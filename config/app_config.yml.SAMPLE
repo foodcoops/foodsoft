@@ -26,6 +26,7 @@ development: &defaults
       - benni@dresdener27.de
     sender_address: FoodSoft Error <foodsoft@foodcoops.net>
     email_prefix: "[FoodSoft]"
+
   # Access to sharedLists, the external article-database
   shared_lists:
     adapter: mysql
@@ -35,6 +36,7 @@ development: &defaults
     password:
     encoding: utf8
     socket: /opt/lampp/var/mysql/mysql.sock
+
   # auto-units-conversion
   # this is used for automatic article-synchronization to handle different units
   # e.g. when foodcoop-unit should be 500g and supplier-unit is 1kg
