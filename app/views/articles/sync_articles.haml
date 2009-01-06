@@ -1,0 +1,70 @@
+%h1 Artikel mit externer Datenbank synchronisieren
+
+- form_tag :action => 'update_all', :id => @supplier, :sync => "1" do
+  %h2 Auslisten ...
+  %p
+  - unless @outlisted_articles.empty?
+    Folgende Artikel wurden ausgelistet und werden 
+    %b gelöscht:
+    %ul
+      - for article in @outlisted_articles
+        %li
+          = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
+          = article.name
+  - else
+    %i Es müssen keine Artikel gelöscht werden.
+  %hr/
+  %h2 Aktualisieren ...
+  %p
+    %i
+      %b= @updated_articles.size
+      Artikel müssen aktualisiert werden:
+  %p
+    %i
+      Jeder Artikel wird doppelt angezeigt. Die alten Werte sind grau und die Textfelder sind mit den aktuellen
+      Werten vorausgefüllt.
+      %br/
+      Abweichungen zu den alten Artikeln sind gelb markiert.
+    %table
+      %tr
+        %th Name
+        %th Notiz
+        %th Hersteller
+        %th Herkunft
+        %th Einheit
+        %th GebGr
+        %th Preis
+        %th MwSt.
+        %th Pfand
+        %th Kategorie
+      - @updated_articles.each do |@article, unequal_attributes|
+        - article = Article.find(@article.id)
+        %tr{:style => 'color:grey'}
+          %td= article.name
+          %td= article.note
+          %td= article.manufacturer
+          %td= article.origin
+          %td= article.unit
+          %td= article.unit_quantity
+          %td= article.net_price
+          %td= article.tax
+          %td= article.deposit
+          %td= article.article_category.name if article.article_category
+        %tr
+          %td{:style => highlight_new(unequal_attributes, :name)}
+            = text_field 'article[]', 'name', :size => 0
+            = hidden_field 'article[]', 'shared_updated_on'
+          %td{:style => highlight_new(unequal_attributes, :note)}= text_field 'article[]', 'note', :size => 15
+          %td{:style => highlight_new(unequal_attributes, :manufacturer)}= text_field 'article[]', 'manufacturer', :size => 10
+          %td{:style => highlight_new(unequal_attributes, :origin)}= text_field 'article[]', 'origin', :size => 5
+          %td{:style => highlight_new(unequal_attributes, :unit)}= text_field 'article[]', 'unit', :size => 5
+          %td{:style => highlight_new(unequal_attributes, :unit_quantity)}= text_field 'article[]', 'unit_quantity', :size => 5
+          %td{:style => highlight_new(unequal_attributes, :net_price)}= text_field 'article[]', 'net_price', :size => 5
+          %td{:style => highlight_new(unequal_attributes, :tax)}= text_field 'article[]', 'tax', :size => 4
+          %td{:style => highlight_new(unequal_attributes, :deposit)}= text_field 'article[]', 'deposit', :size => 4
+          %td= select 'article[]', 'article_category_id', ArticleCategory.find(:all).collect {|a| [ a.name, a.id ] }, { :include_blank => true }
+  %hr/
+  = hidden_field 'supplier', 'id'
+  = submit_tag 'Alle löschen/aktualisieren'
+  |
+  = link_to 'Abbrechen', :action => 'list', :id => @supplier

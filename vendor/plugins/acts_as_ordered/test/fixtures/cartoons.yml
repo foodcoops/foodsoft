@@ -1,0 +1,19 @@
+bugs:
+  id: 1
+  first_name: Bugs
+  last_name: Bunny
+
+daffy:
+  id: 2
+  first_name: Daffy
+  last_name: Duck
+  
+elmer:
+  id: 3
+  first_name: Elmer
+  last_name: Fudd
+
+roger:
+  id: 4
+  first_name: Roger
+  last_name: Rabbit

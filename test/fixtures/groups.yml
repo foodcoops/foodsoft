@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first:
+  id: 1
+  name: Order Group 1
+  type: OrderGroup
+another:
+  id: 2
+  name: Order Group 2
+  type: OrderGroup
+admins:
+  id: 3
+  name: Administrators
+  role_admin: true    

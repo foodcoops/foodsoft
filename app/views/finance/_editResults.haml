@@ -1,0 +1,20 @@
+%p{:style => "float:left"}
+  %b Lieferung bearbeiten  
+%p{:style => "float:right"}
+  = link_to_remote "Artikel hinzufügen", :url => {:action => "newArticleResult", :id => @order}
+
+%table{:class => "ordered_articles", :style => "clear:both"}
+  %thead
+    %tr
+      %th{:colspan => "2"} Artikel
+      %th Nr.
+      %th Menge
+      %th GebGr * Einheit
+      %th netto
+      %th brutto
+      %th MwSt
+      %th Pfand
+      %th{:colspan => "2"}
+  %tbody#result_table
+    - for @article in @order.order_article_results
+      = render :partial => "articleResults"

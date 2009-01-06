@@ -1,0 +1,69 @@
+<%= error_messages_for 'article' %>
+<!--[form:article]-->
+<p>
+	<b>Verfügbar?</b> <label for="article_availability"><%= check_box 'article', 'availability' %></label>
+</p>
+<table style="width: 20em">
+    <tr>
+        <th>Name</th>
+				<th>Herkunft</th>
+        <th>Herstellerin</th>
+        <th>Einheit</th>
+        <th>Notiz</th>
+        <th>Kategorie</th>
+    </tr>
+    <tbody>
+        <tr>
+            <td>
+                <label for="article_name"><%= text_field 'article', 'name', :size => 15 %></label>
+            </td>
+            <td>
+                <label for="article_origin"><%= text_field 'article', 'origin', :size => 5 %></label>
+            </td>
+            <td>
+                <label for="article_manufacturer"><%= text_field 'article', 'manufacturer', :size => 8 %></label>
+            </td>
+            <td>
+                <label for="article_unit"><%= text_field 'article', 'unit', :size => 5 %></label>
+            </td>
+            <td>
+                <label for="article_note"><%= text_field 'article', 'note', :size => 15 %></label>
+            </td>
+            <td>
+                <label for="article_article_category"><%= select('article', 'article_category_id', ArticleCategory.find(:all, :order => 'name').collect {|a| [ a.name, a.id ] }) %></label>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+
+<table style="width:35em">
+ <tr>
+  <th>netto Preis</th>
+  <th>Gebindegröße</th>
+  <th>Artikelnummer</th>
+  <th>Steuer</th>
+  <th>Pfand</th>
+ </tr>
+<tbody>
+ <tr>
+    <td><label for="article_net_price">
+    <%= text_field 'article', 'net_price', :size => 5%></label></td>
+    
+    <td><label for="article_unit_quantity">
+    <%= text_field 'article', 'unit_quantity', :size => 5%></label></td>
+    
+    <td><label for="article_order_number">
+    <%= text_field 'article', 'order_number', :size => 10%></label></td>
+    
+    <td><label for="article_tax">
+    <%= text_field 'article', 'tax', :size => 5%></label></td>
+    
+    <td><label for="article_deposit">
+    <%= text_field 'article', 'deposit', :size => 5%></label></td>
+ </tr>
+ </tbody>
+</table>
+		<%= hidden_field 'article', 'shared_updated_on' %>
+		<%= hidden_field 'article', 'supplier_id' %>
+<!--[eoform:article]-->

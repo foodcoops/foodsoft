@@ -1,0 +1,71 @@
+%h1 Startseite
+
+#start_nav
+  = render :partial => 'start_nav'
+  
+- unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks_number == 0
+  .right_column{:style => "width:70%"}
+    .box_title 
+      %h2=_ "Tasks"
+    .column_content
+      -unless @next_tasks.empty?
+        %div{:style => "float:left, margin-bottom:2em"}
+          %h3=_ "Your tasks for the upcoming week:"
+          %table{:style => "width:25em"}
+            -for task in @next_tasks
+              %tr
+                %td= format_date task.due_date
+                %td
+                  %b= task.name
+          
+      - unless @unaccepted_tasks.empty?
+        %h3=_ "Accept tasks"
+        = _("Your are responsible for a few tasks.")
+        = link_to _("Accept/Reject tasks"), :controller => "tasks", :action => "myTasks"
+      - unless @unassigned_tasks_number == 0
+        %h3=_ "Unassigned tasks"
+        = _("There are") + " #{@unassigned_tasks_number} " + link_to(_("unassigned task(s)"), :controller => "tasks")
+      %p{:style => "clear:both"}= link_to _("My tasks"), :controller => "tasks", :action => "myTasks"
+
+- unless @messages.empty?
+  .right_column{:style => "width:70%"}
+    .box_title 
+      %h2=_ "Unread messages"
+    .column_content
+      = render :partial => 'messages/unread'
+      %p= link_to _("All messages"), :controller => 'messages', :action => 'inbox'
+
+- if @orderGroup
+  // Current orders
+  = render :partial => 'ordering/currentOrders'
+  
+
+  // OrderGroup overview
+  .right_column{:style => "width:70%"}
+    .box_title 
+      %h2=_ "My ordergroup"
+    .column_content
+      %p
+        %b= @orderGroup.name
+        |
+        =_ "Account balance:"
+        = number_to_currency(@orderGroup.account_balance)
+        %span{:style => "color:grey"} 
+          (zuletzt aktualisiert vor 
+          = distance_of_time_in_words(Time.now, @orderGroup.account_updated) + ")"
+        %h3=_ "Last transactions"
+        %table				
+          %tr
+            %th=_ "When"
+            %th=_ "Who"
+            %th=_ "Note"
+            %th=_ "Amount"
+          - for ft in @financial_transactions
+            %tr{:class => cycle('even','odd')}
+              %td= format_time(ft.created_on)
+              %td= h(ft.user.nil? ? '?' : ft.user.nick)
+              %td= h(ft.note)
+              - color = ft.amount < 0 ? 'red' : 'black'
+              %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
+        %br/
+        = link_to _("more ..."), :action => "myOrdergroup"

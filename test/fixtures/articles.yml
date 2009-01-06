@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+banana:
+  id: 1
+  name: banana
+  current_price_id: 1
+  unit: 500g
+  availability: 1
+  note: delicious
+  supplier_id: 1
+  article_category_id: 1
+kiwi:
+  id: 2
+  name: kiwi
+  current_price_id: 2
+  unit: 500g
+  availability: 1
+  note: delicious
+  supplier_id: 1
+  article_category_id: 1
+apple:
+  id: 3
+  name: apple
+  current_price_id: 3
+  unit: 500g
+  availability: 0
+  note: delicious
+  supplier_id: 1
+  article_category_id: 1
+  

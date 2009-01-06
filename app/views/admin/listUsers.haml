@@ -1,0 +1,28 @@
+%h1 Admin/Benutzerinnen
+%p
+  %i
+    Hier kannst du Benutzer_innen
+    = link_to_remote 'neu Anlegen', :url => {:action => 'newUser'}
+    , bearbeiten und natürlich auch löschen.
+#newUser{:style => "display:none;"}
+  .box_title
+    %h2 Neue Benutzerinn
+  .column_content#userForm
+.left_column{:style => "width:100%"}
+  .box_title
+    %h2 Benutzerinnenübersicht
+  .column_content
+    #user_filter
+      %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
+        %label{:for => 'article_name'} Suche in Name : 
+        = text_field_tag("query", params['query'], :size => 10 )
+        
+      = observe_field 'query',  :frequency => 2, |
+        :before => "Element.show('loader')", |
+        :success => "Element.hide('loader')", |
+        :url => {:action => 'listUsers'}, |
+        :with => 'query' |
+    #table
+      = render :partial => "listUsers"
+- if @current_user.role_admin?
+  %p= link_to 'Neue Benutzer_in', :action => 'newUser'

@@ -1,0 +1,61 @@
+<h1>Alle Artikel von <%= @supplier.name %> bearbeiten</h1>
+
+<div class="single_column" style="width:100%">
+  <div class="box_title">
+    <h2>
+      <div id="change_supplier">
+        <%  form_tag do -%>
+        <select onchange="redirectTo(this)" style="font-size: 0.9em;margin-left:1em;">
+          <%= options_for_select(Supplier.find(:all).collect {|s| [ s.name, url_for(:action => "edit_all", :id => s)] }, url_for(:action => "edit_all", :id => @supplier.id)) %>
+        </select>
+        <% end %>
+       </div>
+     </h2>
+  </div>
+  <div class="box column_content">
+    <div id="links"><%= link_to 'zurück zur Liste', :action => 'list', :id => @supplier.id %></div>
+    <p>
+    	<i>
+    		Pflichtfelder sind: Name, Einheit, (netto) Preis und Bestellnummer.
+			</i>
+		</p>
+    <% form_tag(:action => 'update_all', :id => @supplier) do %>
+     <table id="articles_table" class="list">
+      <thead>
+       <tr>
+         <th><acronym title="verfügbar">verf.</acronym></th>
+         <th>Name</th>
+         <th>Einheit</th>
+         <th><acronym title="Netto!">Preis</acronym></th>
+         <th><acronym title="Gebindegröße">GebGr</acronym></th>
+         <th>Best.Nr.</th>
+         <th>Notiz</th>
+         <th>Kategorie</th>
+         <th>MwSt.</th>
+         <th>Pfand</th>
+       </tr>
+       <tbody>
+       <% @supplier.articles.find(:all, :order => 'article_categories.name, articles.name', :include => [:article_category]).each do |@article| %>
+         <tr class="<%= cycle('even', 'odd') %>"<%= ' style="background-color: yellow"' if @failedArticle == @article %>>
+          <td colspan="2"><label for="article_availability"><%= check_box 'article[]', 'availability' %></label>
+          <label for="article_name"><%= text_field( 'article[]', 'name', :size => 0)  %></label></td>
+          <td><label for="article_unit"><%= text_field 'article[]', 'unit', :size => 5  %></label></td>
+          <td><label for="article_net_price"><%= text_field 'article[]', 'net_price', :size => 4 %></label></td>
+          <td><label for="article_unit_quantity"><%= text_field 'article[]', 'unit_quantity', :size => 4 %></label></td>
+          <td><label for="article_order_number"><%= text_field 'article[]', 'order_number', :size => 6 %></label></td>
+          <td><label for="article_note"><%= text_field 'article[]', 'note', :size => 15  %></label></td>
+          <td><label for="article_article_category"><%= select('article[]', 'article_category_id', ArticleCategory.find(:all).collect {|a| [ a.name, a.id ] }, { :include_blank => true })%></label></td>
+          <td><label for="article_tax"><%= text_field 'article[]', 'tax', :size => 4 %></label></td>
+          <td><label for="article_deposit"><%= text_field 'article[]', 'deposit', :size => 4 %></label></td>
+         </tr>
+       <% end %>
+       <!--[eoform:article]-->
+        </tbody>
+    </table><br />
+		<i>Achtung, alle Artikel werden aktualisiert!</i><br />
+    <%= hidden_field 'supplier', 'id' %>
+    <%= submit_tag 'Alle aktualisieren'%>
+    | <%= link_to 'Abbrechen', :action => 'list', :id => @supplier.id %>
+    <% end %>
+  </div>
+</div>

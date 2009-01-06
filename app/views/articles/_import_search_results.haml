@@ -1,0 +1,24 @@
+%p= pagination_links_remote @articles, 10, {:import_query => params[:import_query], :lists => params[:lists], :regional => params[:regional]}
+%table.list
+  %thead
+    %tr 
+      %th Name
+      %th Herkunft
+      %th Hersteller
+      %th Notiz
+      %th{:style => "width:4em"} Preis
+      %th Einheit
+      %th GebGröße
+      %th
+  %tbody
+    - for article in @articles
+      %tr{:class => cycle('even','odd', :name => 'import_search_results')}
+        %td= highlight_phrase article.name, params[:import_query]
+        %td= article.origin
+        %td= article.manufacturer
+        %td= article.note
+        %td= number_to_currency(article.price)
+        %td= article.unit
+        %td= article.unit_quantity
+        %td= link_to_remote 'importieren', :url => {:action => 'new_import', :id => article, :supplier_id => @supplier.id}
+        

@@ -1,0 +1,78 @@
+<%
+    class PDF < FPDF
+        def Footer
+            SetY(-15)
+            SetFont('Arial', 'I', 8)
+            Cell(0, 10, 'Seite ' + PageNo().to_s + ' | powered by FoodSoft', 0, 0, 'C')
+        end    
+      end
+    
+    pdf=PDF.new
+    
+    @order_articles = @order.order_article_results
+    
+    pdf.SetAuthor(replace_UTF8(FoodSoft.getFoodcoopName))
+    pdf.SetTitle(replace_UTF8("BestellFAX für #{@order.supplier.name}"))
+    pdf.AliasNbPages()
+    pdf.AddPage()
+   
+    #the main informations
+    pdf.SetY(15)
+    pdf.SetFont('Arial','',10)
+		pdf.Cell(0,5,replace_UTF8(FoodSoft.getFoodcoopName),0,0,'R')
+    pdf.Ln()
+		pdf.Cell(0,5,replace_UTF8(FoodSoft.getFoodcoopContact[:street]),0,0,'R')
+    pdf.Ln()
+		pdf.Cell(0,5,FoodSoft.getFoodcoopContact[:zip_code] + " " + replace_UTF8(FoodSoft.getFoodcoopContact[:city]),0,0,'R')
+    pdf.Ln()
+		pdf.Cell(0,5,replace_UTF8(FoodSoft.getFoodcoopName[:phone]),0,0,'R')
+    pdf.Ln()
+		pdf.Cell(0,5,replace_UTF8(FoodSoft.getFoodcoopName[:email]),0,0,'R')
+    pdf.Ln()
+		pdf.Cell(0,5,Date.today.strftime('%d.%m.%Y').to_s,0,0,'R')
+    pdf.Ln()
+    pdf.SetFont('Arial','B',10)
+    pdf.SetXY(10,30)
+    pdf.MultiCell(0,6,@order.supplier.name.to_s + "\r\n" + replace_UTF8(@order.supplier.address.to_s) + "\r\nFAX: " + @order.supplier.fax.to_s)
+    pdf.Ln()
+    pdf.SetFont('Arial','B',10)
+    pdf.Cell(0,9,"Lieferdatum: ",0)
+    pdf.Ln()
+    pdf.Cell(0,5,"Ansprechpartner: " + @order.supplier.contact_person.to_s,0)
+    pdf.SetY(80)
+    
+    #now the articles 
+    pdf.SetFont('Arial','B',9)
+    pdf.Cell(16,6,'BestellNr.',1)
+    pdf.Cell(12,6,'Menge',1)
+    pdf.Cell(100,6,'Name',1)
+    #pdf.Cell(30,6,'Produktgruppe',1)
+    pdf.Cell(15,6,'Gebinde',1)
+    pdf.Cell(20,6,'Einheit',1)
+    pdf.Cell(22,6,'Preis/Einheit',1)	
+    pdf.Ln()
+    pdf.SetFont('Arial','',9)
+    
+    for article in @order_articles
+      pdf.Cell(16,5,article.order_number.to_s,1)
+      pdf.Cell(12,5,article.units_to_order.to_s,1,0,'R')
+      pdf.Cell(100,5, replace_UTF8(article.name.to_s),1)
+      #pdf.Cell(30,5,,1)
+      pdf.Cell(15,5,article.unit_quantity.to_s,1,0,'R')
+      pdf.Cell(20,5,replace_UTF8(article.unit.to_s),1,0,'R')
+      pdf.Cell(22,5,number_to_currency(article.net_price, :unit=> "").to_s,1,0,'R')
+      pdf.Ln()
+    end
+    
+    pdf.Ln()
+    pdf.SetFont('Arial','B',10)
+    pdf.Cell(70,9,"Gesamtpreis (netto): ",0)
+    pdf.Cell(15,9,number_to_currency(@order.sumPrice('clear'), :unit=> "").to_s + " EUR",0,0,'R')
+    pdf.Ln()
+    pdf.Cell(70,9,"Gesamtpreis (brutto, incl. Pfand): ",0)
+    pdf.Cell(15,9,number_to_currency(@order.sumPrice('gross'), :unit=> "").to_s + " EUR",0,0,'R')
+    pdf.Ln()
+    pdf.SetFont('Arial','I',8)
+    pdf.MultiCell(0,4, replace_UTF8("Hinweise: \r\nGebinde und Einheit in der Tabelle beziehen sich auf interne Größen der Foodcoop und können von Ihren Gebinden bzw. Einheiten abweichen. \r\nDie Preise sind exklusive Mehrwertsteuer."))
+
+%><%= pdf.Output %>

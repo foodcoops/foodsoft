@@ -1,0 +1,11 @@
+- title _('Create new task')
+
+#form{:style => "float:left; width:39em"}
+  - form_tag :action => 'create' do
+    = render :partial => 'form'    
+    = submit_tag _('Create task')
+ 
+#workgroup_members{:style => "padding-left:41em"}
+  %h3=_ 'Members of the workgroups'
+  #list
+    = render :partial => "/groups/workgroup_members"

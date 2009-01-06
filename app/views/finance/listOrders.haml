@@ -1,0 +1,37 @@
+%h1 beendete Bestellungen
+%p
+  %i
+    Aktuell gibt es die Möglichkeit eine Bestellung mittels dem "abrechnen"-link zu verbuchen, d.h.
+    nach Bearbeitung der Liefermengen die Gruppenbeträge automatisiert zu verbuchen, 
+    %br/
+    oder die Bestellung manuell abzurechnen (Kontostände selbst zu aktualisieren) und mittels "auf gebucht setzen" 
+    die Bestellung als abgeschlossen zu deklarieren.
+.left_column{:style => "width:70em"}
+  .box_title
+  .column_content
+    - unless @orders.empty?
+      = will_paginate @orders
+      %table.list
+        %thead
+          %tr
+            %th Name
+            %th Anbieter
+            %th Ende
+            %th Status
+            %th zuletzt bearbeitet von
+            %th
+        %tbody
+          - @orders.each do |order|
+            %tr{:class => cycle("even","odd", :name => "order")}
+              %td= link_to truncate(order.name), :action => "editOrder", :id => order
+              %td=h order.supplier ? order.supplier.name : _('nonexistent')
+              %td=h format_time(order.ends) unless order.ends.nil?
+              %td= order.booked ? "abgerechnet (#{number_to_currency order.fcProfit})" : "beendet"
+              %td= order.updated_by.nil? ? '??' : order.updated_by.nick
+              %td
+                - unless order.booked
+                  = link_to "abrechnen", :action => "editOrder", :id => order
+                  | 
+                  = link_to 'auf "gebucht" setzen', {:action => 'setAllBooked', :id => order}, :confirm => 'Wirklich alle Gruppenbestellungen für diese Bestellung auf "gebucht" setzen?', :method => "post"
+    - else
+      %i derzeit gibt es keine beendeten Bestellungen

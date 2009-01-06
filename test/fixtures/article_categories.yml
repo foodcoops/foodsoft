@@ -1,0 +1,4 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+fruits:
+  id: 1
+  description: fruits and only fruits

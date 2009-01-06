@@ -1,0 +1,444 @@
+// colors which are used in the foodsoft
+!main_red = #ED0606
+!hover_yellow = #ffff72
+!boxContent = #e4eed6
+!lightGrey = #efefef
+!darkGreen = #78b74e
+!lightGreen = #e4eed6
+
+/* General rules ...
+body
+  :background-color #fff
+  :color black
+  :margin 0
+  :padding 1% 0 0 0
+  :min-width 990px
+  :font-size 62.5%
+  :font-family verdana, arial, sans-serif
+
+#loader
+  :position fixed
+  :top 1px
+  :right 1px
+  :background #FFF
+  :padding 10px
+  :color black
+  :border
+    :width 2px
+    :style solid 
+    :color = !main_red
+
+a, a:visited
+  :text-decoration underline
+  :color black
+
+a:hover
+  :color = !main_red
+
+h1, h2
+  :color = !main_red
+
+h1
+  :font-size 2.2em
+  :line-height 0.8em
+  :padding 1em 0 5px 5%
+  :margin 0 0 1em 0
+  :border-bottom 
+    :width 1px
+    :style dotted 
+    :color = !main_red
+
+h2
+  :font-size 1.4em
+  :margin-top .5em
+    
+h3
+  :font-size 1em
+  :margin-top 1.5em
+    
+input
+  :color #2e2e2e
+
+abbr, acronym
+  :cursor help
+    
+// ********************************* loginpage
+#login
+  :margin auto
+  :width 27em
+  :font-size 1.2em
+
+#login #meta
+  :margin-top 2em
+  :padding-top .3em
+  :border-top 1px dotted #ED0606
+  :color #2e2e2e
+
+    
+// ******************************** - Logo - head
+#header 
+  :margin 0
+  :padding 0
+
+
+#logo 
+  :background = !main_red
+  :height 1.1em
+  :width 8em
+  :padding 0 20px
+  :text-align left
+  :line-height 54px
+  :font-size 54px
+  :overflow hidden
+  :letter-spacing -3px
+  :margin 0
+  a, a:hover
+    :color white
+    :background-color = !main_red
+    :text-decoration none
+  a span
+    :color = !main_red
+    :background #FFF
+    :padding-right 0.1em
+    :font-weight bold
+    :border-top
+      :width 2px
+      :style dotted 
+      :color = !main_red
+    
+#logininfo
+  :position absolute
+  :top 3px
+  :right 10px
+  :font-size 1em
+  ul 
+    :list-style none
+    li 
+      :margin 0 3px
+      :float left
+  a 
+    :padding 0.2em
+    :color #737272
+    :font-weight bold
+  a:hover 
+    :color = !main_red
+    
+// *************************************  box structure
+#main 
+  :background #FFF
+  :padding 0
+  :margin 0
+
+//  ************************************* infobar
+#infobar 
+  :width 10% 
+  :min-width 5em
+  :float right
+  :padding 2.6em 1em
+  :margin 3em 0 0 0
+  :border-left 1px dotted #ED0606
+  :font-size 1.2em 
+  h3
+    :color #ED0606
+  ul 
+    :list-style none
+  li 
+    :margin .3em 0 0 -3em
+
+// ************************************ embedded menu
+.menu, #start_nav
+  :border 2px solid #e3e3e3
+  :background #f5f5f5
+  :padding 0 10px 0px 5px
+  :float left
+
+  ul 
+    :list-style-type none
+    :margin 0 0 0.2em 0
+    :padding 0
+
+    li 
+      :border-bottom 1px solid #dedede
+      :color #666
+      :margin 0.8em 0 0 0
+      :font-weight bold    
+      a:link, a:visited 
+        :display block
+        :padding 0.25em 1em
+        :text-decoration none
+        :width 12em 
+      a:hover, a:focus 
+        :background-color #e3e3e3
+
+      ul 
+        :margin 0
+        :padding 0
+        li 
+          :border-top 1px solid #dedede
+          :border-bottom none
+          :margin 0
+          :font-weight normal
+          a:link, a:visited 
+            :width 11.5em
+            :padding 0 1em 0.1em 1.5em
+            :font-weight normal
+            :text-decoration none
+.menu
+  :position absolute
+  :top 100px
+  :right 1px
+  
+// ************************************** content
+#content 
+  :padding .5em 0 2.5em 0
+  :margin 0 0 0 1em
+  :background #FFF
+  :font-size 1.3em
+  :width 95%
+  :float left
+
+
+/************************************ tables
+table 
+  :border-collapse collapse
+  // border2px solid #e3e3e3
+  :text-align left
+  :width 100%
+  :margin 0
+  
+  thead th, tbody td, th, td 
+    :padding 0.3em  
+
+  thead tr  
+    :background-color #efefef
+  th
+    :color black
+  tr.odd, tr.even
+    :border-top 1px solid #DDDDDD 
+  tr.odd, tr.odd input
+    :background-color #F6F6F6
+  tr.even
+    :background-color #FBFBFB
+  tr.unavailable, tr.unavailable a
+    :color grey 
+  tr.unavailable a:hover
+    :color #ED0606
+  tr.just_updated
+    :color #008000
+  tr.selected, tr.active
+    :background-color #ffffc2
+      
+table.list
+  //:border 2px solid #78b74e
+  tr
+    :border 1px solid #e3e3e3
+  tbody tr:hover
+    :background-color #EEEEDD
+    
+table tfoot tr
+  :background-color #fff
+  td
+    :padding-top 0.8em
+   
+
+tr.edit_inline
+  :background-color = !hover_yellow
+  td, span
+    :padding 0.5em 0.2em
+
+div.legend, div.legend table th  
+  :color grey
+  :font-size .8em
+  :background none
+
+form table 
+  :border none
+
+table.ordered_articles
+  :background-color #fff
+  tbody tr:hover
+    :background-color #EEEEDD
+  a
+    :display block
+  tr.results:hover
+    :background-color none
+  table
+    tfoot
+      :font-weight bold
+      
+td.currency, td.actions
+  :text-align right
+  :padding-right 0.5em
+
+// ************************************* for edit formulars */
+div.edit_form
+  :border 2px solid #e3e3e3
+  :background #f5f5f5
+  :padding 0 0.8em 0.8em 0.8em
+  :margin 5px 0
+  :color black
+  
+#edit_article, #edit_box
+  :position fixed
+  :top 23%
+  :left 10em
+  :width 50em
+  :background #FBFBFB
+  :padding 3em
+  :padding-top 1em
+  :border 
+    :width 3px
+    :style solid
+    :color = !main_red
+  
+// ***************************************** other boxes */
+
+// *********boxes in columns ****/
+div.box 
+  :border-left 2px solid #78b74e
+  :padding-left 5px
+
+div.single_column, div.left_column, div.right_column
+  :margin .5em .5em 1.5em .5em
+
+div.single_column 
+  :width 100%
+
+div.left_column 
+  :width 40%
+  :float left
+
+div.right_column
+  :margin-bottom 3em
+  :width 55%
+  :float right
+
+// *********** content of boxes ******/
+
+div.box_title 
+  :background #78b74e
+  :padding 5px 10px
+  
+  h2, h2 a 
+    :color #FFF
+    :margin 0
+  h2
+    :font-size 1.3em 
+
+div.column_content 
+  :background = !boxContent
+  :color black
+  :padding 10px
+  h2 
+    :color black
+    :font-size 1.3em
+    :margin 1em 0 0 0
+  #links
+    :float right
+
+// for special pages
+// index-page
+
+
+
+
+// * article show
+tr.current_price
+  :background #cdee9e
+    
+
+// **** maybe later for the very little spinner
+li.check div.spinner
+  :display block 
+  :height 5px 
+  :width 21px 
+  :background-image url(/images/dots-white.gif) 
+  :line-height 16px 
+  :float left 
+  :margin-right 5px
+  :background-position center center
+  :background-repeat no-repeat
+
+
+// ************************************* the order page */
+span.used, span.unused
+  :font-weight bold
+span.used  
+  :color #008000
+span.unused
+  :color #ed0606
+span.total
+  :font-size 80% 
+table#order
+  :text-align center
+  input
+    :font-size 80% 
+  th#col_required, th#col_tolerance
+    :width 145px 
+  th#col_packages,  th#col_left_units
+    :width 50px 
+  td#col_left_units
+    :color #ed0606
+  td
+    :padding 0.6em
+  td.name, tr.note td
+    :text-align left
+    :padding-left 10px
+  tfoot
+    tr
+      :background-color = !lightGreen
+    td
+      :padding-right 10px
+  tr.note
+    :background-color #FBFBFB
+    :font-size 0.9em
+    :border-bottom 1px solid #DDDDDD 
+    td
+      :padding-left 20px
+      
+// ********* Comments
+#newComment
+  :margin 1em
+.comment
+  :border-bottom 1px dotted black
+  :padding .5em 0 1em .5em
+  .timestamp
+    :font-size 0.8em
+    :color grey
+    
+// *************** Clearing Order Page ..
+#editOrderNav
+  a
+    :color #fff
+    :font-weight bold
+  ul
+    :margin 0
+    :padding 0
+    li
+      :display inline
+      :list-style none
+      :margin-right 1em
+      
+// *************** Tasks ...
+.accepted
+  color: green
+  font-weight: bold
+.done, .done a, .done .accepted
+  color: grey
+  font-weight: normal
+  
+// **************  auto_complete
+ul.autocomplete
+  .nick, .informal
+    margin: auto
+  .nick
+    font-weight: bold
+  .informal
+    color: grey
+    margin-left: 1em
+    
+// ******* to navigate easy to the next element, e.g. next order
+#element_navigation
+  position: relative
+  top: -1em
+  left: 5%

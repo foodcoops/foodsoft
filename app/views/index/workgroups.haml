@@ -1,0 +1,15 @@
+%h1 Arbeitsgruppen
+
+%p
+  %i
+    Das bearbeiten von Gruppen ist nur für Mitglieder der Gruppe möglich. 
+    %br/
+    Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.
+      
+- unless @groups.empty?
+  -for @group in @groups
+    = render :partial => "showGroup"
+        
+          
+            
+          

@@ -1,0 +1,5 @@
+%h3 Neuer Artikel
+- form_remote_tag :url => { :action => 'createArticle'} do
+  = render :partial => 'articles/form'
+  = submit_tag "Speichern"
+  = link_to_function('Abbrechen', 'Element.hide("edit_article")')

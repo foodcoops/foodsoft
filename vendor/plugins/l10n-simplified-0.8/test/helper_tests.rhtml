@@ -1,0 +1,175 @@
+﻿<p>Use this page to test helpers of the Localization Simplified plugin.
+Put this file in your applications view directory, add a controller action "helper_tests", and view this page</p>
+<p>Sentence with UTF-8 characters: Café, Danish(æ,ø,å), Swedish(ä,ö,å), Spanish: (ñ) </p>
+<table border="1">
+	<tr>
+		<th>fn</th>
+		<th>result</th>
+		<th>expected</th>
+	</tr>
+  <tr>
+    <td><code>time_ago_in_words(3.seconds.ago, true)</code></td>
+    <td><%=   time_ago_in_words(3.seconds.ago, true) %></td>
+    <td>'less than 5 seconds'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(9.seconds.ago, true)</code></td>
+    <td><%=   time_ago_in_words(9.seconds.ago, true) %></td>
+    <td>'less than 10 seconds'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(20.seconds.ago, true)</code></td>
+    <td><%=   time_ago_in_words(20.seconds.ago, true) %></td>
+    <td>'less than 20 seconds'</td>
+  </tr>
+  <tr>
+     <td><code>time_ago_in_words(31.seconds.ago, true)</code></td>
+    <td><%=   time_ago_in_words(31.seconds.ago, true) %></td>
+    <td>'half a minute'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(50.seconds.ago, true)</code></td>
+    <td><%=   time_ago_in_words(50.seconds.ago, true) %></td>
+    <td>'less than a minute'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(80.seconds.ago, true)</code></td>
+    <td><%=   time_ago_in_words(80.seconds.ago, true) %></td>
+    <td>'1 minute'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(4.minutes.ago, true)</code></td>
+    <td><%=   time_ago_in_words(4.minutes.ago, true) %></td>
+    <td>'4 minutes'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(50.minutes.ago, true)</code></td>
+    <td><%=   time_ago_in_words(50.minutes.ago, true) %></td>
+    <td>'about 1 hour'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(4.hours.ago, true)</code></td>
+    <td><%=   time_ago_in_words(4.hours.ago, true) %></td>
+    <td>'about 4 hours'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(1.day.ago, true)</code></td>
+    <td><%=   time_ago_in_words(1.day.ago, true) %></td>
+    <td>'1 day'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(4.days.ago, true)</code></td>
+    <td><%=   time_ago_in_words(4.days.ago, true) %></td>
+    <td>'4 days'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(1.month.ago, true)</code></td>
+    <td><%=   time_ago_in_words(1.month.ago, true) %></td>
+    <td>'1 month'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(4.months.ago, true)</code></td>
+    <td><%=   time_ago_in_words(4.months.ago, true) %></td>
+    <td>'4 months'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(13.months.ago, true)</code></td>
+    <td><%=   time_ago_in_words(13.months.ago, true) %></td>
+    <td>'1 year'</td>
+  </tr>
+  <tr>
+    <td><code>time_ago_in_words(26.months.ago, true)</code></td>
+    <td><%=   time_ago_in_words(26.months.ago, true) %></td>
+    <td>'2 years'</td>
+  </tr>
+	</table>
+	<p>number_to_currency test:</p>
+	<ul>
+	  <li><%= number_to_currency(1008323) %></li>
+		<li><%= number_to_currency(10083.777) %></li>
+		<li><%= number_to_currency(0.2) %></li>
+	</ul>
+	<p>Array.to_sentence test: [1,2,3].to_sentence: "<%= [1,2,3].to_sentence %>"  <em>(expected "1,2, and 3")</em></p>
+
+	<% t = Time.parse('2006-12-25 11:55') -%>
+	<% d = Date.parse('2006-12-25 11:55') -%>
+	<table>
+	  <tr>
+	    <th>Formatted time:</th>
+			<th>result</th>
+			<th>expected</th>
+	  </tr>
+	  <tr>
+	    <td>t.to_formatted_s()</td>
+	    <td><%= t.to_formatted_s() %></td>
+			<td>Mon Dec 25 11:55:00 Romance Standard Time 2006  </td>
+	  </tr>
+	  <tr>
+	    <td>t.to_formatted_s(:default)</td>
+	    <td><%= t.to_formatted_s(:default) %></td>
+			<td>Mon Dec 25 11:55:00 Romance Standard Time 2006  </td>
+	  </tr>
+	  <tr>
+	    <td>t.to_formatted_s(:long)</td>
+	    <td><%= t.to_formatted_s(:long) %></td>
+			<td>December 25, 2006 11:55</td>
+	  </tr>
+	  <tr>
+	    <td>t.to_formatted_s(:short)</td>
+	    <td><%= t.to_formatted_s(:short) %></td>
+			<td> 	25 Dec 11:55</td>
+	  </tr>
+
+	  <tr>
+	    <th>Formatted date:</th>
+			<th>result</th>
+			<th>expected</th>
+	  </tr>
+	  <tr>
+	    <td>d.to_formatted_s()</td>
+	    <td><%= d.to_formatted_s() %></td>
+			<td>2006-12-25</td>
+	  </tr>
+	  <tr>
+	    <td>d.to_formatted_s(:default)</td>
+	    <td><%= d.to_formatted_s(:default) %></td>
+			<td>2006-12-25</td>
+	  </tr>
+	  <tr>
+	    <td>d.to_formatted_s(:long)</td>
+	    <td><%= d.to_formatted_s(:long) %></td>
+			<td>December 25, 2006</td>
+	  </tr>
+	  <tr>
+	    <td>d.to_formatted_s(:short)</td>
+	    <td><%= d.to_formatted_s(:short) %></td>
+			<td> 	25 Dec</td>
+	  </tr>
+
+	</table>
+
+	<h3>date_select and datetime_select tests</h3>
+<%
+
+
+%>
+<p>
+<label for="testmodel_date">Test order and localized content of date_select</label><br />
+<%= date_select :testmodel, :date %>
+</p>
+
+<p>
+<label for="testmodel_datetime">Test order and localized content of datetime_select</label><br />
+<%= datetime_select :testmodel, :datetime %>
+</p>
+
+<p>
+<label for="testmodel_select_date">Test order and localized content of select_date</label><br />
+<%=
+# this gives exception
+# select_date :testmodel, :select_date
+%>
+</p>
+
+<h3>String concatenation tests</h3>
+<p><code> truncate 'Iñtërnâtiônàlizætiøn', 12</code>: <strong><%= truncate 'Iñtërnâtiônàlizætiøn', 12 %></strong> (expected: "Iñtërnâti…")</p>

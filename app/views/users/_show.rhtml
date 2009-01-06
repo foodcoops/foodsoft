@@ -1,0 +1,26 @@
+<p>Mitglied seit <%= distance_of_time_in_words(Time.now, @user.created_on) -%></p>
+
+<% if @current_user.role_admin? %>
+	<div style="float:left;margin:5px; margin-right:10px;" class="box">
+	  <p><b>Person</b></p>
+	  <p><b>Nick:</b> <%=h @user.nick %></p>
+	  <p><b>Name:</b> <%=h @user.first_name + ' ' + @user.last_name %></p>
+	  <p><b>Email:</b> <%=h @user.email %></p>
+	  <p><b>Telefon:</b> <%=h @user.phone %></p>
+	  <p><b>Adresse:</b> <%=h @user.address %></p>
+	</div>
+	<div style="float:left; margin:5px;" class="box">
+	  <p><b>Einstellungen</b></p>
+	  <%= render :partial => 'users/settings' %>
+	  <p><b>Benutzer_in hat Zugriff auf:</b></p>
+	  <% roles = Array.new
+	     roles << 'Admin' if @user.role_admin?
+	     roles << 'Finanzen' if @user.role_finance?
+	     roles << 'Lieferanten' if @user.role_suppliers?
+	     roles << 'Artikel' if @user.role_article_meta?
+	     roles << 'Bestellung' if @user.role_orders? %>
+	  <p>
+	    <%=h roles.join(', ') %>
+	  </p>
+	</div>
+<% end %>

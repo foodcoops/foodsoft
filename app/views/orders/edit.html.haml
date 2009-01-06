@@ -1,0 +1,7 @@
+- title _("Edit order")
+
+- form_tag :action => 'update', :id => @order do
+  = render :partial => 'form'
+  = submit_tag _("Save")
+  |
+  = link_to _("Cancel"), :action => 'show', :id => @order

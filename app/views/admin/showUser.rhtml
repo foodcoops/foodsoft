@@ -1,0 +1,17 @@
+<h1><%=h @user.nick %></h1>
+<div class="left_column" style="width:100%">
+  <div class="box_title"><h2>Übersicht</h2></div>
+  <div class="column_content">
+    <%= render :partial => 'users/show'%>
+    <p style="clear:both">
+    <%= link_to 'Bearbeiten', :action => 'editUser', :id => @user %>
+    | <%= link_to 'Löschen', { :action => 'destroyUser', :id => @user }, :confirm => 'Willst du ' + @user.first_name + ' wirklich rausschmeißen?', :method => "post" %>
+	| <%= link_to 'Nachricht senden', :controller => 'messages', :action => 'user', :id => @user %>
+    </p>
+  </div>
+  <div class="box_title"><h2>Gruppenabos</h2></div>
+  <div class="column_content">
+    <%= render :partial => 'users/memberships'%>
+    <p><%= link_to 'Gruppenübersicht', :action => 'listGroups' %></p>
+  </div>
+</div>

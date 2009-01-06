@@ -1,0 +1,50 @@
+<%
+    class PDF < FPDF  
+        def Header
+          SetFont('Arial', 'B', 13)
+          Cell(80)
+          Cell(30, 8, @title, 0, 0, 'C')
+          Ln(20)
+        end  
+        def Footer
+            SetY(-15)
+            SetFont('Arial', 'I', 8)
+            Cell(0, 8, 'Seite ' + PageNo().to_s + ' | ' + @title + ' | powered by FoodSoft', 0, 0, 'C')
+        end    
+      end
+    
+    pdf=PDF.new
+    
+    @order_articles = @order.order_article_results
+    @starts = @order.starts.strftime('%d.%m.%Y').to_s
+    @ends = @order.ends.strftime('%d.%m.%Y').to_s
+    @title = replace_UTF8(@order.name.to_s) + " | beendet am " + @ends
+    
+    pdf.SetAuthor(FoodSoft.getFoodcoopName) 
+    pdf.SetTitle(replace_UTF8("Artikelsortierung für #{@order.name}, #{format_date(@order.ends)}"))    
+    pdf.AliasNbPages()
+    pdf.AddPage()
+    
+    # now the legend
+    pdf.SetFont('Arial','I',8)
+    pdf.Cell(80,6,'Bestellgruppe',1)
+    pdf.Cell(12,6,'Menge',1)
+    pdf.Cell(12,6,'Preis',1)    
+    pdf.Ln()
+    pdf.Ln()
+    
+    #now the articles
+    for article in @order_articles
+        pdf.SetFont('Arial','B',10)
+        pdf.Cell(150,6,replace_UTF8("#{article.name} (#{article.unit} | #{article.unit_quantity.to_s} | #{number_to_currency(article.gross_price, :unit=> '')} EUR)"),0)
+        pdf.Ln()
+        pdf.SetFont('Arial','',9)
+        for result in article.group_order_article_results
+            pdf.Cell(80,6,replace_UTF8(result.group_order_result.group_name),1)
+            pdf.Cell(12,6,result.quantity.to_s,1,0,'C')
+            pdf.Cell(12,6,number_to_currency(article.gross_price * result.quantity, :unit=> ''),1,0,'R')
+            pdf.Ln()
+        end
+        pdf.Ln()
+    end
+%><%= pdf.Output %>

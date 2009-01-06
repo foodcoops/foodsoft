@@ -1,0 +1,54 @@
+%h1 
+  Lieferantin
+  =h @supplier.name
+- if shared_supplier = @supplier.shared_supplier
+  %p
+    %strong Der Lieferant ist mit der externen ArtikleDatenbank verknüpft.
+
+%table{:style => "width:40em"}
+  %tr
+    %td Name:
+    %td{:style => "font-weight:bold"}=h @supplier.name
+  %tr
+    %td Adresse:
+    %td{:style => "font-weight:bold"}=h @supplier.address
+  %tr
+    %td Telefon:
+    %td{:style => "font-weight:bold"}=h @supplier.phone
+  %tr
+    %td Telefon2:
+    %td{:style => "font-weight:bold"}=h @supplier.phone2
+  %tr
+    %td FAX:
+    %td{:style => "font-weight:bold"}=h @supplier.fax
+  %tr
+    %td Hompage:
+    %td{:style => "font-weight:bold"}=h @supplier.url
+  %tr
+    %td Kontakt-Person:
+    %td{:style => "font-weight:bold"}=h @supplier.contact_person
+  %tr
+    %td Kundennummer:
+    %td{:style => "font-weight:bold"}=h @supplier.customer_number
+  %tr
+    %td Liefertage:
+    %td{:style => "font-weight:bold"}=h @supplier.delivery_days
+  %tr
+    %td BestellHowTo:
+    %td{:style => "font-weight:bold"}=h @supplier.order_howto
+  %tr
+    %td Notiz:
+    %td{:style => "font-weight:bold"}=h @supplier.note
+  %tr
+    %td Liefertage:
+    %td{:style => "font-weight:bold"}=h @supplier.delivery_days
+  %tr
+    %td Mindestbestellmenge:
+    %td{:style => "font-weight:bold"}=h @supplier.min_order_quantity  
+%br/
+- if @current_user.role_suppliers?
+  = link_to 'Bearbeiten', :action => 'edit', :id => @supplier
+  |
+  = link_to 'Löschen', { :action => 'destroy', :id => @supplier }, :confirm => 'Bist Du sicher?', :method => "post"
+  |
+= link_to 'zurück', :action => 'list'

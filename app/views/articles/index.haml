@@ -1,0 +1,29 @@
+%h1 Manage die Artikeldatenbank
+.left_column{:style => "width:44%"}
+  .box_title 
+    %h2 Artikel anzeigen
+  .column_content
+    %p 
+      %i 
+        Hier kannst du Artikel anzeigen, ändern und neue erstellen
+        %br/
+        Wähle einen Lieferanten:
+    %ul
+      - @suppliers.each do |supplier|
+        %li 
+          %b= link_to supplier.name, :action => "list", :id => supplier.id
+          (
+          = supplier.articles.count
+          Artikel )
+    %hr/
+    %p
+      %i 
+        hier kannst du neue Artikel aus einer csv-Datei in die Datenbank
+        = link_to 'hochladen', :action => 'upload_articles'
+
+.right_column{:style => "width:53%"}
+  .box_title 
+    %h2 Artikelkategorien
+  .column_content#categories
+    #category_form.box.edit_form{:style => "display:none;margin-bottom:1em;"}
+    #category_list= render :partial => 'article_categories/list'

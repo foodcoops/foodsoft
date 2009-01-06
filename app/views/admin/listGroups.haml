@@ -1,0 +1,32 @@
+%h1=_ 'Groups'
+%p
+  %i
+    Hier kannst du
+    = link_to 'neue Gruppen', :action => 'newGroup'
+    und
+    = link_to 'neue Bestellgruppen', :action => 'newOrderGroup'
+    anlegen, Gruppen bearbeiten und löschen.
+%p
+  Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>:
+  Eine <em>Bestellgruppe</em> hat ein Konto und kann Essen bestellen, eine <em>Gruppe</em> ist eine Arbeitsgruppe wie z.B. die "Sortiergruppe".
+  Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
+.left_column{:style => "width:100%"}
+  .box_title
+    %h2 Gruppenübersicht
+  .column_content
+    #group_filter
+      %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
+        %label{:for => 'article_name'} Suche in Name : 
+        = text_field_tag("query", params['query'], :size => 10 )
+        
+      = observe_field 'query',  :frequency => 2, |
+        :before => "Element.show('loader')", |
+        :success => "Element.hide('loader')", |
+        :url => {:action => 'listGroups'}, |
+        :with => 'query' |
+    #table
+      = render :partial => "listGroups"
+- if @current_user.role_admin?
+  = link_to 'Neue Gruppe', :action => 'newGroup'
+  |
+  = link_to 'Neue Bestellgruppe', :action => 'newOrderGroup'

@@ -1,0 +1,22 @@
+%h1=_ 'Login'
+.edit_form{:style => "width:25em"}
+  - form_tag :action => 'login' do
+    - if flash[:notice]
+      %div.notice= flash[:notice]
+    - if flash[:error]
+      %div.error= flash[:error]
+    %p
+      %label{:for => 'user'}=_ 'Username'
+      %br/
+      = text_field 'login', 'user'
+    %p
+      %label{:for => 'password'}=_ 'Password'
+      %br/
+      = password_field 'login', 'password'
+    = submit_tag _('Login!')
+    |
+    = link_to _('Forgot Password?'), :action => 'forgot_password'
+    %br/
+    %br/
+    %i{:style => 'font-size:0.8em;'}=_ 'Cookies must be accepted!'
+= javascript_tag("$('login_user').focus()")

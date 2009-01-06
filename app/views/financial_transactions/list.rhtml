@@ -1,0 +1,24 @@
+<h1>Kontoauszug für <%= @group.name %></h1>
+<p>
+  <b>Kontostand: <%= number_to_currency(@group.account_balance) -%></b>
+  <span style="color:grey">(zuletzt aktualisiert vor <%= distance_of_time_in_words(Time.now, @group.account_updated) -%>)</span>
+</p>
+<div class="left_column" style="width:100%">
+  <div class="box_title"><h2>Überweisungen</h2></div>
+  <div class="column_content">
+    <form name="sform" action="" style="display:inline;">
+    <label for="financial_transaction_note">in Notizen suchen: </label>
+    <%= text_field_tag("query", params['query'], :size => 10 ) %>
+    </form>
+   <%= observe_field 'query',  :frequency => 2,
+         :before => "Element.show('loader')",
+         :success => "Element.hide('loader')",
+         :url => {:action => 'listTransactions'},
+         :with => 'query' %>
+    <div id="table">          
+    <%= render :partial => "/financial_transactions/list" %>
+    </div>
+    <p><%= link_to 'Neue Transaktion', :action => 'newTransaction', :id => @group %></p>
+  </div>
+</div>
+    <%= link_to 'Bestellgruppen', :controller => 'finance', :action => "listOrdergroups" %>

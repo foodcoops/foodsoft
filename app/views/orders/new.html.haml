@@ -1,0 +1,7 @@
+- title _("New order")
+
+- form_tag :action => 'create' do
+  = render :partial => 'form'
+  = submit_tag _("Put the order online")
+  |
+  = link_to _("Cancel"), :action => 'index'

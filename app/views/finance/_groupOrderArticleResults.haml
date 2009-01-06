@@ -1,0 +1,25 @@
+%td{:colspan => "7"}
+  %p 
+    Notiz:
+    = @article.note
+  %table
+    %thead
+      %tr
+        %td
+        %td{:style => "width:8em"} Gruppe
+        %td Einheiten
+        %td Gesamtpreis
+        %td{:colspan => "3",:style => "width:14em"}
+          = link_to_remote '[Gruppe hinzufügen]', :url => {:action => "newGroupResult", :id => @article}, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+    %tbody{:id => "groups_results_#{@article.id}"}
+      - for @result in @article.group_order_article_results
+        = render :partial => "groupResults"
+    %tfoot
+      %tr{:class => cycle('even', 'odd', :name => 'results'), :id => "sum_of_article_#{@article.id}"}
+        %td
+        %td{:style => "width:8em"} Summe
+        %td{:id => "totalArticleQuantity_#{@article.id}"}= @article.total[:quantity]
+        %td{:id => "totalArticlePrice_#{@article.id}", :class => "currency"}
+          = number_to_currency(@article.total[:price])
+        %td{:colspan => "3"}
+    - reset_cycle('results')

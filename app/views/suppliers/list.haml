@@ -1,0 +1,28 @@
+%h1 Lieferantinnen
+- if @current_user.role_suppliers?
+  %p
+    %i 
+      Erstelle eine 
+      = link_to 'neue Lieferantin', :action => 'new'
+      oder 
+      = link_to 'importiere', :action => 'shared_suppliers'
+      aus der externen ArtikelDatenbank.
+
+.left_column{:style => "width:100%"}
+  .box_title
+    %h2 Übersicht
+  .column_content
+    %table
+      %tr
+        - for column in @supplier_column_names
+          %th= column
+        %th
+      - for supplier in @suppliers
+        %tr{:class => cycle('even','odd', :name => 'suppliers')}
+          - for column in @supplier_columns
+            %td
+              - if column == 'name'
+                = link_to supplier[column], :action => 'show', :id => supplier
+              - else
+                =h supplier[column]
+          %td= link_to 'Artikel anzeigen', :controller => 'articles', :action => 'list', :id => supplier

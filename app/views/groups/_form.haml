@@ -1,0 +1,87 @@
+= error_messages_for 'group'
+
+<!--[form:group]-->
+%div{:style => "float:left;width:55%;"}
+  - if controller.controller_name == "admin" || !@group.is_a?(OrderGroup)
+    %p
+      %label{:for => "group_name"} Names
+      %br/
+      = text_field 'group', 'name', :size => 20
+  %p
+    %label{:for => "group_description"} Beschreibung
+    %br/
+    = text_field 'group', 'description', :size => 40
+  - if @group.is_a?(OrderGroup) && controller.controller_name == "admin"
+    %p
+      %label{:for => "group_actual_size"} Aktuelle Gruppengröße
+      %br/
+      = text_field "group", "actual_size", :size => 3
+- if controller.controller_name == "admin"
+  %div{:style => "float:right;width:40%"}
+    %h3 Gruppe hat Zugriff auf
+    %table
+      %tr
+        %td
+          %label{:for => "group_role_admin"} Administration
+        %td= check_box 'group', 'role_admin'
+      %tr
+        %td
+          %label{:for => "group_role_finance"} Finanzen
+        %td= check_box 'group', 'role_finance'
+      %tr
+        %td
+          %label{:for => "group_role_suppliers"} Lieferantenverwaltung
+        %td= check_box 'group', 'role_suppliers'
+      %tr
+        %td
+          %label{:for => "group_role_article_meta"} Artikelverwaltung
+        %td= check_box 'group', 'role_article_meta'
+      %tr
+        %td
+          %label{:for => "group_role_orders"} Bestellungsverwaltung
+        %td= check_box 'group', 'role_orders'
+-unless @group.is_a?(OrderGroup)
+  %div{:style => "clear:both"}
+    %h3 
+      Wöchentliche Jobs definieren?
+      = check_box "group", "weekly_task", {:onclick => "toggleWeeklyTask();"}
+    %table
+      %tr
+        %td
+          %label{:for => "group_weekday"} Wochentag:
+        %td
+          %select#group_weekday{:name => "group[weekday]"}
+            = options_for_select([["Montag", "1"], ["Dienstag", "2"], ["Mittwoch","3"],["Donnerstag","4"],["Freitag","5"],["Samstag","6"],["Sonntag","0"]], [@group.weekday.to_s])
+      %tr
+        %td
+          %label{:for => "group_task_name"} Dienstname:
+        %td= text_field "group", "task_name",:size => 20
+      %tr
+        %td
+          %label{:for => "group_task_name"} Benötigte Verantwortliche:
+        %td= text_field "group", "task_required_users",:size => 3
+      %tr
+        %td
+          %label{:for => "group_task_name"} Beschreibung:
+        %td= text_area "group", "task_description"
+
+%script{ 'type' => "text/javascript"}
+  :plain
+    //<![CDATA[
+    // preset data
+    function toggleWeeklyTask(){
+      if ($("group_weekly_task").checked == true) {
+        $('group_weekday').disabled = false;
+        $('group_task_name').disabled = false;
+        $('group_task_required_users').disabled = false;
+        $('group_task_description').disabled = false;
+      } else {
+        $('group_weekday').disabled = true;
+        $('group_task_name').disabled = true;
+        $('group_task_required_users').disabled = true;
+        $('group_task_description').disabled = true;
+      }
+    }
+    toggleWeeklyTask();
+    //]]>
+<!--[eoform:group]-->

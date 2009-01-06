@@ -1,0 +1,33 @@
+%table
+  %tr
+    %th=_ "Name"
+    %th=_ "Unit quantity"
+    %th=_ "Price"
+    %th=_ "Units ordered"
+    %th=_ "Result/Unit quantity"
+  - totalNetto, totalBrutto, counter = 0, 0, 0
+  - @order_articles.each do |category, order_articles|
+    %tr{:style => "background-color:#EFEFEF"}
+      %td{:style => "text-align:left; color: grey;"}=h category
+      %td{:colspan => "9"}
+    - order_articles.each do |order_article|
+      - nettoPrice = order_article.article.net_price
+      - bruttoPrice = order_article.article.gross_price
+      - units = order_article.units_to_order
+      - unitQuantity = order_article.article.unit_quantity
+      - totalNetto += units * unitQuantity * nettoPrice
+      - totalBrutto += units * unitQuantity * bruttoPrice
+      - counter += 1 if units > 0
+      %tr{:class => cycle('even', 'odd', :name => 'articles'), :style => "color: #{units > 0 ? 'green' : 'red'}"}
+        %td=h order_article.article.name
+        %td= "#{unitQuantity} x #{order_article.article.unit}"
+        %td= "#{number_to_currency(nettoPrice)} / #{number_to_currency(bruttoPrice)}"
+        %td= "#{order_article.quantity} + #{order_article.tolerance}" if unitQuantity > 1
+        %td= units
+%p
+  =_ "Total value"
+  =_ "(net/gross)"
+  = "#{number_to_currency(totalNetto)} / #{number_to_currency(totalBrutto)}"
+%p
+  =_ "Ordered articles:"
+  = counter

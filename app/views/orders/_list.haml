@@ -1,0 +1,22 @@
+= pagination_links_remote @orders, @per_page, {:sort => params[:sort]}
+%table.list{:style => "width: 100%"}
+  %thead
+    %tr
+      %th=_ "Name"
+      %th[sort_td_class_helper "supplier"]
+        = sort_link_helper _("Supplier"), "supplier"
+      %th=_ "Start"
+      %th[sort_td_class_helper "ends"]
+        = sort_link_helper _("End"), "ends"
+      %th=_ "Status"
+      %th{:colspan => "2"}
+  %tbody
+    - @orders.each do |order|
+      %tr{:class => cycle('even', 'odd', :name => 'orders') + ((!order.finished? and order.ends < Time.now) ? " active" : "")}
+        %td= link_to order.name, :action => "show", :id => order
+        %td=h order.supplier ? order.supplier.name : _("nonexistent")
+        %td=h format_time(order.starts)
+        %td=h format_time(order.ends)
+        %td= order.status == _("expired") ? link_to( _("finish now") + (" !!"), {:action => 'finish', :id => order}, :confirm => _("Are you really sure to finish the order?"), :method => "post") : order.status
+        %td= link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => _('Edit')), :action => 'edit', :id => order) unless order.finished?
+        %td= link_to image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => _("Destroy")), { :action => 'destroy', :id => order }, :confirm => _("Are you really sure you want to destroy the order?"), :method => "post"

@@ -1,0 +1,47 @@
+%h1=_ 'Invitation'
+%p
+  =_ 'You are invited to join:'
+  %b= @invite.group.name
+%p=_ 'If you accept the invitation and want to join the foodcoop please fill out the form.'
+.edit_form{:style => "width:25em"}
+  - form_for(:user, @user) do |u|
+    - if flash[:error]
+      %p= flash[:error]
+    = error_messages_for('user')
+    %p
+      %label{:for => 'nick'}=_ 'Nickname (for log in)'
+      %br/
+      = u.text_field 'nick', :maxlength => 25
+    %p
+      %label{:for => 'first_name'}=_ 'First name'
+      %br/
+      = u.text_field 'first_name', :maxlength => 50, :size => 25
+    %p
+      %label{:for => 'last_name'}=_ 'Last name'
+      %br/
+      = u.text_field 'last_name'
+    %p
+      %label{:for => 'phone'}=_ 'Phone'
+      %br/
+      = u.text_field 'phone'
+    %p
+      %label{:for => 'address'}=_ 'Address'
+      %br/
+      = u.text_field 'address'
+    %p
+      %label{:for => 'password'}=_ 'Password'
+      %br/
+      = password_field_tag 'user[password]'
+    %p
+      %label{:for => 'password_confirmation'}=_ 'Passwort confirmation'
+      %br/
+      = password_field_tag 'user[password_confirmation]'
+    
+    %h3=_ 'Settings'
+    - for setting in User::setting_keys.keys
+      %p
+        = check_box_tag "user[settings][#{setting}]", '1', @user.settings[setting] == '1' || @user.settings_default(setting)
+        %label{:for => "user[settings][#{setting}]"}= User::setting_keys[setting]
+        
+    = submit_tag _('Send')
+= javascript_tag("$('user_login').focus()")

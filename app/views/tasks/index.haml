@@ -1,0 +1,21 @@
+- title _('Arrange tasks')
+= render :partial => "nav"
+
+- unless @non_group_tasks.empty?
+  .left_column{:style => "width:75%"}
+    - @tasks = @non_group_tasks
+    .box_title 
+      %h2=_ 'Tasks for all'
+    .column_content
+      = render :partial => "list"
+
+
+- for @group in @groups
+  - @tasks = @group.open_tasks
+  - unless @tasks.empty?
+    .left_column{:style => "width:75%"}
+      .box_title 
+        %h2= link_to @group.name, :action => 'workgroup', :id => @group
+      .column_content
+        = render :partial => "list"
+      = link_to_top

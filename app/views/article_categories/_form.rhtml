@@ -1,0 +1,17 @@
+<%= error_messages_for 'article_category' %>
+
+<!--[form:article_category]-->
+<table>
+ <tr>
+ <th>Name</th>
+ <th>Beschreibung</th>
+ </tr>
+ <tr>
+ <td><label for="article_category_name">
+    <%= @f.text_field 'name',  :size => 20 %></label></td>
+ <td><label for="article_category_description">
+    <%= @f.text_field 'description', :size => 30  %></label></td>
+ </tr>
+</tabel>
+<!--[eoform:article_category]-->
+

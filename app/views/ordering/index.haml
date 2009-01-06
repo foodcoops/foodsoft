@@ -1,0 +1,45 @@
+%h1= _('Order Overview')
+
+// OrderGroups Account Balance
+.left_column{:style => "width:26%"}
+  .box_title
+    %h2=h @orderGroup.name
+  .column_content
+    %table
+      %tr
+        %td= _('Account balance')
+        %td{:class => "currency", :style => "width:5em"}= number_to_currency(@orderGroup.account_balance)
+      %tr
+        %td= "- " + _('Current orders')
+        %td{:class => "currency"}= number_to_currency(@currentOrdersValue)
+      %tr
+        %td=  "- " +_('Unrecorded orders')
+        %td{:class => "currency"}= number_to_currency(@nonbookedOrdersValue)
+      %tr
+        %th= _('Available')
+        %th{:class => "currency"}= number_to_currency(@orderGroup.account_balance - @currentOrdersValue - @nonbookedOrdersValue)
+
+// Current Orders
+= render :partial => "currentOrders"
+
+// finished, nonbooked Orders
+- unless @finishedOrders.empty?
+  .right_column{:style => "width:70%"}
+    .box_title
+      %h2=  _('unrecorded orders')
+    .column_content
+      = render :partial => "finishedOrders"
+      - if @nonbookedOrdersValue > 0
+        %p
+          = _('total order value')
+          %b= number_to_currency(@nonbookedOrdersValue)
+
+// bookedOrders
+- unless @bookedOrders.empty?
+  .right_column{:style => "width:70%"}
+    .box_title
+      %h2=  _('balanced orders')
+    .column_content
+      = render :partial => "bookedOrders"
+      %br/
+      = link_to _('more...'), :action => "myOrders"

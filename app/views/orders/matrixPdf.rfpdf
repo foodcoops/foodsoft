@@ -1,0 +1,145 @@
+<% 
+  # Use this class instead of FPDF when you need PDF header/footer.
+  # Used by template matrixPdf.rfpdf.
+  class PDF < FPDF  
+    def Header
+      SetFont('Arial', 'B', 15)
+      Cell(80)
+      Cell(30, 10, @title, 0, 0, 'C')
+      Ln(20)
+    end  
+    def Footer
+        SetY(-15)
+        SetFont('Arial', 'I', 8)
+        Cell(0, 10, 'Seite ' + PageNo().to_s + ' | ' + @title + ' | powered by FoodSoft', 0, 0, 'C')
+    end    
+  end
+ 
+	MAX_ARTICLES_PER_PAGE = 15 #how many articles shoud written on a page
+
+    pdf=PDF.new 
+    pdf.SetAuthor(FoodSoft.getFoodcoopName) 
+    @starts = @order.starts.strftime('%d.%m.%Y').to_s
+    @ends = @order.ends.strftime('%d.%m.%Y').to_s
+    @title = replace_UTF8(@order.name.to_s) + " | beendet am " + @ends
+    @order_articles = @order.order_article_results
+    
+    pdf.SetTitle(@title) 
+    pdf.SetFont('Arial','B',10)
+  	pdf.SetFillColor(235)
+    pdf.AliasNbPages()
+    pdf.AddPage()
+    pdf.Cell(25,7,'Bestellstart: ',1)
+    pdf.Cell(40,7,@starts,1)
+    pdf.Ln()
+    pdf.Cell(25,7,'Bestellende: ',1)
+    pdf.Cell(40,7,@ends,1)
+    pdf.Ln()
+    pdf.Ln()
+    
+    #list all articles
+    total_num_articles = 0
+    index = 0
+    token = Array.new
+    
+    pdf.SetFont('Arial','B',9)	
+    pdf.Cell(10,6,'Index',1,0,'L',1)				
+    pdf.Cell(20,6,replace_UTF8('Kürzel'),1,0,'L',1)	
+    pdf.Cell(80,6,'Name',1,0,'L',1)	
+    pdf.Cell(20,6,'Einheit',1,0,'L',1)	
+    pdf.Cell(15,6,'Gebinde',1,0,'L',1)	
+    pdf.Cell(10,6,'Preis',1,0,'L',1)		
+    #pdf.Cell(30,6,'Produktgruppe',1,0,'L',1)
+    pdf.Cell(12,6,'Menge',1,0,'L',1)
+    pdf.Ln()
+    pdf.SetFont('Arial','',9)
+    
+    for article in @order_articles
+    	index += 1
+    	# convert the name to correct UTF8
+    	name = replace_UTF8(article.name.to_s)
+      if name.length > 11
+      	token[index] = name[0..3] + '..' + name[-3..-1]
+      else
+        token[index] = name[0..6]
+      end	
+      if index%2 == 0   # every second row gets a background color
+        pdf.Cell(10,6,index.to_s,1,0,'L',1)
+        pdf.Cell(20, 6, token[index],1,0,'L',1)
+        pdf.Cell(80, 6, name, 1,0,'L',1)	
+        pdf.Cell(20, 6, replace_UTF8(article.unit.to_s), 1,0,'L',1)	
+        pdf.Cell(15, 6, article.unit_quantity.to_s, 1,0,'L',1)	
+        pdf.Cell(10, 6, number_to_currency(article.gross_price, :unit => "").to_s, 1,0,'L',1)		
+        #pdf.Cell(30, 6, article.category.to_s, 1,0,'L',1)
+        pdf.Cell(12, 6, article.units_to_order.to_s, 1,0,'L',1)
+      else
+        pdf.Cell(10,6,index.to_s,1)
+        pdf.Cell(20, 6, token[index], 1)
+        pdf.Cell(80, 6, name, 1)	
+        pdf.Cell(20, 6, replace_UTF8(article.unit.to_s), 1)	
+        pdf.Cell(15, 6, article.unit_quantity.to_s, 1)	
+        pdf.Cell(10, 6, number_to_currency(article.gross_price, :unit => "").to_s, 1)		
+        #pdf.Cell(30, 6, article.category.to_s, 1)
+        pdf.Cell(12, 6, article.units_to_order.to_s, 1)
+      end
+      pdf.Ln()
+      total_num_articles += 1
+    end
+    
+    #******************  start with matrix
+    num_site = -1
+    
+    while ((num_site + 1) * MAX_ARTICLES_PER_PAGE < total_num_articles) do  # page generator
+    
+      num_site += 1
+    	
+      pdf.AddPage('L') # 'L' means landscape
+      pdf.SetFont('Arial','',9)
+      pdf.Cell(40,5,'',1,0,'L',1)
+      
+      # show tokens
+      articleNum = 0
+      j = 1
+      index.times do
+        articleNum += 1
+        #check, if the article should be written on the current page
+        if ( articleNum > (MAX_ARTICLES_PER_PAGE * num_site) && articleNum <= (MAX_ARTICLES_PER_PAGE * (num_site+1)))
+          pdf.Cell(16, 5, token[j], 1,0,'L',1)
+        end
+        j += 1
+      end
+      pdf.Ln()
+      
+      group_index = 0
+      for group_order_result in @order.group_order_results
+        group_index += 1
+        pdf.SetFont('Arial','B',10) # make bold
+        group_index%2 == 0 ? pdf.Cell(40,5, replace_UTF8(group_order_result.group_name[0..20]),1,0,'L',1) : pdf.Cell(40,5, replace_UTF8(group_order_result.group_name[0..21]),1)
+  	    pdf.SetFont('Arial','',9)
+ 	    
+  	    # show quantity results
+        articleNum = 0
+        j = 1
+        for article in @order_articles
+          articleNum += 1
+          #check, if the article should be written on the current page
+          if ( articleNum > (MAX_ARTICLES_PER_PAGE * num_site) && articleNum <= (MAX_ARTICLES_PER_PAGE * (num_site+1)))    
+            
+            # get the OrderGroupResult for this article
+            groupResult = GroupOrderArticleResult.find(:first, :conditions => ['order_article_result_id = ? AND group_order_result_id = ?', article.id, group_order_result.id]) 
+            if group_index%2 == 0
+            	groupResult ? pdf.Cell(8,5,groupResult.quantity.to_s,1,0,'L',1) : pdf.Cell(8, 5, '--', 1,0,'L',1)
+            	pdf.Cell(8,5,"",1,0,'C',1)
+           	else
+           		groupResult ? pdf.Cell(8,5,groupResult.quantity.to_s,1) : pdf.Cell(8, 5, '--', 1)
+           		pdf.Cell(8, 5, "", 1,0,'C')
+            end
+          end
+          j += 1
+        end
+        pdf.Ln() 
+  	  end
+
+    end # page generator
+%>
+<%= pdf.Output %>

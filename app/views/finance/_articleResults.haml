@@ -1,0 +1,5 @@
+%tr{:class => cycle('even', 'odd', :name => 'articles')}[@article]
+  = render :partial => 'articleResult'
+  
+%tr{:id => "group_order_article_results_#{@article.id}", :class => "results", :style => "display:none"}
+  = render :partial => 'groupOrderArticleResults'

@@ -1,0 +1,86 @@
+%h1= _("Your result for") + " #{@order.name}"
+#element_navigation
+  = link_to_unless @order.previous == @order, _("Previous order"), :action => "my_order_result", :id => @order.previous
+  |
+  = link_to _("Overview"), :controller => 'ordering'
+  |
+  = link_to_unless @order.next == @order, _("Next order"), :action => "my_order_result", :id => @order.next
+
+// Order summary
+.left_column{:style => "width:45em"}
+  .box_title
+    %h2=_ "Summary"
+  .column_content
+    %table
+      %tr{:valign => "top"}
+        %td{:style => "width:50%"}
+          %p
+            = _("Name") + ":"
+            %b=h @order.name
+            |
+            = _("Supplier") + ":"
+            %b=h @order.supplier ? @order.supplier.name : _("nonexistent")
+          - unless @order.note.empty?
+            %p
+              = _("Note") + ":"
+              =h @order.note
+          %p
+            = _("End") + ":"
+            %b=h format_time(@order.ends)
+          %p
+            = _("Order value") + ":"
+            - if @order_value
+              %b=h number_to_currency(@order_value)
+            - else
+              %b --
+          %p
+            - if @finished
+              = @order.booked ? _("Cleared by") + " #{@order.updated_by.nick}" : "<b>" + _("Order isn't balanced yet") + "</b>"
+    = link_to _("read/add comments"), "#comments"
+
+// directly switch to active orders
+.right_column{:style => "width:23em;"}
+  .box_title
+    %h2= _("Running orders")
+  .column_content
+    %table
+      - @current_orders.each do |order|
+        %tr
+          %td= link_to order.name, :action => 'order', :id => order
+          %td= "("+ time_ago_in_words(order.ends) + ")" if @order.ends
+
+// Article box          
+.single_column{:style => "clear:both; width:70em;"}
+  .box_title
+    %h2=_ "Overview of articles"
+  .column_content#result
+    - if @finished
+      // order is finished, show results ...
+      - unless @groupOrderResult.nil?
+        = render :partial => "finished_order_result"
+      - else
+        =_ "You haven't ordered"          
+    - else
+      // order isn't finished yet, show ordered articles
+      - if @group_order
+        %p= link_to("Bestellung ändern", :action => "order", :id => @order) if @order.current?
+        = render :partial => 'unfinished_order_result'
+        %br/
+        = link_to_top
+      - else
+        = _("You haven't ordered yet.")
+        = link_to _("Order now"), :action => "order", :id => @order
+
+//  Comments box
+- if @finished
+  .single_column{:style => "width:70em;"}
+    .box_title
+      %h2=_ "Comments"
+    .column_content#comments
+      = render :partial => 'shared/comments'
+      %p
+        = link_to_remote _("New comment"), :url => {:action => 'newComment', :id => @order}, |
+                   :before => "Element.show('loader')", |
+                   :success => "Element.hide('loader')" |
+        #newComment
+      =  link_to_top

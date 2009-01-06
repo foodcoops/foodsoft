@@ -1,0 +1,32 @@
+%table				
+  %tr
+    %th= _('Due date')
+    %th= _('Subject')
+    %th{:colspan => '2'}
+      = _('Who will make it?') 
+      %small= "(" + _("How many are still required?") + ")"
+  - for task in @tasks
+    %tr{:class => cycle('even','odd', :name => "tasks") + (task.done ? " done" : "") }
+      %td= format_date(task.due_date) unless task.due_date.nil?
+      %td= link_to task.name, :controller => "tasks", :action => "show", :id => task
+      %td
+        - unless task.users.empty?
+          - owner = Array.new
+          - task.assignments.each do |ass| 
+            - if ass.accepted? 
+              - nick = "<span class='accepted'>#{ass.user.nick.to_s}</span>"
+            - else
+              - nick = "<span class='unaccepted'>#{ass.user.nick.to_s} ?</span>"
+            - owner << nick
+          = owner.join(", ")
+        = highlighted_required_users task
+      %td
+        - unless task.is_accepted?(@current_user)
+          %span{:style => "float:left"}= button_to _('Accept task'), :controller => "tasks", :action => "accept", :id => task
+          = button_to _("Reject task"), :controller => "tasks", :action => "reject", :id => task if task.is_assigned?(@current_user)
+        - else
+          - form_for :task, :url => {:action => "update_status", :id => task} do |f|
+            = _("Done") + "?"
+            = f.check_box :done, {:onchange => "submit()"}
+        = _("Done") if task.done
+  - reset_cycle("tasks")

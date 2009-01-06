@@ -1,0 +1,90 @@
+- title _("Show order")
+#element_navigation
+  = link_to_unless @order.previous == @order, _("Previous order"), :action => "show", :id => @order.previous
+  |
+  = link_to _("Overview"), :controller => 'orders'
+  |
+  = link_to_unless @order.next == @order, _("Next order"), :action => "show", :id => @order.next
+
+// Order summary
+.left_column{:style => "width:55em"}
+  .box_title
+    %h2=_ "Summary"
+  .column_content
+    - if !@order.booked? and @finished
+      %p
+        %b{:style => "color:red"}=_ "Order isn't balanced yet"
+    %p
+      = _("Name") + ":"
+      %b=h @order.name
+      |
+      = _("Supplier") + ":"
+      %b=h @order.supplier ? @order.supplier.name : _('nonexistent')
+    - unless @order.note.empty?
+      %p
+        = _("Note") + ":"
+        =h @order.note
+    %p
+      = _("Begin") + ":"
+      %b=h format_time(@order.starts)
+      |
+      = _("End") + ":"
+      %b=h format_time(@order.ends)
+    %p
+      = _("Groups ordered") + ":"
+      %b= @group_orders.size
+      - unless @finished
+        = "[#{@group_orders.collect{|g| g.order_group.name}.join(', ')}]" unless @group_orders.empty? 
+      - else
+        = "[#{@group_orders.collect{|g| g.group_name}.join(', ')}]" unless @group_orders.empty? 
+    %p
+      =_ "Total price"
+      %b= number_to_currency(@order.sumPrice('gross'))
+      - if @order.finished
+        |
+        =_ "Ordered articles:"
+        %b= @order_articles.size
+    - unless @finished
+      = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Edit'), :action => 'edit', :id => @order)
+      = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Delete'), { :action => 'destroy', :id => @order }, :confirm => "Willst du wirklich die Bestellung '#{@order.name}' löschen?", :method => "post")
+      = link_to('[beenden]', {:action => 'finish', :id => @order}, :confirm => "Willst du wirklich die Bestellung '#{@order.name}' beenden?", :method => "post")
+    - else
+      %p
+        = link_to_remote _("All articles"), :update => 'result', :url => {:action => 'show', :id => @order, :view => 'normal'}, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+        |
+        = link_to_remote _("Sort by groups"), :update => 'result', :url => {:action => 'show', :id => @order, :view => 'groups'}, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'groupsPdf', :id => @order }, { :title => _("Download file") }
+        |
+        = link_to_remote _("Sort by articles"), :update => 'result', :url => {:action => 'show', :id => @order, :view => 'articles'}, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'articlesPdf', :id => @order }, { :title => _("Download file") }
+        |
+        =_ "Matrix" + ":"
+        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'matrixPdf', :id => @order }, { :title => _("Download file") }
+        |
+        =_ "FAX-template" + ":"
+        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'faxPdf', :id => @order }, { :title => _("Download file") }
+        = link_to image_tag("text_file.png", :size => "16x16", :border => "0", :alt => "Textdatei erstellen"), { :action => 'text_fax_template', :id => @order }, { :title => _("Download file") }
+        |
+        = link_to 'Kommentare', '#comments'
+      
+// Ordered articles
+.single_column{:style => "clear:both; width:70em;"}
+  .box_title
+    %h2=_ "Articles"
+  .column_content#result
+    - unless @finished
+      = render :partial => "show_unfinished"
+    - else
+      = render :partial => "showResult"
+
+// comments
+- if @finished
+  .single_column{:style => "width:70em;"}
+    .box_title
+      %h2=_ "Comments"
+    .column_content#comments
+      = render :partial => "/shared/comments"
+      %p
+        = link_to_remote "neuer Kommentar", :url => {:action => 'newComment', :id => @order}
+        #newComment
+      = link_to_top                                           

@@ -1,0 +1,72 @@
+= error_messages_for 'order'
+
+.single_column
+  .box_title
+    %h2=_ "Order"
+  .column_content
+    = hidden_field 'order', 'supplier_id'
+    %p
+      =h _("Supplier") + ": #{@order.supplier.name}"
+    %p
+      %label{:for => 'order_name'}=_ "Name"
+      %br/
+      = text_field 'order', 'name'
+    %p
+      %label{:for => 'order_note'}=_ "Note"
+      %br/
+      = text_area 'order', 'note', :cols => 50,  :rows => 5
+    %p
+      %label{:for => 'order_starts'}=_ "Start"
+      %br/
+      = datetime_select 'order', 'starts', :start_year => Time.now.year - 1
+    %p
+      %label{:for => 'order_ends'}=_ "End"
+      %br/
+      = datetime_select 'order', 'ends', :start_year => Time.now.year - 1, :include_blank => true
+
+  .box_title
+    %h2=_ "Articles"
+  .column_content
+    - if (@template_orders && !@template_orders.empty?)
+      %p
+        %label{:for => 'template'}=_ "Use article selection from"
+        %select{:name => "template_id", :onchange => "useTemplate(this[this.selectedIndex].value)"}
+          %option{:value => "-1", :selected => "selected"}=_ "Choose an order..."
+          - i = -1
+          - for order in @template_orders
+            %option{:value => (i += 1)}=h order.name
+    %table.list
+      %tr
+        %th= check_box_tag 'checkall', "1", false, { :onclick => "checkUncheckAll(this)" }
+        %th=_ "Name"
+        %th=_ "Note"
+        %th=_ "Origin"
+        %th=_ "Manufacturer"
+        %th=_ "Unit quantity"
+        %th=_ "Price"
+      - for category, articles in Article.group_by_category(@order.supplier.getArticlesAvailableForOrdering)
+        %tr{:style => "background-color:#EFEFEF"}
+          %td
+          %td{:colspan => "6", :style => "text-align:left"}
+            %b=h category
+        - for article in articles
+          / check if the article is selected
+          - included = @order.order_articles.detect { |order_article| order_article.article_id == article.id }
+          %tr{:class => cycle('even', 'odd') + (included ? ' selected' : ''),  :id => article.id.to_s, :onclick => "checkRow('#{article.id}')"}
+            %td= check_box_tag "order[article_ids][]", article.id.to_s, included, { :id => "checkbox_#{article.id}", :onclick => "checkRow('#{article.id}')" }
+            %td=h article.name
+            %td=h truncate article.note, 25
+            %td=h truncate article.origin, 15
+            %td=h truncate article.manufacturer, 15
+            %td= "#{article.unit_quantity} x #{article.unit}"
+            %td= "#{number_to_currency(article.net_price)} / #{number_to_currency(article.gross_price)}"
+      %tr
+        %td{:colspan => "6"}
+          = check_box_tag 'checkall', "1", false, { :onclick => "checkUncheckAll(this)" }
+          =_ "Select all"
+
+- if (@template_orders && !@template_orders.empty?)
+  = render :partial => 'template_orders_script'
+
+
+          

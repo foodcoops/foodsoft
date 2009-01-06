@@ -1,0 +1,42 @@
+<h1>Meine Bestellgruppe</h1>
+<div class="left_column">
+  <div class="box_title"><h2><%=h @ordergroup.name %></h2></div>
+  <div class="column_content">
+    <p><b>Beschreibung:</b> <%=h @ordergroup.description %> 
+    <%= link_to '(ändern)', :action => 'editGroup', :id => @ordergroup %>
+    </p>
+    <p><b>Gruppengröße:</b> <%=h @ordergroup.actual_size %></p>
+    <p><b>Kontostand:</b> <%= number_to_currency(@ordergroup.account_balance) %></p>
+    <h2>Personen</h2>
+    <ul style="list-style-type:decimal;">
+    <% for membership in @ordergroup.memberships %>
+      <li>
+        <%= link_to membership.user.nick, :controller => 'index', :action => 'showUser', :id => membership.user %>
+      </li>
+    <% end %>
+    </ul>
+    <%= link_to('Hinzufügen/entfernen', :action => 'members', :id => @ordergroup) %> | 
+    <%= link_to('Person einladen', :action => 'invite', :id => @ordergroup) %>
+  </div>
+</div>
+
+<div class="right_column">
+  <div class="box_title"><h2>Kontoauszug</h2></div>
+  <div class="column_content">
+  <p>
+    <form name="sform" action="" style="display:inline;">
+    <label for="financial_transaction_note">Filter für Notizen: </label>
+    <%= text_field_tag("query", params['query'], :size => 10 ) %>
+    </form>
+   </p>
+   <%= observe_field 'query',  :frequency => 2,
+         :before => "Element.show('loader')",
+         :success => "Element.hide('loader')",
+         :url => {:action => 'myOrdergroup'},
+         :with => 'query' %>
+    <div id="table">          
+    <%= render :partial => "/financial_transactions/list" %>
+    </div>
+  </div>
+</div>
+

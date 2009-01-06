@@ -1,0 +1,41 @@
+- title _("Manage orders")
+
+- if @current_user.role_orders?
+  %p
+    - form_tag do
+      =_ "New Order"
+      =_ "for"
+      %select{:onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;"}
+        %option{:selected => 'selected'}=_ "Choose a supplier..."
+        = options_for_select(Supplier.find(:all).collect {|s| [ s.name, url_for(:action => "new", :id => s)] })
+%br/
+.left_column{:style => "width:55em"}
+  .box_title
+    %h2=_ "Running orders"
+  .column_content
+    - if (@current_orders.length > 0)
+      %table.list
+        %thead
+          %tr
+            %th=_ "Name"
+            %th=_ "Supplier"
+            %th=_ "End"
+            %th{:colspan => "2"}
+        %tbody
+          - for order in @current_orders
+            %tr{:class => cycle('even', 'odd', :name => 'current_orders')}
+              %td= link_to order.name, :controller => 'orders', :action => 'show', :id => order
+              %td=h order.supplier.name
+              %td=h format_time(order.ends) unless order.ends.nil?
+              %td= link_to _("finish"), {:action => 'finish', :id => order}, :confirm => _("Are you really sure to finish the order?"), :method => "post"
+              %td
+                = link_to image_tag('b_edit.png', :size => "16x16", :border => 0, :alt => _("Edit")), :action => 'edit', :id => order
+                = link_to image_tag('b_drop.png', :size => "16x16", :border => 0, :alt => _("Destroy")), { :action => 'destroy', :id => order }, :confirm => _("Are you really sure you want to destroy the order?"), :method => "post"
+    - else
+      =_ "There aren't current orders at the moment."
+        
+.left_column{:style => "width:75em"}
+  .box_title
+    %h2=_ "Expired/finished orders"
+  .column_content#orders_table
+    = render :partial => 'list'

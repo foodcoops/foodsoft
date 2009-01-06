@@ -1,0 +1,50 @@
+<%= error_messages_for 'user' %>
+
+<table style="float:left;width:52%;">
+ <tr>
+   <td><label for="user_nick">Nick</label></td>
+   <td><%= text_field 'user', 'nick'  %></td>
+ </tr>
+ <tr>
+   <td><label for="user_first_name">Vorname</label></td>
+   <td><%= text_field 'user', 'first_name'  %></td>
+ </tr>
+ <tr>
+   <td><label for="user_last_name">Nachname</label></td>
+   <td><%= text_field 'user', 'last_name'  %></td>
+ </tr>
+ <tr>
+   <td><label for="user_email">Email</label></td>
+   <td><%= text_field 'user', 'email'  %></td>
+ </tr>
+  <tr>
+   <td><label for="user_phone">Telefon</label></td>
+   <td><%= text_field 'user', 'phone'  %></td>
+ </tr>
+ <tr>
+   <td><label for="user_address">Adresse</label></td>
+   <td><%= text_field 'user', 'address'  %></td>
+ </tr>
+ <tr>
+   <td/>
+ </tr>
+ <tr>
+   <td><label for="user[password]">Neues Passwort</label></td>
+   <td><%= password_field_tag "user[password]" %></td>
+ </tr>
+ <tr>
+   <td><label for="user[password_confirmation]">Passwort wiederholen</label></td>
+   <td><%= password_field_tag "user[password_confirmation]" %></td>
+ </tr>
+</table>
+<table style="float:right;width:45%;">
+ <tr> 
+   <td colspan="2"><b>Einstellungen:</b></td>
+ </tr>
+ <% for setting in User::setting_keys.keys -%>
+ <tr>
+   <td><label for="user[settings][<%= setting %>]"><%=h User::setting_keys[setting]%></label></td>
+   <td><%= check_box_tag "user[settings][#{setting}]", '1', @user.settings[setting] == '1' || @user.settings_default(setting) %></td>
+ </tr> 
+ <% end -%>
+</table>

@@ -1,0 +1,5 @@
+<% for membership in Membership.find_all_by_user_id(@user.id) %>
+<p>
+    <%= link_to(membership.group.name, :action => 'showGroup', :id => membership.group) %>
+</p>
+<% end %>

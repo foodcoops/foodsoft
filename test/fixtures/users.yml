@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+admin:
+  id: 1
+  nick: admin
+  first_name: Anton
+  last_name: Admininistrator
+  email: admin@foo.test
+  #TODO: password can't loaded directyl to the database
+  #password_hash: 
+  #password_salt:
+test:
+  id: 2
+  nick: test
+  first_name: Tim
+  last_name: Tester
+  email: test@foo.test

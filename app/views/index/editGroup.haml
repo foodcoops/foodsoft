@@ -1,0 +1,14 @@
+%h1 Gruppe bearbeiten
+
+%p
+  %i
+    Mitglieder kannst du 
+    = link_to "hier", :action => "members", :id => @group
+    hinzufügen.
+.edit_form{:style => "width:35em"}      
+  - form_tag(:action => 'updateGroup', :id => @group) do
+    = render :partial => "/groups/form"
+    %p{:style => "clear:both"}
+      = submit_tag 'Speichern'
+      |
+      = link_to "Abbrechen", :action => "showGroup", :id => @group

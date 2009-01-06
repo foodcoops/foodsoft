@@ -1,0 +1,48 @@
+%h1 Bestellung abrechnen
+- if @order.booked
+  %p
+    %b Achtung, Bestellung wurde schon abgerechnet!
+.left_column{:style => 'width: 50em'}
+  .box_title
+    %h2
+      = @order.name + " | " + format_date(@order.starts) + ' --> ' + format_date(@order.ends)
+  .column_content#summary
+    #order_summary
+      = render :partial => "summary"
+.right_column{:style => 'width: 20em'}
+  .box_title
+    %h2 Aktionen
+  .column_content
+    %ul
+      - unless @order.booked
+        %li= link_to "Bestellung abschließen", :action => "confirmOrder", :id => @order
+
+.right_column{:style => 'clear:both;width: 28%'}
+  .box_title
+    %h2 Protokoll
+  .column_content
+    #note
+      - unless @order.note.empty?
+        = simple_format @order.note
+      - else
+        %p Hier kannst Du deine Abrechnung kommentieren
+    %small Protokoll bearbeiten:
+    = link_to_remote image_tag("b_edit.png", :size => "16x16", :border => "0"), |
+       :update => 'results', :url => { :action => 'editOrder', :id => @order, :view => 'editNote' }, | 
+       :before => "Element.show('loader')", :success => "Element.hide('loader')" |
+    %hr/
+    #comments
+      = render :partial => 'shared/comments'
+      
+.left_column{:style => 'width: 69%'}
+  .box_title
+    #editOrderNav
+      %ul
+        %li= link_to_remote 'Gruppenübersicht', :update => 'results', :url => { :action => 'editOrder', :id => @order, :view => 'groupsOverview' }, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+        %li= link_to_remote 'Artikelübersicht', :update => 'results', :url => { :action => 'editOrder', :id => @order, :view => 'articlesOverview' }, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+        %li= link_to_remote 'Bestellung bearbeiten', :update => 'results', :url => { :action => 'editOrder', :id => @order, :view => 'editResults' }, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+  .column_content
+    #results
+      = render :partial => 'groupsOverview'
+    %p= link_to_top
+#edit_box{:style => 'display:none'}

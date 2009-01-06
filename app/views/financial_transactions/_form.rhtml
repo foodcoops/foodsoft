@@ -1,0 +1,10 @@
+<%= error_messages_for 'financial_transaction' %>
+
+<div class="edit_form" style="width:30em">
+<p><b><%=h @group.name %></b>
+<p><label for="financial_transaction_amount">Betrag</label>
+<%= text_field 'financial_transaction', 'amount', :size => '10'  %> Euro</p>
+
+<p><label for="financial_transaction_note">Note</label><br/>
+<%= text_area 'financial_transaction', 'note', :cols => "40", :rows => "5" %></p>
+</div>

@@ -1,0 +1,12 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  order_id: 1
+  group_name: Order Group 1
+  price: 99.95
+two:
+  id: 2
+  order_id: 1
+  group_name: Order Group 2
+  price: 99.95
+  

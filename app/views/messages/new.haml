@@ -1,0 +1,49 @@
+%h1 Neue Nachricht
+
+- form_tag(:action => 'create') do
+  = error_messages_for 'message'
+
+  %p
+    %label{:for => "message_recipient"} An
+    %fieldset
+      <input type="checkbox" name="everyone" value="yes" 
+      = "checked='checked'" if @everyone
+      onchange="Element.toggle('recipients')" />
+      gesamte Foodcoop
+      %table{:id => 'recipients', :style => (@everyone ? 'display:none;' : '')}
+        %tr
+          %td
+            %b BenutzerInnen:
+            %br/
+            %small{:style => "color:grey"} (Mehrere Benutzerinnen mit Komma trennen)
+            %br/
+            = text_field_with_auto_complete(:recipient, :nicks, {:value => @recipient_nicks}, {:tokens => ","})
+            :javascript
+              var userListLoaded = false;
+              function checkUserList() {
+                if (userListLoaded) {
+                  $('user-list').toggle();
+                }
+                return !userListLoaded;
+              }
+            = link_to_remote('Liste', :update => 'user-list', :url => {:action => 'user_list'}, :complete => 'userListLoaded = true', :condition => 'checkUserList()')
+            %div{:id => 'user-list', :class => 'auto_complete'}
+        %tr
+          %td
+            %b Gruppe:
+            %br/
+            %select{:name => 'recipient[group_id]'}
+              %option{:value => '-1'} -- Gruppe -- 
+              = options_from_collection_for_select(Group.find(:all, :order => 'name', :include => :memberships).reject{|g| g.memberships.empty?}, "id", "name", (@group ? @group.id : nil))    
+    
+  %p
+    %label{:for => "message_subject"} Betreff
+    %br/
+    = text_field 'message', 'subject'
+
+  %p
+    %label{:for => "message_body"} Nachricht
+    %br/
+    = preserve(text_area 'message', 'body', :cols => '80', :rows => '20')
+
+  = submit_tag "Senden"

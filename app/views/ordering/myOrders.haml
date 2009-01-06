@@ -1,0 +1,27 @@
+%h1 
+  =_ "Orders of"
+  = @orderGroup.name
+%p
+  %i
+    =_ "See current orders in"
+    = link_to _("Overview"), :action => "index"
+%p
+  %i{:style => "float:left"}=_ "Also show orders, your ordergroup haven't participated:"
+  - form_tag({:action => "myOrders"}, :method => "get") do
+    -unless @show_all
+      %input{:type => "checkbox", :name => :show_all, :value => "1", :onclick => "submit();"}
+    -else
+      %input{:type => "checkbox", :name => :show_all, :value => "0", :checked => "checked", :onclick => "submit();"}
+      
+.single_column{:style => "width:50em"}
+  .box_title
+    %h2=_ "finished/not balanced"
+  .column_content
+    = render :partial => "finishedOrders"
+    
+.single_column{:style => "width:50em"}
+  .box_title
+    %h2=_ "balanced"
+  .column_content
+    #bookedOrders
+      = render :partial => "bookedOrders"

@@ -1,0 +1,39 @@
+%p
+  %table{:style => "width:100%"}
+    %tr
+      %td
+        = pagination_links_remote @users
+      %td{:style => "text-align:right"}
+        - if @total > 20
+          = items_per_page
+%table.list
+  %thead
+    %tr
+      %th= _('Username')
+      %th= _('First name')
+      %th= _('Last name')
+      %th= _('Email')
+      %th= _('Roles')
+      %th= _('Last Login')
+      %th{:style => "width:3em"}
+  %tbody
+    - for user in @users 
+      - roles = Array.new
+      - roles << 'Admin' if user.role_admin?
+      - roles << 'Finanzen' if user.role_finance?
+      - roles << 'Lieferanten' if user.role_suppliers?
+      - roles << 'Artikel' if user.role_article_meta?
+      - roles << 'Bestellung' if user.role_orders?
+      %tr{:class => cycle('even','odd', :name => 'users')}
+        %td= link_to user.nick, :action => 'showUser', :id => user
+        %td=h user.first_name
+        %td=h user.last_name
+        %td=h user.email
+        %td=h roles.join(', ')
+        %td=h FoodSoft::format_date_time(user.last_login)
+        %td
+          = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Benutzer_in bearbeiten', :title => 'Benutzer_in bearbeiten'), :action => 'editUser', :id => user)
+          = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Benutzer_in löschen', :title => 'Benutzer_in löschen'), | 
+            {:action => 'destroyUser', :id => user}, |
+            :confirm => 'Willst du ' + user.first_name + ' wirklich löschen?', |
+            :method => "post") |

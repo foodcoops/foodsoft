@@ -1,0 +1,52 @@
+%ul
+  // Startarea
+  %li{:class => ("current" if controller.controller_name == 'index' || controller.controller_name == 'messages' || controller.controller_name == 'tasks')}
+    = link_to _('Startpage'), {:controller => 'index', :action => 'index'}, {:title => _('The Startpage. A good Startpoint.')}
+    %ul
+      %li= link_to _("Members"), {:controller => "index", :action => "foodcoop_members"}, {:title => _('Here you find a List with all Foodcoop members.')}
+      %li= link_to _("Workgroups"), {:controller => "index", :action => "workgroups"}, {:title => _('Here you find all Workgroups. For Example the sortinggroup with all their members.')}
+      %li= link_to _("Tasks"), {:controller => "tasks"}, {:title => _('Here you see the tasks. Please do something for the foodcoop!')}
+      - unread = Message.find_all_by_recipient_id_and_read(@current_user.id, false)
+      %li= link_to _("Messages") + "#{unread.nil? || unread.empty? ? '' : "(#{unread.size})"}", {:controller => 'messages', :action => 'inbox'}, {:title => _('Here you can read/write Messages from/to other foodcoop members')}
+      - if @current_user.find_ordergroup
+        %li= link_to _("My ordergroup"), {:controller => 'index', :action => 'myOrdergroup'}, {:title => _('Here are informations about your ordergroup. You can also see your accounts current')}      
+      %li= link_to _("My Profile"), my_profile_path, {:title => _('Here are your personal Settings')}
+      
+  // Orders
+  - hasOrderGroup = !@current_user.find_ordergroup.nil?
+  - hasOrdersRole = @current_user.role_orders?
+  
+  - if hasOrderGroup || hasOrdersRole
+    %li{:class => ("current" if controller.controller_name == 'orders' || controller.controller_name == 'ordering')}
+      = hasOrderGroup ? link_to( _("Orders"), :controller => 'ordering') : link_to('Bestellungen', :controller => 'orders')
+      %ul
+        - if hasOrderGroup
+          %li= link_to _("Order"), :controller => "ordering"
+          %li= link_to _("My orders"), :controller => 'ordering', :action => "myOrders"
+        - if hasOrdersRole
+          %li= link_to _("Manage orders"), :controller => 'orders'
+
+  // Articles, Suppliers
+  - if @current_user.role_article_meta? || @current_user.role_suppliers?
+    %li{:class => ("current" if controller.controller_name == 'articles' || controller.controller_name == 'suppliers')}
+      = link_to _("Articles"), :controller => 'articles', :action => 'index'
+      %ul
+        %li= link_to _("Show articles"), :controller => 'articles', :action => 'list'
+        %li= link_to _("Categories"), :controller => 'articles', :action => 'index'
+        %li= link_to _("Suppliers"), :controller => 'suppliers', :action => 'list'
+        
+  // Finance
+  - if @current_user.role_finance?
+    %li{:class => ("current" if controller.controller_name == 'finance')}
+      = link_to _("Finance"), :controller => 'finance'
+      %ul
+        %li= link_to _("Ordergroups"), :controller => 'finance', :action => 'listOrdergroups'
+        %li= link_to _("Balance orders"), :controller => 'finance', :action => 'listOrders'
+    
+  // Administration
+  - if @current_user.role_admin?
+    %li{:class => ("current" if controller.controller_name == 'admin')}
+      = link_to _("Administration"), :controller => 'admin'
+      %ul
+        %li= link_to _("User"), :controller => 'admin', :action => 'listUsers'
+        %li= link_to _("Groups"), :controller => 'admin', :action => 'listGroups'

@@ -1,0 +1,41 @@
+one:
+  id: 1
+  category_id: 1
+  name: A - First Project
+  description: This is the first one
+  
+two:
+  id: 2
+  category_id: 1
+  name: B - Second Project
+  description: This is the second one
+  
+three:
+  id: 3
+  category_id: 1
+  name: C - Third Project
+  description: This is the third one
+  
+four:
+  id: 4
+  category_id: 2
+  name: D - Fourth
+  description: This is the fourth one
+  
+five:
+  id: 5
+  category_id: 2
+  name: E - Fifth
+  description: This is the fifth one
+  
+six:
+  id: 6
+  category_id: 2
+  name: F - Sixth
+  description: This is the sixth one
+  
+seven:
+  id: 7
+  category_id: 2
+  name: G - Seventh
+  description: This is the seventh one

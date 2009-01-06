@@ -1,0 +1,18 @@
+%h1=_ "Upload articles"
+%p
+  %i 
+    =_ 'The file-type must be "csv" (textfile). Use a semicolon (";") to seperate the fields and double quotes ("Bananas...") for the text.'
+    %br/
+    =_ 'The character-set has to be "UTF-8". The first row, maybe used for headers, will be ignored.'
+%p
+  %i
+    =_ "Correct order of the columns:"
+    %br/
+    = [_("Status (x=outlistet)"), _("Number"), _("Name"), _("Note"), _("Manufacturer"), _("Origin"), |
+      _("Unit"), _("Net price"), _("Tax"), _("Deposit"), _("Unit quantity"), |
+      _("Scale quantity"), _("Scale price"), _("Category")].join(" | ") |
+
+#uploadArticles.uploadForm
+  - form_for(:articles, :url => {:action => 'parse_articles'}, :html => { :multipart => true }) do |form|
+    %p= form.file_field("file")
+    %p= submit_tag _("Upload articles")

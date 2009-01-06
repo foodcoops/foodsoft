@@ -1,0 +1,61 @@
+%p
+  =_ 'Number of found articles :' 
+  %b= @total
+
+%p
+  %table{:style => "width:100%"}
+    %tr
+      %td
+        = pagination_links_remote @articles, @per_page, {:sort => params[:sort]}
+      %td{:style => "text-align:right"}
+        - if @total > 30
+          = items_per_page([30, 100, 500])
+
+%table#articles_table.list.articles
+  %thead
+    %tr
+      %th
+      %th[sort_td_class_helper "name"]
+        = sort_link_helper _("Name"), "name", @supplier.id
+      %th
+      %th[sort_td_class_helper "category"]
+        = sort_link_helper _("Category"), "category", @supplier.id
+      %th[sort_td_class_helper "unit"]
+        = sort_link_helper _("Unit"), "unit", @supplier.id
+      %th[sort_td_class_helper "note"]
+        = sort_link_helper _("Note"), "note", @supplier.id
+      %th{:style => "width: 4em;"}=_ 'UnitQu'
+      %th{:style => "width: 4em;"}=_ 'Price'
+      %th{:style => "width: 3.5em;"}=_ 'Tax'
+      %th{:style => "width: 4em;"}=_ 'Deposit'
+      %th{:style => "width: 3em;"}
+      
+  %tbody#listbody
+    
+    - if @total > 0  
+      - for @article in @articles
+        %tr{ :class => cycle('even','odd') + (!@article.availability ? ' unavailable' : '') + ((@article.recently_updated && @article.availability) ? " just_updated" : ""), |
+             :id => @article.id, :onclick => "checkRow('#{@article.id.to_s}')"} |
+          = render :partial => 'article_row'
+      %tfoot
+        %tr
+          %td{:colspan => '10'}
+            %input{:type => 'checkbox', :name => 'checkall', :onclick => 'checkUncheckAll(this)'}/
+            %select{:name => "selected_action"}
+              %option{:value => '', :selected => 'selected'} Aktion wählen ...
+              %option{:value => "destroy", :onclick => "if (confirm('Willst Du wirklich alle gewählten Artikel löschen?')) { formSubmit(); }; return false;"} Artikel löschen
+              %option{:value => "setNotAvailable", :onclick => 'formSubmit();'} Artikel sind nicht mehr verfügbar
+              %option{:value => "setAvailable", :onclick => 'formSubmit();'} Artikel sind verfügbar
+              
+            = hidden_field_tag 'supplier', @supplier.id
+%p
+  = pagination_links_remote @articles, @per_page, {:sort => params[:sort]}
+    
+:plain
+  <script type="text/javascript">
+    function formSubmit() {
+      $("articlesInListForm").submit()
+    }
+  </script>        
+              
+            

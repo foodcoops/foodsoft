@@ -1,0 +1,44 @@
+%h1 Finanzbereich
+.left_column{:style => 'width: 50%'}
+  .box_title
+    %h2 letzte Überweisungen
+  .column_content
+    %p
+      = link_to "Bestellgruppen", :action => "listOrdergroups"
+    %table.list
+      %thead
+        %tr
+          %th Datum
+          %th Gruppe
+          %th Notiz
+          %th Betrag
+      %tbody
+        - @financial_transactions.each do |ft|
+          %tr{:class => cycle("even","odd", :name => "financial_transaction")}
+            %td= format_date(ft.created_on)
+            %td= ft.order_group.name
+            %td{:style => "width:50%"}=h ft.note
+            %td{:style => "color:#{ft.amount < 0 ? 'red' : 'black'}", :class => "currency"}= number_to_currency(ft.amount)
+            
+.right_column{:style => 'width: 46%'}
+  .box_title
+    %h2 noch nicht abgerechnet
+  .column_content
+    %p= link_to "Bestellungsübersicht", :action => "listOrders"
+    - unless @orders.empty?
+      %table.list
+        %thead
+          %tr
+            %th Name
+            %th Ende
+            %th Betrag(FC)
+            %th 
+        %tbody
+          - @orders.each do |order|
+            %tr{:class => cycle("even","odd", :name => "order")}
+              %td= order.name
+              %td= format_date(order.ends)
+              %td{:class => "currency"}= number_to_currency(order.sumPrice("fc"))
+              %td= link_to "abrechnen", :action => "editOrder", :id => order
+    - else
+      Super, alles schon abgerechnet...

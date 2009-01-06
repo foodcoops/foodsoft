@@ -1,0 +1,27 @@
+%p
+  %table{:style => "width:100%"}
+    %tr
+      %td
+        = pagination_links_remote @groups
+      %td{:style => "text-align:right"}
+        - if @total > 20
+          = items_per_page
+%table.list
+  %thead
+    %tr
+      %th Name
+      %th Typ
+      %th Mitglieder
+      %th
+  %tbody
+    - for group in @groups
+      %tr{:class => cycle('even','odd', :name => 'groups')}
+        %td= link_to group.name, :action => 'showGroup', :id => group
+        %td= group.is_a?(OrderGroup) ? 'Bestellgruppe' : 'Gruppe'
+        %td= group.users.size
+        %td
+          = link_to image_tag('b_users.png', :size => '16x16',  :border => "0", :alt => 'Mitlglieder bearbeiten'), :action => 'members', :id => group
+          = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Gruppe bearbeiten'), :action => 'editGroup', :id => group)
+          = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Gruppe löschen'), {:action => 'destroyGroup', :id => group}, |
+                         :confirm => 'Willst du ' + group.name + ' wirklich löschen?', |
+                         :method => "post") |

@@ -1,0 +1,43 @@
+%h2=    _('Go to ...')
+%ul
+  %li
+    = _('FoodCoop')
+    %ul
+      %li= link_to _("Member list"), :controller => "index", :action => "foodcoop_members"
+      %li= link_to _("My tasks"), :controller => "tasks", :action => "myTasks"
+      %li= link_to _("Write message"), :controller => "messages", :action => "new"
+  
+  // Orders
+  - hasOrderGroup = !@current_user.find_ordergroup.nil?
+  - hasOrdersRole = @current_user.role_orders?
+  - if hasOrderGroup || hasOrdersRole
+    %li
+      = _("Orders")
+      %ul
+        - if hasOrderGroup
+          %li= link_to _('Order summary'), :controller => "ordering"
+        - if hasOrdersRole
+          %li= link_to _('Finish order'), :controller => 'orders'
+  // Articles
+  - if @current_user.role_article_meta? || @current_user.role_suppliers?
+    %li
+      = _("Artcle management")
+      %ul
+        %li= link_to _("Refresh articles"), :controller => "articles", :action => 'list'
+        %li= link_to _("Suppliers"), :controller => 'suppliers', :action => 'list'
+  
+  // Finance
+  - if @current_user.role_finance?
+    %li
+      = _('Financial management')
+      %ul
+        %li= link_to _("Update account balances"), :controller => 'finance', :action => 'new_transactions'
+        %li= link_to _('Cancel orders'), :controller => 'finance'
+  
+  // Administration
+  - if @current_user.role_admin?
+    %li 
+      = _('Administration')
+      %ul
+        %li= link_to _("New ordergroup"), :controller => "admin", :action => "newOrderGroup"
+        %li= link_to _("New user"), :controller => "admin", :action => "newUser"  

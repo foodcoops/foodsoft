@@ -1,0 +1,141 @@
+role :libs, "root@webserver"
+
+set :root_path, "/var/www/vhosts/foodcoops.net/railsapps/"
+set :backup_path, "/var/www/vhosts/foodcoops.net/railsapps/backup/"
+set :foodsoft_path, "/var/www/vhosts/foodcoops.net/railsapps/foodsoft/"
+
+set :sandbox, {:subdomain => "sandbox"} 
+
+set :sharedLists, 
+  {
+    :subdomain => "/var/www/vhosts/foodcoops.net/railsapps/sharedLists/",
+    :db_user => "fcnet_shared",
+    :db_name => "fcnet_shared",
+    :db_pwd => "dhj450lw"
+  } 
+
+set :foodcoops, [
+  {
+    :subdomain => "sandbox",
+    :db_user => "fs2_sandbox",
+    :db_name => "fs2_sandbox",
+    :db_pwd => "gruenbarsch"},
+  {
+    :subdomain => "fcschinke09",
+    :db_user => "fs2_fcschinke09",
+    :db_name => "fs2_fcschinke09",
+    :db_pwd => "gruenbarsch"},
+  {
+    :subdomain => "fc-fruchtzwerge",
+    :db_user => "fs2_fruchtzwerge",
+    :db_name => "fs2_fruchtzwerge",
+    :db_pwd => "fruchtblub234"},
+  {
+    :subdomain => "fcnova",
+    :db_user => "fs2_fcnova",
+    :db_name => "fs2_fcnova",
+    :db_pwd => "suppenkueche2"},
+  {
+    :subdomain => "mosa",
+    :db_user => "fs2_mosa",
+    :db_name => "fs2_mosa",
+    :db_pwd => "skh489ndp"},
+  {
+    :subdomain => "mainz",
+    :db_user => "fs2_mainz",
+    :db_name => "fs2_mainz",
+    :db_pwd => "sdfh2987s2m"},
+  {
+    :subdomain => "bioparadeis",
+    :db_user => "fs2_bioparadeis",
+    :db_name => "fs2_bioparadeis",
+    :db_pwd => "sdfh4872bs00"},
+  {
+    :subdomain => "fcduncker",
+    :db_user => "fs2_fcduncker",
+    :db_name => "fs2_fcduncker",
+    :db_pwd => "sdf89gh3"},
+  {
+    :subdomain => "leipzig",
+    :db_user => "fs2_leipzig",
+    :db_name => "fs2_leipzig",
+    :db_pwd => "dfh2098q1hja"},
+  {
+    :subdomain => "fcfutterneid",
+    :db_user => "fs2_fcfutterneid",
+    :db_name => "fs2_fcfutterneid",
+    :db_pwd => "lreiugh277ah2l"}
+]
+
+desc "backup code and databases"
+task :backup do
+  run "tar cfz #{backup_path}foodsoft.tar.gz #{foodsoft_path}" #code-backup
+  for fc in foodcoops
+    # backup db and compress
+    run "mysqldump -u #{fc[:db_user]} --password=#{fc[:db_pwd]} #{fc[:db_name]} | gzip > #{backup_path + fc[:subdomain]}/#{fc[:subdomain]}_#{Time.now.strftime('%Y-%m-%d_%H:%M')}.sql.gz"
+  end
+end
+
+desc "backup code and databases, updates foodsoft-code, runs migrations for every foodcoop-db, restart passenger"
+task :update_and_migrate do
+  run "tar cfz #{backup_path}foodsoft.tar.gz #{foodsoft_path}" #code-backup
+  run "svn up #{foodsoft_path}" # code-update
+  for fc in foodcoops
+    # backup db and compress
+    run "mysqldump -u #{fc[:db_user]} --password=#{fc[:db_pwd]} #{fc[:db_name]} | gzip > #{backup_path + fc[:subdomain]}/#{fc[:subdomain]}_#{Time.now.strftime('%Y-%m-%d_%H:%M')}.sql.gz"
+    # migrations
+    run "cd #{foodsoft_path} && rake db:migrate RAILS_ENV=#{fc[:subdomain]}"
+  end
+  run "touch #{foodsoft_path}tmp/restart.txt"
+  run "chown -R www-data:www-data #{foodsoft_path}app"
+end
+
+desc "backup and update code, restart passenger"
+task :update do
+  #run "tar cfz #{backup_path}foodsoft.tar.gz #{foodsoft_path}" #code-backup
+  run "svn up #{foodsoft_path}" # code-update
+  for fc in foodcoops
+    # backup db and compress
+    run "mysqldump -u #{fc[:db_user]} --password=#{fc[:db_pwd]} #{fc[:db_name]} | gzip > #{backup_path + fc[:subdomain]}/#{fc[:subdomain]}_#{Time.now.strftime('%Y-%m-%d_%H:%M')}.sql.gz"
+  end
+  run "touch #{foodsoft_path}tmp/restart.txt"
+  run "chown -R www-data:www-data #{foodsoft_path}app"
+end
+
+desc "only update, no backups -> use for small! fixes"
+task :only_update do
+  run "svn up #{foodsoft_path}" # code-update
+  run "touch #{foodsoft_path}tmp/restart.txt"
+  run "chown -R www-data:www-data #{foodsoft_path}app"
+end
+
+desc "sharedLists: backup, update, migration, restart server"
+task :update_sharedLists do
+end
+
+desc "create fcschinke09 database dump, download and fills up the development db"
+task :dump do
+  run "mysqldump -u #{foodcoops[1][:db_user]} --password=#{foodcoops[1][:db_pwd]} #{foodcoops[1][:db_name]} | gzip > #{backup_path + foodcoops[1][:subdomain]}/fcschinke09_tmp.sql.gz" 
+  puts "download mysqldump"
+  puts `scp server:"#{backup_path + foodcoops[1][:subdomain]}"/fcschinke09_tmp.sql.gz ../`
+  
+  puts "load dump into database"
+  puts `gunzip ../fcschinke09_tmp.sql.gz`
+  puts `mysql -u root foodsoft_development < ../fcschinke09_tmp.sql`
+end
+
+desc "dump databases to backup-dir"
+task :dump_to_backup do
+  for fc in foodcoops
+    run "mysqldump -u #{fc[:db_user]} --password=#{fc[:db_pwd]} #{fc[:db_name]} | gzip > #{backup_path}/#{fc[:subdomain]}.sql.gz"
+  end
+end
+
+desc "load last mysql-dumps in backup-path"
+task :load_dumps do
+  for fc in foodcoops
+    run "gunzip -c #{backup_path}/#{fc[:subdomain]}.sql.gz | mysql -u #{fc[:db_user]} --password=#{fc[:db_pwd]} #{fc[:db_name]}"
+  end
+end
+
+

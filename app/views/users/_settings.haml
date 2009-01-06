@@ -1,0 +1,6 @@
+%table{:style => "width:26em"}
+  %tbody
+    - for setting in User::setting_keys.keys
+      %tr
+        %td=h User::setting_keys[setting]
+        %td= @user.settings[setting] == '1' ? 'ja' : 'nein'

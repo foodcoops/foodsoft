@@ -1,0 +1,6 @@
+log/*.log
+tmp/**/*
+config/*.yml
+db/*.sqlite3
+nbproject/
+

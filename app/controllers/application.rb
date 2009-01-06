@@ -1,0 +1,136 @@
+require 'user'
+
+class ApplicationController < ActionController::Base
+  # Gettext For i18n
+  # locale is chosen through browser http request
+  init_gettext "foodsoft"
+  
+  before_filter :select_foodcoop, :authenticate, :store_controller
+#  before_filter :ensureUTF8
+  after_filter  :send_email_messages, :remove_controller
+  
+  # sends a mail, when an error occurs
+  # see plugins/exception_notification
+  include ExceptionNotifiable
+
+  # Returns the controller handling the current request.
+  def self.current
+    Thread.current[:application_controller]
+  end
+  
+  protected
+
+    def current_user
+      begin
+        # check if there is a valid session and return the logged-in user (its object)
+        if session['user_and_subdomain']
+          id, subdomain = session['user_and_subdomain'].split
+          # for shared-host installations. check if the cookie-subdomain fits to request.
+          return User.current_user = User.find(id) if request.subdomains.first == subdomain
+        end
+      rescue
+        reset_session
+        flash[:error]= _("An error has occurred. Please login again.")
+        redirect_to :controller => 'login'
+      end
+    end
+
+    def current_user=(user)
+      session['user_and_subdomain'] = [user.id, request.subdomains.first].join(" ")
+    end
+    
+    def return_to
+      session['return_to']
+    end
+
+    def return_to=(uri)
+      session['return_to'] = uri
+    end
+    
+    def deny_access
+      self.return_to = request.request_uri
+      redirect_to :controller => 'login', :action => 'denied'
+      return false
+    end
+
+  private
+
+    # selects the foodcoop depending on the subdomain
+    def select_foodcoop
+      # get subdomain and set FoodSoft-class-variable (for later config-requests)
+      FoodSoft.subdomain = request.subdomains.first
+      # set database-connection
+      ActiveRecord::Base.establish_connection(FoodSoft.get_database)
+    end
+
+    # Ensures the HTTP content-type encoding is set to "UTF-8" for "text/html" contents.
+    def ensureUTF8
+      content_type = headers["Content-Type"] || "text/html"
+      if /^text\//.match(content_type)
+        headers["Content-Type"] = "#{content_type}; charset=utf-8"
+      end
+    end  
+
+    def authenticate(role = 'any')
+      # Attempt to retrieve authenticated user from controller instance or session...
+      if !(user = current_user)
+        # No user at all: redirect to login page.
+        self.return_to = request.request_uri
+        redirect_to :controller => 'login'
+        return false
+      else
+        # We have an authenticated user, now check role...
+        # Roles gets the user through his memberships.
+        hasRole = case role
+           when "admin"  then user.role_admin?
+           when "finance"   then  user.role_finance?
+           when "article_meta" then user.role_article_meta?
+           when "suppliers"  then user.role_suppliers?
+           when "orders" then user.role_orders?
+           when "any" then true        # no role required
+           else false                  # any unknown role will always fail
+        end        
+        if hasRole
+          @current_user = user
+        else
+          deny_access
+        end
+      end      
+    end
+    
+    def authenticate_admin
+      authenticate('admin')
+    end
+    
+    def authenticate_finance
+      authenticate('finance')
+    end
+    
+    def authenticate_article_meta
+      authenticate('article_meta')
+    end
+
+    def authenticate_suppliers
+      authenticate('suppliers')
+    end
+
+    def authenticate_orders
+      authenticate('orders')
+    end
+
+    # Stores this controller instance as a thread local varibale to be accessible from outside ActionController/ActionView.
+    def store_controller
+      Thread.current[:application_controller] = self
+    end
+    
+    # Sets the thread local variable that holds a reference to the current controller to nil.
+    def remove_controller
+      Thread.current[:application_controller] = nil
+    end
+    
+    # Sends any pending emails that were created during this request.
+    def send_email_messages
+      Message.send_emails if Message.pending?
+    end
+    
+end

@@ -1,0 +1,60 @@
+class Task < ActiveRecord::Base
+  has_many :assignments, :dependent => :destroy
+  has_many :users, :through => :assignments
+  belongs_to :group
+  
+  # form will send user in string. responsibilities will added later
+  attr_protected :users
+  
+  validates_length_of :name, :minimum => 3
+  
+  
+  def is_assigned?(user)
+    self.assignments.detect {|ass| ass.user_id == user.id }
+  end
+  
+  def is_accepted?(user)
+    self.assignments.detect {|ass| ass.user_id == user.id && ass.accepted }
+  end
+  
+  def enough_users_assigned?
+    assignments.find_all_by_accepted(true).size >= required_users ? true : false
+  end
+  
+  # extracts nicknames from a comma seperated string 
+  # and makes the users responsible for the task
+  def user_list=(string)
+    @user_list = string.split(%r{,\s*})
+    new_users = @user_list - users.collect(&:nick)
+    old_users = users.reject { |user| @user_list.include?(user.nick) }
+    
+    logger.debug "New users: #{new_users}"
+    logger.debug "Old users: #{old_users}"
+    
+    self.class.transaction do
+      # delete old assignments
+      if old_users.any?
+        assignments.find(:all, :conditions => ["user_id IN (?)", old_users.collect(&:id)]).each(&:destroy)
+      end
+      # create new assignments
+      new_users.each do |nick|
+        user = User.find_by_nick(nick)
+        if user.blank?
+          errors.add(:user_list)
+        else
+          if  user == User.current_user
+            # current_user will accept, when he puts himself to the list of users
+            self.assignments.build :user => user, :accepted => true
+          else
+            # normal assignement
+            self.assignments.build :user => user
+          end
+        end
+      end
+    end
+  end
+  
+  def user_list
+    @user_list ||= users.collect(&:nick).join(", ")
+  end
+end

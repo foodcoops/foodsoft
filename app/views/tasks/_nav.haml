@@ -1,0 +1,19 @@
+#start_nav{:style => "float:right"}
+  %h2=_ 'TaskMenu'
+  %ul
+    %li
+      =_ 'Actions'
+      %ul
+        %li= link_to _('New task'), :action => "new"
+    %li 
+      =_ 'Pages'
+      %ul
+        %li= link_to _('My tasks'), :action => "myTasks"
+        %li= link_to _('All tasks'), :action => "index"
+        %li= link_to _('Tasks done'), :action => "archive"
+
+    %li
+      =_ 'Group tasks'
+      %ul
+        - for group in Group.find :all, :conditions => "type != 'OrderGroup'"
+          %li= link_to group.name, :action => "workgroup", :id => group

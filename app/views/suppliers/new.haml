@@ -1,0 +1,7 @@
+%h1 Neue Lieferantinn
+- form_for :supplier, @supplier, :url => {:action => 'create'} do |@f|
+  = render :partial => 'form'
+  = submit_tag "Speichern"
+  |
+  = link_to 'Abbrechen', :action => 'list'
+  

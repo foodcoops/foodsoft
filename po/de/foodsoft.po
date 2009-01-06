@@ -1,0 +1,1978 @@
+# translation of foodsoft.po to German
+# German translation of foodsoft.
+# Copyright (C) 2007 lasse, tom, benni
+# This file is distributed under the same license as the foodsoft package.
+# benni <benni@dresdener27.de>, 2007.
+# Thomas Bechtold <thomas@jpberlin.de>, 2007, 2008.
+# Thomas Bechtold <thomas@jpberlin.de>, 2008.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-19 17:31+0100\n"
+"PO-Revision-Date: 2008-11-19 17:32+0100\n"
+"Last-Translator: Benjamin Meichsner <foodsoft@foodcoops.net>\n"
+"Language-Team: German <en@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);"
+
+#: app/helpers/application_helper.rb:16
+msgid "Previous"
+msgstr "Vorige"
+
+#: app/helpers/application_helper.rb:17
+msgid "Next"
+msgstr "Nächste"
+
+#: app/helpers/application_helper.rb:35
+msgid "Per page: "
+msgstr "Pro Seite: "
+
+#: app/helpers/application_helper.rb:53
+msgid "Sort by this field"
+msgstr "Nach diesem Feld sortieren"
+
+#: app/controllers/articles_controller.rb:323
+msgid " ..in line "
+msgstr " ...in Zeile "
+
+#: app/controllers/articles_controller.rb:327
+msgid " articles are parsed successfully."
+msgstr " Artikel wurden erfolgreich eingelesen."
+
+#: app/controllers/articles_controller.rb:329
+#: app/controllers/suppliers_controller.rb:68
+msgid "An error has occurred: "
+msgstr "Ein Fehler ist aufgetreten: "
+
+#: app/controllers/articles_controller.rb:348
+msgid "The articles are saved successfully"
+msgstr "Die Artikel wurden erfolgreich gespeichert"
+
+#: app/controllers/articles_controller.rb:352
+#: app/controllers/finance_controller.rb:129
+msgid "An error occured: "
+msgstr "Ein Fehler ist aufgetreten: "
+
+#: app/controllers/articles_controller.rb:406
+msgid " ist not assigned to an external database."
+msgstr " ist nicht mit einer externen Datenbank verknüpft."
+
+#: app/controllers/articles_controller.rb:414
+msgid "The database is up to date."
+msgstr "Die Datenbank ist aktuell."
+
+#: app/controllers/index_controller.rb:255
+msgid "The membership was cancelled."
+msgstr "Die Mitgliedschaft wurde beendet."
+
+#: app/controllers/index_controller.rb:257
+msgid "You are not allowed to cancel this membership"
+msgstr "Dir ist nicht erlaubt diese Mitgliedschaft zu beenden"
+
+#: app/controllers/login_controller.rb:17
+msgid "Logged out."
+msgstr "Abgemeldet."
+
+#: app/controllers/login_controller.rb:23
+msgid ""
+"You are not authorized to do this. Please log in as another user or go back."
+msgstr ""
+"Du bist nicht ausreichend berechtigt. Bitte mit ausreichenden Rechten "
+"anmelden oder zurück gehen."
+
+#: app/controllers/login_controller.rb:42
+msgid "Sorry, login is not possible."
+msgstr "Sorry, Anmeldung nicht möglich."
+
+#: app/controllers/login_controller.rb:60
+msgid ""
+"If your email address is listed in our system, you will now receive an email "
+"with the instructions how to change your password."
+msgstr ""
+"Wenn Deine Email-Adresse in der FoodSoft registriert ist, bekommt du jetzt "
+"eine Email mit den Anweisungen für ein neues Passwort."
+
+#: app/controllers/login_controller.rb:69
+#: app/controllers/login_controller.rb:79
+msgid "Invalid or expired token, password cannot be changed."
+msgstr ""
+"Ungültiger oder abgelaufender Token, Passwort kann nicht geändert werden."
+
+#: app/controllers/login_controller.rb:87
+msgid "New password has been saved, please log in."
+msgstr "Neues Passwort wurde gespeichert, bitte anmelden."
+
+#: app/controllers/login_controller.rb:91
+msgid ""
+"When trying to save your new password an error has occured. Please try again."
+msgstr ""
+"Während des Speicherns ist ein Fehler aufgetreten. Bitte nochmal versuchen."
+
+#: app/controllers/login_controller.rb:105
+msgid "Your invitation is invalid or has expired, sorry!"
+msgstr "Deine Einladung ist abgelaufen oder ungültig, sorry!"
+
+#: app/controllers/login_controller.rb:108
+msgid "The group you are invited to join doesn't exist any more!"
+msgstr "Die Gruppe, in die Du eingeladen wurdest, existiert nicht mehr!"
+
+#: app/controllers/login_controller.rb:121
+msgid ""
+"Congratulations, your account has been created successfully. You can log in "
+"now."
+msgstr ""
+"Herzlichen Glückwunsch, Dein Benutzerkonto wurde erfolgreich erstellt. Du "
+"kannst Dich jetzt anmelden."
+
+#: app/controllers/login_controller.rb:129
+msgid "An error has occured. Please try again."
+msgstr "Ein Fehler ist aufgetreten. Bitte erneut anmelden."
+
+#: app/controllers/orders_controller.rb:71
+msgid "The order has been created successfully."
+msgstr "Die Bestellung wurde erfolgreich angelegt."
+
+#: app/controllers/orders_controller.rb:88
+msgid "The order has been updated."
+msgstr "Die Bestellung wurde aktualisiert."
+
+#: app/controllers/orders_controller.rb:106
+msgid "The order has been finished successfully."
+msgstr "Die Bestellung wurde erfolgreich beendet."
+
+#: app/controllers/orders_controller.rb:137
+msgid "Order for"
+msgstr "Bestellung für"
+
+#: app/controllers/orders_controller.rb:138
+msgid "Customer number"
+msgstr "Kundennummer"
+
+#: app/controllers/orders_controller.rb:139
+msgid "Delivery date"
+msgstr "Lieferdatum"
+
+#: app/controllers/orders_controller.rb:141
+msgid "Shipping address"
+msgstr "Lieferadresse"
+
+#: app/controllers/orders_controller.rb:143 app/views/ordering/order.rhtml:64
+#: app/views/shared/_nav.haml:32 app/views/orders/show.haml:73
+#: app/views/orders/_form.html.haml:28
+msgid "Articles"
+msgstr "Artikel"
+
+#: app/controllers/orders_controller.rb:144
+#: app/views/articles/upload_articles.haml:15
+#: app/views/articles/parse_articles.haml:11
+msgid "Number"
+msgstr "Nummer"
+
+#: app/controllers/orders_controller.rb:144 app/views/ordering/order.rhtml:76
+msgid "Quantity"
+msgstr "Menge"
+
+#: app/controllers/orders_controller.rb:144 app/views/ordering/order.rhtml:70
+#: app/views/ordering/_finishedOrders.haml:4
+#: app/views/ordering/my_order_result.haml:18
+#: app/views/ordering/_bookedOrders.haml:6
+#: app/views/ordering/_finished_order_result.haml:4
+#: app/views/ordering/_currentOrders.haml:10
+#: app/views/articles/upload_articles.haml:15 app/views/articles/_list.haml:19
+#: app/views/articles/parse_articles.haml:12 app/views/tasks/show.haml:7
+#: app/views/orders/show.haml:18 app/views/orders/index.haml:20
+#: app/views/orders/_show_unfinished.haml:3 app/views/orders/_list.haml:5
+#: app/views/orders/_form.html.haml:11 app/views/orders/_form.html.haml:41
+#: app/views/finance/_listOrdergroups.haml:15
+msgid "Name"
+msgstr "Name"
+
+#: app/controllers/orders_controller.rb:178
+#: app/controllers/ordering_controller.rb:204
+msgid "Comment has been created."
+msgstr "Kommentar wurde erstellt."
+
+#: app/controllers/orders_controller.rb:181
+#: app/controllers/ordering_controller.rb:207
+msgid "The comment has not been saved. Check the title and try again."
+msgstr ""
+"Der Kommentar konnte nicht gespeichert werden. Überprüfe den Titel und "
+"versuche es nochmal."
+
+#: app/controllers/finance_controller.rb:119
+msgid "Note is required!"
+msgstr "Notiz wird benötigt!"
+
+#: app/controllers/finance_controller.rb:126
+msgid "Saved all transactions successfully"
+msgstr "Die Transaktionen wurden erfolgreich gespeichert"
+
+#: app/controllers/application.rb:33
+msgid "An error has occurred. Please login again."
+msgstr "Ein Fehler ist aufgetreten. Bitte erneut anmelden."
+
+#: app/models/invite.rb:-
+msgid "invite"
+msgstr "Einladung"
+
+#: app/models/invite.rb:-
+msgid "Invite|Token"
+msgstr "Schlüssel"
+
+#: app/models/invite.rb:-
+msgid "Invite|Expires at"
+msgstr "läuft ab am"
+
+#: app/models/invite.rb:-
+msgid "Invite|Group"
+msgstr "Gruppe"
+
+#: app/models/invite.rb:-
+msgid "Invite|User"
+msgstr "Benutzerin"
+
+#: app/models/invite.rb:-
+msgid "Invite|Email"
+msgstr "E-Mail"
+
+#: app/models/article.rb:-
+msgid "article"
+msgstr "Artikel"
+
+#: app/models/article.rb:-
+msgid "Article|Name"
+msgstr "Name"
+
+#: app/models/article.rb:-
+msgid "Article|Supplier"
+msgstr "Lieferantin"
+
+#: app/models/article.rb:-
+msgid "Article|Article category"
+msgstr "Artikelkategorie"
+
+#: app/models/article.rb:-
+msgid "Article|Unit"
+msgstr "Einheit"
+
+#: app/models/article.rb:-
+msgid "Article|Note"
+msgstr "Notiz"
+
+#: app/models/article.rb:-
+msgid "Article|Availability"
+msgstr "Verfügbarkeit"
+
+#: app/models/article.rb:-
+msgid "Article|Manufacturer"
+msgstr "Herstellerin"
+
+#: app/models/article.rb:-
+msgid "Article|Origin"
+msgstr "Herkunft"
+
+#: app/models/article.rb:-
+msgid "Article|Shared updated on"
+msgstr ""
+
+#: app/models/article.rb:-
+msgid "Article|Net price"
+msgstr "Nettopreis"
+
+#: app/models/article.rb:-
+msgid "Article|Gross price"
+msgstr "Bruttopreis"
+
+#: app/models/article.rb:-
+msgid "Article|Tax"
+msgstr "Steuer"
+
+#: app/models/article.rb:-
+msgid "Article|Deposit"
+msgstr "Pfand"
+
+#: app/models/article.rb:-
+msgid "Article|Unit quantity"
+msgstr "Gebindegröße"
+
+#: app/models/article.rb:-
+msgid "Article|Order number"
+msgstr "Bestellnummer"
+
+#: app/models/article.rb:-
+msgid "Article|Created at"
+msgstr "erstellt am"
+
+#: app/models/article.rb:-
+msgid "Article|Updated at"
+msgstr "aktualisiert am"
+
+#: app/models/article.rb:95
+msgid " cannot be deleted. The article is used in a current order!"
+msgstr ""
+" kann nicht gelöscht werden. Der Artikel wird in einer laufenden Bestellung "
+"benutzt."
+
+#: app/models/article_category.rb:-
+msgid "article category"
+msgstr "Artikelkategorie"
+
+#: app/models/article_category.rb:-
+msgid "ArticleCategory|Name"
+msgstr "Name"
+
+#: app/models/article_category.rb:-
+msgid "ArticleCategory|Description"
+msgstr "Beschreibung"
+
+#: app/models/user.rb:36
+msgid "Get message with order result"
+msgstr "Bekomme Nachricht mit Bestellergebnis"
+
+#: app/models/user.rb:37
+msgid "Get message if negative account balance"
+msgstr "Bekomme Nachricht bei negativem Kontostand"
+
+#: app/models/user.rb:38
+msgid "Get messages as emails"
+msgstr "Nachrichten als E-Mails empfangen"
+
+#: app/models/user.rb:39
+msgid "Phone is visible for foodcoop members"
+msgstr "Telefonnummer einsehbar für Mitgliederinnen"
+
+#: app/models/user.rb:40
+msgid "Email is visible for foodcoop members"
+msgstr "E-Mail ist einsehbar für Mitgliederinnen"
+
+#: app/models/user.rb:41
+msgid "Name is visible for foodcoop members"
+msgstr "Name ist einsehbar für Mitgliederinnen"
+
+#: app/models/user.rb:72
+msgid "Password is required"
+msgstr "Passwort wird benötigt"
+
+#: app/models/user.rb:75
+msgid "Passwords doesn't match"
+msgstr "Passwörter stimmen nicht überein"
+
+#: app/models/user.rb:77
+msgid "Password-length has to be between 5 and 25 characters"
+msgstr "Passwort muss zwischen 5 und 25 Zeichen haben"
+
+#: app/models/supplier.rb:-
+msgid "supplier"
+msgstr "Lieferantin"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Name"
+msgstr "Name"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Address"
+msgstr "Adresse"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Phone"
+msgstr "Telefon"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Phone2"
+msgstr "Telefon 2"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Fax"
+msgstr "Fax"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Email"
+msgstr "E-Mail"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Url"
+msgstr "Hompage"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Contact person"
+msgstr "Kontaktperson"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Customer number"
+msgstr "Kundennummer"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Delivery days"
+msgstr "Liefertage"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Order howto"
+msgstr "BestellHowTo"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Note"
+msgstr "Notiz"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Shared supplier"
+msgstr "externer Lieferant"
+
+#: app/models/supplier.rb:-
+msgid "Supplier|Min order quantity"
+msgstr "Mindestbestellmenge"
+
+#: app/models/order.rb:-
+msgid "order"
+msgstr "Bestellung"
+
+#: app/models/order.rb:-
+msgid "Order|Name"
+msgstr "Name"
+
+#: app/models/order.rb:-
+msgid "Order|Supplier"
+msgstr "Lieferantin"
+
+#: app/models/order.rb:-
+msgid "Order|Starts"
+msgstr "Start"
+
+#: app/models/order.rb:-
+msgid "Order|Ends"
+msgstr "Ende"
+
+#: app/models/order.rb:-
+msgid "Order|Note"
+msgstr "Notiz"
+
+#: app/models/order.rb:-
+msgid "Order|Finished"
+msgstr "beendet"
+
+#: app/models/order.rb:-
+msgid "Order|Booked"
+msgstr "verbucht"
+
+#: app/models/order.rb:-
+msgid "Order|Lock version"
+msgstr ""
+
+#: app/models/order.rb:-
+msgid "Order|Updated by user"
+msgstr ""
+
+#: app/models/order.rb:-
+msgid "Order|Invoice amount"
+msgstr "Rechnungsbetrag"
+
+#: app/models/order.rb:-
+msgid "Order|Deposit"
+msgstr "Pfand"
+
+#: app/models/order.rb:-
+msgid "Order|Deposit credit"
+msgstr "Pfandguthaben"
+
+#: app/models/order.rb:-
+msgid "Order|Invoice number"
+msgstr "Rechnungsnummer"
+
+#: app/models/order.rb:-
+msgid "Order|Invoice date"
+msgstr "Rechnungsdatum"
+
+#: app/models/order.rb:271
+msgid "running"
+msgstr "laufend"
+
+#: app/models/order.rb:273 app/views/orders/_list.haml:20
+msgid "expired"
+msgstr "abgelaufen"
+
+#: app/models/order.rb:275
+msgid "finished"
+msgstr "beendet"
+
+#: app/models/order.rb:277 app/views/ordering/myOrders.haml:24
+msgid "balanced"
+msgstr "abgerechnet"
+
+#: app/models/order.rb:288
+msgid "There must be at least one article selected"
+msgstr "Es muss mindestens ein Artikel ausgewählt werden."
+
+#: app/models/financial_transaction.rb:-
+msgid "financial transaction"
+msgstr "Überweisung"
+
+#: app/models/financial_transaction.rb:-
+msgid "FinancialTransaction|Order group"
+msgstr "Bestellgruppe"
+
+#: app/models/financial_transaction.rb:-
+msgid "FinancialTransaction|Amount"
+msgstr "Betrag"
+
+#: app/models/financial_transaction.rb:-
+msgid "FinancialTransaction|Note"
+msgstr "Notiz"
+
+#: app/models/financial_transaction.rb:-
+msgid "FinancialTransaction|User"
+msgstr "Benutzerin"
+
+#: app/models/financial_transaction.rb:-
+msgid "FinancialTransaction|Created on"
+msgstr "Erstellt am"
+
+#: app/models/message.rb:-
+msgid "message"
+msgstr "Nachricht"
+
+#: app/models/message.rb:-
+msgid "Message|Sender"
+msgstr "Absender"
+
+#: app/models/message.rb:-
+msgid "Message|Recipient"
+msgstr "Empfänger"
+
+#: app/models/message.rb:-
+msgid "Message|Recipients"
+msgstr "Empfänger"
+
+#: app/models/message.rb:-
+msgid "Message|Subject"
+msgstr "Betreff"
+
+#: app/models/message.rb:-
+msgid "Message|Body"
+msgstr "Nachrichtentext"
+
+#: app/models/message.rb:-
+msgid "Message|Read"
+msgstr "gelesen"
+
+#: app/models/message.rb:-
+msgid "Message|Email state"
+msgstr "E-Mail Status"
+
+#: app/models/message.rb:-
+msgid "Message|Created on"
+msgstr "Erstellt am"
+
+#: app/models/order_article_result.rb:-
+msgid "order article result"
+msgstr "BestellArtikelErgebnis"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Order"
+msgstr "Bestellung"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Name"
+msgstr "Name"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Unit"
+msgstr "Einheit"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Note"
+msgstr "Notiz"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Net price"
+msgstr "Netto Preis"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Gross price"
+msgstr "Brutto Preis"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Tax"
+msgstr "Steuer"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Deposit"
+msgstr "Pfand"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Fc markup"
+msgstr "FC-Aufschlag"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Order number"
+msgstr "Bestellnummer"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Unit quantity"
+msgstr "Gebindegröße"
+
+#: app/models/order_article_result.rb:-
+msgid "OrderArticleResult|Units to order"
+msgstr "Einheiten zu Bestellen"
+
+#: app/models/group.rb:-
+msgid "group"
+msgstr "Gruppe"
+
+#: app/models/group.rb:-
+msgid "Group|Type"
+msgstr "Typ"
+
+#: app/models/group.rb:-
+msgid "Group|Name"
+msgstr "Name"
+
+#: app/models/group.rb:-
+msgid "Group|Description"
+msgstr "Beschreibung"
+
+#: app/models/group.rb:-
+msgid "Group|Actual size"
+msgstr "aktuelle Gruppengröße"
+
+#: app/models/group.rb:-
+msgid "Group|Account balance"
+msgstr "Kontostand"
+
+#: app/models/group.rb:-
+msgid "Group|Account updated"
+msgstr "Konte akutalisiert"
+
+#: app/models/group.rb:-
+msgid "Group|Created on"
+msgstr "Erstellt am"
+
+#: app/models/group.rb:-
+msgid "Group|Role admin"
+msgstr ""
+
+#: app/models/group.rb:-
+msgid "Group|Role suppliers"
+msgstr ""
+
+#: app/models/group.rb:-
+msgid "Group|Role article meta"
+msgstr ""
+
+#: app/models/group.rb:-
+msgid "Group|Role finance"
+msgstr ""
+
+#: app/models/group.rb:-
+msgid "Group|Role orders"
+msgstr ""
+
+#: app/models/group.rb:-
+msgid "Group|Weekly task"
+msgstr "Wöchentliche Aufgabe"
+
+#: app/models/group.rb:-
+msgid "Group|Weekday"
+msgstr "Wochentag"
+
+#: app/models/group.rb:-
+msgid "Group|Task name"
+msgstr "Aufgabenname"
+
+#: app/models/group.rb:-
+msgid "Group|Task description"
+msgstr "Aufgabenbeschreibung"
+
+#: app/models/group.rb:-
+msgid "Group|Task required users"
+msgstr "Aufgabenvorlage: Benötigte Benutzer"
+
+#: app/models/task.rb:-
+msgid "task"
+msgstr "Aufgabe"
+
+#: app/models/task.rb:-
+msgid "Task|Name"
+msgstr "Name"
+
+#: app/models/task.rb:-
+msgid "Task|Description"
+msgstr "Beschreibung"
+
+#: app/models/task.rb:-
+msgid "Task|Due date"
+msgstr "Fälligkeitsdatum"
+
+#: app/models/task.rb:-
+msgid "Task|Done"
+msgstr "Erledigt"
+
+#: app/models/task.rb:-
+msgid "Task|Group"
+msgstr "Gruppe"
+
+#: app/models/task.rb:-
+msgid "Task|Assigned"
+msgstr "zugeordnet"
+
+#: app/models/task.rb:-
+msgid "Task|Created on"
+msgstr "Erstellt am"
+
+#: app/models/task.rb:-
+msgid "Task|Updated on"
+msgstr "aktualisiert am"
+
+#: app/models/task.rb:-
+msgid "Task|Required users"
+msgstr "Benötigte Benutzerinnen"
+
+#: app/models/group_order_article_result.rb:-
+msgid "group order article result"
+msgstr "Gruppenbestellergebnis"
+
+#: app/models/group_order_article_result.rb:-
+msgid "GroupOrderArticleResult|Order article result"
+msgstr ""
+
+#: app/models/group_order_article_result.rb:-
+msgid "GroupOrderArticleResult|Group order result"
+msgstr ""
+
+#: app/models/group_order_article_result.rb:-
+msgid "GroupOrderArticleResult|Quantity"
+msgstr "Menge"
+
+#: app/models/group_order_article_result.rb:-
+msgid "GroupOrderArticleResult|Tolerance"
+msgstr ""
+
+#: app/views/login/forgot_password.rhtml:1
+msgid "Forgot password?"
+msgstr "Passwort vergessen?"
+
+#: app/views/login/forgot_password.rhtml:4
+msgid "No problem: You can enter a new password here."
+msgstr "Kein Problem: Du kannst hier ein neues Passwort eingeben."
+
+#: app/views/login/forgot_password.rhtml:5
+msgid ""
+"Just enter your email address. Then you'll receive an email with the "
+"detailed instructions."
+msgstr ""
+"Einfach Deine Email-Adresse eingeben. Du bekommst dann eine Mail mit den "
+"genauen Anweisungen."
+
+#: app/views/login/forgot_password.rhtml:10
+msgid "Reset your password"
+msgstr "Passwort zurücksetzen"
+
+#: app/views/login/forgot_password.rhtml:10 app/views/articles/list.haml:67
+#: app/views/articles/parse_articles.haml:39
+msgid "Back"
+msgstr "Zurück"
+
+#: app/views/ordering/order.rhtml:9 app/views/ordering/_finishedOrders.haml:5
+#: app/views/ordering/my_order_result.haml:21
+#: app/views/ordering/_bookedOrders.haml:7
+#: app/views/ordering/_currentOrders.haml:11 app/views/orders/show.haml:21
+#: app/views/orders/index.haml:21 app/views/orders/_list.haml:7
+#: app/views/orders/_form.html.haml:9
+msgid "Supplier"
+msgstr "Lieferant"
+
+#: app/views/ordering/order.rhtml:10 app/views/ordering/_finishedOrders.haml:6
+#: app/views/ordering/my_order_result.haml:28
+#: app/views/ordering/_bookedOrders.haml:8
+#: app/views/ordering/_currentOrders.haml:12 app/views/orders/show.haml:31
+#: app/views/orders/index.haml:22 app/views/orders/_list.haml:10
+#: app/views/orders/_form.html.haml:23
+msgid "End"
+msgstr "Ende"
+
+#: app/views/ordering/order.rhtml:12
+msgid "person ordered at last"
+msgstr "Zuletzt bestellt"
+
+#: app/views/ordering/order.rhtml:14 app/views/ordering/order.rhtml:146
+msgid "Credit available"
+msgstr "Verfügbares Guthaben"
+
+#: app/views/ordering/order.rhtml:19
+#: app/views/ordering/my_order_result.haml:25
+#: app/views/articles/upload_articles.haml:15 app/views/articles/_list.haml:26
+#: app/views/articles/parse_articles.haml:13 app/views/orders/show.haml:25
+#: app/views/orders/_form.html.haml:15 app/views/orders/_form.html.haml:42
+#: app/views/index/index.haml:61 app/views/finance/new_transactions.haml:5
+msgid "Note"
+msgstr "Notiz"
+
+#: app/views/ordering/order.rhtml:25
+msgid "Minimum order quantity"
+msgstr "Mindestbestellmenge"
+
+#: app/views/ordering/order.rhtml:30
+msgid "Order quanitity so far"
+msgstr "Bisherige Gesamtbestellmenge"
+
+#: app/views/ordering/order.rhtml:42
+msgid "Other orders"
+msgstr "Andere Bestellungen"
+
+#: app/views/ordering/order.rhtml:72
+#: app/views/articles/upload_articles.haml:15
+#: app/views/articles/parse_articles.haml:14
+#: app/views/orders/_form.html.haml:44
+msgid "Manufacturer"
+msgstr "Herstellerin"
+
+#: app/views/ordering/order.rhtml:73
+msgid "Package"
+msgstr "Gebinde"
+
+#: app/views/ordering/order.rhtml:74 app/views/articles/_list.haml:28
+#: app/views/orders/_show_unfinished.haml:5
+#: app/views/orders/_form.html.haml:46
+msgid "Price"
+msgstr "Preis"
+
+#: app/views/ordering/order.rhtml:75
+msgid "totally ordered packages"
+msgstr "Insgesamt bestellte Gebinde"
+
+#: app/views/ordering/order.rhtml:75
+msgid "Ord."
+msgstr "Best."
+
+#: app/views/ordering/order.rhtml:77
+msgid "Tolerance"
+msgstr "Toleranz"
+
+#: app/views/ordering/order.rhtml:78 app/views/index/index.haml:62
+#: app/views/finance/new_transactions.haml:11
+msgid "Amount"
+msgstr "Betrag"
+
+#: app/views/ordering/order.rhtml:100
+msgid "Show note"
+msgstr "Zeige Notiz"
+
+#: app/views/ordering/order.rhtml:142
+msgid "Total amount"
+msgstr "Gesamtbetrag"
+
+#: app/views/ordering/order.rhtml:150
+msgid "New account balance"
+msgstr "Neuer Kontostand"
+
+#: app/views/ordering/order.rhtml:155
+msgid "Save order"
+msgstr "Bestellung speichern"
+
+#: app/views/ordering/order.rhtml:155 app/views/tasks/edit.haml:8
+#: app/views/orders/edit.html.haml:7 app/views/orders/new.html.haml:7
+#: app/views/finance/new_transactions.haml:20
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: app/views/index/myProfile.rhtml:1
+msgid "edit my profile"
+msgstr "Mein Profil"
+
+#: app/views/index/myProfile.rhtml:2
+msgid ""
+"Here you can change your preferences. For example you can change your phone "
+"number or your password.\n"
+"  <br>\n"
+"You can also see in which workgroups you are.\n"
+"<p></p>\n"
+msgstr ""
+"Hier kannst du deine persönlichen Einstellungen ändern. Zum Beispiel deine "
+"Telefonnummer oder dein Passwort. <br>\n"
+"Außerdem siehst du, bei welchen Arbeitsgruppen du Mitglied bist. <p></p>\n"
+
+#: app/views/index/myProfile.rhtml:25
+msgid "Cancel membership"
+msgstr "Mitgliedschaft beenden"
+
+#: app/views/index/myProfile.rhtml:25
+msgid "Are you sure to cancel this membership?"
+msgstr "Bist Du wirklich sicher die Mitgliedschaft zu beenden?"
+
+#: app/views/shared/_loginInfo.haml:3 app/views/shared/_nav.haml:51
+msgid "User"
+msgstr "Benutzerinnen"
+
+#: app/views/shared/_loginInfo.haml:4
+msgid "User Settings"
+msgstr "Persönliche Einstellungen"
+
+#: app/views/shared/_loginInfo.haml:6
+msgid "Go to your FoodCoop-Hompage"
+msgstr "Gehe zur Deiner FoodCoop-Hompage"
+
+#: app/views/shared/_loginInfo.haml:7
+msgid "Help"
+msgstr "Hilfe"
+
+#: app/views/shared/_loginInfo.haml:8
+msgid "Logout"
+msgstr "Abmelden"
+
+#: app/views/shared/_nav.haml:4
+msgid "Startpage"
+msgstr "Startseite"
+
+#: app/views/shared/_nav.haml:4
+msgid "The Startpage. A good Startpoint."
+msgstr "Die Startseite. Ein guter Ausgabspunkt zum Entdecken der Foodsoft."
+
+#: app/views/shared/_nav.haml:6 app/views/index/_showGroup.haml:20
+msgid "Members"
+msgstr "Mitglieder"
+
+#: app/views/shared/_nav.haml:6
+msgid "Here you find a List with all Foodcoop members."
+msgstr "Eine Liste mit allen Foodcoop Mitgliedern"
+
+#: app/views/shared/_nav.haml:7
+msgid "Workgroups"
+msgstr "Arbeitsgruppen"
+
+#: app/views/shared/_nav.haml:7
+msgid ""
+"Here you find all Workgroups. For Example the sortinggroup with all their "
+"members."
+msgstr ""
+"Eine Liste mit allen Arbeitsgruppen. Z.B. Sortiergruppe, Palettengruppe,..."
+
+#: app/views/shared/_nav.haml:8 app/views/index/index.haml:9
+msgid "Tasks"
+msgstr "Aufgaben"
+
+#: app/views/shared/_nav.haml:8
+msgid "Here you see the tasks. Please do something for the foodcoop!"
+msgstr ""
+"Hier gehts zu den Aufgaben. Bitte hilf mit, damit alle Aufgaben erledigt "
+"werden."
+
+#: app/views/shared/_nav.haml:10
+msgid "Messages"
+msgstr "Nachrichten"
+
+#: app/views/shared/_nav.haml:12 app/views/index/index.haml:46
+msgid "My ordergroup"
+msgstr "Meine Bestellgruppe"
+
+#: app/views/shared/_nav.haml:12
+msgid ""
+"Here are informations about your ordergroup. You can also see your accounts "
+"current"
+msgstr "Informationen über deine Bestellgruppe sowie den aktuellen Kontostand."
+
+#: app/views/shared/_nav.haml:13
+msgid "My Profile"
+msgstr "Mein Profil"
+
+#: app/views/shared/_nav.haml:13
+msgid "Here are your personal Settings"
+msgstr "Deine persönlichen Einstellungen"
+
+#: app/views/shared/_nav.haml:21 app/views/index/_start_nav.haml:15
+msgid "Orders"
+msgstr "Bestellungen"
+
+#: app/views/shared/_nav.haml:24 app/views/orders/_form.html.haml:5
+msgid "Order"
+msgstr "Bestellen"
+
+#: app/views/shared/_nav.haml:25
+msgid "My orders"
+msgstr "Meine Bestellungen"
+
+#: app/views/shared/_nav.haml:27 app/views/orders/index.haml:1
+msgid "Manage orders"
+msgstr "Gesamtbestellungen verwalten"
+
+#: app/views/shared/_nav.haml:34
+msgid "Show articles"
+msgstr "Artikel anzeigen"
+
+#: app/views/shared/_nav.haml:35
+msgid "Categories"
+msgstr "Kategorien"
+
+#: app/views/shared/_nav.haml:36 app/views/index/_start_nav.haml:27
+msgid "Suppliers"
+msgstr "Lieferanten"
+
+#: app/views/shared/_nav.haml:41
+msgid "Finance"
+msgstr "Finanzen"
+
+#: app/views/shared/_nav.haml:43 app/views/finance/listOrdergroups.haml:8
+msgid "Ordergroups"
+msgstr "Bestellgruppen"
+
+#: app/views/shared/_nav.haml:44
+msgid "Balance orders"
+msgstr "Bestellungen abrechnen"
+
+#: app/views/shared/_nav.haml:49 app/views/index/_start_nav.haml:40
+msgid "Administration"
+msgstr "Administration"
+
+#: app/views/shared/_nav.haml:52 app/views/admin/listGroups.haml:1
+msgid "Groups"
+msgstr "Gruppen"
+
+#: app/views/login/invite.haml:1
+msgid "Invitation"
+msgstr "Einladung"
+
+#: app/views/login/invite.haml:3
+msgid "You are invited to join:"
+msgstr "Du bist eingeladen Mitglied einer Bestellgruppe zu werden:"
+
+#: app/views/login/invite.haml:5
+msgid ""
+"If you accept the invitation and want to join the foodcoop please fill out "
+"the form."
+msgstr ""
+"Wenn Du die Einladung annimmst und bei der Foodcoop mitmachen willst, dann "
+"fülle bitte das folgende Formular aus."
+
+#: app/views/login/invite.haml:12
+msgid "Nickname (for log in)"
+msgstr "Nickname (für den Login)"
+
+#: app/views/login/invite.haml:16 app/views/admin/_listUsers.haml:13
+msgid "First name"
+msgstr "Vorname"
+
+#: app/views/login/invite.haml:20 app/views/admin/_listUsers.haml:14
+msgid "Last name"
+msgstr "Nachname"
+
+#: app/views/login/invite.haml:24
+msgid "Phone"
+msgstr "Telefon"
+
+#: app/views/login/invite.haml:28
+msgid "Address"
+msgstr "Adresse"
+
+#: app/views/login/invite.haml:32 app/views/login/login.haml:13
+msgid "Password"
+msgstr "Passwort"
+
+#: app/views/login/invite.haml:36
+msgid "Passwort confirmation"
+msgstr "Passwort Bestätigung"
+
+#: app/views/login/invite.haml:40
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: app/views/login/invite.haml:46
+msgid "Send"
+msgstr "Senden"
+
+#: app/views/login/login.haml:1
+msgid "Login"
+msgstr "Anmeldung"
+
+#: app/views/login/login.haml:9 app/views/admin/_listUsers.haml:12
+msgid "Username"
+msgstr "Benutzername"
+
+#: app/views/login/login.haml:16
+msgid "Login!"
+msgstr "Anmeldung!"
+
+#: app/views/login/login.haml:18
+msgid "Forgot Password?"
+msgstr "Passwort vergessen?"
+
+#: app/views/login/login.haml:21
+msgid "Cookies must be accepted!"
+msgstr "Kekse müssen akzeptiert werden!"
+
+#: app/views/ordering/_finishedOrders.haml:7
+#: app/views/ordering/_bookedOrders.haml:9
+#: app/views/ordering/_finished_order_result.haml:32
+#: app/views/ordering/_currentOrders.haml:14
+msgid "Sum"
+msgstr "Summe"
+
+#: app/views/ordering/_finishedOrders.haml:13
+#: app/views/ordering/_finishedOrders.haml:21
+#: app/views/ordering/_finishedOrders.haml:27
+#: app/views/ordering/my_order_result.haml:22
+#: app/views/ordering/_bookedOrders.haml:15
+#: app/views/ordering/_bookedOrders.haml:23
+#: app/views/ordering/_bookedOrders.haml:29 app/views/orders/show.haml:22
+#: app/views/orders/_list.haml:17 app/views/finance/listOrders.haml:27
+#: app/views/finance/_summary.haml:2
+msgid "nonexistent"
+msgstr "nicht vorhanden"
+
+#: app/views/ordering/index.haml:1
+msgid "Order Overview"
+msgstr "Bestellübersicht"
+
+#: app/views/ordering/index.haml:10 app/views/finance/_listOrdergroups.haml:17
+msgid "Account balance"
+msgstr "Kontostand"
+
+#: app/views/ordering/index.haml:13
+msgid "Current orders"
+msgstr "Laufende Bestellungen"
+
+#: app/views/ordering/index.haml:16
+msgid "Unrecorded orders"
+msgstr "Unverbuchte Bestellungen"
+
+#: app/views/ordering/index.haml:19
+msgid "Available"
+msgstr "Verfügbar"
+
+#: app/views/ordering/index.haml:29
+msgid "unrecorded orders"
+msgstr "Unverbuchte Bestellungen"
+
+#: app/views/ordering/index.haml:34
+msgid "total order value"
+msgstr "Gesamtbestellwert"
+
+#: app/views/ordering/index.haml:41
+msgid "balanced orders"
+msgstr "Abgerechnete Bestellungen"
+
+#: app/views/ordering/index.haml:45
+msgid "more..."
+msgstr "mehr..."
+
+#: app/views/ordering/my_order_result.haml:1
+msgid "Your result for"
+msgstr "Dein Ergebnis für"
+
+#: app/views/ordering/my_order_result.haml:3 app/views/orders/show.haml:3
+msgid "Previous order"
+msgstr "Vorige Bestellung"
+
+#: app/views/ordering/my_order_result.haml:5
+#: app/views/ordering/myOrders.haml:7 app/views/orders/show.haml:5
+msgid "Overview"
+msgstr "Übersicht"
+
+#: app/views/ordering/my_order_result.haml:7 app/views/orders/show.haml:7
+msgid "Next order"
+msgstr "Nächste Bestellung"
+
+#: app/views/ordering/my_order_result.haml:12 app/views/orders/show.haml:12
+msgid "Summary"
+msgstr "Zusammenfassung"
+
+#: app/views/ordering/my_order_result.haml:31
+msgid "Order value"
+msgstr "Bestellwert"
+
+#: app/views/ordering/my_order_result.haml:38
+msgid "Cleared by"
+msgstr "Abgerechnet durch"
+
+#: app/views/ordering/my_order_result.haml:38 app/views/orders/show.haml:16
+msgid "Order isn't balanced yet"
+msgstr "Bestellung ist noch nicht abgerechnet"
+
+#: app/views/ordering/my_order_result.haml:39
+msgid "read/add comments"
+msgstr "lese/schreibe Kommentare"
+
+#: app/views/ordering/my_order_result.haml:44
+#: app/views/ordering/_currentOrders.haml:4 app/views/orders/index.haml:14
+msgid "Running orders"
+msgstr "Laufende Bestellungen"
+
+#: app/views/ordering/my_order_result.haml:55
+msgid "Overview of articles"
+msgstr "Artikelübersicht"
+
+#: app/views/ordering/my_order_result.haml:62
+msgid "You haven't ordered"
+msgstr "Du hast nicht bestellt."
+
+#: app/views/ordering/my_order_result.haml:71
+msgid "You haven't ordered yet."
+msgstr "Du hast noch nicht bestellt."
+
+#: app/views/ordering/my_order_result.haml:72
+msgid "Order now"
+msgstr "Jetzt bestellen"
+
+#: app/views/ordering/my_order_result.haml:78 app/views/orders/show.haml:84
+msgid "Comments"
+msgstr "Kommentare"
+
+#: app/views/ordering/my_order_result.haml:85
+msgid "New comment"
+msgstr "Neuer Kommentar"
+
+#: app/views/ordering/_finished_order_result.haml:5
+#: app/views/articles/upload_articles.haml:15
+#: app/views/articles/parse_articles.haml:20
+#: app/views/orders/_show_unfinished.haml:4
+#: app/views/orders/_form.html.haml:45
+msgid "Unit quantity"
+msgstr "Gebindegröße"
+
+#: app/views/ordering/_finished_order_result.haml:6
+msgid "Unit price"
+msgstr "Einzelpreis"
+
+#: app/views/ordering/_finished_order_result.haml:7
+msgid "Received"
+msgstr "Bekommen"
+
+#: app/views/ordering/_finished_order_result.haml:8
+#: app/views/orders/show.haml:41
+msgid "Total price"
+msgstr "Gesamtpreis"
+
+#: app/views/ordering/myOrders.haml:2
+msgid "Orders of"
+msgstr "Bestellungen von"
+
+#: app/views/ordering/myOrders.haml:6
+msgid "See current orders in"
+msgstr "Laufende Bestellungen findest Du in der"
+
+#: app/views/ordering/myOrders.haml:9
+msgid "Also show orders, your ordergroup haven't participated:"
+msgstr ""
+"Zeige auch Bestellungen, bei denen Deine Bestellgruppe nicht bestellt hat."
+
+#: app/views/ordering/myOrders.haml:18
+msgid "finished/not balanced"
+msgstr "beendet/nicht abgerechnet"
+
+#: app/views/ordering/_currentOrders.haml:13
+msgid "Who ordered?"
+msgstr "Wer bestellte?"
+
+#: app/views/ordering/_currentOrders.haml:31
+msgid "Total sum"
+msgstr "Gesamtbetrag"
+
+#: app/views/ordering/_currentOrders.haml:34 app/views/orders/index.haml:35
+msgid "There aren't current orders at the moment."
+msgstr "Es gibt derzeit keine laufenden Bestellungen."
+
+#: app/views/articles/upload_articles.haml:1
+#: app/views/articles/upload_articles.haml:18 app/views/articles/list.haml:52
+msgid "Upload articles"
+msgstr "Artikel hochladen"
+
+#: app/views/articles/upload_articles.haml:4
+msgid ""
+"The file-type must be \"csv\" (textfile). Use a semicolon (\";\") to "
+"seperate the fields and double quotes (\"Bananas...\") for the text."
+msgstr ""
+"Die Datei muss vom Typ \"csv\" (Textdatei) sein. Als Feldtrenner benutze ein "
+"Semikolon (\";\") und als Texttrenner doppelte Anführungszeichen "
+"(\"Bananen...\")."
+
+#: app/views/articles/upload_articles.haml:6
+msgid ""
+"The character-set has to be \"UTF-8\". The first row, maybe used for "
+"headers, will be ignored."
+msgstr ""
+"Der Zeichensatz muss \"UTF-8\" sein. Die erste Zeile wird ignoriert, z.B. "
+"für Spaltenüberschriften."
+
+#: app/views/articles/upload_articles.haml:9
+msgid "Correct order of the columns:"
+msgstr "Reihenfolge der Spalten:"
+
+#: app/views/articles/upload_articles.haml:15
+msgid "Status (x=outlistet)"
+msgstr "Status (x=ausgelistet)"
+
+#: app/views/articles/upload_articles.haml:15
+#: app/views/articles/parse_articles.haml:15
+#: app/views/orders/_form.html.haml:43
+msgid "Origin"
+msgstr "Herkunft"
+
+#: app/views/articles/upload_articles.haml:15 app/views/articles/_list.haml:24
+#: app/views/articles/parse_articles.haml:16
+msgid "Unit"
+msgstr "Einheit"
+
+#: app/views/articles/upload_articles.haml:15
+#: app/views/articles/parse_articles.haml:17
+msgid "Net price"
+msgstr "Netto Preis"
+
+#: app/views/articles/upload_articles.haml:15 app/views/articles/_list.haml:29
+#: app/views/articles/parse_articles.haml:18
+msgid "Tax"
+msgstr "Steuer"
+
+#: app/views/articles/upload_articles.haml:15 app/views/articles/_list.haml:30
+#: app/views/articles/parse_articles.haml:19
+msgid "Deposit"
+msgstr "Pfand"
+
+#: app/views/articles/upload_articles.haml:15
+msgid "Scale quantity"
+msgstr "Staffelmenge"
+
+#: app/views/articles/upload_articles.haml:15
+msgid "Scale price"
+msgstr "Staffelpreis"
+
+#: app/views/articles/upload_articles.haml:15 app/views/articles/_list.haml:22
+#: app/views/articles/parse_articles.haml:21
+msgid "Category"
+msgstr "Kategorie"
+
+#: app/views/articles/_list.haml:2
+msgid "Number of found articles :"
+msgstr "Anzahl gefundener Artikel :"
+
+#: app/views/articles/_list.haml:27
+msgid "UnitQu"
+msgstr "GebGr"
+
+#: app/views/articles/list.haml:2
+msgid "Articles from"
+msgstr "Artikel von"
+
+#: app/views/articles/list.haml:10
+msgid "External database"
+msgstr "Externe Datenbank"
+
+#: app/views/articles/list.haml:12
+msgid "search/import"
+msgstr "suchen/importieren"
+
+#: app/views/articles/list.haml:13
+msgid "sync"
+msgstr "synchronisieren"
+
+#: app/views/articles/list.haml:18
+msgid "Change supplier:"
+msgstr "Lieferantin wechseln:"
+
+#: app/views/articles/list.haml:26
+msgid "Import articles"
+msgstr "Artikel importieren"
+
+#: app/views/articles/list.haml:31
+msgid "Search articles"
+msgstr "Artikel Suchen"
+
+#: app/views/articles/list.haml:33
+msgid "Search in following lists: "
+msgstr "Suche in folgenden Listen: "
+
+#: app/views/articles/list.haml:38
+msgid "only regional:"
+msgstr "nur regional:"
+
+#: app/views/articles/list.haml:42
+msgid "Close"
+msgstr "Schließen"
+
+#: app/views/articles/list.haml:48
+msgid "New article"
+msgstr "Neuer Artikel"
+
+#: app/views/articles/list.haml:50
+msgid "Edit all"
+msgstr "Alle bearbeiten"
+
+#: app/views/articles/list.haml:54
+msgid "Create order"
+msgstr "Bestellung anlegen"
+
+#: app/views/articles/list.haml:59
+msgid "Search in article name: "
+msgstr "Suche in Artikelnamen: "
+
+#: app/views/articles/list.haml:61
+msgid "Search"
+msgstr "Suche"
+
+#: app/views/articles/parse_articles.haml:1
+msgid "Upload Articles"
+msgstr "Artikel hochladen"
+
+#: app/views/articles/parse_articles.haml:4
+msgid ""
+"Please check the parsed articles and choose a supplier at the end of page."
+msgstr ""
+"Bitte überprüfe die eingelesenen Artikel und wähle unten einen Lieferanten "
+"aus."
+
+#: app/views/articles/parse_articles.haml:6
+msgid "At the moment there is now checking of dublicate articles."
+msgstr "Momentan gibt es keine Überprüfung von doppelten Artikeln."
+
+#: app/views/articles/parse_articles.haml:36
+msgid "Choose a supplier:"
+msgstr "Lieferantin auswählen:"
+
+#: app/views/articles/parse_articles.haml:38
+msgid "Save articles"
+msgstr "Artikel speichern"
+
+#: app/views/admin/_listUsers.haml:15
+msgid "Email"
+msgstr "E-Mail"
+
+#: app/views/admin/_listUsers.haml:16
+msgid "Roles"
+msgstr "Rollen"
+
+#: app/views/admin/_listUsers.haml:17
+msgid "Last Login"
+msgstr "Letzter Login"
+
+#: app/views/tasks/myTasks.haml:1 app/views/tasks/_nav.haml:11
+#: app/views/index/index.haml:28 app/views/index/_start_nav.haml:7
+msgid "My tasks"
+msgstr "Meine Aufgaben"
+
+#: app/views/tasks/show.haml:1
+msgid "Task in detail"
+msgstr "Aufgabe im Detail"
+
+#: app/views/tasks/show.haml:11 app/views/tasks/_form.html.haml:9
+#: app/views/index/_showGroup.haml:7
+msgid "Description"
+msgstr "Beschreibung"
+
+#: app/views/tasks/show.haml:14 app/views/tasks/_list.haml:3
+#: app/views/tasks/archive.haml:6 app/views/tasks/_form.html.haml:35
+msgid "Due date"
+msgstr "Fälligkeitsdatum"
+
+#: app/views/tasks/show.haml:17 app/views/tasks/archive.haml:8
+#: app/views/tasks/_form.html.haml:14
+msgid "Responsible people"
+msgstr "Verantwortliche Personen"
+
+#: app/views/tasks/show.haml:20 app/views/tasks/_form.html.haml:30
+msgid "Group"
+msgstr "Gruppe"
+
+#: app/views/tasks/show.haml:27 app/views/tasks/_list.haml:29
+#: app/views/tasks/_list.haml:31
+msgid "Done"
+msgstr "Erledigt"
+
+#: app/views/tasks/show.haml:33 app/views/orders/index.haml:32
+#: app/views/orders/_list.haml:21
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: app/views/tasks/show.haml:35
+msgid "Delete"
+msgstr "Löschen"
+
+#: app/views/tasks/show.haml:35
+msgid "Delete the task?"
+msgstr "Die Aufgabe wirklich löschen?"
+
+#: app/views/tasks/index.haml:1
+msgid "Arrange tasks"
+msgstr "Aufgaben zuweisen"
+
+#: app/views/tasks/index.haml:8
+msgid "Tasks for all"
+msgstr "Aufgaben für alle"
+
+#: app/views/tasks/new.haml:1
+msgid "Create new task"
+msgstr "Neue Aufgabe erstellen"
+
+#: app/views/tasks/new.haml:6
+msgid "Create task"
+msgstr "Aufgabe erstellen"
+
+#: app/views/tasks/new.haml:9 app/views/tasks/edit.haml:10
+msgid "Members of the workgroups"
+msgstr "Mitglieder der Arbeitsgruppen"
+
+#: app/views/tasks/_assignments.haml:3 app/views/finance/_order_group.haml:6
+msgid "Remove"
+msgstr "Entfernen"
+
+#: app/views/tasks/_list.haml:4 app/views/tasks/archive.haml:7
+#: app/views/tasks/_form.html.haml:4
+msgid "Subject"
+msgstr "Betreff"
+
+#: app/views/tasks/_list.haml:6 app/views/tasks/workgroup.haml:16
+msgid "Who will make it?"
+msgstr "Wer macht das?"
+
+#: app/views/tasks/_list.haml:7
+msgid "How many are still required?"
+msgstr "Wie viele werden noch benötigt?"
+
+#: app/views/tasks/_list.haml:25 app/views/tasks/workgroup.haml:17
+#: app/views/tasks/workgroup.haml:39
+msgid "Accept task"
+msgstr "Aufgabe übernehmen"
+
+#: app/views/tasks/_list.haml:26 app/views/tasks/workgroup.haml:40
+msgid "Reject task"
+msgstr "Aufgabe ablehnen"
+
+#: app/views/tasks/archive.haml:1
+msgid "Task archive"
+msgstr "AufgabenArchiv"
+
+#: app/views/tasks/_form.html.haml:15
+msgid "tasks can have multiple assignments"
+msgstr "Aufgaben können mehrere Verantwortliche haben"
+
+#: app/views/tasks/_form.html.haml:19
+msgid "use commas to seperate the names"
+msgstr "Benutze Kommas, um mehrere Namen zu trennen"
+
+#: app/views/tasks/_form.html.haml:25
+msgid "How many users are altogether required?"
+msgstr "Wie viele Verantwortliche werden insgesamt benötigt?"
+
+#: app/views/tasks/workgroup.haml:2
+msgid "Arrange tasks for"
+msgstr "AufgabenVerteilung für"
+
+#: app/views/tasks/workgroup.haml:9
+msgid "Weekly tasks"
+msgstr "Wöchentliche Aufgaben"
+
+#: app/views/tasks/workgroup.haml:15
+msgid "Date"
+msgstr "Datum"
+
+#: app/views/tasks/workgroup.haml:33
+msgid "more"
+msgstr "mehr"
+
+#: app/views/tasks/workgroup.haml:36 app/views/tasks/workgroup.haml:42
+msgid "Assign people"
+msgstr "Personen zuweisen"
+
+#: app/views/tasks/workgroup.haml:47 app/views/index/_showGroup.haml:33
+msgid "No weekly tasks defined yet"
+msgstr "Noch keine wöchentlichen Aufgaben angelegt"
+
+#: app/views/tasks/workgroup.haml:48
+msgid "Edit weekly tasks"
+msgstr "Wöchentliche Aufgaben bearbeiten"
+
+#: app/views/tasks/workgroup.haml:52
+msgid "all tasks"
+msgstr "Alle Aufgaben"
+
+#: app/views/tasks/_nav.haml:2
+msgid "TaskMenu"
+msgstr "AufgabenMenu"
+
+#: app/views/tasks/_nav.haml:5
+msgid "Actions"
+msgstr "Aktionen"
+
+#: app/views/tasks/_nav.haml:7
+msgid "New task"
+msgstr "Neue Aufgabe"
+
+#: app/views/tasks/_nav.haml:9
+msgid "Pages"
+msgstr "Seiten"
+
+#: app/views/tasks/_nav.haml:12
+msgid "All tasks"
+msgstr "Alle Aufgaben"
+
+#: app/views/tasks/_nav.haml:13
+msgid "Tasks done"
+msgstr "Erledigte Aufgaben"
+
+#: app/views/tasks/_nav.haml:16
+msgid "Group tasks"
+msgstr "GruppenAufgaben"
+
+#: app/views/tasks/edit.haml:1
+msgid "Edit task"
+msgstr "Aufgabe bearbeiten"
+
+#: app/views/tasks/edit.haml:6
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+#: app/views/orders/show.haml:1
+msgid "Show order"
+msgstr "Bestellung anzeigen"
+
+#: app/views/orders/show.haml:28
+msgid "Begin"
+msgstr "Beginn"
+
+#: app/views/orders/show.haml:34
+msgid "Groups ordered"
+msgstr "Gruppenbestellungen"
+
+#: app/views/orders/show.haml:45 app/views/orders/_show_unfinished.haml:32
+msgid "Ordered articles:"
+msgstr "Bestellte Artikel:"
+
+#: app/views/orders/show.haml:53
+msgid "All articles"
+msgstr "Alle Artikel"
+
+#: app/views/orders/show.haml:55
+msgid "Sort by groups"
+msgstr "Gruppensortierung"
+
+#: app/views/orders/show.haml:56 app/views/orders/show.haml:59
+#: app/views/orders/show.haml:62 app/views/orders/show.haml:65
+#: app/views/orders/show.haml:66
+msgid "Download file"
+msgstr "Datei runterladen"
+
+#: app/views/orders/show.haml:58
+msgid "Sort by articles"
+msgstr "Artikelsortierung"
+
+#: app/views/orders/show.haml:61
+msgid "Matrix:"
+msgstr "Matrix:"
+
+#: app/views/orders/show.haml:64
+msgid "FAX-template:"
+msgstr "FAX-Vorlage:"
+
+#: app/views/orders/index.haml:6
+msgid "New Order"
+msgstr "Neue Bestellung"
+
+#: app/views/orders/index.haml:7
+msgid "for"
+msgstr "für"
+
+#: app/views/orders/index.haml:9
+msgid "Choose a supplier..."
+msgstr "Lieferant auswählen..."
+
+#: app/views/orders/index.haml:30
+msgid "finish"
+msgstr "beenden"
+
+#: app/views/orders/index.haml:30 app/views/orders/_list.haml:20
+msgid "Are you really sure to finish the order?"
+msgstr "Bist Du wirklich sicher die Bestellung zu beenden?"
+
+#: app/views/orders/index.haml:33 app/views/orders/_list.haml:22
+msgid "Destroy"
+msgstr "Löschen"
+
+#: app/views/orders/index.haml:33 app/views/orders/_list.haml:22
+msgid "Are you really sure you want to destroy the order?"
+msgstr "Bist Du wirklich sicher, Du willst die Bestellung löschen?"
+
+#: app/views/orders/index.haml:39
+msgid "Expired/finished orders"
+msgstr "abgelaufende/beendete Bestellungen"
+
+#: app/views/orders/_show_unfinished.haml:6
+msgid "Units ordered"
+msgstr "bestellte Einheiten"
+
+#: app/views/orders/_show_unfinished.haml:7
+msgid "Result/Unit quantity"
+msgstr "Ergebnis/Gebinde"
+
+#: app/views/orders/_show_unfinished.haml:28
+msgid "Total value"
+msgstr "Gesamtbetrag"
+
+#: app/views/orders/_show_unfinished.haml:29
+msgid "(net/gross)"
+msgstr "(netto/brutto)"
+
+#: app/views/orders/_list.haml:8 app/views/orders/_form.html.haml:19
+msgid "Start"
+msgstr "Start"
+
+#: app/views/orders/_list.haml:11
+msgid "Status"
+msgstr "Status"
+
+#: app/views/orders/_list.haml:20
+msgid "finish now"
+msgstr "jetzt beenden"
+
+#: app/views/orders/_form.html.haml:32
+msgid "Use article selection from"
+msgstr "Benutze Artikelauswahl von"
+
+#: app/views/orders/_form.html.haml:34
+msgid "Choose an order..."
+msgstr "Bestellung wählen..."
+
+#: app/views/orders/_form.html.haml:66
+msgid "Select all"
+msgstr "Alle auswählen"
+
+#: app/views/orders/edit.html.haml:1
+msgid "Edit order"
+msgstr "Bestellung bearbeiten"
+
+#: app/views/orders/edit.html.haml:5
+#: app/views/finance/new_transactions.haml:18
+msgid "Save"
+msgstr "Speichern"
+
+#: app/views/orders/new.html.haml:1
+msgid "New order"
+msgstr "Neue Bestellung"
+
+#: app/views/orders/new.html.haml:5
+msgid "Put the order online"
+msgstr "Bestellung online stellen"
+
+#: app/views/index/index.haml:13
+msgid "Your tasks for the upcoming week:"
+msgstr "Deine Aufgaben für die nächste Woche:"
+
+#: app/views/index/index.haml:22
+msgid "Accept tasks"
+msgstr "Aufgaben übernehmen"
+
+#: app/views/index/index.haml:23
+msgid "Your are responsible for a few tasks."
+msgstr "Du bist für einige Aufgaben verantwortlich."
+
+#: app/views/index/index.haml:24
+msgid "Accept/Reject tasks"
+msgstr "Aufgaben übernehmen/ablehnen"
+
+#: app/views/index/index.haml:26
+msgid "Unassigned tasks"
+msgstr "Nicht zugewiesene Aufgaben"
+
+#: app/views/index/index.haml:27
+msgid "There are"
+msgstr "Es gibt"
+
+#: app/views/index/index.haml:27
+msgid "unassigned task(s)"
+msgstr "nicht zugewiesene Aufgabe(n)"
+
+#: app/views/index/index.haml:33
+msgid "Unread messages"
+msgstr "Ungelesene Nachrichten"
+
+#: app/views/index/index.haml:36
+msgid "All messages"
+msgstr "Alle Nachrichten"
+
+#: app/views/index/index.haml:51
+msgid "Account balance:"
+msgstr "Kontostand:"
+
+#: app/views/index/index.haml:56
+msgid "Last transactions"
+msgstr "Letzte Überweisungen"
+
+#: app/views/index/index.haml:59
+msgid "When"
+msgstr "Wann"
+
+#: app/views/index/index.haml:60
+msgid "Who"
+msgstr "Wer"
+
+#: app/views/index/index.haml:71
+msgid "more ..."
+msgstr "mehr ..."
+
+#: app/views/index/foodcoop_members.haml:27
+msgid "Sort by Ordergroups :"
+msgstr "Sortiere nach Bestellgruppen :"
+
+#: app/views/index/_list_members.haml:26
+msgid "Send user an email"
+msgstr "Mitglied eine Nachricht schicken"
+
+#: app/views/index/_start_nav.haml:1
+msgid "Go to ..."
+msgstr "Direkt zu ..."
+
+#: app/views/index/_start_nav.haml:4
+msgid "FoodCoop"
+msgstr "FoodCoop"
+
+#: app/views/index/_start_nav.haml:6
+msgid "Member list"
+msgstr "Mitgliederliste "
+
+#: app/views/index/_start_nav.haml:8
+msgid "Write message"
+msgstr "Nachricht schreiben"
+
+#: app/views/index/_start_nav.haml:18
+msgid "Order summary"
+msgstr "Bestellungen"
+
+#: app/views/index/_start_nav.haml:20
+msgid "Finish order"
+msgstr "Bestellung beenden"
+
+#: app/views/index/_start_nav.haml:24
+msgid "Artcle management"
+msgstr "Artikelverwaltung"
+
+#: app/views/index/_start_nav.haml:26
+msgid "Refresh articles"
+msgstr "Artikel aktualisieren"
+
+#: app/views/index/_start_nav.haml:32
+msgid "Financial management"
+msgstr "Finanzverwaltung"
+
+#: app/views/index/_start_nav.haml:34
+msgid "Update account balances"
+msgstr "Kontostände aktualisieren"
+
+#: app/views/index/_start_nav.haml:35
+msgid "Cancel orders"
+msgstr "Bestellungen abbrechen"
+
+#: app/views/index/_start_nav.haml:42
+#: app/views/finance/listOrdergroups.haml:24
+msgid "New ordergroup"
+msgstr "Neue Bestellgruppe"
+
+#: app/views/index/_start_nav.haml:43
+msgid "New user"
+msgstr "Neue Benutzerin"
+
+#: app/views/index/_showGroup.haml:10
+msgid "Group has access to"
+msgstr "Gruppe hat Zugriff auf"
+
+#: app/views/index/_showGroup.haml:26
+msgid "Weekly task"
+msgstr "Wöchentliche Aufgabe"
+
+#: app/views/index/_showGroup.haml:30
+msgid "at"
+msgstr "am"
+
+#: app/views/index/_showGroup.haml:35
+msgid "Show all tasks"
+msgstr "Zeige alle Aufgaben"
+
+#: app/views/index/_showGroup.haml:38
+msgid "Edit group"
+msgstr "Gruppe bearbeiten"
+
+#: app/views/index/_showGroup.haml:40
+msgid "Send members a message"
+msgstr "Schicke den Mitgliedern eine Nachricht"
+
+#: app/views/finance/listOrdergroups.haml:1
+msgid "Manage accounts"
+msgstr "Kontenverwaltung"
+
+#: app/views/finance/listOrdergroups.haml:4
+msgid "To create multiple transactions at once please follow this "
+msgstr "Um mehrere Transaktionen auf einmal zu erstellen folge diesem "
+
+#: app/views/finance/listOrdergroups.haml:5
+msgid "link"
+msgstr "Link"
+
+#: app/views/finance/listOrdergroups.haml:12
+msgid "Search in name"
+msgstr "Suche im Namen"
+
+#: app/views/finance/_listOrdergroups.haml:2
+msgid "Found"
+msgstr "Gefunden"
+
+#: app/views/finance/_listOrdergroups.haml:16
+msgid "Size of group"
+msgstr "Gruppengröße"
+
+#: app/views/finance/_listOrdergroups.haml:22
+msgid "Show ordergroup"
+msgstr "Zeige Bestellgruppe"
+
+#: app/views/finance/_listOrdergroups.haml:26
+msgid "New transaction"
+msgstr "Neue Überweisung"
+
+#: app/views/finance/_listOrdergroups.haml:27
+msgid "List transactions"
+msgstr "Überweisung anzeigen"
+
+#: app/views/finance/new_transactions.haml:1
+msgid "Update multiple accounts"
+msgstr "Aktualisiere mehrere Konten"
+
+#: app/views/finance/new_transactions.haml:10
+msgid "Ordergroup"
+msgstr "Bestellgruppe"
+
+#: app/views/finance/new_transactions.haml:15
+msgid "Add another ordergroup"
+msgstr "Weitere Bestellgruppe hinzufügen"
+
+#: app/views/finance/_order_group.haml:6
+msgid "Remove ordergroup"
+msgstr "Bestellgruppe entfernen"
+
+#~ msgid "user"
+#~ msgstr "Benutzerin"
+
+#~ msgid "User|Nick"
+#~ msgstr "Benutzername"
+
+#~ msgid "User|Password hash"
+#~ msgstr "Passwort"
+
+#~ msgid "User|Password salt"
+#~ msgstr "Passwort"
+
+#~ msgid "User|First name"
+#~ msgstr "Vorname"
+
+#~ msgid "User|Last name"
+#~ msgstr "Nachname"
+
+#~ msgid "User|Email"
+#~ msgstr "E-Mail"
+
+#~ msgid "User|Phone"
+#~ msgstr "Telefon"
+
+#~ msgid "User|Address"
+#~ msgstr "Adresse"
+
+#~ msgid "User|Created on"
+#~ msgstr "Erstelle am"
+
+#~ msgid "User|Last login"
+#~ msgstr "Letzter Login"

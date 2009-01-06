@@ -1,0 +1,21 @@
+%td= @article.name
+%td= link_to_function image_tag("arrow_down_red.png", :size => "16x16", :border => 0), "Element.toggle('group_order_article_results_#{@article.id}')"
+%td= @article.order_number
+%td= @article.units_to_order
+%td= @article.unit_quantity.to_s + ' * ' + @article.unit.to_s
+%td= number_to_currency(@article.net_price)
+%td= number_to_currency(@article.gross_price)
+%td= @article.tax
+%td= @article.deposit
+%td
+  = link_to_remote image_tag('b_edit.png', :size => "16x16", :border => 0, :alt => 'Artikel ändern'), |
+    :url => {:action => 'editArticleResult', :id => @article}, |
+    :before => "Element.show('loader')", |
+    :success => "Element.hide('loader')" |
+%td    
+  = link_to_remote image_tag('b_drop.png', :size => "16x16", :border => 0, :alt => 'Artikel löschen'), |
+    :url => {:action => 'destroyArticleResult', :id => @article}, |
+    :confirm => 'Bist du sicher?', |
+    :method => 'post', |
+    :before => "Element.show('loader')", |
+    :success => "Element.hide('loader')" |

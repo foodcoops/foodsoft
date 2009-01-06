@@ -1,0 +1,14 @@
+Hallo <%= user.nick %>!
+
+Die Bestellung "<%= order.name %>" wurde am <%= order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= order.updated_by.nick %> beendet.
+
+Für deine Bestellgruppe <%= group.name %> wurden die folgenden Artikel bestellt:
+<%	for result in results
+      article = result.order_article_result  -%>
+<%= article.name %>:	<%= result.quantity %> x <%= article.unit %> = <%= FoodSoft::format_currency(result.quantity * article.gross_price) %>
+<%	end  -%>
+Gesamtpreis: <%= FoodSoft::format_currency(total) %> 
+
+Bestellung online einsehen: <%= ApplicationController.current.url_for(:controller => 'ordering', :action => 'my_order_result', :id => order.id) %> 
+
+Viele Grüße von <%= FoodSoft::getFoodcoopName %>

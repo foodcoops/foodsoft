@@ -1,0 +1,9 @@
+<h1>Neue Transaktion</h1>
+
+<% form_tag(:action => 'createTransaction', :id => @group) do -%>
+  <%= render :partial => 'financial_transactions/form' %>
+  <%= submit_tag 'Speichern' %>
+  <%= hidden_field 'financial_transaction', 'order_group_id' %>
+<% end -%>
+<br />
+<%= link_to 'Zurück', :controller => 'finance' %>

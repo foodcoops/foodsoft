@@ -1,0 +1,20 @@
+- title _("Update multiple accounts")
+
+- form_tag :action => "create_transactions" do
+  %p
+    %b= _("Note") + ":"
+    = text_field_tag "note"
+  %p
+    %table#OrderGroups{:style => "width:20em"}
+      %tr
+        %th=_ "Ordergroup"
+        %th=_ "Amount"
+      = render :partial => 'order_group', :collection => [1, 2, 3]
+  
+  %p
+    = link_to_function _("Add another ordergroup") do |page|
+      - page.insert_html :bottom, :OrderGroups, :partial => 'order_group'
+  %p
+    = submit_tag _("Save")
+    |
+    = link_to _("Cancel"), :action => 'listOrdergroups'

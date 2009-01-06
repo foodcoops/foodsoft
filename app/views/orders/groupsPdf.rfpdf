@@ -1,0 +1,84 @@
+<%
+    class PDF < FPDF  
+        def Header
+          SetFont('Arial', 'B', 13)
+          Cell(80)
+          Cell(30, 10, @title, 0, 0, 'C')
+          Ln(20)
+        end  
+        def Footer
+            SetY(-15)
+            SetFont('Arial', 'I', 8)
+            Cell(0, 10, 'Seite ' + PageNo().to_s + ' | ' + @title + ' | powered by FoodSoft', 0, 0, 'C')
+        end    
+      end
+    
+    pdf=PDF.new
+    
+    @starts = @order.starts.strftime('%d.%m.%Y').to_s
+    @ends = @order.ends.strftime('%d.%m.%Y').to_s
+    @title = replace_UTF8(@order.name.to_s) + " | beendet am " + @ends
+    
+    pdf.SetAuthor(FoodSoft.getFoodcoopName) 
+    pdf.SetTitle(replace_UTF8("GruppenSortierung für #{@order.name}, #{format_date(@order.ends)}"))
+    pdf.SetFillColor(235)
+    pdf.AliasNbPages()
+    pdf.AddPage()
+    
+    groups = @order.group_order_results.size
+    counter = 1
+    #now the groups
+    for group_result in @order.group_order_results
+        pdf.SetFont('Arial','B',14)
+        pdf.Cell(160,6,replace_UTF8(group_result.group_name),0, 0, '')
+        pdf.SetFont('Arial','I',9)
+        pdf.Ln()
+        pdf.Cell(20,5,"Gruppe #{counter.to_s}/#{groups.to_s}",0, 0, '')
+        pdf.Ln()
+        # the legend
+        pdf.SetFont('Arial','I',8)
+        pdf.Cell(100,6,'Artikel',1)
+        pdf.Cell(12,6,'Menge',1)
+        pdf.Cell(12,6,'Preis',1)
+        pdf.Cell(12,6,'GebGr',1)
+        pdf.Cell(12,6,'Einheit',1)
+        pdf.Cell(12,6,'Summe',1)
+        pdf.Ln()
+        pdf.SetFont('Arial','',9)
+        total = 0
+        
+        index = 0   # used for row-highlighting
+        # and the ordered articles
+        for result in group_result.group_order_article_results
+            index += 1
+            
+            # calculating the sum
+            price = result.order_article_result.gross_price
+            quantity = result.quantity
+            subTotal = price * quantity
+            total += subTotal
+        
+            if index%2 == 0   # every second row gets a background color
+                pdf.Cell(100,6,replace_UTF8(result.order_article_result.name),1,0,'L',1)
+                pdf.Cell(12,6,quantity.to_s,1,0,'C',1)
+                pdf.Cell(12,6,number_to_currency(price, :unit=> ''),1,0,'R',1)
+                pdf.Cell(12,6,result.order_article_result.unit_quantity.to_s,1,0,'C',1)
+                pdf.Cell(12,6,result.order_article_result.unit,1,0,'C',1)
+                pdf.Cell(12,6,number_to_currency(subTotal, :unit=> ''),1,0,'R',1)
+            else
+                pdf.Cell(100,6,replace_UTF8(result.order_article_result.name),1,0,'L')
+                pdf.Cell(12,6,quantity.to_s,1,0,'C')
+                pdf.Cell(12,6,number_to_currency(price, :unit=> ''),1,0,'R')
+                pdf.Cell(12,6,result.order_article_result.unit_quantity.to_s,1,0,'C')
+                pdf.Cell(12,6,result.order_article_result.unit,1,0,'C')
+                pdf.Cell(12,6,number_to_currency(subTotal, :unit=> ''),1,0,'R')
+            end
+            pdf.Ln()
+        end
+        pdf.SetFont('Arial','B',10)
+        pdf.Cell(148,6,"Summe",1)
+        pdf.Cell(12,6,number_to_currency(total, :unit=> ''),1,0,'R')
+        pdf.AddPage()
+        counter += 1
+    end
+%><%= pdf.Output %>

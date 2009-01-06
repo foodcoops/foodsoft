@@ -1,0 +1,14 @@
+Foodsoft-Nachricht
+
+Von: <%= @sender %>
+An:  <%= @recipients %>
+
+======================================================================
+<%= @body %>
+======================================================================
+
+Antworten: <%= @reply %> 
+Nachricht online einsehen: <%= @link %> 
+Nachrichten-Einstellungen: <%= @profile %> 
+
+<%= render :partial => 'shared/mail_footer' %>

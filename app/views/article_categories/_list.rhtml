@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Beschreibung</th>
+    <th colspan="2"></th>
+  </tr>
+<% for article_category in ArticleCategory.find(:all) %>
+  <tr class="<%= cycle("even","odd", :name => 'category') %>" id="category_<%= article_category.id %>">
+    <td><%=h article_category.name %></td>
+    <td><%=h article_category.description %></td>
+    <td><%= link_to_remote(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Katgerie bearbeiten'), 
+                                        :url => {:action => 'editCategory', :id => article_category},
+                                        :before => "Element.show('loader')",
+                                        :success => "Element.hide('loader')" ) %></td>
+    <td><%= link_to_remote(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Kategorie löschen'), :url => {:action => 'destroyCategory', :id => article_category }, :confirm => 'Are you sure?' )%></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= link_to_remote('Neue Kategorie', :url => {:action => :newCategory},
+                            :before => "Element.show('loader')",
+                            :success => "Element.hide('loader')") -%>

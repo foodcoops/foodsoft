@@ -1,0 +1,27 @@
+[28 September 2007]
+
+* Refactoring.
+
+[29 June 2007]
+
+* Add :ignore_sti option to allow next and previous to iterate over all models.
+
+[3 June 2007]
+
+* Improve STI ordering
+
+*  BACKWARDS INCOMPATIBLE
+
+   To jump more than one record forward or back, pass :number => x to next or previous, not just the number.
+   Number defaults to 1.
+   
+   Old: person.next(10)
+   New: person.next(:number => 10)
+   
+   This allows options to be passed to the find method when the record is instantiated:
+   
+     person.next(:include => :groups) 
+
+[31 Jul 2006]
+
+* Make the plugin work with Rails 1.1, not just trunk

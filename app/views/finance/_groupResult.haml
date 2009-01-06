@@ -1,0 +1,17 @@
+%td
+%td{:style=>"width:50%"}= @result.group_order_result.group_name
+%td{:id => "group_order_article_result_#{@result.id}_quantity"}= @result.quantity
+%td{:class => "currency"}= number_to_currency(@result.order_article_result.gross_price * @result.quantity)
+%td{:style=>"width:1em", :class => "actions"}
+  = link_to_remote image_tag('b_edit.png', :size => "16x16", :border => 0, :alt => 'Menge ändern'), |
+    :url => {:action => 'updateGroupResult', :id => @result}, |
+    :before => "Element.show('loader')", |
+    :success => "Element.hide('loader')" |
+%td{:style=>"width:1em", :class => "actions"}
+  = link_to_remote image_tag('b_drop.png', :size => "16x16", :border => 0, :alt => 'Gruppenergebnis löschen'), |
+    :url => {:action => 'destroyGroupResult', :id => @result}, |
+    :confirm => 'Bist du sicher?', |
+    :method => 'post', |
+    :before => "Element.show('loader')", |
+    :success => "Element.hide('loader')" |
+%td

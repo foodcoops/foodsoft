@@ -1,0 +1,9 @@
+%tr.edit_inline{:id=> "edit_"+@article.id.to_s}
+  %td{:colspan=>"10"}
+    =h @article.name
+    wird in laufenden Bestellungen verwendet und kann nicht gelöscht werden.
+    Bitte zuerst den Artikel aus den Bestellungen
+    = link_to "entfernen", :controller => 'orders', :action => 'edit', :id => @order
+    oder
+    = link_to_function 'abbrechen', "Element.remove('edit_#{@article.id.to_s}')"
+  
