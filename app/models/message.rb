@@ -14,8 +14,6 @@ class Message < ActiveRecord::Base
   
   attr_accessible :recipient_id, :recipient, :subject, :body, :recipients
 
-  # needed for method 'from_template'
-  include GetText::Rails
   
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {

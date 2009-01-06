@@ -21,7 +21,7 @@ class GroupOrderArticleResult < ActiveRecord::Base
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def quantity=(quantity)
-    self[:quantity] = FoodSoft::delocalizeDecimalString(quantity)
+    self[:quantity] = String.delocalized_decimal(quantity)
   end
   
 end

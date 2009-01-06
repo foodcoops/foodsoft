@@ -6,8 +6,6 @@
 # * group_order_article_results: collection of associated GroupOrderArticleResults
 # 
 class GroupOrderResult < ActiveRecord::Base
-  # gettext-option
-  untranslate_all
   
   belongs_to :order
   has_many :group_order_article_results, :dependent => :destroy

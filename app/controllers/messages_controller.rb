@@ -118,7 +118,7 @@ class MessagesController < ApplicationController
       @message = Message.new(
         :recipient => message.sender, 
         :subject => "Re: #{message.subject}", 
-        :body => "#{message.sender.nick} schrieb am #{FoodSoft::format_date(message.created_on)} um #{FoodSoft::format_time(message.created_on)}:\n"
+        :body => "#{message.sender.nick} schrieb am #{I18n.l(message.created_on.to_date)} um #{I18n.l(message.created_on, :format => :time)}:\n"
       )
       if (message.body)
         message.body.each_line{|l| @message.body += "> #{l}"}

@@ -27,8 +27,7 @@ test1:
   email_sender: foodsoft@myfoodcoop.org
   
   # localized date/time formats
-  date_format: %d.%m.%Y
-  time_format: %H:%M
+
 
 
 #test2:  
@@ -44,5 +43,3 @@ test1:
 #  help_url: http://foodsoft.fcschinke09.de/trac/wiki/FoodsoftDoku
 #  price_markup: 1.0
 #  email_sender: foodsoft@fctest2.org
-#  date_format: %d.%m.%Y
-#  time_format: %H:%M

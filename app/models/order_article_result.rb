@@ -28,22 +28,22 @@ class OrderArticleResult < ActiveRecord::Base
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def net_price=(net_price)
-    self[:net_price] = FoodSoft::delocalizeDecimalString(net_price)
+    self[:net_price] = String.delocalized_decimal(net_price)
   end
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def tax=(tax)
-    self[:tax] = FoodSoft::delocalizeDecimalString(tax)
+    self[:tax] = String.delocalized_decimal(tax)
   end
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def deposit=(deposit)
-    self[:deposit] = FoodSoft::delocalizeDecimalString(deposit)
+    self[:deposit] = String.delocalized_decimal(deposit)
   end
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def units_to_order=(units_to_order)
-    self[:units_to_order] = FoodSoft::delocalizeDecimalString(units_to_order)
+    self[:units_to_order] = String.delocalized_decimal(units_to_order)
   end
   
   # counts from every GroupOrderArticleResult for this ArticleResult

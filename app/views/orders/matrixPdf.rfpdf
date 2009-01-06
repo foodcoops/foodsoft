@@ -18,7 +18,7 @@
 	MAX_ARTICLES_PER_PAGE = 15 #how many articles shoud written on a page
 
     pdf=PDF.new 
-    pdf.SetAuthor(FoodSoft.getFoodcoopName) 
+    pdf.SetAuthor(APP_CONFIG[:name]) 
     @starts = @order.starts.strftime('%d.%m.%Y').to_s
     @ends = @order.ends.strftime('%d.%m.%Y').to_s
     @title = replace_UTF8(@order.name.to_s) + " | beendet am " + @ends

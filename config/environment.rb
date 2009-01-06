@@ -5,25 +5,22 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-# Need gettext for i18n
-require 'gettext/rails'
-
-# Loads the "FoodSoft" module and configuration:
-require 'foodsoft'
-
 Rails::Initializer.run do |config|
-  # Settings in config/environments/* take precedence over those specified here
+  # Settings in config/environments/* take precedence over those specified here.
+  # Application configuration should go into files in config/initializers
+  # -- all .rb files in that directory are automatically loaded.
+  # See Rails::Configuration for more options.
   
   # Skip frameworks you're not going to use (only works if using vendor/rails)
   # config.frameworks -= [ :action_web_service, :action_mailer ]
 
   # Only load the plugins named here, by default all plugins in vendor/plugins are loaded
-  # config.plugins = %W( exception_notification ssl_requirement )
+  # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
@@ -48,7 +45,7 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
 
   # Make Active Record use UTC-base instead of local time
-  # config.active_record.default_timezone = :utc
+  config.time_zone = 'UTC'
   
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
@@ -56,42 +53,31 @@ Rails::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :session_key => '_foodsoft_session',
-    :secret      => FoodSoft.get_session_secret
+    :secret      => "dhjfuez47892nsl39fh83ham3jsdfjkh4879sdh"
   }
   
+  # Specify gems that this application depends on.
+  # They can then be installed with "rake gems:install" on new installations.
+  # You have to specify the :lib option for libraries, where the Gem name (sqlite3-ruby) differs from the file itself (sqlite3)
+  # config.gem "bj"
+  # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
+  # config.gem "sqlite3-ruby", :lib => "sqlite3"
+  # config.gem "aws-s3", :lib => "aws/s3"
+  #
+  # library for parsing/writing files from/to csv-file
+  config.gem "fastercsv"
+
+  # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
+  # All files from config/locales/*.rb,yml are added automatically.
+  # config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
+  config.i18n.default_locale = :de
+
   # See Rails::Configuration for more options
 end
-
-# Add new inflection rules using the following format 
-# (all these examples are active by default):
-# Inflector.inflections do |inflect|
-#   inflect.plural /^(ox)$/i, '\1en'
-#   inflect.singular /^(ox)en/i, '\1'
-#   inflect.irregular 'person', 'people'
-#   inflect.uncountable %w( fish sheep )decimal
-# end
-
-# Add new mime types for use in respond_to blocks:
-# Mime::Type.register "text/richtext", :rtf
-# Mime::Type.register "application/x-mobile", :mobile
-
-# Include your application configuration below
-
-# library for parsing/writing files from/to csv-file
-# doc: http://fastercsv.rubyforge.org/
-require 'faster_csv'
-
-# Attention: Don't forget to set the locale through LocalizationSimplified plugin!
  
 # Defines custom logging format.
-class Logger
-  def format_message(severity, timestamp, progname, msg)
-    format("%s %-5.5s %s\n", timestamp.strftime('%H:%M:%S'), severity, msg) 
-  end
-end
-
-# Configuration of the exception_notification plugin
-# Mailadresses are set in config/foodsoft.yaml
-ExceptionNotifier.exception_recipients = FoodSoft.get_notification_config[:error_recipients]
-ExceptionNotifier.sender_address = FoodSoft.get_notification_config[:sender_address]
-ExceptionNotifier.email_prefix = FoodSoft.get_notification_config[:email_prefix]
+#class Logger
+#  def format_message(severity, timestamp, progname, msg)
+#    format("%s %-5.5s %s\n", timestamp.strftime('%H:%M:%S'), severity, msg)
+#  end
+#end

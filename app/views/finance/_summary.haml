@@ -56,5 +56,5 @@
     %td{:colspan => "4"}
       %b
         %abbr{:title => "= Gruppenbeträge - Rechnung ohne Pfand"} Differenz mit Aufschlag
-        = "(#{number_to_percentage(FoodSoft.getPriceMarkup)}):"
+        = "(#{number_to_percentage(APP_CONFIG[:price_markup])}):"
         %span#fcProfit= number_to_currency(@order.fcProfit)

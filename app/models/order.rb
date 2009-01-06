@@ -26,17 +26,17 @@ class Order < ActiveRecord::Base
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def invoice_amount=(amount)
-    self[:invoice_amount] = FoodSoft::delocalizeDecimalString(amount)
+    self[:invoice_amount] = String.delocalized_decimal(amount)
   end
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def deposit=(deposit)
-    self[:deposit] = FoodSoft::delocalizeDecimalString(deposit)
+    self[:deposit] = String.delocalized_decimal(deposit)
   end
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def deposit_credit=(deposit)
-    self[:deposit_credit] = FoodSoft::delocalizeDecimalString(deposit)
+    self[:deposit_credit] = String.delocalized_decimal(deposit)
   end
   
   # Create or destroy OrderArticle associations on create/update
@@ -169,7 +169,7 @@ class Order < ActiveRecord::Base
                                               :gross_price => oa.article.gross_price,
                                               :tax => oa.article.tax,
                                               :deposit => oa.article.deposit,
-                                              :fc_markup => FoodSoft::getPriceMarkup,
+                                              :fc_markup => APP_CONFIG[:price_markup],
                                               :order_number => oa.article.order_number,
                                               :unit_quantity => oa.article.unit_quantity,
                                               :units_to_order => oa.units_to_order)

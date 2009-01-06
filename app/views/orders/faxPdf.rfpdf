@@ -11,7 +11,7 @@
     
     @order_articles = @order.order_article_results
     
-    pdf.SetAuthor(replace_UTF8(FoodSoft.getFoodcoopName))
+    pdf.SetAuthor(replace_UTF8(APP_CONFIG[:name]))
     pdf.SetTitle(replace_UTF8("BestellFAX für #{@order.supplier.name}"))
     pdf.AliasNbPages()
     pdf.AddPage()
@@ -19,15 +19,15 @@
     #the main informations
     pdf.SetY(15)
     pdf.SetFont('Arial','',10)
-		pdf.Cell(0,5,replace_UTF8(FoodSoft.getFoodcoopName),0,0,'R')
+		pdf.Cell(0,5,replace_UTF8(APP_CONFIG[:name]),0,0,'R')
     pdf.Ln()
-		pdf.Cell(0,5,replace_UTF8(FoodSoft.getFoodcoopContact[:street]),0,0,'R')
+		pdf.Cell(0,5,replace_UTF8(APP_CONFIG[:contact].symbolize_keys[:street]),0,0,'R')
     pdf.Ln()
-		pdf.Cell(0,5,FoodSoft.getFoodcoopContact[:zip_code] + " " + replace_UTF8(FoodSoft.getFoodcoopContact[:city]),0,0,'R')
+		pdf.Cell(0,5,APP_CONFIG[:contact].symbolize_keys[:zip_code] + " " + replace_UTF8(APP_CONFIG[:contact].symbolize_keys[:city]),0,0,'R')
     pdf.Ln()
-		pdf.Cell(0,5,replace_UTF8(FoodSoft.getFoodcoopName[:phone]),0,0,'R')
+		pdf.Cell(0,5,replace_UTF8(APP_CONFIG[:name][:phone]),0,0,'R')
     pdf.Ln()
-		pdf.Cell(0,5,replace_UTF8(FoodSoft.getFoodcoopName[:email]),0,0,'R')
+		pdf.Cell(0,5,replace_UTF8(APP_CONFIG[:name][:email]),0,0,'R')
     pdf.Ln()
 		pdf.Cell(0,5,Date.today.strftime('%d.%m.%Y').to_s,0,0,'R')
     pdf.Ln()

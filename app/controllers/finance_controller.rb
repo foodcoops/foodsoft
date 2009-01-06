@@ -163,7 +163,7 @@ class FinanceController < ApplicationController
   def createArticleResult
     render :update do |page|
       @article = OrderArticleResult.new(params[:order_article_result])
-      @article.fc_markup = FoodSoft::getPriceMarkup
+      @article.fc_markup = APP_CONFIG[:price_markup]
       @article.make_gross if @article.tax && @article.deposit && @article.net_price
       if @article.valid?
         @article.save

@@ -12,4 +12,4 @@
       = yield
       #meta
         Foodcoop 
-        = link_to_if FoodSoft::getFoodcoopUrl, FoodSoft::getFoodcoopName, FoodSoft::getFoodcoopUrl
+        = link_to_if APP_CONFIG[:base_url], APP_CONFIG[:name], APP_CONFIG[:base_url]

@@ -8,10 +8,7 @@
 # * units_to_order (int): number of packaging units to be ordered according to the order quantity/tolerance
 #
 class OrderArticle < ActiveRecord::Base
-  
-  # gettext-option
-  untranslate_all
-  
+
   belongs_to :order
   belongs_to :article
   has_many :group_order_articles, :dependent => :destroy

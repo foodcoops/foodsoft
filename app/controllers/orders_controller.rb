@@ -133,13 +133,13 @@ class OrdersController < ApplicationController
   def text_fax_template
     order = Order.find(params[:id])
     supplier = order.supplier
-    contact = FoodSoft.getFoodcoopContact
-    text = _("Order for") + " #{FoodSoft.getFoodcoopName}"
+    contact = APP_CONFIG[:contact].symbolize_keys
+    text = _("Order for") + " #{APP_CONFIG[:name]}"
     text += "\n" + _("Customer number") + ": #{supplier.customer_number}" unless supplier.customer_number.blank?
     text += "\n" + _("Delivery date") + ": "
     text += "\n\n#{supplier.name}\n#{supplier.address}\nFAX: #{supplier.fax}\n\n"
     text += "****** " + _("Shipping address") + "\n\n"
-    text += "#{FoodSoft.getFoodcoopName}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
+    text += "#{APP_CONFIG[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
     text += "****** " + _("Articles") + "\n\n"
     text += _("Number") + "  " + _("Quantity") + "  " + _("Name") + "\n"
     # now display all ordered articles

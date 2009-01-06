@@ -1,6 +1,4 @@
 class Assignment < ActiveRecord::Base
-  # gettext-option
-  untranslate_all
   
   belongs_to :user
   belongs_to :task

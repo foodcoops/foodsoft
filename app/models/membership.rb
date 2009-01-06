@@ -1,8 +1,5 @@
 class Membership < ActiveRecord::Base
   
-  # gettext-option
-  untranslate_all
-  
   belongs_to :user
   belongs_to :group
   

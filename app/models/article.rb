@@ -31,22 +31,22 @@ class Article < ActiveRecord::Base
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def net_price=(net_price)
-    self[:net_price] = FoodSoft::delocalizeDecimalString(net_price)
+    self[:net_price] = String.delocalized_decimal(net_price)
   end
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def tax=(tax)
-    self[:tax] = FoodSoft::delocalizeDecimalString(tax)
+    self[:tax] = String.delocalized_decimal(tax)
   end
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def deposit=(deposit)
-    self[:deposit] = FoodSoft::delocalizeDecimalString(deposit)
+    self[:deposit] = String.delocalized_decimal(deposit)
   end
   
   # calculate the fc price and sets the attribute
   def calc_gross_price
-    self.gross_price = ((net_price + deposit) * (tax / 100 + 1)) * (FoodSoft::getPriceMarkup / 100 + 1)
+    self.gross_price = ((net_price + deposit) * (tax / 100 + 1)) * (APP_CONFIG[:price_markup] / 100 + 1)
   end
   
   # Returns true if article has been updated at least 2 days ago
@@ -150,7 +150,7 @@ class Article < ActiveRecord::Base
   end
   
   # convert units in foodcoop-size
-  # uses FoodSoft.get_units_factors to calc the price/unit_quantity
+  # uses unit factors in app_config.yml to calc the price/unit_quantity
   # returns new price and unit_quantity in array, when calc is possible => [price, unit_quanity]
   # returns false if units aren't foodsoft-compatible
   # returns nil if units are eqal
@@ -166,7 +166,8 @@ class Article < ActiveRecord::Base
           false
         end
       else # get factors for fc and supplier
-        fc_unit_factor, supplier_unit_factor = FoodSoft.get_units_factors[self.unit], FoodSoft.get_units_factors[self.shared_article.unit]
+        fc_unit_factor = APP_CONFIG[:units][self.unit]
+        supplier_unit_factor = APP_CONFIG[:units][self.shared_article.unit]
         if fc_unit_factor and supplier_unit_factor
           convertion_factor = fc_unit_factor / supplier_unit_factor
           new_price = BigDecimal((convertion_factor * shared_article.price).to_s).round(2)

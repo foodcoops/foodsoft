@@ -30,7 +30,7 @@
         %td=h user.last_name
         %td=h user.email
         %td=h roles.join(', ')
-        %td=h FoodSoft::format_date_time(user.last_login)
+        %td=h format_date_time(user.last_login)
         %td
           = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Benutzer_in bearbeiten', :title => 'Benutzer_in bearbeiten'), :action => 'editUser', :id => user)
           = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Benutzer_in löschen', :title => 'Benutzer_in löschen'), | 

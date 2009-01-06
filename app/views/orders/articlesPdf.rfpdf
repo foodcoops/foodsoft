@@ -20,7 +20,7 @@
     @ends = @order.ends.strftime('%d.%m.%Y').to_s
     @title = replace_UTF8(@order.name.to_s) + " | beendet am " + @ends
     
-    pdf.SetAuthor(FoodSoft.getFoodcoopName) 
+    pdf.SetAuthor(APP_CONFIG[:name]) 
     pdf.SetTitle(replace_UTF8("Artikelsortierung für #{@order.name}, #{format_date(@order.ends)}"))    
     pdf.AliasNbPages()
     pdf.AddPage()

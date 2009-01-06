@@ -1,9 +1,9 @@
 Hallo <%= user.nick %>!
 
-Der Kontostand deiner Bestellgruppe <%= group.name %> ist durch eine Buchung am <%= transaction.created_on.strftime('%d.%m.%Y um %H:%M') %> ins Minus gerutscht: <%= FoodSoft::format_currency(group.account_balance) %>
+Der Kontostand deiner Bestellgruppe <%= group.name %> ist durch eine Buchung am <%= transaction.created_on.strftime('%d.%m.%Y um %H:%M') %> ins Minus gerutscht: <%= group.account_balance %>
 
-Es wurden <%= FoodSoft::format_currency(transaction.amount) %> für "<%= transaction.note %>" abgebucht, die Buchung wurde von <%= transaction.user.nick %> erstellt.
+Es wurden <%= transaction.amount %> für "<%= transaction.note %>" abgebucht, die Buchung wurde von <%= transaction.user.nick %> erstellt.
 
 Bitte zahlt so bald wie möglich wieder Geld ein, um das Gruppenkonto auszugleichen.
 
-Viele Grüße von <%= FoodSoft::getFoodcoopName %>
+Viele Grüße von <%= APP_CONFIG[:name] %>

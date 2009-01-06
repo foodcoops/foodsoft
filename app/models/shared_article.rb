@@ -1,10 +1,7 @@
 class SharedArticle < ActiveRecord::Base
   
-  # gettext-option
-  untranslate_all
-  
   # connect to database from sharedLists-Application
-  SharedArticle.establish_connection(FoodSoft::get_shared_lists_config)
+  SharedArticle.establish_connection(APP_CONFIG[:shared_lists])
   # set correct table_name in external DB
   set_table_name :articles
   

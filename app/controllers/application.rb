@@ -1,12 +1,7 @@
-require 'user'
-
 class ApplicationController < ActionController::Base
-  # Gettext For i18n
-  # locale is chosen through browser http request
-  init_gettext "foodsoft"
-  
-  before_filter :select_foodcoop, :authenticate, :store_controller
-#  before_filter :ensureUTF8
+    
+  #before_filter :select_foodcoop
+  before_filter :authenticate, :store_controller
   after_filter  :send_email_messages, :remove_controller
   
   # sends a mail, when an error occurs
@@ -56,12 +51,12 @@ class ApplicationController < ActionController::Base
   private
 
     # selects the foodcoop depending on the subdomain
-    def select_foodcoop
-      # get subdomain and set FoodSoft-class-variable (for later config-requests)
-      FoodSoft.subdomain = request.subdomains.first
-      # set database-connection
-      ActiveRecord::Base.establish_connection(FoodSoft.get_database)
-    end
+#    def select_foodcoop
+#      # get subdomain and set FoodSoft-class-variable (for later config-requests)
+#      FoodSoft.subdomain = request.subdomains.first
+#      # set database-connection
+#      ActiveRecord::Base.establish_connection(FoodSoft.get_database)
+#    end
 
     # Ensures the HTTP content-type encoding is set to "UTF-8" for "text/html" contents.
     def ensureUTF8

@@ -10,8 +10,6 @@
 # * updated_by (User): the user who last updated this order
 #
 class GroupOrder < ActiveRecord::Base
-  # gettext-option
-  untranslate_all
   
   belongs_to :order
   belongs_to :order_group

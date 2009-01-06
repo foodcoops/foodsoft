@@ -9,8 +9,6 @@
 # * updated_on (timestamp): updated automatically by ActiveRecord
 #
 class GroupOrderArticle < ActiveRecord::Base
-  # gettext-option
-  untranslate_all
   
   belongs_to :group_order
   belongs_to :order_article

@@ -8,8 +8,6 @@
 # * created_on (timestamp)
 
 class GroupOrderArticleQuantity < ActiveRecord::Base
-  # gettext-option
-  untranslate_all
 
   belongs_to :group_order_article
   

@@ -2,11 +2,15 @@
 module ApplicationHelper
 
   def format_time(time = Time.now)
-    FoodSoft::format_date_time(time) unless time.nil?
+    I18n.l time, :format => "%d.%m.%Y %H:%M"
   end
 
   def format_date(time = Time.now)
-    FoodSoft::format_date(time) unless time.nil?
+    I18n.l time.to_date
+  end
+
+  def format_datetime(time = Time.now)
+    I18n.l time
   end
   
   # Creates ajax-controlled-links for pagination

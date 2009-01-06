@@ -1,9 +1,7 @@
 class SharedSupplier < ActiveRecord::Base
-  # used for gettext
-  untranslate_all
   
   # connect to database from sharedLists-Application
-  SharedSupplier.establish_connection(FoodSoft::get_shared_lists_config)
+  SharedSupplier.establish_connection(APP_CONFIG[:shared_lists])
   # set correct table_name in external DB
   set_table_name :suppliers
   

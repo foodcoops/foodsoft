@@ -15,7 +15,7 @@ class FinancialTransaction < ActiveRecord::Base
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def amount=(amount)
-    self[:amount] = FoodSoft::delocalizeDecimalString(amount)
+    self[:amount] = String.delocalized_decimal(amount)
   end
 
 end

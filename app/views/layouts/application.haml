@@ -17,7 +17,7 @@
       #logo
         %a{:href => "/"}
           <span>food</span>soft
-        %span{:style => "color:white; font-size:45%; letter-spacing: -1px;"}= FoodSoft::getFoodcoopName
+        %span{:style => "color:white; font-size:45%; letter-spacing: -1px;"}= APP_CONFIG[:name]
       #nav= render :partial => 'shared/nav'
 
     #main

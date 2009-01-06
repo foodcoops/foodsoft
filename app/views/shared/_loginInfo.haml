@@ -2,7 +2,7 @@
   %li
     = image_tag 'b_user.png' , :size => '7x10',  :border => 0, :alt => _("User")
     = link_to h(@current_user.nick), { :controller => 'index', :action => 'myProfile' }, { :title => _("User Settings") }
-  - if FoodSoft::getFoodcoopUrl
-    %li= link_to FoodSoft::getFoodcoopName, FoodSoft::getFoodcoopUrl, { :title => _("Go to your FoodCoop-Hompage") }
+  - if APP_CONFIG[:base_url]
+    %li= link_to APP_CONFIG[:name], APP_CONFIG[:base_url], { :title => _("Go to your FoodCoop-Hompage") }
   %li= link_to _("Help"), 'http://dev.foodcoops.net/wiki/FoodsoftDoku'
   %li= link_to _("Logout"), :controller => '/login', :action => 'logout'
