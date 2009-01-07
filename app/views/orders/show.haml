@@ -56,7 +56,7 @@
         = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'groupsPdf', :id => @order }, { :title => _("Download file") }
         |
         = link_to_remote _("Sort by articles"), :update => 'result', :url => {:action => 'show', :id => @order, :view => 'articles'}, :before => "Element.show('loader')", :success => "Element.hide('loader')"
-        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'articlesPdf', :id => @order }, { :title => _("Download file") }
+        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'articlesPdf', :id => @order, :format => :pdf}, { :title => _("Download file") }
         |
         =_ "Matrix" + ":"
         = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'matrixPdf', :id => @order }, { :title => _("Download file") }

@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.my_profile 'my_profile', :controller => 'index', :action => 'myProfile'
+
+  map.root :controller => 'index'
   
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -43,5 +45,6 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing the them or commenting them out if you're using named routes and resources.
 
   # Install the default route as the lowest priority.
-  map.connect ':controller/:action/:id', :controller => 'index'
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
 end

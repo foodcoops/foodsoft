@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   
   # Define layout exceptions for PDF actions:
   layout "application", :except => [:faxPdf, :matrixPdf, :articlesPdf, :groupsPdf]
+  prawnto :prawn => { :page_size => 'A4' }
   
   # List orders
   def index
@@ -117,15 +118,28 @@ class OrdersController < ApplicationController
   # Renders the articles-orderd PDF.
   def articlesPdf
     @order = Order.find(params[:id])
-    @options_for_rfpdf ||= {}
-    @options_for_rfpdf[:file_name] = "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf",
+            :prawn => { :left_margin => 48,
+                        :right_margin => 48,
+                        :top_margin => 48,
+                        :bottom_margin => 48 }
+#    @options_for_rfpdf ||= {}
+#    @options_for_rfpdf[:file_name] = "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf"
+
+#    send_data PdfGenerator.order_articles(@order),
+#      :filename => "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf",
+#      :type => 'application/pdf', :disposition => 'inline'
   end
   
   # Renders the fax PDF.
   def faxPdf
     @order = Order.find(params[:id])
-    @options_for_rfpdf ||= {}
-    @options_for_rfpdf[:file_name] = "#{Date.today}_#{@order.name}_FAX.pdf"
+#    @options_for_rfpdf ||= {}
+#    @options_for_rfpdf[:file_name] = "#{Date.today}_#{@order.name}_FAX.pdf"
+
+    send_data PdfGenerator.order_fax(@order),
+      :filename => "#{Date.today}_#{@order.name}_FAX.pdf",
+      :type => 'application/pdf', :disposition => 'inline'
   end
   
   # Renders the fax-text-file
