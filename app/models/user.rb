@@ -1,13 +1,24 @@
-require 'digest/sha1'
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: users
+#
+#  id                     :integer(4)      not null, primary key
+#  nick                   :string(255)     default(""), not null
+#  password_hash          :string(255)     default(""), not null
+#  password_salt          :string(255)     default(""), not null
+#  first_name             :string(255)     default(""), not null
+#  last_name              :string(255)     default(""), not null
+#  email                  :string(255)     default(""), not null
+#  phone                  :string(255)
+#  address                :string(255)
+#  created_on             :datetime        not null
+#  reset_password_token   :string(255)
+#  reset_password_expires :datetime
+#  last_login             :datetime
+#
 
-# A foodsoft user.
-# 
-# * memberships
-# * groups
-# * first_name, last_name, email, phone, address
-# * nick
-# * password (stored as a hash)
-# * settings (user properties via acts_as_configurable plugin)
+require 'digest/sha1'
 # specific user rights through memberships (see Group)
 class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy

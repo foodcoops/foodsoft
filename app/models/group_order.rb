@@ -1,14 +1,18 @@
-# A GroupOrder represents an Order placed by an OrderGroup.
-# 
-# Properties:
-# * order_id (int): association to the Order
-# * order_group_id (int): association to the OrderGroup
-# * group_order_articles: collection of associated GroupOrderArticles
-# * order_articles: collection of associated OrderArticles (through GroupOrderArticles)
-# * price (decimal): the price of this GroupOrder (either maximum price if current order or the actual price if finished order)
-# * lock_version (int): ActiveRecord optimistic locking column
-# * updated_by (User): the user who last updated this order
+# == Schema Information
+# Schema version: 20090102171850
 #
+# Table name: group_orders
+#
+#  id                 :integer(4)      not null, primary key
+#  order_group_id     :integer(4)      default(0), not null
+#  order_id           :integer(4)      default(0), not null
+#  price              :decimal(8, 2)   default(0.0), not null
+#  lock_version       :integer(4)      default(0), not null
+#  updated_on         :datetime        not null
+#  updated_by_user_id :integer(4)      default(0), not null
+#
+
+# A GroupOrder represents an Order placed by an OrderGroup.
 class GroupOrder < ActiveRecord::Base
   
   belongs_to :order

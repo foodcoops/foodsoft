@@ -84,5 +84,8 @@ module ApplicationHelper
   def title(page_title)
     content_for(:title) { page_title }
   end
-  
+
+  def tab_is_active?(tab)
+    tab[:active].detect {|c| c == controller.controller_name }
+  end
 end

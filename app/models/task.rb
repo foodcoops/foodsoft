@@ -1,3 +1,20 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: tasks
+#
+#  id             :integer(4)      not null, primary key
+#  name           :string(255)     default(""), not null
+#  description    :string(255)
+#  due_date       :date
+#  done           :boolean(1)
+#  group_id       :integer(4)
+#  assigned       :boolean(1)
+#  created_on     :datetime        not null
+#  updated_on     :datetime        not null
+#  required_users :integer(4)      default(1)
+#
+
 class Task < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments

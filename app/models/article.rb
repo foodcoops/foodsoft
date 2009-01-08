@@ -1,20 +1,26 @@
-# articles are the internal products which can ordered by ordergroups
-# 
-# articles have the following attributes:
-# * name	
-# * supplier_id	
-# * article_category_id  
-# * unit	                (string, e.g. 500gr, 1liter)
-# * note	
-# * availability	        (boolean)
-# * net_price, decimal    (net price, which will be edited by the user)
-# * gross_price, decimal  (gross price (or long price), incl. tax, deposit, price markup ... see environment.rb)
-# * tax, float            (the VAT, value added tax. default is 7.00 which means 7.00%)
-# * deposit, decimal       (deposit, e.g. for bottles)
-# * unit_quantity, int    (the internal(FC) size of trading unit)
-# * order_number, varchar (for the supplier)
-# * created_at, timestamp
-# * updated_at, timestamp
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: articles
+#
+#  id                  :integer(4)      not null, primary key
+#  name                :string(255)     default(""), not null
+#  supplier_id         :integer(4)      default(0), not null
+#  article_category_id :integer(4)      default(0), not null
+#  unit                :string(255)     default(""), not null
+#  note                :string(255)
+#  availability        :boolean(1)      default(TRUE), not null
+#  manufacturer        :string(255)
+#  origin              :string(255)
+#  shared_updated_on   :datetime
+#  net_price           :decimal(8, 2)
+#  gross_price         :decimal(8, 2)   default(0.0), not null
+#  tax                 :float
+#  deposit             :decimal(8, 2)   default(0.0)
+#  unit_quantity       :integer(4)      default(1), not null
+#  order_number        :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
 #
 class Article < ActiveRecord::Base
   belongs_to :supplier

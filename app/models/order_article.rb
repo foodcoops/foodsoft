@@ -1,12 +1,18 @@
-# An OrderArticle represents a single Article that is part of an Order.
-# 
-# Properties:
-# * order_id (int): association to the Order
-# * article_id (int): association to the Article
-# * quantity (int): number of items ordered by all OrderGroups for this order
-# * tolerance (int): number of items ordered as tolerance by all OrderGroups for this order
-# * units_to_order (int): number of packaging units to be ordered according to the order quantity/tolerance
+# == Schema Information
+# Schema version: 20090102171850
 #
+# Table name: order_articles
+#
+#  id             :integer(4)      not null, primary key
+#  order_id       :integer(4)      default(0), not null
+#  article_id     :integer(4)      default(0), not null
+#  quantity       :integer(4)      default(0), not null
+#  tolerance      :integer(4)      default(0), not null
+#  units_to_order :integer(4)      default(0), not null
+#  lock_version   :integer(4)      default(0), not null
+#
+
+# An OrderArticle represents a single Article that is part of an Order.
 class OrderArticle < ActiveRecord::Base
 
   belongs_to :order

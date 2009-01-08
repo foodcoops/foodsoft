@@ -1,11 +1,18 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: group_order_article_results
+#
+#  id                      :integer(4)      not null, primary key
+#  order_article_result_id :integer(4)      default(0), not null
+#  group_order_result_id   :integer(4)      default(0), not null
+#  quantity                :decimal(6, 3)   default(0.0)
+#  tolerance               :integer(4)
+#
+
 # An GroupOrderArticleResult represents a group-order for a single Article and its quantities, 
 # according to the order quantity/tolerance.
 # The GroupOrderArticleResult is part of a finished Order, see OrderArticleResult.
-# 
-# Properties:
-# * order_article_result_id (int)
-# * group_order_result_id (int): associated with OrderGroup through GroupOrderResult.group_name
-# * quantity (int)
 #
 class GroupOrderArticleResult < ActiveRecord::Base
 

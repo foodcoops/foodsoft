@@ -1,5 +1,5 @@
 # This file is auto-generated from the current state of the database. Instead of editing this file, 
-# please use the migrations feature of ActiveRecord to incrementally modify your database, and
+# please use the migrations feature of Active Record to incrementally modify your database, and
 # then regenerate this schema definition.
 #
 # Note that this schema.rb definition is the authoritative source for your database schema. If you need
@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 25) do
+ActiveRecord::Schema.define(:version => 20090102155714) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(:version => 25) do
     t.integer "tolerance"
   end
 
-  add_index "group_order_article_results", ["order_article_result_id"], :name => "index_group_order_article_results_on_order_article_result_id"
   add_index "group_order_article_results", ["group_order_result_id"], :name => "index_group_order_article_results_on_group_order_result_id"
+  add_index "group_order_article_results", ["order_article_result_id"], :name => "index_group_order_article_results_on_order_article_result_id"
 
   create_table "group_order_articles", :force => true do |t|
     t.integer  "group_order_id",   :default => 0, :null => false
@@ -157,6 +157,18 @@ ActiveRecord::Schema.define(:version => 25) do
 
   add_index "invites", ["token"], :name => "index_invites_on_token"
 
+  create_table "invoices", :force => true do |t|
+    t.integer  "supplier_id"
+    t.integer  "delivery_id"
+    t.string   "number"
+    t.date     "date"
+    t.date     "paid_on"
+    t.text     "note"
+    t.decimal  "amount",      :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "memberships", :force => true do |t|
     t.integer "group_id", :default => 0, :null => false
     t.integer "user_id",  :default => 0, :null => false
@@ -175,8 +187,8 @@ ActiveRecord::Schema.define(:version => 25) do
     t.datetime "created_on",                      :null => false
   end
 
-  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
   add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
   create_table "order_article_results", :force => true do |t|
     t.integer "order_id",                                     :default => 0,   :null => false
@@ -223,9 +235,9 @@ ActiveRecord::Schema.define(:version => 25) do
     t.string   "invoice_date"
   end
 
-  add_index "orders", ["starts"], :name => "index_orders_on_starts"
   add_index "orders", ["ends"], :name => "index_orders_on_ends"
   add_index "orders", ["finished"], :name => "index_orders_on_finished"
+  add_index "orders", ["starts"], :name => "index_orders_on_starts"
 
   create_table "suppliers", :force => true do |t|
     t.string  "name",               :default => "", :null => false
@@ -258,8 +270,8 @@ ActiveRecord::Schema.define(:version => 25) do
     t.integer  "required_users", :default => 1
   end
 
-  add_index "tasks", ["name"], :name => "index_tasks_on_name"
   add_index "tasks", ["due_date"], :name => "index_tasks_on_due_date"
+  add_index "tasks", ["name"], :name => "index_tasks_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "nick",                   :default => "", :null => false
@@ -276,7 +288,7 @@ ActiveRecord::Schema.define(:version => 25) do
     t.datetime "last_login"
   end
 
-  add_index "users", ["nick"], :name => "index_users_on_nick", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["nick"], :name => "index_users_on_nick", :unique => true
 
 end

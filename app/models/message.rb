@@ -1,13 +1,19 @@
-# A message within the foodsoft.
-# 
-# * sender (User) - the sending User (might be nil if it is a system message)
-# * recipient (User) - the receiving User
-# * recipients (String) - list of all recipients of this message as User.nick/Group.name
-# * subject (string) - message subject
-# * body (string) - message body
-# * read? (boolean) - message read status
-# * email_state (integer) - email state, one of EMAIL_STATE.values
-# * created_on (timestamp) - creation timestamp
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: messages
+#
+#  id           :integer(4)      not null, primary key
+#  sender_id    :integer(4)
+#  recipient_id :integer(4)      default(0), not null
+#  recipients   :string(255)     default(""), not null
+#  subject      :string(255)     default(""), not null
+#  body         :text            default(""), not null
+#  read         :boolean(1)      not null
+#  email_state  :integer(4)      default(0), not null
+#  created_on   :datetime        not null
+#
+
 class Message < ActiveRecord::Base
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
   belongs_to :recipient, :class_name => "User", :foreign_key => "recipient_id"

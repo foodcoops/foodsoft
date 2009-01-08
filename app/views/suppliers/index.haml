@@ -1,11 +1,12 @@
-%h1 Lieferantinnen
+- title "LieferantInnen"
+
 - if @current_user.role_suppliers?
   %p
     %i 
       Erstelle eine 
-      = link_to 'neue Lieferantin', :action => 'new'
+      = link_to 'neue Lieferantin', new_supplier_path
       oder 
-      = link_to 'importiere', :action => 'shared_suppliers'
+      = link_to 'importiere', shared_suppliers_suppliers_path
       aus der externen ArtikelDatenbank.
 
 .left_column{:style => "width:100%"}
@@ -22,7 +23,7 @@
           - for column in @supplier_columns
             %td
               - if column == 'name'
-                = link_to supplier[column], :action => 'show', :id => supplier
+                = link_to supplier[column], supplier
               - else
                 =h supplier[column]
           %td= link_to 'Artikel anzeigen', :controller => 'articles', :action => 'list', :id => supplier

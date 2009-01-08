@@ -1,11 +1,17 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: group_order_article_quantities
+#
+#  id                     :integer(4)      not null, primary key
+#  group_order_article_id :integer(4)      default(0), not null
+#  quantity               :integer(4)      default(0)
+#  tolerance              :integer(4)      default(0)
+#  created_on             :datetime        not null
+#
+
 # stores the quantity, tolerance and timestamp of an GroupOrderArticle
 # Considers every update of an article-order, so may rows for one group_order_article ar possible.
-# 
-# properties:
-# * group_order_article_id (int)
-# * quantity (int)
-# * tolerance (in)
-# * created_on (timestamp)
 
 class GroupOrderArticleQuantity < ActiveRecord::Base
 

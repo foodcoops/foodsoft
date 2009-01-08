@@ -1,3 +1,25 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: orders
+#
+#  id                 :integer(4)      not null, primary key
+#  name               :string(255)     default(""), not null
+#  supplier_id        :integer(4)      default(0), not null
+#  starts             :datetime        not null
+#  ends               :datetime
+#  note               :string(255)
+#  finished           :boolean(1)      not null
+#  booked             :boolean(1)      not null
+#  lock_version       :integer(4)      default(0), not null
+#  updated_by_user_id :integer(4)
+#  invoice_amount     :decimal(8, 2)   default(0.0), not null
+#  deposit            :decimal(8, 2)   default(0.0)
+#  deposit_credit     :decimal(8, 2)   default(0.0)
+#  invoice_number     :string(255)
+#  invoice_date       :string(255)
+#
+
 class Order < ActiveRecord::Base
   has_many :order_articles, :dependent => :destroy
   has_many :articles, :through => :order_articles

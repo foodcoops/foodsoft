@@ -1,0 +1,28 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: invoices
+#
+#  id          :integer(4)      not null, primary key
+#  supplier_id :integer(4)
+#  delivery_id :integer(4)
+#  number      :string(255)
+#  date        :date
+#  paid_on     :date
+#  amount      :decimal(8, 2)   default(0.0), not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+class Invoice < ActiveRecord::Base
+
+  belongs_to :supplier
+
+  validates_presence_of :supplier_id
+  validates_uniqueness_of :date, :scope => [:supplier_id]
+
+  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
+  def amount=(amount)
+    self[:amount] = String.delocalized_decimal(amount)
+  end
+end

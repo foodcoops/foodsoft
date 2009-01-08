@@ -1,3 +1,23 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: order_article_results
+#
+#  id             :integer(4)      not null, primary key
+#  order_id       :integer(4)      default(0), not null
+#  name           :string(255)     default(""), not null
+#  unit           :string(255)     default(""), not null
+#  note           :string(255)
+#  net_price      :decimal(8, 2)   default(0.0)
+#  gross_price    :decimal(8, 2)   default(0.0), not null
+#  tax            :float           default(0.0), not null
+#  deposit        :decimal(8, 2)   default(0.0)
+#  fc_markup      :float           default(0.0), not null
+#  order_number   :string(255)
+#  unit_quantity  :integer(4)      default(0), not null
+#  units_to_order :decimal(6, 3)   default(0.0), not null
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 first:
   id: 1

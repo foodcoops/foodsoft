@@ -1,6 +1,31 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: suppliers
+#
+#  id                 :integer(4)      not null, primary key
+#  name               :string(255)     default(""), not null
+#  address            :string(255)     default(""), not null
+#  phone              :string(255)     default(""), not null
+#  phone2             :string(255)
+#  fax                :string(255)
+#  email              :string(255)
+#  url                :string(255)
+#  contact_person     :string(255)
+#  customer_number    :string(255)
+#  delivery_days      :string(255)
+#  order_howto        :string(255)
+#  note               :string(255)
+#  shared_supplier_id :integer(4)
+#  min_order_quantity :string(255)
+#
+
 class Supplier < ActiveRecord::Base
   has_many :articles, :dependent => :destroy
   has_many :orders
+  has_many :deliveries
+  has_many :invoices
+
   attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number, :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
 	
   validates_length_of :name, :in => 4..30

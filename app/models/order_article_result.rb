@@ -1,19 +1,24 @@
-# An OrderArticleResult represents a single Article that is part of a *finished* Order.
-# 
-# Properties:
-# * order_id	(int): association to the Order
-# * name (string): article name
-# * unit (string)
-# * note (string): for post-editing the ordered article. informations like "new tax is ..."
-# * net_price (decimal): the net price
-# * gross_price (decimal): incl tax, deposit, fc-markup
-# * tax	(int)
-# * deposit	(decimal)
-# * fc_markup (float) 
-# * order_number (string)
-# * unit_quantity (int): the internal(FC) size of trading unit
-# * units_to_order	(int): number of packaging units to be ordered according to the order quantity/tolerance
+# == Schema Information
+# Schema version: 20090102171850
 #
+# Table name: order_article_results
+#
+#  id             :integer(4)      not null, primary key
+#  order_id       :integer(4)      default(0), not null
+#  name           :string(255)     default(""), not null
+#  unit           :string(255)     default(""), not null
+#  note           :string(255)
+#  net_price      :decimal(8, 2)   default(0.0)
+#  gross_price    :decimal(8, 2)   default(0.0), not null
+#  tax            :float           default(0.0), not null
+#  deposit        :decimal(8, 2)   default(0.0)
+#  fc_markup      :float           default(0.0), not null
+#  order_number   :string(255)
+#  unit_quantity  :integer(4)      default(0), not null
+#  units_to_order :decimal(6, 3)   default(0.0), not null
+#
+
+# An OrderArticleResult represents a single Article that is part of a *finished* Order.
 class OrderArticleResult < ActiveRecord::Base
   belongs_to :order
   has_many :group_order_article_results, :dependent => :destroy

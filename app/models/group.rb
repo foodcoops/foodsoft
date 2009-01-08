@@ -1,13 +1,29 @@
-# Groups organize the User. 
-# 
-# Group have the following attributes
-# * name
-# * description
-# * type (to specify, if it is a OrderGroup)
-# * role_admin, role_suppliers, role_article_eta, role_finance, role_orders
-# * weekly_task (if the group should do a job ervery week)
-# * weekday (on which weekday should the job be done? 1 means monday and so on)
+# == Schema Information
+# Schema version: 20090102171850
 #
+# Table name: groups
+#
+#  id                  :integer(4)      not null, primary key
+#  type                :string(255)     default(""), not null
+#  name                :string(255)     default(""), not null
+#  description         :string(255)
+#  actual_size         :integer(4)
+#  account_balance     :decimal(8, 2)   default(0.0), not null
+#  account_updated     :datetime
+#  created_on          :datetime        not null
+#  role_admin          :boolean(1)      not null
+#  role_suppliers      :boolean(1)      not null
+#  role_article_meta   :boolean(1)      not null
+#  role_finance        :boolean(1)      not null
+#  role_orders         :boolean(1)      not null
+#  weekly_task         :boolean(1)
+#  weekday             :integer(4)
+#  task_name           :string(255)
+#  task_description    :string(255)
+#  task_required_users :integer(4)      default(1)
+#
+
+# Groups organize the User. 
 # A Member gets the roles from the Group
 class Group < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy

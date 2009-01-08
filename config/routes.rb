@@ -1,6 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.resources :invoices
+  map.resources :suppliers, 
+    :has_many => [:deliveries],
+    :collection => { :shared_suppliers => :get }
+
   map.my_profile 'my_profile', :controller => 'index', :action => 'myProfile'
+  map.my_order_group 'my_order_group', :controller => 'index', :action => 'myOrdergroup'
 
   map.root :controller => 'index'
   

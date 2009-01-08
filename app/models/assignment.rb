@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: assignments
+#
+#  id       :integer(4)      not null, primary key
+#  user_id  :integer(4)      default(0), not null
+#  task_id  :integer(4)      default(0), not null
+#  accepted :boolean(1)
+#
+
 class Assignment < ActiveRecord::Base
   
   belongs_to :user

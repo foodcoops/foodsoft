@@ -1,6 +1,5 @@
 = error_messages_for 'supplier'
 
-<!--[form:supplier]-->
 - if @supplier.shared_supplier
   %p Lieferantin wird mit externer Datenbank verknüpft.
 .edit_form{:style=>"width:30em"}
@@ -58,5 +57,4 @@
         %label{:for => "supplier_min_order_quantity"} Mindestbestellmenge
       %td= @f.text_field :min_order_quantity
   = @f.hidden_field :shared_supplier_id
-<!--[eoform:supplier]-->
 

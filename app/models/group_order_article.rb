@@ -1,12 +1,18 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: group_order_articles
+#
+#  id               :integer(4)      not null, primary key
+#  group_order_id   :integer(4)      default(0), not null
+#  order_article_id :integer(4)      default(0), not null
+#  quantity         :integer(4)      default(0), not null
+#  tolerance        :integer(4)      default(0), not null
+#  updated_on       :datetime        not null
+#
+
 # A GroupOrderArticle stores the sum of how many items of an OrderArticle are ordered as part of a GroupOrder.
 # The chronologically order of the OrderGroup - activity are stored in GroupOrderArticleQuantity
-# 
-# Properties:
-# * group_order_id (int): association to the GroupOrder
-# * order_article_id (int): association to the OrderArticle
-# * quantity (int): number of items ordered
-# * tolerance (int): number of items ordered as tolerance
-# * updated_on (timestamp): updated automatically by ActiveRecord
 #
 class GroupOrderArticle < ActiveRecord::Base
   

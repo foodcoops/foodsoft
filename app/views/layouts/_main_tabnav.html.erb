@@ -1,0 +1,61 @@
+<%
+  u = @current_user
+  tabs = [
+      { :name => "Start", :url => root_path, :active => ["index", "messages", "tasks"],
+        :subnav => [
+          { :name => "Members", :url => "/index/foodcoop_members"},
+          { :name => "Workgroups", :url => "/index/workgroups"},
+          { :name => "Tasks", :url => "/tasks"},
+          { :name => "Messages", :url => "/messages/inbox"},
+          { :name => "My Ordergroup", :url => my_order_group_path},
+          { :name => "My Ordergroup", :url => my_profile_path}
+        ]
+      },
+      { :name => "Orders", :url => "/ordering", :active => ["orders", "ordering"],
+        :subnav => [
+          { :name => "Order", :url => "/ordering" },
+          { :name => "My orders", :url => "/ordering/myOrders" },
+          { :name => "Manage orders", :url => "/orders", :access? => (u.role_orders?) }
+        ]
+      },
+      { :name => "Articles", :url => "/articles", :active => ["articles", "suppliers"],
+        :access? => (u.role_article_meta? || u.role_suppliers?),
+        :subnav => [
+          { :name => "Show articles", :url => "/articles/list" },
+          { :name => "Categories", :url => "/articles" },
+          { :name => "Suppliers", :url => suppliers_path, :access? => (u.role_suppliers?) }
+        ]
+      },
+      { :name => "Finance", :url => "/finance", :active => ["finance", "invoices"],
+        :access? => (u.role_finance?),
+        :subnav => [
+          { :name => "Ordergroups", :url => "/finance/listOrdergroups" },
+          { :name => "Balance orders", :url => "/finance/listOrders" },
+          { :name => "Invoices", :url => invoices_path }
+        ]
+      },
+      { :name => "Administration", :url => "/admin", :active => ["admin"],
+        :access? => (u.role_admin?),
+        :subnav => [
+          { :name => "Users", :url => "/admin/listUsers" },
+          { :name => "Groups", :url => "/admin/listGroups" }
+        ]
+      }
+    ]
+-%>
+<ul>
+  <% for tab in tabs -%>
+    <% unless tab[:access?] and tab[:access?] == false %>
+      <li class="<%= 'current' if tab_is_active?(tab) %>">
+        <%= link_to tab[:name], tab[:url] %>
+        <ul>
+          <% for subtab in tab[:subnav] -%>
+            <% unless subtab[:access?] and subtab[:access?] == false %>
+              <li><%= link_to subtab[:name], subtab[:url] %></li>
+            <% end -%>
+          <% end -%>
+        </ul>
+      </li>
+    <% end -%>
+  <% end -%>
+</ul>

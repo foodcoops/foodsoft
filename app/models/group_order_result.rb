@@ -1,10 +1,15 @@
+# == Schema Information
+# Schema version: 20090102171850
+#
+# Table name: group_order_results
+#
+#  id         :integer(4)      not null, primary key
+#  order_id   :integer(4)      default(0), not null
+#  group_name :string(255)     default(""), not null
+#  price      :decimal(8, 2)   default(0.0), not null
+#
+
 # OrderGroups, which participate on a specific order will have a line
-# Properties:
-# * order_id, int
-# * group_name, the name of the group
-# * price, decimal
-# * group_order_article_results: collection of associated GroupOrderArticleResults
-# 
 class GroupOrderResult < ActiveRecord::Base
   
   belongs_to :order

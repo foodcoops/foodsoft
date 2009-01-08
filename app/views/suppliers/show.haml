@@ -47,8 +47,8 @@
     %td{:style => "font-weight:bold"}=h @supplier.min_order_quantity  
 %br/
 - if @current_user.role_suppliers?
-  = link_to 'Bearbeiten', :action => 'edit', :id => @supplier
+  = link_to 'Bearbeiten', edit_supplier_path(@supplier)
   |
-  = link_to 'Löschen', { :action => 'destroy', :id => @supplier }, :confirm => 'Bist Du sicher?', :method => "post"
+  = link_to 'Löschen', @supplier, :confirm => 'Bist Du sicher?', :method => :delete
   |
-= link_to 'zurück', :action => 'list'
+= link_to 'zurück', suppliers_path

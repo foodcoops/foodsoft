@@ -1,19 +1,12 @@
 class SuppliersController < ApplicationController
   before_filter :authenticate_suppliers, :except => [:index, :list]
 
-  verify :method => :post, :only => [ :destroy, :create, :update ], :redirect_to => { :action => :list }
-
   # messages
   MSG_SUPPLIER_DESTOYED = "Lieferant wurde gelöscht"
   MSG_SUPPLIER_UPDATED = 'Lieferant wurde aktualisiert'
   MSG_SUPPLIER_CREATED = "Lieferant wurde erstellt"
   
   def index
-    list
-    render :action => 'list'
-  end
-
- def list
     @supplier_column_names = ["Name", "Telefon", "Email", "Kundennummer"]
     @supplier_columns = ["name", "phone", "email", "customer_number"]
     @suppliers = Supplier.find :all
@@ -40,7 +33,7 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new(params[:supplier])
     if @supplier.save
       flash[:notice] = MSG_SUPPLIER_CREATED
-      redirect_to :action => 'list'
+      redirect_to suppliers_path
     else
       render :action => 'new'
     end 
@@ -54,19 +47,20 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.find(params[:id])
     if @supplier.update_attributes(params[:supplier])
       flash[:notice] = MSG_SUPPLIER_UPDATED
-      redirect_to :action => 'show', :id => @supplier
+      redirect_to @supplier
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    Supplier.find(params[:id]).destroy
+    @supplier = Supplier.find(params[:id])
+    @supplier.destroy
     flash[:notice] = MSG_SUPPLIER_DESTOYED
-    redirect_to :action => 'list'
+    redirect_to suppliers_path
     rescue => e
       flash[:error] = _("An error has occurred: ") + e.message
-      redirect_to :action => 'show', :id => params[:id]
+      redirect_to @supplier
   end  
   
   # gives a list with all available shared_suppliers

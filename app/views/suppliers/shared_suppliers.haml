@@ -24,4 +24,4 @@
         %td=h shared_supplier.note
         %td=h shared_supplier.delivery_days
         %td= image_tag("icon_message.gif", :size => "16x16", :border => "0",:alt => "abonniert!") if shared_supplier.supplier
-        %td= link_to "abonnieren", :action => "new", :shared_supplier_id => shared_supplier unless shared_supplier.supplier
+        %td= link_to "abonnieren", new_supplier_path(:shared_supplier_id => shared_supplier) unless shared_supplier.supplier
