@@ -17,11 +17,11 @@ module ApplicationHelper
   # see also the plugin "will_paginate"
   def pagination_links_remote(collection, per_page = @per_page, params = {})
     # Translations
-    prev_label = '&laquo; ' + _('Previous')
+    previous_label = '&laquo; ' + _('Previous')
     next_label = _('Next') + ' &raquo;'
     # Merge other url-options for will_paginate
     params = params.merge({:per_page => per_page})
-    will_paginate collection, {:params => params, :remote => true, :prev_label => prev_label, :next_label => next_label}
+    will_paginate collection, {:params => params, :remote => true, :previous_label => previous_label, :next_label => next_label}
   end
   
   # Link-collection for per_page-options when using the pagination-plugin
