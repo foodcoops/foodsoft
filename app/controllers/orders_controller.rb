@@ -111,8 +111,7 @@ class OrdersController < ApplicationController
   # Renders the groups-orderd PDF.
   def groupsPdf
     @order = Order.find(params[:id])
-    @options_for_rfpdf ||= {}
-    @options_for_rfpdf[:file_name] = "#{Date.today}_#{@order.name}_GruppenSortierung.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.name}_GruppenSortierung.pdf"
   end
   
   # Renders the articles-orderd PDF.
@@ -123,23 +122,12 @@ class OrdersController < ApplicationController
                         :right_margin => 48,
                         :top_margin => 48,
                         :bottom_margin => 48 }
-#    @options_for_rfpdf ||= {}
-#    @options_for_rfpdf[:file_name] = "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf"
-
-#    send_data PdfGenerator.order_articles(@order),
-#      :filename => "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf",
-#      :type => 'application/pdf', :disposition => 'inline'
   end
   
   # Renders the fax PDF.
   def faxPdf
     @order = Order.find(params[:id])
-#    @options_for_rfpdf ||= {}
-#    @options_for_rfpdf[:file_name] = "#{Date.today}_#{@order.name}_FAX.pdf"
-
-    send_data PdfGenerator.order_fax(@order),
-      :filename => "#{Date.today}_#{@order.name}_FAX.pdf",
-      :type => 'application/pdf', :disposition => 'inline'
+    prawnto :filename => "#{Date.today}_#{@order.name}_FAX.pdf"
   end
   
   # Renders the fax-text-file
@@ -171,8 +159,7 @@ class OrdersController < ApplicationController
   # Renders the matrix PDF.
   def matrixPdf
     @order = Order.find(params[:id])
-    @options_for_rfpdf ||= {}
-    @options_for_rfpdf[:file_name] = "#{Date.today}_#{@order.name}_Matrix.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.name}_Matrix.pdf"
   end
 
   # sends a form for adding a new comment

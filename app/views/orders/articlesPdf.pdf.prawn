@@ -13,11 +13,6 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom-5] do
 end
 
 # Start rendering
-pdf.table [["Bestellgruppe", "Menge", "Preis"]],
-  :font_size => 8,
-  :font_style => :italic,
-  :widths => { 0 => 200, 1 => 40, 2 => 40 }
-pdf.move_down 10
 
 for article in order_articles
   pdf.text "#{article.name} (#{article.unit} | #{article.unit_quantity.to_s} | #{number_to_currency(article.gross_price)})",
@@ -32,7 +27,10 @@ for article in order_articles
 
   pdf.table data,
     :font_size => 8,
+    :headers => ["Bestellgruppe", "Menge", "Preis"],
     :widths => { 0 => 200, 1 => 40, 2 => 40 },
-    :border_style => :grid
+    :border_style => :grid,
+    :row_colors => ['ffffff','ececec'],
+    :vertical_padding => 3
   pdf.move_down 10
 end
