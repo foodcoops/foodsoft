@@ -3,9 +3,9 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :finance do |finance|
     finance.resources :invoices
     finance.connect 'transactions/:action/:id', :controller => 'transactions'
+    finance.connect 'balancing/:action/:id', :controller => 'balancing'
   end
 
-  #map.resources :invoices
   map.resources :suppliers, 
     :has_many => [:deliveries],
     :collection => { :shared_suppliers => :get }

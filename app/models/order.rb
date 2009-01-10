@@ -45,7 +45,10 @@ class Order < ActiveRecord::Base
 
   # easyier find of next or previous model
   acts_as_ordered :order => "ends"
-  
+
+  named_scope :finished, :conditions => { :finished => true },
+    :order => 'ends DESC', :include => :supplier
+
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def invoice_amount=(amount)
     self[:invoice_amount] = String.delocalized_decimal(amount)

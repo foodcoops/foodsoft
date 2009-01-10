@@ -3,7 +3,7 @@
   .box_title
     %h2 Unpaid invoices
   .column_content
-    %p= link_to "Show all invoices", invoices_path
+    %p= link_to "Show all invoices", finance_invoices_path
     %table.list
       %thead
         %tr
@@ -17,13 +17,13 @@
             %td= format_date(invoice.date)
             %td= number_to_currency(invoice.amount)
             %td=h invoice.supplier.name
-            %td= link_to "Edit", edit_invoice_path(invoice)
+            %td= link_to "Edit", edit_finance_invoice_path(invoice)
 
   .box_title
     %h2 letzte Überweisungen
   .column_content
     %p
-      = link_to "Bestellgruppen", :action => "listOrdergroups"
+      = link_to "Bestellgruppen", :controller => 'finance/transactions'
     %table.list
       %thead
         %tr
@@ -43,7 +43,7 @@
   .box_title
     %h2 noch nicht abgerechnet
   .column_content
-    %p= link_to "Bestellungsübersicht", :action => "listOrders"
+    %p= link_to "Bestellungsübersicht", :controller => 'finance/orders'
     - unless @orders.empty?
       %table.list
         %thead

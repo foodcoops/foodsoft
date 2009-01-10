@@ -7,4 +7,4 @@
   %p
     = submit_tag "Speichern"
     |
-    = link_to_remote 'Abbrechen', :update => 'results', :url => { :action => 'editOrder', :id => @order, :view => 'groupsOverview' }, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+    = link_to_remote 'Abbrechen', :update => 'results', :url => { :action => 'edit', :id => @order, :view => 'groupsOverview' }, :before => "Element.show('loader')", :success => "Element.hide('loader')"
