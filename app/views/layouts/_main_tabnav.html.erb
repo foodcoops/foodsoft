@@ -26,10 +26,10 @@
           { :name => "Suppliers", :url => suppliers_path, :access? => (u.role_suppliers?) }
         ]
       },
-      { :name => "Finance", :url => "/finance", :active => ["finance", "invoices"],
+      { :name => "Finance", :url => "/finance", :active => ["finance", "invoices", "transactions"],
         :access? => (u.role_finance?),
         :subnav => [
-          { :name => "Ordergroups", :url => "/finance/listOrdergroups" },
+          { :name => "Manage accounts", :url => "/finance/transactions" },
           { :name => "Balance orders", :url => "/finance/listOrders" },
           { :name => "Invoices", :url => finance_invoices_path }
         ]

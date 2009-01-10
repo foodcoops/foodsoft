@@ -1,4 +1,5 @@
-<h1>Kontoauszug für <%= @group.name %></h1>
+<% title "Kontoauszug für #{@group.name}" %>
+
 <p>
   <b>Kontostand: <%= number_to_currency(@group.account_balance) -%></b>
   <span style="color:grey">(zuletzt aktualisiert vor <%= distance_of_time_in_words(Time.now, @group.account_updated) -%>)</span>
@@ -13,12 +14,12 @@
    <%= observe_field 'query',  :frequency => 2,
          :before => "Element.show('loader')",
          :success => "Element.hide('loader')",
-         :url => {:action => 'listTransactions'},
+         :url => {:action => 'list'},
          :with => 'query' %>
     <div id="table">          
-    <%= render :partial => "/financial_transactions/list" %>
+    <%= render :partial => "list" %>
     </div>
-    <p><%= link_to 'Neue Transaktion', :action => 'newTransaction', :id => @group %></p>
+    <p><%= link_to 'Neue Transaktion', :action => 'new', :id => @group %></p>
   </div>
+  <%= link_to 'Gruppenübersicht', :action => 'index' %>
 </div>
-    <%= link_to 'Bestellgruppen', :controller => 'finance', :action => "listOrdergroups" %>

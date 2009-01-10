@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :finance do |finance|
     finance.resources :invoices
+    finance.connect 'transactions/:action/:id', :controller => 'transactions'
   end
 
   #map.resources :invoices

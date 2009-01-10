@@ -19,10 +19,10 @@
   %tbody
     - for group in @groups
       %tr{:class => cycle('even','odd', :name => 'groups')}
-        %td= @current_user.role_admin? ? link_to(group.name, {:controller => 'admin', :action => 'showGroup', :id => group}, {:title => _("Show ordergroup")}) : group.name
+        %td= group.name
         %td= group.actual_size
         %td{:class => "currency", :style => "width:5em"}= number_to_currency(group.account_balance)
         %td{:class => "actions"}
-          = link_to image_tag("euro_new.png", :size => "16x16", :alt => _("New transaction"), :border => "0"), {:action => 'newTransaction', :id => group}, {:title => _("New transaction")}
-          = link_to image_tag("b_browse.png", :size => "16x16", :border => "0", :alt => 'Kontoauszug'), {:action => 'listTransactions', :id => group}, {:title => _("List transactions")}
+          = link_to image_tag("euro_new.png", :size => "16x16", :alt => _("New transaction"), :border => "0"), {:action => 'new', :id => group}, {:title => _("New transaction")}
+          = link_to image_tag("b_browse.png", :size => "16x16", :border => "0", :alt => 'Kontoauszug'), {:action => 'list', :id => group}, {:title => _("List transactions")}
         

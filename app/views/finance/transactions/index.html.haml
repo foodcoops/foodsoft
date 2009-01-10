@@ -1,8 +1,9 @@
-- title _("Manage accounts")
+%h1 Manage accounts
 %p
   %i
     =_ "To create multiple transactions at once please follow this "
-    = link_to _("link"), :action => 'new_transactions'
+    = link_to _("link"), :action => 'new_collection'
+
 .left_column{:style=>"width:50em"}
   .box_title
     %h2=_ "Ordergroups"
@@ -15,10 +16,10 @@
       = observe_field 'query',  :frequency => 2, |
         :before => "Element.show('loader')", |
         :success => "Element.hide('loader')", |
-        :url => {:action => 'listOrdergroups'}, |
+        :url => {:action => 'index'}, |
         :with => 'query' |
     #table
-      = render :partial => "listOrdergroups"
+      = render :partial => "ordergroups"
     %br/
     - if @current_user.role_admin?
       = link_to _("New ordergroup"), :controller => 'admin', :action => 'newOrderGroup'

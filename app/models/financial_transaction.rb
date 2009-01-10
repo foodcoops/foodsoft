@@ -19,7 +19,7 @@ class FinancialTransaction < ActiveRecord::Base
   
   validates_presence_of :note, :user_id, :order_group_id
   validates_numericality_of :amount
-  
+
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def amount=(amount)
     self[:amount] = String.delocalized_decimal(amount)

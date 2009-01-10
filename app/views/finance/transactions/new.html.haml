@@ -1,0 +1,21 @@
+%h1 New transaction
+
+.edit_form{ :style => "width:30em" }
+  - form_for(@financial_transaction, :url => { :action => 'create' }) do |f|
+    = f.error_messages
+    = f.hidden_field :order_group_id
+    %p
+      Group:
+      %b=h @group.name
+    %p
+      = f.label :amount
+      %br/
+      = f.text_field :amount, :size => 10
+    %p
+      = f.label :note
+      %br/
+      = f.text_area :note, :cols => 40, :rows => 5
+    %p
+      = submit_tag "Save"
+
+= link_to "Back", :controller => 'transactions'
