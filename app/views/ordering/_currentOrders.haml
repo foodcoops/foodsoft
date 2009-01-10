@@ -1,34 +1,32 @@
-- if @orderGroup
-  .right_column{:style => "width:70%"}
-    .box_title
-      %h2=_ "Running orders"
-    .column_content
-      - unless @currentOrders.empty?
-        %table.list
-          %thead
-            %tr
-              %th=_ "Name"
-              %th=_ "Supplier"
-              %th=_ "End"
-              %th=_ "Who ordered?"
-              %th=_ "Sum"
-          %tbody
-            - total = 0
-            - @currentOrders.each do |order|
-              %tr{:class => cycle('even', 'odd', :name => 'current_orders')}
-                %td= link_to order.name, :controller => 'ordering', :action => 'order', :id => order 
-                %td=h order.supplier.name
-                %td=h format_time(order.ends) unless order.ends.nil?
-                - if (groupOrder = order.group_orders.find(:first, :conditions => ["order_group_id = ?", @orderGroup.id]))
-                  - total += groupOrder.price
-                  %td=h groupOrder.updated_by.nil? ? '??' : "#{groupOrder.updated_by.nick} (#{format_time(groupOrder.updated_on)})"
-                  %td= number_to_currency(groupOrder.price)
-                - else
-                  %td
-                  %td
-        - if total > 0
-          %p
-            =_ "Total sum"
-            %b= number_to_currency(total)
-      - else
-        %i=_ "There aren't current orders at the moment."
+.box_title
+  %h2=_ "Running orders"
+.column_content
+  - unless @currentOrders.empty?
+    %table.list
+      %thead
+        %tr
+          %th=_ "Name"
+          %th=_ "Supplier"
+          %th=_ "End"
+          %th=_ "Who ordered?"
+          %th=_ "Sum"
+      %tbody
+        - total = 0
+        - @currentOrders.each do |order|
+          %tr{:class => cycle('even', 'odd', :name => 'current_orders')}
+            %td= link_to order.name, :controller => 'ordering', :action => 'order', :id => order
+            %td=h order.supplier.name
+            %td=h format_time(order.ends) unless order.ends.nil?
+            - if (groupOrder = order.group_orders.find(:first, :conditions => ["order_group_id = ?", @orderGroup.id]))
+              - total += groupOrder.price
+              %td=h groupOrder.updated_by.nil? ? '??' : "#{groupOrder.updated_by.nick} (#{format_time(groupOrder.updated_on)})"
+              %td= number_to_currency(groupOrder.price)
+            - else
+              %td
+              %td
+    - if total > 0
+      %p
+        =_ "Total sum"
+        %b= number_to_currency(total)
+  - else
+    %i=_ "There aren't current orders at the moment."

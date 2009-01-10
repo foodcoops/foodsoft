@@ -1,6 +1,25 @@
 %h1 Finanzbereich
 .left_column{:style => 'width: 50%'}
   .box_title
+    %h2 Unpaid invoices
+  .column_content
+    %p= link_to "Show all invoices", invoices_path
+    %table.list
+      %thead
+        %tr
+          %th Date
+          %th Amount
+          %th Supplier
+          %th
+      %tbody
+        - for invoice in @unpaid_invoices
+          %tr{:class => cycle("even","odd", :name => "invoices")}
+            %td= format_date(invoice.date)
+            %td= number_to_currency(invoice.amount)
+            %td=h invoice.supplier.name
+            %td= link_to "Edit", edit_invoice_path(invoice)
+
+  .box_title
     %h2 letzte Überweisungen
   .column_content
     %p

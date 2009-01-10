@@ -21,6 +21,8 @@ class Invoice < ActiveRecord::Base
   validates_presence_of :supplier_id
   validates_uniqueness_of :date, :scope => [:supplier_id]
 
+  named_scope :unpaid, :conditions => { :paid_on => nil }
+
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def amount=(amount)
     self[:amount] = String.delocalized_decimal(amount)

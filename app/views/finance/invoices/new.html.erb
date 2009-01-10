@@ -1,6 +1,6 @@
 <h1>New invoice</h1>
 
-<% form_for(@invoice) do |f| %>
+<% form_for([:finance, @invoice]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -32,4 +32,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Back', invoices_path %>
+<%= link_to 'Back', finance_invoices_path %>

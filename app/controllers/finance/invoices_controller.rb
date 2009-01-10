@@ -1,4 +1,4 @@
-class InvoicesController < ApplicationController
+class Finance::InvoicesController < ApplicationController
 
   def index
     @invoices = Invoice.find(:all, :order => "date DESC")
@@ -39,7 +39,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       if @invoice.save
         flash[:notice] = 'Invoice was successfully created.'
-        format.html { redirect_to(@invoice) }
+        format.html { redirect_to([:finance, @invoice]) }
         format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
       else
         format.html { render :action => "new" }
@@ -56,7 +56,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
         flash[:notice] = 'Invoice was successfully updated.'
-        format.html { redirect_to(@invoice) }
+        format.html { redirect_to([:finance, @invoice]) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,7 +72,7 @@ class InvoicesController < ApplicationController
     @invoice.destroy
 
     respond_to do |format|
-      format.html { redirect_to(invoices_path) }
+      format.html { redirect_to(finance_invoices_path) }
       format.xml  { head :ok }
     end
   end
