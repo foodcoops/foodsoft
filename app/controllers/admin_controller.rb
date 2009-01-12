@@ -5,10 +5,6 @@ class AdminController < ApplicationController
   verify :method => :post, :only => [ :destroyUser, :createUser, :updateUser, :destroyGroup, :createGroup, :updateGroup], :redirect_to => { :action => :index }
 
   # Messages
-  MSG_USER_CREATED = 'Benutzer_in wurde erfolgreich angelegt.'
-  MSG_USER_UPDATED = 'Änderungen wurden gespeichert'
-  MSG_USER_DELETED = 'Benutzer_in wurde gelöscht'
-  ERR_NO_SELF_DELETE = 'Du darfst Dich nicht selbst löschen'
   MESG_NO_ADMIN_ANYMORE = "Du bist nun kein Admin mehr"
   
   def index

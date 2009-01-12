@@ -25,15 +25,14 @@
       - roles << 'Artikel' if user.role_article_meta?
       - roles << 'Bestellung' if user.role_orders?
       %tr{:class => cycle('even','odd', :name => 'users')}
-        %td= link_to user.nick, :action => 'showUser', :id => user
+        %td= link_to user.nick, [:admin, user]
         %td=h user.first_name
         %td=h user.last_name
         %td=h user.email
         %td=h roles.join(', ')
-        %td=h format_date_time(user.last_login)
+        %td=h format_time(user.last_login)
         %td
-          = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Benutzer_in bearbeiten', :title => 'Benutzer_in bearbeiten'), :action => 'editUser', :id => user)
+          = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Benutzer_in bearbeiten', :title => 'Benutzer_in bearbeiten'), edit_admin_user_path(user))
           = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Benutzer_in löschen', :title => 'Benutzer_in löschen'), | 
-            {:action => 'destroyUser', :id => user}, |
-            :confirm => 'Willst du ' + user.first_name + ' wirklich löschen?', |
-            :method => "post") |
+            [:admin, user], |
+            :confirm => 'Willst du ' + user.first_name + ' wirklich löschen?', :method => :delete) |

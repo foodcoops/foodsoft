@@ -1,0 +1,12 @@
+<h1>Benutzerin bearbeiten</h1>
+<div id="newUser" style="width:65em">
+  <div class="box_title"><h2>Benutzerin bearbeiten</h2></div>
+  <div class="column_content" id="userForm">
+    <% form_for([:admin, @user]) do |@form| %>
+      <%= render :partial => 'shared/user_form' %>
+      <br style="clear:both" />
+      <p>
+      <%= submit_tag 'Speichern' %> | <%= link_to 'Abbrechen', admin_users_path %></p>
+    <% end %>
+  </div>
+</div>

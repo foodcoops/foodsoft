@@ -301,7 +301,9 @@ module WillPaginate
     def page_link(page, text, attributes = {})
       # bennis hack to support ajax-support
       if @options[:remote] == true
-        @template.link_to_remote text, :url => url_for(page), :html => attributes, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+        @template.link_to_remote text, :url => url_for(page), :html => attributes, 
+          :before => "Element.show('loader')", :success => "Element.hide('loader')",
+          :method => :get
       else
         @template.link_to text, url_for(page), attributes
       end

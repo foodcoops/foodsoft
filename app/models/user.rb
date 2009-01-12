@@ -27,13 +27,20 @@ class User < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments
   
-  attr_accessible :nick, :first_name, :last_name, :email, :phone, :address
-	
+  attr_accessor :password, :setting_attributes
+
+  validates_presence_of :nick, :email
+  validates_presence_of :password_hash, :message => "Password is required."
   validates_length_of :nick, :in => 2..25
   validates_uniqueness_of :nick
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_uniqueness_of :email	
   validates_length_of :first_name, :in => 2..50
+  validates_confirmation_of :password
+  validates_length_of :password, :in => 5..25, :allow_blank => true
+
+  before_validation :set_password
+  after_save :update_settings
 
   # Adds support for configuration settings (through "settings" attribute).
   acts_as_configurable
@@ -44,15 +51,14 @@ class User < ActiveRecord::Base
   # User settings keys
   # returns the User-settings and the translated description
   def self.setting_keys
-    settings_hash = {
-      "notify.orderFinished" => _('Get message with order result'),
-      "notify.negativeBalance" => _('Get message if negative account balance'),
-      "messages.sendAsEmail" => _('Get messages as emails'),
-      "profile.phoneIsPublic" => _('Phone is visible for foodcoop members'),
-      "profile.emailIsPublic" => _('Email is visible for foodcoop members'),
-      "profile.nameIsPublic" => _('Name is visible for foodcoop members')
+    {
+      "notify.orderFinished" => 'Get message with order result',
+      "notify.negativeBalance" => 'Get message if negative account balance',
+      "messages.sendAsEmail" => 'Get messages as emails',
+      "profile.phoneIsPublic" => 'Phone is visible for foodcoop members',
+      "profile.emailIsPublic" => 'Email is visible for foodcoop members',
+      "profile.nameIsPublic" => 'Name is visible for foodcoop members'
     }
-    return settings_hash
   end
   # retuns the default setting for a NEW user
   # for old records nil will returned
@@ -64,12 +70,20 @@ class User < ActiveRecord::Base
     }
     return true if self.new_record? && defaults[setting]
   end
+
+  def update_settings
+    for setting in User::setting_keys.keys
+      self.settings[setting] = setting_attributes[setting] && setting_attributes[setting] == '1' ? '1' : nil
+    end
+  end
   
   
   # Sets the user's password. It will be stored encrypted along with a random salt.
-  def password=(password)
-    salt = [Array.new(6){rand(256).chr}.join].pack("m").chomp
-    self.password_hash, self.password_salt = Digest::SHA1.hexdigest(password + salt), salt
+  def set_password
+    unless password.blank?
+      salt = [Array.new(6){rand(256).chr}.join].pack("m").chomp
+      self.password_hash, self.password_salt = Digest::SHA1.hexdigest(password + salt), salt
+    end
   end
   
   # Returns true if the password argument matches the user's password.
@@ -77,21 +91,21 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(password + self.password_salt) == self.password_hash
   end
   
-  #Sets the passwort, and if fails it returns error-messages (see above)
-  def set_password(options = {:required => false}, password = nil, confirmation = nil)
-    required = options[:required]
-    if required && (password.nil? || password.empty?) 
-      self.errors.add_to_base _('Password is required')
-    elsif !password.nil? && !password.empty?
-      if password != confirmation
-        self.errors.add_to_base _("Passwords doesn't match")
-      elsif password.length < 5 || password.length > 25
-        self.errors.add_to_base _('Password-length has to be between 5 and 25 characters')
-      else 
-        self.password = password
-      end
-    end  
-  end
+#  # Sets the passwort, and if fails it returns error-messages (see above)
+#  def set_password(options = {:required => false}, password = nil, confirmation = nil)
+#    required = options[:required]
+#    if required && (password.nil? || password.empty?)
+#      self.errors.add_to_base 'Password is required'
+#    elsif !password.nil? && !password.empty?
+#      if password != confirmation
+#        self.errors.add_to_base "Passwords doesn't match"
+#      elsif password.length < 5 || password.length > 25
+#        self.errors.add_to_base 'Password-length has to be between 5 and 25 characters'
+#      else
+#        self.password = password
+#      end
+#    end
+#  end
   
   # Returns a random password.
   def new_random_password(size = 3)

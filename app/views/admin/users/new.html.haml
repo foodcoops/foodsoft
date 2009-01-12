@@ -1,0 +1,13 @@
+- title "Neue Benutzerin"
+
+#newUser
+  .box_title
+    %h2 Neue Benutzerin
+  .column_content#userForm
+    - form_for([:admin, @user]) do |@form|
+      = render :partial => 'shared/user_form'
+      %p{:style => "clear:both" }
+      = submit_tag "Speichern"
+      |
+      = link_to('Abbrechen', admin_users_path )
+%p= link_to 'Benutzerinnenübersicht', admin_users_path

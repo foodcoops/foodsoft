@@ -2,7 +2,7 @@
 %p
   %i
     Hier kannst du Benutzer_innen
-    = link_to_remote 'neu Anlegen', :url => {:action => 'newUser'}
+    = link_to 'neu Anlegen', new_admin_user_path
     , bearbeiten und natürlich auch löschen.
 #newUser{:style => "display:none;"}
   .box_title
@@ -20,9 +20,9 @@
       = observe_field 'query',  :frequency => 2, |
         :before => "Element.show('loader')", |
         :success => "Element.hide('loader')", |
-        :url => {:action => 'listUsers'}, |
-        :with => 'query' |
+        :url => admin_users_path, |
+        :with => 'query', |
+        :method => :get |
     #table
-      = render :partial => "listUsers"
-- if @current_user.role_admin?
-  %p= link_to 'Neue Benutzer_in', :action => 'newUser'
+      = render :partial => "users"
+  %p= link_to 'Neue Benutzerin', new_admin_user_path

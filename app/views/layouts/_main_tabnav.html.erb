@@ -26,7 +26,8 @@
           { :name => "Suppliers", :url => suppliers_path, :access? => (u.role_suppliers?) }
         ]
       },
-      { :name => "Finance", :url => "/finance", :active => ["finance", "invoices", "transactions", "balancing"],
+      { :name => "Finance", :url => "/finance",
+        :active => ["finance", "finance/invoices", "finance/transactions", "finance/balancing"],
         :access? => (u.role_finance?),
         :subnav => [
           { :name => "Manage accounts", :url => "/finance/transactions" },
@@ -34,10 +35,11 @@
           { :name => "Invoices", :url => finance_invoices_path }
         ]
       },
-      { :name => "Administration", :url => "/admin", :active => ["admin"],
+      { :name => "Administration", :url => "/admin",
+        :active => ["admin", "admin/users"],
         :access? => (u.role_admin?),
         :subnav => [
-          { :name => "Users", :url => "/admin/listUsers" },
+          { :name => "Users", :url => "/admin/users" },
           { :name => "Groups", :url => "/admin/listGroups" }
         ]
       }

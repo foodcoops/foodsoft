@@ -2,15 +2,15 @@
 module ApplicationHelper
 
   def format_time(time = Time.now)
-    I18n.l time, :format => "%d.%m.%Y %H:%M"
+    I18n.l(time, :format => "%d.%m.%Y %H:%M") unless time.nil?
   end
 
   def format_date(time = Time.now)
-    I18n.l time.to_date
+    I18n.l(time.to_date) unless time.nil?
   end
 
   def format_datetime(time = Time.now)
-    I18n.l time
+    I18n.l(time) unless time.nil?
   end
   
   # Creates ajax-controlled-links for pagination
@@ -29,9 +29,12 @@ module ApplicationHelper
     links = []
     per_page_options.each do |per_page|
       unless per_page == current
-        links << link_to_remote(per_page, {:url => {:action => action, :params => {:per_page => per_page}},
-                                           :before => "Element.show('loader')",
-                                           :success => "Element.hide('loader')"})
+        links << link_to_remote(
+          per_page,
+          { :url => { :action => action, :params => {:per_page => per_page}},
+            :before => "Element.show('loader')",
+            :success => "Element.hide('loader')",
+            :method => :get } )
       else
         links << per_page 
       end
@@ -51,7 +54,8 @@ module ApplicationHelper
     options = {
         :url => {:action => 'list', :params => params.merge({:sort => key, :page => nil, :per_page => per_page})},
         :before => "Element.show('loader')",
-        :success => "Element.hide('loader')"
+        :success => "Element.hide('loader')",
+        :method => :get
     }
     html_options = {
       :title => _('Sort by this field'),
@@ -86,6 +90,6 @@ module ApplicationHelper
   end
 
   def tab_is_active?(tab)
-    tab[:active].detect {|c| c == controller.controller_name }
+    tab[:active].detect {|c| c == controller.controller_path }
   end
 end
