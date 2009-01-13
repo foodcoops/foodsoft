@@ -1,0 +1,34 @@
+- title "List workgroups"
+
+%p
+  %i
+    Hier kannst du
+    = link_to 'neue Arbeitsgruppen', new_admin_workgroup_path
+    anlegen, Gruppen bearbeiten und löschen.
+    
+%p
+  Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>:
+  Eine
+  %em= link_to 'Bestellgruppe', '/admin/ordergroups'
+  hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. 'Soritiergruppe')
+  koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten.
+  Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
+.left_column{:style => "width:100%"}
+  .box_title
+    %h2 Gruppenübersicht
+  .column_content
+    #group_filter
+      %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
+        %label{:for => 'workgroup_name'} Suche in Name :
+        = text_field_tag("query", params['query'], :size => 10 )
+        
+      = observe_field 'query',  :frequency => 2, |
+        :before => "Element.show('loader')", |
+        :success => "Element.hide('loader')", |
+        :update => "workgroups", |
+        :url => admin_workgroups_path, |
+        :with => 'query', |
+        :method => :get |
+    #workgroups
+      = render :partial => "workgroups"
+  = link_to 'Neue Arbeits', new_admin_workgroup_path

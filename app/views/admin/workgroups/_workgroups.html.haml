@@ -1,0 +1,24 @@
+%p
+  %table{:style => "width:100%"}
+    %tr
+      %td
+        = pagination_links_remote @workgroups
+      %td{:style => "text-align:right"}
+        - if @workgroups.size > 20
+          = items_per_page
+%table.list
+  %thead
+    %tr
+      %th Name
+      %th Mitglieder
+      %th
+  %tbody
+    - for workgroup in @workgroups
+      %tr{:class => cycle('even','odd', :name => 'groups')}
+        %td= link_to workgroup.name, [:admin, workgroup]
+        %td= workgroup.users.size
+        %td
+          = link_to image_tag('b_users.png', :size => '16x16',  :border => "0", :alt => 'Mitlglieder bearbeiten'), memberships_admin_workgroup_path(workgroup)
+          = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Gruppe bearbeiten'), edit_admin_workgroup_path(workgroup))
+          = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Gruppe löschen'), [:admin, workgroup], |
+                         :confirm => 'Willst du ' + workgroup.name + ' wirklich löschen?', :method => :delete) |

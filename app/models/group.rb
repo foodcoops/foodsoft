@@ -28,12 +28,6 @@
 class Group < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :users, :through => :memberships
-  has_many :tasks
-  # returns all non-finished tasks
-  has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], :order => 'due_date ASC'
-  
-  attr_accessible :name, :description, :role_admin, :role_suppliers, :role_article_meta, :role_finance, :role_orders, 
-                  :weekly_task, :weekday, :task_name, :task_description, :task_required_users
   
   validates_length_of :name, :in => 1..25
   validates_uniqueness_of :name
@@ -63,31 +57,9 @@ class Group < ActiveRecord::Base
     raise ERR_LAST_ADMIN_GROUP_DELETE if self.role_admin == true && Group.find_all_by_role_admin(true).size == 1
   end
   
-  # Returns an Array with date-objects to represent the next weekly-tasks
-  def next_weekly_tasks(number = 8)
-    # our system starts from 0 (sunday) to 6 (saturday)
-    # get difference between groups weekday and now
-    diff = self.weekday - Time.now.wday 
-    if diff >= 0  
-      # weektask is in current week
-      nextTask = diff.day.from_now
-    else
-      # weektask is in the next week
-      nextTask = (diff + 7).day.from_now
-    end
-    # now generate the Array
-    nextTasks = Array.new
-    number.times do
-      nextTasks << nextTask
-      nextTask = 1.week.from_now(nextTask)
-    end
-    return nextTasks
-  end
- 
   # get all groups, which are NOT OrderGroups
-  #TODO: better implement a new model, which inherits from Group, e.g. WorkGroup
   def self.workgroups
-    Group.find :all, :conditions => "type IS NULL"
+    Workgroup.all
   end
   
   protected

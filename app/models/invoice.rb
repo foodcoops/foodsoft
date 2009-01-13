@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090102171850
+# Schema version: 20090113111624
 #
 # Table name: invoices
 #
@@ -9,6 +9,7 @@
 #  number      :string(255)
 #  date        :date
 #  paid_on     :date
+#  note        :text
 #  amount      :decimal(8, 2)   default(0.0), not null
 #  created_at  :datetime
 #  updated_at  :datetime

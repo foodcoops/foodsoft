@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090102155714) do
+ActiveRecord::Schema.define(:version => 20090113111624) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -70,6 +70,12 @@ ActiveRecord::Schema.define(:version => 20090102155714) do
   end
 
   add_index "configurable_settings", ["name"], :name => "index_configurable_settings_on_name"
+
+  create_table "deliveries", :force => true do |t|
+    t.integer  "supplier_id"
+    t.date     "delivered_on"
+    t.datetime "created_at"
+  end
 
   create_table "financial_transactions", :force => true do |t|
     t.integer  "order_group_id",                               :default => 0,   :null => false

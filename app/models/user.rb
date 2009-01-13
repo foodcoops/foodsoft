@@ -72,8 +72,10 @@ class User < ActiveRecord::Base
   end
 
   def update_settings
-    for setting in User::setting_keys.keys
-      self.settings[setting] = setting_attributes[setting] && setting_attributes[setting] == '1' ? '1' : nil
+    unless setting_attributes.nil?
+      for setting in User::setting_keys.keys
+        self.settings[setting] = setting_attributes[setting] && setting_attributes[setting] == '1' ? '1' : nil
+      end
     end
   end
   

@@ -36,11 +36,11 @@
         ]
       },
       { :name => "Administration", :url => "/admin",
-        :active => ["admin", "admin/users"],
+        :active => ["admin", "admin/users", "admin/workgroups"],
         :access? => (u.role_admin?),
         :subnav => [
           { :name => "Users", :url => "/admin/users" },
-          { :name => "Groups", :url => "/admin/listGroups" }
+          { :name => "Workgroups", :url => "/admin/workgroups" }
         ]
       }
     ]

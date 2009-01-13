@@ -2,6 +2,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
     admin.resources :users
+    admin.resources :workgroups, :member => { :memberships => :get }
+    admin.connect 'memberships/:action/:id', :controller => 'memberships'
+    admin.add_member 'add_member', :controller => 'memberships', :action => 'add_member'
   end
 
   map.namespace :finance do |finance|
