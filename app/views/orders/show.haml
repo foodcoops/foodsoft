@@ -34,7 +34,7 @@
       = _("Groups ordered") + ":"
       %b= @group_orders.size
       - unless @finished
-        = "[#{@group_orders.collect{|g| g.order_group.name}.join(', ')}]" unless @group_orders.empty? 
+        = "[#{@group_orders.collect{|g| g.ordergroup.name}.join(', ')}]" unless @group_orders.empty? 
       - else
         = "[#{@group_orders.collect{|g| g.group_name}.join(', ')}]" unless @group_orders.empty? 
     %p

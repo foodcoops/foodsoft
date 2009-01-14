@@ -7,7 +7,7 @@
 <p>Anzahl gefundener Transaktionen: <b><%= @total %></b></p>
 
 <p>
-<%= pagination_links_remote @financial_transactions, @per_page, {:sort => params[:sort], :query => params['query']}%>
+<%= pagination_links_remote @financial_transactions, :params => {:sort => params[:sort], :query => params['query']}%>
 </p>
 
 

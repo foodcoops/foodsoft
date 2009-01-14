@@ -23,7 +23,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
-  has_many :order_groups, :through => :memberships, :source => :group
+  has_many :ordergroups, :through => :memberships, :source => :group
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments
   
@@ -146,10 +146,10 @@ class User < ActiveRecord::Base
     groups.detect {|group| group.role_orders?}
   end
   
-  # Returns the user's OrderGroup or nil if none found.
+  # Returns the user's Ordergroup or nil if none found.
   def find_ordergroup
-    order_groups.first
-    #groups.find(:first, :conditions => "type = 'OrderGroup'")
+    ordergroups.first
+    #groups.find(:first, :conditions => "type = 'Ordergroup'")
   end
   
   # Find all tasks, for which the current user should be responsible
@@ -195,7 +195,7 @@ class User < ActiveRecord::Base
     return true if group.users.detect {|user| user == self}
   end
  
-  #Returns an array with the users groups (but without the OrderGroups -> because tpye=>"")
+  #Returns an array with the users groups (but without the Ordergroups -> because tpye=>"")
   def member_of_groups()
      self.groups.find(:all, :conditions => {:type => ""})
   end

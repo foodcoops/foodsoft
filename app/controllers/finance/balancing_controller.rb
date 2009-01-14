@@ -98,11 +98,11 @@ class Finance::BalancingController < ApplicationController
   end
 
   # Creates a new GroupOrderArticleResult
-  # If the the chosen OrderGroup hasn't ordered yet, a GroupOrderResult will created
+  # If the the chosen Ordergroup hasn't ordered yet, a GroupOrderResult will created
   def createGroupResult
     @result = GroupOrderArticleResult.new(params[:group_order_article_result])
     order = @result.order_article_result.order
-    orderGroup = OrderGroup.find(params[:group_order_article_result][:group_order_result_id])
+    orderGroup = Ordergroup.find(params[:group_order_article_result][:group_order_result_id])
     # creates a new GroupOrderResult if necessary
     unless @result.group_order_result = GroupOrderResult.find(:first,
                                                           :conditions => ["group_order_results.group_name = ? AND group_order_results.order_id = ?", orderGroup.name, order.id ])
@@ -208,12 +208,12 @@ class Finance::BalancingController < ApplicationController
     end
   end
 
-  # before the order will booked, a view lists all OrderGroups and its order_prices
+  # before the order will booked, a view lists all Ordergroups and its order_prices
   def confirm
     @order = Order.find(params[:id])
   end
 
-  # Balances the Order, Update of the OrderGroup.account_balances
+  # Balances the Order, Update of the Ordergroup.account_balances
   def close
     @order = Order.find(params[:id])
     begin

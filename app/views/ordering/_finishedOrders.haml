@@ -14,7 +14,7 @@
           %td= format_time(order.order.ends)
           %td{:class => "currency"}= number_to_currency(order.price)
       - else 
-        // check if the OrderGroup has ordered
+        // check if the Ordergroup has ordered
         - if groupOrder = order.group_order(@orderGroup)
           %tr{:class=> cycle('even', 'odd', :name => 'finishedOrders')}
             %td= link_to order.name, :action => 'my_order_result', :id => order

@@ -9,13 +9,13 @@
 #  price      :decimal(8, 2)   default(0.0), not null
 #
 
-# OrderGroups, which participate on a specific order will have a line
+# Ordergroups, which participate on a specific order will have a line
 class GroupOrderResult < ActiveRecord::Base
   
   belongs_to :order
   has_many :group_order_article_results, :dependent => :destroy
   
-  # Calculates the Order-Price for the OrderGroup and updates the price-attribute
+  # Calculates the Order-Price for the Ordergroup and updates the price-attribute
   def updatePrice
     total = 0
     group_order_article_results.each do |result|

@@ -37,14 +37,14 @@
     <% for group in @groups %>
       <tr class="<%= cycle('even','odd', :name => 'groups') %>">
         <td><%= link_to group.name, :action => 'showGroup', :id => group %></td>
-        <td><%= group.is_a?(OrderGroup) ? 'Bestellgruppe' : 'Gruppe' %></td>
+        <td><%= group.is_a?(Ordergroup) ? 'Bestellgruppe' : 'Gruppe' %></td>
         <td><%= group.users.size %></td>
       </tr>
     <% end %>
     </table>
     <br />
     <%= link_to 'Alle Gruppen', :action => 'listGroups' %> | 
-    <%= link_to "Neue Bestellgruppe", :action => "newOrderGroup" %> | 
+    <%= link_to "Neue Bestellgruppe", :action => "newOrdergroup" %> | 
     <%= link_to "Neue Gruppe", :action => "newGroup" %>
   </div>
 </div>

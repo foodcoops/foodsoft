@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090113111624) do
+ActiveRecord::Schema.define(:version => 20090114101610) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -78,11 +78,11 @@ ActiveRecord::Schema.define(:version => 20090113111624) do
   end
 
   create_table "financial_transactions", :force => true do |t|
-    t.integer  "order_group_id",                               :default => 0,   :null => false
-    t.decimal  "amount",         :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.text     "note",                                                          :null => false
-    t.integer  "user_id",                                      :default => 0,   :null => false
-    t.datetime "created_on",                                                    :null => false
+    t.integer  "ordergroup_id",                               :default => 0,   :null => false
+    t.decimal  "amount",        :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.text     "note",                                                         :null => false
+    t.integer  "user_id",                                     :default => 0,   :null => false
+    t.datetime "created_on",                                                   :null => false
   end
 
   create_table "group_order_article_quantities", :force => true do |t|
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20090113111624) do
   add_index "group_order_results", ["group_name", "order_id"], :name => "index_group_order_results_on_group_name_and_order_id", :unique => true
 
   create_table "group_orders", :force => true do |t|
-    t.integer  "order_group_id",                                   :default => 0,   :null => false
+    t.integer  "ordergroup_id",                                    :default => 0,   :null => false
     t.integer  "order_id",                                         :default => 0,   :null => false
     t.decimal  "price",              :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.integer  "lock_version",                                     :default => 0,   :null => false
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(:version => 20090113111624) do
     t.integer  "updated_by_user_id",                               :default => 0,   :null => false
   end
 
-  add_index "group_orders", ["order_group_id", "order_id"], :name => "index_group_orders_on_order_group_id_and_order_id", :unique => true
+  add_index "group_orders", ["ordergroup_id", "order_id"], :name => "index_group_orders_on_ordergroup_id_and_order_id", :unique => true
 
   create_table "groups", :force => true do |t|
     t.string   "type",                                              :default => "",    :null => false

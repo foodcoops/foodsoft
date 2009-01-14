@@ -12,7 +12,7 @@
 #
 
 # A GroupOrderArticle stores the sum of how many items of an OrderArticle are ordered as part of a GroupOrder.
-# The chronologically order of the OrderGroup - activity are stored in GroupOrderArticleQuantity
+# The chronologically order of the Ordergroup - activity are stored in GroupOrderArticleQuantity
 #
 class GroupOrderArticle < ActiveRecord::Base
   
@@ -94,7 +94,7 @@ class GroupOrderArticle < ActiveRecord::Base
     end
   end
   
-  # Determines how many items of this article the OrderGroup receives.
+  # Determines how many items of this article the Ordergroup receives.
   # Returns a hash with three keys: :quantity / :tolerance / :total
   # 
   # See description of the ordering algorithm in the general application documentation for details.

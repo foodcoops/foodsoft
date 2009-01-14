@@ -1,8 +1,8 @@
-# Controller for all ordering-actions that are performed by a user who is member of an OrderGroup.
+# Controller for all ordering-actions that are performed by a user who is member of an Ordergroup.
 # Management actions that require the "orders" role are handled by the OrdersController.
 class OrderingController < ApplicationController
   # Security
-  before_filter :ensureOrderGroupMember
+  before_filter :ensureOrdergroupMember
   verify :method => :post, :only => [:saveOrder], :redirect_to => { :action => :index }
   
   # Messages
@@ -33,7 +33,7 @@ class OrderingController < ApplicationController
     if !@order.current?
       flash[:notice] = ERROR_ALREADY_FINISHED
       redirect_to :action => 'index'
-    elsif !(@order_group = @current_user.find_ordergroup)
+    elsif !(@ordergroup = @current_user.find_ordergroup)
       flash[:notice] = ERROR_NO_ORDERGROUP
       redirect_to :controller => 'index'
     else
@@ -43,7 +43,7 @@ class OrderingController < ApplicationController
       @articles_by_category = @order.get_articles
       # save results of earlier orders in array
       ordered_articles = Array.new
-      @group_order = @order.group_orders.find(:first, :conditions => "order_group_id = #{@order_group.id}", :include => :group_order_articles)       
+      @group_order = @order.group_orders.find(:first, :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)       
       if @group_order
         # Group has already ordered, so get the results...
         for article in @group_order.group_order_articles
@@ -54,10 +54,10 @@ class OrderingController < ApplicationController
                                                      'tolerance_result' => result[:tolerance]}
         end           
         @version = @group_order.lock_version
-        @availableFunds = @order_group.getAvailableFunds(@group_order)
+        @availableFunds = @ordergroup.getAvailableFunds(@group_order)
       else
         @version = 0
-        @availableFunds = @order_group.getAvailableFunds
+        @availableFunds = @ordergroup.getAvailableFunds
       end
       
       # load prices ....
@@ -90,7 +90,7 @@ class OrderingController < ApplicationController
     if (!order.current?)
       flash[:error] = ERROR_ALREADY_FINISHED
       redirect_to :action => 'index'
-    elsif !(order_group = @current_user.find_ordergroup)
+    elsif !(ordergroup = @current_user.find_ordergroup)
       flash[:error] = ERROR_NO_ORDERGROUP
       redirect_to :controller => 'index'
     elsif (params[:total_balance].to_i < 0)
@@ -100,12 +100,12 @@ class OrderingController < ApplicationController
        begin
          Order.transaction do
            # Create group order if necessary...
-           if (groupOrder = order.group_orders.find(:first, :conditions => "order_group_id = #{order_group.id}", :include => [:group_order_articles]))
+           if (groupOrder = order.group_orders.find(:first, :conditions => "ordergroup_id = #{ordergroup.id}", :include => [:group_order_articles]))
               if (params[:version].to_i != groupOrder.lock_version) # check for conflicts well ahead
                 raise ActiveRecord::StaleObjectError
               end
            else
-              groupOrder = GroupOrder.new(:order_group => order_group, :order => order, :updated_by => @current_user, :price => 0)   
+              groupOrder = GroupOrder.new(:ordergroup => ordergroup, :order => order, :updated_by => @current_user, :price => 0)   
               groupOrder.save!
            end
            # Create/update GroupOrderArticles...
@@ -142,7 +142,7 @@ class OrderingController < ApplicationController
     end
   end
   
-  # Shows the Result for the OrderGroup the current user belongs to
+  # Shows the Result for the Ordergroup the current user belongs to
   # this method decides between finished and unfinished orders
   def my_order_result
     @order= Order.find(params[:id])
@@ -153,7 +153,7 @@ class OrderingController < ApplicationController
       @order_value= @groupOrderResult.price if @groupOrderResult
       @comments= @order.comments
     else
-      @group_order = @order.group_orders.find_by_order_group_id(@current_user.find_ordergroup.id)
+      @group_order = @order.group_orders.find_by_ordergroup_id(@current_user.find_ordergroup.id)
       @order_value= @group_order.price if @group_order
     end
   end
@@ -211,9 +211,9 @@ class OrderingController < ApplicationController
 
   private
   
-    # Returns true if @current_user is member of an OrderGroup.
+    # Returns true if @current_user is member of an Ordergroup.
     # Used as a :before_filter by OrderingController.
-    def ensureOrderGroupMember
+    def ensureOrdergroupMember
       !@current_user.find_ordergroup.nil?
     end    
 

@@ -2,10 +2,10 @@
   %table{:style => "width:100%"}
     %tr
       %td
-        = pagination_links_remote @workgroups
+        = pagination_links_remote @workgroups, { :update => "workgroups" }
       %td{:style => "text-align:right"}
-        - if @workgroups.size > 20
-          = items_per_page
+        - if @total.size > 20
+          = items_per_page :update => "workgroups"
 %table.list
   %thead
     %tr

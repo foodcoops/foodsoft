@@ -1,14 +1,17 @@
-%h1=_ 'Groups'
+- title "Bestellgruppen"
+
 %p
   %i
     Hier kannst du
-    = link_to 'neue Gruppen', :action => 'newGroup'
-    und
-    = link_to 'neue Bestellgruppen', :action => 'newOrderGroup'
+    = link_to 'neue Bestellgruppen', new_admin_ordergroup_path
     anlegen, Gruppen bearbeiten und löschen.
+    
 %p
   Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>:
-  Eine <em>Bestellgruppe</em> hat ein Konto und kann Essen bestellen, eine <em>Gruppe</em> ist eine Arbeitsgruppe wie z.B. die "Sortiergruppe".
+  Eine Bestellgruppe hat ein Konto und kann Essen bestellen. In einer
+  %em= link_to 'Arbeisgruppe', admin_workgroups_path
+  (z.b. 'Soritiergruppe')
+  koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten.
   Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
 .left_column{:style => "width:100%"}
   .box_title
@@ -16,17 +19,16 @@
   .column_content
     #group_filter
       %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
-        %label{:for => 'article_name'} Suche in Name : 
+        %label{:for => 'ordergroup_name'} Suche in Name :
         = text_field_tag("query", params['query'], :size => 10 )
         
       = observe_field 'query',  :frequency => 2, |
         :before => "Element.show('loader')", |
         :success => "Element.hide('loader')", |
-        :url => {:action => 'listGroups'}, |
-        :with => 'query' |
-    #table
-      = render :partial => "listGroups"
-- if @current_user.role_admin?
-  = link_to 'Neue Gruppe', :action => 'newGroup'
-  |
-  = link_to 'Neue Bestellgruppe', :action => 'newOrderGroup'
+        :update => "ordergroups", |
+        :url => admin_ordergroups_path, |
+        :with => 'query', |
+        :method => :get |
+    #ordergroups
+      = render :partial => "ordergroups"
+  = link_to 'Neue Arbeits', new_admin_ordergroup_path

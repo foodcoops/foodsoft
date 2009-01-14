@@ -23,13 +23,13 @@
 #  task_required_users :integer(4)      default(1)
 #
 
-# OrderGroups can order, they are "children" of the class Group
+# Ordergroups can order, they are "children" of the class Group
 # 
-# OrderGroup have the following attributes, in addition to Group
+# Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
 # * account_updated (datetime)
-# * actual_size (int) : how many persons are ordering through the OrderGroup
-class OrderGroup < Group
+# * actual_size (int) : how many persons are ordering through the Ordergroup
+class Ordergroup < Group
   has_many :financial_transactions, :dependent => :destroy
   has_many :group_orders, :dependent => :destroy
   has_many :orders, :through => :group_orders
@@ -44,9 +44,9 @@ class OrderGroup < Group
   # messages
   ERR_NAME_IS_USED_IN_ARCHIVE = "Der Name ist von einer ehemaligen Gruppe verwendet worden."
     
-  # if the order_group.name is changed, group_order_result.name has to be adapted
+  # if the ordergroup.name is changed, group_order_result.name has to be adapted
   def before_update
-    ordergroup = OrderGroup.find(self.id)
+    ordergroup = Ordergroup.find(self.id)
     unless (ordergroup.name == self.name) || ordergroup.group_order_results.empty?
       # rename all finished orders
       for result in ordergroup.group_order_results
@@ -59,7 +59,7 @@ class OrderGroup < Group
   # * excludeGroupOrder (GroupOrder): exclude this GroupOrder from the calculation
   def getAvailableFunds(excludeGroupOrder = nil)
     funds = account_balance
-    for order in GroupOrder.find_all_by_order_group_id(self.id)
+    for order in GroupOrder.find_all_by_ordergroup_id(self.id)
       unless order == excludeGroupOrder
         funds -= order.price
       end
@@ -70,11 +70,11 @@ class OrderGroup < Group
     return funds
   end
   
-  # Creates a new FinancialTransaction for this OrderGroup and updates the account_balance accordingly.
+  # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.
   def addFinancialTransaction(amount, note, user)
     transaction do      
-      trans = FinancialTransaction.new(:order_group => self, :amount => amount, :note => note, :user => user)
+      trans = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
       trans.save!
       self.account_balance += trans.amount
       self.account_updated = trans.created_on
@@ -137,7 +137,7 @@ class OrderGroup < Group
     errors.add(:name, ERR_NAME_IS_USED_IN_ARCHIVE) unless GroupOrderResult.find_all_by_group_name(self.name).empty?
   end
   def validate_on_update
-    ordergroup = OrderGroup.find(self.id)
+    ordergroup = Ordergroup.find(self.id)
     errors.add(:name, ERR_NAME_IS_USED_IN_ARCHIVE) unless ordergroup.name == self.name || GroupOrderResult.find_all_by_group_name(self.name).empty?
   end
 

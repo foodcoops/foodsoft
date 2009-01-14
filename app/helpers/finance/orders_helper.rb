@@ -1,2 +1,0 @@
-module Finance::OrdersHelper
-end

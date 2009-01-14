@@ -1,6 +1,6 @@
 %tr.transaction
   %td
-    %select{:name => 'financial_transactions[][order_group_id]'}
-      = options_for_select OrderGroup.find(:all, :order => 'name').collect { |g| [ g.name, g.id ] }
+    %select{:name => 'financial_transactions[][ordergroup_id]'}
+      = options_for_select Ordergroup.find(:all, :order => 'name').collect { |g| [ g.name, g.id ] }
   %td= text_field_tag 'financial_transactions[][amount]'
   %td= link_to_function image_tag("b_drop.png", :size => "16x16", :alt => _("Remove"), :border => "0"), "$(this).up('.transaction').remove()", {:title => _("Remove ordergroup")}

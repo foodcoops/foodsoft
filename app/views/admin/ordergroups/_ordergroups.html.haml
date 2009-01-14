@@ -1,0 +1,24 @@
+%p
+  %table{:style => "width:100%"}
+    %tr
+      %td
+        = pagination_links_remote @ordergroups, { :update => "ordergroups" }
+      %td{:style => "text-align:right"}
+        - if @total > 20
+          = items_per_page :update => "ordergroups"
+%table.list
+  %thead
+    %tr
+      %th Name
+      %th Mitglieder
+      %th
+  %tbody
+    - for ordergroup in @ordergroups
+      %tr{:class => cycle('even','odd', :name => 'groups')}
+        %td= link_to ordergroup.name, [:admin, ordergroup]
+        %td= ordergroup.users.size
+        %td
+          = link_to image_tag('b_users.png', :size => '16x16',  :border => "0", :alt => 'Mitlglieder bearbeiten'), memberships_admin_ordergroup_path(ordergroup)
+          = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Gruppe bearbeiten'), edit_admin_ordergroup_path(ordergroup))
+          = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Gruppe löschen'), [:admin, ordergroup], |
+                         :confirm => 'Willst du ' + ordergroup.name + ' wirklich löschen?', :method => :delete) |

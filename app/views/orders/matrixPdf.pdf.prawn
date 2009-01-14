@@ -56,7 +56,7 @@ while (page_number * max_articles_per_page < total_num_articles) do  # Start pag
     group_result = [truncate(group_order_result.group_name, 20)]
 
     for article in current_articles
-      # get the OrderGroupResult for this article
+      # get the OrdergroupResult for this article
       result = GroupOrderArticleResult.find(:first,
         :conditions => ['order_article_result_id = ? AND group_order_result_id = ?', article.id, group_order_result.id])
       group_result << ((result.nil? || result == 0) ? "" : result.quantity.to_i)

@@ -29,7 +29,7 @@
   %label{:for => "task_group"} 
   %b=_ 'Group'
   %br/
-  = select(:task, :group_id, Group.find(:all, :conditions => "type != 'OrderGroup'", :order => 'name').collect {|g| [ g.name, g.id ] }, { :include_blank => true })
+  = select(:task, :group_id, Group.find(:all, :conditions => "type != 'Ordergroup'", :order => 'name').collect {|g| [ g.name, g.id ] }, { :include_blank => true })
 %p
   %label{:for => "task_due_date"}
   %b=_ 'Due date'

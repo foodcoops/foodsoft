@@ -6,7 +6,7 @@
   = error_messages_for 'result'
   %p
     Gruppe:
-    = @form.select "group_order_result_id", OrderGroup.find(:all, :order => "name").collect {|og| [og.name, og.id] }
+    = @form.select "group_order_result_id", Ordergroup.find(:all, :order => "name").collect {|og| [og.name, og.id] }
   %p
     Menge:
     = @form.text_field "quantity", :size => 5

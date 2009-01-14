@@ -22,8 +22,8 @@ class Finance::TransactionsController < ApplicationController
 
     conditions = "name LIKE '%#{params[:query]}%'" unless params[:query].nil?
 
-    @total = OrderGroup.count(:conditions => conditions)
-    @groups = OrderGroup.paginate :conditions => conditions, :page => params[:page], :per_page => @per_page, :order => sort
+    @total = Ordergroup.count(:conditions => conditions)
+    @groups = Ordergroup.paginate :conditions => conditions, :page => params[:page], :per_page => @per_page, :order => sort
 
     respond_to do |format|
       format.html
@@ -36,7 +36,7 @@ class Finance::TransactionsController < ApplicationController
   end
 
   def list
-    @group = OrderGroup.find(params[:id])
+    @group = Ordergroup.find(params[:id])
 
     if params['sort']
       sort = case params['sort']
@@ -69,12 +69,12 @@ class Finance::TransactionsController < ApplicationController
   end
 
   def new
-    @group = OrderGroup.find(params[:id])
+    @group = Ordergroup.find(params[:id])
     @financial_transaction = @group.financial_transactions.build
   end
 
   def create
-    @group = OrderGroup.find(params[:financial_transaction][:order_group_id])
+    @group = Ordergroup.find(params[:financial_transaction][:ordergroup_id])
     amount = params[:financial_transaction][:amount]
     note = params[:financial_transaction][:note]
     begin
@@ -97,7 +97,7 @@ class Finance::TransactionsController < ApplicationController
     params[:financial_transactions].each do |trans|
       # ignore empty amount fields ...
       unless trans[:amount].blank?
-        OrderGroup.find(trans[:order_group_id]).addFinancialTransaction trans[:amount], note, @current_user
+        Ordergroup.find(trans[:ordergroup_id]).addFinancialTransaction trans[:amount], note, @current_user
       end
     end
     flash[:notice] = 'Saved all transactions successfully'

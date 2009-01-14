@@ -112,11 +112,11 @@ class IndexController < ApplicationController
   end
   
   # update the Group
-  # only access to description for OrderGroups
+  # only access to description for Ordergroups
   def updateGroup
     @group = Group.find(params[:id])
     authenticate_membership(@group)
-    if @group.is_a?(OrderGroup)
+    if @group.is_a?(Ordergroup)
       @group.update_attribute(:description, params[:group][:description])
     else
       @group.update_attributes(params[:group])
@@ -149,8 +149,8 @@ class IndexController < ApplicationController
       group = Group.find(params[:group])
       authenticate_membership(group)
       membership = Membership.find(params[:membership])
-      if group.is_a?(OrderGroup) && group.memberships.size == 1
-        # Deny dropping member if the group is an OrderGroup and there is only one member left.
+      if group.is_a?(Ordergroup) && group.memberships.size == 1
+        # Deny dropping member if the group is an Ordergroup and there is only one member left.
         flash[:error] = ERR_LAST_MEMBER
       else
         membership.destroy
@@ -196,7 +196,7 @@ class IndexController < ApplicationController
     # sort by ordergroups
     if params[:sort_by_ordergroups]
       @users = []
-      OrderGroup.find(:all, :order => "name").each do |group|
+      Ordergroup.find(:all, :order => "name").each do |group|
         group.users.each do |user|
           @users << user
         end
@@ -229,7 +229,7 @@ class IndexController < ApplicationController
   
   # gives an overview for the workgroups and its members
   def workgroups
-    @groups = Group.find :all, :conditions => "type != 'OrderGroup'", :order => "name"
+    @groups = Group.find :all, :conditions => "type != 'Ordergroup'", :order => "name"
   end
   
   # Invites a new user to join foodsoft in this group.

@@ -2,7 +2,7 @@
 
 <!--[form:group]-->
 %div{:style => "float:left;width:55%;"}
-  - if controller.controller_name == "admin" || !@group.is_a?(OrderGroup)
+  - if controller.controller_name == "admin" || !@group.is_a?(Ordergroup)
     %p
       %label{:for => "group_name"} Names
       %br/
@@ -11,7 +11,7 @@
     %label{:for => "group_description"} Beschreibung
     %br/
     = text_field 'group', 'description', :size => 40
-  - if @group.is_a?(OrderGroup) && controller.controller_name == "admin"
+  - if @group.is_a?(Ordergroup) && controller.controller_name == "admin"
     %p
       %label{:for => "group_actual_size"} Aktuelle Gruppengröße
       %br/
@@ -40,7 +40,7 @@
         %td
           %label{:for => "group_role_orders"} Bestellungsverwaltung
         %td= check_box 'group', 'role_orders'
--unless @group.is_a?(OrderGroup)
+-unless @group.is_a?(Ordergroup)
   %div{:style => "clear:both"}
     %h3 
       Wöchentliche Jobs definieren?

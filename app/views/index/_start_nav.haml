@@ -8,13 +8,13 @@
       %li= link_to _("Write message"), :controller => "messages", :action => "new"
   
   // Orders
-  - hasOrderGroup = !@current_user.find_ordergroup.nil?
+  - hasOrdergroup = !@current_user.find_ordergroup.nil?
   - hasOrdersRole = @current_user.role_orders?
-  - if hasOrderGroup || hasOrdersRole
+  - if hasOrdergroup || hasOrdersRole
     %li
       = _("Orders")
       %ul
-        - if hasOrderGroup
+        - if hasOrdergroup
           %li= link_to _('Order summary'), :controller => "ordering"
         - if hasOrdersRole
           %li= link_to _('Finish order'), :controller => 'orders'
@@ -39,5 +39,5 @@
     %li 
       = _('Administration')
       %ul
-        %li= link_to _("New ordergroup"), :controller => "admin", :action => "newOrderGroup"
+        %li= link_to _("New ordergroup"), :controller => "admin", :action => "newOrdergroup"
         %li= link_to _("New user"), :controller => "admin", :action => "newUser"  

@@ -15,17 +15,27 @@ module ApplicationHelper
   
   # Creates ajax-controlled-links for pagination
   # see also the plugin "will_paginate"
-  def pagination_links_remote(collection, per_page = @per_page, params = {})
+  def pagination_links_remote(collection, options = {})
+    per_page = options[:per_page] || @per_page
+    params = options[:params] || {}
+    update = options[:update] || nil
+
     # Translations
     previous_label = '&laquo; ' + _('Previous')
     next_label = _('Next') + ' &raquo;'
     # Merge other url-options for will_paginate
     params = params.merge({:per_page => per_page})
-    will_paginate collection, {:params => params, :remote => true, :previous_label => previous_label, :next_label => next_label}
+    will_paginate collection, { :params => params, :remote => true, :update => update,
+      :previous_label => previous_label, :next_label => next_label, }
   end
   
   # Link-collection for per_page-options when using the pagination-plugin
-  def items_per_page(per_page_options = [20, 50, 100], current = @per_page, action = controller.action_name)
+  def items_per_page(options = {})
+    per_page_options = options[:per_page_options] || [20, 50, 100]
+    current = options[:current] || @per_page
+    action = options[:action] || controller.action_name
+    update = options[:update] || nil
+
     links = []
     per_page_options.each do |per_page|
       unless per_page == current
@@ -34,7 +44,7 @@ module ApplicationHelper
           { :url => { :action => action, :params => {:per_page => per_page}},
             :before => "Element.show('loader')",
             :success => "Element.hide('loader')",
-            :method => :get } )
+            :method => :get, :update => update } )
       else
         links << per_page 
       end

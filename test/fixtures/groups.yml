@@ -27,11 +27,11 @@
 first:
   id: 1
   name: Order Group 1
-  type: OrderGroup
+  type: Ordergroup
 another:
   id: 2
   name: Order Group 2
-  type: OrderGroup
+  type: Ordergroup
 admins:
   id: 3
   name: Administrators

@@ -3,8 +3,8 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :users
     admin.resources :workgroups, :member => { :memberships => :get }
+    admin.resources :ordergroups, :member => { :memberships => :get }
     admin.connect 'memberships/:action/:id', :controller => 'memberships'
-    admin.add_member 'add_member', :controller => 'memberships', :action => 'add_member'
   end
 
   map.namespace :finance do |finance|
@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
     :collection => { :shared_suppliers => :get }
 
   map.my_profile 'my_profile', :controller => 'index', :action => 'myProfile'
-  map.my_order_group 'my_order_group', :controller => 'index', :action => 'myOrdergroup'
+  map.my_ordergroup 'my_ordergroup', :controller => 'index', :action => 'myOrdergroup'
 
   map.root :controller => 'index'
   

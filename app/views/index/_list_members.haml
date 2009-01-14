@@ -21,8 +21,8 @@
     - for user in @users
       %tr{:class => cycle('even','odd', :name => 'users')}
         - groups = user.groups
-        - ordergroup = groups.detect { |group| group.is_a?(OrderGroup) }
-        - workgroups = groups.select { |group| !group.is_a?(OrderGroup) }.collect(&:name)
+        - ordergroup = groups.detect { |group| group.is_a?(Ordergroup) }
+        - workgroups = groups.select { |group| !group.is_a?(Ordergroup) }.collect(&:name)
         %td= link_to user.nick, {:controller => "messages", :action => "user", :id => user}, :title => _('Send user an email')
         %td=h user.first_name if @current_user.role_admin? || user.settings["profile.nameIsPublic"] == '1'
         %td=h user.last_name if @current_user.role_admin? ||  user.settings["profile.nameIsPublic"] == '1'

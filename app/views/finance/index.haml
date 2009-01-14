@@ -35,7 +35,7 @@
         - @financial_transactions.each do |ft|
           %tr{:class => cycle("even","odd", :name => "financial_transaction")}
             %td= format_date(ft.created_on)
-            %td= ft.order_group.name
+            %td= ft.ordergroup.name
             %td{:style => "width:50%"}=h ft.note
             %td{:style => "color:#{ft.amount < 0 ? 'red' : 'black'}", :class => "currency"}= number_to_currency(ft.amount)
             

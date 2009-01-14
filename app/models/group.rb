@@ -41,11 +41,11 @@ class Group < ActiveRecord::Base
     memberships.find_by_user_id(user.id)
   end
   
-  # Returns all NONmembers and a checks for possible multiple OrderGroup-Memberships
+  # Returns all NONmembers and a checks for possible multiple Ordergroup-Memberships
   def non_members
     nonMembers = Array.new
     for user in User.find(:all, :order => "nick")
-      unless self.users.include?(user) || ( self.is_a?(OrderGroup) && user.find_ordergroup )
+      unless self.users.include?(user) || ( self.is_a?(Ordergroup) && user.find_ordergroup )
         nonMembers << user      
       end  
     end
@@ -57,16 +57,16 @@ class Group < ActiveRecord::Base
     raise ERR_LAST_ADMIN_GROUP_DELETE if self.role_admin == true && Group.find_all_by_role_admin(true).size == 1
   end
   
-  # get all groups, which are NOT OrderGroups
+  # get all groups, which are NOT Ordergroups
   def self.workgroups
     Workgroup.all
   end
   
   protected
   
-  # validates uniqueness of the Group.name. Checks groups and order_groups
+  # validates uniqueness of the Group.name. Checks groups and ordergroups
   def validate
-    errors.add(:name, "ist schon vergeben") if (group = Group.find_by_name(name) || group = OrderGroup.find_by_name(name)) && self != group
+    errors.add(:name, "ist schon vergeben") if (group = Group.find_by_name(name) || group = Ordergroup.find_by_name(name)) && self != group
   end
 
   # add validation check on update

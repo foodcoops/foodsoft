@@ -24,7 +24,7 @@ class Order < ActiveRecord::Base
   has_many :order_articles, :dependent => :destroy
   has_many :articles, :through => :order_articles
   has_many :group_orders, :dependent => :destroy
-  has_many :order_groups, :through => :group_orders
+  has_many :ordergroups, :through => :group_orders
   has_many :order_article_results, :dependent => :destroy
   has_many :group_order_results, :dependent => :destroy
   belongs_to :supplier
@@ -96,10 +96,10 @@ class Order < ActiveRecord::Base
     find :all, :conditions => ['booked = ?', true], :order => 'ends desc', :include => :supplier
   end
 
-  # search GroupOrder of given OrderGroup
+  # search GroupOrder of given Ordergroup
   def group_order(ordergroup)
     unless finished
-      return group_orders.detect {|o| o.order_group_id == ordergroup.id}
+      return group_orders.detect {|o| o.ordergroup_id == ordergroup.id}
     else
       return group_order_results.detect {|o| o.group_name == ordergroup.name}
     end
@@ -180,7 +180,7 @@ class Order < ActiveRecord::Base
         #saves ordergroups, which take part in this order
         self.group_orders.each do |go|
           group_order_result = GroupOrderResult.create!(:order => self, 
-                                                    :group_name => go.order_group.name,
+                                                    :group_name => go.ordergroup.name,
                                                     :price => go.price)
         end
         # saves every article of the order
@@ -203,7 +203,7 @@ class Order < ActiveRecord::Base
               oa.group_order_articles.each do |goa|
                 result = goa.orderResult
                 # find appropriate GroupOrderResult
-                group_order_result = GroupOrderResult.find(:first, :conditions => ['order_id = ? AND group_name = ?', self.id, goa.group_order.order_group.name])
+                group_order_result = GroupOrderResult.find(:first, :conditions => ['order_id = ? AND group_name = ?', self.id, goa.group_order.ordergroup.name])
                 group_order_article_result = GroupOrderArticleResult.new(:order_article_result => article_result,
                                                          :group_order_result => group_order_result,
                                                          :quantity => result[:total],
@@ -274,15 +274,15 @@ class Order < ActiveRecord::Base
     end
   end
   
-  # Sets "booked"-attribute to true and updates all OrderGroup_account_balances
+  # Sets "booked"-attribute to true and updates all Ordergroup_account_balances
   def balance(user)
     raise "Bestellung wurde schon abgerechnet" if self.booked
     transaction_note = "Bestellung: #{name}, von #{starts.strftime('%d.%m.%Y')} bis #{ends.strftime('%d.%m.%Y')}"
     transaction do
-      # update OrderGroups
+      # update Ordergroups
       group_order_results.each do |result|
         price = result.price * -1 # decrease! account balance
-        OrderGroup.find_by_name(result.group_name).addFinancialTransaction(price, transaction_note, user)        
+        Ordergroup.find_by_name(result.group_name).addFinancialTransaction(price, transaction_note, user)        
       end
       self.booked = true
       self.updated_by = user
@@ -319,9 +319,9 @@ class Order < ActiveRecord::Base
     def notifyOrderFinished 
       # Loop through GroupOrderResults for this order: 
       for group_order in self.group_order_results        
-        order_group = OrderGroup.find_by_name(group_order.group_name)
+        ordergroup = Ordergroup.find_by_name(group_order.group_name)
         # Determine group users that want a notification message:
-        users = order_group.users.reject{|u| u.settings["notify.orderFinished"] != '1'}
+        users = ordergroup.users.reject{|u| u.settings["notify.orderFinished"] != '1'}
         unless (users.empty?)
           # Assemble the order message text:
           results = group_order.group_order_article_results.find(:all, :include => [:order_article_result])
@@ -330,7 +330,7 @@ class Order < ActiveRecord::Base
           for user in users
             Message.from_template(
               'order_finished', 
-              {:user => user, :group => order_group, :order => self, :results => results, :total => group_order.price}, 
+              {:user => user, :group => ordergroup, :order => self, :results => results, :total => group_order.price}, 
               {:recipient_id => user.id, :recipients => recipients, :subject => "Bestellung beendet: #{self.name}"}
             ).save!
           end

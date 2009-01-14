@@ -1,5 +1,5 @@
 - if controller.action_name == 'myOrders'  
-  = pagination_links_remote @bookedOrders, 10, {:show_all => params[:show_all]}
+  = pagination_links_remote @bookedOrders, :per_page => 10, :params => {:show_all => params[:show_all]}
 %table.list
   %thead
     %tr
@@ -16,7 +16,7 @@
           %td= format_time(order.order.ends)
           %td{:class => "currency"}= number_to_currency(order.price)
       - else
-        // check if the OrderGroup has ordered
+        // check if the Ordergroup has ordered
         - if groupOrder = order.group_order(@orderGroup)
           %tr{:class=> cycle('even', 'odd', :name => 'bookedOrders')}
             %td= link_to order.name, :action => 'my_order_result', :id => order

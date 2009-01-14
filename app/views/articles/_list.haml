@@ -6,10 +6,10 @@
   %table{:style => "width:100%"}
     %tr
       %td
-        = pagination_links_remote @articles, @per_page, {:sort => params[:sort]}
+        = pagination_links_remote @articles, :params => {:sort => params[:sort]}
       %td{:style => "text-align:right"}
         - if @total > 30
-          = items_per_page([30, 100, 500])
+          = items_per_page :per_page_options => [30, 100, 500]
 
 %table#articles_table.list.articles
   %thead
@@ -49,7 +49,7 @@
               
             = hidden_field_tag 'supplier', @supplier.id
 %p
-  = pagination_links_remote @articles, @per_page, {:sort => params[:sort]}
+  = pagination_links_remote @articles, :params => {:sort => params[:sort]}
     
 :plain
   <script type="text/javascript">

@@ -17,7 +17,7 @@
             %td= link_to order.name, :controller => 'ordering', :action => 'order', :id => order
             %td=h order.supplier.name
             %td=h format_time(order.ends) unless order.ends.nil?
-            - if (groupOrder = order.group_orders.find(:first, :conditions => ["order_group_id = ?", @orderGroup.id]))
+            - if (groupOrder = order.group_orders.find(:first, :conditions => ["ordergroup_id = ?", @orderGroup.id]))
               - total += groupOrder.price
               %td=h groupOrder.updated_by.nil? ? '??' : "#{groupOrder.updated_by.nick} (#{format_time(groupOrder.updated_on)})"
               %td= number_to_currency(groupOrder.price)

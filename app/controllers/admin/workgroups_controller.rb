@@ -1,4 +1,5 @@
 class Admin::WorkgroupsController < ApplicationController
+  before_filter :authenticate_admin
   
   def index
     if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
@@ -10,6 +11,7 @@ class Admin::WorkgroupsController < ApplicationController
     # if the search field is used
     conditions = "name LIKE '%#{params[:query]}%'" unless params[:query].nil?
 
+    @total = Ordergroup.count(:conditions => conditions )
     @workgroups = Workgroup.paginate(:conditions => conditions, :page => params[:page],
       :per_page => @per_page, :order => 'name')
 

@@ -1,8 +1,0 @@
-<h1>Neue <%= @group.is_a?(OrderGroup) ? 'Bestellgruppe' : 'Gruppe' %></h1>
-<div class="edit_form" style="width:50em">
-<% form_tag(:action => (@group.is_a?(OrderGroup) ? 'createOrderGroup' : 'createGroup')) do %>
-  <%= render :partial => 'groups/form' %>
-  <br style="clear:both" />
-  <%= submit_tag "Speichern" %> | <%= link_to "Abbrechen", :action => "listGroups" %>
-<% end %>
-</div>

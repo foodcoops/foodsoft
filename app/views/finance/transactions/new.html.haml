@@ -3,7 +3,7 @@
 .edit_form{ :style => "width:30em" }
   - form_for(@financial_transaction, :url => { :action => 'create' }) do |f|
     = f.error_messages
-    = f.hidden_field :order_group_id
+    = f.hidden_field :ordergroup_id
     %p
       Group:
       %b=h @group.name

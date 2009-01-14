@@ -95,7 +95,7 @@ class Message < ActiveRecord::Base
   # Example:
   #   Message.from_template(
   #     'order_finished', 
-  #     {:user => user, :group => order_group, :order => self, :results => results, :total => group_order.price}, 
+  #     {:user => user, :group => ordergroup, :order => self, :results => results, :total => group_order.price}, 
   #     {:recipient_id => user.id, :recipients => recipients, :subject => "Bestellung beendet: #{self.name}"}
   #   ).save!
   def self.from_template(template, vars, attributes)

@@ -34,7 +34,8 @@ module WillPaginate
       :page_links     => true,
       :container      => true,
       # bennis hack for ajax-support
-      :remote         => false
+      :remote         => false,
+      :update         => nil,
     }
     mattr_reader :pagination_options
 
@@ -303,7 +304,7 @@ module WillPaginate
       if @options[:remote] == true
         @template.link_to_remote text, :url => url_for(page), :html => attributes, 
           :before => "Element.show('loader')", :success => "Element.hide('loader')",
-          :method => :get
+          :method => :get, :update => @options[:update]
       else
         @template.link_to text, url_for(page), attributes
       end

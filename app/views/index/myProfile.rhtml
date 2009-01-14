@@ -21,7 +21,7 @@ You can also see in which workgroups you are.
     <% for membership in Membership.find_all_by_user_id(@user.id) %>
     <p>
         <%= link_to(membership.group.name, :action => 'showGroup', :id => membership.group) %>
-        <% if membership.group.type != 'OrderGroup' %>
+        <% if membership.group.type != 'Ordergroup' %>
           (<%= link_to _("Cancel membership"), { :action => 'cancel_membership', :id => membership }, :confirm => _("Are you sure to cancel this membership?"), :method => :post  %>)
         <% end %>
     </p>

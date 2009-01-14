@@ -1,4 +1,4 @@
-= pagination_links_remote @orders, @per_page, {:sort => params[:sort]}
+= pagination_links_remote @orders, :params => {:sort => params[:sort]}
 %table.list{:style => "width: 100%"}
   %thead
     %tr

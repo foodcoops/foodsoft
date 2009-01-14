@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   
   def index
     @non_group_tasks = Task.find :all, :conditions => "group_id IS NULL AND done = 0", :order => "due_date ASC"
-    @groups = Group.find :all, :conditions => "type != 'OrderGroup'"
+    @groups = Group.find :all, :conditions => "type != 'Ordergroup'"
   end
   
   def myTasks
@@ -109,7 +109,7 @@ class TasksController < ApplicationController
   # shows workgroup (normal group) to edit weekly_tasks_template
   def workgroup
     @group = Group.find(params[:id])
-    if @group.is_a? OrderGroup
+    if @group.is_a? Ordergroup
       flash[:error] = "Keine Arbeitsgruppe gefunden"
       redirect_to :action => "index"
     end
