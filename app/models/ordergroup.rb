@@ -125,9 +125,8 @@ class Ordergroup < Group
           {:group => self, :transaction => transaction}, 
           {:recipients_ids => users.collect(&:id), :subject => "Gruppenkonto im Minus"}
         ).save!
-        end        
       end
-    end    
+    end
   end
   
   # before create or update, check if the name is already used in GroupOrderResults

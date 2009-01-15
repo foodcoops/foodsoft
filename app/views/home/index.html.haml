@@ -31,6 +31,12 @@
     // Current orders
     = render :partial => 'ordering/currentOrders'
 
+  - unless @messages.empty?
+    .box_title
+      %h2 Neuste Nachrichten
+    .column_content
+      = render :partial => 'messages/messages', :locals => { :subject_length => 110 }
+
   // Ordergroup overview
   .box_title
     %h2=_ "My ordergroup"

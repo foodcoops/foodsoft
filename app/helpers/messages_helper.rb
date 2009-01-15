@@ -11,7 +11,7 @@ module MessagesHelper
     groups
   end
 
-  def format_subject(message)
-    truncate "<b>#{link_to(h(message.subject), message)}</b> <span style='color:grey'>#{h(message.body)}</span>", :length => 200
+  def format_subject(message, length)
+    truncate "<b>#{link_to(h(message.subject), message)}</b> <span style='color:grey'>#{h(message.body)}</span>", :length => length
   end
 end

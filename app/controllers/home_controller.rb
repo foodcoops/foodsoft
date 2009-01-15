@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  helper :messages
   
   def index
     @currentOrders = Order.find_current
@@ -10,7 +11,7 @@ class HomeController < ApplicationController
     @unaccepted_tasks = @current_user.unaccepted_tasks
     # task in next week
     @next_tasks = @current_user.next_tasks
-
+    @messages = Message.user.find :all, :limit => 5
     # count tasks with no responsible person
     # tasks for groups the current user is not a member are ignored
     tasks = Task.find(:all, :conditions => ["assigned = ? and done = ?", false, false])
