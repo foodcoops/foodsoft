@@ -1,88 +1,88 @@
 # == Schema Information
-# Schema version: 20090102171850
+# Schema version: 20090115123421
 #
 # Table name: messages
 #
-#  id           :integer(4)      not null, primary key
-#  sender_id    :integer(4)
-#  recipient_id :integer(4)      default(0), not null
-#  recipients   :string(255)     default(""), not null
-#  subject      :string(255)     default(""), not null
-#  body         :text            default(""), not null
-#  read         :boolean(1)      not null
-#  email_state  :integer(4)      default(0), not null
-#  created_on   :datetime        not null
+#  id             :integer(4)      not null, primary key
+#  sender_id      :integer(4)
+#  recipients_ids :text            default(""), not null
+#  subject        :string(255)     not null
+#  body           :text
+#  email_state    :integer(4)      default(0), not null
+#  private        :boolean(1)
+#  created_at     :datetime
 #
 
 class Message < ActiveRecord::Base
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
-  belongs_to :recipient, :class_name => "User", :foreign_key => "recipient_id"
-  
-  attr_accessible :recipient_id, :recipient, :subject, :body, :recipients
 
+  serialize :recipients_ids, Array
+  attr_accessor :sent_to_all, :group_id, :recipients_nicks
   
+  named_scope :pending, :conditions => { :email_state => 0 }
+  named_scope :sent, :conditions => { :email_state => 1 }
+  named_scope :user, :conditions => "sender_id IS NOT NULL", :order => 'created_at DESC', :include => :sender
+
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {
-    :none => 0,
-    :pending => 1,
-    :sent => 2,
-    :failed => 3
+    :pending => 0,
+    :sent => 1,
+    :failed => 2
   }
 
-  validates_presence_of :recipient_id
+  validates_presence_of :recipients_ids, :subject, :body
   validates_length_of :subject, :in => 1..255
-  validates_presence_of :recipients
-  validates_presence_of :body  
   validates_inclusion_of :email_state, :in => EMAIL_STATE.values
-  
-  @@pending = false
-  
-  # Automatically determine if this message should be send as an email.
+
+
+  # clean up the recipients_ids
   def before_validation_on_create
-    if (recipient && recipient.settings["messages.sendAsEmail"] == '1')
-      self.email_state = EMAIL_STATE[:pending]
-    else
-      self.email_state = EMAIL_STATE[:none]
-    end
+    self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
+    self.recipients_ids = User.all.collect(&:id) if sent_to_all == 1
   end
 
-  # Determines if this new message is a pending email.
-  def after_create
-    @@pending = @@pending || self.email_state == EMAIL_STATE[:pending]
+  def add_recipients(users)
+    self.recipients_ids = [] if recipients_ids.blank?
+    self.recipients_ids += users.collect(&:id) unless users.blank?
   end
 
-  # Returns true if there might be pending emails.
-  def self.pending?
-    @@pending
+  def group_id=(group_id)
+    @group_id = group_id
+    add_recipients Group.find(group_id).users unless group_id.blank?
+  end
+
+  def recipients_nicks=(nicks)
+    @recipients_nicks = nicks
+    add_recipients nicks.split(",").collect { |nick| User.find_by_nick(nick) }
+  end
+
+  def recipient=(user)
+    @recipients_nicks = user.nick
   end
   
   # Returns true if this message is a system message, i.e. was sent automatically by the FoodSoft itself.
   def system_message?    
     self.sender_id.nil?
-  end  
+  end
+
+  def sender_name
+    system_message? ? 'Foodsoft' : sender.nick
+  end
+
+  def recipients
+    User.find(recipients_ids)
+  end
   
   # Sends all pending messages that are to be send as emails.
   def self.send_emails
-    transaction do
-      messages = find(:all, :conditions => ["email_state = ?", EMAIL_STATE[:pending]], :lock => true)
-      logger.debug("Sending #{messages.size} pending messages as emails...") unless messages.empty?
-      for message in messages
-        if (message.recipient && message.recipient.email && !message.recipient.email.empty?)
-          begin
-            Mailer.deliver_message(message)
-            message.update_attribute(:email_state, EMAIL_STATE[:sent])
-            logger.debug("Delivered message as email: id = #{message.id}, recipient = #{message.recipient.nick}, subject = \"#{message.subject}\"")
-          rescue => exception
-            message.update_attribute(:email_state, EMAIL_STATE[:failed])
-            logger.warn("Failed to deliver message as email: id = #{message.id}, recipient = #{message.recipient.nick}, subject = \"#{message.subject}\", exception = #{exception.message}")
-          end
-        else
-          message.update_attribute(:email_state, EMAIL_STATE[:failed])
-          logger.warn("Cannot deliver message as email (no user email): id = #{message.id}, recipient = #{message.recipient.nick}, subject = \"#{message.subject}\"")
+    messages = Message.pending
+    for message in messages
+      for recipient in message.recipients
+        if recipient.settings['messages.sendAsEmail'] == 1 && !recipient.email.blank?
+          Mailer.deliver_message(message)
         end
       end
-      logger.debug("Done sending emails.") unless messages.empty?
-      @@pending = false
+      message.update_attribute(:email_state, 1)
     end
   end
 

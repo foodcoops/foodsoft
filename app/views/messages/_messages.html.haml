@@ -1,0 +1,12 @@
+- unless @messages.empty?
+  - form_tag :action => 'destroy' do
+    %table.list
+      %tbody
+        - for message in @messages
+          %tr{:class => cycle('even','odd', :name => 'messages')}
+            %td
+              %b= h(message.sender_name)
+            %td= format_subject(message)
+            %td= format_time(message.created_at)
+            %td= link_to('Antworten', reply_message_path(message))
+            

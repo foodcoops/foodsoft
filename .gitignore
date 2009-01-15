@@ -3,4 +3,5 @@ tmp/**/*
 config/*.yml
 db/*.sqlite3
 nbproject/
+config/environments/development.rb
 

@@ -1,0 +1,6 @@
+- title "Nachrichten im Überblick"
+
+%p= link_to('Neue Nachricht', :action => 'new')
+
+#messages
+  = render :partial => 'messages'

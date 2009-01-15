@@ -1,28 +1,21 @@
-%h1 Nachricht anzeigen
+- title "Nachricht anzeigen"
 
 %div{:style => "width:40em"}
-  - if @message
-    %table{:style => "width:25em"}
-      %tr
-        %td Von:
-        %td=h @message.system_message? ? 'FoodSoft' : @message.sender.nick
-      %tr
-        %td An:
-        %td=h @message.recipients
-      %tr
-        %td Betreff:
-        %td
-          %b=h @message.subject
-      %tr
-        %td Gesendet:
-        %td= format_time(@message.created_on)
-    %hr/
-    %p= simple_format(h(@message.body))
-    %hr/
-    %p
-      = link_to('Antworten', :action => 'reply', :id => @message) + ' | ' unless @message.system_message?
-      = link_to('Löschen', {:action => 'destroy', :id => @message}, :method => "post")
-      |
-      = link_to 'Nachrichteneingang', :action => 'inbox'
-  - else 
-    %p Nachricht kann nicht angezeigt werden.  
+  %table{:style => "width:25em"}
+    %tr
+      %td Von:
+      %td=h @message.sender_name
+    %tr
+      %td Betreff:
+      %td
+        %b=h @message.subject
+    %tr
+      %td Gesendet:
+      %td= format_time(@message.created_at)
+  %hr/
+  %p= simple_format(h(@message.body))
+  %hr/
+  %p
+    = link_to('Antworten', reply_message_path(@message))
+    |
+    = link_to 'Nachricht im Überblick', messages_path

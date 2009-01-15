@@ -2,6 +2,9 @@ ActionController::Routing::Routes.draw do |map|
   map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
   map.my_tasks '/home/tasks', :controller => 'tasks', :action => 'myTasks'
 
+  map.resources :messages, :only => [:index, :show, :new, :create],
+    :member => { :reply => :get, :user => :get, :group => :get }
+
   map.namespace :admin do |admin|
     admin.resources :users
     admin.resources :workgroups, :member => { :memberships => :get }

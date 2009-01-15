@@ -27,13 +27,6 @@
         = _("There are") + " #{@unassigned_tasks_number} " + link_to(_("unassigned task(s)"), :controller => "tasks")
       %p{:style => "clear:both"}= link_to _("My tasks"), :controller => "tasks", :action => "myTasks"
 
-  - unless @messages.empty?
-    .box_title 
-      %h2=_ "Unread messages"
-    .column_content
-      = render :partial => 'messages/unread'
-      %p= link_to _("All messages"), :controller => 'messages', :action => 'inbox'
-
   - if @orderGroup
     // Current orders
     = render :partial => 'ordering/currentOrders'

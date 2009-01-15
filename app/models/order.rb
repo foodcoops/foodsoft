@@ -322,18 +322,15 @@ class Order < ActiveRecord::Base
         ordergroup = Ordergroup.find_by_name(group_order.group_name)
         # Determine group users that want a notification message:
         users = ordergroup.users.reject{|u| u.settings["notify.orderFinished"] != '1'}
-        unless (users.empty?)
+        unless users.empty?
           # Assemble the order message text:
           results = group_order.group_order_article_results.find(:all, :include => [:order_article_result])
           # Create user notification messages:
-          recipients = users.collect{|u| u.nick}.join(', ')
-          for user in users
-            Message.from_template(
-              'order_finished', 
-              {:user => user, :group => ordergroup, :order => self, :results => results, :total => group_order.price}, 
-              {:recipient_id => user.id, :recipients => recipients, :subject => "Bestellung beendet: #{self.name}"}
-            ).save!
-          end
+          Message.from_template(
+            'order_finished',
+            {:group => ordergroup, :order => self, :results => results, :total => group_order.price},
+            {:recipients_ids => users.collect(&:id), :subject => "Bestellung beendet: #{self.name}"}
+          ).save!
         end
       end
     end

@@ -1,17 +1,16 @@
 # == Schema Information
-# Schema version: 20090102171850
+# Schema version: 20090115123421
 #
 # Table name: messages
 #
-#  id           :integer(4)      not null, primary key
-#  sender_id    :integer(4)
-#  recipient_id :integer(4)      default(0), not null
-#  recipients   :string(255)     default(""), not null
-#  subject      :string(255)     default(""), not null
-#  body         :text            default(""), not null
-#  read         :boolean(1)      not null
-#  email_state  :integer(4)      default(0), not null
-#  created_on   :datetime        not null
+#  id             :integer(4)      not null, primary key
+#  sender_id      :integer(4)
+#  recipients_ids :text            default(""), not null
+#  subject        :string(255)     not null
+#  body           :text
+#  email_state    :integer(4)      default(0), not null
+#  private        :boolean(1)
+#  created_at     :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

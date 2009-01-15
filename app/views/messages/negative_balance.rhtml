@@ -1,6 +1,6 @@
-Hallo <%= user.nick %>!
+Liebe <%= group.name %>,
 
-Der Kontostand deiner Bestellgruppe <%= group.name %> ist durch eine Buchung am <%= transaction.created_on.strftime('%d.%m.%Y um %H:%M') %> ins Minus gerutscht: <%= group.account_balance %>
+euer Kontostand ist durch eine Buchung am <%= transaction.created_on.strftime('%d.%m.%Y um %H:%M') %> ins Minus gerutscht: <%= group.account_balance %>
 
 Es wurden <%= transaction.amount %> für "<%= transaction.note %>" abgebucht, die Buchung wurde von <%= transaction.user.nick %> erstellt.
 

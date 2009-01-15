@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090113111624) do
+ActiveRecord::Schema.define(:version => 20090114101610) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -184,17 +184,13 @@ ActiveRecord::Schema.define(:version => 20090113111624) do
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
-    t.integer  "recipient_id", :default => 0,     :null => false
-    t.string   "recipients",   :default => "",    :null => false
-    t.string   "subject",      :default => "",    :null => false
-    t.text     "body",                            :null => false
-    t.boolean  "read",         :default => false, :null => false
-    t.integer  "email_state",  :default => 0,     :null => false
-    t.datetime "created_on",                      :null => false
+    t.text     "recipients_ids",                    :null => false
+    t.string   "subject",                           :null => false
+    t.text     "body"
+    t.integer  "email_state",    :default => 0,     :null => false
+    t.boolean  "private",        :default => false
+    t.datetime "created_at"
   end
-
-  add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
-  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
   create_table "order_article_results", :force => true do |t|
     t.integer "order_id",                                     :default => 0,   :null => false

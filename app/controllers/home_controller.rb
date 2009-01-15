@@ -6,8 +6,6 @@ class HomeController < ApplicationController
     if @orderGroup
       @financial_transactions = @orderGroup.financial_transactions.find(:all, :order => 'created_on desc', :limit => 3)
     end
-    # unread messages
-    @messages = Message.find_all_by_recipient_id_and_read(@current_user.id, false, :order => 'messages.created_on desc', :include => :sender)
     # unaccepted tasks
     @unaccepted_tasks = @current_user.unaccepted_tasks
     # task in next week

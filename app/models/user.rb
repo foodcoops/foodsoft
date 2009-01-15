@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   has_many :ordergroups, :through => :memberships, :source => :group
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments
+  has_many :send_messages, :class_name => "Message", :foreign_key => "sender_id"
   
   attr_accessor :password, :setting_attributes
 

@@ -1,8 +1,8 @@
-Hallo <%= user.nick %>!
+Liebe <%= group.name %>,
 
-Die Bestellung "<%= order.name %>" wurde am <%= order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= order.updated_by.nick %> beendet.
+die Bestellung "<%= order.name %>" wurde am <%= order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= order.updated_by.nick %> beendet.
 
-Für deine Bestellgruppe <%= group.name %> wurden die folgenden Artikel bestellt:
+Für Euch wurden die folgenden Artikel bestellt:
 <%	for result in results
       article = result.order_article_result  -%>
 <%= article.name %>:	<%= result.quantity %> x <%= article.unit %> = <%= result.quantity * article.gross_price %>

@@ -12,6 +12,15 @@ class ApplicationController < ActionController::Base
   def self.current
     Thread.current[:application_controller]
   end
+
+  # Use this method to call a rake task,,
+  # e.g. to deliver mails after there are created.
+  def call_rake(task, options = {})
+    options[:rails_env] ||= Rails.env
+    args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
+    system "/usr/bin/rake #{task} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/rake.log &"
+  end
+
   
   protected
 
@@ -139,7 +148,7 @@ class ApplicationController < ActionController::Base
     
     # Sends any pending emails that were created during this request.
     def send_email_messages
-      Message.send_emails if Message.pending?
+      call_rake :send_emails unless Message.pending.empty?
     end
 
 end

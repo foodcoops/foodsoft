@@ -21,9 +21,9 @@ class Mailer < ActionMailer::Base
     from        (message.system_message? ? "FoodSoft <#{APP_CONFIG[:email_sender]}>" : "#{message.sender.nick} <#{message.sender.email}>")
     body        :body => message.body, :sender => (message.system_message? ? 'Foodsoft' : message.sender.nick), 
                 :recipients => message.recipients,
-                :reply => url_for(:host => request.host, :controller => "messages", :action => "reply", :id => message),
-                :profile => url_for(:host => request.host, :controller => "index", :action => "myProfile", :id => message.recipient),
-                :link => url_for(:host => request.host, :controller => "messages", :action => "show", :id => message),
+                :reply => url_for(:host => request.host, reply_message_path(message),
+                :profile => url_for(:host => request.host, my_profile_path),
+                :link => url_for(:host => request.host, message_path(message),
                 :foodsoftUrl => url_for(:host => request.host, :controller => "index")
   end
   
