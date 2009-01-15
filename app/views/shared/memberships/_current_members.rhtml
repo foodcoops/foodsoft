@@ -10,7 +10,7 @@
       <li style="margin-left:-15px">
         <b><%= membership.user.nick %></b> (<%=h membership.user.first_name + ' ' + membership.user.last_name %>)
          | <%= link_to_remote 'entfernen', 
-                :url => { :controller => 'admin/memberships', :action => 'drop_member', :group_id => @group, :membership_id => membership },
+                :url => { :controller => '/memberships', :action => 'drop_member', :group_id => @group, :membership_id => membership },
                 :before => "Element.show('loader')",
                 :success => "Element.hide('loader')" %>
        </li>

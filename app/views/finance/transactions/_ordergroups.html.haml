@@ -5,10 +5,10 @@
   %table{:style => "width:100%"}
     %tr
       %td
-        = pagination_links_remote @groups, :params => {:sort => params[:sort]}
+        = pagination_links_remote @groups, :update => :ordergroups, :params => {:sort => params[:sort]}
       %td{:style => "text-align:right"}
         - if @total > 20
-          = items_per_page
+          = items_per_page :update => :ordergroups
 %table.list
   %thead
     %tr

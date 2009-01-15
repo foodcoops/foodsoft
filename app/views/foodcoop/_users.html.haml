@@ -3,10 +3,10 @@
     %table{:style => "width:100%"}
       %tr
         %td
-          = pagination_links_remote @users
+          = pagination_links_remote @users, :update => :users
         %td{:style => "text-align:right"}
           - if @total > 20
-            = items_per_page
+            = items_per_page :update => :users
 %table.list
   %thead
     %tr

@@ -1,0 +1,57 @@
+= @form.error_messages
+
+%div{:style => "float:left;width:55%;"}
+  %p
+    = @form.label :name
+    %br/
+    = @form.text_field :name, :size => 20
+  %p
+    = @form.label :description
+    %br/
+    = @form.text_field :description, :size => 40
+
+= yield
+
+- if @group.is_a?(Workgroup)
+  %div{:style => "clear:both"}
+    %h3
+      Wöchentliche Jobs definieren?
+      = @form.check_box :weekly_task, {:onclick => "toggleWeeklyTask();"}
+    %table
+      %tr
+        %td
+          = @form.label :weekday, "Wochentag:"
+        %td
+          = @form.select :weekday, Workgroup.weekdays
+      %tr
+        %td
+          = @form.label :task_name, "Dienstname:"
+        %td= @form.text_field :task_name, :size => 20
+      %tr
+        %td
+          = @form.label :task_required_users, "Benötigte Verantwortliche:"
+        %td= @form.text_field :task_required_users, :size => 3
+      %tr
+        %td
+          = @form.label :task_description, "Beschreibung:"
+        %td= @form.text_area :task_description
+
+  %script{ 'type' => "text/javascript"}
+    :plain
+      //<![CDATA[
+      // preset data
+      function toggleWeeklyTask(){
+        if ($("workgroup_weekly_task").checked == true) {
+          $('workgroup_weekday').disabled = false;
+          $('workgroup_task_name').disabled = false;
+          $('workgroup_task_required_users').disabled = false;
+          $('workgroup_task_description').disabled = false;
+        } else {
+          $('workgroup_weekday').disabled = true;
+          $('workgroup_task_name').disabled = true;
+          $('workgroup_task_required_users').disabled = true;
+          $('workgroup_task_description').disabled = true;
+        }
+      }
+      toggleWeeklyTask();
+      //]]>

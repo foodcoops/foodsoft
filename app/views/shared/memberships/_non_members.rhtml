@@ -3,7 +3,7 @@
   <li>
     <b><%= user.nick %></b> (<%=h user.first_name + ' ' + user.last_name %>)
     | <%= link_to_remote 'hinzufügen', 
-        :url => { :controller => 'admin/memberships', :action => 'add_member', :group_id => @group, :user_id => user },
+        :url => { :controller => '/memberships', :action => 'add_member', :group_id => @group, :user_id => user },
         :before => "Element.show('loader')",
         :success => "Element.hide('loader')" %>
   </li>

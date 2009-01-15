@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090102171850
+# Schema version: 20090114101610
 #
 # Table name: tasks
 #
@@ -8,7 +8,7 @@
 #  description    :string(255)
 #  due_date       :date
 #  done           :boolean(1)
-#  group_id       :integer(4)
+#  workgroup_id   :integer(4)
 #  assigned       :boolean(1)
 #  created_on     :datetime        not null
 #  updated_on     :datetime        not null

@@ -4,7 +4,7 @@
     Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.
     %br/
     Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter
-    = link_to "Einstellungen", :action => "editProfile"
+    = link_to "Einstellungen", my_profile_path
     freigeben.
 
 .left_column{:style => "width:100%"}
@@ -21,13 +21,11 @@
           :before => "Element.show('loader')", |
           :success => "Element.hide('loader')", |
           :url => {:action => 'foodcoop_members'}, |
+          :update => :users, |
           :with => 'query' |
     
     =_ "Sort by Ordergroups :"
-    - form_tag({:action => "foodcoop_members"}, :method => "get", :style=>"display:inline;") do
-      -unless params[:sort_by_ordergroups]
-        %input{:type => "checkbox", :name => :sort_by_ordergroups, :value => "1", :onclick => "submit();"}
-      -else
-        %input{:type => "checkbox", :name => :sort_by_ordergroups, :value => "0", :checked => "checked", :onclick => "submit();"}
-    #user_table
-      = render :partial => "list_members"
+    - form_tag({:action => "members"}, :method => "get", :style=>"display:inline;") do
+      = check_box_tag :sort_by_ordergroups, 1, params[:sort_by_ordergroups], :onclick => "submit();"
+    #users
+      = render :partial => "users"

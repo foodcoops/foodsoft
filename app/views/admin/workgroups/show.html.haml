@@ -3,40 +3,14 @@
   .box_title
     %h2 Übersicht
   .column_content
-    %p
-      %b Beschreibung:
-      =h @workgroup.description
-    %p
-      %b Gruppe hat Zugriff auf:
-      - roles = Array.new
-      - roles << 'Administration' if @workgroup.role_admin?
-      - roles << 'Finanzen' if @workgroup.role_finance?
-      - roles << 'Lieferanten' if @workgroup.role_suppliers?
-      - roles << 'Artikel' if @workgroup.role_article_meta?
-      - roles << 'Bestellungsverwaltung' if @workgroup.role_orders?
-      =h roles.join(', ')
-    %p
-      - if @workgroup.weekly_task
-        %b wöchentlicher Job:
-        =h @workgroup.task_name
-        am
-        = weekday(@workgroup.weekday)
-      - else
-        kein wöchentlicher Job definiert
+    = render :partial => 'shared/group', :locals => { :group => @workgroup }
 
-    = link_to 'Gruppe bearbeiten', edit_admin_workgroup_path(@workgroup)
-    |
-    = link_to 'Löschen', [:admin, @workgroup], :confirm => 'Bist Du sicher?', :method => :delete
-    |
-    = link_to 'Nachricht senden', :controller => 'messages', :action => 'group', :id => @workgroup
-  .box_title
-    %h2 Mitglieder
-  .column_content
-    - if @workgroup.memberships.empty?
-      %i Diese Gruppe hat derzeit keine Mitglieder
-    - else
-      %ul{:style => "list-style-type:decimal;"}
-        - for membership in @workgroup.memberships
-          %li= link_to membership.user.nick, [:admin, membership.user]
-    %p= link_to 'Mitglieder bearbeiten', memberships_admin_workgroup_path(@workgroup)
+    %p
+      = link_to 'Gruppe bearbeiten', edit_admin_workgroup_path(@workgroup)
+      |
+      = link_to 'Löschen', [:admin, @workgroup], :confirm => 'Bist Du sicher?', :method => :delete
+      |
+      = link_to 'Nachricht senden', :controller => 'messages', :action => 'group', :id => @workgroup
+      |
+      = link_to 'Mitglieder bearbeiten', memberships_admin_workgroup_path(@workgroup)
 %p{:style => "clear:both"}= link_to "Gruppenübersicht", admin_workgroups_path

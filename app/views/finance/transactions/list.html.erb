@@ -15,9 +15,10 @@
          :before => "Element.show('loader')",
          :success => "Element.hide('loader')",
          :url => {:action => 'list'},
-         :with => 'query' %>
-    <div id="table">          
-    <%= render :partial => "list" %>
+         :with => 'query',
+         :update => 'transactions' %>
+    <div id="transactions">
+      <%= render :partial => "list" %>
     </div>
     <p><%= link_to 'Neue Transaktion', :action => 'new', :id => @group %></p>
   </div>

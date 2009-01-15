@@ -1,14 +1,19 @@
 <%
   u = @current_user
   tabs = [
-      { :name => "Start", :url => root_path, :active => ["index", "messages", "tasks"],
+      { :name => "Start", :url => root_path, :active => ["index", "messages", "home"],
         :subnav => [
-          { :name => "Members", :url => "/index/foodcoop_members"},
-          { :name => "Workgroups", :url => "/index/workgroups"},
-          { :name => "Tasks", :url => "/tasks"},
           { :name => "Messages", :url => "/messages/inbox"},
-          { :name => "My Ordergroup", :url => my_ordergroup_path},
-          { :name => "My Ordergroup", :url => my_profile_path}
+          { :name => "My tasks", :url => "/home/tasks" },
+          { :name => "My ordergroup", :url => "/home/ordergroup"},
+          { :name => "My profile", :url => "/home/profile"}
+        ]
+      },
+      { :name => "Foodcoop", :url => "/foodcoop/members", :active => ["foodcoop", "tasks"],
+        :subnav => [
+          { :name => "Members", :url => "/foodcoop/members"},
+          { :name => "Workgroups", :url => "/foodcoop/workgroups"},
+          { :name => "Tasks", :url => "/tasks"}
         ]
       },
       { :name => "Orders", :url => "/ordering", :active => ["orders", "ordering"],
@@ -48,12 +53,12 @@
 -%>
 <ul>
   <% for tab in tabs -%>
-    <% unless tab[:access?] and tab[:access?] == false %>
+    <% unless tab[:access?] and tab[:access?] == false -%>
       <li class="<%= 'current' if tab_is_active?(tab) %>">
         <%= link_to tab[:name], tab[:url] %>
         <ul>
           <% for subtab in tab[:subnav] -%>
-            <% unless subtab[:access?] and subtab[:access?] == false %>
+            <% unless subtab[:access?] and subtab[:access?] == false -%>
               <li><%= link_to subtab[:name], subtab[:url] %></li>
             <% end -%>
           <% end -%>

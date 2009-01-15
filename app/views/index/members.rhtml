@@ -1,8 +1,0 @@
-<%= render :partial => 'groups/edit_members' %>
-<p style="clear:both">
-  <% if @group.is_a?(Ordergroup) -%>
-    <%= link_to "Zurück", :action => "myOrdergroup" %>
-  <% else -%>
-    <%= link_to 'Zurück', :action => 'showGroup', :id => @group %>
-  <% end -%>
-</p>

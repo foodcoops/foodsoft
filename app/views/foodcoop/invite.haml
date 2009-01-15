@@ -1,0 +1,14 @@
+- title "Neues Foodcoop-Mitglied einladen"
+
+%p 
+  Hier kannst du eine Person in die Gruppe 
+  %b=h @group.name
+  einladen, die noch nicht Mitglied der Foodcoop ist.
+.edit_form{:style => 'width:35em'}      
+  - form_for(@invite, :url => {:action => 'send_invitation', :id => @group}) do |form|
+    = form.error_messages
+    %p
+      Email-Adresse: 
+      = form.text_field('email', :size => 40, :maxlength => 128)
+    %p
+      = submit_tag('Einladung abschicken')

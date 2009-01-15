@@ -1,10 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
+  map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
+  map.my_tasks '/home/tasks', :controller => 'tasks', :action => 'myTasks'
 
   map.namespace :admin do |admin|
     admin.resources :users
     admin.resources :workgroups, :member => { :memberships => :get }
     admin.resources :ordergroups, :member => { :memberships => :get }
-    admin.connect 'memberships/:action/:id', :controller => 'memberships'
   end
 
   map.namespace :finance do |finance|
@@ -17,10 +18,7 @@ ActionController::Routing::Routes.draw do |map|
     :has_many => [:deliveries],
     :collection => { :shared_suppliers => :get }
 
-  map.my_profile 'my_profile', :controller => 'index', :action => 'myProfile'
-  map.my_ordergroup 'my_ordergroup', :controller => 'index', :action => 'myOrdergroup'
-
-  map.root :controller => 'index'
+  map.root :controller => 'home', :action => 'index'
   
   # The priority is based upon order of creation: first created -> highest priority.
 

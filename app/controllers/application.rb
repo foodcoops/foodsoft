@@ -113,6 +113,20 @@ class ApplicationController < ActionController::Base
       authenticate('orders')
     end
 
+    # checks if the current_user is member of given group.
+    # if fails the user will redirected to startpage
+    def authenticate_membership_or_admin
+      @group = Group.find(params[:id])
+      unless @group.member?(@current_user) or @current_user.role_admin?
+        flash[:error] = ERROR_NO_GROUP_MEMBER
+        if request.xml_http_request?
+          render(:update) {|page| page.redirect_to root_path }
+        else
+          redirect_to root_path
+        end
+      end
+    end
+
     # Stores this controller instance as a thread local varibale to be accessible from outside ActionController/ActionView.
     def store_controller
       Thread.current[:application_controller] = self

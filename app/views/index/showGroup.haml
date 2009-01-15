@@ -1,8 +1,0 @@
-%h1
-  =h @group.is_a?(Ordergroup) ? "Bestellgruppe:" : "Gruppe:"
-  =h @group.name
-= render :partial => "showGroup"
-
-- unless @group.is_a?(Ordergroup)
-  %p{:style => "clear:both"}
-    = link_to "alle Arbeitsgruppen", :action => "workgroups"

@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   #auto_complete_for :user, :nick
   
   def index
-    @non_group_tasks = Task.find :all, :conditions => "group_id IS NULL AND done = 0", :order => "due_date ASC"
+    @non_group_tasks = Task.non_group
     @groups = Group.find :all, :conditions => "type != 'Ordergroup'"
   end
   
@@ -28,8 +28,8 @@ class TasksController < ApplicationController
     if @task.errors.empty?
       @task.save
       flash[:notice] = "Aufgabe wurde erstellt"
-      if @task.group
-        redirect_to :action => "workgroup", :id => @task.group
+      if @task.workgroup
+        redirect_to :action => "workgroup", :id => @task.workgroup
       else
         redirect_to :action => "index"
       end          
@@ -52,8 +52,8 @@ class TasksController < ApplicationController
     if @task.errors.empty?
       @task.save
       flash[:notice] = "Aufgabe wurde aktualisiert"
-      if @task.group
-        redirect_to :action => "workgroup", :id => @task.group
+      if @task.workgroup
+        redirect_to :action => "workgroup", :id => @task.workgroup
       else
         redirect_to :action => "index"
       end

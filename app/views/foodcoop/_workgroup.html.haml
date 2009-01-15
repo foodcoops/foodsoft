@@ -1,0 +1,12 @@
+.single_column{:style => "width:50em"}
+  .box_title
+    %h2= @group.name
+  .column_content
+    = render :partial => 'shared/group', :locals => { :group => @group }
+    %p
+      = link_to _("Show all tasks"), :controller => "tasks", :action => "workgroup", :id => @group
+      |
+      - if @group.member?(@current_user)
+        = link_to _("Edit group"), :action => "edit_group", :id => @group
+        |
+      = link_to _('Send members a message'), :controller => 'messages', :action => 'group', :id => @group

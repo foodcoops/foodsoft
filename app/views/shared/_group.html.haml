@@ -1,0 +1,28 @@
+%table
+  %tr
+    %td Beschreibung:
+    %td=h group.description
+  %tr
+    %td Gruppe hat Zugriff auf:
+    %td
+      - roles = Array.new
+      - roles << 'Administration' if group.role_admin?
+      - roles << 'Finanzen' if group.role_finance?
+      - roles << 'Lieferanten' if group.role_suppliers?
+      - roles << 'Artikel' if group.role_article_meta?
+      - roles << 'Bestellungsverwaltung' if group.role_orders?
+      = roles.join(', ')
+  %tr
+    %td Mitglieder:
+    %td
+      - members = group.users
+      = "(#{members.size})"
+      = members.collect(&:nick).join(", ")
+  - if group.is_a?(Workgroup)
+    %tr
+      %td wöchentlicher Job:
+      %td
+        - if group.weekly_task
+          =h "#{group.task_name} am #{weekday(group.weekday)}"
+        - else
+          kein wöchentlicher Job definiert

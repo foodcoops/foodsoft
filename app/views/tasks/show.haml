@@ -19,8 +19,8 @@
     %tr
       %td=_ 'Group'
       %td
-        - if @task.group
-          = link_to @task.group.name, :action => "workgroup", :id => @task.group
+        - if @task.workgroup
+          = link_to @task.workgroup.name, :action => "workgroup", :id => @task.workgroup
           
     %tr
       %td{:colspan => "2"} 

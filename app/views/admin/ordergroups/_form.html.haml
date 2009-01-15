@@ -1,43 +1,11 @@
 - form_for [:admin, @ordergroup] do |@form|
-  = @form.error_messages
-
+  = render :partial => 'shared/group_form'
+  
   %div{:style => "float:left;width:55%;"}
-    %p
-      = @form.label :name
-      %br/
-      = @form.text_field :name, :size => 20
-    %p
-      = @form.label :description
-      %br/
-      = @form.text_field :description, :size => 40
     %p
       = @form.label :actual_size, "Aktuelle Gruppengröße"
       %br/
       = @form.text_field :actual_size, :size => 3
-
-  %div{:style => "float:right;width:40%"}
-    %h3 Gruppe hat Zugriff auf
-    %table
-      %tr
-        %td
-          = @form.label :role_admin, "Administration"
-        %td= @form.check_box :role_admin
-      %tr
-        %td
-          = @form.label :role_finance, "Finanzen"
-        %td= @form.check_box :role_finance
-      %tr
-        %td
-          = @form.label :role_suppliers, "Lieferantenverwaltung"
-        %td= @form.check_box :role_suppliers
-      %tr
-        %td
-          = @form.label :role_article_meta, "Artikelverwaltung"
-        %td= @form.check_box :role_article_meta
-      %tr
-        %td
-          = @form.label :role_orders, "Bestellungsverwaltung"
-        %td= @form.check_box :role_orders
 
   %br{ :style => "clear:both" }
   = submit_tag "Speichern"

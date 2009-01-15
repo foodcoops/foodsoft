@@ -2,8 +2,8 @@
 <div class="left_column">
   <div class="box_title"><h2><%=h @ordergroup.name %></h2></div>
   <div class="column_content">
-    <p><b>Beschreibung:</b> <%=h @ordergroup.description %> 
-    <%= link_to '(ändern)', :action => 'editGroup', :id => @ordergroup %>
+    <p><b>Beschreibung:</b> <%=h @ordergroup.description %>
+    <%= link_to '(ändern)', :controller => 'foodcoop', :action => 'edit_group', :id => @ordergroup %>
     </p>
     <p><b>Gruppengröße:</b> <%=h @ordergroup.actual_size %></p>
     <p><b>Kontostand:</b> <%= number_to_currency(@ordergroup.account_balance) %></p>
@@ -15,7 +15,7 @@
       </li>
     <% end %>
     </ul>
-    <%= link_to('Hinzufügen/entfernen', :action => 'members', :id => @ordergroup) %> | 
+    <%= link_to('Hinzufügen/entfernen', :action => 'members', :id => @ordergroup) %> |
     <%= link_to('Person einladen', :action => 'invite', :id => @ordergroup) %>
   </div>
 </div>
@@ -32,10 +32,11 @@
    <%= observe_field 'query',  :frequency => 2,
          :before => "Element.show('loader')",
          :success => "Element.hide('loader')",
-         :url => {:action => 'myOrdergroup'},
-         :with => 'query' %>
-    <div id="table">          
-    <%= render :partial => "/financial_transactions/list" %>
+         :url => {:action => 'ordergroup'},
+         :with => 'query',
+         :update => 'transactions' %>
+    <div id="transactions">
+      <%= render :partial => "/finance/transactions/list" %>
     </div>
   </div>
 </div>

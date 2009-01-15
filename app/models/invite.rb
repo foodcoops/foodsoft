@@ -18,17 +18,14 @@ class Invite < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => 'ist keine gültige Email-Adresse'
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_presence_of :user
   validates_presence_of :group
   validates_presence_of :token
   validates_presence_of :expires_at
   
   attr_accessible :email, :user, :group
-  
-  # messages
-  ERR_EMAIL_IN_USE = 'ist bereits in Verwendung'
-  
+    
  protected
   
   # Before validation, set token and expires_at.
@@ -46,7 +43,9 @@ class Invite < ActiveRecord::Base
 
   # Custom validation: check that email does not already belong to a registered user.
   def validate_on_create
-    errors.add(:email, ERR_EMAIL_IN_USE) unless User.find_by_email(self.email).nil?
+    unless User.find_by_email(self.email).nil?
+      errors.add(:email, 'ist bereits in Verwendung. Person ist schon Mitglied der Foodcoop.')
+    end
   end
 
 end

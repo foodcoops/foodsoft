@@ -1,8 +1,0 @@
-<ul>
- <% for user in @group.non_members %>
-  <li><b><%= link_to user.nick, :action => "showUser", :id => user %></b> (<%=h user.first_name + ' ' + user.last_name %>) 
-  | <%= link_to_remote 'hinzufügen', :url => {:action => 'addMember', :id => @group, :user => user},
-                                     :before => "Element.show('loader')",
-                                     :success => "Element.hide('loader')" %> </li>
- <% end %>
-</ul>

@@ -17,8 +17,9 @@
         :before => "Element.show('loader')", |
         :success => "Element.hide('loader')", |
         :url => {:action => 'index'}, |
-        :with => 'query' |
-    #table
+        :with => 'query', |
+        :update => 'ordergroups' |
+    #ordergroups
       = render :partial => "ordergroups"
     %br/
     - if @current_user.role_admin?

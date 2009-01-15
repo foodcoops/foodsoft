@@ -23,15 +23,12 @@ class Finance::TransactionsController < ApplicationController
     conditions = "name LIKE '%#{params[:query]}%'" unless params[:query].nil?
 
     @total = Ordergroup.count(:conditions => conditions)
-    @groups = Ordergroup.paginate :conditions => conditions, :page => params[:page], :per_page => @per_page, :order => sort
+    @groups = Ordergroup.paginate :conditions => conditions, :page => params[:page],
+      :per_page => @per_page, :order => sort
 
     respond_to do |format|
       format.html
-      format.js do
-        render :update do |page|
-          page.replace_html 'table', :partial => "ordergroups"
-        end
-      end
+      format.js { render :partial => "ordergroups" }
     end
   end
 
@@ -54,17 +51,15 @@ class Finance::TransactionsController < ApplicationController
     conditions = ["note LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
 
     @total = @group.financial_transactions.count(:conditions => conditions)
-    @financial_transactions = @group.financial_transactions.paginate(:page => params[:page],
-                                                                    :per_page => 10,
-                                                                    :conditions => conditions,
-                                                                    :order => sort)
+    @financial_transactions = @group.financial_transactions.paginate(
+      :page => params[:page],
+      :per_page => 10,
+      :conditions => conditions,
+      :order => sort)
+
     respond_to do |format|
       format.html
-      format.js do
-        render :update do |page|
-          page.replace_html 'table', :partial => "list"
-        end
-      end
+      format.js { render :partial => "list" }
     end
   end
 

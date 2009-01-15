@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090114101610) do
+ActiveRecord::Schema.define(:version => 20090113111624) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -269,7 +269,7 @@ ActiveRecord::Schema.define(:version => 20090114101610) do
     t.string   "description"
     t.date     "due_date"
     t.boolean  "done",           :default => false
-    t.integer  "group_id"
+    t.integer  "workgroup_id"
     t.boolean  "assigned",       :default => false
     t.datetime "created_on",                        :null => false
     t.datetime "updated_on",                        :null => false

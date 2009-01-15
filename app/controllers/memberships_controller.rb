@@ -1,4 +1,5 @@
-class Admin::MembershipsController < ApplicationController
+class MembershipsController < ApplicationController
+    before_filter :authenticate_membership_or_admin
 
   def add_member
     @group = Group.find(params[:group_id])
@@ -27,8 +28,8 @@ class Admin::MembershipsController < ApplicationController
   def reload
     @group = Group.find(params[:group_id])
     render :update do |page|
-      page.replace_html 'members', :partial => 'members',  :object => @group
-      page.replace_html 'non_members', :partial => 'non_members', :object => @group
+      page.replace_html 'members', :partial => 'shared/memberships/current_members',  :object => @group
+      page.replace_html 'non_members', :partial => 'shared/memberships/non_members', :object => @group
     end
   end
 
