@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090114101610) do
+ActiveRecord::Schema.define(:version => 20090115232435) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20090114101610) do
     t.string   "order_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "quantity",            :precision => 6, :scale => 2, :default => 0.0
   end
 
   add_index "articles", ["name", "supplier_id"], :name => "index_articles_on_name_and_supplier_id"
@@ -184,7 +185,7 @@ ActiveRecord::Schema.define(:version => 20090114101610) do
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
-    t.text     "recipients_ids",                    :null => false
+    t.text     "recipients_ids"
     t.string   "subject",                           :null => false
     t.text     "body"
     t.integer  "email_state",    :default => 0,     :null => false
@@ -240,6 +241,14 @@ ActiveRecord::Schema.define(:version => 20090114101610) do
   add_index "orders", ["ends"], :name => "index_orders_on_ends"
   add_index "orders", ["finished"], :name => "index_orders_on_finished"
   add_index "orders", ["starts"], :name => "index_orders_on_starts"
+
+  create_table "stock_changes", :force => true do |t|
+    t.integer  "delivery_id"
+    t.integer  "order_id"
+    t.integer  "article_id"
+    t.decimal  "quantity",    :precision => 6, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+  end
 
   create_table "suppliers", :force => true do |t|
     t.string  "name",               :default => "", :null => false

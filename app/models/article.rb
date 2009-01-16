@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090113111624
+# Schema version: 20090115232435
 #
 # Table name: articles
 #
@@ -21,32 +21,9 @@
 #  order_number        :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
+#  quantity            :decimal(6, 2)   default(0.0)
 #
 
-# == Schema Information
-# Schema version: 20090102171850
-#
-# Table name: articles
-#
-#  id                  :integer(4)      not null, primary key
-#  name                :string(255)     default(""), not null
-#  supplier_id         :integer(4)      default(0), not null
-#  article_category_id :integer(4)      default(0), not null
-#  unit                :string(255)     default(""), not null
-#  note                :string(255)
-#  availability        :boolean(1)      default(TRUE), not null
-#  manufacturer        :string(255)
-#  origin              :string(255)
-#  shared_updated_on   :datetime
-#  net_price           :decimal(8, 2)
-#  gross_price         :decimal(8, 2)   default(0.0), not null
-#  tax                 :float
-#  deposit             :decimal(8, 2)   default(0.0)
-#  unit_quantity       :integer(4)      default(1), not null
-#  order_number        :string(255)
-#  created_at          :datetime
-#  updated_at          :datetime
-#
 class Article < ActiveRecord::Base
   belongs_to :supplier
   belongs_to :article_category
@@ -230,4 +207,9 @@ class Article < ActiveRecord::Base
     # it could be so easy ... but that doesn't work for empty category-ids...
     # articles.group_by {|a| a.article_category}.sort {|a, b| a[0].name <=> b[0].name}
   end
+
+  def update_quantity(amount)
+    update_attribute :quantity, quantity + amount
+  end
+
 end

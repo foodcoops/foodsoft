@@ -12,6 +12,14 @@
 class Delivery < ActiveRecord::Base
 
   belongs_to :supplier
+  has_many :stock_changes
 
   validates_presence_of :supplier_id
+
+  def stock_change_attributes=(stock_change_attributes)
+    for attributes in stock_change_attributes
+      stock_changes.build(attributes) unless attributes[:quantity] == 0.0 or attributes[:quantity].blank?
+    end
+  end
+  
 end

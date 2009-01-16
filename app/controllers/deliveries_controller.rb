@@ -2,8 +2,6 @@ class DeliveriesController < ApplicationController
 
   before_filter :find_supplier
 
-  # GET /deliveries
-  # GET /deliveries.xml
   def index
     @deliveries = @supplier.deliveries.find(:all)
 
@@ -13,8 +11,6 @@ class DeliveriesController < ApplicationController
     end
   end
 
-  # GET /deliveries/1
-  # GET /deliveries/1.xml
   def show
     @delivery = Delivery.find(params[:id])
 
@@ -24,24 +20,19 @@ class DeliveriesController < ApplicationController
     end
   end
 
-  # GET /deliveries/new
-  # GET /deliveries/new.xml
   def new
     @delivery = @supplier.deliveries.build
-
+    3.times { @delivery.stock_changes.build }
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @delivery }
     end
   end
 
-  # GET /deliveries/1/edit
   def edit
     @delivery = Delivery.find(params[:id])
   end
 
-  # POST /deliveries
-  # POST /deliveries.xml
   def create
     @delivery = Delivery.new(params[:delivery])
 
@@ -74,8 +65,6 @@ class DeliveriesController < ApplicationController
     end
   end
 
-  # DELETE /deliveries/1
-  # DELETE /deliveries/1.xml
   def destroy
     @delivery = Delivery.find(params[:id])
     @delivery.destroy
@@ -86,6 +75,15 @@ class DeliveriesController < ApplicationController
     end
   end
 
+  def drop_stock_change
+    stock_change = StockChange.find(params[:stock_change_id])
+    stock_change.destroy
+
+    render :update do |page|
+      page.visual_effect(:DropOut, "stock_change_#{stock_change.id}")
+    end
+  end
+  
   protected
 
   def find_supplier

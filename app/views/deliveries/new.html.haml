@@ -1,0 +1,4 @@
+- title "Neue Lieferung von #{@supplier.name}"
+
+- render :layout => 'form' do
+  = render :partial => 'stock_change', :collection => @delivery.stock_changes

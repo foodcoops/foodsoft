@@ -1,0 +1,16 @@
+- form_for([@supplier,@delivery]) do |f|
+  = f.error_messages
+  = f.hidden_field :supplier_id
+  %p
+    %b= f.label :delivered_on
+    = f.date_select :delivered_on
+
+  %h2 Artikel
+  #stock_changes
+    = yield
+  %br/
+  = add_article_link
+  %p
+    = f.submit "Speichern"
+
+= link_to 'Zurück', supplier_deliveries_path(@supplier)

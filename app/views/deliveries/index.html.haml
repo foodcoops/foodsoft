@@ -1,0 +1,16 @@
+- title "#{@supplier.name}/deliveries"
+
+%table{:style => "width:50em"}
+  %tr
+    %th Delivered on
+    %th Invoice
+  - for delivery in @deliveries
+    %tr
+      %td=h delivery.delivered_on
+      %td=h "invoice ..."
+      %td= link_to 'Show', [@supplier, delivery]
+      %td= link_to 'Edit', edit_supplier_delivery_path(@supplier,delivery)
+      %td= link_to 'Destroy', [@supplier,delivery], :confirm => 'Are you sure?', :method => :delete
+
+%br/
+= link_to 'New delivery', new_supplier_delivery_path(@supplier)

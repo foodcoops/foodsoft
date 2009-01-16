@@ -23,7 +23,7 @@
           { :name => "Manage orders", :url => "/orders", :access? => (u.role_orders?) }
         ]
       },
-      { :name => "Articles", :url => "/articles", :active => ["articles", "suppliers"],
+      { :name => "Articles", :url => "/articles", :active => ["articles", "suppliers", "deliveries"],
         :access? => (u.role_article_meta? || u.role_suppliers?),
         :subnav => [
           { :name => "Show articles", :url => "/articles/list" },

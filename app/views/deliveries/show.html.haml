@@ -1,0 +1,25 @@
+- title "Lieferung anzeigen"
+
+%p
+  %b Lieferant:
+  =h @delivery.supplier.name
+%p
+  %b Delivered on:
+  =h @delivery.delivered_on
+
+%h2 Artikel
+%table.list{:style => "width:30em"}
+  %tr
+    %th Artikel
+    %th Einheit
+    %th Menge
+  - for stock_change in @delivery.stock_changes.find :all, :include => :article
+    %tr
+      %td= stock_change.article.name
+      %td= stock_change.article.unit
+      %td= stock_change.quantity
+
+%br/
+= link_to 'Edit', edit_supplier_delivery_path(@supplier,@delivery)
+|
+= link_to 'Back', supplier_deliveries_path(@supplier)

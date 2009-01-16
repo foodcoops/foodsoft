@@ -17,9 +17,9 @@ ActionController::Routing::Routes.draw do |map|
     finance.connect 'balancing/:action/:id', :controller => 'balancing'
   end
 
-  map.resources :suppliers, 
-    :has_many => [:deliveries],
-    :collection => { :shared_suppliers => :get }
+  map.resources :suppliers, :collection => { :shared_suppliers => :get } do |suppliers|
+    suppliers.resources :deliveries, :member => { :drop_stock_change => :post }
+  end
 
   map.root :controller => 'home', :action => 'index'
   

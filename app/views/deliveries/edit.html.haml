@@ -1,0 +1,16 @@
+- title "Lieferung bearbeiten"
+
+%p
+  %b Lieferant:
+  = @supplier.name
+
+- render :layout => 'form' do
+  %table{:style => "width:40em"}
+    - for stock_change in @delivery.stock_changes
+      %tr[stock_change]
+        %td= stock_change.article.name
+        %td= stock_change.quantity
+        %td
+          = link_to_remote "Artikel entfernen", |
+            :url => drop_stock_change_supplier_delivery_path(@supplier, @delivery, :stock_change_id => stock_change), |
+            :method => :post |

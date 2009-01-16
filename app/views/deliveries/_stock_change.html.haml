@@ -1,0 +1,6 @@
+%p
+  - fields_for "delivery[stock_change_attributes][]", stock_change do |form|
+    = form.select :article_id, articles_for_select(@supplier), :prompt => " -- Artikel auswählen -- "
+    Menge
+    = form.text_field :quantity, :size => 5, :autocomplete => 'off'
+    = link_to_function "Löschen", "$(this).up('p').remove()"
