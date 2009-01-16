@@ -33,24 +33,23 @@ h3.error {
 
 #errorExplanation {
   width: 40em;
-  border: 2px solid red;
   padding: 7px;
   padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0; }
+  color: #ed0606; }
   #errorExplanation h2 {
+    color: #ed0606;
     text-align: left;
     font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    background-color: #ed0606;
-    color: #fff; }
+    margin: 0;
+    padding: 5px 5px 5px 5px;
+    font-size: 15px; }
   #errorExplanation p {
-    color: #333;
-    margin-bottom: 0;
+    margin: 0;
     padding: 5px; }
-  #errorExplanation ul li {
+  #errorExplanation ul, #errorExplanation li {
+    margin: 0; }
+  #errorExplanation li {
+    padding: 0;
     font-size: 12px;
     list-style: square; }
 

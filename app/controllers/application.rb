@@ -151,4 +151,8 @@ class ApplicationController < ActionController::Base
       call_rake :send_emails unless Message.pending.empty?
     end
 
+    # Get supplier in nested resources
+    def find_supplier
+      @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
+    end
 end

@@ -7,9 +7,8 @@ class SuppliersController < ApplicationController
   MSG_SUPPLIER_CREATED = "Lieferant wurde erstellt"
   
   def index
-    @supplier_column_names = ["Name", "Telefon", "Email", "Kundennummer"]
-    @supplier_columns = ["name", "phone", "email", "customer_number"]
-    @suppliers = Supplier.find :all
+    @suppliers = Supplier.all :order => 'name'
+    #@categories = ArticleCategory.all :order => 'name'
   end
 
   def show

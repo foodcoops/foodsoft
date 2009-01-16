@@ -1,27 +1,32 @@
 <td>
-  <%= check_box_tag 'selected_articles[]', @article.id.to_s, false, {:id => "checkbox_#{@article.id.to_s}", :onclick => "checkRow('#{@article.id.to_s}')"} %>
+  <%= check_box_tag 'selected_articles[]', @article.id.to_s, false,
+        {:id => "checkbox_#{@article.id.to_s}", :onclick => "checkRow('#{@article.id.to_s}')"} %>
 </td>
-<td><%=h @article.name %></td>
-<td><%= @article.origin %></td>
-<td><%=h truncate(@article.article_category.name, 11) if @article.article_category%></td>
-<td><%=h @article.unit %></td>
-<td><%=h truncate(@article.note, 15) %></td>
-<td><%= @article.unit_quantity %></td>
+<td><%=h @article.name -%></td>
+<td><%= @article.origin -%></td>
+<td><%=h truncate(@article.article_category.name, :length => 11) if @article.article_category -%></td>
+<td><%=h @article.unit -%></td>
+<td><%=h truncate(@article.note, :length => 11) -%></td>
+<td><%= @article.unit_quantity -%></td>
 <td class="currency">
-  <acronym title="zuletzt geändert: <%= format_date(@article.updated_at) %> 
-    | Brutto: <%= number_to_currency(@article.gross_price) %>">
-    <%= number_to_currency(@article.net_price) %>
+  <acronym title="zuletzt geändert: <%= format_date(@article.updated_at) -%>
+    | Brutto: <%= number_to_currency(@article.gross_price) -%>">
+    <%= number_to_currency(@article.net_price) -%>
   </acronym>
 </td>
-<td><%= number_to_percentage(@article.tax) if @article.tax != 0  %></td>
-<td><%= number_to_currency(@article.deposit) if @article.deposit != 0 %></td>
-<td><%= link_to_remote(image_tag('b_edit.png', :size => "16x16", :border => 0, :alt => 'Artikel ändern', :onclick => "checkRow('#{@article.id.to_s}')"), 
-                                  :url => {:action => 'editArticle', :id => @article },
-                                  :before => "Element.show('loader')",
-                                  :success => "Element.hide('loader')") %>
-    <%= link_to_remote(image_tag('b_drop.png', :size => "16x16", :border => 0, :alt => 'Artikel löschen', :onclick => "checkRow('#{@article.id.to_s}')"), 
-                                 :url => { :action => 'destroyArticle', :id => @article }, 
-                                 :confirm => 'Bist du sicher?',
-                                 :before => "Element.show('loader')",
-                                 :success => "Element.hide('loader')")%></td>
+<td><%= number_to_percentage(@article.tax) if @article.tax != 0  -%></td>
+<td><%= number_to_currency(@article.deposit) if @article.deposit != 0 -%></td>
+<td>
+  <%= link_to_remote icon(:edit, :onclick => "checkRow('#{@article.id.to_s}')"),
+                     :url => edit_supplier_article_path(@supplier, @article),
+                     :method => :get,
+                     :before => "Element.show('loader')",
+                     :success => "Element.hide('loader')" %>
+  <%= link_to_remote icon(:delete, :onclick => "checkRow('#{@article.id.to_s}')"),
+                     :url => [@supplier, @article],
+                     :method => :delete,
+                     :confirm => 'Bist du sicher?',
+                     :before => "Element.show('loader')",
+                     :success => "Element.hide('loader')" %>
+</td>
      

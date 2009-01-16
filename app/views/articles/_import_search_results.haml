@@ -21,5 +21,7 @@
         %td= number_to_currency(article.price)
         %td= article.unit
         %td= article.unit_quantity
-        %td= link_to_remote 'importieren', :url => {:action => 'new_import', :id => article, :supplier_id => @supplier.id}
+        %td= link_to_remote 'importieren', |
+                :url => import_supplier_articles_path(@supplier, :shared_article_id => article.id), |
+                :method => :get |
         

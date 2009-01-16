@@ -23,11 +23,11 @@
           { :name => "Manage orders", :url => "/orders", :access? => (u.role_orders?) }
         ]
       },
-      { :name => "Articles", :url => "/articles", :active => ["articles", "suppliers", "deliveries"],
+      { :name => "Articles", :url => "/suppliers", :active => ["articles", "suppliers", "deliveries", "article_categories"],
         :access? => (u.role_article_meta? || u.role_suppliers?),
         :subnav => [
-          { :name => "Show articles", :url => "/articles/list" },
-          { :name => "Categories", :url => "/articles" },
+          { :name => "Show articles", :url => "/suppliers" },
+          { :name => "Categories", :url => "/suppliers" },
           { :name => "Suppliers", :url => suppliers_path, :access? => (u.role_suppliers?) }
         ]
       },

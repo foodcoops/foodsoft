@@ -1,6 +1,6 @@
 %h1 Artikel mit externer Datenbank synchronisieren
 
-- form_tag :action => 'update_all', :id => @supplier, :sync => "1" do
+- form_tag update_all_supplier_articles_path(@supplier, :sync => "1") do
   %h2 Auslisten ...
   %p
   - unless @outlisted_articles.empty?

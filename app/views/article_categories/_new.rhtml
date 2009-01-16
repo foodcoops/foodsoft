@@ -1,7 +1,0 @@
-<% remote_form_for :article_category, :url => { :action => 'createCategory', :id => @article_category },
-                    :before => "Element.show('loader')",
-                    :success => "Element.hide('loader')" do |@f| %>
-  <%= render :partial => '/article_categories/form' %>
-  <br />
-  <%= submit_tag "Speichern" %> | <%= link_to_function("Abbrechen", "Element.hide('category_form')") %>
-<% end %>

@@ -3,12 +3,5 @@
   = @article.name
 zuletzt aktualisiert am:
 = format_time(@article.updated_at)
-
-- form_remote_tag :url => { :action => 'updateArticle', :id => @article}, :html => {:id => "edit"}, |
-  :before => "Element.show('loader')", :success => "Element.hide('loader')" do |form| |
-  
-  = render :partial => "form"
-  
-  = submit_tag "Speichern"
-  | 
-  = link_to_function "Abbrechen", "Element.hide('edit_article')"
+ 
+= render :partial => "form"

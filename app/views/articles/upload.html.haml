@@ -1,4 +1,4 @@
-%h1=_ "Upload articles"
+- title "#{@supplier.name} / Artikel hochladen"
 %p
   %i 
     =_ 'The file-type must be "csv" (textfile). Use a semicolon (";") to seperate the fields and double quotes ("Bananas...") for the text.'
@@ -13,6 +13,6 @@
       _("Scale quantity"), _("Scale price"), _("Category")].join(" | ") |
 
 #uploadArticles.uploadForm
-  - form_for(:articles, :url => {:action => 'parse_articles'}, :html => { :multipart => true }) do |form|
+  - form_for(:articles, :url => parse_upload_supplier_articles_path(@supplier), :html => { :multipart => true }) do |form|
     %p= form.file_field("file")
     %p= submit_tag _("Upload articles")

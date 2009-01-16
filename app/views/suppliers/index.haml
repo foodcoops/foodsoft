@@ -1,29 +1,34 @@
-- title "LieferantInnen"
+- title "Artikeldatenbank"
 
-- if @current_user.role_suppliers?
-  %p
-    %i 
-      Erstelle eine 
-      = link_to 'neue Lieferantin', new_supplier_path
-      oder 
-      = link_to 'importiere', shared_suppliers_suppliers_path
-      aus der externen ArtikelDatenbank.
-
-.left_column{:style => "width:100%"}
+.left_column{:style => "width:50%"}
   .box_title
-    %h2 Übersicht
+    %h2 Lieferanten
   .column_content
-    %table
-      %tr
-        - for column in @supplier_column_names
-          %th= column
-        %th
-      - for supplier in @suppliers
-        %tr{:class => cycle('even','odd', :name => 'suppliers')}
-          - for column in @supplier_columns
-            %td
-              - if column == 'name'
-                = link_to supplier[column], supplier
-              - else
-                =h supplier[column]
-          %td= link_to 'Artikel anzeigen', :controller => 'articles', :action => 'list', :id => supplier
+    %p
+      %i
+        Erstelle eine
+        = link_to 'neue Lieferantin', new_supplier_path
+        oder
+        = link_to 'importiere', shared_suppliers_suppliers_path
+        aus der externen ArtikelDatenbank.
+    %table.list
+      %thead
+        %tr
+          %th Name
+          %th Telefon
+          %th KundenNr
+          %th 
+      %tbody
+        - for supplier in @suppliers
+          %tr{:class => cycle('even','odd', :name => 'suppliers')}
+            %td= link_to "<b>#{h(supplier.name)}</b> (#{supplier.articles.count})", supplier_articles_path(supplier)
+            %td=h supplier.phone
+            %td=h supplier.customer_number
+            %td= link_to "Anzeigen", supplier
+
+.right_column{:style => "width:47%"}
+  .box_title
+    %h2 Artikelkategorien
+  .column_content#categories
+    #category_form.box.edit_form{:style => "display:none;margin-bottom:1em;"}
+    #category_list= render :partial => 'article_categories/list'

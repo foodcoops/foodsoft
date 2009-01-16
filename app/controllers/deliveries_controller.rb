@@ -83,10 +83,4 @@ class DeliveriesController < ApplicationController
       page.visual_effect(:DropOut, "stock_change_#{stock_change.id}")
     end
   end
-  
-  protected
-
-  def find_supplier
-    @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
-  end
 end

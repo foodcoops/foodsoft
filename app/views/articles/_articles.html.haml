@@ -16,14 +16,14 @@
     %tr
       %th
       %th[sort_td_class_helper "name"]
-        = sort_link_helper _("Name"), "name", @supplier.id
+        = sort_link_helper _("Name"), "name"
       %th
       %th[sort_td_class_helper "category"]
-        = sort_link_helper _("Category"), "category", @supplier.id
+        = sort_link_helper _("Category"), "category"
       %th[sort_td_class_helper "unit"]
-        = sort_link_helper _("Unit"), "unit", @supplier.id
+        = sort_link_helper _("Unit"), "unit"
       %th[sort_td_class_helper "note"]
-        = sort_link_helper _("Note"), "note", @supplier.id
+        = sort_link_helper _("Note"), "note"
       %th{:style => "width: 4em;"}=_ 'UnitQu'
       %th{:style => "width: 4em;"}=_ 'Price'
       %th{:style => "width: 3.5em;"}=_ 'Tax'
@@ -34,20 +34,19 @@
     
     - if @total > 0  
       - for @article in @articles
-        %tr{ :class => cycle('even','odd') + (!@article.availability ? ' unavailable' : '') + ((@article.recently_updated && @article.availability) ? " just_updated" : ""), |
-             :id => @article.id, :onclick => "checkRow('#{@article.id.to_s}')"} |
+        %tr{ :class => cycle('even','odd') + row_classes(@article), :id => @article.id, :onclick => "checkRow('#{@article.id.to_s}')"}
           = render :partial => 'article_row'
       %tfoot
         %tr
-          %td{:colspan => '10'}
-            %input{:type => 'checkbox', :name => 'checkall', :onclick => 'checkUncheckAll(this)'}/
+          %td{:colspan => '11'}
+            = check_box_tag :checkall, 1, false, :onclick => 'checkUncheckAll(this)'
             %select{:name => "selected_action"}
               %option{:value => '', :selected => 'selected'} Aktion wählen ...
               %option{:value => "destroy", :onclick => "if (confirm('Willst Du wirklich alle gewählten Artikel löschen?')) { formSubmit(); }; return false;"} Artikel löschen
               %option{:value => "setNotAvailable", :onclick => 'formSubmit();'} Artikel sind nicht mehr verfügbar
               %option{:value => "setAvailable", :onclick => 'formSubmit();'} Artikel sind verfügbar
               
-            = hidden_field_tag 'supplier', @supplier.id
+            = hidden_field_tag 'supplier_id', @supplier.id
 %p
   = pagination_links_remote @articles, :params => {:sort => params[:sort]}
     

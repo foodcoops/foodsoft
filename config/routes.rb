@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  
   map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
   map.my_tasks '/home/tasks', :controller => 'tasks', :action => 'myTasks'
 
@@ -19,7 +20,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :suppliers, :collection => { :shared_suppliers => :get } do |suppliers|
     suppliers.resources :deliveries, :member => { :drop_stock_change => :post }
+    suppliers.resources :articles,
+      :collection => { :update_selected => :post, :edit_all => :get, :update_all => :post,
+                       :upload => :get, :parse_upload => :post, :create_from_upload => :post,
+                       :shared => :get, :import => :get, :sync => :post }
   end
+  map.resources :article_categories
 
   map.root :controller => 'home', :action => 'index'
   

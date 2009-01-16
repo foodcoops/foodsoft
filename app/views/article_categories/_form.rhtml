@@ -1,17 +1,24 @@
-<%= error_messages_for 'article_category' %>
+<% remote_form_for @article_category,
+                    :before => "Element.show('loader')",
+                    :success => "Element.hide('loader')" do |@f| %>
 
-<!--[form:article_category]-->
-<table>
- <tr>
- <th>Name</th>
- <th>Beschreibung</th>
- </tr>
- <tr>
- <td><label for="article_category_name">
-    <%= @f.text_field 'name',  :size => 20 %></label></td>
- <td><label for="article_category_description">
-    <%= @f.text_field 'description', :size => 30  %></label></td>
- </tr>
-</tabel>
-<!--[eoform:article_category]-->
+  <%= @f.error_messages %>
+  <table>
+   <tr>
+     <th>Name</th>
+     <th>Beschreibung</th>
+   </tr>
+   <tr>
+     <td>
+        <%= @f.text_field :name,  :size => 20 %>
+     </td>
+     <td>
+        <%= @f.text_field :description, :size => 30  %>
+     </td>
+   </tr>
+  </table>
+
+  <br />
+  <%= submit_tag "Speichern" %> | <%= link_to_function("Abbrechen", "Element.hide('category_form')") %>
+<% end %>
 

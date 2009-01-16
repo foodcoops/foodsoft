@@ -1,82 +1,60 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticate_article_meta
-  verify :method => :post, 
-         :only => [ :destroyArticle, :createArticle, :updateArticle, 
-                    :update_all, :createArticlesFromFile, :update_selected_articles ], 
-         :redirect_to => { :action => :list }
-
-  # messages
-  ERROR_NO_SELECTED_ARTICLES = 'Du hast keine Artikel ausgewählt'
-  MSG_ALL_CHECKED_DESTROYED = 'Alle gewählten Artikel wurden gelöscht'
-  MSG_ALL_CHECKED_UNAVAILABLE = 'Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt'
-  MSG_ALL_CHECKED_AVAILABLE = 'Alle gewählten Artikel wurden auf "verfügbar" gesetzt'
-  ERROR_NO_SELECTED_ACTION = 'Keine Aktion ausgewählt!'
-  ERROR_UPDATE_ARTICLES = 'Ein Fehler ist aufgetreten: '
+  before_filter :authenticate_article_meta, :find_supplier
 
   def index
-    @suppliers = Supplier.find(:all)
-  end
-
-  def list
-    if params[:id]
-      @supplier = Supplier.find(params[:id])
-      @suppliers = Supplier.find(:all)
-        if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 500)
-        @per_page = params[:per_page].to_i
-      else
-        @per_page = 30
-      end
-      
-      if params['sort']
-      sort = case params['sort']
-               when "name"  then "articles.name"
-               when "unit"   then "articles.unit"
-               when "category" then "article_categories.name"
-               when "note"   then "articles.note"
-               when "availability" then "articles.availability"
-               when "name_reverse"  then "articles.name DESC"
-               when "unit_reverse"   then "articles.unit DESC"
-               when "category_reverse" then "article_categories.name DESC"
-               when "note_reverse" then "articles.note DESC"
-               when "availability_reverse" then "articles.availability DESC"
-               end
-      else
-        sort = "article_categories.name, articles.name"
-      end
-      
-      # if somebody uses the search field:
-      conditions = ["articles.name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
-  
-      @total = @supplier.articles.count(:conditions => conditions)
-      @articles = @supplier.articles.paginate(:order => sort, 
-                                               :conditions => conditions,
-                                               :page => params[:page],
-                                               :per_page => @per_page,
-                                               :include => :article_category)
-  
-      respond_to do |format|
-        format.html # list.haml
-        format.js do
-          render :update do |page|
-            page.replace_html 'table', :partial => "list"
-          end
-        end
-      end            
+    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 500)
+      @per_page = params[:per_page].to_i
     else
-      redirect_to :action => 'index'
-    end                             
+      @per_page = 30
+    end
+
+    if params['sort']
+    sort = case params['sort']
+             when "name"  then "articles.name"
+             when "unit"   then "articles.unit"
+             when "category" then "article_categories.name"
+             when "note"   then "articles.note"
+             when "availability" then "articles.availability"
+             when "name_reverse"  then "articles.name DESC"
+             when "unit_reverse"   then "articles.unit DESC"
+             when "category_reverse" then "article_categories.name DESC"
+             when "note_reverse" then "articles.note DESC"
+             when "availability_reverse" then "articles.availability DESC"
+             end
+    else
+      sort = "article_categories.name, articles.name"
+    end
+
+    # if somebody uses the search field:
+    conditions = ["articles.name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
+
+    @total = @supplier.articles.count(:conditions => conditions)
+    @articles = @supplier.articles.paginate(:order => sort,
+                                             :conditions => conditions,
+                                             :page => params[:page],
+                                             :per_page => @per_page,
+                                             :include => :article_category)
+
+    respond_to do |format|
+      format.html # list.haml
+      format.js do
+        render :update do |page|
+          page.replace_html 'table', :partial => "articles"
+        end
+      end
+    end
   end
 
-  def newArticle
-    @supplier = Supplier.find(params[:supplier])
-    @article = Article.new(:supplier => @supplier, :tax => 7.0)
+  def new
+    @article = @supplier.articles.build(:tax => 7.0)
+
     render :update do |page|
       page["edit_article"].replace_html :partial => 'new'
       page["edit_article"].show
     end
   end
   
-  def createArticle
+  def create
     @article = Article.new(params[:article])
     if @article.valid? and @article.save
       render :update do |page|
@@ -99,8 +77,9 @@ class ArticlesController < ApplicationController
   end
   
   # edit an article and its price
-  def editArticle
+  def edit
     @article = Article.find(params[:id])
+
     render :update do |page|
       page["edit_article"].replace_html :partial => 'edit'
       page["edit_article"].show
@@ -109,8 +88,9 @@ class ArticlesController < ApplicationController
   end
   
   # Updates one Article and highlights the line if succeded
-  def updateArticle
-    @article = Article.find(params[:id])    
+  def update
+    @article = Article.find(params[:id])
+
     if @article.update_attributes(params[:article])
       render :update do |page|
         page["edit_article"].hide
@@ -138,9 +118,10 @@ class ArticlesController < ApplicationController
   end
 
   # Deletes article from database. send error msg, if article is used in a current order
-  def destroyArticle
+  def destroy
     @article = Article.find(params[:id])
-    @order = @article.inUse #if article is in an active Order, the Order will be returned
+
+    @order = @article.inUse # If article is in an active Order, the Order will be returned
     if @order
       render :update do |page|
         page.insert_html :after, @article.id.to_s, :partial => 'destroyActiveArticle'
@@ -155,144 +136,76 @@ class ArticlesController < ApplicationController
   
   # Renders a form for editing all articles from a supplier
   def edit_all
-    @supplier = Supplier.find(params[:id])
+    @articles = @supplier.articles.find :all,
+      :order => 'article_categories.name, articles.name',
+      :include => [:article_category]
+
   end
-  
+
   # Updates all article of specific supplier
   # deletes all articles from params[outlisted_articles]
   def update_all
     currentArticle = nil  # used to find out which article caused a validation exception
     begin
       Article.transaction do
-        @supplier = Supplier.find(params[:supplier][:id]) if params[:supplier][:id]
-        unless params[:article].blank?
+        unless params[:articles].blank?
           # Update other article attributes...
-          i = 0
-          for id in params[:article].keys
+          for id, attributes in params[:articles]
             currentArticle = Article.find(id)
-            currentArticle.update_attributes!(params[:article].values[i])
-            i += 1
+            currentArticle.update_attributes!(attributes)
           end
         end
         # delete articles
         if params[:outlisted_articles]
           params[:outlisted_articles].keys.each {|id| Article.find(id).destroy }
         end
-      end  
+      end
       # Successfully done.
       flash[:notice] = 'Alle Artikel und Preise wurden aktalisiert'
-      redirect_to :action => 'list', :id => @supplier
-      
+      redirect_to supplier_articles_path(@supplier)
+
     rescue => e
       # An error has occurred, transaction has been rolled back.
       if currentArticle
         @failedArticle = currentArticle
         flash[:error] = "Es trat ein Fehler beim Aktualisieren des Artikels '#{currentArticle.name}' auf: #{e.message}"
-        params[:sync] ? redirect_to(:action => "list", :id => @supplier) : render(:action => 'edit_all')
-      else 
+        params[:sync] ? redirect_to(supplier_articles_path(@supplier)) : render(:action => 'edit_all')
+      else
         flash[:error] = "Es trat ein Fehler beim Aktualisieren der Artikel auf: #{e.message}"
-        redirect_to :action => "index"
+        redirect_to supplier_articles_path(@supplier)
       end
     end
   end
   
   # makes different actions on selected articles
-  def update_selected_articles
-    @supplier = Supplier.find(params[:supplier])
-    articles = Array.new
-    begin
-      raise ERROR_NO_SELECTED_ARTICLES if params[:selected_articles].nil?
-      params[:selected_articles].each do |article|
-        articles << Article.find(article)  # put selected articles in an array
-      end
+  def update_selected
+    raise 'Du hast keine Artikel ausgewählt' if params[:selected_articles].nil?
+    articles = Article.find(params[:selected_articles])
 
-      case params[:selected_action].to_s
-        when 'destroy'
-          articles.each {|a| a.destroy }
-          flash[:notice] = MSG_ALL_CHECKED_DESTROYED
-        when 'setNotAvailable'
-          articles.each {|a| a.update_attribute(:availability, false) }
-          flash[:notice] = MSG_ALL_CHECKED_UNAVAILABLE
-        when 'setAvailable'
-          articles.each {|a| a.update_attribute(:availability, true) }
-          flash[:notice] = MSG_ALL_CHECKED_AVAILABLE
-      else
-        flash[:error] = ERROR_NO_SELECTED_ACTION
-      end
-      # action succeded
-      redirect_to :action => 'list', :id => @supplier
+    case params[:selected_action]
+    when 'destroy'
+      articles.each {|a| a.destroy }
+      flash[:notice] = 'Alle gewählten Artikel wurden gelöscht'
+    when 'setNotAvailable'
+      articles.each {|a| a.update_attribute(:availability, false) }
+      flash[:notice] = 'Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt'
+    when 'setAvailable'
+      articles.each {|a| a.update_attribute(:availability, true) }
+      flash[:notice] = 'Alle gewählten Artikel wurden auf "verfügbar" gesetzt'
+    else
+      flash[:error] = 'Keine Aktion ausgewählt!'
+    end
+    # action succeded
+    redirect_to supplier_articles_path(@supplier)
       
-    rescue => e
-      flash[:error] = ERROR_UPDATE_ARTICLES + e
-      redirect_to :action => 'list', :id => @supplier
-    end
-  end
-  
-  
-
- #************** start article categories ************************
-
-  def newCategory
-    @article_category = ArticleCategory.new
-    render :update do |page|
-      page['category_form'].replace_html :partial => 'article_categories/new'
-      page['category_form'].show
-    end
-  end
-
-  def createCategory
-    @article_category = ArticleCategory.new(params[:article_category])
-    if @article_category.save
-      render :update do |page|
-       page['category_form'].hide
-       page['category_list'].replace_html :partial => 'article_categories/list'
-       page['category_'+@article_category.id.to_s].visual_effect(:highlight,
-                                                                  :duration => 2)
-      end
-    else
-      render :update do |page|
-        page['category_form'].replace_html :partial => 'article_categories/new'
-      end
-    end
-  end
-
-  def editCategory
-    @article_category = ArticleCategory.find(params[:id])
-    render :update do |page|
-      page['category_form'].replace_html :partial => 'article_categories/edit'
-      page['category_form'].show
-    end
-  end
-
-  def updateCategory
-    @article_category = ArticleCategory.find(params[:id])
-    if @article_category.update_attributes(params[:article_category])
-      render :update do |page|
-       page['category_form'].hide
-       page['category_list'].replace_html :partial => 'article_categories/list'
-       page['category_'+@article_category.id.to_s].visual_effect(:highlight,
-                                                                  :duration => 2)
-      end
-    else
-      render :update do |page|
-        page['category_form'].replace_html :partial => 'article_categories/edit'
-      end
-    end
-  end
-
-  def destroyCategory
-    @article_category = ArticleCategory.find(params[:id])
-    id = @article_category.id.to_s #save the id before destroying the object
-    if @article_category.destroy
-      render :update do |page|
-        page['category_'+id].visual_effect :drop_out
-      end
-    end
+  rescue => e
+    flash[:error] = 'Ein Fehler ist aufgetreten: ' + e
+    redirect_to supplier_articles_path(@supplier)
   end
  
   # lets start with parsing articles from uploaded file, yeah
   # Renders the upload form
-  def upload_articles
+  def upload
   end
  
   # parses the articles from a csv and creates a form-table with the parsed data.
@@ -301,7 +214,7 @@ class ArticlesController < ApplicationController
   # the first line will be ignored. 
   # field-seperator: ";"
   # text-seperator: ""
-  def parse_articles
+  def parse_upload
     begin
       @articles = Array.new
       articles, outlisted_articles = FoodsoftFile::parse(params[:articles]["file"])
@@ -320,44 +233,38 @@ class ArticlesController < ApplicationController
                                :tax => row[:tax])
         # stop parsing, when an article isn't valid
         unless article.valid?
-          raise article.errors.full_messages.join(", ") + _(" ..in line ") +  (articles.index(row) + 2).to_s
+          raise article.errors.full_messages.join(", ") + " ..in line " +  (articles.index(row) + 2).to_s
         end
         @articles << article
       end
-      flash.now[:notice] = @articles.size.to_s + _(" articles are parsed successfully.")
+      flash.now[:notice] = @articles.size.to_s + " articles are parsed successfully."
     rescue => e
-      flash[:error] = _("An error has occurred: ") + e.message
-      redirect_to :action => 'upload_articles'
+      flash[:error] = "An error has occurred: " + e.message
+      redirect_to upload_supplier_articles_path(@supplier)
     end
   end
  
   # creates articles from form
-  def create_articles_from_file
-    @supplier = Supplier.find(params[:supplier][:id])
+  def create_from_upload
     begin
       Article.transaction do
-        i = 0
-        params[:article].each do
-          @article = Article.new(params[:article][i])
-          @article.supplier = @supplier
-          @article.save!
-          i += 1
+        for article_attributes in params[:articles]
+          @supplier.articles.create!(article_attributes)
         end
       end
       # Successfully done.
-      flash[:notice] = _("The articles are saved successfully")
-      redirect_to :action => 'list', :id => @supplier
-    rescue => e
+      flash[:notice] = "The articles are saved successfully"
+      redirect_to supplier_articles_path(@supplier)
+    rescue => error
       # An error has occurred, transaction has been rolled back.
-      flash[:error] = _("An error occured: ") + " #{e.message}"
-      redirect_to :action => 'upload_articles'
+      flash[:error] = "An error occured: #{error.message}"
+      redirect_to upload_supplier_articles_path(@supplier)
     end
   end
   
   # renders a view to import articles in local database
   #   
-  def list_shared_articles
-    @supplier = Supplier.find(params[:id])    
+  def shared
     conditions = []
     conditions << "supplier_id = #{@supplier.shared_supplier.id}"
     # check for keywords
@@ -374,8 +281,8 @@ class ArticlesController < ApplicationController
   end
   
   # fills a form whith values of the selected shared_article
-  def new_import
-    shared_article = SharedArticle.find(params[:id])
+  def import
+    shared_article = SharedArticle.find(params[:shared_article_id])
     @article = Article.new(
         :supplier_id => params[:supplier_id],
         :name => shared_article.name,
@@ -399,12 +306,12 @@ class ArticlesController < ApplicationController
   
   # sync all articles with the external database
   # renders a form with articles, which should be updated
-  def sync_articles
+  def sync
     @supplier = Supplier.find(params[:id])
     # check if there is an shared_supplier
     unless @supplier.shared_supplier
       flash[:error]= @supplier.name + _(" ist not assigned to an external database.")
-      redirect_to :action => "list", :id => @supplier
+      redirect_to supplier_articles_path(@supplier)
     end
     # sync articles against external database
     @updated_articles, @outlisted_articles = @supplier.sync_all
@@ -412,7 +319,7 @@ class ArticlesController < ApplicationController
     @updated_articles.each {|a, b| a.shared_updated_on = a.shared_updated_on.to_formatted_s(:db)}
     if @updated_articles.empty? && @outlisted_articles.empty?
       flash[:notice] = _("The database is up to date.")
-      redirect_to :action => 'list', :id => @supplier
+      redirect_to supplier_articles_path(@supplier)
     end
   end
 end

@@ -58,11 +58,11 @@ module ApplicationHelper
     return result
   end
   
-  def sort_link_helper(text, param, per_page = 10)
+  def sort_link_helper(text, param, per_page = (@per_page || 10) )
     key = param
     key += "_reverse" if params[:sort] == param
     options = {
-        :url => {:action => 'list', :params => params.merge({:sort => key, :page => nil, :per_page => per_page})},
+        :url => url_for(:params => params.merge({:sort => key, :page => nil, :per_page => per_page})),
         :before => "Element.show('loader')",
         :success => "Element.hide('loader')",
         :method => :get
@@ -101,5 +101,14 @@ module ApplicationHelper
 
   def tab_is_active?(tab)
     tab[:active].detect {|c| c == controller.controller_path }
+  end
+
+  def icon(name, options={})
+    icons = { :delete => { :file => 'b_drop.png', :alt => 'Löschen'},
+              :edit   => { :file => 'b_edit.png', :alt => 'Bearbeiten'}}
+    options.merge!({:size => '16x16',:border => "0"})
+    options.merge!({:alt => icons[name][:alt]}) unless options[:alt]
+    
+    image_tag icons[name][:file], options
   end
 end
