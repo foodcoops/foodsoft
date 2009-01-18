@@ -23,7 +23,7 @@
       <td><%= invoice.date %></td>
       <td><%= invoice.paid_on %></td>
       <td><%= invoice.amount %></td>
-      <td><%=h invoice.delivery_id %></td>
+      <td><%= link_to "Lieferung", [invoice.supplier,invoice.delivery] if invoice.delivery %></td>
       <td><%=h truncate(invoice.note) %></td>
       <td><%= link_to 'Show', finance_invoice_path(invoice) %></td>
       <td><%= link_to 'Edit', edit_finance_invoice_path(invoice) %></td>

@@ -1,7 +1,11 @@
 class ArticleCategoriesController < ApplicationController
 
   before_filter :authenticate_article_meta
- 
+
+  def index
+    @article_categories = ArticleCategory.all :order => 'name'
+  end
+
   def new
     @article_category = ArticleCategory.new
 

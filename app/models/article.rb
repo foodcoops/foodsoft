@@ -27,7 +27,9 @@
 class Article < ActiveRecord::Base
   belongs_to :supplier
   belongs_to :article_category
-	
+
+  named_scope :in_stock, :conditions => "quantity > 0", :order => 'suppliers.name', :include => :supplier
+  
   validates_presence_of :name, :unit, :net_price, :tax, :deposit, :unit_quantity, :supplier_id
   validates_length_of :name, :in => 4..60
   validates_length_of :unit, :in => 2..15

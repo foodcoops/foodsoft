@@ -307,7 +307,6 @@ class ArticlesController < ApplicationController
   # sync all articles with the external database
   # renders a form with articles, which should be updated
   def sync
-    @supplier = Supplier.find(params[:id])
     # check if there is an shared_supplier
     unless @supplier.shared_supplier
       flash[:error]= @supplier.name + _(" ist not assigned to an external database.")

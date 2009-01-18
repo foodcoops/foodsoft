@@ -1,0 +1,32 @@
+- form_for([:finance, @invoice]) do |f|
+  = f.error_messages
+  = f.hidden_field :delivery_id
+
+  - if @invoice.delivery
+    %p= "Diese Rechnung ist mit einer #{link_to "Lieferung", [@invoice.supplier,@invoice.delivery]} verknüpft."
+  %p
+    = f.label :supplier_id
+    %br/
+    = f.select :supplier_id, Supplier.all.collect { |s| [s.name, s.id] }
+  %p
+    = f.label :number
+    %br/
+    = f.text_field :number
+  %p
+    = f.label :date
+    %br/
+    = f.date_select :date
+  %p
+    = f.label :paid_on
+    %br/
+    = f.date_select :paid_on, :include_blank => true
+  %p
+    = f.label :amount
+    %br/
+    = f.text_field :amount
+  %p
+    = f.label :note
+    %br/
+    = f.text_area :note
+  %p
+    = f.submit "Speichern"

@@ -1,54 +1,71 @@
-%h1 
-  Lieferantin
-  =h @supplier.name
-- if shared_supplier = @supplier.shared_supplier
-  %p
-    %strong Der Lieferant ist mit der externen ArtikleDatenbank verknüpft.
+- title "Lieferantin #{h(@supplier.name)}"
 
-%table{:style => "width:40em"}
-  %tr
-    %td Name:
-    %td{:style => "font-weight:bold"}=h @supplier.name
-  %tr
-    %td Adresse:
-    %td{:style => "font-weight:bold"}=h @supplier.address
-  %tr
-    %td Telefon:
-    %td{:style => "font-weight:bold"}=h @supplier.phone
-  %tr
-    %td Telefon2:
-    %td{:style => "font-weight:bold"}=h @supplier.phone2
-  %tr
-    %td FAX:
-    %td{:style => "font-weight:bold"}=h @supplier.fax
-  %tr
-    %td Hompage:
-    %td{:style => "font-weight:bold"}=h @supplier.url
-  %tr
-    %td Kontakt-Person:
-    %td{:style => "font-weight:bold"}=h @supplier.contact_person
-  %tr
-    %td Kundennummer:
-    %td{:style => "font-weight:bold"}=h @supplier.customer_number
-  %tr
-    %td Liefertage:
-    %td{:style => "font-weight:bold"}=h @supplier.delivery_days
-  %tr
-    %td BestellHowTo:
-    %td{:style => "font-weight:bold"}=h @supplier.order_howto
-  %tr
-    %td Notiz:
-    %td{:style => "font-weight:bold"}=h @supplier.note
-  %tr
-    %td Liefertage:
-    %td{:style => "font-weight:bold"}=h @supplier.delivery_days
-  %tr
-    %td Mindestbestellmenge:
-    %td{:style => "font-weight:bold"}=h @supplier.min_order_quantity  
-%br/
-- if @current_user.role_suppliers?
-  = link_to 'Bearbeiten', edit_supplier_path(@supplier)
-  |
-  = link_to 'Löschen', @supplier, :confirm => 'Bist Du sicher?', :method => :delete
-  |
-= link_to 'zurück', suppliers_path
+.left_column{:style => "width:45%"}
+  .box_title
+    %h2=h @supplier.name
+  .column_content
+    - if shared_supplier = @supplier.shared_supplier
+      %p
+        %strong Der Lieferant ist mit der externen ArtikleDatenbank verknüpft.
+
+    %table{:style => "width:40em"}
+      %tr
+        %td Adresse:
+        %td{:style => "font-weight:bold"}=h @supplier.address
+      %tr
+        %td Telefon:
+        %td{:style => "font-weight:bold"}=h @supplier.phone
+      %tr
+        %td Telefon2:
+        %td{:style => "font-weight:bold"}=h @supplier.phone2
+      %tr
+        %td FAX:
+        %td{:style => "font-weight:bold"}=h @supplier.fax
+      %tr
+        %td Hompage:
+        %td{:style => "font-weight:bold"}=h @supplier.url
+      %tr
+        %td Kontakt-Person:
+        %td{:style => "font-weight:bold"}=h @supplier.contact_person
+      %tr
+        %td Kundennummer:
+        %td{:style => "font-weight:bold"}=h @supplier.customer_number
+      %tr
+        %td Liefertage:
+        %td{:style => "font-weight:bold"}=h @supplier.delivery_days
+      %tr
+        %td BestellHowTo:
+        %td{:style => "font-weight:bold"}=h @supplier.order_howto
+      %tr
+        %td Notiz:
+        %td{:style => "font-weight:bold"}=h @supplier.note
+      %tr
+        %td Liefertage:
+        %td{:style => "font-weight:bold"}=h @supplier.delivery_days
+      %tr
+        %td Mindestbestellmenge:
+        %td{:style => "font-weight:bold"}=h @supplier.min_order_quantity
+    %br/
+    - if @current_user.role_suppliers?
+      = link_to 'Bearbeiten', edit_supplier_path(@supplier)
+      |
+      = link_to 'Löschen', @supplier, :confirm => 'Bist Du sicher?', :method => :delete
+      |
+      = link_to 'zurück', suppliers_path
+
+.right_column{:style => "width:45%"}
+  .box_title
+    %h2 Letzte Lieferungen
+  .column_content
+    %table
+      %tr
+        %th Datum
+        %th Betrag
+      - for delivery in @deliveries
+        %tr
+          %td= link_to delivery.delivered_on, [@supplier, delivery]
+          %td= link_to_invoice(delivery)
+    %p
+      = link_to "Neue Lieferung anlegen", new_supplier_delivery_path(@supplier)
+      |
+      = link_to "Zeige alle Lieferungen", supplier_deliveries_path(@supplier)

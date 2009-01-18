@@ -1,20 +1,15 @@
 class SuppliersController < ApplicationController
   before_filter :authenticate_suppliers, :except => [:index, :list]
+  helper :deliveries
 
-  # messages
-  MSG_SUPPLIER_DESTOYED = "Lieferant wurde gelöscht"
-  MSG_SUPPLIER_UPDATED = 'Lieferant wurde aktualisiert'
-  MSG_SUPPLIER_CREATED = "Lieferant wurde erstellt"
-  
   def index
     @suppliers = Supplier.all :order => 'name'
-    #@categories = ArticleCategory.all :order => 'name'
+    @deliveries = Delivery.recent
   end
 
   def show
     @supplier = Supplier.find(params[:id])
-    @supplier_column_names = ["Name", "Telefon", "Telefon2", "FAX", "Email", "URL", "Kontakt", "Kundennummer", "Liefertage", "BestellHowTo", "Notiz", "Mindestbestellmenge"]
-    @supplier_columns = ["name", "phone", "phone2", "fax", "email", "url", "contact_person", "customer_number", "delivery_days", "order_howto", "note", "min_order_quantity"]
+    @deliveries = @supplier.deliveries.recent
   end
 
   # new supplier
@@ -31,7 +26,7 @@ class SuppliersController < ApplicationController
   def create    
     @supplier = Supplier.new(params[:supplier])
     if @supplier.save
-      flash[:notice] = MSG_SUPPLIER_CREATED
+      flash[:notice] = "Lieferant wurde erstellt"
       redirect_to suppliers_path
     else
       render :action => 'new'
@@ -45,7 +40,7 @@ class SuppliersController < ApplicationController
   def update
     @supplier = Supplier.find(params[:id])
     if @supplier.update_attributes(params[:supplier])
-      flash[:notice] = MSG_SUPPLIER_UPDATED
+      flash[:notice] = 'Lieferant wurde aktualisiert'
       redirect_to @supplier
     else
       render :action => 'edit'
@@ -55,7 +50,7 @@ class SuppliersController < ApplicationController
   def destroy
     @supplier = Supplier.find(params[:id])
     @supplier.destroy
-    flash[:notice] = MSG_SUPPLIER_DESTOYED
+    flash[:notice] = "Lieferant wurde gelöscht"
     redirect_to suppliers_path
     rescue => e
       flash[:error] = _("An error has occurred: ") + e.message

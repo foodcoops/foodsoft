@@ -16,7 +16,7 @@
     =_ 'Change supplier:'
   - form_tag do
     = select_tag :switch_supplier, |
-      options_for_select( Supplier.all.collect {|s| [s.name, url_for(supplier_articles_path(s))] }, |
+      options_for_select( Supplier.all(:order => 'name').collect {|s| [s.name, url_for(supplier_articles_path(s))] }, |
       url_for(supplier_articles_path(@supplier)) ), |
       :onchange => "redirectTo(this)", |
       :style => "font-size: 0.9em;margin-left:1em;" |

@@ -18,6 +18,7 @@
 class Invoice < ActiveRecord::Base
 
   belongs_to :supplier
+  belongs_to :delivery
 
   validates_presence_of :supplier_id
   validates_uniqueness_of :date, :scope => [:supplier_id]

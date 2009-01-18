@@ -12,7 +12,10 @@
 class Delivery < ActiveRecord::Base
 
   belongs_to :supplier
+  has_one :invoice
   has_many :stock_changes
+
+  named_scope :recent, :order => 'created_at DESC', :limit => 10
 
   validates_presence_of :supplier_id
 

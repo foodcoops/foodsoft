@@ -5,7 +5,10 @@
   =h @delivery.supplier.name
 %p
   %b Delivered on:
-  =h @delivery.delivered_on
+  = @delivery.delivered_on
+%p
+  %b Rechnungsbetrag:
+  = link_to_invoice(@delivery)
 
 %h2 Artikel
 %table.list{:style => "width:30em"}

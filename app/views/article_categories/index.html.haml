@@ -1,0 +1,8 @@
+- title "Artikelkategorien"
+
+.left_column{:style => "width:50em"}
+  .box_title
+    %h2 Artikelkategorien
+  .column_content#categories
+    #category_form.box.edit_form{:style => "display:none;margin-bottom:1em;"}
+    #category_list= render :partial => 'article_categories/list'

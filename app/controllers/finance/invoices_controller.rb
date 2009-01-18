@@ -19,7 +19,7 @@ class Finance::InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.new
+    @invoice = Invoice.new(:supplier_id => params[:supplier_id], :delivery_id => params[:delivery_id])
 
     respond_to do |format|
       format.html # new.html.erb

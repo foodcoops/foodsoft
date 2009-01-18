@@ -28,7 +28,15 @@
 
 .right_column{:style => "width:47%"}
   .box_title
-    %h2 Artikelkategorien
-  .column_content#categories
-    #category_form.box.edit_form{:style => "display:none;margin-bottom:1em;"}
-    #category_list= render :partial => 'article_categories/list'
+    %h2 Letzte Lieferungen
+  .column_content
+    %table{:style => "width:50em"}
+      %tr
+        %th Datum
+        %th Betrag
+        %th Lieferant
+      - for delivery in @deliveries
+        %tr
+          %td= link_to delivery.delivered_on, [delivery.supplier, delivery]
+          %td= link_to_invoice(delivery)
+          %td=h delivery.supplier.name

@@ -1,0 +1,2 @@
+module StockitHelper
+end

@@ -51,20 +51,21 @@
           %td= article.deposit
           %td= article.article_category.name if article.article_category
         %tr
-          %td{:style => highlight_new(unequal_attributes, :name)}
-            = text_field 'article[]', 'name', :size => 0
-            = hidden_field 'article[]', 'shared_updated_on'
-          %td{:style => highlight_new(unequal_attributes, :note)}= text_field 'article[]', 'note', :size => 15
-          %td{:style => highlight_new(unequal_attributes, :manufacturer)}= text_field 'article[]', 'manufacturer', :size => 10
-          %td{:style => highlight_new(unequal_attributes, :origin)}= text_field 'article[]', 'origin', :size => 5
-          %td{:style => highlight_new(unequal_attributes, :unit)}= text_field 'article[]', 'unit', :size => 5
-          %td{:style => highlight_new(unequal_attributes, :unit_quantity)}= text_field 'article[]', 'unit_quantity', :size => 5
-          %td{:style => highlight_new(unequal_attributes, :net_price)}= text_field 'article[]', 'net_price', :size => 5
-          %td{:style => highlight_new(unequal_attributes, :tax)}= text_field 'article[]', 'tax', :size => 4
-          %td{:style => highlight_new(unequal_attributes, :deposit)}= text_field 'article[]', 'deposit', :size => 4
-          %td= select 'article[]', 'article_category_id', ArticleCategory.find(:all).collect {|a| [ a.name, a.id ] }, { :include_blank => true }
+          - fields_for 'articles[]', @article do |form|
+            %td{:style => highlight_new(unequal_attributes, :name)}
+              = form.text_field 'name', :size => 0
+              = form.hidden_field 'shared_updated_on'
+            %td{:style => highlight_new(unequal_attributes, :note)}= form.text_field 'note', :size => 15
+            %td{:style => highlight_new(unequal_attributes, :manufacturer)}= form.text_field 'manufacturer', :size => 10
+            %td{:style => highlight_new(unequal_attributes, :origin)}= form.text_field 'origin', :size => 5
+            %td{:style => highlight_new(unequal_attributes, :unit)}= form.text_field 'unit', :size => 5
+            %td{:style => highlight_new(unequal_attributes, :unit_quantity)}= form.text_field 'unit_quantity', :size => 5
+            %td{:style => highlight_new(unequal_attributes, :net_price)}= form.text_field 'net_price', :size => 5
+            %td{:style => highlight_new(unequal_attributes, :tax)}= form.text_field 'tax', :size => 4
+            %td{:style => highlight_new(unequal_attributes, :deposit)}= form.text_field 'deposit', :size => 4
+            %td= select 'article[]', 'article_category_id', ArticleCategory.find(:all).collect {|a| [ a.name, a.id ] }, { :include_blank => true }
   %hr/
   = hidden_field 'supplier', 'id'
   = submit_tag 'Alle löschen/aktualisieren'
   |
-  = link_to 'Abbrechen', :action => 'list', :id => @supplier
+  = link_to 'Abbrechen', supplier_articles_path(@supplier)

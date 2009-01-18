@@ -1,0 +1,28 @@
+- title "Rechnung #{@invoice.number}"
+
+%p
+  %b Supplier:
+  =h @invoice.supplier.name
+- if @invoice.delivery
+  %p
+    %b Delivery:
+    ="Diese Rechnung ist mit einer #{link_to "Lieferung", [@invoice.supplier,@invoice.delivery]} verknüpft."
+%p
+  %b Number:
+  =h @invoice.number
+%p
+  %b Date:
+  =h @invoice.date
+%p
+  %b Paid on:
+  =h @invoice.paid_on
+%p
+  %b Amount:
+  =h @invoice.amount
+%p
+  %b Note:
+  =h @invoice.note
+
+= link_to 'Edit', edit_finance_invoice_path(@invoice)
+|
+= link_to 'Back', finance_invoices_path

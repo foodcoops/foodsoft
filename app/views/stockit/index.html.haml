@@ -1,0 +1,27 @@
+- title "Lagerübersicht"
+
+%p
+  - form_tag do
+    Neue Lieferung anlegen für:
+    = select_tag :new_delivery, |
+      options_for_select([" -- Lieferantin wählen --", ""] + |
+        Supplier.find(:all).collect {|s| [ s.name, url_for(new_supplier_delivery_path(s))] }), |
+      :onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;" |
+
+%p
+  %table.list
+    %thead
+      %tr
+        %th Artikel
+        %th Menge
+        %th Einheit
+        %th Preis
+        %th Lieferant
+    %tbody
+      - for article in @articles
+        %tr{:class => cycle("even", "odd")}
+          %td=h article.name
+          %td= article.quantity
+          %td= article.unit
+          %td= article.net_price
+          %td= link_to article.supplier.name, article.supplier
