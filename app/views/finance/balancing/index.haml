@@ -43,7 +43,7 @@
   .box_title
     %h2 noch nicht abgerechnet
   .column_content
-    %p= link_to "Bestellungsübersicht", :controller => 'finance/orders'
+    %p= link_to "Bestellungsübersicht", :controller => 'balancing', :action => 'list'
     - unless @orders.empty?
       %table.list
         %thead

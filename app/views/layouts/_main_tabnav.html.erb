@@ -34,11 +34,11 @@
         ]
       },
       { :name => "Finance", :url => "/finance",
-        :active => ["finance", "finance/invoices", "finance/transactions", "finance/balancing"],
+        :active => ["finance/invoices", "finance/transactions", "finance/balancing"],
         :access? => (u.role_finance?),
         :subnav => [
           { :name => "Manage accounts", :url => "/finance/transactions" },
-          { :name => "Balance orders", :url => "/finance/balancing" },
+          { :name => "Balance orders", :url => "/finance/balancing/list" },
           { :name => "Invoices", :url => finance_invoices_path }
         ]
       },
