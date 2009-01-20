@@ -1,62 +1,22 @@
-# MySQL (default setup).  Versions 4.1 and 5.0 are recommended.
-#
-# Install the MySQL driver:
-#   gem install mysql
-# On MacOS X:
-#   gem install mysql -- --include=/usr/local/lib
-# On Windows:
-#   There is no gem for Windows.  Install mysql.so from RubyForApache.
-#   http://rubyforge.org/projects/rubyforapache
-#
-# And be sure to use new-style password hashing:
-#   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
-#
-# Note: to properly connect to MySQL 5 running under Ubuntu, you need to
-# specify the connection socket (add to every connection):
-# 	socket: /var/run/mysqld/mysqld.sock
-#
-
+# SQLite version 3.x
+#   gem install sqlite3-ruby (not necessary on OS X Leopard)
 development:
-  adapter: mysql
-  database: foodsoft_development
-  username: root
-  password:
-  host: localhost
-  encoding: utf8
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
 
-# Warning: The database defined as 'test' will be erased and
-# re-generated from your development database when you run 'rake'.
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: mysql
-  database: foodsoft_test
-  username: root
-  password:
-  host: localhost
-  encoding: utf8
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
 
 production:
-  adapter: mysql
-  database: foodsoft_production
-  username: root
-  password: 
-  host: localhost
-  encoding: utf8
-  
-test1:
-  adapter: mysql
-  database: foodsoft_development
-  username: root
-  password:
-  host: localhost
-  encoding: utf8
-  #socket: /opt/lampp/var/mysql/mysql.sock
-
-test2:
-  adapter: mysql
-  database: foodsoft_test2
-  username: root
-  password:
-  host: localhost
-  encoding: utf8
-  #socket: /opt/lampp/var/mysql/mysql.sock
+  adapter: sqlite3
+  database: db/production.sqlite3
+  pool: 5
+  timeout: 5000

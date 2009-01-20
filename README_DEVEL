@@ -8,7 +8,7 @@ trying it out and then jumping into development.
 
 Configure datebase
 ------------------
-Create at least one local databases and then configure database access.
+If you are fine with sqlite you can skip this point. Otherwise ..
 
 	cp config/database.yml.SAMPLE config/database.yml
 	
@@ -28,19 +28,9 @@ Configure Foodsoft
 ------------------
 You need to create your own copy of the foodsoft configuration settings:
 
-	cp config/foodsoft.yml.SAMPLE config/foodsoft.yml
+	cp config/app_config.yml.SAMPLE config/app_config.yml
 
-Edit foodsoft.yml to suit your needs.
-
-
-Create log files
-----------------
-The WEBrick server will complain if these do not exist.
-
-	touch log/development.log
-	touch log/test.log
-	touch log/production.log
-	touch log/server.log
+Edit app_config.yml to suit your needs.
 
 
 Create database schema
@@ -57,5 +47,4 @@ Try it out
 ----------	
 Start the WEBrick server to try it out:
 	
-	script/server
-	
+	script/server	

@@ -2,10 +2,14 @@
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
 
+== Install
+
+Have a look on README_DEVEL.
+
 == License
 
 FoodSoft - a webbased foodcoop management software
-Copyright (C) 2007 Benni and Lasse
+Copyright (C) 2009 Benni and Lasse
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
