@@ -2,17 +2,10 @@
 # Management actions that require the "orders" role are handled by the OrdersController.
 class OrderingController < ApplicationController
   # Security
-  before_filter :ensureOrdergroupMember
-  verify :method => :post, :only => [:saveOrder], :redirect_to => { :action => :index }
+  before_filter :ensure_ordergroup_member
+  before_filter :ensure_open_order, :only => [:order, :saveOrder]
   
-  # Messages
-  ERROR_ALREADY_FINISHED = 'Diese Bestellung ist bereits abgeschlossen.'
-  ERROR_NO_ORDERGROUP = 'Sie gehören keiner Bestellgruppe an.'
-  ERROR_INSUFFICIENT_FUNDS = 'Der Bestellwert übersteigt das verfügbare Guthaben.'
-  MSG_ORDER_UPDATED = 'Die Bestellung wurde gespeichert.'
-  MSG_ORDER_CREATED = 'Die Bestellung wurde angelegt.'
-  ERROR_UPDATE_FAILED = 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
-  ERROR_UPDATE_CONFLICT = 'In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.'
+  verify :method => :post, :only => [:saveOrder], :redirect_to => { :action => :index }
   
   # Index page.
   def index
@@ -29,72 +22,57 @@ class OrderingController < ApplicationController
     
   # Edit a current order.
   def order       
-    @order = Order.find(params[:id], :include => [:supplier, :order_articles])
-    if !@order.current?
-      flash[:notice] = ERROR_ALREADY_FINISHED
-      redirect_to :action => 'index'
-    elsif !(@ordergroup = @current_user.find_ordergroup)
-      flash[:notice] = ERROR_NO_ORDERGROUP
-      redirect_to :controller => 'index'
-    else
-      @current_orders = Order.find_current
-      @other_orders = @current_orders.reject{|order| order == @order}
-      # Load order article data...
-      @articles_by_category = @order.get_articles
-      # save results of earlier orders in array
-      ordered_articles = Array.new
-      @group_order = @order.group_orders.find(:first, :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)       
-      if @group_order
-        # Group has already ordered, so get the results...
-        for article in @group_order.group_order_articles
-          result = article.orderResult
-          ordered_articles[article.order_article_id] = { 'quantity' => article.quantity,
-                                                     'tolerance' => article.tolerance,
-                                                     'quantity_result' => result[:quantity],
-                                                     'tolerance_result' => result[:tolerance]}
-        end           
-        @version = @group_order.lock_version
-        @availableFunds = @ordergroup.getAvailableFunds(@group_order)
-      else
-        @version = 0
-        @availableFunds = @ordergroup.getAvailableFunds
+    @current_orders = Order.find_current
+    @other_orders = @current_orders.reject{|order| order == @order}
+    # Load order article data...
+    @articles_by_category = @order.get_articles
+    # save results of earlier orders in array
+    ordered_articles = Array.new
+    @group_order = @order.group_orders.find(:first, :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
+    if @group_order
+      # Group has already ordered, so get the results...
+      for article in @group_order.group_order_articles
+        result = article.orderResult
+        ordered_articles[article.order_article_id] = { 'quantity' => article.quantity,
+                                                   'tolerance' => article.tolerance,
+                                                   'quantity_result' => result[:quantity],
+                                                   'tolerance_result' => result[:tolerance]}
       end
-      
-      # load prices ....
-      @price = Array.new; @unit = Array.new; 
-      @others_quantity = Array.new; @quantity = Array.new; @quantity_result = Array.new; @used_quantity = Array.new; @unused_quantity = Array.new
-      @others_tolerance = Array.new; @tolerance = Array.new; @tolerance_result = Array.new; @used_tolerance = Array.new; @unused_tolerance = Array.new
-      i = 0;
-      @articles_by_category.each do |category, order_articles|
-        for order_article in order_articles
-          # price/unit size
-          @price[i] = order_article.article.gross_price
-          @unit[i] = order_article.article.unit_quantity
-          # quantity
-          @quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['quantity'] : 0)
-          @others_quantity[i] = order_article.quantity - @quantity[i]
-          @used_quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['quantity_result'] : 0)
-          # tolerance
-          @tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['tolerance'] : 0)
-          @others_tolerance[i] = order_article.tolerance - @tolerance[i]
-          @used_tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['tolerance_result'] : 0)
-          i += 1
-        end
+      @version = @group_order.lock_version
+      @availableFunds = @ordergroup.getAvailableFunds(@group_order)
+    else
+      @version = 0
+      @availableFunds = @ordergroup.getAvailableFunds
+    end
+
+    # load prices ....
+    @price = Array.new; @unit = Array.new;
+    @others_quantity = Array.new; @quantity = Array.new; @quantity_result = Array.new; @used_quantity = Array.new; @unused_quantity = Array.new
+    @others_tolerance = Array.new; @tolerance = Array.new; @tolerance_result = Array.new; @used_tolerance = Array.new; @unused_tolerance = Array.new
+    i = 0;
+    @articles_by_category.each do |category, order_articles|
+      for order_article in order_articles
+        # price/unit size
+        @price[i] = order_article.article.gross_price
+        @unit[i] = order_article.article.unit_quantity
+        # quantity
+        @quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['quantity'] : 0)
+        @others_quantity[i] = order_article.quantity - @quantity[i]
+        @used_quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['quantity_result'] : 0)
+        # tolerance
+        @tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['tolerance'] : 0)
+        @others_tolerance[i] = order_article.tolerance - @tolerance[i]
+        @used_tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['tolerance_result'] : 0)
+        i += 1
       end
     end
   end
   
   # Update changes to a current order.
   def saveOrder
-    order = Order.find(params[:id], :include => [:supplier, :order_articles])
-    if (!order.current?)
-      flash[:error] = ERROR_ALREADY_FINISHED
-      redirect_to :action => 'index'
-    elsif !(ordergroup = @current_user.find_ordergroup)
-      flash[:error] = ERROR_NO_ORDERGROUP
-      redirect_to :controller => 'index'
-    elsif (params[:total_balance].to_i < 0)
-      flash[:error] = ERROR_INSUFFICIENT_FUNDS
+    order = @order # Get the object through before_filter
+    if (params[:total_balance].to_i < 0)
+      flash[:error] = 'Der Bestellwert übersteigt das verfügbare Guthaben.'
       redirect_to :action => 'order'
     elsif (ordered = params[:ordered])
        begin
@@ -131,12 +109,12 @@ class OrderingController < ApplicationController
            order.updateQuantities
            order.save!
          end         
-         flash[:notice] = MSG_ORDER_UPDATED
+         flash[:notice] = 'Die Bestellung wurde gespeichert.'
        rescue ActiveRecord::StaleObjectError
-         flash[:error] = ERROR_UPDATE_CONFLICT
+         flash[:error] = 'In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.'
        rescue => exception
          logger.error('Failed to update order: ' + exception.message)
-         flash[:error] = ERROR_UPDATE_FAILED
+         flash[:error] = 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
        end
        redirect_to :action => 'my_order_result', :id => order
     end
@@ -213,8 +191,19 @@ class OrderingController < ApplicationController
   
     # Returns true if @current_user is member of an Ordergroup.
     # Used as a :before_filter by OrderingController.
-    def ensureOrdergroupMember
-      !@current_user.find_ordergroup.nil?
-    end    
+    def ensure_ordergroup_member
+      unless @current_user.find_ordergroup
+        flash[:notice] = 'Sie gehören keiner Bestellgruppe an.'
+        redirect_to :controller => root_path
+      end
+    end
+
+    def ensure_open_order
+      @order = Order.find(params[:id], :include => [:supplier, :order_articles])
+      unless @order.current?
+        flash[:notice] = 'Diese Bestellung ist bereits abgeschlossen.'
+        redirect_to :action => 'index'
+      end
+    end
 
 end

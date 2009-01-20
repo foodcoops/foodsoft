@@ -32,10 +32,6 @@ class Group < ActiveRecord::Base
   validates_length_of :name, :in => 1..25
   validates_uniqueness_of :name
   
-  # messages
-  ERR_LAST_ADMIN_GROUP_UPDATE = "Der letzten Gruppe mit Admin-Rechten darf die Admin-Rolle nicht entzogen werden"
-  ERR_LAST_ADMIN_GROUP_DELETE = "Die letzte Gruppe mit Admin-Rechten darf nicht gelöscht werden"
-  
   # Returns true if the given user if is an member of this group.
   def member?(user)
     memberships.find_by_user_id(user.id)
@@ -54,7 +50,9 @@ class Group < ActiveRecord::Base
   
   # Check before destroy a group, if this is the last group with admin role
   def before_destroy
-    raise ERR_LAST_ADMIN_GROUP_DELETE if self.role_admin == true && Group.find_all_by_role_admin(true).size == 1
+    if self.role_admin == true && Group.find_all_by_role_admin(true).size == 1
+      raise "Die letzte Gruppe mit Admin-Rechten darf nicht gelöscht werden"
+    end
   end
   
   # get all groups, which are NOT Ordergroups
@@ -72,7 +70,9 @@ class Group < ActiveRecord::Base
   # add validation check on update
   def validate_on_update
     # error if this is the last group with admin role and role_admin should set to false
-    errors.add(:role_admin, ERR_LAST_ADMIN_GROUP_UPDATE) if self.role_admin == false && Group.find_all_by_role_admin(true).size == 1 && self == Group.find(:first, :conditions => "role_admin = 1")
+    if self.role_admin == false && Group.find_all_by_role_admin(true).size == 1 && self == Group.find(:first, :conditions => "role_admin = 1")
+      errors.add(:role_admin, "Der letzten Gruppe mit Admin-Rechten darf die Admin-Rolle nicht entzogen werden")
+    end
   end
   
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090115232435) do
+ActiveRecord::Schema.define(:version => 20090119155930) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20090115232435) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "quantity",            :precision => 6, :scale => 2, :default => 0.0
+    t.datetime "deleted_at"
   end
 
   add_index "articles", ["name", "supplier_id"], :name => "index_articles_on_name_and_supplier_id"
@@ -251,20 +252,21 @@ ActiveRecord::Schema.define(:version => 20090115232435) do
   end
 
   create_table "suppliers", :force => true do |t|
-    t.string  "name",               :default => "", :null => false
-    t.string  "address",            :default => "", :null => false
-    t.string  "phone",              :default => "", :null => false
-    t.string  "phone2"
-    t.string  "fax"
-    t.string  "email"
-    t.string  "url"
-    t.string  "contact_person"
-    t.string  "customer_number"
-    t.string  "delivery_days"
-    t.string  "order_howto"
-    t.string  "note"
-    t.integer "shared_supplier_id"
-    t.string  "min_order_quantity"
+    t.string   "name",               :default => "", :null => false
+    t.string   "address",            :default => "", :null => false
+    t.string   "phone",              :default => "", :null => false
+    t.string   "phone2"
+    t.string   "fax"
+    t.string   "email"
+    t.string   "url"
+    t.string   "contact_person"
+    t.string   "customer_number"
+    t.string   "delivery_days"
+    t.string   "order_howto"
+    t.string   "note"
+    t.integer  "shared_supplier_id"
+    t.string   "min_order_quantity"
+    t.datetime "deleted_at"
   end
 
   add_index "suppliers", ["name"], :name => "index_suppliers_on_name", :unique => true

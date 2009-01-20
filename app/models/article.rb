@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090115232435
+# Schema version: 20090119155930
 #
 # Table name: articles
 #
@@ -22,9 +22,12 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  quantity            :decimal(6, 2)   default(0.0)
+#  deleted_at          :datetime
 #
 
 class Article < ActiveRecord::Base
+  acts_as_paranoid  # Avoid deleting the article for consistency of order-results
+
   belongs_to :supplier
   belongs_to :article_category
 

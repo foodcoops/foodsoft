@@ -67,6 +67,7 @@ Rails::Initializer.run do |config|
   # library for parsing/writing files from/to csv-file
   config.gem "fastercsv"
   config.gem "prawn"
+  config.gem "rubyist-aasm", :version => '2.0.5', :source => "http://gems.github.com" # acts_as_statemachine
 
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
   # All files from config/locales/*.rb,yml are added automatically.

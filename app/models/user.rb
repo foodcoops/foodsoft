@@ -150,7 +150,6 @@ class User < ActiveRecord::Base
   # Returns the user's Ordergroup or nil if none found.
   def find_ordergroup
     ordergroups.first
-    #groups.find(:first, :conditions => "type = 'Ordergroup'")
   end
   
   # Find all tasks, for which the current user should be responsible

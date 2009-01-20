@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090102171850
+# Schema version: 20090119155930
 #
 # Table name: suppliers
 #
@@ -18,9 +18,12 @@
 #  note               :string(255)
 #  shared_supplier_id :integer(4)
 #  min_order_quantity :string(255)
+#  deleted_at         :datetime
 #
 
 class Supplier < ActiveRecord::Base
+  acts_as_paranoid  # Avoid deleting the supplier for consistency of order-results
+
   has_many :articles, :dependent => :destroy
   has_many :orders
   has_many :deliveries
