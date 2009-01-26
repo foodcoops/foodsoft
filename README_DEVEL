@@ -1,50 +1,67 @@
 README for DEVELopment Project Setup
 ====================================
 
-Gratulations, you have successfully checked out the foodsoft project
-form the subversion repository. Now you are only a few steps away from
-trying it out and then jumping into development.
+Gratulations, you have successfully cloned the foodsoft project
+from the git repository. Now you are only a few steps away from
+trying it out and then jumping into development. (This manual presumes
+you have ruby and rails setup.)
 
+(1) Configure datebase
+----------------------
+Create the database configuration from the default:
 
-Configure datebase
-------------------
-If you are fine with sqlite you can skip this point. Otherwise ..
+    cp config/database.yml.SAMPLE config/database.yml
 
-	cp config/database.yml.SAMPLE config/database.yml
+If you are fine with using a file-based sqlite database you are all set.
+The sqlite files (development/test/production) will reside in the "db" directory.
+You might still need to install sqlite and the respective gem, i.e. on Ubuntu do:
+
+    sudo aptitude install sqlite3 libsqlite3-dev
+    sudo gem install sqlite3-ruby
+
+Otherwise you would want to edit database.yml to suit your needs (MySQL whatever).
 	
-Edit database.yml to specify connection parameters.
-	
 
-Configure Development Environment
----------------------------------
-You need to create your own copy of the development environment configuration:
+(2) Configure development environment
+-------------------------------------
+Again, you need to create your own copy of the default configuration:
 
 	cp config/environments/development.rb.SAMPLE config/environments/development.rb
 
-Edit development.rb to specify your settings (e.g. ActionMailer SMTP settings).
+Edit development.rb to specify your settings (at least the ActionMailer SMTP settings).
+If you just leave the file as is, emails will not work but everything else should be okay.
 
 
-Configure Foodsoft
-------------------
+(3) Foodsoft settings
+---------------------
 You need to create your own copy of the foodsoft configuration settings:
 
 	cp config/app_config.yml.SAMPLE config/app_config.yml
 
-Edit app_config.yml to suit your needs.
+Edit app_config.yml to suit your needs or just keep the defaults for now.
 
 
-Create database schema
-----------------------
+(4) Required gems
+-------------------
+In addition to the standard Ruby on Rails gems you will need to install 
+the additional gems required by running:
+
+    sudo gem sources -a http://gems.github.com
+    sudo gem install haml fastercsv prawn rubyist-aasm
+
+
+(5) Create database schema
+--------------------------
 	rake db:schema:load
 
 
-Create user admin with password secret
---------------------------------------
+(6) Create user "admin" with password "secret"
+----------------------------------------------
 	rake foodsoft:create_admin
 	
 
-Try it out
-----------	
+(7) Try it out!
+---------------	
 Start the WEBrick server to try it out:
 	
 	script/server	
