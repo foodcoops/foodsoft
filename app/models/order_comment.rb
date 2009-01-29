@@ -1,0 +1,19 @@
+# == Schema Information
+# Schema version: 20090120184410
+#
+# Table name: order_comments
+#
+#  id         :integer(4)      not null, primary key
+#  order_id   :integer(4)
+#  user_id    :integer(4)
+#  text       :text
+#  created_at :datetime
+#
+
+class OrderComment < ActiveRecord::Base
+
+  belongs_to :order
+  belongs_to :user
+
+  validates_presence_of :order_id, :user_id, :text
+end

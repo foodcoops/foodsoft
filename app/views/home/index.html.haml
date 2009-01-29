@@ -27,7 +27,7 @@
         = _("There are") + " #{@unassigned_tasks_number} " + link_to(_("unassigned task(s)"), :controller => "tasks")
       %p{:style => "clear:both"}= link_to _("My tasks"), :controller => "tasks", :action => "myTasks"
 
-  - if @orderGroup
+  - if @ordergroup
     // Current orders
     = render :partial => 'ordering/currentOrders'
 
@@ -42,13 +42,13 @@
     %h2=_ "My ordergroup"
   .column_content
     %p
-      %b= @orderGroup.name
+      %b= @ordergroup.name
       |
       =_ "Account balance:"
-      = number_to_currency(@orderGroup.account_balance)
+      = number_to_currency(@ordergroup.account_balance)
       %span{:style => "color:grey"}
         (zuletzt aktualisiert vor
-        = distance_of_time_in_words(Time.now, @orderGroup.account_updated) + ")"
+        = distance_of_time_in_words(Time.now, @ordergroup.account_updated) + ")"
       %h3=_ "Last transactions"
       %table
         %tr

@@ -11,7 +11,7 @@
       %tbody
         - total = 0
         - for result in groupOrderResult.group_order_article_results 
-          - price = result.order_article_result.gross_price
+          - price = result.order_article_result.fc_price
           - quantity = result.quantity
           - subTotal = price * quantity
           - total += subTotal

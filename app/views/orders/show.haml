@@ -1,90 +1,88 @@
 - title _("Show order")
 #element_navigation
-  = link_to_unless @order.previous == @order, _("Previous order"), :action => "show", :id => @order.previous
+  = link_to_unless @order.previous == @order, _("Previous order"), @order.previous
   |
-  = link_to _("Overview"), :controller => 'orders'
+  = link_to _("Overview"), orders_path
   |
-  = link_to_unless @order.next == @order, _("Next order"), :action => "show", :id => @order.next
+  = link_to_unless @order.next == @order, _("Next order"), @order.next
 
 // Order summary
-.left_column{:style => "width:55em"}
+.left_column{:style => "width:65em"}
   .box_title
-    %h2=_ "Summary"
+    %h2 Zusammenfassung
   .column_content
-    - if !@order.booked? and @finished
+    - if @order.finished? and !@order.closed?
       %p
-        %b{:style => "color:red"}=_ "Order isn't balanced yet"
+        %b{:style => "color:red"}=_ "Order isn't closed yet"
     %p
-      = _("Name") + ":"
-      %b=h @order.name
-      |
-      = _("Supplier") + ":"
-      %b=h @order.supplier ? @order.supplier.name : _('nonexistent')
+      Lieferant:
+      %b=h @order.supplier.name
     - unless @order.note.empty?
       %p
-        = _("Note") + ":"
+        Notiz:
         =h @order.note
     %p
-      = _("Begin") + ":"
+      Beginn:
       %b=h format_time(@order.starts)
       |
-      = _("End") + ":"
+      Ende:
       %b=h format_time(@order.ends)
     %p
-      = _("Groups ordered") + ":"
-      %b= @group_orders.size
-      - unless @finished
-        = "[#{@group_orders.collect{|g| g.ordergroup.name}.join(', ')}]" unless @group_orders.empty? 
-      - else
-        = "[#{@group_orders.collect{|g| g.group_name}.join(', ')}]" unless @group_orders.empty? 
+      Gruppenbestellungen:
+      %b= @order.group_orders.count
+      = "[#{@order.group_orders.find(:all, :include => :ordergroup).collect{|g| g.ordergroup.name}.join(', ')}]"
+      
     %p
-      =_ "Total price"
-      %b= number_to_currency(@order.sumPrice('gross'))
-      - if @order.finished
+      Bruttosummer aller Artikel
+      %b= number_to_currency(@order.sum(:gross))
+      - if @order.finished?
         |
-        =_ "Ordered articles:"
-        %b= @order_articles.size
-    - unless @finished
-      = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Edit'), :action => 'edit', :id => @order)
-      = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Delete'), { :action => 'destroy', :id => @order }, :confirm => "Willst du wirklich die Bestellung '#{@order.name}' löschen?", :method => "post")
-      = link_to('[beenden]', {:action => 'finish', :id => @order}, :confirm => "Willst du wirklich die Bestellung '#{@order.name}' beenden?", :method => "post")
-    - else
+        Bestellte Artikel:
+        %b= @order.order_articles.ordered.count
+
+    - if @order.open?
       %p
-        = link_to_remote _("All articles"), :update => 'result', :url => {:action => 'show', :id => @order, :view => 'normal'}, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+        = link_to icon(:edit), edit_order_path(@order)
+        = link_to icon(:delete), @order, :confirm => "Willst du wirklich die Bestellung löschen?", :method => :delete
+        = link_to '[beenden]', finish_order_path(@order), :method => :post
+    
+    - unless @order.open?
+      %p
+        = update_articles_link(@order, "Artikelübersicht", :normal)
         |
-        = link_to_remote _("Sort by groups"), :update => 'result', :url => {:action => 'show', :id => @order, :view => 'groups'}, :before => "Element.show('loader')", :success => "Element.hide('loader')"
-        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'groupsPdf', :id => @order, :format => :pdf }, { :title => _("Download file") }
+        = update_articles_link(@order, "Sortiert nach Gruppen", :groups)
+        = link_to_pdf(@order, 'groupsPdf')
         |
-        = link_to_remote _("Sort by articles"), :update => 'result', :url => {:action => 'show', :id => @order, :view => 'articles'}, :before => "Element.show('loader')", :success => "Element.hide('loader')"
-        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'articlesPdf', :id => @order, :format => :pdf}, { :title => _("Download file") }
+        = update_articles_link(@order, "Sortiert nach Artikeln", :articles)
+        = link_to_pdf(@order, 'articlesPdf')
         |
-        =_ "Matrix" + ":"
-        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'matrixPdf', :id => @order, :format => :pdf }, { :title => _("Download file") }
+        Matrix:
+        = link_to_pdf(@order, 'matrixPdf')
         |
-        =_ "FAX-template" + ":"
-        = link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"), { :action => 'faxPdf', :id => @order, :format => :pdf }, { :title => _("Download file") }
+        Faxvorlage:
+        = link_to_pdf(@order, 'faxPdf')
         = link_to image_tag("text_file.png", :size => "16x16", :border => "0", :alt => "Textdatei erstellen"), { :action => 'text_fax_template', :id => @order }, { :title => _("Download file") }
         |
         = link_to 'Kommentare', '#comments'
       
-// Ordered articles
 .single_column{:style => "clear:both; width:70em;"}
   .box_title
-    %h2=_ "Articles"
-  .column_content#result
-    - unless @finished
-      = render :partial => "show_unfinished"
-    - else
-      = render :partial => "showResult"
+    %h2 Artikel
+  .column_content#articles
+    = render :partial => 'articles', :locals => { :order => @order }
 
-// comments
-- if @finished
-  .single_column{:style => "width:70em;"}
-    .box_title
-      %h2=_ "Comments"
-    .column_content#comments
-      = render :partial => "/shared/comments"
-      %p
-        = link_to_remote "neuer Kommentar", :url => {:action => 'newComment', :id => @order}
-        #newComment
-      = link_to_top                                           
+.single_column{:style => "width:70em;"}
+  .box_title
+    %h2 Kommentare
+  .column_content#comments
+    = render :partial => "/shared/comments", :locals => { :comments => @order.comments }
+    %p
+      - form_for :comment, :url => add_comment_order_path(@order) do |form|
+        %p
+          %b Neuen Kommentar hinzufügen:
+          %br/
+          = form.text_area :comment, :cols => 50, :rows => 6
+          %br/
+          = submit_tag "Kommentar hinzufügen"
+
+    = link_to_top

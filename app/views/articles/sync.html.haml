@@ -46,7 +46,7 @@
           %td= article.origin
           %td= article.unit
           %td= article.unit_quantity
-          %td= article.net_price
+          %td= article.price
           %td= article.tax
           %td= article.deposit
           %td= article.article_category.name if article.article_category
@@ -60,7 +60,7 @@
             %td{:style => highlight_new(unequal_attributes, :origin)}= form.text_field 'origin', :size => 5
             %td{:style => highlight_new(unequal_attributes, :unit)}= form.text_field 'unit', :size => 5
             %td{:style => highlight_new(unequal_attributes, :unit_quantity)}= form.text_field 'unit_quantity', :size => 5
-            %td{:style => highlight_new(unequal_attributes, :net_price)}= form.text_field 'net_price', :size => 5
+            %td{:style => highlight_new(unequal_attributes, :price)}= form.text_field 'price', :size => 5
             %td{:style => highlight_new(unequal_attributes, :tax)}= form.text_field 'tax', :size => 4
             %td{:style => highlight_new(unequal_attributes, :deposit)}= form.text_field 'deposit', :size => 4
             %td= select 'article[]', 'article_category_id', ArticleCategory.find(:all).collect {|a| [ a.name, a.id ] }, { :include_blank => true }

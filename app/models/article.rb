@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090119155930
+# Schema version: 20090120184410
 #
 # Table name: articles
 #
@@ -13,8 +13,7 @@
 #  manufacturer        :string(255)
 #  origin              :string(255)
 #  shared_updated_on   :datetime
-#  net_price           :decimal(8, 2)
-#  gross_price         :decimal(8, 2)   default(0.0), not null
+#  price               :decimal(8, 2)
 #  tax                 :float
 #  deposit             :decimal(8, 2)   default(0.0)
 #  unit_quantity       :integer(4)      default(1), not null
@@ -26,25 +25,30 @@
 #
 
 class Article < ActiveRecord::Base
-  acts_as_paranoid  # Avoid deleting the article for consistency of order-results
+  acts_as_paranoid                    # Avoid deleting the article for consistency of order-results
+  extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
 
+  # Associations
   belongs_to :supplier
   belongs_to :article_category
+  has_many :article_prices, :order => "created_at"
 
   named_scope :in_stock, :conditions => "quantity > 0", :order => 'suppliers.name', :include => :supplier
-  
-  validates_presence_of :name, :unit, :net_price, :tax, :deposit, :unit_quantity, :supplier_id
+
+  # Validations
+  validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category_id
   validates_length_of :name, :in => 4..60
   validates_length_of :unit, :in => 2..15
-  validates_numericality_of :net_price, :greater_than => 0
+  validates_numericality_of :price, :greater_than => 0
   validates_numericality_of :deposit, :tax
   
-  # calculate the gross_price
-  before_save :calc_gross_price
-  
+  # Callbacks
+  before_save :update_price_history
+  before_destroy :check_article_in_use
+    
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def net_price=(net_price)
-    self[:net_price] = String.delocalized_decimal(net_price)
+  def price=(price)
+    self[:price] = String.delocalized_decimal(price)
   end
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
@@ -57,9 +61,14 @@ class Article < ActiveRecord::Base
     self[:deposit] = String.delocalized_decimal(deposit)
   end
   
-  # calculate the fc price and sets the attribute
-  def calc_gross_price
-    self.gross_price = ((net_price + deposit) * (tax / 100 + 1)) * (APP_CONFIG[:price_markup] / 100 + 1)
+  # The financial gross, net plus tax and deposti
+  def gross_price
+    ((price + deposit) * (tax / 100 + 1)).round(2)
+  end
+
+  # The price for the foodcoop-member.
+  def fc_price
+    (gross_price  * (APP_CONFIG[:price_markup] / 100 + 1)).round(2)
   end
   
   # Returns true if article has been updated at least 2 days ago
@@ -75,7 +84,7 @@ class Article < ActiveRecord::Base
   # 
   # Example:
   # 
-  # unit_quantity | quantity | tolerance | calculateOrderQuantity
+  # unit_quantity | quantity | tolerance | calculate_order_quantity
   # --------------+----------+-----------+-----------------------
   #      4        |    0     |     2     |           0
   #      4        |    0     |     5     |           0
@@ -85,28 +94,20 @@ class Article < ActiveRecord::Base
   #      4        |    5     |     3     |           2
   #      4        |    5     |     4     |           2
   # 
-  def calculateOrderQuantity(quantity, tolerance = 0)
-    unitSize = unit_quantity
-    units = quantity / unitSize
-    remainder = quantity % unitSize
-    units += ((remainder > 0) && (remainder + tolerance >= unitSize) ? 1 : 0) 
+  def calculate_order_quantity(quantity, tolerance = 0)
+    unit_size = unit_quantity
+    units = quantity / unit_size
+    remainder = quantity % unit_size
+    units += ((remainder > 0) && (remainder + tolerance >= unit_size) ? 1 : 0)
   end
 
-  # If the article is used in an active Order, the Order will returned.
-  def inUse
-    Order.find(:all, :conditions => 'finished = 0').each do |order|
-      if order.articles.find_by_id(self)
-        @order = order
-        break
-      end
-    end
-    return @order if @order
+  # If the article is used in an open Order, the Order will be returned.
+  def in_open_order
+    order_articles = OrderArticle.all(:conditions => ['order_id IN (?)', Order.open.collect {|o| o.id }])
+    order_article = order_articles.detect {|oa| oa.article_id == id }
+    order_article ? order_article.order : nil
   end
-  
-  # Checks if the article is in use before it will deleted
-  def before_destroy
-    raise self.name.to_s + _(" cannot be deleted. The article is used in a current order!") if self.inUse
-  end
+  memoize :in_open_order
   
   # this method checks, if the shared_article has been changed
   # unequal attributes will returned in array
@@ -132,7 +133,7 @@ class Article < ActiveRecord::Base
           :manufacturer => [self.manufacturer, self.shared_article.manufacturer.to_s],
           :origin => [self.origin, self.shared_article.origin],
           :unit => [self.unit, new_unit],
-          :net_price => [self.net_price, new_price],
+          :price => [self.price, new_price],
           :tax => [self.tax, self.shared_article.tax],
           :deposit => [self.deposit, self.shared_article.deposit],
           # take care of different num-objects.
@@ -217,4 +218,26 @@ class Article < ActiveRecord::Base
     update_attribute :quantity, quantity + amount
   end
 
+  protected
+  
+  # Checks if the article is in use before it will deleted
+  def check_article_in_use
+    raise self.name.to_s + _(" cannot be deleted. The article is used in a current order!") if self.in_open_order
+  end
+
+  # Create an ArticlePrice, when the price-attr are changed.
+  def update_price_history
+    if price_changed?
+      article_prices.create(
+        :price => price,
+        :tax => tax,
+        :deposit => deposit,
+        :unit_quantity => unit_quantity
+      )
+    end
+  end
+
+  def price_changed?
+    changed.detect { |attr| attr == 'price' || 'tax' || 'deposit' || 'unit_quantity' } ? true : false
+  end
 end

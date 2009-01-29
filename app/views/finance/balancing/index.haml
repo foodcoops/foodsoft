@@ -55,9 +55,9 @@
         %tbody
           - @orders.each do |order|
             %tr{:class => cycle("even","odd", :name => "order")}
-              %td= order.name
+              %td= order.supplier.name
               %td= format_date(order.ends)
-              %td{:class => "currency"}= number_to_currency(order.sumPrice("fc"))
+              %td{:class => "currency"}= number_to_currency(order.sum(:fc))
               %td= link_to "abrechnen", :action => "editOrder", :id => order
     - else
       Super, alles schon abgerechnet...

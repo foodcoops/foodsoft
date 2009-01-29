@@ -2,10 +2,10 @@ class HomeController < ApplicationController
   helper :messages
   
   def index
-    @currentOrders = Order.find_current
-    @orderGroup = @current_user.find_ordergroup
-    if @orderGroup
-      @financial_transactions = @orderGroup.financial_transactions.find(:all, :order => 'created_on desc', :limit => 3)
+    @currentOrders = Order.open
+    @ordergroup = @current_user.find_ordergroup
+    if @ordergroup
+      @financial_transactions = @ordergroup.financial_transactions.find(:all, :order => 'created_on desc', :limit => 3)
     end
     # unaccepted tasks
     @unaccepted_tasks = @current_user.unaccepted_tasks

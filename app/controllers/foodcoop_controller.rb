@@ -27,7 +27,7 @@ class FoodcoopController < ApplicationController
       conditions = "first_name LIKE '%#{params[:query]}%' OR last_name LIKE '%#{params[:query]}%'" unless params[:query].blank?
 
       @total = User.count(:conditions => conditions)
-      @users = User.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "nick", :include => "groups")
+      @users = User.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "nick", :include => :groups)
 
       respond_to do |format|
         format.html # index.html.erb

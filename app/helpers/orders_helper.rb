@@ -1,11 +1,13 @@
 module OrdersHelper
-  require 'iconv'
 
-  # This method is needed to convert special characters into UTF-8 for rendering PDF files correctly.
-  def replace_UTF8(field)
-    ic_ignore = Iconv.new('ISO-8859-15//IGNORE//TRANSLIT', 'UTF-8')
-    field = ic_ignore.iconv(field)
-    ic_ignore.close  
-    field
+  def update_articles_link(order, text, view)
+    link_to_remote text, :url => order_path(order, :view => view),
+      :update => 'articles', :before => "Element.show('loader')", :success => "Element.hide('loader')",
+      :method => :get
+  end
+
+  def link_to_pdf(order, action)
+    link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"),
+      { :action => action, :id => order, :format => :pdf }, { :title => "PDF erstellen" }
   end
 end

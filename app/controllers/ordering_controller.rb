@@ -8,22 +8,13 @@ class OrderingController < ApplicationController
   verify :method => :post, :only => [:saveOrder], :redirect_to => { :action => :index }
   
   # Index page.
-  def index
-    @orderGroup = @current_user.find_ordergroup
-    @currentOrders = Order.find_current
-    @finishedOrders = @orderGroup.findExpiredOrders + @orderGroup.findFinishedNotBooked
-    @bookedOrders = @orderGroup.findBookedOrders(5)
-    
-    # Calculate how much the order group has spent on open or nonbooked orders:
-    @currentOrdersValue, @nonbookedOrdersValue = 0, 0
-    @orderGroup.findCurrent.each { |groupOrder| @currentOrdersValue += groupOrder.price}
-    @finishedOrders.each { |groupOrder| @nonbookedOrdersValue += groupOrder.price}
+  def index    
   end
     
   # Edit a current order.
   def order       
-    @current_orders = Order.find_current
-    @other_orders = @current_orders.reject{|order| order == @order}
+    @open_orders = Order.open
+    @other_orders = @open_orders.reject{|order| order == @order}
     # Load order article data...
     @articles_by_category = @order.get_articles
     # save results of earlier orders in array
@@ -39,10 +30,10 @@ class OrderingController < ApplicationController
                                                    'tolerance_result' => result[:tolerance]}
       end
       @version = @group_order.lock_version
-      @availableFunds = @ordergroup.getAvailableFunds(@group_order)
+      @availableFunds = @ordergroup.get_available_funds(@group_order)
     else
       @version = 0
-      @availableFunds = @ordergroup.getAvailableFunds
+      @availableFunds = @ordergroup.get_available_funds
     end
 
     # load prices ....
@@ -50,10 +41,10 @@ class OrderingController < ApplicationController
     @others_quantity = Array.new; @quantity = Array.new; @quantity_result = Array.new; @used_quantity = Array.new; @unused_quantity = Array.new
     @others_tolerance = Array.new; @tolerance = Array.new; @tolerance_result = Array.new; @used_tolerance = Array.new; @unused_tolerance = Array.new
     i = 0;
-    @articles_by_category.each do |category, order_articles|
+    @articles_by_category.each do |category_name, order_articles|
       for order_article in order_articles
         # price/unit size
-        @price[i] = order_article.article.gross_price
+        @price[i] = order_article.article.fc_price
         @unit[i] = order_article.article.unit_quantity
         # quantity
         @quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['quantity'] : 0)
@@ -78,12 +69,12 @@ class OrderingController < ApplicationController
        begin
          Order.transaction do
            # Create group order if necessary...
-           if (groupOrder = order.group_orders.find(:first, :conditions => "ordergroup_id = #{ordergroup.id}", :include => [:group_order_articles]))
+           if (groupOrder = order.group_orders.find(:first, :conditions => "ordergroup_id = #{@ordergroup.id}", :include => [:group_order_articles]))
               if (params[:version].to_i != groupOrder.lock_version) # check for conflicts well ahead
                 raise ActiveRecord::StaleObjectError
               end
            else
-              groupOrder = GroupOrder.new(:ordergroup => ordergroup, :order => order, :updated_by => @current_user, :price => 0)   
+              groupOrder = GroupOrder.new(:ordergroup => @ordergroup, :order => order, :updated_by => @current_user, :price => 0)
               groupOrder.save!
            end
            # Create/update GroupOrderArticles...
@@ -98,15 +89,15 @@ class OrderingController < ApplicationController
               unless (quantities = ordered.delete(article.id.to_s)) && (quantity = quantities['quantity']) && (tolerance = quantities['tolerance'])
                 quantity = tolerance = 0
               end
-              groupOrderArticle.updateQuantities(quantity.to_i, tolerance.to_i)
+              groupOrderArticle.update_quantities(quantity.to_i, tolerance.to_i)
               # Add to new list of GroupOrderArticles:
               newGroupOrderArticles.push(groupOrderArticle)
            end
            groupOrder.group_order_articles = newGroupOrderArticles
-           groupOrder.updatePrice
+           groupOrder.update_price!
            groupOrder.updated_by = @current_user
            groupOrder.save!
-           order.updateQuantities
+           order.update_quantities
            order.save!
          end         
          flash[:notice] = 'Die Bestellung wurde gespeichert.'
@@ -124,86 +115,53 @@ class OrderingController < ApplicationController
   # this method decides between finished and unfinished orders
   def my_order_result
     @order= Order.find(params[:id])
-    @current_orders = Order.find_current #.reject{|order| order == @order}
-    if @order.finished?
-      @finished= true
-      @groupOrderResult= @order.group_order_results.find_by_group_name(@current_user.find_ordergroup.name)
-      @order_value= @groupOrderResult.price if @groupOrderResult
-      @comments= @order.comments
-    else
-      @group_order = @order.group_orders.find_by_ordergroup_id(@current_user.find_ordergroup.id)
-      @order_value= @group_order.price if @group_order
-    end
+    @group_order = @order.group_order(@ordergroup)
   end
   
   # Shows all Orders of the Ordergroup
   # if selected, it shows all orders of the foodcoop
   def myOrders
-    @orderGroup = @current_user.find_ordergroup
-    unless params[:show_all] == "1"
-      # get only orders belonging to the ordergroup
-      @finishedOrders = @orderGroup.findExpiredOrders + @orderGroup.findFinishedNotBooked  
-      @bookedOrders = GroupOrderResult.paginate :page => params[:page], :per_page => 10,
-                                                :include => :order,
-                                                :conditions => ["group_order_results.group_name = ? AND group_order_results.order_id = orders.id AND orders.finished = ? AND orders.booked = ? ", @orderGroup.name, true, true],
-                                                :order => "orders.ends DESC"
-    else
-      # get all orders, take care of different models in @finishedOrders
-      @show_all = true
-      @finishedOrders = Order.find_finished
-      @bookedOrders = Order.paginate_all_by_booked true, :page => params[:page], :per_page => 10, :order => 'ends desc'
-    end
-    
+    # get only orders belonging to the ordergroup
+    @closed_orders = Order.paginate :page => params[:page], :per_page => 10,
+      :conditions => { :state => 'closed' }, :order => "orders.ends DESC"
+
     respond_to do |format|
       format.html # myOrders.haml
-      format.js do
-        render :update do |page|
-          page.replace_html 'bookedOrders', :partial => "bookedOrders"
-        end
-      end
-    end
-  end
-  
-  # sends a form for adding a new comment
-  def newComment
-    @order = Order.find(params[:id])
-    render :update do |page|
-      page.replace_html 'newComment', :partial => 'shared/newComment', :object => @order
-      page["newComment"].show
+      format.js { render :partial => "orders" }
     end
   end
   
   # adds a Comment to the Order
-  def addComment
-    @order = Order.find(params[:id])
-    @comment = Comment.new(params[:comment])
-    @comment.user = @current_user
-    if @comment.title.length > 3 && @order.comments << @comment
-      flash[:notice] =  _("Comment has been created.")
-      redirect_to :action => 'my_order_result', :id => @order 
+  def add_comment
+    order = Order.find(params[:id])
+    comment = order.comments.build(params[:comment])
+    comment.user = @current_user
+    if !comment.text.empty? and comment.save
+      flash[:notice] = "Kommentar wurde erstellt."
     else
-      flash[:error] = _("The comment has not been saved. Check the title and try again.")
-      redirect_to :action => 'my_order_result', :id => @order
+      flash[:error] = "Kommentar konnte nicht erstellt werden. Leerer Kommentar?"
     end
+    redirect_to :action => 'my_order_result', :id => order
   end
 
   private
   
-    # Returns true if @current_user is member of an Ordergroup.
-    # Used as a :before_filter by OrderingController.
-    def ensure_ordergroup_member
-      unless @current_user.find_ordergroup
-        flash[:notice] = 'Sie gehören keiner Bestellgruppe an.'
-        redirect_to :controller => root_path
-      end
+  # Returns true if @current_user is member of an Ordergroup.
+  # Used as a :before_filter by OrderingController.
+  def ensure_ordergroup_member
+    @ordergroup = @current_user.find_ordergroup
+    if @ordergroup.nil?
+      flash[:notice] = 'Sie gehören keiner Bestellgruppe an.'
+      redirect_to :controller => root_path
     end
+  end
 
-    def ensure_open_order
-      @order = Order.find(params[:id], :include => [:supplier, :order_articles])
-      unless @order.current?
-        flash[:notice] = 'Diese Bestellung ist bereits abgeschlossen.'
-        redirect_to :action => 'index'
-      end
+  def ensure_open_order
+    @order = Order.find(params[:id], :include => [:supplier, :order_articles])
+    unless @order.open?
+      flash[:notice] = 'Diese Bestellung ist bereits abgeschlossen.'
+      redirect_to :action => 'index'
     end
+  end
 
 end

@@ -23,13 +23,13 @@
         %tbody
           - @orders.each do |order|
             %tr{:class => cycle("even","odd", :name => "order")}
-              %td= link_to truncate(order.name), :action => "new", :id => order
+              %td= link_to truncate(order.supplier.name), :action => "new", :id => order
               %td=h order.supplier ? order.supplier.name : _('nonexistent')
               %td=h format_time(order.ends) unless order.ends.nil?
-              %td= order.booked ? "abgerechnet (#{number_to_currency order.fcProfit})" : "beendet"
+              %td= order.closed? ? "abgerechnet (#{number_to_currency order.profit})" : "beendet"
               %td= order.updated_by.nil? ? '??' : order.updated_by.nick
               %td
-                - unless order.booked
+                - unless order.closed?
                   = link_to "abrechnen", :action => "new", :id => order
                   | 
                   = link_to 'auf "gebucht" setzen', {:action => 'setAllBooked', :id => order}, :confirm => 'Wirklich alle Gruppenbestellungen für diese Bestellung auf "gebucht" setzen?', :method => "post"

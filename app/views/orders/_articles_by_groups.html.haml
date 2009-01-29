@@ -1,0 +1,36 @@
+.legend
+  %table.legend{:style => "margin-bottom:1em"}
+    %tr
+      %th{:style => "width:40%"} Name
+      %th
+        %acronym{:title => "zugeteilte Einheiten (davon aus Toleranzmenge)"} Menge
+      %th
+        %acronym{:title => "Preis incl. MwSt, Pfand und Foodcoop-Aufschlag"} FC-Preis
+      %th
+        %acronym{:title => "Gebindegröße"} GebGr
+      %th Einheit
+      %th Gesamtpreis
+
+- for group_order in order.group_orders.all
+  %table{:style => "margin-bottom:1em"}
+    %thead
+      %tr
+        %th{:colspan => "6"}=h group_order.ordergroup.name
+    %tbody
+      - total = 0
+      - for goa in group_order.group_order_articles.all(:include => :order_article)
+        - fc_price = goa.order_article.price.fc_price
+        - subTotal = fc_price * goa.quantity
+        - total += subTotal
+        %tr{:class => cycle('even', 'odd', :name => 'articles')}
+          %td{:style => "width:40%"}=h goa.order_article.article.name
+          %td= "#{goa.quantity} (#{goa.tolerance})"
+          %td= number_to_currency(fc_price)
+          %td= goa.order_article.price.unit_quantity
+          %td= goa.order_article.article.unit
+          %td= number_to_currency(subTotal)
+
+    %tr{:class => cycle('even', 'odd', :name => 'articles')}
+      %th{:colspan => "5"} Summe
+      %th= number_to_currency(total)
+    - reset_cycle("articles")

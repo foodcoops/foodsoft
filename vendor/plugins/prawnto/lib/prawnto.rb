@@ -8,6 +8,7 @@ require 'prawnto/action_view'
 require 'prawnto/template_handler/compile_support'
 
 require 'prawnto/template_handlers/base'
+require 'prawn/layout' # Added by benni
 #require 'prawnto/template_handlers/raw'
 
 # for now applying to all Controllers

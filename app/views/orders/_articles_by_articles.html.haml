@@ -1,0 +1,23 @@
+.legend
+  %table.legend{:style => "margin-bottom:1em"}
+    %tr
+      %th{:colspan => '3'} Legende
+    %tr
+      %th{:style => 'width:70%'} Bestellgruppe
+      %th Menge
+      %th Gesamtpreis
+
+- for order_article in order.order_articles.all(:include => [:article, :article_price])
+  %table{:style => "margin-bottom:1em"}
+    %thead
+      %tr
+        %th{:colspan => "3"}
+          = order_article.article.name
+          = "(#{order_article.article.unit} | #{order_article.price.unit_quantity} | #{number_to_currency(order_article.price.fc_price)})"
+    %tbody
+      - for goa in order_article.group_order_articles
+        %tr{:class => cycle('even', 'odd', :name => 'groups')}
+          %td{:style => "width:70%"}=h goa.group_order.ordergroup.name
+          %td= "#{goa.quantity} (#{goa.tolerance})"
+          %td= number_to_currency(order_article.price.fc_price * goa.quantity)
+  - reset_cycle('groups')

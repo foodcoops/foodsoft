@@ -18,7 +18,7 @@
   %tr
     %td
       %abbr{:title => "gelieferten Artikel x Nettopreis"} Nettobetrag:
-    %td= number_to_currency(@order.sumPrice("clear"))
+    %td= number_to_currency(@order.sum(:clear))
     %td 
       Rechnungsbetrag
       %small (incl. Pfand/Gutschriften)
@@ -26,7 +26,7 @@
   %tr
     %td
       %abbr{:title => "Nettobetrag mit Pfand und MwSt."} Bruttobetrag:
-    %td= number_to_currency(@order.sumPrice("gross"))
+    %td= number_to_currency(@order.sum(:gross))
     %td 
       %span - extra Pfand
       %small (Kistenpfand etc.)
@@ -34,7 +34,7 @@
   %tr
     %td
       %abbr{:title => "Bruttobetrag mit Foodcoop Aufschlag"} FC Summe:
-    %td= number_to_currency(@order.sumPrice("fc"))
+    %td= number_to_currency(@order.sum(:fc))
     %td{:style => "border-bottom: 1px solid grey"}
       + Pfandgutschriften
     %td{:style => "border-bottom: 1px solid grey"}
@@ -42,7 +42,7 @@
   %tr
     %td
       %abbr{:title => "Zugeteilte Mengen x Bruttopreise (inkl. Aufschlag)"} Gruppenbeträge: 
-    %td#groups_amount= number_to_currency(@order.sumPrice("groups"))
+    %td#groups_amount= number_to_currency(@order.sum(:groups))
     %td 
       Summe 
       %small (Rechungsbetrag ohne Pfand)
@@ -51,10 +51,10 @@
     %td{:colspan => "4"}
       %abbr{:title => "Gruppenbeträge ohne Aufschlag minus Rechnung ohne Pfand. |
         Im Idealfall sollte hier 0.00 stehen."} Differenz ohne Aufschlag: |
-      %span#fcProfit= number_to_currency(@order.fcProfit(false))
+      %span#profit= number_to_currency(@order.profit(false))
   %tr
     %td{:colspan => "4"}
       %b
         %abbr{:title => "= Gruppenbeträge - Rechnung ohne Pfand"} Differenz mit Aufschlag
         = "(#{number_to_percentage(APP_CONFIG[:price_markup])}):"
-        %span#fcProfit= number_to_currency(@order.fcProfit)
+        %span#profit= number_to_currency(@order.profit)

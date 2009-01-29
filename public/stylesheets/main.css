@@ -202,6 +202,8 @@ table {
     color: #008000; }
   table tr.selected, table tr.active {
     background-color: #ffffc2; }
+  table tr.click-me {
+    cursor: pointer; }
 
 table.list tr {
   border: 1px solid #e3e3e3; }

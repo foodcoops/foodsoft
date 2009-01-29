@@ -3,8 +3,8 @@
 %td= @article.order_number
 %td= @article.units_to_order
 %td= @article.unit_quantity.to_s + ' * ' + @article.unit.to_s
-%td= number_to_currency(@article.net_price)
-%td= number_to_currency(@article.gross_price)
+%td= number_to_currency(@article.price)
+%td= number_to_currency(@article.fc_price)
 %td= @article.tax
 %td= @article.deposit
 %td

@@ -1,9 +1,8 @@
 # Controller for managing orders, i.e. all actions that require the "orders" role.
 # Normal ordering actions of members of order groups is handled by the OrderingController.
 class OrdersController < ApplicationController
-  # Security
+  
   before_filter :authenticate_orders
-  verify :method => :post, :only => [:finish, :create, :update, :destroy, :setAllBooked], :redirect_to => { :action => :index }
   
   # Define layout exceptions for PDF actions:
   layout "application", :except => [:faxPdf, :matrixPdf, :articlesPdf, :groupsPdf]
@@ -11,20 +10,20 @@ class OrdersController < ApplicationController
   
   # List orders
   def index
-    @current_orders = Order.find_current
+    @open_orders = Order.open
     @per_page = 15
     if params['sort']
       sort = case params['sort']
                when "supplier"  then "suppliers.name, ends DESC"
                when "ends"   then "ends DESC"
-               when "supplier_reverse"  then "suppliers.name DESC, ends DESC"
+               when "supplier_reverse"  then "suppliers.name DESC"
                when "ends_reverse"   then "ends"
                end
     else
       sort = "ends DESC"
     end
     @orders = Order.paginate :page => params[:page], :per_page => @per_page, 
-                             :order => sort, :conditions => ['ends < ? OR starts > ? OR finished = ?', Time.now, Time.now, true],
+                             :order => sort, :conditions => "state != 'open'",
                              :include => :supplier
     
     respond_to do |format|
@@ -38,30 +37,25 @@ class OrdersController < ApplicationController
   end
 
   # Gives a view for the results to a specific order
+  # Renders also the pdf
   def show
     @order= Order.find(params[:id])
-    unless @order.finished?
-      @order_articles= @order.get_articles
-      @group_orders= @order.group_orders
-    else
-      @finished= true
-      @order_articles= @order.order_article_results
-      @group_orders= @order.group_order_results
-      @comments= @order.comments
+
+    if params[:view]    # Articles-list will be replaced
       partial = case params[:view]
-        when 'normal' then "showResult"
-        when 'groups'then 'showResult_groups'
-        when 'articles'then 'showResult_articles'
+        when 'normal' then "articles"
+        when 'groups'then 'articles_by_groups'
+        when 'articles'then 'articles_by_articles'
       end
-      render :partial => partial if partial
+      render :partial => partial, :locals => {:order => @order} if partial
     end
   end
 
   # Page to create a new order.
   def new
-    @supplier = Supplier.find(params[:id])
+    @supplier = Supplier.find(params[:supplier_id])
     @order = @supplier.orders.build :ends => 4.days.from_now
-    @template_orders = Order.find_all_by_supplier_id_and_finished(@supplier.id, true, :limit => 3, :order => 'starts DESC', :include => "order_article_results")
+    @template_orders = @supplier.orders.finished :order => 'starts DESC', :include => "order_article_results"
   end
 
   # Save a new order.
@@ -69,8 +63,8 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     if @order.save
-      flash[:notice] = _("The order has been created successfully.")
-      redirect_to :action => 'show', :id => @order
+      flash[:notice] = "Die Bestellung wurde erstellt."
+      redirect_to @order
     else
       render :action => 'new'
     end
@@ -86,12 +80,11 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find params[:id]
     if @order.update_attributes params[:order]
-      flash[:notice] = _("The order has been updated.")
+      flash[:notice] = "Die Bestellung wurde aktualisiert."
       redirect_to :action => 'show', :id => @order
     else
       render :action => 'edit'
     end
-    @order.updateAllGroupOrders #important if ordered articles has been removed
   end
 
   # Delete an order.
@@ -103,21 +96,21 @@ class OrdersController < ApplicationController
   # Finish a current order.
   def finish
     order = Order.find(params[:id])
-    order.finish(@current_user)
-    flash[:notice] = _("The order has been finished successfully.")
-    redirect_to :action => 'show', :id => order
+    order.finish!(@current_user)
+    flash[:notice] = "Die Bestellung wurde beendet."
+    redirect_to order
   end
   
   # Renders the groups-orderd PDF.
   def groupsPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_GruppenSortierung.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.supplier.name}_GruppenSortierung.pdf"
   end
   
   # Renders the articles-orderd PDF.
   def articlesPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf",
+    prawnto :filename => "#{Date.today}_#{@order.supplier.name}_ArtikelSortierung.pdf",
             :prawn => { :left_margin => 48,
                         :right_margin => 48,
                         :top_margin => 48,
@@ -127,7 +120,7 @@ class OrdersController < ApplicationController
   # Renders the fax PDF.
   def faxPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_FAX.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.supplier.name}_FAX.pdf"
   end
   
   # Renders the fax-text-file
@@ -136,51 +129,43 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
     supplier = order.supplier
     contact = APP_CONFIG[:contact].symbolize_keys
-    text = _("Order for") + " #{APP_CONFIG[:name]}"
-    text += "\n" + _("Customer number") + ": #{supplier.customer_number}" unless supplier.customer_number.blank?
-    text += "\n" + _("Delivery date") + ": "
+    text = "Bestellung für" + " #{APP_CONFIG[:name]}"
+    text += "\n" + "Kundennummer" + ": #{supplier.customer_number}" unless supplier.customer_number.blank?
+    text += "\n" + "Liefertag" + ": "
     text += "\n\n#{supplier.name}\n#{supplier.address}\nFAX: #{supplier.fax}\n\n"
-    text += "****** " + _("Shipping address") + "\n\n"
+    text += "****** " + "Versandadresse" + "\n\n"
     text += "#{APP_CONFIG[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
-    text += "****** " + _("Articles") + "\n\n"
-    text += _("Number") + "  " + _("Quantity") + "  " + _("Name") + "\n"
+    text += "****** " + "Artikel" + "\n\n"
+    text += "Nummer" + "   " + "Menge" + "   " + "Name" + "\n"
     # now display all ordered articles
-    order.order_article_results.each do |article|
-      text += article.order_number.blank? ? "        " : "#{article.order_number}  "
-      quantity = article.units_to_order.to_i.to_s
+    order.order_articles.all(:include => [:article, :article_price]).each do |oa|
+      number = oa.article.order_number
+      (8 - number.size).times { number += " " }
+      quantity = oa.units_to_order.to_i.to_s
       quantity = " " + quantity if quantity.size < 2
-      text += "#{quantity}     #{article.name}\n"
+      text += "#{number}   #{quantity}    #{oa.article.name}\n"
     end
     send_data text,
                 :type => 'text/plain; charset=utf-8; header=present',
-                :disposition => "attachment; filename=#{order.name}"
+                :disposition => "attachment; filename=#{order.supplier.name}"
   end
   
   # Renders the matrix PDF.
   def matrixPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_Matrix.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.supplier.name}_Matrix.pdf"
   end
 
-  # sends a form for adding a new comment
-  def newComment
-    @order = Order.find(params[:id])
-    render :update do |page|
-      page.replace_html 'newComment', :partial => 'shared/newComment', :object => @order
-    end
-  end
-  
   # adds a Comment to the Order
-  def addComment
-    @order = Order.find(params[:id])
-    @comment = Comment.new(params[:comment])
-    @comment.user = @current_user
-    if @comment.title.length > 3 && @order.comments << @comment
-      flash[:notice] = _("Comment has been created.")
-      redirect_to :action => 'show', :id => @order 
+  def add_comment
+    order = Order.find(params[:id])
+    comment = order.comments.build(params[:comment])
+    comment.user = @current_user
+    if !comment.text.empty? and comment.save
+      flash[:notice] = "Kommentar wurde erstellt."
     else
-      flash[:error] = _("The comment has not been saved. Check the title and try again.")
-      redirect_to :action => 'show', :id => @order
+      flash[:error] = "Kommentar konnte nicht erstellt werden. Leerer Kommentar?"
     end
+    redirect_to order
   end
 end

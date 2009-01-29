@@ -6,12 +6,12 @@
   %table{:style=> "margin-bottom:1em; width:40em;"}[article]
     %thead
       %tr
-        %th{:colspan => "3"}= article.name + " (" + article.unit + " | " + article.unit_quantity.to_s + " | " + article.gross_price.to_s + ")"
+        %th{:colspan => "3"}= article.name + " (" + article.unit + " | " + article.unit_quantity.to_s + " | " + article.fc_price.to_s + ")"
     %tbody
       - for result in article.group_order_article_results
         %tr{ :class => cycle('even', 'odd', :name => 'group')}
           %td{:style=>"width:70%"}= result.group_order_result.group_name
           %td= result.quantity
-          %td= article.gross_price * result.quantity
+          %td= article.fc_price * result.quantity
       - reset_cycle("group")
           

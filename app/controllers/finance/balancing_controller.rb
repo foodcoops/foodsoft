@@ -39,7 +39,7 @@ class Finance::BalancingController < ApplicationController
     render :update do |page|
       @article = OrderArticleResult.new(params[:order_article_result])
       @article.fc_markup = APP_CONFIG[:price_markup]
-      @article.make_gross if @article.tax && @article.deposit && @article.net_price
+      @article.make_gross if @article.tax && @article.deposit && @article.price
       if @article.valid?
         @article.save
         @order = @article.order
@@ -121,9 +121,9 @@ class Finance::BalancingController < ApplicationController
         page["edit_box"].hide
         page.insert_html :after, "groups_results_#{article.id}", :partial => "groupResults"
         page["group_order_article_result_#{@result.id}"].visual_effect :highlight, :duration => 2
-        page["groups_amount"].replace_html number_to_currency(article.order.sumPrice('groups'))
-        page["fcProfit"].replace_html number_to_currency(article.order.fcProfit)
-        page["fcProfit"].visual_effect :highlight, :duration => 2
+        page["groups_amount"].replace_html number_to_currency(article.order.sum('groups'))
+        page["profit"].replace_html number_to_currency(article.order.profit)
+        page["profit"].visual_effect :highlight, :duration => 2
 
         # get the new sums for quantity and price and replace it
         total = article.total
@@ -141,15 +141,15 @@ class Finance::BalancingController < ApplicationController
       if params[:group_order_article_result]
         if @result.update_attribute(:quantity, params[:group_order_article_result][:quantity])
           order = @result.group_order_result.order
-          groups_amount = order.sumPrice("groups")
+          groups_amount = order.sum(:groups)
           article = @result.order_article_result
           total = article.total
 
           page["edit_box"].hide
           page["groups_amount"].replace_html number_to_currency(groups_amount)
-          page["fcProfit"].replace_html number_to_currency(order.fcProfit)
+          page["profit"].replace_html number_to_currency(order.profit)
           page["groups_amount"].visual_effect :highlight, :duration => 2
-          page["fcProfit"].visual_effect :highlight, :duration => 2
+          page["profit"].visual_effect :highlight, :duration => 2
           page["group_order_article_result_#{@result.id}"].replace_html :partial => "groupResult"
           page["group_order_article_result_#{@result.id}"].visual_effect :highlight, :duration => 2
           page["totalArticleQuantity_#{article.id}"].replace_html total[:quantity]
@@ -169,9 +169,9 @@ class Finance::BalancingController < ApplicationController
       render :update do |page|
         article = @result.order_article_result
         page["group_order_article_result_#{@result.id}"].remove
-        page["groups_amount"].replace_html number_to_currency(article.order.sumPrice('groups'))
-        page["fcProfit"].replace_html number_to_currency(article.order.fcProfit)
-        page["fcProfit"].visual_effect :highlight, :duration => 2
+        page["groups_amount"].replace_html number_to_currency(article.order.sum('groups'))
+        page["profit"].replace_html number_to_currency(article.order.profit)
+        page["profit"].visual_effect :highlight, :duration => 2
         total = article.total # get total quantity and price for the ArticleResult
         page["totalArticleQuantity_#{article.id}"].replace_html total[:quantity]
         page["totalArticleQuantity_#{article.id}"].visual_effect :highlight, :duration => 2

@@ -19,7 +19,6 @@ class GroupOrder < ActiveRecord::Base
   belongs_to :ordergroup
   has_many :group_order_articles, :dependent => :destroy
   has_many :order_articles, :through => :group_order_articles
-  has_many :group_order_article_results
   belongs_to :updated_by, :class_name => "User", :foreign_key => "updated_by_user_id"
 
   validates_presence_of :order_id
@@ -28,14 +27,17 @@ class GroupOrder < ActiveRecord::Base
   validates_numericality_of :price
   validates_uniqueness_of :ordergroup_id, :scope => :order_id   # order groups can only order once per order
 
+  named_scope :open, lambda { {:conditions => ["order_id IN (?)", Order.open.collect{|o| o.id}]} }
+  named_scope :finished, lambda { {:conditions => ["order_id IN (?)", Order.finished.collect{|o| o.id}]} }
+  
   # Updates the "price" attribute.
   # This will be the maximum value of a current order
-  def updatePrice
+  def update_price!
     total = 0
     for article in group_order_articles.find(:all, :include => :order_article)
-      total += article.order_article.article.gross_price * (article.quantity + article.tolerance)            
+      total += article.order_article.article.fc_price * (article.quantity + article.tolerance)            
     end        
-    self.price = total
+    update_attribute(:price, total)
   end
 
 end

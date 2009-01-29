@@ -30,8 +30,8 @@ class GroupOrderArticle < ActiveRecord::Base
   # and the associated GroupOrderArticleQuantities chronologically.
   # 
   # See description of the ordering algorithm in the general application documentation for details.
-  def updateQuantities(quantity, tolerance)
-    logger.debug("GroupOrderArticle[#{id}].updateQuantities(#{quantity}, #{tolerance})")
+  def update_quantities(quantity, tolerance)
+    logger.debug("GroupOrderArticle[#{id}].update_quantities(#{quantity}, #{tolerance})")
     logger.debug("Current quantity = #{self.quantity}, tolerance = #{self.tolerance}")
     
     # Get quantities ordered with the newest item first.

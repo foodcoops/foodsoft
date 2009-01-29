@@ -1,12 +1,12 @@
 %h1 Bestellung abrechnen
 
-- if @order.booked
+- if @order.closed?
   %p
     %b Achtung, Bestellung wurde schon abgerechnet!
 .left_column{:style => 'width: 50em'}
   .box_title
     %h2
-      = @order.name + " | " + format_date(@order.starts) + ' --> ' + format_date(@order.ends)
+      = @order.supplier.name + " | " + format_date(@order.starts) + ' --> ' + format_date(@order.ends)
   .column_content#summary
     #order_summary
       = render :partial => "summary"
@@ -15,7 +15,7 @@
     %h2 Aktionen
   .column_content
     %ul
-      - unless @order.booked
+      - unless @order.closed?
         %li= link_to "Bestellung abschließen", :action => "confirm", :id => @order
 
 .right_column{:style => 'clear:both;width: 28%'}

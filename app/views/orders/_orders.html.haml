@@ -1,0 +1,19 @@
+= pagination_links_remote @orders, :params => {:sort => params[:sort]}
+%table.list{:style => "width: 100%"}
+  %thead
+    %tr
+      %th[sort_td_class_helper "supplier"]
+        = sort_link_helper "Lieferant", "supplier"
+      %th Start
+      %th[sort_td_class_helper "ends"]
+        = sort_link_helper "Ende", "ends"
+      %th Status
+      %th{:colspan => "2"}
+  %tbody
+    - @orders.each do |order|
+      %tr{:class => cycle('even', 'odd', :name => 'orders')}
+        %td=h order.supplier.name
+        %td=h format_time(order.starts)
+        %td=h format_time(order.ends)
+        %td= order.state
+        %td= link_to "Anzeigen", order

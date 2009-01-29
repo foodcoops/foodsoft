@@ -121,7 +121,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
 
-    @order = @article.inUse # If article is in an active Order, the Order will be returned
+    @order = @article.in_open_order # If article is in an active Order, the Order will be returned
     if @order
       render :update do |page|
         page.insert_html :after, @article.id.to_s, :partial => 'destroyActiveArticle'
@@ -226,7 +226,7 @@ class ArticlesController < ApplicationController
                                :origin => row[:origin],
                                :unit => row[:unit],
                                :article_category => ArticleCategory.find_by_name(row[:category]),
-                               :net_price => row[:price],
+                               :price => row[:price],
                                :unit_quantity => row[:unit_quantity],
                                :order_number => row[:number],
                                :deposit => row[:deposit],
@@ -290,7 +290,7 @@ class ArticlesController < ApplicationController
         :note => shared_article.note,
         :manufacturer => shared_article.manufacturer,
         :origin => shared_article.origin,
-        :net_price => shared_article.price,
+        :price => shared_article.price,
         :tax => shared_article.tax,
         :deposit => shared_article.deposit,
         :unit_quantity => shared_article.unit_quantity,

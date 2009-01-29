@@ -30,46 +30,34 @@
 # * account_updated (datetime)
 # * actual_size (int) : how many persons are ordering through the Ordergroup
 class Ordergroup < Group
-  has_many :financial_transactions, :dependent => :destroy
-  has_many :group_orders, :dependent => :destroy
+  acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
+  extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
+
+  has_many :financial_transactions
+  has_many :group_orders
   has_many :orders, :through => :group_orders
-  has_many :group_order_article_results, :through => :group_orders # TODO: whats this???
-  has_many :group_order_results, :finder_sql => 'SELECT * FROM group_order_results as r WHERE r.group_name = "#{name}"'
 
   validates_inclusion_of :actual_size, :in => 1..99 
   validates_numericality_of :account_balance, :message => 'ist keine gültige Zahl'
-  
+
   attr_accessible :actual_size, :account_updated
   
-  # messages
-  ERR_NAME_IS_USED_IN_ARCHIVE = "Der Name ist von einer ehemaligen Gruppe verwendet worden."
-    
-  # if the ordergroup.name is changed, group_order_result.name has to be adapted
-  def before_update
-    ordergroup = Ordergroup.find(self.id)
-    unless (ordergroup.name == self.name) || ordergroup.group_order_results.empty?
-      # rename all finished orders
-      for result in ordergroup.group_order_results
-        result.update_attribute(:group_name, self.name)
-      end
-    end
-  end
-    
-  # Returns the available funds for this order group (the account_balance minus price of all non-booked GroupOrders of this group).
-  # * excludeGroupOrder (GroupOrder): exclude this GroupOrder from the calculation
-  def getAvailableFunds(excludeGroupOrder = nil)
-    funds = account_balance
-    for order in GroupOrder.find_all_by_ordergroup_id(self.id)
-      unless order == excludeGroupOrder
-        funds -= order.price
-      end
-    end
-    for order_result in self.findFinishedNotBooked
-      funds -= order_result.price
-    end
-    return funds
+
+  def value_of_open_orders(exclude = nil)
+    group_orders.open.reject{|go| go == exclude}.collect(&:price).sum
   end
   
+  def value_of_finished_orders(exclude = nil)
+    group_orders.finished.reject{|go| go == exclude}.collect(&:price).sum
+  end
+
+  # Returns the available funds for this order group (the account_balance minus price of all non-closed GroupOrders of this group).
+  # * exclude (GroupOrder): exclude this GroupOrder from the calculation
+  def get_available_funds(exclude = nil)
+    account_balance - value_of_open_orders(exclude) - value_of_finished_orders(exclude)
+  end
+  memoize :get_available_funds
+
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.
   def addFinancialTransaction(amount, note, user)
@@ -129,13 +117,4 @@ class Ordergroup < Group
     end
   end
   
-  # before create or update, check if the name is already used in GroupOrderResults
-  def validate_on_create
-    errors.add(:name, ERR_NAME_IS_USED_IN_ARCHIVE) unless GroupOrderResult.find_all_by_group_name(self.name).empty?
-  end
-  def validate_on_update
-    ordergroup = Ordergroup.find(self.id)
-    errors.add(:name, ERR_NAME_IS_USED_IN_ARCHIVE) unless ordergroup.name == self.name || GroupOrderResult.find_all_by_group_name(self.name).empty?
-  end
-
 end

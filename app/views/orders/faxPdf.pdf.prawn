@@ -41,12 +41,13 @@ pdf.text "Ansprechpartner: " + @order.supplier.contact_person
 pdf.move_down 10
 
 # Articles
-data = @order.order_article_results.collect do |a|
-  [a.order_number, a.units_to_order, a.name,
-   a.unit_quantity, a.unit, a.net_price]
+data = @order.order_articles.all(:include => :article).collect do |a|
+  [a.article.order_number, a.units_to_order, a.article.name,
+   a.price.unit_quantity, a.article.unit, a.price.price]
 end
 pdf.table data,
   :font_size => 8,
   :vertical_padding => 3,
   :border_style => :grid,
-  :headers => ["BestellNr.", "Menge","Name", "Gebinde", "Einheit","Preis/Einheit"]
+  :headers => ["BestellNr.", "Menge","Name", "Gebinde", "Einheit","Preis/Einheit"],
+  :align => {0 => :left}

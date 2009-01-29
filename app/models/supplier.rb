@@ -43,7 +43,7 @@ class Supplier < ActiveRecord::Base
   # Returns all articles for this supplier that are available and have a valid price, grouped by article category and ordered by name.
   def getArticlesAvailableForOrdering
     articles = Article.find(:all, :conditions => ['supplier_id = ? AND availability = ?', self.id, true], :order => 'article_categories.name, articles.name', :include => :article_category)
-    articles.select {|article| article.gross_price}
+    articles.select {|article| article.fc_price}
   end
   
   # sync all articles with the external database
@@ -66,10 +66,10 @@ class Supplier < ActiveRecord::Base
           # try to convert different units
           new_price, new_unit_quantity = article.convert_units
           if new_price and new_unit_quantity
-            article.net_price = new_price
+            article.price = new_price
             article.unit_quantity = new_unit_quantity
           else
-            article.net_price = shared_article.price
+            article.price = shared_article.price
             article.unit_quantity = shared_article.unit_quantity
             article.unit = shared_article.unit
           end

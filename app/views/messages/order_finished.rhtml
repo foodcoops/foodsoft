@@ -1,13 +1,13 @@
 Liebe <%= group.name %>,
 
-die Bestellung "<%= order.name %>" wurde am <%= order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= order.updated_by.nick %> beendet.
+die Bestellung für "<%= order.supplier.name %>" wurde am <%= order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= order.updated_by.nick %> beendet.
 
 Für Euch wurden die folgenden Artikel bestellt:
-<%	for result in results
-      article = result.order_article_result  -%>
-<%= article.name %>:	<%= result.quantity %> x <%= article.unit %> = <%= result.quantity * article.gross_price %>
+<%	for group_order_article in group_order.group_order_articles.all(:include => :order_article)
+      article = group_order_article.order_article.article  -%>
+<%= article.name %>:	<%= group_order_article.quantity %> x <%= article.unit %> = <%= group_order_article.quantity * article.fc_price %>
 <%	end  -%>
-Gesamtpreis: <%= total %> 
+Gesamtpreis: <%= group_order.price %>
 
 Bestellung online einsehen: <%= ApplicationController.current.url_for(:controller => 'ordering', :action => 'my_order_result', :id => order.id) %> 
 

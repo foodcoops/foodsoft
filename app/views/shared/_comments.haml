@@ -1,10 +1,9 @@
-- unless @comments.empty?
-  - @comments.each do |comment|
+- unless comments.empty?
+  - comments.each do |comment|
     .comment[comment]
       %h3
         = "#{comment.user.find_ordergroup.name} :" if comment.user.find_ordergroup
-        =h comment.title
-      = simple_format(comment.comment)
+      = simple_format(comment.text)
       .timestamp
         Erstellt am 
         = format_time(comment.created_at)
