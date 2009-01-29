@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090120184410) do
+ActiveRecord::Schema.define(:version => 20090119155930) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20090120184410) do
     t.decimal  "price",              :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.integer  "lock_version",                                     :default => 0,   :null => false
     t.datetime "updated_on",                                                        :null => false
-    t.integer  "updated_by_user_id",                               :default => 0,   :null => false
+    t.integer  "updated_by_user_id"
   end
 
   add_index "group_orders", ["ordergroup_id", "order_id"], :name => "index_group_orders_on_ordergroup_id_and_order_id", :unique => true

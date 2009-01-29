@@ -43,4 +43,9 @@ class Invoice < ActiveRecord::Base
   def deposit_credit=(deposit)
     self[:deposit_credit] = String.delocalized_decimal(deposit)
   end
+
+  # Amount without deposit
+  def net_amount
+    amount - deposit + deposit_credit
+  end
 end

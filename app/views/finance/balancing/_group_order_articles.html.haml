@@ -1,0 +1,39 @@
+%td{:colspan => "7"}
+  %table
+    %thead
+      %tr
+        %td
+        %td{:style => "width:8em"} Gruppe
+        %td Einheiten
+        %td Gesamtpreis
+        %td{:colspan => "3",:style => "width:14em"}
+          = remote_link_to '[Gruppe hinzufügen]', :url => {:action => "new_group_order_article", :id => order_article}
+    %tbody
+      - for group_order_article in order_article.group_order_articles.all(:include => [:group_order])
+        %tr{:class => cycle('even', 'odd', :name => 'results')}[group_order_article]
+          %td
+          %td{:style=>"width:50%"}
+            = group_order_article.group_order.ordergroup.name
+          %td{:id => "group_order_article_#{group_order_article.id}_quantity"}
+            = group_order_article.quantity
+          %td.currency
+            = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.quantity, :unit => "")
+          %td.actions{:style=>"width:1em"}
+            = remote_link_to icon(:edit), :update => 'edit_box', |
+              :url => {:action => 'edit_group_order_article', :id => group_order_article}, |
+              :success => "Element.hide('loader'); Element.show('edit_box')" |
+          %td.actions{:style=>"width:1em"}
+            = remote_link_to icon(:delete), |
+              :url => {:action => 'destroy_group_order_article', :id => group_order_article}, |
+              :confirm => 'Bist du sicher?', :method => 'post' |
+          %td
+    %tfoot
+      %tr{:class => cycle('even', 'odd', :name => 'results')}
+        %td
+        %td{:style => "width:8em"} Summe
+        %td{:id => "group_orders_sum_quantity_#{order_article.id}"}
+          = order_article.group_orders_sum[:quantity]
+        %td{:id => "group_orders_sum_price_#{order_article.id}", :class => "currency"}
+          = number_to_currency(order_article.group_orders_sum[:price], :unit => "")
+        %td{:colspan => "3"}
+    - reset_cycle('results')

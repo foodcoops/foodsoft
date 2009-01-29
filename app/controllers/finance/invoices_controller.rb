@@ -19,7 +19,8 @@ class Finance::InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.new(:supplier_id => params[:supplier_id], :delivery_id => params[:delivery_id])
+    @invoice = Invoice.new :supplier_id => params[:supplier_id],
+      :delivery_id => params[:delivery_id], :order_id => params[:order_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,15 +37,16 @@ class Finance::InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(params[:invoice])
 
-    respond_to do |format|
-      if @invoice.save
-        flash[:notice] = 'Invoice was successfully created.'
-        format.html { redirect_to([:finance, @invoice]) }
-        format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
+    if @invoice.save
+      flash[:notice] = "Rechnung wurde erstellt."
+      if @invoice.order
+        # Redirect to balancing page
+        redirect_to :controller => 'balancing', :action => 'new', :id => @invoice.order
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
+        redirect_to [:finance, @invoice]
       end
+    else
+      render :action => "new"
     end
   end
 

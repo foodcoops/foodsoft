@@ -1,9 +1,12 @@
 - form_for([:finance, @invoice]) do |f|
   = f.error_messages
   = f.hidden_field :delivery_id
+  = f.hidden_field :order_id
 
   - if @invoice.delivery
     %p= "Diese Rechnung ist mit einer #{link_to "Lieferung", [@invoice.supplier,@invoice.delivery]} verknüpft."
+  - if @invoice.order
+    %p= "Diese Rechnung ist mit einer #{link_to "Bestellung", @invoice.order} verknüpft."
   %p
     = f.label :supplier_id
     %br/
@@ -24,6 +27,14 @@
     = f.label :amount
     %br/
     = f.text_field :amount
+  %p
+    = f.label :deposit
+    %br/
+    = f.text_field :deposit
+  %p
+    = f.label :deposit_credit
+    %br/
+    = f.text_field :deposit_credit
   %p
     = f.label :note
     %br/

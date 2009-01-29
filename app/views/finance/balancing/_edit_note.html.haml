@@ -1,0 +1,9 @@
+%h2 Notiz bearbeiten
+- remote_form_for 'order', @order, :url => {:action => 'update_note', :id => @order}, |
+  :before => "Element.show('loader')", :success => "Element.hide('loader')" do |form| |
+  = form.error_messages
+  = form.text_area "note", :size => "60x20"
+  %p
+    = submit_tag "Speichern"
+    |
+    = link_to_function 'Abbrechen', "Element.hide('edit_box')"

@@ -1,60 +1,23 @@
+%b=h order.supplier.name
+%br/
+= "von #{format_date(order.starts)} bis #{format_date(order.ends)}"
 %p
-  %b=h @order.supplier ? @order.supplier.name : _('nonexistent')
-  | Rechnungsnummer:
-  = @order.invoice_number
-  | Rechnungsdatum:
-  = @order.invoice_date
-  |
-  = link_to_remote image_tag('b_edit.png', :size => "16x16", :border => 0, :alt => 'Rechnungsbetrag ändern'), |
-        :url => {:action => "editOrderSummary", :id => @order}, |
-        :before => "Element.show('loader')", |
-        :success => "Element.hide('loader')" |
-%table
-  %tr
-    %td{:colspan => "2"}
-      %b Foodcoop
-    %td{:colspan => "2"}
-      %b Lieferant
-  %tr
-    %td
-      %abbr{:title => "gelieferten Artikel x Nettopreis"} Nettobetrag:
-    %td= number_to_currency(@order.sum(:clear))
-    %td 
-      Rechnungsbetrag
-      %small (incl. Pfand/Gutschriften)
-    %td#invoice_amount= number_to_currency(@order.invoice_amount)
-  %tr
-    %td
-      %abbr{:title => "Nettobetrag mit Pfand und MwSt."} Bruttobetrag:
-    %td= number_to_currency(@order.sum(:gross))
-    %td 
-      %span - extra Pfand
-      %small (Kistenpfand etc.)
-    %td#deposit= number_to_currency(@order.deposit)
-  %tr
-    %td
-      %abbr{:title => "Bruttobetrag mit Foodcoop Aufschlag"} FC Summe:
-    %td= number_to_currency(@order.sum(:fc))
-    %td{:style => "border-bottom: 1px solid grey"}
-      + Pfandgutschriften
-    %td{:style => "border-bottom: 1px solid grey"}
-      #deposit_credit= number_to_currency(@order.deposit_credit)
-  %tr
-    %td
-      %abbr{:title => "Zugeteilte Mengen x Bruttopreise (inkl. Aufschlag)"} Gruppenbeträge: 
-    %td#groups_amount= number_to_currency(@order.sum(:groups))
-    %td 
-      Summe 
-      %small (Rechungsbetrag ohne Pfand)
-    %td#clear_invoice= number_to_currency(@order.invoice_amount - @order.deposit + @order.deposit_credit)
-  %tr
-    %td{:colspan => "4"}
-      %abbr{:title => "Gruppenbeträge ohne Aufschlag minus Rechnung ohne Pfand. |
-        Im Idealfall sollte hier 0.00 stehen."} Differenz ohne Aufschlag: |
-      %span#profit= number_to_currency(@order.profit(false))
-  %tr
-    %td{:colspan => "4"}
-      %b
-        %abbr{:title => "= Gruppenbeträge - Rechnung ohne Pfand"} Differenz mit Aufschlag
-        = "(#{number_to_percentage(APP_CONFIG[:price_markup])}):"
-        %span#profit= number_to_currency(@order.profit)
+  %table
+    %tr
+      %td Nettobetrag:
+      %td= number_to_currency(order.sum(:clear))
+    %tr
+      %td Bruttobetrag:
+      %td= number_to_currency(order.sum(:gross))
+    %tr
+      %td FC-Betrag:
+      %td= number_to_currency(order.sum(:fc))
+    %tr
+      %td Summe der Gruppenbeträge:
+      %td= number_to_currency(order.sum(:groups))
+    %tr
+      %td FC Gewinn ohne Aufschlag:
+      %td= number_to_currency(order.profit(:with_markup => false))
+    %tr
+      %td FC Gewinn mit Aufschlag:
+      %td#order_profit= number_to_currency(order.profit)

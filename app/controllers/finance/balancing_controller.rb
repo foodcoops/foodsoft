@@ -1,9 +1,10 @@
 class Finance::BalancingController < ApplicationController
   before_filter :authenticate_finance
-
+  verify :method => :post, :only => [:close_direct]
+  
   def index
     @financial_transactions = FinancialTransaction.find(:all, :order => "created_on DESC", :limit => 8)
-    @orders = Order.find(:all, :conditions => 'finished = 1 AND booked = 0', :order => 'ends DESC')
+    @orders = Order.finished
     @unpaid_invoices = Invoice.unpaid
   end
 
@@ -16,201 +17,177 @@ class Finance::BalancingController < ApplicationController
     @comments = @order.comments
     case params[:view]
       when 'editResults'
-        render :partial => 'editResults'
+        render :partial => 'edit_results_by_articles'
       when 'groupsOverview'
-        render :partial => 'groupsOverview'
+        render :partial => 'shared/articles_by_groups', :locals => {:order => @order}
       when 'articlesOverview'
-       render :partial => 'articlesOverview'
-      when "editNote"
-        render :partial => "editNote"
+       render :partial => 'shared/articles_by_articles', :locals => {:order => @order}
     end
   end
 
-   def newArticleResult
+  def edit_note
     @order = Order.find(params[:id])
-    @article = @order.order_article_results.build(:tax => 7, :deposit => 0)
-    render :update do |page|
-      page["edit_box"].replace_html :partial => "newArticleResult"
-      page["edit_box"].show
-    end
+    render :partial => 'edit_note'
   end
 
-  def createArticleResult
-    render :update do |page|
-      @article = OrderArticleResult.new(params[:order_article_result])
-      @article.fc_markup = APP_CONFIG[:price_markup]
-      @article.make_gross if @article.tax && @article.deposit && @article.price
-      if @article.valid?
-        @article.save
-        @order = @article.order
-        page["edit_box"].hide
-        page["order_summary"].replace_html :partial => 'summary'
-        page.insert_html :bottom, "result_table", :partial => "articleResults"
-        page["order_article_result_#{@article.id}"].visual_effect :highlight, :duration => 2
-        page["group_order_article_results_#{@article.id}"].show
-      else
-        page["edit_box"].replace_html :partial => "newArticleResult"
-      end
-    end
-  end
-
-  def editArticleResult
-    @article = OrderArticleResult.find(params[:id])
-    render :update do |page|
-       page["edit_box"].replace_html :partial => 'editArticleResult'
-       page["edit_box"].show
-    end
-  end
-
-  def updateArticleResult
-    @article = OrderArticleResult.find(params[:id])
-    @article.attributes=(params[:order_article_result]) # update attributes but doesn't save
-    @article.make_gross
-    @order = @article.order
-    @ordered_articles = @order.order_article_results
-    @group_orders = @order.group_order_results
-    render :update do |page|
-      if @article.save
-        page["edit_box"].hide
-        page["order_summary"].replace_html :partial => 'summary'
-        page["order_summary"].visual_effect :highlight, :duration => 2
-        page["order_article_result_#{@article.id}"].replace_html :partial => 'articleResult'
-        page['order_article_result_'+@article.id.to_s].visual_effect :highlight, :delay => 0.5, :duration => 2
-        page["group_order_article_results_#{@article.id}"].replace_html :partial => "groupOrderArticleResults"
-      else
-        page['edit_box'].replace_html :partial => 'editArticleResult'
-      end
-    end
-  end
-
-  def destroyArticleResult
-    if @article = OrderArticleResult.find(params[:id]).destroy
-      @order = @article.order
-      render :update do |page|
-        page["order_article_result_#{@article.id}"].remove
-        page["group_order_article_results_#{@article.id}"].remove
-        page["order_summary"].replace_html :partial => 'summary'
-        page["order_summary"].visual_effect :highlight, :duration => 2
-      end
-    end
-  end
-
-  def newGroupResult
-    @result = OrderArticleResult.find(params[:id]).group_order_article_results.build
-    render :update do |page|
-      page["edit_box"].replace_html :partial => "newGroupResult"
-      page["edit_box"].show
-    end
-  end
-
-  # Creates a new GroupOrderArticleResult
-  # If the the chosen Ordergroup hasn't ordered yet, a GroupOrderResult will created
-  def createGroupResult
-    @result = GroupOrderArticleResult.new(params[:group_order_article_result])
-    order = @result.order_article_result.order
-    orderGroup = Ordergroup.find(params[:group_order_article_result][:group_order_result_id])
-    # creates a new GroupOrderResult if necessary
-    unless @result.group_order_result = GroupOrderResult.find(:first,
-                                                          :conditions => ["group_order_results.group_name = ? AND group_order_results.order_id = ?", orderGroup.name, order.id ])
-      @result.group_order_result = GroupOrderResult.create(:order => order, :group_name => orderGroup.name)
-    end
-    render :update do |page|
-      if @result.valid? && @result.save
-        @result.group_order_result.updatePrice #updates the price attribute
-        article = @result.order_article_result
-        page["edit_box"].hide
-        page.insert_html :after, "groups_results_#{article.id}", :partial => "groupResults"
-        page["group_order_article_result_#{@result.id}"].visual_effect :highlight, :duration => 2
-        page["groups_amount"].replace_html number_to_currency(article.order.sum('groups'))
-        page["profit"].replace_html number_to_currency(article.order.profit)
-        page["profit"].visual_effect :highlight, :duration => 2
-
-        # get the new sums for quantity and price and replace it
-        total = article.total
-        page["totalArticleQuantity_#{article.id}"].replace_html total[:quantity]
-        page["totalArticlePrice_#{article.id}"].replace_html number_to_currency(total[:price])
-      else
-        page["edit_box"].replace_html :partial => "newGroupResult"
-      end
-    end
-  end
-
-  def updateGroupResult
-    @result = GroupOrderArticleResult.find(params[:id])
-    render :update do |page|
-      if params[:group_order_article_result]
-        if @result.update_attribute(:quantity, params[:group_order_article_result][:quantity])
-          order = @result.group_order_result.order
-          groups_amount = order.sum(:groups)
-          article = @result.order_article_result
-          total = article.total
-
-          page["edit_box"].hide
-          page["groups_amount"].replace_html number_to_currency(groups_amount)
-          page["profit"].replace_html number_to_currency(order.profit)
-          page["groups_amount"].visual_effect :highlight, :duration => 2
-          page["profit"].visual_effect :highlight, :duration => 2
-          page["group_order_article_result_#{@result.id}"].replace_html :partial => "groupResult"
-          page["group_order_article_result_#{@result.id}"].visual_effect :highlight, :duration => 2
-          page["totalArticleQuantity_#{article.id}"].replace_html total[:quantity]
-          page["totalArticlePrice_#{article.id}"].replace_html total[:price]
-          page["sum_of_article_#{article.id}"].visual_effect :highlight, :duration => 2
-        end
-      else
-        page["edit_box"].replace_html :partial => 'editGroupResult'
-        page["edit_box"].show
-      end
-    end
-  end
-
-  def destroyGroupResult
-    @result = GroupOrderArticleResult.find(params[:id])
-    if @result.destroy
-      render :update do |page|
-        article = @result.order_article_result
-        page["group_order_article_result_#{@result.id}"].remove
-        page["groups_amount"].replace_html number_to_currency(article.order.sum('groups'))
-        page["profit"].replace_html number_to_currency(article.order.profit)
-        page["profit"].visual_effect :highlight, :duration => 2
-        total = article.total # get total quantity and price for the ArticleResult
-        page["totalArticleQuantity_#{article.id}"].replace_html total[:quantity]
-        page["totalArticleQuantity_#{article.id}"].visual_effect :highlight, :duration => 2
-        page["totalArticlePrice_#{article.id}"].replace_html number_to_currency(total[:price])
-        page["totalArticlePrice_#{article.id}"].visual_effect :highlight, :duration => 2
-      end
-    end
-  end
-
-  def editOrderSummary
-    @order = Order.find(params[:id])
-    render :update do |page|
-      page["edit_box"].replace_html :partial => 'editSummary'
-      page["edit_box"].show
-    end
-  end
-
-  def updateOrderSummary
+  def update_note
     @order = Order.find(params[:id])
     render :update do |page|
       if @order.update_attributes(params[:order])
+        page["note"].replace_html simple_format(@order.note)
         page["edit_box"].hide
-        page["order_summary"].replace_html :partial => "summary"
-        page["clear_invoice"].visual_effect :highlight, :duration => 2
       else
-        page["edit_box"].replace_html :partial => 'editSummary'
+        page["results"].replace_html :partial => "edit_note"
       end
     end
   end
 
-  def updateOrderNote
-    @order = Order.find(params[:id])
+  #TODO: Implement create/update of articles/article_prices...
+#  def new_order_article
+#    @order = Order.find(params[:id])
+#    order_article = @order.order_articles.build(:tax => 7, :deposit => 0)
+#    render :update do |page|
+#      page["edit_box"].replace_html :partial => "new_order_article", :locals => {:order_article => order_article}
+#      page["edit_box"].show
+#    end
+#  end
+#
+#  def create_order_article
+#    @order = Order.find(params[:order_article][:order_id])
+#    order_article = OrderArticle.new(params[:order_article])
+#
+#    render :update do |page|
+#      if order_article.save
+#        page["edit_box"].hide
+#        page["summary"].replace_html :partial => 'summary'
+#        page.insert_html :bottom, "result_table", :partial => "order_article_result", :locals => {:order_article => order_article}
+#        page["order_article_#{order_article.id}"].visual_effect :highlight, :duration => 2
+#        page["group_order_articles_#{order_article.id}"].show
+#      else
+#        page["edit_box"].replace_html :partial => "new_order_article", :locals => {:order_article => order_article}
+#      end
+#    end
+#  end
+#
+#  def editArticleResult
+#    @article = OrderArticleResult.find(params[:id])
+#    render :update do |page|
+#       page["edit_box"].replace_html :partial => 'editArticleResult'
+#       page["edit_box"].show
+#    end
+#  end
+#
+#  def updateArticleResult
+#    @article = OrderArticleResult.find(params[:id])
+#    @article.attributes=(params[:order_article_result]) # update attributes but doesn't save
+#    @article.make_gross
+#    @order = @article.order
+#    @ordered_articles = @order.order_article_results
+#    @group_orders = @order.group_order_results
+#    render :update do |page|
+#      if @article.save
+#        page["edit_box"].hide
+#        page["summary"].replace_html :partial => 'summary'
+#        page["summary"].visual_effect :highlight, :duration => 2
+#        page["order_article_result_#{@article.id}"].replace_html :partial => 'articleResult'
+#        page['order_article_result_'+@article.id.to_s].visual_effect :highlight, :delay => 0.5, :duration => 2
+#        page["group_order_article_results_#{@article.id}"].replace_html :partial => "groupOrderArticleResults"
+#      else
+#        page['edit_box'].replace_html :partial => 'editArticleResult'
+#      end
+#    end
+#  end
+
+  def destroy_order_article
+    order_article = OrderArticle.find(params[:id])
+    order_article.destroy
+    @order = order_article.order
     render :update do |page|
-      if @order.update_attribute(:note, params[:order][:note])
-        page["note"].replace_html simple_format(@order.note)
-        page["results"].replace_html :partial => "groupsOverview"
+      page["order_article_#{order_article.id}"].remove
+      page["group_order_articles_#{order_article.id}"].remove
+      page["summary"].replace_html :partial => 'summary', :locals => {:order => @order}
+      page["summary"].visual_effect :highlight, :duration => 2
+    end
+  end
+
+  def new_group_order_article
+    group_order_article = OrderArticle.find(params[:id]).group_order_articles.build
+    render :update do |page|
+      page["edit_box"].replace_html :partial => "new_group_order_article",
+        :locals => {:group_order_article => group_order_article}
+      page["edit_box"].show
+    end
+  end
+
+  # Creates a new GroupOrderArticle
+  # If the the chosen Ordergroup hasn't ordered yet, a GroupOrder will also be created
+  def create_group_order_article
+    goa = GroupOrderArticle.new(params[:group_order_article])
+    order_article = goa.order_article
+    order = order_article.order
+    
+    # creates a new GroupOrder if necessary
+    group_order = GroupOrder.first :conditions => {:order_id => order.id, :ordergroup_id => goa.ordergroup_id}
+    unless group_order
+      goa.create_group_order(:order_id => order.id, :ordergroup_id => goa.ordergroup_id)
+    else
+      goa.group_order = group_order
+    end
+
+    render :update do |page|
+      if goa.save
+        goa.group_order.update_price! # Updates the price attribute of new GroupOrder
+        page["edit_box"].hide
+
+        page["group_order_articles_#{order_article.id}"].replace_html :partial => 'group_order_articles',
+          :locals => {:order_article => order_article}
+        page["group_order_article_#{goa.id}"].visual_effect :highlight, :duration => 2
+
+        page["summary"].replace_html :partial => 'summary', :locals => {:order => order}
+        page["order_profit"].visual_effect :highlight, :duration => 2
       else
-        page["results"].replace_html :partial => "editNote"
+        page["edit_box"].replace_html :partial => "new_group_order_article",
+          :locals => {:group_order_article => goa}
       end
+    end
+  end
+
+  def edit_group_order_article
+    group_order_article = GroupOrderArticle.find(params[:id])
+    render :partial => 'edit_group_order_article', 
+      :locals => {:group_order_article => group_order_article}
+  end
+
+  def update_group_order_article
+    goa = GroupOrderArticle.find(params[:id])
+    
+    render :update do |page|
+      if goa.update_attributes(params[:group_order_article])
+        goa.group_order.update_price! # Updates the price attribute of new GroupOrder
+
+        page["edit_box"].hide
+        page["group_order_articles_#{goa.order_article.id}"].replace_html :partial => 'group_order_articles',
+          :locals => {:order_article => goa.order_article}
+        page["summary"].replace_html :partial => 'summary', :locals => {:order => goa.order_article.order}
+        page["order_profit"].visual_effect :highlight, :duration => 2
+      else
+        page["edit_box"].replace_html :partial => 'edit_group_order_article'
+      end
+    end
+  end
+
+  def destroy_group_order_article
+    goa = GroupOrderArticle.find(params[:id])
+    goa.destroy
+    goa.group_order.update_price! # Updates the price attribute of new GroupOrder
+      
+    render :update do |page|
+      page["edit_box"].hide
+      page["group_order_articles_#{goa.order_article.id}"].replace_html :partial => 'group_order_articles',
+        :locals => {:order_article => goa.order_article}
+      page["group_order_article_#{goa.id}"].visual_effect :highlight, :duration => 2
+      page["summary"].replace_html :partial => 'summary', :locals => {:order => goa.order_article.order}
+      page["order_profit"].visual_effect :highlight, :duration => 2
     end
   end
 
@@ -232,13 +209,11 @@ class Finance::BalancingController < ApplicationController
     end
   end
 
-  # Set all GroupOrders that belong to this finished order to status 'booked'.
-  def setAllBooked
+  # Close the order directly, without automaticly updating ordergroups account balances
+  def close_direct
     @order = Order.find(params[:id])
-    if (@order.finished?)
-      @order.booked = true
-      @order.updated_by = @current_user
-      @order.save!
+    if @order.finished?
+      @order.update_attributes(:state => 'closed', :updated_by => @current_user)
       flash[:notice] = 'Die Bestellung wurde auf "gebucht" gesetzt.'
       redirect_to :action => 'listOrders', :id => @order
     else

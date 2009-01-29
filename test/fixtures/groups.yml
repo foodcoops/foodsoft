@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090102171850
+# Schema version: 20090120184410
 #
 # Table name: groups
 #
@@ -21,6 +21,7 @@
 #  task_name           :string(255)
 #  task_description    :string(255)
 #  task_required_users :integer(4)      default(1)
+#  deleted_at          :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

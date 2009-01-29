@@ -1,0 +1,7 @@
+%h2
+  Neuer gelieferter Artikel die Bestellung
+
+- remote_form_for order_article, :url => {:action => 'create_order_article' }, |
+  :before => "Element.show('loader')", :success => "Element.hide('loader')" do |form| |
+  
+  = render :partial => 'order_article_form', :locals => {:form => form}

@@ -1,16 +1,16 @@
-%h1 Bestellung abschließen
-.single_column#confirm{:style => "width:35em"}
+-title "Bestellung abschließen"
+%div{:style => "width: 40em"}
   %p
     Wenn die Bestellung abgeschlossen wird, werden ebenfalls alle Gruppenkonten aktualisiert.
     %br/
     Die Konten werden wie folgt belastet:
   %table.list{:style => "width:35em"}
-    - for groupResult in @order.group_order_results
+    - for group_order in @order.group_orders
       %tr{:class => cycle('even', 'odd')}
-        %td= groupResult.group_name
-        %td= number_to_currency(groupResult.price)
+        %td= group_order.ordergroup.name
+        %td= number_to_currency(group_order.price)
   %p
     %div{:style => "float:left"}
       = button_to "Abschließen", :action => "close", :id => @order
     %div{:style => "float:right"}
-      = link_to 'Zurück zur Abrechnung', :action => "new", :id => @order
+      = link_to 'Zurück zur Abrechnung', :action => 'new', :id => @order

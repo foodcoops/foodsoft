@@ -1,37 +1,44 @@
-%h1 Bestellung abrechnen
+- title "#{@order.supplier.name} abrechnen"
 
 - if @order.closed?
   %p
     %b Achtung, Bestellung wurde schon abgerechnet!
-.left_column{:style => 'width: 50em'}
+.left_column{:style => 'width: 24em'}
   .box_title
-    %h2
-      = @order.supplier.name + " | " + format_date(@order.starts) + ' --> ' + format_date(@order.ends)
+    %h2 Zusammenfassung
   .column_content#summary
-    #order_summary
-      = render :partial => "summary"
+    = render :partial => "summary", :locals => {:order => @order}
+.left_column{:style => 'width: 24em'}
+  .box_title
+    %h2 Rechnung
+  .column_content#invoice
+    = render :partial => "invoice", :locals => {:invoice => @order.invoice}
+
 .right_column{:style => 'width: 20em'}
   .box_title
     %h2 Aktionen
   .column_content
     %ul
+      - unless @order.invoice
+        %li= link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order)
       - unless @order.closed?
         %li= link_to "Bestellung abschließen", :action => "confirm", :id => @order
 
 .right_column{:style => 'clear:both;width: 28%'}
   .box_title
-    %h2 Protokoll
+    %h2 Notizen/Protokoll
   .column_content
     #note
       - unless @order.note.empty?
         = simple_format @order.note
       - else
         %p Hier kannst Du deine Abrechnung kommentieren
-    %small Protokoll bearbeiten:
-    = link_to_remote image_tag("b_edit.png", :size => "16x16", :border => "0"), |
-       :update => 'results', :url => { :action => 'new', :id => @order, :view => 'editNote' }, |
-       :before => "Element.show('loader')", :success => "Element.hide('loader')" |
-    %hr/
+    = remote_link_to "Notiz bearbeiten", |
+       :update => 'edit_box', :url => {:action => 'edit_note', :id => @order}, |
+       :success => "Element.hide('loader'); Element.show('edit_box')" |
+  .box_title
+    %h2 Kommentare
+  .column_content
     #comments
       = render :partial => 'shared/comments'
       
@@ -39,11 +46,11 @@
   .box_title
     #editOrderNav
       %ul
-        %li= link_to_remote 'Gruppenübersicht', :update => 'results', :url => { :action => 'new', :id => @order, :view => 'groupsOverview' }, :before => "Element.show('loader')", :success => "Element.hide('loader')"
-        %li= link_to_remote 'Artikelübersicht', :update => 'results', :url => { :action => 'new', :id => @order, :view => 'articlesOverview' }, :before => "Element.show('loader')", :success => "Element.hide('loader')"
-        %li= link_to_remote 'Bestellung bearbeiten', :update => 'results', :url => { :action => 'new', :id => @order, :view => 'editResults' }, :before => "Element.show('loader')", :success => "Element.hide('loader')"
+        %li= remote_link_to 'Gruppenübersicht', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'groupsOverview'}
+        %li= remote_link_to 'Artikelübersicht', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'articlesOverview'}
+        %li= remote_link_to 'Bestellung bearbeiten', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'editResults'}
   .column_content
     #results
-      = render :partial => 'groupsOverview'
+      = render :partial => 'edit_results_by_articles'
     %p= link_to_top
 #edit_box{:style => 'display:none'}

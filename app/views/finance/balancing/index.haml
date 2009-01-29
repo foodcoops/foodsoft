@@ -48,7 +48,7 @@
       %table.list
         %thead
           %tr
-            %th Name
+            %th Lieferant
             %th Ende
             %th Betrag(FC)
             %th 
@@ -58,6 +58,6 @@
               %td= order.supplier.name
               %td= format_date(order.ends)
               %td{:class => "currency"}= number_to_currency(order.sum(:fc))
-              %td= link_to "abrechnen", :action => "editOrder", :id => order
+              %td= link_to "abrechnen", :action => "new", :id => order
     - else
       Super, alles schon abgerechnet...

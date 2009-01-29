@@ -20,11 +20,12 @@ class GroupOrderArticle < ActiveRecord::Base
   belongs_to :order_article
   has_many   :group_order_article_quantities, :dependent => :destroy
 
-  validates_presence_of :group_order_id
-  validates_presence_of :order_article_id
+  validates_presence_of :group_order_id, :order_article_id
   validates_inclusion_of :quantity, :in => 0..99
   validates_inclusion_of :tolerance, :in => 0..99
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
+
+  attr_accessor :ordergroup_id  # To create an new GroupOrder if neccessary
 
   # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties 
   # and the associated GroupOrderArticleQuantities chronologically.

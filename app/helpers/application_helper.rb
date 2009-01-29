@@ -111,4 +111,10 @@ module ApplicationHelper
     
     image_tag icons[name][:file], options
   end
+
+  # Remote links with default 'loader'.gif during request
+  def remote_link_to(text, options={})
+    remote_options = {:before => "Element.show('loader')", :success => "Element.hide('loader')"}
+    link_to_remote(text, remote_options.merge(options))
+  end
 end

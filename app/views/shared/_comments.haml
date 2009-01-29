@@ -1,13 +1,9 @@
 - unless comments.empty?
   - comments.each do |comment|
     .comment[comment]
-      %h3
-        = "#{comment.user.find_ordergroup.name} :" if comment.user.find_ordergroup
-      = simple_format(comment.text)
       .timestamp
-        Erstellt am 
-        = format_time(comment.created_at)
-        von 
-        =h comment.user.nick
+        %b=h "#{comment.user.ordergroup_name}"
+        = "(#{comment.user.nick} am #{format_time(comment.created_at)}):"
+      = simple_format(comment.text)
 - else
   es gibt derzeit keine Kommentare.

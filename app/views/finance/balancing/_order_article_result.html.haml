@@ -1,0 +1,5 @@
+%tr{:class => cycle('even', 'odd', :name => 'articles')}[order_article]
+  = render :partial => 'order_article', :locals => {:order_article => order_article}
+  
+%tr{:id => "group_order_articles_#{order_article.id}", :class => "results", :style => "display:none"}
+  = render :partial => 'group_order_articles', :locals => {:order_article => order_article}

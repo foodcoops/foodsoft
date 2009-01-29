@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090114101610
+# Schema version: 20090120184410
 #
 # Table name: group_orders
 #
@@ -9,7 +9,7 @@
 #  price              :decimal(8, 2)   default(0.0), not null
 #  lock_version       :integer(4)      default(0), not null
 #  updated_on         :datetime        not null
-#  updated_by_user_id :integer(4)      default(0), not null
+#  updated_by_user_id :integer(4)
 #
 
 # A GroupOrder represents an Order placed by an Ordergroup.
@@ -23,7 +23,6 @@ class GroupOrder < ActiveRecord::Base
 
   validates_presence_of :order_id
   validates_presence_of :ordergroup_id
-  validates_presence_of :updated_by
   validates_numericality_of :price
   validates_uniqueness_of :ordergroup_id, :scope => :order_id   # order groups can only order once per order
 

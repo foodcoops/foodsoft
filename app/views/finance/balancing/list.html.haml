@@ -1,11 +1,7 @@
-%h1 beendete Bestellungen
-%p
+- title "beendete Bestellungen"
+%p{:style => "width:30em"}
   %i
-    Aktuell gibt es die Möglichkeit eine Bestellung mittels dem "abrechnen"-link zu verbuchen, d.h.
-    nach Bearbeitung der Liefermengen die Gruppenbeträge automatisiert zu verbuchen, 
-    %br/
-    oder die Bestellung manuell abzurechnen (Kontostände selbst zu aktualisieren) und mittels "auf gebucht setzen" 
-    die Bestellung als abgeschlossen zu deklarieren.
+    Beschreibungstext für die Abrechnunsmodi ....
 .left_column{:style => "width:70em"}
   .box_title
   .column_content
@@ -32,6 +28,7 @@
                 - unless order.closed?
                   = link_to "abrechnen", :action => "new", :id => order
                   | 
-                  = link_to 'auf "gebucht" setzen', {:action => 'setAllBooked', :id => order}, :confirm => 'Wirklich alle Gruppenbestellungen für diese Bestellung auf "gebucht" setzen?', :method => "post"
+                  = link_to 'direkt schließen', {:action => 'close_direct', :id => order}, |
+                    :confirm => 'Wirklich die Bestellung schließen setzen?', :method => "post" |
     - else
       %i derzeit gibt es keine beendeten Bestellungen

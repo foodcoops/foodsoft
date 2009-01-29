@@ -1,0 +1,21 @@
+%h2 Mengenänderung
+%p
+  = group_order_article.group_order.ordergroup.name
+  hat von
+  = group_order_article.order_article.article.name
+  bekommen:
+
+- remote_form_for group_order_article, |
+  :url => {:action => 'update_group_order_article', :id => group_order_article }, |
+  :before => "Element.show('loader')", :success => "Element.hide('loader')" do |form| |
+  
+  = form.error_messages
+  %p
+    %b Menge:
+    (Einheit: 
+    = group_order_article.order_article.article.unit
+    ) 
+    = form.text_field :quantity, :size => "6"
+  = submit_tag "Speichern"
+  | 
+  = link_to_function 'Abbrechen', "Element.hide('edit_box')"  

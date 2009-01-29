@@ -82,9 +82,13 @@ class Order < ActiveRecord::Base
   memoize :get_articles
   
   # Returns the defecit/benefit for the foodcoop
-  def profit(with_markup = true)
-    groups_sum = with_markup ? sum(:groups) : sum(:groups_without_markup)
-    groups_sum - invoice_amount + deposit - deposit_credit
+  # Requires a valid invoice, belonging to this order
+  def profit(options = {})
+    markup = options[:with_markup] || true
+    if invoice
+      groups_sum = markup ? sum(:groups) : sum(:groups_without_markup)
+      groups_sum - invoice.net_amount
+    end
   end
   
   # Returns the all round price of a finished order

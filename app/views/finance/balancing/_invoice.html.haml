@@ -1,0 +1,24 @@
+- if invoice
+  %table
+    %tr
+      %td Rechnungsnummer:
+      %td= invoice.number
+    %tr
+      %td Rechnungsdatum:
+      %td= invoice.date
+    %tr
+      %td Rechnungsbetrag:
+      %td.curreny= number_to_currency invoice.amount
+    %tr
+      %td - Pfand berechnet:
+      %td.curreny= number_to_currency invoice.deposit
+    %tr
+      %td + Pfand gutgeschrieben:
+      %td.curreny= number_to_currency invoice.deposit_credit
+    %tr
+      %td pfandbereinigter Betrag:
+      %td.curreny= number_to_currency invoice.net_amount
+
+- else
+  Eine Rechnung für diese Bestellung anlegen:
+  = link_to "Neue Rechnung erstellen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier)

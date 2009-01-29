@@ -243,6 +243,16 @@ td.currency, td.actions {
   text-align: right;
   padding-right: 0.5em; }
 
+td.closed {
+  background: url(/images/arrow_right_red.png) no-repeat center left; }
+  td.closed a {
+    display: block;
+    text-decoration: none;
+    padding-left: 20px; }
+
+td.open {
+  background: url(/images/arrow_down_red.png) no-repeat center left; }
+
 div.edit_form {
   border: 2px solid #e3e3e3;
   background: #f5f5f5;
@@ -252,7 +262,7 @@ div.edit_form {
 
 #edit_article, #edit_box {
   position: fixed;
-  top: 23%;
+  top: 5em;
   left: 10em;
   width: 55em;
   background: #FBFBFB;

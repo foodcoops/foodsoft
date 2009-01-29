@@ -1,0 +1,17 @@
+%h2
+  Neue Gruppenmenge für
+  = group_order_article.order_article.article.name
+- remote_form_for group_order_article, :url => {:action => 'create_group_order_article'}, |
+  :before => "Element.show('loader')", :success => "Element.hide('loader')" do |form| |
+  = form.error_messages
+  %p
+    Gruppe:
+    = form.select :ordergroup_id, Ordergroup.all(:order => "name").collect {|og| [og.name, og.id] }
+  %p
+    Menge:
+    = form.text_field "quantity", :size => 5
+    = form.hidden_field "order_article_id"
+  %p
+    = submit_tag "Speichern"
+    | 
+    = link_to_function 'Abbrechen', "Element.hide('edit_box')"

@@ -151,7 +151,12 @@ class User < ActiveRecord::Base
   def find_ordergroup
     ordergroups.first
   end
-  
+
+  def ordergroup_name
+    ordergroup = find_ordergroup
+    ordergroup ? ordergroup.name : "keine Bestellgruppe"
+  end
+
   # Find all tasks, for which the current user should be responsible
   # but which aren't accepted yet
   def unaccepted_tasks
