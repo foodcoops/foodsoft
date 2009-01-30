@@ -1,10 +1,10 @@
 class Finance::BalancingController < ApplicationController
   before_filter :authenticate_finance
-  verify :method => :post, :only => [:close_direct]
+  verify :method => :post, :only => [:close, :close_direct]
   
   def index
     @financial_transactions = FinancialTransaction.find(:all, :order => "created_on DESC", :limit => 8)
-    @orders = Order.finished
+    @orders = Order.finished_not_closed
     @unpaid_invoices = Invoice.unpaid
   end
 
@@ -200,12 +200,12 @@ class Finance::BalancingController < ApplicationController
   def close
     @order = Order.find(params[:id])
     begin
-      @order.balance(@current_user)
+      @order.close!(@current_user)
       flash[:notice] = "Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert."
       redirect_to :action => "index"
     rescue => e
       flash[:error] = "Ein Fehler ist beim Abrechnen aufgetreten: " + e
-      redirect_to :action =>"editOrder", :id => @order
+      redirect_to :action => "new", :id => @order
     end
   end
 

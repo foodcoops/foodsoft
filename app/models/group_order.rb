@@ -30,7 +30,7 @@ class GroupOrder < ActiveRecord::Base
   named_scope :finished, lambda { {:conditions => ["order_id IN (?)", Order.finished.collect{|o| o.id}]} }
   
   # Updates the "price" attribute.
-  # This will be the maximum value of a current order
+  # This will be the maximum value of an order
   def update_price!
     total = 0
     for article in group_order_articles.find(:all, :include => :order_article)

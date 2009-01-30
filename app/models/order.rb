@@ -35,9 +35,11 @@ class Order < ActiveRecord::Base
   after_update :update_price_of_group_orders
  
   # Finders
-  named_scope :finished, :conditions => { :state => 'finished' },
-    :order => 'ends DESC'
   named_scope :open, :conditions => { :state => 'open' },
+    :order => 'ends DESC'
+  named_scope :finished, :conditions => "state = 'finished' OR state = 'closed'",
+    :order => 'ends DESC'
+  named_scope :finished_not_closed, :conditions => { :state => 'finished' },
     :order => 'ends DESC'
   named_scope :closed, :conditions => { :state => 'closed' },
     :order => 'ends DESC'
@@ -177,19 +179,20 @@ class Order < ActiveRecord::Base
     end
   end
   
-  # Sets "booked"-attribute to true and updates all Ordergroup_account_balances
-  def balance(user)
-    raise "Bestellung wurde schon abgerechnet" if self.booked
-    transaction_note = "Bestellung: #{name}, von #{starts.strftime('%d.%m.%Y')} bis #{ends.strftime('%d.%m.%Y')}"
-    transaction do
-      # update Ordergroups
-      group_order_results.each do |result|
-        price = result.price * -1 # decrease! account balance
-        Ordergroup.find_by_name(result.group_name).addFinancialTransaction(price, transaction_note, user)        
+  # Sets order.status to 'close' and updates all Ordergroup.account_balances
+  def close!(user)
+    raise "Bestellung wurde schon abgerechnet" if closed?
+    transaction_note = "Bestellung: #{supplier.name}, bis #{ends.strftime('%d.%m.%Y')}"
+
+    gos = group_orders.all(:include => :ordergroup)       # Fetch group_orders
+    gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
+
+    transaction do                                        # Start updating account balances
+      for group_order in gos
+        price = group_order.price * -1                    # decrease! account balance
+        group_order.ordergroup.addFinancialTransaction(price, transaction_note, user)
       end
-      self.booked = true
-      self.updated_by = user
-      self.save!
+      self.update_attributes! :state => 'closed', :updated_by => user
     end
   end
   
