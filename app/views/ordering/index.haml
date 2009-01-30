@@ -21,7 +21,7 @@
 
 .right_column{:style => "width:70%"}
   // open orders
-  = render :partial => "open_orders"
+  = render :partial => "shared/open_orders"
 
   // finished orders
   - unless Order.finished.empty?
