@@ -35,7 +35,7 @@ class LoginController < ApplicationController
         self.return_to = nil 
         redirect_to redirect
       else
-        redirect_to :controller => 'index'
+        redirect_to root_path
       end
     else
       current_user = nil

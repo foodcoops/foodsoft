@@ -20,9 +20,10 @@
         = observe_field 'query',  :frequency => 2, |
           :before => "Element.show('loader')", |
           :success => "Element.hide('loader')", |
-          :url => {:action => 'foodcoop_members'}, |
+          :url => {:action => 'members'}, |
           :update => :users, |
-          :with => 'query' |
+          :with => 'query', |
+          :method => :get |
     
     =_ "Sort by Ordergroups :"
     - form_tag({:action => "members"}, :method => "get", :style=>"display:inline;") do

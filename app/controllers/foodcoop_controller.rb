@@ -24,7 +24,7 @@ class FoodcoopController < ApplicationController
       end
 
       # if somebody uses the search field:
-      conditions = "first_name LIKE '%#{params[:query]}%' OR last_name LIKE '%#{params[:query]}%'" unless params[:query].blank?
+      conditions = ["first_name LIKE ? OR last_name LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%"] unless params[:query].blank?
 
       @total = User.count(:conditions => conditions)
       @users = User.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "nick", :include => :groups)
@@ -54,12 +54,13 @@ class FoodcoopController < ApplicationController
   def invite
     @invite = Invite.new
   end
+  
   # Sends an email
   def send_invitation
     @invite = Invite.new(:user => @current_user, :group => @group, :email => params[:invite][:email])
     if @invite.save
       flash[:notice] = format('Es wurde eine Einladung an %s geschickt.', @invite.email)
-      redirect_to(:action => 'index')
+      redirect_to root_path
     else
       render :action => 'invite'
     end

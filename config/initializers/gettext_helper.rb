@@ -16,3 +16,11 @@ module ActiveRecord
     end
   end
 end
+
+module ActionController
+  class Base
+    def _(text)
+      text
+    end
+  end
+end

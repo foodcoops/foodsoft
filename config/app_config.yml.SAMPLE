@@ -23,8 +23,8 @@ development: &defaults
 # Config for the exception_notification plugin
   notification:
     error_recipients:
-      - benni@dresdener27.de
-    sender_address: FoodSoft Error <foodsoft@foodcoops.net>
+      - admin@myfoodcoop.org
+    sender_address: FoodSoft Error <foodsoft@myfoodcoop.org>
     email_prefix: "[FoodSoft]"
 
   # Access to sharedLists, the external article-database

@@ -1,43 +1,43 @@
-%h2=    _('Go to ...')
+%h2 Direkt zu ...
 %ul
   %li
-    = _('FoodCoop')
+    Foodcoop
     %ul
-      %li= link_to _("Member list"), :controller => "index", :action => "foodcoop_members"
-      %li= link_to _("My tasks"), :controller => "tasks", :action => "myTasks"
-      %li= link_to _("Write message"), :controller => "messages", :action => "new"
+      %li= link_to "Mitglieder", :controller => "foodcoop", :action => "members"
+      %li= link_to "Meine Aufgaben", :controller => "home", :action => "tasks"
+      %li= link_to "Nachricht schreiben", :controller => "messages", :action => "new"
   
   // Orders
-  - hasOrdergroup = !@current_user.ordergroup.nil?
-  - hasOrdersRole = @current_user.role_orders?
-  - if hasOrdergroup || hasOrdersRole
+  - has_ordergroup = !@current_user.ordergroup.nil?
+  - has_orders_role = @current_user.role_orders?
+  - if has_ordergroup || has_orders_role
     %li
-      = _("Orders")
+      Bestellungen
       %ul
-        - if hasOrdergroup
-          %li= link_to _('Order summary'), :controller => "ordering"
-        - if hasOrdersRole
-          %li= link_to _('Finish order'), :controller => 'orders'
+        - if has_ordergroup
+          %li= link_to "Bestellübersicht", :controller => "ordering"
+        - if has_orders_role
+          %li= link_to "Bestellungen beenden", :controller => 'orders'
   // Articles
   - if @current_user.role_article_meta? || @current_user.role_suppliers?
     %li
-      = _("Artcle management")
+      Artikelverwaltung
       %ul
-        %li= link_to _("Refresh articles"), :controller => "articles", :action => 'list'
-        %li= link_to _("Suppliers"), :controller => 'suppliers', :action => 'list'
+        %li= link_to "Artikel aktualisieren", suppliers_path
+        %li= link_to "Lieferanten verwalten", suppliers_path
   
   // Finance
   - if @current_user.role_finance?
     %li
-      = _('Financial management')
+      Finanzbereich
       %ul
-        %li= link_to _("Update account balances"), :controller => 'finance', :action => 'new_transactions'
-        %li= link_to _('Cancel orders'), :controller => 'finance'
+        %li= link_to "Konten aktualisieren", :controller => 'finance/transactions', :action => 'new_collection'
+        %li= link_to "Bestellungen abrechnen", finance_root_path
   
   // Administration
   - if @current_user.role_admin?
     %li 
-      = _('Administration')
+      Administration
       %ul
-        %li= link_to _("New ordergroup"), :controller => "admin", :action => "newOrdergroup"
-        %li= link_to _("New user"), :controller => "admin", :action => "newUser"  
+        %li= link_to "Neue Bestellgruppe", new_admin_ordergroup_path
+        %li= link_to "Neues Mitglied", new_admin_user_path
