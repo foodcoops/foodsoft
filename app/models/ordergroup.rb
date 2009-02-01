@@ -41,8 +41,6 @@ class Ordergroup < Group
   validates_inclusion_of :actual_size, :in => 1..99 
   validates_numericality_of :account_balance, :message => 'ist keine gültige Zahl'
 
-  attr_accessible :actual_size, :account_updated
-
   def non_members
     User.all(:order => 'nick').reject { |u| (users.include?(u) || u.ordergroup) }
   end

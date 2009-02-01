@@ -1,0 +1,45 @@
+- title "Administration"
+
+%p
+  %i Hier kannst Du die Gruppen und Benutzer der Foodsoft verwalten.
+.left_column{:style => "width:48%"}
+  .box_title
+    %h2 Neuste Benutzer
+  .column_content
+    %table
+      %tr
+        %th Nick
+        %th Name
+        %th Erstellt am
+      - for user in @users
+        %tr{:class => cycle('even','odd', :name => 'users')}
+          %td= link_to user.nick, [:admin, user]
+          %td= [user.first_name, user.last_name].join(", ")
+          %td= format_date(user.created_on)
+    %br/
+    = link_to 'Alle Benutzerinnen', admin_users_path
+    |
+    = link_to "Neue Benutzerin", new_admin_user_path
+
+.right_column{:style => "width:48%"}
+  .box_title
+    %h2 Neuste Gruppen
+  .column_content
+    %table
+      %tr
+        %th Name
+        %th Typ
+        %th Mitglieder
+      - for group in @groups
+        %tr{:class => cycle('even','odd', :name => 'groups')}
+          %td= link_to group.name, [:admin, group]
+          %td= group.class.human_name
+          %td= group.users.size
+    %br/
+    = link_to 'Alle Bestellgruppen', admin_ordergroups_path
+    |
+    = link_to "Neue Bestellgruppe", new_admin_ordergroup_path
+    |
+    = link_to 'Alle Arbeitsgruppen', admin_workgroups_path
+    |
+    = link_to "Neue Arbeitsgruppe", new_admin_workgroup_path

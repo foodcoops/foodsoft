@@ -119,6 +119,9 @@ de:
         even: "muss gerade sein"
     models:
       article: Artikel
+      user: Benutzerinnen
+      workgroup: Arbeitsgruppe
+      ordergroup: Bestellgruppe
     attributes:
       article:
         price: Nettopreis

@@ -35,7 +35,7 @@ class Admin::OrdergroupsController < ApplicationController
   end
 
   def create
-    @ordergroup = Ordergroup.new(params[:Ordergroup])
+    @ordergroup = Ordergroup.new(params[:ordergroup])
 
     if @ordergroup.save
       flash[:notice] = 'Ordergroup was successfully created.'
@@ -48,7 +48,7 @@ class Admin::OrdergroupsController < ApplicationController
   def update
     @ordergroup = Ordergroup.find(params[:id])
 
-    if @ordergroup.update_attributes(params[:Ordergroup])
+    if @ordergroup.update_attributes(params[:ordergroup])
       flash[:notice] = 'Ordergroup was successfully updated.'
       redirect_to([:admin, @ordergroup])
     else
