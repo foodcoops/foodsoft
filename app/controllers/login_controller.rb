@@ -102,31 +102,27 @@ class LoginController < ApplicationController
   def invite
     @invite = Invite.find_by_token(params[:id])
     if (@invite.nil? || @invite.expires_at < Time.now)
-      flash[:error] = _("Your invitation is invalid or has expired, sorry!")
+      flash[:error] = "Deine Einladung ist nicht (mehr) gültig."
       render :action => 'login'
     elsif @invite.group.nil?
-      flash[:error] = _("The group you are invited to join doesn't exist any more!")
+      flash[:error] = "Die Gruppe, in die Du eingeladen wurdest, existiert leider nicht mehr."
       render :action => 'login'
     elsif (request.post?)
       User.transaction do
         @user = User.new(params[:user])
         @user.email = @invite.email
-        @user.set_password({:required => true}, params[:user][:password], params[:user][:password_confirmation])
-        if (@user.errors.empty? && @user.save)
+        if @user.save
           Membership.new(:user => @user, :group => @invite.group).save!
-          for setting in User::setting_keys.keys
-            @user.settings[setting] = (params[:user][:settings] && params[:user][:settings][setting] == '1' ? '1' : nil)
-          end
           @invite.destroy
-          flash[:notice] = _("Congratulations, your account has been created successfully. You can log in now.")
-          render(:action => 'login')
+          flash[:notice] = "Herzlichen Glückwunsch, Dein Account wurde erstellt. Du kannst Dich nun einloggen."
+          render :action => 'login'
         end
       end
     else
       @user = User.new(:email => @invite.email)
     end
   rescue
-    flash[:error] = _("An error has occured. Please try again.")
+    flash[:error] = "Ein Fehler ist aufgetreten. Bitte erneut versuchen."
   end
   
 end
