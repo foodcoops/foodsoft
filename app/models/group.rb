@@ -40,13 +40,7 @@ class Group < ActiveRecord::Base
   
   # Returns all NONmembers and a checks for possible multiple Ordergroup-Memberships
   def non_members
-    nonMembers = Array.new
-    for user in User.find(:all, :order => "nick")
-      unless self.users.include?(user) || ( self.is_a?(Ordergroup) && user.find_ordergroup )
-        nonMembers << user      
-      end  
-    end
-    return nonMembers
+    User.all(:order => 'nick').reject { |u| users.include?(u) }
   end
   
   # Check before destroy a group, if this is the last group with admin role
@@ -54,11 +48,6 @@ class Group < ActiveRecord::Base
     if self.role_admin == true && Group.find_all_by_role_admin(true).size == 1
       raise "Die letzte Gruppe mit Admin-Rechten darf nicht gelöscht werden"
     end
-  end
-  
-  # get all groups, which are NOT Ordergroups
-  def self.workgroups
-    Workgroup.all
   end
   
   protected

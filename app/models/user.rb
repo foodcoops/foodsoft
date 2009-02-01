@@ -23,7 +23,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
-  has_many :ordergroups, :through => :memberships, :source => :group
+  has_one :ordergroup, :through => :memberships, :source => :group
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments
   has_many :send_messages, :class_name => "Message", :foreign_key => "sender_id"
@@ -147,13 +147,7 @@ class User < ActiveRecord::Base
     groups.detect {|group| group.role_orders?}
   end
   
-  # Returns the user's Ordergroup or nil if none found.
-  def find_ordergroup
-    ordergroups.first
-  end
-
   def ordergroup_name
-    ordergroup = find_ordergroup
     ordergroup ? ordergroup.name : "keine Bestellgruppe"
   end
 

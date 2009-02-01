@@ -1,5 +1,5 @@
 <ul class="autocomplete">
 <% for user in @users do -%>
-  <li><span class="nick"><%=h user.nick %></span><span class="informal"> (<%= user.find_ordergroup.name.to_s if user.find_ordergroup %>)</span></li>
+  <li><span class="nick"><%=h user.nick %></span><span class="informal"> (<%= user.ordergroup.name.to_s if user.ordergroup %>)</span></li>
 <% end -%>
 </ul>

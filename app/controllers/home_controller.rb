@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   
   def index
     @currentOrders = Order.open
-    @ordergroup = @current_user.find_ordergroup
+    @ordergroup = @current_user.ordergroup
     if @ordergroup
       @financial_transactions = @ordergroup.financial_transactions.find(:all, :order => 'created_on desc', :limit => 3)
     end
@@ -37,7 +37,7 @@ class HomeController < ApplicationController
 
   def ordergroup
     @user = @current_user
-    @ordergroup = @user.find_ordergroup
+    @ordergroup = @user.ordergroup
     @ordergroup_column_names = ["Description", "Actual Size", "Balance", "Updated"]
     @ordergroup_columns = ["description", "actual_size", "account_balance", "account_updated"]
 

@@ -149,7 +149,7 @@ class OrderingController < ApplicationController
   # Returns true if @current_user is member of an Ordergroup.
   # Used as a :before_filter by OrderingController.
   def ensure_ordergroup_member
-    @ordergroup = @current_user.find_ordergroup
+    @ordergroup = @current_user.ordergroup
     if @ordergroup.nil?
       flash[:notice] = 'Sie gehören keiner Bestellgruppe an.'
       redirect_to :controller => root_path

@@ -8,7 +8,7 @@
       %li= link_to _("Write message"), :controller => "messages", :action => "new"
   
   // Orders
-  - hasOrdergroup = !@current_user.find_ordergroup.nil?
+  - hasOrdergroup = !@current_user.ordergroup.nil?
   - hasOrdersRole = @current_user.role_orders?
   - if hasOrdergroup || hasOrdersRole
     %li

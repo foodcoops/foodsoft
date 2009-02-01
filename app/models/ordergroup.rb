@@ -42,7 +42,10 @@ class Ordergroup < Group
   validates_numericality_of :account_balance, :message => 'ist keine gültige Zahl'
 
   attr_accessible :actual_size, :account_updated
-  
+
+  def non_members
+    User.all(:order => 'nick').reject { |u| (users.include?(u) || u.ordergroup) }
+  end
 
   def value_of_open_orders(exclude = nil)
     group_orders.open.reject{|go| go == exclude}.collect(&:price).sum
