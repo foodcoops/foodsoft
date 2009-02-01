@@ -37,31 +37,32 @@
     .column_content
       = render :partial => 'messages/messages', :locals => { :subject_length => 110 }
 
-  // Ordergroup overview
-  .box_title
-    %h2=_ "My ordergroup"
-  .column_content
-    %p
-      %b= @ordergroup.name
-      |
-      =_ "Account balance:"
-      = number_to_currency(@ordergroup.account_balance)
-      %span{:style => "color:grey"}
-        (zuletzt aktualisiert vor
-        = distance_of_time_in_words(Time.now, @ordergroup.account_updated) + ")"
-      %h3=_ "Last transactions"
-      %table
-        %tr
-          %th=_ "When"
-          %th=_ "Who"
-          %th=_ "Note"
-          %th=_ "Amount"
-        - for ft in @financial_transactions
-          %tr{:class => cycle('even','odd')}
-            %td= format_time(ft.created_on)
-            %td= h(ft.user.nil? ? '?' : ft.user.nick)
-            %td= h(ft.note)
-            - color = ft.amount < 0 ? 'red' : 'black'
-            %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
-      %br/
-      = link_to _("more ..."), :action => "myOrdergroup"
+  - if @ordergroup
+    // Ordergroup overview
+    .box_title
+      %h2=_ "My ordergroup"
+    .column_content
+      %p
+        %b= @ordergroup.name
+        |
+        =_ "Account balance:"
+        = number_to_currency(@ordergroup.account_balance)
+        %span{:style => "color:grey"}
+          (zuletzt aktualisiert vor
+          = distance_of_time_in_words(Time.now, @ordergroup.account_updated) + ")"
+        %h3=_ "Last transactions"
+        %table
+          %tr
+            %th=_ "When"
+            %th=_ "Who"
+            %th=_ "Note"
+            %th=_ "Amount"
+          - for ft in @financial_transactions
+            %tr{:class => cycle('even','odd')}
+              %td= format_time(ft.created_on)
+              %td= h(ft.user.nil? ? '?' : ft.user.nick)
+              %td= h(ft.note)
+              - color = ft.amount < 0 ? 'red' : 'black'
+              %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
+        %br/
+        = link_to _("more ..."), :action => "myOrdergroup"
