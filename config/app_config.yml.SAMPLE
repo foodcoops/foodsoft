@@ -24,7 +24,7 @@ development: &defaults
   notification:
     error_recipients:
       - admin@myfoodcoop.org
-    sender_address: FoodSoft Error <foodsoft@myfoodcoop.org>
+    sender_address: "\"FoodSoft Error\" <foodsoft@myfoodcoop.org>"
     email_prefix: "[FoodSoft]"
 
   # Access to sharedLists, the external article-database

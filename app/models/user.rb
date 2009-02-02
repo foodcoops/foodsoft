@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
   has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
+  has_many :workgroups, :through => :memberships, :source => :group, :class_name => "Workgroup"
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments
   has_many :send_messages, :class_name => "Message", :foreign_key => "sender_id"
