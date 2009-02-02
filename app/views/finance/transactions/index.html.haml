@@ -23,4 +23,4 @@
       = render :partial => "ordergroups"
     %br/
     - if @current_user.role_admin?
-      = link_to _("New ordergroup"), :controller => 'admin', :action => 'newOrdergroup'
+      = link_to "Neue Bestellgruppe anlegen", new_admin_ordergroup_path

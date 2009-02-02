@@ -10,10 +10,8 @@ class Finance::TransactionsController < ApplicationController
     if params["sort"]
       sort = case params["sort"]
                when "name" then "name"
-               when "size" then "actual_size"
                when "account_balance" then "account_balance"
                when "name_reverse" then "name DESC"
-               when "size_reverse" then "actual_size DESC"
                when "account_balance_reverse" then "account_balance DESC"
             end
     else

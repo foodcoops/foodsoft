@@ -1,11 +1,18 @@
 - form_for [:admin, @ordergroup] do |@form|
-  = render :partial => 'shared/group_form'
-  
-  %div{:style => "float:left;width:55%;"}
-    %p
-      = @form.label :actual_size, "Aktuelle Gruppengröße"
-      %br/
-      = @form.text_field :actual_size, :size => 3
+  - render :layout => 'shared/group_form' do
+    %div{:style => "float:right;width:40%"}
+      %p
+        = @form.label :contact_person
+        %br/
+        = @form.text_field :contact_person, :size => 20
+      %p
+        = @form.label :contact_phone
+        %br/
+        = @form.text_field :contact_phone, :size => 20
+      %p
+        = @form.label :contact_address
+        %br/
+        = @form.text_field :contact_address
 
   %br{ :style => "clear:both" }
   = submit_tag "Speichern"

@@ -3,25 +3,27 @@
 #
 # Table name: groups
 #
-#  id                  :integer(4)      not null, primary key
+#  id                  :integer         not null, primary key
 #  type                :string(255)     default(""), not null
 #  name                :string(255)     default(""), not null
 #  description         :string(255)
-#  actual_size         :integer(4)
-#  account_balance     :decimal(8, 2)   default(0.0), not null
+#  account_balance     :decimal(, )     default(0.0), not null
 #  account_updated     :datetime
 #  created_on          :datetime        not null
-#  role_admin          :boolean(1)      not null
-#  role_suppliers      :boolean(1)      not null
-#  role_article_meta   :boolean(1)      not null
-#  role_finance        :boolean(1)      not null
-#  role_orders         :boolean(1)      not null
-#  weekly_task         :boolean(1)
-#  weekday             :integer(4)
+#  role_admin          :boolean         not null
+#  role_suppliers      :boolean         not null
+#  role_article_meta   :boolean         not null
+#  role_finance        :boolean         not null
+#  role_orders         :boolean         not null
+#  weekly_task         :boolean
+#  weekday             :integer
 #  task_name           :string(255)
 #  task_description    :string(255)
-#  task_required_users :integer(4)      default(1)
+#  task_required_users :integer         default(1)
 #  deleted_at          :datetime
+#  contact_person      :string(255)
+#  contact_phone       :string(255)
+#  contact_address     :string(255)
 #
 
 # Ordergroups can order, they are "children" of the class Group
@@ -29,7 +31,6 @@
 # Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
 # * account_updated (datetime)
-# * actual_size (int) : how many persons are ordering through the Ordergroup
 class Ordergroup < Group
   acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
@@ -38,9 +39,11 @@ class Ordergroup < Group
   has_many :group_orders
   has_many :orders, :through => :group_orders
 
-  validates_inclusion_of :actual_size, :in => 1..99 
   validates_numericality_of :account_balance, :message => 'ist keine gültige Zahl'
 
+  def contact
+    "#{contact_phone} (#{contact_person})"
+  end
   def non_members
     User.all(:order => 'nick').reject { |u| (users.include?(u) || u.ordergroup) }
   end

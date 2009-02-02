@@ -2,16 +2,16 @@
   %tr
     %td Beschreibung:
     %td=h group.description
+  - if @current_user.role_admin? or @current_user.role_finance?
+    %tr
+      %td Kontakt:
+      %td=h group.contact
+    %tr
+      %td Adresse:
+      %td= link_to_gmaps group.contact_address
   %tr
     %td Gruppe hat Zugriff auf:
-    %td
-      - roles = Array.new
-      - roles << 'Administration' if group.role_admin?
-      - roles << 'Finanzen' if group.role_finance?
-      - roles << 'Lieferanten' if group.role_suppliers?
-      - roles << 'Artikel' if group.role_article_meta?
-      - roles << 'Bestellungsverwaltung' if group.role_orders?
-      = roles.join(', ')
+    %td= format_roles(group)
   %tr
     %td Mitglieder:
     %td

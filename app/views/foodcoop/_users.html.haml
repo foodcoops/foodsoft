@@ -11,8 +11,7 @@
   %thead
     %tr
       %th Nick
-      %th Vorname
-      %th Nachname
+      %th Name
       %th Email
       %th Telefon
       %th Bestellgruppe
@@ -20,14 +19,10 @@
   %tbody
     - for user in @users
       %tr{:class => cycle('even','odd', :name => 'users')}
-        - groups = user.groups
-        - ordergroup = groups.detect { |group| group.is_a?(Ordergroup) }
-        - workgroups = groups.select { |group| !group.is_a?(Ordergroup) }.collect(&:name)
         %td= link_to user.nick, {:controller => "messages", :action => "user", :id => user}, :title => _('Send user an email')
-        %td=h user.first_name if @current_user.role_admin? || user.settings["profile.nameIsPublic"] == '1'
-        %td=h user.last_name if @current_user.role_admin? ||  user.settings["profile.nameIsPublic"] == '1'
+        %td=h user.name if @current_user.role_admin? || user.settings["profile.nameIsPublic"] == '1'
         %td=h user.email if @current_user.role_admin? ||  user.settings["profile.emailIsPublic"] == '1'
         %td=h user.phone if @current_user.role_admin? ||  user.settings["profile.phoneIsPublic"] == '1'
-        %td=h ordergroup.name if ordergroup
-        %td=h workgroups.join(', ')
+        %td=h user.ordergroup_name
+        %td=h groups.select { |group| !group.is_a?(Ordergroup) }.collect(&:name).join(', ')
 

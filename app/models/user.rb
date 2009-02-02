@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 20090102171850
+# Schema version: 20090120184410
 #
 # Table name: users
 #
-#  id                     :integer(4)      not null, primary key
+#  id                     :integer         not null, primary key
 #  nick                   :string(255)     default(""), not null
 #  password_hash          :string(255)     default(""), not null
 #  password_salt          :string(255)     default(""), not null
@@ -11,7 +11,6 @@
 #  last_name              :string(255)     default(""), not null
 #  email                  :string(255)     default(""), not null
 #  phone                  :string(255)
-#  address                :string(255)
 #  created_on             :datetime        not null
 #  reset_password_token   :string(255)
 #  reset_password_expires :datetime
@@ -80,6 +79,13 @@ class User < ActiveRecord::Base
     end
   end
   
+  def name
+    [first_name, last_name].join(" ")
+  end
+
+  def ordergroup_name
+    ordergroup.name if ordergroup
+  end
   
   # Sets the user's password. It will be stored encrypted along with a random salt.
   def set_password
@@ -93,22 +99,6 @@ class User < ActiveRecord::Base
   def has_password(password)
     Digest::SHA1.hexdigest(password + self.password_salt) == self.password_hash
   end
-  
-#  # Sets the passwort, and if fails it returns error-messages (see above)
-#  def set_password(options = {:required => false}, password = nil, confirmation = nil)
-#    required = options[:required]
-#    if required && (password.nil? || password.empty?)
-#      self.errors.add_to_base 'Password is required'
-#    elsif !password.nil? && !password.empty?
-#      if password != confirmation
-#        self.errors.add_to_base "Passwords doesn't match"
-#      elsif password.length < 5 || password.length > 25
-#        self.errors.add_to_base 'Password-length has to be between 5 and 25 characters'
-#      else
-#        self.password = password
-#      end
-#    end
-#  end
   
   # Returns a random password.
   def new_random_password(size = 3)

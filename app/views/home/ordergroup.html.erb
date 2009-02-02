@@ -5,7 +5,6 @@
     <p><b>Beschreibung:</b> <%=h @ordergroup.description %>
     <%= link_to '(ändern)', :controller => 'foodcoop', :action => 'edit_group', :id => @ordergroup %>
     </p>
-    <p><b>Gruppengröße:</b> <%=h @ordergroup.actual_size %></p>
     <p><b>Kontostand:</b> <%= number_to_currency(@ordergroup.account_balance) %></p>
     <h2>Personen</h2>
     <ul style="list-style-type:decimal;">

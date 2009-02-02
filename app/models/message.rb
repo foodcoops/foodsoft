@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 20090115232435
+# Schema version: 20090119155930
 #
 # Table name: messages
 #
-#  id             :integer(4)      not null, primary key
-#  sender_id      :integer(4)
+#  id             :integer         not null, primary key
+#  sender_id      :integer
 #  recipients_ids :text
 #  subject        :string(255)     not null
 #  body           :text
-#  email_state    :integer(4)      default(0), not null
-#  private        :boolean(1)
+#  email_state    :integer         default(0), not null
+#  private        :boolean
 #  created_at     :datetime
 #
 

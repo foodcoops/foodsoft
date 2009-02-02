@@ -19,17 +19,20 @@
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
-  id: 1    
+terra:
   name: Terra
-  delivery_days: tuesday
-  contact_person: thomas terra
-  url: www.terra-natur.de
-  note: 
-  fax: 01324-343444
-  phone: 0123-555555
-  order_howto: 
-  phone2: 01234-7878787
   address: berlin bio
-  customer_number: 123478
+  phone: 0123-555555
+  phone2: 01234-7878787
+  fax: 01324-343444
   email: terra@terra.com
+  url: www.terra-natur.de
+  contact_person: Harry
+  customer_number: 123478
+  delivery_days: tuesday
+  order_howto: call or send email/fax
+  note:
+    Terra possibly delivers also on other days than tuesday. Don't
+    hesitate to ask for it.
+  min_order_quantity: 80,-€ (gross)
+  

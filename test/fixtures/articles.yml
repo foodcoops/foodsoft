@@ -3,53 +3,59 @@
 #
 # Table name: articles
 #
-#  id                  :integer(4)      not null, primary key
+#  id                  :integer         not null, primary key
 #  name                :string(255)     default(""), not null
-#  supplier_id         :integer(4)      default(0), not null
-#  article_category_id :integer(4)      default(0), not null
+#  supplier_id         :integer         default(0), not null
+#  article_category_id :integer         default(0), not null
 #  unit                :string(255)     default(""), not null
 #  note                :string(255)
-#  availability        :boolean(1)      default(TRUE), not null
+#  availability        :boolean         default(TRUE), not null
 #  manufacturer        :string(255)
 #  origin              :string(255)
 #  shared_updated_on   :datetime
-#  price               :decimal(8, 2)
+#  price               :decimal(, )
 #  tax                 :float
-#  deposit             :decimal(8, 2)   default(0.0)
-#  unit_quantity       :integer(4)      default(1), not null
+#  deposit             :decimal(, )     default(0.0)
+#  unit_quantity       :integer         default(1), not null
 #  order_number        :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
-#  quantity            :decimal(6, 2)   default(0.0)
+#  quantity            :decimal(, )     default(0.0)
 #  deleted_at          :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 banana:
-  id: 1
-  name: banana
-  current_price_id: 1
-  unit: 500g
-  availability: 1
+  supplier: terra
+  name: Banana
+  article_category: fruits
+  unit: KG
+  availability: true
   note: delicious
-  supplier_id: 1
-  article_category_id: 1
+  origin: EC
+  price: 1.45
+  tax: 7.0
+  unit_quantity: 18
+  order_number: 123456
 kiwi:
-  id: 2
-  name: kiwi
-  current_price_id: 2
+  supplier: terra
+  name: Kiwi
+  article_category: fruits
   unit: 500g
-  availability: 1
-  note: delicious
-  supplier_id: 1
-  article_category_id: 1
-apple:
-  id: 3
-  name: apple
-  current_price_id: 3
+  availability: true
+  origin: IT
+  price: 1.11
+  tax: 7.0
+  unit_quantity: 10
+  order_number: 123457
+potatoe:
+  supplier: terra
+  name: Potatoe
+  article_category: vegi
   unit: 500g
-  availability: 0
-  note: delicious
-  supplier_id: 1
-  article_category_id: 1
-  
+  availability: true
+  origin: REG
+  price: 1.33
+  tax: 7.0
+  unit_quantity: 25
+  order_number: 123458

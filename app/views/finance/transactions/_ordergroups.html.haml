@@ -13,14 +13,14 @@
   %thead
     %tr
       %th= sort_link_helper _("Name"), "name", @per_page
-      %th= sort_link_helper _("Size of group"), "size", @per_page
+      %th Kontakt
       %th= sort_link_helper _("Account balance"), "account_balance", @per_page
       %th
   %tbody
     - for group in @groups
       %tr{:class => cycle('even','odd', :name => 'groups')}
         %td= group.name
-        %td= group.actual_size
+        %td= group.contact
         %td{:class => "currency", :style => "width:5em"}= number_to_currency(group.account_balance)
         %td{:class => "actions"}
           = link_to image_tag("euro_new.png", :size => "16x16", :alt => _("New transaction"), :border => "0"), {:action => 'new', :id => group}, {:title => _("New transaction")}

@@ -39,7 +39,7 @@ class HomeController < ApplicationController
     @user = @current_user
     @ordergroup = @user.ordergroup
     @ordergroup_column_names = ["Description", "Actual Size", "Balance", "Updated"]
-    @ordergroup_columns = ["description", "actual_size", "account_balance", "account_updated"]
+    @ordergroup_columns = ["description", "account_balance", "account_updated"]
 
     #listing the financial transactions with ajax...
 

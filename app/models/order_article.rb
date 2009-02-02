@@ -1,16 +1,16 @@
 # == Schema Information
-# Schema version: 20090120184410
+# Schema version: 20090119155930
 #
 # Table name: order_articles
 #
-#  id               :integer(4)      not null, primary key
-#  order_id         :integer(4)      default(0), not null
-#  article_id       :integer(4)      default(0), not null
-#  quantity         :integer(4)      default(0), not null
-#  tolerance        :integer(4)      default(0), not null
-#  units_to_order   :integer(4)      default(0), not null
-#  lock_version     :integer(4)      default(0), not null
-#  article_price_id :integer(4)
+#  id               :integer         not null, primary key
+#  order_id         :integer         default(0), not null
+#  article_id       :integer         default(0), not null
+#  quantity         :integer         default(0), not null
+#  tolerance        :integer         default(0), not null
+#  units_to_order   :integer         default(0), not null
+#  lock_version     :integer         default(0), not null
+#  article_price_id :integer
 #
 
 # An OrderArticle represents a single Article that is part of an Order.

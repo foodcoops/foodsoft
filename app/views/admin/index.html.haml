@@ -14,7 +14,7 @@
       - for user in @users
         %tr{:class => cycle('even','odd', :name => 'users')}
           %td= link_to user.nick, [:admin, user]
-          %td= [user.first_name, user.last_name].join(", ")
+          %td=h user.name
           %td= format_date(user.created_on)
     %br/
     = link_to 'Alle Benutzerinnen', admin_users_path

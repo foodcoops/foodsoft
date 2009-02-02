@@ -1,14 +1,14 @@
 # == Schema Information
-# Schema version: 20090120184410
+# Schema version: 20090119155930
 #
 # Table name: article_prices
 #
-#  id            :integer(4)      not null, primary key
-#  article_id    :integer(4)
+#  id            :integer         not null, primary key
+#  article_id    :integer
 #  price         :decimal(8, 2)   default(0.0), not null
 #  tax           :decimal(8, 2)   default(0.0), not null
 #  deposit       :decimal(8, 2)   default(0.0), not null
-#  unit_quantity :integer(4)
+#  unit_quantity :integer
 #  created_at    :datetime
 #
 

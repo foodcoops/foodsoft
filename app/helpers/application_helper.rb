@@ -117,4 +117,20 @@ module ApplicationHelper
     remote_options = {:before => "Element.show('loader')", :success => "Element.hide('loader')"}
     link_to_remote(text, remote_options.merge(options))
   end
+
+  def format_roles(record)
+    roles = []
+    roles << 'Admin' if record.role_admin?
+    roles << 'Finanzen' if record.role_finance?
+    roles << 'Lieferanten' if record.role_suppliers?
+    roles << 'Artikel' if record.role_article_meta?
+    roles << 'Bestellung' if record.role_orders?
+    roles.join(', ')
+  end
+
+  def link_to_gmaps(address)
+    link_to h(address), "http://maps.google.de/?q=#{h(address)}", :title => "Show it on google maps",
+      :target => "_blank"
+  end
+
 end

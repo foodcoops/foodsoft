@@ -2,12 +2,28 @@ class RefactorOrderLogic < ActiveRecord::Migration
   def self.up
     # TODO: Combine migrations since foodsoft3-development into one file
     # and try to build a migration path from old data.
-
-#    # articles
+    
+    # == Ordergroups
+    add_column :groups, :deleted_at, :datetime # acts_as_paranoid
+    remove_column :groups, :actual_size        # Useless, desposits are better stored within a transaction.note
+    # move contact-infos from users to ordergroups
+    add_column :groups, :contact_person, :string
+    add_column :groups, :contact_phone, :string
+    add_column :groups, :contact_address, :string
+    Ordergroup.all.each do |ordergroup|
+      contact = ordergroup.users.first
+      if contact
+        ordergroup.update_attributes :contact_person => contact.name,
+          :contact_phone => contact.phone, :contact_address => contact.address
+      end
+    end
+    remove_column :users, :address
+#
+#    # == Article
 #    rename_column :articles, :net_price, :price
 #    remove_column :articles, :gross_price
 #
-#    # orders
+#    # == Order
 #    drop_table :orders
 #    drop_table :group_order_results
 #    drop_table :order_article_results
@@ -24,12 +40,12 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #      t.integer :updated_by_user_id
 #    end
 #
-#    # invoices
+#    # == Invoice
 #    add_column :invoices, :order_id, :integer
 #    add_column :invoices, :deposit, :decimal, :precision => 8, :scale => 2, :default => 0.0,  :null => false
 #    add_column :invoices, :deposit_credit, :decimal, :precision => 8, :scale => 2, :default => 0.0,  :null => false
 #
-#    # comments
+#    # == Comment
 #    drop_table :comments
 #    create_table :order_comments do |t|
 #      t.references :order
@@ -38,7 +54,7 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #      t.datetime :created_at
 #    end
 #
-#    # article_prices
+#    # == ArticlePrice
 #    create_table :article_prices do |t|
 #      t.references :article
 #      t.decimal :price, :precision => 8, :scale => 2, :default => 0.0, :null => false
@@ -59,11 +75,8 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #    # order-articles
 #    add_column :order_articles, :article_price_id, :integer
 #
-#    # ordergroups
-#    add_column :groups, :deleted_at, :datetime
-
-    # GroupOrders
-    change_column :group_orders, :updated_by_user_id, :integer, :default => nil, :null => true
+#    # == GroupOrder
+#    change_column :group_orders, :updated_by_user_id, :integer, :default => nil, :null => true
   end
 
   def self.down

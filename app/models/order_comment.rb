@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 20090120184410
+# Schema version: 20090119155930
 #
 # Table name: order_comments
 #
-#  id         :integer(4)      not null, primary key
-#  order_id   :integer(4)
-#  user_id    :integer(4)
+#  id         :integer         not null, primary key
+#  order_id   :integer
+#  user_id    :integer
 #  text       :text
 #  created_at :datetime
 #

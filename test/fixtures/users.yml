@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 20090102171850
+# Schema version: 20090120184410
 #
 # Table name: users
 #
-#  id                     :integer(4)      not null, primary key
+#  id                     :integer         not null, primary key
 #  nick                   :string(255)     default(""), not null
 #  password_hash          :string(255)     default(""), not null
 #  password_salt          :string(255)     default(""), not null
@@ -11,7 +11,6 @@
 #  last_name              :string(255)     default(""), not null
 #  email                  :string(255)     default(""), not null
 #  phone                  :string(255)
-#  address                :string(255)
 #  created_on             :datetime        not null
 #  reset_password_token   :string(255)
 #  reset_password_expires :datetime
@@ -20,17 +19,16 @@
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 admin:
-  id: 1
   nick: admin
   first_name: Anton
   last_name: Admininistrator
   email: admin@foo.test
-  #TODO: password can't loaded directyl to the database
-  #password_hash: 
-  #password_salt:
+  password_hash: a3c77e64311ad37161e582b28737d1e420962538
+  password_salt: LNpP/lca
 test:
-  id: 2
   nick: test
   first_name: Tim
   last_name: Tester
   email: test@foo.test
+  password_hash: 5549cd54032a72435037893b02d95ebef13cdc57
+  password_salt: DxnbIF1h

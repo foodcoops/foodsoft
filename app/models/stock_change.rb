@@ -1,12 +1,12 @@
 # == Schema Information
-# Schema version: 20090115232435
+# Schema version: 20090119155930
 #
 # Table name: stock_changes
 #
-#  id          :integer(4)      not null, primary key
-#  delivery_id :integer(4)
-#  order_id    :integer(4)
-#  article_id  :integer(4)
+#  id          :integer         not null, primary key
+#  delivery_id :integer
+#  order_id    :integer
+#  article_id  :integer
 #  quantity    :decimal(6, 2)   default(0.0)
 #  created_at  :datetime
 #

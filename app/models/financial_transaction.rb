@@ -1,13 +1,13 @@
 # == Schema Information
-# Schema version: 20090114101610
+# Schema version: 20090119155930
 #
 # Table name: financial_transactions
 #
-#  id            :integer(4)      not null, primary key
-#  ordergroup_id :integer(4)      default(0), not null
+#  id            :integer         not null, primary key
+#  ordergroup_id :integer         default(0), not null
 #  amount        :decimal(8, 2)   default(0.0), not null
-#  note          :text            default(""), not null
-#  user_id       :integer(4)      default(0), not null
+#  note          :text            not null
+#  user_id       :integer         default(0), not null
 #  created_on    :datetime        not null
 #
 

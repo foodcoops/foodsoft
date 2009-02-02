@@ -10,12 +10,16 @@
   %thead
     %tr
       %th Name
+      %th Kontakt
+      %th Adresse
       %th Mitglieder
       %th
   %tbody
     - for ordergroup in @ordergroups
       %tr{:class => cycle('even','odd', :name => 'groups')}
         %td= link_to ordergroup.name, [:admin, ordergroup]
+        %td= ordergroup.contact
+        %td= link_to_gmaps ordergroup.contact_address
         %td= ordergroup.users.size
         %td
           = link_to image_tag('b_users.png', :size => '16x16',  :border => "0", :alt => 'Mitlglieder bearbeiten'), memberships_admin_ordergroup_path(ordergroup)
