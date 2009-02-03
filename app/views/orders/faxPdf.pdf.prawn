@@ -41,7 +41,7 @@ pdf.text "Ansprechpartner: " + @order.supplier.contact_person
 pdf.move_down 10
 
 # Articles
-data = @order.order_articles.all(:include => :article).collect do |a|
+data = @order.order_articles.ordered.all(:include => :article).collect do |a|
   [a.article.order_number, a.units_to_order, a.article.name,
    a.price.unit_quantity, a.article.unit, a.price.price]
 end

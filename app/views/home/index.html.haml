@@ -57,7 +57,7 @@
             %th=_ "Who"
             %th=_ "Note"
             %th=_ "Amount"
-          - for ft in @financial_transactions
+          - for ft in @ordergroup.financial_transactions.all(:limit => 5)
             %tr{:class => cycle('even','odd')}
               %td= format_time(ft.created_on)
               %td= h(ft.user.nil? ? '?' : ft.user.nick)

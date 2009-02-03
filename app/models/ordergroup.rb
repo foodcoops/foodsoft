@@ -35,7 +35,7 @@ class Ordergroup < Group
   acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
 
-  has_many :financial_transactions
+  has_many :financial_transactions, :order => "created_on DESC"
   has_many :group_orders
   has_many :orders, :through => :group_orders
 

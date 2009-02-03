@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     
     def deny_access
       self.return_to = request.request_uri
-      redirect_to :controller => 'login', :action => 'denied'
+      redirect_to :controller => '/login', :action => 'denied'
       return false
     end
 

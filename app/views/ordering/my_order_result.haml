@@ -17,7 +17,7 @@
           %p
             Lieferant:
             %b=h @order.supplier.name
-          - unless @order.note.empty?
+          - unless @order.note.blank?
             %p
               Notiz:
               =h @order.note
@@ -76,7 +76,7 @@
               - if goa
                 - quantity = goa.quantity
                 - tolerance = goa.tolerance
-                - result = goa.orderResult[:quantity] + goa.orderResult[:tolerance]
+                - result = goa.result[:total]
                 - sub_total = oa.price.fc_price * (quantity + tolerance)
               - else
                 - quantity, tolerance, result, sub_total = 0, 0, 0, 0
@@ -88,7 +88,7 @@
               %tr{:class => cycle('even', 'odd', :name => 'articles'), :style => "color:#{style}"}
                 %td{:style => "width:40%"}
                   =h oa.article.name
-                  - unless oa.article.note.empty?
+                  - unless oa.article.note.blank?
                     = image_tag("lamp_grey.png", {:alt => "Notiz anzeigen", :size => "15x16", :border => "0", :onmouseover => "$('note_#{oa.id}').show();", :onmouseout => "$('note_#{oa.id}').hide();"})
                 %td= "#{oa.price.unit_quantity} x #{oa.article.unit}"
                 %td= number_to_currency(oa.price.fc_price)
@@ -97,7 +97,7 @@
                   = "+ #{tolerance}" if oa.price.unit_quantity > 1
                 %td= result > 0 ? result : "0"
                 %td= number_to_currency(sub_total)
-              - unless oa.article.note.empty?
+              - unless oa.article.note.blank?
                 %tr{:id => "note_#{oa.id}", :class => "note even", :style => "display:none"}
                   %td{:colspan => "6"}=h oa.article.note
           %tr{:class => cycle('even', 'odd', :name => 'articles')}

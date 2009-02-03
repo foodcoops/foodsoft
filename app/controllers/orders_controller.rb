@@ -138,7 +138,7 @@ class OrdersController < ApplicationController
     text += "****** " + "Artikel" + "\n\n"
     text += "Nummer" + "   " + "Menge" + "   " + "Name" + "\n"
     # now display all ordered articles
-    order.order_articles.all(:include => [:article, :article_price]).each do |oa|
+    order.order_articles.ordered.all(:include => [:article, :article_price]).each do |oa|
       number = oa.article.order_number
       (8 - number.size).times { number += " " }
       quantity = oa.units_to_order.to_i.to_s

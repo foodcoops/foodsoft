@@ -20,22 +20,22 @@
         :subnav => [
           { :name => "Order", :url => "/ordering" },
           { :name => "My orders", :url => "/ordering/myOrders" },
-          { :name => "Manage orders", :url => "/orders", :access? => (u.role_orders?) }
+          { :name => "Manage orders", :url => "/orders", :access_denied? => (!u.role_orders?) }
         ]
       },
       { :name => "Articles", :url => "/suppliers", 
         :active => ["articles", "suppliers", "deliveries", "article_categories", "stockit"],
-        :access? => (u.role_article_meta? || u.role_suppliers?),
+        :access_denied? => (!u.role_article_meta? && !u.role_suppliers?),
         :subnav => [
           { :name => "Artikel", :url => supplier_articles_path(Supplier.first) },
           { :name => "Lager", :url => "/stockit" },
-          { :name => "Lieferantinnen", :url => suppliers_path, :access? => (u.role_suppliers?) },
+          { :name => "Lieferantinnen", :url => suppliers_path, :access_denied? => (!u.role_suppliers?) },
           { :name => "Kategorien", :url => "/article_categories"}
         ]
       },
       { :name => "Finance", :url => "/finance",
         :active => ["finance/invoices", "finance/transactions", "finance/balancing"],
-        :access? => (u.role_finance?),
+        :access_denied? => (!u.role_finance?),
         :subnav => [
           { :name => "Manage accounts", :url => "/finance/transactions" },
           { :name => "Balance orders", :url => "/finance/balancing/list" },
@@ -44,7 +44,7 @@
       },
       { :name => "Administration", :url => "/admin",
         :active => ["admin", "admin/users", "admin/ordergroups", "admin/workgroups"],
-        :access? => (u.role_admin?),
+        :access_denied? => (!u.role_admin?),
         :subnav => [
           { :name => "Users", :url => admin_users_path },
           { :name => "Ordergroups", :url => admin_ordergroups_path },
@@ -55,12 +55,12 @@
 -%>
 <ul>
   <% for tab in tabs -%>
-    <% unless tab[:access?] and tab[:access?] == false -%>
+    <% unless tab[:access_denied?] -%>
       <li class="<%= 'current' if tab_is_active?(tab) %>">
         <%= link_to tab[:name], tab[:url] %>
         <ul>
           <% for subtab in tab[:subnav] -%>
-            <% unless subtab[:access?] and subtab[:access?] == false -%>
+            <% unless subtab[:access_denied?] -%>
               <li><%= link_to subtab[:name], subtab[:url] %></li>
             <% end -%>
           <% end -%>

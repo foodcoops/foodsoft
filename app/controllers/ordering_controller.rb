@@ -5,7 +5,7 @@ class OrderingController < ApplicationController
   before_filter :ensure_ordergroup_member
   before_filter :ensure_open_order, :only => [:order, :saveOrder]
   
-  verify :method => :post, :only => [:saveOrder], :redirect_to => { :action => :index }
+  verify :method => :post, :only => [:saveOrder], :redirect_to => {:action => :index}
   
   # Index page.
   def index    
@@ -23,8 +23,8 @@ class OrderingController < ApplicationController
     if @group_order
       # Group has already ordered, so get the results...
       for article in @group_order.group_order_articles
-        result = article.orderResult
-        ordered_articles[article.order_article_id] = { 'quantity' => article.quantity,
+        result = article.result
+        ordered_articles[article.order_article_id] = {'quantity' => article.quantity,
                                                    'tolerance' => article.tolerance,
                                                    'quantity_result' => result[:quantity],
                                                    'tolerance_result' => result[:tolerance]}
@@ -61,53 +61,53 @@ class OrderingController < ApplicationController
   
   # Update changes to a current order.
   def saveOrder
-    order = @order # Get the object through before_filter
-    if (params[:total_balance].to_i < 0)
+    if (params[:total_balance].to_i < 0)  #TODO: Better use a real test on sufficiant funds
       flash[:error] = 'Der Bestellwert übersteigt das verfügbare Guthaben.'
       redirect_to :action => 'order'
     elsif (ordered = params[:ordered])
-       begin
-         Order.transaction do
-           # Create group order if necessary...
-           if (groupOrder = order.group_orders.find(:first, :conditions => "ordergroup_id = #{@ordergroup.id}", :include => [:group_order_articles]))
-              if (params[:version].to_i != groupOrder.lock_version) # check for conflicts well ahead
-                raise ActiveRecord::StaleObjectError
-              end
-           else
-              groupOrder = GroupOrder.new(:ordergroup => @ordergroup, :order => order, :updated_by => @current_user, :price => 0)
-              groupOrder.save!
-           end
-           # Create/update GroupOrderArticles...
-           newGroupOrderArticles = Array.new
-           for article in order.order_articles
-              # Find the GroupOrderArticle, create a new one if necessary...
-              groupOrderArticles = groupOrder.group_order_articles.select{ |v| v.order_article_id == article.id }
-              unless (groupOrderArticle = groupOrderArticles[0])
-                groupOrderArticle = GroupOrderArticle.create(:group_order => groupOrder, :order_article_id => article.id, :quantity => 0, :tolerance => 0)           
-              end
-              # Get ordered quantities and update GroupOrderArticle/-Quantities...
-              unless (quantities = ordered.delete(article.id.to_s)) && (quantity = quantities['quantity']) && (tolerance = quantities['tolerance'])
-                quantity = tolerance = 0
-              end
-              groupOrderArticle.update_quantities(quantity.to_i, tolerance.to_i)
-              # Add to new list of GroupOrderArticles:
-              newGroupOrderArticles.push(groupOrderArticle)
-           end
-           groupOrder.group_order_articles = newGroupOrderArticles
-           groupOrder.update_price!
-           groupOrder.updated_by = @current_user
-           groupOrder.save!
-           order.update_quantities
-           order.save!
-         end         
-         flash[:notice] = 'Die Bestellung wurde gespeichert.'
-       rescue ActiveRecord::StaleObjectError
-         flash[:error] = 'In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.'
-       rescue => exception
-         logger.error('Failed to update order: ' + exception.message)
-         flash[:error] = 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
-       end
-       redirect_to :action => 'my_order_result', :id => order
+      begin
+        Order.transaction do
+          # Try to find group_order
+          group_order = @order.group_orders.first :conditions => "ordergroup_id = #{@ordergroup.id}",
+                                                  :include => [:group_order_articles]
+          # Create group order if necessary...
+          unless group_order.nil?
+            # check for conflicts well ahead
+            if (params[:version].to_i != group_order.lock_version)
+              raise ActiveRecord::StaleObjectError
+            end
+          else
+            group_order = @ordergroup.group_orders.create!(:order => @order, :updated_by => @current_user, :price => 0)
+          end
+
+          # Create/update group_order_articles...
+          for order_article in @order.order_articles
+
+            # Find the group_order_article, create a new one if necessary...
+            group_order_article = group_order.group_order_articles.detect { |v| v.order_article_id == order_article.id }
+            if group_order_article.nil?
+              group_order_article = group_order.group_order_articles.create(:order_article_id => order_article.id)
+            end
+
+            # Get ordered quantities and update group_order_articles/_quantities...
+            quantities = ordered.fetch(order_article.id.to_s, {'quantity' => 0, 'tolerance' => 0})
+            group_order_article.update_quantities(quantities['quantity'].to_i, quantities['tolerance'].to_i)
+
+            # Also update results for the order_article
+            order_article.update_results!
+          end
+
+          group_order.update_price!
+          group_order.update_attribute(:updated_by, @current_user)
+        end
+        flash[:notice] = 'Die Bestellung wurde gespeichert.'
+      rescue ActiveRecord::StaleObjectError
+        flash[:error] = 'In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.'
+      rescue => exception
+        logger.error('Failed to update order: ' + exception.message)
+        flash[:error] = 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
+      end
+        redirect_to :action => 'my_order_result', :id => @order
     end
   end
   

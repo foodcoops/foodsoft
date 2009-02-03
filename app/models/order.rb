@@ -100,11 +100,11 @@ class Order < ActiveRecord::Base
   # :fc, guess what...
   def sum(type = :gross)
     total = 0
-    if type == :clear || type == :gross || type == :fc
+    if type == :net || type == :gross || type == :fc
       for oa in order_articles.ordered.all(:include => [:article,:article_price])
         quantity = oa.units_to_order * oa.price.unit_quantity
         case type
-        when :clear
+        when :net
           total += quantity * oa.price.price
         when :gross
           total += quantity * oa.price.gross_price
@@ -133,49 +133,24 @@ class Order < ActiveRecord::Base
     unless finished?
       Order.transaction do
         # Update order_articles. Save the current article_price to keep price consistency
+        # Also save results for each group_order_result
         order_articles.all(:include => :article).each do |oa|
           oa.update_attribute(:article_price, oa.article.article_prices.first)
+          oa.group_order_articles.each { |goa| goa.save_results! }
         end
         # set new order state (needed by notify_order_finished)
         update_attributes(:state => 'finished', :ends => Time.now, :updated_by => user)
 
-        # TODO: delete data, which is no longer required ...
-        # group_order_article_quantities... order_articles with units_to_order == 0 ? ...
+        # Clean up
+        # Delete no longer required order-history (group_order_article_quantities) and
+        # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
+        order_articles.each do |oa|
+          oa.group_order_articles.each { |goa| goa.group_order_article_quantities.clear }
+        end
       end
 
       # notify order groups
       notify_order_finished
-    end
-  end
-
-  # TODO: I can't understand, why its going out from the group_order_articles perspective.
-  # Why we can't just iterate through the order_articles?
-  #
-  # Updates the ordered quantites of all OrderArticles from the GroupOrderArticles.
-  # This method is fired after an ordergroup has saved/updated his order.
-  def update_quantities
-    indexed_order_articles = {}  # holds the list of updated OrderArticles indexed by their id
-    # Get all GroupOrderArticles for this order and update OrderArticle.quantity/.tolerance/.units_to_order from them...
-    group_order_articles = GroupOrderArticle.all(:conditions => ['group_order_id IN (?)', group_order_ids],
-                                                 :include => [:order_article])
-    for goa in group_order_articles
-      if (order_article = indexed_order_articles[goa.order_article.id.to_s])
-        # order_article has already been fetched, just update...
-        order_article.quantity = order_article.quantity + goa.quantity
-        order_article.tolerance = order_article.tolerance + goa.tolerance
-        order_article.units_to_order = order_article.article.calculate_order_quantity(order_article.quantity, order_article.tolerance)
-      else
-        # First update to OrderArticle, need to store in orderArticle hash...
-        order_article = goa.order_article
-        order_article.quantity = goa.quantity
-        order_article.tolerance = goa.tolerance
-        order_article.units_to_order = order_article.article.calculate_order_quantity(order_article.quantity, order_article.tolerance)
-        indexed_order_articles[order_article.id.to_s] = order_article
-      end
-    end
-    # Commit changes to database...
-    OrderArticle.transaction do
-      indexed_order_articles.each_value { | value | value.save! }
     end
   end
   

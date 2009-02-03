@@ -4,9 +4,6 @@ class HomeController < ApplicationController
   def index
     @currentOrders = Order.open
     @ordergroup = @current_user.ordergroup
-    if @ordergroup
-      @financial_transactions = @ordergroup.financial_transactions.find(:all, :order => 'created_on desc', :limit => 3)
-    end
     # unaccepted tasks
     @unaccepted_tasks = @current_user.unaccepted_tasks
     # task in next week

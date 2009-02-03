@@ -22,7 +22,7 @@ for group_order in @order.group_orders
 
   total = 0
   data = []
-  group_order.group_order_articles.each do |goa|
+  group_order.group_order_articles.ordered.each do |goa|
     price = goa.order_article.price.fc_price
     quantity = goa.quantity
     sub_total = price * quantity

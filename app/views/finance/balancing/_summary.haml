@@ -5,7 +5,7 @@
   %table
     %tr
       %td Nettobetrag:
-      %td= number_to_currency(order.sum(:clear))
+      %td= number_to_currency(order.sum(:net))
     %tr
       %td Bruttobetrag:
       %td= number_to_currency(order.sum(:gross))

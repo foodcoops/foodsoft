@@ -3,21 +3,21 @@ class RefactorOrderLogic < ActiveRecord::Migration
     # TODO: Combine migrations since foodsoft3-development into one file
     # and try to build a migration path from old data.
     
-    # == Ordergroups
-    add_column :groups, :deleted_at, :datetime # acts_as_paranoid
-    remove_column :groups, :actual_size        # Useless, desposits are better stored within a transaction.note
-    # move contact-infos from users to ordergroups
-    add_column :groups, :contact_person, :string
-    add_column :groups, :contact_phone, :string
-    add_column :groups, :contact_address, :string
-    Ordergroup.all.each do |ordergroup|
-      contact = ordergroup.users.first
-      if contact
-        ordergroup.update_attributes :contact_person => contact.name,
-          :contact_phone => contact.phone, :contact_address => contact.address
-      end
-    end
-    remove_column :users, :address
+#    # == Ordergroups
+#    add_column :groups, :deleted_at, :datetime # acts_as_paranoid
+#    remove_column :groups, :actual_size        # Useless, desposits are better stored within a transaction.note
+#    # move contact-infos from users to ordergroups
+#    add_column :groups, :contact_person, :string
+#    add_column :groups, :contact_phone, :string
+#    add_column :groups, :contact_address, :string
+#    Ordergroup.all.each do |ordergroup|
+#      contact = ordergroup.users.first
+#      if contact
+#        ordergroup.update_attributes :contact_person => contact.name,
+#          :contact_phone => contact.phone, :contact_address => contact.address
+#      end
+#    end
+#    remove_column :users, :address
 #
 #    # == Article
 #    rename_column :articles, :net_price, :price
@@ -77,6 +77,11 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #
 #    # == GroupOrder
 #    change_column :group_orders, :updated_by_user_id, :integer, :default => nil, :null => true
+
+    # == GroupOrderArticle
+    # The order result in ordergroup is now saved!
+    add_column :group_order_articles, :quantity_result, :integer, :default => nil
+    add_column :group_order_articles, :tolerance_result, :integer, :default => nil
   end
 
   def self.down

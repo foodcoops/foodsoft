@@ -1,10 +1,10 @@
 - title _("Show order")
 #element_navigation
-  = link_to_unless @order.previous == @order, _("Previous order"), @order.previous
+  = link_to_unless @order.previous == @order, "<< #{@order.previous.supplier.name}", @order.previous
   |
   = link_to _("Overview"), orders_path
   |
-  = link_to_unless @order.next == @order, _("Next order"), @order.next
+  = link_to_unless @order.next == @order, "#{@order.next.supplier.name} >>", @order.next
 
 // Order summary
 .left_column{:style => "width:65em"}
@@ -33,18 +33,21 @@
       = "[#{@order.group_orders.find(:all, :include => :ordergroup).collect{|g| g.ordergroup.name}.join(', ')}]"
       
     %p
-      Bruttosummer aller Artikel
-      %b= number_to_currency(@order.sum(:gross))
-      - if @order.finished?
-        |
-        Bestellte Artikel:
-        %b= @order.order_articles.ordered.count
+      Netto/Bruttosumme aller Artikel
+      %b= "#{number_to_currency(@order.sum(:net))} / #{number_to_currency(@order.sum(:gross))}"
+    %p
+      Bestellte Artikel:
+      %b= @order.order_articles.ordered.count
 
-    - if @order.open?
-      %p
-        = link_to icon(:edit), edit_order_path(@order)
-        = link_to icon(:delete), @order, :confirm => "Willst du wirklich die Bestellung löschen?", :method => :delete
-        = link_to '[beenden]', finish_order_path(@order), :method => :post
+    
+    %p
+      Aktionen:
+      - if @order.open?
+        = link_to "Bearbeiten", edit_order_path(@order)
+        = link_to 'Beenden!', finish_order_path(@order), :method => :post, :confirm => "Willst Du wirklich die Bestellung beenden?\nEs gibt kein zurück.."
+      - unless @order.closed?
+        = link_to "Löschen", @order, :confirm => "Willst du wirklich die Bestellung löschen?", :method => :delete
+        
     
     - unless @order.open?
       %p

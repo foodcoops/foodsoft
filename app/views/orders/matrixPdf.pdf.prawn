@@ -10,7 +10,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom-5] do
 end
 
 max_order_articles_per_page = 17 # How many order_articles shoud written on a page
-order_articles = @order.order_articles
+order_articles = @order.order_articles.ordered
 
 pdf.text "Artikelübersicht", :style => :bold
 pdf.move_down 5

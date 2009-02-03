@@ -54,7 +54,7 @@
       |
       = link_to _('Upload articles'), upload_supplier_articles_path(@supplier)
       |
-      = link_to_if @current_user.role_orders?, _('Create order'), {:controller => 'orders', :action => 'new', :id => @supplier }
+      = link_to_if @current_user.role_orders?, _('Create order'), {:controller => 'orders', :action => 'new', :supplier_id => @supplier }
 
     #article_filter
       #article_search_form{:style=>"display:inline;"}

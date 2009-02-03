@@ -41,7 +41,7 @@ und OrderArticle miteinander verbunden.
 Bei jeder Bestellung wird außerdem die Summe der Menge, Toleranz in GroupOrderArticle
 abgelegt. Allerdings muss jede Aenderung dieser Mengen mit protokolliert werden.
 Dies ist wichtig, weil spaeter die Zuteilung der Einheiten pro bestellten Artikel
-nach der chronoligischen Reihenfolge erfolgt. (s.u.)
+nach der chronologischen Reihenfolge erfolgt. (s.u.)
 Das passiert dann in der Tabelle group_order_article_quantities.
 (GroupOrderArticleQuantity)
 

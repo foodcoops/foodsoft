@@ -76,34 +76,9 @@ class Article < ActiveRecord::Base
     updated_at > 2.days.ago
   end
   
-  # Returns how many units of this article need to be ordered given the specified order quantity and tolerance.
-  # This is determined by calculating how many units can be ordered from the given order quantity, using
-  # the tolerance to order an additional unit if the order quantity is not quiet sufficient. 
-  # There must always be at least one item in a unit that is an ordered quantity (no units are ever entirely 
-  # filled by tolerance items only).  
-  # 
-  # Example:
-  # 
-  # unit_quantity | quantity | tolerance | calculate_order_quantity
-  # --------------+----------+-----------+-----------------------
-  #      4        |    0     |     2     |           0
-  #      4        |    0     |     5     |           0
-  #      4        |    2     |     2     |           1
-  #      4        |    4     |     2     |           1
-  #      4        |    4     |     4     |           1
-  #      4        |    5     |     3     |           2
-  #      4        |    5     |     4     |           2
-  # 
-  def calculate_order_quantity(quantity, tolerance = 0)
-    unit_size = unit_quantity
-    units = quantity / unit_size
-    remainder = quantity % unit_size
-    units += ((remainder > 0) && (remainder + tolerance >= unit_size) ? 1 : 0)
-  end
-
   # If the article is used in an open Order, the Order will be returned.
   def in_open_order
-    order_articles = OrderArticle.all(:conditions => ['order_id IN (?)', Order.open.collect {|o| o.id }])
+    order_articles = OrderArticle.all(:conditions => ['order_id IN (?)', Order.open.collect(&:id)])
     order_article = order_articles.detect {|oa| oa.article_id == id }
     order_article ? order_article.order : nil
   end

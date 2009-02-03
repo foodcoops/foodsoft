@@ -96,14 +96,14 @@
         -%>
             <tr class="<%= cycle('even', 'odd', :name => 'articles') %>" valign="top">
                 <td class="name">
-                  <% unless order_article.article.note.empty? %>
+                  <% unless order_article.article.note.blank? %>
                       <%= order_article.article.name %> <%= image_tag "lamp_grey.png", {:alt => _("Show note"), :size => "15x16", :border => "0", :onmouseover => "$('note_#{i}').show();", :onmouseout => "$('note_#{i}').hide();" }%>
                   <% else %>
                     <%= order_article.article.name %>
                   <% end %>
                 </td>
 								<td><%=h order_article.article.origin %></td>
-								<td><%=h truncate order_article.article.manufacturer, 11 %></td>
+								<td><%=h truncate order_article.article.manufacturer, :length => 11 %></td>
                 <td><%= @unit[i] %> * <%=h order_article.article.unit %></td>
                 <td><%= number_to_currency(@price[i]) %></td>
                 <td id="units_<%= i %>"><%= order_article.units_to_order %></td>
@@ -127,7 +127,7 @@
                 </td>
                 <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €</td>
             </tr>
-            <% unless order_article.article.note.empty? -%>
+            <% unless order_article.article.note.blank? -%>
             <tr id="note_<%= i %>" class="note" style="display:none">
               <td colspan="10"><%=h order_article.article.note %> | <%=h order_article.article.manufacturer %></td>
 			</tr>
