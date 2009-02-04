@@ -79,9 +79,8 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #    change_column :group_orders, :updated_by_user_id, :integer, :default => nil, :null => true
 
     # == GroupOrderArticle
-    # The order result in ordergroup is now saved!
-    add_column :group_order_articles, :quantity_result, :integer, :default => nil
-    add_column :group_order_articles, :tolerance_result, :integer, :default => nil
+    # The total order result in ordergroup is now saved!
+    add_column :group_order_articles, :result, :integer, :default => nil
   end
 
   def self.down

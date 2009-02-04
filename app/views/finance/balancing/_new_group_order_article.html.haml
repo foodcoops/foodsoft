@@ -6,11 +6,11 @@
   = form.error_messages
   %p
     Gruppe:
-    = form.select :ordergroup_id, Ordergroup.all(:order => "name").collect {|og| [og.name, og.id] }
+    = form.select :ordergroup_id, Ordergroup.all(:order => "name").collect{ |og| [og.name, og.id] }
   %p
     Menge:
-    = form.text_field "quantity", :size => 5
-    = form.hidden_field "order_article_id"
+    = form.text_field :result, :size => 5
+    = form.hidden_field :order_article_id
   %p
     = submit_tag "Speichern"
     | 

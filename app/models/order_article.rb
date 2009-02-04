@@ -43,11 +43,12 @@ class OrderArticle < ActiveRecord::Base
   # Count quantities of belonging group_orders. 
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
-    quantity = group_order_articles.collect(&:quantity).sum
+    quantity = group_order_articles.collect(&:result).sum
     {:quantity => quantity, :price => quantity * price.fc_price}
   end
 
   # Update quantity/tolerance/units_to_order from group_order_articles
+  # This is only used in opened orders.
   def update_results!
     quantity = group_order_articles.collect(&:quantity).sum
     tolerance = group_order_articles.collect(&:tolerance).sum
@@ -78,6 +79,10 @@ class OrderArticle < ActiveRecord::Base
     units = quantity / unit_size
     remainder = quantity % unit_size
     units += ((remainder > 0) && (remainder + tolerance >= unit_size) ? 1 : 0)
+  end
+
+  def ordered_quantities_equal_to_group_orders?
+    (units_to_order * price.unit_quantity) == group_orders_sum[:quantity]
   end
 
   private

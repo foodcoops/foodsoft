@@ -59,7 +59,7 @@ while (page_number * max_order_articles_per_page < total_num_order_articles) do 
     for order_article in current_order_articles
       # get the Ordergroup result for this order_article
       goa = order_article.group_order_articles.first :conditions => { :group_order_id => group_order.id }
-      group_result << ((goa.nil? || goa == 0) ? "" : goa.quantity.to_i)
+      group_result << ((goa.nil? || goa == 0) ? "" : goa.result.to_i)
     end
     groups_data << group_result
   end

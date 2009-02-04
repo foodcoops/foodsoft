@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090119155930) do
+ActiveRecord::Schema.define(:version => 20090120184410) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20090119155930) do
     t.integer  "quantity",         :default => 0, :null => false
     t.integer  "tolerance",        :default => 0, :null => false
     t.datetime "updated_on",                      :null => false
+    t.integer  "result"
   end
 
   add_index "group_order_articles", ["group_order_id", "order_article_id"], :name => "goa_index", :unique => true

@@ -16,5 +16,5 @@
       %th Pfand
       %th{:colspan => "2"}
   %tbody#result_table
-    - for order_article in @order.order_articles.all(:include => [:article, :article_price])
+    - for order_article in @order.order_articles.ordered.all(:include => [:article, :article_price])
       = render :partial => "order_article_result", :locals => {:order_article => order_article}

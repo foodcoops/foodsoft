@@ -30,7 +30,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
   attr_accessor :ordergroup_id  # To create an new GroupOrder if neccessary
 
-  named_scope :ordered, :conditions => 'quantity_result > 0 OR tolerance_result > 0'
+  named_scope :ordered, :conditions => 'result > 0'
   
   # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties 
   # and the associated GroupOrderArticleQuantities chronologically.
@@ -155,18 +155,14 @@ class GroupOrderArticle < ActiveRecord::Base
 
   # Returns order result,
   # either calcualted on the fly or fetched from quantity_/tolerance_result
-  def result
-    if quantity_result.nil?
-      calculate_result
-    else
-      {:quantity => quantity_result, :tolerance => tolerance_result, :total => quantity_result + tolerance_result}
-    end
+  # After an order is finished, there is only the result
+  def result(type = :total)
+    self[:result] || calculate_result[type]
   end
 
-  # This is used when finishing the order.
+  # This is used during order.finish!.
   def save_results!
-    self.quantity_result = calculate_result[:quantity]
-    self.tolerance_result = calculate_result[:tolerance]
-    save!
+    self.update_attribute(:result, calculate_result[:total])
   end
+  
 end

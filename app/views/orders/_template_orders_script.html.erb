@@ -1,18 +1,20 @@
 <script type="text/javascript">
 //<![CDATA[
 	// Preset selected order articles per template order:
-	var template = new Array();	
+	var template = new Array();
+<% current_article_ids = @order.supplier.articles.available.map(&:id) -%>
 <% 	i = -1; for order in @template_orders -%>
-	template[<%= i += 1 %>] = new Array(<%= @order.supplier.getArticlesAvailableForOrdering.collect{|a| !order.order_article_results.detect{|t| t.name == a.name }.nil?}.join(', ') %>);
+	template[<%= i += 1 %>] = new Array(<%= current_article_ids.collect { |id| order.article_ids.include?(id) }.join(', ') %>);
 <%	end -%>	
 	// Call with index into template-array to select order articles from template.
 	function useTemplate(id) {
 		if (id >= 0 && id < template.length) {
-    	<% i = -1; for article in @order.supplier.getArticlesAvailableForOrdering -%>
-			var status = template[id][<%= i += 1 %>]
-			$('checkbox_<%= article.id %>').checked = status;
-			highlightRow('<%= article.id %>',status);
-	    <% end -%>}
-	}  
+    <% i = -1; for article_id in  current_article_ids -%>
+      var status = template[id][<%= i += 1 %>]
+      $('checkbox_<%= article_id %>').checked = status;
+      highlightRow('<%= article_id %>',status);
+    <% end -%>
+    }
+  }
 //]]>
 </script>

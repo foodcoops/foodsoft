@@ -71,7 +71,7 @@ class Finance::TransactionsController < ApplicationController
     amount = params[:financial_transaction][:amount]
     note = params[:financial_transaction][:note]
     begin
-      @group.addFinancialTransaction(amount, note, @current_user)
+      @group.add_financial_transaction(amount, note, @current_user)
       flash[:notice] = 'Transaktion erfolgreich angelegt.'
       redirect_to :action => 'index'
     rescue => e
@@ -90,7 +90,7 @@ class Finance::TransactionsController < ApplicationController
     params[:financial_transactions].each do |trans|
       # ignore empty amount fields ...
       unless trans[:amount].blank?
-        Ordergroup.find(trans[:ordergroup_id]).addFinancialTransaction trans[:amount], note, @current_user
+        Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction trans[:amount], note, @current_user
       end
     end
     flash[:notice] = 'Saved all transactions successfully'

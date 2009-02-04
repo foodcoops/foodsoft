@@ -76,12 +76,18 @@ class Order < ActiveRecord::Base
   # Returns OrderArticles in a nested Array, grouped by category and ordered by article name.
   # The array has the following form:
   # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
-  def get_articles
+  def articles_grouped_by_category
     order_articles.all(:include => [:article, :article_price], :order => 'articles.name').group_by { |a|
       a.article.article_category.name
     }.sort { |a, b| a[0] <=> b[0] }
   end
-  memoize :get_articles
+  memoize :articles_grouped_by_category
+
+  def articles_sort_by_category
+    order_articles.all(:include => [:article], :order => 'articles.name').sort do |a,b|
+      a.article.article_category.name <=> b.article.article_category.name
+    end
+  end
   
   # Returns the defecit/benefit for the foodcoop
   # Requires a valid invoice, belonging to this order
@@ -117,9 +123,9 @@ class Order < ActiveRecord::Base
         for goa in go.group_order_articles
           case type
           when :groups
-            total += goa.quantity * goa.order_article.price.fc_price
+            total += goa.result * goa.order_article.price.fc_price
           when :groups_without_markup
-            total += goa.quantity * goa.order_article.price.gross_price
+            total += goa.result * goa.order_article.price.gross_price
           end
         end
       end
@@ -165,7 +171,7 @@ class Order < ActiveRecord::Base
     transaction do                                        # Start updating account balances
       for group_order in gos
         price = group_order.price * -1                    # decrease! account balance
-        group_order.ordergroup.addFinancialTransaction(price, transaction_note, user)
+        group_order.ordergroup.add_financial_transaction(price, transaction_note, user)
       end
       self.update_attributes! :state => 'closed', :updated_by => user
     end

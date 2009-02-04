@@ -24,11 +24,10 @@ for group_order in @order.group_orders
   data = []
   group_order.group_order_articles.ordered.each do |goa|
     price = goa.order_article.price.fc_price
-    quantity = goa.quantity
-    sub_total = price * quantity
+    sub_total = price * goa.result
     total += sub_total
     data <<  [goa.order_article.article.name,
-              quantity, number_with_precision(price),
+              goa.result, number_with_precision(price),
               goa.order_article.price.unit_quantity,
               goa.order_article.article.unit,
               number_with_precision(sub_total)]

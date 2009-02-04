@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
   def new
     @supplier = Supplier.find(params[:supplier_id])
     @order = @supplier.orders.build :ends => 4.days.from_now
-    @template_orders = @supplier.orders.finished :order => 'starts DESC', :include => "order_article_results"
+    @template_orders = @supplier.orders.finished :order => 'starts DESC', :limit => 5
   end
 
   # Save a new order.

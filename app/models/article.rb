@@ -34,6 +34,7 @@ class Article < ActiveRecord::Base
   has_many :article_prices, :order => "created_at"
 
   named_scope :in_stock, :conditions => "quantity > 0", :order => 'suppliers.name', :include => :supplier
+  named_scope :available, :conditions => {:availability => true}
 
   # Validations
   validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category_id
@@ -170,24 +171,6 @@ class Article < ActiveRecord::Base
       nil
     end
   end
-  
-  # Returns Articles in a nested Array, grouped by category and ordered by article name.
-  # The array has the following form:
-  # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
-  # TODO: force article to belong to a category and remove this complicated implementation!
-  def self.group_by_category(articles)
-    articles_by_category = {}
-    ArticleCategory.find(:all).each do |category|
-      articles_by_category.merge!(category.name.to_s => articles.select {|article| article.article_category and article.article_category.id == category.id })
-    end
-    # add articles without a category
-    articles_by_category.merge!( "--" => articles.select {|article| article.article_category == nil})
-    # return "clean" hash, sorted by category.name
-    return articles_by_category.reject {|category, array| array.empty?}.sort
-
-    # it could be so easy ... but that doesn't work for empty category-ids...
-    # articles.group_by {|a| a.article_category}.sort {|a, b| a[0].name <=> b[0].name}
-  end
 
   def update_quantity(amount)
     update_attribute :quantity, quantity + amount
@@ -203,7 +186,7 @@ class Article < ActiveRecord::Base
   # Create an ArticlePrice, when the price-attr are changed.
   def update_price_history
     if price_changed?
-      article_prices.create(
+      article_prices.build(
         :price => price,
         :tax => tax,
         :deposit => deposit,

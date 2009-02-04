@@ -65,50 +65,22 @@ class Ordergroup < Group
 
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.
-  def addFinancialTransaction(amount, note, user)
+  def add_financial_transaction(amount, note, user)
     transaction do      
       trans = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
       trans.save!
       self.account_balance += trans.amount
       self.account_updated = trans.created_on
       save!
-      notifyNegativeBalance(trans) 
+      notify_negative_balance(trans) 
     end
   end
-  
-  # Returns all GroupOrders by this group that are currently running.
-  def findCurrent
-    group_orders.find(:all, :conditions => ["orders.finished = ? AND orders.starts < ? AND (orders.ends IS NULL OR orders.ends > ?)", false, Time.now, Time.now], :include => :order)
-  end
-  
-  #find expired (lapsed) but not manually finished orders
-  def findExpiredOrders
-    group_orders.find(:all, :conditions => ["orders.ends < ?", Time.now], :include => :order, :order => 'orders.ends DESC')
-  end
-  
-  # Returns all GroupOrderResults by this group that are finished but not booked yet.
-  def findFinishedNotBooked 
-    GroupOrderResult.find(:all, 
-                          :conditions => ["group_order_results.group_name = ? AND group_order_results.order_id = orders.id AND orders.finished = ? AND orders.booked = ? ", self.name, true, false],
-                          :include => :order,
-                          :order => 'orders.ends DESC')
-  end
-  
-  # Returns all GroupOrderResults for booked orders
-  def findBookedOrders(limit = false, offset = 0)
-    GroupOrderResult.find(:all,
-                         :conditions => ["group_order_results.group_name = ? AND group_order_results.order_id = orders.id AND orders.finished = ? AND orders.booked = ? ", self.name, true, true],
-                         :include => :order,
-                         :order => "orders.ends DESC",
-                         :limit => limit, 
-                         :offset => offset)
-  end
-  
- private
+
+  private
   
   # If this order group's account balance is made negative by the given/last transaction, 
   # a message is sent to all users who have enabled notification.
-  def notifyNegativeBalance(transaction)
+  def notify_negative_balance(transaction)
     # Notify only when order group had a positive balance before the last transaction:
     if (transaction.amount < 0 && self.account_balance < 0 && self.account_balance - transaction.amount >= 0) 
       users = self.users.reject { |u| u.settings["notify.negativeBalance"] != '1' }

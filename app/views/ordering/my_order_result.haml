@@ -62,11 +62,11 @@
             %th
               %abbr{:title => "Menge + Toleranz"} Bestellt
             %th
-              %abbr{:title => "Unter Berücksichtigung der anderen Gruppen"} Zugeteilt
+              %abbr{:title => "Unter Berücksichtigung der anderen Gruppen"} Bekommen
             %th Gesamtpreis
         %tbody
           - total = 0 #set counter for order-sum
-          - for category_name, order_articles in @order.get_articles
+          - for category_name, order_articles in @order.articles_grouped_by_category
             %tr{:style => "background-color:#EFEFEF"}
               %td{:style => "text-align:left;"}=h category_name
               %td{:colspan => "9"}
@@ -76,8 +76,11 @@
               - if goa
                 - quantity = goa.quantity
                 - tolerance = goa.tolerance
-                - result = goa.result[:total]
-                - sub_total = oa.price.fc_price * (quantity + tolerance)
+                - result = goa.result
+                - if @order.open?
+                  - sub_total = oa.price.fc_price * (quantity + tolerance)
+                - else
+                  - sub_total = oa.price.fc_price * result
               - else
                 - quantity, tolerance, result, sub_total = 0, 0, 0, 0
               - total += sub_total

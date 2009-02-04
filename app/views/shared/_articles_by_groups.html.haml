@@ -3,7 +3,7 @@
     %tr
       %th{:style => "width:40%"} Name
       %th
-        %acronym{:title => "zugeteilte Einheiten (davon aus Toleranzmenge)"} Menge
+        %acronym{:title => "zugeteilte Einheiten"} Menge
       %th
         %acronym{:title => "Preis incl. MwSt, Pfand und Foodcoop-Aufschlag"} FC-Preis
       %th
@@ -20,11 +20,11 @@
       - total = 0
       - for goa in group_order.group_order_articles.ordered.all(:include => :order_article)
         - fc_price = goa.order_article.price.fc_price
-        - subTotal = fc_price * goa.quantity
+        - subTotal = fc_price * goa.result
         - total += subTotal
         %tr{:class => cycle('even', 'odd', :name => 'articles')}
           %td{:style => "width:40%"}=h goa.order_article.article.name
-          %td= "#{goa.result[:quantity]} (#{goa.result[:tolerance]})"
+          %td= goa.result
           %td= number_to_currency(fc_price)
           %td= goa.order_article.price.unit_quantity
           %td= goa.order_article.article.unit

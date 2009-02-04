@@ -3,7 +3,10 @@
   "Element.toggle('group_order_articles_#{order_article.id}'); |
   Element.toggleClassName(this.up('td'), 'open')" |
 %td= order_article.article.order_number
-%td= order_article.units_to_order
+%td
+  = order_article.units_to_order
+  - unless order_article.ordered_quantities_equal_to_group_orders?
+    %span{:style => "color:red;font-weight: bold"} !
 %td= order_article.price.unit_quantity.to_s + ' * ' + order_article.article.unit.to_s
 %td= number_to_currency(order_article.price.price, :unit => "")
 %td= number_to_currency(order_article.price.fc_price, :unit => "")

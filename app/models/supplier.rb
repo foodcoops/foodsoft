@@ -24,7 +24,8 @@
 class Supplier < ActiveRecord::Base
   acts_as_paranoid  # Avoid deleting the supplier for consistency of order-results
 
-  has_many :articles, :dependent => :destroy
+  has_many :articles, :dependent => :destroy,
+    :include => [:article_category], :order => 'article_categories.name, articles.name'
   has_many :orders
   has_many :deliveries
   has_many :invoices
@@ -40,10 +41,9 @@ class Supplier < ActiveRecord::Base
   # for the sharedLists-App
   belongs_to :shared_supplier
   
-  # Returns all articles for this supplier that are available and have a valid price, grouped by article category and ordered by name.
-  def getArticlesAvailableForOrdering
-    articles = Article.find(:all, :conditions => ['supplier_id = ? AND availability = ?', self.id, true], :order => 'article_categories.name, articles.name', :include => :article_category)
-    articles.select {|article| article.fc_price}
+  # Returns all articles for this supplier that are available, grouped by article category and ordered by name.
+  def get_articles_for_ordering
+    articles.available.all.group_by { |a| a.article_category.name }
   end
   
   # sync all articles with the external database
@@ -52,7 +52,7 @@ class Supplier < ActiveRecord::Base
   def sync_all
     updated_articles = Array.new
     outlisted_articles = Array.new
-    for article in articles.find(:all, :order => "article_categories.name", :include => :article_category)
+    for article in articles
       # try to find the associated shared_article
       shared_article = article.shared_article
       if shared_article

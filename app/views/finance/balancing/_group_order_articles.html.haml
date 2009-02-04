@@ -15,7 +15,7 @@
           %td{:style=>"width:50%"}
             = group_order_article.group_order.ordergroup.name
           %td{:id => "group_order_article_#{group_order_article.id}_quantity"}
-            = group_order_article.quantity
+            = group_order_article.result
           %td.currency
             = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.quantity, :unit => "")
           %td.actions{:style=>"width:1em"}

@@ -111,10 +111,10 @@ class Finance::BalancingController < ApplicationController
   end
 
   def new_group_order_article
-    group_order_article = OrderArticle.find(params[:id]).group_order_articles.build
+    goa = OrderArticle.find(params[:id]).group_order_articles.build
     render :update do |page|
       page["edit_box"].replace_html :partial => "new_group_order_article",
-        :locals => {:group_order_article => group_order_article}
+        :locals => {:group_order_article => goa}
       page["edit_box"].show
     end
   end
@@ -185,7 +185,6 @@ class Finance::BalancingController < ApplicationController
       page["edit_box"].hide
       page["group_order_articles_#{goa.order_article.id}"].replace_html :partial => 'group_order_articles',
         :locals => {:order_article => goa.order_article}
-      page["group_order_article_#{goa.id}"].visual_effect :highlight, :duration => 2
       page["summary"].replace_html :partial => 'summary', :locals => {:order => goa.order_article.order}
       page["order_profit"].visual_effect :highlight, :duration => 2
     end

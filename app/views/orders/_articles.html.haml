@@ -6,7 +6,7 @@
     %th Bestellte Einheiten
     %th Volle Gebinde
   - total_net, total_gross, counter = 0, 0, 0
-  - order.get_articles.each do |category_name, order_articles|
+  - order.articles_grouped_by_category.each do |category_name, order_articles|
     %tr{:style => "background-color:#EFEFEF"}
       %td{:style => "text-align:left; color: grey;"}=h category_name
       %td{:colspan => "9"}

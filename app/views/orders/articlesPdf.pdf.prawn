@@ -20,8 +20,8 @@ for order_article in @order.order_articles.ordered
   data = []
   for goa in order_article.group_order_articles
     data << [goa.group_order.ordergroup.name,
-            goa.quantity,
-            number_with_precision(order_article.price.fc_price * goa.quantity)]
+            goa.result,
+            number_with_precision(order_article.price.fc_price * goa.result)]
   end
 
   pdf.table data,

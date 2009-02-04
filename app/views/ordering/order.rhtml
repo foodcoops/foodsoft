@@ -82,7 +82,7 @@
         <%- 
             total = 0
             i = 0
-			@articles_by_category.each do |category, order_articles|
+			@articles_grouped_by_category.each do |category, order_articles|
 				-%>
 						<tr style="background-color:#EFEFEF">
 							<td style="text-align:left"><b><%=h category %></b></td>

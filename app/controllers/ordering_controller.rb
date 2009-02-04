@@ -16,18 +16,19 @@ class OrderingController < ApplicationController
     @open_orders = Order.open
     @other_orders = @open_orders.reject{|order| order == @order}
     # Load order article data...
-    @articles_by_category = @order.get_articles
+    @articles_grouped_by_category = @order.articles_grouped_by_category
     # save results of earlier orders in array
     ordered_articles = Array.new
-    @group_order = @order.group_orders.find(:first, :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
+    @group_order = @order.group_orders.find(:first, 
+      :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
+
     if @group_order
       # Group has already ordered, so get the results...
-      for article in @group_order.group_order_articles
-        result = article.result
-        ordered_articles[article.order_article_id] = {'quantity' => article.quantity,
-                                                   'tolerance' => article.tolerance,
-                                                   'quantity_result' => result[:quantity],
-                                                   'tolerance_result' => result[:tolerance]}
+      for goa in @group_order.group_order_articles
+        ordered_articles[goa.order_article_id] = {:quantity => goa.quantity,
+                                                  :tolerance => goa.tolerance,
+                                                  :quantity_result => goa.result(:quantity),
+                                                  :tolerance_result => goa.result(:tolerance)}
       end
       @version = @group_order.lock_version
       @availableFunds = @ordergroup.get_available_funds(@group_order)
@@ -41,19 +42,19 @@ class OrderingController < ApplicationController
     @others_quantity = Array.new; @quantity = Array.new; @quantity_result = Array.new; @used_quantity = Array.new; @unused_quantity = Array.new
     @others_tolerance = Array.new; @tolerance = Array.new; @tolerance_result = Array.new; @used_tolerance = Array.new; @unused_tolerance = Array.new
     i = 0;
-    @articles_by_category.each do |category_name, order_articles|
+    @articles_grouped_by_category.each do |category_name, order_articles|
       for order_article in order_articles
         # price/unit size
         @price[i] = order_article.article.fc_price
         @unit[i] = order_article.article.unit_quantity
         # quantity
-        @quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['quantity'] : 0)
+        @quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:quantity] : 0)
         @others_quantity[i] = order_article.quantity - @quantity[i]
-        @used_quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['quantity_result'] : 0)
+        @used_quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:quantity_result] : 0)
         # tolerance
-        @tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['tolerance'] : 0)
+        @tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:tolerance] : 0)
         @others_tolerance[i] = order_article.tolerance - @tolerance[i]
-        @used_tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id]['tolerance_result'] : 0)
+        @used_tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:tolerance_result] : 0)
         i += 1
       end
     end
@@ -90,8 +91,8 @@ class OrderingController < ApplicationController
             end
 
             # Get ordered quantities and update group_order_articles/_quantities...
-            quantities = ordered.fetch(order_article.id.to_s, {'quantity' => 0, 'tolerance' => 0})
-            group_order_article.update_quantities(quantities['quantity'].to_i, quantities['tolerance'].to_i)
+            quantities = ordered.fetch(order_article.id.to_s, {:quantity => 0, :tolerance => 0})
+            group_order_article.update_quantities(quantities[:quantity].to_i, quantities[:tolerance].to_i)
 
             # Also update results for the order_article
             order_article.update_results!
