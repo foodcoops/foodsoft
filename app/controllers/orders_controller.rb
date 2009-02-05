@@ -53,9 +53,7 @@ class OrdersController < ApplicationController
 
   # Page to create a new order.
   def new
-    @supplier = Supplier.find(params[:supplier_id])
-    @order = @supplier.orders.build :ends => 4.days.from_now
-    @template_orders = @supplier.orders.finished :order => 'starts DESC', :limit => 5
+    @order = Order.new :ends => 4.days.from_now, :supplier_id => params[:supplier_id]
   end
 
   # Save a new order.
@@ -104,13 +102,13 @@ class OrdersController < ApplicationController
   # Renders the groups-orderd PDF.
   def groupsPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.supplier.name}_GruppenSortierung.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.name}_GruppenSortierung.pdf"
   end
   
   # Renders the articles-orderd PDF.
   def articlesPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.supplier.name}_ArtikelSortierung.pdf",
+    prawnto :filename => "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf",
             :prawn => { :left_margin => 48,
                         :right_margin => 48,
                         :top_margin => 48,
@@ -120,7 +118,7 @@ class OrdersController < ApplicationController
   # Renders the fax PDF.
   def faxPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.supplier.name}_FAX.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.name}_FAX.pdf"
   end
   
   # Renders the fax-text-file
@@ -147,13 +145,13 @@ class OrdersController < ApplicationController
     end
     send_data text,
                 :type => 'text/plain; charset=utf-8; header=present',
-                :disposition => "attachment; filename=#{order.supplier.name}"
+                :disposition => "attachment; filename=#{order.name}"
   end
   
   # Renders the matrix PDF.
   def matrixPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.supplier.name}_Matrix.pdf"
+    prawnto :filename => "#{Date.today}_#{@order.name}_Matrix.pdf"
   end
 
   # adds a Comment to the Order

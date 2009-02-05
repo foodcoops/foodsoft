@@ -1,7 +1,7 @@
-- title _("New order")
+- title "Neue Bestellung anlegen"
 
 - form_for @order do |form|
   = render :partial => 'form', :locals => { :form => form }
-  = submit_tag _("Put the order online")
+  = submit_tag "Bestellung online stellen"
   |
   = link_to "Abbrechen", orders_path

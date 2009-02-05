@@ -11,7 +11,7 @@
       - group_order = order.group_order(@ordergroup) # Get GroupOrder if possible
       - order_class = group_order ? "" : "color:grey"
       %tr{:class=> cycle('even', 'odd', :name => 'orders'), :style => order_class}
-        %td= link_to order.supplier.name, :action => 'my_order_result', :id => order
+        %td= link_to order.name, :action => 'my_order_result', :id => order
         %td= format_time(order.ends)
         %td{:class => "currency"}= group_order ? number_to_currency(group_order.price) : "--"
           

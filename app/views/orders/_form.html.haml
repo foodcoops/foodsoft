@@ -7,7 +7,7 @@
     = form.hidden_field :supplier_id
     %p
       Lieferant:
-      = @order.supplier.name
+      = @order.name
     %p
       Notiz
       %br/
@@ -31,7 +31,7 @@
           %option{:value => "-1", :selected => "selected"}=_ "Choose an order..."
           - i = -1
           - for order in @template_orders
-            %option{:value => (i += 1)}= "#{h(order.supplier.name)} bis #{order.ends.strftime('%d. %b')}"
+            %option{:value => (i += 1)}= "#{h(order.name)} bis #{order.ends.strftime('%d. %b')}"
     %table.list
       %tr
         %th= check_box_tag 'checkall', "1", false, { :onclick => "checkUncheckAll(this)" }
@@ -41,7 +41,7 @@
         %th=_ "Manufacturer"
         %th=_ "Unit quantity"
         %th=_ "Price"
-      - for category_name, articles in @order.supplier.get_articles_for_ordering
+      - for category_name, articles in @order.articles_for_ordering
         %tr{:style => "background-color:#EFEFEF"}
           %td
           %td{:colspan => "6", :style => "text-align:left"}
@@ -65,6 +65,3 @@
 
 - if (@template_orders && !@template_orders.empty?)
   = render :partial => 'template_orders_script'
-
-
-          

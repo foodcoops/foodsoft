@@ -1,5 +1,5 @@
 end_date = @order.ends.strftime('%d.%m.%Y')
-title = "#{@order.supplier.name} | beendet am #{end_date}"
+title = "#{@order.name} | beendet am #{end_date}"
 
 # Define header and footer
 pdf.header [pdf.margin_box.left,pdf.margin_box.top+30] do

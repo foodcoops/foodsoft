@@ -77,10 +77,10 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #
 #    # == GroupOrder
 #    change_column :group_orders, :updated_by_user_id, :integer, :default => nil, :null => true
-
-    # == GroupOrderArticle
-    # The total order result in ordergroup is now saved!
-    add_column :group_order_articles, :result, :integer, :default => nil
+#
+#    # == GroupOrderArticle
+#    # The total order result in ordergroup is now saved!
+#    add_column :group_order_articles, :result, :integer, :default => nil
   end
 
   def self.down

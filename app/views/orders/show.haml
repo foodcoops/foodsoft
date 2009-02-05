@@ -1,10 +1,10 @@
-- title _("Show order")
+- title "Bestellung: #{@order.name}"
 #element_navigation
-  = link_to_unless @order.previous == @order, "<< #{@order.previous.supplier.name}", @order.previous
+  = link_to_unless @order.previous == @order, "<< #{@order.previous.name}", @order.previous
   |
   = link_to _("Overview"), orders_path
   |
-  = link_to_unless @order.next == @order, "#{@order.next.supplier.name} >>", @order.next
+  = link_to_unless @order.next == @order, "#{@order.next.name} >>", @order.next
 
 // Order summary
 .left_column{:style => "width:65em"}
@@ -16,7 +16,7 @@
         %b{:style => "color:red"}=_ "Order isn't closed yet"
     %p
       Lieferant:
-      %b=h @order.supplier.name
+      %b=h @order.name
     - unless @order.note.empty?
       %p
         Notiz:

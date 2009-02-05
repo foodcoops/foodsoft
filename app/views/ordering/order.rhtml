@@ -1,33 +1,33 @@
 <h1>Bestellen</h1>    
 
 <div class="left_column" style="width:49em">
-  <div class="box_title"><h2><%=h @order.supplier.name %></h2></div>
+  <div class="box_title"><h2><%=h @order.name %></h2></div>
   <div class="column_content">
     <table>
         <tr valign="top">
             <td width="60%">
-                <p><b><%=_ "Supplier" %>:</b> <%=h @order.supplier.name %></p>
-                <p><b><%=_ "End" %>:</b> <%=h format_time(@order.ends) %></p>
+                <p><b>Lieferant:</b> <%=h @order.name %></p>
+                <p><b>Ende:</b> <%=h format_time(@order.ends) %></p>
                 <% if @group_order && @group_order.updated_by -%>
-                    <p><b><%=_ "person ordered at last" %>:</b> <%=h @group_order.updated_by.nick if @group_order.updated_by %> (<%= format_time(@group_order.updated_on) %>)</p>    
+                    <p><b>Zuletzt bestellt:</b> <%=h @group_order.updated_by.nick if @group_order.updated_by %> (<%= format_time(@group_order.updated_on) %>)</p>
                 <% end -%>
-                <p><b><%=_ "Credit available"%>:</b> <%= number_to_currency(@availableFunds) %></p>
+                <p><b>Verfügbares Guthaben:</b> <%= number_to_currency(@availableFunds) %></p>
             </td>
             <td>
             		<% unless @order.note.empty? %>
 	                <p>
-	                	<b><%=_ "Note" %>:</b>
+	                	<b>Notiz:</b>
 									</p>
 	                <%= simple_format(@order.note) %>
 								<% end %>
-								<% unless @order.supplier.min_order_quantity.nil? || @order.supplier.min_order_quantity.empty? %>
+								<% unless @order.stockit? || @order.supplier.min_order_quantity.blank? -%>
 									<p>
-										<b><%=_ "Minimum order quantity" %>:</b>
+										<b>Mindestellmenge:</b>
 	                	<%=h @order.supplier.min_order_quantity %>
 									</p>
-								<% end %>
+								<% end -%>
 								<p>
-									<b><%=_ "Order quanitity so far" %>:</b>
+									<b>Gesamtbestellmenge bisher:</b>
                 	<%= number_to_currency @order.sum %>
 								</p>
             </td>
@@ -39,14 +39,14 @@
 <%- if !@other_orders.empty? -%>
 <div class="right_column" style="width:22em">
   <div class="box_title">
-  	<h2><%=_ "Other orders" %></h2>
+  	<h2>Andere Bestellungen</h2>
 	</div>
   <div class="column_content">
     <table>
     <% for order in @other_orders -%>
         <tr>
             <td>
-              <%= link_to_function order.supplier.name, "if (confirmSwitchOrder()) (window.location = '#{ url_for(:action => 'order', :id => order) }' )" %>
+              <%= link_to_function order.name, "if (confirmSwitchOrder()) (window.location = '#{ url_for(:action => 'order', :id => order) }' )" %>
             </td>
             <td>noch <%= time_ago_in_words(order.ends) if order.ends -%></td>
         </tr>
@@ -61,21 +61,23 @@
 <div class="single_column">        
   <% form_tag(:action => 'saveOrder', :id => @order) do %>        
       <div class="box_title">
-				<h2><%=_ "Articles" %></h2>
+				<h2>Artikel</h2>
 			</div>
       <div class="column_content">
         <table id="order" class="list">
           <thead>
             <tr>
-                <th><%=_ "Name" %></th>
+                <th>Name</th>
 								<th></th>
-								<th><%=_ "Manufacturer" %></th>
-                <th style="width:7em;"><%=_ "Package" %></th>                
-                <th style="width:4.5em;"><%=_ "Price" %></th>      
-                <th id="col_packages"><acronym title="<%=_ "totally ordered packages" %>"><%=_ "Ord."%></acronym></th>
-                <th id="col_required"><%=_ "Quantity" %></th>
-                <th id="col_tolerance"><%=_ "Tolerance" %></th>
-                <th><%=_ "Amount" %></th>      
+								<th>Herstellerin</th>
+                <th style="width:7em;"><%= @order.stockit? ? "im Lager" : "Gebinde" -%></th>
+                <th style="width:4.5em;">Preis</th>
+                <th id="col_packages"><acronym title="insgesamt bestellte Gebinde">Best</acronym></th>
+                <th id="col_required">Menge</th>
+                <% unless @order.stockit? -%>
+                <th id="col_tolerance">Toleranz</th>
+                <% end -%>
+                <th>Summe</th>
             </tr>
           </thead>
           <tbody>
@@ -104,7 +106,7 @@
                 </td>
 								<td><%=h order_article.article.origin %></td>
 								<td><%=h truncate order_article.article.manufacturer, :length => 11 %></td>
-                <td><%= @unit[i] %> * <%=h order_article.article.unit %></td>
+                <td><%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %></td>
                 <td><%= number_to_currency(@price[i]) %></td>
                 <td id="units_<%= i %>"><%= order_article.units_to_order %></td>
                 <td style="text-align:right;">

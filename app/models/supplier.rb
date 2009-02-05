@@ -41,11 +41,6 @@ class Supplier < ActiveRecord::Base
   # for the sharedLists-App
   belongs_to :shared_supplier
   
-  # Returns all articles for this supplier that are available, grouped by article category and ordered by name.
-  def get_articles_for_ordering
-    articles.available.all.group_by { |a| a.article_category.name }
-  end
-  
   # sync all articles with the external database
   # returns an array with articles(and prices), which should be updated (to use in a form)
   # also returns an array with outlisted_articles, which should be deleted

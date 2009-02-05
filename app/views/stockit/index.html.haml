@@ -7,7 +7,8 @@
       options_for_select([" -- Lieferantin wählen --", ""] + |
         Supplier.find(:all).collect {|s| [ s.name, url_for(new_supplier_delivery_path(s))] }), |
       :onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;" |
-
+%p
+  = link_to "Lagerbestellung online stellen", new_order_path(:supplier_id => 0)
 %p
   %table.list
     %thead

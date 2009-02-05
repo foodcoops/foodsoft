@@ -1,5 +1,5 @@
 end_date = @order.ends.strftime('%d.%m.%Y')
-title = "Gruppensortierung für #{@order.supplier.name}, beendet am #{end_date}"
+title = "Gruppensortierung für #{@order.name}, beendet am #{end_date}"
 
 # Define header and footer
 pdf.header [pdf.margin_box.left,pdf.margin_box.top+20] do

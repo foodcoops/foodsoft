@@ -20,15 +20,11 @@ class StockChange < ActiveRecord::Base
   validates_numericality_of :quantity
 
   after_save :update_article_quantity
-  after_destroy :remove_added_quantity
+  after_destroy :update_article_quantity
 
   protected
 
   def update_article_quantity
-    article.update_quantity(quantity)
-  end
-
-  def remove_added_quantity
-    article.update_quantity(quantity * -1)
+    article.update_quantity!
   end
 end

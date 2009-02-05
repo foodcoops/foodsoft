@@ -24,7 +24,7 @@
           - for order in @open_orders
             - active = (order.open? and order.ends < Time.now) ? " active" : ""
             %tr{:class => cycle('even', 'odd', :name => 'open_orders') + active}
-              %td=h order.supplier.name
+              %td=h order.name
               %td=h format_time(order.ends) unless order.ends.nil?
               %td=h truncate(order.note)
               %td= link_to "Beenden", finish_order_path(order), :confirm => _("Are you really sure to finish the order?"), :method => :post

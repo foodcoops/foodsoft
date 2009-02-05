@@ -25,7 +25,7 @@ end
 
 # Recipient
 pdf.bounding_box [pdf.margin_box.left,pdf.margin_box.top-60], :width => 200 do
-  pdf.text @order.supplier.name
+  pdf.text @order.name
   pdf.move_down 5
   pdf.text @order.supplier.address
   pdf.move_down 5

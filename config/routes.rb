@@ -4,6 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   map.my_tasks '/home/tasks', :controller => 'tasks', :action => 'myTasks'
 
   map.resources :orders, :member => { :finish => :post, :add_comment => :post }
+  map.resources :stock_orders, :member => { :finish => :post, :add_comment => :post },
+    :controller => 'orders'
 
   map.resources :messages, :only => [:index, :show, :new, :create],
     :member => { :reply => :get, :user => :get, :group => :get }

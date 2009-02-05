@@ -12,7 +12,7 @@
   %tbody
     - @orders.each do |order|
       %tr{:class => cycle('even', 'odd', :name => 'orders')}
-        %td=h order.supplier.name
+        %td=h order.name
         %td=h format_time(order.starts)
         %td=h format_time(order.ends)
         %td= order.state

@@ -1,6 +1,6 @@
 Liebe <%= group.name %>,
 
-die Bestellung für "<%= order.supplier.name %>" wurde am <%= order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= order.updated_by.nick %> beendet.
+die Bestellung für "<%= order.name %>" wurde am <%= order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= order.updated_by.nick %> beendet.
 
 Für Euch wurden die folgenden Artikel bestellt:
 <%	for group_order_article in group_order.group_order_articles.all(:include => :order_article)

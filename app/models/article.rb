@@ -32,6 +32,7 @@ class Article < ActiveRecord::Base
   belongs_to :supplier
   belongs_to :article_category
   has_many :article_prices, :order => "created_at"
+  has_many :stock_changes
 
   named_scope :in_stock, :conditions => "quantity > 0", :order => 'suppliers.name', :include => :supplier
   named_scope :available, :conditions => {:availability => true}
@@ -172,8 +173,9 @@ class Article < ActiveRecord::Base
     end
   end
 
-  def update_quantity(amount)
-    update_attribute :quantity, quantity + amount
+  # Update the quantity of items in stock
+  def update_quantity!
+    update_attribute :quantity, stock_changes.collect(&:quantity).sum
   end
 
   protected

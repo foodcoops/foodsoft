@@ -26,8 +26,8 @@ class GroupOrder < ActiveRecord::Base
   validates_numericality_of :price
   validates_uniqueness_of :ordergroup_id, :scope => :order_id   # order groups can only order once per order
 
-  named_scope :open, lambda { {:conditions => ["order_id IN (?)", Order.open.collect{|o| o.id}]} }
-  named_scope :finished, lambda { {:conditions => ["order_id IN (?)", Order.finished.collect{|o| o.id}]} }
+  named_scope :open, lambda { {:conditions => ["order_id IN (?)", Order.open.collect(&:id)]} }
+  named_scope :finished, lambda { {:conditions => ["order_id IN (?)", Order.finished.collect(&:id)]} }
   
   # Updates the "price" attribute.
   # This will be the maximum value of an order

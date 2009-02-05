@@ -1,4 +1,4 @@
-title = "#{@order.supplier.name}, beendet am #{@order.ends.strftime('%d.%m.%Y')}"
+title = "#{@order.name}, beendet am #{@order.ends.strftime('%d.%m.%Y')}"
 
 # Define header and footer
 pdf.header [pdf.margin_box.left,pdf.margin_box.top+20] do

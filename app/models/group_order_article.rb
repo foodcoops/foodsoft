@@ -154,8 +154,8 @@ class GroupOrderArticle < ActiveRecord::Base
   memoize :calculate_result
 
   # Returns order result,
-  # either calcualted on the fly or fetched from quantity_/tolerance_result
-  # After an order is finished, there is only the result
+  # either calcualted on the fly or fetched from result attribute
+  # Result is set when finishing the order.
   def result(type = :total)
     self[:result] || calculate_result[type]
   end

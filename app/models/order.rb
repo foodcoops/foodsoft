@@ -28,21 +28,44 @@ class Order < ActiveRecord::Base
   belongs_to :updated_by, :class_name => "User", :foreign_key => "updated_by_user_id"
 
   # Validations
-  validates_presence_of :supplier_id, :starts
-  validate_on_create :starts_before_ends, :include_articles
+  validates_presence_of :starts
+  validate :starts_before_ends, :include_articles
 
   # Callbacks
   after_update :update_price_of_group_orders
  
   # Finders
-  named_scope :open, :conditions => { :state => 'open' },
-    :order => 'ends DESC'
-  named_scope :finished, :conditions => "state = 'finished' OR state = 'closed'",
-    :order => 'ends DESC'
-  named_scope :finished_not_closed, :conditions => { :state => 'finished' },
-    :order => 'ends DESC'
-  named_scope :closed, :conditions => { :state => 'closed' },
-    :order => 'ends DESC'
+  named_scope :open, :conditions => {:state => 'open'}, :order => 'ends DESC'
+  named_scope :finished, :conditions => "state = 'finished' OR state = 'closed'", :order => 'ends DESC'
+  named_scope :finished_not_closed, :conditions => {:state => 'finished'}, :order => 'ends DESC'
+  named_scope :closed, :conditions => {:state => 'closed'}, :order => 'ends DESC'
+  named_scope :stockit, :conditions => {:supplier_id => 0}, :order => 'ends DESC'
+
+  def stockit?
+    supplier_id == 0
+  end
+
+  def name
+    stockit? ? "Lager" : supplier.name
+  end
+
+  def articles_for_ordering
+     if stockit?
+       Article.in_stock.all(:include => :article_category,
+         :order => 'article_categories.name, articles.name').group_by { |a| a.article_category.name }
+     else
+       supplier.articles.available.all.group_by { |a| a.article_category.name }
+     end
+  end
+
+  # Fetch last orders from same supplier, to generate an article selection proposal
+  def templates
+    if stockit?
+      Order.stockit :limit => 5
+    else
+      supplier.orders.finished :limit => 5
+    end
+  end
 
   # Create or destroy OrderArticle associations on create/update
   def article_ids=(ids)
@@ -163,7 +186,7 @@ class Order < ActiveRecord::Base
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
   def close!(user)
     raise "Bestellung wurde schon abgerechnet" if closed?
-    transaction_note = "Bestellung: #{supplier.name}, bis #{ends.strftime('%d.%m.%Y')}"
+    transaction_note = "Bestellung: #{name}, bis #{ends.strftime('%d.%m.%Y')}"
 
     gos = group_orders.all(:include => :ordergroup)       # Fetch group_orders
     gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders

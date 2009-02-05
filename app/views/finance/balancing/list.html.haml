@@ -18,7 +18,7 @@
         %tbody
           - @orders.each do |order|
             %tr{:class => cycle("even","odd", :name => "order")}
-              %td= link_to truncate(order.supplier.name), :action => "new", :id => order
+              %td= link_to truncate(order.name), :action => "new", :id => order
               %td=h format_time(order.ends) unless order.ends.nil?
               %td= order.closed? ? "abgerechnet (#{number_to_currency order.profit})" : "beendet"
               %td= order.updated_by.nil? ? '??' : order.updated_by.nick
