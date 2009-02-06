@@ -37,3 +37,10 @@ potatoe1:
   price: 1.33
   tax: 7.0
   unit_quantity: 25
+
+applejuice1:
+  article: applejuice
+  price: 1.15
+  tax: 7.0
+  unit_quantity: 1
+  deposit: 0.15

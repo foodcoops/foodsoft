@@ -14,3 +14,5 @@ fruits:
   description: fruits and only fruits
 vegi:
   name: Vegetables
+other:
+  name: Other stuff

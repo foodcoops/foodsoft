@@ -20,7 +20,7 @@
 #  order_number        :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
-#  quantity            :decimal(, )     default(0.0)
+#  quantity            :integer         default(0)
 #  deleted_at          :datetime
 #  type                :string(255)
 #

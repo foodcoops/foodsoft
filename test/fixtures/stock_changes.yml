@@ -7,7 +7,7 @@
 #  delivery_id      :integer
 #  order_id         :integer
 #  stock_article_id :integer
-#  quantity         :decimal(, )     default(0.0)
+#  quantity         :integer         default(0)
 #  created_at       :datetime
 #
 

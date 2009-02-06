@@ -21,7 +21,7 @@ class Delivery < ActiveRecord::Base
 
   def stock_change_attributes=(stock_change_attributes)
     for attributes in stock_change_attributes
-      stock_changes.build(attributes) unless attributes[:quantity] == 0.0 or attributes[:quantity].blank?
+      stock_changes.build(attributes) unless attributes[:quantity].to_i == 0
     end
   end
   

@@ -20,7 +20,7 @@
 #  order_number        :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
-#  quantity            :decimal(, )     default(0.0)
+#  quantity            :integer         default(0)
 #  deleted_at          :datetime
 #  type                :string(255)
 #
@@ -38,6 +38,7 @@ banana:
   tax: 7.0
   unit_quantity: 18
   order_number: 123456
+  
 kiwi:
   supplier: terra
   name: Kiwi
@@ -49,6 +50,7 @@ kiwi:
   tax: 7.0
   unit_quantity: 10
   order_number: 123457
+
 potatoe:
   supplier: terra
   name: Potatoe
@@ -60,3 +62,12 @@ potatoe:
   tax: 7.0
   unit_quantity: 25
   order_number: 123458
+
+applejuice:
+  type: StockArticle
+  supplier: terra
+  name: Apple-juice
+  article_category: other
+  unit: 1L
+  price: 1.33
+  tax: 7.0

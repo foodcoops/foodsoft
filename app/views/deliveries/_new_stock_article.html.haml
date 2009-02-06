@@ -29,6 +29,6 @@
     = form.text_field :deposit
   %p
     Kategorie:
-    = form.select :article_category, ArticleCategory.all(:order => 'name').collect { |c| [c.name, c.id] }
+    = form.select :article_category_id, ArticleCategory.all(:order => 'name').collect { |c| [c.name, c.id] }
   %p
     = submit_tag "Artikel speichern"
