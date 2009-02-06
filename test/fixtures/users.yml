@@ -25,6 +25,7 @@ admin:
   email: admin@foo.test
   password_hash: a3c77e64311ad37161e582b28737d1e420962538
   password_salt: LNpP/lca
+  created_on: <%= 1.day.ago.to_s(:db) %>
 test:
   nick: test
   first_name: Tim
@@ -32,3 +33,4 @@ test:
   email: test@foo.test
   password_hash: 5549cd54032a72435037893b02d95ebef13cdc57
   password_salt: DxnbIF1h
+  created_on: <%= Time.now.to_s(:db) %>

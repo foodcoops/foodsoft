@@ -40,7 +40,7 @@ bananas:
   type: Ordergroup
   name: Banangroup
   account_balance: 100.00
-  account_updated: <%= 1.weeks.ago.strftime("%d.%m.%Y") %>
+  account_updated: <%= 1.weeks.ago.to_s(:db) %>
   contact_person: Tim
   contact_phone: 030 123132456
   contact_address: Waldermarstrasse 43, 10988 Berlin
