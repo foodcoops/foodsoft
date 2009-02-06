@@ -18,6 +18,7 @@
         %th Einheit
         %th Preis
         %th Lieferant
+        %th Kategorie
     %tbody
       - for article in @articles
         %tr{:class => cycle("even", "odd")}
@@ -26,3 +27,4 @@
           %td= article.unit
           %td= article.price
           %td= link_to article.supplier.name, article.supplier
+          %td= article.article_category.name

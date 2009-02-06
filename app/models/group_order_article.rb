@@ -9,8 +9,7 @@
 #  quantity         :integer         default(0), not null
 #  tolerance        :integer         default(0), not null
 #  updated_on       :datetime        not null
-#  quantity_result  :integer
-#  tolerance_result :integer
+#  result           :integer
 #
 
 # A GroupOrderArticle stores the sum of how many items of an OrderArticle are ordered as part of a GroupOrder.
@@ -106,9 +105,10 @@ class GroupOrderArticle < ActiveRecord::Base
   # See description of the ordering algorithm in the general application documentation for details.
   def calculate_result
     quantity = tolerance = 0
-  
+    stockit = order_article.article.is_a?(StockArticle)
+
     # Get total
-    total = order_article.units_to_order * order_article.price.unit_quantity
+    total = stockit ? order_article.article.quantity : order_article.units_to_order * order_article.price.unit_quantity
     logger.debug("<#{order_article.article.name}>.unitsToOrder => items ordered: #{order_article.units_to_order} => #{total}")
        
     if (total > 0)
@@ -130,7 +130,7 @@ class GroupOrderArticle < ActiveRecord::Base
         end
         i += 1
       end
-      
+
       # Determine tolerance to be ordered...
       if (total_quantity < total)
         logger.debug("determining additional items to be ordered from tolerance")
@@ -143,7 +143,7 @@ class GroupOrderArticle < ActiveRecord::Base
             tolerance += q
           end
           i += 1
-        end        
+        end
       end
       
       logger.debug("determined quantity/tolerance/total: #{quantity} / #{tolerance} / #{quantity + tolerance}")

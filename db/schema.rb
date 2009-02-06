@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20090119155930) do
     t.datetime "updated_at"
     t.decimal  "quantity",            :default => 0.0
     t.datetime "deleted_at"
+    t.string   "type"
   end
 
   add_index "articles", ["name", "supplier_id"], :name => "index_articles_on_name_and_supplier_id"
@@ -212,8 +213,8 @@ ActiveRecord::Schema.define(:version => 20090119155930) do
   create_table "stock_changes", :force => true do |t|
     t.integer  "delivery_id"
     t.integer  "order_id"
-    t.integer  "article_id"
-    t.decimal  "quantity",    :precision => 6, :scale => 2, :default => 0.0
+    t.integer  "stock_article_id"
+    t.decimal  "quantity",         :default => 0.0
     t.datetime "created_at"
   end
 

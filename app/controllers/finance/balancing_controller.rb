@@ -136,7 +136,8 @@ class Finance::BalancingController < ApplicationController
 
     render :update do |page|
       if goa.save
-        goa.group_order.update_price! # Updates the price attribute of new GroupOrder
+        goa.group_order.update_price!                                       # Update the price attribute of new GroupOrder
+        order_article.update_results! if order_article.article.is_a?(StockArticle)  # Update units_to_order of order_article
         page["edit_box"].hide
 
         page["group_order_articles_#{order_article.id}"].replace_html :partial => 'group_order_articles',
@@ -163,7 +164,8 @@ class Finance::BalancingController < ApplicationController
     
     render :update do |page|
       if goa.update_attributes(params[:group_order_article])
-        goa.group_order.update_price! # Updates the price attribute of new GroupOrder
+        goa.group_order.update_price!                     # Update the price attribute of new GroupOrder
+        goa.order_article.update_results! if goa.order_article.article.is_a?(StockArticle) # Update units_to_order of order_article
 
         page["edit_box"].hide
         page["group_order_articles_#{goa.order_article.id}"].replace_html :partial => 'group_order_articles',
@@ -180,7 +182,8 @@ class Finance::BalancingController < ApplicationController
     goa = GroupOrderArticle.find(params[:id])
     goa.destroy
     goa.group_order.update_price! # Updates the price attribute of new GroupOrder
-      
+    goa.order_article.update_results! if goa.order_article.article.is_a?(StockArticle) # Update units_to_order of order_article
+    
     render :update do |page|
       page["edit_box"].hide
       page["group_order_articles_#{goa.order_article.id}"].replace_html :partial => 'group_order_articles',

@@ -26,6 +26,7 @@ class Supplier < ActiveRecord::Base
 
   has_many :articles, :dependent => :destroy,
     :include => [:article_category], :order => 'article_categories.name, articles.name'
+  has_many :stock_articles
   has_many :orders
   has_many :deliveries
   has_many :invoices

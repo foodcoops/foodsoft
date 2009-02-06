@@ -13,7 +13,7 @@ class Delivery < ActiveRecord::Base
 
   belongs_to :supplier
   has_one :invoice
-  has_many :stock_changes
+  has_many :stock_changes, :dependent => :destroy
 
   named_scope :recent, :order => 'created_at DESC', :limit => 10
 

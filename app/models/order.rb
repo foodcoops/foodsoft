@@ -24,6 +24,7 @@ class Order < ActiveRecord::Base
   has_many :ordergroups, :through => :group_orders
   has_one :invoice
   has_many :comments, :class_name => "OrderComment", :order => "created_at"
+  has_many :stock_changes
   belongs_to :supplier
   belongs_to :updated_by, :class_name => "User", :foreign_key => "updated_by_user_id"
 
@@ -51,8 +52,10 @@ class Order < ActiveRecord::Base
 
   def articles_for_ordering
      if stockit?
-       Article.in_stock.all(:include => :article_category,
-         :order => 'article_categories.name, articles.name').group_by { |a| a.article_category.name }
+       StockArticle.available.all(:include => :article_category,
+         :order => 'article_categories.name, articles.name').reject{ |a|
+         a.quantity_available == 0
+         }.group_by { |a| a.article_category.name }
      else
        supplier.articles.available.all.group_by { |a| a.article_category.name }
      end
@@ -95,7 +98,7 @@ class Order < ActiveRecord::Base
   def group_order(ordergroup)
     group_orders.first :conditions => { :ordergroup_id => ordergroup.id }
   end
-  
+ 
   # Returns OrderArticles in a nested Array, grouped by category and ordered by article name.
   # The array has the following form:
   # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
@@ -196,6 +199,14 @@ class Order < ActiveRecord::Base
         price = group_order.price * -1                    # decrease! account balance
         group_order.ordergroup.add_financial_transaction(price, transaction_note, user)
       end
+
+      if stockit?                                         # Decreases the quantity of stock_articles
+        for oa in order_articles.all(:include => :article)
+          oa.update_results!                              # Update units_to_order of order_article
+          stock_changes.create! :stock_article => oa.article, :quantity => oa.units_to_order*-1
+        end
+      end
+
       self.update_attributes! :state => 'closed', :updated_by => user
     end
   end

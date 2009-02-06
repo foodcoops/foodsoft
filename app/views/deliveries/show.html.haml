@@ -16,10 +16,10 @@
     %th Artikel
     %th Einheit
     %th Menge
-  - for stock_change in @delivery.stock_changes.find :all, :include => :article
+  - for stock_change in @delivery.stock_changes.find :all, :include => :stock_article
     %tr
-      %td= stock_change.article.name
-      %td= stock_change.article.unit
+      %td= stock_change.stock_article.name
+      %td= stock_change.stock_article.unit
       %td= stock_change.quantity
 
 %br/

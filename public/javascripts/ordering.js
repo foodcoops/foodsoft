@@ -16,6 +16,7 @@ var itemTotal = new Array();    // total item price
 var quantityOthers = new Array(); 
 var toleranceOthers = new Array();
 var itemsAllocated = new Array();  // how many items the group has been allocated and should definitely get
+var quantityAvailable = new Array();  // stock_order. how many items are currently in stock
 
 function setDecimalSeparator(character) {
 	decimalSeparator = character;	
@@ -25,7 +26,7 @@ function setGroupBalance(amount) {
 	groupBalance = amount;
 }
 
-function addData(itemPrice, itemUnit, itemSubtotal, itemQuantityOthers, itemToleranceOthers, allocated) {
+function addData(itemPrice, itemUnit, itemSubtotal, itemQuantityOthers, itemToleranceOthers, allocated, available) {
 	i = price.length;
 	price[i] = itemPrice;
 	unit[i] = itemUnit;
@@ -33,6 +34,7 @@ function addData(itemPrice, itemUnit, itemSubtotal, itemQuantityOthers, itemTole
 	quantityOthers[i] = itemQuantityOthers;
 	toleranceOthers[i] = itemToleranceOthers;
 	itemsAllocated[i] = allocated;
+	quantityAvailable[i] = available;
 }
 
 function increaseQuantity(item) {
@@ -102,6 +104,46 @@ function update(item, quantity, tolerance) {
     // update balance
     updateBalance();
 }    
+
+function increaseStockQuantity(item) {
+    value = Number($('q_' + item).value) + 1;
+    if (value <= quantityAvailable[item] - quantityOthers[item]) {
+        updateStockQuantity(item, value);
+    }
+}
+
+function decreaseStockQuantity(item) {
+    value = Number($('q_' + item).value) - 1;
+    if (value >= 0) {
+        updateStockQuantity(item, value);
+    }
+}
+
+function updateStockQuantity(item, quantity) {
+  // set modification flag
+	modified = true
+
+	// update hidden input fields
+	$('q_' + item).value = quantity;
+
+	// update used/unused quantity
+	available = Math.max(0, quantityAvailable[item] - quantityOthers[item]);
+	q_used = Math.min(available, quantity);
+
+	// ensure that at least the amout of items this group has already been allocated is used
+	if (quantity >= itemsAllocated[item] && q_used < itemsAllocated[item]) {
+		q_used = itemsAllocated[item];
+	}
+	$('q_used_' + item).update(String(q_used));
+	$('q_total_' + item).update(String(Number(quantity) + quantityOthers[item]));
+
+	// update total price
+	itemTotal[item] = price[item] * (Number(quantity));
+	$('price_' + item + '_display').update(asMoney(itemTotal[item]));
+
+    // update balance
+    updateBalance();
+}
 
 function asMoney(amount) {
 	return String(amount.toFixed(2)).replace(/\./, ",");	

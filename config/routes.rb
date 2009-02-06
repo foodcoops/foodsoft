@@ -4,8 +4,6 @@ ActionController::Routing::Routes.draw do |map|
   map.my_tasks '/home/tasks', :controller => 'tasks', :action => 'myTasks'
 
   map.resources :orders, :member => { :finish => :post, :add_comment => :post }
-  map.resources :stock_orders, :member => { :finish => :post, :add_comment => :post },
-    :controller => 'orders'
 
   map.resources :messages, :only => [:index, :show, :new, :create],
     :member => { :reply => :get, :user => :get, :group => :get }
@@ -22,7 +20,8 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :suppliers, :collection => { :shared_suppliers => :get } do |suppliers|
-    suppliers.resources :deliveries, :member => { :drop_stock_change => :post }
+    suppliers.resources :deliveries, :member => { :drop_stock_change => :post },
+      :collection => {:add_stock_article => :post}
     suppliers.resources :articles,
       :collection => { :update_selected => :post, :edit_all => :get, :update_all => :post,
                        :upload => :get, :parse_upload => :post, :create_from_upload => :post,

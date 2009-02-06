@@ -8,11 +8,13 @@
     %h2 Zusammenfassung
   .column_content#summary
     = render :partial => "summary", :locals => {:order => @order}
-.left_column{:style => 'width: 24em'}
-  .box_title
-    %h2 Rechnung
-  .column_content#invoice
-    = render :partial => "invoice", :locals => {:invoice => @order.invoice}
+
+- unless @order.stockit?
+  .left_column{:style => 'width: 24em'}
+    .box_title
+      %h2 Rechnung
+    .column_content#invoice
+      = render :partial => "invoice", :locals => {:invoice => @order.invoice}
 
 .right_column{:style => 'width: 20em'}
   .box_title

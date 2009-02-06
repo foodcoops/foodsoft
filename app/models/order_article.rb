@@ -48,12 +48,15 @@ class OrderArticle < ActiveRecord::Base
   end
 
   # Update quantity/tolerance/units_to_order from group_order_articles
-  # This is only used in opened orders.
   def update_results!
-    quantity = group_order_articles.collect(&:quantity).sum
-    tolerance = group_order_articles.collect(&:tolerance).sum
-    update_attributes(:quantity => quantity, :tolerance => tolerance,
-                      :units_to_order => calculate_units_to_order(quantity, tolerance))
+    if order.open?
+      quantity = group_order_articles.collect(&:quantity).sum
+      tolerance = group_order_articles.collect(&:tolerance).sum
+      update_attributes(:quantity => quantity, :tolerance => tolerance,
+                        :units_to_order => calculate_units_to_order(quantity, tolerance))
+    elsif order.finished?
+      update_attribute(:units_to_order, group_order_articles.collect(&:result).sum)
+    end
   end
 
   # Returns how many units of the belonging article need to be ordered given the specified order quantity and tolerance.

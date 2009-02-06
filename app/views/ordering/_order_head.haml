@@ -1,0 +1,48 @@
+- title "Bestellen"
+
+.left_column{:style => "width:49em"}
+  .box_title
+    %h2=h @order.name
+  .column_content
+    %table
+      %tr{:valign => "top"}
+        %td{:width => "60%"}
+          %p
+            %b Lieferant:
+            =h @order.name
+          %p
+            %b Ende:
+            =h format_time(@order.ends)
+          - if @group_order && @group_order.updated_by
+            %p
+              %b Zuletzt bestellt:
+              =h @group_order.updated_by.nick if @group_order.updated_by
+              = "(#{format_time(@group_order.updated_on)})"
+          %p
+            %b Verfügbares Guthaben:
+            = number_to_currency(@availableFunds)
+        %td
+          - unless @order.note.empty?
+            %p
+              %b Notiz:
+              = simple_format(@order.note)
+          - unless @order.stockit? || @order.supplier.min_order_quantity.blank?
+            %p
+              %b Mindestellmenge:
+              =h @order.supplier.min_order_quantity
+          %p
+            %b Gesamtbestellmenge bisher:
+            = number_to_currency @order.sum
+
+- orders = Order.open.reject{ |order| order == @order }
+- unless orders.empty?
+  .right_column{:style => "width:22em"}
+    .box_title
+      %h2 Anderer Bestellungen
+    .column_content
+      %table
+        - for order in @other_orders
+          %tr
+            %td
+              = link_to_function order.name, "if (confirmSwitchOrder()) (window.location = '#{ url_for(:action => 'order', :id => order) }' )"
+            %td= "noch #{time_ago_in_words(order.ends)}" if order.ends

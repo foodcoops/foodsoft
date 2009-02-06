@@ -17,7 +17,7 @@
           %td{:id => "group_order_article_#{group_order_article.id}_quantity"}
             = group_order_article.result
           %td.currency
-            = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.quantity, :unit => "")
+            = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result, :unit => "")
           %td.actions{:style=>"width:1em"}
             = remote_link_to icon(:edit), :update => 'edit_box', |
               :url => {:action => 'edit_group_order_article', :id => group_order_article}, |

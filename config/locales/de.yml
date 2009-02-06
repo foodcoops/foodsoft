@@ -126,6 +126,8 @@ de:
       article:
         price: Nettopreis
         gross_price: Bruttopreis
+      stock_article:
+        price: Nettopreis
       user:
         password: Passwort
         first_name: Vorname

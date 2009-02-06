@@ -25,38 +25,25 @@
 #  type                :string(255)
 #
 
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-banana:
-  supplier: terra
-  name: Banana
-  article_category: fruits
-  unit: KG
-  availability: true
-  note: delicious
-  origin: EC
-  price: 1.45
-  tax: 7.0
-  unit_quantity: 18
-  order_number: 123456
-kiwi:
-  supplier: terra
-  name: Kiwi
-  article_category: fruits
-  unit: 500g
-  availability: true
-  origin: IT
-  price: 1.11
-  tax: 7.0
-  unit_quantity: 10
-  order_number: 123457
-potatoe:
-  supplier: terra
-  name: Potatoe
-  article_category: vegi
-  unit: 500g
-  availability: true
-  origin: REG
-  price: 1.33
-  tax: 7.0
-  unit_quantity: 25
-  order_number: 123458
+class StockArticle < Article
+  has_many :stock_changes
+
+  named_scope :available, :conditions => "quantity > 0"
+
+  # Update the quantity of items in stock
+  def update_quantity!
+    update_attribute :quantity, stock_changes.collect(&:quantity).sum
+  end
+
+  # Check for unclosed orders and substract its ordered quantity
+  def quantity_available(exclude_order = nil)
+    available = quantity
+    for order in Order.stockit.all(:conditions => "state = 'open' OR state = 'finished'")
+      unless order == exclude_order
+        order_article = order.order_articles.first(:conditions => {:article_id => id})
+        available -= order_article.units_to_order if order_article
+      end
+    end
+    available
+  end
+end

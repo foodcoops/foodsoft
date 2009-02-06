@@ -1,14 +1,14 @@
 # == Schema Information
-# Schema version: 20090119155930
+# Schema version: 20090120184410
 #
 # Table name: stock_changes
 #
-#  id          :integer         not null, primary key
-#  delivery_id :integer
-#  order_id    :integer
-#  article_id  :integer
-#  quantity    :decimal(6, 2)   default(0.0)
-#  created_at  :datetime
+#  id               :integer         not null, primary key
+#  delivery_id      :integer
+#  order_id         :integer
+#  stock_article_id :integer
+#  quantity         :decimal(, )     default(0.0)
+#  created_at       :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

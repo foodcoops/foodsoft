@@ -1,0 +1,34 @@
+- remote_form_for stock_article, :url => add_stock_article_supplier_deliveries_path(@supplier) do |form|
+  = form.error_messages
+
+  %p
+    remote_link_to "Artikel aus dem Katalog wählen"...
+  %p
+    = form.label :name
+    %br/
+    = form.text_field :name
+  %p
+    = form.label :unit
+    %br/
+    = form.text_field :unit
+  %p
+    = form.label :note
+    %br/
+    = form.text_field :note
+  %p
+    = form.label :price
+    %br/
+    = form.text_field :price
+  %p
+    = form.label :tax
+    %br/
+    = form.text_field :tax, :value => (stock_article.tax || 7.0)
+  %p
+    = form.label :deposit
+    %br/
+    = form.text_field :deposit
+  %p
+    Kategorie:
+    = form.select :article_category, ArticleCategory.all(:order => 'name').collect { |c| [c.name, c.id] }
+  %p
+    = submit_tag "Artikel speichern"

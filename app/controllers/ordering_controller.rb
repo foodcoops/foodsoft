@@ -3,18 +3,18 @@
 class OrderingController < ApplicationController
   # Security
   before_filter :ensure_ordergroup_member
-  before_filter :ensure_open_order, :only => [:order, :saveOrder]
+  before_filter :ensure_open_order, :only => [:order, :stock_order, :saveOrder]
   
   verify :method => :post, :only => [:saveOrder], :redirect_to => {:action => :index}
   
   # Index page.
-  def index    
+  def index
   end
     
   # Edit a current order.
-  def order       
-    @open_orders = Order.open
-    @other_orders = @open_orders.reject{|order| order == @order}
+  def order
+    redirect_to :action => 'stock_order', :id => @order if @order.stockit?
+
     # Load order article data...
     @articles_grouped_by_category = @order.articles_grouped_by_category
     # save results of earlier orders in array
@@ -55,6 +55,47 @@ class OrderingController < ApplicationController
         @tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:tolerance] : 0)
         @others_tolerance[i] = order_article.tolerance - @tolerance[i]
         @used_tolerance[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:tolerance_result] : 0)
+        i += 1
+      end
+    end
+  end
+
+  def stock_order
+    # Load order article data...
+    @articles_grouped_by_category = @order.articles_grouped_by_category
+    # save results of earlier orders in array
+    ordered_articles = Array.new
+    @group_order = @order.group_orders.find(:first,
+      :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
+
+    if @group_order
+      # Group has already ordered, so get the results...
+      for goa in @group_order.group_order_articles
+        ordered_articles[goa.order_article_id] = {:quantity => goa.quantity,
+                                                  :tolerance => goa.tolerance,
+                                                  :quantity_result => goa.result(:quantity),
+                                                  :tolerance_result => goa.result(:tolerance)}
+      end
+      @version = @group_order.lock_version
+      @availableFunds = @ordergroup.get_available_funds(@group_order)
+    else
+      @version = 0
+      @availableFunds = @ordergroup.get_available_funds
+    end
+
+    # load prices ....
+    @price = Array.new; @quantity_available = Array.new
+    @others_quantity = Array.new; @quantity = Array.new; @quantity_result = Array.new; @used_quantity = Array.new; @unused_quantity = Array.new
+    i = 0;
+    @articles_grouped_by_category.each do |category_name, order_articles|
+      for order_article in order_articles
+        # price/unit size
+        @price[i] = order_article.article.fc_price
+        @quantity_available[i] = order_article.article.quantity_available(@order)
+        # quantity
+        @quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:quantity] : 0)
+        @others_quantity[i] = order_article.quantity - @quantity[i]
+        @used_quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:quantity_result] : 0)
         i += 1
       end
     end

@@ -2,10 +2,42 @@ class RefactorOrderLogic < ActiveRecord::Migration
   def self.up
     # TODO: Combine migrations since foodsoft3-development into one file
     # and try to build a migration path from old data.
-    
+
+#    # == Message
+#    drop_table :messages
+#    create_table :messages do |t|
+#      t.references :sender
+#      t.text :recipients_ids
+#      t.string :subject, :null => false
+#      t.text :body
+#      t.integer :email_state, :default => 0, :null => false
+#      t.boolean :private, :default => false
+#      t.datetime :created_at
+#    end
+#
+#    # Acts_as_paranoid
+#    add_column :suppliers, :deleted_at, :datetime
+#    add_column :articles, :deleted_at, :datetime
+#    add_column :groups, :deleted_at, :datetime
+#
+#    # == Workgroups
+#    # Migrate all groups to workgroups
+#    Group.find(:all, :conditions => { :type => "" }).each do |workgroup|
+#      workgroup.update_attribute(:type, "Workgroup")
+#    end
+#
 #    # == Ordergroups
-#    add_column :groups, :deleted_at, :datetime # acts_as_paranoid
 #    remove_column :groups, :actual_size        # Useless, desposits are better stored within a transaction.note
+#    # rename from OrderGroup to Ordergroup
+#    rename_column :financial_transactions, :order_group_id, :ordergroup_id
+#    rename_column :group_orders, :order_group_id, :ordergroup_id
+#    rename_column :tasks, :group_id, :workgroup_id
+#    remove_index :group_orders, :name => "index_group_orders_on_order_group_id_and_order_id"
+#    add_index :group_orders, [:ordergroup_id, :order_id], :unique => true
+#
+#    Group.find(:all, :conditions => { :type => "OrderGroup" }).each do |ordergroup|
+#      ordergroup.update_attribute(:type, "Ordergroup")
+#    end
 #    # move contact-infos from users to ordergroups
 #    add_column :groups, :contact_person, :string
 #    add_column :groups, :contact_phone, :string
@@ -18,10 +50,6 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #      end
 #    end
 #    remove_column :users, :address
-#
-#    # == Article
-#    rename_column :articles, :net_price, :price
-#    remove_column :articles, :gross_price
 #
 #    # == Order
 #    drop_table :orders
@@ -41,9 +69,26 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #    end
 #
 #    # == Invoice
-#    add_column :invoices, :order_id, :integer
-#    add_column :invoices, :deposit, :decimal, :precision => 8, :scale => 2, :default => 0.0,  :null => false
-#    add_column :invoices, :deposit_credit, :decimal, :precision => 8, :scale => 2, :default => 0.0,  :null => false
+#    create_table :invoices do |t|
+#      t.references :supplier
+#      t.references :delivery
+#      t.references :order
+#      t.string :number
+#      t.date :date
+#      t.date :paid_on
+#      t.text :note
+#      t.decimal :amount, :null => false, :precision => 8, :scale => 2, :default => 0.0
+#      t.decimal :deposit, :precision => 8, :scale => 2, :default => 0.0,  :null => false
+#      t.decimal :deposit_credit, :precision => 8, :scale => 2, :default => 0.0,  :null => false
+#      t.timestamps
+#    end
+#
+#    # == Delivery
+#     create_table :deliveries do |t|
+#      t.integer :supplier_id
+#      t.date :delivered_on
+#      t.datetime :created_at
+#    end
 #
 #    # == Comment
 #    drop_table :comments
@@ -53,6 +98,10 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #      t.text :text
 #      t.datetime :created_at
 #    end
+#
+#    # == Article
+#    rename_column :articles, :net_price, :price
+#    remove_column :articles, :gross_price
 #
 #    # == ArticlePrice
 #    create_table :article_prices do |t|
@@ -81,6 +130,22 @@ class RefactorOrderLogic < ActiveRecord::Migration
 #    # == GroupOrderArticle
 #    # The total order result in ordergroup is now saved!
 #    add_column :group_order_articles, :result, :integer, :default => nil
+#
+#    # == StockArticle
+#    add_column :articles, :type, :string
+#    add_column :articles, :quantity, :integer, :default => 0
+#
+#    # == StockChanges
+#    create_table :stock_changes do |t|
+#      t.references :delivery
+#      t.references :order
+#      t.references :stock_article
+#      t.integer :quantity, :default => 0
+#      t.datetime :created_at
+#    end
+
+
+
   end
 
   def self.down
