@@ -14,13 +14,13 @@ class LoginController < ApplicationController
     self.return_to = nil 
     current_user = nil
     reset_session
-    flash[:notice] = _("Logged out.")
+    flash[:notice] = "Abgemeldet"
     render :action => 'login'
   end
   
   # Displays a "denied due to insufficient privileges" message and provides the login form.
   def denied
-    flash[:error] = _("You are not authorized to do this. Please log in as another user or go back.")
+    flash[:error] = "Du bist nicht berechtigt diese Seite zu besuchen. Bitte als berechtige Benutzerin anmelden oder zurück gehen."
     render :action => 'login'
   end
   
@@ -39,7 +39,7 @@ class LoginController < ApplicationController
       end
     else
       current_user = nil
-      flash[:error] = _("Sorry, login is not possible.")
+      flash[:error] = "Tschuldige, die Anmeldung war nicht erfolgreich. Bitte erneut versuchen."
     end
   end
   

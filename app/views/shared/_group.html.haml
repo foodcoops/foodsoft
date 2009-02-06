@@ -2,7 +2,7 @@
   %tr
     %td Beschreibung:
     %td=h group.description
-  - if @current_user.role_admin? or @current_user.role_finance?
+  - if group.is_a?(Ordergroup) and (@current_user.role_admin? or @current_user.role_finance?)
     %tr
       %td Kontakt:
       %td=h group.contact

@@ -6,11 +6,11 @@
 .right_column{:style => "width:70%"}
   - unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks_number == 0
     .box_title 
-      %h2=_ "Tasks"
+      %h2 Aufgaben
     .column_content
       -unless @next_tasks.empty?
         %div{:style => "float:left, margin-bottom:2em"}
-          %h3=_ "Your tasks for the upcoming week:"
+          %h3 Deine Aufgaben für die nächste Woche:
           %table{:style => "width:25em"}
             -for task in @next_tasks
               %tr
@@ -19,13 +19,13 @@
                   %b= task.name
           
       - unless @unaccepted_tasks.empty?
-        %h3=_ "Accept tasks"
-        = _("Your are responsible for a few tasks.")
-        = link_to _("Accept/Reject tasks"), :controller => "tasks", :action => "myTasks"
+        %h3 Aufgaben übernehmen
+        Du bis für Aufgaben verantwortlich.
+        = link_to "Aufgaben übernehmen/ablehnen", my_tasks_path
       - unless @unassigned_tasks_number == 0
-        %h3=_ "Unassigned tasks"
-        = _("There are") + " #{@unassigned_tasks_number} " + link_to(_("unassigned task(s)"), :controller => "tasks")
-      %p{:style => "clear:both"}= link_to _("My tasks"), :controller => "tasks", :action => "myTasks"
+        %h3 Offene Aufgaben
+        = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufage(n)', :controller => 'tasks'}"
+      %p{:style => "clear:both"}= link_to "Meine Aufgaben", my_tasks_path
 
   - if @ordergroup
     // Current orders
@@ -40,23 +40,23 @@
   - if @ordergroup
     // Ordergroup overview
     .box_title
-      %h2=_ "My ordergroup"
+      %h2 Meine Bestellgruppe
     .column_content
       %p
         %b= @ordergroup.name
         |
-        =_ "Account balance:"
+        Kontostand:
         = number_to_currency(@ordergroup.account_balance)
         %span{:style => "color:grey"}
           (zuletzt aktualisiert vor
-          = distance_of_time_in_words(Time.now, @ordergroup.account_updated) + ")"
-        %h3=_ "Last transactions"
+          = distance_of_time_in_words(Time.now, @ordergroup.account_updated) + "(n))"
+        %h3 Letzte Transaktionen
         %table
           %tr
-            %th=_ "When"
-            %th=_ "Who"
-            %th=_ "Note"
-            %th=_ "Amount"
+            %th Wann
+            %th Wer
+            %th Notiz
+            %th Betrag
           - for ft in @ordergroup.financial_transactions.all(:limit => 5)
             %tr{:class => cycle('even','odd')}
               %td= format_time(ft.created_on)
@@ -65,4 +65,4 @@
               - color = ft.amount < 0 ? 'red' : 'black'
               %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
         %br/
-        = link_to _("more ..."), :action => "myOrdergroup"
+        = link_to _("mehr ..."), my_ordergroup_path
