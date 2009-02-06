@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090119155930) do
+ActiveRecord::Schema.define(:version => 20090120184410) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20090119155930) do
     t.string   "order_number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "quantity",            :default => 0.0
+    t.integer  "quantity",            :default => 0
     t.datetime "deleted_at"
     t.string   "type"
   end
@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(:version => 20090119155930) do
     t.integer  "delivery_id"
     t.integer  "order_id"
     t.integer  "stock_article_id"
-    t.decimal  "quantity",         :default => 0.0
+    t.integer  "quantity",         :default => 0
     t.datetime "created_at"
   end
 
