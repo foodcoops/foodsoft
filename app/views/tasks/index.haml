@@ -1,11 +1,11 @@
-- title _('Arrange tasks')
+- title "Aufgabenübersicht"
 = render :partial => "nav"
 
 - unless @non_group_tasks.empty?
   .left_column{:style => "width:75%"}
     - @tasks = @non_group_tasks
     .box_title 
-      %h2=_ 'Tasks for all'
+      %h2 Aufgaben für alle!
     .column_content
       = render :partial => "list"
 

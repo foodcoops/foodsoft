@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   
   def index
     @non_group_tasks = Task.non_group
-    @groups = Group.find :all, :conditions => "type != 'Ordergroup'"
+    @groups = Workgroup.all
   end
   
   def myTasks
@@ -86,7 +86,7 @@ class TasksController < ApplicationController
       task.assignments.create(:user => current_user, :accepted => true)
     end
     flash[:notice] = "Du hast die Aufgabe übernommen"
-    redirect_to :action => "myTasks"
+    redirect_to my_tasks_path
   end
   
   # deletes assignment between current_user and given task
@@ -103,7 +103,7 @@ class TasksController < ApplicationController
   
   # Shows all tasks, which are already done
   def archive
-    @tasks = Task.find :all, :conditions => "done = 1", :order => "due_date DESC"
+    @tasks = Task.done
   end
   
   # shows workgroup (normal group) to edit weekly_tasks_template

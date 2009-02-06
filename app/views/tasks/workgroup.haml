@@ -1,12 +1,12 @@
 %h1
-  = _('Arrange tasks for')
+  Aufgaben verwalten für
   = @group.name
 = render :partial => "nav"
 
 .left_column{:style => "width:45em"}
   .box_title 
     %h2
-      = _('Weekly tasks') + ':'
+      Wöchentliche Aufgaben
       = @group.task_name
   .column_content
     - if @group.weekly_task
@@ -45,7 +45,8 @@
       %br/
     - else
       = _('No weekly tasks defined yet')
-    = link_to _('Edit weekly tasks'), :controller => "index", :action => "editGroup", :id => @group
+    - if @current_user.member_of?(@group) or @current_user.role_admin?
+      = link_to _('Edit weekly tasks'), :controller => "foodcoop", :action => "edit_group", :id => @group
 
 .left_column{:style => "width:75%"}
   .box_title 

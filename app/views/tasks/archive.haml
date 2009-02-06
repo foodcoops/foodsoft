@@ -1,11 +1,11 @@
-- title _('Task archive')
+- title "Aufgabenarchiv"
 = render :partial => "nav"
 
 %table{:style => "width: 76%"}
   %tr
-    %th=_ 'Due date'
-    %th=_ 'Subject'
-    %th=_ 'Responsible people'
+    %th Fälligkeitsdatum
+    %th Betreff
+    %th Verantwortliche Menschen
     %th 
   - for task in @tasks
     %tr{:class => cycle('even','odd')}

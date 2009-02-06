@@ -3,27 +3,28 @@
   tabs = [
       { :name => "Start", :url => root_path, :active => ["index", "messages", "home"],
         :subnav => [
-          { :name => "Messages", :url => "/messages"},
-          { :name => "My tasks", :url => "/home/tasks" },
-          { :name => "My ordergroup", :url => "/home/ordergroup"},
-          { :name => "My profile", :url => "/home/profile"}
+          { :name => "Nachrichten", :url => "/messages"},
+          { :name => "Meine Aufgaben", :url => "/home/tasks" },
+          { :name => "Meine Bestellgruppe", :url => "/home/ordergroup"},
+          { :name => "Mein Profil", :url => "/home/profile"}
         ]
       },
       { :name => "Foodcoop", :url => "/foodcoop/members", :active => ["foodcoop", "tasks"],
         :subnav => [
-          { :name => "Members", :url => "/foodcoop/members"},
-          { :name => "Workgroups", :url => "/foodcoop/workgroups"},
-          { :name => "Tasks", :url => "/tasks"}
+          { :name => "Mitglieder", :url => "/foodcoop/members"},
+          { :name => "Abeitsgruppen", :url => "/foodcoop/workgroups"},
+          { :name => "Aufgaben", :url => "/tasks"}
         ]
       },
-      { :name => "Orders", :url => "/ordering", :active => ["orders", "ordering"],
+      { :name => "Bestellungen", :url => u.ordergroup ? "/ordering/" : "/orders",
+        :active => ["orders", "ordering"],
         :subnav => [
-          { :name => "Order", :url => "/ordering" },
-          { :name => "My orders", :url => "/ordering/myOrders" },
-          { :name => "Manage orders", :url => "/orders", :access_denied? => (!u.role_orders?) }
+          { :name => "Bestellen!", :url => "/ordering" },
+          { :name => "Meine Bestellungen", :url => "/ordering/myOrders" },
+          { :name => "Bestellverwaltung", :url => "/orders", :access_denied? => (!u.role_orders?) }
         ]
       },
-      { :name => "Articles", :url => "/suppliers", 
+      { :name => "Artikel", :url => "/suppliers",
         :active => ["articles", "suppliers", "deliveries", "article_categories", "stockit"],
         :access_denied? => (!u.role_article_meta? && !u.role_suppliers?),
         :subnav => [
@@ -33,22 +34,22 @@
           { :name => "Kategorien", :url => "/article_categories"}
         ]
       },
-      { :name => "Finance", :url => "/finance",
+      { :name => "Finanzen", :url => "/finance",
         :active => ["finance/invoices", "finance/transactions", "finance/balancing"],
         :access_denied? => (!u.role_finance?),
         :subnav => [
-          { :name => "Manage accounts", :url => "/finance/transactions" },
-          { :name => "Balance orders", :url => "/finance/balancing/list" },
-          { :name => "Invoices", :url => finance_invoices_path }
+          { :name => "Konten verwalten", :url => "/finance/transactions" },
+          { :name => "Bestellungen abrechnen", :url => "/finance/balancing/list" },
+          { :name => "Rechnungen", :url => finance_invoices_path }
         ]
       },
       { :name => "Administration", :url => "/admin",
         :active => ["admin", "admin/users", "admin/ordergroups", "admin/workgroups"],
         :access_denied? => (!u.role_admin?),
         :subnav => [
-          { :name => "Users", :url => admin_users_path },
-          { :name => "Ordergroups", :url => admin_ordergroups_path },
-          { :name => "Workgroups", :url => admin_workgroups_path }
+          { :name => "Benutzerinnen", :url => admin_users_path },
+          { :name => "Bestellgruppen", :url => admin_ordergroups_path },
+          { :name => "Arbeitsgruppen", :url => admin_workgroups_path }
         ]
       }
     ]

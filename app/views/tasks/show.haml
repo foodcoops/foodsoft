@@ -1,35 +1,35 @@
-- title _('Task in detail')
+- title "Aufgabe im Detail"
 = render :partial => "nav"
 
 #task{:style => 'width:70%'}
   %table
     %tr
-      %td{:style => "width: 10em"}= _'Name'
+      %td{:style => "width: 10em"} Name
       %td
         %b= @task.name
     %tr
-      %td{:style => "vertical-align:top;"}=_ 'Description'
+      %td{:style => "vertical-align:top;"} Beschreibung
       %td= simple_format(@task.description)
     %tr
-      %td=_ 'Due date'
+      %td Fälligkeitsdatum
       %td= format_date(@task.due_date)
     %tr
-      %td=_ 'Responsible people'
+      %td Verantwortliche Menschen
       %td= render :partial => "assignments"
     %tr
-      %td=_ 'Group'
+      %td Arbeitsgruppe
       %td
         - if @task.workgroup
           = link_to @task.workgroup.name, :action => "workgroup", :id => @task.workgroup
           
     %tr
       %td{:colspan => "2"} 
-        %div{:style => "float:left"}=_ 'Done'
+        %div{:style => "float:left"} Als erledigt markieren
         - form_for :task, :url => {:action => "update_status", :id => @task} do |f|
-          = f.check_box :done, {:onchange => "submit()"}
+          = f.check_box :done, {:onchange => "submit()", :title => "Die Aufgabe wandert in das Archiv"}
          
     
   %p
-    = link_to _('Edit'), :action => "edit", :id => @task
+    = link_to "Bearbeiten", :action => "edit", :id => @task
     | 
-    = link_to _('Delete'), {:action => "destroy", :id => @task}, :method => "post", :confirm => _('Delete the task?')
+    = link_to "Löschen", {:action => "destroy", :id => @task}, :method => "post", :confirm => "Die Aufgabe wirklich löschen?"

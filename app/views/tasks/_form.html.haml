@@ -1,37 +1,30 @@
-= error_messages_for "task"
+= form.error_messages
 %p
-  %label{:for => "task_name"}
-  %b=_ 'Subject'
+  %b= form.label :name
   %br/
-  = text_field :task, :name
+  = form.text_field :name
 %p
-  %label{:for => "task_description"}
-  %b=_ 'Description'
+  %b= form.label :description
   %br/
-  = text_area :task, :description, :cols => 50, :rows => 10
+  = form.text_area :description, :cols => 50, :rows => 10
 %p
-  %label{:for => "task_user"}
-  %b=_ 'Responsible people'
+  %b= form.label :user
   %small=_ 'tasks can have multiple assignments'
   /%br/
   /= render :partial => "assignments"
 %p
   %small=_ 'use commas to seperate the names'
   %br/
-  /= text_field_with_auto_complete :user, :nick, {}, {:tokens => ","}
   = text_field_with_auto_complete :task, :user_list, {}, {:tokens => ","}
 %p
-  %label{:for => "task_required_users"}
-  %b= _("How many users are altogether required?")
+  %b= form.label :required_users, "How many users are altogether required?"
   %br/
-  = text_field :task, :required_users, :size => 3
+  = form.text_field :required_users, :size => 3
 %p
-  %label{:for => "task_group"} 
-  %b=_ 'Group'
+  %b= form.label :workgroup
   %br/
-  = select(:task, :group_id, Group.find(:all, :conditions => "type != 'Ordergroup'", :order => 'name').collect {|g| [ g.name, g.id ] }, { :include_blank => true })
+  = form.select :workgroup_id, Workgroup.all(:order => 'name').collect {|g| [ g.name, g.id ] }, { :include_blank => true }
 %p
-  %label{:for => "task_due_date"}
-  %b=_ 'Due date'
+  %b= form.label :due_date
   %br/
-  = date_select :task, :due_date, :start_year => 2007, :include_blank => true
+  = form.date_select :due_date, :start_year => 2007, :include_blank => true

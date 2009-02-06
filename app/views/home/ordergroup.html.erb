@@ -8,14 +8,12 @@
     <p><b>Kontostand:</b> <%= number_to_currency(@ordergroup.account_balance) %></p>
     <h2>Personen</h2>
     <ul style="list-style-type:decimal;">
-    <% for membership in @ordergroup.memberships %>
-      <li>
-        <%= link_to membership.user.nick, :controller => 'index', :action => 'showUser', :id => membership.user %>
-      </li>
-    <% end %>
+    <% for membership in @ordergroup.memberships -%>
+      <li><%= membership.user.nick -%></li>
+    <% end -%>
     </ul>
-    <%= link_to('Hinzufügen/entfernen', :action => 'members', :id => @ordergroup) %> |
-    <%= link_to('Person einladen', :action => 'invite', :id => @ordergroup) %>
+    <%= link_to('Hinzufügen/entfernen', :controller => 'foodcoop', :action => 'memberships', :id => @ordergroup) %> |
+    <%= link_to('Person einladen', :controller => 'foodcoop', :action => 'invite', :id => @ordergroup) %>
   </div>
 </div>
 

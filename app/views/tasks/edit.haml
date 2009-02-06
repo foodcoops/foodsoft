@@ -1,12 +1,12 @@
-- title _('Edit task')
+- title "Aufgabe bearbeiten"
 
 #form{:style => "float:left; width:39em"}
-  - form_tag :action => 'update', :id => @task do
-    = render :partial => 'form'
-    = submit_tag _('Save changes')
+  - form_for :task, @task, :url => {:action => 'update', :id => @task} do |form|
+    = render :partial => 'form', :locals => {:form => form}
+    = submit_tag "Speichern"
     |
-    = link_to _('Cancel'), :action => "show", :id => @task
+    = link_to "Abbrechen", :action => "show", :id => @task
 #workgroup_members{:style => "padding-left:41em"}
-  %h3=_ 'Members of the workgroups'
+  %h3 Mitglieder der Gruppe
   #list
     = render :partial => "shared/workgroup_members"

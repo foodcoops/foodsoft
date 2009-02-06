@@ -14,7 +14,7 @@ class HomeController < ApplicationController
     tasks = Task.find(:all, :conditions => ["assigned = ? and done = ?", false, false])
     @unassigned_tasks_number = 0
     for task in tasks
-      (@unassigned_tasks_number += 1) unless task.workgroup && !current_user.is_member_of(task.workgroup)
+      (@unassigned_tasks_number += 1) unless task.workgroup && !current_user.member_of?(task.workgroup)
     end
   end
 

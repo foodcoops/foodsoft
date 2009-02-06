@@ -20,7 +20,8 @@ class Task < ActiveRecord::Base
   has_many :users, :through => :assignments
   belongs_to :workgroup
 
-  named_scope :non_group, :conditions => { :workgroup_id => nil, :done => false }, :order => "due_date ASC"
+  named_scope :non_group, :conditions => { :workgroup_id => nil, :done => false }
+  named_scope :done, :conditions => {:done => true}, :order => "due_date ASC"
   
   # form will send user in string. responsibilities will added later
   attr_protected :users

@@ -181,8 +181,8 @@ class User < ActiveRecord::Base
   end
  
   # returns true if user is a member of a given group
-  def is_member_of(group)
-    return true if group.users.detect {|user| user == self}
+  def member_of?(group)
+    group.users.exists?(self.id)
   end
  
   #Returns an array with the users groups (but without the Ordergroups -> because tpye=>"")
