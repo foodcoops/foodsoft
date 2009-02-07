@@ -35,6 +35,7 @@ class Article < ActiveRecord::Base
   has_many :article_prices, :order => "created_at"
 
   named_scope :available, :conditions => {:availability => true}
+  named_scope :not_in_stock,  :conditions => {:type => nil}
 
   # Validations
   validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category_id

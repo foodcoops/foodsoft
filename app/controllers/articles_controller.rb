@@ -28,8 +28,8 @@ class ArticlesController < ApplicationController
     # if somebody uses the search field:
     conditions = ["articles.name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
 
-    @total = @supplier.articles.count(:conditions => conditions)
-    @articles = @supplier.articles.paginate(:order => sort,
+    @total = @supplier.articles.not_in_stock.count(:conditions => conditions)
+    @articles = @supplier.articles.not_in_stock.paginate(:order => sort,
                                              :conditions => conditions,
                                              :page => params[:page],
                                              :per_page => @per_page,
@@ -136,7 +136,7 @@ class ArticlesController < ApplicationController
   
   # Renders a form for editing all articles from a supplier
   def edit_all
-    @articles = @supplier.articles.find :all,
+    @articles = @supplier.articles.not_in_stock.find :all,
       :order => 'article_categories.name, articles.name',
       :include => [:article_category]
 
