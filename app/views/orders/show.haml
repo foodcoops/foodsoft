@@ -44,7 +44,9 @@
       Aktionen:
       - if @order.open?
         = link_to "Bearbeiten", edit_order_path(@order)
+        |
         = link_to 'Beenden!', finish_order_path(@order), :method => :post, :confirm => "Willst Du wirklich die Bestellung beenden?\nEs gibt kein zurück.."
+        |
       - unless @order.closed?
         = link_to "Löschen", @order, :confirm => "Willst du wirklich die Bestellung löschen?", :method => :delete
         

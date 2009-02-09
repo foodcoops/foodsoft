@@ -21,18 +21,11 @@ class OrderArticle < ActiveRecord::Base
   belongs_to :article_price
   has_many :group_order_articles, :dependent => :destroy
 
-  validates_presence_of :order_id
-  validates_presence_of :article_id
-  validates_uniqueness_of :article_id, :scope => :order_id   #  an article can only have one record per order
+  validates_presence_of :order_id, :article_id
   validate :article_and_price_exist
 
   named_scope :ordered, :conditions => "units_to_order >= 1"
 
-  # TODO: How to create/update articles/article_prices during balancing
-#  # Accessors for easy create of new order_articles in balancing process
-#  attr_accessor :name, :order_number, :units_to_order, :unit_quantity, :unit, :net_price, :tax, :deposit
-#
-#  before_validation_on_create :create_new_article
 
   # This method returns either the ArticlePrice or the Article
   # The first will be set, when the the order is finished
@@ -88,16 +81,33 @@ class OrderArticle < ActiveRecord::Base
     (units_to_order * price.unit_quantity) == group_orders_sum[:quantity]
   end
 
+  # Updates order_article and belongings during balancing process
+  def update_article_and_price!(article_attributes, price_attributes, order_article_attributes)
+    OrderArticle.transaction do
+      # Updates article
+      article.update_attributes!(article_attributes)
+
+      article_price.attributes = price_attributes
+      if article_price.changed?
+        # Creates a new article_price if neccessary
+        price = build_article_price(price_attributes)
+        price.created_at = order.ends
+        price.save!
+
+        # Updates ordergroup values
+        group_order_articles.each { |goa| goa.group_order.update_price! }
+      end
+
+      # Updates units_to_order
+      self.attributes = order_article_attributes
+      self.save!
+    end
+  end
+
   private
   
   def article_and_price_exist
      errors.add(:article, "muss angegeben sein und einen aktuellen Preis haben") if !(article = Article.find(article_id)) || article.fc_price.nil?
   end
 
-#  def create_new_article
-#    old_article = order.articles.find_by_name(name) # Check if there is already an Article with this name
-#    unless old_article
-#      self.article.build
-#    end
-#  end
 end

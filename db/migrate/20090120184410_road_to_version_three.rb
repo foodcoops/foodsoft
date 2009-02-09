@@ -1,4 +1,4 @@
-class RefactorOrderLogic < ActiveRecord::Migration
+class RoadToVersionThree < ActiveRecord::Migration
   def self.up
     # TODO: Combine migrations since foodsoft3-development into one file
     # and try to build a migration path from old data.

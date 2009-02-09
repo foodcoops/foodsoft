@@ -13,8 +13,8 @@
 %td= order_article.price.tax
 %td= order_article.price.deposit
 %td
-  //= remote_link_to icon(:edit), |
-  //:url => {:action => 'edit_order_article', :id => order_article} |
+  = remote_link_to icon(:edit), |
+  :url => {:action => 'edit_order_article', :id => order_article} |
 %td
   = remote_link_to icon(:delete), :confirm => 'Bist du sicher?', |
     :url => {:action => 'destroy_order_article', :id => order_article}, |

@@ -1,25 +1,25 @@
-= form.error_messages
+- if @error
+  %b= @error
 %table
   %tr
     %th Name
     %th Nr.
     %th
       %abbr{:title=>"Anzahl gelieferter Gebinde"} Menge
-    %th GebGr
     %th Einheit
+    %th GebGr
     %th netto
     %th MwSt.
     %th Pfand
   %tr
-    %td= form.text_field 'name', :size => 20
-    %td= form.text_field 'order_number', :size => 3
-    %td= form.text_field 'units_to_order', :size => 5
-    %td= form.text_field 'unit_quantity', :size => 3
-    %td= form.text_field 'unit', :size => 5
-    %td= form.text_field 'net_price', :size => 3
-    %td= form.text_field 'tax', :size => 3
-    %td= form.text_field 'deposit', :size => 3
-= form.hidden_field "order_id"
+    %td= text_field_tag 'article[name]', @order_article.article.name, :size => 20
+    %td= text_field_tag 'article[order_number]', @order_article.article.order_number, :size => 3
+    %td= text_field_tag 'order_article[units_to_order]', @order_article.units_to_order, :size => 5
+    %td= text_field_tag 'article[unit]', @order_article.article.unit, :size => 5
+    %td= text_field_tag 'price[unit_quantity]', @order_article.price.unit_quantity, :size => 3
+    %td= text_field_tag 'price[price]', @order_article.price.price, :size => 3
+    %td= text_field_tag 'price[tax]', @order_article.price.tax, :size => 3
+    %td= text_field_tag 'price[deposit]', @order_article.price.deposit, :size => 3
 %br/
 = submit_tag "Speichern"
 | 

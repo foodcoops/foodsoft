@@ -45,3 +45,10 @@ function redirectTo(newLoc) {
     	document.location.href = nextPage
    	}
 }
+
+// Use with auto_complete to set a unique id,
+// e.g. when the user selects a (may not unique) name
+// There must be a hidden field with the id 'hidden_field'
+function setHiddenId(text, li) {
+  $('hidden_id').value = li.id;
+}

@@ -1,0 +1,3 @@
+%ul.autocomplete
+  - for article in @articles
+    %li{:id => article.id.to_s}= "#{article.name} (#{article.unit_quantity} * #{article.unit} | #{number_to_currency(article.price)})"
