@@ -1,7 +1,7 @@
 class DeliveriesController < ApplicationController
 
-  before_filter :find_supplier
-
+  before_filter :find_supplier, :exclude => :fill_new_stock_article_form
+  
   def index
     @deliveries = @supplier.deliveries.find(:all)
 
@@ -97,6 +97,32 @@ class DeliveriesController < ApplicationController
 
     render :update do |page|
       page.visual_effect :DropOut, "stock_change_#{stock_change.id}"
+    end
+  end
+
+  def auto_complete_for_article_name
+    @articles = @supplier.articles.find(:all,
+      :conditions => [ "LOWER(articles.name) LIKE ?", '%' + params[:article][:name].downcase + '%' ],
+      :limit => 8)
+    render :partial => 'shared/auto_complete_articles'
+  end
+
+  def fill_new_stock_article_form
+    article = Article.find(params[:article_id])
+    @supplier = article.supplier
+    stock_article = @supplier.stock_articles.build(
+      article.attributes.reject { |attr| attr == ('id' || 'type')}
+    )
+
+    render :partial => 'new_stock_article', :locals => {:stock_article => stock_article}
+  end
+
+  def in_place_edit_for_stock_quantity
+    stock_change = StockChange.find(params[:editorId])
+    if stock_change.update_attribute(:quantity, params[:value])
+      render :inline => params[:value]
+    else
+      render :inline => "Ein Fehler ist aufgetreten."
     end
   end
 end

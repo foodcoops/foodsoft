@@ -14,7 +14,8 @@
     %thead
       %tr
         %th Artikel
-        %th Menge
+        %th im Lager
+        %th davon bestellt
         %th Einheit
         %th Preis
         %th Lieferant
@@ -24,6 +25,7 @@
         %tr{:class => cycle("even", "odd")}
           %td=h article.name
           %td= article.quantity
+          %td= article.quantity - article.quantity_available
           %td= article.unit
           %td= article.price
           %td= link_to article.supplier.name, article.supplier

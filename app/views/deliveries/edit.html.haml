@@ -4,13 +4,34 @@
   %b Lieferant:
   = @supplier.name
 
-- render :layout => 'form' do
-  %table{:style => "width:40em"}
-    - for stock_change in @delivery.stock_changes
-      %tr[stock_change]
-        %td= stock_change.article.name
-        %td= stock_change.quantity
-        %td
-          = link_to_remote "Artikel entfernen", |
-            :url => drop_stock_change_supplier_delivery_path(@supplier, @delivery, :stock_change_id => stock_change), |
-            :method => :post |
+- form_for([@supplier,@delivery]) do |f|
+  = f.error_messages
+  = f.hidden_field :supplier_id
+  %p
+    %b= f.label :delivered_on
+    = f.date_select :delivered_on
+
+  %h2 Artikel
+  #stock_changes
+    %table.list{:style => "width:40em"}
+      %tr
+        %th Name
+        %th Menge
+        %th
+      - for stock_change in @delivery.stock_changes
+        %tr[stock_change]
+          %td= stock_change.stock_article.name
+          %td
+            %span{:id => stock_change.id, :style => "width:5em"}= stock_change.quantity
+            = javascript_tag "new Ajax.InPlaceEditor('#{stock_change.id}', |
+                            '/deliveries/in_place_edit_for_stock_quantity', |
+                            {size: 5, });" |
+          %td
+            = link_to_remote "Artikel entfernen", |
+              :url => drop_stock_change_supplier_delivery_path(@supplier, @delivery, :stock_change_id => stock_change), |
+              :method => :post |
+  %p
+    = f.submit "Speichern"
+
+= link_to 'Zurück', supplier_deliveries_path(@supplier)
+  

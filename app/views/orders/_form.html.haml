@@ -26,21 +26,24 @@
   .column_content
     - if (@template_orders && !@template_orders.empty?)
       %p
-        %label{:for => 'template'}=_ "Use article selection from"
+        %label{:for => 'template'} Benutze Artikelauswahl von
         %select{:name => "template_id", :onchange => "useTemplate(this[this.selectedIndex].value)"}
-          %option{:value => "-1", :selected => "selected"}=_ "Choose an order..."
+          %option{:value => "-1", :selected => "selected"} Bestellung auswählen...
           - i = -1
           - for order in @template_orders
             %option{:value => (i += 1)}= "#{h(order.name)} bis #{order.ends.strftime('%d. %b')}"
     %table.list
       %tr
         %th= check_box_tag 'checkall', "1", false, { :onclick => "checkUncheckAll(this)" }
-        %th=_ "Name"
-        %th=_ "Note"
-        %th=_ "Origin"
-        %th=_ "Manufacturer"
-        %th=_ "Unit quantity"
-        %th=_ "Price"
+        %th Name
+        %th Notiz
+        - if @order.stockit?
+          %th Verfügbar
+        - else
+          %th Herkunft
+          %th Hersteller
+          %th Gebinde
+        %th Preis (netto/FC)
       - for category_name, articles in @order.articles_for_ordering
         %tr{:style => "background-color:#EFEFEF"}
           %td
@@ -54,9 +57,12 @@
             %td= check_box_tag "order[article_ids][]", article.id, included, { :id => "checkbox_#{article.id}", :onclick => "checkRow('#{article.id}')" }
             %td=h article.name
             %td=h truncate article.note, :length => 25
-            %td=h truncate article.origin, :length => 15
-            %td=h truncate article.manufacturer, :length => 15
-            %td= "#{article.unit_quantity} x #{article.unit}"
+            - if @order.stockit?
+              %td= "#{article.quantity_available} * #{article.unit}"
+            - else
+              %td=h truncate article.origin, :length => 15
+              %td=h truncate article.manufacturer, :length => 15
+              %td= "#{article.unit_quantity} x #{article.unit}"
             %td= "#{number_to_currency(article.price)} / #{number_to_currency(article.fc_price)}"
       %tr
         %td{:colspan => "6"}
