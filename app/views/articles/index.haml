@@ -2,18 +2,18 @@
 
 // import menu
 - unless @supplier.shared_supplier.nil?
-  .menu{:style => 'width: 14em'}
+  .menu{:style => 'width: 16em'}
     %ul
       %li
-        =_ 'External database'
+        Zugriff auf externe Datenbank
         %ul
-          %li= link_to_function _('search/import'), "Element.toggle('import')"
-          %li= link_to _('sync'), sync_supplier_articles_path(@supplier), :method => :post
+          %li= link_to_function "Suchen/Importieren", "Element.toggle('import')"
+          %li= link_to "Synchronisieren", sync_supplier_articles_path(@supplier), :method => :post
 
 
 #change_supplier{:style => "padding:0 0 0.5em 0.7em;"}
   %span{:style => "float:left"}
-    =_ 'Change supplier:'
+    Lieferant wechseln:
   - form_tag do
     = select_tag :switch_supplier, |
       options_for_select( Supplier.all(:order => 'name').collect {|s| [s.name, url_for(supplier_articles_path(s))] }, |
@@ -24,50 +24,50 @@
 - unless @supplier.shared_supplier.nil?
   #import.single_column{:style => "display:none; clear:both"}
     .box_title
-      %h2=_ 'Import articles'
+      %h2 Artikel importieren
     .column_content
       #search{:style => "padding-bottom:3em"}
         - form_remote_tag :url => shared_supplier_articles_path(@supplier), |
             :before => "Element.show('loader')", :success => "Element.hide('loader')", |
             :method => :get do |
           = text_field_tag :import_query, params['import_query'], :size => 10
-          = submit_tag _('Search articles')
+          = submit_tag "Suchen"
           - if @supplier.shared_supplier.lists
-            =_ "Search in following lists: "
+            Suche in folgenden Listen:
             - @supplier.shared_supplier.lists.each do |token, name|
               = check_box_tag "lists[#{token}]", "1", true
               = name
           |
-          =_ "only regional:"
+          Nur aus der Region:
           = check_box_tag "regional", "1", false
         #search_results
           // "import_search_results" will be rendered
-      = link_to_function _('Close'), "Element.hide('import')"
+      = link_to_function "Schließen", "Element.hide('import')"
 
 .single_column{:style => 'width:100%; clear:both'}
   .box_title
   .column_content
     #links
-      %b= link_to_remote _('New article'), :url => new_supplier_article_path(@supplier), :before => "Element.show('loader')", :success => "Element.hide('loader')", :method => :get
+      %b= remote_link_to "Neuer Artikel", :url => new_supplier_article_path(@supplier)
       |
-      = link_to _('Edit all'), edit_all_supplier_articles_path(@supplier)
+      = link_to "Alle bearbeiten", edit_all_supplier_articles_path(@supplier)
       |
-      = link_to _('Upload articles'), upload_supplier_articles_path(@supplier)
+      = link_to "Artikel hochladen", upload_supplier_articles_path(@supplier)
       |
-      = link_to_if @current_user.role_orders?, _('Create order'), {:controller => 'orders', :action => 'new', :supplier_id => @supplier }
+      = link_to_if @current_user.role_orders?, "Bestellung anlegen", {:controller => 'orders', :action => 'new', :supplier_id => @supplier }
 
     #article_filter
       #article_search_form{:style=>"display:inline;"}
         - form_remote_tag :url => supplier_articles_path(@supplier), |
           :before => "Element.show('loader')", :success => "Element.hide('loader')", |
           :method => :get do |
-          %label{:for => 'article_name'}=_ "Search in article name: "
+          %label{:for => 'article_name'} Suche im Artikelnamen:
           = text_field_tag("query", params['query'], :size => 10 )
-          = submit_tag _('Search')
+          = submit_tag "Suchen"
     
     %form{ :action => url_for(update_selected_supplier_articles_path(@supplier)), :method => "post", :id => "articlesInListForm" }
       #table= render :partial => 'articles'
   
   %br/
-  = link_to _('Back'), :action => 'index'
+  = link_to "Zurück", :action => 'index'
 #edit_article{:style => "display:none"}

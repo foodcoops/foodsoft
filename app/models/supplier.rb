@@ -24,9 +24,9 @@
 class Supplier < ActiveRecord::Base
   acts_as_paranoid  # Avoid deleting the supplier for consistency of order-results
 
-  has_many :articles, :dependent => :destroy,
+  has_many :articles, :dependent => :destroy, :conditions => {:type => nil},
     :include => [:article_category], :order => 'article_categories.name, articles.name'
-  has_many :stock_articles
+  has_many :stock_articles, :include => [:article_category], :order => 'article_categories.name, articles.name'
   has_many :orders
   has_many :deliveries
   has_many :invoices
@@ -51,13 +51,11 @@ class Supplier < ActiveRecord::Base
     for article in articles
       # try to find the associated shared_article
       shared_article = article.shared_article
-      if shared_article
-        # article will be updated
+
+      if shared_article # article will be updated
         
-        # skip if shared_article has not been changed
         unequal_attributes = article.shared_article_changed?
-        unless unequal_attributes.blank?
-          # update objekt but don't save it
+        unless unequal_attributes.blank? # skip if shared_article has not been changed
           
           # try to convert different units
           new_price, new_unit_quantity = article.convert_units

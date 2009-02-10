@@ -1,5 +1,5 @@
 %p
-  =_ 'Number of found articles :' 
+  Gefundene Artikel:
   %b= @total
 
 %p
@@ -16,18 +16,18 @@
     %tr
       %th
       %th[sort_td_class_helper "name"]
-        = sort_link_helper _("Name"), "name"
+        = sort_link_helper "Name", "name"
       %th
       %th[sort_td_class_helper "category"]
-        = sort_link_helper _("Category"), "category"
+        = sort_link_helper "Kategorie", "category"
       %th[sort_td_class_helper "unit"]
-        = sort_link_helper _("Unit"), "unit"
+        = sort_link_helper "Einheit", "unit"
       %th[sort_td_class_helper "note"]
-        = sort_link_helper _("Note"), "note"
-      %th{:style => "width: 4em;"}=_ 'UnitQu'
-      %th{:style => "width: 4em;"}=_ 'Price'
-      %th{:style => "width: 3.5em;"}=_ 'Tax'
-      %th{:style => "width: 4em;"}=_ 'Deposit'
+        = sort_link_helper "Notiz", "note"
+      %th{:style => "width: 4em;"} Gebgr.
+      %th{:style => "width: 4em;"} Preis
+      %th{:style => "width: 3.5em;"} MwSt
+      %th{:style => "width: 4em;"} Pfand
       %th{:style => "width: 3em;"}
       
   %tbody#listbody
@@ -47,14 +47,10 @@
               %option{:value => "setAvailable", :onclick => 'formSubmit();'} Artikel sind verfügbar
               
             = hidden_field_tag 'supplier_id', @supplier.id
-%p
-  = pagination_links_remote @articles, :params => {:sort => params[:sort]}
-    
-:plain
-  <script type="text/javascript">
-    function formSubmit() {
-      $("articlesInListForm").submit()
-    }
-  </script>        
-              
-            
+
+%p= pagination_links_remote @articles, :params => {:sort => params[:sort]}
+
+:javascript
+  function formSubmit() {
+    $("articlesInListForm").submit()
+  }

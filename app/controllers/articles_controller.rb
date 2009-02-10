@@ -28,8 +28,8 @@ class ArticlesController < ApplicationController
     # if somebody uses the search field:
     conditions = ["articles.name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
 
-    @total = @supplier.articles.not_in_stock.count(:conditions => conditions)
-    @articles = @supplier.articles.not_in_stock.paginate(:order => sort,
+    @total = @supplier.articles.count(:conditions => conditions)
+    @articles = @supplier.articles.paginate(:order => sort,
                                              :conditions => conditions,
                                              :page => params[:page],
                                              :per_page => @per_page,
@@ -136,10 +136,7 @@ class ArticlesController < ApplicationController
   
   # Renders a form for editing all articles from a supplier
   def edit_all
-    @articles = @supplier.articles.not_in_stock.find :all,
-      :order => 'article_categories.name, articles.name',
-      :include => [:article_category]
-
+    @articles = @supplier.articles.all
   end
 
   # Updates all article of specific supplier
@@ -309,15 +306,15 @@ class ArticlesController < ApplicationController
   def sync
     # check if there is an shared_supplier
     unless @supplier.shared_supplier
-      flash[:error]= @supplier.name + _(" ist not assigned to an external database.")
+      flash[:error]= "#{@supplier.name} ist nicht mit einer externen Datenbank verknüpft."
       redirect_to supplier_articles_path(@supplier)
     end
     # sync articles against external database
     @updated_articles, @outlisted_articles = @supplier.sync_all
-      # convert to db-compatible-string
+    # convert to db-compatible-string
     @updated_articles.each {|a, b| a.shared_updated_on = a.shared_updated_on.to_formatted_s(:db)}
     if @updated_articles.empty? && @outlisted_articles.empty?
-      flash[:notice] = _("The database is up to date.")
+      flash[:notice] = "Der Katalog ist aktuell."
       redirect_to supplier_articles_path(@supplier)
     end
   end

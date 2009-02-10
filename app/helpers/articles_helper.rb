@@ -6,8 +6,8 @@ module ArticlesHelper
   end
 
   def row_classes(article)
-    classes = ""
-    classes += ' unavailable' if article.availability
+    classes = " click-me"
+    classes += " unavailable" if !article.availability
     classes += " just_updated" if @article.recently_updated && @article.availability
     classes
   end

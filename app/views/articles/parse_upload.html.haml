@@ -1,24 +1,24 @@
 - title "#{@supplier.name} / Artikel hochladen"
 %p
   %i
-    =_ "Please check the parsed articles and choose a supplier at the end of page."
+    Bitte überprüfe die eingelesenen Artikel.
     %br/
-    =_ "At the moment there is no checking of dublicate articles."
+    Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.
 
 - form_tag(create_from_upload_supplier_articles_path(@supplier)) do
   %table
     %tr
-      %th=_ "Number"
-      %th=_ "Name"
-      %th=_ "Note"
-      %th=_ "Manufacturer"
-      %th=_ "Origin"
-      %th=_ "Unit"
-      %th=_ "Net price"
-      %th=_ "Tax"
-      %th=_ "Deposit"
-      %th=_ "Unit quantity"
-      %th=_ "Category"
+      %th Nummer
+      %th Name
+      %th Notiz
+      %th Hersteller
+      %th Herkunft
+      %th Einheit
+      %th Nettopreis
+      %th MwSt
+      %th Pfand
+      %th Gebindegröße
+      %th Kategorie
     - for article in @articles
       - fields_for "articles[]", article do |form|
         %tr{:class => cycle('even', 'odd')}
@@ -34,7 +34,7 @@
           %td= form.text_field 'unit_quantity', :size => 4
           %td= form.select 'article_category_id', ArticleCategory.find(:all).collect {|a| [ a.name, a.id ] }
   %p
-    = submit_tag "Save new Articles for #{@supplier.name}"
+    = submit_tag "Speichere neue Artikel für #{@supplier.name}"
     |
-    = link_to _("Back"), upload_supplier_articles_path(@supplier)
+    = link_to "Zurück", upload_supplier_articles_path(@supplier)
       

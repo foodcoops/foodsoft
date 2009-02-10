@@ -107,14 +107,18 @@ module ApplicationHelper
     icons = { :delete => { :file => 'b_drop.png', :alt => 'Löschen'},
               :edit   => { :file => 'b_edit.png', :alt => 'Bearbeiten'}}
     options.merge!({:size => '16x16',:border => "0"})
-    options.merge!({:alt => icons[name][:alt]}) unless options[:alt]
+    options.merge!({:alt => icons[name][:alt], :title => icons[name][:alt]}) unless options[:alt]
     
     image_tag icons[name][:file], options
   end
 
   # Remote links with default 'loader'.gif during request
   def remote_link_to(text, options={})
-    remote_options = {:before => "Element.show('loader')", :success => "Element.hide('loader')"}
+    remote_options = {
+      :before => "Element.show('loader')",
+      :success => "Element.hide('loader')",
+      :method => :get
+    }
     link_to_remote(text, remote_options.merge(options))
   end
 

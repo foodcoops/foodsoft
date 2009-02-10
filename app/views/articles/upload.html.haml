@@ -1,18 +1,23 @@
 - title "#{@supplier.name} / Artikel hochladen"
 %p
-  %i 
-    =_ 'The file-type must be "csv" (textfile). Use a semicolon (";") to seperate the fields and double quotes ("Bananas...") for the text.'
+  %i
+    Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile
+    wird beim Einlesen ignoriert.
     %br/
-    =_ 'The character-set has to be "UTF-8". The first row, maybe used for headers, will be ignored.'
+    Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten
+    Anführungszeichen ("Text...") umklammert werden.
+    %br/
+    Als Zeichensatz wird UTF-8 erwartet.
 %p
   %i
-    =_ "Correct order of the columns:"
+    Korrekte Reihenfolge der Spalten:
     %br/
-    = [_("Status (x=outlistet)"), _("Number"), _("Name"), _("Note"), _("Manufacturer"), _("Origin"), |
-      _("Unit"), _("Net price"), _("Tax"), _("Deposit"), _("Unit quantity"), |
-      _("Scale quantity"), _("Scale price"), _("Category")].join(" | ") |
+    = ["Status (x=ausgelistet)", "Bestellnummer", "Name", "Notiz", "Hersteller", "Herkunft", |
+      "Einheit", "Preis(netto)", "MwSt", "Pfand", "Gebindegröße", |
+      "Staffelmenge", "Staffelpreis", "Kategorie"].join(" | ") |
 
 #uploadArticles.uploadForm
-  - form_for(:articles, :url => parse_upload_supplier_articles_path(@supplier), :html => { :multipart => true }) do |form|
-    %p= form.file_field("file")
-    %p= submit_tag _("Upload articles")
+  - form_for :articles, :url => parse_upload_supplier_articles_path(@supplier), |
+     :html => { :multipart => true } do |form| |
+    %p= form.file_field "file"
+    %p= submit_tag "Datei hochladen"

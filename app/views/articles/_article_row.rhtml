@@ -10,23 +10,18 @@
 <td><%= @article.unit_quantity -%></td>
 <td class="currency">
   <acronym title="zuletzt geändert: <%= format_date(@article.updated_at) -%>
-    | Brutto: <%= number_to_currency(@article.fc_price) -%>">
+    | Brutto: <%= number_to_currency(@article.gross_price) -%>">
     <%= number_to_currency(@article.price) -%>
   </acronym>
 </td>
 <td><%= number_to_percentage(@article.tax) if @article.tax != 0  -%></td>
 <td><%= number_to_currency(@article.deposit) if @article.deposit != 0 -%></td>
 <td>
-  <%= link_to_remote icon(:edit, :onclick => "checkRow('#{@article.id.to_s}')"),
-                     :url => edit_supplier_article_path(@supplier, @article),
-                     :method => :get,
-                     :before => "Element.show('loader')",
-                     :success => "Element.hide('loader')" %>
-  <%= link_to_remote icon(:delete, :onclick => "checkRow('#{@article.id.to_s}')"),
+  <%= remote_link_to icon(:edit, :onclick => "checkRow('#{@article.id.to_s}')"),
+                     :url => edit_supplier_article_path(@supplier, @article) %>
+  <%= remote_link_to icon(:delete, :onclick => "checkRow('#{@article.id.to_s}')"),
                      :url => [@supplier, @article],
                      :method => :delete,
-                     :confirm => 'Bist du sicher?',
-                     :before => "Element.show('loader')",
-                     :success => "Element.hide('loader')" %>
+                     :confirm => 'Bist du sicher?' %>
 </td>
      

@@ -21,7 +21,7 @@
       %tbody
         - for supplier in @suppliers
           %tr{:class => cycle('even','odd', :name => 'suppliers')}
-            %td= link_to "<b>#{h(supplier.name)}</b> (#{supplier.articles.not_in_stock.count})", supplier_articles_path(supplier)
+            %td= link_to "<b>#{h(supplier.name)}</b> (#{supplier.articles.count})", supplier_articles_path(supplier)
             %td=h supplier.phone
             %td=h supplier.customer_number
             %td= link_to "Anzeigen", supplier
