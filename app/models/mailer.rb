@@ -37,5 +37,14 @@ class Mailer < ActionMailer::Base
                 :link => url_for(:host => request.host, :controller => "login", :action => "invite", :id => invite.token),
                 :foodsoftUrl => url_for(:host => request.host, :controller => "index")
   end
+
+  # Notify user of upcoming task.
+  def notify_upcoming_tasks(user, task)
+    subject   "[#{APP_CONFIG[:name]}] Aufgaben werden fällig!"
+    recipients  user.email
+    from        "FoodSoft <#{APP_CONFIG[:email_sender]}>"
+    body        :user => user, :task => task
+
+  end
   
 end

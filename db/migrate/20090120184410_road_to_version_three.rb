@@ -144,7 +144,9 @@ class RoadToVersionThree < ActiveRecord::Migration
 #      t.datetime :created_at
 #    end
 
-
+    # == User
+    # Ativate all Users for notification on upcoming tasks
+    User.all.each { |u| u.settings['notify.upcoming_tasks'] = 1 }
 
   end
 

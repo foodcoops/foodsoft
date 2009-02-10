@@ -53,12 +53,13 @@ class User < ActiveRecord::Base
   # returns the User-settings and the translated description
   def self.setting_keys
     {
-      "notify.orderFinished" => 'Get message with order result',
-      "notify.negativeBalance" => 'Get message if negative account balance',
-      "messages.sendAsEmail" => 'Get messages as emails',
-      "profile.phoneIsPublic" => 'Phone is visible for foodcoop members',
-      "profile.emailIsPublic" => 'Email is visible for foodcoop members',
-      "profile.nameIsPublic" => 'Name is visible for foodcoop members'
+      "notify.orderFinished" => 'Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).',
+      "notify.negativeBalance" => 'Informiere mich, falls meine Bestellgruppe ins Minus rutscht.',
+      "notify.upcoming_tasks" => 'Erinnere mich an anstehende Aufgaben.',
+      "messages.sendAsEmail" => 'Bekomme Nachrichten als Emails.',
+      "profile.phoneIsPublic" => 'Telefon ist für Mitglieder sichtbar',
+      "profile.emailIsPublic" => 'E-Mail ist für Mitglieder sichtbar',
+      "profile.nameIsPublic" => 'Name ist für Mitglieder sichtbar'
     }
   end
   # retuns the default setting for a NEW user
@@ -67,7 +68,8 @@ class User < ActiveRecord::Base
   def settings_default(setting)
     # define a default for the settings
     defaults = {
-      "messages.sendAsEmail" => true
+      "messages.sendAsEmail" => true,
+      "notify.upcoming_tasks" => true
     }
     return true if self.new_record? && defaults[setting]
   end
