@@ -11,8 +11,8 @@ class Admin::OrdergroupsController < ApplicationController
     # if the search field is used
     conditions = "name LIKE '%#{params[:query]}%'" unless params[:query].nil?
 
-    @total = Ordergroup.count(:conditions => conditions )
-    @ordergroups = Ordergroup.paginate(:conditions => conditions, :page => params[:page],
+    @total = Ordergroup.without_deleted.count(:conditions => conditions )
+    @ordergroups = Ordergroup.without_deleted.paginate(:conditions => conditions, :page => params[:page],
       :per_page => @per_page, :order => 'name')
 
     respond_to do |format|
@@ -60,7 +60,7 @@ class Admin::OrdergroupsController < ApplicationController
     @ordergroup = Ordergroup.find(params[:id])
     @ordergroup.destroy
 
-    redirect_to(admin_Ordergroups_url)
+    redirect_to(admin_ordergroups_url)
   end
 
   def memberships

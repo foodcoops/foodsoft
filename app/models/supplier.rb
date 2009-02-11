@@ -30,6 +30,7 @@ class Supplier < ActiveRecord::Base
   has_many :orders
   has_many :deliveries
   has_many :invoices
+  belongs_to :shared_supplier  # for the sharedLists-App
 
   attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number, :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
 	
@@ -38,17 +39,14 @@ class Supplier < ActiveRecord::Base
 
   validates_length_of :phone, :in => 8..20
   validates_length_of :address, :in => 8..50
-  
-  # for the sharedLists-App
-  belongs_to :shared_supplier
-  
+
   # sync all articles with the external database
   # returns an array with articles(and prices), which should be updated (to use in a form)
   # also returns an array with outlisted_articles, which should be deleted
   def sync_all
     updated_articles = Array.new
     outlisted_articles = Array.new
-    for article in articles
+    for article in articles.without_deleted
       # try to find the associated shared_article
       shared_article = article.shared_article
 

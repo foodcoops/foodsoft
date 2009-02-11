@@ -28,12 +28,14 @@ class ArticlesController < ApplicationController
     # if somebody uses the search field:
     conditions = ["articles.name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
 
-    @total = @supplier.articles.count(:conditions => conditions)
-    @articles = @supplier.articles.paginate(:order => sort,
-                                             :conditions => conditions,
-                                             :page => params[:page],
-                                             :per_page => @per_page,
-                                             :include => :article_category)
+    @total = @supplier.articles.without_deleted.count(:conditions => conditions)
+    @articles = @supplier.articles.without_deleted.paginate(
+      :order => sort,
+      :conditions => conditions,
+      :page => params[:page],
+      :per_page => @per_page,
+      :include => :article_category
+    )
 
     respond_to do |format|
       format.html # list.haml
@@ -136,7 +138,7 @@ class ArticlesController < ApplicationController
   
   # Renders a form for editing all articles from a supplier
   def edit_all
-    @articles = @supplier.articles.all
+    @articles = @supplier.articles.without_deleted
   end
 
   # Updates all article of specific supplier

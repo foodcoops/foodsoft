@@ -101,7 +101,7 @@ class DeliveriesController < ApplicationController
   end
 
   def auto_complete_for_article_name
-    @articles = @supplier.articles.find(:all,
+    @articles = @supplier.articles.without_deleted.find(:all,
       :conditions => [ "LOWER(articles.name) LIKE ?", '%' + params[:article][:name].downcase + '%' ],
       :limit => 8)
     render :partial => 'shared/auto_complete_articles'

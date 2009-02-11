@@ -26,7 +26,7 @@
 #
 
 class Article < ActiveRecord::Base
-  acts_as_paranoid                    # Avoid deleting the article for consistency of order-results
+  acts_as_paranoid  # Avoid deleting the article for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
 
   # Associations
@@ -46,7 +46,7 @@ class Article < ActiveRecord::Base
   # Callbacks
   before_save :update_price_history
   before_destroy :check_article_in_use
-    
+
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def price=(price)
     self[:price] = String.delocalized_decimal(price)
@@ -176,7 +176,7 @@ class Article < ActiveRecord::Base
   
   # Checks if the article is in use before it will deleted
   def check_article_in_use
-    raise self.name.to_s + _(" cannot be deleted. The article is used in a current order!") if self.in_open_order
+    raise self.name.to_s + " kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!" if self.in_open_order
   end
 
   # Create an ArticlePrice, when the price-attr are changed.

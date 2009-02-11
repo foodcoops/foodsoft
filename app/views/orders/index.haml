@@ -6,7 +6,7 @@
       Neue Bestellung anlegen für
       %select{:onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;"}
         %option{:selected => 'selected'}=_ "Choose a supplier..."
-        = options_for_select(Supplier.find(:all).collect {|s| [ s.name, url_for(:action => "new", :supplier_id => s)] })
+        = options_for_suppliers_to_select
 %br/
 .left_column{:style => "width:55em"}
   .box_title

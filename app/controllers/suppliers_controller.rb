@@ -3,7 +3,7 @@ class SuppliersController < ApplicationController
   helper :deliveries
 
   def index
-    @suppliers = Supplier.all :order => 'name'
+    @suppliers = Supplier.without_deleted :order => 'name'
     @deliveries = Delivery.recent
   end
 
@@ -53,7 +53,7 @@ class SuppliersController < ApplicationController
     flash[:notice] = "Lieferant wurde gelöscht"
     redirect_to suppliers_path
     rescue => e
-      flash[:error] = _("An error has occurred: ") + e.message
+      flash[:error] = "Ein Fehler ist aufgetreten: " + e.message
       redirect_to @supplier
   end  
   

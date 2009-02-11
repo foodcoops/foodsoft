@@ -5,7 +5,7 @@ module MessagesHelper
       [g.name, g.id]
     end
     groups += [[" -- Bestellgruppen -- ", ""]]
-    groups += Ordergroup.find(:all, :order => 'name', :include => :memberships).reject{ |g| g.memberships.empty? }.collect do |g|
+    groups += Ordergroup.without_deleted(:order => 'name', :include => :memberships).reject{ |g| g.memberships.empty? }.collect do |g|
       [g.name, g.id]
     end
     groups

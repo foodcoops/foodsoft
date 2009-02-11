@@ -58,10 +58,11 @@ module Caboose #:nodoc:
             self.deleted_attribute = options[:with] || :deleted_at
             alias_method :destroy_without_callbacks!, :destroy_without_callbacks
             class << self
-              alias_method :find_every_with_deleted,    :find_every
-              alias_method :calculate_with_deleted,     :calculate
+#              alias_method :find_every_with_deleted,    :find_every
+#              alias_method :calculate_with_deleted,     :calculate
               alias_method :delete_all!,                :delete_all
             end
+            send :named_scope, :without_deleted, :conditions => {:deleted_at => nil}
           end
           include InstanceMethods
         end
@@ -77,55 +78,55 @@ module Caboose #:nodoc:
         end
 
         module ClassMethods
-          def find_with_deleted(*args)
-            options = args.extract_options!
-            validate_find_options(options)
-            set_readonly_option!(options)
-            options[:with_deleted] = true # yuck!
-
-            case args.first
-              when :first then find_initial(options)
-              when :all   then find_every(options)
-              else             find_from_ids(args, options)
-            end
-          end
-
-          def find_only_deleted(*args)
-            options = args.extract_options!
-            validate_find_options(options)
-            set_readonly_option!(options)
-            options[:only_deleted] = true # yuck!
-
-            case args.first
-              when :first then find_initial(options)
-              when :all   then find_every(options)
-              else             find_from_ids(args, options)
-            end
-          end
-
-          def exists?(*args)
-            with_deleted_scope { exists_with_deleted?(*args) }
-          end
-
-          def exists_only_deleted?(*args)
-            with_only_deleted_scope { exists_with_deleted?(*args) }
-          end
-
-          def count_with_deleted(*args)
-            calculate_with_deleted(:count, *construct_count_options_from_args(*args))
-          end
-
-          def count_only_deleted(*args)
-            with_only_deleted_scope { count_with_deleted(*args) }
-          end
-
-          def count(*args)
-            with_deleted_scope { count_with_deleted(*args) }
-          end
-
-          def calculate(*args)
-            with_deleted_scope { calculate_with_deleted(*args) }
-          end
+#          def find_with_deleted(*args)
+#            options = args.extract_options!
+#            validate_find_options(options)
+#            set_readonly_option!(options)
+#            options[:with_deleted] = true # yuck!
+#
+#            case args.first
+#              when :first then find_initial(options)
+#              when :all   then find_every(options)
+#              else             find_from_ids(args, options)
+#            end
+#          end
+#
+#          def find_only_deleted(*args)
+#            options = args.extract_options!
+#            validate_find_options(options)
+#            set_readonly_option!(options)
+#            options[:only_deleted] = true # yuck!
+#
+#            case args.first
+#              when :first then find_initial(options)
+#              when :all   then find_every(options)
+#              else             find_from_ids(args, options)
+#            end
+#          end
+#
+#          def exists?(*args)
+#            with_deleted_scope { exists_with_deleted?(*args) }
+#          end
+#
+#          def exists_only_deleted?(*args)
+#            with_only_deleted_scope { exists_with_deleted?(*args) }
+#          end
+#
+#          def count_with_deleted(*args)
+#            calculate_with_deleted(:count, *construct_count_options_from_args(*args))
+#          end
+#
+#          def count_only_deleted(*args)
+#            with_only_deleted_scope { count_with_deleted(*args) }
+#          end
+#
+#          def count(*args)
+#            with_deleted_scope { count_with_deleted(*args) }
+#          end
+#
+#          def calculate(*args)
+#            with_deleted_scope { calculate_with_deleted(*args) }
+#          end
 
           def delete_all(conditions = nil)
             self.update_all ["#{self.deleted_attribute} = ?", current_time], conditions
@@ -136,23 +137,23 @@ module Caboose #:nodoc:
               default_timezone == :utc ? Time.now.utc : Time.now
             end
 
-            def with_deleted_scope(&block)
-              with_scope({:find => { :conditions => ["#{table_name}.#{deleted_attribute} IS NULL OR #{table_name}.#{deleted_attribute} > ?", current_time] } }, :merge, &block)
-            end
-
-            def with_only_deleted_scope(&block)
-              with_scope({:find => { :conditions => ["#{table_name}.#{deleted_attribute} IS NOT NULL AND #{table_name}.#{deleted_attribute} <= ?", current_time] } }, :merge, &block)
-            end
+#            def with_deleted_scope(&block)
+#              with_scope({:find => { :conditions => ["#{table_name}.#{deleted_attribute} IS NULL OR #{table_name}.#{deleted_attribute} > ?", current_time] } }, :merge, &block)
+#            end
+#
+#            def with_only_deleted_scope(&block)
+#              with_scope({:find => { :conditions => ["#{table_name}.#{deleted_attribute} IS NOT NULL AND #{table_name}.#{deleted_attribute} <= ?", current_time] } }, :merge, &block)
+#            end
 
           private
             # all find calls lead here
-            def find_every(options)
-              options.delete(:with_deleted) ? 
-                find_every_with_deleted(options) :
-                options.delete(:only_deleted) ? 
-                  with_only_deleted_scope { find_every_with_deleted(options) } :
-                  with_deleted_scope { find_every_with_deleted(options) }
-            end
+#            def find_every(options)
+#              options.delete(:with_deleted) ?
+#                find_every_with_deleted(options) :
+#                options.delete(:only_deleted) ?
+#                  with_only_deleted_scope { find_every_with_deleted(options) } :
+#                  with_deleted_scope { find_every_with_deleted(options) }
+#            end
         end
 
         def destroy_without_callbacks
@@ -182,14 +183,14 @@ module Caboose #:nodoc:
           save!
         end
         
-        def recover_with_associations!(*associations)
-          self.recover!
-          associations.to_a.each do |assoc|
-            self.send(assoc).find_with_deleted(:all).each do |a|
-              a.recover! if a.class.paranoid?
-            end
-          end
-        end
+#        def recover_with_associations!(*associations)
+#          self.recover!
+#          associations.to_a.each do |assoc|
+#            self.send(assoc).find_with_deleted(:all).each do |a|
+#              a.recover! if a.class.paranoid?
+#            end
+#          end
+#        end
       end
     end
   end

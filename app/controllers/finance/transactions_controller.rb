@@ -20,9 +20,9 @@ class Finance::TransactionsController < ApplicationController
 
     conditions = "name LIKE '%#{params[:query]}%'" unless params[:query].nil?
 
-    @total = Ordergroup.count(:conditions => conditions)
-    @groups = Ordergroup.paginate :conditions => conditions, :page => params[:page],
-      :per_page => @per_page, :order => sort
+    @total = Ordergroup.without_deleted.count(:conditions => conditions)
+    @groups = Ordergroup.without_deleted.paginate :conditions => conditions,
+      :page => params[:page], :per_page => @per_page, :order => sort
 
     respond_to do |format|
       format.html
