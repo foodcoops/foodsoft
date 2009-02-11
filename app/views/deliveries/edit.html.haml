@@ -3,6 +3,9 @@
 %p
   %b Lieferant:
   = @supplier.name
+%p
+  %b Rechnungsbetrag:
+  = link_to_invoice(@delivery)
 
 - form_for([@supplier,@delivery]) do |f|
   = f.error_messages
@@ -12,6 +15,7 @@
     = f.date_select :delivered_on
 
   %h2 Artikel
+  %i Um die Mengen anzupassen einfach auf die Anzahl klicken.
   #stock_changes
     %table.list{:style => "width:40em"}
       %tr
@@ -22,10 +26,10 @@
         %tr[stock_change]
           %td= stock_change.stock_article.name
           %td
-            %span{:id => stock_change.id, :style => "width:5em"}= stock_change.quantity
+            %span.click-me{:id => stock_change.id, :style => "width:5em"}= stock_change.quantity
             = javascript_tag "new Ajax.InPlaceEditor('#{stock_change.id}', |
                             '/deliveries/in_place_edit_for_stock_quantity', |
-                            {size: 5, });" |
+                            {size: 5});" |
           %td
             = link_to_remote "Artikel entfernen", |
               :url => drop_stock_change_supplier_delivery_path(@supplier, @delivery, :stock_change_id => stock_change), |

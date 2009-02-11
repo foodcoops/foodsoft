@@ -1,32 +1,50 @@
 - title "Lagerübersicht"
 
-%p
-  - form_tag do
-    Neue Lieferung anlegen für:
-    = select_tag :new_delivery, |
-      options_for_select([[" -- Lieferantin wählen --", ""]] + |
-        Supplier.without_deleted.collect {|s| [ s.name, url_for(new_supplier_delivery_path(s))] }), |
-      :onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;" |
-%p
-  = link_to "Lagerbestellung online stellen", new_order_path(:supplier_id => 0)
-%p
-  %table.list
-    %thead
-      %tr
-        %th Artikel
-        %th im Lager
-        %th davon bestellt
-        %th Einheit
-        %th Preis
-        %th Lieferant
-        %th Kategorie
-    %tbody
-      - for article in @articles
-        %tr{:class => cycle("even", "odd")}
-          %td=h article.name
-          %td= article.quantity
-          %td= article.quantity - article.quantity_available
-          %td= article.unit
-          %td= article.price
-          %td= link_to article.supplier.name, article.supplier
-          %td= article.article_category.name
+%div{:style => "padding:0 0 0.5em 0.7em;margin-bottom:2em"}
+  %span{:style => "float:left"}
+    - form_tag do
+      Neue Lieferung anlegen für:
+      = select_tag :new_delivery, |
+        options_for_select([[" -- Lieferantin wählen --", ""]] + |
+          Supplier.without_deleted.collect {|s| [ s.name, url_for(new_supplier_delivery_path(s))] }), |
+        :onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;" |
+
+.single_column{:style => 'width:100%; clear:both'}
+  .box_title
+  .column_content
+    #actions
+      %b Neuen Lagerartikel anlegen für
+      = select_tag :new_stock_article, |
+        options_for_select([[" -- Lieferantin wählen --", ""]] + |
+          Supplier.without_deleted.collect {|s| [ s.name, url_for(new_stock_article_path(:supplier_id => s))] }), |
+        :onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;" |
+        
+      |
+      = link_to_if @current_user.role_orders?, "Lagerbestellung online stellen", {:controller => 'orders', :action => 'new', :supplier_id => 0}
+
+    #articles{:style => "clear:both;margin-top:1em"}
+      %table.list
+        %thead
+          %tr
+            %th Artikel
+            %th im Lager
+            %th davon bestellt
+            %th Einheit
+            %th Preis
+            %th Lieferant
+            %th Kategorie
+            %th
+        %tbody
+          - for article in @stock_articles
+            %tr{:class => cycle("even", "odd")}
+              %td=h article.name
+              %td= article.quantity
+              %td= article.quantity - article.quantity_available
+              %td= article.unit
+              %td= article.price
+              %td= link_to article.supplier.name, article.supplier
+              %td= article.article_category.name
+              %td
+                = link_to icon(:edit), edit_stock_article_path(article)
+                = link_to icon(:delete), article, :method => :delete, :confirm => "Bist Du sicher?"
+

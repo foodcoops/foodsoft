@@ -119,7 +119,7 @@ class DeliveriesController < ApplicationController
 
   def in_place_edit_for_stock_quantity
     stock_change = StockChange.find(params[:editorId])
-    if stock_change.update_attribute(:quantity, params[:value])
+    if stock_change.update_attributes(:quantity => params[:value])
       render :inline => params[:value]
     else
       render :inline => "Ein Fehler ist aufgetreten."

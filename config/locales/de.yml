@@ -119,6 +119,7 @@ de:
         even: "muss gerade sein"
     models:
       article: Artikel
+      supplier: Lieferant
       user: Benutzerinnen
       workgroup: Arbeitsgruppe
       ordergroup: Bestellgruppe

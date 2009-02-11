@@ -20,6 +20,8 @@ ActionController::Routing::Routes.draw do |map|
     finance.resources :invoices
   end
 
+  map.resources :stock_articles, :controller => 'stockit', :as => 'stockit'
+  
   map.resources :suppliers, :collection => { :shared_suppliers => :get } do |suppliers|
     suppliers.resources :deliveries, :member => { :drop_stock_change => :post },
       :collection => {:add_stock_article => :post}

@@ -8,36 +8,36 @@
   - if @invoice.order
     %p= "Diese Rechnung ist mit einer #{link_to "Bestellung", @invoice.order} verknüpft."
   %p
-    = f.label :supplier_id
+    Lieferant
     %br/
     = f.select :supplier_id, Supplier.all.collect { |s| [s.name, s.id] }
   %p
-    = f.label :number
+    Rechnungsnummer
     %br/
     = f.text_field :number
   %p
-    = f.label :date
+    Rechnungsdatum
     %br/
     = f.date_select :date
   %p
-    = f.label :paid_on
+    Bezahlt am
     %br/
     = f.date_select :paid_on, :include_blank => true
   %p
-    = f.label :amount
+    Rechnungsbetrag
     %br/
     = f.text_field :amount
   %p
-    = f.label :deposit
+    Pfand berechnet
     %br/
     = f.text_field :deposit
   %p
-    = f.label :deposit_credit
+    Pfand gutgeschrieben
     %br/
     = f.text_field :deposit_credit
   %p
-    = f.label :note
+    Notiz
     %br/
-    = f.text_area :note
+    = f.text_area :note, :size => "28x8"
   %p
     = f.submit "Speichern"

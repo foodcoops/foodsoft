@@ -76,6 +76,9 @@ option {
   border-top: 1px solid #D7D7D7;
   margin: .2em 0; }
 
+span.click-me {
+  cursor: pointer; }
+
 #login {
   margin: auto;
   width: 27em;

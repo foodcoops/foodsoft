@@ -17,14 +17,16 @@
           %th Name
           %th Telefon
           %th KundenNr
-          %th 
+          %th
+          %th
       %tbody
         - for supplier in @suppliers
           %tr{:class => cycle('even','odd', :name => 'suppliers')}
-            %td= link_to "<b>#{h(supplier.name)}</b> (#{supplier.articles.count})", supplier_articles_path(supplier)
+            %td= link_to h(supplier.name) , supplier
             %td=h supplier.phone
             %td=h supplier.customer_number
-            %td= link_to "Anzeigen", supplier
+            %td= link_to "Artikel (#{supplier.articles.count})", supplier_articles_path(supplier)
+            %td= link_to "Lieferungen", supplier_deliveries_path(supplier)
 
 .right_column{:style => "width:47%"}
   .box_title

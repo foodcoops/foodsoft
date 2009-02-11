@@ -1,0 +1,16 @@
+- title "Neuen Lagerartikel für #{@supplier.name} anlegen"
+
+:javascript
+  function fillNewStockArticle(text, li) {
+    new Ajax.Updater('stock_article_form', '/stockit/fill_new_stock_article_form', {
+      parameters: {article_id: li.id}
+    });
+  }
+
+%p
+  Suche nach Artikeln aus dem Katalog:
+  = text_field_with_auto_complete :article, :name, {}, |
+  {:url => {:action => 'auto_complete_for_article_name', :supplier_id => @supplier.id}, |
+   :after_update_element => 'fillNewStockArticle'} |
+#stock_article_form
+  = render :partial => 'form', :locals => {:stock_article => @stock_article}
