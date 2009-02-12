@@ -82,10 +82,10 @@ class DeliveriesController < ApplicationController
         page.insert_html :top, 'stock_changes', :partial => 'stock_change',
           :locals => {:stock_change => article.stock_changes.build}
 
-        page.replace_html 'new_stock_article', :partial => 'new_stock_article',
+        page.replace_html 'new_stock_article', :partial => 'stock_article_form',
           :locals => {:stock_article => @supplier.stock_articles.build}
       else
-        page.replace_html 'new_stock_article', :partial => 'new_stock_article',
+        page.replace_html 'new_stock_article', :partial => 'stock_article_form',
           :locals => {:stock_article => article}
       end
     end
@@ -100,13 +100,6 @@ class DeliveriesController < ApplicationController
     end
   end
 
-  def auto_complete_for_article_name
-    @articles = @supplier.articles.without_deleted.find(:all,
-      :conditions => [ "LOWER(articles.name) LIKE ?", '%' + params[:article][:name].downcase + '%' ],
-      :limit => 8)
-    render :partial => 'shared/auto_complete_articles'
-  end
-
   def fill_new_stock_article_form
     article = Article.find(params[:article_id])
     @supplier = article.supplier
@@ -114,7 +107,7 @@ class DeliveriesController < ApplicationController
       article.attributes.reject { |attr| attr == ('id' || 'type')}
     )
 
-    render :partial => 'new_stock_article', :locals => {:stock_article => stock_article}
+    render :partial => 'stock_article_form', :locals => {:stock_article => stock_article}
   end
 
   def in_place_edit_for_stock_quantity

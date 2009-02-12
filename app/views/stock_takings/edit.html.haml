@@ -1,0 +1,16 @@
+- title "Inventur bearbeiten"
+
+- form_for(@stock_taking) do |f|
+  = f.error_messages
+  %p
+    %b Datum
+    %br/
+    = f.date_select :date
+  %p
+    %b Notiz
+    %br/
+    = f.text_area :note, :size => "28x7"
+  %p
+    = f.submit "Invenur speichern"
+    |
+    = link_to "Abbrechen", stock_takings_path

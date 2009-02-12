@@ -30,6 +30,8 @@ class StockArticle < Article
 
   named_scope :available, :conditions => "quantity > 0"
 
+  before_destroy :check_quantity
+
   # Update the quantity of items in stock
   def update_quantity!
     update_attribute :quantity, stock_changes.collect(&:quantity).sum
@@ -45,5 +47,11 @@ class StockArticle < Article
       end
     end
     available
+  end
+
+  protected
+
+  def check_quantity
+    raise "#{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null." unless quantity == 0
   end
 end

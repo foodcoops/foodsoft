@@ -1,4 +1,4 @@
-- title "Neuen Lagerartikel für #{@supplier.name} anlegen"
+- title "Neuen Lagerartikel anlegen"
 
 :javascript
   function fillNewStockArticle(text, li) {
@@ -8,9 +8,9 @@
   }
 
 %p
-  Suche nach Artikeln aus dem Katalog:
+  Suche nach Artikeln aus allen Katalogen:
   = text_field_with_auto_complete :article, :name, {}, |
-  {:url => {:action => 'auto_complete_for_article_name', :supplier_id => @supplier.id}, |
+  {:url => {:action => 'auto_complete_for_article_name'}, |
    :after_update_element => 'fillNewStockArticle'} |
 #stock_article_form
   = render :partial => 'form', :locals => {:stock_article => @stock_article}

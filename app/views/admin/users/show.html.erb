@@ -43,7 +43,11 @@
   </div>
   <div class="box_title"><h2>Gruppenabos</h2></div>
   <div class="column_content">
-    <%= render :partial => 'shared/user_memberships'%>
+    <% for membership in Membership.find_all_by_user_id(@user.id) -%>
+    <p>
+      <%= link_to(membership.group.name, [:admin, membership.group]) %>
+    </p>
+    <% end -%>
     <p><%= link_to 'Gruppenübersicht', :action => 'listGroups' %></p>
   </div>
 </div>

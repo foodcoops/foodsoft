@@ -1,0 +1,48 @@
+- title "Neue Inventur anlegen"
+
+.left_column{:style => "width:40em;"}
+  - form_for(@stock_taking) do |f|
+    .box_title
+      %h2 Lieferung anlegen
+    .column_content
+      = f.error_messages
+      %p
+        %b Datum
+        %br/
+        = f.date_select :date
+      %p
+        %b Notiz
+        %br/
+        = f.text_area :note, :size => "28x7", :value => "#{@current_user.nick}: ..."
+      %h2 Lagerartikel
+      %p
+        %i
+          Bitte trage hier alle gezählten Abweichungen vom
+          = link_to "vorläufigen Lagerbestand", stock_articles_path
+          ein. Bei Schwund benutze einfach ein Minus vor der Zahl.
+      #stock_changes
+      = render :partial => 'stock_change', :collection => @stock_taking.stock_changes
+      %p
+        = f.submit "Invenur anlegen"
+        |
+        = link_to "Abbrechen", stock_takings_path
+
+.right_column{:style => "width:30em;"}
+  .box_title
+    %h2 Neuen Lagerartikel anlegen
+  .column_content
+    %p
+      :javascript
+        function fillNewStockArticle(text, li) {
+          new Ajax.Updater('stock_article_form', '/stock_takings/fill_new_stock_article_form', {
+            method: 'get',
+            parameters: {article_id: li.id}
+          });
+        }
+      Suche nach Artikeln aus dem allen Katalogen:
+      = text_field_with_auto_complete :article, :name, {}, |
+      {:url => {:controller => 'stockit', :action => 'auto_complete_for_article_name' }, |
+       :after_update_element => 'fillNewStockArticle', :method => :get} |
+    %hr/
+    #stock_article_form
+      = render :partial => 'stock_article_form', :locals => {:stock_article => StockArticle.new}

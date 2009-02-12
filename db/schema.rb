@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090120184410) do
+ActiveRecord::Schema.define(:version => 20090119155930) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -215,6 +215,13 @@ ActiveRecord::Schema.define(:version => 20090120184410) do
     t.integer  "order_id"
     t.integer  "stock_article_id"
     t.integer  "quantity",         :default => 0
+    t.datetime "created_at"
+  end
+
+  create_table "stock_takings", :force => true do |t|
+    t.date     "date"
+    t.text     "note"
+    t.integer  "created_by"
     t.datetime "created_at"
   end
 

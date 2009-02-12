@@ -25,7 +25,7 @@
         ]
       },
       { :name => "Artikel", :url => "/suppliers",
-        :active => ["articles", "suppliers", "deliveries", "article_categories", "stockit"],
+        :active => ["articles", "suppliers", "deliveries", "article_categories", "stockit", "stock_takings"],
         :access_denied? => (!u.role_article_meta? && !u.role_suppliers?),
         :subnav => [
           { :name => "Artikel", :url => supplier_articles_path(Supplier.first) },

@@ -1,6 +1,9 @@
 - form_for stock_article do |form|
   = form.error_messages
-  = form.hidden_field :supplier_id
+  %p
+    Lieferant
+    %br/
+    = form.select :supplier_id, Supplier.without_deleted(:order => 'name').collect{ |s| [s.name, s.id] }
   %p
     Name
     %br/
@@ -27,7 +30,7 @@
       %br/
       = form.text_field :deposit
   - else
-    %p 
+    %p
       Preis:
       %br/
       Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten

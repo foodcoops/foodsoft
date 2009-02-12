@@ -13,14 +13,11 @@
   .box_title
   .column_content
     #actions
-      %b Neuen Lagerartikel anlegen für
-      = select_tag :new_stock_article, |
-        options_for_select([[" -- Lieferantin wählen --", ""]] + |
-          Supplier.without_deleted.collect {|s| [ s.name, url_for(new_stock_article_path(:supplier_id => s))] }), |
-        :onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;" |
-        
+      %b= link_to "Neuen Lagerartikel anlegen", new_stock_article_path
       |
       = link_to_if @current_user.role_orders?, "Lagerbestellung online stellen", {:controller => 'orders', :action => 'new', :supplier_id => 0}
+      |
+      = link_to "Inventur anlegen", new_stock_taking_path
 
     #articles{:style => "clear:both;margin-top:1em"}
       %table.list

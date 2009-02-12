@@ -23,18 +23,20 @@
     %p
       :javascript
         function fillNewStockArticle(text, li) {
-          new Ajax.Updater('new_stock_article', '/deliveries/fill_new_stock_article_form', {
+          new Ajax.Updater('stock_article_form', '/deliveries/fill_new_stock_article_form', {
             method: 'get',
             parameters: {article_id: li.id}
           });
         }
-      Suche nach Artikeln aus dem Katalog:
+      Suche nach Artikeln aus dem
+      %i= @supplier.name
+      Katalog:
       = text_field_with_auto_complete :article, :name, {}, |
-      {:url => {:action => 'auto_complete_for_article_name', :supplier_id => @supplier.id}, |
-       :after_update_element => 'fillNewStockArticle'} |
+      {:url => {:controller => 'stockit', :action => 'auto_complete_for_article_name', :supplier_id => @supplier.id}, |
+       :after_update_element => 'fillNewStockArticle', :method => :get} |
     %hr/
-    #new_stock_article
-      = render :partial => 'new_stock_article', :locals => {:stock_article => @supplier.stock_articles.build}
+    #stock_article_form
+      = render :partial => 'stock_article_form', :locals => {:stock_article => @supplier.stock_articles.build}
   
 %p{:style => "clear:both"}
   = link_to 'Zurück', supplier_deliveries_path(@supplier)

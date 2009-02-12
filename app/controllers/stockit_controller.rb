@@ -8,16 +8,13 @@ class StockitController < ApplicationController
   end
 
   def new
-    @supplier = Supplier.find(params[:supplier_id])
-    @stock_article = @supplier.stock_articles.build(:tax => 7.0)
-  rescue
-    flash[:error] = "Es wurde kein gültiger Lieferant ausgewählt."
-    redirect_to stock_articles_path
+    @stock_article = StockArticle.new
   end
 
   def create
     @stock_article = StockArticle.new(params[:stock_article])
     if @stock_article.save
+      flash[:notice] = "Lagerartikel wurde gespeichert."
       redirect_to stock_articles_path
     else
       render :action => 'new'
@@ -31,6 +28,7 @@ class StockitController < ApplicationController
   def update
     @stock_article = StockArticle.find(params[:id])
     if @stock_article.update_attributes(params[:stock_article])
+      flash[:notice] = "Lagerartikel wurde gespeichert."
       redirect_to stock_articles_path
     else
       render :action => 'edit'
@@ -46,10 +44,14 @@ class StockitController < ApplicationController
   end
 
   def auto_complete_for_article_name
-    @supplier = Supplier.find(params[:supplier_id])
-    @articles = @supplier.articles.without_deleted.find(:all,
-      :conditions => [ "LOWER(articles.name) LIKE ?", '%' + params[:article][:name].downcase + '%' ],
-      :limit => 8)
+    conditions = [ "LOWER(articles.name) LIKE ?", '%' + params[:article][:name].downcase + '%' ]
+
+    if params[:supplier_id]
+      @supplier = Supplier.find(params[:supplier_id])
+      @articles = @supplier.articles.without_deleted.all(:conditions => conditions, :limit => 8)
+    else
+      @articles = Article.without_deleted.not_in_stock.all(:conditions => conditions, :limit => 8)
+    end
     render :partial => 'shared/auto_complete_articles'
   end
 

@@ -144,10 +144,17 @@ class RoadToVersionThree < ActiveRecord::Migration
 #      t.datetime :created_at
 #    end
 
-    # == User
-    # Ativate all Users for notification on upcoming tasks
-    User.all.each { |u| u.settings['notify.upcoming_tasks'] = 1 }
+    # == StockTaking
+    create_table :stock_takings do |t|
+      t.date :date
+      t.text :note
+      t.datetime :created_at
+    end
+    add_column :stock_changes, :stock_taking_id, :integer
 
+#    # == User
+#    # Ativate all Users for notification on upcoming tasks
+#    User.all.each { |u| u.settings['notify.upcoming_tasks'] = 1 }
   end
 
   def self.down

@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  
+
   map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
   map.my_ordergroup '/home/ordergroup', :controller => 'home', :action => 'ordergroup'
   map.my_tasks '/home/tasks', :controller => 'tasks', :action => 'myTasks'
@@ -20,10 +20,16 @@ ActionController::Routing::Routes.draw do |map|
     finance.resources :invoices
   end
 
-  map.resources :stock_articles, :controller => 'stockit', :as => 'stockit'
+ map.resources :stock_takings, 
+   :collection => {:fill_new_stock_article_form => :get, :add_stock_article => :post}
+ map.resources :stock_articles,
+   :controller => 'stockit', :as => 'stockit',
+   :collection => {:auto_complete_for_article_name => :get, :fill_new_stock_article_form => :get}
   
-  map.resources :suppliers, :collection => { :shared_suppliers => :get } do |suppliers|
-    suppliers.resources :deliveries, :member => { :drop_stock_change => :post },
+  map.resources :suppliers,
+    :collection => { :shared_suppliers => :get } do |suppliers|
+    suppliers.resources :deliveries,
+      :member => { :drop_stock_change => :post },
       :collection => {:add_stock_article => :post}
     suppliers.resources :articles,
       :collection => { :update_selected => :post, :edit_all => :get, :update_all => :post,
