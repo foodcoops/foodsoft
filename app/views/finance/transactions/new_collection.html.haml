@@ -1,20 +1,20 @@
-- title _("Update multiple accounts")
+- title "Mehrer Konten aktualisieren"
 
 - form_tag :action => "create_collection" do
   %p
-    %b= _("Note") + ":"
+    %b Notiz
     = text_field_tag "note"
   %p
     %table#Ordergroups{:style => "width:20em"}
       %tr
-        %th=_ "Ordergroup"
-        %th=_ "Amount"
+        %th Bestellgruppe
+        %th Betrag
       = render :partial => 'ordergroup', :collection => [1, 2, 3]
   
   %p
-    = link_to_function _("Add another ordergroup") do |page|
+    = link_to_function "Neue Bestellgruppe hinzufügen" do |page|
       - page.insert_html :bottom, :Ordergroups, :partial => 'ordergroup'
   %p
-    = submit_tag _("Save")
+    = submit_tag "Transaktionen speichern"
     |
-    = link_to _("Cancel"), :controller => 'finance/transactions'
+    = link_to "Abbrechen", :controller => 'finance/transactions'

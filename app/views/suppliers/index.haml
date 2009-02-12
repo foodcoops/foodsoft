@@ -1,6 +1,6 @@
 - title "Artikeldatenbank"
 
-.left_column{:style => "width:50%"}
+.left_column{:style => "width:60%"}
   .box_title
     %h2 Lieferanten
   .column_content
@@ -19,20 +19,22 @@
           %th KundenNr
           %th
           %th
+          %th
       %tbody
         - for supplier in @suppliers
           %tr{:class => cycle('even','odd', :name => 'suppliers')}
             %td= link_to h(supplier.name) , supplier
             %td=h supplier.phone
             %td=h supplier.customer_number
-            %td= link_to "Artikel (#{supplier.articles.count})", supplier_articles_path(supplier)
+            %td= link_to "Artikel (#{supplier.articles.without_deleted.count})", supplier_articles_path(supplier)
+            %td= link_to "im Lager (#{supplier.stock_articles.without_deleted.count})", stock_articles_path
             %td= link_to "Lieferungen", supplier_deliveries_path(supplier)
 
-.right_column{:style => "width:47%"}
+.right_column{:style => "width:37%"}
   .box_title
     %h2 Letzte Lieferungen
   .column_content
-    %table{:style => "width:50em"}
+    %table
       %tr
         %th Datum
         %th Betrag

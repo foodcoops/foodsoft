@@ -86,17 +86,17 @@ class Finance::TransactionsController < ApplicationController
 
   def create_collection
     note = params[:note]
-    raise "Note is required!" if note.blank?
+    raise "Notiz wird benötigt!" if note.blank?
     params[:financial_transactions].each do |trans|
       # ignore empty amount fields ...
       unless trans[:amount].blank?
         Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction trans[:amount], note, @current_user
       end
     end
-    flash[:notice] = 'Saved all transactions successfully'
+    flash[:notice] = "Alle Transaktionen wurden gespeichert."
     redirect_to :action => 'index'
   rescue => error
-    flash[:error] = "An error occured: " + error.to_s
+    flash[:error] = "Ein Fehler ist aufgetreten: " + error.to_s
     redirect_to :action => 'new_collection'
   end
 

@@ -36,7 +36,8 @@ class Admin::OrdergroupsController < ApplicationController
 
   def create
     @ordergroup = Ordergroup.new(params[:ordergroup])
-
+    @ordergroup.account_updated = Time.now
+    
     if @ordergroup.save
       flash[:notice] = 'Ordergroup was successfully created.'
       redirect_to([:admin, @ordergroup])

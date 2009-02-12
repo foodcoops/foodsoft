@@ -1,16 +1,16 @@
-%h1 Manage accounts
+- title "Konten verwalten"
 %p
   %i
-    =_ "To create multiple transactions at once please follow this "
-    = link_to _("link"), :action => 'new_collection'
+    Um mehrer Transaktionen auf einmal anzulegen folge bitte diesem
+    = link_to _("Link"), :action => 'new_collection'
 
 .left_column{:style=>"width:50em"}
   .box_title
-    %h2=_ "Ordergroups"
+    %h2 Bestellgruppen
   .column_content
     #group_filter
       %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
-        %label{:for => 'article_name'}= _("Search in name") + ":"
+        Suchen im Namen:
         = text_field_tag("query", params['query'], :size => 10 )
         
       = observe_field 'query',  :frequency => 2, |

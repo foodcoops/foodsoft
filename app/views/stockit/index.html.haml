@@ -17,7 +17,9 @@
       |
       = link_to_if @current_user.role_orders?, "Lagerbestellung online stellen", {:controller => 'orders', :action => 'new', :supplier_id => 0}
       |
-      = link_to "Inventur anlegen", new_stock_taking_path
+      %b= link_to "Inventur anlegen", new_stock_taking_path
+      |
+      = link_to "Inventurübersicht", stock_takings_path
 
     #articles{:style => "clear:both;margin-top:1em"}
       %table.list

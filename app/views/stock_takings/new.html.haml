@@ -3,7 +3,7 @@
 .left_column{:style => "width:40em;"}
   - form_for(@stock_taking) do |f|
     .box_title
-      %h2 Lieferung anlegen
+      %h2 Inventur anlegen
     .column_content
       = f.error_messages
       %p
@@ -23,7 +23,7 @@
       #stock_changes
       = render :partial => 'stock_change', :collection => @stock_taking.stock_changes
       %p
-        = f.submit "Invenur anlegen"
+        = f.submit "Inventur anlegen"
         |
         = link_to "Abbrechen", stock_takings_path
 

@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.logout '/logout', :controller => 'login', :action => 'logout'
   map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
   map.my_ordergroup '/home/ordergroup', :controller => 'home', :action => 'ordergroup'
   map.my_tasks '/home/tasks', :controller => 'tasks', :action => 'myTasks'

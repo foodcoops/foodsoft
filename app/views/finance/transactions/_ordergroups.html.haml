@@ -1,5 +1,5 @@
 %p
-  = _("Found") + ":"
+  Gefunden:
   = @total
 %p
   %table{:style => "width:100%"}
@@ -12,9 +12,9 @@
 %table.list
   %thead
     %tr
-      %th= sort_link_helper _("Name"), "name", @per_page
+      %th= sort_link_helper "Name", "name", @per_page
       %th Kontakt
-      %th= sort_link_helper _("Account balance"), "account_balance", @per_page
+      %th= sort_link_helper "Kontostand", "account_balance", @per_page
       %th
   %tbody
     - for group in @groups
@@ -23,6 +23,6 @@
         %td= group.contact
         %td{:class => "currency", :style => "width:5em"}= number_to_currency(group.account_balance)
         %td{:class => "actions"}
-          = link_to image_tag("euro_new.png", :size => "16x16", :alt => _("New transaction"), :border => "0"), {:action => 'new', :id => group}, {:title => _("New transaction")}
-          = link_to image_tag("b_browse.png", :size => "16x16", :border => "0", :alt => 'Kontoauszug'), {:action => 'list', :id => group}, {:title => _("List transactions")}
+          = link_to image_tag("euro_new.png", :size => "16x16", :alt => "Neue Transaktion", :border => "0"), {:action => 'new', :id => group}, {:title => "Neue Transaktion"}
+          = link_to image_tag("b_browse.png", :size => "16x16", :border => "0", :alt => 'Kontoauszug'), {:action => 'list', :id => group}, {:title => "Kontoauszug"}
         

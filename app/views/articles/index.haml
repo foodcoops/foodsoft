@@ -67,7 +67,5 @@
     
     %form{ :action => url_for(update_selected_supplier_articles_path(@supplier)), :method => "post", :id => "articlesInListForm" }
       #table= render :partial => 'articles'
-  
-  %br/
-  = link_to "Zurück", :action => 'index'
+
 #edit_article{:style => "display:none"}

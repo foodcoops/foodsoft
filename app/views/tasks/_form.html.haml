@@ -1,30 +1,30 @@
 = form.error_messages
 %p
-  %b= form.label :name
+  %b Name
   %br/
   = form.text_field :name
 %p
-  %b= form.label :description
+  %b Beschreibung
   %br/
   = form.text_area :description, :cols => 50, :rows => 10
 %p
-  %b= form.label :user
-  %small=_ 'tasks can have multiple assignments'
+  %b Verantwortliche
+  %small Aufgaben können mehrere Verantwortliche haben
   /%br/
   /= render :partial => "assignments"
 %p
-  %small=_ 'use commas to seperate the names'
+  %small Benutze Kommas um mehrere Benutzerinnen zu trennen
   %br/
   = text_field_with_auto_complete :task, :user_list, {}, {:tokens => ","}
 %p
-  %b= form.label :required_users, "How many users are altogether required?"
+  %b Wieviel Benutzerinnen werden insgesamt benötigt?
   %br/
   = form.text_field :required_users, :size => 3
 %p
-  %b= form.label :workgroup
+  %b Arbeitsgruppe
   %br/
   = form.select :workgroup_id, Workgroup.all(:order => 'name').collect {|g| [ g.name, g.id ] }, { :include_blank => true }
 %p
-  %b= form.label :due_date
+  %b Fälligkeit
   %br/
   = form.date_select :due_date, :start_year => 2007, :include_blank => true
