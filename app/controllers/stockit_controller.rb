@@ -10,6 +10,9 @@ class StockitController < ApplicationController
   def new
     @supplier = Supplier.find(params[:supplier_id])
     @stock_article = @supplier.stock_articles.build(:tax => 7.0)
+  rescue
+    flash[:error] = "Es wurde kein gültiger Lieferant ausgewählt."
+    redirect_to stock_articles_path
   end
 
   def create
