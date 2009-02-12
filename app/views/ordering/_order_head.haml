@@ -41,7 +41,7 @@
       %h2 Anderer Bestellungen
     .column_content
       %table
-        - for order in @other_orders
+        - for order in orders
           %tr
             %td
               = link_to_function order.name, "if (confirmSwitchOrder()) (window.location = '#{ url_for(:action => 'order', :id => order) }' )"
