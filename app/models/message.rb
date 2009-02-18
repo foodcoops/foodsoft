@@ -21,7 +21,6 @@ class Message < ActiveRecord::Base
   
   named_scope :pending, :conditions => { :email_state => 0 }
   named_scope :sent, :conditions => { :email_state => 1 }
-  named_scope :user, :conditions => "sender_id IS NOT NULL", :order => 'created_at DESC', :include => :sender
 
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {
@@ -84,22 +83,5 @@ class Message < ActiveRecord::Base
       end
       message.update_attribute(:email_state, 1)
     end
-  end
-
-  # Returns a new message object created from the attributes specified (recipient, recipients, subject)
-  # and the body from the given template that can make use of the variables specified.
-  # The templates are to be stored in app/views/messages, i.e. the template name 
-  # "order_finished" would invoke template file "app/views/messages/order_finished.rhtml".
-  # Note: you need to set the sender afterwards if this should not be a system message.
-  #
-  # Example:
-  #   Message.from_template(
-  #     'order_finished', 
-  #     {:user => user, :group => ordergroup, :order => self, :results => results, :total => group_order.price}, 
-  #     {:recipient_id => user.id, :recipients => recipients, :subject => "Bestellung beendet: #{self.name}"}
-  #   ).save!
-  def self.from_template(template, vars, attributes)
-    view = ActionView::Base.new(Rails::Configuration.new.view_path, {}, MessagesController.new)    
-    new(attributes.merge(:body => view.render(:file => "messages/#{template}.rhtml", :locals => vars)))
   end
 end

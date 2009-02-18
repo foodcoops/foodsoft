@@ -1,50 +1,67 @@
 # ActionMailer class that handles all emails for the FoodSoft.
 class Mailer < ActionMailer::Base
-  
-  # Sends an email with instructions on how to reset the password.
-  # Assumes user.setResetPasswordToken has been successfully called already.
-  def password(user)
-    request = ApplicationController.current.request
-    subject     "[#{APP_CONFIG[:name]}] Neues Passwort für/ New password for " + user.nick
-    recipients  user.email
-    from        "FoodSoft <#{APP_CONFIG[:email_sender]}>"
-    body        :user => user, 
-                :link => url_for(:host => request.host, :controller => "login", :action => "password", :id => user.id, :token => user.reset_password_token),
-                :foodsoftUrl => url_for(:host => request.host, :controller => "index")
-  end
+
+  layout 'email'  # Use views/layouts/email.html.erb
   
   # Sends an email copy of the given internal foodsoft message.
   def message(message)
-    request = ApplicationController.current.request
     subject     "[#{APP_CONFIG[:name]}] " + message.subject
     recipients  message.recipient.email
-    from        (message.system_message? ? "FoodSoft <#{APP_CONFIG[:email_sender]}>" : "#{message.sender.nick} <#{message.sender.email}>")
-    body        :body => message.body, :sender => (message.system_message? ? 'Foodsoft' : message.sender.nick), 
-                :recipients => message.recipients,
-                :reply => url_for(:host => request.host, :controller => "messages", :action => "reply", :id => message),
-                :profile => url_for(:host => request.host, :controller => "home", :action => "profile"),
-                :link => url_for(:host => request.host, :controller => "messages", :action => "show", :id => message),
-                :foodsoftUrl => url_for(:host => request.host, :controller => "/")
+    from        "#{message.sender.nick} <#{message.sender.email}>"
+    body        :body         => message.body,
+                :sender       => message.sender.nick,
+                :recipients   => message.recipients,
+                :reply        => "#{APP_CONFIG[:base_url]}/messages/reply/#{message}",
+                :profile      => "#{APP_CONFIG[:base_url]}/home/profile",
+                :link         => "#{APP_CONFIG[:base_url]}/messages/show/#{message}"
   end
-  
+
+  # Sends an email with instructions on how to reset the password.
+  # Assumes user.setResetPasswordToken has been successfully called already.
+  def reset_password(user)
+    prepare_system_message(user)
+    subject     "[#{APP_CONFIG[:name]}] Neues Passwort für/ New password for #{user.nick}"
+    body        :user => user,
+                :link => "#{APP_CONFIG[:base_url]}/login/password/#{user.id}?token=#{user.reset_password_token}"
+  end
+    
   # Sends an invite email.
   def invite(invite)
-    request = ApplicationController.current.request
+    prepare_system_message(invite)
     subject     "Einladung in die Foodcoop #{APP_CONFIG[:name]} - Invitation to the Foodcoop"
-    recipients  invite.email
-    from        "FoodSoft <#{APP_CONFIG[:email_sender]}>"
     body        :invite => invite,
-                :link => url_for(:host => request.host, :controller => "login", :action => "invite", :id => invite.token),
-                :foodsoftUrl => url_for(:host => request.host, :controller => "index")
+                :link   => "#{APP_CONFIG[:base_url]}/login/invite/#{invite.token}"
   end
 
   # Notify user of upcoming task.
-  def notify_upcoming_tasks(user, task)
+  def upcoming_tasks(user, task)
+    prepare_system_message(user)
     subject   "[#{APP_CONFIG[:name]}] Aufgaben werden fällig!"
-    recipients  user.email
-    from        "FoodSoft <#{APP_CONFIG[:email_sender]}>"
-    body        :user => user, :task => task
+    body        :user => user,
+                :task => task
+  end
 
+  # Sends order result for specific Ordergroup
+  def order_result(user, group_order)
+    prepare_system_message(user)
+    subject   "[#{APP_CONFIG[:name]}] Bestellung beendet: #{group_order.order.name}"
+    body      :order        => group_order.order,
+              :group_order  => group_order
+  end
+
+  # Notify user if account balance is less than zero
+  def negative_balance(user,transaction)
+    prepare_system_message(user)
+    subject   "[#{APP_CONFIG[:name]}] Gruppenkonto im Minus"
+    body      :group        => user.ordergroup,
+              :transaction  => transaction
+  end
+
+  protected
+
+  def prepare_system_message(recipient)
+    recipients  recipient.email
+    from        "FoodSoft <#{APP_CONFIG[:email_sender]}>"
   end
   
 end

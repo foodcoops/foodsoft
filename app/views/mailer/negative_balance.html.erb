@@ -1,0 +1,9 @@
+Liebe <%= @group.name %>,
+
+euer Kontostand ist durch eine Buchung am <%= @transaction.created_on.strftime('%d.%m.%Y um %H:%M') %> ins Minus gerutscht: <%= @group.account_balance %>
+
+Es wurden <%= @transaction.amount %> für "<%= @transaction.note %>" abgebucht, die Buchung wurde von <%= @transaction.user.nick %> erstellt.
+
+Bitte zahlt so bald wie möglich wieder Geld ein, um das Gruppenkonto auszugleichen.
+
+Viele Grüße von <%= APP_CONFIG[:name] %>

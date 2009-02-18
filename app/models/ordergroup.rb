@@ -82,14 +82,9 @@ class Ordergroup < Group
   # a message is sent to all users who have enabled notification.
   def notify_negative_balance(transaction)
     # Notify only when order group had a positive balance before the last transaction:
-    if (transaction.amount < 0 && self.account_balance < 0 && self.account_balance - transaction.amount >= 0) 
-      users = self.users.reject { |u| u.settings["notify.negativeBalance"] != '1' }
-      unless users.empty?
-        Message.from_template(
-          'negative_balance', 
-          {:group => self, :transaction => transaction}, 
-          {:recipients_ids => users.collect(&:id), :subject => "Gruppenkonto im Minus"}
-        ).save!
+    if (transaction.amount < 0 && self.account_balance < 0 && self.account_balance - transaction.amount >= 0)
+      for user in users
+        Mailer.deliver_negative_balance(user,transaction) if user.settings["notify.negativeBalance"] == '1'
       end
     end
   end

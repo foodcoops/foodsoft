@@ -33,7 +33,7 @@ namespace :foodsoft do
       for user in task.users
         if user.settings['notify.upcoming_tasks'] == 1
           puts "#{user.email}.."
-          Mailer.deliver_notify_upcoming_tasks(user,task)
+          Mailer.deliver_upcoming_tasks(user, task)
         end
       end
     end

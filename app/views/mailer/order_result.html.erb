@@ -1,0 +1,14 @@
+Liebe <%= @group_order.group.name %>,
+
+die Bestellung für "<%= @order.name %>" wurde am <%= @order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= @order.updated_by.nick %> beendet.
+
+Für Euch wurden die folgenden Artikel bestellt:
+<%	for group_order_article in @group_order.group_order_articles.all(:include => :order_article)
+      article = group_order_article.order_article.article  -%>
+<%= article.name %>:	<%= group_order_article.quantity %> x <%= article.unit %> = <%= group_order_article.quantity * article.fc_price %>
+<%	end  -%>
+Gesamtpreis: <%= @group_order.price %>
+
+Bestellung online einsehen: <%= "#{APP_CONFIG[:base_url]}/ordering/my_order_result/#{@order.id}" %>
+
+Viele Grüße von <%= APP_CONFIG[:name] %>

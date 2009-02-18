@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   
   # Renders the "inbox" action.
   def index
-    @messages = Message.user
+    @messages = Message.all :order => 'created_at DESC', :limit => 100
   end
     
   # Creates a new message object.
@@ -20,7 +20,6 @@ class MessagesController < ApplicationController
       render :action => 'new'
     end
   end
-  
   
   # Shows a single message.
   def show

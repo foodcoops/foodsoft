@@ -232,17 +232,8 @@ class Order < ActiveRecord::Base
   # Sends "order finished" messages to users who have participated in this order.
   def notify_order_finished
     for group_order in self.group_orders
-      ordergroup = group_order.ordergroup
-      logger.debug("Send 'order finished' message to #{ordergroup.name}")
-      # Determine users that want a notification message:
-      users = ordergroup.users.reject{|u| u.settings["notify.orderFinished"] != '1'}
-      unless users.empty?
-        # Create user notification messages:
-        Message.from_template(
-          'order_finished',
-          {:group => ordergroup, :order => self, :group_order => group_order},
-          {:recipients_ids => users.collect(&:id), :subject => "Bestellung beendet: #{supplier.name}"}
-        ).save!
+      for user in group_order.ordergroup.users
+        Mailer.deliver_order_result(user, group_order) if user.settings["notify.orderFinished"] == '1'
       end
     end
   end

@@ -2,7 +2,7 @@
   %li
     = image_tag 'b_user.png' , :size => '7x10',  :border => 0, :alt => _("User")
     = link_to h(@current_user.nick), my_profile_path, { :title => _("User Settings") }
-  - if APP_CONFIG[:base_url]
-    %li= link_to APP_CONFIG[:name], APP_CONFIG[:base_url], { :title => _("Go to your FoodCoop-Hompage") }
+  - if APP_CONFIG[:homepage]
+    %li= link_to APP_CONFIG[:name], APP_CONFIG[:homepage], { :title => _("Go to your FoodCoop-Hompage") }
   %li= link_to _("Help"), 'http://dev.foodcoops.net/wiki/FoodsoftDoku'
   %li= link_to _("Logout"), :controller => '/login', :action => 'logout'
