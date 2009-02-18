@@ -1,36 +1,31 @@
-- title "Startseite"
+%h1 Startseite
 
-- content_for :sidebar do
-  .block
-    = render :partial => 'start_nav'
+#start_nav
+  = render :partial => 'start_nav'
 
-.block
-  .secondary-navigation
-    %ul
-      %li.active.first
-        %a Startseite
-  .content
-    %h2 Startseite
-    .inner
-      - unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks_number == 0
-        -unless @next_tasks.empty?
-          %div{:style => "float:left, margin-bottom:2em"}
-            %h3 Deine Aufgaben für die nächste Woche:
-            %table{:style => "width:25em"}
-              -for task in @next_tasks
-                %tr
-                  %td= format_date task.due_date
-                  %td
-                    %b= task.name
+.right_column{:style => "width:70%"}
+  - unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks_number == 0
+    .box_title 
+      %h2 Aufgaben
+    .column_content
+      -unless @next_tasks.empty?
+        %div{:style => "float:left, margin-bottom:2em"}
+          %h3 Deine Aufgaben für die nächste Woche:
+          %table{:style => "width:25em"}
+            -for task in @next_tasks
+              %tr
+                %td= format_date task.due_date
+                %td
+                  %b= task.name
           
-        - unless @unaccepted_tasks.empty?
-          %h3 Aufgaben übernehmen
-          Du bis für Aufgaben verantwortlich.
-          = link_to "Aufgaben übernehmen/ablehnen", my_tasks_path
-        - unless @unassigned_tasks_number == 0
-          %h3 Offene Aufgaben
-          = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufage(n)', :controller => 'tasks'}"
-        %p{:style => "clear:both"}= link_to "Meine Aufgaben", my_tasks_path
+      - unless @unaccepted_tasks.empty?
+        %h3 Aufgaben übernehmen
+        Du bis für Aufgaben verantwortlich.
+        = link_to "Aufgaben übernehmen/ablehnen", my_tasks_path
+      - unless @unassigned_tasks_number == 0
+        %h3 Offene Aufgaben
+        = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufage(n)', :controller => 'tasks'}"
+      %p{:style => "clear:both"}= link_to "Meine Aufgaben", my_tasks_path
 
   - if @ordergroup
     // Current orders
