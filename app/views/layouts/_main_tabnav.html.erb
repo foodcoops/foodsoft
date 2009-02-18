@@ -57,15 +57,15 @@
 <ul>
   <% for tab in tabs -%>
     <% unless tab[:access_denied?] -%>
-      <li class="<%= 'current' if tab_is_active?(tab) %>">
+      <li class="<%= 'active' if tab_is_active?(tab) %>">
         <%= link_to tab[:name], tab[:url] %>
-        <ul>
+        <!--<ul>
           <% for subtab in tab[:subnav] -%>
             <% unless subtab[:access_denied?] -%>
               <li><%= link_to subtab[:name], subtab[:url] %></li>
             <% end -%>
           <% end -%>
-        </ul>
+        </ul>-->
       </li>
     <% end -%>
   <% end -%>

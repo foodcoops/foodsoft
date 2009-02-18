@@ -3,35 +3,40 @@
   %head
     %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
     %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
-    = stylesheet_link_tag 'foodsoft'
-    = stylesheet_link_tag "print", :media => "print"
+    = stylesheet_link_tag 'base'
+    = stylesheet_link_tag 'style'
     = javascript_include_tag 'prototype'
     = javascript_include_tag 'effects'
     = javascript_include_tag 'controls'
     = javascript_include_tag 'application'
     = javascript_include_tag('ordering') if (controller.controller_name == "ordering")
   %body
-    #logininfo= render :partial => 'shared/loginInfo'
-    
-    #header
-      #logo
-        %a{:href => "/"}
-          <span>food</span>soft
-        %span{:style => "color:white; font-size:45%; letter-spacing: -1px;"}= APP_CONFIG[:name]
-      #nav= render :partial => 'layouts/main_tabnav'
-
-    #main
-      #content
-        - if flash[:notice]
-          %h3.notice#flashNotice= flash[:notice]
-        - if flash[:error]
-          %h3.error#flashError= flash[:error]
-        #loader{:style => "display:none;"}= image_tag("loader.gif", :border => 0)
-        - if yield(:title)
-          %h1= yield(:title)
-        = yield
-
-    - if flash[:notice]
-      = javascript_tag("new Effect.Highlight('flashNotice', {delay:0.8, duration:1});")
-    - if flash[:error]
-      = javascript_tag("new Effect.Highlight('flashError', {delay:0.8, duration:1});")
+    #container
+      #header
+        %h1
+          %a{:href => "/"}= APP_CONFIG[:name]
+        #user-navigation
+          = render :partial => 'shared/loginInfo'
+          .clear
+        #main-navigation
+          = render :partial => 'layouts/main_tabnav'
+          .clear
+      #wrapper
+        #loader{:style => "display:none;"}
+          = image_tag("loader.gif", :border => 0)
+        #main
+          - if flash[:notice]
+            .flash-messages.notice
+              %p= flash[:notice]
+          - if flash[:error]
+            .flash-messages.error
+              %p= flash[:error]
+          = yield
+        #sidebar
+          = yield(:sidebar)
+        .clear
+      #footer
+        .block
+          %p= "#{APP_CONFIG[:name]} is powered by FoodSoft"
+    - if flash[:notice] or flash[:error]
+      = javascript_tag("new Effect.Highlight('flash-messages', {delay:0.8, duration:1});")
