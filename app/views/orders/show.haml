@@ -2,7 +2,7 @@
 #element_navigation
   = link_to_unless @order.previous == @order, "<< #{@order.previous.name}", @order.previous
   |
-  = link_to _("Overview"), orders_path
+  = link_to "Übersicht", orders_path
   |
   = link_to_unless @order.next == @order, "#{@order.next.name} >>", @order.next
 
@@ -13,7 +13,7 @@
   .column_content
     - if @order.finished? and !@order.closed?
       %p
-        %b{:style => "color:red"}=_ "Order isn't closed yet"
+        %b{:style => "color:red"} Bestellung wurde noch nicht abgerechnet.
     %p
       Lieferant:
       %b=h @order.name
@@ -33,7 +33,7 @@
       = "[#{@order.group_orders.find(:all, :include => :ordergroup).collect{|g| g.ordergroup.name}.join(', ')}]"
       
     %p
-      Netto/Bruttosumme aller Artikel
+      Netto/Bruttosumme aller Artikel:
       %b= "#{number_to_currency(@order.sum(:net))} / #{number_to_currency(@order.sum(:gross))}"
     %p
       Bestellte Artikel:

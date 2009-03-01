@@ -2,6 +2,6 @@
 
 - form_for @order do |form|
   = render :partial => 'form', :locals => { :form => form }
-  = submit_tag _("Save")
+  = submit_tag "Speichern"
   |
-  = link_to _("Cancel"), :action => 'show', :id => @order
+  = link_to "Abbrechen", :action => 'show', :id => @order

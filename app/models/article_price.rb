@@ -34,11 +34,11 @@ class ArticlePrice < ActiveRecord::Base
 
   # The financial gross, net plus tax and deposit.
   def gross_price
-    ((price + deposit) * (tax / 100 + 1))
+    ((price + deposit) * (tax / 100 + 1)).round(2)
   end
 
   # The price for the foodcoop-member.
   def fc_price
-    (gross_price  * (APP_CONFIG[:price_markup] / 100 + 1))
+    (gross_price  * (APP_CONFIG[:price_markup] / 100 + 1)).round(2)
   end
 end

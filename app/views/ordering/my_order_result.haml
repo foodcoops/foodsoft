@@ -2,7 +2,7 @@
 #element_navigation
   = link_to_unless @order.previous == @order, "<< #{@order.previous.name}", :action => "my_order_result", :id => @order.previous
   |
-  = link_to _("Overview"), :controller => 'ordering'
+  = link_to "Übersicht", :controller => 'ordering'
   |
   = link_to_unless @order.next == @order, "#{@order.next.name} >>", :action => "my_order_result", :id => @order.next
 
@@ -30,9 +30,9 @@
               %b=h number_to_currency(@group_order.price)
             - else
               %b Du hast nicht bestellt.
-          %p
-            = "Abgerechnet von #{@order.updated_by.nick}" if @order.finished?
-            = "<b>Bestellung</b>" if @order.closed?
+          - if @order.closed?
+            %p
+              = "Abgerechnet von #{@order.updated_by.nick}"
     = link_to "Kommentare lesen/schreiben", "#comments"
 
 // directly switch to active orders

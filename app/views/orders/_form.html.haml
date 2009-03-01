@@ -67,7 +67,7 @@
       %tr
         %td{:colspan => "6"}
           = check_box_tag 'checkall', "1", false, { :onclick => "checkUncheckAll(this)" }
-          =_ "Select all"
+          Alle auswählen
 
 - if (@template_orders && !@template_orders.empty?)
   = render :partial => 'template_orders_script'

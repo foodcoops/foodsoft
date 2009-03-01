@@ -5,7 +5,7 @@
     - form_tag do
       Neue Bestellung anlegen für
       %select{:onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;"}
-        %option{:selected => 'selected'}=_ "Choose a supplier..."
+        %option{:selected => 'selected'} Lieferant auswählen...
         = options_for_suppliers_to_select
 %br/
 .left_column{:style => "width:55em"}
@@ -27,13 +27,13 @@
               %td=h order.name
               %td=h format_time(order.ends) unless order.ends.nil?
               %td=h truncate(order.note)
-              %td= link_to "Beenden", finish_order_path(order), :confirm => _("Are you really sure to finish the order?"), :method => :post
+              %td= link_to "Beenden", finish_order_path(order), :confirm => "Bist Du sicher die Bestellung zu beenden?", :method => :post
               %td
                 = link_to "Anzeigen", order
                 = link_to icon(:edit), edit_order_path(order)
-                = link_to icon(:delete), order, :confirm => _("Are you really sure you want to destroy the order?"), :method => :delete
+                = link_to icon(:delete), order, :confirm => "Bist Du sicher die Bestellung zu beenden?", :method => :delete
     - else
-      =_ "There aren't open orders at the moment."
+      Derzeit gibt es keine laufende Bestellungen.
         
 .left_column{:style => "width:75em"}
   .box_title

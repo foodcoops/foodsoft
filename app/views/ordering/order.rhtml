@@ -39,7 +39,7 @@
           <tr class="<%= cycle('even', 'odd', :name => 'articles') %>" valign="top">
               <td class="name">
                 <% unless order_article.article.note.blank? %>
-                    <%= order_article.article.name %> <%= image_tag "lamp_grey.png", {:alt => _("Show note"), :size => "15x16", :border => "0", :onmouseover => "$('note_#{i}').show();", :onmouseout => "$('note_#{i}').hide();" }%>
+                    <%= order_article.article.name %> <%= image_tag "lamp_grey.png", {:alt => "Notiz zeigen", :size => "15x16", :border => "0", :onmouseover => "$('note_#{i}').show();", :onmouseout => "$('note_#{i}').hide();" }%>
                 <% else %>
                   <%= order_article.article.name %>
                 <% end %>
@@ -81,20 +81,20 @@
         <tfoot>
           <tr>
               <td colspan="6"></td>
-              <td colspan="3" class="currency"><%=_ "Total amount" %>: <span id="total_price"><%= total %></span> €</td>
+              <td colspan="3" class="currency">Gesamtbetrag: <span id="total_price"><%= total %></span> €</td>
           </tr>
           <tr>
               <td colspan="6"></td>
-              <td colspan="3" class="currency"><%=_ "Credit available"%>: <%= number_to_currency(@availableFunds) %></td>
+              <td colspan="3" class="currency">Verfügbares Guthaben: <%= number_to_currency(@availableFunds) %></td>
           </tr>
           <tr>
               <td colspan="6"></td>
-              <td colspan="3" class="currency"><%=_ "New account balance"%>: <strong><span id="new_balance"><%= @ordergroup.account_balance - total %></span> €</strong></td>
+              <td colspan="3" class="currency">Neuer Kontostand: <strong><span id="new_balance"><%= @ordergroup.account_balance - total %></span> €</strong></td>
           </tr>
           <tr>
               <td style="text-align:left;"><%= link_to_top %></td>
               <td colspan="5"></td>
-              <td colspan="3" style="text-align:right;"><span style="font-size:1.2em"><%= submit_tag( _("Save order"), :id => 'submit_button' ) %></span> | <%= link_to _("Cancel"), :controller => 'ordering' %></td>
+              <td colspan="3" style="text-align:right;"><span style="font-size:1.2em"><%= submit_tag( "Bestellung speichern", :id => 'submit_button' ) %></span> | <%= link_to "Abbrechen", :controller => 'ordering' %></td>
           </tr>
         </tfoot>
       </table>

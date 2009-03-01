@@ -18,13 +18,13 @@ pdf.text "Insgesamt #{order_articles.size} Artikel", :size => 8
 pdf.move_down 10
 
 order_articles_data = order_articles.collect do |a|
-  [a.article.name, a.article.unit, a.price.unit_quantity, a.price.fc_price, a.units_to_order]
+  [a.article.name, a.article.unit, a.price.unit_quantity, number_with_precision(a.price.fc_price), a.units_to_order]
 end
 pdf.table order_articles_data,
   :font_size => 8,
     :border_style => :grid,
     :vertical_padding => 3,
-    :headers => ["Artikel", "Einheit", "Gebinde", "Preis", "Menge"],
+    :headers => ["Artikel", "Einheit", "Gebinde", "FC-Preis", "Menge"],
     :align => { 3 => :right }
 
 
@@ -46,15 +46,15 @@ while (page_number * max_order_articles_per_page < total_num_order_articles) do 
   header = [""]
   for header_article in current_order_articles
     name = header_article.article.name.split("-").join(" ").split(".").join(". ").split("/").join(" ")
-    name = name.split.collect { |w| truncate(w, 8, "..") }.join(" ")
-    header << truncate(name, 30, " ..")
+    name = name.split.collect { |w| truncate(w, :length => 8, :omission => "..") }.join(" ")
+    header << truncate(name, :length => 30, :omission => " ..")
   end
 
   # Collect group results
   groups_data = []
   for group_order in @order.group_orders.all(:include => :ordergroup)
 
-    group_result = [truncate(group_order.ordergroup.name, 20)]
+    group_result = [truncate(group_order.ordergroup.name, :length => 20)]
 
     for order_article in current_order_articles
       # get the Ordergroup result for this order_article
