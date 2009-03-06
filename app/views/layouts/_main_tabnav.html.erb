@@ -1,18 +1,18 @@
 <%
   u = @current_user
   tabs = [
-      { :name => "Start", :url => root_path, :active => ["index", "messages", "home"],
+      { :name => "Start", :url => root_path, :active => ["index", "home"],
         :subnav => [
-          { :name => "Nachrichten", :url => "/messages"},
           { :name => "Meine Aufgaben", :url => "/home/tasks" },
           { :name => "Meine Bestellgruppe", :url => "/home/ordergroup"},
           { :name => "Mein Profil", :url => "/home/profile"}
         ]
       },
-      { :name => "Foodcoop", :url => "/foodcoop/members", :active => ["foodcoop", "tasks"],
+      { :name => "Foodcoop", :url => "/foodcoop/members", :active => ["foodcoop", "tasks", "messages"],
         :subnav => [
           { :name => "Mitglieder", :url => "/foodcoop/members"},
           { :name => "Abeitsgruppen", :url => "/foodcoop/workgroups"},
+          { :name => "Nachrichten", :url => "/messages"},
           { :name => "Aufgaben", :url => "/tasks"}
         ]
       },

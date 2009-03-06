@@ -37,7 +37,7 @@ class Message < ActiveRecord::Base
   # clean up the recipients_ids
   def before_validation_on_create
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
-    self.recipients_ids = User.all.collect(&:id) if sent_to_all == 1
+    self.recipients_ids = User.all.collect(&:id) if sent_to_all == "1"
   end
 
   def add_recipients(users)
