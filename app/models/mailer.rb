@@ -4,16 +4,17 @@ class Mailer < ActionMailer::Base
   layout 'email'  # Use views/layouts/email.html.erb
   
   # Sends an email copy of the given internal foodsoft message.
-  def message(message)
+  def message(message, recipient)
+    headers     'Sender' => APP_CONFIG[:email_sender], 'Errors-To' => APP_CONFIG[:email_sender]
     subject     "[#{APP_CONFIG[:name]}] " + message.subject
-    recipients  message.recipient.email
+    recipients  recipient.email
     from        "#{message.sender.nick} <#{message.sender.email}>"
     body        :body         => message.body,
                 :sender       => message.sender.nick,
-                :recipients   => message.recipients,
-                :reply        => "#{APP_CONFIG[:base_url]}/messages/reply/#{message}",
-                :profile      => "#{APP_CONFIG[:base_url]}/home/profile",
-                :link         => "#{APP_CONFIG[:base_url]}/messages/show/#{message}"
+                :recipients   => recipient.nick,
+                :reply        => "#{APP_CONFIG[:base_url]}/messages/reply/#{message.id}",
+                :link         => "#{APP_CONFIG[:base_url]}/messages/show/#{message.id}",
+                :profile      => "#{APP_CONFIG[:base_url]}/home/profile"
   end
 
   # Sends an email with instructions on how to reset the password.

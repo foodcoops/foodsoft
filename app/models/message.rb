@@ -77,8 +77,8 @@ class Message < ActiveRecord::Base
     messages = Message.pending
     for message in messages
       for recipient in message.recipients
-        if recipient.settings['messages.sendAsEmail'] == 1 && !recipient.email.blank?
-          Mailer.deliver_message(message)
+        if recipient.settings['messages.sendAsEmail'] == "1" && !recipient.email.blank?
+          Mailer.deliver_message(message, recipient)
         end
       end
       message.update_attribute(:email_state, 1)
