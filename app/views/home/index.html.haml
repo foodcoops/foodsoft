@@ -35,7 +35,9 @@
     .box_title
       %h2 Neuste Nachrichten
     .column_content
-      = render :partial => 'messages/messages', :locals => { :subject_length => 110 }
+      = render :partial => 'messages/messages', :locals => { :subject_length => 70 }
+      %br/
+      = link_to "Alle Nachrichten einsehen", messages_path
 
   - if @ordergroup
     // Ordergroup overview

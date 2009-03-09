@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     
   #before_filter :select_foodcoop
   before_filter :authenticate, :store_controller
-  after_filter  :send_email_messages, :remove_controller
+  after_filter  :remove_controller
   
   # sends a mail, when an error occurs
   # see plugins/exception_notification
@@ -144,11 +144,6 @@ class ApplicationController < ActionController::Base
     # Sets the thread local variable that holds a reference to the current controller to nil.
     def remove_controller
       Thread.current[:application_controller] = nil
-    end
-    
-    # Sends any pending emails that were created during this request.
-    def send_email_messages
-      call_rake :send_emails unless Message.pending.empty?
     end
 
     # Get supplier in nested resources

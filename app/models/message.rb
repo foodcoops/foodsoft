@@ -78,7 +78,11 @@ class Message < ActiveRecord::Base
     for message in messages
       for recipient in message.recipients
         if recipient.settings['messages.sendAsEmail'] == "1" && !recipient.email.blank?
-          Mailer.deliver_message(message, recipient)
+          begin
+            Mailer.deliver_message(message, recipient)
+          rescue
+            logger.warn "Deliver failed for #{recipient.nick}: #{recipient.email}"
+          end
         end
       end
       message.update_attribute(:email_state, 1)
