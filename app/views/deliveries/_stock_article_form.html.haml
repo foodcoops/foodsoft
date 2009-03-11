@@ -3,27 +3,27 @@
   = form.hidden_field :supplier_id
 
   %p
-    = form.label :name
+    Name
     %br/
     = form.text_field :name
   %p
-    = form.label :unit
+    Einheit
     %br/
     = form.text_field :unit
   %p
-    = form.label :note
+    Notiz
     %br/
     = form.text_field :note
   %p
-    = form.label :price
+    Preis
     %br/
     = form.text_field :price
   %p
-    = form.label :tax
+    MwSt
     %br/
     = form.text_field :tax, :value => (stock_article.tax || 7.0)
   %p
-    = form.label :deposit
+    Pfand
     %br/
     = form.text_field :deposit
   %p

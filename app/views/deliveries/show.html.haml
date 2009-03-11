@@ -4,7 +4,7 @@
   %b Lieferant:
   =h @delivery.supplier.name
 %p
-  %b Delivered on:
+  %b Geliefert am:
   = @delivery.delivered_on
 %p
   %b Rechnungsbetrag:
@@ -16,13 +16,28 @@
     %th Artikel
     %th Einheit
     %th Menge
+    %th Nettopreis
+    %th Summe
+  - total_net, total_gross = 0,0
   - for stock_change in @delivery.stock_changes.find :all, :include => :stock_article
+    - quantity = stock_change.quantity
+    - sum = quantity * stock_change.stock_article.price
+    - total_net += sum
+    - total_gross += quantity * stock_change.stock_article.gross_price
     %tr
       %td= stock_change.stock_article.name
       %td= stock_change.stock_article.unit
-      %td= stock_change.quantity
+      %td= quantity
+      %td= number_to_currency stock_change.stock_article.price
+      %td= number_to_currency sum
+%p
+  Nettosumme:
+  = number_to_currency total_net
+%p
+  Bruttosumme:
+  = number_to_currency total_gross
 
 %br/
-= link_to 'Edit', edit_supplier_delivery_path(@supplier,@delivery)
+= link_to 'Bearbeiten', edit_supplier_delivery_path(@supplier,@delivery)
 |
-= link_to 'Back', supplier_deliveries_path(@supplier)
+= link_to 'Lieferungsübersicht', supplier_deliveries_path(@supplier)
