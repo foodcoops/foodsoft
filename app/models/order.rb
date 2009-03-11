@@ -183,9 +183,6 @@ class Order < ActiveRecord::Base
           oa.group_order_articles.each { |goa| goa.group_order_article_quantities.clear }
         end
       end
-
-      # notify order groups
-      notify_order_finished
     end
   end
   
@@ -213,7 +210,7 @@ class Order < ActiveRecord::Base
       self.update_attributes! :state => 'closed', :updated_by => user
     end
   end
-  
+
   protected
 
   def starts_before_ends
@@ -230,15 +227,6 @@ class Order < ActiveRecord::Base
   # This will be either the maximum value of a current order or the actual order value of a finished order.
   def update_price_of_group_orders
     group_orders.each { |group_order| group_order.update_price! }
-  end
-
-  # Sends "order finished" messages to users who have participated in this order.
-  def notify_order_finished
-    for group_order in self.group_orders
-      for user in group_order.ordergroup.users
-        Mailer.deliver_order_result(user, group_order) if user.settings["notify.orderFinished"] == '1'
-      end
-    end
   end
 
 end

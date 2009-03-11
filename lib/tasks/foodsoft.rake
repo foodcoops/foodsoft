@@ -38,4 +38,14 @@ namespace :foodsoft do
       end
     end
   end
+
+  desc "Notify users of finished orders"
+  task :notify_order_finished => :environment do
+    order = Order.find(ENV["ORDER_ID"])
+    for group_order in order.group_orders
+      for user in group_order.ordergroup.users
+        Mailer.deliver_order_result(user, group_order) if user.settings["notify.orderFinished"] == '1'
+      end
+    end
+  end
 end
