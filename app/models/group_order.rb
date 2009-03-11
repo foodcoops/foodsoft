@@ -30,12 +30,17 @@ class GroupOrder < ActiveRecord::Base
   named_scope :finished, lambda { {:conditions => ["order_id IN (?)", Order.finished.collect(&:id)]} }
   
   # Updates the "price" attribute.
-  # This will be the maximum value of an order
+  # This will be the maximum value of an open order or
+  # the value depending of the article results.
   def update_price!
     total = 0
     for article in group_order_articles.find(:all, :include => :order_article)
-      total += article.order_article.article.fc_price * (article.quantity + article.tolerance)            
-    end        
+      unless order.finished?
+        total += article.order_article.article.fc_price * (article.quantity + article.tolerance)
+      else
+        total += article.order_article.price.fc_price * article.result
+      end
+    end
     update_attribute(:price, total)
   end
 
