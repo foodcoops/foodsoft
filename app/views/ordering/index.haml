@@ -28,7 +28,7 @@
     .box_title
       %h2 Nicht abgerechnete Bestellungen
     .column_content
-      = render :partial => "orders", :locals => {:orders => Order.finished}
+      = render :partial => "orders", :locals => {:orders => Order.finished_not_closed}
       - if @ordergroup.value_of_finished_orders > 0
         %p
           Gesamtsumme:
