@@ -1,3 +1,13 @@
+# == Schema Information
+# Schema version: 20090317175355
+#
+# Table name: memberships
+#
+#  id       :integer         not null, primary key
+#  group_id :integer         default(0), not null
+#  user_id  :integer         default(0), not null
+#
+
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MembershipTest < Test::Unit::TestCase

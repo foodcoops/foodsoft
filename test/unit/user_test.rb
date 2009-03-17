@@ -1,3 +1,22 @@
+# == Schema Information
+# Schema version: 20090317175355
+#
+# Table name: users
+#
+#  id                     :integer         not null, primary key
+#  nick                   :string(255)     default(""), not null
+#  password_hash          :string(255)     default(""), not null
+#  password_salt          :string(255)     default(""), not null
+#  first_name             :string(255)     default(""), not null
+#  last_name              :string(255)     default(""), not null
+#  email                  :string(255)     default(""), not null
+#  phone                  :string(255)
+#  created_on             :datetime        not null
+#  reset_password_token   :string(255)
+#  reset_password_expires :datetime
+#  last_login             :datetime
+#
+
 require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < Test::Unit::TestCase

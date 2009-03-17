@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090120184410
+# Schema version: 20090317175355
 #
 # Table name: stock_changes
 #
@@ -9,6 +9,7 @@
 #  stock_article_id :integer
 #  quantity         :integer         default(0)
 #  created_at       :datetime
+#  stock_taking_id  :integer
 #
 
 class StockChange < ActiveRecord::Base

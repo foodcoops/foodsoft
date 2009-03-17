@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090119155930
+# Schema version: 20090317175355
 #
 # Table name: orders
 #
@@ -11,6 +11,7 @@
 #  state              :string(255)     default("open")
 #  lock_version       :integer         default(0), not null
 #  updated_by_user_id :integer
+#  foodcoop_result    :decimal(8, 2)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

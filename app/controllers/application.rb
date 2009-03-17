@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
       if !(user = current_user)
         # No user at all: redirect to login page.
         self.return_to = request.request_uri
-        redirect_to :controller => 'login'
+        redirect_to :controller => '/login'
         return false
       else
         # We have an authenticated user, now check role...

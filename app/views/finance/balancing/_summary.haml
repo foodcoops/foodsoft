@@ -17,7 +17,7 @@
       %td= number_to_currency(order.sum(:groups))
     %tr
       %td FC Gewinn ohne Aufschlag:
-      %td= number_to_currency(order.profit(:with_markup => false))
+      %td= number_to_currency(order.profit(:without_markup => true))
     %tr
       %td FC Gewinn mit Aufschlag:
       %td#order_profit= number_to_currency(order.profit)

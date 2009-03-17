@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20090317175355
+#
+# Table name: stock_takings
+#
+#  id         :integer         not null, primary key
+#  date       :date
+#  note       :text
+#  created_at :datetime
+#
+
 class StockTaking < ActiveRecord::Base
 
   has_many :stock_changes, :dependent => :destroy

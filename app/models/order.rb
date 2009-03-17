@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090119155930
+# Schema version: 20090317175355
 #
 # Table name: orders
 #
@@ -11,6 +11,7 @@
 #  state              :string(255)     default("open")
 #  lock_version       :integer         default(0), not null
 #  updated_by_user_id :integer
+#  foodcoop_result    :decimal(8, 2)
 #
 
 class Order < ActiveRecord::Base
@@ -117,10 +118,11 @@ class Order < ActiveRecord::Base
   
   # Returns the defecit/benefit for the foodcoop
   # Requires a valid invoice, belonging to this order
+  #FIXME: Consider order.foodcoop_result
   def profit(options = {})
-    markup = options[:with_markup] || true
+    markup = options[:without_markup] || false
     if invoice
-      groups_sum = markup ? sum(:groups) : sum(:groups_without_markup)
+      groups_sum = markup ? sum(:groups_without_markup) : sum(:groups)
       groups_sum - invoice.net_amount
     end
   end
@@ -145,8 +147,8 @@ class Order < ActiveRecord::Base
         end
       end
     elsif type == :groups || type == :groups_without_markup
-      for go in group_orders
-        for goa in go.group_order_articles
+      for go in group_orders.all(:include => :group_order_articles)
+        for goa in go.group_order_articles.all(:include => [:order_article])
           case type
           when :groups
             total += goa.result * goa.order_article.price.fc_price
@@ -208,7 +210,7 @@ class Order < ActiveRecord::Base
         end
       end
 
-      self.update_attributes! :state => 'closed', :updated_by => user
+      self.update_attributes! :state => 'closed', :updated_by => user, :foodcoop_result => profit
     end
   end
 
