@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   
   # Renders the "inbox" action.
   def index
-    @messages = Message.all :order => 'created_at DESC', :limit => 100
+    @messages = Message.public.all :order => 'created_at DESC', :limit => 100
   end
     
   # Creates a new message object.

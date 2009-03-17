@@ -21,6 +21,7 @@ class Message < ActiveRecord::Base
   
   named_scope :pending, :conditions => { :email_state => 0 }
   named_scope :sent, :conditions => { :email_state => 1 }
+  named_scope :public, :conditions => {:private => false}
 
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {

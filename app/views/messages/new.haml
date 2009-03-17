@@ -4,6 +4,7 @@
   = f.error_messages
 
   %p
+    Empfängerinnen
     %fieldset
       - if APP_CONFIG[:mailing_list].blank?
         = f.check_box :sent_to_all, :onchange => "Element.toggle('recipients')"
@@ -41,14 +42,19 @@
             %b Gruppe:
             %br/
             = f.select :group_id, groups_for_select, :prompt => " -- Gruppe auswählen --"
-    
+
   %p
-    = f.label :subject, "Betreff"
+    Privat
+    = f.check_box :private
+    %small{:style => "color:grey"} (Nachricht taucht nicht im Foodsoft-Nachrichteneingang auf)
+
+  %p
+    Betreff
     %br/
     = f.text_field :subject
 
   %p
-    = f.label :body, "Nachricht"
+    Nachricht
     %br/
     ~ f.text_area :body, :cols => '80', :rows => '20'
 
