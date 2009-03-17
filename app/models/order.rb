@@ -170,12 +170,13 @@ class Order < ActiveRecord::Base
           oa.update_attribute(:article_price, oa.article.article_prices.first)
           oa.group_order_articles.each { |goa| goa.save_results! }
         end
-        # Update GroupOrder prices
-        group_orders.each { |go| go.update_price! }
-        
+
         # set new order state (needed by notify_order_finished)
         update_attributes(:state => 'finished', :ends => Time.now, :updated_by => user)
 
+        # Update GroupOrder prices
+        group_orders.each { |go| go.update_price! }
+        
         # Clean up
         # Delete no longer required order-history (group_order_article_quantities) and
         # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
