@@ -9,7 +9,7 @@
     %span{:style => "color:red;font-weight: bold"} !
 %td= order_article.price.unit_quantity.to_s + ' * ' + order_article.article.unit.to_s
 %td= number_to_currency(order_article.price.price, :unit => "")
-%td= number_to_currency(order_article.price.fc_price, :unit => "")
+%td= number_to_currency(order_article.price.gross_price, :unit => "")
 %td= order_article.price.tax
 %td= order_article.price.deposit
 %td
