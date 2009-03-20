@@ -14,8 +14,10 @@
           %td
           %td{:style=>"width:50%"}
             = group_order_article.group_order.ordergroup.name
-          %td{:id => "group_order_article_#{group_order_article.id}_quantity"}
+          %td{:id => "group_order_article_#{group_order_article.id}_quantity", :style => "white-space:nowrap"}
             = group_order_article.result
+            = button_to_remote( "+", :url => {:action => "update_group_order_article_result", :id => group_order_article, :modifier => '+'}, :html => {:style => "float:left"}, :success => "Element.hide('loader');", :before => "Element.show('loader');")
+            = button_to_remote( "-", :url => {:action => "update_group_order_article_result", :id => group_order_article, :modifier => '-'}, :success => "Element.hide('loader');", :before => "Element.show('loader');")
           %td.currency
             = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result, :unit => "")
           %td.actions{:style=>"width:1em"}

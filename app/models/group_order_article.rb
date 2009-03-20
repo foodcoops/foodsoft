@@ -24,6 +24,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
   validates_presence_of :group_order_id, :order_article_id
   validates_inclusion_of :quantity, :in => 0..99
+  validates_inclusion_of :result, :in => 0..99, :allow_nil => true
   validates_inclusion_of :tolerance, :in => 0..99
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
 

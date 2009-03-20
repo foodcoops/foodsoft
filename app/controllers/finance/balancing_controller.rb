@@ -196,6 +196,28 @@ class Finance::BalancingController < ApplicationController
     end
   end
 
+  def update_group_order_article_result
+    goa = GroupOrderArticle.find(params[:id])
+
+    if params[:modifier] == '-'
+      goa.update_attributes({:result => goa.result - 1})
+    elsif params[:modifier] == '+'
+      goa.update_attributes({:result => goa.result + 1})
+    end
+
+    render :update do |page|
+        goa.group_order.update_price!                     # Update the price attribute of new GroupOrder
+        goa.order_article.update_results! if goa.order_article.article.is_a?(StockArticle) # Update units_to_order of order_article
+
+        page["order_article_#{goa.order_article.id}"].replace_html :partial => 'order_article', :locals => {:order_article => goa.order_article}
+        page["group_order_articles_#{goa.order_article.id}"].replace_html :partial => 'group_order_articles',
+          :locals => {:order_article => goa.order_article}
+        page["summary"].replace_html :partial => 'summary', :locals => {:order => goa.order_article.order}
+        page["order_profit"].visual_effect :highlight, :duration => 2
+    end
+
+  end
+
   def destroy_group_order_article
     goa = GroupOrderArticle.find(params[:id])
     goa.destroy
