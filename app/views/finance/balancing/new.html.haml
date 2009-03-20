@@ -22,7 +22,7 @@
   .column_content
     %ul
       - unless @order.invoice
-        %li= link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order)
+        %li= link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier)
       - unless @order.closed?
         %li= link_to "Bestellung abschließen", :action => "confirm", :id => @order
 
