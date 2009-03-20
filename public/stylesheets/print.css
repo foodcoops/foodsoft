@@ -67,7 +67,8 @@ input[type="button"], input[type="submit"], input[type="reset"] {
   color: #222222;
   padding: 0.1em 0.5em;
   font-size: 1em;
-  font-weight: bold; }
+  font-weight: bold;
+  min-width: 34px; }
 
 select {
   max-width: 15em; }
