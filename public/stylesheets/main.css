@@ -56,7 +56,8 @@ input, textarea, select {
   border: 1px solid #D7D7D7;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 0.9em;
-  padding: .2em; }
+  padding-left: .2em;
+  padding-right: .2em; }
 
 input:focus, textarea:focus, select:focus {
   border-color: #000; }
