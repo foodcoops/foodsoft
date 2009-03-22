@@ -7,7 +7,7 @@
 <div class="left_column" style="width: 60%;">
   <div class="box_title">
     <h2>
-      Benutzername: <%= h @user.nick %>
+      <%= h @user.nick %>
       <small>(Mitglied seit: <%= distance_of_time_in_words(Time.now, @user.created_on) -%>)</small>
     </h2>
   </div>
