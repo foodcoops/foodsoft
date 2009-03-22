@@ -1,14 +1,14 @@
 - title "Administration"
 
 %p
-  %i Hier kannst Du die Gruppen und Benutzer der Foodsoft verwalten.
+  %i Hier kannst Du die Gruppen und Benutzerinnen der Foodsoft verwalten.
 .left_column{:style => "width:48%"}
   .box_title
-    %h2 Neuste Benutzer
+    %h2 Neuste Benutzerinnen
   .column_content
     %table
       %tr
-        %th Nick
+        %th Benutzername
         %th Name
         %th Erstellt am
       - for user in @users
@@ -27,7 +27,7 @@
   .column_content
     %table
       %tr
-        %th Name
+        %th Gruppenname
         %th Typ
         %th Mitglieder
       - for group in @groups
