@@ -1,6 +1,8 @@
 - title "Aufgabenarchiv"
 = render :partial => "nav"
 
+= will_paginate @orders
+%br/
 %table{:style => "width: 76%"}
   %tr
     %th Fälligkeitsdatum
