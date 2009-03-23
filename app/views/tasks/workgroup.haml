@@ -12,14 +12,14 @@
     - if @group.weekly_task
       %table.list
         %tr
-          %th= _('Date')
-          %th= _('Who will make it?')
-          %th= _('Accept task')
+          %th Datum
+          %th Wer machts?
+          %th Aufgabe übernehmen
         - i = 0
-        - for nextTask in @group.next_weekly_tasks
+        - for next_task in @group.next_weekly_tasks
           %tr{:class => cycle("even","odd")}
-            %td= nextTask.strftime("%a, %d.%m.%Y")
-            - if task = @group.tasks.find(:first, :conditions => ["due_date = ? AND name = ?",nextTask.strftime("%Y-%m-%d"),@group.task_name])
+            %td= I18n.l next_task, :format => "%a, %d.%m.%Y"
+            - if task = @group.tasks.find(:first, :conditions => ["due_date = ? AND name = ?",next_task.strftime("%Y-%m-%d"),@group.task_name])
               - unless task.users.empty?
                 - owner = Array.new
                 - task.assignments.each do |ass| 
@@ -30,27 +30,27 @@
                   - owner << nick
                 %td
                   = owner.join(", ")
-                  %small= link_to _('more'), :action => "edit", :id => task
+                  %small= link_to "mehr", :action => "edit", :id => task
               - else
                 %td
-                  = link_to _('Assign people'), :action => "edit", :id => task
+                  = link_to "Verantwortliche zuweisen", :action => "edit", :id => task
               %td
                 - unless task.is_accepted?(@current_user)
-                  %span{:style => "float:left"}= button_to _('Accept task'), :controller => "tasks", :action => "accept", :id => task
-                  = button_to _('Reject task'), :controller => "tasks", :action => "reject", :id => task if task.is_assigned?(@current_user)
+                  %span{:style => "float:left"}= button_to "Aufgabe übernehmen", :controller => "tasks", :action => "accept", :id => task
+                  = button_to "Aufgabe ablehnen", :controller => "tasks", :action => "reject", :id => task if task.is_assigned?(@current_user)
             - else
-              %td= link_to _('Assign people'), :action => "new", :id => @group, :task_from_now => i
+              %td= link_to "Verantwortliche zuweisen", :action => "new", :id => @group, :task_from_now => i
               %td
           - i += 1
       %br/
     - else
-      = _('No weekly tasks defined yet')
+      Noch keine Wochenaufgaben angelegt.
     - if @current_user.member_of?(@group) or @current_user.role_admin?
-      = link_to _('Edit weekly tasks'), :controller => "foodcoop", :action => "edit_group", :id => @group
+      = link_to "Wochenaufgaben bearbeiten", :controller => "foodcoop", :action => "edit_group", :id => @group
 
 .left_column{:style => "width:75%"}
   .box_title 
-    %h2= _('all tasks')
+    %h2 Alle Aufgaben der Gruppe
   .column_content
     - @tasks = @group.open_tasks
     = render :partial => "list"
