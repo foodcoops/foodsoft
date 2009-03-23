@@ -6,9 +6,7 @@
     %br/
     Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.
       
-- unless @groups.empty?
-  -for @group in @groups
-    = render :partial => "workgroup"
+= render :partial => "workgroup", :collection => @groups
         
           
             

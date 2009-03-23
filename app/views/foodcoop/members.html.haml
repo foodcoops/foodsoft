@@ -14,7 +14,7 @@
     - unless params[:sort_by_ordergroups]
       #user_filter{:style => "float:left; margin-right:2em;"}
         %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
-          %label{:for => 'article_name'} Suche in Name : 
+          %label{:for => 'article_name'} Suche nach Name:
           = text_field_tag("query", params['query'], :size => 10 )
           
         = observe_field 'query',  :frequency => 2, |
@@ -25,7 +25,7 @@
           :with => 'query', |
           :method => :get |
     
-    =_ "Sort by Ordergroups :"
+    =_ "Nach Bestellgruppen sortieren:"
     - form_tag({:action => "members"}, :method => "get", :style=>"display:inline;") do
       = check_box_tag :sort_by_ordergroups, 1, params[:sort_by_ordergroups], :onclick => "submit();"
     #users

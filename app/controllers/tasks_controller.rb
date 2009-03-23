@@ -103,7 +103,7 @@ class TasksController < ApplicationController
   
   # Shows all tasks, which are already done
   def archive
-    @tasks = Task.done
+    @tasks = Task.done.paginate :page => params[:page], :per_page => 30
   end
   
   # shows workgroup (normal group) to edit weekly_tasks_template

@@ -4,5 +4,5 @@
     = link_to h(@current_user.nick), my_profile_path, { :title => _("User Settings") }
   - if APP_CONFIG[:homepage]
     %li= link_to APP_CONFIG[:name], APP_CONFIG[:homepage], { :title => _("Go to your FoodCoop-Hompage") }
-  %li= link_to _("Help"), 'http://dev.foodcoops.net/wiki/FoodsoftDoku'
+  %li= link_to _("Hilfe"), 'http://dev.foodcoops.net/wiki/FoodsoftDoku'
   %li= link_to _("Logout"), :controller => '/login', :action => 'logout'

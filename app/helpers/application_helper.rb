@@ -21,8 +21,8 @@ module ApplicationHelper
     update = options[:update] || nil
 
     # Translations
-    previous_label = '&laquo; ' + _('Previous')
-    next_label = _('Next') + ' &raquo;'
+    previous_label = '&laquo; ' + "Vorherige"
+    next_label = "Nächste" + ' &raquo;'
     # Merge other url-options for will_paginate
     params = params.merge({:per_page => per_page})
     will_paginate collection, { :params => params, :remote => true, :update => update,
@@ -49,7 +49,7 @@ module ApplicationHelper
         links << per_page 
       end
     end
-    return _('Per page: ') + links.join(" ")
+    return "Pro Seite: " + links.join(" ")
   end
   
   def sort_td_class_helper(param)

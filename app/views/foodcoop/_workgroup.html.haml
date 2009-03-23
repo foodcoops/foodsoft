@@ -1,12 +1,14 @@
-.single_column{:style => "width:50em"}
+.single_column{:style => "width:55em"}
   .box_title
-    %h2= @group.name
+    %h2= workgroup.name
   .column_content
-    = render :partial => 'shared/group', :locals => { :group => @group }
+    = render :partial => 'shared/group', :locals => { :group => workgroup }
     %p
-      = link_to _("Show all tasks"), :controller => "tasks", :action => "workgroup", :id => @group
+      = link_to "Alle Aufgaben zeigen", :controller => "tasks", :action => "workgroup", :id => workgroup
       |
-      - if @group.member?(@current_user)
-        = link_to _("Edit group"), :action => "edit_group", :id => @group
+      = link_to "Mitgliedern eine Nachricht schicken", :controller => 'messages', :action => 'group', :id => workgroup
+      - if workgroup.member?(@current_user)
         |
-      = link_to _('Send members a message'), :controller => 'messages', :action => 'group', :id => @group
+        = link_to "Gruppe bearbeiten", :action => "edit_group", :id => workgroup
+        |
+        = link_to "Mitglieder bearbeiten", :action => "memberships", :id => workgroup
