@@ -2,7 +2,7 @@
 
 .left_column{:style => "width:60%"}
   .box_title
-    %h2 Lieferanten
+    %h2 Lieferantinnen
   .column_content
     %p
       %i
@@ -10,13 +10,13 @@
         = link_to 'neue Lieferantin', new_supplier_path
         oder
         = link_to 'importiere', shared_suppliers_suppliers_path
-        aus der externen ArtikelDatenbank.
+        aus der externen Artikeldatenbank.
     %table.list
       %thead
         %tr
           %th Name
           %th Telefon
-          %th KundenNr
+          %th Kunden-Nr
           %th
           %th
           %th
@@ -38,7 +38,7 @@
       %tr
         %th Datum
         %th Betrag
-        %th Lieferant
+        %th Lieferantin
       - for delivery in @deliveries
         %tr
           %td= link_to delivery.delivered_on, [delivery.supplier, delivery]

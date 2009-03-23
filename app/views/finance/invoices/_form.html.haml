@@ -8,7 +8,7 @@
   - if @invoice.order
     %p= "Diese Rechnung ist mit einer #{link_to "Bestellung", @invoice.order} verknüpft."
   %p
-    Lieferant
+    Lieferantin
     %br/
     = f.select :supplier_id, Supplier.all.collect { |s| [s.name, s.id] }
   %p

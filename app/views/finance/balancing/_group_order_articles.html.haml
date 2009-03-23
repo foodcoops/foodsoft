@@ -32,7 +32,7 @@
     %tfoot
       %tr{:class => cycle('even', 'odd', :name => 'results')}
         %td
-        %td{:style => "width:8em"} Summe
+        %td{:style => "width:8em"} Summe (FC-Preis)
         %td{:id => "group_orders_sum_quantity_#{order_article.id}"}
           = order_article.group_orders_sum[:quantity]
         %td{:id => "group_orders_sum_price_#{order_article.id}", :class => "currency"}

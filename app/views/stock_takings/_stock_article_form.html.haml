@@ -1,7 +1,7 @@
 - remote_form_for stock_article, :url => add_stock_article_stock_takings_path do |form|
   = form.error_messages
   %p
-    Lieferant
+    Lieferantin
     %br/
     = form.select :supplier_id, Supplier.without_deleted(:order => 'name').collect{ |s| [s.name, s.id] }
   %p
