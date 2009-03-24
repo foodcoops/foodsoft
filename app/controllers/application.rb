@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-    
-  #before_filter :select_foodcoop
+
+  # If you wanna run multiple foodcoops on one installation uncomment next line.
+  before_filter :select_foodcoop
   before_filter :authenticate, :store_controller
   after_filter  :remove_controller
   
@@ -149,5 +150,17 @@ class ApplicationController < ActionController::Base
     # Get supplier in nested resources
     def find_supplier
       @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
+    end
+
+    # Set config and database connection for each request
+    # It uses the subdomain to select the appropriate section in the config files
+    # Use this method as a before filter (first filter!) in ApplicationController
+    def select_foodcoop
+      # Get subdomain
+      subdomain = request.subdomains.first
+      # Set Config
+      Foodsoft.set_env subdomain
+      # Set database-connection
+      ActiveRecord::Base.establish_connection(Foodsoft.database(subdomain))
     end
 end
