@@ -58,15 +58,7 @@ class ApplicationController < ActionController::Base
       return false
     end
 
-  private
-
-    # Ensures the HTTP content-type encoding is set to "UTF-8" for "text/html" contents.
-    def ensureUTF8
-      content_type = headers["Content-Type"] || "text/html"
-      if /^text\//.match(content_type)
-        headers["Content-Type"] = "#{content_type}; charset=utf-8"
-      end
-    end  
+  private  
 
     def authenticate(role = 'any')
       # Attempt to retrieve authenticated user from controller instance or session...
