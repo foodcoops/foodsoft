@@ -9,6 +9,6 @@ Für Euch wurden die folgenden Artikel bestellt:
 <%	end  -%>
 Gesamtpreis: <%= @group_order.price %>
 
-Bestellung online einsehen: <%= "#{APP_CONFIG[:base_url]}/ordering/my_order_result/#{@order.id}" %>
+Bestellung online einsehen: <%= "#{Foodsoft.config[:base_url]}/ordering/my_order_result/#{@order.id}" %>
 
-Viele Grüße von <%= APP_CONFIG[:name] %>
+Viele Grüße von <%= Foodsoft.config[:name] %>

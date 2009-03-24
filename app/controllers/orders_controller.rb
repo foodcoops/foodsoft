@@ -127,13 +127,13 @@ class OrdersController < ApplicationController
   def text_fax_template
     order = Order.find(params[:id])
     supplier = order.supplier
-    contact = APP_CONFIG[:contact].symbolize_keys
-    text = "Bestellung für" + " #{APP_CONFIG[:name]}"
+    contact = Foodsoft.config[:contact].symbolize_keys
+    text = "Bestellung für" + " #{Foodsoft.config[:name]}"
     text += "\n" + "Kundennummer" + ": #{supplier.customer_number}" unless supplier.customer_number.blank?
     text += "\n" + "Liefertag" + ": "
     text += "\n\n#{supplier.name}\n#{supplier.address}\nFAX: #{supplier.fax}\n\n"
     text += "****** " + "Versandadresse" + "\n\n"
-    text += "#{APP_CONFIG[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
+    text += "#{Foodsoft.config[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
     text += "****** " + "Artikel" + "\n\n"
     text += "Nummer" + "   " + "Menge" + "   " + "Name" + "\n"
     # now display all ordered articles

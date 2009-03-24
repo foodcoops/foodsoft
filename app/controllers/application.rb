@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   # If you wanna run multiple foodcoops on one installation uncomment next line.
-  before_filter :select_foodcoop
+  #before_filter :select_foodcoop
   before_filter :authenticate, :store_controller
   after_filter  :remove_controller
   
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   # Use this method to call a rake task,,
   # e.g. to deliver mails after there are created.
   def call_rake(task, options = {})
-    options[:rails_env] ||= Rails.env
+    options[:rails_env] ||= Foodsoft.env
     args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
     system "/usr/bin/rake #{task} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/rake.log &"
   end
@@ -59,14 +59,6 @@ class ApplicationController < ActionController::Base
     end
 
   private
-
-    # selects the foodcoop depending on the subdomain
-#    def select_foodcoop
-#      # get subdomain and set FoodSoft-class-variable (for later config-requests)
-#      FoodSoft.subdomain = request.subdomains.first
-#      # set database-connection
-#      ActiveRecord::Base.establish_connection(FoodSoft.get_database)
-#    end
 
     # Ensures the HTTP content-type encoding is set to "UTF-8" for "text/html" contents.
     def ensureUTF8
@@ -159,7 +151,7 @@ class ApplicationController < ActionController::Base
       # Get subdomain
       subdomain = request.subdomains.first
       # Set Config
-      Foodsoft.set_env subdomain
+      Foodsoft.env = subdomain
       # Set database-connection
       ActiveRecord::Base.establish_connection(Foodsoft.database(subdomain))
     end

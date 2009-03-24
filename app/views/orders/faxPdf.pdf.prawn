@@ -1,5 +1,5 @@
 # Get ActiveRecord objects
-contact = APP_CONFIG[:contact].symbolize_keys
+contact = Foodsoft.config[:contact].symbolize_keys
 
 # Define header and footer
 #pdf.header [pdf.margin_box.left,pdf.margin_box.top+30] do
@@ -12,7 +12,7 @@ end
 
 # From paragraph
 pdf.bounding_box [pdf.margin_box.right-200,pdf.margin_box.top], :width => 200 do
-  pdf.text APP_CONFIG[:name], :align => :right
+  pdf.text Foodsoft.config[:name], :align => :right
   pdf.move_down 5
   pdf.text contact[:street], :align => :right
   pdf.move_down 5

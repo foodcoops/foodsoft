@@ -6,19 +6,19 @@
   %p
     Empfängerinnen
     %fieldset
-      - if APP_CONFIG[:mailing_list].blank?
+      - if Foodsoft.config[:mailing_list].blank?
         = f.check_box :sent_to_all, :onchange => "Element.toggle('recipients')"
         gesamte Foodcoop
       - else
         %b Nachrichten an alle
         verschickst Du bitte über den Verteiler:
-        = mail_to APP_CONFIG[:mailing_list]
+        = mail_to Foodsoft.config[:mailing_list]
         %br/
         %small{:style => "color:grey"}
           Eventuell musst Du Dich dem Verteiler erst bekannt machen.
           %br/
           z.b. mit einer Mail an
-          = mail_to APP_CONFIG[:mailing_list_subscribe]
+          = mail_to Foodsoft.config[:mailing_list_subscribe]
       %table#recipients
         %tr
           %td

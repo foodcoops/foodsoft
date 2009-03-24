@@ -5,39 +5,39 @@ class Mailer < ActionMailer::Base
   
   # Sends an email copy of the given internal foodsoft message.
   def message(message, recipient)
-    headers     'Sender' => APP_CONFIG[:email_sender], 'Errors-To' => APP_CONFIG[:email_sender]
-    subject     "[#{APP_CONFIG[:name]}] " + message.subject
+    headers     'Sender' => Foodsoft.config[:email_sender], 'Errors-To' => Foodsoft.config[:email_sender]
+    subject     "[#{Foodsoft.config[:name]}] " + message.subject
     recipients  recipient.email
     from        "#{message.sender.nick} <#{message.sender.email}>"
     body        :body         => message.body,
                 :sender       => message.sender.nick,
                 :recipients   => recipient.nick,
-                :reply        => "#{APP_CONFIG[:base_url]}/messages/reply/#{message.id}",
-                :link         => "#{APP_CONFIG[:base_url]}/messages/show/#{message.id}",
-                :profile      => "#{APP_CONFIG[:base_url]}/home/profile"
+                :reply        => "#{Foodsoft.config[:base_url]}/messages/reply/#{message.id}",
+                :link         => "#{Foodsoft.config[:base_url]}/messages/show/#{message.id}",
+                :profile      => "#{Foodsoft.config[:base_url]}/home/profile"
   end
 
   # Sends an email with instructions on how to reset the password.
   # Assumes user.setResetPasswordToken has been successfully called already.
   def reset_password(user)
     prepare_system_message(user)
-    subject     "[#{APP_CONFIG[:name]}] Neues Passwort für/ New password for #{user.nick}"
+    subject     "[#{Foodsoft.config[:name]}] Neues Passwort für/ New password for #{user.nick}"
     body        :user => user,
-                :link => "#{APP_CONFIG[:base_url]}/login/password/#{user.id}?token=#{user.reset_password_token}"
+                :link => "#{Foodsoft.config[:base_url]}/login/password/#{user.id}?token=#{user.reset_password_token}"
   end
     
   # Sends an invite email.
   def invite(invite)
     prepare_system_message(invite)
-    subject     "Einladung in die Foodcoop #{APP_CONFIG[:name]} - Invitation to the Foodcoop"
+    subject     "Einladung in die Foodcoop #{Foodsoft.config[:name]} - Invitation to the Foodcoop"
     body        :invite => invite,
-                :link   => "#{APP_CONFIG[:base_url]}/login/invite/#{invite.token}"
+                :link   => "#{Foodsoft.config[:base_url]}/login/invite/#{invite.token}"
   end
 
   # Notify user of upcoming task.
   def upcoming_tasks(user, task)
     prepare_system_message(user)
-    subject   "[#{APP_CONFIG[:name]}] Aufgaben werden fällig!"
+    subject   "[#{Foodsoft.config[:name]}] Aufgaben werden fällig!"
     body        :user => user,
                 :task => task
   end
@@ -45,7 +45,7 @@ class Mailer < ActionMailer::Base
   # Sends order result for specific Ordergroup
   def order_result(user, group_order)
     prepare_system_message(user)
-    subject   "[#{APP_CONFIG[:name]}] Bestellung beendet: #{group_order.order.name}"
+    subject   "[#{Foodsoft.config[:name]}] Bestellung beendet: #{group_order.order.name}"
     body      :order        => group_order.order,
               :group_order  => group_order
   end
@@ -53,7 +53,7 @@ class Mailer < ActionMailer::Base
   # Notify user if account balance is less than zero
   def negative_balance(user,transaction)
     prepare_system_message(user)
-    subject   "[#{APP_CONFIG[:name]}] Gruppenkonto im Minus"
+    subject   "[#{Foodsoft.config[:name]}] Gruppenkonto im Minus"
     body      :group        => user.ordergroup,
               :transaction  => transaction
   end
@@ -62,7 +62,7 @@ class Mailer < ActionMailer::Base
 
   def prepare_system_message(recipient)
     recipients  recipient.email
-    from        "FoodSoft <#{APP_CONFIG[:email_sender]}>"
+    from        "FoodSoft <#{Foodsoft.config[:email_sender]}>"
   end
   
 end
