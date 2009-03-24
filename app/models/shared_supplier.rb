@@ -21,7 +21,7 @@
 class SharedSupplier < ActiveRecord::Base
   
   # connect to database from sharedLists-Application
-  SharedSupplier.establish_connection(APP_CONFIG[:shared_lists])
+  SharedSupplier.establish_connection(Foodsoft.config[:shared_lists])
   # set correct table_name in external DB
   set_table_name :suppliers
   
