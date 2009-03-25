@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :pages, :collection => { :all => :get }
+  map.wiki_page "/wiki/:permalink", :controller => 'pages', :action => 'show'
 
   map.logout '/logout', :controller => 'login', :action => 'logout'
   map.my_profile '/home/profile', :controller => 'home', :action => 'profile'

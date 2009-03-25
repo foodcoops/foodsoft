@@ -1,0 +1,15 @@
+- form_for @page do |f|
+  = f.error_messages
+
+  %p
+    %b Title
+    %br/
+    = f.text_field :title
+  %p
+    %b Inhalt
+    %br/
+    = f.text_area :body, :size => "60x30"
+  %p
+    = f.submit "Speichern"
+    |
+    = link_to "Abbrechen", :back
