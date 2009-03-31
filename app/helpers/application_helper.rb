@@ -58,7 +58,7 @@ module ApplicationHelper
     return result
   end
   
-  def sort_link_helper(text, param, per_page = (@per_page || 10) )
+  def sort_link_helper(text, param, per_page = (@per_page || 10), action = "list" )
     key = param
     key += "_reverse" if params[:sort] == param
     options = {
@@ -69,7 +69,7 @@ module ApplicationHelper
     }
     html_options = {
       :title => _('Sort by this field'),
-      :href => url_for(:action => 'list', :params => params.merge({:sort => key, :page => nil, :per_page => per_page}))
+      :href => url_for(:action => action, :params => params.merge({:sort => key, :page => nil, :per_page => per_page}))
     }
     link_to_remote(text, options, html_options)
   end
