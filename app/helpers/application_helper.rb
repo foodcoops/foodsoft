@@ -68,7 +68,7 @@ module ApplicationHelper
         :method => :get
     }
     html_options = {
-      :title => _('Sort by this field'),
+      :title => _('Nach diesem Feld sortieren'),
       :href => url_for(:action => action, :params => params.merge({:sort => key, :page => nil, :per_page => per_page}))
     }
     link_to_remote(text, options, html_options)
