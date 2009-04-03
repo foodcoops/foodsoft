@@ -6,6 +6,7 @@ pdf.header [pdf.margin_box.left,pdf.margin_box.top+20] do
 end
 pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom-5] do
   pdf.stroke_horizontal_rule
+  pdf.move_down 2
   pdf.text "Seite #{pdf.page_count}", :size => 8
 end
 
@@ -62,7 +63,7 @@ while (page_number * max_order_articles_per_page < total_num_order_articles) do 
     for order_article in current_order_articles
       # get the Ordergroup result for this order_article
       goa = order_article.group_order_articles.first :conditions => { :group_order_id => group_order.id }
-      group_result << ((goa.nil? || goa == 0) ? "" : goa.result.to_i)
+      group_result << ((goa.nil? || goa.result == 0) ? "" : goa.result.to_i)
     end
     groups_data << group_result
   end
