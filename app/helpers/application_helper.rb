@@ -58,10 +58,13 @@ module ApplicationHelper
     return result
   end
   
-  def sort_link_helper(text, param, per_page = (@per_page || 10), action = "list" )
-    key = param
-    key += "_reverse" if params[:sort] == param
-    options = {
+  def sort_link_helper(text, key, options = {})
+    per_page = options[:per_page] || 10
+    action = options[:action] || "list"
+    remote = options[:remote].nil? ? true : options[:remote]
+    key += "_reverse" if params[:sort] == key
+
+    link_options = {
         :url => url_for(:params => params.merge({:sort => key, :page => nil, :per_page => per_page})),
         :before => "Element.show('loader')",
         :success => "Element.hide('loader')",
@@ -71,7 +74,12 @@ module ApplicationHelper
       :title => _("Nach #{text} sortieren"),
       :href => url_for(:action => action, :params => params.merge({:sort => key, :page => nil, :per_page => per_page}))
     }
-    link_to_remote(text, options, html_options)
+
+    if remote
+      link_to_remote(text, link_options, html_options)
+    else
+      link_to(text, link_options[:url], html_options)
+    end
   end
   
   # Generates a link to the top of the website
