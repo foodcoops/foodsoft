@@ -15,13 +15,40 @@ class Finance::BalancingController < ApplicationController
   def new
     @order = Order.find(params[:id])
     @comments = @order.comments
+
+    if params['sort']
+    sort = case params['sort']
+             when "name"  then "articles.name"
+             when "order_number" then "articles.order_number"
+             when "name_reverse"  then "articles.name DESC"
+             when "order_number_reverse" then "articles.order_number DESC"
+             end
+    else
+      sort = "articles.name"
+    end
+
+    @articles = @order.order_articles.ordered.find(
+      :all,
+      :include => :article,
+      :order => sort
+    )
+
     case params[:view]
       when 'editResults'
-        render :partial => 'edit_results_by_articles'
+        render :partial => 'edit_results_by_articles' and return
       when 'groupsOverview'
-        render :partial => 'shared/articles_by_groups', :locals => {:order => @order}
+        render :partial => 'shared/articles_by_groups', :locals => {:order => @order} and return
       when 'articlesOverview'
-       render :partial => 'shared/articles_by_articles', :locals => {:order => @order}
+       render :partial => 'shared/articles_by_articles', :locals => {:order => @order} and return
+    end
+
+    respond_to do |format|
+      format.html # new.haml
+      format.js do
+        render :update do |page|
+          page.replace_html 'results', :partial => "edit_results_by_articles"
+        end
+      end
     end
   end
 

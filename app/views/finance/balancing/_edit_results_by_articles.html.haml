@@ -6,8 +6,10 @@
 %table{:class => "ordered_articles", :style => "clear:both"}
   %thead
     %tr
-      %th{:colspan => "1"} Artikel
-      %th Nr.
+      %th[sort_td_class_helper "name"]{:colspan => "1"}
+        = sort_link_helper "Artikel", "name", 1000, "new"
+      %th[sort_td_class_helper "order_number"]
+        = sort_link_helper "Nr.", "order_number", 1000, "new"
       %th Menge
       %th GebGr * Einheit
       %th Netto
@@ -16,5 +18,5 @@
       %th Pfand
       %th{:colspan => "2"}
   %tbody#result_table
-    - for order_article in @order.order_articles.ordered.all(:include => [:article, :article_price])
+    - for order_article in @articles
       = render :partial => "order_article_result", :locals => {:order_article => order_article}
