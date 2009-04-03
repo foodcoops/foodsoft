@@ -9,7 +9,7 @@
         %td{:colspan => "3",:style => "width:14em"}
           = remote_link_to '[Gruppe hinzufügen]', :url => {:action => "new_group_order_article", :id => order_article}
     %tbody
-      - for group_order_article in order_article.group_order_articles.all(:include => [:group_order])
+      - for group_order_article in order_article.group_order_articles.ordered.all(:include => [:group_order])
         %tr{:class => cycle('even', 'odd', :name => 'results')}[group_order_article]
           %td
           %td{:style=>"width:50%"}
