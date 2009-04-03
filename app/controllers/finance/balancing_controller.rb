@@ -33,22 +33,16 @@ class Finance::BalancingController < ApplicationController
       :order => sort
     )
 
-    case params[:view]
+    view = params[:view]
+    params[:view] = nil
+
+    case view
       when 'editResults'
         render :partial => 'edit_results_by_articles' and return
       when 'groupsOverview'
         render :partial => 'shared/articles_by_groups', :locals => {:order => @order} and return
       when 'articlesOverview'
        render :partial => 'shared/articles_by_articles', :locals => {:order => @order} and return
-    end
-
-    respond_to do |format|
-      format.html # new.haml
-      format.js do
-        render :update do |page|
-          page.replace_html 'results', :partial => "edit_results_by_articles"
-        end
-      end
     end
   end
 
