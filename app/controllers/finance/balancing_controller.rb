@@ -164,6 +164,7 @@ class Finance::BalancingController < ApplicationController
 
   # Creates a new GroupOrderArticle
   # If the the chosen Ordergroup hasn't ordered yet, a GroupOrder will also be created
+  #FIXME: Clean up this messy code !
   def create_group_order_article
     goa = GroupOrderArticle.new(params[:group_order_article])
     order_article = goa.order_article
@@ -177,6 +178,12 @@ class Finance::BalancingController < ApplicationController
       goa.group_order = group_order
     end
 
+    # If there is an GroupOrderArticle already, only update result attribute.
+    if group_order_article = GroupOrderArticle.first(:conditions => {:group_order_id => goa.group_order, :order_article_id => goa.order_article})
+      goa = group_order_article
+      goa.result = params[:group_order_article]["result"]
+    end
+    
     render :update do |page|
       if goa.save
         goa.group_order.update_price!                                       # Update the price attribute of new GroupOrder
