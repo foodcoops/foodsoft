@@ -6,6 +6,7 @@ pdf.header [pdf.margin_box.left,pdf.margin_box.top+20] do
 end
 pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom-5] do
   pdf.stroke_horizontal_rule
+  pdf.move_down 2
   pdf.text "Seite #{pdf.page_count}", :size => 8
 end
 
@@ -35,6 +36,9 @@ while (page_number * max_order_articles_per_page < total_num_order_articles) do 
 
   page_number += 1
   pdf.start_new_page(:layout => :landscape)
+  pdf.header [pdf.margin_box.left,pdf.margin_box.top+20] do
+    pdf.text title, :size => 10, :align => :center
+  end
 
   # Collect order_articles for this page
   current_order_articles = order_articles.select do |a|
@@ -45,7 +49,7 @@ while (page_number * max_order_articles_per_page < total_num_order_articles) do 
   # Make order_articles header
   header = [""]
   for header_article in current_order_articles
-    name = header_article.article.name.split("-").join(" ").split(".").join(". ").split("/").join(" ")
+    name = header_article.article.name.gsub(/[-\/]/, " ").gsub(".", ". ")
     name = name.split.collect { |w| truncate(w, :length => 8, :omission => "..") }.join(" ")
     header << truncate(name, :length => 30, :omission => " ..")
   end
@@ -59,20 +63,21 @@ while (page_number * max_order_articles_per_page < total_num_order_articles) do 
     for order_article in current_order_articles
       # get the Ordergroup result for this order_article
       goa = order_article.group_order_articles.first :conditions => { :group_order_id => group_order.id }
-      group_result << ((goa.nil? || goa == 0) ? "" : goa.result.to_i)
+      group_result << ((goa.nil? || goa.result == 0) ? "" : goa.result.to_i)
     end
     groups_data << group_result
   end
 
   # Make table
-  widths = { }  # Generate widths-hash for table layout
-  (max_order_articles_per_page + 1).times { |i| widths.merge!({ i => 40 }) unless i == 0 }
+  widths = {0 => 85}  # Generate widths-hash for table layout
+  (max_order_articles_per_page + 1).times { |i| widths.merge!({ i => 41 }) unless i == 0 }
+  logger.debug "Spaltenbreiten: #{widths.inspect}"
   pdf.table groups_data,
     :font_size => 8,
     :border_style => :grid,
     :vertical_padding => 3,
     :headers => header,
-    :widths => widths,
+    :column_widths => widths,
     :row_colors => ['ffffff','ececec']
 
 end

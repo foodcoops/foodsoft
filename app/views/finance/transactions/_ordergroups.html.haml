@@ -12,9 +12,9 @@
 %table.list
   %thead
     %tr
-      %th= sort_link_helper "Name", "name", @per_page
+      %th= sort_link_helper "Name", "name", :per_page => @per_page
       %th Kontakt
-      %th= sort_link_helper "Kontostand", "account_balance", @per_page
+      %th= sort_link_helper "Kontostand", "account_balance", :per_page => @per_page
       %th
   %tbody
     - for group in @groups

@@ -152,7 +152,12 @@ class OrdersController < ApplicationController
   # Renders the matrix PDF.
   def matrixPdf
     @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_Matrix.pdf"
+    unless @order.order_articles.ordered.empty?
+      prawnto :filename => "#{Date.today}_#{@order.name}_Matrix.pdf"
+    else
+      flash[:error] = "Es sind keine Artikel bestellt worden."
+      redirect_to @order
+    end
   end
 
   # adds a Comment to the Order

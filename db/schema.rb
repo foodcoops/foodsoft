@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090317175355) do
+ActiveRecord::Schema.define(:version => 20090405131156) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -28,25 +28,25 @@ ActiveRecord::Schema.define(:version => 20090317175355) do
   end
 
   create_table "articles", :force => true do |t|
-    t.string   "name",                :default => "",   :null => false
-    t.integer  "supplier_id",         :default => 0,    :null => false
-    t.integer  "article_category_id", :default => 0,    :null => false
-    t.string   "unit",                :default => "",   :null => false
+    t.string   "name",                                              :default => "",   :null => false
+    t.integer  "supplier_id",                                       :default => 0,    :null => false
+    t.integer  "article_category_id",                               :default => 0,    :null => false
+    t.string   "unit",                                              :default => "",   :null => false
     t.string   "note"
-    t.boolean  "availability",        :default => true, :null => false
+    t.boolean  "availability",                                      :default => true, :null => false
     t.string   "manufacturer"
     t.string   "origin"
     t.datetime "shared_updated_on"
-    t.decimal  "price"
+    t.decimal  "price",               :precision => 8, :scale => 2
     t.float    "tax"
-    t.decimal  "deposit",             :default => 0.0
-    t.integer  "unit_quantity",       :default => 1,    :null => false
+    t.decimal  "deposit",             :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "unit_quantity",                                     :default => 1,    :null => false
     t.string   "order_number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity",            :default => 0
     t.datetime "deleted_at"
     t.string   "type"
+    t.integer  "quantity",                                          :default => 0
   end
 
   add_index "articles", ["name", "supplier_id"], :name => "index_articles_on_name_and_supplier_id"
@@ -93,12 +93,12 @@ ActiveRecord::Schema.define(:version => 20090317175355) do
   end
 
   create_table "group_order_articles", :force => true do |t|
-    t.integer  "group_order_id",   :default => 0, :null => false
-    t.integer  "order_article_id", :default => 0, :null => false
-    t.integer  "quantity",         :default => 0, :null => false
-    t.integer  "tolerance",        :default => 0, :null => false
-    t.datetime "updated_on",                      :null => false
-    t.integer  "result"
+    t.integer  "group_order_id",                                 :default => 0, :null => false
+    t.integer  "order_article_id",                               :default => 0, :null => false
+    t.integer  "quantity",                                       :default => 0, :null => false
+    t.integer  "tolerance",                                      :default => 0, :null => false
+    t.datetime "updated_on",                                                    :null => false
+    t.decimal  "result",           :precision => 8, :scale => 3
   end
 
   add_index "group_order_articles", ["group_order_id", "order_article_id"], :name => "goa_index", :unique => true
@@ -115,22 +115,22 @@ ActiveRecord::Schema.define(:version => 20090317175355) do
   add_index "group_orders", ["ordergroup_id", "order_id"], :name => "index_group_orders_on_ordergroup_id_and_order_id", :unique => true
 
   create_table "groups", :force => true do |t|
-    t.string   "type",                :default => "",    :null => false
-    t.string   "name",                :default => "",    :null => false
+    t.string   "type",                                              :default => "",    :null => false
+    t.string   "name",                                              :default => "",    :null => false
     t.string   "description"
-    t.decimal  "account_balance",     :default => 0.0,   :null => false
+    t.decimal  "account_balance",     :precision => 8, :scale => 2, :default => 0.0,   :null => false
     t.datetime "account_updated"
-    t.datetime "created_on",                             :null => false
-    t.boolean  "role_admin",          :default => false, :null => false
-    t.boolean  "role_suppliers",      :default => false, :null => false
-    t.boolean  "role_article_meta",   :default => false, :null => false
-    t.boolean  "role_finance",        :default => false, :null => false
-    t.boolean  "role_orders",         :default => false, :null => false
-    t.boolean  "weekly_task",         :default => false
+    t.datetime "created_on",                                                           :null => false
+    t.boolean  "role_admin",                                        :default => false, :null => false
+    t.boolean  "role_suppliers",                                    :default => false, :null => false
+    t.boolean  "role_article_meta",                                 :default => false, :null => false
+    t.boolean  "role_finance",                                      :default => false, :null => false
+    t.boolean  "role_orders",                                       :default => false, :null => false
+    t.boolean  "weekly_task",                                       :default => false
     t.integer  "weekday"
     t.string   "task_name"
     t.string   "task_description"
-    t.integer  "task_required_users", :default => 1
+    t.integer  "task_required_users",                               :default => 1
     t.datetime "deleted_at"
     t.string   "contact_person"
     t.string   "contact_phone"
@@ -152,16 +152,16 @@ ActiveRecord::Schema.define(:version => 20090317175355) do
   create_table "invoices", :force => true do |t|
     t.integer  "supplier_id"
     t.integer  "delivery_id"
+    t.integer  "order_id"
     t.string   "number"
     t.date     "date"
     t.date     "paid_on"
     t.text     "note"
     t.decimal  "amount",         :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "order_id"
     t.decimal  "deposit",        :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.decimal  "deposit_credit", :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "memberships", :force => true do |t|
@@ -209,6 +209,10 @@ ActiveRecord::Schema.define(:version => 20090317175355) do
     t.integer  "lock_version",                                     :default => 0,      :null => false
     t.integer  "updated_by_user_id"
     t.decimal  "foodcoop_result",    :precision => 8, :scale => 2
+  end
+
+  create_table "schema_info", :id => false, :force => true do |t|
+    t.integer "version"
   end
 
   create_table "stock_changes", :force => true do |t|
