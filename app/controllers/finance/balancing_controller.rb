@@ -34,9 +34,9 @@ class Finance::BalancingController < ApplicationController
     )
 
     if params[:sort] == "order_number"
-      @articles = @articles.sort { |a,b| a.article.order_number.gsub(/[a-zA-Z]/, "").to_i <=> b.article.order_number.gsub(/[a-zA-Z]/, "").to_i }
+      @articles = @articles.sort { |a,b| a.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> b.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
     elsif params[:sort] == "order_number_reverse"
-      @articles = @articles.sort { |a,b| b.article.order_number.gsub(/[a-zA-Z]/, "").to_i <=> a.article.order_number.gsub(/[a-zA-Z]/, "").to_i }
+      @articles = @articles.sort { |a,b| b.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> a.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
     end
 
     view = params[:view]
