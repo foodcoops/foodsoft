@@ -128,10 +128,9 @@ span.click-me {
   #logininfo ul {
     list-style: none; }
     #logininfo ul li {
-      margin: 0 3px;
+      margin: 0 0 0 5px;
       float: left; }
   #logininfo a {
-    padding: 0.2em;
     color: #737272;
     font-weight: bold; }
   #logininfo a:hover {
