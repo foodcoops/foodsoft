@@ -41,6 +41,26 @@ class FoodcoopController < ApplicationController
     @groups = Workgroup.find :all, :order => "name"
   end
 
+  def ordergroups
+    #@order_groups = Ordergroup.find :all, :order => "name"
+    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 20
+    end
+
+    # if somebody uses the search field:
+    conditions = ["name LIKE ?", "%#{params[:query]}%"] unless params[:query].blank?
+
+    @total = Ordergroup.count(:conditions => conditions)
+    @order_groups = Ordergroup.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "name")
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js { render :partial => "ordergroups" }
+    end
+  end
+
   def group
   end
 

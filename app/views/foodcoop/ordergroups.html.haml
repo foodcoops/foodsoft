@@ -1,0 +1,21 @@
+%h1 Bestellgruppen der Foodcoop
+
+.left_column{:style => "width:100%"}
+  .box_title
+    %h2 Übersicht
+  .column_content
+    #user_filter{:style => "margin-right:2em;"}
+      %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
+        %label{:for => 'article_name'} Suche nach Name:
+        = text_field_tag("query", params['query'], :size => 10 )
+
+      = observe_field 'query',  :frequency => 2, |
+        :before => "Element.show('loader')", |
+        :success => "Element.hide('loader')", |
+        :url => {:action => 'ordergroups'}, |
+        :update => :order_groups, |
+        :with => 'query', |
+        :method => :get |
+    
+    #order_groups
+      = render :partial => "ordergroups"
