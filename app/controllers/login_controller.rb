@@ -1,7 +1,8 @@
 class LoginController < ApplicationController
   skip_before_filter :authenticate        # no authentication since this is the login page
   filter_parameter_logging "password"     # do not log "password" parameter
-  
+  before_filter :validate_token, :only => [:password, :update_password]
+
   verify :method => :post, :only => [:login, :reset_password, :new], :redirect_to => { :action => :index }
   
   # Redirects to the login action.
@@ -57,45 +58,28 @@ class LoginController < ApplicationController
         logger.debug("Sent password reset email to #{user.email}.")
       end
     end
-    flash[:notice] = _("If your email address is listed in our system, you will now receive an email with the instructions how to change your password.")
+    flash[:notice] = "Wenn Deine E-Mail hier registiert ist bekommst Du jetzt eine Nachricht mit einem Passwort-Zurücksetzen-Link."
     render :action => 'login'
   end
   
   # Set a new password with a token from the password reminder email.
   # Called with params :id => User.id and :token => User.reset_password_token to specify a new password.
   def password
-    @user = User.find_by_id_and_reset_password_token(params[:id], params[:token])
-    if (@user.nil? || @user.reset_password_expires < Time.now)        
-      flash[:error] = _("Invalid or expired token, password cannot be changed.")
-      render :action => 'forgot_password'
-    end
   end
   
   # Sets a new password.
   # Called with params :id => User.id and :token => User.reset_password_token to specify a new password.
-  def new
-    @user = User.find_by_id_and_reset_password_token(params[:id], params[:token])
-    if (@user.nil? || @user.reset_password_expires < Time.now)
-      flash[:error] = _("Invalid or expired token, password cannot be changed.")
-      redirect_to :action => 'forgot_password'
-    else      
-      @user.set_password({:required => true}, params[:user][:password], params[:user][:password_confirmation])
-      if @user.errors.empty?
-        @user.reset_password_token = nil
-        @user.reset_password_expires = nil
-        if @user.save
-          flash[:notice] = _("New password has been saved, please log in.")
-          render :action => 'login'         
-        else
-          @user = User.find(@user.id)   # reload to refetch token
-          flash[:error] = _("When trying to save your new password an error has occured. Please try again.")
-          render :action => 'password'
-        end
-      else
-        flash[:error] = _("Error: #{@user.errors.on_base}.")
-        render :action => 'password'
-      end
-    end    
+  def update_password
+    @user.attributes = params[:user]
+    if @user.valid?
+      @user.reset_password_token = nil
+      @user.reset_password_expires = nil
+      @user.save
+      flash[:notice] = "Dein Passwort wurde aktualisiert. Du kannst Dich jetzt anmelden."
+      render :action => 'login'
+    else
+      render :action => 'password'
+    end
   end
 
   # Invited users.
@@ -124,5 +108,14 @@ class LoginController < ApplicationController
   rescue
     flash[:error] = "Ein Fehler ist aufgetreten. Bitte erneut versuchen."
   end
-  
+
+  protected
+
+  def validate_token
+    @user = User.find_by_id_and_reset_password_token(params[:id], params[:token])
+    if (@user.nil? || @user.reset_password_expires < Time.now)
+      flash[:error] = "Ungültiger oder abgelaufener Token. Bitte versuch es erneut."
+      render :action => 'forgot_password'
+    end
+  end
 end
