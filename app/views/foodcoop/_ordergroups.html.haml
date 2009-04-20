@@ -11,13 +11,13 @@
   %thead
     %tr
       %th Name
-      %th #Mitglieder
+      %th= "#Mitglieder"
       %th Kontakt
 
   %tbody
     - for order_group in @order_groups
       %tr{:class => cycle('even','odd', :name => 'order_group')}
-        %td=h order_group.name
+        %td= link_to h(order_group.name), {:controller => 'messages', :action => 'group', :id => order_group}, :title => "Bestellgruppe eine Nachricht schicken"
         %th=h order_group.users.length
         %td=h order_group.contact
 

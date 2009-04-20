@@ -10,6 +10,7 @@
         = text_field_tag("query", params['query'], :size => 10 )
         %label{:for => 'only_active'} Nur aktive:
         = check_box_tag('only_active')
+        %small (mindestens einmal in den letzten 3 Monaten bestellt)
 
         = observe_form 'sform', :frequency => 2, |
           :before => "Element.show('loader')", |
