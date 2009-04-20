@@ -1,4 +1,4 @@
-- if controller.action_name == 'myOrders'
+- if pagination
   = pagination_links_remote @closed_orders, :per_page => 10, :update => 'closed_orders'
 %table.list
   %thead

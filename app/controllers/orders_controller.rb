@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
       format.html
       format.js do
         render :update do |page|
-          page.replace_html 'orders_table', :partial => "list"
+          page.replace_html 'orders_table', :partial => "orders"
         end
       end
     end

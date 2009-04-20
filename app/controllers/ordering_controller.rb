@@ -169,7 +169,7 @@ class OrderingController < ApplicationController
 
     respond_to do |format|
       format.html # myOrders.haml
-      format.js { render :partial => "orders" }
+      format.js { render :partial => "orders", :locals => {:orders => @closed_orders, :pagination => true} }
     end
   end
   
