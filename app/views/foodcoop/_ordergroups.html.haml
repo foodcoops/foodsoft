@@ -1,0 +1,23 @@
+%p
+%table{:style => "width:100%"}
+  %tr
+    %td
+      = pagination_links_remote @order_groups, :update => :order_groups
+    %td{:style => "text-align:right"}
+      - if @total > 20
+        = items_per_page :update => :order_groups
+
+%table.list
+  %thead
+    %tr
+      %th Name
+      %th #Mitglieder
+      %th Kontakt
+
+  %tbody
+    - for order_group in @order_groups
+      %tr{:class => cycle('even','odd', :name => 'order_group')}
+        %td=h order_group.name
+        %th=h order_group.users.length
+        %td=h order_group.contact
+
