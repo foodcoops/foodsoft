@@ -24,7 +24,7 @@
         = link_to "Aufgaben übernehmen/ablehnen", my_tasks_path
       - unless @unassigned_tasks_number == 0
         %h3 Offene Aufgaben
-        = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufage(n)', :controller => 'tasks'}"
+        = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufgabe(n)', :controller => 'tasks'}"
       %p{:style => "clear:both"}= link_to "Meine Aufgaben", my_tasks_path
 
   - if @ordergroup
