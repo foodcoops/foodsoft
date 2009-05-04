@@ -17,14 +17,14 @@ class Finance::BalancingController < ApplicationController
     @comments = @order.comments
 
     if params['sort']
-    sort = case params['sort']
+      sort = case params['sort']
              when "name"  then "articles.name"
              when "order_number" then "articles.order_number"
              when "name_reverse"  then "articles.name DESC"
              when "order_number_reverse" then "articles.order_number DESC"
              end
     else
-      sort = "articles.name"
+      sort = "id"
     end
 
     @articles = @order.order_articles.ordered.find(
@@ -32,7 +32,7 @@ class Finance::BalancingController < ApplicationController
       :include => :article,
       :order => sort
     )
-
+      
     if params[:sort] == "order_number"
       @articles = @articles.sort { |a,b| a.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> b.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
     elsif params[:sort] == "order_number_reverse"
