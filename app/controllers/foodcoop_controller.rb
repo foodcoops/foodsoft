@@ -61,7 +61,7 @@ class FoodcoopController < ApplicationController
     end
 
     @total = Ordergroup.count(:conditions => conditions, :include => "orders")
-    @order_groups = Ordergroup.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "name", :include => "orders")
+    @ordergroups = Ordergroup.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "name", :include => "orders")
 
     respond_to do |format|
       format.html # index.html.erb

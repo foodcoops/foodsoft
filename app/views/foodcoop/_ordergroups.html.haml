@@ -2,22 +2,24 @@
 %table{:style => "width:100%"}
   %tr
     %td
-      = pagination_links_remote @order_groups, :update => :order_groups
+      = pagination_links_remote @ordergroups, :update => :ordergroups
     %td{:style => "text-align:right"}
       - if @total > 20
-        = items_per_page :update => :order_groups
+        = items_per_page :update => :ordergroups
 
 %table.list
   %thead
     %tr
       %th Name
-      %th= "#Mitglieder"
-      %th Kontakt
+      %th Mitglieder
+      %th zuletzt bestellt
 
   %tbody
-    - for order_group in @order_groups
-      %tr{:class => cycle('even','odd', :name => 'order_group')}
-        %td= link_to h(order_group.name), {:controller => 'messages', :action => 'group', :id => order_group}, :title => "Bestellgruppe eine Nachricht schicken"
-        %th=h order_group.users.length
-        %td=h order_group.contact
+    - for ordergroup in @ordergroups
+      %tr{:class => cycle('even','odd', :name => 'ordergroup')}
+        %td= link_to h(ordergroup.name), {:controller => 'messages', :action => 'group', :id => ordergroup}, :title => "Bestellgruppe eine Nachricht schicken"
+        %td=h ordergroup.users.collect { |u| u.nick }.join(", ")
+        %td
+          - order = ordergroup.orders.first(:order => 'starts DESC')
+          = order ? format_date(order.starts) : "-"
 
