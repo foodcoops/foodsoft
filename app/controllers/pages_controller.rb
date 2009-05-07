@@ -41,8 +41,8 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
-        flash[:notice] = 'Page was successfully created.'
-        format.html { redirect_to(@page) }
+        flash[:notice] = 'Seite wurde angelegt.'
+        format.html { redirect_to(wiki_page_path(@page.permalink)) }
         format.xml  { render :xml => @page, :status => :created, :location => @page }
       else
         format.html { render :action => "new" }
@@ -58,8 +58,8 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.update_attributes(params[:page])
-        flash[:notice] = 'Page was successfully updated.'
-        format.html { redirect_to(@page) }
+        flash[:notice] = 'Seite wurde aktualisiert.'
+        format.html { redirect_to(wiki_page_path(@page.permalink)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

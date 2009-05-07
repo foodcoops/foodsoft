@@ -8,5 +8,5 @@
     %th zuletzt aktualisiert
   - for page in @pages
     %tr
-      %td= link_to page.title, page
+      %td= link_to page.title, wiki_page_path(page.permalink)
       %td= format_date page.updated_at

@@ -434,3 +434,6 @@ ul.autocomplete .informal {
   position: relative;
   top: -1em;
   left: 5%; }
+
+a.new_wiki_link {
+  color: grey; }
