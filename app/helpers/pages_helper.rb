@@ -1,7 +1,7 @@
 module PagesHelper
 
   def wikified_body(body)
-    r = RedCloth.new(body)
+    r = BlueCloth.new(body)
     r.gsub!(/\[\[(.*?)(\|(.*?))?\]\]/) { wiki_link($1, $3) }
     sanitize r.to_html
     r.to_html
