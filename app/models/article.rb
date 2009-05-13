@@ -32,7 +32,7 @@ class Article < ActiveRecord::Base
   # Associations
   belongs_to :supplier
   belongs_to :article_category
-  has_many :article_prices, :order => "created_at"
+  has_many :article_prices, :order => "created_at DESC"
 
   named_scope :available, :conditions => {:availability => true}
   named_scope :not_in_stock, :conditions => {:type => nil}
