@@ -145,6 +145,9 @@ class Finance::BalancingController < ApplicationController
   def destroy_order_article
     order_article = OrderArticle.find(params[:id])
     order_article.destroy
+    # Updates ordergroup values
+    order_article.group_order_articles.each { |goa| goa.group_order.update_price! }
+    
     render :update do |page|
       page["order_article_#{order_article.id}"].remove
       page["group_order_articles_#{order_article.id}"].remove
