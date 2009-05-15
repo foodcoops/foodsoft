@@ -56,16 +56,16 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
 
-    respond_to do |format|
-      if @page.update_attributes(params[:page])
-        flash[:notice] = 'Seite wurde aktualisiert.'
-        format.html { redirect_to(wiki_page_path(@page.permalink)) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
-      end
+    if @page.update_attributes(params[:page])
+      flash[:notice] = 'Seite wurde aktualisiert.'
+      redirect_to wiki_page_path(@page.permalink)
+    else
+      render :action => "edit"
     end
+
+  rescue ActiveRecord::StaleObjectError
+    flash[:error] = "Achtung, die Seite wurde gerade von jemand anderes bearbeitet. Bitte versuche es erneut."
+    redirect_to wiki_page_path(@page.permalink)
   end
 
   # DELETE /pages/1

@@ -215,6 +215,7 @@ ActiveRecord::Schema.define(:version => 20090325175756) do
     t.string   "title"
     t.text     "body"
     t.string   "permalink"
+    t.integer  "lock_version", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

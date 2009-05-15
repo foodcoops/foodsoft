@@ -4,6 +4,7 @@ class CreatePages < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.string :permalink
+      t.integer :lock_version, :default => 0
 
       t.timestamps
     end
