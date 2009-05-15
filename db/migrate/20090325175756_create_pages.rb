@@ -5,12 +5,17 @@ class CreatePages < ActiveRecord::Migration
       t.text :body
       t.string :permalink
       t.integer :lock_version, :default => 0
+      t.integer :updated_by
+      t.integer :version
 
       t.timestamps
     end
+    
+    Page.create_versioned_table # Automaticly creates pages_versions table
   end
 
   def self.down
     drop_table :pages
+    Page.drop_versioned_table
   end
 end

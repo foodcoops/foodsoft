@@ -37,7 +37,7 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.xml
   def create
-    @page = Page.new(params[:page])
+    @page = current_user.pages.build(params[:page])
 
     respond_to do |format|
       if @page.save
@@ -56,7 +56,7 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
 
-    if @page.update_attributes(params[:page])
+    if @page.update_attributes(params[:page].merge({:user => current_user}))
       flash[:notice] = 'Seite wurde aktualisiert.'
       redirect_to wiki_page_path(@page.permalink)
     else
@@ -82,5 +82,17 @@ class PagesController < ApplicationController
 
   def all
     @pages = Page.all :order => 'created_at'
+  end
+
+  def version
+    @page = Page.find(params[:id])
+    @version = @page.versions[params[:version].to_i - 1]
+  end
+
+  def revert
+    @page = Page.find(params[:id])
+    @page.revert_to(params[:version].to_i)
+
+    render :action => 'edit'
   end
 end

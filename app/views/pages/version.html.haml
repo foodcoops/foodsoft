@@ -1,0 +1,11 @@
+- title @version.title 
+
+#page-versions{:style => "float:right"}
+  %b= "Version vom #{format_datetime @version.updated_at}"
+  %ul
+    %li= "Autor: #{User.find(@version.updated_by).nick}"
+    %li= link_to "Aktuelle Version sehen", wiki_page_path(:permalink => @page.permalink)
+    %li= link_to "Auf diese Version zurücksetzen", revert_page_path(@page, :version => @version.version)
+
+= wikified_body @version.body
+

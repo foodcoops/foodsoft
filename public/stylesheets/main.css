@@ -81,6 +81,9 @@ option {
 span.click-me {
   cursor: pointer; }
 
+.clear {
+  clear: both; }
+
 #login {
   margin: auto;
   width: 27em;

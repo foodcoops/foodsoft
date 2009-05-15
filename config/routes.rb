@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :pages, :collection => { :all => :get }
+  map.resources :pages, :collection => { :all => :get }, :member => {:version => :get, :revert => :get}
   map.wiki_page "/wiki/:permalink", :controller => 'pages', :action => 'show'
   map.wiki "/wiki", :controller => 'pages', :action => 'show', :permalink => 'home'
 
