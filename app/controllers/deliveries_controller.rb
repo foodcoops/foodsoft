@@ -3,7 +3,7 @@ class DeliveriesController < ApplicationController
   before_filter :find_supplier, :exclude => :fill_new_stock_article_form
   
   def index
-    @deliveries = @supplier.deliveries.find(:all)
+    @deliveries = @supplier.deliveries.all :order => 'delivered_on DESC'
 
     respond_to do |format|
       format.html # index.html.erb

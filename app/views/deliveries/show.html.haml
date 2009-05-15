@@ -9,6 +9,10 @@
 %p
   %b Rechnungsbetrag:
   = link_to_invoice(@delivery)
+- if @delivery.invoice
+  %p
+    %b bereinigter Rechnungsbetrag:
+    = number_to_currency @delivery.invoice.net_amount
 
 %h2 Artikel
 %table.list{:style => "width:30em"}
@@ -36,6 +40,11 @@
 %p
   Bruttosumme:
   = number_to_currency total_gross
+
+- if @delivery.invoice
+  %p
+    %b Brutto - bereinigter Rechnungsbetrag:
+    = number_to_currency total_gross - @delivery.invoice.net_amount
 
 %br/
 = link_to 'Bearbeiten', edit_supplier_delivery_path(@supplier,@delivery)
