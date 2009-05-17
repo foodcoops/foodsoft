@@ -28,7 +28,7 @@
             %td=h supplier.customer_number
             %td= link_to "Artikel (#{supplier.articles.without_deleted.count})", supplier_articles_path(supplier)
             %td= link_to "im Lager (#{supplier.stock_articles.without_deleted.count})", stock_articles_path
-            %td= link_to "Lieferungen", supplier_deliveries_path(supplier)
+            %td= link_to "Lieferungen (#{supplier.deliveries.count})", supplier_deliveries_path(supplier)
 
 .right_column{:style => "width:37%"}
   .box_title
