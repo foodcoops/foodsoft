@@ -54,4 +54,9 @@ class StockArticle < Article
   def check_quantity
     raise "#{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null." unless quantity == 0
   end
+
+  # Overwrite Price history of Article. For StockArticles isn't it necessary.
+  def update_price_history
+    true
+  end
 end
