@@ -1,0 +1,48 @@
+.left_column
+  - form_for([@supplier,@delivery]) do |f|
+    .box_title
+      %h2 Lieferung anlegen
+    .column_content
+      = f.error_messages
+      = f.hidden_field :supplier_id
+      %p
+        %b= f.label :delivered_on
+        = f.date_select :delivered_on
+      %h2 Lagerartikel des Lieferanten
+      #stock_changes
+        - f.fields_for :stock_changes do |stock_change_form|
+          %p
+            = stock_change_form.select :stock_article_id, stock_articles_for_select(@supplier)
+            Menge
+            = stock_change_form.text_field :quantity, :size => 5, :autocomplete => 'off'
+            Entfernen
+            = stock_change_form.check_box :_delete
+      %p
+        = remote_link_to "Lagerartikel hinzufügen", :url => {:action => 'add_stock_change', :supplier_id => @supplier.id}
+      %p
+        = f.submit "Lieferung speichern"
+
+.right_column{:style => "width:35em;"}
+  .box_title
+    %h2 Neuen Lagerartikel anlegen
+  .column_content
+    %p
+      :javascript
+        function fillNewStockArticle(text, li) {
+          new Ajax.Updater('stock_article_form', '/deliveries/fill_new_stock_article_form', {
+            method: 'get',
+            parameters: {article_id: li.id}
+          });
+        }
+      Suche nach Artikeln aus dem
+      %i= @supplier.name
+      Katalog:
+      = text_field_with_auto_complete :article, :name, {}, |
+      {:url => {:controller => 'stockit', :action => 'auto_complete_for_article_name', :supplier_id => @supplier.id}, |
+       :after_update_element => 'fillNewStockArticle', :method => :get} |
+    %hr/
+    #stock_article_form
+      = render :partial => 'stock_article_form', :locals => {:stock_article => @supplier.stock_articles.build}
+
+%p{:style => "clear:both"}
+  = link_to 'Zurück', supplier_deliveries_path(@supplier)

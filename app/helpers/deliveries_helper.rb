@@ -9,4 +9,8 @@ module DeliveriesHelper
     end
   end
 
+  def stock_articles_for_select(supplier)
+    supplier.stock_articles.collect {|a| ["#{a.name} (#{number_to_currency a.price}/#{a.unit})", a.id] }
+  end
+
 end
