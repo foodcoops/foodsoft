@@ -55,7 +55,7 @@ class Order < ActiveRecord::Base
      if stockit?
        StockArticle.available.without_deleted(:include => :article_category,
          :order => 'article_categories.name, articles.name').reject{ |a|
-         a.quantity_available == 0
+         a.quantity_available <= 0
          }.group_by { |a| a.article_category.name }
      else
        supplier.articles.available.without_deleted.group_by { |a| a.article_category.name }
