@@ -28,6 +28,7 @@
             %th Artikel
             %th im Lager
             %th davon bestellt
+            %th verfügbar
             %th Einheit
             %th Preis
             %th Lieferantin
@@ -39,6 +40,7 @@
               %td=h article.name
               %td= article.quantity
               %td= article.quantity - article.quantity_available
+              %th= article.quantity_available
               %td= article.unit
               %td= article.price
               %td= link_to article.supplier.name, article.supplier
