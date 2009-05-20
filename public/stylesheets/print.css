@@ -445,6 +445,9 @@ a.new_wiki_link {
   border: 1px dotted grey;
   padding: 0 1em; }
 
+#toc {
+  float: right; }
+
 #logininfo, #header, #footer {
   display: none; }
 

@@ -7,7 +7,7 @@
     %ul
       - for version in @page.versions.reverse
         %li
-          = link_to format_datetime(version.updated_at), version_page_path(@page, :version => version.version)
+          = link_to format_time(version.updated_at), version_page_path(@page, :version => version.version)
           = "(#{User.find(version.updated_by).nick})"
 
 
