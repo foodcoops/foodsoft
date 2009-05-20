@@ -2,7 +2,7 @@ class Page < ActiveRecord::Base
 
   belongs_to :user, :foreign_key => 'updated_by'
 
-  acts_as_versioned
+  acts_as_versioned :version_column => :lock_version
   self.non_versioned_columns += ['permalink', 'created_at']
 
   validates_presence_of :title, :body

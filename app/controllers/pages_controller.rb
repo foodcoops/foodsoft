@@ -19,7 +19,8 @@ class PagesController < ApplicationController
   end
 
   def new
-    @page = Page.new(:title => params[:title].capitalize.gsub("-", " "))
+    @page = Page.new
+    @page.title = params[:title].capitalize.gsub("-", " ") if params[:title]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -83,13 +84,13 @@ class PagesController < ApplicationController
 
   def version
     @page = Page.find(params[:id])
-    @version = @page.versions[params[:version].to_i - 1]
+    @version = Page::Version.find_by_page_id_and_lock_version params[:id], params[:version]
   end
 
   def revert
     @page = Page.find(params[:id])
-    @page.revert_to(params[:version].to_i)
+    @page.revert_to!(params[:version].to_i)
 
-    render :action => 'edit'
+    redirect_to wiki_page_path(@page.permalink)
   end
 end

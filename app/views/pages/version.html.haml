@@ -5,7 +5,7 @@
   %ul
     %li= "Autor: #{User.find(@version.updated_by).nick}"
     %li= link_to "Aktuelle Version sehen", wiki_page_path(:permalink => @page.permalink)
-    %li= link_to "Auf diese Version zurücksetzen", revert_page_path(@page, :version => @version.version)
+    %li= link_to "Auf diese Version zurücksetzen", revert_page_path(@page, :version => @version.lock_version)
 
 = wikified_body @version.body
 
