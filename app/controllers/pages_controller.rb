@@ -18,10 +18,8 @@ class PagesController < ApplicationController
     end
   end
 
-  # GET /pages/new
-  # GET /pages/new.xml
   def new
-    @page = Page.new(:title => params[:title])
+    @page = Page.new(:title => params[:title].capitalize.gsub("-", " "))
 
     respond_to do |format|
       format.html # new.html.erb
@@ -29,38 +27,39 @@ class PagesController < ApplicationController
     end
   end
 
-  # GET /pages/1/edit
   def edit
     @page = Page.find(params[:id])
   end
 
-  # POST /pages
-  # POST /pages.xml
   def create
     @page = current_user.pages.build(params[:page])
 
-    respond_to do |format|
+    if params[:preview]
+      render :action => 'new'
+    else
       if @page.save
         flash[:notice] = 'Seite wurde angelegt.'
-        format.html { redirect_to(wiki_page_path(@page.permalink)) }
-        format.xml  { render :xml => @page, :status => :created, :location => @page }
+        redirect_to(wiki_page_path(@page.permalink))
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @page.errors, :status => :unprocessable_entity }
+        render :action => "new"
       end
     end
   end
 
-  # PUT /pages/1
-  # PUT /pages/1.xml
   def update
     @page = Page.find(params[:id])
+    @page.attributes = params[:page].merge({:user => current_user})
 
-    if @page.update_attributes(params[:page].merge({:user => current_user}))
-      flash[:notice] = 'Seite wurde aktualisiert.'
-      redirect_to wiki_page_path(@page.permalink)
+    if params[:preview]
+      @page.attributes = params[:page]
+      render :action => 'edit'
     else
-      render :action => "edit"
+      if @page.save
+        flash[:notice] = 'Seite wurde aktualisiert.'
+        redirect_to wiki_page_path(@page.permalink)
+      else
+        render :action => "edit"
+      end
     end
 
   rescue ActiveRecord::StaleObjectError
@@ -68,8 +67,6 @@ class PagesController < ApplicationController
     redirect_to wiki_page_path(@page.permalink)
   end
 
-  # DELETE /pages/1
-  # DELETE /pages/1.xml
   def destroy
     @page = Page.find(params[:id])
     @page.destroy

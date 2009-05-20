@@ -1,3 +1,7 @@
+- if params[:preview]
+  %h2 Vorschau
+  #preview= render :partial => 'body'
+
 #wiki-syntax-help{:style => "float:right"}
   %p
     %b Schnelle Formatierungshilfe
@@ -25,6 +29,8 @@
     %br/
     = f.text_area :body, :size => "60x30"
   %p
+    = f.submit "Vorschau", :name => 'preview'
+    |
     = f.submit "Speichern"
     |
     = link_to "Abbrechen", :back

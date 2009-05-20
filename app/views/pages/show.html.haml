@@ -11,7 +11,7 @@
           = "(#{User.find(version.updated_by).nick})"
 
 
-= wikified_body @page.body
+= render :partial => 'body'
 
 %hr.clear/
 %p
