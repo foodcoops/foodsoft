@@ -8,14 +8,16 @@
     %br/
     :plain
       [[interner Link]]<br />
-      [externer Link](http://addresse.net)<br />
-      *kursiv*<br />
-      **Fett**<br />
-      * erster Listenpunkt<br />
-      * zweiter Listenpunkt<br />
+      "externer Link":http://addresse.net<br />
+      h1. Erste Überschrift<br />
+      h2. Unterüberschrift<br />
+      _kursiv_<br />
+      *Fett*<br />
+      # erster Listenpunkt<br />
+      # zweiter Listenpunkt<br />
+      ## Unterpunkt<br />
   %p
-    Übersicht über alle Formatierungen:
-    = link_to "Markdown Cheatsheet", "http://packetlife.net/static/cheatsheets/markdown.pdf", :target => '_blank'
+    = link_to "Tabellen, Styling, etc..", "http://hobix.com/textile/quick.html", :target => '_blank'
 
 - form_for @page do |f|
   = f.error_messages
