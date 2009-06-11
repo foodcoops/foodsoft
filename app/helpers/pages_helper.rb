@@ -1,7 +1,8 @@
 module PagesHelper
 
   def wikified_body(body)
-    r = RedCloth.new(generate_anchors(body))
+    body = wiki_header(body)
+    r = RedCloth.new(body)
     r.gsub!(/\[\[(.*?)(\|(.*?))?\]\]/) { wiki_link($1, $3) }
     sanitize r.to_html
     r.to_html
@@ -14,6 +15,10 @@ module PagesHelper
     else
       link_to((link_text || wiki_words), wiki_page_url(permalink), :class => "new_wiki_link")
     end
+  end
+
+  def wiki_header(body)
+    body.gsub(/^(={2,6})\s+(.*)\s+={2,6}$/) { "h#{$1.size}. #{$2}" }
   end
 
   def generate_toc(body)
