@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def index
-    @page = Page.find_by_permalink "home"
+    @page = Page.find_by_permalink "Home"
 
     if @page
       render :action => 'show'
@@ -15,6 +15,9 @@ class PagesController < ApplicationController
 
     if @page.nil?
       redirect_to new_page_path(:title => params[:permalink])
+    elsif @page.redirect?
+      flash[:notice] = "Weitergeleitet von #{@page.title} ..."
+      redirect_to wiki_page_path(Page.find(@page.redirect).permalink)
     end
   end
 
@@ -79,7 +82,7 @@ class PagesController < ApplicationController
   end
 
   def all
-    @pages = Page.all :order => 'created_at'
+    @pages = Page.all :order => 'created_at', :conditions => {:redirect => nil}
   end
 
   def version

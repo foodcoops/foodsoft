@@ -38,7 +38,6 @@ module PagesHelper
 
       toc << "#" * number + " #{name}\n"
     end
-    logger.debug("TOC: #{toc}")
     toc = Wikitext::Parser.new.parse toc
 
     toc.gsub(/<li>([^<>\n]*)/) do
