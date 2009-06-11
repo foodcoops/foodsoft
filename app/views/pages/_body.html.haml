@@ -1,4 +1,5 @@
+- content = wikified_body @page.body
 #toc
   %h2 Inhaltsverzeichnis
-  = generate_toc @page.body
-= wikified_body @page.body
+  = generate_toc content
+#wiki_content= content

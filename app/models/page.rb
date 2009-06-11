@@ -25,9 +25,13 @@ class Page < ActiveRecord::Base
 
   before_validation_on_create :set_permalink
 
+  def self.permalink(title)
+    Wikitext::Parser.new.parse "[[#{title}]]"
+  end
+
   def set_permalink
-    if self.permalink.blank?
-      self.permalink = Page.count == 0 ? "home" : "#{title.downcase.strip.gsub(/ |\.|@/, '-')}"
+    unless self.permalink.blank?
+      self.permalink = Page.count == 0 ? "Home" : Page.permalink(title)
     end
   end
 end

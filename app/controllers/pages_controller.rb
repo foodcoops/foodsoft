@@ -20,7 +20,7 @@ class PagesController < ApplicationController
 
   def new
     @page = Page.new
-    @page.title = params[:title].capitalize.gsub("-", " ") if params[:title]
+    @page.title = params[:title].gsub("_", " ") if params[:title]
 
     respond_to do |format|
       format.html # new.html.erb

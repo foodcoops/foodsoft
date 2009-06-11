@@ -1,15 +1,7 @@
 module PagesHelper
 
-  def wikified_body(body)
-    body = wiki_header(body)
-    r = RedCloth.new(body)
-    r.gsub!(/\[\[(.*?)(\|(.*?))?\]\]/) { wiki_link($1, $3) }
-    sanitize r.to_html
-    r.to_html
-  end
-
   def wiki_link(wiki_words, link_text = nil)
-    permalink = wiki_words.downcase.gsub(' ', '-')
+    permalink = Page.permalink(wiki_words)
     if Page.exists?(:permalink => permalink)
       link_to((link_text || wiki_words), wiki_page_url(permalink))
     else
@@ -17,27 +9,43 @@ module PagesHelper
     end
   end
 
+  def build_internal_links(body)
+    body.gsub(/\[\[(.*?)(\|(.*?))?\]\]/) { wiki_link($1, $3) }
+  end
+
+  def build_anchors(body)
+    body.gsub(/(<h\d{1}>(.+)<\/h\d{1}>)/) do
+      header = $1
+      token = $2.downcase.gsub(' ', '-')
+      "<a name='#{token}'> </a>#{header}"
+    end
+  end
+
+  def wikified_body(body)
+    body = Wikitext::Parser.new.parse body
+    build_anchors(body)
+  end
+  
   def wiki_header(body)
-    body.gsub(/^(={2,6})\s+(.*)\s+={2,6}$/) { "h#{$1.size}. #{$2}" }
+    body.gsub(/^(={1,6})\s*(.*)\s*={1,6}$/) { "h#{$1.size}. #{$2}" }
   end
 
   def generate_toc(body)
     toc = ""
-    body.gsub(/^\s*h([1-6])\.\s+(.*)/) do
-      number = $1
+    body.gsub(/<h(\d{1})>(.+)<\/h\d{1}>/) do
+      number = $1.to_i - 1
       name = $2
-      header = name.downcase.gsub(' ', '-')
-      toc << '#' * number.to_i + ' "' + name + '":#' + header + "\n"
-    end
-    RedCloth.new(toc).to_html
-  end
 
-  def generate_anchors(body)
-    body.gsub(/^\s*h([1-6])\.\s+(.*)/) do
-      number = $1
-      name = $2
-      header = name.downcase.gsub(' ', '-')
-      "\nh#{number}. #{name}<a name ='#{header}'> </a>"
+      toc << "#" * number + " #{name}\n"
+    end
+    logger.debug("TOC: #{toc}")
+    toc = Wikitext::Parser.new.parse toc
+
+    toc.gsub(/<li>([^<>\n]*)/) do
+      name = $1
+      token = name.downcase.gsub(' ', '-')
+
+      "<li><a href='##{token}'>#{name}</a>"
     end
   end
 
