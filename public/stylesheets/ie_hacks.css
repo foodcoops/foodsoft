@@ -1,0 +1,8 @@
+#nav {
+  text-align: left; }
+  #nav ul {
+    margin: 0; }
+    #nav ul li.current a:hover {
+      color: #fff; }
+    #nav ul li.current ul {
+      width: 100%; }
