@@ -24,7 +24,10 @@ class FoodcoopController < ApplicationController
       end
 
       # if somebody uses the search field:
-      conditions = ["first_name LIKE ? OR last_name LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%"] unless params[:query].blank?
+      unless params[:query].blank?
+        conditions = ["first_name LIKE ? OR last_name LIKE ? OR nick LIKE ?",
+          "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%"]
+      end
 
       @total = User.count(:conditions => conditions)
       @users = User.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "nick", :include => :groups)
