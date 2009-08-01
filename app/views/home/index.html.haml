@@ -31,6 +31,12 @@
     // Current orders
     = render :partial => 'shared/open_orders'
 
+  // Stats
+  .box_title
+    %h2 Engagement Deiner Bestellgruppe
+  .column_content
+    = render "stats"
+
   - unless @messages.empty?
     .box_title
       %h2 Neuste Nachrichten
@@ -49,9 +55,9 @@
         |
         Verfügbares Guthaben:
         = number_to_currency(@ordergroup.get_available_funds())
-        %span{:style => "color:grey"}
-          (zuletzt aktualisiert vor
-          = distance_of_time_in_words(Time.now, @ordergroup.account_updated) + "(n))"
+        %span.description
+          (Letzte Aktualisierung ist
+          = distance_of_time_in_words(Time.now, @ordergroup.account_updated) + " her)"
         %h3 Letzte Transaktionen
         %table
           %tr

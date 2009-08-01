@@ -1,9 +1,8 @@
 # == Schema Information
-# Schema version: 20090120184410
 #
 # Table name: users
 #
-#  id                     :integer         not null, primary key
+#  id                     :integer(4)      not null, primary key
 #  nick                   :string(255)     default(""), not null
 #  password_hash          :string(255)     default(""), not null
 #  password_salt          :string(255)     default(""), not null

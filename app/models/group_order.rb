@@ -1,15 +1,14 @@
 # == Schema Information
-# Schema version: 20090119155930
 #
 # Table name: group_orders
 #
-#  id                 :integer         not null, primary key
-#  ordergroup_id      :integer         default(0), not null
-#  order_id           :integer         default(0), not null
+#  id                 :integer(4)      not null, primary key
+#  ordergroup_id      :integer(4)      default(0), not null
+#  order_id           :integer(4)      default(0), not null
 #  price              :decimal(8, 2)   default(0.0), not null
-#  lock_version       :integer         default(0), not null
+#  lock_version       :integer(4)      default(0), not null
 #  updated_on         :datetime        not null
-#  updated_by_user_id :integer
+#  updated_by_user_id :integer(4)
 #
 
 # A GroupOrder represents an Order placed by an Ordergroup.

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090405131156) do
+ActiveRecord::Schema.define(:version => 20090731132547) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20090405131156) do
     t.string   "contact_person"
     t.string   "contact_phone"
     t.string   "contact_address"
+    t.text     "stats"
   end
 
   add_index "groups", ["name"], :name => "index_groups_on_name", :unique => true

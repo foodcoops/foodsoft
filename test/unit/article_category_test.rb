@@ -1,9 +1,8 @@
 # == Schema Information
-# Schema version: 20090317175355
 #
 # Table name: article_categories
 #
-#  id          :integer         not null, primary key
+#  id          :integer(4)      not null, primary key
 #  name        :string(255)     default(""), not null
 #  description :string(255)
 #

@@ -1,18 +1,17 @@
 # == Schema Information
-# Schema version: 20090119155930
 #
 # Table name: tasks
 #
-#  id             :integer         not null, primary key
+#  id             :integer(4)      not null, primary key
 #  name           :string(255)     default(""), not null
 #  description    :string(255)
 #  due_date       :date
-#  done           :boolean
-#  workgroup_id   :integer
-#  assigned       :boolean
+#  done           :boolean(1)
+#  workgroup_id   :integer(4)
+#  assigned       :boolean(1)
 #  created_on     :datetime        not null
 #  updated_on     :datetime        not null
-#  required_users :integer         default(1)
+#  required_users :integer(4)      default(1)
 #
 
 class Task < ActiveRecord::Base
@@ -28,7 +27,8 @@ class Task < ActiveRecord::Base
   attr_protected :users
   
   validates_length_of :name, :minimum => 3
-  
+
+  after_save :update_ordergroup_stats
   
   def is_assigned?(user)
     self.assignments.detect {|ass| ass.user_id == user.id }
@@ -77,5 +77,13 @@ class Task < ActiveRecord::Base
   
   def user_list
     @user_list ||= users.collect(&:nick).join(", ")
+  end
+
+  private
+
+  def update_ordergroup_stats
+    if done
+      users.each { |u| u.ordergroup.update_stats! }
+    end
   end
 end

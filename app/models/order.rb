@@ -1,16 +1,15 @@
 # == Schema Information
-# Schema version: 20090317175355
 #
 # Table name: orders
 #
-#  id                 :integer         not null, primary key
-#  supplier_id        :integer
+#  id                 :integer(4)      not null, primary key
+#  supplier_id        :integer(4)
 #  note               :text
 #  starts             :datetime
 #  ends               :datetime
 #  state              :string(255)     default("open")
-#  lock_version       :integer         default(0), not null
-#  updated_by_user_id :integer
+#  lock_version       :integer(4)      default(0), not null
+#  updated_by_user_id :integer(4)
 #  foodcoop_result    :decimal(8, 2)
 #
 
@@ -185,6 +184,10 @@ class Order < ActiveRecord::Base
         order_articles.each do |oa|
           oa.group_order_articles.each { |goa| goa.group_order_article_quantities.clear }
         end
+
+        # Stats
+        # TODO: Move into background, if possible
+        ordergroups.each { |o| o.update_stats! }
       end
     end
   end

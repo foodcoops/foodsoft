@@ -81,6 +81,13 @@ option {
 span.click-me {
   cursor: pointer; }
 
+.clear {
+  clear: both; }
+
+.description {
+  color: grey;
+  font-size: 0.9em; }
+
 #login {
   margin: auto;
   width: 27em;
@@ -161,31 +168,31 @@ span.click-me {
   background: #f5f5f5;
   padding: 0 10px 0px 5px;
   float: left; }
-  .menu ul,   #start_nav ul {
+  .menu ul, #start_nav ul {
     list-style-type: none;
     margin: 0 0 0.2em 0;
     padding: 0; }
-    .menu ul li,     #start_nav ul li {
+    .menu ul li, #start_nav ul li {
       border-bottom: 1px solid #dedede;
       color: #666;
       margin: 0.8em 0 0 0;
       font-weight: bold; }
-      .menu ul li a:link, .menu ul li a:visited,       #start_nav ul li a:link, #start_nav ul li a:visited {
+      .menu ul li a:link, .menu ul li a:visited, #start_nav ul li a:link, #start_nav ul li a:visited {
         display: block;
         padding: 0.25em 1em;
         text-decoration: none;
         width: 12em; }
-      .menu ul li a:hover, .menu ul li a:focus,       #start_nav ul li a:hover, #start_nav ul li a:focus {
+      .menu ul li a:hover, .menu ul li a:focus, #start_nav ul li a:hover, #start_nav ul li a:focus {
         background-color: #e3e3e3; }
-      .menu ul li ul,       #start_nav ul li ul {
+      .menu ul li ul, #start_nav ul li ul {
         margin: 0;
         padding: 0; }
-        .menu ul li ul li,         #start_nav ul li ul li {
+        .menu ul li ul li, #start_nav ul li ul li {
           border-top: 1px solid #dedede;
           border-bottom: none;
           margin: 0;
           font-weight: normal; }
-          .menu ul li ul li a:link, .menu ul li ul li a:visited,           #start_nav ul li ul li a:link, #start_nav ul li ul li a:visited {
+          .menu ul li ul li a:link, .menu ul li ul li a:visited, #start_nav ul li ul li a:link, #start_nav ul li ul li a:visited {
             width: 11.5em;
             padding: 0 1em 0.1em 1.5em;
             font-weight: normal;
@@ -433,6 +440,14 @@ ul.autocomplete .informal {
   position: relative;
   top: -1em;
   left: 5%; }
+
+.stats-bar {
+  height: 20px;
+  min-width: 10px;
+  border: 1px solid #DDDDDD;
+  background-color: #fff;
+  text-align: center;
+  margin: 0 10px 10px 0; }
 
 #logininfo, #header, #footer {
   display: none; }

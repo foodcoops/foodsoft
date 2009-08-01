@@ -1,0 +1,24 @@
+<%
+max_width = 600
+
+global_avg = Ordergroup.avg_jobs_per_euro
+group_avg = @ordergroup.avg_jobs_per_euro.to_f
+
+length_of_global_bar = max_width / 2.0
+length_of_group_bar = (group_avg / global_avg) * length_of_global_bar
+
+length_of_group_bar = max_width if length_of_group_bar > max_width
+
+color = group_avg >= global_avg ? "#78b74e" : "red"
+%>
+Engagement Deiner Bestellgruppe
+<div class="stats-bar" style="width:<%= length_of_group_bar -%>px; background-color:<%= color -%>">
+  <%= ((group_avg / global_avg) * 100).to_i -%><%=  " Äpfel" if length_of_group_bar > 50 -%>
+</div>
+Durchschnittsengagement
+<div class="stats-bar" style="width:<%= length_of_global_bar -%>px">
+  100 Birnen
+</div>
+<span class="description">
+  Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop.
+</span>
