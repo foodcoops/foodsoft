@@ -11,7 +11,8 @@ ActionController::Routing::Routes.draw do |map|
     :member => { :reply => :get, :user => :get, :group => :get }
 
   map.namespace :foodcoop do |foodcoop|
-    foodcoop.root :controller => "foodcoop", :action => "members"
+    foodcoop.root :controller => "users", :action => "index"
+    foodcoop.resources :users, :only => [:index]
     foodcoop.resources :ordergroups, :only => [:index]
     foodcoop.resources :workgroups, :only => [:index, :edit, :update],
       :member => {:memberships => :get}
@@ -28,11 +29,11 @@ ActionController::Routing::Routes.draw do |map|
     finance.resources :invoices
   end
 
- map.resources :stock_takings, 
-   :collection => {:fill_new_stock_article_form => :get, :add_stock_article => :post}
- map.resources :stock_articles,
-   :controller => 'stockit', :as => 'stockit',
-   :collection => {:auto_complete_for_article_name => :get, :fill_new_stock_article_form => :get}
+  map.resources :stock_takings,
+    :collection => {:fill_new_stock_article_form => :get, :add_stock_article => :post}
+  map.resources :stock_articles,
+    :controller => 'stockit', :as => 'stockit',
+    :collection => {:auto_complete_for_article_name => :get, :fill_new_stock_article_form => :get}
   
   map.resources :suppliers,
     :collection => { :shared_suppliers => :get } do |suppliers|

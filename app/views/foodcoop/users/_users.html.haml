@@ -19,7 +19,7 @@
   %tbody
     - for user in @users
       %tr{:class => cycle('even','odd', :name => 'users')}
-        %td= link_to user.nick, {:controller => "messages", :action => "user", :id => user}, :title => _('Send user an email')
+        %td= link_to user.nick, user_message_path(user), :title => _('Send user an email')
         %td=h user.name if @current_user.role_admin? || user.settings["profile.nameIsPublic"] == '1'
         %td=h user.email if @current_user.role_admin? ||  user.settings["profile.emailIsPublic"] == '1'
         %td=h user.phone if @current_user.role_admin? ||  user.settings["profile.phoneIsPublic"] == '1'

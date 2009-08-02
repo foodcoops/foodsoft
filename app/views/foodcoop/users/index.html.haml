@@ -20,13 +20,13 @@
         = observe_field 'query',  :frequency => 2, |
           :before => "Element.show('loader')", |
           :success => "Element.hide('loader')", |
-          :url => {:action => 'members'}, |
+          :url => foodcoop_users_path, |
           :update => :users, |
           :with => 'query', |
           :method => :get |
     
     =_ "Nach Bestellgruppen sortieren:"
-    - form_tag({:action => "members"}, :method => "get", :style=>"display:inline;") do
+    - form_tag(foodcoop_users_path, :method => "get", :style=>"display:inline;") do
       = check_box_tag :sort_by_ordergroups, 1, params[:sort_by_ordergroups], :onclick => "submit();"
     #users
       = render :partial => "users"
