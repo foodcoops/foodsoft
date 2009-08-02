@@ -8,6 +8,7 @@
 var modified = false    		// indicates if anything has been clicked on this page
 var groupBalance = 0;			// available group money 
 var decimalSeparator = ".";		// default decimal separator
+var toleranceIsCostly = true; // default tolerance behaviour
 
 // Article data arrays:
 var price = new Array();
@@ -20,6 +21,10 @@ var quantityAvailable = new Array();  // stock_order. how many items are current
 
 function setDecimalSeparator(character) {
 	decimalSeparator = character;	
+}
+
+function setToleranceBehaviour(value) {
+    toleranceIsCostly = value;
 }
 
 function setGroupBalance(amount) {
@@ -98,7 +103,11 @@ function update(item, quantity, tolerance) {
 	}
 	
 	// update total price
-	itemTotal[item] = price[item] * (Number(quantity) + Number(tolerance));
+    if(toleranceIsCostly == true) {
+        itemTotal[item] = price[item] * (Number(quantity) + Number(tolerance));
+    } else {
+        itemTotal[item] = price[item] * (Number(quantity));
+    }
 	$('price_' + item + '_display').update(asMoney(itemTotal[item]));
     
     // update balance

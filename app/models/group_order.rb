@@ -29,13 +29,18 @@ class GroupOrder < ActiveRecord::Base
   named_scope :finished, lambda { {:conditions => ["order_id IN (?)", Order.finished_not_closed.collect(&:id)]} }
   
   # Updates the "price" attribute.
-  # This will be the maximum value of an open order or
-  # the value depending of the article results.
+  # Until the order is finished this will be the maximum price or
+  # the minimum price depending on configuration. When the order is finished it
+  # will be the value depending of the article results.
   def update_price!
     total = 0
     for article in group_order_articles.find(:all, :include => :order_article)
       unless order.finished?
-        total += article.order_article.article.fc_price * (article.quantity + article.tolerance)
+        if Foodsoft.config[:tolerance_is_costly]
+          total += article.order_article.article.fc_price * (article.quantity + article.tolerance)
+        else
+          total += article.order_article.article.fc_price * article.quantity
+        end
       else
         total += article.order_article.price.fc_price * article.result
       end
