@@ -15,7 +15,7 @@
         = observe_form 'sform', :frequency => 2, |
           :before => "Element.show('loader')", |
           :success => "Element.hide('loader')", |
-          :url => {:action => 'ordergroups'}, |
+          :url => foodcoop_ordergroups_path, |
           :update => :ordergroups, |
           :method => :get |
     
