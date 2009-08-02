@@ -32,10 +32,11 @@
     = render :partial => 'shared/open_orders'
 
   // Stats
-  .box_title
-    %h2 Engagement Deiner Bestellgruppe
-  .column_content
-    = render "stats"
+  - if @ordergroup
+    .box_title
+      %h2 Engagement Deiner Bestellgruppe
+    .column_content
+      = render "stats"
 
   - unless @messages.empty?
     .box_title
