@@ -23,9 +23,7 @@ class Invite < ActiveRecord::Base
   validates_presence_of :group
   validates_presence_of :token
   validates_presence_of :expires_at
-  
-  attr_accessible :email, :user, :group
-    
+      
  protected
   
   # Before validation, set token and expires_at.

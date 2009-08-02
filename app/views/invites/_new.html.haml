@@ -1,0 +1,16 @@
+%p 
+  Hier kannst du eine Person in die Gruppe 
+  %b=h @invite.group.name
+  einladen, die noch nicht Mitglied der Foodcoop ist.
+.edit_form{:style => 'width:35em'}      
+  - remote_form_for @invite do |form|
+    = form.error_messages :header_message => nil
+    = form.hidden_field :user_id
+    = form.hidden_field :group_id
+    %p
+      Email-Adresse: 
+      = form.text_field :email, :size => 40, :maxlength => 128
+    %p
+      = submit_tag('Einladung abschicken')
+      oder
+      = link_to_function "Abbrechen", "Element.hide('edit_box')"

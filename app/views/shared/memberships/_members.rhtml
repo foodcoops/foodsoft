@@ -2,7 +2,7 @@
 <p>
     <i>
       Hier kannst Du die Mitglieder der Gruppe verwalten oder ein neues Foodcoop-Mitglied in die Gruppe
-      <%= link_to('einladen', :controller => '/foodcoop', :action => 'invite', :id => @group) %>.
+      <%= remote_link_to('einladen', :url => new_invite_path(:id => @group)) %>.
     </i>
 </p>
 <div class="left_column" style="width:48%">
@@ -22,3 +22,5 @@
 		<%= link_to('Person einladen', :controller => '/foodcoop', :action => 'invite', :id => @group) %>
     </div>
 </div>
+
+<div id="edit_box" style="display:none"></div>
