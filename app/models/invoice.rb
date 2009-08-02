@@ -1,21 +1,20 @@
 # == Schema Information
-# Schema version: 20090119155930
 #
 # Table name: invoices
 #
-#  id             :integer         not null, primary key
-#  supplier_id    :integer
-#  delivery_id    :integer
+#  id             :integer(4)      not null, primary key
+#  supplier_id    :integer(4)
+#  delivery_id    :integer(4)
+#  order_id       :integer(4)
 #  number         :string(255)
 #  date           :date
 #  paid_on        :date
 #  note           :text
 #  amount         :decimal(8, 2)   default(0.0), not null
-#  created_at     :datetime
-#  updated_at     :datetime
-#  order_id       :integer
 #  deposit        :decimal(8, 2)   default(0.0), not null
 #  deposit_credit :decimal(8, 2)   default(0.0), not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 
 class Invoice < ActiveRecord::Base

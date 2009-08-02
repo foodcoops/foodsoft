@@ -1,18 +1,17 @@
 # == Schema Information
-# Schema version: 20090317175355
 #
 # Table name: tasks
 #
-#  id             :integer         not null, primary key
+#  id             :integer(4)      not null, primary key
 #  name           :string(255)     default(""), not null
 #  description    :string(255)
 #  due_date       :date
-#  done           :boolean
-#  workgroup_id   :integer
-#  assigned       :boolean
+#  done           :boolean(1)
+#  workgroup_id   :integer(4)
+#  assigned       :boolean(1)
 #  created_on     :datetime        not null
 #  updated_on     :datetime        not null
-#  required_users :integer         default(1)
+#  required_users :integer(4)      default(1)
 #
 
 require File.dirname(__FILE__) + '/../test_helper'

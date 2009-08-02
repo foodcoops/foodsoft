@@ -81,6 +81,13 @@ option {
 span.click-me {
   cursor: pointer; }
 
+.clear {
+  clear: both; }
+
+.description {
+  color: grey;
+  font-size: 0.9em; }
+
 #login {
   margin: auto;
   width: 27em;
@@ -433,3 +440,11 @@ ul.autocomplete .informal {
   position: relative;
   top: -1em;
   left: 5%; }
+
+.stats-bar {
+  height: 20px;
+  min-width: 10px;
+  border: 1px solid #DDDDDD;
+  background-color: #fff;
+  text-align: center;
+  margin: 0 10px 10px 0; }

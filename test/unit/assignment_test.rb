@@ -1,12 +1,11 @@
 # == Schema Information
-# Schema version: 20090317175355
 #
 # Table name: assignments
 #
-#  id       :integer         not null, primary key
-#  user_id  :integer         default(0), not null
-#  task_id  :integer         default(0), not null
-#  accepted :boolean
+#  id       :integer(4)      not null, primary key
+#  user_id  :integer(4)      default(0), not null
+#  task_id  :integer(4)      default(0), not null
+#  accepted :boolean(1)
 #
 
 require File.dirname(__FILE__) + '/../test_helper'

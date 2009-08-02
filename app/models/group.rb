@@ -1,29 +1,29 @@
 # == Schema Information
-# Schema version: 20090120184410
 #
 # Table name: groups
 #
-#  id                  :integer         not null, primary key
+#  id                  :integer(4)      not null, primary key
 #  type                :string(255)     default(""), not null
 #  name                :string(255)     default(""), not null
 #  description         :string(255)
-#  account_balance     :decimal(, )     default(0.0), not null
+#  account_balance     :decimal(8, 2)   default(0.0), not null
 #  account_updated     :datetime
 #  created_on          :datetime        not null
-#  role_admin          :boolean         not null
-#  role_suppliers      :boolean         not null
-#  role_article_meta   :boolean         not null
-#  role_finance        :boolean         not null
-#  role_orders         :boolean         not null
-#  weekly_task         :boolean
-#  weekday             :integer
+#  role_admin          :boolean(1)      not null
+#  role_suppliers      :boolean(1)      not null
+#  role_article_meta   :boolean(1)      not null
+#  role_finance        :boolean(1)      not null
+#  role_orders         :boolean(1)      not null
+#  weekly_task         :boolean(1)
+#  weekday             :integer(4)
 #  task_name           :string(255)
 #  task_description    :string(255)
-#  task_required_users :integer         default(1)
+#  task_required_users :integer(4)      default(1)
 #  deleted_at          :datetime
 #  contact_person      :string(255)
 #  contact_phone       :string(255)
 #  contact_address     :string(255)
+#  stats               :text
 #
 
 # Groups organize the User. 

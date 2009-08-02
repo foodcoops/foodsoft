@@ -1,9 +1,8 @@
 # == Schema Information
-# Schema version: 20090317175355
 #
 # Table name: suppliers
 #
-#  id                 :integer         not null, primary key
+#  id                 :integer(4)      not null, primary key
 #  name               :string(255)     default(""), not null
 #  address            :string(255)     default(""), not null
 #  phone              :string(255)     default(""), not null
@@ -16,7 +15,7 @@
 #  delivery_days      :string(255)
 #  order_howto        :string(255)
 #  note               :string(255)
-#  shared_supplier_id :integer
+#  shared_supplier_id :integer(4)
 #  min_order_quantity :string(255)
 #  deleted_at         :datetime
 #

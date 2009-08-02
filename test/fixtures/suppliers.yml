@@ -1,5 +1,4 @@
 # == Schema Information
-# Schema version: 20090317175355
 #
 # Table name: suppliers
 #
