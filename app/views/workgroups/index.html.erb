@@ -1,0 +1,52 @@
+<% title "Workgroups" %>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Account Balance</th>
+    <th>Account Updated</th>
+    <th>Created On</th>
+    <th>Role Admin</th>
+    <th>Role Suppliers</th>
+    <th>Role Article Meta</th>
+    <th>Role Finance</th>
+    <th>Role Orders</th>
+    <th>Weekly Task</th>
+    <th>Weekday</th>
+    <th>Task Name</th>
+    <th>Task Description</th>
+    <th>Task Required Users</th>
+    <th>Deleted At</th>
+    <th>Contact Person</th>
+    <th>Contact Phone</th>
+    <th>Contact Address</th>
+  </tr>
+  <% for workgroup in @workgroups %>
+    <tr>
+      <td><%=h workgroup.type %></td>
+      <td><%=h workgroup.name %></td>
+      <td><%=h workgroup.description %></td>
+      <td><%=h workgroup.account_balance %></td>
+      <td><%=h workgroup.account_updated %></td>
+      <td><%=h workgroup.created_on %></td>
+      <td><%=h workgroup.role_admin %></td>
+      <td><%=h workgroup.role_suppliers %></td>
+      <td><%=h workgroup.role_article_meta %></td>
+      <td><%=h workgroup.role_finance %></td>
+      <td><%=h workgroup.role_orders %></td>
+      <td><%=h workgroup.weekly_task %></td>
+      <td><%=h workgroup.weekday %></td>
+      <td><%=h workgroup.task_name %></td>
+      <td><%=h workgroup.task_description %></td>
+      <td><%=h workgroup.task_required_users %></td>
+      <td><%=h workgroup.deleted_at %></td>
+      <td><%=h workgroup.contact_person %></td>
+      <td><%=h workgroup.contact_phone %></td>
+      <td><%=h workgroup.contact_address %></td>
+      <td><%= link_to "Edit", edit_workgroup_path(workgroup) %></td>
+    </tr>
+  <% end %>
+</table>
+

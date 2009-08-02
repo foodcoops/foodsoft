@@ -1,8 +1,7 @@
 class FoodcoopController < ApplicationController
 
-  before_filter :authenticate_membership_or_admin, 
-    :only => [:edit_group, :update_group, :memberships, :invite, :send_invitation]
-
+  before_filter :authenticate_membership_or_admin, :except => [:members]
+  
   # gives a view to list all members of the foodcoop
   def members
 
@@ -39,25 +38,11 @@ class FoodcoopController < ApplicationController
     end
   end
 
-  # gives an overview for the workgroups and its members
-  def workgroups
-    @groups = Workgroup.find :all, :order => "name"
-  end
-
-  def group
-  end
-
-  def edit_group
-  end
-
-  def memberships
-  end
-
   # Invites a new user to join foodsoft in this group.
   def invite
     @invite = Invite.new
   end
-  
+
   # Sends an email
   def send_invitation
     @invite = Invite.new(:user => @current_user, :group => @group, :email => params[:invite][:email])

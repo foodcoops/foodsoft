@@ -3,13 +3,14 @@
 %p
   %i
     Mitglieder kannst du 
-    = link_to "hier", :action => "memberships", :id => @group
+    = link_to "hier", :action => "memberships", :id => @workgroup
     hinzufügen.
+
 .edit_form{:style => "width:35em"}      
-  - form_for(@group, :url => {:action => 'update_group', :id => @group}) do |@form|
+  - form_for [:foodcoop, @workgroup] do |@form|
     = render :partial => "shared/group_form"
 
     %p{:style => "clear:both"}
       = submit_tag 'Speichern'
       |
-      = link_to "Abbrechen", :action => "workgroups"
+      = link_to "Abbrechen", foodcoop_workgroups_path

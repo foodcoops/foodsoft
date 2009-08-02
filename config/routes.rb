@@ -13,6 +13,8 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :foodcoop do |foodcoop|
     foodcoop.root :controller => "foodcoop", :action => "members"
     foodcoop.resources :ordergroups, :only => [:index]
+    foodcoop.resources :workgroups, :only => [:index, :edit, :update],
+      :member => {:memberships => :get}
   end
 
   map.namespace :admin do |admin|

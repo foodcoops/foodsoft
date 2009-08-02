@@ -32,6 +32,9 @@ class Workgroup < Group
   # returns all non-finished tasks
   has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], :order => 'due_date ASC'
 
+  validates_presence_of :task_name, :weekday, :task_required_users,
+    :if => Proc.new {|workgroup| workgroup.weekly_task }
+
   def self.weekdays
     [["Montag", "1"], ["Dienstag", "2"], ["Mittwoch","3"],["Donnerstag","4"],["Freitag","5"],["Samstag","6"],["Sonntag","0"]]
   end
