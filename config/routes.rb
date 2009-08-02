@@ -10,6 +10,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :messages, :only => [:index, :show, :new, :create],
     :member => { :reply => :get, :user => :get, :group => :get }
 
+  map.namespace :foodcoop do |foodcoop|
+    foodcoop.root :controller => "foodcoop", :action => "members"
+    foodcoop.resources :ordergroups, :only => [:index]
+  end
+
   map.namespace :admin do |admin|
     admin.resources :users
     admin.resources :workgroups, :member => { :memberships => :get }
