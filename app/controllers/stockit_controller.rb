@@ -1,10 +1,17 @@
 class StockitController < ApplicationController
 
   def index
-    @stock_articles = StockArticle.without_deleted.all(
-      :include => [:supplier, :article_category],
-      :order => 'suppliers.name, article_categories.name, articles.name'
-    )
+    unless params[:show_not_available] == "1"
+      @stock_articles = StockArticle.without_deleted.available.all(
+        :include => [:supplier, :article_category],
+        :order => 'suppliers.name, article_categories.name, articles.name'
+      )
+    else
+      @stock_articles = StockArticle.without_deleted.all(
+        :include => [:supplier, :article_category],
+        :order => 'suppliers.name, article_categories.name, articles.name'
+      )
+    end
   end
 
   def new
