@@ -58,6 +58,15 @@ class Mailer < ActionMailer::Base
               :transaction  => transaction
   end
 
+  def feedback(user, message)
+    subject     "[Foodsoft] Feeback von #{user.email}"
+    recipients  Foodsoft.config[:notification]["error_recipients"]
+    from        "#{user.nick} <#{user.email}>"
+    headers     'Sender' => Foodsoft.config[:notification]["sender_address"],
+                'Errors-To' =>  Foodsoft.config[:notification]["sender_address"]
+    body        :user => user, :message => message
+  end
+
   protected
 
   def prepare_system_message(recipient)
