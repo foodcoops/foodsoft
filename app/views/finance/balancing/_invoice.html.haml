@@ -18,6 +18,8 @@
     %tr
       %td pfandbereinigter Betrag:
       %td.curreny= number_to_currency invoice.net_amount
+  %br/
+  = link_to "Rechnung bearbeiten", edit_finance_invoice_path(invoice)
 
 - else
   Eine Rechnung für diese Bestellung anlegen:
