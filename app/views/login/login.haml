@@ -17,7 +17,8 @@
     = submit_tag "Anmelden"
     |
     = link_to "Passwort vergessen?", :action => 'forgot_password'
-    %br/
-    %br/
-    %i{:style => 'font-size:0.8em;'} Kekse und Javascript müssen erlaubt sein!
+    %div{:style => 'font-size:0.9em;margin-top:2em;'}
+      %b Achtung, Cookies und Javascript müssen aktiviert sein!
+      = link_to "NoScript", "http://noscript.net/"
+      bitte abschalten.
 = javascript_tag("$('login_user').focus()")
