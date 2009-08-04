@@ -48,6 +48,10 @@ class StockArticle < Article
     available
   end
 
+  def self.stock_value
+    available.collect { |a| a.quantity * a.gross_price }.sum
+  end
+
   protected
 
   def check_quantity

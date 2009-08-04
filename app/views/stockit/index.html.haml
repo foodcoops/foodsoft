@@ -53,4 +53,7 @@
               %td
                 = link_to icon(:edit), edit_stock_article_path(article)
                 = link_to icon(:delete), article, :method => :delete, :confirm => "Bist Du sicher?"
+    %p
+      Aktueller Lagerwert:
+      = number_to_currency StockArticle.stock_value
 
