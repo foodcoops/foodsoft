@@ -73,7 +73,7 @@ class Finance::TransactionsController < ApplicationController
     begin
       @group.add_financial_transaction(amount, note, @current_user)
       flash[:notice] = 'Transaktion erfolgreich angelegt.'
-      redirect_to :action => 'index'
+      redirect_to :action => 'list', :id => @group
     rescue => e
       @financial_transaction = FinancialTransaction.new(params[:financial_transaction])
       flash.now[:error] = 'Transaktion konnte nicht angelegt werden!' + ' (' + e.message + ')'
