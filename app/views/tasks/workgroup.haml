@@ -46,7 +46,7 @@
     - else
       Noch keine Wochenaufgaben angelegt.
     - if @current_user.member_of?(@group) or @current_user.role_admin?
-      = link_to "Wochenaufgaben bearbeiten", :controller => "foodcoop", :action => "edit_group", :id => @group
+      = link_to "Wochenaufgaben bearbeiten", edit_foodcoop_workgroup_path(@group)
 
 .left_column{:style => "width:75%"}
   .box_title 
