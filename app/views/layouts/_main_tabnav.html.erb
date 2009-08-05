@@ -4,7 +4,7 @@
       { :name => "Start", :url => root_path, :active => ["index", "home"],
         :subnav => [
           { :name => "Meine Aufgaben", :url => "/home/tasks" },
-          { :name => "Meine Bestellgruppe", :url => "/home/ordergroup"},
+          { :name => "Meine Bestellgruppe", :url => "/home/ordergroup", :access_denied? => (!u.ordergroup)},
           { :name => "Mein Profil", :url => "/home/profile"}
         ]
       },
