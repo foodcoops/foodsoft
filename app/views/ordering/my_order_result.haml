@@ -78,7 +78,10 @@
                 - tolerance = goa.tolerance
                 - result = goa.result
                 - if @order.open?
-                  - sub_total = oa.price.fc_price * (quantity + tolerance)
+                  - if Foodsoft.config[:tolerance_is_costly]
+                    - sub_total = oa.price.fc_price * (quantity + tolerance)
+                  - else
+                    - sub_total = oa.price.fc_price * quantity
                 - else
                   - sub_total = oa.price.fc_price * result
               - else

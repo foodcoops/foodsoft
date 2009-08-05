@@ -32,9 +32,12 @@
           </tr>
 				<%-
 				order_articles.each do |order_article|
-	                article_total = @price[i] * (@tolerance[i] + @quantity[i]);
+                    if Foodsoft.config[:tolerance_is_costly]
+                        article_total = @price[i] * (@tolerance[i] + @quantity[i])
+                    else
+                        article_total = @price[i] * @quantity[i]
+                    end
 	                total += article_total
-
         -%>
           <tr class="<%= cycle('even', 'odd', :name => 'articles') %>" valign="top">
               <td class="name">
@@ -107,13 +110,22 @@
 <script type="text/javascript">
 //<![CDATA[
     // preset data
-<% for i in 0...@price.size -%>
+<% if Foodsoft.config[:tolerance_is_costly]
+       for i in 0...@price.size -%>
     addData(<%= @price[i] %>, <%= @unit[i] %>, <%= @price[i] * (@tolerance[i] + @quantity[i])%>, <%= @others_quantity[i] %>, <%= @others_tolerance[i] %>, <%= @used_quantity[i] %>, 0);
-<% end -%>
+<%     end
+    else
+       for j in 0...@price.size -%>
+    addData(<%= @price[j] %>, <%= @unit[j] %>, <%= @price[j] * @quantity[j]%>, <%= @others_quantity[j] %>, <%= @others_tolerance[j] %>, <%= @used_quantity[j] %>, 0);
+<%    end
+    end%>
     setGroupBalance(<%= @availableFunds %>);
 
     // localization 
     setDecimalSeparator(",");
+
+    // configuration
+    setToleranceBehaviour(<%= Foodsoft.config[:tolerance_is_costly] %>);
     
     // initialize javascript
     updateBalance();    
