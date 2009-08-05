@@ -11,25 +11,37 @@ development: &defaults
     country: Deutschland
     email: foodsoft@myfoodcoop.org
     phone: "030 323 23249"
+
   # base URL for this installation
   base_url: http://foodsoft.fctest.de
+
   # Homepage
   homepage: http://www.fctest.de
+
   # foodsoft documentation URL
   help_url: http://foodsoft.fcschinke09.de/trac/wiki/FoodsoftDoku
+
   # price markup in percent
   price_markup: 2.0
+
+  # tolerance order option: If set to false, article tolerance values do not count
+  # for total article price as long as the order is not finished.
+  tolerance_is_costly: false
+
   # email address to be used as sender
   email_sender: foodsoft@myfoodcoop.org
+
   # If your foodcoop uses a mailing list instead of internal messaging system
   #mailing_list: list@myfoodcoop.org
   #mailing_list_subscribe: list-subscribe@myfoodcoop.org
+
   # Config for the exception_notification plugin
   notification:
     error_recipients:
       - admin@myfoodcoop.org
     sender_address: "\"FoodSoft Error\" <foodsoft@myfoodcoop.org>"
     email_prefix: "[FoodSoft]"
+
   # Access to sharedLists, the external article-database
   shared_lists:
     adapter: mysql
@@ -39,6 +51,7 @@ development: &defaults
     password:
     encoding: utf8
     socket: /opt/lampp/var/mysql/mysql.sock
+
   # auto-units-conversion
   # this is used for automatic article-synchronization to handle different units
   # e.g. when foodcoop-unit should be 500g and supplier-unit is 1kg
