@@ -55,9 +55,19 @@ class Workgroup < Group
     nextTasks = Array.new
     number.times do
       nextTasks << nextTask
-      nextTask = 1.week.from_now(nextTask)
+      nextTask = 1.week.from_now(nextTask).to_date
     end
     return nextTasks
+  end
+
+  def task_attributes(date)
+    {
+      :name => task_name,
+      :description => task_description,
+      :due_date => date,
+      :required_users => task_required_users,
+      :weekly => true
+    }
   end
 
 end

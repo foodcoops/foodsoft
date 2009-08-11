@@ -16,10 +16,10 @@
           %th Wer machts?
           %th Aufgabe übernehmen
         - i = 0
-        - for next_task in @group.next_weekly_tasks
+        - for next_date in @group.next_weekly_tasks
           %tr{:class => cycle("even","odd")}
-            %td= I18n.l next_task, :format => "%a, %d.%m.%Y"
-            - if task = @group.tasks.find(:first, :conditions => ["due_date = ? AND name = ?",next_task.strftime("%Y-%m-%d"),@group.task_name])
+            %td= I18n.l next_date, :format => "%a, %d.%m.%Y"
+            - if task = @group.tasks.find(:first, :conditions => {:due_date => next_date, :weekly => true})
               - unless task.users.empty?
                 - owner = Array.new
                 - task.assignments.each do |ass| 
