@@ -23,7 +23,6 @@
         %span{:style => "color:white; font-size:45%; letter-spacing: -1px;"}= Foodsoft.config[:name]
       #nav= render :partial => 'layouts/main_tabnav'
 
-    #ajax_box(style="display:none")
     #main
       #content
         - if flash[:notice]
@@ -34,6 +33,7 @@
         - if yield(:title)
           %h1= yield(:title)
         = yield
+    #ajax_box(style="display:none")
 
     - if flash[:notice]
       = javascript_tag("new Effect.Highlight('flashNotice', {delay:0.8, duration:1});")
