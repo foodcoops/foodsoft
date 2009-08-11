@@ -44,7 +44,7 @@ namespace :foodsoft do
     workgroups = Workgroup.all :conditions => {:weekly_task => true}
     for workgroup in workgroups
       puts "Create weekly tasks for #{workgroup.name}"
-      workgroup.next_weekly_tasks(8)[3..7].each do |date|
+      workgroup.next_weekly_tasks(8)[3..5].each do |date|
         unless workgroup.tasks.exists?({:due_date => date, :weekly => true})
           workgroup.tasks.create(workgroup.task_attributes(date))
         end
