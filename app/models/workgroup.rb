@@ -54,8 +54,8 @@ class Workgroup < Group
     # now generate the Array
     nextTasks = Array.new
     number.times do
-      nextTasks << nextTask
-      nextTask = 1.week.from_now(nextTask).to_date
+      nextTasks << nextTask.to_date
+      nextTask = 1.week.from_now(nextTask)
     end
     return nextTasks
   end
@@ -69,5 +69,5 @@ class Workgroup < Group
       :weekly => true
     }
   end
-
+  
 end

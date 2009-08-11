@@ -52,6 +52,20 @@ namespace :foodsoft do
     end
   end
 
+  desc "Notify workgroup of upcoming weekly task"
+  task :notify_users_of_weekly_task => :environment do
+    for workgroup in Workgroup.all
+      for task in workgroup.tasks.all(:conditions => ["due_date = ?", 4.days.from_now.to_date])
+        unless task.enough_users_assigned?
+          puts "Notify workgroup: #{workgroup.name} for task #{task.name}"
+          for user in workgroup.users.collect { |u| u if u.settings['messages.sendAsEmail'] == "1" && !u.email.blank? }
+            Mailer.deliver_not_enough_users_assigned(task, user)
+          end
+        end
+      end
+    end
+  end
+
   desc "Notify users of finished orders"
   task :notify_order_finished => :environment do
     order = Order.find(ENV["ORDER_ID"])
