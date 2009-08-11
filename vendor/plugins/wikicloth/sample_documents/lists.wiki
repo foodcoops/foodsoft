@@ -1,0 +1,421 @@
+This page deals with creating lists in Mediawiki.
+
+== List basics ==
+
+[[MediaWiki]] offers three types of lists. '''Ordered lists''', '''unordered lists''', and '''definition lists'''. In the following sections, ordered lists are used for examples. Unordered lists would give corresponding results.
+
+{|border="1" width="79%"
+!wikitext!!rendering
+|-
+|
+ * Lists are easy to do:
+ ** start every line
+ * with a star
+ ** more stars mean
+ *** deeper levels
+||
+* Lists are easy to do:
+** start every line
+* with a star
+** more stars mean 
+*** deeper levels
+|-
+|
+ *A newline
+ *in a list  
+ marks the end of the list.
+ Of course
+ *you can
+ *start again.
+|
+*A newline
+*in a list  
+marks the end of the list.
+Of course
+*you can
+*start again.
+|-
+|
+ # Numbered lists are good
+ ## very organized
+ ## easy to follow
+|
+# Numbered lists are good
+## very organized
+## easy to follow
+|-
+|
+ * You can also
+ **break lines
+ **like this
+|
+* You can also
+**break lines
+**like this
+|-
+|
+ ; Definition lists
+ ; item : definition
+ ; semicolon plus term
+ : colon plus definition
+|
+; Definition lists
+; item : definition
+; semicolon plus term
+: colon plus definition
+|-
+|
+ * Or create mixed lists
+ *# and nest them
+ *#* like this
+ *#*; definitions
+ *#*: work:
+ *#*; apple
+ *#*; banana
+ *#*: fruits
+|
+* Or create mixed lists
+*# and nest them
+*#* like this
+*#*; definitions
+*#*: work: 
+*#*; apple
+*#*; banana
+*#*: fruits
+|}{{-}}
+
+== Paragraphs in lists ==
+
+For simplicity, list items in wiki markup cannot be longer than a paragraph. A following blank line will end the list and reset the counter on ordered lists. Separating unordered list items usually has no noticeable effects.
+
+Paragraphs can be forced in lists by using HTML tags. Two line break symbols, <code><nowiki><br><br></nowiki></code>, will create the desired effect. So will enclosing all but the first paragraph with <code><nowiki><p>...</p></nowiki></code>
+
+For a list with items of more than one paragraph long, adding a blank line between items may be necessary to avoid confusion.
+
+*lists
+**ordered lists
+**unordered lists
+***definition lists
+
+==Continuing a list item after a sub-item==
+
+In HTML, a list item may contain several sublists, not necessarily adjacent; thus there may be parts of the list item not only before the first sublist, but also between sublists, and after the last one; however, in wiki-syntax, sublists follow the same rules as sections of a page: the only possible part of the list item not in sublists is before the first sublist.
+
+In the case of an unnumbered first-level list in wikitext code this limitation can be overcome by splitting the list into multiple lists; indented text between the partial lists may visually serve as part of a list item after a sublist; however, this may give, depending on CSS, a blank line before and after each list, in which case, for uniformity, every first-level list item could be made a separate list.
+
+Numbered lists illustrate that what should look like one list may, for the software, consist of multiple lists; unnumbered lists give a corresponding result, except that the problem of restarting with 1 is not applicable.
+
+{| style="border:1px;border-spacing:1px;background-color:black;" cellpadding="5"
+|- style="background-color:white;"
+|
+ <nowiki>
+<ol>
+  <li>list item A1
+    <ol>
+      <li>list item B1</li>
+      <li>list item B2</li>
+    </ol>continuing list item A1
+  </li>
+  <li>list item A2</li>
+</ol></nowiki>
+| <ol>
+  <li>list item A1
+    <ol>
+      <li>list item B1</li>
+      <li>list item B2</li>
+    </ol>continuing list item A1
+  </li>
+  <li>list item A2</li>
+</ol>
+|- style="background-color:#E0E0E0;font-weight:bold;text-align:center;"
+| colspan="2" | vs.
+|- style="background-color:white;"
+|
+ #list item A1
+ ##list item B1
+ ##list item B2
+ #:continuing list item A1
+ #list item A2
+|
+#list item A1
+##list item B1
+##list item B2
+#:continuing list item A1
+#list item A2
+|}
+
+One level deeper, with a sublist item continuing after a sub-sublist, one gets even more blank lines; however, the continuation of the first-level list is not affected:
+<pre>
+#list item A1
+##list item B1
+###list item C1
+##:continuing list item B1
+##list item B2
+#list item A2
+</pre>
+gives
+#list item A1
+##list item B1
+###list item C1
+##:continuing list item B1
+##list item B2
+#list item A2
+
+See also {{tim|List demo}} and [[Help:Section#Subdivisions in general|subdivisions]].
+
+== Changing the list type ==
+
+The list type (which type of marker appears before the list item) can be changed in CSS by setting the [http://www.w3.org/TR/REC-CSS2/generate.html#lists list-style-type] property:
+
+{|border="1" width="79%"
+!wikitext!!rendering
+|-
+|
+ <nowiki>
+<ol style="list-style-type:lower-roman">
+  <li>About the author</li>
+  <li>Foreword to the first edition</li>
+  <li>Foreword to the second edition</li>
+</ol></nowiki>
+|<ol style="list-style-type:lower-roman">
+  <li>About the author</li>
+  <li>Foreword to the first edition</li>
+  <li>Foreword to the second edition</li>
+</ol>
+|-
+|}
+
+==Extra indentation of lists==
+In a numbered list in a large font, some browsers do not show more than two digits, unless extra indentation is applied (if there are multiple columns: for each column). This can be done with CSS:
+ ol { margin-left: 2cm}
+or alternatively, like below.
+
+{|border=1
+!wikitext!!rendering 
+! style="width: 40%" | comments
+|-
+|
+ <nowiki>
+:#abc
+:#def
+:#ghi
+ </nowiki>
+|
+:#abc
+:#def
+:#ghi
+| A list of one or more lines starting with a colon creates a [http://www.w3.org/TR/html4/struct/lists.html#edef-DL definition list] without definition terms, and with the items as definition descriptions, hence indented. However, if the colons are in front of the codes "*" or "#" of an unordered or ordered list, the list is treated as one definition description, so the whole list is indented.
+|-
+|
+ <nowiki>
+<ul>
+  <ol>
+    <li>abc</li>
+    <li>def</li>
+    <li>ghi</li>
+  </ol>
+</ul>
+</nowiki>
+|
+<ul>
+  <ol>
+    <li>abc</li>
+    <li>def</li>
+    <li>ghi</li>
+  </ol>
+</ul>
+| MediaWiki translates an unordered list (ul) without any list items (li) into a div with a <code>style="margin-left: 2em"</code>, causing  indentation of the contents. This is '''the most versatile method''', as it allows starting with a number other than 1, see below.
+
+|-
+|
+ <nowiki>
+<ul>
+#abc
+#def
+#ghi
+</ul>
+</nowiki>
+|
+<ul>
+#abc
+#def
+#ghi
+</ul>
+|Like above, with the content of the "unordered list without any list items", which itself is an ordered list, expressed with # codes. The HTML produced, and hence the rendering, is the same. This is the '''recommended''' method when not starting with a number other than 1.
+
+|}
+
+To demonstrate that all three methods show all digits of 3-digit numbers, see [[m:Help:List demo|List demo]].
+
+==Specifying a starting value==
+Specifying a starting value is only possible with HTML syntax.
+(W3C has deprecated the <code>start</code> and <code>value</code> attributes as used below in HTML 4.01 and XHTML 1.0. But as of 2007, no popular web browsers implement CSS counters, which were to replace these attributes. Wikimedia projects use XHTML Transitional, which contains the deprecated attributes.)
+
+<pre>
+<ol start="9">
+<li>Amsterdam</li>
+<li>Rotterdam</li>
+<li>The Hague</li>
+</ol>
+</pre>
+gives
+<ol start="9">
+<li>Amsterdam</li>
+<li>Rotterdam</li>
+<li>The Hague</li>
+</ol>
+
+Or:
+<pre>
+<ol>
+<li value="9">Amsterdam</li>
+<li value="8">Rotterdam</li>
+<li value="7">The Hague</li>
+</ol>
+</pre>
+gives
+<ol>
+<li value="9">Amsterdam</li>
+<li value="8">Rotterdam</li>
+<li value="7">The Hague</li>
+</ol>
+
+==Comparison with a table==
+Apart from providing automatic numbering, the numbered list also aligns the contents of the items, comparable with using table syntax:
+<pre>
+{|
+|-
+| align=right |  9.||Amsterdam
+|-
+| align=right | 10.||Rotterdam
+|-
+| align=right | 11.||The Hague
+|}
+</pre>
+gives
+{|
+|-
+| align=right |  9.||Amsterdam
+|-
+| align=right | 10.||Rotterdam
+|-
+| align=right | 11.||The Hague
+|}
+
+This non-automatic numbering has the advantage that if a text refers to the numbers, insertion or deletion of an item does not disturb the correspondence.
+
+==Multi-column bulleted list==
+<pre>
+{| 
+| 
+*1
+*2 
+| 
+*3
+*4
+|}
+</pre>
+gives:
+{| 
+| 
+*1
+*2 
+| 
+*3
+*4
+|}
+
+==Multi-column numbered list==
+Specifying a starting value is useful for a numbered list with multiple columns, to avoid restarting from one in each column. As mentioned above, this is only possible with HTML-syntax (for the first column either wiki-syntax or HTML-syntax can be used).
+
+In combination with the extra indentation explained in the previous section:
+<pre>
+{| valign="top"
+|-
+|<ul><ol start="125"><li>a<li>bb<li>ccc</ol></ul>
+|<ul><ol start="128"><li>ddd<li>ee<li>f</ol></ul>
+|}
+</pre>
+
+gives
+
+{| valign="top"
+|-
+|<ul><ol start="125"><li>a<li>bb<li>ccc</ol></ul>
+|<ul><ol start="128"><li>ddd<li>ee<li>f</ol></ul>
+|}
+
+Using {{tim|multi-column numbered list}} the computation of the starting values can be automated, and only the first starting value and the number of items in each column except the last has to be specified. Adding an item to, or removing an item from a column requires adjusting only one number, the number of items in that column, instead of changing the starting numbers for all subsequent columns.
+
+<pre>{{Multi-column numbered list|125|a<li>bb<li>ccc|3|<li>ddd<li>ee<li>f}}</pre>
+
+gives
+
+{{Multi-column numbered list|125|a<li>bb<li>ccc|3|<li>ddd<li>ee<li>f}}
+
+<pre>{{Multi-column numbered list|lst=lower-alpha|125|a<li>bb<li>ccc|3|<li>ddd<li>ee|2|<li>f}}</pre>
+
+gives
+
+{{Multi-column numbered list|lst=lower-alpha|125|a<li>bb<li>ccc|3|<li>ddd<li>ee|2|<li>f}}
+
+<pre>{{Multi-column numbered list|lst=lower-roman|125|a<li>bb<li>ccc|3|<li>ddd<li>ee|2|<li>f}}</pre>
+
+gives
+
+{{Multi-column numbered list|lst=lower-roman|125|a<li>bb<li>ccc|3|<li>ddd<li>ee|2|<li>f}}
+
+<pre>{{Multi-column numbered list|lst=disc|125|a<li>bb<li>ccc|3|<li>ddd<li>ee|2|<li>f}}</pre>
+
+gives
+
+{{Multi-column numbered list|lst=disc|125|a<li>bb<li>ccc|3|<li>ddd<li>ee|2|<li>f}}
+
+Note that the starting values of each column (125, +3, +2) have no effect when the disc list type is used.
+
+==Streamlined style or horizontal style==
+It is also possible to present short lists using very basic formatting, such as:
+
+ <nowiki>''Title of list:''</nowiki> example 1, example 2, example 3
+
+''Title of list:'' example 1, example 2, example 3
+
+This style requires less space on the page, and is preferred if there are only a few entries in the list, it can be read easily, and a direct edit point is not required. The list items should start with a lowercase letter unless they are proper nouns.
+
+==Tables==
+A one-column table is very similar to a list, but it allows sorting. If the wikitext itself is already sorted with the same sortkey, this advantage does not apply.
+A multiple-column table allows sorting on any column.
+
+See also .
+
+==Changing unordered lists to ordered ones==
+With the CSS
+ ul { list-style: decimal }
+unordered lists are changed to ordered ones. This applies (as far as the CSS selector does not restrict this) to all ul-lists in the HTML source code:
+*those produced with *
+*those with <nowiki><ul></nowiki> in the wikitext
+*those produced by the system
+
+Since each special page, like other pages, has a class based on the pagename, one can separately specify for each type whether the lists should be ordered, see [[Help:User contributions#User styles]] and [[Help:What links here#User styles]].
+
+However, it does not seem possible to make all page history lists ordered (unless one makes ''all'' lists ordered), because the class name is based on the page for which the history is viewed. 
+
+==See also==
+*[[mw:Extension:Sort2]]: creates a list with list code only at the start and end, not per item; allows easy change of list type; sorts list
+
+==Wikipedia-specific help==
+
+* [[Wikipedia:Lists]] - For suggested styles of lists.''
+* {{tn|·}} and {{tn|•}} - Dots and bullets for horizontal link lists, such as in [[Template:Navbox|navboxes]], which look like lists, but do not use HTML list mark-up.
+**{{tl|flatlist}} - for a more semantically-correct and accessible way of marking up such lists.
+* [[Wikipedia:Line break handling]] - Covers among other things how to properly handle the line wrapping in horizontal link lists.
+
+[[Category:Wikipedia help]]
+
+[[ar:مساعدة:قوائم]]
+[[de:Hilfe:Listen]]
+[[dsb:Pomoc:Lisćina]]
+[[es:Ayuda:Listas]]
+[[hsb:Pomoc:Lisćina]]
+[[it:Aiuto:Liste]]
+

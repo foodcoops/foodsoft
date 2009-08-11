@@ -1,0 +1,7 @@
+<!-- should convert tags to normal text -->
+<script type="text/javascript">
+  alert('boo');
+</script>
+
+<!-- should drop the onclick attribute -->
+<a href="http://www.google.com/" onclick="alert('hello world');">test</a>

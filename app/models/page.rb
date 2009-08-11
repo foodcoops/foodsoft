@@ -30,7 +30,7 @@ class Page < ActiveRecord::Base
   after_update :create_redirect
 
   def self.permalink(title)
-    title.gsub(" ", "_")
+    title.gsub(/[\/\.,;@\s]/, "_").gsub(/[\"\']/, "")
   end
 
   def set_permalink

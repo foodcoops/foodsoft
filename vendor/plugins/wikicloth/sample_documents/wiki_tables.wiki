@@ -1,0 +1,410 @@
+'''Tables''' may be authored in wiki pages using either XHTML table elements directly, or using wikicode formatting to define the table. XHTML table elements and their use are well described on various web pages and will not be discussed here. The benefit of wikicode is that the table is constructed of character symbols which tend to make it easier to perceive the table structure in the article editing view compared to XHTML table elements.
+
+As a general rule, it is best to avoid using a table unless you need one. Table markup often complicates page editing.
+
+== Wiki table markup summary ==
+{|cellpadding="5" cellspacing="0" border="1" width="60%"
+|
+ <nowiki>{|</nowiki>
+| '''table start'''
+|-
+|
+ <nowiki>|+</nowiki>
+| table '''caption,''' ''optional;'' only between '''table start''' and first '''table row'''
+|-
+|
+ <nowiki>|-</nowiki>
+| '''table row,''' ''optional on first row'' -- wiki engine assumes the first row
+|-
+|
+ <nowiki>!</nowiki> 
+| '''table header''' cell, ''optional.'' Consecutive '''table header''' cells may be added on same line separated by double marks (<code>!!</code>) or start on new lines, each with its own single mark (<code>!</code>).
+|- 
+|
+ <nowiki>|</nowiki>
+| '''table data''' cell, ''required!'' Consecutive '''table data''' cells may be added on same line separated by double marks (<code><nowiki>||</nowiki></code>) or start on new lines, each with its own single mark (<code><nowiki>|</nowiki></code>).
+|-
+|
+ <nowiki>|}</nowiki>
+| '''table end''' 
+|}
+*The above marks must '''start on a new line''' except the double <code>||</code> and <code>!!</code> for optionally adding consecutive cells to a line. However, blank spaces at the beginning of a line are ignored.
+*'''XHTML attributes.''' Each mark, except table end, optionally accepts one or more XHTML attributes. Attributes must be on the same line as the mark. Separate attributes from each other with a single space. 
+**Cells and caption (<code>|</code> or <code>||</code>, <code>!</code> or <code>!!</code>, and <code>|+</code>) hold content. So separate any attributes from content with a single pipe (<code>|</code>). Cell content may follow on same line or on following lines.
+**Table and row marks (<code>{|</code> and <code>|-</code>) do not directly hold content. Do ''not'' add pipe (<code>|</code>) after their optional attributes. If you erroneously add a pipe after attributes for the table mark or row mark the parser will delete it ''and'' your final attribute if it was touching the erroneous pipe!
+*'''Content''' may (a) follow its cell mark on the same line after any optional XHTML attributes or (b) on lines below the cell mark. Content that uses wiki markup that itself needs to start on a new line, such as lists, headings, or nested tables, must be on its own new line.
+
+==Basics==
+The following table lacks borders and good spacing but shows the simplest wiki markup table structure.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre>
+{|
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+</pre>
+|
+{|
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+|}
+
+The cells in the same row can be listed on one line separated by <code>||</code>.
+
+Extra spaces within cells in the wiki markup, as in the wiki markup below, do not affect the actual table rendering.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre>
+{|
+|  Orange    ||   Apple   ||   more
+|-
+|   Bread    ||   Pie     ||   more
+|-
+|   Butter   || Ice cream ||  and more
+|}
+</pre>
+|
+{|
+|  Orange    ||   Apple   ||   more
+|-
+|   Bread    ||   Pie     ||   more
+|-
+|   Butter   || Ice cream ||  and more
+|}
+|}
+
+=== Table headers ===
+Table headers can be created by using "<code>!</code>" instead of "<code>|</code>". Headers usually show up bold and centered by default.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre>
+{|
+! Item
+! Amount
+! Cost
+|-
+|Orange
+|10
+|7.00
+|-
+|Bread
+|4
+|3.00
+|-
+|Butter
+|1
+|5.00
+|-
+!Total
+|
+|15.00
+|}
+</pre>
+|
+{|
+! Item
+! Amount
+! Cost
+|-
+|Orange
+|10
+|7.00
+|-
+|Bread
+|4
+|3.00
+|-
+|Butter
+|1
+|5.00
+|-
+!Total
+|
+|15.00
+|}
+|}
+
+===Caption===
+A '''table caption''' can be added to the top of any table as follows.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre>
+{|
+|+Food complements
+|-
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+</pre>
+|
+{|
+|+ Food complements
+|-
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+|}
+
+== XHTML attributes ==
+You can add XHTML attributes to tables. For the authoriative source on these, see [http://www.w3.org/TR/REC-html40/struct/tables.html the W3C's HTML 4.01 Specification page on tables].
+
+=== Attributes on tables ===
+Placing attributes after the table start tag (<code>{|</code>) applies attributes to the entire table.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre>
+{| border="1"
+|Orange
+|Apple
+|12,333.00
+|-
+|Bread
+|Pie
+|500.00
+|-
+|Butter
+|Ice cream
+|1.00
+|}
+</pre>
+|
+{| border="1"
+|Orange
+|Apple
+|12,333.00
+|-
+|Bread
+|Pie
+|500.00
+|-
+|Butter
+|Ice cream
+|1.00
+|}
+|}
+
+=== Attributes on cells ===
+You can put attributes on individual '''cells'''. For example, numbers may look better aligned right.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre>
+{| border="1"
+|Orange
+|Apple
+|align="right" | 12,333.00
+|-
+|Bread
+|Pie
+|align="right" | 500.00
+|-
+|Butter
+|Ice cream
+|align="right" | 1.00
+|}
+</pre>
+|
+{| border="1"
+|Orange
+|Apple
+|align="right"|12,333.00
+|-
+|Bread
+|Pie
+|align="right"|500.00
+|-
+|Butter
+|Ice cream
+|align="right"|1.00
+|}
+|}
+
+You can also use '''cell''' attributes when you are listing multiple '''cells''' on a single line. Note that the '''cells''' are separated by <code>||</code>, and within each '''cell''' the attribute(s) and value are separated by <code>|</code>.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre>
+{| border="1"
+| Orange || Apple     || align="right" | 12,333.00
+|-
+| Bread  || Pie       || align="right" | 500.00
+|-
+| Butter || Ice cream || align="right" | 1.00
+|}
+</pre>
+|
+{| border="1"
+| Orange || Apple     || align="right" | 12,333.00
+|-
+| Bread  || Pie       || align="right" | 500.00
+|-
+| Butter || Ice cream || align="right" | 1.00
+|}
+|}
+
+===Attributes on rows===
+You can put attributes on individual '''rows''', too.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre>
+{| border="1"
+|Orange
+|Apple
+|align="right"|12,333.00
+|-
+|Bread
+|Pie
+|align="right"|500.00
+|- style="font-style:italic; color:green;"
+|Butter
+|Ice cream
+|align="right"|1.00
+|}
+</pre>
+|
+{| border="1"
+|Orange
+|Apple
+|align="right"|12,333.00
+|-
+|Bread
+|Pie
+|align="right"|500.00
+|- style="font-style:italic; color:green;"
+|Butter
+|Ice cream
+|align="right"|1.00
+|}
+|}
+
+===With HTML attributes and CSS styles===
+CSS style attributes can be added with or without other HTML attributes.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre style="white-space:-moz-pre-wrap; white-space:-pre-wrap; white-space:-o-pre-wrap; white-space:pre-wrap; word-wrap:break-word; word-break:break-all;">
+{| style="color:green; background-color:#ffffcc;" cellpadding="20" cellspacing="0" border="1"
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+</pre>
+|
+{| style="color:green; background-color:#ffffcc;" cellpadding="20" cellspacing="0" border="1"
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+|}
+
+'''Attributes''' can be added to the caption and headers as follows.
+
+{| cellspacing="0" border="1"
+!style="width:50%"|You type
+!style="width:50%"|You get
+|-
+|
+<pre style="white-space:-moz-pre-wrap; white-space:-pre-wrap; white-space:-o-pre-wrap; white-space:pre-wrap; word-wrap:break-word; word-break:break-all;">
+{| border="1" cellpadding="20" cellspacing="0"
+|+ align="bottom" style="color:#e76700;" |''Food complements''
+|-
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+</pre>
+|
+{| border="1" cellpadding="20" cellspacing="0"
+|+ align="bottom" style="color:#e76700;" |''Food complements''
+|-
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+|}
+
+==Caveats==
+===Negative numbers===
+If you start a cell on a new line with a negative number with a minus sign (or a parameter that evaluates to a negative number), your table can get broken, because the characters <code>|-</code> will be parsed as the wiki markup for table row, not table cell. To avoid this, insert a space before the value (<code>| -6</code>) or use in-line cell markup (<code>|| -6</code>).
+===CSS vs Attributes===
+Table borders specified through CSS rather then the border attribute will render incorrectly in a small subset of text browsers.
+
