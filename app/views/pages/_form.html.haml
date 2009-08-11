@@ -7,17 +7,16 @@
     %b Schnelle Formatierungshilfe
     %br/
     :plain
-      [[interner Link]]<br />
-      "externer Link":http://addresse.net<br />
-      h1. Erste Überschrift<br />
-      h2. Unterüberschrift<br />
-      _kursiv_<br />
-      *Fett*<br />
-      # erster Listenpunkt<br />
-      # zweiter Listenpunkt<br />
-      ## Unterpunkt<br />
-  %p
-    = link_to "Tabellen, Styling, etc..", "http://hobix.com/textile/quick.html", :target => '_blank'
+      [[Foodsoft Wiki Seite]]<br />
+      [http://addresse.net Externe Seite]<br />
+      ==Erste Überschrift==<br />
+      ===Unterüberschrift===<br />
+      ''kursiv''<br />
+      '''Fett'''<br />
+      * Erster Listenpunkt<br />
+      * Zweiter Listenpunkt<br />
+      ** Unterpunkt<br />
+    = link_to "Tabellen", "http://www.mediawiki.org/wiki/Help:Tables", :target => '_blank'
 
 - form_for @page do |f|
   = f.error_messages
