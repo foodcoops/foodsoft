@@ -42,6 +42,7 @@ class Article < ActiveRecord::Base
   validates_length_of :unit, :in => 2..15
   validates_numericality_of :price, :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
+  validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at]
   
   # Callbacks
   before_save :update_price_history
