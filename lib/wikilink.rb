@@ -1,7 +1,11 @@
 class Wikilink < WikiCloth::WikiLinkHandler
 
-  def url_for(page)
-    "/wiki/#{page}"
+  def url_for(page, parent = nil)
+    if parent
+      "/pages/new?title=#{page}&parent=#{parent}"
+    else
+      "/wiki/#{page}"
+    end
   end
 
   def link_attributes_for(page)
@@ -9,7 +13,7 @@ class Wikilink < WikiCloth::WikiLinkHandler
     if Page.exists?(:permalink => permalink)
      { :href => url_for(permalink) }
     else
-     { :href => url_for(page), :class =>  "new_wiki_link"}
+     { :href => url_for(page, params[:referer]), :class =>  "new_wiki_link"}
     end
   end
 

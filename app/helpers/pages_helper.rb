@@ -9,10 +9,13 @@ module PagesHelper
 #    end
 #  end
 
-  def wikified_body(body)
-    WikiCloth.new({:data => body, :link_handler => Wikilink.new}).to_html
+  def wikified_body(page)
+    WikiCloth.new({:data => page.body, :link_handler => Wikilink.new, :params => {:referer => page.title}}).to_html
   end
 
+  def link_to_wikipage(page)
+    link_to page.title, "/wiki/#{page.title}"
+  end
 #  def generate_toc(body)
 #    toc = ""
 #    body.gsub(/^([=]{1,6})\s*(.*?)\s*(\1)/) do

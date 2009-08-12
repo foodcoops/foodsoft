@@ -19,6 +19,7 @@ class Page < ActiveRecord::Base
 
   acts_as_versioned :version_column => :lock_version
   self.non_versioned_columns += ['permalink', 'created_at', 'title']
+  acts_as_tree :order => "title"
 
   attr_accessor :old_title # Save title to create redirect page when editing title
 

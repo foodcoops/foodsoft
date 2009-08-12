@@ -7,6 +7,7 @@ class CreatePages < ActiveRecord::Migration
       t.integer :lock_version, :default => 0
       t.integer :updated_by
       t.integer :redirect
+      t.integer :parent_id
 
       t.timestamps
     end

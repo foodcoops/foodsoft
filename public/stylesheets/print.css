@@ -448,6 +448,18 @@ a.new_wiki_link {
 #toc {
   float: right; }
 
+#breadcrump {
+  font-size: 0.5em; }
+  #breadcrump a {
+    color: #ed0606; }
+
+#sidebar {
+  float: right;
+  margin-top: -2%;
+  width: 20%; }
+  #sidebar #page-versions {
+    text-align: right; }
+
 #wiki_content h1, #wiki_content h2, #wiki_content h3, #wiki_content h4, #wiki_content h5 {
   color: black; }
 #wiki_content span.editsection {

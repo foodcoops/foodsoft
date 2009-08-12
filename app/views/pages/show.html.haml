@@ -1,14 +1,29 @@
-- title @page.title
+- title @page.title, false
 
-#page-versions{:style => "float:right;margin-top:-2%;text-align:right;"}
-  = link_to "Bearbeiten", edit_page_path(@page)
-  = link_to_function "Versionen (#{@page.versions.count})", "Element.toggle('versions')"
-  #versions{:style => "display:none"}
-    %ul
-      - for version in @page.versions.reverse
-        %li
-          = link_to I18n.l(version.updated_at, :format => "%d.%m.%y %H:%M"), version_page_path(@page, :version => version.lock_version)
-          = "(#{User.find(version.updated_by).nick})"
+%h1
+  %span#breadcrump
+    - for page in @page.ancestors.reverse
+      = link_to_wikipage(page)
+      &gt;&gt;
+  = @page.title
+
+#sidebar
+  #page-versions
+    = link_to "Bearbeiten", edit_page_path(@page)
+    = link_to_function "Versionen (#{@page.versions.count})", "Element.toggle('versions')"
+    #versions{:style => "display:none"}
+      %ul
+        - for version in @page.versions.reverse
+          %li
+            = link_to I18n.l(version.updated_at, :format => "%d.%m.%y %H:%M"), version_page_path(@page, :version => version.lock_version)
+            = "(#{User.find(version.updated_by).nick})"
+
+  - unless @page.children.empty?
+    #children
+      %h2 Unterseiten
+      %ul
+        - for page in @page.children
+          %li= link_to_wikipage(page)
 
 = render :partial => 'body'
 

@@ -12,7 +12,7 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find_by_permalink(params[:permalink])
-
+    
     if @page.nil?
       redirect_to new_page_path(:title => params[:permalink])
     elsif @page.redirect?
@@ -24,6 +24,7 @@ class PagesController < ApplicationController
   def new
     @page = Page.new
     @page.title = params[:title].gsub("_", " ") if params[:title]
+    @page.parent = Page.find_by_permalink(params[:parent]) if params[:parent]
 
     respond_to do |format|
       format.html # new.html.erb

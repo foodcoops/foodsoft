@@ -21,8 +21,9 @@
 - form_for @page do |f|
   = f.error_messages
   = f.hidden_field :lock_version
+  = f.hidden_field :parent_id
   %p
-    %b Title
+    %b Titel
     %br/
     = f.text_field :title
   %p
