@@ -1,4 +1,4 @@
-- title "Lagerübersicht"
+- title "Lagerübersicht: #{StockArticle.available.count} Artikel im Lager"
 
 %div{:style => "padding:0 0 0.5em 0.7em;margin-bottom:2em"}
   %span{:style => "float:left"}
@@ -56,4 +56,7 @@
     %p
       Aktueller Lagerwert:
       = number_to_currency StockArticle.stock_value
+      |
+      Artikelanzahl:
+      = StockArticle.available.count
 
