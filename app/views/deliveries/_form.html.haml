@@ -1,4 +1,4 @@
-.left_column
+.left_column(style="width:55%")
   - form_for([@supplier,@delivery]) do |f|
     .box_title
       %h2 Lieferung anlegen
@@ -12,10 +12,10 @@
             = stock_change_form.select :stock_article_id, stock_articles_for_select(@supplier)
             Menge
             = stock_change_form.text_field :quantity, :size => 5, :autocomplete => 'off'
-            Entfernen
-            = stock_change_form.check_box :_delete
+            = stock_change_form.hidden_field :_delete
+            = link_to_function "Artikel aus Lieferung entfernen", "$(this).previous('input').value = 1; $(this).up('p').hide();"
       %p
-        = remote_link_to "Lagerartikel hinzufügen", :url => {:action => 'add_stock_change', :supplier_id => @supplier.id}
+        = remote_link_to "Lagerartikel der Lieferung hinzufügen", :url => {:action => 'add_stock_change', :supplier_id => @supplier.id}
       %hr/
       %p
         %b= f.label :delivered_on, "Lieferdatum"
@@ -23,11 +23,13 @@
       %p
         %b= f.label :note, "Notiz"
         %br/
-        = f.text_area :note, :size => "35x8"
+        = f.text_area :note, :size => "35x4"
       %p
         = f.submit "Lieferung speichern"
+        oder
+        = link_to "Abbrechen", supplier_deliveries_path(@supplier)
 
-.right_column{:style => "width:35em;"}
+.right_column{:style => "width:35%;"}
   .box_title
     %h2 Neuen Lagerartikel anlegen
   .column_content

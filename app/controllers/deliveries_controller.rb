@@ -22,7 +22,6 @@ class DeliveriesController < ApplicationController
 
   def new
     @delivery = @supplier.deliveries.build
-    @delivery.stock_changes.build(:stock_article => @supplier.stock_articles.first)
     
     respond_to do |format|
       format.html # new.html.erb
@@ -35,7 +34,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.save
-        flash[:notice] = 'Delivery was successfully created.'
+        flash[:notice] = 'Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!'
         format.html { redirect_to([@supplier,@delivery]) }
         format.xml  { render :xml => @delivery, :status => :created, :location => @delivery }
       else
@@ -54,7 +53,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.update_attributes(params[:delivery])
-        flash[:notice] = 'Delivery was successfully updated.'
+        flash[:notice] = 'Lieferung wurde aktualisiert.'
         format.html { redirect_to([@supplier,@delivery]) }
         format.xml  { head :ok }
       else
@@ -68,6 +67,7 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find(params[:id])
     @delivery.destroy
 
+    flash[:notice] = "Lieferung wurde gelöscht."
     respond_to do |format|
       format.html { redirect_to(supplier_deliveries_url(@supplier)) }
       format.xml  { head :ok }
