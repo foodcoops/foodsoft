@@ -5,10 +5,7 @@
     .column_content
       = f.error_messages
       = f.hidden_field :supplier_id
-      %p
-        %b= f.label :delivered_on
-        = f.date_select :delivered_on
-      %h2 Lagerartikel des Lieferanten
+      %b Lagerartikel des Lieferanten
       #stock_changes
         - f.fields_for :stock_changes do |stock_change_form|
           %p
@@ -19,6 +16,14 @@
             = stock_change_form.check_box :_delete
       %p
         = remote_link_to "Lagerartikel hinzufügen", :url => {:action => 'add_stock_change', :supplier_id => @supplier.id}
+      %hr/
+      %p
+        %b= f.label :delivered_on, "Lieferdatum"
+        = f.date_select :delivered_on
+      %p
+        %b= f.label :note, "Notiz"
+        %br/
+        = f.text_area :note, :size => "35x8"
       %p
         = f.submit "Lieferung speichern"
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090731132547) do
+ActiveRecord::Schema.define(:version => 20090812110010) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20090731132547) do
     t.integer  "supplier_id"
     t.date     "delivered_on"
     t.datetime "created_at"
+    t.text     "note"
   end
 
   create_table "financial_transactions", :force => true do |t|
@@ -261,6 +262,7 @@ ActiveRecord::Schema.define(:version => 20090731132547) do
     t.datetime "created_on",                        :null => false
     t.datetime "updated_on",                        :null => false
     t.integer  "required_users", :default => 1
+    t.boolean  "weekly"
   end
 
   add_index "tasks", ["due_date"], :name => "index_tasks_on_due_date"

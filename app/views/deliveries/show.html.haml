@@ -13,6 +13,9 @@
   %p
     %b bereinigter Rechnungsbetrag:
     = number_to_currency @delivery.invoice.net_amount
+%p
+  %b Notiz:
+  = simple_format @delivery.note
 
 %h2 Artikel
 %table.list{:style => "width:30em"}

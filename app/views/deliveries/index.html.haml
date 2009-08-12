@@ -5,6 +5,7 @@
     %tr
       %th Geliefert am
       %th Rechnungsbetrag
+      %th Notiz
       %th
       %th
       %th
@@ -13,6 +14,7 @@
       %tr
         %td=h delivery.delivered_on
         %td= link_to_invoice(delivery)
+        %td= truncate delivery.note
         %td= link_to 'Anzeigen', [@supplier, delivery]
         %td= link_to 'Bearbeiten', edit_supplier_delivery_path(@supplier,delivery)
         %td= link_to 'Löschen', [@supplier,delivery], :confirm => 'Are you sure?', :method => :delete
