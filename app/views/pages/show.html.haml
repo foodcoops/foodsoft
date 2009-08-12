@@ -31,6 +31,6 @@
 %p
   = link_to "Seite bearbeiten", edit_page_path(@page)
   |
-  = link_to "Seite löschen", @page, :method => :delete, :confirm => "Achtung, möchtest Du wirklich die Wikiseite löschen?"
+  = link_to "Seite löschen", @page, :method => :delete, :confirm => "Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?"
   |
   = "Zuletzt bearbeitet am #{format_datetime @page.updated_at} (#{@page.user.nick})"
