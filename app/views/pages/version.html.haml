@@ -1,6 +1,6 @@
 - title @page.title 
 
-#page-versions{:style => "float:right"}
+#sidebar
   %b= "Version vom #{format_datetime @version.updated_at}"
   %ul
     %li= "Autor: #{User.find(@version.updated_by).nick}"

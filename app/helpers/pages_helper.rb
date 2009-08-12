@@ -9,8 +9,8 @@ module PagesHelper
 #    end
 #  end
 
-  def wikified_body(page)
-    WikiCloth.new({:data => page.body+"\n", :link_handler => Wikilink.new, :params => {:referer => page.title}}).to_html
+  def wikified_body(body, title = nil)
+    WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html
   end
 
   def link_to_wikipage(page)
