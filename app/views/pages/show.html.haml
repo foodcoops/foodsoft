@@ -19,7 +19,7 @@
             = "(#{User.find(version.updated_by).nick})"
 
   - unless @page.children.empty?
-    #children
+    #subpages
       %h2 Unterseiten
       %ul
         - for page in @page.children

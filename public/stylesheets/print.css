@@ -455,10 +455,12 @@ a.new_wiki_link {
 
 #sidebar {
   float: right;
-  margin-top: -2%;
   width: 20%; }
   #sidebar #page-versions {
+    margin-top: -4em;
     text-align: right; }
+  #sidebar #subpages {
+    margin-top: 2em; }
 
 #wiki_content h1, #wiki_content h2, #wiki_content h3, #wiki_content h4, #wiki_content h5 {
   color: black; }
