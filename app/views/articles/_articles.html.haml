@@ -42,15 +42,11 @@
             = check_box_tag :checkall, 1, false, :onclick => 'checkUncheckAll(this)'
             %select{:name => "selected_action"}
               %option{:value => '', :selected => 'selected'} Aktion wählen ...
-              %option{:value => "destroy", :onclick => "if (confirm('Willst Du wirklich alle gewählten Artikel löschen?')) { formSubmit(); }; return false;"} Artikel löschen
-              %option{:value => "setNotAvailable", :onclick => 'formSubmit();'} Artikel sind nicht mehr verfügbar
-              %option{:value => "setAvailable", :onclick => 'formSubmit();'} Artikel sind verfügbar
+              %option{:value => "destroy", :onclick => "if (confirm('Willst Du wirklich alle gewählten Artikel löschen?')) { this.up('form').submit(); }; return false;"} Artikel löschen
+              %option{:value => "setNotAvailable", :onclick => "this.up('form').submit()"} Artikel sind nicht mehr verfügbar
+              %option{:value => "setAvailable", :onclick => "this.up('form').submit()"} Artikel sind verfügbar
               
             = hidden_field_tag 'supplier_id', @supplier.id
 
 %p= pagination_links_remote @articles, :params => {:sort => params[:sort]}
-
-:javascript
-  function formSubmit() {
-    $("articlesInListForm").submit()
-  }
+= hidden_field_tag :per_page, params[:per_page]

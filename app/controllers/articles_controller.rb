@@ -195,11 +195,11 @@ class ArticlesController < ApplicationController
       flash[:error] = 'Keine Aktion ausgewählt!'
     end
     # action succeded
-    redirect_to supplier_articles_path(@supplier)
+    redirect_to supplier_articles_path(@supplier, :per_page => params[:per_page])
       
   rescue => e
     flash[:error] = 'Ein Fehler ist aufgetreten: ' + e
-    redirect_to supplier_articles_path(@supplier)
+    redirect_to supplier_articles_path(@supplier, :per_page => params[:per_page])
   end
  
   # lets start with parsing articles from uploaded file, yeah
