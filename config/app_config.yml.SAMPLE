@@ -1,6 +1,10 @@
 # Foodsoft configuration
 
 development: &defaults
+  # If you wanna serve more than one foodcoop with one installation
+  # Don't forget to setup databases for each foodcoop. See also MULTI_COOP_INSTALL
+  multi_coop_install: false
+
   # name of this foodcoop
   name: FC Test
   # foodcoop contact information (used for FAX messages)

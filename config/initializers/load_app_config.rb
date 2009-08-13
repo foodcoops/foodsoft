@@ -13,10 +13,12 @@ module Foodsoft
   end
 
   def config(rails_env = @@env)
+    raise "No config for this environment (or subdomain) available!" if @@configs[rails_env].nil?
     @@configs[rails_env].symbolize_keys
   end
 
   def database(rails_env = @@env)
+    raise "No database for this environment (or subdomain) available!" if @@databases[rails_env].nil?
     @@databases[rails_env].symbolize_keys
   end
 

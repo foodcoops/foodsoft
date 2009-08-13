@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  # If you wanna run multiple foodcoops on one installation uncomment next line.
-  #before_filter :select_foodcoop
-  before_filter :authenticate, :store_controller
+  before_filter :select_foodcoop, :authenticate, :store_controller
   after_filter  :remove_controller
   
   # sends a mail, when an error occurs
@@ -140,11 +138,13 @@ class ApplicationController < ActionController::Base
     # It uses the subdomain to select the appropriate section in the config files
     # Use this method as a before filter (first filter!) in ApplicationController
     def select_foodcoop
-      # Get subdomain
-      subdomain = request.subdomains.first
-      # Set Config
-      Foodsoft.env = subdomain
-      # Set database-connection
-      ActiveRecord::Base.establish_connection(Foodsoft.database(subdomain))
+      if Foodsoft.config[:multi_coop_install]
+        # Get subdomain
+        subdomain = request.subdomains.first
+        # Set Config
+        Foodsoft.env = subdomain
+        # Set database-connection
+        ActiveRecord::Base.establish_connection(Foodsoft.database(subdomain))
+      end
     end
 end
