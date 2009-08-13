@@ -112,7 +112,7 @@ class ApplicationController < ActionController::Base
     def authenticate_membership_or_admin
       @group = Group.find(params[:id])
       unless @group.member?(@current_user) or @current_user.role_admin?
-        flash[:error] = ERROR_NO_GROUP_MEMBER
+        flash[:error] = "Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!"
         if request.xml_http_request?
           render(:update) {|page| page.redirect_to root_path }
         else
