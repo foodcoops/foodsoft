@@ -58,8 +58,10 @@ namespace :foodsoft do
       for task in workgroup.tasks.all(:conditions => ["due_date = ?", 7.days.from_now.to_date])
         unless task.enough_users_assigned?
           puts "Notify workgroup: #{workgroup.name} for task #{task.name}"
-          for user in workgroup.users.collect { |u| u if u.settings['messages.sendAsEmail'] == "1" && !u.email.blank? }
-            Mailer.deliver_not_enough_users_assigned(task, user)
+          for user in workgroup.users
+            if user.settings['messages.sendAsEmail'] == "1" && !user.email.blank?
+              Mailer.deliver_not_enough_users_assigned(task, user)
+            end
           end
         end
       end
