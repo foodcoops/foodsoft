@@ -1,0 +1,55 @@
+<!-- TEST
+
+-->----
+
+
+{{ date }}
+
+<ref>test</ref>
+
+<ref name="test">another reference</ref>
+
+<ref name="test" />
+
+<references />
+
+== TEST ==
+
+---hello world---
+
+_hello world_
+
+{|
+|+ Hello World
+| ABBA
+| BANK
+|-
+| CAT
+| DOG
+|}
+
+{| style="foo||"
+! x !! 1 !! 2 !! 3
+|-
+! 1
+| style="boo" | 1 || 2 || 3
+|- style="blah"
+! 2
+| 2 || 4 || 6
+|-
+! 3
+| 3 || [ http://www.google.com/ GOOGLE ] || 9
+|-
+! 4
+| 4 || 8 || 12
+|-
+! 5
+| 5 || 10 || 15
+|}
+
+''whats up foo'' or '''maybe''' you just want some of '''''this'''''
+[ http://www.youtube.com/ {{PAGENAME}} ]
+
+<nowiki>hello {{ BOO }} world</nowiki>
+
+{{#if: {{PAGENAME}} | sucka foo | {{ BLA |1=foo|bla}} }}

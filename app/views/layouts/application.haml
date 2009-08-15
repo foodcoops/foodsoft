@@ -30,7 +30,7 @@
         - if flash[:error]
           %h3.error#flashError= flash[:error]
         #loader{:style => "display:none;"}= image_tag("loader.gif", :border => 0)
-        - if yield(:title)
+        - if show_title?
           %h1= yield(:title)
         = yield
     #ajax_box(style="display:none")

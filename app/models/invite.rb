@@ -2,11 +2,11 @@
 #
 # Table name: invites
 #
-#  id         :integer(4)      not null, primary key
+#  id         :integer         not null, primary key
 #  token      :string(255)     default(""), not null
 #  expires_at :datetime        not null
-#  group_id   :integer(4)      default(0), not null
-#  user_id    :integer(4)      default(0), not null
+#  group_id   :integer         default(0), not null
+#  user_id    :integer         default(0), not null
 #  email      :string(255)     default(""), not null
 #
 

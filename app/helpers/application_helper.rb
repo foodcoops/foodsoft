@@ -103,8 +103,13 @@ module ApplicationHelper
   end
   
   # to set a title for both the h1-tag and the title in the header
-  def title(page_title)
-    content_for(:title) { page_title }
+  def title(page_title, show_title = true)
+    @content_for_title = page_title.to_s
+    @show_title = show_title
+  end
+
+  def show_title?
+    @show_title
   end
 
   def tab_is_active?(tab)

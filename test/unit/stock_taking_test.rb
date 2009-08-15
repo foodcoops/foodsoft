@@ -2,7 +2,7 @@
 #
 # Table name: stock_takings
 #
-#  id         :integer(4)      not null, primary key
+#  id         :integer         not null, primary key
 #  date       :date
 #  note       :text
 #  created_at :datetime

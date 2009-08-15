@@ -2,10 +2,10 @@
 #
 # Table name: group_order_article_quantities
 #
-#  id                     :integer(4)      not null, primary key
-#  group_order_article_id :integer(4)      default(0), not null
-#  quantity               :integer(4)      default(0)
-#  tolerance              :integer(4)      default(0)
+#  id                     :integer         not null, primary key
+#  group_order_article_id :integer         default(0), not null
+#  quantity               :integer         default(0)
+#  tolerance              :integer         default(0)
 #  created_on             :datetime        not null
 #
 

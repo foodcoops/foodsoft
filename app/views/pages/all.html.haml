@@ -1,0 +1,12 @@
+- title "Alle Wikiseiten"
+
+%p= link_to "Neue Seite anlegen", new_page_path
+
+%table
+  %tr
+    %th Titel
+    %th zuletzt aktualisiert
+  - for page in @pages
+    %tr
+      %td= link_to page.title, wiki_page_path(page.permalink)
+      %td= format_date page.updated_at

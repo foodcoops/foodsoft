@@ -1,0 +1,205 @@
+<div align="center">
+{{WP help pages (header bar)}}
+<!--COMMENT MARKUP. Displays:Edit mode only.-->
+{|align="center" style="width:100%; border:2px #a3b1bf solid; background:#f5faff; text-align:left;"
+|colspan="3" align="center" style="background:#cee0f2; text-align:center;" |{{shortcut|WP:CHEAT}}
+<h2 style="margin:.5em; margin-top:.1em; margin-bottom:.1em; border-bottom:0; font-weight:bold;">Wikipedia Cheatsheet</h2>
+<h4>For more advanced details, see [[Wikipedia:How to edit a page|How to edit a page]]</h4>
+|-<!--COLUMN HEADINGS-->
+| width="25%" style="background:#cee0f2; padding:0.3em; text-align:center;"|'''Description'''
+| style="background:#cee0f2; padding:0.3em; text-align:center;"|'''You type''' 
+| width="25%" style="background:#cee0f2; padding:0.3em; text-align:center;"|'''You get'''
+|-<!--1ST ROW 1ST COLUMN-->
+|[[Wikipedia:How_to_edit_a_page#Character_formatting|Italic text]]{{Anchor|Italic text}}
+|<!--2ND COLUMN-->
+<tt><nowiki>''italic''</nowiki></tt>
+|<!--3RD COLUMN-->
+''italic''
+|-<!--HORIZONTAL LINE-->
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-<!--2ND ROW 1ST COLUMN-->
+|[[Wikipedia:How_to_edit_a_page#Character_formatting|Bold text]]{{Anchor|Bold text}}
+|
+<tt><nowiki>'''bold'''</nowiki></tt>
+|
+'''bold'''
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|[[Wikipedia:How_to_edit_a_page#Character_formatting|Bold and italic]]{{Anchor|bold and italic}}
+|
+<tt><nowiki>'''''bold & italic'''''</nowiki></tt>
+|
+'''''bold & italic'''''
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+||[[Wikipedia:How_to_edit_a_page#Links_and_URLs|Internal link]]{{Anchor|Internal link}}<br />
+<div style="padding: 0em .5em; font-size:0.9em;">''(within Wikipedia)''</div>
+|
+<tt><nowiki>[[Name of page]]</nowiki></tt><br />
+<tt><nowiki>[[Name of page|Text to display]]</nowiki></tt>
+|
+[[Name of page]]<br />
+[[Name of page|Text to display]]
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|[[Wikipedia:How_to_edit_a_page#Links_and_URLs|External link]]{{Anchor|External link}}<br />
+<div style="padding: 0em .5em; font-size:0.9em;">''(to other websites)''</div>
+|
+<tt><nowiki>[http://www.example.org Text to display]</nowiki></tt><br />
+<tt><nowiki>[http://www.example.org]</nowiki></tt><br />
+<tt><nowiki>http://www.example.org</nowiki></tt>
+|
+[http://www.example.org Text to display]<br />
+[http://www.example.org]<br />
+http://www.example.org
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|[[Wikipedia:Redirect|Redirect to another page]]{{Anchor|Redirect to another page}}
+|
+<tt><nowiki>#REDIRECT [[Target page]]</nowiki></tt>
+|
+[[Image:Redirect arrow without text.svg|30px]][[Target page]]
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|rowspan="3"|[[Help:Citations quick reference|Footnotes]]/[[Wikipedia:Referencing for beginners|References]]{{Anchor|Footnotes/References}}
+<div style="padding: 0em .5em; font-size:0.9em;">''Numbering is generated automatically.''</div>
+|<div style="margin-left:2em; font-size:0.9em;">''To create a footnote or reference, use this format:''</div>
+<tt><nowiki>Article text.<ref name="test">[http://www.example.org Link text], additional text.</ref></nowiki></tt>
+|rowspan="2"|Article text.<ref name="test">[http://www.example.org Link text], additional text.</ref>
+|-
+|<div style="margin-left:2em; font-size:0.9em;">''To reuse the same note, reuse the name with a trailing slash:''</div>
+<tt><nowiki>Article text.<ref name="test" /></nowiki></tt>
+|-
+|<div style="margin-left:2em; font-size:0.9em;">''To display notes, add '''either''' of these lines to the References section''</div>
+<tt><nowiki><references/></nowiki></tt><br/>
+<tt>{{tl|Reflist}}</tt>
+|<br/><references /><br/>
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|[[Wikipedia:How_to_edit_a_page#Headings|Section headings]]{{Anchor|Section headings}}<ref name="firstline">''Applies only at the very beginning of lines.''</ref><br />
+<div style="padding: 0em .5em; font-size:0.9em;">''A Table of Contents will automatically be generated when four headings are added to an article.''</div>
+|
+<tt><nowiki>== Level 1 ==</nowiki></tt><br />
+<tt><nowiki>=== Level 2 ===</nowiki></tt><br />
+<tt><nowiki>==== Level 3 ====</nowiki></tt><br />
+<tt><nowiki>===== Level 4 =====</nowiki></tt><br />
+<tt><nowiki>====== Level 5 ======</nowiki></tt>
+|
+== Level 1 ==
+=== Level 2 ===
+==== Level 3 ====
+===== Level 4 =====
+====== Level 5 ======
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|[[Help:List|Bulleted list]]{{Anchor|Bulleted list}}<ref name="firstline" />
+<div style="padding: 0em .5em; font-size:0.9em;">''Empty lines between list items discouraged, (see numbered lists).''</div>
+|
+<tt>* One</tt><br />
+<tt>* Two</tt><br />
+<tt>** Two point one</tt><br />
+<tt>* Three</tt>
+|
+* One
+* Two
+** Two point one
+* Three
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|[[Help:List|Numbered list]]{{Anchor|Numbered list}}<ref name="firstline" />
+<div style="padding: 0em .5em; font-size:0.9em;">''Empty lines between list items restarts numbering at 1.''</div>
+|
+<tt># One</tt><br />
+<tt># Two</tt><br />
+<tt>## Two point one</tt><br />
+<tt># Three</tt><br />
+|
+# One
+# Two
+## Two point one
+# Three
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|[[Wikipedia:Extended_image_syntax|Thumbnail image]]{{Anchor|Thumbnail image}}
+|
+<tt><nowiki>[[File:Wiki.png|thumb|Caption text]]</nowiki></tt>
+|
+[[File:Wiki.png|thumb|Caption text]]
+|-
+
+|-<!--TALKPAGES-->
+| colspan="3" style="background:#E6F2FF; padding: 0.2em; font-family: sans-serif; font-size: 0.9em; text-align:center;" | For [[Wikipedia:Tutorial_%28Talk_pages%29|Talk Pages]]
+|-
+|Signature{{Anchor|Signature}}
+|
+<tt><nowiki>~~~~</nowiki></tt><hr />
+<tt><nowiki>~~~</nowiki></tt>
+|
+[[Special:Mypage|Username]] ([[Special:Mytalk|talk]]) {{CURRENTTIME}}, {{CURRENTDAY}} {{CURRENTMONTHNAME}} {{CURRENTYEAR}} (UTC)<hr />
+[[Special:Mypage|Username]] ([[Special:Mytalk|talk]])
+|-
+|colspan="3" style="border-top:1px solid #cee0f2;"|
+|-
+|Indenting text{{Anchor|Indenting text}}<ref name="firstline" />
+|
+<tt><nowiki>no indent (normal)</nowiki></tt><br/>
+<tt><nowiki>:first indent</nowiki></tt><br/>
+<tt><nowiki>::second indent</nowiki></tt><br/>
+<tt><nowiki>:::third indent</nowiki></tt>
+|
+no indent (normal)<br/>
+:first indent
+::second indent
+:::third indent
+|-
+
+|colspan="3" style="border-top:1px solid #cee0f2; font-size:0.9em;"|<references/>
+|}
+</div>
+
+==See also==
+[[File:User contributions detail.png|thumb|'''User contribution''' pages, '''article history''' pages, '''watch lists''', and '''recent changes''' are helpful in keeping track of what your fellow editors are doing. This graphic explains some of the features.]]
+* For a tour of features, see the [[Wikipedia:Introduction|Introduction to Wikipedia]].
+* [[mw:Help:Magic words|Magic Words]] of Wikipedia
+* For experimentation with editing, use the [[Wikipedia:Sandbox|sandbox]].
+* For a guide to more advanced page editing, see [[Wikipedia:How_to_edit_a_page|How to edit a page]]
+* The Wikipedia [[Wikipedia:Manual of Style|Manual of Style]]
+* For a checklist of elements required to make a "perfect" article, see [[Wikipedia:The perfect article|The perfect article]].
+* For print cheatsheets, see the [[:m:Help:Reference card|MediaWiki reference card]] or the [[:m:Cheatsheet|poster-size cheatsheet]] (available in many languages).
+* The encyclopedic article on [[cheat sheet]]s
+* [[Wikipedia:Citation templates|Citation templates]]
+
+__NOTOC__ __NOEDITSECTION__
+
+[[Category:Wikipedia basic information|{{PAGENAME}}]]
+
+[[ar:مساعدة:أساسيات التحرير]]
+[[bg:Уикипедия:Наръчник/Уикипищов]]
+[[ca:Viquipèdia:Apunts d'ajuda]]
+[[cs:Nápověda:Rychlý přehled]]
+[[de:Hilfe:Textgestaltung]]
+[[es:Ayuda:Referencia rápida]]
+[[fa:ویکی‌پدیا:کارت راهنما]]
+[[id:Wikipedia:Pedoman ringkas]]
+[[hr:Wikipedija:Šalabahter]]
+[[ja:Help:早見表]]
+[[ka:ვიკიპედია:შპარგალკა]]
+[[ko:위키백과:편집 요약]]
+[[lo:ຊ່ອຍເຫຼືອ:ເຈ້ຍກ່າຍ]]
+[[mk:Википедија:Помошна табела]]
+[[mr:विकिपीडिया:टाचण]]
+[[nl:Wikipedia:Spiekbriefje]]
+[[pt:Wikipedia:Livro de estilo]]
+[[th:วิกิพีเดีย:วิธีการแก้ไขหน้าพื้นฐาน]]
+[[tr:Vikipedi:Hızlı rehber]]
+[[zh:Wikipedia:備忘單]]
+

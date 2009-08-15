@@ -2,14 +2,14 @@
 #
 # Table name: orders
 #
-#  id                 :integer(4)      not null, primary key
-#  supplier_id        :integer(4)
+#  id                 :integer         not null, primary key
+#  supplier_id        :integer
 #  note               :text
 #  starts             :datetime
 #  ends               :datetime
 #  state              :string(255)     default("open")
-#  lock_version       :integer(4)      default(0), not null
-#  updated_by_user_id :integer(4)
+#  lock_version       :integer         default(0), not null
+#  updated_by_user_id :integer
 #  foodcoop_result    :decimal(8, 2)
 #
 

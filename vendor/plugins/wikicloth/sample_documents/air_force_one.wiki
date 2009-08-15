@@ -1,0 +1,170 @@
+{{for|the current aircraft|Boeing VC-25}}
+{{otheruses}}
+<!-- This article is a part of [[Wikipedia:WikiProject Aircraft]]. Please see [[Wikipedia:WikiProject Aircraft/page content]] for recommended layout. -->
+{{Infobox Aviation
+ |name = Air Force One
+ |image = Image:Air Force One over Mt. Rushmore.jpg
+ |caption = SAM 28000, one of the two VC-25s used as Air Force One, above [[Mount Rushmore]]
+}}
+
+'''Air Force One''' is the [[air traffic control]] [[call sign]] of any [[United States Air Force]] aircraft carrying the [[President of the United States]].<ref name="foxtrot"> [http://www.faa.gov/airports_airtraffic/air_traffic/publications/atpubs/ATC/Chp2/atc0204.html#2-4-20 Order 7110.65R (Air Traffic Control)] Federal Aviation Administration 14 March 2007. Retrieved: 27 August 2007. </ref>  Since 1990, the presidential fleet has consisted of two specifically configured, highly customized [[Boeing 747-200#747-200|Boeing 747-200B]] series aircraft – [[Tail Code|tail codes]] '''S'''pecial '''A'''ir '''M'''ission ('''SAM''') "28000" and '''SAM''' "29000" – with Air Force designation "[[Boeing VC-25|VC-25A]]". While these aircraft are referred to as "Air Force One" only while the president is on board, the term is commonly used to describe either of the two aircraft normally used and maintained by the U.S. Air Force solely for the president, as well as any additional Air Force aircraft used by the president; a recent example is when President [[Barack Obama]] flew to New York City aboard a U.S. Air Force [[Gulfstream V|C-37A]].<ref> Bosman, Julie. [http://www.nytimes.com/2009/05/31/nyregion/31obama.html?_r=1&scp=9&sq=obama%20broadway&st=cse "Politics Can Wait: The President Has a Date."] ''[[The New York Times]]'', May 30, 2009. Retrieved: June 17, 2009.</ref>
+
+Air Force One is a prominent symbol of the [[United States|American]] presidency and its power.<ref name=Walsh/> The aircraft are among the most famous and most photographed in the world.<ref name="af1">Wallace, Chris (host). [http://www.foxnews.com/video-search/m/21504368/aboard_air_force_one.htm?pageid=23236 "Aboard Air Force One."] ''Fox News'', November 24, 2008. Retrieved: November 28, 2008.</ref>
+
+==History==
+On October 11, 1910, [[Theodore Roosevelt]] became the first U.S. president to fly in an aircraft, although at the time of the flight in an early [[Wright Flyer]] from Kinloch Field (near [[St. Louis]], [[Missouri]]), he was no longer in office, having been succeeded by [[William Howard Taft]]. The record-making occasion was a brief overflight of the crowd at a country fair but was nonetheless, the beginning of presidential air travel.<ref> Hardesty 2003, pp. 31–32.</ref>
+
+Prior to [[World War II]], overseas and cross-country presidential travel was rare. Lack of wireless telecommunication and quick transportation made long-distance travel impractical, as it took much time and isolated the president from events in [[Washington, D.C.]] By the late 1930s, with the arrival of aircraft such as the [[Douglas DC-3]], increasing numbers of the U.S. public saw passenger air travel as a reasonable mode of transportation. All-metal aircraft, more reliable engines, and new radio aids to navigation had made commercial airline travel safer and more convenient. Life insurance companies even began to offer airline pilots insurance policies, albeit at extravagant rates, and many commercial travelers and government officials began using the airlines in preference to rail travel, especially for longer trips.
+
+[[Franklin D. Roosevelt]] was the first president to fly in an aircraft while in office. During World War II, Roosevelt traveled on the ''Dixie Clipper'', a Pan Am-crewed [[Boeing 314]] [[flying boat]] to the 1943 [[Casablanca Conference (1943)|Casablanca Conference]], in [[Morocco]], a flight that covered 5,500 miles (in three "legs").<ref> Hardesty 2003, pp. 38.</ref> The threat from the German submarines throughout the [[Battle of the Atlantic (1939–1945)|Battle of the Atlantic]] made transatlantic air travel the preferred method of transportation.<ref> Hardesty 2003, p. 39.</ref>
+
+[[Image:Sacred Cow airplane.jpg|thumb|right|President Franklin D. Roosevelt's [[C-54 Skymaster]] aircraft, nicknamed "the Sacred Cow".]]
+
+The first dedicated aircraft proposed for presidential use was a [[C-87 Liberator Express|C-87A]] VIP transport aircraft. This aircraft, number 41-24159, was re-modified in 1943 for use as a presidential VIP transport, the ''Guess Where II'', intended to carry President Franklin D. Roosevelt on international trips.<ref name= "Dorr"/>  Had it been accepted, it would have been the first aircraft to be used in presidential service, in effect the first Air Force One. However, after a review of the C-87's highly controversial safety record in service, the [[United States Secret Service|Secret Service]] flatly refused to approve the ''Guess Where II'' for presidential carriage.<ref name= "Dorr">Dorr 2002, p. l34.</ref>  The aircraft was then used to transport senior members of the Roosevelt administration on various trips. In March 1944, the ''Guess Where II'' transported [[Eleanor Roosevelt]] on a goodwill tour of several Latin American countries. The C-87 was scrapped in 1945.<ref name= "Dorr"/>
+
+The Secret Service subsequently reconfigured a Douglas [[C-54 Skymaster]] for duty as a presidential transport. This aircraft, nicknamed the ''Sacred Cow'', included a sleeping area, radio telephone, and retractable elevator for Roosevelt's wheelchair. As modified, the presidential C-54 carried the president on several important trips.
+
+[[Image:Independence aircraft.png|thumb|left|The ''Independence'' used primarily by President Truman]]
+
+After Roosevelt died in spring 1945, Vice President [[Harry S. Truman]] became President. He replaced the C-54 in 1947 with a modified [[Douglas DC-6|C-118 Liftmaster]], calling it the ''Independence''. This was the first aircraft acting as Air Force One that had a distinctive exterior&ndash;a [[bald eagle]] head painted on its nose.
+
+The presidential call sign was established for security purposes during the administration of [[Dwight D. Eisenhower]]. The change stemmed from a 1953 incident where an [[Eastern Air Lines|Eastern Airlines]] commercial flight (8610) had the same call sign as a flight the president was on (Air Force 8610). The aircraft accidentally entered the same airspace, and after the incident the unique call sign "Air Force One" was introduced for the presidential aircraft.
+
+[[File:Lockheed VC-121E Super Constellation.jpg|thumb|right|The ''Columbine III'' used by President Eisenhower]]
+
+Eisenhower also introduced four other [[propeller]] aircraft, the [[Lockheed Constellation|Lockheed C-121 Constellations]] (VC-121E) to presidential service. These aircraft were named ''Columbine II'' and ''Columbine III'' by [[Mamie Eisenhower]] after the [[Aquilegia caerulea|columbine]], the official state flower of Colorado, her adopted home state. Two [[Aero Commander 500|Aero Commanders]] were also added to the fleet and earned the distinction of being the smallest planes ever to serve as Air Force One. President Eisenhower also upgraded Air Force One's technology by adding an air-to-ground telephone and an air-to-ground teletype machine. Towards the end of Eisenhower's term in 1958, the Air Force added three [[C-137 Stratoliner|Boeing 707]] [[jet aircraft|jet]]s (as VC-137s designated SAM 970, 971, and 972), into the fleet. Eisenhower became the first president to use the VC-137 during his "Flight to Peace" Goodwill tour, from 3 December through 22 December 1959. He visited 11 Asian nations, flying {{convert|22000|mi|km}} in 19 days, about twice as fast as he would have on ''Columbine''.
+
+===Boeing 707s===
+{{main|VC-137C SAM 26000|VC-137C SAM 27000}}
+[[File:VC-137-1 Air Force One .jpg|thumb|left|Boeing 707 ([[SAM 26000]]) served Presidents Kennedy to Clinton.]]
+
+In October 1962, the [[John F. Kennedy]] administration purchased a [[C-137 Stratoliner]], [[SAM 26000|a modified long-range 707—Special Air Mission (SAM) 26000]], although he had used the Eisenhower-era jets for trips to Canada, France, Austria and the United Kingdom.
+
+The Air Force had attempted a special presidential [[livery]] of their own design: a scheme in red and metallic gold, with the nation's name in block letters. Kennedy felt the aircraft appeared too regal, and, on advice from his wife, First Lady [[Jacqueline Kennedy]], he contacted the French-born American industrial designer [[Raymond Loewy]] for help in designing a new livery and interiors for the VC-137 jet.<ref name=Walsh>Walsh, Kenneth T. ''Air Force One: A History of the Presidents and Their Planes''. New York: Hyperion: 2003. ISBN 1-4013-0004-9.</ref> Loewy met with the president, and his earliest research on the project took him to the National Archives, where he looked at the first printed copy of the [[United States Declaration of Independence]], and saw the country's name set widely spaced and in upper case in a typeface called [[Caslon]]. He chose to expose the polished aluminum fuselage on the bottom side, and used two blues; a slate-blue associated with the early republic and the presidency, and a more contemporary [[cyan]] to represent the present and future. The [[Seal of the President of the United States|presidential seal]] was added to both sides of the fuselage near the nose, a large American flag was painted on the tail, and the sides of the aircraft read "United States of America" in all capital letters. Loewy's work won immediate praise from the president and the press. The VC-137 markings were adapted for the larger VC-25 when it entered service in 1990.<ref>Hardesty 2003, p. 70.</ref>
+
+[[Image:Air Force One SAM 27000.jpg|thumb|right|Boeing 707 [[SAM 27000]] as Air Force One SAM 27000 served Presidents Nixon to Bush 43, and was the primary transport for Nixon to Reagan.]]
+SAM 26000 was in service from 1962 to 1998, serving Presidents Kennedy to [[Bill Clinton|Clinton]]. On November 22, 1963, SAM 26000 carried President Kennedy to Dallas, Texas, where it served as the backdrop as President and Mrs. Kennedy greeted well-wishers at Dallas' Love Field. Later that afternoon, Kennedy was assassinated, and Vice President [[Lyndon Johnson]] assumed the job of president and took the oath of office aboard SAM 26000. At Johnson's request, the plane carried Kennedy's body back to Washington. It also flew over [[Arlington National Cemetery]] as Kennedy was being laid to rest, following 50 fighter jets. A decade later, it brought Johnson's own body to Washington for his [[state funeral]] and then back home to Texas. As the former president was laid to rest at [[LBJ Ranch|his ranch]], a former pilot of SAM 26000 presented the flag to [[Lady Bird Johnson]].
+
+President Johnson twice used Air Force One, in 1966 and 1967, to visit American troops in Vietnam. <ref>Hardesty 2003, p. 88.</ref>  Another unusual use of the aircraft was a five-day odyssey beginning on December 19, 1967 when Johnson embarked on a world tour. Ostensibly the president was to attend the funeral of Prime Minister Harold Holt of Australia, but the press corps flying on a "no-frills" charter jet airliner derided the unscheduled and haphazard nature of the flights that ended with visits to the leaders of 14 countries covering a total of 28,210 miles.<ref>Hardesty 2003, pp. 88–89.</ref> A visit to [[Pope Paul VI]] ended the whirlwind trek, widely criticized by the world press as an "extravagant feat that mocked every role of protocol."<ref>Hardesty 2003, p. 94.</ref>
+
+SAM 26000 was replaced in 1972 by another VC-137, [[SAM 27000|Special Air Mission 27000]], although SAM 26000 was kept as a backup until it was finally retired in 1998. SAM 26000 is now on display at the [[National Museum of the United States Air Force]]. [[Richard Nixon]] was the first president to use SAM 27000, and the newer aircraft served every president since Nixon, until it was replaced by two [[Boeing VC-25|VC-25]] aircraft (SAM 28000 and 29000) in 1990. After announcing his intention to resign, Nixon boarded SAM 27000 to travel to California.  Over Missouri, the call sign for the airplane changed from Air Force One to SAM 27000 after Gerald Ford became president.  
+
+SAM 27000 was decommissioned in 2001 by President [[George W. Bush]], flown to [[San Bernardino International Airport]] in California, and later dismantled and taken to the [[Ronald Reagan Presidential Library]] in [[Simi Valley]], where it was reassembled and is currently on permanent display.
+
+===Boeing 747s===
+{{see also|Boeing VC-25}}
+[[File:Barack Obama meets his staff in Air Force One Conference Room.jpg|thumb|left|President [[Barack Obama]] meets with staff in the conference room, April 3, 2009.]]
+
+Though [[Ronald Reagan]]'s two terms as president saw no major changes to Air Force One, the fabrication of the current 747s began during his presidency. Reagan ordered two identical [[Boeing 747]]s to replace the aging 707 that he used for transport.<ref name="747-dod">Williams, Rudi. [https://www.defenselink.mil/news/newsarticle.aspx?id=26295 "Reagan Makes First, Last Flight in Jet He Ordered."] ''United States Department of Defense''. June 10, 2004. Retrieved: June 23, 2009.</ref> The interior designs were drawn up by First Lady [[Nancy Reagan]], who used designs reminiscent of the [[American Southwest]].<ref name="747-dod"/> The first aircraft was delivered in 1990, during the administration of [[George H. W. Bush]]. Delays were experienced to allow for additional work to protect the aircraft from [[electromagnetic pulse]] (EMP) effects.
+
+The VC-25 is equipped with both secure and unsecure phone and computer communications systems, enabling the president to perform duties while in the air in the event of an attack on the United States. 
+
+When [[George W. Bush|President Bush]] came to the end of his second term, a VC-25 was used to transport him to Texas - for this purpose, the craft was called Special Air Mission 28000, as the aircraft did not carry the President of the United States.
+
+[[Image:George and Laura Bush at Bagram Air Base in Afghanistan.jpg|thumb|right|President [[George W. Bush]] and first lady [[Laura Bush]] walk on the tarmac as Air Force One sits at [[Bagram Air Base]] in [[Afghanistan]], March 1, 2006.]]
+One of the most dramatic episodes aboard Air Force One happened during the [[September 11 attacks]]. President George W. Bush was interrupted at [[Emma E. Booker Elementary School]] in [[Sarasota, Florida]] after the attack on the World Trade Center South Tower in New York City. He flew on a VC-25 from [[Sarasota-Bradenton International Airport]] to [[Barksdale Air Force Base]] in Louisiana and then to [[Offutt Air Force Base]] in Nebraska before returning to Washington. The next day, officials at the White House and the Justice Department explained that President Bush did this because there was "specific and credible information that the White House and Air Force One were also intended targets."<ref>[http://georgewbush-whitehouse.archives.gov/news/releases/2001/09/20010912-8.html White House News releases]</ref> The White House later could not confirm evidence of a threat made against Air Force One, and subsequent investigation found the original claim to be a result of miscommunication.<ref>[http://www.washingtonpost.com/ac2/wp-dyn?pagename=article&node=&contentId=A32319-2001Sep26 "White House Drops Claim of Threat to Bush."] ''The Washington Post'', September 27, 2001. Retrieved: February 28, 2007.</ref>
+
+The presidential air fleet is maintained by the [[89th Airlift Wing]] at [[Andrews Air Force Base]], [[Maryland]].
+Air Force One usually does not have fighter aircraft to escort the presidential aircraft over the United States, but this has occurred. In June 1974, while President Nixon was on his way to a scheduled stop in Syria, Syrian fighter jets intercepted Air Force One to act as escorts. However, the Air Force One crew was not informed in advance and, as a result, took evasive action including a dive.<ref> [http://www.washingtonpost.com/wp-srv/liveonline/03/special/books/sp_books_walsh052203.htm "Washington Post Book Review of ''Air Force One: A History of the Presidents and Their Planes''".] New York: Hyperion: 2003. ISBN 1-4013-0004-9.</ref>
+
+On April 27, 2009, a low-flying VC-25 circled [[New York City]] for a [[photo-op]] and [[military exercise|training exercise]] and caused a scare for many in New York.<ref>[http://www.cnn.com/2009/POLITICS/04/28/low.flying.plane/index.html Photo-op]</ref> Fallout from the [[Air Force One photo op incident|photo op incident]] led to the resignation of the director of the White House Military Office.
+
+The VC-25As are expected to be replaced, as they have become less cost-effective to operate. The USAF [[Air Mobility Command]] has been charged with looking into possible replacements, including the new [[Boeing 747-8]] and the [[EADS]] [[Airbus A380]].<ref>[http://www.flightglobal.com/articles/2007/10/17/218681/exclusive-us-considers-airbus-a380-as-air-force-one-and-potentially-a-c-5-replacement.html "US considers Airbus A380 as Air Force One and potentially a C-5 replacement."] ''Flight Global'', October 17, 2007. Retrieved: June 23, 2009.</ref>  On January 7, 2009, the USAF [[Air Materiel Command]] issued a new requirement for a replacement aircraft to enter service beginning in 2017.<ref>[https://www.fbo.gov/index?s=opportunity&mode=form&id=e35e259abc36437e8e7665d42bdac9b2&tab=core&_cview=0 "USAF Presidential Aircraft Recapitalization (PAR) Program."] ''USAF Materiel Command'', 7 January 2007. Retrieved: 8 January 2009.</ref>  On January 28, 2009, [[EADS]] announced they would not bid on the program, leaving Boeing the sole bidder, with either their Boeing 747-8 or [[Boeing 787]] being proposed.<ref>[http://www.aviationweek.com/aw/generic/story.jsp?id=news/AF1-012809.xml&headline=Boeing%20Only%20Contender%20for%20New%20Air%20Force%20One&channel=defense "Boeing Only Contender for New Air Force One".] ''AviationWeek.com'', January 28, 2009. Retrieved: June 23, 2009.</ref> <!-- This is a summary.  Keep replacement details at [[Boeing VC-25]]. -->
+
+==Other presidential aircraft==
+[[United Airlines]] has the distinction of being the only commercial airline to have operated ''[[Executive One]]'', the designation given to a civilian flight on which the U.S. President is aboard. On December 26, 1973, then-President [[Richard Nixon]] flew as a passenger aboard a [[Washington Dulles International Airport|Washington Dulles]] to [[Los Angeles International Airport|Los Angeles International]] flight. It was explained by his staff that this was done in order to conserve fuel by not having to fly the usual [[Boeing 707]] Air Force aircraft; however, the 707 followed behind in case of emergency.<ref name=Exec1CBS>[http://tvnews.vanderbilt.edu/program.pl?ID=226900 Vanderbilt Television News Archive "President / Commercial Airline Flight."] ''[[CBS News]]'', December 27, 1973. Retrieved: June 23, 2009.</ref>
+
+On March 8, 2000, President [[Bill Clinton]] flew to Pakistan aboard an unmarked [[Gulfstream III]] while another aircraft with the call sign "Air Force One" flew on the same route a few minutes later.<ref>Sammon, Bill. "Clinton uses decoy flight for security." ''Washington Times'', March 26, 2000, p. C.1.</ref><ref>Haniffa, Aziz. "Playing hide-and-seek on trip to Islamabad."  ''India Abroad''. New York: March 31, 2000, Vol. XXX, Issue 27, p. 22.</ref><ref>"Clinton's trip to Asia cost at least $50 million." ''Milwaukee Journal Sentinel'', April 9, 2000, p. 175 A.</ref> This diversion was reported by several U.S. press outlets.
+
+Other heads of state also have special aircraft assigned.  See [[Air transports of heads of state and government]] for further details.
+
+==Air Force One aircraft on display==
+[[Image:George W. Bush Tours Air Force One.jpg|thumb|right|In 2005, President [[George W. Bush]], First Lady [[Laura Bush]], and former First Lady [[Nancy Reagan]] toured [[VC-137C SAM 27000|SAM 27000]], the aircraft that served seven presidents from 1972&ndash;2001; it is now housed at the [[Ronald Reagan Presidential Library]].]]
+
+Several presidential aircraft that have formerly served as Air Force One (''Sacred Cow'', ''Independence'', ''Columbine III'', [[VC-137C SAM 26000|SAM 26000]], and other smaller presidential aircraft) are on display in the presidential hangar of the [[National Museum of the United States Air Force]] (located at [[Wright-Patterson Air Force Base|Wright-Patterson AFB]] near [[Dayton, Ohio|Dayton]], [[Ohio]]) and at the [[Museum of Flight]] in [[Seattle]], [[Washington]] (earlier VC-137B SAM 970). The Boeing 707 that served as Air Force One from the Nixon years through the George H. W. Bush administration ([[VC-137C SAM 27000|SAM 27000]]) is on display in [[Simi Valley]], [[California]] at the [[Ronald Reagan Presidential Library]]. The library's Air Force One Pavilion was opened to the public on October 24, 2005.
+
+A [[Douglas DC-6|VC-118A Liftmaster]] used by [[John F. Kennedy]] is on display at the [[Pima Air & Space Museum]] in [[Tucson, Arizona|Tucson]], [[Arizona]].
+
+==See also==
+{{portal|United States Air Force|Seal of the US Air Force.svg}}
+* [[Air Force Two]]
+* [[Air transports of heads of state and government]]
+* [[Cadillac One]]
+* [[Marine One]]
+* [[Marine Two]]
+* [[Army One]]
+* [[Navy One]]
+* [[Air Force One photo op incident]]
+
+==References==
+===Notes===
+{{reflist}}
+<references />
+
+===Bibliography===
+{{refbegin}}
+* Abbott James A. and Elaine M. Rice. ''Designing Camelot: The Kennedy White House Restoration.'' New York: Van Nostrand Reinhold, 1998. ISBN 0-442-02532-7.
+* Albertazzie, Ralph and [[Jerald TerHorst|Jerald F. TerHorst]]. ''Flying White House: The Story of Air Force One''. New York: Book Sales, 1979. ISBN 0-698-10930-9.
+* Braun, David. [http://news.nationalgeographic.com/news/2003/05/0529_030529_airforceone.html Q&A: U.S. Presidential Jet Air Force One.] ''National Geographic News,'' May 29, 2003. 
+* Dorr, Robert F. ''Air Force One''. St. Paul, Minnesota: Motorbooks International, 2002. ISBN 0-7603-1055-6. 
+* Hardesty, Von. ''Air Force One: The Aircraft that Shaped the Modern Presidency''. Chanhassen, Minnesota: Northword Press, 2003. ISBN 1-55971-894-3. 
+* Harris, Tom. [http://www.howstuffworks.com/air-force-one.htm "How Air Force One Works."] ''HowStuffWorks.com''. Retrieved: October 10, 2006.
+* Technical Order 00-105E-9, Segment 9, Chapter 7 [http://www.0x4d.net/files/AF1/ Technical Order 00-105E-9]
+* Walsh, Kenneth T. ''Air Force One: A History of the Presidents and Their Planes''. New York: Hyperion, 2003. ISBN 1-4013-0004-9.
+{{refend}}
+
+==External links==
+{{commons}}
+* [http://www.nationalmuseum.af.mil/factsheets/factsheet.asp?id=570 SAM 26000 at the National Museum of the United States Air Force]
+* [http://www.707sim.com/air-force-one.html Facts and History of 707 as Air Force One and "Where they are Now?"]
+* [http://www.reaganfoundation.org/airforceone/ Air Force One Pavilion]
+* [http://www.af.mil/factsheets/factsheet.asp?id=131 Air Force Fact Sheet, VC-25 - AIR FORCE ONE]
+* [http://www.whitehouse.gov/about/air_force_one/ Air Force One page on White House site]
+* [http://www.trumanlibrary.org/photographs/search.php?access=selectbycategory&keywords=Presidential+aircraft Truman Library & Museum]
+* [http://www.af.mil/photos/index.asp?galleryID=55 United States Air Force]
+* [http://www.boeing.com/history/boeing/airforceone.html Boeing History of Air Force One]
+
+{{PresidentialCallsigns}}
+{{White House Military Office}}
+{{US Air Force navbox}}
+{{aviation lists}}
+
+[[Category:Executive Office of the President of the United States]]
+[[Category:Presidency of the United States]]
+[[Category:Individual aircraft]]
+[[Category:Presidential aircraft]]
+[[Category:United States special-purpose aircraft]]
+[[Category:United States Air Force]]
+[[Category:Call signs]]
+
+[[cs:Air Force One]]
+[[da:Air Force One]]
+[[de:Air Force One]]
+[[es:Air Force One]]
+[[eo:Air Force One]]
+[[fa:یکم نیروی هوایی]]
+[[fr:Air Force One]]
+[[ko:에어 포스 원]]
+[[hr:Air Force One]]
+[[id:Air Force One]]
+[[it:Air Force One]]
+[[lv:Air Force One]]
+[[he:אייר פורס 1]]
+[[hu:Air Force One]]
+[[nl:Air Force One (roepletter)]]
+[[ja:エアフォースワン]]
+[[no:Air Force One]]
+[[pl:Air Force One]]
+[[ro:Air Force One]]
+[[ru:Air Force One]]
+[[simple:Air Force One]]
+[[sk:Air Force One]]
+[[sl:Air Force One]]
+[[fi:Air Force One]]
+[[sv:Air Force One]]
+[[th:แอร์ฟอร์ซวัน]]
+[[tr:Air Force One]]
+[[vi:Air Force One]]
+[[yi:עיר פארס וואן]]
+[[zh:空军一号]]
+

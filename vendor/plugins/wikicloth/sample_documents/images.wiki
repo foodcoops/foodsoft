@@ -1,0 +1,15 @@
+[[Image:wiki.png]]
+
+[[Image:wiki.png|Wikipedia, The Free Encyclopedia.]]
+
+[[Image:wiki.png|frame|Wikipedia Encyclopedia]]
+
+[[Image:wiki.png|thumb|Wikipedia Encyclopedia]]
+
+[[Image:wiki.png|right|Wikipedia Encyclopedia]]
+
+[[Image:wiki.png|30 px]]
+
+[[:Image:wiki.png]]
+
+

@@ -2,16 +2,16 @@
 #
 # Table name: tasks
 #
-#  id             :integer(4)      not null, primary key
+#  id             :integer         not null, primary key
 #  name           :string(255)     default(""), not null
 #  description    :string(255)
 #  due_date       :date
-#  done           :boolean(1)
-#  workgroup_id   :integer(4)
-#  assigned       :boolean(1)
+#  done           :boolean
+#  workgroup_id   :integer
+#  assigned       :boolean
 #  created_on     :datetime        not null
 #  updated_on     :datetime        not null
-#  required_users :integer(4)      default(1)
+#  required_users :integer         default(1)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

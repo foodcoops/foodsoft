@@ -213,6 +213,30 @@ ActiveRecord::Schema.define(:version => 20090812110010) do
     t.decimal  "foodcoop_result",    :precision => 8, :scale => 2
   end
 
+  create_table "page_versions", :force => true do |t|
+    t.integer  "page_id"
+    t.integer  "lock_version"
+    t.text     "body"
+    t.integer  "updated_by"
+    t.integer  "redirect"
+    t.integer  "parent_id"
+    t.datetime "updated_at"
+  end
+
+  add_index "page_versions", ["page_id"], :name => "index_page_versions_on_page_id"
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "permalink"
+    t.integer  "lock_version", :default => 0
+    t.integer  "updated_by"
+    t.integer  "redirect"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "schema_info", :id => false, :force => true do |t|
     t.integer "version"
   end

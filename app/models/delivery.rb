@@ -2,8 +2,8 @@
 #
 # Table name: deliveries
 #
-#  id           :integer(4)      not null, primary key
-#  supplier_id  :integer(4)
+#  id           :integer         not null, primary key
+#  supplier_id  :integer
 #  delivered_on :date
 #  created_at   :datetime
 #
