@@ -2,21 +2,85 @@
   %h2 Vorschau
   #preview= render :partial => 'body'
 
-#wiki-syntax-help{:style => "float:right"}
+#wiki-syntax-help
   %p
-    %b Schnelle Formatierungshilfe
-    %br/
-    :plain
-      [[Foodsoft Wiki Seite]]<br />
-      [http://addresse.net Externe Seite]<br />
-      ==Erste Überschrift==<br />
-      ===Unterüberschrift===<br />
-      ''kursiv''<br />
-      '''Fett'''<br />
-      * Erster Listenpunkt<br />
-      * Zweiter Listenpunkt<br />
-      ** Unterpunkt<br />
-    = link_to "Tabellen", "http://www.mediawiki.org/wiki/Help:Tables", :target => '_blank'
+    .box_title
+      %h2 Schnelle Formatierungshilfe
+    .column_content
+      %table(frame="void")
+        %tbody
+          %tr
+            %td(colspan=2)
+              %b Zeichenformatierung
+          %tr
+            %td
+              %i kursiv
+            %td
+              %pre 
+                ''kursiv''<br />
+          %tr
+            %td
+              %b fett
+            %td
+              %pre '''Fett'''<br />
+          %tr
+            %td
+              Keine Wiki-<br/>Formatierung
+            %td
+              %pre &lt;nowiki&gt;text&lt;/nowiki&gt;
+          %tr
+            %td(colspan=2)
+              %b Block-Formatierung
+          %tr
+            %td
+              Überschriften
+            %td
+              %pre
+                \= Ebene 1 =
+              %pre
+                \== Ebene 2 ==
+              %pre
+                \=== Ebene 3 ===
+              %pre
+                \==== Ebene 4 ====
+          %tr
+            %td
+              Listen mit Punkten
+            %td
+              %pre
+                * Erster Punkt
+              %pre
+                ** Zweiter Punkt
+          %tr
+            %td
+              Listen mit Zahlen
+            %td
+              %pre
+                1. Ersten Punkt
+              %pre
+                1. Zweiter Punkt
+          %tr
+            %td(colspan=2)
+              %b Link-Formatierung
+          %tr
+            %td
+              Wiki-Links
+            %td
+              %pre
+                [[Foodsoft Wiki Seite]]
+          %tr
+            %td
+              Externe Links
+            %td
+              %pre
+                [http://addresse.net Externe Seite]
+          %tr
+            %td(colspan=2)
+              %b Tabellenformatierung
+          %tr
+            %td
+              Siehe
+              = link_to "Tabellen", "http://www.mediawiki.org/wiki/Help:Tables", :target => '_blank'
 
 - form_for @page do |f|
   = f.error_messages

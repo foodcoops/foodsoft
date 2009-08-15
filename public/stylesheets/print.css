@@ -467,6 +467,11 @@ a.new_wiki_link {
 #wiki_content span.editsection {
   display: none; }
 
+#wiki-syntax-help {
+  float: right; }
+  #wiki-syntax-help table {
+    border-color: #78b74e; }
+
 #logininfo, #header, #footer {
   display: none; }
 
