@@ -11,7 +11,8 @@ class CreatePages < ActiveRecord::Migration
 
       t.timestamps
     end
-    
+    add_index :pages, :title
+    add_index :pages, :permalink
     Page.create_versioned_table # Automaticly creates pages_versions table
   end
 

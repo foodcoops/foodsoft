@@ -237,6 +237,9 @@ ActiveRecord::Schema.define(:version => 20090812110010) do
     t.datetime "updated_at"
   end
 
+  add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
+  add_index "pages", ["title"], :name => "index_pages_on_title"
+
   create_table "schema_info", :id => false, :force => true do |t|
     t.integer "version"
   end
