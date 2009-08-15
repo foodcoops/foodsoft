@@ -18,12 +18,12 @@
           { :name => "Aufgaben", :url => "/tasks"}
         ]
       },
-      { :name => "Wiki", :url => "/wiki", :active => ["pages", "wiki"],
-        :subnav => [
-          { :name => "Startseite", :url => "/wiki" },
-          { :name => "Alle Seiten", :url => "/pages/all" }
-        ]
-      },
+      #{ :name => "Wiki", :url => "/wiki", :active => ["pages", "wiki"],
+        #:subnav => [
+          #{ :name => "Startseite", :url => "/wiki" },
+          #{ :name => "Alle Seiten", :url => "/pages/all" }
+        #]
+      #},
       { :name => "Bestellungen", :url => u.ordergroup ? "/ordering/" : "/orders",
         :active => ["orders", "ordering"],
         :subnav => [
