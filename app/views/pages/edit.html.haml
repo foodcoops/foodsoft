@@ -1,3 +1,14 @@
-- title "#{@page.title} bearbeiten"
+- title "#{@page.title} bearbeiten", false
 
-= render :partial => 'form'
+.wiki_edit
+  #breadcrump
+    = link_to_wikipage(Page.find_by_permalink("Home"), "Foodcoop-Wiki")
+    - for page in @page.ancestors.reverse
+      %span.wikiSeparator &gt;
+      = link_to_wikipage(page)
+    %span.wikiSeparator &gt;
+    = link_to_wikipage(@page)
+
+  %h1 #{@page.title} bearbeiten
+
+  = render :partial => 'form'

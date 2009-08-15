@@ -438,6 +438,10 @@ ul.autocomplete .informal {
   top: -1em;
   left: 5%; }
 
+.wiki_show h1, .wiki_version h1, .wiki_new h1, .wiki_edit h1, .wiki_all h1 {
+  padding-left: 0;
+  padding-top: 10px; }
+
 a.new_wiki_link {
   color: grey; }
 
@@ -449,15 +453,22 @@ a.new_wiki_link {
   float: right; }
 
 #breadcrump {
-  font-size: 0.5em; }
+  font-size: 0.5em;
+  margin-bottom: 5px;
+  margin-top: 30px;
+  height: 1em;
+  color: #ED0606; }
   #breadcrump a {
-    color: #ed0606; }
+    color: #ed0606;
+    text-decoration: none; }
+  #breadcrump a:hover {
+    text-decoration: underline; }
 
 #sidebar {
   float: right;
   width: 20%; }
   #sidebar #page-versions {
-    margin-top: -4em;
+    margin-top: -60px;
     text-align: right; }
   #sidebar #subpages {
     margin-top: 2em; }

@@ -13,8 +13,12 @@ module PagesHelper
     WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html
   end
 
-  def link_to_wikipage(page)
-    link_to page.title, "/wiki/#{page.title}"
+  def link_to_wikipage(page, text = nil)
+    if text == nil
+      link_to page.title, "/wiki/#{page.title}"
+    else
+      link_to text, "/wiki/#{page.title}"
+    end
   end
 #  def generate_toc(body)
 #    toc = ""

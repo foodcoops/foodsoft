@@ -1,12 +1,18 @@
-- title "Alle Wikiseiten"
+- title "Alle Wikiseiten", false
 
-%p= link_to "Neue Seite anlegen", new_page_path
+.wiki_all
+  #breadcrump
+    = link_to_wikipage(Page.find_by_permalink("Home"), "Foodcoop-Wiki")
 
-%table
-  %tr
-    %th Titel
-    %th zuletzt aktualisiert
-  - for page in @pages
+  %h1 Alle Wikiseite
+
+  %p= link_to "Neue Seite anlegen", new_page_path
+
+  %table
     %tr
-      %td= link_to page.title, wiki_page_path(page.permalink)
-      %td= format_date page.updated_at
+      %th Titel
+      %th Zuletzt aktualisiert
+    - for page in @pages
+      %tr
+        %td= link_to page.title, wiki_page_path(page.permalink)
+        %td= format_date page.updated_at
