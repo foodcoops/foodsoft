@@ -488,7 +488,6 @@ ul.autocomplete
   top: -1em
   left: 5%
 
-<<<<<<< HEAD:public/stylesheets/sass/main.sass
 // group stats
 .stats-bar
   height: 20px
@@ -497,8 +496,11 @@ ul.autocomplete
   background-color: #fff
   text-align: center
   margin: 0 10px 10px 0
-=======
 // *** wiki
+.wiki_show, .wiki_version, .wiki_new, .wiki_edit, .wiki_all
+  h1
+    padding-left: 0
+    padding-top: 10px
 a.new_wiki_link
   color: grey
 #preview
@@ -508,13 +510,20 @@ a.new_wiki_link
   float: right
 #breadcrump
   font-size: 0.5em
+  margin-bottom: 5px
+  margin-top: 30px
+  height: 1em
+  color: #ED0606
   a
     :color = !main_red
+    :text-decoration = none
+  a:hover
+    :text-decoration = underline
 #sidebar
   float: right
   width: 20%
   #page-versions
-    margin-top: -4em
+    margin-top: -60px
     text-align: right
   #subpages
     margin-top: 2em
@@ -530,4 +539,3 @@ a.new_wiki_link
   float: right
   table
     border-color: #78b74e
->>>>>>> wiki:public/stylesheets/sass/main.sass
