@@ -2,7 +2,7 @@
 
 .wiki_new
   #breadcrump
-    = link_to_wikipage(Page.find_by_permalink("Home"), "Foodcoop-Wiki")
+    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
     - parent_page = Page.find_by_permalink(params[:parent])
     - if parent_page != nil
       - for page in parent_page.ancestors.reverse

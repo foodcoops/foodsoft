@@ -2,7 +2,7 @@
 
 .wiki_version
   #breadcrump
-    = link_to_wikipage(Page.find_by_permalink("Home"), "Foodcoop-Wiki")
+    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
     - for page in @page.ancestors.reverse
       %span.wikiSeparator &gt;
       = link_to_wikipage(page)
