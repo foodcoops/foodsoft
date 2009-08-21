@@ -143,7 +143,7 @@ span.click-me {
 #main {
   background: #FFF;
   padding: 0;
-  margin: 0; }
+  margin: 0 15px 0 15px; }
 
 #infobar {
   width: 10%;
@@ -202,10 +202,10 @@ span.click-me {
 
 #content {
   padding: .5em 0 2.5em 0;
-  margin: 0 0 0 1em;
+  margin: 0;
   background: #FFF;
   font-size: 1.3em;
-  width: 95%;
+  width: 100%;
   float: left; }
 
 /* *********************************** tables */
@@ -308,14 +308,17 @@ div.box {
   border-left: 2px solid #78b74e;
   padding-left: 5px; }
 
-div.single_column, div.left_column, div.right_column {
-  margin: .5em .5em 1.5em .5em; }
 
 div.single_column {
   width: 100%; }
 
 div.left_column {
   width: 40%;
+  float: left; }
+
+div.middle_column {
+  width: 40%;
+  margin-left: 10px;
   float: left; }
 
 div.right_column {
