@@ -486,10 +486,52 @@ ul.autocomplete
   left: 5%
 
 // *** wiki
+#wiki_content
+  border-style: none
+  color: black
+  line-height: 1.5em
+
 .wiki_show, .wiki_version, .wiki_new, .wiki_edit, .wiki_all
+  margin-top: 30px
+  padding: 10px
+  border: 1px solid #78b74e
+  background-color: #F5FFFA
   h1
     padding-left: 0
     padding-top: 10px
+    border-bottom:
+      :style solid
+
+#wiki_content
+  min-height: 400px
+  span.editsection
+    display: none
+  h2, h3, h4, h5, h6
+    background: transparent none repeat scroll 0 0
+    border-bottom: 1px solid #AAAAAA
+    padding-bottom: 0,17em
+    padding-top: 0,5em
+    font-weight: normal
+    font-size: 150%
+    color: black
+  h3, h4, h5, h6
+    border-bottom: medium none
+    font-weight: bold
+  h3
+    font-size: 132%
+  h4
+    font-size: 116%
+  ul
+    line-height: 1.5em
+    margin: 0.3em 0 0 1.5em
+    padding: 0
+  ol
+    line-height: 1.5em
+    margin: 0.3em 0 0 3.2em
+    padding: 0
+    list-style-image: none
+  li margin-bottom: 0.1em
+
 a.new_wiki_link
   color: grey
 #preview
@@ -500,7 +542,6 @@ a.new_wiki_link
 #breadcrump
   font-size: 0.5em
   margin-bottom: 5px
-  margin-top: 30px
   height: 1em
   color: #ED0606
   a
@@ -516,13 +557,6 @@ a.new_wiki_link
     text-align: right
   #subpages
     margin-top: 2em
-
-
-#wiki_content
-  h1, h2, h3, h4, h5
-    color: black
-  span.editsection
-    display: none
 
 #wiki-syntax-help
   float: right
