@@ -60,6 +60,8 @@ class PagesController < ApplicationController
       render :action => 'edit'
     else
       if @page.save
+        @page.parent_id = parent_id if (!params[:parent_id].blank? \
+            and params[:parent_id] != @page_id)
         flash[:notice] = 'Seite wurde aktualisiert.'
         redirect_to wiki_page_path(@page.permalink)
       else
