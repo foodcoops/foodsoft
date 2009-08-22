@@ -12,6 +12,10 @@ module ApplicationHelper
   def format_datetime(time = Time.now)
     I18n.l(time) unless time.nil?
   end
+
+  def format_datetime_timespec(time, format)
+    I18n.l(time, :format => format) unless (time.nil? or format.nil?)
+  end
   
   # Creates ajax-controlled-links for pagination
   # see also the plugin "will_paginate"

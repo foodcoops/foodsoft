@@ -308,7 +308,6 @@ div.box {
   border-left: 2px solid #78b74e;
   padding-left: 5px; }
 
-
 div.single_column {
   width: 100%; }
 
@@ -455,6 +454,8 @@ ul.autocomplete .informal {
     padding-left: 0;
     padding-top: 10px;
     border-bottom-style: solid; }
+  .wiki_show .column_content, .wiki_version .column_content, .wiki_new .column_content, .wiki_edit .column_content, .wiki_all .column_content {
+    margin-bottom: 0; }
 
 #wiki_content {
   min-height: 400px; }
@@ -508,17 +509,27 @@ a.new_wiki_link {
 
 #sidebar {
   float: right;
-  width: 20%; }
+  width: 290px;
+  margin-top: -60px; }
   #sidebar #page-versions {
-    margin-top: -60px;
+    margin-bottom: 18px;
     text-align: right; }
   #sidebar #subpages {
-    margin-top: 2em; }
+    border: 1px solid #78b74e;
+    margin-top: 10px;
+    padding: 0 0 0 0; }
+  #sidebar #versions {
+    margin-top: 10px;
+    border: 1px solid #78b74e; }
 
 #wiki-syntax-help {
   float: right; }
   #wiki-syntax-help table {
     border-color: #78b74e; }
+
+.wiki_version #sidebar {
+  margin-top: -23px;
+  border: 1px solid #78b74e; }
 
 #logininfo, #header, #footer {
   display: none; }
