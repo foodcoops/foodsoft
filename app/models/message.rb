@@ -65,7 +65,7 @@ class Message < ActiveRecord::Base
   end
 
   def sender_name
-    system_message? ? 'Foodsoft' : sender.nick
+    system_message? ? 'Foodsoft' : sender.nick rescue "??"
   end
 
   def recipients
