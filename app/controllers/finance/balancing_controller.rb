@@ -95,7 +95,8 @@ class Finance::BalancingController < ApplicationController
   
   def create_order_article
     @order = Order.find(params[:order_id])
-    order_article = @order.order_articles.find_by_article_id(params[:order_article][:article_id])
+    article = Article.find(params[:order_article][:article_id])
+    order_article = @order.order_articles.find_by_article_id(article.id)
 
     unless order_article
       # Article wasn't already assigned with this order, lets create a new one
@@ -114,6 +115,12 @@ class Finance::BalancingController < ApplicationController
       else
         page["edit_box"].replace_html :partial => "new_order_article"
       end
+    end
+
+  rescue
+    render :update do |page|
+      page.replace_html "edit_box", :text => "<b>Keinen Artikel gefunden. Bitte erneut versuchen.</b>"
+      page.insert_html :bottom, "edit_box", :partial => "new_order_article"
     end
   end
 
