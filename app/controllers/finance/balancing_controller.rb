@@ -79,15 +79,18 @@ class Finance::BalancingController < ApplicationController
   
   def auto_complete_for_article_name
     order = Order.find(params[:order_id])
-    type = order.stockit? ? "type = 'StockArticle'" : "type IS NULL"
-    @articles = Article.find(:all,
-      :conditions => [ "supplier_id = ? AND #{type} AND LOWER(name) LIKE ?",
-        order.supplier_id,
-        '%' + params[:article][:name].downcase + '%' ],
-      :order => 'name ASC',
-      :limit => 8)
+    find_params = {
+      :conditions => ["LOWER(articles.name) LIKE ?", "%#{params[:article][:name].downcase}%" ],
+      :order => 'articles.name ASC',
+      :limit => 8
+    }
+    @articles = if order.stockit?
+      StockArticle.all find_params
+    else
+      order.supplier.articles.all find_params
+    end
+  
     render :partial => 'shared/auto_complete_articles'
-
   end
   
   def create_order_article
