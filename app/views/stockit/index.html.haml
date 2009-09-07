@@ -36,6 +36,7 @@
             %th verfügbar
             %th Einheit
             %th Preis
+            %th MwSt
             %th Lieferantin
             %th Kategorie
             %th
@@ -48,6 +49,7 @@
               %th= article.quantity_available
               %td= article.unit
               %td= article.price
+              %td= number_to_percentage article.tax
               %td= link_to article.supplier.name, article.supplier
               %td= article.article_category.name
               %td
