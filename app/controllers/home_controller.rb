@@ -78,7 +78,7 @@ class HomeController < ApplicationController
     membership = Membership.find(params[:membership_id])
     if membership.user == current_user
       membership.destroy
-      flash[:notice] = "Du bist jetzt kein Mitglied der Gruppe #{@group.name} mehr."
+      flash[:notice] = "Du bist jetzt kein Mitglied der Gruppe #{membership.group.name} mehr."
     else
       flash[:error] = "Ein Problem ist aufgetreten."
     end
