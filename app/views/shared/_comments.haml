@@ -2,8 +2,8 @@
   - comments.each do |comment|
     .comment[comment]
       .timestamp
-        %b=h "#{comment.user.ordergroup_name}"
-        = "(#{comment.user.nick} am #{format_time(comment.created_at)}):"
+        %b=h "#{comment.user.try(:ordergroup_name)}"
+        = "(#{comment.user.try(:nick)} am #{format_time(comment.created_at)}):"
       = simple_format(comment.text)
 - else
   es gibt derzeit keine Kommentare.
