@@ -2,39 +2,43 @@
 <div class="left_column">
   <div class="box_title"><h2><%=h @ordergroup.name %></h2></div>
   <div class="column_content">
-    <p><b>Beschreibung:</b> <%=h @ordergroup.description %>
-    <%= link_to '(ändern)', :controller => 'foodcoop', :action => 'edit_group', :id => @ordergroup %>
+    <p>
+      <b>Beschreibung:</b> <%=h @ordergroup.description %>
     </p>
-    <p><b>Verfügbares Guthaben:</b> <%= number_to_currency(@ordergroup.get_available_funds()) %></p>
+    <p>
+      <b>Verfügbares Guthaben:</b> <%= number_to_currency(@ordergroup.get_available_funds()) %>
+    </p>
     <h2>Personen</h2>
     <ul style="list-style-type:decimal;">
-    <% for membership in @ordergroup.memberships -%>
-      <li><%= membership.user.nick -%></li>
-    <% end -%>
+      <% for membership in @ordergroup.memberships -%>
+        <li><%= membership.user.nick -%></li>
+      <% end -%>
     </ul>
-    <%= link_to('Hinzufügen/entfernen', :controller => 'foodcoop', :action => 'memberships', :id => @ordergroup) %> |
-    <%= link_to('Person einladen', :controller => 'foodcoop', :action => 'invite', :id => @ordergroup) %>
+    <%= remote_link_to('Person einladen', :url => new_invite_path(:id => @ordergroup)) %>
   </div>
 </div>
 
 <div class="right_column">
-  <div class="box_title"><h2>Kontoauszug</h2></div>
+  <div class="box_title">
+    <h2>Kontoauszug</h2>
+  </div>
   <div class="column_content">
-  <p>
+    <p>
     <form name="sform" action="" style="display:inline;">
-    <label for="financial_transaction_note">Filter für Notizen: </label>
-    <%= text_field_tag("query", params['query'], :size => 10 ) %>
+      <label for="financial_transaction_note">Filter für Notizen: </label>
+      <%= text_field_tag("query", params['query'], :size => 10 ) %>
     </form>
-   </p>
-   <%= observe_field 'query',  :frequency => 2,
-         :before => "Element.show('loader')",
-         :success => "Element.hide('loader')",
-         :url => {:action => 'ordergroup'},
-         :with => 'query',
-         :update => 'transactions' %>
+    </p>
+    <%= observe_field 'query',  :frequency => 2,
+      :before => "Element.show('loader')",
+      :success => "Element.hide('loader')",
+      :url => {:action => 'ordergroup'},
+      :with => 'query',
+      :update => 'transactions' %>
     <div id="transactions">
       <%= render :partial => "/finance/transactions/list" %>
     </div>
   </div>
 </div>
+<div id="edit_box" style="display:none"></div>
 

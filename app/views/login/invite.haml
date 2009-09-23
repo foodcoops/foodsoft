@@ -1,7 +1,9 @@
 - title "Einladung in die #{Foodsoft.config[:name]}"
 %p
-  Du bist eingeladen worden in der Foodcoop
+  Du bist eingeladen worden als Mitglied der Gruppe
   %b= @invite.group.name
+  in der Foodcoop
+  = Foodsoft.config[:name]
   mitzumachen.
 %p
   Wenn Du mitmachen möchtest, dann fülle bitte dieses Formular aus.
