@@ -88,10 +88,8 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(pages_url) }
-      format.xml  { head :ok }
-    end
+    flash[:notice] = "Die Seite '#{@page.title}' und alle Unterseiten wurden erfolgreich gelöscht."
+    redirect_to wiki_path
   end
 
   def all
