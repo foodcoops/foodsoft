@@ -85,7 +85,7 @@ class PagesController < ApplicationController
   end
 
   def all
-    @pages = Page.all :order => 'created_at', :conditions => {:redirect => nil}
+    @pages = Page.all :order => 'updated_at DESC', :conditions => {:redirect => nil}
   end
 
   def version

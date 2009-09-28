@@ -447,9 +447,7 @@ ul.autocomplete .informal {
 
 .wiki_show, .wiki_version, .wiki_new, .wiki_edit, .wiki_all {
   margin-top: 30px;
-  padding: 10px;
-  border: 1px solid #78b74e;
-  background-color: #F5FFFA; }
+  padding: 10px; }
   .wiki_show h1, .wiki_version h1, .wiki_new h1, .wiki_edit h1, .wiki_all h1 {
     padding-left: 0;
     padding-top: 10px;
@@ -493,8 +491,18 @@ a.new_wiki_link {
   border: 1px dotted grey;
   padding: 0 1em; }
 
-#toc {
-  float: right; }
+#wikitoc {
+  padding: 5px;
+  margin-bottom: 2em;
+  width: 25em;
+  border: 1px solid grey;
+  background-color: #efefef; }
+  #wikitoc h2 {
+    font-size: 1em;
+    color: black; }
+    #wikitoc h2 span a {
+      font-size: 0.5em;
+      color: grey; }
 
 #breadcrump {
   font-size: 0.5em;

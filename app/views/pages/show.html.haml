@@ -30,7 +30,7 @@
               = "(#{User.find(version.updated_by).nick})"
 
     - unless @page.children.empty?
-      #subpages
+      #subpages{:style => "display:none"}
         .box_title
           %h2 Unterseiten
         .column_content
