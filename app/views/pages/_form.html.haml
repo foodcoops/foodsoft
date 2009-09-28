@@ -97,6 +97,6 @@
     |
     = link_to "Abbrechen", @page
     | Oberseite ändern:
-    = collection_select(:page, :parent_id, Page.all, :id, :permalink, {:prompt => "Neue Oberseite?"})
+    = collection_select(:page, :parent_id, Page.all, :id, :permalink, {:prompt => "Neue Oberseite?", :include_blank => true})
 
 %div(style="clear:right; height:1px")
