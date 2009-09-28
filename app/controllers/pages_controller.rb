@@ -11,7 +11,17 @@ class PagesController < ApplicationController
   end
 
   def show
-    @page = Page.find_by_permalink(params[:permalink])
+    if params[:permalink]
+      @page = Page.find_by_permalink(params[:permalink])
+    elsif params[:id]
+      page = Page.find_by_id(params[:id])
+      if page.nil?
+        flash[:error] = "Seite existiert nicht!"
+        redirect_to all_pages_path and return
+      else
+        redirect_to wiki_page_path(page.permalink) and return
+      end
+    end
     
     if @page.nil?
       redirect_to new_page_path(:title => params[:permalink])
