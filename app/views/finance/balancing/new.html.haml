@@ -10,7 +10,7 @@
     = render :partial => "summary", :locals => {:order => @order}
 
 - unless @order.stockit?
-  .left_column{:style => 'width: 24em'}
+  .middle_column{:style => 'width: 24em'}
     .box_title
       %h2 Rechnung
     .column_content#invoice

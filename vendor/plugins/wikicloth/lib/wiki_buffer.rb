@@ -127,7 +127,7 @@ class WikiBuffer
       self.data.gsub!(/^([-]{4,})/) { |r| "<hr />" }
       self.data.gsub!(/^([=]{1,6})\s*(.*?)\s*(\1)/) { |r|
         @section_count += 1
-        "<h#{$1.length}>" + (@noeditsection == true ? "" : 
+        "<a name='section-#{@section_count}' /><h#{$1.length}>" + (@noeditsection == true ? "" :
         "<span class=\"editsection\">[<a href=\"" + @options[:link_handler].section_link(@section_count) + 
 	"\" title=\"Edit section: #{$2}\">edit</a>]</span>") +
         " <span class=\"mw-headline\">#{$2}</span></h#{$1.length}>"

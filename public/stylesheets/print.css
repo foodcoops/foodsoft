@@ -146,7 +146,7 @@ span.click-me {
 #main {
   background: #FFF;
   padding: 0;
-  margin: 0; }
+  margin: 0 15px 0 15px; }
 
 #infobar {
   width: 10%;
@@ -205,10 +205,10 @@ span.click-me {
 
 #content {
   padding: .5em 0 2.5em 0;
-  margin: 0 0 0 1em;
+  margin: 0;
   background: #FFF;
   font-size: 1.3em;
-  width: 95%;
+  width: 100%;
   float: left; }
 
 /* *********************************** tables */
@@ -311,14 +311,16 @@ div.box {
   border-left: 2px solid #78b74e;
   padding-left: 5px; }
 
-div.single_column, div.left_column, div.right_column {
-  margin: .5em .5em 1.5em .5em; }
-
 div.single_column {
   width: 100%; }
 
 div.left_column {
   width: 40%;
+  float: left; }
+
+div.middle_column {
+  width: 40%;
+  margin-left: 10px;
   float: left; }
 
 div.right_column {
@@ -441,6 +443,7 @@ ul.autocomplete .informal {
   top: -1em;
   left: 5%; }
 
+<<<<<<< HEAD:public/stylesheets/print.css
 .stats-bar {
   height: 20px;
   min-width: 10px;
@@ -452,6 +455,51 @@ ul.autocomplete .informal {
 .wiki_show h1, .wiki_version h1, .wiki_new h1, .wiki_edit h1, .wiki_all h1 {
   padding-left: 0;
   padding-top: 10px; }
+=======
+#wiki_content {
+  border-style: none;
+  color: black;
+  line-height: 1.5em; }
+
+.wiki_show, .wiki_version, .wiki_new, .wiki_edit, .wiki_all {
+  margin-top: 30px;
+  padding: 10px; }
+  .wiki_show h1, .wiki_version h1, .wiki_new h1, .wiki_edit h1, .wiki_all h1 {
+    padding-left: 0;
+    padding-top: 10px;
+    border-bottom-style: solid; }
+  .wiki_show .column_content, .wiki_version .column_content, .wiki_new .column_content, .wiki_edit .column_content, .wiki_all .column_content {
+    margin-bottom: 0; }
+
+#wiki_content {
+  min-height: 400px; }
+  #wiki_content span.editsection {
+    display: none; }
+  #wiki_content h2, #wiki_content h3, #wiki_content h4, #wiki_content h5, #wiki_content h6 {
+    background: transparent none repeat scroll 0 0;
+    border-bottom: 1px solid #AAAAAA;
+    padding-bottom: 0,17em;
+    padding-top: 0,5em;
+    font-weight: normal;
+    font-size: 150%;
+    color: black; }
+  #wiki_content h3, #wiki_content h4, #wiki_content h5, #wiki_content h6 {
+    border-bottom: medium none;
+    font-weight: bold; }
+  #wiki_content h3 {
+    font-size: 132%; }
+  #wiki_content h4 {
+    font-size: 116%; }
+  #wiki_content ul {
+    line-height: 1.5em;
+    margin: 0.3em 0 0 1.5em;
+    padding: 0; }
+  #wiki_content ol {
+    line-height: 1.5em;
+    margin: 0.3em 0 0 3.2em;
+    padding: 0;
+    list-style-image: none; }
+>>>>>>> wiki:public/stylesheets/print.css
 
 a.new_wiki_link {
   color: grey; }
@@ -460,13 +508,22 @@ a.new_wiki_link {
   border: 1px dotted grey;
   padding: 0 1em; }
 
-#toc {
-  float: right; }
+#wikitoc {
+  padding: 5px;
+  margin-bottom: 2em;
+  width: 25em;
+  border: 1px solid grey;
+  background-color: #efefef; }
+  #wikitoc h2 {
+    font-size: 1em;
+    color: black; }
+    #wikitoc h2 span a {
+      font-size: 0.5em;
+      color: grey; }
 
 #breadcrump {
   font-size: 0.5em;
   margin-bottom: 5px;
-  margin-top: 30px;
   height: 1em;
   color: #ED0606; }
   #breadcrump a {
@@ -477,22 +534,27 @@ a.new_wiki_link {
 
 #sidebar {
   float: right;
-  width: 20%; }
+  width: 290px;
+  margin-top: -60px; }
   #sidebar #page-versions {
-    margin-top: -60px;
+    margin-bottom: 18px;
     text-align: right; }
   #sidebar #subpages {
-    margin-top: 2em; }
-
-#wiki_content h1, #wiki_content h2, #wiki_content h3, #wiki_content h4, #wiki_content h5 {
-  color: black; }
-#wiki_content span.editsection {
-  display: none; }
+    border: 1px solid #78b74e;
+    margin-top: 10px;
+    padding: 0 0 0 0; }
+  #sidebar #versions {
+    margin-top: 10px;
+    border: 1px solid #78b74e; }
 
 #wiki-syntax-help {
   float: right; }
   #wiki-syntax-help table {
     border-color: #78b74e; }
+
+.wiki_version #sidebar {
+  margin-top: -23px;
+  border: 1px solid #78b74e; }
 
 #logininfo, #header, #footer {
   display: none; }
