@@ -26,8 +26,11 @@ class PagesController < ApplicationController
     if @page.nil?
       redirect_to new_page_path(:title => params[:permalink])
     elsif @page.redirect?
-      flash[:notice] = "Weitergeleitet von #{@page.title} ..."
-      redirect_to wiki_page_path(Page.find(@page.redirect).permalink)
+      page = Page.find_by_id(@page.redirect)
+      unless page.nil?
+        flash[:notice] = "Weitergeleitet von #{@page.title} ..."
+        redirect_to wiki_page_path(page.permalink)
+      end
     end
   end
 
