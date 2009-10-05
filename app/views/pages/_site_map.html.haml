@@ -1,0 +1,10 @@
+.column_content
+  %table
+    %tr
+      %th Titel
+      %th Zuletzt aktualisiert
+    - homepage = Page.find_by_permalink('Home')
+    = render :partial => 'page_list_item', :locals => {:page => homepage, :level => 0, :siteMap => 1}
+    - for page in @top_pages
+      - if page.id != homepage.id
+        = render :partial => 'page_list_item', :locals => {:page => page, :level => 0, :siteMap => 1}
