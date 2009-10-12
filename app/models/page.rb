@@ -31,6 +31,7 @@ class Page < ActiveRecord::Base
   after_update :create_redirect
 
   named_scope :non_redirected, :conditions => {:redirect => nil}
+  named_scope :no_parent, :conditions => {:parent_id => nil}
   
   def self.permalink(title)
     title.gsub(/[\/\.,;@\s]/, "_").gsub(/[\"\']/, "")

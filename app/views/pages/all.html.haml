@@ -8,13 +8,14 @@
 
 
   #sidebar
-    #sidebar-links= link_to "Neue Seite anlegen", new_page_path
+    #sidebar-links
+      = link_to "Neue Seite anlegen", new_page_path
 
-  %table
-    %tr
-      %th Titel
-      %th Zuletzt aktualisiert
-    - for page in @pages
-      %tr
-        %td= link_to page.title, wiki_page_path(page.permalink)
-        %td= format_datetime page.updated_at
+  .left_column{:style => "width:100%"}
+    .box_title
+      #editOrderNav
+        = remote_link_to 'Letzte Änderungen', :update => 'left_column', :url => {:action => 'all', :view => 'recentChanges'}
+        = remote_link_to 'Seiten-Liste', :update => 'left_column', :url => {:action => 'all', :view => 'titleList'}
+        = remote_link_to 'Site Map', :update => 'left_column', :url => {:action => 'all', :view => 'siteMap'}
+    #left_column
+      = render :partial => 'recent_changes'

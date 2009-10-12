@@ -96,7 +96,21 @@ class PagesController < ApplicationController
   end
 
   def all
-    @pages = Page.non_redirected.all :order => 'updated_at DESC'
+    @recent_pages = Page.non_redirected.all :order => 'updated_at DESC'
+    @pages = Page.non_redirected.all :order => 'title'
+    @top_pages = Page.no_parent.non_redirected.all :order => 'created_at'
+
+    view = params[:view]
+    params[:view] = nil
+
+    case view
+      when 'recentChanges'
+        render :partial => 'recent_changes' and return
+      when 'siteMap'
+        render :partial => 'site_map' and return
+      when 'titleList'
+       render :partial => 'title_list' and return
+    end
   end
 
   def version

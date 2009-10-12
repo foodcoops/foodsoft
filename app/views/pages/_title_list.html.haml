@@ -1,0 +1,7 @@
+.column_content
+  %table
+    %tr
+      %th Titel
+      %th Zuletzt aktualisiert
+    - for page in @pages
+      = render :partial => "page_list_item", :locals => {:page => page, :level => 0, :siteMap => 0}
