@@ -123,8 +123,9 @@ module ApplicationHelper
   def icon(name, options={})
     icons = { :delete => { :file => 'b_drop.png', :alt => 'Löschen'},
               :edit   => { :file => 'b_edit.png', :alt => 'Bearbeiten'}}
+    options[:alt] ||= icons[name][:alt]
+    options[:title] ||= icons[name][:title]
     options.merge!({:size => '16x16',:border => "0"})
-    options.merge!({:alt => icons[name][:alt], :title => icons[name][:alt]}) unless options[:alt]
     
     image_tag icons[name][:file], options
   end

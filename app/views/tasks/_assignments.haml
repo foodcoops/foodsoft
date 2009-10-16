@@ -1,4 +1,5 @@
 - @task.assignments.each do |ass|
   = ass.user.nick
-  %small= link_to icon(:delete), {:action => "drop_assignment", :id => ass}, :confirm => 'Bist du sicher?', :method => "post"
-  %br/
+  %small= link_to icon(:delete, :title => "#{ass.user.nick} entfernen"), |
+    {:action => "drop_assignment", :id => ass}, |
+    :confirm => 'Bist du sicher?', :method => "post" |
