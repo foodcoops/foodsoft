@@ -12,12 +12,7 @@ class TasksController < ApplicationController
   end
   
   def new
-    if params[:id]
-      group = Workgroup.find(params[:id])
-      @task = group.tasks.build(group.task_attributes(group.next_weekly_tasks[params[:task_from_now].to_i]))
-    else
-      @task = Task.new
-    end
+    @task = Task.new
   end
   
   def create

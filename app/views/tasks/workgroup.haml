@@ -5,44 +5,11 @@
 
 .left_column{:style => "width:45em"}
   .box_title 
-    %h2
-      Wöchentliche Aufgaben
-      = @group.task_name
+    %h2 Wöchentliche Aufgaben verwalten
   .column_content
     - if @group.weekly_task
-      %table.list
-        %tr
-          %th Datum
-          %th Wer machts?
-          %th Aufgabe übernehmen
-        - i = 0
-        - for next_date in @group.next_weekly_tasks
-          %tr{:class => cycle("even","odd")}
-            %td= I18n.l next_date, :format => "%a, %d.%m.%Y"
-            - if task = @group.tasks.find(:first, :conditions => {:due_date => next_date, :weekly => true})
-              - unless task.users.empty?
-                - owner = Array.new
-                - task.assignments.each do |ass| 
-                  - if ass.accepted? 
-                    - nick = "<span class='accepted'>#{ass.user.nick.to_s}</span>"
-                  - else
-                    - nick = "<span class='unaccepted'>#{ass.user.nick.to_s} ?</span>"
-                  - owner << nick
-                %td
-                  = owner.join(", ")
-                  %small= link_to "mehr", :action => "edit", :id => task
-              - else
-                %td
-                  = link_to "Verantwortliche zuweisen", :action => "edit", :id => task
-              %td
-                - unless task.is_accepted?(@current_user)
-                  %span{:style => "float:left"}= button_to "Aufgabe übernehmen", :controller => "tasks", :action => "accept", :id => task
-                  = button_to "Aufgabe ablehnen", :controller => "tasks", :action => "reject", :id => task if task.is_assigned?(@current_user)
-            - else
-              %td= link_to "Verantwortliche zuweisen", :action => "new", :id => @group, :task_from_now => i
-              %td
-          - i += 1
-      %br/
+      %p= "Jeden <b>#{weekday(@group.weekday)}</b> hat diese Arbeitsgruppe folgenden Job: <b>#{@group.task_name}</b>"
+      %p Die Wochenaufgaben werden von der Foodsoft automatisch erstellt. Eintragen müsst Ihr Euch aber selber.
     - else
       Noch keine Wochenaufgaben angelegt.
     - if @current_user.member_of?(@group) or @current_user.role_admin?
