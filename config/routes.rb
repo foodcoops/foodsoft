@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :invites, :only => [:new, :create]
 
   map.namespace :foodcoop do |foodcoop|
-    foodcoop.root :controller => "users", :action => "index"
+    foodcoop.root :controller => "tasks", :action => "index"
     foodcoop.resources :users, :only => [:index]
     foodcoop.resources :ordergroups, :only => [:index]
     foodcoop.resources :workgroups, :only => [:index, :edit, :update],
