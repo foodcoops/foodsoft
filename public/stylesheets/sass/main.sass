@@ -430,7 +430,7 @@ table#order
   input
     :font-size 80% 
   th#col_required, th#col_tolerance
-    :width 145px 
+    :width 165px
   th#col_packages,  th#col_left_units
     :width 50px 
   td#col_left_units
@@ -451,7 +451,28 @@ table#order
     :border-bottom 1px solid #DDDDDD 
     td
       :padding-left 20px
-      
+#order-footer, .article-info
+  z-index: 1
+  position: fixed
+  bottom: 0
+  width: 97.5%
+  background-color: #E4EED6
+  border-top: 2px solid #78B74E
+  #total-sum
+    width: 22em
+    margin: .5em 2em 0 0
+    float: right
+    #order-button
+      margin: .5em 0
+      input
+        background-color: #78B74E
+        color: #fff
+.article-info
+  z-index: 2
+  width: 30em
+  height: 8em
+  border: none
+  left: 30px
 // ********* Comments
 #newComment
   :margin 1em

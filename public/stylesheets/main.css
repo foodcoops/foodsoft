@@ -389,7 +389,7 @@ table#order {
   table#order input {
     font-size: 80%; }
   table#order th#col_required, table#order th#col_tolerance {
-    width: 145px; }
+    width: 165px; }
   table#order th#col_packages, table#order th#col_left_units {
     width: 50px; }
   table#order td#col_left_units {
@@ -409,6 +409,30 @@ table#order {
     border-bottom: 1px solid #DDDDDD; }
     table#order tr.note td {
       padding-left: 20px; }
+
+#order-footer, .article-info {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  width: 97.5%;
+  background-color: #E4EED6;
+  border-top: 2px solid #78B74E; }
+  #order-footer #total-sum, .article-info #total-sum {
+    width: 22em;
+    margin: .5em 2em 0 0;
+    float: right; }
+    #order-footer #total-sum #order-button, .article-info #total-sum #order-button {
+      margin: .5em 0; }
+      #order-footer #total-sum #order-button input, .article-info #total-sum #order-button input {
+        background-color: #78B74E;
+        color: #fff; }
+
+.article-info {
+  z-index: 2;
+  width: 30em;
+  height: 8em;
+  border: none;
+  left: 30px; }
 
 #newComment {
   margin: 1em; }
