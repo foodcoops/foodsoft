@@ -1,5 +1,15 @@
 - title "Lagerübersicht: #{StockArticle.available.count} Artikel im Lager"
 
+.menu
+  - form_tag do
+    %ul
+      %li
+        Ansichtsoptionen
+        %ul
+          %li= link_to_function "Nicht verfügbare Artikel zeigen/verstecken", |
+            "$$('tr.unavailable').invoke('toggleClassName', 'hidden');", :style => "width:15em" |
+
+
 %div{:style => "padding:0 0 0.5em 0.7em;margin-bottom:2em"}
   %span{:style => "float:left"}
     - form_tag do
@@ -20,11 +30,6 @@
       %b= link_to "Inventur anlegen", new_stock_taking_path
       |
       = link_to "Inventurübersicht", stock_takings_path
-      |
-      - unless params[:show_not_available] == "1"
-        = link_to "Zeige auch nicht verfügbare Lagerartikel", stock_articles_path(:show_not_available => 1)
-      - else
-        = link_to "Verstecke nicht verfügbare Artikel", stock_articles_path
 
     #articles{:style => "clear:both;margin-top:1em"}
       %table.list
@@ -42,7 +47,10 @@
             %th
         %tbody
           - for article in @stock_articles
-            %tr{:class => cycle("even", "odd")}
+            - class_name = cycle :even, :odd
+            - class_name += " unavailable hidden" if article.quantity_available <= 0
+            - class_name += " supplier_#{article.supplier.id}"
+            %tr{:class => class_name}
               %td=h article.name
               %td= article.quantity
               %td= article.quantity - article.quantity_available

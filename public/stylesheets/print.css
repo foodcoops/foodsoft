@@ -88,6 +88,9 @@ span.click-me {
   color: grey;
   font-size: 0.9em; }
 
+.hidden {
+  display: none; }
+
 #login {
   margin: auto;
   width: 27em;
