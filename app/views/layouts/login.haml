@@ -4,7 +4,8 @@
     %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
     %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
     = stylesheet_link_tag 'foodsoft'
-    = javascript_include_tag 'prototype'    
+    = javascript_include_tag 'prototype'
+    = yield(:head)
   %body
     #login
       - if yield(:title)

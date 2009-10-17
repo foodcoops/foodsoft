@@ -1,6 +1,20 @@
-- title "Login"
+- content_for :head do
+  :javascript
+    document.observe("dom:loaded", function() {
+      // initially hide javascript warn message, when javascript is available
+      $('javascript-warn').hide(); $('login-form').show();
 
-.edit_form{:style => "width:25em"}
+      $('login_user').focus();
+    });
+
+- title "FoodSoft login"
+
+#javascript-warn.error(style="font-size:1.5em")
+  %b Achtung, Cookies und Javascript müssen aktiviert sein!
+  = link_to "NoScript", "http://noscript.net/"
+  bitte abschalten.
+
+#login-form.edit_form(style="width:25em;display:none")
   - form_tag :action => 'login' do
     - if flash[:notice]
       %div.notice= flash[:notice]
@@ -17,8 +31,3 @@
     = submit_tag "Anmelden"
     |
     = link_to "Passwort vergessen?", :action => 'forgot_password'
-    %div{:style => 'font-size:0.9em;margin-top:2em;'}
-      %b Achtung, Cookies und Javascript müssen aktiviert sein!
-      = link_to "NoScript", "http://noscript.net/"
-      bitte abschalten.
-= javascript_tag("$('login_user').focus()")
