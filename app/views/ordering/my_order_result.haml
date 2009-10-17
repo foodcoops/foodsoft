@@ -124,13 +124,16 @@
       %br/
       = link_to_top
     - else
-      Du hast noch nicht bestellt.
-      = link_to "Das ist Deine Chance!", :action => "order", :id => @order
+      - if @order.open?
+        Du hast noch nicht bestellt.
+        = link_to "Das ist Deine Chance!", :action => "order", :id => @order
+      - else
+        Die Bestellung is leider schon zu Ende. Beim nächsten mal früher aufstehen...
 
 //  Comments box
 .single_column{:style => "width:70em;"}
   .box_title
-    %h2=_ "Comments"
+    %h2 Kommentare
   .column_content#comments
     = render :partial => 'shared/comments', :locals => { :comments => @order.comments }
     %p
