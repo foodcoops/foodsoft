@@ -1,3 +1,14 @@
+- content_for :head do
+  :javascript
+    document.observe("dom:loaded", function() {
+      // initially hide all ignored articles
+      $$('tr.ignored').invoke('hide');
+    });
+    function toggleIgnoredArticles() {
+      $$('tr.ignored').invoke('toggle');
+    };
+
+
 - title "Dein Bestellergebnis für #{@order.name}"
 #element_navigation
   = link_to_unless @order.previous == @order, "<< #{@order.previous.name}", :action => "my_order_result", :id => @order.previous
@@ -52,6 +63,7 @@
     %h2 Artikelübersicht
   .column_content#result
     - if @group_order
+      %p(style="float:right")= link_to_function "Zeige/Verstecke nicht bestellte Artikel", "toggleIgnoredArticles();"
       %p= link_to("Bestellung ändern", :action => "order", :id => @order) if @order.open?
       %table.list
         %thead
@@ -88,10 +100,10 @@
                 - quantity, tolerance, result, sub_total = 0, 0, 0, 0
               - total += sub_total
               - # give the article different colors, dependent on order-result
-              - style = "grey"
+              - class_name = "ignored"
               - if (quantity > 0)
-                - style = result > 0 ? 'green' : 'red'
-              %tr{:class => cycle('even', 'odd', :name => 'articles'), :style => "color:#{style}"}
+                - class_name = result > 0 ? 'success' : 'failed'
+              %tr{:class => cycle('even', 'odd', :name => 'articles') + " " + class_name}
                 %td{:style => "width:40%"}
                   =h oa.article.name
                   - unless oa.article.note.blank?

@@ -239,6 +239,12 @@ table {
     background-color: #ffffc2; }
   table tr.click-me {
     cursor: pointer; }
+  table tr.ignored {
+    color: grey; }
+  table tr.success {
+    color: green; }
+  table tr.failed {
+    color: red; }
 
 table.list tr {
   border: 1px solid #e3e3e3; }

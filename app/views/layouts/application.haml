@@ -13,6 +13,7 @@
     = javascript_include_tag 'controls'
     = javascript_include_tag 'application'
     = javascript_include_tag('ordering') if (controller.controller_name == "ordering")
+    = yield(:head)
   %body
     #logininfo= render :partial => 'shared/loginInfo'
     
