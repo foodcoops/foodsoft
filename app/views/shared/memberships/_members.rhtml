@@ -19,7 +19,7 @@
     </div>
     <div class="column_content" id="non_members">
         <%= render :partial => 'shared/memberships/non_members' %>
-		<%= link_to('Person einladen', :controller => '/foodcoop', :action => 'invite', :id => @group) %>
+		<%= remote_link_to('Person einladen', :url => new_invite_path(:id => @group)) %>
     </div>
 </div>
 
