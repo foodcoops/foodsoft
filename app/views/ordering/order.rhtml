@@ -1,7 +1,7 @@
 <%= render :partial => 'order_head' %>
 
-<div class="single_column" style="clear:both;">
-  <% form_tag(:action => 'saveOrder', :id => @order) do %>
+<% form_tag(:action => 'saveOrder', :id => @order) do %>
+  <div class="single_column" style="clear:both;margin-bottom:7em;">
     <div class="box_title">
       <h2>Artikel</h2>
     </div>
@@ -38,8 +38,8 @@
               end
               total += article_total
               -%>
-            <tr class="<%= cycle('even', 'odd', :name => 'articles') %>" valign="top" 
-                onmouseover="$('article-info_<%= order_article.id %>').show();" onmouseout="$('article-info_<%= order_article.id %>').hide();">
+              <tr class="<%= cycle('even', 'odd', :name => 'articles') %>" valign="top"
+                  onmouseover="$('article-info_<%= order_article.id %>').show();" onmouseout="$('article-info_<%= order_article.id %>').hide();">
                 <td class="name"><%= order_article.article.name %></td>
                 <td><%=h order_article.article.origin %></td>
                 <td><%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %></td>
@@ -65,46 +65,46 @@
                 </td>
                 <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €</td>
               </tr>
-        <div class="article-info" id="article-info_<%= order_article.id %>" style="display:none">
-          <b><%= order_article.article.name -%></b>
-          <p>
-            Hersteller: <%= order_article.article.manufacturer -%><br />
-            Notiz: <%= order_article.article.note -%><br />
-          </p>
-        </div>
-              <%- i = i + 1
-            end
-          end -%>
+            <div class="article-info" id="article-info_<%= order_article.id %>" style="display:none">
+              <b><%= order_article.article.name -%></b>
+              <p>
+                Hersteller: <%= order_article.article.manufacturer -%><br />
+                Notiz: <%= order_article.article.note -%><br />
+              </p>
+            </div>
+            <%- i = i + 1
+          end
+        end -%>
         </tbody>
       </table>
     </div>
+  </div>
   <div id="order-footer">
-      <div id="info-box">
-      </div>
-      <div id="total-sum">
-        <table>
-          <tr>
-            <td>Gesamtbetrag:</td>
-            <td class="currency"><span id="total_price"><%= total %></span> €</td>
-          </tr>
-          <tr>
-            <td>Verfügbares Guthaben:</td>
-            <td class="currency"><%= number_to_currency(@availableFunds) %></td>
-          </tr>
-          <tr>
-            <td>Neuer Kontostand:</td>
-            <td class="currency"><strong><span id="new_balance"><%= @ordergroup.account_balance - total %></span> €</strong></td>
-          </tr>
-        </table>
-        <div id="order-button">
-          <%= submit_tag( "Bestellung speichern", :id => 'submit_button' ) %></span> oder <%= link_to "abbrechen", :controller => 'ordering' %>
-        </div>
+    <div id="info-box">
+    </div>
+    <div id="total-sum">
+      <table>
+        <tr>
+          <td>Gesamtbetrag:</td>
+          <td class="currency"><span id="total_price"><%= total %></span> €</td>
+        </tr>
+        <tr>
+          <td>Verfügbares Guthaben:</td>
+          <td class="currency"><%= number_to_currency(@availableFunds) %></td>
+        </tr>
+        <tr>
+          <td>Neuer Kontostand:</td>
+          <td class="currency"><strong><span id="new_balance"><%= @ordergroup.account_balance - total %></span> €</strong></td>
+        </tr>
+      </table>
+      <div id="order-button">
+        <%= submit_tag( "Bestellung speichern", :id => 'submit_button' ) %></span> oder <%= link_to "abbrechen", :controller => 'ordering' %>
       </div>
     </div>
-    <input type="hidden" id="total_balance" name="total_balance" value="<%= @ordergroup.account_balance - total %>"/>
-    <input type="hidden" name="version" value="<%= @version %>"/>
-  <% end %>
-</div>
+  </div>
+  <input type="hidden" id="total_balance" name="total_balance" value="<%= @ordergroup.account_balance - total %>"/>
+  <input type="hidden" name="version" value="<%= @version %>"/>
+<% end %>
 
 <script type="text/javascript">
   //<![CDATA[
@@ -130,8 +130,8 @@ end%>
   updateBalance();
 
   // show article info on row hover
-  <%#*$$('tbody tr').observer('hover', function() {%>
+<%#*$$('tbody tr').observer('hover', function() {%>
 
-  <%#*});%>
+<%#*});%>
   //]]>
 </script>
