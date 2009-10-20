@@ -428,16 +428,24 @@ span.total
 table#order
   :text-align center
   input
-    :font-size 80% 
+    font-size: 0.9em
+    font-weight: bolder
+    background-color: #78B74E
+    color: #fff
+    -moz-border-radius: 3px
+    -webkit-border-radius: 3px
+    padding: 0
   th#col_required, th#col_tolerance
     :width 165px
   th#col_packages,  th#col_left_units
-    :width 50px 
+    :width 50px
+  td.quantity, td.tolerance
+    text-align: right
   td#col_left_units
     :color #ed0606
   td
     :padding 0.6em
-  td.name, tr.note td
+  td.name
     :text-align left
     :padding-left 10px
   tfoot
@@ -445,12 +453,6 @@ table#order
       :background-color = !lightGreen
     td
       :padding-right 10px
-  tr.note
-    :background-color #FBFBFB
-    :font-size 0.9em
-    :border-bottom 1px solid #DDDDDD 
-    td
-      :padding-left 20px
 #order-footer, .article-info
   z-index: 1
   position: fixed
@@ -467,6 +469,8 @@ table#order
       input
         background-color: #78B74E
         color: #fff
+        -moz-border-radius: 3px
+        -webkit-border-radius: 3px
       input:disabled
         background-color: red
 .article-info

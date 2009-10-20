@@ -45,7 +45,7 @@
                 <td><%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %></td>
                 <td><%= number_to_currency(@price[i]) %></td>
                 <td id="units_<%= i %>"><%= order_article.units_to_order %></td>
-                <td style="text-align:right;">
+                <td class="quantity">
                   <input type="hidden" id="q_<%= i %>" name="<%= "ordered[#{order_article.id}][quantity]" %>" value="<%= @quantity[i] %>" size="2" />
                   <span id="q_used_<%= i %>" class="used"><%= @used_quantity[i] %></span> +
                   <span id="q_unused_<%= i %>" class="unused"><%= @quantity[i] - @used_quantity[i] %></span>
@@ -53,7 +53,7 @@
                   <%= button_to_function('+', "increaseQuantity(#{i})") %>
                   <%= button_to_function('-', "decreaseQuantity(#{i})") %>
                 </td>
-                <td style="text-align:right;">
+                <td class="tolerance">
                   <input type="hidden" id="t_<%= i %>" name="<%= "ordered[#{order_article.id}][tolerance]" %>" value="<%= @tolerance[i] %>" size="2" />
                   <% if (@unit[i] > 1) -%>
                     <span id="t_used_<%= i %>" class="used"><%= @used_tolerance[i] %></span> +
