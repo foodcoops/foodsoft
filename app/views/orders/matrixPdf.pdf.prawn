@@ -10,7 +10,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom-5] do
   pdf.text "Seite #{pdf.page_count}", :size => 8
 end
 
-max_order_articles_per_page = 17 # How many order_articles shoud written on a page
+max_order_articles_per_page = 16 # How many order_articles shoud written on a page
 order_articles = @order.order_articles.ordered
 
 pdf.text "Artikelübersicht", :style => :bold
