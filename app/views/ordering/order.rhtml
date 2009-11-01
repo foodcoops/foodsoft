@@ -14,7 +14,9 @@
             <th style="width:4.5em;">Preis</th>
             <th style="width:7em;">Fehlende Einheiten</th>
             <th id="col_required">Menge</th>
-            <th id="col_tolerance">Toleranz</th>
+            <% if not @order.stockit? -%>
+              <th id="col_tolerance">Toleranz</th>
+            <% end %>
             <th>Summe</th>
           </tr>
         </thead>
@@ -55,6 +57,7 @@
                   <%= button_to_function('+', "increaseQuantity(#{i})") %>
                   <%= button_to_function('-', "decreaseQuantity(#{i})") %>
                 </td>
+                <% if not @order.stockit? -%>
                 <td class="tolerance">
                   <input type="hidden" id="t_<%= i %>" name="<%= "ordered[#{order_article.id}][tolerance]" %>" value="<%= @tolerance[i] %>" size="2" />
                   <% if (@unit[i] > 1) -%>
@@ -64,6 +67,7 @@
                     <%= button_to_function('-', "decreaseTolerance(#{i})") %>
                   <% end -%>
                 </td>
+                <% end %>
                 <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €
                   <div class="article-info" id="article-info_<%= order_article.id %>" style="display:none">
                     <div class="right">
