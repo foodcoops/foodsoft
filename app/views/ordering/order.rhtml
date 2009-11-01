@@ -11,9 +11,8 @@
           <tr>
             <th>Name</th>
             <th></th>
-            <th style="width:7em;">Gebinde</th>
             <th style="width:4.5em;">Preis</th>
-            <th id="col_packages"><acronym title="insgesamt bestellte Gebinde">Best</acronym></th>
+            <th style="width:7em;">Fehlende Einheiten</th>
             <th id="col_required">Menge</th>
             <th id="col_tolerance">Toleranz</th>
             <th>Summe</th>
@@ -42,14 +41,17 @@
                   onmouseover="$('article-info_<%= order_article.id %>').show();" onmouseout="$('article-info_<%= order_article.id %>').hide();">
                 <td class="name"><%= order_article.article.name %></td>
                 <td><%=h order_article.article.origin %></td>
-                <td><%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %></td>
                 <td><%= number_to_currency(@price[i]) %></td>
-                <td id="units_<%= i %>"><%= order_article.units_to_order %></td>
+                <td><span id="missing_units_<%= i %>"><%= if @order.stockit?
+                  order_article.article.quantity_available
+                else
+                  missing_units = @unit[i] - (((@quantity[i] + @others_quantity[i]) % @unit[i]) + @tolerance[i] + @others_tolerance[i])
+                  missing_units < 0 ? 0 : missing_units
+                end%></span></td>
                 <td class="quantity">
                   <input type="hidden" id="q_<%= i %>" name="<%= "ordered[#{order_article.id}][quantity]" %>" value="<%= @quantity[i] %>" size="2" />
                   <span id="q_used_<%= i %>" class="used"><%= @used_quantity[i] %></span> +
                   <span id="q_unused_<%= i %>" class="unused"><%= @quantity[i] - @used_quantity[i] %></span>
-                  <span class="total">(<span id="q_total_<%= i %>"><%= @quantity[i] + @others_quantity[i] %></span>)</span>
                   <%= button_to_function('+', "increaseQuantity(#{i})") %>
                   <%= button_to_function('-', "decreaseQuantity(#{i})") %>
                 </td>
@@ -58,23 +60,32 @@
                   <% if (@unit[i] > 1) -%>
                     <span id="t_used_<%= i %>" class="used"><%= @used_tolerance[i] %></span> +
                     <span id="t_unused_<%= i %>" class="unused"><%= @tolerance[i] - @used_tolerance[i] %></span>
-                    <span class="total">(<span id="t_total_<%= i %>"><%= @tolerance[i] + @others_tolerance[i] %></span>)</span>
                     <%= button_to_function('+', "increaseTolerance(#{i})") %>
                     <%= button_to_function('-', "decreaseTolerance(#{i})") %>
                   <% end -%>
                 </td>
-                <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €</td>
+                <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €
+                  <div class="article-info" id="article-info_<%= order_article.id %>" style="display:none">
+                    <div class="right">
+                      Volle Gebinde: <span id="units_<%= i %>"><%= order_article.units_to_order %></span><br/>
+                      Gesamt-Einheiten: <span id="q_total_<%= i %>"><%= @quantity[i] + @others_quantity[i] %></span><br/>
+                      Gesamt-Toleranz: <span id="t_total_<%= i %>"><%= @tolerance[i] + @others_tolerance[i] %></span><br/>
+                    </div>
+                    <div class="left">
+                      <b><%= order_article.article.name -%></b>
+                      <p>
+                        Hersteller: <%= order_article.article.manufacturer -%><br />
+                        Notiz: <%= order_article.article.note -%><br />
+                        Gebinde: <%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %>
+                      </p>
+                    </div>
+                  </div>
+                </td>
               </tr>
-            <div class="article-info" id="article-info_<%= order_article.id %>" style="display:none">
-              <b><%= order_article.article.name -%></b>
-              <p>
-                Hersteller: <%= order_article.article.manufacturer -%><br />
-                Notiz: <%= order_article.article.note -%><br />
-              </p>
-            </div>
-            <%- i = i + 1
-          end
-        end -%>
+
+              <%- i = i + 1
+            end
+          end -%>
         </tbody>
       </table>
     </div>
@@ -125,7 +136,7 @@ end%>
 
   // configuration
   setToleranceBehaviour(<%= Foodsoft.config[:tolerance_is_costly] %>);
-    
+
   // initialize javascript
   updateBalance();
 

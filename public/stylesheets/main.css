@@ -81,6 +81,12 @@ option {
 span.click-me {
   cursor: pointer; }
 
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
 .clear {
   clear: both; }
 
@@ -413,6 +419,7 @@ table#order {
     padding-right: 10px; }
 
 #order-footer, .article-info {
+  text-align: left;
   z-index: 1;
   position: fixed;
   bottom: 0;
@@ -435,7 +442,7 @@ table#order {
 
 .article-info {
   z-index: 2;
-  width: 30em;
+  width: 50em;
   height: 8em;
   border: none;
   left: 30px; }
