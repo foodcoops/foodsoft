@@ -79,8 +79,8 @@
                       <b><%= order_article.article.name -%></b>
                       <p>
                         Hersteller: <%= order_article.article.manufacturer -%><br />
+                        Gebinde: <%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %><br/>
                         Notiz: <%= order_article.article.note -%><br />
-                        Gebinde: <%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %>
                       </p>
                     </div>
                   </div>

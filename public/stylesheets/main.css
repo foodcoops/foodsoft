@@ -423,7 +423,6 @@ table#order {
   z-index: 1;
   position: fixed;
   bottom: 0;
-  width: 97.5%;
   background-color: #E4EED6;
   border-top: 2px solid #78B74E; }
   #order-footer #total-sum, .article-info #total-sum {
@@ -439,6 +438,10 @@ table#order {
         -webkit-border-radius: 3px; }
       #order-footer #total-sum #order-button input:disabled, .article-info #total-sum #order-button input:disabled {
         background-color: red; }
+
+#order-footer {
+  right: 15px;
+  left: 15px; }
 
 .article-info {
   z-index: 2;
