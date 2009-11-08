@@ -45,11 +45,11 @@
                 <td><%=h order_article.article.origin %></td>
                 <td><%= number_to_currency(@price[i]) %></td>
                 <td><span id="missing_units_<%= i %>"><%= if @order.stockit?
-                  order_article.article.quantity_available
-                else
-                  missing_units = @unit[i] - (((@quantity[i] + @others_quantity[i]) % @unit[i]) + @tolerance[i] + @others_tolerance[i])
-                  missing_units < 0 ? 0 : missing_units
-                end%></span></td>
+                      order_article.article.quantity_available
+                    else
+                      missing_units = @unit[i] - (((@quantity[i] + @others_quantity[i]) % @unit[i]) + @tolerance[i] + @others_tolerance[i])
+                      missing_units < 0 ? 0 : missing_units
+                    end%></span></td>
                 <td class="quantity">
                   <input type="hidden" id="q_<%= i %>" name="<%= "ordered[#{order_article.id}][quantity]" %>" value="<%= @quantity[i] %>" size="2" />
                   <span id="q_used_<%= i %>" class="used"><%= @used_quantity[i] %></span> +
@@ -58,30 +58,28 @@
                   <%= button_to_function('-', "decreaseQuantity(#{i})") %>
                 </td>
                 <% if not @order.stockit? -%>
-                <td class="tolerance">
-                  <input type="hidden" id="t_<%= i %>" name="<%= "ordered[#{order_article.id}][tolerance]" %>" value="<%= @tolerance[i] %>" size="2" />
-                  <% if (@unit[i] > 1) -%>
-                    <span id="t_used_<%= i %>" class="used"><%= @used_tolerance[i] %></span> +
-                    <span id="t_unused_<%= i %>" class="unused"><%= @tolerance[i] - @used_tolerance[i] %></span>
-                    <%= button_to_function('+', "increaseTolerance(#{i})") %>
-                    <%= button_to_function('-', "decreaseTolerance(#{i})") %>
-                  <% end -%>
-                </td>
+                  <td class="tolerance">
+                    <input type="hidden" id="t_<%= i %>" name="<%= "ordered[#{order_article.id}][tolerance]" %>" value="<%= @tolerance[i] %>" size="2" />
+                    <% if (@unit[i] > 1) -%>
+                      <span id="t_used_<%= i %>" class="used"><%= @used_tolerance[i] %></span> +
+                      <span id="t_unused_<%= i %>" class="unused"><%= @tolerance[i] - @used_tolerance[i] %></span>
+                      <%= button_to_function('+', "increaseTolerance(#{i})") %>
+                      <%= button_to_function('-', "decreaseTolerance(#{i})") %>
+                    <% end -%>
+                  </td>
                 <% end %>
                 <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €
                   <div class="article-info" id="article-info_<%= order_article.id %>" style="display:none">
+                    <h3><%= order_article.article.name -%></h3>
                     <div class="right">
                       Volle Gebinde: <span id="units_<%= i %>"><%= order_article.units_to_order %></span><br/>
                       Gesamt-Einheiten: <span id="q_total_<%= i %>"><%= @quantity[i] + @others_quantity[i] %></span><br/>
                       Gesamt-Toleranz: <span id="t_total_<%= i %>"><%= @tolerance[i] + @others_tolerance[i] %></span><br/>
                     </div>
                     <div class="left">
-                      <b><%= order_article.article.name -%></b>
-                      <p>
-                        Hersteller: <%= order_article.article.manufacturer -%><br />
-                        Gebinde: <%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %><br/>
-                        Notiz: <%= order_article.article.note -%><br />
-                      </p>
+                      Hersteller: <%= order_article.article.manufacturer -%><br />
+                      Gebinde: <%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %><br/>
+                      Notiz: <%= order_article.article.note -%><br />
                     </div>
                   </div>
                 </td>

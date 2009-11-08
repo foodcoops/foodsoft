@@ -440,15 +440,21 @@ table#order {
         background-color: red; }
 
 #order-footer {
+  min-width: 975px;
   right: 15px;
   left: 15px; }
 
 .article-info {
   z-index: 2;
-  width: 50em;
+  width: 45em;
   height: 8em;
   border: none;
   left: 30px; }
+  .article-info h3 {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 5px;
+    width: 100%; }
 
 #newComment {
   margin: 1em; }
