@@ -39,8 +39,7 @@
               end
               total += article_total
               -%>
-              <tr class="<%= cycle('even', 'odd', :name => 'articles') %>" valign="top"
-                  onmouseover="$('article-info_<%= order_article.id %>').show();" onmouseout="$('article-info_<%= order_article.id %>').hide();">
+              <tr class="<%= cycle('even', 'odd', :name => 'articles') %> order-article" valign="top">
                 <td class="name"><%= order_article.article.name %></td>
                 <td><%=h order_article.article.origin %></td>
                 <td><%= number_to_currency(@price[i]) %></td>
@@ -69,7 +68,7 @@
                   </td>
                 <% end %>
                 <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €
-                  <div class="article-info" id="article-info_<%= order_article.id %>" style="display:none">
+                  <div class="article-info">
                     <h3><%= order_article.article.name -%></h3>
                     <div class="right">
                       Volle Gebinde: <span id="units_<%= i %>"><%= order_article.units_to_order %></span><br/>

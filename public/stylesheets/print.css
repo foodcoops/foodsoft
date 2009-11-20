@@ -457,6 +457,12 @@ table#order {
     margin-bottom: 5px;
     width: 100%; }
 
+tr.order-article .article-info {
+  display: none; }
+
+tr.order-article:hover .article-info {
+  display: block; }
+
 #newComment {
   margin: 1em; }
 
