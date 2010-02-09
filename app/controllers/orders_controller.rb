@@ -95,7 +95,7 @@ class OrdersController < ApplicationController
   def finish
     order = Order.find(params[:id])
     order.finish!(@current_user)
-    call_rake "foodsoft:notify_order_finished", :order_id => order.id
+    call_rake "foodsoft:finished_order_tasks", :order_id => order.id
     flash[:notice] = "Die Bestellung wurde beendet."
     redirect_to order
   end

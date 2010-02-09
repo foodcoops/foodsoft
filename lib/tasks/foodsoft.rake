@@ -68,13 +68,31 @@ namespace :foodsoft do
     end
   end
 
-  desc "Notify users of finished orders"
-  task :notify_order_finished => :environment do
+  desc "finished order tasks, cleanup, notifications, stats ..."
+  task :finished_order_tasks => :environment do
+    puts "Start: #{Time.now}"
     order = Order.find(ENV["ORDER_ID"])
+
+    # Update GroupOrder prices
+    order.group_orders.each { |go| go.update_price! }
+
+    # Clean up
+    # Delete no longer required order-history (group_order_article_quantities) and
+    # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
+    order.order_articles.each do |oa|
+      oa.group_order_articles.each { |goa| goa.group_order_article_quantities.clear }
+    end
+
+    # Notifications
     for group_order in order.group_orders
       for user in group_order.ordergroup.users
         Mailer.deliver_order_result(user, group_order) if user.settings["notify.orderFinished"] == '1'
       end
     end
+
+    # Stats
+    order.ordergroups.each { |o| o.update_stats! }
+
+    puts "End: #{Time.now}"
   end
 end
