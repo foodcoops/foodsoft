@@ -3,16 +3,12 @@
   %head
     %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
     %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
-    = stylesheet_link_tag 'foodsoft'
+    = stylesheet_link_tag 'main', 'rails_messages', 'nav', :cache => "all_cached"
     = stylesheet_link_tag "print", :media => "print"
     <!--[if lte IE 7]>
     = stylesheet_link_tag 'ie_hacks'
     <![endif]-->
-    = javascript_include_tag 'prototype'
-    = javascript_include_tag 'effects'
-    = javascript_include_tag 'controls'
-    = javascript_include_tag 'application'
-    = javascript_include_tag('ordering') if (controller.controller_name == "ordering")
+    = javascript_include_tag 'prototype', 'effects', 'controls', 'application', 'ordering', :cache => "all_cached"
     = yield(:head)
   %body
     #logininfo= render :partial => 'shared/loginInfo'
