@@ -424,8 +424,7 @@ table#order {
   position: fixed;
   bottom: 0;
   background-color: #E4EED6;
-  border-top: 2px solid #78B74E;
-  opacity: 0.95; }
+  border-top: 2px solid #78B74E; }
   #order-footer #total-sum, .article-info #total-sum {
     width: 22em;
     margin: .5em 2em 0 0;
@@ -441,9 +440,9 @@ table#order {
         background-color: red; }
 
 #order-footer {
-  min-width: 975px;
-  right: 15px;
-  left: 15px; }
+  width: 100%;
+  right: 0;
+  left: 0; }
 
 .article-info {
   z-index: 2;
