@@ -90,7 +90,10 @@ option
 
 span.click-me
   cursor: pointer
-
+.left
+  float: left
+.right
+  float: right
 .clear
   clear: both
 
@@ -428,16 +431,24 @@ span.total
 table#order
   :text-align center
   input
-    :font-size 80% 
+    font-size: 0.9em
+    font-weight: bolder
+    background-color: #78B74E
+    color: #fff
+    -moz-border-radius: 3px
+    -webkit-border-radius: 3px
+    padding: 0
   th#col_required, th#col_tolerance
-    :width 145px 
+    :width 165px
   th#col_packages,  th#col_left_units
-    :width 50px 
+    :width 50px
+  td.quantity, td.tolerance
+    text-align: right
   td#col_left_units
     :color #ed0606
   td
     :padding 0.6em
-  td.name, tr.note td
+  td.name
     :text-align left
     :padding-left 10px
   tfoot
@@ -445,13 +456,46 @@ table#order
       :background-color = !lightGreen
     td
       :padding-right 10px
-  tr.note
-    :background-color #FBFBFB
-    :font-size 0.9em
-    :border-bottom 1px solid #DDDDDD 
-    td
-      :padding-left 20px
-      
+#order-footer, .article-info
+  text-align: left
+  z-index: 1
+  position: fixed
+  bottom: 0
+  background-color: #E4EED6
+  border-top: 2px solid #78B74E
+  //opacity: 0.95
+  #total-sum
+    width: 22em
+    margin: .5em 2em 0 0
+    float: right
+    #order-button
+      margin: .5em 0
+      input
+        background-color: #78B74E
+        color: #fff
+        -moz-border-radius: 3px
+        -webkit-border-radius: 3px
+      input:disabled
+        background-color: red
+#order-footer
+  width: 100%
+  right: 0
+  left: 0
+.article-info
+  z-index: 2
+  width: 45em
+  height: 8em
+  border: none
+  left: 30px
+  h3
+    text-align: center
+    margin: 0
+    margin-bottom: 5px
+    width: 100%
+tr.order-article .article-info
+  display: none
+tr.order-article:hover .article-info
+  display: block
 // ********* Comments
 #newComment
   :margin 1em

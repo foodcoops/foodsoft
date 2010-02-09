@@ -81,6 +81,12 @@ option {
 span.click-me {
   cursor: pointer; }
 
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
 .clear {
   clear: both; }
 
@@ -387,28 +393,74 @@ span.total {
 table#order {
   text-align: center; }
   table#order input {
-    font-size: 80%; }
+    font-size: 0.9em;
+    font-weight: bolder;
+    background-color: #78B74E;
+    color: #fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 0; }
   table#order th#col_required, table#order th#col_tolerance {
-    width: 145px; }
+    width: 165px; }
   table#order th#col_packages, table#order th#col_left_units {
     width: 50px; }
+  table#order td.quantity, table#order td.tolerance {
+    text-align: right; }
   table#order td#col_left_units {
     color: #ed0606; }
   table#order td {
     padding: 0.6em; }
-  table#order td.name, table#order tr.note td {
+  table#order td.name {
     text-align: left;
     padding-left: 10px; }
   table#order tfoot tr {
     background-color: #e4eed6; }
   table#order tfoot td {
     padding-right: 10px; }
-  table#order tr.note {
-    background-color: #FBFBFB;
-    font-size: 0.9em;
-    border-bottom: 1px solid #DDDDDD; }
-    table#order tr.note td {
-      padding-left: 20px; }
+
+#order-footer, .article-info {
+  text-align: left;
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  background-color: #E4EED6;
+  border-top: 2px solid #78B74E; }
+  #order-footer #total-sum, .article-info #total-sum {
+    width: 22em;
+    margin: .5em 2em 0 0;
+    float: right; }
+    #order-footer #total-sum #order-button, .article-info #total-sum #order-button {
+      margin: .5em 0; }
+      #order-footer #total-sum #order-button input, .article-info #total-sum #order-button input {
+        background-color: #78B74E;
+        color: #fff;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px; }
+      #order-footer #total-sum #order-button input:disabled, .article-info #total-sum #order-button input:disabled {
+        background-color: red; }
+
+#order-footer {
+  width: 100%;
+  right: 0;
+  left: 0; }
+
+.article-info {
+  z-index: 2;
+  width: 45em;
+  height: 8em;
+  border: none;
+  left: 30px; }
+  .article-info h3 {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 5px;
+    width: 100%; }
+
+tr.order-article .article-info {
+  display: none; }
+
+tr.order-article:hover .article-info {
+  display: block; }
 
 #newComment {
   margin: 1em; }

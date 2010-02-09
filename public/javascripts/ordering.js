@@ -109,6 +109,13 @@ function update(item, quantity, tolerance) {
         itemTotal[item] = price[item] * (Number(quantity));
     }
 	$('price_' + item + '_display').update(asMoney(itemTotal[item]));
+
+  // update missing units
+  missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
+  if (missing_units < 0) {
+    missing_units = 0;
+  }
+  $('missing_units_' + item).update(String(missing_units));
     
     // update balance
     updateBalance();

@@ -1,7 +1,7 @@
 <%= render :partial => 'order_head' %>
 
-<div class="single_column" style="clear:both;">
-  <% form_tag(:action => 'saveOrder', :id => @order) do %>
+<% form_tag(:action => 'saveOrder', :id => @order) do %>
+  <div class="single_column" style="clear:both;margin-bottom:7em;">
     <div class="box_title">
       <h2>Artikel</h2>
     </div>
@@ -10,124 +10,140 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th></th>
-            <th>Herstellerin</th>
-            <th style="width:7em;">Gebinde</th>
+            <th style="width:13px;"></th>
             <th style="width:4.5em;">Preis</th>
-            <th id="col_packages"><acronym title="insgesamt bestellte Gebinde">Best</acronym></th>
+            <th style="width:7em;">Fehlende Einheiten</th>
             <th id="col_required">Menge</th>
-            <th id="col_tolerance">Toleranz</th>
-            <th>Summe</th>
+            <% if not @order.stockit? -%>
+              <th id="col_tolerance">Toleranz</th>
+            <% end %>
+            <th style="width:15px;">Summe</th>
           </tr>
         </thead>
         <tbody>
-        <%- 
-            total = 0
-            i = 0
-			@articles_grouped_by_category.each do |category, order_articles|
-				-%>
-          <tr style="background-color:#EFEFEF">
-            <td style="text-align:left"><b><%=h category %></b></td>
-            <td colspan="9"></td>
-          </tr>
-				<%-
-				order_articles.each do |order_article|
-                    if Foodsoft.config[:tolerance_is_costly]
-                        article_total = @price[i] * (@tolerance[i] + @quantity[i])
+          <%-
+          total = 0
+          i = 0
+          @articles_grouped_by_category.each do |category, order_articles|
+            -%>
+            <tr style="background-color:#EFEFEF">
+              <td style="text-align:left"><b><%=h category %></b></td>
+              <td colspan="9"></td>
+            </tr>
+            <%-
+            order_articles.each do |order_article|
+              if Foodsoft.config[:tolerance_is_costly]
+                article_total = @price[i] * (@tolerance[i] + @quantity[i])
+              else
+                article_total = @price[i] * @quantity[i]
+              end
+              total += article_total
+              -%>
+              <tr class="<%= cycle('even', 'odd', :name => 'articles') %> order-article" valign="top">
+                <td class="name"><%= order_article.article.name %></td>
+                <td><%=h order_article.article.origin %></td>
+                <td><%= number_to_currency(@price[i]) %></td>
+                <td><span id="missing_units_<%= i %>"><%= if @order.stockit?
+                      order_article.article.quantity_available
                     else
-                        article_total = @price[i] * @quantity[i]
-                    end
-	                total += article_total
-        -%>
-          <tr class="<%= cycle('even', 'odd', :name => 'articles') %>" valign="top">
-              <td class="name">
-                <% unless order_article.article.note.blank? %>
-                    <%= order_article.article.name %> <%= image_tag "lamp_grey.png", {:alt => "Notiz zeigen", :size => "15x16", :border => "0", :onmouseover => "$('note_#{i}').show();", :onmouseout => "$('note_#{i}').hide();" }%>
-                <% else %>
-                  <%= order_article.article.name %>
-                <% end %>
-              </td>
-              <td><%=h order_article.article.origin %></td>
-              <td><%=h truncate order_article.article.manufacturer, :length => 11 %></td>
-              <td><%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %></td>
-              <td><%= number_to_currency(@price[i]) %></td>
-              <td id="units_<%= i %>"><%= order_article.units_to_order %></td>
-              <td style="text-align:right;">
+                      missing_units = @unit[i] - (((@quantity[i] + @others_quantity[i]) % @unit[i]) + @tolerance[i] + @others_tolerance[i])
+                      missing_units < 0 ? 0 : missing_units
+                    end%></span></td>
+                <td class="quantity">
                   <input type="hidden" id="q_<%= i %>" name="<%= "ordered[#{order_article.id}][quantity]" %>" value="<%= @quantity[i] %>" size="2" />
                   <span id="q_used_<%= i %>" class="used"><%= @used_quantity[i] %></span> +
                   <span id="q_unused_<%= i %>" class="unused"><%= @quantity[i] - @used_quantity[i] %></span>
-                  <span class="total">(<span id="q_total_<%= i %>"><%= @quantity[i] + @others_quantity[i] %></span>)</span>
                   <%= button_to_function('+', "increaseQuantity(#{i})") %>
                   <%= button_to_function('-', "decreaseQuantity(#{i})") %>
-              </td>
-              <td style="text-align:right;">
-                  <input type="hidden" id="t_<%= i %>" name="<%= "ordered[#{order_article.id}][tolerance]" %>" value="<%= @tolerance[i] %>" size="2" />
-              <% if (@unit[i] > 1) -%>
-                  <span id="t_used_<%= i %>" class="used"><%= @used_tolerance[i] %></span> +
-                  <span id="t_unused_<%= i %>" class="unused"><%= @tolerance[i] - @used_tolerance[i] %></span>
-                  <span class="total">(<span id="t_total_<%= i %>"><%= @tolerance[i] + @others_tolerance[i] %></span>)</span>
-                  <%= button_to_function('+', "increaseTolerance(#{i})") %>
-                  <%= button_to_function('-', "decreaseTolerance(#{i})") %>
-              <% end -%>
-              </td>
-              <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €</td>
-          </tr>
-          <% unless order_article.article.note.blank? -%>
-          <tr id="note_<%= i %>" class="note" style="display:none">
-            <td colspan="10"><%=h order_article.article.note %> | <%=h order_article.article.manufacturer %></td>
-          </tr>
-            	<% end -%>
-        	<%- i = i + 1
-				end
-			end -%>
+                </td>
+                <% if not @order.stockit? -%>
+                  <td class="tolerance">
+                    <input type="hidden" id="t_<%= i %>" name="<%= "ordered[#{order_article.id}][tolerance]" %>" value="<%= @tolerance[i] %>" size="2" />
+                    <% if (@unit[i] > 1) -%>
+                      <span id="t_used_<%= i %>" class="used"><%= @used_tolerance[i] %></span> +
+                      <span id="t_unused_<%= i %>" class="unused"><%= @tolerance[i] - @used_tolerance[i] %></span>
+                      <%= button_to_function('+', "increaseTolerance(#{i})") %>
+                      <%= button_to_function('-', "decreaseTolerance(#{i})") %>
+                    <% end -%>
+                  </td>
+                <% end %>
+                <td id="td_price_<%= i %>" style="text-align:right; padding-right:10px; width:4em"><span id="price_<%= i %>_display"><%= number_to_currency(article_total, :unit => "") %></span> €
+                  <div class="article-info">
+                    <h3><%= order_article.article.name -%></h3>
+                    <div class="right">
+                      Volle Gebinde: <span id="units_<%= i %>"><%= order_article.units_to_order %></span><br/>
+                      Gesamt-Einheiten: <span id="q_total_<%= i %>"><%= @quantity[i] + @others_quantity[i] %></span><br/>
+                      Gesamt-Toleranz: <span id="t_total_<%= i %>"><%= @tolerance[i] + @others_tolerance[i] %></span><br/>
+                    </div>
+                    <div class="left">
+                      Hersteller: <%= order_article.article.manufacturer -%><br />
+                      Gebinde: <%= @order.stockit? ? order_article.article.quantity_available : @unit[i] %> * <%=h order_article.article.unit %><br/>
+                      Notiz: <%= order_article.article.note -%><br />
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <%- i = i + 1
+            end
+          end -%>
         </tbody>
-        <tfoot>
-          <tr>
-              <td colspan="6"></td>
-              <td colspan="3" class="currency">Gesamtbetrag: <span id="total_price"><%= total %></span> €</td>
-          </tr>
-          <tr>
-              <td colspan="6"></td>
-              <td colspan="3" class="currency">Verfügbares Guthaben: <%= number_to_currency(@availableFunds) %></td>
-          </tr>
-          <tr>
-              <td colspan="6"></td>
-              <td colspan="3" class="currency">Neuer Kontostand: <strong><span id="new_balance"><%= @ordergroup.account_balance - total %></span> €</strong></td>
-          </tr>
-          <tr>
-              <td style="text-align:left;"><%= link_to_top %></td>
-              <td colspan="5"></td>
-              <td colspan="3" style="text-align:right;"><span style="font-size:1.2em"><%= submit_tag( "Bestellung speichern", :id => 'submit_button' ) %></span> | <%= link_to "Abbrechen", :controller => 'ordering' %></td>
-          </tr>
-        </tfoot>
       </table>
     </div>
-      <input type="hidden" id="total_balance" name="total_balance" value="<%= @ordergroup.account_balance - total %>"/>
-      <input type="hidden" name="version" value="<%= @version %>"/>
-    <% end %>    
-</div>
+  </div>
+  <div id="order-footer">
+    <div id="info-box">
+    </div>
+    <div id="total-sum">
+      <table>
+        <tr>
+          <td>Gesamtbetrag:</td>
+          <td class="currency"><span id="total_price"><%= total %></span> €</td>
+        </tr>
+        <tr>
+          <td>Verfügbares Guthaben:</td>
+          <td class="currency"><%= number_to_currency(@availableFunds) %></td>
+        </tr>
+        <tr>
+          <td>Neuer Kontostand:</td>
+          <td class="currency"><strong><span id="new_balance"><%= @ordergroup.account_balance - total %></span> €</strong></td>
+        </tr>
+      </table>
+      <div id="order-button">
+        <%= submit_tag( "Bestellung speichern", :id => 'submit_button' ) %></span> oder <%= link_to "abbrechen", :controller => 'ordering' %>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" id="total_balance" name="total_balance" value="<%= @ordergroup.account_balance - total %>"/>
+  <input type="hidden" name="version" value="<%= @version %>"/>
+<% end %>
 
 <script type="text/javascript">
-//<![CDATA[
-    // preset data
+  //<![CDATA[
+  // preset data
 <% if Foodsoft.config[:tolerance_is_costly]
-       for i in 0...@price.size -%>
-    addData(<%= @price[i] %>, <%= @unit[i] %>, <%= @price[i] * (@tolerance[i] + @quantity[i])%>, <%= @others_quantity[i] %>, <%= @others_tolerance[i] %>, <%= @used_quantity[i] %>, 0);
-<%     end
-    else
-       for j in 0...@price.size -%>
-    addData(<%= @price[j] %>, <%= @unit[j] %>, <%= @price[j] * @quantity[j]%>, <%= @others_quantity[j] %>, <%= @others_tolerance[j] %>, <%= @used_quantity[j] %>, 0);
-<%    end
-    end%>
-    setGroupBalance(<%= @availableFunds %>);
+  for i in 0...@price.size -%>
+      addData(<%= @price[i] %>, <%= @unit[i] %>, <%= @price[i] * (@tolerance[i] + @quantity[i])%>, <%= @others_quantity[i] %>, <%= @others_tolerance[i] %>, <%= @used_quantity[i] %>, 0);
+  <%     end
+else
+  for j in 0...@price.size -%>
+      addData(<%= @price[j] %>, <%= @unit[j] %>, <%= @price[j] * @quantity[j]%>, <%= @others_quantity[j] %>, <%= @others_tolerance[j] %>, <%= @used_quantity[j] %>, 0);
+  <%    end
+end%>
+  setGroupBalance(<%= @availableFunds %>);
 
-    // localization 
-    setDecimalSeparator(",");
+  // localization
+  setDecimalSeparator(",");
 
-    // configuration
-    setToleranceBehaviour(<%= Foodsoft.config[:tolerance_is_costly] %>);
-    
-    // initialize javascript
-    updateBalance();    
-//]]>
+  // configuration
+  setToleranceBehaviour(<%= Foodsoft.config[:tolerance_is_costly] %>);
+
+  // initialize javascript
+  updateBalance();
+
+  // show article info on row hover
+<%#*$$('tbody tr').observer('hover', function() {%>
+
+<%#*});%>
+  //]]>
 </script>
