@@ -10,12 +10,11 @@
           %tr
             %th Name
             %th
-            %th Herstellerin
             %th Lieferantin
             %th{:style => "width:5em;"} Einheit
             %th{:style => "width:4.5em;"} Preis
-            %th Verfügbar
-            %th#col_required Menge
+            %th(style="width:20px") Verfügbar
+            %th#col_required(style="width:110px") Menge
             %th Summe
         %tbody
           - total = 0
@@ -28,13 +27,9 @@
             - for order_article in order_articles
               - article_total = @price[i] * @quantity[i]
               - total += article_total
-              %tr{:class => cycle('even', 'odd', :name => 'articles'), :valign => "top"}
-                %td.name
-                  = order_article.article.name
-                  - unless order_article.article.note.blank?
-                    = image_tag "lamp_grey.png", {:alt => _("Show note"), :size => "15x16", :border => "0", :onmouseover => "$('note_#{i}').show();", :onmouseout => "$('note_#{i}').hide();" }
+              %tr{:class => cycle('even', 'odd', :name => 'articles')+' order-article', :valign => "top"}
+                %td.name= order_article.article.name
                 %td=h order_article.article.origin
-                %td=h truncate order_article.article.manufacturer, :length => 11
                 %td=h truncate order_article.article.supplier.name, :length => 11
                 %td=h order_article.article.unit
                 %td= number_to_currency @price[i]
@@ -42,50 +37,32 @@
                 %td{:style => "text-align:right;"}
                   = hidden_field_tag "ordered[#{order_article.id}][quantity]", @quantity[i], :id => "q_#{i}", :size => "2"
                   %span.used{:id => "q_used_#{i}"}= @used_quantity[i]
-                  %span.total= "(<span id='q_total_#{i}'>#{@quantity[i] + @others_quantity[i]}</span>)"
                   = button_to_function('+', "increaseStockQuantity(#{i})")
                   = button_to_function('-', "decreaseStockQuantity(#{i})")
 
                 %td{:id => "td_price_#{i}", :style => "text-align:right; padding-right:10px; width:4em"}
                   %span{:id => "price_#{i}_display"}= number_to_currency(article_total, :unit => "")
                   €
-              - unless order_article.article.note.blank?
-                %tr.note{:id => "note_#{i}", :style => "display:none"}
-                  %td{:colspan => "10"}
-                    =h order_article.article.note
-                    |
-                    =h order_article.article.manufacturer
-              
+                  .article-info
+                    %h3= order_article.article.name
+                    .right
+                      Gesamt-Einheiten:
+                      %span{:id => "q_total_#{i}"}= @quantity[i] + @others_quantity[i]
+                      %br/
+                    .left
+                      Hersteller:
+                      = order_article.article.manufacturer
+                      %br/
+                      Gebinde:
+                      = order_article.article.quantity_available
+                      *
+                      = order_article.article.unit
+                      %br/
+                      Notiz:
+                      = order_article.article.note
+                      %br/
               - i = i + 1
-        %tfoot
-          %tr
-            %td{:colspan => "5"}
-            %td.currency{:colspan => "3"}
-              Gesamtbetrag:
-              %span#total_price= total
-              €
-          %tr
-            %td{:colspan => "5"}
-            %td.currency{:colspan => "3"}
-              Verfügbares Guthaben:
-              = number_to_currency @availableFunds
-          %tr
-            %td{:colspan => "5"}
-            %td.currency{:colspan => "3"}
-              Neuer Kontostand:
-              %strong
-                %span#new_balance= @ordergroup.account_balance - total
-                €
-          %tr
-            %td{:style => "text-align:left;"}= link_to_top
-            %td{:colspan => "4"}
-            %td{:colspan => "3", :style => "text-align:right;"}
-              %span{:style => "font-size:1.2em"}= submit_tag("Bestellung speichern", :id => 'submit_button' )
-              |
-              = link_to "Abbrechen", :controller => 'ordering'
-
-      = hidden_field_tag "total_balance", @ordergroup.account_balance - total, :id => "total_balance"
-      = hidden_field_tag "version", @version
+      = render "order_footer", :total => total
 
 %script{:type => "text/" + "javascript"}
   // preset data

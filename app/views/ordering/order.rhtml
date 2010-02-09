@@ -91,31 +91,7 @@
       </table>
     </div>
   </div>
-  <div id="order-footer">
-    <div id="info-box">
-    </div>
-    <div id="total-sum">
-      <table>
-        <tr>
-          <td>Gesamtbetrag:</td>
-          <td class="currency"><span id="total_price"><%= total %></span> €</td>
-        </tr>
-        <tr>
-          <td>Verfügbares Guthaben:</td>
-          <td class="currency"><%= number_to_currency(@availableFunds) %></td>
-        </tr>
-        <tr>
-          <td>Neuer Kontostand:</td>
-          <td class="currency"><strong><span id="new_balance"><%= @ordergroup.account_balance - total %></span> €</strong></td>
-        </tr>
-      </table>
-      <div id="order-button">
-        <%= submit_tag( "Bestellung speichern", :id => 'submit_button' ) %></span> oder <%= link_to "abbrechen", :controller => 'ordering' %>
-      </div>
-    </div>
-  </div>
-  <input type="hidden" id="total_balance" name="total_balance" value="<%= @ordergroup.account_balance - total %>"/>
-  <input type="hidden" name="version" value="<%= @version %>"/>
+  <%= render "order_footer", :total => total %>
 <% end %>
 
 <script type="text/javascript">
