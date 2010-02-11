@@ -12,7 +12,8 @@
             <th>Name</th>
             <th style="width:13px;"></th>
             <th style="width:4.5em;">Preis</th>
-            <th style="width:7em;">Fehlende Einheiten</th>
+            <th style="width:4.5em;">Einheit</th>
+            <th style="width:70px;">Fehlende Einheiten</th>
             <th id="col_required">Menge</th>
             <% if not @order.stockit? -%>
               <th id="col_tolerance">Toleranz</th>
@@ -43,12 +44,17 @@
                 <td class="name"><%= order_article.article.name %></td>
                 <td><%=h order_article.article.origin %></td>
                 <td><%= number_to_currency(@price[i]) %></td>
-                <td><span id="missing_units_<%= i %>"><%= if @order.stockit?
+                <td><%= order_article.article.unit %></td>
+                <td>
+                  <span id="missing_units_<%= i %>">
+                    <%= if @order.stockit?
                       order_article.article.quantity_available
                     else
                       missing_units = @unit[i] - (((@quantity[i] + @others_quantity[i]) % @unit[i]) + @tolerance[i] + @others_tolerance[i])
                       missing_units < 0 ? 0 : missing_units
-                    end%></span></td>
+                    end %>
+                  </span>
+                </td>
                 <td class="quantity">
                   <input type="hidden" id="q_<%= i %>" name="<%= "ordered[#{order_article.id}][quantity]" %>" value="<%= @quantity[i] %>" size="2" />
                   <span id="q_used_<%= i %>" class="used"><%= @used_quantity[i] %></span> +

@@ -401,7 +401,7 @@ table#order {
     -webkit-border-radius: 3px;
     padding: 0; }
   table#order th#col_required, table#order th#col_tolerance {
-    width: 165px; }
+    width: 140px; }
   table#order th#col_packages, table#order th#col_left_units {
     width: 50px; }
   table#order td.quantity, table#order td.tolerance {
@@ -455,6 +455,10 @@ table#order {
     margin: 0;
     margin-bottom: 5px;
     width: 100%; }
+  .article-info .right {
+    width: 35%; }
+  .article-info .left {
+    width: 60%; }
 
 tr.order-article .article-info {
   display: none; }
