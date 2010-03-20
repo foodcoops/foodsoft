@@ -1,23 +1,35 @@
 ActionController::Routing::Routes.draw do |map|
 
+  # Use routing filter to select foodcoop config and datbase
   map.filter 'foodcoop', :file => File.join(RAILS_ROOT, "lib", "foodcoop_filter")
-  
+
+  # Root path
+  map.root :controller => 'home', :action => 'index'
+
+  # User specific
+  map.logout '/logout', :controller => 'login', :action => 'logout'
+  map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
+  map.my_ordergroup '/home/ordergroup', :controller => 'home', :action => 'ordergroup'
+
+  # Wiki
   map.resources :pages, :collection => { :all => :get }, :member => {:version => :get, :revert => :get}
   map.wiki_page "/wiki/:permalink", :controller => 'pages', :action => 'show', :permalink => /[^\s]+/
   map.wiki "/wiki", :controller => 'pages', :action => 'show', :permalink => 'Home'
 
-  map.logout '/logout', :controller => 'login', :action => 'logout'
-  map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
-  map.my_ordergroup '/home/ordergroup', :controller => 'home', :action => 'ordergroup'
-  map.my_tasks '/home/tasks', :controller => 'tasks', :action => 'myTasks'
-
+  # Orders, ordering
   map.resources :orders, :member => { :finish => :post, :add_comment => :post }
+  map.with_options :controller => "ordering" do |ordering|
+    ordering.ordering "/ordering", :action => "index"
+    ordering.my_orders "/ordering/myOrders", :action => "myOrders"
+  end
 
+
+  # Foodcoop orga
+  map.resources :invites, :only => [:new, :create]
+  map.resources :tasks,
+    :collection => {:user => :get}
   map.resources :messages, :only => [:index, :show, :new, :create],
     :member => { :reply => :get, :user => :get, :group => :get }
-
-  map.resources :invites, :only => [:new, :create]
-
   map.namespace :foodcoop do |foodcoop|
     foodcoop.root :controller => "users", :action => "index"
     foodcoop.resources :users, :only => [:index]
@@ -26,23 +38,13 @@ ActionController::Routing::Routes.draw do |map|
       :member => {:memberships => :get}
   end
 
-  map.namespace :admin do |admin|
-    admin.resources :users
-    admin.resources :workgroups, :member => { :memberships => :get }
-    admin.resources :ordergroups, :member => { :memberships => :get }
-  end
-
-  map.namespace :finance do |finance|
-    finance.root :controller => 'balancing'
-    finance.resources :invoices
-  end
-
+  # Article management
   map.resources :stock_takings,
     :collection => {:fill_new_stock_article_form => :get, :add_stock_article => :post}
   map.resources :stock_articles,
     :controller => 'stockit', :as => 'stockit',
     :collection => {:auto_complete_for_article_name => :get, :fill_new_stock_article_form => :get}
-  
+
   map.resources :suppliers,
     :collection => { :shared_suppliers => :get } do |suppliers|
     suppliers.resources :deliveries,
@@ -55,47 +57,21 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :article_categories
 
-  map.root :controller => 'home', :action => 'index'
-  
-  # The priority is based upon order of creation: first created -> highest priority.
+  # Finance
+  map.namespace :finance do |finance|
+    finance.root :controller => 'balancing'
+    finance.balancing "balancing/list", :controller => 'balancing', :action => 'list'
+    finance.resources :invoices
+    finance.resources :transactions
+  end
 
-  # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
-
-  # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-
-  # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
-  #     products.resources :comments
-  #     products.resources :sales, :collection => { :recent => :get }
-  #   end
-
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
-
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
-
-  # See how all your routes lay out with "rake routes"
-
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing the them or commenting them out if you're using named routes and resources.
+  # Administration
+  map.namespace :admin do |admin|
+    admin.root :controller => "admin", :action => "index"
+    admin.resources :users
+    admin.resources :workgroups, :member => { :memberships => :get }
+    admin.resources :ordergroups, :member => { :memberships => :get }
+  end
 
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id'
