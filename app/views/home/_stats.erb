@@ -22,6 +22,6 @@ unless global_avg == 0 or global_avg.nan?
   </div>
   <span class="description">
     Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop.
-    Konkret: Für jede <%= number_to_currency 1/global_avg %> Bestellsumme solltest Du eine Aufgabe machen!
+    Konkret: Pro <%= number_to_currency( (1/global_avg).round, :precision => 0 ) %> Bestellsumme solltest Du eine Aufgabe machen!
   </span>
 <%- end -%>
