@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.filter 'foodcoop', :file => File.join(RAILS_ROOT, "lib", "foodcoop_filter")
+  
   map.resources :pages, :collection => { :all => :get }, :member => {:version => :get, :revert => :get}
   map.wiki_page "/wiki/:permalink", :controller => 'pages', :action => 'show', :permalink => /[^\s]+/
   map.wiki "/wiki", :controller => 'pages', :action => 'show', :permalink => 'Home'
