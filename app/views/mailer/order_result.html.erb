@@ -9,6 +9,6 @@ Für Euch wurden die folgenden Artikel bestellt:
 <%	end  -%>
 Gesamtpreis: <%= @group_order.price %>
 
-Bestellung online einsehen: <%= "#{Foodsoft.config[:base_url]}/ordering/my_order_result/#{@order.id}" %>
+Bestellung online einsehen: <%= url_for(:controller => "ordering", :action => "my_order_result", :id => @order.id) %>
 
 Viele Grüße von <%= Foodsoft.config[:name] %>

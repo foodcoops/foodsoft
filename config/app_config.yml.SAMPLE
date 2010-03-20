@@ -5,6 +5,12 @@ development: &defaults
   # Don't forget to setup databases for each foodcoop. See also MULTI_COOP_INSTALL
   multi_coop_install: false
 
+  # http config for this host
+  # Required for action mailer
+  protocol: http
+  host: localhost
+  port: 3000
+
   # name of this foodcoop
   name: FC Test
   # foodcoop contact information (used for FAX messages)

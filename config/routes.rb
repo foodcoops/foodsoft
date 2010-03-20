@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'home', :action => 'index'
 
   # User specific
+  map.login "/login", :controller => 'login', :action => 'login'
   map.logout '/logout', :controller => 'login', :action => 'logout'
   map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
   map.my_ordergroup '/home/ordergroup', :controller => 'home', :action => 'ordergroup'
