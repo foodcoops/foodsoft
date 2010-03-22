@@ -1,19 +1,17 @@
 class Wikilink < WikiCloth::WikiLinkHandler
-
-  def url_for(page, parent = nil)
-    if parent
-      "/pages/new?title=#{page}&parent=#{parent}"
-    else
-      "/wiki/#{page}"
-    end
-  end
-
+  include ActionController::UrlWriter # To use named routes
+  
   def link_attributes_for(page)
     permalink = Page.permalink(page)
+    url_options = {:host => Foodsoft.config[:host], :protocol => Foodsoft.config[:protocol]}
+    url_options.merge!({:port => Foodsoft.config[:port]}) if Foodsoft.config[:port]
+
     if Page.exists?(:permalink => permalink)
-     { :href => url_for(permalink) }
+     { :href => url_for(url_options.merge({:controller => "pages", :action => "show", 
+                                          :permalink => permalink, :use_route => :wiki_page})) }
     else
-     { :href => url_for(page, params[:referer]), :class =>  "new_wiki_link"}
+     { :href => url_for(url_options.merge({:controller => "pages", :action => "new", 
+                                          :title => page, :parent => params[:referer]})), :class =>  "new_wiki_link"}
     end
   end
 

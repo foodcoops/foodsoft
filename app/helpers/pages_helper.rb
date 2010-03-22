@@ -7,9 +7,9 @@ module PagesHelper
 
   def link_to_wikipage(page, text = nil)
     if text == nil
-      link_to page.title, "/wiki/#{page.title}"
+      link_to page.title, wiki_page_path(page.permalink)
     else
-      link_to text, "/wiki/#{page.title}"
+      link_to text, wiki_page_path(page.permalink)
     end
   end
 
