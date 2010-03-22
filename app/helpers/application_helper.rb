@@ -117,7 +117,7 @@ module ApplicationHelper
   end
 
   def tab_is_active?(tab)
-    tab[:active].detect {|c| c == controller.controller_path }
+    tab[:active].detect {|c| controller.controller_path.match(c) }
   end
 
   def icon(name, options={})

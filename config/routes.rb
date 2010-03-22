@@ -68,7 +68,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Administration
   map.namespace :admin do |admin|
-    admin.root :controller => "admin", :action => "index"
+    admin.root :controller => "base", :action => "index"
     admin.resources :users
     admin.resources :workgroups, :member => { :memberships => :get }
     admin.resources :ordergroups, :member => { :memberships => :get }

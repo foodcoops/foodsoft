@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 
+  filter_parameter_logging :password, :password_confirmation   # do not log passwort parameters
   before_filter :select_foodcoop, :authenticate, :store_controller
   after_filter  :remove_controller
   

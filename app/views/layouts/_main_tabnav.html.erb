@@ -52,7 +52,7 @@
         ]
       },
       { :name => "Administration", :url => admin_root_path,
-        :active => ["admin", "admin/users", "admin/ordergroups", "admin/workgroups"],
+        :active => ["admin/"],
         :access_denied? => (!u.role_admin?),
         :subnav => [
           { :name => "Benutzerinnen", :url => admin_users_path },

@@ -1,6 +1,4 @@
-class Admin::UsersController < ApplicationController
-  before_filter :authenticate_admin
-  filter_parameter_logging :password, :password_confirmation   # do not log passwort parameters
+class Admin::UsersController < Admin::BaseController
   
   def index
     if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
