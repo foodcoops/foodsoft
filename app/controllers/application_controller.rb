@@ -26,10 +26,9 @@ class ApplicationController < ActionController::Base
   def current_user
     begin
       # check if there is a valid session and return the logged-in user (its object)
-      if session['user_and_subdomain']
-        id, subdomain = session['user_and_subdomain'].split
+      if session[:user] and session[:foodcoop]
         # for shared-host installations. check if the cookie-subdomain fits to request.
-        return User.current_user = User.find(id) if request.subdomains.first == subdomain
+        return User.current_user = User.find(session[:user]) if session[:foodcoop] == Foodsoft.env
       end
     rescue
       reset_session
@@ -39,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user=(user)
-    session['user_and_subdomain'] = [user.id, request.subdomains.first].join(" ")
+    session[:user], session[:foodcoop] = user.id, Foodsoft.env
   end
     
   def return_to
