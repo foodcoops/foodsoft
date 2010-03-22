@@ -22,9 +22,6 @@ development: &defaults
     email: foodsoft@myfoodcoop.org
     phone: "030 323 23249"
 
-  # base URL for this installation
-  base_url: http://foodsoft.fctest.de
-
   # Homepage
   homepage: http://www.fctest.de
 

@@ -18,11 +18,12 @@ end
 Foodsoft.env = RAILS_ENV
 
 # Set action mailer default host for url generating
-ActionMailer::Base.default_url_options = { 
-  :host => Foodsoft.config[:host],
-  :port => Foodsoft.config[:port],
-  :protocol => Foodsoft.config[:protocol]
+url_options = {
+    :host => Foodsoft.config[:host],
+    :protocol => Foodsoft.config[:protocol]
 }
+url_options.merge!({:port => Foodsoft.config[:port]}) if Foodsoft.config[:port]
+ActionMailer::Base.default_url_options = url_options
 
 # Configuration of the exception_notification plugin
 # Mailadresses are set in config/foodsoft.yaml

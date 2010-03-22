@@ -140,10 +140,15 @@ class ApplicationController < ActionController::Base
   def select_foodcoop
     if Foodsoft.config[:multi_coop_install]
       if !params[:foodcoop].blank?
-        # Set Config
-        Foodsoft.env = params[:foodcoop]
-        # Set database-connection
-        ActiveRecord::Base.establish_connection(Foodsoft.database)
+        begin
+          # Set Config
+          Foodsoft.env = params[:foodcoop]
+          # Set database-connection
+          ActiveRecord::Base.establish_connection(Foodsoft.database)
+        rescue => error
+          flash[:error] = error.to_s
+          redirect_to root_path
+        end
       else
         redirect_to root_path
       end
