@@ -2,6 +2,9 @@
 # by Clemens Kofler (clemens@railway.at)
  
 de:
+  home:
+    index:
+      title: Startseite
   date:
     formats:
       default: "%d.%m.%Y"
