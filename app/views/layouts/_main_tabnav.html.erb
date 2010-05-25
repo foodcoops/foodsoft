@@ -36,7 +36,7 @@
         :active => ["articles", "suppliers", "deliveries", "article_categories", "stockit", "stock_takings"],
         :access_denied? => (!u.role_article_meta? && !u.role_suppliers?),
         :subnav => [
-          { :name => "Artikel", :url => supplier_articles_path(Supplier.first) },
+          { :name => "Artikel", :url => suppliers_path },
           { :name => "Lager", :url => stock_articles_path },
           { :name => "Lieferantinnen", :url => suppliers_path, :access_denied? => (!u.role_suppliers?) },
           { :name => "Kategorien", :url => article_categories_path }

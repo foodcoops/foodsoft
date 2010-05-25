@@ -63,7 +63,7 @@ ActionController::Routing::Routes.draw do |map|
     finance.root :controller => 'balancing'
     finance.balancing "balancing/list", :controller => 'balancing', :action => 'list'
     finance.resources :invoices
-    finance.resources :transactions
+    finance.resources :transactions, :collection => {:new_collection => :get, :create_collection => :post}
   end
 
   # Administration
