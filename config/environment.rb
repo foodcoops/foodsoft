@@ -59,6 +59,7 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv"
   config.gem "prawn", :version => '<=0.6.3'
   config.gem "haml", :version => '>=2.0.6'
+  config.gem "routing-filter", :lib => "routing_filter"
 
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
   # All files from config/locales/*.rb,yml are added automatically.

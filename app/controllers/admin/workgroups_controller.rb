@@ -1,5 +1,4 @@
-class Admin::WorkgroupsController < ApplicationController
-  before_filter :authenticate_admin
+class Admin::WorkgroupsController < Admin::BaseController
   
   def index
     if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)

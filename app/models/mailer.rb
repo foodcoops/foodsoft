@@ -12,9 +12,9 @@ class Mailer < ActionMailer::Base
     body        :body         => message.body,
                 :sender       => message.sender.nick,
                 :recipients   => recipient.nick,
-                :reply        => "#{Foodsoft.config[:base_url]}/messages/reply/#{message.id}",
-                :link         => "#{Foodsoft.config[:base_url]}/messages/show/#{message.id}",
-                :profile      => "#{Foodsoft.config[:base_url]}/home/profile"
+                :reply        => url_for(:controller => "messages", :action => "reply", :id => message.id),
+                :link         => url_for(:controller => "messages", :action => "show", :id => message.id),
+                :profile      => url_for(:controller => "home", :action => "profile")
   end
 
   # Sends an email with instructions on how to reset the password.
@@ -23,7 +23,7 @@ class Mailer < ActionMailer::Base
     prepare_system_message(user)
     subject     "[#{Foodsoft.config[:name]}] Neues Passwort für/ New password for #{user.nick}"
     body        :user => user,
-                :link => "#{Foodsoft.config[:base_url]}/login/password/#{user.id}?token=#{user.reset_password_token}"
+                :link => url_for(:controller => "login", :action => "password", :id => user.id, :token => user.reset_password_token)
   end
     
   # Sends an invite email.
@@ -31,7 +31,7 @@ class Mailer < ActionMailer::Base
     prepare_system_message(invite)
     subject     "Einladung in die Foodcoop #{Foodsoft.config[:name]} - Invitation to the Foodcoop"
     body        :invite => invite,
-                :link   => "#{Foodsoft.config[:base_url]}/login/invite/#{invite.token}"
+                :link   => url_for(:controller => "login", :action => "invite", :id => invite.token)
   end
 
   # Notify user of upcoming task.
@@ -71,7 +71,7 @@ class Mailer < ActionMailer::Base
     prepare_system_message(user)
     subject   "[#{Foodsoft.config[:name]}] #{task.name} braucht noch Leute!"
     body        :task => task, :user => user,
-                :task_url => File.join(Foodsoft.config[:base_url], "tasks/workgroup", task.workgroup_id.to_s)
+                :task_url => url_for(:controller => "tasks", :action => "workgroup", :id => task.workgroup_id)
   end
 
   protected

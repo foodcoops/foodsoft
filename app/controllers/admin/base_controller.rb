@@ -1,7 +1,5 @@
-class AdminController < ApplicationController
+class Admin::BaseController < ApplicationController
   before_filter :authenticate_admin
-  filter_parameter_logging :password, :password_confirmation   # do not log passwort parameters
-
   
   def index
     @user = self.current_user

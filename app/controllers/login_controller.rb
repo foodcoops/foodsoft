@@ -1,6 +1,5 @@
 class LoginController < ApplicationController
   skip_before_filter :authenticate        # no authentication since this is the login page
-  filter_parameter_logging "password"     # do not log "password" parameter
   before_filter :validate_token, :only => [:password, :update_password]
 
   verify :method => :post, :only => [:login, :reset_password, :new], :redirect_to => { :action => :index }

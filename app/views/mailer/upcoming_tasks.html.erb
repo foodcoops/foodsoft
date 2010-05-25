@@ -11,6 +11,6 @@ Aufgaben für die nächste Woche:
   <% end -%>
 <% end -%>
 
-Meine Aufgaben: <%= Foodsoft.config[:base_url] %>/home/tasks
+Meine Aufgaben: <%= url_for(:controller => "home", :actions => "user") %>
 
 Viele Grüße von <%= Foodsoft.config[:name] %>

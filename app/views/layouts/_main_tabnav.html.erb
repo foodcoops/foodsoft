@@ -3,56 +3,56 @@
   tabs = [
       { :name => "Start", :url => root_path, :active => ["index", "home"],
         :subnav => [
-          { :name => "Meine Aufgaben", :url => "/home/tasks" },
-          { :name => "Meine Bestellgruppe", :url => "/home/ordergroup", :access_denied? => (!u.ordergroup)},
-          { :name => "Mein Profil", :url => "/home/profile"}
+          { :name => "Meine Aufgaben", :url => user_tasks_path },
+          { :name => "Meine Bestellgruppe", :url => my_ordergroup_path, :access_denied? => (!u.ordergroup)},
+          { :name => "Mein Profil", :url => my_profile_path}
         ]
       },
-      { :name => "Foodcoop", :url => "/tasks", 
+      { :name => "Foodcoop", :url => tasks_path,
         :active => ["foodcoop", "tasks", "messages", "foodcoop/ordergroups", "foodcoop/workgroups", "foodcoop/users"],
         :subnav => [
-          { :name => "Mitglieder", :url => "/foodcoop/users"},
-          { :name => "Abeitsgruppen", :url => "/foodcoop/workgroups"},
-          { :name => "Bestellgruppen", :url => "/foodcoop/ordergroups"},
-          { :name => "Nachrichten", :url => "/messages"},
-          { :name => "Aufgaben", :url => "/tasks"}
+          { :name => "Mitglieder", :url => foodcoop_users_path},
+          { :name => "Abeitsgruppen", :url => foodcoop_workgroups_path},
+          { :name => "Bestellgruppen", :url => foodcoop_ordergroups_path},
+          { :name => "Nachrichten", :url => messages_path},
+          { :name => "Aufgaben", :url => tasks_path}
         ]
       },
-      { :name => "Wiki", :url => "/wiki", :active => ["pages", "wiki"],
+      { :name => "Wiki", :url => wiki_path, :active => ["pages", "wiki"],
         :subnav => [
-          { :name => "Startseite", :url => "/wiki" },
-          { :name => "Alle Seiten", :url => "/pages/all" }
+          { :name => "Startseite", :url => wiki_path },
+          { :name => "Alle Seiten", :url => all_pages_path }
         ]
       },
-      { :name => "Bestellungen", :url => u.ordergroup ? "/ordering/" : "/orders",
+      { :name => "Bestellungen", :url => u.ordergroup ? ordering_path : orders_path,
         :active => ["orders", "ordering"],
         :subnav => [
-          { :name => "Bestellen!", :url => "/ordering" },
-          { :name => "Meine Bestellungen", :url => "/ordering/myOrders" },
-          { :name => "Bestellverwaltung", :url => "/orders", :access_denied? => (!u.role_orders?) }
+          { :name => "Bestellen!", :url => ordering_path },
+          { :name => "Meine Bestellungen", :url => my_orders_path },
+          { :name => "Bestellverwaltung", :url => orders_path, :access_denied? => (!u.role_orders?) }
         ]
       },
-      { :name => "Artikel", :url => "/suppliers",
+      { :name => "Artikel", :url => suppliers_path,
         :active => ["articles", "suppliers", "deliveries", "article_categories", "stockit", "stock_takings"],
         :access_denied? => (!u.role_article_meta? && !u.role_suppliers?),
         :subnav => [
           { :name => "Artikel", :url => supplier_articles_path(Supplier.first) },
-          { :name => "Lager", :url => "/stockit" },
+          { :name => "Lager", :url => stock_articles_path },
           { :name => "Lieferantinnen", :url => suppliers_path, :access_denied? => (!u.role_suppliers?) },
-          { :name => "Kategorien", :url => "/article_categories"}
+          { :name => "Kategorien", :url => article_categories_path }
         ]
       },
-      { :name => "Finanzen", :url => "/finance",
+      { :name => "Finanzen", :url => finance_root_path,
         :active => ["finance/invoices", "finance/transactions", "finance/balancing"],
         :access_denied? => (!u.role_finance?),
         :subnav => [
-          { :name => "Konten verwalten", :url => "/finance/transactions" },
-          { :name => "Bestellungen abrechnen", :url => "/finance/balancing/list" },
+          { :name => "Konten verwalten", :url => finance_transactions_path },
+          { :name => "Bestellungen abrechnen", :url => finance_balancing_path },
           { :name => "Rechnungen", :url => finance_invoices_path }
         ]
       },
-      { :name => "Administration", :url => "/admin",
-        :active => ["admin", "admin/users", "admin/ordergroups", "admin/workgroups"],
+      { :name => "Administration", :url => admin_root_path,
+        :active => ["admin/"],
         :access_denied? => (!u.role_admin?),
         :subnav => [
           { :name => "Benutzerinnen", :url => admin_users_path },
