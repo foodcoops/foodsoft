@@ -62,10 +62,9 @@ class ArticleCategoriesController < ApplicationController
     @article_category = ArticleCategory.find(params[:id])
     @article_category.destroy
 
-    #id = @article_category.id.to_s #save the id before destroying the object
     if @article_category.destroy
       render :update do |page|
-        page['category_'+@article_category.id].visual_effect :drop_out
+        page['category_'+@article_category.id.to_s].visual_effect :drop_out
       end
     end
   end
