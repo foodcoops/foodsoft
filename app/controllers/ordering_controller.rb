@@ -178,7 +178,7 @@ class OrderingController < ApplicationController
     order = Order.find(params[:id])
     comment = order.comments.build(params[:comment])
     comment.user = @current_user
-    if !comment.text.empty? and comment.save
+    if !comment.text.blank? and comment.save
       flash[:notice] = "Kommentar wurde erstellt."
     else
       flash[:error] = "Kommentar konnte nicht erstellt werden. Leerer Kommentar?"
