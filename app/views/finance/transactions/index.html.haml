@@ -18,7 +18,8 @@
         :success => "Element.hide('loader')", |
         :url => {:action => 'index'}, |
         :with => 'query', |
-        :update => 'ordergroups' |
+        :update => 'ordergroups', |
+        :method => :get |
     #ordergroups
       = render :partial => "ordergroups"
     %br/
