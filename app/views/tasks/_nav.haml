@@ -9,11 +9,11 @@
       Seiten
       %ul
         %li= link_to "Meine Aufgaben", user_tasks_path
-        %li= link_to "Alle Aufgaben", :action => "index"
-        %li= link_to "Erledigt Aufgaben (Archiv)", :action => "archive"
+        %li= link_to "Alle Aufgaben", tasks_path
+        %li= link_to "Erledigt Aufgaben (Archiv)", archive_tasks_path
 
     %li
       Gruppenaufgaben
       %ul
         - for group in Workgroup.all
-          %li= link_to group.name, :action => "workgroup", :id => group
+          %li= link_to group.name, :controller => 'tasks', :action => "workgroup", :id => group

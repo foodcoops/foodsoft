@@ -28,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   # Foodcoop orga
   map.resources :invites, :only => [:new, :create]
   map.resources :tasks,
-    :collection => {:user => :get}
+    :collection => {:user => :get, :archive => :get}
   map.resources :messages, :only => [:index, :show, :new, :create],
     :member => { :reply => :get, :user => :get, :group => :get }
   map.namespace :foodcoop do |foodcoop|
