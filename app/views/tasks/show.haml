@@ -30,6 +30,6 @@
          
     
   %p
-    = link_to "Bearbeiten", :action => "edit", :id => @task
+    = link_to "Bearbeiten", edit_task_path(@task)
     | 
-    = link_to "Löschen", {:action => "destroy", :id => @task}, :method => "post", :confirm => "Die Aufgabe wirklich löschen?"
+    = link_to "Löschen", task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?"

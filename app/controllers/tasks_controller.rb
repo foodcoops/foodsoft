@@ -56,6 +56,7 @@ class TasksController < ApplicationController
   
   def destroy
     Task.find(params[:id]).destroy
+    flash[:notice] = "Aufgabe wurde gelöscht"
     redirect_to :action => "index"
   end
   

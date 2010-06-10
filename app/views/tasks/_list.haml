@@ -9,7 +9,7 @@
     - done = task.done ? " done" : ""
     %tr{:class => cycle('even','odd', :name => "tasks") + done }
       %td= format_date(task.due_date) unless task.due_date.nil?
-      %td= link_to task.name, :controller => "tasks", :action => "show", :id => task
+      %td= link_to task.name, task_path(task)
       %td
         - unless task.users.empty?
           - owner = Array.new
