@@ -47,5 +47,5 @@
     = link_to "Seite löschen", @page, :method => :delete, :confirm => "Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?"
     | Zuletzt bearbeitet von
     %b
-      = "#{@page.user.nick}"
+      = "#{@page.user.try(:nick)}"
     = "am #{format_datetime @page.updated_at}"
