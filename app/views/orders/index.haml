@@ -22,8 +22,9 @@
             %th{:colspan => "2"}
         %tbody
           - for order in @open_orders
-            - active = (order.open? and order.ends < Time.now) ? " active" : ""
-            %tr{:class => cycle('even', 'odd', :name => 'open_orders') + active}
+          - tr_class = cycle('even', 'odd', :name => 'open_orders')
+          - tr_class += " active" if order.expired?
+            %tr{:class => tr_class}
               %td=h order.name
               %td=h format_time(order.ends) unless order.ends.nil?
               %td=h truncate(order.note)
