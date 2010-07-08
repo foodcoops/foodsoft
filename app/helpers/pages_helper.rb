@@ -48,4 +48,8 @@ module PagesHelper
       end
     end
   end
+
+  def parent_pages_to_select(current_page)
+    Page.non_redirected.reject { |p| p == current_page }
+  end
 end
