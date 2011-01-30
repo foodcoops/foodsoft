@@ -55,13 +55,13 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   #
-  # library for parsing/writing files from/to csv-file
-  config.gem "fastercsv"
-  config.gem "prawn", :version => '<=0.6.3'
-  config.gem "haml", :version => '>=2.0.6'
-  config.gem "routing-filter", :lib => "routing_filter"
+  #  config.gem "fastercsv"
+  #  config.gem "prawn", :version => '<=0.6.3'
+  #  config.gem "haml", :version => '>=2.0.6'
+  #  config.gem "routing-filter", :lib => "routing_filter"
 
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
+  # library for parsing/writing files from/to csv-file
   # All files from config/locales/*.rb,yml are added automatically.
   # config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
   config.i18n.default_locale = :de
