@@ -32,9 +32,13 @@ class Page < ActiveRecord::Base
 
   named_scope :non_redirected, :conditions => {:redirect => nil}
   named_scope :no_parent, :conditions => {:parent_id => nil}
-  
+
   def self.permalink(title)
     title.gsub(/[\/\.,;@\s]/, "_").gsub(/[\"\']/, "")
+  end
+
+  def homepage?
+    permalink == "Home"
   end
 
   def set_permalink
