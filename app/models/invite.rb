@@ -28,7 +28,7 @@ class Invite < ActiveRecord::Base
   # Before validation, set token and expires_at.
   def before_validation
     self.token = Digest::SHA1.hexdigest(Time.now.to_s + rand(100).to_s)
-    self.expires_at = Time.now.advance(:days => 2)
+    self.expires_at = Time.now.advance(:days => 7)
   end
 
   # Sends an email to the invited user.
