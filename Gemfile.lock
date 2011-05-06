@@ -34,6 +34,7 @@ GEM
       rake (>= 0.8.3)
     rake (0.8.7)
     routing-filter (0.0.1)
+    sqlite3-ruby (1.2.4)
 
 PLATFORMS
   ruby
@@ -45,3 +46,4 @@ DEPENDENCIES
   prawn (<= 0.6.3)
   rails (= 2.3.10)
   routing-filter (= 0.0.1)
+  sqlite3-ruby
