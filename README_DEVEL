@@ -14,11 +14,6 @@ Create the database configuration from the default:
 
 If you are fine with using a file-based sqlite database you are all set.
 The sqlite files (development/test/production) will reside in the "db" directory.
-You might still need to install sqlite and the respective gem, i.e. on Ubuntu do:
-
-    sudo aptitude install sqlite3 libsqlite3-dev
-    sudo gem install sqlite3-ruby
-
 Otherwise you would want to edit database.yml to suit your needs (MySQL whatever).
 	
 
@@ -41,26 +36,26 @@ You need to create your own copy of the foodsoft configuration settings:
 Edit app_config.yml to suit your needs or just keep the defaults for now.
 
 
-(4) Required gems
+(4) Required ruby and gems
 -------------------
-In addition to the standard Ruby on Rails gems you will need to install 
-the additional gems required by running:
+We reccomend the using of rvm (https://rvm.beginrescueend.com/). Install rvm and get the lates ruby (1.8.7).
+If installed you only need to install the gem bundler:
 
-    sudo gem sources -a http://gems.github.com
-    sudo gem install haml fastercsv prawn rubyist-aasm
+    gem install bundler
+
+After that you get the other gems easily with (from project root):
+
+    bundle install
 
 
-(5) Create database schema
+(5) Create database (schema) and load defaults
 --------------------------
-	rake db:schema:load
+	rake db:create
+
+With this, you also get a ready to go user with username 'admin' and password 'secret'.
 
 
-(6) Create user "admin" with password "secret"
-----------------------------------------------
-	rake foodsoft:create_admin
-	
-
-(7) Try it out!
+(6) Try it out!
 ---------------	
 Start the WEBrick server to try it out:
 	
