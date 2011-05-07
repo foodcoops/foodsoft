@@ -12,4 +12,5 @@ gem 'sqlite3-ruby'
 
 group :development do
   gem 'annotate'
+  gem 'hirb'
 end

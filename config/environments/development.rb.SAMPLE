@@ -26,4 +26,8 @@ config.action_mailer.smtp_settings = {
   :user_name => "username",
   :password => "secret"
 }
+
+# Enable hirb for better console formatting
+require "hirb"
+Hirb.enable
  
