@@ -1,3 +1,6 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+
 # == Schema Information
 #
 # Table name: messages
@@ -8,9 +11,7 @@
 #  subject        :string(255)     not null
 #  body           :text
 #  email_state    :integer         default(0), not null
-#  private        :boolean
+#  private        :boolean         default(FALSE)
 #  created_at     :datetime
 #
-
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 

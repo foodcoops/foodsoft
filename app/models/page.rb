@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: pages
-#
-#  id           :integer         not null, primary key
-#  title        :string(255)
-#  body         :text
-#  permalink    :string(255)
-#  lock_version :integer         default(0)
-#  updated_by   :integer
-#  redirect     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 class Page < ActiveRecord::Base
 
   belongs_to :user, :foreign_key => 'updated_by'
@@ -66,3 +51,20 @@ class Page < ActiveRecord::Base
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: pages
+#
+#  id           :integer         not null, primary key
+#  title        :string(255)
+#  body         :text
+#  permalink    :string(255)
+#  lock_version :integer         default(0)
+#  updated_by   :integer
+#  redirect     :integer
+#  parent_id    :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

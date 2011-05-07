@@ -1,13 +1,3 @@
-# == Schema Information
-#
-# Table name: deliveries
-#
-#  id           :integer         not null, primary key
-#  supplier_id  :integer
-#  delivered_on :date
-#  created_at   :datetime
-#
-
 class Delivery < ActiveRecord::Base
 
   belongs_to :supplier
@@ -27,3 +17,15 @@ class Delivery < ActiveRecord::Base
   end
   
 end
+
+# == Schema Information
+#
+# Table name: deliveries
+#
+#  id           :integer         not null, primary key
+#  supplier_id  :integer
+#  delivered_on :date
+#  created_at   :datetime
+#  note         :text
+#
+

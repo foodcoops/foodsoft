@@ -1,19 +1,3 @@
-# == Schema Information
-#
-# Table name: tasks
-#
-#  id             :integer         not null, primary key
-#  name           :string(255)     default(""), not null
-#  description    :string(255)
-#  due_date       :date
-#  done           :boolean
-#  workgroup_id   :integer
-#  assigned       :boolean
-#  created_on     :datetime        not null
-#  updated_on     :datetime        not null
-#  required_users :integer         default(1)
-#
-
 class Task < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
@@ -87,3 +71,22 @@ class Task < ActiveRecord::Base
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id             :integer         not null, primary key
+#  name           :string(255)     default(""), not null
+#  description    :string(255)
+#  due_date       :date
+#  done           :boolean         default(FALSE)
+#  workgroup_id   :integer
+#  assigned       :boolean         default(FALSE)
+#  created_on     :datetime        not null
+#  updated_on     :datetime        not null
+#  required_users :integer         default(1)
+#  weekly         :boolean
+#  duration       :integer
+#
+

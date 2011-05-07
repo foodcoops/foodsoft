@@ -1,22 +1,3 @@
-# == Schema Information
-#
-# Table name: invoices
-#
-#  id             :integer         not null, primary key
-#  supplier_id    :integer
-#  delivery_id    :integer
-#  number         :string(255)
-#  date           :date
-#  paid_on        :date
-#  note           :text
-#  amount         :decimal(8, 2)   default(0.0), not null
-#  created_at     :datetime
-#  updated_at     :datetime
-#  order_id       :integer
-#  deposit        :decimal(8, 2)   default(0.0), not null
-#  deposit_credit :decimal(8, 2)   default(0.0), not null
-#
-
 class Invoice < ActiveRecord::Base
 
   belongs_to :supplier
@@ -47,3 +28,23 @@ class Invoice < ActiveRecord::Base
     amount - deposit + deposit_credit
   end
 end
+
+# == Schema Information
+#
+# Table name: invoices
+#
+#  id             :integer         not null, primary key
+#  supplier_id    :integer
+#  delivery_id    :integer
+#  order_id       :integer
+#  number         :string(255)
+#  date           :date
+#  paid_on        :date
+#  note           :text
+#  amount         :decimal(8, 2)   default(0.0), not null
+#  deposit        :decimal(8, 2)   default(0.0), not null
+#  deposit_credit :decimal(8, 2)   default(0.0), not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+

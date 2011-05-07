@@ -1,30 +1,4 @@
 # == Schema Information
-#
-# Table name: articles
-#
-#  id                  :integer         not null, primary key
-#  name                :string(255)     default(""), not null
-#  supplier_id         :integer         default(0), not null
-#  article_category_id :integer         default(0), not null
-#  unit                :string(255)     default(""), not null
-#  note                :string(255)
-#  availability        :boolean         default(TRUE), not null
-#  manufacturer        :string(255)
-#  origin              :string(255)
-#  shared_updated_on   :datetime
-#  price               :decimal(, )
-#  tax                 :float
-#  deposit             :decimal(, )     default(0.0)
-#  unit_quantity       :integer         default(1), not null
-#  order_number        :string(255)
-#  created_at          :datetime
-#  updated_at          :datetime
-#  quantity            :integer         default(0)
-#  deleted_at          :datetime
-#  type                :string(255)
-#
-
-# == Schema Information
 <<<<<<< HEAD:test/fixtures/articles.yml
 =======
 # Schema version: 20090325175756
@@ -100,3 +74,28 @@ applejuice:
   unit: 1L
   price: 1.33
   tax: 7.0
+
+
+# == Schema Information
+#
+# Table name: articles
+#
+#  id             :integer(4)      not null, primary key
+#  name           :string(255)     not null
+#  supplier_id    :integer(4)      not null
+#  number         :string(255)
+#  note           :string(255)
+#  manufacturer   :string(255)
+#  origin         :string(255)
+#  unit           :string(255)
+#  price          :decimal(8, 2)   default(0.0), not null
+#  tax            :decimal(3, 1)   default(7.0), not null
+#  deposit        :decimal(8, 2)   default(0.0), not null
+#  unit_quantity  :decimal(4, 1)   default(1.0), not null
+#  scale_quantity :decimal(4, 2)
+#  scale_price    :decimal(8, 2)
+#  created_on     :datetime
+#  updated_on     :datetime
+#  list           :string(255)
+#
+

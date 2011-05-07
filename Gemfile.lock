@@ -11,6 +11,7 @@ GEM
     activeresource (2.3.10)
       activesupport (= 2.3.10)
     activesupport (2.3.10)
+    annotate (2.4.0)
     fastercsv (1.5.4)
     haml (3.0.25)
     mysql (2.8.1)
@@ -40,6 +41,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   fastercsv
   haml (>= 2.0.6)
   mysql
