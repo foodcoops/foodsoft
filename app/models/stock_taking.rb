@@ -1,13 +1,3 @@
-# == Schema Information
-#
-# Table name: stock_takings
-#
-#  id         :integer         not null, primary key
-#  date       :date
-#  note       :text
-#  created_at :datetime
-#
-
 class StockTaking < ActiveRecord::Base
 
   has_many :stock_changes, :dependent => :destroy
@@ -21,3 +11,14 @@ class StockTaking < ActiveRecord::Base
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: stock_takings
+#
+#  id         :integer(4)      not null, primary key
+#  date       :date
+#  note       :text
+#  created_at :datetime
+#
+

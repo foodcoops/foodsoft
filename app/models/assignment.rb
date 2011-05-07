@@ -14,13 +14,14 @@ class Assignment < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: assignments
 #
-#  id       :integer         not null, primary key
-#  user_id  :integer         default(0), not null
-#  task_id  :integer         default(0), not null
-#  accepted :boolean         default(FALSE)
+#  id       :integer(4)      not null, primary key
+#  user_id  :integer(4)      default(0), not null
+#  task_id  :integer(4)      default(0), not null
+#  accepted :boolean(1)      default(FALSE)
 #
 

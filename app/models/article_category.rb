@@ -1,12 +1,3 @@
-# == Schema Information
-#
-# Table name: article_categories
-#
-#  id          :integer         not null, primary key
-#  name        :string(255)     default(""), not null
-#  description :string(255)
-#
-
 class ArticleCategory < ActiveRecord::Base
   has_many :articles
 	
@@ -14,3 +5,13 @@ class ArticleCategory < ActiveRecord::Base
   validates_uniqueness_of :name
 
 end
+
+# == Schema Information
+#
+# Table name: article_categories
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)     default(""), not null
+#  description :string(255)
+#
+

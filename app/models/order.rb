@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: orders
-#
-#  id                 :integer         not null, primary key
-#  supplier_id        :integer
-#  note               :text
-#  starts             :datetime
-#  ends               :datetime
-#  state              :string(255)     default("open")
-#  lock_version       :integer         default(0), not null
-#  updated_by_user_id :integer
-#  foodcoop_result    :decimal(8, 2)
-#
-
 class Order < ActiveRecord::Base
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
   acts_as_ordered :order => "ends"    # easyier find of next or previous model
@@ -226,3 +211,19 @@ class Order < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+#
+# Table name: orders
+#
+#  id                 :integer(4)      not null, primary key
+#  supplier_id        :integer(4)
+#  note               :text
+#  starts             :datetime
+#  ends               :datetime
+#  state              :string(255)     default("open")
+#  lock_version       :integer(4)      default(0), not null
+#  updated_by_user_id :integer(4)
+#  foodcoop_result    :decimal(8, 2)
+#
+

@@ -1,25 +1,3 @@
-# == Schema Information
-#
-# Table name: suppliers
-#
-#  id                 :integer         not null, primary key
-#  name               :string(255)     default(""), not null
-#  address            :string(255)     default(""), not null
-#  phone              :string(255)     default(""), not null
-#  phone2             :string(255)
-#  fax                :string(255)
-#  email              :string(255)
-#  url                :string(255)
-#  contact_person     :string(255)
-#  customer_number    :string(255)
-#  delivery_days      :string(255)
-#  order_howto        :string(255)
-#  note               :string(255)
-#  shared_supplier_id :integer
-#  min_order_quantity :string(255)
-#  deleted_at         :datetime
-#
-
 class Supplier < ActiveRecord::Base
   acts_as_paranoid  # Avoid deleting the supplier for consistency of order-results
 
@@ -84,3 +62,26 @@ class Supplier < ActiveRecord::Base
     return [updated_articles, outlisted_articles]
   end
 end
+
+# == Schema Information
+#
+# Table name: suppliers
+#
+#  id                 :integer(4)      not null, primary key
+#  name               :string(255)     default(""), not null
+#  address            :string(255)     default(""), not null
+#  phone              :string(255)     default(""), not null
+#  phone2             :string(255)
+#  fax                :string(255)
+#  email              :string(255)
+#  url                :string(255)
+#  contact_person     :string(255)
+#  customer_number    :string(255)
+#  delivery_days      :string(255)
+#  order_howto        :string(255)
+#  note               :string(255)
+#  shared_supplier_id :integer(4)
+#  min_order_quantity :string(255)
+#  deleted_at         :datetime
+#
+

@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: stock_changes
-#
-#  id               :integer         not null, primary key
-#  delivery_id      :integer
-#  order_id         :integer
-#  stock_article_id :integer
-#  quantity         :integer         default(0)
-#  created_at       :datetime
-#  stock_taking_id  :integer
-#
-
 class StockChange < ActiveRecord::Base
   belongs_to :delivery
   belongs_to :order
@@ -28,3 +15,17 @@ class StockChange < ActiveRecord::Base
     stock_article.update_quantity!
   end
 end
+
+# == Schema Information
+#
+# Table name: stock_changes
+#
+#  id               :integer(4)      not null, primary key
+#  delivery_id      :integer(4)
+#  order_id         :integer(4)
+#  stock_article_id :integer(4)
+#  quantity         :integer(4)      default(0)
+#  created_at       :datetime
+#  stock_taking_id  :integer(4)
+#
+

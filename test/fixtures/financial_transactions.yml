@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: financial_transactions
-#
-#  id            :integer         not null, primary key
-#  ordergroup_id :integer         default(0), not null
-#  amount        :decimal(8, 2)   default(0.0), not null
-#  note          :text            not null
-#  user_id       :integer         default(0), not null
-#  created_on    :datetime        not null
-#
-
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 bananas1:
   ordergroup: bananas
@@ -23,3 +11,16 @@ bananas2:
   amount: 100.00
   note: Paying in from <%= 1.weeks.ago.strftime("%d.%m.%Y") %>
   created_on: <%= 1.weeks.ago.to_s(:db) %>
+
+# == Schema Information
+#
+# Table name: financial_transactions
+#
+#  id            :integer(4)      not null, primary key
+#  ordergroup_id :integer(4)      default(0), not null
+#  amount        :decimal(8, 2)   default(0.0), not null
+#  note          :text            default(""), not null
+#  user_id       :integer(4)      default(0), not null
+#  created_on    :datetime        not null
+#
+

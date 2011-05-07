@@ -1,12 +1,3 @@
-# == Schema Information
-#
-# Table name: memberships
-#
-#  id       :integer         not null, primary key
-#  group_id :integer         default(0), not null
-#  user_id  :integer         default(0), not null
-#
-
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MembershipTest < Test::Unit::TestCase
@@ -17,3 +8,13 @@ class MembershipTest < Test::Unit::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: memberships
+#
+#  id       :integer(4)      not null, primary key
+#  group_id :integer(4)      default(0), not null
+#  user_id  :integer(4)      default(0), not null
+#
+

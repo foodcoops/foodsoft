@@ -29,14 +29,15 @@ class Invoice < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: invoices
 #
-#  id             :integer         not null, primary key
-#  supplier_id    :integer
-#  delivery_id    :integer
-#  order_id       :integer
+#  id             :integer(4)      not null, primary key
+#  supplier_id    :integer(4)
+#  delivery_id    :integer(4)
+#  order_id       :integer(4)
 #  number         :string(255)
 #  date           :date
 #  paid_on        :date

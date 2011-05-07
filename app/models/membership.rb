@@ -1,12 +1,3 @@
-# == Schema Information
-#
-# Table name: memberships
-#
-#  id       :integer         not null, primary key
-#  group_id :integer         default(0), not null
-#  user_id  :integer         default(0), not null
-#
-
 class Membership < ActiveRecord::Base
   
   belongs_to :user
@@ -20,3 +11,13 @@ class Membership < ActiveRecord::Base
     raise ERR_NO_ADMIN_MEMBER_DELETE if self.group.role_admin? && self.group.memberships.size == 1 && Group.find_all_by_role_admin(true).size == 1 
   end
 end
+
+# == Schema Information
+#
+# Table name: memberships
+#
+#  id       :integer(4)      not null, primary key
+#  group_id :integer(4)      default(0), not null
+#  user_id  :integer(4)      default(0), not null
+#
+

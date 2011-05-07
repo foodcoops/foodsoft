@@ -1,12 +1,3 @@
-# == Schema Information
-#
-# Table name: article_categories
-#
-#  id          :integer         not null, primary key
-#  name        :string(255)     default(""), not null
-#  description :string(255)
-#
-
 require File.dirname(__FILE__) + '/../test_helper'
 
 class ArticleCategoryTest < Test::Unit::TestCase
@@ -17,3 +8,13 @@ class ArticleCategoryTest < Test::Unit::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: article_categories
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)     default(""), not null
+#  description :string(255)
+#
+

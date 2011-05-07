@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: article_prices
-#
-#  id            :integer         not null, primary key
-#  article_id    :integer
-#  price         :decimal(8, 2)   default(0.0), not null
-#  tax           :decimal(8, 2)   default(0.0), not null
-#  deposit       :decimal(8, 2)   default(0.0), not null
-#  unit_quantity :integer
-#  created_at    :datetime
-#
-
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 banana1:
@@ -48,3 +35,17 @@ applejuice1:
   unit_quantity: 1
   deposit: 0.15
   created_at: <%= Time.now.to_s(:db) %>
+
+# == Schema Information
+#
+# Table name: article_prices
+#
+#  id            :integer(4)      not null, primary key
+#  article_id    :integer(4)
+#  price         :decimal(8, 2)   default(0.0), not null
+#  tax           :decimal(8, 2)   default(0.0), not null
+#  deposit       :decimal(8, 2)   default(0.0), not null
+#  unit_quantity :integer(4)
+#  created_at    :datetime
+#
+

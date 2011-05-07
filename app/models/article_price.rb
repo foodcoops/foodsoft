@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: article_prices
-#
-#  id            :integer         not null, primary key
-#  article_id    :integer
-#  price         :decimal(8, 2)   default(0.0), not null
-#  tax           :decimal(8, 2)   default(0.0), not null
-#  deposit       :decimal(8, 2)   default(0.0), not null
-#  unit_quantity :integer
-#  created_at    :datetime
-#
-
 class ArticlePrice < ActiveRecord::Base
 
   belongs_to :article
@@ -43,3 +30,17 @@ class ArticlePrice < ActiveRecord::Base
     (gross_price  * (Foodsoft.config[:price_markup] / 100 + 1)).round(2)
   end
 end
+
+# == Schema Information
+#
+# Table name: article_prices
+#
+#  id            :integer(4)      not null, primary key
+#  article_id    :integer(4)
+#  price         :decimal(8, 2)   default(0.0), not null
+#  tax           :decimal(8, 2)   default(0.0), not null
+#  deposit       :decimal(8, 2)   default(0.0), not null
+#  unit_quantity :integer(4)
+#  created_at    :datetime
+#
+
