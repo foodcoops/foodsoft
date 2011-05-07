@@ -9,6 +9,7 @@ class TaskTest < Test::Unit::TestCase
   end
 end
 
+
 # == Schema Information
 #
 # Table name: tasks
@@ -24,6 +25,6 @@ end
 #  updated_on     :datetime        not null
 #  required_users :integer         default(1)
 #  weekly         :boolean
-#  duration       :integer
+#  duration       :integer         default(1)
 #
 

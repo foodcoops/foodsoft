@@ -9,6 +9,11 @@
   %br/
   = form.text_area :description, :cols => 50, :rows => 10
 %p
+  %b Dauer
+  %small Wie lange dauert die Aufgabe, 1-3 Stunden
+  %br/
+  = form.select :duration, options_for_select(1..3, @task.duration)
+%p
   %b Verantwortliche
   %small Aufgaben können mehrere Verantwortliche haben
   /%br/

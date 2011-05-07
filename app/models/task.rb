@@ -11,6 +11,7 @@ class Task < ActiveRecord::Base
   attr_protected :users
   
   validates_length_of :name, :minimum => 3
+  validates_numericality_of :duration, :in => 1..3
 
   after_save :update_ordergroup_stats
   
@@ -67,7 +68,7 @@ class Task < ActiveRecord::Base
 
   def update_ordergroup_stats
     if done
-      users.each { |u| u.ordergroup.update_stats! }
+      users.each { |u| u.ordergroup.update_stats! if u.ordergroup }
     end
   end
 end
@@ -87,6 +88,6 @@ end
 #  updated_on     :datetime        not null
 #  required_users :integer         default(1)
 #  weekly         :boolean
-#  duration       :integer
+#  duration       :integer         default(1)
 #
 

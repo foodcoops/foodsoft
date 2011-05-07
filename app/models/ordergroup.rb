@@ -53,7 +53,7 @@ class Ordergroup < Group
 
   def update_stats!
     time = 6.month.ago
-    jobs = users.collect { |u| u.tasks.done.all(:conditions => ["updated_on > ?", time]).size }.sum
+    jobs = users.collect { |u| u.tasks.done.sum('duration', :conditions => ["updated_on > ?", time]) }.sum
     orders_sum = group_orders.select { |go| !go.order.ends.nil? && go.order.ends > time }.collect(&:price).sum
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
   end
@@ -91,7 +91,7 @@ end
 #  type                :string(255)     default(""), not null
 #  name                :string(255)     default(""), not null
 #  description         :string(255)
-#  account_balance     :decimal(8, 2)   default(0.0), not null
+#  account_balance     :decimal(, )     default(0.0), not null
 #  account_updated     :datetime
 #  created_on          :datetime        not null
 #  role_admin          :boolean         default(FALSE), not null
@@ -109,5 +109,6 @@ end
 #  contact_phone       :string(255)
 #  contact_address     :string(255)
 #  stats               :text
+#  task_duration       :integer         default(1)
 #
 

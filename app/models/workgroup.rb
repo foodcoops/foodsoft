@@ -34,11 +34,12 @@ class Workgroup < Group
 
   def task_attributes(date)
     {
-      :name => task_name,
-      :description => task_description,
-      :due_date => date,
-      :required_users => task_required_users,
-      :weekly => true
+        :name => task_name,
+        :description => task_description,
+        :due_date => date,
+        :required_users => task_required_users,
+        :duration => task_duration,
+        :weekly => true
     }
   end
   
@@ -52,7 +53,7 @@ end
 #  type                :string(255)     default(""), not null
 #  name                :string(255)     default(""), not null
 #  description         :string(255)
-#  account_balance     :decimal(8, 2)   default(0.0), not null
+#  account_balance     :decimal(, )     default(0.0), not null
 #  account_updated     :datetime
 #  created_on          :datetime        not null
 #  role_admin          :boolean         default(FALSE), not null
@@ -70,5 +71,6 @@ end
 #  contact_phone       :string(255)
 #  contact_address     :string(255)
 #  stats               :text
+#  task_duration       :integer         default(1)
 #
 

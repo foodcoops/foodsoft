@@ -1,5 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+
 # == Schema Information
 #
 # Table name: tasks
@@ -15,6 +16,6 @@
 #  updated_on     :datetime        not null
 #  required_users :integer         default(1)
 #  weekly         :boolean
-#  duration       :integer
+#  duration       :integer         default(1)
 #
 

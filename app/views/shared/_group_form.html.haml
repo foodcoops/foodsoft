@@ -33,6 +33,10 @@
         %td= @form.text_field :task_required_users, :size => 3
       %tr
         %td
+          = @form.label :task_duration, "Vor. Dauer in Stunden"
+        %td= @form.select :task_duration, options_for_select(1..3, @group.task_duration)
+      %tr
+        %td
           = @form.label :task_description, "Beschreibung:"
         %td= @form.text_area :task_description, :size => "30x10"
 
@@ -45,11 +49,13 @@
           $('workgroup_weekday').disabled = false;
           $('workgroup_task_name').disabled = false;
           $('workgroup_task_required_users').disabled = false;
+          $('workgroup_task_duration').disabled = false;
           $('workgroup_task_description').disabled = false;
         } else {
           $('workgroup_weekday').disabled = true;
           $('workgroup_task_name').disabled = true;
           $('workgroup_task_required_users').disabled = true;
+          $('workgroup_task_duration').disabled = true;
           $('workgroup_task_description').disabled = true;
         }
       }

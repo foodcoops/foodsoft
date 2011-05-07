@@ -12,7 +12,7 @@
   - for task in @tasks
     %tr{:class => cycle('even','odd')}
       %td= task.due_date unless task.due_date.nil?
-      %td= link_to task.name, :controller => "tasks", :action => "show", :id => task
+      %td= link_to "#{task.name} (#{task.duration}h)", :controller => "tasks", :action => "show", :id => task
       %td 
         - unless task.users.empty?
           = task.users.map(&:nick).join(", ")
