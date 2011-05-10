@@ -4,7 +4,7 @@ module RoutingFilter
   class Foodcoop < Base
     def around_recognize(path, env, &block)
       token = extract_token!(path)                                # remove the token from the beginning of the path
-      returning yield do |params|                                 # invoke the given block (calls more filters and finally routing)
+      yield.tap do |params|                                 # invoke the given block (calls more filters and finally routing)
         params[:foodcoop] = token if token                        # set recognized token to the resulting params hash
       end
     end
@@ -13,7 +13,7 @@ module RoutingFilter
       token = args.extract_options!.delete(:foodcoop)             # extract the passed :token option
       token = Foodsoft.env if token.nil?                          # default to Foodsoft.env
 
-      returning yield do |result|
+      yield.tap do |result|
         if token
           url = result.is_a?(Array) ? result.first : result
           prepend_token!(url, token)
