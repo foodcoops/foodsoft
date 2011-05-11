@@ -87,7 +87,7 @@ Foodsoft::Application.routes.draw do
       end
     end
 
-    resources :stock_articles, :to => 'stockit', :as => 'stockit' do
+    resources :stock_articles, :to => 'stockit' do
       collection do
         get :auto_complete_for_article_name
         get :fill_new_stock_article_form
@@ -151,6 +151,10 @@ Foodsoft::Application.routes.draw do
       end
     end
 
+    ############## Feedback
+
+    resource :feedback, :only => [:new, :create], :controller => 'feedback'
+    
     ############## The rest
 
     match '/:controller(/:action(/:id))'

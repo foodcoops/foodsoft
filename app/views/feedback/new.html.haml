@@ -1,0 +1,6 @@
+%h2 Fehler gefunden? Vorschlag? Idee? Kritik?
+
+= form_tag feedback_path do
+  %p
+    = text_area_tag :message, nil, :size => "40x15"
+  = submit_tag "Absenden"

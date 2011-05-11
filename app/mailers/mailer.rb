@@ -6,7 +6,7 @@ class Mailer < ActionMailer::Base
   default :from => "FoodSoft <#{Foodsoft.config[:email_sender]}>"
   
   # Sends an email copy of the given internal foodsoft message.
-  def message(message, recipient)
+  def foodsoft_message(message, recipient)
     @body = message.body
     @sender = message.sender.nick
     @recipients = recipient.nick
@@ -67,9 +67,9 @@ class Mailer < ActionMailer::Base
          :subject => "[#{Foodsoft.config[:name]}] Gruppenkonto im Minus"
   end
 
-  def feedback(user, message)
+  def feedback(user, feedback)
     @user = user
-    @message = message
+    @feedback = feedback
 
     mail :to => Foodsoft.config[:notification]["error_recipients"],
          :from => "#{user.nick} <#{user.email}>",

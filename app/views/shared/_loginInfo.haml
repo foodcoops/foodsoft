@@ -5,6 +5,5 @@
   - if Foodsoft.config[:homepage]
     %li= link_to Foodsoft.config[:name], Foodsoft.config[:homepage], { :title => _("Go to your FoodCoop-Hompage") }
   %li= link_to "Hilfe", 'http://dev.foodcoops.net/wiki/FoodsoftDoku'
-  %li= link_to_remote "Feedback", :url => {:controller => "/feedback", :action => "new"}, |
-       :method => :get, :html => {:title => "Fehler gefunden? Vorschlag? Idee? Kritik?"} |
+  %li= link_to "Feedback", new_feedback_path, :title => "Fehler gefunden? Vorschlag? Idee? Kritik?"
   %li= link_to "Abmelden", logout_path
