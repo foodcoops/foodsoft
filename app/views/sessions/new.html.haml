@@ -1,20 +1,18 @@
 - content_for :head do
   :javascript
-    document.observe("dom:loaded", function() {
-      // initially hide javascript warn message, when javascript is available
-      $('javascript-warn').hide(); $('login-form').show();
-
-      $('login_user').focus();
+    $(function() {
+      $('#nick').focus();
     });
 
 - title "FoodSoft login"
 
-#javascript-warn.error(style="font-size:1.5em")
-  %b Achtung, Cookies und Javascript müssen aktiviert sein!
-  = link_to "NoScript", "http://noscript.net/"
-  bitte abschalten.
+%noscript
+  #javascript-warn.error(style="font-size:1.5em")
+    Achtung, Cookies und Javascript müssen aktiviert sein!
+    = link_to "NoScript", "http://noscript.net/"
+    bitte abschalten.
 
-#login-form.edit_form(style="width:25em;display:none")
+#login-form.edit_form(style="width:25em")
   = form_tag sessions_path do
     %p
       %label{:for => 'user'} Benutzerin
