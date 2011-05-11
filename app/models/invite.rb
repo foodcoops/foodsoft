@@ -21,7 +21,7 @@ class Invite < ActiveRecord::Base
 
   # Sends an email to the invited user.
   def after_create
-    Mailer.deliver_invite(self)
+    Mailer.invite(self).deliver
   end
 
  private

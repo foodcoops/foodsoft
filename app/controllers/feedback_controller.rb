@@ -9,7 +9,7 @@ class FeedbackController < ApplicationController
 
   def create
     unless params[:message].blank?
-      Mailer.deliver_feedback(current_user, params[:message])
+      Mailer.feedback(current_user, params[:message]).deliver
     end
 
     render :update do |page|

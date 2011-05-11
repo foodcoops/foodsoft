@@ -76,7 +76,7 @@ class Ordergroup < Group
     # Notify only when order group had a positive balance before the last transaction:
     if (transaction.amount < 0 && self.account_balance < 0 && self.account_balance - transaction.amount >= 0)
       for user in users
-        Mailer.deliver_negative_balance(user,transaction) if user.settings["notify.negativeBalance"] == '1'
+        Mailer.negative_balance(user,transaction).deliver if user.settings["notify.negativeBalance"] == '1'
       end
     end
   end

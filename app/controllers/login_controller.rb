@@ -53,7 +53,7 @@ class LoginController < ApplicationController
       user.reset_password_token = user.new_random_password(16)
       user.reset_password_expires = Time.now.advance(:days => 2)
       if user.save
-        email = Mailer.deliver_reset_password(user)
+        email = Mailer.reset_password(user).deliver
         logger.debug("Sent password reset email to #{user.email}.")
       end
     end
