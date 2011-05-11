@@ -1,7 +1,5 @@
-require 'routing_filter/base'
-
 module RoutingFilter
-  class Foodcoop < Base
+  class Foodcoop < Filter
     def around_recognize(path, env, &block)
       token = extract_token!(path)                                # remove the token from the beginning of the path
       yield.tap do |params|                                 # invoke the given block (calls more filters and finally routing)

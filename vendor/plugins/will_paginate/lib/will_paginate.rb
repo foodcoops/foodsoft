@@ -46,18 +46,18 @@ module WillPaginate
       end
     end
 
-    # Enable named_scope, a feature of Rails 2.1, even if you have older Rails
+    # Enable scope, a feature of Rails 2.1, even if you have older Rails
     # (tested on Rails 2.0.2 and 1.2.6).
     #
     # You can pass +false+ for +patch+ parameter to skip monkeypatching
-    # *associations*. Use this if you feel that <tt>named_scope</tt> broke
+    # *associations*. Use this if you feel that <tt>scope</tt> broke
     # has_many, has_many :through or has_and_belongs_to_many associations in
-    # your app. By passing +false+, you can still use <tt>named_scope</tt> in
+    # your app. By passing +false+, you can still use <tt>scope</tt> in
     # your models, but not through associations.
-    def enable_named_scope(patch = true)
+    def enable_scope(patch = true)
       return if defined? ActiveRecord::NamedScope
-      require 'will_paginate/named_scope'
-      require 'will_paginate/named_scope_patch' if patch
+      require 'will_paginate/scope'
+      require 'will_paginate/scope_patch' if patch
 
       ActiveRecord::Base.send :include, WillPaginate::NamedScope
     end

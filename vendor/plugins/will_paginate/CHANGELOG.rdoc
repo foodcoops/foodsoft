@@ -51,7 +51,7 @@
   
 == 2.2.1, released 2008-04-08
 
-* take less risky path when monkeypatching named_scope; fix that it no longer
+* take less risky path when monkeypatching scope; fix that it no longer
   requires ActiveRecord::VERSION
 * use strings in "respond_to?" calls to work around a bug in acts_as_ferret
   stable (ugh)
@@ -79,8 +79,8 @@
 
 === Other
 
-* Add ability to opt-in for Rails 2.1 feature "named_scope" by calling
-  WillPaginate.enable_named_scope (tested in Rails 1.2.6 and 2.0.2)
+* Add ability to opt-in for Rails 2.1 feature "scope" by calling
+  WillPaginate.enable_scope (tested in Rails 1.2.6 and 2.0.2)
 * Support complex page parameters like "developers[page]"
 * Move Array#paginate definition to will_paginate/array.rb. You can now easily
   use pagination on arrays outside of Rails:

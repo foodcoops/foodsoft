@@ -16,7 +16,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
   attr_accessor :ordergroup_id  # To create an new GroupOrder if neccessary
 
-  named_scope :ordered, :conditions => 'result > 0'
+  scope :ordered, :conditions => 'result > 0'
 
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def result=(result)

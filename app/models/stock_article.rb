@@ -1,7 +1,7 @@
 class StockArticle < Article
   has_many :stock_changes
 
-  named_scope :available, :conditions => "quantity > 0"
+  scope :available, :conditions => "quantity > 0"
 
   before_destroy :check_quantity
 

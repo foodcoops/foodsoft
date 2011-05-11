@@ -3,7 +3,7 @@ require 'lib/activerecord_test_case'
 
 require 'will_paginate'
 WillPaginate.enable_activerecord
-WillPaginate.enable_named_scope
+WillPaginate.enable_scope
 
 class FinderTest < ActiveRecordTestCase
   fixtures :topics, :replies, :users, :projects, :developers_projects
@@ -221,16 +221,16 @@ class FinderTest < ActiveRecordTestCase
     assert_equal 2, entries.total_entries
   end
 
-  ## named_scope ##
+  ## scope ##
   
-  def test_paginate_in_named_scope
+  def test_paginate_in_scope
     entries = Developer.poor.paginate :page => 1, :per_page => 1
 
     assert_equal 1, entries.size
     assert_equal 2, entries.total_entries
   end
   
-  def test_paginate_in_named_scope_on_habtm_association
+  def test_paginate_in_scope_on_habtm_association
     project = projects(:active_record)
     assert_queries(2) do
       entries = project.developers.poor.paginate :page => 1, :per_page => 1
@@ -240,7 +240,7 @@ class FinderTest < ActiveRecordTestCase
     end
   end
 
-  def test_paginate_in_named_scope_on_hmt_association
+  def test_paginate_in_scope_on_hmt_association
     project = projects(:active_record)
     expected = [replies(:brave)]
     
@@ -251,7 +251,7 @@ class FinderTest < ActiveRecordTestCase
     end
   end
 
-  def test_paginate_in_named_scope_on_has_many_association
+  def test_paginate_in_scope_on_has_many_association
     project = projects(:active_record)
     expected = [topics(:ar)]
     

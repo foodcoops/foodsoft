@@ -1,80 +1,145 @@
-ActionController::Routing::Routes.draw do |map|
+Foodsoft::Application.routes.draw do
 
   # Use routing filter to select foodcoop config and datbase
-  map.filter 'foodcoop', :file => File.join(RAILS_ROOT, "lib", "foodcoop_filter")
+#  filter :foodcoop
 
-  # Root path
-  map.root :controller => 'home', :action => 'index'
+  scope '/:foodcoop', :defaults => { :foodcoop => Foodsoft.env } do
 
-  # User specific
-  map.login "/login", :controller => 'login', :action => 'index'
-  map.logout '/logout', :controller => 'login', :action => 'logout'
-  map.my_profile '/home/profile', :controller => 'home', :action => 'profile'
-  map.my_ordergroup '/home/ordergroup', :controller => 'home', :action => 'ordergroup'
+    # Root path
+    root :to => 'home#index'
 
-  # Wiki
-  map.resources :pages, :collection => { :all => :get }, :member => {:version => :get, :revert => :get}
-  map.wiki_page "/wiki/:permalink", :controller => 'pages', :action => 'show', :permalink => /[^\s]+/
-  map.wiki "/wiki", :controller => 'pages', :action => 'show', :permalink => 'Home'
+    ########### User specific
 
-  # Orders, ordering
-  map.resources :orders, :member => { :finish => :post, :add_comment => :post }
-  map.with_options :controller => "ordering" do |ordering|
-    ordering.ordering "/ordering", :action => "index"
-    ordering.my_orders "/ordering/myOrders", :action => "myOrders"
+    match '/login' => 'login#index', :as => 'login'
+    match '/logout' => 'login#logout', :as => 'logout'
+    match '/home/profile' => 'home#profile', :as => 'my_profile'
+    match '/home/ordergroup' => 'home#ordergroup', :as => 'my_ordergroup'
+
+    ############ Wiki
+
+    resources :pages do
+      get :all, :on => :collection
+      get :version, :on => :member
+      get :revert, :on => :member
+    end
+    match '/wiki/:permalink' => 'pages#show', :constraints => {:permalink => /[^\s]+/}, :as => 'wiki_page'
+    match '/wiki' => 'pages#show', :defaults => {:permalink => 'Home'}, :as => 'wiki'
+
+    ############ Orders, ordering
+
+    resources :orders do
+      member do
+        post :finish
+        post :add_comment
+      end
+    end
+
+    match '/ordering/myOrders' => 'ordering#myOrders', :as => 'my_orders'
+    match '/ordering' => 'ordering#index', :as => 'ordering'
+
+    ############ Foodcoop orga
+
+    resources :invites, :only => [:new, :create]
+
+    resources :tasks do
+      collection do
+        get :user
+        get :archive
+        get :workgroup
+      end
+    end
+
+    resources :messages, :only => [:index, :show, :new, :create] do
+      member do
+        get :reply
+        get :user
+        get :group
+      end
+    end
+
+    namespace :foodcoop do
+      root :to => 'users#index'
+
+      resources :users, :only => [:index]
+
+      resources :ordergroups, :only => [:index]
+
+      resources :workgroups, :only => [:index, :edit, :update] do
+        get :memberships, :on => :member
+      end
+    end
+
+    ########### Article management
+
+    resources :stock_takings do
+      collection do
+        get :fill_new_stock_article_form
+        post :add_stock_article
+      end
+    end
+
+    resources :stock_articles, :to => 'stockit', :as => 'stockit' do
+      collection do
+        get :auto_complete_for_article_name
+        get :fill_new_stock_article_form
+      end
+    end
+
+    resources :suppliers do
+      get :shared_suppliers, :on => :collection
+
+      resources :deliveries do
+        post :drop_stock_change, :on => :member
+        post :add_stock_article, :on => :collection
+      end
+
+      resources :articles do
+        collection do
+          post :update_selected
+          get :edit_all
+          post :update_all
+          get :upload
+          post :parse_upload
+          post :create_from_upload
+          get :shared
+          get :import
+          post :sync
+        end
+      end
+
+      resources :article_categories
+
+      ########### Finance
+
+      namespace :finance do
+        root :to => 'balancing#index'
+        match 'balancing/list' => 'balancing#list', :as => 'balancing'
+
+        resources :invoices
+
+        resources :transactions do
+          collection do
+            get :new_collection
+            post :create_collection
+          end
+        end
+      end
+
+      ########### Administration
+
+      namespace :admin do
+        root :to => 'base#index'
+
+        resources :users
+
+        resources :workgroups do
+          get :memberships, :on => :member
+        end
+
+        resources :ordergroups do
+          get :memberships, :on => :member
+        end
+      end
+    end
   end
-
-
-  # Foodcoop orga
-  map.resources :invites, :only => [:new, :create]
-  map.resources :tasks,
-    :collection => {:user => :get, :archive => :get, :workgroup => :get}
-  map.resources :messages, :only => [:index, :show, :new, :create],
-    :member => { :reply => :get, :user => :get, :group => :get }
-  map.namespace :foodcoop do |foodcoop|
-    foodcoop.root :controller => "users", :action => "index"
-    foodcoop.resources :users, :only => [:index]
-    foodcoop.resources :ordergroups, :only => [:index]
-    foodcoop.resources :workgroups, :only => [:index, :edit, :update],
-      :member => {:memberships => :get}
-  end
-
-  # Article management
-  map.resources :stock_takings,
-    :collection => {:fill_new_stock_article_form => :get, :add_stock_article => :post}
-  map.resources :stock_articles,
-    :controller => 'stockit', :as => 'stockit',
-    :collection => {:auto_complete_for_article_name => :get, :fill_new_stock_article_form => :get}
-
-  map.resources :suppliers,
-    :collection => { :shared_suppliers => :get } do |suppliers|
-    suppliers.resources :deliveries,
-      :member => { :drop_stock_change => :post },
-      :collection => {:add_stock_article => :post}
-    suppliers.resources :articles,
-      :collection => { :update_selected => :post, :edit_all => :get, :update_all => :post,
-                       :upload => :get, :parse_upload => :post, :create_from_upload => :post,
-                       :shared => :get, :import => :get, :sync => :post }
-  end
-  map.resources :article_categories
-
-  # Finance
-  map.namespace :finance do |finance|
-    finance.root :controller => 'balancing'
-    finance.balancing "balancing/list", :controller => 'balancing', :action => 'list'
-    finance.resources :invoices
-    finance.resources :transactions, :collection => {:new_collection => :get, :create_collection => :post}
-  end
-
-  # Administration
-  map.namespace :admin do |admin|
-    admin.root :controller => "base", :action => "index"
-    admin.resources :users
-    admin.resources :workgroups, :member => { :memberships => :get }
-    admin.resources :ordergroups, :member => { :memberships => :get }
-  end
-
-  # Install the default route as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end

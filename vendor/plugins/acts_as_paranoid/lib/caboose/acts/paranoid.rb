@@ -62,7 +62,7 @@ module Caboose #:nodoc:
 #              alias_method :calculate_with_deleted,     :calculate
               alias_method :delete_all!,                :delete_all
             end
-            send :named_scope, :without_deleted, :conditions => {:deleted_at => nil}
+            send :scope, :without_deleted, :conditions => {:deleted_at => nil}
           end
           include InstanceMethods
         end

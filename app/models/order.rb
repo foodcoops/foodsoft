@@ -21,11 +21,11 @@ class Order < ActiveRecord::Base
   after_update :update_price_of_group_orders
  
   # Finders
-  named_scope :open, :conditions => {:state => 'open'}, :order => 'ends DESC'
-  named_scope :finished, :conditions => "state = 'finished' OR state = 'closed'", :order => 'ends DESC'
-  named_scope :finished_not_closed, :conditions => {:state => 'finished'}, :order => 'ends DESC'
-  named_scope :closed, :conditions => {:state => 'closed'}, :order => 'ends DESC'
-  named_scope :stockit, :conditions => {:supplier_id => 0}, :order => 'ends DESC'
+  scope :open, :conditions => {:state => 'open'}, :order => 'ends DESC'
+  scope :finished, :conditions => "state = 'finished' OR state = 'closed'", :order => 'ends DESC'
+  scope :finished_not_closed, :conditions => {:state => 'finished'}, :order => 'ends DESC'
+  scope :closed, :conditions => {:state => 'closed'}, :order => 'ends DESC'
+  scope :stockit, :conditions => {:supplier_id => 0}, :order => 'ends DESC'
 
   def stockit?
     supplier_id == 0

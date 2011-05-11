@@ -6,7 +6,7 @@ class Invoice < ActiveRecord::Base
 
   validates_presence_of :supplier_id
 
-  named_scope :unpaid, :conditions => { :paid_on => nil }
+  scope :unpaid, :conditions => { :paid_on => nil }
 
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def amount=(amount)

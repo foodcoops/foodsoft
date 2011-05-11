@@ -1,10 +1,10 @@
-## stolen from: http://dev.rubyonrails.org/browser/trunk/activerecord/lib/active_record/named_scope.rb?rev=9084
+## stolen from: http://dev.rubyonrails.org/browser/trunk/activerecord/lib/active_record/scope.rb?rev=9084
 
 module WillPaginate
   # This is a feature backported from Rails 2.1 because of its usefullness not only with will_paginate,
   # but in other aspects when managing complex conditions that you want to be reusable.
   module NamedScope
-    # All subclasses of ActiveRecord::Base have two named_scopes:
+    # All subclasses of ActiveRecord::Base have two scopes:
     # * <tt>all</tt>, which is similar to a <tt>find(:all)</tt> query, and
     # * <tt>scoped</tt>, which allows for the creation of anonymous scopes, on the fly:
     #
@@ -15,8 +15,8 @@ module WillPaginate
     def self.included(base)
       base.class_eval do
         extend ClassMethods
-        named_scope :all
-        named_scope :scoped, lambda { |scope| scope }
+        scope :all
+        scope :scoped, lambda { |scope| scope }
       end
     end
 
@@ -29,11 +29,11 @@ module WillPaginate
       # such as <tt>:conditions => {:color => :red}, :select => 'shirts.*', :include => :washing_instructions</tt>.
       #
       #   class Shirt < ActiveRecord::Base
-      #     named_scope :red, :conditions => {:color => 'red'}
-      #     named_scope :dry_clean_only, :joins => :washing_instructions, :conditions => ['washing_instructions.dry_clean_only = ?', true]
+      #     scope :red, :conditions => {:color => 'red'}
+      #     scope :dry_clean_only, :joins => :washing_instructions, :conditions => ['washing_instructions.dry_clean_only = ?', true]
       #   end
       # 
-      # The above calls to <tt>named_scope</tt> define class methods <tt>Shirt.red</tt> and <tt>Shirt.dry_clean_only</tt>. <tt>Shirt.red</tt>, 
+      # The above calls to <tt>scope</tt> define class methods <tt>Shirt.red</tt> and <tt>Shirt.dry_clean_only</tt>. <tt>Shirt.red</tt>,
       # in effect, represents the query <tt>Shirt.find(:all, :conditions => {:color => 'red'})</tt>.
       #
       # Unlike Shirt.find(...), however, the object returned by <tt>Shirt.red</tt> is not an Array; it resembles the association object
@@ -59,7 +59,7 @@ module WillPaginate
       # Named scopes can also be procedural.
       #
       #   class Shirt < ActiveRecord::Base
-      #     named_scope :colored, lambda { |color|
+      #     scope :colored, lambda { |color|
       #       { :conditions => { :color => color } }
       #     }
       #   end
@@ -69,14 +69,14 @@ module WillPaginate
       # Named scopes can also have extensions, just as with <tt>has_many</tt> declarations:
       #
       #   class Shirt < ActiveRecord::Base
-      #     named_scope :red, :conditions => {:color => 'red'} do
+      #     scope :red, :conditions => {:color => 'red'} do
       #       def dom_id
       #         'red_shirts'
       #       end
       #     end
       #   end
       #
-      def named_scope(name, options = {}, &block)
+      def scope(name, options = {}, &block)
         scopes[name] = lambda do |parent_scope, *args|
           Scope.new(parent_scope, case options
             when Hash

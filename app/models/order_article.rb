@@ -9,7 +9,7 @@ class OrderArticle < ActiveRecord::Base
   validates_presence_of :order_id, :article_id
   validate :article_and_price_exist
 
-  named_scope :ordered, :conditions => "units_to_order >= 1"
+  scope :ordered, :conditions => "units_to_order >= 1"
 
 
   # This method returns either the ArticlePrice or the Article

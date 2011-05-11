@@ -4,7 +4,7 @@ class Delivery < ActiveRecord::Base
   has_one :invoice
   has_many :stock_changes, :dependent => :destroy
 
-  named_scope :recent, :order => 'created_at DESC', :limit => 10
+  scope :recent, :order => 'created_at DESC', :limit => 10
 
   validates_presence_of :supplier_id
 
