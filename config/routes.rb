@@ -115,39 +115,39 @@ Foodsoft::Application.routes.draw do
           post :sync
         end
       end
+    end
 
-      resources :article_categories
+    resources :article_categories
 
-      ########### Finance
+    ########### Finance
 
-      namespace :finance do
-        root :to => 'balancing#index'
-        match 'balancing/list' => 'balancing#list', :as => 'balancing'
+    namespace :finance do
+      root :to => 'balancing#index'
+      match 'balancing/list' => 'balancing#list', :as => 'balancing'
 
-        resources :invoices
+      resources :invoices
 
-        resources :transactions do
-          collection do
-            get :new_collection
-            post :create_collection
-          end
+      resources :transactions do
+        collection do
+          get :new_collection
+          post :create_collection
         end
       end
+    end
 
-      ########### Administration
+    ########### Administration
 
-      namespace :admin do
-        root :to => 'base#index'
+    namespace :admin do
+      root :to => 'base#index'
 
-        resources :users
+      resources :users
 
-        resources :workgroups do
-          get :memberships, :on => :member
-        end
+      resources :workgroups do
+        get :memberships, :on => :member
+      end
 
-        resources :ordergroups do
-          get :memberships, :on => :member
-        end
+      resources :ordergroups do
+        get :memberships, :on => :member
       end
     end
 
