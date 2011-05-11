@@ -15,19 +15,15 @@
   bitte abschalten.
 
 #login-form.edit_form(style="width:25em;display:none")
-  - form_tag :action => 'login' do
-    - if flash[:notice]
-      %div.notice= flash[:notice]
-    - if flash[:error]
-      %div.error= flash[:error]
+  = form_tag sessions_path do
     %p
       %label{:for => 'user'} Benutzerin
       %br/
-      = text_field 'login', 'user'
+      = text_field_tag 'nick'
     %p
       %label{:for => 'password'} Passwort
       %br/
-      = password_field 'login', 'password'
+      = password_field_tag 'password'
     = submit_tag "Anmelden"
     |
-    = link_to "Passwort vergessen?", :action => 'forgot_password'
+    = link_to "Passwort vergessen?", :controller => 'login', :action => 'forgot_password'

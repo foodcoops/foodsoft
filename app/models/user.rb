@@ -176,6 +176,15 @@ class User < ActiveRecord::Base
      self.groups.find(:all, :conditions => {:type => ""})
   end
 
+  def self.authenticate(nick, password)
+    user = find_by_nick(nick)
+    if user && user.has_password(password)
+      user
+    else
+      nil
+    end
+  end
+
 end
 
 # == Schema Information

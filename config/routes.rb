@@ -1,19 +1,28 @@
 Foodsoft::Application.routes.draw do
 
+  get "sessions/new"
+
   # Use routing filter to select foodcoop config and datbase
 #  filter :foodcoop
+
+  root :to => redirect("/#{Foodsoft.env}")
 
   scope '/:foodcoop', :defaults => { :foodcoop => Foodsoft.env } do
 
     # Root path
     root :to => 'home#index'
 
+    ########### Sessions
+
+    match '/login' => 'sessions#new', :as => 'login'
+    match '/logout' => 'sessions#destroy', :as => 'logout'
+    resources :sessions, :only => [:new, :create, :destroy]
+
     ########### User specific
 
-    match '/login' => 'login#index', :as => 'login'
-    match '/logout' => 'login#logout', :as => 'logout'
     match '/home/profile' => 'home#profile', :as => 'my_profile'
     match '/home/ordergroup' => 'home#ordergroup', :as => 'my_ordergroup'
+
 
     ############ Wiki
 
@@ -141,5 +150,10 @@ Foodsoft::Application.routes.draw do
         end
       end
     end
-  end
+
+    ############## The rest
+
+    match '/:controller(/:action(/:id))'
+
+  end # End of /:foodcoop scope
 end

@@ -1,12 +1,10 @@
 class ApplicationController < ActionController::Base
 
-  filter_parameter_logging :password, :password_confirmation   # do not log passwort parameters
+  protect_from_forgery
   before_filter :select_foodcoop, :authenticate, :store_controller
   after_filter  :remove_controller
-  
-  # sends a mail, when an error occurs
-  # see plugins/exception_notification
-  include ExceptionNotifiable
+
+  helper_method :current_user
 
   # Returns the controller handling the current request.
   def self.current
@@ -25,46 +23,27 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    begin
-      # check if there is a valid session and return the logged-in user (its object)
-      if session[:user] and session[:foodcoop]
-        # for shared-host installations. check if the cookie-subdomain fits to request.
-        return User.current_user = User.find(session[:user]) if session[:foodcoop] == Foodsoft.env
-      end
-    rescue
-      reset_session
-      flash[:error]= _("An error has occurred. Please login again.")
-      redirect_to :controller => 'login'
+    # check if there is a valid session and return the logged-in user (its object)
+    if session[:user_id] and params[:foodcoop]
+      # for shared-host installations. check if the cookie-subdomain fits to request.
+      @current_user ||= User.find(session[:user_id]) if params[:foodcoop] == Foodsoft.env
     end
-  end
-
-  def current_user=(user)
-    session[:user], session[:foodcoop] = user.id, Foodsoft.env
-  end
-    
-  def return_to
-    session['return_to']
-  end
-
-  def return_to=(uri)
-    session['return_to'] = uri
   end
     
   def deny_access
     self.return_to = request.request_uri
-    redirect_to :controller => '/login', :action => 'denied'
-    return false
+    redirect_to login_url, :alert => 'Access denied!'
   end
 
   private  
 
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
-    if !(user = current_user)
+    if !current_user
       # No user at all: redirect to login page.
-      self.return_to = request.request_uri
-      redirect_to :controller => '/login'
-      return false
+      session[:user_id] = nil
+      session['return_to'] = request.fullpath
+      redirect_to login_url, :alert => 'Authentication required!'
     else
       # We have an authenticated user, now check role...
       # Roles gets the user through his memberships.
@@ -78,7 +57,7 @@ class ApplicationController < ActionController::Base
       else false                  # any unknown role will always fail
       end
       if hasRole
-        @current_user = user
+        current_user
       else
         deny_access
       end

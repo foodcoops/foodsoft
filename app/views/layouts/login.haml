@@ -10,6 +10,8 @@
     #login
       - if yield(:title)
         %h1= yield(:title)
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :class => "flash #{name}"
       = yield
       #meta
         Foodcoop 

@@ -2,47 +2,8 @@ class LoginController < ApplicationController
   skip_before_filter :authenticate        # no authentication since this is the login page
   before_filter :validate_token, :only => [:password, :update_password]
 
-  verify :method => :post, :only => [:login, :reset_password, :new], :redirect_to => { :action => :index }
-  
-  # Redirects to the login action.
-  def index
-    render :action => 'login'
-  end
-  
-  # Logout the current user and deletes the session
-  def logout
-    self.return_to = nil 
-    current_user = nil
-    reset_session
-    flash[:notice] = "Abgemeldet"
-    render :action => 'login'
-  end
-  
-  # Displays a "denied due to insufficient privileges" message and provides the login form.
-  def denied
-    flash[:error] = "Du bist nicht berechtigt diese Seite zu besuchen. Bitte als berechtige Benutzerin anmelden oder zurück gehen."
-    render :action => 'login'
-  end
-  
-  # Login to the foodsoft.
-  def login
-    user = User.find_by_nick(params[:login][:user])
-    if user && user.has_password(params[:login][:password])
-      # Set last_login to Now()
-      user.update_attribute(:last_login, Time.now)
-      self.current_user = user
-      if (redirect = return_to) 
-        self.return_to = nil 
-        redirect_to redirect
-      else
-        redirect_to root_path
-      end
-    else
-      current_user = nil
-      flash[:error] = "Tschuldige, die Anmeldung war nicht erfolgreich. Bitte erneut versuchen."
-    end
-  end
-  
+  verify :method => :post, :only => [:reset_password], :redirect_to => { :action => 'forgot_password' }
+
   # Display the form to enter an email address requesting a token to set a new password.
   def forgot_password
   end
@@ -57,8 +18,7 @@ class LoginController < ApplicationController
         logger.debug("Sent password reset email to #{user.email}.")
       end
     end
-    flash[:notice] = "Wenn Deine E-Mail hier registiert ist bekommst Du jetzt eine Nachricht mit einem Passwort-Zurücksetzen-Link."
-    render :action => 'login'
+    redirect_to login_url, :notice => "Wenn Deine E-Mail hier registiert ist bekommst Du jetzt eine Nachricht mit einem Passwort-Zurücksetzen-Link."
   end
   
   # Set a new password with a token from the password reminder email.
@@ -74,8 +34,7 @@ class LoginController < ApplicationController
       @user.reset_password_token = nil
       @user.reset_password_expires = nil
       @user.save
-      flash[:notice] = "Dein Passwort wurde aktualisiert. Du kannst Dich jetzt anmelden."
-      render :action => 'login'
+      redirect_to login_url, :notice => "Dein Passwort wurde aktualisiert. Du kannst Dich jetzt anmelden."
     else
       render :action => 'password'
     end
