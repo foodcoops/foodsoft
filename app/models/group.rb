@@ -6,6 +6,7 @@ class Group < ActiveRecord::Base
   
   validates_length_of :name, :in => 1..25
   validates_uniqueness_of :name
+  validate :last_admin_on_earth, :on => :update
   
   # Returns true if the given user if is an member of this group.
   def member?(user)
@@ -32,8 +33,8 @@ class Group < ActiveRecord::Base
   end
 
   # add validation check on update
-  def validate_on_update
-    # error if this is the last group with admin role and role_admin should set to false
+  # Return an error if this is the last group with admin role and role_admin should set to false
+  def last_admin_on_earth
     if self.role_admin == false && Group.find_all_by_role_admin(true).size == 1 && self == Group.find(:first, :conditions => "role_admin = 1")
       errors.add(:role_admin, "Der letzten Gruppe mit Admin-Rechten darf die Admin-Rolle nicht entzogen werden")
     end

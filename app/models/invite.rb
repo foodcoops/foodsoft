@@ -10,6 +10,8 @@ class Invite < ActiveRecord::Base
   validates_presence_of :group
   validates_presence_of :token
   validates_presence_of :expires_at
+  validate :email_not_already_registered, :on => :create
+
       
  protected
   
@@ -27,7 +29,7 @@ class Invite < ActiveRecord::Base
  private
 
   # Custom validation: check that email does not already belong to a registered user.
-  def validate_on_create
+  def email_not_already_registered
     unless User.find_by_email(self.email).nil?
       errors.add(:email, 'ist bereits in Verwendung. Person ist schon Mitglied der Foodcoop.')
     end

@@ -11,8 +11,8 @@ class Page < ActiveRecord::Base
   validates_presence_of :title, :body
   validates_uniqueness_of :permalink, :title
 
-  before_validation_on_create :set_permalink
-  before_validation_on_update :update_permalink
+  before_validation :set_permalink, :on => :create
+  before_validation :update_permalink, :on => :update
   after_update :create_redirect
 
   named_scope :non_redirected, :conditions => {:redirect => nil}

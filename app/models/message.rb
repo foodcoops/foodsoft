@@ -19,9 +19,9 @@ class Message < ActiveRecord::Base
   validates_length_of :subject, :in => 1..255
   validates_inclusion_of :email_state, :in => EMAIL_STATE.values
 
+  before_validation :clean_up_recipient_ids, :on => :create
 
-  # clean up the recipients_ids
-  def before_validation_on_create
+  def clean_up_recipient_ids
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
     self.recipients_ids = User.all.collect(&:id) if sent_to_all == "1"
   end
