@@ -33,6 +33,7 @@ GEM
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    exception_notification (2.4.0)
     fastercsv (1.5.4)
     haml (3.0.25)
     hirb (0.3.4)
@@ -84,6 +85,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  exception_notification
   fastercsv
   haml (>= 2.0.6)
   hirb

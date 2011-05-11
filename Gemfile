@@ -14,3 +14,7 @@ group :development do
   gem 'annotate'
   gem 'hirb'
 end
+
+group :production do
+  gem 'exception_notification', :require => 'exception_notifier'
+end

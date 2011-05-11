@@ -23,11 +23,16 @@ url_options = {
     :protocol => Foodsoft.config[:protocol]
 }
 url_options.merge!({:port => Foodsoft.config[:port]}) if Foodsoft.config[:port]
-ActionMailer::Base.default_url_options = url_options
 
-# Configuration of the exception_notification plugin
-# Mailadresses are set in config/foodsoft.yaml
-ExceptionNotifier.exception_recipients = Foodsoft.config[:notification]['error_recipients']
-ExceptionNotifier.sender_address = Foodsoft.config[:notification]['sender_address']
-ExceptionNotifier.email_prefix = Foodsoft.config[:notification]['email_prefix']
+Foodsoft::Application.configure do
+  config.action_mailer.default_url_options = url_options
+
+  # Configuration of the exception_notification plugin
+  # Mailadresses are set in config/app_config.yml
+  config.middleware.use ExceptionNotifier,
+                        :email_prefix => Foodsoft.config[:notification]['email_prefix'],
+                        :sender_address => Foodsoft.config[:notification]['sender_address'],
+                        :exception_recipients => Foodsoft.config[:notification]['error_recipients']
+
+end
 
