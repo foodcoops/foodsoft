@@ -11,7 +11,7 @@ class Task < ActiveRecord::Base
   attr_protected :users
   
   validates_length_of :name, :minimum => 3
-  validates_numericality_of :duration, :in => 1..3
+  validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 1
 
   after_save :update_ordergroup_stats
   
