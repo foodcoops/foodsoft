@@ -9,7 +9,7 @@ gem "prawn", '<=0.6.3'
 gem 'haml', '>=2.0.6'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'jquery-rails'
-
+gem 'simple_form'
 
 group :development do
   gem 'annotate'

@@ -10,12 +10,12 @@ h3.notice {
   font-size: 100%;
   position: relative; }
 
-h3.error, div.error {
+h3.alert, div.alert, div.error {
   color: red;
   font-size: 100%;
   font-weight: bold; }
 
-h3.error {
+h3.alert {
   background: yellow url(/images/error.png) no-repeat 10px 3px;
   border: 1px solid red;
   padding: 4px 40px;

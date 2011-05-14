@@ -3,7 +3,7 @@
   %head
     %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
     %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
-    = stylesheet_link_tag 'main', 'rails_messages', 'nav', :cache => "all_cached"
+    = stylesheet_link_tag 'main', 'rails_messages', 'nav', 'simple_form', :cache => "all_cached"
     = stylesheet_link_tag "print", :media => "print"
     <!--[if lte IE 7]>
     = stylesheet_link_tag 'ie_hacks'

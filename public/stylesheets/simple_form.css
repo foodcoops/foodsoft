@@ -1,0 +1,41 @@
+.simple_form label {
+    float: left;
+    width: 100px;
+    text-align: right;
+    margin: 2px 10px;
+}
+
+.simple_form div.input {
+    margin-bottom: 10px;
+}
+
+.simple_form div.boolean, .simple_form input[type='submit'] {
+    margin-left: 120px;
+}
+
+.simple_form div.boolean label, .simple_form label.collection_radio {
+    float: none;
+    margin: 0;
+}
+
+.simple_form label.collection_radio {
+    margin-right: 10px;
+    margin-left: 2px;
+}
+
+.simple_form .error {
+    clear: left;
+    margin-left: 120px;
+    font-size: 12px;
+    color: #D00;
+    display: block;
+}
+
+.simple_form .hint {
+    clear: left;
+    margin-left: 120px;
+    font-size: 12px;
+    color: #555;
+    display: block;
+    font-style: italic;
+}
