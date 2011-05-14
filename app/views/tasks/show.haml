@@ -18,7 +18,7 @@
       %td= @task.duration
     %tr
       %td Verantwortliche Menschen
-      %td= render :partial => "assignments"
+      %td= task_assignments(@task)
     %tr
       %td Arbeitsgruppe
       %td

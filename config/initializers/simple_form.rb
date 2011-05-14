@@ -51,6 +51,7 @@ SimpleForm.setup do |config|
 
   # How the label text should be generated altogether with the required text.
   # config.label_text = lambda { |label, required| "#{required} #{label}" }
+  config.label_text = lambda { |label, required| "#{label}#{required}" }
 
   # Whether attributes are required by default (or not). Default is true.
   # config.required_by_default = true

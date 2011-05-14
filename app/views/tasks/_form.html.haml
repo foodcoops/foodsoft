@@ -1,36 +1,9 @@
-= form.error_messages
-= form.hidden_field :weekly
-%p
-  %b Name
-  %br/
-  = form.text_field :name
-%p
-  %b Beschreibung
-  %br/
-  = form.text_area :description, :cols => 50, :rows => 10
-%p
-  %b Dauer
-  %small Wie lange dauert die Aufgabe, 1-3 Stunden
-  %br/
-  = form.select :duration, options_for_select(1..3, @task.duration)
-%p
-  %b Verantwortliche
-  %small Aufgaben können mehrere Verantwortliche haben
-  /%br/
-  /= render :partial => "assignments"
-%p
-  %small Benutze Kommas um mehrere Benutzerinnen zu trennen
-  %br/
-  = text_field_with_auto_complete :task, :user_list, {}, {:tokens => ","}
-%p
-  %b Wieviel Benutzerinnen werden insgesamt benötigt?
-  %br/
-  = form.text_field :required_users, :size => 3
-%p
-  %b Arbeitsgruppe
-  %br/
-  = form.select :workgroup_id, Workgroup.all(:order => 'name').collect {|g| [ g.name, g.id ] }, { :include_blank => true }
-%p
-  %b Fälligkeit
-  %br/
-  = form.date_select :due_date, :start_year => 2007, :include_blank => true
+= simple_form_for @task do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :duration, :as => :select, :collection => 1..3
+  = f.input :user_list, :as => :string
+  = f.input :required_users
+  = f.association :workgroup
+  = f.input :due_date, :include_blank => true
+  = f.submit

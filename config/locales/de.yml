@@ -155,6 +155,7 @@ de:
       user: Benutzerinnen
       workgroup: Arbeitsgruppe
       ordergroup: Bestellgruppe
+      task: Aufgabe
     attributes:
       article:
         price: Nettopreis
@@ -168,6 +169,11 @@ de:
       user:
         password: Passwort
         first_name: Vorname
+
+  helpers:
+    submit:
+      create: "%{model} speichern"
+      update: "Änderungen speichern"
 
   # Simple form i18n is used to build the forms
   simple_form:
@@ -192,3 +198,16 @@ de:
     # hints:
     #   username: 'User name to sign in.'
     #   password: 'No special characters, please.'
+    labels:
+      password: 'Passwort'
+      description: 'Beschreibung'
+      workgroup: 'Arbeitsgruppe'
+      task:
+        duration: 'Dauer'
+        user_list: 'Verantwortliche'
+        required_users: 'Anzahl'
+        due_date: 'Wann erledigen?'
+    hints:
+      task:
+        duration: 'Wie lange dauert die Aufgabe, 1-3 Stunden'
+        required_users: 'Wieviel Benutzerinnen werden insgesamt benötigt?'

@@ -11,15 +11,7 @@
       %td= format_date(task.due_date) unless task.due_date.nil?
       %td= link_to "#{task.name} (#{task.duration}h)", task_path(task)
       %td
-        - unless task.users.empty?
-          - owner = Array.new
-          - task.assignments.each do |ass| 
-            - if ass.accepted? 
-              - nick = "<span class='accepted'>#{ass.user.nick.to_s}</span>"
-            - else
-              - nick = "<span class='unaccepted'>#{ass.user.nick.to_s} ?</span>"
-            - owner << nick
-          = owner.join(", ")
+        = task_assignments task
         = highlighted_required_users task
       %td
         - unless task.is_accepted?(@current_user)

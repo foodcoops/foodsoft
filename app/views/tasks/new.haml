@@ -1,10 +1,8 @@
 - title "Neue Aufgabe erstellen"
 
 #form{:style => "float:left; width:39em"}
-  - form_for @task do |form|
-    = render :partial => 'form', :locals => {:form => form}
-    = submit_tag "Aufgabe erstellen"
- 
+  = render('form')
+  
 #workgroup_members{:style => "padding-left:41em"}
   %h3 Mitglieder der Arbeitsgruppen
   %i Klicke auf den Gruppennamen um die Mitglieder zu sehen

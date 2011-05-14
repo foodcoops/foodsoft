@@ -17,14 +17,8 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(params[:task])
-    if @task.errors.empty?
-      @task.save
-      flash[:notice] = "Aufgabe wurde erstellt"
-      if @task.workgroup
-        redirect_to :action => "workgroup", :id => @task.workgroup
-      else
-        redirect_to :action => "index"
-      end          
+    if @task.save
+      redirect_to tasks_url, :notice => "Aufgabe wurde erstellt"
     else
       render :template => "tasks/new"
     end
@@ -58,15 +52,6 @@ class TasksController < ApplicationController
     Task.find(params[:id]).destroy
     flash[:notice] = "Aufgabe wurde gelöscht"
     redirect_to :action => "index"
-  end
-  
-  # Delete an given Assignment
-  # currently used in edit-view
-  def drop_assignment
-    ass = Assignment.find(params[:id])
-    task = ass.task
-    ass.destroy
-    redirect_to :action => "show", :id => task
   end
   
   # assign current_user to the task and set the assignment to "accepted"

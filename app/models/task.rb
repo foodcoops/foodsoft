@@ -9,9 +9,10 @@ class Task < ActiveRecord::Base
   
   # form will send user in string. responsibilities will added later
   attr_protected :users
-  
-  validates_length_of :name, :minimum => 3
-  validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 1
+
+  validates :name, :presence => true, :length => { :minimum => 3 }
+  validates :required_users, :presence => true
+  validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 0
 
   after_save :update_ordergroup_stats
   
