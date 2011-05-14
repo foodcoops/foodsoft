@@ -1,8 +1,17 @@
+- content_for :head do
+  :javascript
+    $(function() {
+      $("#task_user_list").tokenInput("#{users_path(:format => :json)}", {
+        crossDomain: false,
+        prePopulate: $("#task_user_list").data("pre")
+      });
+    });
+
 = simple_form_for @task do |f|
   = f.input :name
   = f.input :description
   = f.input :duration, :as => :select, :collection => 1..3
-  = f.input :user_list, :as => :string
+  = f.input :user_list, :as => :string, :input_html => { 'data-pre' => @task.users.map { |u| {:id => u.id, :name => u.nick} }.to_json }
   = f.input :required_users
   = f.association :workgroup
   = f.input :due_date, :include_blank => true

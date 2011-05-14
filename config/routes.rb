@@ -23,7 +23,6 @@ Foodsoft::Application.routes.draw do
     match '/home/profile' => 'home#profile', :as => 'my_profile'
     match '/home/ordergroup' => 'home#ordergroup', :as => 'my_ordergroup'
 
-
     ############ Wiki
 
     resources :pages do
@@ -156,6 +155,8 @@ Foodsoft::Application.routes.draw do
     resource :feedback, :only => [:new, :create], :controller => 'feedback'
     
     ############## The rest
+
+    resources :users, :only => [:index]
 
     match '/:controller(/:action(/:id))'
 

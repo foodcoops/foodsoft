@@ -27,13 +27,13 @@ class Task < ActiveRecord::Base
   def enough_users_assigned?
     assignments.find_all_by_accepted(true).size >= required_users ? true : false
   end
-  
-  # extracts nicknames from a comma seperated string 
+
+  # Get users from comma seperated ids
   # and makes the users responsible for the task
-  def user_list=(string)
-    @user_list = string.split(%r{,\s*})
-    new_users = @user_list - users.collect(&:nick)
-    old_users = users.reject { |user| @user_list.include?(user.nick) }
+  def user_list=(ids)
+    list = ids.split(",")
+    new_users = list - users.collect(&:id)
+    old_users = users.reject { |user| list.include?(user.id) }
     
     logger.debug "New users: #{new_users}"
     logger.debug "Old users: #{old_users}"
@@ -44,8 +44,8 @@ class Task < ActiveRecord::Base
         assignments.find(:all, :conditions => ["user_id IN (?)", old_users.collect(&:id)]).each(&:destroy)
       end
       # create new assignments
-      new_users.each do |nick|
-        user = User.find_by_nick(nick)
+      new_users.each do |id|
+        user = User.find(id)
         if user.blank?
           errors.add(:user_list)
         else
@@ -62,7 +62,7 @@ class Task < ActiveRecord::Base
   end
   
   def user_list
-    @user_list ||= users.collect(&:nick).join(", ")
+    @user_list ||= users.collect(&:id).join(", ")
   end
 
   private
