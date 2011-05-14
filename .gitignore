@@ -8,6 +8,6 @@ capfile
 config/environments/fcschinke09.rb
 *.swp
 public/**/*_cached.*
-config/initializers/session_store.rb
+config/initializers/secret_token.rb
 .idea
 .rvmrc
