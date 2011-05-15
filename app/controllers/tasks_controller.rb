@@ -50,8 +50,7 @@ class TasksController < ApplicationController
   
   def destroy
     Task.find(params[:id]).destroy
-    flash[:notice] = "Aufgabe wurde gelöscht"
-    redirect_to :action => "index"
+    redirect_to tasks_url, :notice => "Aufgabe wurde gelöscht"
   end
   
   # assign current_user to the task and set the assignment to "accepted"
@@ -63,8 +62,7 @@ class TasksController < ApplicationController
     else
       task.assignments.create(:user => current_user, :accepted => true)
     end
-    flash[:notice] = "Du hast die Aufgabe übernommen"
-    redirect_to user_tasks_path
+    redirect_to user_tasks_path, :notice => "Du hast die Aufgabe übernommen"
   end
   
   # deletes assignment between current_user and given task
@@ -75,8 +73,7 @@ class TasksController < ApplicationController
   
   def update_status
     Task.find(params[:id]).update_attribute("done", params[:task][:done])
-    flash[:notice] = "Aufgabenstatus wurde aktualisiert"
-    redirect_to :action => "index"
+    redirect_to tasks_url, :notice => "Aufgabenstatus wurde aktualisiert"
   end
   
   # Shows all tasks, which are already done
@@ -88,8 +85,7 @@ class TasksController < ApplicationController
   def workgroup
     @group = Group.find(params[:id])
     if @group.is_a? Ordergroup
-      flash[:error] = "Keine Arbeitsgruppe gefunden"
-      redirect_to :action => "index"
+      redirect_to tasks_url, :alert => "Keine Arbeitsgruppe gefunden"
     end
   end
   

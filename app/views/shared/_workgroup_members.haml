@@ -1,6 +1,6 @@
-- for group in Group.find :all, :conditions => "type != 'Ordergroup'"
-  %h4= link_to_function group.name, "Element.toggle('workgroup_#{group.id}')"
-  %ul{:style => "display:none"}[group]
-    - for user in group.users.find :all, :order => "nick"
-      %li= user.nick + " (#{user.ordergroup.name if user.ordergroup})"
+- for workgroup in Workgroup.all
+  %h4= link_to workgroup.name, "#", 'data-toggle_this' => "#workgroup_#{workgroup.id}"
+  %ul{:style => "display:none"}[workgroup]
+    - for user in workgroup.users.order("nick")
+      %li= "#{user.nick} (#{user.ordergroup.try(:name)})"
   

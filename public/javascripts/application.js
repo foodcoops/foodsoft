@@ -1,3 +1,12 @@
+// Load following statements, when DOM is ready
+$(function() {
+    $('a[data-toggle_this]').click(function() {
+        $($(this).data('toggle_this')).toggle();
+        return false;
+    });
+});
+
+
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 

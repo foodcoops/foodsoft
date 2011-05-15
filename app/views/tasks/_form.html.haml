@@ -11,7 +11,7 @@
   = f.input :name
   = f.input :description
   = f.input :duration, :as => :select, :collection => 1..3
-  = f.input :user_list, :as => :string, :input_html => { 'data-pre' => @task.users.map { |u| {:id => u.id, :name => u.nick} }.to_json }
+  = f.input :user_list, :as => :string, :input_html => { 'data-pre' => @task.users.map { |u| u.token_attributes }.to_json }
   = f.input :required_users
   = f.association :workgroup
   = f.input :due_date, :include_blank => true
