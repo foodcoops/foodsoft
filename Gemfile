@@ -6,10 +6,11 @@ gem "rails", '3.0.7'
 gem 'mysql'
 gem "fastercsv"
 gem "prawn", '<=0.6.3'
-gem 'haml', '>=2.0.6'
+gem 'haml'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'jquery-rails'
 gem 'simple_form'
+gem 'rails3_acts_as_paranoid'
 
 group :development do
   gem 'annotate'
