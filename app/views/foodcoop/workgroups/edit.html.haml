@@ -1,16 +1,41 @@
 - title "Gruppe bearbeiten"
 
-%p
-  %i
-    Mitglieder kannst du 
-    = link_to "hier", :action => "memberships", :id => @workgroup
-    hinzufügen.
+= simple_form_for [:foodcoop, @workgroup] do |f|
+  = f.input :name
+  = f.input :description
 
-.edit_form{:style => "width:35em"}      
-  - form_for [:foodcoop, @workgroup] do |@form|
-    = render :partial => "shared/group_form"
+  = f.input :weekly_task
+  = f.input :weekday, :as => :select, :collection => Workgroup.weekdays, :input_html => {:class => 'weekly_option'}
+  = f.input :task_name, :input_html => {:class => 'weekly_option'}
+  = f.input :task_required_users, :input_html => {:class => 'weekly_option'}
+  = f.input :task_duration, :input_html => {:class => 'weekly_option'}
+  = f.input :task_description, :input_html => {:class => 'weekly_option'}
 
-    %p{:style => "clear:both"}
-      = submit_tag 'Speichern'
-      |
-      = link_to "Abbrechen", foodcoop_workgroups_path
+  = f.input :user_tokens, :as => :string, :input_html => { 'data-pre' => @workgroup.users.map { |u| u.token_attributes }.to_json }
+
+  = f.submit
+  = link_to "oder abbrechen", foodcoop_workgroups_path
+
+- content_for :head do
+  :javascript
+    function toggleWeeklyTask() {
+      $('.weekly_option').each(function() {
+        if ($("#workgroup_weekly_task").is(':checked')) {
+          $(this).removeAttr('disabled');
+        } else {
+          $(this).attr('disabled', 'disabled');
+        }
+      });
+    }
+
+    $(function() {
+      toggleWeeklyTask();
+      $('#workgroup_weekly_task').click(function() {
+        toggleWeeklyTask();
+      })
+
+      $("#workgroup_user_tokens").tokenInput("#{users_path(:format => :json)}", {
+        crossDomain: false,
+        prePopulate: $("#workgroup_user_tokens").data("pre")
+      });
+    })

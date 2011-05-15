@@ -9,6 +9,8 @@ class Group < ActiveRecord::Base
   validate :last_admin_on_earth, :on => :update
 
   before_destroy :check_last_admin_group
+
+  attr_reader :user_tokens
   
   # Returns true if the given user if is an member of this group.
   def member?(user)
@@ -18,6 +20,10 @@ class Group < ActiveRecord::Base
   # Returns all NONmembers and a checks for possible multiple Ordergroup-Memberships
   def non_members
     User.all(:order => 'nick').reject { |u| users.include?(u) }
+  end
+
+  def user_tokens=(ids)
+    self.user_ids = ids.split(",")
   end
 
   protected

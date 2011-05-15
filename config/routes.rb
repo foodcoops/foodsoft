@@ -72,9 +72,7 @@ Foodsoft::Application.routes.draw do
 
       resources :ordergroups, :only => [:index]
 
-      resources :workgroups, :only => [:index, :edit, :update] do
-        get :memberships, :on => :member
-      end
+      resources :workgroups, :only => [:index, :edit, :update]
     end
 
     ########### Article management
