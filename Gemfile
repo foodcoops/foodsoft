@@ -11,6 +11,7 @@ gem "will_paginate", "~> 3.0.pre2"
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'rails3_acts_as_paranoid'
+gem 'meta_where'
 
 group :development do
   gem 'annotate'

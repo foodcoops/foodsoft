@@ -5,7 +5,7 @@
         %td
           = pagination_links_remote @users, :update => :users
         %td{:style => "text-align:right"}
-          - if @total > 20
+          - if @users.size > 20
             = items_per_page :update => :users
 %table.list
   %thead
@@ -17,7 +17,8 @@
       %th Bestellgruppe
       %th Arbeitsgruppe(n)
   %tbody
-    - for user in @users
+    - users = params[:sort_by_ordergroups] ? @users.sort { |a,b| a.ordergroup.name <=> b.ordergroup.name } : @users
+    - for user in users
       %tr{:class => cycle('even','odd', :name => 'users')}
         %td= link_to user.nick, user_message_path(user), :title => _('Send user an email')
         %td=h user.name if @current_user.role_admin? || user.settings["profile.nameIsPublic"] == '1'

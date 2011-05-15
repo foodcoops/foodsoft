@@ -7,6 +7,8 @@ class Group < ActiveRecord::Base
   validates_length_of :name, :in => 1..25
   validates_uniqueness_of :name
   validate :last_admin_on_earth, :on => :update
+
+  before_destroy :check_last_admin_group
   
   # Returns true if the given user if is an member of this group.
   def member?(user)
@@ -17,16 +19,16 @@ class Group < ActiveRecord::Base
   def non_members
     User.all(:order => 'nick').reject { |u| users.include?(u) }
   end
-  
+
+  protected
+
   # Check before destroy a group, if this is the last group with admin role
-  def before_destroy
+  def check_last_admin_group
     if self.role_admin == true && Group.find_all_by_role_admin(true).size == 1
       raise "Die letzte Gruppe mit Admin-Rechten darf nicht gelöscht werden"
     end
   end
-  
-  protected
-  
+    
   # validates uniqueness of the Group.name. Checks groups and ordergroups
   def validate
     errors.add(:name, "ist schon vergeben") if (group = Group.find_by_name(name) || group = Ordergroup.find_by_name(name)) && self != group

@@ -8,14 +8,16 @@
     <!--[if lte IE 7]>
     = stylesheet_link_tag 'ie_hacks'
     <![endif]-->
-    = javascript_include_tag 'jquery.min', 'jquery-ui.min', 'jquery_ujs', 'jquery.tokeninput', 'application', 'ordering', :cache => "all_cached"
+    = javascript_include_tag 'jquery.min', 'jquery-ui.min', 'jquery_ujs', 'jquery.tokeninput', 'jquery.observe_field',
+     'application', 'ordering', :cache => "all_cached"
+    = csrf_meta_tag
     = yield(:head)
   %body
     #logininfo= render :partial => 'shared/loginInfo'
     
     #header
       #logo
-        - link_to root_path do
+        = link_to root_path do
           <span>food</span>soft
         %span{:style => "color:white; font-size:45%; letter-spacing: -1px;"}= Foodsoft.config[:name]
       #nav= render :partial => 'layouts/main_tabnav'

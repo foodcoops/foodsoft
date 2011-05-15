@@ -1,36 +1,30 @@
 class Foodcoop::UsersController < ApplicationController
 
   def index
+    @users = User.order(:nick.asc)
+
+    # if somebody uses the search field:
+    unless params[:query].blank?
+      @users = @users.where(({:first_name.matches => "%#{params[:query]}%"}) | ({:last_name.matches => "%#{params[:query]}%"}) | ({:nick.matches => "%#{params[:query]}%"}))
+    end
+
     # sort by ordergroups
-    if params[:sort_by_ordergroups]
-      @users = []
-      Ordergroup.find(:all, :order => "name").each do |group|
-        group.users.each do |user|
-          @users << user
-        end
-      end
-      @total = @users.size
-    else
+#    if params[:sort_by_ordergroups]
+#      @users = @users.joins(:ordergroup).order(:ordergroup => :name.asc) # Retunr dubbled entries, why?
+#    end
+
     # sort by nick, thats default
-      if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
-        @per_page = params[:per_page].to_i
-      else
-        @per_page = 20
-      end
+    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 20
+    end
 
-      # if somebody uses the search field:
-      unless params[:query].blank?
-        conditions = ["first_name LIKE ? OR last_name LIKE ? OR nick LIKE ?",
-          "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%"]
-      end
+    @users = @users.paginate(:page => params[:page], :per_page => @per_page)
 
-      @total = User.count(:conditions => conditions)
-      @users = User.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "nick", :include => :groups)
-
-      respond_to do |format|
-        format.html # index.html.erb
-        format.js { render :partial => "users" }
-      end
+    respond_to do |format|
+      format.html # index.html.haml
+      format.js { render :layout => false } # index.js.erb
     end
   end
 
