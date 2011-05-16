@@ -77,10 +77,10 @@ de:
     currency:
       format:
         unit: '€'
-        format: '%n%u'
-        separator:
-        delimiter:
-        precision:
+        format: '%n %u'
+        separator: ','
+        delimiter: '.'
+        precision: 2
     percentage:
       format:
         delimiter: ""

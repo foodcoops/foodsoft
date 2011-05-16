@@ -5,7 +5,6 @@
 # * account_updated (datetime)
 class Ordergroup < Group
   acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
-  extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
   serialize :stats
 
   has_many :financial_transactions, :order => "created_on DESC"
@@ -36,7 +35,6 @@ class Ordergroup < Group
   def get_available_funds(exclude = nil)
     account_balance - value_of_open_orders(exclude) - value_of_finished_orders(exclude)
   end
-  memoize :get_available_funds
 
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.

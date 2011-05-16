@@ -27,38 +27,38 @@
         = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufgabe(n)', :controller => 'tasks'}".html_safe
       %p{:style => "clear:both"}= link_to "Meine Aufgaben", user_tasks_path
 
-  - if @ordergroup
+  - if current_user.ordergroup
     // Current orders
     = render :partial => 'shared/open_orders'
 
   // Stats
-  - if @ordergroup
+  - if current_user.ordergroup
     .box_title
       %h2 Engagement Deiner Bestellgruppe
     .column_content
-      = render "stats"
+      = render :partial => "stats", :locals => {:ordergroup => current_user.ordergroup}
 
-  - unless @messages.empty?
+  - unless Message.public.empty?
     .box_title
       %h2 Neuste Nachrichten
     .column_content
-      = render :partial => 'messages/messages', :locals => { :subject_length => 70 }
+      = render :partial => 'messages/messages', :locals => {:messages => Message.public.order(:create_at.desc).limit(5), :subject_length => 70}
       %br/
       = link_to "Alle Nachrichten einsehen", messages_path
 
-  - if @ordergroup
+  - if current_user.ordergroup
     // Ordergroup overview
     .box_title
       %h2 Meine Bestellgruppe
     .column_content
       %p
-        %b= @ordergroup.name
+        %b= current_user.ordergroup.name
         |
         Verfügbares Guthaben:
-        = number_to_currency(@ordergroup.get_available_funds())
+        = number_to_currency(current_user.ordergroup.get_available_funds)
         %span.description
           (Letzte Aktualisierung ist
-          = distance_of_time_in_words(Time.now, @ordergroup.account_updated) + " her)"
+          = distance_of_time_in_words(Time.now, current_user.ordergroup.account_updated) + " her)"
         %h3 Letzte Transaktionen
         %table
           %tr
@@ -66,7 +66,7 @@
             %th Wer
             %th Notiz
             %th Betrag
-          - for ft in @ordergroup.financial_transactions.all(:limit => 5)
+          - for ft in current_user.ordergroup.financial_transactions.limit(5)
             %tr{:class => cycle('even','odd')}
               %td= format_time(ft.created_on)
               %td= h(ft.user.nil? ? '?' : ft.user.nick)

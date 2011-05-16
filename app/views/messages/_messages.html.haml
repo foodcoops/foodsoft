@@ -1,7 +1,7 @@
-- unless @messages.empty?
+- unless messages.empty?
   %table.list
     %tbody
-      - for message in @messages
+      - for message in messages
         %tr{:class => cycle('even','odd', :name => 'messages')}
           %td= format_subject(message, subject_length)
           %td= h(message.sender_name)

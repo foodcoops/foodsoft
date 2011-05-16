@@ -2,7 +2,7 @@
 max_width = 600
 
 global_avg = Ordergroup.avg_jobs_per_euro
-group_avg = @ordergroup.avg_jobs_per_euro.to_f
+group_avg = ordergroup.avg_jobs_per_euro.to_f
 
 unless global_avg == 0 or global_avg.nan?
   length_of_global_bar = max_width / 2.0
