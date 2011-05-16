@@ -62,11 +62,10 @@ class HomeController < ApplicationController
         :order => sort)
       respond_to do |format|
         format.html # myOrdergroup.haml
-        format.js { render :partial => "finance/transactions/list" }
+        format.js { render :layout => false }
       end
     else
-      flash[:error] = "Leider bist Du kein Mitglied einer Bestellgruppe"
-      redirect_to root_path
+      redirect_to root_path, :alert => "Leider bist Du kein Mitglied einer Bestellgruppe"
     end
   end
 

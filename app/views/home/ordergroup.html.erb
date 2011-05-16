@@ -14,7 +14,7 @@
         <li><%= membership.user.nick -%></li>
       <% end -%>
     </ul>
-    <%= remote_link_to('Person einladen', :url => new_invite_path(:id => @ordergroup)) %>
+    <%= link_to('Person einladen', new_invite_path(:id => @ordergroup), :remote => true) %>
   </div>
 </div>
 
@@ -23,22 +23,25 @@
     <h2>Kontoauszug</h2>
   </div>
   <div class="column_content">
-    <p>
-    <form name="sform" action="" style="display:inline;">
-      <label for="financial_transaction_note">Filter für Notizen: </label>
-      <%= text_field_tag("query", params['query'], :size => 10 ) %>
-    </form>
-    </p>
-    <%= observe_field 'query',  :frequency => 2,
-      :before => "Element.show('loader')",
-      :success => "Element.hide('loader')",
-      :url => {:action => 'ordergroup'},
-      :with => 'query',
-      :update => 'transactions' %>
+    <%= form_tag my_ordergroup_url, :method => :get, :style => 'display:inline;', :id => 'transactions_search',
+                 :remote => true do %>
+        <%= label_tag "financial_transaction_note", "Filter für Notizen:" %>
+        <%= text_field_tag("query", params['query'], :size => 10 ) %>
+    <% end %>
     <div id="transactions">
       <%= render :partial => "/finance/transactions/list" %>
     </div>
   </div>
 </div>
 <div id="edit_box" style="display:none"></div>
+
+<% content_for :head do %>
+    <script type="text/javascript">
+      $(function() {
+          $('#query').observe_field(1, function() {
+              $('#transactions_search').submit();
+          });
+      })
+    </script>
+<% end %>
 

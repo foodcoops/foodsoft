@@ -59,31 +59,22 @@ module ApplicationHelper
   def sort_td_class_helper(param)
     result = 'class="sortup"' if params[:sort] == param
     result = 'class="sortdown"' if params[:sort] == param + "_reverse"
-    return result
+    result
   end
-  
+
   def sort_link_helper(text, key, options = {})
     per_page = options[:per_page] || 10
     action = options[:action] || "list"
     remote = options[:remote].nil? ? true : options[:remote]
     key += "_reverse" if params[:sort] == key
+    url = url_for(:sort => key, :page => nil, :per_page => per_page)
 
-    link_options = {
-        :url => url_for(:params => params.merge({:sort => key, :page => nil, :per_page => per_page})),
-        :before => "Element.show('loader')",
-        :success => "Element.hide('loader')",
-        :method => :get
-    }
     html_options = {
-      :title => _("Nach #{text} sortieren"),
-      :href => url_for(:action => action, :params => params.merge({:sort => key, :page => nil, :per_page => per_page}))
+        :title => "Nach #{text} sortieren",
+        :remote => remote
     }
 
-    if remote
-      link_to_remote(text, link_options, html_options)
-    else
-      link_to(text, link_options[:url], html_options)
-    end
+    link_to(text, url, html_options)
   end
   
   # Generates a link to the top of the website
