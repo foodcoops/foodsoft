@@ -6,6 +6,6 @@
     - homepage = Page.find_by_permalink('Home')
     - unless homepage.nil?
       = render :partial => 'page_list_item', :locals => {:page => homepage, :level => 0, :siteMap => 1}
-    - for page in @top_pages
+    - for page in Page.no_parent.non_redirected.order(:created_at.desc)
       - if page.id != homepage.id
         = render :partial => 'page_list_item', :locals => {:page => page, :level => 0, :siteMap => 1}

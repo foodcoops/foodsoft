@@ -206,6 +206,7 @@ de:
     labels:
       password: 'Passwort'
       description: 'Beschreibung'
+      title: 'Titel'
       workgroup:
         weekly_task: 'Monatlichen Job definieren?'
         weekday: 'Wochentag'
@@ -227,6 +228,8 @@ de:
         subject: 'Betreff'
         body: 'Inhalt'
         private: 'privat verschicken, Nachricht erscheint nicht im Foodsoft Posteingang'
+      page:
+        body: 'Inhalt'
     hints:
       task:
         duration: 'Wie lange dauert die Aufgabe, 1-3 Stunden'

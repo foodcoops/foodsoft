@@ -16,9 +16,9 @@
   #sidebar
     #sidebar-links
       = link_to "Bearbeiten", edit_page_path(@page)
-      = link_to_function "Versionen (#{@page.versions.count})", "Element.toggle('versions')"
+      = link_to "Versionen (#{@page.versions.count})", "#versions", 'data-toggle_this' => '#versions'
       - unless @page.children.empty?
-        = link_to_function "Unterseiten", "Element.toggle('subpages')"
+        = link_to "Unterseiten", "#subpages", 'data-toggle_this' => '#subpages'
     #versions{:style => "display:none"}
       .box_title
         %h2 Versionen

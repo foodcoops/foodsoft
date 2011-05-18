@@ -581,8 +581,8 @@ a.new_wiki_link {
       color: grey; }
 
 #breadcrump {
-  font-size: 0.5em;
-  margin-bottom: 5px;
+  font-size: 0.8em;
+  margin-bottom: 3px;
   height: 1em;
   color: #ED0606; }
   #breadcrump a {

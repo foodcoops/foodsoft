@@ -2,14 +2,14 @@ module PagesHelper
   include WikiCloth
 
   def wikified_body(body, title = nil)
-    WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html
+    WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html.html_safe
   end
 
   def link_to_wikipage(page, text = nil)
     if text == nil
-      link_to page.title, wiki_page_path(page.permalink)
+      link_to page.title, wiki_page_path(:permalink => page.permalink)
     else
-      link_to text, wiki_page_path(page.permalink)
+      link_to text, wiki_page_path(:permalink => page.permalink)
     end
   end
 
@@ -45,7 +45,7 @@ module PagesHelper
       toc.gsub(/<li>([^<>\n]*)/) do
         section_count += 1
         "<li><a href='#section-#{section_count}'>#{$1}</a>"
-      end
+      end.html_safe
     end
   end
 

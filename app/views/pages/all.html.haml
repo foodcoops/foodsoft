@@ -14,8 +14,8 @@
   .left_column{:style => "width:100%"}
     .box_title
       #editOrderNav
-        = remote_link_to 'Letzte Änderungen', :update => 'left_column', :url => {:action => 'all', :view => 'recentChanges'}
-        = remote_link_to 'Seiten-Liste', :update => 'left_column', :url => {:action => 'all', :view => 'titleList'}
-        = remote_link_to 'Site Map', :update => 'left_column', :url => {:action => 'all', :view => 'siteMap'}
+        = link_to 'Letzte Änderungen', all_pages_path(:view => 'recent_changes')
+        = link_to 'Seiten-Liste', all_pages_path(:view => 'title_list')
+        = link_to 'Site Map', all_pages_path(:view => 'site_map')
     #left_column
-      = render :partial => 'recent_changes'
+      = render :partial => params[:view] || 'recent_changes'

@@ -79,21 +79,14 @@
             Siehe
             = link_to "Tabellen", "http://www.mediawiki.org/wiki/Help:Tables", :target => '_blank'
 
-- form_for @page do |f|
-  = f.error_messages
+- simple_form_for @page do |f|
   = f.hidden_field :lock_version
+  = f.input :title
+  = f.input :body, :input_html => {:size => "65x30"}
   %p
-    %b Titel
-    %br/
-    = f.text_field :title
-  %p
-    %b Inhalt
-    %br/
-    = f.text_area :body, :size => "65x30"
-  %p
-    = f.submit "Vorschau", :name => 'preview'
+    = submit_tag "Vorschau", :name => 'preview'
     |
-    = f.submit "Speichern"
+    = submit_tag "Speichern"
     |
     = link_to "Abbrechen", @page
     | Oberseite ändern:

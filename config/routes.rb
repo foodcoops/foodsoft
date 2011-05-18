@@ -30,7 +30,7 @@ Foodsoft::Application.routes.draw do
       get :version, :on => :member
       get :revert, :on => :member
     end
-    match '/wiki/:permalink' => 'pages#show', :constraints => {:permalink => /[^\s]+/}, :as => 'wiki_page'
+    match '/wiki/:permalink' => 'pages#show', :as => 'wiki_page' # , :constraints => {:permalink => /[^\s]+/}
     match '/wiki' => 'pages#show', :defaults => {:permalink => 'Home'}, :as => 'wiki'
 
     ############ Orders, ordering
