@@ -7,23 +7,16 @@ class Foodcoop::OrdergroupsController < ApplicationController
       @per_page = 20
     end
 
-    if (params[:only_active].to_i == 1)
-      if (! params[:query].blank?)
-        conditions = ["orders.starts >= ? AND name LIKE ?", Time.now.months_ago(3), "%#{params[:query]}%"]
-      else
-        conditions = ["orders.starts >= ?", Time.now.months_ago(3)]
-      end
-    else
-      # if somebody uses the search field:
-      conditions = ["name LIKE ?", "%#{params[:query]}%"] unless params[:query].blank?
-    end
+    @ordergroups = Ordergroup.order(:name.desc)
+    @ordergroups = @ordergroups.where(:name.matches => "%#{params[:query]}%") unless params[:query].blank? # Search by name
+    @ordergroups = @ordergroups.joins(:orders).where(:orders => {:starts.gte => Time.now.months_ago(3)}) if params[:only_active] # Select only active groups
 
-    @total = Ordergroup.count(:conditions => conditions, :include => "orders")
-    @ordergroups = Ordergroup.paginate(:page => params[:page], :per_page => @per_page, :conditions => conditions, :order => "name", :include => "orders")
+    @total = @ordergroups.size
+    @ordergroups = @ordergroups.paginate(:page => params[:page], :per_page => @per_page)
 
     respond_to do |format|
       format.html # index.html.erb
-      format.js { render :partial => "ordergroups" }
+      format.js { render :layout => false }
     end
   end
 end
