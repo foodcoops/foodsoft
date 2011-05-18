@@ -159,6 +159,7 @@ de:
       ordergroup: Bestellgruppe
       task: Aufgabe
       message: Nachricht
+      article_category: Artikelkategorie
     attributes:
       article:
         price: Nettopreis

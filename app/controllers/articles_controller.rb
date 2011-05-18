@@ -28,8 +28,8 @@ class ArticlesController < ApplicationController
     # if somebody uses the search field:
     conditions = ["articles.name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
 
-    @total = @supplier.articles.without_deleted.count(:conditions => conditions)
-    @articles = @supplier.articles.without_deleted.paginate(
+    @total = @supplier.articles.count(:conditions => conditions)
+    @articles = @supplier.articles.paginate(
       :order => sort,
       :conditions => conditions,
       :page => params[:page],

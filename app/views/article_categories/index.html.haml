@@ -4,5 +4,16 @@
   .box_title
     %h2 Artikelkategorien
   .column_content#categories
-    #category_form.box.edit_form{:style => "display:none;margin-bottom:1em;"}
-    #category_list= render :partial => 'article_categories/list'
+    %table
+      %tr
+        %th Name
+        %th Beschreibung
+        %th
+      - for article_category in ArticleCategory.all
+        %tr{:class => cycle("even","odd", :name => 'category')}[article_category]
+          %td= article_category.name
+          %td= article_category.description
+          %td
+            = link_to icon(:edit), edit_article_category_path(article_category)
+            = link_to icon(:delete), article_category, :method => :delete, :confirm => 'Are you sure?'
+    %p= link_to 'Neue Kategorie anlegen', new_article_category_path
