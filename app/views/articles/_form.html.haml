@@ -1,45 +1,18 @@
-- remote_form_for [@supplier, @article], :before => "Element.show('loader')", |
-    :success => "Element.hide('loader')" do |form| |
+= simple_form_for [@supplier, @article], :remote => true do |f|
+  = f.input :availability
+  = f.input :name
+  = f.input :origin
+  = f.input :manufacturer
+  = f.input :unit
+  = f.input :note
+  = f.association :article_category
 
-  = form.error_messages
-  %p
-    %b Verfügbar?
-    = form.check_box :availability
-  %table{ :style => "width: 20em"}
-    %tr
-      %th Name
-      %th Herkunft
-      %th Hersteller
-      %th Einheit
-      %th Notiz
-      %th kategorie
-    %tbody
-      %tr
-        %td= form.text_field :name, :size => 15
-        %td= form.text_field :origin, :size => 5
-        %td= form.text_field :manufacturer, :size => 8
-        %td= form.text_field :unit, :size => 5
-        %td= form.text_field :note, :size => 15
-        %td= form.select :article_category_id, ArticleCategory.find(:all, :order => 'name').collect {|a| [ a.name, a.id ] }
-  %br/
-  %table{ :style=>"width:35em"}
-    %tr
-      %th Nettopreis
-      %th Gebindegröße
-      %th Bestellnummer
-      %th MwSt
-      %th Pfand
-    %tbody
-      %tr
-        %td= form.text_field :price, :size => 5
-        %td= form.text_field :unit_quantity, :size => 5
-        %td= form.text_field :order_number, :size => 10
-        %td= form.text_field :tax, :size => 5
-        %td= form.text_field :deposit, :size => 5
-          
-  = form.hidden_field :shared_updated_on
-  = form.hidden_field :supplier_id
+  = f.input :price
+  = f.input :unit_quantity
+  = f.input :order_number
+  = f.input :tax
+  = f.input :deposit
+  = f.submit
 
-  = submit_tag "Speichern"
-  |
-  = link_to_function "Abbrechen", "Element.hide('edit_article')"
+  = f.hidden_field :shared_updated_on
+  = f.hidden_field :supplier_id

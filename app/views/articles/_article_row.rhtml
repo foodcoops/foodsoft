@@ -2,11 +2,11 @@
   <%= check_box_tag 'selected_articles[]', @article.id.to_s, false,
         {:id => "checkbox_#{@article.id.to_s}", :onclick => "checkRow('#{@article.id.to_s}')"} %>
 </td>
-<td><%=h @article.name -%></td>
+<td><%= @article.name -%></td>
 <td><%= @article.origin -%></td>
-<td><%=h truncate(@article.article_category.name, :length => 11) if @article.article_category -%></td>
-<td><%=h @article.unit -%></td>
-<td><%=h truncate(@article.note, :length => 11) -%></td>
+<td><%= truncate(@article.article_category.name, :length => 11) if @article.article_category -%></td>
+<td><%= @article.unit -%></td>
+<td><%= truncate(@article.note, :length => 11) -%></td>
 <td><%= @article.unit_quantity -%></td>
 <td class="currency">
   <acronym title="zuletzt geändert: <%= format_date(@article.updated_at) -%>
@@ -17,11 +17,9 @@
 <td><%= number_to_percentage(@article.tax) if @article.tax != 0  -%></td>
 <td><%= number_to_currency(@article.deposit) if @article.deposit != 0 -%></td>
 <td>
-  <%= remote_link_to icon(:edit, :onclick => "checkRow('#{@article.id.to_s}')"),
-                     :url => edit_supplier_article_path(@supplier, @article) %>
-  <%= remote_link_to icon(:delete, :onclick => "checkRow('#{@article.id.to_s}')"),
-                     :url => [@supplier, @article],
-                     :method => :delete,
-                     :confirm => 'Bist du sicher?' %>
+  <%= link_to icon(:edit, :onclick => "checkRow('#{@article.id.to_s}')"), edit_supplier_article_path(@supplier, @article),
+    :remote => true %>
+  <%= link_to icon(:delete, :onclick => "checkRow('#{@article.id.to_s}')"), [@supplier, @article],
+              :method => :delete, :confirm => 'Bist du sicher?', :remote => true %>
 </td>
      

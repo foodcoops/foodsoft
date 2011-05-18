@@ -25,68 +25,35 @@ class ArticlesController < ApplicationController
       sort = "article_categories.name, articles.name"
     end
 
-    # if somebody uses the search field:
-    conditions = ["articles.name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
+    @articles = @supplier.articles.includes(:article_category).order(sort)
+    @articles = @articles.where(:name.matches => "%#{params[:query]}%") unless params[:query].nil?
 
-    @total = @supplier.articles.count(:conditions => conditions)
-    @articles = @supplier.articles.paginate(
-      :order => sort,
-      :conditions => conditions,
-      :page => params[:page],
-      :per_page => @per_page,
-      :include => :article_category
-    )
+    @total = @articles.size
+    @articles = @articles.paginate(:page => params[:page], :per_page => @per_page)
 
     respond_to do |format|
-      format.html # list.haml
-      format.js do
-        render :update do |page|
-          page.replace_html 'table', :partial => "articles"
-        end
-      end
+      format.html
+      format.js { render :layout => false }
     end
   end
 
   def new
     @article = @supplier.articles.build(:tax => 7.0)
-
-    render :update do |page|
-      page["edit_article"].replace_html :partial => 'new'
-      page["edit_article"].show
-    end
+    render :layout => false
   end
   
   def create
     @article = Article.new(params[:article])
     if @article.valid? and @article.save
-      render :update do |page|
-          page.Element.hide('edit_article')
-          page.insert_html :top, 'listbody', :partial => 'new_article_row'
-          page[@article.id.to_s].visual_effect(:highlight,
-                                                :duration => 2)
-          # highlights article
-          if !@article.availability
-            page[@article.id.to_s].addClassName 'unavailable'
-          else
-            page[@article.id.to_s].addClassName 'just_updated'
-          end
-      end
+      render :layout => false
     else
-      render :update do |page|
-        page.replace_html 'edit_article', :partial => "new"
-      end
-    end    
+      render :action => 'new', :layout => false
+    end
   end
   
-  # edit an article and its price
   def edit
     @article = Article.find(params[:id])
-
-    render :update do |page|
-      page["edit_article"].replace_html :partial => 'edit'
-      page["edit_article"].show
-    end
-    #render :partial => "quick_edit", :layout => false
+    render :action => 'new', :layout => false
   end
   
   # Updates one Article and highlights the line if succeded
@@ -94,46 +61,17 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     if @article.update_attributes(params[:article])
-      render :update do |page|
-        page["edit_article"].hide
-        page[@article.id.to_s].replace_html :partial => 'article_row'
-        
-        # hilights an updated article if the article ist available
-        page[@article.id.to_s].addClassName 'just_updated' if @article.availability
-        
-        # highlights an available article and de-highlights in other case 
-        if !@article.availability
-          page[@article.id.to_s].addClassName 'unavailable'
-          # remove updated-class
-          page[@article.id.to_s].removeClassName 'just_updated'
-        else
-          page[@article.id.to_s].removeClassName 'unavailable'
-        end
-             
-        page[@article.id.to_s].visual_effect(:highlight, :delay => 0.5, :duration => 2)
-      end
+      render :layout => false
     else
-      render :update do |page|
-        page["edit_article"].replace_html :partial => "edit"
-      end
+      render :action => 'new', :layout => false
     end
   end
 
   # Deletes article from database. send error msg, if article is used in a current order
   def destroy
     @article = Article.find(params[:id])
-
-    @order = @article.in_open_order # If article is in an active Order, the Order will be returned
-    if @order
-      render :update do |page|
-        page.insert_html :after, @article.id.to_s, :partial => 'destroyActiveArticle'
-      end
-    else
-      @article.destroy
-      render :update do |page|
-        page[@article.id.to_s].remove
-      end
-    end
+    @article.destroy unless @order = @article.in_open_order # If article is in an active Order, the Order will be returned
+    render :layout => false
   end   
   
   # Renders a form for editing all articles from a supplier

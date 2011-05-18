@@ -1,2 +1,2 @@
-%tr{:class => cycle('even','odd'),  :id => @article.id, :onclick => "checkRow('#{@article.id.to_s}')"}
+%tr{:class => row_classes(@article),  :id => @article.id, :onclick => "checkRow('#{@article.id.to_s}')"}
   = render :partial => 'article_row'

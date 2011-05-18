@@ -244,9 +244,23 @@ de:
         order_howto: 'Howto Bestellen'
         note: 'Notiz'
         min_order_quantity: 'Mindestbestellmenge'
+      article:
+        availability: 'Artikel ist verfügbar?'
+        origin: 'Herkunft'
+        manufacturer: 'Produzent'
+        unit: 'Einheit'
+        note: 'Notiz'
+        article_category: 'Kategorie'
+        price: 'Preis (netto)'
+        unit_quantity: 'Gebindegröße'
+        order_number: 'Bestellnummer'
+        tax: 'MwSt'
+        deposit: 'Pfand'
     hints:
       task:
         duration: 'Wie lange dauert die Aufgabe, 1-3 Stunden'
         required_users: 'Wieviel Benutzerinnen werden insgesamt benötigt?'
       supplier:
         min_order_quantity: 'Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren'
+      article:
+        unit: 'z.B. KG oder 1L oder 500g'
