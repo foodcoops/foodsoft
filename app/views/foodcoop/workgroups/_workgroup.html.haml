@@ -6,7 +6,7 @@
     %p
       = link_to "Alle Aufgaben zeigen", :controller => "/tasks", :action => "workgroup", :id => workgroup
       |
-      = link_to "Mitgliedern eine Nachricht schicken", :controller => '/messages', :action => 'group', :id => workgroup
+      = link_to "Mitgliedern eine Nachricht schicken", new_message_path(:message => {:group_id => workgroup.id})
       - if workgroup.member?(@current_user)
         |
         = link_to "Gruppe bearbeiten", edit_foodcoop_workgroup_path(workgroup)

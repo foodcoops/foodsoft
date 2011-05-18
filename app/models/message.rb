@@ -2,11 +2,11 @@ class Message < ActiveRecord::Base
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
 
   serialize :recipients_ids, Array
-  attr_accessor :sent_to_all, :group_id, :recipients_nicks
+  attr_accessor :sent_to_all, :group_id, :recipient_tokens
   
-  scope :pending, :conditions => { :email_state => 0 }
-  scope :sent, :conditions => { :email_state => 1 }
-  scope :public, :conditions => {:private => false}
+  scope :pending, where(:email_state => 0)
+  scope :sent, where(:email_state => 1)
+  scope :public, where(:private => false)
 
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {
@@ -36,15 +36,24 @@ class Message < ActiveRecord::Base
     add_recipients Group.find(group_id).users unless group_id.blank?
   end
 
-  def recipients_nicks=(nicks)
-    @recipients_nicks = nicks
-    add_recipients nicks.split(",").collect { |nick| User.find_by_nick(nick) }
+  def recipient_tokens=(ids)
+    @recipient_tokens = ids
+    add_recipients ids.split(",").collect { |id| User.find(id) }
   end
 
-  def recipient=(user)
-    @recipients_nicks = user.nick
+  def reply_to=(message_id)
+    message = Message.find(message_id)
+    add_recipients(message.sender.to_a)
+    self.subject = "Re: #{message.subject}"
+    self.body = "#{message.sender.nick} schrieb am #{I18n.l(message.created_at.to_date)} um #{I18n.l(message.created_at, :format => :time)}:\n"
+    message.body.each_line{ |l| self.body += "> #{l}" }
   end
-  
+
+  def mail_to=(user_id)
+    user = User.find(user_id)
+    add_recipients(user.to_a)
+  end
+
   # Returns true if this message is a system message, i.e. was sent automatically by the FoodSoft itself.
   def system_message?    
     self.sender_id.nil?

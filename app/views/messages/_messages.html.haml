@@ -6,5 +6,5 @@
           %td= format_subject(message, subject_length)
           %td= h(message.sender_name)
           %td= format_time(message.created_at)
-          %td= link_to('Antworten', reply_message_path(message))
+          %td= link_to('Antworten', new_message_path(:message => {:reply_to => message.id}))
             

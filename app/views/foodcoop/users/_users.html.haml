@@ -20,7 +20,7 @@
     - users = params[:sort_by_ordergroups] ? @users.sort { |a,b| a.ordergroup.name <=> b.ordergroup.name } : @users
     - for user in users
       %tr{:class => cycle('even','odd', :name => 'users')}
-        %td= link_to user.nick, user_message_path(user), :title => _('Send user an email')
+        %td= link_to user.nick, new_message_path(:message => {:mail_to => user.id}), :title => _('Send user an email')
         %td=h user.name if @current_user.role_admin? || user.settings["profile.nameIsPublic"] == '1'
         %td=h user.email if @current_user.role_admin? ||  user.settings["profile.emailIsPublic"] == '1'
         %td=h user.phone if @current_user.role_admin? ||  user.settings["profile.phoneIsPublic"] == '1'

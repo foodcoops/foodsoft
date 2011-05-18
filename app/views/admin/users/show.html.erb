@@ -38,7 +38,7 @@
     <p style="clear:both">
     <%= link_to 'Bearbeiten', edit_admin_user_path(@user) %>
     | <%= link_to 'Löschen', [:admin, @user], :confirm => "Willst du #{@user.first_name} wirklich rausschmeißen?", :method => :delete %>
-    | <%= link_to "Nachricht senden", user_message_path(@user.id) %>
+    | <%= link_to "Nachricht senden", new_message_path(:message => {:mail_to => @user.id}) %>
     </p>
   </div>
   <div class="box_title"><h2>Gruppenabos</h2></div>

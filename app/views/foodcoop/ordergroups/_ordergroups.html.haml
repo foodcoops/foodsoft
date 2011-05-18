@@ -17,7 +17,7 @@
   %tbody
     - for ordergroup in @ordergroups
       %tr{:class => cycle('even','odd', :name => 'ordergroup')}
-        %td= link_to h(ordergroup.name), group_message_path(ordergroup), :title => "Bestellgruppe eine Nachricht schicken"
+        %td= link_to h(ordergroup.name), new_message_path(:message => {:group_id => ordergroup.id}), :title => "Bestellgruppe eine Nachricht schicken"
         %td=h ordergroup.users.collect { |u| u.nick }.join(", ")
         %td
           - order = ordergroup.orders.first(:order => 'starts DESC')

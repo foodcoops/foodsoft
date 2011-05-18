@@ -57,13 +57,7 @@ Foodsoft::Application.routes.draw do
       end
     end
 
-    resources :messages, :only => [:index, :show, :new, :create] do
-      member do
-        get :reply
-        get :user
-        get :group
-      end
-    end
+    resources :messages, :only => [:index, :show, :new, :create]
 
     namespace :foodcoop do
       root :to => 'users#index'

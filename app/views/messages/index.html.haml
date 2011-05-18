@@ -5,4 +5,4 @@
 %div{:style => "text-align:right"}= will_paginate @messages
 
 #messages
-  = render :partial => 'messages', :locals => { :subject_length => 130 }
+  = render :partial => 'messages', :locals => { :messages => @messages, :subject_length => 130 }
