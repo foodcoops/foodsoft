@@ -3,7 +3,7 @@ class SuppliersController < ApplicationController
   helper :deliveries
 
   def index
-    @suppliers = Supplier.without_deleted :order => 'name'
+    @suppliers = Supplier.order(:name)
     @deliveries = Delivery.recent
   end
 

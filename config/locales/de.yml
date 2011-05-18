@@ -207,6 +207,7 @@ de:
       password: 'Passwort'
       description: 'Beschreibung'
       title: 'Titel'
+      email: 'E-Mail'
       workgroup:
         weekly_task: 'Monatlichen Job definieren?'
         weekday: 'Wochentag'
@@ -230,7 +231,21 @@ de:
         private: 'privat verschicken, Nachricht erscheint nicht im Foodsoft Posteingang'
       page:
         body: 'Inhalt'
+      supplier:
+        address: 'Adresse'
+        phone: 'Telefon'
+        phone2: 'Telefon 2'
+        fax: 'FAX'
+        url: 'Homepage'
+        contact_person: 'Ansprechparter_in'
+        customer_number: 'Kundennummer'
+        delivery_days: 'Liefertage'
+        order_howto: 'Howto Bestellen'
+        note: 'Notiz'
+        min_order_quantity: 'Mindestbestellmenge'
     hints:
       task:
         duration: 'Wie lange dauert die Aufgabe, 1-3 Stunden'
         required_users: 'Wieviel Benutzerinnen werden insgesamt benötigt?'
+      supplier:
+        min_order_quantity: 'Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren'

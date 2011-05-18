@@ -9,10 +9,14 @@ class Supplier < ActiveRecord::Base
   has_many :invoices
   belongs_to :shared_supplier  # for the sharedLists-App
 
-  attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number, :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
-	
-  validates_length_of :name, :in => 4..30
-  validates_uniqueness_of :name
+  attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
+                  :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
+
+  validates :name, :presence => true, :length => { :in => 4..30 }, :uniqueness => true
+  validates :phone, :presence => true, :length => { :in => 8..20 }
+  validates :address, :presence => true, :length => { :in => 8..50 }
+#  validates_length_of :name, :in => 4..30
+#  validates_uniqueness_of :name
 
   validates_length_of :phone, :in => 8..20
   validates_length_of :address, :in => 8..50

@@ -5,8 +5,6 @@ class OrderingController < ApplicationController
   before_filter :ensure_ordergroup_member
   before_filter :ensure_open_order, :only => [:order, :stock_order, :saveOrder]
   
-  verify :method => :post, :only => [:saveOrder], :redirect_to => {:action => :index}
-  
   # Index page.
   def index
   end

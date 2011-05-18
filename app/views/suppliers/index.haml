@@ -26,8 +26,8 @@
             %td= link_to h(supplier.name) , supplier
             %td=h supplier.phone
             %td=h supplier.customer_number
-            %td= link_to "Artikel (#{supplier.articles.without_deleted.count})", supplier_articles_path(supplier)
-            %td= link_to "im Lager (#{supplier.stock_articles.without_deleted.count})", stock_articles_path
+            %td= link_to "Artikel (#{supplier.articles.count})", supplier_articles_path(supplier)
+            %td= link_to "im Lager (#{supplier.stock_articles.count})", stock_articles_path
             %td= link_to "Lieferungen (#{supplier.deliveries.count})", supplier_deliveries_path(supplier)
 
 .right_column{:style => "width:37%"}
