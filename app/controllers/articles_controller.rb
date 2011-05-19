@@ -220,16 +220,14 @@ class ArticlesController < ApplicationController
   def sync
     # check if there is an shared_supplier
     unless @supplier.shared_supplier
-      flash[:error]= "#{@supplier.name} ist nicht mit einer externen Datenbank verknüpft."
-      redirect_to supplier_articles_path(@supplier)
+      redirect_to supplier_articles_url(@supplier), :alert => "#{@supplier.name} ist nicht mit einer externen Datenbank verknüpft."
     end
     # sync articles against external database
     @updated_articles, @outlisted_articles = @supplier.sync_all
     # convert to db-compatible-string
     @updated_articles.each {|a, b| a.shared_updated_on = a.shared_updated_on.to_formatted_s(:db)}
     if @updated_articles.empty? && @outlisted_articles.empty?
-      flash[:notice] = "Der Katalog ist aktuell."
-      redirect_to supplier_articles_path(@supplier)
+      redirect_to supplier_articles_path(@supplier), :notice => "Der Katalog ist aktuell."
     end
   end
 end

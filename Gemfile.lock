@@ -31,6 +31,8 @@ GEM
     annotate (2.4.0)
     arel (2.0.9)
     builder (2.1.2)
+    client_side_validations (3.0.4)
+      activesupport (~> 3.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     exception_notification (2.4.0)
@@ -106,6 +108,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  client_side_validations
   exception_notification
   fastercsv
   haml

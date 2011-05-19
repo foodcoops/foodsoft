@@ -27,7 +27,7 @@ class Supplier < ActiveRecord::Base
   def sync_all
     updated_articles = Array.new
     outlisted_articles = Array.new
-    for article in articles.without_deleted
+    for article in articles
       # try to find the associated shared_article
       shared_article = article.shared_article
 

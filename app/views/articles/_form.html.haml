@@ -1,4 +1,4 @@
-= simple_form_for [@supplier, @article], :remote => true do |f|
+= simple_form_for [@supplier, @article], :validate => true, :remote => true do |f|
   = f.input :availability
   = f.input :name
   = f.input :origin

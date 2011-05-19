@@ -9,6 +9,7 @@ gem "prawn", '<=0.6.3'
 gem 'haml'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'jquery-rails'
+gem 'client_side_validations'
 gem 'simple_form'
 gem 'rails3_acts_as_paranoid'
 gem 'meta_where'
