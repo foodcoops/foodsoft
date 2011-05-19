@@ -26,18 +26,17 @@
     .column_content
       #search{:style => "padding-bottom:3em"}
         = form_tag shared_supplier_articles_path(@supplier), :method => :get, :remote => true do
-          = text_field_tag :import_query, params['import_query'], :size => 10
+          = text_field_tag "search[name_contains_all]", "", :size => 10
           = submit_tag "Suchen"
           - if @supplier.shared_supplier.lists
             Suche in folgenden Listen:
             - @supplier.shared_supplier.lists.each do |token, name|
-              = check_box_tag "lists[#{token}]", "1", true
+              = check_box_tag "search[list_equals_any][]", token, true
               = name
           |
           Nur aus der Region:
-          = check_box_tag "regional", "1", false
+          = check_box_tag "search[origin_equals]", "REG", false
         #search_results
-          // "import_search_results" will be rendered
       = link_to "Schließen", "#import", 'data-toggle-this' => '#import'
 
 .single_column{:style => 'width:100%; clear:both'}

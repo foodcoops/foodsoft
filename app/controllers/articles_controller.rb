@@ -201,43 +201,18 @@ class ArticlesController < ApplicationController
   # renders a view to import articles in local database
   #   
   def shared
-    conditions = []
-    conditions << "supplier_id = #{@supplier.shared_supplier.id}"
-    # check for keywords
-    conditions << params[:import_query].split(' ').collect { |keyword| "name LIKE '%#{keyword}%'" }.join(' AND ') unless params[:import_query].blank?
-    # check for selected lists
-    conditions << "(" + params[:lists].collect {|list| "list = '#{list[0]}'"}.join(" OR ") + ")" if params[:lists]
-    # check for regional articles
-    conditions << "origin = 'REG'" if params[:regional]
-      
-    @articles = SharedArticle.paginate :page => params[:page], :per_page => 10, :conditions => conditions.join(" AND ")
-    render :update do |page|
-      page.replace_html 'search_results', :partial => "import_search_results"
-    end  
+    # build array of keywords, required for meta search _all suffix
+    params[:search][:name_contains_all] = params[:search][:name_contains_all].split(' ') if params[:search]
+    # Build search with meta search plugin
+    @search = @supplier.shared_supplier.shared_articles.search(params[:search])
+    @articles = @search.paginate :page => params[:page], :per_page => 10
+    render :layout => false
   end
   
   # fills a form whith values of the selected shared_article
   def import
-    shared_article = SharedArticle.find(params[:shared_article_id])
-    @article = Article.new(
-        :supplier_id => params[:supplier_id],
-        :name => shared_article.name,
-        :unit => shared_article.unit,
-        :note => shared_article.note,
-        :manufacturer => shared_article.manufacturer,
-        :origin => shared_article.origin,
-        :price => shared_article.price,
-        :tax => shared_article.tax,
-        :deposit => shared_article.deposit,
-        :unit_quantity => shared_article.unit_quantity,
-        :order_number => shared_article.number,
-          # convert to db-compatible-string
-        :shared_updated_on => shared_article.updated_on.to_formatted_s(:db))
-        
-    render :update do |page|
-      page["edit_article"].replace_html :partial => 'new'
-      page["edit_article"].show
-    end
+    @article = SharedArticle.find(params[:shared_article_id]).build_new_article
+    render :action => 'new', :layout => false
   end
   
   # sync all articles with the external database

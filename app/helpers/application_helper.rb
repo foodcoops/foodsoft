@@ -88,15 +88,6 @@ module ApplicationHelper
     return weekdays[dayNumber]
   end
   
-  # highlights a phrase in given text
-  # based on the rails text-helper 'highlight'
-  def highlight_phrase(text, phrase, highlighter = '<strong class="highlight">\1</strong>')
-    unless phrase.blank? || text.nil?
-      phrase.split(' ').each {|keyword| text.gsub!(/(#{Regexp.escape(keyword)})/i, highlighter)}
-    end
-    return text
-  end
-  
   # to set a title for both the h1-tag and the title in the header
   def title(page_title, show_title = true)
     content_for(:title) { page_title.to_s }

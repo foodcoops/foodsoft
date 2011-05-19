@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'rails3_acts_as_paranoid'
 gem 'meta_where'
+gem 'meta_search'
 gem 'inherited_resources'
 
 group :development do
