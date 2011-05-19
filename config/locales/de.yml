@@ -168,6 +168,7 @@ de:
         unit_quantity: Gebindegröße
         tax: MwSt
         deposit: Pfand
+        article_category: Kategorie
       stock_article:
         price: Nettopreis
       user:

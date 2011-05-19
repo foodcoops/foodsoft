@@ -5,7 +5,7 @@
     %br/
     Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.
 
-- form_tag(create_from_upload_supplier_articles_path(@supplier)) do
+= form_tag(create_from_upload_supplier_articles_path(@supplier)) do
   %table
     %tr
       %th Nummer
@@ -20,7 +20,7 @@
       %th Gebindegröße
       %th Kategorie
     - for article in @articles
-      - fields_for "articles[]", article do |form|
+      = fields_for "articles[]", article do |form|
         %tr{:class => cycle('even', 'odd')}
           %td= form.text_field 'order_number', :size => 6
           %td= form.text_field 'name', :size => 0

@@ -12,12 +12,12 @@
   %i
     Korrekte Reihenfolge der Spalten:
     %br/
-    = ["Status (x=ausgelistet)", "Bestellnummer", "Name", "Notiz", "Hersteller", "Herkunft", |
-      "Einheit", "Preis(netto)", "MwSt", "Pfand", "Gebindegröße", |
-      "Staffelmenge", "Staffelpreis", "Kategorie"].join(" | ") |
+    = ["Status (x=ausgelistet)", "Bestellnummer", "Name", "Notiz", "Hersteller", "Herkunft",
+      "Einheit", "Preis(netto)", "MwSt", "Pfand", "Gebindegröße",
+      "Staffelmenge", "Staffelpreis", "Kategorie"].join(" | ")
 
 #uploadArticles.uploadForm
-  - form_for :articles, :url => parse_upload_supplier_articles_path(@supplier), |
-     :html => { :multipart => true } do |form| |
+  = form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
+     :html => { :multipart => true } do |form|
     %p= form.file_field "file"
     %p= submit_tag "Datei hochladen"

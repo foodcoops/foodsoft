@@ -1,58 +1,71 @@
 // Load following statements, when DOM is ready
 $(function() {
-    $('a[data-toggle_this]').click(function() {
-        $($(this).data('toggle_this')).toggle();
+
+    // Show/Hide a specific DOM element
+    $('a[data-toggle-this]').click(function() {
+        $($(this).data('toggle-this')).toggle();
         return false;
+    });
+
+    // Check/Uncheck a single checkbox
+    $('[data-check-this]').live('click', function() {
+        var checkbox = $($(this).data('check-this'));
+        checkbox.attr('checked', !checkbox.is(':checked'));
+        highlightRow(checkbox);
+        return false;
+    });
+
+    // Check/Uncheck all checkboxes for s specific form
+    $('input[data-check-all]').live('click', function() {
+        var status = $(this).is(':checked')
+        $($(this).data('check-all')).find('input[type="checkbox"]').each(function() {
+            $(this).attr('checked', status);
+            highlightRow($(this));
+        });
+    });
+
+    // Submit form when changing a select menu.
+    $('form[data-submit-onchange] select').live('change', function() {
+        var confirmMessage = $(this).children(':selected').data('confirm');
+        if (confirmMessage && confirm(confirmMessage)) {
+            $(this).parents('form').submit();
+        } else {
+            $(this).parents('form').submit();
+        }
+        return false;
+    });
+
+    // Submit form when changing text of an input field
+    // Use jquery observe_field plugin
+    $('form[data-submit-onchange] input[type=text]').each(function() {
+        $(this).observe_field(1, function() {
+            $(this).parents('form').submit();
+        });
+    });
+
+    // Submit form when clicking on checkbox
+    $('form[data-submit-onchange] input[type=checkbox]:not(input[data-ignore-onchange])').click(function() {
+        $(this).parents('form').submit();
+    });
+
+    $('[data-redirect-to]').bind('change', function() {
+        var newLocation = $(this).children(':selected').val();
+        if (newLocation != "") {
+            document.location.href = newLocation;
+        }
     });
 });
 
 
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-
-// for checkboxes. just insert box in same form-element like: 
-// <input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/>
-// credit to Shawn Olson & http://www.shawnolson.net
-function checkUncheckAll(theElement) {
-  var theForm = theElement.form, z = 0;
-  for(z=0; z<theForm.length;z++){
-    if(theForm[z].type == 'checkbox' && theForm[z].name != 'checkall'){
-      theForm[z].checked = theElement.checked;
-			// remove "checkbox_" in form-id before call highligh-function
-			highlightRow(theForm[z].id.substring(9), theElement.checked);
-    }
-  }
-}
 // gives the row an yellow background
-function highlightRow(row_id,status) {
-	if(status) {
-		$(row_id).addClassName("selected");
-	} else {
-		$(row_id).removeClassName("selected");
-	}
-}
-// check or uncheck a given checkbox and adds or removes class "selected"
-// used prototype to get the element
-function checkRow(id) {
-  var checkbox = "checkbox_" + id
-  if($(checkbox).checked) {
-    $(checkbox).checked = false;
-    highlightRow(id,false);
-  } else {
-    $(checkbox).checked = true;
-		highlightRow(id,true);
-  }
-}
+function highlightRow(checkbox) {
+    var row = checkbox.parents('tr');
+    if (checkbox.is(':checked')) {
+        row.addClass('selected');
+    } else {
+        row.removeClass('selected');
+    }
 
-// redirect to another "item"
-// this function is used with an select menu
-// for an example see app/views/articles/list.haml
-function redirectTo(newLoc) {
-	nextPage = newLoc.options[newLoc.selectedIndex].value
-	
-   	if (nextPage != "") {
-    	document.location.href = nextPage
-   	}
 }
 
 // Use with auto_complete to set a unique id,

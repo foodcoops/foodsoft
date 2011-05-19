@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
-  helper :messages
-  
+
   def index
     # unaccepted tasks
     @unaccepted_tasks = @current_user.unaccepted_tasks

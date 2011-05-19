@@ -2,9 +2,6 @@ Foodsoft::Application.routes.draw do
 
   get "sessions/new"
 
-  # Use routing filter to select foodcoop config and datbase
-#  filter :foodcoop
-
   root :to => redirect("/#{Foodsoft.env}")
 
   scope '/:foodcoop', :defaults => { :foodcoop => Foodsoft.env } do

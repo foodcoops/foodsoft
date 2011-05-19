@@ -1,2 +1,2 @@
-$('#<%= @article.id %>').html('<%= escape_javascript(render("article_row")) %>');
+$('#article_<%= @article.id %>').replaceWith('<%= escape_javascript(render(@article)) %>');
 $.fancybox.close();

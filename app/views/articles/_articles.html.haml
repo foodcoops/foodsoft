@@ -25,7 +25,7 @@
       %th[sort_td_class_helper "note"]
         = sort_link_helper "Notiz", "note"
       %th{:style => "width: 4em;"} Gebgr.
-      %th{:style => "width: 4em;"} Preis
+      %th{:style => "width: 5em;"} Preis
       %th{:style => "width: 3.5em;"} MwSt
       %th{:style => "width: 4em;"} Pfand
       %th{:style => "width: 3em;"}
@@ -33,19 +33,17 @@
   %tbody#listbody
     
     - if @total > 0  
-      - for @article in @articles
-        %tr{ :class => cycle('even','odd') + row_classes(@article), :id => @article.id, :onclick => "checkRow('#{@article.id.to_s}')"}
-          = render :partial => 'article_row'
+      - for article in @articles
+        = render(article)
       %tfoot
         %tr
           %td{:colspan => '11'}
-            = check_box_tag :checkall, 1, false, :onclick => 'checkUncheckAll(this)'
-            %select{:name => "selected_action"}
+            = check_box_tag :checkall, 1, false, 'data-check-all' => '#articlesInListForm', 'data-ignore-onchange' => true
+            %select{:name => "selected_action", 'data-submit-onchange' => true}
               %option{:value => '', :selected => 'selected'} Aktion wählen ...
-              %option{:value => "destroy", :onclick => "if (confirm('Willst Du wirklich alle gewählten Artikel löschen?')) { this.up('form').submit(); }; return false;"} Artikel löschen
-              %option{:value => "setNotAvailable", :onclick => "this.up('form').submit()"} Artikel sind nicht mehr verfügbar
-              %option{:value => "setAvailable", :onclick => "this.up('form').submit()"} Artikel sind verfügbar
-              
+              %option{:value => "destroy", 'data-confirm' => 'Willst Du wirklich alle gewählten Artikel löschen?'} Artikel löschen
+              %option{:value => "setNotAvailable"} Artikel sind nicht mehr verfügbar
+              %option{:value => "setAvailable"} Artikel sind verfügbar
             = hidden_field_tag 'supplier_id', @supplier.id
 
 %p= pagination_links_remote @articles, :params => {:sort => params[:sort]}

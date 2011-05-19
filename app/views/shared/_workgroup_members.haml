@@ -1,5 +1,5 @@
 - for workgroup in Workgroup.all
-  %h4= link_to workgroup.name, "#", 'data-toggle_this' => "#workgroup_#{workgroup.id}"
+  %h4= link_to workgroup.name, "#", 'data-toggle-this' => "#workgroup_#{workgroup.id}"
   %ul{:style => "display:none"}[workgroup]
     - for user in workgroup.users.order("nick")
       %li= "#{user.nick} (#{user.ordergroup.try(:name)})"

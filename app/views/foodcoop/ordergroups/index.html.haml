@@ -5,23 +5,13 @@
     %h2 Übersicht
   .column_content
     #filter{:style => "margin-right:2em;"}
-      = form_tag foodcoop_ordergroups_path, :method => :get, :style=>"display:inline;", :id => 'ordergroup_search', :remote => true do
+      = form_tag foodcoop_ordergroups_path, :method => :get, :style=>"display:inline;", :id => 'ordergroup_search',
+      :remote => true, 'data-submit-onchange' => true do
         %label{:for => 'article_name'} Suche nach Name:
-        = text_field_tag(:query, params[:query], :size => 10 )
+        = text_field_tag :query, params[:query], :size => 10
         %label{:for => 'only_active'} Nur aktive:
-        = check_box_tag('only_active')
+        = check_box_tag 'only_active', 1, params[:only_active]
         %small (mindestens einmal in den letzten 3 Monaten bestellt)
     
     #ordergroups
       = render :partial => "ordergroups"
-
-- content_for :head do
-  :javascript
-    $(function() {
-      $('#query').observe_field(1, function() {
-        $('#ordergroup_search').submit();
-      });
-      $('#only_active').click(function() {
-        $('#ordergroup_search').submit();
-      });
-    });

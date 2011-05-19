@@ -7,19 +7,17 @@
       %li
         Zugriff auf externe Datenbank
         %ul
-          %li= link_to "Suchen/Importieren", "#import", 'data-toggle_this' => '#import'
+          %li= link_to "Suchen/Importieren", "#import", 'data-toggle-this' => '#import'
           %li= link_to "Synchronisieren", sync_supplier_articles_path(@supplier), :method => :post
 
 
 #change_supplier{:style => "padding:0 0 0.5em 0.7em;"}
   %span{:style => "float:left"}
     Lieferantin wechseln:
-  = form_tag do
-    = select_tag :switch_supplier,
-      options_for_select( Supplier.all(:order => 'name').collect {|s| [s.name, url_for(supplier_articles_path(s))] },
-      url_for(supplier_articles_path(@supplier)) ),
-      :onchange => "redirectTo(this)",
-      :style => "font-size: 0.9em;margin-left:1em;"
+  = select_tag :switch_supplier,
+    options_for_select(Supplier.order(:name).map {|s| [s.name, supplier_articles_url(s)] }, supplier_articles_url(@supplier)),
+    :style => "font-size: 0.9em;margin-left:1em;",
+    'data-redirect-to' => true
 
 - unless @supplier.shared_supplier.nil?
   #import.single_column{:style => "display:none; clear:both"}
@@ -40,7 +38,7 @@
           = check_box_tag "regional", "1", false
         #search_results
           // "import_search_results" will be rendered
-      = link_to "Schließen", "#import", 'data-toggle_this' => '#import'
+      = link_to "Schließen", "#import", 'data-toggle-this' => '#import'
 
 .single_column{:style => 'width:100%; clear:both'}
   .box_title
@@ -57,12 +55,13 @@
 
     #article_filter
       #article_search_form{:style=>"display:inline;"}
-        = form_tag supplier_articles_path(@supplier), :method => :get, :remote => true do
+        = form_tag supplier_articles_path(@supplier), :method => :get, :remote => true, 'data-submit-onchange' => true do
           %label{:for => 'article_name'} Suche im Artikelnamen:
-          = text_field_tag("query", params['query'], :size => 10 )
+          = text_field_tag :query, params[:query], :size => 10
           = submit_tag "Suchen"
 
-    = form_tag update_selected_supplier_articles_path(@supplier), :id => "articlesInListForm" do
+    = form_tag update_selected_supplier_articles_path(@supplier), :id => "articlesInListForm",
+      'data-submit-onchange' => true do
       #table= render 'articles'
 
 #edit_article{:style => "display:none"}

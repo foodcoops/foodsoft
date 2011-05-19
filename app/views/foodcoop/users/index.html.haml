@@ -1,14 +1,3 @@
-- content_for :head do
-  :javascript
-    $(function() {
-      $('#query').observe_field(1, function() {
-        $('#user_search').submit();
-      });
-      $('#sort_by_ordergroups').click(function() {
-        $('#user_search').submit();
-      });
-    });
-
 %h1 Mitglieder der Foodcoop
 %p
   %i
@@ -24,9 +13,10 @@
   .column_content
     - unless params[:sort_by_ordergroups]
       #user_filter{:style => "float:left; margin-right:2em;"}
-        = form_tag foodcoop_users_path, :method => :get, :style=>"display:inline;", :id => 'user_search', :remote => true do
+        = form_tag foodcoop_users_path, :method => :get, :style=>"display:inline;", :id => 'user_search',
+          :remote => true, 'data-submit-onchange' => true do
           %label{:for => 'article_name'} Suche nach Name:
-          = text_field_tag(:query, params[:query], :size => 10 )
+          = text_field_tag :query, params[:query], :size => 10
 
           Nach Bestellgruppen sortieren:
           = check_box_tag :sort_by_ordergroups, 1, params[:sort_by_ordergroups]

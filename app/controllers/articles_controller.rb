@@ -76,7 +76,7 @@ class ArticlesController < ApplicationController
   
   # Renders a form for editing all articles from a supplier
   def edit_all
-    @articles = @supplier.articles.without_deleted
+    @articles = @supplier.articles
   end
 
   # Updates all article of specific supplier
@@ -130,14 +130,14 @@ class ArticlesController < ApplicationController
       articles.each {|a| a.update_attribute(:availability, true) }
       flash[:notice] = 'Alle gewählten Artikel wurden auf "verfügbar" gesetzt'
     else
-      flash[:error] = 'Keine Aktion ausgewählt!'
+      flash[:alert] = 'Keine Aktion ausgewählt!'
     end
     # action succeded
-    redirect_to supplier_articles_path(@supplier, :per_page => params[:per_page])
+    redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page])
       
-  rescue => e
-    flash[:error] = 'Ein Fehler ist aufgetreten: ' + e
-    redirect_to supplier_articles_path(@supplier, :per_page => params[:per_page])
+  rescue => error
+    redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page]),
+                :alert => "Ein Fehler ist aufgetreten: #{error}"
   end
  
   # lets start with parsing articles from uploaded file, yeah
@@ -174,10 +174,9 @@ class ArticlesController < ApplicationController
         end
         @articles << article
       end
-      flash.now[:notice] = @articles.size.to_s + " articles are parsed successfully."
-    rescue => e
-      flash[:error] = "An error has occurred: " + e.message
-      redirect_to upload_supplier_articles_path(@supplier)
+      flash.now[:notice] = "#{@articles.size} articles are parsed successfully."
+    rescue => error
+      redirect_to upload_supplier_articles_path(@supplier), :alert => "An error has occurred: #{error.message}"
     end
   end
  

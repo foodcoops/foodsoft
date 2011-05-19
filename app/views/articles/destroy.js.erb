@@ -1,5 +1,5 @@
 <% if @order %>
-$('#<%= @article.id %>').after('<%= escape_javascript(render("destroy_active_article")) %>');
+$('#article_<%= @article.id %>').after('<%= escape_javascript(render("destroy_active_article")) %>');
 <% else %>
-$('#<%= @article.id %>').remove();
+$('#article_<%= @article.id %>').remove();
 <% end %>

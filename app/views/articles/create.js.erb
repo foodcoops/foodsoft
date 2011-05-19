@@ -1,2 +1,2 @@
-$('#listbody').prepend('<%= escape_javascript(render("new_article_row")) %>');
+$('#listbody').prepend('<%= escape_javascript(render(@article)) %>');
 $.fancybox.close();
