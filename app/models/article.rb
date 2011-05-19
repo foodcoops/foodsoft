@@ -28,6 +28,9 @@ class Article < ActiveRecord::Base
   acts_as_paranoid  # Avoid deleting the article for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
 
+  # Replace numeric seperator with database format
+  localize_input_of :price, :tax, :deposit
+
   # Associations
   belongs_to :supplier
   belongs_to :article_category
@@ -47,21 +50,6 @@ class Article < ActiveRecord::Base
   # Callbacks
   before_save :update_price_history
   before_destroy :check_article_in_use
-
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def price=(price)
-    self[:price] = String.delocalized_decimal(price)
-  end
-  
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def tax=(tax)
-    self[:tax] = String.delocalized_decimal(tax)
-  end
-  
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def deposit=(deposit)
-    self[:deposit] = String.delocalized_decimal(deposit)
-  end
   
   # The financial gross, net plus tax and deposti
   def gross_price

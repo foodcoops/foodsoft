@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/bennibu/localize_input.git
+  revision: 1de033997a66b3c22344799cd354e45f0dab4d32
+  specs:
+    localize_input (0.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -115,6 +121,7 @@ DEPENDENCIES
   hirb
   inherited_resources
   jquery-rails
+  localize_input!
   meta_search
   meta_where
   mysql
