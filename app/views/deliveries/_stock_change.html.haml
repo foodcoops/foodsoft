@@ -1,6 +1,6 @@
 %p
-  - fields_for "delivery[new_stock_changes][]", stock_change do |form|
+  = fields_for "delivery[new_stock_changes][]", stock_change do |form|
     = form.select :stock_article_id, stock_articles_for_select(supplier)
     Menge
     = form.text_field :quantity, :size => 5, :autocomplete => 'off'
-    = link_to_function "Artikel aus Lieferung entfernen", "$(this).up('p').remove()"
+    = link_to "Artikel aus Lieferung entfernen", "#", :class => 'remove_new_stock_change'

@@ -1,35 +1,10 @@
-- remote_form_for stock_article, :url => add_stock_article_stock_takings_path do |form|
-  = form.error_messages
-  %p
-    Lieferantin
-    %br/
-    = form.select :supplier_id, Supplier.without_deleted(:order => 'name').collect{ |s| [s.name, s.id] }
-  %p
-    Name
-    %br/
-    = form.text_field :name
-  %p
-    Einheit
-    %br/
-    = form.text_field :unit
-  %p
-    Notiz
-    %br/
-    = form.text_field :note
-  %p
-    Nettopreis
-    %br/
-    = form.text_field :price
-  %p
-    MwSt
-    %br/
-    = form.text_field :tax, :value => (stock_article.tax || 7.0)
-  %p
-    Pfand
-    %br/
-    = form.text_field :deposit
-  %p
-    Kategorie:
-    = form.select :article_category_id, ArticleCategory.all(:order => 'name').collect { |c| [c.name, c.id] }
-  %p
-    = submit_tag "Lagerartikel hinzufügen"
+- simple_form_for stock_article, add_stock_article_stock_takings_path, :remote => true do |f|
+  = f.association :supplier
+  = f.input :name
+  = f.input :unit
+  = f.input :note
+  = f.input :price
+  = f.input :tax
+  = f.input :deposit
+  = f.association :article_category
+  = f.submit

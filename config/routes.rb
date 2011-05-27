@@ -77,7 +77,7 @@ Foodsoft::Application.routes.draw do
 
     resources :stock_articles, :to => 'stockit' do
       collection do
-        get :auto_complete_for_article_name
+        get :articles_search
         get :fill_new_stock_article_form
       end
     end

@@ -92,11 +92,7 @@ class DeliveriesController < ApplicationController
   end
 
   def add_stock_change
-
-    render :update do |page|
-      page.insert_html :bottom, 'stock_changes', :partial => 'stock_change',
-          :locals => {:stock_change => StockChange.new, :supplier => @supplier}
-    end
+    render :layout => false
   end
 
   def fill_new_stock_article_form

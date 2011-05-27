@@ -1,16 +1,20 @@
 - title "Neuen Lagerartikel anlegen"
 
-:javascript
-  function fillNewStockArticle(text, li) {
-    new Ajax.Updater('stock_article_form', '/stockit/fill_new_stock_article_form', {
-      parameters: {article_id: li.id}
-    });
-  }
+- content_for :head do
+  :javascript
+    $(function() {
+      $('#article_search').autocomplete({
+          source: '#{articles_search_stock_articles_path}',
+          select: function(e, ui) {
+            alert(ui.item.value);
+            //location.href = '#{nil}' + ui.item.value;
+          }
+        });
+    })
+
 
 %p
   Suche nach Artikeln aus allen Katalogen:
-  = text_field_with_auto_complete :article, :name, {}, |
-  {:url => {:action => 'auto_complete_for_article_name'}, |
-   :after_update_element => 'fillNewStockArticle'} |
+  = text_field_tag 'article_search'
 #stock_article_form
   = render :partial => 'form', :locals => {:stock_article => @stock_article}

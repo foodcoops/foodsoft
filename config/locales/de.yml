@@ -160,6 +160,9 @@ de:
       task: Aufgabe
       message: Nachricht
       article_category: Artikelkategorie
+      stock_article: Lagerartikel
+      delivery: Lieferung
+      stock_taking: Inventur
     attributes:
       article:
         price: Nettopreis
@@ -210,6 +213,8 @@ de:
       description: 'Beschreibung'
       title: 'Titel'
       email: 'E-Mail'
+      note: 'Notiz'
+      date: 'Datum'
       workgroup:
         weekly_task: 'Monatlichen Job definieren?'
         weekday: 'Wochentag'
@@ -257,7 +262,12 @@ de:
         order_number: 'Bestellnummer'
         tax: 'MwSt'
         deposit: 'Pfand'
+      stock_article:
+        supplier: 'Lieferant'
+      delivery:
+        delivered_on: 'Lieferdatum'
     hints:
+      tax: 'In Prozent, Standard sind 7,0'
       task:
         duration: 'Wie lange dauert die Aufgabe, 1-3 Stunden'
         required_users: 'Wieviel Benutzerinnen werden insgesamt benötigt?'
@@ -265,3 +275,5 @@ de:
         min_order_quantity: 'Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren'
       article:
         unit: 'z.B. KG oder 1L oder 500g'
+      stock_article:
+        supplier: ''

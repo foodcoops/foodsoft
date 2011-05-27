@@ -1,4 +1,6 @@
 class StockArticle < Article
+  acts_as_paranoid
+  
   has_many :stock_changes
 
   scope :available, :conditions => "quantity > 0"

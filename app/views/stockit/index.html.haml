@@ -1,23 +1,26 @@
 - title "Lagerübersicht: #{StockArticle.available.count} Artikel im Lager"
-
+- content_for :head do
+  :javascript
+    $(function() {
+      $('tr.unavailable').hide();
+    })
 .menu
   - form_tag do
     %ul
       %li
         Ansichtsoptionen
         %ul
-          %li= link_to_function "Nicht verfügbare Artikel zeigen/verstecken", |
-            "$$('tr.unavailable').invoke('toggleClassName', 'hidden');", :style => "width:15em" |
+          %li= link_to "Nicht verfügbare Artikel zeigen/verstecken", "#", 'data-toggle-this' => 'tr.unavailable',
+            :style => "width:15em"
 
 
 %div{:style => "padding:0 0 0.5em 0.7em;margin-bottom:2em"}
   %span{:style => "float:left"}
     - form_tag do
       Neue Lieferung anlegen für:
-      = select_tag :new_delivery, |
-        options_for_select([[" -- Lieferantin wählen --", ""]] + |
-          Supplier.without_deleted.collect {|s| [ s.name, url_for(new_supplier_delivery_path(s))] }), |
-        :onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;" |
+      = select_tag :new_delivery,
+        options_for_select([[" -- Lieferantin wählen --", ""]] + Supplier.all.map {|s| [ s.name, new_supplier_delivery_url(s)]}),
+        'data-redirect-to' => true, :style => "font-size: 0.9em;margin-left:1em;"
 
 .single_column{:style => 'width:100%; clear:both'}
   .box_title
@@ -48,7 +51,7 @@
         %tbody
           - for article in @stock_articles
             - class_name = cycle :even, :odd
-            - class_name += " unavailable hidden" if article.quantity_available <= 0
+            - class_name += " unavailable" if article.quantity_available <= 0
             - class_name += " supplier_#{article.supplier.id}"
             %tr{:class => class_name}
               %td=h article.name

@@ -7,6 +7,12 @@ $(function() {
         return false;
     });
 
+    // Remove this item from DOM
+    $('a[data-remove-this').click(function() {
+        $($(this).data('remove-this')).remove();
+        return false;
+    });
+
     // Check/Uncheck a single checkbox
     $('[data-check-this]').live('click', function() {
         var checkbox = $($(this).data('check-this'));
