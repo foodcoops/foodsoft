@@ -51,6 +51,8 @@ After that you get the other gems easily with (from project root):
 (5) Create database (schema) and load defaults
 --------------------------
 	rake db:create
+        rake db:schema:load
+        rake db:seed
 
 With this, you also get a ready to go user with username 'admin' and password 'secret'.
 
