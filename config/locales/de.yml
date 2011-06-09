@@ -211,6 +211,7 @@ de:
     #   password: 'No special characters, please.'
     labels:
       password: 'Passwort'
+      password_confirmation: 'Passwort wiederholen'
       description: 'Beschreibung'
       title: 'Titel'
       email: 'E-Mail'
@@ -218,6 +219,7 @@ de:
       date: 'Datum'
       ordergroup: 'Bestellgruppe'
       amount: 'Betrag'
+      phone: "Telefon"
       workgroup:
         weekly_task: 'Monatlichen Job definieren?'
         weekday: 'Wochentag'
@@ -269,6 +271,10 @@ de:
         supplier: 'Lieferant'
       delivery:
         delivered_on: 'Lieferdatum'
+      user:
+        nick: "Benutzername"
+        last_name: "Nachname"
+
     hints:
       tax: 'In Prozent, Standard sind 7,0'
       task:

@@ -1,28 +1,18 @@
-%h1 Admin/Benutzerinnen
+- title "Admin/Benutzerinnen"
 %p
   %i
     Hier kannst du Benutzer_innen
     = link_to 'neu Anlegen', new_admin_user_path
     , bearbeiten und natürlich auch löschen.
-#newUser{:style => "display:none;"}
-  .box_title
-    %h2 Neue Benutzerinn
-  .column_content#userForm
 .left_column{:style => "width:100%"}
   .box_title
     %h2 Benutzerinnenübersicht
   .column_content
-    #user_filter
-      %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
-        %label{:for => 'article_name'} Suche in Name : 
-        = text_field_tag("query", params['query'], :size => 10 )
-        
-      = observe_field 'query',  :frequency => 2, |
-        :before => "Element.show('loader')", |
-        :success => "Element.hide('loader')", |
-        :url => admin_users_path, |
-        :with => 'query', |
-        :method => :get |
-    #table
+    #user_filter{:style => "float:left; margin-right:2em;"}
+      = form_tag admin_users_path, :method => :get, :style=>"display:inline;", :id => 'user_search',
+        :remote => true, 'data-submit-onchange' => true do
+        %label{:for => 'article_name'} Suche nach Name:
+        = text_field_tag :query, params[:query], :size => 10
+    #users
       = render :partial => "users"
   %p= link_to 'Neue Benutzerin', new_admin_user_path

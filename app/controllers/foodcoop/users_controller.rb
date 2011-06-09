@@ -8,11 +8,6 @@ class Foodcoop::UsersController < ApplicationController
       @users = @users.where(({:first_name.matches => "%#{params[:query]}%"}) | ({:last_name.matches => "%#{params[:query]}%"}) | ({:nick.matches => "%#{params[:query]}%"}))
     end
 
-    # sort by ordergroups
-#    if params[:sort_by_ordergroups]
-#      @users = @users.joins(:ordergroup).order(:ordergroup => :name.asc) # Retunr dubbled entries, why?
-#    end
-
     # sort by nick, thats default
     if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
       @per_page = params[:per_page].to_i
