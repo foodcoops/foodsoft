@@ -1,6 +1,6 @@
 /* General rules ... */
 body {
-  background-color: #fff;
+  background-color: white;
   color: black;
   margin: 0;
   padding: 1% 0 0 0;
@@ -12,7 +12,7 @@ body {
   position: fixed;
   top: 1px;
   right: 1px;
-  background: #FFF;
+  background: white;
   padding: 10px;
   color: black;
   border-width: 2px;
@@ -40,7 +40,7 @@ h1 {
 
 h2 {
   font-size: 1.4em;
-  margin-top: .5em; }
+  margin-top: 0.5em; }
 
 h3 {
   font-size: 1em;
@@ -53,18 +53,18 @@ abbr, acronym {
   cursor: help; }
 
 input, textarea, select {
-  border: 1px solid #D7D7D7;
+  border: 1px solid #d7d7d7;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 0.9em;
-  padding-left: .2em;
-  padding-right: .2em; }
+  padding-left: 0.2em;
+  padding-right: 0.2em; }
 
 input:focus, textarea:focus, select:focus {
-  border-color: #000; }
+  border-color: black; }
 
 input[type="button"], input[type="submit"], input[type="reset"] {
-  background: #EEEEEE none repeat scroll 0%;
-  border: 1px outset #CCCCCC;
+  background: #eeeeee none repeat scroll 0%;
+  border: 1px outset #cccccc;
   color: #222222;
   padding: 0.1em 0.5em;
   font-size: 1em;
@@ -75,17 +75,11 @@ select {
   max-width: 15em; }
 
 option {
-  border-top: 1px solid #D7D7D7;
-  margin: .2em 0; }
+  border-top: 1px solid #d7d7d7;
+  margin: 0.2em 0; }
 
 span.click-me {
   cursor: pointer; }
-
-.left {
-  float: left; }
-
-.right {
-  float: right; }
 
 .clear {
   clear: both; }
@@ -94,9 +88,6 @@ span.click-me {
   color: grey;
   font-size: 0.9em; }
 
-.hidden {
-  display: none; }
-
 #login {
   margin: auto;
   width: 27em;
@@ -104,8 +95,8 @@ span.click-me {
 
 #login #meta {
   margin-top: 2em;
-  padding-top: .3em;
-  border-top: 1px dotted #ED0606;
+  padding-top: 0.3em;
+  border-top: 1px dotted #ed0606;
   color: #2e2e2e; }
 
 #header {
@@ -129,7 +120,7 @@ span.click-me {
     text-decoration: none; }
   #logo a span {
     color: #ed0606;
-    background: #FFF;
+    background: white;
     padding-right: 0.1em;
     font-weight: bold;
     border-top-width: 2px;
@@ -153,7 +144,7 @@ span.click-me {
     color: #ed0606; }
 
 #main {
-  background: #FFF;
+  background: white;
   padding: 0;
   margin: 0 15px 0 15px; }
 
@@ -163,14 +154,14 @@ span.click-me {
   float: right;
   padding: 2.6em 1em;
   margin: 3em 0 0 0;
-  border-left: 1px dotted #ED0606;
+  border-left: 1px dotted #ed0606;
   font-size: 1.2em; }
   #infobar h3 {
-    color: #ED0606; }
+    color: #ed0606; }
   #infobar ul {
     list-style: none; }
   #infobar li {
-    margin: .3em 0 0 -3em; }
+    margin: 0.3em 0 0 -3em; }
 
 .menu, #start_nav {
   border: 2px solid #e3e3e3;
@@ -183,7 +174,7 @@ span.click-me {
     padding: 0; }
     .menu ul li, #start_nav ul li {
       border-bottom: 1px solid #dedede;
-      color: #666;
+      color: #666666;
       margin: 0.8em 0 0 0;
       font-weight: bold; }
       .menu ul li a:link, .menu ul li a:visited, #start_nav ul li a:link, #start_nav ul li a:visited {
@@ -213,14 +204,14 @@ span.click-me {
   right: 1px; }
 
 #content {
-  padding: .5em 0 2.5em 0;
+  padding: 0.5em 0 2.5em 0;
   margin: 0;
-  background: #FFF;
+  background: white;
   font-size: 1.3em;
   width: 100%;
   float: left; }
 
-/* *********************************** tables */
+/*********************************** tables */
 table {
   border-collapse: collapse;
   text-align: left;
@@ -233,35 +224,29 @@ table {
   table th {
     color: black; }
   table tr.odd, table tr.even {
-    border-top: 1px solid #DDDDDD; }
+    border-top: 1px solid #dddddd; }
   table tr.odd, table tr.odd input {
-    background-color: #F6F6F6; }
+    background-color: #f6f6f6; }
   table tr.even {
-    background-color: #FBFBFB; }
+    background-color: #fbfbfb; }
   table tr.unavailable, table tr.unavailable a {
     color: grey; }
   table tr.unavailable a:hover {
-    color: #ED0606; }
+    color: #ed0606; }
   table tr.just_updated {
-    color: #008000; }
+    color: green; }
   table tr.selected, table tr.active {
     background-color: #ffffc2; }
-  table tr.click-me, table td.click-me {
+  table tr.click-me {
     cursor: pointer; }
-  table tr.ignored {
-    color: grey; }
-  table tr.success {
-    color: green; }
-  table tr.failed {
-    color: red; }
 
 table.list tr {
   border: 1px solid #e3e3e3; }
 table.list tbody tr:hover {
-  background-color: #EEEEDD; }
+  background-color: #eeeedd; }
 
 table tfoot tr {
-  background-color: #fff; }
+  background-color: white; }
   table tfoot tr td {
     padding-top: 0.8em; }
 
@@ -272,16 +257,16 @@ tr.edit_inline {
 
 div.legend, div.legend table th {
   color: grey;
-  font-size: .8em;
+  font-size: 0.8em;
   background: none; }
 
 form table {
   border: none; }
 
 table.ordered_articles {
-  background-color: #fff; }
+  background-color: white; }
   table.ordered_articles tbody tr:hover {
-    background-color: #EEEEDD; }
+    background-color: #eeeedd; }
   table.ordered_articles a {
     display: block; }
   table.ordered_articles tr.results:hover {
@@ -315,7 +300,7 @@ div.edit_form {
   top: 5em;
   left: 10em;
   width: 55em;
-  background: #FBFBFB;
+  background: #fbfbfb;
   padding: 3em;
   padding-top: 1em;
   border-width: 3px;
@@ -347,7 +332,7 @@ div.box_title {
   background: #78b74e;
   padding: 5px 10px; }
   div.box_title h2, div.box_title h2 a {
-    color: #FFF;
+    color: white;
     margin: 0; }
   div.box_title h2 {
     font-size: 1.3em; }
@@ -382,7 +367,7 @@ span.used, span.unused {
   font-weight: bold; }
 
 span.used {
-  color: #008000; }
+  color: green; }
 
 span.unused {
   color: #ed0606; }
@@ -393,91 +378,41 @@ span.total {
 table#order {
   text-align: center; }
   table#order input {
-    font-size: 0.9em;
-    font-weight: bolder;
-    background-color: #78B74E;
-    color: #fff;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    padding: 0; }
+    font-size: 80%; }
   table#order th#col_required, table#order th#col_tolerance {
-    width: 140px; }
+    width: 145px; }
   table#order th#col_packages, table#order th#col_left_units {
     width: 50px; }
-  table#order td.quantity, table#order td.tolerance {
-    text-align: right; }
   table#order td#col_left_units {
     color: #ed0606; }
   table#order td {
     padding: 0.6em; }
-  table#order td.name {
+  table#order td.name, table#order tr.note td {
     text-align: left;
     padding-left: 10px; }
   table#order tfoot tr {
     background-color: #e4eed6; }
   table#order tfoot td {
     padding-right: 10px; }
-
-#order-footer, .article-info {
-  text-align: left;
-  z-index: 1;
-  position: fixed;
-  bottom: 0;
-  background-color: #E4EED6;
-  border-top: 2px solid #78B74E; }
-  #order-footer #total-sum, .article-info #total-sum {
-    width: 22em;
-    margin: .5em 2em 0 0;
-    float: right; }
-    #order-footer #total-sum #order-button, .article-info #total-sum #order-button {
-      margin: .5em 0; }
-      #order-footer #total-sum #order-button input, .article-info #total-sum #order-button input {
-        background-color: #78B74E;
-        color: #fff;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px; }
-      #order-footer #total-sum #order-button input:disabled, .article-info #total-sum #order-button input:disabled {
-        background-color: red; }
-
-#order-footer {
-  width: 100%;
-  right: 0;
-  left: 0; }
-
-.article-info {
-  z-index: 2;
-  width: 45em;
-  height: 8em;
-  border: none;
-  left: 30px; }
-  .article-info h3 {
-    text-align: center;
-    margin: 0;
-    margin-bottom: 5px;
-    width: 100%; }
-  .article-info .right {
-    width: 35%; }
-  .article-info .left {
-    width: 60%; }
-
-tr.order-article .article-info {
-  display: none; }
-
-tr.order-article:hover .article-info {
-  display: block; }
+  table#order tr.note {
+    background-color: #fbfbfb;
+    font-size: 0.9em;
+    border-bottom: 1px solid #dddddd; }
+    table#order tr.note td {
+      padding-left: 20px; }
 
 #newComment {
   margin: 1em; }
 
 .comment {
   border-bottom: 1px dotted black;
-  padding: .5em 0 1em .5em; }
+  padding: 0.5em 0 1em 0.5em; }
   .comment .timestamp {
     font-size: 0.8em;
     color: grey; }
 
 #editOrderNav a {
-  color: #fff;
+  color: white;
   font-weight: bold; }
 #editOrderNav ul {
   margin: 0;
@@ -511,35 +446,34 @@ ul.autocomplete .informal {
 .stats-bar {
   height: 20px;
   min-width: 10px;
-  border: 1px solid #DDDDDD;
-  background-color: #fff;
+  border: 1px solid #dddddd;
+  background-color: white;
   text-align: center;
   margin: 0 10px 10px 0; }
-
-#wiki_content {
-  border-style: none;
-  color: black;
-  line-height: 1.5em; }
 
 .wiki_show, .wiki_version, .wiki_new, .wiki_edit, .wiki_all {
   margin-top: 30px;
   padding: 10px; }
-  .wiki_show h1, .wiki_version h1, .wiki_new h1, .wiki_edit h1, .wiki_all h1 {
-    padding-left: 0;
-    padding-top: 10px;
-    border-bottom-style: solid; }
-  .wiki_show .column_content, .wiki_version .column_content, .wiki_new .column_content, .wiki_edit .column_content, .wiki_all .column_content {
-    margin-bottom: 0; }
 
 #wiki_content {
+  border: 1px solid grey;
+  margin-right: 300px;
+  padding: 10px;
+  color: black;
+  line-height: 1.5em;
   min-height: 400px; }
   #wiki_content span.editsection {
     display: none; }
+  #wiki_content h1 {
+    padding-left: 0;
+    padding-top: 10px;
+    border: none;
+    margin-bottom: 10px; }
   #wiki_content h2, #wiki_content h3, #wiki_content h4, #wiki_content h5, #wiki_content h6 {
     background: transparent none repeat scroll 0 0;
-    border-bottom: 1px solid #AAAAAA;
-    padding-bottom: 0,17em;
-    padding-top: 0,5em;
+    border-bottom: 1px solid #aaaaaa;
+    padding-bottom: 0, 17em;
+    padding-top: 0, 5em;
     font-weight: normal;
     font-size: 150%;
     color: black; }
@@ -559,6 +493,8 @@ ul.autocomplete .informal {
     margin: 0.3em 0 0 3.2em;
     padding: 0;
     list-style-image: none; }
+  #wiki_content li {
+    margin-bottom: 0.1em; }
 
 a.new_wiki_link {
   color: grey; }
@@ -581,10 +517,10 @@ a.new_wiki_link {
       color: grey; }
 
 #breadcrump {
-  font-size: 0.8em;
-  margin-bottom: 3px;
+  font-size: 0.5em;
+  margin-bottom: 5px;
   height: 1em;
-  color: #ED0606; }
+  color: #ed0606; }
   #breadcrump a {
     color: #ed0606;
     text-decoration: none; }
@@ -593,8 +529,7 @@ a.new_wiki_link {
 
 #sidebar {
   float: right;
-  width: 290px;
-  margin-top: -60px; }
+  width: 290px; }
   #sidebar #sidebar-links {
     margin-bottom: 18px;
     text-align: right; }

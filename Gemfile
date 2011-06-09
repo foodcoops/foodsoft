@@ -7,6 +7,7 @@ gem 'mysql'
 gem "fastercsv"
 gem "prawn", '<=0.6.3'
 gem 'haml'
+gem 'sass'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'jquery-rails'
 gem 'client_side_validations'

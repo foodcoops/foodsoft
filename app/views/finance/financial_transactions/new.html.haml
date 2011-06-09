@@ -1,0 +1,9 @@
+- title "Neue Transaktion"
+
+= simple_form_for @financial_transaction, :url => finance_ordergroup_transactions_path(@ordergroup),
+  :validate => true do |f|
+  = f.association :ordergroup
+  = f.input :amount
+  = f.input :note, :as => :text
+  = f.submit
+  = link_to "oder abbrechen", finance_ordergroup_transactions_path(@ordergroup)

@@ -4,14 +4,15 @@ class FinancialTransaction < ActiveRecord::Base
   belongs_to :ordergroup
   belongs_to :user
   
-  validates_presence_of :note, :user_id, :ordergroup_id
+  validates_presence_of :amount, :note, :user_id, :ordergroup_id
   validates_numericality_of :amount
 
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def amount=(amount)
-    self[:amount] = String.delocalized_decimal(amount)
-  end
+  localize_input_of :amount
 
+  # Use this save method instead of simple save and after callback
+  def add_transaction!
+    ordergroup.add_financial_transaction! amount, note, user
+  end
 end
 
 # == Schema Information

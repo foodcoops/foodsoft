@@ -1,9 +1,10 @@
 - content = wikified_body @page.body, @page.title
 - toc = generate_toc @page.body
+
 - unless toc.blank?
   #wikitoc
-    %h2 
+    %h2
       Inhaltsverzeichnis
       %span= link_to_function "[verstecken]", "Element.toggle('wikitoc-content')"
     #wikitoc-content= toc
-#wiki_content= content
+= content

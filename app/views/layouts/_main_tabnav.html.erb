@@ -43,10 +43,10 @@
         ]
       },
       { :name => "Finanzen", :url => finance_root_path,
-        :active => ["finance/invoices", "finance/transactions", "finance/balancing"],
+        :active => ["finance/"],
         :access_denied? => (!u.role_finance?),
         :subnav => [
-          { :name => "Konten verwalten", :url => finance_transactions_path },
+          { :name => "Konten verwalten", :url => finance_ordergroups_path },
           { :name => "Bestellungen abrechnen", :url => finance_balancing_path },
           { :name => "Rechnungen", :url => finance_invoices_path }
         ]

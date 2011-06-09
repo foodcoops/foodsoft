@@ -1,0 +1,34 @@
+- title "Mehrer Konten aktualisieren"
+
+- content_for :head do
+  :javascript
+    var ordergroup = "#{escape_javascript(render('ordergroup'))}"
+
+    $(function() {
+      $('a[data-remove-transaction]').live('click', function() {
+        $(this).parents('tr').remove();
+        return false;
+      });
+
+      $('a[data-add-transaction]').click(function() {
+        $('#ordergroups').append(ordergroup);
+        return false;
+      });
+    });
+
+- form_tag finance_create_transaction_collection_path do
+  %p
+    %b Notiz
+    = text_field_tag :note
+  %p
+    %table#ordergroups{:style => "width:20em"}
+      %tr
+        %th Bestellgruppe
+        %th Betrag
+      = render :partial => 'ordergroup', :collection => [1, 2, 3]
+  
+  %p
+    = link_to "Neue Bestellgruppe hinzufügen", '#', 'data-add-transaction' => true
+  %p
+    = submit_tag "Transaktionen speichern"
+    = link_to "oder abbrechen", finance_ordergroups_path

@@ -38,11 +38,11 @@ class Ordergroup < Group
 
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.
-  def add_financial_transaction(amount, note, user)
+  def add_financial_transaction!(amount, note, user)
     transaction do      
       trans = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
       trans.save!
-      self.account_balance += trans.amount
+      self.account_balance = financial_transactions.sum('amount')
       self.account_updated = trans.created_on
       save!
       notify_negative_balance(trans) 

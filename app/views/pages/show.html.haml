@@ -10,9 +10,6 @@
     %span.wikiSeparator &gt;
     = @page.title
 
-  %h1
-    = @page.title
-
   #sidebar
     #sidebar-links
       = link_to "Bearbeiten", edit_page_path(@page)
@@ -38,7 +35,10 @@
             - for page in @page.children
               %li= link_to_wikipage(page)
 
-  = render :partial => 'body'
+  #wiki_content
+    %h1
+      = @page.title
+    = render :partial => 'body'
 
   %hr.clear/
   %p

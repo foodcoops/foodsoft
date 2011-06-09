@@ -1,0 +1,18 @@
+- title "Kontoauszug für #{@ordergroup.name}"
+%p
+  %b
+    Kontostand: #{number_to_currency(@ordergroup.account_balance)}
+  %span{:style => "color:grey"}
+    (zuletzt aktualisiert vor #{distance_of_time_in_words(Time.now, @ordergroup.account_updated)})
+.left_column{:style => "width:100%"}
+  .box_title
+    %h2 Überweisungen
+  .column_content
+    = form_tag finance_ordergroup_transactions_path(@ordergroup), :method => :get, :style=>"display:inline;", :id => 'ordergroup_search',
+      :remote => true, 'data-submit-onchange' => true do
+      %label{:for => 'article_name'} Suche in Notiz:
+      = text_field_tag :query, params[:query], :size => 10
+    #transactions
+      = render :partial => "transactions"
+    %p= link_to 'Neue Transaktion', new_finance_ordergroup_transaction_path(@ordergroup)
+  = link_to 'Gruppenübersicht', finance_ordergroups_path

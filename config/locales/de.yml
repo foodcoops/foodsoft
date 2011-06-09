@@ -163,6 +163,7 @@ de:
       stock_article: Lagerartikel
       delivery: Lieferung
       stock_taking: Inventur
+      financial_transaction: Kontotransaktion
     attributes:
       article:
         price: Nettopreis
@@ -215,6 +216,8 @@ de:
       email: 'E-Mail'
       note: 'Notiz'
       date: 'Datum'
+      ordergroup: 'Bestellgruppe'
+      amount: 'Betrag'
       workgroup:
         weekly_task: 'Monatlichen Job definieren?'
         weekday: 'Wochentag'
