@@ -228,6 +228,10 @@ de:
         task_duration: 'Vor. Dauer in Stunden'
         task_description: 'Beschreibung'
         user_tokens: 'Mitglieder'
+      ordergroup:
+        contact_person: "Kontaktperson"
+        contact_phone: "Telefon"
+        contact_address: "Adresse"
       task:
         duration: 'Dauer'
         user_list: 'Verantwortliche'

@@ -23,49 +23,4 @@ class Admin::UsersController < Admin::BaseController
       format.js { render :layout => false } # index.js.erb
     end
   end
-
-#  def show
-#    @user = User.find(params[:id])
-#  end
-#
-#  def new
-#    @user = User.new
-#  end
-#
-#  def create
-#    @user = User.new(params[:user])
-#    if @user.save
-#      flash[:notice] = 'Benutzerin wurde erfolgreich angelegt.'
-#      redirect_to admin_users_path
-#    else
-#      render :action => 'new'
-#    end
-#  end
-#
-#  def edit
-#    @user = User.find(params[:id])
-#  end
-#
-#  def update
-#    @user = User.find(params[:id])
-#    if @user.update_attributes(params[:user])
-#      flash[:notice] = 'Änderungen wurden gespeichert.'
-#      redirect_to [:admin, @user]
-#    else
-#      render :action => 'edit'
-#    end
-#  end
-#
-#  def destroy
-#    user = User.find(params[:id])
-#    if user.nick == @current_user.nick
-#      # deny destroying logged-in-user
-#      flash[:error] = 'Du darfst Dich nicht selbst löschen.'
-#    else
-#      user.destroy
-#      flash[:notice] = 'Benutzer_in wurde gelöscht.'
-#    end
-#    redirect_to admin_users_path
-#  end
-
 end

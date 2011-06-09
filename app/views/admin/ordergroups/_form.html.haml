@@ -1,20 +1,7 @@
-- form_for [:admin, @ordergroup] do |@form|
-  - render :layout => 'shared/group_form' do
-    %div{:style => "float:right;width:40%"}
-      %p
-        = @form.label :contact_person
-        %br/
-        = @form.text_field :contact_person, :size => 20
-      %p
-        = @form.label :contact_phone
-        %br/
-        = @form.text_field :contact_phone, :size => 20
-      %p
-        = @form.label :contact_address
-        %br/
-        = @form.text_field :contact_address
-
-  %br{ :style => "clear:both" }
-  = submit_tag "Speichern"
-  |
-  = link_to "Abbrechen", admin_ordergroups_path
+= simple_form_for [:admin, @ordergroup] do |f|
+  = render :layout => 'shared/group_form_fields', :locals => {:f => f} do
+    = f.input :contact_person
+    = f.input :contact_phone
+    = f.input :contact_address
+  = f.submit
+  = link_to "oder abbrechen", admin_ordergroups_path

@@ -3,9 +3,8 @@
 class Group < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :users, :through => :memberships
-  
-  validates_length_of :name, :in => 1..25
-  validates_uniqueness_of :name
+
+  validates :name, :presence => true, :length => {:in => 1..25}, :uniqueness => true
   validate :last_admin_on_earth, :on => :update
 
   before_destroy :check_last_admin_group

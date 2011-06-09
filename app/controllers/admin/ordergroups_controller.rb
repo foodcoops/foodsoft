@@ -1,66 +1,27 @@
 class Admin::OrdergroupsController < Admin::BaseController
+  inherit_resources
   
   def index
+    @ordergroups = Ordergroup.order(:name.asc)
+
+    # if somebody uses the search field:
+    unless params[:query].blank?
+      @ordergroups = @ordergroups.where(:name.matches => "%#{params[:query]}%")
+    end
+
+    # sort by nick, thats default
     if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
       @per_page = params[:per_page].to_i
     else
       @per_page = 20
     end
 
-    # if the search field is used
-    conditions = "name LIKE '%#{params[:query]}%'" unless params[:query].nil?
-
-    @total = Ordergroup.without_deleted.count(:conditions => conditions )
-    @ordergroups = Ordergroup.without_deleted.paginate(:conditions => conditions, :page => params[:page],
-      :per_page => @per_page, :order => 'name')
+    @ordergroups = @ordergroups.paginate(:page => params[:page], :per_page => @per_page)
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.js { render :partial => "ordergroups" }
+      format.html # index.html.haml
+      format.js { render :layout => false } # index.js.erb
     end
-  end
-
-
-  def show
-    @ordergroup = Ordergroup.find(params[:id])
-  end
-
-  def new
-    @ordergroup = Ordergroup.new
-  end
-
-  def edit
-    @ordergroup = Ordergroup.find(params[:id])
-  end
-
-  def create
-    @ordergroup = Ordergroup.new(params[:ordergroup])
-    @ordergroup.account_updated = Time.now
-    
-    if @ordergroup.save
-      flash[:notice] = 'Ordergroup was successfully created.'
-      redirect_to([:admin, @ordergroup])
-    else
-      render :action => "new"
-    end
-  end
-
-  def update
-    @ordergroup = Ordergroup.find(params[:id])
-
-    if @ordergroup.update_attributes(params[:ordergroup])
-      flash[:notice] = 'Ordergroup was successfully updated.'
-      redirect_to([:admin, @ordergroup])
-    else
-      render :action => "edit"
-    end
-  end
-
-  def destroy
-    @ordergroup = Ordergroup.find(params[:id])
-    @ordergroup.destroy
-
-    redirect_to(admin_ordergroups_url)
   end
 
   def memberships

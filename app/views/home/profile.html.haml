@@ -1,0 +1,22 @@
+- title "Mein Profil"
+%p
+  Hier kannst Du deine Einstellungen ändern, z.b. Deine Telphonnummer oder Dein Passwort.
+.left_column{:style => "width: 60%;"}
+  .box_title
+    %h2
+      = h @user.nick
+      %small
+        (Mitglied seit: #{distance_of_time_in_words(Time.now, @user.created_on)})
+  .column_content
+    - simple_form_for(@user, :url => { :action => 'update_profile'}) do |f|
+      = render :partial => 'shared/user_form_fields', :locals => {:f => f}
+      = submit_tag 'Speichern'
+.right_column{:style => "width: 35%;"}
+  .box_title
+    %h2 Du bist Mitglied in folgenden Gruppen
+  .column_content
+    - for membership in Membership.find_all_by_user_id(@user.id)
+      %p
+        = membership.group.name
+        - if membership.group.type != 'Ordergroup'
+          (#{link_to _("Mitgliedschaft beenden"), { :action => 'cancel_membership', :membership_id => membership }, :confirm => _("Bist Du sicher, dass Du Deine Mitgliedschaft beenden willst?"), :method => :post})

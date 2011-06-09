@@ -1,0 +1,31 @@
+= f.input :name
+= f.input :description
+
+= yield
+
+- if f.object.is_a?(Workgroup)
+  %h3 Wöchentliche Jobs definieren?
+  = f.input :weekly_task
+  #weekly_task_fields
+    = f.input :weekday
+    = f.input :task_name
+    = f.input :task_required_users
+    = f.input :task_duration, :as => :select, :collection => (1..3)
+    = f.input :task_description
+
+- content_for :head do
+  :javascript
+    function toggleWeeklyTaskFields() {
+      if ($('#workgroup_weekly_task').attr('checked') == 'checked') {
+        $('#weekly_task_fields div.input').show();
+      } else {
+        $('#weekly_task_fields div.input').hide();
+      }
+    }
+
+    $(function() {
+      toggleWeeklyTaskFields();
+      $('#workgroup_weekly_task').click(function() {
+        toggleWeeklyTaskFields();
+      })
+    })
