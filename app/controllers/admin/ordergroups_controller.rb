@@ -16,4 +16,12 @@ class Admin::OrdergroupsController < Admin::BaseController
       format.js { render :layout => false } # index.js.erb
     end
   end
+
+  def destroy
+    @ordergroup = Ordergroup.find(params[:id])
+    @ordergroup.destroy
+    redirect_to admin_ordergroups_url, :notice => "Bestellgruppe wurde gelöscht"
+  rescue => error
+    redirect_to admin_ordergroups_url, :alert => "Bestellgruppe konnte nicht gelöscht werden: #{error}"
+  end
 end
