@@ -191,8 +191,7 @@ class OrderingController < ApplicationController
   def ensure_ordergroup_member
     @ordergroup = @current_user.ordergroup
     if @ordergroup.nil?
-      flash[:notice] = 'Sie gehören keiner Bestellgruppe an.'
-      redirect_to :controller => root_path
+      redirect_to root_url, :alert => "Du bist kein Mitglieder einer Bestellgruppe."
     end
   end
 
