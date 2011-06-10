@@ -28,7 +28,7 @@ module ApplicationHelper
     next_label = "Nächste" + ' &raquo;'
     # Merge other url-options for will_paginate
     params = params.merge({:per_page => per_page})
-    will_paginate collection, :params => params, 'data-remote' => remote,
+    will_paginate collection, :params => params, 'data-remote' => true,
       :previous_label => previous_label, :next_label => next_label
   end
   
@@ -36,23 +36,13 @@ module ApplicationHelper
   def items_per_page(options = {})
     per_page_options = options[:per_page_options] || [20, 50, 100]
     current = options[:current] || @per_page
-    action = options[:action] || controller.action_name
-    update = options[:update] || nil
+    params = params || {}
 
-    links = []
-    per_page_options.each do |per_page|
-      unless per_page == current
-        links << link_to_remote(
-          per_page,
-          { :url => { :action => action, :params => {:per_page => per_page}},
-            :before => "Element.show('loader')",
-            :success => "Element.hide('loader')",
-            :method => :get, :update => update } )
-      else
-        links << per_page 
-      end
+    links = per_page_options.map do |per_page|
+      params.merge!({:per_page => per_page})
+      per_page == current ? per_page : link_to(per_page, params, :remote => true)
     end
-    return "Pro Seite: " + links.join(" ")
+    "Pro Seite: #{links.join(" ")}".html_safe
   end
   
   def sort_td_class_helper(param)
@@ -63,7 +53,6 @@ module ApplicationHelper
 
   def sort_link_helper(text, key, options = {})
     per_page = options[:per_page] || 10
-    action = options[:action] || "list"
     remote = options[:remote].nil? ? true : options[:remote]
     key += "_reverse" if params[:sort] == key
     url = url_for(:sort => key, :page => nil, :per_page => per_page)

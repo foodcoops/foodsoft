@@ -2,10 +2,9 @@
   %table{:style => "width:100%"}
     %tr
       %td
-        = pagination_links_remote @ordergroups, { :update => "ordergroups" }
+        = pagination_links_remote @ordergroups
       %td{:style => "text-align:right"}
-        - if @ordergroups.size > 20
-          = items_per_page :update => "ordergroups"
+        = items_per_page
 %table.list
   %thead
     %tr
