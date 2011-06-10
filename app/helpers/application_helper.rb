@@ -22,15 +22,14 @@ module ApplicationHelper
   def pagination_links_remote(collection, options = {})
     per_page = options[:per_page] || @per_page
     params = options[:params] || {}
-    update = options[:update] || nil
 
     # Translations
     previous_label = '&laquo; ' + "Vorherige"
     next_label = "Nächste" + ' &raquo;'
     # Merge other url-options for will_paginate
     params = params.merge({:per_page => per_page})
-    will_paginate collection, { :params => params, :remote => true, :update => update,
-      :previous_label => previous_label, :next_label => next_label, }
+    will_paginate collection, :params => params, 'data-remote' => remote,
+      :previous_label => previous_label, :next_label => next_label
   end
   
   # Link-collection for per_page-options when using the pagination-plugin

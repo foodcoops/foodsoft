@@ -60,6 +60,12 @@ $(function() {
             document.location.href = newLocation;
         }
     });
+
+    // Remote paginations
+    $('div.pagination[data-remote] a').live('click', function() {
+        $.getScript($(this).attr('href'));
+        return false;
+    });
 });
 
 
