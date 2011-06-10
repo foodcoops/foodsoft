@@ -3,7 +3,7 @@
 = f.input :last_name
 = f.input :email
 = f.input :phone
-= f.input :password
+= f.input :password, :required => @user.new_record?
 = f.input :password_confirmation
 - for setting in User::setting_keys.keys
   .input.boolean

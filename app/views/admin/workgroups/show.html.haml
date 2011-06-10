@@ -10,5 +10,5 @@
       |
       = link_to 'Löschen', [:admin, @workgroup], :confirm => 'Bist Du sicher?', :method => :delete
       |
-      = link_to 'Nachricht senden', new_message_path(:message => {:group_id => @ordergroup.id})
+      = link_to 'Nachricht senden', new_message_path(:message => {:group_id => @workgroup.id})
 %p{:style => "clear:both"}= link_to "Gruppenübersicht", admin_workgroups_path
