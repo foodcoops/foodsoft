@@ -2,11 +2,6 @@ class Finance::OrdergroupsController < ApplicationController
   before_filter :authenticate_finance
   
   def index
-    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
-      @per_page = params[:per_page].to_i
-    else
-      @per_page = 20
-    end
     if params["sort"]
       sort = case params["sort"]
                when "name" then "name"

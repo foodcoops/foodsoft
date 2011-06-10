@@ -2,10 +2,9 @@
   %table{:style => "width:100%"}
     %tr
       %td
-        = pagination_links_remote @workgroups, { :update => "workgroups" }
+        = pagination_links_remote @workgroups
       %td{:style => "text-align:right"}
-        - if @total.size > 20
-          = items_per_page :update => "workgroups"
+        = items_per_page
 %table.list
   %thead
     %tr
@@ -20,7 +19,7 @@
         %td= workgroup.users.size
         %td= format_roles(workgroup)
         %td
-          = link_to image_tag('b_users.png', :size => '16x16',  :border => "0", :alt => 'Mitlglieder bearbeiten'), memberships_admin_workgroup_path(workgroup)
-          = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Gruppe bearbeiten'), edit_admin_workgroup_path(workgroup))
-          = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Gruppe löschen'), [:admin, workgroup], |
-                         :confirm => 'Willst du ' + workgroup.name + ' wirklich löschen?', :method => :delete) |
+          = link_to icon(:members), memberships_admin_workgroup_path(workgroup)
+          = link_to icon(:edit), edit_admin_workgroup_path(workgroup)
+          = link_to icon(:delete), [:admin, workgroup], :confirm => 'Willst du ' + workgroup.name + ' wirklich löschen?',
+            :method => :delete

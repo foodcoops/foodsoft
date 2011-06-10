@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-  before_filter :select_foodcoop, :authenticate, :store_controller
+  before_filter :select_foodcoop, :authenticate, :store_controller, :items_per_page
   after_filter  :remove_controller
 
   helper_method :current_user
@@ -134,6 +134,14 @@ class ApplicationController < ActionController::Base
     else
       # Deactivate routing filter
       RoutingFilter::Foodcoop.active = false
+    end
+  end
+
+  def items_per_page
+    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 20
     end
   end
 end

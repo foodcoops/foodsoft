@@ -2,12 +2,6 @@ class ArticlesController < ApplicationController
   before_filter :authenticate_article_meta, :find_supplier
 
   def index
-    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 500)
-      @per_page = params[:per_page].to_i
-    else
-      @per_page = 30
-    end
-
     if params['sort']
     sort = case params['sort']
              when "name"  then "articles.name"

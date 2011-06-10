@@ -9,13 +9,6 @@ class Admin::OrdergroupsController < Admin::BaseController
       @ordergroups = @ordergroups.where(:name.matches => "%#{params[:query]}%")
     end
 
-    # sort by nick, thats default
-    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
-      @per_page = params[:per_page].to_i
-    else
-      @per_page = 20
-    end
-
     @ordergroups = @ordergroups.paginate(:page => params[:page], :per_page => @per_page)
 
     respond_to do |format|

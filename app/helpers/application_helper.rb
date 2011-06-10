@@ -91,8 +91,11 @@ module ApplicationHelper
   end
 
   def icon(name, options={})
-    icons = { :delete => { :file => 'b_drop.png', :alt => 'Löschen'},
-              :edit   => { :file => 'b_edit.png', :alt => 'Bearbeiten'}}
+    icons = {
+        :delete  => { :file => 'b_drop.png', :alt => 'Löschen'},
+        :edit    => { :file => 'b_edit.png', :alt => 'Bearbeiten'},
+        :members => { :file => 'b_users.png', :alt => 'Mitlglieder bearbeiten'}
+    }
     options[:alt] ||= icons[name][:alt]
     options[:title] ||= icons[name][:title]
     options.merge!({:size => '16x16',:border => "0"})

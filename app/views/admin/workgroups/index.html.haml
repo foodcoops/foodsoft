@@ -18,17 +18,9 @@
     %h2 Gruppenübersicht
   .column_content
     #group_filter
-      %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
-        %label{:for => 'workgroup_name'} Suche in Name :
-        = text_field_tag("query", params['query'], :size => 10 )
-        
-      = observe_field 'query',  :frequency => 2, |
-        :before => "Element.show('loader')", |
-        :success => "Element.hide('loader')", |
-        :update => "workgroups", |
-        :url => admin_workgroups_path, |
-        :with => 'query', |
-        :method => :get |
+      = form_tag admin_workgroups_path, :method => :get, :style=>"display:inline;", :id => 'ordergroup_search',
+      :remote => true, 'data-submit-onchange' => true do
+        %label{:for => 'article_name'} Suche nach Name:
+        = text_field_tag :query, params[:query], :size => 10
     #workgroups
       = render :partial => "workgroups"
-  = link_to 'Neue Arbeits', new_admin_workgroup_path
