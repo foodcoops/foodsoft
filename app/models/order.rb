@@ -37,12 +37,12 @@ class Order < ActiveRecord::Base
 
   def articles_for_ordering
     if stockit?
-      StockArticle.available.without_deleted(:include => :article_category,
+      StockArticle.available.all(:include => :article_category,
         :order => 'article_categories.name, articles.name').reject{ |a|
         a.quantity_available <= 0
       }.group_by { |a| a.article_category.name }
     else
-      supplier.articles.available.without_deleted.group_by { |a| a.article_category.name }
+      supplier.articles.available.all.group_by { |a| a.article_category.name }
     end
   end
 

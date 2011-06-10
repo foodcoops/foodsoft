@@ -21,7 +21,7 @@ $(function() {
         return false;
     });
 
-    // Check/Uncheck all checkboxes for s specific form
+    // Check/Uncheck all checkboxes for a specific form
     $('input[data-check-all]').live('click', function() {
         var status = $(this).is(':checked')
         $($(this).data('check-all')).find('input[type="checkbox"]').each(function() {

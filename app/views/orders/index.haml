@@ -1,12 +1,12 @@
 - title "Bestellungen verwalten"
 
-- if @current_user.role_orders?
-  %p
-    - form_tag do
-      Neue Bestellung anlegen für
-      %select{:onchange => "redirectTo(this)", :style => "font-size: 0.9em;margin-left:1em;"}
-        %option{:selected => 'selected'} Lieferantin auswählen...
-        = options_for_suppliers_to_select
+%p
+  - form_tag do
+    Neue Bestellung anlegen für
+    = select_tag :switch_supplier,
+      options_for_suppliers_to_select,
+      :style => "font-size: 0.9em;margin-left:1em;",
+      'data-redirect-to' => true
 %br/
 .left_column{:style => "width:55em"}
   .box_title
