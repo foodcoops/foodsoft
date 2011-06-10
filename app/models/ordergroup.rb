@@ -12,6 +12,7 @@ class Ordergroup < Group
   has_many :orders, :through => :group_orders
 
   validates_numericality_of :account_balance, :message => 'ist keine gültige Zahl'
+  validate :uniqueness_of_members
 
   after_create :update_stats!
 
@@ -76,6 +77,13 @@ class Ordergroup < Group
       for user in users
         Mailer.negative_balance(user,transaction).deliver if user.settings["notify.negativeBalance"] == '1'
       end
+    end
+  end
+
+  # Make sure, that a user can only be in one ordergroup
+  def uniqueness_of_members
+    users.each do |user|
+      errors.add :user_tokens, "#{user.nick} ist schon in einer anderen Bestellgruppe" if user.groups.where(:type => 'Ordergroup').size > 1
     end
   end
   

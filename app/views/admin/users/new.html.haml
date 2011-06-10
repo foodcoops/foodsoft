@@ -4,7 +4,7 @@
   .box_title
     %h2 Neue Benutzerin
   .column_content#userForm
-    - simple_form_for([:admin, @user]) do |f|
+    = simple_form_for([:admin, @user]) do |f|
       = render :partial => 'shared/user_form_fields', :locals => {:f => f}
       = f.submit
       = link_to 'oder abbrechen', admin_users_path

@@ -220,6 +220,7 @@ de:
       ordergroup: 'Bestellgruppe'
       amount: 'Betrag'
       phone: "Telefon"
+      user_tokens: 'Mitglieder'
       workgroup:
         weekly_task: 'Monatlichen Job definieren?'
         weekday: 'Wochentag'
@@ -227,7 +228,11 @@ de:
         task_required_users: 'Benötige Verantwortliche'
         task_duration: 'Vor. Dauer in Stunden'
         task_description: 'Beschreibung'
-        user_tokens: 'Mitglieder'
+        role_admin: "Administration"
+        role_finance: "Fianzen"
+        role_suppliers: "Lieferanten"
+        role_article_meta: "Artikeldatenbank"
+        role_orders: "Bestellverwaltung"
       ordergroup:
         contact_person: "Kontaktperson"
         contact_phone: "Telefon"

@@ -19,7 +19,6 @@
         %td= workgroup.users.size
         %td= format_roles(workgroup)
         %td
-          = link_to icon(:members), memberships_admin_workgroup_path(workgroup)
           = link_to icon(:edit), edit_admin_workgroup_path(workgroup)
           = link_to icon(:delete), [:admin, workgroup], :confirm => 'Willst du ' + workgroup.name + ' wirklich löschen?',
             :method => :delete

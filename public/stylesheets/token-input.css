@@ -3,7 +3,7 @@ ul.token-input-list {
     overflow: hidden; 
     height: auto !important; 
     height: 1%;
-    width: 400px;
+    width: 300px;
     border: 1px solid #999;
     cursor: text;
     font-size: 12px;
@@ -13,7 +13,6 @@ ul.token-input-list {
     padding: 0;
     background-color: #fff;
     list-style-type: none;
-    clear: left;
 }
 
 ul.token-input-list li {

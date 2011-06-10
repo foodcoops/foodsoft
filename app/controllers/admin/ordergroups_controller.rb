@@ -16,8 +16,4 @@ class Admin::OrdergroupsController < Admin::BaseController
       format.js { render :layout => false } # index.js.erb
     end
   end
-
-  def memberships
-    @group = Ordergroup.find(params[:id])
-  end
 end

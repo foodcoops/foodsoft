@@ -5,11 +5,9 @@
   .column_content
     = render :partial => 'shared/group', :locals => { :group => @ordergroup }
     %p
-      = link_to 'Gruppe bearbeiten', edit_admin_ordergroup_path(@ordergroup)
+      = link_to 'Gruppe/Mitglieder bearbeiten', edit_admin_ordergroup_path(@ordergroup)
       |
       = link_to 'Löschen', [:admin, @ordergroup], :confirm => 'Bist Du sicher?', :method => :delete
       |
-      = link_to 'Nachricht senden', :controller => 'messages', :action => 'group', :id => @ordergroup
-      |
-      = link_to 'Mitglieder bearbeiten', memberships_admin_ordergroup_path(@ordergroup)
+      = link_to 'Nachricht senden', new_message_path(:message => {:group_id => @ordergroup.id})
 %p{:style => "clear:both"}= link_to "Gruppenübersicht", admin_ordergroups_path

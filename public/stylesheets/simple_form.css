@@ -7,6 +7,7 @@
 
 .simple_form div.input {
     margin-bottom: 10px;
+    clear: both;
 }
 
 .simple_form div.boolean, .simple_form input[type='submit'] {

@@ -6,6 +6,9 @@ class Workgroup < Group
 
   validates_presence_of :task_name, :weekday, :task_required_users,
     :if => Proc.new {|workgroup| workgroup.weekly_task }
+  validate :last_admin_on_earth, :on => :update
+  before_destroy :check_last_admin_group
+
 
   def self.weekdays
     [["Montag", "1"], ["Dienstag", "2"], ["Mittwoch","3"],["Donnerstag","4"],["Freitag","5"],["Samstag","6"],["Sonntag","0"]]
@@ -41,6 +44,23 @@ class Workgroup < Group
         :duration => task_duration,
         :weekly => true
     }
+  end
+
+  protected
+
+  # Check before destroy a group, if this is the last group with admin role
+  def check_last_admin_group
+    if role_admin && Workgroup.where(:role_admin => true).size == 1
+      raise "Die letzte Gruppe mit Admin-Rechten darf nicht gelöscht werden"
+    end
+  end
+
+  # add validation check on update
+  # Return an error if this is the last group with admin role and role_admin should set to false
+  def last_admin_on_earth
+    if !role_admin  && Workgroup.where(:role_admin => true, :id.ne => id).empty?
+      errors.add(:role_admin, "Der letzten Gruppe mit Admin-Rechten darf die Admin-Rolle nicht entzogen werden")
+    end
   end
   
 end
