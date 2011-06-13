@@ -6,7 +6,7 @@ $lightGrey: #efefef
 $darkGreen: #78b74e
 $lightGreen: #e4eed6
 
-/* General rules ... */
+// General rules ...
 body
   :background-color #fff
   :color black
@@ -26,17 +26,17 @@ body
   :border
     :width 2px
     :style solid 
-    :color $main_red
+    color: $main_red
 
 a, a:visited
   :text-decoration underline
   :color black
 
 a:hover
-  :color $main_red
+  color: $main_red
 
 h1, h2
-  :color $main_red
+  color: $main_red
 
 h1
   :font-size 2.2em
@@ -46,7 +46,7 @@ h1
   :border-bottom 
     :width 1px
     :style dotted 
-    :color $main_red
+    color: $main_red
 
 h2
   :font-size 1.4em
@@ -90,14 +90,20 @@ option
 
 span.click-me
   cursor: pointer
-
+.left
+  float: left
+.right
+  float: right
 .clear
   clear: both
 
 .description
   color: grey
   font-size: 0.9em
-    
+
+.hidden
+  display: none
+
 // ********************************* loginpage
 #login
   :margin auto
@@ -118,7 +124,7 @@ span.click-me
 
 
 #logo 
-  :background $main_red
+  background: $main_red
   :height 1.1em
   :width 8em
   :padding 0 20px
@@ -130,17 +136,17 @@ span.click-me
   :margin 0
   a, a:hover
     :color white
-    :background-color $main_red
+    background-color: $main_red
     :text-decoration none
   a span
-    :color $main_red
+    color: $main_red
     :background #FFF
     :padding-right 0.1em
     :font-weight bold
     :border-top
       :width 2px
       :style dotted 
-      :color $main_red
+      color: $main_red
     
 #logininfo
   :position absolute
@@ -156,7 +162,7 @@ span.click-me
     :color #737272
     :font-weight bold
   a:hover 
-    :color $main_red
+    color: $main_red
     
 // *************************************  box structure
 #main 
@@ -264,6 +270,12 @@ table
     :background-color #ffffc2
   tr.click-me
     :cursor pointer
+  tr.ignored
+    color: grey
+  tr.success
+    color: green
+  tr.failed
+    color: red
       
 table.list
   //:border 2px solid #78b74e
@@ -278,7 +290,7 @@ table tfoot tr
     :padding-top 0.8em
 
 tr.edit_inline
-  :background-color $hover_yellow
+  background-color: $hover_yellow
   td, span
     :padding 0.5em 0.2em
 
@@ -314,7 +326,7 @@ td.closed
 td.open
   background: url(/images/arrow_down_red.png) no-repeat center left
 
-// ************************************* for edit formulars */
+// ************************************* for edit formulars
 div.edit_form
   :border 2px solid #e3e3e3
   :background #f5f5f5
@@ -333,7 +345,7 @@ div.edit_form
   :border 
     :width 3px
     :style solid
-    :color $main_red
+    color: $main_red
   
 // ***************************************** other boxes */
 
@@ -372,7 +384,7 @@ div.box_title
     :font-size 1.3em 
 
 div.column_content 
-  :background $boxContent
+  background: $boxContent
   :color black
   :padding 10px
   margin-bottom: 2em
@@ -419,30 +431,76 @@ span.total
 table#order
   :text-align center
   input
-    :font-size 80% 
+    font-size: 0.9em
+    font-weight: bolder
+    background-color: #78B74E
+    color: #fff
+    -moz-border-radius: 3px
+    -webkit-border-radius: 3px
+    padding: 0
   th#col_required, th#col_tolerance
-    :width 145px 
+    :width 140px
   th#col_packages,  th#col_left_units
-    :width 50px 
+    :width 50px
+  td.quantity, td.tolerance
+    text-align: right
   td#col_left_units
     :color #ed0606
   td
     :padding 0.6em
-  td.name, tr.note td
+  td.name
     :text-align left
     :padding-left 10px
   tfoot
     tr
-      :background-color $lightGreen
+      background-color: $lightGreen
     td
       :padding-right 10px
-  tr.note
-    :background-color #FBFBFB
-    :font-size 0.9em
-    :border-bottom 1px solid #DDDDDD 
-    td
-      :padding-left 20px
-      
+#order-footer, .article-info
+  text-align: left
+  z-index: 1
+  position: fixed
+  bottom: 0
+  background-color: #E4EED6
+  border-top: 2px solid #78B74E
+  //opacity: 0.95
+  #total-sum
+    width: 22em
+    margin: .5em 2em 0 0
+    float: right
+    #order-button
+      margin: .5em 0
+      input
+        background-color: #78B74E
+        color: #fff
+        -moz-border-radius: 3px
+        -webkit-border-radius: 3px
+      input:disabled
+        background-color: red
+#order-footer
+  width: 100%
+  right: 0
+  left: 0
+.article-info
+  z-index: 2
+  width: 45em
+  height: 8em
+  border: none
+  left: 30px
+  h3
+    text-align: center
+    margin: 0
+    margin-bottom: 5px
+    width: 100%
+  .right
+    width: 35%
+  .left
+    width: 60%
+tr.order-article .article-info
+  display: none
+tr.order-article:hover .article-info
+  display: block
+
 // ********* Comments
 #newComment
   :margin 1em
@@ -498,27 +556,28 @@ ul.autocomplete
   background-color: #fff
   text-align: center
   margin: 0 10px 10px 0
-
+  
 // *** wiki
+#wiki_content
+  border-style: none
+  color: black
+  line-height: 1.5em
+
 .wiki_show, .wiki_version, .wiki_new, .wiki_edit, .wiki_all
   margin-top: 30px
   padding: 10px
-  .column_content
-
-#wiki_content
-  border: 1px solid grey
-  margin-right: 300px
-  padding: 10px
-  color: black
-  line-height: 1.5em
-  min-height: 400px
-  span.editsection
-    display: none
   h1
     padding-left: 0
     padding-top: 10px
-    border: none
-    margin-bottom: 10px
+    border-bottom:
+      :style solid
+  .column_content
+    margin-bottom: 0
+
+#wiki_content
+  min-height: 400px
+  span.editsection
+    display: none
   h2, h3, h4, h5, h6
     background: transparent none repeat scroll 0 0
     border-bottom: 1px solid #AAAAAA
@@ -570,13 +629,14 @@ a.new_wiki_link
   height: 1em
   color: #ED0606
   a
-    :color $main_red
-    :text-decoration none
+    color: $main_red
+    text-decoration: none
   a:hover
-    :text-decoration underline
+    text-decoration: underline
 #sidebar
   float: right
   width: 290px
+  margin-top: -60px
   #sidebar-links
     margin-bottom: 18px
     text-align: right

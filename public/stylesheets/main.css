@@ -1,4 +1,3 @@
-/* General rules ... */
 body {
   background-color: white;
   color: black;
@@ -81,12 +80,21 @@ option {
 span.click-me {
   cursor: pointer; }
 
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
 .clear {
   clear: both; }
 
 .description {
   color: grey;
   font-size: 0.9em; }
+
+.hidden {
+  display: none; }
 
 #login {
   margin: auto;
@@ -239,6 +247,12 @@ table {
     background-color: #ffffc2; }
   table tr.click-me {
     cursor: pointer; }
+  table tr.ignored {
+    color: grey; }
+  table tr.success {
+    color: green; }
+  table tr.failed {
+    color: red; }
 
 table.list tr {
   border: 1px solid #e3e3e3; }
@@ -378,28 +392,78 @@ span.total {
 table#order {
   text-align: center; }
   table#order input {
-    font-size: 80%; }
+    font-size: 0.9em;
+    font-weight: bolder;
+    background-color: #78b74e;
+    color: white;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 0; }
   table#order th#col_required, table#order th#col_tolerance {
-    width: 145px; }
+    width: 140px; }
   table#order th#col_packages, table#order th#col_left_units {
     width: 50px; }
+  table#order td.quantity, table#order td.tolerance {
+    text-align: right; }
   table#order td#col_left_units {
     color: #ed0606; }
   table#order td {
     padding: 0.6em; }
-  table#order td.name, table#order tr.note td {
+  table#order td.name {
     text-align: left;
     padding-left: 10px; }
   table#order tfoot tr {
     background-color: #e4eed6; }
   table#order tfoot td {
     padding-right: 10px; }
-  table#order tr.note {
-    background-color: #fbfbfb;
-    font-size: 0.9em;
-    border-bottom: 1px solid #dddddd; }
-    table#order tr.note td {
-      padding-left: 20px; }
+
+#order-footer, .article-info {
+  text-align: left;
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  background-color: #e4eed6;
+  border-top: 2px solid #78b74e; }
+  #order-footer #total-sum, .article-info #total-sum {
+    width: 22em;
+    margin: 0.5em 2em 0 0;
+    float: right; }
+    #order-footer #total-sum #order-button, .article-info #total-sum #order-button {
+      margin: 0.5em 0; }
+      #order-footer #total-sum #order-button input, .article-info #total-sum #order-button input {
+        background-color: #78b74e;
+        color: white;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px; }
+      #order-footer #total-sum #order-button input:disabled, .article-info #total-sum #order-button input:disabled {
+        background-color: red; }
+
+#order-footer {
+  width: 100%;
+  right: 0;
+  left: 0; }
+
+.article-info {
+  z-index: 2;
+  width: 45em;
+  height: 8em;
+  border: none;
+  left: 30px; }
+  .article-info h3 {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 5px;
+    width: 100%; }
+  .article-info .right {
+    width: 35%; }
+  .article-info .left {
+    width: 60%; }
+
+tr.order-article .article-info {
+  display: none; }
+
+tr.order-article:hover .article-info {
+  display: block; }
 
 #newComment {
   margin: 1em; }
@@ -451,24 +515,25 @@ ul.autocomplete .informal {
   text-align: center;
   margin: 0 10px 10px 0; }
 
+#wiki_content {
+  border-style: none;
+  color: black;
+  line-height: 1.5em; }
+
 .wiki_show, .wiki_version, .wiki_new, .wiki_edit, .wiki_all {
   margin-top: 30px;
   padding: 10px; }
+  .wiki_show h1, .wiki_version h1, .wiki_new h1, .wiki_edit h1, .wiki_all h1 {
+    padding-left: 0;
+    padding-top: 10px;
+    border-bottom-style: solid; }
+  .wiki_show .column_content, .wiki_version .column_content, .wiki_new .column_content, .wiki_edit .column_content, .wiki_all .column_content {
+    margin-bottom: 0; }
 
 #wiki_content {
-  border: 1px solid grey;
-  margin-right: 300px;
-  padding: 10px;
-  color: black;
-  line-height: 1.5em;
   min-height: 400px; }
   #wiki_content span.editsection {
     display: none; }
-  #wiki_content h1 {
-    padding-left: 0;
-    padding-top: 10px;
-    border: none;
-    margin-bottom: 10px; }
   #wiki_content h2, #wiki_content h3, #wiki_content h4, #wiki_content h5, #wiki_content h6 {
     background: transparent none repeat scroll 0 0;
     border-bottom: 1px solid #aaaaaa;
@@ -529,7 +594,8 @@ a.new_wiki_link {
 
 #sidebar {
   float: right;
-  width: 290px; }
+  width: 290px;
+  margin-top: -60px; }
   #sidebar #sidebar-links {
     margin-bottom: 18px;
     text-align: right; }

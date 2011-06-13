@@ -1,0 +1,43 @@
+<script>
+//<![CDATA[
+    $(function() {
+        <% if Foodsoft.config[:tolerance_is_costly]
+    for i in 0...@price.size %>
+        addData(<%= @price[i] %>,
+                <%= @unit[i] %>,
+                <%= @price[i] * (@tolerance[i] + @quantity[i])%>,
+                <%= @others_quantity[i] %>,
+                <%= @others_tolerance[i] %>,
+                <%= @used_quantity[i] %>,
+                0);
+        <%     end
+    else
+    for j in 0...@price.size -%>
+        addData(<%= @price[j] %>,
+                <%= @unit[j] %>,
+                <%= @price[j] * @quantity[j]%>,
+                <%= @others_quantity[j] %>,
+                <%= @others_tolerance[j] %>,
+                <%= @used_quantity[j] %>,
+                0);
+        <%    end
+        end%>
+        setGroupBalance(<%= @availableFunds %>);
+
+    // localization
+        setDecimalSeparator(",");
+
+    // configuration
+        setToleranceBehaviour(<%= Foodsoft.config[:tolerance_is_costly] %>);
+
+    // initialize javascript
+        updateBalance();
+
+    // show article info on row hover
+        <%#*$$('tbody tr').observer('hover', function() {%>
+
+        <%#*});%>
+
+    });
+//]]>
+</script>
