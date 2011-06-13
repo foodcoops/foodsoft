@@ -82,7 +82,7 @@ class Order < ActiveRecord::Base
   def expired?
     !ends.nil? && ends < Time.now
   end
-
+  
   # search GroupOrder of given Ordergroup
   def group_order(ordergroup)
     group_orders.first :conditions => { :ordergroup_id => ordergroup.id }

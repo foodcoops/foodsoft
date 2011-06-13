@@ -15,13 +15,12 @@
           %tr{:class => cycle('even', 'odd', :name => 'open_orders')}
             %td= link_to h(order.name), :controller => 'ordering', :action => 'order', :id => order
             %td=h format_time(order.ends) unless order.ends.nil?
-            - if group_order = order.group_order(@ordergroup)
+            - if group_order = order.group_order(ordergroup)
               - total += group_order.price
-              %td=h "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
+              %td= "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
               %td= number_to_currency(group_order.price)
             - else
-              %td
-              %td
+              %td{:colspan => 2}
     - if total > 0
       %p
         Gesamtsumme:

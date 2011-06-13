@@ -29,7 +29,7 @@
 
   - if current_user.ordergroup
     // Current orders
-    = render :partial => 'shared/open_orders'
+    = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}
 
   // Stats
   - if current_user.ordergroup
