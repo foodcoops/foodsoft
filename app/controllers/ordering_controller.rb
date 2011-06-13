@@ -4,11 +4,11 @@ class OrderingController < ApplicationController
   # Security
   before_filter :ensure_ordergroup_member
   before_filter :ensure_open_order, :only => [:order, :stock_order, :saveOrder]
-  
+
   # Index page.
   def index
   end
-    
+
   # Edit a current order.
   def order
     redirect_to :action => 'stock_order', :id => @order if @order.stockit?
@@ -17,8 +17,8 @@ class OrderingController < ApplicationController
     @articles_grouped_by_category = @order.articles_grouped_by_category
     # save results of earlier orders in array
     ordered_articles = Array.new
-    @group_order = @order.group_orders.find(:first, 
-      :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
+    @group_order = @order.group_orders.find(:first,
+                                            :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
 
     if @group_order
       # Group has already ordered, so get the results...
@@ -56,6 +56,19 @@ class OrderingController < ApplicationController
         i += 1
       end
     end
+
+    @add_data_to_js = []
+    if Foodsoft.config[:tolerance_is_costly]
+      for i in 0...@price.size
+        @add_data_to_js << [@price[i], @unit[i], @price[i] * (@tolerance[i] + @quantity[i]), @others_quantity[i],
+                           @others_tolerance[i], @used_quantity[i], 0]
+      end
+    else
+      for j in 0...@price.size
+        @add_data_to_js << [@price[j], @unit[j], @price[j] * @quantity[j], @others_quantity[j],
+                           @others_tolerance[j], @used_quantity[j], 0]
+      end
+    end
   end
 
   def stock_order
@@ -64,7 +77,7 @@ class OrderingController < ApplicationController
     # save results of earlier orders in array
     ordered_articles = Array.new
     @group_order = @order.group_orders.find(:first,
-      :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
+                                            :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
 
     if @group_order
       # Group has already ordered, so get the results...
@@ -98,7 +111,7 @@ class OrderingController < ApplicationController
       end
     end
   end
-  
+
   # Update changes to a current order.
   def saveOrder
     if (params[:total_balance].to_i < 0)  #TODO: Better use a real test on sufficiant funds
@@ -147,30 +160,30 @@ class OrderingController < ApplicationController
         logger.error('Failed to update order: ' + exception.message)
         flash[:error] = 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
       end
-        redirect_to :action => 'my_order_result', :id => @order
+      redirect_to :action => 'my_order_result', :id => @order
     end
   end
-  
+
   # Shows the Result for the Ordergroup the current user belongs to
   # this method decides between finished and unfinished orders
   def my_order_result
     @order= Order.find(params[:id])
     @group_order = @order.group_order(@ordergroup)
   end
-  
+
   # Shows all Orders of the Ordergroup
   # if selected, it shows all orders of the foodcoop
   def myOrders
     # get only orders belonging to the ordergroup
     @closed_orders = Order.paginate :page => params[:page], :per_page => 10,
-      :conditions => { :state => 'closed' }, :order => "orders.ends DESC"
+                                    :conditions => { :state => 'closed' }, :order => "orders.ends DESC"
 
     respond_to do |format|
       format.html # myOrders.haml
       format.js { render :partial => "orders", :locals => {:orders => @closed_orders, :pagination => true} }
     end
   end
-  
+
   # adds a Comment to the Order
   def add_comment
     order = Order.find(params[:id])
@@ -185,7 +198,7 @@ class OrderingController < ApplicationController
   end
 
   private
-  
+
   # Returns true if @current_user is member of an Ordergroup.
   # Used as a :before_filter by OrderingController.
   def ensure_ordergroup_member
