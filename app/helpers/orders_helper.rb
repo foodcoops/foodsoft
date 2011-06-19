@@ -1,9 +1,7 @@
 module OrdersHelper
 
   def update_articles_link(order, text, view)
-    link_to_remote text, :url => order_path(order, :view => view),
-      :update => 'articles', :before => "Element.show('loader')", :success => "Element.hide('loader')",
-      :method => :get
+    link_to text, order_path(order, :view => view), :remote => true
   end
 
   def link_to_pdf(order, action)

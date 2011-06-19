@@ -287,6 +287,9 @@ de:
         last_name: "Nachname"
       order_comment:
         text: 'Kommentar'
+      order:
+        starts: "Läuft vom"
+        ends: "Endet am"
 
     hints:
       tax: 'In Prozent, Standard sind 7,0'

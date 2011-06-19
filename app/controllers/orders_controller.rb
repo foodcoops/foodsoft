@@ -42,12 +42,12 @@ class OrdersController < ApplicationController
     @order= Order.find(params[:id])
 
     if params[:view]    # Articles-list will be replaced
-      partial = case params[:view]
-        when 'normal' then "articles"
-        when 'groups'then 'shared/articles_by_groups'
-        when 'articles'then 'shared/articles_by_articles'
-      end
-      render :partial => partial, :locals => {:order => @order} if partial
+      @partial = case params[:view]
+                   when 'normal' then "articles"
+                   when 'groups'then 'shared/articles_by_groups'
+                   when 'articles'then 'shared/articles_by_articles'
+                 end
+      render :layout => false
     end
   end
 
