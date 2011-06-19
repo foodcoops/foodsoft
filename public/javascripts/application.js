@@ -66,6 +66,20 @@ $(function() {
         $.getScript($(this).attr('href'));
         return false;
     });
+
+    // Show and hide loader on ajax callbacks
+    $('*[data-remote]').bind('ajax:beforeSend', function() {
+        $('#loader').show();
+    });
+
+    $('*[data-remote]').bind('ajax:complete', function() {
+        $('#loader').hide();
+    });
+
+    // Disable submit button on ajax forms
+    $('form[data-remote]').bind('ajax:beforeSend', function() {
+        $(this).children('input[type="submit"]').attr('disabled', 'disabled');
+    });
 });
 
 
