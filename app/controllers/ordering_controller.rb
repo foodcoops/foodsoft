@@ -64,19 +64,6 @@ class OrderingController < ApplicationController
     end
   end
 
-  # adds a Comment to the Order
-  def add_comment
-    order = Order.find(params[:id])
-    comment = order.comments.build(params[:comment])
-    comment.user = @current_user
-    if !comment.text.blank? and comment.save
-      flash[:notice] = "Kommentar wurde erstellt."
-    else
-      flash[:error] = "Kommentar konnte nicht erstellt werden. Leerer Kommentar?"
-    end
-    redirect_to :action => 'show', :id => order
-  end
-
   private
 
   # Returns true if @current_user is member of an Ordergroup.

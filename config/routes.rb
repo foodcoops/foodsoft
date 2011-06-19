@@ -1,5 +1,9 @@
 Foodsoft::Application.routes.draw do
 
+  get "order_comments/new"
+
+  get "comments/new"
+
   get "sessions/new"
 
   root :to => redirect("/#{Foodsoft.env}")
@@ -43,6 +47,8 @@ Foodsoft::Application.routes.draw do
       get :archive, :on => :collection
     end
     match '/ordering' => 'ordering#index', :as => 'ordering'
+
+    resources :order_comments, :only => [:new, :create]
 
     ############ Foodcoop orga
 

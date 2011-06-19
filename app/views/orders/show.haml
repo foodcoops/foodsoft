@@ -79,15 +79,8 @@
 .single_column{:style => "width:70em;"}
   .box_title
     %h2 Kommentare
-  .column_content#comments
-    = render :partial => "/shared/comments", :locals => { :comments => @order.comments }
-    %p
-      - form_for :comment, :url => add_comment_order_path(@order) do |form|
-        %p
-          %b Neuen Kommentar hinzufügen:
-          %br/
-          = form.text_area :text, :cols => 50, :rows => 6
-          %br/
-          = submit_tag "Kommentar hinzufügen"
-
+  .column_content
+    #comments
+      = render :partial => 'shared/comments', :locals => { :comments => @order.comments }
+    #new_comment= render :partial => 'order_comments/form', :locals => { :order_comment => @order.comments.build(:user => current_user)}
     = link_to_top

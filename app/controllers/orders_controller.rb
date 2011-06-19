@@ -159,17 +159,4 @@ class OrdersController < ApplicationController
       redirect_to @order
     end
   end
-
-  # adds a Comment to the Order
-  def add_comment
-    order = Order.find(params[:id])
-    comment = order.comments.build(params[:comment])
-    comment.user = @current_user
-    if !comment.text.empty? and comment.save
-      flash[:notice] = "Kommentar wurde erstellt."
-    else
-      flash[:error] = "Kommentar konnte nicht erstellt werden. Leerer Kommentar?"
-    end
-    redirect_to order
-  end
 end

@@ -4,6 +4,7 @@ class OrderComment < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :order_id, :user_id, :text
+  validates_length_of :text, :minimum => 3
 end
 
 # == Schema Information

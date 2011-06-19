@@ -164,6 +164,8 @@ de:
       delivery: Lieferung
       stock_taking: Inventur
       financial_transaction: Kontotransaktion
+      order: Bestellung
+      order_comment: Kommentar
     attributes:
       article:
         price: Nettopreis
@@ -283,6 +285,8 @@ de:
       user:
         nick: "Benutzername"
         last_name: "Nachname"
+      order_comment:
+        text: 'Kommentar'
 
     hints:
       tax: 'In Prozent, Standard sind 7,0'
