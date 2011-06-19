@@ -39,7 +39,9 @@ Foodsoft::Application.routes.draw do
       end
     end
 
-    match '/ordering/myOrders' => 'ordering#myOrders', :as => 'my_orders'
+    resources :group_orders, :controller => 'ordering', :path => 'ordering' do
+      get :archive, :on => :collection
+    end
     match '/ordering' => 'ordering#index', :as => 'ordering'
 
     ############ Foodcoop orga

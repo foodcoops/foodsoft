@@ -31,8 +31,8 @@ function setGroupBalance(amount) {
     groupBalance = amount;
 }
 
-function addData(itemPrice, itemUnit, itemSubtotal, itemQuantityOthers, itemToleranceOthers, allocated, available) {
-    i = price.length;
+function addData(orderArticleId, itemPrice, itemUnit, itemSubtotal, itemQuantityOthers, itemToleranceOthers, allocated, available) {
+    i = orderArticleId;
     price[i] = itemPrice;
     unit[i] = itemUnit;
     itemTotal[i] = itemSubtotal;
@@ -77,7 +77,7 @@ function update(item, quantity, tolerance) {
     // calculate how many units would be ordered in total
     units = calcUnits(unit[item], quantityOthers[item] + Number(quantity), toleranceOthers[item] + Number(tolerance));
     if (unitCompletedFromTolerance(unit[item], quantityOthers[item] + Number(quantity), toleranceOthers[item] + Number(tolerance))) {
-        $('#units_' + item).html('<span style="color:grey">' + String(units) + "</span>");
+        $('#units_' + item).html('<span style=\"color:grey\">' + String(units) + '</span>');
     } else {
         $('#units_' + item).html(String(units));
     }
@@ -140,7 +140,7 @@ function updateStockQuantity(item, quantity) {
     modified = true
 
     // update hidden input fields
-    $('#q_' + item).val() = quantity;
+    $('#q_' + item).val(quantity);
 
     // update used/unused quantity
     available = Math.max(0, quantityAvailable[item] - quantityOthers[item]);
@@ -179,7 +179,7 @@ function unitCompletedFromTolerance(unitSize, quantity, tolerance) {
 function updateBalance() {
     // update total price and order balance
     total = 0;
-    for (i = 0; i < itemTotal.length; i++) {
+    for (i in itemTotal) {
         total += itemTotal[i];
     }
     $('#total_price').html(asMoney(total));
@@ -195,7 +195,7 @@ function updateBalance() {
         $('#submit_button').disabled = false;
     }
     // update bgcolor
-    for (i = 0; i < itemTotal.length; i++) {
+    for (i in itemTotal) {
         $('#ltd_price_' + i).css('background-color', bgcolor);
     }
 }
@@ -203,3 +203,18 @@ function updateBalance() {
 function confirmSwitchOrder() {
     return (!modified || confirm('Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird.'))
 }
+
+$(function() {
+    $('input[data-increase_quantity]').click(function() {
+        increaseQuantity($(this).data('increase_quantity'));
+    })
+    $('input[data-decrease_quantity]').click(function() {
+        decreaseQuantity($(this).data('decrease_quantity'));
+    })
+    $('input[data-increase_tolerance]').click(function() {
+        increaseTolerance($(this).data('increase_tolerance'));
+    })
+    $('input[data-decrease_tolerance]').click(function() {
+        decreaseTolerance($(this).data('decrease_tolerance'));
+    })
+})

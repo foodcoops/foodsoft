@@ -1,10 +1,10 @@
 <script>
 //<![CDATA[
     $(function() {
-        <% for row in @add_data_to_js %>
+        <% for row in data_to_js(@ordering_data) %>
         addData(<%= row.join(", ") %>);
         <% end %>
-        setGroupBalance(<%= @availableFunds %>);
+        setGroupBalance(<%= @ordering_data[:available_funds] %>);
 
     // localization
         setDecimalSeparator(",");

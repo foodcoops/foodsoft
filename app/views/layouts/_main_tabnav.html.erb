@@ -28,7 +28,7 @@
         :active => ["orders", "ordering"],
         :subnav => [
           { :name => "Bestellen!", :url => ordering_path },
-          { :name => "Meine Bestellungen", :url => my_orders_path },
+          { :name => "Meine Bestellungen", :url => archive_group_orders_path },
           { :name => "Bestellverwaltung", :url => orders_path, :access_denied? => (!u.role_orders?) }
         ]
       },

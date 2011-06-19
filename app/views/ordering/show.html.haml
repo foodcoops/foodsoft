@@ -1,21 +1,10 @@
 - content_for :head do
   :javascript
-    document.observe("dom:loaded", function() {
-      // initially hide all ignored articles
-      $$('tr.ignored').invoke('hide');
+    $(function() {
+      $('tr.ignored').hide();
     });
-    function toggleIgnoredArticles() {
-      $$('tr.ignored').invoke('toggle');
-    };
-
 
 - title "Dein Bestellergebnis für #{@order.name}"
-#element_navigation
-  = link_to_unless @order.previous == @order, "<< #{@order.previous.name}", :action => "my_order_result", :id => @order.previous
-  |
-  = link_to "Übersicht", :controller => 'ordering'
-  |
-  = link_to_unless @order.next == @order, "#{@order.next.name} >>", :action => "my_order_result", :id => @order.next
 
 // Order summary
 .left_column{:style => "width:45em"}
@@ -54,7 +43,7 @@
     %table
       - for order in Order.open
         %tr
-          %td= link_to order.name, :action => 'order', :id => order
+          %td= link_to_ordering(order)
           %td= "("+ time_ago_in_words(order.ends) + ")" if order.ends
 
 // Article box
@@ -63,8 +52,8 @@
     %h2 Artikelübersicht
   .column_content#result
     - if @group_order
-      %p(style="float:right")= link_to_function "Zeige/Verstecke nicht bestellte Artikel", "toggleIgnoredArticles();"
-      %p= link_to("Bestellung ändern", :action => "order", :id => @order) if @order.open?
+      %p(style="float:right")= link_to "Zeige/Verstecke nicht bestellte Artikel", '#', 'data-toggle-this' => 'tr.ignored'
+      %p= link_to("Bestellung ändern", edit_group_order_path(@group_order, :order_id => @order.id)) if @order.open?
       %table.list
         %thead
           %tr
@@ -87,26 +76,13 @@
               %td{:colspan => "9"}
             - for oa in order_articles
               - # get the order-results for the ordergroup
-              - goa = oa.group_order_articles.first :conditions => {:group_order_id => @group_order.id}
-              - if goa
-                - quantity = goa.quantity
-                - tolerance = goa.tolerance
-                - result = goa.result
-                - if @order.open?
-                  - if Foodsoft.config[:tolerance_is_costly]
-                    - sub_total = oa.price.fc_price * (quantity + tolerance)
-                  - else
-                    - sub_total = oa.price.fc_price * quantity
-                - else
-                  - sub_total = oa.price.fc_price * result
-              - else
-                - quantity, tolerance, result, sub_total = 0, 0, 0, 0
+              - goa = oa.group_order_articles.find_by_group_order_id(@group_order.id)
+              - quantity = goa.quantity
+              - tolerance = goa.tolerance
+              - result = goa.result
+              - sub_total = goa.total_price
               - total += sub_total
-              - # give the article different colors, dependent on order-result
-              - class_name = "ignored"
-              - if (quantity + tolerance > 0)
-                - class_name = result > 0 ? 'success' : 'failed'
-              %tr{:class => cycle('even', 'odd', :name => 'articles') + " " + class_name}
+              %tr{:class => cycle('even', 'odd', :name => 'articles') + " " + order_article_class_name(quantity, tolerance, result)}
                 %td{:style => "width:40%"}
                   =h oa.article.name
                   - unless oa.article.note.blank?

@@ -10,18 +10,17 @@
         %td Kontostand:
         %td{:class => "currency", :style => "width:5em"}= number_to_currency(@ordergroup.account_balance)
       %tr
-        %td - laufende Bestellungen:
+        %td= "- laufende Bestellungen:"
         %td{:class => "currency"}= number_to_currency(@ordergroup.value_of_open_orders)
       %tr
-        %td - nicht abgerechnete Bestellungen:
+        %td= "- nicht abgerechnete Bestellungen:"
         %td{:class => "currency"}= number_to_currency(@ordergroup.value_of_finished_orders)
       %tr
         %th verfügbares Guthaben:
         %th{:class => "currency"}= number_to_currency(@ordergroup.get_available_funds)
 
 .right_column{:style => "width:70%"}
-  // open orders
-  = render :partial => "shared/open_orders"
+  = render :partial => "shared/open_orders", :locals => {:ordergroup => @ordergroup}
 
   // finished orders
   - unless Order.finished.empty?
@@ -41,4 +40,4 @@
     .column_content
       = render :partial => "orders", :locals => {:orders => Order.closed.all(:limit => 5), :pagination => false}
       %br/
-      = link_to "mehr...", :action => "myOrders"
+      = link_to "mehr...", archive_group_orders_path

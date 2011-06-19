@@ -2,8 +2,8 @@
 # TODO: When to use class or module. It seems this could also be a Foodsoft-class?
 module Foodsoft
   mattr_accessor :env, :config, :database
-  CONFIGS = YAML.load(File.read(RAILS_ROOT + "/config/app_config.yml"))
-  DATABASES = YAML.load(File.read(RAILS_ROOT + "/config/database.yml"))
+  CONFIGS = YAML.load(File.read(File.join(Rails.root, "/config/app_config.yml")))
+  DATABASES = YAML.load(File.read(File.join(Rails.root, "/config/database.yml")))
 
   class << self
     def env=(env)
@@ -15,7 +15,7 @@ module Foodsoft
   end
 end
 # Initial load the default config and database from rails environment
-Foodsoft.env = RAILS_ENV
+Foodsoft.env = Rails.env
 
 # Set action mailer default host for url generating
 url_options = {

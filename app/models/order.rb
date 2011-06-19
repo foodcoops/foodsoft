@@ -85,16 +85,16 @@ class Order < ActiveRecord::Base
   
   # search GroupOrder of given Ordergroup
   def group_order(ordergroup)
-    group_orders.first :conditions => { :ordergroup_id => ordergroup.id }
+    group_orders.where(:ordergroup_id => ordergroup.id).first
   end
  
   # Returns OrderArticles in a nested Array, grouped by category and ordered by article name.
   # The array has the following form:
   # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
   def articles_grouped_by_category
-    order_articles.all(:include => [:article, :article_price], :order => 'articles.name').group_by { |a|
-      a.article.article_category.name
-    }.sort { |a, b| a[0] <=> b[0] }
+    order_articles.includes(:article, :article_price).order('articles.name').
+        group_by { |a|  a.article.article_category.name }.
+        sort { |a, b| a[0] <=> b[0] }
   end
   memoize :articles_grouped_by_category
 

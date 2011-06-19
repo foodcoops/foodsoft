@@ -20,7 +20,7 @@
               = "(#{format_time(@group_order.updated_on)})"
           %p
             %b Verfügbares Guthaben:
-            = number_to_currency(@availableFunds)
+            = number_to_currency(@ordering_data[:available_funds])
         %td
           - unless @order.note.empty?
             %p

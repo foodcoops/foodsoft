@@ -1,0 +1,23 @@
+#order-footer
+  #info-box
+  #total-sum
+    %table
+      %tr
+        %td Gesamtbetrag:
+        %td.currency
+          %span#total_price= total
+          €
+      %tr
+        %td Verfügbares Guthaben:
+        %td.currency= number_to_currency(@ordering_data[:available_funds])
+      %tr
+        %td Neuer Kontostand:
+        %td.currency
+          %strong
+            %span#new_balance= @ordergroup.account_balance - total
+            €
+    #order-button
+      = submit_tag( "Bestellung speichern", :id => 'submit_button' )
+      oder #{link_to "abbrechen", :controller => 'ordering'}
+%input#total_balance{:name => "total_balance", :type => "hidden", :value => @ordergroup.account_balance - total}/
+%input{:name => "version", :type => "hidden", :value => @version}/
