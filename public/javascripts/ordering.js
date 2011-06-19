@@ -6,9 +6,10 @@
 // Call setDecimalSeparator(char) to overwrite the default character "." with a localized value.
 
 var modified = false    		// indicates if anything has been clicked on this page
-var groupBalance = 0;			// available group money 
+var groupBalance = 0;			// available group money
 var decimalSeparator = ".";		// default decimal separator
-var toleranceIsCostly = true; // default tolerance behaviour
+var toleranceIsCostly = true;   // default tolerance behaviour
+var isStockit = false;          // Wheter the order is from stock oder normal supplier
 
 // Article data arrays:
 var price = new Array();
@@ -27,12 +28,16 @@ function setToleranceBehaviour(value) {
     toleranceIsCostly = value;
 }
 
+function setStockit(value) {
+    isStockit = value;
+}
+
 function setGroupBalance(amount) {
     groupBalance = amount;
 }
 
 function addData(orderArticleId, itemPrice, itemUnit, itemSubtotal, itemQuantityOthers, itemToleranceOthers, allocated, available) {
-    i = orderArticleId;
+    var i = orderArticleId;
     price[i] = itemPrice;
     unit[i] = itemUnit;
     itemTotal[i] = itemSubtotal;
@@ -43,24 +48,26 @@ function addData(orderArticleId, itemPrice, itemUnit, itemSubtotal, itemQuantity
 }
 
 function increaseQuantity(item) {
-    value = Number($('#q_' + item).val()) + 1;
-    update(item, value, $('#t_' + item).val());
+    var value = Number($('#q_' + item).val()) + 1;
+    if (!isStockit || (value <= (quantityAvailable[item] - quantityOthers[item]))) {
+        update(item, value, $('#t_' + item).val());
+    }
 }
 
 function decreaseQuantity(item) {
-    value = Number($('#q_' + item).val()) - 1;
+    var value = Number($('#q_' + item).val()) - 1;
     if (value >= 0) {
         update(item, value, $('#t_' + item).val());
     }
 }
 
 function increaseTolerance(item) {
-    value = Number($('#t_' + item).val()) + 1;
+    var value = Number($('#t_' + item).val()) + 1;
     update(item, $('#q_' + item).val(), value);
 }
 
 function decreaseTolerance(item) {
-    value = Number($('#t_' + item).val()) - 1;
+    var value = Number($('#t_' + item).val()) - 1;
     if (value >= 0) {
         update(item, $('#q_' + item).val(), value);
     }
@@ -75,7 +82,7 @@ function update(item, quantity, tolerance) {
     $('#t_' + item).val(tolerance);
 
     // calculate how many units would be ordered in total
-    units = calcUnits(unit[item], quantityOthers[item] + Number(quantity), toleranceOthers[item] + Number(tolerance));
+    var units = calcUnits(unit[item], quantityOthers[item] + Number(quantity), toleranceOthers[item] + Number(tolerance));
     if (unitCompletedFromTolerance(unit[item], quantityOthers[item] + Number(quantity), toleranceOthers[item] + Number(tolerance))) {
         $('#units_' + item).html('<span style=\"color:grey\">' + String(units) + '</span>');
     } else {
@@ -83,8 +90,8 @@ function update(item, quantity, tolerance) {
     }
 
     // update used/unused quantity
-    available = Math.max(0, units * unit[item] - quantityOthers[item]);
-    q_used = Math.min(available, quantity);
+    var available = Math.max(0, units * unit[item] - quantityOthers[item]);
+    var q_used = Math.min(available, quantity);
     // ensure that at least the amout of items this group has already been allocated is used
     if (quantity >= itemsAllocated[item] && q_used < itemsAllocated[item]) {
         q_used = itemsAllocated[item];
@@ -111,51 +118,11 @@ function update(item, quantity, tolerance) {
     $('#price_' + item + '_display').html(asMoney(itemTotal[item]));
 
     // update missing units
-    missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
+    var missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
     if (missing_units < 0) {
         missing_units = 0;
     }
     $('#missing_units_' + item).html(String(missing_units));
-
-    // update balance
-    updateBalance();
-}
-
-function increaseStockQuantity(item) {
-    value = Number($('#q_' + item).val()) + 1;
-    if (value <= quantityAvailable[item] - quantityOthers[item]) {
-        updateStockQuantity(item, value);
-    }
-}
-
-function decreaseStockQuantity(item) {
-    value = Number($('#q_' + item).val()) - 1;
-    if (value >= 0) {
-        updateStockQuantity(item, value);
-    }
-}
-
-function updateStockQuantity(item, quantity) {
-    // set modification flag
-    modified = true
-
-    // update hidden input fields
-    $('#q_' + item).val(quantity);
-
-    // update used/unused quantity
-    available = Math.max(0, quantityAvailable[item] - quantityOthers[item]);
-    q_used = Math.min(available, quantity);
-
-    // ensure that at least the amout of items this group has already been allocated is used
-    if (quantity >= itemsAllocated[item] && q_used < itemsAllocated[item]) {
-        q_used = itemsAllocated[item];
-    }
-    $('#q_used_' + item).html(String(q_used));
-    $('#q_total_' + item).html(String(Number(quantity) + quantityOthers[item]));
-
-    // update total price
-    itemTotal[item] = price[item] * (Number(quantity));
-    $('#price_' + item + '_display').html(asMoney(itemTotal[item]));
 
     // update balance
     updateBalance();
@@ -166,32 +133,32 @@ function asMoney(amount) {
 }
 
 function calcUnits(unitSize, quantity, tolerance) {
-    units = Math.floor(quantity / unitSize)
-    remainder = quantity % unitSize
+    var units = Math.floor(quantity / unitSize)
+    var remainder = quantity % unitSize
     return units + ((remainder > 0) && (remainder + tolerance >= unitSize) ? 1 : 0)
 }
 
 function unitCompletedFromTolerance(unitSize, quantity, tolerance) {
-    remainder = quantity % unitSize
+    var remainder = quantity % unitSize
     return (remainder > 0 && (remainder + tolerance >= unitSize));
 }
 
 function updateBalance() {
     // update total price and order balance
-    total = 0;
+    var total = 0;
     for (i in itemTotal) {
         total += itemTotal[i];
     }
     $('#total_price').html(asMoney(total));
-    balance = groupBalance - total;
+    var balance = groupBalance - total;
     $('#new_balance').html(asMoney(balance));
     $('#total_balance').val(asMoney(balance));
-    // determine bgcolor and submit button state according to balance 
+    // determine bgcolor and submit button state according to balance
+    var bgcolor = '';
     if (balance < 0) {
         bgcolor = '#FF0000';
         $('#submit_button').disabled = true;
     } else {
-        bgcolor = '';
         $('#submit_button').disabled = false;
     }
     // update bgcolor
@@ -200,21 +167,21 @@ function updateBalance() {
     }
 }
 
-function confirmSwitchOrder() {
-    return (!modified || confirm('Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird.'))
-}
-
 $(function() {
     $('input[data-increase_quantity]').click(function() {
         increaseQuantity($(this).data('increase_quantity'));
-    })
+    });
     $('input[data-decrease_quantity]').click(function() {
         decreaseQuantity($(this).data('decrease_quantity'));
-    })
+    });
     $('input[data-increase_tolerance]').click(function() {
         increaseTolerance($(this).data('increase_tolerance'));
-    })
+    });
     $('input[data-decrease_tolerance]').click(function() {
         decreaseTolerance($(this).data('decrease_tolerance'));
-    })
-})
+    });
+
+    $('a[data-confirm_switch_order]').click(function() {
+        return (!modified || confirm('Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?'));
+    });
+});

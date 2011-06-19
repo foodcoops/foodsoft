@@ -50,48 +50,7 @@ class OrderingController < ApplicationController
       redirect_to group_orders_url, :alert => 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
     end
   end
-
-  def stock_order
-    # Load order article data...
-    @articles_grouped_by_category = @order.articles_grouped_by_category
-    # save results of earlier orders in array
-    ordered_articles = Array.new
-    @group_order = @order.group_orders.find(:first,
-                                            :conditions => "ordergroup_id = #{@ordergroup.id}", :include => :group_order_articles)
-
-    if @group_order
-      # Group has already ordered, so get the results...
-      for goa in @group_order.group_order_articles
-        ordered_articles[goa.order_article_id] = {:quantity => goa.quantity,
-                                                  :tolerance => goa.tolerance,
-                                                  :quantity_result => goa.result(:quantity),
-                                                  :tolerance_result => goa.result(:tolerance)}
-      end
-      @version = @group_order.lock_version
-      @availableFunds = @ordergroup.get_available_funds(@group_order)
-    else
-      @version = 0
-      @availableFunds = @ordergroup.get_available_funds
-    end
-
-    # load prices ....
-    @price = Array.new; @quantity_available = Array.new
-    @others_quantity = Array.new; @quantity = Array.new; @quantity_result = Array.new; @used_quantity = Array.new; @unused_quantity = Array.new
-    i = 0;
-    @articles_grouped_by_category.each do |category_name, order_articles|
-      for order_article in order_articles
-        # price/unit size
-        @price[i] = order_article.article.fc_price
-        @quantity_available[i] = order_article.article.quantity_available(@order)
-        # quantity
-        @quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:quantity] : 0)
-        @others_quantity[i] = order_article.quantity - @quantity[i]
-        @used_quantity[i] = (ordered_articles[order_article.id] ? ordered_articles[order_article.id][:quantity_result] : 0)
-        i += 1
-      end
-    end
-  end
-
+  
   # Shows all Orders of the Ordergroup
   # if selected, it shows all orders of the foodcoop
   def archive

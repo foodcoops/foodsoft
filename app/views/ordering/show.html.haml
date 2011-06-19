@@ -35,16 +35,7 @@
               = "Abgerechnet von #{@order.updated_by.nick}"
     = link_to "Kommentare lesen/schreiben", "#comments"
 
-// directly switch to active orders
-.right_column{:style => "width:23em;"}
-  .box_title
-    %h2 Laufende Bestellungen
-  .column_content
-    %table
-      - for order in Order.open
-        %tr
-          %td= link_to_ordering(order)
-          %td= "("+ time_ago_in_words(order.ends) + ")" if order.ends
+= render :partial => "switch_order", :locals => {:current_order => @order}
 
 // Article box
 .single_column{:style => "clear:both; width:70em;"}

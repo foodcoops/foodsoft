@@ -26,14 +26,17 @@ class GroupOrder < ActiveRecord::Base
       # Group has already ordered, so get the results...
       goas = {}
       group_order_articles.all.each do |goa|
-        goas[goa.order_article_id] = {:quantity => goa.quantity,
-                                 :tolerance => goa.tolerance,
-                                 :quantity_result => goa.result(:quantity),
-                                 :tolerance_result => goa.result(:tolerance)}
-      end
+        goas[goa.order_article_id] = {
+            :quantity => goa.quantity,
+            :tolerance => goa.tolerance,
+            :quantity_result => goa.result(:quantity),
+            :tolerance_result => goa.result(:tolerance),
+            :total_price => goa.total_price
+        }
+  end
     end
 
-    # load prices ....
+    # load prices and other stuff....
     data[:order_articles] = {}
     order.order_articles.each do |order_article|
       data[:order_articles][order_article.id] = {
@@ -44,7 +47,10 @@ class GroupOrder < ActiveRecord::Base
           :used_quantity => (new_record? ? 0 : goas[order_article.id][:quantity_result]),
           :tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance]),
           :others_tolerance => order_article.tolerance - (new_record? ? 0 : goas[order_article.id][:tolerance]),
-          :used_tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance_result])
+          :used_tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance_result]),
+          :total_price => (new_record? ? 0 : goas[order_article.id][:total_price]),
+          :missing_units => order_article.missing_units,
+          :quantity_available => (order.stockit? ? order_article.article.quantity_available : 0)
       }
     end
 

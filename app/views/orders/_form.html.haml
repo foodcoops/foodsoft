@@ -1,7 +1,7 @@
 = simple_form_for @order do |f|
   .single_column
     .box_title
-      %h2 Bestellung für #{@order.supplier.name}
+      %h2 Bestellung für #{@order.name}
     .column_content
       = f.hidden_field :supplier_id
       = f.input :note
@@ -40,9 +40,9 @@
             / check if the article is selected
             - included = @order.order_articles.detect { |order_article| order_article.article_id == article.id }
             - included_class = included ? ' selected' : ''
-            %tr{:class => cycle('even', 'odd') + ' click-me' + included_class, :id => article.id.to_s, :onclick => "checkRow('#{article.id}')"}
-              %td= check_box_tag "order[article_ids][]", article.id, included, { :id => "checkbox_#{article.id}", :onclick => "checkRow('#{article.id}')" }
-              %td=h article.name
+            %tr{:class => cycle('even', 'odd') + included_class, :id => article.id.to_s }
+              %td= check_box_tag "order[article_ids][]", article.id, included, :id => "checkbox_#{article.id}"
+              %td.click-me{'data-check-this' => "#checkbox_#{article.id}"}= article.name
               %td=h truncate article.note, :length => 25
               - if @order.stockit?
                 %td= "#{article.quantity_available} * #{article.unit}"

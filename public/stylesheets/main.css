@@ -77,7 +77,7 @@ option {
   border-top: 1px solid #d7d7d7;
   margin: 0.2em 0; }
 
-span.click-me {
+.click-me {
   cursor: pointer; }
 
 .left {
@@ -245,8 +245,6 @@ table {
     color: green; }
   table tr.selected, table tr.active {
     background-color: #ffffc2; }
-  table tr.click-me {
-    cursor: pointer; }
   table tr.ignored {
     color: grey; }
   table tr.success {
@@ -400,7 +398,7 @@ table#order {
     -webkit-border-radius: 3px;
     padding: 0; }
   table#order th#col_required, table#order th#col_tolerance {
-    width: 140px; }
+    width: 145px; }
   table#order th#col_packages, table#order th#col_left_units {
     width: 50px; }
   table#order td.quantity, table#order td.tolerance {

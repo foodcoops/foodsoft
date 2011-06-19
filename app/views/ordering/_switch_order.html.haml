@@ -1,0 +1,12 @@
+- orders = Order.open.reject{ |order| order == current_order }
+- unless orders.empty?
+  .right_column{:style => "width:22em"}
+    .box_title
+      %h2 Laufende Bestellungen
+    .column_content
+      %table
+        - for order in orders
+          %tr
+            %td
+              = link_to_ordering(order, 'data-confirm_switch_order' => true)
+            %td= "noch #{time_ago_in_words(order.ends)}" if order.ends
