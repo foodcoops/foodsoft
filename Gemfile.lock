@@ -34,6 +34,7 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    acts_as_configurable (0.0.8)
     annotate (2.4.0)
     arel (2.0.9)
     builder (2.1.2)
@@ -42,6 +43,7 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     exception_notification (2.4.0)
+    expression_parser (0.9.0)
     fastercsv (1.5.4)
     haml (3.1.1)
     has_scope (0.5.0)
@@ -71,10 +73,10 @@ GEM
     mysql (2.8.1)
     polyglot (0.3.1)
     prawn (0.6.3)
-      prawn-core (< 0.7, >= 0.6.3)
-      prawn-format (< 0.3, >= 0.2.3)
-      prawn-layout (< 0.4, >= 0.3.2)
-      prawn-security (< 0.2, >= 0.1.1)
+      prawn-core (>= 0.6.3, < 0.7)
+      prawn-format (>= 0.2.3, < 0.3)
+      prawn-layout (>= 0.3.2, < 0.4)
+      prawn-security (>= 0.1.1, < 0.2)
     prawn-core (0.6.3)
     prawn-format (0.2.3)
       prawn-core
@@ -93,8 +95,8 @@ GEM
       activesupport (= 3.0.7)
       bundler (~> 1.0)
       railties (= 3.0.7)
-    rails3_acts_as_paranoid (0.0.7)
-      activerecord (>= 3.0)
+    rails3_acts_as_paranoid (0.0.9)
+      activerecord (~> 3.0)
     railties (3.0.7)
       actionpack (= 3.0.7)
       activesupport (= 3.0.7)
@@ -108,12 +110,16 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.27)
+    wikicloth (0.8.0)
+      builder
+      expression_parser
     will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_configurable
   annotate
   client_side_validations
   exception_notification
@@ -128,7 +134,8 @@ DEPENDENCIES
   mysql
   prawn (<= 0.6.3)
   rails (= 3.0.7)
-  rails3_acts_as_paranoid
+  rails3_acts_as_paranoid (= 0.0.9)
   sass
   simple_form
+  wikicloth
   will_paginate (~> 3.0.pre2)

@@ -1,5 +1,0 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), "lib", "core_ext")
-require File.join(File.expand_path(File.dirname(__FILE__)), "lib", "wiki_cloth")
-require File.join(File.expand_path(File.dirname(__FILE__)), "lib", "wiki_buffer")
-require File.join(File.expand_path(File.dirname(__FILE__)), "lib", "wiki_link_handler")
-String.send(:include, ExtendedString)
