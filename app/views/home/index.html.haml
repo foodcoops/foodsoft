@@ -17,7 +17,7 @@
                 %td= format_date task.due_date
                 %td
                   %b= task.name
-          
+
       - unless @unaccepted_tasks.empty?
         %h3 Aufgaben übernehmen
         Du bis für Aufgaben verantwortlich.
@@ -74,4 +74,4 @@
               - color = ft.amount < 0 ? 'red' : 'black'
               %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
         %br/
-        = link_to _("mehr ..."), my_ordergroup_path
+        = link_to "mehr ...", my_ordergroup_path

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module OrdersHelper
 
   def update_articles_link(order, text, view)

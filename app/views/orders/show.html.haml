@@ -66,7 +66,7 @@
         |
         Faxvorlage:
         = link_to_pdf(@order, 'faxPdf')
-        = link_to image_tag("text_file.png", :size => "16x16", :border => "0", :alt => "Textdatei erstellen"), { :action => 'text_fax_template', :id => @order }, { :title => _("Download file") }
+        = link_to image_tag("text_file.png", :size => "16x16", :border => "0", :alt => "Textdatei erstellen"), { :action => 'text_fax_template', :id => @order }, { :title => "Download file" }
         |
         = link_to 'Kommentare', '#comments'
       

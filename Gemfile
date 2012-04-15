@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "http://rubygems.org"
 
-gem "rails", '3.0.7'
+gem "rails", '3.0.12'
 
 gem 'mysql'
 gem "fastercsv"

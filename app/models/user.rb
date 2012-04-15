@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'digest/sha1'
 # specific user rights through memberships (see Group)
 class User < ActiveRecord::Base
