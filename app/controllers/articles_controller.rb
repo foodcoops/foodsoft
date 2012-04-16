@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ArticlesController < ApplicationController
   before_filter :authenticate_article_meta, :find_supplier
 

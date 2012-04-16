@@ -1,29 +1,4 @@
-# == Schema Information
-#
-# Table name: articles
-#
-#  id                  :integer         not null, primary key
-#  name                :string(255)     default(""), not null
-#  supplier_id         :integer         default(0), not null
-#  article_category_id :integer         default(0), not null
-#  unit                :string(255)     default(""), not null
-#  note                :string(255)
-#  availability        :boolean         default(TRUE), not null
-#  manufacturer        :string(255)
-#  origin              :string(255)
-#  shared_updated_on   :datetime
-#  price               :decimal(, )
-#  tax                 :float
-#  deposit             :decimal(, )     default(0.0)
-#  unit_quantity       :integer         default(1), not null
-#  order_number        :string(255)
-#  created_at          :datetime
-#  updated_at          :datetime
-#  quantity            :integer         default(0)
-#  deleted_at          :datetime
-#  type                :string(255)
-#
-
+# encoding: utf-8
 class Article < ActiveRecord::Base
   acts_as_paranoid  # Avoid deleting the article for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method

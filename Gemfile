@@ -3,7 +3,7 @@ source "http://rubygems.org"
 
 gem "rails", '3.0.12'
 
-gem 'mysql'
+gem 'mysql2'
 gem "fastercsv"
 gem "prawn", '<=0.6.3'
 gem 'haml'

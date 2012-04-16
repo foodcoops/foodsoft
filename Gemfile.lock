@@ -45,7 +45,7 @@ GEM
     exception_notification (2.4.0)
     expression_parser (0.9.0)
     fastercsv (1.5.4)
-    haml (3.1.1)
+    haml (3.1.4)
     has_scope (0.5.0)
     hirb (0.3.4)
     i18n (0.5.0)
@@ -71,7 +71,7 @@ GEM
       activesupport (~> 3.0.0)
       arel (~> 2.0.7)
     mime-types (1.18)
-    mysql (2.8.1)
+    mysql2 (0.2.6)
     polyglot (0.3.3)
     prawn (0.6.3)
       prawn-core (>= 0.6.3, < 0.7)
@@ -136,7 +136,7 @@ DEPENDENCIES
   localize_input!
   meta_search
   meta_where
-  mysql
+  mysql2
   prawn (<= 0.6.3)
   rails (= 3.0.12)
   rails3_acts_as_paranoid (= 0.0.9)

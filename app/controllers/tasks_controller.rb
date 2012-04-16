@@ -1,3 +1,4 @@
+# encoding: utf-8
 class TasksController < ApplicationController
   #auto_complete_for :user, :nick
   

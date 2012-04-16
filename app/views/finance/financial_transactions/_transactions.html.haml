@@ -10,12 +10,12 @@
   %table
     %thead
       %tr
-        <td #{sort_td_class_helper "date"}>
+        <td #{sort_td_class_helper("date")}>
         \#{sort_link_helper "Datum", "date"}
         %td Wer
-        <td #{sort_td_class_helper "note"}>
+        <td #{sort_td_class_helper("note")}>
         \#{sort_link_helper "Notiz", "note"}
-        <td #{sort_td_class_helper "amount"}>
+        <td #{sort_td_class_helper("amount")}>
         \#{sort_link_helper "Betrag", "amount"}
     %tbody
       - @financial_transactions.each do |t|

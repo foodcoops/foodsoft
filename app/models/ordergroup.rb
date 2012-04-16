@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 # Ordergroups can order, they are "children" of the class Group
 # 
 # Ordergroup have the following attributes, in addition to Group

@@ -2,10 +2,10 @@
 %table.list{:style => "width: 100%"}
   %thead
     %tr
-      %th[sort_td_class_helper "supplier"]
+      %th[sort_td_class_helper("supplier")]
         = sort_link_helper "Lieferantin", "supplier"
       %th Start
-      %th[sort_td_class_helper "ends"]
+      %th[sort_td_class_helper("ends")]
         = sort_link_helper "Ende", "ends"
       %th Status
       %th{:colspan => "2"}

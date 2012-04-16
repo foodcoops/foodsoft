@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Finance::BalancingController < ApplicationController
   before_filter :authenticate_finance
   verify :method => :post, :only => [:close, :close_direct]

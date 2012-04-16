@@ -15,14 +15,14 @@
   %thead
     %tr
       %th
-      %th[sort_td_class_helper "name"]
+      %th[sort_td_class_helper("name")]
         = sort_link_helper "Name", "name"
       %th
-      %th[sort_td_class_helper "category"]
+      %th[sort_td_class_helper("category")]
         = sort_link_helper "Kategorie", "category"
-      %th[sort_td_class_helper "unit"]
+      %th[sort_td_class_helper("unit")]
         = sort_link_helper "Einheit", "unit"
-      %th[sort_td_class_helper "note"]
+      %th[sort_td_class_helper("note")]
         = sort_link_helper "Notiz", "note"
       %th{:style => "width: 4em;"} Gebgr.
       %th{:style => "width: 5em;"} Preis
