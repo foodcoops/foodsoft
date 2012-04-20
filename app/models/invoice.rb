@@ -5,23 +5,12 @@ class Invoice < ActiveRecord::Base
   belongs_to :order
 
   validates_presence_of :supplier_id
+  validates_numericality_of :amount, :deposit, :deposit_credit
 
   scope :unpaid, :conditions => { :paid_on => nil }
 
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def amount=(amount)
-    self[:amount] = String.delocalized_decimal(amount)
-  end
-  
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def deposit=(deposit)
-    self[:deposit] = String.delocalized_decimal(deposit)
-  end
-
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def deposit_credit=(deposit)
-    self[:deposit_credit] = String.delocalized_decimal(deposit)
-  end
+  # Replace numeric seperator with database format
+  localize_input_of :amount, :deposit, :deposit_credit
 
   # Amount without deposit
   def net_amount

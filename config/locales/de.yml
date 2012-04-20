@@ -345,6 +345,13 @@ de:
       order:
         starts: "Läuft vom"
         ends: "Endet am"
+      invoice:
+        supplier: Lieferant
+        number: Nummer
+        date: Rechnungsdatum
+        paid_on: Bezahlt am
+        deposit: Pfand berechnet
+        deposit_credit: Pfand gutgeschrieben
 
     hints:
       tax: 'In Prozent, Standard sind 7,0'

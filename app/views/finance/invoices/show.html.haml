@@ -2,29 +2,29 @@
 
 %p
   %b Lieferantin:
-  =h @invoice.supplier.name
+  = @invoice.supplier.name
 - if @invoice.delivery
   %p
     %b Lieferung:
-    ="Diese Rechnung ist mit einer #{link_to "Lieferung", [@invoice.supplier,@invoice.delivery]} verknüpft."
+    Diese Rechnung ist mit einer #{link_to "Lieferung", [@invoice.supplier,@invoice.delivery]} verknüpft.
 %p
   %b Rechnungsnummer:
-  =h @invoice.number
+  = @invoice.number
 %p
   %b Datum:
-  =h @invoice.date
+  = @invoice.date
 %p
   %b Bezahlt am:
-  =h @invoice.paid_on
+  = @invoice.paid_on
 %p
   %b Rechnungsbetrag:
-  =h @invoice.amount
+  = number_to_currency @invoice.amount
 %p
   %b Pfand berechnet:
-  =h @invoice.deposit
+  = number_to_currency @invoice.deposit
 %p
   %b Pfand gutgeschrieben:
-  =h @invoice.deposit_credit
+  = number_to_currency @invoice.deposit_credit
 %p
   %b Notiz:
   =h @invoice.note
