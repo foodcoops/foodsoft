@@ -11,3 +11,4 @@ public/**/*_cached.*
 config/initializers/secret_token.rb
 .idea
 .rvmrc
+.rbenv-version
