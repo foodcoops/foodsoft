@@ -46,11 +46,11 @@
   .box_title
     #editOrderNav
       %ul
-        %li= remote_link_to 'Gruppenübersicht', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'groupsOverview'}
-        %li= remote_link_to 'Artikelübersicht', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'articlesOverview'}
-        %li= remote_link_to 'Bestellung bearbeiten', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'editResults'}
+        %li= link_to 'Gruppenübersicht', new_finance_order_path(@order, view: :groups_overview)
+        /%li= remote_link_to 'Artikelübersicht', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'articlesOverview'}
+        /%li= remote_link_to 'Bestellung bearbeiten', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'editResults'}
   .column_content
     #results
-      /= render :partial => 'edit_results_by_articles'
+      = render :partial => 'edit_results_by_articles'
     %p= link_to_top
 #edit_box{:style => 'display:none'}

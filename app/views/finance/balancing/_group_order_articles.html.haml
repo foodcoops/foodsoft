@@ -7,7 +7,8 @@
         %td Einheiten
         %td Gesamtpreis
         %td{:colspan => "3",:style => "width:14em"}
-          = remote_link_to '[Gruppe hinzufügen]', :url => {:action => "new_group_order_article", :id => order_article}
+          = link_to '[Gruppe hinzufügen]', '#'
+          /:url => {:action => "new_group_order_article", :id => order_article}
     %tbody
       - for group_order_article in order_article.group_order_articles.ordered.all(:include => [:group_order])
         %tr{:class => cycle('even', 'odd', :name => 'results')}[group_order_article]
@@ -16,18 +17,19 @@
             = group_order_article.group_order.ordergroup.name
           %td{:id => "group_order_article_#{group_order_article.id}_quantity", :style => "white-space:nowrap"}
             = group_order_article.result
-            = button_to_remote( "+", :url => {:action => "update_group_order_article_result", :id => group_order_article, :modifier => '+'}, :html => {:style => "float:left"}, :success => "Element.hide('loader');", :before => "Element.show('loader');")
-            = button_to_remote( "-", :url => {:action => "update_group_order_article_result", :id => group_order_article, :modifier => '-'}, :success => "Element.hide('loader');", :before => "Element.show('loader');")
+            /= button_to_remote( "+", :url => {:action => "update_group_order_article_result", :id => group_order_article, :modifier => '+'}, :html => {:style => "float:left"}, :success => "Element.hide('loader');", :before => "Element.show('loader');")
+            /= button_to_remote( "-", :url => {:action => "update_group_order_article_result", :id => group_order_article, :modifier => '-'}, :success => "Element.hide('loader');", :before => "Element.show('loader');")
           %td.currency
             = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result, :unit => "")
           %td.actions{:style=>"width:1em"}
-            = remote_link_to icon(:edit), :update => 'edit_box', |
-              :url => {:action => 'edit_group_order_article', :id => group_order_article}, |
-              :success => "Element.hide('loader'); Element.show('edit_box')" |
+            = link_to icon(:edit), '#'
+            /:update => 'edit_box', |
+            /:url => {:action => 'edit_group_order_article', :id => group_order_article}, |
+            /:success => "Element.hide('loader'); Element.show('edit_box')" |
           %td.actions{:style=>"width:1em"}
-            = remote_link_to icon(:delete), |
-              :url => {:action => 'destroy_group_order_article', :id => group_order_article}, |
-              :confirm => 'Bist du sicher?', :method => 'post' |
+            = link_to icon(:delete), '#'
+            /:url => {:action => 'destroy_group_order_article', :id => group_order_article}, |
+            /:confirm => 'Bist du sicher?', :method => 'post' |
           %td
     %tfoot
       %tr{:class => cycle('even', 'odd', :name => 'results')}

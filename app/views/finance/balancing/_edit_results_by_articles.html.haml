@@ -1,15 +1,15 @@
 %p{:style => "float:left"}
   %b Lieferung bearbeiten  
 %p{:style => "float:right"}
-  = remote_link_to "Artikel hinzufügen", :url => {:action => "new_order_article", :id => @order}
+  /= remote_link_to "Artikel hinzufügen", :url => {:action => "new_order_article", :id => @order}
 
 %table{:class => "ordered_articles", :style => "clear:both"}
   %thead
     %tr
-      %th[sort_td_class_helper("name")]{:colspan => "1"}
-        = sort_link_helper "Artikel", "name", :action => "new", :remote => false
-      %th[sort_td_class_helper "order_number"]
-        = sort_link_helper "Nr.", "order_number", :action => "new", :remote => false
+      %th{colspan: "1", class: sort_td_class_helper("name")}
+        = sort_link_helper "Artikel", "name"
+      %th{class: sort_td_class_helper("order_number")}
+        = sort_link_helper "Nr.", "order_number"
       %th Menge
       %th GebGr * Einheit
       %th Netto

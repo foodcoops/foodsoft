@@ -27,25 +27,21 @@ class Finance::BalancingController < ApplicationController
       sort = "id"
     end
 
-    @articles = @order.order_articles.ordered.find(
-      :all,
-      :include => :article,
-      :order => sort
-    )
+    @articles = @order.order_articles.ordered.includes(:article).order(sort)
       
     if params[:sort] == "order_number"
-      @articles = @articles.sort { |a,b| a.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> b.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
+      @articles = @articles.to_a.sort { |a,b| a.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> b.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
     elsif params[:sort] == "order_number_reverse"
-      @articles = @articles.sort { |a,b| b.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> a.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
+      @articles = @articles.to_a.sort { |a,b| b.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> a.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
     end
 
     view = params[:view]
     params[:view] = nil
 
-    case view
+    case view.try(:to_sym)
       when 'editResults'
         render :partial => 'edit_results_by_articles' and return
-      when 'groupsOverview'
+      when :groups_overview
         render :partial => 'shared/articles_by_groups', :locals => {:order => @order} and return
       when 'articlesOverview'
        render :partial => 'shared/articles_by_articles', :locals => {:order => @order} and return
