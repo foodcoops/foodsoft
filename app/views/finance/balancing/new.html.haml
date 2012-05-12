@@ -35,14 +35,12 @@
         = simple_format @order.note
       - else
         %p Hier kannst Du deine Abrechnung kommentieren
-    = remote_link_to "Notiz bearbeiten", |
-       :update => 'edit_box', :url => {:action => 'edit_note', :id => @order}, |
-       :success => "Element.hide('loader'); Element.show('edit_box')" |
+    = link_to "Notiz bearbeiten", edit_note_finance_order_path(@order), remote: true
   .box_title
     %h2 Kommentare
   .column_content
     #comments
-      = render :partial => 'shared/comments'
+      = render :partial => 'shared/comments', locals: {comments: @order.comments}
       
 .left_column{:style => 'width: 69%'}
   .box_title
@@ -53,6 +51,6 @@
         %li= remote_link_to 'Bestellung bearbeiten', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'editResults'}
   .column_content
     #results
-      = render :partial => 'edit_results_by_articles'
+      /= render :partial => 'edit_results_by_articles'
     %p= link_to_top
 #edit_box{:style => 'display:none'}

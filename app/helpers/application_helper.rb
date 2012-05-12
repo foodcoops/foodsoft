@@ -112,7 +112,7 @@ module ApplicationHelper
       :success => "Element.hide('loader')",
       :method => :get
     }
-    link_to_remote(text, remote_options.merge(options))
+    link_to(text, options[:url], remote_options.merge(options))
   end
 
   def format_roles(record)

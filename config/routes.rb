@@ -119,6 +119,14 @@ Foodsoft::Application.routes.draw do
 
     namespace :finance do
       root :to => 'balancing#index'
+
+      resources :order, controller: 'balancing', path: 'balancing' do
+        member do
+          get :edit_note
+          put :update_note
+        end
+      end
+
       match 'balancing/list' => 'balancing#list', :as => 'balancing'
 
       resources :invoices

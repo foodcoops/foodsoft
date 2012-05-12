@@ -1,8 +1,7 @@
 # encoding: utf-8
 class Finance::BalancingController < ApplicationController
   before_filter :authenticate_finance
-  verify :method => :post, :only => [:close, :close_direct]
-  
+
   def index
     @financial_transactions = FinancialTransaction.find(:all, :order => "created_on DESC", :limit => 8)
     @orders = Order.finished_not_closed
@@ -55,18 +54,15 @@ class Finance::BalancingController < ApplicationController
 
   def edit_note
     @order = Order.find(params[:id])
-    render :partial => 'edit_note'
+    render :layout => false
   end
 
   def update_note
     @order = Order.find(params[:id])
-    render :update do |page|
-      if @order.update_attributes(params[:order])
-        page["note"].replace_html simple_format(@order.note)
-        page["edit_box"].hide
-      else
-        page["results"].replace_html :partial => "edit_note"
-      end
+    if @order.update_attributes(params[:order])
+      render :layout => false
+    else
+      render :action => :edit_note, :layout => false
     end
   end
 
