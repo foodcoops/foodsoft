@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(:version => 20120622094337) do
   end
 
   add_index "group_order_articles", ["group_order_id", "order_article_id"], :name => "goa_index", :unique => true
+  add_index "group_order_articles", ["group_order_id"], :name => "index_group_order_articles_on_group_order_id"
+  add_index "group_order_articles", ["order_article_id"], :name => "index_group_order_articles_on_order_article_id"
 
   create_table "group_orders", :force => true do |t|
     t.integer  "ordergroup_id",                                    :default => 0,   :null => false
