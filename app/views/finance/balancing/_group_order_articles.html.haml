@@ -7,8 +7,8 @@
         %td Einheiten
         %td Gesamtpreis
         %td{:colspan => "3",:style => "width:14em"}
-          = link_to '[Gruppe hinzufügen]', '#'
-          /:url => {:action => "new_group_order_article", :id => order_article}
+          = link_to '[Gruppe hinzufügen]', new_finance_group_order_article_path(order_id: order_article.order_id),
+            remote: true
     %tbody
       - for group_order_article in order_article.group_order_articles.ordered.all(:include => [:group_order])
         %tr{:class => cycle('even', 'odd', :name => 'results')}[group_order_article]

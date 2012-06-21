@@ -1,0 +1,26 @@
+%h2 Artikel aktualisieren
+
+= form_for [:finance, @order, @order_article], remote: true do |form|
+  = @order_article.errors.try(:full_messages)
+  %table
+    %tr
+      %th Name
+      %th Nr.
+      %th
+        %abbr{:title=>"Anzahl gelieferter Gebinde"} Menge
+      %th Einheit
+      %th GebGr
+      %th Netto
+      %th MwSt.
+      %th Pfand
+    %tr
+      %td= text_field_tag 'article[name]', @order_article.article.name, :size => 20
+      %td= text_field_tag 'article[order_number]', @order_article.article.order_number, :size => 3
+      %td= text_field_tag 'order_article[units_to_order]', @order_article.units_to_order, :size => 5
+      %td= text_field_tag 'article[unit]', @order_article.article.unit, :size => 5
+      %td= text_field_tag 'price[unit_quantity]', @order_article.price.unit_quantity, :size => 3
+      %td= text_field_tag 'price[price]', @order_article.price.price, :size => 3
+      %td= text_field_tag 'price[tax]', @order_article.price.tax, :size => 3
+      %td= text_field_tag 'price[deposit]', @order_article.price.deposit, :size => 3
+  %br/
+  = submit_tag "Speichern"

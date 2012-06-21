@@ -3,7 +3,7 @@ class Finance::BalancingController < ApplicationController
   before_filter :authenticate_finance
 
   def index
-    @financial_transactions = FinancialTransaction.find(:all, :order => "created_on DESC", :limit => 8)
+    @financial_transactions = FinancialTransaction.order(:created_on.desc).limit(8)
     @orders = Order.finished_not_closed
     @unpaid_invoices = Invoice.unpaid
   end
@@ -45,117 +45,6 @@ class Finance::BalancingController < ApplicationController
         render :partial => 'shared/articles_by_groups', :locals => {:order => @order} and return
       when 'articlesOverview'
        render :partial => 'shared/articles_by_articles', :locals => {:order => @order} and return
-    end
-  end
-
-  def edit_note
-    @order = Order.find(params[:id])
-    render :layout => false
-  end
-
-  def update_note
-    @order = Order.find(params[:id])
-    if @order.update_attributes(params[:order])
-      render :layout => false
-    else
-      render :action => :edit_note, :layout => false
-    end
-  end
-
-  def new_order_article
-    @order = Order.find(params[:id])
-    render :update do |page|
-      page["edit_box"].replace_html :partial => "new_order_article"
-      page["edit_box"].show
-    end
-  end
-  
-  def auto_complete_for_article_name
-    order = Order.find(params[:order_id])
-    find_params = {
-      :conditions => ["LOWER(articles.name) LIKE ?", "%#{params[:article][:name].downcase}%" ],
-      :order => 'articles.name ASC',
-      :limit => 8
-    }
-    @articles = if order.stockit?
-      StockArticle.all find_params
-    else
-      order.supplier.articles.all find_params
-    end
-  
-    render :partial => 'shared/auto_complete_articles'
-  end
-  
-  def create_order_article
-    @order = Order.find(params[:order_id])
-    article = Article.find(params[:order_article][:article_id])
-    order_article = @order.order_articles.find_by_article_id(article.id)
-
-    unless order_article
-      # Article wasn't already assigned with this order, lets create a new one
-      order_article = @order.order_articles.build(params[:order_article])
-      order_article.article_price = order_article.article.article_prices.first
-    end
-    # Set units to order to 1, so the article is visible on page
-    order_article.units_to_order = 1
-    
-    render :update do |page|
-      if order_article.save
-        page["edit_box"].hide
-        page.insert_html :top, "result_table", :partial => "order_article_result", :locals => {:order_article => order_article}
-        page["order_article_#{order_article.id}"].visual_effect :highlight, :duration => 2
-        page["group_order_articles_#{order_article.id}"].show
-      else
-        page["edit_box"].replace_html :partial => "new_order_article"
-      end
-    end
-
-  rescue
-    render :update do |page|
-      page.replace_html "edit_box", :text => "<b>Keinen Artikel gefunden. Bitte erneut versuchen.</b>"
-      page.insert_html :bottom, "edit_box", :partial => "new_order_article"
-    end
-  end
-
-  def edit_order_article
-    @order_article = OrderArticle.find(params[:id])
-    render :update do |page|
-       page["edit_box"].replace_html :partial => 'edit_order_article'
-       page["edit_box"].show
-    end
-  end
-
-  # Update this article and creates a new articleprice if neccessary
-  def update_order_article
-    @order_article = OrderArticle.find(params[:id])
-    begin
-      @order_article.update_article_and_price!(params[:article], params[:price], params[:order_article])
-      render :update do |page|
-        page["edit_box"].hide
-        page["summary"].replace_html :partial => 'summary', :locals => {:order => @order_article.order}
-        page["summary"].visual_effect :highlight, :duration => 2
-        page["order_article_#{@order_article.id}"].replace_html :partial => 'order_article', :locals => {:order_article => @order_article}
-        page["order_article_#{@order_article.id}"].visual_effect :highlight, :delay => 0.5, :duration => 2
-        page["group_order_articles_#{@order_article.id}"].replace_html :partial => "group_order_articles", :locals => {:order_article => @order_article}
-      end
-    rescue => @error
-      render :update do |page|
-        page['edit_box'].replace_html :partial => 'edit_order_article'
-      end
-    end
-  end
-
-  def destroy_order_article
-    order_article = OrderArticle.find(params[:id])
-    order_article.destroy
-    # Updates ordergroup values
-    order_article.group_order_articles.each { |goa| goa.group_order.update_price! }
-    
-    render :update do |page|
-      page["order_article_#{order_article.id}"].remove
-      page["group_order_articles_#{order_article.id}"].remove
-      page["summary"].replace_html :partial => 'summary', :locals => {:order => order_article.order}
-      page["summary"].visual_effect :highlight, :duration => 2
     end
   end
 

@@ -221,6 +221,7 @@ de:
       financial_transaction: Kontotransaktion
       order: Bestellung
       order_comment: Kommentar
+      order_article: Bestell-Artikel
     attributes:
       article:
         price: Nettopreis
@@ -345,6 +346,8 @@ de:
       order:
         starts: "Läuft vom"
         ends: "Endet am"
+      order_article:
+        article_id: Artikel aus dem Katalog wählen
       invoice:
         supplier: Lieferant
         number: Nummer

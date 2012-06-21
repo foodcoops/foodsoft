@@ -1,7 +1,7 @@
 %p{:style => "float:left"}
   %b Lieferung bearbeiten  
 %p{:style => "float:right"}
-  /= remote_link_to "Artikel hinzufügen", :url => {:action => "new_order_article", :id => @order}
+  = link_to "Artikel hinzufügen", new_finance_order_order_article_path(@order), remote: true
 
 %table{:class => "ordered_articles", :style => "clear:both"}
   %thead

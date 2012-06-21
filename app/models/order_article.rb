@@ -8,9 +8,12 @@ class OrderArticle < ActiveRecord::Base
 
   validates_presence_of :order_id, :article_id
   validate :article_and_price_exist
+  validates_uniqueness_of :article_id, scope: :order_id
 
   scope :ordered, :conditions => "units_to_order >= 1"
 
+  before_create :init_from_balancing
+  after_destroy :update_ordergroup_prices
 
   # This method returns either the ArticlePrice or the Article
   # The first will be set, when the the order is finished
@@ -110,6 +113,19 @@ class OrderArticle < ActiveRecord::Base
   
   def article_and_price_exist
      errors.add(:article, "muss angegeben sein und einen aktuellen Preis haben") if !(article = Article.find(article_id)) || article.fc_price.nil?
+  end
+
+  # Associate with current article price if created in a finished order
+  def init_from_balancing
+    if order.present? and order.finished?
+      self.article_price = article.article_prices.first
+      self.units_to_order = 1
+    end
+  end
+
+  #TODO: Delayed job maybe??
+  def update_ordergroup_prices
+    group_order_articles.each { |goa| goa.group_order.update_price! }
   end
 
 end

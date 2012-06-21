@@ -1,0 +1,2 @@
+module Finance::OrderArticlesHelper
+end

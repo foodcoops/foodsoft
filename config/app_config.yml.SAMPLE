@@ -51,7 +51,7 @@ development: &defaults
 
   # Access to sharedLists, the external article-database
   shared_lists:
-    adapter: mysql
+    adapter: mysql2
     host: localhost
     database: sharedlists_development
     username: root

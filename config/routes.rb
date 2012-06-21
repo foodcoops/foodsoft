@@ -125,7 +125,11 @@ Foodsoft::Application.routes.draw do
           get :edit_note
           put :update_note
         end
+
+        resources :order_articles
       end
+
+      resources :group_order_articles
 
       match 'balancing/list' => 'balancing#list', :as => 'balancing'
 

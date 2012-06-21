@@ -1,7 +1,5 @@
 %td.closed
-  = link_to order_article.article.name, '#'
-  /"Element.toggle('group_order_articles_#{order_article.id}'); |
-  /Element.toggleClassName(this.up('td'), 'open')" |
+  = link_to order_article.article.name, '#', 'data-toggle-this' => "#group_order_articles_#{order_article.id}"
 %td= order_article.article.order_number
 %td
   = order_article.units_to_order
@@ -21,10 +19,7 @@
 %td= order_article.price.tax
 %td= order_article.price.deposit
 %td
-  = link_to icon(:edit), '#'
-  /:url => {:action => 'edit_order_article', :id => order_article} |
+  = link_to icon(:edit), edit_finance_order_order_article_path(@order, order_article), remote: true
 %td
-  = link_to icon(:delete), '#'
-  /:confirm => 'Bist du sicher?'
-  /:url => {:action => 'destroy_order_article', :id => order_article},
-  /:method => :post
+  = link_to icon(:delete), finance_order_order_article_path(@order, order_article), method: :delete,
+    remote: true, confirm: 'Bist du sicher?'

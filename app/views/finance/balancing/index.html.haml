@@ -43,7 +43,7 @@
   .box_title
     %h2 noch nicht abgerechnet
   .column_content
-    %p= link_to "Bestellungsübersicht", :controller => 'balancing', :action => 'list'
+    %p= link_to "Bestellungsübersicht", finance_balancing_path
     - unless @orders.empty?
       %table.list
         %thead
@@ -58,6 +58,6 @@
               %td= order.name
               %td= format_date(order.ends)
               %td{:class => "currency"}= number_to_currency(order.sum(:fc))
-              %td= link_to "abrechnen", :action => "new", :id => order
+              %td= link_to "abrechnen", new_finance_order_path(id: order)
     - else
       Super, alles schon abgerechnet...
