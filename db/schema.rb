@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110507192928) do
+ActiveRecord::Schema.define(:version => 20120622094337) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -129,28 +129,29 @@ ActiveRecord::Schema.define(:version => 20110507192928) do
   add_index "group_orders", ["ordergroup_id"], :name => "index_group_orders_on_ordergroup_id"
 
   create_table "groups", :force => true do |t|
-    t.string   "type",                                              :default => "",    :null => false
-    t.string   "name",                                              :default => "",    :null => false
+    t.string   "type",                                                   :default => "",    :null => false
+    t.string   "name",                                                   :default => "",    :null => false
     t.string   "description"
-    t.decimal  "account_balance",     :precision => 8, :scale => 2, :default => 0.0,   :null => false
+    t.decimal  "account_balance",          :precision => 8, :scale => 2, :default => 0.0,   :null => false
     t.datetime "account_updated"
-    t.datetime "created_on",                                                           :null => false
-    t.boolean  "role_admin",                                        :default => false, :null => false
-    t.boolean  "role_suppliers",                                    :default => false, :null => false
-    t.boolean  "role_article_meta",                                 :default => false, :null => false
-    t.boolean  "role_finance",                                      :default => false, :null => false
-    t.boolean  "role_orders",                                       :default => false, :null => false
-    t.boolean  "weekly_task",                                       :default => false
+    t.datetime "created_on",                                                                :null => false
+    t.boolean  "role_admin",                                             :default => false, :null => false
+    t.boolean  "role_suppliers",                                         :default => false, :null => false
+    t.boolean  "role_article_meta",                                      :default => false, :null => false
+    t.boolean  "role_finance",                                           :default => false, :null => false
+    t.boolean  "role_orders",                                            :default => false, :null => false
+    t.boolean  "weekly_task",                                            :default => false
     t.integer  "weekday"
     t.string   "task_name"
     t.string   "task_description"
-    t.integer  "task_required_users",                               :default => 1
+    t.integer  "task_required_users",                                    :default => 1
     t.datetime "deleted_at"
     t.string   "contact_person"
     t.string   "contact_phone"
     t.string   "contact_address"
     t.text     "stats"
-    t.integer  "task_duration",                                     :default => 1
+    t.integer  "task_duration",                                          :default => 1
+    t.integer  "next_weekly_tasks_number",                               :default => 8
   end
 
   add_index "groups", ["name"], :name => "index_groups_on_name", :unique => true

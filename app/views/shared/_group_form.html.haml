@@ -39,6 +39,10 @@
         %td
           = @form.label :task_description, "Beschreibung:"
         %td= @form.text_area :task_description, :size => "30x10"
+      %tr
+        %td
+          = @form.label :next_weekly_tasks_number, "Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?"
+        %td= @form.text_field :next_weekly_tasks_number, :size => 3
 
   %script{ 'type' => "text/javascript"}
     :plain

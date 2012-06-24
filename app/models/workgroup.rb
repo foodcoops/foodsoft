@@ -4,15 +4,17 @@ class Workgroup < Group
   # returns all non-finished tasks
   has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], :order => 'due_date ASC'
 
-  validates_presence_of :task_name, :weekday, :task_required_users,
-    :if => Proc.new {|workgroup| workgroup.weekly_task }
+  validates_presence_of :task_name, :weekday, :task_required_users, :next_weekly_tasks_number,
+    :if => :weekly_task
+  validates_numericality_of :next_weekly_tasks_number, :greater_than => 0, :less_than => 21, :only_integer => true,
+    :if => :weekly_task
 
   def self.weekdays
     [["Montag", "1"], ["Dienstag", "2"], ["Mittwoch","3"],["Donnerstag","4"],["Freitag","5"],["Samstag","6"],["Sonntag","0"]]
   end
 
   # Returns an Array with date-objects to represent the next weekly-tasks
-  def next_weekly_tasks(number = 8)
+  def next_weekly_tasks
     # our system starts from 0 (sunday) to 6 (saturday)
     # get difference between groups weekday and now
     diff = self.weekday - Time.now.wday 
@@ -25,7 +27,7 @@ class Workgroup < Group
     end
     # now generate the Array
     nextTasks = Array.new
-    number.times do
+    next_weekly_tasks_number.times do
       nextTasks << nextTask.to_date
       nextTask = 1.week.from_now(nextTask)
     end
