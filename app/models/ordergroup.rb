@@ -62,6 +62,12 @@ class Ordergroup < Group
     stats[:orders_sum] != 0 ? stats[:jobs_size].to_f / stats[:orders_sum].to_f : 0
   end
 
+  # This is the ordergroup job per euro performance 
+  # in comparison to the hole foodcoop average
+  def apples
+    ((avg_jobs_per_euro / Ordergroup.avg_jobs_per_euro) * 100).to_i rescue 0
+  end
+
   # Global average
   def self.avg_jobs_per_euro
     stats = Ordergroup.all.collect(&:stats)
