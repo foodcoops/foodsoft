@@ -27,7 +27,7 @@
         padding: 0.5em 1.2em 0.6em 1.2em;
         margin-top: 0; }
       #nav ul li a:hover {
-        color: #ED0606; }
+        color: #ed0606; }
       #nav ul li ul {
         display: none;
         position: absolute;
@@ -36,22 +36,22 @@
         padding: 0.6em;
         bottom: -1.4em;
         right: 0em;
-        background: #ED0606; }
+        background: #ed0606; }
         #nav ul li ul li {
           border-left: 0.1em dotted white;
           background: none; }
         #nav ul li ul a, #nav ul li ul a:hover {
           border: none;
           background: none;
-          color: #FFF;
+          color: white;
           font-style: normal;
           font-size: 1em; }
     #nav ul li.current a {
       border: none;
       border-bottom: none;
-      background: #ED0606;
+      background: #ed0606;
       padding-bottom: 0.6em;
-      color: #FFF; }
+      color: white; }
     #nav ul li.current ul {
       display: inline; }
       #nav ul li.current ul a {

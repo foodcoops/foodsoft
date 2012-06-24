@@ -14,7 +14,7 @@ unless global_avg == 0 or global_avg.nan?
 %>
   Engagement Deiner Bestellgruppe
   <div class="stats-bar" style="width:<%= length_of_group_bar -%>px; background-color:<%= color -%>">
-    <%= ((group_avg / global_avg) * 100).to_i -%><%=  " Äpfel" if length_of_group_bar > 50 -%>
+    <%= @ordergroup.apples -%><%=  " Äpfel" if length_of_group_bar > 50 -%>
   </div>
   Durchschnittsengagement
   <div class="stats-bar" style="width:<%= length_of_global_bar -%>px">
