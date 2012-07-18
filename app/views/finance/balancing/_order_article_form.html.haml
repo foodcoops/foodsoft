@@ -11,6 +11,8 @@
     %th Netto
     %th MwSt.
     %th Pfand
+    %th 
+      %abbr{:title=>"Aendert den Preis auch fuer zukuenftige Bestellungen"} Preisaenderung (Preis/MwSt/Pfand) global anwenden
   %tr
     %td= text_field_tag 'article[name]', @order_article.article.name, :size => 20
     %td= text_field_tag 'article[order_number]', @order_article.article.order_number, :size => 3
@@ -20,6 +22,7 @@
     %td= text_field_tag 'price[price]', @order_article.price.price, :size => 3
     %td= text_field_tag 'price[tax]', @order_article.price.tax, :size => 3
     %td= text_field_tag 'price[deposit]', @order_article.price.deposit, :size => 3
+    %td= check_box_tag  'price_global'
 %br/
 = submit_tag "Speichern"
 | 
