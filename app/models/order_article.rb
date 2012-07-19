@@ -77,10 +77,12 @@ class OrderArticle < ActiveRecord::Base
   end
 
   # Updates order_article and belongings during balancing process
-  def update_article_and_price!(article_attributes, price_attributes, order_article_attributes)
+  def update_article_and_price!(article_attributes, price_attributes, order_article_attributes, global_attribute)
     OrderArticle.transaction do
       # Updates article
       article.update_attributes!(article_attributes)
+      article.update_attributes!(price_attributes) if global_attribute
+
 
       article_price.attributes = price_attributes
       if article_price.changed?
@@ -92,6 +94,7 @@ class OrderArticle < ActiveRecord::Base
         # Updates ordergroup values
         group_order_articles.each { |goa| goa.group_order.update_price! }
       end
+      
 
       # Updates units_to_order
       self.attributes = order_article_attributes
