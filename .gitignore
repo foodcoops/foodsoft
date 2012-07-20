@@ -12,4 +12,3 @@ config/initializers/session_store.rb
 .idea
 .rvmrc
 .get-dump.yml
-.rbenv-version
