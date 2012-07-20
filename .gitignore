@@ -8,8 +8,5 @@ capfile
 config/environments/fcschinke09.rb
 *.swp
 public/**/*_cached.*
-config/initializers/secret_token.rb
 .idea
-.rvmrc
 .get-dump.yml
-.rbenv-version
