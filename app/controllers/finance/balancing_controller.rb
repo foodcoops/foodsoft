@@ -136,7 +136,7 @@ class Finance::BalancingController < ApplicationController
   def update_order_article
     @order_article = OrderArticle.find(params[:id])
     begin
-      @order_article.update_article_and_price!(params[:article], params[:price], params[:order_article])
+      @order_article.update_article_and_price!(params[:article], params[:price], params[:order_article], params[:price_global])
       render :update do |page|
         page["edit_box"].hide
         page["summary"].replace_html :partial => 'summary', :locals => {:order => @order_article.order}
