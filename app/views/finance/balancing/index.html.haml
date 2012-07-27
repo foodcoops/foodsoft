@@ -58,6 +58,6 @@
               %td= order.name
               %td= format_date(order.ends)
               %td{:class => "currency"}= number_to_currency(order.sum(:fc))
-              %td= link_to "abrechnen", new_finance_order_path(id: order)
+              %td= link_to "abrechnen", new_finance_order_path(order_id: order.id)
     - else
       Super, alles schon abgerechnet...

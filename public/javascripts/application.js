@@ -2,13 +2,13 @@
 $(function() {
 
     // Show/Hide a specific DOM element
-    $('a[data-toggle-this]').click(function() {
+    $('a[data-toggle-this]').live('click', function() {
         $($(this).data('toggle-this')).toggle();
         return false;
     });
 
     // Remove this item from DOM
-    $('a[data-remove-this').click(function() {
+    $('a[data-remove-this]').live('click', function() {
         $($(this).data('remove-this')).remove();
         return false;
     });

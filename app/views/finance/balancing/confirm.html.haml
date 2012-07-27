@@ -11,6 +11,6 @@
         %td= number_to_currency(group_order.price)
   %p
     %div{:style => "float:left"}
-      = button_to "Abschließen", :action => "close", :id => @order
+      = button_to "Abschließen", close_finance_order_path(@order), method: :put
     %div{:style => "float:right"}
-      = link_to 'Zurück zur Abrechnung', :action => 'new', :id => @order
+      = link_to 'Zurück zur Abrechnung', new_finance_order_path(order_id: @order.id)

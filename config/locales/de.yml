@@ -348,6 +348,9 @@ de:
         ends: "Endet am"
       order_article:
         article_id: Artikel aus dem Katalog wählen
+      group_order_article:
+        ordergroup_id: Bestellgruppe
+        result: Menge
       invoice:
         supplier: Lieferant
         number: Nummer

@@ -2,5 +2,5 @@
   Neuer gelieferter Artikel die Bestellung
 
 = simple_form_for [:finance, @order, @order_article], remote: true do |form|
-  = form.input :article_id, as: :select, collection: @order.supplier.articles.order(:name)
+  = form.input :article_id, as: :select, collection: new_order_articles_collection
   = form.submit

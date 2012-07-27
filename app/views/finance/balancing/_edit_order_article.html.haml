@@ -1,7 +1,0 @@
-%h2 
-  Bearbeiten von
-  = @order_article.article.name
-
-- remote_form_for :order_article, :url => {:action => 'update_order_article', :id => @order_article }, |
-  :before => "Element.show('loader')", :success => "Element.hide('loader')" do |
-  = render :partial => "order_article_form"

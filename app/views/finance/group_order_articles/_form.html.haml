@@ -1,0 +1,9 @@
+%h2 Mengenänderung
+%p
+  %b Artikel: #{@order_article.article.name}
+
+- simple_form_for [:finance, @group_order_article], remote: true do |form|
+  = form.hidden_field :order_article_id
+  = form.input :ordergroup_id, as: :select, collection: Ordergroup.all.map { |g| [g.name, g.id] }
+  = form.input :result, hint: "Einheit: #{@order_article.article.unit}"
+  = form.submit 'Speichern'

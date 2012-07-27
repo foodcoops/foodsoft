@@ -18,6 +18,16 @@ class GroupOrderArticle < ActiveRecord::Base
 
   localize_input_of :result
 
+  # Setter used in group_order_article#new
+  # We have to create an group_order, if the ordergroup wasn't involved in the order yet
+  def ordergroup_id=(id)
+    self.group_order = GroupOrder.find_or_initialize_by_order_id_and_ordergroup_id(order_article.order_id, id)
+  end
+
+  def ordergroup_id
+    group_order.try(:ordergroup_id)
+  end
+
   # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties 
   # and the associated GroupOrderArticleQuantities chronologically.
   # 

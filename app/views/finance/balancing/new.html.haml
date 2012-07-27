@@ -1,8 +1,5 @@
 - title "#{@order.name} abrechnen"
 
-- if @order.closed?
-  %p
-    %b Achtung, Bestellung wurde schon abgerechnet!
 .left_column{:style => 'width: 24em'}
   .box_title
     %h2 Zusammenfassung
@@ -46,11 +43,11 @@
   .box_title
     #editOrderNav
       %ul
-        %li= link_to 'Gruppenübersicht', new_finance_order_path(@order, view: :groups_overview)
-        /%li= remote_link_to 'Artikelübersicht', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'articlesOverview'}
-        /%li= remote_link_to 'Bestellung bearbeiten', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'editResults'}
+        %li= link_to 'Bestellung bearbeiten', new_finance_order_path(order_id: @order.id, view: 'edit_results'), remote: true
+        %li= link_to 'Gruppenübersicht', new_finance_order_path(order_id: @order.id, view: 'groups_overview'), remote: true
+        %li= link_to 'Artikelübersicht', new_finance_order_path(order_id: @order.id, view: 'articles_overview'), remote: true
   .column_content
     #results
-      = render :partial => 'edit_results_by_articles'
+      = render partial: 'edit_results_by_articles'
     %p= link_to_top
 #edit_box{:style => 'display:none'}

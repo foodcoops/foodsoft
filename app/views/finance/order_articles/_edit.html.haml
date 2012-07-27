@@ -1,7 +1,6 @@
 %h2 Artikel aktualisieren
 
 = form_for [:finance, @order, @order_article], remote: true do |form|
-  = @order_article.errors.try(:full_messages)
   %table
     %tr
       %th Name

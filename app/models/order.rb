@@ -194,6 +194,12 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Close the order directly, without automaticly updating ordergroups account balances
+  def close_direct!(user)
+    raise "Bestellung wurde schon abgerechnet" if closed?
+    update_attributes! state: 'closed', updated_by: user
+  end
+
   protected
 
   def starts_before_ends

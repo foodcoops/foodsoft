@@ -1,7 +1,4 @@
 - title "beendete Bestellungen"
-%p{:style => "width:30em"}
-  %i
-    Beschreibungstext für die Abrechnunsmodi ....
 .left_column{:style => "width:70em"}
   .box_title
   .column_content
@@ -18,15 +15,15 @@
         %tbody
           - @orders.each do |order|
             %tr{:class => cycle("even","odd", :name => "order")}
-              %td= link_to truncate(order.name), :action => "new", :id => order
+              %td= link_to truncate(order.name), new_finance_order_path(order_id: order.id)
               %td=h format_time(order.ends) unless order.ends.nil?
               %td= order.closed? ? "abgerechnet (#{number_to_currency order.foodcoop_result})" : "beendet"
               %td= order.updated_by.nil? ? '??' : order.updated_by.nick
               %td
                 - unless order.closed?
-                  = link_to "abrechnen", :action => "new", :id => order
+                  = link_to "abrechnen", new_finance_order_path(order_id: order.id)
                   | 
-                  = link_to 'direkt schließen', {:action => 'close_direct', :id => order}, |
-                    :confirm => 'Wirklich die Bestellung schließen setzen?', :method => "post" |
+                  = link_to 'direkt schließen', close_direct_finance_order_path(order),
+                    :confirm => 'Wirklich die Bestellung schließen setzen?', :method => :put
     - else
       %i derzeit gibt es keine beendeten Bestellungen
