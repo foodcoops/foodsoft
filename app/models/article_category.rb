@@ -5,12 +5,3 @@ class ArticleCategory < ActiveRecord::Base
 
 end
 
-# == Schema Information
-#
-# Table name: article_categories
-#
-#  id          :integer(4)      not null, primary key
-#  name        :string(255)     default(""), not null
-#  description :string(255)
-#
-

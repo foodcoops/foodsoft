@@ -20,11 +20,6 @@ gem 'localize_input', :git => "git://github.com/bennibu/localize_input.git"
 gem 'acts_as_configurable'
 gem 'wikicloth'
 
-group :development do
-  gem 'annotate'
-  gem 'hirb'
-end
-
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'
 end

@@ -130,17 +130,3 @@ class OrderArticle < ActiveRecord::Base
 
 end
 
-# == Schema Information
-#
-# Table name: order_articles
-#
-#  id               :integer(4)      not null, primary key
-#  order_id         :integer(4)      default(0), not null
-#  article_id       :integer(4)      default(0), not null
-#  quantity         :integer(4)      default(0), not null
-#  tolerance        :integer(4)      default(0), not null
-#  units_to_order   :integer(4)      default(0), not null
-#  lock_version     :integer(4)      default(0), not null
-#  article_price_id :integer(4)
-#
-

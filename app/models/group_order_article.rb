@@ -181,16 +181,3 @@ class GroupOrderArticle < ActiveRecord::Base
 end
 
 
-# == Schema Information
-#
-# Table name: group_order_articles
-#
-#  id               :integer(4)      not null, primary key
-#  group_order_id   :integer(4)      default(0), not null
-#  order_article_id :integer(4)      default(0), not null
-#  quantity         :integer(4)      default(0), not null
-#  tolerance        :integer(4)      default(0), not null
-#  updated_on       :datetime        not null
-#  result           :decimal(8, 3)
-#
-

@@ -35,7 +35,6 @@ GEM
       activesupport (= 3.0.12)
     activesupport (3.0.12)
     acts_as_configurable (0.0.8)
-    annotate (2.4.0)
     arel (2.0.10)
     builder (2.1.2)
     client_side_validations (3.0.4)
@@ -47,7 +46,6 @@ GEM
     fastercsv (1.5.4)
     haml (3.1.4)
     has_scope (0.5.0)
-    hirb (0.3.4)
     i18n (0.5.0)
     inherited_resources (1.2.2)
       has_scope (~> 0.5.0)
@@ -125,12 +123,10 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_configurable
-  annotate
   client_side_validations
   exception_notification
   fastercsv
   haml
-  hirb
   inherited_resources
   jquery-rails
   localize_input!

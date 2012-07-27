@@ -220,18 +220,3 @@ class Order < ActiveRecord::Base
 
 end
 
-# == Schema Information
-#
-# Table name: orders
-#
-#  id                 :integer(4)      not null, primary key
-#  supplier_id        :integer(4)
-#  note               :text
-#  starts             :datetime
-#  ends               :datetime
-#  state              :string(255)     default("open")
-#  lock_version       :integer(4)      default(0), not null
-#  updated_by_user_id :integer(4)
-#  foodcoop_result    :decimal(8, 2)
-#
-

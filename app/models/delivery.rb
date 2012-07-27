@@ -19,14 +19,3 @@ class Delivery < ActiveRecord::Base
 end
 
 
-# == Schema Information
-#
-# Table name: deliveries
-#
-#  id           :integer(4)      not null, primary key
-#  supplier_id  :integer(4)
-#  delivered_on :date
-#  created_at   :datetime
-#  note         :text
-#
-

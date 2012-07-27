@@ -16,12 +16,3 @@ class Membership < ActiveRecord::Base
   end
 end
 
-# == Schema Information
-#
-# Table name: memberships
-#
-#  id       :integer(4)      not null, primary key
-#  group_id :integer(4)      default(0), not null
-#  user_id  :integer(4)      default(0), not null
-#
-
