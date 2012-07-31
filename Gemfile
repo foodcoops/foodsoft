@@ -17,7 +17,6 @@ gem 'meta_where'
 gem 'meta_search'
 gem 'inherited_resources'
 gem 'localize_input', :git => "git://github.com/bennibu/localize_input.git"
-gem 'acts_as_configurable'
 gem 'wikicloth'
 
 group :production do

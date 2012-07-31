@@ -222,6 +222,7 @@ de:
       order: Bestellung
       order_comment: Kommentar
       order_article: Bestell-Artikel
+      invoice: Rechnung
     attributes:
       article:
         price: Nettopreis

@@ -34,7 +34,6 @@ GEM
       activemodel (= 3.0.16)
       activesupport (= 3.0.16)
     activesupport (3.0.16)
-    acts_as_configurable (0.0.8)
     arel (2.0.10)
     builder (2.1.2)
     client_side_validations (3.0.4)
@@ -122,7 +121,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_configurable
   client_side_validations
   exception_notification
   fastercsv

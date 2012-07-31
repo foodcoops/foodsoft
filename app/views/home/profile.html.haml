@@ -19,5 +19,5 @@
       %p
         = membership.group.name
         - if membership.group.type != 'Ordergroup'
-          (#{link_to "Mitgliedschaft beenden", { :action => 'cancel_membership', :membership_id => membership },
-            :confirm => "Bist Du sicher, dass Du Deine Mitgliedschaft beenden willst?", :method => :post})
+          = link_to "Mitgliedschaft beenden", cancel_membership_path(membership_id: membership),
+            confirm: "Bist Du sicher, dass Du Deine Mitgliedschaft beenden willst?", method: :post

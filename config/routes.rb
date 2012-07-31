@@ -23,6 +23,7 @@ Foodsoft::Application.routes.draw do
 
     match '/home/profile' => 'home#profile', :as => 'my_profile'
     match '/home/ordergroup' => 'home#ordergroup', :as => 'my_ordergroup'
+    match '/home/cancel_membership' => 'home#cancel_membership', :as => 'cancel_membership'
 
     ############ Wiki
 
