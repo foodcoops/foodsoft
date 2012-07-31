@@ -3,7 +3,10 @@
     $(function() {
       $('#message_recipient_tokens').tokenInput("#{users_path(:format => :json)}", {
         crossDomain: false,
-        prePopulate: $('#message_recipient_tokens').data('pre')
+        prePopulate: $('#message_recipient_tokens').data('pre'),
+        hintText: 'Nach Nutzerin suchen',
+        noResultText: 'Keine Nutzerin gefunden',
+        searchingText: 'Suche ...'
       });
 
       $('#message_sent_to_all').click(function() {

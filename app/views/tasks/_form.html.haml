@@ -3,7 +3,10 @@
     $(function() {
       $("#task_user_list").tokenInput("#{users_path(:format => :json)}", {
         crossDomain: false,
-        prePopulate: $("#task_user_list").data("pre")
+        prePopulate: $("#task_user_list").data("pre"),
+        hintText: 'Nach Nutzerin suchen',
+        noResultText: 'Keine Nutzerin gefunden',
+        searchingText: 'Suche ...'
       });
     });
 

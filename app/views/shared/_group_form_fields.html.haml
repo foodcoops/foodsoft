@@ -12,6 +12,7 @@
     = f.input :task_required_users
     = f.input :task_duration, :as => :select, :collection => (1..3)
     = f.input :task_description
+    = f.input :next_weekly_tasks_number
 
 = f.input :user_tokens, :as => :string, :input_html => { 'data-pre' => f.object.users.map { |u| u.token_attributes }.to_json }
 
@@ -35,7 +36,10 @@
 
       $("##{f.object.class.to_s.underscore}_user_tokens").tokenInput("#{users_path(:format => :json)}", {
         crossDomain: false,
-        prePopulate: $("##{f.object.class.to_s.underscore}_user_tokens").data("pre")
+        prePopulate: $("##{f.object.class.to_s.underscore}_user_tokens").data("pre"),
+        hintText: 'Nach Nutzerin suchen',
+        noResultText: 'Keine Nutzerin gefunden',
+        searchingText: 'Suche ...'
       });
     });
 

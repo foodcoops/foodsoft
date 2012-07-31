@@ -287,6 +287,7 @@ de:
         task_required_users: 'Benötige Verantwortliche'
         task_duration: 'Vor. Dauer in Stunden'
         task_description: 'Beschreibung'
+        next_weekly_tasks_number: "Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?"
         role_admin: "Administration"
         role_finance: "Fianzen"
         role_suppliers: "Lieferanten"
