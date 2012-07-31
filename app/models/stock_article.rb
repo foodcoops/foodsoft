@@ -14,15 +14,9 @@ class StockArticle < Article
   end
 
   # Check for unclosed orders and substract its ordered quantity
-  def quantity_available(exclude_order = nil)
-    available = quantity
-    for order in Order.stockit.all(:conditions => "state = 'open' OR state = 'finished'")
-      unless order == exclude_order
-        order_article = order.order_articles.first(:conditions => {:article_id => id})
-        available -= order_article.units_to_order if order_article
-      end
-    end
-    available
+  def quantity_available
+    quantity - OrderArticle.where(article_id: id).
+        joins(:order).where("orders.state = 'open' OR orders.state = 'finished'").sum(:units_to_order)
   end
 
   def self.stock_value
