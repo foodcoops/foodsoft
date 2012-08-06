@@ -1,5 +1,9 @@
 - title "Gruppe bearbeiten"
 
+%p
+  Neue Mitglieder kannst du 
+  = link_to "hier", new_invite_path(id: @workgroup.id)
+  einladen.
 = simple_form_for [:foodcoop, @workgroup] do |f|
   = render :partial => 'shared/group_form_fields', :locals => {:f => f}
   = f.submit

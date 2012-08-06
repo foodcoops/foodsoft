@@ -5,22 +5,14 @@ class InvitesController < ApplicationController
   
   def new
     @invite = Invite.new(:user => @current_user, :group => @group)
-
-    render :update do |page|
-      page.replace_html :edit_box, :partial => "new"
-      page.show :edit_box
-    end
   end
   
   def create
     @invite = Invite.new(params[:invite])
-
-    render :update do |page|
-      if @invite.save
-        page.replace_html :edit_box, :partial => "success"
-      else
-        page.replace_html :edit_box, :partial => "new"
-      end
+    if @invite.save
+      redirect_to back_or_default_path, notice: "Benutzerin wurde erfolgreich eingeladen."
+    else
+      render action: :new
     end
   end
 end

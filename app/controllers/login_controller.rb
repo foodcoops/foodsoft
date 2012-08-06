@@ -1,8 +1,7 @@
+# encoding: utf-8
 class LoginController < ApplicationController
   skip_before_filter :authenticate        # no authentication since this is the login page
   before_filter :validate_token, :only => [:password, :update_password]
-
-  verify :method => :post, :only => [:reset_password], :redirect_to => { :action => 'forgot_password' }
 
   # Display the form to enter an email address requesting a token to set a new password.
   def forgot_password
@@ -56,8 +55,7 @@ class LoginController < ApplicationController
         if @user.save
           Membership.new(:user => @user, :group => @invite.group).save!
           @invite.destroy
-          flash[:notice] = "Herzlichen Glückwunsch, Dein Account wurde erstellt. Du kannst Dich nun einloggen."
-          render :action => 'login'
+          redirect_to login_url, notice: "Herzlichen Glückwunsch, Dein Account wurde erstellt. Du kannst Dich nun einloggen."
         end
       end
     else

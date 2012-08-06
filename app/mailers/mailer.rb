@@ -1,3 +1,4 @@
+# encoding: utf-8
 # ActionMailer class that handles all emails for the FoodSoft.
 class Mailer < ActionMailer::Base
 

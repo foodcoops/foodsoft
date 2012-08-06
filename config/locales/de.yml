@@ -280,6 +280,10 @@ de:
       amount: 'Betrag'
       phone: "Telefon"
       user_tokens: 'Mitglieder'
+      user:
+        nick: "Benutzerinnenname"
+        first_name: "Vorname"
+        last_name: "Nachname"
       workgroup:
         weekly_task: 'Monatlichen Job definieren?'
         weekday: 'Wochentag'

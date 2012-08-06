@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-  before_filter :select_foodcoop, :authenticate, :store_controller, :items_per_page
+  before_filter :select_foodcoop, :authenticate, :store_controller, :items_per_page, :set_redirect_to
   after_filter  :remove_controller
 
   helper_method :current_user
@@ -90,12 +90,7 @@ class ApplicationController < ActionController::Base
   def authenticate_membership_or_admin
     @group = Group.find(params[:id])
     unless @group.member?(@current_user) or @current_user.role_admin?
-      flash[:error] = "Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!"
-      if request.xml_http_request?
-        render(:update) {|page| page.redirect_to root_path }
-      else
-        redirect_to root_path
-      end
+      redirect_to root_path, alert: "Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!"
     end
   end
 
@@ -144,5 +139,17 @@ class ApplicationController < ActionController::Base
     else
       @per_page = 20
     end
+  end
+
+  def set_redirect_to
+    session[:redirect_to] = params[:redirect_to] if params[:redirect_to]
+  end
+
+  def back_or_default_path(default = root_path)
+    if session[:redirect_to].present?
+      default = session[:redirect_to]
+      session[:redirect_to] = nil
+    end
+    default
   end
 end

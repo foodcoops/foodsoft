@@ -1,3 +1,7 @@
+%p
+  Neue Mitglieder kannst du 
+  = link_to "hier", new_invite_path(id: @workgroup.id)
+  einladen.
 = simple_form_for [:admin, @workgroup] do |f|
   = render :layout => 'shared/group_form_fields', :locals => {:f => f} do
     %h3 Zugriff auf ..

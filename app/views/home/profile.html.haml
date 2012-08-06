@@ -18,6 +18,7 @@
     - for membership in Membership.find_all_by_user_id(@user.id)
       %p
         = membership.group.name
+        = link_to "Neue Mitglieder einladen", new_invite_path(id: membership.group_id)
         - if membership.group.type != 'Ordergroup'
           = link_to "Mitgliedschaft beenden", cancel_membership_path(membership_id: membership),
             confirm: "Bist Du sicher, dass Du Deine Mitgliedschaft beenden willst?", method: :post
