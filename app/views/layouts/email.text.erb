@@ -1,6 +1,6 @@
 <%= yield %>
 
 --
-FoodSoft: <%= url_for(:controller => "home", :action => "index", :only_path => false) %>
+FoodSoft: <%= root_url %>
 Foodcoop-Homepage: <%= Foodsoft.config[:homepage] %>
 Hilfe/Help: <%= Foodsoft.config[:help_url] %>

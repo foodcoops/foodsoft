@@ -2,24 +2,19 @@
 # ActionMailer class that handles all emails for the FoodSoft.
 class Mailer < ActionMailer::Base
 
-  layout 'email'  # Use views/layouts/email.html.erb
+  layout 'email'  # Use views/layouts/email.txt.erb
 
-  default :from => "FoodSoft <#{Foodsoft.config[:email_sender]}>"
+  default from: "FoodSoft <#{Foodsoft.config[:email_sender]}>"
   
   # Sends an email copy of the given internal foodsoft message.
   def foodsoft_message(message, recipient)
-    @body = message.body
-    @sender = message.sender.nick
-    @recipients = recipient.nick
-    @reply = url_for(:controller => "messages", :action => "reply", :id => message.id)
-    @link = url_for(:controller => "messages", :action => "show", :id => message.id)
-    @profile = url_for(:controller => "home", :action => "profile")
+    @message = message
 
-    mail :sender => Foodsoft.config[:email_sender],
-         :errors_to => Foodsoft.config[:email_sender],
-         :subject => "[#{Foodsoft.config[:name]}] " + message.subject,
-         :to => recipient.email,
-         :from => "#{message.sender.nick} <#{message.sender.email}>"
+    mail sender: Foodsoft.config[:email_sender],
+         errors_to: Foodsoft.config[:email_sender],
+         subject: "[#{Foodsoft.config[:name]}] " + message.subject,
+         to: recipient.email,
+         from: "#{message.sender.nick} <#{message.sender.email}>"
   end
 
   # Sends an email with instructions on how to reset the password.

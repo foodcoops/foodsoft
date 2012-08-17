@@ -15,7 +15,8 @@ class MessagesController < ApplicationController
     @message = @current_user.send_messages.new(params[:message])
     if @message.save
       #FIXME: Send Mails wit ID instead of using message.state ...
-      call_rake :send_emails
+      #call_rake :send_emails
+      @message.deliver
       redirect_to messages_url, :notice => "Nachricht ist gespeichert und wird versendet."
     else
       render :action => 'new'

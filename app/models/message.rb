@@ -43,15 +43,15 @@ class Message < ActiveRecord::Base
 
   def reply_to=(message_id)
     message = Message.find(message_id)
-    add_recipients(message.sender.to_a)
+    add_recipients([message.sender])
     self.subject = "Re: #{message.subject}"
-    self.body = "#{message.sender.nick} schrieb am #{I18n.l(message.created_at.to_date)} um #{I18n.l(message.created_at, :format => :time)}:\n"
+    self.body = "#{message.sender.nick} schrieb am #{I18n.l(message.created_at, :format => :short)}:\n"
     message.body.each_line{ |l| self.body += "> #{l}" }
   end
 
   def mail_to=(user_id)
     user = User.find(user_id)
-    add_recipients(user.to_a)
+    add_recipients([user])
   end
 
   # Returns true if this message is a system message, i.e. was sent automatically by the FoodSoft itself.
@@ -67,20 +67,24 @@ class Message < ActiveRecord::Base
     User.find(recipients_ids)
   end
   
+  def deliver
+    for recipient in recipients
+      if recipient.settings['messages.sendAsEmail'] == "1" && !recipient.email.blank?
+        begin
+          Mailer.foodsoft_message(self, recipient).deliver
+#        rescue
+#          logger.warn "Deliver failed for #{recipient.nick}: #{recipient.email}"
+        end
+      end
+    end
+    update_attribute(:email_state, 1)
+  end
+
   # Sends all pending messages that are to be send as emails.
   def self.send_emails
     messages = Message.pending
     for message in messages
-      for recipient in message.recipients
-        if recipient.settings['messages.sendAsEmail'] == "1" && !recipient.email.blank?
-          begin
-            Mailer.foodsoft_message(message, recipient).deliver
-          rescue
-            logger.warn "Deliver failed for #{recipient.nick}: #{recipient.email}"
-          end
-        end
-      end
-      message.update_attribute(:email_state, 1)
+      message.deliver
     end
   end
 end
