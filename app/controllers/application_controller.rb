@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     # check if there is a valid session and return the logged-in user (its object)
     if session[:user_id] and params[:foodcoop]
       # for shared-host installations. check if the cookie-subdomain fits to request.
-      @current_user ||= User.find(session[:user_id]) if params[:foodcoop] == Foodsoft.env
+      @current_user ||= User.find_by_id(session[:user_id]) if params[:foodcoop] == Foodsoft.env
     end
   end
     
