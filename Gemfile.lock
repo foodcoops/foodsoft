@@ -38,6 +38,12 @@ GEM
     builder (2.1.2)
     client_side_validations (3.0.4)
       activesupport (~> 3.0.0)
+    daemons (1.1.9)
+    delayed_job (3.0.3)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.3.2)
+      activerecord (> 2.1.0)
+      delayed_job (~> 3.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     exception_notification (2.4.0)
@@ -122,6 +128,8 @@ PLATFORMS
 
 DEPENDENCIES
   client_side_validations
+  daemons
+  delayed_job_active_record
   exception_notification
   fastercsv
   haml
