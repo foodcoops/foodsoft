@@ -50,9 +50,7 @@ After that you get the other gems easily with (from project root):
 
 (5) Create database (schema) and load defaults
 --------------------------
-	rake db:create
-        rake db:schema:load
-        rake db:seed
+	rake db:setup
 
 With this, you also get a ready to go user with username 'admin' and password 'secret'.
 
@@ -61,4 +59,16 @@ With this, you also get a ready to go user with username 'admin' and password 's
 ---------------	
 Start the WEBrick server to try it out:
 	
-	script/server	
+	script/server
+
+
+(7) (optional) Get background jobs done
+---------------------------------------
+We use for time intensive tasks a background job queue, at the moment delayed job. To deliver mails etc you have to
+start the workers:
+
+    rake jobs:work
+
+or as a daemon process in the background
+
+    scrip/delayed_job start # and stop
