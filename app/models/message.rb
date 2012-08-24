@@ -21,6 +21,10 @@ class Message < ActiveRecord::Base
 
   before_validation :clean_up_recipient_ids, :on => :create
 
+  def self.deliver(message_id)
+    find(message_id).deliver
+  end
+
   def clean_up_recipient_ids
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
     self.recipients_ids = User.all.collect(&:id) if sent_to_all == "1"
@@ -73,19 +77,11 @@ class Message < ActiveRecord::Base
         begin
           Mailer.foodsoft_message(self, user).deliver
         rescue
-          logger.warn "Deliver failed for #{user.nick}: #{user.email}"
+          Rails.logger.warn "Deliver failed for #{user.nick}: #{user.email}"
         end
       end
     end
     update_attribute(:email_state, 1)
-  end
-
-  # Sends all pending messages that are to be send as emails.
-  def self.send_emails
-    messages = Message.pending
-    for message in messages
-      message.deliver
-    end
   end
 end
 

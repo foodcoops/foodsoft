@@ -11,15 +11,6 @@ class ApplicationController < ActionController::Base
   def self.current
     Thread.current[:application_controller]
   end
-
-  # Use this method to call a rake task,,
-  # e.g. to deliver mails after there are created.
-  def call_rake(task, options = {})
-    options[:rails_env] ||= Foodsoft.env
-    args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
-    system "/usr/bin/rake #{task} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/rake.log &"
-  end
-
   
   protected
 

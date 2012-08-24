@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
   def create
     @message = @current_user.send_messages.new(params[:message])
     if @message.save
-      @message.deliver #TODO: Put this into a background job
+      Message.delay.deliver(@message.id)
       redirect_to messages_url, :notice => "Nachricht ist gespeichert und wird versendet."
     else
       render :action => 'new'
