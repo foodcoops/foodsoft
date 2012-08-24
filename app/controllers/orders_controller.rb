@@ -97,9 +97,7 @@ class OrdersController < ApplicationController
   def finish
     order = Order.find(params[:id])
     order.finish!(@current_user)
-    call_rake "foodsoft:finished_order_tasks", :order_id => order.id
-    flash[:notice] = "Die Bestellung wurde beendet."
-    redirect_to order
+    redirect_to order, notice: "Die Bestellung wurde beendet."
   end
   
   # Renders the groups-orderd PDF.

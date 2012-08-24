@@ -156,15 +156,30 @@ class Order < ActiveRecord::Base
   def finish!(user)
     unless finished?
       Order.transaction do
-        # Update order_articles. Save the current article_price to keep price consistency
-        # Also save results for each group_order_result
-        order_articles.all(:include => :article).each do |oa|
-          oa.update_attribute(:article_price, oa.article.article_prices.first)
-          oa.group_order_articles.each { |goa| goa.save_results! }
-        end
-
         # set new order state (needed by notify_order_finished)
         update_attributes(:state => 'finished', :ends => Time.now, :updated_by => user)
+
+        # Update order_articles. Save the current article_price to keep price consistency
+        # Also save results for each group_order_result
+        # Clean up
+        order_articles.all(:include => :article).each do |oa|
+          oa.update_attribute(:article_price, oa.article.article_prices.first)
+          oa.group_order_articles.each do |goa|
+            goa.save_results!
+            # Delete no longer required order-history (group_order_article_quantities) and
+            # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
+            goa.group_order_article_quantities.clear
+          end
+        end
+
+        # Update GroupOrder prices
+        group_orders.each { |go| go.update_price! }
+
+        # Stats
+        ordergroups.each { |o| o.update_stats! }
+
+        # Notifications
+        UserNotifier.delay.finished_order(self.id)
       end
     end
   end
