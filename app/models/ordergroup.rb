@@ -43,12 +43,15 @@ class Ordergroup < Group
   # Throws an exception if it fails.
   def add_financial_transaction!(amount, note, user)
     transaction do      
-      trans = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
-      trans.save!
+      t = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
+      t.save!
       self.account_balance = financial_transactions.sum('amount')
-      self.account_updated = trans.created_on
+      self.account_updated = t.created_on
       save!
-      notify_negative_balance(trans)
+      # Notify only when order group had a positive balance before the last transaction:
+      if t.amount < 0 && self.account_balance < 0 && self.account_balance - t.amount >= 0
+        UserNotifier.delay.negative_balance(self.id, t.id)
+      end
     end
   end
 
@@ -76,17 +79,6 @@ class Ordergroup < Group
   end
   
   private
-  
-  # If this order group's account balance is made negative by the given/last transaction, 
-  # a message is sent to all users who have enabled notification.
-  def notify_negative_balance(transaction)
-    # Notify only when order group had a positive balance before the last transaction:
-    if (transaction.amount < 0 && self.account_balance < 0 && self.account_balance - transaction.amount >= 0)
-      for user in users
-        Mailer.negative_balance(user,transaction).deliver if user.settings["notify.negativeBalance"] == '1'
-      end
-    end
-  end
 
   # Make sure, that a user can only be in one ordergroup
   def uniqueness_of_members
