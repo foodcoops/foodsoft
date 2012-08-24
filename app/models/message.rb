@@ -68,12 +68,12 @@ class Message < ActiveRecord::Base
   end
   
   def deliver
-    for recipient in recipients
-      if recipient.settings['messages.sendAsEmail'] == "1" && !recipient.email.blank?
+    for user in recipients
+      if user.receive_email?
         begin
-          Mailer.foodsoft_message(self, recipient).deliver
-#        rescue
-#          logger.warn "Deliver failed for #{recipient.nick}: #{recipient.email}"
+          Mailer.foodsoft_message(self, user).deliver
+        rescue
+          logger.warn "Deliver failed for #{user.nick}: #{user.email}"
         end
       end
     end

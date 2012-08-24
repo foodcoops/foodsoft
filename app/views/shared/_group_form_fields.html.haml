@@ -11,7 +11,7 @@
     = f.input :task_name
     = f.input :task_required_users
     = f.input :task_duration, :as => :select, :collection => (1..3)
-    = f.input :task_description
+    = f.input :task_description, as: :text, input_html: {rows: 10}
     = f.input :next_weekly_tasks_number
 
 = f.input :user_tokens, :as => :string, :input_html => { 'data-pre' => f.object.users.map { |u| u.token_attributes }.to_json }

@@ -40,9 +40,9 @@ class TasksController < ApplicationController
       @task.save
       flash[:notice] = "Aufgabe wurde aktualisiert"
       if @task.workgroup
-        redirect_to :action => "workgroup", :id => @task.workgroup
+        redirect_to workgroup_tasks_url(workgroup_id: @task.workgroup_id)
       else
-        redirect_to :action => "index"
+        redirect_to tasks_url
       end
     else
       render :template => "tasks/edit"
@@ -84,20 +84,9 @@ class TasksController < ApplicationController
   
   # shows workgroup (normal group) to edit weekly_tasks_template
   def workgroup
-    @group = Group.find(params[:id])
+    @group = Group.find(params[:workgroup_id])
     if @group.is_a? Ordergroup
       redirect_to tasks_url, :alert => "Keine Arbeitsgruppe gefunden"
     end
-  end
-  
-  # this method is uses for the auto_complete-function from script.aculo.us
-  def auto_complete_for_task_user_list
-    @users = User.find(
-      :all,
-      :conditions => [ 'LOWER(nick) LIKE ?', '%' + params[:task][:user_list].downcase + '%' ], 
-      :order => 'nick ASC',
-      :limit => 8
-    )
-    render :partial => '/shared/auto_complete_users'
   end
 end

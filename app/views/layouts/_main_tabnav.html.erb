@@ -24,10 +24,10 @@
           { :name => "Alle Seiten", :url => all_pages_path }
         ]
       },
-      { :name => "Bestellungen", :url => u.ordergroup ? ordering_path : orders_path,
+      { :name => "Bestellungen", :url => u.ordergroup ? group_orders_path : orders_path,
         :active => ["orders", "ordering"],
         :subnav => [
-          { :name => "Bestellen!", :url => ordering_path },
+          { :name => "Bestellen!", :url => group_orders_path },
           { :name => "Meine Bestellungen", :url => archive_group_orders_path },
           { :name => "Bestellverwaltung", :url => orders_path, :access_denied? => (!u.role_orders?) }
         ]

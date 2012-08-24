@@ -1,4 +1,4 @@
-module OrderingHelper
+module GroupOrdersHelper
   def data_to_js(ordering_data)
     ordering_data[:order_articles].map { |id, data|
       [id, data[:price], data[:unit], data[:total_price], data[:others_quantity], data[:others_tolerance], data[:used_quantity], data[:quantity_available]]

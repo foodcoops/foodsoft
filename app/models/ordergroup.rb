@@ -48,7 +48,7 @@ class Ordergroup < Group
       self.account_balance = financial_transactions.sum('amount')
       self.account_updated = trans.created_on
       save!
-      notify_negative_balance(trans) 
+      notify_negative_balance(trans)
     end
   end
 

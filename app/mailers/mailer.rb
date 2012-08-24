@@ -4,15 +4,15 @@ class Mailer < ActionMailer::Base
 
   layout 'email'  # Use views/layouts/email.txt.erb
 
-  default from: "FoodSoft <#{Foodsoft.config[:email_sender]}>"
+  default from: "FoodSoft <#{Foodsoft.config[:email_sender]}>",
+          sender: Foodsoft.config[:email_sender],
+          errors_to: Foodsoft.config[:email_sender]
   
   # Sends an email copy of the given internal foodsoft message.
   def foodsoft_message(message, recipient)
     @message = message
 
-    mail sender: Foodsoft.config[:email_sender],
-         errors_to: Foodsoft.config[:email_sender],
-         subject: "[#{Foodsoft.config[:name]}] " + message.subject,
+    mail subject: "[#{Foodsoft.config[:name]}] " + message.subject,
          to: recipient.email,
          from: "#{message.sender.nick} <#{message.sender.email}>"
   end
@@ -74,13 +74,12 @@ class Mailer < ActionMailer::Base
          :subject => "[Foodsoft] Feeback von #{user.email}"
   end
 
-  def not_enough_users_assigned(task,user)
+  def not_enough_users_assigned(task, user)
     @task = task
     @user = user
-    @task_url = url_for(:controller => "tasks", :action => "workgroup", :id => task.workgroup_id)
-    
+
     mail :to => user.email,
-         :subject => "[#{Foodsoft.config[:name]}] #{task.name} braucht noch Leute!"
+         :subject => "[#{Foodsoft.config[:name]}] \"#{task.name}\" braucht noch Leute!"
   end
   
 end

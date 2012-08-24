@@ -23,7 +23,7 @@
       %td Arbeitsgruppe
       %td
         - if @task.workgroup
-          = link_to @task.workgroup.name, :action => "workgroup", :id => @task.workgroup
+          = link_to @task.workgroup.name, workgroup_tasks_path(workgroup_id: @task.workgroup_id)
           
     %tr
       %td{:colspan => "2"} 

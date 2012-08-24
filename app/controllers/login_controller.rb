@@ -5,11 +5,12 @@ class LoginController < ApplicationController
 
   # Display the form to enter an email address requesting a token to set a new password.
   def forgot_password
+    @user = User.new
   end
   
   # Sends an email to a user with the token that allows setting a new password through action "password".
   def reset_password
-    if (user = User.find_by_email(params[:login][:email]))
+    if (user = User.find_by_email(params[:user][:email]))
       user.reset_password_token = user.new_random_password(16)
       user.reset_password_expires = Time.now.advance(:days => 2)
       if user.save

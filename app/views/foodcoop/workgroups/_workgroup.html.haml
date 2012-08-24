@@ -4,7 +4,7 @@
   .column_content
     = render :partial => 'shared/group', :locals => { :group => workgroup }
     %p
-      = link_to "Alle Aufgaben zeigen", :controller => "/tasks", :action => "workgroup", :id => workgroup
+      = link_to "Alle Aufgaben zeigen", workgroup_tasks_path(workgroup_id: workgroup)
       |
       = link_to "Mitgliedern eine Nachricht schicken", new_message_path(:message => {:group_id => workgroup.id})
       - if workgroup.member?(@current_user)

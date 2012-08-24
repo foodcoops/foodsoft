@@ -44,10 +44,9 @@ Foodsoft::Application.routes.draw do
       end
     end
 
-    resources :group_orders, :controller => 'ordering', :path => 'ordering' do
+    resources :group_orders do
       get :archive, :on => :collection
     end
-    match '/ordering' => 'ordering#index', :as => 'ordering'
 
     resources :order_comments, :only => [:new, :create]
 

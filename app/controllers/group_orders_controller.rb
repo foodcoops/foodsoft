@@ -1,9 +1,10 @@
 # Controller for all ordering-actions that are performed by a user who is member of an Ordergroup.
 # Management actions that require the "orders" role are handled by the OrdersController.
-class OrderingController < ApplicationController
+class GroupOrdersController < ApplicationController
   # Security
   before_filter :ensure_ordergroup_member
   before_filter :ensure_open_order, :only => [:new, :create, :edit, :update, :order, :stock_order, :saveOrder]
+  before_filter :ensure_my_group_order, only: [:show, :edit, :update]
 
   # Index page.
   def index
@@ -28,17 +29,14 @@ class OrderingController < ApplicationController
   end
 
   def show
-    @group_order = GroupOrder.find(params[:id])
     @order= @group_order.order
   end
 
   def edit
-    @group_order = GroupOrder.find(params[:id])
     @ordering_data = @group_order.load_data
   end
 
   def update
-    @group_order = GroupOrder.find(params[:id])
     @group_order.attributes = params[:group_order]
     begin
       @group_order.save_ordering!
@@ -82,6 +80,12 @@ class OrderingController < ApplicationController
       flash[:notice] = 'Diese Bestellung ist bereits abgeschlossen.'
       redirect_to :action => 'index'
     end
+  end
+
+  def ensure_my_group_order
+    @group_order = @ordergroup.group_orders.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to group_orders_url, alert: 'Fehlerhafte URL, das ist nicht Deine Bestellung.'
   end
 
 end

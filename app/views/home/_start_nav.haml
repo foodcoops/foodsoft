@@ -15,7 +15,7 @@
       Bestellungen
       %ul
         - if has_ordergroup
-          %li= link_to "Bestellübersicht", :controller => "ordering"
+          %li= link_to "Bestellübersicht", group_orders_path
         - if has_orders_role
           %li= link_to "Bestellungen beenden", :controller => 'orders'
   // Articles

@@ -16,4 +16,4 @@
       Gruppenaufgaben
       %ul
         - for group in Workgroup.all
-          %li= link_to group.name, :controller => 'tasks', :action => "workgroup", :id => group
+          %li= link_to group.name, workgroup_tasks_path(workgroup_id: group.id)

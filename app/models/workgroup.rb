@@ -6,9 +6,10 @@ class Workgroup < Group
   has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], :order => 'due_date ASC'
 
   validates_presence_of :task_name, :weekday, :task_required_users, :next_weekly_tasks_number,
-    :if => :weekly_task
+                        :if => :weekly_task
   validates_numericality_of :next_weekly_tasks_number, :greater_than => 0, :less_than => 21, :only_integer => true,
-    :if => :weekly_task
+                            :if => :weekly_task
+  validates_length_of :task_description, maximum: 250
   validate :last_admin_on_earth, :on => :update
   before_destroy :check_last_admin_group
 

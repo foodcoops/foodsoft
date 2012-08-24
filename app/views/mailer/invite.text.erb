@@ -2,7 +2,7 @@ Hallo!
 
 <%= @invite.user.first_name %> <%= @invite.user.last_name %> (<%= @invite.user.email %>) hat dich in die Gruppe "<%= @invite.group.name %>" eingeladen.
 Um die Einladung anzunehmen und der Foodcoop beizutreten, gehe zu: <%= @link %>
-Dieser Link kann nur einmal aufgerufen werden und ist nur bis <%= @invite.expires_at.strftime('%A den %d.%m.%Y um %H:%M') %> gültig.
+Dieser Link kann nur einmal aufgerufen werden und ist nur bis <%= I18n.l @invite.expires_at %> gültig.
 
 Grüße sendet die Foodsoft!
 
@@ -12,6 +12,6 @@ Hi!
 
 <%= @invite.user.first_name %> <%= @invite.user.last_name %> (<%= @invite.user.email %>) has invited you to join the group "<%= @invite.group.name %>".
 To accept the invitation and to join the foodcoop please follow this link: <%= @link %>
-This link works only once and expires on <%= @invite.expires_at.strftime('%A den %d.%m.%Y um %H:%M') %>.
+This link works only once and expires on <%= I18n.l @invite.expires_at, locale: :en %>.
 
 Greetings, your FoodSoft Team!

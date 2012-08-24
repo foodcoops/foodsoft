@@ -1,8 +1,10 @@
 - title "Neue Transaktion"
 
+%p Hier kannst du der Bestellgruppe <b>#{@ordergroup.name}</b> Geld gutschreiben/abziehen.
+
 = simple_form_for @financial_transaction, :url => finance_ordergroup_transactions_path(@ordergroup),
   :validate => true do |f|
-  = f.association :ordergroup
+  = f.hidden_field :ordergroup_id
   = f.input :amount
   = f.input :note, :as => :text
   = f.submit

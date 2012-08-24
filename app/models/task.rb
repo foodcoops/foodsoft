@@ -13,6 +13,7 @@ class Task < ActiveRecord::Base
   validates :name, :presence => true, :length => { :minimum => 3 }
   validates :required_users, :presence => true
   validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 0
+  validates_length_of :description, maximum: 250
 
   after_save :update_ordergroup_stats
   

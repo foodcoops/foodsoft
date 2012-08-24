@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Finance::FinancialTransactionsController < ApplicationController
   before_filter :authenticate_finance
   before_filter :find_ordergroup, :except => [:new_collection, :create_collection]
@@ -38,8 +39,8 @@ class Finance::FinancialTransactionsController < ApplicationController
     @financial_transaction.user = current_user
     @financial_transaction.add_transaction!
     redirect_to finance_ordergroup_transactions_url(@ordergroup), :notice => "Die Transaktion wurde gespeichert."
-  rescue
-    render :action => :new
+  #rescue
+  #  render :action => :new
   end
 
   def new_collection

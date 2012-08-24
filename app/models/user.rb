@@ -72,6 +72,10 @@ class User < ActiveRecord::Base
     [first_name, last_name].join(" ")
   end
 
+  def receive_email?
+    settings['messages.sendAsEmail'] == "1" && email.present?
+  end
+
   def ordergroup_name
     ordergroup.name if ordergroup
   end

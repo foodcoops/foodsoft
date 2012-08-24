@@ -1,6 +1,6 @@
 Liebe <%= @group_order.ordergroup.name %>,
 
-die Bestellung für "<%= @order.name %>" wurde am <%= @order.ends.strftime('%d.%m.%Y um %H:%M') %> von <%= @order.updated_by.nick %> beendet.
+die Bestellung für "<%= @order.name %>" wurde am <%= I18n.l @order.ends %> von <%= @order.updated_by.nick %> beendet.
 
 Für Euch wurden die folgenden Artikel bestellt:
 <%	for group_order_article in @group_order.group_order_articles.ordered.all(:include => :order_article)
@@ -9,6 +9,6 @@ Für Euch wurden die folgenden Artikel bestellt:
 <%	end  -%>
 Gesamtpreis: <%= @group_order.price %>
 
-Bestellung online einsehen: <%= url_for(:controller => "ordering", :action => "my_order_result", :id => @order.id) %>
+Bestellung online einsehen: <%= group_order_url(@group_order) %>
 
 Viele Grüße von <%= Foodsoft.config[:name] %>

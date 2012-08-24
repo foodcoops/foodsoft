@@ -147,6 +147,6 @@
               €
       #order-button
         = submit_tag( "Bestellung speichern", :id => 'submit_button' )
-        oder #{link_to "abbrechen", :controller => 'ordering'}
+        oder #{link_to "abbrechen", group_orders_path}
   %input#total_balance{:name => "total_balance", :type => "hidden", :value => @ordergroup.account_balance - @group_order.price}/
   %input{:name => "version", :type => "hidden", :value => @version}/
