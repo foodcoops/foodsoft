@@ -1,9 +1,12 @@
 # Foodsoft configuration
 
-development: &defaults
+default: &defaults
   # If you wanna serve more than one foodcoop with one installation
   # Don't forget to setup databases for each foodcoop. See also MULTI_COOP_INSTALL
   multi_coop_install: false
+
+  # If multi_coop_install you have to use a coop name, which you you wanna be selected by default
+  default_scope: 'f'
 
   # http config for this host
   # Required for action mailer
@@ -74,6 +77,9 @@ development: &defaults
     125g: 0.125
     100g: 0.1
     50g: 0.05
+
+development:
+  <<: *defaults
 
 test:
   <<: *defaults

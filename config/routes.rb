@@ -6,9 +6,9 @@ Foodsoft::Application.routes.draw do
 
   get "sessions/new"
 
-  root :to => redirect("/#{Foodsoft.env}")
+  root :to => redirect("/#{FoodsoftConfig.scope}")
 
-  scope '/:foodcoop', :defaults => { :foodcoop => Foodsoft.env } do
+  scope '/:foodcoop' do
 
     # Root path
     root :to => 'home#index'

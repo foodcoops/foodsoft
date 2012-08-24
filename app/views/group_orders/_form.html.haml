@@ -4,7 +4,7 @@
       #{data_to_js(@ordering_data)}
       setGroupBalance(#{@ordering_data[:available_funds]});
       setDecimalSeparator(",");
-      setToleranceBehaviour(#{Foodsoft.config[:tolerance_is_costly]});
+      setToleranceBehaviour(#{FoodsoftConfig[:tolerance_is_costly]});
       setStockit(#{@order.stockit?});
     });
 

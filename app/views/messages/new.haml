@@ -21,18 +21,18 @@
 - title "Neue Nachricht"
 
 = simple_form_for @message do |f|
-  - if Foodsoft.config[:mailing_list].blank?
+  - if FoodsoftConfig[:mailing_list].blank?
     = f.input :sent_to_all, :as => :boolean
   - else
     %b Nachrichten an alle
     verschickst Du bitte über den Verteiler:
-    = mail_to Foodsoft.config[:mailing_list]
+    = mail_to FoodsoftConfig[:mailing_list]
     %br/
     %small{:style => "color:grey"}
       Eventuell musst Du Dich dem Verteiler erst bekannt machen.
       %br/
       z.b. mit einer Mail an
-      = mail_to Foodsoft.config[:mailing_list_subscribe]
+      = mail_to FoodsoftConfig[:mailing_list_subscribe]
 
   #recipients
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.find_all_by_id(@message.recipients_ids).map { |u| u.token_attributes }.to_json }

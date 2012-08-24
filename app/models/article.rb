@@ -33,7 +33,7 @@ class Article < ActiveRecord::Base
 
   # The price for the foodcoop-member.
   def fc_price
-    (gross_price  * (Foodsoft.config[:price_markup] / 100 + 1)).round(2)
+    (gross_price  * (FoodsoftConfig[:price_markup] / 100 + 1)).round(2)
   end
   
   # Returns true if article has been updated at least 2 days ago
@@ -120,8 +120,8 @@ class Article < ActiveRecord::Base
           false
         end
       else # get factors for fc and supplier
-        fc_unit_factor = Foodsoft.config[:units][self.unit]
-        supplier_unit_factor = Foodsoft.config[:units][self.shared_article.unit]
+        fc_unit_factor = FoodsoftConfig[:units][self.unit]
+        supplier_unit_factor = FoodsoftConfig[:units][self.shared_article.unit]
         if fc_unit_factor and supplier_unit_factor
           convertion_factor = fc_unit_factor / supplier_unit_factor
           new_price = BigDecimal((convertion_factor * shared_article.price).to_s).round(2)

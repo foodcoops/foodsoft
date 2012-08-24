@@ -5,7 +5,6 @@ db/*.sqlite3
 nbproject/
 config/environments/development.rb
 capfile
-config/environments/fcschinke09.rb
 *.swp
 public/**/*_cached.*
 .idea

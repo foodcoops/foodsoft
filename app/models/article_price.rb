@@ -27,7 +27,7 @@ class ArticlePrice < ActiveRecord::Base
 
   # The price for the foodcoop-member.
   def fc_price
-    (gross_price  * (Foodsoft.config[:price_markup] / 100 + 1)).round(2)
+    (gross_price  * (FoodsoftConfig[:price_markup] / 100 + 1)).round(2)
   end
 end
 

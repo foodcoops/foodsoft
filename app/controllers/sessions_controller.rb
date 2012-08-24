@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:nick], params[:password])
     if user
       session[:user_id] = user.id
+      session[:scope] = FoodsoftConfig.scope  # Save scope in session to not allow switching between foodcoops with one account
       redirect_to session['return_to'] || root_url, :notice => "Logged in!"
     else
       flash.now.alert = "Invalid email or password"

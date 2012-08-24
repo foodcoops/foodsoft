@@ -29,7 +29,7 @@
                 %b= h category
               %td{:colspan => "9"}
             - order_articles.each do |order_article|
-            - if Foodsoft.config[:tolerance_is_costly]
+            - if FoodsoftConfig[:tolerance_is_costly]
               - article_total = @price[i] * (@tolerance[i] + @quantity[i])
             - else
               - article_total = @price[i] * @quantity[i]

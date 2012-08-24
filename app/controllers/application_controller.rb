@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
   before_filter :select_foodcoop, :authenticate, :store_controller, :items_per_page, :set_redirect_to
   after_filter  :remove_controller
 
-  helper_method :current_user
-
   # Returns the controller handling the current request.
   def self.current
     Thread.current[:application_controller]
@@ -18,10 +16,11 @@ class ApplicationController < ActionController::Base
     # check if there is a valid session and return the logged-in user (its object)
     if session[:user_id] and params[:foodcoop]
       # for shared-host installations. check if the cookie-subdomain fits to request.
-      @current_user ||= User.find_by_id(session[:user_id]) if params[:foodcoop] == Foodsoft.env
+      @current_user ||= User.find_by_id(session[:user_id]) if session[:scope] == FoodsoftConfig.scope
     end
   end
-    
+  helper_method :current_user
+
   def deny_access
     self.return_to = request.request_uri
     redirect_to login_url, :alert => 'Access denied!'
@@ -104,28 +103,22 @@ class ApplicationController < ActionController::Base
   # It uses the subdomain to select the appropriate section in the config files
   # Use this method as a before filter (first filter!) in ApplicationController
   def select_foodcoop
-    if Foodsoft.config[:multi_coop_install]
-      if !params[:foodcoop].blank?
+    if FoodsoftConfig[:multi_coop_install]
+      if params[:foodcoop].present?
         begin
-          # Set Config
-          Foodsoft.env = params[:foodcoop]
-          # Set database-connection
-          ActiveRecord::Base.establish_connection(Foodsoft.database)
+          # Set Config and database connection
+          FoodsoftConfig.select_foodcoop params[:foodcoop]
         rescue => error
-          flash[:error] = error.to_s
-          redirect_to root_path
+          redirect_to root_url, alert: error.message
         end
       else
-        redirect_to root_path
+        redirect_to root_url
       end
-    else
-      # Deactivate routing filter
-      RoutingFilter::Foodcoop.active = false
     end
   end
 
   def items_per_page
-    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
+    if params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100
       @per_page = params[:per_page].to_i
     else
       @per_page = 20
@@ -142,5 +135,10 @@ class ApplicationController < ActionController::Base
       session[:redirect_to] = nil
     end
     default
+  end
+
+  # Always stay in foodcoop url scope
+  def default_url_options(options = {})
+    {foodcoop: FoodsoftConfig.scope}
   end
 end

@@ -3,8 +3,8 @@ class Wikilink < WikiCloth::WikiLinkHandler
   
   def link_attributes_for(page)
     permalink = Page.permalink(page)
-    url_options = {:host => Foodsoft.config[:host], :protocol => Foodsoft.config[:protocol]}
-    url_options.merge!({:port => Foodsoft.config[:port]}) if Foodsoft.config[:port]
+    url_options = {:host => FoodsoftConfig[:host], :protocol => FoodsoftConfig[:protocol]}
+    url_options.merge!({:port => FoodsoftConfig[:port]}) if FoodsoftConfig[:port]
 
     if Page.exists?(:permalink => permalink)
      { :href => url_for(url_options.merge({:controller => "pages", :action => "show", 

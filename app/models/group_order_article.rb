@@ -168,7 +168,7 @@ class GroupOrderArticle < ActiveRecord::Base
   # will be the value depending of the article results.
   def total_price
     unless order_article.order.finished?
-      if Foodsoft.config[:tolerance_is_costly]
+      if FoodsoftConfig[:tolerance_is_costly]
         order_article.article.fc_price * (quantity + tolerance)
       else
         order_article.article.fc_price * quantity
