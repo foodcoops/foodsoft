@@ -36,9 +36,19 @@ You need to create your own copy of the foodsoft configuration settings:
 Edit app_config.yml to suit your needs or just keep the defaults for now.
 
 
-(4) Required ruby and gems
+(4) Secret Token
 -------------------
-We reccomend the using of rvm (https://rvm.beginrescueend.com/). Install rvm and get the lates ruby (1.8.7).
+The user session are stored in cookies. Do avoid misusing the cookies and its sensitive information, rails
+will encrypt it with a token. So copy the config file
+
+   cp config/initializers/secret_token.rb.SAMPLE config/initializers/secret_token.rb
+
+and modify the token!!
+
+
+(5) Required ruby and gems
+-------------------
+We reccomend the using of rvm (https://rvm.beginrescueend.com/). Install rvm and get the latest ruby (>= 1.9.3).
 If installed you only need to install the gem bundler:
 
     gem install bundler
@@ -48,21 +58,21 @@ After that you get the other gems easily with (from project root):
     bundle install
 
 
-(5) Create database (schema) and load defaults
+(6) Create database (schema) and load defaults
 --------------------------
 	rake db:setup
 
 With this, you also get a ready to go user with username 'admin' and password 'secret'.
 
 
-(6) Try it out!
+(7) Try it out!
 ---------------	
 Start the WEBrick server to try it out:
 	
 	script/server
 
 
-(7) (optional) Get background jobs done
+(8) (optional) Get background jobs done
 ---------------------------------------
 We use for time intensive tasks a background job queue, at the moment delayed job. To deliver mails etc you have to
 start the workers:
