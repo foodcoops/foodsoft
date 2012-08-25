@@ -69,7 +69,7 @@ With this, you also get a ready to go user with username 'admin' and password 's
 ---------------	
 Start the WEBrick server to try it out:
 	
-	script/server
+	bundle exec rails s
 
 
 (8) (optional) Get background jobs done
