@@ -6,6 +6,11 @@ Web-based software to manage a non-profit food coop (product catalog, ordering, 
 
 Have a look on README_DEVEL.
 
+Update, it is highly recommended to checkout the rails3 branch. As soon as possible I will merge this branch
+into master. So for beginnners, better start with the new (I hope much easier) code.
+
+git checkout -b rails3 origin/rails3
+
 == License
 
 FoodSoft - a webbased foodcoop management software
