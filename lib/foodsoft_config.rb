@@ -24,6 +24,14 @@ class FoodsoftConfig
       config[key]
     end
 
+    # Loop through each foodcoop and executes the given block after setup config and database
+    def each_coop
+      APP_CONFIG.keys.reject { |coop| coop =~ /^(default|development|test|production)$/ }.each do |coop|
+        select_foodcoop coop
+        yield coop
+      end
+    end
+
     private
 
     def set_config(foodcoop)
