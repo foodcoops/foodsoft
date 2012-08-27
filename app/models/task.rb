@@ -5,7 +5,6 @@ class Task < ActiveRecord::Base
 
   scope :non_group, :conditions => { :workgroup_id => nil, :done => false }
   scope :done, :conditions => {:done => true}, :order => "due_date DESC"
-  scope :upcoming, lambda { |*args| {:conditions => ["done = 0 AND due_date = ?", (args.first || 7.days.from_now)]} }
   
   # form will send user in string. responsibilities will added later
   attr_protected :users

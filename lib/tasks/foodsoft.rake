@@ -4,17 +4,14 @@
 namespace :foodsoft do
   desc "Notify users of upcoming tasks"
   task :notify_upcoming_tasks => :environment do
-    tasks = Task.find :all, :conditions => ["done = ? AND due_date = ?", false, 1.day.from_now.to_date]
+    tasks = Task.where(done: false, due_date: 1.day.from_now.to_date)
     for task in tasks
       puts "Send notifications for #{task.name} to .."
       for user in task.users
-        if user.settings['notify.upcoming_tasks'] == 1
-          begin
-            puts "#{user.email}.."
-            Mailer.upcoming_tasks(user, task).deliver
-          rescue
-            puts "deliver aborted for #{user.email}.."
-          end
+        begin
+          Mailer.upcoming_tasks(user, task).deliver if user.settings['notify.upcoming_tasks'] == 1
+        rescue
+          puts "deliver aborted for #{user.email}.."
         end
       end
     end
@@ -22,7 +19,7 @@ namespace :foodsoft do
 
   desc "Create upcoming workgroups tasks (next 3 to 7 weeks)"
   task :create_upcoming_weekly_tasks => :environment do
-    workgroups = Workgroup.all :conditions => {:weekly_task => true}
+    workgroups = Workgroup.where(weekly_task: true)
     for workgroup in workgroups
       puts "Create weekly tasks for #{workgroup.name}"
       workgroup.next_weekly_tasks[3..5].each do |date|
@@ -36,7 +33,7 @@ namespace :foodsoft do
   desc "Notify workgroup of upcoming weekly task"
   task :notify_users_of_weekly_task => :environment do
     for workgroup in Workgroup.all
-      for task in workgroup.tasks.all(:conditions => ["due_date = ?", 7.days.from_now.to_date])
+      for task in workgroup.tasks.where(due_date: 7.days.from_now.to_date)
         unless task.enough_users_assigned?
           puts "Notify workgroup: #{workgroup.name} for task #{task.name}"
           for user in workgroup.users
