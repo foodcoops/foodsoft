@@ -38,6 +38,10 @@ default: &defaults
   # for total article price as long as the order is not finished.
   tolerance_is_costly: false
 
+  # Ordergroups, which have less than 75 apples should not be allowed to make new orders
+  # Comment out this option to activate this restriction
+  # stop_ordering_under: 75
+
   # email address to be used as sender
   email_sender: foodsoft@myfoodcoop.org
 

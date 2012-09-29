@@ -72,6 +72,15 @@ class Ordergroup < Group
     ((avg_jobs_per_euro / Ordergroup.avg_jobs_per_euro) * 100).to_i rescue 0
   end
 
+  # If the the option stop_ordering_under is set, the ordergroup is only allowed to participate in an order,
+  # when the apples value is above the configured amount.
+  # Only ordergroups, which have participated in more than 5 order are affected
+  def not_enough_apples?
+    FoodsoftConfig[:stop_ordering_under].present? and
+        apples < FoodsoftConfig[:stop_ordering_under] and
+        group_orders.count > 5
+  end
+
   # Global average
   def self.avg_jobs_per_euro
     stats = Ordergroup.all.collect(&:stats)

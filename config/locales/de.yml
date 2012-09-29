@@ -4,6 +4,12 @@ de:
   home:
     index:
       title: Startseite
+
+  group_orders:
+    messages:
+      not_enough_apples:
+        Um zu Bestellen brauchst Du mindestends %{stop_ordering_under} Äpfel.
+        Momentan hat Deine Bestellgruppe aber nur %{apples} Äpfel.
   date:
     abbr_day_names:
     - So

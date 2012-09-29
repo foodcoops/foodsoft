@@ -36,7 +36,7 @@
     .box_title
       %h2 Engagement Deiner Bestellgruppe
     .column_content
-      = render :partial => "stats", :locals => {:ordergroup => current_user.ordergroup}
+      = render :partial => "apple_bar", :locals => {:apple_bar => AppleBar.new(current_user.ordergroup)}
 
   - unless Message.public.empty?
     .box_title

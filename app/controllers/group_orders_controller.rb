@@ -5,6 +5,7 @@ class GroupOrdersController < ApplicationController
   before_filter :ensure_ordergroup_member
   before_filter :ensure_open_order, :only => [:new, :create, :edit, :update, :order, :stock_order, :saveOrder]
   before_filter :ensure_my_group_order, only: [:show, :edit, :update]
+  before_filter :enough_apples?, only: [:new, :create]
 
   # Index page.
   def index
@@ -86,6 +87,14 @@ class GroupOrdersController < ApplicationController
     @group_order = @ordergroup.group_orders.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to group_orders_url, alert: 'Fehlerhafte URL, das ist nicht Deine Bestellung.'
+  end
+
+  def enough_apples?
+    if @ordergroup.not_enough_apples?
+      redirect_to group_orders_url,
+                  alert: t('not_enough_apples', scope: 'group_orders.messages', apples: @ordergroup.apples,
+                           stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
+    end
   end
 
 end

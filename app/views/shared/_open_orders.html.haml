@@ -1,6 +1,9 @@
 .box_title
   %h2 Laufende Bestellungen
 .column_content
+  - if ordergroup.not_enough_apples?
+    .warning
+      %p Achtung, Deine Bestellgruppe hat zu wenig Äpfel um Bestellen zu können!
   - unless Order.open.empty?
     %table.list
       %thead

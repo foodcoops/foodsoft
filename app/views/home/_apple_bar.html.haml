@@ -1,0 +1,14 @@
+Engagement Deiner Bestellgruppe
+.stats-bar{style: "width:#{apple_bar.length_of_group_bar}px; background-color:#{apple_bar.group_bar_color}"}
+  = apple_bar.apples
+  = " Äpfel" if apple_bar.length_of_group_bar > 50
+
+Durchschnittsengagement
+.stats-bar{style: "width:#{apple_bar.length_of_global_bar}px"}
+  100 Birnen
+
+%span.description
+  Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop.
+  Konkret: Pro #{number_to_currency(apple_bar.mean_order_amount_per_job, :precision => 0 )} Bestellsumme solltest Du eine Aufgabe machen!
+  - if FoodsoftConfig[:stop_ordering_under].present?
+    Achtung, hast Du weniger als #{FoodsoftConfig[:stop_ordering_under]} Äpfel, darfst Du nicht mehr bestellen!
