@@ -74,9 +74,11 @@ class Ordergroup < Group
 
   # If the the option stop_ordering_under is set, the ordergroup is only allowed to participate in an order,
   # when the apples value is above the configured amount.
+  # The restriction can be deactivated for each ordergroup.
   # Only ordergroups, which have participated in more than 5 order are affected
   def not_enough_apples?
     FoodsoftConfig[:stop_ordering_under].present? and
+        !ignore_apple_restriction and
         apples < FoodsoftConfig[:stop_ordering_under] and
         group_orders.count > 5
   end

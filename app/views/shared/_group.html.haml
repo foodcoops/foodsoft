@@ -26,3 +26,7 @@
           =h "#{group.task_name} am #{weekday(group.weekday)}"
         - else
           kein wöchentlicher Job definiert
+  - else
+    %tr
+      %td Äpfel-Bestellbeschränkung
+      %td= group.ignore_apple_restriction ? 'deaktiviert' : 'aktiviert'

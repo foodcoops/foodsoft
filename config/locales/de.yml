@@ -307,6 +307,7 @@ de:
         contact_person: "Kontaktperson"
         contact_phone: "Telefon"
         contact_address: "Adresse"
+        ignore_apple_restriction: "Bestellstop bei zu wenig Äpfeln ignorieren"
       task:
         duration: 'Dauer'
         user_list: 'Verantwortliche'
