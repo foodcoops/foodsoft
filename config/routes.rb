@@ -174,7 +174,7 @@ Foodsoft::Application.routes.draw do
 
     resources :users, :only => [:index]
 
-    match '/:controller(/:action(/:id))'
+    match ':controller(/:action(/:id))(.:format)'
 
   end # End of /:foodcoop scope
 end
