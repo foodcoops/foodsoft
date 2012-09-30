@@ -100,6 +100,9 @@ GEM
       prawn-core
     prawn-layout (0.3.2)
     prawn-security (0.1.1)
+    prawnto_2 (0.2.5)
+      prawn (>= 0.6.0)
+      rails (>= 3.1)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -174,6 +177,7 @@ DEPENDENCIES
   meta_search
   mysql2
   prawn (<= 0.6.3)
+  prawnto_2
   rails (= 3.2.8)
   rails3_acts_as_paranoid (~> 0.1.4)
   sass-rails (~> 3.2.3)
