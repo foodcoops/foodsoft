@@ -1,3 +1,13 @@
+//= require jquery
+//= require jquery-ui
+//= require jquery_ujs
+//= require jquery.tokeninput
+//= require jquery.observe_field
+//= require jquery.fancybox-1.3.4.pack
+//= require rails.validations
+//= require_self
+//= require ordering
+
 // Load following statements, when DOM is ready
 $(function() {
 

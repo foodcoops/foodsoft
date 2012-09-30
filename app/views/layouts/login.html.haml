@@ -3,8 +3,9 @@
   %head
     %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
     %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
-    = stylesheet_link_tag 'main', 'rails_messages', 'nav', 'simple_form', :cache => "login_cached"
-    = javascript_include_tag 'jquery.min'
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
     = yield(:head)
   %body
     #login

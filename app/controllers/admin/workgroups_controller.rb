@@ -3,9 +3,9 @@ class Admin::WorkgroupsController < Admin::BaseController
   inherit_resources
 
   def index
-    @workgroups = Workgroup.order(:name.asc)
+    @workgroups = Workgroup.order('name ASC')
     # if somebody uses the search field:
-    @workgroups = @workgroups.where(:name.matches => "%#{params[:query]}%") unless params[:query].blank?
+    @workgroups = @workgroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].blank?
 
     @workgroups = @workgroups.paginate(:page => params[:page], :per_page => @per_page)
 

@@ -41,7 +41,7 @@ class StockitController < ApplicationController
 
   #TODO: Fix this!!
   def articles_search
-    @articles = Article.not_in_stock.limit(8).where(:name.matches => params[:term])
+    @articles = Article.not_in_stock.limit(8).where('name LIKE ?', "%#{params[:term]}%")
     render :json => @articles.map(&:name)
   end
 

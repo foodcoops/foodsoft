@@ -14,8 +14,8 @@ class GroupOrder < ActiveRecord::Base
   validates_numericality_of :price
   validates_uniqueness_of :ordergroup_id, :scope => :order_id   # order groups can only order once per order
 
-  scope :open, lambda { {:conditions => ["order_id IN (?)", Order.open.collect(&:id)]} }
-  scope :finished, lambda { {:conditions => ["order_id IN (?)", Order.finished_not_closed.collect(&:id)]} }
+  scope :in_open_orders, joins(:order).merge(Order.open)
+  scope :in_finished_orders, joins(:order).merge(Order.finished_not_closed)
 
   # Generate some data for the javascript methods in ordering view
   def load_data

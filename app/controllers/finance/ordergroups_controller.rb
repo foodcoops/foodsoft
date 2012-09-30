@@ -14,7 +14,7 @@ class Finance::OrdergroupsController < ApplicationController
     end
 
     @ordergroups = Ordergroup.order(sort)
-    @ordergroups = @ordergroups.where(:name.matches => "%#{params[:query]}%") unless params[:query].nil?
+    @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
     @ordergroups = @ordergroups.paginate :page => params[:page], :per_page => @per_page
 

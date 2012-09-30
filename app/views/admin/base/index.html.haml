@@ -33,7 +33,7 @@
       - for group in @groups
         %tr{:class => cycle('even','odd', :name => 'groups')}
           %td= link_to group.name, [:admin, group]
-          %td= group.class.human_name
+          %td= group.class.model_name.human
           %td= group.users.size
     %br/
     = link_to 'Alle Bestellgruppen', admin_ordergroups_path

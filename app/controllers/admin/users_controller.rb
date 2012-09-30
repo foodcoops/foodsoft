@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::BaseController
   inherit_resources
 
   def index
-    @users = User.order(:nick.asc)
+    @users = User.order('nick ASC')
 
     # if somebody uses the search field:
     unless params[:query].blank?

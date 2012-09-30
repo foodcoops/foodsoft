@@ -1,7 +1,7 @@
 class Finance::InvoicesController < ApplicationController
 
   def index
-    @invoices = Invoice.includes(:supplier, :delivery, :order).order(:date.desc).paginate(page: params[:page])
+    @invoices = Invoice.includes(:supplier, :delivery, :order).order('date DESC').paginate(page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

@@ -7,7 +7,7 @@
   %h3 Wöchentliche Jobs
   = f.input :weekly_task
   #weekly_task_fields
-    = f.input :weekday
+    = f.input :weekday, as: :select, collection: Workgroup.weekdays
     = f.input :task_name
     = f.input :task_required_users
     = f.input :task_duration, :as => :select, :collection => (1..3)

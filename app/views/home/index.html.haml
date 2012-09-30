@@ -42,7 +42,8 @@
     .box_title
       %h2 Neuste Nachrichten
     .column_content
-      = render :partial => 'messages/messages', :locals => {:messages => Message.public.order(:created_at.desc).limit(5), :subject_length => 70}
+      = render :partial => 'messages/messages',
+        :locals => {:messages => Message.public.order('created_at DESC').limit(5), :subject_length => 70}
       %br/
       = link_to "Alle Nachrichten einsehen", messages_path
 

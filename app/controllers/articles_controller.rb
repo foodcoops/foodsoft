@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
     end
 
     @articles = @supplier.articles.includes(:article_category).order(sort)
-    @articles = @articles.where(:name.matches => "%#{params[:query]}%") unless params[:query].nil?
+    @articles = @articles.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
     @total = @articles.size
     @articles = @articles.paginate(:page => params[:page], :per_page => @per_page)

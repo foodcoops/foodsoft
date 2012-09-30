@@ -3,7 +3,7 @@ h3.notice, div.notice {
   color: #090; }
 
 h3.notice {
-  background: #dfd url(/images/icon_message.gif) no-repeat 10px 3px;
+  background: #dfd image-url('icon_message.gif') no-repeat 10px 3px;
   border: 1px solid #bfb;
   padding: 4px 40px;
   margin: 2em 0 1em 0;
@@ -16,7 +16,7 @@ h3.alert, div.alert, div.error {
   font-weight: bold; }
 
 h3.alert {
-  background: yellow url(/images/error.png) no-repeat 10px 3px;
+  background: yellow image-url('error.png') no-repeat 10px 3px;
   border: 1px solid red;
   padding: 4px 40px;
   position: relative;

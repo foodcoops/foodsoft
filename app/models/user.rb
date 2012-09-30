@@ -7,7 +7,11 @@ class User < ActiveRecord::Base
   
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
-  has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
+  #has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
+  def ordergroup
+    Ordergroup.joins(:memberships).where(memberships: {user_id: self.id}).first
+  end
+
   has_many :workgroups, :through => :memberships, :source => :group, :class_name => "Workgroup"
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments

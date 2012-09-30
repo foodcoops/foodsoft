@@ -3,11 +3,11 @@ class Admin::OrdergroupsController < Admin::BaseController
   inherit_resources
   
   def index
-    @ordergroups = Ordergroup.order(:name.asc)
+    @ordergroups = Ordergroup.order('name ASC')
 
     # if somebody uses the search field:
     unless params[:query].blank?
-      @ordergroups = @ordergroups.where(:name.matches => "%#{params[:query]}%")
+      @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%")
     end
 
     @ordergroups = @ordergroups.paginate(:page => params[:page], :per_page => @per_page)

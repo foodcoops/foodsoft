@@ -20,7 +20,7 @@ class Finance::FinancialTransactionsController < ApplicationController
     end
 
     @financial_transactions = @ordergroup.financial_transactions.order(sort)
-    @financial_transactions = @financial_transactions.where(:note.matches => "%#{params[:query]}%") unless params[:query].nil?
+    @financial_transactions = @financial_transactions.where('note LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
     @financial_transactions = @financial_transactions.paginate :page => params[:page], :per_page => 10
 
@@ -39,8 +39,9 @@ class Finance::FinancialTransactionsController < ApplicationController
     @financial_transaction.user = current_user
     @financial_transaction.add_transaction!
     redirect_to finance_ordergroup_transactions_url(@ordergroup), :notice => "Die Transaktion wurde gespeichert."
-  #rescue
-  #  render :action => :new
+  rescue ActiveRecord::RecordInvalid => error
+    flash.now[:alert] = error.message
+    render :action => :new
   end
 
   def new_collection

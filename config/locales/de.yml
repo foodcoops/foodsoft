@@ -243,6 +243,9 @@ de:
       user:
         password: Passwort
         first_name: Vorname
+      financial_transaction:
+        amount: Betrag
+        note: Notiz
 
   helpers:
     submit:
@@ -275,17 +278,18 @@ de:
     #   username: 'User name to sign in.'
     #   password: 'No special characters, please.'
     labels:
-      password: 'Passwort'
-      password_confirmation: 'Passwort wiederholen'
-      description: 'Beschreibung'
-      title: 'Titel'
-      email: 'E-Mail'
-      note: 'Notiz'
-      date: 'Datum'
-      ordergroup: 'Bestellgruppe'
-      amount: 'Betrag'
-      phone: "Telefon"
-      user_tokens: 'Mitglieder'
+      defaults:
+        password: 'Passwort'
+        password_confirmation: 'Passwort wiederholen'
+        description: 'Beschreibung'
+        title: 'Titel'
+        email: 'E-Mail'
+        note: 'Notiz'
+        date: 'Datum'
+        ordergroup: 'Bestellgruppe'
+        amount: 'Betrag'
+        phone: "Telefon"
+        user_tokens: 'Mitglieder'
       user:
         nick: "Benutzerinnenname"
         first_name: "Vorname"

@@ -9,3 +9,4 @@ capfile
 public/**/*_cached.*
 .idea
 .get-dump.yml
+.sass-cache/

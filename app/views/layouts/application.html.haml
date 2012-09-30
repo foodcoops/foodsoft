@@ -3,15 +3,13 @@
   %head
     %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
     %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
-    = stylesheet_link_tag 'main', 'rails_messages', 'nav', 'simple_form', 'token-input', 'jquery.fancybox-1.3.4',
-      :cache => "all_cached"
+    = stylesheet_link_tag 'application'
     = stylesheet_link_tag "print", :media => "print"
     <!--[if lte IE 7]>
     = stylesheet_link_tag 'ie_hacks'
     <![endif]-->
-    = javascript_include_tag 'jquery.min', 'jquery-ui.min', 'jquery_ujs', 'jquery.tokeninput', 'jquery.observe_field',
-      'rails.validations', 'application', 'ordering', 'jquery.fancybox-1.3.4.pack', :cache => 'all_cached'
-    = csrf_meta_tag
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
     = yield(:head)
   %body
     #logininfo= render :partial => 'shared/loginInfo'
