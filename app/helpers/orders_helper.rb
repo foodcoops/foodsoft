@@ -5,9 +5,9 @@ module OrdersHelper
     link_to text, order_path(order, :view => view), :remote => true
   end
 
-  def link_to_pdf(order, action)
+  def order_pdf(order, document)
     link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"),
-      { :action => action, :id => order, :format => :pdf }, { :title => "PDF erstellen" }
+      order_path(order, :document => document, :format => :pdf), { :title => "PDF erstellen" }
   end
 
   def options_for_suppliers_to_select

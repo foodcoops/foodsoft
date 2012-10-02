@@ -6,10 +6,6 @@ class OrdersController < ApplicationController
   
   before_filter :authenticate_orders
   
-  # Define layout exceptions for PDF actions:
-  layout "application", :except => [:faxPdf, :matrixPdf, :articlesPdf, :groupsPdf]
-  prawnto :prawn => { :page_size => 'A4' }
-  
   # List orders
   def index
     @open_orders = Order.open
@@ -43,13 +39,26 @@ class OrdersController < ApplicationController
   def show
     @order= Order.find(params[:id])
 
-    if params[:view]    # Articles-list will be replaced
-      @partial = case params[:view]
-                   when 'normal' then "articles"
-                   when 'groups'then 'shared/articles_by_groups'
-                   when 'articles'then 'shared/articles_by_articles'
-                 end
-      render :layout => false
+    respond_to do |format|
+      format.html
+      format.js do
+        @partial = case params[:view]
+                     when 'normal' then "articles"
+                     when 'groups'then 'shared/articles_by_groups'
+                     when 'articles'then 'shared/articles_by_articles'
+                     else 'articles'
+                   end
+        render :layout => false
+      end
+      format.pdf do
+        pdf = case params[:document]
+                when 'groups' then OrderByGroups.new(@order)
+                when 'articles' then OrderByArticles.new(@order)
+                when 'fax' then OrderFax.new(@order)
+                when 'matrix' then OrderMatrix.new(@order)
+              end
+        send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf'
+      end
     end
   end
 
@@ -100,28 +109,6 @@ class OrdersController < ApplicationController
     redirect_to order, notice: "Die Bestellung wurde beendet."
   end
   
-  # Renders the groups-orderd PDF.
-  def groupsPdf
-    @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_GruppenSortierung.pdf"
-  end
-  
-  # Renders the articles-orderd PDF.
-  def articlesPdf
-    @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf",
-            :prawn => { :left_margin => 48,
-                        :right_margin => 48,
-                        :top_margin => 48,
-                        :bottom_margin => 48 }
-  end
-  
-  # Renders the fax PDF.
-  def faxPdf
-    @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_FAX.pdf"
-  end
-  
   # Renders the fax-text-file
   # e.g. for easier use with online-fax-software, which don't accept pdf-files
   def text_fax_template
@@ -147,16 +134,5 @@ class OrdersController < ApplicationController
     send_data text,
                 :type => 'text/plain; charset=utf-8; header=present',
                 :disposition => "attachment; filename=#{order.name}"
-  end
-  
-  # Renders the matrix PDF.
-  def matrixPdf
-    @order = Order.find(params[:id])
-    unless @order.order_articles.ordered.empty?
-      prawnto :filename => "#{Date.today}_#{@order.name}_Matrix.pdf"
-    else
-      flash[:error] = "Es sind keine Artikel bestellt worden."
-      redirect_to @order
-    end
   end
 end

@@ -19,8 +19,7 @@ gem 'jquery-rails'
 
 gem 'mysql2'
 gem "fastercsv"
-gem "prawn", '<=0.6.3'
-gem 'prawnto_2', :require => "prawnto" # Used for prawn view templates
+gem 'prawn'
 gem 'haml-rails'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'client_side_validations'

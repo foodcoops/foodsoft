@@ -30,7 +30,7 @@
     %p
       Gruppenbestellungen:
       %b= @order.group_orders.count
-      = "[#{@order.group_orders.find(:all, :include => :ordergroup).collect{|g| g.ordergroup.name}.join(', ')}]"
+      = "[#{@order.group_orders.includes(:ordergroup).all.collect{|g| g.ordergroup.name}.join(', ')}]"
       
     %p
       Netto/Bruttosumme aller Artikel:
@@ -56,16 +56,16 @@
         = update_articles_link(@order, "Artikelübersicht", :normal)
         |
         = update_articles_link(@order, "Sortiert nach Gruppen", :groups)
-        = link_to_pdf(@order, 'groupsPdf')
+        = order_pdf(@order, :groups)
         |
         = update_articles_link(@order, "Sortiert nach Artikeln", :articles)
-        = link_to_pdf(@order, 'articlesPdf')
+        = order_pdf(@order, :articles)
         |
         Matrix:
-        = link_to_pdf(@order, 'matrixPdf')
+        = order_pdf(@order, :matrix)
         |
         Faxvorlage:
-        = link_to_pdf(@order, 'faxPdf')
+        = order_pdf(@order, :fax)
         = link_to image_tag("text_file.png", :size => "16x16", :border => "0", :alt => "Textdatei erstellen"), { :action => 'text_fax_template', :id => @order }, { :title => "Download file" }
         |
         = link_to 'Kommentare', '#comments'
