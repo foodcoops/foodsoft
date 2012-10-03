@@ -58,8 +58,8 @@ class GroupOrdersController < ApplicationController
                                     :conditions => { :state => 'closed' }, :order => "orders.ends DESC"
 
     respond_to do |format|
-      format.html # myOrders.haml
-      format.js { render :partial => "orders", :locals => {:orders => @closed_orders, :pagination => true} }
+      format.html # archive.html.haml
+      format.js   # archive.js.erb
     end
   end
 

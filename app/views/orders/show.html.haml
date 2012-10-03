@@ -1,10 +1,4 @@
 - title "Bestellung: #{@order.name}"
-#element_navigation
-  = link_to_unless @order.previous == @order, "<< #{@order.previous.name}", @order.previous
-  |
-  = link_to "Übersicht", orders_path
-  |
-  = link_to_unless @order.next == @order, "#{@order.next.name} >>", @order.next
 
 // Order summary
 .left_column{:style => "width:65em"}

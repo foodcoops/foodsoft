@@ -2,7 +2,6 @@
 #
 class Order < ActiveRecord::Base
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
-  acts_as_ordered :order => "ends"    # easyier find of next or previous model
 
   # Associations
   has_many :order_articles, :dependent => :destroy
