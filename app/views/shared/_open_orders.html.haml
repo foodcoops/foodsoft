@@ -1,11 +1,9 @@
-.box_title
+%section
   %h2 Laufende Bestellungen
-.column_content
   - if ordergroup.not_enough_apples?
-    .warning
-      %p Achtung, Deine Bestellgruppe hat zu wenig Äpfel um Bestellen zu können!
+    .alert Achtung, Deine Bestellgruppe hat zu wenig Äpfel um Bestellen zu können!
   - unless Order.open.empty?
-    %table.list
+    %table.table.table-striped
       %thead
         %tr
           %th Lieferantin
@@ -15,7 +13,7 @@
       %tbody
         - total = 0
         - Order.open.each do |order|
-          %tr{:class => cycle('even', 'odd', :name => 'open_orders')}
+          %tr
             %td= link_to_ordering(order)
             %td=h format_time(order.ends) unless order.ends.nil?
             - if group_order = order.group_order(ordergroup)
@@ -24,9 +22,11 @@
               %td= number_to_currency(group_order.price)
             - else
               %td{:colspan => 2}
-    - if total > 0
-      %p
-        Gesamtsumme:
-        %b= number_to_currency(total)
+      - if total > 0
+        %tfooter
+          %tr
+            %th(colspan="2")
+            %th Gesamtsumme:
+            %th= number_to_currency(total)
   - else
     %i Derzeit gibt es keine laufenden Bestellungen

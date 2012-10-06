@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
+    %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
+    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag "print", :media => "print"
+    <!--[if lte IE 7]>
+    = stylesheet_link_tag 'ie_hacks'
+    <![endif]-->
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    = yield(:head)
+  %body
+    #logininfo= render :partial => 'shared/loginInfo'
+    
+    #header
+      #logo
+        = link_to root_path do
+          <span>food</span>soft
+        %span{:style => "color:white; font-size:45%; letter-spacing: -1px;"}= FoodsoftConfig[:name]
+      #nav= render :partial => 'layouts/main_tabnav'
+
+    #main
+      #content
+        - flash.each do |name, msg|
+          = content_tag :h3, msg, :id => "flash#{name.to_s.camelize}", :class => "flash #{name}"
+        #loader{:style => "display:none;"}= image_tag("loader.gif", :border => 0)
+        - if show_title?
+          %h1= yield(:title)
+        = yield
+    #ajax_box(style="display:none")

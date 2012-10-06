@@ -1,32 +1,58 @@
-!!!
-%html
+!!! 5
+%html(lang="en")
   %head
-    %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
-    %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
-    = stylesheet_link_tag 'application'
-    = stylesheet_link_tag "print", :media => "print"
-    <!--[if lte IE 7]>
-    = stylesheet_link_tag 'ie_hacks'
-    <![endif]-->
-    = javascript_include_tag 'application'
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= content_for?(:title) ? yield(:title) : "Foodsoft"
     = csrf_meta_tags
-    = yield(:head)
-  %body
-    #logininfo= render :partial => 'shared/loginInfo'
-    
-    #header
-      #logo
-        = link_to root_path do
-          <span>food</span>soft
-        %span{:style => "color:white; font-size:45%; letter-spacing: -1px;"}= FoodsoftConfig[:name]
-      #nav= render :partial => 'layouts/main_tabnav'
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = stylesheet_link_tag "application", :media => "all"
+    %link(href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
+    %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
+    %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
+    %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
+    %link(href="images/favicon.ico" rel="shortcut icon")
 
-    #main
-      #content
-        - flash.each do |name, msg|
-          = content_tag :h3, msg, :id => "flash#{name.to_s.camelize}", :class => "flash #{name}"
-        #loader{:style => "display:none;"}= image_tag("loader.gif", :border => 0)
-        - if show_title?
-          %h1= yield(:title)
-        = yield
-    #ajax_box(style="display:none")
+
+  %body
+    .row-fluid
+
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+            = link_to 'Foodsoft', root_path(anchor: ''), class: 'brand'
+          .container.nav-collapse
+            = render_navigation expand_all: true, renderer: :bootstrap
+
+    .container-fluid
+      .row-fluid
+        - if content_for?(:sidebar)
+          .span2
+            = yield(:sidebar)
+          .span10
+            - if show_title?
+              .page-header
+                %h1= yield(:title)
+            = yield
+        - else
+          - if show_title?
+            .page-header
+              %h1= yield(:title)
+          = yield
+    
+      %footer
+        %p
+          Foodsoft, open source software to manage a non-profit food coop.
+
+    /
+      Javascripts
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag "application"

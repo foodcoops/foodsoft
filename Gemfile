@@ -31,6 +31,9 @@ gem 'localize_input', :git => "git://github.com/bennibu/localize_input.git"
 gem 'wikicloth'
 gem 'daemons'
 gem 'delayed_job_active_record'
+gem 'twitter-bootstrap-rails'
+gem 'simple-navigation'
+gem 'simple-navigation-bootstrap'
 
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'

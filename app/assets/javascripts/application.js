@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery.tokeninput
 //= require jquery.observe_field
 //= require jquery.fancybox-1.3.4.pack

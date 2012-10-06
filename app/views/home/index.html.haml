@@ -1,78 +1,68 @@
-- title t('.title')
+- title t('.title'), false
 
-#start_nav
+- content_for(:sidebar) do
   = render :partial => 'start_nav'
 
-.right_column{:style => "width:70%"}
-  - unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks_number == 0
-    .box_title 
-      %h2 Aufgaben
-    .column_content
-      -unless @next_tasks.empty?
-        %div{:style => "float:left, margin-bottom:2em"}
-          %h3 Deine Aufgaben für die nächste Woche:
-          %table{:style => "width:25em"}
-            -for task in @next_tasks
-              %tr
-                %td= format_date task.due_date
-                %td
-                  %b= task.name
+- unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks_number == 0
+  %section.well
+    %h2 Aufgaben
+    -unless @next_tasks.empty?
+      %div{:style => "float:left, margin-bottom:2em"}
+        %strong Deine Aufgaben für die nächste Woche:
+        %table.table(style="width:25em")
+          -for task in @next_tasks
+            %tr
+              %td= format_date task.due_date
+              %td
+                %b= task.name
 
-      - unless @unaccepted_tasks.empty?
-        %h3 Aufgaben übernehmen
-        Du bis für Aufgaben verantwortlich.
-        = link_to "Aufgaben übernehmen/ablehnen", user_tasks_path
-      - unless @unassigned_tasks_number == 0
-        %h3 Offene Aufgaben
-        = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufgabe(n)', :controller => 'tasks'}".html_safe
-      %p{:style => "clear:both"}= link_to "Meine Aufgaben", user_tasks_path
+    - unless @unaccepted_tasks.empty?
+      %h3 Aufgaben übernehmen
+      Du bis für Aufgaben verantwortlich.
+      = link_to "Aufgaben übernehmen/ablehnen", user_tasks_path
+    - unless @unassigned_tasks_number == 0
+      %h3 Offene Aufgaben
+      = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufgabe(n)', :controller => 'tasks'}".html_safe
+    %p= link_to "Meine Aufgaben", user_tasks_path
 
-  - if current_user.ordergroup
-    // Current orders
-    = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}
+- if current_user.ordergroup
+  = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}
 
-  // Stats
-  - if current_user.ordergroup
-    .box_title
-      %h2 Engagement Deiner Bestellgruppe
-    .column_content
-      = render :partial => "apple_bar", :locals => {:apple_bar => AppleBar.new(current_user.ordergroup)}
+// Stats
+- if current_user.ordergroup
+  %section
+    %h2 Engagement Deiner Bestellgruppe
+    = render :partial => "apple_bar", :locals => {:apple_bar => AppleBar.new(current_user.ordergroup)}
 
-  - unless Message.public.empty?
-    .box_title
-      %h2 Neuste Nachrichten
-    .column_content
-      = render :partial => 'messages/messages',
-        :locals => {:messages => Message.public.order('created_at DESC').limit(5), :subject_length => 70}
-      %br/
-      = link_to "Alle Nachrichten einsehen", messages_path
+- unless Message.public.empty?
+  %section
+    %h2 Neuste Nachrichten
+    = render :partial => 'messages/messages',
+      :locals => {:messages => Message.public.order('created_at DESC').limit(5), :subject_length => 70}
+    %p= link_to "Alle Nachrichten einsehen", messages_path
 
-  - if current_user.ordergroup
-    // Ordergroup overview
-    .box_title
-      %h2 Meine Bestellgruppe
-    .column_content
-      %p
-        %b= current_user.ordergroup.name
-        |
-        Verfügbares Guthaben:
-        = number_to_currency(current_user.ordergroup.get_available_funds)
-        %span.description
-          (Letzte Aktualisierung ist
-          = distance_of_time_in_words(Time.now, current_user.ordergroup.account_updated) + " her)"
-        %h3 Letzte Transaktionen
-        %table
+- if current_user.ordergroup
+  // Ordergroup overview
+  %section
+    %h2 Meine Bestellgruppe
+    %p
+      %b= current_user.ordergroup.name
+      | Verfügbares Guthaben:
+      = number_to_currency(current_user.ordergroup.get_available_funds)
+      %small (Letzte Aktualisierung ist #{distance_of_time_in_words(Time.now, current_user.ordergroup.account_updated)} her)
+      %h3 Letzte Transaktionen
+      %table.table.table-striped
+        %tr
+          %th Wann
+          %th Wer
+          %th Notiz
+          %th Betrag
+        - for ft in current_user.ordergroup.financial_transactions.limit(5)
           %tr
-            %th Wann
-            %th Wer
-            %th Notiz
-            %th Betrag
-          - for ft in current_user.ordergroup.financial_transactions.limit(5)
-            %tr{:class => cycle('even','odd')}
-              %td= format_time(ft.created_on)
-              %td= h(ft.user.nil? ? '?' : ft.user.nick)
-              %td= h(ft.note)
-              - color = ft.amount < 0 ? 'red' : 'black'
-              %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
-        %br/
-        = link_to "mehr ...", my_ordergroup_path
+            %td= format_time(ft.created_on)
+            %td= h(ft.user.nil? ? '?' : ft.user.nick)
+            %td= h(ft.note)
+            - color = ft.amount < 0 ? 'red' : 'black'
+            %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
+      %br/
+      %p= link_to "Kontoauszug anzeigen", my_ordergroup_path
