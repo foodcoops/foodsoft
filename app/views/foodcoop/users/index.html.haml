@@ -1,24 +1,23 @@
-%h1 Mitglieder der Foodcoop
-%p
-  %i
+- title "Mitglieder"
+
+%section
+  %p
     Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.
     %br/
     Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter
     = link_to "Einstellungen", my_profile_path
     freigeben.
 
-.left_column{:style => "width:100%"}
-  .box_title
-    %h2 Übersicht
-  .column_content
-    - unless params[:sort_by_ordergroups]
-      #user_filter{:style => "float:left; margin-right:2em;"}
-        = form_tag foodcoop_users_path, :method => :get, :style=>"display:inline;", :id => 'user_search',
-          :remote => true, 'data-submit-onchange' => true do
-          %label{:for => 'article_name'} Suche nach Name:
-          = text_field_tag :query, params[:query], :size => 10
+  .well
+    = form_tag foodcoop_users_path, :method => :get, :remote => true,
+      'data-submit-onchange' => true, class: 'form-search' do
 
-          Nach Bestellgruppen sortieren:
-          = check_box_tag :sort_by_ordergroups, 1, params[:sort_by_ordergroups]
-    #users
-      = render :partial => "users"
+      = text_field_tag :user_name, params[:user_name], class: 'input-medium search-query',
+      placeholder: 'Name ...'
+      = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'input-medium search-query',
+        placeholder: 'Bestelllgruppe ...'
+      %button.btn
+        %i.icon-search
+
+  #users
+    = render :partial => "users"

@@ -20,18 +20,11 @@ module ApplicationHelper
   end
   
   # Creates ajax-controlled-links for pagination
-  # see also the plugin "will_paginate"
   def pagination_links_remote(collection, options = {})
     per_page = options[:per_page] || @per_page
     params = options[:params] || {}
-
-    # Translations
-    previous_label = '&laquo; ' + "Vorherige"
-    next_label = "Nächste" + ' &raquo;'
-    # Merge other url-options for will_paginate
     params = params.merge({:per_page => per_page})
-    will_paginate collection, :params => params, 'data-remote' => true,
-      :previous_label => previous_label, :next_label => next_label
+    paginate collection, :params => params, :remote => true
   end
   
   # Link-collection for per_page-options when using the pagination-plugin
@@ -42,9 +35,15 @@ module ApplicationHelper
 
     links = per_page_options.map do |per_page|
       params.merge!({:per_page => per_page})
-      per_page == current ? per_page : link_to(per_page, params, :remote => true)
+      link_class = 'btn'
+      link_class << ' disabled' if per_page == current
+      link_to(per_page, params, :remote => true, class: link_class)
     end
-    "Pro Seite: #{links.join(" ")}".html_safe
+
+    content_tag :div, class: 'btn-group pull-right' do
+      links.join.html_safe
+    end
+
   end
   
   def sort_td_class_helper(param)

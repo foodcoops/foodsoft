@@ -38,9 +38,9 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :admin, 'Administration', '#', if: Proc.new { current_user.role_admin? } do |subnav|
-      subnav.item :users, 'Benutzerinnen', admin_users_path
-      subnav.item :ordergroups, 'Bestellgruppen', admin_ordergroups_path
-      subnav.item :workgroups, 'Arbeitsgruppen', admin_workgroups_path
+      subnav.item :users, 'Benutzerinnen', admin_users_path, id: nil
+      subnav.item :ordergroups, 'Bestellgruppen', admin_ordergroups_path, id: nil
+      subnav.item :workgroups, 'Arbeitsgruppen', admin_workgroups_path, id: nil
     end
 
     primary.item :divider, '', '#', class: 'divider'

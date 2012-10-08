@@ -9,4 +9,12 @@ module MessagesHelper
     end
     "<b>#{link_to(h(subject), message)}</b> <span style='color:grey'>#{h(body)}</span>".html_safe
   end
+
+  def link_to_new_message(options = {})
+    messages_params = options[:message_params] || nil
+    link_text = content_tag :id, nil, class: 'icon-envelope'
+    link_text << " #{options[:text]}" if options[:text].present?
+    link_to(link_text.html_safe, new_message_path(message: messages_params), class: 'btn',
+            title: 'Nachricht verschicken')
+  end
 end

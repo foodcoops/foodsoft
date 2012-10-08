@@ -21,11 +21,10 @@ gem 'mysql2'
 gem "fastercsv"
 gem 'prawn'
 gem 'haml-rails'
-gem "will_paginate", "~> 3.0.pre2"
+gem 'kaminari'
 gem 'client_side_validations'
 gem 'simple_form'
 gem 'rails3_acts_as_paranoid', "~>0.1.4"
-gem 'meta_search'
 gem 'inherited_resources'
 gem 'localize_input', :git => "git://github.com/bennibu/localize_input.git"
 gem 'wikicloth'

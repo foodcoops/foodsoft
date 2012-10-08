@@ -10,6 +10,13 @@ de:
       not_enough_apples:
         Um zu Bestellen brauchst Du mindestends %{stop_ordering_under} Äpfel.
         Momentan hat Deine Bestellgruppe aber nur %{apples} Äpfel.
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..."
   date:
     abbr_day_names:
     - So
