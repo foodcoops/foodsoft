@@ -1,21 +1,19 @@
-- title "Aufgabenübersicht"
-= render :partial => "nav"
+- title "Aufgaben"
+- content_for :sidebar do
+  = render 'nav'
 
 - unless @non_group_tasks.empty?
-  .left_column{:style => "width:75%"}
-    - @tasks = @non_group_tasks
-    .box_title 
-      %h2 Aufgaben für alle!
-    .column_content
-      = render :partial => "list"
+  %section
+    %h3 Aufgaben für alle!
+    = render 'list', tasks: @non_group_tasks
 
 
-- for @group in @groups
-  - @tasks = @group.open_tasks
-  - unless @tasks.empty?
-    .left_column{:style => "width:75%"}
-      .box_title 
-        %h2= link_to @group.name, :action => 'workgroup', :id => @group
-      .column_content
-        = render :partial => "list"
+- for group in @groups
+  - tasks = group.open_tasks
+  - unless tasks.empty?
+    %section
+      %h3
+        = group.name
+        %small= link_to "Gruppenaufgaben anzeigen", workgroup_tasks_path(group)
+      = render 'list', tasks: tasks
       = link_to_top

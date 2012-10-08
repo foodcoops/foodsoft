@@ -3,6 +3,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.tokeninput
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker.de
 //= require jquery.observe_field
 //= require jquery.fancybox-1.3.4.pack
 //= require rails.validations
@@ -91,6 +93,9 @@ $(function() {
     $('form[data-remote]').bind('ajax:beforeSend', function() {
         $(this).children('input[type="submit"]').attr('disabled', 'disabled');
     });
+
+    // Use bootstrap datepicker for dateinput
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd', weekStart: 1, language: 'de'});
 });
 
 

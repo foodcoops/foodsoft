@@ -72,14 +72,14 @@ class TasksController < ApplicationController
     redirect_to :action => "index"
   end
   
-  def update_status
-    Task.find(params[:id]).update_attribute("done", params[:task][:done])
+  def set_done
+    Task.find(params[:id]).update_attribute :done, true
     redirect_to tasks_url, :notice => "Aufgabenstatus wurde aktualisiert"
   end
   
   # Shows all tasks, which are already done
   def archive
-    @tasks = Task.done.paginate :page => params[:page], :per_page => 30
+    @tasks = Task.done.page(params[:page]).per(@per_page)
   end
   
   # shows workgroup (normal group) to edit weekly_tasks_template

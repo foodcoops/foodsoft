@@ -1,27 +1,22 @@
-%h1
-  Aufgaben verwalten für
-  = @group.name
-= render :partial => "nav"
+- title "Aufgaben für #{@group.name}"
+- content_for :sidebar do
+  = render 'nav'
 
-.left_column{:style => "width:45em"}
-  .box_title 
-    %h2 Wöchentliche Aufgaben verwalten
-  .column_content
-    - if @group.weekly_task
-      %p Jeden <b>#{weekday(@group.weekday)}</b> hat diese Arbeitsgruppe folgenden Job: <b>#{@group.task_name}</b>
-      %p Die Wochenaufgaben werden von der Foodsoft automatisch erstellt. Eintragen müsst Ihr Euch aber selber.
-    - else
-      Noch keine Wochenaufgaben angelegt.
-    - if @current_user.member_of?(@group) or @current_user.role_admin?
-      = link_to "Wochenaufgaben bearbeiten", edit_foodcoop_workgroup_path(@group)
+%section.well
+  %h3 Wöchentliche Aufgaben
+  - if @group.weekly_task
+    %p Jeden <b>#{weekday(@group.weekday)}</b> hat diese Arbeitsgruppe folgenden Job: <b>#{@group.task_name}</b>
+    %p Die Wochenaufgaben werden von der Foodsoft automatisch erstellt. Eintragen müsst Ihr Euch aber selber.
+  - else
+    Noch keine Wochenaufgaben angelegt.
 
-.left_column{:style => "width:75%"}
-  .box_title 
-    %h2 Alle Aufgaben der Gruppe
-  .column_content
-    - @tasks = @group.open_tasks
-    = render :partial => "list"
-    %br/
-    = link_to_top
+  - if @current_user.member_of?(@group) or @current_user.role_admin?
+    = link_to "Wöchentliche Aufgaben anpassen", edit_foodcoop_workgroup_path(@group), class: 'btn'
+
+%section
+  %h3 Alle Aufgaben der Gruppe
+  = render 'list', tasks: @group.open_tasks
+  %br/
+  = link_to_top
 
   

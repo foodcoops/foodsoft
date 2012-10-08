@@ -1,0 +1,19 @@
+- if Task.done.count > 20
+  = items_per_page
+= pagination_links_remote @tasks
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Fälligkeitsdatum
+      %th Betreff
+      %th Verantwortliche Menschen
+      %th
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td= task.due_date unless task.due_date.nil?
+        %td= link_to "#{task.name} (#{task.duration}h)", :controller => "tasks", :action => "show", :id => task
+        %td
+          - unless task.users.empty?
+            = task.users.map(&:nick).join(", ")

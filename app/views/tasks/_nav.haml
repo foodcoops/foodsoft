@@ -1,19 +1,10 @@
-#start_nav{:style => "float:right"}
-  %h2 Aufgabenmenü
-  %ul
-    %li
-      Aktionen
-      %ul
-        %li= link_to "Neue Aufgabe erstellen", :action => "new"
-    %li 
-      Seiten
-      %ul
-        %li= link_to "Meine Aufgaben", user_tasks_path
-        %li= link_to "Alle Aufgaben", tasks_path
-        %li= link_to "Erledigt Aufgaben (Archiv)", archive_tasks_path
-
-    %li
-      Gruppenaufgaben
-      %ul
-        - for group in Workgroup.all
-          %li= link_to group.name, workgroup_tasks_path(workgroup_id: group.id)
+%p= link_to "Neue Aufgabe erstellen", new_task_path, class: 'btn btn-primary'
+.well.well-small
+  %ul.nav.nav-list
+    %li.nav-header Seiten
+    %li= link_to "Meine Aufgaben", user_tasks_path
+    %li= link_to "Alle Aufgaben", tasks_path
+    %li= link_to "Erledigte Aufgaben (Archiv)", archive_tasks_path
+    %li.nav-header Gruppenaufgaben
+    - for group in Workgroup.all
+      %li= link_to group.name, workgroup_tasks_path(workgroup_id: group.id)

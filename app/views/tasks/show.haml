@@ -1,38 +1,27 @@
 - title "Aufgabe im Detail"
-= render :partial => "nav"
+- content_for :sidebar do
+  = render 'nav'
 
-#task{:style => 'width:70%'}
-  %table
-    %tr
-      %td{:style => "width: 10em"} Name
-      %td
-        %b= @task.name
-    %tr
-      %td{:style => "vertical-align:top;"} Beschreibung
-      %td= simple_format(@task.description)
-    %tr
-      %td Fälligkeitsdatum
-      %td= format_date(@task.due_date)
-    %tr
-      %td Dauer in Stunden
-      %td= @task.duration
-    %tr
-      %td Verantwortliche Menschen
-      %td= task_assignments(@task)
-    %tr
-      %td Arbeitsgruppe
-      %td
-        - if @task.workgroup
-          = link_to @task.workgroup.name, workgroup_tasks_path(workgroup_id: @task.workgroup_id)
-          
-    %tr
-      %td{:colspan => "2"} 
-        %div{:style => "float:left"} Als erledigt markieren
-        - form_for :task, :url => {:action => "update_status", :id => @task} do |f|
-          = f.check_box :done, {:onchange => "submit()", :title => "Die Aufgabe wandert in das Archiv"}
-         
-    
+%section
+  %dl.dl-horizontal
+    %dt Name
+    %dd= @task.name
+    %dt Beschreibung
+    %dd= simple_format(@task.description)
+    %dt Fälligkeitsdatum
+    %dd= format_date(@task.due_date)
+    %dt Dauer in Stunden
+    %dd= @task.duration
+    %dt Verantwortliche Menschen
+    %dd= task_assignments(@task)
+    %dt Arbeitsgruppe
+    %dd
+      - if @task.workgroup
+        = link_to @task.workgroup.name, workgroup_tasks_path(workgroup_id: @task.workgroup_id)
+
   %p
-    = link_to "Bearbeiten", edit_task_path(@task)
-    | 
-    = link_to "Löschen", task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?"
+    - unless @task.done?
+      = link_to 'Als erledigt markieren', set_done_task_path(@task), method: :post, class: 'btn'
+    = link_to "Bearbeiten", edit_task_path(@task), class: 'btn'
+    = link_to "Löschen", task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?",
+      class: 'btn btn-danger'

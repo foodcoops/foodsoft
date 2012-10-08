@@ -62,6 +62,11 @@ Foodsoft::Application.routes.draw do
         get :archive
         get :workgroup
       end
+      member do
+        post :accept
+        post :reject
+        post :set_done
+      end
     end
 
     resources :messages, :only => [:index, :show, :new, :create]

@@ -28,7 +28,7 @@ SimpleNavigation::Configuration.run do |navigation|
                  if: Proc.new { current_user.role_article_meta? or current_user.role_suppliers? } do |subnav|
       subnav.item :suppliers, 'Lieferanten/Artikel', suppliers_path, id: nil
       subnav.item :stockit, 'Lager', stock_articles_path, id: nil
-      subnav.item :categories, 'Kategorien', id: nil
+      subnav.item :categories, 'Kategorien', article_categories_path, id: nil
     end
 
     primary.item :finance, 'Finanzen', '#', if: Proc.new { current_user.role_finance? } do |subnav|

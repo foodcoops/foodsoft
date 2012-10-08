@@ -1,27 +1,20 @@
 - title "Meine Aufgaben"
-= render :partial => "nav"
+- content_for :sidebar do
+  = render 'nav'
 
-- @tasks = @unaccepted_tasks
-- unless @tasks.empty?
-  .left_column{:style => "width:75%"}
-    .box_title 
-      %h2 Offene Aufgaben
-    .column_content
-      = render :partial => "list"
-      
-    
-.left_column{:style => "width:75%"}
-  .box_title 
-    %h2 Anstehende Aufgaben
-  .column_content
-    - @tasks = @accepted_tasks
-    - unless @tasks.empty?
-      = render :partial => "list"
-    - else
-      Nichts zu tun? 
-      = link_to "Hier", :action => "index"
-      gibt es bestimmt Arbeit. 
-    %br/
-    = link_to_top
-      
-    
+- unless @unaccepted_tasks.empty?
+  %section
+    %h3 Offene Aufgaben
+    = render 'list', tasks: @unaccepted_tasks
+
+%section
+  %h3 Anstehende Aufgaben
+  - unless @accepted_tasks.empty?
+    = render 'list', tasks: @accepted_tasks
+  - else
+    Nichts zu tun?
+    = link_to "Hier", tasks_path
+    gibt es bestimmt Arbeit.
+  %br/
+  = link_to_top
+

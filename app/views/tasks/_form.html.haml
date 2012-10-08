@@ -1,4 +1,4 @@
-- content_for :head do
+- content_for :javascript do
   :javascript
     $(function() {
       $("#task_user_list").tokenInput("#{users_path(:format => :json)}", {
@@ -6,9 +6,13 @@
         prePopulate: $("#task_user_list").data("pre"),
         hintText: 'Nach Nutzerin suchen',
         noResultText: 'Keine Nutzerin gefunden',
-        searchingText: 'Suche ...'
+        searchingText: 'Suche ...',
+        theme: 'facebook'
       });
     });
+
+- content_for :sidebar do
+  = render "shared/workgroup_members"
 
 = simple_form_for @task do |f|
   = f.input :name
@@ -17,5 +21,8 @@
   = f.input :user_list, :as => :string, :input_html => { 'data-pre' => @task.users.map { |u| u.token_attributes }.to_json }
   = f.input :required_users
   = f.association :workgroup
-  = f.input :due_date, :include_blank => true
-  = f.submit
+  = f.input :due_date, as: :date_picker
+  = f.input :done
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to 'oder abbrechen', :back
