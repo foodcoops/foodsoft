@@ -1,4 +1,4 @@
-- content_for :head do
+- content_for :javascript do
   :javascript
     $(function() {
       $('#message_recipient_tokens').tokenInput("#{users_path(:format => :json)}", {
@@ -6,7 +6,8 @@
         prePopulate: $('#message_recipient_tokens').data('pre'),
         hintText: 'Nach Nutzerin suchen',
         noResultText: 'Keine Nutzerin gefunden',
-        searchingText: 'Suche ...'
+        searchingText: 'Suche ...',
+        theme: 'facebook'
       });
 
       $('#message_sent_to_all').click(function() {
@@ -38,6 +39,8 @@
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.find_all_by_id(@message.recipients_ids).map { |u| u.token_attributes }.to_json }
     = f.input :group_id, :as => :select, :collection => Group.order('type DESC, name DESC').all.reject { |g| g.memberships.empty? }
   = f.input :private
-  = f.input :subject
-  = f.input :body
-  = f.submit
+  = f.input :subject, input_html: {class: 'input-xxlarge'}
+  = f.input :body, input_html: {class: 'input-xxlarge'}
+  .form-actions
+    = f.submit
+    = link_to 'oder abbrechen', :back

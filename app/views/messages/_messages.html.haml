@@ -1,3 +1,7 @@
+- if Message.public.count > 20
+  = items_per_page
+= pagination_links_remote messages
+
 - unless messages.empty?
   %table.table.table-striped
     %tbody

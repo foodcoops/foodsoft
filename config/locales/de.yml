@@ -331,7 +331,7 @@ de:
         group_id: 'Gruppe'
         subject: 'Betreff'
         body: 'Inhalt'
-        private: 'privat verschicken, Nachricht erscheint nicht im Foodsoft Posteingang'
+        private: Privat
       page:
         body: 'Inhalt'
       supplier:
@@ -394,3 +394,5 @@ de:
         unit: 'z.B. KG oder 1L oder 500g'
       stock_article:
         supplier: ''
+      message:
+        private: Nachricht erscheint nicht im Foodsoft Posteingang

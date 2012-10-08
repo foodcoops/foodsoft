@@ -1,8 +1,5 @@
-- title "Nachrichten im Überblick"
+- title "Nachrichten"
 
-%p= link_to('Neue Nachricht', :action => 'new')
-
-%div{:style => "text-align:right"}= will_paginate @messages
-
+= link_to 'Neue Nachricht', new_message_path, class: 'btn btn-primary'
 #messages
   = render :partial => 'messages', :locals => { :messages => @messages, :subject_length => 130 }

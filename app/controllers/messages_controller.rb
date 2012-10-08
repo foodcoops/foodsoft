@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
 
   # Renders the "inbox" action.
   def index
-    @messages = Message.public.paginate :page => params[:page], :per_page => 20, :order => 'created_at DESC'
+    @messages = Message.public.page(params[:page]).per(@per_page).order('created_at DESC')
   end
 
   # Creates a new message object.
