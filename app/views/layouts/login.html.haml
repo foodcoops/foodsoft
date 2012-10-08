@@ -1,19 +1,13 @@
-!!!
-%html
-  %head
-    %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
-    %title= "FoodSoft - " + (yield(:title) or controller.controller_name)
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
-    = csrf_meta_tags
-    = yield(:head)
-  %body
-    #login
-      - if yield(:title)
-        %h1= yield(:title)
-      - flash.each do |name, msg|
-        = content_tag :div, msg, :class => "flash #{name}"
-      = yield
-      #meta
-        Foodcoop 
-        = link_to_if FoodsoftConfig[:homepage], FoodsoftConfig[:name], FoodsoftConfig[:homepage]
+= render layout: 'layouts/header' do
+  .container
+    .row
+      .span6.offset3
+        = bootstrap_flash
+        - if show_title?
+          .page-header
+            %h1= yield(:title)
+        = yield
+
+        %footer
+          %p
+            Foodsoft, open source software to manage a non-profit food coop.

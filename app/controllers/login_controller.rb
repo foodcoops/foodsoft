@@ -1,7 +1,7 @@
 # encoding: utf-8
 class LoginController < ApplicationController
   skip_before_filter :authenticate        # no authentication since this is the login page
-  before_filter :validate_token, :only => [:password, :update_password]
+  before_filter :validate_token, :only => [:new_password, :update_password]
 
   # Display the form to enter an email address requesting a token to set a new password.
   def forgot_password
@@ -14,7 +14,7 @@ class LoginController < ApplicationController
       user.reset_password_token = user.new_random_password(16)
       user.reset_password_expires = Time.now.advance(:days => 2)
       if user.save
-        email = Mailer.reset_password(user).deliver
+        Mailer.delay.reset_password(FoodsoftConfig.scope, user.id)
         logger.debug("Sent password reset email to #{user.email}.")
       end
     end
@@ -23,7 +23,7 @@ class LoginController < ApplicationController
   
   # Set a new password with a token from the password reminder email.
   # Called with params :id => User.id and :token => User.reset_password_token to specify a new password.
-  def password
+  def new_password
   end
   
   # Sets a new password.
@@ -36,13 +36,13 @@ class LoginController < ApplicationController
       @user.save
       redirect_to login_url, :notice => "Dein Passwort wurde aktualisiert. Du kannst Dich jetzt anmelden."
     else
-      render :action => 'password'
+      render :new_password
     end
   end
 
-  # Invited users.
-  def invite
-    @invite = Invite.find_by_token(params[:id])
+  # For invited users.
+  def accept_invitation
+    @invite = Invite.find_by_token(params[:token])
     if (@invite.nil? || @invite.expires_at < Time.now)
       flash[:error] = "Deine Einladung ist nicht (mehr) gültig."
       render :action => 'login'
@@ -71,7 +71,7 @@ class LoginController < ApplicationController
   def validate_token
     @user = User.find_by_id_and_reset_password_token(params[:id], params[:token])
     if (@user.nil? || @user.reset_password_expires < Time.now)
-      flash[:error] = "Ungültiger oder abgelaufener Token. Bitte versuch es erneut."
+      flash.now.error = "Ungültiger oder abgelaufener Token. Bitte versuch es erneut."
       render :action => 'forgot_password'
     end
   end

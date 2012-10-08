@@ -12,18 +12,14 @@ class Invite < ActiveRecord::Base
   validates_presence_of :expires_at
   validate :email_not_already_registered, :on => :create
 
+  before_validation :set_token_and_expires_at
       
  protected
   
   # Before validation, set token and expires_at.
-  def before_validation
+  def set_token_and_expires_at
     self.token = Digest::SHA1.hexdigest(Time.now.to_s + rand(100).to_s)
     self.expires_at = Time.now.advance(:days => 7)
-  end
-
-  # Sends an email to the invited user.
-  def after_create
-    Mailer.invite(self).deliver
   end
 
  private

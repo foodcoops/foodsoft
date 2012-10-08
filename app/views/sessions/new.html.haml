@@ -1,4 +1,4 @@
-- content_for :head do
+- content_for :javascript do
   :javascript
     $(function() {
       $('#nick').focus();
@@ -7,21 +7,23 @@
 - title "FoodSoft login"
 
 %noscript
-  #javascript-warn.error(style="font-size:1.5em")
+  .alert.alert-error
     Achtung, Cookies und Javascript müssen aktiviert sein!
     = link_to "NoScript", "http://noscript.net/"
     bitte abschalten.
 
-#login-form.edit_form(style="width:25em")
-  = form_tag sessions_path do
-    %p
-      %label{:for => 'user'} Benutzerin
-      %br/
+= form_tag sessions_path, class: 'form-horizontal' do
+  .control-group
+    %label(for='nick' class='control-label') Benutzerin
+    .controls
       = text_field_tag 'nick'
-    %p
-      %label{:for => 'password'} Passwort
-      %br/
+
+  .control-group
+    %label(for='password' class='control-label') Passwort
+    .controls
       = password_field_tag 'password'
-    = submit_tag "Anmelden"
-    |
-    = link_to "Passwort vergessen?", :controller => 'login', :action => 'forgot_password'
+
+  .control-group
+    .controls
+      = submit_tag "Anmelden", class: 'btn'
+      = link_to "Passwort vergessen?", :controller => 'login', :action => 'forgot_password'

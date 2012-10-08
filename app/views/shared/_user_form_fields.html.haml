@@ -3,11 +3,12 @@
 = f.input :last_name
 = f.input :email
 = f.input :phone
-= f.input :password, :required => @user.new_record?
+= f.input :password, :required => f.object.new_record?
 = f.input :password_confirmation
-- for setting in User::setting_keys.keys
-  .input.boolean
-    = check_box_tag "user[setting_attributes][#{setting}]",
-      '1', @user.settings[setting] == '1' || @user.settings_default(setting),
-      :class => 'boolean'
-    %label.boolean{:for => "user[setting_attributes][#{setting}]"}= h User::setting_keys[setting]
+.control-group
+  .controls
+    - for setting in User::setting_keys.keys
+      %label.checkbox{:for => "user[setting_attributes][#{setting}]"}
+        = check_box_tag "user[setting_attributes][#{setting}]", '1',
+        f.object.settings[setting] == '1' || f.object.settings_default(setting)
+        = User::setting_keys[setting]

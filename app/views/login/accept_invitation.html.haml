@@ -1,3 +1,7 @@
+- content_for :javascript do
+  :javascript
+    $('user_nick').focus();
+
 - title "Einladung in die #{FoodsoftConfig[:name]}"
 %p
   Du bist eingeladen worden als Mitglied der Gruppe
@@ -12,7 +16,8 @@
   Gründen, weitergeben. Du kannst auch entscheiden, wieviel deiner persönlichen
   Daten für alle einsehbar sein sollen. 'Alle' bedeutet hier alle Foodcoop-Mitglieder.
   Die Administratoren haben aber jederzeit Zugriff auf deine Daten.
-= simple_form_for @user, url: {action: 'invite'} do |form|
+= simple_form_for @user, url: accept_invitation_path do |form|
   = render partial: 'shared/user_form_fields', locals: {f: form}
-  = submit_tag "Absenden"
-= javascript_tag("$('user_nick').focus()")
+  .form-actions
+    = submit_tag "Foodsoft Account erstellen", class: 'btn'
+

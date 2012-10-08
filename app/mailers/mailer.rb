@@ -19,20 +19,22 @@ class Mailer < ActionMailer::Base
 
   # Sends an email with instructions on how to reset the password.
   # Assumes user.setResetPasswordToken has been successfully called already.
-  def reset_password(user)
-    @user = user
-    @link = url_for(:controller => "login", :action => "password", :id => user.id, :token => user.reset_password_token)
+  def reset_password(foodcoop, user_id)
+    set_foodcoop_scope(foodcoop)
+    @user = User.find(user_id)
+    @link = new_password_url(id: @user.id, token: @user.reset_password_token)
 
-    mail :to => user.email,
-         :subject => "[#{FoodsoftConfig[:name]}] Neues Passwort für/ New password for #{user.nick}"
+    mail :to => @user.email,
+         :subject => "[#{FoodsoftConfig[:name]}] Neues Passwort für/ New password for #{@user.nick}"
   end
     
   # Sends an invite email.
-  def invite(invite)
-    @invite = invite
-    @link = url_for(:controller => "login", :action => "invite", :id => invite.token)
+  def invite(foodcoop, invite_id)
+    set_foodcoop_scope(foodcoop)
+    @invite = Invite.find(invite_id)
+    @link = accept_invitation_url(token: @invite.token)
 
-    mail :to => invite.email,
+    mail :to => @invite.email,
          :subject => "Einladung in die Foodcoop #{FoodsoftConfig[:name]} - Invitation to the Foodcoop"
   end
 
@@ -80,6 +82,12 @@ class Mailer < ActionMailer::Base
 
     mail :to => user.email,
          :subject => "[#{FoodsoftConfig[:name]}] \"#{task.name}\" braucht noch Leute!"
+  end
+
+  private
+
+  def set_foodcoop_scope(foodcoop)
+    ActionMailer::Base.default_url_options[:foodcoop] = foodcoop
   end
   
 end

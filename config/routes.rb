@@ -17,6 +17,8 @@ Foodsoft::Application.routes.draw do
 
     match '/login' => 'sessions#new', :as => 'login'
     match '/logout' => 'sessions#destroy', :as => 'logout'
+    get '/login/new_password' => 'login#new_password', as: :new_password
+    match '/login/accept_invitation/:token' => 'login#accept_invitation', as: :accept_invitation
     resources :sessions, :only => [:new, :create, :destroy]
 
     ########### User specific
@@ -174,6 +176,7 @@ Foodsoft::Application.routes.draw do
 
     resources :users, :only => [:index]
 
+    # TODO: This is very error prone. Better deactivate this catch all route
     match ':controller(/:action(/:id))(.:format)'
 
   end # End of /:foodcoop scope
