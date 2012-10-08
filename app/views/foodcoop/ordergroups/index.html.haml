@@ -1,17 +1,13 @@
-%h1 Bestellgruppen der Foodcoop
+- title "Bestellgruppen"
 
-.left_column{:style => "width:100%"}
-  .box_title
-    %h2 Übersicht
-  .column_content
-    #filter{:style => "margin-right:2em;"}
-      = form_tag foodcoop_ordergroups_path, :method => :get, :style=>"display:inline;", :id => 'ordergroup_search',
-      :remote => true, 'data-submit-onchange' => true do
-        %label{:for => 'article_name'} Suche nach Name:
-        = text_field_tag :query, params[:query], :size => 10
-        %label{:for => 'only_active'} Nur aktive:
-        = check_box_tag 'only_active', 1, params[:only_active]
-        %small (mindestens einmal in den letzten 3 Monaten bestellt)
-    
-    #ordergroups
-      = render :partial => "ordergroups"
+.well
+  = form_tag foodcoop_ordergroups_path, :method => :get, :remote => true, 'data-submit-onchange' => true,
+    class: 'form-search' do
+    = text_field_tag :name, params[:name], class: 'input-medium search-query', placeholder: 'Name ...'
+    %label{:for => 'only_active'}
+      = check_box_tag 'only_active', 1, params[:only_active]
+      Nur aktive
+      %small (mindestens einmal in den letzten 3 Monaten bestellt)
+
+#ordergroups
+  = render :partial => "ordergroups"

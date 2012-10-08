@@ -2,11 +2,16 @@ class Foodcoop::OrdergroupsController < ApplicationController
   
   def index
     @ordergroups = Ordergroup.order('name DESC')
-    @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].blank? # Search by name
-    @ordergroups = @ordergroups.joins(:orders).where(:orders => {:starts.gte => Time.now.months_ago(3)}) if params[:only_active] # Select only active groups
 
-    @total = @ordergroups.size
-    @ordergroups = @ordergroups.paginate(:page => params[:page], :per_page => @per_page)
+    unless params[:name].blank? # Search by name
+      @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")
+    end
+
+    if params[:only_active] # Select only active groups
+      @ordergroups = @ordergroups.joins(:orders).where("orders.starts >= ?", Time.now.months_ago(3)).uniq
+    end
+
+    @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
 
     respond_to do |format|
       format.html # index.html.erb

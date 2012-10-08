@@ -1,13 +1,8 @@
-%p
-%table{:style => "width:100%"}
-  %tr
-    %td
-      = pagination_links_remote @ordergroups, :update => :ordergroups
-    %td{:style => "text-align:right"}
-      - if @total > 20
-        = items_per_page :update => :ordergroups
+- if Ordergroup.count > 20
+  = items_per_page
+= pagination_links_remote @ordergroups
 
-%table.list
+%table.table.table-striped
   %thead
     %tr
       %th Name
@@ -16,10 +11,9 @@
 
   %tbody
     - for ordergroup in @ordergroups
-      %tr{:class => cycle('even','odd', :name => 'ordergroup')}
-        %td= link_to h(ordergroup.name), new_message_path(:message => {:group_id => ordergroup.id}), :title => "Bestellgruppe eine Nachricht schicken"
+      %tr
+        %td= ordergroup.name
         %td=h ordergroup.users.collect { |u| u.nick }.join(", ")
-        %td
-          - order = ordergroup.orders.first(:order => 'starts DESC')
-          = order ? format_date(order.starts) : "-"
+        %td= format_date ordergroup.orders.order('orders.starts DESC').first.try(:starts)
+        %td= link_to_new_message(message_params: {group_id: ordergroup.id})
 

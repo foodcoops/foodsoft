@@ -1,7 +1,6 @@
-- unless params[:sort_by_ordergroups]
-  - if User.count > 20
-    = items_per_page
-  = pagination_links_remote @users
+- if User.count > 20
+  = items_per_page
+= pagination_links_remote @users
 %table.table.table-striped
   %thead
     %tr
