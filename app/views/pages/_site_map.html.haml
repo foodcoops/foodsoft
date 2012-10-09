@@ -1,11 +1,12 @@
-.column_content
-  %table
+%table.table.table-striped
+  %thead
     %tr
       %th Titel
       %th Zuletzt aktualisiert
     - homepage = Page.find_by_permalink('Home')
     - unless homepage.nil?
       = render :partial => 'page_list_item', :locals => {:page => homepage, :level => 0, :siteMap => 1}
-    - for page in Page.no_parent.non_redirected.order('created_at DESC')
+  %tbody
+    - for page in @pages
       - if page.id != homepage.id
         = render :partial => 'page_list_item', :locals => {:page => page, :level => 0, :siteMap => 1}

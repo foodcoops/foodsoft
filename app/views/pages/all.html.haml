@@ -1,21 +1,17 @@
 - title "Alle Wikiseiten", false
 
-.wiki_all
-  #breadcrump
-    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
+- content_for :sidebar do
+  = link_to "Neue Seite anlegen", new_page_path, class: 'btn btn-primary'
 
-  %h1 Alle Wikiseiten
+.navbar
+  .navbar-inner
+    %ul.nav
+      %li= link_to 'Letzte Änderungen', all_pages_path(:view => 'recent_changes')
+      %li= link_to 'Seiten-Liste', all_pages_path(:view => 'title_list')
+      %li= link_to 'Site Map', all_pages_path(:view => 'site_map')
+    = form_tag all_pages_path, method: :get, class: 'form-search pull-right' do
+      = text_field_tag :name, params[:name], class: 'input-medium search-query',
+        placeholder: 'Seitentitel ...'
+      = submit_tag "Suche", class: 'btn'
 
-
-  #sidebar
-    #sidebar-links
-      = link_to "Neue Seite anlegen", new_page_path
-
-  .left_column{:style => "width:100%"}
-    .box_title
-      #editOrderNav
-        = link_to 'Letzte Änderungen', all_pages_path(:view => 'recent_changes')
-        = link_to 'Seiten-Liste', all_pages_path(:view => 'title_list')
-        = link_to 'Site Map', all_pages_path(:view => 'site_map')
-    #left_column
-      = render :partial => params[:view] || 'recent_changes'
+= render @partial

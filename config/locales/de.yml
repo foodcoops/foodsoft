@@ -335,6 +335,7 @@ de:
         private: Privat
       page:
         body: 'Inhalt'
+        parent_id: Oberseite
       supplier:
         address: 'Adresse'
         phone: 'Telefon'

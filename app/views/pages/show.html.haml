@@ -1,51 +1,54 @@
 - title @page.title, false
 
-.wiki_show
-
-  #breadcrump
-    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
-    - for page in @page.ancestors.reverse
-      %span.wikiSeparator &gt;
-      = link_to_wikipage(page)
-    %span.wikiSeparator &gt;
-    = @page.title
-
-  #sidebar
-    #sidebar-links
-      = link_to "Bearbeiten", edit_page_path(@page)
-      = link_to "Versionen (#{@page.versions.count})", "#versions", 'data-toggle-this' => '#versions'
-      - unless @page.children.empty?
-        = link_to "Unterseiten", "#subpages", 'data-toggle-this' => '#subpages'
-    #versions{:style => "display:none"}
-      .box_title
-        %h2 Versionen
-      .column_content
-        %ul
-          - for version in @page.versions.reverse
-            %li
-              = link_to I18n.l(version.updated_at, :format => "%d.%m.%y %H:%M"), version_page_path(@page, :version => version.lock_version)
-              = "(#{User.find_by_id(version.updated_by).try(:nick)})"
-
-    - unless @page.children.empty?
-      #subpages{:style => "display:none"}
-        .box_title
-          %h2 Unterseiten
-        .column_content
-          %ul
-            - for page in @page.children
-              %li= link_to_wikipage(page)
-
-  #wiki_content
-    %h1
-      = @page.title
-    = render :partial => 'body'
-
-  %hr.clear/
+- content_for :sidebar do
   %p
-    = link_to "Seite bearbeiten", edit_page_path(@page)
-    |
-    = link_to "Seite löschen", @page, :method => :delete, :confirm => "Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?"
-    | Zuletzt bearbeitet von
-    %b
-      = "#{@page.user.try(:nick)}"
-    = "am #{format_datetime @page.updated_at}"
+    = link_to edit_page_path(@page), class: 'btn btn-primary' do
+      %i.icon-edit
+      Seite bearbeiten
+  .well.well-small
+    %ul.nav.nav-list
+      %li
+      %li= link_to "Versionen (#{@page.versions.count})", "#versions", 'data-toggle-this' => '#versions'
+      - unless @page.children.empty?
+        %li= link_to "Unterseiten", "#subpages", 'data-toggle-this' => '#subpages'
+
+  #versions.well.well-small{:style => "display:none"}
+    %h3 Versionen
+    %ul.unstyled
+      - @page.versions.reverse.each do |version|
+        %li
+          = link_to I18n.l(version.updated_at, :format => "%d.%m.%y %H:%M"), version_page_path(@page, :version => version.lock_version)
+          = "(#{User.find_by_id(version.updated_by).try(:nick)})"
+
+  - unless @page.children.empty?
+    #subpages.well.well-small{:style => "display:none"}
+      %h3 Unterseiten
+      %ul.unstyled
+        - @page.children.each do |page|
+          %li= link_to_wikipage(page)
+
+#breadcrump
+  = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
+  - for page in @page.ancestors.reverse
+    %span.wikiSeparator &gt;
+    = link_to_wikipage(page)
+  %span.wikiSeparator &gt;
+  = @page.title
+
+
+#wikiContent
+  .page-header
+    %h1= @page.title
+  = render :partial => 'body'
+
+%hr.clear/
+%p
+  = link_to edit_page_path(@page), class: 'btn btn-primary' do
+    %i.icon-edit
+    Seite bearbeiten
+  = link_to "Seite löschen", @page, class: 'btn btn-danger', :method => :delete,
+    :confirm => "Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?"
+  | Zuletzt bearbeitet von
+  %b
+    = "#{@page.user.try(:nick)}"
+  = "am #{format_datetime @page.updated_at}"

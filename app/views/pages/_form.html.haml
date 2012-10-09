@@ -1,12 +1,26 @@
 - if params[:preview]
-  %h2 Vorschau
-  #preview= render :partial => 'body'
+  %section#wikiContent
+    = render 'body'
 
-#wiki-syntax-help
-  .box_title
-    %h2 Schnelle Formatierungshilfe
-  .column_content
-    %table(frame="void")
+.row-fluid
+  .span8
+    = simple_form_for @page do |f|
+      = f.hidden_field :lock_version
+      = f.input :title, input_html: {class: 'input-xxlarge'}
+      = f.input :body, input_html: {class: 'input-xxlarge'}
+      = f.input :parent_id, as: :select, collection: parent_pages_to_select(@page)
+      .form-actions
+        = button_tag :name => 'preview', class: 'btn' do
+          %i.icon-search
+          Vorschau
+        = button_tag class: 'btn' do
+          %i.icon-save
+          Speichern
+        = link_to "oder abbrechen", @page
+
+  .span4
+    %h3 Schnelle Formatierungshilfe
+    %table.table
       %tbody
         %tr
           %td(colspan=2)
@@ -79,17 +93,3 @@
             Siehe
             = link_to "Tabellen", "http://www.mediawiki.org/wiki/Help:Tables", :target => '_blank'
 
-- simple_form_for @page do |f|
-  = f.hidden_field :lock_version
-  = f.input :title
-  = f.input :body, :input_html => {:size => "65x30"}
-  %p
-    = submit_tag "Vorschau", :name => 'preview'
-    |
-    = submit_tag "Speichern"
-    |
-    = link_to "Abbrechen", @page
-    | Oberseite ändern:
-    = collection_select(:page, :parent_id, parent_pages_to_select(@page), :id, :permalink, {:prompt => "Neue Oberseite?", :include_blank => true})
-
-%div(style="clear:right; height:1px")

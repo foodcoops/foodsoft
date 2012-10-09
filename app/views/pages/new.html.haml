@@ -1,16 +1,3 @@
-- title "Neue Wikiseite anlegen", false
+- title "Neue Wikiseite anlegen"
 
-.wiki_new
-  #breadcrump
-    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
-    - parent_page = Page.find_by_permalink(params[:parent])
-    - if parent_page != nil
-      - for page in parent_page.ancestors.reverse
-        %span.wikiSeparator &gt;
-        = link_to_wikipage(page)
-    %span.wikiSeparator &gt;
-    = @page.title
-
-  %h1 Neue Wikiseite anlegen
-
-  = render :partial => 'form'
+= render 'form'

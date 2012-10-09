@@ -97,6 +97,23 @@ class PagesController < ApplicationController
   end
 
   def all
+    @pages = Page.non_redirected
+    @partial = params[:view] || 'recent_changes'
+
+    if params[:name]
+      @pages = @pages.where("title LIKE ?", "%#{params[:name]}%").limit(20).order('updated_at DESC')
+      @partial = 'title_list'
+    else
+      order = case @partial
+        when 'recent_changes' then
+          'updated_at DESC'
+        when 'site_map' then
+          'created_at DESC'
+        when 'title_list' then
+          'title DESC'
+              end
+      @pages.order(order)
+    end
   end
 
   def version

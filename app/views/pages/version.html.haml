@@ -1,27 +1,11 @@
-- title @page.title, false
+- title "#{@page.title} - Version #{@version.lock_version}"
 
-.wiki_version
-  #breadcrump
-    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
-    - for page in @page.ancestors.reverse
-      %span.wikiSeparator &gt;
-      = link_to_wikipage(page)
-    %span.wikiSeparator &gt;
-    = link_to_wikipage(@page)
+- content_for :sidebar do
+  %h3 Version
+  %b= "#{format_datetime_timespec(@version.updated_at, "%a, %d.%m.%Y, %H:%M Uhr") }"
+  %ul
+    %li= "Autor: #{User.find(@version.updated_by).nick}"
+    %li= link_to "Aktuelle Version sehen", wiki_page_path(:permalink => @page.permalink)
+    %li= link_to "Auf diese Version zurücksetzen", revert_page_path(@page, :version => @version.lock_version)
 
-  %h1
-    = @page.title
-
-  #sidebar
-    .box_title
-      %h2 Version
-    .column_content
-      %b= "#{format_datetime_timespec(@version.updated_at, "%a, %d.%m.%Y, %H:%M Uhr") }"
-      %ul
-        %li= "Autor: #{User.find(@version.updated_by).nick}"
-        %li= link_to "Aktuelle Version sehen", wiki_page_path(:permalink => @page.permalink)
-        %li= link_to "Auf diese Version zurücksetzen", revert_page_path(@page, :version => @version.lock_version)
-
-  = wikified_body @version.body
-  %div(style="clear:right")
-
+= wikified_body @version.body

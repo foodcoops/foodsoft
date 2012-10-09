@@ -1,7 +1,8 @@
-.column_content
-  %table
+%table.table.table-striped
+  %thead
     %tr
       %th Titel
       %th Zuletzt aktualisiert
-    - for page in Page.non_redirected.order('title DESC')
+  %tbody
+    - for page in @pages
       = render :partial => "page_list_item", :locals => {:page => page, :level => 0, :siteMap => 0}

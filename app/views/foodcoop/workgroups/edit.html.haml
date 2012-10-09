@@ -6,5 +6,6 @@
   einladen.
 = simple_form_for [:foodcoop, @workgroup] do |f|
   = render :partial => 'shared/group_form_fields', :locals => {:f => f}
-  = f.submit
-  = link_to "oder abbrechen", foodcoop_workgroups_path
+  .form-actions
+    = f.submit
+    = link_to "oder abbrechen", foodcoop_workgroups_path

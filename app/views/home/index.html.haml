@@ -5,16 +5,12 @@
 
 - unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks_number == 0
   %section.well
-    %h2 Aufgaben
-    -unless @next_tasks.empty?
-      %div{:style => "float:left, margin-bottom:2em"}
-        %strong Deine Aufgaben für die nächste Woche:
-        %table.table(style="width:25em")
-          -for task in @next_tasks
-            %tr
-              %td= format_date task.due_date
-              %td
-                %b= task.name
+    - unless @next_tasks.empty?
+      %h3 Deine Aufgaben für nächste Woche
+      %dl.dl-horizontal
+        - @next_tasks.each do |task|
+          %dt= l task.due_date, format: "%A, %d. %b"
+          %dd= link_to task.name, task_path(task)
 
     - unless @unaccepted_tasks.empty?
       %h3 Aufgaben übernehmen
@@ -23,7 +19,6 @@
     - unless @unassigned_tasks_number == 0
       %h3 Offene Aufgaben
       = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufgabe(n)', :controller => 'tasks'}".html_safe
-    %p= link_to "Meine Aufgaben", user_tasks_path
 
 - if current_user.ordergroup
   = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}

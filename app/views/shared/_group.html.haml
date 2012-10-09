@@ -1,32 +1,25 @@
-%table
-  %tr
-    %td Beschreibung:
-    %td=h group.description
+%dl.dl-horizontal
+  %dt Beschreibung:
+  %dd=h group.description
   - if group.is_a?(Ordergroup) and (@current_user.role_admin? or @current_user.role_finance?)
-    %tr
-      %td Kontakt:
-      %td=h group.contact
-    %tr
-      %td Adresse:
-      %td= link_to_gmaps group.contact_address
-  %tr
-    %td Gruppe hat Zugriff auf:
-    %td= format_roles(group)
-  %tr
-    %td Mitglieder:
-    %td
-      - members = group.users
-      = "(#{members.size})"
-      = members.collect(&:nick).join(", ")
+    %dt Kontakt:
+    %dd=h group.contact
+    %dt Adresse:
+    %dd= link_to_gmaps group.contact_address
+  %dt Zugriff auf:
+  %dd= format_roles(group)
+  %dt Mitglieder:
+  %dd
+    - members = group.users
+    = "(#{members.size})"
+    = members.collect(&:nick).join(", ")
   - if group.is_a?(Workgroup)
-    %tr
-      %td wöchentlicher Job:
-      %td
-        - if group.weekly_task
-          =h "#{group.task_name} am #{weekday(group.weekday)}"
-        - else
-          kein wöchentlicher Job definiert
+    %dt wöchentlicher Job:
+    %dd
+      - if group.weekly_task
+        =h "#{group.task_name} am #{weekday(group.weekday)}"
+      - else
+        kein wöchentlicher Job definiert
   - else
-    %tr
-      %td Äpfel-Bestellbeschränkung
-      %td= group.ignore_apple_restriction ? 'deaktiviert' : 'aktiviert'
+    %dt Äpfel-Bestellbeschränkung
+    %dd= group.ignore_apple_restriction ? 'deaktiviert' : 'aktiviert'

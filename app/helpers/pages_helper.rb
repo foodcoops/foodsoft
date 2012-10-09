@@ -41,10 +41,10 @@ module PagesHelper
     unless toc.blank?
       toc = WikiCloth.new({:data => toc, :link_handler => Wikilink.new}).to_html
 
-      section_count = 0
       toc.gsub(/<li>([^<>\n]*)/) do
-        section_count += 1
-        "<li><a href='#section-#{section_count}'>#{$1}</a>"
+        name = $1
+        anchor = name.gsub(/\s/, '_').gsub(/[^a-zA-Z_]/, '')
+        "<li><a href='##{anchor}'>#{name.truncate(20)}</a>"
       end.html_safe
     end
   end
