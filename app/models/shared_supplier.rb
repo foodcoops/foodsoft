@@ -9,9 +9,6 @@ class SharedSupplier < ActiveRecord::Base
   has_one :supplier
   has_many :shared_articles, :foreign_key => :supplier_id
   
-  # save the lists as an array
-  serialize :lists
-  
 end
 
 # == Schema Information
