@@ -1,26 +1,22 @@
-- title "List workgroups"
+- title "Arbeitsgruppen"
 
-%p
-  %i
+- content_for :sidebar do
+  %p= link_to "Neue Arbeitsgruppe anlegen", new_admin_workgroup_path, class: 'btn btn-primary'
+  %p
     Hier kannst du
     = link_to 'neue Arbeitsgruppen', new_admin_workgroup_path
     anlegen, Gruppen bearbeiten und löschen.
-    
-%p
-  Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>:
-  Eine
-  %em= link_to 'Bestellgruppe', '/admin/ordergroups'
-  hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. 'Soritiergruppe')
-  koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten.
-  Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
-.left_column{:style => "width:100%"}
-  .box_title
-    %h2 Gruppenübersicht
-  .column_content
-    #group_filter
-      = form_tag admin_workgroups_path, :method => :get, :style=>"display:inline;", :id => 'ordergroup_search',
-      :remote => true, 'data-submit-onchange' => true do
-        %label{:for => 'article_name'} Suche nach Name:
-        = text_field_tag :query, params[:query], :size => 10
-    #workgroups
-      = render :partial => "workgroups"
+  %p
+    Beachte dabei den <strong>Unterschied zwischen Gruppe und Bestellgruppe</strong>:
+    Eine #{link_to 'Bestellgruppe', '/admin/ordergroups'}
+    hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. 'Soritiergruppe')
+    koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten.
+    Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
+
+.well.well-small
+  = form_tag admin_workgroups_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :query, params[:query], class: 'input-medium search-query',
+      placeholder: 'Name ...'
+#workgroups
+  = render "workgroups"

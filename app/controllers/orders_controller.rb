@@ -20,18 +20,7 @@ class OrdersController < ApplicationController
     else
       sort = "ends DESC"
     end
-    @orders = Order.paginate :page => params[:page], :per_page => @per_page, 
-                             :order => sort, :conditions => "state != 'open'",
-                             :include => :supplier
-    
-    respond_to do |format|
-      format.html
-      format.js do
-        render :update do |page|
-          page.replace_html 'orders_table', :partial => "orders"
-        end
-      end
-    end
+    @orders = Order.page(params[:page]).per(@per_page).order(sort).where("state != 'open'").includes(:supplier)
   end
 
   # Gives a view for the results to a specific order
@@ -43,7 +32,7 @@ class OrdersController < ApplicationController
       format.html
       format.js do
         @partial = case params[:view]
-                     when 'normal' then "articles"
+                     when 'default' then "articles"
                      when 'groups'then 'shared/articles_by_groups'
                      when 'articles'then 'shared/articles_by_articles'
                      else 'articles'

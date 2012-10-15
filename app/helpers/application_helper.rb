@@ -68,7 +68,9 @@ module ApplicationHelper
   
   # Generates a link to the top of the website
   def link_to_top
-    link_to image_tag("arrow_up_red.png", :size => "16x16", :border => "0", :alt => "Nach oben"), "#" 
+    link_to '#' do
+      content_tag :i, nil, class: 'icon-arrow-up icon-large'
+    end
   end
   
   # Returns the weekday. 0 is sunday, 1 is monday and so on

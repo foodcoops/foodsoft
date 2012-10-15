@@ -2,44 +2,42 @@
 
 %p
   %i Hier kannst Du die Gruppen und Benutzerinnen der Foodsoft verwalten.
-.left_column{:style => "width:48%"}
-  .box_title
-    %h2 Neuste Benutzerinnen
-  .column_content
-    %table
-      %tr
-        %th Benutzername
-        %th Name
-        %th Erstellt am
-      - for user in @users
-        %tr{:class => cycle('even','odd', :name => 'users')}
-          %td= link_to user.nick, [:admin, user]
-          %td=h user.name
-          %td= format_date(user.created_on)
-    %br/
-    = link_to 'Alle Benutzerinnen', admin_users_path
-    |
-    = link_to "Neue Benutzerin", new_admin_user_path
-
-.right_column{:style => "width:48%"}
-  .box_title
-    %h2 Neuste Gruppen
-  .column_content
-    %table
-      %tr
-        %th Gruppenname
-        %th Typ
-        %th Mitglieder
-      - for group in @groups
-        %tr{:class => cycle('even','odd', :name => 'groups')}
-          %td= link_to group.name, [:admin, group]
-          %td= group.class.model_name.human
-          %td= group.users.size
-    %br/
-    = link_to 'Alle Bestellgruppen', admin_ordergroups_path
-    |
-    = link_to "Neue Bestellgruppe", new_admin_ordergroup_path
-    |
-    = link_to 'Alle Arbeitsgruppen', admin_workgroups_path
-    |
-    = link_to "Neue Arbeitsgruppe", new_admin_workgroup_path
+.row-fluid
+  .span6
+    %section
+      %h2 Neuste Benutzerinnen
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Benutzername
+            %th Name
+            %th Erstellt am
+        - for user in @users
+          %tr{:class => cycle('even','odd', :name => 'users')}
+            %td= link_to user.nick, [:admin, user]
+            %td=h user.name
+            %td= format_date(user.created_on)
+      = link_to 'Alle Benutzerinnen', admin_users_path
+      |
+      = link_to "Neue Benutzerin", new_admin_user_path, class: 'btn btn-primary btn-small'
+  .span6
+    %section
+      %h2 Neuste Gruppen
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Gruppenname
+            %th Typ
+            %th Mitglieder
+        - for group in @groups
+          %tr{:class => cycle('even','odd', :name => 'groups')}
+            %td= link_to group.name, [:admin, group]
+            %td= group.class.model_name.human
+            %td= group.users.size
+      = link_to 'Alle Bestellgruppen', admin_ordergroups_path
+      |
+      = link_to "Neue Bestellgruppe", new_admin_ordergroup_path, class: 'btn btn-primary btn-small'
+      |
+      = link_to 'Alle Arbeitsgruppen', admin_workgroups_path
+      |
+      = link_to "Neue Arbeitsgruppe", new_admin_workgroup_path, class: 'btn btn-primary btn-small'

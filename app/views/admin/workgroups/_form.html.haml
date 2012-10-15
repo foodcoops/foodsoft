@@ -4,11 +4,12 @@
   einladen.
 = simple_form_for [:admin, @workgroup] do |f|
   = render :layout => 'shared/group_form_fields', :locals => {:f => f} do
-    %h3 Zugriff auf ..
+    %h4 Zugriff auf
     = f.input :role_admin
     = f.input :role_finance
     = f.input :role_suppliers
     = f.input :role_article_meta
     = f.input :role_orders
-  = f.submit
-  = link_to "oder abbrechen", admin_workgroups_path
+  .form-actions
+    = f.button :submit
+    = link_to "oder abbrechen", :back

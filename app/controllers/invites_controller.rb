@@ -11,9 +11,15 @@ class InvitesController < ApplicationController
     @invite = Invite.new(params[:invite])
     if @invite.save
       Mailer.delay.invite(FoodsoftConfig.scope, @invite.id)
-      redirect_to back_or_default_path, notice: "Benutzerin wurde erfolgreich eingeladen."
+
+      respond_to do |format|
+        format.html do
+          redirect_to back_or_default_path, notice: "Benutzerin wurde erfolgreich eingeladen."
+        end
+        format.js { render layout: false }
+      end
+
     else
-      logger.debug "[debug] errors: #{@invite.errors.messages}"
       render action: :new
     end
   end

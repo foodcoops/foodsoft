@@ -1,12 +1,7 @@
-%p
-  %table{:style => "width:100%"}
-    %tr
-      %td
-        = pagination_links_remote @users
-      %td{:style => "text-align:right"}
-        - if @users.size > 20
-          = items_per_page
-%table.list
+- if User.count > 20
+  = items_per_page
+= pagination_links_remote @users
+%table.table.table-striped
   %thead
     %tr
       %th Login
@@ -14,17 +9,16 @@
       %th Email
       %th Zugriff auf
       %th Letzter login
-      %th{:style => "width:3em"}
+      %th Aktionen
   %tbody
     - for user in @users 
-
-      %tr{:class => cycle('even','odd', :name => 'users')}
+      %tr
         %td= link_to user.nick, [:admin, user]
         %td=h user.name
         %td=h user.email
         %td=h format_roles(user)
         %td=h format_time(user.last_login)
         %td
-          = link_to icon(:edit), edit_admin_user_path(user)
-          = link_to icon(:delete), [:admin, user], :confirm => "Willst du #{user.name} wirklich löschen?",
-            :method => :delete
+          = link_to 'Bearbeiten', edit_admin_user_path(user), class: 'btn btn-mini'
+          = link_to 'Löschen', [:admin, user], :confirm => "Willst du #{user.name} wirklich löschen?",
+            :method => :delete, class: 'btn btn-danger btn-mini'

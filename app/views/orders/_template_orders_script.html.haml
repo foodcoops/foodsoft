@@ -1,0 +1,17 @@
+:javascript
+  //
+  	// Preset selected order articles per template order:
+  	var template = new Array();
+  <haml:silent> current_article_ids = @order.supplier.articles.available.map(&:id) 
+  </haml:silent><haml:silent> 	i = -1; for order in @template_orders 
+  </haml:silent><haml:block>	template[#{i += 1}] = new Array(#{current_article_ids.collect { |id| order.article_ids.include?(id) }.join(', ')});
+  </haml:block>	// Call with index into template-array to select order articles from template.
+  	function useTemplate(id) {
+  		if (id >= 0 && id < template.length) {
+  <haml:silent>     i = -1; for article_id in  current_article_ids 
+  </haml:silent><haml:block>      var status = template[id][#{i += 1}]
+        $('checkbox_#{article_id}').checked = status;
+        highlightRow('#{article_id}',status);
+  </haml:block>    }
+    }
+  //

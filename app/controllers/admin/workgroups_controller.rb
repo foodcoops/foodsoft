@@ -7,12 +7,7 @@ class Admin::WorkgroupsController < Admin::BaseController
     # if somebody uses the search field:
     @workgroups = @workgroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].blank?
 
-    @workgroups = @workgroups.paginate(:page => params[:page], :per_page => @per_page)
-
-    respond_to do |format|
-      format.html # index.html.haml
-      format.js { render :layout => false } # index.js.erb
-    end
+    @workgroups = @workgroups.page(params[:page]).per(@per_page)
   end
 
   def destroy

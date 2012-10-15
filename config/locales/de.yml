@@ -1,6 +1,10 @@
 de:
-  groups:
-    
+  orders:
+    state:
+      open: laufend
+      finished: beendet
+      closed: abgerechnet
+
   home:
     index:
       title: Startseite
@@ -142,13 +146,6 @@ de:
       header:
         one: ! 'Konnte %{model} nicht speichern: ein Fehler.'
         other: ! 'Konnte %{model} nicht speichern: %{count} Fehler.'
-  helpers:
-    select:
-      prompt: Bitte wählen
-    submit:
-      create: ! '%{model} erstellen'
-      submit: ! '%{model} speichern'
-      update: ! '%{model} aktualisieren'
   number:
     currency:
       format:
@@ -255,11 +252,15 @@ de:
         note: Notiz
 
   helpers:
+    select:
+      prompt: Bitte wählen
     submit:
       create: "%{model} speichern"
       update: "Änderungen speichern"
       message:
         create: 'Nachricht verschicken'
+      invite:
+        create: Einladung verschicken
 
   # Simple form i18n is used to build the forms
   simple_form:
@@ -268,22 +269,8 @@ de:
     required:
       text: 'benötigt'
       mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Fehler wurden gefunden. Bitte das Formular überprüfen."
-    # Labels and hints examples
-    # labels:
-    #   password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail para efetuar o sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
-    #   username: 'User name to sign in.'
-    #   password: 'No special characters, please.'
     labels:
       defaults:
         password: 'Passwort'
@@ -368,7 +355,7 @@ de:
         nick: "Benutzername"
         last_name: "Nachname"
       order_comment:
-        text: 'Kommentar'
+        text: Kommentiere diese Bestellung ...
       order:
         starts: "Läuft vom"
         ends: "Endet am"
@@ -384,6 +371,7 @@ de:
         paid_on: Bezahlt am
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
+
 
     hints:
       tax: 'In Prozent, Standard sind 7,0'

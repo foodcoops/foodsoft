@@ -1,24 +1,20 @@
-%p
-  %table{:style => "width:100%"}
-    %tr
-      %td
-        = pagination_links_remote @workgroups
-      %td{:style => "text-align:right"}
-        = items_per_page
-%table.list
+- if Workgroup.count > 20
+  = items_per_page
+= pagination_links_remote @workgroups
+%table.table.table-striped
   %thead
     %tr
       %th Name
       %th Mitglieder
       %th Zugriff auf
-      %th
+      %th Aktionen
   %tbody
     - for workgroup in @workgroups
-      %tr{:class => cycle('even','odd', :name => 'groups')}
+      %tr
         %td= link_to workgroup.name, [:admin, workgroup]
         %td= workgroup.users.size
         %td= format_roles(workgroup)
         %td
-          = link_to icon(:edit), edit_admin_workgroup_path(workgroup)
-          = link_to icon(:delete), [:admin, workgroup], :confirm => 'Willst du ' + workgroup.name + ' wirklich löschen?',
-            :method => :delete
+          = link_to "Bearbeiten", edit_admin_workgroup_path(workgroup), class: 'btn btn-mini'
+          = link_to "Löschen", [:admin, workgroup], :confirm => 'Willst du ' + workgroup.name + ' wirklich löschen?',
+            :method => :delete, class: 'btn btn-mini btn-danger'

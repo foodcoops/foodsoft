@@ -5,15 +5,11 @@ class Admin::UsersController < Admin::BaseController
     @users = User.order('nick ASC')
 
     # if somebody uses the search field:
-    unless params[:query].blank?
-      @users = @users.where(({:first_name.matches => "%#{params[:query]}%"}) | ({:last_name.matches => "%#{params[:query]}%"}) | ({:nick.matches => "%#{params[:query]}%"}))
+    unless params[:user_name].blank?
+      @users = @users.where("first_name LIKE :user_name OR last_name LIKE :user_name OR nick LIKE :user_name",
+                            user_name: "%#{params[:user_name]}%")
     end
 
-    @users = @users.paginate(:page => params[:page], :per_page => @per_page)
-
-    respond_to do |format|
-      format.html # index.html.haml
-      format.js { render :layout => false } # index.js.erb
-    end
+    @users = @users.page(params[:page]).per(@per_page)
   end
 end

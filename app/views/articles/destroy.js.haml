@@ -1,0 +1,4 @@
+- if @order
+  $('#article_#{@article.id}').after('#{escape_javascript(render("destroy_active_article"))}');
+- else
+  $('#article_#{@article.id}').remove();

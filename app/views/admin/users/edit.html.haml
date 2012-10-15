@@ -1,9 +1,3 @@
-%h1 Benutzerin bearbeiten
-#newUser{:style => "width:65em"}
-  .box_title
-    %h2 Benutzerin bearbeiten
-  #userForm.column_content
-    - simple_form_for([:admin, @user]) do |f|
-      = render :partial => 'shared/user_form_fields', :locals => {:f => f}
-      = f.submit
-      = link_to 'oder abbrechen', admin_users_path
+- title "Benutzerin bearbeiten"
+
+= render 'form'

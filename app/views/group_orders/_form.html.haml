@@ -1,4 +1,4 @@
-- content_for :head do
+- content_for :javascript do
   :javascript
     $(function() {
       #{data_to_js(@ordering_data)}
@@ -10,123 +10,107 @@
 
 - title "Bestellen"
 
-.left_column{:style => "width:49em"}
-  .box_title
-    %h2=h @order.name
-  .column_content
-    %table
-      %tr{:valign => "top"}
-        %td{:width => "60%"}
-          %p
-            %b Lieferantin:
-            =h @order.name
-          %p
-            %b Ende:
-            =h format_time(@order.ends)
-          - if @group_order && @group_order.updated_by
-            %p
-              %b Zuletzt bestellt:
-              =h @group_order.updated_by.nick if @group_order.updated_by
-              = "(#{format_time(@group_order.updated_on)})"
-          %p
-            %b Verfügbares Guthaben:
-            = number_to_currency(@ordering_data[:available_funds])
-        %td
-          - unless @order.note.empty?
-            %p
-              %b Notiz:
-              = simple_format(@order.note)
-          - unless @order.stockit? || @order.supplier.min_order_quantity.blank?
-            %p
-              %b Mindestellmenge:
-              =h @order.supplier.min_order_quantity
-          %p
-            %b Gesamtbestellmenge bisher:
-            = number_to_currency @order.sum
+.well.pull-left
+  %h2= @order.name
+  %dl.dl-horizontal
+    - unless @order.note.blank?
+      %dt Notiz
+      %dd= @order.note
+    %dt Ende
+    %dd= format_time(@order.ends)
+    - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
+      %dt Mindestbestellmenge
+      %dd= @order.supplier.min_order_quantity
+    %dt Gesamtbestellmenge bisher:
+    %dd= number_to_currency @order.sum
+    %dt Zuletzt bestellt
+    %dd
+      = @group_order.updated_by.nick if @group_order.updated_by
+      (#{format_time(@group_order.updated_on)})
+    %dt Guthaben
+    %dd= number_to_currency(@ordering_data[:available_funds])
 
-= render :partial => 'switch_order', :locals => {:current_order => @order}
+.well.pull-right
+  = render 'switch_order', current_order: @order
 
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
   = f.hidden_field :order_id
   = f.hidden_field :updated_by_user_id
   = f.hidden_field :ordergroup_id
-  .single_column{:style => "clear:both;margin-bottom:7em;"}
-    .box_title
-      %h2 Artikel
-    .column_content
-      %table#order.list
-        %thead
-          %tr
-            %th Name
-            %th{:style => "width:13px;"}
-            %th{:style => "width:4.5em;"} Preis
-            %th{:style => "width:4.5em;"} Einheit
-            - unless @order.stockit?
-              %th{:style => "width:70px;"} Fehlende Einheiten
-              %th#col_required Menge
-              %th#col_tolerance Toleranz
-            - else
-              %th(style="width:20px") Verfügbar
-              %th#col_required Menge
-            %th{:style => "width:15px;"} Summe
-        %tbody
-          - @order.articles_grouped_by_category.each do |category, order_articles|
-            %tr{:style => "background-color:#EFEFEF"}
-              %td{:style => "text-align:left"}
-                %b= h category
-              %td{:colspan => "9"}
-            - order_articles.each do |order_article|
-              %tr{:class => "#{cycle('even', 'odd', :name => 'articles')} order-article", :valign => "top"}
-                %td.name= order_article.article.name
-                %td= h order_article.article.origin
-                %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
-                %td= order_article.article.unit
-                %td
-                  - if @order.stockit?
-                    = @ordering_data[:order_articles][order_article.id][:quantity_available]
-                  - else
-                    %span{:id => "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Name
+        %th{style: "width:13px;"}
+        %th{style: "width:4.5em;"} Preis
+        %th{style: "width:4.5em;"} Einheit
+        - unless @order.stockit?
+          %th{style: "width:70px;"} Fehlende Einheiten
+          %th#col_required Menge
+          %th#col_tolerance Toleranz
+        - else
+          %th(style="width:20px") Verfügbar
+          %th#col_required Menge
+        %th{style: "width:15px;"} Summe
+    %tbody
+      - @order.articles_grouped_by_category.each do |category, order_articles|
+        %tr.article-category
+          %td
+            = category
+            %i.icon-tag
+          %td{colspan: "9"}
+        - order_articles.each do |order_article|
+          %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
+            %td.name= order_article.article.name
+            %td= h order_article.article.origin
+            %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
+            %td= order_article.article.unit
+            %td
+              - if @order.stockit?
+                = @ordering_data[:order_articles][order_article.id][:quantity_available]
+              - else
+                %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
 
-                %td.quantity
-                  %input{:id => "q_#{order_article.id}", :name => "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", :size => "2", :type => "hidden", :value => @ordering_data[:order_articles][order_article.id][:quantity]}/
-                  %span.used{:id => "q_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_quantity]
-                  +
-                  %span.unused{:id => "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
-                  %input{:type => 'button', :value => '+', 'data-increase_quantity' => order_article.id}
-                  %input{:type => 'button', :value => '-', 'data-decrease_quantity' => order_article.id}
+            %td.quantity
+              %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", size: "2", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:quantity]}/
+              %span.used{id: "q_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_quantity]
+              +
+              %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
+              %input{type: 'button', value: '+', 'data-increase_quantity' => order_article.id}
+              %input{type: 'button', value: '-', 'data-decrease_quantity' => order_article.id}
 
-                %td.tolerance{:style => ('display:none' if @order.stockit?)}
-                  %input{:id => "t_#{order_article.id}", :name => "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", :size => "2", :type => "hidden", :value => @ordering_data[:order_articles][order_article.id][:tolerance]}/
-                  - if (@ordering_data[:order_articles][order_article.id][:unit] > 1)
-                    %span.used{:id => "t_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_tolerance]
-                    +
-                    %span.unused{:id => "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
-                    %input{:type => 'button', :value => '+', 'data-increase_tolerance' => order_article.id}
-                    %input{:type => 'button', :value => '-', 'data-decrease_tolerance' => order_article.id}
+            %td.tolerance{style: ('display:none' if @order.stockit?)}
+              %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", size: "2", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance]}/
+              - if (@ordering_data[:order_articles][order_article.id][:unit] > 1)
+                %span.used{id: "t_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_tolerance]
+                +
+                %span.unused{id: "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
+                %input{type: 'button', value: '+', 'data-increase_tolerance' => order_article.id}
+                %input{type: 'button', value: '-', 'data-decrease_tolerance' => order_article.id}
 
-                %td{:id => "td_price_#{order_article.id}", :style => "text-align:right; padding-right:10px; width:4em"}
-                  %span{:id => "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price], :unit => "")
-                  €
-                  .article-info
-                    %h3= order_article.article.name
-                    .right
-                      Volle Gebinde:
-                      %span{:id => "units_#{order_article.id}"}= order_article.units_to_order
-                      %br/
-                      Gesamt-Einheiten:
-                      %span{:id => "q_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] + @ordering_data[:order_articles][order_article.id][:others_quantity]
-                      %br/
-                      Gesamt-Toleranz:
-                      %span{:id => "t_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
-                      %br/
-                    .left
-                      Hersteller: #{order_article.article.manufacturer}
-                      %br/
-                      Gebinde: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
-                      %br/
-                      Notiz: #{order_article.article.note}
-                      %br/
+            %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
+              %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price], unit: "")
+              €
+              .article-info
+                .article-name= order_article.article.name
+                .pull-right
+                  Volle Gebinde:
+                  %span{id: "units_#{order_article.id}"}= order_article.units_to_order
+                  %br/
+                  Gesamt-Einheiten:
+                  %span{id: "q_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] + @ordering_data[:order_articles][order_article.id][:others_quantity]
+                  %br/
+                  Gesamt-Toleranz:
+                  %span{id: "t_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
+                  %br/
+                .pull-left
+                  Hersteller: #{order_article.article.manufacturer}
+                  %br/
+                  Gebinde: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
+                  %br/
+                  Notiz: #{order_article.article.note}
+                  %br/
   #order-footer
     #info-box
     #total-sum
@@ -146,7 +130,7 @@
               %span#new_balance= @ordergroup.account_balance - @group_order.price
               €
       #order-button
-        = submit_tag( "Bestellung speichern", :id => 'submit_button' )
+        = submit_tag( "Bestellung speichern", id: 'submit_button', class: 'btn btn-primary' )
         oder #{link_to "abbrechen", group_orders_path}
-  %input#total_balance{:name => "total_balance", :type => "hidden", :value => @ordergroup.account_balance - @group_order.price}/
-  %input{:name => "version", :type => "hidden", :value => @version}/
+  %input#total_balance{name: "total_balance", type: "hidden", value: @ordergroup.account_balance - @group_order.price}/
+  %input{name: "version", type: "hidden", value: @version}/

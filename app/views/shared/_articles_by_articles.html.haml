@@ -1,15 +1,12 @@
-.legend
-  %table.legend{:style => "margin-bottom:1em"}
-    %tr
-      %th{:colspan => '3'} Legende
+%table.table.table-hover
+  %thead
     %tr
       %th{:style => 'width:70%'} Bestellgruppe
       %th Bestellt (Menge + Toleranz)
       %th Bekommen
       %th Gesamtpreis
 
-- for order_article in order.order_articles.ordered.all(:include => [:article, :article_price])
-  %table{:style => "margin-bottom:1em"}
+  - for order_article in order.order_articles.ordered.all(:include => [:article, :article_price])
     %thead
       %tr
         %th{:colspan => "4"}
@@ -23,4 +20,6 @@
           %td
             %b= goa.result
           %td= number_to_currency(order_article.price.fc_price * goa.result)
+    %tr
+      %td(colspan="4" )
   - reset_cycle('groups')

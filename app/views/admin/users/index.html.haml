@@ -1,18 +1,16 @@
 - title "Admin/Benutzerinnen"
-%p
-  %i
-    Hier kannst du Benutzer_innen
-    = link_to 'neu Anlegen', new_admin_user_path
-    , bearbeiten und natürlich auch löschen.
-.left_column{:style => "width:100%"}
-  .box_title
-    %h2 Benutzerinnenübersicht
-  .column_content
-    #user_filter{:style => "float:left; margin-right:2em;"}
-      = form_tag admin_users_path, :method => :get, :style=>"display:inline;", :id => 'user_search',
-        :remote => true, 'data-submit-onchange' => true do
-        %label{:for => 'article_name'} Suche nach Name:
-        = text_field_tag :query, params[:query], :size => 10
-    #users
-      = render :partial => "users"
-  %p= link_to 'Neue Benutzerin', new_admin_user_path
+
+- content_for :sidebar do
+  %p= link_to 'Neue Benutzerin anlegen', new_admin_user_path, class: 'btn btn-primary'
+  %p
+    Hier kannst du Benutzer_innen #{link_to 'neu Anlegen', new_admin_user_path},
+    bearbeiten und natürlich auch löschen.
+
+.well.well-small
+  = form_tag admin_users_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :user_name, params[:user_name], class: 'input-medium search-query',
+      placeholder: 'Name ...'
+
+#users
+  = render "users"

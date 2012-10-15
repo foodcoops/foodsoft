@@ -15,11 +15,11 @@
         - Order.open.each do |order|
           %tr
             %td= link_to_ordering(order)
-            %td=h format_time(order.ends) unless order.ends.nil?
+            %td= format_time(order.ends) unless order.ends.nil?
             - if group_order = order.group_order(ordergroup)
               - total += group_order.price
               %td= "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
-              %td= number_to_currency(group_order.price)
+              %td.numeric= number_to_currency(group_order.price)
             - else
               %td{:colspan => 2}
       - if total > 0
@@ -27,6 +27,6 @@
           %tr
             %th(colspan="2")
             %th Gesamtsumme:
-            %th= number_to_currency(total)
+            %th.numeric= number_to_currency(total)
   - else
     %i Derzeit gibt es keine laufenden Bestellungen

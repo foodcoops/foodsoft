@@ -1,6 +1,6 @@
 @import "twitter/bootstrap/bootstrap";
-body { 
-	padding-top: 60px;
+body {
+  padding-top: 60px;
 }
 
 @import "twitter/bootstrap/responsive";
@@ -42,6 +42,27 @@ section {
   border-bottom: 1px solid #d3d3d3;
 }
 
+footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid lightGrey;
+}
+
+table {
+  tr.article-category {
+    background-color: #efefef;
+    td:first-child {
+      text-align: left;
+    }
+  }
+  th.numeric, td.numeric {
+    text-align: right;
+  }
+  td.odd {
+    background-color: @tableBackgroundAccent;
+  }
+}
+
 // Tasks ..
 .accepted {
   color: #468847;
@@ -59,4 +80,69 @@ section {
     color: @textColor;
     text-decoration: none;
   }
+}
+
+// ordering
+span.used {
+  color: green;
+}
+span.unused {
+  color: red;
+}
+
+#order-footer, .article-info {
+  text-align: left;
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  background-color: #E4EED6;
+  border-top: 2px solid #78B74E;
+
+  #total-sum {
+    width: 22em;
+    margin: .5em 2em 0 0;
+    float: right;
+    #order-button {
+      margin: .5em 0;
+
+      input:disabled {
+        background-color: red; }
+    }
+  }
+}
+
+#order-footer {
+  width: 100%;
+  right: 0;
+  left: 0;
+}
+
+.article-info {
+  z-index: 2;
+  width: 40em;
+  height: 8em;
+  border: none;
+  left: 30px;
+
+  .article-name {
+    text-align: center;
+    margin: 2px 0;
+    margin-bottom: 5px;
+    width: 100%;
+    font-weight: bold;
+  }
+  .pull-right {
+    width: 35%;
+  }
+  .pull-left {
+    width: 60%;
+  }
+}
+
+tr.order-article .article-info {
+  display: none;
+}
+
+tr.order-article:hover .article-info {
+  display: block;
 }

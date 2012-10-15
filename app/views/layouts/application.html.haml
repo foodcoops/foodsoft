@@ -15,9 +15,9 @@
   .container-fluid
     .row-fluid
       - if content_for?(:sidebar)
-        .span2
+        .span3
           = yield(:sidebar)
-        .span10
+        .span9
           = bootstrap_flash
           - if show_title?
             .page-header
@@ -33,3 +33,4 @@
     %footer
       %p
         Foodsoft, open source software to manage a non-profit food coop.
+  #modalContainer

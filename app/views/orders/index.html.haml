@@ -1,0 +1,41 @@
+- title "Bestellungen verwalten"
+
+%p
+  - form_tag do
+    Neue Bestellung anlegen für
+    = select_tag :switch_supplier,
+      options_for_suppliers_to_select,
+      style: "font-size: 0.9em;margin-left:1em;",
+      'data-redirect-to' => true
+.well
+  %h2 Laufende Bestellungen
+  - unless @open_orders.empty?
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Lieferantin
+          %th Ende
+          %th Notiz
+          %th{colspan: "2"}
+      %tbody
+        - for order in @open_orders
+        - tr_class = " active" if order.expired?
+          %tr{class: tr_class}
+            %td= order.name
+            %td= format_time(order.ends) unless order.ends.nil?
+            %td= truncate(order.note)
+            %td= link_to "Beenden", finish_order_path(order),
+              confirm: "Willst Du wirklich die Bestellung \"#{order.name}\" beenden?\nEs gibt kein zurück.",
+              method: :post, class: 'btn btn-small btn-success'
+
+            %td
+              = link_to "Anzeigen", order, class: 'btn btn-small'
+              = link_to "Bearbeiten", edit_order_path(order), class: 'btn btn-small'
+              = link_to "Löschen", order, confirm: "Willst Du wirklich die Bestellung löschen?", method: :delete,
+                class: 'btn btn-small btn-danger'
+  - else
+    Derzeit gibt es keine laufende Bestellungen.
+
+%h2 Beendete Bestellungen
+#orders_table
+  = render partial: 'orders'

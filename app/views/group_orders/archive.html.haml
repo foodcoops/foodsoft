@@ -3,15 +3,12 @@
   Siehe hier alle
   = link_to "laufenden Bestellungen.", group_orders_path
 
-.single_column{:style => "width:50em"}
-  .box_title
+.row-fluid
+  .span6
     %h2 beendet/nicht abgerechnet
-  .column_content
     = render :partial => "orders", :locals => {:orders => Order.finished_not_closed, :pagination => false}
-    
-.single_column{:style => "width:50em"}
-  .box_title
+
+  .span6
     %h2 abgerechnet
-  .column_content
     #closed_orders
       = render :partial => "orders", :locals => {:orders => @closed_orders, :pagination => true}

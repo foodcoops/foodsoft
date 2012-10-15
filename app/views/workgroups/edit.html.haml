@@ -1,0 +1,84 @@
+- title "Edit Workgroup"
+- form_for @workgroup do |f|
+  = f.error_messages
+  %p
+    = f.label :type
+    %br/
+    = f.text_field :type
+  %p
+    = f.label :name
+    %br/
+    = f.text_field :name
+  %p
+    = f.label :description
+    %br/
+    = f.text_field :description
+  %p
+    = f.label :account_balance
+    %br/
+    = f.text_field :account_balance
+  %p
+    = f.label :account_updated
+    %br/
+    = f.datetime_select :account_updated
+  %p
+    = f.label :created_on
+    %br/
+    = f.datetime_select :created_on
+  %p
+    = f.label :role_admin
+    %br/
+    = f.check_box :role_admin
+  %p
+    = f.label :role_suppliers
+    %br/
+    = f.check_box :role_suppliers
+  %p
+    = f.label :role_article_meta
+    %br/
+    = f.check_box :role_article_meta
+  %p
+    = f.label :role_finance
+    %br/
+    = f.check_box :role_finance
+  %p
+    = f.label :role_orders
+    %br/
+    = f.check_box :role_orders
+  %p
+    = f.label :weekly_task
+    %br/
+    = f.check_box :weekly_task
+  %p
+    = f.label :weekday
+    %br/
+    = f.text_field :weekday
+  %p
+    = f.label :task_name
+    %br/
+    = f.text_field :task_name
+  %p
+    = f.label :task_description
+    %br/
+    = f.text_field :task_description
+  %p
+    = f.label :task_required_users
+    %br/
+    = f.text_field :task_required_users
+  %p
+    = f.label :deleted_at
+    %br/
+    = f.datetime_select :deleted_at
+  %p
+    = f.label :contact_person
+    %br/
+    = f.text_field :contact_person
+  %p
+    = f.label :contact_phone
+    %br/
+    = f.text_field :contact_phone
+  %p
+    = f.label :contact_address
+    %br/
+    = f.text_field :contact_address
+  %p= f.submit "Submit"

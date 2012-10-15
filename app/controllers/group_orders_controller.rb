@@ -54,8 +54,7 @@ class GroupOrdersController < ApplicationController
   # if selected, it shows all orders of the foodcoop
   def archive
     # get only orders belonging to the ordergroup
-    @closed_orders = Order.paginate :page => params[:page], :per_page => 10,
-                                    :conditions => { :state => 'closed' }, :order => "orders.ends DESC"
+    @closed_orders = Order.closed.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # archive.html.haml

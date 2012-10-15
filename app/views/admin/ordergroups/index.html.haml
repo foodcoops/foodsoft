@@ -1,26 +1,23 @@
 - title "Bestellgruppen"
 
-%p
-  %i
+- content_for :sidebar do
+  %p= link_to "Neue Bestellgruppe anlegen", new_admin_ordergroup_path, class: 'btn btn-primary'
+  %p
     Hier kannst du
     = link_to 'neue Bestellgruppen', new_admin_ordergroup_path
     anlegen, Gruppen bearbeiten und löschen.
-    
-%p
-  Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>:
-  Eine Bestellgruppe hat ein Konto und kann Essen bestellen. In einer
-  %em= link_to 'Arbeitsgruppe', admin_workgroups_path
-  (z.b. 'Soritiergruppe')
-  koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten.
-  Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
-.left_column{:style => "width:100%"}
-  .box_title
-    %h2 Gruppenübersicht
-  .column_content
-    #group_filter
-      = form_tag admin_ordergroups_path, :method => :get, :style=>"display:inline;", :id => 'ordergroup_search',
-      :remote => true, 'data-submit-onchange' => true do
-        %label{:for => 'article_name'} Suche nach Name:
-        = text_field_tag :query, params[:query], :size => 10
-    #ordergroups
-      = render :partial => "ordergroups"
+  %p
+    Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>:
+    Eine Bestellgruppe hat ein Konto und kann Essen bestellen. In einer
+    %em= link_to 'Arbeitsgruppe', admin_workgroups_path
+    (z.b. 'Soritiergruppe')
+    koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten.
+    Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
+
+.well.well-small
+  = form_tag admin_ordergroups_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :query, params[:query], class: 'input-medium search-query',
+      placeholder: 'Name ...'
+#ordergroups
+  = render "ordergroups"

@@ -1,6 +1,4 @@
-- if pagination
-  = pagination_links_remote @closed_orders, :per_page => 10, :update => 'closed_orders'
-%table.list
+%table.table.table-striped
   %thead
     %tr
       %th Lieferantin
@@ -13,5 +11,6 @@
       %tr{:class=> cycle('even', 'odd', :name => 'orders'), :style => order_class}
         %td= group_order.present? ? link_to(order.name, group_order_path(group_order)) : order.name
         %td= format_time(order.ends)
-        %td{:class => "currency"}= group_order ? number_to_currency(group_order.price) : "--"
-          
+        %td.numeric= group_order ? number_to_currency(group_order.price) : "--"
+- if pagination
+  = pagination_links_remote @closed_orders

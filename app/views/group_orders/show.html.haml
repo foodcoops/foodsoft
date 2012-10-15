@@ -1,4 +1,4 @@
-- content_for :head do
+- content_for :javascript do
   :javascript
     $(function() {
       $('tr.ignored').hide();
@@ -6,55 +6,42 @@
 
 - title "Dein Bestellergebnis für #{@order.name}"
 
-// Order summary
-.left_column{:style => "width:45em"}
-  .box_title
-    %h2 Zusammenfassung
-  .column_content
-    %table
-      %tr{:valign => "top"}
-        %td{:style => "width:50%"}
-          %p
-            Lieferantin:
-            %b=h @order.name
-          - unless @order.note.blank?
-            %p
-              Notiz:
-              =h @order.note
-          %p
-            Ende:
-            %b=h format_time(@order.ends)
-          %p
-            Bestellsumme:
-            - if @group_order
-              %b=h number_to_currency(@group_order.price)
-            - else
-              %b Du hast nicht bestellt.
-          - if @order.closed?
-            %p
-              = "Abgerechnet von #{@order.updated_by.nick}"
-    = link_to "Kommentare lesen/schreiben", "#comments"
-
-= render :partial => "switch_order", :locals => {:current_order => @order}
+.well
+  // Order summary
+  %dl.dl-horizontal
+    %dt Lieferantin
+    %dd= @order.name
+    %dt Notiz
+    %dd= @order.note
+    %dt Ende
+    %dd= format_time(@order.ends)
+    %dt Bestellsumme
+    %dd
+      - if @group_order
+        = number_to_currency(@group_order.price)
+      - else
+        Du hast nicht bestellt.
+    - if @order.closed?
+      %p Abgerechnet von #{@order.updated_by.nick}
+      = link_to "Kommentare lesen/schreiben", "#comments"
 
 // Article box
-.single_column{:style => "clear:both; width:70em;"}
-  .box_title
-    %h2 Artikelübersicht
+%section
+  %h2 Artikelübersicht
   .column_content#result
     - if @group_order
-      %p(style="float:right")= link_to "Zeige/Verstecke nicht bestellte Artikel", '#', 'data-toggle-this' => 'tr.ignored'
-      %p= link_to("Bestellung ändern", edit_group_order_path(@group_order, :order_id => @order.id)) if @order.open?
-      %table.list
+      %p.pull-right= link_to "Zeige/Verstecke nicht bestellte Artikel", '#', 'data-toggle-this' => 'tr.ignored'
+      %p= link_to("Bestellung anpassen", edit_group_order_path(@group_order, order_id: @order.id), class: 'btn btn-primary') if @order.open?
+      %table.table.table-hover
         %thead
           %tr
-            %th{:style => "width:40%"} Name
+            %th{style: "width:40%"} Name
             %th Gebinde
             %th Einzelpreis
             %th
-              %abbr{:title => "Menge + Toleranz"} Bestellt
+              %abbr{title: "Menge + Toleranz"} Bestellt
             %th
-              %abbr{:title => "Unter Berücksichtigung der derzeitigen Bestellungen aller Gruppen"}
+              %abbr{title: "Unter Berücksichtigung der derzeitigen Bestellungen aller Gruppen"}
                 - if @order.open?
                   Zu
                 Erhalten
@@ -62,9 +49,11 @@
         %tbody
           - total = 0 #set counter for order-sum
           - for category_name, order_articles in @order.articles_grouped_by_category
-            %tr{:style => "background-color:#EFEFEF"}
-              %td{:style => "text-align:left;"}=h category_name
-              %td{:colspan => "9"}
+            %tr.article-category
+              %td
+                = category_name
+                %i.icon-tag
+              %td{colspan: "9"}
             - for oa in order_articles
               - # get the order-results for the ordergroup
               - goa = oa.group_order_articles.find_by_group_order_id(@group_order.id)
@@ -73,11 +62,11 @@
               - result = goa.result
               - sub_total = goa.total_price
               - total += sub_total
-              %tr{:class => cycle('even', 'odd', :name => 'articles') + " " + order_article_class_name(quantity, tolerance, result)}
-                %td{:style => "width:40%"}
+              %tr{class: cycle('even', 'odd', name: 'articles') + " " + order_article_class_name(quantity, tolerance, result)}
+                %td{style: "width:40%"}
                   =h oa.article.name
                   - unless oa.article.note.blank?
-                    = image_tag("lamp_grey.png", {:alt => "Notiz anzeigen", :size => "15x16", :border => "0", :onmouseover => "$('note_#{oa.id}').show();", :onmouseout => "$('note_#{oa.id}').hide();"})
+                    = image_tag("lamp_grey.png", {alt: "Notiz anzeigen", size: "15x16", border: "0", onmouseover: "$('note_#{oa.id}').show();", onmouseout: "$('note_#{oa.id}').hide();"})
                 %td= "#{oa.price.unit_quantity} x #{oa.article.unit}"
                 %td= number_to_currency(oa.price.fc_price)
                 %td
@@ -86,26 +75,24 @@
                 %td= result > 0 ? result : "0"
                 %td= number_to_currency(sub_total)
               - unless oa.article.note.blank?
-                %tr{:id => "note_#{oa.id}", :class => "note even", :style => "display:none"}
-                  %td{:colspan => "6"}=h oa.article.note
-          %tr{:class => cycle('even', 'odd', :name => 'articles')}
-            %th{:colspan => "5"} Summe
+                %tr{id: "note_#{oa.id}", class: "note even", style: "display:none"}
+                  %td{colspan: "6"}=h oa.article.note
+          %tr{class: cycle('even', 'odd', name: 'articles')}
+            %th{colspan: "5"} Summe
             %th= number_to_currency(total)
       %br/
       = link_to_top
     - else
       - if @order.open?
         Du hast noch nicht bestellt.
-        = link_to "Das ist Deine Chance!", :action => "order", :id => @order
+        = link_to "Das ist Deine Chance!", action: "order", id: @order
       - else
         Die Bestellung is leider schon zu Ende. Beim nächsten mal früher aufstehen...
 
 //  Comments box
-.single_column{:style => "width:70em;"}
-  .box_title
-    %h2 Kommentare
-  .column_content
-    #comments
-      = render :partial => 'shared/comments', :locals => { :comments => @order.comments }
-    #new_comment= render :partial => 'order_comments/form', :locals => { :order_comment => @order.comments.build(:user => current_user)}
-    =  link_to_top
+%section
+  %h2 Kommentare
+  #comments
+    = render 'shared/comments', comments: @order.comments
+  #new_comment= render 'order_comments/form', order_comment: @order.comments.build(user: current_user)
+  =  link_to_top

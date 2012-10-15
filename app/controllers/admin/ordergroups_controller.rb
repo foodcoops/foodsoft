@@ -10,12 +10,7 @@ class Admin::OrdergroupsController < Admin::BaseController
       @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%")
     end
 
-    @ordergroups = @ordergroups.paginate(:page => params[:page], :per_page => @per_page)
-
-    respond_to do |format|
-      format.html # index.html.haml
-      format.js { render :layout => false } # index.js.erb
-    end
+    @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
   end
 
   def destroy
