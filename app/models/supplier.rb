@@ -15,6 +15,7 @@ class Supplier < ActiveRecord::Base
   validates :name, :presence => true, :length => { :in => 4..30 }, :uniqueness => true
   validates :phone, :presence => true, :length => { :in => 8..20 }
   validates :address, :presence => true, :length => { :in => 8..50 }
+  validates_length_of :order_howto, :note, maximum: 250
 #  validates_length_of :name, :in => 4..30
 #  validates_uniqueness_of :name
 

@@ -1,46 +1,29 @@
-- title "Artikeldatenbank"
+- title "Lieferanten"
 
-.left_column{:style => "width:60%"}
-  .box_title
-    %h2 Lieferantinnen
-  .column_content
-    %p
-      %i
-        Erstelle eine
-        = link_to 'neue Lieferantin', new_supplier_path
-        oder
-        = link_to 'importiere', shared_suppliers_suppliers_path
-        aus der externen Artikeldatenbank.
-    %table.list
-      %thead
-        %tr
-          %th Name
-          %th Telefon
-          %th Kunden-Nr
-          %th
-          %th
-          %th
-      %tbody
-        - for supplier in @suppliers
-          %tr{:class => cycle('even','odd', :name => 'suppliers')}
-            %td= link_to h(supplier.name) , supplier
-            %td=h supplier.phone
-            %td=h supplier.customer_number
-            %td= link_to "Artikel (#{supplier.articles.count})", supplier_articles_path(supplier)
-            %td= link_to "im Lager (#{supplier.stock_articles.count})", stock_articles_path
-            %td= link_to "Lieferungen (#{supplier.deliveries.count})", supplier_deliveries_path(supplier)
-
-.right_column{:style => "width:37%"}
-  .box_title
-    %h2 Letzte Lieferungen
-  .column_content
-    %table
+%p
+  = link_to 'Neue Lieferantin anlegen', new_supplier_path, class: 'btn btn-primary'
+  oder
+  = link_to 'importiere', shared_suppliers_suppliers_path
+  aus der externen Artikeldatenbank.
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Telefon
+      %th Kunden-Nr
+      %th
+      %th
+      %th
+  %tbody
+    - for supplier in @suppliers
       %tr
-        %th Datum
-        %th Betrag
-        %th Lieferantin
-      - for delivery in @deliveries
-        %tr
-          %td= link_to delivery.delivered_on, [delivery.supplier, delivery]
-          %td= link_to_invoice(delivery)
-          %td=h delivery.supplier.name
+        %td= link_to h(supplier.name) , supplier
+        %td= supplier.phone
+        %td= supplier.customer_number
+        %td= link_to "Artikel (#{supplier.articles.count})", supplier_articles_path(supplier)
+        %td= link_to "im Lager (#{supplier.stock_articles.count})", stock_articles_path
+        %td= link_to "Lieferungen (#{supplier.deliveries.count})", supplier_deliveries_path(supplier)
+        %td
+          = link_to "Bearbeiten", edit_supplier_path(supplier), class: 'btn btn-mini'
+          = link_to "Löschen", supplier_path(supplier), method: :delete,
+            confirm: "Achtung, willst Du wirklich den Lieferanten #{supplier.name} löschen?", class: 'btn btn-mini btn-danger'

@@ -116,8 +116,8 @@ GEM
       activesupport (= 3.2.8)
       bundler (~> 1.0)
       railties (= 3.2.8)
-    rails3_acts_as_paranoid (0.1.4)
-      activerecord (~> 3.1)
+    rails3_acts_as_paranoid (0.2.4)
+      activerecord (~> 3.2)
     railties (3.2.8)
       actionpack (= 3.2.8)
       activesupport (= 3.2.8)
@@ -186,7 +186,7 @@ DEPENDENCIES
   mysql2
   prawn
   rails (= 3.2.8)
-  rails3_acts_as_paranoid (~> 0.1.4)
+  rails3_acts_as_paranoid (~> 0.2.0)
   sass-rails (~> 3.2.3)
   simple-navigation
   simple-navigation-bootstrap

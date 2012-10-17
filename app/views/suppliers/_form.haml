@@ -1,6 +1,6 @@
-- simple_form_for @supplier do |f|
+= simple_form_for @supplier do |f|
   - if @supplier.shared_supplier
-    %p Lieferantin wird mit externer Datenbank verknüpft.
+    .alert.alert-success Lieferantin ist mit externer Datenbank verknüpft.
   = f.hidden_field :shared_supplier_id
   = f.input :name
   = f.input :address
@@ -12,8 +12,9 @@
   = f.input :contact_person
   = f.input :customer_number
   = f.input :delivery_days
-  = f.input :order_howto
-  = f.input :note
+  = f.input :order_howto, as: :text, input_html: {rows: 5}
+  = f.input :note, as: :text, input_html: {rows: 5}
   = f.input :min_order_quantity
-  = f.submit
-  = link_to 'oder abbrechen', suppliers_path
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to 'oder abbrechen', suppliers_path

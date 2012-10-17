@@ -1,74 +1,57 @@
-- title "Lieferantin #{h(@supplier.name)}"
+- title @supplier.name
 
-.left_column{:style => "width:45%"}
-  .box_title
-    %h2=h @supplier.name
-  .column_content
+.row-fluid
+  .span6
     - if shared_supplier = @supplier.shared_supplier
-      %p
-        %strong Die Lieferantin ist mit der externen Artikledatenbank verknüpft.
+      .alert.alert-info
+        Die Lieferantin ist mit der externen Artikledatenbank verknüpft.
 
-    %table{:style => "width:40em"}
-      %tr
-        %td Adresse:
-        %td{:style => "font-weight:bold"}=h @supplier.address
-      %tr
-        %td Telefon:
-        %td{:style => "font-weight:bold"}=h @supplier.phone
-      %tr
-        %td Telefon2:
-        %td{:style => "font-weight:bold"}=h @supplier.phone2
-      %tr
-        %td FAX:
-        %td{:style => "font-weight:bold"}=h @supplier.fax
-      %tr
-        %td Email:
-        %td{:style => "font-weight:bold"}=h @supplier.email
-      %tr
-        %td Hompage:
-        %td{:style => "font-weight:bold"}=h @supplier.url
-      %tr
-        %td Kontakt-Person:
-        %td{:style => "font-weight:bold"}=h @supplier.contact_person
-      %tr
-        %td Kundennummer:
-        %td{:style => "font-weight:bold"}=h @supplier.customer_number
-      %tr
-        %td Liefertage:
-        %td{:style => "font-weight:bold"}=h @supplier.delivery_days
-      %tr
-        %td BestellHowTo:
-        %td{:style => "font-weight:bold"}=h @supplier.order_howto
-      %tr
-        %td Notiz:
-        %td{:style => "font-weight:bold"}=h @supplier.note
-      %tr
-        %td Liefertage:
-        %td{:style => "font-weight:bold"}=h @supplier.delivery_days
-      %tr
-        %td Mindestbestellmenge:
-        %td{:style => "font-weight:bold"}=h @supplier.min_order_quantity
-    %br/
+    %dl.dl-horizontal
+      %dt Adresse:
+      %dd= @supplier.address
+      %dt Telefon:
+      %dd= @supplier.phone
+      %dt Telefon2:
+      %dd= @supplier.phone2
+      %dt FAX:
+      %dd= @supplier.fax
+      %dt Email:
+      %dd= @supplier.email
+      %dt Hompage:
+      %dd= @supplier.url
+      %dt Kontakt-Person:
+      %dd= @supplier.contact_person
+      %dt Kundennummer:
+      %dd= @supplier.customer_number
+      %dt Liefertage:
+      %dd= @supplier.delivery_days
+      %dt BestellHowTo:
+      %dd= @supplier.order_howto
+      %dt Notiz:
+      %dd= @supplier.note
+      %dt Liefertage:
+      %dd= @supplier.delivery_days
+      %dt Mindestbestellmenge:
+      %dd= @supplier.min_order_quantity
+
+    .clearfix
     - if @current_user.role_suppliers?
-      = link_to 'Bearbeiten', edit_supplier_path(@supplier)
-      |
-      = link_to 'Löschen', @supplier, :confirm => 'Bist Du sicher?', :method => :delete
-      |
-      = link_to 'zurück', suppliers_path
+      .form-actions
+        = link_to 'Bearbeiten', edit_supplier_path(@supplier), class: 'btn'
+        = link_to 'Löschen', @supplier, :confirm => 'Bist Du sicher?', :method => :delete, class: 'btn btn-danger'
 
-.right_column{:style => "width:45%"}
-  .box_title
+  .span6
     %h2 Letzte Lieferungen
-  .column_content
-    %table
-      %tr
-        %th Datum
-        %th Betrag
-      - for delivery in @deliveries
+    %table.table.table-horizontal
+      %thead
         %tr
-          %td= link_to delivery.delivered_on, [@supplier, delivery]
-          %td= link_to_invoice(delivery)
-    %p
-      = link_to "Neue Lieferung anlegen", new_supplier_delivery_path(@supplier)
-      |
+          %th Datum
+          %th Betrag
+      %tbody
+        - for delivery in @deliveries
+          %tr
+            %td= link_to delivery.delivered_on, [@supplier, delivery]
+            %td= link_to_invoice(delivery)
+    .form-actions
+      = link_to "Neue Lieferung anlegen", new_supplier_delivery_path(@supplier), class: 'btn'
       = link_to "Zeige alle Lieferungen", supplier_deliveries_path(@supplier)

@@ -1,5 +1,5 @@
-= simple_form_for stock_article, add_stock_article_supplier_deliveries_path(@supplier), :remote => true,
- :validate => true do |f|
+= simple_form_for stock_article, url: add_stock_article_supplier_deliveries_path(@supplier), remote: true,
+  validate: true do |f|
   = f.hidden_field :supplier_id
   = f.input :name
   = f.input :unit
@@ -8,4 +8,4 @@
   = f.input :tax
   = f.input :deposit
   = f.association :article_category
-  = f.submit
+  = f.submit class: 'btn'

@@ -1,25 +1,23 @@
 - title "#{@supplier.name}/Lieferungen"
 
-%table.list{:style => "width:50em"}
+%table.table.table-striped
   %thead
     %tr
       %th Geliefert am
-      %th Rechnungsbetrag
+      %th.numeric Rechnungsbetrag
       %th Notiz
-      %th
-      %th
-      %th
   %tbody
     - for delivery in @deliveries
       %tr
         %td=h delivery.delivered_on
-        %td= link_to_invoice(delivery)
+        %td.numeric= link_to_invoice(delivery)
         %td= truncate delivery.note
-        %td= link_to 'Anzeigen', [@supplier, delivery]
-        %td= link_to 'Bearbeiten', edit_supplier_delivery_path(@supplier,delivery)
-        %td= link_to 'Löschen', [@supplier,delivery], :confirm => 'Are you sure?', :method => :delete
+        %td
+          = link_to 'Anzeigen', [@supplier, delivery], class: 'btn btn-mini'
+          = link_to 'Bearbeiten', edit_supplier_delivery_path(@supplier,delivery), class: 'btn btn-mini'
+          = link_to 'Löschen', [@supplier,delivery], :confirm => 'Are you sure?', :method => :delete,
+          class: 'btn btn-mini btn-danger'
 
-%br/
-= link_to "Neue Lieferung für #{@supplier.name} anlegen", new_supplier_delivery_path(@supplier)
+= link_to "Neue Lieferung für #{@supplier.name} anlegen", new_supplier_delivery_path(@supplier), class: 'btn btn-primary'
 |
 = link_to "Lieferantenübersicht", suppliers_path

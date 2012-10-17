@@ -1,7 +1,7 @@
 class StockChange < ActiveRecord::Base
   belongs_to :delivery
   belongs_to :order
-  belongs_to :stock_article
+  belongs_to :stock_article, with_deleted: true
 
   validates_presence_of :stock_article_id, :quantity
   validates_numericality_of :quantity
