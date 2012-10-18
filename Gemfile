@@ -18,7 +18,7 @@ end
 gem 'jquery-rails'
 
 gem 'mysql2'
-gem 'sqlite3'
+gem 'sqlite3', :group => :development
 gem "fastercsv"
 gem 'prawn'
 gem 'haml-rails'
