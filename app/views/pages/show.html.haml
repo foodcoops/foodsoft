@@ -27,13 +27,15 @@
         - @page.children.each do |page|
           %li= link_to_wikipage(page)
 
-#breadcrump
-  = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
+%ul.breadcrumb
+  %li
+    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
+    %span.divider /
   - for page in @page.ancestors.reverse
-    %span.wikiSeparator &gt;
-    = link_to_wikipage(page)
-  %span.wikiSeparator &gt;
-  = @page.title
+    %li
+      = link_to_wikipage(page)
+      %span.divider /
+  %li.active= @page.title
 
 
 #wikiContent
