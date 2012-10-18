@@ -1,28 +1,19 @@
-%p
-  Gefundene Artikel:
-  %b= @total
+- if @supplier.articles.count > 20
+  = items_per_page
+= pagination_links_remote @articles
 
-%p
-  %table{:style => "width:100%"}
-    %tr
-      %td
-        = pagination_links_remote @articles, :params => {:sort => params[:sort]}
-      %td{:style => "text-align:right"}
-        - if @total > 30
-          = items_per_page :per_page_options => [30, 100, 500]
-
-%table#articles_table.list.articles
+%table#articles_table.table.table-striped
   %thead
     %tr
       %th
-      %th[sort_td_class_helper("name")]
+      %th{class: sort_td_class_helper(:name)}
         = sort_link_helper "Name", "name"
       %th
-      %th[sort_td_class_helper("category")]
+      %th{class: sort_td_class_helper(:category)}
         = sort_link_helper "Kategorie", "category"
-      %th[sort_td_class_helper("unit")]
+      %th{class: sort_td_class_helper(:unit)}
         = sort_link_helper "Einheit", "unit"
-      %th[sort_td_class_helper("note")]
+      %th{class: sort_td_class_helper(:note)}
         = sort_link_helper "Notiz", "note"
       %th{:style => "width: 4em;"} Gebgr.
       %th{:style => "width: 5em;"} Preis
@@ -32,7 +23,7 @@
       
   %tbody#listbody
     
-    - if @total > 0  
+    - unless @articles.empty?
       - for article in @articles
         = render(article)
       %tfoot
@@ -46,5 +37,4 @@
               %option{:value => "setAvailable"} Artikel sind verfügbar
             = hidden_field_tag 'supplier_id', @supplier.id
 
-%p= pagination_links_remote @articles, :params => {:sort => params[:sort]}
-= hidden_field_tag :per_page, params[:per_page]
+= pagination_links_remote @articles

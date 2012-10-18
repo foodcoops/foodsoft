@@ -1,66 +1,48 @@
-- title "Artikel von #{@supplier.name}"
+- title "Artikel von #{@supplier.name} (#{@supplier.articles.count})"
 
-// import menu
-- unless @supplier.shared_supplier.nil?
-  .menu{:style => 'width: 16em'}
-    %ul
-      %li
-        Zugriff auf externe Datenbank
-        %ul
-          %li= link_to "Suchen/Importieren", "#import", 'data-toggle-this' => '#import'
-          %li= link_to "Synchronisieren", sync_supplier_articles_path(@supplier), :method => :post
-
-
-#change_supplier{:style => "padding:0 0 0.5em 0.7em;"}
-  %span{:style => "float:left"}
-    Lieferantin wechseln:
-  = select_tag :switch_supplier,
-    options_for_select(Supplier.order(:name).map {|s| [s.name, supplier_articles_url(s)] }, supplier_articles_url(@supplier)),
-    :style => "font-size: 0.9em;margin-left:1em;",
-    'data-redirect-to' => true
-
-- unless @supplier.shared_supplier.nil?
-  #import.single_column{:style => "display:none; clear:both"}
-    .box_title
-      %h2 Artikel importieren
-    .column_content
-      #search{:style => "padding-bottom:3em"}
-        = form_tag shared_supplier_articles_path(@supplier), :method => :get, :remote => true do
-          = text_field_tag "search[name_contains_all]", "", :size => 10
-          = submit_tag "Suchen"
-          - if @supplier.shared_supplier.lists
-            Suche in folgenden Listen:
-            - @supplier.shared_supplier.lists.each do |token, name|
-              = check_box_tag "search[list_equals_any][]", token, true
-              = name
-          |
-          Nur aus der Region:
-          = check_box_tag "search[origin_equals]", "REG", false
-        #search_results
-      = link_to "Schließen", "#import", 'data-toggle-this' => '#import'
-
-.single_column{:style => 'width:100%; clear:both'}
-  .box_title
-  .column_content
-    #links
-      %b= link_to "Neuer Artikel", new_supplier_article_path(@supplier), :remote => true
-      |
-      = link_to "Alle bearbeiten", edit_all_supplier_articles_path(@supplier)
-      |
-      = link_to "Artikel hochladen", upload_supplier_articles_path(@supplier)
-      - if current_user.role_orders?
-        |
-        = link_to "Bestellung anlegen", new_order_path(:supplier_id => @supplier)
-
-    #article_filter
-      #article_search_form{:style=>"display:inline;"}
-        = form_tag supplier_articles_path(@supplier), :method => :get, :remote => true, 'data-submit-onchange' => true do
-          %label{:for => 'article_name'} Suche im Artikelnamen:
-          = text_field_tag :query, params[:query], :size => 10
-          = submit_tag "Suchen"
-
-    = form_tag update_selected_supplier_articles_path(@supplier), :id => "articlesInListForm",
+.well.well-small
+  .btn-toolbar
+    = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search pull-right',
       'data-submit-onchange' => true do
-      #table= render 'articles'
+      = text_field_tag :query, params[:query], class: 'input-medium search-query',
+        placeholder: 'Name ...'
 
-#edit_article{:style => "display:none"}
+    .btn-group
+      = link_to "Neuer Artikel", new_supplier_article_path(@supplier), remote: true, class: 'btn btn-primary'
+      = link_to "Alle bearbeiten", edit_all_supplier_articles_path(@supplier), class: 'btn'
+      = link_to "Artikel hochladen", upload_supplier_articles_path(@supplier), class: 'btn'
+      - if current_user.role_orders?
+        = link_to "Bestellung anlegen", new_order_path(supplier_id: @supplier), class: 'btn'
+
+    - unless @supplier.shared_supplier.nil?
+      .btn-group
+        = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-success dropdown-toggle' do
+          Externe Datenbank
+          %span.caret
+        %ul.dropdown-menu
+          %li= link_to "Suchen/Importieren", "#import", 'data-toggle-this' => '#import'
+          %li= link_to "Synchronisieren", sync_supplier_articles_path(@supplier), method: :post
+
+    .btn-group
+      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+        Lieferant wechseln ..
+        %span.caret
+      %ul.dropdown-menu
+        - Supplier.where('id != ?', @supplier.id).order('name ASC').each do |supplier|
+          %li= link_to supplier.name, supplier_articles_path(supplier), tabindex: -1
+
+- unless @supplier.shared_supplier.nil?
+  #import.well.well-small(style="display:none;")
+    = form_tag shared_supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search',
+      'data-submit-onchange' => true do
+      %h3 Artikel importieren
+      = text_field_tag "search[name_contains_all]", "", class: 'input-medium search-query', placeholder: 'Name ...'
+      %label.checkbox
+        = check_box_tag "search[origin_equals]", "REG", false
+        Nur aus der Region
+      #search_results.clearfix
+    = link_to "Schließen", "#import", 'data-toggle-this' => '#import'
+
+= form_tag update_selected_supplier_articles_path(@supplier), id: "articlesInListForm",
+  'data-submit-onchange' => true do
+  #table= render 'articles'

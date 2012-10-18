@@ -1,18 +1,24 @@
 = simple_form_for [@supplier, @article], :validate => true, :remote => true do |f|
-  = f.input :availability
-  = f.input :name
-  = f.input :origin
-  = f.input :manufacturer
-  = f.input :unit
-  = f.input :note
-  = f.association :article_category
-
-  = f.input :price
-  = f.input :unit_quantity
-  = f.input :order_number
-  = f.input :tax
-  = f.input :deposit
-  = f.submit
-
   = f.hidden_field :shared_updated_on
   = f.hidden_field :supplier_id
+  .modal-header
+    = button_tag "x", class: 'close', data: {dismiss: 'modal'}
+    %h3 Neuen Artikel einfügen
+  .modal-body
+    = f.input :availability
+    = f.input :name
+    = f.input :origin
+    = f.input :manufacturer
+    = f.input :unit
+    = f.input :note
+    = f.association :article_category
+
+    = f.input :price
+    = f.input :unit_quantity
+    = f.input :order_number
+    = f.input :tax
+    = f.input :deposit
+  .modal-footer
+    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
+    = f.submit class: 'btn btn-primary'
+

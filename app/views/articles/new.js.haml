@@ -1,1 +1,2 @@
-$.fancybox('#{escape_javascript(render("form"))}');
+$('#modalContainer').html('#{escape_javascript(render("form"))}');
+$('#modalContainer').modal();

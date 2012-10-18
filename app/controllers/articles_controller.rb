@@ -21,10 +21,9 @@ class ArticlesController < ApplicationController
     end
 
     @articles = @supplier.articles.includes(:article_category).order(sort)
-    @articles = @articles.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
+    @articles = @articles.where('articles.name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
-    @total = @articles.size
-    @articles = @articles.paginate(:page => params[:page], :per_page => @per_page)
+    @articles = @articles.page(params[:page]).per(@per_page)
 
     respond_to do |format|
       format.html
@@ -200,7 +199,7 @@ class ArticlesController < ApplicationController
     params[:search][:name_contains_all] = params[:search][:name_contains_all].split(' ') if params[:search]
     # Build search with meta search plugin
     @search = @supplier.shared_supplier.shared_articles.search(params[:search])
-    @articles = @search.paginate :page => params[:page], :per_page => 10
+    @articles = @search.page(params[:page]).per(10)
     render :layout => false
   end
   

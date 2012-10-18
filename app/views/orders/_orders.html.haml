@@ -2,10 +2,10 @@
 %table.table.table-striped
   %thead
     %tr
-      %th[sort_td_class_helper("supplier")]
+      %th{class: sort_td_class_helper(:supplier)}
         = sort_link_helper "Lieferantin", "supplier"
       %th Start
-      %th[sort_td_class_helper("ends")]
+      %th{class: sort_td_class_helper(:ends)}
         = sort_link_helper "Ende", "ends"
       %th Status
       %th{:colspan => "2"}

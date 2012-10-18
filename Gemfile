@@ -33,6 +33,7 @@ gem 'delayed_job_active_record'
 gem 'twitter-bootstrap-rails'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
+gem 'meta_search'
 
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'

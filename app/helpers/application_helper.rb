@@ -47,13 +47,13 @@ module ApplicationHelper
   end
   
   def sort_td_class_helper(param)
-    result = 'class="sortup"' if params[:sort] == param
-    result = 'class="sortdown"' if params[:sort] == param + "_reverse"
+    result = 'sortup' if params[:sort] == param.to_s
+    result = 'sortdown' if params[:sort] == param.to_s + "_reverse"
     result
   end
 
   def sort_link_helper(text, key, options = {})
-    per_page = options[:per_page] || 10
+    per_page = options[:per_page] || @per_page
     remote = options[:remote].nil? ? true : options[:remote]
     key += "_reverse" if params[:sort] == key
     url = url_for(:sort => key, :page => nil, :per_page => per_page)
