@@ -2,7 +2,7 @@
 
 :javascript
   function fillNewStockArticle(text, li) {
-    new Ajax.Updater('stock_article_form', '/stockit/fill_new_stock_article_form', {
+    new Ajax.Updater('stock_article_form', '#{url_for(:controller => "stockit", :action => "fill_new_stock_article_form")}', {
       parameters: {article_id: li.id}
     });
   }
