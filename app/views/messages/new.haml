@@ -36,7 +36,7 @@
 
   #recipients
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.find_all_by_id(@message.recipients_ids).map { |u| u.token_attributes }.to_json }
-    = f.input :group_id, :as => :select, :collection => Group.order('type DESC, name DESC').all.reject { |g| g.memberships.empty? }
+    = f.input :group_id, :as => :select, :collection => Group.order('type DESC, name ASC').all.reject { |g| g.memberships.empty? }
   = f.input :private
   = f.input :subject
   = f.input :body
