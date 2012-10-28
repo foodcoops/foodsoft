@@ -76,15 +76,19 @@ class ArticlesController < ApplicationController
   # Updates all article of specific supplier
   # deletes all articles from params[outlisted_articles]
   def update_all
-    currentArticle = nil  # used to find out which article caused a validation exception
     begin
       Article.transaction do
         unless params[:articles].blank?
+          invalid_articles = false
           # Update other article attributes...
-          for id, attributes in params[:articles]
-            currentArticle = Article.find(id)
-            currentArticle.update_attributes!(attributes)
+          @articles = Article.find(params[:articles].keys)
+          @articles.each do |article|
+            unless article.update_attributes(params[:articles][article.id.to_s])
+              invalid_articles = true unless invalid_articles # Remember that there are validation errors
+            end
           end
+
+          raise "Artikel sind fehlerhaft. Bitte überprüfe Deine Eingaben." if invalid_articles
         end
         # delete articles
         if params[:outlisted_articles]
@@ -92,18 +96,16 @@ class ArticlesController < ApplicationController
         end
       end
       # Successfully done.
-      flash[:notice] = 'Alle Artikel und Preise wurden aktalisiert'
-      redirect_to supplier_articles_path(@supplier)
+      redirect_to supplier_articles_path(@supplier), notice: "Alle Artikel und Preise wurden aktalisiert"
 
     rescue => e
       # An error has occurred, transaction has been rolled back.
-      if currentArticle
-        @failedArticle = currentArticle
-        flash[:error] = "Es trat ein Fehler beim Aktualisieren des Artikels '#{currentArticle.name}' auf: #{e.message}"
-        params[:sync] ? redirect_to(supplier_articles_path(@supplier)) : render(:action => 'edit_all')
+      if params[:sync]
+        flash[:error] = "Es trat ein Fehler beim Aktualisieren des Artikels '#{current_article.name}' auf: #{e.message}"
+        redirect_to(supplier_articles_path(@supplier))
       else
-        flash[:error] = "Es trat ein Fehler beim Aktualisieren der Artikel auf: #{e.message}"
-        redirect_to supplier_articles_path(@supplier)
+        flash.now.alert = e.message
+        render :edit_all
       end
     end
   end
@@ -178,17 +180,22 @@ class ArticlesController < ApplicationController
   def create_from_upload
     begin
       Article.transaction do
-        for article_attributes in params[:articles]
-          @supplier.articles.create!(article_attributes)
+        invalid_articles = false
+        @articles = []
+        params[:articles].each do |_key, article_attributes|
+          @articles << (article = @supplier.articles.build(article_attributes))
+          invalid_articles = true unless article.save
         end
+
+        raise "Artikel sind fehlerhaft" if invalid_articles
       end
       # Successfully done.
-      flash[:notice] = "The articles are saved successfully"
-      redirect_to supplier_articles_path(@supplier)
+      redirect_to supplier_articles_path(@supplier), notice: "Es wurden #{@articles.size} neue Artikel gespeichert."
+
     rescue => error
       # An error has occurred, transaction has been rolled back.
-      flash[:error] = "An error occured: #{error.message}"
-      redirect_to upload_supplier_articles_path(@supplier)
+      flash.now[:error] = "An error occured: #{error.message}"
+      render :parse_upload
     end
   end
   

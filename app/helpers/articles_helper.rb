@@ -6,10 +6,10 @@ module ArticlesHelper
   end
 
   def row_classes(article)
-    classes = " "
-    classes += " unavailable" if !article.availability
-    classes += " just_updated" if article.recently_updated && article.availability
-    classes
+    classes = []
+    classes << "unavailable" if !article.availability
+    classes << "just-updated" if article.recently_updated && article.availability
+    classes.join(" ")
   end
 
   # Flatten search params, used in import from external database

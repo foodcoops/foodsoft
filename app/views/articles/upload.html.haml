@@ -1,23 +1,21 @@
 - title "#{@supplier.name} / Artikel hochladen"
 %p
-  %i
-    Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile
-    wird beim Einlesen ignoriert.
-    %br/
-    Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten
-    Anführungszeichen ("Text...") umklammert werden.
-    %br/
-    Als Zeichensatz wird UTF-8 erwartet.
-%p
-  %i
-    Korrekte Reihenfolge der Spalten:
-    %br/
+  Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile
+  wird beim Einlesen ignoriert.
+  %br/
+  Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten
+  Anführungszeichen ("Text...") umklammert werden.
+  %br/
+  Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:
+  %pre
     = ["Status (x=ausgelistet)", "Bestellnummer", "Name", "Notiz", "Hersteller", "Herkunft",
       "Einheit", "Preis(netto)", "MwSt", "Pfand", "Gebindegröße",
       "Staffelmenge", "Staffelpreis", "Kategorie"].join(" | ")
 
-#uploadArticles.uploadForm
-  = form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
-     :html => { :multipart => true } do |form|
-    %p= form.file_field "file"
-    %p= submit_tag "Datei hochladen"
+= form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
+   :html => { :multipart => true } do |f|
+  %label(for="articles_file")
+    Bitte wähle eine kompatible Datei aus
+  = f.file_field "file"
+  .form-actions
+    = submit_tag "Datei hochladen", class: 'btn'

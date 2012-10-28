@@ -1,0 +1,34 @@
+%table.table
+  %thead
+    %tr
+      %th
+        %acronym{:title => "verfügbar"} verf.
+      %th Name
+      %th Einheit
+      %th
+        %acronym{:title => "Netto!"} Preis
+      %th
+        %acronym{:title => "Gebindegröße"} GebGr
+      %th Best.Nr.
+      %th Notiz
+      %th Kategorie
+      %th MwSt.
+      %th Pfand
+  %tbody
+    - @articles.each_with_index do |article, index|
+      = fields_for "articles[#{article.id || index}]", article do |form|
+        %tr
+          %td= form.check_box 'availability'
+          %td= form.text_field 'name', class: 'input-medium'
+          %td= form.text_field 'unit', class: 'input-mini'
+          %td= form.text_field 'price', class: 'input-mini'
+          %td= form.text_field 'unit_quantity', class: 'input-mini'
+          %td= form.text_field 'order_number', class: 'input-mini'
+          %td= form.text_field 'note', class: 'input-medium'
+          %td= form.collection_select 'article_category_id', ArticleCategory.all,
+            :id, :name, { :include_blank => true }, class: 'input-small'
+          %td= form.text_field 'tax', class: 'input-mini'
+          %td= form.text_field 'deposit', class: 'input-mini'
+        - unless article.errors.empty?
+          %tr.alert
+            %td(colspan="10")= article.errors.full_messages.join(", ")

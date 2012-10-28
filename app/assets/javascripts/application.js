@@ -46,8 +46,10 @@ $(function() {
     // Submit form when changing a select menu.
     $('form[data-submit-onchange] select').live('change', function() {
         var confirmMessage = $(this).children(':selected').data('confirm');
-        if (confirmMessage && confirm(confirmMessage)) {
-            $(this).parents('form').submit();
+        if (confirmMessage) {
+            if (confirm(confirmMessage)) {
+                $(this).parents('form').submit();
+            }
         } else {
             $(this).parents('form').submit();
         }

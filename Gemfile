@@ -18,7 +18,6 @@ end
 gem 'jquery-rails'
 
 gem 'mysql2'
-gem "fastercsv"
 gem 'prawn'
 gem 'haml-rails'
 gem 'kaminari'
