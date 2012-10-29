@@ -64,6 +64,7 @@ class OrdersController < ApplicationController
       flash[:notice] = "Die Bestellung wurde erstellt."
       redirect_to @order
     else
+      logger.debug "[debug] order errors: #{@order.errors.messages}"
       render :action => 'new'
     end
   end

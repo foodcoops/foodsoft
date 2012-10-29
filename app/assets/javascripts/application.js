@@ -109,7 +109,6 @@ function highlightRow(checkbox) {
     } else {
         row.removeClass('selected');
     }
-
 }
 
 // Use with auto_complete to set a unique id,

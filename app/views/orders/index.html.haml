@@ -1,13 +1,14 @@
 - title "Bestellungen verwalten"
 
-%p
-  - form_tag do
-    Neue Bestellung anlegen für
-    = select_tag :switch_supplier,
-      options_for_suppliers_to_select,
-      style: "font-size: 0.9em;margin-left:1em;",
-      'data-redirect-to' => true
 .well
+  .btn-group.pull-right
+    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-primary dropdown-toggle' do
+      Neue Bestellung für ..
+      %span.caret
+    %ul.dropdown-menu
+      - Supplier.all.each do |supplier|
+        %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1
+
   %h2 Laufende Bestellungen
   - unless @open_orders.empty?
     %table.table.table-striped

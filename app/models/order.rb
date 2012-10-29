@@ -20,7 +20,8 @@ class Order < ActiveRecord::Base
 
   # Callbacks
   after_update :update_price_of_group_orders
- 
+  after_save :save_order_articles
+
   # Finders
   scope :open, where(state: 'open').order('ends DESC')
   scope :finished, where("state = 'finished' OR state = 'closed'").order('ends DESC')
@@ -47,25 +48,13 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Fetch last orders from same supplier, to generate an article selection proposal
-  def templates
-    if stockit?
-      Order.stockit :limit => 5
-    else
-      supplier.orders.finished :limit => 5
-    end
+  # Save ids, and create/delete order_articles after successfully saved the order
+  def article_ids=(ids)
+    @article_ids = ids
   end
 
-  # Create or destroy OrderArticle associations on create/update
-  def article_ids=(ids)
-    # fetch selected articles
-    articles_list = Article.find(ids)
-    # create new order_articles
-    (articles_list - articles).each { |article| order_articles.build(:article => article) }
-    # delete old order_articles
-    articles.reject { |article| articles_list.include?(article) }.each do |article|
-      order_articles.detect { |order_article| order_article.article_id == article.id }.destroy
-    end
+  def article_ids
+    @article_ids ||= order_articles.map(&:article_id)
   end
 
   def open?
@@ -83,12 +72,12 @@ class Order < ActiveRecord::Base
   def expired?
     !ends.nil? && ends < Time.now
   end
-  
+
   # search GroupOrder of given Ordergroup
   def group_order(ordergroup)
     group_orders.where(:ordergroup_id => ordergroup.id).first
   end
- 
+
   # Returns OrderArticles in a nested Array, grouped by category and ordered by article name.
   # The array has the following form:
   # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
@@ -104,7 +93,7 @@ class Order < ActiveRecord::Base
       a.article.article_category.name <=> b.article.article_category.name
     end
   end
-  
+
   # Returns the defecit/benefit for the foodcoop
   # Requires a valid invoice, belonging to this order
   #FIXME: Consider order.foodcoop_result
@@ -115,7 +104,7 @@ class Order < ActiveRecord::Base
       groups_sum - invoice.net_amount
     end
   end
-  
+
   # Returns the all round price of a finished order
   # :groups returns the sum of all GroupOrders
   # :clear returns the price without tax, deposit and markup
@@ -182,7 +171,7 @@ class Order < ActiveRecord::Base
       end
     end
   end
-  
+
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
   def close!(user)
     raise "Bestellung wurde schon abgerechnet" if closed?
@@ -221,11 +210,15 @@ class Order < ActiveRecord::Base
   end
 
   def include_articles
-    errors.add(:order_articles, "Es muss mindestens ein Artikel ausgewählt sein") if order_articles.empty?
+    errors.add(:articles, "Es muss mindestens ein Artikel ausgewählt sein") if article_ids.empty?
+  end
+
+  def save_order_articles
+    self.articles = Article.find(article_ids)
   end
 
   private
-  
+
   # Updates the "price" attribute of GroupOrders or GroupOrderResults
   # This will be either the maximum value of a current order or the actual order value of a finished order.
   def update_price_of_group_orders
