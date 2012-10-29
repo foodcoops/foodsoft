@@ -1,4 +1,4 @@
-- simple_form_for stock_article, :validate => true do |f|
+= simple_form_for stock_article, :validate => true do |f|
   = f.association :supplier
   = f.input :name
   = f.input :unit
@@ -12,5 +12,6 @@
     = f.input :price, :input_html => {:disabled => 'disabled'},
     :hint => "Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden."
   = f.association :article_category
-  = f.submit
-  = link_to "oder abbrechen", stock_articles_path
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to "oder abbrechen", stock_articles_path

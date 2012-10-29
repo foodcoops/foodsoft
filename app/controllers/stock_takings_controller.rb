@@ -1,6 +1,10 @@
 class StockTakingsController < ApplicationController
   inherit_resources
 
+  def index
+    @stock_takings = StockTaking.order('date DESC').page(params[:page]).per(@per_page)
+  end
+
   def new
     @stock_taking = StockTaking.new
     StockArticle.all.each { |a| @stock_taking.stock_changes.build(:stock_article => a) }
@@ -48,6 +52,4 @@ class StockTakingsController < ApplicationController
       page.visual_effect :DropOut, "stock_change_#{stock_change.id}"
     end
   end
-
-
 end

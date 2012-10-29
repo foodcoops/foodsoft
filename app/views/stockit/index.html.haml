@@ -1,75 +1,68 @@
-- title "Lagerübersicht: #{StockArticle.available.count} Artikel im Lager"
-- content_for :head do
+- title "Lager (#{StockArticle.available.count})"
+- content_for :javascript do
   :javascript
     $(function() {
       $('tr.unavailable').hide();
     })
-.menu
-  - form_tag do
-    %ul
-      %li
+
+.well.well-small
+  .btn-toolbar
+    .btn-group.pull-right
+      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
         Ansichtsoptionen
-        %ul
-          %li= link_to "Nicht verfügbare Artikel zeigen/verstecken", "#", 'data-toggle-this' => 'tr.unavailable',
-            :style => "width:15em"
+        %span.caret
+      %ul.dropdown-menu
+        %li= link_to "Nicht verfügbare Artikel zeigen/verstecken", "#", 'data-toggle-this' => 'tr.unavailable', tabindex: -1
+
+    .btn-group
+      = link_to "Neuen Lagerartikel anlegen", new_stock_article_path, class: 'btn btn-primary'
+      = link_to_if @current_user.role_orders?, "Lagerbestellung online stellen", new_order_path(supplier_id: 0),
+        class: 'btn'
+      = link_to "Inventur anlegen", new_stock_taking_path, class: 'btn'
+      = link_to "Inventurübersicht", stock_takings_path, class: 'btn'
+
+    .btn-group
+      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+        Neue Lieferung ..
+        %span.caret
+      %ul.dropdown-menu
+        - Supplier.all.each do |supplier|
+          %li= link_to supplier.name, new_supplier_delivery_path(supplier), tabindex: -1
 
 
-%div{:style => "padding:0 0 0.5em 0.7em;margin-bottom:2em"}
-  %span{:style => "float:left"}
-    - form_tag do
-      Neue Lieferung anlegen für:
-      = select_tag :new_delivery,
-        options_for_select([[" -- Lieferantin wählen --", ""]] + Supplier.all.map {|s| [ s.name, new_supplier_delivery_url(s)]}),
-        'data-redirect-to' => true, :style => "font-size: 0.9em;margin-left:1em;"
-
-.single_column{:style => 'width:100%; clear:both'}
-  .box_title
-  .column_content
-    #actions
-      %b= link_to "Neuen Lagerartikel anlegen", new_stock_article_path
-      |
-      = link_to_if @current_user.role_orders?, "Lagerbestellung online stellen", {:controller => 'orders', :action => 'new', :supplier_id => 0}
-      |
-      %b= link_to "Inventur anlegen", new_stock_taking_path
-      |
-      = link_to "Inventurübersicht", stock_takings_path
-
-    #articles{:style => "clear:both;margin-top:1em"}
-      %table.list
-        %thead
-          %tr
-            %th Artikel
-            %th im Lager
-            %th davon bestellt
-            %th verfügbar
-            %th Einheit
-            %th Preis
-            %th MwSt
-            %th Lieferantin
-            %th Kategorie
-            %th
-        %tbody
-          - for article in @stock_articles
-            - class_name = cycle :even, :odd
-            - class_name += " unavailable" if article.quantity_available <= 0
-            - class_name += " supplier_#{article.supplier.id}"
-            %tr{:class => class_name}
-              %td=h article.name
-              %td= article.quantity
-              %td= article.quantity - article.quantity_available
-              %th= article.quantity_available
-              %td= article.unit
-              %td= article.price
-              %td= number_to_percentage article.tax
-              %td= link_to article.supplier.name, article.supplier
-              %td= article.article_category.name
-              %td
-                = link_to icon(:edit), edit_stock_article_path(article)
-                = link_to icon(:delete), article, :method => :delete, :confirm => "Bist Du sicher?"
-    %p
-      Aktueller Lagerwert:
-      = number_to_currency StockArticle.stock_value
-      |
-      Artikelanzahl:
-      = StockArticle.available.count
+%table.table.table-hover#articles
+  %thead
+    %tr
+      %th Artikel
+      %th im Lager
+      %th davon bestellt
+      %th verfügbar
+      %th Einheit
+      %th Preis
+      %th MwSt
+      %th Lieferantin
+      %th Kategorie
+      %th
+  %tbody
+    - for article in @stock_articles
+      %tr{:class => stock_article_classes(article)}
+        %td=h article.name
+        %td= article.quantity
+        %td= article.quantity - article.quantity_available
+        %th= article.quantity_available
+        %td= article.unit
+        %td= article.price
+        %td= number_to_percentage article.tax
+        %td= link_to article.supplier.name, article.supplier
+        %td= article.article_category.name
+        %td
+          = link_to "Bearbeiten", edit_stock_article_path(article), class: 'btn btn-mini'
+          = link_to "Löschen", article, :method => :delete, :confirm => "Bist Du sicher?",
+            class: 'btn btn-mini btn-danger'
+%p
+  Aktueller Lagerwert:
+  = number_to_currency StockArticle.stock_value
+  |
+  Artikelanzahl:
+  = StockArticle.available.count
 

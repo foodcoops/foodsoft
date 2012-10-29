@@ -1,31 +1,24 @@
 - title "Neue Inventur anlegen"
 
-.left_column{:style => "width:50%;"}
-  = simple_form_for(@stock_taking) do |f|
-    .box_title
-      %h2 Inventur anlegen
-    .column_content
-      = f.input :date
-      = f.input :note, :input_html => {:size => "28x7", :value => "#{@current_user.nick}: ..."}
-      %h2 Lagerartikel
-      %p
-        %i
-          Bitte trage hier alle gezählten Abweichungen vom
-          = link_to "vorläufigen Lagerbestand", stock_articles_path
-          ein. Bei Schwund benutze einfach ein Minus vor der Zahl.
-      #stock_changes
-        = render :partial => 'stock_change', :collection => @stock_taking.stock_changes
-      = f.submit
-      = link_to "oder abbrechen", stock_takings_path
+- content_for :sidebar do
+  %p
+    %i
+      Bitte trage hier alle gezählten Abweichungen vom
+      = link_to "vorläufigen Lagerbestand", stock_articles_path
+      ein. Bei Schwund benutze einfach ein Minus vor der Zahl.
+  %p
+    Einen neuen Lagerartikel musst Du vorher
+    = link_to "anlegen", new_stock_article_path
+    bevor Du Ihn hier verwenden kannst.
 
-.right_column{:style => "width:45%;"}
-  .box_title
-    %h2 Neuen Lagerartikel anlegen
-  .column_content
-    %p
-      // FIx this!
-      Suche nach Artikeln aus dem allen Katalogen:
-      = text_field_tag :article_name
-    %hr/
-    #stock_article_form
-      = render :partial => 'stock_article_form', :locals => {:stock_article => StockArticle.new}
+
+= simple_form_for(@stock_taking) do |f|
+  = f.input :date, as: :date_picker
+  = f.input :note, :input_html => {:size => "28x7", :value => "#{@current_user.nick}: ..."}
+  %h2 Lagerartikel
+
+  #stock_changes
+    = render :partial => 'stock_change', :collection => @stock_taking.stock_changes
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to "oder abbrechen", stock_takings_path

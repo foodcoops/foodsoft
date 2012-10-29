@@ -1,4 +1,4 @@
-- simple_form_for stock_article, add_stock_article_stock_takings_path, :remote => true do |f|
+- simple_form_for stock_article, url: add_stock_article_stock_takings_path, remote: true do |f|
   = f.association :supplier
   = f.input :name
   = f.input :unit
