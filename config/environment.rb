@@ -67,4 +67,5 @@ Rails::Initializer.run do |config|
   config.i18n.default_locale = :de
 
   # See Rails::Configuration for more options
+  config.action_controller.session = { :key => "_myapp_session", :secret => "9195616576518931793179752176417923862176431279acfaedcbeafdcbeafdcbeafcbaefdcbaedcfadcf" }
 end
