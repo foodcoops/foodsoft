@@ -3,15 +3,17 @@
 %p= link_to "Neue Kategorie anlegen", new_article_category_path, class: 'btn btn-primary'
 
 %table.table.table-striped
-  %tr
-    %th Name
-    %th Beschreibung
-    %th
-  - for article_category in ArticleCategory.all
-    %tr{:class => cycle("even","odd", :name => 'category')}[article_category]
-      %td= article_category.name
-      %td= article_category.description
-      %td
-        = link_to "Bearbeiten", edit_article_category_path(article_category), class: 'btn btn-mini'
-        = link_to "Löschen", article_category, :method => :delete, :confirm => 'Are you sure?',
-          class: 'btn btn-mini btn-danger'
+  %thead
+    %tr
+      %th Name
+      %th Beschreibung
+      %th
+  %tbody
+    - @article_categories.each do |article_category|
+      %tr
+        %td= article_category.name
+        %td= article_category.description
+        %td
+          = link_to "Bearbeiten", edit_article_category_path(article_category), class: 'btn btn-mini'
+          = link_to "Löschen", article_category, :method => :delete, :confirm => 'Are you sure?',
+            class: 'btn btn-mini btn-danger'

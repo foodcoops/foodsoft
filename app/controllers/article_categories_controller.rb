@@ -12,4 +12,10 @@ class ArticleCategoriesController < ApplicationController
     update!(:notice => "Die Kategorie wurde aktualisiert") { article_categories_path }
   end
 
+  protected
+
+  def collection
+    @article_categories = ArticleCategory.order('name')
+  end
+
 end
