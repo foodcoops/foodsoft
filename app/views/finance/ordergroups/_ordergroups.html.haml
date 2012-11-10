@@ -1,30 +1,20 @@
-%p
-  Gefunden:
-  = @ordergroups.size
-%p
-  %table{:style => "width:100%"}
-    %tr
-      %td
-        = pagination_links_remote @ordergroups, :update => :ordergroups, :params => {:sort => params[:sort]}
-      %td{:style => "text-align:right"}
-        - if @ordergroups.size > 20
-          = items_per_page
-%table.list
+- if Ordergroup.count > 20
+  = items_per_page
+= pagination_links_remote @ordergroups
+%table.table.table-striped
   %thead
     %tr
       %th= sort_link_helper "Name", "name", :per_page => @per_page
       %th Kontakt
-      %th= sort_link_helper "Kontostand", "account_balance", :per_page => @per_page
+      %th.numeric= sort_link_helper "Kontostand", "account_balance", :per_page => @per_page
       %th
   %tbody
     - for ordergroup in @ordergroups
-      %tr{:class => cycle('even','odd', :name => 'ordergroups')}
+      %tr
         %td= ordergroup.name
         %td= ordergroup.contact
-        %td{:class => "currency", :style => "width:5em"}= number_to_currency(ordergroup.account_balance)
-        %td{:class => "actions"}
-          = link_to image_tag("euro_new.png", :size => "16x16", :alt => "Neue Transaktion", :border => "0"),
-            new_finance_ordergroup_transaction_path(ordergroup), :title => "Neue Transaktion"
-          = link_to image_tag("b_browse.png", :size => "16x16", :border => "0", :alt => 'Kontoauszug'),
-            finance_ordergroup_transactions_path(ordergroup), :title => "Kontoauszug"
+        %td.numeric= number_to_currency(ordergroup.account_balance)
+        %td
+          = link_to "Neue Transaktion", new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-mini'
+          = link_to "Kontoauszug", finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-mini'
         

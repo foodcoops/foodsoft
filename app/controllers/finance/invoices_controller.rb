@@ -1,39 +1,23 @@
 class Finance::InvoicesController < ApplicationController
 
   def index
-    @invoices = Invoice.includes(:supplier, :delivery, :order).order('date DESC').paginate(page: params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @invoices }
-    end
+    @invoices = Invoice.includes(:supplier, :delivery, :order).order('date DESC').page(params[:page]).per(@per_page)
   end
 
   def show
     @invoice = Invoice.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @invoice }
-    end
   end
 
   def new
     @invoice = Invoice.new :supplier_id => params[:supplier_id],
-      :delivery_id => params[:delivery_id], :order_id => params[:order_id]
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @invoice }
-    end
+                           :delivery_id => params[:delivery_id],
+                           :order_id => params[:order_id]
   end
 
   def edit
     @invoice = Invoice.find(params[:id])
   end
 
-  # POST /invoices
-  # POST /invoices.xml
   def create
     @invoice = Invoice.new(params[:invoice])
 
@@ -41,7 +25,7 @@ class Finance::InvoicesController < ApplicationController
       flash[:notice] = "Rechnung wurde erstellt."
       if @invoice.order
         # Redirect to balancing page
-        redirect_to :controller => 'balancing', :action => 'new', :id => @invoice.order
+        redirect_to new_finance_order_url(order_id: @invoice.order.id)
       else
         redirect_to [:finance, @invoice]
       end
@@ -50,32 +34,20 @@ class Finance::InvoicesController < ApplicationController
     end
   end
 
-  # PUT /invoices/1
-  # PUT /invoices/1.xml
   def update
     @invoice = Invoice.find(params[:id])
 
-    respond_to do |format|
-      if @invoice.update_attributes(params[:invoice])
-        flash[:notice] = 'Invoice was successfully updated.'
-        format.html { redirect_to([:finance, @invoice]) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
-      end
+    if @invoice.update_attributes(params[:invoice])
+      redirect_to [:finance, @invoice], notice: "Rechnung wurde aktualisiert."
+    else
+      render :edit
     end
   end
 
-  # DELETE /invoices/1
-  # DELETE /invoices/1.xml
   def destroy
     @invoice = Invoice.find(params[:id])
     @invoice.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(finance_invoices_path) }
-      format.xml  { head :ok }
-    end
+    redirect_to finance_invoices_url
   end
 end

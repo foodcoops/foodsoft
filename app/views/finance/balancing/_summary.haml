@@ -5,19 +5,23 @@
   %table
     %tr
       %td Nettobetrag:
-      %td= number_to_currency(order.sum(:net))
+      %td.numeric= number_to_currency(order.sum(:net))
     %tr
       %td Bruttobetrag:
-      %td= number_to_currency(order.sum(:gross))
+      %td.numeric= number_to_currency(order.sum(:gross))
     %tr
       %td FC-Betrag:
-      %td= number_to_currency(order.sum(:fc))
+      %td.numeric= number_to_currency(order.sum(:fc))
     %tr
-      %td Summe der Gruppenbeträge:
-      %td= number_to_currency(order.sum(:groups))
+      %td Gruppenbeträge:
+      %td.numeric= number_to_currency(order.sum(:groups))
     %tr
-      %td FC Gewinn ohne Aufschlag:
-      %td= number_to_currency(order.profit(:without_markup => true))
+      %td
+        FC Gewinn
+        %small ohne Aufschlag:
+      %td.numeric= number_to_currency(order.profit(:without_markup => true))
     %tr
-      %td FC Gewinn mit Aufschlag:
-      %td#order_profit= number_to_currency(order.profit)
+      %td
+        FC Gewinn
+        %small mit Aufschlag:
+      %td#order_profit.numeric= number_to_currency(order.profit)

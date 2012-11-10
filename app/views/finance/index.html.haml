@@ -1,0 +1,60 @@
+- title "Finanzbereich"
+
+.row-fluid
+  .span6
+    %h2
+      Unbezahlte Rechnungen
+      %small= link_to "alle anzeigen", finance_invoices_path
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Datum
+          %th.numeric Betrag
+          %th Lieferantin
+          %th
+      %tbody
+        - for invoice in @unpaid_invoices
+          %tr
+            %td= format_date(invoice.date)
+            %td.numeric= number_to_currency(invoice.amount)
+            %td= invoice.supplier.name
+            %td= link_to "Bearbeiten", edit_finance_invoice_path(invoice), class: 'btn btn-mini'
+
+    %h2
+      letzte Überweisungen
+      %small= link_to "alle anzeigen", finance_ordergroups_path
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Datum
+          %th Gruppe
+          %th Notiz
+          %th.numeric Betrag
+      %tbody
+        - @financial_transactions.each do |ft|
+          %tr
+            %td= format_date(ft.created_on)
+            %td= ft.ordergroup.name
+            %td= ft.note
+            %td.numeric{:style => "color:#{ft.amount < 0 ? 'red' : 'black'}"}= number_to_currency(ft.amount)
+  .span6
+    %h2
+      noch nicht abgerechnet
+      %small= link_to "alle anzeigen", finance_order_index_path
+    - unless @orders.empty?
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Lieferantin
+            %th Ende
+            %th.numeric Betrag(FC)
+            %th 
+        %tbody
+          - @orders.each do |order|
+            %tr
+              %td= order.name
+              %td= format_date(order.ends)
+              %td.numeric= number_to_currency(order.sum(:fc))
+              %td= link_to "Abrechnen", new_finance_order_path(order_id: order.id), class: 'btn btn-mini'
+    - else
+      Super, alles schon abgerechnet...

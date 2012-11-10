@@ -1,15 +1,10 @@
-%p{:style => "float:left"}
-  %b Lieferung bearbeiten  
-%p{:style => "float:right"}
-  = link_to "Artikel hinzufügen", new_finance_order_order_article_path(@order), remote: true
+%h3 Bestellung bearbeiten
 
-%table{:class => "ordered_articles", :style => "clear:both"}
+%table.ordered-articles.table.table-striped
   %thead
     %tr
-      %th{colspan: "1", class: sort_td_class_helper("name")}
-        = sort_link_helper "Artikel", "name"
-      %th{class: sort_td_class_helper("order_number")}
-        = sort_link_helper "Nr.", "order_number"
+      %th= sort_link_helper "Artikel", "name"
+      %th= sort_link_helper "Nr.", "order_number"
       %th Menge
       %th GebGr * Einheit
       %th Netto
@@ -17,6 +12,8 @@
       %th MwSt
       %th Pfand
       %th{:colspan => "2"}
+        = link_to "Artikel hinzufügen", new_finance_order_order_article_path(@order), remote: true,
+          class: 'btn btn-small'
   %tbody#result_table
     - for order_article in @articles
       = render :partial => "order_article_result", :locals => {:order_article => order_article}

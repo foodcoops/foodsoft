@@ -45,25 +45,33 @@ module ApplicationHelper
     end
 
   end
-  
-  def sort_td_class_helper(param)
-    result = 'sortup' if params[:sort] == param.to_s
-    result = 'sortdown' if params[:sort] == param.to_s + "_reverse"
-    result
-  end
 
   def sort_link_helper(text, key, options = {})
-    per_page = options[:per_page] || @per_page
+    # Hmtl options
     remote = options[:remote].nil? ? true : options[:remote]
-    key += "_reverse" if params[:sort] == key
-    url = url_for(:sort => key, :page => nil, :per_page => per_page)
-
+    class_name = case params[:sort]
+                   when key then
+                     'sortup'
+                   when key + '_reverse' then
+                     'sortdown'
+                   else
+                     nil
+                 end
     html_options = {
         :title => "Nach #{text} sortieren",
-        :remote => remote
+        :remote => remote,
+        :class => class_name
     }
 
-    link_to(text, url, html_options)
+
+    # Url options
+    key += "_reverse" if params[:sort] == key
+    per_page = options[:per_page] || @per_page
+    url_options = params.merge(per_page: per_page, sort: key)
+    url_options.merge!({page: params[:page]}) if params[:page]
+    url_options.merge!({query: params[:query]}) if params[:query]
+
+    link_to(text, url_for(url_options), html_options)
   end
   
   # Generates a link to the top of the website

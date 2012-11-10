@@ -1,6 +1,5 @@
-class Finance::OrdergroupsController < ApplicationController
-  before_filter :authenticate_finance
-  
+class Finance::OrdergroupsController < Finance::BaseController
+
   def index
     if params["sort"]
       sort = case params["sort"]
@@ -16,11 +15,6 @@ class Finance::OrdergroupsController < ApplicationController
     @ordergroups = Ordergroup.order(sort)
     @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
-    @ordergroups = @ordergroups.paginate :page => params[:page], :per_page => @per_page
-
-    respond_to do |format|
-      format.html
-      format.js { render :layout => false }
-    end
+    @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
   end
 end

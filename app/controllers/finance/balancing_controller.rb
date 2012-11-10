@@ -1,15 +1,8 @@
 # encoding: utf-8
-class Finance::BalancingController < ApplicationController
-  before_filter :authenticate_finance
+class Finance::BalancingController < Finance::BaseController
 
   def index
-    @financial_transactions = FinancialTransaction.order('created_on DESC').limit(8)
-    @orders = Order.finished_not_closed
-    @unpaid_invoices = Invoice.unpaid
-  end
-
-  def list
-    @orders = Order.finished.paginate :page => params[:page], :per_page => 10, :order => 'ends DESC'
+    @orders = Order.finished.page(params[:page]).per(@per_page).order('ends DESC')
   end
 
   def new
@@ -62,10 +55,10 @@ class Finance::BalancingController < ApplicationController
   def close
     @order = Order.find(params[:id])
     @order.close!(@current_user)
-    redirect_to finance_balancing_url, notice: "Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert."
+    redirect_to finance_root_url, notice: "Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert."
 
   rescue => error
-    redirect_to finance_balancing_url, alert: "Ein Fehler ist beim Abrechnen aufgetreten: #{error.message}"
+    redirect_to new_finance_order_url(order_id: @order.id), alert: "Ein Fehler ist beim Abrechnen aufgetreten: #{error.message}"
   end
 
   # Close the order directly, without automaticly updating ordergroups account balances

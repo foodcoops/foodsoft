@@ -1,6 +1,9 @@
-%h2
-  Neuer gelieferter Artikel die Bestellung
-
 = simple_form_for [:finance, @order, @order_article], remote: true do |form|
-  = form.input :article_id, as: :select, collection: new_order_articles_collection
-  = form.submit
+  .modal-header
+    = button_tag "x", class: 'close', data: {dismiss: 'modal'}
+    %h3 Neuer gelieferter Artikel die Bestellung
+  .modal-body
+    = form.input :article_id, as: :select, collection: new_order_articles_collection
+  .modal-footer
+    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
+    = form.submit class: 'btn btn-primary'

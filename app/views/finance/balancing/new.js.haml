@@ -1,1 +1,1 @@
-$('#results').html('#{escape_javascript(render(partial: balancing_view_partial, locals: {order: @order}))}');
+$('#results').html('#{j(render(balancing_view_partial, order: @order))}');

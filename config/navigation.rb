@@ -32,8 +32,9 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     primary.item :finance, 'Finanzen', '#', if: Proc.new { current_user.role_finance? } do |subnav|
+      subnav.item :finance_home, 'Übersicht', finance_root_path
       subnav.item :accounts, 'Konten verwalten', finance_ordergroups_path, id: nil
-      subnav.item :balancing, 'Bestellungen abrechnen', finance_balancing_path, id: nil
+      subnav.item :balancing, 'Bestellungen abrechnen', finance_order_index_path, id: nil
       subnav.item :invoices, 'Rechnungen', finance_invoices_path, id: nil
     end
 

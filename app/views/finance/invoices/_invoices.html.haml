@@ -1,0 +1,31 @@
+- if Invoice.count > 20
+  = items_per_page
+= pagination_links_remote @invoices
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Nummer
+      %th Lieferantin
+      %th Datum
+      %th Bezahlt am
+      %th Betrag
+      %th Lieferung
+      %th Bestellung
+      %th Note
+      %th
+      %th
+  %tbody
+    - for invoice in @invoices
+      %tr
+        %td= link_to h(invoice.number), finance_invoice_path(invoice)
+        %td= invoice.supplier.name
+        %td= format_date invoice.date
+        %td= format_date invoice.paid_on
+        %td= number_to_currency invoice.amount
+        %td= link_to "Lieferung", [invoice.supplier,invoice.delivery] if invoice.delivery
+        %td= link_to format_date(invoice.order.ends), new_finance_order_path(order_id: invoice.order_id) if invoice.order
+        %td= truncate(invoice.note)
+        %td= link_to "Bearbeiten", edit_finance_invoice_path(invoice), class: 'btn btn-mini'
+        %td= link_to "Löschen", finance_invoice_path(invoice), :confirm => 'Are you sure?', :method => :delete,
+          class: 'btn btn-danger btn-mini'

@@ -1,53 +1,49 @@
 - title "#{@order.name} abrechnen"
 
-.left_column{:style => 'width: 24em'}
-  .box_title
-    %h2 Zusammenfassung
-  .column_content#summary
-    = render :partial => "summary", :locals => {:order => @order}
+- content_for :sidebar do
+  .well.well-small
+    %h3 Zusammenfassung
+    #summary= render 'summary', order: @order
 
-- unless @order.stockit?
-  .middle_column{:style => 'width: 24em'}
-    .box_title
-      %h2 Rechnung
-    .column_content#invoice
-      = render :partial => "invoice", :locals => {:invoice => @order.invoice}
+  .well.well-small
+    %h3 Rechnung
+    #invoice= render 'invoice', invoice: @order.invoice
 
-.right_column{:style => 'width: 20em'}
-  .box_title
-    %h2 Aktionen
-  .column_content
-    %ul
-      - unless @order.invoice or @order.stockit?
-        %li= link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier)
-      - unless @order.closed?
-        %li= link_to "Bestellung abschließen", :action => "confirm", :id => @order
-
-.right_column{:style => 'clear:both;width: 28%'}
-  .box_title
-    %h2 Notizen/Protokoll
-  .column_content
+  .well.well-small
+    %h3 Notizen/Protokoll
     #note
       - unless @order.note.empty?
         = simple_format @order.note
       - else
         %p Hier kannst Du deine Abrechnung kommentieren
     = link_to "Notiz bearbeiten", edit_note_finance_order_path(@order), remote: true
-  .box_title
-    %h2 Kommentare
-  .column_content
-    #comments
-      = render :partial => 'shared/comments', locals: {comments: @order.comments}
-      
-.left_column{:style => 'width: 69%'}
-  .box_title
-    #editOrderNav
-      %ul
-        %li= link_to 'Bestellung bearbeiten', new_finance_order_path(order_id: @order.id, view: 'edit_results'), remote: true
-        %li= link_to 'Gruppenübersicht', new_finance_order_path(order_id: @order.id, view: 'groups_overview'), remote: true
-        %li= link_to 'Artikelübersicht', new_finance_order_path(order_id: @order.id, view: 'articles_overview'), remote: true
-  .column_content
-    #results
-      = render partial: 'edit_results_by_articles'
-    %p= link_to_top
+
+  .well.well-small
+    %h3 Kommentare
+    #comments= render :partial => 'shared/comments', locals: {comments: @order.comments}
+
+.well.well-small
+  .btn-toolbar
+    .btn-group
+      - unless @order.invoice or @order.stockit?
+        = link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
+          class: 'btn'
+      - unless @order.closed?
+        = link_to "Bestellung abschließen", confirm_finance_order_path(@order), class: 'btn btn-primary'
+
+    #editOrderNav.btn-group.pull-right
+      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+        Ansichtsoptionen
+        %span.caret
+      %ul.dropdown-menu
+        %li= link_to 'Bestellung bearbeiten', new_finance_order_path(order_id: @order.id, view: 'edit_results'),
+          remote: true
+        %li= link_to 'Gruppenübersicht', new_finance_order_path(order_id: @order.id, view: 'groups_overview'),
+          remote: true
+        %li= link_to 'Artikelübersicht', new_finance_order_path(order_id: @order.id, view: 'articles_overview'),
+          remote: true
+
+%section#results
+  = render 'edit_results_by_articles'
+%p= link_to_top
 #edit_box{:style => 'display:none'}

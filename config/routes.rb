@@ -125,8 +125,7 @@ Foodsoft::Application.routes.draw do
     ########### Finance
 
     namespace :finance do
-      root :to => 'balancing#index'
-      match 'balancing/list' => 'balancing#list', :as => 'balancing'
+      root :to => 'base#index'
 
       resources :order, controller: 'balancing', path: 'balancing' do
         member do

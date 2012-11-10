@@ -1,9 +1,11 @@
-%h2 Mengenänderung
-%p
-  %b Artikel: #{@order_article.article.name}
-
-- simple_form_for [:finance, @group_order_article], remote: true do |form|
+= simple_form_for [:finance, @group_order_article], remote: true do |form|
   = form.hidden_field :order_article_id
-  = form.input :ordergroup_id, as: :select, collection: Ordergroup.all.map { |g| [g.name, g.id] }
-  = form.input :result, hint: "Einheit: #{@order_article.article.unit}"
-  = form.submit 'Speichern'
+  .modal-header
+    = button_tag "x", class: 'close', data: {dismiss: 'modal'}
+    %h3 Mengenänderung für #{@order_article.article.name}
+  .modal-body
+    = form.input :ordergroup_id, as: :select, collection: Ordergroup.all.map { |g| [g.name, g.id] }
+    = form.input :result, hint: "Einheit: #{@order_article.article.unit}"
+  .modal-footer
+    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
+    = form.submit "Speichern", class: 'btn btn-primary'

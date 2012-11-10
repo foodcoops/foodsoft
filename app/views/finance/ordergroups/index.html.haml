@@ -1,20 +1,15 @@
 - title "Konten verwalten"
-%p
-  %i
-    Um mehrer Transaktionen auf einmal anzulegen folge bitte diesem
-    = link_to "Link", finance_new_transaction_collection_path
 
-.left_column{:style=>"width:50em"}
-  .box_title
-    %h2 Bestellgruppen
-  .column_content
-    #group_filter
-      = form_tag finance_ordergroups_path, :method => :get, :style=>"display:inline;", :id => 'ordergroup_search',
-        :remote => true, 'data-submit-onchange' => true do
-        %label{:for => 'article_name'} Suche nach Name:
-        = text_field_tag :query, params[:query], :size => 10
-    #ordergroups
-      = render :partial => "ordergroups"
-    %br/
-    - if @current_user.role_admin?
-      = link_to "Neue Bestellgruppe anlegen", new_admin_ordergroup_path
+- content_for :sidebar do
+  .well.well-small
+    Hier kannst du mehrere Transaktionen gleichzeitig anlegen:
+    = link_to "Neue Überweisungen eingeben", finance_new_transaction_collection_path, class: 'btn btn-primary'
+
+.well.well-small
+  = form_tag finance_ordergroups_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :query, params[:query], class: 'input-medium search-query',
+      placeholder: 'Suchen ...'
+
+#ordergroupsTable
+  = render :partial => "ordergroups"

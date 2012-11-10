@@ -1,30 +1,5 @@
 - title "Rechnungen"
-%p= will_paginate @invoices
-%table.list{:style => "width:70em"}
-  %thead
-    %tr
-      %th Nummer
-      %th Lieferantin
-      %th Datum
-      %th Bezahlt am
-      %th Betrag
-      %th Lieferung
-      %th Bestellung
-      %th Note
-      %th
-      %th
-  %tbody
-    - for invoice in @invoices
-      %tr
-        %td= link_to h(invoice.number), finance_invoice_path(invoice)
-        %td= invoice.supplier.name
-        %td= format_date invoice.date
-        %td= format_date invoice.paid_on
-        %td= number_to_currency invoice.amount
-        %td= link_to "Lieferung", [invoice.supplier,invoice.delivery] if invoice.delivery
-        %td= link_to format_date(invoice.order.ends), new_finance_order_path(order_id: invoice.order_id) if invoice.order
-        %td= truncate(invoice.note)
-        %td= link_to icon(:edit), edit_finance_invoice_path(invoice)
-        %td= link_to icon(:delete), finance_invoice_path(invoice), :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'Neue Rechnung anlegen', new_finance_invoice_path
+
+= link_to 'Neue Rechnung anlegen', new_finance_invoice_path, class: 'btn btn-primary'
+
+#invoicesTable= render 'invoices'

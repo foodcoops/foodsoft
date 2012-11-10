@@ -4,23 +4,23 @@ class ArticlesController < ApplicationController
 
   def index
     if params['sort']
-    sort = case params['sort']
-             when "name"  then "articles.name"
-             when "unit"   then "articles.unit"
-             when "category" then "article_categories.name"
-             when "note"   then "articles.note"
-             when "availability" then "articles.availability"
-             when "name_reverse"  then "articles.name DESC"
-             when "unit_reverse"   then "articles.unit DESC"
-             when "category_reverse" then "article_categories.name DESC"
-             when "note_reverse" then "articles.note DESC"
-             when "availability_reverse" then "articles.availability DESC"
-             end
+      sort = case params['sort']
+               when "name"  then "articles.name"
+               when "unit"   then "articles.unit"
+               when "category" then "article_categories.name"
+               when "note"   then "articles.note"
+               when "availability" then "articles.availability"
+               when "name_reverse"  then "articles.name DESC"
+               when "unit_reverse"   then "articles.unit DESC"
+               when "category_reverse" then "article_categories.name DESC"
+               when "note_reverse" then "articles.note DESC"
+               when "availability_reverse" then "articles.availability DESC"
+               end
     else
       sort = "article_categories.name, articles.name"
     end
 
-    @articles = @supplier.articles.includes(:article_category).order(sort)
+    @articles = Article.where(supplier_id: @supplier).includes(:article_category).order(sort)
     @articles = @articles.where('articles.name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
     @articles = @articles.page(params[:page]).per(@per_page)

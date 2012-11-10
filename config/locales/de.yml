@@ -371,6 +371,8 @@ de:
         paid_on: Bezahlt am
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
+      order_article:
+        units_to_order: Menge
 
 
     hints:
@@ -386,3 +388,5 @@ de:
         supplier: ''
       message:
         private: Nachricht erscheint nicht im Foodsoft Posteingang
+      order_article:
+        units_to_order: Anzahl gelieferter Gebinde

@@ -1,6 +1,6 @@
-- title "Mehrer Konten aktualisieren"
+- title "Mehrere Konten aktualisieren"
 
-- content_for :head do
+- content_for :javascript do
   :javascript
     var ordergroup = "#{escape_javascript(render('ordergroup'))}"
 
@@ -16,19 +16,23 @@
       });
     });
 
-- form_tag finance_create_transaction_collection_path do
+- content_for :sidebar do
+  .well.well-small
+    Hier kannst Du mehrere Konten gleichzeitig aktualsieren.
+    Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
+
+= form_tag finance_create_transaction_collection_path do
   %p
     %b Notiz
-    = text_field_tag :note
+    = text_field_tag :note, params[:note], class: 'input-xlarge', required: 'required'
   %p
     %table#ordergroups{:style => "width:20em"}
       %tr
         %th Bestellgruppe
         %th Betrag
       = render :partial => 'ordergroup', :collection => [1, 2, 3]
-  
   %p
-    = link_to "Neue Bestellgruppe hinzufügen", '#', 'data-add-transaction' => true
-  %p
-    = submit_tag "Transaktionen speichern"
+    = link_to "Weitere Bestellgruppe hinzufügen", '#', 'data-add-transaction' => true, class: 'btn'
+  .form-actions
+    = submit_tag "Transaktionen speichern", class: 'btn btn-primary'
     = link_to "oder abbrechen", finance_ordergroups_path

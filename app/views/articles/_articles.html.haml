@@ -2,19 +2,15 @@
   = items_per_page
 = pagination_links_remote @articles
 
-%table#articles_table.table.table-striped
+%table#articles_table.table.table-hover
   %thead
     %tr
       %th
-      %th{class: sort_td_class_helper(:name)}
-        = sort_link_helper "Name", "name"
+      %th= sort_link_helper "Name", "name"
       %th
-      %th{class: sort_td_class_helper(:category)}
-        = sort_link_helper "Kategorie", "category"
-      %th{class: sort_td_class_helper(:unit)}
-        = sort_link_helper "Einheit", "unit"
-      %th{class: sort_td_class_helper(:note)}
-        = sort_link_helper "Notiz", "note"
+      %th= sort_link_helper "Kategorie", "category"
+      %th= sort_link_helper "Einheit", "unit"
+      %th= sort_link_helper "Notiz", "note"
       %th{:style => "width: 4em;"} Gebgr.
       %th{:style => "width: 5em;"} Preis
       %th{:style => "width: 3.5em;"} MwSt

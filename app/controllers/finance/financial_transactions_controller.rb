@@ -19,15 +19,10 @@ class Finance::FinancialTransactionsController < ApplicationController
       sort = "created_on DESC"
     end
 
-    @financial_transactions = @ordergroup.financial_transactions.order(sort)
+    @financial_transactions = @ordergroup.financial_transactions.unscoped.order(sort)
     @financial_transactions = @financial_transactions.where('note LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
-    @financial_transactions = @financial_transactions.paginate :page => params[:page], :per_page => 10
-
-    respond_to do |format|
-      format.html
-      format.js { render :layout => false }
-    end
+    @financial_transactions = @financial_transactions.page(params[:page]).per(@per_page)
   end
 
   def new
@@ -55,9 +50,9 @@ class Finance::FinancialTransactionsController < ApplicationController
         Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(trans[:amount], params[:note], @current_user)
       end
     end
-    redirect_to finance_ordergroups_url, :notice => "Alle Transaktionen wurden gespeichert."
+    redirect_to finance_ordergroups_url, notice: "Alle Transaktionen wurden gespeichert."
   rescue => error
-    redirect_to :action => 'new_collection', :alert => "Ein Fehler ist aufgetreten: " + error.to_s
+    redirect_to finance_new_transaction_collection_url, alert: "Ein Fehler ist aufgetreten: " + error.to_s
   end
 
   protected

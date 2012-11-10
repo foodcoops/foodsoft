@@ -1,1 +1,2 @@
-$.fancybox('#{escape_javascript(render("edit_note"))}');
+$('#modalContainer').html('#{j(render("edit_note"))}');
+$('#modalContainer').modal();

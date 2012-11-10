@@ -1,5 +1,3 @@
-$.fancybox.close();
-$('#order_article_#{@order_article.id}').
-html('#{escape_javascript(render(partial: 'finance/balancing/order_article', locals: {order_article: @order_article}))}');
-$('#group_order_articles_#{@order_article.id}').
-html('#{escape_javascript(render(partial: 'finance/balancing/group_order_articles', locals: {order_article: @order_article}))}');
+$('#modalContainer').modal('hide');
+$('#order_article_#{@order_article.id}').html('#{j(render('finance/balancing/order_article', order_article: @order_article))}');
+$('#group_order_articles_#{@order_article.id}').html('#{j(render('finance/balancing/group_order_articles', order_article: @order_article))}');

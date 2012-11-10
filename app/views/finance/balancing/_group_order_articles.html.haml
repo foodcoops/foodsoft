@@ -1,5 +1,5 @@
 %td{:colspan => "7"}
-  %table
+  %table.table.table-striped
     %thead
       %tr
         %td
@@ -7,35 +7,35 @@
         %td Einheiten
         %td Gesamtpreis
         %td{:colspan => "3",:style => "width:14em"}
-          = link_to '[Gruppe hinzufügen]', new_finance_group_order_article_path(order_article_id: order_article.id),
-            remote: true
+          = link_to 'Gruppe hinzufügen', new_finance_group_order_article_path(order_article_id: order_article.id),
+            remote: true, class: 'btn btn-mini'
     %tbody
       - for group_order_article in order_article.group_order_articles.ordered.all(:include => [:group_order])
-        %tr{:class => cycle('even', 'odd', :name => 'results')}[group_order_article]
+        %tr[group_order_article]
           %td
           %td{:style=>"width:50%"}
             = group_order_article.group_order.ordergroup.name
           %td{:id => "group_order_article_#{group_order_article.id}_quantity", :style => "white-space:nowrap"}
             = group_order_article.result
-            = button_to "+", update_result_finance_group_order_article_path(group_order_article, modifier: '+'),
-              method: :put, remote: true, style: 'float:left'
-            = button_to "-", update_result_finance_group_order_article_path(group_order_article, modifier: '-'),
-              method: :put, remote: true
-          %td.currency
+            = link_to "+", update_result_finance_group_order_article_path(group_order_article, modifier: '+'),
+              method: :put, remote: true, class: 'btn btn-mini'
+            = link_to "-", update_result_finance_group_order_article_path(group_order_article, modifier: '-'),
+              method: :put, remote: true, class: 'btn btn-mini'
+          %td.numeric
             = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result, :unit => "")
           %td.actions{:style=>"width:1em"}
-            = link_to icon(:edit), edit_finance_group_order_article_path(group_order_article), remote: true
+            = link_to "Bearbeiten", edit_finance_group_order_article_path(group_order_article), remote: true,
+              class: 'btn btn-mini'
           %td.actions{:style=>"width:1em"}
-            = link_to icon(:delete), finance_group_order_article_path(group_order_article), method: :delete,
-              remote: true
+            = link_to "Löschen", finance_group_order_article_path(group_order_article), method: :delete,
+              remote: true, class: 'btn btn-mini btn-danger'
           %td
     %tfoot
-      %tr{:class => cycle('even', 'odd', :name => 'results')}
+      %tr
         %td
         %td{:style => "width:8em"} Summe (FC-Preis)
         %td{:id => "group_orders_sum_quantity_#{order_article.id}"}
           = order_article.group_orders_sum[:quantity]
-        %td{:id => "group_orders_sum_price_#{order_article.id}", :class => "currency"}
+        %td.numeric{:id => "group_orders_sum_price_#{order_article.id}"}
           = number_to_currency(order_article.group_orders_sum[:price], :unit => "")
         %td{:colspan => "3"}
-    - reset_cycle('results')
