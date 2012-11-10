@@ -51,7 +51,7 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :homepage, FoodsoftConfig[:name], FoodsoftConfig[:homepage]
     end
     primary.item :help, 'Hilfe', 'https://github.com/bennibu/foodsoft/wiki/Doku', id: nil
-    primary.item :feedback, 'Feedback', 'new_feedback_path', title: "Fehler gefunden? Vorschlag? Idee? Kritik?", id: nil
+    primary.item :feedback, 'Feedback', new_feedback_path, title: "Fehler gefunden? Vorschlag? Idee? Kritik?", id: nil
     primary.item :nick, current_user.nick, '#' do |subnav|
       subnav.item :edit_profile, 'Profil bearbeiten', my_profile_path, title: 'Profil bearbeiten', id: nil
       subnav.item :logout, 'Abmelden', logout_path, id: nil

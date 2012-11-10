@@ -4,9 +4,9 @@ class FeedbackController < ApplicationController
   end
 
   def create
-    unless params[:message].blank?
-      Mailer.feedback(current_user, params[:message]).deliver
-      redirect_to new_feedback_url, :notice => 'The message was successfully delivered.'
+    if params[:message].present?
+      Mailer.feedback(FoodsoftConfig.scope, current_user, params[:message]).deliver
+      redirect_to root_url, :notice => "Das Feedback wurde erfolgreich verschickt. Vielen Dank!"
     else
       render :action => 'new'
     end

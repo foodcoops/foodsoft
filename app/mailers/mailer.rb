@@ -65,7 +65,8 @@ class Mailer < ActionMailer::Base
          :subject => "[#{FoodsoftConfig[:name]}] Gruppenkonto im Minus"
   end
 
-  def feedback(user, feedback)
+  def feedback(foodcoop, user, feedback)
+    set_foodcoop_scope(foodcoop)
     @user = user
     @feedback = feedback
 
