@@ -11,6 +11,9 @@
             %b Lieferantin:
             =h @order.name
           %p
+            %b Erstellt von:
+            =h link_to_user_message_if_valid(@order.created_by)
+          %p
             %b Ende:
             =h format_time(@order.ends)
           - if @group_order && @group_order.updated_by
