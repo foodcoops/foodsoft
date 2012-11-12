@@ -3,9 +3,12 @@ class Task < ActiveRecord::Base
   has_many :users, :through => :assignments
   belongs_to :workgroup
 
-  scope :non_group, :conditions => { :workgroup_id => nil, :done => false }
-  scope :done, :conditions => {:done => true}, :order => "due_date DESC"
-  
+  scope :non_group, where(workgroup_id: nil, done: false)
+  scope :done, where(done: true)
+  scope :undone, where(done: false)
+
+  attr_accessor :current_user_id
+
   # form will send user in string. responsibilities will added later
   attr_protected :users
 
@@ -15,7 +18,33 @@ class Task < ActiveRecord::Base
   validates_length_of :description, maximum: 250
 
   after_save :update_ordergroup_stats
-  
+
+  # Find all tasks, for which the current user should be responsible
+  # but which aren't accepted yet
+  def self.unaccepted_tasks_for(user)
+    user.tasks.undone.where(assignments: {accepted: false})
+  end
+
+  # Find all accepted tasks, which aren't done
+  def self.accepted_tasks_for(user)
+    user.tasks.undone.where(assignments: {accepted: true})
+  end
+
+
+  # find all tasks in the next week (or another number of days)
+  def self.next_assigned_tasks_for(user, number = 7)
+    user.tasks.undone.where(assignments: {accepted: true}).
+        where(["tasks.due_date >= ? AND tasks.due_date <= ?", Time.now, number.days.from_now])
+  end
+
+  # count tasks with no responsible person
+  # tasks for groups the user is not a member are ignored
+  def self.unassigned_tasks_for(user)
+    Task.undone.where(assigned: false).includes(:workgroup).all.select do |task|
+      !task.workgroup or user.member_of?(task.workgroup)
+    end
+  end
+
   def is_assigned?(user)
     self.assignments.detect {|ass| ass.user_id == user.id }
   end
@@ -35,13 +64,13 @@ class Task < ActiveRecord::Base
     new_users = list - users.collect(&:id)
     old_users = users.reject { |user| list.include?(user.id) }
     
-    logger.debug "New users: #{new_users}"
+    logger.debug "[debug] New users: #{new_users}"
     logger.debug "Old users: #{old_users}"
     
     self.class.transaction do
       # delete old assignments
       if old_users.any?
-        assignments.find(:all, :conditions => ["user_id IN (?)", old_users.collect(&:id)]).each(&:destroy)
+        assignments.where(user_id: old_users.map(&:id)).each(&:destroy)
       end
       # create new assignments
       new_users.each do |id|
@@ -49,7 +78,7 @@ class Task < ActiveRecord::Base
         if user.blank?
           errors.add(:user_list)
         else
-          if  user == User.current_user
+          if  id == current_user_id
             # current_user will accept, when he puts himself to the list of users
             self.assignments.build :user => user, :accepted => true
           else

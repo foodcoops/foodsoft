@@ -6,7 +6,6 @@
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker.de
 //= require jquery.observe_field
-//= require jquery.fancybox-1.3.4.pack
 //= require rails.validations
 //= require_self
 //= require ordering

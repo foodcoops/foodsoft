@@ -8,12 +8,12 @@ class TasksController < ApplicationController
   end
   
   def user
-    @unaccepted_tasks = @current_user.unaccepted_tasks
-    @accepted_tasks = @current_user.accepted_tasks
+    @unaccepted_tasks = Task.unaccepted_tasks_for(current_user)
+    @accepted_tasks = Task.accepted_tasks_for(current_user)
   end
   
   def new
-    @task = Task.new
+    @task = Task.new(current_user_id: current_user.id)
   end
   
   def create
@@ -31,6 +31,7 @@ class TasksController < ApplicationController
   
   def edit
     @task = Task.find(params[:id])
+    @task.current_user_id = current_user.id
   end
   
   def update

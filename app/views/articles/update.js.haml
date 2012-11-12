@@ -1,2 +1,2 @@
 $('#article_#{@article.id}').replaceWith('#{escape_javascript(render(@article))}');
-$.fancybox.close();
+$('#modalContainer').modal('hide');

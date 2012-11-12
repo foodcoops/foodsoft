@@ -1,4 +1,4 @@
-- title "Aufgabe im Detail"
+- title "Aufgabe anzeigen"
 - content_for :sidebar do
   = render 'nav'
 
@@ -18,10 +18,9 @@
     %dd
       - if @task.workgroup
         = link_to @task.workgroup.name, workgroup_tasks_path(workgroup_id: @task.workgroup_id)
-
-  %p
-    - unless @task.done?
-      = link_to 'Als erledigt markieren', set_done_task_path(@task), method: :post, class: 'btn'
-    = link_to "Bearbeiten", edit_task_path(@task), class: 'btn'
-    = link_to "Löschen", task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?",
-      class: 'btn btn-danger'
+%p
+  - unless @task.done?
+    = link_to 'Als erledigt markieren', set_done_task_path(@task), method: :post, class: 'btn'
+  = link_to "Bearbeiten", edit_task_path(@task), class: 'btn'
+  = link_to "Löschen", task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?",
+    class: 'btn btn-danger'

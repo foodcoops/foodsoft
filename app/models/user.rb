@@ -138,44 +138,6 @@ class User < ActiveRecord::Base
     ordergroup ? ordergroup.name : "keine Bestellgruppe"
   end
 
-  # Find all tasks, for which the current user should be responsible
-  # but which aren't accepted yet
-  def unaccepted_tasks
-    # this doesn't work. Produces "undefined method", when later use task.users... Rails Bug?
-    # self.tasks.find :all, :conditions => ["accepted = ?", false], :order => "due_date DESC"
-    Task.find_by_sql ["SELECT t.* FROM tasks t, assignments a, users u 
-                      WHERE u.id = a.user_id
-                      AND t.id = a.task_id
-                      AND u.id = ?
-                      AND a.accepted = ?
-                      AND t.done = ?
-                      ORDER BY t.due_date ASC", self.id, false, false]
-  end
-  
-  # Find all accepted tasks, which aren't done
-  def accepted_tasks
-    Task.find_by_sql ["SELECT t.* FROM tasks t, assignments a, users u 
-                      WHERE u.id = a.user_id
-                      AND t.id = a.task_id
-                      AND u.id = ?
-                      AND a.accepted = ?
-                      AND t.done = ?
-                      ORDER BY t.due_date ASC", self.id, true, false]
-  end
-  
-  # find all tasks in the next week (or another number of days)
-  def next_tasks(number = 7)
-    Task.find_by_sql ["SELECT t.* FROM tasks t, assignments a, users u 
-                      WHERE u.id = a.user_id
-                      AND t.id = a.task_id
-                      AND u.id = ?
-                      AND t.due_date >= ?
-                      AND t.due_date <= ?
-                      AND t.done = ?
-                      AND a.accepted = ?
-                      ORDER BY t.due_date ASC", self.id, Time.now, number.days.from_now, false, true]  
-  end
- 
   # returns true if user is a member of a given group
   def member_of?(group)
     group.users.exists?(self.id)

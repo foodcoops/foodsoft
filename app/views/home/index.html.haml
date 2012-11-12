@@ -3,22 +3,25 @@
 - content_for(:sidebar) do
   = render :partial => 'start_nav'
 
-- unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks_number == 0
-  %section.well
+- unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks.size == 0
+  %section.row-fluid
     - unless @next_tasks.empty?
-      %h3 Deine Aufgaben für nächste Woche
-      %dl.dl-horizontal
-        - @next_tasks.each do |task|
-          %dt= l task.due_date, format: "%A, %d. %b"
-          %dd= link_to task.name, task_path(task)
-
+      .span3.well
+        %h4 Deine Aufgaben
+        %dl
+          - @next_tasks.each do |task|
+            %dt= l task.due_date, format: "%A, %d. %b"
+            %dd= link_to task.name, task_path(task)
     - unless @unaccepted_tasks.empty?
-      %h3 Aufgaben übernehmen
-      Du bis für Aufgaben verantwortlich.
-      = link_to "Aufgaben übernehmen/ablehnen", user_tasks_path
-    - unless @unassigned_tasks_number == 0
-      %h3 Offene Aufgaben
-      = "Es gibt #{@unassigned_tasks_number} #{link_to 'offene Aufgabe(n)', :controller => 'tasks'}".html_safe
+      .span3.well
+        %h4 Aufgaben übernehmen
+        Du bis für Aufgaben verantwortlich.
+        = link_to "Aufgaben übernehmen/ablehnen", user_tasks_path
+    - unless @unassigned_tasks.size == 0
+      .span3.well
+        %h4 Offene Aufgaben
+        Es gibt #{@unassigned_tasks.size}
+        = link_to 'offene Aufgabe(n)', tasks_path
 
 - if current_user.ordergroup
   = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}

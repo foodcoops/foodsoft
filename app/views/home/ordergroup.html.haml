@@ -1,35 +1,26 @@
-%h1 Meine Bestellgruppe
-.left_column
-  .box_title
-    %h2= h @ordergroup.name
-  .column_content
-    %p
-      %b Beschreibung:
-      = h @ordergroup.description
-    %p
-      %b Verfügbares Guthaben:
-      = number_to_currency(@ordergroup.get_available_funds())
-    %h2 Personen
-    %ul{:style => "list-style-type:decimal;"}
-      - for membership in @ordergroup.memberships
-        %li= membership.user.nick
-    = link_to('Person einladen', new_invite_path(:id => @ordergroup), :remote => true)
-.right_column
-  .box_title
+-title "Meine Bestellgruppe"
+
+.row-fluid
+  .span4
+    %h2= @ordergroup.name
+    .well
+      %p
+        %b Beschreibung:
+        = @ordergroup.description
+      %p
+        %b Verfügbares Guthaben:
+        = number_to_currency(@ordergroup.get_available_funds())
+      %h2 Personen
+      %ul{:style => "list-style-type:decimal;"}
+        - for membership in @ordergroup.memberships
+          %li= membership.user.nick
+      = link_to('Person einladen', new_invite_path(:id => @ordergroup), :remote => true)
+  .span8
     %h2 Kontoauszug
-  .column_content
-    = form_tag my_ordergroup_url, :method => :get, :style => 'display:inline;', :id => 'transactions_search', |
-      :remote => true do                                                                                      |
-      = label_tag "financial_transaction_note", "Filter für Notizen:"
-      = text_field_tag("query", params['query'], :size => 10 )
-    #transactions
-      = render :partial => "/finance/transactions/list"
-#edit_box{:style => "display:none"}
-- content_for :head do
-  :javascript
-    $(function() {
-        $('#query').observe_field(1, function() {
-            $('#transactions_search').submit();
-        });
-    })
+    .well.well-small
+      = form_tag my_ordergroup_path, :method => :get, :remote => true,
+        'data-submit-onchange' => true, class: 'form-search' do
+        = text_field_tag :query, params[:query], class: 'input-medium search-query',
+          placeholder: 'Suchen ...'
+    #transactions= render "finance/financial_transactions/transactions"
     

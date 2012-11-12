@@ -54,6 +54,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :feedback, 'Feedback', new_feedback_path, title: "Fehler gefunden? Vorschlag? Idee? Kritik?", id: nil
     primary.item :nick, current_user.nick, '#' do |subnav|
       subnav.item :edit_profile, 'Profil bearbeiten', my_profile_path, title: 'Profil bearbeiten', id: nil
+      subnav.item :my_ordergroup, 'Meine Bestellgruppe', my_ordergroup_path, id: nil
       subnav.item :logout, 'Abmelden', logout_path, id: nil
     end
   end

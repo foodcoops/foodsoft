@@ -15,6 +15,7 @@
   = render "shared/workgroup_members"
 
 = simple_form_for @task do |f|
+  = f.hidden_field :current_user_id
   = f.input :name
   = f.input :description, as: :text, input_html: {rows: 10}
   = f.input :duration, :as => :select, :collection => 1..3
