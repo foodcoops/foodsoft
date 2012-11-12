@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(params[:task])
-    if @task.save
+    if @task.errors.empty? && @task.save
       flash[:notice] = "Aufgabe wurde erstellt"
       if @task.workgroup
         redirect_to :action => "workgroup", :id => @task.workgroup
@@ -40,8 +40,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     @task.attributes=(params[:task])
-    if @task.errors.empty?
-      @task.save
+    if @task.errors.empty? && @task.save
       flash[:notice] = "Aufgabe wurde aktualisiert"
       if @task.workgroup
         redirect_to :action => "workgroup", :id => @task.workgroup

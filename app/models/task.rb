@@ -29,6 +29,8 @@ class Task < ActiveRecord::Base
   
   # extracts nicknames from a comma seperated string 
   # and makes the users responsible for the task
+  # TODO: check for uniqueness
+  # TODO: check for maximal number of users
   def user_list=(string)
     @user_list = string.split(%r{,\s*})
     new_users = @user_list - users.collect(&:nick)
