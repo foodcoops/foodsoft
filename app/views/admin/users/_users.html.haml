@@ -9,16 +9,15 @@
       %th Email
       %th Zugriff auf
       %th Letzter login
-      %th Aktionen
+      %th(colspan="2") Aktionen
   %tbody
     - for user in @users 
       %tr
         %td= link_to user.nick, [:admin, user]
-        %td=h user.name
-        %td=h user.email
-        %td=h format_roles(user)
-        %td=h format_time(user.last_login)
-        %td
-          = link_to 'Bearbeiten', edit_admin_user_path(user), class: 'btn btn-mini'
-          = link_to 'Löschen', [:admin, user], :confirm => "Willst du #{user.name} wirklich löschen?",
+        %td= user.name
+        %td= user.email
+        %td= format_roles(user)
+        %td= format_time(user.last_login)
+        %td= link_to 'Bearbeiten', edit_admin_user_path(user), class: 'btn btn-mini'
+        %td= link_to 'Löschen', [:admin, user], :confirm => "Willst du #{user.name} wirklich löschen?",
             :method => :delete, class: 'btn btn-danger btn-mini'

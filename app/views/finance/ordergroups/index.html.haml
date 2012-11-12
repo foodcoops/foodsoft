@@ -1,9 +1,7 @@
 - title "Konten verwalten"
 
-- content_for :sidebar do
-  .well.well-small
-    Hier kannst du mehrere Transaktionen gleichzeitig anlegen:
-    = link_to "Neue Überweisungen eingeben", finance_new_transaction_collection_path, class: 'btn btn-primary'
+- content_for :actionbar do
+  = link_to "Neue Überweisungen eingeben", finance_new_transaction_collection_path, class: 'btn btn-primary'
 
 .well.well-small
   = form_tag finance_ordergroups_path, :method => :get, :remote => true,

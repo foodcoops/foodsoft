@@ -1,10 +1,8 @@
 - title "Lieferanten"
 
-%p
+- content_for :actionbar do
   = link_to 'Neue Lieferantin anlegen', new_supplier_path, class: 'btn btn-primary'
-  oder
-  = link_to 'importiere', shared_suppliers_suppliers_path
-  aus der externen Artikeldatenbank.
+  = link_to 'Lieferantin aus externer Datenbank importieren', shared_suppliers_suppliers_path, class: 'btn'
 %table.table.table-striped
   %thead
     %tr

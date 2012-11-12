@@ -54,7 +54,7 @@
           %th Wer
           %th Notiz
           %th Betrag
-        - for ft in current_user.ordergroup.financial_transactions.limit(5)
+        - for ft in current_user.ordergroup.financial_transactions.limit(5).order('created_on DESC')
           %tr
             %td= format_time(ft.created_on)
             %td= h(ft.user.nil? ? '?' : ft.user.nick)

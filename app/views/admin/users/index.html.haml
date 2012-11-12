@@ -1,7 +1,9 @@
 - title "Admin/Benutzerinnen"
 
+- content_for :actionbar do
+  = link_to 'Neue Benutzerin anlegen', new_admin_user_path, class: 'btn btn-primary'
+
 - content_for :sidebar do
-  %p= link_to 'Neue Benutzerin anlegen', new_admin_user_path, class: 'btn btn-primary'
   %p
     Hier kannst du Benutzer_innen #{link_to 'neu Anlegen', new_admin_user_path},
     bearbeiten und natürlich auch löschen.

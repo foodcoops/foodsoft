@@ -1,7 +1,9 @@
 - title "Kontoauszug für #{@ordergroup.name}"
 
+- content_for :actionbar do
+  = link_to 'Neue Transaktion anlegen', new_finance_ordergroup_transaction_path(@ordergroup), class: 'btn btn-primary'
+
 - content_for :sidebar do
-  %p= link_to 'Neue Transaktion anlegen', new_finance_ordergroup_transaction_path(@ordergroup), class: 'btn btn-primary'
   .well.well-small
     %strong Kontostand: #{number_to_currency(@ordergroup.account_balance)}
     %br/

@@ -9,7 +9,7 @@ class Ordergroup < Group
   acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
   serialize :stats
 
-  has_many :financial_transactions, :order => "created_on DESC"
+  has_many :financial_transactions
   has_many :group_orders
   has_many :orders, :through => :group_orders
 

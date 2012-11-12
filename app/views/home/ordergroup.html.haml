@@ -1,4 +1,4 @@
--title "Meine Bestellgruppe"
+- title "Meine Bestellgruppe", false
 
 .row-fluid
   .span4
@@ -11,10 +11,10 @@
         %b Verfügbares Guthaben:
         = number_to_currency(@ordergroup.get_available_funds())
       %h2 Personen
-      %ul{:style => "list-style-type:decimal;"}
+      %ul
         - for membership in @ordergroup.memberships
           %li= membership.user.nick
-      = link_to('Person einladen', new_invite_path(:id => @ordergroup), :remote => true)
+      = link_to 'Neue Person einladen', new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
   .span8
     %h2 Kontoauszug
     .well.well-small

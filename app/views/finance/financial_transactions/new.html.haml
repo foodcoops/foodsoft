@@ -7,5 +7,6 @@
   = f.hidden_field :ordergroup_id
   = f.input :amount
   = f.input :note, :as => :text
-  = f.submit
-  = link_to "oder abbrechen", finance_ordergroup_transactions_path(@ordergroup)
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to "oder abbrechen", finance_ordergroup_transactions_path(@ordergroup)

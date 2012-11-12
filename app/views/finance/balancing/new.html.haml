@@ -22,28 +22,26 @@
     %h3 Kommentare
     #comments= render :partial => 'shared/comments', locals: {comments: @order.comments}
 
-.well.well-small
-  .btn-toolbar
-    .btn-group
-      - unless @order.invoice or @order.stockit?
-        = link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
-          class: 'btn'
-      - unless @order.closed?
-        = link_to "Bestellung abschließen", confirm_finance_order_path(@order), class: 'btn btn-primary'
+- content_for :actionbar do
+  .btn-group
+    - unless @order.invoice or @order.stockit?
+      = link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
+        class: 'btn'
+    - unless @order.closed?
+      = link_to "Bestellung abschließen", confirm_finance_order_path(@order), class: 'btn btn-primary'
 
-    #editOrderNav.btn-group.pull-right
-      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
-        Ansichtsoptionen
-        %span.caret
-      %ul.dropdown-menu
-        %li= link_to 'Bestellung bearbeiten', new_finance_order_path(order_id: @order.id, view: 'edit_results'),
-          remote: true
-        %li= link_to 'Gruppenübersicht', new_finance_order_path(order_id: @order.id, view: 'groups_overview'),
-          remote: true
-        %li= link_to 'Artikelübersicht', new_finance_order_path(order_id: @order.id, view: 'articles_overview'),
-          remote: true
+  #editOrderNav.btn-group.pull-right
+    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+      Ansichtsoptionen
+      %span.caret
+    %ul.dropdown-menu
+      %li= link_to 'Bestellung bearbeiten', new_finance_order_path(order_id: @order.id, view: 'edit_results'),
+        remote: true
+      %li= link_to 'Gruppenübersicht', new_finance_order_path(order_id: @order.id, view: 'groups_overview'),
+        remote: true
+      %li= link_to 'Artikelübersicht', new_finance_order_path(order_id: @order.id, view: 'articles_overview'),
+        remote: true
 
 %section#results
   = render 'edit_results_by_articles'
 %p= link_to_top
-#edit_box{:style => 'display:none'}

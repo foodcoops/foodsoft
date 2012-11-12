@@ -19,12 +19,16 @@
           = yield(:sidebar)
         .span9
           = bootstrap_flash
+          - if content_for?(:actionbar)
+            .btn-toolbar.pull-right= yield(:actionbar)
           - if show_title?
             .page-header
               %h1= yield(:title)
           = yield
       - else
         = bootstrap_flash
+        - if content_for?(:actionbar)
+          .btn-toolbar.pull-right= yield(:actionbar)
         - if show_title?
           .page-header
             %h1= yield(:title)

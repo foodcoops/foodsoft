@@ -1,5 +1,6 @@
 - title "Rechnungen"
 
-= link_to 'Neue Rechnung anlegen', new_finance_invoice_path, class: 'btn btn-primary'
+- content_for :actionbar do
+  = link_to 'Neue Rechnung anlegen', new_finance_invoice_path, class: 'btn btn-primary'
 
 #invoicesTable= render 'invoices'

@@ -1,7 +1,9 @@
 - title "Bestellgruppen"
 
+- content_for :actionbar do
+  = link_to "Neue Bestellgruppe anlegen", new_admin_ordergroup_path, class: 'btn btn-primary'
+
 - content_for :sidebar do
-  %p= link_to "Neue Bestellgruppe anlegen", new_admin_ordergroup_path, class: 'btn btn-primary'
   %p
     Hier kannst du
     = link_to 'neue Bestellgruppen', new_admin_ordergroup_path

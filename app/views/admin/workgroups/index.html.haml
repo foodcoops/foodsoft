@@ -1,7 +1,9 @@
 - title "Arbeitsgruppen"
 
+- content_for :actionbar do
+  = link_to "Neue Arbeitsgruppe anlegen", new_admin_workgroup_path, class: 'btn btn-primary'
+
 - content_for :sidebar do
-  %p= link_to "Neue Arbeitsgruppe anlegen", new_admin_workgroup_path, class: 'btn btn-primary'
   %p
     Hier kannst du
     = link_to 'neue Arbeitsgruppen', new_admin_workgroup_path

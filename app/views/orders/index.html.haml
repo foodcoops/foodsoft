@@ -1,14 +1,15 @@
 - title "Bestellungen verwalten"
 
-.well
-  .btn-group.pull-right
+- content_for :actionbar do
+  .btn-group
     = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-primary dropdown-toggle' do
-      Neue Bestellung für ..
+      Neue Bestellung anlegen
       %span.caret
     %ul.dropdown-menu
       - Supplier.all.each do |supplier|
         %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1
 
+.well
   %h2 Laufende Bestellungen
   - unless @open_orders.empty?
     %table.table.table-striped
@@ -26,7 +27,7 @@
             %td= format_time(order.ends) unless order.ends.nil?
             %td= truncate(order.note)
             %td= link_to "Beenden", finish_order_path(order),
-              confirm: "Willst Du wirklich die Bestellung \"#{order.name}\" beenden?\nEs gibt kein zurück.",
+              confirm: "Willst Du wirklich die Bestellung \"#{order.name}\" beenden? Es gibt kein zurück.",
               method: :post, class: 'btn btn-small btn-success'
 
             %td
