@@ -17,14 +17,13 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(params[:task])
-    if @task.errors.empty?
-      @task.save
+    if @task.save
       flash[:notice] = "Aufgabe wurde erstellt"
       if @task.workgroup
         redirect_to :action => "workgroup", :id => @task.workgroup
       else
         redirect_to :action => "index"
-      end          
+      end
     else
       render :template => "tasks/new"
     end
