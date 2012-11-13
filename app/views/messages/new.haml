@@ -17,7 +17,7 @@
         %small{:style => "color:grey"}
           Eventuell musst Du Dich dem Verteiler erst bekannt machen.
           %br/
-          - if Foodsoft.config[:mailing_list_unsubscribe].blank?
+          - if Foodsoft.config[:mailing_list_subscribe].blank?
             Erklärungen zum Verteiler findest Du im
             = link_to 'Wiki (Abschnitt Mailing-Liste)', wiki_page_path('MailingListe')
           - else
