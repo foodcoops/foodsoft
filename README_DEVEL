@@ -38,12 +38,11 @@ Edit app_config.yml to suit your needs or just keep the defaults for now.
 
 (4) Secret Token
 -------------------
-The user session are stored in cookies. Do avoid misusing the cookies and its sensitive information, rails
-will encrypt it with a token. So copy the config file
+The user session is stored in a cookie. To avoid misusing the cookies and its sensitive information, rails will encrypt it with a token. So copy the config file
 
    cp config/environment.rb.SAMPLE config/environment.rb
 
-and modify the token "config.action_controller.session"!!!
+and modify the token "config.action_controller.session"!
 
 
 (5) Required ruby and gems
