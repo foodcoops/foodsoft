@@ -32,12 +32,6 @@
             :method => :get do |
           = text_field_tag :import_query, params['import_query'], :size => 10
           = submit_tag "Suchen"
-          - if @supplier.shared_supplier.lists
-            Suche in folgenden Listen:
-            - @supplier.shared_supplier.lists.each do |token, name|
-              = check_box_tag "lists[#{token}]", "1", true
-              = name
-          |
           Nur aus der Region:
           = check_box_tag "regional", "1", false
         #search_results

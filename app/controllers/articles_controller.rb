@@ -268,8 +268,6 @@ class ArticlesController < ApplicationController
     conditions << "supplier_id = #{@supplier.shared_supplier.id}"
     # check for keywords
     conditions << params[:import_query].split(' ').collect { |keyword| "name LIKE '%#{keyword}%'" }.join(' AND ') unless params[:import_query].blank?
-    # check for selected lists
-    conditions << "(" + params[:lists].collect {|list| "list = '#{list[0]}'"}.join(" OR ") + ")" if params[:lists]
     # check for regional articles
     conditions << "origin = 'REG'" if params[:regional]
       
