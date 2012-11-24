@@ -5,6 +5,8 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.dom_class = 'nav'
 
+    primary.item :dashboard_nav_item, 'Dashboard', root_path(anchor: '')
+
     primary.item :foodcoop, 'Foodcoop', '#' do |subnav|
       subnav.item :members, 'Mitglieder', foodcoop_users_path, id: nil
       subnav.item :workgroups, 'Arbeitsgruppen', foodcoop_workgroups_path, id: nil
@@ -43,19 +45,6 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :users, 'Benutzerinnen', admin_users_path, id: nil
       subnav.item :ordergroups, 'Bestellgruppen', admin_ordergroups_path, id: nil
       subnav.item :workgroups, 'Arbeitsgruppen', admin_workgroups_path, id: nil
-    end
-
-    primary.item :divider, '', '#', class: 'divider'
-
-    if FoodsoftConfig[:homepage]
-      primary.item :homepage, FoodsoftConfig[:name], FoodsoftConfig[:homepage]
-    end
-    primary.item :help, 'Hilfe', 'https://github.com/bennibu/foodsoft/wiki/Doku', id: nil
-    primary.item :feedback, 'Feedback', new_feedback_path, title: "Fehler gefunden? Vorschlag? Idee? Kritik?", id: nil
-    primary.item :nick, current_user.nick, '#' do |subnav|
-      subnav.item :edit_profile, 'Profil bearbeiten', my_profile_path, title: 'Profil bearbeiten', id: nil
-      subnav.item :my_ordergroup, 'Meine Bestellgruppe', my_ordergroup_path, id: nil
-      subnav.item :logout, 'Abmelden', logout_path, id: nil
     end
   end
 

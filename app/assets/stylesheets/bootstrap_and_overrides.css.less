@@ -1,6 +1,6 @@
 @import "twitter/bootstrap/bootstrap";
 body {
-  padding-top: 60px;
+  padding-top: 10px;
 }
 
 @import "twitter/bootstrap/responsive";
@@ -36,6 +36,25 @@ body {
 @import "datepicker";
 
 // Custom styles
+
+@mainRedColor: #ED0606;
+
+.logo {
+  margin: 10px 0 0 30px;
+  float: left;
+  font-size: 35px;
+  font-weight: bold;
+  display: block;
+  color: @mainRedColor;
+
+  span {
+    padding: 2px 4px;
+    color: #ffffff;
+    background-color: @mainRedColor;
+  }
+}
+
+
 section {
   padding-bottom: 30px;
   margin-bottom: 30px;
