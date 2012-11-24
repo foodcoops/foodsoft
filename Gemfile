@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "rails", '3.2.8'
+gem "rails", '3.2.9'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,6 +33,7 @@ gem 'twitter-bootstrap-rails'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 gem 'meta_search'
+gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git' # Use this instead of rubygem
 
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'
