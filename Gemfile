@@ -37,3 +37,7 @@ gem 'meta_search'
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'
 end
+
+group :development do
+  gem 'sqlite3'
+end
