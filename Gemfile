@@ -35,6 +35,7 @@ gem 'simple-navigation-bootstrap'
 gem 'meta_search'
 gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git' # Use this instead of rubygem
 gem 'acts_as_tree'
+gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git'
 
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'
