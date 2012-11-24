@@ -42,6 +42,8 @@ GEM
     activesupport (3.2.9)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    acts_as_tree (1.2.0)
+      activerecord (>= 3.0.0)
     arel (3.0.2)
     builder (3.0.4)
     client_side_validations (3.1.4)
@@ -187,6 +189,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_tree
   acts_as_versioned!
   client_side_validations
   coffee-rails (~> 3.2.1)

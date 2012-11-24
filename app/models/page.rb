@@ -1,9 +1,11 @@
 class Page < ActiveRecord::Base
-
+  include ActsAsTree
+  
   belongs_to :user, :foreign_key => 'updated_by'
 
   acts_as_versioned version_column: :lock_version, limit: 20
   self.non_versioned_columns += %w(permalink created_at title)
+
   acts_as_tree :order => "title"
 
   attr_accessor :old_title # Save title to create redirect page when editing title
