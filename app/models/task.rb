@@ -2,6 +2,7 @@ class Task < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
   belongs_to :workgroup
+  belongs_to :periodic_task_group, :inverse_of => :tasks
 
   scope :non_group, where(workgroup_id: nil, done: false)
   scope :done, where(done: true)
@@ -45,6 +46,14 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def periodic
+    not periodic_task_group.nil?
+  end
+
+  def periodic=(p)
+    self.periodic_task_group = PeriodicTaskGroup.new if p == "1"
+  end  
+  
   def is_assigned?(user)
     self.assignments.detect {|ass| ass.user_id == user.id }
   end

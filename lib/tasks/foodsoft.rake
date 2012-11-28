@@ -49,4 +49,15 @@ namespace :foodsoft do
       end
     end
   end
+
+  desc "Create upcoming periodic tasks"
+  task :create_upcoming_periodic_tasks => :environment do
+    for tg in PeriodicTaskGroup.all
+      if tg.has_next_task?
+        while tg.next_task_date.nil? or tg.next_task_date < Date.today + 30
+          tg.create_next_task
+        end
+      end
+    end
+  end
 end
