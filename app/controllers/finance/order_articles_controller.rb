@@ -26,7 +26,7 @@ class Finance::OrderArticlesController < ApplicationController
     @order = Order.find(params[:order_id])
     @order_article = OrderArticle.find(params[:id])
     begin
-      @order_article.update_article_and_price!(params[:article], params[:price], params[:order_article])
+      @order_article.update_article_and_price!(params[:article], params[:article_price], params[:order_article])
     rescue
       render action: :edit
     end

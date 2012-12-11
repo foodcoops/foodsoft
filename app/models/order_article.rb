@@ -1,6 +1,8 @@
 # An OrderArticle represents a single Article that is part of an Order.
 class OrderArticle < ActiveRecord::Base
 
+  attr_reader :update_current_price
+
   belongs_to :order
   belongs_to :article
   belongs_to :article_price
@@ -82,24 +84,33 @@ class OrderArticle < ActiveRecord::Base
   # Updates order_article and belongings during balancing process
   def update_article_and_price!(article_attributes, price_attributes, order_article_attributes)
     OrderArticle.transaction do
+      # Updates self
+      self.update_attributes!(order_article_attributes)
+
       # Updates article
       article.update_attributes!(article_attributes)
 
+      # Updates article_price belonging to current order article
       article_price.attributes = price_attributes
       if article_price.changed?
-        # Creates a new article_price if neccessary
-        price = build_article_price(price_attributes)
-        price.created_at = order.ends
-        price.save!
+        # Updates also price attributes of article if update_current_price is selected
+        if update_current_price
+          article.update_attributes!(price_attributes)
+          self.article_price = article.article_prices.first # Assign new created article price to order article
+        else
+          # Creates a new article_price if neccessary
+          # Set created_at timestamp to order ends, to make sure the current article price isn't changed
+          create_article_price!(price_attributes.merge(created_at: order.ends)) and save
+        end
 
         # Updates ordergroup values
-        group_order_articles.each { |goa| goa.group_order.update_price! }
+        update_ordergroup_prices
       end
-
-      # Updates units_to_order
-      self.attributes = order_article_attributes
-      self.save!
     end
+  end
+
+  def update_current_price=(value)
+    @update_current_price = (value == true or value == '1') ?  true : false
   end
 
   # Units missing for the next full unit_quantity of the article
@@ -123,10 +134,10 @@ class OrderArticle < ActiveRecord::Base
     end
   end
 
-  #TODO: Delayed job maybe??
   def update_ordergroup_prices
     group_order_articles.each { |goa| goa.group_order.update_price! }
   end
+  handle_asynchronously :update_ordergroup_prices
 
 end
 

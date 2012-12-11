@@ -284,6 +284,11 @@ de:
         amount: 'Betrag'
         phone: "Telefon"
         user_tokens: 'Mitglieder'
+        price: 'Preis (netto)'
+        unit_quantity: 'Gebindegröße'
+        order_number: 'Bestellnummer'
+        tax: 'MwSt'
+        deposit: 'Pfand'
       user:
         nick: "Benutzerinnenname"
         first_name: "Vorname"
@@ -342,11 +347,6 @@ de:
         unit: 'Einheit'
         note: 'Notiz'
         article_category: 'Kategorie'
-        price: 'Preis (netto)'
-        unit_quantity: 'Gebindegröße'
-        order_number: 'Bestellnummer'
-        tax: 'MwSt'
-        deposit: 'Pfand'
       stock_article:
         supplier: 'Lieferant'
       delivery:
@@ -373,7 +373,7 @@ de:
         deposit_credit: Pfand gutgeschrieben
       order_article:
         units_to_order: Menge
-
+        update_current_price: Globalen Preis aktualisieren
 
     hints:
       tax: 'In Prozent, Standard sind 7,0'
@@ -390,3 +390,4 @@ de:
         private: Nachricht erscheint nicht im Foodsoft Posteingang
       order_article:
         units_to_order: Anzahl gelieferter Gebinde
+        update_current_price: Ändert auch den Preis für aktuelle Bestellungen
