@@ -4,21 +4,10 @@ class ArticlePrice < ActiveRecord::Base
   has_many :order_articles
 
   validates_presence_of :price, :tax, :deposit, :unit_quantity
-  
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def price=(price)
-    self[:price] = String.delocalized_decimal(price)
-  end
+  validates_numericality_of :price, :unit_quantity, :greater_than => 0
+  validates_numericality_of :deposit, :tax
 
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def tax=(tax)
-    self[:tax] = String.delocalized_decimal(tax)
-  end
-
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def deposit=(deposit)
-    self[:deposit] = String.delocalized_decimal(deposit)
-  end
+  localize_input_of :price, :tax, :deposit
 
   # The financial gross, net plus tax and deposit.
   def gross_price
