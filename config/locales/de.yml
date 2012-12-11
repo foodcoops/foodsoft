@@ -21,6 +21,11 @@ de:
       previous: "&lsaquo;"
       next: "&rsaquo;"
       truncate: "..."
+
+  controller:
+    article_categories:
+      destroy:
+        error: 'Kategorie konnte nicht gelöscht werden: %{message}'
   date:
     abbr_day_names:
     - So
@@ -216,6 +221,7 @@ de:
   activerecord:
     errors:
       <<: *errors
+      has_many_left: 'ist noch mit einem/r %{collection} verknüpft!'
     models:
       article: Artikel
       supplier: Lieferant

@@ -12,6 +12,12 @@ class ArticleCategoriesController < ApplicationController
     update!(:notice => "Die Kategorie wurde aktualisiert") { article_categories_path }
   end
 
+  def destroy
+    destroy!
+  rescue => error
+    redirect_to article_categories_path, alert: t('controller.article_categories.destroy.error', message: error.message)
+  end
+
   protected
 
   def collection
