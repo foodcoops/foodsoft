@@ -11,7 +11,7 @@ class Task < ActiveRecord::Base
   attr_protected :users
   
   validates_length_of :name, :minimum => 3
-  validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 1
+  validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than_or_equal_to => 1
 
   after_save :update_ordergroup_stats
   
@@ -29,6 +29,8 @@ class Task < ActiveRecord::Base
   
   # extracts nicknames from a comma seperated string 
   # and makes the users responsible for the task
+  # TODO: check for uniqueness
+  # TODO: check for maximal number of users
   def user_list=(string)
     @user_list = string.split(%r{,\s*})
     new_users = @user_list - users.collect(&:nick)

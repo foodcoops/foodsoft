@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120622094337) do
+ActiveRecord::Schema.define(:version => 20121112093327) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -234,6 +234,7 @@ ActiveRecord::Schema.define(:version => 20120622094337) do
     t.integer  "lock_version",                                     :default => 0,      :null => false
     t.integer  "updated_by_user_id"
     t.decimal  "foodcoop_result",    :precision => 8, :scale => 2
+    t.integer  "created_by_user_id"
   end
 
   add_index "orders", ["state"], :name => "index_orders_on_state"

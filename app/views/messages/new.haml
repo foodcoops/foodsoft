@@ -17,8 +17,12 @@
         %small{:style => "color:grey"}
           Eventuell musst Du Dich dem Verteiler erst bekannt machen.
           %br/
-          z.b. mit einer Mail an
-          = mail_to Foodsoft.config[:mailing_list_subscribe]
+          - if Foodsoft.config[:mailing_list_subscribe].blank?
+            Erklärungen zum Verteiler findest Du im
+            = link_to 'Wiki (Abschnitt Mailing-Liste)', wiki_page_path('MailingListe')
+          - else
+            z.b. mit einer Mail an
+            = mail_to Foodsoft.config[:mailing_list_subscribe]
       %table#recipients
         %tr
           %td

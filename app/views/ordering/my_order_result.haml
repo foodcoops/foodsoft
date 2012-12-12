@@ -33,6 +33,9 @@
               Notiz:
               =h @order.note
           %p
+            Erstellt von:
+            =h link_to_user_message_if_valid(@order.created_by)
+          %p
             Ende:
             %b=h format_time(@order.ends)
           %p

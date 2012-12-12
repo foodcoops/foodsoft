@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :tasks, :through => :assignments
   has_many :send_messages, :class_name => "Message", :foreign_key => "sender_id"
   has_many :pages, :foreign_key => 'updated_by'
+  has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
   
   attr_accessor :password, :setting_attributes
 
