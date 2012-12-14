@@ -6,6 +6,7 @@ nbproject/
 config/environments/development.rb
 capfile
 *.swp
+*~
 public/**/*_cached.*
 .idea
 .get-dump.yml

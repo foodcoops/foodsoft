@@ -16,6 +16,8 @@
     - unless @order.note.blank?
       %dt Notiz
       %dd= @order.note
+    %dt Erstellt von
+    %dd= link_to_user_message_if_valid(@order.created_by)
     %dt Ende
     %dd= format_time(@order.ends)
     - unless @order.stockit? or @order.supplier.min_order_quantity.blank?

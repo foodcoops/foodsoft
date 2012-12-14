@@ -8,17 +8,17 @@
   %dl.dl-horizontal
     %dt Lieferantin
     %dd= @order.name
-    %dt Notiz
-    %dd= @order.note
+    - if @note.present?
+      %dt Notiz
+      %dd= @order.note
+    %dt Erstellt von
+    %dd= link_to_user_message_if_valid(@order.created_by)
     %dt Beginn
     %dd= format_time(@order.starts)
     %dt Ende
     %dd= format_time(@order.ends)
     %dt Gruppenbestellungen:
-    %dd
-      = @order.group_orders.count
-      = "[#{@order.group_orders.includes(:ordergroup).all.collect{|g| g.ordergroup.name}.join(', ')}]"
-      
+    %dd #{@order.group_orders.count} (#{@order.group_orders.includes(:ordergroup).all.map {|g| g.ordergroup.name}.join(', ')})
     %dt Netto/Bruttosumme aller Artikel:
     %dd= "#{number_to_currency(@order.sum(:net))} / #{number_to_currency(@order.sum(:gross))}"
     %dt Bestellte Artikel:

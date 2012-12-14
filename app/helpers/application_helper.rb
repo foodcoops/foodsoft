@@ -138,6 +138,12 @@ module ApplicationHelper
     link_to h(address), "http://maps.google.de/?q=#{h(address)}", :title => "Show it on google maps",
       :target => "_blank"
   end
+  
+  # offers a link for writing message to user
+  # checks for nil (useful for relations)
+  def link_to_user_message_if_valid(user)
+    user.nil? ? '??' : ( link_to user.nick, user_message_path(user), :title => 'Nachricht schreiben' )
+  end
 
   def bootstrap_flash
     flash_messages = []

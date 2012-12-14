@@ -37,8 +37,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     @task.attributes=(params[:task])
-    if @task.errors.empty?
-      @task.save
+    if @task.errors.empty? && @task.save
       flash[:notice] = "Aufgabe wurde aktualisiert"
       if @task.workgroup
         redirect_to workgroup_tasks_url(workgroup_id: @task.workgroup_id)

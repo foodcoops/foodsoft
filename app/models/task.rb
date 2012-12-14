@@ -59,9 +59,10 @@ class Task < ActiveRecord::Base
 
   # Get users from comma seperated ids
   # and makes the users responsible for the task
+  # TODO: check for maximal number of users
   def user_list=(ids)
     list = ids.split(",")
-    new_users = list - users.collect(&:id)
+    new_users = (list - users.collect(&:id)).uniq
     old_users = users.reject { |user| list.include?(user.id) }
     
     logger.debug "[debug] New users: #{new_users}"

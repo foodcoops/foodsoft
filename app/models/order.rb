@@ -12,13 +12,17 @@ class Order < ActiveRecord::Base
   has_many :comments, :class_name => "OrderComment", :order => "created_at"
   has_many :stock_changes
   belongs_to :supplier
-  belongs_to :updated_by, :class_name => "User", :foreign_key => "updated_by_user_id"
+  belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
+  belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
   # Validations
   validates_presence_of :starts
   validate :starts_before_ends, :include_articles
 
   # Callbacks
+  before_create do |order|
+    order.created_by = User.current_user
+  end
   after_update :update_price_of_group_orders
   after_save :save_order_articles
 
