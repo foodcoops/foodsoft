@@ -62,6 +62,7 @@ class Ordergroup < Group
     # Get group_order.price for every finished order in this period
     orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', time).sum(:price)
 
+    @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
   end
 

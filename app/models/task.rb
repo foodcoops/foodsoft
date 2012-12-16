@@ -99,7 +99,7 @@ class Task < ActiveRecord::Base
 
   def update_ordergroup_stats
     if done
-      users.each { |u| u.ordergroup.update_stats! if u.ordergroup }
+      Ordergroup.joins(:users).where(users: {id: user_ids}).each(&:update_stats!)
     end
   end
 end
