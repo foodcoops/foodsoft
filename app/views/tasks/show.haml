@@ -5,10 +5,12 @@
   %dl.dl-horizontal
     %dt Name
     %dd= @task.name
-    %dt Beschreibung
-    %dd= simple_format(@task.description)
-    %dt Fälligkeitsdatum
-    %dd= format_date(@task.due_date)
+    - if @task.description.present?
+      %dt Beschreibung
+      %dd= simple_format(@task.description)
+    - if @task.due_date.present?
+      %dt Fälligkeitsdatum
+      %dd= format_date(@task.due_date)
     %dt Dauer in Stunden
     %dd= @task.duration
     %dt Verantwortliche Menschen

@@ -6,6 +6,9 @@
 # * account_balance (decimal)
 # * account_updated (datetime)
 class Ordergroup < Group
+
+  APPLE_MONTH_AGO = 6                 # How many month back we will count tasks and orders sum
+
   acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
   serialize :stats
 
@@ -56,11 +59,10 @@ class Ordergroup < Group
   end
 
   def update_stats!
-    time = 6.month.ago
     # Get hours for every job of each user in period
-    jobs = users.sum { |u| u.tasks.done.sum(:duration, :conditions => ["updated_on > ?", time]) }
+    jobs = users.sum { |u| u.tasks.done.sum(:duration, :conditions => ["updated_on > ?", APPLE_MONTH_AGO.month.ago]) }
     # Get group_order.price for every finished order in this period
-    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', time).sum(:price)
+    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).sum(:price)
 
     @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
@@ -79,12 +81,13 @@ class Ordergroup < Group
   # If the the option stop_ordering_under is set, the ordergroup is only allowed to participate in an order,
   # when the apples value is above the configured amount.
   # The restriction can be deactivated for each ordergroup.
-  # Only ordergroups, which have participated in more than 5 order are affected
+  # Only ordergroups, which have participated in more than 5 orders in total and more than 2 orders in apple time period
   def not_enough_apples?
     FoodsoftConfig[:stop_ordering_under].present? and
         !ignore_apple_restriction and
         apples < FoodsoftConfig[:stop_ordering_under] and
-        group_orders.count > 5
+        group_orders.count > 5 and
+        group_orders.joins(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).count > 2
   end
 
   # Global average

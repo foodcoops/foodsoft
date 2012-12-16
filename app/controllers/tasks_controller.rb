@@ -3,8 +3,8 @@ class TasksController < ApplicationController
   #auto_complete_for :user, :nick
   
   def index
-    @non_group_tasks = Task.non_group
-    @groups = Workgroup.all
+    @non_group_tasks = Task.non_group.includes(assignments: :user)
+    @groups = Workgroup.includes(open_tasks: {assignments: :user})
   end
   
   def user
@@ -50,7 +50,12 @@ class TasksController < ApplicationController
   end
   
   def destroy
-    Task.find(params[:id]).destroy
+    task = Task.find(params[:id])
+    # Save user_ids to update apple statistics after destroy
+    user_ids = task.user_ids
+    task.destroy
+    task.update_ordergroup_stats(user_ids)
+
     redirect_to tasks_url, :notice => "Aufgabe wurde gelöscht"
   end
   
@@ -79,7 +84,7 @@ class TasksController < ApplicationController
   
   # Shows all tasks, which are already done
   def archive
-    @tasks = Task.done.page(params[:page]).per(@per_page)
+    @tasks = Task.done.page(params[:page]).per(@per_page).order('tasks.updated_on DESC').includes(assignments: :user)
   end
   
   # shows workgroup (normal group) to edit weekly_tasks_template

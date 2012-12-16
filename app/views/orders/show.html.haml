@@ -28,15 +28,15 @@
     .form-actions
       - if @order.open?
         = link_to "Bearbeiten", edit_order_path(@order), class: 'btn'
-        = link_to 'Beenden!', finish_order_path(@order), method: :post,
-          confirm: "Willst Du wirklich die Bestellung beenden?\nEs gibt kein zurück..", class: 'btn'
+        = link_to 'Beenden!', finish_order_path(@order), method: :post, class: 'btn btn-success',
+          confirm: "Willst Du wirklich die Bestellung beenden?\nEs gibt kein zurück.."
       - unless @order.closed?
         = link_to "Löschen", @order, confirm: "Willst du wirklich die Bestellung löschen?", method: :delete,
           class: 'btn btn-danger'
 
 - unless @order.open?
   %ul.nav.nav-pills
-    %li.active= update_articles_link(@order, "Artikelübersicht", :default)
+    %li= update_articles_link(@order, "Artikelübersicht", :default)
     %li= update_articles_link(@order, "Sortiert nach Gruppen", :groups)
     %li= update_articles_link(@order, "Sortiert nach Artikeln", :articles)
     %li= link_to 'Kommentare', '#comments'

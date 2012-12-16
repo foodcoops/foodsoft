@@ -9,9 +9,8 @@ module TasksHelper
   # generate colored number of still required users
   def highlighted_required_users(task)
     unless task.enough_users_assigned?
-      still_required = task.required_users - task.assignments.select { |ass| ass.accepted }.size
-      content_tag :span, still_required, class: 'badge badge-important',
-                  title: "Es fehlen #{still_required} Mitstreiterinnen!"
+      content_tag :span, task.still_required_users, class: 'badge badge-important',
+                  title: "Es fehlen #{task.still_required_users} Mitstreiterinnen!"
     end
   end
 end

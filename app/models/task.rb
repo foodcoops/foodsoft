@@ -37,11 +37,12 @@ class Task < ActiveRecord::Base
         where(["tasks.due_date >= ? AND tasks.due_date <= ?", Time.now, number.days.from_now])
   end
 
-  # count tasks with no responsible person
+  # count tasks with not enough responsible people
   # tasks for groups the user is not a member are ignored
   def self.unassigned_tasks_for(user)
-    Task.undone.where(assigned: false).includes(:workgroup).all.select do |task|
-      !task.workgroup or user.member_of?(task.workgroup)
+    undone.includes(:assignments, workgroup: :memberships).select do |task|
+      !task.enough_users_assigned? and
+          (!task.workgroup or task.workgroup.memberships.detect { |m| m.user_id == user.id })
     end
   end
 
@@ -54,7 +55,11 @@ class Task < ActiveRecord::Base
   end
   
   def enough_users_assigned?
-    assignments.find_all_by_accepted(true).size >= required_users ? true : false
+    assignments.to_a.count(&:accepted) >= required_users ? true : false
+  end
+
+  def still_required_users
+    required_users - assignments.to_a.count(&:accepted)
   end
 
   # Get users from comma seperated ids
@@ -95,12 +100,8 @@ class Task < ActiveRecord::Base
     @user_list ||= users.collect(&:id).join(", ")
   end
 
-  private
-
-  def update_ordergroup_stats
-    if done
-      Ordergroup.joins(:users).where(users: {id: user_ids}).each(&:update_stats!)
-    end
+  def update_ordergroup_stats(user_ids = self.user_ids)
+    Ordergroup.joins(:users).where(users: {id: user_ids}).each(&:update_stats!)
   end
 end
 
