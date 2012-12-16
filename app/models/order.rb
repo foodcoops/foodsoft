@@ -1,7 +1,6 @@
 # encoding: utf-8
 #
 class Order < ActiveRecord::Base
-  extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
 
   # Associations
   has_many :order_articles, :dependent => :destroy
@@ -86,11 +85,11 @@ class Order < ActiveRecord::Base
   # The array has the following form:
   # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
   def articles_grouped_by_category
-    order_articles.includes(:article, :article_price).order('articles.name').
+    order_articles.includes([:article_price, :group_order_articles, :article => :article_category]).
+        order('articles.name').
         group_by { |a|  a.article.article_category.name }.
         sort { |a, b| a[0] <=> b[0] }
   end
-  memoize :articles_grouped_by_category
 
   def articles_sort_by_category
     order_articles.all(:include => [:article], :order => 'articles.name').sort do |a,b|

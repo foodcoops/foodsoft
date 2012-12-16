@@ -25,4 +25,15 @@ module GroupOrdersHelper
       'ignored'
     end
   end
+
+  def get_order_results(order_article, group_order_id)
+    goa = order_article.group_order_articles.detect { |goa| goa.group_order_id == group_order_id }
+    quantity, tolerance, result, sub_total = if goa.present?
+      [goa.quantity, goa.tolerance, goa.result, goa.total_price(order_article)]
+    else
+      [0, 0, 0, 0]
+    end
+
+    {group_order_article: goa, quantity: quantity, tolerance: tolerance, result: result, sub_total: sub_total}
+  end
 end
