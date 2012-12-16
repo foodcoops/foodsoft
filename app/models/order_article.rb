@@ -137,7 +137,6 @@ class OrderArticle < ActiveRecord::Base
   def update_ordergroup_prices
     group_order_articles.each { |goa| goa.group_order.update_price! }
   end
-  handle_asynchronously :update_ordergroup_prices
 
 end
 

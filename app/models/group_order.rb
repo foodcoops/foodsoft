@@ -76,7 +76,7 @@ class GroupOrder < ActiveRecord::Base
 
   # Updates the "price" attribute.
   def update_price!
-    total = group_order_articles.includes(:order_article => :article).all.map(&:total_price).sum
+    total = group_order_articles.includes(:order_article => [:article, :article_price]).to_a.sum(&:total_price)
     update_attribute(:price, total)
   end
 

@@ -164,10 +164,10 @@ class Order < ActiveRecord::Base
         end
 
         # Update GroupOrder prices
-        group_orders.each { |go| go.update_price! }
+        group_orders.each(&:update_price!)
 
         # Stats
-        ordergroups.each { |o| o.update_stats! }
+        ordergroups.each(&:update_stats!)
 
         # Notifications
         UserNotifier.delay.finished_order(self.id)
