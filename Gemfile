@@ -44,4 +44,12 @@ end
 
 group :development do
   gem 'sqlite3'
+
+  # Better error output
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  # Re-enable rails benchmarker/profiler
+  gem 'ruby-prof'
+  gem 'test-unit'
 end
