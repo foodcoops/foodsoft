@@ -28,7 +28,7 @@ class Order < ActiveRecord::Base
 
   # Finders
   scope :open, where(state: 'open').order('ends DESC')
-  scope :finished, where("state = 'finished' OR state = 'closed'").order('ends DESC')
+  scope :finished, where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC')
   scope :finished_not_closed, where(state: 'finished').order('ends DESC')
   scope :closed, where(state: 'closed').order('ends DESC')
   scope :stockit, where(supplier_id: 0).order('ends DESC')

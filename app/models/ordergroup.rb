@@ -57,8 +57,11 @@ class Ordergroup < Group
 
   def update_stats!
     time = 6.month.ago
-    jobs = users.collect { |u| u.tasks.done.sum('duration', :conditions => ["updated_on > ?", time]) }.sum
-    orders_sum = group_orders.select { |go| !go.order.ends.nil? && go.order.ends > time }.collect(&:price).sum
+    # Get hours for every job of each user in period
+    jobs = users.sum { |u| u.tasks.done.sum(:duration, :conditions => ["updated_on > ?", time]) }
+    # Get group_order.price for every finished order in this period
+    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', time).sum(:price)
+
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
   end
 
