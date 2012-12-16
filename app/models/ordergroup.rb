@@ -88,8 +88,8 @@ class Ordergroup < Group
 
   # Global average
   def self.avg_jobs_per_euro
-    stats = Ordergroup.all.collect(&:stats)
-    stats.collect {|s| s[:jobs_size].to_f }.sum / stats.collect {|s| s[:orders_sum].to_f }.sum
+    stats = Ordergroup.pluck(:stats)
+    stats.sum {|s| s[:jobs_size].to_f } / stats.sum {|s| s[:orders_sum].to_f }
   end
   
   private
