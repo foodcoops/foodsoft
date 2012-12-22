@@ -8,32 +8,33 @@
       setStockit(#{@order.stockit?});
     });
 
-- title "Bestellen"
+- title "Bestellen", false
 
-.well.pull-left
-  %h2= @order.name
-  %dl.dl-horizontal
-    - unless @order.note.blank?
-      %dt Notiz
-      %dd= @order.note
-    %dt Erstellt von
-    %dd= link_to_user_message_if_valid(@order.created_by)
-    %dt Ende
-    %dd= format_time(@order.ends)
-    - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
-      %dt Mindestbestellmenge
-      %dd= @order.supplier.min_order_quantity
-    %dt Gesamtbestellmenge bisher:
-    %dd= number_to_currency @order.sum
-    %dt Zuletzt bestellt
-    %dd
-      = @group_order.updated_by.nick if @group_order.updated_by
-      (#{format_time(@group_order.updated_on)})
-    %dt Guthaben
-    %dd= number_to_currency(@ordering_data[:available_funds])
+.row-fluid
+  .well.pull-left
+    %h2= @order.name
+    %dl.dl-horizontal
+      - unless @order.note.blank?
+        %dt Notiz
+        %dd= @order.note
+      %dt Erstellt von
+      %dd= link_to_user_message_if_valid(@order.created_by)
+      %dt Ende
+      %dd= format_time(@order.ends)
+      - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
+        %dt Mindestbestellmenge
+        %dd= @order.supplier.min_order_quantity
+      %dt Gesamtbestellmenge bisher:
+      %dd= number_to_currency @order.sum
+      %dt Zuletzt bestellt
+      %dd
+        = @group_order.updated_by.nick if @group_order.updated_by
+        (#{format_time(@group_order.updated_on)})
+      %dt Guthaben
+      %dd= number_to_currency(@ordering_data[:available_funds])
 
-.well.pull-right
-  = render 'switch_order', current_order: @order
+  .well.pull-right
+    = render 'switch_order', current_order: @order
 
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
