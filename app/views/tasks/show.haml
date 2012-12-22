@@ -20,6 +20,10 @@
       - if @task.workgroup
         = link_to @task.workgroup.name, workgroup_tasks_path(workgroup_id: @task.workgroup_id)
 %p
+  - if !@task.is_accepted?(current_user)
+    = link_to "Aufgabe übernehmen", accept_task_path(@task), method: :post, class: 'btn btn-success'
+    - if @task.is_assigned?(current_user)
+      = link_to "Aufgabe ablehnen", reject_task_path(@task), method: :post, class: 'btn'
   - unless @task.done?
     = link_to 'Als erledigt markieren', set_done_task_path(@task), method: :post, class: 'btn'
   = link_to "Bearbeiten", edit_task_path(@task), class: 'btn'
