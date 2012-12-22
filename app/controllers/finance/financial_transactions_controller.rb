@@ -19,10 +19,11 @@ class Finance::FinancialTransactionsController < ApplicationController
       sort = "created_on DESC"
     end
 
-    @financial_transactions = @ordergroup.financial_transactions.unscoped.order(sort)
-    @financial_transactions = @financial_transactions.where('note LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
-
-    @financial_transactions = @financial_transactions.page(params[:page]).per(@per_page)
+    @financial_transactions = @ordergroup.financial_transactions.includes(:user).order(sort).
+        page(params[:page]).per(@per_page)
+    if params[:query].present?
+      @financial_transactions = @financial_transactions.where('note LIKE ?', "%#{params[:query]}%")
+    end
   end
 
   def new
