@@ -5,8 +5,7 @@ die Bestellung für "#{@order.name}" wurde am #{I18n.l @order.ends} von #{@order
 Für Euch wurden die folgenden Artikel bestellt:
 - for group_order_article in @group_order.group_order_articles.ordered.all(:include => :order_article)
 - article = group_order_article.order_article.article
-  = article.name
-  \:	#{group_order_article.result} x #{article.unit} = #{group_order_article.result * article.fc_price}
+  #{article.name}:	#{group_order_article.result} x #{article.unit} = #{group_order_article.result * article.fc_price}
 Gesamtpreis: #{@group_order.price}
 
 Bestellung online einsehen: #{group_order_url(@group_order)}

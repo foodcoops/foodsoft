@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
 
   # Renders the "inbox" action.
   def index
-    @messages = Message.public.page(params[:page]).per(@per_page).order('created_at DESC')
+    @messages = Message.public.page(params[:page]).per(@per_page).order('created_at DESC').includes(:sender)
   end
 
   # Creates a new message object.
@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
   def create
     @message = @current_user.send_messages.new(params[:message])
     if @message.save
-      Message.delay.deliver(@message.id)
+      Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'message_deliver', @message.id)
       redirect_to messages_url, :notice => "Nachricht ist gespeichert und wird versendet."
     else
       render :action => 'new'

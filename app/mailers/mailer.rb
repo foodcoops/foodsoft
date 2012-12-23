@@ -10,6 +10,7 @@ class Mailer < ActionMailer::Base
   
   # Sends an email copy of the given internal foodsoft message.
   def foodsoft_message(message, recipient)
+    set_foodcoop_scope
     @message = message
 
     mail subject: "[#{FoodsoftConfig[:name]}] " + message.subject,
@@ -19,9 +20,9 @@ class Mailer < ActionMailer::Base
 
   # Sends an email with instructions on how to reset the password.
   # Assumes user.setResetPasswordToken has been successfully called already.
-  def reset_password(foodcoop, user_id)
-    set_foodcoop_scope(foodcoop)
-    @user = User.find(user_id)
+  def reset_password(user)
+    set_foodcoop_scope
+    @user = user
     @link = new_password_url(id: @user.id, token: @user.reset_password_token)
 
     mail :to => @user.email,
@@ -29,9 +30,9 @@ class Mailer < ActionMailer::Base
   end
     
   # Sends an invite email.
-  def invite(foodcoop, invite_id)
-    set_foodcoop_scope(foodcoop)
-    @invite = Invite.find(invite_id)
+  def invite(invite)
+    set_foodcoop_scope
+    @invite = invite
     @link = accept_invitation_url(token: @invite.token)
 
     mail :to => @invite.email,
@@ -40,6 +41,7 @@ class Mailer < ActionMailer::Base
 
   # Notify user of upcoming task.
   def upcoming_tasks(user, task)
+    set_foodcoop_scope
     @user = user
     @task = task
 
@@ -49,6 +51,7 @@ class Mailer < ActionMailer::Base
 
   # Sends order result for specific Ordergroup
   def order_result(user, group_order)
+    set_foodcoop_scope
     @order        = group_order.order
     @group_order  = group_order
 
@@ -58,6 +61,7 @@ class Mailer < ActionMailer::Base
 
   # Notify user if account balance is less than zero
   def negative_balance(user,transaction)
+    set_foodcoop_scope
     @group        = user.ordergroup
     @transaction  = transaction
 
@@ -65,8 +69,8 @@ class Mailer < ActionMailer::Base
          :subject => "[#{FoodsoftConfig[:name]}] Gruppenkonto im Minus"
   end
 
-  def feedback(foodcoop, user, feedback)
-    set_foodcoop_scope(foodcoop)
+  def feedback(user, feedback)
+    set_foodcoop_scope
     @user = user
     @feedback = feedback
 
@@ -78,6 +82,7 @@ class Mailer < ActionMailer::Base
   end
 
   def not_enough_users_assigned(task, user)
+    set_foodcoop_scope
     @task = task
     @user = user
 
@@ -87,7 +92,7 @@ class Mailer < ActionMailer::Base
 
   private
 
-  def set_foodcoop_scope(foodcoop)
+  def set_foodcoop_scope(foodcoop = FoodsoftConfig.scope)
     ActionMailer::Base.default_url_options[:foodcoop] = foodcoop
   end
   

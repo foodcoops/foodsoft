@@ -74,11 +74,23 @@ Start the WEBrick server to try it out:
 
 (8) (optional) Get background jobs done
 ---------------------------------------
-We use for time intensive tasks a background job queue, at the moment delayed job. To deliver mails etc you have to
-start the workers:
+We use for time intensive tasks a background job queue, at the moment resque with redis as key/value store.
+Install redis (in ubuntu the package redis-server works out of the box) and start the resque worker with:
 
-    rake jobs:work
+    rake resque:work QUEUE=foodsoft_notifier
 
-or as a daemon process in the background
+To have look on the current queue, failed jobs etc start the resque server with
 
-    scrip/delayed_job start # and stop
+    resque-web
+
+
+(9) (optional) View mails in browser instead in your logs
+---------------------------------------------------------
+We use mailcatcher in development mode to view all delivered mails in a browser interface.
+Just install mailcatcher with gem install mailcatcher and start the service with
+
+    mailcatcher
+
+From now on you have a smpt server listening on 1025. To see the emails go to
+
+    http://localhost:1080

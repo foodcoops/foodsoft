@@ -29,7 +29,6 @@ gem 'inherited_resources'
 gem 'localize_input', :git => "git://github.com/bennibu/localize_input.git"
 gem 'wikicloth'
 gem 'daemons'
-gem 'delayed_job_active_record'
 gem 'twitter-bootstrap-rails'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
@@ -37,6 +36,7 @@ gem 'meta_search'
 gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git' # Use this instead of rubygem
 gem 'acts_as_tree'
 gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git'
+gem 'resque'
 
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'

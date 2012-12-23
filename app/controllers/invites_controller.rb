@@ -10,7 +10,7 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new(params[:invite])
     if @invite.save
-      Mailer.delay.invite(FoodsoftConfig.scope, @invite.id)
+      Mailer.invite(@invite)
 
       respond_to do |format|
         format.html do

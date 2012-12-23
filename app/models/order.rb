@@ -170,7 +170,7 @@ class Order < ActiveRecord::Base
         ordergroups.each(&:update_stats!)
 
         # Notifications
-        UserNotifier.delay.finished_order(self.id)
+        Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'finished_order', self.id)
       end
     end
   end
