@@ -37,6 +37,7 @@ gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.g
 gem 'acts_as_tree'
 gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git'
 gem 'resque'
+gem 'whenever', :require => false # For defining cronjobs, see config/schedule.rb
 
 group :production do
   gem 'exception_notification', :require => 'exception_notifier'
