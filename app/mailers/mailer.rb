@@ -93,6 +93,8 @@ class Mailer < ActionMailer::Base
   private
 
   def set_foodcoop_scope(foodcoop = FoodsoftConfig.scope)
+    ActionMailer::Base.default_url_options[:protocol] = FoodsoftConfig[:protocol]
+    ActionMailer::Base.default_url_options[:host] = FoodsoftConfig[:host]
     ActionMailer::Base.default_url_options[:foodcoop] = foodcoop
   end
   
