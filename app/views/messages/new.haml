@@ -32,12 +32,12 @@
     %small{:style => "color:grey"}
       Eventuell musst Du Dich dem Verteiler erst bekannt machen.
       %br/
-      - if Foodsoft.config[:mailing_list_subscribe].blank?
+      - if FoodsoftConfig[:mailing_list_subscribe].blank?
         Erklärungen zum Verteiler findest Du im
         = link_to 'Wiki (Abschnitt Mailing-Liste)', wiki_page_path('MailingListe')
       - else
         z.b. mit einer Mail an
-        = mail_to Foodsoft.config[:mailing_list_subscribe]
+        = mail_to FoodsoftConfig[:mailing_list_subscribe]
 
   #recipients
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.find_all_by_id(@message.recipients_ids).map { |u| u.token_attributes }.to_json }
