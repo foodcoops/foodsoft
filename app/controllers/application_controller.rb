@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-  before_filter :select_foodcoop, :authenticate, :store_controller, :items_per_page, :set_redirect_to
+  before_filter :select_language, :select_foodcoop, :authenticate, :store_controller, :items_per_page, :set_redirect_to
   after_filter  :remove_controller
 
   # Returns the controller handling the current request.
@@ -140,5 +140,10 @@ class ApplicationController < ActionController::Base
   # Always stay in foodcoop url scope
   def default_url_options(options = {})
     {foodcoop: FoodsoftConfig.scope}
+  end
+
+  # Used to prevent accidently switching to :en in production mode.
+  def select_language
+    I18n.locale = :de
   end
 end
