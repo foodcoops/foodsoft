@@ -1,5 +1,5 @@
 Liebe(r) #{@user.name},
-
+\
 Du bist für "#{@task.name}" eingetragen. Die Aufgabe ist morgen (#{I18n.l @task.due_date, format: "%d. %b"}) fällig!
 - if @user.next_tasks.size > 0
   Aufgaben für die nächste Woche:
@@ -7,5 +7,5 @@ Du bist für "#{@task.name}" eingetragen. Die Aufgabe ist morgen (#{I18n.l @task
     - next if next_task == @task
     * #{I18n.l next_task.due_date, format: "%d. %b"} #{next_task.name}
 Meine Aufgaben: #{user_tasks_url}
-
+\
 Viele Grüße von #{FoodsoftConfig[:name]}

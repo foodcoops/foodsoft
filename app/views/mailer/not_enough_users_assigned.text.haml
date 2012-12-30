@@ -1,10 +1,10 @@
 Liebe(r) #{@user.first_name},
-
+\
 Der Job '#{@task.name}' Deiner Arbeitsgruppe ist am #{I18n.l @task.due_date, format: "%d. %b"} fällig
 und es fehlen noch Mitstreiterinnen!
-
+\
 Sofern Du Dich noch nicht für diese Aufgabe eingetragen hast ist das jetzt die Chance:
-\#{workgroup_tasks_url(workgroup_id: task.workgroup_id)}
-
-\--
+\
+= workgroup_tasks_url(workgroup_id: task.workgroup_id)
+\
 Deine Aufgaben: #{user_tasks_url}
