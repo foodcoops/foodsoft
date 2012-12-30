@@ -4,7 +4,6 @@
 # 
 # Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
-# * account_updated (datetime)
 class Ordergroup < Group
 
   APPLE_MONTH_AGO = 6                 # How many month back we will count tasks and orders sum
@@ -49,7 +48,6 @@ class Ordergroup < Group
       t = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
       t.save!
       self.account_balance = financial_transactions.sum('amount')
-      self.account_updated = t.created_on
       save!
       # Notify only when order group had a positive balance before the last transaction:
       if t.amount < 0 && self.account_balance < 0 && self.account_balance - t.amount >= 0
@@ -94,6 +92,10 @@ class Ordergroup < Group
   def self.avg_jobs_per_euro
     stats = Ordergroup.pluck(:stats)
     stats.sum {|s| s[:jobs_size].to_f } / stats.sum {|s| s[:orders_sum].to_f }
+  end
+
+  def account_updated
+    financial_transactions.last.try(:created_on) || created_on
   end
   
   private

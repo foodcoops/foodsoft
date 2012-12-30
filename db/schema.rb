@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216180646) do
+ActiveRecord::Schema.define(:version => 20121230142516) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -137,7 +137,6 @@ ActiveRecord::Schema.define(:version => 20121216180646) do
     t.string   "name",                                                   :default => "",    :null => false
     t.string   "description"
     t.decimal  "account_balance",          :precision => 8, :scale => 2, :default => 0.0,   :null => false
-    t.datetime "account_updated"
     t.datetime "created_on",                                                                :null => false
     t.boolean  "role_admin",                                             :default => false, :null => false
     t.boolean  "role_suppliers",                                         :default => false, :null => false
