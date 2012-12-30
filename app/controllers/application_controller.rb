@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def deny_access
-    self.return_to = request.original_url
+    session[:return_to] = request.original_url
     redirect_to login_url, :alert => 'Access denied!'
   end
 
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     if !current_user
       # No user at all: redirect to login page.
       session[:user_id] = nil
-      session['return_to'] = request.fullpath
+      session[:return_to] = request.original_url
       redirect_to login_url, :alert => 'Authentication required!'
     else
       # We have an authenticated user, now check role...
