@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def deny_access
-    self.return_to = request.request_uri
+    self.return_to = request.original_url
     redirect_to login_url, :alert => 'Access denied!'
   end
 
