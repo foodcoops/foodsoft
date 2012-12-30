@@ -10,7 +10,7 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new(params[:invite])
     if @invite.save
-      Mailer.invite(@invite)
+      Mailer.invite(@invite).deliver
 
       respond_to do |format|
         format.html do
