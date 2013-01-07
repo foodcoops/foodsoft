@@ -5,7 +5,7 @@ namespace :multicoops do
     task_to_run = ARGV[1]
     FoodsoftConfig.each_coop do |coop|
       puts "Run '#{task_to_run}' for #{coop}"
-      Rake::Task[task_to_run].invoke
+      Rake::Task[task_to_run].execute
     end
   end
 
@@ -14,7 +14,7 @@ namespace :multicoops do
     task_to_run = ARGV[1]
     FoodsoftConfig.select_foodcoop ENV['FOODCOOP']
     puts "Run '#{task_to_run}' for #{ENV['FOODCOOP']}"
-    Rake::Task[task_to_run].invoke
+    Rake::Task[task_to_run].execute
   end
 
 end
