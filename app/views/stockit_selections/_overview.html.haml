@@ -1,0 +1,19 @@
+
+%table.table.table-hover
+  %tr
+    %th Artikel
+    %th Erstellt am
+    %th Erstellt von
+    %th Optionen
+    
+  - stock_article_selections.each do |stock_article_selection|
+    %tr
+      %td=h truncate stock_article_selection.stock_articles.map{ |article| article.name}.join(', ')
+      %td=h stock_article_selection.created_at
+      %td=h link_to_user_message_if_valid stock_article_selection.created_by
+      %td
+        = link_to 'Anzeigen', stock_article_selection, class: 'btn btn-small'
+        = link_to "Artikel löschen", articles_stock_article_selection_path(stock_article_selection), :method => :delete,
+          :confirm => 'Diesen Löschvorschlag wirklich ausführen und markierte Artikel löschen?', class: 'btn btn-small btn-danger'
+        = link_to "Verwerfen", stock_article_selection, :method => :delete,
+          :confirm => 'Diesen Löschvorschlag wirklich verwerfen?', class: 'btn btn-small'
