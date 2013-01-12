@@ -60,6 +60,7 @@ class OrdersController < ApplicationController
   # order_articles will be saved in Order.article_ids=()
   def create
     @order = Order.new(params[:order])
+    @order.created_by = current_user
     if @order.save
       flash[:notice] = "Die Bestellung wurde erstellt."
       redirect_to @order

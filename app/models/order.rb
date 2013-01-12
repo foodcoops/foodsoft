@@ -19,9 +19,6 @@ class Order < ActiveRecord::Base
   validate :starts_before_ends, :include_articles
 
   # Callbacks
-  before_create do |order|
-    order.created_by = User.current_user
-  end
   after_update :update_price_of_group_orders
   after_save :save_order_articles
 
