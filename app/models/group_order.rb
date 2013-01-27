@@ -38,20 +38,23 @@ class GroupOrder < ActiveRecord::Base
 
     # load prices and other stuff....
     data[:order_articles] = {}
-    order.order_articles.each do |order_article|
-      data[:order_articles][order_article.id] = {
-          :price => order_article.article.fc_price,
-          :unit => order_article.article.unit_quantity,
-          :quantity => (new_record? ? 0 : goas[order_article.id][:quantity]),
-          :others_quantity => order_article.quantity - (new_record? ? 0 : goas[order_article.id][:quantity]),
-          :used_quantity => (new_record? ? 0 : goas[order_article.id][:quantity_result]),
-          :tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance]),
-          :others_tolerance => order_article.tolerance - (new_record? ? 0 : goas[order_article.id][:tolerance]),
-          :used_tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance_result]),
-          :total_price => (new_record? ? 0 : goas[order_article.id][:total_price]),
-          :missing_units => order_article.missing_units,
-          :quantity_available => (order.stockit? ? order_article.article.quantity_available : 0)
-      }
+    #order.order_articles.each do |order_article|
+    order.articles_grouped_by_category.each do |article_category, order_articles|
+      order_articles.each do |order_article|
+        data[:order_articles][order_article.id] = {
+            :price => order_article.article.fc_price,
+            :unit => order_article.article.unit_quantity,
+            :quantity => (new_record? ? 0 : goas[order_article.id][:quantity]),
+            :others_quantity => order_article.quantity - (new_record? ? 0 : goas[order_article.id][:quantity]),
+            :used_quantity => (new_record? ? 0 : goas[order_article.id][:quantity_result]),
+            :tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance]),
+            :others_tolerance => order_article.tolerance - (new_record? ? 0 : goas[order_article.id][:tolerance]),
+            :used_tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance_result]),
+            :total_price => (new_record? ? 0 : goas[order_article.id][:total_price]),
+            :missing_units => order_article.missing_units,
+            :quantity_available => (order.stockit? ? order_article.article.quantity_available : 0)
+        }
+      end
     end
 
     data

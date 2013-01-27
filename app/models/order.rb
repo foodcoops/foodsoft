@@ -82,9 +82,10 @@ class Order < ActiveRecord::Base
   # The array has the following form:
   # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
   def articles_grouped_by_category
-    order_articles.includes([:article_price, :group_order_articles, :article => :article_category]).
+    @articles_grouped_by_category ||= order_articles.
+        includes([:article_price, :group_order_articles, :article => :article_category]).
         order('articles.name').
-        group_by { |a|  a.article.article_category.name }.
+        group_by { |a| a.article.article_category.name }.
         sort { |a, b| a[0] <=> b[0] }
   end
 

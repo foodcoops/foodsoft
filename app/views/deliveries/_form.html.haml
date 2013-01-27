@@ -12,31 +12,34 @@
       })
     });
 
-.row-fluid
-  .span6
-    = simple_form_for [@supplier, @delivery], validate: true do |f|
-      = f.hidden_field :supplier_id
-      #stock_changes
-        = f.fields_for :stock_changes do |stock_change_form|
-          %p
-            = stock_change_form.select :stock_article_id, stock_articles_for_select(@supplier)
-            Menge
-            = stock_change_form.text_field :quantity, size: 5, autocomplete: 'off'
-            = stock_change_form.hidden_field :_destroy
-            = link_to "Artikel aus Lieferung entfernen", "#", class: 'destroy_stock_change'
+= simple_form_for [@supplier, @delivery], validate: true do |f|
+  = f.hidden_field :supplier_id
+  #stock_changes
+    = f.fields_for :stock_changes do |stock_change_form|
       %p
-        = link_to "Lagerartikel der Lieferung hinzufügen", {action: 'add_stock_change', supplier_id: @supplier.id}, remote: true
-      %hr/
-      = f.input :delivered_on, as: :date_picker
-      = f.input :note, input_html: {size: '35x4'}
-      .form-actions
-        = f.submit class: 'btn btn-primary'
-        = link_to "oder abbrechen", supplier_deliveries_path(@supplier)
+        = stock_change_form.select :stock_article_id, stock_articles_for_select(@supplier)
+        Menge
+        = stock_change_form.text_field :quantity, size: 5, autocomplete: 'off'
+        = stock_change_form.hidden_field :_destroy
+        = link_to "Artikel aus Lieferung entfernen", "#", class: 'destroy_stock_change'
+  %p
+    = link_to "Lagerartikel der Lieferung hinzufügen", {action: 'add_stock_change', supplier_id: @supplier.id}, remote: true
+  %p
+    %small
+      Ist ein Artikel noch nicht in der Lagerverwaltung, muss er erst
+      #{link_to("neu angelegt", new_stock_article_path)} werden.
+  %hr/
+  = f.input :delivered_on, as: :date_picker
+  = f.input :note, input_html: {size: '35x4'}
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to "oder abbrechen", supplier_deliveries_path(@supplier)
 
+/
+  TODO: Fix this!!
   .span6
     %h2 Neuen Lagerartikel anlegen
     %p
-      //TODO: Fix this!!
       Suche nach Artikeln aus dem
       %i= @supplier.name
       Katalog:
