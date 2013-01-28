@@ -142,7 +142,8 @@ module ApplicationHelper
   # offers a link for writing message to user
   # checks for nil (useful for relations)
   def link_to_user_message_if_valid(user)
-    user.nil? ? '??' : ( link_to user.nick, new_message_path(:message => {:mail_to => user.id}), :title => 'Nachricht schreiben' )
+    user.nil? ? '??' : link_to(user.nick, new_message_path('message[mail_to]' => user.id),
+                               :title => 'Nachricht schreiben')
   end
 
   def bootstrap_flash

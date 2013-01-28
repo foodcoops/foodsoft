@@ -157,13 +157,13 @@ function updateBalance() {
     var bgcolor = '';
     if (balance < 0) {
         bgcolor = '#FF0000';
-        $('#submit_button').disabled = true;
+        $('#submit_button').attr('disabled', 'disabled')
     } else {
-        $('#submit_button').disabled = false;
+        $('#submit_button').removeAttr('disabled')
     }
     // update bgcolor
     for (i in itemTotal) {
-        $('#ltd_price_' + i).css('background-color', bgcolor);
+        $('#td_price_' + i).css('background-color', bgcolor);
     }
 }
 

@@ -53,4 +53,7 @@ group :development do
   # Re-enable rails benchmarker/profiler
   gem 'ruby-prof'
   gem 'test-unit'
+
+  # Get infos when not using proper eager loading
+  gem 'bullet'
 end

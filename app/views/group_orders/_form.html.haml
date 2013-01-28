@@ -130,7 +130,7 @@
           %td Neuer Kontostand:
           %td.currency
             %strong
-              %span#new_balance= @ordergroup.account_balance - @group_order.price
+              %span#new_balance= @ordering_data[:available_funds] - @group_order.price
               €
       #order-button
         = submit_tag( "Bestellung speichern", id: 'submit_button', class: 'btn btn-primary' )

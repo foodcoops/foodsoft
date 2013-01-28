@@ -95,6 +95,10 @@ Foodsoft::Application.routes.draw do
       member do
         delete 'articles'
       end
+      
+      collection do
+        delete 'finished'
+      end
     end
     
 

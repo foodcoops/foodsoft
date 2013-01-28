@@ -2,7 +2,7 @@
 - content_for :javascript do
   :javascript
     $(function() {
-      $('tr.unavailable,input.unavailable').hide();
+      $('tr.unavailable,input.unavailable,div.unavailable').hide();
     })
 
 .well.well-small
@@ -12,12 +12,12 @@
         Ansichtsoptionen
         %span.caret
       %ul.dropdown-menu
-        %li= link_to "Nicht verfügbare Artikel zeigen/verstecken", "#", 'data-toggle-this' => 'tr.unavailable,input.unavailable', tabindex: -1
+        %li= link_to "Nicht verfügbare Artikel zeigen/verstecken", "#", 'data-toggle-this' => 'tr.unavailable,input.unavailable,div.unavailable', tabindex: -1
 
     .btn-group
-      = link_to "Neuen Lagerartikel anlegen", new_stock_article_path, class: 'btn btn-primary'
       = link_to_if @current_user.role_orders?, "Lagerbestellung online stellen", new_order_path(supplier_id: 0),
-        class: 'btn'
+        class: 'btn', class: 'btn btn-primary'
+      = link_to "Neuen Lagerartikel anlegen", new_stock_article_path, class: 'btn'
       = link_to "Inventur anlegen", new_stock_taking_path, class: 'btn'
       = link_to "Inventurübersicht", stock_takings_path, class: 'btn'
       = link_to 'Löschvorschläge', stock_article_selections_path, class: 'btn'
@@ -66,7 +66,8 @@
             = link_to "Bearbeiten", edit_stock_article_path(article), class: 'btn btn-mini'
             = link_to "Löschen", article, :method => :delete, :confirm => "Bist Du sicher?",
               class: 'btn btn-mini btn-danger'
-  %p= submit_tag "Artikel zum Löschen vormerken", { :class => 'unavailable btn' }
+  .form-actions.unavailable
+    = submit_tag "Artikel zum Löschen vormerken", { :class => 'unavailable btn' }
 %p
   Aktueller Lagerwert:
   = number_to_currency StockArticle.stock_value
