@@ -1,13 +1,20 @@
 - title "Löschvorschlag für #{@stock_article_selection.stock_articles.count} Lagerartikel"
 
+.well.well-small
+  .btn-toolbar
+    .btn-group
+      = link_to "Lager anzeigen", stock_articles_path, class: 'btn'
+      = link_to 'Alle Löschvorschläge anzeigen', stock_article_selections_path, class: 'btn'
+
 %dl
   %dt Löschvorschlag vom:
-  %dd=h @stock_article_selection.created_at
+  %dd= format_time(@stock_article_selection.created_at)
   %dt Erstellt durch:
-  %dd=h link_to_user_message_if_valid(@stock_article_selection.created_by)
+  %dd= link_to_user_message_if_valid(@stock_article_selection.created_by)
   %dt Zu löschende Artikel
-  - for article in @stock_article_selection.stock_articles
-    %dd=h article.name
+  - for article in @stock_article_selection.stock_articles.with_deleted
+    %dd
+      %span{:class => article_deletion_classes(article), :title => article_deletion_title(article)}= article.name
 
 
 %p
@@ -15,4 +22,4 @@
     :confirm => 'Diesen Löschvorschlag wirklich ausführen und markierte Artikel löschen?', class: 'btn btn-danger'
   = link_to 'Verwerfen', @stock_article_selection, :method => :delete,
     :confirm => 'Diesen Löschvorschlag wirklich verwerfen?', class: 'btn'
-  = link_to 'Alle Löschvorschläge zeigen', stock_article_selections_path, class: 'btn'
+  = link_to 'Alle Löschvorschläge anzeigen', stock_article_selections_path, class: 'btn'

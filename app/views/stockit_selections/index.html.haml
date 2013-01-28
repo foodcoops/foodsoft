@@ -1,7 +1,25 @@
 - title "Löschvorschläge für Lagerartikel"
-- if @stock_article_selections.empty?
-  %p Es gibt keine ausstehenden Löschvorschläge.
-  %ul
-    %li= link_to "Löschvorschlag erstellen", stock_articles_path
+
+.well.well-small
+  .btn-toolbar
+    .btn-group
+      = link_to "Lager anzeigen", stock_articles_path, class: 'btn'
+      = link_to "Aufräumen", finished_stock_article_selections_path, :method => 'delete', 
+        :confirm => 'Wirklich alle erledigten Löschvorschläge entfernen?', class: 'btn'
+
+.well
+  %h2 Ausstehende Löschvorschläge
+  - open_selections = @stock_article_selections.select { |sel| sel.deletable_count + sel.nondeletable_count > 0 }
+  - if open_selections.length == 0
+    %p Es gibt keine ausstehenden Löschvorschläge.
+    %ul
+      %li= link_to "Löschvorschlag erstellen", stock_articles_path
+  - else
+    = render :partial => 'overview', :locals => {:stock_article_selections => open_selections}
+
+%h2 Erledigte Löschvorschläge
+- finished_selections = @stock_article_selections.select { |sel| sel.deletable_count + sel.nondeletable_count <= 0 }
+- if finished_selections.length == 0
+  %p Es gibt keine erledigten Löschvorschläge.
 - else
-  = render :partial => 'overview', :locals => {:stock_article_selections => @stock_article_selections}
+  = render :partial => 'overview', :locals => {:stock_article_selections => finished_selections}

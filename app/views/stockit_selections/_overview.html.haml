@@ -2,15 +2,22 @@
 %table.table.table-hover
   %tr
     %th Artikel
+    %th Zusammenfassung
     %th Erstellt am
     %th Erstellt von
     %th Optionen
     
   - stock_article_selections.each do |stock_article_selection|
     %tr
-      %td=h truncate stock_article_selection.stock_articles.map{ |article| article.name}.join(', ')
-      %td=h stock_article_selection.created_at
-      %td=h link_to_user_message_if_valid stock_article_selection.created_by
+      %td
+        - for article in stock_article_selection.stock_articles.with_deleted
+          %span{:class => article_deletion_classes(article), :title => article_deletion_title(article)}= article.name
+      %td
+        %span{:class => 'label label-success'}= "#{stock_article_selection.deletable_count} Löschbar"
+        %span{:class => 'label'}= "#{stock_article_selection.deleted_count} Gelöscht"
+        %span{:class => 'label label-important'}= "#{stock_article_selection.nondeletable_count} Nicht löschbar"
+      %td= format_date(stock_article_selection.created_at)
+      %td= link_to_user_message_if_valid stock_article_selection.created_by
       %td
         = link_to 'Anzeigen', stock_article_selection, class: 'btn btn-small'
         = link_to "Artikel löschen", articles_stock_article_selection_path(stock_article_selection), :method => :delete,

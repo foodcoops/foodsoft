@@ -13,6 +13,18 @@ class StockArticleSelection < ActiveRecord::Base
     all_articles = stock_article_ids
   end
   
+  def deletable_count
+    stock_articles.select { |a| a.quantity_available<=0 }.length
+  end
+  
+  def nondeletable_count
+    stock_articles.select { |a| a.quantity_available>0 }.length
+  end
+  
+  def deleted_count
+    stock_articles.only_deleted.count
+  end
+  
   protected
   
   def include_stock_articles
