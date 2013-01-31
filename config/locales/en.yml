@@ -1,5 +1,399 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  orders:
+    state:
+      open: open
+      finished: finished
+      closed: closed
+
+  home:
+    index:
+      title: Homepage
+
+  group_orders:
+    messages:
+      not_enough_apples:
+        You need at least %{stop_ordering_under} apples to order.
+        Currently your order group has only %{apples} apples.
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..."
+
+  controller:
+    article_categories:
+      destroy:
+        error: 'Category could not be deleted: %{message}'
+  date:
+    abbr_day_names:
+    - Su
+    - Mo
+    - Tu
+    - We
+    - Th
+    - Fr
+    - Sa
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Okt
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%e %B %Y'
+      short: ! '%e %b'
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - Oktober
+    - November
+    - December
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about one hour
+        other: about %{count} hours
+      about_x_months:
+        one: about one month
+        other: about %{count} months
+      about_x_years:
+        one: about one year
+        other: about %{count} years
+      almost_x_years:
+        one:  almost one year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than one minute
+        other: less then %{count} minutes
+      less_than_x_seconds:
+        one: less than a second
+        other: less than %{count} seconds
+      over_x_years:
+        one: more then a year
+        other: more than %{count} year
+      x_days:
+        one: one day
+        other: ! '%{count} days'
+      x_minutes:
+        one: one minute
+        other: ! '%{count} minutes'
+      x_months:
+        one: one month
+        other: ! '%{count} months'
+      x_seconds:
+        one: eine Sekunde
+        other: ! '%{count} seconds'
+    prompts:
+      day: day
+      hour: hours
+      minute: minutes
+      month: months
+      second: seconds
+      year: years
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: has to be accepted
+      blank: has to be filled
+      confirmation: does not match the confirmation
+      empty: has to be entered
+      equal_to: has to be exactly %{count} 
+      even: has to be an even number
+      exclusion: is not available
+      greater_than: has to be greater than %{count} 
+      greater_than_or_equal_to: has to be greater than or equal to %{count} 
+      inclusion: is not a valid value
+      invalid: is invalid
+      less_than: has to be less than %{count} 
+      less_than_or_equal_to: has to be less than or equal to %{count} 
+      not_a_number: is not a number
+      not_an_integer: must be a whole number
+      odd: must be odd
+      record_invalid: ! 'validation failed: %{errors}'
+      taken: is already taken
+      too_long: is too long (no more than %{count} characters)
+      too_short: is too short (use more than %{count} characters)
+      wrong_length: is the wrong length (has to have exactly %{count} characters)
+    template:
+      body: ! 'Please check the following fields:'
+      header:
+        one: ! 'Could not save %{model}: an error.'
+        other: ! 'could not save %{model}: %{count} errors.'
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%n %u'
+        precision: 2
+        separator: ! '.'
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: .
+      precision: 2
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion:
+            one: billion
+            other: billions
+          million: million
+          quadrillion:
+            one: quadrillion
+            other: quadrillions
+          thousand: thousand
+          trillion: trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: byte
+            other: bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ' and '
+      two_words_connector: ! ' and '
+      words_connector: ! ', '
+  time:
+    am: morning
+    formats:
+      default: ! '%A, %d %B %Y, %H:%M'
+      long: ! '%A, %d %B %Y, %H:%M'
+      short: ! '%d %B, %H:%M'
+    pm: afternoon
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors
+      has_many_left: 'is still associated with a %{collection}!'
+    models:
+      article: Article
+      supplier: Supplier
+      user: User
+      workgroup: Workgroup
+      ordergroup: Ordergroup
+      task: Task
+      message: Message
+      article_category: Article category
+      stock_article: Stock article
+      delivery: Delivery
+      stock_taking: Stock taking
+      financial_transaction: Financial transaction
+      order: Order
+      order_comment: Order comment
+      order_article: Order article
+      invoice: Invoice
+    attributes:
+      article:
+        price: price
+        gross_price: gross price
+        unit: unit
+        unit_quantity: unit quantity
+        tax: VAT
+        deposit: deposit
+        article_category: article category
+      stock_article:
+        price: Price
+      user:
+        password: Password
+        first_name: First name
+      financial_transaction:
+        amount: amount
+        note: note
+
+  helpers:
+    select:
+      prompt: please select
+    submit:
+      create: "save %{model}"
+      update: "save changes"
+      message:
+        create: 'send message'
+      invite:
+        create: send invitation
+
+  # Simple form i18n is used to build the forms
+  simple_form:
+    "yes": 'yes'
+    "no": 'no'
+    required:
+      text: 'required'
+      mark: '*'
+    error_notification:
+      default_message: "Errors were found, please review the form."
+    labels:
+      defaults:
+        password: 'password'
+        password_confirmation: 'password confirmation'
+        description: 'description'
+        title: 'title'
+        email: 'email'
+        note: 'note'
+        date: 'date'
+        ordergroup: 'order group'
+        amount: 'amount'
+        phone: "phone"
+        user_tokens: 'members'
+        price: 'price (netto)'
+        unit_quantity: 'unit quantity'
+        order_number: 'order number'
+        tax: 'VAT'
+        deposit: 'deposit'
+      user:
+        nick: "nickname"
+        first_name: "first name"
+        last_name: "last name"
+      workgroup:
+        weekly_task: 'define weekly task?'
+        weekday: 'day of the week'
+        task_name: 'name of task'
+        task_required_users: 'required users'
+        task_duration: 'task duration in hours'
+        task_description: 'task description'
+        next_weekly_tasks_number: "How many weeks in advance should tasks be created?"
+        role_admin: "Administration"
+        role_finance: "Finance"
+        role_suppliers: "Suppliers"
+        role_article_meta: "Product catalogue"
+        role_orders: "Order management"
+      ordergroup:
+        contact_person: "Contact person"
+        contact_phone: "Phone"
+        contact_address: "Address"
+        ignore_apple_restriction: "Ignore order blocking when there are too little apples"
+      task:
+        duration: 'Duration'
+        user_list: 'Responsible persons'
+        required_users: 'number'
+        due_date: 'Due date'
+        workgroup: 'Workgroup'
+        done: Done?
+      message:
+        sent_to_all: 'Send to all members'
+        recipient_tokens: 'recipients'
+        group_id: 'Group'
+        subject: 'Subject'
+        body: 'Body'
+        private: Private
+      page:
+        body: 'Body'
+        parent_id: Top
+      supplier:
+        address: 'Address'
+        phone: 'Phone'
+        phone2: 'Phone 2'
+        fax: 'Fax'
+        url: 'Homepage'
+        contact_person: 'Contact person'
+        customer_number: 'Customer number'
+        delivery_days: 'Delivery days'
+        order_howto: 'How to order'
+        note: 'Note'
+        min_order_quantity: 'Minimum order quantity'
+      article:
+        availability: 'Article is available?'
+        origin: 'Origin'
+        manufacturer: 'Producer'
+        unit: 'Unit'
+        note: 'Note'
+        article_category: 'Article category'
+      stock_article:
+        supplier: 'Supplier'
+      delivery:
+        delivered_on: 'date of delivery'
+      user:
+        nick: "username"
+        last_name: "last name"
+      order_comment:
+        text: comment on this order ...
+      order:
+        starts: "starts from"
+        ends: "ends at"
+      order_article:
+        article_id: select items from the catalogue
+      group_order_article:
+        ordergroup_id: Ordergroup
+        result: quantity
+      invoice:
+        supplier: supplier
+        number: number
+        date: invoice date
+        paid_on: paid on
+        deposit: deposit calculated
+        deposit_credit: deposit credited
+      order_article:
+        units_to_order: quantity
+        update_current_price: global price update
+
+    hints:
+      tax: 'as percentage, standard for food is 7.0'
+      task:
+        duration: 'how long does the task take, 1-3 hours'
+        required_users: 'how many users in total are needed?'
+      supplier:
+        min_order_quantity: 'the minimum order quantity is displayed during the order and must be explanatory'
+      article:
+        unit: 'e.g. kg or 1L or 500g'
+      stock_article:
+        supplier: ''
+      message:
+        private: Message does not appear in the Foodsoft inbox
+      order_article:
+        units_to_order: number of delivered packages
+        update_current_price: also change the price for current orders
