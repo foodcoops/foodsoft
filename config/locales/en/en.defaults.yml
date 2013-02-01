@@ -8,6 +8,8 @@ en:
   home:
     index:
       title: Homepage
+    start_nav:
+      title: Directly to ...
 
   group_orders:
     messages:
