@@ -8,7 +8,7 @@
       %th= t '.contact'
       %th= t '.address'
       %th= t '.members'
-      %th= t '.actions'
+      %th= t 'admin.actions'
   %tbody
     - for ordergroup in @ordergroups
       %tr{:class => cycle('even','odd', :name => 'groups')}
@@ -17,6 +17,6 @@
         %td= link_to_gmaps ordergroup.contact_address
         %td= ordergroup.users.size
         %td
-          = link_to t('.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
-          = link_to t('.delete'), [:admin, ordergroup], :confirm => t('.confirm', name: ordergroup.name),
+          = link_to t('admin.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
+          = link_to t('admin.delete'), [:admin, ordergroup], :confirm => t('admin.confirm', name: ordergroup.name),
             :method => :delete, class: 'btn btn-mini btn-danger'

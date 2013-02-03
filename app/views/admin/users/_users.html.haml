@@ -4,12 +4,12 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Login
-      %th Name
-      %th Email
-      %th Zugriff auf
-      %th Letzter login
-      %th(colspan="2") Aktionen
+      %th= t '.login'
+      %th= t '.name'
+      %th= t '.email'
+      %th= t 'admin.access_to'
+      %th= t '.last_login'
+      %th(colspan="2")= t 'admin.actions'
   %tbody
     - for user in @users 
       %tr
@@ -18,6 +18,6 @@
         %td= user.email
         %td= format_roles(user)
         %td= format_time(user.last_login)
-        %td= link_to 'Bearbeiten', edit_admin_user_path(user), class: 'btn btn-mini'
-        %td= link_to 'Löschen', [:admin, user], :confirm => "Willst du #{user.name} wirklich löschen?",
+        %td= link_to t('admin.edit'), edit_admin_user_path(user), class: 'btn btn-mini'
+        %td= link_to t('admin.delete'), [:admin, user], :confirm => t('admin.confirm', name: user.name),
             :method => :delete, class: 'btn btn-danger btn-mini'

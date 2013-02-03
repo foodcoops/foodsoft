@@ -6,8 +6,8 @@
     %tr
       %th= t '.name'
       %th= t '.members'
-      %th= t '.access_to'
-      %th= t '.actions'
+      %th= t 'admin.access_to'
+      %th= t 'admin.actions'
   %tbody
     - for workgroup in @workgroups
       %tr
@@ -15,6 +15,6 @@
         %td= workgroup.users.size
         %td= format_roles(workgroup)
         %td
-          = link_to t('.edit'), edit_admin_workgroup_path(workgroup), class: 'btn btn-mini'
-          = link_to t('.delete'), [:admin, workgroup], :confirm => t('.confirm', name: workgroup.name),
+          = link_to t('admin.edit'), edit_admin_workgroup_path(workgroup), class: 'btn btn-mini'
+          = link_to t('admin.delete'), [:admin, workgroup], :confirm => t('admin.confirm', name: workgroup.name),
             :method => :delete, class: 'btn btn-mini btn-danger'
