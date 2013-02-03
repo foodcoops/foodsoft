@@ -1,0 +1,20 @@
+de:
+  admin:
+    base:
+      index:
+        title: 'Administration'
+        first_paragraph: 'Hier kannst Du die Gruppen und Benutzerinnen der Foodsoft verwalten.'
+        newest_users: 'Neuste Benutzerinnen'
+        username: 'Benutzername'
+        name: 'Name'
+        created_at: 'Erstellt am'
+        all_users: 'Alle Benutzerinnen'
+        new_user: 'Neue Benutzerin'
+        newest_groups: 'Neuste Gruppen'
+        groupname: 'Gruppenname'
+        type: 'Typ'
+        members: 'Mitglieder'
+        all_ordergroups: 'Alle Bestellgruppen'
+        new_ordergroup: 'Neue Bestellgruppe'
+        all_workgroups: 'Alle Arbeitsgruppen'
+        new_workgroup: 'Neue Arbeitsgruppe'
