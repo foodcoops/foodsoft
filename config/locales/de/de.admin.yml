@@ -51,6 +51,32 @@ de:
         contact: 'Kontakt'
         address: 'Adresse'
         members: 'Mitglieder'
+    users:
+      index:
+        title: 'Admin/Benutzerinnen'
+        new_user: 'Neue Benutzerin anlegen'
+        first_paragraph: 'Hier kannst du Benutzer_innen %{url}, bearbeiten und natürlich auch löschen.'
+        new_users: 'neu anlegen'
+      edit:
+        title: 'Benutzerin bearbeiten'
+      new: 
+        title: 'Neue Benutzerin anlegen'
+      show:
+        person: 'Person'
+        member_since: 'Mitglied seit %{time}'
+        nick: 'Nick'
+        name: 'Name'
+        email: 'Email'
+        phone: 'Telefon'
+        preference: 'Einstellungen'
+        groupabos: 'Gruppenabos'
+        confirm: 'Willst du %{user} wirklich rausschmeißen?'
+        send_message: 'Nachricht senden'
+      users:
+        login: 'Login'
+        name: 'Name'
+        email: 'Email'
+        last_login: 'Letzter login'
     workgroups:
       index:
         title: 'Arbeitsgruppen'
@@ -74,33 +100,3 @@ de:
       workgroups:
         name: 'Name'
         members: 'Mitglieder'
-    users:
-      index:
-        title: 'Admin/Benutzerinnen'
-        new_user: 'Neue Benutzerin anlegen'
-        first_paragraph: 'Hier kannst du Benutzer_innen %{url}, bearbeiten und natürlich auch löschen.'
-        new_users: 'neu anlegen'
-      edit:
-        title: 'Benutzerin bearbeiten'
-      new: 
-        title: 'Neue Benutzerin anlegen'
-      form:
-        first_paragraph: 'Neue Mitglieder kannst du %{url} einladen.'
-        here: 'hier'
-        or_cancel: 'oder abbrechen'
-      show:
-        person: 'Person'
-        member_since: 'Mitglied seit %{time}'
-        nick: 'Nick'
-        name: 'Name'
-        email: 'Email'
-        phone: 'Telefon'
-        preference: 'Einstellungen'
-        groupabos: 'Gruppenabos'
-        confirm: 'Willst du %{user} wirklich rausschmeißen?'
-        send_message: 'Nachricht senden'
-      users:
-        login: 'Login'
-        name: 'Name'
-        email: 'Email'
-        last_login: 'Letzter login'
