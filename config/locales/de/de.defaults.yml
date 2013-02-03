@@ -5,10 +5,6 @@ de:
       finished: beendet
       closed: abgerechnet
 
-  home:
-    index:
-      title: Startseite
-
   group_orders:
     messages:
       not_enough_apples:

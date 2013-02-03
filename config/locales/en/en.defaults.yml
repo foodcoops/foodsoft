@@ -5,12 +5,6 @@ en:
       finished: finished
       closed: closed
 
-  home:
-    index:
-      title: Homepage
-    start_nav:
-      title: Directly to ...
-
   group_orders:
     messages:
       not_enough_apples:

@@ -1,0 +1,80 @@
+de:
+  home:
+    index:
+      title: 'Startseite'
+      your_tasks: 'Deine Aufgaben'
+      due_date_format: '%A, %d. %b'
+      tasks_move:
+        title: 'Aufgaben übernehmen'
+        desc: 'Du bis für Aufgaben verantwortlich.'
+        action: 'Aufgaben übernehmen/ablehnen'
+      tasks_open:
+        title: 'Offene Aufgaben'
+        desc: 'Es gibt %{size}'
+        action: 'offene Aufgabe(n)'
+      ordergroup:
+        title: 'Engagement Deiner Bestellgruppe'
+      messages:
+        title: 'Neuste Nachrichten'
+        view_all: 'Alle Nachrichten einsehen'
+      my_ordergroup:
+        title: 'Meine Bestellgruppe'
+        funds: '| Verfügbares Guthaben:'
+        last_update: 'Letzte Aktualisiering ist %{when} her'
+        transactions:
+          title: 'Letzte Transaktionen'
+          when: 'Wann'
+          where: 'Wer'
+          note: 'Notiz'
+          amount: 'Betrag'
+          view: 'Kontoauszug anzeigen'
+
+    start_nav:
+      title: 'Direkt zu ...'
+      foodcoop: 'Foodcoop'
+      members: 'Mitglieder'
+      tasks: 'Meine Aufgaben'
+      write_message: 'Nachricht schreiben'
+      orders:
+        title: 'Bestellungen'
+        overview: 'Bestellübersicht'
+        end: 'Bestellungen beenden'
+      products:
+        title: 'Artikelverwaltung'
+        edit: 'Artikel aktualisieren'
+        edit_stock: 'Lagerverwaltung'
+        edit_suppliers: 'Lieferanten verwalten'
+      finances:
+        title: 'Finanzbereich'
+        accounts: 'Konten aktualisieren'
+        settle: 'Bestellungen abrechnen'
+      admin: 'Administration'
+      new_ordergroup: 'Neue Bestellgruppe'
+      new_user: 'Neues Mitglied'
+
+    apple_bar:
+      points: 'Deine aktueller Äpfelpunktestand: %{points}'
+      desc: 'Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop. Konkret: Pro %{amount} Bestellsumme solltest Du eine Aufgabe machen!'
+      warning: 'Achtung, hast Du weniger als %{threshold} Äpfel, darfst Du nicht mehr bestellen!'
+
+    ordergroup:
+      title: 'Meine Bestellgruppe'
+      description: 'Beschreibung'
+      funds: 'Verfügbares Guthaben:'
+      people: 'Personen'
+      invite: 'Neue Person einladen'
+      account_summary: 'Kontoauszug'
+      search: Suchen ...
+
+    profile:
+      title: 'Mein Profil'
+      user:
+        title: '%{user}'
+        since: '(Mitglied seit: %{when})'
+        save: 'Speichern'
+      groups:
+        title: 'Du bist Mitglied in folgenden Gruppen'
+        invite: 'Neue Mitglieder einladen'
+        cancel: 'Mitgliedschaft beenden'
+        cancel_confirm: 'Bist Du sicher, dass Du Deine Mitgliedschaft beenden willst?'
+

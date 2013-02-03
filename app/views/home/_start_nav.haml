@@ -1,34 +1,34 @@
 .well.well-small
-  %h3= t('home.start_nav.title')
+  %h3= t '.title'
   %ul.nav.nav-list
-    %li.nav-header Foodcoop
-    %li= link_to "Mitglieder", foodcoop_users_path
-    %li= link_to "Meine Aufgaben", user_tasks_path
-    %li= link_to "Nachricht schreiben", :controller => "messages", :action => "new"
+    %li.nav-header= t '.foodcoop'
+    %li= link_to t('.members'), foodcoop_users_path
+    %li= link_to t('.tasks'), user_tasks_path
+    %li= link_to t('.write_message'), :controller => "messages", :action => "new"
 
     - has_ordergroup = !@current_user.ordergroup.nil?
     - has_orders_role = @current_user.role_orders?
     - if has_ordergroup || has_orders_role
-      %li.nav-header Bestellungen
+      %li.nav-header= t '.orders.title'
       - if has_ordergroup
-        %li= link_to "Bestellübersicht", group_orders_path
+        %li= link_to t('.orders.overview'), group_orders_path
       - if has_orders_role
-        %li= link_to "Bestellungen beenden", :controller => 'orders'
+        %li= link_to t('.orders.end'), :controller => 'orders'
     // Articles
     - if @current_user.role_article_meta? || @current_user.role_suppliers?
-      %li.nav-header Artikelverwaltung
-      %li= link_to "Artikel aktualisieren", suppliers_path
-      %li= link_to "Lagerverwaltung", :controller => 'stockit'
-      %li= link_to "Lieferanten verwalten", suppliers_path
+      %li.nav-header= t '.products.title'
+      %li= link_to t('.products.edit'), suppliers_path
+      %li= link_to t('.products.edit_stock'), :controller => 'stockit'
+      %li= link_to t('.products.edit_suppliers'), suppliers_path
 
     // Finance
     - if @current_user.role_finance?
-      %li.nav-header Finanzbereich
-      %li= link_to "Konten aktualisieren", finance_new_transaction_collection_path
-      %li= link_to "Bestellungen abrechnen", finance_root_path
+      %li.nav-header= t '.finances.title'
+      %li= link_to t('.finances.accounts'), finance_new_transaction_collection_path
+      %li= link_to t('.finances.settle'), finance_root_path
 
     // Administration
     - if @current_user.role_admin?
-      %li.nav-header Administration
-      %li= link_to "Neue Bestellgruppe", new_admin_ordergroup_path
-      %li= link_to "Neues Mitglied", new_admin_user_path
+      %li.nav-header= t '.admin'
+      %li= link_to t('.new_ordergroup'), new_admin_ordergroup_path
+      %li= link_to t('.new_user'), new_admin_user_path

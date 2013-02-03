@@ -1,10 +1,8 @@
-Deine aktueller Äpfelpunktestand: #{apple_bar.apples}
+= t '.points', points: apple_bar.apples
 .progress
   %div{class: "bar bar-#{apple_bar.group_bar_state}", style: "width: #{apple_bar.group_bar_width}%"}
 
 %span.description
-  Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop.
-  Konkret: Pro #{number_to_currency(apple_bar.mean_order_amount_per_job, :precision => 0 )} Bestellsumme solltest Du eine Aufgabe machen!
+  = t '.desc', amount: number_to_currency(apple_bar.mean_order_amount_per_job, :precision=>0)
   - if FoodsoftConfig[:stop_ordering_under].present?
-    %strong Achtung,
-    hast Du weniger als #{FoodsoftConfig[:stop_ordering_under]} Äpfel, darfst Du nicht mehr bestellen!
+    %strong= t '.warning', threshold: FoodsoftConfig[:stop_ordering_under]
