@@ -1,8 +1,5 @@
 - unless @ordergroup.new_record?
-  %p
-    Neue Mitglieder kannst du
-    = link_to "hier", new_invite_path(id: @ordergroup.id), remote: true
-    einladen.
+  %p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @ordergroup.id), remote: true)).html_safe
 = simple_form_for [:admin, @ordergroup] do |f|
   = render :layout => 'shared/group_form_fields', :locals => {:f => f} do
     = f.input :contact_person
@@ -11,4 +8,4 @@
     = f.input :ignore_apple_restriction
   .form-actions
     = f.button :submit
-    = link_to "oder abbrechen", :back
+    = link_to t('.or_cancel'), :back

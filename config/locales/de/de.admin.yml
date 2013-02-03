@@ -18,3 +18,35 @@ de:
         new_ordergroup: 'Neue Bestellgruppe'
         all_workgroups: 'Alle Arbeitsgruppen'
         new_workgroup: 'Neue Arbeitsgruppe'
+    ordergroups:
+      index:
+        title: 'Bestellgruppen'
+        new_ordergroup: 'Neue Bestellgruppe anlegen'
+        first_paragraph: 'Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.'
+        new_ordergroups: 'neue Bestellgruppen'
+        second_paragraph: "Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>: Eine Bestellgruppe hat ein Konto und kann Essen bestellen. In einer <em>%{url}</em> (z.b. 'Soritiergruppe') koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten. Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören."
+        workgroup: 'Arbeitsgruppe'
+        search_placeholder: 'Name ...'
+      edit:
+        title: 'Bestellgruppe bearbeiten'
+      new: 
+        title: 'Bestellgruppe anlegen'
+      form:
+        first_paragraph: 'Neue Mitglieder kannst du %{url} einladen.'
+        here: 'hier'
+        or_cancel: 'oder abbrechen'
+      show:
+        title: 'Bestellgruppe %{name}'
+        edit: 'Gruppe/Mitglieder bearbeiten'
+        delete: 'Löschen'
+        confirm: 'Bist Du sicher?'
+        send_message: 'Nachricht senden'
+      ordergroups:
+        name: 'Name'
+        contact: 'Kontakt'
+        address: 'Adresse'
+        members: 'Mitglieder'
+        actions: 'Aktionen'
+        edit: 'Bearbeiten'
+        delete: 'Löschen'
+        confirm: 'Willst du %{name} wirklich löschen?'
