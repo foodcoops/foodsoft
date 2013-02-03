@@ -1,24 +1,15 @@
-- title "Arbeitsgruppen"
+- title t '.title'
 
 - content_for :actionbar do
-  = link_to "Neue Arbeitsgruppe anlegen", new_admin_workgroup_path, class: 'btn btn-primary'
+  = link_to t('.new_workgroup'), new_admin_workgroup_path, class: 'btn btn-primary'
 
 - content_for :sidebar do
-  %p
-    Hier kannst du
-    = link_to 'neue Arbeitsgruppen', new_admin_workgroup_path
-    anlegen, Gruppen bearbeiten und löschen.
-  %p
-    Beachte dabei den <strong>Unterschied zwischen Gruppe und Bestellgruppe</strong>:
-    Eine #{link_to 'Bestellgruppe', '/admin/ordergroups'}
-    hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. 'Soritiergruppe')
-    koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten.
-    Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
-
+  %p= t('.first_paragraph', url: link_to(t('.new_workgroups'), new_admin_workgroup_path)).html_safe
+  %p= t('.second_paragraph', url: link_to(t('.ordergroup'), admin_ordergroups_path)).html_safe
 .well.well-small
   = form_tag admin_workgroups_path, :method => :get, :remote => true,
     'data-submit-onchange' => true, class: 'form-search' do
     = text_field_tag :query, params[:query], class: 'input-medium search-query',
-      placeholder: 'Name ...'
+      placeholder: t('.search_placeholder')
 #workgroups
   = render "workgroups"

@@ -1,7 +1,4 @@
-%p
-  Neue Mitglieder kannst du 
-  = link_to "hier", new_invite_path(id: @workgroup.id)
-  einladen.
+%p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @workgroup.id), remote: true)).html_safe
 = simple_form_for [:admin, @workgroup] do |f|
   = render :layout => 'shared/group_form_fields', :locals => {:f => f} do
     %h4 Zugriff auf
@@ -12,4 +9,4 @@
     = f.input :role_orders
   .form-actions
     = f.button :submit
-    = link_to "oder abbrechen", :back
+    = link_to t('.or_cancel'), :back

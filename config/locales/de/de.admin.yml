@@ -50,3 +50,33 @@ de:
         edit: 'Bearbeiten'
         delete: 'Löschen'
         confirm: 'Willst du %{name} wirklich löschen?'
+    workgroups:
+      index:
+        title: 'Arbeitsgruppen'
+        new_workgroup: 'Neue Arbeitsgruppe anlegen'
+        first_paragraph: 'Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.'
+        new_workgroups: 'neue Arbeitsgruppen'
+        second_paragraph: "Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>: Eine %{url} hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. 'Soritiergruppe') koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten. Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören."
+        ordergroup: 'Bestellgruppe'
+        search_placeholder: 'Name ...'
+      edit:
+        title: 'Arbeitsgruppe bearbeiten'
+      new: 
+        title: 'Arbeitsgruppe anlegen'
+      form:
+        first_paragraph: 'Neue Mitglieder kannst du %{url} einladen.'
+        here: 'hier'
+        or_cancel: 'oder abbrechen'
+      show:
+        title: 'Arbeitsgruppe %{name}'
+        edit: 'Gruppe/Mitglieder bearbeiten'
+        delete: 'Löschen'
+        confirm: 'Bist Du sicher?'
+      workgroups:
+        name: 'Name'
+        members: 'Mitglieder'
+        access_to: 'Zugriff auf'
+        actions: 'Aktionen'
+        edit: 'Bearbeiten'
+        delete: 'Löschen'
+        confirm: 'Willst du %{name} wirklich löschen?'
