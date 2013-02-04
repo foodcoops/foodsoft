@@ -9,3 +9,6 @@ de:
       body:
         <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
         <p>Die Person ist dann nach erstmaliger Anmeldung automatisch Mitglied dieser Gruppe.</p>
+
+    # used by controller
+    success: 'Benutzerin wurde erfolgreich eingeladen.'
