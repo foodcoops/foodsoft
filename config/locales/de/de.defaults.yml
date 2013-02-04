@@ -119,6 +119,7 @@ de:
       second: Sekunden
       year: Jahr
   errors: &errors
+    general: 'Ein Problem ist aufgetreten.'
     format: ! '%{attribute} %{message}'
     messages:
       accepted: muss akzeptiert werden

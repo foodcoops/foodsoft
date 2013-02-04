@@ -78,3 +78,8 @@ de:
         cancel: 'Mitgliedschaft beenden'
         cancel_confirm: 'Bist Du sicher, dass Du Deine Mitgliedschaft beenden willst?'
 
+    # used by controller
+    changes_saved: 'Änderungen wurden gespeichert.'
+    no_ordergroups: 'Leider bist Du kein Mitglied einer Bestellgruppe'
+    ordergroup_cancelled: 'Du bist jetzt kein Mitglied der Gruppe %{group} mehr.'
+
