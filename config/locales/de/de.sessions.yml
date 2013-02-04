@@ -8,3 +8,7 @@ de:
       password: 'Passwort'
       login: 'Anmelden'
       forgot_password: 'Passwort vergessen?'
+    # used in controller
+    logged_in: 'Logged in!'
+    logged_out: 'Logged out!'
+    login_invalid: 'Invalid email or password'
