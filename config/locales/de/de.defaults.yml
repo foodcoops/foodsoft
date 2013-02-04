@@ -264,3 +264,10 @@ de:
         create: 'Nachricht verschicken'
       invite:
         create: Einladung verschicken
+
+  # general user-interface
+  ui:
+    close: 'Schließen'
+    marks:
+      close: 'x'
+

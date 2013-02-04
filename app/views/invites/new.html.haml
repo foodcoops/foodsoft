@@ -1,10 +1,7 @@
-%p 
-  Hier kannst du eine Person in die Gruppe 
-  %b=h @invite.group.name
-  einladen, die noch nicht Mitglied der Foodcoop ist.
+%p= t('.body', group: @invite.group.name).html_safe
 = simple_form_for @invite do |form|
   = form.hidden_field :user_id
   = form.hidden_field :group_id
   = form.input :email
-  = form.submit "Einladung abschicken"
-  = link_to "oder zurück", :back
+  = form.submit t('.action')
+  = link_to t('.back'), :back

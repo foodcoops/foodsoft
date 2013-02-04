@@ -1,17 +1,12 @@
 = simple_form_for @invite, remote: true do |form|
   .modal-header
-    = button_tag "x", class: 'close', data: {dismiss: 'modal'}
-    %h3 Person einladen
+    = button_tag t('ui.marks.close'), class: 'close', data: {dismiss: 'modal'}
+    %h3= t '.title'
   .modal-body
-    %p
-      Hier kannst du eine Person in die Gruppe
-      %b=h @invite.group.name
-      einladen, die noch nicht Mitglied der Foodcoop ist.
-      %br/
-      Die Person ist dann nach erstmaliger Anmeldung automatisch Mitglied dieser Gruppe.
+    = t('.body', group: @invite.group.name).html_safe
     = form.hidden_field :user_id
     = form.hidden_field :group_id
     = form.input :email
   .modal-footer
-    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
+    = button_tag t('ui.close'), class: 'btn', data: {dismiss: 'modal'}
     = form.submit class: 'btn btn-primary'

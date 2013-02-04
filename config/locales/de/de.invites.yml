@@ -1,0 +1,11 @@
+de:
+  invites:
+    new:
+      body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
+      action: 'Einlading abschicken'
+      back: 'oder zurück'
+    modal_form:
+      title: 'Person einladen'
+      body:
+        <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
+        <p>Die Person ist dann nach erstmaliger Anmeldung automatisch Mitglied dieser Gruppe.</p>
