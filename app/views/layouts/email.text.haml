@@ -1,6 +1,3 @@
 = yield
 \
-\--
-FoodSoft: #{root_url}
-Foodcoop-Homepage: #{FoodsoftConfig[:homepage]}
-Hilfe/Help: #{FoodsoftConfig[:help_url]}
+= t '.footer', foodsoft: root_url, foodcoop: FoodsoftConfig[:homepage], help: FoodsoftConfig[:help_url]

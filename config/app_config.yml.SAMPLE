@@ -29,7 +29,7 @@ default: &defaults
   homepage: http://www.fctest.de
 
   # foodsoft documentation URL
-  help_url: http://foodsoft.fcschinke09.de/trac/wiki/FoodsoftDoku
+  help_url: https://github.com/bennibu/foodsoft/wiki/Doku
 
   # price markup in percent
   price_markup: 2.0
