@@ -1,0 +1,22 @@
+# this file is currently unfinished!
+en:
+  mailer:
+    invite:
+      text: |
+        Hi!
+        
+        %{user} <%{mail}> has invited you to join the group "%{group}".
+        To accept the invitation and to join the foodcoop please follow this link: %{link}
+        This link works only once and expires on %{expires}.
+        
+        Greetings, your Foodsoft Team!
+    reset_password:
+      text: |
+        Hi %{user},
+
+        you have (or someone else has) requested a new password.
+        In order to choose a new password follow this link: %{link}
+        This link works only once and expires on %{expires}.
+        If you don't want to change your password, just ignore this message. Your password hasn't been changed yet.
+        
+        Greetings, your Foodsoft Team!

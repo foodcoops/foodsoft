@@ -1,0 +1,76 @@
+de:
+  mailer:
+    dateformat: '%d. %b'
+    feedback:
+      header: '%{user} schrieb am %{date}:'
+    foodsoft_message:
+      footer: |
+       Antworten: %{reply_url}
+       Nachricht online einsehen: %{msg_url}
+       Nachrichten-Einstellungen: %{profile_url}
+    invite:
+      text: |
+        Hallo!
+        
+        %{user} <%{mail}> hat dich in die Gruppe "%{group}" eingeladen.
+        Um die Einladung anzunehmen und der Foodcoop beizutreten, gehe zu: %{link}
+        Dieser Link kann nur einmal aufgerufen werden und ist nur bis %{expires} gültig.
+        
+        Grüße sendet die Foodsoft!
+    negative_balance:
+      text: |
+        Liebe %{group},
+
+        euer Kontostand is durch eine Buching am %{when} ins Minus gerutscht: %{balance}
+
+        Es wurden %{amount} für "%{note}" abgebucht, die Buchung wurde von %{user} erstellt.
+
+        Bitte zahlt so bald wie möglich wieder Geld ein, un das Gruppenkonto auszugleichen.
+
+        Viele Grüße von %{foodcoop}
+    not_enough_users_assigned:
+      text: |
+        Liebe(r) %{user},
+
+        De Job '%{task}' Deiner Arbeitsgruppe ist am %{when} fällig
+        und es fehlen noch Mitstriterinnen!
+
+        Sofern Du Dich noch nicht für diese Aufgabe eingetragen hast ist des jetzt die Chance:
+
+        %{workgroup_tasks_url}
+
+        Deine Aufgaben: %{user_tasks_url}
+    order_result:
+      text0: |
+        Liebe %{ordergroup},
+
+        die Bestelling für "%{order}" wurde am %{when} von %{user} beendet.
+
+        Für Euch wurden die folgenden Artikel bestellt:
+      text1: |
+        Gesamtpreis: %{sum}
+
+        Bestelling unline einsehen: %{order_url}
+
+        Viele Grüße von %{foodcoop}
+    reset_password:
+      text: |
+        Hallo %{user},
+        
+        du (oder jemand anderes) hat auf der FoodSoft-Website ein neues Passwort angefordert.
+        Um ein neues Passwort einzugeben, gehe zu: %{link}
+        Dieser Link kann nur einmal aufgerufen werden und läuft am %{expires} ab.
+        Wenn du das Passwort nicht ändern möchtest oder diese Email nicht ausgelöst hast, brauchst du nichts zu tun.
+        Dein bisheriges Passwort wurde nicht geändert.
+        
+        Grüße sendet die Foodsoft! :)
+    upcoming_tasks:
+      text0: |
+        Liebe(r) %{user},
+
+        Du bist für "%{task}" eingetragen. Die Aufgabe ist morgen (%{when}) fällig!
+      nextweek: 'Aufgaben für die nächtste Woche:'
+      text1: |
+        Meine Aufgaben: %{user_tasks_url}
+
+        Viele Grüße von %{foodcoop}
