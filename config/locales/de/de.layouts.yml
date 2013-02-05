@@ -12,11 +12,10 @@ de:
         desc: 'Fehler gefunden? Vorschlag? Idee? Kritik?'
       footer: 'Foodsoft, open source software to manage a non-profit food coop.'
     email:
-      footer: '
+      footer: |
         --
         Foodsoft: %{foodsoft}
         Foodcoop-Homepage: %{foodcoop}
-        Hilfe/Help: %{help}
-        '
+        Hilfe: %{help}
     application1:
       title: 'Foodsoft - %{title}'
