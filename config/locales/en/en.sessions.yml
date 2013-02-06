@@ -1,0 +1,15 @@
+en:
+  sessions:
+    new:
+      title: 'Foodsoft login'
+      nojs: 'Attention, Cookies and Javascript have to be activated! %{link} please  switch off.'
+      noscript: 'NoScript'
+      user: 'user'
+      password: 'password'
+      login: 'login'
+      forgot_password: 'forgot password?'
+    # used in controller
+    logged_in: 'logged in!'
+    logged_out: 'logged out!'
+    login_invalid: 'Invalid email or password'
+
