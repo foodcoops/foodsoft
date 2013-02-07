@@ -269,6 +269,8 @@ de:
   # general user-interface
   ui:
     close: 'Schließen'
+    edit: 'Bearbeiten'
+    delete: 'Löschen'
     marks:
       close: 'x'
 

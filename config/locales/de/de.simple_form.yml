@@ -66,10 +66,12 @@ de:
         body: 'Inhalt'
         parent_id: Oberseite
       supplier:
+        name: 'Name'
         address: 'Adresse'
         phone: 'Telefon'
         phone2: 'Telefon 2'
         fax: 'FAX'
+        email: 'Email'
         url: 'Homepage'
         contact_person: 'Ansprechparter_in'
         customer_number: 'Kundennummer'
@@ -77,6 +79,7 @@ de:
         order_howto: 'Howto Bestellen'
         note: 'Notiz'
         min_order_quantity: 'Mindestbestellmenge'
+        is_subscribed: 'abonniert?'
       article:
         availability: 'Artikel ist verfügbar?'
         origin: 'Herkunft'

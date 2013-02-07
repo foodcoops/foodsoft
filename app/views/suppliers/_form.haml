@@ -1,6 +1,7 @@
 = simple_form_for @supplier do |f|
   - if @supplier.shared_supplier
-    .alert.alert-success Lieferantin ist mit externer Datenbank verknüpft.
+    .alert.alert-success
+    = t 'suppliers.shared_supplier_note'
   = f.hidden_field :shared_supplier_id
   = f.input :name
   = f.input :address
@@ -17,4 +18,4 @@
   = f.input :min_order_quantity
   .form-actions
     = f.submit class: 'btn'
-    = link_to 'oder abbrechen', suppliers_path
+    = link_to t('.cancel'), suppliers_path

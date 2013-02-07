@@ -1,0 +1,30 @@
+de:
+  suppliers:
+    shared_supplier_note: 'Lieferantin ist mit externer Datenbank verknüpft.'
+    index:
+      title: 'Lieferanten'
+      action_new: 'Neue Lieferantin anlegen'
+      action_import: 'Lieferantin aus externer Datenbank importieren'
+      articles: 'Artikel (%{count})'
+      stock: 'im Lager (%{count})'
+      deliveries: 'Lieferungen (%{count})'
+      confirm_del: 'Achtung, willst Du wirklich den Lieferanten %{name} löschen?'
+    edit:
+      title: 'Lieferantin bearbeiten'
+    form:
+      cancel: 'oder abbrechen'
+    new:
+      title: 'Neue Lieferantin'
+    show:
+      confirm_delete: 'Bist Du sicher?'
+      last_deliveries: 'Letzte Lieferungen'
+      new_delivery: 'Neue Lieferung anlegen'
+      show_deliveries: 'Zeige alle Lieferungen'
+    shared_suppliers:
+      title: 'Externe Listen'
+      body:
+        <p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p>
+        <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p>
+        <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>
+      supplier: 'Lieferantin'
+      subscribe: 'abonnieren'

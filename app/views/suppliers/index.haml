@@ -1,14 +1,14 @@
-- title "Lieferanten"
+- title t('.title')
 
 - content_for :actionbar do
-  = link_to 'Neue Lieferantin anlegen', new_supplier_path, class: 'btn btn-primary'
-  = link_to 'Lieferantin aus externer Datenbank importieren', shared_suppliers_suppliers_path, class: 'btn'
+  = link_to t('.action_new'), new_supplier_path, class: 'btn btn-primary'
+  = link_to t('.action_import'), shared_suppliers_suppliers_path, class: 'btn'
 %table.table.table-striped
   %thead
     %tr
-      %th Name
-      %th Telefon
-      %th Kunden-Nr
+      %th= t 'simple_form.labels.supplier.name'
+      %th= t 'simple_form.labels.supplier.phone'
+      %th= t 'simple_form.labels.supplier.customer_number'
       %th
       %th
       %th
@@ -18,10 +18,10 @@
         %td= link_to h(supplier.name) , supplier
         %td= supplier.phone
         %td= supplier.customer_number
-        %td= link_to "Artikel (#{supplier.articles.count})", supplier_articles_path(supplier)
-        %td= link_to "im Lager (#{supplier.stock_articles.count})", stock_articles_path
-        %td= link_to "Lieferungen (#{supplier.deliveries.count})", supplier_deliveries_path(supplier)
+        %td= link_to t('.articles', count: supplier.articles.count), supplier_articles_path(supplier)
+        %td= link_to t('.stock', count: supplier.stock_articles.count), stock_articles_path
+        %td= link_to t('.deliveries', count: supplier.deliveries.count), supplier_deliveries_path(supplier)
         %td
-          = link_to "Bearbeiten", edit_supplier_path(supplier), class: 'btn btn-mini'
-          = link_to "Löschen", supplier_path(supplier), method: :delete,
-            confirm: "Achtung, willst Du wirklich den Lieferanten #{supplier.name} löschen?", class: 'btn btn-mini btn-danger'
+          = link_to t('ui.edit'), edit_supplier_path(supplier), class: 'btn btn-mini'
+          = link_to t('ui.delete'), supplier_path(supplier), method: :delete,
+            confirm: t('.confirm_del', name: supplier.name), class: 'btn btn-mini btn-danger'

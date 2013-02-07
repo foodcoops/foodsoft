@@ -195,3 +195,18 @@ tr.unavailable {
     border-color: red;
   }
 }
+
+
+// ********* Tweaks & fixes
+
+// https://github.com/twitter/bootstrap/issues/4062
+.dl-horizontal { 
+  dd { .clearfix(); }
+}
+
+// need more space for supplier information (in German, at least)
+.dl-horizontal {
+  dt { width: 150px; }
+  dd { margin-left: 160px; }
+}
+
