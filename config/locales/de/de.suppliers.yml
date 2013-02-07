@@ -28,3 +28,11 @@ de:
         <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>
       supplier: 'Lieferantin'
       subscribe: 'abonnieren'
+
+    # used by controller
+    create:
+      notice: 'Lieferant wurde erstellt'
+    update:
+      notice: 'Lieferant wurde aktualisiert'
+    destroy:
+      notice: 'Lieferant wurde gelöscht'

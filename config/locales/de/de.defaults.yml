@@ -120,6 +120,7 @@ de:
       year: Jahr
   errors: &errors
     general: 'Ein Problem ist aufgetreten.'
+    general_msg: 'Ein Fehler ist aufgetreten: %{msg}'
     general_again: 'Ein Fehler ist aufgetreten. Bitte erneut versuchen.'
     format: ! '%{attribute} %{message}'
     messages:
