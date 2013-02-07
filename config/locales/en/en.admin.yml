@@ -1,102 +1,102 @@
 en:
-  admin:
-    edit: 'Edit'
-    delete: 'Delete'
-    confirm: 'Do you really want to delete %{name}?'
-    actions: 'Actions'
-    access_to: 'access to'
-    or_cancel: 'or cancel'
-    search_placeholder: 'name ..'
-    base:
-      index:
-        title: 'Administration'
-        first_paragraph: 'Here you can administrate the groups and users of Foodsoft.'
-        newest_users: 'newest users'
-        username: 'username'
-        name: 'name'
-        created_at: 'created at'
-        all_users: 'all users'
-        new_user: 'new users'
-        newest_groups: 'newest groups'
-        groupname: 'group name'
-        type: 'type'
-        members: 'members'
-        all_ordergroups: 'All ordergroups'
-        new_ordergroup: 'New ordergroups'
-        all_workgroups: 'All workgroups'
-        new_workgroup: 'New workgroups'
-    ordergroups:
-      index:
-        title: 'Ordergroup'
-        new_ordergroup: 'Add new ordergroup'
-        first_paragraph: 'Here you can add a %{url}, administer a group or delete it.'
-        new_ordergroups: 'New ordergroups'
-        second_paragraph: "Consider the <em>difference between group and ordergroup</em>: A ordergroup has an account and can order food. In a <em>%{url}</em> (for example 'sorting group') the members coordinate each other via tasks and messages. Users can always just be part of one ordergroup, but any multitude of other groups."
-        workgroup: 'workgroup'
-      edit:
-        title: 'Edit ordergroup'
-      new: 
-        title: 'Create ordergroup'
-      form:
-        first_paragraph: 'You can invite new members %{url}.'
-        here: 'here'
-      show:
-        title: 'Ordergroup %{name}'
-        edit: 'Edit group/member'
-        delete: 'Delete'
-        confirm: 'Are you sure?'
-        send_message: 'Send message'
-      ordergroups:
-        name: 'Name'
-        contact: 'Contact'
-        address: 'Address'
-        members: 'Members'
-    users:
-      index:
-        title: 'Admin/users'
-        new_user: 'Create new user'
-        first_paragraph: 'Here you can edit users %{url}, bearbeiten and also delete them.'
-        new_users: 'Create new user'
-      edit:
-        title: 'Edit user'
-      new: 
-        title: 'Create new user'
-      show:
-        person: 'Person'
-        member_since: 'Member since %{time}'
-        nick: 'Nick'
-        name: 'Name'
-        email: 'Email'
-        phone: 'Phone'
-        preference: 'Preferences'
-        groupabos: 'Group subscriptions'
-        confirm: 'Do you really want to kick out %{user}?'
-        send_message: 'Send message'
-      users:
-        login: 'login'
-        name: 'name'
-        email: 'email'
-        last_login: 'last login'
-    workgroups:
-      index:
-        title: 'Workgroups'
-        new_workgroup: 'Create new workgroup'
-        first_paragraph: 'Here you can create %{url}, edit and delete them.'
-        new_workgroups: 'new workgroups'
-        second_paragraph: "Be aware of the <em>difference between a group and ordergroup</em>: A %{url} has an account and can order food. In a workgroup (for example 'sorting group') the members coordinate each other via tasks and messages. Users can always just be part of one ordergroup, but a multitude of other groups."
-        ordergroup: 'ordergroup'
-      edit:
-        title: 'Edit workgroup'
-      new: 
-        title: 'Create workgroup'
-      form:
-        first_paragraph: 'You can invite new members %{url}.'
-        here: 'here'
-      show:
-        title: 'Workgroup %{name}'
-        edit: 'Edit group/members'
-        delete: 'Delete'
-        confirm: 'Are you sure?'
-      workgroups:
-        name: 'name'
-        members: 'members'
+  admin:
+    edit: 'Edit'
+    delete: 'Delete'
+    confirm: 'Do you really want to delete %{name}?'
+    actions: 'Actions'
+    access_to: 'access to'
+    or_cancel: 'or cancel'
+    search_placeholder: 'name ..'
+    base:
+      index:
+        title: 'Administration'
+        first_paragraph: 'Here you can administrate the groups and users of Foodsoft.'
+        newest_users: 'newest users'
+        username: 'username'
+        name: 'name'
+        created_at: 'created at'
+        all_users: 'all users'
+        new_user: 'new users'
+        newest_groups: 'newest groups'
+        groupname: 'group name'
+        type: 'type'
+        members: 'members'
+        all_ordergroups: 'All ordergroups'
+        new_ordergroup: 'New ordergroups'
+        all_workgroups: 'All workgroups'
+        new_workgroup: 'New workgroups'
+    ordergroups:
+      index:
+        title: 'Ordergroup'
+        new_ordergroup: 'Add new ordergroup'
+        first_paragraph: 'Here you can add a %{url}, administer a group or delete it.'
+        new_ordergroups: 'New ordergroups'
+        second_paragraph: "Consider the <em>difference between group and ordergroup</em>: A ordergroup has an account and can order food. In a <em>%{url}</em> (for example 'sorting group') the members coordinate each other via tasks and messages. Users can always just be part of one ordergroup, but any multitude of other groups."
+        workgroup: 'workgroup'
+      edit:
+        title: 'Edit ordergroup'
+      new: 
+        title: 'Create ordergroup'
+      form:
+        first_paragraph: 'You can invite new members %{url}.'
+        here: 'here'
+      show:
+        title: 'Ordergroup %{name}'
+        edit: 'Edit group/member'
+        delete: 'Delete'
+        confirm: 'Are you sure?'
+        send_message: 'Send message'
+      ordergroups:
+        name: 'Name'
+        contact: 'Contact'
+        address: 'Address'
+        members: 'Members'
+    users:
+      index:
+        title: 'Admin/users'
+        new_user: 'Create new user'
+        first_paragraph: 'Here you can edit users %{url}, bearbeiten and also delete them.'
+        new_users: 'Create new user'
+      edit:
+        title: 'Edit user'
+      new: 
+        title: 'Create new user'
+      show:
+        person: 'Person'
+        member_since: 'Member since %{time}'
+        nick: 'Nick'
+        name: 'Name'
+        email: 'Email'
+        phone: 'Phone'
+        preference: 'Preferences'
+        groupabos: 'Group subscriptions'
+        confirm: 'Do you really want to kick out %{user}?'
+        send_message: 'Send message'
+      users:
+        login: 'login'
+        name: 'name'
+        email: 'email'
+        last_login: 'last login'
+    workgroups:
+      index:
+        title: 'Workgroups'
+        new_workgroup: 'Create new workgroup'
+        first_paragraph: 'Here you can create %{url}, edit and delete them.'
+        new_workgroups: 'new workgroups'
+        second_paragraph: "Be aware of the <em>difference between a group and ordergroup</em>: A %{url} has an account and can order food. In a workgroup (for example 'sorting group') the members coordinate each other via tasks and messages. Users can always just be part of one ordergroup, but a multitude of other groups."
+        ordergroup: 'ordergroup'
+      edit:
+        title: 'Edit workgroup'
+      new: 
+        title: 'Create workgroup'
+      form:
+        first_paragraph: 'You can invite new members %{url}.'
+        here: 'here'
+      show:
+        title: 'Workgroup %{name}'
+        edit: 'Edit group/members'
+        delete: 'Delete'
+        confirm: 'Are you sure?'
+      workgroups:
+        name: 'name'
+        members: 'members'
