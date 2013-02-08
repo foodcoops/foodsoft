@@ -1,9 +1,9 @@
 %ul
   %li
-    = image_tag 'b_user.png' , :size => '7x10',  :border => 0, :alt => "Profil"
-    = link_to h(@current_user.nick), my_profile_path, { :title => "Profil bearbeiten" }
+    = image_tag 'b_user.png' , :size => '7x10',  :border => 0, :alt => t('.profile')
+    = link_to h(@current_user.nick), my_profile_path, { :title => t('.edit_profile') }
   - if FoodsoftConfig[:homepage]
-    %li= link_to FoodsoftConfig[:name], FoodsoftConfig[:homepage], { :title => "Go to your FoodCoop-Hompage" }
-  %li= link_to "Hilfe", 'http://dev.foodcoops.net/wiki/FoodsoftDoku'
-  %li= link_to "Feedback", new_feedback_path, :title => "Fehler gefunden? Vorschlag? Idee? Kritik?"
-  %li= link_to "Abmelden", logout_path
+    %li= link_to FoodsoftConfig[:name], FoodsoftConfig[:homepage], { :title => t('.homepage_title') }
+  %li= link_to t('.help'), FoodsoftConfig[:help_url]
+  %li= link_to t('.feedback.title'), new_feedback_path, :title => t('.feedback.desc')
+  %li= link_to t('.logout'), logout_path

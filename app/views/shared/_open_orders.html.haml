@@ -1,15 +1,16 @@
 %section
-  %h2 Laufende Bestellungen
+  %h2= t '.title'
   - if ordergroup.not_enough_apples?
-    .alert Achtung, Deine Bestellgruppe hat zu wenig Äpfel um Bestellen zu können!
+    .alert
+    = t '.not_enough_apples'
   - unless Order.open.empty?
     %table.table.table-striped
       %thead
         %tr
-          %th Lieferantin
-          %th Ende
-          %th Wer hat bestellt?
-          %th Summe
+          %th= t '.supplier'
+          %th= t '.ending'
+          %th= t '.who_ordered'
+          %th= t '.total'
       %tbody
         - total = 0
         - Order.open.each do |order|
@@ -26,7 +27,7 @@
         %tfooter
           %tr
             %th(colspan="2")
-            %th Gesamtsumme:
+            %th= t('.total_sum') + ':'
             %th.numeric= number_to_currency(total)
   - else
-    %i Derzeit gibt es keine laufenden Bestellungen
+    %i= t '.no_open_orders'

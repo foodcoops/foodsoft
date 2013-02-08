@@ -1,10 +1,10 @@
 %table.table.table-hover
   %thead
     %tr
-      %th{:style => 'width:70%'} Bestellgruppe
-      %th Bestellt (Menge + Toleranz)
-      %th Bekommen
-      %th Gesamtpreis
+      %th{:style => 'width:70%'}= t '.ordergroup'
+      %th= t '.ordered'
+      %th= t '.received'
+      %th= t '.price'
 
   - for order_article in order.order_articles.ordered.all(:include => [:article, :article_price])
     %thead

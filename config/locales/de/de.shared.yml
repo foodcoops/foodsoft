@@ -1,0 +1,68 @@
+de:
+  shared:
+    articles_by_articles:
+      ordergroup: 'Bestellgruppe'
+      ordered: 'Bestellt (Menge + Toleranz)'
+      received: 'Bekommen'
+      price: 'Gesamtpreis'
+    articles_by_groups:
+      name: 'Name'
+      units: 'Menge'
+      units_desc: 'Zugeteilte Einheiten'
+      fc_price: 'FC-Preis'
+      fc_price_desc: 'Preis incl. MwSt, Pfand und Foodcoop-Aufschlag'
+      unit_quantity: 'GebGr'
+      unit_quantity_desc: 'Gebindegröße'
+      unit: 'Einheit'
+      price: 'Gesamtpreis'
+    group_form_fields:
+      title: 'Wöchentliche Jobs'
+      search_user: 'Nach Nutzerin suchen'
+      user_not_found: 'Keine Nutzerin gefunden'
+      search: 'Suche ...'
+    group:
+      description: 'Beschreibung'
+      contact: 'Kontakt'
+      address: 'Adresse'
+      access: 'Zugriff auf'
+      members: 'Mitglieder'
+      weekly_job: 'wöchentlicher Job'
+      no_weekly_job: 'kein wöchentlicher Job definiert'
+      apple_limit: 'Äpfel-Bestellbeschränkung'
+      deactivated: 'deaktiviert'
+      activated: 'aktiviert'
+    loginInfo:
+      profile: 'Profil'
+      edit_profile: 'Profil bearbeiten'
+      homepage_title: 'Foodcoop Homepage besuchen'
+      # duplicate from de.layouts.header
+      logout: 'Abmelden'
+      help: 'Hilfe'
+      feedback:
+        title: 'Feedback'
+        desc: 'Fehler gefunden? Vorschlag? Idee? Kritik?'
+    open_orders:
+      title: 'Laufende Bestellungen'
+      not_enough_apples: 'Achtung, Deine Bestellgruppe hat zu wenig Äpfel um Bestellen zu können!'
+      supplier: 'Lieferantin'
+      ending: 'Ende'
+      who_ordered: 'Wer hat bestellt?'
+      total: 'Summe'
+      total_sum: 'Gesamtsumme'
+      no_open_orders: 'Derzeit gibt es keine laufenden Bestellungen'
+    workgroup_members:
+      title: 'Mitglieder der Gruppen'
+
+    memberships:
+      current_members:
+        drop: 'entfernen'
+        no_members: '%{group} hat keine Mitglieder.'
+      members:
+        title: 'Mitglieder von %{group}'
+        desc: 'Hier kannst Du Mitglieder der Gruppe verwalten oder ein neues Foodcoop-Mitglied in die Gruppe %{link}.'
+        invite: 'einladen'
+        already_members: 'Sind schon Mitglieder'
+        no_members_yet: 'Sind noch keine Mitglieder'
+        invite_someone: 'Person einladen'
+      non_members:
+        add: 'hinzufügen'

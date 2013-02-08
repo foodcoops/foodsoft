@@ -4,7 +4,7 @@
 = yield
 
 - if f.object.is_a?(Workgroup)
-  %h3 Wöchentliche Jobs
+  %h3= t '.title'
   = f.input :weekly_task
   #weekly_task_fields
     = f.input :weekday, as: :select, collection: Workgroup.weekdays
@@ -38,9 +38,9 @@
       $("##{f.object.class.to_s.underscore}_user_tokens").tokenInput("#{users_path(:format => :json)}", {
         crossDomain: false,
         prePopulate: $("##{f.object.class.to_s.underscore}_user_tokens").data("pre"),
-        hintText: 'Nach Nutzerin suchen',
-        noResultText: 'Keine Nutzerin gefunden',
-        searchingText: 'Suche ...',
+        hintText: #{t('.search_user')},
+        noResultText: #{t('.user_not_found')}
+        searchingText: #{t('.search')},
         theme: 'facebook'
       });
     });

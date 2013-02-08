@@ -1,15 +1,15 @@
 %table.table.table-hover
   %thead
     %tr
-      %th{:style => "width:40%"} Name
+      %th{:style => "width:40%"}= t '.name'
       %th
-        %acronym{:title => "zugeteilte Einheiten"} Menge
+        %acronym{:title => t('.units_desc')}= t '.units'
       %th
-        %acronym{:title => "Preis incl. MwSt, Pfand und Foodcoop-Aufschlag"} FC-Preis
+        %acronym{:title => t('.fc_price_desc')}= t '.fc_price'
       %th
-        %acronym{:title => "Gebindegröße"} GebGr
-      %th Einheit
-      %th Gesamtpreis
+        %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity'
+      %th= t '.unit'
+      %th= t '.price'
 
   - for group_order in order.group_orders.all
     %thead
