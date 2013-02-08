@@ -1,60 +1,61 @@
-- title "Bestellung: #{@order.name}"
+- title t('.title', name: @order.name)
 
 - if @order.finished? and !@order.closed?
-  .alert.alert-warning Achtung, Bestellung wurde noch nicht abgerechnet.
+  .alert.alert-warning
+  = t '.warn_not_closed'
 
 // Order summary
 .well
   %dl.dl-horizontal
-    %dt Lieferantin
+    %dt= t '.supplier'
     %dd= @order.name
     - if @note.present?
-      %dt Notiz
+      %dt= t '.note'
       %dd= @order.note
-    %dt Erstellt von
+    %dt= t '.created_by'
     %dd= link_to_user_message_if_valid(@order.created_by)
-    %dt Beginn
+    %dt= t '.begin'
     %dd= format_time(@order.starts)
-    %dt Ende
+    %dt= t '.ending'
     %dd= format_time(@order.ends)
-    %dt Gruppenbestellungen:
+    %dt= t '.group_orders'
     %dd #{@order.group_orders.count} (#{@order.group_orders.includes(:ordergroup).all.map {|g| g.ordergroup.name}.join(', ')})
-    %dt Netto/Bruttosumme aller Artikel:
+    %dt= t '.amounts'
     %dd= "#{number_to_currency(@order.sum(:net))} / #{number_to_currency(@order.sum(:gross))}"
-    %dt Bestellte Artikel:
+    %dt= t '.articles_ordered'
     %dd= @order.order_articles.ordered.count
 
     
     .form-actions
       - if @order.open?
-        = link_to "Bearbeiten", edit_order_path(@order), class: 'btn'
-        = link_to 'Beenden!', finish_order_path(@order), method: :post, class: 'btn btn-success',
-          confirm: "Willst Du wirklich die Bestellung beenden?\nEs gibt kein zurück.."
+        = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
+        = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
+          confirm: t('.confirm_end')
       - unless @order.closed?
-        = link_to "Löschen", @order, confirm: "Willst du wirklich die Bestellung löschen?", method: :delete,
+        = link_to t('ui.delete'), @order, confirm: t('.confirm_delete'), method: :delete,
           class: 'btn btn-danger'
 
 - unless @order.open?
   %ul.nav.nav-pills
-    %li= update_articles_link(@order, "Artikelübersicht", :default)
-    %li= update_articles_link(@order, "Sortiert nach Gruppen", :groups)
-    %li= update_articles_link(@order, "Sortiert nach Artikeln", :articles)
-    %li= link_to 'Kommentare', '#comments'
+    %li= update_articles_link(@order, t('.articles'), :default)
+    %li= update_articles_link(@order, t('.sort_group'), :groups)
+    %li= update_articles_link(@order, t('.sort_article'), :articles)
+    %li= link_to t('.comments_link'), '#comments'
     %li.dropdown
       = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
-        Download
+        = t '.download.title'
         %b.caret
       %ul.dropdown-menu
-        %li= order_pdf(@order, :groups, "Gruppenpdf")
-        %li= order_pdf(@order, :articles, "Artikelpdf")
-        %li= order_pdf(@order, :matrix, "Matrix")
-        %li= order_pdf(@order, :fax, "Fax PDF")
-        %li= link_to "Fax Text", {action: 'text_fax_template', id: @order }, {title: "Download file"}
+        %li= order_pdf(@order, :groups, t('.group_pdf'))
+        %li= order_pdf(@order, :articles, t('.article_pdf'))
+        %li= order_pdf(@order, :matrix, t('.matrix_pdf'))
+        %li= order_pdf(@order, :fax, t('.fax_pdf'))
+        %li= link_to t('.fax_txt'), {action: 'text_fax_template', id: @order }, {title: t('.download_file')}
 
 %section#articles_table
   = render 'articles', order: @order
 
-%h2 Kommentare
+%h2= t '.comments.title'
 #comments
   = render partial: 'shared/comments', locals: { comments: @order.comments }
 #new_comment= render partial: 'order_comments/form', locals: { order_comment: @order.comments.build(user: current_user)}

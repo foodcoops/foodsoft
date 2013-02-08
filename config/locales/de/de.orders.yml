@@ -1,0 +1,87 @@
+de:
+  orders:
+    articles:
+      name: 'Name'
+      unit_quantity: 'Gebinde'
+      prices: 'Netto-/Bruttopreis'
+      units_ordered: 'Bestellte Einheiten'
+      units_full: 'Volle Gebinde'
+      prices_sum: 'Summe (Netto/Brutto-Preise):'
+      article_count: 'Bestellte Artikel:'
+    edit:
+      title: 'Bestellung bearbeiten'
+    new:
+      title: 'Neue Bestellung anlegen'
+    form:
+      title: 'Artikel'
+      name: 'Name'
+      note: 'Notiz'
+      stockit: 'Verfügbar'
+      origin: 'Herkunft'
+      supplier: 'Hersteller'
+      unit_quantity: 'Gebinde'
+      prices: 'Price (netto/FC)'
+      select_all: 'Alle auswählen'
+      cancel: 'oder abbrechen'
+    index:
+      title: 'Bestellungen verwalten'
+      new_order: 'Neue Bestellung anlegen'
+      open_orders: 'Laufende Bestellungen'
+      supplier: 'Lieferantin'
+      ending: 'Ende'
+      note: 'Notiz'
+      action_end: 'Beenden'
+      confirm_end: 'Willst Du wirklich die Bestellung %{order} beenden? Es gibt kein zurück.'
+      confirm_delete: 'Willst Du wirklich die Bestellung löschen?'
+      no_open_orders: 'Derzeit gibt es keine laufende Bestellungen.'
+      ended_orders: 'Beendete Bestellungen'
+    orders:
+      supplier: 'Lieferantin'
+      start: 'Start'
+      ending: 'Ende'
+      status: 'Status'
+    show:
+      title: 'Bestellung: %{name}'
+      warn_not_closed: 'Achtung, Bestellung wurde noch nicht abgerechnet.'
+      supplier: 'Lieferantin:'
+      note: 'Notiz:'
+      created_by: 'Erstellt von:'
+      begin: 'Beginn:'
+      ending: 'Ende:'
+      group_orders: 'Gruppenbestellungen:'
+      amounts: 'Netto/Bruttosumme:'
+      articles_ordered: 'Bestellte Artikel:'
+      action_end: 'Beenden!'
+      confirm_end: "Willst Du wirklich die Bestellung %{order} beenden?\nEs gibt kein zurück."
+      confirm_delete: 'Willst Du wirklich die Bestellung löschen?'
+      articles: 'Artikelübersicht'
+      sort_group: 'Sortiert nach Gruppen'
+      sort_article: 'Sortiert nach Artikeln'
+      comments_link: 'Kommentare'
+      download:
+        title: 'Download'
+        group_pdf: 'Gruppen PDF'
+        article_pdf: 'Artikel PDF'
+        matrix_pdf: 'Matrix PDF'
+        fax_pdf: 'Fax PDF'
+        fax_txt: 'Fax Text'
+        download_file: 'Download file'
+      comments:
+        title: 'Kommentare'
+
+    # used by controller
+    create:
+      notice: 'Die Bestellung wurde erstellt.'
+    update:
+      notice: 'Die Bestellung wurde aktualisiert.'
+    finish:
+      notice: 'Die Bestellung wurde beendet.'
+    fax:
+      heading: 'Bestellung für %{name}'
+      customer_number: 'Kundennummer'
+      delivery_day: 'Liefertag'
+      to_address: 'Versandaddresse'
+      articles: 'Artikel'
+      number: 'Nummer'
+      amount: 'Menge'
+      name: 'Name'

@@ -272,6 +272,7 @@ de:
     close: 'Schließen'
     edit: 'Bearbeiten'
     delete: 'Löschen'
+    show: 'Anzeigen'
     marks:
       close: 'x'
 

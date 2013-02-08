@@ -1,12 +1,12 @@
 %table.table.table-hover
   %thead
     %tr
-      %th Name
-      %th Gebinde
-      %th Netto-/Bruttopreis
-      %th Bestellte Einheiten
+      %th= t '.name'
+      %th= t '.unit_quantity'
+      %th= t '.prices'
+      %th= t '.units_ordered'
       - unless order.stockit?
-        %th Volle Gebinde
+        %th= t '.units_full'
     - total_net, total_gross, counter = 0, 0, 0
   %tbody
     - order.articles_grouped_by_category.each do |category_name, order_articles|
@@ -32,8 +32,8 @@
             %td= "#{order_article.quantity} + #{order_article.tolerance}" if unit_quantity > 1
             %td= units
 %p
-  Summe (Netto/Brutto-Preise):
+  = t '.prices_sum'
   = "#{number_to_currency(total_net)} / #{number_to_currency(total_gross)}"
 %p
-  Bestellte Artikel.
+  = t '.article_count'
   = order.order_articles.ordered.count

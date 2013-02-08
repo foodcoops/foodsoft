@@ -1,4 +1,4 @@
-- title "Ordergroups"
+- title t('.title')
 %table
   %tr
     %th Type
@@ -43,4 +43,4 @@
       %td= h ordergroup.contact_person
       %td= h ordergroup.contact_phone
       %td= h ordergroup.contact_address
-      %td= link_to "Edit", edit_ordergroup_path(ordergroup)
+      %td= link_to t('ui.edit'), edit_ordergroup_path(ordergroup)

@@ -1,23 +1,23 @@
-- title "Bestellungen verwalten"
+- title t('.title')
 
 - content_for :actionbar do
   .btn-group
     = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-primary dropdown-toggle' do
-      Neue Bestellung anlegen
+      = t '.new_order'
       %span.caret
     %ul.dropdown-menu
       - Supplier.all.each do |supplier|
         %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1
 
 .well
-  %h2 Laufende Bestellungen
+  %h2= t '.open_orders'
   - unless @open_orders.empty?
     %table.table.table-striped
       %thead
         %tr
-          %th Lieferantin
-          %th Ende
-          %th Notiz
+          %th= t '.supplier'
+          %th= t '.ending'
+          %th= t '.note'
           %th{colspan: "2"}
       %tbody
         - for order in @open_orders
@@ -26,18 +26,18 @@
             %td= order.name
             %td= format_time(order.ends) unless order.ends.nil?
             %td= truncate(order.note)
-            %td= link_to "Beenden", finish_order_path(order),
-              confirm: "Willst Du wirklich die Bestellung \"#{order.name}\" beenden? Es gibt kein zurück.",
-              method: :post, class: 'btn btn-small btn-success'
+            %td= link_to t('.action_end'), finish_order_path(order),
+              confirm: t('.confirm_end', order: order.name), method: :post,
+              class: 'btn btn-small btn-success'
 
             %td
-              = link_to "Anzeigen", order, class: 'btn btn-small'
-              = link_to "Bearbeiten", edit_order_path(order), class: 'btn btn-small'
-              = link_to "Löschen", order, confirm: "Willst Du wirklich die Bestellung löschen?", method: :delete,
+              = link_to t('ui.show'), order, class: 'btn btn-small'
+              = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-small'
+              = link_to t('ui.delete'), order, confirm: t('.confirm_delete'), method: :delete,
                 class: 'btn btn-small btn-danger'
   - else
-    Derzeit gibt es keine laufende Bestellungen.
+    = t '.no_open_orders'
 
-%h2 Beendete Bestellungen
+%h2= t '.ended_orders'
 #orders_table
   = render partial: 'orders'
