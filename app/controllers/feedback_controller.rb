@@ -6,7 +6,7 @@ class FeedbackController < ApplicationController
   def create
     if params[:message].present?
       Mailer.feedback(current_user, params[:message]).deliver
-      redirect_to root_url, :notice => "Das Feedback wurde erfolgreich verschickt. Vielen Dank!"
+      redirect_to root_url, notice: t('feedback.create.notice')
     else
       render :action => 'new'
     end
