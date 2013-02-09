@@ -16,8 +16,8 @@ class Admin::OrdergroupsController < Admin::BaseController
   def destroy
     @ordergroup = Ordergroup.find(params[:id])
     @ordergroup.destroy
-    redirect_to admin_ordergroups_url, :notice => "Bestellgruppe wurde gelöscht"
+    redirect_to admin_ordergroups_url, notice: t('admin.ordergroups.destroy.notice')
   rescue => error
-    redirect_to admin_ordergroups_url, :alert => "Bestellgruppe konnte nicht gelöscht werden: #{error}"
+    redirect_to admin_ordergroups_url, alert: t('admin.ordergroups.destroy.error')
   end
 end

@@ -51,6 +51,9 @@ de:
         contact: 'Kontakt'
         address: 'Adresse'
         members: 'Mitglieder'
+      destroy:
+        notice: 'Bestellgruppe wurde gelöscht'
+        error: 'Bestellgruppe konnte nicht gelöscht werden: #{error}'
     users:
       index:
         title: 'Admin/Benutzerinnen'
@@ -100,3 +103,6 @@ de:
       workgroups:
         name: 'Name'
         members: 'Mitglieder'
+      destroy:
+        notice: 'Arbeitsgruppe wurde gelöscht'
+        error: 'Arbeitsgruppe konnte nicht gelöscht werden: #{error}'

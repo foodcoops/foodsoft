@@ -13,8 +13,8 @@ class Admin::WorkgroupsController < Admin::BaseController
   def destroy
     @workgroup = Workgroup.find(params[:id])
     @workgroup.destroy
-    redirect_to admin_workgroups_url, :notice => "Arbeitsgruppe wurde gelöscht"
+    redirect_to admin_workgroups_url, notice: t('admin.ordergroups.destroy.notice')
   rescue => error
-    redirect_to admin_workgroups_url, :alert => "Arbeitsgruppe konnte nicht gelöscht werden: #{error}"
+    redirect_to admin_workgroups_url, alert: t('admin.ordergroups.destroy.error')
   end
 end
