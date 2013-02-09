@@ -48,9 +48,9 @@ class Message < ActiveRecord::Base
   def reply_to=(message_id)
     message = Message.find(message_id)
     add_recipients([message.sender])
-    self.subject = "Re: #{message.subject}"
-    self.body = "#{message.sender.nick} schrieb am #{I18n.l(message.created_at, :format => :short)}:\n"
-    message.body.each_line{ |l| self.body += "> #{l}" }
+    self.subject = I18n.t('messages.model.reply_subject', :subject => message.subject)
+    self.body = I18n.t('messages.model.reply_header', :user => message.sender.nick, :when => I18n.l(message.created_at, :format => :short)) + "\n"
+    message.body.each_line{ |l| self.body += I18n.t('messages.model.reply_indent', :line => l) }
   end
 
   def mail_to=(user_id)
@@ -64,7 +64,7 @@ class Message < ActiveRecord::Base
   end
 
   def sender_name
-    system_message? ? 'Foodsoft' : sender.nick rescue "??"
+    system_message? ? I18n.t('layouts.foodsoft') : sender.nick rescue "??"
   end
 
   def recipients

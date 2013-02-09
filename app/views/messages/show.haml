@@ -1,21 +1,21 @@
-- title "Nachricht anzeigen"
+- title t('.title')
 
 %div{:style => "width:40em"}
   %table{:style => "width:25em"}
     %tr
-      %td Von:
+      %td= t '.from'
       %td=h @message.sender_name
     %tr
-      %td Betreff:
+      %td= t '.subject'
       %td
         %b=h @message.subject
     %tr
-      %td Gesendet:
+      %td= t '.sent_on'
       %td= format_time(@message.created_at)
   %hr/
   %p= simple_format(h(@message.body))
   %hr/
   %p
-    = link_to 'Antworten', new_message_path(:message => {:reply_to => @message.id}), class: 'btn'
+    = link_to t('.reply'), new_message_path(:message => {:reply_to => @message.id}), class: 'btn'
     |
-    = link_to 'Nachricht im Überblick', messages_path
+    = link_to t('.all_messages'), messages_path

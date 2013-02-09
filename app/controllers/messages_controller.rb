@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
     @message = @current_user.send_messages.new(params[:message])
     if @message.save
       Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'message_deliver', @message.id)
-      redirect_to messages_url, :notice => "Nachricht ist gespeichert und wird versendet."
+      redirect_to messages_url, :notice => I18n.t('messages.create.notice')
     else
       render :action => 'new'
     end
