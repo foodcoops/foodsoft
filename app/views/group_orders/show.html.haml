@@ -4,48 +4,49 @@
       $('tr.ignored').hide();
     });
 
-- title "Dein Bestellergebnis für #{@order.name}"
+- title t('.title', order: @order.name)
 
 .well
   // Order summary
   %dl.dl-horizontal
-    %dt Lieferantin
+    %dt= t '.supplier'
     %dd= @order.name
-    %dt Notiz
+    %dt= t '.note'
     %dd= @order.note
-    %dt Ende
+    %dt= t '.ending'
     %dd= format_time(@order.ends)
-    %dt Bestellsumme
+    %dt= t '.order_sum'
     %dd
       - if @group_order
         = number_to_currency(@group_order.price)
       - else
-        Du hast nicht bestellt.
+        = t '.not_ordered'
     - if @order.closed?
-      %p Abgerechnet von #{@order.updated_by.nick}
-      = link_to "Kommentare lesen/schreiben", "#comments"
+      %p= t '.closed_by', user: @order.updated_by.nick
+      = link_to t('.comment'), "#comments"
 
 // Article box
 %section
-  %h2 Artikelübersicht
+  %h2= t '.articles.title'
   .column_content#result
     - if @group_order
-      %p.pull-right= link_to "Zeige/Verstecke nicht bestellte Artikel", '#', 'data-toggle-this' => 'tr.ignored'
-      %p= link_to("Bestellung anpassen", edit_group_order_path(@group_order, order_id: @order.id), class: 'btn btn-primary') if @order.open?
+      %p.pull-right= link_to t('.articles.show_hide'), '#', 'data-toggle-this' => 'tr.ignored'
+      %p= link_to(t('.articles.edit_order'), edit_group_order_path(@group_order, order_id: @order.id), class: 'btn btn-primary') if @order.open?
       %table.table.table-hover
         %thead
           %tr
-            %th{style: "width:40%"} Name
-            %th Gebinde
-            %th Einzelpreis
+            %th{style: "width:40%"}= t '.articles.name'
+            %th= t '.articles.units'
+            %th= t '.articles.unit_price'
             %th
-              %abbr{title: "Menge + Toleranz"} Bestellt
+              %abbr{title: t('.articles.ordered_title')}= t '.articles.ordered'
             %th
-              %abbr{title: "Unter Berücksichtigung der derzeitigen Bestellungen aller Gruppen"}
+              %abbr{title: t('.articles.order_nopen_title')}
                 - if @order.open?
-                  Zu
-                Erhalten
-            %th Gesamtpreis
+                  = t '.articles.order_open'
+                - else
+                  = t '.articles.order_not_open'
+            %th= t '.articles.total_price'
         %tbody
           - total = 0 #set counter for order-sum
           - for category_name, order_articles in @order.articles_grouped_by_category
@@ -73,20 +74,20 @@
                 %tr{id: "note_#{oa.id}", class: "note even", style: "display:none"}
                   %td{colspan: "6"}=h oa.article.note
           %tr{class: cycle('even', 'odd', name: 'articles')}
-            %th{colspan: "5"} Summe
+            %th{colspan: "5"}= t '.articles.sum'
             %th= number_to_currency(total)
       %br/
       = link_to_top
     - else
       - if @order.open?
-        Du hast noch nicht bestellt.
-        = link_to "Das ist Deine Chance!", action: "order", id: @order
+        = t '.articles.not_ordered_msg'
+        = link_to t('.articles.order_now'), action: "order", id: @order
       - else
-        Die Bestellung is leider schon zu Ende. Beim nächsten mal früher aufstehen...
+        = t '.articles.order_closed_msg'
 
 //  Comments box
 %section
-  %h2 Kommentare
+  %h2= t '.comments.title'
   #comments
     = render 'shared/comments', comments: @order.comments
   #new_comment= render 'order_comments/form', order_comment: @order.comments.build(user: current_user)

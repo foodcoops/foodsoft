@@ -1,9 +1,9 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Lieferantin
-      %th Ende
-      %th Summe
+      %th= t '.supplier'
+      %th= t '.ending'
+      %th= t '.sum'
   %tbody
     - for order in orders
       - group_order = order.group_order(@ordergroup) # Get GroupOrder if possible

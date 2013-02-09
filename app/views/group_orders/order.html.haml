@@ -6,20 +6,20 @@
 - form_tag(:action => 'saveOrder', :id => @order) do
   .single_column{:style => "clear:both;margin-bottom:7em;"}
     .box_title
-      %h2 Artikel
+      %h2= t '.title'
     .column_content
       %table#order.list
         %thead
           %tr
-            %th Name
+            %th= t 'group_orders.form.name'
             %th{:style => "width:13px;"}
-            %th{:style => "width:4.5em;"} Preis
-            %th{:style => "width:4.5em;"} Einheit
-            %th{:style => "width:70px;"} Fehlende Einheiten
-            %th#col_required Menge
+            %th{:style => "width:4.5em;"}= t 'group_orders.form.price'
+            %th{:style => "width:4.5em;"}= t 'group_orders.form.unit'
+            %th{:style => "width:70px;"}= t 'group_orders.form.unit_missing'
+            %th#col_required= t 'group_orders.form.amount'
             - if not @order.stockit?
-              %th#col_tolerance Toleranz
-            %th{:style => "width:15px;"} Summe
+              %th#col_tolerance= t 'group_orders.form.tolerance'
+            %th{:style => "width:15px;"}= t 'group_orders.form.sum'
         %tbody
           - total = 0
           - i = 0
@@ -68,21 +68,21 @@
                   .article-info
                     %h3= order_article.article.name
                     .right
-                      Volle Gebinde:
+                      = t('group_orders.form.units_full') + ':'
                       %span{:id => "units_#{i}"}= order_article.units_to_order
                       %br/
-                      Gesamt-Einheiten:
+                      = t('group_orders.form.total_units') + ':'
                       %span{:id => "q_total_#{i}"}= @quantity[i] + @others_quantity[i]
                       %br/
-                      Gesamt-Toleranz:
+                      = t('group_orders.form.total_tolerance') + ':'
                       %span{:id => "t_total_#{i}"}= @tolerance[i] + @others_tolerance[i]
                       %br/
                     .left
-                      Hersteller: #{order_article.article.manufacturer}
+                      #{t 'group_orders.form.manufacturer'}: #{order_article.article.manufacturer}
                       %br/
-                      Gebinde: #{@order.stockit? ? order_article.article.quantity_available : @unit[i]} * #{h order_article.article.unit}
+                      #{t 'group_orders.form.units'}: #{@order.stockit? ? order_article.article.quantity_available : @unit[i]} * #{h order_article.article.unit}
                       %br/
-                      Notiz: #{order_article.article.note}
+                      #{t 'group_orders.form.note'}: #{order_article.article.note}
                       %br/
               - i = i + 1
   = render "order_footer", :total => total
