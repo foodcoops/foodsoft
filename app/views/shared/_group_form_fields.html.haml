@@ -38,9 +38,9 @@
       $("##{f.object.class.to_s.underscore}_user_tokens").tokenInput("#{users_path(:format => :json)}", {
         crossDomain: false,
         prePopulate: $("##{f.object.class.to_s.underscore}_user_tokens").data("pre"),
-        hintText: #{t('.search_user')},
-        noResultText: #{t('.user_not_found')}
-        searchingText: #{t('.search')},
+        hintText: '#{t('.search_user')}',
+        noResultText: '#{t('.user_not_found')}',
+        searchingText: '#{t('.search')}',
         theme: 'facebook'
       });
     });
