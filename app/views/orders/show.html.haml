@@ -30,7 +30,7 @@
       - if @order.open?
         = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
         = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
-          confirm: t('.confirm_end')
+          confirm: t('.confirm_end', order: @order.name)
       - unless @order.closed?
         = link_to t('ui.delete'), @order, confirm: t('.confirm_delete'), method: :delete,
           class: 'btn btn-danger'
