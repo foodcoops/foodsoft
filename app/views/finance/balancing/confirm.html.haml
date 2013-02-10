@@ -1,13 +1,10 @@
--title "Bestellung abschließen"
-%p
-  Wenn die Bestellung abgeschlossen wird, werden ebenfalls alle Gruppenkonten aktualisiert.
-  %br/
-  Die Konten werden wie folgt belastet:
+-title t('.title')
+%p!= t('.first_paragraph')
 %table.table.table-striped{:style => "width:35em"}
   - for group_order in @order.group_orders
     %tr{:class => cycle('even', 'odd')}
       %td= group_order.ordergroup.name
       %td.numeric= number_to_currency(group_order.price)
 .form-actions
-  = link_to "Abschließen", close_finance_order_path(@order), method: :put, class: 'btn btn-primary'
-  = link_to 'oder zurück zur Abrechnung', new_finance_order_path(order_id: @order.id)
+  = link_to t('.clear'), close_finance_order_path(@order), method: :put, class: 'btn btn-primary'
+  = link_to t('.or_cancle'), new_finance_order_path(order_id: @order.id)

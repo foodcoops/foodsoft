@@ -5,5 +5,5 @@
   .modal-body
     = f.input :note, input_html: {class: 'input-xlarge'}
   .modal-footer
-    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
-    = f.submit "Speichern", class: 'btn btn-primary'
+    = button_tag t('.close'), class: 'btn', data: {dismiss: 'modal'}
+    = f.submit , class: 'btn btn-primary'

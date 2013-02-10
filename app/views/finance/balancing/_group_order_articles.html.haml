@@ -3,11 +3,11 @@
     %thead
       %tr
         %td
-        %td{:style => "width:8em"} Gruppe
-        %td Einheiten
-        %td Gesamtpreis
+        %td{:style => "width:8em"}= t('.group')
+        %td= t('.units')
+        %td= t('.total')
         %td{:colspan => "3",:style => "width:14em"}
-          = link_to 'Gruppe hinzufügen', new_finance_group_order_article_path(order_article_id: order_article.id),
+          = link_to t('.add_group'), new_finance_group_order_article_path(order_article_id: order_article.id),
             remote: true, class: 'btn btn-mini'
     %tbody
       - for group_order_article in order_article.group_order_articles.ordered.all(:include => [:group_order])
@@ -33,7 +33,7 @@
     %tfoot
       %tr
         %td
-        %td{:style => "width:8em"} Summe (FC-Preis)
+        %td{:style => "width:8em"}= t('total_fc')
         %td{:id => "group_orders_sum_quantity_#{order_article.id}"}
           = order_article.group_orders_sum[:quantity]
         %td.numeric{:id => "group_orders_sum_price_#{order_article.id}"}

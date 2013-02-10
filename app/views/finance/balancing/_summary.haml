@@ -1,27 +1,27 @@
 %b=h order.name
 %br/
-= "von #{format_date(order.starts)} bis #{format_date(order.ends)}"
+= t('.duration', {starts: format_date(order.starts), ends: format_date(order.ends)})
 %p
   %table
     %tr
-      %td Nettobetrag:
+      %td= t('.net_amount')
       %td.numeric= number_to_currency(order.sum(:net))
     %tr
-      %td Bruttobetrag:
+      %td= t('.gross_amount')
       %td.numeric= number_to_currency(order.sum(:gross))
     %tr
-      %td FC-Betrag:
+      %td= t('.fc_amount')
       %td.numeric= number_to_currency(order.sum(:fc))
     %tr
-      %td Gruppenbeträge:
+      %td= t('.groups_amount')
       %td.numeric= number_to_currency(order.sum(:groups))
     %tr
       %td
-        FC Gewinn
-        %small ohne Aufschlag:
+        = t('.fc_profit')
+        %small= t('.without_extra_charge')
       %td.numeric= number_to_currency(order.profit(:without_markup => true))
     %tr
       %td
-        FC Gewinn
-        %small mit Aufschlag:
+        = t('.fc_profit')
+        %small= t('.with_extra_charge')        
       %td#order_profit.numeric= number_to_currency(order.profit)
