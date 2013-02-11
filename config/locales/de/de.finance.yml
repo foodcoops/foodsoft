@@ -129,4 +129,9 @@ de:
         title: "Neue Transaktion"
         paragraph: 'Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.'
         or_cancel: "oder abbrechen"
+    group_order_articles:
+      form:
+        amount_change_for: 'Mengenänderung für %{article}'
+        close: 'Schließen'
+        save: "Speichern"
       
