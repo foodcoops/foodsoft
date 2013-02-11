@@ -1,0 +1,46 @@
+de:
+  stockit:
+    edit:
+      title: 'Lagerartikel bearbeiten'
+    form:
+      price_hint: 'Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.'
+      cancel: 'or cancel'
+    index:
+      view_options: 'Ansichtsoptionen'
+      toggle_unavailable: 'Nicht verfügbare Artikel zeigen/verstecken'
+      order_online: 'Lagerbestellung online stellen'
+      new_stock_article: 'Neuen Lagerartikel anlegen'
+      new_stock_taking: 'Inventur anlegen'
+      show_stock_takings: 'Inventurübersicht'
+      new_delivery: 'Neue Lieferung ..'
+      article:
+        article: 'Artikel'
+        stock: 'im Lager'
+        ordered: 'davon bestellt'
+        available: 'verfügbar'
+        unit: 'Einheit'
+        price: 'Preis'
+        vat: 'MwSt'
+        supplier: 'Lieferantin'
+        category: 'Kategorie'
+      confirm_delete: 'Bist Du sicher?'
+      stock_worth: 'Aktueller Lagerwert:'
+      stock_count: 'Artikelanzahl:'
+    new:
+      title: 'Neuen Lagerartikel anlegen'
+      search_text: 'Suche nache Artikeln aus allen Katalogen:'
+    
+    # used by controller
+    stock_create:
+      notice: 'Lagerartikel wurde gespeichert.'
+    stock_update:
+      notice: 'Lagerartikel wurde gespeichert.'
+    stock_taking_create:
+      notice: 'Inventur wurde erfolgreich angelegt.'
+    stock_taking_update:
+      notice: 'Inventur wurde aktualisiert.'
+
+    # used by model
+    check:
+      not_empty: '%{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null.'
+      

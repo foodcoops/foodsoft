@@ -9,9 +9,8 @@
     = f.input :tax
     = f.input :deposit
   - else
-    = f.input :price, :input_html => {:disabled => 'disabled'},
-    :hint => "Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden."
+    = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('.form.price_hint')
   = f.association :article_category
   .form-actions
     = f.submit class: 'btn'
-    = link_to "oder abbrechen", stock_articles_path
+    = link_to t('.cancel'), stock_articles_path

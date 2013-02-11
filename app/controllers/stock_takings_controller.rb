@@ -11,11 +11,11 @@ class StockTakingsController < ApplicationController
   end
 
   def create
-    create!(:notice => "Inventur wurde erfolgreich angelegt.")
+    create!(:notice => I18n.t('stockit.stock_taking_create.notice'))
   end
 
   def update
-    update!(:notice => "Inventur wurde aktualisiert.")
+    update!(:notice => I18n.t('stockit.stock_taking_update.notice'))
   end
 
   def fill_new_stock_article_form
