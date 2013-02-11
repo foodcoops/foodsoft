@@ -96,3 +96,37 @@ de:
         tax: 'MwSt'
         refund: 'Pfand'
         add_article: 'Artikel hinzufügen'
+    financial_transactions:
+      create:
+        notice: "Die Transaktion wurde gespeichert."
+      create_collection:
+        notice: "Alle Transaktionen wurden gespeichert."
+        alert: "Ein Fehler ist aufgetreten: %{error}"
+      ordergroup:
+        remove: "Entfernen"
+        remove_group: "Gruppe enfernen"
+      transactions:
+        date: "Datum"
+        who: "Wer"
+        note: "Notiz"
+        amount: "Betrag"
+      index:
+        title: "Kontoauszug für %{name}"
+        new_transaction: 'Neue Transaktion anlegen'
+        balance: 'Kontostand: %{balance}'
+        last_updated_at: '(zuletzt aktualisiert vor %{when})'
+        search_placeholder: 'Suchen ...'
+      new_collection:
+        title: "Mehrere Konten aktualisieren"
+        sidebar: 'Hier kannst Du mehrere Konten gleichzeitig aktualsieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.'
+        new_ordergroup: 'Weitere Bestellgruppe hinzufügen'
+        ordergroup: 'Bestellgruppe'
+        note: 'Notiz'
+        amount: 'Betrag'
+        save: "Transaktionen speichern"
+        or_cancel: 'oder abbrechen'
+      new:
+        title: "Neue Transaktion"
+        paragraph: 'Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.'
+        or_cancel: "oder abbrechen"
+      

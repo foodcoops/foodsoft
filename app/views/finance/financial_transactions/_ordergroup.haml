@@ -3,5 +3,5 @@
     = select_tag 'financial_transactions[][ordergroup_id]',
       options_for_select(Ordergroup.order(:name).all.map { |g| [ g.name, g.id ] })
   %td= text_field_tag 'financial_transactions[][amount]', nil, class: 'input-small'
-  %td= link_to "Entfernen", "#", :title => "Gruppe enfernen", 'data-remove-transaction' => true,
+  %td= link_to t('.remove'), "#", :title => t('.remove_group'), 'data-remove-transaction' => true,
     class: 'btn btn-small'
