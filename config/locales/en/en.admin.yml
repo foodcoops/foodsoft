@@ -15,22 +15,22 @@ en:
         username: 'username'
         name: 'name'
         created_at: 'created at'
-        all_users: 'all users'
-        new_user: 'new users'
+        all_users: 'All users'
+        new_user: 'New user'
         newest_groups: 'newest groups'
         groupname: 'group name'
         type: 'type'
         members: 'members'
         all_ordergroups: 'All ordergroups'
-        new_ordergroup: 'New ordergroups'
+        new_ordergroup: 'New ordergroup'
         all_workgroups: 'All workgroups'
-        new_workgroup: 'New workgroups'
+        new_workgroup: 'New workgroup'
     ordergroups:
       index:
         title: 'Ordergroup'
         new_ordergroup: 'Add new ordergroup'
         first_paragraph: 'Here you can add a %{url}, administer a group or delete it.'
-        new_ordergroups: 'New ordergroups'
+        new_ordergroups: 'new ordergroups'
         second_paragraph: "Consider the <em>difference between group and ordergroup</em>: A ordergroup has an account and can order food. In a <em>%{url}</em> (for example 'sorting group') the members coordinate each other via tasks and messages. Users can always just be part of one ordergroup, but any multitude of other groups."
         workgroup: 'workgroup'
       edit:

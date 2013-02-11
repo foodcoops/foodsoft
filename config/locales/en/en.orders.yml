@@ -3,10 +3,10 @@ en:
     articles:
       name: 'Name'
       unit_quantity: 'Unit quantity'
-      prices: 'Netto/bruto price'
+      prices: 'Net/gross price'
       units_ordered: 'Units ordered'
       units_full: 'Full units'
-      prices_sum: 'Sum (netto/bruto price):'
+      prices_sum: 'Sum (net/gross price):'
       article_count: 'Ordered articles:'
     edit:
       title: 'Edit order'
@@ -20,7 +20,7 @@ en:
       origin: 'Origin'
       supplier: 'Supplier'
       unit_quantity: 'Unit quantity'
-      prices: 'Prices (netto/FC)'
+      prices: 'Prices (net/FC)'
       select_all: 'Select all'
       cancel: 'or cancel'
     index:
@@ -49,7 +49,7 @@ en:
       begin: 'Begin:'
       ending: 'End:'
       group_orders: 'Group orders:'
-      amounts: 'Netto/brutto sum:'
+      amounts: 'Net/gross sum:'
       articles_ordered: 'Ordered articles:'
       action_end: 'Close!'
       confirm_end: "Do you really want to close the order %{order}?\nThere is no going back."
