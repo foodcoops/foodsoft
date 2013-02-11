@@ -1,0 +1,38 @@
+en:
+  suppliers:
+    shared_supplier_note: 'supplier is connected with external data base'
+    index:
+      title: 'suppliers'
+      action_new: 'creat new supplier'
+      action_import: 'import supplier from external data base'
+      articles: 'articles (%{count})'
+      stock: 'in stock (%{count})'
+      deliveries: 'deliveries (%{count})'
+      confirm_del: 'Attention, do you really want to delete the supplier %{name}?'
+    edit:
+      title: 'edit supplier'
+    form:
+      cancel: 'or cancel'
+    new:
+      title: 'new supplier'
+    show:
+      confirm_delete: 'Are you sure?'
+      last_deliveries: 'last deliveries'
+      new_delivery: 'creat new delievery'
+      show_deliveries: 'show all delieveries'
+    shared_suppliers:
+      title: 'external lists'
+      body:
+        <p>Here the suppliers of the external data base are displayed.</p>
+        <p>You can import extern suppliers by subscribing. (see down under)</p>
+        <p>Thereby a new supplier is created and connecte with the external data base.</p>
+      supplier: 'supplier'
+      subscribe: 'subscribe'
+
+    # used by controller
+    create:
+      notice: 'supplier was created'
+    update:
+      notice: 'supplier was updated'
+    destroy:
+      notice: 'supplier was deleted'

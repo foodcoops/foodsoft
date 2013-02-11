@@ -1,0 +1,87 @@
+en:
+  orders:
+    articles:
+      name: 'name'
+      unit_quantity: 'unit quantity'
+      prices: 'Netto/Brutto price'
+      units_ordered: 'ordered units'
+      units_full: 'full units'
+      prices_sum: 'sum (netto/brutto price):'
+      article_count: 'ordered articles:'
+    edit:
+      title: 'edit order'
+    new:
+      title: 'creat new order'
+    form:
+      title: 'article'
+      name: 'name'
+      note: 'notiz'
+      stockit: 'in stock'
+      origin: 'origin'
+      supplier: 'supplier'
+      unit_quantity: 'unit quantity'
+      prices: 'prices (netto/FC)' ?
+      select_all: 'select all'
+      cancel: 'cancel'
+    index:
+      title: 'manage orders'
+      new_order: 'creat new order'
+      open_orders: 'current orders'
+      supplier: 'supplier'
+      ending: 'ending'
+      note: 'note'
+      action_end: 'closing'
+      confirm_end: 'Do you really want to close the order %{order}? There is no going back'
+      confirm_delete: 'Do you really want to delete the order?'
+      no_open_orders: 'There are no current orders.'
+      ended_orders: 'Closed orders'
+    orders:
+      supplier: 'supplier'
+      start: 'start'
+      ending: 'ending'
+      status: 'status'
+    show:
+      title: 'order: %{name}'
+      warn_not_closed: 'Attention, order is not accounted yet.'
+      supplier: 'supplier:'
+      note: 'note:'
+      created_by: 'created by:'
+      begin: 'begin:'
+      ending: 'ending:'
+      group_orders: 'group orders:'
+      amounts: 'Netto/Brutto sum:'
+      articles_ordered: 'ordered articles:'
+      action_end: 'closing!'
+      confirm_end: "Do you really want to close the order %{order}?\nThere is no going back."
+      confirm_delete: 'Do you really want to delete the order?'
+      articles: 'overview of articles'
+      sort_group: 'sorted in groups'
+      sort_article: 'sorted in articles'
+      comments_link: 'comments'
+      download:
+        title: 'download'
+        group_pdf: 'group PDF'
+        article_pdf: 'article PDF'
+        matrix_pdf: 'matrix PDF'
+        fax_pdf: 'fax PDF'
+        fax_txt: 'fax text'
+        download_file: 'download file'
+      comments:
+        title: 'comments'
+
+    # used by controller
+    create:
+      notice: 'The order was created.'
+    update:
+      notice: 'The order was updated.'
+    finish:
+      notice: 'The order has finished.'
+    fax:
+      heading: 'order for %{name}'
+      customer_number: 'customer number'
+      delivery_day: 'delivery day'
+      to_address: 'shipping address'
+      articles: 'articles'
+      number: 'number'
+      amount: 'amount'
+      name: 'name'

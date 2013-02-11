@@ -1,0 +1,37 @@
+en:
+  messages:
+    index:
+      title: 'Messages'
+      new: 'New Messages'
+    messages:
+      reply: 'Replies'
+    new:
+      title: 'New Message'
+      search_user: 'Search User'
+      no_user_found: 'No User found'
+      search: 'Search ...'
+      list:
+        desc: 'Messages to all please send via the mailing-list: %{list}'
+        subscribe_msg: 'Eventually you will have to introduce yourself to the mailing-list first.'
+        subscribe: 'Explanations about the mailing-list you can find here %{link}'
+        wiki: 'Wiki (paragraph mailing-list)'
+        mail: 'for example with an email to %{email}.'
+      cancel: 'or cancel'
+    show:
+      title: 'Show message'
+      from: 'From:'
+      subject: 'Subject:'
+      sent_on: 'Sent:'
+      reply: 'Reply'
+      all_messages: 'Overview of all messages'
+
+    # used by controller
+    create:
+      notice: 'Message is saved and will be send.'
+
+    # used by model
+    model:
+      reply_subject: 'Re: %{subject}'
+      reply_header: '%{user} wrote on %{when}:'
+      reply_indent: '> %{line}'
+
