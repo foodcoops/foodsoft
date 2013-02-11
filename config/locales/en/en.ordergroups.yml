@@ -1,12 +1,12 @@
 en:
   ordergroups:
     index:
-      title: 'Order Groups'
+      title: 'Ordergroups'
     edit:
-      title: 'Edit Order Groups'
+      title: 'Edit ordergroups'
       submit: 'Edit'
 
     # used by model
     model:
       invalid_balance: 'is not a valid number'
-      error_single_group: '%{user} is already member of another order group'
+      error_single_group: '%{user} is already a member of another ordergroup'

@@ -1,13 +1,13 @@
 en:
   mailer:
-    dateformat: '%d. %b'
+    dateformat: '%d %b'
     feedback:
       header: '%{user} wrote at %{date}:'
     foodsoft_message:
       footer: |
        Reply: %{reply_url}
-       See Messages online: %{msg_url}
-       Messaging Options: %{profile_url}
+       See message online: %{msg_url}
+       Messaging options: %{profile_url}
     invite:
       text: |
         Hi!
@@ -21,21 +21,21 @@ en:
       text: |
         Dear %{group},
 
-        Your account balance has dropped into minus due to a booking on %{when}: %{balance}
+        Your account balance has dropped below zero due to a booking on %{when}: %{balance}
 
-        There was a charg of %{amount} for "%{note}", the booking was done by %{user} .
+        There was a charge of %{amount} for "%{note}" by %{user}.
 
-        Please deposit as soon as possible money to the group account to balance it
+        Please deposit your account as soon as possible.
 
-        Many regards from %{foodcoop}
+        Kind regards from %{foodcoop}.
     not_enough_users_assigned:
       text: |
         Dear %{user},
 
-        The Task '%{task}' of your working group is due on %{when} 
-        And could use some more contributors!
+        The Task '%{task}' of your working group is due on %{when},
+        and could use some more contributors!
 
-        If you havn’t assigned yourself to this task yet it’s your chance now:
+        If you haven’t assigned yourself to this task yet it’s your chance now:
 
         %{workgroup_tasks_url}
 
@@ -44,20 +44,20 @@ en:
       text0: |
         Dear %{ordergroup},
 
-        the order for "%{order}" was placed on %{when} by %{user}
+        The order for "%{order}" was placed on %{when} by %{user}.
 
-        For your order group the following articles were ordered:
+        The following articles were ordered by your ordergroup:
       text1: |
-        Total Sum: %{sum}
+        Total sum: %{sum}
 
         See order online: %{order_url}
 
-        Many regards from %{foodcoop}
+        Kind regards from %{foodcoop}.
     reset_password:
       text: |
         Hi %{user},
 
-        you have (or someone else has) requested a new password.
+        You have (or someone else has) requested a new password.
         In order to choose a new password follow this link: %{link}
         This link works only once and expires on %{expires}.
         If you don't want to change your password, just ignore this message. Your password hasn't been changed yet.
@@ -67,9 +67,9 @@ en:
       text0: |
         Dear %{user},
 
-        You are asigned to the task "%{task}" This Task is due by tomorrow (%{when})!
-      nextweek: 'Tasks fort he next week:'
+        You are asigned to the task "%{task}". This task is due by tomorrow (%{when})!
+      nextweek: 'Tasks for the next week:'
       text1: |
-        My Tasks: %{user_tasks_url}
+        My tasks: %{user_tasks_url}
 
-        Many regards from %{foodcoop}
+        Kind regards from %{foodcoop}.

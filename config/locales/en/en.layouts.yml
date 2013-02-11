@@ -3,8 +3,8 @@ en:
     foodsoft: 'Foodsoft'
     logo: '<span>food</span>soft'
     header:
-      profile: 'Edit Profile'
-      ordergroup: 'My Order Group'
+      profile: 'Edit profile'
+      ordergroup: 'My ordergroup'
       logout: 'Logout'
       help: 'Help'
       feedback:
@@ -16,6 +16,6 @@ en:
         --
         Foodsoft: %{foodsoft}
         Foodcoop-Homepage: %{foodcoop}
-        Hilfe: %{help}
+        Help: %{help}
     application1:
       title: 'Foodsoft - %{title}'
