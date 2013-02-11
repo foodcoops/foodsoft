@@ -42,7 +42,7 @@ en:
       status: 'Status'
     show:
       title: 'Order: %{name}'
-      warn_not_closed: 'Attention, order is not accounted yet.'
+      warn_not_closed: 'Warning, order is not accounted yet.'
       supplier: 'Supplier:'
       note: 'Note:'
       created_by: 'Created by:'

@@ -46,11 +46,11 @@
         = t '.download.title'
         %b.caret
       %ul.dropdown-menu
-        %li= order_pdf(@order, :groups, t('.group_pdf'))
-        %li= order_pdf(@order, :articles, t('.article_pdf'))
-        %li= order_pdf(@order, :matrix, t('.matrix_pdf'))
-        %li= order_pdf(@order, :fax, t('.fax_pdf'))
-        %li= link_to t('.fax_txt'), {action: 'text_fax_template', id: @order }, {title: t('.download_file')}
+        %li= order_pdf(@order, :groups, t('.download.group_pdf'))
+        %li= order_pdf(@order, :articles, t('.download.article_pdf'))
+        %li= order_pdf(@order, :matrix, t('.download.matrix_pdf'))
+        %li= order_pdf(@order, :fax, t('.download.fax_pdf'))
+        %li= link_to t('.download.fax_txt'), {action: 'text_fax_template', id: @order }, {title: t('.download.download_file')}
 
 %section#articles_table
   = render 'articles', order: @order
