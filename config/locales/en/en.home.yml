@@ -3,24 +3,24 @@ en:
     index:
       title: 'Homepage'
       your_tasks: 'Your tasks'
-      due_date_format: '%A, %d. %b'
+      due_date_format: '%A %d %b'
       tasks_move:
-        title: 'take over tasks'
+        title: 'Take over tasks'
         desc: 'You are responsible for these tasks.'
-        action: 'take over tasks/decline tasks'
+        action: 'Take over tasks/decline tasks'
       tasks_open:
         title: 'Open tasks'
         desc: 'There is/are %{size}'
         action: 'open task(s)'
       ordergroup:
-        title: 'Engagement of your ordergroep'
+        title: 'Engagement of your ordergroup'
       messages:
         title: 'Newest Messages'
         view_all: 'See all messages'
       my_ordergroup:
         title: 'My ordergroup'
         funds: '| Available Credit:'
-        last_update: 'Last Update was %{when}'
+        last_update: 'Last Update was %{when} ago'
         transactions:
           title: 'Last Transactions'
           when: 'When'
@@ -30,37 +30,37 @@ en:
           view: 'Show account statement'
 
     start_nav:
-      title: 'Go directly to ...'
+      title: 'Directly to ...'
       foodcoop: 'Foodcoop'
       members: 'Members'
       tasks: 'My tasks'
       write_message: 'Write message'
       orders:
         title: 'Orders'
-        overview: 'Overview of Orders'
-        end: 'Close Orders'
+        overview: 'Overview of orders'
+        end: 'Close orders'
       products:
-        title: 'edit products'
-        edit: 'update products'
-        edit_stock: 'edit stock'
-        edit_suppliers: 'edit suppliers'
+        title: 'Products'
+        edit: 'Update products'
+        edit_stock: 'Edit stock'
+        edit_suppliers: 'Edit suppliers'
       finances:
-        title: 'finances'
-        accounts: 'update accounts'
+        title: 'Finances'
+        accounts: 'Update accounts'
         settle: 'To account orders'
       admin: 'Administration'
       new_ordergroup: 'New ordergroup'
-      new_user: 'New Member'
+      new_user: 'New member'
 
     apple_bar:
-      points: 'Your up-to-date Applepointsbar: %{points}'
-      desc: 'Displayed you find the proportion of executed tasks to the order volume of your ordergroup in comparison to the average of the Foodcoop. Practical: Per %{amount} of the sum of orders you should execute a task!'
-      warning: 'Warning, if you have less then %{threshold} of appel points?, you are not allowed to order anymore/to place an order anymore!'
+      points: 'Your current apple points: %{points}'
+      desc: 'You find the proportion of executed tasks displayed to the order volume of your ordergroup in comparison to the average of the Foodcoop. In practice: for every %{amount} of order sum, you should execute a task!'
+      warning: 'Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order anymore!'
 
     ordergroup:
       title: 'My ordergroup'
       description: 'description'
-      funds: 'Available credit?:'
+      funds: 'Available credit:'
       people: 'People'
       invite: 'Invite a new Person'
       account_summary: 'Account Statement'
@@ -70,15 +70,15 @@ en:
       title: 'My Profile'
       user:
         title: '%{user}'
-        since: '(Member since: %{when})'
+        since: '(member since: %{when})'
         save: 'Save'
       groups:
         title: 'You are member of the following groups'
         invite: 'Invite new members'
-        cancel: 'Quit membership'
-        cancel_confirm: 'Are you sure that you want to quit membership?'
+        cancel: 'Leave group'
+        cancel_confirm: 'Are you sure you want to leave this group?'
 
     # used by controller
     changes_saved: 'Changes saved.'
-    no_ordergroups: 'Sorry to say so but you are not a member of an ordergroup'
-    ordergroup_cancelled: 'You quit membership of the group %{group}'
+    no_ordergroups: 'You are unfortunately not a member of an ordergroup.'
+    ordergroup_cancelled: 'You cancelled membership of the group %{group}.'

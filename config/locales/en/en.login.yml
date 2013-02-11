@@ -1,36 +1,38 @@
 en:
   login:
     accept_invitation:
-      title: 'Invite into %{name}'
+      title: 'Invitation to %{name}'
       body:
-        <p>You are invited as a member of the group <b>%{group}</b> to be part of the foodcoop %{foodcoop}</p>
-        <p>If you want to participate please fill in this form.</p>
-        <p>Your information of course won’t be shared with third parties, for any reasons
-what so ever. You can also decide how much of your personal dates should be visible for everyone. 'All' means here all Foodcoop-Members.
-        The administrators have at any times access to your information.</p>
-      submit: 'Create a Foodsoft Account'
+        <p>You are invited to be part of the foodcoop %{foodcoop} as
+        a member of the group <b>%{group}</b>.</p>
+        <p>If you want to participate, please fill in this form.</p>
+        <p>Naturally, your information wll not be shared with third parties for
+        any reasons whatsoever. You can decide how much of your personal information
+        should be visible for everyone. 'All' means all Foodcoop-members.
+        Please note that the administrators do have access to your information.</p>
+      submit: 'Create a Foodsoft account'
     forgot_password:
-      title: 'Forgot Password?'
+      title: 'Forgot password?'
       body:
-        <p>No Problem, you can chose a new password.</p>
-        <p>For this fill in the email address with which you registered in the Foodsoft.
-        You will receive an email with further instructions.</p>
-      submit: 'Request New Password'
+        <p>No Problem, you can choose a new password.</p>
+        <p>Please fill in the email address with which you are registered here.
+        Then you will receive an email with further instructions.</p>
+      submit: 'Request new password'
       cancel: 'or abort'
     new_password:
-      title: 'New Password'
+      title: 'New password'
       body:
-        <p>Please fill in new password for <b>%{user}</b></p>
-      submit: 'Save New Password'
+        <p>Please fill in the new password for <b>%{user}</b></p>
+      submit: 'Save new password'
 
     # used by controller
     reset_password:
-      notice: 'If your email is registered here you will receive a message with a link to reset your password.'
+      notice: 'If your email is registered here, you will receive a message with a link to reset your password.'
     update_password:
-      notice: 'Your password was refreshed. You can login now.'
+      notice: 'Your password was updated. You can login now.'
     accept_invitation:
-      notice: 'Congratulations your account was created. You can login now.'
+      notice: 'Congratulations, your account was created. You can login now.'
     errors:
       invite_invalid: 'Your invite is not valid (anymore).'
       group_invalid: 'The group in which you were invited doesn’t exist anymore."'
-      token_invalid: 'Invalid or expired Token. Please try again.'
+      token_invalid: 'Invalid or expired token. Please try again.'

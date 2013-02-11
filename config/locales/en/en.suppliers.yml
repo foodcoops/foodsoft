@@ -1,38 +1,38 @@
 en:
   suppliers:
-    shared_supplier_note: 'supplier is connected with external data base'
+    shared_supplier_note: 'Supplier is connected to the external database.'
     index:
-      title: 'suppliers'
-      action_new: 'creat new supplier'
-      action_import: 'import supplier from external data base'
+      title: 'Suppliers'
+      action_new: 'Create new supplier'
+      action_import: 'Import supplier from external database'
       articles: 'articles (%{count})'
       stock: 'in stock (%{count})'
       deliveries: 'deliveries (%{count})'
-      confirm_del: 'Attention, do you really want to delete the supplier %{name}?'
+      confirm_del: 'Do you really want to delete the supplier %{name}?'
     edit:
-      title: 'edit supplier'
+      title: 'Edit supplier'
     form:
       cancel: 'or cancel'
     new:
-      title: 'new supplier'
+      title: 'New supplier'
     show:
       confirm_delete: 'Are you sure?'
-      last_deliveries: 'last deliveries'
-      new_delivery: 'creat new delievery'
-      show_deliveries: 'show all delieveries'
+      last_deliveries: 'Last deliveries'
+      new_delivery: 'Create new delivery'
+      show_deliveries: 'Show all deliveries'
     shared_suppliers:
-      title: 'external lists'
+      title: 'External lists'
       body:
-        <p>Here the suppliers of the external data base are displayed.</p>
-        <p>You can import extern suppliers by subscribing. (see down under)</p>
-        <p>Thereby a new supplier is created and connecte with the external data base.</p>
-      supplier: 'supplier'
-      subscribe: 'subscribe'
+        <p>Suppliers of the external database are displayed here.</p>
+        <p>You can import external suppliers by subscribing (see below).</p>
+        <p>A new supplier will be created and connected to the external database.</p>
+      supplier: 'Supplier'
+      subscribe: 'Subscribe'
 
     # used by controller
     create:
-      notice: 'supplier was created'
+      notice: 'Supplier was created'
     update:
-      notice: 'supplier was updated'
+      notice: 'Supplier was updated'
     destroy:
-      notice: 'supplier was deleted'
+      notice: 'Supplier was deleted'

@@ -2,19 +2,19 @@ en:
   messages:
     index:
       title: 'Messages'
-      new: 'New Messages'
+      new: 'New messages'
     messages:
-      reply: 'Replies'
+      reply: 'Reply'
     new:
-      title: 'New Message'
-      search_user: 'Search User'
-      no_user_found: 'No User found'
+      title: 'New message'
+      search_user: 'Search user'
+      no_user_found: 'No user found'
       search: 'Search ...'
       list:
-        desc: 'Messages to all please send via the mailing-list: %{list}'
-        subscribe_msg: 'Eventually you will have to introduce yourself to the mailing-list first.'
-        subscribe: 'Explanations about the mailing-list you can find here %{link}'
-        wiki: 'Wiki (paragraph mailing-list)'
+        desc: 'Please send messages to all using the mailing-list: %{list}'
+        subscribe_msg: 'You may have to subscribe to the mailing-list first.'
+        subscribe: 'You can find more about the mailing-list at %{link}.'
+        wiki: 'Wiki (page Mailing-List)'
         mail: 'for example with an email to %{email}.'
       cancel: 'or cancel'
     show:
@@ -23,15 +23,14 @@ en:
       subject: 'Subject:'
       sent_on: 'Sent:'
       reply: 'Reply'
-      all_messages: 'Overview of all messages'
+      all_messages: 'All messages'
 
     # used by controller
     create:
-      notice: 'Message is saved and will be send.'
+      notice: 'Message is saved and will be sent.'
 
     # used by model
     model:
       reply_subject: 'Re: %{subject}'
       reply_header: '%{user} wrote on %{when}:'
       reply_indent: '> %{line}'
-
