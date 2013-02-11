@@ -32,7 +32,7 @@ de:
       available_funds: 'Verfügbares Guthaben'
       new_funds: 'Neuer Kontostand'
       action_save: 'Bestellung speichern'
-      cancel: 'abbrechen'
+      cancel: 'oder abbrechen'
     index:
       title: 'Bestellüberblick'
       funds:

@@ -12,7 +12,7 @@ en:
       created_by: 'Created by'
       ending: 'End'
       min_quantity: 'Minimum quantity'
-      sum_amount: 'Quantity until now:'
+      sum_amount: 'Current amount'
       last_update: 'Last ordered'
       funds: 'Credit'
       name: 'Mame'
@@ -31,8 +31,8 @@ en:
       total_sum_amount: 'Total amount'
       available_funds: 'Available credits'
       new_funds: 'New account balance'
-      action_save: 'Order saved'
-      cancel: 'Cancel'
+      action_save: 'Save order'
+      cancel: 'or cancel'
     index:
       title: 'Orders overview'
       funds:
