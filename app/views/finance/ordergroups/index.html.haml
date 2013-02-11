@@ -1,13 +1,13 @@
-- title "Konten verwalten"
+- title t('.title')
 
 - content_for :actionbar do
-  = link_to "Neue Überweisungen eingeben", finance_new_transaction_collection_path, class: 'btn btn-primary'
+  = link_to t('.new_transaction'), finance_new_transaction_collection_path, class: 'btn btn-primary'
 
 .well.well-small
   = form_tag finance_ordergroups_path, :method => :get, :remote => true,
     'data-submit-onchange' => true, class: 'form-search' do
     = text_field_tag :query, params[:query], class: 'input-medium search-query',
-      placeholder: 'Suchen ...'
+      placeholder: t('.search_placeholder')
 
 #ordergroupsTable
   = render :partial => "ordergroups"

@@ -134,4 +134,14 @@ de:
         amount_change_for: 'Mengenänderung für %{article}'
         close: 'Schließen'
         save: "Speichern"
+    ordergroups:
+      ordergroups:
+        name: "Name"
+        account_balance: "Kontostand"
+        new_transaction: "Neue Transaktion"
+        account_statement: "Kontoauszug"
+      index:
+        title: "Konten verwalten"
+        new_transaction: "Neue Überweisungen eingeben"
+        search_placeholder: 'Suchen ...'
       
