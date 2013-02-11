@@ -1,6 +1,13 @@
-# this file is currently unfinished!
 en:
   mailer:
+    dateformat: '%d. %b'
+    feedback:
+      header: '%{user} wrote at %{date}:'
+    foodsoft_message:
+      footer: |
+       Reply: %{reply_url}
+       See Messages online: %{msg_url}
+       Messaging Options: %{profile_url}
     invite:
       text: |
         Hi!
@@ -10,6 +17,42 @@ en:
         This link works only once and expires on %{expires}.
         
         Greetings, your Foodsoft Team!
+    negative_balance:
+      text: |
+        Dear %{group},
+
+        Your account balance has dropped into minus due to a booking on %{when}: %{balance}
+
+        There was a charg of %{amount} for "%{note}", the booking was done by %{user} .
+
+        Please deposit as soon as possible money to the group account to balance it
+
+        Many regards from %{foodcoop}
+    not_enough_users_assigned:
+      text: |
+        Dear %{user},
+
+        The Task '%{task}' of your working group is due on %{when} 
+        And could use some more contributors!
+
+        If you havn’t assigned yourself to this task yet it’s your chance now:
+
+        %{workgroup_tasks_url}
+
+        Your Tasks: %{user_tasks_url}
+    order_result:
+      text0: |
+        Dear %{ordergroup},
+
+        the order for "%{order}" was placed on %{when} by %{user}
+
+        For your order group the following articles were ordered:
+      text1: |
+        Total Sum: %{sum}
+
+        See order online: %{order_url}
+
+        Many regards from %{foodcoop}
     reset_password:
       text: |
         Hi %{user},
@@ -20,3 +63,13 @@ en:
         If you don't want to change your password, just ignore this message. Your password hasn't been changed yet.
         
         Greetings, your Foodsoft Team!
+    upcoming_tasks:
+      text0: |
+        Dear %{user},
+
+        You are asigned to the task "%{task}" This Task is due by tomorrow (%{when})!
+      nextweek: 'Tasks fort he next week:'
+      text1: |
+        My Tasks: %{user_tasks_url}
+
+        Many regards from %{foodcoop}

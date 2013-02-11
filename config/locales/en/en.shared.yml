@@ -1,0 +1,68 @@
+en:
+  shared:
+    articles_by_articles:
+      ordergroup: 'Order Group'
+      ordered: 'Ordered (Amount + Tolerance)'
+      received: 'Received'
+      price: 'Total Price'
+    articles_by_groups:
+      name: 'Name'
+      units: 'Amount'
+      units_desc: 'Distributed Units'
+      fc_price: 'FC-Price'
+      fc_price_desc: 'Price including taxes, deposit and Foodcoop-Charge'
+      unit_quantity: 'Unit Quantity'
+      unit_quantity_desc: 'Unit Quantity'
+      unit: 'Unit'
+      price: 'Total Price'
+    group_form_fields:
+      title: 'Weekly Jobs'
+      search_user: 'Search User'
+      user_not_found: 'No User found'
+      search: 'Search ...'
+    group:
+      description: 'Description'
+      contact: 'Contact'
+      address: 'Address'
+      access: 'Access to'
+      members: 'Members'
+      weekly_job: 'Weekly Job'
+      no_weekly_job: 'No Weekly Job defined'
+      apple_limit: 'Applepoints order limit'
+      deactivated: 'decativated'
+      activated: 'activated'
+    loginInfo:
+      profile: 'Profile'
+      edit_profile: 'Edit Profile'
+      homepage_title: 'Visit Foodcoop Homepage'
+      # duplicate from de.layouts.header
+      logout: 'Logout'
+      help: 'Help'
+      feedback:
+        title: 'Feedback'
+        desc: 'Found a bug? Suggestions? Review?'
+    open_orders:
+      title: 'Current Orders'
+      not_enough_apples: 'Attention your order group has to little apple points to place an order!'
+      supplier: 'Supplier'
+      ending: 'Ending'
+      who_ordered: 'Who ordered?'
+      total: 'Sum'
+      total_sum: 'Total Sum'
+      no_open_orders: 'There are not current orders'
+    workgroup_members:
+      title: 'Members of the groups'
+
+    memberships:
+      current_members:
+        drop: 'remove'
+        no_members: '%{group} has no members.'
+      members:
+        title: 'Members of %{group}'
+        desc: 'Here you can manage members of the group or invite a new Foodcoop-Member into the group %{link}.'
+        invite: 'invite'
+        already_members: 'Are already Members'
+        no_members_yet: 'Are not Members yet'
+        invite_someone: 'Invite Someone'
+      non_members:
+        add: 'add'
