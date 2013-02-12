@@ -4,73 +4,73 @@ en:
     "yes": 'Yes'
     "no": 'No'
     required:
-      text: 'Required'
+      text: 'required'
       mark: '*'
     error_notification:
-      default_message: 'Errors were found. Please check the form'
+      default_message: 'Errors were found. Please check the form.'
     labels:
       defaults:
         password: 'Password'
         password_confirmation: 'Repeat password'
         description: 'Description'
-        title: 'Titel'
+        title: 'Title'
         email: 'Email'
         note: 'Note'
         date: 'Date'
-        ordergroup: 'Order group'
+        ordergroup: 'Ordergroup'
         amount: 'Amount'
         phone: 'Phone'
         user_tokens: 'Members'
-        price: 'Price (neto)'
+        price: 'Price (net)'
         unit_quantity: 'Unit quantity'
         order_number: 'Order number'
-        tax: 'Tax'
+        tax: 'VAT'
         deposit: 'Deposit'
       user:
-        nick: 'User name'
+        nick: 'Username'
         first_name: 'First name'
         last_name: 'Last name'
       workgroup:
         weekly_task: 'Define monthly task?'
         weekday: 'Weekday'
         task_name: 'Task name'
-        task_required_users: 'Required responsible users'
-        task_duration: 'For. Amount of hours'
-        task_description: 'Task description'
+        task_required_users: 'People required'
+        task_duration: 'Duration in hours'
+        task_description: 'Description'
         next_weekly_tasks_number: 'For how many weeks in advance would you like to define tasks?'
         role_admin: 'Administration'
         role_finance: 'Finances'
         role_suppliers: 'Suppliers'
-        role_article_meta: 'Article data base'
+        role_article_meta: 'Article database'
         role_orders: 'Order management'
       ordergroup:
         contact_person: 'Contact person'
         contact_phone: 'Phone'
         contact_address: 'Address'
-        ignore_apple_restriction: 'Ignore orderstop by Apple points restrictions'
+        ignore_apple_restriction: 'Ignore order stop by apple points restriction'
       task:
         duration: 'Duration'
         user_list: 'Responsible user'
-        required_users: 'Required amount of users'
+        required_users: 'People required'
         due_date: 'Due date'
-        workgroup: 'Work group'
+        workgroup: 'Workgroup'
         done: 'Done?'
       message:
-        sent_to_all: 'Sent to all members'
+        sent_to_all: 'Send to all members'
         recipient_tokens: 'Recipients'
         group_id: 'Group'
         subject: 'Subject'
         body: 'Body'
-        private: Privat
+        private: 'Private'
       page:
         body: 'Body'
-        parent_id: Above Site
+        parent_id: Parent page
       supplier:
         name: 'Name'
         address: 'Address'
         phone: 'Phone'
         phone2: 'Phone 2'
-        fax: 'FAX'
+        fax: 'Fax'
         email: 'Email'
         url: 'Homepage'
         contact_person: 'Contact person'
@@ -92,7 +92,7 @@ en:
       delivery:
         delivered_on: 'Delivery date'
       user:
-        nick: 'User name'
+        nick: 'Username'
         last_name: 'Last name'
       order_comment:
         text: Comment to this order ...
@@ -100,9 +100,9 @@ en:
         starts: 'Starts at'
         ends: 'Ends at'
       order_article:
-        article_id: Chose article from the cataloge
+        article_id: Choose article from the catalogue
       group_order_article:
-        ordergroup_id: Order group
+        ordergroup_id: Ordergroup
         result: Amount
       invoice:
         supplier: Supplier
@@ -113,12 +113,12 @@ en:
         deposit_credit: Credit deposit
       order_article:
         units_to_order: Amount of units
-        update_current_price: Update global current price
+        update_current_price: Globally update current price
 
     hints:
       tax: 'In percentage, standard is 7,0'
       task:
-        duration: 'How long will the task take to be done, 1-3 hours'
+        duration: 'How long will the task take, 1-3 hours'
         required_users: 'How many users will be needed in total?'
       supplier:
         min_order_quantity: 'The minimum amount which has to be orderd will be shown during the order process and should motivate ordering'
@@ -127,8 +127,7 @@ en:
       stock_article:
         supplier: ''
       message:
-        private: Message doesn’t show in Foodsoft mail in-box
+        private: Message doesn’t show in Foodsoft mail inbox
       order_article:
         units_to_order: Amount of delivered units
-        update_current_price: Updates also the price of the current order
-
+        update_current_price: Also update the price of the current order

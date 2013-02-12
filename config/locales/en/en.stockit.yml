@@ -3,11 +3,11 @@ en:
     edit:
       title: 'Edit stock articles'
     form:
-      price_hint: 'To avoid chaos it’s till further notice not possible to edit the prices of already applied added? stock articles.'
+      price_hint: 'To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.'
       cancel: 'or cancel'
     index:
       view_options: 'View options'
-      toggle_unavailable: 'Show/Hide not available articles'
+      toggle_unavailable: 'Show/hide unavailable articles'
       order_online: 'Put stock order online'
       new_stock_article: 'Add new stock article'
       new_stock_taking: 'Add inventory'
@@ -28,18 +28,18 @@ en:
       stock_count: 'Number of articles:'
     new:
       title: 'Add new stock article'
-      search_text: 'Search for articles in all cataloges:'
+      search_text: 'Search for articles in all catalogues:'
     
     # used by controller
     stock_create:
-      notice: 'Stock article was rreated.'
+      notice: 'Stock article was created.'
     stock_update:
       notice: 'Stock article was saved.'
     stock_taking_create:
-      notice: 'Inventory was created successfully'
+      notice: 'Inventory was created successfully.'
     stock_taking_update:
       notice: 'Inventory was updated.'
 
     # used by model
     check:
-      not_empty: '%{name} could not be deleted. The inventory is not zero'
+      not_empty: '%{name} could not be deleted, the inventory is not zero.'
