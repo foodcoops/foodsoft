@@ -1,0 +1,10 @@
+de:
+  workgroups:
+    edit:
+      title: 'Arbeitsgruppe bearbeiten'
+    index:
+      title: 'Arbeitsgruppen'
+
+    # used by controller
+    update:
+      notice: 'Arbeitsgruppe wurde aktualisiert'
