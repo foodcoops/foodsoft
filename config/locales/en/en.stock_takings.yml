@@ -1,0 +1,36 @@
+en:
+  stock_takings:
+    edit:
+      title: 'Edit inventory'
+      cancel: 'or cancel'
+    index:
+      title: 'Inventory overview'
+      new_inventory: 'Create new inventory'
+    new:
+      title: 'Create new inventory'
+      text_deviations: 'Please fill in all surplus deviations from the %{inv_link}. For reduction, use a a negative number.'
+      temp_inventory: 'temporary inventory'
+      text_need_articles: 'You have to %{create_link} a new stock article before you can use it here.'
+      create: 'create'
+      stock_articles: 'Stock articles'
+      cancel: 'or cancel'
+    show:
+      title: 'Show inventory'
+      date: 'Date'
+      note: 'Note'
+      article: 'Article'
+      supplier: 'Supplier'
+      unit: 'Unit'
+      amount: 'Amount'
+      overview: 'Inventory overview'
+      confirm_delete: 'Do you really want to delete the inventory?'
+    stock_takings:
+      date: 'Date'
+      note: 'Note'
+      confirm_delete: 'Are you sure you want to delete this?'
+
+    # used by controller
+    create:
+      notice: 'Inventory was created successfully.'
+    update:
+      notice: 'Inventory was updated.'
