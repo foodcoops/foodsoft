@@ -5,8 +5,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Datum
-      %th Notiz
+      %th= t '.date'
+      %th= t '.note'
       %th
   %tbody
     - for stock_taking in @stock_takings
@@ -14,6 +14,6 @@
         %td= link_to format_date(stock_taking.date), stock_taking
         %td= truncate stock_taking.note
         %td
-          = link_to 'Bearbeiten', edit_stock_taking_path(stock_taking), class: 'btn btn-mini'
-          = link_to 'Löschen', stock_taking, :confirm => 'Are you sure?', :method => :delete,
+          = link_to t('ui.edit'), edit_stock_taking_path(stock_taking), class: 'btn btn-mini'
+          = link_to t('ui.delete'), stock_taking, :confirm => t('.confirm_delete'), :method => :delete,
             class: 'btn btn-mini btn-danger'

@@ -1,7 +1,7 @@
-- title "Inventur bearbeiten"
+- title t('.title')
 
 - simple_form_for(@stock_taking) do |f|
   = f.input :date
   = f.input :note
   = f.submit
-  = link_to "oder abbrechen", stock_takings_path
+  = link_to t('.cancel'), stock_takings_path

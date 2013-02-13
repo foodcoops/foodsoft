@@ -1,24 +1,17 @@
-- title "Neue Inventur anlegen"
+- title t('.title')
 
 - content_for :sidebar do
   %p
-    %i
-      Bitte trage hier alle gezählten Abweichungen vom
-      = link_to "vorläufigen Lagerbestand", stock_articles_path
-      ein. Bei Schwund benutze einfach ein Minus vor der Zahl.
-  %p
-    Einen neuen Lagerartikel musst Du vorher
-    = link_to "anlegen", new_stock_article_path
-    bevor Du Ihn hier verwenden kannst.
-
+    %i= t('.text_deviations', inv_link: link_to(t('.temp_inventory'), stock_articles_path)).html_safe
+  %p= t('.text_need_articles', create_link: link_to(t('.create'), new_stock_article_path)).html_safe
 
 = simple_form_for(@stock_taking) do |f|
   = f.input :date, as: :date_picker
   = f.input :note, :input_html => {:size => "28x7", :value => "#{@current_user.nick}: ..."}
-  %h2 Lagerartikel
+  %h2= t '.stock_articles'
 
   #stock_changes
     = render :partial => 'stock_change', :collection => @stock_taking.stock_changes
   .form-actions
     = f.submit class: 'btn'
-    = link_to "oder abbrechen", stock_takings_path
+    = link_to t('.cancel'), stock_takings_path

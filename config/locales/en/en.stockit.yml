@@ -35,10 +35,6 @@ en:
       notice: 'Stock article was created.'
     stock_update:
       notice: 'Stock article was saved.'
-    stock_taking_create:
-      notice: 'Inventory was created successfully.'
-    stock_taking_update:
-      notice: 'Inventory was updated.'
 
     # used by model
     check:

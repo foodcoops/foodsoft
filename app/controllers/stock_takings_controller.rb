@@ -11,11 +11,11 @@ class StockTakingsController < ApplicationController
   end
 
   def create
-    create!(:notice => I18n.t('stockit.stock_taking_create.notice'))
+    create!(:notice => I18n.t('stock_takings.create.notice'))
   end
 
   def update
-    update!(:notice => I18n.t('stockit.stock_taking_update.notice'))
+    update!(:notice => I18n.t('stock_takings.update.notice'))
   end
 
   def fill_new_stock_article_form

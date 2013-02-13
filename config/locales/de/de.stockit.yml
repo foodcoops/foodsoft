@@ -35,10 +35,6 @@ de:
       notice: 'Lagerartikel wurde gespeichert.'
     stock_update:
       notice: 'Lagerartikel wurde gespeichert.'
-    stock_taking_create:
-      notice: 'Inventur wurde erfolgreich angelegt.'
-    stock_taking_update:
-      notice: 'Inventur wurde aktualisiert.'
 
     # used by model
     check:
