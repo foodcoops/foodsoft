@@ -5,7 +5,7 @@ begin
   require 'hanna/rdoctask'
 rescue LoadError
   require 'rake'
-  require 'rake/rdoctask'
+  #require 'rake/rdoctask'
 end
 load 'test/tasks.rake'
 

@@ -1,5 +1,5 @@
 require 'rake/testtask'
-require 'rake/rdoctask'
+#require 'rake/rdoctask'
 
 namespace :test do
   desc "run the acts as configurable test suite"
