@@ -15,6 +15,7 @@ GEM
     fastercsv (1.5.4)
     haml (3.0.25)
     hirb (0.3.4)
+    json (1.7.6)
     mysql (2.8.1)
     prawn (0.6.3)
       prawn-core (>= 0.6.3, < 0.7)
@@ -35,6 +36,8 @@ GEM
       activesupport (= 2.3.17)
       rake (>= 0.8.3)
     rake (10.0.3)
+    rdoc (3.12)
+      json (~> 1.4)
     routing-filter (0.0.1)
     sqlite3-ruby (1.2.4)
 
@@ -49,5 +52,6 @@ DEPENDENCIES
   mysql
   prawn (<= 0.6.3)
   rails (= 2.3.17)
+  rdoc (>= 2.4.2)
   routing-filter (= 0.0.1)
   sqlite3-ruby
