@@ -56,6 +56,9 @@ class Message < ActiveRecord::Base
 
   def recipients
     User.find(recipients_ids)
+  rescue ActiveRecord::RecordNotFound => error
+    logger.warn "#{Foodsoft.env}: #{error.message}"
+    User.find(recipients_ids.select { |id| User.exists?(id) }.uniq)
   end
   
   # Sends all pending messages that are to be send as emails.
