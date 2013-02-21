@@ -1,13 +1,13 @@
-- title "Bestellgruppen"
+- title t('.title')
 
 .well
   = form_tag foodcoop_ordergroups_path, :method => :get, :remote => true, 'data-submit-onchange' => true,
     class: 'form-search' do
-    = text_field_tag :name, params[:name], class: 'input-medium search-query', placeholder: 'Name ...'
+    = text_field_tag :name, params[:name], class: 'input-medium search-query', placeholder: t('.name')
     %label{:for => 'only_active'}
       = check_box_tag 'only_active', 1, params[:only_active]
-      Nur aktive
-      %small (mindestens einmal in den letzten 3 Monaten bestellt)
+      = t '.only_active'
+      %small= t '.only_active_desc'
 
 #ordergroups
   = render :partial => "ordergroups"

@@ -8,3 +8,5 @@ de:
     # used by controller
     update:
       notice: 'Arbeitsgruppe wurde aktualisiert'
+    error_last_admin_group: 'Die letzte Gruppe mit Admin-Rechten darf nicht gelöscht werden'
+    error_last_admin_role: 'Der letzten Gruppe mit Admin-Rechten darf die Admin-Rolle nicht entzogen werden'

@@ -4,12 +4,12 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Benutzername
-      %th Name
-      %th Email
-      %th Telefon
-      %th Bestellgruppe
-      %th Arbeitsgruppe(n)
+      %th= t 'simple_form.labels.user.nick'
+      %th= t 'simple_form.labels.user.name'
+      %th= t 'simple_form.labels.user.email'
+      %th= t 'simple_form.labels.user.phone'
+      %th= t 'simple_form.labels.user.ordergroup'
+      %th= t 'simple_form.labels.user.workgroup', count: 3
   %tbody
     - for user in @users
       %tr

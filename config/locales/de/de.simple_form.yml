@@ -93,7 +93,14 @@ de:
         delivered_on: 'Lieferdatum'
       user:
         nick: "Benutzername"
+        name: "Name"
         last_name: "Nachname"
+        email: 'Email'
+        phone: "Telefon"
+        ordergroup: 'Bestellgruppe'
+        workgroup:
+          one: 'Arbeitsgruppe'
+          other: 'Arbeitsgruppen'
       order_comment:
         text: Kommentiere diese Bestellung ...
       order:
