@@ -145,3 +145,8 @@ de:
         new_transaction: "Neue Überweisungen eingeben"
         search_placeholder: 'Suchen ...'
       
+    # used by controller
+    create:
+      notice: 'Rechnung wurde erstellt.'
+    update:
+      notice: 'Rechnung wurde aktualisiert.'

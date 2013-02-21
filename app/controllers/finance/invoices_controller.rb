@@ -22,7 +22,7 @@ class Finance::InvoicesController < ApplicationController
     @invoice = Invoice.new(params[:invoice])
 
     if @invoice.save
-      flash[:notice] = "Rechnung wurde erstellt."
+      flash[:notice] = I18n.t('finance.create.notice')
       if @invoice.order
         # Redirect to balancing page
         redirect_to new_finance_order_url(order_id: @invoice.order.id)
@@ -38,7 +38,7 @@ class Finance::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
 
     if @invoice.update_attributes(params[:invoice])
-      redirect_to [:finance, @invoice], notice: "Rechnung wurde aktualisiert."
+      redirect_to [:finance, @invoice], notice: I18n.t('finance.update.notice')
     else
       render :edit
     end
