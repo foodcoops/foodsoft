@@ -93,7 +93,14 @@ en:
         delivered_on: 'Delivery date'
       user:
         nick: 'Username'
+        name: "Name"
         last_name: 'Last name'
+        email: 'Email'
+        phone: "Telephone"
+        ordergroup: 'Ordergroup'
+        workgroup:
+          one: 'Workgroup'
+          other: 'Workgroups'
       order_comment:
         text: Comment to this order ...
       order:

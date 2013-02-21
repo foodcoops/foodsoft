@@ -120,6 +120,8 @@ en:
       year: years
   errors: &errors
     general: 'A problem has occured.'
+    general_msg: 'A problem has occured: %{msg}'
+    general_again: 'A problem has occured. Please try again.'
     format: ! '%{attribute} %{message}'
     messages:
       accepted: has to be accepted
@@ -264,6 +266,15 @@ en:
         create: 'send message'
       invite:
         create: send invitation
+
+  # general user-interface
+  ui:
+    close: 'Close'
+    edit: 'Edit'
+    delete: 'Delete'
+    show: 'Show'
+    marks:
+      close: 'x'
 
   # Simple form i18n is used to build the forms
   simple_form:
