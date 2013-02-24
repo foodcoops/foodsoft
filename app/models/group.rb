@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :users, :through => :memberships
 
-  validates :name, :presence => true, :length => {:in => 1..25}, :uniqueness => true
+  validates :name, :presence => true, :length => {:in => 1..25}
   
   attr_reader :user_tokens
   

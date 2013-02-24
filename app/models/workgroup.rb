@@ -5,6 +5,7 @@ class Workgroup < Group
   # returns all non-finished tasks
   has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], :order => 'due_date ASC'
 
+  validates_uniqueness_of :name
   validates_presence_of :task_name, :weekday, :task_required_users, :next_weekly_tasks_number,
                         :if => :weekly_task
   validates_numericality_of :next_weekly_tasks_number, :greater_than => 0, :less_than => 21, :only_integer => true,

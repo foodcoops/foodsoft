@@ -16,7 +16,7 @@ class Ordergroup < Group
   has_many :orders, :through => :group_orders
 
   validates_numericality_of :account_balance, :message => 'ist keine gültige Zahl'
-  validate :uniqueness_of_members
+  validate :uniqueness_of_name, :uniqueness_of_members
 
   after_create :update_stats!
 
@@ -104,6 +104,16 @@ class Ordergroup < Group
   def uniqueness_of_members
     users.each do |user|
       errors.add :user_tokens, "#{user.nick} ist schon in einer anderen Bestellgruppe" if user.groups.where(:type => 'Ordergroup').size > 1
+    end
+  end
+
+  # Make sure, the name is uniq, add usefull message if uniq group is already deleted
+  def uniqueness_of_name
+    id = new_record? ? '' : self.id
+    group = Ordergroup.with_deleted.where('groups.id != ? AND groups.name = ?', id, name).first
+    if group.present?
+      message = group.deleted? ? :taken_with_deleted : :taken
+      errors.add :name, message
     end
   end
   
