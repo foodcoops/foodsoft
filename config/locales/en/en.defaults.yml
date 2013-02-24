@@ -142,6 +142,7 @@ en:
       odd: must be odd
       record_invalid: ! 'validation failed: %{errors}'
       taken: is already taken
+      taken_with_deleted: is already taken (deleted group)
       too_long: is too long (no more than %{count} characters)
       too_short: is too short (use more than %{count} characters)
       wrong_length: is the wrong length (has to have exactly %{count} characters)
