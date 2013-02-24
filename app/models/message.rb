@@ -64,6 +64,9 @@ class Message < ActiveRecord::Base
   # Sends all pending messages that are to be send as emails.
   def self.send_emails
     messages = Message.pending
+    # Set all messages not pending, to avoid sending mails twice with different background processes
+    messages.each { |m| m.update_attribute(:email_state, 2) }
+
     for message in messages
       for recipient in message.recipients
         if recipient.settings['messages.sendAsEmail'] == "1" && !recipient.email.blank?
@@ -74,7 +77,7 @@ class Message < ActiveRecord::Base
           end
         end
       end
-      message.update_attribute(:email_state, 1)
+      message.update_attribute(:email_state, 1) # Set email state to 'sent'
     end
   end
 end
