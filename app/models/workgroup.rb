@@ -62,7 +62,7 @@ class Workgroup < Group
   # add validation check on update
   # Return an error if this is the last group with admin role and role_admin should set to false
   def last_admin_on_earth
-    if !role_admin  && Workgroup.where(:role_admin => true, :id.ne => id).empty?
+    if !role_admin && !Workgroup.where('role_admin = ? AND id != ?', true, id).exists?
       errors.add(:role_admin, "Der letzten Gruppe mit Admin-Rechten darf die Admin-Rolle nicht entzogen werden")
     end
   end
