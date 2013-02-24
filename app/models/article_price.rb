@@ -4,6 +4,7 @@ class ArticlePrice < ActiveRecord::Base
   has_many :order_articles
 
   validates_presence_of :price, :tax, :deposit, :unit_quantity
+  validates_numericality_of :price, :unit_quantity, :greater_than => 0
   
   # Custom attribute setter that accepts decimal numbers using localized decimal separator.
   def price=(price)
