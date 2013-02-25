@@ -33,10 +33,11 @@ class StockitController < ApplicationController
 
   def destroy
     StockArticle.find(params[:id]).destroy
-    redirect_to stock_articles_path
+    render :layout => false,
+      :locals => { :destroyed_article_id => params[:id] }
   rescue => error
-    flash[:error] = "Ein Fehler ist aufgetreten: " + error.message
-    redirect_to stock_articles_path
+    render :partial => "destroy_fail", :layout => false,
+      :locals => { :fail_msg => "Ein Fehler ist aufgetreten: " + error.message }
   end
 
   #TODO: Fix this!!

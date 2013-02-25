@@ -64,8 +64,7 @@
           %td= article.article_category.name
           %td
             = link_to "Bearbeiten", edit_stock_article_path(article), class: 'btn btn-mini'
-            = link_to "Löschen", article, :method => :delete, :confirm => "Bist Du sicher?",
-              class: 'btn btn-mini btn-danger'
+            = link_to "Löschen", article, :method => :delete, :confirm => "Bist Du sicher?", class: 'btn btn-mini btn-danger', :remote => true
   .form-actions.unavailable
     = submit_tag "Artikel zum Löschen vormerken", { :class => 'unavailable btn' }
 %p
