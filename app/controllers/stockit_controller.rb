@@ -3,7 +3,6 @@ class StockitController < ApplicationController
   def index
     @stock_articles = StockArticle.includes(:supplier, :article_category).
         order('suppliers.name, article_categories.name, articles.name')
-    @stock_article_selection = StockArticleSelection.new
   end
 
   def new

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130112121840) do
+ActiveRecord::Schema.define(:version => 20121230142516) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -267,17 +267,6 @@ ActiveRecord::Schema.define(:version => 20130112121840) do
 
   add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
   add_index "pages", ["title"], :name => "index_pages_on_title"
-
-  create_table "stock_article_selections", :force => true do |t|
-    t.integer  "created_by_user_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  create_table "stock_article_selections_stock_articles", :id => false, :force => true do |t|
-    t.integer "stock_article_id"
-    t.integer "stock_article_selection_id"
-  end
 
   create_table "stock_changes", :force => true do |t|
     t.integer  "delivery_id"
