@@ -5,6 +5,7 @@ class Workgroup < Group
   # returns all non-finished tasks
   has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], :order => 'due_date ASC'
 
+  validates_uniqueness_of :name
   validates_presence_of :task_name, :weekday, :task_required_users, :next_weekly_tasks_number,
                         :if => :weekly_task
   validates_numericality_of :next_weekly_tasks_number, :greater_than => 0, :less_than => 21, :only_integer => true,
@@ -61,7 +62,7 @@ class Workgroup < Group
   # add validation check on update
   # Return an error if this is the last group with admin role and role_admin should set to false
   def last_admin_on_earth
-    if !role_admin  && Workgroup.where(:role_admin => true, :id.ne => id).empty?
+    if !role_admin && !Workgroup.where('role_admin = ? AND id != ?', true, id).exists?
       errors.add(:role_admin, "Der letzten Gruppe mit Admin-Rechten darf die Admin-Rolle nicht entzogen werden")
     end
   end

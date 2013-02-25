@@ -12,15 +12,13 @@ class Supplier < ActiveRecord::Base
   attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
                   :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
 
-  validates :name, :presence => true, :length => { :in => 4..30 }, :uniqueness => true
+  validates :name, :presence => true, :length => { :in => 4..30 }
   validates :phone, :presence => true, :length => { :in => 8..20 }
   validates :address, :presence => true, :length => { :in => 8..50 }
   validates_length_of :order_howto, :note, maximum: 250
-#  validates_length_of :name, :in => 4..30
-#  validates_uniqueness_of :name
-
   validates_length_of :phone, :in => 8..20
   validates_length_of :address, :in => 8..50
+  validate :uniqueness_of_name
 
   # sync all articles with the external database
   # returns an array with articles(and prices), which should be updated (to use in a form)
@@ -65,6 +63,18 @@ class Supplier < ActiveRecord::Base
       end
     end
     return [updated_articles, outlisted_articles]
+  end
+
+  protected
+
+  # Make sure, the name is uniq, add usefull message if uniq group is already deleted
+  def uniqueness_of_name
+    id = new_record? ? '' : self.id
+    supplier = Supplier.with_deleted.where('suppliers.id != ? AND suppliers.name = ?', id, name).first
+    if supplier.present?
+      message = supplier.deleted? ? :taken_with_deleted : :taken
+      errors.add :name, message
+    end
   end
 end
 

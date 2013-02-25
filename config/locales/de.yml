@@ -143,6 +143,7 @@ de:
       odd: muss ungerade sein
       record_invalid: ! 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
       taken: ist bereits vergeben
+      taken_with_deleted: ist bereits vergeben (eine gelöschte Gruppe)
       too_long: ist zu lang (nicht mehr als %{count} Zeichen)
       too_short: ist zu kurz (nicht weniger als %{count} Zeichen)
       wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
