@@ -22,6 +22,11 @@ class StockArticle < Article
   def self.stock_value
     available.collect { |a| a.quantity * a.gross_price }.sum
   end
+  
+  def self.elements_for_index
+    StockArticle.includes(:supplier, :article_category).
+      order('suppliers.name, article_categories.name, articles.name')
+  end
 
   protected
 
