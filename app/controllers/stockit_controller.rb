@@ -32,9 +32,9 @@ class StockitController < ApplicationController
   end
 
   def destroy
-    StockArticle.find(params[:id]).destroy
-    render :layout => false,
-      :locals => { :destroyed_article_id => params[:id] }
+    @article = StockArticle.find(params[:id])
+    @article.destroy
+    render :layout => false
   rescue => error
     render :partial => "destroy_fail", :layout => false,
       :locals => { :fail_msg => "Ein Fehler ist aufgetreten: " + error.message }

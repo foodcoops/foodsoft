@@ -1,7 +1,5 @@
--# please polish the following line if you know how
-var errorDiv = $('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert" href="#">×</a></div>');
+-# please polish the following line if you know how, same in view destroy
+var errorDiv = $('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert" href="#">x</a></div>');
 
--# next line, createTextNode called by .text(textString) helps escaping for html, but what about ' signs?
-errorDiv.text('#{fail_msg}');
-
+errorDiv.append(document.createTextNode('#{j(fail_msg)}'));
 $('div.container-fluid').prepend(errorDiv);

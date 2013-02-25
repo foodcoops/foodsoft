@@ -44,7 +44,7 @@
       %th
   %tbody
     - for article in @stock_articles
-      %tr{:class => stock_article_classes(article)}
+      %tr{:class => stock_article_classes(article), :id => "stockArticle-#{article.id}"}
         %td=h article.name
         %td= article.quantity
         %td= article.quantity - article.quantity_available
