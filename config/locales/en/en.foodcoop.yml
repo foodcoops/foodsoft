@@ -1,0 +1,35 @@
+en:
+  foodcoop:
+    ordergroups:
+      index:
+        title: 'Ordergroups'
+        name: Name ...
+        only_active: 'Only active groups'
+        only_active_desc: '(has placed order at least once in the last 3 months)'
+      ordergroups:
+        name: 'Name'
+        user: 'Users'
+        last_ordered: 'Last ordered'
+    users:
+      index:
+        title: 'Users'
+        body:
+          <p>Here you can write a message to the members of your Foodcoop.</p>
+          <p>You have to approve in your %{profile_link} that your contact details are visible.</p>
+        profile_link: 'options'
+        ph_name: Name ...
+        ph_ordergroup: Order group ...
+    workgroups:
+      index:
+        title: 'Working groups'
+        body:
+          <p>Editing a group is just available to members of the group.<br/>
+          If you want to join a group, please send the members a message. </p>
+      edit:
+        title: 'Edit group'
+        invite_new: 'You can invite new members %{invite_link}.'
+        invite_link: 'here'
+        or_cancel: 'or cancel'
+      workgroup:
+        show_tasks: 'Show all tasks'
+        edit: 'Edit group'
