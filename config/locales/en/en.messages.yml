@@ -2,7 +2,7 @@ en:
   messages:
     index:
       title: 'Messages'
-      new: 'New messages'
+      new: 'New message'
     messages:
       reply: 'Reply'
     new:
