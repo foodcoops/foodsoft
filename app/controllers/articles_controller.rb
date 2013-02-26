@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
       sort = "article_categories.name, articles.name"
     end
 
-    @articles = Article.where(supplier_id: @supplier).includes(:article_category).order(sort)
+    @articles = Article.where(supplier_id: @supplier, :type => nil).includes(:article_category).order(sort)
     @articles = @articles.where('articles.name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
     @articles = @articles.page(params[:page]).per(@per_page)
