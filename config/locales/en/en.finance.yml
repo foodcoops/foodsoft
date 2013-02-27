@@ -1,0 +1,152 @@
+en:
+  finance:
+    index:
+      title: 'Finances'
+      unpaid_invoices: 'Unpaid invoices'
+      show_all: 'Show all'
+      date: 'Date'
+      amount: 'Amount'
+      supplier: 'supplier'
+      edit: 'Edit'
+      last_transactions: 'Last Transactions'
+      group: 'Group'
+      note: 'Note'
+      open_transactions: 'Open Transactions'
+      end: 'End'
+      amount_fc: 'Amount(FC)'
+      clear: 'To account'
+      everything_cleared: 'Great, everything is accounted...'
+    balancing:
+      close:
+        notice: 'Order was accounted succesfully, the balance of the account was updated.'
+        alert: 'An error occured while accounting: %{message}'
+      close_direct:
+        notice: 'Order was closed'
+        alert: 'Order can not be closed: %{message}'
+      index:
+        title: 'Closed Orders'
+      new:
+        alert: 'Attention, order was already accounted'
+        title: 'Accounting %{name}'
+        summary: 'Summary'
+        invoice: 'Invoice'
+        notes_and_journal: 'Notes/Protocol'
+        comment_on_transaction: 'Here you can put a comment with your accounting'
+        edit_note: 'Edit note'
+        comments: 'Comments'
+        create_invoice: 'Create invoice'
+        confirm_order: 'Close order'
+        view_options: 'Viewing options'
+        edit_order: 'Edit order'
+        groups_overview: 'Overview of groups'
+        articles_overview: 'Overview of articles'
+      confirm:
+        title: 'Close order'
+        first_paragraph: 'When the order is closed, all group accounts will be updated.<br />The accounts will be charged as follows:'
+        clear: 'Close'
+        or_cancle: 'or back to accounting'
+      summary:
+        duration: 'From %{starts} till %{ends}'
+        net_amount: 'Net amount:'
+        gross_amount: 'Gross amount:'
+        fc_amount: 'FC-amount:'
+        groups_amount: 'Group amounts:'
+        fc_profit: 'FC Profit'
+        without_extra_charge: 'Without extra charge:'
+        with_extra_charge: 'With extra charge:'
+      orders:
+        name: 'Name'
+        end: 'End'
+        state: 'State'
+        last_edited_by: 'Last edited by'
+        cleared: 'Accounted (%{amount})'
+        clear: 'Accounting'
+        close: 'Close directly'
+        confirm: 'Really want to put the order on closed?'
+        no_closed_orders: 'At the moment there are not closed orders'
+      order_article:
+        edit: 'Edit'
+        delete: 'Delete'
+        confirm: 'Are you sure?'
+      invoice:
+        invoice_number: 'Invoice number:'
+        invoice_date: 'Invoice date:'
+        invoice_amount: 'Invoice amount:'
+        minus_refund_calculated: '- refund calculated:'
+        plus_refund_credited: '+ refund credited:'
+        refund_adjusted_amount: 'refund adjusted amount:'
+        edit: 'Edit invoice'
+        new: 'Create new invoice'
+      group_order_articles:
+        group: 'Group'
+        units: 'Units'
+        total: 'Total costs'
+        add_group: 'Add group'
+        total_fc: 'Sum (FC-Price)'
+      edit_note:
+        close: 'Close'
+        save: 'Save'
+      edit_results_by_articles:
+        article: 'Article'
+        number: 'Number'
+        amount: 'Amount'
+        amount_per_unit: 'Unit quantity'
+        net: 'Net'
+        gross: 'Gross'
+        tax: 'Tax'
+        refund: 'Refund'
+        add_article: 'Add article'
+    financial_transactions:
+      create:
+        notice: "The Transaction was saved."
+      create_collection:
+        notice: "All Transactions were saved."
+        alert: "An Error occured: %{error}"
+      ordergroup:
+        remove: "Remove"
+        remove_group: "Remove group"
+      transactions:
+        date: "Date"
+        who: "Who"
+        note: "Note"
+        amount: "Amount"
+      index:
+        title: "Account statement for %{name}"
+        new_transaction: 'Create new transaction'
+        balance: 'Balance of account: %{balance}'
+        last_updated_at: '(last updated at %{when})'
+        search_placeholder: 'Search ..'
+      new_collection:
+        title: "Updating more accounts"
+        sidebar: 'Here you can update more accounts at the same time. For example all transfers of the order group from one account statement'
+        new_ordergroup: 'Add new order group'
+        ordergroup: 'Order group'
+        note: 'Note'
+        amount: 'Amount'
+        save: "Save transaction"
+        or_cancel: 'or cancel'
+      new:
+        title: "New transaction"
+        paragraph: 'Here you can credit/distract the order group <b>%{name}</b> money.'
+        or_cancel: "or cancel"
+    group_order_articles:
+      form:
+        amount_change_for: 'Change amount for %{article}'
+        close: 'Close'
+        save: "Save"
+    ordergroups:
+      ordergroups:
+        name: "Name"
+        account_balance: "Account Balance"
+        new_transaction: "New transaction"
+        account_statement: "Account statement"
+      index:
+        title: "Manage accounts"
+        new_transaction: "Add new transactions"
+        search_placeholder: 'Search ..'
+      
+    # used by controller
+    create:
+      notice: 'Invoice was created'
+    update:
+      notice: 'Invoice was updated'
