@@ -118,6 +118,10 @@ en:
         paid_on: Paid on
         deposit: Charge deposit
         deposit_credit: Credit deposit
+        amount: Amount
+        delivery: Delivery
+        order: Order
+        note: Note
       order_article:
         units_to_order: Amount of units
         update_current_price: Globally update current price

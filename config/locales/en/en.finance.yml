@@ -144,6 +144,28 @@ en:
         title: "Manage accounts"
         new_transaction: "Add new transactions"
         search_placeholder: 'Search ..'
+    invoices:
+      edit:
+        title: "Edit invoice"
+      form:
+        linked: "This invoice is linked to a %{what_link}."
+        delivery: "delivery"
+        order: "order"
+        or_cancel: "or cancel"
+      index:
+        title: "Invoices"
+        action_new: "Create new invoice"
+      invoices:
+        delivery: "Delivery"
+        confirm_delete: "Are you sure?"
+      new:
+        title: "Create new invoice"
+        back: "Back"
+      show:
+        title: "Invoice %{number}"
+        linked: "This invoice is linked to a %{what_link}."
+        delivery: "delivery"
+        back: "Back"
       
     # used by controller
     create:

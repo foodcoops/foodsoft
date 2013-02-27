@@ -1,34 +1,34 @@
-- title "Rechnung #{@invoice.number}"
+- title t('.title', number: @invoice.number)
 
 %p
-  %b Lieferantin:
+  %b= t 'simple_form.labels.invoice.supplier'
   = @invoice.supplier.name
 - if @invoice.delivery
   %p
-    %b Lieferung:
-    Diese Rechnung ist mit einer #{link_to "Lieferung", [@invoice.supplier,@invoice.delivery]} verknüpft.
+    %b= t('simple_form.labels.invoice.delivery') + ':'
+    = t '.linked', what_link: link_to(t('.delivery'), [@invoice.supplier,@invoice.delivery])
 %p
-  %b Rechnungsnummer:
+  %b= t('simple_form.labels.invoice.number') + ':'
   = @invoice.number
 %p
-  %b Datum:
+  %b= t('simple_form.labels.invoice.date') + ':'
   = @invoice.date
 %p
-  %b Bezahlt am:
+  %b= t('simple_form.labels.invoice.paid_on') + ':'
   = @invoice.paid_on
 %p
-  %b Rechnungsbetrag:
+  %b= t('simple_form.labels.invoice.amount') + ':'
   = number_to_currency @invoice.amount
 %p
-  %b Pfand berechnet:
+  %b= t('simple_form.labels.invoice.deposit') + ':'
   = number_to_currency @invoice.deposit
 %p
-  %b Pfand gutgeschrieben:
+  %b= t('simple_form.labels.invoice.deposit_credit') + ':'
   = number_to_currency @invoice.deposit_credit
 %p
-  %b Notiz:
+  %b= t('simple_form.labels.invoice.note') + ':'
   =h @invoice.note
 
-= link_to "Bearbeiten", edit_finance_invoice_path(@invoice)
+= link_to t('ui.edit'), edit_finance_invoice_path(@invoice)
 |
-= link_to "Zurück", finance_invoices_path
+= link_to t('.back'), finance_invoices_path

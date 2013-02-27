@@ -5,14 +5,14 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Nummer
-      %th Lieferantin
-      %th Datum
-      %th Bezahlt am
-      %th Betrag
-      %th Lieferung
-      %th Bestellung
-      %th Note
+      %th= t 'simple_form.labels.invoice.number'
+      %th= t 'simple_form.labels.invoice.supplier'
+      %th= t 'simple_form.labels.invoice.date'
+      %th= t 'simple_form.labels.invoice.paid_on'
+      %th= t 'simple_form.labels.invoice.amount'
+      %th= t 'simple_form.labels.invoice.delivery'
+      %th= t 'simple_form.labels.invoice.order'
+      %th= t 'simple_form.labels.invoice.note'
       %th
       %th
   %tbody
@@ -23,9 +23,9 @@
         %td= format_date invoice.date
         %td= format_date invoice.paid_on
         %td= number_to_currency invoice.amount
-        %td= link_to "Lieferung", [invoice.supplier,invoice.delivery] if invoice.delivery
+        %td= link_to t('.delivery'), [invoice.supplier,invoice.delivery] if invoice.delivery
         %td= link_to format_date(invoice.order.ends), new_finance_order_path(order_id: invoice.order_id) if invoice.order
         %td= truncate(invoice.note)
-        %td= link_to "Bearbeiten", edit_finance_invoice_path(invoice), class: 'btn btn-mini'
-        %td= link_to "Löschen", finance_invoice_path(invoice), :confirm => 'Are you sure?', :method => :delete,
+        %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
+        %td= link_to t('ui.delete'), finance_invoice_path(invoice), :confirm => t('.confirm_delete'), :method => :delete,
           class: 'btn btn-danger btn-mini'

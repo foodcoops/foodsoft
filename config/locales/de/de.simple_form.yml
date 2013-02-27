@@ -118,6 +118,10 @@ de:
         paid_on: Bezahlt am
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
+        amount: Betrag
+        delivery: Lieferung
+        order: Bestellung
+        note: Notiz
       order_article:
         units_to_order: Menge
         update_current_price: Globalen Preis aktualisieren

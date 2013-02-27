@@ -144,6 +144,28 @@ de:
         title: "Konten verwalten"
         new_transaction: "Neue Überweisungen eingeben"
         search_placeholder: 'Suchen ...'
+    invoices:
+      edit:
+        title: "Rechnung bearbeiten"
+      form:
+        linked: "Diese Rechnung ist mit einer %{what_link} verknüpft."
+        delivery: "Lieferung"
+        order: "Bestellung"
+        or_cancel: "oder abbrechen"
+      index:
+        title: "Rechnungen"
+        action_new: "Neue Rechnung anlegen"
+      invoices:
+        delivery: "Lieferung"
+        confirm_delete: "Bist Du sicher?"
+      new:
+        title: "Neue Rechnung anlegen"
+        back: "Züruck"
+      show:
+        title: "Rechnung %{number}"
+        linked: "Diese Rechnung ist mit einer %{what_link} verknüpft."
+        delivery: "Lieferung"
+        back: "Züruck"
       
     # used by controller
     create:
