@@ -13,3 +13,6 @@ en:
     # used by controller
     success: 'User was invited successfully.'
 
+    # used by model
+    errors:
+      already_member: 'is already in use. Person is a member of this Foodcoop already.'
