@@ -1,0 +1,5 @@
+-# please polish the following line if you know how, same in view destroy
+var errorDiv = $('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert" href="#">x</a></div>');
+
+errorDiv.append(document.createTextNode('#{j(fail_msg)}'));
+$('div.container-fluid').prepend(errorDiv);

@@ -2,7 +2,7 @@
 - content_for :javascript do
   :javascript
     $(function() {
-      $('tr.unavailable,input.unavailable,div.unavailable').hide();
+      $('tr.unavailable').hide();
     })
 
 .well.well-small
@@ -12,7 +12,7 @@
         Ansichtsoptionen
         %span.caret
       %ul.dropdown-menu
-        %li= link_to "Nicht verfügbare Artikel zeigen/verstecken", "#", 'data-toggle-this' => 'tr.unavailable,input.unavailable,div.unavailable', tabindex: -1
+        %li= link_to "Nicht verfügbare Artikel zeigen/verstecken", "#", 'data-toggle-this' => 'tr.unavailable', tabindex: -1
 
     .btn-group
       = link_to_if @current_user.role_orders?, "Lagerbestellung online stellen", new_order_path(supplier_id: 0),
@@ -20,7 +20,6 @@
       = link_to "Neuen Lagerartikel anlegen", new_stock_article_path, class: 'btn'
       = link_to "Inventur anlegen", new_stock_taking_path, class: 'btn'
       = link_to "Inventurübersicht", stock_takings_path, class: 'btn'
-      = link_to 'Löschvorschläge', stock_article_selections_path, class: 'btn'
 
     .btn-group
       = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
@@ -30,44 +29,36 @@
         - Supplier.all.each do |supplier|
           %li= link_to supplier.name, new_supplier_delivery_path(supplier), tabindex: -1
 
-= form_for @stock_article_selection do |form|
-  - if @stock_article_selection.errors.has_key?(:stock_articles)
-    .alert.alert-error
-      = @stock_article_selection.errors.get(:stock_articles).join(" ")
-  %table.table.table-hover#articles
-    %thead
-      %tr
-        %th= check_box_tag 'checkall', '1', false,
-          { 'data-check-all' => 'table#articles tr.unavailable', :title => 'Alle löschbaren Artikel', :class => 'unavailable' }
-        %th Artikel
-        %th im Lager
-        %th davon bestellt
-        %th verfügbar
-        %th Einheit
-        %th Preis
-        %th MwSt
-        %th Lieferantin
-        %th Kategorie
-        %th
-    %tbody
-      - for article in @stock_articles
-        %tr{:class => stock_article_classes(article)}
-          %td= stock_article_delete_checkbox(article)
-          %td=h article.name
-          %td= article.quantity
-          %td= article.quantity - article.quantity_available
-          %th= article.quantity_available
-          %td= article.unit
-          %td= article.price
-          %td= number_to_percentage article.tax
-          %td= link_to article.supplier.name, article.supplier
-          %td= article.article_category.name
-          %td
-            = link_to "Bearbeiten", edit_stock_article_path(article), class: 'btn btn-mini'
-            = link_to "Löschen", article, :method => :delete, :confirm => "Bist Du sicher?",
-              class: 'btn btn-mini btn-danger'
-  .form-actions.unavailable
-    = submit_tag "Artikel zum Löschen vormerken", { :class => 'unavailable btn' }
+%table.table.table-hover#articles
+  %thead
+    %tr
+      %th Artikel
+      %th im Lager
+      %th davon bestellt
+      %th verfügbar
+      %th Einheit
+      %th Preis
+      %th MwSt
+      %th Lieferantin
+      %th Kategorie
+      %th
+  %tbody
+    - for article in @stock_articles
+      %tr{:class => stock_article_classes(article), :id => "stockArticle-#{article.id}"}
+        %td=h article.name
+        %td= article.quantity
+        %td= article.quantity - article.quantity_available
+        %th= article.quantity_available
+        %td= article.unit
+        %td= article.price
+        %td= number_to_percentage article.tax
+        %td= link_to article.supplier.name, article.supplier
+        %td= article.article_category.name
+        %td
+          = link_to "Bearbeiten", edit_stock_article_path(article), class: 'btn btn-mini'
+          = link_to "Löschen", article, :method => :delete, :confirm => "Bist Du sicher?",
+            class: 'btn btn-mini btn-danger', :remote => true
+
 %p
   Aktueller Lagerwert:
   = number_to_currency StockArticle.stock_value

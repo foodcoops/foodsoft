@@ -89,18 +89,6 @@ Foodsoft::Application.routes.draw do
         post :add_stock_article
       end
     end
-    
-    resources :stock_article_selections, :controller => 'stockit_selections',
-      :only => [ :create, :show, :index, :destroy ], :path => "/stock_articles/selections" do
-      member do
-        delete 'articles'
-      end
-      
-      collection do
-        delete 'finished'
-      end
-    end
-    
 
     resources :stock_articles, :to => 'stockit' do
       collection do
