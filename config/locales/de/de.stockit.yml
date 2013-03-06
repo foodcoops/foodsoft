@@ -29,6 +29,8 @@ de:
     new:
       title: 'Neuen Lagerartikel anlegen'
       search_text: 'Suche nache Artikeln aus allen Katalogen:'
+    destroy:
+      notice: 'Artikel %{name} gelöscht.'
     
     # used by controller
     stock_create:
@@ -39,4 +41,3 @@ de:
     # used by model
     check:
       not_empty: '%{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null.'
-      

@@ -29,6 +29,8 @@ en:
     new:
       title: 'Add new stock article'
       search_text: 'Search for articles in all catalogues:'
+    destroy:
+      notice: 'Article %{name} was deleted.'
     
     # used by controller
     stock_create:
