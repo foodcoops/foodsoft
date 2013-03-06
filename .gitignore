@@ -1,6 +1,7 @@
 log/*.log
 tmp/**/*
 config/*.yml
+config/initializers/secret_token.rb
 db/*.sqlite3
 nbproject/
 config/environments/development.rb

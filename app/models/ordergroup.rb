@@ -116,6 +116,16 @@ class Ordergroup < Group
       errors.add :name, message
     end
   end
+
+  # Make sure, the name is uniq, add usefull message if uniq group is already deleted
+  def uniqueness_of_name
+    id = new_record? ? '' : self.id
+    group = Ordergroup.with_deleted.where('groups.id != ? AND groups.name = ?', id, name).first
+    if group.present?
+      message = group.deleted? ? :taken_with_deleted : :taken
+      errors.add :name, message
+    end
+  end
   
 end
 

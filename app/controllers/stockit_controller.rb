@@ -32,11 +32,12 @@ class StockitController < ApplicationController
   end
 
   def destroy
-    StockArticle.find(params[:id]).destroy
-    redirect_to stock_articles_path
+    @article = StockArticle.find(params[:id])
+    @article.destroy
+    render :layout => false
   rescue => error
-    flash[:error] = I18n.t('errors.general_msg', :msg => error.message)
-    redirect_to stock_articles_path
+    render :partial => "destroy_fail", :layout => false,
+      :locals => { :fail_msg => I18n.t('errors.general_msg', :msg => error.message) }
   end
 
   #TODO: Fix this!!

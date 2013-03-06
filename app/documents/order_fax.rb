@@ -19,6 +19,10 @@ class OrderFax < OrderPdf
       text contact[:street], align: :right
       move_down 5
       text "#{contact[:zip_code]} #{contact[:city]}", align: :right
+      move_down 5
+      if @order.supplier.customer_number != ''
+        text "Kundennummer: #{@order.supplier.customer_number}", align: :right
+      end
       move_down 10
       text contact[:phone], size: 9, align: :right
       move_down 5
@@ -34,6 +38,7 @@ class OrderFax < OrderPdf
       text "Fax: " + @order.supplier.fax
     end
 
+    move_down 5
     text Date.today.strftime('%d.%m.%Y'), align: :right
 
     move_down 10

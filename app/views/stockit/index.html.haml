@@ -29,7 +29,6 @@
         - Supplier.all.each do |supplier|
           %li= link_to supplier.name, new_supplier_delivery_path(supplier), tabindex: -1
 
-
 %table.table.table-hover#articles
   %thead
     %tr
@@ -45,7 +44,7 @@
       %th
   %tbody
     - for article in @stock_articles
-      %tr{:class => stock_article_classes(article)}
+      %tr{:class => stock_article_classes(article), :id => "stockArticle-#{article.id}"}
         %td=h article.name
         %td= article.quantity
         %td= article.quantity - article.quantity_available
@@ -58,7 +57,7 @@
         %td
           = link_to t('ui.edit'), edit_stock_article_path(article), class: 'btn btn-mini'
           = link_to t('ui.delete'), article, :method => :delete, :confirm => t('.confirm_delete'),
-            class: 'btn btn-mini btn-danger'
+            class: 'btn btn-mini btn-danger', :remote => true
 %p
   = t '.stock_worth'
   = number_to_currency StockArticle.stock_value

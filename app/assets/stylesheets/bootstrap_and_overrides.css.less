@@ -37,6 +37,11 @@ body {
 
 // Custom styles
 
+// Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
+.dl-horizontal { 
+    dd { .clearfix(); }
+}
+
 @mainRedColor: #ED0606;
 
 .logo {
@@ -196,17 +201,10 @@ tr.unavailable {
   }
 }
 
-
 // ********* Tweaks & fixes
-
-// https://github.com/twitter/bootstrap/issues/4062
-.dl-horizontal { 
-  dd { .clearfix(); }
-}
 
 // need more space for supplier&order information (in German, at least)
 .dl-horizontal {
   dt { width: 160px; }
   dd { margin-left: 170px; }
 }
-
