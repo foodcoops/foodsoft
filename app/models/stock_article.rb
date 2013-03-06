@@ -16,7 +16,7 @@ class StockArticle < Article
   # Check for unclosed orders and substract its ordered quantity
   def quantity_available
     quantity - OrderArticle.where(article_id: id).
-        joins(:order).where("orders.state = 'open' OR orders.state = 'finished'").sum(:units_to_order)
+        joins(:order).where("orders.state = 'finished'").sum(:units_to_order)
   end
 
   def self.stock_value
