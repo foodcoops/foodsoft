@@ -6,7 +6,7 @@
 - if @invoice.delivery
   %p
     %b= t('simple_form.labels.invoice.delivery') + ':'
-    = t '.linked', what_link: link_to(t('.delivery'), [@invoice.supplier,@invoice.delivery])
+    = t('.linked', what_link: link_to(t('.delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
 %p
   %b= t('simple_form.labels.invoice.number') + ':'
   = @invoice.number
