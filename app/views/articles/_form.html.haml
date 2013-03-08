@@ -2,8 +2,8 @@
   = f.hidden_field :shared_updated_on
   = f.hidden_field :supplier_id
   .modal-header
-    = button_tag "x", class: 'close', data: {dismiss: 'modal'}
-    %h3 Neuen Artikel einfügen
+    = button_tag t('ui.marks.close'), class: 'close', data: {dismiss: 'modal'}
+    %h3= t '.title'
   .modal-body
     = f.input :availability
     = f.input :name
@@ -19,6 +19,6 @@
     = f.input :tax
     = f.input :deposit
   .modal-footer
-    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
+    = button_tag t('ui.close'), class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'
 

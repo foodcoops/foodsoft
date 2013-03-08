@@ -1,11 +1,10 @@
-- title "Alle Artikel von #{@supplier.name} bearbeiten"                                              |
+- title t('.title', supplier: @supplier.name)
 %p
-  %i
-    Pflichtfelder sind: Name, Einheit, (netto) Preis und Bestellnummer.
+  %i= t '.note'
 = form_tag(update_all_supplier_articles_path(@supplier)) do
   = render 'edit_all_table'
   %br/
-  %i Achtung, alle Artikel werden aktualisiert!
+  %i= t '.warning'
   .form-actions
-    = submit_tag 'Alle Artikel aktualisieren', class: 'btn btn-primary'
-    = link_to 'oder abbrechen', supplier_articles_path(@supplier)
+    = submit_tag t('.submit'), class: 'btn btn-primary'
+    = link_to t('.or_cancel'), supplier_articles_path(@supplier)

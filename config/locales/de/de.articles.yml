@@ -1,0 +1,26 @@
+de:
+  articles:
+    article:
+      last_update: 'zuletzt geändert: %{last_update} | Brutto: %{gross_price}'
+      confirm_delete: 'Bist du sicher?'
+    articles:
+      unit_quantity: 'Gebgr.'
+      price_netto: 'Preis'
+      option_select: 'Aktion wählen ...'
+      option_delete: 'Artikel löschen'
+      confirm_delete: 'Willst Du wirklich alle gewählten Artikel löschen?'
+      option_not_available: 'Artikel sind nicht mehr verfügbar'
+      option_available: 'Artikel sind verfügbar'
+    destroy_active_article:
+      note: >
+        %{article} wird in laufenden Bestellungen verwendet und kann nicht gelöscht werden.
+        Bitte zuerst den Artikel aus den Bestellungen %{drop_link}.
+      drop: 'entfernen'
+    edit_all:
+      title: 'Alle Artikel von %{supplier} bearbeiten'
+      note: 'Pflichtfelder sind: Name, Einheit, (netto) Preis und Bestellnummer.'
+      warning: 'Achtung, alle Artikel werden aktualisiert!'
+      submit: 'Alle Artikel aktualisieren'
+      or_cancel: 'oder abbrechen'
+    form:
+      title: 'Neuen Artikel einfügen'
