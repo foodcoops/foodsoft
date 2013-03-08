@@ -166,6 +166,11 @@ de:
         linked: "Diese Rechnung ist mit einer %{what_link} verknüpft."
         delivery: "Lieferung"
         back: "Züruck"
+    order_articles:
+      edit:
+        title: 'Artikel aktualisieren'
+      new:
+        title: 'Neuer gelieferter Artikel die Bestellung'
       
     # used by controller
     create:

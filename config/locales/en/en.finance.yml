@@ -166,6 +166,11 @@ en:
         linked: "This invoice is linked to a %{what_link}."
         delivery: "delivery"
         back: "Back"
+    order_articles:
+      edit:
+        title: 'Update article'
+      new:
+        title: 'Add delivered article to order'
       
     # used by controller
     create:
