@@ -8,3 +8,4 @@ Deine aktueller Äpfelpunktestand: #{apple_bar.apples}
   - if FoodsoftConfig[:stop_ordering_under].present?
     %strong Achtung,
     hast Du weniger als #{FoodsoftConfig[:stop_ordering_under]} Äpfel, darfst Du nicht mehr bestellen!
+  = link_to 'Mehr Informationen', 'https://github.com/bennibu/foodsoft/wiki/%C3%84pfel-u.-Birnen', target: '_blank'
