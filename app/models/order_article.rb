@@ -4,7 +4,7 @@ class OrderArticle < ActiveRecord::Base
   attr_reader :update_current_price
 
   belongs_to :order
-  belongs_to :article
+  belongs_to :article, :with_deleted => true
   belongs_to :article_price
   has_many :group_order_articles, :dependent => :destroy
 

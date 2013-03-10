@@ -1,6 +1,6 @@
 class ArticlePrice < ActiveRecord::Base
 
-  belongs_to :article
+  belongs_to :article, :with_deleted => true
   has_many :order_articles
 
   validates_presence_of :price, :tax, :deposit, :unit_quantity

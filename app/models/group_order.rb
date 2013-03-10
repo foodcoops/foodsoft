@@ -4,7 +4,7 @@ class GroupOrder < ActiveRecord::Base
   attr_accessor :group_order_articles_attributes
 
   belongs_to :order
-  belongs_to :ordergroup
+  belongs_to :ordergroup, :with_deleted => true
   has_many :group_order_articles, :dependent => :destroy
   has_many :order_articles, :through => :group_order_articles
   belongs_to :updated_by, :class_name => "User", :foreign_key => "updated_by_user_id"
