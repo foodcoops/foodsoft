@@ -19,8 +19,7 @@ class Order < ActiveRecord::Base
   validate :starts_before_ends, :include_articles
 
   # Callbacks
-  after_update :update_price_of_group_orders
-  after_save :save_order_articles
+  after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
   scope :open, where(state: 'open').order('ends DESC')
@@ -215,7 +214,14 @@ class Order < ActiveRecord::Base
   end
 
   def save_order_articles
-    self.articles = Article.find(article_ids)
+    self.articles = Article.find(article_ids) # This doesn't deletes the group_order_articles, belonging to order_articles,
+                                              # see http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#method-i-has_many
+
+    # Ensure to delete also the group_order_articles, belonging to order_articles
+    # This case is relevant, when removing articles from a running order
+    goa_ids = GroupOrderArticle.where(group_order_id: group_order_ids).includes(:order_article).
+        select { |goa| goa.order_article.nil? }.map(&:id)
+    GroupOrderArticle.delete_all(id: goa_ids) unless goa_ids.empty?
   end
 
   private
