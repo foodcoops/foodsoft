@@ -17,6 +17,17 @@ class OrderArticle < ActiveRecord::Base
   before_create :init_from_balancing
   after_destroy :update_ordergroup_prices
 
+  def self.sort_by_name(order_articles)
+    order_articles.sort { |a,b| a.article.name <=> b.article.name }
+  end
+
+  def self.sort_by_order_number(order_articles)
+    order_articles.sort do |a,b|
+      a.article.order_number.to_s.gsub(/[^[:digit:]]/, "").to_i <=>
+          b.article.order_number.to_s.gsub(/[^[:digit:]]/, "").to_i
+    end
+  end
+
   # This method returns either the ArticlePrice or the Article
   # The first will be set, when the the order is finished
   def price
