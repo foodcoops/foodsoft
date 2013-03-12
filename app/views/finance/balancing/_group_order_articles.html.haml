@@ -10,7 +10,7 @@
           = link_to 'Gruppe hinzufügen', new_finance_group_order_article_path(order_article_id: order_article.id),
             remote: true, class: 'btn btn-mini'
     %tbody
-      - for group_order_article in order_article.group_order_articles.ordered.all(:include => [:group_order])
+      - for group_order_article in order_article.group_order_articles.select { |goa| goa.result > 0 }
         %tr[group_order_article]
           %td
           %td{:style=>"width:50%"}
