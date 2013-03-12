@@ -22,35 +22,25 @@ class GroupOrder < ActiveRecord::Base
     data = {}
     data[:available_funds] = ordergroup.get_available_funds(self)
 
-    unless new_record?
-      # Group has already ordered, so get the results...
-      goas = {}
-      group_order_articles.all.each do |goa|
-        goas[goa.order_article_id] = {
-            :quantity => goa.quantity,
-            :tolerance => goa.tolerance,
-            :quantity_result => goa.result(:quantity),
-            :tolerance_result => goa.result(:tolerance),
-            :total_price => goa.total_price
-        }
-  end
-    end
-
     # load prices and other stuff....
     data[:order_articles] = {}
-    #order.order_articles.each do |order_article|
     order.articles_grouped_by_category.each do |article_category, order_articles|
       order_articles.each do |order_article|
+        
+        # Get the result of last time ordering, if possible
+        goa = group_order_articles.detect { |goa| goa.order_article_id == order_article.id }
+
+        # Build hash with relevant data
         data[:order_articles][order_article.id] = {
             :price => order_article.article.fc_price,
             :unit => order_article.article.unit_quantity,
-            :quantity => (new_record? ? 0 : goas[order_article.id][:quantity]),
-            :others_quantity => order_article.quantity - (new_record? ? 0 : goas[order_article.id][:quantity]),
-            :used_quantity => (new_record? ? 0 : goas[order_article.id][:quantity_result]),
-            :tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance]),
-            :others_tolerance => order_article.tolerance - (new_record? ? 0 : goas[order_article.id][:tolerance]),
-            :used_tolerance => (new_record? ? 0 : goas[order_article.id][:tolerance_result]),
-            :total_price => (new_record? ? 0 : goas[order_article.id][:total_price]),
+            :quantity => (goa ? goa.quantity : 0),
+            :others_quantity => order_article.quantity - (goa ? goa.quantity : 0),
+            :used_quantity => (goa ? goa.result(:quantity) : 0),
+            :tolerance => (goa ? goa.result(:tolerance) : 0),
+            :others_tolerance => order_article.tolerance - (goa ? goa.result(:tolerance) : 0),
+            :used_tolerance => (goa ? goa.result(:tolerance) : 0),
+            :total_price => (goa ? goa.total_price : 0),
             :missing_units => order_article.missing_units,
             :quantity_available => (order.stockit? ? order_article.article.quantity_available : 0)
         }
