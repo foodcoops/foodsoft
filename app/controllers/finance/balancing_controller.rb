@@ -21,9 +21,8 @@ class Finance::BalancingController < Finance::BaseController
       sort = "id"
     end
 
-    @articles = @order.order_articles.ordered.includes(:order, :article, :article_price,
+    @articles = @order.order_articles.ordered.includes(:order, :article_price,
                                                        group_order_articles: {group_order: :ordergroup}).order(sort)
-
 
     if params[:sort] == "order_number"
       @articles = @articles.to_a.sort { |a,b| a.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> b.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
