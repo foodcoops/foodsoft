@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   has_one :invoice
   has_many :comments, :class_name => "OrderComment", :order => "created_at"
   has_many :stock_changes
-  belongs_to :supplier
+  belongs_to :supplier, :with_deleted => true
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
@@ -19,8 +19,7 @@ class Order < ActiveRecord::Base
   validate :starts_before_ends, :include_articles
 
   # Callbacks
-  after_update :update_price_of_group_orders
-  after_save :save_order_articles
+  after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
   scope :open, where(state: 'open').order('ends DESC')
@@ -215,7 +214,24 @@ class Order < ActiveRecord::Base
   end
 
   def save_order_articles
-    self.articles = Article.find(article_ids)
+    #self.articles = Article.find(article_ids) # This doesn't deletes the group_order_articles, belonging to order_articles,
+    #                                          # see http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#method-i-has_many
+    #
+    ## Ensure to delete also the group_order_articles, belonging to order_articles
+    ## This case is relevant, when removing articles from a running order
+    #goa_ids = GroupOrderArticle.where(group_order_id: group_order_ids).includes(:order_article).
+    #    select { |goa| goa.order_article.nil? }.map(&:id)
+    #GroupOrderArticle.delete_all(id: goa_ids) unless goa_ids.empty?
+
+
+    # fetch selected articles
+    articles_list = Article.find(article_ids)
+    # create new order_articles
+    (articles_list - articles).each { |article| order_articles.create(:article => article) }
+    # delete old order_articles
+    articles.reject { |article| articles_list.include?(article) }.each do |article|
+      order_articles.detect { |order_article| order_article.article_id == article.id }.destroy
+    end
   end
 
   private

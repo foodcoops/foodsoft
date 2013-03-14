@@ -10,24 +10,22 @@ class Finance::BalancingController < Finance::BaseController
     flash.now.alert = "Achtung, Bestellung wurde schon abgerechnet" if @order.closed?
     @comments = @order.comments
 
-    if params['sort']
-      sort = case params['sort']
-             when "name"  then "articles.name"
-             when "order_number" then "articles.order_number"
-             when "name_reverse"  then "articles.name DESC"
-             when "order_number_reverse" then "articles.order_number DESC"
-             end
-    else
-      sort = "id"
-    end
+    @articles = @order.order_articles.ordered.includes(:order, :article_price,
+                                                       group_order_articles: {group_order: :ordergroup})
 
-    @articles = @order.order_articles.ordered.includes(:article).order(sort)
-      
-    if params[:sort] == "order_number"
-      @articles = @articles.to_a.sort { |a,b| a.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> b.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
-    elsif params[:sort] == "order_number_reverse"
-      @articles = @articles.to_a.sort { |a,b| b.article.order_number.gsub(/[^[:digit:]]/, "").to_i <=> a.article.order_number.gsub(/[^[:digit:]]/, "").to_i }
-    end
+    sort_param = params['sort'] || 'name'
+    @articles = case sort_param
+                  when 'name' then
+                    OrderArticle.sort_by_name(@articles)
+                  when 'name_reverse' then
+                    OrderArticle.sort_by_name(@articles).reverse
+                  when 'order_number' then
+                    OrderArticle.sort_by_order_number(@articles)
+                  when 'order_number_reverse' then
+                    OrderArticle.sort_by_order_number(@articles).reverse
+                  else
+                    @articles
+                end
 
     render layout: false if request.xhr?
   end

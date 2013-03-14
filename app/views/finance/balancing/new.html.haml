@@ -20,7 +20,7 @@
 
   .well.well-small
     %h3 Kommentare
-    #comments= render :partial => 'shared/comments', locals: {comments: @order.comments}
+    #comments= render :partial => 'shared/comments', locals: {comments: @order.comments.includes(:user)}
 
 - content_for :actionbar do
   .btn-group

@@ -7,7 +7,7 @@ class Article < ActiveRecord::Base
   localize_input_of :price, :tax, :deposit
 
   # Associations
-  belongs_to :supplier
+  belongs_to :supplier, :with_deleted => true
   belongs_to :article_category
   has_many :article_prices, :order => "created_at DESC"
 
