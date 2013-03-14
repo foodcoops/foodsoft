@@ -49,7 +49,7 @@ function addData(orderArticleId, itemPrice, itemUnit, itemSubtotal, itemQuantity
 
 function increaseQuantity(item) {
     var value = Number($('#q_' + item).val()) + 1;
-    if (!isStockit || (value <= (quantityAvailable[item] - quantityOthers[item]))) {
+    if (!isStockit || (value <= (quantityAvailable[item] + itemsAllocated[item]))) {
         update(item, value, $('#t_' + item).val());
     }
 }
