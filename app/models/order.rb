@@ -40,7 +40,7 @@ class Order < ActiveRecord::Base
     if stockit?
       StockArticle.available.all(:include => :article_category,
         :order => 'article_categories.name, articles.name').reject{ |a|
-        a.quantity_available <= 0
+        a.quantity_available <= 0 and not a.ordered?(self)
       }.group_by { |a| a.article_category.name }
     else
       supplier.articles.available.all.group_by { |a| a.article_category.name }

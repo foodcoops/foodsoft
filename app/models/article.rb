@@ -48,6 +48,10 @@ class Article < ActiveRecord::Base
     order_article ? order_article.order : nil
   end
   memoize :in_open_order
+
+  def ordered?(order)
+    order.order_articles.where(article_id: id).where('quantity > 0').one?
+  end
   
   # this method checks, if the shared_article has been changed
   # unequal attributes will returned in array
