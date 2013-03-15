@@ -48,8 +48,9 @@ class Article < ActiveRecord::Base
     order_article ? order_article.order : nil
   end
   memoize :in_open_order
-
-  def ordered?(order)
+  
+  # Returns true if the article has been ordered in the given order at least once
+  def ordered_in_order?(order)
     order.order_articles.where(article_id: id).where('quantity > 0').one?
   end
   
