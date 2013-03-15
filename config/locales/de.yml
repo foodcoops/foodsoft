@@ -324,6 +324,7 @@ de:
         required_users: 'Anzahl'
         due_date: 'Wann erledigen?'
         workgroup: 'Arbeitsgruppe'
+        periodic: 'Wöchentlich wiederholen'
         done: Erledigt?
       message:
         sent_to_all: 'An alle Mitglieder schicken'

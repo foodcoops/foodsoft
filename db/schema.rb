@@ -268,6 +268,12 @@ ActiveRecord::Schema.define(:version => 20121230142516) do
   add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
   add_index "pages", ["title"], :name => "index_pages_on_title"
 
+  create_table "periodic_task_groups", :force => true do |t|
+    t.date     "next_task_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "stock_changes", :force => true do |t|
     t.integer  "delivery_id"
     t.integer  "order_id"
@@ -308,16 +314,24 @@ ActiveRecord::Schema.define(:version => 20121230142516) do
   add_index "suppliers", ["name"], :name => "index_suppliers_on_name", :unique => true
 
   create_table "tasks", :force => true do |t|
-    t.string   "name",           :default => "",    :null => false
+    t.string   "name",                   :default => "",    :null => false
     t.string   "description"
     t.date     "due_date"
-    t.boolean  "done",           :default => false
+    t.boolean  "done",                   :default => false
     t.integer  "workgroup_id"
+<<<<<<< HEAD
     t.datetime "created_on",                        :null => false
     t.datetime "updated_on",                        :null => false
     t.integer  "required_users", :default => 1
+=======
+    t.boolean  "assigned",               :default => false
+    t.datetime "created_on",                                :null => false
+    t.datetime "updated_on",                                :null => false
+    t.integer  "required_users",         :default => 1
+>>>>>>> 1cdb9e85017a17e4dbee276cd87feaa2aab75932
     t.boolean  "weekly"
-    t.integer  "duration",       :default => 1
+    t.integer  "duration",               :default => 1
+    t.integer  "periodic_task_group_id"
   end
 
   add_index "tasks", ["due_date"], :name => "index_tasks_on_due_date"
