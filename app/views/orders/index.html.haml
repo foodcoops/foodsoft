@@ -6,7 +6,7 @@
       Neue Bestellung anlegen
       %span.caret
     %ul.dropdown-menu
-      - Supplier.all.each do |supplier|
+      - Supplier.undeleted.order('suppliers.name ASC').each do |supplier|
         %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1
 
 .well

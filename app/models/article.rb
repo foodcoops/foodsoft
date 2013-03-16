@@ -1,16 +1,16 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
-  acts_as_paranoid  # Avoid deleting the article for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
 
   # Replace numeric seperator with database format
   localize_input_of :price, :tax, :deposit
 
   # Associations
-  belongs_to :supplier, :with_deleted => true
+  belongs_to :supplier
   belongs_to :article_category
   has_many :article_prices, :order => "created_at DESC"
 
+  scope :undeleted, -> { where(deleted_at: nil) }
   scope :available, :conditions => {:availability => true}
   scope :not_in_stock, :conditions => {:type => nil}
 
@@ -134,6 +134,15 @@ class Article < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def deleted?
+    deleted_at.present?
+  end
+
+  def mark_as_deleted
+    check_article_in_use
+    update_column :deleted_at, Time.now
   end
 
   protected

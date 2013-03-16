@@ -1,10 +1,9 @@
 # encoding: utf-8
 class StockArticle < Article
-  acts_as_paranoid
-  
+
   has_many :stock_changes
 
-  scope :available, :conditions => "quantity > 0"
+  scope :available, -> { undeleted.where'quantity > 0' }
 
   before_destroy :check_quantity
 
@@ -21,6 +20,11 @@ class StockArticle < Article
 
   def self.stock_value
     available.collect { |a| a.quantity * a.gross_price }.sum
+  end
+
+  def mark_as_deleted
+    check_quantity
+    super
   end
 
   protected

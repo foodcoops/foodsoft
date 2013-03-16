@@ -3,7 +3,7 @@ class Admin::OrdergroupsController < Admin::BaseController
   inherit_resources
   
   def index
-    @ordergroups = Ordergroup.order('name ASC')
+    @ordergroups = Ordergroup.undeleted.order('name ASC')
 
     # if somebody uses the search field:
     unless params[:query].blank?
@@ -15,7 +15,7 @@ class Admin::OrdergroupsController < Admin::BaseController
 
   def destroy
     @ordergroup = Ordergroup.find(params[:id])
-    @ordergroup.destroy
+    @ordergroup.mark_as_deleted
     redirect_to admin_ordergroups_url, :notice => "Bestellgruppe wurde gelöscht"
   rescue => error
     redirect_to admin_ordergroups_url, :alert => "Bestellgruppe konnte nicht gelöscht werden: #{error}"

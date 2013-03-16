@@ -143,8 +143,6 @@ GEM
       activesupport (= 3.2.11)
       bundler (~> 1.0)
       railties (= 3.2.11)
-    rails3_acts_as_paranoid (0.2.4)
-      activerecord (~> 3.2)
     railties (3.2.11)
       actionpack (= 3.2.11)
       activesupport (= 3.2.11)
@@ -240,7 +238,6 @@ DEPENDENCIES
   mysql2
   prawn
   rails (~> 3.2.9)
-  rails3_acts_as_paranoid (~> 0.2.0)
   resque
   ruby-prof
   sass-rails (~> 3.2.3)

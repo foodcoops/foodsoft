@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   has_one :invoice
   has_many :comments, :class_name => "OrderComment", :order => "created_at"
   has_many :stock_changes
-  belongs_to :supplier, :with_deleted => true
+  belongs_to :supplier
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 

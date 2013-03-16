@@ -1,4 +1,4 @@
-- title "Artikel von #{@supplier.name} (#{@supplier.articles.count})"
+- title "Artikel von #{@supplier.name} (#{@supplier.articles.undeleted.count})"
 
 .well.well-small
   .btn-toolbar
@@ -28,7 +28,7 @@
         Lieferant wechseln ..
         %span.caret
       %ul.dropdown-menu
-        - Supplier.where('id != ?', @supplier.id).order('name ASC').each do |supplier|
+        - Supplier.undeleted.where('id != ?', @supplier.id).order('suppliers.name ASC').each do |supplier|
           %li= link_to supplier.name, supplier_articles_path(supplier), tabindex: -1
 
 - unless @supplier.shared_supplier.nil?

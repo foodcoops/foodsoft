@@ -1,7 +1,7 @@
 # financial transactions are the foodcoop internal financial transactions
 # only ordergroups have an account  balance and are happy to transfer money
 class FinancialTransaction < ActiveRecord::Base
-  belongs_to :ordergroup, :with_deleted => true
+  belongs_to :ordergroup
   belongs_to :user
   
   validates_presence_of :amount, :note, :user_id, :ordergroup_id

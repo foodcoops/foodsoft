@@ -1,6 +1,6 @@
 class Invoice < ActiveRecord::Base
 
-  belongs_to :supplier, :with_deleted => true
+  belongs_to :supplier
   belongs_to :delivery
   belongs_to :order
 

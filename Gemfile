@@ -24,7 +24,6 @@ gem 'haml-rails'
 gem 'kaminari'
 gem 'client_side_validations'
 gem 'simple_form'
-gem 'rails3_acts_as_paranoid', "~>0.2.0"
 gem 'inherited_resources'
 gem 'localize_input', :git => "git://github.com/bennibu/localize_input.git"
 gem 'wikicloth'
