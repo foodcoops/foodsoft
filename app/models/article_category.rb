@@ -8,7 +8,7 @@ class ArticleCategory < ActiveRecord::Base
   protected
 
   def check_for_associated_articles
-    raise I18n.t('activerecord.errors.has_many_left', collection: Article.model_name.human) if articles.exists?
+    raise I18n.t('activerecord.errors.has_many_left', collection: Article.model_name.human) if articles.undeleted.exists?
   end
 
 end
