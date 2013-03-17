@@ -25,7 +25,7 @@
           %td= article.unit_quantity
           %td
             - logger.debug "[debug] #{article.attributes.inspect}"
-            - if @supplier.articles.where(order_number: article.number).exists?
+            - if @supplier.articles.undeleted.where(order_number: article.number).exists?
               %i.icon-ok
               schon importiert
             - else
