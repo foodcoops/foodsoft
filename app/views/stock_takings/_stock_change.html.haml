@@ -3,5 +3,5 @@
     = form.hidden_field :stock_article_id
     = "Menge (#{stock_change.stock_article.quantity_available})"
     = form.text_field :quantity, :size => 5, :autocomplete => 'off'
-    %b=h truncate(stock_change.stock_article.name)
+    %b= stock_change.stock_article.name
     = "(#{number_to_currency(stock_change.stock_article.price)} / #{stock_change.stock_article.unit})"

@@ -49,6 +49,11 @@ class Article < ActiveRecord::Base
   end
   memoize :in_open_order
   
+  # Returns true if the article has been ordered in the given order at least once
+  def ordered_in_order?(order)
+    order.order_articles.where(article_id: id).where('quantity > 0').one?
+  end
+  
   # this method checks, if the shared_article has been changed
   # unequal attributes will returned in array
   # if only the timestamps differ and the attributes are equal, 
