@@ -113,25 +113,25 @@ class Order < ActiveRecord::Base
   def sum(type = :gross)
     total = 0
     if type == :net || type == :gross || type == :fc
-      for oa in order_articles.ordered.all(:include => [:article,:article_price])
+      for oa in order_articles.ordered.includes(:article, :article_price)
         quantity = oa.units_to_order * oa.price.unit_quantity
         case type
-        when :net
-          total += quantity * oa.price.price
-        when :gross
-          total += quantity * oa.price.gross_price
-        when :fc
-          total += quantity * oa.price.fc_price
+          when :net
+            total += quantity * oa.price.price
+          when :gross
+            total += quantity * oa.price.gross_price
+          when :fc
+            total += quantity * oa.price.fc_price
         end
       end
     elsif type == :groups || type == :groups_without_markup
-      for go in group_orders.all(:include => :group_order_articles)
-        for goa in go.group_order_articles.all(:include => [:order_article])
+      for go in group_orders.includes(group_order_articles: {order_article: [:article, :article_price]})
+        for goa in go.group_order_articles
           case type
-          when :groups
-            total += goa.result * goa.order_article.price.fc_price
-          when :groups_without_markup
-            total += goa.result * goa.order_article.price.gross_price
+            when :groups
+              total += goa.result * goa.order_article.price.fc_price
+            when :groups_without_markup
+              total += goa.result * goa.order_article.price.gross_price
           end
         end
       end

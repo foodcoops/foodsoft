@@ -10,7 +10,7 @@ class Finance::BalancingController < Finance::BaseController
     flash.now.alert = "Achtung, Bestellung wurde schon abgerechnet" if @order.closed?
     @comments = @order.comments
 
-    @articles = @order.order_articles.ordered.includes(:order, :article_price,
+    @articles = @order.order_articles.ordered.includes(:article, :article_price,
                                                        group_order_articles: {group_order: :ordergroup})
 
     sort_param = params['sort'] || 'name'
