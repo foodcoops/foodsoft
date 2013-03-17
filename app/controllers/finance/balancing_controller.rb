@@ -57,7 +57,7 @@ class Finance::BalancingController < Finance::BaseController
   def close
     @order = Order.find(params[:id])
     @order.close!(@current_user)
-    redirect_to finance_root_url, notice: "Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert."
+    redirect_to finance_order_index_url, notice: "Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert."
 
   rescue => error
     redirect_to new_finance_order_url(order_id: @order.id), alert: "Ein Fehler ist beim Abrechnen aufgetreten: #{error.message}"
@@ -67,9 +67,9 @@ class Finance::BalancingController < Finance::BaseController
   def close_direct
     @order = Order.find(params[:id])
     @order.close_direct!(@current_user)
-    redirect_to finance_balancing_url, notice: "Bestellung wurde geschlossen."
+    redirect_to finance_order_index_url, notice: "Bestellung wurde geschlossen."
   rescue => error
-    redirect_to finance_balancing_url, alert: "Bestellung kann nicht geschlossen werden: #{error.message}"
+    redirect_to finance_order_index_url, alert: "Bestellung kann nicht geschlossen werden: #{error.message}"
   end
 
 end
