@@ -14,28 +14,26 @@ class OrderFax < OrderPdf
 
     # From paragraph
     bounding_box [margin_box.right-200,margin_box.top], width: 200 do
-      text FoodsoftConfig[:name], align: :right
+      text FoodsoftConfig[:name], size: 9, align: :right
       move_down 5
-      text contact[:street], align: :right
+      text contact[:street], size: 9, align: :right
       move_down 5
-      text "#{contact[:zip_code]} #{contact[:city]}", align: :right
+      text "#{contact[:zip_code]} #{contact[:city]}", size: 9, align: :right
       move_down 5
-      if @order.supplier.customer_number != ''
-        text "Kundennummer: #{@order.supplier.customer_number}", align: :right
-      end
-      move_down 10
-      text contact[:phone], size: 9, align: :right
+      text "Kundennummer: #{@order.supplier.try(:customer_number)}", size: 9, align: :right
       move_down 5
-      text contact[:email], size: 9, align: :right
+      text "Telefon: #{contact[:phone]}", size: 9, align: :right
+      move_down 5
+      text "E-mail: #{contact[:email]}", size: 9, align: :right
     end
 
     # Recipient
     bounding_box [margin_box.left,margin_box.top-60], width: 200 do
       text @order.name
       move_down 5
-      text @order.supplier.address
+      text @order.supplier.try(:address).to_s
       move_down 5
-      text "Fax: " + @order.supplier.fax
+      text "Fax: #{@order.supplier.try(:fax)}"
     end
 
     move_down 5
@@ -44,7 +42,7 @@ class OrderFax < OrderPdf
     move_down 10
     text "Lieferdatum:"
     move_down 10
-    text "Ansprechpartner: " + @order.supplier.contact_person
+    text "Ansprechpartner: #{@order.supplier.try(:contact_person)}"
     move_down 10
 
     # Articles
