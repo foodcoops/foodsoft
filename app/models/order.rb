@@ -38,9 +38,11 @@ class Order < ActiveRecord::Base
 
   def articles_for_ordering
     if stockit?
+      # make sure to include those articles which are no longer available
+      # but which have already been ordered in this stock order
       StockArticle.available.all(:include => :article_category,
         :order => 'article_categories.name, articles.name').reject{ |a|
-        a.quantity_available <= 0
+        a.quantity_available <= 0 and not a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else
       supplier.articles.available.all.group_by { |a| a.article_category.name }
