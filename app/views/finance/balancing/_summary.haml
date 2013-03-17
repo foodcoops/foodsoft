@@ -25,3 +25,7 @@
         FC Gewinn
         %small mit Aufschlag:
       %td#order_profit.numeric= number_to_currency(order.profit)
+#summaryChangedWarning.alert(style="display:none;")
+  %strong Daten wurden verändert!
+  %br/
+  = link_to 'Zusammenfassung neu laden', update_summary_finance_order_path(order), remote: true

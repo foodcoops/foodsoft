@@ -30,6 +30,10 @@ class Finance::BalancingController < Finance::BaseController
     render layout: false if request.xhr?
   end
 
+  def update_summary
+    @order = Order.find(params[:id])
+  end
+
   def edit_note
     @order = Order.find(params[:id])
     render :layout => false

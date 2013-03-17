@@ -129,6 +129,7 @@ Foodsoft::Application.routes.draw do
 
       resources :order, controller: 'balancing', path: 'balancing' do
         member do
+          get :update_summary
           get :edit_note
           put :update_note
 
