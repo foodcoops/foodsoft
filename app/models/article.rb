@@ -11,7 +11,7 @@ class Article < ActiveRecord::Base
   has_many :article_prices, :order => "created_at DESC"
 
   scope :undeleted, -> { where(deleted_at: nil) }
-  scope :available, :conditions => {:availability => true}
+  scope :available, -> { undeleted.where(availability: true) }
   scope :not_in_stock, :conditions => {:type => nil}
 
   # Validations
