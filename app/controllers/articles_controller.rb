@@ -92,7 +92,7 @@ class ArticlesController < ApplicationController
         end
         # delete articles
         if params[:outlisted_articles]
-          params[:outlisted_articles].keys.each {|id| Article.find(id).destroy }
+          params[:outlisted_articles].keys.each {|id| Article.find(id).mark_as_deleted }
         end
       end
       # Successfully done.
