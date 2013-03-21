@@ -22,5 +22,73 @@ de:
       warning: 'Achtung, alle Artikel werden aktualisiert!'
       submit: 'Alle Artikel aktualisieren'
       or_cancel: 'oder abbrechen'
+    edit_all_table:
+      available_short: 'verf.'
+      available_desc: 'verfügbar'
+      price_short: 'Preis'
+      price_desc: 'Netto!'
+      unit_quantity_short: 'GebGr'
+      unit_quantity_desc: 'Gebindegröße'
+      order_number_short: 'Best.Nr.'
+      order_number_desc: 'Bestellnummer'
     form:
       title: 'Neuen Artikel einfügen'
+    index:
+      title: 'Artikel von %{supplier} (%{count})'
+      search_placeholder: Name ...
+      new: 'Neuer Artikel'
+      edit_all: 'Alle bearbeiten'
+      upload: 'Artikel hochladen'
+      new_order: 'Bestellung anlegen'
+      ext_db:
+        title: 'Externe Datenbank'
+        import: 'Suchen/Importieren'
+        sync: 'Synchronisieren'
+      change_supplier: 'Lieferant wechseln ...'
+      import:
+        title: 'Artikel importieren'
+        placeholder: Name ...
+        restrict_region: 'Nur aus der Region'
+    import_search_results:
+      not_found: 'Keine Artikel gefunden'
+      already_imported: 'schon importiert'
+      action_import: 'importieren'
+    sync:
+      title: 'Artikel mit externer Datenbank synchronisieren'
+      outlist:
+        title: 'Auslisten ...'
+        body: 'Folgende Artikel wurden ausgelistet und werden <b>gelöscht</b>:'
+        body_skip: 'Es müssen keine Artikel gelöscht werden.'
+      update:
+        title: 'Aktualisieren ...'
+        update_msg: 'Artikel müssen aktualisiert werden:'
+        body:
+          <p><i>Jeder Artikel wird doppelt angezeigt. Die alten Werte sind grau und die
+          Textfelder sind mit den aktuellen Werten vorausgefüllt.</i></p>
+          <p><i>Abweichungen zu den alten Artikeln sind gelb markiert.</i></p>
+      unit_quantity_short: 'GebGr'
+      price_short: 'Price'
+      submit: 'Alle löschen/aktualisieren'
+      or_cancel: 'oder abbrechen'
+    upload:
+      title: '%{supplier} / Artikel hochladen'
+      body:
+        <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile
+        wird beim Einlesen ignoriert.</p>
+        <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten
+        Anführungszeichen ("Text...") umklammert werden.</p>
+        <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>
+      fields:
+        status: 'Status (x=ausgelistet)'
+        season_amount: 'Staffelmenge'
+        season_price: 'Staffelpreis'
+      file_label: 'Bitte wähle eine kompatible Datei aus'
+      submit: 'Datei hochladen'
+    parse_upload:
+      title: '%{supplier} / Artikel hochladen'
+      body:
+        <p><i>Bitte überprufe die engelesenen Artikel.</i></p>
+        <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
+      submit: 'Speichere neue Artikel für %{supplier}'
+      or_cancel: 'oder abbrechen'
+
