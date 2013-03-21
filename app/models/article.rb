@@ -154,7 +154,7 @@ class Article < ActiveRecord::Base
   
   # Checks if the article is in use before it will deleted
   def check_article_in_use
-    raise self.name.to_s + " kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!" if self.in_open_order
+    raise I18n.t('articles.model.error_in_use', :article => self.name.to_s) if self.in_open_order
   end
 
   # Create an ArticlePrice, when the price-attr are changed.

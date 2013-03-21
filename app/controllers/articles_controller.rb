@@ -88,7 +88,7 @@ class ArticlesController < ApplicationController
             end
           end
 
-          raise "Artikel sind fehlerhaft. Bitte überprüfe Deine Eingaben." if invalid_articles
+          raise I18n.t('articles.update_all.error_invalid') if invalid_articles
         end
         # delete articles
         if params[:outlisted_articles]
@@ -96,12 +96,12 @@ class ArticlesController < ApplicationController
         end
       end
       # Successfully done.
-      redirect_to supplier_articles_path(@supplier), notice: "Alle Artikel und Preise wurden aktalisiert"
+      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.update_all.notice')
 
     rescue => e
       # An error has occurred, transaction has been rolled back.
       if params[:sync]
-        flash[:error] = "Es trat ein Fehler beim Aktualisieren des Artikels '#{current_article.name}' auf: #{e.message}"
+        flash[:error] = I18n.t('articles.update_all.error_update', :article => current_article.name, :msg => e.message)
         redirect_to(supplier_articles_path(@supplier))
       else
         flash.now.alert = e.message
@@ -112,21 +112,21 @@ class ArticlesController < ApplicationController
   
   # makes different actions on selected articles
   def update_selected
-    raise 'Du hast keine Artikel ausgewählt' if params[:selected_articles].nil?
+    raise I18n.t('articles.update_selected.error_nosel') if params[:selected_articles].nil?
     articles = Article.find(params[:selected_articles])
     Article.transaction do
       case params[:selected_action]
         when 'destroy'
           articles.each(&:mark_as_deleted)
-          flash[:notice] = 'Alle gewählten Artikel wurden gelöscht'
+          flash[:notice] = I18n.t('articles.update_selected.notice_destroy')
         when 'setNotAvailable'
           articles.each {|a| a.update_attribute(:availability, false) }
-          flash[:notice] = 'Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt'
+          flash[:notice] = I18n.t('articles.update_selected.notice_unavail')
         when 'setAvailable'
           articles.each {|a| a.update_attribute(:availability, true) }
-          flash[:notice] = 'Alle gewählten Artikel wurden auf "verfügbar" gesetzt'
+          flash[:notice] = I18n.t('articles.update_selected.notice_avail')
         else
-          flash[:alert] = 'Keine Aktion ausgewählt!'
+          flash[:alert] = I18n.t('articles.update_selected.notice_noaction')
       end
     end
     # action succeded
@@ -134,7 +134,7 @@ class ArticlesController < ApplicationController
 
   rescue => error
     redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page]),
-                :alert => "Ein Fehler ist aufgetreten: #{error}"
+                :alert => I18n.t('errors.general_msg', :msg => error)
   end
  
   # lets start with parsing articles from uploaded file, yeah
@@ -167,13 +167,13 @@ class ArticlesController < ApplicationController
                                :tax => row[:tax])
         # stop parsing, when an article isn't valid
         unless article.valid?
-          raise article.errors.full_messages.join(", ") + " ..in line " +  (articles.index(row) + 2).to_s
+          raise I18n.t('articles.parse_upload.error_parse', :msg => article.errors.full_messages.join(", "), :line => (articles.index(row) + 2).to_s)
         end
         @articles << article
       end
-      flash.now[:notice] = "#{@articles.size} articles are parsed successfully."
+      flash.now[:notice] = I18n.t('articles.parse_upload.notice', :count => @articles.size)
     rescue => error
-      redirect_to upload_supplier_articles_path(@supplier), :alert => "An error has occurred: #{error.message}"
+      redirect_to upload_supplier_articles_path(@supplier), :alert => I18n.t('errors.general_msg', :msg => error.message)
     end
   end
  
@@ -188,14 +188,14 @@ class ArticlesController < ApplicationController
           invalid_articles = true unless article.save
         end
 
-        raise "Artikel sind fehlerhaft" if invalid_articles
+        raise I18n.t('articles.create_from_upload.error_invalid') if invalid_articles
       end
       # Successfully done.
-      redirect_to supplier_articles_path(@supplier), notice: "Es wurden #{@articles.size} neue Artikel gespeichert."
+      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.create_from_upload.notice', :count => @articles.size)
 
     rescue => error
       # An error has occurred, transaction has been rolled back.
-      flash.now[:error] = "An error occured: #{error.message}"
+      flash.now[:error] = I18n.t('errors.general_msg', :msg => error.message)
       render :parse_upload
     end
   end
@@ -222,14 +222,14 @@ class ArticlesController < ApplicationController
   def sync
     # check if there is an shared_supplier
     unless @supplier.shared_supplier
-      redirect_to supplier_articles_url(@supplier), :alert => "#{@supplier.name} ist nicht mit einer externen Datenbank verknüpft."
+      redirect_to supplier_articles_url(@supplier), :alert => I18n.t('articles.sync.shared_alert', :supplier => @supplier.name)
     end
     # sync articles against external database
     @updated_articles, @outlisted_articles = @supplier.sync_all
     # convert to db-compatible-string
     @updated_articles.each {|a, b| a.shared_updated_on = a.shared_updated_on.to_formatted_s(:db)}
     if @updated_articles.empty? && @outlisted_articles.empty?
-      redirect_to supplier_articles_path(@supplier), :notice => "Der Katalog ist aktuell."
+      redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.sync.notice')
     end
   end
 end
