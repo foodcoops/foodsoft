@@ -8,7 +8,6 @@ class Ordergroup < Group
 
   APPLE_MONTH_AGO = 6                 # How many month back we will count tasks and orders sum
 
-  acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
   serialize :stats
 
   has_many :financial_transactions
@@ -120,7 +119,7 @@ class Ordergroup < Group
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
     id = new_record? ? '' : self.id
-    group = Ordergroup.with_deleted.where('groups.id != ? AND groups.name = ?', id, name).first
+    group = Ordergroup.where('groups.id != ? AND groups.name = ?', id, name).first
     if group.present?
       message = group.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message

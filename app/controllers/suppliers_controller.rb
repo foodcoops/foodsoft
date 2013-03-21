@@ -4,7 +4,7 @@ class SuppliersController < ApplicationController
   helper :deliveries
 
   def index
-    @suppliers = Supplier.order(:name)
+    @suppliers = Supplier.undeleted.order(:name)
     @deliveries = Delivery.recent
   end
 
@@ -50,7 +50,7 @@ class SuppliersController < ApplicationController
 
   def destroy
     @supplier = Supplier.find(params[:id])
-    @supplier.destroy
+    @supplier.mark_as_deleted
     flash[:notice] = I18n.t('suppliers.destroy.notice')
     redirect_to suppliers_path
     rescue => e

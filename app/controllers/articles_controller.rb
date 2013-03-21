@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
       sort = "article_categories.name, articles.name"
     end
 
-    @articles = Article.where(supplier_id: @supplier, :type => nil).includes(:article_category).order(sort)
+    @articles = Article.undeleted.where(supplier_id: @supplier, :type => nil).includes(:article_category).order(sort)
     @articles = @articles.where('articles.name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
     @articles = @articles.page(params[:page]).per(@per_page)
@@ -64,13 +64,13 @@ class ArticlesController < ApplicationController
   # Deletes article from database. send error msg, if article is used in a current order
   def destroy
     @article = Article.find(params[:id])
-    @article.destroy unless @order = @article.in_open_order # If article is in an active Order, the Order will be returned
+    @article.mark_as_deleted unless @order = @article.in_open_order # If article is in an active Order, the Order will be returned
     render :layout => false
   end   
   
   # Renders a form for editing all articles from a supplier
   def edit_all
-    @articles = @supplier.articles
+    @articles = @supplier.articles.undeleted
   end
 
   # Updates all article of specific supplier
@@ -92,7 +92,7 @@ class ArticlesController < ApplicationController
         end
         # delete articles
         if params[:outlisted_articles]
-          params[:outlisted_articles].keys.each {|id| Article.find(id).destroy }
+          params[:outlisted_articles].keys.each {|id| Article.find(id).mark_as_deleted }
         end
       end
       # Successfully done.
@@ -114,23 +114,24 @@ class ArticlesController < ApplicationController
   def update_selected
     raise 'Du hast keine Artikel ausgewählt' if params[:selected_articles].nil?
     articles = Article.find(params[:selected_articles])
-
-    case params[:selected_action]
-    when 'destroy'
-      articles.each {|a| a.destroy }
-      flash[:notice] = 'Alle gewählten Artikel wurden gelöscht'
-    when 'setNotAvailable'
-      articles.each {|a| a.update_attribute(:availability, false) }
-      flash[:notice] = 'Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt'
-    when 'setAvailable'
-      articles.each {|a| a.update_attribute(:availability, true) }
-      flash[:notice] = 'Alle gewählten Artikel wurden auf "verfügbar" gesetzt'
-    else
-      flash[:alert] = 'Keine Aktion ausgewählt!'
+    Article.transaction do
+      case params[:selected_action]
+        when 'destroy'
+          articles.each(&:mark_as_deleted)
+          flash[:notice] = 'Alle gewählten Artikel wurden gelöscht'
+        when 'setNotAvailable'
+          articles.each {|a| a.update_attribute(:availability, false) }
+          flash[:notice] = 'Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt'
+        when 'setAvailable'
+          articles.each {|a| a.update_attribute(:availability, true) }
+          flash[:notice] = 'Alle gewählten Artikel wurden auf "verfügbar" gesetzt'
+        else
+          flash[:alert] = 'Keine Aktion ausgewählt!'
+      end
     end
     # action succeded
     redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page])
-      
+
   rescue => error
     redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page]),
                 :alert => "Ein Fehler ist aufgetreten: #{error}"

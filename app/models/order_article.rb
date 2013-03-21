@@ -17,6 +17,17 @@ class OrderArticle < ActiveRecord::Base
   before_create :init_from_balancing
   after_destroy :update_ordergroup_prices
 
+  def self.sort_by_name(order_articles)
+    order_articles.sort { |a,b| a.article.name <=> b.article.name }
+  end
+
+  def self.sort_by_order_number(order_articles)
+    order_articles.sort do |a,b|
+      a.article.order_number.to_s.gsub(/[^[:digit:]]/, "").to_i <=>
+          b.article.order_number.to_s.gsub(/[^[:digit:]]/, "").to_i
+    end
+  end
+
   # This method returns either the ArticlePrice or the Article
   # The first will be set, when the the order is finished
   def price
@@ -82,7 +93,7 @@ class OrderArticle < ActiveRecord::Base
   end
 
   # Updates order_article and belongings during balancing process
-  def update_article_and_price!(article_attributes, price_attributes, order_article_attributes)
+  def update_article_and_price!(order_article_attributes, article_attributes, price_attributes = nil)
     OrderArticle.transaction do
       # Updates self
       self.update_attributes!(order_article_attributes)
@@ -91,20 +102,22 @@ class OrderArticle < ActiveRecord::Base
       article.update_attributes!(article_attributes)
 
       # Updates article_price belonging to current order article
-      article_price.attributes = price_attributes
-      if article_price.changed?
-        # Updates also price attributes of article if update_current_price is selected
-        if update_current_price
-          article.update_attributes!(price_attributes)
-          self.article_price = article.article_prices.first # Assign new created article price to order article
-        else
-          # Creates a new article_price if neccessary
-          # Set created_at timestamp to order ends, to make sure the current article price isn't changed
-          create_article_price!(price_attributes.merge(created_at: order.ends)) and save
-        end
+      if price_attributes.present?
+        article_price.attributes = price_attributes
+        if article_price.changed?
+          # Updates also price attributes of article if update_current_price is selected
+          if update_current_price
+            article.update_attributes!(price_attributes)
+            self.article_price = article.article_prices.first # Assign new created article price to order article
+          else
+            # Creates a new article_price if neccessary
+            # Set created_at timestamp to order ends, to make sure the current article price isn't changed
+            create_article_price!(price_attributes.merge(created_at: order.ends)) and save
+          end
 
-        # Updates ordergroup values
-        update_ordergroup_prices
+          # Updates ordergroup values
+          update_ordergroup_prices
+        end
       end
     end
   end

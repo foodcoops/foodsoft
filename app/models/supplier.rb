@@ -1,7 +1,7 @@
+# encoding: utf-8
 class Supplier < ActiveRecord::Base
-  acts_as_paranoid  # Avoid deleting the supplier for consistency of order-results
 
-  has_many :articles, :dependent => :destroy, :conditions => {:type => nil},
+  has_many :articles, :conditions => {:type => nil},
     :include => [:article_category], :order => 'article_categories.name, articles.name'
   has_many :stock_articles, :include => [:article_category], :order => 'article_categories.name, articles.name'
   has_many :orders
@@ -20,13 +20,15 @@ class Supplier < ActiveRecord::Base
   validates_length_of :address, :in => 8..50
   validate :uniqueness_of_name
 
+  scope :undeleted, -> { where(deleted_at: nil) }
+
   # sync all articles with the external database
   # returns an array with articles(and prices), which should be updated (to use in a form)
   # also returns an array with outlisted_articles, which should be deleted
   def sync_all
     updated_articles = Array.new
     outlisted_articles = Array.new
-    for article in articles
+    for article in articles.undeleted
       # try to find the associated shared_article
       shared_article = article.shared_article
 
@@ -65,12 +67,23 @@ class Supplier < ActiveRecord::Base
     return [updated_articles, outlisted_articles]
   end
 
+  def deleted?
+    deleted_at.present?
+  end
+
+  def mark_as_deleted
+    transaction do
+      update_column :deleted_at, Time.now
+      articles.each(&:mark_as_deleted)
+    end
+  end
+
   protected
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
     id = new_record? ? '' : self.id
-    supplier = Supplier.with_deleted.where('suppliers.id != ? AND suppliers.name = ?', id, name).first
+    supplier = Supplier.where('suppliers.id != ? AND suppliers.name = ?', id, name).first
     if supplier.present?
       message = supplier.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message

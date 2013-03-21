@@ -1,6 +1,5 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
-  acts_as_paranoid  # Avoid deleting the article for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
 
   # Replace numeric seperator with database format
@@ -11,7 +10,8 @@ class Article < ActiveRecord::Base
   belongs_to :article_category
   has_many :article_prices, :order => "created_at DESC"
 
-  scope :available, :conditions => {:availability => true}
+  scope :undeleted, -> { where(deleted_at: nil) }
+  scope :available, -> { undeleted.where(availability: true) }
   scope :not_in_stock, :conditions => {:type => nil}
 
   # Validations
@@ -48,6 +48,11 @@ class Article < ActiveRecord::Base
     order_article ? order_article.order : nil
   end
   memoize :in_open_order
+  
+  # Returns true if the article has been ordered in the given order at least once
+  def ordered_in_order?(order)
+    order.order_articles.where(article_id: id).where('quantity > 0').one?
+  end
   
   # this method checks, if the shared_article has been changed
   # unequal attributes will returned in array
@@ -134,6 +139,15 @@ class Article < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def deleted?
+    deleted_at.present?
+  end
+
+  def mark_as_deleted
+    check_article_in_use
+    update_column :deleted_at, Time.now
   end
 
   protected

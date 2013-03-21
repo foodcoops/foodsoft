@@ -19,8 +19,7 @@ class Order < ActiveRecord::Base
   validate :starts_before_ends, :include_articles
 
   # Callbacks
-  after_update :update_price_of_group_orders
-  after_save :save_order_articles
+  after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
   scope :open, where(state: 'open').order('ends DESC')
@@ -39,9 +38,11 @@ class Order < ActiveRecord::Base
 
   def articles_for_ordering
     if stockit?
+      # make sure to include those articles which are no longer available
+      # but which have already been ordered in this stock order
       StockArticle.available.all(:include => :article_category,
         :order => 'article_categories.name, articles.name').reject{ |a|
-        a.quantity_available <= 0
+        a.quantity_available <= 0 and not a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else
       supplier.articles.available.all.group_by { |a| a.article_category.name }
@@ -114,25 +115,25 @@ class Order < ActiveRecord::Base
   def sum(type = :gross)
     total = 0
     if type == :net || type == :gross || type == :fc
-      for oa in order_articles.ordered.all(:include => [:article,:article_price])
+      for oa in order_articles.ordered.includes(:article, :article_price)
         quantity = oa.units_to_order * oa.price.unit_quantity
         case type
-        when :net
-          total += quantity * oa.price.price
-        when :gross
-          total += quantity * oa.price.gross_price
-        when :fc
-          total += quantity * oa.price.fc_price
+          when :net
+            total += quantity * oa.price.price
+          when :gross
+            total += quantity * oa.price.gross_price
+          when :fc
+            total += quantity * oa.price.fc_price
         end
       end
     elsif type == :groups || type == :groups_without_markup
-      for go in group_orders.all(:include => :group_order_articles)
-        for goa in go.group_order_articles.all(:include => [:order_article])
+      for go in group_orders.includes(group_order_articles: {order_article: [:article, :article_price]})
+        for goa in go.group_order_articles
           case type
-          when :groups
-            total += goa.result * goa.order_article.price.fc_price
-          when :groups_without_markup
-            total += goa.result * goa.order_article.price.gross_price
+            when :groups
+              total += goa.result * goa.order_article.price.fc_price
+            when :groups_without_markup
+              total += goa.result * goa.order_article.price.gross_price
           end
         end
       end
@@ -215,7 +216,24 @@ class Order < ActiveRecord::Base
   end
 
   def save_order_articles
-    self.articles = Article.find(article_ids)
+    #self.articles = Article.find(article_ids) # This doesn't deletes the group_order_articles, belonging to order_articles,
+    #                                          # see http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#method-i-has_many
+    #
+    ## Ensure to delete also the group_order_articles, belonging to order_articles
+    ## This case is relevant, when removing articles from a running order
+    #goa_ids = GroupOrderArticle.where(group_order_id: group_order_ids).includes(:order_article).
+    #    select { |goa| goa.order_article.nil? }.map(&:id)
+    #GroupOrderArticle.delete_all(id: goa_ids) unless goa_ids.empty?
+
+
+    # fetch selected articles
+    articles_list = Article.find(article_ids)
+    # create new order_articles
+    (articles_list - articles).each { |article| order_articles.create(:article => article) }
+    # delete old order_articles
+    articles.reject { |article| articles_list.include?(article) }.each do |article|
+      order_articles.detect { |order_article| order_article.article_id == article.id }.destroy
+    end
   end
 
   private

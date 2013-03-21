@@ -16,6 +16,7 @@ de:
       last_update: 'Zuletzt bestellt'
       funds: 'Guthaben'
       name: 'Name'
+      supplier: 'Lieferant'
       price: 'Preis'
       unit: 'Einheit'
       unit_missing: 'Fehlende Einheiten'

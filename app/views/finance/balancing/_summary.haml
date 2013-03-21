@@ -25,3 +25,7 @@
         = t('.fc_profit')
         %small= t('.with_extra_charge')        
       %td#order_profit.numeric= number_to_currency(order.profit)
+#summaryChangedWarning.alert(style="display:none;")
+  %strong= t '.changed'
+  %br/
+  = link_to t('.reload'), update_summary_finance_order_path(order), remote: true

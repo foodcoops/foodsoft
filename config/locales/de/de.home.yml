@@ -56,6 +56,7 @@ de:
       points: 'Deine aktueller Äpfelpunktestand: %{points}'
       desc: 'Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop. Konkret: Pro %{amount} Bestellsumme solltest Du eine Aufgabe machen!'
       warning: 'Achtung, hast Du weniger als %{threshold} Äpfel, darfst Du nicht mehr bestellen!'
+      more_info: 'Mehr Informationen'
 
     ordergroup:
       title: 'Meine Bestellgruppe'

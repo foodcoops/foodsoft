@@ -54,6 +54,8 @@ de:
         fc_profit: 'FC Gewinn'
         without_extra_charge: 'ohne Aufschlag:'
         with_extra_charge: 'mit Aufschlag:'
+        changed: 'Daten wurden verändert!'
+        reload: 'Zusammenfassung neu laden'
       orders:
         name: 'Name'
         end: 'Ende'

@@ -18,8 +18,8 @@
         %td= link_to h(supplier.name) , supplier
         %td= supplier.phone
         %td= supplier.customer_number
-        %td= link_to t('.articles', count: supplier.articles.count), supplier_articles_path(supplier)
-        %td= link_to t('.stock', count: supplier.stock_articles.count), stock_articles_path
+        %td= link_to t('.articles', count: supplier.articles.undeleted.count), supplier_articles_path(supplier)
+        %td= link_to t('.stock', count: supplier.stock_articles.undeleted.count), stock_articles_path
         %td= link_to t('.deliveries', count: supplier.deliveries.count), supplier_deliveries_path(supplier)
         %td
           = link_to t('ui.edit'), edit_supplier_path(supplier), class: 'btn btn-mini'

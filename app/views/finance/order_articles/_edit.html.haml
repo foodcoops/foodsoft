@@ -5,18 +5,20 @@
   .modal-body
     = form.input :units_to_order
 
-    = simple_fields_for @order_article.article do |f|
+    = simple_fields_for :article, @order_article.article do |f|
       = f.input :name
       = f.input :order_number
       = f.input :unit
-    = simple_fields_for @order_article.article_price do |f|
-      = f.input :unit_quantity
-      = f.input :price
-      = f.input :tax
-      = f.input :deposit
 
-    = form.input :update_current_price, as: :boolean
-
+    - if @order_article.article.is_a?(StockArticle)
+      %div.alert Preise von Lagerartikeln können nicht geändert werden!
+    - else
+      = simple_fields_for :article_price, @order_article.article_price do |f|
+        = f.input :unit_quantity
+        = f.input :price
+        = f.input :tax
+        = f.input :deposit
+      = form.input :update_current_price, as: :boolean
   .modal-footer
     = button_tag t('ui.close'), class: 'btn', data: {dismiss: 'modal'}
     = form.submit class: 'btn btn-primary'

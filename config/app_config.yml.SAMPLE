@@ -31,6 +31,9 @@ default: &defaults
   # foodsoft documentation URL
   help_url: https://github.com/bennibu/foodsoft/wiki/Doku
 
+  # documentation URL for the apples&pears work system
+  applepear_url: https://github.com/bennibu/foodsoft/wiki/%C3%84pfel-u.-Birnen
+
   # price markup in percent
   price_markup: 2.0
 

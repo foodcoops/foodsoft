@@ -1,7 +1,7 @@
 class StockitController < ApplicationController
 
   def index
-    @stock_articles = StockArticle.includes(:supplier, :article_category).
+    @stock_articles = StockArticle.undeleted.includes(:supplier, :article_category).
         order('suppliers.name, article_categories.name, articles.name')
   end
 
@@ -33,7 +33,7 @@ class StockitController < ApplicationController
 
   def destroy
     @article = StockArticle.find(params[:id])
-    @article.destroy
+    @article.mark_as_deleted
     render :layout => false
   rescue => error
     render :partial => "destroy_fail", :layout => false,
