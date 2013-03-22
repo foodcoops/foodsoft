@@ -136,7 +136,7 @@ class OrderArticle < ActiveRecord::Base
   private
   
   def article_and_price_exist
-     errors.add(:article, "muss angegeben sein und einen aktuellen Preis haben") if !(article = Article.find(article_id)) || article.fc_price.nil?
+     errors.add(:article, I18n.t('model.order_article.error_price')) if !(article = Article.find(article_id)) || article.fc_price.nil?
   end
 
   # Associate with current article price if created in a finished order

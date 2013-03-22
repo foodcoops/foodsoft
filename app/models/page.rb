@@ -47,7 +47,7 @@ class Page < ActiveRecord::Base
     unless old_title.blank?
       Page.create :redirect => id,
         :title => old_title,
-        :body => "Weiterleitung auf [[#{title}]]..",
+        :body => I18n.t('model.page.redirect', :title => title),
         :permalink => Page.permalink(old_title),
         :updated_by => updated_by
     end

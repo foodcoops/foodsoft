@@ -176,8 +176,9 @@ class Order < ActiveRecord::Base
 
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
   def close!(user)
-    raise "Bestellung wurde schon abgerechnet" if closed?
-    transaction_note = "Bestellung: #{name}, bis #{ends.strftime('%d.%m.%Y')}"
+    raise I18n.t('orders.model.error_closed') if closed?
+    transaction_note = I18n.t('orders.model.notice_close', :name => name,
+                              :ends => ends.strftime(I18n.t('date.formats.default')))
 
     gos = group_orders.all(:include => :ordergroup)       # Fetch group_orders
     gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
@@ -201,18 +202,18 @@ class Order < ActiveRecord::Base
 
   # Close the order directly, without automaticly updating ordergroups account balances
   def close_direct!(user)
-    raise "Bestellung wurde schon abgerechnet" if closed?
+    raise I18n.t('orders.model.error_closed') if closed?
     update_attributes! state: 'closed', updated_by: user
   end
 
   protected
 
   def starts_before_ends
-    errors.add(:ends, "muss nach dem Bestellstart liegen (oder leer bleiben)") if (ends && starts && ends <= starts)
+    errors.add(:ends, I18n.t('articles.model.error_starts_before_ends')) if (ends && starts && ends <= starts)
   end
 
   def include_articles
-    errors.add(:articles, "Es muss mindestens ein Artikel ausgewählt sein") if article_ids.empty?
+    errors.add(:articles, I18n.t('articles.model.error_nosel')) if article_ids.empty?
   end
 
   def save_order_articles

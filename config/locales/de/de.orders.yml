@@ -85,3 +85,11 @@ de:
       number: 'Nummer'
       amount: 'Menge'
       name: 'Name'
+
+    # used by model
+    model:
+      notice_close: 'Bestellung: %{name}, bis %{ends}'
+      error_closed: 'Bestellung wurde schon abgerechnet'
+      error_starts_before_ends: 'muss nach dem Bestellstart liegen (oder leer bleiben)'
+      error_nosel: 'Es muss mindestens ein Artikel ausgewählt sein'
+

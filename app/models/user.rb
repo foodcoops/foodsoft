@@ -44,13 +44,13 @@ class User < ActiveRecord::Base
   # returns the User-settings and the translated description
   def self.setting_keys
     {
-      "notify.orderFinished" => 'Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).',
-      "notify.negativeBalance" => 'Informiere mich, falls meine Bestellgruppe ins Minus rutscht.',
-      "notify.upcoming_tasks" => 'Erinnere mich an anstehende Aufgaben.',
-      "messages.sendAsEmail" => 'Bekomme Nachrichten als Emails.',
-      "profile.phoneIsPublic" => 'Telefon ist für Mitglieder sichtbar',
-      "profile.emailIsPublic" => 'E-Mail ist für Mitglieder sichtbar',
-      "profile.nameIsPublic" => 'Name ist für Mitglieder sichtbar'
+      "notify.orderFinished" => I18n.t('model.user.notify.order_finished'),
+      "notify.negativeBalance" => I18n.t('model.user.notify.negative_balance'),
+      "notify.upcoming_tasks" => I18n.t('model.user.notify.upcoming_tasks'),
+      "messages.sendAsEmail" => I18n.t('model.user.notify.send_as_email'),
+      "profile.phoneIsPublic" => I18n.t('model.user.notify.phone_is_public'),
+      "profile.emailIsPublic" => I18n.t('model.user.notify.email_is_public'),
+      "profile.nameIsPublic" => I18n.t('model.user.notify.name_is_public')
     }
   end
   # retuns the default setting for a NEW user
@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
   end
   
   def ordergroup_name
-    ordergroup ? ordergroup.name : "keine Bestellgruppe"
+    ordergroup ? ordergroup.name : I18n.t('model.user.no_ordergroup')
   end
 
   # returns true if user is a member of a given group
