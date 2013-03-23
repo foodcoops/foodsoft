@@ -43,13 +43,11 @@ class LoginController < ApplicationController
   # For invited users.
   def accept_invitation
     @invite = Invite.find_by_token(params[:token])
-    if (@invite.nil? || @invite.expires_at < Time.now)
-      flash[:error] = "Deine Einladung ist nicht (mehr) gültig."
-      render :action => 'login'
+    if @invite.nil? || @invite.expires_at < Time.now
+      redirect_to login_url, alert: 'Deine Einladung ist nicht (mehr) gültig.'
     elsif @invite.group.nil?
-      flash[:error] = "Die Gruppe, in die Du eingeladen wurdest, existiert leider nicht mehr."
-      render :action => 'login'
-    elsif (request.post?)
+      redirect_to login_url, alert: 'Die Gruppe, in die Du eingeladen wurdest, existiert leider nicht mehr.'
+    elsif request.post?
       User.transaction do
         @user = User.new(params[:user])
         @user.email = @invite.email
@@ -62,8 +60,6 @@ class LoginController < ApplicationController
     else
       @user = User.new(:email => @invite.email)
     end
-  rescue
-    flash[:error] = "Ein Fehler ist aufgetreten. Bitte erneut versuchen."
   end
 
   protected
