@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
 
   serialize :recipients_ids, Array
-  attr_accessor :sent_to_all, :group_id, :recipient_tokens
+  attr_accessor :sent_to_all, :group_id, :recipient_tokens, :reply_to
   
   scope :pending, where(:email_state => 0)
   scope :sent, where(:email_state => 1)
@@ -46,11 +46,11 @@ class Message < ActiveRecord::Base
   end
 
   def reply_to=(message_id)
-    message = Message.find(message_id)
-    add_recipients([message.sender])
-    self.subject = "Re: #{message.subject}"
-    self.body = "#{message.sender.nick} schrieb am #{I18n.l(message.created_at, :format => :short)}:\n"
-    message.body.each_line{ |l| self.body += "> #{l}" }
+    @reply_to = Message.find(message_id)
+    add_recipients([@reply_to.sender])
+    self.subject = "Re: #{@reply_to.subject}"
+    self.body = "#{@reply_to.sender.nick} schrieb am #{I18n.l(@reply_to.created_at, :format => :short)}:\n"
+    @reply_to.body.each_line{ |l| self.body += "> #{l}" }
   end
 
   def mail_to=(user_id)
@@ -82,6 +82,10 @@ class Message < ActiveRecord::Base
       end
     end
     update_attribute(:email_state, 1)
+  end
+
+  def is_readable_for?(user)
+    !private || sender == user || recipients_ids.include?(user.id)
   end
 end
 
