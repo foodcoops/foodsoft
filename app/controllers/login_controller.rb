@@ -67,8 +67,7 @@ class LoginController < ApplicationController
   def validate_token
     @user = User.find_by_id_and_reset_password_token(params[:id], params[:token])
     if (@user.nil? || @user.reset_password_expires < Time.now)
-      flash.now.error = "Ungültiger oder abgelaufener Token. Bitte versuch es erneut."
-      render :action => 'forgot_password'
+      redirect_to forgot_password_url, alert: "Ungültiger oder abgelaufener Token. Bitte versuch es erneut."
     end
   end
 end
