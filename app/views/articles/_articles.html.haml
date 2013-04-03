@@ -11,7 +11,8 @@
       %th= sort_link_helper t('simple_form.labels.article.article_category'), "category"
       %th= sort_link_helper t('simple_form.labels.article.unit'), "unit"
       %th= sort_link_helper t('simple_form.labels.article.note'), "note"
-      %th{:style => "width: 4em;"}= t '.unit_quantity'
+      %th{:style => "width: 4em;"}
+        %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity_short'
       %th{:style => "width: 5em;"}= t '.price_netto'
       %th{:style => "width: 3.5em;"}= t 'simple_form.labels.defaults.tax'
       %th{:style => "width: 4em;"}= t 'simple_form.labels.defaults.deposit'

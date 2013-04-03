@@ -4,7 +4,8 @@ en:
       last_update: 'last updated: %{last_update} | Gross: %{gross_price}'
       confirm_delete: 'Are you sure?'
     articles:
-      unit_quantity: 'Unit Quantity'
+      unit_quantity_short: 'Quantity'
+      unit_quantity_desc: 'Unit quantity'
       price_netto: 'Price'
       option_select: 'Chose special offer ...'
       option_delete: 'Delete article'
@@ -26,11 +27,11 @@ en:
       available_short: 'avail'
       available_desc: 'available'
       price_short: 'Price'
-      price_desc: 'Net!'
-      unit_quantity_short: 'Quant.'
-      unit_quantity_desc: 'Unit Quantity'
+      price_desc: 'Net price'
+      unit_quantity_short: 'Quantity'
+      unit_quantity_desc: 'Unit quantity'
       order_number_short: 'Ordernr.'
-      order_number_desc: 'Ordernumber'
+      order_number_desc: 'Order number'
     form:
       title: 'Add new article'
     index:

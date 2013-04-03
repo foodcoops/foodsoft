@@ -4,7 +4,8 @@ de:
       last_update: 'zuletzt geändert: %{last_update} | Brutto: %{gross_price}'
       confirm_delete: 'Bist du sicher?'
     articles:
-      unit_quantity: 'Gebgr.'
+      unit_quantity_short: 'GebGr'
+      unit_quantity_desc: 'Gebindegröße'
       price_netto: 'Preis'
       option_select: 'Aktion wählen ...'
       option_delete: 'Artikel löschen'
