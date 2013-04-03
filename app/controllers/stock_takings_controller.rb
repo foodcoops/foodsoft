@@ -7,7 +7,7 @@ class StockTakingsController < ApplicationController
 
   def new
     @stock_taking = StockTaking.new
-    StockArticle.all.each { |a| @stock_taking.stock_changes.build(:stock_article => a) }
+    StockArticle.undeleted.each { |a| @stock_taking.stock_changes.build(:stock_article => a) }
   end
 
   def create

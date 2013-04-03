@@ -10,6 +10,10 @@ class LoginController < ApplicationController
   
   # Sends an email to a user with the token that allows setting a new password through action "password".
   def reset_password
+    if request.get? || params[:user].nil? # Catch for get request and give better error message.
+      redirect_to forgot_password_url, alert: 'Ein Problem ist aufgetreten. Bitte erneut versuchen' and return
+    end
+
     if (user = User.find_by_email(params[:user][:email]))
       user.reset_password_token = user.new_random_password(16)
       user.reset_password_expires = Time.now.advance(:days => 2)
@@ -43,13 +47,11 @@ class LoginController < ApplicationController
   # For invited users.
   def accept_invitation
     @invite = Invite.find_by_token(params[:token])
-    if (@invite.nil? || @invite.expires_at < Time.now)
-      flash[:error] = I18n.t('login.errors.invite_invalid')
-      render :action => 'login'
+    if @invite.nil? || @invite.expires_at < Time.now
+      redirect_to login_url, alert: I18n.t('login.errors.invite_invalid')
     elsif @invite.group.nil?
-      flash[:error] = I18n.t('login.errors.group_invalid')
-      render :action => 'login'
-    elsif (request.post?)
+      redirect_to login_url, alert: I18n.t('login.errors.group_invalid')
+    elsif request.post?
       User.transaction do
         @user = User.new(params[:user])
         @user.email = @invite.email
@@ -62,8 +64,6 @@ class LoginController < ApplicationController
     else
       @user = User.new(:email => @invite.email)
     end
-  rescue
-    flash[:error] = I18n.t('errors.general_again')
   end
 
   protected
@@ -71,8 +71,7 @@ class LoginController < ApplicationController
   def validate_token
     @user = User.find_by_id_and_reset_password_token(params[:id], params[:token])
     if (@user.nil? || @user.reset_password_expires < Time.now)
-      flash[:error] = I18n.t('login.errors.token_invalid')
-      render :action => 'forgot_password'
+      redirect_to forgot_password_url, alert: I18n.t('login.errors.token_invalid')
     end
   end
 end

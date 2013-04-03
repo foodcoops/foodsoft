@@ -8,6 +8,9 @@ class MessagesController < ApplicationController
   # Creates a new message object.
   def new
     @message = Message.new(params[:message])
+    if @message.reply_to and not @message.reply_to.is_readable_for?(current_user)
+      redirect_to new_message_url, alert: 'Nachricht ist privat!'
+    end
   end
 
   # Creates a new message.
@@ -24,5 +27,8 @@ class MessagesController < ApplicationController
   # Shows a single message.
   def show
     @message = Message.find(params[:id])
+    unless @message.is_readable_for?(current_user)
+      redirect_to messages_url, alert: 'Nachricht ist privat!'
+    end
   end
 end
