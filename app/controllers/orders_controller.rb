@@ -97,7 +97,7 @@ class OrdersController < ApplicationController
   def finish
     order = Order.find(params[:id])
     order.finish!(@current_user)
-    redirect_to order, notice: I18n.t('order.finish.notice')
+    redirect_to order, notice: I18n.t('orders.finish.notice')
   end
   
   # Renders the fax-text-file

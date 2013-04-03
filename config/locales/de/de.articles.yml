@@ -117,3 +117,4 @@ de:
     # used by model
     model:
       error_in_use: '%{article} kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!'
+      error_nosel: 'Du hast keine Artikel ausgewählt'

@@ -114,3 +114,4 @@ en:
     # used by model
     model:
       error_in_use: '%{article} can not be deleted because the article is part of a current order!'
+      error_nosel: 'You have selected no articles'
