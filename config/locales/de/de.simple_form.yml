@@ -88,6 +88,9 @@ de:
         unit: 'Einheit'
         note: 'Notiz'
         article_category: 'Kategorie'
+      article_category:
+        name: 'Name'
+        description: 'Beschreibung'
       stock_article:
         supplier: 'Lieferant'
       delivery:

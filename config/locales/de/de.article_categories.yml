@@ -1,0 +1,12 @@
+de:
+  article_categories:
+    edit:
+      title: 'Kategorie ändern'
+    form:
+      or_cancel: 'oder abbrechen'
+    index:
+      title: 'Artikelkategorien'
+      new: 'Neue Kategorie anlegen'
+      confirm_delete: 'Bist Du sicher?'
+    new:
+      title: 'Neue Kategorie anlegen'
