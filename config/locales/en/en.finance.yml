@@ -54,6 +54,8 @@ en:
         fc_profit: 'FC Profit'
         without_extra_charge: 'Without extra charge:'
         with_extra_charge: 'With extra charge:'
+        changed: 'Data was changed!'
+        reload: 'Reload summary'
       orders:
         name: 'Name'
         end: 'End'

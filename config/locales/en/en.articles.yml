@@ -1,0 +1,115 @@
+en:
+  articles:
+    article:
+      last_update: 'last updated: %{last_update} | Gross: %{gross_price}'
+      confirm_delete: 'Are you sure?'
+    articles:
+      unit_quantity: 'Unit Quantity'
+      price_netto: 'Price'
+      option_select: 'Chose special offer ...'
+      option_delete: 'Delete article'
+      confirm_delete: 'Do you really want to delete all selected articles?'
+      option_not_available: 'Articles are not available anymore'
+      option_available: 'Articles are available'
+    destroy_active_article:
+      note: >
+        %{article} is used in current orders and can not be deleted
+        Please first ... the article from orders %{drop_link}.
+      drop: 'delete'
+    edit_all:
+      title: 'Edit all articles from %{supplier}'
+      note: 'Mandatory fields are: name, unit, (net) price and order number.'
+      warning: 'Warning: all articles will be updated!'
+      submit: 'Updating all articles'
+      or_cancel: 'or cancel'
+    edit_all_table:
+      available_short: 'avail'
+      available_desc: 'available'
+      price_short: 'Price'
+      price_desc: 'Net!'
+      unit_quantity_short: 'Quant.'
+      unit_quantity_desc: 'Unit Quantity'
+      order_number_short: 'Ordernr.'
+      order_number_desc: 'Ordernumber'
+    form:
+      title: 'Add new article'
+    index:
+      title: 'Article from %{supplier} (%{count})'
+      search_placeholder: Name ...
+      new: 'New article'
+      edit_all: 'Edit all'
+      upload: 'Upload article'
+      new_order: 'Create new order'
+      ext_db:
+        title: 'External databank'
+        import: 'Search/Import'
+        sync: 'Synchronise'
+      change_supplier: 'Change supplier ...'
+      import:
+        title: 'Import article'
+        placeholder: Name ...
+        restrict_region: 'Restrict to region only'
+    import_search_results:
+      not_found: 'No articles found'
+      already_imported: 'already imported'
+      action_import: 'import'
+    sync:
+      title: 'Synchronise articles with external database'
+      outlist:
+        title: 'Put from the list ...'
+        body: 'The following articles are put from the list and will be <b>deleted</b>:'
+        body_skip: 'No articles for deletion.'
+      update:
+        title: 'Update ..'
+        update_msg: 'Articles must be updated:'
+        body:
+          <p><i>Every article is shown twice. The old value is gray and the textfields are pre-filled with the actual value now.</i></p>
+          <p><i>Differences with the old articles are marked yellow</i></p>
+      unit_quantity_short: 'Unity Quan.'
+      price_short: 'Price'
+      submit: 'Delete/update all'
+      or_cancel: 'or cancel'
+    upload:
+      title: '%{supplier} / upload article'
+      body:
+        <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p>
+        <p>The fields have to be separated with semicolons (';') and the text with double quotation marks ("text...").</p>
+        <p>As character set UTF-8 is demanded. Correct order of the column:</p>
+      fields:
+        status: 'Status (x=skip)'
+        season_amount: 'Scaled amount'
+        season_price: 'Scaled price'
+      file_label: 'Please choose a compatible file'
+      submit: 'Upload file'
+    parse_upload:
+      title: '%{supplier} / upload article'
+      body:
+        <p><i>Please check the imported articles.</i></p>
+        <p><i>Attention, at the moment there is no revision on dubble articles.</i></p>
+      submit: 'Save new articles for %{supplier}'
+      or_cancel: 'or cancel'
+
+    # used by controller
+    update_all:
+      notice: 'All articles and prices are updated'
+      error_invalid: 'Articles are incorrect. Please check your input.'
+      error_update: "There was an error when updating the article '%{article}' on: %{msg}"
+    update_selected:
+      notice_destroy: 'All selected articles have been deleted'
+      notice_unavail: 'All selected articles have been made unavailable'
+      notice_avail: 'All selected articles have been made available '
+      notice_noaction: 'No action selected!'
+      error_nosel: 'You have selected no articles'
+    parse_upload:
+      notice: '%{count} articles analysed succesfully.'
+      error_parse: '%{msg} ... in line %{line}'
+    create_from_upload:
+      notice: '%{count} new articles were saved'
+      error_invalid: 'Articles are faulty'
+    sync:
+      shared_alert: '%{supplier} is not linked to an external database'
+      notice: 'The catalog is up to date'
+
+    # used by model
+    model:
+      error_in_use: '%{article} can not be deleted because the article is part of a current order!'

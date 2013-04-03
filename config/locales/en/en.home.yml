@@ -56,6 +56,7 @@ en:
       points: 'Your current apple points: %{points}'
       desc: 'You find the proportion of executed tasks displayed to the order volume of your ordergroup in comparison to the average of the Foodcoop. In practice: for every %{amount} of order sum, you should execute a task!'
       warning: 'Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order anymore!'
+      more_info: 'More information'
 
     ordergroup:
       title: 'My ordergroup'

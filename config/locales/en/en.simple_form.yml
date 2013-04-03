@@ -81,6 +81,7 @@ en:
         min_order_quantity: 'Minimum order quantity'
         is_subscribed: 'subscribed?'
       article:
+        name: 'Name'
         availability: 'Is article available?'
         origin: 'Origin'
         manufacturer: 'Manufacturer'
