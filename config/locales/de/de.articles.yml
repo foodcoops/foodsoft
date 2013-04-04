@@ -22,7 +22,6 @@ de:
       note: 'Pflichtfelder sind: Name, Einheit, (netto) Preis und Bestellnummer.'
       warning: 'Achtung, alle Artikel werden aktualisiert!'
       submit: 'Alle Artikel aktualisieren'
-      or_cancel: 'oder abbrechen'
     edit_all_table:
       available_short: 'verf.'
       available_desc: 'verfügbar'
@@ -70,7 +69,6 @@ de:
       unit_quantity_short: 'GebGr'
       price_short: 'Price'
       submit: 'Alle löschen/aktualisieren'
-      or_cancel: 'oder abbrechen'
     upload:
       title: '%{supplier} / Artikel hochladen'
       body:
@@ -91,7 +89,6 @@ de:
         <p><i>Bitte überprufe die engelesenen Artikel.</i></p>
         <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
       submit: 'Speichere neue Artikel für %{supplier}'
-      or_cancel: 'oder abbrechen'
 
     # used by controller
     update_all:

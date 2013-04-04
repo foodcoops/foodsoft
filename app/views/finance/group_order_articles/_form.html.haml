@@ -7,5 +7,5 @@
     = form.input :ordergroup_id, as: :select, collection: Ordergroup.all.map { |g| [g.name, g.id] }
     = form.input :result, hint: "Einheit: #{@order_article.article.unit}"
   .modal-footer
-    = button_tag t('.close'), class: 'btn', data: {dismiss: 'modal'}
-    = form.submit t('.save'), class: 'btn btn-primary'
+    = button_tag t('ui.close'), class: 'btn', data: {dismiss: 'modal'}
+    = form.submit t('ui.save'), class: 'btn btn-primary'

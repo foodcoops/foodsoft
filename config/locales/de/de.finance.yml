@@ -7,7 +7,6 @@ de:
       date: 'Datum'
       amount: 'Betrag'
       supplier: 'Lieferantin'
-      edit: 'Bearbeiten'
       last_transactions: 'letzte Überweisungen'
       group: 'Gruppe'
       note: 'Notiz'
@@ -67,8 +66,6 @@ de:
         confirm: 'Wirklich die Bestellung schließen setzen?'
         no_closed_orders: 'derzeit gibt es keine beendeten Bestellungen'
       order_article:
-        edit: 'Bearbeiten'
-        delete: 'Löschen'
         confirm: 'Bist du sicher?'
       invoice:
         invoice_number: 'Rechnungsnummer:'
@@ -85,9 +82,6 @@ de:
         total: 'Gesamtpreis'
         add_group: 'Gruppe hinzufügen'
         total_fc: 'Summe (FC-Preis)'
-      edit_note:
-        close: 'Schließen'
-        save: 'Speichern'
       edit_results_by_articles:
         article: 'Artikel'
         number: 'Nr.'
@@ -126,16 +120,12 @@ de:
         note: 'Notiz'
         amount: 'Betrag'
         save: "Transaktionen speichern"
-        or_cancel: 'oder abbrechen'
       new:
         title: "Neue Transaktion"
         paragraph: 'Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.'
-        or_cancel: "oder abbrechen"
     group_order_articles:
       form:
         amount_change_for: 'Mengenänderung für %{article}'
-        close: 'Schließen'
-        save: "Speichern"
     ordergroups:
       ordergroups:
         name: "Name"
@@ -153,7 +143,6 @@ de:
         linked: "Diese Rechnung ist mit einer %{what_link} verknüpft."
         delivery: "Lieferung"
         order: "Bestellung"
-        or_cancel: "oder abbrechen"
       index:
         title: "Rechnungen"
         action_new: "Neue Rechnung anlegen"

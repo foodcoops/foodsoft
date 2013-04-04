@@ -5,5 +5,5 @@
   = render 'edit_all_table'
   .form-actions
     = submit_tag t('.submit', supplier: @supplier.name), class: 'btn btn-primary'
-    = link_to t('.or_cancel'), upload_supplier_articles_path(@supplier)
+    = link_to t('ui.or_cancel'), upload_supplier_articles_path(@supplier)
       

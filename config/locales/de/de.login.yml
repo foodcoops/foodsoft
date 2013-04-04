@@ -18,7 +18,6 @@ de:
         <p>Dazu musst hier die E-Mail-Adresse eingeben, mit der Du in der Foodsoft angemeldet bist.
         Du erhälst dann eine E-Mail mit weiteren Instruktionen.</p>
       submit: 'Neues Passwort anfordern'
-      cancel: 'oder abbrechen'
     new_password:
       title: 'Neues Passwort'
       body:

@@ -32,7 +32,6 @@ en:
       available_funds: 'Available credits'
       new_funds: 'New account balance'
       action_save: 'Save order'
-      cancel: 'or cancel'
     index:
       title: 'Orders overview'
       funds:

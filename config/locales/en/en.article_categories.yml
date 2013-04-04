@@ -2,8 +2,6 @@ en:
   article_categories:
     edit:
       title: 'Edit category'
-    form:
-      or_cancel: 'or cancel'
     index:
       title: 'Article categories'
       new: 'Add new category'

@@ -11,8 +11,6 @@ de:
       confirm_del: 'Achtung, willst Du wirklich den Lieferanten %{name} löschen?'
     edit:
       title: 'Lieferantin bearbeiten'
-    form:
-      cancel: 'oder abbrechen'
     new:
       title: 'Neue Lieferantin'
     show:

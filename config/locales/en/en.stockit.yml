@@ -4,7 +4,6 @@ en:
       title: 'Edit stock articles'
     form:
       price_hint: 'To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.'
-      cancel: 'or cancel'
     index:
       view_options: 'View options'
       toggle_unavailable: 'Show/hide unavailable articles'

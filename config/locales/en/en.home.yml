@@ -72,7 +72,6 @@ en:
       user:
         title: '%{user}'
         since: '(member since: %{when})'
-        save: 'Save'
       groups:
         title: 'You are member of the following groups'
         invite: 'Invite new members'

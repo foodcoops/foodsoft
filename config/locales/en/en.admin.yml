@@ -1,11 +1,8 @@
 en:
   admin:
-    edit: 'Edit'
-    delete: 'Delete'
     confirm: 'Do you really want to delete %{name}?'
     actions: 'Actions'
     access_to: 'access to'
-    or_cancel: 'or cancel'
     search_placeholder: 'name ..'
     base:
       index:
@@ -43,7 +40,6 @@ en:
       show:
         title: 'Ordergroup %{name}'
         edit: 'Edit group/member'
-        delete: 'Delete'
         confirm: 'Are you sure?'
         send_message: 'Send message'
       ordergroups:
@@ -95,7 +91,6 @@ en:
       show:
         title: 'Workgroup %{name}'
         edit: 'Edit group/members'
-        delete: 'Delete'
         confirm: 'Are you sure?'
       workgroups:
         name: 'name'

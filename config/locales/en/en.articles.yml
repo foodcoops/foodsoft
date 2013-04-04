@@ -22,7 +22,6 @@ en:
       note: 'Mandatory fields are: name, unit, (net) price and order number.'
       warning: 'Warning: all articles will be updated!'
       submit: 'Updating all articles'
-      or_cancel: 'or cancel'
     edit_all_table:
       available_short: 'avail'
       available_desc: 'available'
@@ -69,7 +68,6 @@ en:
       unit_quantity_short: 'Unity Quan.'
       price_short: 'Price'
       submit: 'Delete/update all'
-      or_cancel: 'or cancel'
     upload:
       title: '%{supplier} / upload article'
       body:
@@ -88,7 +86,6 @@ en:
         <p><i>Please check the imported articles.</i></p>
         <p><i>Attention, at the moment there is no revision on dubble articles.</i></p>
       submit: 'Save new articles for %{supplier}'
-      or_cancel: 'or cancel'
 
     # used by controller
     update_all:

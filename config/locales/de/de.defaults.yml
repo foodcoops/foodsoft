@@ -289,6 +289,8 @@ de:
     edit: 'Bearbeiten'
     delete: 'Löschen'
     show: 'Anzeigen'
+    save: 'Speichern'
+    or_cancel: 'oder abbrechen'
     marks:
       close: 'x'
 

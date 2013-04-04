@@ -18,7 +18,7 @@
             %td= format_date(invoice.date)
             %td.numeric= number_to_currency(invoice.amount)
             %td= invoice.supplier.name
-            %td= link_to t('.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
+            %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
 
     %h2
       = t('.last_transactions')

@@ -2,7 +2,6 @@ en:
   stock_takings:
     edit:
       title: 'Edit inventory'
-      cancel: 'or cancel'
     index:
       title: 'Inventory overview'
       new_inventory: 'Create new inventory'
@@ -13,7 +12,6 @@ en:
       text_need_articles: 'You have to %{create_link} a new stock article before you can use it here.'
       create: 'create'
       stock_articles: 'Stock articles'
-      cancel: 'or cancel'
     show:
       title: 'Show inventory'
       date: 'Date'

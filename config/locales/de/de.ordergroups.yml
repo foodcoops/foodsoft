@@ -4,7 +4,6 @@ de:
       title: 'Bestellgruppen'
     edit:
       title: 'Bestellgruppe bearbeiten'
-      submit: 'Bearbeiten'
 
     # used by model
     model:

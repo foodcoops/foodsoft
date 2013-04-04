@@ -1,11 +1,8 @@
 de:
   admin:
-    edit: 'Bearbeiten'
-    delete: 'Löschen'
     confirm: 'Willst du %{name} wirklich löschen?'
     actions: 'Aktionen'
     access_to: 'Zugriff auf'
-    or_cancel: 'oder abbrechen'
     search_placeholder: 'Name ...'
     base:
       index:
@@ -43,7 +40,6 @@ de:
       show:
         title: 'Bestellgruppe %{name}'
         edit: 'Gruppe/Mitglieder bearbeiten'
-        delete: 'Löschen'
         confirm: 'Bist Du sicher?'
         send_message: 'Nachricht senden'
       ordergroups:
@@ -98,7 +94,6 @@ de:
       show:
         title: 'Arbeitsgruppe %{name}'
         edit: 'Gruppe/Mitglieder bearbeiten'
-        delete: 'Löschen'
         confirm: 'Bist Du sicher?'
       workgroups:
         name: 'Name'

@@ -29,7 +29,6 @@ en:
         title: 'Edit group'
         invite_new: 'You can invite new members %{invite_link}.'
         invite_link: 'here'
-        or_cancel: 'or cancel'
       workgroup:
         show_tasks: 'Show all tasks'
         edit: 'Edit group'

@@ -2,7 +2,6 @@ de:
   stock_takings:
     edit:
       title: 'Inventur bearbeiten'
-      cancel: 'or cancel'
     index:
       title: 'Inventurübersicht'
       new_inventory: 'Neue Inventur anlegen'
@@ -13,7 +12,6 @@ de:
       text_need_articles: 'Einen neuen Lagerartikel musst Du vorher %{create_link} bevor Du Ihn hier verwenden kannst.'
       create: 'anlegen'
       stock_articles: 'Lagerartikel'
-      cancel: 'oder abbrechen'
     show:
       title: 'Inventur anzeigen'
       date: 'Datum'

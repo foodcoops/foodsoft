@@ -4,7 +4,6 @@ de:
       title: 'Lagerartikel bearbeiten'
     form:
       price_hint: 'Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.'
-      cancel: 'or cancel'
     index:
       view_options: 'Ansichtsoptionen'
       toggle_unavailable: 'Nicht verfügbare Artikel zeigen/verstecken'

@@ -29,7 +29,6 @@ de:
         title: 'Gruppe bearbeiten'
         invite_new: 'Neue Mitglieder kannst du %{invite_link} einladen.'
         invite_link: 'hier'
-        or_cancel: 'oder abbrechen'
       workgroup:
         show_tasks: 'Alle Aufgaben zeigen'
         edit: 'Gruppe bearbeiten'

@@ -22,7 +22,6 @@ en:
       unit_quantity: 'Unit quantity'
       prices: 'Prices (net/FC)'
       select_all: 'Select all'
-      cancel: 'or cancel'
     index:
       title: 'Manage orders'
       new_order: 'Create new order'

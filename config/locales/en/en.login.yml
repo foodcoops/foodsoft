@@ -18,7 +18,6 @@ en:
         <p>Please fill in the email address with which you are registered here.
         Then you will receive an email with further instructions.</p>
       submit: 'Request new password'
-      cancel: 'or abort'
     new_password:
       title: 'New password'
       body:

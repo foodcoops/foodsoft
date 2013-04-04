@@ -22,7 +22,6 @@ de:
       unit_quantity: 'Gebinde'
       prices: 'Price (netto/FC)'
       select_all: 'Alle auswählen'
-      cancel: 'oder abbrechen'
     index:
       title: 'Bestellungen verwalten'
       new_order: 'Neue Bestellung anlegen'

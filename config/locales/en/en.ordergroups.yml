@@ -4,7 +4,6 @@ en:
       title: 'Ordergroups'
     edit:
       title: 'Edit ordergroups'
-      submit: 'Edit'
 
     # used by model
     model:

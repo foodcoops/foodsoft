@@ -16,7 +16,6 @@ de:
         subscribe: 'Erklärungen zum Verteiler findest Du im %{link}.'
         wiki: 'Wiki (Abschnitt Mailing-Liste)'
         mail: 'z.b. mit einer Mail an %{email}.'
-      cancel: 'oder abbrechen'
     show:
       title: 'Nachricht anzeigen'
       from: 'Von:'

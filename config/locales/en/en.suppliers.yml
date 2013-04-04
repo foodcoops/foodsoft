@@ -11,8 +11,6 @@ en:
       confirm_del: 'Do you really want to delete the supplier %{name}?'
     edit:
       title: 'Edit supplier'
-    form:
-      cancel: 'or cancel'
     new:
       title: 'New supplier'
     show:
