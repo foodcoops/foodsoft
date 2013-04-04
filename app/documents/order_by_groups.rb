@@ -2,11 +2,12 @@
 class OrderByGroups < OrderPdf
 
   def filename
-    "Bestellung #{@order.name}-#{@order.ends.to_date} - Gruppensortierung.pdf"
+    I18n.t('documents.order_by_groups.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
   end
 
   def title
-    "Gruppensortierung der Bestellung: #{@order.name}, beendet am #{@order.ends.strftime('%d.%m.%Y')}"
+    I18n.t('documents.order_by_groups.title', :name => @order.name,
+      :date => @order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
@@ -16,7 +17,7 @@ class OrderByGroups < OrderPdf
 
       total = 0
       rows = []
-      rows << %w(Artikel Menge Preis GebGr Einheit Summe) # Table Header
+      rows << I18n.t('documents.order_by_groups.rows') # Table Header
 
       group_order_articles = group_order.group_order_articles.ordered
       group_order_articles.each do |goa|
@@ -30,7 +31,7 @@ class OrderByGroups < OrderPdf
                   goa.order_article.article.unit,
                   number_with_precision(sub_total, precision: 2)]
       end
-      rows << [ "Summe", nil, nil, nil, nil, number_with_precision(total, precision: 2)]
+      rows << [ I18n.t('documents.order_by_groups.sum'), nil, nil, nil, nil, number_with_precision(total, precision: 2)]
 
       table rows, column_widths: [250,50,50,50,50,50], cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
         # borders

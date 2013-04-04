@@ -2,7 +2,7 @@
 class OrderFax < OrderPdf
 
   def filename
-    "Bestellung #{@order.name}-#{@order.ends.to_date} - Fax.pdf"
+    I18n.t('documents.order_fax.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
   end
 
   def title
@@ -20,11 +20,11 @@ class OrderFax < OrderPdf
       move_down 5
       text "#{contact[:zip_code]} #{contact[:city]}", size: 9, align: :right
       move_down 5
-      text "Kundennummer: #{@order.supplier.try(:customer_number)}", size: 9, align: :right
+      text "#{I18n.t('simple_form.labels.supplier.customer_number')}: #{@order.supplier.try(:customer_number)}", size: 9, align: :right
       move_down 5
-      text "Telefon: #{contact[:phone]}", size: 9, align: :right
+      text "#{I18n.t('simple_form.labels.supplier.phone')}: #{contact[:phone]}", size: 9, align: :right
       move_down 5
-      text "E-mail: #{contact[:email]}", size: 9, align: :right
+      text "#{I18n.t('simple_form.labels.supplier.email')}: #{contact[:email]}", size: 9, align: :right
     end
 
     # Recipient
@@ -33,20 +33,20 @@ class OrderFax < OrderPdf
       move_down 5
       text @order.supplier.try(:address).to_s
       move_down 5
-      text "Fax: #{@order.supplier.try(:fax)}"
+      text "#{I18n.t('simple_form.labels.supplier.fax')}: #{@order.supplier.try(:fax)}"
     end
 
     move_down 5
-    text Date.today.strftime('%d.%m.%Y'), align: :right
+    text Date.today.strftime(I18n.t('date.formats.default')), align: :right
 
     move_down 10
-    text "Lieferdatum:"
+    text "#{I18n.t('simple_form.labels.delivery.delivered_on')}:"
     move_down 10
-    text "Ansprechpartner: #{@order.supplier.try(:contact_person)}"
+    text "#{I18n.t('simple_form.labels.supplier.contact_person')}: #{@order.supplier.try(:contact_person)}"
     move_down 10
 
     # Articles
-    data = [["BestellNr.", "Menge","Name", "Gebinde", "Einheit","Preis/Einheit"]]
+    data = [I18n.t('documents.order_fax.rows')]
     data = @order.order_articles.ordered.all(include: :article).collect do |a|
       [a.article.order_number,
        a.units_to_order,

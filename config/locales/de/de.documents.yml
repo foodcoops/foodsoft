@@ -1,0 +1,41 @@
+de:
+  # for app/documents
+  documents:
+    order_by_articles:
+      filename: 'Bestellung %{name}-%{date} - Artikelsortierung'
+      title: 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
+      rows:
+      - Bestellgruppe
+      - Menge
+      - Preis
+    order_by_groups:
+      filename: 'Bestellung %{name}-%{date} - Gruppensortierung'
+      title: 'Gruppensortierung der Bestellung: %{name}, beendet am %{date}'
+      rows:
+      - Artikel
+      - Menge
+      - Preis
+      - GebGr
+      - Einheit
+      - Summe
+      sum: 'Summe'
+    order_fax:
+      filename: 'Bestellung %{name}-%{date} - Fax'
+      rows:
+      - BestellNr.
+      - Menge
+      - Name
+      - Gebinde
+      - Einheit
+      - Preis/Einheit
+    order_matrix:
+      filename: 'Bestellung %{name}-%{date} - Sortiermatrix'
+      title: 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
+      heading: 'Artikelübersicht'
+      total: 'Insgesamt %{count} Artikel'
+      rows:
+      - Artikel
+      - Einheit
+      - Gebinde
+      - FC-Preis
+      - Menge
