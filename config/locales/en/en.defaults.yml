@@ -18,10 +18,6 @@ en:
       next: "&rsaquo;"
       truncate: "..."
 
-  controller:
-    article_categories:
-      destroy:
-        error: 'Category could not be deleted: %{message}'
   date:
     abbr_day_names:
     - Su

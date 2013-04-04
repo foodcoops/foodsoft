@@ -10,3 +10,11 @@ en:
       confirm_delete: 'Are you sure?'
     new:
       title: 'Add new category'
+
+    # used by controller
+    create:
+      notice: 'Category was stored'
+    update:
+      notice: 'Category was updated'
+    destroy:
+      error: 'Category could not be deleted: %{message}'

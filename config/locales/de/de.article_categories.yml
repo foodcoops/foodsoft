@@ -10,3 +10,11 @@ de:
       confirm_delete: 'Bist Du sicher?'
     new:
       title: 'Neue Kategorie anlegen'
+
+    # used by controller
+    create:
+      notice: 'Die Kategorie wurde gespeichert'
+    update:
+      notice: 'Die Kategorie wurde aktualisiert'
+    destroy:
+      error: 'Kategorie konnte nicht gelöscht werden: %{message}'
