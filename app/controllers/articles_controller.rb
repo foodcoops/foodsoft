@@ -74,12 +74,12 @@ class ArticlesController < ApplicationController
   end
 
   # Updates all article of specific supplier
-  # deletes all articles from params[outlisted_articles]
   def update_all
+    invalid_articles = false
+
     begin
       Article.transaction do
         unless params[:articles].blank?
-          invalid_articles = false
           # Update other article attributes...
           @articles = Article.find(params[:articles].keys)
           @articles.each do |article|
@@ -88,25 +88,18 @@ class ArticlesController < ApplicationController
             end
           end
 
-          raise "Artikel sind fehlerhaft. Bitte überprüfe Deine Eingaben." if invalid_articles
-        end
-        # delete articles
-        if params[:outlisted_articles]
-          params[:outlisted_articles].keys.each {|id| Article.find(id).mark_as_deleted }
+          raise ActiveRecord::Rollback  if invalid_articles # Rollback all changes
         end
       end
+    end
+
+    if invalid_articles
+      # An error has occurred, transaction has been rolled back.
+      flash.now.alert = 'Artikel sind fehlerhaft. Bitte überprüfen.'
+      render :edit_all
+    else
       # Successfully done.
       redirect_to supplier_articles_path(@supplier), notice: "Alle Artikel und Preise wurden aktalisiert"
-
-    rescue => e
-      # An error has occurred, transaction has been rolled back.
-      if params[:sync]
-        flash[:error] = "Es trat ein Fehler beim Aktualisieren des Artikels '#{current_article.name}' auf: #{e.message}"
-        redirect_to(supplier_articles_path(@supplier))
-      else
-        flash.now.alert = e.message
-        render :edit_all
-      end
     end
   end
   
@@ -230,6 +223,35 @@ class ArticlesController < ApplicationController
     @updated_articles.each {|a, b| a.shared_updated_on = a.shared_updated_on.to_formatted_s(:db)}
     if @updated_articles.empty? && @outlisted_articles.empty?
       redirect_to supplier_articles_path(@supplier), :notice => "Der Katalog ist aktuell."
+    end
+  end
+
+  # Updates, deletes articles when sync form is submitted
+  def update_synchronized
+    begin
+      Article.transaction do
+        # delete articles
+        if params[:outlisted_articles]
+          Article.find(params[:outlisted_articles].keys).each(&:mark_as_deleted)
+        end
+
+        # Update articles
+        params[:articles].each do |id, attrs|
+          Article.find(id).update_attributes! attrs
+        end
+      end
+
+      # Successfully done.
+      redirect_to supplier_articles_path(@supplier), notice: "Alle Artikel und Preise wurden aktalisiert"
+
+    rescue ActiveRecord::RecordInvalid => invalid
+      # An error has occurred, transaction has been rolled back.
+      redirect_to supplier_articles_path(@supplier),
+                  alert: "Es trat ein Fehler beim Aktualisieren des Artikels '#{invalid.record.name}' auf: #{invalid.record.errors.full_messages}"
+
+    rescue => error
+      redirect_to supplier_articles_path(@supplier),
+                  alert: "Es trat ein Fehler auf: #{error.message}"
     end
   end
 end
