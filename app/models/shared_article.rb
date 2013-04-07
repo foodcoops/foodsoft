@@ -8,6 +8,8 @@ class SharedArticle < ActiveRecord::Base
   belongs_to :shared_supplier, :foreign_key => :supplier_id
 
   def build_new_article
+    # The supplier might be overwritten subsequently.
+    # TODO: Confirm that this works.
     shared_supplier.supplier.articles.build(
         :name => name,
         :unit => unit,
