@@ -214,6 +214,16 @@ class ArticlesController < ApplicationController
   # fills a form whith values of the selected shared_article
   def import
     @article = SharedArticle.find(params[:shared_article_id]).build_new_article
+    # Now, the article is assigned to the supplier which is assigned to the
+    # shared_supplier of the external database. However, in at least one food
+    # coop using the foodsoft, there are multiple suppliers using the same single
+    # shared_supplier even though this kind of relation is not allowed by the
+    # shared_supplier model (has_one :supplier)
+    # 
+    # Here comes the dirty fix for importing articles assigned to the desired
+    # supplier. It is based on the supplier info given by the link in
+    # /app/views/articles/_import_search_results.haml
+    @article.supplier = params[:supplier] # FIXME: PSEUDOCODE, UNTESTED!!! (database is not set up locally)
     render :action => 'new', :layout => false
   end
   
