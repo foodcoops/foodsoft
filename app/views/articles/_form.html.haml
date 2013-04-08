@@ -2,7 +2,7 @@
   = f.hidden_field :shared_updated_on
   = f.hidden_field :supplier_id
   .modal-header
-    = button_tag "x", class: 'close', data: {dismiss: 'modal'}
+    = link_to 'x', '#', class: 'close', data: {dismiss: 'modal'}
     %h3 Neuen Artikel einfügen
   .modal-body
     = f.input :availability
@@ -19,6 +19,6 @@
     = f.input :tax
     = f.input :deposit
   .modal-footer
-    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
+    = link_to 'Schließen', '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'
 
