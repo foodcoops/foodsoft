@@ -55,4 +55,7 @@ group :development do
 
   # Get infos when not using proper eager loading
   gem 'bullet'
+
+  # Hide assets requests in log
+  gem 'quiet_assets'
 end

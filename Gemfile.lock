@@ -126,6 +126,8 @@ GEM
     prawn (0.12.0)
       pdf-reader (>= 0.9.0)
       ttfunk (~> 1.0.2)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -237,6 +239,7 @@ DEPENDENCIES
   meta_search
   mysql2
   prawn
+  quiet_assets
   rails (~> 3.2.9)
   resque
   ruby-prof
