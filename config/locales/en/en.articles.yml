@@ -38,7 +38,7 @@ en:
       search_placeholder: Name ...
       new: 'New article'
       edit_all: 'Edit all'
-      upload: 'Upload article'
+      upload: 'Upload articles'
       new_order: 'Create new order'
       ext_db:
         title: 'External databank'
@@ -69,7 +69,7 @@ en:
       price_short: 'Price'
       submit: 'Delete/update all'
     upload:
-      title: '%{supplier} / upload article'
+      title: '%{supplier} / upload articles'
       body:
         <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p>
         <p>The fields have to be separated with semicolons (';') and the text with double quotation marks ("text...").</p>
