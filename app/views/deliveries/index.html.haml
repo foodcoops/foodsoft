@@ -1,11 +1,11 @@
-- title "#{@supplier.name}/Lieferungen"
+- title t('.title', supplier: @supplier.name)
 
 %table.table.table-striped
   %thead
     %tr
-      %th Geliefert am
-      %th.numeric Rechnungsbetrag
-      %th Notiz
+      %th= t 'simple_form.labels.delivery.delivered_on'
+      %th.numeric= t 'deliveries.invoice_amount'
+      %th= t 'simple_form.labels.defaults.note'
   %tbody
     - for delivery in @deliveries
       %tr
@@ -13,11 +13,11 @@
         %td.numeric= link_to_invoice(delivery)
         %td= truncate delivery.note
         %td
-          = link_to 'Anzeigen', [@supplier, delivery], class: 'btn btn-mini'
-          = link_to 'Bearbeiten', edit_supplier_delivery_path(@supplier,delivery), class: 'btn btn-mini'
-          = link_to 'Löschen', [@supplier,delivery], :confirm => 'Are you sure?', :method => :delete,
+          = link_to t('ui.show'), [@supplier, delivery], class: 'btn btn-mini'
+          = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,delivery), class: 'btn btn-mini'
+          = link_to t('ui.delete'), [@supplier,delivery], :confirm => t('.confirm_delete'), :method => :delete,
           class: 'btn btn-mini btn-danger'
 
-= link_to "Neue Lieferung für #{@supplier.name} anlegen", new_supplier_delivery_path(@supplier), class: 'btn btn-primary'
+= link_to t('.new_delivery', supplier: @supplier.name), new_supplier_delivery_path(@supplier), class: 'btn btn-primary'
 |
-= link_to "Lieferantenübersicht", suppliers_path
+= link_to t('deliveries.suppliers_overview'), suppliers_path

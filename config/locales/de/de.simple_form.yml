@@ -94,6 +94,7 @@ de:
       stock_article:
         supplier: 'Lieferant'
       delivery:
+        supplier: 'Lieferantin'
         delivered_on: 'Lieferdatum'
       user:
         nick: "Benutzername"

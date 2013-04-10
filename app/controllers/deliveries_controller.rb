@@ -35,7 +35,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.save
-        flash[:notice] = 'Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!'
+        flash[:notice] = I18n.t('deliveries.create.notice')
         format.html { redirect_to([@supplier,@delivery]) }
         format.xml  { render :xml => @delivery, :status => :created, :location => @delivery }
       else
@@ -54,7 +54,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.update_attributes(params[:delivery])
-        flash[:notice] = 'Lieferung wurde aktualisiert.'
+        flash[:notice] = I18n.t('deliveries.update.notice')
         format.html { redirect_to([@supplier,@delivery]) }
         format.xml  { head :ok }
       else
@@ -68,7 +68,7 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.find(params[:id])
     @delivery.destroy
 
-    flash[:notice] = "Lieferung wurde gelöscht."
+    flash[:notice] = I18n.t('deliveries.destroy.notice')
     respond_to do |format|
       format.html { redirect_to(supplier_deliveries_url(@supplier)) }
       format.xml  { head :ok }

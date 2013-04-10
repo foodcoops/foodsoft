@@ -1,0 +1,42 @@
+de:
+  deliveries:
+    suppliers_overview: 'Lieferantenübersicht'
+    invoice_amount: 'Rechnungsbetrag'
+    invoice_net_amount: 'bereinigter Rechnungsbetrag'
+    edit:
+      title: 'Lieferung bearbeiten'
+    form:
+      remove_article: 'Artikel aus Lieferung entfernen'
+      add_article: 'Lagerartikel der Lieferung hinzufügen'
+      note_new_article: 'Ist ein Artikel noch nicht in der Lagerverwaltung, muss er erst %{new_link} werden.'
+      note_new_article_link: 'neu angelegt'
+      new_article:
+        title: 'Neuen Lagerartikel anlegen'
+        search: 'Suche nach Artikeln aus dem <i>%{supplier}</i> Katalog'
+    index:
+      title: '%{supplier}/Lieferungen'
+      confirm_delete: 'Bist Du sicher?'
+      new_delivery: 'Neue Lieferung für %{supplier} anlegen'
+    new:
+      title: 'Neue Lieferung von %{supplier}'
+    show:
+      title: 'Lieferung anzeigen'
+      title_articles: 'Artikel'
+      article: 'Artikel'
+      unit: 'Einheit'
+      amount: 'Menge'
+      price: 'Nettopreis'
+      sum: 'Summe'
+      sum_net: 'Nettosumme'
+      sum_gross: 'Bruttosumme'
+      sum_diff: 'Brutto - bereinigter Rechnungsbetrag'
+    stock_change:
+      remove_article: 'Artikel aus Lieferung entfernen'
+
+    # used by controller
+    create:
+      notice: 'Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!'
+    update:
+      notice: 'Lieferung wurde aktualisiert.'
+    destroy:
+      notice: 'Lieferung wurde gelöscht.'
