@@ -1,6 +1,6 @@
 = simple_form_for [:finance, @order, @order_article], remote: true do |form|
   .modal-header
-    = button_tag t('ui.marks.close'), class: 'close', data: {dismiss: 'modal'}
+    = button_tag t('ui.marks.close').html_safe, class: 'close', data: {dismiss: 'modal'}
     %h3= t '.title'
   .modal-body
     = form.input :units_to_order

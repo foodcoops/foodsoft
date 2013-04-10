@@ -312,5 +312,5 @@ de:
     save: 'Speichern'
     or_cancel: 'oder abbrechen'
     marks:
-      close: 'x'
+      close: '&times;'
 

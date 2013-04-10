@@ -1,5 +1,5 @@
 -# please polish the following line if you know how, same in partial _destroy_fail
-var successDiv = $('<div class="alert fade in alert-success"><a class="close" data-dismiss="alert" href="#">#{escape_javascript(t('ui.marks.close'))}</a></div>');
+var successDiv = $('<div class="alert fade in alert-success"><a class="close" data-dismiss="alert" href="#">#{escape_javascript(t('ui.marks.close').html_safe)}</a></div>');
 
 successDiv.append(document.createTextNode('#{escape_javascript(t('.notice', name: @article.name))}'));
 $('div.container-fluid').prepend(successDiv);

@@ -1,6 +1,6 @@
 = simple_form_for @order, url: update_note_finance_order_path(@order), remote: true, method: :put do |f|
   .modal-header
-    = button_tag t('ui.marks.close'), class: 'close', data: {dismiss: 'modal'}
+    = button_tag t('ui.marks.close').html_safe, class: 'close', data: {dismiss: 'modal'}
     %h3 Notiz bearbeiten
   .modal-body
     = f.input :note, input_html: {class: 'input-xlarge'}
