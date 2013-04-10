@@ -39,7 +39,7 @@ de:
         task_description: 'Beschreibung'
         next_weekly_tasks_number: "Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?"
         role_admin: "Administration"
-        role_finance: "Fianzen"
+        role_finance: "Finanzen"
         role_suppliers: "Lieferanten"
         role_article_meta: "Artikeldatenbank"
         role_orders: "Bestellverwaltung"

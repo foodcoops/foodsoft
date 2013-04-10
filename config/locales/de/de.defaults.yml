@@ -282,6 +282,26 @@ de:
         create: 'Nachricht verschicken'
       invite:
         create: Einladung verschicken
+    application:
+      sort_by: 'Nach %{text} sortieren'
+      edit_user: 'Mitglieder bearbeiten'
+      show_google_maps: 'Show it on Google maps'
+      # long names in simple_form.labels.workgroup
+      role_admin: 'Admin'
+      role_finance: 'Finanzen'
+      role_suppliers: 'Lieferanten'
+      role_article_meta: 'Artikel'
+      role_orders: 'Bestellung'
+      write_message: 'Nachricht_schreiben'
+    deliveries:
+      show_invoice: 'Rechnung anzeigen'
+      new_invoice: 'Rechnung anlegen'
+    orders:
+      order_pdf: 'PDF erstellen'
+      option_choose: 'Lieferantin/Lager auswählen'
+      option_stock: 'Lager'
+    tasks:
+      required_users: 'Es fehlen %{count} Mitstreiterinnen!'
 
   # general user-interface
   ui:
