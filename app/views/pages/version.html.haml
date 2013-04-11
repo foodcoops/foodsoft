@@ -1,11 +1,11 @@
-- title "#{@page.title} - Version #{@version.lock_version}"
+- title t('.title', title: @page.title, version: @version.lock_version)
 
 - content_for :sidebar do
-  %h3 Version
-  %b= "#{format_datetime_timespec(@version.updated_at, "%a, %d.%m.%Y, %H:%M Uhr") }"
+  %h3= t '.title_version'
+  %b= "#{format_datetime_timespec(@version.updated_at, t('.date_format'))}"
   %ul
-    %li= "Autor: #{User.find(@version.updated_by).nick}"
-    %li= link_to "Aktuelle Version sehen", wiki_page_path(:permalink => @page.permalink)
-    %li= link_to "Auf diese Version zurücksetzen", revert_page_path(@page, :version => @version.lock_version)
+    %li= t '.author', user: User.find(@version.updated_by).nick
+    %li= link_to t('.view_current'), wiki_page_path(:permalink => @page.permalink)
+    %li= link_to t('.revert'), revert_page_path(@page, :version => @version.lock_version)
 
 = wikified_body @version.body

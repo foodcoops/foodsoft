@@ -11,85 +11,75 @@
       = f.input :parent_id, as: :select, collection: parent_pages_to_select(@page)
       .form-actions
         = button_tag :name => 'preview', class: 'btn' do
-          %i.icon-search
-          Vorschau
+          %i.icon-search= t '.preview'
         = button_tag class: 'btn' do
-          %i.icon-save
-          Speichern
-        = link_to "oder abbrechen", @page
+          %i.icon-save= t 'ui.save'
+        = link_to t('ui.or_cancel'), @page
 
   .span4
-    %h3 Schnelle Formatierungshilfe
+    %h3= t '.help.title'
     %table.table
       %tbody
         %tr
           %td(colspan=2)
-            %b Zeichenformatierung
+            %b= t '.help.section_character'
         %tr
           %td
-            %i kursiv
+            %i= t '.help.italic'
           %td
             %pre
-              ''kursiv''<br />
+              ''#{t '.help.italic'}''<br />
         %tr
           %td
-            %b fett
+            %b= t '.help.bold'
           %td
-            %pre '''Fett'''<br />
+            %pre '''#{t '.help.bold'}'''<br />
         %tr
+          %td= t '.help.noformat'
           %td
-            Keine Wiki-<br/>Formatierung
-          %td
-            %pre &lt;nowiki&gt;text&lt;/nowiki&gt;
-        %tr
-          %td(colspan=2)
-            %b Block-Formatierung
-        %tr
-          %td
-            Überschriften
-          %td
-            %pre
-              \== Ebene 1 ==
-            %pre
-              \=== Ebene 2 ===
-            %pre
-              \==== Ebene 3 ====
-        %tr
-          %td
-            Listen mit Punkten
-          %td
-            %pre
-              * Erster Punkt
-            %pre
-              ** Zweiter Punkt
-        %tr
-          %td
-            Listen mit Zahlen
-          %td
-            %pre
-              \# Ersten Punkt
-            %pre
-              \# Zweiter Punkt
+            %pre &lt;nowiki&gt;#{t '.help.text'}&lt;/nowiki&gt;
         %tr
           %td(colspan=2)
-            %b Link-Formatierung
+            %b= t '.help.section_block'
         %tr
-          %td
-            Wiki-Links
+          %td= t '.help.headings'
           %td
             %pre
-              [[Foodsoft Wiki Seite]]
+              \== #{t '.help.heading', level: 1} ==
+            %pre
+              \=== #{t '.help.heading', level: 2} ===
+            %pre
+              \==== #{t '.help.heading', level: 3} ====
         %tr
-          %td
-            Externe Links
+          %td= t '.help.unordered_list'
           %td
             %pre
-              [http://addresse.net Externe Seite]
+              * #{t '.help.list_item_1'}
+            %pre
+              ** #{t '.help_list_item_2'}
+        %tr
+          %td= t '.help.ordered_list'
+          %td
+            %pre
+              \# #{t '.help.list_item_1'}
+            %pre
+              \# #{t '.help.list_item_2'}
+        %tr
+          %td(colspan=2)
+            %b= t '.help.section_link'
+        %tr
+          %td= t '.help.wiki_links'
+          %td
+            %pre
+              [[#{t '.help.wiki_link_ex'}]]
+        %tr
+          %td= t '.help.external_links'
+          %td
+            %pre
+              [http://example.net #{t '.help.external_link_ex'}]
         %tr
           %td(colspan=2)
             %b Tabellenformatierung
         %tr
-          %td
-            Siehe
-            = link_to "Tabellen", "http://www.mediawiki.org/wiki/Help:Tables", :target => '_blank'
+          %td!= t '.help.see_tables', tables_link: link_to(t('.help.tables_link'), "http://www.mediawiki.org/wiki/Help:Tables", :target => '_blank')
 

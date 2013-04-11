@@ -1,8 +1,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Titel
-      %th Zuletzt aktualisiert
+      %th= t 'pages.title'
+      %th= t 'pages.last_updated'
     - homepage = Page.find_by_permalink('Home')
     - unless homepage.nil?
       = render :partial => 'page_list_item', :locals => {:page => homepage, :level => 0, :siteMap => 1}

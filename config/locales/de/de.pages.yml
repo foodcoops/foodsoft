@@ -1,0 +1,73 @@
+de:
+  pages:
+    title: 'Titel'
+    last_updated: 'Zuletzt aktualisiert'
+    all:
+      title: 'Alle Wikiseiten'
+      new_page: 'Neue Seite anlegen'
+      recent_changes: 'Letzte Änderungen'
+      title_list: 'Seiten-Liste'
+      site_map: 'Site Map'
+      search:
+        placeholder: 'Seitentitle ...'
+        action: 'Suche'
+    body:
+      title_toc: 'Inhalt'
+    edit:
+      title: 'Seite bearbeiten'
+    form:
+      preview: 'Vorschau'
+      help:
+        title: 'Schnelle Formatierungshilfe'
+        section_character: 'Zeichenformatierung'
+        italic: 'kursiv'
+        bold: 'fett'
+        noformat: 'Keine Wiki- Formatierung'
+        text: 'text'
+        section_block: 'Block-Formatierung'
+        headings: 'Überschriften'
+        heading: 'Ebene %{level}'
+        unordered_list: 'Listen mit Punkten'
+        list_item_1: 'Erster Punkt'
+        list_item_2: 'Zweiter Punkt'
+        ordered_list: 'Listen mit Zahlen'
+        section_link: 'Link-Formatierung'
+        wiki_links: 'Wiki-Links'
+        wiki_link_ex: 'Foodsoft Wiki Seite'
+        external_links: 'Externe Links'
+        external_link_ex: 'Externe Seite'
+        section_table: 'Tabellenformatierung'
+        see_tables: 'Siehe %{tables_link}'
+        tables_link: 'Tabellen'
+    new:
+      title: 'Neue Wikiseite anlegen'
+    page_list_item:
+      date_format: '%a, %d. %B %Y %H:%M:%S'
+    show:
+      edit: 'Seite bearbeiten'
+      versions: 'Versionen (%{count})'
+      subpages: 'Unterseiten'
+      title_versions: 'Versionen'
+      date_format: '%d.%m.%y %H:%M'
+      delete: 'Seite löschen'
+      delete_confirm: 'Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?'
+      last_updated: 'Zuletzt bearbeitet von <b>%{user}</b> am %{when}'
+    version:
+      title: '%{title} - Version %{version}'
+      title_version: 'Version'
+      date_format: '%a, %d.%m.%Y, %H:%M Uhr'
+      author: 'Autor: %{user}'
+      view_current: 'Aktuelle Version sehen'
+      revert: 'Auf diese Version zurücksetzen'
+
+    # used by controller
+    cshow:
+       error_noexist: 'Seite existiert nicht!'
+       redirect_notice: 'Weitergeleitet von %{page} ...'
+    create:
+      notice: 'Seite wurde angelegt'
+    update:
+      notice: 'Seite wurde aktualisiert'
+    destroy:
+      notice: "Die Seite '%{page}' und alle Unterseiten wurden erfolgreich gelöscht"
+    error_stale_object: 'Achtung, die Seite wurde gerade von jemand anderes bearbeitet. Bitte versuche es erneut.'

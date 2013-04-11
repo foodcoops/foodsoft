@@ -4,6 +4,6 @@
 - unless toc.blank? or params[:preview]
   - content_for :sidebar do
     #wikitoc.well.well-small
-      %h3 Inhalt
+      %h3= t '.title_toc'
       = toc
 = content

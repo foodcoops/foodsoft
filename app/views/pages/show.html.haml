@@ -3,26 +3,25 @@
 - content_for :sidebar do
   %p
     = link_to edit_page_path(@page), class: 'btn btn-primary' do
-      %i.icon-edit
-      Seite bearbeiten
+      %i.icon-edit= t '.edit'
   .well.well-small
     %ul.nav.nav-list
       %li
-      %li= link_to "Versionen (#{@page.versions.count})", "#versions", 'data-toggle-this' => '#versions'
+      %li= link_to t('.versions', count: @page.versions.count), "#versions", 'data-toggle-this' => '#versions'
       - unless @page.children.empty?
-        %li= link_to "Unterseiten", "#subpages", 'data-toggle-this' => '#subpages'
+        %li= link_to t('.subpages'), "#subpages", 'data-toggle-this' => '#subpages'
 
   #versions.well.well-small{:style => "display:none"}
-    %h3 Versionen
+    %h3= t '.title_versions'
     %ul.unstyled
       - @page.versions.reverse.each do |version|
         %li
-          = link_to I18n.l(version.updated_at, :format => "%d.%m.%y %H:%M"), version_page_path(@page, :version => version.lock_version)
+          = link_to I18n.l(version.updated_at, :format => t('.date_format')), version_page_path(@page, :version => version.lock_version)
           = "(#{User.find_by_id(version.updated_by).try(:nick)})"
 
   - unless @page.children.empty?
     #subpages.well.well-small{:style => "display:none"}
-      %h3 Unterseiten
+      %h3= t '.subpages'
       %ul.unstyled
         - @page.children.each do |page|
           %li= link_to_wikipage(page)
@@ -46,11 +45,7 @@
 %hr.clear/
 %p
   = link_to edit_page_path(@page), class: 'btn btn-primary' do
-    %i.icon-edit
-    Seite bearbeiten
-  = link_to "Seite löschen", @page, class: 'btn btn-danger', :method => :delete,
-    :confirm => "Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?"
-  | Zuletzt bearbeitet von
-  %b
-    = "#{@page.user.try(:nick)}"
-  = "am #{format_datetime @page.updated_at}"
+    %i.icon-edit= t '.edit'
+  = link_to t('.delete'), @page, class: 'btn btn-danger', :method => :delete,
+    :confirm => t('.delete_confirm')
+  != '| ' + t('.last_updated', user: h(@page.user.try(:nick)), when: format_datetime(@page.updated_at))
