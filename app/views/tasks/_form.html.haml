@@ -4,9 +4,9 @@
       $("#task_user_list").tokenInput("#{users_path(:format => :json)}", {
         crossDomain: false,
         prePopulate: $("#task_user_list").data("pre"),
-        hintText: 'Nach Nutzerin suchen',
-        noResultText: 'Keine Nutzerin gefunden',
-        searchingText: 'Suche ...',
+        hintText: '#{escape_javascript(t('.search.hint'))}',
+        noResultText: '#{escape_javascript(t('.search.noresult'))}',
+        searchingText: '#{escape_javascript(t('.search.placeholder'))}',
         theme: 'facebook'
       });
     });
@@ -26,4 +26,4 @@
   = f.input :done
   .form-actions
     = f.submit class: 'btn'
-    = link_to 'oder abbrechen', :back
+    = link_to t('ui.or_cancel'), :back

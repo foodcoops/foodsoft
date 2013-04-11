@@ -3,17 +3,15 @@
 
 - unless @unaccepted_tasks.empty?
   %section
-    %h3 Offene Aufgaben
+    %h3= t '.title_open'
     = render 'list', tasks: @unaccepted_tasks
 
 %section
-  %h3 Anstehende Aufgaben
+  %h3= t '.title_accepted'
   - unless @accepted_tasks.empty?
     = render 'list', tasks: @accepted_tasks
   - else
-    Nichts zu tun?
-    = link_to "Hier", tasks_path
-    gibt es bestimmt Arbeit.
+    = t('.more', tasks_link: link_to(t('.tasks_link'), tasks_path)).html_safe
   %br/
   = link_to_top
 

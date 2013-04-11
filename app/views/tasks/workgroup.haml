@@ -1,19 +1,18 @@
-- title "Aufgaben für #{@group.name}"
+- title t('.title', workgroup: @group.name)
 = render 'nav'
 
 %section.well
-  %h3 Wöchentliche Aufgaben
+  %h3= t '.weekly.title'
   - if @group.weekly_task
-    %p Jeden <b>#{weekday(@group.weekday)}</b> hat diese Arbeitsgruppe folgenden Job: <b>#{@group.task_name}</b>
-    %p Die Wochenaufgaben werden von der Foodsoft automatisch erstellt. Eintragen müsst Ihr Euch aber selber.
+    = t('.weekly.desc', weekday: weekday(@group.weekday), task: @group.task_name).html_safe
   - else
-    Noch keine Wochenaufgaben angelegt.
+    = t('.weekly.empty').html_safe
 
   - if @current_user.member_of?(@group) or @current_user.role_admin?
-    = link_to "Wöchentliche Aufgaben anpassen", edit_foodcoop_workgroup_path(@group), class: 'btn'
+    = link_to t('.weekly.edit'), edit_foodcoop_workgroup_path(@group), class: 'btn'
 
 %section
-  %h3 Alle Aufgaben der Gruppe
+  %h3= t '.title_all'
   = render 'list', tasks: @group.open_tasks
   %br/
   = link_to_top

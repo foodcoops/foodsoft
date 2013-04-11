@@ -1,9 +1,9 @@
-- title "Aufgaben"
+- title t('.title')
 = render 'nav'
 
 - unless @non_group_tasks.empty?
   %section
-    %h3 Aufgaben für alle!
+    %h3= t '.title_non_group'
     = render 'list', tasks: @non_group_tasks
 
 
@@ -13,6 +13,6 @@
     %section
       %h3
         = group.name
-        %small= link_to "Gruppenaufgaben anzeigen", workgroup_tasks_path(group)
+        %small= link_to t('.show_group_tasks'), workgroup_tasks_path(group)
       = render 'list', tasks: tasks
       = link_to_top

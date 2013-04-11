@@ -49,6 +49,7 @@ de:
         contact_address: "Adresse"
         ignore_apple_restriction: "Bestellstop bei zu wenig Äpfeln ignorieren"
       task:
+        name: 'Name'
         duration: 'Dauer'
         user_list: 'Verantwortliche'
         required_users: 'Anzahl'
