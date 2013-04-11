@@ -72,5 +72,4 @@ de:
       notice: 'Du hast die Aufgabe übernommen'
     set_done:
       notice: 'Aufgabenstatus wurde aktualisiert'
-    << workgroup:
-      error_not_found: 'Keine Arbeitsgruppe gefunden'
+    error_not_found: 'Keine Arbeitsgruppe gefunden'

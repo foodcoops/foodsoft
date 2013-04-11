@@ -91,7 +91,7 @@ class TasksController < ApplicationController
   def workgroup
     @group = Group.find(params[:workgroup_id])
     if @group.is_a? Ordergroup
-      redirect_to tasks_url, :alert => I18n.t('tasks.workgroup.error_not_found')
+      redirect_to tasks_url, :alert => I18n.t('tasks.error_not_found')
     end
   end
 end
