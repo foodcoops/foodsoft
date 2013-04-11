@@ -1,0 +1,41 @@
+en:
+  # for app/documents
+  documents:
+    order_by_articles:
+      filename: 'Order %{name}-%{date} - by articles'
+      title: 'Order sorted by articles: %{name}, closed at %{date}'
+      rows:
+      - Order group
+      - Amount
+      - Price
+    order_by_groups:
+      filename: 'Order %{name}-%{date} - by group'
+      title: 'Order sorted by group: %{name}, closed at %{date}'
+      rows:
+      - Article
+      - Amount
+      - Price
+      - Unit Quantity
+      - Unit
+      - Sum
+      sum: 'Sum'
+    order_fax:
+      filename: 'Order %{name}-%{date} - Fax'
+      rows:
+      - Order Number
+      - Amount
+      - Name
+      - Barrel
+      - Unit
+      - Price/Unit
+    order_matrix:
+      filename: 'Order %{name}-%{date} - sorting matrix'
+      title: 'Order sorting matrix: %{name}, closed at %{date}'
+      heading: 'Article overview'
+      total: '%{count} articles in total'
+      rows:
+      - Article
+      - Unit
+      - Barrel
+      - FC-Price
+      - Amount
