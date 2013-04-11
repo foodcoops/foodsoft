@@ -49,6 +49,7 @@ en:
         contact_address: 'Address'
         ignore_apple_restriction: 'Ignore order stop by apple points restriction'
       task:
+        name: 'Name'
         duration: 'Duration'
         user_list: 'Responsible user'
         required_users: 'People required'
@@ -88,9 +89,13 @@ en:
         unit: 'Unit'
         note: 'Note'
         article_category: 'Category'
+      article_category:
+        name: 'Name'
+        description: 'Description'
       stock_article:
         supplier: 'Supplier'
       delivery:
+        supplier: 'Lieferantin'
         delivered_on: 'Delivery date'
       user:
         nick: 'Username'
