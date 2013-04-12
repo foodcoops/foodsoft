@@ -91,26 +91,27 @@ de:
       submit: 'Speichere neue Artikel für %{supplier}'
 
     # used by controller
-    update_all:
-      notice: 'Alle Artikel und Preise wurden aktualisiert'
+    controller:
+      update_all:
+        notice: 'Alle Artikel und Preise wurden aktualisiert'
+      update_sel:
+        notice_destroy: 'Alle gewählten Artikel wurden gelöscht'
+        notice_unavail: 'Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt'
+        notice_avail: 'Alle gewählten Artikel wurden auf "verfügbar" gesetzt'
+        notice_noaction: 'Keine Aktion ausgewählt!'
+      parse_upload:
+        notice: '%{count} Artikel sind erfolgreich analysiert.'
+      create_from_upload:
+        notice: 'Es wurden %{count} neue Artikel gespeichert.'
+      sync:
+        shared_alert: '%{supplier} ist nicht mit einer externen Datenbank verknüpft.'
+        notice: 'Der Katalog ist aktuell'
+      update_sync:
+        notice: 'Alle Artikel und Preise wurden aktualisiert'
       error_invalid: 'Artikel sind fehlerhaft. Bitte überprüfe Deine Eingaben.'
-    update_selected:
-      notice_destroy: 'Alle gewählten Artikel wurden gelöscht'
-      notice_unavail: 'Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt'
-      notice_avail: 'Alle gewählten Artikel wurden auf "verfügbar" gesetzt'
-      notice_noaction: 'Keine Aktion ausgewählt!'
       error_nosel: 'Du hast keine Artikel ausgewählt'
-    parse_upload:
-      notice: '%{count} Artikel sind erfolgreich analysiert.'
-      error_parse: '%{msg} ... in Zeile %{line}'
-    create_from_upload:
-      notice: 'Es wurden %{count} neue Artikel gespeichert.'
       error_invalid: 'Artikel sind fehlerhaft'
-    sync:
-      shared_alert: '%{supplier} ist nicht mit einer externen Datenbank verknüpft.'
-      notice: 'Der Katalog ist aktuell'
-    update_synchronized:
-      notice: 'Alle Artikel und Preise wurden aktualisiert'
+      error_parse: '%{msg} ... in Zeile %{line}'
       error_update: "Es trat ein Fehler beim Aktualisieren des Artikels '%{article}' auf: %{msg}"
 
     # used by model
