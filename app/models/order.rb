@@ -158,7 +158,7 @@ class Order < ActiveRecord::Base
             goa.save_results!
             # Delete no longer required order-history (group_order_article_quantities) and
             # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
-            goa.group_order_article_quantities.clear
+            #goa.group_order_article_quantities.clear
           end
         end
 

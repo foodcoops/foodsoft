@@ -94,7 +94,6 @@ de:
     update_all:
       notice: 'Alle Artikel und Preise wurden aktualisiert'
       error_invalid: 'Artikel sind fehlerhaft. Bitte überprüfe Deine Eingaben.'
-      error_update: "Es trat ein Fehler beim Aktualisieren des Artikels '%{article}' auf: %{msg}"
     update_selected:
       notice_destroy: 'Alle gewählten Artikel wurden gelöscht'
       notice_unavail: 'Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt'
@@ -110,6 +109,9 @@ de:
     sync:
       shared_alert: '%{supplier} ist nicht mit einer externen Datenbank verknüpft.'
       notice: 'Der Katalog ist aktuell'
+    update_synchronized:
+      notice: 'Alle Artikel und Preise wurden aktualisiert'
+      error_update: "Es trat ein Fehler beim Aktualisieren des Artikels '%{article}' auf: %{msg}"
 
     # used by model
     model:

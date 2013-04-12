@@ -1,6 +1,6 @@
 - title 'Artikel mit externer Datenbank synchronisieren'
 
-= form_tag update_all_supplier_articles_path(@supplier, :sync => "1") do
+= form_tag update_synchronized_supplier_articles_path(@supplier) do
   %h2= t '.outlist.title'
   %p
   - unless @outlisted_articles.empty?
@@ -10,6 +10,9 @@
         %li
           = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
           = article.name
+          - if article.in_open_order
+            .alert
+              Achtung, #{article.name} wird gerade in einer laufenden Bestellung verwendet. Bitte erst Bestellung anpassen.
   - else
     %i= t '.outlist.body_skip'
   %hr/
