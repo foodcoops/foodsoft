@@ -7,7 +7,7 @@ en:
     base:
       index:
         title: 'Administration'
-        first_paragraph: 'Here you can administrate the groups and users of Foodsoft.'
+        first_paragraph: 'Here you can administer Foodsoft groups and users.'
         newest_users: 'newest users'
         username: 'username'
         name: 'name'
@@ -28,7 +28,7 @@ en:
         new_ordergroup: 'Add new ordergroup'
         first_paragraph: 'Here you can add a %{url}, administer a group or delete it.'
         new_ordergroups: 'new ordergroups'
-        second_paragraph: "Consider the <em>difference between group and ordergroup</em>: A ordergroup has an account and can order food. In a <em>%{url}</em> (for example 'sorting group') the members coordinate each other via tasks and messages. Users can always just be part of one ordergroup, but any multitude of other groups."
+        second_paragraph: "Consider the <em>difference between group and ordergroup</em>: An ordergroup has an account and can order food. In a <em>%{url}</em> (for example 'sorting group') the members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple other groups."
         workgroup: 'workgroup'
       edit:
         title: 'Edit ordergroup'
@@ -79,7 +79,7 @@ en:
         new_workgroup: 'Create new workgroup'
         first_paragraph: 'Here you can create %{url}, edit and delete them.'
         new_workgroups: 'new workgroups'
-        second_paragraph: "Be aware of the <em>difference between a group and ordergroup</em>: A %{url} has an account and can order food. In a workgroup (for example 'sorting group') the members coordinate each other via tasks and messages. Users can always just be part of one ordergroup, but a multitude of other groups."
+        second_paragraph: "Be aware of the <em>difference between a group and ordergroup</em>: A %{url} has an account and can order food. In a workgroup (for example 'sorting group') the members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple other groups."
         ordergroup: 'ordergroup'
       edit:
         title: 'Edit workgroup'
