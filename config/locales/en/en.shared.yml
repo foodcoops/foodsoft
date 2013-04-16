@@ -43,7 +43,7 @@ en:
         desc: 'Found a bug? Suggestions? Review?'
     open_orders:
       title: 'Current orders'
-      not_enough_apples: 'Attention your order group has too little apple points to place an order!'
+      not_enough_apples: 'Attention your order group has too few apple points to place an order!'
       supplier: 'Supplier'
       ending: 'Ending'
       who_ordered: 'Who ordered?'
@@ -59,7 +59,7 @@ en:
         no_members: '%{group} has no members.'
       members:
         title: 'Members of %{group}'
-        desc: 'Here you can manage members of the group or invite a new Foodcoop-member into the group %{link}.'
+        desc: 'Here you can manage members of the group or invite a new Foodcoop-member to the group %{link}.'
         invite: 'invite'
         already_members: 'Are already members'
         no_members_yet: 'Are not members yet'
