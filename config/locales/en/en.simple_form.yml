@@ -95,7 +95,7 @@ en:
       stock_article:
         supplier: 'Supplier'
       delivery:
-        supplier: 'Lieferantin'
+        supplier: 'Supplier'
         delivered_on: 'Delivery date'
       user:
         nick: 'Username'
@@ -108,7 +108,7 @@ en:
           one: 'Workgroup'
           other: 'Workgroups'
       order_comment:
-        text: Comment to this order ...
+        text: Add comment to this order ...
       order:
         starts: 'Starts at'
         ends: 'Ends at'
