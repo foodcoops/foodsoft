@@ -7,7 +7,7 @@ en:
       unit_quantity_short: 'Quantity'
       unit_quantity_desc: 'Unit quantity'
       price_netto: 'Price'
-      option_select: 'Chose special offer ...'
+      option_select: 'Choose special offer ...'
       option_delete: 'Delete article'
       confirm_delete: 'Do you really want to delete all selected articles?'
       option_not_available: 'Articles are not available anymore'
@@ -72,7 +72,7 @@ en:
       title: '%{supplier} / upload articles'
       body:
         <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p>
-        <p>The fields have to be separated with semicolons (';') and the text with double quotation marks ("text...").</p>
+        <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p>
         <p>As character set UTF-8 is demanded. Correct order of the column:</p>
       fields:
         status: 'Status (x=skip)'
@@ -84,7 +84,7 @@ en:
       title: '%{supplier} / upload article'
       body:
         <p><i>Please check the imported articles.</i></p>
-        <p><i>Attention, at the moment there is no revision on dubble articles.</i></p>
+        <p><i>Note: at the moment there is no check for duplicate articles.</i></p>
       submit: 'Save new articles for %{supplier}'
 
     # used by controller
