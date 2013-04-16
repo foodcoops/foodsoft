@@ -30,7 +30,7 @@ en:
         summary: 'Summary'
         invoice: 'Invoice'
         notes_and_journal: 'Notes/Protocol'
-        comment_on_transaction: 'Here you can put a comment with your accounting'
+        comment_on_transaction: 'Here you can add a comment with your accounting'
         edit_note: 'Edit note'
         comments: 'Comments'
         create_invoice: 'Create invoice'
@@ -122,7 +122,7 @@ en:
         save: "Save transaction"
       new:
         title: "New transaction"
-        paragraph: 'Here you can credit/distract the order group <b>%{name}</b> money.'
+        paragraph: 'Here you can credit/deduct the order group <b>%{name}</b> money.'
     group_order_articles:
       form:
         amount_change_for: 'Change amount for %{article}'
