@@ -38,7 +38,7 @@ en:
     - Jul
     - Aug
     - Sep
-    - Okt
+    - Oct
     - Nov
     - Dec
     day_names:
@@ -64,7 +64,7 @@ en:
     - July
     - August
     - September
-    - Oktober
+    - October
     - November
     - December
     order:
@@ -146,7 +146,7 @@ en:
       body: ! 'Please check the following fields:'
       header:
         one: ! 'Could not save %{model}: an error.'
-        other: ! 'could not save %{model}: %{count} errors.'
+        other: ! 'Could not save %{model}: %{count} errors.'
   number:
     currency:
       format:
