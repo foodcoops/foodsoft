@@ -5,5 +5,5 @@ en:
     new:
       title: 'Give feedback'
       first_paragraph: 'Found a bug? Suggestions? Ideas? Reviews? We are happy to hear any feedback.'
-      second_paragraph: 'Please be aware that the Foodsoft Team is just responsible for the management of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.'
+      second_paragraph: 'Please be aware that the Foodsoft Team is only responsible for the maintenance of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.'
       send: 'Send'
