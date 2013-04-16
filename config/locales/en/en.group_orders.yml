@@ -55,7 +55,7 @@ en:
       sum: 'Sum'
     show:
       <<: *orders
-      title: 'Your orderresult for %{order}'
+      title: 'Your order result for %{order}'
       note: 'Note'
       order_sum: 'Order sum'
       not_ordered: 'You didn’t order'
@@ -92,6 +92,6 @@ en:
     update:
       <<: *create
     errors:
-      no_member: 'You are not a member of a order group.'
+      no_member: 'You are not a member of an order group.'
       closed: 'This order is already closed.'
       notfound: 'Incorrect URL, this is not your order.'
