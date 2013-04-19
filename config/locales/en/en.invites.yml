@@ -6,7 +6,7 @@ en:
       back: 'or go back'
     modal_form:
       title: 'Invite person'
-      body:
+      body: >
         <p>Here you can invite a person to a group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
         <p>After being added for the first time, the person is automatically a member of this group.</p>
 

@@ -13,7 +13,7 @@ en:
     users:
       index:
         title: 'Users'
-        body:
+        body: >
           <p>Here you can write a message to the members of your Foodcoop.</p>
           <p>You have to approve in your %{profile_link} that your contact details are visible.</p>
         profile_link: 'options'
@@ -22,7 +22,7 @@ en:
     workgroups:
       index:
         title: 'Working groups'
-        body:
+        body: >
           <p>Editing a group is only available to members of the group.<br/>
           If you want to join a group, please send the members a message. </p>
       edit:

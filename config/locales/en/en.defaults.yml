@@ -7,7 +7,7 @@ en:
 
   group_orders:
     messages:
-      not_enough_apples:
+      not_enough_apples: >
         You need at least %{stop_ordering_under} apples to order.
         Currently your order group has only %{apples} apples.
   views:

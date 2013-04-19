@@ -2,7 +2,7 @@ en:
   login:
     accept_invitation:
       title: 'Invitation to %{name}'
-      body:
+      body: >
         <p>You are invited to be part of the foodcoop %{foodcoop} as
         a member of the group <b>%{group}</b>.</p>
         <p>If you want to participate, please fill in this form.</p>
@@ -13,14 +13,14 @@ en:
       submit: 'Create a Foodsoft account'
     forgot_password:
       title: 'Forgot password?'
-      body:
+      body: >
         <p>No Problem, you can choose a new password.</p>
         <p>Please fill in the email address with which you are registered here.
         Then you will receive an email with further instructions.</p>
       submit: 'Request new password'
     new_password:
       title: 'New password'
-      body:
+      body: >
         <p>Please fill in the new password for <b>%{user}</b></p>
       submit: 'Save new password'
 

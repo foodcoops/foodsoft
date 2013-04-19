@@ -62,7 +62,7 @@ de:
       update:
         title: 'Aktualisieren ...'
         update_msg: 'Artikel müssen aktualisiert werden:'
-        body:
+        body: >
           <p><i>Jeder Artikel wird doppelt angezeigt. Die alten Werte sind grau und die
           Textfelder sind mit den aktuellen Werten vorausgefüllt.</i></p>
           <p><i>Abweichungen zu den alten Artikeln sind gelb markiert.</i></p>
@@ -71,7 +71,7 @@ de:
       submit: 'Alle löschen/aktualisieren'
     upload:
       title: '%{supplier} / Artikel hochladen'
-      body:
+      body: >
         <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile
         wird beim Einlesen ignoriert.</p>
         <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten
@@ -85,7 +85,7 @@ de:
       submit: 'Datei hochladen'
     parse_upload:
       title: '%{supplier} / Artikel hochladen'
-      body:
+      body: >
         <p><i>Bitte überprufe die engelesenen Artikel.</i></p>
         <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
       submit: 'Speichere neue Artikel für %{supplier}'

@@ -62,7 +62,7 @@ en:
       update:
         title: 'Update ..'
         update_msg: 'Articles must be updated:'
-        body:
+        body: >
           <p><i>Every article is shown twice. The old value is gray and the textfields are pre-filled with the actual value now.</i></p>
           <p><i>Differences with the old articles are marked yellow</i></p>
       unit_quantity_short: 'Unity Quan.'
@@ -70,7 +70,7 @@ en:
       submit: 'Delete/update all'
     upload:
       title: '%{supplier} / upload articles'
-      body:
+      body: >
         <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p>
         <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p>
         <p>As character set UTF-8 is demanded. Correct order of the column:</p>
@@ -82,7 +82,7 @@ en:
       submit: 'Upload file'
     parse_upload:
       title: '%{supplier} / upload article'
-      body:
+      body: >
         <p><i>Please check the imported articles.</i></p>
         <p><i>Note: at the moment there is no check for duplicate articles.</i></p>
       submit: 'Save new articles for %{supplier}'

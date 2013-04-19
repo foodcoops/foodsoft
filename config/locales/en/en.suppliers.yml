@@ -20,7 +20,7 @@ en:
       show_deliveries: 'Show all deliveries'
     shared_suppliers:
       title: 'External lists'
-      body:
+      body: >
         <p>Suppliers of the external database are displayed here.</p>
         <p>You can import external suppliers by subscribing (see below).</p>
         <p>A new supplier will be created and connected to the external database.</p>

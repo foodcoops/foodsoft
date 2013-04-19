@@ -13,7 +13,7 @@ de:
     users:
       index:
         title: 'Mitglieder'
-        body:
+        body: >
           <p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.</p>
           <p>Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>
         profile_link: 'Einstellungen'
@@ -22,7 +22,7 @@ de:
     workgroups:
       index:
         title: 'Arbeitsgruppen'
-        body:
+        body: >
           <p>Das bearbeiten von Gruppen ist nur für Mitglieder der Gruppe möglich.<br/>
           Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.</p>
       edit:
