@@ -83,7 +83,6 @@ en:
         is_subscribed: 'subscribed?'
       article:
         name: 'Name'
-        availability: 'Is article available?'
         origin: 'Origin'
         manufacturer: 'Manufacturer'
         unit: 'Unit'

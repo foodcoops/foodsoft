@@ -237,6 +237,7 @@ de:
       invoice: Rechnung
     attributes:
       article:
+        availability: 'Artikel ist verfügbar?'
         price: Nettopreis
         gross_price: Bruttopreis
         unit: Einheit

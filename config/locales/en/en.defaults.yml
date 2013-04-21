@@ -237,6 +237,7 @@ en:
       invoice: Invoice
     attributes:
       article:
+        availability: 'Is article available?'
         price: price
         gross_price: gross price
         unit: unit

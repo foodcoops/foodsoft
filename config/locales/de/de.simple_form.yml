@@ -83,7 +83,6 @@ de:
         is_subscribed: 'abonniert?'
       article:
         name: 'Name'
-        availability: 'Artikel ist verfügbar?'
         origin: 'Herkunft'
         manufacturer: 'Produzent'
         unit: 'Einheit'
