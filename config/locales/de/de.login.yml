@@ -25,15 +25,15 @@ de:
       submit: 'Neues passwort speichern'
 
     # used by controller
-    reset_password:
-      notice: 'Wenn Deine E-Mail hier registiert ist bekommst Du jetzt eine Nachricht mit einem Passwort-Zurücksetzen-Link.'
-    update_password:
-      notice: 'Dein Passwort wurde aktualisiert. Du kannst Dich jetzt anmelden.'
-    accept_invitation:
-      notice: 'Herzlichen Glückwunsch, Dein Account wurde erstellt. Du kannst Dich nun einloggen.'
-    errors:
-      invite_invalid: 'Deine Einladung ist nicht (mehr) gültig.'
-      group_invalid: 'Die Gruppe, in die Du eingeladen wurdest, existiert leider nicht mehr."'
-      token_invalid: 'Ungültiger oder abgelaufener Token. Bitte versuch es erneut.'
+    controller:
+      reset_password:
+        notice: 'Wenn Deine E-Mail hier registiert ist bekommst Du jetzt eine Nachricht mit einem Passwort-Zurücksetzen-Link.'
+      update_password:
+        notice: 'Dein Passwort wurde aktualisiert. Du kannst Dich jetzt anmelden.'
+      accept_invitation:
+        notice: 'Herzlichen Glückwunsch, Dein Account wurde erstellt. Du kannst Dich nun einloggen.'
+      error_invite_invalid: 'Deine Einladung ist nicht (mehr) gültig.'
+      error_group_invalid: 'Die Gruppe, in die Du eingeladen wurdest, existiert leider nicht mehr.'
+      error_token_invalid: 'Ungültiger oder abgelaufener Token. Bitte versuch es erneut.'
         
 

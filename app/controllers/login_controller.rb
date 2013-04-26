@@ -22,7 +22,7 @@ class LoginController < ApplicationController
         logger.debug("Sent password reset email to #{user.email}.")
       end
     end
-    redirect_to login_url, :notice => I18n.t('login.reset_password.notice')
+    redirect_to login_url, :notice => I18n.t('login.controller.reset_password.notice')
   end
   
   # Set a new password with a token from the password reminder email.
@@ -38,7 +38,7 @@ class LoginController < ApplicationController
       @user.reset_password_token = nil
       @user.reset_password_expires = nil
       @user.save
-      redirect_to login_url, :notice => I18n.t('login.update_password.notice')
+      redirect_to login_url, :notice => I18n.t('login.controller.update_password.notice')
     else
       render :new_password
     end
@@ -48,9 +48,9 @@ class LoginController < ApplicationController
   def accept_invitation
     @invite = Invite.find_by_token(params[:token])
     if @invite.nil? || @invite.expires_at < Time.now
-      redirect_to login_url, alert: I18n.t('login.errors.invite_invalid')
+      redirect_to login_url, alert: I18n.t('login.controller.error_invite_invalid')
     elsif @invite.group.nil?
-      redirect_to login_url, alert: I18n.t('login.errors.group_invalid')
+      redirect_to login_url, alert: I18n.t('login.controller.error_group_invalid')
     elsif request.post?
       User.transaction do
         @user = User.new(params[:user])
@@ -58,7 +58,7 @@ class LoginController < ApplicationController
         if @user.save
           Membership.new(:user => @user, :group => @invite.group).save!
           @invite.destroy
-          redirect_to login_url, notice: I18n.t('login.accept_invitation.notice')
+          redirect_to login_url, notice: I18n.t('login.controller.accept_invitation.notice')
         end
       end
     else
@@ -71,7 +71,7 @@ class LoginController < ApplicationController
   def validate_token
     @user = User.find_by_id_and_reset_password_token(params[:id], params[:token])
     if (@user.nil? || @user.reset_password_expires < Time.now)
-      redirect_to forgot_password_url, alert: I18n.t('login.errors.token_invalid')
+      redirect_to forgot_password_url, alert: I18n.t('login.controller.error_token_invalid')
     end
   end
 end

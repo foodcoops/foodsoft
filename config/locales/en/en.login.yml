@@ -25,13 +25,14 @@ en:
       submit: 'Save new password'
 
     # used by controller
-    reset_password:
-      notice: 'If your email is registered here, you will receive a message with a link to reset your password.'
-    update_password:
-      notice: 'Your password was updated. You can login now.'
-    accept_invitation:
-      notice: 'Congratulations, your account was created. You can login now.'
-    errors:
-      invite_invalid: 'Your invite is not valid (anymore).'
-      group_invalid: 'The group in which you were invited doesn’t exist anymore."'
-      token_invalid: 'Invalid or expired token. Please try again.'
+    controller:
+      reset_password:
+        notice: 'If your email is registered here, you will receive a message with a link to reset your password.'
+      update_password:
+        notice: 'Your password was updated. You can login now.'
+      accept_invitation:
+        notice: 'Congratulations, your account was created. You can login now.'
+      error_invite_invalid: 'Your invite is not valid (anymore).'
+      error_group_invalid: 'The group in which you were invited doesn’t exist anymore.'
+      error_token_invalid: 'Invalid or expired token. Please try again.'
+
