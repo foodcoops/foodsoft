@@ -254,6 +254,25 @@ en:
         amount: amount
         note: note
 
+  # messages in model that don't have a corresponding view
+  model:
+    membership:
+      no_admin_delete: 'Membership can not be withdrawn as you are the last administrator.'
+    order_article:
+      error_price: 'must be specified and have a current price price'
+    page:
+      redirect: 'Redirect to [[%{title}]]...'
+    user:
+      notify:
+        order_finished: 'Inform me about my order result (when the order is closed).'
+        negative_balance: 'inform me when by order group has a negative balance.'
+        upcoming_tasks: 'Remind me of upcoming tasks.'
+        send_as_email: 'Receive messages as emails.'
+        phone_is_public: 'Phone number is visible for other members.'
+        email_is_public: 'Email is visible for other members.'
+        name_is_public: 'Name is visible for other members.'
+      no_ordergroup: 'no order group'
+
   helpers:
     select:
       prompt: please select
@@ -294,4 +313,4 @@ en:
     save: 'Save'
     or_cancel: 'or cancel'
     marks:
-      close: 'x'
+      close: '&times;'
