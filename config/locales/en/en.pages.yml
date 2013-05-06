@@ -1,0 +1,73 @@
+en:
+  pages:
+    title: 'Title'
+    last_updated: 'Last updated'
+    all:
+      title: 'All Wiki pages'
+      new_page: 'Create new page'
+      recent_changes: 'Recent changes'
+      title_list: 'List of pages'
+      site_map: 'Sitemap'
+      search:
+        placeholder: 'Page title ..'
+        action: 'Search'
+    body:
+      title_toc: 'Content'
+    edit:
+      title: 'Edit page'
+    form:
+      preview: 'Preview'
+      help:
+        title: 'Quick formatting help'
+        section_character: 'Character formatting'
+        italic: 'italic'
+        bold: 'bold'
+        noformat: 'No wiki-formatting'
+        text: 'text'
+        section_block: 'Block formatting'
+        headings: 'Heading'
+        heading: 'level %{level}'
+        unordered_list: 'Item list'
+        list_item_1: 'First list item'
+        list_item_2: 'Secound list item'
+        ordered_list: 'Numbered list'
+        section_link: 'Link formatting'
+        wiki_links: 'Wiki-links'
+        wiki_link_ex: 'Foodsoft Wiki Page'
+        external_links: 'External links'
+        external_link_ex: 'External page'
+        section_table: 'Table formatting'
+        see_tables: 'see %{tables_link}'
+        tables_link: 'Tables'
+    new:
+      title: 'Create new wiki page'
+    page_list_item:
+      date_format: '%a, %d %B %Y %H:%M:%S'
+    show:
+      edit: 'Edit page'
+      versions: 'Versions (%{count})'
+      subpages: 'subpages'
+      title_versions: 'Versions'
+      date_format: '%d-%m-%y %H:%M'
+      delete: 'Delete page'
+      delete_confirm: 'Warning: all subpages will be deleted as well. Are you sure?'
+      last_updated: 'Last updated by <b>%{user}</b> on %{when}'
+    version:
+      title: '%{title} - version %{version}'
+      title_version: 'Version'
+      date_format: '%a, %d-%m-%Y, %H:%M'
+      author: 'Author: %{user}'
+      view_current: 'See current version'
+      revert: 'Revert to this version'
+
+    # used by controller
+    cshow:
+      error_noexist: 'Page doesn’t exist!'
+      redirect_notice: 'Redirected from %{page} ..'
+    create:
+      notice: 'Page was created'
+    update:
+      notice: 'Page was updated'
+    destroy:
+      notice: "The page '%{page}' and all subpages have been deleted successfully."
+    error_stale_object: 'Warning, the page has just been edited by someone else. Please try again.'

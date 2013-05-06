@@ -1,0 +1,42 @@
+en:
+  deliveries:
+    suppliers_overview: 'Supplier overview'
+    invoice_amount: 'Invoice amount'
+    invoice_net_amount: 'Invoice net amount'
+    edit:
+      title: 'Edit suppliers'
+    form:
+      remove_article: 'Remove article from delivery'
+      add_article: 'Add stock article to delivery'
+      note_new_article: 'When an article is not yet in the inventory, you have to %{new_link} it first.'
+      note_new_article_link: 'create'
+      new_article:
+        title: 'Create new stock article'
+        search: 'Search for articles in the <i>%{supplier}</i> catalogue'
+    index:
+      title: '%{supplier}/deliveries'
+      confirm_delete: 'Are you sure?'
+      new_delivery: 'Create new delivery for %{supplier} '
+    new:
+      title: 'New delivery from %{supplier}'
+    show:
+      title: 'Show delivery'
+      title_articles: 'Article'
+      article: 'Article'
+      unit: 'Unit'
+      amount: 'Amount'
+      price: 'Netprice'
+      sum: 'Sum'
+      sum_net: 'Net sum'
+      sum_gross: 'Gross sum'
+      sum_diff: 'Gross - adjusted invoice ammount'
+    stock_change:
+      remove_article: 'Remove articles from delivery'
+
+    # used by controller
+    create:
+      notice: 'Delivery was created. Please don’t forget to create invoice!'
+    update:
+      notice: 'Delivery was updated.'
+    destroy:
+      notice: 'Delivery was deleted.'
