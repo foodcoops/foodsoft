@@ -2,6 +2,7 @@ en:
   mailer:
     dateformat: '%d %b'
     feedback:
+      subject: 'Feedback from %{email}'
       header: '%{user} wrote at %{date}:'
     foodsoft_message:
       footer: |
@@ -9,6 +10,7 @@ en:
        See message online: %{msg_url}
        Messaging options: %{profile_url}
     invite:
+      subject: 'Invitation to the Foodcoop'
       text: |
         Hi!
         
@@ -18,6 +20,7 @@ en:
         
         Greetings, your Foodsoft Team!
     negative_balance:
+      subject: 'Negative account balance'
       text: |
         Dear %{group},
 
@@ -29,6 +32,7 @@ en:
 
         Kind regards from %{foodcoop}.
     not_enough_users_assigned:
+      subject: '"%{task}" still needs people!'
       text: |
         Dear %{user},
 
@@ -54,6 +58,7 @@ en:
 
         Kind regards from %{foodcoop}.
     reset_password:
+      subject: 'New password for %{username}'
       text: |
         Hi %{user},
 
@@ -64,6 +69,7 @@ en:
         
         Greetings, your Foodsoft Team!
     upcoming_tasks:
+      subject: 'Tasks are due!'
       text0: |
         Dear %{user},
 

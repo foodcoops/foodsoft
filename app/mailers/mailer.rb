@@ -26,7 +26,7 @@ class Mailer < ActionMailer::Base
     @link = new_password_url(id: @user.id, token: @user.reset_password_token)
 
     mail :to => @user.email,
-         :subject => "[#{FoodsoftConfig[:name]}] Neues Passwort für/ New password for #{@user.nick}"
+         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.reset_password.subject', :username => @user.nick)
   end
     
   # Sends an invite email.
@@ -36,7 +36,7 @@ class Mailer < ActionMailer::Base
     @link = accept_invitation_url(token: @invite.token)
 
     mail :to => @invite.email,
-         :subject => "Einladung in die Foodcoop #{FoodsoftConfig[:name]} - Invitation to the Foodcoop"
+         :subject => I18n.t('mailer.invite.subject')
   end
 
   # Notify user of upcoming task.
@@ -46,7 +46,7 @@ class Mailer < ActionMailer::Base
     @task = task
 
     mail :to => user.email,
-         :subject =>  "[#{FoodsoftConfig[:name]}] Aufgaben werden fällig!"
+         :subject =>  "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.upcoming_tasks.subject')
   end
 
   # Sends order result for specific Ordergroup
@@ -56,7 +56,7 @@ class Mailer < ActionMailer::Base
     @group_order  = group_order
 
     mail :to => user.email,
-         :subject => "[#{FoodsoftConfig[:name]}] Bestellung beendet: #{group_order.order.name}"
+         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.order_result.subject', :name => group_order.order.name)
   end
 
   # Notify user if account balance is less than zero
@@ -66,7 +66,7 @@ class Mailer < ActionMailer::Base
     @transaction  = transaction
 
     mail :to => user.email,
-         :subject => "[#{FoodsoftConfig[:name]}] Gruppenkonto im Minus"
+         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.negative_balance')
   end
 
   def feedback(user, feedback)
@@ -78,7 +78,7 @@ class Mailer < ActionMailer::Base
          :from => "#{user.nick} <#{user.email}>",
          :sender => FoodsoftConfig[:notification]["sender_address"],
          :errors_to => FoodsoftConfig[:notification]["sender_address"],
-         :subject => "[Foodsoft] Feeback von #{user.email}"
+         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.feedback.subject', :email => user.email)
   end
 
   def not_enough_users_assigned(task, user)
@@ -87,7 +87,7 @@ class Mailer < ActionMailer::Base
     @user = user
 
     mail :to => user.email,
-         :subject => "[#{FoodsoftConfig[:name]}] \"#{task.name}\" braucht noch Leute!"
+         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.not_enough_users_assigned.subject', :task => task.name)
   end
 
   private
