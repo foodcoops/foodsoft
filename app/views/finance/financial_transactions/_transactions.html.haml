@@ -7,7 +7,7 @@
       %td= sort_link_helper t('.date'), "date"
       %td= t('.who')
       %td= sort_link_helper t('.note'), "note"
-      %td= sort_link_helper t('amount'), "amount"
+      %td= sort_link_helper t('.amount'), "amount"
   %tbody
     - @financial_transactions.each do |t|
       %tr
