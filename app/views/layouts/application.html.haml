@@ -1,5 +1,6 @@
 = render layout: 'layouts/header' do
   %ul.nav.nav-pills.pull-left
+    %li= link_to t('.dashboard'), root_path(anchor: '')
     %li.dropdown
       %a.dropdown-toggle(data-toggle="dropdown" href="#")
         = current_user.name
