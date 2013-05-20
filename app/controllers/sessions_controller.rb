@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       else
         redirect_to_url = root_url
       end
-      redirect_to redirect_to_url, :notice => I18n.t('sessions.logged_in')
+      redirect_to redirect_to_url
     else
       flash.now.alert = I18n.t('sessions.login_invalid')
       render "new"
@@ -26,6 +26,10 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_url, :notice => I18n.t('sessions.logged_out')
+    if defined? FoodsoftConfig[:homepage]
+      redirect_to FoodsoftConfig[:homepage]
+    else
+      redirect_to login_url, :notice => I18n.t('sessions.logged_out')
+    end
   end
 end
