@@ -304,6 +304,10 @@ de:
     tasks:
       required_users: 'Es fehlen %{count} Mitstreiterinnen!'
 
+  lib:
+    order_pdf:
+      page: 'Seite %{number}'
+
   # general user-interface
   ui:
     close: 'Schließen'

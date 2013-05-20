@@ -17,7 +17,7 @@ class OrderPdf < Prawn::Document
     # Define header
     repeat :all, dynamic: true do
       draw_text title, size: 10, style: :bold, at: [bounds.left, bounds.top+20] if title # Header
-      draw_text "Seite #{page_number}", size: 8, at: [bounds.left, bounds.bottom-10] # Footer
+      draw_text I18n.t('lib.order_pdf.page', :number => page_number), size: 8, at: [bounds.left, bounds.bottom-10] # Footer
     end
 
     body  # Add content, which is defined in subclasses

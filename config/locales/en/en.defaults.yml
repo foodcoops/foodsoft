@@ -304,6 +304,10 @@ en:
     tasks:
       required_users: '%{count} members are still needed!'
 
+  lib:
+    order_pdf:
+      page: 'Page %{number}'
+
   # general user-interface
   ui:
     close: 'Close'
