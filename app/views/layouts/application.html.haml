@@ -9,11 +9,23 @@
         %li= link_to t('.profile'), my_profile_path
         -#%li= link_to t('.ordergroup'), my_ordergroup_path
   %ul.nav.nav-pills.pull-right
+    %li= link_to 'Admin', orders_path if @current_user.role_admin? or @current_user.role_finance? or @current_user.role_article_meta? or @current_user.role_suppliers? or @current_user.role_orders?
     %li= link_to t('.logout'), logout_path
   .logo
-    -#= t('layouts.logo').html_safe
     = FoodsoftConfig[:name]
   .clearfix
+
+  -# XXX only show dashboard on non-admin items
+  - unless ['home', 'group_orders', 'invites'].include?(controller.controller_name)
+    .navbar
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .nav-collapse.collapse
+            = render_navigation expand_all: true, renderer: :bootstrap
 
   .container-fluid
     .row-fluid
