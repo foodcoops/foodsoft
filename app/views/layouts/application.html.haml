@@ -1,30 +1,18 @@
 = render layout: 'layouts/header' do
-  .logo
-    = t('layouts.logo').html_safe
-  %ul.nav.nav-pills.pull-right
+  %ul.nav.nav-pills.pull-left
     %li.dropdown
       %a.dropdown-toggle(data-toggle="dropdown" href="#")
-        = current_user.nick
+        = current_user.name
         %b.caret
       %ul.dropdown-menu
         %li= link_to t('.profile'), my_profile_path
-        %li= link_to t('.ordergroup'), my_ordergroup_path
-        %li= link_to t('.logout'), logout_path
-    %li{class: ('disabled' if FoodsoftConfig.config[:homepage].blank?)}
-      = link_to FoodsoftConfig.config[:name], FoodsoftConfig.config[:homepage]
-    %li= link_to t('.help'), FoodsoftConfig.config[:help_url]
-    %li= link_to t('.feedback.title'), new_feedback_path, title: t('.feedback.desc')
+        -#%li= link_to t('.ordergroup'), my_ordergroup_path
+  %ul.nav.nav-pills.pull-right
+    %li= link_to t('.logout'), logout_path
+  .logo
+    -#= t('layouts.logo').html_safe
+    = FoodsoftConfig[:name]
   .clearfix
-
-  .navbar
-    .navbar-inner
-      .container
-        %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        .nav-collapse.collapse
-          = render_navigation expand_all: true, renderer: :bootstrap
 
   .container-fluid
     .row-fluid
