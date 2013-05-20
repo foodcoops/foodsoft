@@ -5,7 +5,7 @@
 = f.input :phone
 = f.input :password, :required => f.object.new_record?
 = f.input :password_confirmation
-.control-group
+-#.control-group
   .controls
     - for setting in User::setting_keys.keys
       %label.checkbox{:for => "user[setting_attributes][#{setting}]"}
