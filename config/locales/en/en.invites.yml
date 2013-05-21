@@ -1,0 +1,18 @@
+en:
+  invites:
+    new:
+      body: <p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
+      action: 'Send invite'
+      back: 'or go back'
+    modal_form:
+      title: 'Invite person'
+      body: >
+        <p>Here you can invite a person to a group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
+        <p>After being added for the first time, the person is automatically a member of this group.</p>
+
+    # used by controller
+    success: 'User was invited successfully.'
+
+    # used by model
+    errors:
+      already_member: 'is already in use. Person is already a member of this Foodcoop.'

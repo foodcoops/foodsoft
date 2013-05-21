@@ -1,0 +1,34 @@
+de:
+  stock_takings:
+    edit:
+      title: 'Inventur bearbeiten'
+    index:
+      title: 'Inventurübersicht'
+      new_inventory: 'Neue Inventur anlegen'
+    new:
+      title: 'Neue Inventur anlegen'
+      text_deviations: 'Bitte trage hier alle gezählten Abweichungen vom %{inv_link} ein. Bei Schwund benutze einfach ein Minus vor der Zahl.'
+      temp_inventory: 'vorläufigen Lagerbestand'
+      text_need_articles: 'Einen neuen Lagerartikel musst Du vorher %{create_link} bevor Du Ihn hier verwenden kannst.'
+      create: 'anlegen'
+      stock_articles: 'Lagerartikel'
+    show:
+      title: 'Inventur anzeigen'
+      date: 'Datum'
+      note: 'Notiz'
+      article: 'Artikel'
+      supplier: 'Lieferantin'
+      unit: 'Einheit'
+      amount: 'Menge'
+      overview: 'Inventurübersicht'
+      confirm_delete: 'Willst Du wirklicht die Inventur löschen?'
+    stock_takings:
+      date: 'Datum'
+      note: 'Notiz'
+      confirm_delete: 'Bist Du sicher?'
+
+    # used by controller
+    create:
+      notice: 'Inventur wurde erfolgreich angelegt.'
+    update:
+      notice: 'Inventur wurde aktualisiert.'

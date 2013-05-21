@@ -1,0 +1,9 @@
+en:
+  feedback:
+    create:
+      notice: 'Your feedback was sent successfully. Thanks a lot!'
+    new:
+      title: 'Give feedback'
+      first_paragraph: 'Found a bug? Suggestions? Ideas? Reviews? We are happy to hear any feedback.'
+      second_paragraph: 'Please be aware that the Foodsoft Team is only responsible for the maintenance of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.'
+      send: 'Send'

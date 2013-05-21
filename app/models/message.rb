@@ -2,11 +2,11 @@ class Message < ActiveRecord::Base
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
 
   serialize :recipients_ids, Array
-  attr_accessor :sent_to_all, :group_id, :recipients_nicks
+  attr_accessor :sent_to_all, :group_id, :recipient_tokens, :reply_to
   
-  named_scope :pending, :conditions => { :email_state => 0 }
-  named_scope :sent, :conditions => { :email_state => 1 }
-  named_scope :public, :conditions => {:private => false}
+  scope :pending, where(:email_state => 0)
+  scope :sent, where(:email_state => 1)
+  scope :public, where(:private => false)
 
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {
@@ -19,9 +19,13 @@ class Message < ActiveRecord::Base
   validates_length_of :subject, :in => 1..255
   validates_inclusion_of :email_state, :in => EMAIL_STATE.values
 
+  before_validation :clean_up_recipient_ids, :on => :create
 
-  # clean up the recipients_ids
-  def before_validation_on_create
+  def self.deliver(message_id)
+    find(message_id).deliver
+  end
+
+  def clean_up_recipient_ids
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
     self.recipients_ids = User.all.collect(&:id) if sent_to_all == "1"
   end
@@ -36,64 +40,53 @@ class Message < ActiveRecord::Base
     add_recipients Group.find(group_id).users unless group_id.blank?
   end
 
-  def recipients_nicks=(nicks)
-    @recipients_nicks = nicks
-    add_recipients nicks.split(",").collect { |nick| User.find_by_nick(nick) }
+  def recipient_tokens=(ids)
+    @recipient_tokens = ids
+    add_recipients ids.split(",").collect { |id| User.find(id) }
   end
 
-  def recipient=(user)
-    @recipients_nicks = user.nick
+  def reply_to=(message_id)
+    @reply_to = Message.find(message_id)
+    add_recipients([@reply_to.sender])
+    self.subject = I18n.t('messages.model.reply_subject', :subject => @reply_to.subject)
+    self.body = I18n.t('messages.model.reply_header', :user => @reply_to.sender.nick, :when => I18n.l(@reply_to.created_at, :format => :short)) + "\n"
+    @reply_to.body.each_line{ |l| self.body += I18n.t('messages.model.reply_indent', :line => l) }
   end
-  
+
+  def mail_to=(user_id)
+    user = User.find(user_id)
+    add_recipients([user])
+  end
+
   # Returns true if this message is a system message, i.e. was sent automatically by the FoodSoft itself.
   def system_message?    
     self.sender_id.nil?
   end
 
   def sender_name
-    system_message? ? 'Foodsoft' : sender.nick rescue "??"
+    system_message? ? I18n.t('layouts.foodsoft') : sender.nick rescue "??"
   end
 
   def recipients
     User.find(recipients_ids)
-  rescue ActiveRecord::RecordNotFound => error
-    logger.warn "#{Foodsoft.env}: #{error.message}"
-    User.find(recipients_ids.select { |id| User.exists?(id) }.uniq)
   end
   
-  # Sends all pending messages that are to be send as emails.
-  def self.send_emails
-    messages = Message.pending
-    # Set all messages not pending, to avoid sending mails twice with different background processes
-    messages.each { |m| m.update_attribute(:email_state, 2) }
-
-    for message in messages
-      for recipient in message.recipients
-        if recipient.settings['messages.sendAsEmail'] == "1" && !recipient.email.blank?
-          begin
-            Mailer.deliver_message(message, recipient)
-          rescue
-            logger.warn "Deliver failed for #{recipient.nick}: #{recipient.email}"
-          end
+  def deliver
+    for user in recipients
+      if user.receive_email?
+        begin
+          Mailer.foodsoft_message(self, user).deliver
+        rescue
+          Rails.logger.warn "Deliver failed for #{user.nick}: #{user.email}"
         end
       end
-      message.update_attribute(:email_state, 1) # Set email state to 'sent'
     end
+    update_attribute(:email_state, 1)
+  end
+
+  def is_readable_for?(user)
+    !private || sender == user || recipients_ids.include?(user.id)
   end
 end
 
-
-# == Schema Information
-#
-# Table name: messages
-#
-#  id             :integer(4)      not null, primary key
-#  sender_id      :integer(4)
-#  recipients_ids :text
-#  subject        :string(255)     not null
-#  body           :text
-#  email_state    :integer(4)      default(0), not null
-#  private        :boolean(1)      default(FALSE)
-#  created_at     :datetime
-#
 

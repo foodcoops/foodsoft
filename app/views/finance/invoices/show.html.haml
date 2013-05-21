@@ -1,34 +1,34 @@
-- title "Rechnung #{@invoice.number}"
+- title t('.title', number: @invoice.number)
 
 %p
-  %b Lieferantin:
-  =h @invoice.supplier.name
+  %b= t 'simple_form.labels.invoice.supplier'
+  = @invoice.supplier.name
 - if @invoice.delivery
   %p
-    %b Lieferung:
-    ="Diese Rechnung ist mit einer #{link_to "Lieferung", [@invoice.supplier,@invoice.delivery]} verknüpft."
+    %b= t('simple_form.labels.invoice.delivery') + ':'
+    = t('.linked', what_link: link_to(t('.delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
 %p
-  %b Rechnungsnummer:
-  =h @invoice.number
+  %b= t('simple_form.labels.invoice.number') + ':'
+  = @invoice.number
 %p
-  %b Datum:
-  =h @invoice.date
+  %b= t('simple_form.labels.invoice.date') + ':'
+  = @invoice.date
 %p
-  %b Bezahlt am:
-  =h @invoice.paid_on
+  %b= t('simple_form.labels.invoice.paid_on') + ':'
+  = @invoice.paid_on
 %p
-  %b Rechnungsbetrag:
-  =h @invoice.amount
+  %b= t('simple_form.labels.invoice.amount') + ':'
+  = number_to_currency @invoice.amount
 %p
-  %b Pfand berechnet:
-  =h @invoice.deposit
+  %b= t('simple_form.labels.invoice.deposit') + ':'
+  = number_to_currency @invoice.deposit
 %p
-  %b Pfand gutgeschrieben:
-  =h @invoice.deposit_credit
+  %b= t('simple_form.labels.invoice.deposit_credit') + ':'
+  = number_to_currency @invoice.deposit_credit
 %p
-  %b Notiz:
+  %b= t('simple_form.labels.invoice.note') + ':'
   =h @invoice.note
 
-= link_to "Bearbeiten", edit_finance_invoice_path(@invoice)
+= link_to t('ui.edit'), edit_finance_invoice_path(@invoice)
 |
-= link_to "Zurück", finance_invoices_path
+= link_to t('.back'), finance_invoices_path

@@ -1,13 +1,10 @@
-<h1>Mitglieder von <%=h @group.name %></h1>
+<h1><%=h t('.title', group: @group.name) %></h1>
 <p>
-    <i>
-      Hier kannst Du die Mitglieder der Gruppe verwalten oder ein neues Foodcoop-Mitglied in die Gruppe
-      <%= remote_link_to('einladen', :url => new_invite_path(:id => @group)) %>.
-    </i>
+    <i><%= t('.desc', link: remote_link_to(t('.invite'), :url => new_invite_path(:id => @group))).html_safe %></i>
 </p>
 <div class="left_column" style="width:48%">
     <div class="box_title">
-        <h2>Sind schon Mitglieder</h2>
+        <h2><%= t('.already_members') %></h2>
     </div>
     <div class="column_content" id="members">
         <%=render :partial => 'shared/memberships/current_members' %>
@@ -15,11 +12,11 @@
 </div>
 <div class="right_column" style="width:48%">
     <div class="box_title">
-        <h2>Sind noch keine Mitglieder</h2>
+        <h2><%= t('.no_members_yet') %></h2>
     </div>
     <div class="column_content" id="non_members">
         <%= render :partial => 'shared/memberships/non_members' %>
-		<%= remote_link_to('Person einladen', :url => new_invite_path(:id => @group)) %>
+		<%= remote_link_to(t('.invite_someone'), :url => new_invite_path(:id => @group)) %>
     </div>
 </div>
 

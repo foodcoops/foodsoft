@@ -8,21 +8,26 @@ class GroupOrderArticle < ActiveRecord::Base
   belongs_to :order_article
   has_many   :group_order_article_quantities, :dependent => :destroy
 
-  validates_presence_of :group_order_id, :order_article_id
+  validates_presence_of :group_order, :order_article
   validates_inclusion_of :quantity, :in => 0..99
   validates_inclusion_of :result, :in => 0..99, :allow_nil => true
   validates_inclusion_of :tolerance, :in => 0..99
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
 
-  attr_accessor :ordergroup_id  # To create an new GroupOrder if neccessary
+  scope :ordered, :conditions => 'result > 0'
 
-  named_scope :ordered, :conditions => 'result > 0'
+  localize_input_of :result
 
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def result=(result)
-    self[:result] = String.delocalized_decimal(result)
+  # Setter used in group_order_article#new
+  # We have to create an group_order, if the ordergroup wasn't involved in the order yet
+  def ordergroup_id=(id)
+    self.group_order = GroupOrder.find_or_initialize_by_order_id_and_ordergroup_id(order_article.order_id, id)
   end
-  
+
+  def ordergroup_id
+    group_order.try(:ordergroup_id)
+  end
+
   # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties 
   # and the associated GroupOrderArticleQuantities chronologically.
   # 
@@ -30,17 +35,17 @@ class GroupOrderArticle < ActiveRecord::Base
   def update_quantities(quantity, tolerance)
     logger.debug("GroupOrderArticle[#{id}].update_quantities(#{quantity}, #{tolerance})")
     logger.debug("Current quantity = #{self.quantity}, tolerance = #{self.tolerance}")
-    
+
     # Get quantities ordered with the newest item first.
     quantities = group_order_article_quantities.find(:all, :order => 'created_on desc')
     logger.debug("GroupOrderArticleQuantity items found: #{quantities.size}")
 
-    if (quantities.size == 0) 
+    if (quantities.size == 0)
       # There is no GroupOrderArticleQuantity item yet, just insert with desired quantities...
       logger.debug("No quantities entry at all, inserting a new one with the desired quantities")
       quantities.push(GroupOrderArticleQuantity.new(:group_order_article => self, :quantity => quantity, :tolerance => tolerance))
-      self.quantity, self.tolerance = quantity, tolerance      
-    else    
+      self.quantity, self.tolerance = quantity, tolerance
+    else
       # Decrease quantity/tolerance if necessary by going through the existing items and decreasing their values...
       i = 0
       while (i < quantities.size && (quantity < self.quantity || tolerance < self.tolerance))
@@ -50,31 +55,31 @@ class GroupOrderArticle < ActiveRecord::Base
           delta = (delta > quantities[i].quantity ? quantities[i].quantity : delta)
           logger.debug("Decreasing quantity by #{delta}")
           quantities[i].quantity -= delta
-          self.quantity -= delta        
+          self.quantity -= delta
         end
         if (tolerance < self.tolerance && quantities[i].tolerance > 0)
           delta = self.tolerance - tolerance
           delta = (delta > quantities[i].tolerance ? quantities[i].tolerance : delta)
           logger.debug("Decreasing tolerance by #{delta}")
           quantities[i].tolerance -= delta
-          self.tolerance -= delta        
+          self.tolerance -= delta
         end
         i += 1
-      end      
+      end
       # If there is at least one increased value: insert a new GroupOrderArticleQuantity object
       if (quantity > self.quantity || tolerance > self.tolerance)
         logger.debug("Inserting a new GroupOrderArticleQuantity")
         quantities.insert(0, GroupOrderArticleQuantity.new(
-          :group_order_article => self, 
-          :quantity => (quantity > self.quantity ? quantity - self.quantity : 0), 
-          :tolerance => (tolerance > self.tolerance ? tolerance - self.tolerance : 0)
+            :group_order_article => self,
+            :quantity => (quantity > self.quantity ? quantity - self.quantity : 0),
+            :tolerance => (tolerance > self.tolerance ? tolerance - self.tolerance : 0)
         ))
         # Recalc totals:
         self.quantity += quantities[0].quantity
-        self.tolerance += quantities[0].tolerance            
+        self.tolerance += quantities[0].tolerance
       end
     end
-      
+
     # Check if something went terribly wrong and quantites have not been adjusted as desired.
     if (self.quantity != quantity || self.tolerance != tolerance)
       raise 'Invalid state: unable to update GroupOrderArticle/-Quantities to desired quantities!'
@@ -82,7 +87,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
     # Remove zero-only items.
     quantities = quantities.reject { | q | q.quantity == 0 && q.tolerance == 0}
-    
+
     # Save
     transaction do
       quantities.each { | i | i.save! }
@@ -90,7 +95,7 @@ class GroupOrderArticle < ActiveRecord::Base
       save!
     end
   end
-  
+
   # Determines how many items of this article the Ordergroup receives.
   # Returns a hash with three keys: :quantity / :tolerance / :total
   # 
@@ -102,15 +107,15 @@ class GroupOrderArticle < ActiveRecord::Base
     # Get total
     total = stockit ? order_article.article.quantity : order_article.units_to_order * order_article.price.unit_quantity
     logger.debug("<#{order_article.article.name}>.unitsToOrder => items ordered: #{order_article.units_to_order} => #{total}")
-       
+
     if (total > 0)
       # In total there are enough units ordered. Now check the individual result for the ordergroup (group_order).
       #
       # Get all GroupOrderArticleQuantities for this OrderArticle...
       order_quantities = GroupOrderArticleQuantity.all(
-        :conditions => ["group_order_article_id IN (?)", order_article.group_order_article_ids], :order => 'created_on')
+          :conditions => ["group_order_article_id IN (?)", order_article.group_order_article_ids], :order => 'created_on')
       logger.debug("GroupOrderArticleQuantity records found: #{order_quantities.size}")
-        
+
       # Determine quantities to be ordered...
       total_quantity = i = 0
       while (i < order_quantities.size && total_quantity < total)
@@ -137,10 +142,10 @@ class GroupOrderArticle < ActiveRecord::Base
           i += 1
         end
       end
-      
+
       logger.debug("determined quantity/tolerance/total: #{quantity} / #{tolerance} / #{quantity + tolerance}")
     end
-    
+
     {:quantity => quantity, :tolerance => tolerance, :total => quantity + tolerance}
   end
   memoize :calculate_result
@@ -156,20 +161,23 @@ class GroupOrderArticle < ActiveRecord::Base
   def save_results!
     self.update_attribute(:result, calculate_result[:total])
   end
-  
+
+  # Returns total price for this individual article
+  # Until the order is finished this will be the maximum price or
+  # the minimum price depending on configuration. When the order is finished it
+  # will be the value depending of the article results.
+  def total_price(order_article = self.order_article)
+    unless order_article.order.finished?
+      if FoodsoftConfig[:tolerance_is_costly]
+        order_article.article.fc_price * (quantity + tolerance)
+      else
+        order_article.article.fc_price * quantity
+      end
+    else
+      order_article.price.fc_price * result
+    end
+  end
+
 end
 
-
-# == Schema Information
-#
-# Table name: group_order_articles
-#
-#  id               :integer(4)      not null, primary key
-#  group_order_id   :integer(4)      default(0), not null
-#  order_article_id :integer(4)      default(0), not null
-#  quantity         :integer(4)      default(0), not null
-#  tolerance        :integer(4)      default(0), not null
-#  updated_on       :datetime        not null
-#  result           :decimal(8, 3)
-#
 

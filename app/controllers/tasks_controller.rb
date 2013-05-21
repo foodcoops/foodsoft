@@ -1,29 +1,25 @@
+# encoding: utf-8
 class TasksController < ApplicationController
   #auto_complete_for :user, :nick
   
   def index
-    @non_group_tasks = Task.non_group
-    @groups = Workgroup.all
+    @non_group_tasks = Task.non_group.includes(assignments: :user)
+    @groups = Workgroup.includes(open_tasks: {assignments: :user})
   end
   
   def user
-    @unaccepted_tasks = @current_user.unaccepted_tasks
-    @accepted_tasks = @current_user.accepted_tasks
+    @unaccepted_tasks = Task.unaccepted_tasks_for(current_user)
+    @accepted_tasks = Task.accepted_tasks_for(current_user)
   end
   
   def new
-    @task = Task.new
+    @task = Task.new(current_user_id: current_user.id)
   end
   
   def create
     @task = Task.new(params[:task])
-    if @task.errors.empty? && @task.save
-      flash[:notice] = "Aufgabe wurde erstellt"
-      if @task.workgroup
-        redirect_to :action => "workgroup", :id => @task.workgroup
-      else
-        redirect_to :action => "index"
-      end
+    if @task.save
+      redirect_to tasks_url, :notice => I18n.t('tasks.create.notice')
     else
       render :template => "tasks/new"
     end
@@ -35,17 +31,18 @@ class TasksController < ApplicationController
   
   def edit
     @task = Task.find(params[:id])
+    @task.current_user_id = current_user.id
   end
   
   def update
     @task = Task.find(params[:id])
     @task.attributes=(params[:task])
     if @task.errors.empty? && @task.save
-      flash[:notice] = "Aufgabe wurde aktualisiert"
+      flash[:notice] = I18n.t('tasks.update.notice')
       if @task.workgroup
-        redirect_to :action => "workgroup", :id => @task.workgroup
+        redirect_to workgroup_tasks_url(workgroup_id: @task.workgroup_id)
       else
-        redirect_to :action => "index"
+        redirect_to tasks_url
       end
     else
       render :template => "tasks/edit"
@@ -53,18 +50,13 @@ class TasksController < ApplicationController
   end
   
   def destroy
-    Task.find(params[:id]).destroy
-    flash[:notice] = "Aufgabe wurde gelöscht"
-    redirect_to :action => "index"
-  end
-  
-  # Delete an given Assignment
-  # currently used in edit-view
-  def drop_assignment
-    ass = Assignment.find(params[:id])
-    task = ass.task
-    ass.destroy
-    redirect_to :action => "show", :id => task
+    task = Task.find(params[:id])
+    # Save user_ids to update apple statistics after destroy
+    user_ids = task.user_ids
+    task.destroy
+    task.update_ordergroup_stats(user_ids)
+
+    redirect_to tasks_url, :notice => I18n.t('tasks.destroy.notice')
   end
   
   # assign current_user to the task and set the assignment to "accepted"
@@ -76,8 +68,7 @@ class TasksController < ApplicationController
     else
       task.assignments.create(:user => current_user, :accepted => true)
     end
-    flash[:notice] = "Du hast die Aufgabe übernommen"
-    redirect_to user_tasks_path
+    redirect_to user_tasks_path, :notice => I18n.t('tasks.accept.notice')
   end
   
   # deletes assignment between current_user and given task
@@ -86,34 +77,21 @@ class TasksController < ApplicationController
     redirect_to :action => "index"
   end
   
-  def update_status
-    Task.find(params[:id]).update_attribute("done", params[:task][:done])
-    flash[:notice] = "Aufgabenstatus wurde aktualisiert"
-    redirect_to :action => "index"
+  def set_done
+    Task.find(params[:id]).update_attribute :done, true
+    redirect_to tasks_url, :notice => I18n.t('tasks.set_done.notice')
   end
   
   # Shows all tasks, which are already done
   def archive
-    @tasks = Task.done.paginate :page => params[:page], :per_page => 30
+    @tasks = Task.done.page(params[:page]).per(@per_page).order('tasks.updated_on DESC').includes(assignments: :user)
   end
   
   # shows workgroup (normal group) to edit weekly_tasks_template
   def workgroup
-    @group = Group.find(params[:id])
+    @group = Group.find(params[:workgroup_id])
     if @group.is_a? Ordergroup
-      flash[:error] = "Keine Arbeitsgruppe gefunden"
-      redirect_to :action => "index"
+      redirect_to tasks_url, :alert => I18n.t('tasks.error_not_found')
     end
-  end
-  
-  # this method is uses for the auto_complete-function from script.aculo.us
-  def auto_complete_for_task_user_list
-    @users = User.find(
-      :all,
-      :conditions => [ 'LOWER(nick) LIKE ?', '%' + params[:task][:user_list].downcase + '%' ], 
-      :order => 'nick ASC',
-      :limit => 8
-    )
-    render :partial => '/shared/auto_complete_users'
   end
 end

@@ -1,0 +1,18 @@
+en:
+  article_categories:
+    edit:
+      title: 'Edit category'
+    index:
+      title: 'Article categories'
+      new: 'Add new category'
+      confirm_delete: 'Are you sure?'
+    new:
+      title: 'Add new category'
+
+    # used by controller
+    create:
+      notice: 'Category was stored'
+    update:
+      notice: 'Category was updated'
+    destroy:
+      error: 'Category could not be deleted: %{message}'

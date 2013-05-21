@@ -1,0 +1,36 @@
+de:
+  # for config/navigation.rb
+  navigation:
+    dashboard: 'Dashboard'
+    foodcoop: 'Foodcoop'
+    members: 'Mitglieder'
+    workgroups: 'Arbeitsgruppen'
+    ordergroups: 'Bestellgruppen'
+    messages: 'Nachrichten'
+    tasks: 'Aufgaben'
+    wiki:
+      title: 'Wiki'
+      home: 'Startseite'
+      all_pages: 'Alle Seiten'
+    orders:
+      title: 'Bestellungen'
+      ordering: 'Bestellen!'
+      archive: 'Meine Bestellungen'
+      manage: 'Bestellverwaltung'
+    articles:
+      title: 'Artikel'
+      suppliers: 'Lieferanten/Artikel'
+      stock: 'Lager'
+      categories: 'Kategorien'
+    finances:
+      title: 'Finanzen'
+      home: 'Übersicht'
+      accounts: 'Konten verwalten'
+      balancing: 'Bestellungen abrechnen'
+      invoices: 'Rechnungen'
+    admin:
+      title: 'Administration'
+      home: 'Übersicht'
+      users: 'Benutzerinnen'
+      ordergroups: 'Bestellgruppen'
+      workgroups: 'Arbeitsgruppen'

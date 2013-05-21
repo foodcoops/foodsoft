@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PagesController < ApplicationController
 
   def index
@@ -16,7 +17,7 @@ class PagesController < ApplicationController
     elsif params[:id]
       page = Page.find_by_id(params[:id])
       if page.nil?
-        flash[:error] = "Seite existiert nicht!"
+        flash[:error] = I18n.t('pages.cshow.error_noexist')
         redirect_to all_pages_path and return
       else
         redirect_to wiki_page_path(page.permalink) and return
@@ -28,7 +29,7 @@ class PagesController < ApplicationController
     elsif @page.redirect?
       page = Page.find_by_id(@page.redirect)
       unless page.nil?
-        flash[:notice] = "Weitergeleitet von #{@page.title} ..."
+        flash[:notice] = I18n.t('pages.cshow.redirect_notice', :page => @page.title)
         redirect_to wiki_page_path(page.permalink)
       end
     end
@@ -56,7 +57,7 @@ class PagesController < ApplicationController
       render :action => 'new'
     else
       if @page.save
-        flash[:notice] = 'Seite wurde angelegt.'
+        flash[:notice] = I18n.t('pages.create.notice')
         redirect_to(wiki_page_path(@page.permalink))
       else
         render :action => "new"
@@ -75,7 +76,7 @@ class PagesController < ApplicationController
       if @page.save
         @page.parent_id = parent_id if (!params[:parent_id].blank? \
             and params[:parent_id] != @page_id)
-        flash[:notice] = 'Seite wurde aktualisiert.'
+        flash[:notice] = I18n.t('pages.update.notice')
         redirect_to wiki_page_path(@page.permalink)
       else
         render :action => "edit"
@@ -83,7 +84,7 @@ class PagesController < ApplicationController
     end
 
   rescue ActiveRecord::StaleObjectError
-    flash[:error] = "Achtung, die Seite wurde gerade von jemand anderes bearbeitet. Bitte versuche es erneut."
+    flash[:error] = I18n.t('pages.error_stale_object')
     redirect_to wiki_page_path(@page.permalink)
   end
 
@@ -91,25 +92,27 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.destroy
 
-    flash[:notice] = "Die Seite '#{@page.title}' und alle Unterseiten wurden erfolgreich gelöscht."
+    flash[:notice] = I18n.t('pages.destroy.notice', :page => @page.title)
     redirect_to wiki_path
   end
 
   def all
-    @recent_pages = Page.non_redirected.all :order => 'updated_at DESC'
-    @pages = Page.non_redirected.all :order => 'title'
-    @top_pages = Page.no_parent.non_redirected.all :order => 'created_at'
+    @pages = Page.non_redirected
+    @partial = params[:view] || 'recent_changes'
 
-    view = params[:view]
-    params[:view] = nil
-
-    case view
-      when 'recentChanges'
-        render :partial => 'recent_changes' and return
-      when 'siteMap'
-        render :partial => 'site_map' and return
-      when 'titleList'
-       render :partial => 'title_list' and return
+    if params[:name]
+      @pages = @pages.where("title LIKE ?", "%#{params[:name]}%").limit(20).order('updated_at DESC')
+      @partial = 'title_list'
+    else
+      order = case @partial
+        when 'recent_changes' then
+          'updated_at DESC'
+        when 'site_map' then
+          'created_at DESC'
+        when 'title_list' then
+          'title DESC'
+              end
+      @pages.order(order)
     end
   end
 

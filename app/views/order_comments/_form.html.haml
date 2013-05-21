@@ -1,0 +1,5 @@
+= simple_form_for order_comment, remote: true, html: {class: 'form-vertical'} do |f|
+  = f.hidden_field :order_id
+  = f.hidden_field :user_id
+  = f.input :text, input_html: {class: 'input-xlarge', rows: '5'}
+  = f.submit class: 'btn'

@@ -1,0 +1,34 @@
+de:
+  foodcoop:
+    ordergroups:
+      index:
+        title: 'Bestellgruppen'
+        name: Name ...
+        only_active: 'Nur aktive'
+        only_active_desc: '(mindestens einmal in den letzten 3 Monaten bestellt)'
+      ordergroups:
+        name: 'Name'
+        user: 'Mitglieder'
+        last_ordered: 'zuletzt bestellt'
+    users:
+      index:
+        title: 'Mitglieder'
+        body: >
+          <p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.</p>
+          <p>Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>
+        profile_link: 'Einstellungen'
+        ph_name: Name ...
+        ph_ordergroup: Bestellgruppe ...
+    workgroups:
+      index:
+        title: 'Arbeitsgruppen'
+        body: >
+          <p>Das bearbeiten von Gruppen ist nur für Mitglieder der Gruppe möglich.<br/>
+          Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.</p>
+      edit:
+        title: 'Gruppe bearbeiten'
+        invite_new: 'Neue Mitglieder kannst du %{invite_link} einladen.'
+        invite_link: 'hier'
+      workgroup:
+        show_tasks: 'Alle Aufgaben zeigen'
+        edit: 'Gruppe bearbeiten'

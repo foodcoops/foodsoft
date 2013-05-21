@@ -1,44 +1,16 @@
-- form_for stock_article do |form|
-  = form.error_messages
-  %p
-    Lieferantin
-    %br/
-    = form.select :supplier_id, Supplier.without_deleted(:order => 'name').collect{ |s| [s.name, s.id] }
-  %p
-    Name
-    %br/
-    = form.text_field :name
-  %p
-    Einheit
-    %br/
-    = form.text_field :unit
-  %p
-    Notiz
-    %br/
-    = form.text_field :note
+= simple_form_for stock_article, :validate => true do |f|
+  = f.association :supplier
+  = f.input :name
+  = f.input :unit
+  = f.input :note
+
   - if stock_article.new_record?
-    %p
-      Nettopreis
-      %br/
-      = form.text_field :price
-    %p
-      MwSt
-      %br/
-      = form.text_field :tax, :value => (stock_article.tax || 7.0)
-    %p
-      Pfand
-      %br/
-      = form.text_field :deposit
+    = f.input :price
+    = f.input :tax
+    = f.input :deposit
   - else
-    %p
-      Preis:
-      %br/
-      Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten
-      Lagerartikeln nicht mehr verändert werden.
-  %p
-    Kategorie:
-    = form.select :article_category_id, ArticleCategory.all(:order => 'name').collect { |c| [c.name, c.id] }
-  %p
-    = submit_tag "Lagerartikel speichern"
-    |
-    = link_to "Abbrechen", stock_articles_path
+    = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('.form.price_hint')
+  = f.association :article_category
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to t('ui.or_cancel'), stock_articles_path

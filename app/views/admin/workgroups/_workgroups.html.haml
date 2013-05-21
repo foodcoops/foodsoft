@@ -1,26 +1,20 @@
-%p
-  %table{:style => "width:100%"}
-    %tr
-      %td
-        = pagination_links_remote @workgroups, { :update => "workgroups" }
-      %td{:style => "text-align:right"}
-        - if @total.size > 20
-          = items_per_page :update => "workgroups"
-%table.list
+- if Workgroup.count > 20
+  = items_per_page
+= pagination_links_remote @workgroups
+%table.table.table-striped
   %thead
     %tr
-      %th Name
-      %th Mitglieder
-      %th Zugriff auf
-      %th
+      %th= t '.name'
+      %th= t '.members'
+      %th= t 'admin.access_to'
+      %th= t 'admin.actions'
   %tbody
     - for workgroup in @workgroups
-      %tr{:class => cycle('even','odd', :name => 'groups')}
+      %tr
         %td= link_to workgroup.name, [:admin, workgroup]
         %td= workgroup.users.size
         %td= format_roles(workgroup)
         %td
-          = link_to image_tag('b_users.png', :size => '16x16',  :border => "0", :alt => 'Mitlglieder bearbeiten'), memberships_admin_workgroup_path(workgroup)
-          = link_to(image_tag('b_edit.png', :size => "16x16", :border => "0", :alt => 'Gruppe bearbeiten'), edit_admin_workgroup_path(workgroup))
-          = link_to(image_tag('b_drop.png', :size => "16x16", :border => "0", :alt => 'Gruppe löschen'), [:admin, workgroup], |
-                         :confirm => 'Willst du ' + workgroup.name + ' wirklich löschen?', :method => :delete) |
+          = link_to t('ui.edit'), edit_admin_workgroup_path(workgroup), class: 'btn btn-mini'
+          = link_to t('ui.delete'), [:admin, workgroup], :confirm => t('admin.confirm', name: workgroup.name),
+            :method => :delete, class: 'btn btn-mini btn-danger'

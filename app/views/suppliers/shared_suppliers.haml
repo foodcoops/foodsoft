@@ -1,27 +1,23 @@
-%h1 Externe Listen
-%p
-  %i 
-    Hier werden die Lieferantinnen der externen Datenbank angezeigt.
-    %br/
-    Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)
-    %br/
-    Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.
+- title t('.title')
+= t('.body').html_safe
 
-#shared_suppliers
-  %i externe Lieferantinnen
-  %table
+%table.table.table-striped
+  %thead
     %tr
-      %th Lieferantin
-      %th Adresse
-      %th Notiz
-      %th Liefertag
-      %th abonniert?
-      %th
+      %th= t 'simple_form.labels.supplier.name'
+      %th= t 'simple_form.labels.supplier.address'
+      %th= t 'simple_form.labels.supplier.note'
+      %th= t 'simple_form.labels.supplier.delivery_days'
+      %th= t 'simple_form.labels.supplier.is_subscribed'
+  %tbody
     - for shared_supplier in @shared_suppliers
-      %tr{:class => cycle('even', 'odd', :name => "shared_suppliers")}
-        %td=h shared_supplier.name
-        %td=h shared_supplier.address
-        %td=h shared_supplier.note
-        %td=h shared_supplier.delivery_days
-        %td= image_tag("icon_message.gif", :size => "16x16", :border => "0",:alt => "abonniert!") if shared_supplier.supplier
-        %td= link_to "abonnieren", new_supplier_path(:shared_supplier_id => shared_supplier) unless shared_supplier.supplier
+      %tr
+        %td= shared_supplier.name
+        %td= shared_supplier.address
+        %td= shared_supplier.note
+        %td= shared_supplier.delivery_days
+        %td
+          - if shared_supplier.supplier
+            %i.icon-ok
+          - else
+            = link_to t('.subscribe'), new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn'

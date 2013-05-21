@@ -1,7 +1,0 @@
-%p
-  %b= @invite.email
-  wurde erfolgreich eingeladen.
-%p
-  = link_to_function "Schließen", "Element.hide('edit_box')"
-  oder
-  = remote_link_to "Weitere Person einladen", :url => new_invite_path(:id => @invite.group)

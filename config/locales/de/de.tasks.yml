@@ -1,0 +1,75 @@
+de:
+  tasks:
+    archive:
+      title: 'Aufgabenarchiv'
+    archive_tasks:
+      due_date: 'Fälligkeitsdatum'
+      task: 'Betreff'
+      who: 'Verantwortliche Menschen'
+      task_format: '%{name} (%{duration}h)'
+    edit:
+      title: 'Aufgabe bearbeiten'
+    form:
+      search:
+        hint: "Nach Nutzerin suchen"
+        noresult: 'Keine Nutzerin gefunden'
+        placeholder: 'Suche ...'
+    index:
+      title: 'Aufgaben'
+      title_non_group: 'Aufgaben für alle!'
+      show_group_tasks: 'Gruppenaufgaben anzeigen'
+    list:
+      due_date: 'Fälligkeit'
+      task: 'Betreff'
+      who: 'Wer machts?'
+      who_hint: '(Wie viele werden noch benötigt?)'
+      task_format: '%{name} (%{duration}h)'
+      accept_task: 'Aufgabe übernehmen'
+      reject_task: 'Aufgabe ablehnen'
+      mark_done: 'Aufgabe als erledigt markieren'
+      done_q: 'Erledigt?'
+      done: 'Erledigt'
+    nav:
+      new_task: 'Neue Aufgabe erstellen'
+      my_tasks: 'Meine Aufgaben'
+      all_tasks: 'Alle Aufgaben'
+      archive: 'Erledigte Aufgaben (Archiv)'
+      group_tasks: 'Gruppenaufgaben'
+    new:
+      title: 'Neue Aufgabe erstellen'
+    show:
+      title: 'Aufgabe anzeigen'
+      hours: '%{count}h'
+      due_date: 'Fälligkeitsdatum'
+      accept_task: 'Aufgabe übernehmen'
+      reject_task: 'Aufgabe ablehnen'
+      mark_done: 'Als erledigt markieren'
+    user:
+      title: 'Meine Aufgaben'
+      title_open: 'Offene Aufgaben'
+      title_accepted: 'Anstehende Aufgaben'
+      more: 'Nichts zu tun? %{tasks_link} gibt es bestimmt Arbeit'
+      tasks_link: 'Hier'
+    workgroup:
+      title: 'Aufgaben für %{workgroup}'
+      weekly:
+        title: 'Wöchentliche Aufgaben'
+        desc: >
+          <p>Jeden <b>%{weekday}</b> hat diese Arbeitsgruppe folgenden Job: <b>%{task}</b></p>
+          <p>Die Wochenaufgaben werden von der Foodsoft automatisch erstellt. Eintragen müsst Ihr Euch aber selber.</p>
+        empty: 'Noch keine Wochenaufgaben angelegt.'
+        edit: 'Wöchentliche Aufgaben anpassen'
+      title_all: 'Alle Aufgaben der Gruppe'
+
+    # used by controller
+    create:
+      notice: 'Aufgabe wurde erstellt'
+    update:
+      notice: 'Aufgabe wurde aktualisiert'
+    destroy:
+      notice: 'Aufgabe wurde gelöscht'
+    accept:
+      notice: 'Du hast die Aufgabe übernommen'
+    set_done:
+      notice: 'Aufgabenstatus wurde aktualisiert'
+    error_not_found: 'Keine Arbeitsgruppe gefunden'

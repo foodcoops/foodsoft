@@ -1,10 +1,14 @@
-- unless @messages.empty?
-  %table.list
+- if pagination
+  - if Message.public.count > 20
+    = items_per_page
+  = pagination_links_remote messages
+
+- unless messages.empty?
+  %table.table.table-striped
     %tbody
-      - for message in @messages
-        %tr{:class => cycle('even','odd', :name => 'messages')}
-          %td= format_subject(message, subject_length)
+      - for message in messages
+        %tr
+          %td= format_subject(message, 130)
           %td= h(message.sender_name)
           %td= format_time(message.created_at)
-          %td= link_to('Antworten', reply_message_path(message))
-            
+          %td= link_to t('.reply'), new_message_path(:message => {:reply_to => message.id}), class: 'btn'

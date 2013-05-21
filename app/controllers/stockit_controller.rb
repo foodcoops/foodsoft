@@ -1,10 +1,8 @@
 class StockitController < ApplicationController
 
   def index
-    @stock_articles = StockArticle.without_deleted.all(
-        :include => [:supplier, :article_category],
-        :order => 'suppliers.name, article_categories.name, articles.name'
-      )
+    @stock_articles = StockArticle.undeleted.includes(:supplier, :article_category).
+        order('suppliers.name, article_categories.name, articles.name')
   end
 
   def new
@@ -14,8 +12,7 @@ class StockitController < ApplicationController
   def create
     @stock_article = StockArticle.new(params[:stock_article])
     if @stock_article.save
-      flash[:notice] = "Lagerartikel wurde gespeichert."
-      redirect_to stock_articles_path
+      redirect_to stock_articles_path, :notice => I18n.t('stockit.stock_create.notice')
     else
       render :action => 'new'
     end
@@ -28,31 +25,25 @@ class StockitController < ApplicationController
   def update
     @stock_article = StockArticle.find(params[:id])
     if @stock_article.update_attributes(params[:stock_article])
-      flash[:notice] = "Lagerartikel wurde gespeichert."
-      redirect_to stock_articles_path
+      redirect_to stock_articles_path, :notice => I18n.t('stockit.stock_update.notice')
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    StockArticle.find(params[:id]).destroy
-    redirect_to stock_articles_path
+    @article = StockArticle.find(params[:id])
+    @article.mark_as_deleted
+    render :layout => false
   rescue => error
-    flash[:error] = "Ein Fehler ist aufgetreten: " + error.message
-    redirect_to stock_articles_path
+    render :partial => "destroy_fail", :layout => false,
+      :locals => { :fail_msg => I18n.t('errors.general_msg', :msg => error.message) }
   end
 
-  def auto_complete_for_article_name
-    conditions = [ "LOWER(articles.name) LIKE ?", '%' + params[:article][:name].downcase + '%' ]
-
-    if params[:supplier_id]
-      @supplier = Supplier.find(params[:supplier_id])
-      @articles = @supplier.articles.without_deleted.all(:conditions => conditions, :limit => 8)
-    else
-      @articles = Article.without_deleted.not_in_stock.all(:conditions => conditions, :limit => 8)
-    end
-    render :partial => 'shared/auto_complete_articles'
+  #TODO: Fix this!!
+  def articles_search
+    @articles = Article.not_in_stock.limit(8).where('name LIKE ?', "%#{params[:term]}%")
+    render :json => @articles.map(&:name)
   end
 
   def fill_new_stock_article_form

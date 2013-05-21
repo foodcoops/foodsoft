@@ -1,0 +1,7 @@
+= t('.body', group: @invite.group.name).html_safe
+= simple_form_for @invite do |form|
+  = form.hidden_field :user_id
+  = form.hidden_field :group_id
+  = form.input :email
+  = form.submit t('.action')
+  = link_to t('.back'), :back

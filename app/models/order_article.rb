@@ -1,6 +1,8 @@
 # An OrderArticle represents a single Article that is part of an Order.
 class OrderArticle < ActiveRecord::Base
 
+  attr_reader :update_current_price
+
   belongs_to :order
   belongs_to :article
   belongs_to :article_price
@@ -8,9 +10,23 @@ class OrderArticle < ActiveRecord::Base
 
   validates_presence_of :order_id, :article_id
   validate :article_and_price_exist
+  validates_uniqueness_of :article_id, scope: :order_id
 
-  named_scope :ordered, :conditions => "units_to_order >= 1"
+  scope :ordered, :conditions => "units_to_order >= 1"
 
+  before_create :init_from_balancing
+  after_destroy :update_ordergroup_prices
+
+  def self.sort_by_name(order_articles)
+    order_articles.sort { |a,b| a.article.name <=> b.article.name }
+  end
+
+  def self.sort_by_order_number(order_articles)
+    order_articles.sort do |a,b|
+      a.article.order_number.to_s.gsub(/[^[:digit:]]/, "").to_i <=>
+          b.article.order_number.to_s.gsub(/[^[:digit:]]/, "").to_i
+    end
+  end
 
   # This method returns either the ArticlePrice or the Article
   # The first will be set, when the the order is finished
@@ -77,50 +93,63 @@ class OrderArticle < ActiveRecord::Base
   end
 
   # Updates order_article and belongings during balancing process
-  def update_article_and_price!(article_attributes, price_attributes, order_article_attributes, global_attribute)
+  def update_article_and_price!(order_article_attributes, article_attributes, price_attributes = nil)
     OrderArticle.transaction do
+      # Updates self
+      self.update_attributes!(order_article_attributes)
+
       # Updates article
       article.update_attributes!(article_attributes)
-      article.update_attributes!(price_attributes) if global_attribute
 
+      # Updates article_price belonging to current order article
+      if price_attributes.present?
+        article_price.attributes = price_attributes
+        if article_price.changed?
+          # Updates also price attributes of article if update_current_price is selected
+          if update_current_price
+            article.update_attributes!(price_attributes)
+            self.article_price = article.article_prices.first # Assign new created article price to order article
+          else
+            # Creates a new article_price if neccessary
+            # Set created_at timestamp to order ends, to make sure the current article price isn't changed
+            create_article_price!(price_attributes.merge(created_at: order.ends)) and save
+          end
 
-      article_price.attributes = price_attributes
-      if article_price.changed?
-        # Creates a new article_price if neccessary
-        price = build_article_price(price_attributes)
-        price.created_at = order.ends
-        price.save!
-
-        # Updates ordergroup values
-        group_order_articles.each { |goa| goa.group_order.update_price! }
+          # Updates ordergroup values
+          update_ordergroup_prices
+        end
       end
-      
-
-      # Updates units_to_order
-      self.attributes = order_article_attributes
-      self.save!
     end
+  end
+
+  def update_current_price=(value)
+    @update_current_price = (value == true or value == '1') ?  true : false
+  end
+
+  # Units missing for the next full unit_quantity of the article
+  def missing_units
+    units = article.unit_quantity - ((quantity  % article.unit_quantity) + tolerance)
+    units = 0 if units < 0
+    units
   end
 
   private
   
   def article_and_price_exist
-     errors.add(:article, "muss angegeben sein und einen aktuellen Preis haben") if !(article = Article.find(article_id)) || article.fc_price.nil?
+     errors.add(:article, I18n.t('model.order_article.error_price')) if !(article = Article.find(article_id)) || article.fc_price.nil?
+  end
+
+  # Associate with current article price if created in a finished order
+  def init_from_balancing
+    if order.present? and order.finished?
+      self.article_price = article.article_prices.first
+      self.units_to_order = 1
+    end
+  end
+
+  def update_ordergroup_prices
+    group_order_articles.each { |goa| goa.group_order.update_price! }
   end
 
 end
-
-# == Schema Information
-#
-# Table name: order_articles
-#
-#  id               :integer(4)      not null, primary key
-#  order_id         :integer(4)      default(0), not null
-#  article_id       :integer(4)      default(0), not null
-#  quantity         :integer(4)      default(0), not null
-#  tolerance        :integer(4)      default(0), not null
-#  units_to_order   :integer(4)      default(0), not null
-#  lock_version     :integer(4)      default(0), not null
-#  article_price_id :integer(4)
-#
 

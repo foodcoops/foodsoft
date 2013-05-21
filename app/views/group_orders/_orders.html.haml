@@ -1,0 +1,16 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t '.supplier'
+      %th= t '.ending'
+      %th= t '.sum'
+  %tbody
+    - for order in orders
+      - group_order = order.group_order(@ordergroup) # Get GroupOrder if possible
+      - order_class = group_order ? "" : "color:grey"
+      %tr{:class=> cycle('even', 'odd', :name => 'orders'), :style => order_class}
+        %td= group_order.present? ? link_to(order.name, group_order_path(group_order)) : order.name
+        %td= format_time(order.ends)
+        %td.numeric= group_order ? number_to_currency(group_order.price) : "--"
+- if pagination
+  = pagination_links_remote @closed_orders

@@ -1,6 +1,0 @@
-%tr.transaction
-  %td
-    %select{:name => 'financial_transactions[][ordergroup_id]'}
-      = options_for_select Ordergroup.without_deleted.all(:order => 'name').collect { |g| [ g.name, g.id ] }
-  %td= text_field_tag 'financial_transactions[][amount]'
-  %td= link_to_function icon(:delete), "$(this).up('.transaction').remove()", {:title => "Gruppe enfernen"}

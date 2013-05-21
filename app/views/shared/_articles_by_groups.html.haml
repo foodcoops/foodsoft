@@ -1,21 +1,21 @@
-.legend
-  %table.legend{:style => "margin-bottom:1em"}
+%table.table.table-hover
+  %thead
     %tr
-      %th{:style => "width:40%"} Name
+      %th{:style => "width:40%"}= t '.name'
       %th
-        %acronym{:title => "zugeteilte Einheiten"} Menge
+        %acronym{:title => t('.units_desc')}= t '.units'
       %th
-        %acronym{:title => "Preis incl. MwSt, Pfand und Foodcoop-Aufschlag"} FC-Preis
+        %acronym{:title => t('.fc_price_desc')}= t '.fc_price'
       %th
-        %acronym{:title => "Gebindegröße"} GebGr
-      %th Einheit
-      %th Gesamtpreis
+        %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity'
+      %th= t '.unit'
+      %th= t '.price'
 
-- for group_order in order.group_orders.all
-  %table{:style => "margin-bottom:1em"}
+  - for group_order in order.group_orders.all
     %thead
       %tr
-        %th{:colspan => "6"}=h group_order.ordergroup.name
+        %th{:colspan => "6"}
+          %h4= group_order.ordergroup.name
     %tbody
       - total = 0
       - for goa in group_order.group_order_articles.ordered.all(:include => :order_article)
@@ -33,4 +33,6 @@
     %tr{:class => cycle('even', 'odd', :name => 'articles')}
       %th{:colspan => "5"} Summe
       %th= number_to_currency(total)
+    %tr
+      %th(colspan="6")
     - reset_cycle("articles")

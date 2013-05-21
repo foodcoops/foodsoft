@@ -1,0 +1,88 @@
+- content_for :head do
+  = render 'data'
+
+= render :partial => 'order_head'
+
+- form_tag(:action => 'saveOrder', :id => @order) do
+  .single_column{:style => "clear:both;margin-bottom:7em;"}
+    .box_title
+      %h2= t '.title'
+    .column_content
+      %table#order.list
+        %thead
+          %tr
+            %th= t 'group_orders.form.name'
+            %th{:style => "width:13px;"}
+            %th{:style => "width:4.5em;"}= t 'group_orders.form.price'
+            %th{:style => "width:4.5em;"}= t 'group_orders.form.unit'
+            %th{:style => "width:70px;"}= t 'group_orders.form.unit_missing'
+            %th#col_required= t 'group_orders.form.amount'
+            - if not @order.stockit?
+              %th#col_tolerance= t 'group_orders.form.tolerance'
+            %th{:style => "width:15px;"}= t 'group_orders.form.sum'
+        %tbody
+          - total = 0
+          - i = 0
+          - @articles_grouped_by_category.each do |category, order_articles|
+            %tr{:style => "background-color:#EFEFEF"}
+              %td{:style => "text-align:left"}
+                %b= h category
+              %td{:colspan => "9"}
+            - order_articles.each do |order_article|
+            - if FoodsoftConfig[:tolerance_is_costly]
+              - article_total = @price[i] * (@tolerance[i] + @quantity[i])
+            - else
+              - article_total = @price[i] * @quantity[i]
+            - total += article_total
+              %tr{:class => "#{cycle('even', 'odd', :name => 'articles')} order-article", :valign => "top"}
+                %td.name= order_article.article.name
+                %td= h order_article.article.origin
+                %td= number_to_currency(@price[i])
+                %td= order_article.article.unit
+                %td
+                  %span{:id => "missing_units_#{i}"}
+                    - if @order.stockit?
+                      - order_article.article.quantity_available
+                    - else
+                      - missing_units = @unit[i] - (((@quantity[i] + @others_quantity[i]) % @unit[i]) + @tolerance[i] + @others_tolerance[i])
+                      - missing_units < 0 ? 0 : missing_units
+                %td.quantity
+                  %input{:id => "q_#{i}", :name => "ordered[#{order_article.id}][quantity]", :size => "2", :type => "hidden", :value => @quantity[i]}/
+                  %span.used{:id => "q_used_#{i}"}= @used_quantity[i]
+                  +
+                  %span.unused{:id => "q_unused_#{i}"}= @quantity[i] - @used_quantity[i]
+                  = button_to_function('+', "increaseQuantity(#{i})")
+                  = button_to_function('-', "decreaseQuantity(#{i})")
+                - unless @order.stockit?
+                  %td.tolerance
+                    %input{:id => "t_#{i}", :name => "ordered[#{order_article.id}][tolerance]", :size => "2", :type => "hidden", :value => @tolerance[i]}/
+                    - if (@unit[i] > 1)
+                      %span.used{:id => "t_used_#{i}"}= @used_tolerance[i]
+                      +
+                      %span.unused{:id => "t_unused_#{i}"}= @tolerance[i] - @used_tolerance[i]
+                      = button_to_function('+', "increaseTolerance(#{i})")
+                      = button_to_function('-', "decreaseTolerance(#{i})")
+                %td{:id => "td_price_#{i}", :style => "text-align:right; padding-right:10px; width:4em"}
+                  %span{:id => "price_#{i}_display"}= number_to_currency(article_total, :unit => "")
+                  €
+                  .article-info
+                    %h3= order_article.article.name
+                    .right
+                      = t('group_orders.form.units_full') + ':'
+                      %span{:id => "units_#{i}"}= order_article.units_to_order
+                      %br/
+                      = t('group_orders.form.total_units') + ':'
+                      %span{:id => "q_total_#{i}"}= @quantity[i] + @others_quantity[i]
+                      %br/
+                      = t('group_orders.form.total_tolerance') + ':'
+                      %span{:id => "t_total_#{i}"}= @tolerance[i] + @others_tolerance[i]
+                      %br/
+                    .left
+                      #{t 'group_orders.form.manufacturer'}: #{order_article.article.manufacturer}
+                      %br/
+                      #{t 'group_orders.form.units'}: #{@order.stockit? ? order_article.article.quantity_available : @unit[i]} * #{h order_article.article.unit}
+                      %br/
+                      #{t 'group_orders.form.note'}: #{order_article.article.note}
+                      %br/
+              - i = i + 1
+  = render "order_footer", :total => total

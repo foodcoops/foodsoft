@@ -1,0 +1,3 @@
+%tr.edit_inline{:id=> "edit_"+@article.id.to_s}
+  %td{:colspan=>"10"}
+    = t('.note', article: h(@article.name), drop_link: link_to(t('.drop'), :controller => 'orders', :action => 'edit', :id => @order)).html_safe

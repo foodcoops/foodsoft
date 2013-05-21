@@ -1,69 +1,23 @@
+# encoding: utf-8
 class Admin::OrdergroupsController < Admin::BaseController
+  inherit_resources
   
   def index
-    if (params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100)
-      @per_page = params[:per_page].to_i
-    else
-      @per_page = 20
+    @ordergroups = Ordergroup.undeleted.order('name ASC')
+
+    # if somebody uses the search field:
+    unless params[:query].blank?
+      @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%")
     end
 
-    # if the search field is used
-    conditions = "name LIKE '%#{params[:query]}%'" unless params[:query].nil?
-
-    @total = Ordergroup.without_deleted.count(:conditions => conditions )
-    @ordergroups = Ordergroup.without_deleted.paginate(:conditions => conditions, :page => params[:page],
-      :per_page => @per_page, :order => 'name')
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.js { render :partial => "ordergroups" }
-    end
-  end
-
-
-  def show
-    @ordergroup = Ordergroup.find(params[:id])
-  end
-
-  def new
-    @ordergroup = Ordergroup.new
-  end
-
-  def edit
-    @ordergroup = Ordergroup.find(params[:id])
-  end
-
-  def create
-    @ordergroup = Ordergroup.new(params[:ordergroup])
-    @ordergroup.account_updated = Time.now
-    
-    if @ordergroup.save
-      flash[:notice] = 'Ordergroup was successfully created.'
-      redirect_to([:admin, @ordergroup])
-    else
-      render :action => "new"
-    end
-  end
-
-  def update
-    @ordergroup = Ordergroup.find(params[:id])
-
-    if @ordergroup.update_attributes(params[:ordergroup])
-      flash[:notice] = 'Ordergroup was successfully updated.'
-      redirect_to([:admin, @ordergroup])
-    else
-      render :action => "edit"
-    end
+    @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
   end
 
   def destroy
     @ordergroup = Ordergroup.find(params[:id])
-    @ordergroup.destroy
-
-    redirect_to(admin_ordergroups_url)
-  end
-
-  def memberships
-    @group = Ordergroup.find(params[:id])
+    @ordergroup.mark_as_deleted
+    redirect_to admin_ordergroups_url, notice: t('admin.ordergroups.destroy.notice')
+  rescue => error
+    redirect_to admin_ordergroups_url, alert: t('admin.ordergroups.destroy.error')
   end
 end

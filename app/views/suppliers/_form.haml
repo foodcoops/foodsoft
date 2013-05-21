@@ -1,60 +1,21 @@
-= error_messages_for 'supplier'
-
-- if @supplier.shared_supplier
-  %p Lieferantin wird mit externer Datenbank verknüpft.
-.edit_form{:style=>"width:30em"}
-  %table
-    %tr
-      %td
-        %label{:for => "supplier_name"} Name
-      %td= @f.text_field :name
-    %tr
-      %td
-        %label{:for => "supplier_address"} Adresse
-      %td= @f.text_field :address
-    %tr
-      %td
-        %label{:for => "supplier_phone"} Telefon
-      %td= @f.text_field :phone
-    %tr
-      %td
-        %label{:for => "supplier_phone2"} Telefon2
-      %td= @f.text_field :phone2
-    %tr
-      %td
-        %label{:for => "supplier_fax"} Fax
-      %td= @f.text_field :fax
-    %tr
-      %td
-        %label{:for => "supplier_email"} E-Mail
-      %td= @f.text_field :email
-    %tr
-      %td
-        %label{:for => "supplier_url"} Hompage
-      %td= @f.text_field :url
-    %tr
-      %td
-        %label{:for => "supplier_contact_person"} Kotakt Person
-      %td= @f.text_field :contact_person
-    %tr
-      %td
-        %label{:for => "supplier_customer_number"} Kundennummer
-      %td= @f.text_field :customer_number
-    %tr
-      %td
-        %label{:for => "supplier_delivery_days"} Liefertage
-      %td= @f.text_field :delivery_days
-    %tr
-      %td
-        %label{:for => "supplier_order_howto"} BestellHowto
-      %td= @f.text_field :order_howto
-    %tr
-      %td
-        %label{:for => "supplier_note"} Notiz
-      %td= @f.text_field :note
-    %tr
-      %td
-        %label{:for => "supplier_min_order_quantity"} Mindestbestellmenge
-      %td= @f.text_field :min_order_quantity
-  = @f.hidden_field :shared_supplier_id
-
+= simple_form_for @supplier do |f|
+  - if @supplier.shared_supplier
+    .alert.alert-success
+    = t 'suppliers.shared_supplier_note'
+  = f.hidden_field :shared_supplier_id
+  = f.input :name
+  = f.input :address
+  = f.input :phone
+  = f.input :phone2
+  = f.input :fax
+  = f.input :email
+  = f.input :url
+  = f.input :contact_person
+  = f.input :customer_number
+  = f.input :delivery_days
+  = f.input :order_howto, as: :text, input_html: {rows: 5}
+  = f.input :note, as: :text, input_html: {rows: 5}
+  = f.input :min_order_quantity
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to t('ui.or_cancel'), suppliers_path

@@ -1,41 +1,41 @@
 %td{:colspan => "7"}
-  %table
+  %table.table.table-striped
     %thead
       %tr
         %td
-        %td{:style => "width:8em"} Gruppe
-        %td Einheiten
-        %td Gesamtpreis
+        %td{:style => "width:8em"}= t('.group')
+        %td= t('.units')
+        %td= t('.total')
         %td{:colspan => "3",:style => "width:14em"}
-          = remote_link_to '[Gruppe hinzufügen]', :url => {:action => "new_group_order_article", :id => order_article}
+          = link_to t('.add_group'), new_finance_group_order_article_path(order_article_id: order_article.id),
+            remote: true, class: 'btn btn-mini'
     %tbody
-      - for group_order_article in order_article.group_order_articles.ordered.all(:include => [:group_order])
-        %tr{:class => cycle('even', 'odd', :name => 'results')}[group_order_article]
+      - for group_order_article in order_article.group_order_articles.select { |goa| goa.result > 0 }
+        %tr[group_order_article]
           %td
           %td{:style=>"width:50%"}
             = group_order_article.group_order.ordergroup.name
           %td{:id => "group_order_article_#{group_order_article.id}_quantity", :style => "white-space:nowrap"}
             = group_order_article.result
-            = button_to_remote( "+", :url => {:action => "update_group_order_article_result", :id => group_order_article, :modifier => '+'}, :html => {:style => "float:left"}, :success => "Element.hide('loader');", :before => "Element.show('loader');")
-            = button_to_remote( "-", :url => {:action => "update_group_order_article_result", :id => group_order_article, :modifier => '-'}, :success => "Element.hide('loader');", :before => "Element.show('loader');")
-          %td.currency
+            = link_to "+", update_result_finance_group_order_article_path(group_order_article, modifier: '+'),
+              method: :put, remote: true, class: 'btn btn-mini'
+            = link_to "-", update_result_finance_group_order_article_path(group_order_article, modifier: '-'),
+              method: :put, remote: true, class: 'btn btn-mini'
+          %td.numeric
             = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result, :unit => "")
           %td.actions{:style=>"width:1em"}
-            = remote_link_to icon(:edit), :update => 'edit_box', |
-              :url => {:action => 'edit_group_order_article', :id => group_order_article}, |
-              :success => "Element.hide('loader'); Element.show('edit_box')" |
+            = link_to "Bearbeiten", edit_finance_group_order_article_path(group_order_article), remote: true,
+              class: 'btn btn-mini'
           %td.actions{:style=>"width:1em"}
-            = remote_link_to icon(:delete), |
-              :url => {:action => 'destroy_group_order_article', :id => group_order_article}, |
-              :confirm => 'Bist du sicher?', :method => 'post' |
+            = link_to "Löschen", finance_group_order_article_path(group_order_article), method: :delete,
+              remote: true, class: 'btn btn-mini btn-danger'
           %td
     %tfoot
-      %tr{:class => cycle('even', 'odd', :name => 'results')}
+      %tr
         %td
-        %td{:style => "width:8em"} Summe (FC-Preis)
+        %td{:style => "width:8em"}= t('total_fc')
         %td{:id => "group_orders_sum_quantity_#{order_article.id}"}
           = order_article.group_orders_sum[:quantity]
-        %td{:id => "group_orders_sum_price_#{order_article.id}", :class => "currency"}
+        %td.numeric{:id => "group_orders_sum_price_#{order_article.id}"}
           = number_to_currency(order_article.group_orders_sum[:price], :unit => "")
         %td{:colspan => "3"}
-    - reset_cycle('results')

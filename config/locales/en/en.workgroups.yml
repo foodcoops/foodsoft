@@ -1,0 +1,12 @@
+en:
+  workgroups:
+    edit:
+      title: 'Edit workgroup'
+    index:
+      title: 'Workgroups'
+
+    # used by controller
+    update:
+      notice: 'Workgroup was updated'
+    error_last_admin_group: 'The last group with admin rights must not be deleted'
+    error_last_admin_role: 'Admin role for the last group with admin rights cannot be withdrawn'

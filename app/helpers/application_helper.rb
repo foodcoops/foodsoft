@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
@@ -18,97 +20,76 @@ module ApplicationHelper
   end
   
   # Creates ajax-controlled-links for pagination
-  # see also the plugin "will_paginate"
   def pagination_links_remote(collection, options = {})
     per_page = options[:per_page] || @per_page
     params = options[:params] || {}
-    update = options[:update] || nil
-
-    # Translations
-    previous_label = '&laquo; ' + "Vorherige"
-    next_label = "Nächste" + ' &raquo;'
-    # Merge other url-options for will_paginate
     params = params.merge({:per_page => per_page})
-    will_paginate collection, { :params => params, :remote => true, :update => update,
-      :previous_label => previous_label, :next_label => next_label, }
+    paginate collection, :params => params, :remote => true
   end
   
   # Link-collection for per_page-options when using the pagination-plugin
   def items_per_page(options = {})
     per_page_options = options[:per_page_options] || [20, 50, 100]
     current = options[:current] || @per_page
-    action = options[:action] || controller.action_name
-    update = options[:update] || nil
+    params = params || {}
 
-    links = []
-    per_page_options.each do |per_page|
-      unless per_page == current
-        links << link_to_remote(
-          per_page,
-          { :url => { :action => action, :params => {:per_page => per_page}},
-            :before => "Element.show('loader')",
-            :success => "Element.hide('loader')",
-            :method => :get, :update => update } )
-      else
-        links << per_page 
-      end
+    links = per_page_options.map do |per_page|
+      params.merge!({:per_page => per_page})
+      link_class = 'btn'
+      link_class << ' disabled' if per_page == current
+      link_to(per_page, params, :remote => true, class: link_class)
     end
-    return "Pro Seite: " + links.join(" ")
+
+    content_tag :div, class: 'btn-group pull-right' do
+      links.join.html_safe
+    end
+
   end
-  
-  def sort_td_class_helper(param)
-    result = 'class="sortup"' if params[:sort] == param
-    result = 'class="sortdown"' if params[:sort] == param + "_reverse"
-    return result
-  end
-  
+
   def sort_link_helper(text, key, options = {})
-    per_page = options[:per_page] || 10
-    action = options[:action] || "list"
+    # Hmtl options
     remote = options[:remote].nil? ? true : options[:remote]
-    key += "_reverse" if params[:sort] == key
-
-    link_options = {
-        :url => url_for(:params => params.merge({:sort => key, :page => nil, :per_page => per_page})),
-        :before => "Element.show('loader')",
-        :success => "Element.hide('loader')",
-        :method => :get
-    }
+    class_name = case params[:sort]
+                   when key then
+                     'sortup'
+                   when key + '_reverse' then
+                     'sortdown'
+                   else
+                     nil
+                 end
     html_options = {
-      :title => _("Nach #{text} sortieren"),
-      :href => url_for(:action => action, :params => params.merge({:sort => key, :page => nil, :per_page => per_page}))
+        :title => I18n.t('helpers.application.sort_by', text: text),
+        :remote => remote,
+        :class => class_name
     }
 
-    if remote
-      link_to_remote(text, link_options, html_options)
-    else
-      link_to(text, link_options[:url], html_options)
-    end
+
+    # Url options
+    key += "_reverse" if params[:sort] == key
+    per_page = options[:per_page] || @per_page
+    url_options = params.merge(per_page: per_page, sort: key)
+    url_options.merge!({page: params[:page]}) if params[:page]
+    url_options.merge!({query: params[:query]}) if params[:query]
+
+    link_to(text, url_for(url_options), html_options)
   end
   
   # Generates a link to the top of the website
   def link_to_top
-    link_to image_tag("arrow_up_red.png", :size => "16x16", :border => "0", :alt => "Nach oben"), "#" 
+    link_to '#' do
+      content_tag :i, nil, class: 'icon-arrow-up icon-large'
+    end
   end
   
   # Returns the weekday. 0 is sunday, 1 is monday and so on
   def weekday(dayNumber)
-    weekdays = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"]
+    weekdays = I18n.t('date.day_names')
     return weekdays[dayNumber]
-  end
-  
-  # highlights a phrase in given text
-  # based on the rails text-helper 'highlight'
-  def highlight_phrase(text, phrase, highlighter = '<strong class="highlight">\1</strong>')
-    unless phrase.blank? || text.nil?
-      phrase.split(' ').each {|keyword| text.gsub!(/(#{Regexp.escape(keyword)})/i, highlighter)}
-    end
-    return text
   end
   
   # to set a title for both the h1-tag and the title in the header
   def title(page_title, show_title = true)
-    @content_for_title = page_title.to_s
+    content_for(:title) { page_title.to_s }
     @show_title = show_title
   end
 
@@ -121,8 +102,11 @@ module ApplicationHelper
   end
 
   def icon(name, options={})
-    icons = { :delete => { :file => 'b_drop.png', :alt => 'Löschen'},
-              :edit   => { :file => 'b_edit.png', :alt => 'Bearbeiten'}}
+    icons = {
+        :delete  => { :file => 'b_drop.png', :alt => I18n.t('ui.delete')},
+        :edit    => { :file => 'b_edit.png', :alt => I18n.t('ui.edit')},
+        :members => { :file => 'b_users.png', :alt => I18n.t('helpers.application.edit_user')}
+    }
     options[:alt] ||= icons[name][:alt]
     options[:title] ||= icons[name][:title]
     options.merge!({:size => '16x16',:border => "0"})
@@ -137,28 +121,42 @@ module ApplicationHelper
       :success => "Element.hide('loader')",
       :method => :get
     }
-    link_to_remote(text, remote_options.merge(options))
+    link_to(text, options[:url], remote_options.merge(options))
   end
 
   def format_roles(record)
     roles = []
-    roles << 'Admin' if record.role_admin?
-    roles << 'Finanzen' if record.role_finance?
-    roles << 'Lieferanten' if record.role_suppliers?
-    roles << 'Artikel' if record.role_article_meta?
-    roles << 'Bestellung' if record.role_orders?
+    roles << I18n.t('helpers.application.role_admin') if record.role_admin?
+    roles << I18n.t('helpers.application.role_finance') if record.role_finance?
+    roles << I18n.t('helpers.application.role_suppliers') if record.role_suppliers?
+    roles << I18n.t('helpers.application.role_article_meta') if record.role_article_meta?
+    roles << I18n.t('helpers.application.role_orders') if record.role_orders?
     roles.join(', ')
   end
 
   def link_to_gmaps(address)
-    link_to h(address), "http://maps.google.de/?q=#{h(address)}", :title => "Show it on google maps",
+    link_to h(address), "http://maps.google.com/?q=#{h(address)}", :title => I18n.t('helpers.application.show_google_maps'),
       :target => "_blank"
   end
   
   # offers a link for writing message to user
   # checks for nil (useful for relations)
   def link_to_user_message_if_valid(user)
-    user.nil? ? '??' : ( link_to user.nick, user_message_path(user), :title => _('Nachricht schreiben') )
+    user.nil? ? '??' : link_to(user.nick, new_message_path('message[mail_to]' => user.id),
+                               :title => I18n.t('helpers.application.write_message'))
+  end
+
+  def bootstrap_flash
+    flash_messages = []
+    flash.each do |type, message|
+      type = :success if type == :notice
+      type = :error   if type == :alert
+      text = content_tag(:div,
+                         content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => "close", "data-dismiss" => "alert") +
+                             message, :class => "alert fade in alert-#{type}")
+      flash_messages << text if message
+    end
+    flash_messages.join("\n").html_safe
   end
 
 end

@@ -1,17 +1,15 @@
 class ArticleCategory < ActiveRecord::Base
   has_many :articles
-	
-  validates_length_of :name, :in => 2..20
-  validates_uniqueness_of :name
+
+  validates :name, :presence => true, :uniqueness => true, :length => { :in => 2..20 }
+
+  before_destroy :check_for_associated_articles
+
+  protected
+
+  def check_for_associated_articles
+    raise I18n.t('activerecord.errors.has_many_left', collection: Article.model_name.human) if articles.undeleted.exists?
+  end
 
 end
-
-# == Schema Information
-#
-# Table name: article_categories
-#
-#  id          :integer(4)      not null, primary key
-#  name        :string(255)     default(""), not null
-#  description :string(255)
-#
 

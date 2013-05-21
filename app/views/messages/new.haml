@@ -1,65 +1,46 @@
-%h1 Neue Nachricht
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $('#message_recipient_tokens').tokenInput("#{users_path(:format => :json)}", {
+        crossDomain: false,
+        prePopulate: $('#message_recipient_tokens').data('pre'),
+        hintText: '#{t '.search_user'}',
+        noResultText: '#{t '.no_user_found'}',
+        searchingText: '#{t '.search'}',
+        theme: 'facebook'
+      });
 
-- form_for @message do |f|
-  = f.error_messages
+      $('#message_sent_to_all').click(function() {
+        if ($(this).is(':checked')) {
+          $('#recipients').slideUp();
+        } else {
+          $('#recipients').slideDown();
+        }
+      });
+    });
 
-  %p
-    Empfängerinnen
-    %fieldset
-      - if Foodsoft.config[:mailing_list].blank?
-        = f.check_box :sent_to_all, :onchange => "Element.toggle('recipients')"
-        gesamte Foodcoop
+- title t('.title')
+
+= simple_form_for @message do |f|
+  - if FoodsoftConfig[:mailing_list].blank?
+    = f.input :sent_to_all, :as => :boolean
+  - else
+    %b= t '.list.desc', list: mail_to(FoodsoftConfig[:mailing_list])
+    %br/
+    %small{:style => "color:grey"}
+      = t '.list.subscribe_msg'
+      %br/
+      - if FoodsoftConfig[:mailing_list_subscribe].blank?
+        = t '.list.subscribe', link: link_to(t('.list.wiki'), wiki_page_path('MailingListe'))
       - else
-        %b Nachrichten an alle
-        verschickst Du bitte über den Verteiler:
-        = mail_to Foodsoft.config[:mailing_list]
-        %br/
-        %small{:style => "color:grey"}
-          Eventuell musst Du Dich dem Verteiler erst bekannt machen.
-          %br/
-          - if Foodsoft.config[:mailing_list_subscribe].blank?
-            Erklärungen zum Verteiler findest Du im
-            = link_to 'Wiki (Abschnitt Mailing-Liste)', wiki_page_path('MailingListe')
-          - else
-            z.b. mit einer Mail an
-            = mail_to Foodsoft.config[:mailing_list_subscribe]
-      %table#recipients
-        %tr
-          %td
-            %b BenutzerInnen:
-            %br/
-            %small{:style => "color:grey"} (Mehrere Benutzerinnen mit Komma trennen)
-            %br/
-            = text_field_with_auto_complete(:message, :recipients_nicks, {:value => @message.recipients_nicks}, {:tokens => ","})
-            :javascript
-              var userListLoaded = false;
-              function checkUserList() {
-                if (userListLoaded) {
-                  $('user-list').toggle();
-                }
-                return !userListLoaded;
-              }
-            = link_to_remote('Liste', :update => 'user-list', :url => {:action => 'user_list'}, :complete => 'userListLoaded = true', :condition => 'checkUserList()')
-            #user-list.auto_complete
-        %tr
-          %td
-            %b Gruppe:
-            %br/
-            = f.select :group_id, groups_for_select, :prompt => " -- Gruppe auswählen --"
+        = t '.list.mail', email: mail_to(FoodsoftConfig[:mailing_list_subscribe])
 
-  %p
-    Privat
-    = f.check_box :private
-    %small{:style => "color:grey"} (Nachricht taucht nicht im Foodsoft-Nachrichteneingang auf)
-
-  %p
-    Betreff
-    %br/
-    = f.text_field :subject
-
-  %p
-    Nachricht
-    %br/
-    ~ f.text_area :body, :cols => '80', :rows => '20'
-
-  = submit_tag "Senden"
+  #recipients
+    = f.input :recipient_tokens, :input_html => { 'data-pre' => User.find_all_by_id(@message.recipients_ids).map { |u| u.token_attributes }.to_json }
+    = f.input :group_id, :as => :select, :collection => Group.undeleted.order('type DESC, name ASC').all.reject { |g| g.memberships.empty? }
+  = f.input :private
+  = f.input :subject, input_html: {class: 'input-xxlarge'}
+  = f.input :body, input_html: {class: 'input-xxlarge'}
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), :back

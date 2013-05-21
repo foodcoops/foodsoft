@@ -1,21 +1,22 @@
 class Wikilink < WikiCloth::WikiLinkHandler
-  include ActionController::UrlWriter # To use named routes
   
   def link_attributes_for(page)
     permalink = Page.permalink(page)
-    url_options = {:host => Foodsoft.config[:host], :protocol => Foodsoft.config[:protocol]}
-    url_options.merge!({:port => Foodsoft.config[:port]}) if Foodsoft.config[:port]
+    url_options = {:host => FoodsoftConfig[:host], :protocol => FoodsoftConfig[:protocol]}
+    url_options.merge!({:port => FoodsoftConfig[:port]}) if FoodsoftConfig[:port]
 
     if Page.exists?(:permalink => permalink)
-     { :href => url_for(url_options.merge({:controller => "pages", :action => "show", 
-                                          :permalink => permalink, :use_route => :wiki_page})) }
+     { :href => url_for(:wiki_page_path, permalink: permalink, use_route: :wiki_page) }
     else
-     { :href => url_for(url_options.merge({:controller => "pages", :action => "new", 
-                                          :title => page, :parent => params[:referer]})), :class =>  "new_wiki_link"}
+      { href: url_for(:new_page_path, title: page, parent: params[:referer]), class: 'new_wiki_link' }
     end
   end
 
   def section_link(section)
     ""
+  end
+
+  def url_for(path_name, options = {})
+    Rails.application.routes.url_helpers.send path_name, options.merge({foodcoop: FoodsoftConfig.scope})
   end
 end

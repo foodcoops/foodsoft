@@ -1,18 +1,21 @@
+# encoding: utf-8
+#
 # Ordergroups can order, they are "children" of the class Group
 # 
 # Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
-# * account_updated (datetime)
 class Ordergroup < Group
-  acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
-  extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
+
+  APPLE_MONTH_AGO = 6                 # How many month back we will count tasks and orders sum
+
   serialize :stats
 
-  has_many :financial_transactions, :order => "created_on DESC"
+  has_many :financial_transactions
   has_many :group_orders
   has_many :orders, :through => :group_orders
 
-  validates_numericality_of :account_balance, :message => 'ist keine gültige Zahl'
+  validates_numericality_of :account_balance, :message => I18n.t('ordergroups.model.invalid_balance')
+  validate :uniqueness_of_name, :uniqueness_of_members
 
   after_create :update_stats!
 
@@ -24,11 +27,11 @@ class Ordergroup < Group
   end
 
   def value_of_open_orders(exclude = nil)
-    group_orders.open.reject{|go| go == exclude}.collect(&:price).sum
+    group_orders.in_open_orders.reject{|go| go == exclude}.collect(&:price).sum
   end
   
   def value_of_finished_orders(exclude = nil)
-    group_orders.finished.reject{|go| go == exclude}.collect(&:price).sum
+    group_orders.in_finished_orders.reject{|go| go == exclude}.collect(&:price).sum
   end
 
   # Returns the available funds for this order group (the account_balance minus price of all non-closed GroupOrders of this group).
@@ -36,25 +39,29 @@ class Ordergroup < Group
   def get_available_funds(exclude = nil)
     account_balance - value_of_open_orders(exclude) - value_of_finished_orders(exclude)
   end
-  memoize :get_available_funds
 
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.
-  def add_financial_transaction(amount, note, user)
+  def add_financial_transaction!(amount, note, user)
     transaction do      
-      trans = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
-      trans.save!
-      self.account_balance += trans.amount
-      self.account_updated = trans.created_on
+      t = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
+      t.save!
+      self.account_balance = financial_transactions.sum('amount')
       save!
-      notify_negative_balance(trans) 
+      # Notify only when order group had a positive balance before the last transaction:
+      if t.amount < 0 && self.account_balance < 0 && self.account_balance - t.amount >= 0
+        Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'negative_balance', self.id, t.id)
+      end
     end
   end
 
   def update_stats!
-    time = 6.month.ago
-    jobs = users.collect { |u| u.tasks.done.sum('duration', :conditions => ["updated_on > ?", time]) }.sum
-    orders_sum = group_orders.select { |go| !go.order.ends.nil? && go.order.ends > time }.collect(&:price).sum
+    # Get hours for every job of each user in period
+    jobs = users.sum { |u| u.tasks.done.sum(:duration, :conditions => ["updated_on > ?", APPLE_MONTH_AGO.month.ago]) }
+    # Get group_order.price for every finished order in this period
+    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).sum(:price)
+
+    @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
   end
 
@@ -68,53 +75,56 @@ class Ordergroup < Group
     ((avg_jobs_per_euro / Ordergroup.avg_jobs_per_euro) * 100).to_i rescue 0
   end
 
+  # If the the option stop_ordering_under is set, the ordergroup is only allowed to participate in an order,
+  # when the apples value is above the configured amount.
+  # The restriction can be deactivated for each ordergroup.
+  # Only ordergroups, which have participated in more than 5 orders in total and more than 2 orders in apple time period
+  def not_enough_apples?
+    FoodsoftConfig[:stop_ordering_under].present? and
+        !ignore_apple_restriction and
+        apples < FoodsoftConfig[:stop_ordering_under] and
+        group_orders.count > 5 and
+        group_orders.joins(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).count > 2
+  end
+
   # Global average
   def self.avg_jobs_per_euro
-    stats = Ordergroup.all.collect(&:stats)
-    stats.collect {|s| s[:jobs_size].to_f }.sum / stats.collect {|s| s[:orders_sum].to_f }.sum
+    stats = Ordergroup.pluck(:stats)
+    stats.sum {|s| s[:jobs_size].to_f } / stats.sum {|s| s[:orders_sum].to_f }
+  end
+
+  def account_updated
+    financial_transactions.last.try(:created_on) || created_on
   end
   
   private
-  
-  # If this order group's account balance is made negative by the given/last transaction, 
-  # a message is sent to all users who have enabled notification.
-  def notify_negative_balance(transaction)
-    # Notify only when order group had a positive balance before the last transaction:
-    if (transaction.amount < 0 && self.account_balance < 0 && self.account_balance - transaction.amount >= 0)
-      for user in users
-        Mailer.deliver_negative_balance(user,transaction) if user.settings["notify.negativeBalance"] == '1'
-      end
+
+  # Make sure, that a user can only be in one ordergroup
+  def uniqueness_of_members
+    users.each do |user|
+      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.nick) if user.groups.where(:type => 'Ordergroup').size > 1
+    end
+  end
+
+  # Make sure, the name is uniq, add usefull message if uniq group is already deleted
+  def uniqueness_of_name
+    id = new_record? ? '' : self.id
+    group = Ordergroup.with_deleted.where('groups.id != ? AND groups.name = ?', id, name).first
+    if group.present?
+      message = group.deleted? ? :taken_with_deleted : :taken
+      errors.add :name, message
+    end
+  end
+
+  # Make sure, the name is uniq, add usefull message if uniq group is already deleted
+  def uniqueness_of_name
+    id = new_record? ? '' : self.id
+    group = Ordergroup.where('groups.id != ? AND groups.name = ?', id, name).first
+    if group.present?
+      message = group.deleted? ? :taken_with_deleted : :taken
+      errors.add :name, message
     end
   end
   
 end
-
-# == Schema Information
-#
-# Table name: groups
-#
-#  id                  :integer(4)      not null, primary key
-#  type                :string(255)     default(""), not null
-#  name                :string(255)     default(""), not null
-#  description         :string(255)
-#  account_balance     :decimal(8, 2)   default(0.0), not null
-#  account_updated     :datetime
-#  created_on          :datetime        not null
-#  role_admin          :boolean(1)      default(FALSE), not null
-#  role_suppliers      :boolean(1)      default(FALSE), not null
-#  role_article_meta   :boolean(1)      default(FALSE), not null
-#  role_finance        :boolean(1)      default(FALSE), not null
-#  role_orders         :boolean(1)      default(FALSE), not null
-#  weekly_task         :boolean(1)      default(FALSE)
-#  weekday             :integer(4)
-#  task_name           :string(255)
-#  task_description    :string(255)
-#  task_required_users :integer(4)      default(1)
-#  deleted_at          :datetime
-#  contact_person      :string(255)
-#  contact_phone       :string(255)
-#  contact_address     :string(255)
-#  stats               :text
-#  task_duration       :integer(4)      default(1)
-#
 

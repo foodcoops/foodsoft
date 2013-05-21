@@ -1,30 +1,12 @@
-- form_for [:admin, @workgroup] do |@form|
-  - render :layout => 'shared/group_form' do
-    %div{:style => "float:right;width:40%"}
-      %h3 Gruppe hat Zugriff auf
-      %table
-        %tr
-          %td
-            = @form.label :role_admin, "Administration"
-          %td= @form.check_box :role_admin
-        %tr
-          %td
-            = @form.label :role_finance, "Finanzen"
-          %td= @form.check_box :role_finance
-        %tr
-          %td
-            = @form.label :role_suppliers, "Lieferantenverwaltung"
-          %td= @form.check_box :role_suppliers
-        %tr
-          %td
-            = @form.label :role_article_meta, "Artikelverwaltung"
-          %td= @form.check_box :role_article_meta
-        %tr
-          %td
-            = @form.label :role_orders, "Bestellungsverwaltung"
-          %td= @form.check_box :role_orders
-
-  %br{ :style => "clear:both" }
-  = submit_tag "Speichern"
-  |
-  = link_to "Abbrechen", admin_workgroups_path
+%p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @workgroup.id), remote: true)).html_safe
+= simple_form_for [:admin, @workgroup] do |f|
+  = render :layout => 'shared/group_form_fields', :locals => {:f => f} do
+    %h4= t 'admin.access_to'
+    = f.input :role_admin
+    = f.input :role_finance
+    = f.input :role_suppliers
+    = f.input :role_article_meta
+    = f.input :role_orders
+  .form-actions
+    = f.button :submit
+    = link_to t('ui.or_cancel'), :back

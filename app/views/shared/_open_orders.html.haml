@@ -1,30 +1,33 @@
-.box_title
-  %h2 Laufende Bestellungen
-.column_content
+%section
+  %h2= t '.title'
+  - if ordergroup.not_enough_apples?
+    .alert
+    = t '.not_enough_apples'
   - unless Order.open.empty?
-    %table.list
+    %table.table.table-striped
       %thead
         %tr
-          %th Lieferantin
-          %th Ende
-          %th Wer hat bestellt?
-          %th Summe
+          %th= t '.supplier'
+          %th= t '.ending'
+          %th= t '.who_ordered'
+          %th= t '.total'
       %tbody
         - total = 0
         - Order.open.each do |order|
-          %tr{:class => cycle('even', 'odd', :name => 'open_orders')}
-            %td= link_to h(order.name), :controller => 'ordering', :action => 'order', :id => order
-            %td=h format_time(order.ends) unless order.ends.nil?
-            - if group_order = order.group_order(@ordergroup)
+          %tr
+            %td= link_to_ordering(order)
+            %td= format_time(order.ends) unless order.ends.nil?
+            - if group_order = order.group_order(ordergroup)
               - total += group_order.price
-              %td=h "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
-              %td= number_to_currency(group_order.price)
+              %td= "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
+              %td.numeric= number_to_currency(group_order.price)
             - else
-              %td
-              %td
-    - if total > 0
-      %p
-        Gesamtsumme:
-        %b= number_to_currency(total)
+              %td{:colspan => 2}
+      - if total > 0
+        %tfooter
+          %tr
+            %th(colspan="2")
+            %th= t('.total_sum') + ':'
+            %th.numeric= number_to_currency(total)
   - else
-    %i Derzeit gibt es keine laufenden Bestellungen
+    %i= t '.no_open_orders'

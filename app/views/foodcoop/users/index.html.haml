@@ -1,32 +1,18 @@
-%h1 Mitglieder der Foodcoop
-%p
-  %i
-    Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.
-    %br/
-    Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter
-    = link_to "Einstellungen", my_profile_path
-    freigeben.
+- title t('.title')
 
-.left_column{:style => "width:100%"}
-  .box_title
-    %h2 Übersicht
-  .column_content
-    - unless params[:sort_by_ordergroups]
-      #user_filter{:style => "float:left; margin-right:2em;"}
-        %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
-          %label{:for => 'article_name'} Suche nach Name:
-          = text_field_tag("query", params['query'], :size => 10 )
-          
-        = observe_field 'query',  :frequency => 2, |
-          :before => "Element.show('loader')", |
-          :success => "Element.hide('loader')", |
-          :url => foodcoop_users_path, |
-          :update => :users, |
-          :with => 'query', |
-          :method => :get |
-    
-    =_ "Nach Bestellgruppen sortieren:"
-    - form_tag(foodcoop_users_path, :method => "get", :style=>"display:inline;") do
-      = check_box_tag :sort_by_ordergroups, 1, params[:sort_by_ordergroups], :onclick => "submit();"
-    #users
-      = render :partial => "users"
+%section
+  = t('.body', profile_link: link_to(t('.profile_link'), my_profile_path)).html_safe
+
+  .well
+    = form_tag foodcoop_users_path, :method => :get, :remote => true,
+      'data-submit-onchange' => true, class: 'form-search' do
+
+      = text_field_tag :user_name, params[:user_name], class: 'input-medium search-query',
+        placeholder: t('.ph_name')
+      = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'input-medium search-query',
+        placeholder: t('.ph_ordergroup')
+      %button.btn
+        %i.icon-search
+
+  #users
+    = render :partial => "users"

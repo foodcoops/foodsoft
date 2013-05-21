@@ -1,0 +1,23 @@
+- title t('.title'), false
+
+.row-fluid
+  .span7
+    %h3
+      = h(t('.user.title', user: @current_user.nick))
+      %small= t '.user.since', when: distance_of_time_in_words(Time.now, @current_user.created_on)
+    = simple_form_for(@current_user, :url => { :action => 'update_profile'}) do |f|
+      = render :partial => 'shared/user_form_fields', :locals => {:f => f}
+      .form-actions
+        = submit_tag t('ui.save'), class: 'btn'
+  .span5
+    %h2= t '.groups.title'
+    %table.table.table-striped
+      - @current_user.memberships.each do |membership|
+        %tr
+          %td= membership.group.name
+          %td= link_to t('.groups.invite'), new_invite_path(id: membership.group_id),
+            remote: true, class: 'btn btn-success btn-small'
+          - if membership.group.type != 'Ordergroup'
+            %td= link_to t('.groups.cancel'), cancel_membership_path(membership_id: membership),
+              confirm: t('.groups.cancel_confirm'), method: :post,
+              class: 'btn btn-danger btn-small'

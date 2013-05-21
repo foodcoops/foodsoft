@@ -1,12 +1,3 @@
-- title "Aufgabe bearbeiten"
+- title t('.title')
 
-#form{:style => "float:left; width:39em"}
-  - form_for @task do |form|
-    = render :partial => 'form', :locals => {:form => form}
-    = submit_tag "Speichern"
-    |
-    = link_to "Abbrechen", :action => "show", :id => @task
-#workgroup_members{:style => "padding-left:41em"}
-  %h3 Mitglieder der Gruppe
-  #list
-    = render :partial => "shared/workgroup_members"
+= render 'form'

@@ -1,43 +1,20 @@
-- form_for([:finance, @invoice]) do |f|
-  = f.error_messages
+= simple_form_for([:finance, @invoice]) do |f|
   = f.hidden_field :delivery_id
   = f.hidden_field :order_id
 
   - if @invoice.delivery
-    %p= "Diese Rechnung ist mit einer #{link_to "Lieferung", [@invoice.supplier,@invoice.delivery]} verknüpft."
+    %p= t('.linked', what_link: link_to(t('.delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
   - if @invoice.order
-    %p= "Diese Rechnung ist mit einer #{link_to "Bestellung", @invoice.order} verknüpft."
-  %p
-    Lieferantin
-    %br/
-    = f.select :supplier_id, Supplier.all.collect { |s| [s.name, s.id] }
-  %p
-    Rechnungsnummer
-    %br/
-    = f.text_field :number
-  %p
-    Rechnungsdatum
-    %br/
-    = f.date_select :date
-  %p
-    Bezahlt am
-    %br/
-    = f.date_select :paid_on, :include_blank => true
-  %p
-    Rechnungsbetrag
-    %br/
-    = f.text_field :amount
-  %p
-    Pfand berechnet
-    %br/
-    = f.text_field :deposit
-  %p
-    Pfand gutgeschrieben
-    %br/
-    = f.text_field :deposit_credit
-  %p
-    Notiz
-    %br/
-    = f.text_area :note, :size => "28x8"
-  %p
-    = f.submit "Speichern"
+    %p= t('.linked', what_link: link_to(t('.order'), @invoice.order)).html_safe
+
+  = f.association :supplier, hint: false
+  = f.input :number
+  = f.input :date, as: :date_picker
+  = f.input :paid_on, as: :date_picker
+  = f.input :amount, as: :string
+  = f.input :deposit, as: :string
+  = f.input :deposit_credit, as: :string
+  = f.input :note
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to t('ui.or_cancel'), :back

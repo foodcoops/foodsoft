@@ -1,0 +1,26 @@
+- unless @orders.empty?
+  - if Order.finished.count > 20
+    = items_per_page
+  = pagination_links_remote @orders
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= t('.name')
+        %th= t('.end')
+        %th= t('.state')
+        %th= t('.last_edited_by')
+        %th
+    %tbody
+      - @orders.each do |order|
+        %tr{:class => cycle("even","odd", :name => "order")}
+          %td= link_to truncate(order.name), new_finance_order_path(order_id: order.id)
+          %td=h format_time(order.ends) unless order.ends.nil?
+          %td= order.closed? ? t('.cleared', amount: number_to_currency(order.foodcoop_result)) : "beendet"
+          %td= order.updated_by.nil? ? '??' : order.updated_by.nick
+          %td
+            - unless order.closed?
+              = link_to t('.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-mini btn-primary'
+              = link_to t('.close'), close_direct_finance_order_path(order),
+                :confirm => t('.confirm'), :method => :put, class: 'btn btn-mini'
+- else
+  %i= t('.no_closed_orders')

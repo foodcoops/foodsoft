@@ -1,6 +1,14 @@
-- for group in Group.find :all, :conditions => "type != 'Ordergroup'"
-  %h4= link_to_function group.name, "Element.toggle('workgroup_#{group.id}')"
-  %ul{:style => "display:none"}[group]
-    - for user in group.users.find :all, :order => "nick"
-      %li= user.nick + " (#{user.ordergroup.name if user.ordergroup})"
-  
+.well.well-small
+  %h4= t '.title'
+  #groupMembers.accordion
+    - Workgroup.all.each do |workgroup|
+      .accordion-group
+        .accoridon-heading
+          = link_to workgroup.name, "#collapse#{workgroup.id}", data: {toggle: 'collapse', parent: '#groupMembers'}
+        %div{id: "collapse#{workgroup.id}", class: 'accordion-body collapse'}
+          .accordion-inner
+            %ul.unstyled
+              - workgroup.users.includes(:groups).order('nick').each do |user|
+                %li
+                  = user.nick
+                  %small (#{user.ordergroup.try(:name)})

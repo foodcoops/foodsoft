@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'digest/sha1'
 # specific user rights through memberships (see Group)
 class User < ActiveRecord::Base
@@ -5,7 +7,11 @@ class User < ActiveRecord::Base
   
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
-  has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
+  #has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
+  def ordergroup
+    Ordergroup.joins(:memberships).where(memberships: {user_id: self.id}).first
+  end
+
   has_many :workgroups, :through => :memberships, :source => :group, :class_name => "Workgroup"
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments
@@ -16,7 +22,7 @@ class User < ActiveRecord::Base
   attr_accessor :password, :setting_attributes
 
   validates_presence_of :nick, :email
-  validates_presence_of :password_hash, :message => "Password is required."
+  validates_presence_of :password, :on => :create
   validates_length_of :nick, :in => 2..25
   validates_uniqueness_of :nick, :case_sensitive => false
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
@@ -38,13 +44,13 @@ class User < ActiveRecord::Base
   # returns the User-settings and the translated description
   def self.setting_keys
     {
-      "notify.orderFinished" => 'Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).',
-      "notify.negativeBalance" => 'Informiere mich, falls meine Bestellgruppe ins Minus rutscht.',
-      "notify.upcoming_tasks" => 'Erinnere mich an anstehende Aufgaben.',
-      "messages.sendAsEmail" => 'Bekomme Nachrichten als Emails.',
-      "profile.phoneIsPublic" => 'Telefon ist für Mitglieder sichtbar',
-      "profile.emailIsPublic" => 'E-Mail ist für Mitglieder sichtbar',
-      "profile.nameIsPublic" => 'Name ist für Mitglieder sichtbar'
+      "notify.orderFinished" => I18n.t('model.user.notify.order_finished'),
+      "notify.negativeBalance" => I18n.t('model.user.notify.negative_balance'),
+      "notify.upcoming_tasks" => I18n.t('model.user.notify.upcoming_tasks'),
+      "messages.sendAsEmail" => I18n.t('model.user.notify.send_as_email'),
+      "profile.phoneIsPublic" => I18n.t('model.user.notify.phone_is_public'),
+      "profile.emailIsPublic" => I18n.t('model.user.notify.email_is_public'),
+      "profile.nameIsPublic" => I18n.t('model.user.notify.name_is_public')
     }
   end
   # retuns the default setting for a NEW user
@@ -71,8 +77,8 @@ class User < ActiveRecord::Base
     [first_name, last_name].join(" ")
   end
 
-  def ordergroup_name
-    ordergroup.name if ordergroup
+  def receive_email?
+    settings['messages.sendAsEmail'] == "1" && email.present?
   end
   
   # Sets the user's password. It will be stored encrypted along with a random salt.
@@ -126,47 +132,9 @@ class User < ActiveRecord::Base
   end
   
   def ordergroup_name
-    ordergroup ? ordergroup.name : "keine Bestellgruppe"
+    ordergroup ? ordergroup.name : I18n.t('model.user.no_ordergroup')
   end
 
-  # Find all tasks, for which the current user should be responsible
-  # but which aren't accepted yet
-  def unaccepted_tasks
-    # this doesn't work. Produces "undefined method", when later use task.users... Rails Bug?
-    # self.tasks.find :all, :conditions => ["accepted = ?", false], :order => "due_date DESC"
-    Task.find_by_sql ["SELECT t.* FROM tasks t, assignments a, users u 
-                      WHERE u.id = a.user_id
-                      AND t.id = a.task_id
-                      AND u.id = ?
-                      AND a.accepted = ?
-                      AND t.done = ?
-                      ORDER BY t.due_date ASC", self.id, false, false]
-  end
-  
-  # Find all accepted tasks, which aren't done
-  def accepted_tasks
-    Task.find_by_sql ["SELECT t.* FROM tasks t, assignments a, users u 
-                      WHERE u.id = a.user_id
-                      AND t.id = a.task_id
-                      AND u.id = ?
-                      AND a.accepted = ?
-                      AND t.done = ?
-                      ORDER BY t.due_date ASC", self.id, true, false]
-  end
-  
-  # find all tasks in the next week (or another number of days)
-  def next_tasks(number = 7)
-    Task.find_by_sql ["SELECT t.* FROM tasks t, assignments a, users u 
-                      WHERE u.id = a.user_id
-                      AND t.id = a.task_id
-                      AND u.id = ?
-                      AND t.due_date >= ?
-                      AND t.due_date <= ?
-                      AND t.done = ?
-                      AND a.accepted = ?
-                      ORDER BY t.due_date ASC", self.id, Time.now, number.days.from_now, false, true]  
-  end
- 
   # returns true if user is a member of a given group
   def member_of?(group)
     group.users.exists?(self.id)
@@ -177,23 +145,18 @@ class User < ActiveRecord::Base
      self.groups.find(:all, :conditions => {:type => ""})
   end
 
-end
+  def self.authenticate(nick, password)
+    user = find_by_nick(nick)
+    if user && user.has_password(password)
+      user
+    else
+      nil
+    end
+  end
 
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer(4)      not null, primary key
-#  nick                   :string(255)     default(""), not null
-#  password_hash          :string(255)     default(""), not null
-#  password_salt          :string(255)     default(""), not null
-#  first_name             :string(255)     default(""), not null
-#  last_name              :string(255)     default(""), not null
-#  email                  :string(255)     default(""), not null
-#  phone                  :string(255)
-#  created_on             :datetime        not null
-#  reset_password_token   :string(255)
-#  reset_password_expires :datetime
-#  last_login             :datetime
-#
+  def token_attributes
+    {:id => id, :name => "#{nick} (#{ordergroup.try(:name)})"}
+  end
+
+end
 

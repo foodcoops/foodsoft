@@ -1,9 +1,5 @@
-- unless comments.empty?
-  - comments.each do |comment|
-    .comment[comment]
-      .timestamp
-        %b=h "#{comment.user.try(:ordergroup_name)}"
-        = "(#{comment.user.try(:nick)} am #{format_time(comment.created_at)}):"
-      = simple_format(comment.text)
-- else
-  es gibt derzeit keine Kommentare.
+- comments.each do |comment|
+  .comment[comment]
+    %strong= comment.user.try(:ordergroup_name)
+    %small (#{comment.user.try(:nick)} am #{format_time(comment.created_at)}):
+    = simple_format(comment.text)

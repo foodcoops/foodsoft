@@ -1,0 +1,39 @@
+- title t('.title'), false
+
+- content_for :sidebar do
+  .well.well-small
+    // Ordergroups Account Balance
+    %h2= t '.funds.title'
+    %table.table.table-striped
+      %tr
+        %td= t('.funds.account_balance') + ':'
+        %td.numeric{:style => "width:5em"}= number_to_currency(@ordergroup.account_balance)
+      %tr
+        %td= '- ' + t('.funds.open_orders') + ':'
+        %td.numeric= number_to_currency(@ordergroup.value_of_open_orders)
+      %tr
+        %td= '- ' + t('.funds.finished_orders') + ':'
+        %td.numeric= number_to_currency(@ordergroup.value_of_finished_orders)
+      %tr
+        %th= t('.funds.available_funds') + ':'
+        %th.numeric= number_to_currency(@ordergroup.get_available_funds)
+
+= render :partial => "shared/open_orders", :locals => {:ordergroup => @ordergroup}
+
+// finished orders
+- unless Order.finished.empty?
+  %section
+    %h2= t '.finished_orders.title'
+    = render :partial => "orders", :locals => {:orders => Order.finished_not_closed, :pagination => false}
+    - if @ordergroup.value_of_finished_orders > 0
+      %p
+        = t('.finished_orders.total_sum') + ':'
+        %b= number_to_currency(@ordergroup.value_of_finished_orders)
+
+// closed orders
+- unless Order.closed.empty?
+  %section
+    %h2= t '.closed_orders.title'
+    = render :partial => "orders", :locals => {:orders => Order.closed.all(:limit => 5), :pagination => false}
+    %br/
+    = link_to t('.closed_orders.more'), archive_group_orders_path

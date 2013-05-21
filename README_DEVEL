@@ -38,16 +38,17 @@ Edit app_config.yml to suit your needs or just keep the defaults for now.
 
 (4) Secret Token
 -------------------
-The user session is stored in a cookie. To avoid misusing the cookies and its sensitive information, rails will encrypt it with a token. So copy the config file
+The user session are stored in cookies. Do avoid misusing the cookies and its sensitive information, rails
+will encrypt it with a token. So copy the config file
 
-  cp config/initializers/session_store.rb.SAMPLE config/initializers/session_store.rb
+   cp config/initializers/secret_token.rb.SAMPLE config/initializers/secret_token.rb
 
-and modify the token "config.action_controller.session"!
+and modify the token!!
 
 
 (5) Required ruby and gems
 -------------------
-We reccomend the using of rvm (https://rvm.beginrescueend.com/). Install rvm and get the lates ruby (1.8.7).
+We reccomend the using of rvm (https://rvm.beginrescueend.com/). Install rvm and get the latest ruby (>= 1.9.3).
 If installed you only need to install the gem bundler:
 
     gem install bundler
@@ -59,9 +60,7 @@ After that you get the other gems easily with (from project root):
 
 (6) Create database (schema) and load defaults
 --------------------------
-	rake db:create
-        rake db:schema:load
-        rake db:seed
+	rake db:setup
 
 With this, you also get a ready to go user with username 'admin' and password 'secret'.
 
@@ -69,5 +68,29 @@ With this, you also get a ready to go user with username 'admin' and password 's
 (7) Try it out!
 ---------------	
 Start the WEBrick server to try it out:
-	
-	script/server	
+
+	bundle exec rails s
+
+
+(8) (optional) Get background jobs done
+---------------------------------------
+We use for time intensive tasks a background job queue, at the moment resque with redis as key/value store.
+Install redis (in ubuntu the package redis-server works out of the box) and start the resque worker with:
+
+    rake resque:work QUEUE=foodsoft_notifier
+
+To have look on the current queue, failed jobs etc start the resque server with
+
+    resque-web
+
+
+(9) (optional) View mails in browser instead in your logs
+---------------------------------------------------------
+We use mailcatcher in development mode to view all delivered mails in a browser interface.
+Just install mailcatcher with gem install mailcatcher and start the service with
+
+    mailcatcher
+
+From now on you have a smpt server listening on 1025. To see the emails go to
+
+    http://localhost:1080

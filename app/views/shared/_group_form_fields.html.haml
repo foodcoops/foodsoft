@@ -1,0 +1,47 @@
+= f.input :name
+= f.input :description, as: :text, input_html: {rows: 4}
+
+= yield
+
+- if f.object.is_a?(Workgroup)
+  %h3= t '.title'
+  = f.input :weekly_task
+  #weekly_task_fields
+    = f.input :weekday, as: :select, collection: Workgroup.weekdays
+    = f.input :task_name
+    = f.input :task_required_users
+    = f.input :task_duration, :as => :select, :collection => (1..3)
+    = f.input :task_description, as: :text, input_html: {rows: 5}
+    = f.input :next_weekly_tasks_number
+
+= f.input :user_tokens, :as => :string,
+  :input_html => { 'data-pre' => f.object.users.map { |u| u.token_attributes }.to_json }
+
+- content_for :javascript do
+  :javascript
+    function toggleWeeklyTaskFields() {
+      if ($('#workgroup_weekly_task').is(':checked')) {
+        $('#weekly_task_fields .control-group').show();
+        $('#weekly_task_fields input').removeAttr('disabled');
+      } else {
+        $('#weekly_task_fields .control-group').hide();
+        $('#weekly_task_fields input').attr('disabled', 'disabled');
+      }
+    }
+
+    $(function() {
+      toggleWeeklyTaskFields();
+      $('#workgroup_weekly_task').click(function() {
+        toggleWeeklyTaskFields();
+      });
+
+      $("##{f.object.class.to_s.underscore}_user_tokens").tokenInput("#{users_path(:format => :json)}", {
+        crossDomain: false,
+        prePopulate: $("##{f.object.class.to_s.underscore}_user_tokens").data("pre"),
+        hintText: '#{t('.search_user')}',
+        noResultText: '#{t('.user_not_found')}',
+        searchingText: '#{t('.search')}',
+        theme: 'facebook'
+      });
+    });
+

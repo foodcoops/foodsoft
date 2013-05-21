@@ -1,6 +1,8 @@
 # A GroupOrder represents an Order placed by an Ordergroup.
 class GroupOrder < ActiveRecord::Base
-  
+
+  attr_accessor :group_order_articles_attributes
+
   belongs_to :order
   belongs_to :ordergroup
   has_many :group_order_articles, :dependent => :destroy
@@ -12,41 +14,74 @@ class GroupOrder < ActiveRecord::Base
   validates_numericality_of :price
   validates_uniqueness_of :ordergroup_id, :scope => :order_id   # order groups can only order once per order
 
-  named_scope :open, lambda { {:conditions => ["order_id IN (?)", Order.open.collect(&:id)]} }
-  named_scope :finished, lambda { {:conditions => ["order_id IN (?)", Order.finished_not_closed.collect(&:id)]} }
-  
-  # Updates the "price" attribute.
-  # Until the order is finished this will be the maximum price or
-  # the minimum price depending on configuration. When the order is finished it
-  # will be the value depending of the article results.
-  def update_price!
-    total = 0
-    for article in group_order_articles.find(:all, :include => :order_article)
-      unless order.finished?
-        if Foodsoft.config[:tolerance_is_costly]
-          total += article.order_article.article.fc_price * (article.quantity + article.tolerance)
-        else
-          total += article.order_article.article.fc_price * article.quantity
-        end
-      else
-        total += article.order_article.price.fc_price * article.result
+  scope :in_open_orders, joins(:order).merge(Order.open)
+  scope :in_finished_orders, joins(:order).merge(Order.finished_not_closed)
+
+  # Generate some data for the javascript methods in ordering view
+  def load_data
+    data = {}
+    data[:available_funds] = ordergroup.get_available_funds(self)
+
+    # load prices and other stuff....
+    data[:order_articles] = {}
+    order.articles_grouped_by_category.each do |article_category, order_articles|
+      order_articles.each do |order_article|
+        
+        # Get the result of last time ordering, if possible
+        goa = group_order_articles.detect { |goa| goa.order_article_id == order_article.id }
+
+        # Build hash with relevant data
+        data[:order_articles][order_article.id] = {
+            :price => order_article.article.fc_price,
+            :unit => order_article.article.unit_quantity,
+            :quantity => (goa ? goa.quantity : 0),
+            :others_quantity => order_article.quantity - (goa ? goa.quantity : 0),
+            :used_quantity => (goa ? goa.result(:quantity) : 0),
+            :tolerance => (goa ? goa.result(:tolerance) : 0),
+            :others_tolerance => order_article.tolerance - (goa ? goa.result(:tolerance) : 0),
+            :used_tolerance => (goa ? goa.result(:tolerance) : 0),
+            :total_price => (goa ? goa.total_price : 0),
+            :missing_units => order_article.missing_units,
+            :quantity_available => (order.stockit? ? order_article.article.quantity_available : 0)
+        }
       end
     end
+
+    data
+  end
+
+  def save_group_order_articles
+    for order_article in order.order_articles
+      # Find the group_order_article, create a new one if necessary...
+      group_order_article = group_order_articles.find_or_create_by_order_article_id(order_article.id)
+
+      # Get ordered quantities and update group_order_articles/_quantities...
+      quantities = group_order_articles_attributes.fetch(order_article.id.to_s, {:quantity => 0, :tolerance => 0})
+      group_order_article.update_quantities(quantities[:quantity].to_i, quantities[:tolerance].to_i)
+
+      # Also update results for the order_article
+      logger.debug "[save_group_order_articles] update order_article.results!"
+      order_article.update_results!
+    end
+
+    # set attributes to nil to avoid and infinite loop of
+  end
+
+  # Updates the "price" attribute.
+  def update_price!
+    total = group_order_articles.includes(:order_article => [:article, :article_price]).to_a.sum(&:total_price)
     update_attribute(:price, total)
   end
 
-end
 
-# == Schema Information
-#
-# Table name: group_orders
-#
-#  id                 :integer(4)      not null, primary key
-#  ordergroup_id      :integer(4)      default(0), not null
-#  order_id           :integer(4)      default(0), not null
-#  price              :decimal(8, 2)   default(0.0), not null
-#  lock_version       :integer(4)      default(0), not null
-#  updated_on         :datetime        not null
-#  updated_by_user_id :integer(4)
-#
+  # Save GroupOrder and updates group_order_articles/quantities accordingly
+  def save_ordering!
+    transaction do
+      save!
+      save_group_order_articles
+      update_price!
+    end
+  end
+
+end
 

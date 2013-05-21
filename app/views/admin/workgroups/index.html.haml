@@ -1,34 +1,15 @@
-- title "List workgroups"
+- title t '.title'
 
-%p
-  %i
-    Hier kannst du
-    = link_to 'neue Arbeitsgruppen', new_admin_workgroup_path
-    anlegen, Gruppen bearbeiten und löschen.
-    
-%p
-  Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>:
-  Eine
-  %em= link_to 'Bestellgruppe', '/admin/ordergroups'
-  hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. 'Soritiergruppe')
-  koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten.
-  Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.
-.left_column{:style => "width:100%"}
-  .box_title
-    %h2 Gruppenübersicht
-  .column_content
-    #group_filter
-      %form{:name=>"sform", :action=>"", :style=>"display:inline;"}
-        %label{:for => 'workgroup_name'} Suche in Name :
-        = text_field_tag("query", params['query'], :size => 10 )
-        
-      = observe_field 'query',  :frequency => 2, |
-        :before => "Element.show('loader')", |
-        :success => "Element.hide('loader')", |
-        :update => "workgroups", |
-        :url => admin_workgroups_path, |
-        :with => 'query', |
-        :method => :get |
-    #workgroups
-      = render :partial => "workgroups"
-  = link_to 'Neue Arbeits', new_admin_workgroup_path
+- content_for :actionbar do
+  = link_to t('.new_workgroup'), new_admin_workgroup_path, class: 'btn btn-primary'
+
+- content_for :sidebar do
+  %p= t('.first_paragraph', url: link_to(t('.new_workgroups'), new_admin_workgroup_path)).html_safe
+  %p= t('.second_paragraph', url: link_to(t('.ordergroup'), admin_ordergroups_path)).html_safe
+.well.well-small
+  = form_tag admin_workgroups_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :query, params[:query], class: 'input-medium search-query',
+      placeholder: t('admin.search_placeholder')
+#workgroups
+  = render "workgroups"

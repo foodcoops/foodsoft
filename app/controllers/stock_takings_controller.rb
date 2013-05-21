@@ -1,76 +1,21 @@
 class StockTakingsController < ApplicationController
+  inherit_resources
 
   def index
-    @stock_takings = StockTaking.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @stock_takings }
-    end
-  end
-
-  def show
-    @stock_taking = StockTaking.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @stock_taking }
-    end
+    @stock_takings = StockTaking.order('date DESC').page(params[:page]).per(@per_page)
   end
 
   def new
     @stock_taking = StockTaking.new
-    StockArticle.without_deleted.each { |a| @stock_taking.stock_changes.build(:stock_article => a) }
-    
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @stock_taking }
-    end
-  end
-
-
-  def edit
-    @stock_taking = StockTaking.find(params[:id])
+    StockArticle.undeleted.each { |a| @stock_taking.stock_changes.build(:stock_article => a) }
   end
 
   def create
-    @stock_taking = StockTaking.new(params[:stock_taking])
-
-    respond_to do |format|
-      if @stock_taking.save
-        flash[:notice] = 'StockTaking was successfully created.'
-        format.html { redirect_to(@stock_taking) }
-        format.xml  { render :xml => @stock_taking, :status => :created, :location => @stock_taking }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @stock_taking.errors, :status => :unprocessable_entity }
-      end
-    end
+    create!(:notice => I18n.t('stock_takings.create.notice'))
   end
 
   def update
-    @stock_taking = StockTaking.find(params[:id])
-
-    respond_to do |format|
-      if @stock_taking.update_attributes(params[:stock_taking])
-        flash[:notice] = 'StockTaking was successfully updated.'
-        format.html { redirect_to(@stock_taking) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @stock_taking.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @stock_taking = StockTaking.find(params[:id])
-    @stock_taking.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(stock_takings_url) }
-      format.xml  { head :ok }
-    end
+    update!(:notice => I18n.t('stock_takings.update.notice'))
   end
 
   def fill_new_stock_article_form
@@ -107,6 +52,4 @@ class StockTakingsController < ApplicationController
       page.visual_effect :DropOut, "stock_change_#{stock_change.id}"
     end
   end
-
-
 end

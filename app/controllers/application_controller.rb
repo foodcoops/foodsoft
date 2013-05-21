@@ -1,84 +1,54 @@
+# encoding: utf-8
 class ApplicationController < ActionController::Base
 
-  filter_parameter_logging :password, :password_confirmation   # do not log passwort parameters
-  before_filter :select_foodcoop, :authenticate, :store_controller
+  protect_from_forgery
+  before_filter :select_language, :select_foodcoop, :authenticate, :store_controller, :items_per_page, :set_redirect_to
   after_filter  :remove_controller
-  
-  # sends a mail, when an error occurs
-  # see plugins/exception_notification
-  include ExceptionNotifiable
 
   # Returns the controller handling the current request.
   def self.current
     Thread.current[:application_controller]
   end
-
-  # Use this method to call a rake task,,
-  # e.g. to deliver mails after there are created.
-  def call_rake(task, options = {})
-    options[:rails_env] ||= Foodsoft.env
-    args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
-    system "/usr/bin/rake #{task} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/rake.log &"
-  end
-
   
   protected
 
   def current_user
-    begin
-      # check if there is a valid session and return the logged-in user (its object)
-      if session[:user] and session[:foodcoop]
-        # for shared-host installations. check if the cookie-subdomain fits to request.
-        return User.current_user = User.find(session[:user]) if session[:foodcoop] == Foodsoft.env
-      end
-    rescue
-      reset_session
-      flash[:error]= _("An error has occurred. Please login again.")
-      redirect_to :controller => 'login'
+    # check if there is a valid session and return the logged-in user (its object)
+    if session[:user_id] and params[:foodcoop]
+      # for shared-host installations. check if the cookie-subdomain fits to request.
+      @current_user ||= User.find_by_id(session[:user_id]) if session[:scope] == FoodsoftConfig.scope
     end
   end
+  helper_method :current_user
 
-  def current_user=(user)
-    session[:user], session[:foodcoop] = user.id, Foodsoft.env
-  end
-    
-  def return_to
-    session['return_to']
-  end
-
-  def return_to=(uri)
-    session['return_to'] = uri
-  end
-    
   def deny_access
-    self.return_to = request.request_uri
-    redirect_to :controller => '/login', :action => 'denied'
-    return false
+    session[:return_to] = request.original_url
+    redirect_to login_url, :alert => 'Access denied!'
   end
 
   private  
 
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
-    if !(user = current_user)
+    if !current_user
       # No user at all: redirect to login page.
-      self.return_to = request.request_uri
-      redirect_to :controller => '/login'
-      return false
+      session[:user_id] = nil
+      session[:return_to] = request.original_url
+      redirect_to login_url, :alert => 'Authentication required!'
     else
       # We have an authenticated user, now check role...
       # Roles gets the user through his memberships.
       hasRole = case role
-      when "admin"  then user.role_admin?
-      when "finance"   then  user.role_finance?
-      when "article_meta" then user.role_article_meta?
-      when "suppliers"  then user.role_suppliers?
-      when "orders" then user.role_orders?
+      when "admin"  then current_user.role_admin?
+      when "finance"   then  current_user.role_finance?
+      when "article_meta" then current_user.role_article_meta?
+      when "suppliers"  then current_user.role_suppliers?
+      when "orders" then current_user.role_orders?
       when "any" then true        # no role required
       else false                  # any unknown role will always fail
       end
       if hasRole
-        @current_user = user
+        current_user
       else
         deny_access
       end
@@ -110,12 +80,7 @@ class ApplicationController < ActionController::Base
   def authenticate_membership_or_admin
     @group = Group.find(params[:id])
     unless @group.member?(@current_user) or @current_user.role_admin?
-      flash[:error] = "Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!"
-      if request.xml_http_request?
-        render(:update) {|page| page.redirect_to root_path }
-      else
-        redirect_to root_path
-      end
+      redirect_to root_path, alert: "Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!"
     end
   end
 
@@ -138,23 +103,47 @@ class ApplicationController < ActionController::Base
   # It uses the subdomain to select the appropriate section in the config files
   # Use this method as a before filter (first filter!) in ApplicationController
   def select_foodcoop
-    if Foodsoft.config[:multi_coop_install]
-      if !params[:foodcoop].blank?
+    if FoodsoftConfig[:multi_coop_install]
+      if params[:foodcoop].present?
         begin
-          # Set Config
-          Foodsoft.env = params[:foodcoop]
-          # Set database-connection
-          ActiveRecord::Base.establish_connection(Foodsoft.database)
+          # Set Config and database connection
+          FoodsoftConfig.select_foodcoop params[:foodcoop]
         rescue => error
-          flash[:error] = error.to_s
-          redirect_to root_path
+          redirect_to root_url, alert: error.message
         end
       else
-        redirect_to root_path
+        redirect_to root_url
       end
-    else
-      # Deactivate routing filter
-      RoutingFilter::Foodcoop.active = false
     end
+  end
+
+  def items_per_page
+    if params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100
+      @per_page = params[:per_page].to_i
+    else
+      @per_page = 20
+    end
+  end
+
+  def set_redirect_to
+    session[:redirect_to] = params[:redirect_to] if params[:redirect_to]
+  end
+
+  def back_or_default_path(default = root_path)
+    if session[:redirect_to].present?
+      default = session[:redirect_to]
+      session[:redirect_to] = nil
+    end
+    default
+  end
+
+  # Always stay in foodcoop url scope
+  def default_url_options(options = {})
+    {foodcoop: FoodsoftConfig.scope}
+  end
+
+  # Used to prevent accidently switching to :en in production mode.
+  def select_language
+    I18n.locale = :de
   end
 end

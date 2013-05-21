@@ -1,0 +1,6 @@
+- title t('.title')
+
+- content_for :actionbar do
+  = link_to t('.action_new'), new_finance_invoice_path, class: 'btn btn-primary'
+
+#invoicesTable= render 'invoices'

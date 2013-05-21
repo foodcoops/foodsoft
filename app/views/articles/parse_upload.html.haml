@@ -1,40 +1,9 @@
-- title "#{@supplier.name} / Artikel hochladen"
-%p
-  %i
-    Bitte überprüfe die eingelesenen Artikel.
-    %br/
-    Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.
+- title t('.title', supplier: @supplier.name)
+%p= t('.body').html_safe
 
-- form_tag(create_from_upload_supplier_articles_path(@supplier)) do
-  %table
-    %tr
-      %th Nummer
-      %th Name
-      %th Notiz
-      %th Hersteller
-      %th Herkunft
-      %th Einheit
-      %th Nettopreis
-      %th MwSt
-      %th Pfand
-      %th Gebindegröße
-      %th Kategorie
-    - for article in @articles
-      - fields_for "articles[]", article do |form|
-        %tr{:class => cycle('even', 'odd')}
-          %td= form.text_field 'order_number', :size => 6
-          %td= form.text_field 'name', :size => 0
-          %td= form.text_field 'note', :size => 15
-          %td= form.text_field 'manufacturer', :size => 6
-          %td= form.text_field 'origin', :size => 6
-          %td= form.text_field 'unit', :size => 5
-          %td= form.text_field 'price', :size => 4
-          %td= form.text_field 'tax', :size => 4
-          %td= form.text_field 'deposit', :size => 4
-          %td= form.text_field 'unit_quantity', :size => 4
-          %td= form.select 'article_category_id', ArticleCategory.find(:all).collect {|a| [ a.name, a.id ] }
-  %p
-    = submit_tag "Speichere neue Artikel für #{@supplier.name}"
-    |
-    = link_to "Zurück", upload_supplier_articles_path(@supplier)
+= form_tag(create_from_upload_supplier_articles_path(@supplier)) do
+  = render 'edit_all_table'
+  .form-actions
+    = submit_tag t('.submit', supplier: @supplier.name), class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), upload_supplier_articles_path(@supplier)
       

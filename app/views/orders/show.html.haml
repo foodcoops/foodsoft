@@ -1,0 +1,62 @@
+- title t('.title', name: @order.name)
+
+- if @order.finished? and !@order.closed?
+  .alert.alert-warning
+  = t '.warn_not_closed'
+
+// Order summary
+.well
+  %dl.dl-horizontal
+    %dt= t '.supplier'
+    %dd= @order.name
+    - if @note.present?
+      %dt= t '.note'
+      %dd= @order.note
+    %dt= t '.created_by'
+    %dd= link_to_user_message_if_valid(@order.created_by)
+    %dt= t '.begin'
+    %dd= format_time(@order.starts)
+    %dt= t '.ending'
+    %dd= format_time(@order.ends)
+    %dt= t '.group_orders'
+    %dd #{@order.group_orders.count} (#{@order.group_orders.includes(:ordergroup).all.map {|g| g.ordergroup.name}.join(', ')})
+    %dt= t '.amounts'
+    %dd= "#{number_to_currency(@order.sum(:net))} / #{number_to_currency(@order.sum(:gross))}"
+    %dt= t '.articles_ordered'
+    %dd= @order.order_articles.ordered.count
+
+    
+    .form-actions
+      - if @order.open?
+        = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
+        = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
+          confirm: t('.confirm_end', order: @order.name)
+      - unless @order.closed?
+        = link_to t('ui.delete'), @order, confirm: t('.confirm_delete'), method: :delete,
+          class: 'btn btn-danger'
+
+- unless @order.open?
+  %ul.nav.nav-pills
+    %li= update_articles_link(@order, t('.articles'), :default)
+    %li= update_articles_link(@order, t('.sort_group'), :groups)
+    %li= update_articles_link(@order, t('.sort_article'), :articles)
+    %li= link_to t('.comments_link'), '#comments'
+    %li.dropdown
+      = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
+        = t '.download.title'
+        %b.caret
+      %ul.dropdown-menu
+        %li= order_pdf(@order, :groups, t('.download.group_pdf'))
+        %li= order_pdf(@order, :articles, t('.download.article_pdf'))
+        %li= order_pdf(@order, :matrix, t('.download.matrix_pdf'))
+        %li= order_pdf(@order, :fax, t('.download.fax_pdf'))
+        %li= link_to t('.download.fax_txt'), {action: 'text_fax_template', id: @order }, {title: t('.download.download_file')}
+
+%section#articles_table
+  = render 'articles', order: @order
+
+%h2= t '.comments.title'
+#comments
+  = render partial: 'shared/comments', locals: { comments: @order.comments }
+#new_comment= render partial: 'order_comments/form', locals: { order_comment: @order.comments.build(user: current_user)}
+= link_to_top

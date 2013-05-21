@@ -1,12 +1,10 @@
+# encoding: utf-8
+#
 # Controller for managing orders, i.e. all actions that require the "orders" role.
 # Normal ordering actions of members of order groups is handled by the OrderingController.
 class OrdersController < ApplicationController
   
   before_filter :authenticate_orders
-  
-  # Define layout exceptions for PDF actions:
-  layout "application", :except => [:faxPdf, :matrixPdf, :articlesPdf, :groupsPdf]
-  prawnto :prawn => { :page_size => 'A4' }
   
   # List orders
   def index
@@ -22,18 +20,7 @@ class OrdersController < ApplicationController
     else
       sort = "ends DESC"
     end
-    @orders = Order.paginate :page => params[:page], :per_page => @per_page, 
-                             :order => sort, :conditions => "state != 'open'",
-                             :include => :supplier
-    
-    respond_to do |format|
-      format.html
-      format.js do
-        render :update do |page|
-          page.replace_html 'orders_table', :partial => "orders"
-        end
-      end
-    end
+    @orders = Order.page(params[:page]).per(@per_page).order(sort).where("state != 'open'").includes(:supplier)
   end
 
   # Gives a view for the results to a specific order
@@ -41,13 +28,26 @@ class OrdersController < ApplicationController
   def show
     @order= Order.find(params[:id])
 
-    if params[:view]    # Articles-list will be replaced
-      partial = case params[:view]
-        when 'normal' then "articles"
-        when 'groups'then 'shared/articles_by_groups'
-        when 'articles'then 'shared/articles_by_articles'
+    respond_to do |format|
+      format.html
+      format.js do
+        @partial = case params[:view]
+                     when 'default' then "articles"
+                     when 'groups'then 'shared/articles_by_groups'
+                     when 'articles'then 'shared/articles_by_articles'
+                     else 'articles'
+                   end
+        render :layout => false
       end
-      render :partial => partial, :locals => {:order => @order} if partial
+      format.pdf do
+        pdf = case params[:document]
+                when 'groups' then OrderByGroups.new(@order)
+                when 'articles' then OrderByArticles.new(@order)
+                when 'fax' then OrderFax.new(@order)
+                when 'matrix' then OrderMatrix.new(@order)
+              end
+        send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf'
+      end
     end
   end
 
@@ -60,10 +60,12 @@ class OrdersController < ApplicationController
   # order_articles will be saved in Order.article_ids=()
   def create
     @order = Order.new(params[:order])
+    @order.created_by = current_user
     if @order.save
-      flash[:notice] = "Die Bestellung wurde erstellt."
+      flash[:notice] = I18n.t('orders.create.notice')
       redirect_to @order
     else
+      logger.debug "[debug] order errors: #{@order.errors.messages}"
       render :action => 'new'
     end
   end
@@ -78,7 +80,7 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find params[:id]
     if @order.update_attributes params[:order]
-      flash[:notice] = "Die Bestellung wurde aktualisiert."
+      flash[:notice] = I18n.t('orders.update.notice')
       redirect_to :action => 'show', :id => @order
     else
       render :action => 'edit'
@@ -95,31 +97,7 @@ class OrdersController < ApplicationController
   def finish
     order = Order.find(params[:id])
     order.finish!(@current_user)
-    call_rake "foodsoft:finished_order_tasks", :order_id => order.id
-    flash[:notice] = "Die Bestellung wurde beendet."
-    redirect_to order
-  end
-  
-  # Renders the groups-orderd PDF.
-  def groupsPdf
-    @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_GruppenSortierung.pdf"
-  end
-  
-  # Renders the articles-orderd PDF.
-  def articlesPdf
-    @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_ArtikelSortierung.pdf",
-            :prawn => { :left_margin => 48,
-                        :right_margin => 48,
-                        :top_margin => 48,
-                        :bottom_margin => 48 }
-  end
-  
-  # Renders the fax PDF.
-  def faxPdf
-    @order = Order.find(params[:id])
-    prawnto :filename => "#{Date.today}_#{@order.name}_FAX.pdf"
+    redirect_to order, notice: I18n.t('orders.finish.notice')
   end
   
   # Renders the fax-text-file
@@ -127,15 +105,15 @@ class OrdersController < ApplicationController
   def text_fax_template
     order = Order.find(params[:id])
     supplier = order.supplier
-    contact = Foodsoft.config[:contact].symbolize_keys
-    text = "Bestellung für" + " #{Foodsoft.config[:name]}"
-    text += "\n" + "Kundennummer" + ": #{supplier.customer_number}" unless supplier.customer_number.blank?
-    text += "\n" + "Liefertag" + ": "
-    text += "\n\n#{supplier.name}\n#{supplier.address}\nFAX: #{supplier.fax}\n\n"
-    text += "****** " + "Versandadresse" + "\n\n"
-    text += "#{Foodsoft.config[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
-    text += "****** " + "Artikel" + "\n\n"
-    text += "Nummer" + "   " + "Menge" + "   " + "Name" + "\n"
+    contact = FoodsoftConfig[:contact].symbolize_keys
+    text = I18n.t('orders.fax.heading', :name => FoodsoftConfig[:name])
+    text += "\n" + I18n.t('orders.fax.customer_number') + ': #{supplier.customer_number}' unless supplier.customer_number.blank?
+    text += "\n" + I18n.t('orders.fax.delivery_day')
+    text += "\n\n#{supplier.name}\n#{supplier.address}\n" + I18n.t('simple_form.labels.supplier.fax') + ": #{supplier.fax}\n\n"
+    text += "****** " + I18n.t('orders.fax.to_address') + "\n\n"
+    text += "#{FoodsoftConfig[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
+    text += "****** " + I18n.t('orders.fax.articles') + "\n\n"
+    text += I18n.t('orders.fax.number') + "   " + I18n.t('orders.fax.amount') + "   " + I18n.t('orders.fax.name') + "\n"
     # now display all ordered articles
     order.order_articles.ordered.all(:include => [:article, :article_price]).each do |oa|
       number = oa.article.order_number
@@ -147,29 +125,5 @@ class OrdersController < ApplicationController
     send_data text,
                 :type => 'text/plain; charset=utf-8; header=present',
                 :disposition => "attachment; filename=#{order.name}"
-  end
-  
-  # Renders the matrix PDF.
-  def matrixPdf
-    @order = Order.find(params[:id])
-    unless @order.order_articles.ordered.empty?
-      prawnto :filename => "#{Date.today}_#{@order.name}_Matrix.pdf"
-    else
-      flash[:error] = "Es sind keine Artikel bestellt worden."
-      redirect_to @order
-    end
-  end
-
-  # adds a Comment to the Order
-  def add_comment
-    order = Order.find(params[:id])
-    comment = order.comments.build(params[:comment])
-    comment.user = @current_user
-    if !comment.text.empty? and comment.save
-      flash[:notice] = "Kommentar wurde erstellt."
-    else
-      flash[:error] = "Kommentar konnte nicht erstellt werden. Leerer Kommentar?"
-    end
-    redirect_to order
   end
 end

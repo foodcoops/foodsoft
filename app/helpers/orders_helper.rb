@@ -1,19 +1,18 @@
+# encoding: utf-8
 module OrdersHelper
 
   def update_articles_link(order, text, view)
-    link_to_remote text, :url => order_path(order, :view => view),
-      :update => 'articles', :before => "Element.show('loader')", :success => "Element.hide('loader')",
-      :method => :get
+    link_to text, order_path(order, view: view), remote: true
   end
 
-  def link_to_pdf(order, action)
-    link_to image_tag("save_pdf.png", :size => "16x16", :border => "0", :alt => "PDF erstellen"),
-      { :action => action, :id => order, :format => :pdf }, { :title => "PDF erstellen" }
+  def order_pdf(order, document, text)
+    link_to text, order_path(order, document: document, format: :pdf), title: I18n.t('helpers.orders.order_pdf')
   end
 
   def options_for_suppliers_to_select
-    suppliers = Supplier.without_deleted.collect {|s| [ s.name, url_for(:action => "new", :supplier_id => s)] }
-    stockit = [["Lager", url_for(:action => 'new', :supplier_id => 0)]]
-    options_for_select(stockit + suppliers)
+    options = [[I18n.t('helpers.orders.option_choose')]]
+    options += Supplier.all.map {|s| [ s.name, url_for(action: "new", supplier_id: s)] }
+    options += [[I18n.t('helpers.orders.option_stock'), url_for(action: 'new', supplier_id: 0)]]
+    options_for_select(options)
   end
 end

@@ -1,15 +1,18 @@
 log/*.log
 tmp/**/*
 config/*.yml
+config/initializers/secret_token.rb
 db/*.sqlite3
 nbproject/
 config/environments/development.rb
-capfile
-config/environments/fcschinke09.rb
 *.swp
 *~
 public/**/*_cached.*
-config/initializers/session_store.rb
 .idea
-.rvmrc
 .get-dump.yml
+.sass-cache/
+doc/app/
+# Deployment tools
+Capfile
+config/deploy.rb
+config/deploy/*

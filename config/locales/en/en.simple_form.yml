@@ -1,0 +1,149 @@
+en:
+  # Simple form i18n is used to build the forms
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+    error_notification:
+      default_message: 'Errors were found. Please check the form.'
+    labels:
+      defaults:
+        password: 'Password'
+        password_confirmation: 'Repeat password'
+        description: 'Description'
+        title: 'Title'
+        email: 'Email'
+        note: 'Note'
+        date: 'Date'
+        ordergroup: 'Ordergroup'
+        amount: 'Amount'
+        phone: 'Phone'
+        user_tokens: 'Members'
+        price: 'Price (net)'
+        unit_quantity: 'Unit quantity'
+        order_number: 'Order number'
+        tax: 'VAT'
+        deposit: 'Deposit'
+      user:
+        nick: 'Username'
+        first_name: 'First name'
+        last_name: 'Last name'
+      workgroup:
+        weekly_task: 'Define monthly task?'
+        weekday: 'Weekday'
+        task_name: 'Task name'
+        task_required_users: 'People required'
+        task_duration: 'Duration in hours'
+        task_description: 'Description'
+        next_weekly_tasks_number: 'For how many weeks in advance would you like to define tasks?'
+        role_admin: 'Administration'
+        role_finance: 'Finances'
+        role_suppliers: 'Suppliers'
+        role_article_meta: 'Article database'
+        role_orders: 'Order management'
+      ordergroup:
+        contact_person: 'Contact person'
+        contact_phone: 'Phone'
+        contact_address: 'Address'
+        ignore_apple_restriction: 'Ignore order stop by apple points restriction'
+      task:
+        name: 'Name'
+        duration: 'Duration'
+        user_list: 'Responsible user'
+        required_users: 'People required'
+        due_date: 'Due date'
+        workgroup: 'Workgroup'
+        done: 'Done?'
+      message:
+        sent_to_all: 'Send to all members'
+        recipient_tokens: 'Recipients'
+        group_id: 'Group'
+        subject: 'Subject'
+        body: 'Body'
+        private: 'Private'
+      page:
+        body: 'Body'
+        parent_id: Parent page
+      supplier:
+        name: 'Name'
+        address: 'Address'
+        phone: 'Phone'
+        phone2: 'Phone 2'
+        fax: 'Fax'
+        email: 'Email'
+        url: 'Homepage'
+        contact_person: 'Contact person'
+        customer_number: 'Customer ID'
+        delivery_days: 'Delivery days'
+        order_howto: 'How to order'
+        note: 'Note'
+        min_order_quantity: 'Minimum order quantity'
+        is_subscribed: 'subscribed?'
+      article:
+        name: 'Name'
+        origin: 'Origin'
+        manufacturer: 'Manufacturer'
+        unit: 'Unit'
+        note: 'Note'
+        article_category: 'Category'
+      article_category:
+        name: 'Name'
+        description: 'Description'
+      stock_article:
+        supplier: 'Supplier'
+      delivery:
+        supplier: 'Supplier'
+        delivered_on: 'Delivery date'
+      user:
+        nick: 'Username'
+        name: "Name"
+        last_name: 'Last name'
+        email: 'Email'
+        phone: "Telephone"
+        ordergroup: 'Ordergroup'
+        workgroup:
+          one: 'Workgroup'
+          other: 'Workgroups'
+      order_comment:
+        text: Add comment to this order ...
+      order:
+        starts: 'Starts at'
+        ends: 'Ends at'
+      order_article:
+        article_id: Choose article from the catalogue
+      group_order_article:
+        ordergroup_id: Ordergroup
+        result: Amount
+      invoice:
+        supplier: Supplier
+        number: Number
+        date: Billing date
+        paid_on: Paid on
+        deposit: Charge deposit
+        deposit_credit: Credit deposit
+        amount: Amount
+        delivery: Delivery
+        order: Order
+        note: Note
+      order_article:
+        units_to_order: Amount of units
+        update_current_price: Globally update current price
+
+    hints:
+      tax: 'In percentage, standard is 7,0'
+      task:
+        duration: 'How long will the task take, 1-3 hours'
+        required_users: 'How many users will be needed in total?'
+      supplier:
+        min_order_quantity: 'The minimum amount which has to be orderd will be shown during the order process and should motivate ordering'
+      article:
+        unit: 'For example: KG or 1L or 500g'
+      stock_article:
+        supplier: ''
+      message:
+        private: Message doesn’t show in Foodsoft mail inbox
+      order_article:
+        units_to_order: Amount of delivered units
+        update_current_price: Also update the price of the current order

@@ -1,14 +1,7 @@
-.single_column{:style => "width:55em"}
-  .box_title
-    %h2= workgroup.name
-  .column_content
-    = render :partial => 'shared/group', :locals => { :group => workgroup }
-    %p
-      = link_to "Alle Aufgaben zeigen", :controller => "/tasks", :action => "workgroup", :id => workgroup
-      |
-      = link_to "Mitgliedern eine Nachricht schicken", :controller => '/messages', :action => 'group', :id => workgroup
-      - if workgroup.member?(@current_user)
-        |
-        = link_to "Gruppe bearbeiten", edit_foodcoop_workgroup_path(workgroup)
-        |
-        = link_to "Mitglieder bearbeiten", memberships_foodcoop_workgroup_path(workgroup)
+%section.well
+  %h3= workgroup.name
+  = render :partial => 'shared/group', :locals => { :group => workgroup }
+  = link_to t('.show_tasks'), workgroup_tasks_path(workgroup_id: workgroup), class: 'btn'
+  = link_to_new_message message_params: {group_id: workgroup.id}
+  - if workgroup.member?(current_user)
+    = link_to t('.edit'), edit_foodcoop_workgroup_path(workgroup), class: 'btn'

@@ -1,0 +1,19 @@
+- if StockTaking.count > 20
+  = items_per_page
+= pagination_links_remote @stock_takings
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t '.date'
+      %th= t '.note'
+      %th
+  %tbody
+    - for stock_taking in @stock_takings
+      %tr
+        %td= link_to format_date(stock_taking.date), stock_taking
+        %td= truncate stock_taking.note
+        %td
+          = link_to t('ui.edit'), edit_stock_taking_path(stock_taking), class: 'btn btn-mini'
+          = link_to t('ui.delete'), stock_taking, :confirm => t('.confirm_delete'), :method => :delete,
+            class: 'btn btn-mini btn-danger'

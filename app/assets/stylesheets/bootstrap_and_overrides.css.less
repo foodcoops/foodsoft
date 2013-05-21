@@ -1,0 +1,210 @@
+@import "twitter/bootstrap/bootstrap";
+body {
+  padding-top: 10px;
+}
+
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not 
+//       have the proper paths. So for now we use the absolute path.
+@fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
+@fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
+@fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
+@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+
+// Font Awesome
+@import "fontawesome";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/less.html for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+
+// Bootstrap datepicker
+@import "datepicker";
+
+// Custom styles
+
+// Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
+.dl-horizontal { 
+    dd { .clearfix(); }
+}
+
+@mainRedColor: #ED0606;
+
+.logo {
+  margin: 10px 0 0 30px;
+  float: left;
+  font-size: 35px;
+  font-weight: bold;
+  display: block;
+  color: @mainRedColor;
+
+  span {
+    padding: 2px 4px;
+    color: #ffffff;
+    background-color: @mainRedColor;
+  }
+}
+
+
+section {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid lightGrey;
+}
+
+table {
+
+  a.sortdown:after {
+    content: ' \25BC';
+  }
+  a.sortup:after {
+    content: ' \25B2';
+  }
+
+  tr.article-category {
+    background-color: #efefef;
+    td:first-child {
+      text-align: left;
+    }
+  }
+  th.numeric, td.numeric {
+    text-align: right;
+  }
+  td.odd {
+    background-color: @tableBackgroundAccent;
+  }
+
+  tr.selected td {
+    background-color: @successBackground;
+  }
+}
+
+// Tasks ..
+.accepted {
+  color: #468847;
+}
+.unaccepted {
+  color: #B94A48;
+}
+
+// Wiki
+#wikiContent {
+  .editsection {
+    display: none;
+  }
+  .mw-headline a {
+    color: @textColor;
+    text-decoration: none;
+  }
+}
+
+// ordering
+span.used {
+  color: green;
+}
+span.unused {
+  color: red;
+}
+
+#order-footer, .article-info {
+  text-align: left;
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  background-color: #E4EED6;
+  border-top: 2px solid #78B74E;
+
+  #total-sum {
+    width: 22em;
+    margin: .5em 2em 0 0;
+    float: right;
+    #order-button {
+      margin: .5em 0;
+
+      input:disabled {
+        background-color: red; }
+    }
+  }
+}
+
+#order-footer {
+  width: 100%;
+  right: 0;
+  left: 0;
+}
+
+.article-info {
+  z-index: 2;
+  width: 40em;
+  height: 8em;
+  border: none;
+  left: 30px;
+
+  .article-name {
+    text-align: center;
+    margin: 2px 0;
+    margin-bottom: 5px;
+    width: 100%;
+    font-weight: bold;
+  }
+  .pull-right {
+    width: 35%;
+  }
+  .pull-left {
+    width: 60%;
+  }
+}
+
+tr.order-article .article-info {
+  display: none;
+}
+
+tr.order-article:hover .article-info {
+  display: block;
+}
+
+
+// ********* Articles
+
+tr.just-updated {
+  color: #468847;
+}
+
+tr.unavailable {
+  color: #999;
+}
+
+// articles edit all
+.field_with_errors {
+  input, select {
+    border-color: red;
+  }
+}
+
+// ********* Tweaks & fixes
+
+// need more space for supplier&order information (in German, at least)
+.dl-horizontal {
+  dt { width: 160px; }
+  dd { margin-left: 170px; }
+}

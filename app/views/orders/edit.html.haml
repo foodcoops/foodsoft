@@ -1,7 +1,3 @@
-- title _("Edit order")
+- title t('.title')
 
-- form_for @order do |form|
-  = render :partial => 'form', :locals => { :form => form }
-  = submit_tag "Speichern"
-  |
-  = link_to "Abbrechen", :action => 'show', :id => @order
+= render :partial => 'form'

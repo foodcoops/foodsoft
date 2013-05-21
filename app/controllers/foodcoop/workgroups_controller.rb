@@ -14,13 +14,9 @@ class Foodcoop::WorkgroupsController < ApplicationController
   def update
     @workgroup = Workgroup.find(params[:id])
     if @workgroup.update_attributes(params[:workgroup])
-      flash[:notice] = "Arbeitsgruppe wurde aktualisiert"
-      redirect_to foodcoop_workgroups_url
+      redirect_to foodcoop_workgroups_url, :notice => I18n.t('workgroups.update.notice')
     else
       render :action => 'edit'
     end
-  end
-
-  def memberships
   end
 end

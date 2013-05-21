@@ -1,0 +1,98 @@
+de:
+  group_orders:
+    archive:
+      title: 'Bestellungen der %{group}'
+      desc: 'Siehe hier alle %{link}.'
+      open_orders: 'laufenden Bestellungen'
+      title_open: 'beendet/nicht abgerechnet'
+      title_closed: 'abgerechnet'
+    form:
+      title: 'Bestellen'
+      note: 'Notiz'
+      created_by: 'Erstellt von'
+      ending: 'Ende'
+      min_quantity: 'Mindestbestellmenge'
+      sum_amount: 'Gesamtbestellmenge bisher:'
+      last_update: 'Zuletzt bestellt'
+      funds: 'Guthaben'
+      name: 'Name'
+      supplier: 'Lieferant'
+      price: 'Preis'
+      unit: 'Einheit'
+      unit_missing: 'Fehlende Einheiten'
+      amount: 'Menge'
+      tolerance: 'Toleranz'
+      available: 'Verfügbar'
+      sum: 'Summe'
+      units: 'Gebinde'
+      units_full: 'Volle Gebinde'
+      total_units: 'Gesamt-Einheiten'
+      total_tolerance: 'Gesamt-Toleranz'
+      manufacturer: 'Hersteller'
+      total_sum_amount: 'Gesamtbetrag'
+      available_funds: 'Verfügbares Guthaben'
+      new_funds: 'Neuer Kontostand'
+      action_save: 'Bestellung speichern'
+    index:
+      title: 'Bestellüberblick'
+      funds:
+        title: 'Guthaben'
+        account_balance: 'Kontostand'
+        open_orders: 'laufende Bestellungen'
+        finished_orders: 'nicht abgerechnete Bestellungen'
+        available_funds: 'verfügbares Guthaben'
+      finished_orders:
+        title: 'Nicht abgerechnete Bestellungen'
+        total_sum: 'Gesamtsumme'
+      closed_orders:
+        title: 'Abgerechnete Bestellungen'
+        more: 'mehr...'
+    order:
+      title: 'Artikel'
+      # other fields reference group_orders.form
+    orders: &orders
+      supplier: 'Lieferantin'
+      ending: 'Ende'
+      sum: 'Summe'
+    show:
+      <<: *orders
+      title: 'Dein Bestellergebnis für %{order}'
+      note: 'Notiz'
+      order_sum: 'Bestellsumme'
+      not_ordered: 'Du hast nicht bestellt.'
+      closed_by: 'Abgerechnet von %{user}'
+      comment: 'Kommentare lesen/schreiben'
+      articles:
+        title: 'Artikelübersicht'
+        show_hide: 'Zeige/Verstecke nicht bestellte Artikel'
+        edit_order: 'Bestellung anpassen'
+        name: 'Name'
+        units: 'Gebinde'
+        unit_price: 'Einzelpreis'
+        ordered: 'Bestellt'
+        ordered_title: 'Menge + Toleranz'
+        order_open: 'Zu Erhalten'
+        order_not_open: 'Erhalten'
+        order_nopen_title: 'Unter Berücksichtigung der derzeitigen Bestellungen aller Gruppen'
+        total_price: 'Gesamtpreis'
+        sum: 'Summe'
+        not_ordered_msg: 'Du hast noch nicht bestellt'
+        order_now: 'Das ist Deine Chance!'
+        order_closed_msg: 'Die Bestellung is leider schon zu Ende. Beim nächsten mal früher aufstehen...'
+      comments:
+        title: 'Kommentare'
+    switch_order:
+      title: 'Laufende Bestellungen'
+      remaining: 'noch %{remaining}'
+
+    # used by controller
+    create: &create
+      notice: 'Die Bestellung wurde gespeichert.'
+      error_stale: 'In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.'
+      error_general: 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
+    update:
+      <<: *create
+    errors:
+      no_member: 'Du bist kein Mitglieder einer Bestellgruppe.'
+      closed: 'Diese Bestellung ist bereits abgeschlossen.'
+      notfound: 'Fehlerhafte URL, das ist nicht Deine Bestellung.'

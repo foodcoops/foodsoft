@@ -1,0 +1,11 @@
+de:
+  ordergroups:
+    index:
+      title: 'Bestellgruppen'
+    edit:
+      title: 'Bestellgruppe bearbeiten'
+
+    # used by model
+    model:
+      invalid_balance: 'ist keine gültige Zahl'
+      error_single_group: '%{user} ist schon in einer anderen Bestellgruppe'

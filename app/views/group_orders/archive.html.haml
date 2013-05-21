@@ -1,0 +1,13 @@
+- title t('.title', group: @ordergroup.name)
+%p
+= t('.desc', link: link_to(t('.open_orders'), group_orders_path)).html_safe
+
+.row-fluid
+  .span6
+    %h2= t '.title_open'
+    = render :partial => "orders", :locals => {:orders => Order.finished_not_closed, :pagination => false}
+
+  .span6
+    %h2= t '.title_closed'
+    #closed_orders
+      = render :partial => "orders", :locals => {:orders => @closed_orders, :pagination => true}

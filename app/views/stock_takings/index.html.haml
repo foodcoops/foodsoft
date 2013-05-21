@@ -1,25 +1,9 @@
-- title "Inventurübersicht"
+- title t('.title')
 
-%p
-  = link_to "Neue Iniventur anlegen", new_stock_taking_path
-  |
-  = link_to "Lager", stock_articles_path
+.well.well-small
+  .btn-group
+    = link_to t('.new_inventory'), new_stock_taking_path, class: 'btn'
 
-%table.list{:style => "width:50em"}
-  %thead
-    %tr
-      %th Datum
-      %th Notiz
-      %th
-      %th
-      %th
-  %tbody
-    - for stock_taking in @stock_takings
-      %tr
-        %td= link_to format_date(stock_taking.date), stock_taking
-        %td=h truncate stock_taking.note
-        %td= link_to 'Anzeigen', stock_taking
-        %td= link_to 'Bearbeiten', edit_stock_taking_path(stock_taking)
-        %td= link_to 'Löschen', stock_taking, :confirm => 'Are you sure?', :method => :delete
+#StockTakingsTable= render 'stock_takings'
 
 

@@ -1,55 +1,52 @@
-- title "Lieferung anzeigen"
+- title t('.title')
 
-%p
-  %b Lieferantin:
-  =h @delivery.supplier.name
-%p
-  %b Geliefert am:
-  = @delivery.delivered_on
-%p
-  %b Rechnungsbetrag:
-  = link_to_invoice(@delivery)
-- if @delivery.invoice
-  %p
-    %b bereinigter Rechnungsbetrag:
-    = number_to_currency @delivery.invoice.net_amount
-%p
-  %b Notiz:
-  = simple_format @delivery.note
+%dl
+  %dt= t 'simple_form.labels.delivery.supplier'
+  %dd= @delivery.supplier.name
+  %dt= t 'simple_form.labels.delivery.delivered_on'
+  %dd= @delivery.delivered_on
+  %dt= t 'deliveries.invoice_amount'
+  %dd= link_to_invoice(@delivery)
+  - if @delivery.invoice
+    %dt= t 'deliveries.invoice_net_amount'
+    %dd= number_to_currency @delivery.invoice.net_amount
+  %dt= t 'simple_form.labels.defaults.note'
+  %dd= simple_format @delivery.note
 
-%h2 Artikel
-%table.list{:style => "width:30em"}
-  %tr
-    %th Artikel
-    %th Einheit
-    %th Menge
-    %th Nettopreis
-    %th Summe
-  - total_net, total_gross = 0,0
-  - for stock_change in @delivery.stock_changes.find :all, :include => :stock_article
-    - quantity = stock_change.quantity
-    - sum = quantity * stock_change.stock_article.price
-    - total_net += sum
-    - total_gross += quantity * stock_change.stock_article.gross_price
+%h2= t '.title_articles'
+%table.table.table-striped(style="width:500px")
+  %thead
     %tr
-      %td= stock_change.stock_article.name
-      %td= stock_change.stock_article.unit
-      %td= quantity
-      %td= number_to_currency stock_change.stock_article.price
-      %td= number_to_currency sum
-%p
-  Nettosumme:
-  = number_to_currency total_net
-%p
-  Bruttosumme:
-  = number_to_currency total_gross
+      %th= t '.article'
+      %th= t '.unit'
+      %th.numeric= t '.amount'
+      %th.numeric= t '.price'
+      %th.numeric= t '.sum'
+  %tbody
+    - total_net, total_gross = 0,0
+    - @delivery.stock_changes.all.each do |stock_change|
+      - quantity = stock_change.quantity
+      - sum = quantity * stock_change.stock_article.price
+      - total_net += sum
+      - total_gross += quantity * stock_change.stock_article.gross_price
+      %tr
+        %td= stock_change.stock_article.name
+        %td= stock_change.stock_article.unit
+        %td.numeric= quantity
+        %td.numeric= number_to_currency stock_change.stock_article.price
+        %td.numeric= number_to_currency sum
+  %tfoot
+    %tr
+      %td(colspan="4")= t '.sum_net'
+      %td.numeric= number_to_currency total_net
+    %tr
+      %td(colspan="4")= t '.sum_gross'
+      %td.numeric= number_to_currency total_gross
+    - if @delivery.invoice
+      %tr
+        %td(colspan="4")= t '.sum_diff'
+        %td.numeric= number_to_currency total_gross - @delivery.invoice.net_amount
 
-- if @delivery.invoice
-  %p
-    %b Brutto - bereinigter Rechnungsbetrag:
-    = number_to_currency total_gross - @delivery.invoice.net_amount
-
-%br/
-= link_to 'Bearbeiten', edit_supplier_delivery_path(@supplier,@delivery)
-|
-= link_to 'Lieferungsübersicht', supplier_deliveries_path(@supplier)
+%p
+  = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,@delivery), class: 'btn'
+  = link_to t('deliveries.suppliers_overview'), supplier_deliveries_path(@supplier)

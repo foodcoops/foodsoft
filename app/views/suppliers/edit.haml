@@ -1,6 +1,3 @@
-%h1 Lieferantin bearbeiten
-- form_for @supplier do |@f|
-  = render :partial => 'form'
-  = submit_tag 'Speichern'
-  |
-  = link_to 'Abbrechen', suppliers_path
+- title t('.title')
+
+= render "form"

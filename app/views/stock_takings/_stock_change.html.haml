@@ -1,9 +1,7 @@
 %p
-  - fields_for "stock_taking[stock_change_attributes][]", stock_change do |form|
-    - article = stock_change.stock_article
-
+  = simple_fields_for "stock_taking[stock_change_attributes][]", stock_change do |form|
     = form.hidden_field :stock_article_id
-    = "Menge (#{article.quantity_available})"
-    = form.text_field :quantity, :size => 5, :autocomplete => 'off'    
-    %b=h truncate(article.name)
-    = "(#{number_to_currency(article.price)} / #{article.unit})"
+    = "Menge (#{stock_change.stock_article.quantity_available})"
+    = form.text_field :quantity, :size => 5, :autocomplete => 'off'
+    %b= stock_change.stock_article.name
+    = "(#{number_to_currency(stock_change.stock_article.price)} / #{stock_change.stock_article.unit})"

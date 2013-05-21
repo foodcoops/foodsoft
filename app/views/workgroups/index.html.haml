@@ -1,0 +1,46 @@
+- title t('.title')
+%table
+  %tr
+    %th Type
+    %th Name
+    %th Description
+    %th Account Balance
+    %th Account Updated
+    %th Created On
+    %th Role Admin
+    %th Role Suppliers
+    %th Role Article Meta
+    %th Role Finance
+    %th Role Orders
+    %th Weekly Task
+    %th Weekday
+    %th Task Name
+    %th Task Description
+    %th Task Required Users
+    %th Deleted At
+    %th Contact Person
+    %th Contact Phone
+    %th Contact Address
+  - for workgroup in @workgroups
+    %tr
+      %td= h workgroup.type
+      %td= h workgroup.name
+      %td= h workgroup.description
+      %td= h workgroup.account_balance
+      %td= h workgroup.account_updated
+      %td= h workgroup.created_on
+      %td= h workgroup.role_admin
+      %td= h workgroup.role_suppliers
+      %td= h workgroup.role_article_meta
+      %td= h workgroup.role_finance
+      %td= h workgroup.role_orders
+      %td= h workgroup.weekly_task
+      %td= h workgroup.weekday
+      %td= h workgroup.task_name
+      %td= h workgroup.task_description
+      %td= h workgroup.task_required_users
+      %td= h workgroup.deleted_at
+      %td= h workgroup.contact_person
+      %td= h workgroup.contact_phone
+      %td= h workgroup.contact_address
+      %td= link_to t('ui.edit'), edit_workgroup_path(workgroup)

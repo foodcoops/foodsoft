@@ -1,9 +1,11 @@
 class Page < ActiveRecord::Base
+  include ActsAsTree
 
   belongs_to :user, :foreign_key => 'updated_by'
 
-  acts_as_versioned :version_column => :lock_version, :limit => 20
-  self.non_versioned_columns += ['permalink', 'created_at', 'title']
+  acts_as_versioned version_column: :lock_version, limit: 20
+  self.non_versioned_columns += %w(permalink created_at title)
+
   acts_as_tree :order => "title"
 
   attr_accessor :old_title # Save title to create redirect page when editing title
@@ -11,12 +13,12 @@ class Page < ActiveRecord::Base
   validates_presence_of :title, :body
   validates_uniqueness_of :permalink, :title
 
-  before_validation_on_create :set_permalink
-  before_validation_on_update :update_permalink
+  before_validation :set_permalink, :on => :create
+  before_validation :update_permalink, :on => :update
   after_update :create_redirect
 
-  named_scope :non_redirected, :conditions => {:redirect => nil}
-  named_scope :no_parent, :conditions => {:parent_id => nil}
+  scope :non_redirected, :conditions => {:redirect => nil}
+  scope :no_parent, :conditions => {:parent_id => nil}
 
   def self.permalink(title)
     title.gsub(/[\/\.,;@\s]/, "_").gsub(/[\"\']/, "")
@@ -45,26 +47,10 @@ class Page < ActiveRecord::Base
     unless old_title.blank?
       Page.create :redirect => id,
         :title => old_title,
-        :body => "Weiterleitung auf [[#{title}]]..",
+        :body => I18n.t('model.page.redirect', :title => title),
         :permalink => Page.permalink(old_title),
         :updated_by => updated_by
     end
   end
 end
-
-# == Schema Information
-#
-# Table name: pages
-#
-#  id           :integer(4)      not null, primary key
-#  title        :string(255)
-#  body         :text
-#  permalink    :string(255)
-#  lock_version :integer(4)      default(0)
-#  updated_by   :integer(4)
-#  redirect     :integer(4)
-#  parent_id    :integer(4)
-#  created_at   :datetime
-#  updated_at   :datetime
-#
 

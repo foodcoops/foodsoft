@@ -1,0 +1,11 @@
+- content_for :javascript do
+  :javascript
+    $('user_nick').focus();
+
+- title t('.title', name: FoodsoftConfig[:name])
+= t('.body', group: h(@invite.group.name), foodcoop: h(FoodsoftConfig[:name])).html_safe
+= simple_form_for @user, url: accept_invitation_path do |form|
+  = render partial: 'shared/user_form_fields', locals: {f: form}
+  .form-actions
+    = submit_tag t('.submit'), class: 'btn'
+

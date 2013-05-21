@@ -1,22 +1,17 @@
-%p{:style => "float:left"}
-  %b Lieferung bearbeiten  
-%p{:style => "float:right"}
-  = remote_link_to "Artikel hinzufügen", :url => {:action => "new_order_article", :id => @order}
-
-%table{:class => "ordered_articles", :style => "clear:both"}
+%table.ordered-articles.table.table-striped
   %thead
     %tr
-      %th[sort_td_class_helper "name"]{:colspan => "1"}
-        = sort_link_helper "Artikel", "name", :action => "new", :remote => false
-      %th[sort_td_class_helper "order_number"]
-        = sort_link_helper "Nr.", "order_number", :action => "new", :remote => false
-      %th Menge
-      %th GebGr * Einheit
-      %th Netto
-      %th Brutto
-      %th MwSt
-      %th Pfand
+      %th= sort_link_helper t('.article'), "name"
+      %th= sort_link_helper t('.number'), "order_number"
+      %th= t('.amount')
+      %th= t('.amount_per_unit')
+      %th= t('.net')
+      %th= t('.gross')
+      %th= t('.tax')
+      %th= t('.refund')
       %th{:colspan => "2"}
+        = link_to t('.add_article'), new_finance_order_order_article_path(@order), remote: true,
+          class: 'btn btn-small'
   %tbody#result_table
     - for order_article in @articles
       = render :partial => "order_article_result", :locals => {:order_article => order_article}

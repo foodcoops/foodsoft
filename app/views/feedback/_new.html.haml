@@ -1,8 +1,0 @@
-%h2 Fehler gefunden? Vorschlag? Idee? Kritik?
-
-- form_remote_tag :url => {:action => "create"}, :before => "Element.show('loader')", :success => "Element.hide('loader')" do
-  %p
-    = text_area_tag :message, nil, :size => "40x15"
-  = submit_tag "Absenden"
-  oder
-  = link_to_function "Abbrechen", "Element.hide('ajax_box')"

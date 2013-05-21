@@ -1,52 +1,37 @@
-%p
-  Gefundene Artikel:
-  %b= @total
+- if @supplier.articles.count > 20
+  = items_per_page
+= pagination_links_remote @articles
 
-%p
-  %table{:style => "width:100%"}
-    %tr
-      %td
-        = pagination_links_remote @articles, :params => {:sort => params[:sort]}
-      %td{:style => "text-align:right"}
-        - if @total > 30
-          = items_per_page :per_page_options => [30, 100, 500]
-
-%table#articles_table.list.articles
+%table#articles_table.table.table-hover
   %thead
     %tr
       %th
-      %th[sort_td_class_helper "name"]
-        = sort_link_helper "Name", "name"
+      %th= sort_link_helper t('simple_form.labels.article.name'), "name"
       %th
-      %th[sort_td_class_helper "category"]
-        = sort_link_helper "Kategorie", "category"
-      %th[sort_td_class_helper "unit"]
-        = sort_link_helper "Einheit", "unit"
-      %th[sort_td_class_helper "note"]
-        = sort_link_helper "Notiz", "note"
-      %th{:style => "width: 4em;"} Gebgr.
-      %th{:style => "width: 4em;"} Preis
-      %th{:style => "width: 3.5em;"} MwSt
-      %th{:style => "width: 4em;"} Pfand
+      %th= sort_link_helper t('simple_form.labels.article.article_category'), "category"
+      %th= sort_link_helper t('simple_form.labels.article.unit'), "unit"
+      %th= sort_link_helper t('simple_form.labels.article.note'), "note"
+      %th{:style => "width: 4em;"}
+        %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity_short'
+      %th{:style => "width: 5em;"}= t '.price_netto'
+      %th{:style => "width: 3.5em;"}= t 'simple_form.labels.defaults.tax'
+      %th{:style => "width: 4em;"}= t 'simple_form.labels.defaults.deposit'
       %th{:style => "width: 3em;"}
       
   %tbody#listbody
     
-    - if @total > 0  
-      - for @article in @articles
-        %tr{ :class => cycle('even','odd') + row_classes(@article), :id => @article.id, :onclick => "checkRow('#{@article.id.to_s}')"}
-          = render :partial => 'article_row'
+    - unless @articles.empty?
+      - for article in @articles
+        = render(article)
       %tfoot
         %tr
           %td{:colspan => '11'}
-            = check_box_tag :checkall, 1, false, :onclick => 'checkUncheckAll(this)'
-            %select{:name => "selected_action"}
-              %option{:value => '', :selected => 'selected'} Aktion wählen ...
-              %option{:value => "destroy", :onclick => "if (confirm('Willst Du wirklich alle gewählten Artikel löschen?')) { this.up('form').submit(); }; return false;"} Artikel löschen
-              %option{:value => "setNotAvailable", :onclick => "this.up('form').submit()"} Artikel sind nicht mehr verfügbar
-              %option{:value => "setAvailable", :onclick => "this.up('form').submit()"} Artikel sind verfügbar
-              
+            = check_box_tag :checkall, 1, false, 'data-check-all' => '#articlesInListForm', 'data-ignore-onchange' => true
+            %select{:name => "selected_action", 'data-submit-onchange' => true}
+              %option{:value => '', :selected => 'selected'}= t '.option_select'
+              %option{:value => "destroy", 'data-confirm' => t('.confirm_delete')}= t '.option_delete'
+              %option{:value => "setNotAvailable"}= t '.option_not_available'
+              %option{:value => "setAvailable"}= t '.option_available'
             = hidden_field_tag 'supplier_id', @supplier.id
 
-%p= pagination_links_remote @articles, :params => {:sort => params[:sort]}
-= hidden_field_tag :per_page, params[:per_page]
+= pagination_links_remote @articles

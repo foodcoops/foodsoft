@@ -1,0 +1,36 @@
+- title t('.title')
+
+- content_for :javascript do
+  :javascript
+    var ordergroup = "#{escape_javascript(render('ordergroup'))}"
+
+    $(function() {
+      $('a[data-remove-transaction]').live('click', function() {
+        $(this).parents('tr').remove();
+        return false;
+      });
+
+      $('a[data-add-transaction]').click(function() {
+        $('#ordergroups').append(ordergroup);
+        return false;
+      });
+    });
+
+- content_for :sidebar do
+  .well.well-small= t('.sidebar')
+
+= form_tag finance_create_transaction_collection_path do
+  %p
+    %b= t('.note')
+    = text_field_tag :note, params[:note], class: 'input-xlarge', required: 'required'
+  %p
+    %table#ordergroups{:style => "width:20em"}
+      %tr
+        %th= t('.ordergroup')
+        %th= t('.amount')
+      = render :partial => 'ordergroup', :collection => [1, 2, 3]
+  %p
+    = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn'
+  .form-actions
+    = submit_tag t('.save'), class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), finance_ordergroups_path

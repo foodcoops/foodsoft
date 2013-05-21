@@ -1,58 +1,47 @@
-- title "#{@order.name} abrechnen"
+- title t('.title', name: @order.name)
 
-- if @order.closed?
-  %p
-    %b Achtung, Bestellung wurde schon abgerechnet!
-.left_column{:style => 'width: 24em'}
-  .box_title
-    %h2 Zusammenfassung
-  .column_content#summary
-    = render :partial => "summary", :locals => {:order => @order}
+- content_for :sidebar do
+  .well.well-small
+    %h3= t('.summary')
+    #summary= render 'summary', order: @order
 
-- unless @order.stockit?
-  .middle_column{:style => 'width: 24em'}
-    .box_title
-      %h2 Rechnung
-    .column_content#invoice
-      = render :partial => "invoice", :locals => {:invoice => @order.invoice}
+  .well.well-small
+    %h3= t('.invoice')
+    #invoice= render 'invoice', invoice: @order.invoice
 
-.right_column{:style => 'width: 20em'}
-  .box_title
-    %h2 Aktionen
-  .column_content
-    %ul
-      - unless @order.invoice or @order.stockit?
-        %li= link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier)
-      - unless @order.closed?
-        %li= link_to "Bestellung abschließen", :action => "confirm", :id => @order
-
-.right_column{:style => 'clear:both;width: 28%'}
-  .box_title
-    %h2 Notizen/Protokoll
-  .column_content
+  .well.well-small
+    %h3= t('.notes_and_journal')
     #note
       - unless @order.note.empty?
         = simple_format @order.note
       - else
-        %p Hier kannst Du deine Abrechnung kommentieren
-    = remote_link_to "Notiz bearbeiten", |
-       :update => 'edit_box', :url => {:action => 'edit_note', :id => @order}, |
-       :success => "Element.hide('loader'); Element.show('edit_box')" |
-  .box_title
-    %h2 Kommentare
-  .column_content
-    #comments
-      = render :partial => 'shared/comments'
-      
-.left_column{:style => 'width: 69%'}
-  .box_title
-    #editOrderNav
-      %ul
-        %li= remote_link_to 'Gruppenübersicht', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'groupsOverview'}
-        %li= remote_link_to 'Artikelübersicht', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'articlesOverview'}
-        %li= remote_link_to 'Bestellung bearbeiten', :update => 'results', :url => {:action => 'new', :id => @order, :view => 'editResults'}
-  .column_content
-    #results
-      = render :partial => 'edit_results_by_articles'
-    %p= link_to_top
-#edit_box{:style => 'display:none'}
+        %p= t('.comment_on_transaction') 
+    = link_to t('.edit_note'), edit_note_finance_order_path(@order), remote: true
+
+  .well.well-small
+    %h3= t('.comments')
+    #comments= render :partial => 'shared/comments', locals: {comments: @order.comments.includes(:user)}
+
+- content_for :actionbar do
+  .btn-group
+    - unless @order.invoice or @order.stockit?
+      = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
+        class: 'btn'
+    - unless @order.closed?
+      = link_to t('.confirm_order'), confirm_finance_order_path(@order), class: 'btn btn-primary'
+
+  #editOrderNav.btn-group.pull-right
+    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+      = t('.view_options')
+      %span.caret
+    %ul.dropdown-menu
+      %li= link_to t('.edit_order'), new_finance_order_path(order_id: @order.id, view: 'edit_results'),
+        remote: true
+      %li= link_to t('.groups_overview'), new_finance_order_path(order_id: @order.id, view: 'groups_overview'),
+        remote: true
+      %li= link_to t('.articles_overview'), new_finance_order_path(order_id: @order.id, view: 'articles_overview'),
+        remote: true
+
+%section#results
+  = render 'edit_results_by_articles'
+%p= link_to_top

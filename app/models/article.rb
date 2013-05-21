@@ -1,67 +1,31 @@
-# == Schema Information
-#
-# Table name: articles
-#
-#  id                  :integer         not null, primary key
-#  name                :string(255)     default(""), not null
-#  supplier_id         :integer         default(0), not null
-#  article_category_id :integer         default(0), not null
-#  unit                :string(255)     default(""), not null
-#  note                :string(255)
-#  availability        :boolean         default(TRUE), not null
-#  manufacturer        :string(255)
-#  origin              :string(255)
-#  shared_updated_on   :datetime
-#  price               :decimal(, )
-#  tax                 :float
-#  deposit             :decimal(, )     default(0.0)
-#  unit_quantity       :integer         default(1), not null
-#  order_number        :string(255)
-#  created_at          :datetime
-#  updated_at          :datetime
-#  quantity            :integer         default(0)
-#  deleted_at          :datetime
-#  type                :string(255)
-#
-
+# encoding: utf-8
 class Article < ActiveRecord::Base
-  acts_as_paranoid  # Avoid deleting the article for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
+
+  # Replace numeric seperator with database format
+  localize_input_of :price, :tax, :deposit
 
   # Associations
   belongs_to :supplier
   belongs_to :article_category
   has_many :article_prices, :order => "created_at DESC"
 
-  named_scope :available, :conditions => {:availability => true}
-  named_scope :not_in_stock, :conditions => {:type => nil}
+  scope :undeleted, -> { where(deleted_at: nil) }
+  scope :available, -> { undeleted.where(availability: true) }
+  scope :not_in_stock, :conditions => {:type => nil}
 
   # Validations
-  validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category_id
+  validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category
   validates_length_of :name, :in => 4..60
   validates_length_of :unit, :in => 2..15
-  validates_numericality_of :price, :unit_quantity, :greater_than => 0
+  validates_numericality_of :price, :greater_than_or_equal_to => 0
+  validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
   validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type]
   
   # Callbacks
   before_save :update_price_history
   before_destroy :check_article_in_use
-
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def price=(price)
-    self[:price] = String.delocalized_decimal(price)
-  end
-  
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def tax=(tax)
-    self[:tax] = String.delocalized_decimal(tax)
-  end
-  
-  # Custom attribute setter that accepts decimal numbers using localized decimal separator.
-  def deposit=(deposit)
-    self[:deposit] = String.delocalized_decimal(deposit)
-  end
   
   # The financial gross, net plus tax and deposti
   def gross_price
@@ -70,7 +34,7 @@ class Article < ActiveRecord::Base
 
   # The price for the foodcoop-member.
   def fc_price
-    (gross_price  * (Foodsoft.config[:price_markup] / 100 + 1)).round(2)
+    (gross_price  * (FoodsoftConfig[:price_markup] / 100 + 1)).round(2)
   end
   
   # Returns true if article has been updated at least 2 days ago
@@ -85,6 +49,11 @@ class Article < ActiveRecord::Base
     order_article ? order_article.order : nil
   end
   memoize :in_open_order
+  
+  # Returns true if the article has been ordered in the given order at least once
+  def ordered_in_order?(order)
+    order.order_articles.where(article_id: id).where('quantity > 0').one?
+  end
   
   # this method checks, if the shared_article has been changed
   # unequal attributes will returned in array
@@ -157,8 +126,8 @@ class Article < ActiveRecord::Base
           false
         end
       else # get factors for fc and supplier
-        fc_unit_factor = Foodsoft.config[:units][self.unit]
-        supplier_unit_factor = Foodsoft.config[:units][self.shared_article.unit]
+        fc_unit_factor = FoodsoftConfig[:units][self.unit]
+        supplier_unit_factor = FoodsoftConfig[:units][self.shared_article.unit]
         if fc_unit_factor and supplier_unit_factor
           convertion_factor = fc_unit_factor / supplier_unit_factor
           new_price = BigDecimal((convertion_factor * shared_article.price).to_s).round(2)
@@ -173,11 +142,20 @@ class Article < ActiveRecord::Base
     end
   end
 
+  def deleted?
+    deleted_at.present?
+  end
+
+  def mark_as_deleted
+    check_article_in_use
+    update_column :deleted_at, Time.now
+  end
+
   protected
   
   # Checks if the article is in use before it will deleted
   def check_article_in_use
-    raise self.name.to_s + " kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!" if self.in_open_order
+    raise I18n.t('articles.model.error_in_use', :article => self.name.to_s) if self.in_open_order
   end
 
   # Create an ArticlePrice, when the price-attr are changed.

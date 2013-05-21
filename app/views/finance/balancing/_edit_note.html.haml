@@ -1,9 +1,10 @@
-%h2 Notiz bearbeiten
-- remote_form_for 'order', @order, :url => {:action => 'update_note', :id => @order}, |
-  :before => "Element.show('loader')", :success => "Element.hide('loader')" do |form| |
-  = form.error_messages
-  = form.text_area "note", :size => "60x20"
-  %p
-    = submit_tag "Speichern"
-    |
-    = link_to_function 'Abbrechen', "Element.hide('edit_box')"
+= simple_form_for @order, url: update_note_finance_order_path(@order), remote: true, method: :put do |f|
+  .modal-header
+    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    %h3 Notiz bearbeiten
+  .modal-body
+    = f.input :note, input_html: {class: 'input-xlarge'}
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit t('ui.save'), class: 'btn btn-primary'
+

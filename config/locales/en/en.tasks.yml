@@ -1,0 +1,75 @@
+en:
+  tasks:
+   archive:
+     title: 'Task archive'
+   archive_tasks:
+     due_date: 'Due date'
+     task: 'Subject'
+     who: 'People in charge'
+     task_format: '%{name} (%{duration}h)'
+   edit:
+     title: 'Edit task'
+   form:
+     search:
+       hint: "Search for user"
+       noresult: 'No user found'
+       placeholder: 'Search ...'
+   index:
+     title: 'Tasks'
+     title_non_group: 'Tasks for all!'
+     show_group_tasks: 'Show group tasks'
+   list:
+     due_date: 'Due date'
+     task: 'subject'
+     who: 'Who is doing it?'
+     who_hint: '(How much are still needed?)'
+     task_format: '%{name} (%{duration}h)'
+     accept_task: 'Accept task'
+     reject_task: 'Reject task'
+     mark_done: 'Mark task as done'
+     done_q: 'Done?'
+     done: 'Done'
+   nav:
+     new_task: 'Create new task'
+     my_tasks: 'My tasks'
+     all_tasks: 'All tasks'
+     archive: 'Completed tasks (archive)'
+     group_tasks: 'Group tasks'
+   new:
+     title: 'Create new tasks'
+   show:
+     title: 'Show task'
+     hours: '%{count}h'
+     due_date: 'Due date'
+     accept_task: 'Accept task'
+     reject_task: 'Reject task'
+     mark_done: 'Mark task as done'
+   user:
+     title: 'My tasks'
+     title_open: 'Open tasks'
+     title_accepted: 'Accepted tasks'
+     more: 'Nothing to do? %{tasks_link} are tasks for sure.'
+     tasks_link: 'Here'
+   workgroup:
+     title: 'Tasks for %{workgroup}'
+     weekly:
+       title: 'Weekly tasks'
+       desc: >
+         <p>Every <b>%{weekday}</b> this workgroup has the following job: <b>%{task}</b></p>
+         <p>The weektask has been created by Foodsoft automatically. You still have to sign up for it yourself.</p>
+       empty: 'No weekly tasks created yet.'
+       edit: 'Edit weekly tasks'
+     title_all: 'All group tasks'
+
+   # used by controller
+   create:
+     notice: 'Task has been created'
+   update:
+     notice: 'Task has been updated'
+   destroy:
+     notice: 'Task has been deleted'
+   accept:
+     notice: 'You have accepted the task'
+   set_done:
+     notice: 'The state of the task has been updated'
+   error_not_found: 'No workgroup found'
