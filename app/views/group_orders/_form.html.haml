@@ -15,9 +15,9 @@
   = @order.name
   %span{style: 'font-weight: normal; font-size: 50%; vertical-align: middle;'}= t 'group_orders.switch_order.remaining', remaining: time_ago_in_words(@order.ends)
 
--# unless @order.note.blank?
-  %dt= t '.note'
-  %dd= @order.note
+- unless @order.note.blank?
+  %p
+    %i= @order.note
 
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
