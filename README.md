@@ -1,17 +1,17 @@
-== FoodSoft
+FoodSoft
+=========
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
 
-== Install
+More information about using this software and contributing can be found on the [wiki](https://github.com/foodcoops/foodsoft/wiki).
 
-Have a look on README_DEVEL.
+Install
+--------
 
-Update, it is highly recommended to checkout the rails3 branch. As soon as possible I will merge this branch
-into master. So for beginnners, better start with the new (I hope much easier) code.
+Have a look at [README_DEVEL](https://github.com/foodcoops/foodsoft/blob/master/doc/DEVELOPMENT) (possibly outdated) and the (more recent) [Developing](https://github.com/foodcoops/foodsoft/wiki/Developing) page on the wiki.
 
-git checkout -b rails3 origin/rails3
-
-== License
+License
+-------
 
 FoodSoft - a webbased foodcoop management software
 Copyright (C) 2011 Benni and Lasse
