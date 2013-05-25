@@ -139,6 +139,7 @@ GEM
     mime-types (1.21)
     mono_logger (1.1.0)
     multi_json (1.7.3)
+    mysql2 (0.3.11)
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -279,6 +280,7 @@ DEPENDENCIES
   kaminari
   localize_input!
   meta_search
+  mysql2
   prawn
   quiet_assets
   rails (~> 3.2.9)
