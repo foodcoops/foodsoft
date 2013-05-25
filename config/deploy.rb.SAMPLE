@@ -38,9 +38,6 @@ after "deploy:restart", "deploy:cleanup"
 # restart resque
 after "deploy:restart", "resque:restart"
 
-# update cron
-after "deploy:restart", "whenever:update_crontab"
-
 # install rvm and ruby on every deploy
 # before 'deploy', 'rvm:install_rvm'  # update RVM
 # before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)

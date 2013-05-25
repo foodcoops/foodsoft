@@ -18,7 +18,8 @@ end
 
 gem 'jquery-rails'
 
-gem 'mysql2'
+gem 'sqlite3'
+# gem 'mysql2'
 gem 'prawn'
 gem 'haml-rails'
 gem 'kaminari'
