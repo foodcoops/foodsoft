@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/fsmanuel/common_deploy.git
-  revision: 03e4efb52bb24bfea22789fc699d993f6ac9eff7
+  revision: 8c217928bef9dc99d3c95fc8033f97ca7503359c
   specs:
     common_deploy (0.0.1)
       capistrano (>= 2.13.5)
