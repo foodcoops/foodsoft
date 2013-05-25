@@ -8,7 +8,7 @@ More information about using this software and contributing can be found on the 
 Install
 --------
 
-Have a look at [README_DEVEL](https://github.com/foodcoops/foodsoft/blob/master/doc/DEVELOPMENT) (possibly outdated) and the (more recent) [Developing](https://github.com/foodcoops/foodsoft/wiki/Developing) page on the wiki.
+Have a look at [DEVELOPMENT](https://github.com/foodcoops/foodsoft/blob/master/doc/DEVELOPMENT) (possibly outdated) and the (more recent) [Developing](https://github.com/foodcoops/foodsoft/wiki/Developing) page on the wiki.
 
 License
 -------
