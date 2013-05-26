@@ -1,6 +1,5 @@
 # put in here all foodsoft tasks
 # => :environment loads the environment an gives easy access to the application
-
 namespace :foodsoft do
   desc "Notify users of upcoming tasks"
   task :notify_upcoming_tasks => :environment do

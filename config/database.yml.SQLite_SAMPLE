@@ -5,16 +5,6 @@ development:
   pool: 5
   timeout: 5000
 
-# Mysql config instead
-#  database: foodsoft_development
-#  username: root
-#  password:
-#  host: localhost
-#  encoding: utf8
-# Define a socket, if youre not using standard linux socket, like lampp..
-#  socket: /opt/lampp/var/mysql/mysql.sock
-
-
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
