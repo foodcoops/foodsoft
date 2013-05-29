@@ -45,7 +45,8 @@ end
 
 group :development do
   gem 'sqlite3'
-
+  gem 'mailcatcher'
+  
   # Better error output
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -63,5 +64,5 @@ group :development do
   # Deploy with Capistrano
   gem 'capistrano', '2.13.5'
   gem 'capistrano-ext'
-  gem 'common_deploy', require: false, git: 'git://github.com/fsmanuel/common_deploy.git'
+  gem 'common_deploy', require: false, path: '../../common_deploy' #git: 'git://github.com/fsmanuel/common_deploy.git'
 end

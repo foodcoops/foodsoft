@@ -34,15 +34,16 @@ namespace :foodsoft do
     setup_development
     setup_database
     setup_secret_token
+    start_mailcatcher
     puts yellow "All done! Your foodcoft should be running smoothly."
     start_server
   end
 end
 
 def setup_bundler
-  puts "Installing bundler if not installed..."
+  puts yellow "Installing bundler if not installed..."
   %x( if [ -z `which bundle` ]; then gem install bundler --no-rdoc --no-ri; fi )
-  puts "Executing bundle install..."
+  puts yellow "Executing bundle install..."
   %x( bundle install )
 end
 
@@ -98,14 +99,16 @@ def setup_secret_token
   %x( touch #{Rails.root.join("#{file}")}; echo 'Foodsoft::Application.config.secret_token = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
 end
 
-def start_server
-  puts blue "Starting server..."
-  %x( bundle exec rails s )
-  if $?.to_i === 0
-    puts blue "visit http://localhost:3000"
-  else
-    puts red "starting server failed!"
+def start_mailcatcher
+  mailcatcher = ask("Do you want to start mailcatcher?\nOptions:\n(y) Yes\n(n) No", ["y","n"])
+  if mailcatcher === "y"
+    puts yellow "Starting mailcatcher at http://localhost:1080..."
+    %x( mailcatcher )
   end
+end
+
+def start_server
+  puts blue "Start your server running 'bundle exec rails s' and visit http://localhost:3000"
 end
 
 def ask(question, answers = false)

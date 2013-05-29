@@ -6,8 +6,8 @@ set :domain,              'foodsoft.com'
 set :user,                'foodsoft'
 set :default_stage,       'staging' # staging and production are available via (set :stages, ["staging", "production"])
 set :keep_releases,       5
-set :deploy_to,           "/mnt/apps/manuel/#{application}_#{fetch(:stage, default_stage)}"
 set :repository,          'git://github.com/foodcoops/foodsoft.git'
+set(:deploy_to)           { "/mnt/apps/#{application}_#{stage}" }
 
 
 # resque worker
