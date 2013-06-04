@@ -12,13 +12,15 @@ SimpleNavigation::Configuration.run do |navigation|
     # I18n.t('navigation.orders.manage')
 
     primary.item :suppliers, 'Products', suppliers_path, id: nil
+    primary.item :balancing, 'Receive', finance_order_index_path, id: nil, if: Proc.new { current_user.role_finance? }
+    primary.item :accounts, 'Member payments', finance_ordergroups_path, id: nil, if: Proc.new { current_user.role_finance? }
 
-    primary.item :finance, I18n.t('navigation.finances.title'), '#', id: nil, if: Proc.new { current_user.role_finance? } do |subnav|
-      subnav.item :finance_home, I18n.t('navigation.finances.home'), finance_root_path
-      subnav.item :accounts, I18n.t('navigation.finances.accounts'), finance_ordergroups_path, id: nil
-      subnav.item :balancing, I18n.t('navigation.finances.balancing'), finance_order_index_path, id: nil
-      subnav.item :invoices, I18n.t('navigation.finances.invoices'), finance_invoices_path, id: nil
-    end
+    #primary.item :finance, I18n.t('navigation.finances.title'), '#', id: nil, if: Proc.new { current_user.role_finance? } do |subnav|
+      #subnav.item :finance_home, I18n.t('navigation.finances.home'), finance_root_path
+      #subnav.item :accounts, I18n.t('navigation.finances.accounts'), finance_ordergroups_path, id: nil
+      #subnav.item :balancing, I18n.t('navigation.finances.balancing'), finance_order_index_path, id: nil
+      #subnav.item :invoices, I18n.t('navigation.finances.invoices'), finance_invoices_path, id: nil
+    #end
 
     primary.item :admin, 'Membership', '#', id: nil, if: Proc.new { current_user.role_admin? } do |subnav|
       subnav.item :admin_home, I18n.t('navigation.admin.home'), admin_root_path
@@ -26,8 +28,10 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :ordergroups, I18n.t('navigation.admin.ordergroups'), admin_ordergroups_path, id: nil
    end
 
-    primary.item :others, 'Other', '#', id: nil, if: Proc.new { current_user.role_admin? } do |subnav|
-      subnav.item :categories, I18n.t('navigation.articles.categories'), article_categories_path, id: nil
+    primary.item :others, 'Other', '#', id: nil  do |subnav|
+      subnav.item :categories, I18n.t('navigation.articles.categories'), article_categories_path, id: nil, if: Proc.new { current_user.role_admin? }
+      subnav.item :finance_home, 'Financial overview', finance_root_path, if: Proc.new { current_user.role_finance? }
+      subnav.item :invoices, I18n.t('navigation.finances.invoices'), finance_invoices_path, id: nil, if: Proc.new { current_user.role_finance? }
     end
   end
 
