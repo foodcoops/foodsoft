@@ -213,7 +213,7 @@ class ArticlesController < ApplicationController
   
   # fills a form whith values of the selected shared_article
   def import
-    @article = SharedArticle.find(params[:shared_article_id]).build_new_article
+    @article = SharedArticle.find(params[:shared_article_id]).build_new_article(@supplier)
     render :action => 'new', :layout => false
   end
   
