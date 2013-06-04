@@ -28,6 +28,10 @@ class Finance::FinancialTransactionsController < ApplicationController
 
   def new
     @financial_transaction = @ordergroup.financial_transactions.build
+    # pre-fill amount to bring balance to zero
+    if @ordergroup.account_balance < 0
+      @financial_transaction.amount = - @ordergroup.account_balance
+    end
   end
 
   def create
