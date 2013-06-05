@@ -127,8 +127,8 @@ en:
     confirm: Do you really want to delete %{name}?
     ordergroups:
       destroy:
-        error: 
-        notice: 
+        error: ! 'Ordergroup could not be deleted: %{error}'
+        notice: Ordergroup was deleted
       edit:
         title: Edit ordergroup
       form:
@@ -182,8 +182,8 @@ en:
         name: name
     workgroups:
       destroy:
-        error: 
-        notice: 
+        error: ! 'Workgroup could not be deleted: %{error}'
+        notice: Workgroup was deleted
       edit:
         title: Edit workgroup
       form:
@@ -235,28 +235,25 @@ en:
       unit_quantity_short: Quantity
     controller:
       create_from_upload:
-        notice: 
-      error_invalid: 
-      error_nosel: 
-      error_parse: 
-      error_update: 
+        notice: ! '%{count} new articles were saved'
+      error_invalid: Articles are incorrect.
+      error_nosel: You have selected no articles
+      error_parse: ! '%{msg} ... in line %{line}'
+      error_update: ! 'There was an error when updating the article ''%{article}'' on: %{msg}'
       parse_upload:
-        notice: 
+        notice: ! '%{count} articles analysed succesfully.'
       sync:
-        notice: 
-        shared_alert: 
+        notice: The catalog is up to date
+        shared_alert: ! '%{supplier} is not linked to an external database'
       update_all:
-        notice: 
+        notice: All articles and prices are updated
       update_sel:
-        notice_avail: 
-        notice_destroy: 
-        notice_noaction: 
-        notice_unavail: 
+        notice_avail: ! 'All selected articles have been made available '
+        notice_destroy: All selected articles have been deleted
+        notice_noaction: No action selected!
+        notice_unavail: All selected articles have been made unavailable
       update_sync:
         notice: 
-    create_from_upload:
-      error_invalid: Articles are faulty
-      notice: ! '%{count} new articles were saved'
     destroy_active_article:
       drop: delete
       note: ! '%{article} is used in current orders and can not be deleted Please first ... the article from orders %{drop_link}.'
@@ -299,37 +296,6 @@ en:
     model:
       error_in_use: ! '%{article} can not be deleted because the article is part of a current order!'
       error_nosel: You have selected no articles
-    parse_upload:
-      body: 
-      error_parse: ! '%{msg} ... in line %{line}'
-      notice: ! '%{count} articles analysed succesfully.'
-      submit: 
-      title: 
-    sync:
-      notice: The catalog is up to date
-      outlist:
-        body: 
-        body_skip: 
-        title: 
-      price_short: 
-      shared_alert: ! '%{supplier} is not linked to an external database'
-      submit: 
-      title: 
-      unit_quantity_short: 
-      update:
-        body: 
-        title: 
-        update_msg: 
-    update_all:
-      error_invalid: Articles are incorrect. Please check your input.
-      error_update: ! 'There was an error when updating the article ''%{article}'' on: %{msg}'
-      notice: All articles and prices are updated
-    update_selected:
-      error_nosel: You have selected no articles
-      notice_avail: ! 'All selected articles have been made available '
-      notice_destroy: All selected articles have been deleted
-      notice_noaction: No action selected!
-      notice_unavail: All selected articles have been made unavailable
     upload:
       body: ! '<p>The file has to be a text file with the ending ''.csv'' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons ('';'') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>'
       fields:
@@ -1106,7 +1072,6 @@ en:
       reply_indent: ! '> %{line}'
       reply_subject: ! 'Re: %{subject}'
     new:
-      cancel: or cancel
       list:
         desc: ! 'Please send messages to all using the mailing-list: %{list}'
         mail: for example with an email to %{email}.

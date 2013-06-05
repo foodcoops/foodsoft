@@ -127,7 +127,7 @@ de:
     confirm: Willst du %{name} wirklich löschen?
     ordergroups:
       destroy:
-        error: ! 'Bestellgruppe konnte nicht gelöscht werden: #{error}'
+        error: ! 'Bestellgruppe konnte nicht gelöscht werden: %{error}'
         notice: Bestellgruppe wurde gelöscht
       edit:
         title: Bestellgruppe bearbeiten
@@ -182,7 +182,7 @@ de:
         name: Name
     workgroups:
       destroy:
-        error: ! 'Arbeitsgruppe konnte nicht gelöscht werden: #{error}'
+        error: ! 'Arbeitsgruppe konnte nicht gelöscht werden: %{error}'
         notice: Arbeitsgruppe wurde gelöscht
       edit:
         title: Arbeitsgruppe bearbeiten
@@ -300,7 +300,6 @@ de:
       body: ! '<p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>'
       submit: Speichere neue Artikel für %{supplier}
       title: ! '%{supplier} / Artikel hochladen'
-    sync:
       outlist:
         body: ! 'Folgende Artikel wurden ausgelistet und werden <b>gelöscht</b>:'
         body_skip: Es müssen keine Artikel gelöscht werden.
