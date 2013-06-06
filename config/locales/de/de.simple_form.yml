@@ -8,6 +8,12 @@ de:
       mark: '*'
     error_notification:
       default_message: "Fehler wurden gefunden. Bitte das Formular überprüfen."
+    options:
+      settings:
+        profile:
+          language:
+            de: Deutsch
+            en: English
     labels:
       defaults:
         password: 'Passwort'
@@ -30,6 +36,18 @@ de:
         nick: "Benutzerinnenname"
         first_name: "Vorname"
         last_name: "Nachname"
+      settings:
+        profile:
+          language: Sprache
+          phone_is_public: 'Telefon ist für Mitglieder sichtbar'
+          email_is_public: 'E-Mail ist für Mitglieder sichtbar'
+          name_is_public: 'Name ist für Mitglieder sichtbar'
+        notify:
+          order_finished: 'Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).'
+          negative_balance: 'Informiere mich, falls meine Bestellgruppe ins Minus rutscht.'
+          upcoming_tasks: 'Erinnere mich an anstehende Aufgaben.'
+        messages:
+          send_as_email: 'Bekomme Nachrichten als Emails.'
       workgroup:
         weekly_task: 'Monatlichen Job definieren?'
         weekday: 'Wochentag'

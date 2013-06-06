@@ -5,11 +5,19 @@
 = f.input :phone
 = f.input :password, :required => f.object.new_record?
 = f.input :password_confirmation
-.control-group
-  .controls
-    - for setting in User::setting_keys.keys
-      %label.checkbox{:for => "user[setting_attributes][#{setting}]"}
-        = hidden_field_tag "user[setting_attributes][#{setting}]", '0'
-        = check_box_tag "user[setting_attributes][#{setting}]", '1',
-        f.object.settings[setting] == '1' || f.object.settings_default(setting)
-        = User::setting_keys[setting]
+
+= f.simple_fields_for :settings_attributes do |s|
+
+  = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
+    = profile.input 'language',         as: :select,  collection: available_locales, required: false, selected: f.object.settings.profile['language']
+    = profile.input 'phone_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['phone_is_public'] }
+    = profile.input 'email_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['email_is_public'] }
+    = profile.input 'name_is_public',   as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }
+    
+  = s.simple_fields_for :messages, defaults: { inline_label: true, label: false } do |messages|
+    = messages.input 'send_as_email',   as: :boolean, input_html: { checked: f.object.settings.messages['send_as_email'] }
+    
+  = s.simple_fields_for :notify, defaults: { inline_label: true, label: false } do |notify|
+    = notify.input 'order_finished',    as: :boolean, input_html: { checked: f.object.settings.notify['order_finished'] }
+    = notify.input 'negative_balance',  as: :boolean, input_html: { checked: f.object.settings.notify['negative_balance'] }
+    = notify.input 'upcoming_tasks',    as: :boolean, input_html: { checked: f.object.settings.notify['upcoming_tasks'] }
