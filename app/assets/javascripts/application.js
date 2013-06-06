@@ -35,11 +35,14 @@ $(function() {
 
     // Check/Uncheck all checkboxes for a specific form
     $('input[data-check-all]').live('click', function() {
-        var status = $(this).is(':checked')
-        $($(this).data('check-all')).find('input[type="checkbox"]').each(function() {
-            $(this).attr('checked', status);
-            highlightRow($(this));
-        });
+        var status = $(this).is(':checked');
+        var context = $(this).data('check-all');
+        var elms = $('input[type="checkbox"]', context);
+        for(i=elms.length-1; i>=0; --i) { // performance can be an issue here, so use native loop
+          var elm = elms[i];
+          elm.checked = status;
+          highlightRow($(elm));
+        }
     });
 
     // Submit form when changing a select menu.
@@ -101,8 +104,8 @@ $(function() {
 
 
 // gives the row an yellow background
-function highlightRow(checkbox) {
-    var row = checkbox.parents('tr');
+function highlightRow(checkbox, status) {
+    var row = checkbox.closest('tr');
     if (checkbox.is(':checked')) {
         row.addClass('selected');
     } else {
