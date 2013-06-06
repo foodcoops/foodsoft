@@ -98,6 +98,7 @@ function update(item, quantity, tolerance) {
     }
     $('#q_used_' + item).html(String(q_used));
     $('#q_unused_' + item).html(String(quantity - q_used));
+    $('#q_grouptotal_' + item).html(String(Number(quantity)));
     $('#q_total_' + item).html(String(Number(quantity) + quantityOthers[item]));
 
     // update used/unused tolerance
@@ -106,6 +107,7 @@ function update(item, quantity, tolerance) {
         t_used = Math.min(available, tolerance);
         $('#t_used_' + item).html(String(t_used));
         $('#t_unused_' + item).html(String(tolerance - t_used));
+        $('#t_grouptotal_' + item).html(String(Number(tolerance)));
         $('#t_total_' + item).html(String(Number(tolerance) + toleranceOthers[item]));
     }
 
