@@ -64,5 +64,5 @@ group :development do
   # Deploy with Capistrano
   gem 'capistrano', '2.13.5'
   gem 'capistrano-ext'
-  gem 'common_deploy', require: false, path: '../../common_deploy' #git: 'git://github.com/fsmanuel/common_deploy.git'
+  #gem 'common_deploy', require: false, path: '../../common_deploy' # pending foodcoops/foodsoft#34,  git: 'git://github.com/fsmanuel/common_deploy.git'
 end
