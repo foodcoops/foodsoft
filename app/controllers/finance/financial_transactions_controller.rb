@@ -28,10 +28,9 @@ class Finance::FinancialTransactionsController < ApplicationController
 
   def new
     @financial_transaction = @ordergroup.financial_transactions.build
-    # pre-fill amount to bring balance to zero - including unfinished orders!! #foodcoop-adam
-    balance = @ordergroup.account_balance - @ordergroup.value_of_finished_orders
-    if balance < 0
-      @financial_transaction.amount = - balance
+    # pre-fill amount to bring balance to zero - including unfinished and open orders!! #foodcoop-adam
+    if @ordergroup.get_available_funds < 0
+      @financial_transaction.amount = -@ordergroup.get_available_funds
     end
   end
 
