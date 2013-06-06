@@ -104,7 +104,7 @@ $(function() {
 
 
 // gives the row an yellow background
-function highlightRow(checkbox, status) {
+function highlightRow(checkbox) {
     var row = checkbox.closest('tr');
     if (checkbox.is(':checked')) {
         row.addClass('selected');
