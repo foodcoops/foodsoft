@@ -14,9 +14,9 @@
     - for user in @users
       %tr
         %td= user.nick
-        %td= user.name if @current_user.role_admin? || user.settings["profile.nameIsPublic"] == '1'
-        %td= user.email if @current_user.role_admin? ||  user.settings["profile.emailIsPublic"] == '1'
-        %td= user.phone if @current_user.role_admin? ||  user.settings["profile.phoneIsPublic"] == '1'
+        %td= user.name  if @current_user.role_admin? || user.settings.profile["name_is_public"]
+        %td= user.email if @current_user.role_admin? || user.settings.profile["email_is_public"]
+        %td= user.phone if @current_user.role_admin? || user.settings.profile["phone_is_public"]
         %td= user.ordergroup_name
         %td= user.workgroups.collect(&:name).join(', ')
         %td= link_to_new_message(message_params: {mail_to: user.id})

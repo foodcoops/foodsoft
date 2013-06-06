@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
   end
   
   after_save do
+    return if settings_attributes.nil?
     settings_attributes.each do |key, value|
       value.each do |k, v|
         case v
