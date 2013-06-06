@@ -22,5 +22,5 @@
   = link_to t('.edit'), edit_finance_invoice_path(invoice)
 
 - else
-  Eine Rechnung für diese Bestellung anlegen:
+  = t '.new_body'
   = link_to t('.new'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier)

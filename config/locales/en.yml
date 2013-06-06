@@ -572,6 +572,7 @@ en:
         invoice_number: ! 'Invoice number:'
         minus_refund_calculated: ! '- refund calculated:'
         new: Create new invoice
+        new_body: ! 'Create an invoice for this order:'
         plus_refund_credited: ! '+ refund credited:'
         refund_adjusted_amount: ! 'refund adjusted amount:'
       new:

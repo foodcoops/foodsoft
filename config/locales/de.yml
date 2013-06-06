@@ -572,6 +572,7 @@ de:
         invoice_number: ! 'Rechnungsnummer:'
         minus_refund_calculated: ! '- Pfand berechnet:'
         new: Neue Rechnung erstellen
+        new_body: ! 'Eine Rechnung für diese Bestellung anlegen:'
         plus_refund_credited: ! '+ Pfand gutgeschrieben:'
         refund_adjusted_amount: ! 'pfandbereinigter Betrag:'
       new:
