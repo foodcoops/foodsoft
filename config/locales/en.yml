@@ -296,8 +296,22 @@ en:
     model:
       error_in_use: ! '%{article} can not be deleted because the article is part of a current order!'
       error_nosel: You have selected no articles
+    parse_upload:
+      body: 
+      outlist:
+        body: 
+        body_skip: 
+        title: 
+      price_short: 
+      submit: 
+      title: 
+      unit_quantity_short: 
+      update:
+        body: 
+        title: 
+        update_msg: 
     upload:
-      body: ! '<p>The file has to be a text file with the ending ''.csv'' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons ('';'') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>'
+      body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
       fields:
         season_amount: Scaled amount
         season_price: Scaled price
@@ -700,7 +714,7 @@ en:
         user: Users
     users:
       index:
-        body: ! '<p>Here you can write a message to the members of your Foodcoop.</p> <p>You have to approve in your %{profile_link} that your contact details are visible.</p>'
+        body: <p>Here you can write a message to the members of your Foodcoop.</p> <p>You have to approve in your %{profile_link} that your contact details are visible.</p>
         ph_name: Name ...
         ph_ordergroup: Order group ...
         profile_link: options
@@ -711,7 +725,7 @@ en:
         invite_new: You can invite new members %{invite_link}.
         title: Edit group
       index:
-        body: ! '<p>Editing a group is only available to members of the group.<br/> If you want to join a group, please send the members a message. </p>'
+        body: <p>Editing a group is only available to members of the group.<br/> If you want to join a group, please send the members a message. </p>
         title: Working groups
       workgroup:
         edit: Edit group
@@ -773,7 +787,7 @@ en:
         title: Credit
       title: Orders overview
     messages:
-      not_enough_apples: ! 'You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.'
+      not_enough_apples: You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.
     order:
       title: Articles
     orders:
@@ -926,7 +940,7 @@ en:
     errors:
       already_member: is already in use. Person is already a member of this Foodcoop.
     modal_form:
-      body: ! '<p>Here you can invite a person to a group <b>%{group}</b>, who is not yet a member of the foodcoop.</p> <p>After being added for the first time, the person is automatically a member of this group.</p>'
+      body: <p>Here you can invite a person to a group <b>%{group}</b>, who is not yet a member of the foodcoop.</p> <p>After being added for the first time, the person is automatically a member of this group.</p>
       title: Invite person
     new:
       action: Send invite
@@ -938,9 +952,14 @@ en:
       title: Foodsoft - %{title}
     email:
       footer: ! '--
+
         Foodsoft: %{foodsoft}
+
         Foodcoop-Homepage: %{foodcoop}
-        Help: %{help}'
+
+        Help: %{help}
+
+'
     foodsoft: Foodsoft
     header:
       feedback:
@@ -957,7 +976,7 @@ en:
       page: Page %{number}
   login:
     accept_invitation:
-      body: ! '<p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. ''All'' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>'
+      body: <p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>
       submit: Create a Foodsoft account
       title: Invitation to %{name}
     controller:
@@ -971,11 +990,11 @@ en:
       update_password:
         notice: Your password was updated. You can login now.
     forgot_password:
-      body: ! '<p>No Problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>'
+      body: <p>No Problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>
       submit: Request new password
       title: Forgot password?
     new_password:
-      body: ! '<p>Please fill in the new password for <b>%{user}</b></p>'
+      body: <p>Please fill in the new password for <b>%{user}</b></p>
       submit: Save new password
       title: New password
   mailer:
@@ -985,79 +1004,119 @@ en:
       subject: Feedback from %{email}
     foodsoft_message:
       footer: ! 'Reply: %{reply_url}
+
         See message online: %{msg_url}
-        Messaging options: %{profile_url}'
+
+        Messaging options: %{profile_url}
+
+'
     invite:
       subject: Invitation to the Foodcoop
       text: ! 'Hi!
 
+
         %{user} <%{mail}> has invited you to join the group "%{group}".
+
         To accept the invitation and to join the foodcoop please follow this link: %{link}
+
         This link works only once and expires on %{expires}.
 
+
+
         Greetings, your Foodsoft Team!
+
 '
     negative_balance:
       subject: Negative account balance
       text: ! 'Dear %{group},
 
+
         Your account balance has dropped below zero due to a booking on %{when}: %{balance}
 
+
         There was a charge of %{amount} for "%{note}" by %{user}.
+
 
         Please deposit your account as soon as possible.
 
 
+
+
         Kind regards from %{foodcoop}.
+
 '
     not_enough_users_assigned:
       subject: ! '"%{task}" still needs people!'
       text: ! 'Dear %{user},
 
+
         The Task ''%{task}'' of your working group is due on %{when},
+
         and could use some more contributors!
+
 
         If you haven’t assigned yourself to this task yet it’s your chance now:
 
+
         %{workgroup_tasks_url}
 
+
         Your Tasks: %{user_tasks_url}
+
 '
     order_result:
       subject: 
       text0: ! 'Dear %{ordergroup},
 
+
         The order for "%{order}" was placed on %{when} by %{user}.
 
+
         The following articles were ordered by your ordergroup:
+
 '
       text1: ! 'Total sum: %{sum}
 
+
         See order online: %{order_url}
 
+
         Kind regards from %{foodcoop}.
+
 '
     reset_password:
       subject: New password for %{username}
       text: ! 'Hi %{user},
 
+
         You have (or someone else has) requested a new password.
+
         In order to choose a new password follow this link: %{link}
+
         This link works only once and expires on %{expires}.
+
         If you don''t want to change your password, just ignore this message. Your password hasn''t been changed yet.
 
+
+
         Greetings, your Foodsoft Team!
+
 '
     upcoming_tasks:
       nextweek: ! 'Tasks for the next week:'
       subject: Tasks are due!
       text0: ! 'Dear %{user},
 
+
         You are asigned to the task "%{task}". This task is due by tomorrow (%{when})!
+
 '
       text1: ! 'My tasks: %{user_tasks_url}
 
+
+
         Kind regards from %{foodcoop}.
+
 '
   messages:
     create:
@@ -1667,7 +1726,7 @@ en:
       title: New supplier
     shared_supplier_note: Supplier is connected to the external database.
     shared_suppliers:
-      body: ! '<p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>'
+      body: <p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>
       subscribe: Subscribe
       supplier: Supplier
       title: External lists

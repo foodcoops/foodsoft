@@ -297,9 +297,7 @@ de:
       error_in_use: ! '%{article} kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!'
       error_nosel: Du hast keine Artikel ausgewählt
     parse_upload:
-      body: ! '<p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>'
-      submit: Speichere neue Artikel für %{supplier}
-      title: ! '%{supplier} / Artikel hochladen'
+      body: <p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
       outlist:
         body: ! 'Folgende Artikel wurden ausgelistet und werden <b>gelöscht</b>:'
         body_skip: Es müssen keine Artikel gelöscht werden.
@@ -309,11 +307,11 @@ de:
       title: Artikel mit externer Datenbank synchronisieren
       unit_quantity_short: GebGr
       update:
-        body: ! '<p><i>Jeder Artikel wird doppelt angezeigt. Die alten Werte sind grau und die Textfelder sind mit den aktuellen Werten vorausgefüllt.</i></p> <p><i>Abweichungen zu den alten Artikeln sind gelb markiert.</i></p>'
+        body: <p><i>Jeder Artikel wird doppelt angezeigt. Die alten Werte sind grau und die Textfelder sind mit den aktuellen Werten vorausgefüllt.</i></p> <p><i>Abweichungen zu den alten Artikeln sind gelb markiert.</i></p>
         title: Aktualisieren ...
         update_msg: ! 'Artikel müssen aktualisiert werden:'
     upload:
-      body: ! '<p>Die Datei muss eine Textdatei mit der Endung ''.csv'' sein. Die erste Zeile wird beim Einlesen ignoriert.</p> <p>Die Felder müssen mit einem Semikolon ('';'') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden.</p> <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>'
+      body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert.</p> <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden.</p> <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>
       fields:
         season_amount: Staffelmenge
         season_price: Staffelpreis
@@ -716,7 +714,7 @@ de:
         user: Mitglieder
     users:
       index:
-        body: ! '<p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.</p> <p>Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>'
+        body: <p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.</p> <p>Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>
         ph_name: Name ...
         ph_ordergroup: Bestellgruppe ...
         profile_link: Einstellungen
@@ -727,7 +725,7 @@ de:
         invite_new: Neue Mitglieder kannst du %{invite_link} einladen.
         title: Gruppe bearbeiten
       index:
-        body: ! '<p>Das bearbeiten von Gruppen ist nur für Mitglieder der Gruppe möglich.<br/> Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.</p>'
+        body: <p>Das bearbeiten von Gruppen ist nur für Mitglieder der Gruppe möglich.<br/> Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.</p>
         title: Arbeitsgruppen
       workgroup:
         edit: Gruppe bearbeiten
@@ -789,7 +787,7 @@ de:
         title: Guthaben
       title: Bestellüberblick
     messages:
-      not_enough_apples: ! 'Um zu Bestellen brauchst Du mindestends %{stop_ordering_under} Äpfel. Momentan hat Deine Bestellgruppe aber nur %{apples} Äpfel.'
+      not_enough_apples: Um zu Bestellen brauchst Du mindestends %{stop_ordering_under} Äpfel. Momentan hat Deine Bestellgruppe aber nur %{apples} Äpfel.
     order:
       title: Artikel
     orders:
@@ -942,7 +940,7 @@ de:
     errors:
       already_member: ist bereits in Verwendung. Person ist schon Mitglied der Foodcoop.
     modal_form:
-      body: ! '<p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p> <p>Die Person ist dann nach erstmaliger Anmeldung automatisch Mitglied dieser Gruppe.</p>'
+      body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p> <p>Die Person ist dann nach erstmaliger Anmeldung automatisch Mitglied dieser Gruppe.</p>
       title: Person einladen
     new:
       action: Einlading abschicken
@@ -954,9 +952,14 @@ de:
       title: Foodsoft - %{title}
     email:
       footer: ! '--
+
         Foodsoft: %{foodsoft}
+
         Foodcoop-Homepage: %{foodcoop}
-        Hilfe: %{help}'
+
+        Hilfe: %{help}
+
+'
     foodsoft: Foodsoft
     header:
       feedback:
@@ -973,7 +976,7 @@ de:
       page: Seite %{number}
   login:
     accept_invitation:
-      body: ! '<p>Du bist eingeladen worden als Mitglied der Gruppe <b>%{group}</b> in der Foodcoop %{foodcoop} mitzumachen.</p> <p>Wenn Du mitmachen möchtest, dann fülle bitte dieses Formular aus.</p> <p>Deine Daten werden selbstverständlich nicht an Dritte, aus was auch immer für Gründen, weitergeben. Du kannst auch entscheiden, wieviel deiner persönlichen Daten für alle einsehbar sein sollen. ''Alle'' bedeutet hier alle Foodcoop-Mitglieder. Die Administratoren haben aber jederzeit Zugriff auf deine Daten.</p>'
+      body: <p>Du bist eingeladen worden als Mitglied der Gruppe <b>%{group}</b> in der Foodcoop %{foodcoop} mitzumachen.</p> <p>Wenn Du mitmachen möchtest, dann fülle bitte dieses Formular aus.</p> <p>Deine Daten werden selbstverständlich nicht an Dritte, aus was auch immer für Gründen, weitergeben. Du kannst auch entscheiden, wieviel deiner persönlichen Daten für alle einsehbar sein sollen. 'Alle' bedeutet hier alle Foodcoop-Mitglieder. Die Administratoren haben aber jederzeit Zugriff auf deine Daten.</p>
       submit: Foodsoft Account erstellen
       title: Einlading in die %{name}
     controller:
@@ -987,11 +990,11 @@ de:
       update_password:
         notice: Dein Passwort wurde aktualisiert. Du kannst Dich jetzt anmelden.
     forgot_password:
-      body: ! '<p>Kein Problem, Du kannst dir einfach ein neues Passwort zulegen.</p> <p>Dazu musst hier die E-Mail-Adresse eingeben, mit der Du in der Foodsoft angemeldet bist. Du erhälst dann eine E-Mail mit weiteren Instruktionen.</p>'
+      body: <p>Kein Problem, Du kannst dir einfach ein neues Passwort zulegen.</p> <p>Dazu musst hier die E-Mail-Adresse eingeben, mit der Du in der Foodsoft angemeldet bist. Du erhälst dann eine E-Mail mit weiteren Instruktionen.</p>
       submit: Neues Passwort anfordern
       title: Passwort vergessen?
     new_password:
-      body: ! '<p>Bitte neues Passwort für <b>%{user}</b> eingeben.</p>'
+      body: <p>Bitte neues Passwort für <b>%{user}</b> eingeben.</p>
       submit: Neues passwort speichern
       title: Neues Passwort
   mailer:
@@ -1001,21 +1004,33 @@ de:
       subject: Feedback von %{email}
     foodsoft_message:
       footer: ! 'Antworten: %{reply_url}
+
         Nachricht online einsehen: %{msg_url}
-        Nachrichten-Einstellungen: %{profile_url}'
+
+        Nachrichten-Einstellungen: %{profile_url}
+
+'
     invite:
       subject: Einlading in die Foodcoop
       text: ! 'Hallo!
 
+
         %{user} <%{mail}> hat dich in die Gruppe "%{group}" eingeladen.
+
         Um die Einladung anzunehmen und der Foodcoop beizutreten, gehe zu: %{link}
+
         Dieser Link kann nur einmal aufgerufen werden und ist nur bis %{expires} gültig.
 
+
+
         Grüße sendet die Foodsoft!
+
 '
     negative_balance:
       subject: Gruppenkonto im Minus
       text: ! 'Liebe %{group},
+
+
 
         euer Kontostand is durch eine Buching am %{when} ins Minus gerutscht: %{balance}
 
@@ -1023,57 +1038,84 @@ de:
 
         Bitte zahlt so bald wie möglich wieder Geld ein, un das Gruppenkonto auszugleichen.
 
+
+
         Viele Grüße von %{foodcoop}
+
 '
     not_enough_users_assigned:
       subject: ! '"%{task}" braucht noch Leute!'
       text: ! 'Liebe(r) %{user},
 
+
         De Job ''%{task}'' Deiner Arbeitsgruppe ist am %{when} fällig
+
         und es fehlen noch Mitstriterinnen!
+
 
         Sofern Du Dich noch nicht für diese Aufgabe eingetragen hast ist des jetzt die Chance:
 
+
         %{workgroup_tasks_url}
 
+
         Deine Aufgaben: %{user_tasks_url}
+
 '
     order_result:
       subject: ! 'Bestellung beendet: %{name}'
       text0: ! 'Liebe %{ordergroup},
 
+
         die Bestelling für "%{order}" wurde am %{when} von %{user} beendet.
 
+
         Für Euch wurden die folgenden Artikel bestellt:
+
 '
       text1: ! 'Gesamtpreis: %{sum}
 
+
         Bestelling unline einsehen: %{order_url}
 
-        Viele Grüße von %{foodcoop}
-'
+
+
+        Viele Grüße von %{foodcoop} '
     reset_password:
       subject: Neues Password für %{username}
       text: ! 'Hallo %{user},
 
+
         du (oder jemand anderes) hat auf der FoodSoft-Website ein neues Passwort angefordert.
+
         Um ein neues Passwort einzugeben, gehe zu: %{link}
+
         Dieser Link kann nur einmal aufgerufen werden und läuft am %{expires} ab.
+
         Wenn du das Passwort nicht ändern möchtest oder diese Email nicht ausgelöst hast, brauchst du nichts zu tun.
+
         Dein bisheriges Passwort wurde nicht geändert.
 
+
+
         Grüße sendet die Foodsoft! :)
+
 '
     upcoming_tasks:
       nextweek: ! 'Aufgaben für die nächtste Woche:'
       subject: Aufgaben werden fällig!
       text0: ! 'Liebe(r) %{user},
 
+
         Du bist für "%{task}" eingetragen. Die Aufgabe ist morgen (%{when}) fällig!
+
 '
       text1: ! 'Meine Aufgaben: %{user_tasks_url}
 
+
+
         Viele Grüße von %{foodcoop}
+
 '
   messages:
     create:
@@ -1683,7 +1725,7 @@ de:
       title: Neue Lieferantin
     shared_supplier_note: Lieferantin ist mit externer Datenbank verknüpft.
     shared_suppliers:
-      body: ! '<p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>'
+      body: <p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>
       subscribe: abonnieren
       supplier: Lieferantin
       title: Externe Listen
