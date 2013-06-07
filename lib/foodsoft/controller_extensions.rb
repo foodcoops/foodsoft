@@ -12,6 +12,10 @@ module Foodsoft
         params[:locale]
       end
 
+      def user_settings_language
+        current_user.settings.profile['language'] if current_user
+      end
+      
       def session_language
         session[:locale]
       end
@@ -27,7 +31,7 @@ module Foodsoft
       protected
 
       def select_language_according_to_priority
-        language = explicitly_requested_language || session_language || browser_language
+        language = explicitly_requested_language || session_language || user_settings_language || browser_language
         language.to_sym unless language.blank?
       end
 
