@@ -1,6 +1,6 @@
 = simple_form_for @invite, remote: true do |form|
   .modal-header
-    = button_tag "x", class: 'close', data: {dismiss: 'modal'}
+    = link_to 'x', '#', class: 'close', data: {dismiss: 'modal'}
     %h3 Person einladen
   .modal-body
     %p
@@ -13,5 +13,5 @@
     = form.hidden_field :group_id
     = form.input :email
   .modal-footer
-    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
+    = link_to 'Schließen', '#', class: 'btn', data: {dismiss: 'modal'}
     = form.submit class: 'btn btn-primary'
