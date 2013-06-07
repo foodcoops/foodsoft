@@ -117,6 +117,7 @@ Foodsoft::Application.routes.draw do
           get :shared
           get :import
           post :sync
+          post :update_synchronized
         end
       end
     end

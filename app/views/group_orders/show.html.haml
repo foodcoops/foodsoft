@@ -47,7 +47,6 @@
                 Erhalten
             %th Gesamtpreis
         %tbody
-          - total = 0 #set counter for order-sum
           - for category_name, order_articles in @order.articles_grouped_by_category
             %tr.article-category
               %td
@@ -74,7 +73,7 @@
                   %td{colspan: "6"}=h oa.article.note
           %tr{class: cycle('even', 'odd', name: 'articles')}
             %th{colspan: "5"} Summe
-            %th= number_to_currency(total)
+            %th= number_to_currency(@group_order.price)
       %br/
       = link_to_top
     - else

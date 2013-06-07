@@ -4,7 +4,8 @@ class ArticlePrice < ActiveRecord::Base
   has_many :order_articles
 
   validates_presence_of :price, :tax, :deposit, :unit_quantity
-  validates_numericality_of :price, :unit_quantity, :greater_than => 0
+  validates_numericality_of :price, :greater_than_or_equal_to => 0
+  validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
 
   localize_input_of :price, :tax, :deposit
