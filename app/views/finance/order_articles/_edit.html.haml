@@ -1,6 +1,6 @@
 = simple_form_for [:finance, @order, @order_article], remote: true do |form|
   .modal-header
-    = button_tag "x", class: 'close', data: {dismiss: 'modal'}
+    = link_to 'x', '#', class: 'close', data: {dismiss: 'modal'}
     %h3 Artikel aktualisieren
   .modal-body
     = form.input :units_to_order
@@ -20,5 +20,5 @@
         = f.input :deposit
       = form.input :update_current_price, as: :boolean
   .modal-footer
-    = button_tag "Schließen", class: 'btn', data: {dismiss: 'modal'}
+    = link_to 'Schließen', '#', class: 'btn', data: {dismiss: 'modal'}
     = form.submit class: 'btn btn-primary'
