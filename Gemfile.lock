@@ -80,7 +80,7 @@ GEM
     commonjs (0.2.6)
     daemons (1.1.9)
     erubis (2.7.0)
-    eventmachine (1.0.0)
+    eventmachine (1.0.3)
     exception_notification (2.6.1)
       actionmailer (>= 3.0.4)
     execjs (1.4.0)
@@ -288,6 +288,7 @@ DEPENDENCIES
   sqlite3
   test-unit
   therubyracer
+  thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   whenever

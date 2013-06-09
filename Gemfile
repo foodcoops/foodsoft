@@ -65,4 +65,6 @@ group :development do
   gem 'capistrano', '2.13.5'
   gem 'capistrano-ext'
   #gem 'common_deploy', require: false, path: '../../common_deploy' # pending foodcoops/foodsoft#34,  git: 'git://github.com/fsmanuel/common_deploy.git'
+  # Avoid having content-length warnings
+  gem 'thin'
 end
