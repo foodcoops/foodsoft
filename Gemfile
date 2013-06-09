@@ -58,4 +58,7 @@ group :development do
 
   # Hide assets requests in log
   gem 'quiet_assets'
+
+  # Avoid having content-length warnings
+  gem 'thin'
 end
