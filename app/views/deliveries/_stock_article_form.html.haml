@@ -5,7 +5,10 @@
   = f.input :unit
   = f.input :note
   = f.input :price
-  = f.input :tax
+  = f.input :tax, :wrapper => :append do
+    = f.input_field :tax
+    %span.add-on %
+    -# untested, because this view is currently not included (?)
   = f.input :deposit
   = f.association :article_category
   = f.submit class: 'btn'
