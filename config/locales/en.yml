@@ -253,7 +253,7 @@ en:
         notice_noaction: No action selected!
         notice_unavail: All selected articles have been made unavailable
       update_sync:
-        notice: 
+        notice: All articles and prices have been updated
     destroy_active_article:
       drop: delete
       note: ! '%{article} is used in current orders and can not be deleted Please first ... the article from orders %{drop_link}.'
@@ -297,19 +297,19 @@ en:
       error_in_use: ! '%{article} can not be deleted because the article is part of a current order!'
       error_nosel: You have selected no articles
     parse_upload:
-      body: 
+      body: <p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>
       outlist:
-        body: 
-        body_skip: 
-        title: 
-      price_short: 
-      submit: 
-      title: 
-      unit_quantity_short: 
+        body: ! 'The following articles were outlisted and <b>deleted</b>:'
+        body_skip: No articles were deleted.
+        title: Outlist ...
+      price_short: Price
+      submit: Delete/update all
+      title: Synchronize articles with external database
+      unit_quantity_short: unit quantity
       update:
-        body: 
-        title: 
-        update_msg: 
+        body: <p><i>All articles are shown twice. Old articles are shown in grey and the text fields show their current values.</i></p> <p><i>Changes from old articles are marked in yellow.</i></p>
+        title: Update ...
+        update_msg: ! 'Articles must be updated:'
     upload:
       body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
       fields:
@@ -763,7 +763,7 @@ en:
       price: Price
       sum: Sum
       sum_amount: Current amount
-      supplier: 
+      supplier: Supplier
       title: Orders
       tolerance: Tolerance
       total_sum_amount: Total amount
@@ -1066,7 +1066,7 @@ en:
 
 '
     order_result:
-      subject: 
+      subject: ! 'Order was ended: %{name}'
       text0: ! 'Dear %{ordergroup},
 
 
@@ -1306,10 +1306,10 @@ en:
       supplier: Supplier
       title: Manage orders
     model:
-      error_closed: 
-      error_nosel: 
-      error_starts_before_ends: 
-      notice_close: 
+      error_closed: Order was already accounted for
+      error_nosel: At least one article must be selected
+      error_starts_before_ends: must be before the starting date (or remain empty)
+      notice_close: ! 'Order: %{name}, until %{ends}'
     new:
       title: Create new order
     orders:
