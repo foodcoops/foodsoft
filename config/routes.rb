@@ -103,6 +103,7 @@ Foodsoft::Application.routes.draw do
 
       resources :deliveries do
         post :drop_stock_change, :on => :member
+        get :new_stock_article, :on => :collection
         post :add_stock_article, :on => :collection
       end
 

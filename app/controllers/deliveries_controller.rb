@@ -75,21 +75,32 @@ class DeliveriesController < ApplicationController
     end
   end
 
-  def add_stock_article
-    article = @supplier.stock_articles.build(params[:stock_article])
-    render :update do |page|
-      if article.save
-        logger.debug "new StockArticle: #{article.id}"
-        page.insert_html :bottom, 'stock_changes', :partial => 'stock_change',
-          :locals => {:stock_change => article.stock_changes.build, :supplier => @supplier}
+  def new_stock_article
+    @stock_article = @supplier.stock_articles.build
+    render :layout => false
+  end
 
-        page.replace_html 'new_stock_article', :partial => 'stock_article_form',
-          :locals => {:stock_article => @supplier.stock_articles.build}
-      else
-        page.replace_html 'new_stock_article', :partial => 'stock_article_form',
-          :locals => {:stock_article => article}
-      end
+  def add_stock_article
+    @stock_article = StockArticle.new(params[:stock_article])
+    if @stock_article.valid? and @stock_article.save
+      render :layout => false
+    else
+      render :action => 'new_stock_article', :layout => false
     end
+    
+    #render :update do |page|
+    #  if article.save
+    #    logger.debug "new StockArticle: #{article.id}"
+    #    page.insert_html :bottom, 'stock_changes', :partial => 'stock_change',
+    #      :locals => {:stock_change => article.stock_changes.build, :supplier => @supplier}
+#
+    #    page.replace_html 'new_stock_article', :partial => 'stock_article_form',
+    #      :locals => {:stock_article => @supplier.stock_articles.build}
+    #  else
+    #    page.replace_html 'new_stock_article', :partial => 'stock_article_form',
+    #      :locals => {:stock_article => article}
+    #  end
+    #end
   end
 
   def add_stock_change

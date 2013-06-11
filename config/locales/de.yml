@@ -416,6 +416,8 @@ de:
       second: Sekunden
       year: Jahr
   deliveries:
+    add_stock_article:
+      notice: ! Neuer Lagerartikel »%{name}« gespeichert. Zum Auswählen bitte <strong>erneut</strong> einen Lagerartikel der Lieferung hinzufügen.
     create:
       notice: Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!
     destroy:
@@ -424,6 +426,7 @@ de:
       title: Lieferung bearbeiten
     form:
       add_article: Lagerartikel der Lieferung hinzufügen
+      new_stock_article: Neuen Lagerartikel anlegen
       new_article:
         search: Suche nach Artikeln aus dem <i>%{supplier}</i> Katalog
         title: Neuen Lagerartikel anlegen
@@ -451,6 +454,8 @@ de:
       unit: Einheit
     stock_change:
       remove_article: Artikel aus Lieferung entfernen
+    stock_article_form:
+      title: Lagerartikel
     suppliers_overview: Lieferantenübersicht
     update:
       notice: Lieferung wurde aktualisiert.
@@ -1825,6 +1830,7 @@ de:
     edit: Bearbeiten
     marks:
       close: ! '&times;'
+      success: ! '<i class="icon icon-ok"></i>'
     or_cancel: oder abbrechen
     save: Speichern
     show: Anzeigen
