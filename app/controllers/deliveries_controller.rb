@@ -87,20 +87,6 @@ class DeliveriesController < ApplicationController
     else
       render :action => 'new_stock_article', :layout => false
     end
-    
-    #render :update do |page|
-    #  if article.save
-    #    logger.debug "new StockArticle: #{article.id}"
-    #    page.insert_html :bottom, 'stock_changes', :partial => 'stock_change',
-    #      :locals => {:stock_change => article.stock_changes.build, :supplier => @supplier}
-#
-    #    page.replace_html 'new_stock_article', :partial => 'stock_article_form',
-    #      :locals => {:stock_article => @supplier.stock_articles.build}
-    #  else
-    #    page.replace_html 'new_stock_article', :partial => 'stock_article_form',
-    #      :locals => {:stock_article => article}
-    #  end
-    #end
   end
 
   def add_stock_change

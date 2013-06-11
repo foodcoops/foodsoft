@@ -12,10 +12,16 @@
       })
     });
 
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $('#add-stock-change').click();
+    });
+
 .well.well-small
   .btn-toolbar
     .btn-group
-      = link_to t('.new_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), remote: true, class: 'btn btn-primary'
+      = link_to t('.new_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), remote: true, class: 'btn'
 
 = simple_form_for [@supplier, @delivery], validate: true do |f|
   = f.hidden_field :supplier_id
@@ -28,7 +34,7 @@
         = stock_change_form.hidden_field :_destroy
         = link_to t('.remove_article'), "#", class: 'destroy_stock_change'
   %p
-    = link_to t('.add_article'), {action: 'add_stock_change', supplier_id: @supplier.id}, remote: true, class: 'btn btn-small'
+    = link_to t('.add_article'), {action: 'add_stock_change', supplier_id: @supplier.id}, :id => 'add-stock-change', remote: true, class: 'btn btn-small btn-primary'
   %hr/
   = f.input :delivered_on, as: :date_picker
   = f.input :note, input_html: {size: '35x4'}
