@@ -601,9 +601,7 @@ nl:
         alert: 
         notice: 
       index:
-        balance: 
         last_updated_at: 
-        new_transaction: 
         search_placeholder: 
         title: 
       new:

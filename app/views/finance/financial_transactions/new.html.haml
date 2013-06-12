@@ -1,5 +1,9 @@
 - title t('.title')
 
+- content_for :sidebar do
+  .well.well-small
+    = render 'account_info', ordergroup: @ordergroup
+
 %p!= t('.paragraph', name: @ordergroup.name)
 
 = simple_form_for @financial_transaction, :url => finance_ordergroup_transactions_path(@ordergroup),

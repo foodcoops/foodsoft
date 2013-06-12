@@ -1,0 +1,23 @@
+%h3= @ordergroup.name
+%p
+  %table
+    %tr
+      %td= t('.balance') + ':'
+      %td.numeric= number_to_currency(ordergroup.account_balance)
+    %tr
+      %td &nbsp;
+      %td
+    %tr
+      %td= t('.open_orders') + ':'
+      %td.numeric= number_to_currency(ordergroup.value_of_open_orders)
+    %tr
+      %td= t('.finished_orders') + ':'
+      %td.numeric= number_to_currency(ordergroup.value_of_finished_orders)
+    %tr
+      %td &nbsp;
+      %td
+    %tr
+      %td= t('.available_funds') + ':'
+      %td.numeric= number_to_currency(ordergroup.get_available_funds)
+
+%small= t('.last_updated_at', when: distance_of_time_in_words(Time.now, ordergroup.account_updated))

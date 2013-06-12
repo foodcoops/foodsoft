@@ -617,14 +617,15 @@ de:
     create:
       notice: Rechnung wurde erstellt.
     financial_transactions:
+      account_info:
+        balance: Kontostand
+        last_updated_at: (Der Konstostand ist zuletzt aktualisiert vor %{when})
       create:
         notice: Die Transaktion wurde gespeichert.
       create_collection:
         alert: ! 'Ein Fehler ist aufgetreten: %{error}'
         notice: Alle Transaktionen wurden gespeichert.
       index:
-        balance: ! 'Kontostand: %{balance}'
-        last_updated_at: (zuletzt aktualisiert vor %{when})
         new_transaction: Neue Transaktion anlegen
         search_placeholder: Suchen ...
         title: Kontoauszug für %{name}

@@ -619,14 +619,18 @@ en:
     create:
       notice: Invoice was created
     financial_transactions:
+      account_info:
+        available_funds: Available funds
+        balance: Balance of account
+        finished_orders: Value of finished orders
+        last_updated_at: (the account balance was last updated at %{when})
+        open_orders: Value of open orders
       create:
         notice: The Transaction was saved.
       create_collection:
         alert: ! 'An Error occured: %{error}'
         notice: All Transactions were saved.
       index:
-        balance: ! 'Balance of account: %{balance}'
-        last_updated_at: (last updated %{when} ago)
         new_transaction: Create new transaction
         search_placeholder: Search ..
         title: Account statement for %{name}
