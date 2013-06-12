@@ -600,11 +600,11 @@ en:
         close: close directly
         confirm: Do you really want to fully close the order?
         end: End
+        ended: ended
         last_edited_by: Last edited by
         name: Supplier
         no_closed_orders: At the moment there are no ended orders.
         state: State
-        ended: ended
       summary:
         changed: Data was changed!
         duration: From %{starts} till %{ends}
