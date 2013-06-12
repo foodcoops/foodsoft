@@ -1,5 +1,7 @@
 Foodsoft::Application.routes.draw do
 
+  get "periodic_task_groups/destroy"
+
   get "order_comments/new"
 
   get "comments/new"
@@ -69,6 +71,8 @@ Foodsoft::Application.routes.draw do
         post :set_done
       end
     end
+
+    resources :periodic_task_groups, only: [:destroy]
 
     resources :messages, :only => [:index, :show, :new, :create]
 

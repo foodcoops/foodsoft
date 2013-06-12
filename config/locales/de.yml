@@ -1422,6 +1422,9 @@ de:
       title: ! '%{title} - Version %{version}'
       title_version: Version
       view_current: Aktuelle Version sehen
+  periodic_task_groups:
+    destroy:
+      notice: Aufgaben wurden gelöscht
   sessions:
     logged_in: Logged in!
     logged_out: Logged out!
@@ -1517,7 +1520,6 @@ de:
       task:
         duration: Wie lange dauert die Aufgabe, 1-3 Stunden
         required_users: Wieviel Benutzerinnen werden insgesamt benötigt?
-        periodic: Wöchentlich wiederholen
       tax: In Prozent, Standard sind 7,0
     labels:
       article:
@@ -1609,6 +1611,7 @@ de:
         due_date: Wann erledigen?
         duration: Dauer
         name: Name
+        periodic: Wöchentlich wiederholen
         required_users: Anzahl
         user_list: Verantwortliche
         workgroup: Arbeitsgruppe
@@ -1823,6 +1826,7 @@ de:
   ui:
     close: Schließen
     delete: Löschen
+    delete_all: Alle löschen
     edit: Bearbeiten
     marks:
       close: ! '&times;'
