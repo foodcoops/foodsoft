@@ -158,9 +158,9 @@ en:
       edit:
         title: Edit user
       index:
-        first_paragraph: Here you can edit users %{url}, bearbeiten and also delete them.
+        first_paragraph: Here you can %{url} users, edit and also delete them.
         new_user: Create new user
-        new_users: Create new user
+        new_users: create new
         title: Admin/users
       new:
         title: Create new user
@@ -223,7 +223,7 @@ en:
   articles:
     article:
       confirm_delete: Are you sure?
-      last_update: ! 'last updated: %{last_update} | Gross: %{gross_price}'
+      last_update: ! 'last updated: %{last_update} | gross: %{gross_price}'
     articles:
       confirm_delete: Do you really want to delete all selected articles?
       option_available: Articles are available
@@ -578,7 +578,7 @@ en:
       new:
         alert: Attention, order was already accounted
         articles_overview: Overview of articles
-        comment_on_transaction: Here you can add a comment with your accounting
+        comment_on_transaction: Here you can add a comment to your accounting.
         comments: Comments
         confirm_order: Close order
         create_invoice: Create invoice
@@ -596,12 +596,13 @@ en:
         clear: Accounting
         cleared: Accounted (%{amount})
         close: Close directly
-        confirm: Really want to put the order on closed?
+        confirm: Do you really want to fully close the order?
         end: End
         last_edited_by: Last edited by
         name: Name
-        no_closed_orders: At the moment there are not closed orders
+        no_closed_orders: At the moment there are no ended orders.
         state: State
+        ended: ended
       summary:
         changed: Data was changed!
         duration: From %{starts} till %{ends}
@@ -611,8 +612,8 @@ en:
         groups_amount: ! 'Group amounts:'
         net_amount: ! 'Net amount:'
         reload: Reload summary
-        with_extra_charge: ! 'With extra charge:'
-        without_extra_charge: ! 'Without extra charge:'
+        with_extra_charge: ! 'with extra charge:'
+        without_extra_charge: ! 'without extra charge:'
     create:
       notice: Invoice was created
     financial_transactions:
@@ -623,12 +624,12 @@ en:
         notice: All Transactions were saved.
       index:
         balance: ! 'Balance of account: %{balance}'
-        last_updated_at: (last updated at %{when})
+        last_updated_at: (last updated %{when} ago)
         new_transaction: Create new transaction
         search_placeholder: Search ..
         title: Account statement for %{name}
       new:
-        paragraph: Here you can credit/deduct the order group <b>%{name}</b> money.
+        paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
         title: New transaction
       new_collection:
         amount: Amount

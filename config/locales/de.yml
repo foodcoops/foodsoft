@@ -598,10 +598,11 @@ de:
         close: direkt schließen
         confirm: Wirklich die Bestellung schließen setzen?
         end: Ende
-        last_edited_by: zuletzt bearbeitet von
+        last_edited_by: Zuletzt bearbeitet von
         name: Name
         no_closed_orders: derzeit gibt es keine beendeten Bestellungen
         state: Status
+        ended: beendet
       summary:
         changed: Daten wurden verändert!
         duration: von %{starts} bis %{ends}
