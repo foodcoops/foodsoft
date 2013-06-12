@@ -22,7 +22,9 @@
         %td= shared_supplier.note
         %td= shared_supplier.delivery_days
         %td
-          - if shared_supplier.supplier
+          - if shared_supplier.suppliers
             %i.icon-ok
+            = '(' + shared_supplier.suppliers.map{|s| s.name}.join(', ') + ')'
+            = link_to "abonnieren", new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn'
           - else
             = link_to "abonnieren", new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn'
