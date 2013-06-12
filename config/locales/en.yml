@@ -7,7 +7,7 @@ en:
       general_msg: ! 'A problem has occured: %{msg}'
       messages:
         accepted: has to be accepted
-        blank: has to be filled
+        blank: has to be entered
         confirmation: does not match the confirmation
         empty: has to be entered
         equal_to: has to be exactly %{count}
@@ -135,11 +135,11 @@ en:
         first_paragraph: You can invite new members %{url}.
         here: here
       index:
-        first_paragraph: Here you can add a %{url}, administer a group or delete it.
+        first_paragraph: Here you can add %{url}, and edit or delete groups.
         new_ordergroup: Add new ordergroup
         new_ordergroups: new ordergroups
-        second_paragraph: ! 'Consider the <em>difference between group and ordergroup</em>: An ordergroup has an account and can order food. In a <em>%{url}</em> (for example ''sorting group'') the members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple other groups.'
-        title: Ordergroup
+        second_paragraph: ! 'Consider the difference between <em>group</em> and <em>ordergroup</em>: An ordergroup has an account and can order food. In a <em>%{url}</em> (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
+        title: Ordergroups
         workgroup: workgroup
       new:
         title: Create ordergroup
@@ -150,7 +150,7 @@ en:
         name: Name
       show:
         confirm: Are you sure?
-        edit: Edit group/member
+        edit: Edit group/members
         send_message: Send message
         title: Ordergroup %{name}
     search_placeholder: name ..
@@ -158,10 +158,10 @@ en:
       edit:
         title: Edit user
       index:
-        first_paragraph: Here you can %{url} users, edit and also delete them.
+        first_paragraph: Here you can %{url}, edit and delete users.
         new_user: Create new user
         new_users: create new
-        title: Admin/users
+        title: User admin
       new:
         title: Create new user
       show:
@@ -194,7 +194,7 @@ en:
         new_workgroup: Create new workgroup
         new_workgroups: new workgroups
         ordergroup: ordergroup
-        second_paragraph: ! 'Be aware of the <em>difference between a group and ordergroup</em>: A %{url} has an account and can order food. In a workgroup (for example ''sorting group'') the members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple other groups.'
+        second_paragraph: ! 'Consider the difference between a <em>workgroup</em> and an <em>ordergroup</em>: an <em>%{url}</em> has an account and can order food. In a workgroup (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
         title: Workgroups
       new:
         title: Create workgroup
@@ -226,40 +226,40 @@ en:
       last_update: ! 'last updated: %{last_update} | gross: %{gross_price}'
     articles:
       confirm_delete: Do you really want to delete all selected articles?
-      option_available: Articles are available
+      option_available: Make articles available
       option_delete: Delete article
-      option_not_available: Articles are not available anymore
+      option_not_available: Make articles unavailable
       option_select: Choose special offer ...
       price_netto: Price
       unit_quantity_desc: Unit quantity
       unit_quantity_short: Quantity
     controller:
       create_from_upload:
-        notice: ! '%{count} new articles were saved'
-      error_invalid: Articles are incorrect.
-      error_nosel: You have selected no articles
+        notice: ! '%{count} new articles were saved.'
+      error_invalid: There are errors in articles
+      error_nosel: No articles selected
       error_parse: ! '%{msg} ... in line %{line}'
-      error_update: ! 'There was an error when updating the article ''%{article}'' on: %{msg}'
+      error_update: ! 'An error occured when updating article ''%{article}'': %{msg}'
       parse_upload:
-        notice: ! '%{count} articles analysed succesfully.'
+        notice: ! '%{count} articles were succesfully analysed.'
       sync:
-        notice: The catalog is up to date
+        notice: Catalog is up to date
         shared_alert: ! '%{supplier} is not linked to an external database'
       update_all:
-        notice: All articles and prices are updated
+        notice: All articles and prices were updated.
       update_sel:
-        notice_avail: ! 'All selected articles have been made available '
-        notice_destroy: All selected articles have been deleted
-        notice_noaction: No action selected!
-        notice_unavail: All selected articles have been made unavailable
+        notice_avail: All selected articles were set to be available.
+        notice_destroy: All selected articles were deleted.
+        notice_noaction: No action specified!
+        notice_unavail: All selected articles were set to be unavailable.
       update_sync:
-        notice: All articles and prices have been updated
+        notice: All articles and prices were updated.
     destroy_active_article:
       drop: delete
       note: ! '%{article} is used in current orders and can not be deleted Please first ... the article from orders %{drop_link}.'
     edit_all:
       note: ! 'Mandatory fields are: name, unit, (net) price and order number.'
-      submit: Updating all articles
+      submit: Update all articles
       title: Edit all articles from %{supplier}
       warning: ! 'Warning: all articles will be updated!'
     edit_all_table:
@@ -291,7 +291,7 @@ en:
       new: New article
       new_order: Create new order
       search_placeholder: Name ...
-      title: Article from %{supplier} (%{count})
+      title: Articles from %{supplier} (%{count})
       upload: Upload articles
     model:
       error_in_use: ! '%{article} can not be deleted because the article is part of a current order!'
@@ -300,14 +300,16 @@ en:
       body: <p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>
       outlist:
         body: ! 'The following articles were outlisted and <b>deleted</b>:'
-        body_skip: No articles were deleted.
+        body_skip: No articles to delete.
         title: Outlist ...
       price_short: Price
       submit: Delete/update all
       title: Synchronize articles with external database
       unit_quantity_short: unit quantity
       update:
-        body: <p><i>All articles are shown twice. Old articles are shown in grey and the text fields show their current values.</i></p> <p><i>Changes from old articles are marked in yellow.</i></p>
+        body: ! '<p><i>Every article is shown twice. The old values are gray and contain the current values.</i></p>
+
+          <p><i>Differences with the old articles are marked yellow.</i></p>'
         title: Update ...
         update_msg: ! 'Articles must be updated:'
     upload:
@@ -550,7 +552,7 @@ en:
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
-        amount_per_unit: Unit quantity
+        amount_per_unit: Unit quantity * Unit
         article: Article
         gross: Gross
         net: Net
@@ -574,7 +576,7 @@ en:
         new: Create new invoice
         new_body: ! 'Create an invoice for this order:'
         plus_refund_credited: ! '+ refund credited:'
-        refund_adjusted_amount: ! 'refund adjusted amount:'
+        refund_adjusted_amount: ! 'amount adjusted for refund:'
       new:
         alert: Attention, order was already accounted
         articles_overview: Overview of articles
@@ -593,13 +595,13 @@ en:
       order_article:
         confirm: Are you sure?
       orders:
-        clear: Accounting
-        cleared: Accounted (%{amount})
-        close: Close directly
+        clear: accounting
+        cleared: accounted (%{amount})
+        close: close directly
         confirm: Do you really want to fully close the order?
         end: End
         last_edited_by: Last edited by
-        name: Name
+        name: Supplier
         no_closed_orders: At the moment there are no ended orders.
         state: State
         ended: ended
@@ -758,7 +760,7 @@ en:
       last_update: Last ordered
       manufacturer: Manufacturer
       min_quantity: Minimum quantity
-      name: Mame
+      name: Name
       new_funds: New account balance
       note: Note
       price: Price
@@ -776,7 +778,7 @@ en:
       units_full: Filled units
     index:
       closed_orders:
-        more: more..
+        more: more...
         title: Closed orders
       finished_orders:
         title: Unaccounted orders
@@ -819,7 +821,7 @@ en:
       comments:
         title: Comments
       ending: End
-      not_ordered: You didn’t order
+      not_ordered: You didn’t order.
       note: Note
       order_sum: Order sum
       sum: Sum
@@ -1283,7 +1285,7 @@ en:
       number: Number
       to_address: Shipping address
     finish:
-      notice: The order has finished.
+      notice: The order has been ended.
     form:
       name: Name
       note: Note
@@ -1309,7 +1311,7 @@ en:
     model:
       error_closed: Order was already accounted for
       error_nosel: At least one article must be selected
-      error_starts_before_ends: must be before the starting date (or remain empty)
+      error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: ! 'Order: %{name}, until %{ends}'
     new:
       title: Create new order
