@@ -319,16 +319,9 @@ ActiveRecord::Schema.define(:version => 20121230142516) do
     t.date     "due_date"
     t.boolean  "done",                   :default => false
     t.integer  "workgroup_id"
-<<<<<<< HEAD
-    t.datetime "created_on",                        :null => false
-    t.datetime "updated_on",                        :null => false
-    t.integer  "required_users", :default => 1
-=======
-    t.boolean  "assigned",               :default => false
     t.datetime "created_on",                                :null => false
     t.datetime "updated_on",                                :null => false
     t.integer  "required_users",         :default => 1
->>>>>>> 1cdb9e85017a17e4dbee276cd87feaa2aab75932
     t.boolean  "weekly"
     t.integer  "duration",               :default => 1
     t.integer  "periodic_task_group_id"
