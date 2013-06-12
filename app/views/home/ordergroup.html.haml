@@ -1,26 +1,26 @@
-- title "Meine Bestellgruppe", false
+- title t('.title'), false
 
 .row-fluid
   .span4
     %h2= @ordergroup.name
     .well
       %p
-        %b Beschreibung:
+        %b= t '.description'
         = @ordergroup.description
       %p
-        %b Verfügbares Guthaben:
+        %b= t '.funds'
         = number_to_currency(@ordergroup.get_available_funds())
-      %h2 Personen
+      %h2= t '.people'
       %ul
         - for membership in @ordergroup.memberships
           %li= membership.user.nick
-      = link_to 'Neue Person einladen', new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
+      = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
   .span8
-    %h2 Kontoauszug
+    %h2= t('.account_summary')
     .well.well-small
       = form_tag my_ordergroup_path, :method => :get, :remote => true,
         'data-submit-onchange' => true, class: 'form-search' do
         = text_field_tag :query, params[:query], class: 'input-medium search-query',
-          placeholder: 'Suchen ...'
+          placeholder: t('.search')
     #transactions= render "finance/financial_transactions/transactions"
     

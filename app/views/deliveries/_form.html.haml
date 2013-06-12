@@ -21,28 +21,24 @@
         Menge
         = stock_change_form.text_field :quantity, size: 5, autocomplete: 'off'
         = stock_change_form.hidden_field :_destroy
-        = link_to "Artikel aus Lieferung entfernen", "#", class: 'destroy_stock_change'
+        = link_to t('.remove_article'), "#", class: 'destroy_stock_change'
   %p
-    = link_to "Lagerartikel der Lieferung hinzufügen", {action: 'add_stock_change', supplier_id: @supplier.id}, remote: true
+    = link_to t('.add_article'), {action: 'add_stock_change', supplier_id: @supplier.id}, remote: true
   %p
-    %small
-      Ist ein Artikel noch nicht in der Lagerverwaltung, muss er erst
-      #{link_to("neu angelegt", new_stock_article_path)} werden.
+    %small= t('.note_new_article', new_link: link_to(t('.note_new_article_link'), new_stock_article_path)).html_safe
   %hr/
   = f.input :delivered_on, as: :date_picker
   = f.input :note, input_html: {size: '35x4'}
   .form-actions
     = f.submit class: 'btn btn-primary'
-    = link_to "oder abbrechen", supplier_deliveries_path(@supplier)
+    = link_to t('ui.or_cancel'), supplier_deliveries_path(@supplier)
 
 /
   TODO: Fix this!!
   .span6
-    %h2 Neuen Lagerartikel anlegen
+    %h2= t '.new_article.title'
     %p
-      Suche nach Artikeln aus dem
-      %i= @supplier.name
-      Katalog:
+      = t('.new_article.search', supplier: @supplier.name).html_safe + ': '
       = text_field_tag 'article_name'
     %hr/
     #stock_article_form

@@ -1,7 +1,7 @@
 class StockitController < ApplicationController
 
   def index
-    @stock_articles = StockArticle.includes(:supplier, :article_category).
+    @stock_articles = StockArticle.undeleted.includes(:supplier, :article_category).
         order('suppliers.name, article_categories.name, articles.name')
   end
 
@@ -12,7 +12,7 @@ class StockitController < ApplicationController
   def create
     @stock_article = StockArticle.new(params[:stock_article])
     if @stock_article.save
-      redirect_to stock_articles_path, :notice => "Lagerartikel wurde gespeichert."
+      redirect_to stock_articles_path, :notice => I18n.t('stockit.stock_create.notice')
     else
       render :action => 'new'
     end
@@ -25,7 +25,7 @@ class StockitController < ApplicationController
   def update
     @stock_article = StockArticle.find(params[:id])
     if @stock_article.update_attributes(params[:stock_article])
-      redirect_to stock_articles_path, :notice => "Lagerartikel wurde gespeichert."
+      redirect_to stock_articles_path, :notice => I18n.t('stockit.stock_update.notice')
     else
       render :action => 'edit'
     end
@@ -33,11 +33,11 @@ class StockitController < ApplicationController
 
   def destroy
     @article = StockArticle.find(params[:id])
-    @article.destroy
+    @article.mark_as_deleted
     render :layout => false
   rescue => error
     render :partial => "destroy_fail", :layout => false,
-      :locals => { :fail_msg => "Ein Fehler ist aufgetreten: " + error.message }
+      :locals => { :fail_msg => I18n.t('errors.general_msg', :msg => error.message) }
   end
 
   #TODO: Fix this!!

@@ -3,37 +3,37 @@
 .row-fluid
   .span3
     .well
-      %h4 Person
-      %p Mitglied seit #{distance_of_time_in_words(Time.now, @user.created_on)}
+      %h4= t '.person'
+      %p= t '.member_since', time: distance_of_time_in_words(Time.now, @user.created_on)
       %dl
-        %dt Nick
+        %dt= t '.nick'
         %dd= @user.nick
-        %dt Name
+        %dt= t '.name'
         %dd= h @user.name
-        %dt Email
+        %dt= t '.email'
         %dd= @user.email
-        %dt Telefon
+        %dt= t '.phone'
         %dd= @user.phone
-        %dt Zugriff auf
+        %dt= t 'admin.access_to'
         %dd= format_roles(@user)
   .span5
     .well
-      %h4 Einstellungen
+      %h4= t '.preference'
       %table.table
         - for setting in User::setting_keys.keys
           %tr
             %td= User::setting_keys[setting]
-            %td= @user.settings[setting] == '1' ? 'ja' : 'nein'
+            %td= @user.settings[setting] == '1' ? t('simple_form.yes') : t('simple_form.no')
   .span3
     .well
-      %h4 Gruppenabos
+      %h4= t '.groupabos'
       %ul.unstyled
         - for membership in Membership.find_all_by_user_id(@user.id)
           %li= link_to(membership.group.name, [:admin, membership.group])
 
 %hr/
 %p
-  = link_to 'Bearbeiten', edit_admin_user_path(@user), class: 'btn'
-  = link_to 'Löschen', [:admin, @user], :confirm => "Willst du #{@user.first_name} wirklich rausschmeißen?",
+  = link_to t('ui.edit'), edit_admin_user_path(@user), class: 'btn'
+  = link_to t('ui.delete'), [:admin, @user], :confirm => t('.confirm', user: @user.first_name),
     :method => :delete, class: 'btn btn-danger'
-  = link_to "Nachricht senden", new_message_path(:message => {:mail_to => @user.id}), class: 'btn'
+  = link_to t('.send_message'), new_message_path(:message => {:mail_to => @user.id}), class: 'btn'

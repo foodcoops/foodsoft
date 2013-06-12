@@ -1,21 +1,24 @@
-- title "#{@supplier.name} / Artikel hochladen"
-%p
-  Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile
-  wird beim Einlesen ignoriert.
-  %br/
-  Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten
-  Anführungszeichen ("Text...") umklammert werden.
-  %br/
-  Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:
-  %pre
-    = ["Status (x=ausgelistet)", "Bestellnummer", "Name", "Notiz", "Hersteller", "Herkunft",
-      "Einheit", "Preis(netto)", "MwSt", "Pfand", "Gebindegröße",
-      "Staffelmenge", "Staffelpreis", "Kategorie"].join(" | ")
+- title t('.title', supplier: @supplier.name)
+= t('.body').html_safe
+%pre
+  = [t('.fields.status'),
+     t('simple_form.labels.defaults.order_number'),
+     t('simple_form.labels.article.name'),
+     t('simple_form.labels.article.note'),
+     t('simple_form.labels.article.manufacturer'),
+     t('simple_form.labels.article.origin'),
+     t('simple_form.labels.article.unit'),
+     t('simple_form.labels.defaults.price'),
+     t('simple_form.labels.defaults.tax'),
+     t('simple_form.labels.defaults.deposit'),
+     t('simple_form.labels.defaults.unit_quantity'),
+     t('.fields.season_amount'),
+     t('.fields.season_price'),
+     t('simple_form.labels.article.article_category')].join(" | ")
 
 = form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
    :html => { :multipart => true } do |f|
-  %label(for="articles_file")
-    Bitte wähle eine kompatible Datei aus
+  %label(for="articles_file")= t '.file_label'
   = f.file_field "file"
   .form-actions
-    = submit_tag "Datei hochladen", class: 'btn'
+    = submit_tag t('.submit'), class: 'btn'

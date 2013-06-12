@@ -1,6 +1,6 @@
 class Delivery < ActiveRecord::Base
 
-  belongs_to :supplier, :with_deleted => true
+  belongs_to :supplier
   has_one :invoice
   has_many :stock_changes, :dependent => :destroy
 

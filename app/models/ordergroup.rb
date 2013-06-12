@@ -8,14 +8,13 @@ class Ordergroup < Group
 
   APPLE_MONTH_AGO = 6                 # How many month back we will count tasks and orders sum
 
-  acts_as_paranoid                    # Avoid deleting the ordergroup for consistency of order-results
   serialize :stats
 
   has_many :financial_transactions
   has_many :group_orders
   has_many :orders, :through => :group_orders
 
-  validates_numericality_of :account_balance, :message => 'ist keine gültige Zahl'
+  validates_numericality_of :account_balance, :message => I18n.t('ordergroups.model.invalid_balance')
   validate :uniqueness_of_name, :uniqueness_of_members
 
   after_create :update_stats!
@@ -103,7 +102,7 @@ class Ordergroup < Group
   # Make sure, that a user can only be in one ordergroup
   def uniqueness_of_members
     users.each do |user|
-      errors.add :user_tokens, "#{user.nick} ist schon in einer anderen Bestellgruppe" if user.groups.where(:type => 'Ordergroup').size > 1
+      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.nick) if user.groups.where(:type => 'Ordergroup').size > 1
     end
   end
 
@@ -111,6 +110,16 @@ class Ordergroup < Group
   def uniqueness_of_name
     id = new_record? ? '' : self.id
     group = Ordergroup.with_deleted.where('groups.id != ? AND groups.name = ?', id, name).first
+    if group.present?
+      message = group.deleted? ? :taken_with_deleted : :taken
+      errors.add :name, message
+    end
+  end
+
+  # Make sure, the name is uniq, add usefull message if uniq group is already deleted
+  def uniqueness_of_name
+    id = new_record? ? '' : self.id
+    group = Ordergroup.where('groups.id != ? AND groups.name = ?', id, name).first
     if group.present?
       message = group.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message

@@ -4,22 +4,22 @@
   = f.input :starts, input_html: {class: 'input-small'}
   = f.input :ends, input_html: {class: 'input-small'}
 
-  %h2 Artikel
+  %h2= t '.title'
   - if @order.errors.has_key?(:articles)
     .alert.alert-error
       = @order.errors.get(:articles).join(" ")
   %table.table.table-hover#articleList
     %tr
       %th= check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
-      %th Name
-      %th Notiz
+      %th= t '.name'
+      %th= t '.note'
       - if @order.stockit?
-        %th Verfügbar
+        %th= t '.stockit'
       - else
-        %th Herkunft
-        %th Hersteller
-        %th Gebinde
-      %th Preis (netto/FC)
+        %th= t '.origin'
+        %th= t '.supplier'
+        %th= t '.unit_quantity'
+      %th= t '.prices'
     - for category_name, articles in @order.articles_for_ordering
       %tr.article-category
         %td
@@ -44,11 +44,11 @@
     %tr
       %td
         = check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
-      %td{:colspan => "6"} Alle auswählen
+      %td{:colspan => "6"}= t '.select_all'
 
   - if (@template_orders && !@template_orders.empty?)
     = render :partial => 'template_orders_script'
 
   .form-actions
     = f.submit class: 'btn'
-    = link_to "oder abbrechen", orders_path
+    = link_to t('ui.or_cancel'), orders_path

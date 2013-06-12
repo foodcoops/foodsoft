@@ -1,25 +1,25 @@
 %dl
-  %dt Beschreibung:
+  %dt= t('.description') + ':'
   %dd=h group.description
   - if group.is_a?(Ordergroup) and (@current_user.role_admin? or @current_user.role_finance?)
-    %dt Kontakt:
+    %dt= t('.contact') + ':'
     %dd=h group.contact
-    %dt Adresse:
+    %dt= t('.address') + ':'
     %dd= link_to_gmaps group.contact_address
-  %dt Zugriff auf:
+  %dt= t('.access') + ':'
   %dd= format_roles(group)
-  %dt Mitglieder:
+  %dt= t('.members') + ':'
   %dd
     - members = group.users
     = "(#{members.size})"
     = members.collect(&:nick).join(", ")
   - if group.is_a?(Workgroup)
-    %dt wöchentlicher Job:
+    %dt= t('.weekly_job') + ':'
     %dd
       - if group.weekly_task
         =h "#{group.task_name} am #{weekday(group.weekday)}"
       - else
-        kein wöchentlicher Job definiert
+        = t '.no_weekly_job'
   - else
-    %dt Äpfel-Bestellbeschränkung
-    %dd= group.ignore_apple_restriction ? 'deaktiviert' : 'aktiviert'
+    %dt= t '.apple_limit'
+    %dd= group.ignore_apple_restriction ? t('.deactivated') : t('.activated')

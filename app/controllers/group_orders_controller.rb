@@ -20,12 +20,12 @@ class GroupOrdersController < ApplicationController
     @group_order = GroupOrder.new(params[:group_order])
     begin
       @group_order.save_ordering!
-      redirect_to group_order_url(@group_order), :notice => 'Die Bestellung wurde gespeichert.'
+      redirect_to group_order_url(@group_order), :notice => I18n.t('group_orders.create.notice')
     rescue ActiveRecord::StaleObjectError
-      redirect_to group_orders_url, :alert => 'In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.'
+      redirect_to group_orders_url, :alert => I18n.t('group_orders.create.error_stale')
     rescue => exception
       logger.error('Failed to update order: ' + exception.message)
-      redirect_to group_orders_url, :alert => 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
+      redirect_to group_orders_url, :alert => I18n.t('group_orders.create.error_general')
     end
   end
 
@@ -41,12 +41,12 @@ class GroupOrdersController < ApplicationController
     @group_order.attributes = params[:group_order]
     begin
       @group_order.save_ordering!
-      redirect_to group_order_url(@group_order), :notice => 'Die Bestellung wurde gespeichert.'
+      redirect_to group_order_url(@group_order), :notice => I18n.t('group_orders.update.notice')
     rescue ActiveRecord::StaleObjectError
-      redirect_to group_orders_url, :alert => 'In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.'
+      redirect_to group_orders_url, :alert => I18n.t('group_orders.update.error_stale')
     rescue => exception
       logger.error('Failed to update order: ' + exception.message)
-      redirect_to group_orders_url, :alert => 'Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.'
+      redirect_to group_orders_url, :alert => I18n.t('group_orders.update.error_general')
     end
   end
   
@@ -69,7 +69,7 @@ class GroupOrdersController < ApplicationController
   def ensure_ordergroup_member
     @ordergroup = @current_user.ordergroup
     if @ordergroup.nil?
-      redirect_to root_url, :alert => "Du bist kein Mitglieder einer Bestellgruppe."
+      redirect_to root_url, :alert => I18n.t('group_orders.errors.no_member')
     end
   end
 
@@ -77,7 +77,7 @@ class GroupOrdersController < ApplicationController
     @order = Order.find((params[:order_id] || params[:group_order][:order_id]),
                         :include => [:supplier, :order_articles])
     unless @order.open?
-      flash[:notice] = 'Diese Bestellung ist bereits abgeschlossen.'
+      flash[:notice] = I18n.t('group_orders.error_closed')
       redirect_to :action => 'index'
     end
   end
@@ -85,7 +85,7 @@ class GroupOrdersController < ApplicationController
   def ensure_my_group_order
     @group_order = @ordergroup.group_orders.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to group_orders_url, alert: 'Fehlerhafte URL, das ist nicht Deine Bestellung.'
+    redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')
   end
 
   def enough_apples?

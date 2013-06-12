@@ -4,22 +4,23 @@ class OrderMatrix < OrderPdf
   MAX_ARTICLES_PER_PAGE = 16 # How many order_articles shoud written on a page
   
   def filename
-    "Bestellung #{@order.name}-#{@order.ends.to_date} - Sortiermatrix.pdf"
+    I18n.t('documents.order_matrix.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
   end
 
   def title
-    "Sortiermatrix der Bestellung: #{@order.name}, beendet am #{@order.ends.strftime('%d.%m.%Y')}"
+    I18n.t('documents.order_matrix.title', :name => @order.name,
+      :date => @order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
     order_articles = @order.order_articles.ordered
 
-    text "Artikelübersicht", style: :bold
+    text I18n.t('documents.order_matrix.heading'), style: :bold
     move_down 5
-    text "Insgesamt #{order_articles.size} Artikel", size: 8
+    text I18n.t('documents.order_matrix.total', :count => order_articles.size), size: 8
     move_down 10
 
-    order_articles_data = [%w(Artikel Einheit Gebinde FC-Preis Menge)]
+    order_articles_data = [I18n.t('documents.order_matrix.rows')]
 
     order_articles.each do |a|
       order_articles_data << [a.article.name,

@@ -9,21 +9,21 @@
   .btn-toolbar
     .btn-group.pull-right
       = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
-        Ansichtsoptionen
+        = t '.view_options'
         %span.caret
       %ul.dropdown-menu
-        %li= link_to "Nicht verfügbare Artikel zeigen/verstecken", "#", 'data-toggle-this' => 'tr.unavailable', tabindex: -1
+        %li= link_to t('.toggle_unavailable'), "#", 'data-toggle-this' => 'tr.unavailable', tabindex: -1
 
     .btn-group
-      = link_to_if @current_user.role_orders?, "Lagerbestellung online stellen", new_order_path(supplier_id: 0),
+      = link_to_if @current_user.role_orders?, t('.order_online'), new_order_path(supplier_id: 0),
         class: 'btn', class: 'btn btn-primary'
-      = link_to "Neuen Lagerartikel anlegen", new_stock_article_path, class: 'btn'
-      = link_to "Inventur anlegen", new_stock_taking_path, class: 'btn'
-      = link_to "Inventurübersicht", stock_takings_path, class: 'btn'
+      = link_to t('.new_stock_article'), new_stock_article_path, class: 'btn'
+      = link_to t('.new_stock_taking'), new_stock_taking_path, class: 'btn'
+      = link_to t('.show_stock_takings'), stock_takings_path, class: 'btn'
 
     .btn-group
       = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
-        Neue Lieferung ..
+        = t '.new_delivery'
         %span.caret
       %ul.dropdown-menu
         - Supplier.all.each do |supplier|
@@ -32,15 +32,15 @@
 %table.table.table-hover#articles
   %thead
     %tr
-      %th Artikel
-      %th im Lager
-      %th davon bestellt
-      %th verfügbar
-      %th Einheit
-      %th Preis
-      %th MwSt
-      %th Lieferantin
-      %th Kategorie
+      %th= t '.article.article'
+      %th= t '.article.stock'
+      %th= t '.article.ordered'
+      %th= t '.article.available'
+      %th= t '.article.unit'
+      %th= t '.article.price'
+      %th= t '.article.vat'
+      %th= t '.article.supplier'
+      %th= t '.article.category'
       %th
   %tbody
     - for article in @stock_articles
@@ -55,14 +55,13 @@
         %td= link_to article.supplier.name, article.supplier
         %td= article.article_category.name
         %td
-          = link_to "Bearbeiten", edit_stock_article_path(article), class: 'btn btn-mini'
-          = link_to "Löschen", article, :method => :delete, :confirm => "Bist Du sicher?",
+          = link_to t('ui.edit'), edit_stock_article_path(article), class: 'btn btn-mini'
+          = link_to t('ui.delete'), article, :method => :delete, :confirm => t('.confirm_delete'),
             class: 'btn btn-mini btn-danger', :remote => true
-
 %p
-  Aktueller Lagerwert:
+  = t '.stock_worth'
   = number_to_currency StockArticle.stock_value
   |
-  Artikelanzahl:
+  =t '.stock_count'
   = StockArticle.available.count
 

@@ -1,4 +1,4 @@
-- title "Neuen Lagerartikel anlegen"
+- title t('.title')
 
 - content_for :head do
   :javascript
@@ -16,7 +16,7 @@
 /
   TODO: Fix this
   %p
-  Suche nach Artikeln aus allen Katalogen:
+  = t '.search_text'
   = text_field_tag 'article_search'
 #stock_article_form
   = render :partial => 'form', :locals => {:stock_article => @stock_article}

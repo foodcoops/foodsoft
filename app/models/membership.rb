@@ -6,7 +6,7 @@ class Membership < ActiveRecord::Base
   before_destroy :check_last_admin
   
   # messages
-  ERR_NO_ADMIN_MEMBER_DELETE = "Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin"
+  ERR_NO_ADMIN_MEMBER_DELETE = I18n.t('model.membership.no_admin_delete')
 
   protected
 

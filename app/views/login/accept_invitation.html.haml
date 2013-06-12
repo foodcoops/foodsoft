@@ -2,22 +2,10 @@
   :javascript
     $('user_nick').focus();
 
-- title "Einladung in die #{FoodsoftConfig[:name]}"
-%p
-  Du bist eingeladen worden als Mitglied der Gruppe
-  %b= @invite.group.name
-  in der Foodcoop
-  = FoodsoftConfig[:name]
-  mitzumachen.
-%p
-  Wenn Du mitmachen möchtest, dann fülle bitte dieses Formular aus.
-%p
-  Deine Daten werden selbstverständlich nicht an Dritte, aus was auch immer für
-  Gründen, weitergeben. Du kannst auch entscheiden, wieviel deiner persönlichen
-  Daten für alle einsehbar sein sollen. 'Alle' bedeutet hier alle Foodcoop-Mitglieder.
-  Die Administratoren haben aber jederzeit Zugriff auf deine Daten.
+- title t('.title', name: FoodsoftConfig[:name])
+= t('.body', group: h(@invite.group.name), foodcoop: h(FoodsoftConfig[:name])).html_safe
 = simple_form_for @user, url: accept_invitation_path do |form|
   = render partial: 'shared/user_form_fields', locals: {f: form}
   .form-actions
-    = submit_tag "Foodsoft Account erstellen", class: 'btn'
+    = submit_tag t('.submit'), class: 'btn'
 

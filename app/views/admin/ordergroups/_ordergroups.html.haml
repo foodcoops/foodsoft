@@ -4,11 +4,11 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Name
-      %th Kontakt
-      %th Adresse
-      %th Mitglieder
-      %th Aktionen
+      %th= t '.name'
+      %th= t '.contact'
+      %th= t '.address'
+      %th= t '.members'
+      %th= t 'admin.actions'
   %tbody
     - for ordergroup in @ordergroups
       %tr{:class => cycle('even','odd', :name => 'groups')}
@@ -17,6 +17,6 @@
         %td= link_to_gmaps ordergroup.contact_address
         %td= ordergroup.users.size
         %td
-          = link_to "Bearbeiten", edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
-          = link_to "Löschen", [:admin, ordergroup], :confirm => "Willst du #{ordergroup.name} wirklich löschen?",
+          = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
+          = link_to t('ui.delete'), [:admin, ordergroup], :confirm => t('admin.confirm', name: ordergroup.name),
             :method => :delete, class: 'btn btn-mini btn-danger'

@@ -3,9 +3,9 @@
   = f.hidden_field :order_id
 
   - if @invoice.delivery
-    %p Diese Rechnung ist mit einer #{link_to("Lieferung", [@invoice.supplier,@invoice.delivery])} verknüpft.
+    %p= t('.linked', what_link: link_to(t('.delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
   - if @invoice.order
-    %p Diese Rechnung ist mit einer #{link_to("Bestellung", @invoice.order)} verknüpft.
+    %p= t('.linked', what_link: link_to(t('.order'), @invoice.order)).html_safe
 
   = f.association :supplier, hint: false
   = f.input :number
@@ -17,4 +17,4 @@
   = f.input :note
   .form-actions
     = f.submit class: 'btn'
-    = link_to "oder abbrechen", :back
+    = link_to t('ui.or_cancel'), :back

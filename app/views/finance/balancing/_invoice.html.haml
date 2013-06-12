@@ -1,26 +1,26 @@
 - if invoice
   %table
     %tr
-      %td Rechnungsnummer:
+      %td= t('.invoice_number')
       %td= invoice.number
     %tr
-      %td Rechnungsdatum:
+      %td= t('.invoice_date')
       %td= invoice.date
     %tr
-      %td Rechnungsbetrag:
+      %td= t('.invoice_amount')
       %td.curreny= number_to_currency invoice.amount
     %tr
-      %td - Pfand berechnet:
+      %td= t('.minus_refund_calculated')
       %td.curreny= number_to_currency invoice.deposit
     %tr
-      %td + Pfand gutgeschrieben:
+      %td= t('.plus_refund_credited')
       %td.curreny= number_to_currency invoice.deposit_credit
     %tr
-      %td pfandbereinigter Betrag:
+      %td= t('.refund_adjusted_amount')
       %td.curreny= number_to_currency invoice.net_amount
   %br/
-  = link_to "Rechnung bearbeiten", edit_finance_invoice_path(invoice)
+  = link_to t('.edit'), edit_finance_invoice_path(invoice)
 
 - else
-  Eine Rechnung für diese Bestellung anlegen:
-  = link_to "Neue Rechnung erstellen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier)
+  = t '.new_body'
+  = link_to t('.new'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier)

@@ -1,10 +1,9 @@
 # encoding: utf-8
 class StockArticle < Article
-  acts_as_paranoid
-  
+
   has_many :stock_changes
 
-  scope :available, :conditions => "quantity > 0"
+  scope :available, -> { undeleted.where'quantity > 0' }
 
   before_destroy :check_quantity
 
@@ -23,10 +22,15 @@ class StockArticle < Article
     available.collect { |a| a.quantity * a.gross_price }.sum
   end
 
+  def mark_as_deleted
+    check_quantity
+    super
+  end
+
   protected
 
   def check_quantity
-    raise "#{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null." unless quantity == 0
+    raise I18n.t('stockit.check.not_empty', :name => name) unless quantity == 0
   end
 
   # Overwrite Price history of Article. For StockArticles isn't it necessary.

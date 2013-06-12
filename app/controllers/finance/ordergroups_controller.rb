@@ -12,7 +12,7 @@ class Finance::OrdergroupsController < Finance::BaseController
       sort = "name"
     end
 
-    @ordergroups = Ordergroup.order(sort)
+    @ordergroups = Ordergroup.undeleted.order(sort)
     @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
     @ordergroups = @ordergroups.page(params[:page]).per(@per_page)

@@ -1,19 +1,14 @@
-- title "Externe Listen"
-%p
-  Hier werden die Lieferantinnen der externen Datenbank angezeigt.
-  %br/
-  Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)
-  %br/
-  Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.
+- title t('.title')
+= t('.body').html_safe
 
 %table.table.table-striped
   %thead
     %tr
-      %th Lieferantin
-      %th Adresse
-      %th Notiz
-      %th Liefertag
-      %th abonniert?
+      %th= t 'simple_form.labels.supplier.name'
+      %th= t 'simple_form.labels.supplier.address'
+      %th= t 'simple_form.labels.supplier.note'
+      %th= t 'simple_form.labels.supplier.delivery_days'
+      %th= t 'simple_form.labels.supplier.is_subscribed'
   %tbody
     - for shared_supplier in @shared_suppliers
       %tr
@@ -25,4 +20,4 @@
           - if shared_supplier.supplier
             %i.icon-ok
           - else
-            = link_to "abonnieren", new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn'
+            = link_to t('.subscribe'), new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn'

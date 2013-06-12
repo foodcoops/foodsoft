@@ -1,24 +1,25 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
-  acts_as_paranoid  # Avoid deleting the article for consistency of order-results
   extend ActiveSupport::Memoizable    # Ability to cache method results. Use memoize :expensive_method
 
   # Replace numeric seperator with database format
   localize_input_of :price, :tax, :deposit
 
   # Associations
-  belongs_to :supplier, :with_deleted => true
+  belongs_to :supplier
   belongs_to :article_category
   has_many :article_prices, :order => "created_at DESC"
 
-  scope :available, :conditions => {:availability => true}
+  scope :undeleted, -> { where(deleted_at: nil) }
+  scope :available, -> { undeleted.where(availability: true) }
   scope :not_in_stock, :conditions => {:type => nil}
 
   # Validations
   validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category
   validates_length_of :name, :in => 4..60
   validates_length_of :unit, :in => 2..15
-  validates_numericality_of :price, :unit_quantity, :greater_than => 0
+  validates_numericality_of :price, :greater_than_or_equal_to => 0
+  validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
   validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type]
   
@@ -48,6 +49,11 @@ class Article < ActiveRecord::Base
     order_article ? order_article.order : nil
   end
   memoize :in_open_order
+  
+  # Returns true if the article has been ordered in the given order at least once
+  def ordered_in_order?(order)
+    order.order_articles.where(article_id: id).where('quantity > 0').one?
+  end
   
   # this method checks, if the shared_article has been changed
   # unequal attributes will returned in array
@@ -136,11 +142,20 @@ class Article < ActiveRecord::Base
     end
   end
 
+  def deleted?
+    deleted_at.present?
+  end
+
+  def mark_as_deleted
+    check_article_in_use
+    update_column :deleted_at, Time.now
+  end
+
   protected
   
   # Checks if the article is in use before it will deleted
   def check_article_in_use
-    raise self.name.to_s + " kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!" if self.in_open_order
+    raise I18n.t('articles.model.error_in_use', :article => self.name.to_s) if self.in_open_order
   end
 
   # Create an ArticlePrice, when the price-attr are changed.

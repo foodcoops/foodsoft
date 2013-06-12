@@ -16,7 +16,7 @@ class HomeController < ApplicationController
 
   def update_profile
     if @current_user.update_attributes(params[:user])
-      redirect_to my_profile_url, notice: 'Änderungen wurden gespeichert.'
+      redirect_to my_profile_url, notice: I18n.t('home.changes_saved')
     else
       render :profile
     end
@@ -45,7 +45,7 @@ class HomeController < ApplicationController
       @financial_transactions = @financial_transactions.where("note LIKE ?", "%#{params[:query]}%") if params[:query].present?
 
     else
-      redirect_to root_path, :alert => "Leider bist Du kein Mitglied einer Bestellgruppe"
+      redirect_to root_path, :alert => I18n.t('home.no_ordergroups')
     end
   end
 
@@ -54,9 +54,9 @@ class HomeController < ApplicationController
     membership = Membership.find(params[:membership_id])
     if membership.user == current_user
       membership.destroy
-      flash[:notice] = "Du bist jetzt kein Mitglied der Gruppe #{membership.group.name} mehr."
+      flash[:notice] = I18n.t('home.ordergroup_cancelled', :group => membership.group.name)
     else
-      flash[:error] = "Ein Problem ist aufgetreten."
+      flash[:error] = I18n.t('errors.general')
     end
     redirect_to my_profile_path
   end

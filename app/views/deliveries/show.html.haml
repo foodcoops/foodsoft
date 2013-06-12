@@ -1,27 +1,27 @@
-- title "Lieferung anzeigen"
+- title t('.title')
 
 %dl
-  %dt Lieferantin
+  %dt= t 'simple_form.labels.delivery.supplier'
   %dd= @delivery.supplier.name
-  %dt Geliefert am
+  %dt= t 'simple_form.labels.delivery.delivered_on'
   %dd= @delivery.delivered_on
-  %dt Rechnungsbetrag:
+  %dt= t 'deliveries.invoice_amount'
   %dd= link_to_invoice(@delivery)
   - if @delivery.invoice
-    %dt bereinigter Rechnungsbetrag:
+    %dt= t 'deliveries.invoice_net_amount'
     %dd= number_to_currency @delivery.invoice.net_amount
-  %dt Notiz:
+  %dt= t 'simple_form.labels.defaults.note'
   %dd= simple_format @delivery.note
 
-%h2 Artikel
+%h2= t '.title_articles'
 %table.table.table-striped(style="width:500px")
   %thead
     %tr
-      %th Artikel
-      %th Einheit
-      %th.numeric Menge
-      %th.numeric Nettopreis
-      %th.numeric Summe
+      %th= t '.article'
+      %th= t '.unit'
+      %th.numeric= t '.amount'
+      %th.numeric= t '.price'
+      %th.numeric= t '.sum'
   %tbody
     - total_net, total_gross = 0,0
     - @delivery.stock_changes.all.each do |stock_change|
@@ -37,16 +37,16 @@
         %td.numeric= number_to_currency sum
   %tfoot
     %tr
-      %td(colspan="4") Nettosumme
+      %td(colspan="4")= t '.sum_net'
       %td.numeric= number_to_currency total_net
     %tr
-      %td(colspan="4") Bruttosumme
+      %td(colspan="4")= t '.sum_gross'
       %td.numeric= number_to_currency total_gross
     - if @delivery.invoice
       %tr
-        %td(colspan="4") Brutto - bereinigter Rechnungsbetrag:
+        %td(colspan="4")= t '.sum_diff'
         %td.numeric= number_to_currency total_gross - @delivery.invoice.net_amount
 
 %p
-  = link_to 'Bearbeiten', edit_supplier_delivery_path(@supplier,@delivery), class: 'btn'
-  = link_to 'Lieferungsübersicht', supplier_deliveries_path(@supplier)
+  = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,@delivery), class: 'btn'
+  = link_to t('deliveries.suppliers_overview'), supplier_deliveries_path(@supplier)

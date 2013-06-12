@@ -34,7 +34,7 @@ class Finance::FinancialTransactionsController < ApplicationController
     @financial_transaction = FinancialTransaction.new(params[:financial_transaction])
     @financial_transaction.user = current_user
     @financial_transaction.add_transaction!
-    redirect_to finance_ordergroup_transactions_url(@ordergroup), :notice => "Die Transaktion wurde gespeichert."
+    redirect_to finance_ordergroup_transactions_url(@ordergroup), notice: t('finance.financial_transactions.create.notice')
   rescue ActiveRecord::RecordInvalid => error
     flash.now[:alert] = error.message
     render :action => :new
@@ -51,9 +51,9 @@ class Finance::FinancialTransactionsController < ApplicationController
         Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(trans[:amount], params[:note], @current_user)
       end
     end
-    redirect_to finance_ordergroups_url, notice: "Alle Transaktionen wurden gespeichert."
+    redirect_to finance_ordergroups_url, notice: t('finance.create_collection.create.notice')
   rescue => error
-    redirect_to finance_new_transaction_collection_url, alert: "Ein Fehler ist aufgetreten: " + error.to_s
+    redirect_to finance_new_transaction_collection_url, alert: t('finance.create_collection.create.alert', error: error.to_s)
   end
 
   protected

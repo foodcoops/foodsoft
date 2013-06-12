@@ -15,6 +15,6 @@ module MessagesHelper
     link_text = content_tag :id, nil, class: 'icon-envelope'
     link_text << " #{options[:text]}" if options[:text].present?
     link_to(link_text.html_safe, new_message_path(message: messages_params), class: 'btn',
-            title: 'Nachricht verschicken')
+            title: I18n.t('helpers.submit.message.create'))
   end
 end

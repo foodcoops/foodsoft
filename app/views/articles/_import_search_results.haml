@@ -1,17 +1,17 @@
 - if @articles.empty?
-  %p Keine Artikel gefunden
+  %p= t '.not_found'
 - else
   = pagination_links_remote @articles, :params => {:search => search_params}
   %table.table.table-striped
     %thead
       %tr
-        %th Name
-        %th Herkunft
-        %th Hersteller
-        %th Notiz
-        %th{:style => "width:4em"} Preis
-        %th Einheit
-        %th GebGröße
+        %th= t 'simple_form.labels.article.name'
+        %th= t 'simple_form.labels.article.origin'
+        %th= t 'simple_form.labels.article.manufacturer'
+        %th= t 'simple_form.labels.article.note'
+        %th{:style => "width:4em"}= t 'simple_form.labels.defaults.price'
+        %th= t 'simple_form.labels.article.unit'
+        %th= t 'simple_form.labels.defaults.unit_quantity'
         %th
     %tbody
       - for article in @articles
@@ -25,9 +25,8 @@
           %td= article.unit_quantity
           %td
             - logger.debug "[debug] #{article.attributes.inspect}"
-            - if @supplier.articles.where(order_number: article.number).exists?
-              %i.icon-ok
-              schon importiert
+            - if @supplier.articles.undeleted.where(order_number: article.number).exists?
+              %i.icon-ok= t '.already_imported'
             - else
-              = link_to 'importieren', import_supplier_articles_path(@supplier, :shared_article_id => article.id),
+              = link_to t('.action_import'), import_supplier_articles_path(@supplier, :shared_article_id => article.id),
                 :remote => true, class: 'btn btn-small btn-success'

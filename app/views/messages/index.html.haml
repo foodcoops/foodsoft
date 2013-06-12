@@ -1,6 +1,6 @@
-- title "Nachrichten"
+- title t('.title')
 
 - content_for :actionbar do
-  = link_to 'Neue Nachricht', new_message_path, class: 'btn btn-primary'
+  = link_to t('.new'), new_message_path, class: 'btn btn-primary'
 #messages
   = render 'messages', messages: @messages, pagination: true

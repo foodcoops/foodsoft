@@ -2,11 +2,12 @@
 class OrderByArticles < OrderPdf
 
   def filename
-    "Bestellung #{@order.name}-#{@order.ends.to_date} - Artikelsortierung.pdf"
+    I18n.t('documents.order_by_articles.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
   end
 
   def title
-    "Artikelsortierung der Bestellung: #{@order.name}, beendet am #{@order.ends.strftime('%d.%m.%Y')}"
+    I18n.t('documents.order_by_articles.title', :name => @order.name,
+      :date => @order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
@@ -14,7 +15,7 @@ class OrderByArticles < OrderPdf
       text "#{order_article.article.name} (#{order_article.article.unit} | #{order_article.price.unit_quantity.to_s} | #{number_with_precision(order_article.price.fc_price, precision: 2)})",
            style: :bold, size: 10
       rows = []
-      rows << %w(Bestellgruppe Menge Preis)
+      rows << I18n.t('documents.order_by_articles.rows')
       for goa in order_article.group_order_articles
         rows << [goa.group_order.ordergroup.name,
                  goa.result,

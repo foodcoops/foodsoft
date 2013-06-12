@@ -1,4 +1,4 @@
-- title "Workgroups"
+- title t('.title')
 %table
   %tr
     %th Type
@@ -43,4 +43,4 @@
       %td= h workgroup.contact_person
       %td= h workgroup.contact_phone
       %td= h workgroup.contact_address
-      %td= link_to "Edit", edit_workgroup_path(workgroup)
+      %td= link_to t('ui.edit'), edit_workgroup_path(workgroup)

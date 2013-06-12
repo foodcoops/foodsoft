@@ -8,29 +8,29 @@
       setStockit(#{@order.stockit?});
     });
 
-- title "Bestellen", false
+- title t('.title'), false
 
 .row-fluid
   .well.pull-left
     %h2= @order.name
     %dl.dl-horizontal
       - unless @order.note.blank?
-        %dt Notiz
+        %dt= t '.note'
         %dd= @order.note
-      %dt Erstellt von
+      %dt= t '.created_by'
       %dd= link_to_user_message_if_valid(@order.created_by)
-      %dt Ende
+      %dt= t '.ending'
       %dd= format_time(@order.ends)
       - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
-        %dt Mindestbestellmenge
+        %dt= t '.min_quantity'
         %dd= @order.supplier.min_order_quantity
-      %dt Gesamtbestellmenge bisher:
+      %dt= t '.sum_amount'
       %dd= number_to_currency @order.sum
-      %dt Zuletzt bestellt
+      %dt= t '.last_update'
       %dd
         = @group_order.updated_by.nick if @group_order.updated_by
         (#{format_time(@group_order.updated_on)})
-      %dt Guthaben
+      %dt= t '.funds'
       %dd= number_to_currency(@ordering_data[:available_funds])
 
   .well.pull-right
@@ -44,20 +44,20 @@
   %table.table.table-hover
     %thead
       %tr
-        %th Name
+        %th= t '.name'
         - if @order.stockit?
-          %th{style: 'width:120px'} Lieferant
+          %th{style: 'width:120px'}= t '.supplier'
         %th{style: "width:13px;"}
-        %th{style: "width:4.5em;"} Preis
-        %th{style: "width:4.5em;"} Einheit
+        %th{style: "width:4.5em;"}= t '.price'
+        %th{style: "width:4.5em;"}= t '.unit'
         - unless @order.stockit?
-          %th{style: "width:70px;"} Fehlende Einheiten
-          %th#col_required Menge
-          %th#col_tolerance Toleranz
+          %th{style: "width:70px;"}= t '.unit_missing'
+          %th#col_required= t '.amount'
+          %th#col_tolerance= t '.tolerance'
         - else
-          %th(style="width:20px") Verfügbar
-          %th#col_required Menge
-        %th{style: "width:15px;"} Summe
+          %th(style="width:20px")= t '.available'
+          %th#col_required= t '.amount'
+        %th{style: "width:15px;"}= t '.sum'
     %tbody
       - @order.articles_grouped_by_category.each do |category, order_articles|
         %tr.article-category
@@ -102,42 +102,42 @@
               .article-info
                 .article-name= order_article.article.name
                 .pull-right
-                  Volle Gebinde:
+                  = t('.units_full') + ':'
                   %span{id: "units_#{order_article.id}"}= order_article.units_to_order
                   %br/
-                  Gesamt-Einheiten:
+                  = t('.units_total') + ':'
                   %span{id: "q_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] + @ordering_data[:order_articles][order_article.id][:others_quantity]
                   %br/
-                  Gesamt-Toleranz:
+                  = t('.total_tolerance') + ':'
                   %span{id: "t_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
                   %br/
                 .pull-left
-                  Hersteller: #{order_article.article.manufacturer}
+                  #{t '.manufacturer'}: #{order_article.article.manufacturer}
                   %br/
-                  Gebinde: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
+                  #{t '.units'}: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
                   %br/
-                  Notiz: #{order_article.article.note}
+                  #{t '.note'}: #{order_article.article.note}
                   %br/
   #order-footer
     #info-box
     #total-sum
       %table
         %tr
-          %td Gesamtbetrag:
+          %td= t('.total_sum_amount') + ':'
           %td.currency
             %span#total_price= @group_order.price
             €
         %tr
-          %td Verfügbares Guthaben:
+          %td= t('.available_funds') + ':'
           %td.currency= number_to_currency(@ordering_data[:available_funds])
         %tr
-          %td Neuer Kontostand:
+          %td= t('.new_funds') + ':'
           %td.currency
             %strong
               %span#new_balance= @ordering_data[:available_funds] - @group_order.price
               €
       #order-button
-        = submit_tag( "Bestellung speichern", id: 'submit_button', class: 'btn btn-primary' )
-        oder #{link_to "abbrechen", group_orders_path}
+        = submit_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary' )
+        #{link_to t('ui.or_cancel'), group_orders_path}
   %input#total_balance{name: "total_balance", type: "hidden", value: @ordergroup.account_balance - @group_order.price}/
   %input{name: "version", type: "hidden", value: @version}/

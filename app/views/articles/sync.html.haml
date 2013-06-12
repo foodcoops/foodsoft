@@ -1,71 +1,70 @@
-%h1 Artikel mit externer Datenbank synchronisieren
+- title 'Artikel mit externer Datenbank synchronisieren'
 
-- form_tag update_all_supplier_articles_path(@supplier, :sync => "1") do
-  %h2 Auslisten ...
+= form_tag update_synchronized_supplier_articles_path(@supplier) do
+  %h2= t '.outlist.title'
   %p
   - unless @outlisted_articles.empty?
-    Folgende Artikel wurden ausgelistet und werden 
-    %b gelöscht:
+    = t('.outlist.body').html_safe
     %ul
       - for article in @outlisted_articles
         %li
           = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
           = article.name
+          - if article.in_open_order
+            .alert
+              Achtung, #{article.name} wird gerade in einer laufenden Bestellung verwendet. Bitte erst Bestellung anpassen.
   - else
-    %i Es müssen keine Artikel gelöscht werden.
+    %i= t '.outlist.body_skip'
   %hr/
-  %h2 Aktualisieren ...
+  %h2= t '.update.title'
   %p
     %i
       %b= @updated_articles.size
-      Artikel müssen aktualisiert werden:
-  %p
-    %i
-      Jeder Artikel wird doppelt angezeigt. Die alten Werte sind grau und die Textfelder sind mit den aktuellen
-      Werten vorausgefüllt.
-      %br/
-      Abweichungen zu den alten Artikeln sind gelb markiert.
-    %table
-      %tr
-        %th Name
-        %th Notiz
-        %th Hersteller
-        %th Herkunft
-        %th Einheit
-        %th GebGr
-        %th Preis
-        %th MwSt.
-        %th Pfand
-        %th Kategorie
-      - @updated_articles.each do |@article, unequal_attributes|
-        - article = Article.find(@article.id)
-        %tr{:style => 'color:grey'}
-          %td= article.name
-          %td= article.note
-          %td= article.manufacturer
-          %td= article.origin
-          %td= article.unit
-          %td= article.unit_quantity
-          %td= article.price
-          %td= article.tax
-          %td= article.deposit
-          %td= article.article_category.name if article.article_category
+      = t '.update.update_msg'
+  = t('.update.body').html_safe
+    %table.table
+      %thead
         %tr
-          - fields_for 'articles[]', @article do |form|
-            %td{:style => highlight_new(unequal_attributes, :name)}
-              = form.text_field 'name', :size => 0
-              = form.hidden_field 'shared_updated_on'
-            %td{:style => highlight_new(unequal_attributes, :note)}= form.text_field 'note', :size => 15
-            %td{:style => highlight_new(unequal_attributes, :manufacturer)}= form.text_field 'manufacturer', :size => 10
-            %td{:style => highlight_new(unequal_attributes, :origin)}= form.text_field 'origin', :size => 5
-            %td{:style => highlight_new(unequal_attributes, :unit)}= form.text_field 'unit', :size => 5
-            %td{:style => highlight_new(unequal_attributes, :unit_quantity)}= form.text_field 'unit_quantity', :size => 5
-            %td{:style => highlight_new(unequal_attributes, :price)}= form.text_field 'price', :size => 5
-            %td{:style => highlight_new(unequal_attributes, :tax)}= form.text_field 'tax', :size => 4
-            %td{:style => highlight_new(unequal_attributes, :deposit)}= form.text_field 'deposit', :size => 4
-            %td= select 'article[]', 'article_category_id', ArticleCategory.find(:all).collect {|a| [ a.name, a.id ] }, { :include_blank => true }
+          %th= t 'simple_form.labels.article.name'
+          %th= t 'simple_form.labels.article.note'
+          %th= t 'simple_form.labels.article.manufacturer'
+          %th= t 'simple_form.labels.article.origin'
+          %th= t 'simple_form.labels.article.unit'
+          %th= t '.unit_quantity_short'
+          %th= t '.price_short'
+          %th= t 'simple_form.labels.defaults.tax'
+          %th= t 'simple_form.labels.defaults.deposit'
+          %th= t 'simple_form.labels.article.article_category'
+      %tbody
+        - @updated_articles.each do |updated_article, attrs|
+          - article = Article.find(updated_article.id)
+          %tr{:style => 'color:grey'}
+            %td= article.name
+            %td= article.note
+            %td= article.manufacturer
+            %td= article.origin
+            %td= article.unit
+            %td= article.unit_quantity
+            %td= article.price
+            %td= article.tax
+            %td= article.deposit
+            %td= article.article_category.name if article.article_category
+          %tr
+            = fields_for 'articles[]', updated_article do |form|
+              %td{:style => highlight_new(attrs, :name)}
+                = form.text_field 'name', :size => 0
+                = form.hidden_field 'shared_updated_on'
+              %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-small'
+              %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-small'
+              %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'input-mini'
+              %td{:style => highlight_new(attrs, :unit)}= form.text_field 'unit', class: 'input-mini'
+              %td{:style => highlight_new(attrs, :unit_quantity)}= form.text_field 'unit_quantity', class: 'input-mini'
+              %td{:style => highlight_new(attrs, :price)}= form.text_field 'price', class: 'input-mini'
+              %td{:style => highlight_new(attrs, :tax)}= form.text_field 'tax', class: 'input-mini'
+              %td{:style => highlight_new(attrs, :deposit)}= form.text_field 'deposit', class: 'input-mini'
+              %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
+                {include_blank: true}, class: 'input-small'
   %hr/
   = hidden_field 'supplier', 'id'
-  = submit_tag 'Alle löschen/aktualisieren'
-  |
-  = link_to 'Abbrechen', supplier_articles_path(@supplier)
+  = submit_tag t('.submit'), class: 'btn btn-primary'
+  = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)

@@ -1,0 +1,43 @@
+require 'bundler/setup'
+require 'common_deploy'
+
+set :application,         'foodsoft'
+set :domain,              'foodsoft.com'
+set :user,                'foodsoft'
+set :default_stage,       'staging' # staging and production are available via (set :stages, ["staging", "production"])
+set :keep_releases,       5
+set :repository,          'git://github.com/foodcoops/foodsoft.git'
+set(:deploy_to)           { "/mnt/apps/#{application}_#{stage}" }
+
+
+# resque worker
+role :resque_worker,      domain
+role :resque_scheduler,   domain
+set  :workers,            { "foodsoft_notifier" => 1 }
+
+
+# rvm
+# set :rvm_ruby_string,     :local
+
+
+server domain, :web, :app, :db
+
+# Loads all needed capistrano extensions
+load_extensions :bundler,
+  # :rvm, # if you are using rvm on your server uncomment this line
+  :passenger,
+  :multistage,
+  :resque,
+  :whenever,
+  :assets
+
+
+# clean up old releases on each deploy
+after "deploy:restart", "deploy:cleanup"
+
+# restart resque
+after "deploy:restart", "resque:restart"
+
+# install rvm and ruby on every deploy
+# before 'deploy', 'rvm:install_rvm'  # update RVM
+# before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)

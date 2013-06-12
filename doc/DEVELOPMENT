@@ -48,7 +48,7 @@ and modify the token!!
 
 (5) Required ruby and gems
 -------------------
-We reccomend the using of rvm (https://rvm.beginrescueend.com/). Install rvm and get the latest ruby (>= 1.9.3).
+We recommend to use rvm (https://rvm.beginrescueend.com/). Install rvm and get the latest ruby (>= 1.9.3).
 If installed you only need to install the gem bundler:
 
     gem install bundler

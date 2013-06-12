@@ -1,21 +1,16 @@
-- title "Mitglieder"
+- title t('.title')
 
 %section
-  %p
-    Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.
-    %br/
-    Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter
-    = link_to "Einstellungen", my_profile_path
-    freigeben.
+  = t('.body', profile_link: link_to(t('.profile_link'), my_profile_path)).html_safe
 
   .well
     = form_tag foodcoop_users_path, :method => :get, :remote => true,
       'data-submit-onchange' => true, class: 'form-search' do
 
       = text_field_tag :user_name, params[:user_name], class: 'input-medium search-query',
-      placeholder: 'Name ...'
+        placeholder: t('.ph_name')
       = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'input-medium search-query',
-        placeholder: 'Bestelllgruppe ...'
+        placeholder: t('.ph_ordergroup')
       %button.btn
         %i.icon-search
 

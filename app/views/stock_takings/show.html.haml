@@ -1,18 +1,18 @@
-- title "Inventur anzeigen"
+- title t('.title')
 
 .well.well-small
   %dl.dl-horizontal
-    %dt Datum
+    %dt= t '.date'
     %dd= format_date @stock_taking.date
-    %dt Notiz
+    %dt= t '.note'
     %dd= simple_format @stock_taking.note
 
 %table.table.table-striped
   %tr
-    %th Artikel
-    %th Lieferantin
-    %th Einheit
-    %th Menge
+    %th= t '.article'
+    %th= t '.supplier'
+    %th= t '.unit'
+    %th= t '.amount'
   - for stock_change in @stock_taking.stock_changes.all
     %tr
       %td= stock_change.stock_article.name
@@ -21,7 +21,7 @@
       %td= stock_change.quantity
 
 .btn-group
-  = link_to "Bearbeiten", edit_stock_taking_path(@stock_taking), class: 'btn'
-  = link_to "Inventurübersicht", stock_takings_path, class: 'btn'
-  = link_to "Löschen", @stock_taking, :method => :delete, :confirm => "Willst Du wirklich die Inventur löschen?",
+  = link_to t('ui.edit'), edit_stock_taking_path(@stock_taking), class: 'btn'
+  = link_to t('.overview'), stock_takings_path, class: 'btn'
+  = link_to t('ui.delete'), @stock_taking, :method => :delete, :confirm => t('.confirm_delete'),
     class: 'btn btn-danger'

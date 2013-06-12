@@ -5,9 +5,9 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Name
-      %th Mitglieder
-      %th zuletzt bestellt
+      %th= t '.name'
+      %th= t '.user'
+      %th= t '.last_ordered'
 
   %tbody
     - for ordergroup in @ordergroups

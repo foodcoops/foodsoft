@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   has_one :invoice
   has_many :comments, :class_name => "OrderComment", :order => "created_at"
   has_many :stock_changes
-  belongs_to :supplier, :with_deleted => true
+  belongs_to :supplier
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
@@ -38,9 +38,11 @@ class Order < ActiveRecord::Base
 
   def articles_for_ordering
     if stockit?
+      # make sure to include those articles which are no longer available
+      # but which have already been ordered in this stock order
       StockArticle.available.all(:include => :article_category,
         :order => 'article_categories.name, articles.name').reject{ |a|
-        a.quantity_available <= 0
+        a.quantity_available <= 0 and not a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else
       supplier.articles.available.all.group_by { |a| a.article_category.name }
@@ -113,25 +115,25 @@ class Order < ActiveRecord::Base
   def sum(type = :gross)
     total = 0
     if type == :net || type == :gross || type == :fc
-      for oa in order_articles.ordered.all(:include => [:article,:article_price])
+      for oa in order_articles.ordered.includes(:article, :article_price)
         quantity = oa.units_to_order * oa.price.unit_quantity
         case type
-        when :net
-          total += quantity * oa.price.price
-        when :gross
-          total += quantity * oa.price.gross_price
-        when :fc
-          total += quantity * oa.price.fc_price
+          when :net
+            total += quantity * oa.price.price
+          when :gross
+            total += quantity * oa.price.gross_price
+          when :fc
+            total += quantity * oa.price.fc_price
         end
       end
     elsif type == :groups || type == :groups_without_markup
-      for go in group_orders.all(:include => :group_order_articles)
-        for goa in go.group_order_articles.all(:include => [:order_article])
+      for go in group_orders.includes(group_order_articles: {order_article: [:article, :article_price]})
+        for goa in go.group_order_articles
           case type
-          when :groups
-            total += goa.result * goa.order_article.price.fc_price
-          when :groups_without_markup
-            total += goa.result * goa.order_article.price.gross_price
+            when :groups
+              total += goa.result * goa.order_article.price.fc_price
+            when :groups_without_markup
+              total += goa.result * goa.order_article.price.gross_price
           end
         end
       end
@@ -156,7 +158,7 @@ class Order < ActiveRecord::Base
             goa.save_results!
             # Delete no longer required order-history (group_order_article_quantities) and
             # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
-            goa.group_order_article_quantities.clear
+            #goa.group_order_article_quantities.clear
           end
         end
 
@@ -174,8 +176,9 @@ class Order < ActiveRecord::Base
 
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
   def close!(user)
-    raise "Bestellung wurde schon abgerechnet" if closed?
-    transaction_note = "Bestellung: #{name}, bis #{ends.strftime('%d.%m.%Y')}"
+    raise I18n.t('orders.model.error_closed') if closed?
+    transaction_note = I18n.t('orders.model.notice_close', :name => name,
+                              :ends => ends.strftime(I18n.t('date.formats.default')))
 
     gos = group_orders.all(:include => :ordergroup)       # Fetch group_orders
     gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
@@ -199,18 +202,18 @@ class Order < ActiveRecord::Base
 
   # Close the order directly, without automaticly updating ordergroups account balances
   def close_direct!(user)
-    raise "Bestellung wurde schon abgerechnet" if closed?
+    raise I18n.t('orders.model.error_closed') if closed?
     update_attributes! state: 'closed', updated_by: user
   end
 
   protected
 
   def starts_before_ends
-    errors.add(:ends, "muss nach dem Bestellstart liegen (oder leer bleiben)") if (ends && starts && ends <= starts)
+    errors.add(:ends, I18n.t('articles.model.error_starts_before_ends')) if (ends && starts && ends <= starts)
   end
 
   def include_articles
-    errors.add(:articles, "Es muss mindestens ein Artikel ausgewählt sein") if article_ids.empty?
+    errors.add(:articles, I18n.t('articles.model.error_nosel')) if article_ids.empty?
   end
 
   def save_order_articles

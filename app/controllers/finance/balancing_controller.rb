@@ -7,10 +7,10 @@ class Finance::BalancingController < Finance::BaseController
 
   def new
     @order = Order.find(params[:order_id])
-    flash.now.alert = "Achtung, Bestellung wurde schon abgerechnet" if @order.closed?
+    flash.now.alert = t('finance.balancing.new.alert') if @order.closed?
     @comments = @order.comments
 
-    @articles = @order.order_articles.ordered.includes(:order, :article_price,
+    @articles = @order.order_articles.ordered.includes(:article, :article_price,
                                                        group_order_articles: {group_order: :ordergroup})
 
     sort_param = params['sort'] || 'name'
@@ -28,6 +28,10 @@ class Finance::BalancingController < Finance::BaseController
                 end
 
     render layout: false if request.xhr?
+  end
+
+  def update_summary
+    @order = Order.find(params[:id])
   end
 
   def edit_note
@@ -53,19 +57,19 @@ class Finance::BalancingController < Finance::BaseController
   def close
     @order = Order.find(params[:id])
     @order.close!(@current_user)
-    redirect_to finance_root_url, notice: "Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert."
+    redirect_to finance_order_index_url, notice: t('finance.balancing.close.notice')
 
   rescue => error
-    redirect_to new_finance_order_url(order_id: @order.id), alert: "Ein Fehler ist beim Abrechnen aufgetreten: #{error.message}"
+    redirect_to new_finance_order_url(order_id: @order.id), alert: t('finance.balancing.close.alert', message: error.message)
   end
 
   # Close the order directly, without automaticly updating ordergroups account balances
   def close_direct
     @order = Order.find(params[:id])
     @order.close_direct!(@current_user)
-    redirect_to finance_balancing_url, notice: "Bestellung wurde geschlossen."
+    redirect_to finance_order_index_url, notice: t('finance.balancing.close_direct.notice')
   rescue => error
-    redirect_to finance_balancing_url, alert: "Bestellung kann nicht geschlossen werden: #{error.message}"
+    redirect_to finance_order_index_url, alert: t('finance.balancing.close_direct.alert', message: error.message)
   end
 
 end

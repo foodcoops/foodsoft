@@ -2,18 +2,19 @@
   %thead
     %tr
       %th
-        %acronym{:title => "verfügbar"} verf.
-      %th Name
-      %th Einheit
+        %acronym{:title => t('.available_desc')}= t '.available_short'
+      %th= t 'simple_form.labels.article.name'
+      %th= t 'simple_form.labels.article.unit'
       %th
-        %acronym{:title => "Netto!"} Preis
+        %acronym{:title => t('.price_desc')}= t '.price_short'
       %th
-        %acronym{:title => "Gebindegröße"} GebGr
-      %th Best.Nr.
-      %th Notiz
-      %th Kategorie
-      %th MwSt.
-      %th Pfand
+        %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity_short'
+      %th
+        %acronym{:title => t('.order_number_desc')}= t '.order_number_short'
+      %th= t 'simple_form.labels.article.note'
+      %th= t 'simple_form.labels.article.article_category'
+      %th= t 'simple_form.labels.defaults.tax'
+      %th= t 'simple_form.labels.defaults.deposit'
   %tbody
     - @articles.each_with_index do |article, index|
       = fields_for "articles[#{article.id || index}]", article do |form|

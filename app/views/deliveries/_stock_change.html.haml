@@ -3,4 +3,4 @@
     = form.select :stock_article_id, stock_articles_for_select(supplier)
     Menge
     = form.text_field :quantity, :size => 5, :autocomplete => 'off'
-    = link_to "Artikel aus Lieferung entfernen", "#", :class => 'remove_new_stock_change'
+    = link_to t('.remove_article'), "#", :class => 'remove_new_stock_change'

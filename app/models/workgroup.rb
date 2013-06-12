@@ -15,7 +15,8 @@ class Workgroup < Group
   before_destroy :check_last_admin_group
 
   def self.weekdays
-    [["Montag", "1"], ["Dienstag", "2"], ["Mittwoch","3"],["Donnerstag","4"],["Freitag","5"],["Samstag","6"],["Sonntag","0"]]
+    days = I18n.t('date.day_names')
+    (0..days.length-1).map {|i| [days[i], i.to_s]}
   end
 
   # Returns an Array with date-objects to represent the next weekly-tasks
@@ -55,7 +56,7 @@ class Workgroup < Group
   # Check before destroy a group, if this is the last group with admin role
   def check_last_admin_group
     if role_admin && Workgroup.where(:role_admin => true).size == 1
-      raise "Die letzte Gruppe mit Admin-Rechten darf nicht gelöscht werden"
+      raise I18n.t('workgroups.error_last_admin_group')
     end
   end
 
@@ -63,7 +64,7 @@ class Workgroup < Group
   # Return an error if this is the last group with admin role and role_admin should set to false
   def last_admin_on_earth
     if !role_admin && !Workgroup.where('role_admin = ? AND id != ?', true, id).exists?
-      errors.add(:role_admin, "Der letzten Gruppe mit Admin-Rechten darf die Admin-Rolle nicht entzogen werden")
+      errors.add(:role_admin, I18n.t('workgroups.error_last_admin_role'))
     end
   end
   

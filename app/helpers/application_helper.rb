@@ -58,7 +58,7 @@ module ApplicationHelper
                      nil
                  end
     html_options = {
-        :title => "Nach #{text} sortieren",
+        :title => I18n.t('helpers.application.sort_by', text: text),
         :remote => remote,
         :class => class_name
     }
@@ -83,7 +83,7 @@ module ApplicationHelper
   
   # Returns the weekday. 0 is sunday, 1 is monday and so on
   def weekday(dayNumber)
-    weekdays = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"]
+    weekdays = I18n.t('date.day_names')
     return weekdays[dayNumber]
   end
   
@@ -103,9 +103,9 @@ module ApplicationHelper
 
   def icon(name, options={})
     icons = {
-        :delete  => { :file => 'b_drop.png', :alt => 'Löschen'},
-        :edit    => { :file => 'b_edit.png', :alt => 'Bearbeiten'},
-        :members => { :file => 'b_users.png', :alt => 'Mitlglieder bearbeiten'}
+        :delete  => { :file => 'b_drop.png', :alt => I18n.t('ui.delete')},
+        :edit    => { :file => 'b_edit.png', :alt => I18n.t('ui.edit')},
+        :members => { :file => 'b_users.png', :alt => I18n.t('helpers.application.edit_user')}
     }
     options[:alt] ||= icons[name][:alt]
     options[:title] ||= icons[name][:title]
@@ -126,16 +126,16 @@ module ApplicationHelper
 
   def format_roles(record)
     roles = []
-    roles << 'Admin' if record.role_admin?
-    roles << 'Finanzen' if record.role_finance?
-    roles << 'Lieferanten' if record.role_suppliers?
-    roles << 'Artikel' if record.role_article_meta?
-    roles << 'Bestellung' if record.role_orders?
+    roles << I18n.t('helpers.application.role_admin') if record.role_admin?
+    roles << I18n.t('helpers.application.role_finance') if record.role_finance?
+    roles << I18n.t('helpers.application.role_suppliers') if record.role_suppliers?
+    roles << I18n.t('helpers.application.role_article_meta') if record.role_article_meta?
+    roles << I18n.t('helpers.application.role_orders') if record.role_orders?
     roles.join(', ')
   end
 
   def link_to_gmaps(address)
-    link_to h(address), "http://maps.google.de/?q=#{h(address)}", :title => "Show it on google maps",
+    link_to h(address), "http://maps.google.com/?q=#{h(address)}", :title => I18n.t('helpers.application.show_google_maps'),
       :target => "_blank"
   end
   
@@ -143,7 +143,7 @@ module ApplicationHelper
   # checks for nil (useful for relations)
   def link_to_user_message_if_valid(user)
     user.nil? ? '??' : link_to(user.nick, new_message_path('message[mail_to]' => user.id),
-                               :title => 'Nachricht schreiben')
+                               :title => I18n.t('helpers.application.write_message'))
   end
 
   def bootstrap_flash
@@ -152,7 +152,7 @@ module ApplicationHelper
       type = :success if type == :notice
       type = :error   if type == :alert
       text = content_tag(:div,
-                         content_tag(:button, raw("&times;"), :class => "close", "data-dismiss" => "alert") +
+                         content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => "close", "data-dismiss" => "alert") +
                              message, :class => "alert fade in alert-#{type}")
       flash_messages << text if message
     end

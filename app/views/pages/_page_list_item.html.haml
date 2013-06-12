@@ -2,7 +2,7 @@
 %tr
   %td{:style => "padding-left: #{ident}px"}
     = link_to page.title, wiki_page_path(page.permalink)
-  %td #{page.user.try(:nick)} (#{format_datetime_timespec(page.updated_at, '%a, %d. %B %Y %H:%M:%S')})
+  %td #{page.user.try(:nick)} (#{format_datetime_timespec(page.updated_at, t('.date_format'))})
 -if siteMap == 1
   -for child in page.children.all
     = render :partial => 'page_list_item', :locals => {:page => child, :level => level+1, :siteMap => 1}

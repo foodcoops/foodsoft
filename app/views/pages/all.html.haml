@@ -1,17 +1,17 @@
-- title "Alle Wikiseiten", false
+- title t('.title'), false
 
 - content_for :sidebar do
-  = link_to "Neue Seite anlegen", new_page_path, class: 'btn btn-primary'
+  = link_to t('.new_page'), new_page_path, class: 'btn btn-primary'
 
 .navbar
   .navbar-inner
     %ul.nav
-      %li= link_to 'Letzte Änderungen', all_pages_path(:view => 'recent_changes')
-      %li= link_to 'Seiten-Liste', all_pages_path(:view => 'title_list')
-      %li= link_to 'Site Map', all_pages_path(:view => 'site_map')
+      %li= link_to t('.recent_changes'), all_pages_path(:view => 'recent_changes')
+      %li= link_to t('.title_list'), all_pages_path(:view => 'title_list')
+      %li= link_to t('.site_map'), all_pages_path(:view => 'site_map')
     = form_tag all_pages_path, method: :get, class: 'form-search pull-right' do
       = text_field_tag :name, params[:name], class: 'input-medium search-query',
-        placeholder: 'Seitentitel ...'
-      = submit_tag "Suche", class: 'btn'
+        placeholder: t('.search.placeholder')
+      = submit_tag t('.search.action'), class: 'btn'
 
 = render @partial

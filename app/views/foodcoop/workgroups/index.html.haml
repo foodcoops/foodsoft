@@ -1,10 +1,7 @@
-- title "Arbeitsgruppen"
+- title t('.title')
 
-%p
-  Das bearbeiten von Gruppen ist nur für Mitglieder der Gruppe möglich.
-  %br/
-  Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.
-      
+= t('.body').html_safe
+
 = render :partial => "workgroup", :collection => @workgroups
         
           

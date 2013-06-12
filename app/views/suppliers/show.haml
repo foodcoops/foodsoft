@@ -4,54 +4,52 @@
   .span6
     - if shared_supplier = @supplier.shared_supplier
       .alert.alert-info
-        Die Lieferantin ist mit der externen Artikledatenbank verknüpft.
+      = t 'suppliers.shared_supplier_note'
 
     %dl.dl-horizontal
-      %dt Adresse:
+      %dt= t('simple_form.labels.supplier.address') + ':'
       %dd= @supplier.address
-      %dt Telefon:
+      %dt= t('simple_form.labels.supplier.phone') + ':'
       %dd= @supplier.phone
-      %dt Telefon2:
+      %dt= t('simple_form.labels.supplier.phone2') + ':'
       %dd= @supplier.phone2
-      %dt FAX:
+      %dt= t('simple_form.labels.supplier.fax') + ':'
       %dd= @supplier.fax
-      %dt Email:
+      %dt= t('simple_form.labels.supplier.email') + ':'
       %dd= @supplier.email
-      %dt Hompage:
-      %dd= @supplier.url
-      %dt Kontakt-Person:
+      %dt= t('simple_form.labels.supplier.url') + ':'
+      %dd= link_to @supplier.url, @supplier.url
+      %dt= t('simple_form.labels.supplier.contact_person') + ':'
       %dd= @supplier.contact_person
-      %dt Kundennummer:
+      %dt= t('simple_form.labels.supplier.customer_number') + ':'
       %dd= @supplier.customer_number
-      %dt Liefertage:
+      %dt= t('simple_form.labels.supplier.delivery_days') + ':'
       %dd= @supplier.delivery_days
-      %dt BestellHowTo:
+      %dt= t('simple_form.labels.supplier.order_howto') + ':'
       %dd= @supplier.order_howto
-      %dt Notiz:
+      %dt= t('simple_form.labels.supplier.note') + ':'
       %dd= @supplier.note
-      %dt Liefertage:
-      %dd= @supplier.delivery_days
-      %dt Mindestbestellmenge:
+      %dt= t('simple_form.labels.supplier.min_order_quantity') + ':'
       %dd= @supplier.min_order_quantity
 
     .clearfix
     - if @current_user.role_suppliers?
       .form-actions
-        = link_to 'Bearbeiten', edit_supplier_path(@supplier), class: 'btn'
-        = link_to 'Löschen', @supplier, :confirm => 'Bist Du sicher?', :method => :delete, class: 'btn btn-danger'
+        = link_to t('ui.edit'), edit_supplier_path(@supplier), class: 'btn'
+        = link_to t('ui.delete'), @supplier, :confirm => t('.confirm_delete'), :method => :delete, class: 'btn btn-danger'
 
   .span6
-    %h2 Letzte Lieferungen
+    %h2= t '.last_deliveries'
     %table.table.table-horizontal
       %thead
         %tr
-          %th Datum
-          %th Betrag
+          %th= t 'simple_form.labels.defaults.date'
+          %th= t 'simple_form.labels.defaults.amount'
       %tbody
         - for delivery in @deliveries
           %tr
             %td= link_to delivery.delivered_on, [@supplier, delivery]
             %td= link_to_invoice(delivery)
     .form-actions
-      = link_to "Neue Lieferung anlegen", new_supplier_delivery_path(@supplier), class: 'btn'
-      = link_to "Zeige alle Lieferungen", supplier_deliveries_path(@supplier)
+      = link_to t('.new_delivery'), new_supplier_delivery_path(@supplier), class: 'btn'
+      = link_to t('.show_deliveries'), supplier_deliveries_path(@supplier)

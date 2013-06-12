@@ -1,31 +1,31 @@
-- title "Aufgabe anzeigen"
+- title t('.title')
 = render 'nav'
 
 %section
   %dl.dl-horizontal
-    %dt Name
+    %dt= t 'simple_form.labels.task.name'
     %dd= @task.name
     - if @task.description.present?
-      %dt Beschreibung
+      %dt= t 'simple_form.labels.defaults.description'
       %dd= simple_format(@task.description)
     - if @task.due_date.present?
-      %dt Fälligkeitsdatum
+      %dt= t '.due_date'
       %dd= format_date(@task.due_date)
-    %dt Dauer in Stunden
-    %dd= @task.duration
-    %dt Verantwortliche Menschen
+    %dt= t 'simple_form.labels.task.duration'
+    %dd= t('.hours', count: @task.duration)
+    %dt= t 'simple_form.labels.task.user_list'
     %dd= task_assignments(@task)
-    %dt Arbeitsgruppe
+    %dt= t 'simple_form.labels.task.workgroup'
     %dd
       - if @task.workgroup
         = link_to @task.workgroup.name, workgroup_tasks_path(workgroup_id: @task.workgroup_id)
 %p
   - if !@task.is_accepted?(current_user)
-    = link_to "Aufgabe übernehmen", accept_task_path(@task), method: :post, class: 'btn btn-success'
+    = link_to t('.accept_task'), accept_task_path(@task), method: :post, class: 'btn btn-success'
     - if @task.is_assigned?(current_user)
-      = link_to "Aufgabe ablehnen", reject_task_path(@task), method: :post, class: 'btn'
+      = link_to t('.reject_task'), reject_task_path(@task), method: :post, class: 'btn'
   - unless @task.done?
-    = link_to 'Als erledigt markieren', set_done_task_path(@task), method: :post, class: 'btn'
-  = link_to "Bearbeiten", edit_task_path(@task), class: 'btn'
-  = link_to "Löschen", task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?",
+    = link_to t('.mark_done'), set_done_task_path(@task), method: :post, class: 'btn'
+  = link_to t('ui.edit'), edit_task_path(@task), class: 'btn'
+  = link_to t('ui.delete'), task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?",
     class: 'btn btn-danger'

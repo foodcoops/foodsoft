@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(params[:task])
     if @task.save
-      redirect_to tasks_url, :notice => "Aufgabe wurde erstellt"
+      redirect_to tasks_url, :notice => I18n.t('tasks.create.notice')
     else
       render :template => "tasks/new"
     end
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.attributes=(params[:task])
     if @task.errors.empty? && @task.save
-      flash[:notice] = "Aufgabe wurde aktualisiert"
+      flash[:notice] = I18n.t('tasks.update.notice')
       if @task.workgroup
         redirect_to workgroup_tasks_url(workgroup_id: @task.workgroup_id)
       else
@@ -56,7 +56,7 @@ class TasksController < ApplicationController
     task.destroy
     task.update_ordergroup_stats(user_ids)
 
-    redirect_to tasks_url, :notice => "Aufgabe wurde gelöscht"
+    redirect_to tasks_url, :notice => I18n.t('tasks.destroy.notice')
   end
   
   # assign current_user to the task and set the assignment to "accepted"
@@ -68,7 +68,7 @@ class TasksController < ApplicationController
     else
       task.assignments.create(:user => current_user, :accepted => true)
     end
-    redirect_to user_tasks_path, :notice => "Du hast die Aufgabe übernommen"
+    redirect_to user_tasks_path, :notice => I18n.t('tasks.accept.notice')
   end
   
   # deletes assignment between current_user and given task
@@ -79,7 +79,7 @@ class TasksController < ApplicationController
   
   def set_done
     Task.find(params[:id]).update_attribute :done, true
-    redirect_to tasks_url, :notice => "Aufgabenstatus wurde aktualisiert"
+    redirect_to tasks_url, :notice => I18n.t('tasks.set_done.notice')
   end
   
   # Shows all tasks, which are already done
@@ -91,7 +91,7 @@ class TasksController < ApplicationController
   def workgroup
     @group = Group.find(params[:workgroup_id])
     if @group.is_a? Ordergroup
-      redirect_to tasks_url, :alert => "Keine Arbeitsgruppe gefunden"
+      redirect_to tasks_url, :alert => I18n.t('tasks.error_not_found')
     end
   end
 end

@@ -1,8 +1,8 @@
-- title "Inventurübersicht"
+- title t('.title')
 
 .well.well-small
   .btn-group
-    = link_to "Neue Inventur anlegen", new_stock_taking_path, class: 'btn'
+    = link_to t('.new_inventory'), new_stock_taking_path, class: 'btn'
 
 #StockTakingsTable= render 'stock_takings'
 

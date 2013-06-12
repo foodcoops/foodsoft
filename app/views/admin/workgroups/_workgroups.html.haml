@@ -4,10 +4,10 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Name
-      %th Mitglieder
-      %th Zugriff auf
-      %th Aktionen
+      %th= t '.name'
+      %th= t '.members'
+      %th= t 'admin.access_to'
+      %th= t 'admin.actions'
   %tbody
     - for workgroup in @workgroups
       %tr
@@ -15,6 +15,6 @@
         %td= workgroup.users.size
         %td= format_roles(workgroup)
         %td
-          = link_to "Bearbeiten", edit_admin_workgroup_path(workgroup), class: 'btn btn-mini'
-          = link_to "Löschen", [:admin, workgroup], :confirm => 'Willst du ' + workgroup.name + ' wirklich löschen?',
+          = link_to t('ui.edit'), edit_admin_workgroup_path(workgroup), class: 'btn btn-mini'
+          = link_to t('ui.delete'), [:admin, workgroup], :confirm => t('admin.confirm', name: workgroup.name),
             :method => :delete, class: 'btn btn-mini btn-danger'

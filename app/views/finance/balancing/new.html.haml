@@ -1,45 +1,45 @@
-- title "#{@order.name} abrechnen"
+- title t('.title', name: @order.name)
 
 - content_for :sidebar do
   .well.well-small
-    %h3 Zusammenfassung
+    %h3= t('.summary')
     #summary= render 'summary', order: @order
 
   .well.well-small
-    %h3 Rechnung
+    %h3= t('.invoice')
     #invoice= render 'invoice', invoice: @order.invoice
 
   .well.well-small
-    %h3 Notizen/Protokoll
+    %h3= t('.notes_and_journal')
     #note
       - unless @order.note.empty?
         = simple_format @order.note
       - else
-        %p Hier kannst Du deine Abrechnung kommentieren
-    = link_to "Notiz bearbeiten", edit_note_finance_order_path(@order), remote: true
+        %p= t('.comment_on_transaction') 
+    = link_to t('.edit_note'), edit_note_finance_order_path(@order), remote: true
 
   .well.well-small
-    %h3 Kommentare
+    %h3= t('.comments')
     #comments= render :partial => 'shared/comments', locals: {comments: @order.comments.includes(:user)}
 
 - content_for :actionbar do
   .btn-group
     - unless @order.invoice or @order.stockit?
-      = link_to "Rechnung anlegen", new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
+      = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
         class: 'btn'
     - unless @order.closed?
-      = link_to "Bestellung abschließen", confirm_finance_order_path(@order), class: 'btn btn-primary'
+      = link_to t('.confirm_order'), confirm_finance_order_path(@order), class: 'btn btn-primary'
 
   #editOrderNav.btn-group.pull-right
     = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
-      Ansichtsoptionen
+      = t('.view_options')
       %span.caret
     %ul.dropdown-menu
-      %li= link_to 'Bestellung bearbeiten', new_finance_order_path(order_id: @order.id, view: 'edit_results'),
+      %li= link_to t('.edit_order'), new_finance_order_path(order_id: @order.id, view: 'edit_results'),
         remote: true
-      %li= link_to 'Gruppenübersicht', new_finance_order_path(order_id: @order.id, view: 'groups_overview'),
+      %li= link_to t('.groups_overview'), new_finance_order_path(order_id: @order.id, view: 'groups_overview'),
         remote: true
-      %li= link_to 'Artikelübersicht', new_finance_order_path(order_id: @order.id, view: 'articles_overview'),
+      %li= link_to t('.articles_overview'), new_finance_order_path(order_id: @order.id, view: 'articles_overview'),
         remote: true
 
 %section#results

@@ -1,16 +1,16 @@
 %table.ordered-articles.table.table-striped
   %thead
     %tr
-      %th= sort_link_helper "Artikel", "name"
-      %th= sort_link_helper "Nr.", "order_number"
-      %th Menge
-      %th GebGr * Einheit
-      %th Netto
-      %th Brutto
-      %th MwSt
-      %th Pfand
+      %th= sort_link_helper t('.article'), "name"
+      %th= sort_link_helper t('.number'), "order_number"
+      %th= t('.amount')
+      %th= t('.amount_per_unit')
+      %th= t('.net')
+      %th= t('.gross')
+      %th= t('.tax')
+      %th= t('.refund')
       %th{:colspan => "2"}
-        = link_to "Artikel hinzufügen", new_finance_order_order_article_path(@order), remote: true,
+        = link_to t('.add_article'), new_finance_order_order_article_path(@order), remote: true,
           class: 'btn btn-small'
   %tbody#result_table
     - for order_article in @articles

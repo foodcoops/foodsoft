@@ -11,4 +11,4 @@
           %td= format_subject(message, 130)
           %td= h(message.sender_name)
           %td= format_time(message.created_at)
-          %td= link_to 'Antworten', new_message_path(:message => {:reply_to => message.id}), class: 'btn'
+          %td= link_to t('.reply'), new_message_path(:message => {:reply_to => message.id}), class: 'btn'

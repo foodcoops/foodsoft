@@ -75,12 +75,9 @@ class Task < ActiveRecord::Base
   # and makes the users responsible for the task
   # TODO: check for maximal number of users
   def user_list=(ids)
-    list = ids.split(",")
+    list = ids.split(",").map(&:to_i)
     new_users = (list - users.collect(&:id)).uniq
     old_users = users.reject { |user| list.include?(user.id) }
-    
-    logger.debug "[debug] New users: #{new_users}"
-    logger.debug "Old users: #{old_users}"
     
     self.class.transaction do
       # delete old assignments
@@ -93,7 +90,7 @@ class Task < ActiveRecord::Base
         if user.blank?
           errors.add(:user_list)
         else
-          if  id == current_user_id
+          if  id == current_user_id.to_i
             # current_user will accept, when he puts himself to the list of users
             self.assignments.build :user => user, :accepted => true
           else

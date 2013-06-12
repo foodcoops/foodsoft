@@ -1,43 +1,43 @@
-- title "Administration"
+- title t '.title'
 
 %p
-  %i Hier kannst Du die Gruppen und Benutzerinnen der Foodsoft verwalten.
+  %i= t '.first_paragraph'
 .row-fluid
   .span6
     %section
-      %h2 Neuste Benutzerinnen
+      %h2= t '.newest_users'
       %table.table.table-striped
         %thead
           %tr
-            %th Benutzername
-            %th Name
-            %th Erstellt am
+            %th= t '.username'
+            %th= t '.name'
+            %th= t '.created_at'
         - for user in @users
           %tr{:class => cycle('even','odd', :name => 'users')}
             %td= link_to user.nick, [:admin, user]
             %td=h user.name
             %td= format_date(user.created_on)
-      = link_to 'Alle Benutzerinnen', admin_users_path
+      = link_to t('.all_users'), admin_users_path
       |
-      = link_to "Neue Benutzerin", new_admin_user_path, class: 'btn btn-primary btn-small'
+      = link_to t('.new_user'), new_admin_user_path, class: 'btn btn-primary btn-small'
   .span6
     %section
-      %h2 Neuste Gruppen
+      %h2= t '.newest_groups'
       %table.table.table-striped
         %thead
           %tr
-            %th Gruppenname
-            %th Typ
-            %th Mitglieder
+            %th= t '.groupname'
+            %th= t '.type'
+            %th= t '.members'
         - for group in @groups
           %tr{:class => cycle('even','odd', :name => 'groups')}
             %td= link_to group.name, [:admin, group]
             %td= group.class.model_name.human
             %td= group.users.size
-      = link_to 'Alle Bestellgruppen', admin_ordergroups_path
+      = link_to t('.all_ordergroups'), admin_ordergroups_path
       |
-      = link_to "Neue Bestellgruppe", new_admin_ordergroup_path, class: 'btn btn-primary btn-small'
+      = link_to t('.new_ordergroup'), new_admin_ordergroup_path, class: 'btn btn-primary btn-small'
       |
-      = link_to 'Alle Arbeitsgruppen', admin_workgroups_path
+      = link_to t('.all_workgroups'), admin_workgroups_path
       |
-      = link_to "Neue Arbeitsgruppe", new_admin_workgroup_path, class: 'btn btn-primary btn-small'
+      = link_to t('.new_workgroup'), new_admin_workgroup_path, class: 'btn btn-primary btn-small'

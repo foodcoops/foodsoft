@@ -1,29 +1,27 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Fälligkeit
-      %th Betreff
+      %th= t '.due_date'
+      %th= t '.task'
       %th{:colspan => '2'}
-        Wer machts?
-        %small (Wie viele werden noch benötigt?)
+        = t '.who'
+        %small= t '.who_hint'
   %tbody
     - tasks.each do |task|
       - done = task.done ? " done" : ""
       %tr{:class => done }
         %td= format_date(task.due_date) unless task.due_date.nil?
-        %td= link_to "#{task.name} (#{task.duration}h)", task_path(task)
+        %td= link_to t('.task_format', name: task.name, duration: task.duration), task_path(task)
         %td
           = task_assignments task
           = highlighted_required_users task
         %td
           - if !task.is_accepted?(current_user)
-            = link_to "Aufgabe übernehmen", accept_task_path(task), method: :post, class: 'btn btn-small'
-            = link_to "Aufgabe ablehnen", reject_task_path(task), method: :post, class: 'btn btn-small' if task.is_assigned?(current_user)
+            = link_to t('.accept_task'), accept_task_path(task), method: :post, class: 'btn btn-small'
+            = link_to t('.reject_task'), reject_task_path(task), method: :post, class: 'btn btn-small' if task.is_assigned?(current_user)
           - elsif !task.done
             = link_to set_done_task_path(task), method: :post, class: 'btn btn-small',
-              title: 'Aufgabe als erledigt markieren' do
-              %i.icon-ok
-              Erledigt?
+              title: t('.mark_done') do
+              %i.icon-ok= t '.done_q'
           - else
-            %i.icon-ok
-            Erledigt
+            %i.icon-ok= t '.done'

@@ -5,13 +5,13 @@
 %table.table.table-striped
   %thead
     %tr
-      %th Fälligkeitsdatum
-      %th Betreff
-      %th Verantwortliche Menschen
+      %th= t '.due_date'
+      %th= t '.task'
+      %th= t '.who'
       %th
   %tbody
     - @tasks.each do |task|
       %tr
         %td= task.due_date unless task.due_date.nil?
-        %td= link_to "#{task.name} (#{task.duration}h)", :controller => "tasks", :action => "show", :id => task
+        %td= link_to t('.task_format', name: task.name, duration: task.duration), :controller => "tasks", :action => "show", :id => task
         %td= task_assignments task

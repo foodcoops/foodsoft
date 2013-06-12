@@ -4,7 +4,7 @@ class OrderArticle < ActiveRecord::Base
   attr_reader :update_current_price
 
   belongs_to :order
-  belongs_to :article, :with_deleted => true
+  belongs_to :article
   belongs_to :article_price
   has_many :group_order_articles, :dependent => :destroy
 
@@ -93,7 +93,7 @@ class OrderArticle < ActiveRecord::Base
   end
 
   # Updates order_article and belongings during balancing process
-  def update_article_and_price!(article_attributes, price_attributes, order_article_attributes)
+  def update_article_and_price!(order_article_attributes, article_attributes, price_attributes = nil)
     OrderArticle.transaction do
       # Updates self
       self.update_attributes!(order_article_attributes)
@@ -102,20 +102,22 @@ class OrderArticle < ActiveRecord::Base
       article.update_attributes!(article_attributes)
 
       # Updates article_price belonging to current order article
-      article_price.attributes = price_attributes
-      if article_price.changed?
-        # Updates also price attributes of article if update_current_price is selected
-        if update_current_price
-          article.update_attributes!(price_attributes)
-          self.article_price = article.article_prices.first # Assign new created article price to order article
-        else
-          # Creates a new article_price if neccessary
-          # Set created_at timestamp to order ends, to make sure the current article price isn't changed
-          create_article_price!(price_attributes.merge(created_at: order.ends)) and save
-        end
+      if price_attributes.present?
+        article_price.attributes = price_attributes
+        if article_price.changed?
+          # Updates also price attributes of article if update_current_price is selected
+          if update_current_price
+            article.update_attributes!(price_attributes)
+            self.article_price = article.article_prices.first # Assign new created article price to order article
+          else
+            # Creates a new article_price if neccessary
+            # Set created_at timestamp to order ends, to make sure the current article price isn't changed
+            create_article_price!(price_attributes.merge(created_at: order.ends)) and save
+          end
 
-        # Updates ordergroup values
-        update_ordergroup_prices
+          # Updates ordergroup values
+          update_ordergroup_prices
+        end
       end
     end
   end
@@ -134,7 +136,7 @@ class OrderArticle < ActiveRecord::Base
   private
   
   def article_and_price_exist
-     errors.add(:article, "muss angegeben sein und einen aktuellen Preis haben") if !(article = Article.find(article_id)) || article.fc_price.nil?
+     errors.add(:article, I18n.t('model.order_article.error_price')) if !(article = Article.find(article_id)) || article.fc_price.nil?
   end
 
   # Associate with current article price if created in a finished order
@@ -146,7 +148,10 @@ class OrderArticle < ActiveRecord::Base
   end
 
   def update_ordergroup_prices
-    group_order_articles.each { |goa| goa.group_order.update_price! }
+    # updates prices of ALL ordergroups - these are actually too many
+    # in case of performance issues, update only ordergroups, which ordered this article
+    # CAUTION: in after_destroy callback related records (e.g. group_order_articles) are already non-existent
+    order.group_orders.each { |go| go.update_price! }
   end
 
 end

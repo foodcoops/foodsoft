@@ -10,7 +10,7 @@ module TasksHelper
   def highlighted_required_users(task)
     unless task.enough_users_assigned?
       content_tag :span, task.still_required_users, class: 'badge badge-important',
-                  title: "Es fehlen #{task.still_required_users} Mitstreiterinnen!"
+                  title: I18n.t('helpers.tasks.required_users', :count => task.still_required_users)
     end
   end
 end

@@ -7,15 +7,15 @@ class StockTakingsController < ApplicationController
 
   def new
     @stock_taking = StockTaking.new
-    StockArticle.all.each { |a| @stock_taking.stock_changes.build(:stock_article => a) }
+    StockArticle.undeleted.each { |a| @stock_taking.stock_changes.build(:stock_article => a) }
   end
 
   def create
-    create!(:notice => "Inventur wurde erfolgreich angelegt.")
+    create!(:notice => I18n.t('stock_takings.create.notice'))
   end
 
   def update
-    update!(:notice => "Inventur wurde aktualisiert.")
+    update!(:notice => I18n.t('stock_takings.update.notice'))
   end
 
   def fill_new_stock_article_form
