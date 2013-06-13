@@ -51,9 +51,7 @@
               = t '.article'
               %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
             %th= t '.unit'
-            %th
-              = t '.price'
-              %span.sorter-bar{:data => {'compare-function' => 'compareFloat', 'sort-criterion' => 'sort-by-price'}}
+            %th= t '.price'
             %th= t '.vat'
             %th
               = t '.category'
@@ -75,6 +73,9 @@
             %th= t '.quantity'
             %th= t '.actions'
         %tbody
+          -# see also the partial 'stock_change' which is used for AJAX updates!
+          -# see also the partial 'stock_change' which is used for AJAX updates!
+          -# see also the partial 'stock_change' which is used for AJAX updates!
           = f.fields_for :stock_changes do |stock_change_form|
             - stock_change = stock_change_form.object
             %tr{:id => "stock_change_stock_article_#{stock_change.stock_article.id}", :data => {:id => stock_change.stock_article.id}}

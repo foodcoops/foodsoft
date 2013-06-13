@@ -1,3 +1,6 @@
+-# see also the partial 'form' which is used for existing stock_changes when loading the edit!
+-# see also the partial 'form' which is used for existing stock_changes when loading the edit!
+-# see also the partial 'form' which is used for existing stock_changes when loading the edit!
 = fields_for "delivery[new_stock_changes][]", stock_change, validate: true do |f|
   - f.object.quantity = '' if 0 == f.object.quantity
   %tr{:id => "stock_change_stock_article_#{stock_change.stock_article.id}", :data => {:id => stock_change.stock_article.id}}
