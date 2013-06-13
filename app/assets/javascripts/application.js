@@ -10,6 +10,34 @@
 //= require_self
 //= require ordering
 
+// function for sorting DOM elements
+$.fn.sorter = (function(){
+  // Thanks to James Padolsey and Avi Deitcher
+  // http://james.padolsey.com/javascript/sorting-elements-with-jquery/#comment-29400
+  var sort = [].sort;
+  
+  return function(comparator, getSortable) {
+    getSortable = getSortable || function(){return this;};
+    
+    var sorted = sort.call(this, comparator); // sort all elements in memory
+    var prevElmt = null;
+    for(i=sorted.length-1; i>=0; --i) { // loop starting from last
+      var criterionElmt = sorted[i];
+      var curElmt = ( 'function' === typeof getSortable ) ? ( getSortable.call(criterionElmt) ) : ( criterionElmt );
+      var parent = curElmt.parentNode;
+      if (!prevElmt) {
+        parent.appendChild(curElmt); // place last element to the end
+      } else {
+        parent.insertBefore(curElmt, prevElmt); // move each element before the previous one
+      }
+      prevElmt = curElmt;
+    }
+    return sorted;
+  
+  };
+
+})();
+
 // Load following statements, when DOM is ready
 $(function() {
 
@@ -100,17 +128,74 @@ $(function() {
 
     // Use bootstrap datepicker for dateinput
     $('.datepicker').datepicker({format: 'yyyy-mm-dd', weekStart: 1, language: 'de'});
+    
+    // Init table sorting
+    var myBars = $('span.sorter-bar');
+    myBars.html('<button type="button" class="sorter-button btn btn-mini"><i class="icon-chevron-up"></i></button><button type="button" class="sorter-button btn btn-mini"><i class="icon-chevron-down"></i></button>');
+    $('button:nth-child(1)', myBars).click(function(e) {sortTable(e, false);}).attr('title', 'Sortiere aufsteigend');
+    $('button:nth-child(2)', myBars).click(function(e) {sortTable(e, true);}).attr('title', 'Sortiere absteigend (umgekehrt)');
+  
+    $('span.sorter-bar.default-sort-asc button:nth-child(1)').trigger('click');
+    $('span.sorter-bar.default-sort-desc button:nth-child(2)').trigger('click');
 });
 
+// parse a string to a float
+function myFloatParse(input) {
+  var number = input.trim();
+  number = number.split(' ')[0];
+  number = number.replace(',', '.');
+  number = parseFloat(number, 10);
+  return number;
+}
+
+// compare two elements interpreted as text
+function compareText(a, b) {
+  return $.trim(a.textContent).toLowerCase() < $.trim(b.textContent).toLowerCase() ? -1 : 1;
+}
+
+// compare two elements interpreted as float
+function compareFloat(a, b) {
+  a = myFloatParse( $(a).text() );
+  b = myFloatParse( $(b).text() );
+  return ( a<b ) ? ( -1 ) : ( 1 );
+}
+
+// wrapper for $.fn.sorter (see above) for sorting tables
+function sortTable(e, inverted) {
+  var sign = ( inverted ) ? ( -1 ) : ( 1 );
+  
+  var myBar = $(e.currentTarget).closest('.sorter-bar'); // bar containing the clicked up/down arrow
+  var sortCriterion = myBar.data('sortCriterion'); // class name of (usually td) elements which define the order
+  var compareFunction = myBar.data('compareFunction'); // function to compare two element contents for ordering
+  var sortElement = myBar.data('sortElement'); // name of function which returns the movable element (default: 'thisParent')
+  var myTable = myBar.closest('table'); // table to sort
+  
+  sortElement = ( 'undefined' === typeof sortElement ) ? ( function() {return this.parentNode;} ) : ( window[sortElement] ); // is this dirty?
+  
+  $('.' + sortCriterion, myTable).sorter(
+    function(a, b) {
+      return sign*window[compareFunction](a, b); // again dirty?
+    },
+    sortElement
+  );
+  
+  $('.sorter-button', myTable).removeClass('btn-primary active');
+  $(e.currentTarget).addClass('btn-primary active');
+}
+
+// resort a certain table (e.g. after DOM update)
+function updateSort(whichTable) {
+  $('.sorter-bar button.active.btn-primary', whichTable).trigger('click');
+}
 
 // gives the row an yellow background
 function highlightRow(checkbox) {
-    var row = checkbox.closest('tr');
-    if (checkbox.is(':checked')) {
-        row.addClass('selected');
-    } else {
-        row.removeClass('selected');
-    }
+  var row = checkbox.closest('tr');
+  if (checkbox.is(':checked')) {
+    row.addClass('selected');
+  } else {
+    row.removeClass('selected');
+  }
 }
 
 // Use with auto_complete to set a unique id,

@@ -1,0 +1,14 @@
+$('div.container-fluid').prepend(
+  '<%= j(render(:partial => 'shared/alert_success', :locals => {:alert_message => t('.notice', :name => @stock_article.name)})) %>'
+);
+
+$('#stock_articles_for_adding tr').removeClass('success');
+
+$('#stock_articles_for_adding tbody').append(
+  $(
+    '<%= j(render(:partial => 'stock_article_for_adding', :locals => {:article => @stock_article})) %>'
+  ).addClass('success')
+);
+updateSort('#stock_articles_for_adding');
+
+$('#modalContainer').modal('hide');

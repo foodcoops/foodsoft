@@ -1,0 +1,35 @@
+$('div.container-fluid').prepend(
+  '<%= j(render(:partial => 'shared/alert_success', :locals => {:alert_message => t('.notice', :name => @stock_article.name)})) %>'
+);
+
+(function() {
+  $('#stock_articles_for_adding tr').removeClass('success');
+  
+  var old_entry = $('#stock_article_<%= @stock_article.id %>');
+  var unavailable = old_entry.hasClass('unavailable');
+  var stock_article_for_adding = $(
+    '<%= j(render(:partial => 'stock_article_for_adding', :locals => {:article => @stock_article, :delivery => @delivery})) %>'
+  ).addClass('success');
+  
+  if(unavailable) {
+    stock_article_for_adding.addClass('unavailable');
+    $('.button-add-stock-change', stock_article_for_adding).attr('disabled', 'disabled');
+  }
+  
+  old_entry.replaceWith(stock_article_for_adding);
+  updateSort('#stock_articles_for_adding');
+  
+  $('#stock_changes tr').removeClass('success');
+  
+  var stock_change_entry = $('#stock_change_stock_article_<%= @stock_article.id %>');
+  $('.stock_article_name', stock_change_entry).text('<%= j(@stock_article.name) %>');
+  $('.price-per-unit', stock_change_entry).text(
+    '<%= "#{j(number_to_currency(@stock_article.price))}/#{j(number_to_currency(@stock_article.unit))}" %>'
+  );
+  
+  stock_change_entry.addClass('success');
+  
+  updateSort('#stock_changes');
+})();
+
+$('#modalContainer').modal('hide');

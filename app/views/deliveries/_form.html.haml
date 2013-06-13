@@ -2,42 +2,94 @@
   :javascript
     $(function() {
       $('.destroy_stock_change').live('click', function() {
-        $(this).prev('input').val('1').parent().hide();
+        $(this).prev('input').val('1'); // check for destruction
+        
+        var stock_change = $(this).closest('tr');
+        stock_change.hide(); // do not remove (to ensure destruction)
+        unmark_article_unavailable_for_delivery( stock_change.data('id') );
         return false;
       });
 
       $('.remove_new_stock_change').live('click', function() {
-        $(this).parent().remove();
+        var stock_change = $(this).closest('tr');
+        stock_change.remove();
+        unmark_article_unavailable_for_delivery( stock_change.data('id') );
         return false;
       })
     });
+    function mark_article_unavailable_for_delivery(stock_article_id) {
+      var articleTr = $('#stock_article_' + stock_article_id);
+      articleTr.addClass('unavailable');
+      $('.button-add-stock-change', articleTr).attr('disabled', 'disabled');
+    }
+    function unmark_article_unavailable_for_delivery(stock_article_id) {
+      var articleTr = $('#stock_article_' + stock_article_id);
+      articleTr.removeClass('unavailable');
+      $('.button-add-stock-change', articleTr).removeAttr('disabled');
+    }
+    function is_article_unavailable_for_delivery(stock_article_id) {
+      var articleTr = $('#stock_article_' + stock_article_id);
+      return articleTr.hasClass('unavailable');
+    }
 
-- content_for :javascript do
-  :javascript
-    $(function() {
-      $('#add-stock-change').click();
-    });
-
-.well.well-small
-  .btn-toolbar
-    .btn-group
-      = link_to t('.new_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), remote: true, class: 'btn'
-
-= simple_form_for [@supplier, @delivery], validate: true do |f|
+-# remove validate true for the form, because it disabled html5 validation
+-# is there anything broken with the simple_form validation? (bootstrap issue?)
+= simple_form_for [@supplier, @delivery] do |f|
   = f.hidden_field :supplier_id
-  #stock_changes
-    = f.fields_for :stock_changes do |stock_change_form|
-      %p
-        = stock_change_form.select :stock_article_id, stock_articles_for_select(@supplier)
-        Menge
-        = stock_change_form.text_field :quantity, size: 5, autocomplete: 'off'
-        = stock_change_form.hidden_field :_destroy
-        = link_to t('.remove_article'), "#", class: 'destroy_stock_change'
-  %p
-    = link_to t('.add_article'), {action: 'add_stock_change', supplier_id: @supplier.id}, :id => 'add-stock-change', remote: true, class: 'btn btn-small btn-primary'
-  %hr/
-  = f.input :delivered_on, as: :date_picker
-  = f.input :note, input_html: {size: '35x4'}
-  .form-actions
-    = f.submit class: 'btn btn-primary'
-    = link_to t('ui.or_cancel'), supplier_deliveries_path(@supplier)
+  .row-fluid
+      
+    .span6
+      %h2 #{t '.title_select_stock_articles'}
+      .well.well-small
+        .btn-toolbar
+          .btn-group
+            = link_to t('.new_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), remote: true, class: 'btn'
+      %table.table.table-condensed.table-hover#stock_articles_for_adding
+        %thead
+          %tr
+            %th
+              = t '.article'
+              %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
+            %th= t '.unit'
+            %th
+              = t '.price'
+              %span.sorter-bar{:data => {'compare-function' => 'compareFloat', 'sort-criterion' => 'sort-by-price'}}
+            %th= t '.vat'
+            %th
+              = t '.category'
+              %span.sorter-bar{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-category'}}
+            %th= t '.actions'
+        %tbody
+          - for article in stock_articles_for_table(@supplier)
+            = render :partial => 'stock_article_for_adding', :locals => {:article => article}
+    
+    .span6
+      %h2 #{t '.title_fill_quantities'}
+      %table.table.table-condensed#stock_changes
+        %thead
+          %tr
+            %th
+              = t '.article'
+              %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
+            %th= t '.price_per_unit'
+            %th= t '.quantity'
+            %th= t '.actions'
+        %tbody
+          = f.fields_for :stock_changes do |stock_change_form|
+            - stock_change = stock_change_form.object
+            %tr{:id => "stock_change_stock_article_#{stock_change.stock_article.id}", :data => {:id => stock_change.stock_article.id}}
+              %td.sort-by-name
+                = stock_change_form.hidden_field :stock_article_id
+                %span.stock_article_name= stock_change.stock_article.name
+              %td.numeric.price-per-unit #{number_to_currency stock_change.stock_article.price}/#{stock_change.stock_article.unit}
+              %td= stock_change_form.text_field :quantity, :size => 5, :autocomplete => 'off'
+              %td
+                = stock_change_form.hidden_field :_destroy
+                = link_to t('.remove_article'), "#", :class => 'destroy_stock_change btn btn-small'
+      
+      %h2 #{t '.title_finish_delivery'}
+      = f.input :delivered_on, as: :date_picker
+      = f.input :note, input_html: {size: '35x4'}
+      .form-actions
+        = f.submit class: 'btn btn-primary'
+        = link_to t('ui.or_cancel'), supplier_deliveries_path(@supplier)

@@ -102,9 +102,13 @@ Foodsoft::Application.routes.draw do
       get :shared_suppliers, :on => :collection
 
       resources :deliveries do
-        post :drop_stock_change, :on => :member
+        post :add_stock_change, :on => :collection
+        
         get :new_stock_article, :on => :collection
         post :add_stock_article, :on => :collection
+        
+        get :edit_stock_article, :on => :collection
+        put :update_stock_article, :on => :collection
       end
 
       resources :articles do

@@ -416,8 +416,10 @@ de:
       second: Sekunden
       year: Jahr
   deliveries:
+    add_stock_change:
+      how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
     add_stock_article:
-      notice: Neuer Lagerartikel »%{name}« gespeichert. Zum Auswählen bitte erneut einen Lagerartikel der Lieferung hinzufügen.
+      notice: Neuer Lagerartikel »%{name}« gespeichert.
     create:
       notice: Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!
     destroy:
@@ -425,14 +427,22 @@ de:
     edit:
       title: Lieferung bearbeiten
     form:
+      actions: Optionen
       add_article: Lagerartikel der Lieferung hinzufügen
+      article: Artikel
+      category: Kategorie
       new_stock_article: Neuen Lagerartikel anlegen
-      new_article:
-        search: Suche nach Artikeln aus dem <i>%{supplier}</i> Katalog
-        title: Neuen Lagerartikel anlegen
       note_new_article: Ist ein Artikel noch nicht in der Lagerverwaltung, muss er erst %{new_link} werden.
       note_new_article_link: neu angelegt
+      price: Preis (netto)
+      price_per_unit: Preis/Einheit
+      quantity: Menge
       remove_article: Artikel aus Lieferung entfernen
+      title_fill_quantities: 2. Liefermenge angeben
+      title_finish_delivery: 3. Lieferung abschließen
+      title_select_stock_articles: 1. Lagerartikel auswählen
+      unit: Einheit
+      vat: MwSt
     index:
       confirm_delete: Bist Du sicher?
       new_delivery: Neue Lieferung für %{supplier} anlegen
@@ -452,11 +462,17 @@ de:
       title: Lieferung anzeigen
       title_articles: Artikel
       unit: Einheit
+    stock_article_for_adding:
+      action_add_to_delivery: 'Liefern'
+      action_edit: 'Bearbeiten'
+      action_other_price: 'Anderer Preis'
     stock_change:
       remove_article: Artikel aus Lieferung entfernen
     suppliers_overview: Lieferantenübersicht
     update:
       notice: Lieferung wurde aktualisiert.
+    update_stock_article:
+      notice: Lagerartikel »%{name}« aktualisiert.
   documents:
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung

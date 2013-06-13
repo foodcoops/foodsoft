@@ -14,4 +14,8 @@ module DeliveriesHelper
     supplier.stock_articles.undeleted.reorder('articles.name ASC').map {|a| ["#{a.name} (#{number_to_currency a.price}/#{a.unit})", a.id] }
   end
 
+  def stock_articles_for_table(supplier)
+    supplier.stock_articles.undeleted.reorder('articles.name COLLATE NOCASE ASC')
+  end
+
 end

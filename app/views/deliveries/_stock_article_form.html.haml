@@ -1,5 +1,8 @@
-= simple_form_for stock_article, url: add_stock_article_supplier_deliveries_path(supplier), remote: true, validate: true do |f|
+- url = ( stock_article.new_record? ) ? ( add_stock_article_supplier_deliveries_path(@supplier) ) : ( update_stock_article_supplier_deliveries_path(@supplier) )
+= simple_form_for stock_article, url: url, remote: true, validate: true do |f|
   = f.hidden_field :supplier_id
+  - unless stock_article.new_record?
+    = f.hidden_field :id
   .modal-header
     = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
     %h3= t 'activerecord.models.stock_article'
@@ -12,7 +15,7 @@
       = f.input :tax
       = f.input :deposit
     - else
-      = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('.form.price_hint')
+      = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('stockit.form.price_hint')
     = f.association :article_category
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
