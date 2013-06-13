@@ -108,7 +108,7 @@ class Ordergroup < Group
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
-    id = new_record? ? '' : self.id
+    id = new_record? ? nil : self.id
     group = Ordergroup.with_deleted.where('groups.id != ? AND groups.name = ?', id, name).first
     if group.present?
       message = group.deleted? ? :taken_with_deleted : :taken
@@ -118,7 +118,7 @@ class Ordergroup < Group
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
-    id = new_record? ? '' : self.id
+    id = new_record? ? nil : self.id
     group = Ordergroup.where('groups.id != ? AND groups.name = ?', id, name).first
     if group.present?
       message = group.deleted? ? :taken_with_deleted : :taken
