@@ -190,11 +190,11 @@ de:
         first_paragraph: Neue Mitglieder kannst du %{url} einladen.
         here: hier
       index:
-        first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
+        first_paragraph: Hier kannst du %{url} anlegen, bearbeiten und löschen.
         new_workgroup: Neue Arbeitsgruppe anlegen
         new_workgroups: neue Arbeitsgruppen
         ordergroup: Bestellgruppe
-        second_paragraph: ! 'Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>: Eine %{url} hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. ''Soritiergruppe'') koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten. Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.'
+        second_paragraph: ! 'Beachte dabei den Unterschied zwischen <em>Gruppe</em> und <em>Bestellgruppe</em>: eine <em>%{url}</em> hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. ''Soritiergruppe'') koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten. Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.'
         title: Arbeitsgruppen
       new:
         title: Arbeitsgruppe anlegen
@@ -302,7 +302,7 @@ de:
         body: ! 'Folgende Artikel wurden ausgelistet und werden <b>gelöscht</b>:'
         body_skip: Es müssen keine Artikel gelöscht werden.
         title: Auslisten ...
-      price_short: Price
+      price_short: Preis
       submit: Alle löschen/aktualisieren
       title: Artikel mit externer Datenbank synchronisieren
       unit_quantity_short: GebGr
@@ -614,8 +614,9 @@ de:
         close: direkt schließen
         confirm: Wirklich die Bestellung schließen setzen?
         end: Ende
-        last_edited_by: zuletzt bearbeitet von
-        name: Name
+        ended: beendet
+        last_edited_by: Zuletzt bearbeitet von
+        name: Lieferantin
         no_closed_orders: derzeit gibt es keine beendeten Bestellungen
         state: Status
       summary:
