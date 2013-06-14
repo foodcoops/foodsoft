@@ -1624,7 +1624,11 @@ en:
           one: Workgroup
           other: Workgroups
       settings:
-      notify:
+        settings_groups: Preferences
+        settings_group:
+          profile: Porfile
+          notify: Notifications
+          messages: Messages
         profile:
           language: Language
           phone_is_public: Phone number is visible for other members.

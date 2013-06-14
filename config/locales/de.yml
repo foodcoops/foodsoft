@@ -1621,6 +1621,11 @@ de:
           one: Arbeitsgruppe
           other: Arbeitsgruppen
       settings:
+        settings_groups: Einstellungen
+        settings_group:
+          profile: Porfil
+          notify: Benachrichtigungen
+          messages: Nachrichten
         profile:
           language: Sprache
           phone_is_public: Telefon ist für Mitglieder sichtbar
