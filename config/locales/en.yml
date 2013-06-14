@@ -1161,14 +1161,6 @@ en:
       redirect: Redirect to [[%{title}]]...
     user:
       no_ordergroup: no order group
-      notify:
-        email_is_public: Email is visible for other members.
-        name_is_public: Name is visible for other members.
-        negative_balance: inform me when by order group has a negative balance.
-        order_finished: Inform me about my order result (when the order is closed).
-        phone_is_public: Phone number is visible for other members.
-        send_as_email: Receive messages as emails.
-        upcoming_tasks: Remind me of upcoming tasks.
   navigation:
     admin:
       home: Overview
@@ -1506,6 +1498,12 @@ en:
   simple_form:
     error_notification:
       default_message: Errors were found. Please check the form.
+    options:
+      settings:
+        profile:
+          language:
+            de: German
+            en: English
     hints:
       article:
         unit: ! 'For example: KG or 1L or 500g'
@@ -1625,6 +1623,19 @@ en:
         workgroup:
           one: Workgroup
           other: Workgroups
+      settings:
+      notify:
+        profile:
+          language: Language
+          phone_is_public: Phone number is visible for other members.
+          email_is_public: Email is visible for other members.
+          name_is_public: Name is visible for other members.
+        notify:
+          order_finished: Inform me about my order result (when the order is closed).
+          negative_balance: inform me when my order group has a negative balance.
+          upcoming_tasks: Remind me of upcoming tasks.
+        messages:
+          send_as_email: Receive messages as emails.
       workgroup:
         next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
         role_admin: Administration
