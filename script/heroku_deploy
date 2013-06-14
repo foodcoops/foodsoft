@@ -81,9 +81,8 @@ else
 		Foodsoft::Application.config.secret_token = '`openssl rand -hex 128`'
 	EOF
 fi
-# special environment hooks
+# configure localeapp, manually to include environment
 if [ "$LOCALEAPP_KEY" ]; then
-	# configure localeapp, manually to include environment
 	cat >config/initializers/localeapp.rb <<EOF
 require 'localeapp/rails'
 
@@ -93,7 +92,8 @@ Localeapp.configure do |config|
   config.polling_environments = ['$RAILS_ENV']
 end
 EOF
-	bundle exec localeapp pull
+	# also do not cache so we get locale updates
+	sed -i 's|config\.cache_classes\s*=.*|config.cache_classes = false|' config/environments/${RAILS_ENV}.rb
 fi
 # TODO add more extensive database seed
 
@@ -107,6 +107,11 @@ if !heroku run rake db:version >/dev/null 2>&1; then
 else
 	heroku run rake db:migrate
 fi
+# get full translations so update works
+[ "$LOCALEAPP_KEY" ] && heroku run localeapp pull
+
+# restart just to be sure
+heroku ps:restart
 
 # return to original branch
 git checkout -q "$ORIG_BRANCH" && git stash pop -q
