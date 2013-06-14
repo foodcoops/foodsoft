@@ -428,12 +428,9 @@ de:
       title: Lieferung bearbeiten
     form:
       actions: Optionen
-      add_article: Lagerartikel der Lieferung hinzufügen
       article: Artikel
       category: Kategorie
       new_stock_article: Neuen Lagerartikel anlegen
-      note_new_article: Ist ein Artikel noch nicht in der Lagerverwaltung, muss er erst %{new_link} werden.
-      note_new_article_link: neu angelegt
       price: Preis (netto)
       price_per_unit: Preis/Einheit
       quantity: Menge
