@@ -1,0 +1,1850 @@
+en:
+  activemodel:
+    errors:
+      format: ! '%{attribute} %{message}'
+      general: A problem has occured.
+      general_again: A problem has occured. Please try again.
+      general_msg: ! 'A problem has occured: %{msg}'
+      messages:
+        accepted: has to be accepted
+        blank: has to be entered
+        confirmation: does not match the confirmation
+        empty: has to be entered
+        equal_to: has to be exactly %{count}
+        even: has to be an even number
+        exclusion: is not available
+        greater_than: has to be greater than %{count}
+        greater_than_or_equal_to: has to be greater than or equal to %{count}
+        inclusion: is not a valid value
+        invalid: is invalid
+        less_than: has to be less than %{count}
+        less_than_or_equal_to: has to be less than or equal to %{count}
+        not_a_number: is not a number
+        not_an_integer: must be a whole number
+        odd: must be odd
+        record_invalid: ! 'validation failed: %{errors}'
+        taken: is already taken
+        taken_with_deleted: is already taken (deleted group)
+        too_long: is too long (no more than %{count} characters)
+        too_short: is too short (use more than %{count} characters)
+        wrong_length: is the wrong length (has to have exactly %{count} characters)
+      template:
+        body: ! 'Please check the following fields:'
+        header:
+          one: ! 'Could not save %{model}: an error.'
+          other: ! 'Could not save %{model}: %{count} errors.'
+  activerecord:
+    attributes:
+      article:
+        article_category: article category
+        availability: Is article available?
+        deposit: deposit
+        gross_price: gross price
+        price: price
+        tax: VAT
+        unit: unit
+        unit_quantity: unit quantity
+      financial_transaction:
+        amount: amount
+        note: note
+      stock_article:
+        price: Price
+      user:
+        first_name: First name
+        password: Password
+    errors:
+      format: ! '%{attribute} %{message}'
+      general: A problem has occured.
+      general_again: A problem has occured. Please try again.
+      general_msg: ! 'A problem has occured: %{msg}'
+      has_many_left: is still associated with a %{collection}!
+      messages:
+        accepted: has to be accepted
+        blank: has to be filled
+        confirmation: does not match the confirmation
+        empty: has to be entered
+        equal_to: has to be exactly %{count}
+        even: has to be an even number
+        exclusion: is not available
+        greater_than: has to be greater than %{count}
+        greater_than_or_equal_to: has to be greater than or equal to %{count}
+        inclusion: is not a valid value
+        invalid: is invalid
+        less_than: has to be less than %{count}
+        less_than_or_equal_to: has to be less than or equal to %{count}
+        not_a_number: is not a number
+        not_an_integer: must be a whole number
+        odd: must be odd
+        record_invalid: ! 'validation failed: %{errors}'
+        taken: is already taken
+        taken_with_deleted: is already taken (deleted group)
+        too_long: is too long (no more than %{count} characters)
+        too_short: is too short (use more than %{count} characters)
+        wrong_length: is the wrong length (has to have exactly %{count} characters)
+      template:
+        body: ! 'Please check the following fields:'
+        header:
+          one: ! 'Could not save %{model}: an error.'
+          other: ! 'Could not save %{model}: %{count} errors.'
+    models:
+      article: Article
+      article_category: Article category
+      delivery: Delivery
+      financial_transaction: Financial transaction
+      invoice: Invoice
+      message: Message
+      order: Order
+      order_article: Order article
+      order_comment: Order comment
+      ordergroup: Ordergroup
+      stock_article: Stock article
+      stock_taking: Stock taking
+      supplier: Supplier
+      task: Task
+      user: User
+      workgroup: Workgroup
+  admin:
+    access_to: access to
+    actions: Actions
+    base:
+      index:
+        all_ordergroups: All ordergroups
+        all_users: All users
+        all_workgroups: All workgroups
+        created_at: created at
+        first_paragraph: Here you can administer Foodsoft groups and users.
+        groupname: group name
+        members: members
+        name: name
+        new_ordergroup: New ordergroup
+        new_user: New user
+        new_workgroup: New workgroup
+        newest_groups: newest groups
+        newest_users: newest users
+        title: Administration
+        type: type
+        username: username
+    confirm: Do you really want to delete %{name}?
+    ordergroups:
+      destroy:
+        error: ! 'Ordergroup could not be deleted: %{error}'
+        notice: Ordergroup was deleted
+      edit:
+        title: Edit ordergroup
+      form:
+        first_paragraph: You can invite new members %{url}.
+        here: here
+      index:
+        first_paragraph: Here you can add %{url}, and edit or delete groups.
+        new_ordergroup: Add new ordergroup
+        new_ordergroups: new ordergroups
+        second_paragraph: ! 'Consider the difference between <em>group</em> and <em>ordergroup</em>: An ordergroup has an account and can order food. In a <em>%{url}</em> (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
+        title: Ordergroups
+        workgroup: workgroup
+      new:
+        title: Create ordergroup
+      ordergroups:
+        address: Address
+        contact: Contact
+        members: Members
+        name: Name
+      show:
+        confirm: Are you sure?
+        edit: Edit group/members
+        send_message: Send message
+        title: Ordergroup %{name}
+    search_placeholder: name ..
+    users:
+      edit:
+        title: Edit user
+      index:
+        first_paragraph: Here you can %{url}, edit and delete users.
+        new_user: Create new user
+        new_users: create new
+        title: User admin
+      new:
+        title: Create new user
+      show:
+        confirm: Do you really want to kick out %{user}?
+        email: Email
+        groupabos: Group subscriptions
+        member_since: Member since %{time}
+        name: Name
+        nick: Nick
+        person: Person
+        phone: Phone
+        preference: Preferences
+        send_message: Send message
+      users:
+        email: email
+        last_login: last login
+        login: login
+        name: name
+    workgroups:
+      destroy:
+        error: ! 'Workgroup could not be deleted: %{error}'
+        notice: Workgroup was deleted
+      edit:
+        title: Edit workgroup
+      form:
+        first_paragraph: You can invite new members %{url}.
+        here: here
+      index:
+        first_paragraph: Here you can create %{url}, edit and delete them.
+        new_workgroup: Create new workgroup
+        new_workgroups: new workgroups
+        ordergroup: ordergroup
+        second_paragraph: ! 'Consider the difference between a <em>workgroup</em> and an <em>ordergroup</em>: an <em>%{url}</em> has an account and can order food. In a workgroup (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
+        title: Workgroups
+      new:
+        title: Create workgroup
+      show:
+        confirm: Are you sure?
+        edit: Edit group/members
+        title: Workgroup %{name}
+      workgroups:
+        members: members
+        name: name
+  article_categories:
+    create:
+      notice: Category was stored
+    destroy:
+      error: ! 'Category could not be deleted: %{message}'
+    edit:
+      title: Edit category
+    index:
+      confirm_delete: Are you sure?
+      new: Add new category
+      title: Article categories
+    new:
+      title: Add new category
+    update:
+      notice: Category was updated
+  articles:
+    article:
+      confirm_delete: Are you sure?
+      last_update: ! 'last updated: %{last_update} | gross: %{gross_price}'
+    articles:
+      confirm_delete: Do you really want to delete all selected articles?
+      option_available: Make articles available
+      option_delete: Delete article
+      option_not_available: Make articles unavailable
+      option_select: Choose special offer ...
+      price_netto: Price
+      unit_quantity_desc: Unit quantity
+      unit_quantity_short: Quantity
+    controller:
+      create_from_upload:
+        notice: ! '%{count} new articles were saved.'
+      error_invalid: There are errors in articles
+      error_nosel: No articles selected
+      error_parse: ! '%{msg} ... in line %{line}'
+      error_update: ! 'An error occured when updating article ''%{article}'': %{msg}'
+      parse_upload:
+        notice: ! '%{count} articles were succesfully analysed.'
+      sync:
+        notice: Catalog is up to date
+        shared_alert: ! '%{supplier} is not linked to an external database'
+      update_all:
+        notice: All articles and prices were updated.
+      update_sel:
+        notice_avail: All selected articles were set to be available.
+        notice_destroy: All selected articles were deleted.
+        notice_noaction: No action specified!
+        notice_unavail: All selected articles were set to be unavailable.
+      update_sync:
+        notice: All articles and prices were updated.
+    destroy_active_article:
+      drop: delete
+      note: ! '%{article} is used in current orders and can not be deleted Please first ... the article from orders %{drop_link}.'
+    edit_all:
+      note: ! 'Mandatory fields are: name, unit, (net) price and order number.'
+      submit: Update all articles
+      title: Edit all articles from %{supplier}
+      warning: ! 'Warning: all articles will be updated!'
+    edit_all_table:
+      available_desc: available
+      available_short: avail
+      order_number_desc: Order number
+      order_number_short: Ordernr.
+      price_desc: Net price
+      price_short: Price
+      unit_quantity_desc: Unit quantity
+      unit_quantity_short: Quantity
+    form:
+      title: Add new article
+    import_search_results:
+      action_import: import
+      already_imported: already imported
+      not_found: No articles found
+    index:
+      change_supplier: Change supplier ...
+      edit_all: Edit all
+      ext_db:
+        import: Search/Import
+        sync: Synchronise
+        title: External databank
+      import:
+        placeholder: Name ...
+        restrict_region: Restrict to region only
+        title: Import article
+      new: New article
+      new_order: Create new order
+      search_placeholder: Name ...
+      title: Articles from %{supplier} (%{count})
+      upload: Upload articles
+    model:
+      error_in_use: ! '%{article} can not be deleted because the article is part of a current order!'
+      error_nosel: You have selected no articles
+    parse_upload:
+      body: <p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>
+      outlist:
+        body: ! 'The following articles were outlisted and <b>deleted</b>:'
+        body_skip: No articles to delete.
+        title: Outlist ...
+      price_short: Price
+      submit: Delete/update all
+      title: Synchronize articles with external database
+      unit_quantity_short: unit quantity
+      update:
+        body: ! '<p><i>Every article is shown twice. The old values are gray and contain the current values.</i></p>
+
+          <p><i>Differences with the old articles are marked yellow.</i></p>'
+        title: Update ...
+        update_msg: ! 'Articles must be updated:'
+    upload:
+      body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
+      fields:
+        season_amount: Scaled amount
+        season_price: Scaled price
+        status: Status (x=skip)
+      file_label: Please choose a compatible file
+      submit: Upload file
+      title: ! '%{supplier} / upload articles'
+  date:
+    abbr_day_names:
+    - Su
+    - Mo
+    - Tu
+    - We
+    - Th
+    - Fr
+    - Sa
+    abbr_month_names:
+    - 
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%e %B %Y'
+      short: ! '%e %b'
+    month_names:
+    - 
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about one hour
+        other: about %{count} hours
+      about_x_months:
+        one: about one month
+        other: about %{count} months
+      about_x_years:
+        one: about one year
+        other: about %{count} years
+      almost_x_years:
+        one: almost one year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than one minute
+        other: less then %{count} minutes
+      less_than_x_seconds:
+        one: less than a second
+        other: less than %{count} seconds
+      over_x_years:
+        one: more then a year
+        other: more than %{count} year
+      x_days:
+        one: one day
+        other: ! '%{count} days'
+      x_minutes:
+        one: one minute
+        other: ! '%{count} minutes'
+      x_months:
+        one: one month
+        other: ! '%{count} months'
+      x_seconds:
+        one: eine Sekunde
+        other: ! '%{count} seconds'
+    prompts:
+      day: day
+      hour: hours
+      minute: minutes
+      month: months
+      second: seconds
+      year: years
+  deliveries:
+    create:
+      notice: Delivery was created. Please don’t forget to create invoice!
+    destroy:
+      notice: Delivery was deleted.
+    edit:
+      title: Edit suppliers
+    form:
+      add_article: Add stock article to delivery
+      new_article:
+        search: Search for articles in the <i>%{supplier}</i> catalogue
+        title: Create new stock article
+      note_new_article: When an article is not yet in the inventory, you have to %{new_link} it first.
+      note_new_article_link: create
+      remove_article: Remove article from delivery
+    index:
+      confirm_delete: Are you sure?
+      new_delivery: ! 'Create new delivery for %{supplier} '
+      title: ! '%{supplier}/deliveries'
+    invoice_amount: Invoice amount
+    invoice_net_amount: Invoice net amount
+    new:
+      title: New delivery from %{supplier}
+    show:
+      amount: Amount
+      article: Article
+      price: Netprice
+      sum: Sum
+      sum_diff: Gross - adjusted invoice ammount
+      sum_gross: Gross sum
+      sum_net: Net sum
+      title: Show delivery
+      title_articles: Article
+      unit: Unit
+    stock_change:
+      remove_article: Remove articles from delivery
+    suppliers_overview: Supplier overview
+    update:
+      notice: Delivery was updated.
+  documents:
+    order_by_articles:
+      filename: Order %{name}-%{date} - by articles
+      rows:
+      - Order group
+      - Amount
+      - Price
+      title: ! 'Order sorted by articles: %{name}, closed at %{date}'
+    order_by_groups:
+      filename: Order %{name}-%{date} - by group
+      rows:
+      - Article
+      - Amount
+      - Price
+      - Unit Quantity
+      - Unit
+      - Sum
+      sum: Sum
+      title: ! 'Order sorted by group: %{name}, closed at %{date}'
+    order_fax:
+      filename: Order %{name}-%{date} - Fax
+      rows:
+      - Order Number
+      - Amount
+      - Name
+      - Barrel
+      - Unit
+      - Price/Unit
+    order_matrix:
+      filename: Order %{name}-%{date} - sorting matrix
+      heading: Article overview
+      rows:
+      - Article
+      - Unit
+      - Barrel
+      - FC-Price
+      - Amount
+      title: ! 'Order sorting matrix: %{name}, closed at %{date}'
+      total: ! '%{count} articles in total'
+  errors:
+    format: ! '%{attribute} %{message}'
+    general: A problem has occured.
+    general_again: A problem has occured. Please try again.
+    general_msg: ! 'A problem has occured: %{msg}'
+    messages:
+      accepted: has to be accepted
+      blank: has to be filled
+      confirmation: does not match the confirmation
+      empty: has to be entered
+      equal_to: has to be exactly %{count}
+      even: has to be an even number
+      exclusion: is not available
+      greater_than: has to be greater than %{count}
+      greater_than_or_equal_to: has to be greater than or equal to %{count}
+      inclusion: is not a valid value
+      invalid: is invalid
+      less_than: has to be less than %{count}
+      less_than_or_equal_to: has to be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be a whole number
+      odd: must be odd
+      record_invalid: ! 'validation failed: %{errors}'
+      taken: is already taken
+      taken_with_deleted: is already taken (deleted group)
+      too_long: is too long (no more than %{count} characters)
+      too_short: is too short (use more than %{count} characters)
+      wrong_length: is the wrong length (has to have exactly %{count} characters)
+    template:
+      body: ! 'Please check the following fields:'
+      header:
+        one: ! 'Could not save %{model}: an error.'
+        other: ! 'Could not save %{model}: %{count} errors.'
+  feedback:
+    create:
+      notice: Your feedback was sent successfully. Thanks a lot!
+    new:
+      first_paragraph: Found a bug? Suggestions? Ideas? Reviews? We are happy to hear any feedback.
+      second_paragraph: Please be aware that the Foodsoft Team is only responsible for the maintenance of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.
+      send: Send
+      title: Give feedback
+  finance:
+    balancing:
+      close:
+        alert: ! 'An error occured while accounting: %{message}'
+        notice: Order was accounted succesfully, the balance of the account was updated.
+      close_direct:
+        alert: ! 'Order can not be closed: %{message}'
+        notice: Order was closed
+      confirm:
+        clear: Close
+        first_paragraph: ! 'When the order is closed, all group accounts will be updated.<br />The accounts will be charged as follows:'
+        or_cancle: or back to accounting
+        title: Close order
+      edit_results_by_articles:
+        add_article: Add article
+        amount: Amount
+        amount_per_unit: Unit quantity * Unit
+        article: Article
+        gross: Gross
+        net: Net
+        number: Number
+        refund: Refund
+        tax: Tax
+      group_order_articles:
+        add_group: Add group
+        group: Group
+        total: Total costs
+        total_fc: Sum (FC-Price)
+        units: Units
+      index:
+        title: Closed Orders
+      invoice:
+        edit: Edit invoice
+        invoice_amount: ! 'Invoice amount:'
+        invoice_date: ! 'Invoice date:'
+        invoice_number: ! 'Invoice number:'
+        minus_refund_calculated: ! '- refund calculated:'
+        new: Create new invoice
+        new_body: ! 'Create an invoice for this order:'
+        plus_refund_credited: ! '+ refund credited:'
+        refund_adjusted_amount: ! 'amount adjusted for refund:'
+      new:
+        alert: Attention, order was already accounted
+        articles_overview: Overview of articles
+        comment_on_transaction: Here you can add a comment to your accounting.
+        comments: Comments
+        confirm_order: Close order
+        create_invoice: Create invoice
+        edit_note: Edit note
+        edit_order: Edit order
+        groups_overview: Overview of groups
+        invoice: Invoice
+        notes_and_journal: Notes/Protocol
+        summary: Summary
+        title: Accounting %{name}
+        view_options: Viewing options
+      order_article:
+        confirm: Are you sure?
+      orders:
+        clear: accounting
+        cleared: accounted (%{amount})
+        close: close directly
+        confirm: Do you really want to fully close the order?
+        end: End
+        ended: ended
+        last_edited_by: Last edited by
+        name: Supplier
+        no_closed_orders: At the moment there are no ended orders.
+        state: State
+      summary:
+        changed: Data was changed!
+        duration: From %{starts} till %{ends}
+        fc_amount: ! 'FC-amount:'
+        fc_profit: FC Profit
+        gross_amount: ! 'Gross amount:'
+        groups_amount: ! 'Group amounts:'
+        net_amount: ! 'Net amount:'
+        reload: Reload summary
+        with_extra_charge: ! 'with extra charge:'
+        without_extra_charge: ! 'without extra charge:'
+    create:
+      notice: Invoice was created
+    financial_transactions:
+      create:
+        notice: The Transaction was saved.
+      create_collection:
+        alert: ! 'An Error occured: %{error}'
+        notice: All Transactions were saved.
+      index:
+        balance: ! 'Balance of account: %{balance}'
+        last_updated_at: (last updated %{when} ago)
+        new_transaction: Create new transaction
+        search_placeholder: Search ..
+        title: Account statement for %{name}
+      new:
+        paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
+        title: New transaction
+      new_collection:
+        amount: Amount
+        new_ordergroup: Add new order group
+        note: Note
+        ordergroup: Order group
+        save: Save transaction
+        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement
+        title: Updating more accounts
+      ordergroup:
+        remove: Remove
+        remove_group: Remove group
+      transactions:
+        amount: Amount
+        date: Date
+        note: Note
+        who: Who
+    group_order_articles:
+      form:
+        amount_change_for: Change amount for %{article}
+    index:
+      amount: Amount
+      amount_fc: Amount(FC)
+      clear: To account
+      date: Date
+      end: End
+      everything_cleared: Great, everything is accounted...
+      group: Group
+      last_transactions: Last Transactions
+      note: Note
+      open_transactions: Open Transactions
+      show_all: Show all
+      supplier: supplier
+      title: Finances
+      unpaid_invoices: Unpaid invoices
+    invoices:
+      edit:
+        title: Edit invoice
+      form:
+        delivery: delivery
+        linked: This invoice is linked to a %{what_link}.
+        order: order
+      index:
+        action_new: Create new invoice
+        title: Invoices
+      invoices:
+        confirm_delete: Are you sure?
+        delivery: Delivery
+      new:
+        back: Back
+        title: Create new invoice
+      show:
+        back: Back
+        delivery: delivery
+        linked: This invoice is linked to a %{what_link}.
+        title: Invoice %{number}
+    order_articles:
+      edit:
+        title: Update article
+      new:
+        title: Add delivered article to order
+    ordergroups:
+      index:
+        new_transaction: Add new transactions
+        search_placeholder: Search ..
+        title: Manage accounts
+      ordergroups:
+        account_balance: Account Balance
+        account_statement: Account statement
+        name: Name
+        new_transaction: New transaction
+    update:
+      notice: Invoice was updated
+  foodcoop:
+    ordergroups:
+      index:
+        name: Name ...
+        only_active: Only active groups
+        only_active_desc: (have placed order at least once in the last 3 months)
+        title: Ordergroups
+      ordergroups:
+        last_ordered: Last ordered
+        name: Name
+        user: Users
+    users:
+      index:
+        body: <p>Here you can write a message to the members of your Foodcoop.</p> <p>You have to approve in your %{profile_link} that your contact details are visible.</p>
+        ph_name: Name ...
+        ph_ordergroup: Order group ...
+        profile_link: options
+        title: Users
+    workgroups:
+      edit:
+        invite_link: here
+        invite_new: You can invite new members %{invite_link}.
+        title: Edit group
+      index:
+        body: <p>Editing a group is only available to members of the group.<br/> If you want to join a group, please send the members a message. </p>
+        title: Working groups
+      workgroup:
+        edit: Edit group
+        show_tasks: Show all tasks
+  group_orders:
+    archive:
+      desc: View all %{link} here.
+      open_orders: current orders
+      title: Orders of %{group}
+      title_closed: Accounted
+      title_open: Completed/not accounted
+    create:
+      error_general: The order couldn’t be updated due to a bug.
+      error_stale: Someone else has ordered in the meantime, couldn't update the order.
+      notice: The order was saved.
+    errors:
+      closed: This order is already closed.
+      no_member: You are not a member of an order group.
+      notfound: Incorrect URL, this is not your order.
+    form:
+      action_save: Save order
+      amount: Amount
+      available: Available
+      available_funds: Available credits
+      created_by: Created by
+      ending: End
+      funds: Credit
+      last_update: Last ordered
+      manufacturer: Manufacturer
+      min_quantity: Minimum quantity
+      name: Name
+      new_funds: New account balance
+      note: Note
+      price: Price
+      sum: Sum
+      sum_amount: Current amount
+      supplier: Supplier
+      title: Orders
+      tolerance: Tolerance
+      total_sum_amount: Total amount
+      total_tolerance: Total tolerance
+      total_units: Total units
+      unit: Unit
+      unit_missing: Missing units
+      units: Units
+      units_full: Filled units
+    index:
+      closed_orders:
+        more: more...
+        title: Closed orders
+      finished_orders:
+        title: Unaccounted orders
+        total_sum: Total sum
+      funds:
+        account_balance: Account balance
+        available_funds: Available credit
+        finished_orders: Unaccounted orders
+        open_orders: Current orders
+        title: Credit
+      title: Orders overview
+    messages:
+      not_enough_apples: You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.
+    order:
+      title: Articles
+    orders:
+      ending: End
+      sum: Sum
+      supplier: Suppliers
+    show:
+      articles:
+        edit_order: Edit order
+        name: Name
+        not_ordered_msg: You didn’t place an order yet
+        order_closed_msg: Sorry, this order is closed.
+        order_nopen_title: Considering current orders of all groups
+        order_not_open: Received
+        order_now: This is your chance!
+        order_open: Available
+        ordered: Ordered
+        ordered_title: Amount + tolerance
+        show_hide: Show/hide articles not ordered
+        sum: Sum
+        title: Article overview
+        total_price: Total price
+        unit_price: Unit price
+        units: Units
+      closed_by: Accounted by %{user}
+      comment: Comment
+      comments:
+        title: Comments
+      ending: End
+      not_ordered: You didn’t order.
+      note: Note
+      order_sum: Order sum
+      sum: Sum
+      supplier: Suppliers
+      title: Your order result for %{order}
+    switch_order:
+      remaining: ! '%{remaining} remaining'
+      title: Current orders
+    update:
+      error_general: The order couldn’t be updated due to a bug.
+      error_stale: Someone else has ordered in the meantime, couldn't update the order.
+      notice: The order was saved.
+  helpers:
+    application:
+      edit_user: Edit user
+      role_admin: Admin
+      role_article_meta: Articles
+      role_finance: Finance
+      role_orders: Orders
+      role_suppliers: Suppliers
+      show_google_maps: Show it on Google maps
+      sort_by: Sort by %{text}
+      write_message: Write message
+    deliveries:
+      new_invoice: New invoice
+      show_invoice: Show invoice
+    orders:
+      option_choose: Choose supplier/stock
+      option_stock: Stock
+      order_pdf: Create PDF
+    select:
+      prompt: please select
+    submit:
+      create: save %{model}
+      invite:
+        create: send invitation
+      message:
+        create: send message
+      update: save changes
+    tasks:
+      required_users: ! '%{count} members are still needed!'
+  home:
+    apple_bar:
+      desc: ! 'This shows the proportion of completed tasks to the volume of orders for your ordergroup in comparison to the average of the Foodcoop. In practice: for every %{amount} of total orders, you should execute a task!'
+      more_info: More information
+      points: ! 'Your current apple points: %{points}'
+      warning: Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order!
+    changes_saved: Changes saved.
+    index:
+      due_date_format: ! '%A %d %b'
+      messages:
+        title: Newest Messages
+        view_all: See all messages
+      my_ordergroup:
+        funds: ! '| Available Credit:'
+        last_update: Last Update was %{when} ago
+        title: My ordergroup
+        transactions:
+          amount: Amount
+          note: Note
+          title: Last Transactions
+          view: Show account statement
+          when: When
+          where: Who
+      ordergroup:
+        title: Engagement of your ordergroup
+      tasks_move:
+        action: Take over tasks/decline tasks
+        desc: You are responsible for these tasks.
+        title: Take over tasks
+      tasks_open:
+        action: open task(s)
+        desc: There is/are %{size}
+        title: Open tasks
+      title: Homepage
+      your_tasks: Your tasks
+    no_ordergroups: You are unfortunately not a member of an ordergroup.
+    ordergroup:
+      account_summary: Account Statement
+      description: description
+      funds: ! 'Available credit:'
+      invite: Invite a new Person
+      people: People
+      search: Search ...
+      title: My ordergroup
+    ordergroup_cancelled: You cancelled membership of the group %{group}.
+    profile:
+      groups:
+        cancel: Leave group
+        cancel_confirm: Are you sure you want to leave this group?
+        invite: Invite new members
+        title: You are member of the following groups
+      title: My Profile
+      user:
+        since: ! '(member since: %{when})'
+        title: ! '%{user}'
+    start_nav:
+      admin: Administration
+      finances:
+        accounts: Update accounts
+        settle: To account orders
+        title: Finances
+      foodcoop: Foodcoop
+      members: Members
+      new_ordergroup: New ordergroup
+      new_user: New member
+      orders:
+        end: Close orders
+        overview: Overview of orders
+        title: Orders
+      products:
+        edit: Update products
+        edit_stock: Edit stock
+        edit_suppliers: Edit suppliers
+        title: Products
+      tasks: My tasks
+      title: Directly to ...
+      write_message: Write message
+  invites:
+    errors:
+      already_member: is already in use. Person is already a member of this Foodcoop.
+    modal_form:
+      body: <p>Here you can invite a person to a group <b>%{group}</b>, who is not yet a member of the foodcoop.</p> <p>After being added for the first time, the person is automatically a member of this group.</p>
+      title: Invite person
+    new:
+      action: Send invite
+      back: or go back
+      body: <p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
+    success: User was invited successfully.
+  layouts:
+    application1:
+      title: Foodsoft - %{title}
+    email:
+      footer: ! '--
+
+        Foodsoft: %{foodsoft}
+
+        Foodcoop-Homepage: %{foodcoop}
+
+        Help: %{help}
+
+'
+    foodsoft: Foodsoft
+    header:
+      feedback:
+        desc: Found a bug? Suggestions? Ideas? Review?
+        title: Feedback
+      footer: Foodsoft, open source software to manage a non-profit food coop.
+      help: Help
+      logout: Logout
+      ordergroup: My ordergroup
+      profile: Edit profile
+    logo: <span>food</span>soft
+  lib:
+    order_pdf:
+      page: Page %{number}
+  login:
+    accept_invitation:
+      body: <p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>
+      submit: Create a Foodsoft account
+      title: Invitation to %{name}
+    controller:
+      accept_invitation:
+        notice: Congratulations, your account was created. You can login now.
+      error_group_invalid: The group in which you were invited doesn’t exist anymore.
+      error_invite_invalid: Your invite is not valid (anymore).
+      error_token_invalid: Invalid or expired token. Please try again.
+      reset_password:
+        notice: If your email is registered here, you will receive a message with a link to reset your password.
+      update_password:
+        notice: Your password was updated. You can login now.
+    forgot_password:
+      body: <p>No Problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>
+      submit: Request new password
+      title: Forgot password?
+    new_password:
+      body: <p>Please fill in the new password for <b>%{user}</b></p>
+      submit: Save new password
+      title: New password
+  mailer:
+    dateformat: ! '%d %b'
+    feedback:
+      header: ! '%{user} wrote at %{date}:'
+      subject: Feedback from %{email}
+    foodsoft_message:
+      footer: ! 'Reply: %{reply_url}
+
+        See message online: %{msg_url}
+
+        Messaging options: %{profile_url}
+
+'
+    invite:
+      subject: Invitation to the Foodcoop
+      text: ! 'Hi!
+
+
+        %{user} <%{mail}> has invited you to join the group "%{group}".
+
+        To accept the invitation and to join the foodcoop please follow this link: %{link}
+
+        This link works only once and expires on %{expires}.
+
+
+
+        Greetings, your Foodsoft Team!
+
+'
+    negative_balance:
+      subject: Negative account balance
+      text: ! 'Dear %{group},
+
+
+        Your account balance has dropped below zero due to a booking on %{when}: %{balance}
+
+
+        There was a charge of %{amount} for "%{note}" by %{user}.
+
+
+        Please deposit your account as soon as possible.
+
+
+
+
+        Kind regards from %{foodcoop}.
+
+'
+    not_enough_users_assigned:
+      subject: ! '"%{task}" still needs people!'
+      text: ! 'Dear %{user},
+
+
+        The Task ''%{task}'' of your working group is due on %{when},
+
+        and could use some more contributors!
+
+
+        If you haven’t assigned yourself to this task yet it’s your chance now:
+
+
+        %{workgroup_tasks_url}
+
+
+        Your Tasks: %{user_tasks_url}
+
+'
+    order_result:
+      subject: ! 'Order was ended: %{name}'
+      text0: ! 'Dear %{ordergroup},
+
+
+        The order for "%{order}" was placed on %{when} by %{user}.
+
+
+        The following articles were ordered by your ordergroup:
+
+'
+      text1: ! 'Total sum: %{sum}
+
+
+        See order online: %{order_url}
+
+
+        Kind regards from %{foodcoop}.
+
+'
+    reset_password:
+      subject: New password for %{username}
+      text: ! 'Hi %{user},
+
+
+        You have (or someone else has) requested a new password.
+
+        In order to choose a new password follow this link: %{link}
+
+        This link works only once and expires on %{expires}.
+
+        If you don''t want to change your password, just ignore this message. Your password hasn''t been changed yet.
+
+
+
+        Greetings, your Foodsoft Team!
+
+'
+    upcoming_tasks:
+      nextweek: ! 'Tasks for the next week:'
+      subject: Tasks are due!
+      text0: ! 'Dear %{user},
+
+
+        You are asigned to the task "%{task}". This task is due by tomorrow (%{when})!
+
+'
+      text1: ! 'My tasks: %{user_tasks_url}
+
+
+
+        Kind regards from %{foodcoop}.
+
+'
+  messages:
+    create:
+      notice: Message is saved and will be sent.
+    index:
+      new: New message
+      title: Messages
+    messages:
+      reply: Reply
+    model:
+      reply_header: ! '%{user} wrote on %{when}:'
+      reply_indent: ! '> %{line}'
+      reply_subject: ! 'Re: %{subject}'
+    new:
+      list:
+        desc: ! 'Please send messages to all using the mailing-list: %{list}'
+        mail: for example with an email to %{email}.
+        subscribe: You can find more about the mailing-list at %{link}.
+        subscribe_msg: You may have to subscribe to the mailing-list first.
+        wiki: Wiki (page Mailing-List)
+      no_user_found: No user found
+      search: Search ...
+      search_user: Search user
+      title: New message
+    show:
+      all_messages: All messages
+      from: ! 'From:'
+      reply: Reply
+      sent_on: ! 'Sent:'
+      subject: ! 'Subject:'
+      title: Show message
+  model:
+    membership:
+      no_admin_delete: Membership can not be withdrawn as you are the last administrator.
+    order_article:
+      error_price: must be specified and have a current price price
+    page:
+      redirect: Redirect to [[%{title}]]...
+    user:
+      no_ordergroup: no order group
+      notify:
+        email_is_public: Email is visible for other members.
+        name_is_public: Name is visible for other members.
+        negative_balance: inform me when by order group has a negative balance.
+        order_finished: Inform me about my order result (when the order is closed).
+        phone_is_public: Phone number is visible for other members.
+        send_as_email: Receive messages as emails.
+        upcoming_tasks: Remind me of upcoming tasks.
+  navigation:
+    admin:
+      home: Overview
+      ordergroups: Ordergroups
+      title: Administration
+      users: Users
+      workgroups: Workgroups
+    articles:
+      categories: Categories
+      stock: Stock
+      suppliers: Suppliers/articles
+      title: Articles
+    dashboard: Dashboard
+    finances:
+      accounts: Manage accounts
+      balancing: Account orders
+      home: Overview
+      invoices: Invoices
+      title: Finances
+    foodcoop: Foodcoop
+    members: Members
+    messages: Messages
+    ordergroups: Ordergroups
+    orders:
+      archive: My Orders
+      manage: Manage orders
+      ordering: Place order!
+      title: Orders
+    tasks: Tasks
+    wiki:
+      all_pages: All Pages
+      home: Home
+      title: Wiki
+    workgroups: Workgroups
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%n %u'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: .
+      precision: 2
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion:
+            one: billion
+            other: billions
+          million: million
+          quadrillion:
+            one: quadrillion
+            other: quadrillions
+          thousand: thousand
+          trillion: trillion
+          unit: 
+      format:
+        delimiter: 
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: byte
+            other: bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: 
+    precision:
+      format:
+        delimiter: 
+  ordergroups:
+    edit:
+      title: Edit ordergroups
+    index:
+      title: Ordergroups
+    model:
+      error_single_group: ! '%{user} is already a member of another ordergroup'
+      invalid_balance: is not a valid number
+  orders:
+    articles:
+      article_count: ! 'Ordered articles:'
+      name: Name
+      prices: Net/gross price
+      prices_sum: ! 'Sum (net/gross price):'
+      unit_quantity: Unit quantity
+      units_full: Full units
+      units_ordered: Units ordered
+    create:
+      notice: The order was created.
+    edit:
+      title: Edit order
+    fax:
+      amount: Amount
+      articles: Articles
+      customer_number: Customer number
+      delivery_day: Delivery day
+      heading: Order for %{name}
+      name: Name
+      number: Number
+      to_address: Shipping address
+    finish:
+      notice: The order has been ended.
+    form:
+      name: Name
+      note: Note
+      origin: Origin
+      prices: Prices (net/FC)
+      select_all: Select all
+      stockit: In stock
+      supplier: Supplier
+      title: Article
+      unit_quantity: Unit quantity
+    index:
+      action_end: Close
+      confirm_delete: Do you really want to delete the order?
+      confirm_end: Do you really want to close the order %{order}? There is no going back.
+      ended_orders: Closed orders
+      ending: End
+      new_order: Create new order
+      no_open_orders: There are no current orders.
+      note: Note
+      open_orders: Current orders
+      supplier: Supplier
+      title: Manage orders
+    model:
+      error_closed: Order was already accounted for
+      error_nosel: At least one article must be selected
+      error_starts_before_ends: must be after the start date (or remain empty)
+      notice_close: ! 'Order: %{name}, until %{ends}'
+    new:
+      title: Create new order
+    orders:
+      ending: End
+      start: Start
+      status: Status
+      supplier: Supplier
+    show:
+      action_end: Close!
+      amounts: ! 'Net/gross sum:'
+      articles: Article overview
+      articles_ordered: ! 'Ordered articles:'
+      begin: ! 'Begin:'
+      comments:
+        title: Comments
+      comments_link: Comments
+      confirm_delete: Do you really want to delete the order?
+      confirm_end: ! 'Do you really want to close the order %{order}?
+
+        There is no going back.'
+      created_by: ! 'Created by:'
+      download:
+        article_pdf: Article PDF
+        download_file: Download file
+        fax_pdf: Fax PDF
+        fax_txt: Fax text
+        group_pdf: Group PDF
+        matrix_pdf: Matrix PDF
+        title: Download
+      ending: ! 'End:'
+      group_orders: ! 'Group orders:'
+      note: ! 'Note:'
+      sort_article: Sorted in articles
+      sort_group: Sorted in groups
+      supplier: ! 'Supplier:'
+      title: ! 'Order: %{name}'
+      warn_not_closed: Warning, order is not accounted yet.
+    state:
+      closed: closed
+      finished: finished
+      open: open
+    update:
+      notice: The order was updated.
+  pages:
+    all:
+      new_page: Create new page
+      recent_changes: Recent changes
+      search:
+        action: Search
+        placeholder: Page title ..
+      site_map: Sitemap
+      title: All Wiki pages
+      title_list: List of pages
+    body:
+      title_toc: Content
+    create:
+      notice: Page was created
+    cshow:
+      error_noexist: Page doesn’t exist!
+      redirect_notice: Redirected from %{page} ..
+    destroy:
+      notice: The page '%{page}' and all subpages have been deleted successfully.
+    edit:
+      title: Edit page
+    error_stale_object: Warning, the page has just been edited by someone else. Please try again.
+    form:
+      help:
+        bold: bold
+        external_link_ex: External page
+        external_links: External links
+        heading: level %{level}
+        headings: Heading
+        italic: italic
+        list_item_1: First list item
+        list_item_2: Secound list item
+        noformat: No wiki-formatting
+        ordered_list: Numbered list
+        section_block: Block formatting
+        section_character: Character formatting
+        section_link: Link formatting
+        section_table: Table formatting
+        see_tables: see %{tables_link}
+        tables_link: Tables
+        text: text
+        title: Quick formatting help
+        unordered_list: Item list
+        wiki_link_ex: Foodsoft Wiki Page
+        wiki_links: Wiki-links
+      preview: Preview
+    last_updated: Last updated
+    new:
+      title: Create new wiki page
+    page_list_item:
+      date_format: ! '%a, %d %B %Y %H:%M:%S'
+    show:
+      date_format: ! '%d-%m-%y %H:%M'
+      delete: Delete page
+      delete_confirm: ! 'Warning: all subpages will be deleted as well. Are you sure?'
+      edit: Edit page
+      last_updated: Last updated by <b>%{user}</b> on %{when}
+      subpages: subpages
+      title_versions: Versions
+      versions: Versions (%{count})
+    title: Title
+    update:
+      notice: Page was updated
+    version:
+      author: ! 'Author: %{user}'
+      date_format: ! '%a, %d-%m-%Y, %H:%M'
+      revert: Revert to this version
+      title: ! '%{title} - version %{version}'
+      title_version: Version
+      view_current: See current version
+  sessions:
+    logged_in: Logged in!
+    logged_out: Logged out!
+    login_invalid: Invalid email or password
+    new:
+      forgot_password: Forgot password?
+      login: Login
+      nojs: Attention, Cookies and Javascript have to be activated! Please switch off %{link}.
+      noscript: NoScript
+      password: Password
+      title: Foodsoft login
+      user: User
+  shared:
+    articles_by_articles:
+      ordered: Ordered (Amount + Tolerance)
+      ordergroup: Ordergroup
+      price: Total price
+      received: Received
+    articles_by_groups:
+      fc_price: FC-Price
+      fc_price_desc: Price including taxes, deposit and Foodcoop-charge
+      name: Name
+      price: Total price
+      unit: Unit
+      unit_quantity: Lot quantity
+      unit_quantity_desc: How many units per lot.
+      units: Amount
+      units_desc: Assigned units
+    group:
+      access: Access to
+      activated: activated
+      address: Address
+      apple_limit: Apple points order limit
+      contact: Contact
+      deactivated: deactivated
+      description: Description
+      members: Members
+      no_weekly_job: No weekly job defined
+      weekly_job: Weekly job
+    group_form_fields:
+      search: Search ...
+      search_user: Search user
+      title: Weekly jobs
+      user_not_found: No user found
+    loginInfo:
+      edit_profile: Edit profile
+      feedback:
+        desc: Found a bug? Suggestions? Review?
+        title: Feedback
+      help: Help
+      homepage_title: Visit Foodcoop Homepage
+      logout: Logout
+      profile: Profile
+    memberships:
+      current_members:
+        drop: remove
+        no_members: ! '%{group} has no members.'
+      members:
+        already_members: Are already members
+        desc: Here you can manage members of the group or invite a new Foodcoop-member to the group %{link}.
+        invite: invite
+        invite_someone: Invite someone
+        no_members_yet: Are not members yet
+        title: Members of %{group}
+      non_members:
+        add: add
+    open_orders:
+      ending: Ending
+      no_open_orders: There are no current orders
+      not_enough_apples: Attention your order group has too few apple points to place an order!
+      supplier: Supplier
+      title: Current orders
+      total: Sum
+      total_sum: Total sum
+      who_ordered: Who ordered?
+    workgroup_members:
+      title: Group memberships
+  simple_form:
+    error_notification:
+      default_message: Errors were found. Please check the form.
+    hints:
+      article:
+        unit: ! 'For example: KG or 1L or 500g'
+      message:
+        private: Message doesn’t show in Foodsoft mail inbox
+      order_article:
+        units_to_order: Amount of delivered units
+        update_current_price: Also update the price of the current order
+      stock_article:
+        supplier: 
+      supplier:
+        min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
+      task:
+        duration: How long will the task take, 1-3 hours
+        required_users: How many users will be needed in total?
+      tax: In percentage, standard is 7,0
+    labels:
+      article:
+        article_category: Category
+        manufacturer: Manufacturer
+        name: Name
+        note: Note
+        origin: Origin
+        unit: Unit
+      article_category:
+        description: Description
+        name: Name
+      defaults:
+        amount: Amount
+        date: Date
+        deposit: Deposit
+        description: Description
+        email: Email
+        note: Note
+        order_number: Order number
+        ordergroup: Ordergroup
+        password: Password
+        password_confirmation: Repeat password
+        phone: Phone
+        price: Price (net)
+        tax: VAT
+        title: Title
+        unit_quantity: Unit quantity
+        user_tokens: Members
+      delivery:
+        delivered_on: Delivery date
+        supplier: Supplier
+      group_order_article:
+        ordergroup_id: Ordergroup
+        result: Amount
+      invoice:
+        amount: Amount
+        date: Billing date
+        delivery: Delivery
+        deposit: Charge deposit
+        deposit_credit: Credit deposit
+        note: Note
+        number: Number
+        order: Order
+        paid_on: Paid on
+        supplier: Supplier
+      message:
+        body: Body
+        group_id: Group
+        private: Private
+        recipient_tokens: Recipients
+        sent_to_all: Send to all members
+        subject: Subject
+      order:
+        ends: Ends at
+        starts: Starts at
+      order_article:
+        units_to_order: Amount of units
+        update_current_price: Globally update current price
+      order_comment:
+        text: Add comment to this order ...
+      ordergroup:
+        contact_address: Address
+        contact_person: Contact person
+        contact_phone: Phone
+        ignore_apple_restriction: Ignore order stop by apple points restriction
+      page:
+        body: Body
+        parent_id: Parent page
+      stock_article:
+        supplier: Supplier
+      supplier:
+        address: Address
+        contact_person: Contact person
+        customer_number: Customer ID
+        delivery_days: Delivery days
+        email: Email
+        fax: Fax
+        is_subscribed: subscribed?
+        min_order_quantity: Minimum order quantity
+        name: Name
+        note: Note
+        order_howto: How to order
+        phone: Phone
+        phone2: Phone 2
+        url: Homepage
+      task:
+        done: Done?
+        due_date: Due date
+        duration: Duration
+        name: Name
+        required_users: People required
+        user_list: Responsible user
+        workgroup: Workgroup
+      user:
+        email: Email
+        last_name: Last name
+        name: Name
+        nick: Username
+        ordergroup: Ordergroup
+        phone: Telephone
+        workgroup:
+          one: Workgroup
+          other: Workgroups
+      workgroup:
+        next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
+        role_admin: Administration
+        role_article_meta: Article database
+        role_finance: Finances
+        role_orders: Order management
+        role_suppliers: Suppliers
+        task_description: Description
+        task_duration: Duration in hours
+        task_name: Task name
+        task_required_users: People required
+        weekday: Weekday
+        weekly_task: Define monthly task?
+    'no': 'No'
+    required:
+      mark: ! '*'
+      text: required
+    'yes': 'Yes'
+  stock_takings:
+    create:
+      notice: Inventory was created successfully.
+    edit:
+      title: Edit inventory
+    index:
+      new_inventory: Create new inventory
+      title: Inventory overview
+    new:
+      create: create
+      stock_articles: Stock articles
+      temp_inventory: temporary inventory
+      text_deviations: Please fill in all surplus deviations from the %{inv_link}. For reduction, use a a negative number.
+      text_need_articles: You have to %{create_link} a new stock article before you can use it here.
+      title: Create new inventory
+    show:
+      amount: Amount
+      article: Article
+      confirm_delete: Do you really want to delete the inventory?
+      date: Date
+      note: Note
+      overview: Inventory overview
+      supplier: Supplier
+      title: Show inventory
+      unit: Unit
+    stock_takings:
+      confirm_delete: Are you sure you want to delete this?
+      date: Date
+      note: Note
+    update:
+      notice: Inventory was updated.
+  stockit:
+    check:
+      not_empty: ! '%{name} could not be deleted, the inventory is not zero.'
+    destroy:
+      notice: Article %{name} was deleted.
+    edit:
+      title: Edit stock articles
+    form:
+      price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
+    index:
+      article:
+        article: Article
+        available: available
+        category: Category
+        ordered: ordered
+        price: Price
+        stock: In stock
+        supplier: Supplier
+        unit: Unit
+        vat: VAT
+      confirm_delete: Are you sure you want to delete?
+      new_delivery: New delivery ..
+      new_stock_article: Add new stock article
+      new_stock_taking: Add inventory
+      order_online: Put stock order online
+      show_stock_takings: Inventory overview
+      stock_count: ! 'Number of articles:'
+      stock_worth: ! 'Current stock value:'
+      toggle_unavailable: Show/hide unavailable articles
+      view_options: View options
+    new:
+      search_text: ! 'Search for articles in all catalogues:'
+      title: Add new stock article
+    stock_create:
+      notice: Stock article was created.
+    stock_update:
+      notice: Stock article was saved.
+  suppliers:
+    create:
+      notice: Supplier was created
+    destroy:
+      notice: Supplier was deleted
+    edit:
+      title: Edit supplier
+    index:
+      action_import: Import supplier from external database
+      action_new: Create new supplier
+      articles: articles (%{count})
+      confirm_del: Do you really want to delete the supplier %{name}?
+      deliveries: deliveries (%{count})
+      stock: in stock (%{count})
+      title: Suppliers
+    new:
+      title: New supplier
+    shared_supplier_note: Supplier is connected to the external database.
+    shared_suppliers:
+      body: <p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>
+      subscribe: Subscribe
+      supplier: Supplier
+      title: External lists
+    show:
+      confirm_delete: Are you sure?
+      last_deliveries: Last deliveries
+      new_delivery: Create new delivery
+      show_deliveries: Show all deliveries
+    update:
+      notice: Supplier was updated
+  support:
+    array:
+      last_word_connector: ! ' and '
+      two_words_connector: ! ' and '
+      words_connector: ! ', '
+  tasks:
+    accept:
+      notice: You have accepted the task
+    archive:
+      title: Task archive
+    archive_tasks:
+      due_date: Due date
+      task: Subject
+      task_format: ! '%{name} (%{duration}h)'
+      who: People in charge
+    create:
+      notice: Task has been created
+    destroy:
+      notice: Task has been deleted
+    edit:
+      title: Edit task
+    error_not_found: No workgroup found
+    form:
+      search:
+        hint: Search for user
+        noresult: No user found
+        placeholder: Search ...
+    index:
+      show_group_tasks: Show group tasks
+      title: Tasks
+      title_non_group: Tasks for all!
+    list:
+      accept_task: Accept task
+      done: Done
+      done_q: Done?
+      due_date: Due date
+      mark_done: Mark task as done
+      reject_task: Reject task
+      task: subject
+      task_format: ! '%{name} (%{duration}h)'
+      who: Who is doing it?
+      who_hint: (How much are still needed?)
+    nav:
+      all_tasks: All tasks
+      archive: Completed tasks (archive)
+      group_tasks: Group tasks
+      my_tasks: My tasks
+      new_task: Create new task
+    new:
+      title: Create new tasks
+    set_done:
+      notice: The state of the task has been updated
+    show:
+      accept_task: Accept task
+      due_date: Due date
+      hours: ! '%{count}h'
+      mark_done: Mark task as done
+      reject_task: Reject task
+      title: Show task
+    update:
+      notice: Task has been updated
+    user:
+      more: Nothing to do? %{tasks_link} are tasks for sure.
+      tasks_link: Here
+      title: My tasks
+      title_accepted: Accepted tasks
+      title_open: Open tasks
+    workgroup:
+      title: Tasks for %{workgroup}
+      title_all: All group tasks
+      weekly:
+        desc: ! '<p>Every <b>%{weekday}</b> this workgroup has the following job: <b>%{task}</b></p> <p>The weektask has been created by Foodsoft automatically. You still have to sign up for it yourself.</p>'
+        edit: Edit weekly tasks
+        empty: No weekly tasks created yet.
+        title: Weekly tasks
+  time:
+    am: morning
+    formats:
+      default: ! '%A, %d %B %Y, %H:%M'
+      long: ! '%A, %d %B %Y, %H:%M'
+      short: ! '%d %B, %H:%M'
+    pm: afternoon
+  ui:
+    close: Close
+    delete: Delete
+    edit: Edit
+    marks:
+      close: ! '&times;'
+    or_cancel: or cancel
+    save: Save
+    show: Show
+  views:
+    pagination:
+      first: ! '&laquo;'
+      last: ! '&raquo;'
+      next: ! '&rsaquo;'
+      previous: ! '&lsaquo;'
+      truncate: ! '...'
+  workgroups:
+    edit:
+      title: Edit workgroup
+    error_last_admin_group: The last group with admin rights must not be deleted
+    error_last_admin_role: Admin role for the last group with admin rights cannot be withdrawn
+    index:
+      title: Workgroups
+    update:
+      notice: Workgroup was updated

@@ -47,7 +47,7 @@ class OrderFax < OrderPdf
 
     # Articles
     data = [I18n.t('documents.order_fax.rows')]
-    data = @order.order_articles.ordered.all(include: :article).collect do |a|
+    data += @order.order_articles.ordered.all(include: :article).collect do |a|
       [a.article.order_number,
        a.units_to_order,
        a.article.name,

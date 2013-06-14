@@ -1,0 +1,1723 @@
+nl:
+  activemodel:
+    errors:
+      format: ! '%{attribute} %{message}'
+      general: Er is een probleem opgetreden.
+      general_again: Een probleem is opgetreden. Graag opnieuw proberen.
+      general_msg: ! 'Een probleem is opgetreden: %{msg}'
+      messages:
+        accepted: moet geaccepteerd worden
+        blank: moet ingevuld worden
+        confirmation: komt niet overeen
+        empty: moet ingevuld worden
+        equal_to: moet precies %{count} zijn
+        even: moet even zijn
+        exclusion: is niet beschikbaar
+        greater_than: moet groter zijn dan %{count}
+        greater_than_or_equal_to: moet groter dan of gelijk aan %{count} zijn
+        inclusion: is geen geldige waarde
+        invalid: is ongeldig
+        less_than: moet minder zijn dan %{count}
+        less_than_or_equal_to: moet minder dan of gelijk aan %{count} zijn
+        not_a_number: is geen getal
+        not_an_integer: moet een geheel getal zijn
+        odd: moet oneven zijn
+        record_invalid: ! 'geldigheidscontrole is mislukt: %{errors}'
+        taken: bestaat al
+        taken_with_deleted: bestaat al (verwijderde groep)
+        too_long: is te lang (niet meer dan %{count} tekens)
+        too_short: is te kort (niet minder dan %{count} tekens)
+        wrong_length: heeft de verkeerde lengte (moet precies %{count} tekens hebben)
+      template:
+        body: ! 'Controleer de volgende velden:'
+        header:
+          one: ! 'Kon %{model} niet opslaan: één fout.'
+          other: ! 'Kon %{model} niet opslaan: %{count} fouten.'
+  activerecord:
+    attributes:
+      article:
+        article_category: categorie
+        availability: Artikel leverbaar?
+        deposit: statiegeld
+        gross_price: bruto prijs
+        price: netto prijs
+        tax: BTW
+        unit: eenheid
+        unit_quantity: groothandelseenheid
+      financial_transaction:
+        amount: bedrag
+        note: notitie
+      stock_article:
+        price: prijs
+      user:
+        first_name: Voornaam
+        password: Wachtwoord
+    errors:
+      format: ! '%{attribute} %{message}'
+      general: Er is een probleem opgetreden.
+      general_again: Er is een probleem opgetreden. Probeer het opnieuw.
+      general_msg: ! 'Er is een probleem opgetreden: %{msg}'
+      has_many_left: is nog met een %{collection} verbonden!
+      messages:
+        accepted: moet geaccepteerd worden
+        blank: moet ingevuld worden
+        confirmation: komt niet overeen
+        empty: moet ingevuld worden
+        equal_to: moet precies %{count} zijn
+        even: moet even zijn
+        exclusion: is niet beschikbaar
+        greater_than: moet groter dan %{count} zijn
+        greater_than_or_equal_to: moet groter zijn dan of gelijk aan %{count}
+        inclusion: is geen geldige waarde
+        invalid: is ongeldig
+        less_than: moet kleiner izjn dan %{count}
+        less_than_or_equal_to: moet kleiner zijn dan of gelijk aan %{count}
+        not_a_number: is geen getal
+        not_an_integer: moet een geheel getal zijn
+        odd: moet oneven zijn
+        record_invalid: ! 'geldigheidscontrole is mislukt: %{errors}'
+        taken: bestaat al
+        taken_with_deleted: bestaat al (verwijderde groep)
+        too_long: is te lang (niet meer dan %{count} tekens)
+        too_short: is te kort (niet minder dan %{count} tekens)
+        wrong_length: heeft de verkeerde lengte (moet precies %{count} tekens zijn)
+      template:
+        body: ! 'Controleer de volgende velden:'
+        header:
+          one: ! 'Kon %{model} niet opslaan: één foutmelding.'
+          other: ! 'Kon %{model} niet opslaan: %{count} foutmeldingen.'
+    models:
+      article: Artikel
+      article_category: Categorie
+      delivery: Levering
+      financial_transaction: Financiële transactie
+      invoice: Rekening
+      message: Bericht
+      order: Bestelling
+      order_article: Bestellingsartikel
+      order_comment: Commentaar
+      ordergroup: Huishouden
+      stock_article: Voorraadartikel
+      stock_taking: Inventaris
+      supplier: Leverancier
+      task: Taak
+      user: Gebruiker
+      workgroup: Werkgroep
+  admin:
+    access_to: toegang tot
+    actions: Acties
+    base:
+      index:
+        all_ordergroups: Alle huishoudens
+        all_users: Alle gebruikers
+        all_workgroups: Alle werkgroepen
+        created_at: gemaakt op
+        first_paragraph: Hier kun je de groepen en gebruiker van Foodsoft beheren.
+        groupname: Groepnaam
+        members: Lid
+        name: Naam
+        new_ordergroup: Nieuw huishouden
+        new_user: Nieuwe gebruiker
+        new_workgroup: Nieuwe werkgroep
+        newest_groups: Nieuwste groepen
+        newest_users: Nieuwste gebruikers
+        title: Administratie
+        type: Type
+        username: Gebruikersnaam
+    confirm: Wil je %{name} daadwerkelijk wissen?
+    ordergroups:
+      destroy:
+        error: ! 'Bestellingsgroep kon niet gewist worden: %{error}'
+        notice: Huishouden is verwijderd
+      edit:
+        title: Huishouden bewerken
+      form:
+        first_paragraph: Nieuwe leden kun je %{url} uitnodigen.
+        here: hier
+      index:
+        first_paragraph: Hier kun je %{url} toevoegen, bewerken en verwijderen.
+        new_ordergroup: Nieuw huishouden toevoegen
+        new_ordergroups: nieuwe huishoudens
+        second_paragraph: 
+        title: Huishoudens
+        workgroup: werkgroep
+      new:
+        title: Huishouden toevoegen
+      ordergroups:
+        address: Adres
+        contact: Contact
+        members: Leden
+        name: Naam
+      show:
+        confirm: Weet je het zeker?
+        edit: Groep/leden bewerken
+        send_message: Bericht sturen
+        title: Huishouden %{name}
+    search_placeholder: naam ...
+    users:
+      edit:
+        title: Lid bewerken
+      index:
+        first_paragraph: Hier kun je gebruikers %{url}, bewerken en wissen.
+        new_user: Nieuwe gebruiker toevoegen
+        new_users: toevoegen
+        title: Gebruikers admin
+      new:
+        title: Nieuwe gebruiker toevoegen
+      show:
+        confirm: Wil je %{user} daadwerkelijk eruit zetten?
+        email: E-mail
+        groupabos: Groepslidmaatschappen
+        member_since: Lid sinds %{time}
+        name: Naam
+        nick: Gebruikersnaam
+        person: Persoon
+        phone: Telefoon
+        preference: Voorkeuren
+        send_message: Bericht versturen
+      users:
+        email: e-mail
+        last_login: laatste login
+        login: login
+        name: naam
+    workgroups:
+      destroy:
+        error: ! 'Werkgroep kon niet gewist worden: %{error}'
+        notice: Werkgroep is gewist
+      edit:
+        title: Werkgroep bewerken
+      form:
+        first_paragraph: Nieuwe leden kun je %{url} uitnodigen
+        here: hier
+      index:
+        first_paragraph: Hier kun je %{url} toevoegen, bewerken en wissen.
+        new_workgroup: Nieuwe werkgroep creëren
+        new_workgroups: nieuwe werkgroepen
+        ordergroup: huishouden
+        second_paragraph: ! 'Let op het verschil tussen een <em>groep</em> en een </em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organizeren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
+        title: werkgroepen
+      new:
+        title: Werkgroep toevoegen
+      show:
+        confirm: Weet je het zeker?
+        edit: Groep/lid bewerken
+        title: Werkgroep %{name}
+      workgroups:
+        members: leden
+        name: naam
+  article_categories:
+    create:
+      notice: Categorie is opgeslagen
+    destroy:
+      error: ! 'Categorie kon niet gewist worden: %{message}'
+    edit:
+      title: Categorie bewerken
+    index:
+      confirm_delete: Weet je het zeker?
+      new: Nieuwe categorie maken
+      title: Categoriën
+    new:
+      title: Nieuwe categorie maken
+    update:
+      notice: Categorie is bijgewerkt.
+  articles:
+    article:
+      confirm_delete: Weet je het zeker?
+      last_update: ! 'laatst bijgewerkt: %{last_update} | bruto: %{gross_price}'
+    articles:
+      confirm_delete: Weet je zeker dat je alle artikelen wilt verwijderen?
+      option_available: Artikelen beschikbaar maken
+      option_delete: Verwijder artikel
+      option_not_available: Artikelen onbeschikbaar maken
+      option_select: Kies actie ...
+      price_netto: Prijs
+      unit_quantity_desc: Groothandelsverpakkingsgrootte
+      unit_quantity_short: Gr.Eenh.
+    controller:
+      create_from_upload:
+        notice: Er zijn %{count} nieuwe artikelen opgeslagen.
+      error_invalid: Er zijn artikelen die een fout hebben
+      error_nosel: Geen artikelen geselecteerd
+      error_parse: ! '%{msg} ... in regel %{line}'
+      error_update: ! 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
+      parse_upload:
+        notice: ! '%{count} artikel zijn geanalyseerd'
+      sync:
+        notice: Catalogus is bijgewerkt
+        shared_alert: ! '%{supplier} is niet aan een externe database gekoppeld'
+      update_all:
+        notice: Alle artikelen en prijzen zijn bijgewerkt.
+      update_sel:
+        notice_avail: Alle geselecteerde artikelen zijn beschikbaar gemaakt.
+        notice_destroy: Alle geselecteerde artikelen zijn gewist.
+        notice_noaction: Geen actie gekozen!
+        notice_unavail: Alle geselecteerde artikelen zijn onbeschikbaar gemaakt.
+      update_sync:
+        notice: Alle artikelen en prijzen zijn bijgewerkt.
+    destroy_active_article:
+      drop: verwijderen
+      note: 
+    edit_all:
+      note: ! 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestellingsnummer.'
+      submit: Alle artikelen bijwerken
+      title: Alle artikelen van %{supplier} bewerken
+      warning: Let op, alle artikelen worden bijgewerkt!
+    edit_all_table:
+      available_desc: beschikbaar
+      available_short: besch.
+      order_number_desc: bestelnummer
+      order_number_short: best.nr.
+      price_desc: netto prijs
+      price_short: prijs
+      unit_quantity_desc: Groothandelsverpakkingsgrootte
+      unit_quantity_short: Gr.Eenh.
+    form:
+      title: Nieuw artikel toevoegen
+    import_search_results:
+      action_import: importeren
+      already_imported: reeds geïmporteerd
+      not_found: Geen artikelen gevonden
+    index:
+      change_supplier: Leverancier wisselen ...
+      edit_all: Alles bewerken
+      ext_db:
+        import: Zoeken/importeren
+        sync: Synchroniseren
+        title: Externe database
+      import:
+        placeholder: Naam
+        restrict_region: Alleen uit de regio
+        title: Artikel importeren
+      new: Nieuw artikel
+      new_order: Bestelling aanmaken
+      search_placeholder: Naam ...
+      title: Artikelen van %{supplier} (%{count})
+      upload: Artikelen uploaden
+    model:
+      error_in_use: ! '%{article} kan niet gewist worden, want deze is deel van een lopende bestelling!'
+      error_nosel: Je hebt geen artikelen geselecteerd
+    parse_upload:
+      body: <p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>
+      outlist:
+        body: ! 'De volgende artikelen werden uit de lijst gehaald en worden <b>gewist</b>:'
+        body_skip: Er zijn geen artikelen om te wissen.
+        title: Uit de lijst halen ...
+      price_short: prijs
+      submit: Alle wissen/bijwerken
+      title: Artikelen met externe database synchroniseren
+      unit_quantity_short: 
+      update:
+        body: 
+        title: 
+        update_msg: 
+    upload:
+      body: 
+      fields:
+        season_amount: 
+        season_price: 
+        status: Status (x=overslaan)
+      file_label: Graag een compatibel bestand uitkiezen
+      submit: Bestand uploaden
+      title: Artikelen uploaden voor %{supplier}
+  date:
+    abbr_day_names:
+    - Zo
+    - Ma
+    - Di
+    - Wo
+    - Do
+    - Vr
+    - Za
+    abbr_month_names:
+    - 
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - Mei
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Okt
+    - Nov
+    - Dec
+    day_names:
+    - Zondag
+    - Maandag
+    - Dinsdag
+    - Woensdag
+    - Donderdag
+    - Vrijdag
+    - Zaterdag
+    formats:
+      default: ! '%d-%m-%Y'
+      long: ! '%e %B %Y'
+      short: ! '%e %b'
+    month_names:
+    - 
+    - Januari
+    - Februari
+    - Maart
+    - April
+    - Mei
+    - Juni
+    - Juli
+    - Augustus
+    - September
+    - Oktober
+    - November
+    - December
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: ca. één uur
+        other: ca. %{count} uur
+      about_x_months:
+        one: ca. één maand
+        other: ca. %{count} maanden
+      about_x_years:
+        one: ca. één jaar
+        other: ca. %{count} jaar
+      almost_x_years:
+        one: bijna één jaar
+        other: bijna %{count} jaar
+      half_a_minute: een halve minuut
+      less_than_x_minutes:
+        one: minder dan één minuut
+        other: minder dan %{count} minuten
+      less_than_x_seconds:
+        one: minder dan een seconde
+        other: minder dan %{count} seconden
+      over_x_years:
+        one: meer dan één jaar
+        other: meer dan %{count} jaar
+      x_days:
+        one: één dag
+        other: ! '%{count} dagen'
+      x_minutes:
+        one: één minuut
+        other: ! '%{count} minuten'
+      x_months:
+        one: één maand
+        other: ! '%{count} maanden'
+      x_seconds:
+        one: een seconde
+        other: ! '%{count} seconden'
+    prompts:
+      day: dag
+      hour: uren
+      minute: minuten
+      month: maanden
+      second: seconden
+      year: jaren
+  deliveries:
+    create:
+      notice: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+    form:
+      add_article: 
+      new_article:
+        search: 
+        title: 
+      note_new_article: 
+      note_new_article_link: 
+      remove_article: 
+    index:
+      confirm_delete: 
+      new_delivery: 
+      title: 
+    invoice_amount: 
+    invoice_net_amount: 
+    new:
+      title: 
+    show:
+      amount: 
+      article: 
+      price: 
+      sum: 
+      sum_diff: 
+      sum_gross: 
+      sum_net: 
+      title: 
+      title_articles: 
+      unit: 
+    stock_change:
+      remove_article: 
+    suppliers_overview: 
+    update:
+      notice: 
+  documents:
+    order_by_articles:
+      filename: 
+      rows: 
+      title: 
+    order_by_groups:
+      filename: 
+      rows: 
+      sum: 
+      title: 
+    order_fax:
+      filename: 
+      rows: 
+    order_matrix:
+      filename: 
+      heading: 
+      rows: 
+      title: 
+      total: 
+  errors:
+    format: 
+    general: 
+    general_again: 
+    general_msg: 
+    messages:
+      accepted: 
+      blank: 
+      confirmation: 
+      empty: 
+      equal_to: 
+      even: 
+      exclusion: 
+      greater_than: 
+      greater_than_or_equal_to: 
+      inclusion: 
+      invalid: 
+      less_than: 
+      less_than_or_equal_to: 
+      not_a_number: 
+      not_an_integer: 
+      odd: 
+      record_invalid: 
+      taken: 
+      taken_with_deleted: 
+      too_long: 
+      too_short: 
+      wrong_length: 
+    template:
+      body: 
+      header: 
+  feedback:
+    create:
+      notice: 
+    new:
+      first_paragraph: 
+      second_paragraph: 
+      send: 
+      title: 
+  finance:
+    balancing:
+      close:
+        alert: ! 'Er trad een fout op bij het afrekenen: %{message}'
+        notice: Bestelling is succesvol afgerekend, de tegoeden van de leden zijn bijgewerkt.
+      close_direct:
+        alert: ! 'Bestelling kan niet gesloten worden: %{message}'
+        notice: Bestelling is gesloten
+      confirm:
+        clear: Sluiten
+        first_paragraph: ! 'Wanneer de bestelling gesloten wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
+        or_cancle: of terug naar afrekenen
+        title: Order sluiten
+      edit_results_by_articles:
+        add_article: Artikel toevoegen
+        amount: Hoeveelheid
+        amount_per_unit: Groothandelsverpakkingsgroote * Hoeveelheid
+        article: Artikel
+        gross: Bruto
+        net: Netto
+        number: Nr.
+        refund: Statiegeld
+        tax: BTW
+      group_order_articles:
+        add_group: Huishouden toevoegen
+        group: Huishouden
+        total: Totale prijs
+        total_fc: Som (FC-prijs)
+        units: Eenheden
+      index:
+        title: Gesloten orders
+      invoice:
+        edit: 
+        invoice_amount: 
+        invoice_date: 
+        invoice_number: 
+        minus_refund_calculated: 
+        new: 
+        new_body: 
+        plus_refund_credited: 
+        refund_adjusted_amount: 
+      new:
+        alert: 
+        articles_overview: 
+        comment_on_transaction: 
+        comments: 
+        confirm_order: 
+        create_invoice: 
+        edit_note: 
+        edit_order: 
+        groups_overview: 
+        invoice: 
+        notes_and_journal: 
+        summary: 
+        title: 
+        view_options: 
+      order_article:
+        confirm: 
+      orders:
+        clear: afrekenen
+        cleared: afgerekend (%{amount})
+        close: direct afsluiten
+        confirm: 
+        end: Einde
+        ended: beëindigd
+        last_edited_by: Laatst aangepast door
+        name: Leverancier
+        no_closed_orders: Momenteel zijn er geen beëindigde bestellingen.
+        state: Status
+      summary:
+        changed: 
+        duration: 
+        fc_amount: 
+        fc_profit: 
+        gross_amount: 
+        groups_amount: 
+        net_amount: 
+        reload: 
+        with_extra_charge: 
+        without_extra_charge: 
+    create:
+      notice: 
+    financial_transactions:
+      create:
+        notice: 
+      create_collection:
+        alert: 
+        notice: 
+      index:
+        balance: 
+        last_updated_at: 
+        new_transaction: 
+        search_placeholder: 
+        title: 
+      new:
+        paragraph: 
+        title: 
+      new_collection:
+        amount: 
+        new_ordergroup: 
+        note: 
+        ordergroup: 
+        save: 
+        sidebar: 
+        title: 
+      ordergroup:
+        remove: 
+        remove_group: 
+      transactions:
+        amount: 
+        date: 
+        note: 
+        who: 
+    group_order_articles:
+      form:
+        amount_change_for: 
+    index:
+      amount: 
+      amount_fc: 
+      clear: 
+      date: 
+      end: 
+      everything_cleared: 
+      group: 
+      last_transactions: 
+      note: 
+      open_transactions: 
+      show_all: 
+      supplier: 
+      title: 
+      unpaid_invoices: 
+    invoices:
+      edit:
+        title: 
+      form:
+        delivery: 
+        linked: 
+        order: 
+      index:
+        action_new: 
+        title: 
+      invoices:
+        confirm_delete: 
+        delivery: 
+      new:
+        back: 
+        title: 
+      show:
+        back: 
+        delivery: 
+        linked: 
+        title: 
+    order_articles:
+      edit:
+        title: 
+      new:
+        title: 
+    ordergroups:
+      index:
+        new_transaction: 
+        search_placeholder: 
+        title: 
+      ordergroups:
+        account_balance: 
+        account_statement: 
+        name: 
+        new_transaction: 
+    update:
+      notice: 
+  foodcoop:
+    ordergroups:
+      index:
+        name: 
+        only_active: 
+        only_active_desc: 
+        title: 
+      ordergroups:
+        last_ordered: 
+        name: 
+        user: 
+    users:
+      index:
+        body: 
+        ph_name: 
+        ph_ordergroup: 
+        profile_link: 
+        title: 
+    workgroups:
+      edit:
+        invite_link: 
+        invite_new: 
+        title: 
+      index:
+        body: 
+        title: 
+      workgroup:
+        edit: 
+        show_tasks: 
+  group_orders:
+    archive:
+      desc: Bekijk hier alle %{link}.
+      open_orders: lopende bestellingen
+      title: Bestellingen van %{group}
+      title_closed: Afgerekend
+      title_open: gesloten/niet afgerekend
+    create:
+      error_general: De bestelling kon niet bijgewerkt worden vanwege een fout.
+      error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon de bestelling niet bijgewerkt worden.
+      notice: Bestelling opgeslagen.
+    errors:
+      closed: Deze bestelling is al gesloten.
+      no_member: Je bent geen lid van dit huishouden.
+      notfound: Foute URL, dit is niet jouw bestelling.
+    form:
+      action_save: Bestelling opslaan
+      amount: Hoeveelheid
+      available: Beschikbaar
+      available_funds: Beschikbaar tegoed
+      created_by: Aangemaakt door
+      ending: Einde
+      funds: Krediet
+      last_update: Laatst bestelt
+      manufacturer: Producent
+      min_quantity: Min. bestelhoeveelheid
+      name: Naam
+      new_funds: Nieuw tegoed
+      note: Notitie
+      price: Prijs
+      sum: Som
+      sum_amount: ! 'Huidig totaalbedrag:'
+      supplier: Leverancier
+      title: Bestellen
+      tolerance: Tolerantie
+      total_sum_amount: Totalbedrag
+      total_tolerance: Totale tolerantie
+      total_units: Totale eenheden
+      unit: Eenheid
+      unit_missing: Missende eenheden
+      units: Eenheden
+      units_full: Volle eenheden
+    index:
+      closed_orders:
+        more: meer...
+        title: Afgerekende bestellingen
+      finished_orders:
+        title: 
+        total_sum: 
+      funds:
+        account_balance: 
+        available_funds: 
+        finished_orders: 
+        open_orders: Lopende bestellingen
+        title: Credit
+      title: Besteloverzicht
+    messages:
+      not_enough_apples: Om te bestellen heb je minimaal %{stop_ordering_under} appels nodig. Momenteel heeft je huishouden slechts %{apples} appels.
+    order:
+      title: Artikelen
+    orders:
+      ending: Einde
+      sum: Som
+      supplier: Leveranciers
+    show:
+      articles:
+        edit_order: Order aanpassen
+        name: Naam
+        not_ordered_msg: Je hebt nog niets bestelt
+        order_closed_msg: Sorry, deze bestelling is gesloten.
+        order_nopen_title: Waarbij rekening gehouden is met bestellingen van anderen
+        order_not_open: Ontvangen
+        order_now: Dit is je kans!
+        order_open: Beschikbaar
+        ordered: Besteld
+        ordered_title: Hoeveelheid + tolerantie
+        show_hide: Niet bestelde artikelen tonen/verbergen
+        sum: Som
+        title: Artikeloverzicht
+        total_price: Totaalprijs
+        unit_price: Stuksprijs
+        units: Eenheden
+      closed_by: Afgerekend door %{user}
+      comment: Notitie
+      comments:
+        title: 
+      ending: Einde
+      not_ordered: Je hebt niets bestelt.
+      note: Notitie
+      order_sum: 
+      sum: Som
+      supplier: Leveranciers
+      title: Jouw bestelling voor %{order}
+    switch_order:
+      remaining: nog %{remaining}
+      title: Lopende bestellingen
+    update:
+      error_general: 
+      error_stale: 
+      notice: De bestelling is opgeslagen.
+  helpers:
+    application:
+      edit_user: Gebruiker bewerken
+      role_admin: Admin
+      role_article_meta: Artikelen
+      role_finance: Financiën
+      role_orders: Bestelling
+      role_suppliers: Leveranciers
+      show_google_maps: Op Google maps bekijken
+      sort_by: Sorteren op %{text}
+      write_message: Bericht schrijven
+    deliveries:
+      new_invoice: Nieuwe rekening
+      show_invoice: Rekening tonen
+    orders:
+      option_choose: Leverancier/voorraad kiezen
+      option_stock: Voorraad
+      order_pdf: PDF maken
+    select:
+      prompt: graag uitkiezen
+    submit:
+      create: ! '%{model} opslaan'
+      invite:
+        create: uitnodiging versturen
+      message:
+        create: bericht versturen
+      update: wijzigingen opslaan
+    tasks:
+      required_users: Nog %{count} leden nodig!
+  home:
+    apple_bar:
+      desc: 
+      more_info: 
+      points: 
+      warning: 
+    changes_saved: Wijzigingen opgeslagen.
+    index:
+      due_date_format: 
+      messages:
+        title: 
+        view_all: 
+      my_ordergroup:
+        funds: 
+        last_update: 
+        title: 
+        transactions:
+          amount: 
+          note: 
+          title: 
+          view: 
+          when: 
+          where: 
+      ordergroup:
+        title: 
+      tasks_move:
+        action: 
+        desc: 
+        title: 
+      tasks_open:
+        action: 
+        desc: 
+        title: 
+      title: Beginpagina
+      your_tasks: Jouw taken
+    no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
+    ordergroup:
+      account_summary: Rekeningafschrift
+      description: Omschrijving
+      funds: ! 'Beschikbaar krediet:'
+      invite: Iemand uitnodigen
+      people: 
+      search: Zoeken ...
+      title: Mijn huishouden
+    ordergroup_cancelled: Je bent geen lid meer van de groep %{group}.
+    profile:
+      groups:
+        cancel: Verlaat groep
+        cancel_confirm: Weet je zeker dat je deze groep wilt verlaten?
+        invite: Nieuw lid uitnodigen
+        title: Je bent lid van de volgende groepen
+      title: Mijn Profiel
+      user:
+        since: ! '(gebruiker sinds: %{when})'
+        title: ! '%{user}'
+    start_nav:
+      admin: 
+      finances:
+        accounts: 
+        settle: 
+        title: Financiën
+      foodcoop: Foodcoop
+      members: Leden
+      new_ordergroup: Nieuw huishouden
+      new_user: Nieuw lid
+      orders:
+        end: Bestellingen sluiten
+        overview: Overzicht van bestellingen
+        title: Bestellingen
+      products:
+        edit: Produkten wijzigen
+        edit_stock: Voorraad wijzigen
+        edit_suppliers: Leveranciers wijzigen
+        title: Produkten
+      tasks: Mijn taken
+      title: Direct naar ...
+      write_message: Bericht schrijven
+  invites:
+    errors:
+      already_member: 
+    modal_form:
+      body: 
+      title: 
+    new:
+      action: 
+      back: 
+      body: 
+    success: 
+  layouts:
+    application1:
+      title: Foodsoft - %{title}
+    email:
+      footer: 
+    foodsoft: Foodsoft
+    header:
+      feedback:
+        desc: Foutje gevonden? Suggesties? Ideeën? Commentaar?
+        title: Feedback
+      footer: Foodsoft, open source software voor een non-profit voedselcoop.
+      help: Help
+      logout: Uitloggen
+      ordergroup: Mijn huishouden
+      profile: Profiel aanpassen
+    logo: <span>food</span>soft
+  lib:
+    order_pdf:
+      page: Pagina %{number}
+  login:
+    accept_invitation:
+      body: 
+      submit: 
+      title: 
+    controller:
+      accept_invitation:
+        notice: 
+      error_group_invalid: 
+      error_invite_invalid: 
+      error_token_invalid: 
+      reset_password:
+        notice: 
+      update_password:
+        notice: 
+    forgot_password:
+      body: 
+      submit: 
+      title: 
+    new_password:
+      body: 
+      submit: 
+      title: 
+  mailer:
+    dateformat: 
+    feedback:
+      header: 
+      subject: 
+    foodsoft_message:
+      footer: 
+    invite:
+      subject: 
+      text: 
+    negative_balance:
+      subject: 
+      text: 
+    not_enough_users_assigned:
+      subject: 
+      text: 
+    order_result:
+      subject: 
+      text0: 
+      text1: 
+    reset_password:
+      subject: 
+      text: 
+    upcoming_tasks:
+      nextweek: 
+      subject: 
+      text0: 
+      text1: 
+  messages:
+    create:
+      notice: 
+    index:
+      new: 
+      title: 
+    messages:
+      reply: 
+    model:
+      reply_header: 
+      reply_indent: 
+      reply_subject: 
+    new:
+      list:
+        desc: 
+        mail: 
+        subscribe: 
+        subscribe_msg: 
+        wiki: 
+      no_user_found: 
+      search: 
+      search_user: 
+      title: 
+    show:
+      all_messages: 
+      from: 
+      reply: 
+      sent_on: 
+      subject: 
+      title: 
+  model:
+    membership:
+      no_admin_delete: 
+    order_article:
+      error_price: 
+    page:
+      redirect: 
+    user:
+      no_ordergroup: 
+      notify:
+        email_is_public: 
+        name_is_public: 
+        negative_balance: 
+        order_finished: 
+        phone_is_public: 
+        send_as_email: 
+        upcoming_tasks: 
+  navigation:
+    admin:
+      home: Overzicht
+      ordergroups: Huishoudens
+      title: Administratie
+      users: Gebruikers
+      workgroups: Werkgroepen
+    articles:
+      categories: Categoriën
+      stock: Voorraad
+      suppliers: Leveranciers/producten
+      title: Producten
+    dashboard: Dashboard
+    finances:
+      accounts: Ledenbetalingen
+      balancing: Bestellingen afrekenen
+      home: Overzicht
+      invoices: Facturen
+      title: Financiën
+    foodcoop: Foodcoop
+    members: Leden
+    messages: Berichten
+    ordergroups: Huishoudens
+    orders:
+      archive: Mijn bestellingen
+      manage: Beheer bestellingen
+      ordering: Plaats bestelling!
+      title: Bestellingen
+    tasks: Taken
+    wiki:
+      all_pages: Alle Pagina's
+      home: Begin
+      title: Wiki
+    workgroups: Werkgroepen
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%n %u'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: ! ','
+      precision: 2
+      separator: ! ' '
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion:
+            one: miljard
+            other: miljard
+          million: miljoen
+          quadrillion:
+            one: biljard
+            other: biljard
+          thousand: duizend
+          trillion: triljoen
+          unit: 
+      format:
+        delimiter: 
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: byte
+            other: bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: 
+    precision:
+      format:
+        delimiter: 
+  ordergroups:
+    edit:
+      title: 
+    index:
+      title: 
+    model:
+      error_single_group: 
+      invalid_balance: 
+  orders:
+    articles:
+      article_count: 
+      name: 
+      prices: 
+      prices_sum: 
+      unit_quantity: 
+      units_full: 
+      units_ordered: 
+    create:
+      notice: 
+    edit:
+      title: 
+    fax:
+      amount: 
+      articles: 
+      customer_number: 
+      delivery_day: 
+      heading: 
+      name: 
+      number: 
+      to_address: 
+    finish:
+      notice: 
+    form:
+      name: 
+      note: 
+      origin: 
+      prices: 
+      select_all: 
+      stockit: 
+      supplier: 
+      title: 
+      unit_quantity: 
+    index:
+      action_end: 
+      confirm_delete: 
+      confirm_end: 
+      ended_orders: 
+      ending: 
+      new_order: 
+      no_open_orders: 
+      note: 
+      open_orders: 
+      supplier: 
+      title: 
+    model:
+      error_closed: 
+      error_nosel: 
+      error_starts_before_ends: 
+      notice_close: 
+    new:
+      title: 
+    orders:
+      ending: 
+      start: 
+      status: 
+      supplier: 
+    show:
+      action_end: 
+      amounts: 
+      articles: 
+      articles_ordered: 
+      begin: 
+      comments:
+        title: 
+      comments_link: 
+      confirm_delete: 
+      confirm_end: 
+      created_by: 
+      download:
+        article_pdf: 
+        download_file: 
+        fax_pdf: 
+        fax_txt: 
+        group_pdf: 
+        matrix_pdf: 
+        title: 
+      ending: 
+      group_orders: 
+      note: 
+      sort_article: 
+      sort_group: 
+      supplier: 
+      title: 
+      warn_not_closed: 
+    state:
+      closed: 
+      finished: 
+      open: 
+    update:
+      notice: 
+  pages:
+    all:
+      new_page: 
+      recent_changes: 
+      search:
+        action: 
+        placeholder: 
+      site_map: 
+      title: 
+      title_list: 
+    body:
+      title_toc: 
+    create:
+      notice: 
+    cshow:
+      error_noexist: 
+      redirect_notice: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+    error_stale_object: 
+    form:
+      help:
+        bold: 
+        external_link_ex: 
+        external_links: 
+        heading: 
+        headings: 
+        italic: 
+        list_item_1: 
+        list_item_2: 
+        noformat: 
+        ordered_list: 
+        section_block: 
+        section_character: 
+        section_link: 
+        section_table: 
+        see_tables: 
+        tables_link: 
+        text: 
+        title: 
+        unordered_list: 
+        wiki_link_ex: 
+        wiki_links: 
+      preview: 
+    last_updated: 
+    new:
+      title: 
+    page_list_item:
+      date_format: 
+    show:
+      date_format: 
+      delete: 
+      delete_confirm: 
+      edit: 
+      last_updated: 
+      subpages: 
+      title_versions: 
+      versions: 
+    title: 
+    update:
+      notice: 
+    version:
+      author: 
+      date_format: 
+      revert: 
+      title: 
+      title_version: 
+      view_current: 
+  sessions:
+    logged_in: 
+    logged_out: 
+    login_invalid: 
+    new:
+      forgot_password: 
+      login: 
+      nojs: 
+      noscript: 
+      password: 
+      title: 
+      user: 
+  shared:
+    articles_by_articles:
+      ordered: Besteld (Hoeveelheid + Tolerantie)
+      ordergroup: Huishouden
+      price: Totaalprijs
+      received: Ontvangen
+    articles_by_groups:
+      fc_price: FC-Prijs
+      fc_price_desc: Prijs inclusief belasting, borg en foodcoop-toeslag
+      name: Naam
+      price: Totaalprijs
+      unit: Eenheid
+      unit_quantity: Groothandelseenheid
+      unit_quantity_desc: Hoeveel eenheden per groothandelsverpakking
+      units: Eenheden
+      units_desc: Toegewezen eenheden
+    group:
+      access: Toegang tot
+      activated: actief
+      address: Adres
+      apple_limit: 
+      contact: Contact
+      deactivated: 
+      description: 
+      members: Leden
+      no_weekly_job: 
+      weekly_job: 
+    group_form_fields:
+      search: Zoeken ...
+      search_user: Gebruiker zoeken
+      title: Wekelijkse taken
+      user_not_found: Geen gebruiker gevonden
+    loginInfo:
+      edit_profile: Profiel aanpassen
+      feedback:
+        desc: 
+        title: 
+      help: Help
+      homepage_title: Foodcoop startpagina bezoeken
+      logout: Uitloggen
+      profile: Profiel
+    memberships:
+      current_members:
+        drop: verwijderen
+        no_members: ! '%{group} heeft geen leden.'
+      members:
+        already_members: Zijn al lid
+        desc: 
+        invite: uitnodiging
+        invite_someone: Iemand uitnodigen
+        no_members_yet: Zijn nog geen lid
+        title: Leden van %{group}
+      non_members:
+        add: toevoegen
+    open_orders:
+      ending: Einde
+      no_open_orders: Er zijn momenteel geen lopende bestellingen.
+      not_enough_apples: 
+      supplier: Leverancier
+      title: Lopende bestellingen
+      total: Som
+      total_sum: Totaalsom
+      who_ordered: Wie heeft besteld?
+    workgroup_members:
+      title: 
+  simple_form:
+    error_notification:
+      default_message: 
+    hints:
+      article:
+        unit: ! 'Bijvoorbeeld: KG of 1L of 500g'
+      message:
+        private: 
+      order_article:
+        units_to_order: 
+        update_current_price: 
+      stock_article:
+        supplier: 
+      supplier:
+        min_order_quantity: 
+      task:
+        duration: 
+        required_users: 
+      tax: 
+    labels:
+      article:
+        article_category: Categorie
+        manufacturer: Producent
+        name: Naam
+        note: Notitie
+        origin: Herkomst
+        unit: Eenheid
+      article_category:
+        description: Omschrijving
+        name: Naam
+      defaults:
+        amount: 
+        date: Datum
+        deposit: Statiegeld
+        description: Omschrijving
+        email: Email
+        note: Notitie
+        order_number: Order nummer
+        ordergroup: Huishouden
+        password: Wachtwoord
+        password_confirmation: Wachtwoord herhalen
+        phone: Telefoon
+        price: Prijs (netto)
+        tax: BTW
+        title: Titel
+        unit_quantity: Groothandelseenheid
+        user_tokens: Leden
+      delivery:
+        delivered_on: 
+        supplier: 
+      group_order_article:
+        ordergroup_id: 
+        result: 
+      invoice:
+        amount: 
+        date: 
+        delivery: 
+        deposit: 
+        deposit_credit: 
+        note: 
+        number: 
+        order: 
+        paid_on: 
+        supplier: 
+      message:
+        body: 
+        group_id: 
+        private: 
+        recipient_tokens: 
+        sent_to_all: 
+        subject: 
+      order:
+        ends: Eindigt op
+        starts: Start op
+      order_article:
+        units_to_order: 
+        update_current_price: 
+      order_comment:
+        text: 
+      ordergroup:
+        contact_address: Adres
+        contact_person: Contactpersoon
+        contact_phone: Telefoon
+        ignore_apple_restriction: 
+      page:
+        body: 
+        parent_id: 
+      stock_article:
+        supplier: 
+      supplier:
+        address: 
+        contact_person: 
+        customer_number: 
+        delivery_days: 
+        email: 
+        fax: 
+        is_subscribed: 
+        min_order_quantity: 
+        name: 
+        note: 
+        order_howto: 
+        phone: 
+        phone2: 
+        url: 
+      task:
+        done: 
+        due_date: 
+        duration: 
+        name: 
+        required_users: 
+        user_list: 
+        workgroup: 
+      user:
+        email: Email
+        last_name: Achternaam
+        name: Naam
+        nick: Gebruikersnaam
+        ordergroup: Huishouden
+        phone: Telefoon
+        workgroup:
+          one: Werkgroep
+          other: Werkgroepen
+      workgroup:
+        next_weekly_tasks_number: 
+        role_admin: 
+        role_article_meta: 
+        role_finance: 
+        role_orders: 
+        role_suppliers: 
+        task_description: 
+        task_duration: 
+        task_name: 
+        task_required_users: 
+        weekday: 
+        weekly_task: 
+    'no': Nee
+    required:
+      mark: ! '*'
+      text: verplicht
+    'yes': Ja
+  stock_takings:
+    create:
+      notice: 
+    edit:
+      title: 
+    index:
+      new_inventory: 
+      title: 
+    new:
+      create: 
+      stock_articles: 
+      temp_inventory: 
+      text_deviations: 
+      text_need_articles: 
+      title: 
+    show:
+      amount: 
+      article: 
+      confirm_delete: 
+      date: 
+      note: 
+      overview: 
+      supplier: 
+      title: 
+      unit: 
+    stock_takings:
+      confirm_delete: 
+      date: 
+      note: 
+    update:
+      notice: 
+  stockit:
+    check:
+      not_empty: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+    form:
+      price_hint: 
+    index:
+      article:
+        article: 
+        available: 
+        category: 
+        ordered: 
+        price: 
+        stock: 
+        supplier: 
+        unit: 
+        vat: 
+      confirm_delete: 
+      new_delivery: 
+      new_stock_article: 
+      new_stock_taking: 
+      order_online: 
+      show_stock_takings: 
+      stock_count: 
+      stock_worth: 
+      toggle_unavailable: 
+      view_options: 
+    new:
+      search_text: 
+      title: 
+    stock_create:
+      notice: 
+    stock_update:
+      notice: 
+  suppliers:
+    create:
+      notice: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+    index:
+      action_import: 
+      action_new: 
+      articles: 
+      confirm_del: 
+      deliveries: 
+      stock: 
+      title: 
+    new:
+      title: 
+    shared_supplier_note: 
+    shared_suppliers:
+      body: 
+      subscribe: 
+      supplier: 
+      title: 
+    show:
+      confirm_delete: 
+      last_deliveries: 
+      new_delivery: 
+      show_deliveries: 
+    update:
+      notice: 
+  support:
+    array:
+      last_word_connector: 
+      two_words_connector: 
+      words_connector: 
+  tasks:
+    accept:
+      notice: 
+    archive:
+      title: 
+    archive_tasks:
+      due_date: 
+      task: 
+      task_format: 
+      who: 
+    create:
+      notice: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+    error_not_found: 
+    form:
+      search:
+        hint: 
+        noresult: 
+        placeholder: 
+    index:
+      show_group_tasks: 
+      title: 
+      title_non_group: 
+    list:
+      accept_task: 
+      done: 
+      done_q: 
+      due_date: 
+      mark_done: 
+      reject_task: 
+      task: 
+      task_format: 
+      who: 
+      who_hint: 
+    nav:
+      all_tasks: 
+      archive: 
+      group_tasks: 
+      my_tasks: 
+      new_task: 
+    new:
+      title: 
+    set_done:
+      notice: 
+    show:
+      accept_task: 
+      due_date: 
+      hours: 
+      mark_done: 
+      reject_task: 
+      title: 
+    update:
+      notice: 
+    user:
+      more: 
+      tasks_link: 
+      title: 
+      title_accepted: 
+      title_open: 
+    workgroup:
+      title: 
+      title_all: 
+      weekly:
+        desc: 
+        edit: 
+        empty: 
+        title: 
+  time:
+    am: morgen
+    formats:
+      default: ! '%A, %d %B %Y, %H:%M'
+      long: ! '%A, %d %B %Y, %H:%M'
+      short: ! '%d %B, %H:%M'
+    pm: middag
+  ui:
+    close: Sluiten
+    delete: Verwijder
+    edit: Bewerk
+    marks:
+      close: ! '&times;'
+    or_cancel: of annuleren
+    save: Opslaan
+    show: Tonen
+  views:
+    pagination:
+      first: 
+      last: 
+      next: 
+      previous: 
+      truncate: 
+  workgroups:
+    edit:
+      title: Werkgroep bewerken
+    error_last_admin_group: 
+    error_last_admin_role: 
+    index:
+      title: Werkgroepen
+    update:
+      notice: Werkgroep is bijgewerkt

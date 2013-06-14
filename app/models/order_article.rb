@@ -148,7 +148,10 @@ class OrderArticle < ActiveRecord::Base
   end
 
   def update_ordergroup_prices
-    group_order_articles.each { |goa| goa.group_order.update_price! }
+    # updates prices of ALL ordergroups - these are actually too many
+    # in case of performance issues, update only ordergroups, which ordered this article
+    # CAUTION: in after_destroy callback related records (e.g. group_order_articles) are already non-existent
+    order.group_orders.each { |go| go.update_price! }
   end
 
 end
