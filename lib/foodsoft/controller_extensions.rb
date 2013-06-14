@@ -13,7 +13,7 @@ module Foodsoft
       end
 
       def user_settings_language
-        current_user.settings.profile['language'] if current_user
+        current_user.locale if current_user
       end
       
       def session_language

@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def locale
+    settings.profile['language']
+  end
+  
   def name
     [first_name, last_name].join(" ")
   end
