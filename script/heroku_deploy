@@ -1,0 +1,115 @@
+#!/bin/sh
+#
+# deploy foodsoft to heroku
+#
+# To be run from foodsoft's root. A new temporary git branch will be created
+# from the current working directory - it's safest to run this with a clean
+# working directory.
+#
+# Use environment variables to customize variables below.
+# You need to have a working heroku client.
+#
+
+# rails environment to deploy
+[ "$RAILS_ENV" ] || RAILS_ENV=production
+# heroku application name
+[ "$APP" ] || APP=foodsoft-translation
+# heroku region to create application in
+[ "$REGION" ] || REGION=eu
+
+
+# make sure required software is available
+if ! heroku >/dev/null 2>&1; then
+	echo "Please install heroku." 1>&2
+	exit 1
+fi
+if ! git version >/dev/null 2>&1; then
+	echo "Please install git." 1>&2
+	exit 1
+fi
+# required settings
+if [ "$RAILS_ENV" = "translation" -a ! "$LOCALEAPP_KEY" ]; then
+	echo "Need to specify LOCALEAPP_KEY key for translation environment" 1>&2
+	exit 1
+fi
+
+# create app if it doesn't exist
+if ! heroku apps | grep -q "^$APP\s"; then
+	heroku create "$APP" --region "$REGION"
+	heroku addons:add heroku-postgresql:dev --app "$APP"
+	heroku pg:promote `heroku config | grep 'HEROKU_POSTGRESQL_.*_URL' | cut -d: -f1`
+fi
+heroku config:set RACK_ENV="${RAILS_ENV}" RAILS_ENV="${RAILS_ENV}" --app "$APP"
+
+# create temporary branch with heroku-specific changes
+touch ._tmp_havestash
+OLDSTASH=`git stash list | wc -l`
+git stash save -q -a "stored changes before creating heroku-$APP"
+ORIG_BRANCH=`git status --b --porcelain | head -n 1 | sed 's|^#*\s*||;s|\.\.\..*$||'`
+BRANCH="_tmp-heroku-$APP"
+if ! git checkout -b "$BRANCH"; then
+	echo "Could not create to temporary branch '$BRANCH', aborting." 1>&2
+	exit 1
+fi
+# remove sqlite3 dependency as it doesn't install on heroku
+sed -i "s|^\\(\\s*gem\\s\\+'sqlite3'\\)|#\1|" Gemfile
+sed -i "s|^\\(\\s*sqlite3\\b\)|#\1|" Gemfile.lock
+# make sure postgresql db is present, as it is the default heroku db
+echo "\ngem 'pg'" >>Gemfile
+echo "\ngem 'localeapp'" >>Gemfile
+# always use unicorn
+echo "\ngem 'unicorn'" >>Gemfile
+echo 'web: bundle exec unicorn -p $PORT -E $RACK_ENV' >Procfile
+bundle install --quiet # to update Gemfile.lock
+# do not ignore deployment files
+sed -i 's|^\(config/\*.yml\)|#\1|' .gitignore
+sed -i 's|^\(config/initializers/secret_token.rb\)|#\1|' .gitignore
+sed -i 's|^\(config/environments/development.rb\)|#\1|' .gitignore
+# make sure we have a full configuration
+# TODO pull this from heroku when exists?
+if [ ! -e config/app_config.yml ]; then
+	echo "config/app_config.yml not present, copying config/app_config.yml.SAMPLE"
+	cp config/app_config.yml.SAMPLE config/app_config.yml
+fi
+# keep secret token from currently deployed app, else generate new one
+heroku git:remote --app="$APP" >/dev/null 2>&1
+if git show heroku/master:config/initializers/secret_token.rb >/dev/null 2>&1; then
+	git show heroku/master:config/initializers/secret_token.rb >config/initializers/secret_token.rb
+else
+	cat >config/initializers/secret_token.rb <<-EOF
+		# auto-generated secret key
+		Foodsoft::Application.config.secret_token = '`openssl rand -hex 128`'
+	EOF
+fi
+# special environment hooks
+if [ "$LOCALEAPP_KEY" ]; then
+	# configure localeapp, manually to include environment
+	cat >config/initializers/localeapp.rb <<EOF
+require 'localeapp/rails'
+
+Localeapp.configure do |config|
+  config.api_key = '$LOCALEAPP_KEY'
+  config.sending_environments = ['$RAILS_ENV']
+  config.polling_environments = ['$RAILS_ENV']
+end
+EOF
+	bundle exec localeapp pull
+fi
+# TODO add more extensive database seed
+
+# and push = deploy
+git add -A
+git commit -q -m "heroku changes for environment ${RAILS_ENV}" -a
+git push -f heroku $BRANCH:master
+# create/update database
+if !heroku run rake db:version >/dev/null 2>&1; then
+	heroku run rake db:setup
+else
+	heroku run rake db:migrate
+fi
+
+# return to original branch
+git checkout -q "$ORIG_BRANCH" && git stash pop -q
+git branch -q -D "$BRANCH"
+rm -f ._tmp_havestash
+
