@@ -58,7 +58,8 @@ class LoginController < ApplicationController
         if @user.save
           Membership.new(:user => @user, :group => @invite.group).save!
           @invite.destroy
-          redirect_to login_url, notice: I18n.t('login.controller.accept_invitation.notice')
+          login(@user)
+          redirect_to root_url, notice: I18n.t('login.controller.accept_invitation.notice')
         end
       end
     else
@@ -72,7 +73,8 @@ class LoginController < ApplicationController
       User.transaction do
         @user = User.new(params[:user])
         if @user.save
-          redirect_to login_url, notice: I18n.t('login.controller.signup.notice')
+          login(@user)
+          redirect_to root_url, notice: I18n.t('login.controller.signup.notice')
         end
       end
     else

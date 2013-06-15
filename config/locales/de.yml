@@ -983,7 +983,7 @@ de:
       title: Einlading in die %{name}
     controller:
       accept_invitation:
-        notice: Herzlichen Glückwunsch, Dein Account wurde erstellt. Du kannst Dich nun einloggen.
+        notice: Herzlichen Glückwunsch, Dein Account wurde erstellt.
       error_group_invalid: Die Gruppe, in die Du eingeladen wurdest, existiert leider nicht mehr.
       error_invite_invalid: Deine Einladung ist nicht (mehr) gültig.
       error_token_invalid: Ungültiger oder abgelaufener Token. Bitte versuch es erneut.

@@ -985,7 +985,7 @@ en:
       title: Invitation to %{name}
     controller:
       accept_invitation:
-        notice: Congratulations, your account was created. You can login now.
+        notice: Congratulations, your account was created.
       error_group_invalid: The group in which you were invited doesn’t exist anymore.
       error_invite_invalid: Your invite is not valid (anymore).
       error_token_invalid: Invalid or expired token. Please try again.
@@ -994,7 +994,7 @@ en:
       update_password:
         notice: Your password was updated. You can login now.
       signup:
-        notice: Congratulations, your account was created. You can login now.
+        notice: Congratulations, your account was created.
     forgot_password:
       body: <p>No Problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>
       submit: Request new password
