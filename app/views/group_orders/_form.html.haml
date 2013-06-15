@@ -50,7 +50,10 @@
           %td{colspan: "9"}
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
-            %td.name= order_article.article.name
+            - order_title = ''
+            - order_title += t('.manufacturer')+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.nil?
+            - order_title += "\n" + t('.note')+': ' + order_article.article.note unless order_article.article.note.nil?
+            %td.name{title: order_title}= order_article.article.name
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15
             %td= h order_article.article.origin
@@ -86,7 +89,7 @@
             %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
               %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price], unit: "")
               €
-              .article-info
+              -#.article-info
                 .article-name= order_article.article.name
                 .pull-right
                   = t('.units_full') + ':'
@@ -114,7 +117,7 @@
           %td.currency
             %span#total_price= @group_order.price
             €
-        %tr
+        -#%tr
           %td= t('.available_funds') + ':'
           %td.currency= number_to_currency(@ordering_data[:available_funds])
         %tr
