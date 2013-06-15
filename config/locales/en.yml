@@ -556,8 +556,8 @@ en:
         article: Article
         gross: Gross
         net: Net
-        number: Number
-        refund: Refund
+        number: Nr.
+        refund: Deposit
         tax: Tax
       group_order_articles:
         add_group: Add group
@@ -566,16 +566,16 @@ en:
         total_fc: Sum (FC-Price)
         units: Units
       index:
-        title: Closed Orders
+        title: Closed orders
       invoice:
         edit: Edit invoice
         invoice_amount: ! 'Invoice amount:'
         invoice_date: ! 'Invoice date:'
         invoice_number: ! 'Invoice number:'
-        minus_refund_calculated: ! '- refund calculated:'
+        minus_refund_calculated: ! '- deposit charged:'
         new: Create new invoice
         new_body: ! 'Create an invoice for this order:'
-        plus_refund_credited: ! '+ refund credited:'
+        plus_refund_credited: ! '+ deposit returned:'
         refund_adjusted_amount: ! 'amount adjusted for refund:'
       new:
         alert: Attention, order was already accounted
@@ -620,15 +620,15 @@ en:
       notice: Invoice was created
     financial_transactions:
       create:
-        notice: The Transaction was saved.
+        notice: The transaction was saved.
       create_collection:
-        alert: ! 'An Error occured: %{error}'
-        notice: All Transactions were saved.
+        alert: ! 'An error occured: %{error}'
+        notice: All transactions were saved.
       index:
         balance: ! 'Balance of account: %{balance}'
         last_updated_at: (last updated %{when} ago)
         new_transaction: Create new transaction
-        search_placeholder: Search ..
+        search_placeholder: Search ...
         title: Account statement for %{name}
       new:
         paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
@@ -660,10 +660,10 @@ en:
       end: End
       everything_cleared: Great, everything is accounted...
       group: Group
-      last_transactions: Last Transactions
+      last_transactions: Last transactions
       note: Note
-      open_transactions: Open Transactions
-      show_all: Show all
+      open_transactions: not yet accounted
+      show_all: show all
       supplier: supplier
       title: Finances
       unpaid_invoices: Unpaid invoices
@@ -696,10 +696,10 @@ en:
     ordergroups:
       index:
         new_transaction: Add new transactions
-        search_placeholder: Search ..
+        search_placeholder: Search ...
         title: Manage accounts
       ordergroups:
-        account_balance: Account Balance
+        account_balance: Account balance
         account_statement: Account statement
         name: Name
         new_transaction: New transaction
@@ -771,11 +771,11 @@ en:
       tolerance: Tolerance
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
-      total_units: Total units
       unit: Unit
       unit_missing: Missing units
       units: Units
       units_full: Filled units
+      units_total: Total units
     index:
       closed_orders:
         more: more...
@@ -1429,11 +1429,11 @@ en:
   sessions:
     logged_in: Logged in!
     logged_out: Logged out!
-    login_invalid: Invalid email or password
+    login_invalid: Invalid username or password
     new:
       forgot_password: Forgot password?
       login: Login
-      nojs: Attention, Cookies and Javascript have to be activated! Please switch off %{link}.
+      nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
       password: Password
       title: Foodsoft login
@@ -1560,8 +1560,8 @@ en:
         amount: Amount
         date: Billing date
         delivery: Delivery
-        deposit: Charge deposit
-        deposit_credit: Credit deposit
+        deposit: Deposit charged
+        deposit_credit: Deposit returned
         note: Note
         number: Number
         order: Order

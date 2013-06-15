@@ -527,8 +527,8 @@ nl:
         title: Order sluiten
       edit_results_by_articles:
         add_article: Artikel toevoegen
-        amount: Hoeveelheid
-        amount_per_unit: Groothandelsverpakkingsgroote * Hoeveelheid
+        amount: Aantal
+        amount_per_unit: Groothandelsverpakkingsgroote * Aantal
         article: Artikel
         gross: Bruto
         net: Netto
@@ -544,37 +544,37 @@ nl:
       index:
         title: Gesloten orders
       invoice:
-        edit: 
-        invoice_amount: 
-        invoice_date: 
-        invoice_number: 
-        minus_refund_calculated: 
-        new: 
-        new_body: 
-        plus_refund_credited: 
-        refund_adjusted_amount: 
+        edit: Factuur bewerken
+        invoice_amount: ! 'Factuurbedrag:'
+        invoice_date: ! 'Factuurdatum:'
+        invoice_number: ! 'Factuurnummer:'
+        minus_refund_calculated: ! '- statiegeld berekend:'
+        new: Factuur toevoegen
+        new_body: ! 'Een factuur aan deze rekening toevoegen:'
+        plus_refund_credited: ! '+ statiegeld teruggekregen:'
+        refund_adjusted_amount: ! 'bedrag gecorrigeerd voor statiegeld:'
       new:
-        alert: 
-        articles_overview: 
-        comment_on_transaction: 
-        comments: 
-        confirm_order: 
-        create_invoice: 
-        edit_note: 
-        edit_order: 
-        groups_overview: 
-        invoice: 
-        notes_and_journal: 
-        summary: 
-        title: 
-        view_options: 
+        alert: Opgelet, bestelling is al afgerekend
+        articles_overview: Artikeloverzicht
+        comment_on_transaction: Hier kun je een notitie aan de afrekening toevoegen.
+        comments: Notities
+        confirm_order: Bestelling afsluiten
+        create_invoice: Rekening toevoegen
+        edit_note: Notitie bewerken
+        edit_order: Bestelling bewerken
+        groups_overview: Overzicht per huishouden
+        invoice: Factuur
+        notes_and_journal: Notities/Protocol
+        summary: Samenvatting
+        title: ! '%{name} afrekenen'
+        view_options: Weergaveopties
       order_article:
-        confirm: 
+        confirm: Weet je het zeker?
       orders:
         clear: afrekenen
         cleared: afgerekend (%{amount})
         close: direct afsluiten
-        confirm: 
+        confirm: Weet je zeker dat de je bestelling wilt afsluiten?
         end: Einde
         ended: beëindigd
         last_edited_by: Laatst aangepast door
@@ -583,104 +583,104 @@ nl:
         state: Status
       summary:
         changed: 
-        duration: 
-        fc_amount: 
-        fc_profit: 
-        gross_amount: 
-        groups_amount: 
-        net_amount: 
-        reload: 
+        duration: Van %{starts} tot %{ends}
+        fc_amount: ! 'FC-bedrag:'
+        fc_profit: FC Winst
+        gross_amount: ! 'Bruto bedrag:'
+        groups_amount: ! 'Bedrag van huishoudens:'
+        net_amount: ! 'Netto bedrag:'
+        reload: Samenvatting verversen
         with_extra_charge: 
         without_extra_charge: 
     create:
-      notice: 
+      notice: Rekening is gemaakt
     financial_transactions:
       create:
-        notice: 
+        notice: De transactie is opgeslagen.
       create_collection:
         alert: 
-        notice: 
+        notice: Alle transacties zijn opgeslagen.
       index:
-        balance: 
-        last_updated_at: 
-        new_transaction: 
-        search_placeholder: 
-        title: 
+        balance: ! 'Tegoed: %{balance}'
+        last_updated_at: (laatst bijgewerkt %{when} geleden)
+        new_transaction: Nieuwe transactie toevoegen
+        search_placeholder: Zoeken ...
+        title: Rekeningoverzicht voor %{name}
       new:
         paragraph: 
-        title: 
+        title: Nieuwe transactie
       new_collection:
-        amount: 
-        new_ordergroup: 
-        note: 
-        ordergroup: 
-        save: 
+        amount: Bedrag
+        new_ordergroup: Nog een huishouden toevoegen
+        note: Notitie
+        ordergroup: Huishouden
+        save: Transactie opslaan
         sidebar: 
         title: 
       ordergroup:
         remove: 
         remove_group: 
       transactions:
-        amount: 
-        date: 
-        note: 
-        who: 
+        amount: Bedrag
+        date: Datum
+        note: Notitie
+        who: Wie
     group_order_articles:
       form:
         amount_change_for: 
     index:
-      amount: 
-      amount_fc: 
-      clear: 
-      date: 
-      end: 
-      everything_cleared: 
-      group: 
-      last_transactions: 
-      note: 
-      open_transactions: 
-      show_all: 
-      supplier: 
-      title: 
-      unpaid_invoices: 
+      amount: Bedrag
+      amount_fc: Bedrag(FC)
+      clear: Afrekenen
+      date: Datum
+      end: Einde
+      everything_cleared: Mooi zo, alles is verrekend...
+      group: Groep
+      last_transactions: Laatste transacties
+      note: Notitie
+      open_transactions: nog niet afgerekend
+      show_all: alle tonen
+      supplier: leverancier
+      title: Financiën
+      unpaid_invoices: Onbetaalde facturen
     invoices:
       edit:
-        title: 
+        title: Factuur bewerken
       form:
-        delivery: 
-        linked: 
-        order: 
+        delivery: levering
+        linked: Deze factuur is met aan %{what_link} gekoppeld.
+        order: bestelling
       index:
-        action_new: 
-        title: 
+        action_new: Nieuwe factuur toevoegen
+        title: Facturen
       invoices:
-        confirm_delete: 
-        delivery: 
+        confirm_delete: Weet je het zeker?
+        delivery: Levering
       new:
-        back: 
-        title: 
+        back: Terug
+        title: Nieuwe factuur toevoegen
       show:
-        back: 
-        delivery: 
-        linked: 
-        title: 
+        back: Terug
+        delivery: levering
+        linked: Deze factuur is aan een %{what_link} gekoppeld.
+        title: Factuur %{number}
     order_articles:
       edit:
-        title: 
+        title: Artikel bijwerken
       new:
-        title: 
+        title: Geleverd artikel aan bestelling toevoegen
     ordergroups:
       index:
-        new_transaction: 
-        search_placeholder: 
-        title: 
+        new_transaction: Nieuwe transacties toevoegen
+        search_placeholder: Zoeken ...
+        title: Tegoeden beheren
       ordergroups:
-        account_balance: 
+        account_balance: Tegoed
         account_statement: 
-        name: 
-        new_transaction: 
+        name: Naam
+        new_transaction: Nieuwe transactie
     update:
-      notice: 
+      notice: Factuur is bijgewerkt
   foodcoop:
     ordergroups:
       index:
@@ -747,11 +747,11 @@ nl:
       tolerance: Tolerantie
       total_sum_amount: Totalbedrag
       total_tolerance: Totale tolerantie
-      total_units: Totale eenheden
       unit: Eenheid
       unit_missing: Missende eenheden
       units: Eenheden
       units_full: Volle eenheden
+      units_total: Totaal aantal
     index:
       closed_orders:
         more: meer...
@@ -949,26 +949,26 @@ nl:
   login:
     accept_invitation:
       body: 
-      submit: 
-      title: 
+      submit: Foodsoft account aanmaken
+      title: Uitnodiging voor %{name}
     controller:
       accept_invitation:
-        notice: 
-      error_group_invalid: 
-      error_invite_invalid: 
-      error_token_invalid: 
+        notice: Gefeliciteerd, je account is aangemaakt. Nu kun je inloggen.
+      error_group_invalid: De groep waarin je bent uitgenodigd bestaat niet meer.
+      error_invite_invalid: Deze uitnodiging is niet (meer) geldig.
+      error_token_invalid: Onjuist of verlopen token. Probeer het opnieuw.
       reset_password:
-        notice: 
+        notice: Als je e-mailadres hier is geregistreerd, krijg je een bericht met een link om je wachtwoord opnieuw in te stellen.
       update_password:
-        notice: 
+        notice: Je wachtwoord is veranderd. Nu kun je weer inloggen.
     forgot_password:
-      body: 
-      submit: 
-      title: 
+      body: <p>Geen probleem, je kunt hier een nieuw wachtwoord instellen.</p> <p>Vul het emailadres in waarmee je je hebt geregistreerd, dan krijg je een email met verdere instructies.</p>
+      submit: Nieuw wachtwoord aanvragen
+      title: Wachtwoord vergeten?
     new_password:
-      body: 
-      submit: 
-      title: 
+      body: <p>Geef nieuw wachtwoord voor <b>%{user}</b></p>
+      submit: Nieuw wachtwoord opslaan
+      title: Nieuw wachtwoord
   mailer:
     dateformat: 
     feedback:
@@ -1300,17 +1300,17 @@ nl:
       title_version: 
       view_current: 
   sessions:
-    logged_in: 
-    logged_out: 
-    login_invalid: 
+    logged_in: Ingelogd!
+    logged_out: Uitgelogd!
+    login_invalid: Onjuiste gebruikersnaam of wachtwoord
     new:
-      forgot_password: 
-      login: 
-      nojs: 
-      noscript: 
-      password: 
-      title: 
-      user: 
+      forgot_password: Wachtwoord vergeten?
+      login: Aanmelden
+      nojs: Opgelet, cookies en javascript moeten toegelaten worden! %{link} uitzetten, alsjeblieft.
+      noscript: NoScript
+      password: Wachtwoord
+      title: Foodsoft aanmelden
+      user: Gebruiker
   shared:
     articles_by_articles:
       ordered: Besteld (Hoeveelheid + Tolerantie)
@@ -1323,9 +1323,9 @@ nl:
       name: Naam
       price: Totaalprijs
       unit: Eenheid
-      unit_quantity: Groothandelseenheid
+      unit_quantity: Gr.Eenh.
       unit_quantity_desc: Hoeveel eenheden per groothandelsverpakking
-      units: Eenheden
+      units: Aantal
       units_desc: Toegewezen eenheden
     group:
       access: Toegang tot
@@ -1430,16 +1430,16 @@ nl:
         ordergroup_id: 
         result: 
       invoice:
-        amount: 
-        date: 
-        delivery: 
-        deposit: 
-        deposit_credit: 
-        note: 
-        number: 
-        order: 
-        paid_on: 
-        supplier: 
+        amount: Bedrag
+        date: Factuurdatum
+        delivery: Levering
+        deposit: Statiegeld in rekening gebracht
+        deposit_credit: Statiegeld teruggekregen
+        note: Notitie
+        number: Nummer
+        order: Bestelling
+        paid_on: Betaalt op
+        supplier: Leverancier
       message:
         body: 
         group_id: 
