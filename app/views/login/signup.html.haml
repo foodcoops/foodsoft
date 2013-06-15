@@ -5,7 +5,7 @@
 - title t('.title', name: FoodsoftConfig[:name])
 = t('.body', foodcoop: h(FoodsoftConfig[:name])).html_safe
 = simple_form_for @user, url: signup_path do |form|
-  = render partial: 'shared/user_form_fields', locals: {f: form}
+  = render partial: 'shared/user_form_fields', locals: {f: form, with_ordergroup: true}
   .form-actions
     = submit_tag t('.submit'), class: 'btn'
 

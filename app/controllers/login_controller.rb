@@ -71,8 +71,14 @@ class LoginController < ApplicationController
   def signup
     if request.post?
       User.transaction do
-        @user = User.new(params[:user])
-        if @user.save
+        @user = User.new(params[:user].reject {|k,v| k=='ordergroup'})
+        @group = Ordergroup.new({
+          :name => @user.nick,
+          :contact_person => @user.name,
+          :contact_phone => @user.phone
+        }.merge(params[:user][:ordergroup]))
+        if @user.save and @group.save
+          Membership.new(:user => @user, :group => @group).save!
           login(@user)
           redirect_to root_url, notice: I18n.t('login.controller.signup.notice')
         end

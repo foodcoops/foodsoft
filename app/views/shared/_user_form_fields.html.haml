@@ -1,3 +1,16 @@
+- if defined? with_ordergroup and with_ordergroup
+  - content_for :javascript do
+    :javascript
+      $(function() {
+        $('input#use_ordergroup').change(function(el) {
+          var input = $('#user_ordergroup_contact_address');
+          if (this.checked)
+            input.removeAttr('disabled');
+          else
+            input.attr('disabled','disabled');
+        }).change();
+      });
+
 = f.input :nick
 = f.input :first_name
 = f.input :last_name
@@ -5,6 +18,17 @@
 = f.input :phone
 = f.input :password, :required => f.object.new_record?
 = f.input :password_confirmation
+- if defined? with_ordergroup and with_ordergroup
+  - defined? params[:use_ordergroup] or params[:use_ordergroup] = true
+  = f.fields_for :ordergroup do |ogf|
+    .control-group{style: 'vertical-align: bottom'}
+      = ogf.label :contact_address
+      .controls
+        = ogf.input_field :contact_address
+        - if with_ordergroup == 'optional'
+          %label.checkbox{:for => 'use_ordergroup'}
+            = check_box_tag :use_ordergroup, 1, params[:use_ordergroup]
+            = t('.ordergroup_use')
 .control-group
   .controls
     - for setting in User::setting_keys.keys

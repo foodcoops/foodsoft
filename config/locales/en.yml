@@ -155,6 +155,10 @@ en:
         title: Ordergroup %{name}
     search_placeholder: name ..
     users:
+      controller:
+        create:
+          notice_user: New user created.
+          notice_user_group: New user and ordergroup created.
       edit:
         title: Edit user
       index:
@@ -1507,6 +1511,8 @@ en:
       total: Sum
       total_sum: Total sum
       who_ordered: Who ordered?
+    user_form_fields:
+      ordergroup_use: also create new ordergroup
     workgroup_members:
       title: Group memberships
   simple_form:
