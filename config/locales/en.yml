@@ -993,6 +993,8 @@ en:
         notice: If your email is registered here, you will receive a message with a link to reset your password.
       update_password:
         notice: Your password was updated. You can login now.
+      signup:
+        notice: Congratulations, your account was created. You can login now.
     forgot_password:
       body: <p>No Problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>
       submit: Request new password
@@ -1001,6 +1003,10 @@ en:
       body: <p>Please fill in the new password for <b>%{user}</b></p>
       submit: Save new password
       title: New password
+    signup:
+      body: <p>To become a member of %{foodcoop}, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>
+      submit: Create a Foodsoft account
+      title: Become a member of %{name}
   mailer:
     dateformat: ! '%d %b'
     feedback:

@@ -66,6 +66,20 @@ class LoginController < ApplicationController
     end
   end
 
+  # For anyone
+  def signup
+    if request.post?
+      User.transaction do
+        @user = User.new(params[:user])
+        if @user.save
+          redirect_to login_url, notice: I18n.t('login.controller.signup.notice')
+        end
+      end
+    else
+      @user = User.new
+    end
+  end
+
   protected
 
   def validate_token

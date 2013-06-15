@@ -20,6 +20,8 @@ Foodsoft::Application.routes.draw do
     get '/login/forgot_password' => 'login#forgot_password', as: :forgot_password
     get '/login/new_password' => 'login#new_password', as: :new_password
     match '/login/accept_invitation/:token' => 'login#accept_invitation', as: :accept_invitation
+    get '/login/signup' => 'login#signup', :as => 'signup'
+    post '/login/signup' => 'login#signup', :as => 'signup'
     resources :sessions, :only => [:new, :create, :destroy]
 
     ########### User specific
