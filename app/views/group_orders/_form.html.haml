@@ -24,7 +24,7 @@
   = f.hidden_field :order_id
   = f.hidden_field :updated_by_user_id
   = f.hidden_field :ordergroup_id
-  - has_tolerance = ! @order.stockit? and ! (@ordering_data[:order_articles].values.index {|a| a[:unit] > 1}).nil?
+  - has_tolerance = (!@order.stockit? and !@ordering_data[:order_articles].values.index{|a| a[:unit] > 1}.nil?)
   %table.table.table-hover
     %thead
       %tr
@@ -54,10 +54,10 @@
           %td{colspan: "9"}
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
-            - order_title = ''
-            - order_title += t('.manufacturer')+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.nil?
-            - order_title += "\n" + t('.note')+': ' + order_article.article.note unless order_article.article.note.nil?
-            %td.name{title: order_title}= order_article.article.name
+            - order_title = []
+            - order_title.append t('.manufacturer')+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
+            - order_title.append t('.note')+': ' + order_article.article.note unless order_article.article.note.to_s.empty?
+            %td.name{title: order_title.join("\n")}= order_article.article.name
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15
             %td= h order_article.article.origin
