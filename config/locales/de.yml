@@ -1310,6 +1310,7 @@ de:
       error_nosel: Es muss mindestens ein Artikel ausgewählt sein
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: ! 'Bestellung: %{name}, bis %{ends}'
+      stock: Lager
     new:
       title: Neue Bestellung anlegen
     orders:

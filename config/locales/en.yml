@@ -1313,6 +1313,7 @@ en:
       error_nosel: At least one article must be selected
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: ! 'Order: %{name}, until %{ends}'
+      stock: Stock
     new:
       title: Create new order
     orders:

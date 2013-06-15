@@ -1188,6 +1188,7 @@ nl:
       error_nosel: 
       error_starts_before_ends: 
       notice_close: 
+      stock: Voorraad
     new:
       title: 
     orders:
