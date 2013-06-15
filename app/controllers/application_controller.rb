@@ -31,12 +31,23 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
+
+  def login(user)
+    session[:user_id] = user.id
+    session[:scope] = FoodsoftConfig.scope  # Save scope in session to not allow switching between foodcoops with one account
+    session[:locale] = user.locale
+  end
+
+  def logout
+    session[:user_id] = nil
+    session[:return_to] = nil
+  end
+
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
     if !current_user
       # No user at all: redirect to login page.
-      session[:user_id] = nil
+      logout
       session[:return_to] = request.original_url
       redirect_to_login :alert => I18n.t('application.controller.error_authn')
     else
