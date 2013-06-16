@@ -16,7 +16,9 @@
     = f.input :price
     = f.input :unit_quantity
     = f.input :order_number
-    = f.input :tax
+    = f.input :tax, :wrapper => :append do
+      = f.input_field :tax
+      %span.add-on %
     = f.input :deposit
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
