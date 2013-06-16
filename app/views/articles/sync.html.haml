@@ -22,50 +22,50 @@
       %b= @updated_articles.size
       = t '.update.update_msg'
   = t('.update.body').html_safe
-    %table.table
-      %thead
+  %table.table
+    %thead
+      %tr
+        %th= t 'simple_form.labels.article.name'
+        %th= t 'simple_form.labels.article.note'
+        %th= t 'simple_form.labels.article.manufacturer'
+        %th= t 'simple_form.labels.article.origin'
+        %th= t 'simple_form.labels.article.unit'
+        %th= t '.unit_quantity_short'
+        %th= t '.price_short'
+        %th= t 'simple_form.labels.defaults.tax'
+        %th= t 'simple_form.labels.defaults.deposit'
+        %th= t 'simple_form.labels.article.article_category'
+    %tbody
+      - @updated_articles.each do |updated_article, attrs|
+        - article = Article.find(updated_article.id)
+        %tr{:style => 'color:grey'}
+          %td= article.name
+          %td= article.note
+          %td= article.manufacturer
+          %td= article.origin
+          %td= article.unit
+          %td= article.unit_quantity
+          %td= article.price
+          %td= article.tax
+          %td= article.deposit
+          %td= article.article_category.name if article.article_category
         %tr
-          %th= t 'simple_form.labels.article.name'
-          %th= t 'simple_form.labels.article.note'
-          %th= t 'simple_form.labels.article.manufacturer'
-          %th= t 'simple_form.labels.article.origin'
-          %th= t 'simple_form.labels.article.unit'
-          %th= t '.unit_quantity_short'
-          %th= t '.price_short'
-          %th= t 'simple_form.labels.defaults.tax'
-          %th= t 'simple_form.labels.defaults.deposit'
-          %th= t 'simple_form.labels.article.article_category'
-      %tbody
-        - @updated_articles.each do |updated_article, attrs|
-          - article = Article.find(updated_article.id)
-          %tr{:style => 'color:grey'}
-            %td= article.name
-            %td= article.note
-            %td= article.manufacturer
-            %td= article.origin
-            %td= article.unit
-            %td= article.unit_quantity
-            %td= article.price
-            %td= article.tax
-            %td= article.deposit
-            %td= article.article_category.name if article.article_category
-          %tr
-            = fields_for 'articles[]', updated_article do |form|
-              %td{:style => highlight_new(attrs, :name)}
-                = form.text_field 'name', :size => 0
-                = form.hidden_field 'shared_updated_on'
-              %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-small'
-              %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-small'
-              %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'input-mini'
-              %td{:style => highlight_new(attrs, :unit)}= form.text_field 'unit', class: 'input-mini'
-              %td{:style => highlight_new(attrs, :unit_quantity)}= form.text_field 'unit_quantity', class: 'input-mini'
-              %td{:style => highlight_new(attrs, :price)}= form.text_field 'price', class: 'input-mini'
-              %td{:style => highlight_new(attrs, :tax), class: 'input-append'}
-                = form.text_field 'tax', class: 'input-mini'
-                %span.add-on %
-              %td{:style => highlight_new(attrs, :deposit)}= form.text_field 'deposit', class: 'input-mini'
-              %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
-                {include_blank: true}, class: 'input-small'
+          = fields_for 'articles[]', updated_article do |form|
+            %td{:style => highlight_new(attrs, :name)}
+              = form.text_field 'name', :size => 0
+              = form.hidden_field 'shared_updated_on'
+            %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-small'
+            %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-small'
+            %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'input-mini'
+            %td{:style => highlight_new(attrs, :unit)}= form.text_field 'unit', class: 'input-mini'
+            %td{:style => highlight_new(attrs, :unit_quantity)}= form.text_field 'unit_quantity', class: 'input-mini'
+            %td{:style => highlight_new(attrs, :price)}= form.text_field 'price', class: 'input-mini'
+            %td{:style => highlight_new(attrs, :tax), class: 'input-append'}
+              = form.text_field 'tax', class: 'input-mini'
+              %span.add-on %
+            %td{:style => highlight_new(attrs, :deposit)}= form.text_field 'deposit', class: 'input-mini'
+            %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
+              {include_blank: true}, class: 'input-small'
   %hr/
   = hidden_field 'supplier', 'id'
   = submit_tag t('.submit'), class: 'btn btn-primary'
