@@ -143,34 +143,22 @@ $(function() {
     $('.datepicker').datepicker({format: 'yyyy-mm-dd', weekStart: 1, language: 'de'});
     
     // Init table sorting
-    var myBars = $('span.sorter-bar');
+    var myBars = $('.sorter-bar');
     myBars.html('<button type="button" class="sorter-button btn btn-mini"><i class="icon-chevron-up"></i></button><button type="button" class="sorter-button btn btn-mini"><i class="icon-chevron-down"></i></button>');
-    $('button:nth-child(1)', myBars).click(function(e) {sortTable(e, false);}).attr('title', 'Sortiere aufsteigend');
-    $('button:nth-child(2)', myBars).click(function(e) {sortTable(e, true);}).attr('title', 'Sortiere absteigend (umgekehrt)');
-  
-    $('span.sorter-bar.default-sort-asc button:nth-child(1)').trigger('click');
-    $('span.sorter-bar.default-sort-desc button:nth-child(2)').trigger('click');
+    $('button:nth-child(1)', myBars).click(function(e) {sortTable(e, false);});
+    $('button:nth-child(2)', myBars).click(function(e) {sortTable(e, true);});
+    // A title attribute ('sort ascending order') would be nice here.
+    // However, for a tiny detail like that it is not worth to translate everything:
+    // http://foodsoft.51229.x6.nabble.com/How-to-I18n-content-which-is-dynamically-loaded-via-javascript-assets-td75.html#a76
+    
+    // Sort tables with a default sort
+    $('.sorter-bar.default-sort-asc button:nth-child(1)').trigger('click');
+    $('.sorter-bar.default-sort-desc button:nth-child(2)').trigger('click');
 });
-
-// parse a string to a float
-function myFloatParse(input) {
-  var number = input.trim();
-  number = number.split(' ')[0];
-  number = number.replace(',', '.');
-  number = parseFloat(number, 10);
-  return number;
-}
 
 // compare two elements interpreted as text
 function compareText(a, b) {
   return $.trim(a.textContent).toLowerCase() < $.trim(b.textContent).toLowerCase() ? -1 : 1;
-}
-
-// compare two elements interpreted as float
-function compareFloat(a, b) {
-  a = myFloatParse( $(a).text() );
-  b = myFloatParse( $(b).text() );
-  return ( a<b ) ? ( -1 ) : ( 1 );
 }
 
 // wrapper for $.fn.sorter (see above) for sorting tables
@@ -196,9 +184,9 @@ function sortTable(e, inverted) {
   $(e.currentTarget).addClass('btn-primary active');
 }
 
-// resort a certain table (e.g. after DOM update)
-function updateSort(whichTable) {
-  $('.sorter-bar button.active.btn-primary', whichTable).trigger('click');
+// retrigger last sort function for elements in a context (e.g. after DOM update)
+function updateSort(context) {
+  $('.sorter-bar button.active.btn-primary', context).trigger('click');
 }
 
 // gives the row an yellow background
