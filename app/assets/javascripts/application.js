@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require select2
 //= require twitter/bootstrap
 //= require jquery.tokeninput
 //= require bootstrap-datepicker

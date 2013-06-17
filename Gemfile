@@ -17,6 +17,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'select2-rails'
 
 
 gem 'mysql2'
