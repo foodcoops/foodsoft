@@ -6,7 +6,9 @@
 
   - if stock_article.new_record?
     = f.input :price
-    = f.input :tax
+    = f.input :tax, :wrapper => :append do
+      = f.input_field :tax
+      %span.add-on %
     = f.input :deposit
   - else
     = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('.form.price_hint')

@@ -580,7 +580,7 @@ de:
         total_fc: Summe (FC-Preis)
         units: Einheiten
       index:
-        title: beendete Bestellungen
+        title: Beendete Bestellungen
       invoice:
         edit: Rechnung bearbeiten
         invoice_amount: ! 'Rechnungsbetrag:'
@@ -785,11 +785,11 @@ de:
       tolerance: Toleranz
       total_sum_amount: Gesamtbetrag
       total_tolerance: Gesamt-Toleranz
-      total_units: Gesamt-Einheiten
       unit: Einheit
       unit_missing: Fehlende Einheiten
       units: Gebinde
       units_full: Volle Gebinde
+      units_total: Gesamt-Einheiten
     index:
       closed_orders:
         more: mehr...
@@ -1326,6 +1326,7 @@ de:
       error_nosel: Es muss mindestens ein Artikel ausgewählt sein
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: ! 'Bestellung: %{name}, bis %{ends}'
+      stock: Lager
     new:
       title: Neue Bestellung anlegen
     orders:
@@ -1440,16 +1441,16 @@ de:
       title_version: Version
       view_current: Aktuelle Version sehen
   sessions:
-    logged_in: Logged in!
-    logged_out: Logged out!
-    login_invalid: Invalid email or password
+    logged_in: Angemeldet!
+    logged_out: Abgemeldet!
+    login_invalid: 
     new:
       forgot_password: Passwort vergessen?
       login: Anmelden
       nojs: Achtung, Cookies und Javascript müssen aktiviert sein! %{link} bitte abschalten.
       noscript: NoScript
       password: Passwort
-      title: Foodsoft login
+      title: Foodsoft anmelden
       user: Benutzerin
   shared:
     articles_by_articles:
@@ -1477,7 +1478,7 @@ de:
       description: Beschreibung
       members: Mitglieder
       no_weekly_job: kein wöchentlicher Job definiert
-      weekly_job: wöchentlicher Job
+      weekly_job: Wöchentlicher Job
     group_form_fields:
       search: Suche ...
       search_user: Nach Nutzerin suchen
