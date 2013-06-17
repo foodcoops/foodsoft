@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_filter :ensure_ordergroup_approved, only: [:new, :create]
 
   # Renders the "inbox" action.
   def index

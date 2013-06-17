@@ -6,6 +6,8 @@
     %dd=h group.contact
     %dt= t('.address') + ':'
     %dd= link_to_gmaps group.contact_address
+    %dt= t('.approved') + ':'
+    %dd= group.approved ? t('simple_form.yes') : t('simple_form.no')
   %dt= t('.access') + ':'
   %dd= format_roles(group)
   %dt= t('.members') + ':'

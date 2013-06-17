@@ -174,6 +174,7 @@ Foodsoft::Application.routes.draw do
 
       resources :ordergroups do
         get :memberships, :on => :member
+        post :approve, :on => :member
       end
     end
 

@@ -69,6 +69,9 @@ class LoginController < ApplicationController
 
   # For anyone
   def signup
+    if not FoodsoftConfig[:signup]
+      redirect_to root_url, alert: I18n.t('login.controller.signup.signup_disabled', foodcoop: FoodsoftConfig[:name])
+    end
     if request.post?
       User.transaction do
         @user = User.new(params[:user].reject {|k,v| k=='ordergroup'})

@@ -151,6 +151,24 @@ class ApplicationController < ActionController::Base
     {foodcoop: FoodsoftConfig.scope}
   end
 
+  # returns true if @current_user's ordergroup is approved and approval is required
+  def ensure_ordergroup_approved(redir_url = root_url)
+    unless FoodsoftConfig[:ordergroup_approval_for].nil? or
+       FoodsoftConfig[:ordergroup_approval_for].member?("#{controller_name}") or
+       FoodsoftConfig[:ordergroup_approval_for].member?("#{action_name}_#{controller_name}")
+      return true
+    end
+    phrase = I18n.t("application.controller.phrases.#{action_name}_#{controller_name}",
+      default: I18n.t("application.controller.phrases.#{controller_name}",
+      default: I18n.t('application.controller.phrases.fallback')))
+    if @current_user.ordergroup.nil?
+      redirect_to redir_url, alert: I18n.t('application.controller.ordergroup_require', phrase: phrase)
+    end
+    if !@current_user.ordergroup.approved
+      redirect_to redir_url, alert: I18n.t('application.controller.ordergroup_approval', phrase: phrase)
+    end
+  end
+
   # Used to prevent accidently switching to :en in production mode.
   def select_language
     I18n.locale = :de

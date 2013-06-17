@@ -3,6 +3,7 @@
 class GroupOrdersController < ApplicationController
   # Security
   before_filter :ensure_ordergroup_member
+  before_filter :ensure_ordergroup_approved, only: [:new, :create]
   before_filter :ensure_open_order, :only => [:new, :create, :edit, :update, :order, :stock_order, :saveOrder]
   before_filter :ensure_my_group_order, only: [:show, :edit, :update]
   before_filter :enough_apples?, only: [:new, :create]
@@ -95,5 +96,4 @@ class GroupOrdersController < ApplicationController
                            stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
     end
   end
-
 end
