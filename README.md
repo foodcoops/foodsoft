@@ -5,6 +5,8 @@ We changed the branch structure. The rails3 branch is now master. But you can sa
 
 FoodSoft
 =========
+[![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.png)](https://codeclimate.com/github/foodcoops/foodsoft)
+[![Dependency Status](https://gemnasium.com/foodcoops/foodsoft.png)](https://gemnasium.com/foodcoops/foodsoft)
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
 
