@@ -905,6 +905,7 @@ en:
           where: Who
       ordergroup:
         title: Engagement of your ordergroup
+      ordergroup_approval_msg: Your membership still needs to be approved. Please contact us for more information.
       tasks_move:
         action: Take over tasks/decline tasks
         desc: You are responsible for these tasks.

@@ -52,6 +52,13 @@ default: &defaults
   # Possible values: 'new_group_orders', 'create_group_orders', 'users', 'messages'
   #ordergroup_approval_for: ['new_group_orders', 'create_group_orders', 'users', 'messages']
 
+  # Message to show on dashboard when ordergroup is not yet approved.
+  #ordergroup_approval_msg:
+  #  Your membership still needs to be approved. Please transfer €35 to account
+  #  12345678 "FC Test" in Berlin, mentioning "membership fee" and your
+  #  username. After up to three days, your account will be activated, and you
+  #  will be able to order here.
+
   # email address to be used as sender
   email_sender: foodsoft@foodcoop.test
 
