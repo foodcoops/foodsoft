@@ -16,7 +16,22 @@
         unmark_article_unavailable_for_delivery( stock_change.data('id') );
         return false;
       })
+      $('#copy_from_article').select2({
+        placeholder: "Kopiere Bestellartikel",
+        allowClear: true
+      }).on('change', function(e) {
+        if(e.val != '') {
+          $.ajax({
+            url: '#{new_stock_article_supplier_deliveries_path(@supplier)}',
+            type: 'get',
+            data: {old_article_id: e.val},
+            contentType: 'application/json; charset=UTF-8'
+          });
+          $('#copy_from_article').select2('data', null);
+        }
+      });
     });
+    
     function mark_article_unavailable_for_delivery(stock_article_id) {
       var articleTr = $('#stock_article_' + stock_article_id);
       articleTr.addClass('unavailable');
@@ -39,11 +54,12 @@
   .row-fluid
       
     .span6
-      %h2 #{t '.title_select_stock_articles'}
+      %h2= t '.title_select_stock_articles'
       .well.well-small
         .btn-toolbar
           .btn-group
             = link_to t('.new_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), remote: true, class: 'btn'
+            = select_tag(:copy_from_article, options_for_select(articles_for_select(@supplier)))
       %table.table.table-condensed.table-hover#stock_articles_for_adding
         %thead
           %tr
@@ -62,7 +78,7 @@
             = render :partial => 'stock_article_for_adding', :locals => {:article => article}
     
     .span6
-      %h2 #{t '.title_fill_quantities'}
+      %h2= t '.title_fill_quantities'
       %table.table.table-condensed#stock_changes
         %thead
           %tr
@@ -88,7 +104,7 @@
                 = stock_change_form.hidden_field :_destroy
                 = link_to t('.remove_article'), "#", :class => 'destroy_stock_change btn btn-small'
       
-      %h2 #{t '.title_finish_delivery'}
+      %h2= t '.title_finish_delivery'
       = f.input :delivered_on, as: :date_picker
       = f.input :note, input_html: {size: '35x4'}
       .form-actions

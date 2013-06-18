@@ -1,5 +1,5 @@
 - url = ( stock_article.new_record? ) ? ( add_stock_article_supplier_deliveries_path(@supplier) ) : ( update_stock_article_supplier_deliveries_path(@supplier) )
-= simple_form_for stock_article, url: url, remote: true, validate: true do |f|
+= simple_form_for stock_article, url: url, remote: true do |f|
   = f.hidden_field :supplier_id
   - unless stock_article.new_record?
     = f.hidden_field :id

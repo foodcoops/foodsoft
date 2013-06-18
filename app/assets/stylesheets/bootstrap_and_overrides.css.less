@@ -42,6 +42,12 @@ body {
     dd { .clearfix(); }
 }
 
+// Fix nested content in btn-toolbar and btn-group, see https://github.com/twitter/bootstrap/issues/5497#issuecomment-10038711
+.btn-toolbar > *,
+.btn-group > * {
+  font-size: @baseFontSize;
+}
+
 @mainRedColor: #ED0606;
 
 .logo {
