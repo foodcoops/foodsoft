@@ -432,6 +432,7 @@ en:
       actions: Tasks
       article: Article
       category: Category
+      copy_order_article: Copy order article
       new_stock_article: Create new stock article
       price: Netprice
       price_per_unit: Price/unit

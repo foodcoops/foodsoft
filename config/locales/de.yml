@@ -430,6 +430,7 @@ de:
       actions: Optionen
       article: Artikel
       category: Kategorie
+      copy_order_article: Kopiere Bestellartikel
       new_stock_article: Neuen Lagerartikel anlegen
       price: Preis (netto)
       price_per_unit: Preis/Einheit
