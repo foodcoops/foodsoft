@@ -153,6 +153,7 @@ class ApplicationController < ActionController::Base
 
   # returns true if @current_user's ordergroup is approved and approval is required
   def ensure_ordergroup_approved(redir_url = root_url)
+    @current_user.role_admin? and return true
     unless FoodsoftConfig[:ordergroup_approval_for].nil? or
        FoodsoftConfig[:ordergroup_approval_for].member?("#{controller_name}") or
        FoodsoftConfig[:ordergroup_approval_for].member?("#{action_name}_#{controller_name}")
@@ -163,8 +164,7 @@ class ApplicationController < ActionController::Base
       default: I18n.t('application.controller.phrases.fallback')))
     if @current_user.ordergroup.nil?
       redirect_to redir_url, alert: I18n.t('application.controller.ordergroup_require', phrase: phrase)
-    end
-    if !@current_user.ordergroup.approved
+    elsif !@current_user.ordergroup.approved?
       redirect_to redir_url, alert: I18n.t('application.controller.ordergroup_approval', phrase: phrase)
     end
   end
