@@ -1,7 +1,7 @@
 class AddOrdergroupApproval < ActiveRecord::Migration
   def self.up
     add_column :groups, :approved, :boolean, :default => false
-    Group.ordergroups.each { |o| o.approved = true }
+    Ordergroup.all.each { |o| o.approved = true }
   end
 
   def self.down
