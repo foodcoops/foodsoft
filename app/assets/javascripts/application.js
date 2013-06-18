@@ -39,19 +39,6 @@ $.fn.sorter = (function(){
 
 })();
 
-// allow touch devices to work on click events
-//   http://stackoverflow.com/a/16221066
-$.fn.extend({ _on: (function(){ return $.fn.on; })() });
-$.fn.extend({
-    on: (function(){
-        var isTouchSupported = 'ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch;
-        return function( types, selector, data, fn, one ) {
-            if (typeof types == 'string' && isTouchSupported && !(types.match(/touch/gi))) types = types.replace(/click/gi, 'touchstart');
-            return this._on( types, selector, data, fn);
-        };
-    }()),
-});
-
 // Load following statements, when DOM is ready
 $(function() {
 
