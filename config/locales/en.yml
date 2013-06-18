@@ -1624,10 +1624,8 @@ en:
           one: Workgroup
           other: Workgroups
       settings:
-        settings_groups: Preferences
         settings_group:
-          profile: Porfile
-          notify: Notifications
+          privacy: Privacy
           messages: Messages
         profile:
           language: Language
