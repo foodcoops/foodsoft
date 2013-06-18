@@ -22,7 +22,7 @@
 = f.input :password, :required => f.object.new_record?
 = f.input :password_confirmation
 - if defined? with_ordergroup and with_ordergroup
-  - defined? params[:use_ordergroup] or params[:use_ordergroup] = true
+  - params[:use_ordergroup].nil? and params[:use_ordergroup] = false
   - if with_ordergroup == 'optional'
     .control-group
       .controls
