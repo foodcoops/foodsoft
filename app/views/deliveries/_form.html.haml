@@ -79,6 +79,7 @@
     
     .span6
       %h2= t '.title_fill_quantities'
+      <!-- = f.inspect -->
       %table.table.table-condensed#stock_changes
         %thead
           %tr
@@ -92,14 +93,14 @@
           -# see also the partial 'stock_change' which is used for AJAX updates!
           -# see also the partial 'stock_change' which is used for AJAX updates!
           -# see also the partial 'stock_change' which is used for AJAX updates!
-          = f.fields_for :stock_changes do |stock_change_form|
+          = f.simple_fields_for :stock_changes do |stock_change_form|
             - stock_change = stock_change_form.object
             %tr{:id => "stock_change_stock_article_#{stock_change.stock_article.id}", :data => {:id => stock_change.stock_article.id}}
               %td.sort-by-name
-                = stock_change_form.hidden_field :stock_article_id
+                = stock_change_form.association :stock_article, :as => :hidden
                 %span.stock_article_name= stock_change.stock_article.name
               %td.numeric.price-per-unit #{number_to_currency stock_change.stock_article.price}/#{stock_change.stock_article.unit}
-              %td= stock_change_form.text_field :quantity, :size => 5, :autocomplete => 'off'
+              %td= stock_change_form.input :quantity, :wrapper => :intable, :input_html => {:class => 'stock-change-quantity', :autocomplete => :off}
               %td
                 = stock_change_form.hidden_field :_destroy
                 = link_to t('.remove_article'), "#", :class => 'destroy_stock_change btn btn-small'

@@ -1,12 +1,12 @@
 -# see also the partial 'form' which is used for existing stock_changes when loading the edit!
 -# see also the partial 'form' which is used for existing stock_changes when loading the edit!
 -# see also the partial 'form' which is used for existing stock_changes when loading the edit!
-= fields_for "delivery[new_stock_changes][]", stock_change, validate: true do |f|
+= simple_fields_for "delivery[new_stock_changes][]", stock_change, validate: true do |f|
   - f.object.quantity = '' if 0 == f.object.quantity
   %tr{:id => "stock_change_stock_article_#{stock_change.stock_article.id}", :data => {:id => stock_change.stock_article.id}}
     %td.sort-by-name
-      = f.hidden_field :stock_article_id
+      = f.association :stock_article, :as => :hidden
       %span.stock_article_name= stock_change.stock_article.name
     %td.numeric.price-per-unit #{number_to_currency stock_change.stock_article.price}/#{stock_change.stock_article.unit}
-    %td= f.text_field :quantity, :size => 4, :autocomplete => 'off', :required => true, :class => 'stock-change-quantity'
+    %td= f.input :quantity, :wrapper => :intable, :input_html => {:class => 'stock-change-quantity', :autocomplete => :off}
     %td= link_to t('.remove_article'), "#", :class => 'remove_new_stock_change btn btn-small'

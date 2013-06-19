@@ -9,7 +9,7 @@ class Delivery < ActiveRecord::Base
 
   scope :recent, :order => 'created_at DESC', :limit => 10
 
-  validates_presence_of :supplier_id
+  validates_presence_of :supplier_id, :delivered_on
 
   accepts_nested_attributes_for :stock_changes, :allow_destroy => :true
 
