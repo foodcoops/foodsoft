@@ -18,7 +18,7 @@ $.fn.extend({
         var isTouchSupported = 'ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch;
         return function( types, selector, data, fn, one ) {
             if (typeof types == 'string' && isTouchSupported && !(types.match(/touch/gi))) types = types.replace(/click/gi, 'touchstart');
-            return this._on( types, selector, data, fn);
+            return this._on( types, selector, data, fn, one );
         };
     }()),
 });
