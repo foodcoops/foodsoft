@@ -20,11 +20,17 @@ class OrderFax < OrderPdf
       move_down 5
       text "#{contact[:zip_code]} #{contact[:city]}", size: 9, align: :right
       move_down 5
-      text "#{I18n.t('simple_form.labels.supplier.customer_number')}: #{@order.supplier.try(:customer_number)}", size: 9, align: :right
-      move_down 5
-      text "#{I18n.t('simple_form.labels.supplier.phone')}: #{contact[:phone]}", size: 9, align: :right
-      move_down 5
-      text "#{I18n.t('simple_form.labels.supplier.email')}: #{contact[:email]}", size: 9, align: :right
+      unless @order.supplier.try(:customer_number).blank?
+        text "#{I18n.t('simple_form.labels.supplier.customer_number')}: #{@order.supplier[:customer_number]}", size: 9, align: :right
+        move_down 5
+      end
+      unless contact[:phone].blank?
+        text "#{I18n.t('simple_form.labels.supplier.phone')}: #{contact[:phone]}", size: 9, align: :right
+        move_down 5
+      end
+      unless contact[:email].blank?
+        text "#{I18n.t('simple_form.labels.supplier.email')}: #{contact[:email]}", size: 9, align: :right
+      end
     end
 
     # Recipient
@@ -32,8 +38,10 @@ class OrderFax < OrderPdf
       text @order.name
       move_down 5
       text @order.supplier.try(:address).to_s
-      move_down 5
-      text "#{I18n.t('simple_form.labels.supplier.fax')}: #{@order.supplier.try(:fax)}"
+      unless @order.supplier.try(:fax).blank?
+        move_down 5
+        text "#{I18n.t('simple_form.labels.supplier.fax')}: #{@order.supplier[:fax]}"
+      end
     end
 
     move_down 5
@@ -42,8 +50,10 @@ class OrderFax < OrderPdf
     move_down 10
     text "#{I18n.t('simple_form.labels.delivery.delivered_on')}:"
     move_down 10
-    text "#{I18n.t('simple_form.labels.supplier.contact_person')}: #{@order.supplier.try(:contact_person)}"
-    move_down 10
+    unless @order.supplier.try(:contact_person).blank?
+      text "#{I18n.t('simple_form.labels.supplier.contact_person')}: #{@order.supplier[:contact_person]}"
+      move_down 10
+    end
 
     # Articles
     data = [I18n.t('documents.order_fax.rows')]
