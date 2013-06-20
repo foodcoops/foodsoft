@@ -4,8 +4,11 @@
 
 - title t('.title', name: FoodsoftConfig[:name])
 = t('.body', foodcoop: h(FoodsoftConfig[:name])).html_safe
-= simple_form_for @user, url: signup_path do |form|
-  = render partial: 'shared/user_form_fields', locals: {f: form, with_ordergroup: true}
+= simple_form_for @user, url: signup_path do |f|
+  = render :layout => 'shared/user_form_fields', :locals => {f: f} do
+    = f.fields_for :ordergroup do |ogf|
+      = ogf.input :contact_address, :wrapper => :append do
+        = ogf.input_field :contact_address
   .form-actions
     = submit_tag t('.submit'), class: 'btn'
 

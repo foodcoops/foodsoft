@@ -1,3 +1,32 @@
 - title t '.title'
 
-= render 'form', with_ordergroup: 'optional'
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $('input#use_ordergroup').change(function(el) {
+        var input = $('#user_ordergroup_contact_address, #user_ordergroup_approved');
+        if (this.checked) {
+          input.removeAttr('disabled');
+          input.closest('.control-group').show();
+        } else {
+          input.attr('disabled','disabled');
+          input.closest('.control-group').hide();
+        }
+      }).change();
+    });
+
+= simple_form_for([:admin, @user]) do |f|
+  = render :layout => 'shared/user_form_fields', :locals => {:f => f} do
+    - params[:use_ordergroup].nil? and params[:use_ordergroup] = false
+    .control-group
+      .controls
+        %label.checkbox{:for => 'use_ordergroup'}
+          = check_box_tag :use_ordergroup, 1, params[:use_ordergroup]
+          = t('.ordergroup_use')
+    = f.fields_for :ordergroup do |ogf|
+      = ogf.input :contact_address
+      - if !FoodsoftConfig[:ordergroup_approval_for].nil?
+        = ogf.input :approved, :as => :boolean, :label => false, :inline_label => true
+  .form-actions
+    = f.submit
+    = link_to t('ui.or_cancel'), :back
