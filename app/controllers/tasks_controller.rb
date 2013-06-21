@@ -18,6 +18,9 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(params[:task])
+    if params[:periodic]
+      @task.periodic_task_group = PeriodicTaskGroup.new
+    end
     if @task.save
       redirect_to tasks_url, :notice => I18n.t('tasks.create.notice')
     else

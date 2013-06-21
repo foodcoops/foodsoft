@@ -23,8 +23,9 @@
   = f.input :required_users
   = f.association :workgroup
   = f.input :due_date, as: :date_picker
-  = f.input :periodic, as: :boolean
   = f.input :done
   .form-actions
-    = f.submit class: 'btn'
+    = f.submit class: 'btn btn-primary'
+    - unless @task.id
+      = f.submit 'Wöchentliche Aufgabe erstellen', name: 'periodic', class: 'btn'
     = link_to t('ui.or_cancel'), :back

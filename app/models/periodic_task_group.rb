@@ -1,5 +1,5 @@
 class PeriodicTaskGroup < ActiveRecord::Base
-  has_many :tasks, :inverse_of => :periodic_task_group, :dependent => :destroy
+  has_many :tasks, :dependent => :destroy
 
   PeriodDays = 7
   

@@ -1,7 +1,5 @@
 Foodsoft::Application.routes.draw do
 
-  get "periodic_task_groups/destroy"
-
   get "order_comments/new"
 
   get "comments/new"
