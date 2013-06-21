@@ -668,23 +668,20 @@ de:
     invoices:
       edit:
         title: Rechnung bearbeiten
-      form:
-        delivery: Lieferung
-        linked: Diese Rechnung ist mit einer %{what_link} verknüpft.
-        order: Bestellung
       index:
         action_new: Neue Rechnung anlegen
         title: Rechnungen
       invoices:
         confirm_delete: Bist Du sicher?
         delivery: Lieferung
+      linked: Diese Rechnung ist mit %{what_link} verknüpft.
+      linked_delivery: einer Lieferung
+      linked_order: einer Bestellung
       new:
         back: Züruck
         title: Neue Rechnung anlegen
       show:
         back: Züruck
-        delivery: Lieferung
-        linked: Diese Rechnung ist mit einer %{what_link} verknüpft.
         title: Rechnung %{number}
     order_articles:
       edit:

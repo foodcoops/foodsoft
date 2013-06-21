@@ -1,12 +1,18 @@
 - title t('.title', number: @invoice.number)
 
 %p
-  %b= t 'simple_form.labels.invoice.supplier'
+  %b= t('simple_form.labels.invoice.supplier') + ':'
   = @invoice.supplier.name
+
 - if @invoice.delivery
   %p
     %b= t('simple_form.labels.invoice.delivery') + ':'
-    = t('.linked', what_link: link_to(t('.delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
+    = t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
+- if @invoice.order
+  %p
+    %b= t('simple_form.labels.invoice.order') + ':'
+    = t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), @invoice.order)).html_safe
+
 %p
   %b= t('simple_form.labels.invoice.number') + ':'
   = @invoice.number

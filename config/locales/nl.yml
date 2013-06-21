@@ -646,23 +646,20 @@ nl:
     invoices:
       edit:
         title: Factuur bewerken
-      form:
-        delivery: levering
-        linked: Deze factuur is met aan %{what_link} gekoppeld.
-        order: bestelling
       index:
         action_new: Nieuwe factuur toevoegen
         title: Facturen
       invoices:
         confirm_delete: Weet je het zeker?
         delivery: Levering
+      linked: Deze factuur is aan %{what_link} gekoppeld.
+      linked_delivery: een levering
+      linked_order: een bestelling
       new:
         back: Terug
         title: Nieuwe factuur toevoegen
       show:
         back: Terug
-        delivery: levering
-        linked: Deze factuur is aan een %{what_link} gekoppeld.
         title: Factuur %{number}
     order_articles:
       edit:

@@ -670,23 +670,20 @@ en:
     invoices:
       edit:
         title: Edit invoice
-      form:
-        delivery: delivery
-        linked: This invoice is linked to a %{what_link}.
-        order: order
       index:
         action_new: Create new invoice
         title: Invoices
       invoices:
         confirm_delete: Are you sure?
         delivery: Delivery
+      linked: This invoice is linked to %{what_link}.
+      linked_delivery: a delivery
+      linked_order: an order
       new:
         back: Back
         title: Create new invoice
       show:
         back: Back
-        delivery: delivery
-        linked: This invoice is linked to a %{what_link}.
         title: Invoice %{number}
     order_articles:
       edit:
