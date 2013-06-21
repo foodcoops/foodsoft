@@ -26,6 +26,6 @@
   = f.input :done
   .form-actions
     = f.submit class: 'btn btn-primary'
-    - unless @task.id
+    - if @task.new_record?
       = f.submit 'Wöchentliche Aufgabe erstellen', name: 'periodic', class: 'btn'
     = link_to t('ui.or_cancel'), :back

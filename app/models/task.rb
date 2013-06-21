@@ -18,6 +18,7 @@ class Task < ActiveRecord::Base
   validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 0
   validates_length_of :description, maximum: 250
 
+  before_save :exclude_from_periodic_task_group
   after_save :update_ordergroup_stats
 
   # Find all tasks, for which the current user should be responsible
@@ -104,6 +105,12 @@ class Task < ActiveRecord::Base
 
   def update_ordergroup_stats(user_ids = self.user_ids)
     Ordergroup.joins(:users).where(users: {id: user_ids}).each(&:update_stats!)
+  end
+
+  def exclude_from_periodic_task_group
+    if changed? and not new_record?
+      self.periodic_task_group = nil
+    end
   end
 end
 
