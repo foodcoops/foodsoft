@@ -545,7 +545,7 @@ de:
       confirm:
         clear: Abschließen
         first_paragraph: ! 'Wenn die Bestellung abgeschlossen wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
-        or_cancle: oder zurück zur Abrechnung
+        or_cancel: oder zurück zur Abrechnung
         title: Bestellung abschließen
       edit_results_by_articles:
         add_article: Artikel hinzufügen

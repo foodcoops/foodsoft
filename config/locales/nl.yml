@@ -523,7 +523,7 @@ nl:
       confirm:
         clear: Sluiten
         first_paragraph: ! 'Wanneer de bestelling gesloten wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
-        or_cancle: of terug naar afrekenen
+        or_cancel: of terug naar afrekenen
         title: Order sluiten
       edit_results_by_articles:
         add_article: Artikel toevoegen

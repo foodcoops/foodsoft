@@ -547,7 +547,7 @@ en:
       confirm:
         clear: Close
         first_paragraph: ! 'When the order is closed, all group accounts will be updated.<br />The accounts will be charged as follows:'
-        or_cancle: or back to accounting
+        or_cancel: or back to accounting
         title: Close order
       edit_results_by_articles:
         add_article: Add article
