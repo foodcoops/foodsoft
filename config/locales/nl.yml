@@ -538,7 +538,7 @@ nl:
       group_order_articles:
         add_group: Huishouden toevoegen
         group: Huishouden
-        total: Subtotaal
+        total: Totale prijs
         total_fc: Som (FC-prijs)
         units: Eenheden
       index:
@@ -549,7 +549,7 @@ nl:
         invoice_date: ! 'Factuurdatum:'
         invoice_number: ! 'Factuurnummer:'
         minus_refund_calculated: ! '- statiegeld berekend:'
-        new: Factuur toevoegen
+        new: factuur toevoegen
         new_body: ! 'Een factuur aan deze rekening toevoegen:'
         plus_refund_credited: ! '+ statiegeld teruggekregen:'
         refund_adjusted_amount: ! 'bedrag gecorrigeerd voor statiegeld:'

@@ -562,8 +562,8 @@ en:
       group_order_articles:
         add_group: Add group
         group: Group
-        total: Subtotal
-        total_fc: Sum (FC-Price)
+        total: Total costs
+        total_fc: Sum (FC-price)
         units: Units
       index:
         title: Closed orders
@@ -573,7 +573,7 @@ en:
         invoice_date: ! 'Invoice date:'
         invoice_number: ! 'Invoice number:'
         minus_refund_calculated: ! '- deposit charged:'
-        new: Create new invoice
+        new: create new invoice
         new_body: ! 'Create an invoice for this order:'
         plus_refund_credited: ! '+ deposit returned:'
         refund_adjusted_amount: ! 'amount adjusted for refund:'
