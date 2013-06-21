@@ -562,7 +562,7 @@ en:
       group_order_articles:
         add_group: Add group
         group: Group
-        total: Total costs
+        total: Subtotal
         total_fc: Sum (FC-Price)
         units: Units
       index:

@@ -538,7 +538,7 @@ nl:
       group_order_articles:
         add_group: Huishouden toevoegen
         group: Huishouden
-        total: Totale prijs
+        total: Subtotaal
         total_fc: Som (FC-prijs)
         units: Eenheden
       index:

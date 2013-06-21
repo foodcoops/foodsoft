@@ -22,20 +22,20 @@
             = link_to "-", update_result_finance_group_order_article_path(group_order_article, modifier: '-'),
               method: :put, remote: true, class: 'btn btn-mini'
           %td.numeric
-            = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result, :unit => "")
+            = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result)
           %td.actions{:style=>"width:1em"}
-            = link_to "Bearbeiten", edit_finance_group_order_article_path(group_order_article), remote: true,
+            = link_to t('ui.edit'), edit_finance_group_order_article_path(group_order_article), remote: true,
               class: 'btn btn-mini'
           %td.actions{:style=>"width:1em"}
-            = link_to "Löschen", finance_group_order_article_path(group_order_article), method: :delete,
+            = link_to t('ui.delete'), finance_group_order_article_path(group_order_article), method: :delete,
               remote: true, class: 'btn btn-mini btn-danger'
           %td
     %tfoot
       %tr
         %td
-        %td{:style => "width:8em"}= t('total_fc')
+        %td{:style => "width:8em"}= t('.total_fc')
         %td{:id => "group_orders_sum_quantity_#{order_article.id}"}
           = order_article.group_orders_sum[:quantity]
         %td.numeric{:id => "group_orders_sum_price_#{order_article.id}"}
-          = number_to_currency(order_article.group_orders_sum[:price], :unit => "")
+          = number_to_currency(order_article.group_orders_sum[:price])
         %td{:colspan => "3"}
