@@ -70,8 +70,6 @@ Foodsoft::Application.routes.draw do
       end
     end
 
-    resources :periodic_task_groups, only: [:destroy]
-
     resources :messages, :only => [:index, :show, :new, :create]
 
     namespace :foodcoop do

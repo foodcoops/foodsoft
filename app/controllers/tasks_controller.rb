@@ -56,7 +56,12 @@ class TasksController < ApplicationController
     task = Task.find(params[:id])
     # Save user_ids to update apple statistics after destroy
     user_ids = task.user_ids
-    task.destroy
+    if params[:periodic]
+      task.periodic_task_group.exclude_tasks_before(task)
+      task.periodic_task_group.destroy
+    else
+      task.destroy
+    end
     task.update_ordergroup_stats(user_ids)
 
     redirect_to tasks_url, :notice => I18n.t('tasks.destroy.notice')
