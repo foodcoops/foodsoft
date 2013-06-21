@@ -493,7 +493,7 @@ en:
       - Article
       - Amount
       - Price
-      - Unit Quantity
+      - Unit quantity
       - Unit
       - Sum
       sum: Sum
@@ -504,16 +504,18 @@ en:
       - Order Number
       - Amount
       - Name
-      - Barrel
+      - Unit quantity
       - Unit
       - Price/Unit
+      - Subtotal
+      total: Total
     order_matrix:
       filename: Order %{name}-%{date} - sorting matrix
       heading: Article overview
       rows:
       - Article
       - Unit
-      - Barrel
+      - Unit quantity
       - FC-Price
       - Amount
       title: ! 'Order sorting matrix: %{name}, closed at %{date}'

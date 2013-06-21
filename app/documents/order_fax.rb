@@ -56,21 +56,31 @@ class OrderFax < OrderPdf
     end
 
     # Articles
+    total = 0
     data = [I18n.t('documents.order_fax.rows')]
     data += @order.order_articles.ordered.all(include: :article).collect do |a|
+      subtotal = a.units_to_order * a.price.unit_quantity * a.price.price
+      total += subtotal
       [a.article.order_number,
        a.units_to_order,
        a.article.name,
        a.price.unit_quantity,
        a.article.unit,
-       a.price.price]
+       number_to_currency(a.price.price),
+       number_to_currency(subtotal)]
     end
+    data << [I18n.t('documents.order_fax.total'), nil, nil, nil, nil, nil, number_to_currency(total)]
     table data, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+      table.header = true
       table.cells.border_width = 1
       table.cells.border_color = '666666'
 
+      table.row(0).border_bottom_width = 2
       table.columns(1).align = :right
-      table.columns(3..5).align = :right
+      table.columns(3..6).align = :right
+      table.row(data.length-1).columns(0..5).borders = [:top, :bottom]
+      table.row(data.length-1).columns(0).borders = [:top, :bottom, :left]
+      table.row(data.length-1).border_top_width = 2
     end
               #font_size: 8,
               #vertical_padding: 3,

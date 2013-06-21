@@ -505,6 +505,8 @@ de:
       - Gebinde
       - Einheit
       - Preis/Einheit
+      - Summe
+      total: Gesamtpreis
     order_matrix:
       filename: Bestellung %{name}-%{date} - Sortiermatrix
       heading: Artikelübersicht
