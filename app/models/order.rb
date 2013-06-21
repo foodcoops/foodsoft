@@ -33,7 +33,7 @@ class Order < ActiveRecord::Base
   end
 
   def name
-    stockit? ? "Lager" : supplier.name
+    stockit? ? I18n.t('orders.model.stock') : supplier.name
   end
 
   def articles_for_ordering

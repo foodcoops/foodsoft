@@ -545,7 +545,7 @@ de:
       confirm:
         clear: Abschließen
         first_paragraph: ! 'Wenn die Bestellung abgeschlossen wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
-        or_cancle: oder zurück zur Abrechnung
+        or_cancel: oder zurück zur Abrechnung
         title: Bestellung abschließen
       edit_results_by_articles:
         add_article: Artikel hinzufügen
@@ -564,14 +564,14 @@ de:
         total_fc: Summe (FC-Preis)
         units: Einheiten
       index:
-        title: beendete Bestellungen
+        title: Beendete Bestellungen
       invoice:
         edit: Rechnung bearbeiten
         invoice_amount: ! 'Rechnungsbetrag:'
         invoice_date: ! 'Rechnungsdatum:'
         invoice_number: ! 'Rechnungsnummer:'
         minus_refund_calculated: ! '- Pfand berechnet:'
-        new: Neue Rechnung erstellen
+        new: neue Rechnung erstellen
         new_body: ! 'Eine Rechnung für diese Bestellung anlegen:'
         plus_refund_credited: ! '+ Pfand gutgeschrieben:'
         refund_adjusted_amount: ! 'pfandbereinigter Betrag:'
@@ -669,23 +669,20 @@ de:
     invoices:
       edit:
         title: Rechnung bearbeiten
-      form:
-        delivery: Lieferung
-        linked: Diese Rechnung ist mit einer %{what_link} verknüpft.
-        order: Bestellung
       index:
         action_new: Neue Rechnung anlegen
         title: Rechnungen
       invoices:
         confirm_delete: Bist Du sicher?
         delivery: Lieferung
+      linked: Diese Rechnung ist mit %{what_link} verknüpft.
+      linked_delivery: einer Lieferung
+      linked_order: einer Bestellung
       new:
         back: Züruck
         title: Neue Rechnung anlegen
       show:
         back: Züruck
-        delivery: Lieferung
-        linked: Diese Rechnung ist mit einer %{what_link} verknüpft.
         title: Rechnung %{number}
     order_articles:
       edit:
@@ -770,11 +767,11 @@ de:
       tolerance: Toleranz
       total_sum_amount: Gesamtbetrag
       total_tolerance: Gesamt-Toleranz
-      total_units: Gesamt-Einheiten
       unit: Einheit
       unit_missing: Fehlende Einheiten
       units: Gebinde
       units_full: Volle Gebinde
+      units_total: Gesamt-Einheiten
     index:
       closed_orders:
         more: mehr...
@@ -1311,6 +1308,7 @@ de:
       error_nosel: Es muss mindestens ein Artikel ausgewählt sein
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: ! 'Bestellung: %{name}, bis %{ends}'
+      stock: Lager
     new:
       title: Neue Bestellung anlegen
     orders:
@@ -1425,16 +1423,16 @@ de:
       title_version: Version
       view_current: Aktuelle Version sehen
   sessions:
-    logged_in: Logged in!
-    logged_out: Logged out!
-    login_invalid: Invalid email or password
+    logged_in: Angemeldet!
+    logged_out: Abgemeldet!
+    login_invalid: 
     new:
       forgot_password: Passwort vergessen?
       login: Anmelden
       nojs: Achtung, Cookies und Javascript müssen aktiviert sein! %{link} bitte abschalten.
       noscript: NoScript
       password: Passwort
-      title: Foodsoft login
+      title: Foodsoft anmelden
       user: Benutzerin
   shared:
     articles_by_articles:
@@ -1462,7 +1460,7 @@ de:
       description: Beschreibung
       members: Mitglieder
       no_weekly_job: kein wöchentlicher Job definiert
-      weekly_job: wöchentlicher Job
+      weekly_job: Wöchentlicher Job
     group_form_fields:
       search: Suche ...
       search_user: Nach Nutzerin suchen
