@@ -16,21 +16,6 @@ namespace :foodsoft do
     end
   end
 
-  desc "Create upcoming workgroups tasks (next 3 to 7 weeks)"
-  task :create_upcoming_weekly_tasks => :environment do
-    workgroups = Workgroup.where(weekly_task: true)
-    for workgroup in workgroups
-      puts "Create weekly tasks for #{workgroup.name}"
-      # Loop through next tasks weekly tasks method,
-      # skip the next 3 weeks, to allow manually deleting tasks
-      workgroup.next_weekly_tasks[3..-1].each do |date|
-        unless workgroup.tasks.exists?({:due_date => date, :weekly => true})
-          workgroup.tasks.create(workgroup.task_attributes(date))
-        end
-      end
-    end
-  end
-
   desc "Notify workgroup of upcoming weekly task"
   task :notify_users_of_weekly_task => :environment do
     for workgroup in Workgroup.all
@@ -55,7 +40,7 @@ namespace :foodsoft do
   task :create_upcoming_periodic_tasks => :environment do
     for tg in PeriodicTaskGroup.all
       if tg.has_next_task?
-        while tg.next_task_date.nil? or tg.next_task_date < Date.today + 30
+        while tg.next_task_date.nil? or tg.next_task_date < Date.today + 50
           tg.create_next_task
         end
       end

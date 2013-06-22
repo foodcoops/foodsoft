@@ -1,16 +1,6 @@
 - title t('.title', workgroup: @group.name)
 = render 'nav'
 
-%section.well
-  %h3= t '.weekly.title'
-  - if @group.weekly_task
-    = t('.weekly.desc', weekday: weekday(@group.weekday), task: @group.task_name).html_safe
-  - else
-    = t('.weekly.empty').html_safe
-
-  - if @current_user.member_of?(@group) or @current_user.role_admin?
-    = link_to t('.weekly.edit'), edit_foodcoop_workgroup_path(@group), class: 'btn'
-
 %section
   %h3= t '.title_all'
   = render 'list', tasks: @group.open_tasks

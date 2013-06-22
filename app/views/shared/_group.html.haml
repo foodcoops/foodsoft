@@ -13,13 +13,6 @@
     - members = group.users
     = "(#{members.size})"
     = members.collect(&:nick).join(", ")
-  - if group.is_a?(Workgroup)
-    %dt= t('.weekly_job') + ':'
-    %dd
-      - if group.weekly_task
-        =h "#{group.task_name} am #{weekday(group.weekday)}"
-      - else
-        = t '.no_weekly_job'
-  - else
+  - unless group.is_a?(Workgroup)
     %dt= t '.apple_limit'
     %dd= group.ignore_apple_restriction ? t('.deactivated') : t('.activated')
