@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Task < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
@@ -17,6 +18,7 @@ class Task < ActiveRecord::Base
   validates :required_users, :presence => true
   validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 0
   validates_length_of :description, maximum: 250
+  validates :done, exclusion: { in: [true], message: 'erledigte Aufgaben können nicht wöchentlich wiederholt werden' }, if: :periodic?
 
   before_save :exclude_from_periodic_task_group
   after_save :update_ordergroup_stats
