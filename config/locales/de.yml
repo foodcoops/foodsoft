@@ -1422,9 +1422,6 @@ de:
       title: ! '%{title} - Version %{version}'
       title_version: Version
       view_current: Aktuelle Version sehen
-  periodic_task_groups:
-    destroy:
-      notice: Aufgaben wurden gelöscht
   sessions:
     logged_in: Logged in!
     logged_out: Logged out!
@@ -1611,7 +1608,6 @@ de:
         due_date: Wann erledigen?
         duration: Dauer
         name: Name
-        periodic: Wöchentlich wiederholen
         required_users: Anzahl
         user_list: Verantwortliche
         workgroup: Arbeitsgruppe
@@ -1826,7 +1822,6 @@ de:
   ui:
     close: Schließen
     delete: Löschen
-    delete_all: Alle löschen
     edit: Bearbeiten
     marks:
       close: ! '&times;'
