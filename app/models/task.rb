@@ -108,7 +108,7 @@ class Task < ActiveRecord::Base
   end
 
   def exclude_from_periodic_task_group
-    if changed? and not new_record?
+    if changed? and not new_record? and not changed.include? 'periodic_task_group_id'
       self.periodic_task_group = nil
     end
   end
