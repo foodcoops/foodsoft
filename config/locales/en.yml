@@ -637,6 +637,10 @@ en:
       new:
         paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
         title: New transaction
+        type: Type
+        type_pin: PIN delivery day
+        type_cash: cash delivery day
+        type_other: other (add note)
       new_collection:
         amount: Amount
         new_ordergroup: Add new order group

@@ -10,7 +10,21 @@
   :validate => true do |f|
   = f.hidden_field :ordergroup_id
   = f.input :amount
-  = f.input :note, :as => :text
+  .control-group
+    .control-label.required
+      = "<abbr title='#{I18n.t('simple_form.required.text')}'>#{I18n.t('simple_form.required.mark')}</abbr> ".html_safe
+      = t '.type'
+    .controls
+      %label{:for => :type_pin}
+        = radio_button_tag(:type, :pin)
+        = t '.type_pin'
+      %label{:for => :type_cash}
+        = radio_button_tag(:type, :cash)
+        = t '.type_cash'
+      %label{:for => :type_other}
+        = radio_button_tag(:type, :other)
+        = t '.type_other'
+  = f.input :note, :as => :text, :required => false, :input_html => {rows: 4}
   .form-actions
     = f.submit class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), finance_ordergroup_transactions_path(@ordergroup)
