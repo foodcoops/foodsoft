@@ -11,7 +11,15 @@ class Finance::OrderArticlesController < ApplicationController
 
   def create
     @order = Order.find(params[:order_id])
-    @order_article = @order.order_articles.build(params[:order_article])
+    # The article may with zero units ordered - in that case find and set amount to nonzero.
+    #   If order_article is ordered and a new order_article is created, an error message will be
+    #   given mentioning that the article already exists, which is desired.
+    @order_article = @order.order_articles.where(:article_id => params[:order_article][:article_id]).first
+    if @order_article and @order_article.units_to_order == 0
+      @order_article.units_to_order = 1
+    else
+      @order_article = @order.order_articles.build(params[:order_article])
+    end
     unless @order_article.save
       render action: :new
     end
