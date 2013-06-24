@@ -20,7 +20,7 @@ class Task < ActiveRecord::Base
   validates_length_of :description, maximum: 250
   validates :done, exclusion: { in: [true], message: 'erledigte Aufgaben können nicht wöchentlich wiederholt werden' }, if: :periodic?, on: :create
 
-  before_save :exclude_from_periodic_task_group
+  before_save :exclude_from_periodic_task_group, if: :changed?, unless: :new_record?
   after_save :update_ordergroup_stats
 
   # Find all tasks, for which the current user should be responsible
@@ -110,9 +110,8 @@ class Task < ActiveRecord::Base
   end
 
   def exclude_from_periodic_task_group
-    if changed? and not new_record? and not changed.include? 'periodic_task_group_id'
-      self.periodic_task_group = nil
-    end
+    self.periodic_task_group = nil
+    true
   end
 end
 

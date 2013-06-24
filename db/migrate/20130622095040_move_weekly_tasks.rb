@@ -4,7 +4,7 @@ class MoveWeeklyTasks < ActiveRecord::Migration
       task_group = PeriodicTaskGroup.create
       puts "Moving weekly task for workgroup #{workgroup.name} to group #{task_group.id}"
       workgroup.tasks.undone.each do |task|
-        task_group.tasks << task if weekly_task?(workgroup, task)
+        task.update_column(:periodic_task_group_id, task_group.id) if weekly_task?(workgroup, task)
       end
       tasks = task_group.tasks.order(:due_date)
       task_group.next_task_date = tasks.last.due_date + PeriodicTaskGroup::PeriodDays unless tasks.empty?
