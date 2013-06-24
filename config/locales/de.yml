@@ -546,7 +546,7 @@ de:
         clear: Abschließen
         first_paragraph: ! 'Wenn die Bestellung abgeschlossen wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
         or_cancel: oder zurück zur Abrechnung
-        title: Bestellung abschließen
+        title: Bestellung abrechnen
       edit_results_by_articles:
         add_article: Artikel hinzufügen
         amount: Menge
@@ -782,7 +782,7 @@ de:
         account_balance: Kontostand
         available_funds: verfügbares Guthaben
         finished_orders: nicht abgerechnete Bestellungen
-        open_orders: laufende Bestellungen
+        open_orders: Laufende Bestellungen
         title: Guthaben
       title: Bestellüberblick
     messages:
