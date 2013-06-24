@@ -81,6 +81,11 @@ de:
         too_long: ist zu lang (nicht mehr als %{count} Zeichen)
         too_short: ist zu kurz (nicht weniger als %{count} Zeichen)
         wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
+      models:
+        task:
+          attributes:
+            done:
+              exclusion: erledigte Aufgaben können nicht wöchentlich wiederholt werden
       template:
         body: ! 'Bitte überprüfen Sie die folgenden Felder:'
         header:
@@ -1628,12 +1633,6 @@ de:
         role_finance: Finanzen
         role_orders: Bestellverwaltung
         role_suppliers: Lieferanten
-        task_description: Beschreibung
-        task_duration: Vor. Dauer in Stunden
-        task_name: Name für Job
-        task_required_users: Benötige Verantwortliche
-        weekday: Wochentag
-        weekly_task: Monatlichen Job definieren?
     'no': Nein
     required:
       mark: ! '*'
@@ -1764,6 +1763,8 @@ de:
         hint: Nach Nutzerin suchen
         noresult: Keine Nutzerin gefunden
         placeholder: Suche ...
+      submit:
+        periodic: Wöchentliche Aufgabe speichern
     index:
       show_group_tasks: Gruppenaufgaben anzeigen
       title: Aufgaben
@@ -1791,6 +1792,8 @@ de:
       notice: Aufgabenstatus wurde aktualisiert
     show:
       accept_task: Aufgabe übernehmen
+      confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
+      delete_group: Aufgabe und folgende löschen
       due_date: Fälligkeitsdatum
       hours: ! '%{count}h'
       mark_done: Als erledigt markieren
@@ -1807,11 +1810,6 @@ de:
     workgroup:
       title: Aufgaben für %{workgroup}
       title_all: Alle Aufgaben der Gruppe
-      weekly:
-        desc: ! '<p>Jeden <b>%{weekday}</b> hat diese Arbeitsgruppe folgenden Job: <b>%{task}</b></p> <p>Die Wochenaufgaben werden von der Foodsoft automatisch erstellt. Eintragen müsst Ihr Euch aber selber.</p>'
-        edit: Wöchentliche Aufgaben anpassen
-        empty: Noch keine Wochenaufgaben angelegt.
-        title: Wöchentliche Aufgaben
   time:
     am: vormittags
     formats:

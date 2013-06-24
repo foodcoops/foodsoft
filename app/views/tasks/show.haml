@@ -30,5 +30,5 @@
   = link_to t('ui.delete'), task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?",
     class: 'btn btn-danger'
   - if @task.periodic?
-    = link_to 'Aufgabe und folgende löschen', task_path(@task, periodic: true), method: :delete, 
-      confirm: "Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?", class: 'btn btn-danger'
+    = link_to t('.delete_group'), task_path(@task, periodic: true), method: :delete, 
+      confirm: t('.confirm_delete_group'), class: 'btn btn-danger'
