@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130622095040) do
+ActiveRecord::Schema.define(:version => 20130624085246) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -143,17 +143,11 @@ ActiveRecord::Schema.define(:version => 20130622095040) do
     t.boolean  "role_article_meta",                                      :default => false, :null => false
     t.boolean  "role_finance",                                           :default => false, :null => false
     t.boolean  "role_orders",                                            :default => false, :null => false
-    t.boolean  "weekly_task",                                            :default => false
-    t.integer  "weekday"
-    t.string   "task_name"
-    t.string   "task_description"
-    t.integer  "task_required_users",                                    :default => 1
     t.datetime "deleted_at"
     t.string   "contact_person"
     t.string   "contact_phone"
     t.string   "contact_address"
     t.text     "stats"
-    t.integer  "task_duration",                                          :default => 1
     t.integer  "next_weekly_tasks_number",                               :default => 8
     t.boolean  "ignore_apple_restriction",                               :default => false
   end
@@ -322,7 +316,6 @@ ActiveRecord::Schema.define(:version => 20130622095040) do
     t.datetime "created_on",                                :null => false
     t.datetime "updated_on",                                :null => false
     t.integer  "required_users",         :default => 1
-    t.boolean  "weekly"
     t.integer  "duration",               :default => 1
     t.integer  "periodic_task_group_id"
   end
