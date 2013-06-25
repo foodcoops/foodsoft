@@ -9,5 +9,15 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  def login(nick='admin', pass='secret')
+    open_session do |session|
+      session.post '/f/login', nick: nick, password: pass
+    end
+  end
+
+  def logout
+    open_session do |session|
+      session.post '/f/logout'
+    end
+  end
 end

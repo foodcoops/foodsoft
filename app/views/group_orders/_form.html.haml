@@ -92,9 +92,6 @@
                   %input{type: 'button', value: '+', 'data-increase_tolerance' => order_article.id}
 
             %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
-              %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price], unit: "")
-              €
-              -#.article-info
               %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
               -#.article-info
                 .article-name= order_article.article.name
