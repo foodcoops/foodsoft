@@ -14,12 +14,12 @@
   .control-group
     %label(for='nick' class='control-label')= t '.user'
     .controls
-      = text_field_tag 'nick'
+      = text_field_tag 'nick', nil, autocapitalize: 'off', autocorrect: 'off'
 
   .control-group
     %label(for='password' class='control-label')= t '.password'
     .controls
-      = password_field_tag 'password'
+      = password_field_tag 'password', nil, autocapitalize: 'off', autocorrect: 'off'
 
   .control-group
     .controls
