@@ -3,7 +3,7 @@
     $(function() {
       #{data_to_js(@ordering_data)}
       setGroupBalance(#{@ordering_data[:available_funds]});
-      setDecimalSeparator(",");
+      setCurrencyFormat("#{t('number.currency.format.separator')}", #{t('number.currency.format.precision')}, "#{t('number.currency.format.unit')}");
       setToleranceBehaviour(#{FoodsoftConfig[:tolerance_is_costly]});
       setStockit(#{@order.stockit?});
     });
@@ -95,6 +95,8 @@
               %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price], unit: "")
               €
               -#.article-info
+              %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
+              -#.article-info
                 .article-name= order_article.article.name
                 .pull-right
                   = t('.units_full') + ':'
@@ -120,8 +122,7 @@
         %tr
           %td= t('.total_sum_amount') + ':'
           %td.currency
-            %span#total_price= @group_order.price
-            €
+            %span#total_price= number_to_currency(@group_order.price)
         -#%tr
           %td= t('.available_funds') + ':'
           %td.currency= number_to_currency(@ordering_data[:available_funds])
@@ -129,8 +130,7 @@
           %td= t('.new_funds') + ':'
           %td.currency
             %strong
-              %span#new_balance= @ordering_data[:available_funds] - @group_order.price
-              €
+              %span#new_balance= number_to_currency(@ordering_data[:available_funds] - @group_order.price)
       #order-button
         = submit_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary' )
         #{link_to t('ui.or_cancel'), root_path(anchor: '')}
