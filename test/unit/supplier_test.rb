@@ -1,18 +1,18 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class SupplierTest < Test::Unit::TestCase
+class SupplierTest < ActiveSupport::TestCase
   fixtures :suppliers
 
   def setup
     @supplier = Supplier.find_by_name("Terra")
   end
 
-  def test_read
+  test 'read' do
     assert_equal "Terra", @supplier.name
     assert_equal "www.terra-natur.de", @supplier.url
   end
   
-  def test_update
+  test 'update' do
     assert_equal "tuesday", @supplier.delivery_days
     @supplier.delivery_days = 'wednesday'
     assert @supplier.save, @supplier.errors.full_messages.join("; ")
