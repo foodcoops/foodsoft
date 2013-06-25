@@ -147,6 +147,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate(nick, password)
     user = find_by_nick(nick)
+    user or user = where('nick LIKE ?', nick)
     if user && user.has_password(password)
       user
     else
