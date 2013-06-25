@@ -3,6 +3,7 @@
     $(function() {
       #{data_to_js(@ordering_data)}
       setGroupBalance(#{@ordering_data[:available_funds]});
+      setMinimumBalance(#{FoodsoftConfig[:minimum_balance] or 0});
       setDecimalSeparator(",");
       setToleranceBehaviour(#{FoodsoftConfig[:tolerance_is_costly]});
       setStockit(#{@order.stockit?});
