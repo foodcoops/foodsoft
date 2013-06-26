@@ -6,14 +6,15 @@
         
         var stock_change = $(this).closest('tr');
         stock_change.hide(); // do not remove (to ensure destruction)
-        unmark_article_unavailable_for_delivery( stock_change.data('id') );
+        stock_change.removeAttr('id'); // remove id to allow re-adding
+        mark_article_for_delivery( stock_change.data('id') );
         return false;
       });
 
       $('.remove_new_stock_change').live('click', function() {
         var stock_change = $(this).closest('tr');
         stock_change.remove();
-        unmark_article_unavailable_for_delivery( stock_change.data('id') );
+        mark_article_for_delivery( stock_change.data('id') );
         return false;
       })
       
@@ -62,23 +63,26 @@
       });
     });
     
-    function mark_article_unavailable_for_delivery(stock_article_id) {
+    function mark_article_for_delivery(stock_article_id) {
       var articleTr = $('#stock_article_' + stock_article_id);
-      articleTr.addClass('unavailable');
-      $('.button-add-stock-change', articleTr).attr('disabled', 'disabled');
+      if( is_article_available_for_delivery(stock_article_id) ) {
+        articleTr.removeClass('unavailable');
+        $('.button-add-stock-change', articleTr).removeAttr('disabled');
+      }
+      else {
+        articleTr.addClass('unavailable');
+        $('.button-add-stock-change', articleTr).attr('disabled', 'disabled');
+      }
     }
-    function unmark_article_unavailable_for_delivery(stock_article_id) {
-      var articleTr = $('#stock_article_' + stock_article_id);
-      articleTr.removeClass('unavailable');
-      $('.button-add-stock-change', articleTr).removeAttr('disabled');
-    }
-    function is_article_unavailable_for_delivery(stock_article_id) {
-      var articleTr = $('#stock_article_' + stock_article_id);
-      return articleTr.hasClass('unavailable');
+    function is_article_available_for_delivery(stock_article_id) {
+      return ( 0 == $('#stock_change_stock_article_' + stock_article_id).length );
     }
 
 = simple_form_for [@supplier, @delivery], validate: true do |f|
-  = f.hidden_field :supplier_id
+  = f.error_notification
+  = base_errors f.object
+  = f.association :supplier, :as => :hidden
+  
   %h2= t '.title_select_stock_articles'
   .well.well-small
     .btn-toolbar

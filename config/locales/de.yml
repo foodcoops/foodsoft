@@ -1163,6 +1163,8 @@ de:
       subject: ! 'Betreff:'
       title: Nachricht anzeigen
   model:
+    delivery:
+      each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
     membership:
       no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
     order_article:

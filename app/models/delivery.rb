@@ -10,6 +10,7 @@ class Delivery < ActiveRecord::Base
   scope :recent, :order => 'created_at DESC', :limit => 10
 
   validates_presence_of :supplier_id, :delivered_on
+  validate :stock_articles_must_be_unique
 
   accepts_nested_attributes_for :stock_changes, :allow_destroy => :true
 
@@ -21,6 +22,14 @@ class Delivery < ActiveRecord::Base
 
   def includes_article?(article)
     self.stock_changes.map{|stock_change| stock_change.stock_article.id}.include? article.id
+  end
+  
+  protected
+  
+  def stock_articles_must_be_unique
+    unless stock_changes.reject{|sc| sc.marked_for_destruction?}.map {|sc| sc.stock_article.id}.uniq!.nil?
+      errors.add(:base, I18n.t('model.delivery.each_stock_article_must_be_unique'))
+    end
   end
   
 end
