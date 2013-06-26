@@ -5,7 +5,7 @@ class Delivery < ActiveRecord::Base
   has_many :stock_changes,
     :dependent => :destroy,
     :include => 'stock_article',
-    :order => 'articles.name COLLATE NOCASE ASC'
+    :order => 'articles.name ASC'
 
   scope :recent, :order => 'created_at DESC', :limit => 10
 
