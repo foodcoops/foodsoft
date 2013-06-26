@@ -420,10 +420,10 @@ en:
   deliveries:
     add_stock_change:
       how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
-    add_stock_article:
-      notice: The new stock article »%{name}« was saved.
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
+    create_stock_article:
+      notice: The new stock article »%{name}« was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
@@ -435,14 +435,10 @@ en:
       copy_order_article: Copy order article
       new_stock_article: Create new stock article
       price: Netprice
-      price_per_unit: Price/unit
       quantity: Quantity
-      remove_article: Remove article from delivery
       title_fill_quantities: 2. Set delivery quantities
       title_finish_delivery: 3. Finish delivery
       title_select_stock_articles: 1. Select stock articles
-      unit: Unit
-      vat: VAT
     index:
       confirm_delete: Are you sure?
       new_delivery: ! 'Create new delivery for %{supplier} '
@@ -466,7 +462,7 @@ en:
       action_add_to_delivery: 'Add to delivery'
       action_edit: 'Edit'
       action_other_price: 'Different price'
-    stock_change:
+    stock_change_fields:
       remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
     update:

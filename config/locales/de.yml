@@ -433,13 +433,10 @@ de:
       create_from_blank: Ohne Vorlage anlegen
       create_stock_article: Lagerartikel anlegen
       price: Preis (netto)
-      price_per_unit: Preis/Einheit
       quantity: Menge
       title_fill_quantities: 2. Liefermenge angeben
       title_finish_delivery: 3. Lieferung abschließen
       title_select_stock_articles: 1. Lagerartikel auswählen
-      unit: Einheit
-      vat: MwSt
     index:
       confirm_delete: Bist Du sicher?
       new_delivery: Neue Lieferung für %{supplier} anlegen
