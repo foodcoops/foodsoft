@@ -732,6 +732,7 @@ en:
         title: Manage accounts
       ordergroups:
         account_balance: Account balance
+        available_funds: Available funds
         account_statement: Account statement
         contact: Contact
         name: Name
