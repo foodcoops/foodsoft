@@ -39,6 +39,7 @@ de:
         article_category: Kategorie
         availability: Artikel ist verfügbar?
         deposit: Pfand
+        fc_price: Endpreis
         gross_price: Bruttopreis
         price: Nettopreis
         tax: MwSt

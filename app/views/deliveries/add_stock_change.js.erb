@@ -8,6 +8,7 @@
   var stock_change = $(
     '<%= j(render(:partial => 'stock_change', :locals => {:stock_change => @stock_change})) %>'
   ).addClass('success');
+  enablePriceTooltips(stock_change);
   
   $('#stock_changes').append(stock_change);
   mark_article_for_delivery(<%= @stock_change.stock_article.id %>);

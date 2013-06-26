@@ -7,18 +7,15 @@ $('div.container-fluid').prepend(
   
   $('#stock_articles_for_adding tr').removeClass('success');
   
-  var old_entry = $('#stock_article_<%= @stock_article.id %>');
-  var unavailable = old_entry.hasClass('unavailable');
   var stock_article_for_adding = $(
     '<%= j(render(:partial => 'stock_article_for_adding', :locals => {:article => @stock_article, :delivery => @delivery})) %>'
   ).addClass('success');
+  enablePriceTooltips(stock_article_for_adding);
   
-  old_entry.replaceWith(stock_article_for_adding);
+  $('#stock_article_<%= @stock_article.id %>').replaceWith(stock_article_for_adding);
   updateSort('#stock_articles_for_adding');
   
-  if(unavailable) {
-    mark_article_unavailable_for_delivery(<%= @stock_article.id %>);
-  }
+  mark_article_for_delivery(<%= @stock_article.id %>);
   
   // update entry in stock_changes table
   

@@ -39,6 +39,7 @@ en:
         article_category: article category
         availability: Is article available?
         deposit: deposit
+        fc_price: FC price
         gross_price: gross price
         price: price
         tax: VAT

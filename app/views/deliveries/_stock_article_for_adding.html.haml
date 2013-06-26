@@ -1,7 +1,7 @@
 - css_class = ( @delivery and @delivery.includes_article? article ) ? ( 'unavailable' ) : ( false )
 %tr{:id => "stock_article_#{article.id}", :class => css_class}
   %td.sort-by-name= article.name
-  %td #{number_to_currency article.price}/#{article.unit}
+  %td{:data => {:toggle => :tooltip, :title => render(:partial => 'shared/article_price_info', :locals => {:article => article})}} #{number_to_currency article.price}/#{article.unit}
   %td.sort-by-category= article.article_category.name
   %td
     .btn-group
