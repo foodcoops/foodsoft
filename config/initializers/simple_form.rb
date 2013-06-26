@@ -44,21 +44,6 @@ SimpleForm.setup do |config|
     b.use :hint,  :wrap_with => { :tag => :span, :class => :hint }
     b.use :error, :wrap_with => { :tag => :span, :class => :error }
   end
-  
-  config.wrappers :intable, :class => 'control-group',
-    :error_class => :error do |b|
-    b.use :html5
-    b.use :placeholder
-    b.optional :maxlength
-    b.optional :pattern
-    b.optional :min_max
-    b.optional :readonly
-    
-    b.use :input
-    b.use :hint
-    b.use :error, :wrap_with => { :tag => :span, :class => 'help-inline' }
-  end
-
 
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :default

@@ -142,9 +142,6 @@ $(function() {
     // Sort tables with a default sort
     $('.sorter-bar.default-sort-asc button:nth-child(1)').trigger('click');
     $('.sorter-bar.default-sort-desc button:nth-child(2)').trigger('click');
-    
-    // Translate Select2 messages - could be done in another place, right?
-    $.fn.select2.defaults.formatNoMatches = function () { return "-"; };
 });
 
 // compare two elements interpreted as text

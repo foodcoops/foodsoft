@@ -13,6 +13,7 @@ class DeliveriesController < ApplicationController
 
   def new
     @delivery = @supplier.deliveries.build
+    @delivery.delivered_on = Date.today #TODO: move to model/database
   end
 
   def create
@@ -60,12 +61,12 @@ class DeliveriesController < ApplicationController
     unless old_article.nil?
       @stock_article = old_article.dup
     else
-      @stock_article = @supplier.stock_articles.build
+      @stock_article = @supplier.stock_articles.build(params[:stock_article])
     end
     render :layout => false
   end
 
-  def add_stock_article
+  def create_stock_article
     @stock_article = StockArticle.new(params[:stock_article])
     
     if @stock_article.valid? and @stock_article.save

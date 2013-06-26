@@ -3,6 +3,8 @@ $('div.container-fluid').prepend(
 );
 
 (function() {
+  // update entry in stock_article table
+  
   $('#stock_articles_for_adding tr').removeClass('success');
   
   var old_entry = $('#stock_article_<%= @stock_article.id %>');
@@ -11,13 +13,14 @@ $('div.container-fluid').prepend(
     '<%= j(render(:partial => 'stock_article_for_adding', :locals => {:article => @stock_article, :delivery => @delivery})) %>'
   ).addClass('success');
   
-  if(unavailable) {
-    stock_article_for_adding.addClass('unavailable');
-    $('.button-add-stock-change', stock_article_for_adding).attr('disabled', 'disabled');
-  }
-  
   old_entry.replaceWith(stock_article_for_adding);
   updateSort('#stock_articles_for_adding');
+  
+  if(unavailable) {
+    mark_article_unavailable_for_delivery(<%= @stock_article.id %>);
+  }
+  
+  // update entry in stock_changes table
   
   $('#stock_changes tr').removeClass('success');
   

@@ -418,10 +418,10 @@ de:
   deliveries:
     add_stock_change:
       how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
-    add_stock_article:
-      notice: Neuer Lagerartikel »%{name}« gespeichert.
     create:
       notice: Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!
+    create_stock_article:
+      notice: Neuer Lagerartikel »%{name}« gespeichert.
     destroy:
       notice: Lieferung wurde gelöscht.
     edit:
@@ -430,12 +430,11 @@ de:
       actions: Optionen
       article: Artikel
       category: Kategorie
-      copy_order_article: Kopiere Bestellartikel
-      new_stock_article: Neuen Lagerartikel anlegen
+      create_from_blank: Ohne Vorlage anlegen
+      create_stock_article: Lagerartikel anlegen
       price: Preis (netto)
       price_per_unit: Preis/Einheit
       quantity: Menge
-      remove_article: Artikel aus Lieferung entfernen
       title_fill_quantities: 2. Liefermenge angeben
       title_finish_delivery: 3. Lieferung abschließen
       title_select_stock_articles: 1. Lagerartikel auswählen
@@ -464,7 +463,7 @@ de:
       action_add_to_delivery: 'Liefern'
       action_edit: 'Bearbeiten'
       action_other_price: 'Anderer Preis'
-    stock_change:
+    stock_change_fields:
       remove_article: Artikel aus Lieferung entfernen
     suppliers_overview: Lieferantenübersicht
     update:
@@ -1846,6 +1845,7 @@ de:
       close: ! '&times;'
       success: ! '<i class="icon icon-ok"></i>'
     or_cancel: oder abbrechen
+    please_wait: Bitte warten...
     save: Speichern
     show: Anzeigen
   views:

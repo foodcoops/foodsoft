@@ -16,18 +16,48 @@
         unmark_article_unavailable_for_delivery( stock_change.data('id') );
         return false;
       })
-      $('#copy_from_article').select2({
-        placeholder: '#{t '.copy_order_article'}',
-        allowClear: true
+      
+      $('#new_stock_article').removeAttr('disabled').select2({
+        placeholder: '#{t '.create_stock_article'}',
+        data: #{articles_for_select2(@supplier).to_json},
+        createSearchChoice: function(term) {
+          return {
+            id: 'new',
+            text: term
+          };
+        },
+        formatResult: function(result, container, query, escapeMarkup) {
+          if(result.id == 'new') {
+            return result.text + ' (#{t '.create_from_blank'})';
+          }
+          var markup=[];
+          Select2.util.markMatch(result.text, query.term, markup, escapeMarkup);
+          return markup.join("");
+        }
       }).on('change', function(e) {
-        if(e.val != '') {
+        var selectedArticle = $(e.currentTarget).select2('data');
+        if(!selectedArticle) {
+          return false;
+        }
+        if('new' == selectedArticle.id) {
           $.ajax({
             url: '#{new_stock_article_supplier_deliveries_path(@supplier)}',
             type: 'get',
-            data: {old_article_id: e.val},
+            data: {stock_article: {name: selectedArticle.text}},
             contentType: 'application/json; charset=UTF-8'
           });
-          $('#copy_from_article').select2('data', null);
+          $('#new_stock_article').select2('data', null);
+          return true;
+        }
+        if('' != selectedArticle.id) {
+          $.ajax({
+            url: '#{new_stock_article_supplier_deliveries_path(@supplier)}',
+            type: 'get',
+            data: {old_article_id: selectedArticle.id},
+            contentType: 'application/json; charset=UTF-8'
+          });
+          $('#new_stock_article').select2('data', null);
+          return true;
         }
       });
     });
@@ -47,67 +77,45 @@
       return articleTr.hasClass('unavailable');
     }
 
--# remove validate true for the form, because it disabled html5 validation
--# is there anything broken with the simple_form validation? (bootstrap issue?)
-= simple_form_for [@supplier, @delivery] do |f|
+= simple_form_for [@supplier, @delivery], validate: true do |f|
   = f.hidden_field :supplier_id
-  .row-fluid
-      
-    .span6
-      %h2= t '.title_select_stock_articles'
-      .well.well-small
-        .btn-toolbar
-          .btn-group
-            = link_to t('.new_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), remote: true, class: 'btn'
-            = select_tag(:copy_from_article, options_for_select(articles_for_select(@supplier)))
-      %table.table.table-condensed.table-hover#stock_articles_for_adding
-        %thead
-          %tr
-            %th
-              = t '.article'
-              %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
-            %th= t '.unit'
-            %th= t '.price'
-            %th= t '.vat'
-            %th
-              = t '.category'
-              %span.sorter-bar{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-category'}}
-            %th= t '.actions'
-        %tbody
-          - for article in stock_articles_for_table(@supplier)
-            = render :partial => 'stock_article_for_adding', :locals => {:article => article}
+  %h2= t '.title_select_stock_articles'
+  .well.well-small
+    .btn-toolbar
+      .btn-group
+        %input#new_stock_article{:style => 'width: 500px;'}
+  %table.table.table-condensed.table-hover#stock_articles_for_adding
+    %thead
+      %tr
+        %th
+          = t '.article'
+          %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
+        %th= t '.price'
+        %th
+          = t '.category'
+          %span.sorter-bar{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-category'}}
+        %th= t '.actions'
+    %tbody
+      - for article in stock_articles_for_table(@supplier)
+        = render :partial => 'stock_article_for_adding', :locals => {:article => article}
     
-    .span6
-      %h2= t '.title_fill_quantities'
-      <!-- = f.inspect -->
-      %table.table.table-condensed#stock_changes
-        %thead
-          %tr
-            %th
-              = t '.article'
-              %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
-            %th= t '.price_per_unit'
-            %th= t '.quantity'
-            %th= t '.actions'
-        %tbody
-          -# see also the partial 'stock_change' which is used for AJAX updates!
-          -# see also the partial 'stock_change' which is used for AJAX updates!
-          -# see also the partial 'stock_change' which is used for AJAX updates!
-          = f.simple_fields_for :stock_changes do |stock_change_form|
-            - stock_change = stock_change_form.object
-            %tr{:id => "stock_change_stock_article_#{stock_change.stock_article.id}", :data => {:id => stock_change.stock_article.id}}
-              %td.sort-by-name
-                = stock_change_form.association :stock_article, :as => :hidden
-                %span.stock_article_name= stock_change.stock_article.name
-              %td.numeric.price-per-unit #{number_to_currency stock_change.stock_article.price}/#{stock_change.stock_article.unit}
-              %td= stock_change_form.input :quantity, :wrapper => :intable, :input_html => {:class => 'stock-change-quantity', :autocomplete => :off}
-              %td
-                = stock_change_form.hidden_field :_destroy
-                = link_to t('.remove_article'), "#", :class => 'destroy_stock_change btn btn-small'
-      
-      %h2= t '.title_finish_delivery'
-      = f.input :delivered_on, as: :date_picker
-      = f.input :note, input_html: {size: '35x4'}
-      .form-actions
-        = f.submit class: 'btn btn-primary'
-        = link_to t('ui.or_cancel'), supplier_deliveries_path(@supplier)
+  %h2= t '.title_fill_quantities'
+  %table.table.table-condensed#stock_changes
+    %thead
+      %tr
+        %th
+          = t '.article'
+          %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
+        %th= t '.price'
+        %th= t '.quantity'
+        %th= t '.actions'
+    %tbody
+      = f.simple_fields_for :stock_changes do |stock_change_form|
+        = render :partial => 'stock_change_fields', :locals => {:f => stock_change_form}
+  
+  %h2= t '.title_finish_delivery'
+  = f.input :delivered_on, as: :date_picker
+  = f.input :note, input_html: {size: '35x4'}
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), supplier_deliveries_path(@supplier)

@@ -1,16 +1,11 @@
 - css_class = ( @delivery and @delivery.includes_article? article ) ? ( 'unavailable' ) : ( false )
 %tr{:id => "stock_article_#{article.id}", :class => css_class}
-  %td.sort-by-name
-    = article.name
-  %td.numeric= article.unit
-  %td.numeric= number_to_currency article.price
-  %td.numeric= number_to_percentage article.tax
+  %td.sort-by-name= article.name
+  %td #{number_to_currency article.price}/#{article.unit}
   %td.sort-by-category= article.article_category.name
   %td
     .btn-group
       = link_to t('.action_edit'), edit_stock_article_supplier_deliveries_path(@supplier, :stock_article_id => article.id), remote: true, class: 'btn btn-mini'
       = link_to t('.action_other_price'), new_stock_article_supplier_deliveries_path(@supplier, :old_stock_article_id => article.id), remote: true, class: 'btn btn-mini'
-      - if @delivery and @delivery.includes_article? article
-        = link_to t('.action_add_to_delivery'), add_stock_change_supplier_deliveries_path(@supplier, :stock_article_id => article.id), :method => :post, remote: true, class: 'button-add-stock-change btn btn-mini', disabled: 'disabled'
-      - else
-        = link_to t('.action_add_to_delivery'), add_stock_change_supplier_deliveries_path(@supplier, :stock_article_id => article.id), :method => :post, remote: true, class: 'button-add-stock-change btn btn-mini'
+      - deliver_button_disabled = ( @delivery and @delivery.includes_article? article ) ? ( 'disabled' ) : ( false )
+      = link_to t('.action_add_to_delivery'), add_stock_change_supplier_deliveries_path(@supplier, :stock_article_id => article.id), :method => :post, remote: true, class: 'button-add-stock-change btn btn-mini btn-primary', disabled: deliver_button_disabled

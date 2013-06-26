@@ -105,7 +105,7 @@ Foodsoft::Application.routes.draw do
         post :add_stock_change, :on => :collection
         
         get :new_stock_article, :on => :collection
-        post :add_stock_article, :on => :collection
+        post :create_stock_article, :on => :collection
         
         get :edit_stock_article, :on => :collection
         put :update_stock_article, :on => :collection
