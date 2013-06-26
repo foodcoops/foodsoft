@@ -6,6 +6,7 @@
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker.de
 //= require jquery.observe_field
+//= require list.min
 //= require rails.validations
 //= require_self
 //= require ordering
