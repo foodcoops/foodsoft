@@ -1,8 +1,4 @@
 # == Schema Information
-<<<<<<< HEAD:test/fixtures/suppliers.yml
-=======
-# Schema version: 20090325175756
->>>>>>> wiki:test/fixtures/suppliers.yml
 #
 # Table name: suppliers
 #
@@ -38,12 +34,3 @@ terra:
     Terra possibly delivers also on other days than tuesday. Don't
     hesitate to ask for it.
   min_order_quantity: 80,-€ (gross)
-  
-
-
-
-
-
-
-
-

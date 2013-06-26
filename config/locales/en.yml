@@ -557,12 +557,12 @@ en:
         notice: Order was accounted succesfully, the balance of the account was updated.
       close_direct:
         alert: ! 'Order can not be closed: %{message}'
-        notice: Order was closed
+        notice: Order was closed.
       confirm:
         clear: Close
         first_paragraph: ! 'When the order is closed, all group accounts will be updated.<br />The accounts will be charged as follows:'
-        or_cancle: or back to accounting
-        title: Close order
+        or_cancel: or back to accounting
+        title: Settle order
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
@@ -577,7 +577,7 @@ en:
         add_group: Add group
         group: Group
         total: Total costs
-        total_fc: Sum (FC-Price)
+        total_fc: Sum (FC-price)
         units: Units
       index:
         title: Closed orders
@@ -587,7 +587,7 @@ en:
         invoice_date: ! 'Invoice date:'
         invoice_number: ! 'Invoice number:'
         minus_refund_calculated: ! '- deposit charged:'
-        new: Create new invoice
+        new: create new invoice
         new_body: ! 'Create an invoice for this order:'
         plus_refund_credited: ! '+ deposit returned:'
         refund_adjusted_amount: ! 'amount adjusted for refund:'
@@ -617,7 +617,7 @@ en:
         ended: ended
         last_edited_by: Last edited by
         name: Supplier
-        no_closed_orders: At the moment there are no ended orders.
+        no_closed_orders: At the moment there are no closed orders.
         state: State
       summary:
         changed: Data was changed!
@@ -676,7 +676,7 @@ en:
       group: Group
       last_transactions: Last transactions
       note: Note
-      open_transactions: not yet accounted
+      open_transactions: not yet settled
       show_all: show all
       supplier: supplier
       title: Finances
@@ -684,23 +684,20 @@ en:
     invoices:
       edit:
         title: Edit invoice
-      form:
-        delivery: delivery
-        linked: This invoice is linked to a %{what_link}.
-        order: order
       index:
         action_new: Create new invoice
         title: Invoices
       invoices:
         confirm_delete: Are you sure?
         delivery: Delivery
+      linked: This invoice is linked to %{what_link}.
+      linked_delivery: a delivery
+      linked_order: an order
       new:
         back: Back
         title: Create new invoice
       show:
         back: Back
-        delivery: delivery
-        linked: This invoice is linked to a %{what_link}.
         title: Invoice %{number}
     order_articles:
       edit:
@@ -753,8 +750,8 @@ en:
       desc: View all %{link} here.
       open_orders: current orders
       title: Orders of %{group}
-      title_closed: Accounted
-      title_open: Completed/not accounted
+      title_closed: settled
+      title_open: closed/not settled
     create:
       error_general: The order couldn’t be updated due to a bug.
       error_stale: Someone else has ordered in the meantime, couldn't update the order.
@@ -793,14 +790,14 @@ en:
     index:
       closed_orders:
         more: more...
-        title: Closed orders
+        title: Settled orders
       finished_orders:
-        title: Unaccounted orders
+        title: Unsettled orders
         total_sum: Total sum
       funds:
         account_balance: Account balance
         available_funds: Available credit
-        finished_orders: Unaccounted orders
+        finished_orders: unsettled orders
         open_orders: Current orders
         title: Credit
       title: Orders overview
@@ -830,7 +827,7 @@ en:
         total_price: Total price
         unit_price: Unit price
         units: Units
-      closed_by: Accounted by %{user}
+      closed_by: Settled by %{user}
       comment: Comment
       comments:
         title: Comments
@@ -1319,13 +1316,13 @@ en:
       ended_orders: Closed orders
       ending: End
       new_order: Create new order
-      no_open_orders: There are no current orders.
+      no_open_orders: There are currently no open orders.
       note: Note
       open_orders: Current orders
       supplier: Supplier
       title: Manage orders
     model:
-      error_closed: Order was already accounted for
+      error_closed: Order was already settled
       error_nosel: At least one article must be selected
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: ! 'Order: %{name}, until %{ends}'
@@ -1366,10 +1363,10 @@ en:
       sort_group: Sorted in groups
       supplier: ! 'Supplier:'
       title: ! 'Order: %{name}'
-      warn_not_closed: Warning, order is not accounted yet.
+      warn_not_closed: Warning, order is not yet settled.
     state:
-      closed: closed
-      finished: finished
+      closed: settled
+      finished: closed
       open: open
     update:
       notice: The order was updated.

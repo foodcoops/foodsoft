@@ -523,8 +523,8 @@ nl:
       confirm:
         clear: Sluiten
         first_paragraph: ! 'Wanneer de bestelling gesloten wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
-        or_cancle: of terug naar afrekenen
-        title: Order sluiten
+        or_cancel: of terug naar afrekenen
+        title: Order afrekenen
       edit_results_by_articles:
         add_article: Artikel toevoegen
         amount: Aantal
@@ -549,7 +549,7 @@ nl:
         invoice_date: ! 'Factuurdatum:'
         invoice_number: ! 'Factuurnummer:'
         minus_refund_calculated: ! '- statiegeld berekend:'
-        new: Factuur toevoegen
+        new: factuur toevoegen
         new_body: ! 'Een factuur aan deze rekening toevoegen:'
         plus_refund_credited: ! '+ statiegeld teruggekregen:'
         refund_adjusted_amount: ! 'bedrag gecorrigeerd voor statiegeld:'
@@ -579,7 +579,7 @@ nl:
         ended: beëindigd
         last_edited_by: Laatst aangepast door
         name: Leverancier
-        no_closed_orders: Momenteel zijn er geen beëindigde bestellingen.
+        no_closed_orders: Momenteel zijn er geen gesloten bestellingen.
         state: Status
       summary:
         changed: 
@@ -646,23 +646,20 @@ nl:
     invoices:
       edit:
         title: Factuur bewerken
-      form:
-        delivery: levering
-        linked: Deze factuur is met aan %{what_link} gekoppeld.
-        order: bestelling
       index:
         action_new: Nieuwe factuur toevoegen
         title: Facturen
       invoices:
         confirm_delete: Weet je het zeker?
         delivery: Levering
+      linked: Deze factuur is aan %{what_link} gekoppeld.
+      linked_delivery: een levering
+      linked_order: een bestelling
       new:
         back: Terug
         title: Nieuwe factuur toevoegen
       show:
         back: Terug
-        delivery: levering
-        linked: Deze factuur is aan een %{what_link} gekoppeld.
         title: Factuur %{number}
     order_articles:
       edit:
@@ -715,7 +712,7 @@ nl:
       desc: Bekijk hier alle %{link}.
       open_orders: lopende bestellingen
       title: Bestellingen van %{group}
-      title_closed: Afgerekend
+      title_closed: afgerekend
       title_open: gesloten/niet afgerekend
     create:
       error_general: De bestelling kon niet bijgewerkt worden vanwege een fout.
@@ -757,12 +754,12 @@ nl:
         more: meer...
         title: Afgerekende bestellingen
       finished_orders:
-        title: 
+        title: Niet afgerekende bestellingen
         total_sum: 
       funds:
         account_balance: 
         available_funds: 
-        finished_orders: 
+        finished_orders: niet afgerekende bestellingen
         open_orders: Lopende bestellingen
         title: Credit
       title: Besteloverzicht
@@ -1040,7 +1037,7 @@ nl:
         email_is_public: 
         name_is_public: 
         negative_balance: 
-        order_finished: 
+        order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).
         phone_is_public: 
         send_as_email: 
         upcoming_tasks: 
@@ -1175,16 +1172,16 @@ nl:
       action_end: 
       confirm_delete: 
       confirm_end: 
-      ended_orders: 
+      ended_orders: Gesloten bestellingen
       ending: 
       new_order: 
-      no_open_orders: 
+      no_open_orders: Er zijn momenteel geen lopende bestellingen.
       note: 
-      open_orders: 
+      open_orders: Lopende bestellingen
       supplier: 
       title: 
     model:
-      error_closed: 
+      error_closed: Bestelling was al afgerekend
       error_nosel: 
       error_starts_before_ends: 
       notice_close: 
@@ -1223,11 +1220,11 @@ nl:
       sort_group: 
       supplier: 
       title: 
-      warn_not_closed: 
+      warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
     state:
-      closed: 
-      finished: 
-      open: 
+      closed: afgerekend
+      finished: gesloten
+      open: lopend
     update:
       notice: 
   pages:

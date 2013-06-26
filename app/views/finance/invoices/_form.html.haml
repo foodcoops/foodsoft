@@ -3,9 +3,9 @@
   = f.hidden_field :order_id
 
   - if @invoice.delivery
-    %p= t('.linked', what_link: link_to(t('.delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
+    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
   - if @invoice.order
-    %p= t('.linked', what_link: link_to(t('.order'), @invoice.order)).html_safe
+    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), @invoice.order)).html_safe
 
   = f.association :supplier, hint: false
   = f.input :number

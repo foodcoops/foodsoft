@@ -3,6 +3,7 @@ admins:
   type: Workgroup
   name: Administrators
   description: System administrators.
+  created_on: <%= 5.weeks.ago.to_s(:db) %>
   role_admin: true
   role_suppliers: true
   role_article_meta: true
@@ -11,12 +12,8 @@ admins:
 bananas:
   type: Ordergroup
   name: Banangroup
+  created_on: <%= 4.weeks.ago.to_s(:db) %>
   account_balance: 100.00
-  account_updated: <%= 1.weeks.ago.to_s(:db) %>
   contact_person: Tim
   contact_phone: 030 123132456
   contact_address: Waldermarstrasse 43, 10988 Berlin
-
-
-
-

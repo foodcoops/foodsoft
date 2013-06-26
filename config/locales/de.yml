@@ -559,8 +559,8 @@ de:
       confirm:
         clear: Abschließen
         first_paragraph: ! 'Wenn die Bestellung abgeschlossen wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
-        or_cancle: oder zurück zur Abrechnung
-        title: Bestellung abschließen
+        or_cancel: oder zurück zur Abrechnung
+        title: Bestellung abrechnen
       edit_results_by_articles:
         add_article: Artikel hinzufügen
         amount: Menge
@@ -585,7 +585,7 @@ de:
         invoice_date: ! 'Rechnungsdatum:'
         invoice_number: ! 'Rechnungsnummer:'
         minus_refund_calculated: ! '- Pfand berechnet:'
-        new: Neue Rechnung erstellen
+        new: neue Rechnung erstellen
         new_body: ! 'Eine Rechnung für diese Bestellung anlegen:'
         plus_refund_credited: ! '+ Pfand gutgeschrieben:'
         refund_adjusted_amount: ! 'pfandbereinigter Betrag:'
@@ -682,23 +682,20 @@ de:
     invoices:
       edit:
         title: Rechnung bearbeiten
-      form:
-        delivery: Lieferung
-        linked: Diese Rechnung ist mit einer %{what_link} verknüpft.
-        order: Bestellung
       index:
         action_new: Neue Rechnung anlegen
         title: Rechnungen
       invoices:
         confirm_delete: Bist Du sicher?
         delivery: Lieferung
+      linked: Diese Rechnung ist mit %{what_link} verknüpft.
+      linked_delivery: einer Lieferung
+      linked_order: einer Bestellung
       new:
         back: Züruck
         title: Neue Rechnung anlegen
       show:
         back: Züruck
-        delivery: Lieferung
-        linked: Diese Rechnung ist mit einer %{what_link} verknüpft.
         title: Rechnung %{number}
     order_articles:
       edit:
@@ -799,7 +796,7 @@ de:
         account_balance: Kontostand
         available_funds: verfügbares Guthaben
         finished_orders: nicht abgerechnete Bestellungen
-        open_orders: laufende Bestellungen
+        open_orders: Laufende Bestellungen
         title: Guthaben
       title: Bestellüberblick
     messages:

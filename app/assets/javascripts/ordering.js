@@ -7,7 +7,9 @@
 
 var modified = false    		// indicates if anything has been clicked on this page
 var groupBalance = 0;			// available group money
-var decimalSeparator = ".";		// default decimal separator
+var currencySeparator = ".";		// default decimal separator
+var currencyPrecision = 2;      // default digits behind comma
+var currencyUnit = "€";         // default currency
 var toleranceIsCostly = true;   // default tolerance behaviour
 var isStockit = false;          // Wheter the order is from stock oder normal supplier
 
@@ -20,8 +22,10 @@ var toleranceOthers = new Array();
 var itemsAllocated = new Array();  // how many items the group has been allocated and should definitely get
 var quantityAvailable = new Array();  // stock_order. how many items are currently in stock
 
-function setDecimalSeparator(character) {
-    decimalSeparator = character;
+function setCurrencyFormat(separator, precision, unit) {
+    currencySeparator = separator;
+    currencyPrecision = precision;
+    currencyUnit = unit;
 }
 
 function setToleranceBehaviour(value) {
@@ -129,7 +133,7 @@ function update(item, quantity, tolerance) {
 }
 
 function asMoney(amount) {
-    return String(amount.toFixed(2)).replace(/\./, ",");
+    return String(amount.toFixed(currencyPrecision)).replace(/\./, currencySeparator) + ' ' + currencyUnit;
 }
 
 function calcUnits(unitSize, quantity, tolerance) {
