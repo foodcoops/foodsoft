@@ -15,7 +15,7 @@ module DeliveriesHelper
   end
   
   def stock_articles_for_table(supplier)
-    supplier.stock_articles.undeleted.reorder('articles.name COLLATE NOCASE ASC')
+    supplier.stock_articles.undeleted.reorder('articles.name ASC')
   end
   
   def stock_change_remove_link(stock_change_form)
