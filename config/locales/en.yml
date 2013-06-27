@@ -1795,6 +1795,7 @@ en:
       new_task: Create new task
     new:
       title: Create new tasks
+    repeated: Task is repeated weekly
     set_done:
       notice: The state of the task has been updated
     show:

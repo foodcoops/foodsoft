@@ -1788,6 +1788,7 @@ de:
       new_task: Neue Aufgabe erstellen
     new:
       title: Neue Aufgabe erstellen
+    repeated: Aufgabe wird wöchentlich wiederholt
     set_done:
       notice: Aufgabenstatus wurde aktualisiert
     show:

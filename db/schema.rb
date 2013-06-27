@@ -308,10 +308,10 @@ ActiveRecord::Schema.define(:version => 20130624085246) do
   add_index "suppliers", ["name"], :name => "index_suppliers_on_name", :unique => true
 
   create_table "tasks", :force => true do |t|
-    t.string   "name",           :default => "",    :null => false
+    t.string   "name",                   :default => "",    :null => false
     t.string   "description"
     t.date     "due_date"
-    t.boolean  "done",           :default => false
+    t.boolean  "done",                   :default => false
     t.integer  "workgroup_id"
     t.datetime "created_on",                                :null => false
     t.datetime "updated_on",                                :null => false

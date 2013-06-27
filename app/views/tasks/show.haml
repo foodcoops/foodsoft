@@ -10,7 +10,10 @@
       %dd= simple_format(@task.description)
     - if @task.due_date.present?
       %dt= t '.due_date'
-      %dd= format_date(@task.due_date)
+      %dd 
+        = format_date(@task.due_date)
+        - if @task.periodic?
+          %i.icon-repeat{title: t('tasks.repeated')}
     %dt= t 'simple_form.labels.task.duration'
     %dd= t('.hours', count: @task.duration)
     %dt= t 'simple_form.labels.task.user_list'
