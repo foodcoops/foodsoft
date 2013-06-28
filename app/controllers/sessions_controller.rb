@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     if user
       session[:user_id] = user.id
       session[:scope] = FoodsoftConfig.scope  # Save scope in session to not allow switching between foodcoops with one account
+      session[:locale] = user_settings_language
       if session[:return_to].present?
         redirect_to_url = session[:return_to]
         session[:return_to] = nil
