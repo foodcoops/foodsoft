@@ -14,6 +14,7 @@
 
 .row-fluid
   .well.pull-left
+    %button{type: "button", class: "close", data: {dismiss: 'alert'}}= '&times;'.html_safe
     %h2= @order.name
     %dl.dl-horizontal
       - unless @order.note.blank?
@@ -36,11 +37,12 @@
       %dd= number_to_currency(@ordering_data[:available_funds])
 
   .well.pull-right
+    %button{type: "button", class: "close", data: {dismiss: 'alert'}}= '&times;'.html_safe
     = render 'switch_order', current_order: @order
 
 #article-list
   .well
-    = text_field_tag :article, params[:article], placeholder: 'Artikel ...', class: 'search-query input-xxlarge search'
+    = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query input-large search'
 
   = form_for @group_order do |f|
     = f.hidden_field :lock_version
