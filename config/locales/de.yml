@@ -601,7 +601,7 @@ de:
         ended: beendet
         last_edited_by: Zuletzt bearbeitet von
         name: Lieferantin
-        no_closed_orders: derzeit gibt es keine beendeten Bestellungen
+        no_closed_orders: Derzeit gibt es keine beendeten Bestellungen.
         state: Status
       summary:
         changed: Daten wurden verändert!

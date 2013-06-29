@@ -576,7 +576,7 @@ nl:
         close: direct afsluiten
         confirm: Weet je zeker dat de je bestelling wilt afsluiten?
         end: Einde
-        ended: beëindigd
+        ended: gesloten
         last_edited_by: Laatst aangepast door
         name: Leverancier
         no_closed_orders: Momenteel zijn er geen gesloten bestellingen.
@@ -934,7 +934,7 @@ nl:
       feedback:
         desc: Foutje gevonden? Suggesties? Ideeën? Commentaar?
         title: Feedback
-      footer: Foodsoft, open source software voor een non-profit voedselcoop.
+      footer: Foodsoft, open source software voor non-profit voedselcoops.
       help: Help
       logout: Uitloggen
       ordergroup: Mijn huishouden
@@ -1171,7 +1171,7 @@ nl:
       number: 
       to_address: 
     finish:
-      notice: 
+      notice: De bestelling is gesloten.
     form:
       name: 
       note: 

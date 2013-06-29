@@ -600,7 +600,7 @@ en:
         close: close directly
         confirm: Do you really want to fully close the order?
         end: End
-        ended: ended
+        ended: closed
         last_edited_by: Last edited by
         name: Supplier
         no_closed_orders: At the moment there are no closed orders.
@@ -1280,7 +1280,7 @@ en:
       number: Number
       to_address: Shipping address
     finish:
-      notice: The order has been ended.
+      notice: The order has been closed.
     form:
       name: Name
       note: Note
