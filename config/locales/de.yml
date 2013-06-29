@@ -658,9 +658,9 @@ de:
       end: Ende
       everything_cleared: Super, alles schon abgerechnet...
       group: Gruppe
-      last_transactions: letzte Überweisungen
+      last_transactions: Letzte Überweisungen
       note: Notiz
-      open_transactions: noch nicht abgerechnet
+      open_transactions: Noch nicht abgerechnet
       show_all: alle anzeigen
       supplier: Lieferantin
       title: Finanzbereich
@@ -1068,11 +1068,8 @@ de:
 
         die Bestelling für "%{order}" wurde am %{when} von %{user} beendet.
 
-
-        Für Euch wurden die folgenden Artikel bestellt:
-
-'
-      text1: ! 'Gesamtpreis: %{sum}
+        Für Euch wurden die folgenden Artikel bestellt:'
+      text1: ! 'o Gesamtpreis: %{sum}
 
 
         Bestelling unline einsehen: %{order_url}
