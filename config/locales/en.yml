@@ -1072,7 +1072,9 @@ en:
 
         The order for "%{order}" has been closed by %{user} on %{when}.
 
-        The following articles have been ordered for your ordergroup:'
+        The following articles have been ordered for your ordergroup:
+
+'
       text1: ! 'o Total sum: %{sum}
 
 

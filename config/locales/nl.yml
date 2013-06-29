@@ -989,7 +989,9 @@ nl:
 
         De bestelling voor "%{order}" is om %{when} gesloten door %{user}.
 
-        De volgende artikelen zijn voor jouw huishouden besteld:'
+        De volgende artikelen zijn voor jouw huishouden besteld:
+
+'
       text1: ! 'o Totaal: %{sum}
 
 

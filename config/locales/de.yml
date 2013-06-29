@@ -1068,7 +1068,9 @@ de:
 
         die Bestelling für "%{order}" wurde am %{when} von %{user} beendet.
 
-        Für Euch wurden die folgenden Artikel bestellt:'
+        Für Euch wurden die folgenden Artikel bestellt:
+
+'
       text1: ! 'o Gesamtpreis: %{sum}
 
 
