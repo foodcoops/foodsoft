@@ -824,7 +824,7 @@ de:
       supplier: Lieferantin
       title: Dein Bestellergebnis für %{order}
     switch_order:
-      remaining: noch %{remaining}
+      open_remaining: noch %{remaining}
       title: Laufende Bestellungen
     update:
       error_general: Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.

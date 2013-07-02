@@ -833,7 +833,9 @@ en:
       supplier: Suppliers
       title: Your order result for %{order}
     switch_order:
-      remaining: ! '%{remaining} remaining'
+      open_remaining: ! '%{remaining} remaining'
+      when_finished: ! 'closed since %{date}'
+      when_closed: ! 'settled since %{date}'
       title: Current orders
     update:
       error_general: The order couldn’t be updated due to a bug.

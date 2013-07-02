@@ -801,7 +801,9 @@ nl:
       supplier: Leveranciers
       title: Jouw bestelling voor %{order}
     switch_order:
-      remaining: nog %{remaining}
+      open_remaining: ! 'nog %{remaining} open'
+      when_finished: ! 'gesloten sinds %{date}'
+      when_closed: ! 'afgerekend sinds %{date}'
       title: Lopende bestellingen
     update:
       error_general: 
