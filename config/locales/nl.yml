@@ -528,7 +528,7 @@ nl:
       edit_results_by_articles:
         add_article: Artikel toevoegen
         amount: Aantal
-        amount_per_unit: Groothandelsverpakkingsgroote * Aantal
+        amount_per_unit: Gr.Eenh.
         article: Artikel
         gross: Bruto
         net: Netto
@@ -576,7 +576,7 @@ nl:
         close: direct afsluiten
         confirm: Weet je zeker dat de je bestelling wilt afsluiten?
         end: Einde
-        ended: beëindigd
+        ended: gesloten
         last_edited_by: Laatst aangepast door
         name: Leverancier
         no_closed_orders: Momenteel zijn er geen gesloten bestellingen.
@@ -636,11 +636,11 @@ nl:
       end: Einde
       everything_cleared: Mooi zo, alles is verrekend...
       group: Groep
-      last_transactions: Laatste transacties
+      last_transactions: Recente transacties
       note: Notitie
-      open_transactions: nog niet afgerekend
+      open_transactions: Nog niet afgerekend
       show_all: alle tonen
-      supplier: leverancier
+      supplier: Leverancier
       title: Financiën
       unpaid_invoices: Onbetaalde facturen
     invoices:
@@ -936,7 +936,7 @@ nl:
       feedback:
         desc: Foutje gevonden? Suggesties? Ideeën? Commentaar?
         title: Feedback
-      footer: Foodsoft, open source software voor een non-profit voedselcoop.
+      footer: Foodsoft, open source software voor non-profit voedselcoops.
       help: Help
       logout: Uitloggen
       ordergroup: Mijn huishouden
@@ -985,9 +985,23 @@ nl:
       subject: 
       text: 
     order_result:
-      subject: 
-      text0: 
-      text1: 
+      subject: ! 'Bestelling gesloten: %{name}'
+      text0: ! 'Beste %{ordergroup}.
+
+
+        De bestelling voor "%{order}" is om %{when} gesloten door %{user}.
+
+        De volgende artikelen zijn voor jouw huishouden besteld:
+
+'
+      text1: ! 'o Totaal: %{sum}
+
+
+        Je kunt de bestelling online bekijken: %{order_url}
+
+
+
+        Vriendelijke groet van %{foodcoop}.'
     reset_password:
       subject: 
       text: 
@@ -1159,7 +1173,7 @@ nl:
       number: 
       to_address: 
     finish:
-      notice: 
+      notice: De bestelling is gesloten.
     form:
       name: 
       note: 

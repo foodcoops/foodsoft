@@ -167,7 +167,7 @@ class GroupOrderArticle < ActiveRecord::Base
   # the minimum price depending on configuration. When the order is finished it
   # will be the value depending of the article results.
   def total_price(order_article = self.order_article)
-    unless order_article.order.finished?
+    if order_article.order.open?
       if FoodsoftConfig[:tolerance_is_costly]
         order_article.article.fc_price * (quantity + tolerance)
       else

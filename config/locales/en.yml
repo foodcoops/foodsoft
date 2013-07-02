@@ -600,7 +600,7 @@ en:
         close: close directly
         confirm: Do you really want to fully close the order?
         end: End
-        ended: ended
+        ended: closed
         last_edited_by: Last edited by
         name: Supplier
         no_closed_orders: At the moment there are no closed orders.
@@ -668,11 +668,11 @@ en:
       end: End
       everything_cleared: Great, everything is accounted...
       group: Group
-      last_transactions: Last transactions
+      last_transactions: Recent transactions
       note: Note
-      open_transactions: not yet settled
+      open_transactions: Unsettled orders
       show_all: show all
-      supplier: supplier
+      supplier: Supplier
       title: Finances
       unpaid_invoices: Unpaid invoices
     invoices:
@@ -1076,25 +1076,23 @@ en:
 
 '
     order_result:
-      subject: ! 'Order was ended: %{name}'
+      subject: ! 'Order closed: %{name}'
       text0: ! 'Dear %{ordergroup},
 
 
-        The order for "%{order}" was placed on %{when} by %{user}.
+        The order for "%{order}" has been closed by %{user} on %{when}.
 
-
-        The following articles were ordered by your ordergroup:
-
-'
-      text1: ! 'Total sum: %{sum}
-
-
-        See order online: %{order_url}
-
-
-        Kind regards from %{foodcoop}.
+        The following articles have been ordered for your ordergroup:
 
 '
+      text1: ! 'o Total sum: %{sum}
+
+
+        You can view the order online: %{order_url}
+
+
+
+        Kind regards from %{foodcoop}.'
     reset_password:
       subject: New password for %{username}
       text: ! 'Hi %{user},
@@ -1292,7 +1290,7 @@ en:
       number: Number
       to_address: Shipping address
     finish:
-      notice: The order has been ended.
+      notice: The order has been closed.
     form:
       name: Name
       note: Note
