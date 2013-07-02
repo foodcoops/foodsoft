@@ -14,6 +14,8 @@ class Article < ActiveRecord::Base
   scope :available, -> { undeleted.where(availability: true) }
   scope :not_in_stock, :conditions => {:type => nil}
 
+  attr_accessible :info_url
+
   # Validations
   validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category
   validates_length_of :name, :in => 4..60
@@ -149,6 +151,11 @@ class Article < ActiveRecord::Base
   def mark_as_deleted
     check_article_in_use
     update_column :deleted_at, Time.now
+  end
+
+  # product information url, fallback to optional supplier-wide value
+  def info_url
+    self[:info_url] or supplier.article_info_url(self)
   end
 
   protected

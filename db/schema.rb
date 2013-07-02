@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230142516) do
+ActiveRecord::Schema.define(:version => 20130702013215) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20121230142516) do
     t.datetime "deleted_at"
     t.string   "type"
     t.integer  "quantity",                                          :default => 0
+    t.string   "info_url"
   end
 
   add_index "articles", ["article_category_id"], :name => "index_articles_on_article_category_id"
@@ -303,6 +304,7 @@ ActiveRecord::Schema.define(:version => 20121230142516) do
     t.integer  "shared_supplier_id"
     t.string   "min_order_quantity"
     t.datetime "deleted_at"
+    t.string   "article_info_url"
   end
 
   add_index "suppliers", ["name"], :name => "index_suppliers_on_name", :unique => true

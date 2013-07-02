@@ -10,7 +10,8 @@ class Supplier < ActiveRecord::Base
   belongs_to :shared_supplier  # for the sharedLists-App
 
   attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
-                  :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
+                  :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity,
+                  :article_info_url
 
   validates :name, :presence => true, :length => { :in => 4..30 }
   validates :phone, :presence => true, :length => { :in => 8..20 }
@@ -19,6 +20,7 @@ class Supplier < ActiveRecord::Base
   validates_length_of :phone, :in => 8..20
   validates_length_of :address, :in => 8..50
   validate :uniqueness_of_name
+  validate :valid_article_info_url_substitition
 
   scope :undeleted, -> { where(deleted_at: nil) }
 
@@ -78,6 +80,18 @@ class Supplier < ActiveRecord::Base
     end
   end
 
+  # return article info url for article, or the template if article not supplied
+  # use %{column} substitution for article fields in url template
+  def article_info_url(article=nil)
+    self[:article_info_url].nil? and return nil
+    article.nil? and return self[:article_info_url]
+    self[:article_info_url].gsub /%{.*?}/ do |n|
+      n = n[2..-2]
+      nil unless n.in? Article.column_names
+      article[n]
+    end
+  end
+
   protected
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
@@ -87,6 +101,17 @@ class Supplier < ActiveRecord::Base
     if supplier.present?
       message = supplier.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message
+    end
+  end
+
+  # Make sure article_info_url substitutions are valid
+  def valid_article_info_url_substitition
+    self[:article_info_url].nil? and return
+    self[:article_info_url].scan /%{(.*?)}/ do |n|
+      n = n[0]
+      unless n.in? Article.column_names
+        errors.add :article_info_url, I18n.t('supplier.controller.errors.substitition')
+      end
     end
   end
 end
