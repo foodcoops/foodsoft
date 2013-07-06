@@ -10,6 +10,9 @@ class OrdersController < ApplicationController
   def index
     @open_orders = Order.open
     @per_page = 15
+    @orders = Order.page(params[:page]).per(@per_page).
+                where("state != 'open'").ordered_finished.
+                includes(:supplier)
     if params['sort']
       sort = case params['sort']
                when "supplier"  then "suppliers.name, ends DESC"
@@ -17,10 +20,8 @@ class OrdersController < ApplicationController
                when "supplier_reverse"  then "suppliers.name DESC"
                when "ends_reverse"   then "ends, suppliers.name"
                end
-    else
-      sort = "ends DESC, suppliers.name"
+      sort and @orders = @orders.reorder(sort)
     end
-    @orders = Order.page(params[:page]).per(@per_page).reorder(sort).where("state != 'open'").includes(:supplier)
   end
 
   # Gives a view for the results to a specific order

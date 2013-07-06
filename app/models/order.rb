@@ -22,14 +22,14 @@ class Order < ActiveRecord::Base
 
   # Finders
   # joins needn't be readonly - https://github.com/rails/rails/issues/10769
-  scope :ordered, joins(:supplier).readonly(false).order('ends ASC', 'suppliers.name ASC')
-  scope :open, ordered.where(state: 'open')
-  scope :finished, ordered.where(state: ['finished', 'closed'])
-  scope :finished_not_closed, ordered.where(state: 'finished')
-  scope :closed, ordered.where(state: 'closed')
-  scope :stockit, ordered.where(supplier_id: 0)
+  scope :ordered_open, joins(:supplier).readonly(false).order('ends ASC', 'suppliers.name ASC')
+  scope :ordered_finished, joins(:supplier).readonly(false).order('DATE(ends) DESC', 'suppliers.name ASC')
 
-  default_scope ordered
+  scope :open, where(state: 'open').ordered_open
+  scope :finished, where(state: ['finished', 'closed']).ordered_finished
+  scope :finished_not_closed, where(state: 'finished').ordered_finished
+  scope :closed, where(state: 'closed').ordered_finished
+  scope :stockit, where(supplier_id: 0).order('ends DESC')
 
 
   def stockit?
