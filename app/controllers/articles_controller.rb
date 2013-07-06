@@ -145,14 +145,17 @@ class ArticlesController < ApplicationController
     begin
       @articles = Array.new
       articles, outlisted_articles = FoodsoftFile::parse(params[:articles]["file"])
+      no_category = ArticleCategory.new
       articles.each do |row|
+        # fallback to Others category
+        category = (ArticleCategory.find_by_name(row[:category]) or no_category)
         # creates a new article and price
         article = Article.new( :name => row[:name], 
                                :note => row[:note],
                                :manufacturer => row[:manufacturer],
                                :origin => row[:origin],
                                :unit => row[:unit],
-                               :article_category => ArticleCategory.find_by_name(row[:category]),
+                               :article_category => category,
                                :price => row[:price],
                                :unit_quantity => row[:unit_quantity],
                                :order_number => row[:number],
