@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = @supplier.articles.build(:tax => 7.0)
+    @article = @supplier.articles.build(:tax => FoodsoftConfig[:tax_default])
     render :layout => false
   end
   
@@ -160,7 +160,7 @@ class ArticlesController < ApplicationController
                                :unit_quantity => row[:unit_quantity],
                                :order_number => row[:number],
                                :deposit => row[:deposit],
-                               :tax => row[:tax])
+                               :tax => (row[:tax] or FoodsoftConfig[:tax_default]))
         # stop parsing, when an article isn't valid
         unless article.valid?
           raise I18n.t('articles.controller.error_parse', :msg => article.errors.full_messages.join(", "), :line => (articles.index(row) + 2).to_s)
