@@ -1,8 +1,6 @@
 # encoding: utf-8
 #
 class Order < ActiveRecord::Base
-  default_scope joins(:supplier).order('ends ASC', 'suppliers.name ASC')
-
   # Associations
   has_many :order_articles, :dependent => :destroy
   has_many :articles, :through => :order_articles
@@ -23,11 +21,15 @@ class Order < ActiveRecord::Base
   after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
-  scope :open, where(state: 'open')
-  scope :finished, where("orders.state = 'finished' OR orders.state = 'closed'")
-  scope :finished_not_closed, where(state: 'finished')
-  scope :closed, where(state: 'closed')
-  scope :stockit, where(supplier_id: 0)
+  scope :ordered, joins(:supplier).order('ends ASC', 'suppliers.name ASC')
+  scope :open, ordered.where(state: 'open')
+  scope :finished, ordered.where(state: ['finished', 'closed'])
+  scope :finished_not_closed, ordered.where(state: 'finished')
+  scope :closed, ordered.where(state: 'closed')
+  scope :stockit, ordered.where(supplier_id: 0)
+
+  default_scope ordered
+
 
   def stockit?
     supplier_id == 0

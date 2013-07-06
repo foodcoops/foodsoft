@@ -13,14 +13,14 @@ class OrdersController < ApplicationController
     if params['sort']
       sort = case params['sort']
                when "supplier"  then "suppliers.name, ends DESC"
-               when "ends"   then "ends DESC"
+               when "ends"   then "ends DESC, suppliers.name"
                when "supplier_reverse"  then "suppliers.name DESC"
-               when "ends_reverse"   then "ends"
+               when "ends_reverse"   then "ends, suppliers.name"
                end
     else
-      sort = "ends DESC"
+      sort = "ends DESC, suppliers.name"
     end
-    @orders = Order.page(params[:page]).per(@per_page).order(sort).where("state != 'open'").includes(:supplier)
+    @orders = Order.page(params[:page]).per(@per_page).reorder(sort).where("state != 'open'").includes(:supplier)
   end
 
   # Gives a view for the results to a specific order
