@@ -14,8 +14,6 @@ class Article < ActiveRecord::Base
   scope :available, -> { undeleted.where(availability: true) }
   scope :not_in_stock, :conditions => {:type => nil}
 
-  attr_accessible :info_url
-
   # Validations
   validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category
   validates_length_of :name, :in => 4..60
