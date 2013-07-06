@@ -59,7 +59,10 @@ class Ordergroup < Group
     # Get hours for every job of each user in period
     jobs = users.sum { |u| u.tasks.done.sum(:duration, :conditions => ["updated_on > ?", APPLE_MONTH_AGO.month.ago]) }
     # Get group_order.price for every finished order in this period
-    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).sum(:price)
+    # cannot use merge on joined scope - at least until after rails 3.2.13
+    #   https://github.com/rails/rails/issues/10303
+    #   what's meant here is: where(:orders...) --> merge(Order.finished)
+    orders_sum = group_orders.includes(:order).where(:orders=>{:state=>['finished','closed']}).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).sum(:price)
 
     @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
@@ -84,7 +87,9 @@ class Ordergroup < Group
         !ignore_apple_restriction and
         apples < FoodsoftConfig[:stop_ordering_under] and
         group_orders.count > 5 and
-        group_orders.joins(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).count > 2
+        group_orders.joins(:order).
+        where(:orders=>{:state=>['finished','closed']}). # see comment in update_stats!
+        where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).count > 2
   end
 
   # Global average
