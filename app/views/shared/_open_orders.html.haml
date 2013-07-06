@@ -12,7 +12,7 @@
         %th= t '.total'
     %tbody
       - total = 0
-      - Order.open.joins('LEFT OUTER JOIN suppliers ON orders.supplier_id = suppliers.id').order('suppliers.name DESC').each do |order|
+      - Order.open.each do |order|
         %tr
           %td= link_to_ordering(order)
           %td= format_time(order.ends) unless order.ends.nil?
