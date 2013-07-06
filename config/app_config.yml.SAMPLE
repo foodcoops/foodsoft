@@ -37,6 +37,9 @@ default: &defaults
   # price markup in percent
   price_markup: 2.0
 
+  # default vat percentage for new articles
+  tax_default: 7.0
+
   # tolerance order option: If set to false, article tolerance values do not count
   # for total article price as long as the order is not finished.
   tolerance_is_costly: false

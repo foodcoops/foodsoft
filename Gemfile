@@ -17,6 +17,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'bootstrap-datepicker-rails'
 
 
 gem 'mysql2'

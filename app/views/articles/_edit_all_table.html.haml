@@ -19,7 +19,9 @@
     - @articles.each_with_index do |article, index|
       = fields_for "articles[#{article.id || index}]", article do |form|
         %tr.supplier-article
-          %td= form.check_box 'availability'
+          %td
+            = yield form # allow to add hidden fields to form
+            = form.check_box 'availability'
           %td= form.text_field 'name', class: 'input-medium input-fill'
           %td= form.text_field 'unit', class: 'input-mini'
           %td= form.text_field 'price', class: 'input-nano'

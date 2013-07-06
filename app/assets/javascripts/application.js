@@ -3,8 +3,9 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.tokeninput
-//= require bootstrap-datepicker
-//= require bootstrap-datepicker.de
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.de
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.nl
 //= require jquery.observe_field
 //= require rails.validations
 //= require_self
@@ -112,7 +113,7 @@ $(function() {
     });
 
     // Use bootstrap datepicker for dateinput
-    $('.datepicker').datepicker({format: 'yyyy-mm-dd', weekStart: 1, language: 'de'});
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
 });
 
 

@@ -2,7 +2,9 @@
 %p= t('.body').html_safe
 
 = form_tag(create_from_upload_supplier_articles_path(@supplier)) do
-  = render 'edit_all_table'
+  = render layout: 'edit_all_table' do |form|
+    = form.hidden_field :manufacturer
+    = form.hidden_field :origin
   .form-actions
     = submit_tag t('.submit', supplier: @supplier.name), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), upload_supplier_articles_path(@supplier)

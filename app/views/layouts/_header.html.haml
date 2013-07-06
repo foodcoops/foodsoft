@@ -22,5 +22,7 @@
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
+    :javascript
+      I18n = {locale: '#{I18n.locale}'}
     = javascript_include_tag "application"
     = yield(:javascript)
