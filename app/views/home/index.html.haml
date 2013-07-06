@@ -3,3 +3,6 @@
 - if current_user.ordergroup
   = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}
 
+  %p
+  %p= t('.to_archive', archive_link: link_to(t('.to_archive_link'), archive_group_orders_path)).html_safe
+

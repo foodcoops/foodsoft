@@ -711,9 +711,9 @@ nl:
     archive:
       desc: Bekijk hier alle %{link}.
       open_orders: lopende bestellingen
-      title: Bestellingen van %{group}
+      title: Vorige bestellingen van %{group}
       title_closed: afgerekend
-      title_open: gesloten/niet afgerekend
+      title_open: gesloten
     create:
       error_general: De bestelling kon niet bijgewerkt worden vanwege een fout.
       error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon de bestelling niet bijgewerkt worden.
@@ -872,6 +872,8 @@ nl:
         desc: 
         title: 
       title: Beginpagina
+      to_archive: Bekijk je %{archive_link}.
+      to_archive_link: vorige bestellingen
       your_tasks: Jouw taken
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
     ordergroup:

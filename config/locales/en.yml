@@ -904,6 +904,8 @@ en:
         desc: There is/are %{size}
         title: Open tasks
       title: Homepage
+      to_archive: See your %{archive_link}.
+      to_archive_link: previous orders
       your_tasks: Your tasks
     no_ordergroups: You are unfortunately not a member of an ordergroup.
     ordergroup:
