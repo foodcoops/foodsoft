@@ -56,6 +56,8 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.7.0)
     binding_of_caller (0.6.8)
+    bootstrap-datepicker-rails (1.1.1.1)
+      railties (>= 3.0)
     builder (3.0.4)
     bullet (4.3.0)
       uniform_notifier
@@ -261,6 +263,7 @@ DEPENDENCIES
   acts_as_versioned!
   better_errors
   binding_of_caller
+  bootstrap-datepicker-rails
   bullet
   capistrano (= 2.13.5)
   capistrano-ext
