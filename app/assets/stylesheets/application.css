@@ -2,4 +2,5 @@
 *= require bootstrap_and_overrides
 *= require token-input-bootstrappy
 *= require bootstrap-datepicker
+*= require select2
 */
