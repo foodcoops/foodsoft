@@ -18,6 +18,7 @@ end
 
 gem 'jquery-rails'
 gem 'select2-rails'
+gem 'bootstrap-datepicker-rails'
 
 
 gem 'mysql2'
