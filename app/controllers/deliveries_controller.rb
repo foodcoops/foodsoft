@@ -49,20 +49,26 @@ class DeliveriesController < ApplicationController
     flash[:notice] = I18n.t('deliveries.destroy.notice')
     redirect_to supplier_deliveries_url(@supplier)
   end
-
+  
+  # three possibilites to fill a new_stock_article form
+  # (1) start from blank or use params
   def new_stock_article
-    if params[:old_stock_article_id]
-      old_article = StockArticle.find_by_id(params[:old_stock_article_id])
-    elsif params[:old_article_id]
-      old_article = Article.find_by_id(params[:old_article_id])
-      old_article = old_article.becomes(StockArticle) unless old_article.nil?
-    end
+    @stock_article = @supplier.stock_articles.build(params[:stock_article])
+
+    render :layout => false
+  end
+  
+  # (2) StockArticle as template
+  def copy_stock_article
+    @stock_article = StockArticle.find(params[:old_stock_article_id]).dup
     
-    unless old_article.nil?
-      @stock_article = old_article.dup
-    else
-      @stock_article = @supplier.stock_articles.build(params[:stock_article])
-    end
+    render :layout => false
+  end
+  
+  # (3) non-stock Article as template
+  def derive_stock_article
+    @stock_article = Article.find(params[:old_article_id]).becomes(StockArticle).dup
+    
     render :layout => false
   end
 

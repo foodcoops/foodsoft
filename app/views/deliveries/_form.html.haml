@@ -52,7 +52,7 @@
         }
         if('' != selectedArticle.id) {
           $.ajax({
-            url: '#{new_stock_article_supplier_deliveries_path(@supplier)}',
+            url: '#{derive_stock_article_supplier_deliveries_path(@supplier)}',
             type: 'get',
             data: {old_article_id: selectedArticle.id},
             contentType: 'application/json; charset=UTF-8'
