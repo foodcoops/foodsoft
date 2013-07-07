@@ -1527,6 +1527,8 @@ de:
         update_current_price: Ändert auch den Preis für aktuelle Bestellungen
       stock_article:
         supplier: 
+        copy_stock_article:
+          name: Bitte ändern
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
       task:
