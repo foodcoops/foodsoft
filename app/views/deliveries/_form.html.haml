@@ -98,7 +98,7 @@
     .btn-toolbar
       .btn-group
         %input#new_stock_article{:style => 'width: 500px;'}
-  %table.table.table-condensed.table-hover#stock_articles_for_adding
+  %table.table.table-hover#stock_articles_for_adding
     %thead
       %tr
         %th
@@ -114,7 +114,7 @@
         = render :partial => 'stock_article_for_adding', :locals => {:article => article}
     
   %h2= t '.title_fill_quantities'
-  %table.table.table-condensed#stock_changes
+  %table.table#stock_changes
     %thead
       %tr
         %th

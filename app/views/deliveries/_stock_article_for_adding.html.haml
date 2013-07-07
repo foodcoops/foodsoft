@@ -4,8 +4,7 @@
   %td{:data => {:toggle => :tooltip, :title => render(:partial => 'shared/article_price_info', :locals => {:article => article})}} #{number_to_currency article.price}/#{article.unit}
   %td.sort-by-category= article.article_category.name
   %td
-    .btn-group
-      = link_to t('.action_edit'), edit_stock_article_supplier_deliveries_path(@supplier, :stock_article_id => article.id), remote: true, class: 'btn btn-mini'
-      = link_to t('.action_other_price'), copy_stock_article_supplier_deliveries_path(@supplier, :old_stock_article_id => article.id), remote: true, class: 'btn btn-mini'
-      - deliver_button_disabled = ( @delivery and @delivery.includes_article? article ) ? ( 'disabled' ) : ( false )
-      = link_to t('.action_add_to_delivery'), add_stock_change_supplier_deliveries_path(@supplier, :stock_article_id => article.id), :method => :post, remote: true, class: 'button-add-stock-change btn btn-mini btn-primary', disabled: deliver_button_disabled
+    = link_to t('.action_edit'), edit_stock_article_supplier_deliveries_path(@supplier, :stock_article_id => article.id), remote: true, class: 'btn btn-mini'
+    = link_to t('.action_other_price'), copy_stock_article_supplier_deliveries_path(@supplier, :old_stock_article_id => article.id), remote: true, class: 'btn btn-mini'
+    - deliver_button_disabled = ( @delivery and @delivery.includes_article? article ) ? ( 'disabled' ) : ( false )
+    = link_to t('.action_add_to_delivery'), add_stock_change_supplier_deliveries_path(@supplier, :stock_article_id => article.id), :method => :post, remote: true, class: 'button-add-stock-change btn btn-mini btn-primary', disabled: deliver_button_disabled
