@@ -462,7 +462,7 @@ en:
     stock_article_for_adding:
       action_add_to_delivery: 'Add to delivery'
       action_edit: 'Edit'
-      action_other_price: 'Different price'
+      action_other_price: 'Copy'
     stock_change_fields:
       remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
@@ -1530,6 +1530,8 @@ en:
         update_current_price: Also update the price of the current order
       stock_article:
         supplier: 
+        copy_stock_article:
+          name: Please modify
       supplier:
         min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
       task:

@@ -460,7 +460,7 @@ de:
     stock_article_for_adding:
       action_add_to_delivery: 'Liefern'
       action_edit: 'Bearbeiten'
-      action_other_price: 'Anderer Preis'
+      action_other_price: 'Kopieren'
     stock_change_fields:
       remove_article: Artikel aus Lieferung entfernen
     suppliers_overview: Lieferantenübersicht
