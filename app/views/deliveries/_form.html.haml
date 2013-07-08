@@ -1,7 +1,7 @@
 - content_for :javascript do
   :javascript
     $(function() {
-      $('.destroy_stock_change').live('click', function() {
+      $('#stock_changes').on('click', '.destroy_stock_change', function() {
         $(this).prev('input').val('1'); // check for destruction
         
         var stock_change = $(this).closest('tr');
@@ -11,7 +11,7 @@
         return false;
       });
 
-      $('.remove_new_stock_change').live('click', function() {
+      $('#stock_changes').on('click', '.remove_new_stock_change', function() {
         var stock_change = $(this).closest('tr');
         stock_change.remove();
         mark_article_for_delivery( stock_change.data('id') );
