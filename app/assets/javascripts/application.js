@@ -1,6 +1,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require jquery/livequery
+//= require select2
 //= require twitter/bootstrap
 //= require jquery.tokeninput
 //= require bootstrap-datepicker/core
@@ -113,7 +115,14 @@ $(function() {
     });
 
     // Use bootstrap datepicker for dateinput
-    $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
+    $('.datepicker').livequery(function() {
+      $(this).datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
+    });
+
+    // Use select2 for selects, except those with css class 'plain'
+    $('select').livequery(function() {
+        $(this).not('.plain').select2({dropdownAutoWidth: true});
+    });
 });
 
 
