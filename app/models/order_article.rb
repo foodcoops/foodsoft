@@ -28,6 +28,10 @@ class OrderArticle < ActiveRecord::Base
     end
   end
 
+  def title
+    article.title
+  end
+
   # This method returns either the ArticlePrice or the Article
   # The first will be set, when the the order is finished
   def price

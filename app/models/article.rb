@@ -26,6 +26,10 @@ class Article < ActiveRecord::Base
   # Callbacks
   before_save :update_price_history
   before_destroy :check_article_in_use
+
+  def title
+    "#{name} (#{unit})"
+  end
   
   # The financial gross, net plus tax and deposti
   def gross_price
