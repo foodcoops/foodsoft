@@ -17,7 +17,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'jquery-plugins-rails'
 gem 'select2-rails', '>= 3.4.0'
 gem 'bootstrap-datepicker-rails'
 

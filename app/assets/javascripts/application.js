@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jquery/livequery
 //= require select2
 //= require twitter/bootstrap
 //= require jquery.tokeninput
@@ -106,6 +105,7 @@ $(function() {
     });
 
     $('*[data-remote]').bind('ajax:complete', function() {
+        newElementsReady();
         $('#loader').hide();
     });
 
@@ -114,17 +114,20 @@ $(function() {
         $(this).children('input[type="submit"]').attr('disabled', 'disabled');
     });
 
-    // Use bootstrap datepicker for dateinput
-    $('.datepicker').livequery(function() {
-      $(this).datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
-    });
-
-    // Use select2 for selects, except those with css class 'plain'
-    $('select').livequery(function() {
-        $(this).not('.plain').select2({dropdownAutoWidth: true});
-    });
+    newElementsReady();
 });
 
+// classic document ready functions not supporting jQuery.on()
+// so that we can catch dynamically created elements too
+//   data-remote functions call this after successful ajax (see above),
+//   other modifications need to call this function by themselves.
+function newElementsReady() {
+    // Use bootstrap datepicker for dateinput
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
+
+    // Use select2 for selects, except those with css class 'plain'
+    $('select').not('.plain').select2({dropdownAutoWidth: true});
+}
 
 // gives the row an yellow background
 function highlightRow(checkbox) {
