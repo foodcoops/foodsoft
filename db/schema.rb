@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230142516) do
+ActiveRecord::Schema.define(:version => 20130715233410) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20121230142516) do
     t.integer  "task_duration",                                          :default => 1
     t.integer  "next_weekly_tasks_number",                               :default => 8
     t.boolean  "ignore_apple_restriction",                               :default => false
+    t.boolean  "approved",                                               :default => false
   end
 
   add_index "groups", ["name"], :name => "index_groups_on_name", :unique => true

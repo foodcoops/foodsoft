@@ -20,3 +20,5 @@
           = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
           = link_to t('ui.delete'), [:admin, ordergroup], :confirm => t('admin.confirm', name: ordergroup.name),
             :method => :delete, class: 'btn btn-mini btn-danger'
+          - unless FoodsoftConfig[:ordergroup_approval_for].nil? or ordergroup.approved?
+            = link_to t('.approve'), approve_admin_ordergroup_path(ordergroup), :method => :post, class: 'btn btn-mini'

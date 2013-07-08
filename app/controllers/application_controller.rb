@@ -28,11 +28,20 @@ class ApplicationController < ActionController::Base
 
   private  
 
+  def login(user)
+    session[:user_id] = user.id
+    session[:scope] = FoodsoftConfig.scope  # Save scope in session to not allow switching between foodcoops with one account
+  end
+
+  def logout
+    session[:user_id] = nil
+  end
+
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
     if !current_user
       # No user at all: redirect to login page.
-      session[:user_id] = nil
+      logout
       session[:return_to] = request.original_url
       redirect_to login_url, :alert => 'Authentication required!'
     else
@@ -140,6 +149,24 @@ class ApplicationController < ActionController::Base
   # Always stay in foodcoop url scope
   def default_url_options(options = {})
     {foodcoop: FoodsoftConfig.scope}
+  end
+
+  # returns true if @current_user's ordergroup is approved and approval is required
+  def ensure_ordergroup_approved(redir_url = root_url)
+    @current_user.role_admin? and return true
+    unless FoodsoftConfig[:ordergroup_approval_for].nil? or
+       FoodsoftConfig[:ordergroup_approval_for].member?("#{controller_name}") or
+       FoodsoftConfig[:ordergroup_approval_for].member?("#{action_name}_#{controller_name}")
+      return true
+    end
+    phrase = I18n.t("application.controller.phrases.#{action_name}_#{controller_name}",
+      default: I18n.t("application.controller.phrases.#{controller_name}",
+      default: I18n.t('application.controller.phrases.fallback')))
+    if @current_user.ordergroup.nil?
+      redirect_to redir_url, alert: I18n.t('application.controller.ordergroup_require', phrase: phrase)
+    elsif !@current_user.ordergroup.approved?
+      redirect_to redir_url, alert: I18n.t('application.controller.ordergroup_approval', phrase: phrase)
+    end
   end
 
   # Used to prevent accidently switching to :en in production mode.

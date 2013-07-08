@@ -58,11 +58,36 @@ class LoginController < ApplicationController
         if @user.save
           Membership.new(:user => @user, :group => @invite.group).save!
           @invite.destroy
-          redirect_to login_url, notice: I18n.t('login.controller.accept_invitation.notice')
+          login(@user)
+          redirect_to root_url, notice: I18n.t('login.controller.accept_invitation.notice')
         end
       end
     else
       @user = User.new(:email => @invite.email)
+    end
+  end
+
+  # For anyone
+  def signup
+    if not FoodsoftConfig[:signup]
+      redirect_to root_url, alert: I18n.t('login.controller.signup.signup_disabled', foodcoop: FoodsoftConfig[:name])
+    end
+    if request.post?
+      User.transaction do
+        @user = User.new(params[:user].reject {|k,v| k=='ordergroup'})
+        @group = Ordergroup.new({
+          :name => @user.nick,
+          :contact_person => @user.name,
+          :contact_phone => @user.phone
+        }.merge(params[:user][:ordergroup]))
+        if @user.save and @group.save
+          Membership.new(:user => @user, :group => @group).save!
+          login(@user)
+          redirect_to root_url, notice: I18n.t('login.controller.signup.notice')
+        end
+      end
+    else
+      @user = User.new
     end
   end
 

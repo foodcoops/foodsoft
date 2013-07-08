@@ -3,6 +3,10 @@
 - content_for(:sidebar) do
   = render :partial => 'start_nav'
 
+- unless FoodsoftConfig[:ordergroup_approval_for].nil? or current_user.ordergroup.nil?
+  - unless current_user.ordergroup.approved?
+    .alert= FoodsoftConfig[:ordergroup_approval_msg] or t('.ordergroup_approval_msg')
+
 - unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks.size == 0
   %section.row-fluid
     - unless @next_tasks.empty?

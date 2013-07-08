@@ -5,6 +5,9 @@
 = f.input :phone
 = f.input :password, :required => f.object.new_record?
 = f.input :password_confirmation
+
+= yield
+
 .control-group
   .controls
     - for setting in User::setting_keys.keys

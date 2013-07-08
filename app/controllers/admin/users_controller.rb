@@ -12,4 +12,32 @@ class Admin::UsersController < Admin::BaseController
 
     @users = @users.page(params[:page]).per(@per_page)
   end
+
+  def create
+    # TODO some duplicate code from login_controller#signup
+    params[:use_ordergroup] or params[:user].delete(:ordergroup)
+    User.transaction do
+      @user = User.new(params[:user].reject {|k,v| k=='ordergroup'})
+      if params[:user][:ordergroup].nil?
+        # create user only
+        if @user.save
+          redirect_to admin_users_url, notice: I18n.t('admin.users.controller.create.notice_user')
+        else
+          render :action => 'new'
+        end
+      else
+        # also create ordergroup when fields are present
+        @group = Ordergroup.new({
+          :name => @user.nick,
+          :contact_person => @user.name,
+          :contact_phone => @user.phone
+        }.merge(params[:user][:ordergroup]))
+        if @user.save and @group.save and Membership.new(:user => @user, :group => @group).save!
+          redirect_to admin_users_url, notice: I18n.t('admin.users.controller.create.notice_user_group')
+        else
+          render :action => 'new'
+        end
+      end
+    end
+  end
 end

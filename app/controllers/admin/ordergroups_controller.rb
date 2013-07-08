@@ -20,4 +20,13 @@ class Admin::OrdergroupsController < Admin::BaseController
   rescue => error
     redirect_to admin_ordergroups_url, alert: t('admin.ordergroups.destroy.error')
   end
+
+  def approve
+    @ordergroup = Ordergroup.find(params[:id])
+    @ordergroup.approved = true
+    @ordergroup.save
+    redirect_to admin_ordergroups_url, notice: t('admin.ordergroups.approve.notice')
+  rescue => error
+    redirect_to admin_ordergroups_url, alert: t('admin.ordergroups.approve.error', error: error.message)
+  end
 end

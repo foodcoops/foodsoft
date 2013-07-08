@@ -126,6 +126,9 @@ en:
         username: username
     confirm: Do you really want to delete %{name}?
     ordergroups:
+      approve:
+        error: ! 'Ordergroup could not be approved: %{error}'
+        notice: Ordergroup was approved.
       destroy:
         error: ! 'Ordergroup could not be deleted: %{error}'
         notice: Ordergroup was deleted
@@ -145,6 +148,7 @@ en:
         title: Create ordergroup
       ordergroups:
         address: Address
+        approve: Approve
         contact: Contact
         members: Members
         name: Name
@@ -155,6 +159,10 @@ en:
         title: Ordergroup %{name}
     search_placeholder: name ..
     users:
+      controller:
+        create:
+          notice_user: New user created.
+          notice_user_group: New user and ordergroup created.
       edit:
         title: Edit user
       index:
@@ -205,6 +213,15 @@ en:
       workgroups:
         members: members
         name: name
+  application:
+    controller:
+      ordergroup_require: You need to be a member of an ordergroup to be able to %{phrase}.
+      ordergroup_approval: Your ordergroup needs to be approved before you can %{phrase}.
+      phrases:
+        fallback: do this
+        messages: send messages
+        order_groups: order
+        users: view other members
   article_categories:
     create:
       notice: Category was stored
@@ -885,6 +902,7 @@ en:
           where: Who
       ordergroup:
         title: Engagement of your ordergroup
+      ordergroup_approval_msg: Your membership still needs to be approved. Please contact us for more information.
       tasks_move:
         action: Take over tasks/decline tasks
         desc: You are responsible for these tasks.
@@ -982,7 +1000,7 @@ en:
       title: Invitation to %{name}
     controller:
       accept_invitation:
-        notice: Congratulations, your account was created. You can login now.
+        notice: Congratulations, your account was created.
       error_group_invalid: The group in which you were invited doesn’t exist anymore.
       error_invite_invalid: Your invite is not valid (anymore).
       error_token_invalid: Invalid or expired token. Please try again.
@@ -990,6 +1008,9 @@ en:
         notice: If your email is registered here, you will receive a message with a link to reset your password.
       update_password:
         notice: Your password was updated. You can login now.
+      signup:
+        notice: Congratulations, your account was created.
+        signup_disabled: You cannot signup directly for %{foodcoop}. Please contact us to become a member.
     forgot_password:
       body: <p>No Problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>
       submit: Request new password
@@ -998,6 +1019,10 @@ en:
       body: <p>Please fill in the new password for <b>%{user}</b></p>
       submit: Save new password
       title: New password
+    signup:
+      body: <p>To become a member of %{foodcoop}, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>
+      submit: Create a Foodsoft account
+      title: Become a member of %{name}
   mailer:
     dateformat: ! '%d %b'
     feedback:
@@ -1455,6 +1480,7 @@ en:
       activated: activated
       address: Address
       apple_limit: Apple points order limit
+      approved: Membership approved
       contact: Contact
       deactivated: deactivated
       description: Description
@@ -1497,6 +1523,8 @@ en:
       total: Sum
       total_sum: Total sum
       who_ordered: Who ordered?
+    user_form_fields:
+      ordergroup_use: also create new ordergroup
     workgroup_members:
       title: Group memberships
   simple_form:
@@ -1582,6 +1610,7 @@ en:
         contact_address: Address
         contact_person: Contact person
         contact_phone: Phone
+        approved: Membership approved
         ignore_apple_restriction: Ignore order stop by apple points restriction
       page:
         body: Body

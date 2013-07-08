@@ -1,3 +1,7 @@
 - title t '.title'
 
-= render 'form'
+= simple_form_for([:admin, @user]) do |f|
+  = render :partial => 'shared/user_form_fields', :locals => {:f => f}
+  .form-actions
+    = f.submit
+    = link_to t('ui.or_cancel'), :back

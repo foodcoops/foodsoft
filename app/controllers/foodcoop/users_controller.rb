@@ -1,4 +1,5 @@
 class Foodcoop::UsersController < ApplicationController
+  before_filter :ensure_ordergroup_approved
 
   def index
     @users = User.order('nick ASC')
