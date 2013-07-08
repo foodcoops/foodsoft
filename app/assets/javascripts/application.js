@@ -28,19 +28,19 @@ $.fn.extend({
 $(function() {
 
     // Show/Hide a specific DOM element
-    $('a[data-toggle-this]').on('click', function() {
+    $(document).on('click', 'a[data-toggle-this]', function() {
         $($(this).data('toggle-this')).toggle();
         return false;
     });
 
     // Remove this item from DOM
-    $('a[data-remove-this]').on('click', function() {
+    $(document).on('click', 'a[data-remove-this]', function() {
         $($(this).data('remove-this')).remove();
         return false;
     });
 
     // Check/Uncheck a single checkbox
-    $('[data-check-this]').on('click', function() {
+    $(document).on('click', '[data-check-this]', function() {
         var checkbox = $($(this).data('check-this'));
         checkbox.attr('checked', !checkbox.is(':checked'));
         highlightRow(checkbox);
@@ -48,7 +48,7 @@ $(function() {
     });
 
     // Check/Uncheck all checkboxes for a specific form
-    $('input[data-check-all]').on('click', function() {
+    $(document).on('click', 'input[data-check-all]', function() {
         var status = $(this).is(':checked');
         var context = $(this).data('check-all');
         var elms = $('input[type="checkbox"]', context);
@@ -60,7 +60,7 @@ $(function() {
     });
 
     // Submit form when changing a select menu.
-    $('form[data-submit-onchange] select').on('change', function() {
+    $(document).on('change', 'form[data-submit-onchange] select', function() {
         var confirmMessage = $(this).children(':selected').data('confirm');
         if (confirmMessage) {
             if (confirm(confirmMessage)) {
@@ -93,7 +93,7 @@ $(function() {
     });
 
     // Remote paginations
-    $('div.pagination[data-remote] a').on('click', function() {
+    $(document).on('click', 'div.pagination[data-remote] a', function() {
         $.getScript($(this).attr('href'));
         return false;
     });
