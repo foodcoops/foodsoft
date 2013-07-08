@@ -8,6 +8,10 @@
   %tr
     %th= t 'activerecord.attributes.article.tax'
     %td.numeric= number_to_percentage article.tax
+  - unless article.fc_price == article.gross_price
+    %tr
+      %th= t 'activerecord.attributes.article.fc_share'
+      %td.numeric= number_to_currency(article.fc_price-article.gross_price)
   %tr
     %th= t 'activerecord.attributes.article.fc_price'
     %td.numeric= number_to_currency article.fc_price

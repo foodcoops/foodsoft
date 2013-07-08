@@ -40,6 +40,7 @@ de:
         availability: Artikel ist verfügbar?
         deposit: Pfand
         fc_price: Endpreis
+        fc_share: FC-Aufschlag
         gross_price: Bruttopreis
         price: Nettopreis
         tax: MwSt

@@ -40,6 +40,7 @@ en:
         availability: Is article available?
         deposit: deposit
         fc_price: FC price
+        fc_share: FC share
         gross_price: gross price
         price: price
         tax: VAT
