@@ -441,6 +441,7 @@ en:
       title_fill_quantities: 2. Set delivery quantities
       title_finish_delivery: 3. Finish delivery
       title_select_stock_articles: 1. Select stock articles
+      unit: Unit
     index:
       confirm_delete: Are you sure?
       new_delivery: ! 'Create new delivery for %{supplier} '

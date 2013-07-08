@@ -1,7 +1,8 @@
 - css_class = ( @delivery and @delivery.includes_article? article ) ? ( 'unavailable' ) : ( false )
 %tr{:id => "stock_article_#{article.id}", :class => css_class}
   %td.sort-by-name= article.name
-  %td{:data => {:toggle => :tooltip, :title => render(:partial => 'shared/article_price_info', :locals => {:article => article})}} #{number_to_currency article.price}/#{article.unit}
+  %td{:data => {:toggle => :tooltip, :title => render(:partial => 'shared/article_price_info', :locals => {:article => article})}}= number_to_currency article.price
+  %td= article.unit
   %td.sort-by-category= article.article_category.name
   %td
     = link_to t('.action_edit'), edit_stock_article_supplier_deliveries_path(@supplier, :stock_article_id => article.id), remote: true, class: 'btn btn-mini'
