@@ -16,7 +16,7 @@
         %span.add-on %
       = f.input :deposit
     - else
-      = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('stockit.form.price_hint')
+      = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article)
     = f.association :article_category
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}

@@ -461,6 +461,8 @@ de:
       action_add_to_delivery: 'Liefern'
       action_edit: 'Bearbeiten'
       action_other_price: 'Kopieren'
+    stock_article_form:
+      copy_stock_article: 'Lagerartikel kopieren'
     stock_change_fields:
       remove_article: Artikel aus Lieferung entfernen
     suppliers_overview: Lieferantenübersicht
@@ -1528,6 +1530,8 @@ de:
         supplier: 
         copy_stock_article:
           name: Bitte ändern
+        edit_stock_article:
+          price: ! '<ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>'
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
       task:

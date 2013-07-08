@@ -25,4 +25,13 @@ module DeliveriesHelper
     return output.html_safe
   end
   
+  def stock_article_price_hint(stock_article)
+    t('simple_form.hints.stock_article.edit_stock_article.price',
+      :stock_article_copy_link => link_to(t('.copy_stock_article'),
+        copy_stock_article_supplier_deliveries_path(@supplier, :old_stock_article_id => stock_article.id),
+        :remote => true
+      )
+    )
+  end
+  
 end
