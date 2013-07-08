@@ -145,17 +145,15 @@ $(function() {
     $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
     
     // Init table sorting
-    var myBars = $('.sorter-bar');
-    myBars.html('<button type="button" class="sorter-button btn btn-mini"><i class="icon-chevron-up"></i></button><button type="button" class="sorter-button btn btn-mini"><i class="icon-chevron-down"></i></button>');
-    $('button:nth-child(1)', myBars).click(function(e) {sortTable(e, false);});
-    $('button:nth-child(2)', myBars).click(function(e) {sortTable(e, true);});
-    // A title attribute ('sort ascending order') would be nice here.
+    var myTriggerers = $('.dom-sort-triggerer');
+    myTriggerers.wrapInner('<a href="#" class="dom-sort-link"></a>');
+    $('.dom-sort-link', myTriggerers).click(function(e) {sortTable(e); e.preventDefault();});
+    // A title attribute ('sort ascending/descending') would be nice here.
     // However, for a tiny detail like that it is not worth to translate everything:
     // http://foodsoft.51229.x6.nabble.com/How-to-I18n-content-which-is-dynamically-loaded-via-javascript-assets-td75.html#a76
     
     // Sort tables with a default sort
-    $('.sorter-bar.default-sort-asc button:nth-child(1)').trigger('click');
-    $('.sorter-bar.default-sort-desc button:nth-child(2)').trigger('click');
+    $('.dom-sort-link', '.default-sort').trigger('click');
 });
 
 // compare two elements interpreted as text
@@ -164,14 +162,16 @@ function compareText(a, b) {
 }
 
 // wrapper for $.fn.sorter (see above) for sorting tables
-function sortTable(e, inverted) {
-  var sign = ( inverted ) ? ( -1 ) : ( 1 );
+function sortTable(e) {
+  var sortLink = $(e.currentTarget);
   
-  var myBar = $(e.currentTarget).closest('.sorter-bar'); // bar containing the clicked up/down arrow
-  var sortCriterion = myBar.data('sortCriterion'); // class name of (usually td) elements which define the order
-  var compareFunction = myBar.data('compareFunction'); // function to compare two element contents for ordering
-  var sortElement = myBar.data('sortElement'); // name of function which returns the movable element (default: 'thisParent')
-  var myTable = myBar.closest('table'); // table to sort
+  var sign = ( sortLink.hasClass('sortup') ) ? ( -1 ) : ( 1 );
+  
+  var options = sortLink.closest('.dom-sort-triggerer').data();
+  var sortCriterion = options.sortCriterion; // class name of (usually td) elements which define the order
+  var compareFunction = options.compareFunction; // function to compare two element contents for ordering
+  var sortElement = options.sortElement; // name of function which returns the movable element (default: 'thisParent')
+  var myTable = sortLink.closest('table'); // table to sort
   
   sortElement = ( 'undefined' === typeof sortElement ) ? ( function() {return this.parentNode;} ) : ( window[sortElement] ); // is this dirty?
   
@@ -182,13 +182,15 @@ function sortTable(e, inverted) {
     sortElement
   );
   
-  $('.sorter-button', myTable).removeClass('btn-primary active');
-  $(e.currentTarget).addClass('btn-primary active');
+  $('.dom-sort-link', myTable).removeClass('sortup sortdown');
+  sortLink.addClass(
+    ( sign == 1 ) ? ( 'sortup' ) : ( 'sortdown' )
+  );
 }
 
 // retrigger last sort function for elements in a context (e.g. after DOM update)
 function updateSort(context) {
-  $('.sorter-bar button.active.btn-primary', context).trigger('click');
+  $('.sortup, .sortdown', context).toggleClass('sortup sortdown').trigger('click');
 }
 
 // gives the row an yellow background

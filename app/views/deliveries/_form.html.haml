@@ -101,13 +101,10 @@
   %table.table.table-hover#stock_articles_for_adding
     %thead
       %tr
-        %th
+        %th.dom-sort-triggerer.default-sort{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
           = t '.article'
-          %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
         %th= t '.price'
-        %th
-          = t '.category'
-          %span.sorter-bar{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-category'}}
+        %th= t '.category'
         %th= t '.actions'
     %tbody
       - for article in stock_articles_for_table(@supplier)
@@ -117,9 +114,8 @@
   %table.table#stock_changes
     %thead
       %tr
-        %th
+        %th.dom-sort-triggerer.default-sort{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
           = t '.article'
-          %span.sorter-bar.default-sort-asc{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
         %th= t '.price'
         %th= t '.quantity'
         %th= t '.actions'
