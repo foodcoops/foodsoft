@@ -23,7 +23,7 @@ $('div.container-fluid').prepend(
   
   var stock_change_entry = $('#stock_change_stock_article_<%= @stock_article.id %>');
   $('.stock_article_name', stock_change_entry).text('<%= j(@stock_article.name) %>');
-  $('.unit', stock_change_entry).text('<%= j(number_to_currency(@stock_article.unit)) %>');
+  $('.unit', stock_change_entry).text('<%= j(@stock_article.unit) %>');
   
   stock_change_entry.addClass('success');
   
