@@ -96,6 +96,8 @@ Foodsoft::Application.routes.draw do
         get :articles_search
         get :fill_new_stock_article_form
       end
+      
+      resources :stock_changes, :only => [:index], :to => 'stock_changes'
     end
 
     resources :suppliers do
