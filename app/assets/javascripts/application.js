@@ -129,6 +129,47 @@ function newElementsReady() {
     $('select').not('.plain').select2({dropdownAutoWidth: true});
 }
 
+// select2 jQuery function with remote capabilities
+//   usage: $('#autocomplete_input').select2_remote({
+//     remote_url: '#{xyz_path(:format => json)}',
+//     remote_field: 'title',
+//     remote_init: #{form.object.xyz.map { |u| u.token_attributes }.to_json}
+//   });
+$.fn.extend({
+  select2_remote: function(options={}) {
+
+    function select2_parse(data, text_attr, id_attr='id') {
+      return $(data).map(function(i, o) {
+        return {id:o[id_attr], text:o[text_attr] };
+      });
+    }
+
+    var field = options.remote_field || 'name';
+    var _options = $.extend(true, {}, options, {
+      ajax: {
+        url: options.remote_url,
+        data: function(term, page) {
+          return {q: term};
+        },
+        results: function(data, page) {
+          return { results: select2_parse(data, field) };
+        },
+      },
+      initSelection: function (el, callback) {
+        var values = select2_parse(options.remote_init, field);
+        if (!options.multiple && !options.tags)
+          values = values[0];
+        callback(values);
+      },
+      dropdownAutoWidth: true,
+    });
+
+    if (options.tags || options.multiple)
+      $.extend(_options, {width: 'element'});
+    return $(this).select2(_options);
+  }
+});
+
 // gives the row an yellow background
 function highlightRow(checkbox) {
     var row = checkbox.closest('tr');
