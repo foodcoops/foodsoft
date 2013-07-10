@@ -1,13 +1,9 @@
 - content_for :javascript do
   :javascript
     $(function() {
-      $("#task_user_list").tokenInput("#{users_path(:format => :json)}", {
-        crossDomain: false,
-        prePopulate: $("#task_user_list").data("pre"),
-        hintText: '#{escape_javascript(t('.search.hint'))}',
-        noResultText: '#{escape_javascript(t('.search.noresult'))}',
-        searchingText: '#{escape_javascript(t('.search.placeholder'))}',
-        theme: 'facebook'
+      $("#task_user_list").select2_remote({
+        remote_url: '#{users_path(:format => :json)}',
+        remote_init: #{search_data(@task.users, proc {|u| u.nick_with_ordergroup})[:results].to_json },
       });
     });
 
@@ -19,7 +15,7 @@
   = f.input :name
   = f.input :description, as: :text, input_html: {rows: 10}
   = f.input :duration, :as => :select, :collection => 1..3
-  = f.input :user_list, :as => :string, :input_html => { 'data-pre' => @task.users.map { |u| u.token_attributes }.to_json }
+  = f.input :user_list, :as => :string
   = f.input :required_users
   = f.association :workgroup
   = f.input :due_date, as: :date_picker

@@ -1136,9 +1136,6 @@ en:
         subscribe: You can find more about the mailing-list at %{link}.
         subscribe_msg: You may have to subscribe to the mailing-list first.
         wiki: Wiki (page Mailing-List)
-      no_user_found: No user found
-      search: Search ...
-      search_user: Search user
       title: New message
     show:
       all_messages: All messages
@@ -1759,11 +1756,6 @@ en:
     edit:
       title: Edit task
     error_not_found: No workgroup found
-    form:
-      search:
-        hint: Search for user
-        noresult: No user found
-        placeholder: Search ...
     index:
       show_group_tasks: Show group tasks
       title: Tasks

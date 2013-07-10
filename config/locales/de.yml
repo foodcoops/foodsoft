@@ -1134,9 +1134,6 @@ de:
         subscribe: Erklärungen zum Verteiler findest Du im %{link}.
         subscribe_msg: Eventuell musst Du Dich dem Verteiler erst bekannt machen.
         wiki: Wiki (Abschnitt Mailing-Liste)
-      no_user_found: Keine Nutzerin gefunden
-      search: Suche ...
-      search_user: Nach Nutzerin suchen
       title: Neue Nachricht
     show:
       all_messages: Nachricht im Überblick
@@ -1757,11 +1754,6 @@ de:
     edit:
       title: Aufgabe bearbeiten
     error_not_found: Keine Arbeitsgruppe gefunden
-    form:
-      search:
-        hint: Nach Nutzerin suchen
-        noresult: Keine Nutzerin gefunden
-        placeholder: Suche ...
     index:
       show_group_tasks: Gruppenaufgaben anzeigen
       title: Aufgaben

@@ -1027,9 +1027,6 @@ nl:
         subscribe: 
         subscribe_msg: 
         wiki: 
-      no_user_found: 
-      search: 
-      search_user: 
       title: 
     show:
       all_messages: 
@@ -1648,11 +1645,6 @@ nl:
     edit:
       title: 
     error_not_found: 
-    form:
-      search:
-        hint: 
-        noresult: 
-        placeholder: 
     index:
       show_group_tasks: 
       title: 
