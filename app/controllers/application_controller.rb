@@ -9,7 +9,27 @@ class ApplicationController < ActionController::Base
   def self.current
     Thread.current[:application_controller]
   end
-  
+
+  # return search data from query
+  #   this is public because it can also be called from a view - to
+  #   be able to initialize input fields (select2&friends)
+  def search_data(query, field)
+    data = query
+      .limit(params[:limit].nil? ? 10 : params[:limit])
+      .offset(params[:offset].nil? ? 0 : params[:offset])
+    {
+      :total => query.count,
+      :results =>
+        if field.respond_to?(:call)
+          data.map {|o| {id: o.id, text: field.call(o)} }
+        else
+          # ActiveRecord.pluck() doesn't always work here because of relations
+          # http://meltingice.net/2013/06/11/pluck-multiple-columns-rails/
+          data.map {|o| {id: o.id, text: o[field] } }
+        end
+    }
+  end
+
   protected
 
   def current_user

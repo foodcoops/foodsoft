@@ -124,6 +124,10 @@ module ApplicationHelper
     link_to(text, options[:url], remote_options.merge(options))
   end
 
+  def search_data(query, field)
+    controller.search_data(query, field)
+  end
+
   def format_roles(record)
     roles = []
     roles << I18n.t('helpers.application.role_admin') if record.role_admin?

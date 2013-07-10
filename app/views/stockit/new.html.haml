@@ -1,15 +1,11 @@
 - title t('.title')
 
-- content_for :head do
+- content_for :javascript do
   :javascript
     $(function() {
-      $('#article_search').autocomplete({
-          source: '#{articles_search_stock_articles_path}',
-          select: function(e, ui) {
-            alert(ui.item.value);
-            //location.href = '#{nil}' + ui.item.value;
-          }
-        });
+      $('#article_search').select2_remote({
+        remote_url: '#{articles_search_stock_articles_path}'
+      });
     })
 
 

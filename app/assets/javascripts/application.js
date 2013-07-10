@@ -3,7 +3,6 @@
 //= require jquery_ujs
 //= require select2
 //= require twitter/bootstrap
-//= require jquery.tokeninput
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.de
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.nl
@@ -130,42 +129,42 @@ function newElementsReady() {
 }
 
 // select2 jQuery function with remote capabilities
-//   usage: $('#autocomplete_input').select2_remote({
-//     remote_url: '#{xyz_path(:format => json)}',
-//     remote_field: 'title',
-//     remote_init: #{form.object.xyz.map { |u| u.token_attributes }.to_json}
-//   });
+//   Usage:
+//    $('#autocomplete_input').select2_remote({
+//       remote_url: '#{xyz_path(:format => json)}',
+//       remote_init: #{form.object.xyz.map { |u| u.token_attributes }.to_json}
+//       remote_pagesize: 100,
+//     });
+//   Only remote_url is required.
 $.fn.extend({
   select2_remote: function(options={}) {
 
-    function select2_parse(data, text_attr, id_attr='id') {
-      return $(data).map(function(i, o) {
-        return {id:o[id_attr], text:o[text_attr] };
-      });
-    }
-
-    var field = options.remote_field || 'name';
+    var pagesize = options.remote_pagesize || 25;
     var _options = $.extend(true, {}, options, {
       ajax: {
         url: options.remote_url,
         data: function(term, page) {
-          return {q: term};
+          return {q: term, limit: pagesize, offset: (page-1)*pagesize};
         },
         results: function(data, page) {
-          return { results: select2_parse(data, field) };
+          return { results: data.results, more: ((page-1)*pagesize)<data.total };
         },
       },
       initSelection: function (el, callback) {
-        var values = select2_parse(options.remote_init, field);
-        if (!options.multiple && !options.tags)
+        var values = options.remote_init;
+        // if single select is given an array as init, that's fine
+        if ($.isArray(values) && !options.multiple && !options.tags)
           values = values[0];
         callback(values);
       },
+      // try to avoid linebreaking long values
       dropdownAutoWidth: true,
     });
 
+    // fix width
     if (options.tags || options.multiple)
       $.extend(_options, {width: 'element'});
+
     return $(this).select2(_options);
   }
 });
@@ -178,11 +177,4 @@ function highlightRow(checkbox) {
     } else {
         row.removeClass('selected');
     }
-}
-
-// Use with auto_complete to set a unique id,
-// e.g. when the user selects a (may not unique) name
-// There must be a hidden field with the id 'hidden_field'
-function setHiddenId(text, li) {
-  $('hidden_id').value = li.id;
 }
