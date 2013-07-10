@@ -8,7 +8,7 @@ namespace :foodsoft do
       puts "Send notifications for #{task.name} to .."
       for user in task.users
         begin
-          Mailer.upcoming_tasks(user, task).deliver if user.settings['notify.upcoming_tasks'] == 1
+          Mailer.upcoming_tasks(user, task).deliver if user.settings.notify['upcoming_tasks'] == 1
         rescue
           puts "deliver aborted for #{user.email}.."
         end
@@ -38,7 +38,7 @@ namespace :foodsoft do
         unless task.enough_users_assigned?
           puts "Notify workgroup: #{workgroup.name} for task #{task.name}"
           for user in workgroup.users
-            if user.settings['messages.sendAsEmail'] == "1" && !user.email.blank?
+            if user.settings.messages['send_as_email'] == "1" && !user.email.blank?
               begin
                 Mailer.not_enough_users_assigned(task, user).deliver
               rescue
