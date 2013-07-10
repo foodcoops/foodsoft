@@ -81,11 +81,11 @@ $(function() {
     });
 
     // Submit form when clicking on checkbox
-    $('form[data-submit-onchange] input[type=checkbox]:not(input[data-ignore-onchange])').click(function() {
+    $(document).on('click', 'form[data-submit-onchange] input[type=checkbox]:not(input[data-ignore-onchange])', function() {
         $(this).parents('form').submit();
     });
 
-    $('[data-redirect-to]').bind('change', function() {
+    $(document).on('change', '[data-redirect-to]', function() {
         var newLocation = $(this).children(':selected').val();
         if (newLocation != "") {
             document.location.href = newLocation;
@@ -99,17 +99,24 @@ $(function() {
     });
 
     // Show and hide loader on ajax callbacks
-    $('*[data-remote]').bind('ajax:beforeSend', function() {
+    //   and run newElementsReady() afterwards for new dom elements
+    $(document).on('ajax:beforeSend', '[data-remote]', function(evt, xhr, settings) {
         $('#loader').show();
-    });
-
-    $('*[data-remote]').bind('ajax:complete', function() {
-        newElementsReady();
-        $('#loader').hide();
+        // One idea was $(document).on('ajax:complete', '[data-remote'], ...)
+        // but that doesn't work for a modal dialog that replaces itself.
+        //   https://github.com/rails/jquery-ujs/issues/223
+        if (!settings.complete)
+          settings.complete = [];
+        else if (!$.isArray(settings.complete))
+          settings.complete = [settings.complete];
+        settings.complete.push(function() {
+            newElementsReady();
+            $('#loader').hide();
+        });
     });
 
     // Disable submit button on ajax forms
-    $('form[data-remote]').bind('ajax:beforeSend', function() {
+    $(document).on('ajax:beforeSend', 'form[data-remote]', function() {
         $(this).children('input[type="submit"]').attr('disabled', 'disabled');
     });
 
