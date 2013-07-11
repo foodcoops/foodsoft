@@ -597,8 +597,8 @@ en:
       orders:
         clear: accounting
         cleared: accounted (%{amount})
-        close: close directly
-        confirm: Do you really want to fully close the order?
+        close: settle directly
+        confirm: Do you really want to settle the order?
         end: End
         ended: closed
         last_edited_by: Last edited by

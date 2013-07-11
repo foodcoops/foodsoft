@@ -265,10 +265,10 @@ nl:
     edit_all_table:
       available_desc: beschikbaar
       available_short: besch.
-      order_number_desc: bestelnummer
-      order_number_short: best.nr.
-      price_desc: netto prijs
-      price_short: prijs
+      order_number_desc: Bestelnummer
+      order_number_short: Best.nr.
+      price_desc: Netto prijs
+      price_short: Prijs
       unit_quantity_desc: Groothandelsverpakkingsgrootte
       unit_quantity_short: Gr.Eenh.
     form:
@@ -542,7 +542,7 @@ nl:
         total_fc: Som (FC-prijs)
         units: Eenheden
       index:
-        title: Gesloten orders
+        title: Gesloten bestellingen
       invoice:
         edit: Factuur bewerken
         invoice_amount: ! 'Factuurbedrag:'
@@ -573,8 +573,8 @@ nl:
       orders:
         clear: afrekenen
         cleared: afgerekend (%{amount})
-        close: direct afsluiten
-        confirm: Weet je zeker dat de je bestelling wilt afsluiten?
+        close: direct afrekenen
+        confirm: Weet je zeker dat de je bestelling wilt afrekenen?
         end: Einde
         ended: gesloten
         last_edited_by: Laatst aangepast door
@@ -1092,7 +1092,7 @@ nl:
   number:
     currency:
       format:
-        delimiter: ! ','
+        delimiter: ! ' '
         format: ! '%n %u'
         precision: 2
         separator: ! ','
@@ -1425,7 +1425,7 @@ nl:
         description: Omschrijving
         email: Email
         note: Notitie
-        order_number: Order nummer
+        order_number: Bestelnummer
         ordergroup: Huishouden
         password: Wachtwoord
         password_confirmation: Wachtwoord herhalen
@@ -1450,7 +1450,7 @@ nl:
         note: Notitie
         number: Nummer
         order: Bestelling
-        paid_on: Betaalt op
+        paid_on: Betaald op
         supplier: Leverancier
       message:
         body: 
