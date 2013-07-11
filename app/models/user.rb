@@ -155,8 +155,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def token_attributes
-    {:id => id, :name => "#{nick} (#{ordergroup.try(:name)})"}
+  def nick_with_ordergroup
+    "#{nick} (#{ordergroup.try(:name)})"
   end
 
 end

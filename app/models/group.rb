@@ -6,8 +6,6 @@ class Group < ActiveRecord::Base
 
   validates :name, :presence => true, :length => {:in => 1..25}
   
-  attr_reader :user_tokens
-
   scope :undeleted, -> { where(deleted_at: nil) }
 
   # Returns true if the given user if is an member of this group.
@@ -18,6 +16,10 @@ class Group < ActiveRecord::Base
   # Returns all NONmembers and a checks for possible multiple Ordergroup-Memberships
   def non_members
     User.all(:order => 'nick').reject { |u| users.include?(u) }
+  end
+
+  def user_tokens
+    self.user_ids.join(",")
   end
 
   def user_tokens=(ids)

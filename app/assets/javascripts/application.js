@@ -1,10 +1,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jquery/livequery
 //= require select2
 //= require twitter/bootstrap
-//= require jquery.tokeninput
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.de
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.nl
@@ -83,11 +81,11 @@ $(function() {
     });
 
     // Submit form when clicking on checkbox
-    $('form[data-submit-onchange] input[type=checkbox]:not(input[data-ignore-onchange])').click(function() {
+    $(document).on('click', 'form[data-submit-onchange] input[type=checkbox]:not(input[data-ignore-onchange])', function() {
         $(this).parents('form').submit();
     });
 
-    $('[data-redirect-to]').bind('change', function() {
+    $(document).on('change', '[data-redirect-to]', function() {
         var newLocation = $(this).children(':selected').val();
         if (newLocation != "") {
             document.location.href = newLocation;
@@ -101,30 +99,82 @@ $(function() {
     });
 
     // Show and hide loader on ajax callbacks
-    $('*[data-remote]').bind('ajax:beforeSend', function() {
+    //   and run newElementsReady() afterwards for new dom elements
+    $(document).on('ajax:beforeSend', '[data-remote]', function(evt, xhr, settings) {
         $('#loader').show();
-    });
-
-    $('*[data-remote]').bind('ajax:complete', function() {
-        $('#loader').hide();
+        // One idea was $(document).on('ajax:complete', '[data-remote'], ...)
+        // but that doesn't work for a modal dialog that replaces itself.
+        //   https://github.com/rails/jquery-ujs/issues/223
+        if (!settings.complete)
+          settings.complete = [];
+        else if (!$.isArray(settings.complete))
+          settings.complete = [settings.complete];
+        settings.complete.push(function() {
+            newElementsReady();
+            $('#loader').hide();
+        });
     });
 
     // Disable submit button on ajax forms
-    $('form[data-remote]').bind('ajax:beforeSend', function() {
+    $(document).on('ajax:beforeSend', 'form[data-remote]', function() {
         $(this).children('input[type="submit"]').attr('disabled', 'disabled');
     });
 
-    // Use bootstrap datepicker for dateinput
-    $('.datepicker').livequery(function() {
-      $(this).datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
-    });
-
-    // Use select2 for selects, except those with css class 'plain'
-    $('select').livequery(function() {
-        $(this).not('.plain').select2({dropdownAutoWidth: true});
-    });
+    newElementsReady();
 });
 
+// classic document ready functions not supporting jQuery.on()
+// so that we can catch dynamically created elements too
+//   data-remote functions call this after successful ajax (see above),
+//   other modifications need to call this function by themselves.
+function newElementsReady() {
+    // Use bootstrap datepicker for dateinput
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
+
+    // Use select2 for selects, except those with css class 'plain'
+    $('select').not('.plain').select2({dropdownAutoWidth: true});
+}
+
+// select2 jQuery function with remote capabilities
+//   Usage:
+//    $('#autocomplete_input').select2_remote({
+//       remote_url: '#{xyz_path(:format => json)}',
+//       remote_init: #{form.object.xyz.map { |u| u.token_attributes }.to_json}
+//       remote_pagesize: 100,
+//     });
+//   Only remote_url is required.
+$.fn.extend({
+  select2_remote: function(options) {
+
+    var pagesize = options.remote_pagesize || 25;
+    var _options = $.extend(true, {}, options, {
+      ajax: {
+        url: options.remote_url,
+        data: function(term, page) {
+          return {q: term, limit: pagesize, offset: (page-1)*pagesize};
+        },
+        results: function(data, page) {
+          return { results: data.results, more: ((page-1)*pagesize)<data.total };
+        },
+      },
+      initSelection: function (el, callback) {
+        var values = options.remote_init;
+        // if single select is given an array as init, that's fine
+        if ($.isArray(values) && !options.multiple && !options.tags)
+          values = values[0];
+        callback(values);
+      },
+      // try to avoid linebreaking long values
+      dropdownAutoWidth: true,
+    });
+
+    // fix width
+    if (options.tags || options.multiple)
+      $.extend(_options, {width: 'element'});
+
+    return $(this).select2(_options);
+  }
+});
 
 // gives the row an yellow background
 function highlightRow(checkbox) {
@@ -134,11 +184,4 @@ function highlightRow(checkbox) {
     } else {
         row.removeClass('selected');
     }
-}
-
-// Use with auto_complete to set a unique id,
-// e.g. when the user selects a (may not unique) name
-// There must be a hidden field with the id 'hidden_field'
-function setHiddenId(text, li) {
-  $('hidden_id').value = li.id;
 }

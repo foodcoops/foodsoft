@@ -4,6 +4,21 @@ class Finance::OrderArticlesController < ApplicationController
 
   layout false  # We only use this controller to serve js snippets, no need for layout rendering
 
+  # currently used to for order article autocompletion
+  def index
+    @order = Order.find(params[:order_id])
+    if @order.stockit?
+      @articles = StockArticle.order('articles.name')
+    else
+      @articles = @order.supplier.articles.order('articles.name')
+    end
+
+    @articles = @articles.where("articles.name LIKE ?", "%#{params[:q]}%")
+    respond_to do |format|
+      format.json { render :json => search_data(@articles, :name) }
+    end
+  end
+
   def new
     @order = Order.find(params[:order_id])
     @order_article = @order.order_articles.build
@@ -44,4 +59,6 @@ class Finance::OrderArticlesController < ApplicationController
     @order_article = OrderArticle.find(params[:id])
     @order_article.destroy
   end
+
+
 end
