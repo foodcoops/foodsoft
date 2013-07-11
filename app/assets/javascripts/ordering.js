@@ -10,6 +10,7 @@ var groupBalance = 0;			// available group money
 var currencySeparator = ".";		// default decimal separator
 var currencyPrecision = 2;      // default digits behind comma
 var currencyUnit = "€";         // default currency
+var minimumBalance = 0;                 // minimum group balance for the order to be succesful
 var toleranceIsCostly = true;   // default tolerance behaviour
 var isStockit = false;          // Wheter the order is from stock oder normal supplier
 
@@ -38,6 +39,10 @@ function setStockit(value) {
 
 function setGroupBalance(amount) {
     groupBalance = amount;
+}
+
+function setMinimumBalance(amount) {
+    minimumBalance = amount;
 }
 
 function addData(orderArticleId, itemPrice, itemUnit, itemSubtotal, itemQuantityOthers, itemToleranceOthers, allocated, available) {
@@ -159,7 +164,7 @@ function updateBalance() {
     $('#total_balance').val(asMoney(balance));
     // determine bgcolor and submit button state according to balance
     var bgcolor = '';
-    if (balance < 0) {
+    if (balance < minimumBalance) {
         bgcolor = '#FF0000';
         $('#submit_button').attr('disabled', 'disabled')
     } else {
