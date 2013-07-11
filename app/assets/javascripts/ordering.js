@@ -139,7 +139,8 @@ function update(item, quantity, tolerance) {
     updateBalance();
 }
 
-function asMoney(amount, precision=currencyPrecision) {
+function asMoney(amount, precision) {
+    if (typeof precision === 'undefined') precision = currencyPrecision;
     return String(amount.toFixed(precision)).replace(/\./, currencySeparator) + ' ' + currencyUnit;
 }
 
