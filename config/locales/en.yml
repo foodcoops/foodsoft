@@ -81,6 +81,11 @@ en:
         too_long: is too long (no more than %{count} characters)
         too_short: is too short (use more than %{count} characters)
         wrong_length: is the wrong length (has to have exactly %{count} characters)
+      models:
+        task:
+          attributes:
+            done:
+              exclusion: finished tasks may not be repeated weekly
       template:
         body: ! 'Please check the following fields:'
         header:
@@ -1758,12 +1763,15 @@ en:
       notice: Task has been deleted
     edit:
       title: Edit task
+      warning_periodic: <strong>Warning:</strong> This task is part of a group of <em>weekly tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>.
     error_not_found: No workgroup found
     form:
       search:
         hint: Search for user
         noresult: No user found
         placeholder: Search ...
+      submit:
+        periodic: Save weekly task
     index:
       show_group_tasks: Show group tasks
       title: Tasks
@@ -1787,10 +1795,13 @@ en:
       new_task: Create new task
     new:
       title: Create new tasks
+    repeated: Task is repeated weekly
     set_done:
       notice: The state of the task has been updated
     show:
       accept_task: Accept task
+      confirm_delete_group: Really delete this and all subsequent tasks?
+      delete_group: Delete task and subsequent
       due_date: Due date
       hours: ! '%{count}h'
       mark_done: Mark task as done
@@ -1798,6 +1809,7 @@ en:
       title: Show task
     update:
       notice: Task has been updated
+      notice_converted: Task has been updated and was converted to a regular task
     user:
       more: Nothing to do? %{tasks_link} are tasks for sure.
       tasks_link: Here
