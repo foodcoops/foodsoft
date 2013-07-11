@@ -219,3 +219,13 @@ tr.unavailable {
   dt { width: 160px; }
   dd { margin-left: 170px; }
 }
+
+// somehow select2 miscalculates its width; this width fits in forms
+.select2-container {
+  width: 224px;
+}
+// a bit more space for multi-select values
+.select2-container.select2-container-multi {
+  width: 400px;
+}
+ 
