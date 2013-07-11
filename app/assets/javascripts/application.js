@@ -132,7 +132,7 @@ function newElementsReady() {
     $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
 
     // Use select2 for selects, except those with css class 'plain'
-    $('select').not('.plain').select2({dropdownAutoWidth: true});
+    $('select').not('.plain').select2({dropdownAutoWidth: true, width: 'off'});
 }
 
 // select2 jQuery function with remote capabilities
@@ -166,11 +166,9 @@ $.fn.extend({
       },
       // try to avoid linebreaking long values
       dropdownAutoWidth: true,
+      // we set width in css
+      width: 'off',
     });
-
-    // fix width
-    if (options.tags || options.multiple)
-      $.extend(_options, {width: 'element'});
 
     return $(this).select2(_options);
   }
