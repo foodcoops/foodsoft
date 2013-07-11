@@ -1639,6 +1639,16 @@ en:
       mark: ! '*'
       text: required
     'yes': 'Yes'
+  stock_changes:
+    index:
+      change_quantity: Change
+      datetime: Time
+      delivery: Delivery
+      new_quantity: New quantity
+      order: Order
+      reason: Reason
+      stock_changes: Stock quantity changes of ‘%{article_name}’
+      stock_taking: Inventory
   stock_takings:
     create:
       notice: Inventory was created successfully.
@@ -1823,6 +1833,7 @@ en:
     close: Close
     delete: Delete
     edit: Edit
+    history: Show history
     marks:
       close: ! '&times;'
     or_cancel: or cancel

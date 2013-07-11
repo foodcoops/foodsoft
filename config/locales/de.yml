@@ -1637,6 +1637,16 @@ de:
       mark: ! '*'
       text: benötigt
     'yes': Ja
+  stock_changes:
+    index:
+      change_quantity: Veränderung
+      datetime: Zeitpunkt
+      delivery: Lieferung
+      new_quantity: Neuer Bestand
+      order: Bestellung
+      reason: Ereignis
+      stock_changes: Verlauf anzeigen für »%{article_name}«
+      stock_taking: Inventur
   stock_takings:
     create:
       notice: Inventur wurde erfolgreich angelegt.
@@ -1821,6 +1831,7 @@ de:
     close: Schließen
     delete: Löschen
     edit: Bearbeiten
+    history: Verlauf anzeigen
     marks:
       close: ! '&times;'
     or_cancel: oder abbrechen
