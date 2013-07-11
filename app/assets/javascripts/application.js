@@ -144,7 +144,7 @@ function newElementsReady() {
 //     });
 //   Only remote_url is required.
 $.fn.extend({
-  select2_remote: function(options={}) {
+  select2_remote: function(options) {
 
     var pagesize = options.remote_pagesize || 25;
     var _options = $.extend(true, {}, options, {
