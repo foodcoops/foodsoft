@@ -765,6 +765,12 @@ nl:
       title: Besteloverzicht
     messages:
       not_enough_apples: Om te bestellen heb je minimaal %{stop_ordering_under} appels nodig. Momenteel heeft je huishouden slechts %{apples} appels.
+    min_quantity_notice:
+      status_enough_others: Er is voldoende besteld om te kunnen leveren.
+      status_enough_affected: Als je jouw bestelling opslaat, is er voldoende besteld om te kunnen leveren. Bedankt!
+      status_needed: Er is nog %{amount} nodig aan bestellingen om te kunnen leveren.
+      status_needed_approx: Er is nog ca. %{amount} nodig aan bestellingen om te kunnen leveren.
+      title_note: Deze leverancier heeft een minimum bestelbedrag van %{amount}.
     order:
       title: Artikelen
     orders:

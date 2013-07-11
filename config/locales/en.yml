@@ -797,6 +797,12 @@ en:
       title: Orders overview
     messages:
       not_enough_apples: You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.
+    min_quantity_notice:
+      status_enough_others: The order is large enough to be delivered.
+      status_enough_affected: After saving your order, the order will be large enough for delivery. Thank you!
+      status_needed: Still %{amount} needs to be ordered so that delivery is possible.
+      status_needed_approx: About %{amount} still needs to be ordered so that delivery is possible.
+      title_note: This supplier has a minimum order quantity of %{amount}.
     order:
       title: Articles
     orders:

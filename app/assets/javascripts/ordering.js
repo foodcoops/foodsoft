@@ -139,8 +139,8 @@ function update(item, quantity, tolerance) {
     updateBalance();
 }
 
-function asMoney(amount) {
-    return String(amount.toFixed(currencyPrecision)).replace(/\./, currencySeparator) + ' ' + currencyUnit;
+function asMoney(amount, precision=currencyPrecision) {
+    return String(amount.toFixed(precision)).replace(/\./, currencySeparator) + ' ' + currencyUnit;
 }
 
 function calcUnits(unitSize, quantity, tolerance) {
@@ -162,6 +162,7 @@ function updateBalance() {
     }
     $('#total_price').html(asMoney(total));
     var balance = groupBalance - total;
+    $(document).triggerHandler({type: 'foodsoft:group_order_sum_changed'}, total, balance);
     $('#new_balance').html(asMoney(balance));
     $('#total_balance').val(asMoney(balance));
     // determine bgcolor and submit button state according to balance
