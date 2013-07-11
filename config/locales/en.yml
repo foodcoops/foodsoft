@@ -1633,12 +1633,6 @@ en:
         role_finance: Finances
         role_orders: Order management
         role_suppliers: Suppliers
-        task_description: Description
-        task_duration: Duration in hours
-        task_name: Task name
-        task_required_users: People required
-        weekday: Weekday
-        weekly_task: Define monthly task?
     'no': 'No'
     required:
       mark: ! '*'
@@ -1819,11 +1813,6 @@ en:
     workgroup:
       title: Tasks for %{workgroup}
       title_all: All group tasks
-      weekly:
-        desc: ! '<p>Every <b>%{weekday}</b> this workgroup has the following job: <b>%{task}</b></p> <p>The weektask has been created by Foodsoft automatically. You still have to sign up for it yourself.</p>'
-        edit: Edit weekly tasks
-        empty: No weekly tasks created yet.
-        title: Weekly tasks
   time:
     am: morning
     formats:

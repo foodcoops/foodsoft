@@ -81,6 +81,11 @@ nl:
         too_long: is te lang (niet meer dan %{count} tekens)
         too_short: is te kort (niet minder dan %{count} tekens)
         wrong_length: heeft de verkeerde lengte (moet precies %{count} tekens zijn)
+      models:
+        task:
+          attributes:
+            done:
+              exclusion: 
       template:
         body: ! 'Controleer de volgende velden:'
         header:
@@ -1513,16 +1518,10 @@ nl:
       workgroup:
         next_weekly_tasks_number: 
         role_admin: 
-        role_article_meta: 
-        role_finance: 
+        role_article_meta: Artikelbestand
+        role_finance: Financiën
         role_orders: 
-        role_suppliers: 
-        task_description: 
-        task_duration: 
-        task_name: 
-        task_required_users: 
-        weekday: 
-        weekly_task: 
+        role_suppliers: Leveranciers
     'no': Nee
     required:
       mark: ! '*'
@@ -1647,12 +1646,15 @@ nl:
       notice: 
     edit:
       title: 
+      warning_periodic: 
     error_not_found: 
     form:
       search:
         hint: 
         noresult: 
         placeholder: 
+      submit:
+        periodic: 
     index:
       show_group_tasks: 
       title: 
@@ -1676,10 +1678,13 @@ nl:
       new_task: 
     new:
       title: 
+    repeated: 
     set_done:
       notice: 
     show:
       accept_task: 
+      confirm_delete_group: 
+      delete_group: 
       due_date: 
       hours: 
       mark_done: 
@@ -1687,6 +1692,7 @@ nl:
       title: 
     update:
       notice: 
+      notice_converted: 
     user:
       more: 
       tasks_link: 
@@ -1696,11 +1702,6 @@ nl:
     workgroup:
       title: 
       title_all: 
-      weekly:
-        desc: 
-        edit: 
-        empty: 
-        title: 
   time:
     am: morgen
     formats:
