@@ -81,6 +81,11 @@ nl:
         too_long: is te lang (niet meer dan %{count} tekens)
         too_short: is te kort (niet minder dan %{count} tekens)
         wrong_length: heeft de verkeerde lengte (moet precies %{count} tekens zijn)
+      models:
+        task:
+          attributes:
+            done:
+              exclusion: 
       template:
         body: ! 'Controleer de volgende velden:'
         header:
@@ -265,10 +270,10 @@ nl:
     edit_all_table:
       available_desc: beschikbaar
       available_short: besch.
-      order_number_desc: bestelnummer
-      order_number_short: best.nr.
-      price_desc: netto prijs
-      price_short: prijs
+      order_number_desc: Bestelnummer
+      order_number_short: Best.nr.
+      price_desc: Netto prijs
+      price_short: Prijs
       unit_quantity_desc: Groothandelsverpakkingsgrootte
       unit_quantity_short: Gr.Eenh.
     form:
@@ -542,7 +547,7 @@ nl:
         total_fc: Som (FC-prijs)
         units: Eenheden
       index:
-        title: Gesloten orders
+        title: Gesloten bestellingen
       invoice:
         edit: Factuur bewerken
         invoice_amount: ! 'Factuurbedrag:'
@@ -573,8 +578,8 @@ nl:
       orders:
         clear: afrekenen
         cleared: afgerekend (%{amount})
-        close: direct afsluiten
-        confirm: Weet je zeker dat de je bestelling wilt afsluiten?
+        close: direct afrekenen
+        confirm: Weet je zeker dat de je bestelling wilt afrekenen?
         end: Einde
         ended: gesloten
         last_edited_by: Laatst aangepast door
@@ -1099,7 +1104,7 @@ nl:
   number:
     currency:
       format:
-        delimiter: ! ','
+        delimiter: ! ' '
         format: ! '%n %u'
         precision: 2
         separator: ! ','
@@ -1432,7 +1437,7 @@ nl:
         description: Omschrijving
         email: Email
         note: Notitie
-        order_number: Order nummer
+        order_number: Bestelnummer
         ordergroup: Huishouden
         password: Wachtwoord
         password_confirmation: Wachtwoord herhalen
@@ -1457,7 +1462,7 @@ nl:
         note: Notitie
         number: Nummer
         order: Bestelling
-        paid_on: Betaalt op
+        paid_on: Betaald op
         supplier: Leverancier
       message:
         body: 
@@ -1520,16 +1525,10 @@ nl:
       workgroup:
         next_weekly_tasks_number: 
         role_admin: 
-        role_article_meta: 
-        role_finance: 
+        role_article_meta: Artikelbestand
+        role_finance: Financiën
         role_orders: 
-        role_suppliers: 
-        task_description: 
-        task_duration: 
-        task_name: 
-        task_required_users: 
-        weekday: 
-        weekly_task: 
+        role_suppliers: Leveranciers
     'no': Nee
     required:
       mark: ! '*'
@@ -1654,6 +1653,7 @@ nl:
       notice: 
     edit:
       title: 
+      warning_periodic: 
     error_not_found: 
     index:
       show_group_tasks: 
@@ -1678,10 +1678,13 @@ nl:
       new_task: 
     new:
       title: 
+    repeated: 
     set_done:
       notice: 
     show:
       accept_task: 
+      confirm_delete_group: 
+      delete_group: 
       due_date: 
       hours: 
       mark_done: 
@@ -1689,6 +1692,7 @@ nl:
       title: 
     update:
       notice: 
+      notice_converted: 
     user:
       more: 
       tasks_link: 
@@ -1698,11 +1702,6 @@ nl:
     workgroup:
       title: 
       title_all: 
-      weekly:
-        desc: 
-        edit: 
-        empty: 
-        title: 
   time:
     am: morgen
     formats:
