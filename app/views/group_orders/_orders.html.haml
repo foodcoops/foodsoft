@@ -5,12 +5,20 @@
       %th= t '.ending'
       %th= t '.sum'
   %tbody
+    - total = 0
     - for order in orders
-      - group_order = order.group_order(@ordergroup) # Get GroupOrder if possible
+      - if group_order = order.group_order(@ordergroup) # Get GroupOrder if possible
+        - total += group_order.price
       - order_class = group_order ? "" : "color:grey"
       %tr{:class=> cycle('even', 'odd', :name => 'orders'), :style => order_class}
         %td= group_order.present? ? link_to(order.name, group_order_path(group_order)) : order.name
         %td= format_time(order.ends)
         %td.numeric= group_order ? number_to_currency(group_order.price) : "--"
+    - unless pagination
+      %tfooter
+        %tr
+          %th
+          %th= t('shared.open_orders.total_sum') + ':'
+          %th.numeric= number_to_currency(total)
 - if pagination
   = pagination_links_remote @closed_orders
