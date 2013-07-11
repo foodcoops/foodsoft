@@ -35,13 +35,20 @@ class TasksController < ApplicationController
   def edit
     @task = Task.find(params[:id])
     @task.current_user_id = current_user.id
+    if @task.periodic?
+      flash.now[:alert] = I18n.t('tasks.edit.warning_periodic').html_safe
+    end
   end
   
   def update
     @task = Task.find(params[:id])
+    was_periodic = @task.periodic?
     @task.attributes=(params[:task])
     if @task.errors.empty? && @task.save
       flash[:notice] = I18n.t('tasks.update.notice')
+      if was_periodic and not @task.periodic?
+        flash[:notice] = I18n.t('tasks.update.notice_converted')
+      end
       if @task.workgroup
         redirect_to workgroup_tasks_url(workgroup_id: @task.workgroup_id)
       else

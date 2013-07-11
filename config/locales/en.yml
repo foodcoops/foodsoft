@@ -1764,6 +1764,7 @@ en:
       notice: Task has been deleted
     edit:
       title: Edit task
+      warning_periodic: <strong>Warning:</strong> This task is part of a group of <em>weekly tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>.
     error_not_found: No workgroup found
     form:
       search:
@@ -1809,6 +1810,7 @@ en:
       title: Show task
     update:
       notice: Task has been updated
+      notice_converted: Task has been updated and was converted to a regular task
     user:
       more: Nothing to do? %{tasks_link} are tasks for sure.
       tasks_link: Here

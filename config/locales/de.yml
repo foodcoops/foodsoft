@@ -1757,6 +1757,7 @@ de:
       notice: Aufgabe wurde gelöscht
     edit:
       title: Aufgabe bearbeiten
+      warning_periodic: <strong>Warnung:</strong> Diese Aufgabe ist Teil einer Gruppe von <em>wöchentlichen Aufgaben</em>. Beim Speichern wird sie aus der Gruppe ausgeschlossen und in eine <em>gewöhnliche Aufgabe</em> umgewandelt.
     error_not_found: Keine Arbeitsgruppe gefunden
     form:
       search:
@@ -1802,6 +1803,7 @@ de:
       title: Aufgabe anzeigen
     update:
       notice: Aufgabe wurde aktualisiert
+      notice_converted: Aufgabe wurde aktualisiert und in eine gewöhnliche Aufgabe umgewandelt
     user:
       more: Nichts zu tun? %{tasks_link} gibt es bestimmt Arbeit
       tasks_link: Hier
