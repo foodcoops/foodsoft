@@ -99,11 +99,6 @@ class ApplicationController < ActionController::Base
     @supplier = Supplier.find(params[:supplier_id]) if params[:supplier_id]
   end
 
-  # Get stock_article in nested resources
-  def find_stock_article
-    @stock_article = StockArticle.undeleted.find(params[:stock_article_id])
-  end
-
   # Set config and database connection for each request
   # It uses the subdomain to select the appropriate section in the config files
   # Use this method as a before filter (first filter!) in ApplicationController
