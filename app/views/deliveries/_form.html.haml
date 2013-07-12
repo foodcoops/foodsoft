@@ -94,10 +94,6 @@
   = f.association :supplier, :as => :hidden
   
   %h2= t '.title_select_stock_articles'
-  .well.well-small
-    .btn-toolbar
-      .btn-group
-        %input#new_stock_article{:style => 'width: 500px;'}
   %table.table.table-hover#stock_articles_for_adding
     %thead
       %tr
@@ -107,6 +103,10 @@
         %th= t '.unit'
         %th= t '.category'
         %th= t '.actions'
+    %tfoot
+      %tr
+        %th{:colspan => 5}
+          %input#new_stock_article{:style => 'width: 500px;'}
     %tbody
       - for article in stock_articles_for_table(@supplier)
         = render :partial => 'stock_article_for_adding', :locals => {:article => article}
