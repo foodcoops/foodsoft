@@ -3,17 +3,6 @@
 
 = yield
 
-- if f.object.is_a?(Workgroup)
-  %h3= t '.title'
-  = f.input :weekly_task
-  #weekly_task_fields
-    = f.input :weekday, as: :select, collection: Workgroup.weekdays
-    = f.input :task_name
-    = f.input :task_required_users
-    = f.input :task_duration, :as => :select, :collection => (1..3)
-    = f.input :task_description, as: :text, input_html: {rows: 5}
-    = f.input :next_weekly_tasks_number
-
 = f.input :user_tokens, :as => :string
 
 - content_for :javascript do

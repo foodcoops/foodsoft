@@ -6,50 +6,8 @@ class Workgroup < Group
   has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], :order => 'due_date ASC'
 
   validates_uniqueness_of :name
-  validates_presence_of :task_name, :weekday, :task_required_users, :next_weekly_tasks_number,
-                        :if => :weekly_task
-  validates_numericality_of :next_weekly_tasks_number, :greater_than => 0, :less_than => 21, :only_integer => true,
-                            :if => :weekly_task
-  validates_length_of :task_description, maximum: 250
   validate :last_admin_on_earth, :on => :update
   before_destroy :check_last_admin_group
-
-  def self.weekdays
-    days = I18n.t('date.day_names')
-    (0..days.length-1).map {|i| [days[i], i.to_s]}
-  end
-
-  # Returns an Array with date-objects to represent the next weekly-tasks
-  def next_weekly_tasks
-    # our system starts from 0 (sunday) to 6 (saturday)
-    # get difference between groups weekday and now
-    diff = self.weekday - Time.now.wday 
-    if diff >= 0  
-      # weektask is in current week
-      nextTask = diff.day.from_now
-    else
-      # weektask is in the next week
-      nextTask = (diff + 7).day.from_now
-    end
-    # now generate the Array
-    nextTasks = Array.new
-    next_weekly_tasks_number.times do
-      nextTasks << nextTask.to_date
-      nextTask = 1.week.from_now(nextTask)
-    end
-    return nextTasks
-  end
-
-  def task_attributes(date)
-    {
-        :name => task_name,
-        :description => task_description,
-        :due_date => date,
-        :required_users => task_required_users,
-        :duration => task_duration,
-        :weekly => true
-    }
-  end
 
   protected
 
