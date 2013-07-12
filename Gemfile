@@ -52,10 +52,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 
-  # Re-enable rails benchmarker/profiler
-  gem 'ruby-prof'
-  gem 'test-unit'
-
   # Get infos when not using proper eager loading
   gem 'bullet'
 
@@ -68,4 +64,9 @@ group :development do
   #gem 'common_deploy', require: false, path: '../../common_deploy' # pending foodcoops/foodsoft#34,  git: 'git://github.com/fsmanuel/common_deploy.git'
   # Avoid having content-length warnings
   gem 'thin'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.0'
 end
