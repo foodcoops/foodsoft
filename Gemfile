@@ -4,21 +4,19 @@ ruby "1.9.3"
 
 gem "rails", '~> 3.2.9'
 
-gem 'jquery-rails'
-gem 'bootstrap-datepicker-rails'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
-
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'less-rails-bootstrap'
-
+  gem 'less-rails'
   gem 'uglifier', '>= 1.0.3'
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'therubyracer', platforms: :ruby
 end
+
+gem 'jquery-rails'
+gem 'bootstrap-datepicker-rails'
 
 gem 'mysql2'
 gem 'prawn'
@@ -42,7 +40,7 @@ gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 
 group :production do
-  gem 'exception_notification', require: 'exception_notifier'
+  gem 'exception_notification'
 end
 
 group :development do
