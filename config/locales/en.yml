@@ -1639,16 +1639,6 @@ en:
       mark: ! '*'
       text: required
     'yes': 'Yes'
-  stock_changes:
-    index:
-      change_quantity: Change
-      datetime: Time
-      delivery: Delivery
-      new_quantity: New quantity
-      order: Order
-      reason: Reason
-      stock_changes: Stock quantity changes of ‘%{article_name}’
-      stock_taking: Inventory
   stock_takings:
     create:
       notice: Inventory was created successfully.
@@ -1689,6 +1679,15 @@ en:
       title: Edit stock articles
     form:
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
+    history:
+      change_quantity: Change
+      datetime: Time
+      delivery: Delivery
+      new_quantity: New quantity
+      order: Order
+      reason: Reason
+      stock_changes: Stock quantity changes of ‘%{article_name}’
+      stock_taking: Inventory
     index:
       article:
         article: Article

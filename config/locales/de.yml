@@ -1637,16 +1637,6 @@ de:
       mark: ! '*'
       text: benötigt
     'yes': Ja
-  stock_changes:
-    index:
-      change_quantity: Veränderung
-      datetime: Zeitpunkt
-      delivery: Lieferung
-      new_quantity: Neuer Bestand
-      order: Bestellung
-      reason: Ereignis
-      stock_changes: Verlauf anzeigen für »%{article_name}«
-      stock_taking: Inventur
   stock_takings:
     create:
       notice: Inventur wurde erfolgreich angelegt.
@@ -1687,6 +1677,15 @@ de:
       title: Lagerartikel bearbeiten
     form:
       price_hint: Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.
+    history:
+      change_quantity: Veränderung
+      datetime: Zeitpunkt
+      delivery: Lieferung
+      new_quantity: Neuer Bestand
+      order: Bestellung
+      reason: Ereignis
+      stock_changes: Verlauf anzeigen für »%{article_name}«
+      stock_taking: Inventur
     index:
       article:
         article: Artikel

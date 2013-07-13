@@ -97,7 +97,7 @@ Foodsoft::Application.routes.draw do
         get :fill_new_stock_article_form
       end
       
-      resources :stock_changes, :only => [:index], :to => 'stock_changes'
+      get :history
     end
 
     resources :suppliers do
