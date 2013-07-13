@@ -5,12 +5,12 @@
     var ordergroup = "#{escape_javascript(render('ordergroup'))}"
 
     $(function() {
-      $('a[data-remove-transaction]').live('click', function() {
+      $(document).on('click', 'a[data-remove-transaction]', function() {
         $(this).parents('tr').remove();
         return false;
       });
 
-      $('a[data-add-transaction]').click(function() {
+      $(document).on('click', 'a[data-add-transaction]', function() {
         $('#ordergroups').append(ordergroup);
         newElementsReady();
         return false;

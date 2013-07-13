@@ -9,24 +9,23 @@ gem "rails", '~> 3.2.9'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
+  gem 'less-rails'
+  gem 'uglifier', '>= 1.0.3'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platforms: :ruby
-
-  gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
 gem 'select2-rails', '>= 3.4.0'
 gem 'bootstrap-datepicker-rails'
 
-
 gem 'mysql2'
 gem 'prawn'
 gem 'haml-rails'
 gem 'kaminari'
-gem 'client_side_validations'
 gem 'simple_form'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
 gem 'inherited_resources'
 gem 'localize_input', git: "git://github.com/bennibu/localize_input.git"
 gem 'wikicloth'
@@ -42,7 +41,7 @@ gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 
 group :production do
-  gem 'exception_notification', require: 'exception_notifier'
+  gem 'exception_notification'
 end
 
 group :development do

@@ -1,15 +1,15 @@
 - content_for :javascript do
   :javascript
     $(function() {
-      $('.destroy_stock_change').live('click', function() {
+      $(document).on('click', '.destroy_stock_change', function() {
         $(this).prev('input').val('1').parent().hide();
         return false;
       });
 
-      $('.remove_new_stock_change').live('click', function() {
+      $(document).on('click', '.remove_new_stock_change', function() {
         $(this).parent().remove();
         return false;
-      })
+      });
     });
 
 = simple_form_for [@supplier, @delivery], validate: true do |f|
