@@ -1567,6 +1567,15 @@ nl:
       title: 
     form:
       price_hint: 
+    history:
+      change_quantity: 
+      datetime: 
+      delivery: 
+      new_quantity: 
+      order: 
+      reason: 
+      stock_changes: 
+      stock_taking: 
     index:
       article:
         article: 
@@ -1713,6 +1722,7 @@ nl:
     close: Sluiten
     delete: Verwijder
     edit: Bewerk
+    history: 
     marks:
       close: ! '&times;'
     or_cancel: of annuleren

@@ -1428,7 +1428,7 @@ de:
   sessions:
     logged_in: Angemeldet!
     logged_out: Abgemeldet!
-    login_invalid: 
+    login_invalid: Ungültiger Benutzername oder Passwort
     new:
       forgot_password: Passwort vergessen?
       login: Anmelden
