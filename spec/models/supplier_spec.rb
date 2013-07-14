@@ -10,7 +10,7 @@ describe Supplier do
 
   it 'has valid articles' do
     supplier = FactoryGirl.create :supplier, article_count: true
-    supplier.articles.all.should be_valid
+    supplier.articles.all.each {|a| a.should be_valid }
   end
 
 end
