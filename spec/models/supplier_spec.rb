@@ -8,4 +8,9 @@ describe Supplier do
     supplier2.should_not be_valid
   end
 
+  it 'has valid articles' do
+    supplier = FactoryGirl.create :supplier, article_count: true
+    supplier.articles.all.should be_valid
+  end
+
 end

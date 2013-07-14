@@ -12,7 +12,9 @@ FactoryGirl.define do
     end
 
     after :create do |supplier, evaluator|
-      FactoryGirl.create_list :article, evaluator.article_count, supplier: supplier
+      article_count = evaluator.article_count
+      article_count = rand(1..100) if article_count == true
+      FactoryGirl.create_list :article, article_count, supplier: supplier
     end
   end
 
