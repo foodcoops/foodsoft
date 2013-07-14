@@ -36,3 +36,13 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+module Faker
+  class Unit
+    class << self
+      def unit
+        ['kg', '1L', '100ml', 'piece', 'bunch', '500g'].sample
+      end
+    end
+  end
+end

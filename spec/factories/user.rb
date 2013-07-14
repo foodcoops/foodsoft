@@ -4,8 +4,8 @@ FactoryGirl.define do
 
   factory :user do
     sequence(:nick) { |n| "user#{n}"}
-    first_name 'John'
-    email { "#{nick}@foodcoop.test" }
+    first_name { Faker::Name.first_name }
+    email { Faker::Internet.email }
     password { new_random_password }
 
     factory :admin do
