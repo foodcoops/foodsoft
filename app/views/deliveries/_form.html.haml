@@ -106,7 +106,10 @@
     %tfoot
       %tr
         %th{:colspan => 5}
-          %input#new_stock_article{:style => 'width: 500px;'}
+          - if articles_for_select2(@supplier).empty?
+            = link_to t('.create_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), :remote => true, :class => 'btn'
+          - else
+            %input#new_stock_article{:style => 'width: 500px;'}
     %tbody
       - for article in stock_articles_for_table(@supplier)
         = render :partial => 'stock_article_for_adding', :locals => {:article => article}
