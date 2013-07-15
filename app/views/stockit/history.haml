@@ -1,0 +1,17 @@
+- title t('.stock_changes', :article_name => @stock_article.name)
+
+%table.table.table-hover#stock_changes
+  %thead
+    %tr
+      %th= t '.datetime'
+      %th= t '.reason'
+      %th= t '.change_quantity'
+      %th= t '.new_quantity'
+  %tbody
+    - reversed_history = @stock_article.quantity_history.reverse
+    - @stock_changes.each_with_index do |stock_change, index|
+      %tr
+        %td= l stock_change.created_at
+        %td= link_to_stock_change_reason(stock_change)
+        %td= stock_change.quantity
+        %td= reversed_history[index]
