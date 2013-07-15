@@ -81,6 +81,11 @@ de:
         too_long: ist zu lang (nicht mehr als %{count} Zeichen)
         too_short: ist zu kurz (nicht weniger als %{count} Zeichen)
         wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
+      models:
+        task:
+          attributes:
+            done:
+              exclusion: erledigte Aufgaben können nicht wöchentlich wiederholt werden
       template:
         body: ! 'Bitte überprüfen Sie die folgenden Felder:'
         header:
@@ -1423,7 +1428,7 @@ de:
   sessions:
     logged_in: Angemeldet!
     logged_out: Abgemeldet!
-    login_invalid: 
+    login_invalid: Ungültiger Benutzername oder Passwort
     new:
       forgot_password: Passwort vergessen?
       login: Anmelden
@@ -1626,12 +1631,6 @@ de:
         role_finance: Finanzen
         role_orders: Bestellverwaltung
         role_suppliers: Lieferanten
-        task_description: Beschreibung
-        task_duration: Vor. Dauer in Stunden
-        task_name: Name für Job
-        task_required_users: Benötige Verantwortliche
-        weekday: Wochentag
-        weekly_task: Monatlichen Job definieren?
     'no': Nein
     required:
       mark: ! '*'
@@ -1677,6 +1676,15 @@ de:
       title: Lagerartikel bearbeiten
     form:
       price_hint: Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.
+    history:
+      change_quantity: Veränderung
+      datetime: Zeitpunkt
+      delivery: Lieferung
+      new_quantity: Neuer Bestand
+      order: Bestellung
+      reason: Ereignis
+      stock_changes: Verlauf anzeigen für »%{article_name}«
+      stock_taking: Inventur
     index:
       article:
         article: Artikel
@@ -1756,12 +1764,15 @@ de:
       notice: Aufgabe wurde gelöscht
     edit:
       title: Aufgabe bearbeiten
+      warning_periodic: <strong>Warnung:</strong> Diese Aufgabe ist Teil einer Gruppe von <em>wöchentlichen Aufgaben</em>. Beim Speichern wird sie aus der Gruppe ausgeschlossen und in eine <em>gewöhnliche Aufgabe</em> umgewandelt.
     error_not_found: Keine Arbeitsgruppe gefunden
     form:
       search:
         hint: Nach Nutzerin suchen
         noresult: Keine Nutzerin gefunden
         placeholder: Suche ...
+      submit:
+        periodic: Wöchentliche Aufgabe speichern
     index:
       show_group_tasks: Gruppenaufgaben anzeigen
       title: Aufgaben
@@ -1785,10 +1796,13 @@ de:
       new_task: Neue Aufgabe erstellen
     new:
       title: Neue Aufgabe erstellen
+    repeated: Aufgabe wird wöchentlich wiederholt
     set_done:
       notice: Aufgabenstatus wurde aktualisiert
     show:
       accept_task: Aufgabe übernehmen
+      confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
+      delete_group: Aufgabe und folgende löschen
       due_date: Fälligkeitsdatum
       hours: ! '%{count}h'
       mark_done: Als erledigt markieren
@@ -1796,6 +1810,7 @@ de:
       title: Aufgabe anzeigen
     update:
       notice: Aufgabe wurde aktualisiert
+      notice_converted: Aufgabe wurde aktualisiert und in eine gewöhnliche Aufgabe umgewandelt
     user:
       more: Nichts zu tun? %{tasks_link} gibt es bestimmt Arbeit
       tasks_link: Hier
@@ -1805,11 +1820,6 @@ de:
     workgroup:
       title: Aufgaben für %{workgroup}
       title_all: Alle Aufgaben der Gruppe
-      weekly:
-        desc: ! '<p>Jeden <b>%{weekday}</b> hat diese Arbeitsgruppe folgenden Job: <b>%{task}</b></p> <p>Die Wochenaufgaben werden von der Foodsoft automatisch erstellt. Eintragen müsst Ihr Euch aber selber.</p>'
-        edit: Wöchentliche Aufgaben anpassen
-        empty: Noch keine Wochenaufgaben angelegt.
-        title: Wöchentliche Aufgaben
   time:
     am: vormittags
     formats:
@@ -1821,6 +1831,7 @@ de:
     close: Schließen
     delete: Löschen
     edit: Bearbeiten
+    history: Verlauf anzeigen
     marks:
       close: ! '&times;'
     or_cancel: oder abbrechen

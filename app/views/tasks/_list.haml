@@ -2,6 +2,7 @@
   %thead
     %tr
       %th= t '.due_date'
+      %th
       %th= t '.task'
       %th{:colspan => '2'}
         = t '.who'
@@ -11,6 +12,9 @@
       - done = task.done ? " done" : ""
       %tr{:class => done }
         %td= format_date(task.due_date) unless task.due_date.nil?
+        %td
+          - if task.periodic?
+            %i.icon-repeat{title: t('tasks.repeated')}
         %td= link_to t('.task_format', name: task.name, duration: task.duration), task_path(task)
         %td
           = task_assignments task

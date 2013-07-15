@@ -29,7 +29,10 @@
           - if order.stockit?
             %td= units
           - else
-            %td= "#{order_article.quantity} + #{order_article.tolerance}" if unit_quantity > 1
+            - if unit_quantity > 1 or order_article.tolerance > 0
+              %td= "#{order_article.quantity} + #{order_article.tolerance}"
+            - else
+              %td= "#{order_article.quantity}"
             %td= units
 %p
   = t '.prices_sum'
