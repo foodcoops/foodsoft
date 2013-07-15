@@ -3,7 +3,7 @@ require 'factory_girl'
 FactoryGirl.define do
 
   factory :supplier do
-    name { Faker::Company.name }
+    name { Faker::Company.name.truncate(30) }
     phone { Faker::PhoneNumber.phone_number }
     address { Faker::Address.street_address }
 

@@ -32,10 +32,6 @@ describe User do
     it 'can not authenticate with incorrect password' do
       User.authenticate(user.nick, 'foobar').should be_nil
     end
-    it 'can not set a password without confirmation' do
-      user.password = 'abcdefghij'
-      user.should_not be_valid
-    end
     it 'can not set a password without matching confirmation' do
       user.password = 'abcdefghij'
       user.password_confirmation = 'foobarxyz'
