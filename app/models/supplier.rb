@@ -80,10 +80,10 @@ class Supplier < ActiveRecord::Base
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
-    id = new_record? ? nil : self.id
-    supplier = Supplier.where('suppliers.id != ? AND suppliers.name = ?', id, name).first
-    if supplier.present?
-      message = supplier.deleted? ? :taken_with_deleted : :taken
+    supplier = Supplier.where('suppliers.name = ?', name)
+    supplier = supplier.where('suppliers.id != ?', self.id) unless new_record?
+    if supplier.exists?
+      message = supplier.first.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message
     end
   end

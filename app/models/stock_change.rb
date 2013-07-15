@@ -1,6 +1,7 @@
 class StockChange < ActiveRecord::Base
   belongs_to :delivery
   belongs_to :order
+  belongs_to :stock_taking
   belongs_to :stock_article
 
   validates_presence_of :stock_article_id, :quantity

@@ -55,4 +55,9 @@ class StockitController < ApplicationController
 
     render :partial => 'form', :locals => {:stock_article => stock_article}
   end
+  
+  def history
+    @stock_article = StockArticle.undeleted.find(params[:stock_article_id])
+    @stock_changes = @stock_article.stock_changes.order('stock_changes.created_at DESC').each {|s| s.readonly!}
+  end
 end
