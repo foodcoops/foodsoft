@@ -94,11 +94,10 @@
   = f.association :supplier, :as => :hidden
   
   %h2= t '.title_select_stock_articles'
-  %table.table.table-hover#stock_articles_for_adding
+  %table#stock_articles_for_adding.table.table-hover.stupidtable
     %thead
       %tr
-        %th.dom-sort-triggerer.default-sort{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
-          = t '.article'
+        %th.default-sort{:data => {:sort => 'string'}}= t '.article'
         %th= t '.price'
         %th= t '.unit'
         %th= t '.category'
@@ -115,11 +114,10 @@
         = render :partial => 'stock_article_for_adding', :locals => {:article => article}
     
   %h2= t '.title_fill_quantities'
-  %table.table#stock_changes
+  %table.table#stock_changes.stupidtable
     %thead
       %tr
-        %th.dom-sort-triggerer.default-sort{:data => {'compare-function' => 'compareText', 'sort-criterion' => 'sort-by-name'}}
-          = t '.article'
+        %th.default-sort{:data => {:sort => 'string'}}= t '.article'
         %th= t '.price'
         %th= t '.unit'
         %th= t '.quantity'
