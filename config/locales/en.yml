@@ -1783,6 +1783,9 @@ en:
       title: Edit task
       warning_periodic: <strong>Warning:</strong> This task is part of a group of <em>weekly tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>.
     error_not_found: No workgroup found
+    form:
+      submit:
+        periodic: Save weekly task
     index:
       show_group_tasks: Show group tasks
       title: Tasks

@@ -10,15 +10,12 @@ body {
 @iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
 
 // Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not 
-//       have the proper paths. So for now we use the absolute path.
-@fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
-@fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
-@fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
-@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
-
-// Font Awesome
-@import "fontawesome";
+@fontAwesomeEotPath: asset-url('fontawesome-webfont.eot');
+@fontAwesomeEotPath_iefix: asset-url('fontawesome-webfont.eot?#iefix');
+@fontAwesomeWoffPath: asset-url('fontawesome-webfont.woff');
+@fontAwesomeTtfPath: asset-url('fontawesome-webfont.ttf');
+@fontAwesomeSvgPath: asset-url('fontawesome-webfont.svg#fontawesomeregular');
+@import 'fontawesome/font-awesome';
 
 // Your custom LESS stylesheets goes here
 //
@@ -222,10 +219,13 @@ tr.unavailable {
 
 // somehow select2 miscalculates its width; this width fits in forms
 .select2-container {
-  width: 224px;
+  width: 219px;
 }
 // a bit more space for multi-select values
 .select2-container.select2-container-multi {
   width: 400px;
+}
+.select2-container.input-small {
+  width: inherit;
 }
  

@@ -1664,6 +1664,9 @@ nl:
       title: 
       warning_periodic: 
     error_not_found: 
+    form:
+      submit:
+        periodic:
     index:
       show_group_tasks: 
       title: 

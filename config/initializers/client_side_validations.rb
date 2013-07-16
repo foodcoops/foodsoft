@@ -1,7 +1,15 @@
 # ClientSideValidations Initializer
 
-require 'client_side_validations/simple_form' if defined?(::SimpleForm)
-require 'client_side_validations/formtastic' if defined?(::Formtastic)
+# Uncomment to disable uniqueness validator, possible security issue
+#  Disabled because of possible security issue and because of bug
+#  https://github.com/bcardarella/client_side_validations/pull/532
+ClientSideValidations::Config.disabled_validators = [:uniqueness]
+
+# Uncomment to validate number format with current I18n locale
+#  Foodsoft is currently using localize_input which is activated on certain
+#  fields only, meaning we can't globally turn this on. The non-i18n number
+#  format is still supported - so for now keep false.
+# ClientSideValidations::Config.number_format_with_locale = true
 
 # Uncomment the following block if you want each input field to have the validation messages attached.
 # ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|

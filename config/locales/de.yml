@@ -1764,6 +1764,9 @@ de:
       title: Aufgabe bearbeiten
       warning_periodic: <strong>Warnung:</strong> Diese Aufgabe ist Teil einer Gruppe von <em>wöchentlichen Aufgaben</em>. Beim Speichern wird sie aus der Gruppe ausgeschlossen und in eine <em>gewöhnliche Aufgabe</em> umgewandelt.
     error_not_found: Keine Arbeitsgruppe gefunden
+    form:
+      submit:
+        periodic: Wöchentliche Aufgabe speichern
     index:
       show_group_tasks: Gruppenaufgaben anzeigen
       title: Aufgaben
