@@ -133,6 +133,13 @@ function newElementsReady() {
 
     // Use select2 for selects, except those with css class 'plain'
     $('select').not('.plain').select2({dropdownAutoWidth: true, width: 'off'});
+
+    // Enable client side form validations - cannot be done too early
+    //   this needs the 'focusin' event (instead of 'focus') because of
+    //   bubbling - http://stackoverflow.com/questions/9577971
+    $('form[data-validate]').one('focusin', function() {
+      $(this).enableClientSideValidations();
+    });
 }
 
 // select2 jQuery function with remote capabilities
