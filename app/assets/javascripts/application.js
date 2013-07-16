@@ -128,12 +128,12 @@ function updateSort(table) {
 
 // gives the row an yellow background
 function highlightRow(checkbox) {
-  var row = checkbox.closest('tr');
-  if (checkbox.is(':checked')) {
-    row.addClass('selected');
-  } else {
-    row.removeClass('selected');
-  }
+    var row = checkbox.closest('tr');
+    if (checkbox.is(':checked')) {
+      row.addClass('selected');
+    } else {
+      row.removeClass('selected');
+    }
 }
 
 // Use with auto_complete to set a unique id,
