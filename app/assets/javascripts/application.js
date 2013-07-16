@@ -130,9 +130,9 @@ function updateSort(table) {
 function highlightRow(checkbox) {
     var row = checkbox.closest('tr');
     if (checkbox.is(':checked')) {
-      row.addClass('selected');
+        row.addClass('selected');
     } else {
-      row.removeClass('selected');
+        row.removeClass('selected');
     }
 }
 
