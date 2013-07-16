@@ -1426,7 +1426,7 @@ de:
   sessions:
     logged_in: Angemeldet!
     logged_out: Abgemeldet!
-    login_invalid: 
+    login_invalid: Ungültiger Benutzername oder Passwort
     new:
       forgot_password: Passwort vergessen?
       login: Anmelden
@@ -1674,6 +1674,15 @@ de:
       title: Lagerartikel bearbeiten
     form:
       price_hint: Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.
+    history:
+      change_quantity: Veränderung
+      datetime: Zeitpunkt
+      delivery: Lieferung
+      new_quantity: Neuer Bestand
+      order: Bestellung
+      reason: Ereignis
+      stock_changes: Verlauf anzeigen für »%{article_name}«
+      stock_taking: Inventur
     index:
       article:
         article: Artikel
@@ -1813,6 +1822,7 @@ de:
     close: Schließen
     delete: Löschen
     edit: Bearbeiten
+    history: Verlauf anzeigen
     marks:
       close: ! '&times;'
     or_cancel: oder abbrechen

@@ -10,3 +10,10 @@ class String
     end
   end
 end
+
+class Array
+  def cumulative_sum
+    csum = 0
+    self.map{|val| csum += val}
+  end
+end
