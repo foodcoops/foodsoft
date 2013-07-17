@@ -84,7 +84,8 @@
       $('[data-toggle~="tooltip"]', context).tooltip({
         animation: false,
         html: true,
-        placement: 'left'
+        placement: 'left',
+        container: 'body' // or they become a cell in the table
       });
     }
 
