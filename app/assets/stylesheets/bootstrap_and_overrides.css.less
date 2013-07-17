@@ -35,6 +35,22 @@ body {
     dd { .clearfix(); }
 }
 
+// Do not use additional margin for input in table
+.form-horizontal .control-group.control-group-intable,
+.form-horizontal .controls.controls-intable {
+  margin: 0;
+}
+
+// Light tooltips without empty space below tables
+.tooltip-inner {
+  color: #000;
+  background-color: rgb(245,245,245);
+  border: 1px solid #ccc;
+}
+.tooltip-inner .table {
+  margin-bottom: 0;
+}
+
 @mainRedColor: #ED0606;
 
 .logo {

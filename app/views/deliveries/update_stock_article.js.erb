@@ -1,0 +1,33 @@
+$('div.container-fluid').prepend(
+  '<%= j(render(:partial => 'shared/alert_success', :locals => {:alert_message => t('.notice', :name => @stock_article.name)})) %>'
+);
+
+(function() {
+  // update entry in stock_article table
+  
+  $('#stock_articles_for_adding tr').removeClass('success');
+  
+  var stock_article_for_adding = $(
+    '<%= j(render(:partial => 'stock_article_for_adding', :locals => {:article => @stock_article, :delivery => @delivery})) %>'
+  ).addClass('success');
+  enablePriceTooltips(stock_article_for_adding);
+  
+  $('#stock_article_<%= @stock_article.id %>').replaceWith(stock_article_for_adding);
+  updateSort('#stock_articles_for_adding');
+  
+  mark_article_for_delivery(<%= @stock_article.id %>);
+  
+  // update entry in stock_changes table
+  
+  $('#stock_changes tr').removeClass('success');
+  
+  var stock_change_entry = $('#stock_change_stock_article_<%= @stock_article.id %>');
+  $('.stock_article_name', stock_change_entry).text('<%= j(@stock_article.name) %>');
+  $('.unit', stock_change_entry).text('<%= j(@stock_article.unit) %>');
+  
+  stock_change_entry.addClass('success');
+  
+  updateSort('#stock_changes');
+})();
+
+$('#modalContainer').modal('hide');

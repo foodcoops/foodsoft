@@ -212,6 +212,9 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    select2-rails (3.4.3)
+      sass-rails
+      thor (~> 0.14)
     simple-navigation (3.11.0)
       activesupport (>= 2.3.2)
     simple-navigation-bootstrap (1.0.0)
@@ -299,6 +302,7 @@ DEPENDENCIES
   resque
   ruby-prof
   sass-rails (~> 3.2.3)
+  select2-rails
   simple-navigation
   simple-navigation-bootstrap
   simple_form
