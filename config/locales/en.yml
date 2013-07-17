@@ -39,6 +39,8 @@ en:
         article_category: article category
         availability: Is article available?
         deposit: deposit
+        fc_price: FC price
+        fc_share: FC share
         gross_price: gross price
         price: price
         tax: VAT
@@ -423,20 +425,28 @@ en:
       second: seconds
       year: years
   deliveries:
+    add_stock_change:
+      how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
+    create_stock_article:
+      notice: The new stock article »%{name}« was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
-      title: Edit suppliers
+      title: Edit delivery
     form:
-      add_article: Add stock article to delivery
-      new_article:
-        search: Search for articles in the <i>%{supplier}</i> catalogue
-        title: Create new stock article
-      note_new_article: When an article is not yet in the inventory, you have to %{new_link} it first.
-      note_new_article_link: create
-      remove_article: Remove article from delivery
+      actions: Tasks
+      article: Article
+      category: Category
+      copy_order_article: Copy order article
+      new_stock_article: Create new stock article
+      price: Netprice
+      quantity: Quantity
+      title_fill_quantities: 2. Set delivery quantities
+      title_finish_delivery: 3. Finish delivery
+      title_select_stock_articles: 1. Select stock articles
+      unit: Unit
     index:
       confirm_delete: Are you sure?
       new_delivery: ! 'Create new delivery for %{supplier} '
@@ -456,11 +466,19 @@ en:
       title: Show delivery
       title_articles: Article
       unit: Unit
-    stock_change:
-      remove_article: Remove articles from delivery
+    stock_article_for_adding:
+      action_add_to_delivery: 'Add to delivery'
+      action_edit: 'Edit'
+      action_other_price: 'Copy'
+    stock_article_form:
+      copy_stock_article: 'Lagerartikel kopieren'
+    stock_change_fields:
+      remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
     update:
       notice: Delivery was updated.
+    update_stock_article:
+      notice: The stock article »%{name}« was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
@@ -1153,6 +1171,8 @@ en:
       subject: ! 'Subject:'
       title: Show message
   model:
+    delivery:
+      each_stock_article_must_be_unique: Each stock article must not be listed more than once.
     membership:
       no_admin_delete: Membership can not be withdrawn as you are the last administrator.
     order_article:
@@ -1517,6 +1537,10 @@ en:
         update_current_price: Also update the price of the current order
       stock_article:
         supplier: 
+        copy_stock_article:
+          name: Please modify
+        edit_stock_article:
+          price: ! '<ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>'
       supplier:
         min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
       task:
