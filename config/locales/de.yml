@@ -1621,10 +1621,8 @@ de:
           one: Arbeitsgruppe
           other: Arbeitsgruppen
       settings:
-        settings_groups: Einstellungen
         settings_group:
-          profile: Porfil
-          notify: Benachrichtigungen
+          privacy:
           messages: Nachrichten
         profile:
           language: Sprache
