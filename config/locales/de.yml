@@ -39,6 +39,8 @@ de:
         article_category: Kategorie
         availability: Artikel ist verfügbar?
         deposit: Pfand
+        fc_price: Endpreis
+        fc_share: FC-Aufschlag
         gross_price: Bruttopreis
         price: Nettopreis
         tax: MwSt
@@ -421,20 +423,28 @@ de:
       second: Sekunden
       year: Jahr
   deliveries:
+    add_stock_change:
+      how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
     create:
       notice: Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!
+    create_stock_article:
+      notice: Neuer Lagerartikel »%{name}« gespeichert.
     destroy:
       notice: Lieferung wurde gelöscht.
     edit:
       title: Lieferung bearbeiten
     form:
-      add_article: Lagerartikel der Lieferung hinzufügen
-      new_article:
-        search: Suche nach Artikeln aus dem <i>%{supplier}</i> Katalog
-        title: Neuen Lagerartikel anlegen
-      note_new_article: Ist ein Artikel noch nicht in der Lagerverwaltung, muss er erst %{new_link} werden.
-      note_new_article_link: neu angelegt
-      remove_article: Artikel aus Lieferung entfernen
+      actions: Optionen
+      article: Artikel
+      category: Kategorie
+      create_from_blank: Ohne Vorlage anlegen
+      create_stock_article: Lagerartikel anlegen
+      price: Nettopreis
+      quantity: Menge
+      title_fill_quantities: 2. Liefermenge angeben
+      title_finish_delivery: 3. Lieferung abschließen
+      title_select_stock_articles: 1. Lagerartikel auswählen
+      unit: Einheit
     index:
       confirm_delete: Bist Du sicher?
       new_delivery: Neue Lieferung für %{supplier} anlegen
@@ -454,11 +464,19 @@ de:
       title: Lieferung anzeigen
       title_articles: Artikel
       unit: Einheit
-    stock_change:
+    stock_article_for_adding:
+      action_add_to_delivery: Liefern
+      action_edit: Bearbeiten
+      action_other_price: Kopieren
+    stock_article_form:
+      copy_stock_article: Lagerartikel kopieren
+    stock_change_fields:
       remove_article: Artikel aus Lieferung entfernen
     suppliers_overview: Lieferantenübersicht
     update:
       notice: Lieferung wurde aktualisiert.
+    update_stock_article:
+      notice: Lagerartikel »%{name}« aktualisiert.
   documents:
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
@@ -1149,6 +1167,8 @@ de:
       subject: ! 'Betreff:'
       title: Nachricht anzeigen
   model:
+    delivery:
+      each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
     membership:
       no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
     order_article:
@@ -1157,14 +1177,6 @@ de:
       redirect: Weiterleiting auf [[%{title}]]...
     user:
       no_ordergroup: keine Bestellgruppe
-      notify:
-        email_is_public: E-Mail ist für Mitglieder sichtbar
-        name_is_public: Name ist für Mitglieder sichtbar
-        negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
-        order_finished: Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).
-        phone_is_public: Telefon ist für Mitglieder sichtbar
-        send_as_email: Bekomme Nachrichten als Emails.
-        upcoming_tasks: Erinnere mich an anstehende Aufgaben.
   navigation:
     admin:
       home: Übersicht
@@ -1512,6 +1524,10 @@ de:
         units_to_order: Anzahl gelieferter Gebinde
         update_current_price: Ändert auch den Preis für aktuelle Bestellungen
       stock_article:
+        copy_stock_article:
+          name: Bitte ändern
+        edit_stock_article:
+          price: <ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>
         supplier: 
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
@@ -1587,6 +1603,21 @@ de:
       page:
         body: Inhalt
         parent_id: Oberseite
+      settings:
+        messages:
+          send_as_email: Bekomme Nachrichten als Emails.
+        notify:
+          negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
+          order_finished: Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).
+          upcoming_tasks: Erinnere mich an anstehende Aufgaben.
+        profile:
+          email_is_public: E-Mail ist für Mitglieder sichtbar.
+          language: Sprache
+          name_is_public: Name ist für Mitglieder sichtbar.
+          phone_is_public: Telefon ist für Mitglieder sichtbar.
+        settings_group:
+          messages: Nachrichten
+          privacy: Privatsphäre
       stock_article:
         supplier: Lieferant
       supplier:
@@ -1630,6 +1661,13 @@ de:
         role_orders: Bestellverwaltung
         role_suppliers: Lieferanten
     'no': Nein
+    options:
+      settings:
+        profile:
+          language:
+            de: Deutsch
+            en: English
+            nl: Niederländisch
     required:
       mark: ! '*'
       text: benötigt
@@ -1828,7 +1866,9 @@ de:
     history: Verlauf anzeigen
     marks:
       close: ! '&times;'
+      success: <i class="icon icon-ok"></i>
     or_cancel: oder abbrechen
+    please_wait: Bitte warten...
     save: Speichern
     show: Anzeigen
   views:

@@ -1,10 +1,13 @@
 # encoding: utf-8
 class ApplicationController < ActionController::Base
+  include Foodsoft::ControllerExtensions::Locale
+  helper_method :available_locales
 
   protect_from_forgery
-  before_filter :select_language, :select_foodcoop, :authenticate, :store_controller, :items_per_page, :set_redirect_to
+  before_filter  :select_foodcoop, :authenticate, :store_controller, :items_per_page, :set_redirect_to
   after_filter  :remove_controller
 
+  
   # Returns the controller handling the current request.
   def self.current
     Thread.current[:application_controller]
@@ -52,7 +55,7 @@ class ApplicationController < ActionController::Base
     redirect_to login_url, :alert => 'Access denied!'
   end
 
-  private  
+  private
 
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
@@ -167,9 +170,5 @@ class ApplicationController < ActionController::Base
   def default_url_options(options = {})
     {foodcoop: FoodsoftConfig.scope}
   end
-
-  # Used to prevent accidently switching to :en in production mode.
-  def select_language
-    I18n.locale = :de
-  end
+  
 end

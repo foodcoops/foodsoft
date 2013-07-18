@@ -1,14 +1,23 @@
-= simple_form_for stock_article, url: add_stock_article_supplier_deliveries_path(@supplier), remote: true,
-  validate: true do |f|
-  = f.hidden_field :supplier_id
-  = f.input :name
-  = f.input :unit
-  = f.input :note
-  = f.input :price
-  = f.input :tax, :wrapper => :append do
-    = f.input_field :tax
-    %span.add-on %
-    -# untested, because this view is currently not included (?)
-  = f.input :deposit
-  = f.association :article_category
-  = f.submit class: 'btn'
+- url = ( stock_article.new_record? ) ? ( create_stock_article_supplier_deliveries_path(@supplier) ) : ( update_stock_article_supplier_deliveries_path(@supplier) )
+= simple_form_for stock_article, url: url, remote: true, validate: true do |f|
+  = f.association :supplier, :as => :hidden
+  = f.hidden_field :id unless stock_article.new_record?
+  .modal-header
+    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    %h3= t 'activerecord.models.stock_article'
+  .modal-body
+    = f.input :name
+    = f.input :unit
+    = f.input :note
+    - if stock_article.new_record?
+      = f.input :price
+      = f.input :tax, :wrapper => :append do
+        = f.input_field :tax
+        %span.add-on %
+      = f.input :deposit
+    - else
+      = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article)
+    = f.association :article_category
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit :class => 'btn btn-primary', 'data-disable-with' => t('ui.please_wait')

@@ -10,6 +10,7 @@
 //= require rails.validations.simple_form
 //= require_self
 //= require ordering
+//= require stupidtable
 
 // allow touch devices to work on click events
 //   http://stackoverflow.com/a/16221066
@@ -180,6 +181,12 @@ $.fn.extend({
     return $(this).select2(_options);
   }
 });
+
+// retrigger last local table sorting
+function updateSort(table) {
+  $('.sorting-asc, .sorting-desc', table).toggleClass('.sorting-asc .sorting-desc')
+    .removeData('sort-dir').trigger('click'); // CAUTION: removing data field of plugin
+}
 
 // gives the row an yellow background
 function highlightRow(checkbox) {

@@ -183,6 +183,8 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails-settings-cached (0.2.4)
+      rails (>= 3.0.0)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -299,6 +301,7 @@ DEPENDENCIES
   prawn
   quiet_assets
   rails (~> 3.2.9)
+  rails-settings-cached (= 0.2.4)
   resque
   ruby-prof
   sass-rails (~> 3.2.3)
