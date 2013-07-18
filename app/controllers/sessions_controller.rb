@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:nick], params[:password])
     if user
+      session[:locale] = user.locale
       session[:user_id] = user.id
       session[:scope] = FoodsoftConfig.scope  # Save scope in session to not allow switching between foodcoops with one account
       if session[:return_to].present?
