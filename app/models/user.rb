@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def receive_email?
-    settings['messages.send_as_mail'] == "1" && email.present?
+    settings.messages['send_as_email'] == "1" && email.present?
   end
   
   # Sets the user's password. It will be stored encrypted along with a random salt.
