@@ -39,6 +39,8 @@ nl:
         article_category: categorie
         availability: Artikel leverbaar?
         deposit: statiegeld
+        fc_price: 
+        fc_share: 
         gross_price: bruto prijs
         price: netto prijs
         tax: BTW
@@ -421,20 +423,28 @@ nl:
       second: seconden
       year: jaren
   deliveries:
+    add_stock_change:
+      how_many_units: 
     create:
+      notice: 
+    create_stock_article:
       notice: 
     destroy:
       notice: 
     edit:
       title: 
     form:
-      add_article: 
-      new_article:
-        search: 
-        title: 
-      note_new_article: 
-      note_new_article_link: 
-      remove_article: 
+      actions: 
+      article: 
+      category: 
+      create_from_blank: 
+      create_stock_article: 
+      price: 
+      quantity: 
+      title_fill_quantities: 
+      title_finish_delivery: 
+      title_select_stock_articles: 
+      unit: 
     index:
       confirm_delete: 
       new_delivery: 
@@ -454,10 +464,18 @@ nl:
       title: 
       title_articles: 
       unit: 
-    stock_change:
+    stock_article_for_adding:
+      action_add_to_delivery: 
+      action_edit: 
+      action_other_price: 
+    stock_article_form:
+      copy_stock_article: 
+    stock_change_fields:
       remove_article: 
     suppliers_overview: 
     update:
+      notice: 
+    update_stock_article:
       notice: 
   documents:
     order_by_articles:
@@ -1044,6 +1062,8 @@ nl:
       subject: 
       title: 
   model:
+    delivery:
+      each_stock_article_must_be_unique: 
     membership:
       no_admin_delete: 
     order_article:
@@ -1405,6 +1425,10 @@ nl:
         units_to_order: 
         update_current_price: 
       stock_article:
+        copy_stock_article:
+          name: 
+        edit_stock_article:
+          price: 
         supplier: 
       supplier:
         min_order_quantity: 
@@ -1725,7 +1749,9 @@ nl:
     history: 
     marks:
       close: ! '&times;'
+      success: 
     or_cancel: of annuleren
+    please_wait: 
     save: Opslaan
     show: Tonen
   views:

@@ -465,11 +465,11 @@ de:
       title_articles: Artikel
       unit: Einheit
     stock_article_for_adding:
-      action_add_to_delivery: 'Liefern'
-      action_edit: 'Bearbeiten'
-      action_other_price: 'Kopieren'
+      action_add_to_delivery: Liefern
+      action_edit: Bearbeiten
+      action_other_price: Kopieren
     stock_article_form:
-      copy_stock_article: 'Lagerartikel kopieren'
+      copy_stock_article: Lagerartikel kopieren
     stock_change_fields:
       remove_article: Artikel aus Lieferung entfernen
     suppliers_overview: Lieferantenübersicht
@@ -1534,11 +1534,11 @@ de:
         units_to_order: Anzahl gelieferter Gebinde
         update_current_price: Ändert auch den Preis für aktuelle Bestellungen
       stock_article:
-        supplier: 
         copy_stock_article:
           name: Bitte ändern
         edit_stock_article:
-          price: ! '<ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>'
+          price: <ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>
+        supplier: 
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
       task:
@@ -1858,7 +1858,7 @@ de:
     history: Verlauf anzeigen
     marks:
       close: ! '&times;'
-      success: ! '<i class="icon icon-ok"></i>'
+      success: <i class="icon icon-ok"></i>
     or_cancel: oder abbrechen
     please_wait: Bitte warten...
     save: Speichern

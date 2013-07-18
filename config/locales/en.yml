@@ -426,7 +426,7 @@ en:
       year: years
   deliveries:
     add_stock_change:
-      how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
+      how_many_units: ! 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
     create_stock_article:
@@ -439,8 +439,8 @@ en:
       actions: Tasks
       article: Article
       category: Category
-      copy_order_article: Copy order article
-      new_stock_article: Create new stock article
+      create_from_blank: Create new article
+      create_stock_article: Create stock articles
       price: Netprice
       quantity: Quantity
       title_fill_quantities: 2. Set delivery quantities
@@ -467,11 +467,11 @@ en:
       title_articles: Article
       unit: Unit
     stock_article_for_adding:
-      action_add_to_delivery: 'Add to delivery'
-      action_edit: 'Edit'
-      action_other_price: 'Copy'
+      action_add_to_delivery: Add to delivery
+      action_edit: Edit
+      action_other_price: Copy
     stock_article_form:
-      copy_stock_article: 'Lagerartikel kopieren'
+      copy_stock_article: Copy stock article
     stock_change_fields:
       remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
@@ -1536,11 +1536,11 @@ en:
         units_to_order: Amount of delivered units
         update_current_price: Also update the price of the current order
       stock_article:
-        supplier: 
         copy_stock_article:
           name: Please modify
         edit_stock_article:
-          price: ! '<ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>'
+          price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
+        supplier: 
       supplier:
         min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
       task:
@@ -1860,7 +1860,9 @@ en:
     history: Show history
     marks:
       close: ! '&times;'
+      success: <i class="icon icon-ok"></i>
     or_cancel: or cancel
+    please_wait: Please wait...
     save: Save
     show: Show
   views:
