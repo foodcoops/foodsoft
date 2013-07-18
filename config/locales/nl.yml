@@ -1072,14 +1072,6 @@ nl:
       redirect: 
     user:
       no_ordergroup: 
-      notify:
-        email_is_public: 
-        name_is_public: 
-        negative_balance: 
-        order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).
-        phone_is_public: 
-        send_as_email: 
-        upcoming_tasks: 
   navigation:
     admin:
       home: Overzicht
@@ -1504,6 +1496,21 @@ nl:
       page:
         body: 
         parent_id: 
+      settings:
+        messages:
+          send_as_email: Berichten als emails ontvangen.
+        notify:
+          negative_balance: Informeer me wanneer mijn huishouden een negatief saldo krijgt.
+          order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).
+          upcoming_tasks: Herinner me aan aankomende taken.
+        profile:
+          email_is_public: E-mail is zichtbaar voor andere leden.
+          language: Taal
+          name_is_public: Naam is zichtbaar voor andere leden.
+          phone_is_public: Telefoonnummer is zichtbaar voor andere leden.
+        settings_group:
+          messages: Berichten
+          privacy: Privacy
       stock_article:
         supplier: 
       supplier:
@@ -1547,6 +1554,13 @@ nl:
         role_orders: 
         role_suppliers: Leveranciers
     'no': Nee
+    options:
+      settings:
+        profile:
+          language:
+            de: Duits
+            en: Engels
+            nl: Nederlands
     required:
       mark: ! '*'
       text: verplicht

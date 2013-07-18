@@ -1519,12 +1519,6 @@ en:
   simple_form:
     error_notification:
       default_message: Errors were found. Please check the form.
-    options:
-      settings:
-        profile:
-          language:
-            de: German
-            en: English
     hints:
       article:
         unit: ! 'For example: KG or 1L or 500g'
@@ -1613,6 +1607,21 @@ en:
       page:
         body: Body
         parent_id: Parent page
+      settings:
+        messages:
+          send_as_email: Receive messages as emails.
+        notify:
+          negative_balance: Inform me when my order group has a negative balance.
+          order_finished: Inform me about my order result (when the order is closed).
+          upcoming_tasks: Remind me of upcoming tasks.
+        profile:
+          email_is_public: Email is visible for other members.
+          language: Language
+          name_is_public: Name is visible for other members.
+          phone_is_public: Phone number is visible for other members.
+        settings_group:
+          messages: Messages
+          privacy: Privacy
       stock_article:
         supplier: Supplier
       supplier:
@@ -1648,21 +1657,6 @@ en:
         workgroup:
           one: Workgroup
           other: Workgroups
-      settings:
-        settings_group:
-          privacy: Privacy
-          messages: Messages
-        profile:
-          language: Language
-          phone_is_public: Phone number is visible for other members.
-          email_is_public: Email is visible for other members.
-          name_is_public: Name is visible for other members.
-        notify:
-          order_finished: Inform me about my order result (when the order is closed).
-          negative_balance: inform me when my order group has a negative balance.
-          upcoming_tasks: Remind me of upcoming tasks.
-        messages:
-          send_as_email: Receive messages as emails.
       workgroup:
         next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
         role_admin: Administration
@@ -1671,6 +1665,13 @@ en:
         role_orders: Order management
         role_suppliers: Suppliers
     'no': 'No'
+    options:
+      settings:
+        profile:
+          language:
+            de: German
+            en: English
+            nl: Dutch
     required:
       mark: ! '*'
       text: required

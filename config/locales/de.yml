@@ -1517,12 +1517,6 @@ de:
   simple_form:
     error_notification:
       default_message: Fehler wurden gefunden. Bitte das Formular überprüfen.
-    options:
-      settings:
-        profile:
-          language:
-            de: Deutsch
-            en: English
     hints:
       article:
         unit: z.B. KG oder 1L oder 500g
@@ -1611,6 +1605,21 @@ de:
       page:
         body: Inhalt
         parent_id: Oberseite
+      settings:
+        messages:
+          send_as_email: Bekomme Nachrichten als Emails.
+        notify:
+          negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
+          order_finished: Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).
+          upcoming_tasks: Erinnere mich an anstehende Aufgaben.
+        profile:
+          email_is_public: E-Mail ist für Mitglieder sichtbar.
+          language: Sprache
+          name_is_public: Name ist für Mitglieder sichtbar.
+          phone_is_public: Telefon ist für Mitglieder sichtbar.
+        settings_group:
+          messages: Nachrichten
+          privacy: Privatsphäre
       stock_article:
         supplier: Lieferant
       supplier:
@@ -1646,21 +1655,6 @@ de:
         workgroup:
           one: Arbeitsgruppe
           other: Arbeitsgruppen
-      settings:
-        settings_group:
-          privacy: Privatsphäre
-          messages: Nachrichten
-        profile:
-          language: Sprache
-          phone_is_public: Telefon ist für Mitglieder sichtbar
-          email_is_public: E-Mail ist für Mitglieder sichtbar
-          name_is_public: Name ist für Mitglieder sichtbar
-        notify:
-          order_finished: Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).
-          negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
-          upcoming_tasks: Erinnere mich an anstehende Aufgaben.
-        messages:
-          send_as_email: Bekomme Nachrichten als Emails.
       workgroup:
         next_weekly_tasks_number: Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?
         role_admin: Administration
@@ -1669,6 +1663,13 @@ de:
         role_orders: Bestellverwaltung
         role_suppliers: Lieferanten
     'no': Nein
+    options:
+      settings:
+        profile:
+          language:
+            de: Deutsch
+            en: English
+            nl: Niederländisch
     required:
       mark: ! '*'
       text: benötigt
