@@ -1622,7 +1622,7 @@ de:
           other: Arbeitsgruppen
       settings:
         settings_group:
-          privacy:
+          privacy: Privatsphäre
           messages: Nachrichten
         profile:
           language: Sprache
