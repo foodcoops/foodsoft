@@ -426,7 +426,7 @@ en:
       year: years
   deliveries:
     add_stock_change:
-      how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
+      how_many_units: ! 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
     create_stock_article:
@@ -439,8 +439,8 @@ en:
       actions: Tasks
       article: Article
       category: Category
-      copy_order_article: Copy order article
-      new_stock_article: Create new stock article
+      create_from_blank: Create new article
+      create_stock_article: Create stock articles
       price: Netprice
       quantity: Quantity
       title_fill_quantities: 2. Set delivery quantities
@@ -467,11 +467,11 @@ en:
       title_articles: Article
       unit: Unit
     stock_article_for_adding:
-      action_add_to_delivery: 'Add to delivery'
-      action_edit: 'Edit'
-      action_other_price: 'Copy'
+      action_add_to_delivery: Add to delivery
+      action_edit: Edit
+      action_other_price: Copy
     stock_article_form:
-      copy_stock_article: 'Lagerartikel kopieren'
+      copy_stock_article: Copy stock article
     stock_change_fields:
       remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
@@ -1181,14 +1181,6 @@ en:
       redirect: Redirect to [[%{title}]]...
     user:
       no_ordergroup: no order group
-      notify:
-        email_is_public: Email is visible for other members.
-        name_is_public: Name is visible for other members.
-        negative_balance: inform me when by order group has a negative balance.
-        order_finished: Inform me about my order result (when the order is closed).
-        phone_is_public: Phone number is visible for other members.
-        send_as_email: Receive messages as emails.
-        upcoming_tasks: Remind me of upcoming tasks.
   navigation:
     admin:
       home: Overview
@@ -1536,11 +1528,11 @@ en:
         units_to_order: Amount of delivered units
         update_current_price: Also update the price of the current order
       stock_article:
-        supplier: 
         copy_stock_article:
           name: Please modify
         edit_stock_article:
-          price: ! '<ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>'
+          price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
+        supplier: 
       supplier:
         min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
       task:
@@ -1615,6 +1607,21 @@ en:
       page:
         body: Body
         parent_id: Parent page
+      settings:
+        messages:
+          send_as_email: Receive messages as emails.
+        notify:
+          negative_balance: Inform me when my order group has a negative balance.
+          order_finished: Inform me about my order result (when the order is closed).
+          upcoming_tasks: Remind me of upcoming tasks.
+        profile:
+          email_is_public: Email is visible for other members.
+          language: Language
+          name_is_public: Name is visible for other members.
+          phone_is_public: Phone number is visible for other members.
+        settings_group:
+          messages: Messages
+          privacy: Privacy
       stock_article:
         supplier: Supplier
       supplier:
@@ -1658,6 +1665,13 @@ en:
         role_orders: Order management
         role_suppliers: Suppliers
     'no': 'No'
+    options:
+      settings:
+        profile:
+          language:
+            de: German
+            en: English
+            nl: Dutch
     required:
       mark: ! '*'
       text: required
@@ -1860,7 +1874,9 @@ en:
     history: Show history
     marks:
       close: ! '&times;'
+      success: <i class="icon icon-ok"></i>
     or_cancel: or cancel
+    please_wait: Please wait...
     save: Save
     show: Show
   views:

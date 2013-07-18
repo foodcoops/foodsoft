@@ -8,6 +8,7 @@ Foodsoft::Application.routes.draw do
 
   root :to => redirect("/#{FoodsoftConfig.scope}")
 
+
   scope '/:foodcoop' do
 
     # Root path
@@ -187,7 +188,7 @@ Foodsoft::Application.routes.draw do
     ############## Feedback
 
     resource :feedback, :only => [:new, :create], :controller => 'feedback'
-    
+
     ############## The rest
 
     resources :users, :only => [:index]

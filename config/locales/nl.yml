@@ -39,6 +39,8 @@ nl:
         article_category: categorie
         availability: Artikel leverbaar?
         deposit: statiegeld
+        fc_price: 
+        fc_share: 
         gross_price: bruto prijs
         price: netto prijs
         tax: BTW
@@ -421,20 +423,28 @@ nl:
       second: seconden
       year: jaren
   deliveries:
+    add_stock_change:
+      how_many_units: 
     create:
+      notice: 
+    create_stock_article:
       notice: 
     destroy:
       notice: 
     edit:
       title: 
     form:
-      add_article: 
-      new_article:
-        search: 
-        title: 
-      note_new_article: 
-      note_new_article_link: 
-      remove_article: 
+      actions: 
+      article: 
+      category: 
+      create_from_blank: 
+      create_stock_article: 
+      price: 
+      quantity: 
+      title_fill_quantities: 
+      title_finish_delivery: 
+      title_select_stock_articles: 
+      unit: 
     index:
       confirm_delete: 
       new_delivery: 
@@ -454,10 +464,18 @@ nl:
       title: 
       title_articles: 
       unit: 
-    stock_change:
+    stock_article_for_adding:
+      action_add_to_delivery: 
+      action_edit: 
+      action_other_price: 
+    stock_article_form:
+      copy_stock_article: 
+    stock_change_fields:
       remove_article: 
     suppliers_overview: 
     update:
+      notice: 
+    update_stock_article:
       notice: 
   documents:
     order_by_articles:
@@ -1044,6 +1062,8 @@ nl:
       subject: 
       title: 
   model:
+    delivery:
+      each_stock_article_must_be_unique: 
     membership:
       no_admin_delete: 
     order_article:
@@ -1052,14 +1072,6 @@ nl:
       redirect: 
     user:
       no_ordergroup: 
-      notify:
-        email_is_public: 
-        name_is_public: 
-        negative_balance: 
-        order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).
-        phone_is_public: 
-        send_as_email: 
-        upcoming_tasks: 
   navigation:
     admin:
       home: Overzicht
@@ -1405,6 +1417,10 @@ nl:
         units_to_order: 
         update_current_price: 
       stock_article:
+        copy_stock_article:
+          name: 
+        edit_stock_article:
+          price: 
         supplier: 
       supplier:
         min_order_quantity: 
@@ -1480,6 +1496,21 @@ nl:
       page:
         body: 
         parent_id: 
+      settings:
+        messages:
+          send_as_email: Berichten als emails ontvangen.
+        notify:
+          negative_balance: Informeer me wanneer mijn huishouden een negatief saldo krijgt.
+          order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).
+          upcoming_tasks: Herinner me aan aankomende taken.
+        profile:
+          email_is_public: E-mail is zichtbaar voor andere leden.
+          language: Taal
+          name_is_public: Naam is zichtbaar voor andere leden.
+          phone_is_public: Telefoonnummer is zichtbaar voor andere leden.
+        settings_group:
+          messages: Berichten
+          privacy: Privacy
       stock_article:
         supplier: 
       supplier:
@@ -1523,6 +1554,13 @@ nl:
         role_orders: 
         role_suppliers: Leveranciers
     'no': Nee
+    options:
+      settings:
+        profile:
+          language:
+            de: Duits
+            en: Engels
+            nl: Nederlands
     required:
       mark: ! '*'
       text: verplicht
@@ -1725,7 +1763,9 @@ nl:
     history: 
     marks:
       close: ! '&times;'
+      success: 
     or_cancel: of annuleren
+    please_wait: 
     save: Opslaan
     show: Tonen
   views:
