@@ -9,7 +9,7 @@ describe 'the session', :type => :feature do
       expect(response).to be_success
     end
     it 'logs me in' do
-      login user.nick, user.password
+      login user
       expect(page).to_not have_selector('.alert-error')
     end
     it 'does not log me in with wrong password' do
