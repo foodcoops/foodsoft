@@ -69,6 +69,15 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
+    capybara (2.0.2)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      selenium-webdriver (~> 2.0)
+      xpath (~> 1.0.0)
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.9.0)
     client_side_validations (3.1.4)
     coderay (1.0.8)
@@ -96,6 +105,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.1.2)
       i18n (~> 0.5)
+    ffi (1.4.0)
     haml (3.1.7)
     haml-rails (0.3.5)
       actionpack (>= 3.1, < 4.1)
@@ -153,6 +163,7 @@ GEM
     net-ssh (2.6.7)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    nokogiri (1.5.10)
     pdf-reader (1.2.0)
       Ascii85 (~> 1.0.0)
       hashery (~> 2.0)
@@ -215,11 +226,17 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-rc4 (0.1.5)
+    rubyzip (0.9.9)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    selenium-webdriver (2.31.0)
+      childprocess (>= 0.2.5)
+      multi_json (~> 1.0)
+      rubyzip
+      websocket (~> 1.0.4)
     simple-navigation (3.9.0)
       activesupport (>= 2.3.2)
     simple-navigation-bootstrap (0.0.4)
@@ -264,12 +281,15 @@ GEM
     uniform_notifier (1.1.1)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    websocket (1.0.7)
     whenever (0.8.1)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
     wikicloth (0.8.0)
       builder
       expression_parser
+    xpath (1.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -284,6 +304,7 @@ DEPENDENCIES
   bullet
   capistrano (= 2.13.5)
   capistrano-ext
+  capybara
   client_side_validations
   coffee-rails (~> 3.2.1)
   daemons
