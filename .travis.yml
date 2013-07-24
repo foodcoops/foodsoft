@@ -6,6 +6,7 @@ services:
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+before_script:
   - "bundle exec rake foodsoft:setup:stock_config"
   - 'printf "test:\r\n  adapter:mysql2\r\n  database:foodsoft_test\r\n  username:travis\r\n  encoding:utf8\r\n" >config/database.yml'
 script: bundle exec rake spec
