@@ -32,13 +32,12 @@ describe Article do
   end
 
   it 'keeps a price history' do
-    expect(article.article_prices.count).to eq(1)
+    expect(article.article_prices.all.map(&:price)).to eq([article.price])
     oldprice = article.price
+    sleep 1 # so that the new price really has a later creation time
     article.price += 1
     article.save!
-    expect(article.article_prices.count).to eq(2)
-    expect(article.article_prices[0].price).to eq(article.price)
-    expect(article.article_prices[-1].price).to eq(oldprice)
+    expect(article.article_prices.all.map(&:price)).to eq([article.price, oldprice])
   end
 
 end
