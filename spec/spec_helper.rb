@@ -44,6 +44,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.before(:each) do
+    # include default foodsoft scope in urls, so that *_path works
+    default_url_options[:foodcoop] = FoodsoftConfig.scope
+  end
+
   config.include(SessionHelper)
 end
 
@@ -54,13 +59,5 @@ module Faker
         ['kg', '1L', '100ml', 'piece', 'bunch', '500g'].sample
       end
     end
-  end
-end
-
-# include default foodsoft scope in urls, so that *_path works
-ActionDispatch::Integration::Runner.class_eval do
-  undef default_url_options
-  def default_url_options(options={})
-      {foodcoop: FoodsoftConfig.scope}.merge(options)
   end
 end
