@@ -43,20 +43,6 @@ describe GroupOrderArticle do
       expect(goa.tolerance).to eq(0)
     end
 
-    it 'keeps track of article quantities' do
-      startq = startt = nil
-      for i in 0..6 do
-        goa.group_order_article_quantities.count == i
-        quantity, tolerance = rand(1..100), rand(0..100)
-        goa.update_quantities(quantity, tolerance)
-        startq.nil? and startq = quantity
-        startt.nil? and startt = tolerance
-      end
-      goaq = goa.group_order_article_quantities.last
-      expect(goaq.quantity).to eq(startq)
-      expect(goaq.tolerance).to eq(startt)
-    end
-
   end
 
 end
