@@ -6,18 +6,18 @@ describe GroupOrder do
   let(:order) { FactoryGirl.create(:order, supplier: supplier, article_ids: supplier.articles.map(&:id)).reload }
 
   it 'needs an order' do
-    FactoryGirl.build(:group_order, ordergroup: user.ordergroup).should_not be_valid
+    expect(FactoryGirl.build(:group_order, ordergroup: user.ordergroup)).to be_invalid
   end
 
   it 'needs an ordergroup' do
-    FactoryGirl.build(:group_order, order: order).should_not be_valid
+    expect(FactoryGirl.build(:group_order, order: order)).to be_invalid
   end
 
   describe do
     let(:go) { FactoryGirl.create :group_order, order: order, ordergroup: user.ordergroup }
 
     it 'has zero price initially' do
-      go.price.should == 0
+      expect(go.price).to eq(0)
     end
   end
 
