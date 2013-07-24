@@ -14,35 +14,35 @@ describe 'product distribution', :type => :feature do
       # gruppe a bestellt 2(3), weil sie auf jeden fall was von x bekommen will
       login user_a
       visit new_group_order_path(:order_id => order.id)
-      find("[data-increase_quantity='#{oa.id}']").click
-      find("[data-increase_quantity='#{oa.id}']").click
-      find("[data-increase_tolerance='#{oa.id}']").click
-      find("[data-increase_tolerance='#{oa.id}']").click
-      find("[data-increase_tolerance='#{oa.id}']").click
+      2.times { find("[data-increase_quantity='#{oa.id}']").click }
+      3.times { find("[data-increase_tolerance='#{oa.id}']").click }
       find('input[type=submit]').click
+      expect(page).to have_selector('body')
       # gruppe b bestellt 2(0)
       login user_b
       visit new_group_order_path(:order_id => order.id)
-      find("[data-increase_quantity='#{oa.id}']").click
-      find("[data-increase_quantity='#{oa.id}']").click
+      2.times { find("[data-increase_quantity='#{oa.id}']").click }
       find('input[type=submit]').click
+      expect(page).to have_selector('body')
       # gruppe a faellt ein dass sie doch noch mehr braucht von x und aendert auf 4(1).
       login user_a
       visit edit_group_order_path(order.group_order(user_a.ordergroup), :order_id => order.id)
-      find("[data-increase_quantity='#{oa.id}']").click
-      find("[data-increase_quantity='#{oa.id}']").click
-      find("[data-decrease_tolerance='#{oa.id}']").click
-      find("[data-decrease_tolerance='#{oa.id}']").click
+      2.times { find("[data-increase_quantity='#{oa.id}']").click }
+      2.times { find("[data-decrease_tolerance='#{oa.id}']").click }
+      find('input[type=submit]').click
+      expect(page).to have_selector('body')
       # die zuteilung
-      order.close!(admin)
+      order.finish!(admin)
+      oa.reload
       # Endstand: insg. Bestellt wurden 6(1)
-      expect(oa.result).to == 6
+      expect(oa.quantity).to eq(6)
+      expect(oa.tolerance).to eq(1)
       # Gruppe a bekommt 3 einheiten.
-      goa_a = oa.group_order_articles.where(:ordergroup_id => user_a.ordergroup.id).first
-      expect(goa_a.result).to == 3
+      goa_a = oa.group_order_articles.joins(:group_order).where(:group_orders => {:ordergroup_id => user_a.ordergroup.id}).first
+      expect(goa_a.result).to eq(3)
       # gruppe b bekommt 2 einheiten.
-      goa_b = oa.group_order_articles.where(:ordergroup_id => user_b.ordergroup.id).first
-      expect(goa_b.result).to == 2
+      goa_b = oa.group_order_articles.joins(:group_order).where(:group_orders => {:ordergroup_id => user_b.ordergroup.id}).first
+      expect(goa_b.result).to eq(2)
     end
   end
 

@@ -6,8 +6,6 @@ require 'rspec/autorun'
 
 require 'capybara/rails'
 require 'capybara/rspec'
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -66,9 +64,3 @@ ActionDispatch::Integration::Runner.class_eval do
       {foodcoop: FoodsoftConfig.scope}.merge(options)
   end
 end
-
-# debug driver for tests requiring javascript
-#Capybara.javascript_driver = :poltergeist_debug
-#Capybara.register_driver :poltergeist_debug do |app|
-#  Capybara::Poltergeist::Driver.new(app, :debug => true, :inspector => true)
-#end

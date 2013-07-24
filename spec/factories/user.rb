@@ -27,6 +27,9 @@ FactoryGirl.define do
     factory :ordergroup do
       type 'Ordergroup'
       sequence(:name) {|n| "Order group ##{n}"}
+      # workaround to avoid needing to save the ordergroup
+      #   avoids e.g. error after logging in related to applebar
+      after :create do |group| Ordergroup.find(group.id).update_stats! end
     end
   end
 

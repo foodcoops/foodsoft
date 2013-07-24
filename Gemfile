@@ -71,6 +71,6 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
   gem 'capybara'
-  gem 'poltergeist'
+  # webkit and poltergeist don't seem to work yet
   gem 'database_cleaner'
 end
