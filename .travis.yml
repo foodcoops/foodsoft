@@ -8,5 +8,6 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 before_script:
   - "bundle exec rake foodsoft:setup:stock_config"
+  - "mysql -e 'create database foodsoft_test;'"
   - 'printf "test:\n  adapter: mysql2\n  database: foodsoft_test\n  username: travis\n  encoding: utf8\n" >config/database.yml'
 script: bundle exec rake spec
