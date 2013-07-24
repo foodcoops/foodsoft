@@ -6,6 +6,8 @@ require 'rspec/autorun'
 
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -23,7 +25,15 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  #config.use_transactional_fixtures = true
+  # We use capybara with selenium, and need database_cleaner
+  config.before(:each) do
+    DatabaseCleaner.strategy = (example.metadata[:js] ? :truncation : :transaction)
+    DatabaseCleaner.start
+  end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -57,3 +67,8 @@ ActionDispatch::Integration::Runner.class_eval do
   end
 end
 
+# debug driver for tests requiring javascript
+#Capybara.javascript_driver = :poltergeist_debug
+#Capybara.register_driver :poltergeist_debug do |app|
+#  Capybara::Poltergeist::Driver.new(app, :debug => true, :inspector => true)
+#end
