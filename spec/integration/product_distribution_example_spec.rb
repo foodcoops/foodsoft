@@ -26,6 +26,7 @@ describe 'product distribution', :type => :feature do
       expect(page).to have_selector('body')
       # gruppe a faellt ein dass sie doch noch mehr braucht von x und aendert auf 4(1).
       login user_a
+      order.reload # to make sure all group_order changes are included
       visit edit_group_order_path(order.group_order(user_a.ordergroup), :order_id => order.id)
       2.times { find("[data-increase_quantity='#{oa.id}']").click }
       2.times { find("[data-decrease_tolerance='#{oa.id}']").click }
