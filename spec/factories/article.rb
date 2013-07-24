@@ -3,7 +3,7 @@ require 'factory_girl'
 FactoryGirl.define do
 
   factory :article do
-    name { Faker::Lorem.words(rand(2..5)).join(' ') }
+    sequence(:name) { |n| Faker::Lorem.words(rand(2..4)).join(' ') + " ##{n}" }
     unit { Faker::Unit.unit }
     price { rand(2600) / 100 }
     tax { [6, 21].sample }
@@ -14,7 +14,7 @@ FactoryGirl.define do
   end
 
   factory :article_category do
-    name { Faker::Lorem.characters(rand(2..20)) }
+    sequence(:name) { |n| Faker::Lorem.characters(rand(2..12)) + " ##{n}" }
   end
 
 end
