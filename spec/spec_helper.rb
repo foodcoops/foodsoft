@@ -49,7 +49,7 @@ RSpec.configure do |config|
     default_url_options[:foodcoop] = FoodsoftConfig.scope
   end
 
-  config.include(SessionHelper)
+  config.include SessionHelper
 end
 
 module Faker
