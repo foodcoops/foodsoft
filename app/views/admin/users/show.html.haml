@@ -20,10 +20,10 @@
     .well
       %h4= t '.preference'
       %table.table
-        - for setting in User::setting_keys.keys
+        - @user.settings.profile.each do |key, setting|
           %tr
-            %td= User::setting_keys[setting]
-            %td= @user.settings[setting] == '1' ? t('simple_form.yes') : t('simple_form.no')
+            %td= t("simple_form.labels.settings.profile.#{key}")
+            %td= (setting != true and setting != false) ? setting : (setting === true ? t('simple_form.yes') : t('simple_form.no'))
   .span3
     .well
       %h4= t '.groupabos'

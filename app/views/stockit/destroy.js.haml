@@ -4,11 +4,5 @@ var successDiv = $('<div class="alert fade in alert-success"><a class="close" da
 successDiv.append(document.createTextNode('#{escape_javascript(t('.notice', name: @article.name))}'));
 $('div.container-fluid').prepend(successDiv);
 
--# WARNING: If you try to use the escape j(...) here, an error occurs:
--# Ein Fehler ist aufgetreten: undefined method `gsub' for 50:Fixnum
--# However, it should work without without escaping.
--# Note that article names which are purely numeric, e.g. 12345, are escaped correctly (see above).
-
 $('#stockArticle-#{@article.id}').remove();
-
 -# WARNING: Do not use a simple .fadeOut() above, because it conflicts with the show/hide function of unavailable articles.

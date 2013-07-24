@@ -16,6 +16,7 @@ class HomeController < ApplicationController
 
   def update_profile
     if @current_user.update_attributes(params[:user])
+      session[:locale] = @current_user.locale
       redirect_to my_profile_url, notice: I18n.t('home.changes_saved')
     else
       render :profile

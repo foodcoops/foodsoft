@@ -39,6 +39,8 @@ en:
         article_category: article category
         availability: Is article available?
         deposit: deposit
+        fc_price: FC price
+        fc_share: FC share
         gross_price: gross price
         price: price
         tax: VAT
@@ -423,20 +425,28 @@ en:
       second: seconds
       year: years
   deliveries:
+    add_stock_change:
+      how_many_units: ! 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
+    create_stock_article:
+      notice: The new stock article »%{name}« was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
-      title: Edit suppliers
+      title: Edit delivery
     form:
-      add_article: Add stock article to delivery
-      new_article:
-        search: Search for articles in the <i>%{supplier}</i> catalogue
-        title: Create new stock article
-      note_new_article: When an article is not yet in the inventory, you have to %{new_link} it first.
-      note_new_article_link: create
-      remove_article: Remove article from delivery
+      actions: Tasks
+      article: Article
+      category: Category
+      create_from_blank: Create new article
+      create_stock_article: Create stock articles
+      price: Netprice
+      quantity: Quantity
+      title_fill_quantities: 2. Set delivery quantities
+      title_finish_delivery: 3. Finish delivery
+      title_select_stock_articles: 1. Select stock articles
+      unit: Unit
     index:
       confirm_delete: Are you sure?
       new_delivery: ! 'Create new delivery for %{supplier} '
@@ -456,11 +466,19 @@ en:
       title: Show delivery
       title_articles: Article
       unit: Unit
-    stock_change:
-      remove_article: Remove articles from delivery
+    stock_article_for_adding:
+      action_add_to_delivery: Add to delivery
+      action_edit: Edit
+      action_other_price: Copy
+    stock_article_form:
+      copy_stock_article: Copy stock article
+    stock_change_fields:
+      remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
     update:
       notice: Delivery was updated.
+    update_stock_article:
+      notice: The stock article »%{name}« was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
@@ -1153,6 +1171,8 @@ en:
       subject: ! 'Subject:'
       title: Show message
   model:
+    delivery:
+      each_stock_article_must_be_unique: Each stock article must not be listed more than once.
     membership:
       no_admin_delete: Membership can not be withdrawn as you are the last administrator.
     order_article:
@@ -1161,14 +1181,6 @@ en:
       redirect: Redirect to [[%{title}]]...
     user:
       no_ordergroup: no order group
-      notify:
-        email_is_public: Email is visible for other members.
-        name_is_public: Name is visible for other members.
-        negative_balance: inform me when by order group has a negative balance.
-        order_finished: Inform me about my order result (when the order is closed).
-        phone_is_public: Phone number is visible for other members.
-        send_as_email: Receive messages as emails.
-        upcoming_tasks: Remind me of upcoming tasks.
   navigation:
     admin:
       home: Overview
@@ -1516,6 +1528,10 @@ en:
         units_to_order: Amount of delivered units
         update_current_price: Also update the price of the current order
       stock_article:
+        copy_stock_article:
+          name: Please modify
+        edit_stock_article:
+          price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
         supplier: 
       supplier:
         min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
@@ -1591,6 +1607,21 @@ en:
       page:
         body: Body
         parent_id: Parent page
+      settings:
+        messages:
+          send_as_email: Receive messages as emails.
+        notify:
+          negative_balance: Inform me when my order group has a negative balance.
+          order_finished: Inform me about my order result (when the order is closed).
+          upcoming_tasks: Remind me of upcoming tasks.
+        profile:
+          email_is_public: Email is visible for other members.
+          language: Language
+          name_is_public: Name is visible for other members.
+          phone_is_public: Phone number is visible for other members.
+        settings_group:
+          messages: Messages
+          privacy: Privacy
       stock_article:
         supplier: Supplier
       supplier:
@@ -1634,6 +1665,13 @@ en:
         role_orders: Order management
         role_suppliers: Suppliers
     'no': 'No'
+    options:
+      settings:
+        profile:
+          language:
+            de: German
+            en: English
+            nl: Dutch
     required:
       mark: ! '*'
       text: required
@@ -1836,7 +1874,9 @@ en:
     history: Show history
     marks:
       close: ! '&times;'
+      success: <i class="icon icon-ok"></i>
     or_cancel: or cancel
+    please_wait: Please wait...
     save: Save
     show: Show
   views:

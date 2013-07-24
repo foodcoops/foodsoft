@@ -55,10 +55,10 @@ fi
 sed -i "s|^\\(\\s*gem\\s\\+'sqlite3'\\)|#\1|" Gemfile
 sed -i "s|^\\(\\s*sqlite3\\b\)|#\1|" Gemfile.lock
 # make sure postgresql db is present, as it is the default heroku db
-echo "\ngem 'pg'" >>Gemfile
-echo "\ngem 'localeapp'" >>Gemfile
+echo $'\ngem "pg"' >>Gemfile
+echo $'\ngem "localeapp"' >>Gemfile
 # always use unicorn
-echo "\ngem 'unicorn'" >>Gemfile
+echo $'\ngem "unicorn"' >>Gemfile
 echo 'web: bundle exec unicorn -p $PORT -E $RACK_ENV' >Procfile
 bundle install --quiet # to update Gemfile.lock
 # do not ignore deployment files

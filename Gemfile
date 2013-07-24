@@ -17,6 +17,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
 
 
@@ -36,7 +37,7 @@ gem 'simple-navigation-bootstrap'
 gem 'meta_search'
 gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git' # Use this instead of rubygem
 gem 'acts_as_tree'
-gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git'
+gem "rails-settings-cached", "0.2.4"
 gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 
@@ -51,7 +52,8 @@ group :development do
   # Better error output
   gem 'better_errors'
   gem 'binding_of_caller'
-
+  # gem "rails-i18n-debug"
+  
   # Get infos when not using proper eager loading
   gem 'bullet'
 
@@ -67,6 +69,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'ruby-prof'
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
@@ -74,3 +77,6 @@ group :development, :test do
   # webkit and poltergeist don't seem to work yet
   gem 'database_cleaner'
 end
+
+# Gems left for backwards compatibility
+gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git' # user settings migration needs it

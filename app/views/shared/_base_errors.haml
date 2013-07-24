@@ -1,0 +1,5 @@
+.alert.alert-error.alert-block
+  %a.close{:href => '#', :data => {:dismiss => 'alert'}}
+    = t('ui.marks.close').html_safe
+  %ul
+    = error_messages.html_safe

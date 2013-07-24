@@ -158,5 +158,13 @@ module ApplicationHelper
     end
     flash_messages.join("\n").html_safe
   end
+  
+  # render base errors in a form after failed validation
+  # http://railsapps.github.io/twitter-bootstrap-rails.html
+  def base_errors resource
+    return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
+    messages = resource.errors[:base].map { |msg| content_tag(:li, msg) }.join
+    render :partial => 'shared/base_errors', :locals => {:error_messages => messages}
+  end
 
 end
