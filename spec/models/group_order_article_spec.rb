@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe GroupOrderArticle do
   let(:user) { FactoryGirl.create :user, groups: [FactoryGirl.create(:ordergroup)] }
-  let(:supplier) { FactoryGirl.create :supplier, article_count: true }
-  let(:order) { FactoryGirl.create(:order, supplier: supplier, article_ids: supplier.articles.map(&:id)).reload }
+  let(:order) { FactoryGirl.create(:order).reload }
   let(:go) { FactoryGirl.create :group_order, order: order, ordergroup: user.ordergroup }
   let(:goa) { FactoryGirl.create :group_order_article, group_order: go, order_article: order.order_articles.first }
 
@@ -14,8 +13,9 @@ describe GroupOrderArticle do
   it 'has zero total price by default' do expect(goa.total_price).to eq(0) end
 
   describe do
-    let(:article) { FactoryGirl.create :article, supplier: supplier, unit_quantity: 1 }
-    let(:goa) { article; FactoryGirl.create :group_order_article, group_order: go, order_article: order.order_articles.find_by_article_id(article.id) }
+    let(:article) { FactoryGirl.create :article, supplier: order.supplier, unit_quantity: 1 }
+    let(:oa) { order.order_articles.create(:article => article) }
+    let(:goa) { FactoryGirl.create :group_order_article, group_order: go, order_article: oa }
 
     it 'can be ordered by piece' do
       goa.update_quantities(1, 0)

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Order do
 
   it 'needs a supplier' do
-    expect(FactoryGirl.build(:order)).to be_invalid
+    expect(FactoryGirl.build(:order, supplier: nil)).to be_invalid
   end
 
   it 'needs order articles' do
@@ -12,13 +12,11 @@ describe Order do
   end
 
   it 'can be created' do
-    supplier = FactoryGirl.create :supplier, article_count: 1
-    expect(FactoryGirl.build(:order, supplier: supplier, article_ids: supplier.articles.map(&:id))).to be_valid
+    expect(FactoryGirl.build(:order, article_count: 1)).to be_valid
   end
 
   describe 'with articles' do
-    let(:supplier) { FactoryGirl.create :supplier, article_count: true }
-    let(:order) { FactoryGirl.create(:order, supplier: supplier, article_ids: supplier.articles.map(&:id)).reload }
+    let(:order) { FactoryGirl.create :order }
 
     it 'is open by default'         do expect(order).to be_open end
     it 'is not finished by default' do expect(order).to_not be_finished end

@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe GroupOrder do
   let(:user) { FactoryGirl.create :user, groups: [FactoryGirl.create(:ordergroup)] }
-  let(:supplier) { FactoryGirl.create :supplier, article_count: true }
-  let(:order) { FactoryGirl.create(:order, supplier: supplier, article_ids: supplier.articles.map(&:id)).reload }
+  let(:order) { FactoryGirl.create :order }
 
   # the following two tests are currently disabled - https://github.com/foodcoops/foodsoft/issues/158
 
