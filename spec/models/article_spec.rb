@@ -21,8 +21,12 @@ describe Article do
     expect(article.gross_price).to be >= article.price
   end
 
-  it 'fc-price > gross price' do
-    expect(article.fc_price).to be > article.gross_price
+  it 'fc-price >= gross price' do
+    if article.gross_price > 0
+      expect(article.fc_price).to be > article.gross_price
+    else
+      expect(article.fc_price).to be >= article.gross_price
+    end
   end
 
   it 'knows when it is deleted' do
