@@ -24,20 +24,20 @@ describe GroupOrderArticle do
     end
 
     it 'can be ordered in larger amounts' do
-      quantity, tolerance = rand(13..100), rand(0..100)
+      quantity, tolerance = rand(13..99), rand(0..99)
       goa.update_quantities(quantity, tolerance)
       expect(goa.quantity).to eq(quantity)
       expect(goa.tolerance).to eq(tolerance)
     end
 
     it 'has a proper total price' do
-      quantity = rand(1..100)
+      quantity = rand(1..99)
       goa.update_quantities(quantity, 0)
       expect(goa.total_price).to eq(quantity * goa.order_article.price.fc_price)
     end
 
     it 'can unorder a product' do
-      goa.update_quantities(rand(1..100), rand(0..100))
+      goa.update_quantities(rand(1..99), rand(0..99))
       goa.update_quantities(0, 0)
       expect(goa.quantity).to eq(0)
       expect(goa.tolerance).to eq(0)
