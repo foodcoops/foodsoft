@@ -76,6 +76,7 @@ group :development, :test do
   gem 'capybara'
   # webkit and poltergeist don't seem to work yet
   gem 'database_cleaner'
+  gem 'simplecov', require: false
 end
 
 # Gems left for backwards compatibility
