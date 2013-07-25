@@ -2,8 +2,9 @@ require 'factory_girl'
 
 FactoryGirl.define do
 
-  # requires order and ordergroup
+  # requires order
   factory :group_order do
+    ordergroup { FactoryGirl.create(:user, groups: [FactoryGirl.create(:ordergroup)]).ordergroup }
   end
 
 end
