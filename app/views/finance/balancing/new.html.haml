@@ -12,7 +12,7 @@
   .well.well-small
     %h3= t('.notes_and_journal')
     #note
-      - unless @order.note.empty?
+      - unless @order.note.blank?
         = simple_format @order.note
       - else
         %p= t('.comment_on_transaction') 
