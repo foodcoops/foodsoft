@@ -8,6 +8,7 @@
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.de
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.nl
 //= require jquery.observe_field
+//= require list.min
 //= require rails.validations
 //= require_self
 //= require ordering
