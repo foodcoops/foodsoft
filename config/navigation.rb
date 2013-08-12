@@ -26,6 +26,7 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :admin_home, I18n.t('navigation.admin.home'), admin_root_path
       subnav.item :users, I18n.t('navigation.admin.users'), admin_users_path, id: nil
       subnav.item :ordergroups, I18n.t('navigation.admin.ordergroups'), admin_ordergroups_path, id: nil
+      subnav.item :workgroups, I18n.t('navigation.admin.workgroups'), admin_workgroups_path, id: nil
    end
 
     primary.item :others, 'Other', '#', id: nil  do |subnav|
