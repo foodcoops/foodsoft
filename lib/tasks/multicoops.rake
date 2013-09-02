@@ -1,17 +1,21 @@
+# This namespace is used for a collection of tasks to maintain a hosting environment with multiple foodcoops
+# This tasks are a kind of wrapper for other tasks. The wrapper makes sure, that the appropriate database and config
+# for each foodcoop is used.
+
 namespace :multicoops do
 
-  desc 'Runs a specific rake task for each registered foodcoop, use rake multicoops:run db:migrate'
+  desc 'Runs a specific rake task for each registered foodcoop, use rake multicoops:run TASK=db:migrate'
   task :run => :environment do
-    task_to_run = ARGV[1]
+    task_to_run = ENV['TASK']
     FoodsoftConfig.each_coop do |coop|
       puts "Run '#{task_to_run}' for #{coop}"
       Rake::Task[task_to_run].execute
     end
   end
 
-  desc 'Runs a specific rake task for a single coop, use rake mutlicoops:run_single db:migrate FOODCOOP=demo'
+  desc 'Runs a specific rake task for a single coop, use rake mutlicoops:run_single TASK=db:migrate FOODCOOP=demo'
   task :run_single => :environment do
-    task_to_run = ARGV[1]
+    task_to_run = ENV['TASK']
     FoodsoftConfig.select_foodcoop ENV['FOODCOOP']
     puts "Run '#{task_to_run}' for #{ENV['FOODCOOP']}"
     Rake::Task[task_to_run].execute
