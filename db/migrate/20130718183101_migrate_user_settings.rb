@@ -1,6 +1,13 @@
 class MigrateUserSettings < ActiveRecord::Migration
   def up
     say_with_time 'Save old user settings in new RailsSettings module' do
+
+      # Allow setting default locale via env parameter
+      # This is used, when setting users language settings
+      default_locale = I18n.default_locale
+      tmp_locale = ENV['DEFAULT_LOCALE'].present? ? ENV['DEFAULT_LOCALE'].to_sym : default_locale
+      I18n.default_locale = tmp_locale
+
       old_settings = ConfigurableSetting.all
 
       old_settings.each do |old_setting|
@@ -33,6 +40,8 @@ class MigrateUserSettings < ActiveRecord::Migration
         # save the user to apply after_save callback
         user.save
       end
+
+      I18n.default_locale = default_locale
     end
 
     drop_table :configurable_settings
