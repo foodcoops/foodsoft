@@ -7,8 +7,8 @@ class SharedArticle < ActiveRecord::Base
 
   belongs_to :shared_supplier, :foreign_key => :supplier_id
 
-  def build_new_article
-    shared_supplier.supplier.articles.build(
+  def build_new_article(supplier)
+    supplier.articles.build(
         :name => name,
         :unit => unit,
         :note => note,
