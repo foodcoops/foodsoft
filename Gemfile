@@ -71,7 +71,3 @@ group :development do
   # Avoid having content-length warnings
   gem 'thin'
 end
-
-# Gems left for backwards compatibility
-gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git' # user settings migration needs it
-
