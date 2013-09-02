@@ -1772,6 +1772,7 @@ de:
     shared_suppliers:
       body: <p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>
       subscribe: abonnieren
+      subscribe_again: erneut abonnieren
       supplier: Lieferantin
       title: Externe Listen
     show:
