@@ -36,7 +36,7 @@ class MoveWeeklyTasks < ActiveRecord::Migration
 private
   def weekly_task?(workgroup, task)
     return false if task.due_date.nil?
-    
+
     group_task = {
       weekday: workgroup.weekday,
       name: workgroup.task_name,
