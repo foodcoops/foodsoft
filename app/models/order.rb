@@ -59,6 +59,11 @@ class Order < ActiveRecord::Base
     @article_ids ||= order_articles.map { |a| a.article_id.to_s }
   end
 
+  # Returns an array of article ids that lead to a validation error.
+  def erroneous_article_ids
+    @erroneous_article_ids ||= []
+  end
+
   def open?
     state == "open"
   end
@@ -207,12 +212,6 @@ class Order < ActiveRecord::Base
     update_attributes! state: 'closed', updated_by: user
   end
 
-  def articles_to_be_removed_and_ordered
-    chosen_order_articles = order_articles.find_all_by_article_id(article_ids)
-    to_be_removed = order_articles - chosen_order_articles
-    to_be_removed.select { |a| a.quantity > 0 or a.tolerance > 0 }
-  end
-
   protected
 
   def starts_before_ends
@@ -224,8 +223,12 @@ class Order < ActiveRecord::Base
   end
 
   def keep_ordered_articles
-    unless articles_to_be_removed_and_ordered.empty?
+    chosen_order_articles = order_articles.find_all_by_article_id(article_ids)
+    to_be_removed = order_articles - chosen_order_articles
+    to_be_removed_but_ordered = to_be_removed.select { |a| a.quantity > 0 or a.tolerance > 0 }
+    unless to_be_removed_but_ordered.empty?
       errors.add(:articles, "Die markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht. Bei Lagerbestellungen kann dies je nach Verwendung bedeuten, dass bereits gekaufte Artikel nicht abgerechnet werden!")
+      @erroneous_article_ids = to_be_removed_but_ordered.map { |a| a.article_id }
     end
   end
 
