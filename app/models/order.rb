@@ -17,6 +17,7 @@ class Order < ActiveRecord::Base
   # Validations
   validates_presence_of :starts
   validate :starts_before_ends, :include_articles
+  validate :keep_ordered_articles
 
   # Callbacks
   after_save :save_order_articles, :update_price_of_group_orders
@@ -55,7 +56,7 @@ class Order < ActiveRecord::Base
   end
 
   def article_ids
-    @article_ids ||= order_articles.map(&:article_id)
+    @article_ids ||= order_articles.map { |a| a.article_id.to_s }
   end
 
   def open?
@@ -206,6 +207,12 @@ class Order < ActiveRecord::Base
     update_attributes! state: 'closed', updated_by: user
   end
 
+  def articles_to_be_removed_and_ordered
+    chosen_order_articles = order_articles.find_all_by_article_id(article_ids)
+    to_be_removed = order_articles - chosen_order_articles
+    to_be_removed.select { |a| a.quantity > 0 or a.tolerance > 0 }
+  end
+
   protected
 
   def starts_before_ends
@@ -216,17 +223,13 @@ class Order < ActiveRecord::Base
     errors.add(:articles, I18n.t('articles.model.error_nosel')) if article_ids.empty?
   end
 
+  def keep_ordered_articles
+    unless articles_to_be_removed_and_ordered.empty?
+      errors.add(:articles, "Die markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht. Bei Lagerbestellungen kann dies je nach Verwendung bedeuten, dass bereits gekaufte Artikel nicht abgerechnet werden!")
+    end
+  end
+
   def save_order_articles
-    #self.articles = Article.find(article_ids) # This doesn't deletes the group_order_articles, belonging to order_articles,
-    #                                          # see http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#method-i-has_many
-    #
-    ## Ensure to delete also the group_order_articles, belonging to order_articles
-    ## This case is relevant, when removing articles from a running order
-    #goa_ids = GroupOrderArticle.where(group_order_id: group_order_ids).includes(:order_article).
-    #    select { |goa| goa.order_article.nil? }.map(&:id)
-    #GroupOrderArticle.delete_all(id: goa_ids) unless goa_ids.empty?
-
-
     # fetch selected articles
     articles_list = Article.find(article_ids)
     # create new order_articles

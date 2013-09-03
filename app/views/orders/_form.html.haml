@@ -27,9 +27,14 @@
           = category_name
           %i.icon-tag
       - for article in articles
-        / check if the article is selected
-        - included = @order.article_ids.include?(article.id)
-        - included_class = included ? ' selected' : ''
+        / check if the article is selected or has an error
+        - included = @order.article_ids.include?(article.id.to_s)
+        - if included
+          - included_class = 'selected'
+        - elsif @order.errors.has_key?(:articles) and @order.articles_to_be_removed_and_ordered.map{|a| a.article_id}.include?(article.id)
+          - included_class = 'error'
+        - else
+          - included_class = ''
         %tr{:class => included_class, :id => article.id.to_s }
           %td= check_box_tag "order[article_ids][]", article.id, included, :id => "checkbox_#{article.id}"
           %td.click-me{'data-check-this' => "#checkbox_#{article.id}"}= article.name
