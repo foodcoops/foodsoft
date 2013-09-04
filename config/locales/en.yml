@@ -1299,6 +1299,7 @@ en:
     finish:
       notice: The order has been closed.
     form:
+      ignore_warnings: Ignore warnings
       name: Name
       note: Note
       origin: Origin
@@ -1326,6 +1327,7 @@ en:
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: ! 'Order: %{name}, until %{ends}'
       stock: Stock
+      warning_ordered: 'Warning: Articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted. In case of stock orders this might mean that already bought articles will not be accounted for!'
     new:
       title: Create new order
     orders:

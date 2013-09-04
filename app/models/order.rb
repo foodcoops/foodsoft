@@ -2,6 +2,8 @@
 #
 class Order < ActiveRecord::Base
 
+  attr_accessor :ignore_warnings
+
   # Associations
   has_many :order_articles, :dependent => :destroy
   has_many :articles, :through => :order_articles
@@ -215,19 +217,19 @@ class Order < ActiveRecord::Base
   protected
 
   def starts_before_ends
-    errors.add(:ends, I18n.t('articles.model.error_starts_before_ends')) if (ends && starts && ends <= starts)
+    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if (ends && starts && ends <= starts)
   end
 
   def include_articles
-    errors.add(:articles, I18n.t('articles.model.error_nosel')) if article_ids.empty?
+    errors.add(:articles, I18n.t('orders.model.error_nosel')) if article_ids.empty?
   end
 
   def keep_ordered_articles
     chosen_order_articles = order_articles.find_all_by_article_id(article_ids)
     to_be_removed = order_articles - chosen_order_articles
     to_be_removed_but_ordered = to_be_removed.select { |a| a.quantity > 0 or a.tolerance > 0 }
-    unless to_be_removed_but_ordered.empty?
-      errors.add(:articles, "Die markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht. Bei Lagerbestellungen kann dies je nach Verwendung bedeuten, dass bereits gekaufte Artikel nicht abgerechnet werden!")
+    unless to_be_removed_but_ordered.empty? or ignore_warnings
+      errors.add(:articles, I18n.t('orders.model.warning_ordered'))
       @erroneous_article_ids = to_be_removed_but_ordered.map { |a| a.article_id }
     end
   end

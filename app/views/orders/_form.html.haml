@@ -56,3 +56,7 @@
   .form-actions
     = f.submit class: 'btn'
     = link_to t('ui.or_cancel'), orders_path
+    - unless @order.erroneous_article_ids.empty?
+      &nbsp;
+      = check_box_tag 'order[ignore_warnings]'
+      = t '.ignore_warnings'

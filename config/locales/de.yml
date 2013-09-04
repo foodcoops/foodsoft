@@ -1297,6 +1297,7 @@ de:
     finish:
       notice: Die Bestellung wurde beendet.
     form:
+      ignore_warnings: Warnungen ignorieren
       name: Name
       note: Notiz
       origin: Herkunft
@@ -1324,6 +1325,7 @@ de:
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: ! 'Bestellung: %{name}, bis %{ends}'
       stock: Lager
+      warning_ordered: 'Warnung: Die rot markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht. Bei Lagerbestellungen kann dies je nach Verwendung bedeuten, dass bereits gekaufte Artikel nicht abgerechnet werden!'
     new:
       title: Neue Bestellung anlegen
     orders:
