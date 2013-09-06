@@ -13,11 +13,9 @@ class Supplier < ActiveRecord::Base
                   :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
 
   validates :name, :presence => true, :length => { :in => 4..30 }
-  validates :phone, :presence => true, :length => { :in => 8..20 }
+  validates :phone, :presence => true, :length => { :in => 8..25 }
   validates :address, :presence => true, :length => { :in => 8..50 }
   validates_length_of :order_howto, :note, maximum: 250
-  validates_length_of :phone, :in => 8..20
-  validates_length_of :address, :in => 8..50
   validate :uniqueness_of_name
 
   scope :undeleted, -> { where(deleted_at: nil) }
