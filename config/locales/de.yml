@@ -1669,6 +1669,7 @@ de:
           language:
             de: Deutsch
             en: English
+            fr: Französisch
             nl: Niederländisch
     required:
       mark: ! '*'

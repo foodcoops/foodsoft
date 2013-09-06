@@ -1671,6 +1671,7 @@ en:
           language:
             de: German
             en: English
+            fr: French
             nl: Dutch
     required:
       mark: ! '*'

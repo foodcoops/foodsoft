@@ -1560,6 +1560,7 @@ nl:
           language:
             de: Duits
             en: Engels
+            fr: Frans
             nl: Nederlands
     required:
       mark: ! '*'
