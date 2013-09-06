@@ -5,13 +5,6 @@ GIT
     localize_input (0.1.0)
 
 GIT
-  remote: git://github.com/bwalding/acts_as_configurable.git
-  revision: cdf6f6f979019275b523d10684b748f08e2dd8e8
-  specs:
-    acts_as_configurable (0.0.1)
-      rake
-
-GIT
   remote: git://github.com/technoweenie/acts_as_versioned.git
   revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
   specs:
@@ -310,7 +303,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_configurable!
   acts_as_tree
   acts_as_versioned!
   better_errors

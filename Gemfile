@@ -85,6 +85,3 @@ group :test do
   gem 'rspec-expectations'
   gem 'i18n-spec'
 end
-
-# Gems left for backwards compatibility
-gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git' # user settings migration needs it

@@ -236,7 +236,7 @@ en:
       option_available: Make articles available
       option_delete: Delete article
       option_not_available: Make articles unavailable
-      option_select: Choose special offer ...
+      option_select: Select action ...
       price_netto: Price
       unit_quantity_desc: Unit quantity
       unit_quantity_short: Quantity
@@ -440,7 +440,7 @@ en:
       article: Article
       category: Category
       create_from_blank: Create new article
-      create_stock_article: Create stock articles
+      create_stock_article: Create stock article
       price: Netprice
       quantity: Quantity
       title_fill_quantities: 2. Set delivery quantities
@@ -1671,6 +1671,7 @@ en:
           language:
             de: German
             en: English
+            fr: French
             nl: Dutch
     required:
       mark: ! '*'
@@ -1774,6 +1775,7 @@ en:
     shared_suppliers:
       body: <p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>
       subscribe: Subscribe
+      subscribe_again: Subscribe again
       supplier: Supplier
       title: External lists
     show:

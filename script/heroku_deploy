@@ -55,12 +55,16 @@ fi
 sed -i "s|^\\(\\s*gem\\s\\+'sqlite3'\\)|#\1|" Gemfile
 sed -i "s|^\\(\\s*sqlite3\\b\)|#\1|" Gemfile.lock
 # make sure postgresql db is present, as it is the default heroku db
-echo $'\ngem "pg"' >>Gemfile
-echo $'\ngem "localeapp"' >>Gemfile
+echo "
+gem 'pg'" >>Gemfile
 # always use unicorn
-echo $'\ngem "unicorn"' >>Gemfile
+echo "
+gem 'unicorn'" >>Gemfile
 echo 'web: bundle exec unicorn -p $PORT -E $RACK_ENV' >Procfile
-bundle install --quiet # to update Gemfile.lock
+# don't complain when mail cannot be sent, 
+# XXX when you're hosting a production instance, use a real smtp server instead
+sed -i 's|\(#\s*\)\?\(config\.action_mailer\.raise_delivery_errors\)\s*=.*|\2 = false|' config/environments/${RAILS_ENV}.rb
+sed -i 's|\(#\s*\)\?\(config\.action_mailer\.delivery_method\)\s*=.*|\2 = :smtp|' config/environments/${RAILS_ENV}.rb
 # do not ignore deployment files
 sed -i 's|^\(config/\*.yml\)|#\1|' .gitignore
 sed -i 's|^\(config/initializers/secret_token.rb\)|#\1|' .gitignore
@@ -92,9 +96,13 @@ Localeapp.configure do |config|
   config.polling_environments = ['$RAILS_ENV']
 end
 EOF
+	echo "
+gem 'localeapp'" >>Gemfile
 	# also do not cache so we get locale updates
-	sed -i 's|config\.cache_classes\s*=.*|config.cache_classes = false|' config/environments/${RAILS_ENV}.rb
+	sed -i 's|\(#\s*\)\?\(config\.cache_classes\)\s*=.*|\2 = false|' config/environments/${RAILS_ENV}.rb
 fi
+# update Gemfile.lock after Gemfile updates (required by heroku)
+bundle install --quiet
 # TODO add more extensive database seed
 
 # and push = deploy

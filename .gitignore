@@ -16,3 +16,4 @@ doc/app/
 Capfile
 config/deploy.rb
 config/deploy/*
+.localeapp
