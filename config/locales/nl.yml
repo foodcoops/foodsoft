@@ -499,12 +499,15 @@ nl:
     order_fax:
       filename: Bestelling %{name}-%{date} - Fax
       rows: ! '[]'
+      total: Totaal
     order_matrix:
-      filename: 
-      heading: 
+      filename: Bestelling %{name}-%{date} - Sorteermatrix
+      heading: Artikeloverzicht
       rows: 
-      title: 
-      total: 
+      title: ! 'Sorteermatrix van bestelling: %{name}, gesloten op %{date}'
+      total:
+        one: In totaal éen artikel
+        other: In totaal %{count} artikelen
   errors:
     format: 
     general: Er is een probleem opgetreden.

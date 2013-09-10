@@ -511,6 +511,7 @@ fr:
       - Nombre de lots
       - Unité
       - Prix unitaire
+      total: 
     order_matrix:
       filename: Commande %{name}-%{date} - Tableau de répartition
       heading: Liste des articles
@@ -1874,7 +1875,7 @@ fr:
       notice_converted: Le boulot a été converti en boulot ordinaire (sans répétition).
     user:
       more: ! 'Tu t''ennuies en ce moment? Il y aura sûrement du boulot pour toi %{tasks_link}. '
-      tasks_link: par là-bas.
+      tasks_link: par là-bas
       title: Ton boulot
       title_accepted: Boulots acceptés
       title_open: Boulots disponibles

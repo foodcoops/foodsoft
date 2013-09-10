@@ -519,7 +519,9 @@ en:
       - FC-Price
       - Amount
       title: ! 'Order sorting matrix: %{name}, closed at %{date}'
-      total: ! '%{count} articles in total'
+      total:
+        one: One article in total
+        other: ! '%{count} articles in total'
   errors:
     format: ! '%{attribute} %{message}'
     general: A problem has occured.
