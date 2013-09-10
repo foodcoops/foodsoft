@@ -1,0 +1,14 @@
+language: ruby
+rvm: 
+  - 1.9.3
+services:
+  - redis-server
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+before_script:
+  - "bundle exec rake foodsoft:setup:stock_config"
+  - "mysql -e 'create database foodsoft_test;'"
+  - 'printf "test:\n  adapter: mysql2\n  database: foodsoft_test\n  username: travis\n  encoding: utf8\n" >config/database.yml'
+  - 'bundle exec rake db:schema:load RAILS_ENV=test'
+script: bundle exec rake spec
