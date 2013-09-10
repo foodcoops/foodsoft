@@ -68,7 +68,7 @@
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
             %td.name
-              - if order_article.article.info_url
+              - unless order_article.article.info_url.blank?
                 = link_to order_article.article.info_url, target: '_blank' do
                   %i.icon-info-sign
               - else

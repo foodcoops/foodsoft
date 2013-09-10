@@ -84,6 +84,7 @@ class Supplier < ActiveRecord::Base
   # use %{column} substitution for article fields in url template
   def article_info_url(article=nil)
     self[:article_info_url].nil? and return nil
+    self[:article_info_url].blank? and return nil
     article.nil? and return self[:article_info_url]
     self[:article_info_url].gsub /%{.*?}/ do |n|
       n = n[2..-2]
