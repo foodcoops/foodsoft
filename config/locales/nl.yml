@@ -479,17 +479,26 @@ nl:
       notice: 
   documents:
     order_by_articles:
-      filename: 
-      rows: 
-      title: 
+      filename: Bestelling %{name}-%{date} - Artikellijst
+      rows:
+      - Huishouden
+      - Hoeveelheid
+      - Prijs
+      title: ! 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
     order_by_groups:
-      filename: 
-      rows: 
-      sum: 
-      title: 
+      filename: Bestelling %{name}-%{date} - Huishoudenslijst
+      rows:
+      - Artikel
+      - Hoeveelheid
+      - Prijs
+      - Gr.Eenh.
+      - Eenheid
+      - Som
+      sum: Som
+      title: ! 'Huishoudenslijst van bestelling: %{name}, gesloten op %{date}'
     order_fax:
-      filename: 
-      rows: 
+      filename: Bestelling %{name}-%{date} - Fax
+      rows: ! '[]'
     order_matrix:
       filename: 
       heading: 
@@ -498,29 +507,29 @@ nl:
       total: 
   errors:
     format: 
-    general: 
+    general: Er is een probleem opgetreden.
     general_again: 
-    general_msg: 
+    general_msg: ! 'Er is een probleem opgetreden: %{msg}'
     messages:
-      accepted: 
-      blank: 
+      accepted: moet geaccepteerd worden
+      blank: moet ingevuld worden
       confirmation: 
-      empty: 
-      equal_to: 
+      empty: moet ingevuld worden
+      equal_to: moet precies %{count} zijn
       even: 
-      exclusion: 
-      greater_than: 
+      exclusion: moet even zijn
+      greater_than: moet groter dan %{count} zijn
       greater_than_or_equal_to: 
       inclusion: 
       invalid: 
-      less_than: 
-      less_than_or_equal_to: 
-      not_a_number: 
-      not_an_integer: 
-      odd: 
+      less_than: moet kleiner dan %{count} zijn
+      less_than_or_equal_to: moet groter of gelijk aan %{count} zijn
+      not_a_number: is geen getal
+      not_an_integer: moet een geheel getal zijn
+      odd: moet oneven zijn
       record_invalid: 
-      taken: 
-      taken_with_deleted: 
+      taken: is al in gebruik
+      taken_with_deleted: is al in gebruik (verwijderde groep)
       too_long: 
       too_short: 
       wrong_length: 
@@ -697,6 +706,7 @@ nl:
       ordergroups:
         account_balance: Tegoed
         account_statement: 
+        contact: 
         name: Naam
         new_transaction: Nieuwe transactie
     update:
@@ -1493,6 +1503,7 @@ nl:
         contact_person: Contactpersoon
         contact_phone: Telefoon
         ignore_apple_restriction: 
+        name: 
       page:
         body: 
         parent_id: 
@@ -1634,6 +1645,7 @@ nl:
       show_stock_takings: 
       stock_count: 
       stock_worth: 
+      title: 
       toggle_unavailable: 
       view_options: 
     new:
@@ -1725,6 +1737,7 @@ nl:
       group_tasks: 
       my_tasks: 
       new_task: 
+      pages: 
     new:
       title: 
     repeated: 
@@ -1765,9 +1778,9 @@ nl:
     history: 
     marks:
       close: ! '&times;'
-      success: 
+      success: <i class="icon icon-ok"></i>
     or_cancel: of annuleren
-    please_wait: 
+    please_wait: Een moment alstublieft...
     save: Opslaan
     show: Tonen
   views:

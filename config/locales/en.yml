@@ -721,6 +721,7 @@ en:
       ordergroups:
         account_balance: Account balance
         account_statement: Account statement
+        contact: Contact
         name: Name
         new_transaction: New transaction
     update:
@@ -1604,6 +1605,7 @@ en:
         contact_person: Contact person
         contact_phone: Phone
         ignore_apple_restriction: Ignore order stop by apple points restriction
+        name: Name
       page:
         body: Body
         parent_id: Parent page
@@ -1745,6 +1747,7 @@ en:
       show_stock_takings: Inventory overview
       stock_count: ! 'Number of articles:'
       stock_worth: ! 'Current stock value:'
+      title: Stock (%{article_count})
       toggle_unavailable: Show/hide unavailable articles
       view_options: View options
     new:
@@ -1836,6 +1839,7 @@ en:
       group_tasks: Group tasks
       my_tasks: My tasks
       new_task: Create new task
+      pages: Pages
     new:
       title: Create new tasks
     repeated: Task is repeated weekly

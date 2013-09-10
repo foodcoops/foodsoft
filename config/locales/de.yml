@@ -1832,12 +1832,12 @@ de:
       who: Wer machts?
       who_hint: (Wie viele werden noch benötigt?)
     nav:
-      pages: Seiten
       all_tasks: Alle Aufgaben
       archive: Erledigte Aufgaben (Archiv)
       group_tasks: Gruppenaufgaben
       my_tasks: Meine Aufgaben
       new_task: Neue Aufgabe erstellen
+      pages: Seiten
     new:
       title: Neue Aufgabe erstellen
     repeated: Aufgabe wird wöchentlich wiederholt
@@ -1856,7 +1856,6 @@ de:
       notice: Aufgabe wurde aktualisiert
       notice_converted: Aufgabe wurde aktualisiert und in eine gewöhnliche Aufgabe umgewandelt
     user:
-      title: Meine Aufgaben
       more: Nichts zu tun? %{tasks_link} gibt es bestimmt Arbeit
       tasks_link: Hier
       title: Meine Aufgaben
