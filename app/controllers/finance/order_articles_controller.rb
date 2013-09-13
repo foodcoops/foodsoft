@@ -42,6 +42,14 @@ class Finance::OrderArticlesController < ApplicationController
 
   def destroy
     @order_article = OrderArticle.find(params[:id])
-    @order_article.destroy
+    # only destroy if there are no associated GroupOrders; if we would, the requested
+    # quantity and tolerance would be gone. Instead of destroying, we set all result
+    # quantities to zero.
+    if @order_article.group_order_articles.count == 0
+      @order_article.destroy
+    else
+      @order_article.group_order_articles.each { |goa| goa.update_attribute(:result, 0) }
+      @order_article.update_results!
+    end
   end
 end
