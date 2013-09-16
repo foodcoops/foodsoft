@@ -13,7 +13,7 @@
       %th= t '.unit'
       %th= t '.price'
 
-  - for group_order in order.group_orders.all
+  - for group_order in order.group_orders.ordered
     %thead
       %tr
         %th{:colspan => "7"}

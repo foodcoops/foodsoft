@@ -14,7 +14,7 @@ class OrderByArticles < OrderPdf
     @order.order_articles.ordered.each do |order_article|
       rows = []
       dimrows = []
-      for goa in order_article.group_order_articles
+      for goa in order_article.group_order_articles.ordered
         rows << [goa.group_order.ordergroup.name,
                   "#{goa.quantity} + #{goa.tolerance}",
                  goa.result,

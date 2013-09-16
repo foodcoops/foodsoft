@@ -12,7 +12,7 @@ class OrderByGroups < OrderPdf
 
   def body
     # Start rendering
-    @order.group_orders.each do |group_order|
+    @order.group_orders.ordered.each do |group_order|
       total = 0
       rows = []
       dimrows = []

@@ -15,7 +15,7 @@
           = order_article.article.name
           = "(#{order_article.article.unit} | #{order_article.price.unit_quantity} | #{number_to_currency(order_article.price.gross_price)})"
     %tbody
-      - for goa in order_article.group_order_articles
+      - for goa in order_article.group_order_articles.ordered
         %tr{:class => [cycle('even', 'odd', :name => 'groups'), if goa.result == 0 then 'unavailable' end]}
           %td{:style => "width:70%"}=h goa.group_order.ordergroup.name
           %td= "#{goa.quantity} + #{goa.tolerance}"
