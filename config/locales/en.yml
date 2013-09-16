@@ -484,14 +484,16 @@ en:
       filename: Order %{name}-%{date} - by articles
       rows:
       - Order group
-      - Amount
+      - Ordered
+      - Received
       - Price
       title: ! 'Order sorted by articles: %{name}, closed at %{date}'
     order_by_groups:
       filename: Order %{name}-%{date} - by group
       rows:
       - Article
-      - Amount
+      - Ordered
+      - Received
       - Price
       - Unit quantity
       - Unit
@@ -1457,11 +1459,14 @@ en:
       title: Foodsoft login
       user: User
   shared:
+    articles:
+      ordered: Ordered
+      ordered_desc: Number of articles as ordered by member (amount + tolerance)
+      received: Received
+      received_desc: Number of articles that (will be) received by member
     articles_by_articles:
-      ordered: Ordered (Amount + Tolerance)
       ordergroup: Ordergroup
       price: Total price
-      received: Received
     articles_by_groups:
       fc_price: FC-Price
       fc_price_desc: Price including taxes, deposit and Foodcoop-charge
@@ -1470,8 +1475,6 @@ en:
       unit: Unit
       unit_quantity: Lot quantity
       unit_quantity_desc: How many units per lot.
-      units: Amount
-      units_desc: Assigned units
     group:
       access: Access to
       activated: activated

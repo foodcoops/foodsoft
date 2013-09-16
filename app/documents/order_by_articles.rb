@@ -12,20 +12,29 @@ class OrderByArticles < OrderPdf
 
   def body
     @order.order_articles.ordered.each do |order_article|
-      text "#{order_article.article.name} (#{order_article.article.unit} | #{order_article.price.unit_quantity.to_s} | #{number_with_precision(order_article.price.fc_price, precision: 2)})",
-           style: :bold, size: 10
       rows = []
-      rows << I18n.t('documents.order_by_articles.rows')
+      dimrows = []
       for goa in order_article.group_order_articles
         rows << [goa.group_order.ordergroup.name,
+                  "#{goa.quantity} + #{goa.tolerance}",
                  goa.result,
                  number_with_precision(order_article.price.fc_price * goa.result, precision: 2)]
+        dimrows << rows.length if goa.result == 0
       end
+      next if rows.length == 0
+      rows.unshift I18n.t('documents.order_by_articles.rows') # table header
 
-      table rows, column_widths: [200,40,40], cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
-        table.columns(1..2).align = :right
+      text "#{order_article.article.name} (#{order_article.article.unit} | #{order_article.price.unit_quantity.to_s} | #{number_with_precision(order_article.price.fc_price, precision: 2)})",
+           style: :bold, size: 10
+      table rows, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+        table.column(0).width = 200
+        table.columns(1..3).align = :right
+        table.column(2).font_style = :bold
         table.cells.border_width = 1
         table.cells.border_color = '666666'
+        table.rows(0).border_bottom_width = 2
+        # dim rows which were ordered but not received
+        dimrows.each { |ri| table.row(ri).text_color = '999999' }
       end
       move_down 10
     end

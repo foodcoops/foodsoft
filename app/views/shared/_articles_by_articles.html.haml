@@ -2,8 +2,10 @@
   %thead
     %tr
       %th{:style => 'width:70%'}= t '.ordergroup'
-      %th= t '.ordered'
-      %th= t '.received'
+      %th
+        %acronym{:title => t('shared.articles.ordered_desc')}= t 'shared.articles.ordered'
+      %th
+        %acronym{:title => t('shared.articles.received_desc')}= t 'shared.articles.received'
       %th= t '.price'
 
   - for order_article in order.order_articles.ordered.all(:include => [:article, :article_price])
@@ -14,7 +16,7 @@
           = "(#{order_article.article.unit} | #{order_article.price.unit_quantity} | #{number_to_currency(order_article.price.gross_price)})"
     %tbody
       - for goa in order_article.group_order_articles
-        %tr{:class => cycle('even', 'odd', :name => 'groups')}
+        %tr{:class => [cycle('even', 'odd', :name => 'groups'), if goa.result == 0 then 'unavailable' end]}
           %td{:style => "width:70%"}=h goa.group_order.ordergroup.name
           %td= "#{goa.quantity} + #{goa.tolerance}"
           %td

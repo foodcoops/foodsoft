@@ -14,7 +14,7 @@ class GroupOrderArticle < ActiveRecord::Base
   validates_inclusion_of :tolerance, :in => 0..99
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
 
-  scope :ordered, :conditions => 'result > 0'
+  scope :ordered, :conditions => 'result > 0 OR quantity > 0 OR tolerance > 0'
 
   localize_input_of :result
 
