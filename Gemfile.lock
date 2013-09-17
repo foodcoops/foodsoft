@@ -333,7 +333,7 @@ DEPENDENCIES
   quiet_assets
   rails (~> 3.2.9)
   rails-settings-cached (= 0.2.4)
-  resque
+  resque (>= 1.24.1)
   rspec-core
   rspec-expectations
   rspec-rails
