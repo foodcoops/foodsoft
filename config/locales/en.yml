@@ -236,7 +236,7 @@ en:
       option_available: Make articles available
       option_delete: Delete article
       option_not_available: Make articles unavailable
-      option_select: Choose special offer ...
+      option_select: Select action ...
       price_netto: Price
       unit_quantity_desc: Unit quantity
       unit_quantity_short: Quantity
@@ -440,7 +440,7 @@ en:
       article: Article
       category: Category
       create_from_blank: Create new article
-      create_stock_article: Create stock articles
+      create_stock_article: Create stock article
       price: Netprice
       quantity: Quantity
       title_fill_quantities: 2. Set delivery quantities
@@ -493,7 +493,7 @@ en:
       - Article
       - Amount
       - Price
-      - Unit Quantity
+      - Unit quantity
       - Unit
       - Sum
       sum: Sum
@@ -504,20 +504,24 @@ en:
       - Order Number
       - Amount
       - Name
-      - Barrel
+      - Unit quantity
       - Unit
       - Price/Unit
+      - Subtotal
+      total: Total
     order_matrix:
       filename: Order %{name}-%{date} - sorting matrix
       heading: Article overview
       rows:
       - Article
       - Unit
-      - Barrel
+      - Unit quantity
       - FC-Price
       - Amount
       title: ! 'Order sorting matrix: %{name}, closed at %{date}'
-      total: ! '%{count} articles in total'
+      total:
+        one: One article in total
+        other: ! '%{count} articles in total'
   errors:
     format: ! '%{attribute} %{message}'
     general: A problem has occured.
@@ -721,6 +725,7 @@ en:
       ordergroups:
         account_balance: Account balance
         account_statement: Account statement
+        contact: Contact
         name: Name
         new_transaction: New transaction
     update:
@@ -1606,6 +1611,7 @@ en:
         contact_person: Contact person
         contact_phone: Phone
         ignore_apple_restriction: Ignore order stop by apple points restriction
+        name: Name
       page:
         body: Body
         parent_id: Parent page
@@ -1673,6 +1679,7 @@ en:
           language:
             de: German
             en: English
+            fr: French
             nl: Dutch
     required:
       mark: ! '*'
@@ -1746,6 +1753,7 @@ en:
       show_stock_takings: Inventory overview
       stock_count: ! 'Number of articles:'
       stock_worth: ! 'Current stock value:'
+      title: Stock (%{article_count})
       toggle_unavailable: Show/hide unavailable articles
       view_options: View options
     new:
@@ -1776,6 +1784,7 @@ en:
     shared_suppliers:
       body: <p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>
       subscribe: Subscribe
+      subscribe_again: Subscribe again
       supplier: Supplier
       title: External lists
     show:
@@ -1836,6 +1845,7 @@ en:
       group_tasks: Group tasks
       my_tasks: My tasks
       new_task: Create new task
+      pages: Pages
     new:
       title: Create new tasks
     repeated: Task is repeated weekly

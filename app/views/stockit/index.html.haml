@@ -1,4 +1,4 @@
-- title "Lager (#{StockArticle.available.count})"
+- title t('.title', article_count: StockArticle.available.count)
 - content_for :javascript do
   :javascript
     $(function() {

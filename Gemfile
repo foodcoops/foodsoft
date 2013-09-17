@@ -54,10 +54,6 @@ group :development do
   gem 'binding_of_caller'
   # gem "rails-i18n-debug"
   
-  # Re-enable rails benchmarker/profiler
-  gem 'ruby-prof'
-  gem 'test-unit'
-
   # Get infos when not using proper eager loading
   gem 'bullet'
 
@@ -72,6 +68,22 @@ group :development do
   gem 'thin'
 end
 
-# Gems left for backwards compatibility
-gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git' # user settings migration needs it
+group :development, :test do
+  gem 'ruby-prof'
+end
 
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'faker'
+  # version requirements to avoid problem http://stackoverflow.com/questions/18114544
+  gem 'capybara', '~> 2.1.0'
+  # webkit and poltergeist don't seem to work yet
+  gem 'selenium-webdriver', '~> 2.35.1'
+  gem 'database_cleaner'
+  gem 'simplecov', require: false
+  # need to include rspec components before i18n-spec or rake fails in test environment
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'i18n-spec'
+end
