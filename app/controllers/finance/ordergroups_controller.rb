@@ -16,7 +16,7 @@ class Finance::OrdergroupsController < Finance::BaseController
 
     @ordergroups = Ordergroup.undeleted.order(sort)
     @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
-    @ordergroups = @ordergroups.select("*, (SELECT COALESCE(SUM(price),0) FROM group_orders INNER JOIN orders WHERE group_orders.order_id=orders.id AND group_orders.ordergroup_id=groups.id AND orders.state IN ('open', 'finished')) AS available_funds")
+    @ordergroups = @ordergroups.select("*, account_balance - (SELECT COALESCE(SUM(price),0) FROM group_orders INNER JOIN orders WHERE group_orders.order_id=orders.id AND group_orders.ordergroup_id=groups.id AND orders.state IN ('open', 'finished')) AS available_funds")
 
     @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
   end
