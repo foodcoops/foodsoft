@@ -5,13 +5,9 @@
   %thead
     %tr
       %th= sort_link_helper t('.name'), "name", :per_page => @per_page
-      %th Kontakt
-      -#%th.numeric
-        = sort_link_helper t('.account_balance'), "account_balance", :per_page => @per_page, :html_options => {:title => 'hi'}
-        %div{style: 'font-size: 80%; font-weight: normal'} current balance
-      %th.numeric
-        = sort_link_helper t('.available_funds'), "get_available_funds", :per_page => @per_page
-        -#%div{style: 'font-size: 80%; font-weight: normal'} incl. unsettled orders
+      %th= t '.contact'
+      -#%th.numeric= sort_link_helper t('.account_balance'), "account_balance", :per_page => @per_page
+      %th.numeric= sort_link_helper t('.available_funds'), "get_available_funds", :per_page => @per_page
       %th
   %tbody
     - for ordergroup in @ordergroups

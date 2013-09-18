@@ -1,10 +1,6 @@
-Important
---------
-
-We changed the branch structure. The rails3 branch is now master. But you can safely send pull requests to rails3. It'll remain there for a couple of weeks.
-
 FoodSoft
 =========
+[![Build Status](https://travis-ci.org/foodcoops/foodsoft.png?branch=tests-rspec)](https://travis-ci.org/foodcoops/foodsoft)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.png)](https://codeclimate.com/github/foodcoops/foodsoft)
 [![Dependency Status](https://gemnasium.com/foodcoops/foodsoft.png)](https://gemnasium.com/foodcoops/foodsoft)
 

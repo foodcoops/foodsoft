@@ -38,6 +38,15 @@ namespace :foodsoft do
     puts yellow "All done! Your foodcoft should be running smoothly."
     start_server
   end
+
+  namespace :setup do
+    desc "Initialize stock configuration"
+    task :stock_config do
+      setup_app_config
+      setup_development
+      setup_secret_token
+    end
+  end
 end
 
 def setup_bundler

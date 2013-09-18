@@ -3,7 +3,7 @@ class Workgroup < Group
   
   has_many :tasks
   # returns all non-finished tasks
-  has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], :order => 'due_date ASC'
+  has_many :open_tasks, :class_name => 'Task', :conditions => ['done = ?', false], order: 'due_date ASC, name ASC'
 
   validates_uniqueness_of :name
   validate :last_admin_on_earth, :on => :update
