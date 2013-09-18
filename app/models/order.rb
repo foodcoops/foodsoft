@@ -229,7 +229,7 @@ class Order < ActiveRecord::Base
     to_be_removed = order_articles - chosen_order_articles
     to_be_removed_but_ordered = to_be_removed.select { |a| a.quantity > 0 or a.tolerance > 0 }
     unless to_be_removed_but_ordered.empty? or ignore_warnings
-      errors.add(:articles, I18n.t('orders.model.warning_ordered'))
+      errors.add(:articles, I18n.t(stockit? ? 'orders.model.warning_ordered_stock' : 'orders.model.warning_ordered'))
       @erroneous_article_ids = to_be_removed_but_ordered.map { |a| a.article_id }
     end
   end

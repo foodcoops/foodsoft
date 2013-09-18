@@ -1327,7 +1327,8 @@ de:
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: ! 'Bestellung: %{name}, bis %{ends}'
       stock: Lager
-      warning_ordered: 'Warnung: Die rot markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht. Bei Lagerbestellungen kann dies je nach Verwendung bedeuten, dass bereits gekaufte Artikel nicht abgerechnet werden!'
+      warning_ordered: 'Warnung: Die rot markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht.'
+      warning_ordered_stock: 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
     new:
       title: Neue Bestellung anlegen
     orders:
