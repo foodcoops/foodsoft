@@ -4,7 +4,7 @@ module Finance::OrderArticlesHelper
     if @order.stockit?
       StockArticle.order('articles.name')
     else
-      @order.supplier.articles.order('articles.name')
+      @order.supplier.articles.undeleted.order('articles.name')
     end
   end
 end

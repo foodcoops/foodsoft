@@ -17,6 +17,10 @@ class StockArticle < Article
     quantity - OrderArticle.where(article_id: id).
         joins(:order).where("orders.state = 'open' OR orders.state = 'finished'").sum(:units_to_order)
   end
+  
+  def quantity_history
+    stock_changes.reorder('stock_changes.created_at ASC').map{|s| s.quantity}.cumulative_sum
+  end
 
   def self.stock_value
     available.collect { |a| a.quantity * a.gross_price }.sum

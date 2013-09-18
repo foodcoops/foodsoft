@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130715233410) do
+ActiveRecord::Schema.define(:version => 20130718183101) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -65,18 +65,6 @@ ActiveRecord::Schema.define(:version => 20130715233410) do
   end
 
   add_index "assignments", ["user_id", "task_id"], :name => "index_assignments_on_user_id_and_task_id", :unique => true
-
-  create_table "configurable_settings", :force => true do |t|
-    t.integer "configurable_id"
-    t.string  "configurable_type"
-    t.integer "targetable_id"
-    t.string  "targetable_type"
-    t.string  "name",              :default => "", :null => false
-    t.string  "value_type"
-    t.text    "value"
-  end
-
-  add_index "configurable_settings", ["name"], :name => "index_configurable_settings_on_name"
 
   create_table "deliveries", :force => true do |t|
     t.integer  "supplier_id"
@@ -143,17 +131,11 @@ ActiveRecord::Schema.define(:version => 20130715233410) do
     t.boolean  "role_article_meta",                                      :default => false, :null => false
     t.boolean  "role_finance",                                           :default => false, :null => false
     t.boolean  "role_orders",                                            :default => false, :null => false
-    t.boolean  "weekly_task",                                            :default => false
-    t.integer  "weekday"
-    t.string   "task_name"
-    t.string   "task_description"
-    t.integer  "task_required_users",                                    :default => 1
     t.datetime "deleted_at"
     t.string   "contact_person"
     t.string   "contact_phone"
     t.string   "contact_address"
     t.text     "stats"
-    t.integer  "task_duration",                                          :default => 1
     t.integer  "next_weekly_tasks_number",                               :default => 8
     t.boolean  "ignore_apple_restriction",                               :default => false
   end
@@ -268,6 +250,23 @@ ActiveRecord::Schema.define(:version => 20130715233410) do
   add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
   add_index "pages", ["title"], :name => "index_pages_on_title"
 
+  create_table "periodic_task_groups", :force => true do |t|
+    t.date     "next_task_date"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "settings", :force => true do |t|
+    t.string   "var",                      :null => false
+    t.text     "value"
+    t.integer  "thing_id"
+    t.string   "thing_type", :limit => 30
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
+
   create_table "stock_changes", :force => true do |t|
     t.integer  "delivery_id"
     t.integer  "order_id"
@@ -308,16 +307,16 @@ ActiveRecord::Schema.define(:version => 20130715233410) do
   add_index "suppliers", ["name"], :name => "index_suppliers_on_name", :unique => true
 
   create_table "tasks", :force => true do |t|
-    t.string   "name",           :default => "",    :null => false
+    t.string   "name",                   :default => "",    :null => false
     t.string   "description"
     t.date     "due_date"
-    t.boolean  "done",           :default => false
+    t.boolean  "done",                   :default => false
     t.integer  "workgroup_id"
-    t.datetime "created_on",                        :null => false
-    t.datetime "updated_on",                        :null => false
-    t.integer  "required_users", :default => 1
-    t.boolean  "weekly"
-    t.integer  "duration",       :default => 1
+    t.datetime "created_on",                                :null => false
+    t.datetime "updated_on",                                :null => false
+    t.integer  "required_users",         :default => 1
+    t.integer  "duration",               :default => 1
+    t.integer  "periodic_task_group_id"
   end
 
   add_index "tasks", ["due_date"], :name => "index_tasks_on_due_date"

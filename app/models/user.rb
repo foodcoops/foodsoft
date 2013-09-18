@@ -3,6 +3,7 @@
 require 'digest/sha1'
 # specific user rights through memberships (see Group)
 class User < ActiveRecord::Base
+  include RailsSettings::Extend
   #TODO: acts_as_paraniod ??
   
   has_many :memberships, :dependent => :destroy
@@ -19,8 +20,11 @@ class User < ActiveRecord::Base
   has_many :pages, :foreign_key => 'updated_by'
   has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
   
-  attr_accessor :password, :setting_attributes
-
+  attr_accessor :password, :settings_attributes
+  
+  # makes the current_user (logged-in-user) available in models
+  cattr_accessor :current_user
+  
   validates_presence_of :nick, :email
   validates_presence_of :password, :on => :create
   validates_length_of :nick, :in => 2..25
@@ -32,45 +36,29 @@ class User < ActiveRecord::Base
   validates_length_of :password, :in => 5..25, :allow_blank => true
 
   before_validation :set_password
-  after_save :update_settings
-
-  # Adds support for configuration settings (through "settings" attribute).
-  acts_as_configurable
-  
-  # makes the current_user (logged-in-user) available in models
-  cattr_accessor :current_user
-  
-  # User settings keys
-  # returns the User-settings and the translated description
-  def self.setting_keys
-    {
-      "notify.orderFinished" => I18n.t('model.user.notify.order_finished'),
-      "notify.negativeBalance" => I18n.t('model.user.notify.negative_balance'),
-      "notify.upcoming_tasks" => I18n.t('model.user.notify.upcoming_tasks'),
-      "messages.sendAsEmail" => I18n.t('model.user.notify.send_as_email'),
-      "profile.phoneIsPublic" => I18n.t('model.user.notify.phone_is_public'),
-      "profile.emailIsPublic" => I18n.t('model.user.notify.email_is_public'),
-      "profile.nameIsPublic" => I18n.t('model.user.notify.name_is_public')
-    }
+  after_initialize do
+    settings.defaults['profile']  = { 'language' => I18n.default_locale } unless settings.profile
+    settings.defaults['messages'] = { 'send_as_email' => true }           unless settings.messages
+    settings.defaults['notify']   = { 'upcoming_tasks' => true  }         unless settings.notify
   end
-  # retuns the default setting for a NEW user
-  # for old records nil will returned
-  # TODO: integrate default behaviour in acts_as_configurable plugin
-  def settings_default(setting)
-    # define a default for the settings
-    defaults = {
-      "messages.sendAsEmail" => true,
-      "notify.upcoming_tasks" => true
-    }
-    return true if self.new_record? && defaults[setting]
-  end
-
-  def update_settings
-    unless setting_attributes.nil?
-      for setting in User::setting_keys.keys
-        self.settings[setting] = setting_attributes[setting] && setting_attributes[setting] == '1' ? '1' : nil
+  
+  after_save do
+    return if settings_attributes.nil?
+    settings_attributes.each do |key, value|
+      value.each do |k, v|
+        case v
+          when '1'
+            value[k] = true
+          when '0' 
+            value[k] = false
+        end
       end
+      self.settings.merge!(key, value)
     end
+  end
+  
+  def locale
+    settings.profile['language']
   end
   
   def name
@@ -78,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def receive_email?
-    settings['messages.sendAsEmail'] == "1" && email.present?
+    settings.messages['send_as_email'] && email.present?
   end
   
   # Sets the user's password. It will be stored encrypted along with a random salt.

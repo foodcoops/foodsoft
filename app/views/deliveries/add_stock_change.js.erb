@@ -1,0 +1,25 @@
+(function(w) {
+  if(!is_article_available_for_delivery(<%= @stock_change.stock_article.id %>)) {
+    return false;
+  }
+  
+  $('#stock_changes tr').removeClass('success');
+  
+  var stock_change = $(
+    '<%= j(render(:partial => 'stock_change', :locals => {:stock_change => @stock_change})) %>'
+  ).addClass('success');
+  enablePriceTooltips(stock_change);
+  
+  $('#stock_changes').append(stock_change);
+  mark_article_for_delivery(<%= @stock_change.stock_article.id %>);
+  updateSort('#stock_changes');
+  
+  var quantity = w.prompt('<%= j(t('.how_many_units', :unit => @stock_change.stock_article.unit, :name => @stock_change.stock_article.name)) %>'); <%# how to properly escape here? %>
+  if(null === quantity) {
+    stock_change.remove();
+    mark_article_for_delivery(<%= @stock_change.stock_article.id %>);
+    return false;
+  }
+  $('input.stock-change-quantity', stock_change).val(quantity);
+  
+})(window);

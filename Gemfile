@@ -17,6 +17,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'select2-rails'
+gem 'bootstrap-datepicker-rails'
 
 
 gem 'mysql2'
@@ -35,7 +37,7 @@ gem 'simple-navigation-bootstrap'
 gem 'meta_search'
 gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git' # Use this instead of rubygem
 gem 'acts_as_tree'
-gem 'acts_as_configurable', git: 'git://github.com/bwalding/acts_as_configurable.git'
+gem "rails-settings-cached", "0.2.4"
 gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 
@@ -50,11 +52,8 @@ group :development do
   # Better error output
   gem 'better_errors'
   gem 'binding_of_caller'
-
-  # Re-enable rails benchmarker/profiler
-  gem 'ruby-prof'
-  gem 'test-unit'
-
+  # gem "rails-i18n-debug"
+  
   # Get infos when not using proper eager loading
   gem 'bullet'
 
@@ -67,4 +66,24 @@ group :development do
   #gem 'common_deploy', require: false, path: '../../common_deploy' # pending foodcoops/foodsoft#34,  git: 'git://github.com/fsmanuel/common_deploy.git'
   # Avoid having content-length warnings
   gem 'thin'
+end
+
+group :development, :test do
+  gem 'ruby-prof'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'faker'
+  # version requirements to avoid problem http://stackoverflow.com/questions/18114544
+  gem 'capybara', '~> 2.1.0'
+  # webkit and poltergeist don't seem to work yet
+  gem 'selenium-webdriver', '~> 2.35.1'
+  gem 'database_cleaner'
+  gem 'simplecov', require: false
+  # need to include rspec components before i18n-spec or rake fails in test environment
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'i18n-spec'
 end

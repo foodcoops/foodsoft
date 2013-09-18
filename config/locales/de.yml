@@ -39,6 +39,8 @@ de:
         article_category: Kategorie
         availability: Artikel ist verfügbar?
         deposit: Pfand
+        fc_price: Endpreis
+        fc_share: FC-Aufschlag
         gross_price: Bruttopreis
         price: Nettopreis
         tax: MwSt
@@ -81,6 +83,11 @@ de:
         too_long: ist zu lang (nicht mehr als %{count} Zeichen)
         too_short: ist zu kurz (nicht weniger als %{count} Zeichen)
         wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
+      models:
+        task:
+          attributes:
+            done:
+              exclusion: erledigte Aufgaben können nicht wöchentlich wiederholt werden
       template:
         body: ! 'Bitte überprüfen Sie die folgenden Felder:'
         header:
@@ -416,20 +423,28 @@ de:
       second: Sekunden
       year: Jahr
   deliveries:
+    add_stock_change:
+      how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
     create:
       notice: Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!
+    create_stock_article:
+      notice: Neuer Lagerartikel »%{name}« gespeichert.
     destroy:
       notice: Lieferung wurde gelöscht.
     edit:
       title: Lieferung bearbeiten
     form:
-      add_article: Lagerartikel der Lieferung hinzufügen
-      new_article:
-        search: Suche nach Artikeln aus dem <i>%{supplier}</i> Katalog
-        title: Neuen Lagerartikel anlegen
-      note_new_article: Ist ein Artikel noch nicht in der Lagerverwaltung, muss er erst %{new_link} werden.
-      note_new_article_link: neu angelegt
-      remove_article: Artikel aus Lieferung entfernen
+      actions: Optionen
+      article: Artikel
+      category: Kategorie
+      create_from_blank: Ohne Vorlage anlegen
+      create_stock_article: Lagerartikel anlegen
+      price: Nettopreis
+      quantity: Menge
+      title_fill_quantities: 2. Liefermenge angeben
+      title_finish_delivery: 3. Lieferung abschließen
+      title_select_stock_articles: 1. Lagerartikel auswählen
+      unit: Einheit
     index:
       confirm_delete: Bist Du sicher?
       new_delivery: Neue Lieferung für %{supplier} anlegen
@@ -449,24 +464,34 @@ de:
       title: Lieferung anzeigen
       title_articles: Artikel
       unit: Einheit
-    stock_change:
+    stock_article_for_adding:
+      action_add_to_delivery: Liefern
+      action_edit: Bearbeiten
+      action_other_price: Kopieren
+    stock_article_form:
+      copy_stock_article: Lagerartikel kopieren
+    stock_change_fields:
       remove_article: Artikel aus Lieferung entfernen
     suppliers_overview: Lieferantenübersicht
     update:
       notice: Lieferung wurde aktualisiert.
+    update_stock_article:
+      notice: Lagerartikel »%{name}« aktualisiert.
   documents:
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
       rows:
       - Bestellgruppe
-      - Menge
+      - Bestellt
+      - Bekommen
       - Preis
       title: ! 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
     order_by_groups:
       filename: Bestellung %{name}-%{date} - Gruppensortierung
       rows:
       - Artikel
-      - Menge
+      - Bestellt
+      - Bekommen
       - Preis
       - GebGr
       - Einheit
@@ -482,6 +507,8 @@ de:
       - Gebinde
       - Einheit
       - Preis/Einheit
+      - Summe
+      total: Gesamtpreis
     order_matrix:
       filename: Bestellung %{name}-%{date} - Sortiermatrix
       heading: Artikelübersicht
@@ -696,6 +723,7 @@ de:
       ordergroups:
         account_balance: Kontostand
         account_statement: Kontoauszug
+        contact: Kontakt
         name: Name
         new_transaction: Neue Transaktion
     update:
@@ -1146,6 +1174,8 @@ de:
       subject: ! 'Betreff:'
       title: Nachricht anzeigen
   model:
+    delivery:
+      each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
     membership:
       no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
     order_article:
@@ -1154,14 +1184,6 @@ de:
       redirect: Weiterleiting auf [[%{title}]]...
     user:
       no_ordergroup: keine Bestellgruppe
-      notify:
-        email_is_public: E-Mail ist für Mitglieder sichtbar
-        name_is_public: Name ist für Mitglieder sichtbar
-        negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
-        order_finished: Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).
-        phone_is_public: Telefon ist für Mitglieder sichtbar
-        send_as_email: Bekomme Nachrichten als Emails.
-        upcoming_tasks: Erinnere mich an anstehende Aufgaben.
   navigation:
     admin:
       home: Übersicht
@@ -1423,7 +1445,7 @@ de:
   sessions:
     logged_in: Angemeldet!
     logged_out: Abgemeldet!
-    login_invalid: 
+    login_invalid: Ungültiger Benutzername oder Passwort
     new:
       forgot_password: Passwort vergessen?
       login: Anmelden
@@ -1509,6 +1531,10 @@ de:
         units_to_order: Anzahl gelieferter Gebinde
         update_current_price: Ändert auch den Preis für aktuelle Bestellungen
       stock_article:
+        copy_stock_article:
+          name: Bitte ändern
+        edit_stock_article:
+          price: <ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>
         supplier: 
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
@@ -1581,9 +1607,25 @@ de:
         contact_person: Kontaktperson
         contact_phone: Telefon
         ignore_apple_restriction: Bestellstop bei zu wenig Äpfeln ignorieren
+        name: Name
       page:
         body: Inhalt
         parent_id: Oberseite
+      settings:
+        messages:
+          send_as_email: Bekomme Nachrichten als Emails.
+        notify:
+          negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
+          order_finished: Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).
+          upcoming_tasks: Erinnere mich an anstehende Aufgaben.
+        profile:
+          email_is_public: E-Mail ist für Mitglieder sichtbar.
+          language: Sprache
+          name_is_public: Name ist für Mitglieder sichtbar.
+          phone_is_public: Telefon ist für Mitglieder sichtbar.
+        settings_group:
+          messages: Nachrichten
+          privacy: Privatsphäre
       stock_article:
         supplier: Lieferant
       supplier:
@@ -1626,13 +1668,15 @@ de:
         role_finance: Finanzen
         role_orders: Bestellverwaltung
         role_suppliers: Lieferanten
-        task_description: Beschreibung
-        task_duration: Vor. Dauer in Stunden
-        task_name: Name für Job
-        task_required_users: Benötige Verantwortliche
-        weekday: Wochentag
-        weekly_task: Monatlichen Job definieren?
     'no': Nein
+    options:
+      settings:
+        profile:
+          language:
+            de: Deutsch
+            en: English
+            fr: Französisch
+            nl: Niederländisch
     required:
       mark: ! '*'
       text: benötigt
@@ -1677,6 +1721,15 @@ de:
       title: Lagerartikel bearbeiten
     form:
       price_hint: Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.
+    history:
+      change_quantity: Veränderung
+      datetime: Zeitpunkt
+      delivery: Lieferung
+      new_quantity: Neuer Bestand
+      order: Bestellung
+      reason: Ereignis
+      stock_changes: Verlauf anzeigen für »%{article_name}«
+      stock_taking: Inventur
     index:
       article:
         article: Artikel
@@ -1696,6 +1749,7 @@ de:
       show_stock_takings: Inventurübersicht
       stock_count: ! 'Artikelanzahl:'
       stock_worth: ! 'Aktueller Lagerwert:'
+      title: Lager (%{article_count})
       toggle_unavailable: Nicht verfügbare Artikel zeigen/verstecken
       view_options: Ansichtsoptionen
     new:
@@ -1726,6 +1780,7 @@ de:
     shared_suppliers:
       body: <p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>
       subscribe: abonnieren
+      subscribe_again: erneut abonnieren
       supplier: Lieferantin
       title: Externe Listen
     show:
@@ -1756,12 +1811,15 @@ de:
       notice: Aufgabe wurde gelöscht
     edit:
       title: Aufgabe bearbeiten
+      warning_periodic: <strong>Warnung:</strong> Diese Aufgabe ist Teil einer Gruppe von <em>wöchentlichen Aufgaben</em>. Beim Speichern wird sie aus der Gruppe ausgeschlossen und in eine <em>gewöhnliche Aufgabe</em> umgewandelt.
     error_not_found: Keine Arbeitsgruppe gefunden
     form:
       search:
         hint: Nach Nutzerin suchen
         noresult: Keine Nutzerin gefunden
         placeholder: Suche ...
+      submit:
+        periodic: Wöchentliche Aufgabe speichern
     index:
       show_group_tasks: Gruppenaufgaben anzeigen
       title: Aufgaben
@@ -1783,12 +1841,16 @@ de:
       group_tasks: Gruppenaufgaben
       my_tasks: Meine Aufgaben
       new_task: Neue Aufgabe erstellen
+      pages: Seiten
     new:
       title: Neue Aufgabe erstellen
+    repeated: Aufgabe wird wöchentlich wiederholt
     set_done:
       notice: Aufgabenstatus wurde aktualisiert
     show:
       accept_task: Aufgabe übernehmen
+      confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
+      delete_group: Aufgabe und folgende löschen
       due_date: Fälligkeitsdatum
       hours: ! '%{count}h'
       mark_done: Als erledigt markieren
@@ -1796,6 +1858,7 @@ de:
       title: Aufgabe anzeigen
     update:
       notice: Aufgabe wurde aktualisiert
+      notice_converted: Aufgabe wurde aktualisiert und in eine gewöhnliche Aufgabe umgewandelt
     user:
       more: Nichts zu tun? %{tasks_link} gibt es bestimmt Arbeit
       tasks_link: Hier
@@ -1805,11 +1868,6 @@ de:
     workgroup:
       title: Aufgaben für %{workgroup}
       title_all: Alle Aufgaben der Gruppe
-      weekly:
-        desc: ! '<p>Jeden <b>%{weekday}</b> hat diese Arbeitsgruppe folgenden Job: <b>%{task}</b></p> <p>Die Wochenaufgaben werden von der Foodsoft automatisch erstellt. Eintragen müsst Ihr Euch aber selber.</p>'
-        edit: Wöchentliche Aufgaben anpassen
-        empty: Noch keine Wochenaufgaben angelegt.
-        title: Wöchentliche Aufgaben
   time:
     am: vormittags
     formats:
@@ -1821,9 +1879,12 @@ de:
     close: Schließen
     delete: Löschen
     edit: Bearbeiten
+    history: Verlauf anzeigen
     marks:
       close: ! '&times;'
+      success: <i class="icon icon-ok"></i>
     or_cancel: oder abbrechen
+    please_wait: Bitte warten...
     save: Speichern
     show: Anzeigen
   views:

@@ -13,11 +13,9 @@ class Supplier < ActiveRecord::Base
                   :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
 
   validates :name, :presence => true, :length => { :in => 4..30 }
-  validates :phone, :presence => true, :length => { :in => 8..20 }
+  validates :phone, :presence => true, :length => { :in => 8..25 }
   validates :address, :presence => true, :length => { :in => 8..50 }
   validates_length_of :order_howto, :note, maximum: 250
-  validates_length_of :phone, :in => 8..20
-  validates_length_of :address, :in => 8..50
   validate :uniqueness_of_name
 
   scope :undeleted, -> { where(deleted_at: nil) }
@@ -82,10 +80,10 @@ class Supplier < ActiveRecord::Base
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
-    id = new_record? ? nil : self.id
-    supplier = Supplier.where('suppliers.id != ? AND suppliers.name = ?', id, name).first
-    if supplier.present?
-      message = supplier.deleted? ? :taken_with_deleted : :taken
+    supplier = Supplier.where('suppliers.name = ?', name)
+    supplier = supplier.where('suppliers.id != ?', self.id) unless new_record?
+    if supplier.exists?
+      message = supplier.first.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message
     end
   end

@@ -1,0 +1,10 @@
+- stock_change = f.object
+- stock_article = stock_change.stock_article
+%tr{:id => "stock_change_stock_article_#{stock_article.id}", :data => {:id => stock_article.id}}
+  %td
+    %span.stock_article_name= stock_change.stock_article.name
+    = f.association :stock_article, :as => :hidden
+  %td.price{:data => {:toggle => :tooltip, :title => render(:partial => 'shared/article_price_info', :locals => {:article => stock_article})}}= number_to_currency stock_article.price
+  %td.unit= stock_change.stock_article.unit
+  %td= f.input :quantity, :wrapper => :intable, :input_html => {:class => 'stock-change-quantity', :autocomplete => :off}
+  %td= stock_change_remove_link f

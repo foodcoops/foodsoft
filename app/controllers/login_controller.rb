@@ -58,6 +58,7 @@ class LoginController < ApplicationController
         if @user.save
           Membership.new(:user => @user, :group => @invite.group).save!
           @invite.destroy
+          session[:locale] = @user.locale
           redirect_to login_url, notice: I18n.t('login.controller.accept_invitation.notice')
         end
       end

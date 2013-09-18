@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 class Task < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
   belongs_to :workgroup
+  belongs_to :periodic_task_group
 
   scope :non_group, where(workgroup_id: nil, done: false)
   scope :done, where(done: true)
@@ -16,7 +18,9 @@ class Task < ActiveRecord::Base
   validates :required_users, :presence => true
   validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 0
   validates_length_of :description, maximum: 250
+  validates :done, exclusion: { in: [true] }, if: :periodic?, on: :create
 
+  before_save :exclude_from_periodic_task_group, if: :changed?, unless: :new_record?
   after_save :update_ordergroup_stats
 
   # Find all tasks, for which the current user should be responsible
@@ -44,6 +48,10 @@ class Task < ActiveRecord::Base
       !task.enough_users_assigned? and
           (!task.workgroup or task.workgroup.memberships.detect { |m| m.user_id == user.id })
     end
+  end
+
+  def periodic?
+    not periodic_task_group.nil?
   end
 
   def is_assigned?(user)
@@ -99,6 +107,11 @@ class Task < ActiveRecord::Base
 
   def update_ordergroup_stats(user_ids = self.user_ids)
     Ordergroup.joins(:users).where(users: {id: user_ids}).each(&:update_stats!)
+  end
+
+  def exclude_from_periodic_task_group
+    self.periodic_task_group = nil
+    true
   end
 end
 

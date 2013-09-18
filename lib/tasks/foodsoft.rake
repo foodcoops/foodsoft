@@ -8,24 +8,9 @@ namespace :foodsoft do
       puts "Send notifications for #{task.name} to .."
       for user in task.users
         begin
-          Mailer.upcoming_tasks(user, task).deliver if user.settings['notify.upcoming_tasks'] == 1
+          Mailer.upcoming_tasks(user, task).deliver if user.settings.notify['upcoming_tasks'] == 1
         rescue
           puts "deliver aborted for #{user.email}.."
-        end
-      end
-    end
-  end
-
-  desc "Create upcoming workgroups tasks (next 3 to 7 weeks)"
-  task :create_upcoming_weekly_tasks => :environment do
-    workgroups = Workgroup.where(weekly_task: true)
-    for workgroup in workgroups
-      puts "Create weekly tasks for #{workgroup.name}"
-      # Loop through next tasks weekly tasks method,
-      # skip the next 3 weeks, to allow manually deleting tasks
-      workgroup.next_weekly_tasks[3..-1].each do |date|
-        unless workgroup.tasks.exists?({:due_date => date, :weekly => true})
-          workgroup.tasks.create(workgroup.task_attributes(date))
         end
       end
     end
@@ -38,7 +23,7 @@ namespace :foodsoft do
         unless task.enough_users_assigned?
           puts "Notify workgroup: #{workgroup.name} for task #{task.name}"
           for user in workgroup.users
-            if user.settings['messages.sendAsEmail'] == "1" && !user.email.blank?
+            if user.settings.messages['send_as_email'] == "1" && !user.email.blank?
               begin
                 Mailer.not_enough_users_assigned(task, user).deliver
               rescue
@@ -46,6 +31,17 @@ namespace :foodsoft do
               end
             end
           end
+        end
+      end
+    end
+  end
+
+  desc "Create upcoming periodic tasks"
+  task :create_upcoming_periodic_tasks => :environment do
+    for tg in PeriodicTaskGroup.all
+      if tg.has_next_task?
+        while tg.next_task_date.nil? or tg.next_task_date < Date.today + 50
+          tg.create_next_task
         end
       end
     end

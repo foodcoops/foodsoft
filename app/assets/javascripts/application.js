@@ -1,14 +1,17 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require select2
 //= require twitter/bootstrap
 //= require jquery.tokeninput
-//= require bootstrap-datepicker
-//= require bootstrap-datepicker.de
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.de
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.nl
 //= require jquery.observe_field
 //= require rails.validations
 //= require_self
 //= require ordering
+//= require stupidtable
 
 // allow touch devices to work on click events
 //   http://stackoverflow.com/a/16221066
@@ -112,9 +115,16 @@ $(function() {
     });
 
     // Use bootstrap datepicker for dateinput
-    $('.datepicker').datepicker({format: 'yyyy-mm-dd', weekStart: 1, language: 'de'});
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
+    
+    // See stupidtable.js for initialization of local table sorting
 });
 
+// retrigger last local table sorting
+function updateSort(table) {
+  $('.sorting-asc, .sorting-desc', table).toggleClass('.sorting-asc .sorting-desc')
+    .removeData('sort-dir').trigger('click'); // CAUTION: removing data field of plugin
+}
 
 // gives the row an yellow background
 function highlightRow(checkbox) {

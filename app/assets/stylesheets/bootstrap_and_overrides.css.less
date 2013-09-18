@@ -31,15 +31,27 @@ body {
 // Example:
 // @linkColor: #ff0000;
 
-
-// Bootstrap datepicker
-@import "datepicker";
-
 // Custom styles
 
 // Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
 .dl-horizontal { 
     dd { .clearfix(); }
+}
+
+// Do not use additional margin for input in table
+.form-horizontal .control-group.control-group-intable,
+.form-horizontal .controls.controls-intable {
+  margin: 0;
+}
+
+// Light tooltips without empty space below tables
+.tooltip-inner {
+  color: #000;
+  background-color: rgb(245,245,245);
+  border: 1px solid #ccc;
+}
+.tooltip-inner .table {
+  margin-bottom: 0;
 }
 
 @mainRedColor: #ED0606;
@@ -207,4 +219,22 @@ tr.unavailable {
 .dl-horizontal {
   dt { width: 160px; }
   dd { margin-left: 170px; }
+}
+
+.settings {
+  .settings-group {
+    margin-bottom: 10px;
+    .control-label {
+      margin: 5px 0 0 0;
+    }
+  }
+  .control-group {
+    margin-bottom: 5px;
+  }
+  .control-group.h_wrapper {
+    margin-bottom: 5px;
+  }
+  .control-group.select {
+    margin-bottom: 15px
+  }
 }
