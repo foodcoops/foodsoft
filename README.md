@@ -1,6 +1,6 @@
 FoodSoft
 =========
-[![Build Status](https://travis-ci.org/foodcoops/foodsoft.png?branch=tests-rspec)](https://travis-ci.org/foodcoops/foodsoft)
+[![Build Status](https://travis-ci.org/foodcoops/foodsoft.png)](https://travis-ci.org/foodcoops/foodsoft)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.png)](https://codeclimate.com/github/foodcoops/foodsoft)
 [![Dependency Status](https://gemnasium.com/foodcoops/foodsoft.png)](https://gemnasium.com/foodcoops/foodsoft)
 
