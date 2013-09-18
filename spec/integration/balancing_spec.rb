@@ -1,15 +1,15 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe 'settling an order', :type => :feature do
-  let(:admin) { FactoryGirl.create :user, groups:[FactoryGirl.create(:workgroup, role_finance: true)] }
-  let(:supplier) { FactoryGirl.create :supplier }
-  let(:article) { FactoryGirl.create :article, supplier: supplier, unit_quantity: 1 }
-  let(:order) { FactoryGirl.create :order, supplier: supplier, article_ids: [article.id] } # need to ref article
-  let(:go1) { FactoryGirl.create :group_order, order: order }
-  let(:go2) { FactoryGirl.create :group_order, order: order }
+  let(:admin) { create :user, groups:[create(:workgroup, role_finance: true)] }
+  let(:supplier) { create :supplier }
+  let(:article) { create :article, supplier: supplier, unit_quantity: 1 }
+  let(:order) { create :order, supplier: supplier, article_ids: [article.id] } # need to ref article
+  let(:go1) { create :group_order, order: order }
+  let(:go2) { create :group_order, order: order }
   let(:oa) { order.order_articles.find_by_article_id(article.id) }
-  let(:goa1) { FactoryGirl.create :group_order_article, group_order: go1, order_article: oa }
-  let(:goa2) { FactoryGirl.create :group_order_article, group_order: go2, order_article: oa }
+  let(:goa1) { create :group_order_article, group_order: go1, order_article: oa }
+  let(:goa2) { create :group_order_article, group_order: go2, order_article: oa }
   before do
     goa1.update_quantities(3, 0)
     goa2.update_quantities(1, 0)
