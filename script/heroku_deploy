@@ -92,7 +92,7 @@ require 'localeapp/rails'
 
 Localeapp.configure do |config|
   config.api_key = '$LOCALEAPP_KEY'
-  config.sending_environments = ['$RAILS_ENV']
+  config.sending_environments = []
   config.polling_environments = ['$RAILS_ENV']
 end
 EOF
