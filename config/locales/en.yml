@@ -314,7 +314,7 @@ en:
       title: Synchronize articles with external database
       unit_quantity_short: unit quantity
       update:
-        body: ! '<p><i>Every article is shown twice. The old values are gray and contain the current values.</i></p>
+        body: ! '<p><i>Every article is shown twice. The old values are gray and the text fields contain the current values.</i></p>
 
           <p><i>Differences with the old articles are marked yellow.</i></p>'
         title: Update ...
@@ -1467,6 +1467,8 @@ en:
     articles_by_articles:
       ordergroup: Ordergroup
       price: Total price
+      ordered: Ordered (Amount + Tolerance)
+      received: Received
     articles_by_groups:
       fc_price: FC-Price
       fc_price_desc: Price including taxes, deposit and Foodcoop-charge
@@ -1475,6 +1477,8 @@ en:
       unit: Unit
       unit_quantity: Lot quantity
       unit_quantity_desc: How many units per lot.
+      units: Amount
+      units_desc: Assigned units
     group:
       access: Access to
       activated: activated
