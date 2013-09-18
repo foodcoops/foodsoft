@@ -4,7 +4,7 @@ FactoryGirl.define do
 
   factory :order do
     starts { Time.now }
-    supplier { FactoryGirl.create :supplier, article_count: (article_count.nil? ? true : article_count) }
+    supplier { create :supplier, article_count: (article_count.nil? ? true : article_count) }
     article_ids { supplier.articles.map(&:id) unless supplier.nil? }
 
     ignore do

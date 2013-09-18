@@ -10,7 +10,7 @@ FactoryGirl.define do
     deposit { rand(10) < 8 ? 0 : [0.0, 0.80, 1.20, 12.00].sample }
     unit_quantity { rand(5) < 3 ? 1 : rand(1..20) }
     #supplier_id
-    article_category { FactoryGirl.create :article_category }
+    article_category { create :article_category }
   end
 
   factory :article_category do
