@@ -43,4 +43,13 @@ describe Article do
     article.save!
     expect(article.article_prices.all.map(&:price)).to eq([article.price, oldprice])
   end
+
+  it 'is not in an open order by default' do
+    expect(article.in_open_order).to be_nil
+  end
+
+  it 'is knows its open order' do
+    order = create :order, supplier: supplier, article_ids: [article.id]
+    expect(article.in_open_order).to eq(order)
+  end
 end
