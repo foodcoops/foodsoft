@@ -1330,8 +1330,8 @@ de:
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: ! 'Bestellung: %{name}, bis %{ends}'
       stock: Lager
-      warning_ordered: 'Warnung: Die rot markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht.'
-      warning_ordered_stock: 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
+      warning_ordered: ! 'Warnung: Die rot markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht.'
+      warning_ordered_stock: ! 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
     new:
       title: Neue Bestellung anlegen
     orders:
@@ -1458,11 +1458,14 @@ de:
       title: Foodsoft anmelden
       user: Benutzerin
   shared:
+    articles:
+      ordered: Bestellt
+      ordered_desc: 
+      received: Bekommen
+      received_desc: 
     articles_by_articles:
-      ordered: Bestellt (Menge + Toleranz)
       ordergroup: Bestellgruppe
       price: Gesamtpreis
-      received: Bekommen
     articles_by_groups:
       fc_price: FC-Preis
       fc_price_desc: Preis incl. MwSt, Pfand und Foodcoop-Aufschlag
@@ -1471,8 +1474,6 @@ de:
       unit: Einheit
       unit_quantity: GebGr
       unit_quantity_desc: Gebindegröße
-      units: Menge
-      units_desc: Zugeteilte Einheiten
     group:
       access: Zugriff auf
       activated: aktiviert

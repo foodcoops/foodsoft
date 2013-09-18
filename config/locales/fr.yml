@@ -1308,6 +1308,7 @@ fr:
     finish:
       notice: La commande a été close.
     form:
+      ignore_warnings: 
       name: Nom
       note: Note
       origin: Origine
@@ -1335,6 +1336,8 @@ fr:
       error_starts_before_ends: doit être postérieur à la date de début de la commande (ou bien être laissé vierge)
       notice_close: ! 'Commande: %{name}, jusqu''au %{ends}'
       stock: Stock
+      warning_ordered: 
+      warning_ordered_stock: 
     new:
       title: Définir une nouvelle commande
     orders:
@@ -1459,11 +1462,14 @@ fr:
       title: Te connecter à Foodsoft
       user: Identifiant
   shared:
+    articles:
+      ordered: Commandé
+      ordered_desc: 
+      received: Reçu
+      received_desc: 
     articles_by_articles:
-      ordered: Commandé (Quantité + Tolérance)
       ordergroup: Cellul
       price: Prix total
-      received: Reçu
     articles_by_groups:
       fc_price: Prix coop
       fc_price_desc: Prix avec TVA, consigne et part de la coop inclus.
@@ -1472,8 +1478,6 @@ fr:
       unit: Unité
       unit_quantity: U/L
       unit_quantity_desc: Unités par lot
-      units: Quantité
-      units_desc: Unités assignées
     group:
       access: Accès à
       activated: activé

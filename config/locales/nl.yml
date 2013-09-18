@@ -1218,6 +1218,7 @@ nl:
     finish:
       notice: De bestelling is gesloten.
     form:
+      ignore_warnings: 
       name: 
       note: 
       origin: 
@@ -1245,6 +1246,8 @@ nl:
       error_starts_before_ends: 
       notice_close: 
       stock: Voorraad
+      warning_ordered: 
+      warning_ordered_stock: 
     new:
       title: 
     orders:
@@ -1369,11 +1372,14 @@ nl:
       title: Foodsoft aanmelden
       user: Gebruiker
   shared:
+    articles:
+      ordered: Besteld
+      ordered_desc: Hoeveel artikelen het lid besteld heeft (aantal + tolerantie)
+      received: Ontvangen
+      received_desc: Hoeveel artikelen het lid is toegewezen danwel heeft gekregen
     articles_by_articles:
-      ordered: Besteld (Hoeveelheid + Tolerantie)
       ordergroup: Huishouden
       price: Totaalprijs
-      received: Ontvangen
     articles_by_groups:
       fc_price: FC-Prijs
       fc_price_desc: Prijs inclusief belasting, borg en foodcoop-toeslag
@@ -1382,8 +1388,6 @@ nl:
       unit: Eenheid
       unit_quantity: Gr.Eenh.
       unit_quantity_desc: Hoeveel eenheden per groothandelsverpakking
-      units: Aantal
-      units_desc: Toegewezen eenheden
     group:
       access: Toegang tot
       activated: actief
