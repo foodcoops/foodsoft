@@ -5,7 +5,7 @@ class SharedSupplier < ActiveRecord::Base
   # set correct table_name in external DB
   self.table_name = 'suppliers'
 
-  has_one :supplier
+  has_many :suppliers
   has_many :shared_articles, :foreign_key => :supplier_id
 
   # These set of attributes are used to autofill attributes of new supplier,

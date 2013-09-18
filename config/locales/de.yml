@@ -505,6 +505,7 @@ de:
       - Gebinde
       - Einheit
       - Preis/Einheit
+      total: Gesamtpreis
     order_matrix:
       filename: Bestellung %{name}-%{date} - Sortiermatrix
       heading: Artikelübersicht
@@ -719,6 +720,7 @@ de:
       ordergroups:
         account_balance: Kontostand
         account_statement: Kontoauszug
+        contact: Kontakt
         name: Name
         new_transaction: Neue Transaktion
     update:
@@ -1602,6 +1604,7 @@ de:
         contact_person: Kontaktperson
         contact_phone: Telefon
         ignore_apple_restriction: Bestellstop bei zu wenig Äpfeln ignorieren
+        name: Name
       page:
         body: Inhalt
         parent_id: Oberseite
@@ -1669,6 +1672,7 @@ de:
           language:
             de: Deutsch
             en: English
+            fr: Französisch
             nl: Niederländisch
     required:
       mark: ! '*'
@@ -1742,6 +1746,7 @@ de:
       show_stock_takings: Inventurübersicht
       stock_count: ! 'Artikelanzahl:'
       stock_worth: ! 'Aktueller Lagerwert:'
+      title: Lager (%{article_count})
       toggle_unavailable: Nicht verfügbare Artikel zeigen/verstecken
       view_options: Ansichtsoptionen
     new:
@@ -1772,6 +1777,7 @@ de:
     shared_suppliers:
       body: <p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>
       subscribe: abonnieren
+      subscribe_again: erneut abonnieren
       supplier: Lieferantin
       title: Externe Listen
     show:
@@ -1832,6 +1838,7 @@ de:
       group_tasks: Gruppenaufgaben
       my_tasks: Meine Aufgaben
       new_task: Neue Aufgabe erstellen
+      pages: Seiten
     new:
       title: Neue Aufgabe erstellen
     repeated: Aufgabe wird wöchentlich wiederholt

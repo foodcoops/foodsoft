@@ -18,7 +18,7 @@ class SuppliersController < ApplicationController
   def new
     if params[:shared_supplier_id]
       shared_supplier =  SharedSupplier.find(params[:shared_supplier_id])
-      @supplier = shared_supplier.build_supplier(shared_supplier.autofill_attributes)
+      @supplier = shared_supplier.suppliers.new(shared_supplier.autofill_attributes)
     else
       @supplier = Supplier.new
     end

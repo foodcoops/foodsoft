@@ -4,7 +4,7 @@
 - content_for :sidebar do
   .well.well-small
     %ul.nav.nav-list
-      %li.nav-header Seiten
+      %li.nav-header= t '.pages'
       %li= link_to t('.my_tasks'), user_tasks_path
       %li= link_to t('.all_tasks'), tasks_path
       %li= link_to t('.archive'), archive_tasks_path
