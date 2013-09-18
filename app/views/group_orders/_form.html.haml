@@ -7,6 +7,8 @@
       setMinimumBalance(#{FoodsoftConfig[:minimum_balance] or 0});
       setToleranceBehaviour(#{FoodsoftConfig[:tolerance_is_costly]});
       setStockit(#{@order.stockit?});
+      // create List for search-feature (using list.js, http://listjs.com)
+      new List(document.body, { valueNames: ['name'], engine: 'unlist' }); 
     });
 
 - title t('.title'), false
@@ -37,6 +39,10 @@
   .well.pull-right
     = render 'switch_order', current_order: @order
 
+.row-fluid
+  .well.clear
+    = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query input-large search'
+
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
   = f.hidden_field :order_id
@@ -59,10 +65,10 @@
           %th(style="width:20px")= t '.available'
           %th#col_required= t '.amount'
         %th{style: "width:15px;"}= t '.sum'
-    %tbody
+    %tbody.list
       - @order.articles_grouped_by_category.each do |category, order_articles|
         %tr.article-category
-          %td
+          %td.name
             = category
             %i.icon-tag
           %td{colspan: "9"}
