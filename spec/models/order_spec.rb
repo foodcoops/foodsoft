@@ -1,22 +1,22 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe Order do
 
   it 'needs a supplier' do
-    expect(FactoryGirl.build(:order, supplier: nil)).to be_invalid
+    expect(build(:order, supplier: nil)).to be_invalid
   end
 
   it 'needs order articles' do
-    supplier = FactoryGirl.create :supplier, article_count: 0
-    expect(FactoryGirl.build(:order, supplier: supplier)).to be_invalid
+    supplier = create :supplier, article_count: 0
+    expect(build(:order, supplier: supplier)).to be_invalid
   end
 
   it 'can be created' do
-    expect(FactoryGirl.build(:order, article_count: 1)).to be_valid
+    expect(build(:order, article_count: 1)).to be_valid
   end
 
   describe 'with articles' do
-    let(:order) { FactoryGirl.create :order }
+    let(:order) { create :order }
 
     it 'is open by default'         do expect(order).to be_open end
     it 'is not finished by default' do expect(order).to_not be_finished end

@@ -1,16 +1,16 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe 'supplier', :type => :feature do
-  let(:supplier) { FactoryGirl.create :supplier }
+  let(:supplier) { create :supplier }
 
   describe :type => :feature, :js => true do
-    let(:user) { FactoryGirl.create :user, groups:[FactoryGirl.create(:workgroup, role_suppliers: true)] }
+    let(:user) { create :user, groups:[create(:workgroup, role_suppliers: true)] }
     before { login user }
 
     it 'can be created' do
       visit suppliers_path
       click_on I18n.t('suppliers.index.action_new')
-      supplier = FactoryGirl.build :supplier
+      supplier = build :supplier
       within('#new_supplier') do
         fill_in 'supplier_name', :with => supplier.name
         fill_in 'supplier_address', :with => supplier.address
@@ -28,8 +28,8 @@ describe 'supplier', :type => :feature do
   end
 
   describe :type => :feature, :js => true do
-    let(:article_category) { FactoryGirl.create :article_category }
-    let(:user) { FactoryGirl.create :user, groups:[FactoryGirl.create(:workgroup, role_article_meta: true)] }
+    let(:article_category) { create :article_category }
+    let(:user) { create :user, groups:[create(:workgroup, role_article_meta: true)] }
     before { login user }
 
     it 'can visit supplier articles path' do

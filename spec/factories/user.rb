@@ -12,7 +12,7 @@ FactoryGirl.define do
       sequence(:nick) { |n| "admin#{n}" }
       first_name 'Administrator'
       after :create do |user, evaluator|
-        FactoryGirl.create :workgroup, role_admin: true, user_ids: [user.id]
+        create :workgroup, role_admin: true, user_ids: [user.id]
       end
     end
   end

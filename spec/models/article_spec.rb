@@ -1,8 +1,8 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe Article do
-  let(:supplier) { FactoryGirl.create :supplier }
-  let(:article) { FactoryGirl.create :article, supplier: supplier }
+  let(:supplier) { create :supplier }
+  let(:article) { create :article, supplier: supplier }
 
   it 'has a unique name' do
     article2 = FactoryGirl.build :article, supplier: supplier, name: article.name
@@ -43,5 +43,4 @@ describe Article do
     article.save!
     expect(article.article_prices.all.map(&:price)).to eq([article.price, oldprice])
   end
-
 end
