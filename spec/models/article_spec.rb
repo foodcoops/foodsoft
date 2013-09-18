@@ -4,8 +4,8 @@ describe Article do
   let(:supplier) { FactoryGirl.create :supplier }
   let(:article) { FactoryGirl.create :article, supplier: supplier }
 
-  it 'has a unique name' do
-    article2 = FactoryGirl.build :article, supplier: supplier, name: article.name
+  it 'has a unique name+unit' do
+    article2 = FactoryGirl.build :article, supplier: supplier, name: article.name, unit: article.unit
     expect(article2).to be_invalid
   end
 
