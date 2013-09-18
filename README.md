@@ -30,3 +30,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 (See file LICENSE for the full text of the GPL)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/foodcoops/foodsoft/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
