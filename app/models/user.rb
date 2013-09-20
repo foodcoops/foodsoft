@@ -56,6 +56,22 @@ class User < ActiveRecord::Base
       self.settings.merge!(key, value)
     end
   end
+
+  # sorted by display name
+  def self.natural_order
+    # would be sensible to match ApplicationController#show_user
+    if FoodsoftConfig[:use_nick]
+      order('nick ASC')
+    else
+      order('first_name ASC, last_name ASC')
+    end
+  end
+
+  # search by (nick)name
+  def self.natural_search(q)
+    # we always use both nick and name, to make sure a user is found
+    where("CONCAT(first_name, CONCAT(' ', last_name)) LIKE :q OR nick LIKE :q", q: "%#{q}%")
+  end
   
   def locale
     settings.profile['language']
