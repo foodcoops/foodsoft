@@ -25,9 +25,9 @@ class User < ActiveRecord::Base
   # makes the current_user (logged-in-user) available in models
   cattr_accessor :current_user
   
-  validates_presence_of :nick, :email
+  validates_presence_of :email
   validates_presence_of :password, :on => :create
-  validates_length_of :nick, :in => 2..25
+  validates_length_of :nick, :in => 2..25, :allow_nil => true
   validates_uniqueness_of :nick, :case_sensitive => false
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_uniqueness_of :email, :case_sensitive => false
@@ -134,7 +134,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(nick, password)
-    user = find_by_nick(nick)
+    user = (find_by_nick(nick) or find_by_email(nick))
     if user && user.has_password(password)
       user
     else
