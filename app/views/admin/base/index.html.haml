@@ -9,13 +9,15 @@
       %table.table.table-striped
         %thead
           %tr
-            %th= t '.username'
+            - if FoodsoftConfig[:use_nick]
+              %th= t '.username'
             %th= t '.name'
             %th= t '.created_at'
         - for user in @users
           %tr{:class => cycle('even','odd', :name => 'users')}
-            %td= link_to user.nick, [:admin, user]
-            %td=h user.name
+            %td= link_to show_user(user, full: true), [:admin, user]
+            - if FoodsoftConfig[:use_nick]
+              %td= link_to user.name
             %td= format_date(user.created_on)
       = link_to t('.all_users'), admin_users_path
       |

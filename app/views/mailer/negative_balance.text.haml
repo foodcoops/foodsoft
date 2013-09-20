@@ -1,1 +1,1 @@
-= t '.text', group: @group.name, when: @transaction.created_on.strftime('%d.%m.%Y um %H:%M'), balance: @group.account_balance, amount:@transaction.amount, note: @transaction.note, user: @transaction.user.nick, foodcoop: FoodsoftConfig[:name]
+= t '.text', group: @group.name, when: @transaction.created_on.strftime('%d.%m.%Y um %H:%M'), balance: @group.account_balance, amount:@transaction.amount, note: @transaction.note, user: show_user(@transaction.user), foodcoop: FoodsoftConfig[:name]

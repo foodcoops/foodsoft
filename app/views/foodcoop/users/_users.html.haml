@@ -4,7 +4,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t 'simple_form.labels.user.nick'
+      - if FoodsoftConfig[:use_nick]
+        %th= t 'simple_form.labels.user.nick'
       %th= t 'simple_form.labels.user.name'
       %th= t 'simple_form.labels.user.email'
       %th= t 'simple_form.labels.user.phone'
@@ -13,7 +14,8 @@
   %tbody
     - for user in @users
       %tr
-        %td= user.nick
+        - if FoodsoftConfig[:use_nick]
+          %td= user.nick
         %td= user.name  if @current_user.role_admin? || user.settings.profile["name_is_public"]
         %td= user.email if @current_user.role_admin? || user.settings.profile["email_is_public"]
         %td= user.phone if @current_user.role_admin? || user.settings.profile["phone_is_public"]

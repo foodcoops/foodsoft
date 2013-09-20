@@ -8,7 +8,7 @@
 <ul style="">
     <% for membership in memberships %>
       <li style="margin-left:-15px">
-        <b><%= membership.user.nick %></b> (<%=h membership.user.first_name + ' ' + membership.user.last_name %>)
+        <%= show_user membership.user, full: true, markup: true %>
          | <%= link_to_remote t('.drop'), 
                 :url => { :controller => '/memberships', :action => 'drop_member', :id => @group, :membership_id => membership },
                 :before => "Element.show('loader')",

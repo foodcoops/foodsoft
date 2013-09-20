@@ -13,7 +13,7 @@
       %dt= t '.note'
       %dd= @order.note
     %dt= t '.created_by'
-    %dd= link_to_user_message_if_valid(@order.created_by)
+    %dd= show_user_link(@order.created_by)
     %dt= t '.begin'
     %dd= format_time(@order.starts)
     %dt= t '.ending'

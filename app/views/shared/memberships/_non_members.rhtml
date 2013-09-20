@@ -1,7 +1,7 @@
 <ul>
  <% for user in @group.non_members %>
   <li>
-    <b><%= user.nick %></b> (<%=h user.first_name + ' ' + user.last_name %>)
+    <%= show_user user, full: true, markup: true %>
     | <%= link_to_remote t('.add'), 
         :url => { :controller => '/memberships', :action => 'add_member', :id => @group, :user_id => user },
         :before => "Element.show('loader')",

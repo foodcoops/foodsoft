@@ -1,6 +1,6 @@
 - content_for :javascript do
   :javascript
-    $('user_nick').focus();
+    $(#{FoodsoftConfig[:use_nick ? 'user_nick' : 'user_first_name'}).focus();
 
 - title t('.title', name: FoodsoftConfig[:name])
 = t('.body', group: h(@invite.group.name), foodcoop: h(FoodsoftConfig[:name])).html_safe

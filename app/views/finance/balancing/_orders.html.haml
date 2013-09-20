@@ -16,7 +16,7 @@
           %td= link_to truncate(order.name), new_finance_order_path(order_id: order.id)
           %td=h format_time(order.ends) unless order.ends.nil?
           %td= order.closed? ? t('.cleared', amount: number_to_currency(order.foodcoop_result)) : t('.ended')
-          %td= order.updated_by.nil? ? '??' : order.updated_by.nick
+          %td= show_user(order.updated_by)
           %td
             - unless order.closed?
               = link_to t('.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-mini btn-primary'

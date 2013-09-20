@@ -13,7 +13,7 @@
       %h2= t '.people'
       %ul
         - for membership in @ordergroup.memberships
-          %li= membership.user.nick
+          %li= show_user membership.user
       = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
   .span8
     %h2= t('.account_summary')
