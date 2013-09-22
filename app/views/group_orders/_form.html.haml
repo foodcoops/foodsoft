@@ -8,7 +8,7 @@
       setToleranceBehaviour(#{FoodsoftConfig[:tolerance_is_costly]});
       setStockit(#{@order.stockit?});
       // create List for search-feature (using list.js, http://listjs.com)
-      new List(document.body, { valueNames: ['name'], engine: 'unlist' }); 
+      new CustomizedList(document.body, { valueNames: ['name'], engine: 'unlist' });
     });
 
 - title t('.title'), false
@@ -41,7 +41,7 @@
 
 .row-fluid
   .well.clear
-    = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query input-large search'
+    = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query input-large delayed-search'
 
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
