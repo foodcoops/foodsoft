@@ -67,8 +67,8 @@
         %th{style: "width:15px;"}= t '.sum'
     %tbody.list
       - @order.articles_grouped_by_category.each do |category, order_articles|
-        %tr.article-category
-          %td.name
+        %tr.no-unlist.article-category
+          %td
             = category
             %i.icon-tag
           %td{colspan: "9"}

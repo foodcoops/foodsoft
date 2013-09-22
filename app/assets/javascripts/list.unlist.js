@@ -136,9 +136,9 @@ List.prototype.templateEngines.unlist = function(list, settings) {
         $(item.elm).removeClass('unlisted');
     };
     this.hide = function(item) {
-        if (item.elm !== undefined) {
-            $(item.elm).addClass('unlisted');
-        }
+        ensure.created(item);
+        $(item.elm).addClass('unlisted');
+        listSource.appendChild(item.elm);
     };
     this.clear = function() {
         $(listSource.childNodes).addClass('unlisted');
