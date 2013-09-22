@@ -158,8 +158,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  # XXX this is view-related; need to move out things like token_attributes
+  #     then this can be removed
+  def display
+    # would be sensible to match ApplicationController#show_user
+    FoodsoftConfig[:use_nick] ? nick : "#{first_name} #{last_name}"
+  end
+
   def token_attributes
-    {:id => id, :name => "#{nick} (#{ordergroup.try(:name)})"}
+    # would be sensible to match ApplicationController#show_user
+    #   this should not be part of the model anyway
+    {:id => id, :name => "#{display} (#{ordergroup.try(:name)})"}
   end
 
 end
