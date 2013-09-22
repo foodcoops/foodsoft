@@ -8,7 +8,8 @@
         %div{id: "collapse#{workgroup.id}", class: 'accordion-body collapse'}
           .accordion-inner
             %ul.unstyled
-              - workgroup.users.includes(:groups).order('nick').each do |user|
+              - workgroup.users.includes(:groups).natural_order.each do |user|
                 %li
-                  = user.nick
+                  = show_user(user)
                   %small (#{user.ordergroup.try(:name)})
+

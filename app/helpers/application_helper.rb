@@ -161,7 +161,7 @@ module ApplicationHelper
   end
 
   # show a user, depending on settings
-  def show_user(user=@current_user, options = {})#full: false, markup: false, unique: false)
+  def show_user(user=@current_user, options = {})
     if user.nil?
       "?"
     elsif FoodsoftConfig[:use_nick]
