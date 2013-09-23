@@ -43,7 +43,11 @@
 
 .row-fluid
   .well.clear
-    = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query input-large delayed-search'
+    .form-search
+      .input-append
+        = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search'
+        %button.add-on.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
+          %i.icon.icon-remove
 
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
