@@ -1536,7 +1536,7 @@ en:
       message:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
-        units_to_order: Amount of delivered units
+        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and otherwise ordergroups will be accounted for undelivered articles!
         update_current_price: Also update the price of the current order
       stock_article:
         copy_stock_article:
