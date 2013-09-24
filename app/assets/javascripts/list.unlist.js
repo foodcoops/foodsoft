@@ -62,6 +62,19 @@ List.prototype.templateEngines.unlist = function(list, settings) {
         itemSource = getItemSource(settings.item),
         templater = this;
 
+  var init = {
+    start: function(options) {
+      this.defaults(options);
+      this.callbacks(options);
+    },
+    defaults: function(options) {
+      options.listHeadingsClass = options.listHeadingsClass || 'list-heading';
+    },
+    callbacks: function(options) {
+      list.on('updated', templater.updateListHeadings);
+    }
+  };
+
     function getItemSource(item) {
         if (item === undefined) {
             var nodes = listSource.childNodes,
@@ -143,6 +156,18 @@ List.prototype.templateEngines.unlist = function(list, settings) {
     this.clear = function() {
         $(listSource.childNodes).addClass('unlisted');
     };
+  
+  this.updateListHeadings = function() {
+    var headSel = '.' + settings.listHeadingsClass;
+    
+    $(headSel, listSource).each(function() {
+      if( $(this).nextUntil(headSel, ':not(.unlisted)').length ) {
+        $(this).removeClass('unlisted');
+      }
+    });
+  };
+  
+  init.start(settings);
 };
 
 /*******************************************************************************

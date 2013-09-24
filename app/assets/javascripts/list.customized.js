@@ -45,21 +45,21 @@ var CustomizedList = function(id, options, values) {
     
     var resetSearchButton = h.getByClass(options.resetSearchClass, self.list.listContainer);
     $(resetSearchButton).removeClass(options.highlightClass);
-  }
+  };
   
   this.searchDelayEnd = function(searchString, columns) {
     self.list.search(searchString, columns);
-  }
+  };
   
   this.highlightResetButton = function() {
     var resetSearchButton = h.getByClass(options.resetSearchClass, self.list.listContainer);
     $(resetSearchButton).toggleClass(options.highlightClass, self.list.searched);
-  }
+  };
   
   this.resetSearch = function() {
     $('.' + options.delayedSearchClass + ', .' + options.searchClass, self.list.listContainer).val('');
     self.list.search('');
-  }
+  };
   
   init.start(id, options, values);
 }
