@@ -5,12 +5,12 @@ namespace :foodsoft do
   task :notify_upcoming_tasks => :environment do
     tasks = Task.where(done: false, due_date: 1.day.from_now.to_date)
     for task in tasks
-      puts "Send notifications for #{task.name} to .."
+      say "Send notifications for #{task.name} to .."
       for user in task.users
         begin
           Mailer.upcoming_tasks(user, task).deliver if user.settings.notify['upcoming_tasks'] == 1
         rescue
-          puts "deliver aborted for #{user.email}.."
+          say "deliver aborted for #{user.email}.."
         end
       end
     end
@@ -27,7 +27,7 @@ namespace :foodsoft do
               begin
                 Mailer.not_enough_users_assigned(task, user).deliver
               rescue
-                puts "deliver aborted for #{user.email}"
+                say "deliver aborted for #{user.email}"
               end
             end
           end
@@ -46,4 +46,9 @@ namespace :foodsoft do
       end
     end
   end
+end
+
+# Helper
+def say(message)
+  puts message unless Rake.application.options.silent
 end

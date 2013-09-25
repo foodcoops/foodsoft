@@ -8,7 +8,7 @@ namespace :multicoops do
   task :run => :environment do
     task_to_run = ENV['TASK']
     FoodsoftConfig.each_coop do |coop|
-      puts "Run '#{task_to_run}' for #{coop}"
+      say "Run '#{task_to_run}' for #{coop}"
       Rake::Task[task_to_run].execute
     end
   end
@@ -17,8 +17,14 @@ namespace :multicoops do
   task :run_single => :environment do
     task_to_run = ENV['TASK']
     FoodsoftConfig.select_foodcoop ENV['FOODCOOP']
-    puts "Run '#{task_to_run}' for #{ENV['FOODCOOP']}"
+    say "Run '#{task_to_run}' for #{ENV['FOODCOOP']}"
     Rake::Task[task_to_run].execute
   end
 
+end
+
+
+# Helper
+def say(message)
+  puts message unless Rake.application.options.silent
 end
