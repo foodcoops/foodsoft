@@ -161,9 +161,8 @@ List.prototype.templateEngines.unlist = function(list, settings) {
     var headSel = '.' + settings.listHeadingsClass;
     
     $(headSel, listSource).each(function() {
-      if( $(this).nextUntil(headSel, ':not(.unlisted)').length ) {
-        $(this).removeClass('unlisted');
-      }
+      var listedCount = $(this).nextUntil(headSel, ':not(.unlisted)').length;
+      $(this).toggleClass('unlisted', 0==listedCount);
     });
   };
   
