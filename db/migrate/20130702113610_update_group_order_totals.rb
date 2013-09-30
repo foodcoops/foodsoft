@@ -7,7 +7,7 @@ class UpdateGroupOrderTotals < ActiveRecord::Migration
     say "If you do want to update the ordergroup totals, open the rails console " +
         "(by running `rails c`), and enter:"
 
-    say "GroupOrder.all.each { |go| go.order.closed? and go.update_price! }", subitem: true
+    say "GroupOrder.all.each { |go| go.order.closed? and go.update_price! }"
 
     say "You may want to check first that no undesired accounting issues are introduced. " +
         "It may be wise to discuss this with those responsible for the ordering finances."
