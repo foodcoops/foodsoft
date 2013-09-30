@@ -430,7 +430,7 @@ en:
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
     create_stock_article:
-      notice: The new stock article »%{name}« was saved.
+      notice: The new stock article "%{name}" was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
@@ -478,7 +478,7 @@ en:
     update:
       notice: Delivery was updated.
     update_stock_article:
-      notice: The stock article »%{name}« was updated.
+      notice: The stock article "%{name}" was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
@@ -1313,7 +1313,7 @@ en:
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
-      supplier: Supplier
+      supplier: Producer
       title: Article
       unit_quantity: Unit quantity
     index:
@@ -1395,7 +1395,7 @@ en:
       notice: Page was created
     cshow:
       error_noexist: Page doesn’t exist!
-      redirect_notice: Redirected from %{page} ..
+      redirect_notice: Redirected from %{page} ...
     destroy:
       notice: The page '%{page}' and all subpages have been deleted successfully.
     edit:
@@ -1536,7 +1536,7 @@ en:
       message:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
-        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and otherwise ordergroups will be accounted for undelivered articles!
+        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
         update_current_price: Also update the price of the current order
       stock_article:
         copy_stock_article:
@@ -1866,7 +1866,7 @@ en:
       title: Show task
     update:
       notice: Task has been updated
-      notice_converted: Task has been updated and was converted to a regular task
+      notice_converted: Task has been updated and was converted to a non-repeating task.
     user:
       more: Nothing to do? %{tasks_link} are tasks for sure.
       tasks_link: Here

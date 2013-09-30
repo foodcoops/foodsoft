@@ -1288,7 +1288,7 @@ fr:
       article_count: ! 'Articles commandés:'
       name: Nom
       prices: Prix brut/net
-      prices_sum: Totaux (des prix bruts/nets)
+      prices_sum: ! 'Totaux (des prix bruts/nets):'
       unit_quantity: Unités par lots x Lots
       units_full: Lots complet
       units_ordered: Unités commandées
@@ -1536,7 +1536,7 @@ fr:
       message:
         private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       order_article:
-        units_to_order: Nombre de lots livrés
+        units_to_order: 
         update_current_price: Modifie aussi le prix des commandes en cours
       stock_article:
         copy_stock_article:
