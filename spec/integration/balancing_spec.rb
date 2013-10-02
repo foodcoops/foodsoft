@@ -103,6 +103,23 @@ describe 'settling an order', :type => :feature do
       expect(GroupOrderArticle.exists?(goa1.id)).to be_false
     end
 
+    it 'keeps product when amount is set to zero' do
+      within("#order_article_#{oa.id}") do
+        click_link I18n.t('ui.edit')
+      end
+      within("#edit_order_article_#{oa.id}") do
+        fill_in :order_article_units_to_order, :with => 0
+        find('input[type="submit"]').click
+      end
+      expect(page).to have_selector("#order_article_#{oa.id}")
+      # make sure it still works after reloading
+      visit new_finance_order_path(order_id: order.id)
+      expect(page).to have_selector("#order_article_#{oa.id}")
+      expect(OrderArticle.exists?(oa.id)).to be_true
+      oa.reload
+      expect(oa.units_to_order).to eq(0)
+    end
+
   end
 
 end
