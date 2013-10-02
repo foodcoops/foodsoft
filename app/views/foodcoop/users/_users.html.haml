@@ -16,7 +16,7 @@
       %tr
         - if FoodsoftConfig[:use_nick]
           %td= user.nick
-        %td= user.name  if @current_user.role_admin? || user.settings.profile["name_is_public"]
+        %td= user.name  if @current_user.role_admin? || user.settings.profile["name_is_public"] || !FoodsoftConfig[:use_nick]
         %td= user.email if @current_user.role_admin? || user.settings.profile["email_is_public"]
         %td= user.phone if @current_user.role_admin? || user.settings.profile["phone_is_public"]
         %td= user.ordergroup_name
