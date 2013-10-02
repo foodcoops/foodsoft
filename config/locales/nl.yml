@@ -972,7 +972,6 @@ nl:
       title: 
     new:
       action: 
-      back: 
       body: 
     success: 
   layouts:

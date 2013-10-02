@@ -975,7 +975,6 @@ en:
       title: Invite person
     new:
       action: Send invite
-      back: or go back
       body: <p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
     success: User was invited successfully.
   layouts:

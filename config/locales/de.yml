@@ -971,7 +971,6 @@ de:
       title: Person einladen
     new:
       action: Einlading abschicken
-      back: oder zurück
       body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
     success: Benutzerin wurde erfolgreich eingeladen.
   layouts:

@@ -994,7 +994,6 @@ fr:
       title: Engrainer une personne
     new:
       action: Engrainer!
-      back: ou revenir en arrière
       body: <p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>
     success: La_le membre a été engrainéE avec succès!
   layouts:
