@@ -212,6 +212,11 @@ en:
       workgroups:
         members: members
         name: name
+  application:
+    controller:
+      error_denied: 'Access denied!'
+      error_authn: 'Authentication required!'
+      error_members_only: 'This action is only available to members of the group!'
   article_categories:
     create:
       notice: Category was stored
