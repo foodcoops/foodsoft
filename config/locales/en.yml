@@ -653,11 +653,13 @@ en:
     create:
       notice: Invoice was created
     financial_transactions:
-      create:
-        notice: The transaction was saved.
-      create_collection:
-        alert: ! 'An error occured: %{error}'
-        notice: All transactions were saved.
+      controller:
+        create:
+          notice: The transaction was saved.
+        create_collection:
+          alert: ! 'An error occured: %{error}'
+          error_note_required: ! 'Note is required!'
+          notice: All transactions were saved.
       index:
         balance: ! 'Balance of account: %{balance}'
         last_updated_at: (last updated %{when} ago)

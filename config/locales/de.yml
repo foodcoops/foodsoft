@@ -649,11 +649,13 @@ de:
     create:
       notice: Rechnung wurde erstellt.
     financial_transactions:
-      create:
-        notice: Die Transaktion wurde gespeichert.
-      create_collection:
-        alert: ! 'Ein Fehler ist aufgetreten: %{error}'
-        notice: Alle Transaktionen wurden gespeichert.
+      controller:
+        create:
+          notice: Die Transaktion wurde gespeichert.
+        create_collection:
+          alert: ! 'Ein Fehler ist aufgetreten: %{error}'
+          error_note_required: ! 'Notiz wird benötigt!'
+          notice: Alle Transaktionen wurden gespeichert.
       index:
         balance: ! 'Kontostand: %{balance}'
         last_updated_at: (zuletzt aktualisiert vor %{when})
