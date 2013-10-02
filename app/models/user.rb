@@ -162,7 +162,7 @@ class User < ActiveRecord::Base
   #     then this can be removed
   def display
     # would be sensible to match ApplicationController#show_user
-    FoodsoftConfig[:use_nick] ? nick : "#{first_name} #{last_name}"
+    FoodsoftConfig[:use_nick] ? nick : name
   end
 
   def token_attributes
