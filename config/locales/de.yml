@@ -212,6 +212,11 @@ de:
       workgroups:
         members: Mitglieder
         name: Name
+  application:
+    controller:
+      error_authn: 
+      error_denied: 
+      error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
   article_categories:
     create:
       notice: Die Kategorie wurde gespeichert
@@ -482,14 +487,16 @@ de:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
       rows:
       - Bestellgruppe
-      - Menge
+      - Bestellt
+      - Bekommen
       - Preis
       title: ! 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
     order_by_groups:
       filename: Bestellung %{name}-%{date} - Gruppensortierung
       rows:
       - Artikel
-      - Menge
+      - Bestellt
+      - Bekommen
       - Preis
       - GebGr
       - Einheit
@@ -505,6 +512,7 @@ de:
       - Gebinde
       - Einheit
       - Preis/Einheit
+      - Summe
       total: Gesamtpreis
     order_matrix:
       filename: Bestellung %{name}-%{date} - Sortiermatrix
@@ -644,11 +652,13 @@ de:
       account_info:
         balance: Kontostand
         last_updated_at: (Der Konstostand ist zuletzt aktualisiert vor %{when})
-      create:
-        notice: Die Transaktion wurde gespeichert.
-      create_collection:
-        alert: ! 'Ein Fehler ist aufgetreten: %{error}'
-        notice: Alle Transaktionen wurden gespeichert.
+      controller:
+        create:
+          notice: Die Transaktion wurde gespeichert.
+        create_collection:
+          alert: ! 'Ein Fehler ist aufgetreten: %{error}'
+          error_note_required: Notiz wird benötigt!
+          notice: Alle Transaktionen wurden gespeichert.
       index:
         new_transaction: Neue Transaktion anlegen
         search_placeholder: Suchen ...
@@ -969,7 +979,6 @@ de:
       title: Person einladen
     new:
       action: Einlading abschicken
-      back: oder zurück
       body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
     success: Benutzerin wurde erfolgreich eingeladen.
   layouts:
@@ -1297,6 +1306,7 @@ de:
     finish:
       notice: Die Bestellung wurde beendet.
     form:
+      ignore_warnings: Warnungen ignorieren
       name: Name
       note: Notiz
       origin: Herkunft
@@ -1324,6 +1334,8 @@ de:
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: ! 'Bestellung: %{name}, bis %{ends}'
       stock: Lager
+      warning_ordered: ! 'Warnung: Die rot markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht.'
+      warning_ordered_stock: ! 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
     new:
       title: Neue Bestellung anlegen
     orders:
@@ -1450,11 +1462,14 @@ de:
       title: Foodsoft anmelden
       user: Benutzerin
   shared:
+    articles:
+      ordered: Bestellt
+      ordered_desc: 
+      received: Bekommen
+      received_desc: 
     articles_by_articles:
-      ordered: Bestellt (Menge + Toleranz)
       ordergroup: Bestellgruppe
       price: Gesamtpreis
-      received: Bekommen
     articles_by_groups:
       fc_price: FC-Preis
       fc_price_desc: Preis incl. MwSt, Pfand und Foodcoop-Aufschlag
@@ -1463,8 +1478,6 @@ de:
       unit: Einheit
       unit_quantity: GebGr
       unit_quantity_desc: Gebindegröße
-      units: Menge
-      units_desc: Zugeteilte Einheiten
     group:
       access: Zugriff auf
       activated: aktiviert
@@ -1523,7 +1536,7 @@ de:
       message:
         private: Nachricht erscheint nicht im Foodsoft Posteingang
       order_article:
-        units_to_order: Anzahl gelieferter Gebinde
+        units_to_order: Wenn Du die Gesamtanzahl gelieferter Gebinde änderst, musst Du auch die individuelle Anzahl der einzelnen Bestellgruppen anpassen, indem Du auf den Artikelnamen klickst. Sie werden nicht automatisch neuberechnet und andernfalls werden den Bestellgruppen Artikel in Rechnung gestellt, die nicht geliefert wurden!
         update_current_price: Ändert auch den Preis für aktuelle Bestellungen
       stock_article:
         copy_stock_article:

@@ -1,9 +1,9 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe User do
 
   it 'is correctly created' do
-    user = FactoryGirl.create :user,
+    user = create :user,
       nick: 'johnnydoe', first_name: 'Johnny', last_name: 'DoeBar',
       email: 'johnnydoe@foodcoop.test', phone: '+1234567890'
     expect(user.nick).to eq('johnnydoe')
@@ -15,7 +15,7 @@ describe User do
   end
 
   describe 'does not have the role' do
-    let(:user) { FactoryGirl.create :user }
+    let(:user) { create :user }
     it 'admin'        do expect(user.role_admin?).to be_false end
     it 'finance'      do expect(user.role_finance?).to be_false end
     it 'article_meta' do expect(user.role_article_meta?).to be_false end
@@ -24,7 +24,7 @@ describe User do
   end
 
   describe do
-    let(:user) { FactoryGirl.create :user, password: 'blahblah' }
+    let(:user) { create :user, password: 'blahblah' }
 
     it 'can authenticate with correct password' do
       expect(User.authenticate(user.nick, 'blahblah')).to be_true
@@ -44,15 +44,15 @@ describe User do
     end
 
     it 'has a unique nick' do
-      expect(FactoryGirl.build(:user, nick: user.nick, email: "x-#{user.email}")).to be_invalid
+      expect(build(:user, nick: user.nick, email: "x-#{user.email}")).to be_invalid
     end
     it 'has a unique email' do
-      expect(FactoryGirl.build(:user, email: "#{user.email}")).to be_invalid
+      expect(build(:user, email: "#{user.email}")).to be_invalid
     end
   end
 
   describe 'admin' do
-    let(:user) { FactoryGirl.create :admin }
+    let(:user) { create :admin }
     it 'default admin role' do expect(user.role_admin?).to be_true end
   end
 

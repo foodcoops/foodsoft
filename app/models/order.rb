@@ -1,6 +1,9 @@
 # encoding: utf-8
 #
 class Order < ActiveRecord::Base
+
+  attr_accessor :ignore_warnings
+
   # Associations
   has_many :order_articles, :dependent => :destroy
   has_many :articles, :through => :order_articles
@@ -16,6 +19,7 @@ class Order < ActiveRecord::Base
   # Validations
   validates_presence_of :starts
   validate :starts_before_ends, :include_articles
+  validate :keep_ordered_articles
 
   # Callbacks
   after_save :save_order_articles, :update_price_of_group_orders
@@ -59,7 +63,12 @@ class Order < ActiveRecord::Base
   end
 
   def article_ids
-    @article_ids ||= order_articles.map(&:article_id)
+    @article_ids ||= order_articles.map { |a| a.article_id.to_s }
+  end
+
+  # Returns an array of article ids that lead to a validation error.
+  def erroneous_article_ids
+    @erroneous_article_ids ||= []
   end
 
   def open?
@@ -213,24 +222,24 @@ class Order < ActiveRecord::Base
   protected
 
   def starts_before_ends
-    errors.add(:ends, I18n.t('articles.model.error_starts_before_ends')) if (ends && starts && ends <= starts)
+    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if (ends && starts && ends <= starts)
   end
 
   def include_articles
-    errors.add(:articles, I18n.t('articles.model.error_nosel')) if article_ids.empty?
+    errors.add(:articles, I18n.t('orders.model.error_nosel')) if article_ids.empty?
+  end
+
+  def keep_ordered_articles
+    chosen_order_articles = order_articles.find_all_by_article_id(article_ids)
+    to_be_removed = order_articles - chosen_order_articles
+    to_be_removed_but_ordered = to_be_removed.select { |a| a.quantity > 0 or a.tolerance > 0 }
+    unless to_be_removed_but_ordered.empty? or ignore_warnings
+      errors.add(:articles, I18n.t(stockit? ? 'orders.model.warning_ordered_stock' : 'orders.model.warning_ordered'))
+      @erroneous_article_ids = to_be_removed_but_ordered.map { |a| a.article_id }
+    end
   end
 
   def save_order_articles
-    #self.articles = Article.find(article_ids) # This doesn't deletes the group_order_articles, belonging to order_articles,
-    #                                          # see http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#method-i-has_many
-    #
-    ## Ensure to delete also the group_order_articles, belonging to order_articles
-    ## This case is relevant, when removing articles from a running order
-    #goa_ids = GroupOrderArticle.where(group_order_id: group_order_ids).includes(:order_article).
-    #    select { |goa| goa.order_article.nil? }.map(&:id)
-    #GroupOrderArticle.delete_all(id: goa_ids) unless goa_ids.empty?
-
-
     # fetch selected articles
     articles_list = Article.find(article_ids)
     # create new order_articles

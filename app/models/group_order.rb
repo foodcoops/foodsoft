@@ -21,6 +21,8 @@ class GroupOrder < ActiveRecord::Base
   scope :in_open_orders, joins(:order).where(:orders => {:state => 'open'})
   scope :in_finished_orders, joins(:order).where(:orders => {:state => 'finished'})
 
+  scope :ordered, :include => :ordergroup, :order => 'groups.name'
+
   # Generate some data for the javascript methods in ordering view
   def load_data
     data = {}

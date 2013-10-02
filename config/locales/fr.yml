@@ -212,6 +212,11 @@ fr:
       workgroups:
         members: membres
         name: nom
+  application:
+    controller:
+      error_authn: 
+      error_denied: 
+      error_members_only: 
   article_categories:
     create:
       notice: La catégorie a bien été définie.
@@ -655,11 +660,13 @@ fr:
     create:
       notice: La facture a bien été définie.
     financial_transactions:
-      create:
-        notice: La transaction a été sauvegardée.
-      create_collection:
-        alert: ! 'Une erreur s''est produite: %{error}'
-        notice: Les transactions ont été sauvegardées.
+      controller:
+        create:
+          notice: La transaction a été sauvegardée.
+        create_collection:
+          alert: ! 'Une erreur s''est produite: %{error}'
+          error_note_required: 
+          notice: Les transactions ont été sauvegardées.
       index:
         balance: ! 'Solde: %{balance}'
         last_updated_at: (dernière mise à jour il y a %{when})
@@ -994,7 +1001,6 @@ fr:
       title: Engrainer une personne
     new:
       action: Engrainer!
-      back: ou revenir en arrière
       body: <p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>
     success: La_le membre a été engrainéE avec succès!
   layouts:
@@ -1288,7 +1294,7 @@ fr:
       article_count: ! 'Articles commandés:'
       name: Nom
       prices: Prix brut/net
-      prices_sum: Totaux (des prix bruts/nets)
+      prices_sum: ! 'Totaux (des prix bruts/nets):'
       unit_quantity: Unités par lots x Lots
       units_full: Lots complet
       units_ordered: Unités commandées
@@ -1308,6 +1314,7 @@ fr:
     finish:
       notice: La commande a été close.
     form:
+      ignore_warnings: 
       name: Nom
       note: Note
       origin: Origine
@@ -1335,6 +1342,8 @@ fr:
       error_starts_before_ends: doit être postérieur à la date de début de la commande (ou bien être laissé vierge)
       notice_close: ! 'Commande: %{name}, jusqu''au %{ends}'
       stock: Stock
+      warning_ordered: 
+      warning_ordered_stock: 
     new:
       title: Définir une nouvelle commande
     orders:
@@ -1459,11 +1468,14 @@ fr:
       title: Te connecter à Foodsoft
       user: Identifiant
   shared:
+    articles:
+      ordered: Commandé
+      ordered_desc: 
+      received: Reçu
+      received_desc: 
     articles_by_articles:
-      ordered: Commandé (Quantité + Tolérance)
       ordergroup: Cellul
       price: Prix total
-      received: Reçu
     articles_by_groups:
       fc_price: Prix coop
       fc_price_desc: Prix avec TVA, consigne et part de la coop inclus.
@@ -1472,8 +1484,6 @@ fr:
       unit: Unité
       unit_quantity: U/L
       unit_quantity_desc: Unités par lot
-      units: Quantité
-      units_desc: Unités assignées
     group:
       access: Accès à
       activated: activé
@@ -1532,7 +1542,7 @@ fr:
       message:
         private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       order_article:
-        units_to_order: Nombre de lots livrés
+        units_to_order: 
         update_current_price: Modifie aussi le prix des commandes en cours
       stock_article:
         copy_stock_article:

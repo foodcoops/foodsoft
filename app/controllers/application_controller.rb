@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
 
   def deny_access
     session[:return_to] = request.original_url
-    redirect_to login_url, :alert => 'Access denied!'
+    redirect_to login_url, :alert => I18n.t('application.controller.error_denied')
   end
 
   private
@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
       # No user at all: redirect to login page.
       session[:user_id] = nil
       session[:return_to] = request.original_url
-      redirect_to login_url, :alert => 'Authentication required!'
+      redirect_to login_url, :alert => I18n.t('application.controller.error_authn')
     else
       # We have an authenticated user, now check role...
       # Roles gets the user through his memberships.
@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
   def authenticate_membership_or_admin
     @group = Group.find(params[:id])
     unless @group.member?(@current_user) or @current_user.role_admin?
-      redirect_to root_path, alert: "Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!"
+      redirect_to root_path, alert: I18n.t('application.controller.error_members_only')
     end
   end
 
