@@ -214,9 +214,9 @@ de:
         name: Name
   application:
     controller:
-      error_denied:
-      error_authn:
-      error_members_only: 'Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!'
+      error_authn: 
+      error_denied: 
+      error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
   article_categories:
     create:
       notice: Die Kategorie wurde gespeichert
@@ -654,7 +654,7 @@ de:
           notice: Die Transaktion wurde gespeichert.
         create_collection:
           alert: ! 'Ein Fehler ist aufgetreten: %{error}'
-          error_note_required: ! 'Notiz wird benötigt!'
+          error_note_required: Notiz wird benötigt!
           notice: Alle Transaktionen wurden gespeichert.
       index:
         balance: ! 'Kontostand: %{balance}'

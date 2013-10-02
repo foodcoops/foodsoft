@@ -212,6 +212,11 @@ nl:
       workgroups:
         members: leden
         name: naam
+  application:
+    controller:
+      error_authn: Inloggen vereist.
+      error_denied: Geen toegang.
+      error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
   article_categories:
     create:
       notice: Categorie is opgeslagen
@@ -645,11 +650,13 @@ nl:
     create:
       notice: Rekening is gemaakt
     financial_transactions:
-      create:
-        notice: De transactie is opgeslagen.
-      create_collection:
-        alert: 
-        notice: Alle transacties zijn opgeslagen.
+      controller:
+        create:
+          notice: De transactie is opgeslagen.
+        create_collection:
+          alert: 
+          error_note_required: Notitie ontbreekt.
+          notice: Alle transacties zijn opgeslagen.
       index:
         balance: ! 'Tegoed: %{balance}'
         last_updated_at: (laatst bijgewerkt %{when} geleden)
@@ -668,8 +675,8 @@ nl:
         sidebar: 
         title: 
       ordergroup:
-        remove: 
-        remove_group: 
+        remove: Verwijderen
+        remove_group: Huishouden verwijderen
       transactions:
         amount: Bedrag
         date: Datum
@@ -856,7 +863,7 @@ nl:
       title: Lopende bestellingen
     update:
       error_general: 
-      error_stale: 
+      error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon je bestelling niet opgeslagen worden. Sorry!
       notice: De bestelling is opgeslagen.
   helpers:
     application:
@@ -890,19 +897,19 @@ nl:
   home:
     apple_bar:
       desc: 
-      more_info: 
+      more_info: Meer informatie
       points: 
       warning: 
     changes_saved: Wijzigingen opgeslagen.
     index:
-      due_date_format: 
+      due_date_format: ! '%A %d %B'
       messages:
         title: 
         view_all: 
       my_ordergroup:
-        funds: 
-        last_update: 
-        title: 
+        funds: ! '| Beschikbaar tegoed:'
+        last_update: Laatst gewijzigd %{when} geleden
+        title: Mijn huishouden
         transactions:
           amount: Bedrag
           note: Notitie
@@ -913,13 +920,13 @@ nl:
       ordergroup:
         title: 
       tasks_move:
-        action: 
-        desc: 
-        title: 
+        action: Taken op je nemen/annuleren
+        desc: Je bent voor de volgende taken verantwoordelijk.
+        title: Taken op je nemen
       tasks_open:
-        action: 
-        desc: 
-        title: 
+        action: open taken
+        desc: Er zijn %{size}
+        title: open taken
       title: Beginpagina
       your_tasks: Jouw taken
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
@@ -946,7 +953,7 @@ nl:
       admin: 
       finances:
         accounts: Tegoeden bijwerken
-        settle: 
+        settle: Bestelling afrekenen
         title: Financiën
       foodcoop: Foodcoop
       members: Leden
@@ -1051,13 +1058,31 @@ nl:
 
         Vriendelijke groet van %{foodcoop}.'
     reset_password:
-      subject: 
-      text: 
+      subject: Nieuw wachtwoord voor %{username}
+      text: ! 'Beste %{user},
+
+
+        Jij (of iemand anders) heeft een nieuw wachtwoord aangevraagd voor het foodcoop ordersysteem.
+
+        Ga naar de volgende pagina om een nieuw wachtwoord in te voeren: %{link}
+
+        Dit kan slechts éenmaal gedaan worden, en op zijn laatst op %{expires}.
+
+        Wanneer je je wachtwoord niet wilt veranderen, hoef je niets te doen; dan blijft je huidige wachtwoord geldig.
+
+
+        Groeten van je foodcoop!'
     upcoming_tasks:
-      nextweek: 
-      subject: 
-      text0: 
-      text1: 
+      nextweek: ! 'Taken voor komende week:'
+      subject: Er is een taak te doen!
+      text0: ! 'Beste %{user},
+
+
+        Je bent opgegeven voor "%{task}". Deze taak is morgen te vervullen (%{when})!'
+      text1: ! 'Mijn taken: %{user_tasks_url}
+
+
+        Groeten van %{foodcoop}.'
   messages:
     create:
       notice: Bericht is opgeslagen en wordt verzonden.

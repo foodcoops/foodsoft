@@ -212,6 +212,11 @@ fr:
       workgroups:
         members: membres
         name: nom
+  application:
+    controller:
+      error_authn: 
+      error_denied: 
+      error_members_only: 
   article_categories:
     create:
       notice: La catégorie a bien été définie.
@@ -655,11 +660,13 @@ fr:
     create:
       notice: La facture a bien été définie.
     financial_transactions:
-      create:
-        notice: La transaction a été sauvegardée.
-      create_collection:
-        alert: ! 'Une erreur s''est produite: %{error}'
-        notice: Les transactions ont été sauvegardées.
+      controller:
+        create:
+          notice: La transaction a été sauvegardée.
+        create_collection:
+          alert: ! 'Une erreur s''est produite: %{error}'
+          error_note_required: 
+          notice: Les transactions ont été sauvegardées.
       index:
         balance: ! 'Solde: %{balance}'
         last_updated_at: (dernière mise à jour il y a %{when})
