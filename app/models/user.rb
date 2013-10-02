@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_presence_of :password, :on => :create
   validates_length_of :nick, :in => 2..25, :allow_nil => true
-  validates_uniqueness_of :nick, :case_sensitive => false
+  validates_uniqueness_of :nick, :case_sensitive => false, :allow_nil => true
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_uniqueness_of :email, :case_sensitive => false
   validates_length_of :first_name, :in => 2..50
