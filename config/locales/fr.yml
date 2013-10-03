@@ -312,6 +312,8 @@ fr:
       body: ! '<p><i>Merci de vérifier les articles importés.</i></p>
 
         <p><i>Attention, les doublons ne sont pas automatiquement détectés.</p></i>.'
+      title: 
+    sync:
       outlist:
         body: ! 'Les articles suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
         body_skip: Aucun article à supprimer.
@@ -321,9 +323,9 @@ fr:
       title: Synchroniser les articles avec la base de données extérieure
       unit_quantity_short: U/L
       update:
-        body: <p><i>Chaque article apparaît deux fois. Les anciennes données sont rappelées en gris, et les champs du formulaire ont été préremplis avec les nouvelles valeurs. </i></p><p><i>Les changements sont marqués en jaune.</p></i>
+        body: ! 'Chaque article apparaît deux fois: les anciennes données sont rappelées en gris, et les champs du formulaire ont été préremplis avec les nouvelles valeurs. Les changements sont marqués en jaune.'
         title: Mettre à jour...
-        update_msg: ! 'Ces articles doivent être mis à jour:'
+        update_msg: 
     upload:
       body: ! '<p>Le fichier doit être au format texte et son nom doit se terminer par l''extension ".csv". La première ligne sera ignorée lors de l''importation.</p>
 

@@ -310,20 +310,22 @@ en:
       error_nosel: You have selected no articles
     parse_upload:
       body: <p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>
+      title: Upload articles
+    sync:
       outlist:
-        body: ! 'The following articles were outlisted and <b>deleted</b>:'
+        body: ! 'The following articles were removed from the list and will be <b>deleted</b>:'
         body_skip: No articles to delete.
-        title: Outlist ...
+        title: Remove from list ...
       price_short: Price
-      submit: Delete/update all
+      submit: Synchronize all
       title: Synchronize articles with external database
-      unit_quantity_short: unit quantity
+      unit_quantity_short: Unit quantity
       update:
-        body: ! '<p><i>Every article is shown twice. The old values are gray and the text fields contain the current values.</i></p>
-
-          <p><i>Differences with the old articles are marked yellow.</i></p>'
+        body: ! 'Every article is shown twice: old values are gray, while the text fields contain updated values. Differences with the old articles are marked yellow.'
         title: Update ...
-        update_msg: ! 'Articles must be updated:'
+        update_msg:
+          one: One article needs to be updated.
+          other: ! '%{count} articles need to be updated.'
     upload:
       body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
       fields:
