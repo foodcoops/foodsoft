@@ -1,3 +1,6 @@
+// for use with listjs 0.2.0
+// https://github.com/javve/list.js
+
 /*******************************************************************************
 ********************************************************************************
 
@@ -50,6 +53,7 @@ End copyright notice of the original code
 
 
 
+(function(w, undefined) {
 /*******************************************************************************
 Begin copy-pasted and modified code
 *******************************************************************************/
@@ -57,10 +61,23 @@ Begin copy-pasted and modified code
 // * template engine which adds class 'unlisted' instead of removing from DOM
 // * especially useful in case of formulars
 // * uses jQuery's $
-List.prototype.templateEngines.unlist = function(list, settings) {
-    var listSource = ListJsHelpers.getByClass(settings.listClass, list.listContainer, true),
-        itemSource = getItemSource(settings.item),
-        templater = this;
+w.List.prototype.templateEngines.unlist = function(list, settings) {
+  var h = w.ListJsHelpers;
+  
+  // start with standard engine, override specific methods afterwards
+  this.superClass = w.List.prototype.templateEngines.standard;
+  this.superClass(list, settings);
+  
+  // todo refer to listjs code instead of copy-pasting
+  var listSource = h.getByClass(settings.listClass, list.listContainer, true);
+  var templater = this;
+  var ensure = {
+    created: function(item) {
+      if(item.elm === undefined) {
+        templater.create(item);
+      }
+    }
+  };
 
   var init = {
     start: function(options) {
@@ -74,88 +91,20 @@ List.prototype.templateEngines.unlist = function(list, settings) {
       list.on('updated', templater.updateListHeadings);
     }
   };
-
-    function getItemSource(item) {
-        if (item === undefined) {
-            var nodes = listSource.childNodes,
-                items = [];
-
-            for (var i = 0, il = nodes.length; i < il; i++) {
-                // Only textnodes have a data attribute
-                if (nodes[i].data === undefined) {
-                    return nodes[i];
-                }
-            }
-            return null;
-        } else if (item.indexOf("<") !== -1) { // Try create html element of list, do not work for tables!!
-            var div = document.createElement('div');
-            div.innerHTML = item;
-            return div.firstChild;
-        } else {
-            return document.getElementById(settings.item);
-        }
-    }
-
-    var ensure = {
-        created: function(item) {
-            if (item.elm === undefined) {
-                templater.create(item);
-            }
-        }
-    };
-
-    /* Get values from element */
-    this.get = function(item, valueNames) {
-        ensure.created(item);
-        var values = {};
-        for(var i = 0, il = valueNames.length; i < il; i++) {
-            var elm = ListJsHelpers.getByClass(valueNames[i], item.elm, true);
-            values[valueNames[i]] = elm ? elm.innerHTML : "";
-        }
-        return values;
-    };
-
-    /* Sets values at element */
-    this.set = function(item, values) {
-        ensure.created(item);
-        for(var v in values) {
-            if (values.hasOwnProperty(v)) {
-                // TODO speed up if possible
-                var elm = ListJsHelpers.getByClass(v, item.elm, true);
-                if (elm) {
-                    elm.innerHTML = values[v];
-                }
-            }
-        }
-    };
-
-    this.create = function(item) {
-        if (item.elm !== undefined) {
-            return;
-        }
-        /* If item source does not exists, use the first item in list as
-        source for new items */
-        var newItem = itemSource.cloneNode(true);
-        newItem.id = "";
-        item.elm = newItem;
-        templater.set(item, item.values());
-    };
-    this.remove = function(item) {
-        listSource.removeChild(item.elm);
-    };
-    this.show = function(item) {
-        ensure.created(item);
-        listSource.appendChild(item.elm); // append item (or move it to the end)
-        $(item.elm).removeClass('unlisted');
-    };
-    this.hide = function(item) {
-        ensure.created(item);
-        $(item.elm).addClass('unlisted');
-        listSource.appendChild(item.elm);
-    };
-    this.clear = function() {
-        $(listSource.childNodes).addClass('unlisted');
-    };
+  
+  this.show = function(item) {
+    ensure.created(item);
+    listSource.appendChild(item.elm); // append item (or move it to the end)
+    $(item.elm).removeClass('unlisted');
+  };
+  this.hide = function(item) {
+    ensure.created(item);
+    $(item.elm).addClass('unlisted');
+    listSource.appendChild(item.elm);
+  };
+  this.clear = function() {
+    $(listSource.childNodes).addClass('unlisted');
+  };
   
   this.updateListHeadings = function() {
     var headSel = '.' + settings.listHeadingsClass;
@@ -172,3 +121,4 @@ List.prototype.templateEngines.unlist = function(list, settings) {
 /*******************************************************************************
 End copy-pasted and modified code
 *******************************************************************************/
+})(window);
