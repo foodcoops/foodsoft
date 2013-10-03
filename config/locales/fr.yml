@@ -1769,7 +1769,7 @@ fr:
       new_quantity: Nouveau stock
       order: Commande
       reason: Raison
-      stock_changes: Afficher l'historique pour "%{article_name}"
+      stock_changes: Afficher l'historique
       stock_taking: Inventaire
     stock_create:
       notice: L'article a été sauvegardé.

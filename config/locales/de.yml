@@ -1763,7 +1763,7 @@ de:
       new_quantity: Neuer Bestand
       order: Bestellung
       reason: Ereignis
-      stock_changes: Verlauf anzeigen für »%{article_name}«
+      stock_changes: Verlauf des Lagerbestands
       stock_taking: Inventur
     stock_create:
       notice: Lagerartikel wurde gespeichert.
