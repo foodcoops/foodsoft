@@ -1,7 +1,7 @@
 # encoding: utf-8
 class DeliveriesController < ApplicationController
 
-  before_filter :find_supplier, :exclude => :fill_new_stock_article_form
+  before_filter :find_supplier
   
   def index
     @deliveries = @supplier.deliveries.all :order => 'delivered_on DESC'
@@ -49,57 +49,22 @@ class DeliveriesController < ApplicationController
     flash[:notice] = I18n.t('deliveries.destroy.notice')
     redirect_to supplier_deliveries_url(@supplier)
   end
-  
-  # three possibilites to fill a new_stock_article form
-  # (1) start from blank or use params
-  def new_stock_article
-    @stock_article = @supplier.stock_articles.build(params[:stock_article])
-
-    render :layout => false
-  end
-  
-  # (2) StockArticle as template
-  def copy_stock_article
-    @stock_article = StockArticle.find(params[:old_stock_article_id]).dup
-    
-    render :layout => false
-  end
-  
-  # (3) non-stock Article as template
-  def derive_stock_article
-    @stock_article = Article.find(params[:old_article_id]).becomes(StockArticle).dup
-    
-    render :layout => false
-  end
-
-  def create_stock_article
-    @stock_article = StockArticle.new(params[:stock_article])
-    
-    if @stock_article.valid? and @stock_article.save
-      render :layout => false
-    else
-      render :action => 'new_stock_article', :layout => false
-    end
-  end
-
-  def edit_stock_article
-    @stock_article = StockArticle.find(params[:stock_article_id])
-    render :layout => false
-  end
-
-  def update_stock_article
-    @stock_article = StockArticle.find(params[:stock_article][:id])
-    
-    if @stock_article.update_attributes(params[:stock_article])
-      render :layout => false
-    else
-      render :action => 'edit_stock_article', :layout => false
-    end
-  end
 
   def add_stock_change
     @stock_change = StockChange.new
     @stock_change.stock_article = StockArticle.find(params[:stock_article_id])
+    render :layout => false
+  end
+
+  def on_stock_article_create
+    @stock_article = StockArticle.find(params[:id])
+    
+    render :layout => false
+  end
+
+  def on_stock_article_update
+    @stock_article = StockArticle.find(params[:id])
+    
     render :layout => false
   end
 

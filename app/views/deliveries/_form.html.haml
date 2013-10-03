@@ -42,7 +42,7 @@
         }
         if('new' == selectedArticle.id) {
           $.ajax({
-            url: '#{new_stock_article_supplier_deliveries_path(@supplier)}',
+            url: '#{new_stock_article_path}',
             type: 'get',
             data: {stock_article: {name: selectedArticle.text}},
             contentType: 'application/json; charset=UTF-8'
@@ -52,7 +52,7 @@
         }
         if('' != selectedArticle.id) {
           $.ajax({
-            url: '#{derive_stock_article_supplier_deliveries_path(@supplier)}',
+            url: '#{derive_stock_articles_path}',
             type: 'get',
             data: {old_article_id: selectedArticle.id},
             contentType: 'application/json; charset=UTF-8'
@@ -63,6 +63,24 @@
       });
       
       enablePriceTooltips();
+      
+      $('body').on('StockArticle#create', function(e) {
+        $.ajax({
+          url: '#{on_stock_article_create_supplier_deliveries_path(@supplier)}',
+          type: 'get',
+          data: {id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+      
+      $('body').on('StockArticle#update', function(e) {
+        $.ajax({
+          url: '#{on_stock_article_update_supplier_deliveries_path(@supplier)}',
+          type: 'get',
+          data: {id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
     });
     
     function mark_article_for_delivery(stock_article_id) {
@@ -106,7 +124,7 @@
       %tr
         %th{:colspan => 5}
           - if articles_for_select2(@supplier).empty?
-            = link_to t('.create_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), :remote => true, :class => 'btn'
+            = link_to t('.create_stock_article'), new_stock_article_path(:params => {:stock_article => {:supplier_id => @supplier.id}}), :remote => true, :class => 'btn'
           - else
             %input#new_stock_article{:style => 'width: 500px;'}
     %tbody

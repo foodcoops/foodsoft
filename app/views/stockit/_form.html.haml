@@ -1,18 +1,21 @@
-= simple_form_for stock_article, :validate => true do |f|
-  = f.association :supplier
-  = f.input :name
-  = f.input :unit
-  = f.input :note
-
-  - if stock_article.new_record?
-    = f.input :price
-    = f.input :tax, :wrapper => :append do
-      = f.input_field :tax
-      %span.add-on %
-    = f.input :deposit
-  - else
-    = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('.form.price_hint')
-  = f.association :article_category
-  .form-actions
-    = f.submit class: 'btn'
-    = link_to t('ui.or_cancel'), stock_articles_path
+= simple_form_for stock_article, remote: true, :validate => true do |f|
+  .modal-header
+    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    %h3= title
+  .modal-body
+    = f.association :supplier
+    = f.input :name
+    = f.input :unit
+    = f.input :note
+    - if stock_article.new_record?
+      = f.input :price
+      = f.input :tax, :wrapper => :append do
+        = f.input_field :tax
+        %span.add-on %
+      = f.input :deposit
+    - else
+      = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article)
+    = f.association :article_category
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit :class => 'btn btn-primary', 'data-disable-with' => t('ui.please_wait')
