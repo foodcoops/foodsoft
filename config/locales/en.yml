@@ -36,16 +36,27 @@ en:
   activerecord:
     attributes:
       article:
-        article_category: article category
+        article_category: Category
         availability: Is article available?
-        deposit: deposit
-        fc_price: FC price
-        fc_share: FC share
-        gross_price: gross price
-        price: price
+        availability_short: avail.
+        deposit: Deposit
+        fc_price: FoodCoop price
+        fc_price_short: FC price
+        fc_share: FoodCoop margin
+        fc_share_short: FC margin
+        gross_price: Gross price
+        manufacturer: Manufacturer
+        name: Name
+        note: Note
+        origin: Origin
+        price: Price
         tax: VAT
-        unit: unit
-        unit_quantity: unit quantity
+        unit: Unit
+        unit_quantity: Unit quantity
+        unit_quantity_short: U.Q.
+      article_category:
+        description: Description
+        name: Name
       financial_transaction:
         amount: amount
         note: note
@@ -1559,16 +1570,6 @@ en:
         required_users: How many users will be needed in total?
       tax: In percentage, standard is 7,0
     labels:
-      article:
-        article_category: Category
-        manufacturer: Manufacturer
-        name: Name
-        note: Note
-        origin: Origin
-        unit: Unit
-      article_category:
-        description: Description
-        name: Name
       defaults:
         amount: Amount
         date: Date

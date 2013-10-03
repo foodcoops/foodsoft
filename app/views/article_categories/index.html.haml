@@ -5,8 +5,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t('simple_form.labels.article_category.name')
-      %th= t('simple_form.labels.article_category.description')
+      %th= heading_helper ArticleCategory, :article_category
+      %th= heading_helper ArticleCategory, :description
       %th
   %tbody
     - @article_categories.each do |article_category|

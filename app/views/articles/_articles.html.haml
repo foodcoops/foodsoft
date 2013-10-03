@@ -6,16 +6,15 @@
   %thead
     %tr
       %th
-      %th= sort_link_helper t('simple_form.labels.article.name'), "name"
+      %th= sort_link_helper heading_helper(Article, :name), "name"
       %th
-      %th= sort_link_helper t('simple_form.labels.article.article_category'), "category"
-      %th= sort_link_helper t('simple_form.labels.article.unit'), "unit"
-      %th= sort_link_helper t('simple_form.labels.article.note'), "note"
-      %th{:style => "width: 4em;"}
-        %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity_short'
-      %th{:style => "width: 5em;"}= t '.price_netto'
-      %th{:style => "width: 3.5em;"}= t 'simple_form.labels.defaults.tax'
-      %th{:style => "width: 4em;"}= t 'simple_form.labels.defaults.deposit'
+      %th= sort_link_helper heading_helper(Article, :category), "category"
+      %th= sort_link_helper heading_helper(Article, :unit), "unit"
+      %th= sort_link_helper heading_helper(Article, :note), "note"
+      %th{:style => "width: 4em;"}= heading_helper Article, :unit_quantity, short: true
+      %th{:style => "width: 5em;"}= heading_helper Article, :price
+      %th{:style => "width: 3.5em;"}= heading_helper Article, :tax
+      %th{:style => "width: 4em;"}= heading_helper Article, :deposit
       %th{:style => "width: 3em;"}
       
   %tbody#listbody
