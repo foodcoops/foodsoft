@@ -1731,15 +1731,6 @@ de:
       title: Lagerartikel bearbeiten
     form:
       price_hint: Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.
-    history:
-      change_quantity: Veränderung
-      datetime: Zeitpunkt
-      delivery: Lieferung
-      new_quantity: Neuer Bestand
-      order: Bestellung
-      reason: Ereignis
-      stock_changes: Verlauf anzeigen für »%{article_name}«
-      stock_taking: Inventur
     index:
       article:
         article: Artikel
@@ -1765,6 +1756,15 @@ de:
     new:
       search_text: ! 'Suche nache Artikeln aus allen Katalogen:'
       title: Neuen Lagerartikel anlegen
+    show:
+      change_quantity: Veränderung
+      datetime: Zeitpunkt
+      delivery: Lieferung
+      new_quantity: Neuer Bestand
+      order: Bestellung
+      reason: Ereignis
+      stock_changes: Verlauf anzeigen für »%{article_name}«
+      stock_taking: Inventur
     stock_create:
       notice: Lagerartikel wurde gespeichert.
     stock_update:
@@ -1889,7 +1889,6 @@ de:
     close: Schließen
     delete: Löschen
     edit: Bearbeiten
-    history: Verlauf anzeigen
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>
