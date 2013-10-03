@@ -81,16 +81,6 @@ class StockitController < ApplicationController
     @stock_changes = @stock_article.stock_changes.order('stock_changes.created_at DESC').each {|s| s.readonly!}
   end
 
-  def create_stock_article
-    @stock_article = StockArticle.new(params[:stock_article])
-    
-    if @stock_article.valid? and @stock_article.save
-      render :layout => false
-    else
-      render :action => 'new_stock_article', :layout => false
-    end
-  end
-
   def on_stock_article_create
     @stock_article = StockArticle.find(params[:id])
     
