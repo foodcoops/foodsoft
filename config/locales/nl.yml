@@ -212,6 +212,11 @@ nl:
       workgroups:
         members: leden
         name: naam
+  application:
+    controller:
+      error_authn: Inloggen vereist.
+      error_denied: Geen toegang.
+      error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
   article_categories:
     create:
       notice: Categorie is opgeslagen
@@ -428,11 +433,11 @@ nl:
     add_stock_change:
       how_many_units: 
     create:
-      notice: 
+      notice: Levering is aangemaakt. Vergeet niet een factuur te maken!
     create_stock_article:
-      notice: 
+      notice: Nieuw voorraadsartikel "%{name}" gemaakt.
     destroy:
-      notice: 
+      notice: Levering is verwijdered.
     edit:
       title: 
     form:
@@ -476,7 +481,7 @@ nl:
       remove_article: 
     suppliers_overview: 
     update:
-      notice: 
+      notice: Levering is bijgewerkt.
     update_stock_article:
       notice: 
   documents:
@@ -645,11 +650,13 @@ nl:
     create:
       notice: Rekening is gemaakt
     financial_transactions:
-      create:
-        notice: De transactie is opgeslagen.
-      create_collection:
-        alert: 
-        notice: Alle transacties zijn opgeslagen.
+      controller:
+        create:
+          notice: De transactie is opgeslagen.
+        create_collection:
+          alert: 
+          error_note_required: Notitie ontbreekt.
+          notice: Alle transacties zijn opgeslagen.
       index:
         balance: ! 'Tegoed: %{balance}'
         last_updated_at: (laatst bijgewerkt %{when} geleden)
@@ -668,8 +675,8 @@ nl:
         sidebar: 
         title: 
       ordergroup:
-        remove: 
-        remove_group: 
+        remove: Verwijderen
+        remove_group: Huishouden verwijderen
       transactions:
         amount: Bedrag
         date: Datum
@@ -856,7 +863,7 @@ nl:
       title: Lopende bestellingen
     update:
       error_general: 
-      error_stale: 
+      error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon je bestelling niet opgeslagen worden. Sorry!
       notice: De bestelling is opgeslagen.
   helpers:
     application:
@@ -890,19 +897,19 @@ nl:
   home:
     apple_bar:
       desc: 
-      more_info: 
+      more_info: Meer informatie
       points: 
       warning: 
     changes_saved: Wijzigingen opgeslagen.
     index:
-      due_date_format: 
+      due_date_format: ! '%A %d %B'
       messages:
         title: 
         view_all: 
       my_ordergroup:
-        funds: 
-        last_update: 
-        title: 
+        funds: ! '| Beschikbaar tegoed:'
+        last_update: Laatst gewijzigd %{when} geleden
+        title: Mijn huishouden
         transactions:
           amount: Bedrag
           note: Notitie
@@ -913,13 +920,13 @@ nl:
       ordergroup:
         title: 
       tasks_move:
-        action: 
-        desc: 
-        title: 
+        action: Taken op je nemen/annuleren
+        desc: Je bent voor de volgende taken verantwoordelijk.
+        title: Taken op je nemen
       tasks_open:
-        action: 
-        desc: 
-        title: 
+        action: open taken
+        desc: Er zijn %{size}
+        title: open taken
       title: Beginpagina
       your_tasks: Jouw taken
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
@@ -946,7 +953,7 @@ nl:
       admin: 
       finances:
         accounts: Tegoeden bijwerken
-        settle: 
+        settle: Bestelling afrekenen
         title: Financiën
       foodcoop: Foodcoop
       members: Leden
@@ -972,7 +979,6 @@ nl:
       title: 
     new:
       action: 
-      back: 
       body: 
     success: 
   layouts:
@@ -1052,16 +1058,34 @@ nl:
 
         Vriendelijke groet van %{foodcoop}.'
     reset_password:
-      subject: 
-      text: 
+      subject: Nieuw wachtwoord voor %{username}
+      text: ! 'Beste %{user},
+
+
+        Jij (of iemand anders) heeft een nieuw wachtwoord aangevraagd voor het foodcoop ordersysteem.
+
+        Ga naar de volgende pagina om een nieuw wachtwoord in te voeren: %{link}
+
+        Dit kan slechts éenmaal gedaan worden, en op zijn laatst op %{expires}.
+
+        Wanneer je je wachtwoord niet wilt veranderen, hoef je niets te doen; dan blijft je huidige wachtwoord geldig.
+
+
+        Groeten van je foodcoop!'
     upcoming_tasks:
-      nextweek: 
-      subject: 
-      text0: 
-      text1: 
+      nextweek: ! 'Taken voor komende week:'
+      subject: Er is een taak te doen!
+      text0: ! 'Beste %{user},
+
+
+        Je bent opgegeven voor "%{task}". Deze taak is morgen te vervullen (%{when})!'
+      text1: ! 'Mijn taken: %{user_tasks_url}
+
+
+        Groeten van %{foodcoop}.'
   messages:
     create:
-      notice: 
+      notice: Bericht is opgeslagen en wordt verzonden.
     index:
       new: 
       title: 
@@ -1078,9 +1102,9 @@ nl:
         subscribe: 
         subscribe_msg: 
         wiki: 
-      no_user_found: 
-      search: 
-      search_user: 
+      no_user_found: Geen gebruiker gevonden
+      search: Zoeken ...
+      search_user: Gebruiker zoeken
       title: 
     show:
       all_messages: 
@@ -1091,15 +1115,15 @@ nl:
       title: 
   model:
     delivery:
-      each_stock_article_must_be_unique: 
+      each_stock_article_must_be_unique: In een levering mag ieder voorraadsartikel maar een keer voorkomen.
     membership:
-      no_admin_delete: 
+      no_admin_delete: Lidmaatschap kan niet beeindigd worden. Je bent de laatste administrator.
     order_article:
-      error_price: 
+      error_price: moet ingevuld worden en een huidige prijs hebben
     page:
-      redirect: 
+      redirect: Doorverwijzing naar [[%{title}]]...
     user:
-      no_ordergroup: 
+      no_ordergroup: geen huishouden
   navigation:
     admin:
       home: Overzicht
@@ -1187,46 +1211,46 @@ nl:
         delimiter: 
   ordergroups:
     edit:
-      title: 
+      title: Huidhouden bewerken
     index:
-      title: 
+      title: Huishoudens
     model:
-      error_single_group: 
-      invalid_balance: 
+      error_single_group: ! '%{user} behoort al tot een ander huishouden'
+      invalid_balance: is geen geldig nummer
   orders:
     articles:
-      article_count: 
-      name: 
-      prices: 
-      prices_sum: 
-      unit_quantity: 
-      units_full: 
-      units_ordered: 
+      article_count: ! 'Bestelde artikelen:'
+      name: Naam
+      prices: Netto/bruto prijs
+      prices_sum: ! 'Totaal (netto/bruto prijs):'
+      unit_quantity: Groothandelseenheid
+      units_full: Volle eenheden
+      units_ordered: Bestelde eenheden
     create:
-      notice: 
+      notice: De bestelling is aangemaakt.
     edit:
-      title: 
+      title: Bestelling aanpassen
     fax:
-      amount: 
-      articles: 
-      customer_number: 
-      delivery_day: 
-      heading: 
-      name: 
-      number: 
-      to_address: 
+      amount: Aantal
+      articles: Artikelen
+      customer_number: Klantnummer
+      delivery_day: Bezorgdag
+      heading: Bestelling voor %{name}
+      name: Naam
+      number: Nummer
+      to_address: Verzendadres
     finish:
       notice: De bestelling is gesloten.
     form:
-      ignore_warnings: 
-      name: 
-      note: 
-      origin: 
-      prices: 
-      select_all: 
-      stockit: 
-      supplier: 
-      title: 
+      ignore_warnings: Waarschuwingen negeren
+      name: Naam
+      note: Notitie
+      origin: Herkomst
+      prices: Prijs (netto/FC)
+      select_all: Alles selecteren
+      stockit: Beschikbaar
+      supplier: Producent
+      title: Artikel
       unit_quantity: 
     index:
       action_end: 
@@ -1244,7 +1268,7 @@ nl:
       error_closed: Bestelling was al afgerekend
       error_nosel: 
       error_starts_before_ends: 
-      notice_close: 
+      notice_close: ! 'Bestelling: %{name}, tot %{ends}'
       stock: Voorraad
       warning_ordered: 
       warning_ordered_stock: 
@@ -1288,7 +1312,7 @@ nl:
       finished: gesloten
       open: lopend
     update:
-      notice: 
+      notice: De bestelling is bijgewerkt.
   pages:
     all:
       new_page: 
@@ -1302,12 +1326,12 @@ nl:
     body:
       title_toc: 
     create:
-      notice: 
+      notice: Pagina is gemaakt.
     cshow:
       error_noexist: 
-      redirect_notice: 
+      redirect_notice: Doorverwezen van %{page} ...
     destroy:
-      notice: 
+      notice: De pagina '%{page}' en alle subpagina's zijn verwijderd.
     edit:
       title: 
     error_stale_object: 
@@ -1351,7 +1375,7 @@ nl:
       versions: 
     title: 
     update:
-      notice: 
+      notice: Pagina is bijgewerkt.
     version:
       author: 
       date_format: 
@@ -1394,11 +1418,11 @@ nl:
       address: Adres
       apple_limit: 
       contact: Contact
-      deactivated: 
-      description: 
+      deactivated: inactief
+      description: Beschrijving
       members: Leden
-      no_weekly_job: 
-      weekly_job: 
+      no_weekly_job: geen wekelijkse taak ingesteld
+      weekly_job: wekelijkse taak
     group_form_fields:
       search: Zoeken ...
       search_user: Gebruiker zoeken
@@ -1407,8 +1431,8 @@ nl:
     loginInfo:
       edit_profile: Profiel aanpassen
       feedback:
-        desc: 
-        title: 
+        desc: Fout gevonden? Opmerking? Idee?
+        title: Feedback
       help: Help
       homepage_title: Foodcoop startpagina bezoeken
       logout: Uitloggen
@@ -1436,7 +1460,7 @@ nl:
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
     workgroup_members:
-      title: 
+      title: Groepsleden
   simple_form:
     error_notification:
       default_message: 
@@ -1550,7 +1574,7 @@ nl:
         address: 
         contact_person: 
         customer_number: 
-        delivery_days: 
+        delivery_days: Bezorgdagen
         email: 
         fax: 
         is_subscribed: 
@@ -1601,7 +1625,7 @@ nl:
     'yes': Ja
   stock_takings:
     create:
-      notice: 
+      notice: Inventarisatie is aangelegd.
     edit:
       title: 
     index:
@@ -1629,12 +1653,12 @@ nl:
       date: 
       note: 
     update:
-      notice: 
+      notice: Inventarisatie is bijgewerkt.
   stockit:
     check:
       not_empty: 
     destroy:
-      notice: 
+      notice: Artikel %{name} is verwijdered.
     edit:
       title: 
     form:
@@ -1674,14 +1698,14 @@ nl:
       search_text: 
       title: 
     stock_create:
-      notice: 
+      notice: Voorraadsartikel is opgeslagen.
     stock_update:
-      notice: 
+      notice: Voorraadsartikel is bijgewerkt.
   suppliers:
     create:
-      notice: 
+      notice: Leverancier is aangemaakt.
     destroy:
-      notice: 
+      notice: Leverancier is verwijderd
     edit:
       title: 
     index:
@@ -1707,7 +1731,7 @@ nl:
       new_delivery: 
       show_deliveries: 
     update:
-      notice: 
+      notice: Leverancier is bijgewerkt
   support:
     array:
       last_word_connector: 
@@ -1715,7 +1739,7 @@ nl:
       words_connector: 
   tasks:
     accept:
-      notice: 
+      notice: Je hebt de taak geaccepteerd
     archive:
       title: 
     archive_tasks:
@@ -1724,9 +1748,9 @@ nl:
       task_format: 
       who: 
     create:
-      notice: 
+      notice: Taak is aangemaakt
     destroy:
-      notice: 
+      notice: Taak is verwijderd
     edit:
       title: 
       warning_periodic: 
@@ -1764,7 +1788,7 @@ nl:
       title: 
     repeated: 
     set_done:
-      notice: 
+      notice: De status van de taak is aangepast
     show:
       accept_task: 
       confirm_delete_group: 
@@ -1775,8 +1799,8 @@ nl:
       reject_task: 
       title: 
     update:
-      notice: 
-      notice_converted: 
+      notice: Taak is bijgewerkt
+      notice_converted: Taak is bijgewerkt en omgezet naar een eenmalige taak.
     user:
       more: 
       tasks_link: 

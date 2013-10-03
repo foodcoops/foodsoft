@@ -212,6 +212,11 @@ en:
       workgroups:
         members: members
         name: name
+  application:
+    controller:
+      error_authn: Authentication required!
+      error_denied: Access denied!
+      error_members_only: This action is only available to members of the group!
   article_categories:
     create:
       notice: Category was stored
@@ -430,7 +435,7 @@ en:
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
     create_stock_article:
-      notice: The new stock article »%{name}« was saved.
+      notice: The new stock article "%{name}" was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
@@ -478,7 +483,7 @@ en:
     update:
       notice: Delivery was updated.
     update_stock_article:
-      notice: The stock article »%{name}« was updated.
+      notice: The stock article "%{name}" was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
@@ -648,11 +653,13 @@ en:
     create:
       notice: Invoice was created
     financial_transactions:
-      create:
-        notice: The transaction was saved.
-      create_collection:
-        alert: ! 'An error occured: %{error}'
-        notice: All transactions were saved.
+      controller:
+        create:
+          notice: The transaction was saved.
+        create_collection:
+          alert: ! 'An error occured: %{error}'
+          error_note_required: Note is required!
+          notice: All transactions were saved.
       index:
         balance: ! 'Balance of account: %{balance}'
         last_updated_at: (last updated %{when} ago)
@@ -898,7 +905,7 @@ en:
       warning: Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order!
     changes_saved: Changes saved.
     index:
-      due_date_format: ! '%A %d %b'
+      due_date_format: ! '%A %d %B'
       messages:
         title: Newest Messages
         view_all: See all messages
@@ -975,7 +982,6 @@ en:
       title: Invite person
     new:
       action: Send invite
-      back: or go back
       body: <p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
     success: User was invited successfully.
   layouts:
@@ -1313,7 +1319,7 @@ en:
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
-      supplier: Supplier
+      supplier: Producer
       title: Article
       unit_quantity: Unit quantity
     index:
@@ -1395,7 +1401,7 @@ en:
       notice: Page was created
     cshow:
       error_noexist: Page doesn’t exist!
-      redirect_notice: Redirected from %{page} ..
+      redirect_notice: Redirected from %{page} ...
     destroy:
       notice: The page '%{page}' and all subpages have been deleted successfully.
     edit:
@@ -1536,7 +1542,7 @@ en:
       message:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
-        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and otherwise ordergroups will be accounted for undelivered articles!
+        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
         update_current_price: Also update the price of the current order
       stock_article:
         copy_stock_article:
@@ -1866,7 +1872,7 @@ en:
       title: Show task
     update:
       notice: Task has been updated
-      notice_converted: Task has been updated and was converted to a regular task
+      notice_converted: Task has been updated and was converted to a non-repeating task.
     user:
       more: Nothing to do? %{tasks_link} are tasks for sure.
       tasks_link: Here

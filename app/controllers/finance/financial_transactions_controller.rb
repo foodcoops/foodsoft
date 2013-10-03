@@ -34,7 +34,7 @@ class Finance::FinancialTransactionsController < ApplicationController
     @financial_transaction = FinancialTransaction.new(params[:financial_transaction])
     @financial_transaction.user = current_user
     @financial_transaction.add_transaction!
-    redirect_to finance_ordergroup_transactions_url(@ordergroup), notice: t('finance.financial_transactions.create.notice')
+    redirect_to finance_ordergroup_transactions_url(@ordergroup), notice: I18n.t('finance.financial_transactions.controller.create.notice')
   rescue ActiveRecord::RecordInvalid => error
     flash.now[:alert] = error.message
     render :action => :new
@@ -44,16 +44,16 @@ class Finance::FinancialTransactionsController < ApplicationController
   end
 
   def create_collection
-    raise "Notiz wird benötigt!" if params[:note].blank?
+    raise I18n.t('finance.financial_transactions.controller.create_collection.error_note_required') if params[:note].blank?
     params[:financial_transactions].each do |trans|
       # ignore empty amount fields ...
       unless trans[:amount].blank?
         Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(trans[:amount], params[:note], @current_user)
       end
     end
-    redirect_to finance_ordergroups_url, notice: t('finance.create_collection.create.notice')
+    redirect_to finance_ordergroups_url, notice: I18n.t('finance.financial_transactions.controller.create_collection.notice')
   rescue => error
-    redirect_to finance_new_transaction_collection_url, alert: t('finance.create_collection.create.alert', error: error.to_s)
+    redirect_to finance_new_transaction_collection_url, alert: I18n.t('finance.financial_transactions.controller.create_collection.alert', error: error.to_s)
   end
 
   protected
