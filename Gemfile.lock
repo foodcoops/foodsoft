@@ -5,6 +5,13 @@ GIT
     localize_input (0.1.0)
 
 GIT
+  remote: git://github.com/fnando/i18n-js.git
+  revision: eab4137f83777963f0ebe6960704a7f64fd8911d
+  specs:
+    i18n-js (2.1.2)
+      i18n
+
+GIT
   remote: git://github.com/technoweenie/acts_as_versioned.git
   revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
   specs:
@@ -321,6 +328,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   faker
   haml-rails
+  i18n-js!
   i18n-spec
   inherited_resources
   jquery-rails

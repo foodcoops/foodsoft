@@ -9,6 +9,8 @@
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.nl
 //= require jquery.observe_field
 //= require rails.validations
+//= require i18n
+//= require i18n/translations
 //= require_self
 //= require ordering
 //= require stupidtable

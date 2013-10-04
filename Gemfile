@@ -19,7 +19,7 @@ end
 gem 'jquery-rails'
 gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
-
+gem 'i18n-js', git: 'git://github.com/fnando/i18n-js.git' # to avoid US-ASCII js.erb error
 
 gem 'mysql2'
 gem 'prawn'

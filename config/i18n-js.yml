@@ -1,0 +1,4 @@
+# only serve selected strings for i18n-js to keep filesize down
+translations:
+- file: 'app/assets/javascripts/i18n/translations.js'
+  only: ['*.js.*', '*.number.*', '*.date.formats.*']
