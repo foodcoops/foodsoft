@@ -324,6 +324,7 @@ en:
       title: Upload articles
     sync:
       outlist:
+        alert_used: Warning, %{article} is used in an open order. Please remove it from the order first.
         body: ! 'The following articles were removed from the list and will be <b>deleted</b>:'
         body_skip: No articles to delete.
         title: Remove from list ...

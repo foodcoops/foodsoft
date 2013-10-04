@@ -313,6 +313,7 @@ de:
       title: 
     sync:
       outlist:
+        alert_used: Achtung, %{article} wird gerade in einer laufenden Bestellung verwendet. Bitte erst Bestellung anpassen.
         body: ! 'Folgende Artikel wurden ausgelistet und werden <b>gelöscht</b>:'
         body_skip: Es müssen keine Artikel gelöscht werden.
         title: Auslisten ...
@@ -686,6 +687,7 @@ de:
     group_order_articles:
       form:
         amount_change_for: Mengenänderung für %{article}
+        result_hint: 'Einheit: %{unit}'
     index:
       amount: Betrag
       amount_fc: Betrag(FC)
@@ -722,6 +724,7 @@ de:
     order_articles:
       edit:
         title: Artikel aktualisieren
+        stock_alert: Preise von Lagerartikeln können nicht geändert werden!
       new:
         title: Neuer gelieferter Artikel die Bestellung
     ordergroups:
@@ -1861,6 +1864,7 @@ de:
       notice: Aufgabenstatus wurde aktualisiert
     show:
       accept_task: Aufgabe übernehmen
+      confirm_delete_single: Die Aufgabe wirklich löschen?
       confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
       delete_group: Aufgabe und folgende löschen
       due_date: Fälligkeitsdatum

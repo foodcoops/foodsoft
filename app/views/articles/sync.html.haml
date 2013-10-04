@@ -11,8 +11,7 @@
           = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
           = article.name
           - if article.in_open_order
-            .alert
-              Achtung, #{article.name} wird gerade in einer laufenden Bestellung verwendet. Bitte erst Bestellung anpassen.
+            .alert= t '.alert_used', article: article.name
   - else
     %i= t '.outlist.body_skip'
   %hr/
