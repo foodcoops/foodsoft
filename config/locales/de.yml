@@ -985,6 +985,9 @@ de:
       action: Einlading abschicken
       body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
     success: Benutzerin wurde erfolgreich eingeladen.
+  js:
+    ordering:
+      confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
     application1:
       title: Foodsoft - %{title}

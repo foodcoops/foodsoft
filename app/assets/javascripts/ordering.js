@@ -178,6 +178,6 @@ $(function() {
     });
 
     $('a[data-confirm_switch_order]').click(function() {
-        return (!modified || confirm('Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?'));
+        return (!modified || confirm(I18n.t('js.ordering.confirm_change')));
     });
 });

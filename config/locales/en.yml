@@ -998,6 +998,9 @@ en:
       action: Send invite
       body: <p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
     success: User was invited successfully.
+  js:
+    ordering:
+      confirm_change: Modifications to this order will be lost when you change the order. Do you want to lose the changes you made and continue?
   layouts:
     application1:
       title: Foodsoft - %{title}
