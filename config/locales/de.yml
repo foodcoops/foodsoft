@@ -42,7 +42,10 @@ de:
         fc_price: Endpreis
         fc_share: FC-Aufschlag
         gross_price: Bruttopreis
+        name: Name
+        note: Notiz
         price: Nettopreis
+        supplier: Lieferantin
         tax: MwSt
         unit: Einheit
         unit_quantity: Gebindegröße
@@ -51,6 +54,8 @@ de:
         note: Notiz
       stock_article:
         price: Nettopreis
+        quantity: Lagerbestand
+        quantity_available: Verfügbarer Bestand
       user:
         first_name: Vorname
         password: Passwort

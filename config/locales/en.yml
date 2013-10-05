@@ -42,7 +42,10 @@ en:
         fc_price: FC price
         fc_share: FC share
         gross_price: gross price
+        name: name
+        note: note
         price: price
+        supplier: supplier
         tax: VAT
         unit: unit
         unit_quantity: unit quantity
@@ -50,7 +53,9 @@ en:
         amount: amount
         note: note
       stock_article:
-        price: Price
+        price: price
+        quantity: quantity
+        quantity_available: available quantity
       user:
         first_name: First name
         password: Password
