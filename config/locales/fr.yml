@@ -1739,15 +1739,6 @@ fr:
       title: Modifier l'article
     form:
       price_hint: Pour éviter que ça soit le bazar, les prix des articles en stock ne peuvent plus être modifiés.
-    history:
-      change_quantity: Modification
-      datetime: Temps
-      delivery: Réapprovisionnement
-      new_quantity: Nouveau stock
-      order: Commande
-      reason: Raison
-      stock_changes: Afficher l'historique pour "%{article_name}"
-      stock_taking: Inventaire
     index:
       article:
         article: Article
@@ -1773,6 +1764,15 @@ fr:
     new:
       search_text: ! 'Rechercher des articles dans tous les catalogues:'
       title: Ajouter un article au stock
+    show:
+      change_quantity: Modification
+      datetime: Temps
+      delivery: Réapprovisionnement
+      new_quantity: Nouveau stock
+      order: Commande
+      reason: Raison
+      stock_changes: Afficher l'historique
+      stock_taking: Inventaire
     stock_create:
       notice: L'article a été sauvegardé.
     stock_update:
@@ -1905,7 +1905,6 @@ fr:
     close: Fermer
     delete: Supprimer
     edit: Modifier
-    history: Afficher l'historique
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>
