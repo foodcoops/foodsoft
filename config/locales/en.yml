@@ -42,7 +42,10 @@ en:
         fc_price: FC price
         fc_share: FC share
         gross_price: gross price
+        name: name
+        note: note
         price: price
+        supplier: supplier
         tax: VAT
         unit: unit
         unit_quantity: unit quantity
@@ -50,7 +53,9 @@ en:
         amount: amount
         note: note
       stock_article:
-        price: Price
+        price: price
+        quantity: quantity
+        quantity_available: available quantity
       user:
         first_name: First name
         password: Password
@@ -1737,15 +1742,6 @@ en:
       title: Edit stock articles
     form:
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
-    history:
-      change_quantity: Change
-      datetime: Time
-      delivery: Delivery
-      new_quantity: New quantity
-      order: Order
-      reason: Reason
-      stock_changes: Stock quantity changes of ‘%{article_name}’
-      stock_taking: Inventory
     index:
       article:
         article: Article
@@ -1771,6 +1767,15 @@ en:
     new:
       search_text: ! 'Search for articles in all catalogues:'
       title: Add new stock article
+    show:
+      change_quantity: Change
+      datetime: Time
+      delivery: Delivery
+      new_quantity: New quantity
+      order: Order
+      reason: Reason
+      stock_changes: Stock quantity changes
+      stock_taking: Inventory
     stock_create:
       notice: Stock article was created.
     stock_update:
@@ -1895,7 +1900,6 @@ en:
     close: Close
     delete: Delete
     edit: Edit
-    history: Show history
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>

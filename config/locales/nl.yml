@@ -1665,15 +1665,6 @@ nl:
       title: 
     form:
       price_hint: 
-    history:
-      change_quantity: 
-      datetime: 
-      delivery: 
-      new_quantity: 
-      order: 
-      reason: 
-      stock_changes: 
-      stock_taking: 
     index:
       article:
         article: 
@@ -1699,6 +1690,15 @@ nl:
     new:
       search_text: 
       title: 
+    show:
+      change_quantity: 
+      datetime: 
+      delivery: 
+      new_quantity: 
+      order: 
+      reason: 
+      stock_changes: 
+      stock_taking: 
     stock_create:
       notice: Voorraadsartikel is opgeslagen.
     stock_update:
@@ -1823,7 +1823,6 @@ nl:
     close: Sluiten
     delete: Verwijder
     edit: Bewerk
-    history: 
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>
