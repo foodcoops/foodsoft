@@ -1,32 +1,20 @@
 - title @stock_article.name
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $('body').on('StockArticle#update', function(e) {
+        $.ajax({
+          url: '#{show_on_stock_article_update_stock_articles_path}',
+          type: 'get',
+          data: {id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+    });
 
 .row-fluid
   .span6
-    %dl.dl-horizontal
-      %dt= StockArticle.human_attribute_name 'supplier'
-      %dd= link_to @stock_article.supplier.name, @stock_article.supplier
-      %dt= StockArticle.human_attribute_name 'name'
-      %dd= @stock_article.name
-      %dt= StockArticle.human_attribute_name 'unit'
-      %dd= @stock_article.unit
-      %dt= StockArticle.human_attribute_name 'price'
-      %dd= number_to_currency @stock_article.price
-      %dt= StockArticle.human_attribute_name 'tax'
-      %dd= number_to_percentage @stock_article.tax
-      %dt= StockArticle.human_attribute_name 'deposit'
-      %dd= number_to_currency @stock_article.deposit
-      %dt= StockArticle.human_attribute_name 'fc_price'
-      %dd= number_to_currency @stock_article.fc_price
-      %dt= StockArticle.human_attribute_name 'article_category'
-      %dd= @stock_article.article_category.name
-      %dt= StockArticle.human_attribute_name 'note'
-      %dd= @stock_article.note
-      %dt= StockArticle.human_attribute_name 'quantity'
-      %dd= @stock_article.quantity
-      %dt= StockArticle.human_attribute_name 'quantity_available'
-      %dd= @stock_article.quantity_available
-    .form-actions
-      = link_to t('ui.edit'), edit_stock_article_path(@stock_article), class: 'btn'
+    = render :partial => 'stock_article_details', :locals => {:stock_article => @stock_article}
   
   .span6
     %h2= t('.stock_changes')

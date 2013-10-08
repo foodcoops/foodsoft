@@ -56,6 +56,12 @@ class StockitController < ApplicationController
     @stock_changes = @stock_article.stock_changes.order('stock_changes.created_at DESC')
   end
 
+  def show_on_stock_article_update
+    @stock_article = StockArticle.find(params[:id])
+    
+    render :layout => false
+  end
+
   def destroy
     @stock_article = StockArticle.find(params[:id])
     @stock_article.mark_as_deleted

@@ -102,6 +102,8 @@ Foodsoft::Application.routes.draw do
         
         get :on_stock_article_create
         get :on_stock_article_update
+        
+        get :show_on_stock_article_update
       end
     end
 
