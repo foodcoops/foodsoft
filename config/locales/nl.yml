@@ -42,7 +42,10 @@ nl:
         fc_price: prijs foodcoop
         fc_share: marge foodcoop
         gross_price: bruto prijs
+        name: 
+        note: 
         price: netto prijs
+        supplier: 
         tax: BTW
         unit: eenheid
         unit_quantity: groothandelseenheid
@@ -51,6 +54,8 @@ nl:
         note: notitie
       stock_article:
         price: prijs
+        quantity: 
+        quantity_available: 
       user:
         first_name: Voornaam
         password: Wachtwoord
@@ -797,6 +802,8 @@ nl:
       new_funds: Nieuw tegoed
       note: Notitie
       price: Prijs
+      reset_article_search: 
+      search_article: 
       sum: Som
       sum_amount: ! 'Huidig totaalbedrag:'
       supplier: Leverancier

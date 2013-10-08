@@ -42,7 +42,10 @@ fr:
         fc_price: prix final
         fc_share: supplément boufcoop
         gross_price: prix brut
+        name: 
+        note: 
         price: prix net
+        supplier: 
         tax: TVA
         unit: unité
         unit_quantity: unités par lot
@@ -51,6 +54,8 @@ fr:
         note: note
       stock_article:
         price: Prix net
+        quantity: 
+        quantity_available: 
       user:
         first_name: Prénom
         password: Mot de passe
@@ -811,6 +816,8 @@ fr:
       new_funds: Nouveau solde
       note: Note
       price: Prix
+      reset_article_search: 
+      search_article: 
       sum: Prix total
       sum_amount: ! 'Quantité déjà commandée:'
       supplier: Fourni par
