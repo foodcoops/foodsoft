@@ -19,7 +19,7 @@ end
 gem 'jquery-rails'
 gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
-
+gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
 
 gem 'mysql2'
 gem 'prawn'

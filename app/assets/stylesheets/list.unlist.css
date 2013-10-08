@@ -1,0 +1,3 @@
+.list .unlisted:not(.no-unlist) {
+	display: none;
+}
