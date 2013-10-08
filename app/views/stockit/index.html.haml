@@ -6,7 +6,7 @@
       
       $('body').on('StockArticle#create', function(e) {
         $.ajax({
-          url: '#{on_stock_article_create_stock_articles_path}',
+          url: '#{index_on_stock_article_create_stock_articles_path}',
           type: 'get',
           data: {id: e.stock_article_id},
           contentType: 'application/json; charset=UTF-8'
@@ -19,7 +19,7 @@
       
       $('body').on('StockArticle#update', function(e) {
         $.ajax({
-          url: '#{on_stock_article_update_stock_articles_path}',
+          url: '#{index_on_stock_article_update_stock_articles_path}',
           type: 'get',
           data: {id: e.stock_article_id},
           contentType: 'application/json; charset=UTF-8'

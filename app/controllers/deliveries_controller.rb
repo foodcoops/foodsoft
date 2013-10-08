@@ -56,13 +56,13 @@ class DeliveriesController < ApplicationController
     render :layout => false
   end
 
-  def on_stock_article_create
+  def form_on_stock_article_create
     @stock_article = StockArticle.find(params[:id])
     
     render :layout => false
   end
 
-  def on_stock_article_update
+  def form_on_stock_article_update
     @stock_article = StockArticle.find(params[:id])
     
     render :layout => false

@@ -100,8 +100,8 @@ Foodsoft::Application.routes.draw do
         
         get :derive
         
-        get :on_stock_article_create
-        get :on_stock_article_update
+        get :index_on_stock_article_create
+        get :index_on_stock_article_update
         
         get :show_on_stock_article_update
       end
@@ -113,8 +113,8 @@ Foodsoft::Application.routes.draw do
       resources :deliveries do
         collection do
           post :add_stock_change
-          get :on_stock_article_create
-          get :on_stock_article_update
+          get :form_on_stock_article_create
+          get :form_on_stock_article_update
         end
       end
 

@@ -5,6 +5,18 @@ class StockitController < ApplicationController
         order('suppliers.name, article_categories.name, articles.name')
   end
 
+  def index_on_stock_article_create
+    @stock_article = StockArticle.find(params[:id])
+    
+    render :layout => false
+  end
+
+  def index_on_stock_article_update
+    @stock_article = StockArticle.find(params[:id])
+    
+    render :layout => false
+  end
+
   # three possibilites to fill a new_stock_article form
   # (1) start from blank or use params
   def new
@@ -85,17 +97,5 @@ class StockitController < ApplicationController
     )
 
     render :partial => 'form', :locals => {:stock_article => stock_article}
-  end
-
-  def on_stock_article_create
-    @stock_article = StockArticle.find(params[:id])
-    
-    render :layout => false
-  end
-
-  def on_stock_article_update
-    @stock_article = StockArticle.find(params[:id])
-    
-    render :layout => false
   end
 end
