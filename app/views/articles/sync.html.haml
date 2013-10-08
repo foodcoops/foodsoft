@@ -1,4 +1,4 @@
-- title 'Artikel mit externer Datenbank synchronisieren'
+- title t('.title')
 
 = form_tag update_synchronized_supplier_articles_path(@supplier) do
   %h2= t '.outlist.title'
@@ -19,9 +19,8 @@
   %h2= t '.update.title'
   %p
     %i
-      %b= @updated_articles.size
-      = t '.update.update_msg'
-  = t('.update.body').html_safe
+      = t '.update.update_msg', count: @updated_articles.size
+      = t '.update.body'
   %table.table
     %thead
       %tr

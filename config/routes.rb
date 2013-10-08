@@ -103,8 +103,6 @@ Foodsoft::Application.routes.draw do
         get :on_stock_article_create
         get :on_stock_article_update
       end
-      
-      get :history
     end
 
     resources :suppliers do

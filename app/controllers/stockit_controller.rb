@@ -51,6 +51,11 @@ class StockitController < ApplicationController
     end
   end
 
+  def show
+    @stock_article = StockArticle.find(params[:id])
+    @stock_changes = @stock_article.stock_changes.order('stock_changes.created_at DESC')
+  end
+
   def destroy
     @stock_article = StockArticle.find(params[:id])
     @stock_article.mark_as_deleted
@@ -74,11 +79,6 @@ class StockitController < ApplicationController
     )
 
     render :partial => 'form', :locals => {:stock_article => stock_article}
-  end
-  
-  def history
-    @stock_article = StockArticle.undeleted.find(params[:stock_article_id])
-    @stock_changes = @stock_article.stock_changes.order('stock_changes.created_at DESC').each {|s| s.readonly!}
   end
 
   def on_stock_article_create

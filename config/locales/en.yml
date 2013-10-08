@@ -42,7 +42,10 @@ en:
         fc_price: FC price
         fc_share: FC share
         gross_price: gross price
+        name: name
+        note: note
         price: price
+        supplier: supplier
         tax: VAT
         unit: unit
         unit_quantity: unit quantity
@@ -50,7 +53,9 @@ en:
         amount: amount
         note: note
       stock_article:
-        price: Price
+        price: price
+        quantity: quantity
+        quantity_available: available quantity
       user:
         first_name: First name
         password: Password
@@ -310,20 +315,22 @@ en:
       error_nosel: You have selected no articles
     parse_upload:
       body: <p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>
+      title: Upload articles
+    sync:
       outlist:
-        body: ! 'The following articles were outlisted and <b>deleted</b>:'
+        body: ! 'The following articles were removed from the list and will be <b>deleted</b>:'
         body_skip: No articles to delete.
-        title: Outlist ...
+        title: Remove from list ...
       price_short: Price
-      submit: Delete/update all
+      submit: Synchronize all
       title: Synchronize articles with external database
-      unit_quantity_short: unit quantity
+      unit_quantity_short: Unit quantity
       update:
-        body: ! '<p><i>Every article is shown twice. The old values are gray and the text fields contain the current values.</i></p>
-
-          <p><i>Differences with the old articles are marked yellow.</i></p>'
+        body: ! 'Every article is shown twice: old values are gray, while the text fields contain updated values. Differences with the old articles are marked yellow.'
         title: Update ...
-        update_msg: ! 'Articles must be updated:'
+        update_msg:
+          one: One article needs to be updated.
+          other: ! '%{count} articles need to be updated.'
     upload:
       body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
       fields:
@@ -798,6 +805,8 @@ en:
       new_funds: New account balance
       note: Note
       price: Price
+      reset_article_search: Reset search
+      search_article: Search for article...
       sum: Sum
       sum_amount: Current amount
       supplier: Supplier
@@ -1735,15 +1744,6 @@ en:
       title: Edit stock articles
     form:
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
-    history:
-      change_quantity: Change
-      datetime: Time
-      delivery: Delivery
-      new_quantity: New quantity
-      order: Order
-      reason: Reason
-      stock_changes: Stock quantity changes of ‘%{article_name}’
-      stock_taking: Inventory
     index:
       article:
         article: Article
@@ -1769,6 +1769,15 @@ en:
     new:
       search_text: ! 'Search for articles in all catalogues:'
       title: Add new stock article
+    show:
+      change_quantity: Change
+      datetime: Time
+      delivery: Delivery
+      new_quantity: New quantity
+      order: Order
+      reason: Reason
+      stock_changes: Stock quantity changes
+      stock_taking: Inventory
     stock_create:
       notice: Stock article was created.
     stock_update:
@@ -1893,7 +1902,6 @@ en:
     close: Close
     delete: Delete
     edit: Edit
-    history: Show history
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>

@@ -42,7 +42,10 @@ nl:
         fc_price: prijs foodcoop
         fc_share: marge foodcoop
         gross_price: bruto prijs
+        name: 
+        note: 
         price: netto prijs
+        supplier: 
         tax: BTW
         unit: eenheid
         unit_quantity: groothandelseenheid
@@ -51,6 +54,8 @@ nl:
         note: notitie
       stock_article:
         price: prijs
+        quantity: 
+        quantity_available: 
       user:
         first_name: Voornaam
         password: Wachtwoord
@@ -310,20 +315,22 @@ nl:
       error_nosel: Je hebt geen artikelen geselecteerd
     parse_upload:
       body: <p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>
+      title: 
+    sync:
       outlist:
-        body: ! 'De volgende artikelen werden uit de lijst gehaald en worden <b>gewist</b>:'
-        body_skip: Er zijn geen artikelen om te wissen.
+        body: ! 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
+        body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
       price_short: prijs
-      submit: Alle wissen/bijwerken
+      submit: Alles synchroniseren
       title: Artikelen met externe database synchroniseren
       unit_quantity_short: Gr.Eenh.
       update:
-        body: ! '<p><i>Ieder artikel wordt tweemaal getoond. De oude waarden zijn grijs, en de tekstvelden bevatten de huidige waarden.</i></p>
-
-          <p><i>Verschillen met de oude artikelen zijn geel gemarkeerd.</i></p>'
+        body: ! 'Ieder artikel wordt tweemaal getoond: oude waarden zijn grijs, en de tekstvelden bevatten de nieuwe waarden. Verschillen met de oude artikelen zijn geel gemarkeerd.'
         title: Bijwerken ...
-        update_msg: ! 'De volgende artikelen moeten bijgewerkt worden: '
+        update_msg:
+          one: Er moet éen artikel bijgewerkt worden.
+          other: Er moeten %{count} artikelen bijgewerkt worden.
     upload:
       body: 
       fields:
@@ -795,6 +802,8 @@ nl:
       new_funds: Nieuw tegoed
       note: Notitie
       price: Prijs
+      reset_article_search: 
+      search_article: 
       sum: Som
       sum_amount: ! 'Huidig totaalbedrag:'
       supplier: Leverancier
@@ -1663,15 +1672,6 @@ nl:
       title: 
     form:
       price_hint: 
-    history:
-      change_quantity: 
-      datetime: 
-      delivery: 
-      new_quantity: 
-      order: 
-      reason: 
-      stock_changes: 
-      stock_taking: 
     index:
       article:
         article: 
@@ -1697,6 +1697,15 @@ nl:
     new:
       search_text: 
       title: 
+    show:
+      change_quantity: 
+      datetime: 
+      delivery: 
+      new_quantity: 
+      order: 
+      reason: 
+      stock_changes: 
+      stock_taking: 
     stock_create:
       notice: Voorraadsartikel is opgeslagen.
     stock_update:
@@ -1821,7 +1830,6 @@ nl:
     close: Sluiten
     delete: Verwijder
     edit: Bewerk
-    history: 
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>
