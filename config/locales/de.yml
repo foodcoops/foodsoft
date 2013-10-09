@@ -53,6 +53,17 @@ de:
       financial_transaction:
         amount: Betrag
         note: Notiz
+      invoice:
+        amount: Betrag
+        date: Rechnungsdatum
+        delivery: Lieferung
+        deposit: Pfand berechnet
+        deposit_credit: Pfand gutgeschrieben
+        note: Notiz
+        number: Nummer
+        order: Bestellung
+        paid_on: Bezahlt am
+        supplier: Lieferant
       stock_article:
         price: Nettopreis
       supplier:
@@ -1619,17 +1630,6 @@ de:
       group_order_article:
         ordergroup_id: Bestellgruppe
         result: Menge
-      invoice:
-        amount: Betrag
-        date: Rechnungsdatum
-        delivery: Lieferung
-        deposit: Pfand berechnet
-        deposit_credit: Pfand gutgeschrieben
-        note: Notiz
-        number: Nummer
-        order: Bestellung
-        paid_on: Bezahlt am
-        supplier: Lieferant
       message:
         body: Inhalt
         group_id: Gruppe

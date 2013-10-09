@@ -63,6 +63,17 @@ en:
       financial_transaction:
         amount: amount
         note: note
+      invoice:
+        amount: Amount
+        date: Billing date
+        delivery: Delivery
+        deposit: Deposit charged
+        deposit_credit: Deposit returned
+        note: Note
+        number: Number
+        order: Order
+        paid_on: Paid on
+        supplier: Supplier
       stock_article:
         price: Price
       supplier:
@@ -1628,17 +1639,6 @@ en:
       group_order_article:
         ordergroup_id: Ordergroup
         result: Amount
-      invoice:
-        amount: Amount
-        date: Billing date
-        delivery: Delivery
-        deposit: Deposit charged
-        deposit_credit: Deposit returned
-        note: Note
-        number: Number
-        order: Order
-        paid_on: Paid on
-        supplier: Supplier
       message:
         body: Body
         group_id: Group
