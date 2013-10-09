@@ -51,6 +51,22 @@ de:
         note: Notiz
       stock_article:
         price: Nettopreis
+      supplier:
+        address: Adresse
+        contact_person: Ansprechparter_in
+        customer_number: Kundennummer
+        customer_number_short: Kundennr.
+        delivery_days: Liefertage
+        email: Email
+        fax: FAX
+        is_subscribed: abonniert?
+        min_order_quantity: Mindestbestellmenge
+        name: Name
+        note: Notiz
+        order_howto: Howto Bestellen
+        phone: Telefon
+        phone2: Telefon 2
+        url: Homepage
       user:
         email: Email
         first_name: Vorname
@@ -1654,21 +1670,6 @@ de:
           privacy: Privatsphäre
       stock_article:
         supplier: Lieferant
-      supplier:
-        address: Adresse
-        contact_person: Ansprechparter_in
-        customer_number: Kundennummer
-        delivery_days: Liefertage
-        email: Email
-        fax: FAX
-        is_subscribed: abonniert?
-        min_order_quantity: Mindestbestellmenge
-        name: Name
-        note: Notiz
-        order_howto: Howto Bestellen
-        phone: Telefon
-        phone2: Telefon 2
-        url: Homepage
       task:
         done: Erledigt?
         due_date: Wann erledigen?

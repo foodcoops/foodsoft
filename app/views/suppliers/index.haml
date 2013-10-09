@@ -6,9 +6,9 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t 'simple_form.labels.supplier.name'
-      %th= t 'simple_form.labels.supplier.phone'
-      %th= t 'simple_form.labels.supplier.customer_number'
+      %th= heading_helper Supplier, :name
+      %th= heading_helper Supplier, :phone
+      %th= heading_helper Supplier, :customer_number, short: true
       %th
       %th
       %th

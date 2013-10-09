@@ -62,6 +62,21 @@ en:
         note: note
       stock_article:
         price: Price
+      supplier:
+        address: Address
+        contact_person: Contact person
+        customer_number: Customer number
+        delivery_days: Delivery days
+        email: Email
+        fax: Fax
+        is_subscribed: subscribed?
+        min_order_quantity: Minimum order quantity
+        name: Name
+        note: Note
+        order_howto: How to order
+        phone: Phone
+        phone2: Phone 2
+        url: Homepage
       task:
         done: Done?
         due_date: Due date
@@ -1665,21 +1680,6 @@ en:
           privacy: Privacy
       stock_article:
         supplier: Supplier
-      supplier:
-        address: Address
-        contact_person: Contact person
-        customer_number: Customer number
-        delivery_days: Delivery days
-        email: Email
-        fax: Fax
-        is_subscribed: subscribed?
-        min_order_quantity: Minimum order quantity
-        name: Name
-        note: Note
-        order_howto: How to order
-        phone: Phone
-        phone2: Phone 2
-        url: Homepage
       workgroup:
         next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
         role_admin: Administration
