@@ -1,12 +1,12 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe 'product distribution', :type => :feature do
-  let(:admin) { FactoryGirl.create :admin }
-  let(:user_a) { FactoryGirl.create :user, groups: [FactoryGirl.create(:ordergroup)] }
-  let(:user_b) { FactoryGirl.create :user, groups: [FactoryGirl.create(:ordergroup)] }
-  let(:supplier) { FactoryGirl.create :supplier }
-  let(:article) { FactoryGirl.create :article, supplier: supplier, unit_quantity: 5 }
-  let(:order) { FactoryGirl.create(:order, supplier: supplier, article_ids: [article.id]) }
+  let(:admin) { create :admin }
+  let(:user_a) { create :user, groups: [create(:ordergroup)] }
+  let(:user_b) { create :user, groups: [create(:ordergroup)] }
+  let(:supplier) { create :supplier }
+  let(:article) { create :article, supplier: supplier, unit_quantity: 5 }
+  let(:order) { create(:order, supplier: supplier, article_ids: [article.id]) }
   let(:oa) { order.order_articles.first }
 
   describe :type => :feature do

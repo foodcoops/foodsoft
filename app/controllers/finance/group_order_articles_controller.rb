@@ -65,7 +65,13 @@ class Finance::GroupOrderArticlesController < ApplicationController
 
   def destroy
     group_order_article = GroupOrderArticle.find(params[:id])
-    group_order_article.destroy
+    # only destroy if quantity and tolerance was zero already, so that we don't
+    # lose what the user ordered, if any
+    if group_order_article.quantity > 0 or group_order_article.tolerance >0
+      group_order_article.update_attribute(:result, 0)
+    else
+      group_order_article.destroy
+    end
     update_summaries(group_order_article)
     @order_article = group_order_article.order_article
 

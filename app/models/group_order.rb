@@ -17,6 +17,8 @@ class GroupOrder < ActiveRecord::Base
   scope :in_open_orders, joins(:order).merge(Order.open)
   scope :in_finished_orders, joins(:order).merge(Order.finished_not_closed)
 
+  scope :ordered, :include => :ordergroup, :order => 'groups.name'
+
   # Generate some data for the javascript methods in ordering view
   def load_data
     data = {}

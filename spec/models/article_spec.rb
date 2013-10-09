@@ -1,8 +1,8 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe Article do
-  let(:supplier) { FactoryGirl.create :supplier }
-  let(:article) { FactoryGirl.create :article, supplier: supplier }
+  let(:supplier) { create :supplier }
+  let(:article) { create :article, supplier: supplier }
 
   it 'has a unique name' do
     article2 = FactoryGirl.build :article, supplier: supplier, name: article.name
@@ -44,4 +44,12 @@ describe Article do
     expect(article.article_prices.all.map(&:price)).to eq([article.price, oldprice])
   end
 
+  it 'is not in an open order by default' do
+    expect(article.in_open_order).to be_nil
+  end
+
+  it 'is knows its open order' do
+    order = create :order, supplier: supplier, article_ids: [article.id]
+    expect(article.in_open_order).to eq(order)
+  end
 end

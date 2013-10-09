@@ -45,7 +45,7 @@
   %tbody
     - for article in @stock_articles
       %tr{:class => stock_article_classes(article), :id => "stockArticle-#{article.id}"}
-        %td=h article.name
+        %td= link_to article.name, article
         %td= article.quantity
         %td= article.quantity - article.quantity_available
         %th= article.quantity_available
@@ -56,7 +56,6 @@
         %td= article.article_category.name
         %td
           = link_to t('ui.edit'), edit_stock_article_path(article), class: 'btn btn-mini'
-          = link_to t('ui.history'), stock_article_history_path(article), class: 'btn btn-mini'
           = link_to t('ui.delete'), article, :method => :delete, :confirm => t('.confirm_delete'),
             class: 'btn btn-mini btn-danger', :remote => true
 %p

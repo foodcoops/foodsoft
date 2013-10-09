@@ -1,7 +1,7 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe 'the session', :type => :feature do
-  let(:user) { FactoryGirl.create :user }
+  let(:user) { create :user }
 
   describe 'login page', :type => :feature do
     it 'is accesible' do

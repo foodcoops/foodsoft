@@ -42,7 +42,10 @@ en:
         fc_price: FC price
         fc_share: FC share
         gross_price: gross price
+        name: name
+        note: note
         price: price
+        supplier: supplier
         tax: VAT
         unit: unit
         unit_quantity: unit quantity
@@ -50,7 +53,9 @@ en:
         amount: amount
         note: note
       stock_article:
-        price: Price
+        price: price
+        quantity: quantity
+        quantity_available: available quantity
       user:
         first_name: First name
         password: Password
@@ -212,6 +217,11 @@ en:
       workgroups:
         members: members
         name: name
+  application:
+    controller:
+      error_authn: Authentication required!
+      error_denied: Access denied!
+      error_members_only: This action is only available to members of the group!
   article_categories:
     create:
       notice: Category was stored
@@ -305,20 +315,22 @@ en:
       error_nosel: You have selected no articles
     parse_upload:
       body: <p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>
+      title: Upload articles
+    sync:
       outlist:
-        body: ! 'The following articles were outlisted and <b>deleted</b>:'
+        body: ! 'The following articles were removed from the list and will be <b>deleted</b>:'
         body_skip: No articles to delete.
-        title: Outlist ...
+        title: Remove from list ...
       price_short: Price
-      submit: Delete/update all
+      submit: Synchronize all
       title: Synchronize articles with external database
-      unit_quantity_short: unit quantity
+      unit_quantity_short: Unit quantity
       update:
-        body: ! '<p><i>Every article is shown twice. The old values are gray and contain the current values.</i></p>
-
-          <p><i>Differences with the old articles are marked yellow.</i></p>'
+        body: ! 'Every article is shown twice: old values are gray, while the text fields contain updated values. Differences with the old articles are marked yellow.'
         title: Update ...
-        update_msg: ! 'Articles must be updated:'
+        update_msg:
+          one: One article needs to be updated.
+          other: ! '%{count} articles need to be updated.'
     upload:
       body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
       fields:
@@ -430,7 +442,7 @@ en:
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
     create_stock_article:
-      notice: The new stock article »%{name}« was saved.
+      notice: The new stock article "%{name}" was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
@@ -478,20 +490,22 @@ en:
     update:
       notice: Delivery was updated.
     update_stock_article:
-      notice: The stock article »%{name}« was updated.
+      notice: The stock article "%{name}" was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
       rows:
       - Order group
-      - Amount
+      - Ordered
+      - Received
       - Price
       title: ! 'Order sorted by articles: %{name}, closed at %{date}'
     order_by_groups:
       filename: Order %{name}-%{date} - by group
       rows:
       - Article
-      - Amount
+      - Ordered
+      - Received
       - Price
       - Unit quantity
       - Unit
@@ -646,11 +660,13 @@ en:
     create:
       notice: Invoice was created
     financial_transactions:
-      create:
-        notice: The transaction was saved.
-      create_collection:
-        alert: ! 'An error occured: %{error}'
-        notice: All transactions were saved.
+      controller:
+        create:
+          notice: The transaction was saved.
+        create_collection:
+          alert: ! 'An error occured: %{error}'
+          error_note_required: Note is required!
+          notice: All transactions were saved.
       index:
         balance: ! 'Balance of account: %{balance}'
         last_updated_at: (last updated %{when} ago)
@@ -789,6 +805,8 @@ en:
       new_funds: New account balance
       note: Note
       price: Price
+      reset_article_search: Reset search
+      search_article: Search for article...
       sum: Sum
       sum_amount: Current amount
       supplier: Supplier
@@ -896,7 +914,7 @@ en:
       warning: Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order!
     changes_saved: Changes saved.
     index:
-      due_date_format: ! '%A %d %b'
+      due_date_format: ! '%A %d %B'
       messages:
         title: Newest Messages
         view_all: See all messages
@@ -973,7 +991,6 @@ en:
       title: Invite person
     new:
       action: Send invite
-      back: or go back
       body: <p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
     success: User was invited successfully.
   layouts:
@@ -1304,13 +1321,14 @@ en:
     finish:
       notice: The order has been closed.
     form:
+      ignore_warnings: Ignore warnings
       name: Name
       note: Note
       origin: Origin
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
-      supplier: Supplier
+      supplier: Producer
       title: Article
       unit_quantity: Unit quantity
     index:
@@ -1331,6 +1349,8 @@ en:
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: ! 'Order: %{name}, until %{ends}'
       stock: Stock
+      warning_ordered: ! 'Warning: Articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted.'
+      warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/ purchased within this open stock order. If you uncheck them here, all existing orders/ purchases of these articles will be deleted and it will not be accounted for them.'
     new:
       title: Create new order
     orders:
@@ -1390,7 +1410,7 @@ en:
       notice: Page was created
     cshow:
       error_noexist: Page doesn’t exist!
-      redirect_notice: Redirected from %{page} ..
+      redirect_notice: Redirected from %{page} ...
     destroy:
       notice: The page '%{page}' and all subpages have been deleted successfully.
     edit:
@@ -1457,11 +1477,14 @@ en:
       title: Foodsoft login
       user: User
   shared:
+    articles:
+      ordered: Ordered
+      ordered_desc: Number of articles as ordered by member (amount + tolerance)
+      received: Received
+      received_desc: Number of articles that (will be) received by member
     articles_by_articles:
-      ordered: Ordered (Amount + Tolerance)
       ordergroup: Ordergroup
       price: Total price
-      received: Received
     articles_by_groups:
       fc_price: FC-Price
       fc_price_desc: Price including taxes, deposit and Foodcoop-charge
@@ -1470,8 +1493,6 @@ en:
       unit: Unit
       unit_quantity: Lot quantity
       unit_quantity_desc: How many units per lot.
-      units: Amount
-      units_desc: Assigned units
     group:
       access: Access to
       activated: activated
@@ -1530,7 +1551,7 @@ en:
       message:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
-        units_to_order: Amount of delivered units
+        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
         update_current_price: Also update the price of the current order
       stock_article:
         copy_stock_article:
@@ -1723,15 +1744,6 @@ en:
       title: Edit stock articles
     form:
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
-    history:
-      change_quantity: Change
-      datetime: Time
-      delivery: Delivery
-      new_quantity: New quantity
-      order: Order
-      reason: Reason
-      stock_changes: Stock quantity changes of ‘%{article_name}’
-      stock_taking: Inventory
     index:
       article:
         article: Article
@@ -1757,6 +1769,15 @@ en:
     new:
       search_text: ! 'Search for articles in all catalogues:'
       title: Add new stock article
+    show:
+      change_quantity: Change
+      datetime: Time
+      delivery: Delivery
+      new_quantity: New quantity
+      order: Order
+      reason: Reason
+      stock_changes: Stock quantity changes
+      stock_taking: Inventory
     stock_create:
       notice: Stock article was created.
     stock_update:
@@ -1860,7 +1881,7 @@ en:
       title: Show task
     update:
       notice: Task has been updated
-      notice_converted: Task has been updated and was converted to a regular task
+      notice_converted: Task has been updated and was converted to a non-repeating task.
     user:
       more: Nothing to do? %{tasks_link} are tasks for sure.
       tasks_link: Here
@@ -1881,7 +1902,6 @@ en:
     close: Close
     delete: Delete
     edit: Edit
-    history: Show history
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>

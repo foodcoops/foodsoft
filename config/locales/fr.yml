@@ -42,7 +42,10 @@ fr:
         fc_price: prix final
         fc_share: supplément boufcoop
         gross_price: prix brut
+        name: 
+        note: 
         price: prix net
+        supplier: 
         tax: TVA
         unit: unité
         unit_quantity: unités par lot
@@ -51,6 +54,8 @@ fr:
         note: note
       stock_article:
         price: Prix net
+        quantity: 
+        quantity_available: 
       user:
         first_name: Prénom
         password: Mot de passe
@@ -212,6 +217,11 @@ fr:
       workgroups:
         members: membres
         name: nom
+  application:
+    controller:
+      error_authn: 
+      error_denied: 
+      error_members_only: 
   article_categories:
     create:
       notice: La catégorie a bien été définie.
@@ -307,6 +317,8 @@ fr:
       body: ! '<p><i>Merci de vérifier les articles importés.</i></p>
 
         <p><i>Attention, les doublons ne sont pas automatiquement détectés.</p></i>.'
+      title: 
+    sync:
       outlist:
         body: ! 'Les articles suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
         body_skip: Aucun article à supprimer.
@@ -316,9 +328,9 @@ fr:
       title: Synchroniser les articles avec la base de données extérieure
       unit_quantity_short: U/L
       update:
-        body: <p><i>Chaque article apparaît deux fois. Les anciennes données sont rappelées en gris, et les champs du formulaire ont été préremplis avec les nouvelles valeurs. </i></p><p><i>Les changements sont marqués en jaune.</p></i>
+        body: ! 'Chaque article apparaît deux fois: les anciennes données sont rappelées en gris, et les champs du formulaire ont été préremplis avec les nouvelles valeurs. Les changements sont marqués en jaune.'
         title: Mettre à jour...
-        update_msg: ! 'Ces articles doivent être mis à jour:'
+        update_msg: 
     upload:
       body: ! '<p>Le fichier doit être au format texte et son nom doit se terminer par l''extension ".csv". La première ligne sera ignorée lors de l''importation.</p>
 
@@ -655,11 +667,13 @@ fr:
     create:
       notice: La facture a bien été définie.
     financial_transactions:
-      create:
-        notice: La transaction a été sauvegardée.
-      create_collection:
-        alert: ! 'Une erreur s''est produite: %{error}'
-        notice: Les transactions ont été sauvegardées.
+      controller:
+        create:
+          notice: La transaction a été sauvegardée.
+        create_collection:
+          alert: ! 'Une erreur s''est produite: %{error}'
+          error_note_required: 
+          notice: Les transactions ont été sauvegardées.
       index:
         balance: ! 'Solde: %{balance}'
         last_updated_at: (dernière mise à jour il y a %{when})
@@ -802,6 +816,8 @@ fr:
       new_funds: Nouveau solde
       note: Note
       price: Prix
+      reset_article_search: 
+      search_article: 
       sum: Prix total
       sum_amount: ! 'Quantité déjà commandée:'
       supplier: Fourni par
@@ -994,7 +1010,6 @@ fr:
       title: Engrainer une personne
     new:
       action: Engrainer!
-      back: ou revenir en arrière
       body: <p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>
     success: La_le membre a été engrainéE avec succès!
   layouts:
@@ -1288,7 +1303,7 @@ fr:
       article_count: ! 'Articles commandés:'
       name: Nom
       prices: Prix brut/net
-      prices_sum: Totaux (des prix bruts/nets)
+      prices_sum: ! 'Totaux (des prix bruts/nets):'
       unit_quantity: Unités par lots x Lots
       units_full: Lots complet
       units_ordered: Unités commandées
@@ -1308,6 +1323,7 @@ fr:
     finish:
       notice: La commande a été close.
     form:
+      ignore_warnings: 
       name: Nom
       note: Note
       origin: Origine
@@ -1335,6 +1351,8 @@ fr:
       error_starts_before_ends: doit être postérieur à la date de début de la commande (ou bien être laissé vierge)
       notice_close: ! 'Commande: %{name}, jusqu''au %{ends}'
       stock: Stock
+      warning_ordered: 
+      warning_ordered_stock: 
     new:
       title: Définir une nouvelle commande
     orders:
@@ -1459,11 +1477,14 @@ fr:
       title: Te connecter à Foodsoft
       user: Identifiant
   shared:
+    articles:
+      ordered: Commandé
+      ordered_desc: 
+      received: Reçu
+      received_desc: 
     articles_by_articles:
-      ordered: Commandé (Quantité + Tolérance)
       ordergroup: Cellul
       price: Prix total
-      received: Reçu
     articles_by_groups:
       fc_price: Prix coop
       fc_price_desc: Prix avec TVA, consigne et part de la coop inclus.
@@ -1472,8 +1493,6 @@ fr:
       unit: Unité
       unit_quantity: U/L
       unit_quantity_desc: Unités par lot
-      units: Quantité
-      units_desc: Unités assignées
     group:
       access: Accès à
       activated: activé
@@ -1532,7 +1551,7 @@ fr:
       message:
         private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       order_article:
-        units_to_order: Nombre de lots livrés
+        units_to_order: 
         update_current_price: Modifie aussi le prix des commandes en cours
       stock_article:
         copy_stock_article:
@@ -1727,15 +1746,6 @@ fr:
       title: Modifier l'article
     form:
       price_hint: Pour éviter que ça soit le bazar, les prix des articles en stock ne peuvent plus être modifiés.
-    history:
-      change_quantity: Modification
-      datetime: Temps
-      delivery: Réapprovisionnement
-      new_quantity: Nouveau stock
-      order: Commande
-      reason: Raison
-      stock_changes: Afficher l'historique pour "%{article_name}"
-      stock_taking: Inventaire
     index:
       article:
         article: Article
@@ -1761,6 +1771,15 @@ fr:
     new:
       search_text: ! 'Rechercher des articles dans tous les catalogues:'
       title: Ajouter un article au stock
+    show:
+      change_quantity: Modification
+      datetime: Temps
+      delivery: Réapprovisionnement
+      new_quantity: Nouveau stock
+      order: Commande
+      reason: Raison
+      stock_changes: Afficher l'historique
+      stock_taking: Inventaire
     stock_create:
       notice: L'article a été sauvegardé.
     stock_update:
@@ -1893,7 +1912,6 @@ fr:
     close: Fermer
     delete: Supprimer
     edit: Modifier
-    history: Afficher l'historique
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>
