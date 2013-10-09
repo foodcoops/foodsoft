@@ -1307,7 +1307,6 @@ fr:
     fax:
       amount: Quantité
       articles: Articles
-      customer_number: Numéro de client de la coop
       delivery_day: Jour de livraison
       heading: Commande pour %{name}
       name: Nom

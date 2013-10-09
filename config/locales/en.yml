@@ -1320,7 +1320,6 @@ en:
     fax:
       amount: Amount
       articles: Articles
-      customer_number: Customer number
       delivery_day: Delivery day
       heading: Order for %{name}
       name: Name
@@ -1652,7 +1651,7 @@ en:
       supplier:
         address: Address
         contact_person: Contact person
-        customer_number: Customer ID
+        customer_number: Customer number
         delivery_days: Delivery days
         email: Email
         fax: Fax

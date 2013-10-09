@@ -1235,7 +1235,6 @@ nl:
     fax:
       amount: Aantal
       articles: Artikelen
-      customer_number: Klantnummer
       delivery_day: Bezorgdag
       heading: Bestelling voor %{name}
       name: Naam
@@ -1575,7 +1574,7 @@ nl:
       supplier:
         address: 
         contact_person: 
-        customer_number: 
+        customer_number: Klantnummer
         delivery_days: Bezorgdagen
         email: 
         fax: 

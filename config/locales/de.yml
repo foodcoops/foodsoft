@@ -1307,7 +1307,6 @@ de:
     fax:
       amount: Menge
       articles: Artikel
-      customer_number: Kundennummer
       delivery_day: Liefertag
       heading: Bestellung für %{name}
       name: Name
