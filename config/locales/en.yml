@@ -57,6 +57,9 @@ en:
       article_category:
         description: Description
         name: Name
+      delivery:
+        delivered_on: Delivery date
+        supplier: Supplier
       financial_transaction:
         amount: amount
         note: note
@@ -1622,9 +1625,6 @@ en:
         title: Title
         unit_quantity: Unit quantity
         user_tokens: Members
-      delivery:
-        delivered_on: Delivery date
-        supplier: Supplier
       group_order_article:
         ordergroup_id: Ordergroup
         result: Amount

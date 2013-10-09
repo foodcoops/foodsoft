@@ -46,6 +46,10 @@ de:
         tax: MwSt
         unit: Einheit
         unit_quantity: Gebindegröße
+      delivery:
+        delivered_on: Lieferdatum
+        note: Notiz
+        supplier: Lieferantin
       financial_transaction:
         amount: Betrag
         note: Notiz
@@ -1612,9 +1616,6 @@ de:
         title: Titel
         unit_quantity: Gebindegröße
         user_tokens: Mitglieder
-      delivery:
-        delivered_on: Lieferdatum
-        supplier: Lieferantin
       group_order_article:
         ordergroup_id: Bestellgruppe
         result: Menge
