@@ -42,7 +42,10 @@ nl:
         fc_price: prijs foodcoop
         fc_share: marge foodcoop
         gross_price: bruto prijs
+        name: 
+        note: 
         price: netto prijs
+        supplier: 
         tax: BTW
         unit: eenheid
         unit_quantity: groothandelseenheid
@@ -51,6 +54,8 @@ nl:
         note: notitie
       stock_article:
         price: prijs
+        quantity: 
+        quantity_available: 
       user:
         first_name: Voornaam
         password: Wachtwoord
@@ -797,6 +802,8 @@ nl:
       new_funds: Nieuw tegoed
       note: Notitie
       price: Prijs
+      reset_article_search: 
+      search_article: 
       sum: Som
       sum_amount: ! 'Huidig totaalbedrag:'
       supplier: Leverancier
@@ -1664,15 +1671,6 @@ nl:
       title: 
     form:
       price_hint: 
-    history:
-      change_quantity: 
-      datetime: 
-      delivery: 
-      new_quantity: 
-      order: 
-      reason: 
-      stock_changes: 
-      stock_taking: 
     index:
       article:
         article: 
@@ -1698,6 +1696,15 @@ nl:
     new:
       search_text: 
       title: 
+    show:
+      change_quantity: 
+      datetime: 
+      delivery: 
+      new_quantity: 
+      order: 
+      reason: 
+      stock_changes: 
+      stock_taking: 
     stock_create:
       notice: Voorraadsartikel is opgeslagen.
     stock_update:
@@ -1822,7 +1829,6 @@ nl:
     close: Sluiten
     delete: Verwijder
     edit: Bewerk
-    history: 
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>

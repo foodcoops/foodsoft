@@ -50,6 +50,7 @@ en:
         note: Note
         origin: Origin
         price: Price
+        supplier: Supplier
         tax: VAT
         unit: Unit
         unit_quantity: Unit quantity
@@ -76,6 +77,8 @@ en:
         supplier: Supplier
       stock_article:
         price: Price
+        quantity: Quantity
+        quantity_available: Available quantity
       supplier:
         address: Address
         contact_person: Contact person
@@ -858,6 +861,8 @@ en:
       new_funds: New account balance
       note: Note
       price: Price
+      reset_article_search: Reset search
+      search_article: Search for article...
       sum: Sum
       sum_amount: Current amount
       supplier: Supplier
@@ -1740,15 +1745,6 @@ en:
       title: Edit stock articles
     form:
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
-    history:
-      change_quantity: Change
-      datetime: Time
-      delivery: Delivery
-      new_quantity: New quantity
-      order: Order
-      reason: Reason
-      stock_changes: Stock quantity changes of ‘%{article_name}’
-      stock_taking: Inventory
     index:
       article:
         article: Article
@@ -1774,6 +1770,15 @@ en:
     new:
       search_text: ! 'Search for articles in all catalogues:'
       title: Add new stock article
+    show:
+      change_quantity: Change
+      datetime: Time
+      delivery: Delivery
+      new_quantity: New quantity
+      order: Order
+      reason: Reason
+      stock_changes: Stock quantity changes
+      stock_taking: Inventory
     stock_create:
       notice: Stock article was created.
     stock_update:
@@ -1898,7 +1903,6 @@ en:
     close: Close
     delete: Delete
     edit: Edit
-    history: Show history
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>

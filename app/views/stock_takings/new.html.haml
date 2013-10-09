@@ -1,5 +1,20 @@
 - title t('.title')
 
+- content_for :javascript do
+  :javascript
+    $(function() {
+      enablePriceTooltips();
+    });
+
+    function enablePriceTooltips(context) {
+      $('[data-toggle~="tooltip"]', context).tooltip({
+        animation: false,
+        html: true,
+        placement: 'left',
+        container: 'body'
+      });
+    }
+
 - content_for :sidebar do
   %p
     %i= t('.text_deviations', inv_link: link_to(t('.temp_inventory'), stock_articles_path)).html_safe

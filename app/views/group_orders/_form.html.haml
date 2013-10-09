@@ -6,12 +6,17 @@
       setMinimumBalance(#{FoodsoftConfig[:minimum_balance] or 0});
       setToleranceBehaviour(#{FoodsoftConfig[:tolerance_is_costly]});
       setStockit(#{@order.stockit?});
+      // create List for search-feature (using list.js, http://listjs.com)
+      var listjsResetPlugin = ['reset', {highlightClass: 'btn-primary'}];
+      var listjsDelayPlugin = ['delay', {delayedSearchTime: 500}];
+      new List(document.body, { valueNames: ['name'], engine: 'unlist', plugins: [listjsResetPlugin, listjsDelayPlugin] });
     });
 
 - title t('.title'), false
 
 .row-fluid
   .well.pull-left
+    %button{type: "button", class: "close", data: {dismiss: 'alert'}}= '&times;'.html_safe
     %h2= @order.name
     %dl.dl-horizontal
       - unless @order.note.blank?
@@ -34,7 +39,16 @@
       %dd= number_to_currency(@ordering_data[:available_funds])
 
   .well.pull-right
+    %button{type: "button", class: "close", data: {dismiss: 'alert'}}= '&times;'.html_safe
     = render 'switch_order', current_order: @order
+
+.row-fluid
+  .well.clear
+    .form-search
+      .input-append
+        = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable'
+        %button.add-on.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
+          %i.icon.icon-remove
 
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
@@ -58,9 +72,9 @@
           %th(style="width:20px")= t '.available'
           %th#col_required= t '.amount'
         %th{style: "width:15px;"}= t '.sum'
-    %tbody
+    %tbody.list
       - @order.articles_grouped_by_category.each do |category, order_articles|
-        %tr.article-category
+        %tr.list-heading.article-category
           %td
             = category
             %i.icon-tag
