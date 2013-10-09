@@ -52,8 +52,17 @@ de:
       stock_article:
         price: Nettopreis
       user:
+        email: Email
         first_name: Vorname
+        last_name: Nachname
+        name: Name
+        nick: Benutzername
+        ordergroup: Bestellgruppe
         password: Passwort
+        phone: Telefon
+        workgroup:
+          one: Arbeitsgruppe
+          other: Arbeitsgruppen
     errors:
       format: ! '%{attribute} %{message}'
       general: Ein Problem ist aufgetreten.
@@ -1668,16 +1677,6 @@ de:
         required_users: Anzahl
         user_list: Verantwortliche
         workgroup: Arbeitsgruppe
-      user:
-        email: Email
-        last_name: Nachname
-        name: Name
-        nick: Benutzername
-        ordergroup: Bestellgruppe
-        phone: Telefon
-        workgroup:
-          one: Arbeitsgruppe
-          other: Arbeitsgruppen
       workgroup:
         next_weekly_tasks_number: Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?
         role_admin: Administration

@@ -71,8 +71,17 @@ en:
         user_list: Responsible user
         workgroup: Workgroup
       user:
+        email: Email
         first_name: First name
+        last_name: Last name
+        name: Name
+        nick: Username
+        ordergroup: Ordergroup
         password: Password
+        phone: Telephone
+        workgroup:
+          one: Workgroup
+          other: Workgroups
     errors:
       format: ! '%{attribute} %{message}'
       general: A problem has occured.
@@ -1671,16 +1680,6 @@ en:
         phone: Phone
         phone2: Phone 2
         url: Homepage
-      user:
-        email: Email
-        last_name: Last name
-        name: Name
-        nick: Username
-        ordergroup: Ordergroup
-        phone: Telephone
-        workgroup:
-          one: Workgroup
-          other: Workgroups
       workgroup:
         next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
         role_admin: Administration
