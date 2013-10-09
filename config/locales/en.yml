@@ -62,6 +62,14 @@ en:
         note: note
       stock_article:
         price: Price
+      task:
+        done: Done?
+        due_date: Due date
+        duration: Duration
+        name: Name
+        required_users: People required
+        user_list: Responsible user
+        workgroup: Workgroup
       user:
         first_name: First name
         password: Password
@@ -1663,14 +1671,6 @@ en:
         phone: Phone
         phone2: Phone 2
         url: Homepage
-      task:
-        done: Done?
-        due_date: Due date
-        duration: Duration
-        name: Name
-        required_users: People required
-        user_list: Responsible user
-        workgroup: Workgroup
       user:
         email: Email
         last_name: Last name
@@ -1869,9 +1869,9 @@ en:
       notice: The state of the task has been updated
     show:
       accept_task: Accept task
+      confirm_delete_single: Are you sure you want to delete the task?
       confirm_delete_group: Really delete this and all subsequent tasks?
       delete_group: Delete task and subsequent
-      due_date: Due date
       hours: ! '%{count}h'
       mark_done: Mark task as done
       reject_task: Reject task
