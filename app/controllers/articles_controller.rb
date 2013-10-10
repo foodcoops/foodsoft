@@ -7,12 +7,12 @@ class ArticlesController < ApplicationController
       sort = case params['sort']
                when "name"  then "articles.name"
                when "unit"   then "articles.unit"
-               when "category" then "article_categories.name"
+               when "article_category" then "article_categories.name"
                when "note"   then "articles.note"
                when "availability" then "articles.availability"
                when "name_reverse"  then "articles.name DESC"
                when "unit_reverse"   then "articles.unit DESC"
-               when "category_reverse" then "article_categories.name DESC"
+               when "article_category_reverse" then "article_categories.name DESC"
                when "note_reverse" then "articles.note DESC"
                when "availability_reverse" then "articles.availability DESC"
                end

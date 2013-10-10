@@ -8,7 +8,7 @@
       %th
       %th= sort_link_helper heading_helper(Article, :name), "name"
       %th
-      %th= sort_link_helper heading_helper(Article, :category), "category"
+      %th= sort_link_helper heading_helper(Article, :article_category), "article_category"
       %th= sort_link_helper heading_helper(Article, :unit), "unit"
       %th= sort_link_helper heading_helper(Article, :note), "note"
       %th{:style => "width: 4em;"}= heading_helper Article, :unit_quantity, short: true
