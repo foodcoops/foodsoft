@@ -38,17 +38,27 @@ de:
       article:
         article_category: Kategorie
         availability: Artikel ist verfügbar?
+        availability_short: verf.
         deposit: Pfand
         fc_price: Endpreis
-        fc_share: FC-Aufschlag
+        fc_price_short:
+        fc_share: FoodCoop-Aufschlag
+        fc_share_short: FC-Aufschlag
         gross_price: Bruttopreis
+        manufacturer: Produzent
         name: Name
         note: Notiz
+        order_number: Bestellnummer
+        origin: Herkunft
         price: Nettopreis
         supplier: Lieferantin
         tax: MwSt
         unit: Einheit
         unit_quantity: Gebindegröße
+        unit_quantity_short: GebGr
+      article_category:
+        description: Beschreibung
+        name: Name
       delivery:
         delivered_on: Lieferdatum
         note: Notiz
@@ -56,6 +66,9 @@ de:
       financial_transaction:
         amount: Betrag
         note: Notiz
+      group_order_article:
+        ordergroup_id: Bestellgruppe
+        result: Menge
       invoice:
         amount: Betrag
         date: Rechnungsdatum
@@ -67,10 +80,41 @@ de:
         order: Bestellung
         paid_on: Bezahlt am
         supplier: Lieferant
+      message:
+        body: Inhalt
+        group_id: Gruppe
+        private: Privat
+        recipient_tokens: Empfänger_innen
+        sent_to_all: An alle Mitglieder schicken
+        subject: Betreff
+      order:
+        ends: Endet am
+        note: Notiz
+        starts: Läuft vom
+      order_article:
+        units_to_order: Menge
+        update_current_price: Globalen Preis aktualisieren
+      order_comment:
+        text: Kommentiere diese Bestellung ...
+      ordergroup:
+        contact_address: Adresse
+        contact_person: Kontaktperson
+        contact_phone: Telefon
+        description: Beschreibung
+        ignore_apple_restriction: Bestellstop bei zu wenig Äpfeln ignorieren
+        name: Name
+        user_tokens: Mitglieder
+      page:
+        body: Inhalt
+        parent_id: Oberseite
+        title: Titel
       stock_article:
         price: Nettopreis
         quantity: Lagerbestand
         quantity_available: Verfügbarer Bestand
+      stock_taking:
+        date: Datum
+        note: Notiz
       supplier:
         address: Adresse
         contact_person: Ansprechparter_in
@@ -87,6 +131,17 @@ de:
         phone: Telefon
         phone2: Telefon 2
         url: Homepage
+      stock_article:
+        supplier: Lieferant
+      task:
+        description: Beschreibung
+        done: Erledigt?
+        due_date: Wann erledigen?
+        duration: Dauer
+        name: Name
+        required_users: Anzahl
+        user_list: Verantwortliche
+        workgroup: Arbeitsgruppe
       user:
         email: Email
         first_name: Vorname
@@ -95,10 +150,21 @@ de:
         nick: Benutzername
         ordergroup: Bestellgruppe
         password: Passwort
+        password_confirmation: Passwort wiederholen
         phone: Telefon
         workgroup:
           one: Arbeitsgruppe
           other: Arbeitsgruppen
+      workgroup:
+        name: Name
+        description: Beschreibung
+        next_weekly_tasks_number: Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?
+        role_admin: Administration
+        role_article_meta: Artikeldatenbank
+        role_finance: Finanzen
+        role_orders: Bestellverwaltung
+        role_suppliers: Lieferanten
+        user_tokens: Mitglieder
     errors:
       format: ! '%{attribute} %{message}'
       general: Ein Problem ist aufgetreten.
@@ -1607,60 +1673,6 @@ de:
         required_users: Wieviel Benutzerinnen werden insgesamt benötigt?
       tax: In Prozent, Standard sind 7,0
     labels:
-      article:
-        article_category: Kategorie
-        manufacturer: Produzent
-        name: Name
-        note: Notiz
-        origin: Herkunft
-        unit: Einheit
-      article_category:
-        description: Beschreibung
-        name: Name
-      defaults:
-        amount: Betrag
-        date: Datum
-        deposit: Pfand
-        description: Beschreibung
-        email: E-Mail
-        note: Notiz
-        order_number: Bestellnummer
-        ordergroup: Bestellgruppe
-        password: Passwort
-        password_confirmation: Passwort wiederholen
-        phone: Telefon
-        price: Preis (netto)
-        tax: MwSt
-        title: Titel
-        unit_quantity: Gebindegröße
-        user_tokens: Mitglieder
-      group_order_article:
-        ordergroup_id: Bestellgruppe
-        result: Menge
-      message:
-        body: Inhalt
-        group_id: Gruppe
-        private: Privat
-        recipient_tokens: Empfänger_innen
-        sent_to_all: An alle Mitglieder schicken
-        subject: Betreff
-      order:
-        ends: Endet am
-        starts: Läuft vom
-      order_article:
-        units_to_order: Menge
-        update_current_price: Globalen Preis aktualisieren
-      order_comment:
-        text: Kommentiere diese Bestellung ...
-      ordergroup:
-        contact_address: Adresse
-        contact_person: Kontaktperson
-        contact_phone: Telefon
-        ignore_apple_restriction: Bestellstop bei zu wenig Äpfeln ignorieren
-        name: Name
-      page:
-        body: Inhalt
-        parent_id: Oberseite
       settings:
         messages:
           send_as_email: Bekomme Nachrichten als Emails.
@@ -1676,23 +1688,6 @@ de:
         settings_group:
           messages: Nachrichten
           privacy: Privatsphäre
-      stock_article:
-        supplier: Lieferant
-      task:
-        done: Erledigt?
-        due_date: Wann erledigen?
-        duration: Dauer
-        name: Name
-        required_users: Anzahl
-        user_list: Verantwortliche
-        workgroup: Arbeitsgruppe
-      workgroup:
-        next_weekly_tasks_number: Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?
-        role_admin: Administration
-        role_article_meta: Artikeldatenbank
-        role_finance: Finanzen
-        role_orders: Bestellverwaltung
-        role_suppliers: Lieferanten
     'no': Nein
     options:
       settings:

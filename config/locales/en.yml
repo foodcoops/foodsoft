@@ -48,8 +48,9 @@ en:
         manufacturer: Manufacturer
         name: Name
         note: Note
+        order_number: Order number
         origin: Origin
-        price: Price
+        price: Price (net)
         supplier: Supplier
         tax: VAT
         unit: Unit
@@ -60,10 +61,14 @@ en:
         name: Name
       delivery:
         delivered_on: Delivery date
+        note: Note
         supplier: Supplier
       financial_transaction:
         amount: amount
         note: note
+      group_order_article:
+        ordergroup_id: Ordergroup
+        result: Amount
       invoice:
         amount: Amount
         date: Billing date
@@ -75,14 +80,45 @@ en:
         order: Order
         paid_on: Paid on
         supplier: Supplier
+      message:
+        body: Body
+        group_id: Group
+        private: Private
+        recipient_tokens: Recipients
+        sent_to_all: Send to all members
+        subject: Subject
+      order:
+        ends: Ends at
+        note: Note
+        starts: Starts at
+      order_article:
+        units_to_order: Amount of units
+        update_current_price: Globally update current price
+      order_comment:
+        text: Add comment to this order ...
+      ordergroup:
+        contact_address: Address
+        contact_person: Contact person
+        contact_phone: Phone
+        description: Description
+        ignore_apple_restriction: Ignore order stop by apple points restriction
+        name: Name
+        user_tokens: Members
+      page:
+        body: Body
+        parent_id: Parent page
       stock_article:
         price: Price
         quantity: Quantity
         quantity_available: Available quantity
+      stock_taking:
+        date: Date
+        note: Note
       supplier:
         address: Address
         contact_person: Contact person
         customer_number: Customer number
+        customer_number_short: Cust.nr.
         delivery_days: Delivery days
         email: Email
         fax: Fax
@@ -94,7 +130,10 @@ en:
         phone: Phone
         phone2: Phone 2
         url: Homepage
+      stock_article:
+        supplier: Supplier
       task:
+        description: Description
         done: Done?
         due_date: Due date
         duration: Duration
@@ -110,10 +149,21 @@ en:
         nick: Username
         ordergroup: Ordergroup
         password: Password
+        password_confirmation: Repeat password
         phone: Telephone
         workgroup:
           one: Workgroup
           other: Workgroups
+      workgroup:
+        name: Name
+        description: Description
+        next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
+        role_admin: Administration
+        role_article_meta: Article database
+        role_finance: Finances
+        role_orders: Order management
+        role_suppliers: Suppliers
+        user_tokens: Members
     errors:
       format: ! '%{attribute} %{message}'
       general: A problem has occured.
@@ -1624,50 +1674,6 @@ en:
         required_users: How many users will be needed in total?
       tax: In percentage, standard is 7,0
     labels:
-      defaults:
-        amount: Amount
-        date: Date
-        deposit: Deposit
-        description: Description
-        email: Email
-        note: Note
-        order_number: Order number
-        ordergroup: Ordergroup
-        password: Password
-        password_confirmation: Repeat password
-        phone: Phone
-        price: Price (net)
-        tax: VAT
-        title: Title
-        unit_quantity: Unit quantity
-        user_tokens: Members
-      group_order_article:
-        ordergroup_id: Ordergroup
-        result: Amount
-      message:
-        body: Body
-        group_id: Group
-        private: Private
-        recipient_tokens: Recipients
-        sent_to_all: Send to all members
-        subject: Subject
-      order:
-        ends: Ends at
-        starts: Starts at
-      order_article:
-        units_to_order: Amount of units
-        update_current_price: Globally update current price
-      order_comment:
-        text: Add comment to this order ...
-      ordergroup:
-        contact_address: Address
-        contact_person: Contact person
-        contact_phone: Phone
-        ignore_apple_restriction: Ignore order stop by apple points restriction
-        name: Name
-      page:
-        body: Body
-        parent_id: Parent page
       settings:
         messages:
           send_as_email: Receive messages as emails.
@@ -1683,15 +1689,6 @@ en:
         settings_group:
           messages: Messages
           privacy: Privacy
-      stock_article:
-        supplier: Supplier
-      workgroup:
-        next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
-        role_admin: Administration
-        role_article_meta: Article database
-        role_finance: Finances
-        role_orders: Order management
-        role_suppliers: Suppliers
     'no': 'No'
     options:
       settings:
