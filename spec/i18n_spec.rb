@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'i18n-spec'
 
-Dir.glob('config/locales/*.yml').each do |locale_file|
+Dir.glob('config/locales/??{-*,}.yml').each do |locale_file|
   describe "#{locale_file}" do
     it_behaves_like 'a valid locale file', locale_file
     # We're currently allowing both German and English as source language
