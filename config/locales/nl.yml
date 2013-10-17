@@ -42,10 +42,10 @@ nl:
         fc_price: prijs foodcoop
         fc_share: marge foodcoop
         gross_price: bruto prijs
-        name: 
-        note: 
+        name: Naam
+        note: Notitie
         price: netto prijs
-        supplier: 
+        supplier: Leverancier
         tax: BTW
         unit: eenheid
         unit_quantity: groothandelseenheid
@@ -332,7 +332,7 @@ nl:
           one: Er moet éen artikel bijgewerkt worden.
           other: Er moeten %{count} artikelen bijgewerkt worden.
     upload:
-      body: 
+      body: <p>Het bestand moet een utf-8 tekstbestand zijn met als extensie '.csv'. De eerste regel wordt overgeslagen.</p> <p>Velden moeten met een puntkomma (';') gescheiden worden, en tekst mag tussen dubbele aanhalingstekstens ("Tekst...") staan.</p> <p>Volgende van de kolommen:</p>
       fields:
         season_amount: 
         season_price: 
@@ -503,6 +503,7 @@ nl:
       filename: Bestelling %{name}-%{date} - Huishoudenslijst
       rows:
       - Artikel
+      - Besteld
       - Hoeveelheid
       - Prijs
       - Gr.Eenh.
@@ -871,7 +872,7 @@ nl:
       remaining: nog %{remaining}
       title: Lopende bestellingen
     update:
-      error_general: 
+      error_general: Er is een probleem opgetreden, de bestelling kon niet bijgewerkt worden.
       error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon je bestelling niet opgeslagen worden. Sorry!
       notice: De bestelling is opgeslagen.
   helpers:
@@ -913,8 +914,8 @@ nl:
     index:
       due_date_format: ! '%A %d %B'
       messages:
-        title: 
-        view_all: 
+        title: Nieuwste berichten
+        view_all: Alle berichten bekijken
       my_ordergroup:
         funds: ! '| Beschikbaar tegoed:'
         last_update: Laatst gewijzigd %{when} geleden
@@ -944,7 +945,7 @@ nl:
       description: Omschrijving
       funds: ! 'Beschikbaar krediet:'
       invite: Iemand uitnodigen
-      people: 
+      people: Personen
       search: Zoeken ...
       title: Mijn huishouden
     ordergroup_cancelled: Je bent geen lid meer van de groep %{group}.
@@ -982,19 +983,25 @@ nl:
       write_message: Bericht schrijven
   invites:
     errors:
-      already_member: 
+      already_member: is al lid van de foodcoop.
     modal_form:
-      body: 
-      title: 
+      body: <p>Hier kun je iemand die nog geen lid is uitnodigen voor de groep<b>%{group}</b>.</p> <p>Na aanmelding is hij of zij automatisch lid van deze groep.</p>
+      title: Iemand uitnodigen
     new:
-      action: 
-      body: 
-    success: 
+      action: Uitnodiging versturen
+      body: <p>Hier kun je iemand die nog geen lid is, uitnodigen voor de groep <b>%{group}</b>.</p>
+    success: Persoon is uitgenodigd.
   layouts:
     application1:
       title: Foodsoft - %{title}
     email:
-      footer: 
+      footer: ! '--
+
+        Foodsoft: %{foodsoft}
+
+        Foodcoop-Homepage: %{foodcoop}
+
+        Help: %{help}'
     foodsoft: Foodsoft
     header:
       feedback:
@@ -1011,7 +1018,7 @@ nl:
       page: Pagina %{number}
   login:
     accept_invitation:
-      body: 
+      body: <p>Je bent uitgenodigd als lid voor foodcoop %{foodcoop} in de groep <b>%{group}</b>.</p> <p>Als je wilt meedoen, vul dan dit formulier in.</p> <p>Natuurlijk zullen we je informatie niet delen met anderen. Je kunt zelf aangeven, welke informatie voor andere leden beschikbaar is (maar beheerders hebben daar altijd toegang toe).</p>
       submit: Foodsoft account aanmaken
       title: Uitnodiging voor %{name}
     controller:
@@ -1033,9 +1040,9 @@ nl:
       submit: Nieuw wachtwoord opslaan
       title: Nieuw wachtwoord
   mailer:
-    dateformat: 
+    dateformat: ! '%d %b'
     feedback:
-      header: 
+      header: ! '%{user} schreef op %{date}:'
       subject: 
     foodsoft_message:
       footer: 
@@ -1107,21 +1114,21 @@ nl:
     new:
       list:
         desc: 
-        mail: 
+        mail: bijvoorbeeld door een email te sturen naar %{email}.
         subscribe: 
         subscribe_msg: 
         wiki: 
       no_user_found: Geen gebruiker gevonden
       search: Zoeken ...
       search_user: Gebruiker zoeken
-      title: 
+      title: Nieuw bericht
     show:
-      all_messages: 
-      from: 
-      reply: 
-      sent_on: 
-      subject: 
-      title: 
+      all_messages: Berichtenoverzicht
+      from: ! 'Van:'
+      reply: Antwoorden
+      sent_on: ! 'Verzonden:'
+      subject: ! 'Onderwerp:'
+      title: Bericht lezen
   model:
     delivery:
       each_stock_article_must_be_unique: In een levering mag ieder voorraadsartikel maar een keer voorkomen.
@@ -1262,9 +1269,9 @@ nl:
       title: Artikel
       unit_quantity: 
     index:
-      action_end: 
-      confirm_delete: 
-      confirm_end: 
+      action_end: Sluiten
+      confirm_delete: Wil je de bestelling werkelijk verwijderen?
+      confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
       ended_orders: Gesloten bestellingen
       ending: 
       new_order: 
@@ -1285,11 +1292,11 @@ nl:
       title: 
     orders:
       ending: 
-      start: 
+      start: Start
       status: 
-      supplier: 
+      supplier: Leverancier
     show:
-      action_end: 
+      action_end: Sluiten!
       amounts: 
       articles: 
       articles_ordered: 
