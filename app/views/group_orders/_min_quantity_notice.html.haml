@@ -1,5 +1,5 @@
 - min_order_quantity = (Float(@order.supplier.min_order_quantity) rescue 0)
-- unless @order.supplier.min_order_quantity.nil? or min_order_quantity > 0
+- unless @order.supplier.min_order_quantity.blank? or min_order_quantity > 0
   %p
     %i= t('simple_form.labels.supplier.min_order_quantity') + ': ' +  @order.supplier.min_order_quantity
 
