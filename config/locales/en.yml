@@ -505,6 +505,9 @@ en:
       - Sum
       sum: Sum
       title: ! 'Order sorted by group: %{name}, closed at %{date}'
+      multiple:
+        title: Multiple orders sorted by group
+        filename: Multiple orders - by group
     order_fax:
       filename: Order %{name}-%{date} - Fax
       rows:
