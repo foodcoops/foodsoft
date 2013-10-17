@@ -201,6 +201,9 @@ GEM
       railties (= 3.2.13)
     rails-assets-listjs (0.2.0.beta.4)
       railties (>= 3.1)
+    rails-i18n (3.0.0)
+      i18n (~> 0.5)
+      rails (>= 3.0.0, < 4.0.0)
     rails-settings-cached (0.2.4)
       rails (>= 3.0.0)
     railties (3.2.13)
@@ -343,6 +346,7 @@ DEPENDENCIES
   quiet_assets
   rails (~> 3.2.9)
   rails-assets-listjs (= 0.2.0.beta.4)
+  rails-i18n
   rails-settings-cached (= 0.2.4)
   resque
   rspec-core

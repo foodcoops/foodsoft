@@ -1,38 +1,4 @@
 en:
-  activemodel:
-    errors:
-      format: ! '%{attribute} %{message}'
-      general: A problem has occured.
-      general_again: A problem has occured. Please try again.
-      general_msg: ! 'A problem has occured: %{msg}'
-      messages:
-        accepted: has to be accepted
-        blank: has to be entered
-        confirmation: does not match the confirmation
-        empty: has to be entered
-        equal_to: has to be exactly %{count}
-        even: has to be an even number
-        exclusion: is not available
-        greater_than: has to be greater than %{count}
-        greater_than_or_equal_to: has to be greater than or equal to %{count}
-        inclusion: is not a valid value
-        invalid: is invalid
-        less_than: has to be less than %{count}
-        less_than_or_equal_to: has to be less than or equal to %{count}
-        not_a_number: is not a number
-        not_an_integer: must be a whole number
-        odd: must be odd
-        record_invalid: ! 'validation failed: %{errors}'
-        taken: is already taken
-        taken_with_deleted: is already taken (deleted group)
-        too_long: is too long (no more than %{count} characters)
-        too_short: is too short (use more than %{count} characters)
-        wrong_length: is the wrong length (has to have exactly %{count} characters)
-      template:
-        body: ! 'Please check the following fields:'
-        header:
-          one: ! 'Could not save %{model}: an error.'
-          other: ! 'Could not save %{model}: %{count} errors.'
   activerecord:
     attributes:
       article:
@@ -165,44 +131,12 @@ en:
         role_suppliers: Suppliers
         user_tokens: Members
     errors:
-      format: ! '%{attribute} %{message}'
-      general: A problem has occured.
-      general_again: A problem has occured. Please try again.
-      general_msg: ! 'A problem has occured: %{msg}'
       has_many_left: is still associated with a %{collection}!
-      messages:
-        accepted: has to be accepted
-        blank: has to be filled
-        confirmation: does not match the confirmation
-        empty: has to be entered
-        equal_to: has to be exactly %{count}
-        even: has to be an even number
-        exclusion: is not available
-        greater_than: has to be greater than %{count}
-        greater_than_or_equal_to: has to be greater than or equal to %{count}
-        inclusion: is not a valid value
-        invalid: is invalid
-        less_than: has to be less than %{count}
-        less_than_or_equal_to: has to be less than or equal to %{count}
-        not_a_number: is not a number
-        not_an_integer: must be a whole number
-        odd: must be odd
-        record_invalid: ! 'validation failed: %{errors}'
-        taken: is already taken
-        taken_with_deleted: is already taken (deleted group)
-        too_long: is too long (no more than %{count} characters)
-        too_short: is too short (use more than %{count} characters)
-        wrong_length: is the wrong length (has to have exactly %{count} characters)
       models:
         task:
           attributes:
             done:
               exclusion: finished tasks may not be repeated weekly
-      template:
-        body: ! 'Please check the following fields:'
-        header:
-          one: ! 'Could not save %{model}: an error.'
-          other: ! 'Could not save %{model}: %{count} errors.'
     models:
       article: Article
       article_category: Article category
@@ -446,102 +380,6 @@ en:
       file_label: Please choose a compatible file
       submit: Upload file
       title: ! '%{supplier} / upload articles'
-  date:
-    abbr_day_names:
-    - Su
-    - Mo
-    - Tu
-    - We
-    - Th
-    - Fr
-    - Sa
-    abbr_month_names:
-    - 
-    - Jan
-    - Feb
-    - Mar
-    - Apr
-    - May
-    - Jun
-    - Jul
-    - Aug
-    - Sep
-    - Oct
-    - Nov
-    - Dec
-    day_names:
-    - Sunday
-    - Monday
-    - Tuesday
-    - Wednesday
-    - Thursday
-    - Friday
-    - Saturday
-    formats:
-      default: ! '%d/%m/%Y'
-      long: ! '%e %B %Y'
-      short: ! '%e %b'
-    month_names:
-    - 
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
-    order:
-    - :day
-    - :month
-    - :year
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: about one hour
-        other: about %{count} hours
-      about_x_months:
-        one: about one month
-        other: about %{count} months
-      about_x_years:
-        one: about one year
-        other: about %{count} years
-      almost_x_years:
-        one: almost one year
-        other: almost %{count} years
-      half_a_minute: half a minute
-      less_than_x_minutes:
-        one: less than one minute
-        other: less then %{count} minutes
-      less_than_x_seconds:
-        one: less than a second
-        other: less than %{count} seconds
-      over_x_years:
-        one: more then a year
-        other: more than %{count} year
-      x_days:
-        one: one day
-        other: ! '%{count} days'
-      x_minutes:
-        one: one minute
-        other: ! '%{count} minutes'
-      x_months:
-        one: one month
-        other: ! '%{count} months'
-      x_seconds:
-        one: eine Sekunde
-        other: ! '%{count} seconds'
-    prompts:
-      day: day
-      hour: hours
-      minute: minutes
-      month: months
-      second: seconds
-      year: years
   deliveries:
     add_stock_change:
       how_many_units: ! 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
@@ -643,38 +481,9 @@ en:
         one: One article in total
         other: ! '%{count} articles in total'
   errors:
-    format: ! '%{attribute} %{message}'
     general: A problem has occured.
     general_again: A problem has occured. Please try again.
     general_msg: ! 'A problem has occured: %{msg}'
-    messages:
-      accepted: has to be accepted
-      blank: has to be filled
-      confirmation: does not match the confirmation
-      empty: has to be entered
-      equal_to: has to be exactly %{count}
-      even: has to be an even number
-      exclusion: is not available
-      greater_than: has to be greater than %{count}
-      greater_than_or_equal_to: has to be greater than or equal to %{count}
-      inclusion: is not a valid value
-      invalid: is invalid
-      less_than: has to be less than %{count}
-      less_than_or_equal_to: has to be less than or equal to %{count}
-      not_a_number: is not a number
-      not_an_integer: must be a whole number
-      odd: must be odd
-      record_invalid: ! 'validation failed: %{errors}'
-      taken: is already taken
-      taken_with_deleted: is already taken (deleted group)
-      too_long: is too long (no more than %{count} characters)
-      too_short: is too short (use more than %{count} characters)
-      wrong_length: is the wrong length (has to have exactly %{count} characters)
-    template:
-      body: ! 'Please check the following fields:'
-      header:
-        one: ! 'Could not save %{model}: an error.'
-        other: ! 'Could not save %{model}: %{count} errors.'
   feedback:
     create:
       notice: Your feedback was sent successfully. Thanks a lot!
@@ -1001,15 +810,11 @@ en:
       option_choose: Choose supplier/stock
       option_stock: Stock
       order_pdf: Create PDF
-    select:
-      prompt: please select
     submit:
-      create: save %{model}
       invite:
         create: send invitation
       message:
         create: send message
-      update: save changes
     tasks:
       required_users: ! '%{count} members are still needed!'
   home:
@@ -1346,57 +1151,6 @@ en:
       home: Home
       title: Wiki
     workgroups: Workgroups
-  number:
-    currency:
-      format:
-        delimiter: .
-        format: ! '%n %u'
-        precision: 2
-        separator: .
-        significant: false
-        strip_insignificant_zeros: false
-        unit: €
-    format:
-      delimiter: .
-      precision: 2
-      separator: ! ','
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: ! '%n %u'
-        units:
-          billion:
-            one: billion
-            other: billions
-          million: million
-          quadrillion:
-            one: quadrillion
-            other: quadrillions
-          thousand: thousand
-          trillion: trillion
-          unit: 
-      format:
-        delimiter: 
-        precision: 1
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: ! '%n %u'
-        units:
-          byte:
-            one: byte
-            other: bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: 
-    precision:
-      format:
-        delimiter: 
   ordergroups:
     edit:
       title: Edit ordergroups
@@ -1811,11 +1565,6 @@ en:
       show_deliveries: Show all deliveries
     update:
       notice: Supplier was updated
-  support:
-    array:
-      last_word_connector: ! ' and '
-      two_words_connector: ! ' and '
-      words_connector: ! ', '
   tasks:
     accept:
       notice: You have accepted the task
@@ -1889,13 +1638,6 @@ en:
     workgroup:
       title: Tasks for %{workgroup}
       title_all: All group tasks
-  time:
-    am: morning
-    formats:
-      default: ! '%A, %d %B %Y, %H:%M'
-      long: ! '%A, %d %B %Y, %H:%M'
-      short: ! '%d %B, %H:%M'
-    pm: afternoon
   ui:
     close: Close
     delete: Delete
