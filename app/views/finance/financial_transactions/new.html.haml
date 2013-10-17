@@ -24,7 +24,8 @@
       %label{:for => :type_other}
         = radio_button_tag(:type, :other)
         = t '.type_other'
-  = f.input :note, :as => :text, :required => false, :input_html => {rows: 4}
+  -# need :required for simple_form, and :validate for client_side_validations
+  = f.input :note, :as => :text, :required => false, :validate => { :presence => false }, :input_html => {rows: 4}
   .form-actions
     = f.submit class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), finance_ordergroup_transactions_path(@ordergroup)
