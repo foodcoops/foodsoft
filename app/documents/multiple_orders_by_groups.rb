@@ -44,8 +44,8 @@ class MultipleOrdersByGroups < OrderPdf
         table.cells.border_width            = 1
         table.cells.border_color            = '666666'
 
-        table.column(0).width = 190
-        table.column(1).width = 50
+        table.column(0).width = 180
+        table.column(1).width = 60
         table.column(3).font_style = :bold
         table.columns(2..5).align = :right
         table.column(7).align = :right
