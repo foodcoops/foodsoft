@@ -7,6 +7,10 @@
       setMinimumBalance(#{FoodsoftConfig[:minimum_balance] or 0});
       setToleranceBehaviour(#{FoodsoftConfig[:tolerance_is_costly]});
       setStockit(#{@order.stockit?});
+      // create List for search-feature (using list.js, http://listjs.com)
+      var listjsResetPlugin = ['reset', {highlightClass: 'btn-primary'}];
+      var listjsDelayPlugin = ['delay', {delayedSearchTime: 500}];
+      new List(document.body, { valueNames: ['name'], engine: 'unlist', plugins: [listjsResetPlugin, listjsDelayPlugin] });
     });
 
 - title t('.title'), false
@@ -16,6 +20,14 @@
 - unless @order.note.blank?
   %p
     %i= @order.note
+
+.row-fluid
+  .well.clear
+    .form-search
+      .input-append
+        = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable'
+        %button.add-on.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
+          %i.icon.icon-remove
 
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
@@ -43,9 +55,9 @@
           %th
           %th#col_required= t '.amount'
         %th{style: "width:15px;"}= t '.sum'
-    %tbody
+    %tbody.list
       - @order.articles_grouped_by_category.each do |category, order_articles|
-        %tr.article-category
+        %tr.list-heading.article-category
           %td
             = category
             %i.icon-tag

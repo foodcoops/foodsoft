@@ -202,6 +202,8 @@ GEM
       activesupport (= 3.2.14)
       bundler (~> 1.0)
       railties (= 3.2.14)
+    rails-assets-listjs (0.2.0.beta.4)
+      railties (>= 3.1)
     rails-settings-cached (0.2.4)
       rails (>= 3.0.0)
     railties (3.2.14)
@@ -347,6 +349,7 @@ DEPENDENCIES
   prawn
   quiet_assets
   rails (~> 3.2.9)
+  rails-assets-listjs (= 0.2.0.beta.4)
   rails-settings-cached (= 0.2.4)
   resque
   rspec-core

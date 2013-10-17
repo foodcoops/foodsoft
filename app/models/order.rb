@@ -160,7 +160,7 @@ class Order < ActiveRecord::Base
     unless finished?
       Order.transaction do
         # set new order state (needed by notify_order_finished)
-        update_attributes(:state => 'finished', :ends => Time.now, :updated_by => user)
+        update_attributes!(:state => 'finished', :ends => Time.now, :updated_by => user)
 
         # Update order_articles. Save the current article_price to keep price consistency
         # Also save results for each group_order_result

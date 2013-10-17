@@ -42,7 +42,10 @@ de:
         fc_price: Endpreis
         fc_share: FC-Aufschlag
         gross_price: Bruttopreis
+        name: Name
+        note: Notiz
         price: Nettopreis
+        supplier: Lieferantin
         tax: MwSt
         unit: Einheit
         unit_quantity: Gebindegröße
@@ -51,6 +54,8 @@ de:
         note: Notiz
       stock_article:
         price: Nettopreis
+        quantity: Lagerbestand
+        quantity_available: Verfügbarer Bestand
       user:
         first_name: Vorname
         password: Passwort
@@ -310,18 +315,20 @@ de:
       error_nosel: Du hast keine Artikel ausgewählt
     parse_upload:
       body: <p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
+      title: 
+    sync:
       outlist:
         body: ! 'Folgende Artikel wurden ausgelistet und werden <b>gelöscht</b>:'
         body_skip: Es müssen keine Artikel gelöscht werden.
         title: Auslisten ...
       price_short: Preis
-      submit: Alle löschen/aktualisieren
+      submit: Alle synchronisieren
       title: Artikel mit externer Datenbank synchronisieren
       unit_quantity_short: GebGr
       update:
-        body: <p><i>Jeder Artikel wird doppelt angezeigt. Die alten Werte sind grau und die Textfelder sind mit den aktuellen Werten vorausgefüllt.</i></p> <p><i>Abweichungen zu den alten Artikeln sind gelb markiert.</i></p>
+        body: ! 'Jeder Artikel wird doppelt angezeigt: die alten Werte sind grau und die Textfelder sind mit den aktuellen Werten vorausgefüllt. Abweichungen zu den alten Artikeln sind gelb markiert.'
         title: Aktualisieren ...
-        update_msg: ! 'Artikel müssen aktualisiert werden:'
+        update_msg: ! '%{count} Artikel müssen aktualisiert werden.'
     upload:
       body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert.</p> <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden.</p> <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>
       fields:
@@ -795,6 +802,8 @@ de:
       new_funds: Neuer Kontostand
       note: Notiz
       price: Preis
+      reset_article_search: Suche zurücksetzen
+      search_article: Artikel suchen...
       sum: Summe
       sum_amount: ! 'Gesamtbestellmenge bisher:'
       supplier: Lieferant
@@ -1729,15 +1738,6 @@ de:
       title: Lagerartikel bearbeiten
     form:
       price_hint: Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.
-    history:
-      change_quantity: Veränderung
-      datetime: Zeitpunkt
-      delivery: Lieferung
-      new_quantity: Neuer Bestand
-      order: Bestellung
-      reason: Ereignis
-      stock_changes: Verlauf anzeigen für »%{article_name}«
-      stock_taking: Inventur
     index:
       article:
         article: Artikel
@@ -1763,6 +1763,15 @@ de:
     new:
       search_text: ! 'Suche nache Artikeln aus allen Katalogen:'
       title: Neuen Lagerartikel anlegen
+    show:
+      change_quantity: Veränderung
+      datetime: Zeitpunkt
+      delivery: Lieferung
+      new_quantity: Neuer Bestand
+      order: Bestellung
+      reason: Ereignis
+      stock_changes: Verlauf des Lagerbestands
+      stock_taking: Inventur
     stock_create:
       notice: Lagerartikel wurde gespeichert.
     stock_update:
@@ -1883,7 +1892,6 @@ de:
     close: Schließen
     delete: Löschen
     edit: Bearbeiten
-    history: Verlauf anzeigen
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>

@@ -1,32 +1,33 @@
-%h2= t '.title'
-- if ordergroup.not_enough_apples?
-  .alert
-  = t '.not_enough_apples'
-- unless Order.open.empty?
-  %table.table.table-striped
-    %thead
-      %tr
-        %th= t '.supplier'
-        %th= t '.ending'
-        %th= t '.who_ordered'
-        %th= t '.total'
-    %tbody
-      - total = 0
-      - Order.open.each do |order|
+%section
+  %h2= t '.title'
+  - if ordergroup.not_enough_apples?
+    .alert
+      = t '.not_enough_apples'
+  - unless Order.open.empty?
+    %table.table.table-striped
+      %thead
         %tr
-          %td= link_to_ordering(order)
-          %td= format_time(order.ends) unless order.ends.nil?
-          - if group_order = order.group_order(ordergroup)
-            - total += group_order.price
-            %td= "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
-            %td.numeric= number_to_currency(group_order.price)
-          - else
-            %td{:colspan => 2}
-    - if total > 0
-      %tfooter
-        %tr
-          %th(colspan="2")
-          %th= t('.total_sum') + ':'
-          %th.numeric= number_to_currency(total)
-- else
-  %i= t '.no_open_orders'
+          %th= t '.supplier'
+          %th= t '.ending'
+          %th= t '.who_ordered'
+          %th= t '.total'
+      %tbody
+        - total = 0
+        - Order.open.each do |order|
+          %tr
+            %td= link_to_ordering(order)
+            %td= format_time(order.ends) unless order.ends.nil?
+            - if group_order = order.group_order(ordergroup)
+              - total += group_order.price
+              %td= "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
+              %td.numeric= number_to_currency(group_order.price)
+            - else
+              %td{:colspan => 2}
+      - if total > 0
+        %tfooter
+          %tr
+            %th(colspan="2")
+            %th= t('.total_sum') + ':'
+            %th.numeric= number_to_currency(total)
+  - else
+    %i= t '.no_open_orders'
