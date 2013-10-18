@@ -507,6 +507,7 @@ fr:
       filename: Commande %{name}-%{date} - Répartition par cellules
       rows:
       - Nom de l'article
+      - Commandée
       - Quantité
       - Prix unitaire
       - Unités par lot

@@ -10,7 +10,6 @@ $('div.container-fluid').prepend(
   var stock_article_for_adding = $(
     '<%= j(render(:partial => 'stock_article_for_adding', :locals => {:article => @stock_article, :delivery => @delivery})) %>'
   ).addClass('success');
-  enablePriceTooltips(stock_article_for_adding);
   
   $('#stock_article_<%= @stock_article.id %>').replaceWith(stock_article_for_adding);
   updateSort('#stock_articles_for_adding');
