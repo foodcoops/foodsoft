@@ -1,5 +1,4 @@
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
 //= require select2
 //= require twitter/bootstrap
@@ -14,6 +13,7 @@
 //= require list.delay
 //= require list.reset
 //= require rails.validations
+//= require rails.validations.simple_form
 //= require_self
 //= require ordering
 //= require stupidtable
@@ -35,19 +35,19 @@ $.fn.extend({
 $(function() {
 
     // Show/Hide a specific DOM element
-    $('a[data-toggle-this]').live('click', function() {
+    $(document).on('click', 'a[data-toggle-this]', function() {
         $($(this).data('toggle-this')).toggle();
         return false;
     });
 
     // Remove this item from DOM
-    $('a[data-remove-this]').live('click', function() {
+    $(document).on('click', 'a[data-remove-this]', function() {
         $($(this).data('remove-this')).remove();
         return false;
     });
 
     // Check/Uncheck a single checkbox
-    $('[data-check-this]').live('click', function() {
+    $(document).on('click', '[data-check-this]', function() {
         var checkbox = $($(this).data('check-this'));
         checkbox.attr('checked', !checkbox.is(':checked'));
         highlightRow(checkbox);
@@ -55,7 +55,7 @@ $(function() {
     });
 
     // Check/Uncheck all checkboxes for a specific form
-    $('input[data-check-all]').live('click', function() {
+    $(document).on('click', 'input[data-check-all]', function() {
         var status = $(this).is(':checked');
         var context = $(this).data('check-all');
         var elms = $('input[type="checkbox"]', context);
@@ -67,7 +67,7 @@ $(function() {
     });
 
     // Submit form when changing a select menu.
-    $('form[data-submit-onchange] select').live('change', function() {
+    $(document).on('change', 'form[data-submit-onchange] select', function() {
         var confirmMessage = $(this).children(':selected').data('confirm');
         if (confirmMessage) {
             if (confirm(confirmMessage)) {
@@ -100,7 +100,7 @@ $(function() {
     });
 
     // Remote paginations
-    $('div.pagination[data-remote] a').live('click', function() {
+    $(document).on('click', 'div.pagination[data-remote] a', function() {
         $.getScript($(this).attr('href'));
         return false;
     });
@@ -121,6 +121,20 @@ $(function() {
 
     // Use bootstrap datepicker for dateinput
     $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
+
+    // bootstrap tooltips (for price)
+    //   Extra options don't work when using selector, so override defaults
+    //   https://github.com/twbs/bootstrap/issues/3875 . These can still be
+    //   overridden per tooltip using data-placement attributes and the like.
+    $.extend($.fn.tooltip.defaults, {
+      html: true,
+      animation: false,
+      placement: 'left',
+      container: 'body'
+    });
+    $(document).tooltip({
+      selector: '[data-toggle~="tooltip"]',
+    });
     
     // See stupidtable.js for initialization of local table sorting
 });
@@ -147,3 +161,5 @@ function highlightRow(checkbox) {
 function setHiddenId(text, li) {
   $('hidden_id').value = li.id;
 }
+
+

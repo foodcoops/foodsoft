@@ -61,8 +61,6 @@
           return true;
         }
       });
-      
-      enablePriceTooltips();
     });
     
     function mark_article_for_delivery(stock_article_id) {
@@ -78,14 +76,6 @@
     }
     function is_article_available_for_delivery(stock_article_id) {
       return ( 0 == $('#stock_change_stock_article_' + stock_article_id).length );
-    }
-
-    function enablePriceTooltips(context) {
-      $('[data-toggle~="tooltip"]', context).tooltip({
-        animation: false,
-        html: true,
-        placement: 'left'
-      });
     }
 
 = simple_form_for [@supplier, @delivery], validate: true do |f|
