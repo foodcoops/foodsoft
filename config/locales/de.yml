@@ -78,6 +78,7 @@ de:
         price: Nettopreis
         quantity: Lagerbestand
         quantity_available: Verfügbarer Bestand
+        supplier: Lieferant
       stock_taking:
         date: Datum
         note: Notiz
@@ -97,8 +98,6 @@ de:
         phone: Telefon
         phone2: Telefon 2
         url: Homepage
-      stock_article:
-        supplier: Lieferant
       task:
         description: Beschreibung
         done: Erledigt?
@@ -1621,7 +1620,6 @@ de:
       confirm_delete_single: Die Aufgabe wirklich löschen?
       confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
       delete_group: Aufgabe und folgende löschen
-      due_date: Fälligkeitsdatum
       hours: ! '%{count}h'
       mark_done: Als erledigt markieren
       reject_task: Aufgabe ablehnen

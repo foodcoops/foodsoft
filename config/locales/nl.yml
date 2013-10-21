@@ -2,29 +2,129 @@ nl:
   activerecord:
     attributes:
       article:
-        article_category: categorie
+        article_category: Categorie
         availability: Artikel leverbaar?
-        deposit: statiegeld
-        fc_price: prijs foodcoop
-        fc_share: marge foodcoop
-        gross_price: bruto prijs
+        availability_short: leverb.
+        deposit: Statiegeld
+        fc_price: Foodcoop prijs
+        fc_price_short: FC prijs
+        fc_share: Foodcoop marge
+        fc_share_short: FC marge
+        gross_price: Bruto prijs
+        manufacturer: Producent
         name: Naam
         note: Notitie
-        price: netto prijs
+        origin: Herkomst
+        order_number: Ordernummer
+        price: Netto prijs
         supplier: Leverancier
         tax: BTW
-        unit: eenheid
-        unit_quantity: groothandelseenheid
+        unit: Eenheid
+        unit_quantity: Groothandelseenheid
+        unit_quantity_short: Gr.Eenh.
+      article_category:
+        description: Omschrijving
+        name: Naam
+      delivery:
+        delivered_on: 
+        note:
+        supplier: 
       financial_transaction:
         amount: bedrag
         note: notitie
+      group_order_article:
+        ordergroup_id: 
+        result: 
+      invoice:
+        amount: Bedrag
+        date: Factuurdatum
+        delivery: Levering
+        deposit: Statiegeld in rekening gebracht
+        deposit_credit: Statiegeld teruggekregen
+        note: Notitie
+        number: Nummer
+        order: Bestelling
+        paid_on: Betaald op
+        supplier: Leverancier
+      message:
+        body: 
+        group_id: 
+        private: 
+        recipient_tokens: 
+        sent_to_all: 
+        subject: 
+      order:
+        ends: Eindigt op
+        note: Notitie
+        starts: Start op
+      order_article:
+        units_to_order: 
+        update_current_price: 
+      order_comment:
+        text: Commentaar voor deze bestelling toevoegen ...
+      ordergroup:
+        contact_address: Adres
+        contact_person: Contactpersoon
+        contact_phone: Telefoon
+        description: Omschrijving
+        ignore_apple_restriction: 
+        name: Naam
+        user_tokens: Leden
+      page:
+        body: 
+        parent_id: 
       stock_article:
-        price: prijs
-        quantity: 
-        quantity_available: 
+        price: Prijs
+        quantity: Aantal
+        quantity_available: Beschikbaar
+        supplier: Leverancier
+      supplier:
+        address: Adres
+        contact_person: Contactpersoon
+        customer_number: Klantnummer
+        delivery_days: Bezorgdagen
+        email: Email
+        fax: Fax
+        is_subscribed: geabonneerd?
+        min_order_quantity: Minimale bestelhoeveelheid
+        name: Naam
+        note: Notitie
+        order_howto: Hoe te bestellen
+        phone: Telefoon
+        phone2: Telefoon 2
+        url: Homepage
+      task:
+        description:
+        done: 
+        due_date: 
+        duration: 
+        name: 
+        required_users: 
+        user_list: 
+        workgroup: 
       user:
+        email: Email
         first_name: Voornaam
+        last_name: Achternaam
+        name: Naam
+        nick: Gebruikersnaam
+        ordergroup: Huishouden
         password: Wachtwoord
+        password_confirmation: Wachtwoord herhalen
+        phone: Telefoon
+        workgroup:
+          one: Werkgroep
+          other: Werkgroepen
+      workgroup:
+        name: Naam
+        description: Omschrijving
+        next_weekly_tasks_number: 
+        role_admin: Beheer
+        role_article_meta: Artikelen
+        role_finance: Financiën
+        role_orders: Bestellingen
+        role_suppliers: Leveranciers
+        user_tokens: Leden
     errors:
       has_many_left: is nog met een %{collection} verbonden!
       models:
@@ -32,11 +132,6 @@ nl:
           attributes:
             done:
               exclusion: gedane taken kunnen niet herhaald worden
-      template:
-        body: ! 'Controleer de volgende velden:'
-        header:
-          one: ! 'Kon %{model} niet opslaan: één foutmelding.'
-          other: ! 'Kon %{model} niet opslaan: %{count} foutmeldingen.'
     models:
       article: Artikel
       article_category: Categorie
@@ -339,7 +434,8 @@ nl:
       filename: Bestelling %{name}-%{date} - Artikellijst
       rows:
       - Huishouden
-      - Hoeveelheid
+      - Besteld
+      - Ontvangen
       - Prijs
       title: ! 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
     order_by_groups:
@@ -1253,74 +1349,6 @@ nl:
         required_users: 
       tax: 
     labels:
-      article:
-        article_category: Categorie
-        manufacturer: Producent
-        name: Naam
-        note: Notitie
-        origin: Herkomst
-        unit: Eenheid
-      article_category:
-        description: Omschrijving
-        name: Naam
-      defaults:
-        amount: 
-        date: Datum
-        deposit: Statiegeld
-        description: Omschrijving
-        email: Email
-        note: Notitie
-        order_number: Bestelnummer
-        ordergroup: Huishouden
-        password: Wachtwoord
-        password_confirmation: Wachtwoord herhalen
-        phone: Telefoon
-        price: Prijs (netto)
-        tax: BTW
-        title: Titel
-        unit_quantity: Groothandelseenheid
-        user_tokens: Leden
-      delivery:
-        delivered_on: 
-        supplier: 
-      group_order_article:
-        ordergroup_id: 
-        result: 
-      invoice:
-        amount: Bedrag
-        date: Factuurdatum
-        delivery: Levering
-        deposit: Statiegeld in rekening gebracht
-        deposit_credit: Statiegeld teruggekregen
-        note: Notitie
-        number: Nummer
-        order: Bestelling
-        paid_on: Betaald op
-        supplier: Leverancier
-      message:
-        body: 
-        group_id: 
-        private: 
-        recipient_tokens: 
-        sent_to_all: 
-        subject: 
-      order:
-        ends: Eindigt op
-        starts: Start op
-      order_article:
-        units_to_order: 
-        update_current_price: 
-      order_comment:
-        text: 
-      ordergroup:
-        contact_address: Adres
-        contact_person: Contactpersoon
-        contact_phone: Telefoon
-        ignore_apple_restriction: 
-        name: 
-      page:
-        body: 
-        parent_id: 
       settings:
         messages:
           send_as_email: Berichten als emails ontvangen.
@@ -1336,48 +1364,6 @@ nl:
         settings_group:
           messages: Berichten
           privacy: Privacy
-      stock_article:
-        supplier: 
-      supplier:
-        address: 
-        contact_person: 
-        customer_number: Klantnummer
-        delivery_days: Bezorgdagen
-        email: 
-        fax: 
-        is_subscribed: 
-        min_order_quantity: 
-        name: 
-        note: 
-        order_howto: 
-        phone: 
-        phone2: 
-        url: 
-      task:
-        done: 
-        due_date: 
-        duration: 
-        name: 
-        required_users: 
-        user_list: 
-        workgroup: 
-      user:
-        email: Email
-        last_name: Achternaam
-        name: Naam
-        nick: Gebruikersnaam
-        ordergroup: Huishouden
-        phone: Telefoon
-        workgroup:
-          one: Werkgroep
-          other: Werkgroepen
-      workgroup:
-        next_weekly_tasks_number: 
-        role_admin: 
-        role_article_meta: Artikelbestand
-        role_finance: Financiën
-        role_orders: 
-        role_suppliers: Leveranciers
     'no': Nee
     options:
       settings:
@@ -1556,7 +1542,6 @@ nl:
       accept_task: 
       confirm_delete_group: 
       delete_group: 
-      due_date: 
       hours: 
       mark_done: 
       reject_task: 

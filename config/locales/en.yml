@@ -73,10 +73,12 @@ en:
       page:
         body: Body
         parent_id: Parent page
+        title: Title
       stock_article:
         price: Price
         quantity: Quantity
         quantity_available: Available quantity
+        supplier: Supplier
       stock_taking:
         date: Date
         note: Note
@@ -96,8 +98,6 @@ en:
         phone: Phone
         phone2: Phone 2
         url: Homepage
-      stock_article:
-        supplier: Supplier
       task:
         description: Description
         done: Done?
@@ -610,6 +610,7 @@ en:
     group_order_articles:
       form:
         amount_change_for: Change amount for %{article}
+        result_hint: 'Unit: %{unit}'
     index:
       amount: Amount
       amount_fc: Amount(FC)
