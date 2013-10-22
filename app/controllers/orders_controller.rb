@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
     end
 
     last_finished = Order.finished.maximum(:ends)
-    @orders_last_order_day = Order.finished.where(ends: last_finished.weeks_ago(1)..last_finished)
+    @orders_last_order_day = (Order.finished.where(ends: last_finished.weeks_ago(1)..last_finished) rescue []) # TODO Rails 4: rescue Order.none
   end
 
   # Gives a view for the results to a specific order
