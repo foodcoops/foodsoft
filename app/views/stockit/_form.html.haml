@@ -11,7 +11,7 @@
       %span.add-on %
     = f.input :deposit
   - else
-    = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('.form.price_hint')
+    = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => t('.price_hint')
   = f.association :article_category
   .form-actions
     = f.submit class: 'btn'

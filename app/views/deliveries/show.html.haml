@@ -1,16 +1,16 @@
 - title t('.title')
 
 %dl
-  %dt= t 'simple_form.labels.delivery.supplier'
+  %dt= heading_helper Delivery, :supplier
   %dd= @delivery.supplier.name
-  %dt= t 'simple_form.labels.delivery.delivered_on'
+  %dt= heading_helper Delivery, :delivered_on
   %dd= @delivery.delivered_on
   %dt= t 'deliveries.invoice_amount'
   %dd= link_to_invoice(@delivery)
   - if @delivery.invoice
     %dt= t 'deliveries.invoice_net_amount'
     %dd= number_to_currency @delivery.invoice.net_amount
-  %dt= t 'simple_form.labels.defaults.note'
+  %dt= heading_helper Delivery, :note
   %dd= simple_format @delivery.note
 
 %h2= t '.title_articles'

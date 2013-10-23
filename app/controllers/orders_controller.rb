@@ -109,9 +109,9 @@ class OrdersController < ApplicationController
     supplier = order.supplier
     contact = FoodsoftConfig[:contact].symbolize_keys
     text = I18n.t('orders.fax.heading', :name => FoodsoftConfig[:name])
-    text += "\n" + I18n.t('orders.fax.customer_number') + ': #{supplier.customer_number}' unless supplier.customer_number.blank?
+    text += "\n#{Supplier.human_attribute_name(:customer_number)}: #{supplier.customer_number}" unless supplier.customer_number.blank?
     text += "\n" + I18n.t('orders.fax.delivery_day')
-    text += "\n\n#{supplier.name}\n#{supplier.address}\n" + I18n.t('simple_form.labels.supplier.fax') + ": #{supplier.fax}\n\n"
+    text += "\n\n#{supplier.name}\n#{supplier.address}\n#{Supplier.human_attribute_name(:fax)}: #{supplier.fax}\n\n"
     text += "****** " + I18n.t('orders.fax.to_address') + "\n\n"
     text += "#{FoodsoftConfig[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
     text += "****** " + I18n.t('orders.fax.articles') + "\n\n"

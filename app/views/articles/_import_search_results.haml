@@ -5,13 +5,13 @@
   %table.table.table-striped
     %thead
       %tr
-        %th= t 'simple_form.labels.article.name'
-        %th= t 'simple_form.labels.article.origin'
-        %th= t 'simple_form.labels.article.manufacturer'
-        %th= t 'simple_form.labels.article.note'
-        %th{:style => "width:4em"}= t 'simple_form.labels.defaults.price'
-        %th= t 'simple_form.labels.article.unit'
-        %th= t 'simple_form.labels.defaults.unit_quantity'
+        %th= heading_helper Article, :name
+        %th= heading_helper Article, :origin
+        %th= heading_helper Article, :manufacturer
+        %th= heading_helper Article, :note
+        %th{:style => "width:4em"}= heading_helper Article, :price
+        %th= heading_helper Article, :unit
+        %th= heading_helper Article, :unit_quantity, short: true
         %th
     %tbody
       - for article in @articles

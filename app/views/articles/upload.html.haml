@@ -2,19 +2,19 @@
 = t('.body').html_safe
 %pre
   = [t('.fields.status'),
-     t('simple_form.labels.defaults.order_number'),
-     t('simple_form.labels.article.name'),
-     t('simple_form.labels.article.note'),
-     t('simple_form.labels.article.manufacturer'),
-     t('simple_form.labels.article.origin'),
-     t('simple_form.labels.article.unit'),
-     t('simple_form.labels.defaults.price'),
-     t('simple_form.labels.defaults.tax'),
-     t('simple_form.labels.defaults.deposit'),
-     t('simple_form.labels.defaults.unit_quantity'),
+     Article.human_attribute_name(:order_number),
+     Article.human_attribute_name(:name),
+     Article.human_attribute_name(:note),
+     Article.human_attribute_name(:manufacturer),
+     Article.human_attribute_name(:origin),
+     Article.human_attribute_name(:unit),
+     Article.human_attribute_name(:price),
+     Article.human_attribute_name(:tax),
+     Article.human_attribute_name(:deposit),
+     Article.human_attribute_name(:unit_quantity),
      t('.fields.season_amount'),
      t('.fields.season_price'),
-     t('simple_form.labels.article.article_category')].join(" | ")
+     Article.human_attribute_name(:article_category)].join(" | ")
 
 = form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
    :html => { :multipart => true } do |f|

@@ -3,9 +3,9 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t 'simple_form.labels.delivery.delivered_on'
+      %th= heading_helper Delivery, :delivered_on
       %th.numeric= t 'deliveries.invoice_amount'
-      %th= t 'simple_form.labels.defaults.note'
+      %th= heading_helper Delivery, :note
   %tbody
     - for delivery in @deliveries
       %tr
