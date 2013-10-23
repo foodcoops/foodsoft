@@ -60,7 +60,8 @@ module Foodsoft
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Do not enable database connection when precompiling assets
-    config.assets.initialize_on_precompile = false
+    # It would be nice not to enable database connection when precompiling assets,
+    # but i18n-js requires initialization, that's why it's on.
+    config.assets.initialize_on_precompile = true
   end
 end
