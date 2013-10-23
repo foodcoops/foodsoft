@@ -4,9 +4,12 @@ fr:
       article:
         article_category: Catégorie
         availability: l'article est-il disponible?
+        availability_short: 
         deposit: Consigne
         fc_price: Prix final
+        fc_price_short: 
         fc_share: Supplément boufcoop
+        fc_share_short: 
         gross_price: Prix brut
         manufacturer: ProductRICE_eur
         name: Nom
@@ -18,11 +21,13 @@ fr:
         tax: TVA
         unit: Unité
         unit_quantity: Unités par lot
+        unit_quantity_short: 
       article_category:
         description: Description
         name: Nom
       delivery:
         delivered_on: Date de réapprovisionnement
+        note: 
         supplier: Fournisseuse_r
       financial_transaction:
         amount: montant
@@ -50,6 +55,7 @@ fr:
         subject: Sujet
       order:
         ends: Clôture le
+        note: 
         starts: Ouverture le
       order_article:
         units_to_order: Quantité
@@ -73,10 +79,14 @@ fr:
         quantity: 
         quantity_available: 
         supplier: FournisseurE
+      stock_taking:
+        date: 
+        note: 
       supplier:
         address: Adresse
         contact_person: Contact
         customer_number: Numéro de client de la coop
+        customer_number_short: 
         delivery_days: Jours de livraison
         email: Email
         fax: Fa
@@ -111,8 +121,8 @@ fr:
           one: Équipe
           other: Équipes
       workgroup:
-        name: Nom
         description: Description
+        name: Nom
         next_weekly_tasks_number: Combien de temps en avance les boulots doivent ils être annoncés sur le site?
         role_admin: Administration
         role_article_meta: Base de données des articles
@@ -349,6 +359,7 @@ fr:
       title: 
     sync:
       outlist:
+        alert_used: 
         body: ! 'Les articles suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
         body_skip: Aucun article à supprimer.
         title: Exclure de la liste...
@@ -433,7 +444,7 @@ fr:
       filename: Commande %{name}-%{date} - Trier par
       rows:
       - Cellule
-      -
+      - 
       - Quantité
       - Prix
       title: ! 'Ordre des articles pour la commande: %{name}, close le %{date}'
@@ -609,6 +620,7 @@ fr:
     group_order_articles:
       form:
         amount_change_for: Modification de la quantité de %{article}
+        result_hint: 
     index:
       amount: Montant
       amount_fc: Montant(boufcoop)
@@ -644,6 +656,7 @@ fr:
         title: Facture %{number}
     order_articles:
       edit:
+        stock_alert: 
         title: Mettre à jour la liste des article
       new:
         title: 
@@ -915,6 +928,9 @@ fr:
       action: Engrainer!
       body: <p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>
     success: La_le membre a été engrainéE avec succès!
+  js:
+    ordering:
+      confirm_change: 
   layouts:
     application1:
       title: Foodsoft - %{title}
@@ -1619,6 +1635,7 @@ fr:
     show:
       accept_task: Te charger de ce boulot.
       confirm_delete_group: Veux-tu vraiment supprimer ce boulot hebdomadaire?
+      confirm_delete_single: 
       delete_group: Supprimer ce boulot
       hours: ! '%{count}h'
       mark_done: Marquer comme effectué

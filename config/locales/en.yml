@@ -121,8 +121,8 @@ en:
           one: Workgroup
           other: Workgroups
       workgroup:
-        name: Name
         description: Description
+        name: Name
         next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
         role_admin: Administration
         role_article_meta: Article database
@@ -610,7 +610,7 @@ en:
     group_order_articles:
       form:
         amount_change_for: Change amount for %{article}
-        result_hint: 'Unit: %{unit}'
+        result_hint: ! 'Unit: %{unit}'
     index:
       amount: Amount
       amount_fc: Amount(FC)
@@ -646,6 +646,7 @@ en:
         title: Invoice %{number}
     order_articles:
       edit:
+        stock_alert: 
         title: Update article
       new:
         title: Add delivered article to order
@@ -1620,8 +1621,8 @@ en:
       notice: The state of the task has been updated
     show:
       accept_task: Accept task
-      confirm_delete_single: Are you sure you want to delete the task?
       confirm_delete_group: Really delete this and all subsequent tasks?
+      confirm_delete_single: Are you sure you want to delete the task?
       delete_group: Delete task and subsequent
       hours: ! '%{count}h'
       mark_done: Mark task as done

@@ -7,7 +7,7 @@ de:
         availability_short: verf.
         deposit: Pfand
         fc_price: Endpreis
-        fc_price_short:
+        fc_price_short: 
         fc_share: FoodCoop-Aufschlag
         fc_share_short: FC-Aufschlag
         gross_price: Bruttopreis
@@ -121,8 +121,8 @@ de:
           one: Arbeitsgruppe
           other: Arbeitsgruppen
       workgroup:
-        name: Name
         description: Beschreibung
+        name: Name
         next_weekly_tasks_number: Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?
         role_admin: Administration
         role_article_meta: Artikeldatenbank
@@ -606,7 +606,7 @@ de:
     group_order_articles:
       form:
         amount_change_for: Mengenänderung für %{article}
-        result_hint: 'Einheit: %{unit}'
+        result_hint: ! 'Einheit: %{unit}'
     index:
       amount: Betrag
       amount_fc: Betrag(FC)
@@ -642,8 +642,8 @@ de:
         title: Rechnung %{number}
     order_articles:
       edit:
-        title: Artikel aktualisieren
         stock_alert: Preise von Lagerartikeln können nicht geändert werden!
+        title: Artikel aktualisieren
       new:
         title: Neuer gelieferter Artikel die Bestellung
     ordergroups:
@@ -1617,8 +1617,8 @@ de:
       notice: Aufgabenstatus wurde aktualisiert
     show:
       accept_task: Aufgabe übernehmen
-      confirm_delete_single: Die Aufgabe wirklich löschen?
       confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
+      confirm_delete_single: Die Aufgabe wirklich löschen?
       delete_group: Aufgabe und folgende löschen
       hours: ! '%{count}h'
       mark_done: Als erledigt markieren

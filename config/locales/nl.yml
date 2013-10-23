@@ -14,8 +14,8 @@ nl:
         manufacturer: Producent
         name: Naam
         note: Notitie
-        origin: Herkomst
         order_number: Ordernummer
+        origin: Herkomst
         price: Netto prijs
         supplier: Leverancier
         tax: BTW
@@ -27,7 +27,7 @@ nl:
         name: Naam
       delivery:
         delivered_on: 
-        note:
+        note: 
         supplier: 
       financial_transaction:
         amount: bedrag
@@ -73,15 +73,20 @@ nl:
       page:
         body: 
         parent_id: 
+        title: 
       stock_article:
         price: Prijs
         quantity: Aantal
         quantity_available: Beschikbaar
         supplier: Leverancier
+      stock_taking:
+        date: 
+        note: 
       supplier:
         address: Adres
         contact_person: Contactpersoon
         customer_number: Klantnummer
+        customer_number_short: 
         delivery_days: Bezorgdagen
         email: Email
         fax: Fax
@@ -94,7 +99,7 @@ nl:
         phone2: Telefoon 2
         url: Homepage
       task:
-        description:
+        description: 
         done: 
         due_date: 
         duration: 
@@ -116,8 +121,8 @@ nl:
           one: Werkgroep
           other: Werkgroepen
       workgroup:
-        name: Naam
         description: Omschrijving
+        name: Naam
         next_weekly_tasks_number: 
         role_admin: Beheer
         role_article_meta: Artikelen
@@ -352,6 +357,7 @@ nl:
       title: 
     sync:
       outlist:
+        alert_used: 
         body: ! 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
@@ -597,6 +603,7 @@ nl:
     group_order_articles:
       form:
         amount_change_for: 
+        result_hint: 
     index:
       amount: Bedrag
       amount_fc: Bedrag(FC)
@@ -632,6 +639,7 @@ nl:
         title: Factuur %{number}
     order_articles:
       edit:
+        stock_alert: 
         title: Artikel bijwerken
       new:
         title: Geleverd artikel aan bestelling toevoegen
@@ -891,6 +899,9 @@ nl:
       action: Uitnodiging versturen
       body: <p>Hier kun je iemand die nog geen lid is, uitnodigen voor de groep <b>%{group}</b>.</p>
     success: Persoon is uitgenodigd.
+  js:
+    ordering:
+      confirm_change: 
   layouts:
     application1:
       title: Foodsoft - %{title}
@@ -1541,6 +1552,7 @@ nl:
     show:
       accept_task: 
       confirm_delete_group: 
+      confirm_delete_single: 
       delete_group: 
       hours: 
       mark_done: 
