@@ -38,6 +38,8 @@ if ! heroku apps | grep -q "^$APP\s"; then
 	heroku create "$APP" --region "$REGION"
 	heroku addons:add heroku-postgresql:dev --app "$APP"
 	heroku pg:promote `heroku config | grep 'HEROKU_POSTGRESQL_.*_URL' | cut -d: -f1`
+	# user-env-compile needed because config.assets.initialize_on_precompile is true
+	heroku labs:enable user-env-compile --app "$APP"
 fi
 heroku config:set RACK_ENV="${RAILS_ENV}" RAILS_ENV="${RAILS_ENV}" --app "$APP"
 
@@ -66,7 +68,7 @@ echo 'web: bundle exec unicorn -p $PORT -E $RACK_ENV' >Procfile
 sed -i 's|\(#\s*\)\?\(config\.action_mailer\.raise_delivery_errors\)\s*=.*|\2 = false|' config/environments/${RAILS_ENV}.rb
 sed -i 's|\(#\s*\)\?\(config\.action_mailer\.delivery_method\)\s*=.*|\2 = :smtp|' config/environments/${RAILS_ENV}.rb
 # do not ignore deployment files
-sed -i 's|^\(config/\*.yml\)|#\1|' .gitignore
+sed -i 's|^\(config/.*\.yml\)|#\1|' .gitignore
 sed -i 's|^\(config/initializers/secret_token.rb\)|#\1|' .gitignore
 sed -i 's|^\(config/environments/development.rb\)|#\1|' .gitignore
 # make sure we have a full configuration
@@ -85,6 +87,8 @@ else
 		Foodsoft::Application.config.secret_token = '`openssl rand -hex 128`'
 	EOF
 fi
+# update Gemfile.lock after Gemfile updates (required by heroku)
+bundle install --quiet
 # configure localeapp, manually to include environment
 if [ "$LOCALEAPP_KEY" ]; then
 	cat >config/initializers/localeapp.rb <<EOF
@@ -100,9 +104,8 @@ EOF
 gem 'localeapp'" >>Gemfile
 	# also do not cache so we get locale updates
 	sed -i 's|\(#\s*\)\?\(config\.cache_classes\)\s*=.*|\2 = false|' config/environments/${RAILS_ENV}.rb
+	bundle exec localeapp pull
 fi
-# update Gemfile.lock after Gemfile updates (required by heroku)
-bundle install --quiet
 # TODO add more extensive database seed
 
 # and push = deploy
@@ -115,11 +118,9 @@ if !heroku run rake db:version >/dev/null 2>&1; then
 else
 	heroku run rake db:migrate
 fi
-# get full translations so update works
-[ "$LOCALEAPP_KEY" ] && heroku run localeapp pull
 
 # restart just to be sure
-heroku ps:restart
+#heroku ps:restart
 
 # return to original branch
 git checkout -q "$ORIG_BRANCH" && git stash pop -q
