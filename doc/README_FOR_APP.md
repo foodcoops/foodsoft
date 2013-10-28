@@ -3,30 +3,30 @@ Run "rake doc:app" to generate API documentation for your models and controllers
 
 = The Foodsoft
 
-is a Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling). 
+is a Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
 
 
 == Bestellen
-Das Bestellen ist der Hauptteil dieser Software und ein wenig kompliziert. 
-Hier starte ich den Versuch die Programmlogik in Text umzusetzen und 
+Das Bestellen ist der Hauptteil dieser Software und ein wenig kompliziert.
+Hier starte ich den Versuch die Programmlogik in Text umzusetzen und
 verweise auf die enstprechenden Controller bzw. Modelle.
 Der relevante Controller ist OrderingController.
 
 === Bestellung "in Netz stellen"
 Darunter verstehen wir die Auswahl von Artikeln eines bestimmten Lieferanten fuer eine zeitlich begrenzte
 Bestellung im Internet. Die relevanten Methoden sind OrdersController#newOrder und folgende.
-Jede Bestellung wird durch die Klasse Order abgebildet. 
+Jede Bestellung wird durch die Klasse Order abgebildet.
 
 Die zugehoerigen Artikel werden duch die Klasse OrderArticle mit den Artikeln verknuepft.
 Dabei werden auch die Attribute quantity, tolerance und quantity_to_order gespeichert.
 Diese Mengen repraesentieren die Gesamtbestellung, also alle Bestellgruppen.
 
 === Eine Bestellgruppe bestellt...
-Die Methode OrdersController#order schickt uns die Bestellenseite. Mit dieser Oberflaeche 
+Die Methode OrdersController#order schickt uns die Bestellenseite. Mit dieser Oberflaeche
 koennen die Bestellgruppena die vorher ausgewaehlten Artikel bestellen.
-Mittels den Buttons werden dabei live, also clientseitig, die Preise ermittelt 
+Mittels den Buttons werden dabei live, also clientseitig, die Preise ermittelt
 und der Gesamtpreis berechnet. Ist der Gesamtpreis groeßer als der aktuelle
-Gruppenkontostand, so wird die Preisspalte rot unterlegt und die Bestellung 
+Gruppenkontostand, so wird die Preisspalte rot unterlegt und die Bestellung
 kann nicht gespeichert werden.
 
 === (gruppen)-Bestellung wird gespeichert
@@ -67,27 +67,27 @@ Wir unterscheiden dehalb zwei Faelle:
   Verringe Bestellung auf 2(1) um 19uhr.
   => Zeile mit created_on = 18uhr wird gelöscht und
   in der Zeile mit created_on = 17uhr wird der Wert tolerance auf 1 gaendert.
-  
+
 === Wer bekommt wieviel?
 
 Diese Frage wird wie schon erwaehnt mittels der group_order_article_quantites -Tabelle
-geloest. 
+geloest.
 Beipspiel.
   articel x mit unit_quantity = 5.
   17uhr: gruppe a bestellt 2(3), weil sie auf jeden fall was von x bekommen will
   18uhr: gruppe b bestellt 2(0)
   19uhr: gruppe a faellt ein dass sie doch noch mehr braucht von x und aendert auf 4(1).
-  
+
   jetzt gibt es drei zeilen in der tabelle, die so aussehen:
   (gruppe a), 2(1), 17uhr (wurde um 19uhr von 2(3) auf 2(1) geaendert)
   (gruppe b), 2(0), 18uhr
   (gruppe a), 2(0), 19uhr.
-  
+
   die zuteilung wird dann wie folgt ermittelt:
   zeile 1: gruppe a bekommt 2
   zeile 2: gruppe b bekommt 2
   zeile 3: gruppe a bekommt 1, weil jetzt das gebinde schon voll ist.
-  
+
   Endstand: insg. Bestellt wurden 6(1)
   Gruppe a bekommt 3 einheiten.
   gruppe b bekommt 2 einheiten.
