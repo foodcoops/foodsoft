@@ -61,6 +61,15 @@ Developing
 
 Have a look at [DEVELOPMENT.md](https://github.com/foodcoops/foodsoft/blob/master/doc/DEVELOPMENT.md) (outdated) and the (more recent) [Developing Guidelines](https://github.com/foodcoops/foodsoft/wiki/Developing-Guidelines) page on the wiki.
 
+Deploying
+---------
+
+As you might have noticed, documentation is scarce and insufficient. If you
+intend to deploy foodsoft in production, we would love to guide you through
+the process. We can be contacted through the
+[developers@foodcoop.nl](mailto:developers@foodcoop.nl) or
+[foodsoft@foodcoops.net](mailto:foodsoft@foodcoops.net).
+
 License
 -------
 
