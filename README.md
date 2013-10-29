@@ -20,32 +20,36 @@ Getting started
 ---------------
 
 1. Install RVM (if you have not done so before):
-
-       \curl -L https://get.rvm.io | bash
+   ```
+   \curl -L https://get.rvm.io | bash
+   ```
 
 2. Clone the repository from GitHub:
-
-       git clone https://github.com/foodcoops/foodsoft.git
+    ```
+    git clone https://github.com/foodcoops/foodsoft.git
+    ```
 
 3. Install Ruby dependencies:
-
-       bundle install
+   ```
+   bundle install
+   ```
 
 4. Setup your development environment:
-
-       rake foodsoft:setup_development
-
+   ```
+   rake foodsoft:setup_development
+   ```
    This will interactively prompt with several questions relating to your
    required environment.
 
 5. Start rails by running:
-
-       bundle exec rails s
+   ```
+   bundle exec rails s
+   ```
 
 6. Open your favorite browser and open the web application at:
-
-       http://localhost:3000/
-
+   ```
+   http://localhost:3000/
+   ```
    You might want to watch a
    [kitten video](https://www.youtube.com/watch?v=9Iq5yCoHp4o)
    while it's loading.
@@ -66,9 +70,11 @@ Deploying
 
 As you might have noticed, documentation is scarce and insufficient. If you
 intend to deploy foodsoft in production, we would love to guide you through
-the process. We can be contacted through the
+the process. You can contact the mailing list
+[foodsoft-discuss](http://foodsoft.51229.x6.nabble.com/foodsoft-discuss-f5.html),
+or mail some of us directly at 
 [developers@foodcoop.nl](mailto:developers@foodcoop.nl) or
-[foodsoft@foodcoops.net](mailto:foodsoft@foodcoops.net).
+foodsoft (at) foodcoops.net.
 
 License
 -------
