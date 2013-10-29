@@ -15,7 +15,7 @@ Create the database configuration from the default:
 If you are fine with using a file-based sqlite database you are all set.
 The sqlite files (development/test/production) will reside in the "db" directory.
 Otherwise you would want to edit database.yml to suit your needs (MySQL whatever).
-	
+
 
 (2) Configure development environment
 -------------------------------------
@@ -66,7 +66,7 @@ With this, you also get a ready to go user with username 'admin' and password 's
 
 
 (7) Try it out!
----------------	
+---------------
 Start the WEBrick server to try it out:
 
 	bundle exec rails s
