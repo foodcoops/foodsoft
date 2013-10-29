@@ -23,8 +23,9 @@ page on the wiki.
 Deploying
 ---------
 
-[doc/SETUP_PRODUCTION](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_PRODUCTION.md),
-as well as [doc/DEPLOYMENT](https://github.com/foodcoops/foodsoft/blob/master/doc/DEPLOYMENT.md).
+Setup foodsoft to [run in production](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_PRODUCTION.md),
+and automate [deployment](https://github.com/foodcoops/foodsoft/blob/master/doc/DEPLOYMENT.md). This section is
+very much a work in progress.
 
 
 License
