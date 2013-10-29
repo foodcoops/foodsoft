@@ -21,15 +21,15 @@ class OrderFax < OrderPdf
       text "#{contact[:zip_code]} #{contact[:city]}", size: 9, align: :right
       move_down 5
       unless @order.supplier.try(:customer_number).blank?
-        text "#{I18n.t('simple_form.labels.supplier.customer_number')}: #{@order.supplier[:customer_number]}", size: 9, align: :right
+        text "#{Supplier.human_attribute_name :customer_number}: #{@order.supplier[:customer_number]}", size: 9, align: :right
         move_down 5
       end
       unless contact[:phone].blank?
-        text "#{I18n.t('simple_form.labels.supplier.phone')}: #{contact[:phone]}", size: 9, align: :right
+        text "#{Supplier.human_attribute_name :phone}: #{contact[:phone]}", size: 9, align: :right
         move_down 5
       end
       unless contact[:email].blank?
-        text "#{I18n.t('simple_form.labels.supplier.email')}: #{contact[:email]}", size: 9, align: :right
+        text "#{Supplier.human_attribute_name :email}: #{contact[:email]}", size: 9, align: :right
       end
     end
 
@@ -40,7 +40,7 @@ class OrderFax < OrderPdf
       text @order.supplier.try(:address).to_s
       unless @order.supplier.try(:fax).blank?
         move_down 5
-        text "#{I18n.t('simple_form.labels.supplier.fax')}: #{@order.supplier[:fax]}"
+        text "#{Supplier.human_attribute_name :fax}: #{@order.supplier[:fax]}"
       end
     end
 
@@ -48,10 +48,10 @@ class OrderFax < OrderPdf
     text Date.today.strftime(I18n.t('date.formats.default')), align: :right
 
     move_down 10
-    text "#{I18n.t('simple_form.labels.delivery.delivered_on')}:"
+    text "#{Delivery.human_attribute_name :delivered_on}:"
     move_down 10
     unless @order.supplier.try(:contact_person).blank?
-      text "#{I18n.t('simple_form.labels.supplier.contact_person')}: #{@order.supplier[:contact_person]}"
+      text "#{Supplier.human_attribute_name :contact_person}: #{@order.supplier[:contact_person]}"
       move_down 10
     end
 

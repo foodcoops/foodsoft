@@ -66,7 +66,7 @@ class Ordergroup < Group
   end
 
   def avg_jobs_per_euro
-    stats[:orders_sum] != 0 ? stats[:jobs_size].to_f / stats[:orders_sum].to_f : 0
+    stats[:jobs_size].to_f / stats[:orders_sum].to_f rescue 0
   end
 
   # This is the ordergroup job per euro performance 
@@ -90,7 +90,7 @@ class Ordergroup < Group
   # Global average
   def self.avg_jobs_per_euro
     stats = Ordergroup.pluck(:stats)
-    stats.sum {|s| s[:jobs_size].to_f } / stats.sum {|s| s[:orders_sum].to_f }
+    stats.sum {|s| s[:jobs_size].to_f } / stats.sum {|s| s[:orders_sum].to_f } rescue 0
   end
 
   def account_updated

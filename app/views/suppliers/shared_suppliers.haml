@@ -4,11 +4,11 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t 'simple_form.labels.supplier.name'
-      %th= t 'simple_form.labels.supplier.address'
-      %th= t 'simple_form.labels.supplier.note'
-      %th= t 'simple_form.labels.supplier.delivery_days'
-      %th= t 'simple_form.labels.supplier.is_subscribed'
+      %th= heading_helper Supplier, :name
+      %th= heading_helper Supplier, :address
+      %th= heading_helper Supplier, :note
+      %th= heading_helper Supplier, :delivery_days
+      %th= heading_helper Supplier, :is_subscribed
   %tbody
     - for shared_supplier in @shared_suppliers
       %tr

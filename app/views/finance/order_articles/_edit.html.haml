@@ -11,7 +11,7 @@
       = f.input :unit
 
     - if @order_article.article.is_a?(StockArticle)
-      %div.alert Preise von Lagerartikeln können nicht geändert werden!
+      %div.alert= t '.stock_alert'
     - else
       = simple_fields_for :article_price, @order_article.article_price do |f|
         = f.input :unit_quantity

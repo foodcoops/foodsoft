@@ -1,38 +1,38 @@
 - title t('.title', number: @invoice.number)
 
 %p
-  %b= t('simple_form.labels.invoice.supplier') + ':'
+  %b= heading_helper(Invoice, :supplier) + ':'
   = @invoice.supplier.name
 
 - if @invoice.delivery
   %p
-    %b= t('simple_form.labels.invoice.delivery') + ':'
+    %b= heading_helper(Invoice, :delivery) + ':'
     = t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
 - if @invoice.order
   %p
-    %b= t('simple_form.labels.invoice.order') + ':'
+    %b= heading_helper(Invoice, :order) + ':'
     = t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), @invoice.order)).html_safe
 
 %p
-  %b= t('simple_form.labels.invoice.number') + ':'
+  %b= heading_helper(Invoice, :number) + ':'
   = @invoice.number
 %p
-  %b= t('simple_form.labels.invoice.date') + ':'
+  %b= heading_helper(Invoice, :date) + ':'
   = @invoice.date
 %p
-  %b= t('simple_form.labels.invoice.paid_on') + ':'
+  %b= heading_helper(Invoice, :paid_on) + ':'
   = @invoice.paid_on
 %p
-  %b= t('simple_form.labels.invoice.amount') + ':'
+  %b= heading_helper(Invoice, :amount) + ':'
   = number_to_currency @invoice.amount
 %p
-  %b= t('simple_form.labels.invoice.deposit') + ':'
+  %b= heading_helper(Invoice, :deposit) + ':'
   = number_to_currency @invoice.deposit
 %p
-  %b= t('simple_form.labels.invoice.deposit_credit') + ':'
+  %b= heading_helper(Invoice, :deposit_credit) + ':'
   = number_to_currency @invoice.deposit_credit
 %p
-  %b= t('simple_form.labels.invoice.note') + ':'
+  %b= heading_helper(Invoice, :note) + ':'
   =h @invoice.note
 
 = link_to t('ui.edit'), edit_finance_invoice_path(@invoice)

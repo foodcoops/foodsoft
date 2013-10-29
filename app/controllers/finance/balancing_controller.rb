@@ -10,7 +10,7 @@ class Finance::BalancingController < Finance::BaseController
     flash.now.alert = t('finance.balancing.new.alert') if @order.closed?
     @comments = @order.comments
 
-    @articles = @order.order_articles.ordered.includes(:article, :article_price,
+    @articles = @order.order_articles.ordered_or_member.includes(:article, :article_price,
                                                        group_order_articles: {group_order: :ordergroup})
 
     sort_param = params['sort'] || 'name'

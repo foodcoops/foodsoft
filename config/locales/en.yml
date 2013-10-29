@@ -1,98 +1,142 @@
 en:
-  activemodel:
-    errors:
-      format: ! '%{attribute} %{message}'
-      general: A problem has occured.
-      general_again: A problem has occured. Please try again.
-      general_msg: ! 'A problem has occured: %{msg}'
-      messages:
-        accepted: has to be accepted
-        blank: has to be entered
-        confirmation: does not match the confirmation
-        empty: has to be entered
-        equal_to: has to be exactly %{count}
-        even: has to be an even number
-        exclusion: is not available
-        greater_than: has to be greater than %{count}
-        greater_than_or_equal_to: has to be greater than or equal to %{count}
-        inclusion: is not a valid value
-        invalid: is invalid
-        less_than: has to be less than %{count}
-        less_than_or_equal_to: has to be less than or equal to %{count}
-        not_a_number: is not a number
-        not_an_integer: must be a whole number
-        odd: must be odd
-        record_invalid: ! 'validation failed: %{errors}'
-        taken: is already taken
-        taken_with_deleted: is already taken (deleted group)
-        too_long: is too long (no more than %{count} characters)
-        too_short: is too short (use more than %{count} characters)
-        wrong_length: is the wrong length (has to have exactly %{count} characters)
-      template:
-        body: ! 'Please check the following fields:'
-        header:
-          one: ! 'Could not save %{model}: an error.'
-          other: ! 'Could not save %{model}: %{count} errors.'
   activerecord:
     attributes:
       article:
-        article_category: article category
+        article_category: Category
         availability: Is article available?
-        deposit: deposit
-        fc_price: FC price
-        fc_share: FC share
-        gross_price: gross price
-        price: price
+        availability_short: avail.
+        deposit: Deposit
+        fc_price: FoodCoop price
+        fc_price_short: FC price
+        fc_share: FoodCoop margin
+        fc_share_short: FC margin
+        gross_price: Gross price
+        manufacturer: Manufacturer
+        name: Name
+        note: Note
+        order_number: Order number
+        origin: Origin
+        price: Price (net)
+        supplier: Supplier
         tax: VAT
-        unit: unit
-        unit_quantity: unit quantity
+        unit: Unit
+        unit_quantity: Unit quantity
+        unit_quantity_short: U.Q.
+      article_category:
+        description: Description
+        name: Name
+      delivery:
+        delivered_on: Delivery date
+        note: Note
+        supplier: Supplier
       financial_transaction:
         amount: amount
         note: note
+      group_order_article:
+        ordergroup_id: Ordergroup
+        result: Amount
+      invoice:
+        amount: Amount
+        date: Billing date
+        delivery: Delivery
+        deposit: Deposit charged
+        deposit_credit: Deposit returned
+        note: Note
+        number: Number
+        order: Order
+        paid_on: Paid on
+        supplier: Supplier
+      message:
+        body: Body
+        group_id: Group
+        private: Private
+        recipient_tokens: Recipients
+        sent_to_all: Send to all members
+        subject: Subject
+      order:
+        ends: Ends at
+        note: Note
+        starts: Starts at
+      order_article:
+        units_to_order: Amount of units
+        update_current_price: Globally update current price
+      order_comment:
+        text: Add comment to this order ...
+      ordergroup:
+        contact_address: Address
+        contact_person: Contact person
+        contact_phone: Phone
+        description: Description
+        ignore_apple_restriction: Ignore order stop by apple points restriction
+        name: Name
+        user_tokens: Members
+      page:
+        body: Body
+        parent_id: Parent page
+        title: Title
       stock_article:
         price: Price
+        quantity: Quantity
+        quantity_available: Available quantity
+        supplier: Supplier
+      stock_taking:
+        date: Date
+        note: Note
+      supplier:
+        address: Address
+        contact_person: Contact person
+        customer_number: Customer number
+        customer_number_short: Cust.nr.
+        delivery_days: Delivery days
+        email: Email
+        fax: Fax
+        is_subscribed: subscribed?
+        min_order_quantity: Minimum order quantity
+        name: Name
+        note: Note
+        order_howto: How to order
+        phone: Phone
+        phone2: Phone 2
+        url: Homepage
+      task:
+        description: Description
+        done: Done?
+        due_date: Due date
+        duration: Duration
+        name: Name
+        required_users: People required
+        user_list: Responsible user
+        workgroup: Workgroup
       user:
+        email: Email
         first_name: First name
+        last_name: Last name
+        name: Name
+        nick: Username
+        ordergroup: Ordergroup
         password: Password
+        password_confirmation: Repeat password
+        phone: Telephone
+        workgroup:
+          one: Workgroup
+          other: Workgroups
+      workgroup:
+        description: Description
+        name: Name
+        next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
+        role_admin: Administration
+        role_article_meta: Article database
+        role_finance: Finances
+        role_orders: Order management
+        role_suppliers: Suppliers
+        user_tokens: Members
     errors:
-      format: ! '%{attribute} %{message}'
-      general: A problem has occured.
-      general_again: A problem has occured. Please try again.
-      general_msg: ! 'A problem has occured: %{msg}'
       has_many_left: is still associated with a %{collection}!
-      messages:
-        accepted: has to be accepted
-        blank: has to be filled
-        confirmation: does not match the confirmation
-        empty: has to be entered
-        equal_to: has to be exactly %{count}
-        even: has to be an even number
-        exclusion: is not available
-        greater_than: has to be greater than %{count}
-        greater_than_or_equal_to: has to be greater than or equal to %{count}
-        inclusion: is not a valid value
-        invalid: is invalid
-        less_than: has to be less than %{count}
-        less_than_or_equal_to: has to be less than or equal to %{count}
-        not_a_number: is not a number
-        not_an_integer: must be a whole number
-        odd: must be odd
-        record_invalid: ! 'validation failed: %{errors}'
-        taken: is already taken
-        taken_with_deleted: is already taken (deleted group)
-        too_long: is too long (no more than %{count} characters)
-        too_short: is too short (use more than %{count} characters)
-        wrong_length: is the wrong length (has to have exactly %{count} characters)
       models:
         task:
           attributes:
             done:
               exclusion: finished tasks may not be repeated weekly
-      template:
-        body: ! 'Please check the following fields:'
-        header:
-          one: ! 'Could not save %{model}: an error.'
-          other: ! 'Could not save %{model}: %{count} errors.'
     models:
       article: Article
       article_category: Article category
@@ -212,6 +256,11 @@ en:
       workgroups:
         members: members
         name: name
+  application:
+    controller:
+      error_authn: Authentication required!
+      error_denied: Access denied!
+      error_members_only: This action is only available to members of the group!
   article_categories:
     create:
       notice: Category was stored
@@ -305,20 +354,23 @@ en:
       error_nosel: You have selected no articles
     parse_upload:
       body: <p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>
+      title: Upload articles
+    sync:
       outlist:
-        body: ! 'The following articles were outlisted and <b>deleted</b>:'
+        alert_used: Warning, %{article} is used in an open order. Please remove it from the order first.
+        body: ! 'The following articles were removed from the list and will be <b>deleted</b>:'
         body_skip: No articles to delete.
-        title: Outlist ...
+        title: Remove from list ...
       price_short: Price
-      submit: Delete/update all
+      submit: Synchronize all
       title: Synchronize articles with external database
-      unit_quantity_short: unit quantity
+      unit_quantity_short: Unit quantity
       update:
-        body: ! '<p><i>Every article is shown twice. The old values are gray and the text fields contain the current values.</i></p>
-
-          <p><i>Differences with the old articles are marked yellow.</i></p>'
+        body: ! 'Every article is shown twice: old values are gray, while the text fields contain updated values. Differences with the old articles are marked yellow.'
         title: Update ...
-        update_msg: ! 'Articles must be updated:'
+        update_msg:
+          one: One article needs to be updated.
+          other: ! '%{count} articles need to be updated.'
     upload:
       body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
       fields:
@@ -328,109 +380,13 @@ en:
       file_label: Please choose a compatible file
       submit: Upload file
       title: ! '%{supplier} / upload articles'
-  date:
-    abbr_day_names:
-    - Su
-    - Mo
-    - Tu
-    - We
-    - Th
-    - Fr
-    - Sa
-    abbr_month_names:
-    - 
-    - Jan
-    - Feb
-    - Mar
-    - Apr
-    - May
-    - Jun
-    - Jul
-    - Aug
-    - Sep
-    - Oct
-    - Nov
-    - Dec
-    day_names:
-    - Sunday
-    - Monday
-    - Tuesday
-    - Wednesday
-    - Thursday
-    - Friday
-    - Saturday
-    formats:
-      default: ! '%d/%m/%Y'
-      long: ! '%e %B %Y'
-      short: ! '%e %b'
-    month_names:
-    - 
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
-    order:
-    - :day
-    - :month
-    - :year
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: about one hour
-        other: about %{count} hours
-      about_x_months:
-        one: about one month
-        other: about %{count} months
-      about_x_years:
-        one: about one year
-        other: about %{count} years
-      almost_x_years:
-        one: almost one year
-        other: almost %{count} years
-      half_a_minute: half a minute
-      less_than_x_minutes:
-        one: less than one minute
-        other: less then %{count} minutes
-      less_than_x_seconds:
-        one: less than a second
-        other: less than %{count} seconds
-      over_x_years:
-        one: more then a year
-        other: more than %{count} year
-      x_days:
-        one: one day
-        other: ! '%{count} days'
-      x_minutes:
-        one: one minute
-        other: ! '%{count} minutes'
-      x_months:
-        one: one month
-        other: ! '%{count} months'
-      x_seconds:
-        one: eine Sekunde
-        other: ! '%{count} seconds'
-    prompts:
-      day: day
-      hour: hours
-      minute: minutes
-      month: months
-      second: seconds
-      year: years
   deliveries:
     add_stock_change:
       how_many_units: ! 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
     create_stock_article:
-      notice: The new stock article »%{name}« was saved.
+      notice: The new stock article "%{name}" was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
@@ -478,7 +434,7 @@ en:
     update:
       notice: Delivery was updated.
     update_stock_article:
-      notice: The stock article »%{name}« was updated.
+      notice: The stock article "%{name}" was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
@@ -525,38 +481,9 @@ en:
         one: One article in total
         other: ! '%{count} articles in total'
   errors:
-    format: ! '%{attribute} %{message}'
     general: A problem has occured.
     general_again: A problem has occured. Please try again.
     general_msg: ! 'A problem has occured: %{msg}'
-    messages:
-      accepted: has to be accepted
-      blank: has to be filled
-      confirmation: does not match the confirmation
-      empty: has to be entered
-      equal_to: has to be exactly %{count}
-      even: has to be an even number
-      exclusion: is not available
-      greater_than: has to be greater than %{count}
-      greater_than_or_equal_to: has to be greater than or equal to %{count}
-      inclusion: is not a valid value
-      invalid: is invalid
-      less_than: has to be less than %{count}
-      less_than_or_equal_to: has to be less than or equal to %{count}
-      not_a_number: is not a number
-      not_an_integer: must be a whole number
-      odd: must be odd
-      record_invalid: ! 'validation failed: %{errors}'
-      taken: is already taken
-      taken_with_deleted: is already taken (deleted group)
-      too_long: is too long (no more than %{count} characters)
-      too_short: is too short (use more than %{count} characters)
-      wrong_length: is the wrong length (has to have exactly %{count} characters)
-    template:
-      body: ! 'Please check the following fields:'
-      header:
-        one: ! 'Could not save %{model}: an error.'
-        other: ! 'Could not save %{model}: %{count} errors.'
   feedback:
     create:
       notice: Your feedback was sent successfully. Thanks a lot!
@@ -648,11 +575,13 @@ en:
     create:
       notice: Invoice was created
     financial_transactions:
-      create:
-        notice: The transaction was saved.
-      create_collection:
-        alert: ! 'An error occured: %{error}'
-        notice: All transactions were saved.
+      controller:
+        create:
+          notice: The transaction was saved.
+        create_collection:
+          alert: ! 'An error occured: %{error}'
+          error_note_required: Note is required!
+          notice: All transactions were saved.
       index:
         balance: ! 'Balance of account: %{balance}'
         last_updated_at: (last updated %{when} ago)
@@ -681,6 +610,7 @@ en:
     group_order_articles:
       form:
         amount_change_for: Change amount for %{article}
+        result_hint: ! 'Unit: %{unit}'
     index:
       amount: Amount
       amount_fc: Amount(FC)
@@ -716,6 +646,7 @@ en:
         title: Invoice %{number}
     order_articles:
       edit:
+        stock_alert: 
         title: Update article
       new:
         title: Add delivered article to order
@@ -791,6 +722,8 @@ en:
       new_funds: New account balance
       note: Note
       price: Price
+      reset_article_search: Reset search
+      search_article: Search for article...
       sum: Sum
       sum_amount: Current amount
       supplier: Supplier
@@ -880,15 +813,11 @@ en:
       option_choose: Choose supplier/stock
       option_stock: Stock
       order_pdf: Create PDF
-    select:
-      prompt: please select
     submit:
-      create: save %{model}
       invite:
         create: send invitation
       message:
         create: send message
-      update: save changes
     tasks:
       required_users: ! '%{count} members are still needed!'
   home:
@@ -899,7 +828,7 @@ en:
       warning: Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order!
     changes_saved: Changes saved.
     index:
-      due_date_format: ! '%A %d %b'
+      due_date_format: ! '%A %d %B'
       messages:
         title: Newest Messages
         view_all: See all messages
@@ -976,9 +905,11 @@ en:
       title: Invite person
     new:
       action: Send invite
-      back: or go back
       body: <p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>
     success: User was invited successfully.
+  js:
+    ordering:
+      confirm_change: Modifications to this order will be lost when you change the order. Do you want to lose the changes you made and continue?
   layouts:
     application1:
       title: Foodsoft - %{title}
@@ -1223,57 +1154,6 @@ en:
       home: Home
       title: Wiki
     workgroups: Workgroups
-  number:
-    currency:
-      format:
-        delimiter: .
-        format: ! '%n %u'
-        precision: 2
-        separator: .
-        significant: false
-        strip_insignificant_zeros: false
-        unit: €
-    format:
-      delimiter: .
-      precision: 2
-      separator: ! ','
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: ! '%n %u'
-        units:
-          billion:
-            one: billion
-            other: billions
-          million: million
-          quadrillion:
-            one: quadrillion
-            other: quadrillions
-          thousand: thousand
-          trillion: trillion
-          unit: 
-      format:
-        delimiter: 
-        precision: 1
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: ! '%n %u'
-        units:
-          byte:
-            one: byte
-            other: bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: 
-    precision:
-      format:
-        delimiter: 
   ordergroups:
     edit:
       title: Edit ordergroups
@@ -1298,7 +1178,6 @@ en:
     fax:
       amount: Amount
       articles: Articles
-      customer_number: Customer number
       delivery_day: Delivery day
       heading: Order for %{name}
       name: Name
@@ -1314,7 +1193,7 @@ en:
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
-      supplier: Supplier
+      supplier: Producer
       title: Article
       unit_quantity: Unit quantity
     index:
@@ -1396,7 +1275,7 @@ en:
       notice: Page was created
     cshow:
       error_noexist: Page doesn’t exist!
-      redirect_notice: Redirected from %{page} ..
+      redirect_notice: Redirected from %{page} ...
     destroy:
       notice: The page '%{page}' and all subpages have been deleted successfully.
     edit:
@@ -1537,7 +1416,7 @@ en:
       message:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
-        units_to_order: Amount of delivered units
+        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
         update_current_price: Also update the price of the current order
       stock_article:
         copy_stock_article:
@@ -1552,74 +1431,6 @@ en:
         required_users: How many users will be needed in total?
       tax: In percentage, standard is 7,0
     labels:
-      article:
-        article_category: Category
-        manufacturer: Manufacturer
-        name: Name
-        note: Note
-        origin: Origin
-        unit: Unit
-      article_category:
-        description: Description
-        name: Name
-      defaults:
-        amount: Amount
-        date: Date
-        deposit: Deposit
-        description: Description
-        email: Email
-        note: Note
-        order_number: Order number
-        ordergroup: Ordergroup
-        password: Password
-        password_confirmation: Repeat password
-        phone: Phone
-        price: Price (net)
-        tax: VAT
-        title: Title
-        unit_quantity: Unit quantity
-        user_tokens: Members
-      delivery:
-        delivered_on: Delivery date
-        supplier: Supplier
-      group_order_article:
-        ordergroup_id: Ordergroup
-        result: Amount
-      invoice:
-        amount: Amount
-        date: Billing date
-        delivery: Delivery
-        deposit: Deposit charged
-        deposit_credit: Deposit returned
-        note: Note
-        number: Number
-        order: Order
-        paid_on: Paid on
-        supplier: Supplier
-      message:
-        body: Body
-        group_id: Group
-        private: Private
-        recipient_tokens: Recipients
-        sent_to_all: Send to all members
-        subject: Subject
-      order:
-        ends: Ends at
-        starts: Starts at
-      order_article:
-        units_to_order: Amount of units
-        update_current_price: Globally update current price
-      order_comment:
-        text: Add comment to this order ...
-      ordergroup:
-        contact_address: Address
-        contact_person: Contact person
-        contact_phone: Phone
-        ignore_apple_restriction: Ignore order stop by apple points restriction
-        name: Name
-      page:
-        body: Body
-        parent_id: Parent page
       settings:
         messages:
           send_as_email: Receive messages as emails.
@@ -1635,48 +1446,6 @@ en:
         settings_group:
           messages: Messages
           privacy: Privacy
-      stock_article:
-        supplier: Supplier
-      supplier:
-        address: Address
-        contact_person: Contact person
-        customer_number: Customer ID
-        delivery_days: Delivery days
-        email: Email
-        fax: Fax
-        is_subscribed: subscribed?
-        min_order_quantity: Minimum order quantity
-        name: Name
-        note: Note
-        order_howto: How to order
-        phone: Phone
-        phone2: Phone 2
-        url: Homepage
-      task:
-        done: Done?
-        due_date: Due date
-        duration: Duration
-        name: Name
-        required_users: People required
-        user_list: Responsible user
-        workgroup: Workgroup
-      user:
-        email: Email
-        last_name: Last name
-        name: Name
-        nick: Username
-        ordergroup: Ordergroup
-        phone: Telephone
-        workgroup:
-          one: Workgroup
-          other: Workgroups
-      workgroup:
-        next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
-        role_admin: Administration
-        role_article_meta: Article database
-        role_finance: Finances
-        role_orders: Order management
-        role_suppliers: Suppliers
     'no': 'No'
     options:
       settings:
@@ -1730,15 +1499,6 @@ en:
       title: Edit stock articles
     form:
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
-    history:
-      change_quantity: Change
-      datetime: Time
-      delivery: Delivery
-      new_quantity: New quantity
-      order: Order
-      reason: Reason
-      stock_changes: Stock quantity changes of ‘%{article_name}’
-      stock_taking: Inventory
     index:
       article:
         article: Article
@@ -1764,6 +1524,15 @@ en:
     new:
       search_text: ! 'Search for articles in all catalogues:'
       title: Add new stock article
+    show:
+      change_quantity: Change
+      datetime: Time
+      delivery: Delivery
+      new_quantity: New quantity
+      order: Order
+      reason: Reason
+      stock_changes: Stock quantity changes
+      stock_taking: Inventory
     stock_create:
       notice: Stock article was created.
     stock_update:
@@ -1799,11 +1568,6 @@ en:
       show_deliveries: Show all deliveries
     update:
       notice: Supplier was updated
-  support:
-    array:
-      last_word_connector: ! ' and '
-      two_words_connector: ! ' and '
-      words_connector: ! ', '
   tasks:
     accept:
       notice: You have accepted the task
@@ -1859,15 +1623,15 @@ en:
     show:
       accept_task: Accept task
       confirm_delete_group: Really delete this and all subsequent tasks?
+      confirm_delete_single: Are you sure you want to delete the task?
       delete_group: Delete task and subsequent
-      due_date: Due date
       hours: ! '%{count}h'
       mark_done: Mark task as done
       reject_task: Reject task
       title: Show task
     update:
       notice: Task has been updated
-      notice_converted: Task has been updated and was converted to a regular task
+      notice_converted: Task has been updated and was converted to a non-repeating task.
     user:
       more: Nothing to do? %{tasks_link} are tasks for sure.
       tasks_link: Here
@@ -1877,18 +1641,10 @@ en:
     workgroup:
       title: Tasks for %{workgroup}
       title_all: All group tasks
-  time:
-    am: morning
-    formats:
-      default: ! '%A, %d %B %Y, %H:%M'
-      long: ! '%A, %d %B %Y, %H:%M'
-      short: ! '%d %B, %H:%M'
-    pm: afternoon
   ui:
     close: Close
     delete: Delete
     edit: Edit
-    history: Show history
     marks:
       close: ! '&times;'
       success: <i class="icon icon-ok"></i>
