@@ -1,5 +1,6 @@
-- unless FoodsoftConfig[:use_nick] == false
-  = f.input :nick
+- if FoodsoftConfig[:use_nick]
+  -# use_nil option to user model validators break required mark
+  = f.input :nick, required: true
 = f.input :first_name
 = f.input :last_name
 = f.input :email
