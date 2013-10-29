@@ -22,6 +22,7 @@ PATH
   remote: lib/foodsoft_wiki
   specs:
     foodsoft_wiki (0.0.1)
+      acts_as_versioned
       rails (~> 3.2.15)
 
 GEM

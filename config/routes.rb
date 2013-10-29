@@ -29,16 +29,6 @@ Foodsoft::Application.routes.draw do
     match '/home/ordergroup' => 'home#ordergroup', :as => 'my_ordergroup'
     match '/home/cancel_membership' => 'home#cancel_membership', :as => 'cancel_membership'
 
-    ############ Wiki
-
-    resources :pages do
-      get :all, :on => :collection
-      get :version, :on => :member
-      get :revert, :on => :member
-    end
-    match '/wiki/:permalink' => 'pages#show', :as => 'wiki_page' # , :constraints => {:permalink => /[^\s]+/}
-    match '/wiki' => 'pages#show', :defaults => {:permalink => 'Home'}, :as => 'wiki'
-
     ############ Orders, ordering
 
     resources :orders do

@@ -37,12 +37,13 @@ gem 'twitter-bootstrap-rails'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 gem 'meta_search'
-gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git' # Use this instead of rubygem
 gem 'acts_as_tree'
 gem "rails-settings-cached", "0.2.4"
 gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 
+# we use the git version of acts_as_versioned, and need to include it in this Gemfile
+gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
 gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
 
 group :production do

@@ -21,11 +21,6 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :tasks, I18n.t('navigation.tasks'), tasks_path, id: nil
     end
 
-    primary.item :wiki, I18n.t('navigation.wiki.title'), '#', id: nil do |subnav|
-      subnav.item :wiki_home, I18n.t('navigation.wiki.home'), wiki_path, id: nil
-      subnav.item :all_pages, I18n.t('navigation.wiki.all_pages'), all_pages_path, id: nil
-    end
-
     primary.item :orders, I18n.t('navigation.orders.title'), '#', id: nil do |subnav|
       subnav.item :ordering, I18n.t('navigation.orders.ordering'), group_orders_path, id: nil
       subnav.item :ordering_archive, I18n.t('navigation.orders.archive'), archive_group_orders_path, id: nil
