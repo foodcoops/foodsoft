@@ -18,6 +18,12 @@ GIT
     acts_as_versioned (0.6.0)
       activerecord (>= 3.0.9)
 
+PATH
+  remote: lib/foodsoft_wiki
+  specs:
+    foodsoft_wiki (0.0.1)
+      rails (~> 3.2.15)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -345,6 +351,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails (~> 4.0)
   faker
+  foodsoft_wiki!
   haml-rails
   i18n-js!
   i18n-spec

@@ -43,6 +43,8 @@ gem "rails-settings-cached", "0.2.4"
 gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 
+gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
+
 group :production do
   gem 'exception_notification'
 end
