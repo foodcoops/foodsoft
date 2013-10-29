@@ -170,7 +170,8 @@ module ApplicationHelper
       elsif options[:full]
         "#{user.nick} (#{user.first_name} #{user.last_name})"
       else
-        user.nick
+        # when use_nick was changed from false to true, users may exist without nick
+        user.nick.nil? ? I18n.t('helpers.application.nick_fallback') : user.nick
       end
     else
       "#{user.first_name} #{user.last_name}" + (options[:unique] ? " (\##{user.id})" : '')

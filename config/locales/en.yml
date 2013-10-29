@@ -864,6 +864,7 @@ en:
   helpers:
     application:
       edit_user: Edit user
+      nick_fallback: (empty username)
       role_admin: Admin
       role_article_meta: Articles
       role_finance: Finance

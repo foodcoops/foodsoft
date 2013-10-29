@@ -14,7 +14,7 @@
   %tbody
     - for user in @users 
       %tr
-        %td= link_to show_user(user, full: true), [:admin, user]
+        %td= link_to show_user(user), [:admin, user]
         - if FoodsoftConfig[:use_nick]
           %td= user.name
         %td= user.email

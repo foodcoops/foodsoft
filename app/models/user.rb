@@ -161,8 +161,12 @@ class User < ActiveRecord::Base
   # XXX this is view-related; need to move out things like token_attributes
   #     then this can be removed
   def display
-    # would be sensible to match ApplicationController#show_user
-    FoodsoftConfig[:use_nick] ? nick : name
+    # would be sensible to match ApplicationHelper#show_user
+    if FoodsoftConfig[:use_nick]
+      nick.nil? ? I18n.t('helpers.application.nick_fallback') : nick
+    else
+      name
+    end
   end
 
   def token_attributes

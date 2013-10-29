@@ -15,7 +15,7 @@
             %th= t '.created_at'
         - for user in @users
           %tr{:class => cycle('even','odd', :name => 'users')}
-            %td= link_to show_user(user, full: true), [:admin, user]
+            %td= link_to show_user(user), [:admin, user]
             - if FoodsoftConfig[:use_nick]
               %td= link_to user.name
             %td= format_date(user.created_on)
