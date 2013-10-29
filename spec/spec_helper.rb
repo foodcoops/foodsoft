@@ -29,6 +29,8 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.strategy = (example.metadata[:js] ? :truncation : :transaction)
     DatabaseCleaner.start
+    # maximise window so that buttons can be found on popups
+    page.driver.browser.manage.window.maximize
   end
   config.after(:each) do
     DatabaseCleaner.clean
