@@ -7,7 +7,7 @@ FoodSoft
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
 
-If you're a food coop considering to use foodsoft, please have a look at the [wiki page for foodcoops](https://github.com/foodcoops/foodsoft/wiki/For-foodcoops). When you'd like to experiment with or develop foodsoft, see [doc/SETUP_DEVELOPMENT](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_DEVELOPMENT.md) on how to set it up on your own computer.
+If you're a food coop considering to use foodsoft, please have a look at the [wiki page for foodcoops](https://github.com/foodcoops/foodsoft/wiki/For-foodcoops). When you'd like to experiment with or develop foodsoft, you can read [how to set it up](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_DEVELOPMENT.md) on your own computer.
 
 More information about using this software and contributing can be found on the [wiki](https://github.com/foodcoops/foodsoft/wiki).
 
@@ -23,8 +23,8 @@ page on the wiki.
 Deploying
 ---------
 
-Please see [doc/SETUP_PRODUCTION](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_PRODUCTION.md),
-as well as[doc/DEPLOYMENT](https://github.com/foodcoops/foodsoft/blob/master/doc/DEPLOYMENT.md).
+[doc/SETUP_PRODUCTION](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_PRODUCTION.md),
+as well as [doc/DEPLOYMENT](https://github.com/foodcoops/foodsoft/blob/master/doc/DEPLOYMENT.md).
 
 
 License
