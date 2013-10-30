@@ -8,6 +8,7 @@
       %thead
         %tr
           %th= t '.supplier'
+          %th= t '.order_note'
           %th= t '.ending'
           %th= t '.who_ordered'
           %th= t '.total'
@@ -16,6 +17,7 @@
         - Order.open.each do |order|
           %tr
             %td= link_to_ordering(order)
+            %td= order.note
             %td= format_time(order.ends) unless order.ends.nil?
             - if group_order = order.group_order(ordergroup)
               - total += group_order.price
