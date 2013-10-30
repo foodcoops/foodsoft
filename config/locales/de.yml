@@ -906,8 +906,6 @@ de:
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
-    application1:
-      title: Foodsoft - %{title}
     email:
       footer: ! '--
 
@@ -1369,15 +1367,6 @@ de:
       search_user: Nach Nutzerin suchen
       title: Wöchentliche Jobs
       user_not_found: Keine Nutzerin gefunden
-    loginInfo:
-      edit_profile: Profil bearbeiten
-      feedback:
-        desc: Fehler gefunden? Vorschlag? Idee? Kritik?
-        title: Feedback
-      help: Hilfe
-      homepage_title: Foodcoop Homepage besuchen
-      logout: Abmelden
-      profile: Profil
     open_orders:
       ending: Ende
       no_open_orders: Derzeit gibt es keine laufenden Bestellungen

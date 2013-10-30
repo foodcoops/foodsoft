@@ -903,8 +903,6 @@ nl:
     ordering:
       confirm_change: 
   layouts:
-    application1:
-      title: Foodsoft - %{title}
     email:
       footer: ! '--
 
@@ -1303,15 +1301,6 @@ nl:
       search_user: Gebruiker zoeken
       title: Wekelijkse taken
       user_not_found: Geen gebruiker gevonden
-    loginInfo:
-      edit_profile: Profiel aanpassen
-      feedback:
-        desc: Fout gevonden? Opmerking? Idee?
-        title: Feedback
-      help: Help
-      homepage_title: Foodcoop startpagina bezoeken
-      logout: Uitloggen
-      profile: Profiel
     open_orders:
       ending: Einde
       no_open_orders: Er zijn momenteel geen lopende bestellingen.
