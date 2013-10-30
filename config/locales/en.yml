@@ -1338,9 +1338,7 @@ en:
       login: Login
       nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
-      password: Password
       title: Foodsoft login
-      user: User
   shared:
     articles:
       ordered: Ordered

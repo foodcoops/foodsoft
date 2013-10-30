@@ -1333,9 +1333,7 @@ de:
       login: Anmelden
       nojs: Achtung, Cookies und Javascript müssen aktiviert sein! %{link} bitte abschalten.
       noscript: NoScript
-      password: Passwort
       title: Foodsoft anmelden
-      user: Benutzerin
   shared:
     articles:
       ordered: Bestellt
