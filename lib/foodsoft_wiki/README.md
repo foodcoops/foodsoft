@@ -1,4 +1,5 @@
-= FoodsoftWiki
+FoodsoftWiki
+============
 
 This plugin adds wiki pages to foodsoft. A new 'Wiki' menu is added next to
 the 'Foodcoops' menu in the navigation bar.
