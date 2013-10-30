@@ -1385,19 +1385,6 @@ fr:
       homepage_title: Vers la page d'accueil de la bouffecoop
       logout: Te déconnecter
       profile: Profil
-    memberships:
-      current_members:
-        drop: désinscrire
-        no_members: ! '%{group} n''a aucun membre pour le moment.'
-      members:
-        already_members: Sont déjà membre
-        desc: Sur cette page, tu peux gérer les membres de l'équipe, et aussi %{link} un nouveau membre.
-        invite: engrainer
-        invite_someone: Inviter quelqu'unE
-        no_members_yet: Ne sont pas encore membre
-        title: Membre de %{group}
-      non_members:
-        add: ajouter
     open_orders:
       ending: Clôture le
       no_open_orders: Il n'y a aucune commande en cours en ce moment

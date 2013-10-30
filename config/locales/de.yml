@@ -1378,19 +1378,6 @@ de:
       homepage_title: Foodcoop Homepage besuchen
       logout: Abmelden
       profile: Profil
-    memberships:
-      current_members:
-        drop: entfernen
-        no_members: ! '%{group} hat keine Mitglieder.'
-      members:
-        already_members: Sind schon Mitglieder
-        desc: Hier kannst Du Mitglieder der Gruppe verwalten oder ein neues Foodcoop-Mitglied in die Gruppe %{link}.
-        invite: einladen
-        invite_someone: Person einladen
-        no_members_yet: Sind noch keine Mitglieder
-        title: Mitglieder von %{group}
-      non_members:
-        add: hinzufügen
     open_orders:
       ending: Ende
       no_open_orders: Derzeit gibt es keine laufenden Bestellungen
