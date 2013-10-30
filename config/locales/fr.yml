@@ -1,103 +1,142 @@
 fr:
-  activemodel:
-    errors:
-      format: ! '%{attribute} %{message}'
-      general: Un problème a été rencontré.
-      general_again: Une erreur s'est produite. Merci de réessayer.
-      general_msg: ! 'Une erreur s''est produite: %{msg}'
-      messages:
-        accepted: doit obligatoirement être accepté
-        blank: doit obligatoirement être complété
-        confirmation: ne correspond pas avec le champ de confirmation
-        empty: doit obligatoirement être complété
-        equal_to: doit obligatoirement être égal à %{count}
-        even: doit obligatoirement être pair
-        exclusion: n'est pas disponible
-        greater_than: doit obligatoirement être supérieur à %{count}
-        greater_than_or_equal_to: doit obligatoirement être supérieur ou égal à %{count}
-        inclusion: n'est pas une valeur valide
-        invalid: n'est pas valide
-        less_than: doit obligatoirement être inférieur à %{count}
-        less_than_or_equal_to: doit obligatoirement être inférieur à %{count}
-        not_a_number: n'est pas un nombre
-        not_an_integer: doit être un nombre entier
-        odd: doit obligatoirement être impair
-        record_invalid: ! 'la vérification a échoué: %{errors}'
-        taken: a déjà été attribué
-        taken_with_deleted: a déjà été attribué (à une cellule supprimée depuis)
-        too_long: est trop long (%{count} signes autorisés au maximum)
-        too_short: est trop court (%{count} signes au minimum doivent être présents)
-        wrong_length: n'est pas de la bonne longueur (exactement %{count} signes doivent être présents)
-      template:
-        body: ! 'Merci de contrôler le contenu des champs suivants:'
-        header:
-          one: ! '%{model} n''a pas pu être sauvegardé à cause de la présence d''une erreur.'
-          other: ! '%{model} n''a pas pu être sauvegardé car %{count} erreurs ont été trouvées.'
   activerecord:
     attributes:
       article:
-        article_category: catégorie
+        article_category: Catégorie
         availability: l'article est-il disponible?
-        deposit: consigne
-        fc_price: prix final
-        fc_share: supplément boufcoop
-        gross_price: prix brut
-        name: 
-        note: 
-        price: prix net
+        availability_short: 
+        deposit: Consigne
+        fc_price: Prix final
+        fc_price_short: 
+        fc_share: Supplément boufcoop
+        fc_share_short: 
+        gross_price: Prix brut
+        manufacturer: ProductRICE_eur
+        name: Nom
+        note: Note
+        order_number: ! 'Numéro '
+        origin: Lieu de production
+        price: Prix net
         supplier: 
         tax: TVA
-        unit: unité
-        unit_quantity: unités par lot
+        unit: Unité
+        unit_quantity: Unités par lot
+        unit_quantity_short: 
+      article_category:
+        description: Description
+        name: Nom
+      delivery:
+        delivered_on: Date de réapprovisionnement
+        note: 
+        supplier: Fournisseuse_r
       financial_transaction:
         amount: montant
         note: note
+      group_order_article:
+        ordergroup_id: Cellul
+        result: Quantité
+      invoice:
+        amount: Montant
+        date: Date de facturation
+        delivery: Réapprovisionnement
+        deposit: Consigne facturée
+        deposit_credit: Consigne remboursée
+        note: Note
+        number: Numéro
+        order: Commande
+        paid_on: Payée le
+        supplier: Fournisseuse_r
+      message:
+        body: Contenu
+        group_id: Cellule ou équipe
+        private: Privé
+        recipient_tokens: Destinataires
+        sent_to_all: Envoyer à tous les membres
+        subject: Sujet
+      order:
+        ends: Clôture le
+        note: 
+        starts: Ouverture le
+      order_article:
+        units_to_order: Quantité
+        update_current_price: Mettre à jour le prix global
+      order_comment:
+        text: Commenter cette commande...
+      ordergroup:
+        contact_address: Adresse
+        contact_person: Personne à contacter
+        contact_phone: Téléphone
+        description: Description
+        ignore_apple_restriction: Pour cette cellule, ne pas bloquer les commandes en cas de manque de glands
+        name: Nom
+        user_tokens: Membres
+      page:
+        body: Contenu
+        parent_id: Page parente
+        title: Titre
       stock_article:
         price: Prix net
         quantity: 
         quantity_available: 
+        supplier: FournisseurE
+      stock_taking:
+        date: 
+        note: 
+      supplier:
+        address: Adresse
+        contact_person: Contact
+        customer_number: Numéro de client de la coop
+        customer_number_short: 
+        delivery_days: Jours de livraison
+        email: Email
+        fax: Fa
+        is_subscribed: abonné?
+        min_order_quantity: Quantité minimale à commander
+        name: Nom
+        note: Note
+        order_howto: Comment commander
+        phone: Téléphone
+        phone2: Autre téléphone
+        url: Site web
+      task:
+        description: Description
+        done: Fait?
+        due_date: Echéance
+        duration: Durée
+        name: Nom
+        required_users: Nombre de personnes nécessaires
+        user_list: Responsables inscritEs
+        workgroup: Équipe
       user:
+        email: Email
         first_name: Prénom
+        last_name: Nom de famille
+        name: Nom
+        nick: Identifiant
+        ordergroup: Cellule
         password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        phone: Téléphone
+        workgroup:
+          one: Équipe
+          other: Équipes
+      workgroup:
+        description: Description
+        name: Nom
+        next_weekly_tasks_number: Combien de temps en avance les boulots doivent ils être annoncés sur le site?
+        role_admin: Administration
+        role_article_meta: Base de données des articles
+        role_finance: Trésorerie
+        role_orders: Gestion des commandes
+        role_suppliers: Contact avec les fournisseusEs_rs
+        user_tokens: Membres
     errors:
-      format: ! '%{attribute} %{message}'
-      general: Une problème a été rencontré.
-      general_again: Une erreur s'est produite. Merci de réessayer.
-      general_msg: ! 'Un problème a été rencontré: %{msg}'
       has_many_left: est encore associé à une %{collection}!
-      messages:
-        accepted: doit obligatoirement être accepté
-        blank: doit obligatoirement être complété
-        confirmation: ne correspond pas au champ de confirmation
-        empty: doit obligatoirement être complété
-        equal_to: doit obligatoirement être égal à %{count}
-        even: doit être un nombre pair
-        exclusion: n'est pas disponible
-        greater_than: doit obligatoirement être supérieur à %{count}
-        greater_than_or_equal_to: doit obligatoirement être supérieur ou égal à %{count}
-        inclusion: n'est pas un valeur valide
-        invalid: est invalide
-        less_than: doit obligatoirement être inférieur à %{count}
-        less_than_or_equal_to: doit obligatoirement être inférieur ou égal à %{count}
-        not_a_number: n'est pas un nombre
-        not_an_integer: doit obligatoirement être un nombre entier
-        odd: doit obligaroirement être un nombre impair
-        record_invalid: ! 'la vérification a échoué: %{errors}'
-        taken: a déjà été attribué
-        taken_with_deleted: a déjà été attribué (à une cellule supprimée depuis)
-        too_long: est trop long (au maximum %{count} signes sont autorisés)
-        too_short: est trop court (au minimum %{count} signes doivent être présents)
-        wrong_length: n'a pas la bonne longueur (exactement %{count} signes doivent être présents)
       models:
         task:
           attributes:
             done:
               exclusion: répétition hebdomadaire invalide pour un boulot déjà effectué
-      template:
-        body: ! 'Merci de vérifier le contenu des champs suivants:'
-        header:
-          one: ! '%{model} n''a pu être sauvegardé à cause de la présence d''une erreur.'
-          other: ! '%{model} n''a pu être sauvegardé à cause de %{count} erreurs.'
     models:
       article: Article
       article_category: la nouvelle catégorie
@@ -320,6 +359,7 @@ fr:
       title: 
     sync:
       outlist:
+        alert_used: 
         body: ! 'Les articles suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
         body_skip: Aucun article à supprimer.
         title: Exclure de la liste...
@@ -344,102 +384,6 @@ fr:
       file_label: Merci de choisir un fichier compatible
       submit: Transférer le fichier
       title: ! '%{supplier} / Transférer les données sur l''article'
-  date:
-    abbr_day_names:
-    - Lun
-    - Mar
-    - Mer
-    - Jeu
-    - Ven
-    - Sam
-    - Dim
-    abbr_month_names:
-    - 
-    - Janvier
-    - Février
-    - Mars
-    - Avril
-    - Mai
-    - Juin
-    - Juillet
-    - Août
-    - Septembre
-    - Octobre
-    - Novembre
-    - Décembre
-    day_names:
-    - Dimanche
-    - Lundi
-    - Mardi
-    - Mercredi
-    - Jeudi
-    - Vendredi
-    - Samedi
-    formats:
-      default: ! '%d.%m.%Y'
-      long: ! '%e.%B %Y'
-      short: ! '%e. %b'
-    month_names:
-    - 
-    - Janvier
-    - Février
-    - Mars
-    - Avril
-    - Mai
-    - Juin
-    - Juillet
-    - Août
-    - Septembre
-    - Octobre
-    - Novembre
-    - Décembre
-    order:
-    - :day
-    - :month
-    - :year
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: environ une heure
-        other: environ %{count} heures
-      about_x_months:
-        one: environ un mois
-        other: environ %{count} mois
-      about_x_years:
-        one: environ un an
-        other: environ %{count} ans
-      almost_x_years:
-        one: presque un an
-        other: presque %{count} ans
-      half_a_minute: une demi-minute
-      less_than_x_minutes:
-        one: moins d'une minute
-        other: moins de %{count} minutes
-      less_than_x_seconds:
-        one: moins d'une seconde
-        other: moins de %{count} secondes
-      over_x_years:
-        one: plus d'un an
-        other: plus de %{count} ans
-      x_days:
-        one: un jour
-        other: ! '%{count} jours'
-      x_minutes:
-        one: une minute
-        other: ! '%{count} minutes'
-      x_months:
-        one: un mois
-        other: ! '%{count} mois'
-      x_seconds:
-        one: une seconde
-        other: ! '%{count} secondes'
-    prompts:
-      day: jour
-      hour: heures
-      minute: minute
-      month: mois
-      second: secondes
-      year: an
   deliveries:
     add_stock_change:
       how_many_units: Combien d unités (%{unit}) de l article %{name} doivent-elles être livrées?
@@ -500,6 +444,7 @@ fr:
       filename: Commande %{name}-%{date} - Trier par
       rows:
       - Cellule
+      - 
       - Quantité
       - Prix
       title: ! 'Ordre des articles pour la commande: %{name}, close le %{date}'
@@ -523,6 +468,7 @@ fr:
       - Nom
       - Nombre de lots
       - Unité
+      - Prix/Unité
       - Prix unitaire
       total: 
     order_matrix:
@@ -539,38 +485,9 @@ fr:
         one: Un seul article
         other: ! '%{count} articles au total'
   errors:
-    format: ! '%{attribute} %{message}'
     general: Un problème a été rencontré.
     general_again: Une erreur s'est produite. Merci de réessayer.
     general_msg: ! 'Une erreur s''est produite: %{msg}'
-    messages:
-      accepted: doit obligatoirement être accepté
-      blank: doit obligatoirement être complété
-      confirmation: ! ' ne correspond pas au champ de confirmatio'
-      empty: doit obligatoirement être complété
-      equal_to: doit obligatoirement être égal à %{count}
-      even: doit obligatoirement être un nombre pair
-      exclusion: n'est pas disponible
-      greater_than: doit obligatoirement être supérieur à %{count}
-      greater_than_or_equal_to: doit obligatoirement être supérieur ou égal à %{count}
-      inclusion: n'est pas une valeur valide
-      invalid: n'est pas valide
-      less_than: doit obligatoirement être inférieur à %{count}
-      less_than_or_equal_to: doit obligatoirement être inférieur ou égal à %{count}
-      not_a_number: n'est pas un nombre
-      not_an_integer: doit obligatoirement être un nombre entier
-      odd: doit obligatoirement être un nombre impair
-      record_invalid: ! 'La vérification a échoué: %{errors}'
-      taken: a déjà été attribué
-      taken_with_deleted: a déjà été attribué (à une cellule supprimée depuis)
-      too_long: est trop long (au maximum %{count} signes sont autorisés)
-      too_short: est trop court (au minimum %{count} signes doivent être présents)
-      wrong_length: n'a pas la bonne longueur (exactement %{count} signes doivent être présents)
-    template:
-      body: ! 'Merci de contrôler le contenu des champs suivants:'
-      header:
-        one: ! '%{model} n''a pas pu être sauvegardé: une erreur trouvée.'
-        other: ! '%{model} n''a pas pu être sauvegardé: %{count} erreurs trouvées.'
   feedback:
     create:
       notice: Ton commentaire a été transmis avec succès. Merci
@@ -703,6 +620,7 @@ fr:
     group_order_articles:
       form:
         amount_change_for: Modification de la quantité de %{article}
+        result_hint: 
     index:
       amount: Montant
       amount_fc: Montant(boufcoop)
@@ -738,6 +656,7 @@ fr:
         title: Facture %{number}
     order_articles:
       edit:
+        stock_alert: 
         title: Mettre à jour la liste des article
       new:
         title: 
@@ -909,15 +828,11 @@ fr:
       option_choose: Choix d'unE fournisseusE_r
       option_stock: Stock
       order_pdf: Générer un PDF
-    select:
-      prompt: Faire un choix
     submit:
-      create: Définir %{model}
       invite:
         create: Envoyer une invitatio
       message:
         create: Envoyer un message
-      update: Sauvergarder les modifications
     tasks:
       required_users: Il manque encore %{count} camarades!
   home:
@@ -1013,6 +928,9 @@ fr:
       action: Engrainer!
       body: <p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>
     success: La_le membre a été engrainéE avec succès!
+  js:
+    ordering:
+      confirm_change: 
   layouts:
     application1:
       title: Foodsoft - %{title}
@@ -1240,57 +1158,6 @@ fr:
       home: Page d'accueil
       title: Wiki
     workgroups: Équipes
-  number:
-    currency:
-      format:
-        delimiter: .
-        format: ! '%n %u'
-        precision: 2
-        separator: ! ','
-        significant: false
-        strip_insignificant_zeros: false
-        unit: €
-    format:
-      delimiter: .
-      precision: 2
-      separator: ! ','
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: ! '%n %u'
-        units:
-          billion:
-            one: milliard
-            other: milliards
-          million: millions
-          quadrillion:
-            one: billiard
-            other: billiards
-          thousand: mille
-          trillion: billions
-          unit: 
-      format:
-        delimiter: 
-        precision: 1
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: ! '%n %u'
-        units:
-          byte:
-            one: Octet
-            other: Octets
-          gb: Go
-          kb: kB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: 
-    precision:
-      format:
-        delimiter: 
   ordergroups:
     edit:
       title: Modifier les cellules
@@ -1315,7 +1182,6 @@ fr:
     fax:
       amount: Quantité
       articles: Articles
-      customer_number: Numéro de client de la coop
       delivery_day: Jour de livraison
       heading: Commande pour %{name}
       name: Nom
@@ -1567,74 +1433,6 @@ fr:
         required_users: De combien de personnes avons-nous besoin au total?
       tax: En pourcentage, le standard est de 7,0
     labels:
-      article:
-        article_category: Catégorie
-        manufacturer: ProductRICE_eur
-        name: Nom
-        note: Note
-        origin: Lieu de production
-        unit: Unité
-      article_category:
-        description: Description
-        name: Nom
-      defaults:
-        amount: Montant
-        date: Date
-        deposit: Consigne
-        description: Description
-        email: Email
-        note: Note
-        order_number: ! 'Numéro '
-        ordergroup: Cellule
-        password: Mot de passe
-        password_confirmation: Confirmation du mot de passe
-        phone: Téléphone
-        price: Prix (net)
-        tax: TVA
-        title: Titre
-        unit_quantity: Unités par lot
-        user_tokens: Membres
-      delivery:
-        delivered_on: Date de réapprovisionnement
-        supplier: Fournisseuse_r
-      group_order_article:
-        ordergroup_id: Cellul
-        result: Quantité
-      invoice:
-        amount: Montant
-        date: Date de facturation
-        delivery: Réapprovisionnement
-        deposit: Consigne facturée
-        deposit_credit: Consigne remboursée
-        note: Note
-        number: Numéro
-        order: Commande
-        paid_on: Payée le
-        supplier: Fournisseuse_r
-      message:
-        body: Contenu
-        group_id: Cellule ou équipe
-        private: Privé
-        recipient_tokens: Destinataires
-        sent_to_all: Envoyer à tous les membres
-        subject: Sujet
-      order:
-        ends: Clôture le
-        starts: Ouverture le
-      order_article:
-        units_to_order: Quantité
-        update_current_price: Mettre à jour le prix global
-      order_comment:
-        text: Commenter cette commande...
-      ordergroup:
-        contact_address: Adresse
-        contact_person: Personne à contacter
-        contact_phone: Téléphone
-        ignore_apple_restriction: Pour cette cellule, ne pas bloquer les commandes en cas de manque de glands
-        name: 
-      page:
-        body: Contenu
-        parent_id: Page parente
       settings:
         messages:
           send_as_email: Transmettre les messages de la boufcoop par email
@@ -1650,48 +1448,6 @@ fr:
         settings_group:
           messages: Messages
           privacy: Confidentialité
-      stock_article:
-        supplier: FournisseurE
-      supplier:
-        address: Adresse
-        contact_person: Contact
-        customer_number: Numéro de client de la coop
-        delivery_days: Jours de livraison
-        email: Email
-        fax: Fa
-        is_subscribed: abonné?
-        min_order_quantity: Quantité minimale à commander
-        name: Nom
-        note: Note
-        order_howto: Comment commander
-        phone: Téléphone
-        phone2: Autre téléphone
-        url: Site web
-      task:
-        done: Fait?
-        due_date: Pour quand?
-        duration: Durée
-        name: Nom
-        required_users: Nombre de personnes nécessaires
-        user_list: Responsables inscritEs
-        workgroup: Équipe
-      user:
-        email: Email
-        last_name: Nom de famille
-        name: Nom
-        nick: Identifiant
-        ordergroup: Cellule
-        phone: Téléphone
-        workgroup:
-          one: Équipe
-          other: Équipes
-      workgroup:
-        next_weekly_tasks_number: Combien de temps en avance les boulots doivent ils être annoncés sur le site?
-        role_admin: Administration
-        role_article_meta: Base de données des articles
-        role_finance: Trésorerie
-        role_orders: Gestion des commandes
-        role_suppliers: Contact avec les fournisseusEs_rs
     'no': Non
     options:
       settings:
@@ -1820,11 +1576,6 @@ fr:
       show_deliveries: Afficher tous les réapprovisionnements
     update:
       notice: Les données du_de la fournisseurE ont été mises à jour
-  support:
-    array:
-      last_word_connector: et
-      two_words_connector: et
-      words_connector: ! ','
   tasks:
     accept:
       notice: Tu as accepté ce boulot
@@ -1884,8 +1635,8 @@ fr:
     show:
       accept_task: Te charger de ce boulot.
       confirm_delete_group: Veux-tu vraiment supprimer ce boulot hebdomadaire?
+      confirm_delete_single: 
       delete_group: Supprimer ce boulot
-      due_date: Echéance
       hours: ! '%{count}h'
       mark_done: Marquer comme effectué
       reject_task: Refuser ce boulot
@@ -1902,13 +1653,6 @@ fr:
     workgroup:
       title: Agenda de l'%{workgroup}
       title_all: Boulot prévu pour l'équipe
-  time:
-    am: le matin
-    formats:
-      default: ! '%A, %d. %B %Y, %Hh%M'
-      long: ! '%A, %d. %B %Y, %Hh%M'
-      short: ! '%d. %B, %Hh%M '
-    pm: après-midi
   ui:
     close: Fermer
     delete: Supprimer

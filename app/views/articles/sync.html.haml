@@ -11,8 +11,7 @@
           = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
           = article.name
           - if article.in_open_order
-            .alert
-              Achtung, #{article.name} wird gerade in einer laufenden Bestellung verwendet. Bitte erst Bestellung anpassen.
+            .alert= t '.alert_used', article: article.name
   - else
     %i= t '.outlist.body_skip'
   %hr/
@@ -24,16 +23,16 @@
   %table.table
     %thead
       %tr
-        %th= t 'simple_form.labels.article.name'
-        %th= t 'simple_form.labels.article.note'
-        %th= t 'simple_form.labels.article.manufacturer'
-        %th= t 'simple_form.labels.article.origin'
-        %th= t 'simple_form.labels.article.unit'
-        %th= t '.unit_quantity_short'
-        %th= t '.price_short'
-        %th= t 'simple_form.labels.defaults.tax'
-        %th= t 'simple_form.labels.defaults.deposit'
-        %th= t 'simple_form.labels.article.article_category'
+        %th= heading_helper Article, :name
+        %th= heading_helper Article, :note
+        %th= heading_helper Article, :manufacturer
+        %th= heading_helper Article, :origin
+        %th= heading_helper Article, :unit
+        %th= heading_helper Article, :unit_quantity, short: true
+        %th= heading_helper Article, :price
+        %th= heading_helper Article, :tax
+        %th= heading_helper Article, :deposit
+        %th= heading_helper Article, :article_category
     %tbody
       - @updated_articles.each do |updated_article, attrs|
         - article = Article.find(updated_article.id)

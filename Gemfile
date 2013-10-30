@@ -19,6 +19,8 @@ gem 'jquery-rails'
 gem 'select2-rails', '>= 3.4.0'
 gem 'bootstrap-datepicker-rails'
 gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
+gem 'i18n-js', git: 'git://github.com/fnando/i18n-js.git' # to avoid US-ASCII js.erb error
+gem 'rails-i18n'
 
 gem 'mysql2'
 gem 'prawn'
@@ -76,10 +78,9 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
-  # version requirements to avoid problem http://stackoverflow.com/questions/18114544
-  gem 'capybara', '~> 2.1.0'
+  gem 'capybara'
   # webkit and poltergeist don't seem to work yet
-  gem 'selenium-webdriver', '~> 2.35.1'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'simplecov', require: false
   # need to include rspec components before i18n-spec or rake fails in test environment

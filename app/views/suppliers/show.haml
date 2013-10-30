@@ -7,29 +7,29 @@
         = t 'suppliers.shared_supplier_note'
 
     %dl.dl-horizontal
-      %dt= t('simple_form.labels.supplier.address') + ':'
+      %dt= heading_helper(Supplier, :address) + ':'
       %dd= @supplier.address
-      %dt= t('simple_form.labels.supplier.phone') + ':'
+      %dt= heading_helper(Supplier, :phone) + ':'
       %dd= @supplier.phone
-      %dt= t('simple_form.labels.supplier.phone2') + ':'
+      %dt= heading_helper(Supplier, :phone2) + ':'
       %dd= @supplier.phone2
-      %dt= t('simple_form.labels.supplier.fax') + ':'
+      %dt= heading_helper(Supplier, :fax) + ':'
       %dd= @supplier.fax
-      %dt= t('simple_form.labels.supplier.email') + ':'
+      %dt= heading_helper(Supplier, :email) + ':'
       %dd= @supplier.email
-      %dt= t('simple_form.labels.supplier.url') + ':'
+      %dt= heading_helper(Supplier, :url) + ':'
       %dd= link_to @supplier.url, @supplier.url
-      %dt= t('simple_form.labels.supplier.contact_person') + ':'
+      %dt= heading_helper(Supplier, :contact_person) + ':'
       %dd= @supplier.contact_person
-      %dt= t('simple_form.labels.supplier.customer_number') + ':'
+      %dt= heading_helper(Supplier, :customer_number) + ':'
       %dd= @supplier.customer_number
-      %dt= t('simple_form.labels.supplier.delivery_days') + ':'
+      %dt= heading_helper(Supplier, :delivery_days) + ':'
       %dd= @supplier.delivery_days
-      %dt= t('simple_form.labels.supplier.order_howto') + ':'
+      %dt= heading_helper(Supplier, :order_howto) + ':'
       %dd= @supplier.order_howto
-      %dt= t('simple_form.labels.supplier.note') + ':'
+      %dt= heading_helper(Supplier, :note) + ':'
       %dd= @supplier.note
-      %dt= t('simple_form.labels.supplier.min_order_quantity') + ':'
+      %dt= heading_helper(Supplier, :min_order_quantity) + ':'
       %dd= @supplier.min_order_quantity
 
     .clearfix
@@ -43,8 +43,8 @@
     %table.table.table-horizontal
       %thead
         %tr
-          %th= t 'simple_form.labels.defaults.date'
-          %th= t 'simple_form.labels.defaults.amount'
+          %th= heading_helper Delivery, :date
+          %th= heading_helper Delivery, :amount
       %tbody
         - for delivery in @deliveries
           %tr

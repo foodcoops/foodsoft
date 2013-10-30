@@ -13,6 +13,8 @@
 //= require list.reset
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require i18n
+//= require i18n/translations
 //= require_self
 //= require ordering
 //= require stupidtable
@@ -126,6 +128,22 @@ $(function() {
         $(this).children('input[type="submit"]').attr('disabled', 'disabled');
     });
 
+    // bootstrap tooltips (for price)
+    //   Extra options don't work when using selector, so override defaults
+    //   https://github.com/twbs/bootstrap/issues/3875 . These can still be
+    //   overridden per tooltip using data-placement attributes and the like.
+    $.extend($.fn.tooltip.defaults, {
+      html: true,
+      animation: false,
+      placement: 'left',
+      container: 'body'
+    });
+    $(document).tooltip({
+      selector: '[data-toggle~="tooltip"]',
+    });
+    
+    // See stupidtable.js for initialization of local table sorting
+
     newElementsReady();
 });
 
@@ -202,3 +220,4 @@ function highlightRow(checkbox) {
         row.removeClass('selected');
     }
 }
+

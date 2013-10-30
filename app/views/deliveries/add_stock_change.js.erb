@@ -13,7 +13,6 @@
   var stock_change = $(
     '<%= j(render(:partial => 'stock_change', :locals => {:stock_change => @stock_change})) %>'
   ).addClass('success');
-  enablePriceTooltips(stock_change);
   $('input.stock-change-quantity', stock_change).val(quantity);
   
   $('#stock_changes').append(stock_change);

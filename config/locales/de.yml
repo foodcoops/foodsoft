@@ -1,103 +1,142 @@
 de:
-  activemodel:
-    errors:
-      format: ! '%{attribute} %{message}'
-      general: Ein Problem ist aufgetreten.
-      general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
-      general_msg: ! 'Ein Fehler ist aufgetreten: %{msg}'
-      messages:
-        accepted: muss akzeptiert werden
-        blank: muss ausgefüllt werden
-        confirmation: stimmt nicht mit der Bestätigung überein
-        empty: muss ausgefüllt werden
-        equal_to: muss genau %{count} sein
-        even: muss gerade sein
-        exclusion: ist nicht verfügbar
-        greater_than: muss größer als %{count} sein
-        greater_than_or_equal_to: muss größer oder gleich %{count} sein
-        inclusion: ist kein gültiger Wert
-        invalid: ist nicht gültig
-        less_than: muss kleiner als %{count} sein
-        less_than_or_equal_to: muss kleiner oder gleich %{count} sein
-        not_a_number: ist keine Zahl
-        not_an_integer: muss ganzzahlig sein
-        odd: muss ungerade sein
-        record_invalid: ! 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
-        taken: ist bereits vergeben
-        taken_with_deleted: ist bereits vergeben (eine gelöschte Gruppe)
-        too_long: ist zu lang (nicht mehr als %{count} Zeichen)
-        too_short: ist zu kurz (nicht weniger als %{count} Zeichen)
-        wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
-      template:
-        body: ! 'Bitte überprüfen Sie die folgenden Felder:'
-        header:
-          one: ! 'Konnte %{model} nicht speichern: ein Fehler.'
-          other: ! 'Konnte %{model} nicht speichern: %{count} Fehler.'
   activerecord:
     attributes:
       article:
         article_category: Kategorie
         availability: Artikel ist verfügbar?
+        availability_short: verf.
         deposit: Pfand
         fc_price: Endpreis
-        fc_share: FC-Aufschlag
+        fc_price_short: 
+        fc_share: FoodCoop-Aufschlag
+        fc_share_short: FC-Aufschlag
         gross_price: Bruttopreis
+        manufacturer: Produzent
         name: Name
         note: Notiz
+        order_number: Bestellnummer
+        origin: Herkunft
         price: Nettopreis
         supplier: Lieferantin
         tax: MwSt
         unit: Einheit
         unit_quantity: Gebindegröße
+        unit_quantity_short: GebGr
+      article_category:
+        description: Beschreibung
+        name: Name
+      delivery:
+        delivered_on: Lieferdatum
+        note: Notiz
+        supplier: Lieferantin
       financial_transaction:
         amount: Betrag
         note: Notiz
+      group_order_article:
+        ordergroup_id: Bestellgruppe
+        result: Menge
+      invoice:
+        amount: Betrag
+        date: Rechnungsdatum
+        delivery: Lieferung
+        deposit: Pfand berechnet
+        deposit_credit: Pfand gutgeschrieben
+        note: Notiz
+        number: Nummer
+        order: Bestellung
+        paid_on: Bezahlt am
+        supplier: Lieferant
+      message:
+        body: Inhalt
+        group_id: Gruppe
+        private: Privat
+        recipient_tokens: Empfänger_innen
+        sent_to_all: An alle Mitglieder schicken
+        subject: Betreff
+      order:
+        ends: Endet am
+        note: Notiz
+        starts: Läuft vom
+      order_article:
+        units_to_order: Menge
+        update_current_price: Globalen Preis aktualisieren
+      order_comment:
+        text: Kommentiere diese Bestellung ...
+      ordergroup:
+        contact_address: Adresse
+        contact_person: Kontaktperson
+        contact_phone: Telefon
+        description: Beschreibung
+        ignore_apple_restriction: Bestellstop bei zu wenig Äpfeln ignorieren
+        name: Name
+        user_tokens: Mitglieder
+      page:
+        body: Inhalt
+        parent_id: Oberseite
+        title: Titel
       stock_article:
         price: Nettopreis
         quantity: Lagerbestand
         quantity_available: Verfügbarer Bestand
+        supplier: Lieferant
+      stock_taking:
+        date: Datum
+        note: Notiz
+      supplier:
+        address: Adresse
+        contact_person: Ansprechparter_in
+        customer_number: Kundennummer
+        customer_number_short: Kundennr.
+        delivery_days: Liefertage
+        email: Email
+        fax: FAX
+        is_subscribed: abonniert?
+        min_order_quantity: Mindestbestellmenge
+        name: Name
+        note: Notiz
+        order_howto: Howto Bestellen
+        phone: Telefon
+        phone2: Telefon 2
+        url: Homepage
+      task:
+        description: Beschreibung
+        done: Erledigt?
+        due_date: Wann erledigen?
+        duration: Dauer
+        name: Name
+        required_users: Anzahl
+        user_list: Verantwortliche
+        workgroup: Arbeitsgruppe
       user:
+        email: Email
         first_name: Vorname
+        last_name: Nachname
+        name: Name
+        nick: Benutzername
+        ordergroup: Bestellgruppe
         password: Passwort
+        password_confirmation: Passwort wiederholen
+        phone: Telefon
+        workgroup:
+          one: Arbeitsgruppe
+          other: Arbeitsgruppen
+      workgroup:
+        description: Beschreibung
+        name: Name
+        next_weekly_tasks_number: Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?
+        role_admin: Administration
+        role_article_meta: Artikeldatenbank
+        role_finance: Finanzen
+        role_orders: Bestellverwaltung
+        role_suppliers: Lieferanten
+        user_tokens: Mitglieder
     errors:
-      format: ! '%{attribute} %{message}'
-      general: Ein Problem ist aufgetreten.
-      general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
-      general_msg: ! 'Ein Fehler ist aufgetreten: %{msg}'
       has_many_left: ist noch mit einem/r %{collection} verknüpft!
-      messages:
-        accepted: muss akzeptiert werden
-        blank: muss ausgefüllt werden
-        confirmation: stimmt nicht mit der Bestätigung überein
-        empty: muss ausgefüllt werden
-        equal_to: muss genau %{count} sein
-        even: muss gerade sein
-        exclusion: ist nicht verfügbar
-        greater_than: muss größer als %{count} sein
-        greater_than_or_equal_to: muss größer oder gleich %{count} sein
-        inclusion: ist kein gültiger Wert
-        invalid: ist nicht gültig
-        less_than: muss kleiner als %{count} sein
-        less_than_or_equal_to: muss kleiner oder gleich %{count} sein
-        not_a_number: ist keine Zahl
-        not_an_integer: muss ganzzahlig sein
-        odd: muss ungerade sein
-        record_invalid: ! 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
-        taken: ist bereits vergeben
-        taken_with_deleted: ist bereits vergeben (eine gelöschte Gruppe)
-        too_long: ist zu lang (nicht mehr als %{count} Zeichen)
-        too_short: ist zu kurz (nicht weniger als %{count} Zeichen)
-        wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
       models:
         task:
           attributes:
             done:
               exclusion: erledigte Aufgaben können nicht wöchentlich wiederholt werden
-      template:
-        body: ! 'Bitte überprüfen Sie die folgenden Felder:'
-        header:
-          one: ! 'Konnte %{model} nicht speichern: ein Fehler.'
-          other: ! 'Konnte %{model} nicht speichern: %{count} Fehler.'
     models:
       article: Artikel
       article_category: Artikelkategorie
@@ -318,6 +357,7 @@ de:
       title: 
     sync:
       outlist:
+        alert_used: Achtung, %{article} wird gerade in einer laufenden Bestellung verwendet. Bitte erst Bestellung anpassen.
         body: ! 'Folgende Artikel wurden ausgelistet und werden <b>gelöscht</b>:'
         body_skip: Es müssen keine Artikel gelöscht werden.
         title: Auslisten ...
@@ -338,102 +378,6 @@ de:
       file_label: Bitte wähle eine kompatible Datei aus
       submit: Datei hochladen
       title: ! '%{supplier} / Artikel hochladen'
-  date:
-    abbr_day_names:
-    - So
-    - Mo
-    - Di
-    - Mi
-    - Do
-    - Fr
-    - Sa
-    abbr_month_names:
-    - 
-    - Jan
-    - Feb
-    - Mär
-    - Apr
-    - Mai
-    - Jun
-    - Jul
-    - Aug
-    - Sep
-    - Okt
-    - Nov
-    - Dez
-    day_names:
-    - Sonntag
-    - Montag
-    - Dienstag
-    - Mittwoch
-    - Donnerstag
-    - Freitag
-    - Samstag
-    formats:
-      default: ! '%d.%m.%Y'
-      long: ! '%e. %B %Y'
-      short: ! '%e. %b'
-    month_names:
-    - 
-    - Januar
-    - Februar
-    - März
-    - April
-    - Mai
-    - Juni
-    - Juli
-    - August
-    - September
-    - Oktober
-    - November
-    - Dezember
-    order:
-    - :day
-    - :month
-    - :year
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: etwa eine Stunde
-        other: etwa %{count} Stunden
-      about_x_months:
-        one: etwa ein Monat
-        other: etwa %{count} Monate
-      about_x_years:
-        one: etwa ein Jahr
-        other: etwa %{count} Jahre
-      almost_x_years:
-        one: fast ein Jahr
-        other: fast %{count} Jahre
-      half_a_minute: eine halbe Minute
-      less_than_x_minutes:
-        one: weniger als eine Minute
-        other: weniger als %{count} Minuten
-      less_than_x_seconds:
-        one: weniger als eine Sekunde
-        other: weniger als %{count} Sekunden
-      over_x_years:
-        one: mehr als ein Jahr
-        other: mehr als %{count} Jahre
-      x_days:
-        one: ein Tag
-        other: ! '%{count} Tage'
-      x_minutes:
-        one: eine Minute
-        other: ! '%{count} Minuten'
-      x_months:
-        one: ein Monat
-        other: ! '%{count} Monate'
-      x_seconds:
-        one: eine Sekunde
-        other: ! '%{count} Sekunden'
-    prompts:
-      day: Tag
-      hour: Stunden
-      minute: Minuten
-      month: Monat
-      second: Sekunden
-      year: Jahr
   deliveries:
     add_stock_change:
       how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
@@ -533,38 +477,9 @@ de:
       title: ! 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
       total: Insgesamt %{count} Artikel
   errors:
-    format: ! '%{attribute} %{message}'
     general: Ein Problem ist aufgetreten.
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
     general_msg: ! 'Ein Fehler ist aufgetreten: %{msg}'
-    messages:
-      accepted: muss akzeptiert werden
-      blank: muss ausgefüllt werden
-      confirmation: stimmt nicht mit der Bestätigung überein
-      empty: muss ausgefüllt werden
-      equal_to: muss genau %{count} sein
-      even: muss gerade sein
-      exclusion: ist nicht verfügbar
-      greater_than: muss größer als %{count} sein
-      greater_than_or_equal_to: muss größer oder gleich %{count} sein
-      inclusion: ist kein gültiger Wert
-      invalid: ist nicht gültig
-      less_than: muss kleiner als %{count} sein
-      less_than_or_equal_to: muss kleiner oder gleich %{count} sein
-      not_a_number: ist keine Zahl
-      not_an_integer: muss ganzzahlig sein
-      odd: muss ungerade sein
-      record_invalid: ! 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
-      taken: ist bereits vergeben
-      taken_with_deleted: ist bereits vergeben (eine gelöschte Gruppe)
-      too_long: ist zu lang (nicht mehr als %{count} Zeichen)
-      too_short: ist zu kurz (nicht weniger als %{count} Zeichen)
-      wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
-    template:
-      body: ! 'Bitte überprüfen Sie die folgenden Felder:'
-      header:
-        one: ! 'Konnte %{model} nicht speichern: ein Fehler.'
-        other: ! 'Konnte %{model} nicht speichern: %{count} Fehler.'
   feedback:
     create:
       notice: Das Feedback wurde erfolgreich verschickt. Vielen Dank!
@@ -692,6 +607,7 @@ de:
     group_order_articles:
       form:
         amount_change_for: Mengenänderung für %{article}
+        result_hint: ! 'Einheit: %{unit}'
     index:
       amount: Betrag
       amount_fc: Betrag(FC)
@@ -727,6 +643,7 @@ de:
         title: Rechnung %{number}
     order_articles:
       edit:
+        stock_alert: Preise von Lagerartikeln können nicht geändert werden!
         title: Artikel aktualisieren
       new:
         title: Neuer gelieferter Artikel die Bestellung
@@ -892,15 +809,11 @@ de:
       option_choose: Lieferantin/Lager auswählen
       option_stock: Lager
       order_pdf: PDF erstellen
-    select:
-      prompt: Bitte wählen
     submit:
-      create: ! '%{model} speichern'
       invite:
         create: Einladung verschicken
       message:
         create: Nachricht verschicken
-      update: Änderungen speichern
     tasks:
       required_users: Es fehlen %{count} Mitstreiterinnen!
   home:
@@ -990,6 +903,9 @@ de:
       action: Einlading abschicken
       body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
     success: Benutzerin wurde erfolgreich eingeladen.
+  js:
+    ordering:
+      confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
     application1:
       title: Foodsoft - %{title}
@@ -1231,57 +1147,6 @@ de:
       home: Startseite
       title: Wiki
     workgroups: Arbeitsgruppen
-  number:
-    currency:
-      format:
-        delimiter: .
-        format: ! '%n %u'
-        precision: 2
-        separator: ! ','
-        significant: false
-        strip_insignificant_zeros: false
-        unit: €
-    format:
-      delimiter: .
-      precision: 2
-      separator: ! ','
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: ! '%n %u'
-        units:
-          billion:
-            one: Milliarde
-            other: Milliarden
-          million: Millionen
-          quadrillion:
-            one: Billiarde
-            other: Billiarden
-          thousand: Tausend
-          trillion: Billionen
-          unit: 
-      format:
-        delimiter: 
-        precision: 1
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: ! '%n %u'
-        units:
-          byte:
-            one: Byte
-            other: Bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: 
-    precision:
-      format:
-        delimiter: 
   ordergroups:
     edit:
       title: Bestellgruppe bearbeiten
@@ -1306,7 +1171,6 @@ de:
     fax:
       amount: Menge
       articles: Artikel
-      customer_number: Kundennummer
       delivery_day: Liefertag
       heading: Bestellung für %{name}
       name: Name
@@ -1560,74 +1424,6 @@ de:
         required_users: Wieviel Benutzerinnen werden insgesamt benötigt?
       tax: In Prozent, Standard sind 7,0
     labels:
-      article:
-        article_category: Kategorie
-        manufacturer: Produzent
-        name: Name
-        note: Notiz
-        origin: Herkunft
-        unit: Einheit
-      article_category:
-        description: Beschreibung
-        name: Name
-      defaults:
-        amount: Betrag
-        date: Datum
-        deposit: Pfand
-        description: Beschreibung
-        email: E-Mail
-        note: Notiz
-        order_number: Bestellnummer
-        ordergroup: Bestellgruppe
-        password: Passwort
-        password_confirmation: Passwort wiederholen
-        phone: Telefon
-        price: Preis (netto)
-        tax: MwSt
-        title: Titel
-        unit_quantity: Gebindegröße
-        user_tokens: Mitglieder
-      delivery:
-        delivered_on: Lieferdatum
-        supplier: Lieferantin
-      group_order_article:
-        ordergroup_id: Bestellgruppe
-        result: Menge
-      invoice:
-        amount: Betrag
-        date: Rechnungsdatum
-        delivery: Lieferung
-        deposit: Pfand berechnet
-        deposit_credit: Pfand gutgeschrieben
-        note: Notiz
-        number: Nummer
-        order: Bestellung
-        paid_on: Bezahlt am
-        supplier: Lieferant
-      message:
-        body: Inhalt
-        group_id: Gruppe
-        private: Privat
-        recipient_tokens: Empfänger_innen
-        sent_to_all: An alle Mitglieder schicken
-        subject: Betreff
-      order:
-        ends: Endet am
-        starts: Läuft vom
-      order_article:
-        units_to_order: Menge
-        update_current_price: Globalen Preis aktualisieren
-      order_comment:
-        text: Kommentiere diese Bestellung ...
-      ordergroup:
-        contact_address: Adresse
-        contact_person: Kontaktperson
-        contact_phone: Telefon
-        ignore_apple_restriction: Bestellstop bei zu wenig Äpfeln ignorieren
-        name: Name
-      page:
-        body: Inhalt
-        parent_id: Oberseite
       settings:
         messages:
           send_as_email: Bekomme Nachrichten als Emails.
@@ -1643,48 +1439,6 @@ de:
         settings_group:
           messages: Nachrichten
           privacy: Privatsphäre
-      stock_article:
-        supplier: Lieferant
-      supplier:
-        address: Adresse
-        contact_person: Ansprechparter_in
-        customer_number: Kundennummer
-        delivery_days: Liefertage
-        email: Email
-        fax: FAX
-        is_subscribed: abonniert?
-        min_order_quantity: Mindestbestellmenge
-        name: Name
-        note: Notiz
-        order_howto: Howto Bestellen
-        phone: Telefon
-        phone2: Telefon 2
-        url: Homepage
-      task:
-        done: Erledigt?
-        due_date: Wann erledigen?
-        duration: Dauer
-        name: Name
-        required_users: Anzahl
-        user_list: Verantwortliche
-        workgroup: Arbeitsgruppe
-      user:
-        email: Email
-        last_name: Nachname
-        name: Name
-        nick: Benutzername
-        ordergroup: Bestellgruppe
-        phone: Telefon
-        workgroup:
-          one: Arbeitsgruppe
-          other: Arbeitsgruppen
-      workgroup:
-        next_weekly_tasks_number: Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?
-        role_admin: Administration
-        role_article_meta: Artikeldatenbank
-        role_finance: Finanzen
-        role_orders: Bestellverwaltung
-        role_suppliers: Lieferanten
     'no': Nein
     options:
       settings:
@@ -1807,11 +1561,6 @@ de:
       show_deliveries: Zeige alle Lieferungen
     update:
       notice: Lieferant wurde aktualisiert
-  support:
-    array:
-      last_word_connector: ! ' und '
-      two_words_connector: ! ' und '
-      words_connector: ! ', '
   tasks:
     accept:
       notice: Du hast die Aufgabe übernommen
@@ -1863,8 +1612,8 @@ de:
     show:
       accept_task: Aufgabe übernehmen
       confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
+      confirm_delete_single: Die Aufgabe wirklich löschen?
       delete_group: Aufgabe und folgende löschen
-      due_date: Fälligkeitsdatum
       hours: ! '%{count}h'
       mark_done: Als erledigt markieren
       reject_task: Aufgabe ablehnen
@@ -1881,13 +1630,6 @@ de:
     workgroup:
       title: Aufgaben für %{workgroup}
       title_all: Alle Aufgaben der Gruppe
-  time:
-    am: vormittags
-    formats:
-      default: ! '%A, %d. %B %Y, %H:%M Uhr'
-      long: ! '%A, %d. %B %Y, %H:%M Uhr'
-      short: ! '%d. %B, %H:%M Uhr'
-    pm: nachmittags
   ui:
     close: Schließen
     delete: Löschen

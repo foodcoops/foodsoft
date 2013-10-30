@@ -1,103 +1,142 @@
 nl:
-  activemodel:
-    errors:
-      format: ! '%{attribute} %{message}'
-      general: Er is een probleem opgetreden.
-      general_again: Een probleem is opgetreden. Graag opnieuw proberen.
-      general_msg: ! 'Een probleem is opgetreden: %{msg}'
-      messages:
-        accepted: moet geaccepteerd worden
-        blank: moet ingevuld worden
-        confirmation: komt niet overeen
-        empty: moet ingevuld worden
-        equal_to: moet precies %{count} zijn
-        even: moet even zijn
-        exclusion: is niet beschikbaar
-        greater_than: moet groter zijn dan %{count}
-        greater_than_or_equal_to: moet groter dan of gelijk aan %{count} zijn
-        inclusion: is geen geldige waarde
-        invalid: is ongeldig
-        less_than: moet minder zijn dan %{count}
-        less_than_or_equal_to: moet minder dan of gelijk aan %{count} zijn
-        not_a_number: is geen getal
-        not_an_integer: moet een geheel getal zijn
-        odd: moet oneven zijn
-        record_invalid: ! 'geldigheidscontrole is mislukt: %{errors}'
-        taken: bestaat al
-        taken_with_deleted: bestaat al (verwijderde groep)
-        too_long: is te lang (niet meer dan %{count} tekens)
-        too_short: is te kort (niet minder dan %{count} tekens)
-        wrong_length: heeft de verkeerde lengte (moet precies %{count} tekens hebben)
-      template:
-        body: ! 'Controleer de volgende velden:'
-        header:
-          one: ! 'Kon %{model} niet opslaan: één fout.'
-          other: ! 'Kon %{model} niet opslaan: %{count} fouten.'
   activerecord:
     attributes:
       article:
-        article_category: categorie
+        article_category: Categorie
         availability: Artikel leverbaar?
-        deposit: statiegeld
-        fc_price: prijs foodcoop
-        fc_share: marge foodcoop
-        gross_price: bruto prijs
+        availability_short: leverb.
+        deposit: Statiegeld
+        fc_price: Foodcoop prijs
+        fc_price_short: FC prijs
+        fc_share: Foodcoop marge
+        fc_share_short: FC marge
+        gross_price: Bruto prijs
+        manufacturer: Producent
         name: Naam
         note: Notitie
-        price: netto prijs
+        order_number: Ordernummer
+        origin: Herkomst
+        price: Netto prijs
         supplier: Leverancier
         tax: BTW
-        unit: eenheid
-        unit_quantity: groothandelseenheid
+        unit: Eenheid
+        unit_quantity: Groothandelseenheid
+        unit_quantity_short: Gr.Eenh.
+      article_category:
+        description: Omschrijving
+        name: Naam
+      delivery:
+        delivered_on: 
+        note: 
+        supplier: 
       financial_transaction:
         amount: bedrag
         note: notitie
+      group_order_article:
+        ordergroup_id: 
+        result: 
+      invoice:
+        amount: Bedrag
+        date: Factuurdatum
+        delivery: Levering
+        deposit: Statiegeld in rekening gebracht
+        deposit_credit: Statiegeld teruggekregen
+        note: Notitie
+        number: Nummer
+        order: Bestelling
+        paid_on: Betaald op
+        supplier: Leverancier
+      message:
+        body: 
+        group_id: 
+        private: 
+        recipient_tokens: 
+        sent_to_all: 
+        subject: 
+      order:
+        ends: Eindigt op
+        note: Notitie
+        starts: Start op
+      order_article:
+        units_to_order: 
+        update_current_price: 
+      order_comment:
+        text: Commentaar voor deze bestelling toevoegen ...
+      ordergroup:
+        contact_address: Adres
+        contact_person: Contactpersoon
+        contact_phone: Telefoon
+        description: Omschrijving
+        ignore_apple_restriction: 
+        name: Naam
+        user_tokens: Leden
+      page:
+        body: 
+        parent_id: 
+        title: 
       stock_article:
-        price: prijs
-        quantity: 
-        quantity_available: 
+        price: Prijs
+        quantity: Aantal
+        quantity_available: Beschikbaar
+        supplier: Leverancier
+      stock_taking:
+        date: 
+        note: 
+      supplier:
+        address: Adres
+        contact_person: Contactpersoon
+        customer_number: Klantnummer
+        customer_number_short: 
+        delivery_days: Bezorgdagen
+        email: Email
+        fax: Fax
+        is_subscribed: geabonneerd?
+        min_order_quantity: Minimale bestelhoeveelheid
+        name: Naam
+        note: Notitie
+        order_howto: Hoe te bestellen
+        phone: Telefoon
+        phone2: Telefoon 2
+        url: Homepage
+      task:
+        description: 
+        done: 
+        due_date: 
+        duration: 
+        name: 
+        required_users: 
+        user_list: 
+        workgroup: 
       user:
+        email: Email
         first_name: Voornaam
+        last_name: Achternaam
+        name: Naam
+        nick: Gebruikersnaam
+        ordergroup: Huishouden
         password: Wachtwoord
+        password_confirmation: Wachtwoord herhalen
+        phone: Telefoon
+        workgroup:
+          one: Werkgroep
+          other: Werkgroepen
+      workgroup:
+        description: Omschrijving
+        name: Naam
+        next_weekly_tasks_number: 
+        role_admin: Beheer
+        role_article_meta: Artikelen
+        role_finance: Financiën
+        role_orders: Bestellingen
+        role_suppliers: Leveranciers
+        user_tokens: Leden
     errors:
-      format: ! '%{attribute} %{message}'
-      general: Er is een probleem opgetreden.
-      general_again: Er is een probleem opgetreden. Probeer het opnieuw.
-      general_msg: ! 'Er is een probleem opgetreden: %{msg}'
       has_many_left: is nog met een %{collection} verbonden!
-      messages:
-        accepted: moet geaccepteerd worden
-        blank: moet ingevuld worden
-        confirmation: komt niet overeen
-        empty: moet ingevuld worden
-        equal_to: moet precies %{count} zijn
-        even: moet even zijn
-        exclusion: is niet beschikbaar
-        greater_than: moet groter dan %{count} zijn
-        greater_than_or_equal_to: moet groter zijn dan of gelijk aan %{count}
-        inclusion: is geen geldige waarde
-        invalid: is ongeldig
-        less_than: moet kleiner izjn dan %{count}
-        less_than_or_equal_to: moet kleiner zijn dan of gelijk aan %{count}
-        not_a_number: is geen getal
-        not_an_integer: moet een geheel getal zijn
-        odd: moet oneven zijn
-        record_invalid: ! 'geldigheidscontrole is mislukt: %{errors}'
-        taken: bestaat al
-        taken_with_deleted: bestaat al (verwijderde groep)
-        too_long: is te lang (niet meer dan %{count} tekens)
-        too_short: is te kort (niet minder dan %{count} tekens)
-        wrong_length: heeft de verkeerde lengte (moet precies %{count} tekens zijn)
       models:
         task:
           attributes:
             done:
               exclusion: gedane taken kunnen niet herhaald worden
-      template:
-        body: ! 'Controleer de volgende velden:'
-        header:
-          one: ! 'Kon %{model} niet opslaan: één foutmelding.'
-          other: ! 'Kon %{model} niet opslaan: %{count} foutmeldingen.'
     models:
       article: Artikel
       article_category: Categorie
@@ -318,6 +357,7 @@ nl:
       title: 
     sync:
       outlist:
+        alert_used: 
         body: ! 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
@@ -340,102 +380,6 @@ nl:
       file_label: Graag een compatibel bestand uitkiezen
       submit: Bestand uploaden
       title: Artikelen uploaden voor %{supplier}
-  date:
-    abbr_day_names:
-    - Zo
-    - Ma
-    - Di
-    - Wo
-    - Do
-    - Vr
-    - Za
-    abbr_month_names:
-    - 
-    - Jan
-    - Feb
-    - Mar
-    - Apr
-    - Mei
-    - Jun
-    - Jul
-    - Aug
-    - Sep
-    - Okt
-    - Nov
-    - Dec
-    day_names:
-    - Zondag
-    - Maandag
-    - Dinsdag
-    - Woensdag
-    - Donderdag
-    - Vrijdag
-    - Zaterdag
-    formats:
-      default: ! '%d-%m-%Y'
-      long: ! '%e %B %Y'
-      short: ! '%e %b'
-    month_names:
-    - 
-    - Januari
-    - Februari
-    - Maart
-    - April
-    - Mei
-    - Juni
-    - Juli
-    - Augustus
-    - September
-    - Oktober
-    - November
-    - December
-    order:
-    - :day
-    - :month
-    - :year
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: ca. één uur
-        other: ca. %{count} uur
-      about_x_months:
-        one: ca. één maand
-        other: ca. %{count} maanden
-      about_x_years:
-        one: ca. één jaar
-        other: ca. %{count} jaar
-      almost_x_years:
-        one: bijna één jaar
-        other: bijna %{count} jaar
-      half_a_minute: een halve minuut
-      less_than_x_minutes:
-        one: minder dan één minuut
-        other: minder dan %{count} minuten
-      less_than_x_seconds:
-        one: minder dan een seconde
-        other: minder dan %{count} seconden
-      over_x_years:
-        one: meer dan één jaar
-        other: meer dan %{count} jaar
-      x_days:
-        one: één dag
-        other: ! '%{count} dagen'
-      x_minutes:
-        one: één minuut
-        other: ! '%{count} minuten'
-      x_months:
-        one: één maand
-        other: ! '%{count} maanden'
-      x_seconds:
-        one: een seconde
-        other: ! '%{count} seconden'
-    prompts:
-      day: dag
-      hour: uren
-      minute: minuten
-      month: maanden
-      second: seconden
-      year: jaren
   deliveries:
     add_stock_change:
       how_many_units: 
@@ -496,7 +440,8 @@ nl:
       filename: Bestelling %{name}-%{date} - Artikellijst
       rows:
       - Huishouden
-      - Hoeveelheid
+      - Besteld
+      - Ontvangen
       - Prijs
       title: ! 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
     order_by_groups:
@@ -529,44 +474,9 @@ nl:
         one: In totaal éen artikel
         other: In totaal %{count} artikelen
   errors:
-    format: ! '%{attribute} %{message}'
     general: Er is een probleem opgetreden.
     general_again: Er is een fout opgetreden. Probeer het opnieuw.
     general_msg: ! 'Er is een probleem opgetreden: %{msg}'
-    messages:
-      accepted: moet geaccepteerd worden
-      blank: moet ingevuld worden
-      confirmation: komt niet overeen met de bevestiging
-      empty: moet ingevuld worden
-      equal_to: moet precies %{count} zijn
-      even: moet even zijn
-      exclusion: moet even zijn
-      greater_than: moet groter dan %{count} zijn
-      greater_than_or_equal_to: moet groter dan of gelijk zijn aan %{count}
-      inclusion: geen geldige waarde
-      invalid: is ongeldig
-      less_than: moet kleiner dan %{count} zijn
-      less_than_or_equal_to: moet groter of gelijk aan %{count} zijn
-      not_a_number: is geen getal
-      not_an_integer: moet een geheel getal zijn
-      odd: moet oneven zijn
-      record_invalid: 
-      taken: is al in gebruik
-      taken_with_deleted: is al in gebruik (verwijderde groep)
-      too_long:
-        one: is te lang (niet meer dan éen teken)
-        other: is te lang (niet meer dan %{count} tekens)
-      too_short:
-        one: is te kort (niet minder dan éen teken)
-        other: is te kort (niet minder dan %{count} tekens)
-      wrong_length:
-        one: heeft de verkeerde lengte (moet precies éen zijn)
-        other: heeft de verkeerde lengte (moet precies %{count} tekens hebben)
-    template:
-      body: ! 'Controleer alsjeblieft de volgende velden:'
-      header:
-        one: ! 'Kon %{model} niet opslaan: éen fout gevonden.'
-        other: ! 'Kon %{model} niet opslaan: %{count} fouten gevonden.'
   feedback:
     create:
       notice: Bericht verstuurd. Vriendelijk bedankt!
@@ -693,6 +603,7 @@ nl:
     group_order_articles:
       form:
         amount_change_for: 
+        result_hint: 
     index:
       amount: Bedrag
       amount_fc: Bedrag(FC)
@@ -728,6 +639,7 @@ nl:
         title: Factuur %{number}
     order_articles:
       edit:
+        stock_alert: 
         title: Artikel bijwerken
       new:
         title: Geleverd artikel aan bestelling toevoegen
@@ -901,15 +813,11 @@ nl:
       option_choose: Leverancier/voorraad kiezen
       option_stock: Voorraad
       order_pdf: PDF maken
-    select:
-      prompt: graag uitkiezen
     submit:
-      create: ! '%{model} opslaan'
       invite:
         create: uitnodiging versturen
       message:
         create: bericht versturen
-      update: wijzigingen opslaan
     tasks:
       required_users: Nog %{count} leden nodig!
   home:
@@ -1001,6 +909,9 @@ nl:
       action: Uitnodiging versturen
       body: <p>Hier kun je iemand die nog geen lid is, uitnodigen voor de groep <b>%{group}</b>.</p>
     success: Persoon is uitgenodigd.
+  js:
+    ordering:
+      confirm_change: 
   layouts:
     application1:
       title: Foodsoft - %{title}
@@ -1184,57 +1095,6 @@ nl:
       home: Begin
       title: Wiki
     workgroups: Werkgroepen
-  number:
-    currency:
-      format:
-        delimiter: ! ' '
-        format: ! '%n %u'
-        precision: 2
-        separator: ! ','
-        significant: false
-        strip_insignificant_zeros: false
-        unit: €
-    format:
-      delimiter: ! ','
-      precision: 2
-      separator: ! ' '
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: ! '%n %u'
-        units:
-          billion:
-            one: miljard
-            other: miljard
-          million: miljoen
-          quadrillion:
-            one: biljard
-            other: biljard
-          thousand: duizend
-          trillion: triljoen
-          unit: 
-      format:
-        delimiter: 
-        precision: 1
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: ! '%n %u'
-        units:
-          byte:
-            one: byte
-            other: bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: 
-    precision:
-      format:
-        delimiter: 
   ordergroups:
     edit:
       title: Huidhouden bewerken
@@ -1259,7 +1119,6 @@ nl:
     fax:
       amount: Aantal
       articles: Artikelen
-      customer_number: Klantnummer
       delivery_day: Bezorgdag
       heading: Bestelling voor %{name}
       name: Naam
@@ -1511,74 +1370,6 @@ nl:
         required_users: 
       tax: 
     labels:
-      article:
-        article_category: Categorie
-        manufacturer: Producent
-        name: Naam
-        note: Notitie
-        origin: Herkomst
-        unit: Eenheid
-      article_category:
-        description: Omschrijving
-        name: Naam
-      defaults:
-        amount: 
-        date: Datum
-        deposit: Statiegeld
-        description: Omschrijving
-        email: Email
-        note: Notitie
-        order_number: Bestelnummer
-        ordergroup: Huishouden
-        password: Wachtwoord
-        password_confirmation: Wachtwoord herhalen
-        phone: Telefoon
-        price: Prijs (netto)
-        tax: BTW
-        title: Titel
-        unit_quantity: Groothandelseenheid
-        user_tokens: Leden
-      delivery:
-        delivered_on: 
-        supplier: 
-      group_order_article:
-        ordergroup_id: 
-        result: 
-      invoice:
-        amount: Bedrag
-        date: Factuurdatum
-        delivery: Levering
-        deposit: Statiegeld in rekening gebracht
-        deposit_credit: Statiegeld teruggekregen
-        note: Notitie
-        number: Nummer
-        order: Bestelling
-        paid_on: Betaald op
-        supplier: Leverancier
-      message:
-        body: 
-        group_id: 
-        private: 
-        recipient_tokens: 
-        sent_to_all: 
-        subject: 
-      order:
-        ends: Eindigt op
-        starts: Start op
-      order_article:
-        units_to_order: 
-        update_current_price: 
-      order_comment:
-        text: 
-      ordergroup:
-        contact_address: Adres
-        contact_person: Contactpersoon
-        contact_phone: Telefoon
-        ignore_apple_restriction: 
-        name: 
-      page:
-        body: 
-        parent_id: 
       settings:
         messages:
           send_as_email: Berichten als emails ontvangen.
@@ -1594,48 +1385,6 @@ nl:
         settings_group:
           messages: Berichten
           privacy: Privacy
-      stock_article:
-        supplier: 
-      supplier:
-        address: 
-        contact_person: 
-        customer_number: 
-        delivery_days: Bezorgdagen
-        email: 
-        fax: 
-        is_subscribed: 
-        min_order_quantity: 
-        name: 
-        note: 
-        order_howto: 
-        phone: 
-        phone2: 
-        url: 
-      task:
-        done: 
-        due_date: 
-        duration: 
-        name: 
-        required_users: 
-        user_list: 
-        workgroup: 
-      user:
-        email: Email
-        last_name: Achternaam
-        name: Naam
-        nick: Gebruikersnaam
-        ordergroup: Huishouden
-        phone: Telefoon
-        workgroup:
-          one: Werkgroep
-          other: Werkgroepen
-      workgroup:
-        next_weekly_tasks_number: 
-        role_admin: 
-        role_article_meta: Artikelbestand
-        role_finance: Financiën
-        role_orders: 
-        role_suppliers: Leveranciers
     'no': Nee
     options:
       settings:
@@ -1758,11 +1507,6 @@ nl:
       show_deliveries: 
     update:
       notice: Leverancier is bijgewerkt
-  support:
-    array:
-      last_word_connector: 
-      two_words_connector: 
-      words_connector: 
   tasks:
     accept:
       notice: Je hebt de taak geaccepteerd
@@ -1814,8 +1558,8 @@ nl:
     show:
       accept_task: 
       confirm_delete_group: 
+      confirm_delete_single: 
       delete_group: 
-      due_date: 
       hours: 
       mark_done: 
       reject_task: 
@@ -1832,13 +1576,6 @@ nl:
     workgroup:
       title: 
       title_all: 
-  time:
-    am: morgen
-    formats:
-      default: ! '%A, %d %B %Y, %H:%M'
-      long: ! '%A, %d %B %Y, %H:%M'
-      short: ! '%d %B, %H:%M'
-    pm: middag
   ui:
     close: Sluiten
     delete: Verwijder

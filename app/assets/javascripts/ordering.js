@@ -7,9 +7,6 @@
 
 var modified = false    		// indicates if anything has been clicked on this page
 var groupBalance = 0;			// available group money
-var currencySeparator = ".";		// default decimal separator
-var currencyPrecision = 2;      // default digits behind comma
-var currencyUnit = "€";         // default currency
 var minimumBalance = 0;                 // minimum group balance for the order to be succesful
 var toleranceIsCostly = true;   // default tolerance behaviour
 var isStockit = false;          // Wheter the order is from stock oder normal supplier
@@ -22,12 +19,6 @@ var quantityOthers = new Array();
 var toleranceOthers = new Array();
 var itemsAllocated = new Array();  // how many items the group has been allocated and should definitely get
 var quantityAvailable = new Array();  // stock_order. how many items are currently in stock
-
-function setCurrencyFormat(separator, precision, unit) {
-    currencySeparator = separator;
-    currencyPrecision = precision;
-    currencyUnit = unit;
-}
 
 function setToleranceBehaviour(value) {
     toleranceIsCostly = value;
@@ -126,7 +117,7 @@ function update(item, quantity, tolerance) {
     } else {
         itemTotal[item] = price[item] * (Number(quantity));
     }
-    $('#price_' + item + '_display').html(asMoney(itemTotal[item]));
+    $('#price_' + item + '_display').html(I18n.l("currency", itemTotal[item]));
 
     // update missing units
     var missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
@@ -137,11 +128,6 @@ function update(item, quantity, tolerance) {
 
     // update balance
     updateBalance();
-}
-
-function asMoney(amount, precision) {
-    if (typeof precision === 'undefined') precision = currencyPrecision;
-    return String(amount.toFixed(precision)).replace(/\./, currencySeparator) + ' ' + currencyUnit;
 }
 
 function calcUnits(unitSize, quantity, tolerance) {
@@ -161,11 +147,11 @@ function updateBalance() {
     for (i in itemTotal) {
         total += itemTotal[i];
     }
-    $('#total_price').html(asMoney(total));
+    $('#total_price').html(I18n.l("currency", total));
     var balance = groupBalance - total;
     $(document).triggerHandler({type: 'foodsoft:group_order_sum_changed'}, total, balance);
-    $('#new_balance').html(asMoney(balance));
-    $('#total_balance').val(asMoney(balance));
+    $('#new_balance').html(I18n.l("currency", balance));
+    $('#total_balance').val(I18n.l("currency", balance));
     // determine bgcolor and submit button state according to balance
     var bgcolor = '';
     if (balance < minimumBalance) {
@@ -195,6 +181,6 @@ $(function() {
     });
 
     $('a[data-confirm_switch_order]').click(function() {
-        return (!modified || confirm('Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?'));
+        return (!modified || confirm(I18n.t('js.ordering.confirm_change')));
     });
 });

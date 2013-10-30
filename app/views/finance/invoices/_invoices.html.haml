@@ -5,14 +5,14 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t 'simple_form.labels.invoice.number'
-      %th= t 'simple_form.labels.invoice.supplier'
-      %th= t 'simple_form.labels.invoice.date'
-      %th= t 'simple_form.labels.invoice.paid_on'
-      %th= t 'simple_form.labels.invoice.amount'
-      %th= t 'simple_form.labels.invoice.delivery'
-      %th= t 'simple_form.labels.invoice.order'
-      %th= t 'simple_form.labels.invoice.note'
+      %th= heading_helper Invoice, :number
+      %th= heading_helper Invoice, :supplier
+      %th= heading_helper Invoice, :date
+      %th= heading_helper Invoice, :paid_on
+      %th= heading_helper Invoice, :amount
+      %th= heading_helper Invoice, :delivery
+      %th= heading_helper Invoice, :order
+      %th= heading_helper Invoice, :note
       %th
       %th
   %tbody
