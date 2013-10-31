@@ -15,7 +15,6 @@
           = category_name
           %i.icon-tag
         %td{:colspan => "9"}
-      - group_info = "";
       - order_articles.each do |order_article|
         - net_price = order_article.price.price
         - gross_price = order_article.price.gross_price
@@ -23,19 +22,7 @@
         - unit_quantity = order_article.price.unit_quantity
         - total_net += units * unit_quantity * net_price
         - total_gross += units * unit_quantity * gross_price
-        
-        - order.group_orders.ordered.each do |group_order|
-          - group_order_articles = group_order.group_order_articles.ordered
-          - group_order_articles.each do |goa|
-            - quantity = goa.result
-            - group_info.concat("#{group_order.ordergroup.name}: #{quantity}<br/>")
-
-        %tr{:class => cycle('even', 'odd', 
-            :name => 'articles'), 
-            :style => "color: #{units > 0 ? 'green' : 'red'}", 
-            :'data-placement'=>'bottom', 
-            :'data-toggle'=>'tooltip', 
-            :'data-original-title'=>"#{group_info}"}
+        %tr{:class => cycle('even', 'odd', :name => 'articles'), :style => "color: #{units > 0 ? 'green' : 'red'}"}
           %td=h order_article.article.name
           %td= "#{unit_quantity} x #{order_article.article.unit}"
           %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
