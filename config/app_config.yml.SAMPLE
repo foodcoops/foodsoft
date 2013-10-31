@@ -91,10 +91,6 @@ default: &defaults
     125g: 0.125
     100g: 0.1
     50g: 0.05
-    
-  # in some views order note is visible. Note is cut to this amount of characters
-  # while not cutting words. For full text button is shown to toggle that.
-  order_note_length: 20
 
 development:
   <<: *defaults
