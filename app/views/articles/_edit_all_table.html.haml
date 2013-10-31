@@ -1,20 +1,16 @@
 %table.table
   %thead
     %tr
-      %th
-        %acronym{:title => t('.available_desc')}= t '.available_short'
-      %th= t 'simple_form.labels.article.name'
-      %th= t 'simple_form.labels.article.unit'
-      %th
-        %acronym{:title => t('.price_desc')}= t '.price_short'
-      %th
-        %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity_short'
-      %th
-        %acronym{:title => t('.order_number_desc')}= t '.order_number_short'
-      %th= t 'simple_form.labels.article.note'
-      %th= t 'simple_form.labels.article.article_category'
-      %th= t 'simple_form.labels.defaults.tax'
-      %th= t 'simple_form.labels.defaults.deposit'
+      %th= heading_helper Article, :availability, short: true
+      %th= heading_helper Article, :name
+      %th= heading_helper Article, :unit
+      %th= heading_helper Article, :price, short: true
+      %th= heading_helper Article, :unit_quantity, short: true
+      %th= heading_helper Article, :order_number, short: true
+      %th= heading_helper Article, :note
+      %th= heading_helper Article, :article_category
+      %th= heading_helper Article, :tax
+      %th= heading_helper Article, :deposit
   %tbody
     - @articles.each_with_index do |article, index|
       = fields_for "articles[#{article.id || index}]", article do |form|

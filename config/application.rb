@@ -30,7 +30,8 @@ module Foodsoft
     # config.time_zone = 'Central Time (US & Canada)'
 
     # Internationalization.
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
+    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '??{-*,}.yml')).map{|p| p.basename('.yml').to_s }
     config.i18n.default_locale = :en
 
     # Configure the default encoding used in templates for Ruby 1.9.
@@ -59,7 +60,8 @@ module Foodsoft
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Do not enable database connection when precompiling assets
-    config.assets.initialize_on_precompile = false
+    # It would be nice not to enable database connection when precompiling assets,
+    # but i18n-js requires initialization, that's why it's on.
+    config.assets.initialize_on_precompile = true
   end
 end

@@ -14,13 +14,15 @@ url_options.merge!({:port => FoodsoftConfig[:port]}) if FoodsoftConfig[:port]
 Foodsoft::Application.configure do
   config.action_mailer.default_url_options = url_options
   
-  if Rails.env !~ /development|test/
+  if %w(production).include? Rails.env 
     # Configuration of the exception_notification plugin
     # Mailadresses are set in config/app_config.yml
-    config.middleware.use ExceptionNotifier,
-                          :email_prefix => FoodsoftConfig[:notification]['email_prefix'],
-                          :sender_address => FoodsoftConfig[:notification]['sender_address'],
-                          :exception_recipients => FoodsoftConfig[:notification]['error_recipients']
+    config.middleware.use ExceptionNotification::Rack,
+                          :email => {
+                            :email_prefix => FoodsoftConfig[:notification]['email_prefix'],
+                            :sender_address => FoodsoftConfig[:notification]['sender_address'],
+                            :exception_recipients => FoodsoftConfig[:notification]['error_recipients']
+                          }
   end
 end
 

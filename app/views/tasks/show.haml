@@ -3,22 +3,22 @@
 
 %section
   %dl.dl-horizontal
-    %dt= t 'simple_form.labels.task.name'
+    %dt= Task.human_attribute_name(:name)
     %dd= @task.name
     - if @task.description.present?
-      %dt= t 'simple_form.labels.defaults.description'
+      %dt= Task.human_attribute_name(:description)
       %dd= simple_format(@task.description)
     - if @task.due_date.present?
-      %dt= t '.due_date'
+      %dt= Task.human_attribute_name(:due_date)
       %dd 
         = format_date(@task.due_date)
         - if @task.periodic?
           %i.icon-repeat{title: t('tasks.repeated')}
-    %dt= t 'simple_form.labels.task.duration'
+    %dt= Task.human_attribute_name(:duration)
     %dd= t('.hours', count: @task.duration)
-    %dt= t 'simple_form.labels.task.user_list'
+    %dt= Task.human_attribute_name(:user_list)
     %dd= task_assignments(@task)
-    %dt= t 'simple_form.labels.task.workgroup'
+    %dt= Task.human_attribute_name(:workgroup)
     %dd
       - if @task.workgroup
         = link_to @task.workgroup.name, workgroup_tasks_path(workgroup_id: @task.workgroup_id)
@@ -30,7 +30,7 @@
   - unless @task.done?
     = link_to t('.mark_done'), set_done_task_path(@task), method: :post, class: 'btn'
   = link_to t('ui.edit'), edit_task_path(@task), class: 'btn'
-  = link_to t('ui.delete'), task_path(@task), :method => :delete, :confirm => "Die Aufgabe wirklich löschen?",
+  = link_to t('ui.delete'), task_path(@task), :method => :delete, :confirm => t('.confirm_delete_single'),
     class: 'btn btn-danger'
   - if @task.periodic?
     = link_to t('.delete_group'), task_path(@task, periodic: true), method: :delete, 

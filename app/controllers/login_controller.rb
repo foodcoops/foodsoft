@@ -11,7 +11,7 @@ class LoginController < ApplicationController
   # Sends an email to a user with the token that allows setting a new password through action "password".
   def reset_password
     if request.get? || params[:user].nil? # Catch for get request and give better error message.
-      redirect_to forgot_password_url, alert: 'Ein Problem ist aufgetreten. Bitte erneut versuchen' and return
+      redirect_to forgot_password_url, alert: I18n.t('errors.general_again') and return
     end
 
     if (user = User.find_by_email(params[:user][:email]))

@@ -9,24 +9,26 @@ gem "rails", '~> 3.2.9'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
+  gem 'less-rails'
+  gem 'uglifier', '>= 1.0.3'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platforms: :ruby
-
-  gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
 gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
+gem 'i18n-js', git: 'git://github.com/fnando/i18n-js.git' # to avoid US-ASCII js.erb error
+gem 'rails-i18n'
 
 gem 'mysql2'
 gem 'prawn'
 gem 'haml-rails'
 gem 'kaminari'
-gem 'client_side_validations'
 gem 'simple_form'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
 gem 'inherited_resources'
 gem 'localize_input', git: "git://github.com/bennibu/localize_input.git"
 gem 'wikicloth'
@@ -42,7 +44,7 @@ gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 
 group :production do
-  gem 'exception_notification', require: 'exception_notifier'
+  gem 'exception_notification'
 end
 
 group :development do
@@ -76,10 +78,9 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
-  # version requirements to avoid problem http://stackoverflow.com/questions/18114544
-  gem 'capybara', '~> 2.1.0'
+  gem 'capybara'
   # webkit and poltergeist don't seem to work yet
-  gem 'selenium-webdriver', '~> 2.35.1'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'simplecov', require: false
   # need to include rspec components before i18n-spec or rake fails in test environment

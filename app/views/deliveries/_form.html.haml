@@ -62,8 +62,6 @@
         }
       });
       
-      enablePriceTooltips();
-      
       $('body').on('StockArticle#create', function(e) {
         $.ajax({
           url: '#{form_on_stock_article_create_supplier_deliveries_path(@supplier)}',
@@ -96,14 +94,6 @@
     }
     function is_article_available_for_delivery(stock_article_id) {
       return ( 0 == $('#stock_change_stock_article_' + stock_article_id).length );
-    }
-
-    function enablePriceTooltips(context) {
-      $('[data-toggle~="tooltip"]', context).tooltip({
-        animation: false,
-        html: true,
-        placement: 'left'
-      });
     }
 
 = simple_form_for [@supplier, @delivery], validate: true do |f|

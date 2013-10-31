@@ -1,7 +1,7 @@
 = simple_form_for @supplier do |f|
   - if @supplier.shared_supplier
-    .alert.alert-success
-    = t 'suppliers.shared_supplier_note'
+    .alert.alert-info
+      = t 'suppliers.shared_supplier_note'
   = f.hidden_field :shared_supplier_id
   = f.input :name
   = f.input :address
