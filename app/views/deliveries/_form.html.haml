@@ -62,6 +62,16 @@
         }
       });
       
+    #{##########################################################################
+    # Publish/subscribe pattern for loose coupling of
+    #   (1) AJAX database manipulation and
+    #   (2) DOM updates for the particular view
+    ############################################################################
+    # * THIS STARTS STEP (2)
+    # * subscribe to document's events which are published/triggered by step (1)
+    # * possibly launch a second AJAX request to retreive the source code of the
+    #   new DOM elements
+    }
       $(document).on('StockArticle#create', function(e) {
         $.ajax({
           url: '#{form_on_stock_article_create_supplier_deliveries_path(@supplier)}',

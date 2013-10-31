@@ -4,6 +4,21 @@
     $(function() {
       $('tr.unavailable').hide();
       
+    #{##########################################################################
+    # Publish/subscribe pattern for loose coupling of
+    #   (1) AJAX database manipulation and
+    #   (2) DOM updates for the particular view
+    ############################################################################
+    # * THIS STARTS STEP (2)
+    # * subscribe to document's events which are published/triggered by step (1)
+    # * possibly launch a second AJAX request to retreive the source code of the
+    #   new DOM elements
+    #
+    # NOTE: This is a special case because the same controller (stockit) is
+    # responsible for steps (1) and (2). However, there are other views which
+    # employ the functionality of step (1) in this controller and provide their
+    # own step (2) for DOM updates (by listening on the corresponding events).
+    }
       $(document).on('StockArticle#create', function(e) {
         $.ajax({
           url: '#{index_on_stock_article_create_stock_articles_path}',
