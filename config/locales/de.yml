@@ -1401,6 +1401,7 @@ de:
       total_sum: Gesamtsumme
       who_ordered: Wer hat bestellt?
       order_note: Notiz
+      show_full_comment: Mehr...
     workgroup_members:
       title: Mitglieder der Gruppen
   simple_form:

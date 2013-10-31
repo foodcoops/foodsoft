@@ -1405,6 +1405,7 @@ en:
       total_sum: Total sum
       who_ordered: Who ordered?
       order_note: Note
+      show_full_comment: more...
     workgroup_members:
       title: Group memberships
   simple_form:

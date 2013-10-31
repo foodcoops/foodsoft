@@ -1335,6 +1335,7 @@ nl:
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
       order_note: Notitie
+      show_full_comment: meer...
     workgroup_members:
       title: Groepsleden
   simple_form:

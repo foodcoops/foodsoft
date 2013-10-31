@@ -1408,6 +1408,7 @@ fr:
       total_sum: Total
       who_ordered: Qui a commandé?
       order_note: Note
+      show_full_comment: suite...
     workgroup_members:
       title: Membres des équipes
   simple_form:
