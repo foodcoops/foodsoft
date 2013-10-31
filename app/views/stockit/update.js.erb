@@ -5,7 +5,7 @@ $('div.container-fluid').prepend('<%= j(render(
   }
 )) %>');
 
-$('body').trigger({
+$(document).trigger({
   type: 'StockArticle#update',
   stock_article_id: <%= @stock_article.id %>
 });

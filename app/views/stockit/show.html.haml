@@ -2,7 +2,7 @@
 - content_for :javascript do
   :javascript
     $(function() {
-      $('body').on('StockArticle#update', function(e) {
+      $(document).on('StockArticle#update', function(e) {
         $.ajax({
           url: '#{show_on_stock_article_update_stock_articles_path}',
           type: 'get',

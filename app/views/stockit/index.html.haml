@@ -4,7 +4,7 @@
     $(function() {
       $('tr.unavailable').hide();
       
-      $('body').on('StockArticle#create', function(e) {
+      $(document).on('StockArticle#create', function(e) {
         $.ajax({
           url: '#{index_on_stock_article_create_stock_articles_path}',
           type: 'get',
@@ -13,11 +13,11 @@
         });
       });
       
-      $('body').on('StockArticle#destroy', function(e) {
+      $(document).on('StockArticle#destroy', function(e) {
         $('#stockArticle-' + e.stock_article_id).remove();
       });
       
-      $('body').on('StockArticle#update', function(e) {
+      $(document).on('StockArticle#update', function(e) {
         $.ajax({
           url: '#{index_on_stock_article_update_stock_articles_path}',
           type: 'get',

@@ -62,7 +62,7 @@
         }
       });
       
-      $('body').on('StockArticle#create', function(e) {
+      $(document).on('StockArticle#create', function(e) {
         $.ajax({
           url: '#{form_on_stock_article_create_supplier_deliveries_path(@supplier)}',
           type: 'get',
@@ -71,7 +71,7 @@
         });
       });
       
-      $('body').on('StockArticle#update', function(e) {
+      $(document).on('StockArticle#update', function(e) {
         $.ajax({
           url: '#{form_on_stock_article_update_supplier_deliveries_path(@supplier)}',
           type: 'get',
