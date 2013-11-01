@@ -1,17 +1,17 @@
 %table.table.table-condensed
   %tr
-    %th= t 'activerecord.attributes.article.price'
+    %th= heading_helper(Article, :price)
     %td.numeric= number_to_currency article.price
   %tr
-    %th= t 'activerecord.attributes.article.deposit'
+    %th= heading_helper(Article, :deposit)
     %td.numeric= number_to_currency article.deposit
   %tr
-    %th= t 'activerecord.attributes.article.tax'
+    %th= heading_helper(Article, :tax)
     %td.numeric= number_to_percentage article.tax
   - unless article.fc_price == article.gross_price
     %tr
-      %th= t 'activerecord.attributes.article.fc_share_short'
+      %th= heading_helper(Article, :fc_share, {:short => true})
       %td.numeric= number_to_currency(article.fc_price-article.gross_price)
   %tr
-    %th= t 'activerecord.attributes.article.fc_price'
+    %th= heading_helper(Article, :fc_price)
     %td.numeric= number_to_currency article.fc_price
