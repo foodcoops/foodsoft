@@ -1,0 +1,22 @@
+en:
+  foodsoft_signup:
+    approval:
+      msg: Your membership needs to be approved before you can participate.
+    payment:
+      msg: You still need to pay your membership fee, which you can %{link}.
+      msg_link: do online
+      pay_label: Membership fee
+      pay_title: Pay your membership
+    errors:
+      no_ordergroup: You need an ordergroup to be able to go there.
+      not_approved: Your membership needs to be approved before you can go there.
+    membership_fee:
+      transaction_note: Membership fee for ordergroup
+  signup:
+    controller:
+      disabled: You cannot signup yourself for %{foodcoop}. Please contact us to become a member.
+      notice: Congratulations, your account has been created.
+    signup:
+      title: Join %{name}
+      body: <p>Do you want to become a member of %{foodcoop}? Then please fill in this form!</p> <p>Naturally, your information wll not be shared with third parties. You can decide how much of your personal information is visible to other members of the foodcoop. Please note that the administrators do have access to your information.</p>
+      submit: Create a Foodsoft account
