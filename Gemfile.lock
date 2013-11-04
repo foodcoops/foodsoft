@@ -368,7 +368,7 @@ DEPENDENCIES
   rspec-rails
   ruby-prof
   sass-rails (~> 3.2.3)
-  select2-rails
+  select2-rails (>= 3.4.0)
   selenium-webdriver
   simple-navigation
   simple-navigation-bootstrap
