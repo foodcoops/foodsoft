@@ -1,4 +1,5 @@
-= FoodsoftSignup
+FoodsoftSignup
+==============
 
 This project adds support for signup form to
 [foodsoft](https://github.com/foodcoops/foodsoft).
@@ -8,7 +9,8 @@ them to login to foodsoft, but only when their account is approved by an
 administrator can they access all areas of the site. Typically, one would
 restrict placing an order to approved accounts only.
 
-== Configuration
+Configuration
+-------------
 This plugin is configured in the foodcoop configuration in foodsoft's
 "config/app\_config.yml":
 ```
