@@ -63,8 +63,5 @@ module Foodsoft
     # It would be nice not to enable database connection when precompiling assets,
     # but i18n-js requires initialization, that's why it's on.
     config.assets.initialize_on_precompile = true
-
-    # Include engine migrations. - http://stackoverflow.com/a/8364459/2866660
-    config.paths['db/migrate'] += Rails.application.railties.engines.map{|e| e.paths['db/migrate'].existent}.flatten
   end
 end
