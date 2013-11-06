@@ -12,7 +12,7 @@ module FoodsoftSignup
   end
 
   def self.signup_warning(c, user)
-    unless user.nil? or FoodsoftConfig[:ordergroup_approval_for].empty?
+    unless user.nil?
       if user.ordergroup.nil?
         c.flash.now[:warning] = I18n.t('foodsoft_signup.errors.require_ordergroup')
       elsif !user.ordergroup.approved?
@@ -36,9 +36,9 @@ module FoodsoftSignup
     user and user.role_admin? and return true
     user and user.ordergroup and user.ordergroup.approved? and return true
     # maybe no access, test if member can go here
-    unless FoodsoftConfig[:ordergroup_approval_for].empty? or
-      FoodsoftConfig[:ordergroup_approval_for].member?("#{c.params[:controller]}") or
-      FoodsoftConfig[:ordergroup_approval_for].member?("#{c.action_name}_#{c.params[:controller]}")
+    FoodsoftConfig[:ordergroup_approval_for].blank? and return true
+    unless FoodsoftConfig[:ordergroup_approval_for].member?("#{c.params[:controller]}") or
+           FoodsoftConfig[:ordergroup_approval_for].member?("#{c.action_name}_#{c.params[:controller]}")
       return true
     end
     #phrase = I18n.t("foodsoft_signup.phrases.#{c.action_name}_#{c.controller_name}",
