@@ -24,6 +24,7 @@ PATH
     foodsoft_wiki (0.0.1)
       acts_as_versioned
       rails (~> 3.2.15)
+      wikicloth
 
 GEM
   remote: https://rubygems.org/
@@ -388,4 +389,3 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   whenever
-  wikicloth
