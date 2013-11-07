@@ -31,7 +31,6 @@ gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 gem 'inherited_resources'
 gem 'localize_input', git: "git://github.com/bennibu/localize_input.git"
-gem 'wikicloth'
 gem 'daemons'
 gem 'twitter-bootstrap-rails'
 gem 'simple-navigation'
