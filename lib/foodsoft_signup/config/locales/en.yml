@@ -1,4 +1,9 @@
 en:
+  activerecord:
+    attributes:
+      ordergroup:
+        approved: Membership approved
+        approved_short: Approved
   foodsoft_signup:
     approval:
       msg: Your membership needs to be approved before you can participate.
