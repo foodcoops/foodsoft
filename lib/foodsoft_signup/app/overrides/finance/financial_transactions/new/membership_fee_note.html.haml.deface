@@ -1,5 +1,4 @@
 / insert_bottom 'p:first'
 - unless FoodsoftConfig[:membership_fee].blank?
   - unless @ordergroup.approved?
-    = ' '
-    An amount of #{number_to_currency FoodsoftConfig[:membership_fee]} or more will approve the membership.
+    = ' ' + t('.membership_fee_note', fee: number_to_currency(FoodsoftConfig[:membership_fee]))

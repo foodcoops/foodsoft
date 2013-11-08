@@ -17,6 +17,10 @@ en:
       not_approved: Your membership needs to be approved before you can go there.
     membership_fee:
       transaction_note: Membership fee for ordergroup
+  finance:
+    financial_transactions:
+      new:
+        membership_fee_note: An amount of %{fee} or more will approve the membership.
   signup:
     controller:
       disabled: You cannot signup yourself for %{foodcoop}. Please contact us to become a member.
