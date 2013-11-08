@@ -35,15 +35,13 @@ module FoodsoftSignup
     # short checks
     user and user.role_admin? and return true
     user and user.ordergroup and user.ordergroup.approved? and return true
-    # maybe no access, test if member can go here
-    FoodsoftConfig[:ordergroup_approval_for].blank? and return true
-    unless FoodsoftConfig[:ordergroup_approval_for].member?("#{c.params[:controller]}") or
-           FoodsoftConfig[:ordergroup_approval_for].member?("#{c.action_name}_#{c.params[:controller]}")
+    # maybe the page is always allowed, test if member can go here
+    always_access = FoodsoftConfig[:unapproved_allow_access] or
+      %w(home login sessions feedback pages#show pages#all group_orders#archive payments)
+    if always_access.member?("#{c.params[:controller]}") or
+       always_access.member?("#{c.params[:controller]}\##{c.action_name}")
       return true
     end
-    #phrase = I18n.t("foodsoft_signup.phrases.#{c.action_name}_#{c.controller_name}",
-    #  default: I18n.t("foodsoft_signup.phrases.#{c.controller_name}",
-    #  default: I18n.t('foodsoft_signup.phrases.fallback')))
     if user.nil? or user.ordergroup.nil?
       c.redirect_to c.root_url, alert: I18n.t('foodsoft_signup.errors.no_ordergroup')
     elsif !user.ordergroup.approved?

@@ -17,22 +17,22 @@ This plugin is configured in the foodcoop configuration in foodsoft's
   # membership fee substracted from balance when a new ordergroup is created
   membership_fee: 35
 
-  # enable to to allow public signup; you probably want ordergroup_approval_for too then
+  # enable to to allow public signup
   signup: true
 
-  # Specify which pages are inaccesible to ordergroups that are not approved.
-  # Possible values are controller names or actions combined with controller
-  # names. Typical values would be:
-  #   'new_group_orders', 'create_group_orders', 'messages',
-  #   'foodcoop/users', 'foodcoop/ordergroups', 'foodcoop/workgroups'
-  # By default no action is restricted, so it is important to set this.
-  ordergroup_approval_for:
-  - new_group_orders
-  - create_group_orders
-  - foodcoop/users
-  - foodcoop/ordergroups
-  - foodcoop/workgroups
-  - messages
+  # Array of which pages are accesible to ordergroups that are not approved.
+  # Values are controller names (`pages`) or actions combined with controller
+  # names (`pages#show`). If not set, the default is:
+  # `home login sessions feedback pages#show pages#all group_orders#archive payments`
+  unapproved_allow_access:
+  - home
+  - login
+  - sessions
+  - feedback
+  - pages#show
+  - pages#all
+  - group_orders#archive
+  - payments
 
   # Message to show when ordergroup is not yet approved. If not set, a concise
   # default message will be shown.
