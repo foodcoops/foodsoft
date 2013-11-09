@@ -4,16 +4,14 @@
   .span4
     %h2= @ordergroup.name
     .well
+      - unless @ordergroup.description.blank?
+        %p= @ordergroup.description
       %p
-        %b= t '.description'
-        = @ordergroup.description
-      %p
-        %b= t '.funds'
+        %b= Ordergroup.human_attribute_name(:available_funds) + ':'
         = number_to_currency(@ordergroup.get_available_funds())
-      %h2= t '.people'
-      %ul
-        - for membership in @ordergroup.memberships
-          %li= membership.user.nick
+      %p
+        %b= Ordergroup.human_attribute_name(:user_tokens) + ':'
+        = @ordergroup.memberships.map{|m| m.user.nick}.join(', ')
       = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
   .span8
     %h2= t('.account_summary')

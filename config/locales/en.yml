@@ -857,10 +857,7 @@ en:
     no_ordergroups: You are unfortunately not a member of an ordergroup.
     ordergroup:
       account_summary: Account Statement
-      description: description
-      funds: ! 'Available credit:'
       invite: Invite a new Person
-      people: People
       search: Search ...
       title: My ordergroup
     ordergroup_cancelled: You cancelled membership of the group %{group}.
