@@ -903,8 +903,6 @@ nl:
     ordering:
       confirm_change: 
   layouts:
-    application1:
-      title: Foodsoft - %{title}
     email:
       footer: ! '--
 
@@ -1303,28 +1301,6 @@ nl:
       search_user: Gebruiker zoeken
       title: Wekelijkse taken
       user_not_found: Geen gebruiker gevonden
-    loginInfo:
-      edit_profile: Profiel aanpassen
-      feedback:
-        desc: Fout gevonden? Opmerking? Idee?
-        title: Feedback
-      help: Help
-      homepage_title: Foodcoop startpagina bezoeken
-      logout: Uitloggen
-      profile: Profiel
-    memberships:
-      current_members:
-        drop: verwijderen
-        no_members: ! '%{group} heeft geen leden.'
-      members:
-        already_members: Zijn al lid
-        desc: 
-        invite: uitnodiging
-        invite_someone: Iemand uitnodigen
-        no_members_yet: Zijn nog geen lid
-        title: Leden van %{group}
-      non_members:
-        add: toevoegen
     open_orders:
       ending: Einde
       no_open_orders: Er zijn momenteel geen lopende bestellingen.

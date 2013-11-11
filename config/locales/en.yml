@@ -907,8 +907,6 @@ en:
     ordering:
       confirm_change: Modifications to this order will be lost when you change the order. Do you want to lose the changes you made and continue?
   layouts:
-    application1:
-      title: Foodsoft - %{title}
     email:
       footer: ! '--
 
@@ -1370,28 +1368,6 @@ en:
       search_user: Search user
       title: Weekly jobs
       user_not_found: No user found
-    loginInfo:
-      edit_profile: Edit profile
-      feedback:
-        desc: Found a bug? Suggestions? Review?
-        title: Feedback
-      help: Help
-      homepage_title: Visit Foodcoop Homepage
-      logout: Logout
-      profile: Profile
-    memberships:
-      current_members:
-        drop: remove
-        no_members: ! '%{group} has no members.'
-      members:
-        already_members: Are already members
-        desc: Here you can manage members of the group or invite a new Foodcoop-member to the group %{link}.
-        invite: invite
-        invite_someone: Invite someone
-        no_members_yet: Are not members yet
-        title: Members of %{group}
-      non_members:
-        add: add
     open_orders:
       ending: Ending
       no_open_orders: There are no current orders

@@ -932,8 +932,6 @@ fr:
     ordering:
       confirm_change: 
   layouts:
-    application1:
-      title: Foodsoft - %{title}
     email:
       footer: ! '--
 
@@ -1376,28 +1374,6 @@ fr:
       search_user: Rechercher par utilisatrice
       title: Boulots hebdomadaires
       user_not_found: Aucune utilisatrice n'a été trouvée.
-    loginInfo:
-      edit_profile: Modifier le profil
-      feedback:
-        desc: Tu as détecté une erreur?  Tu as des propositions, des idées, des critiques?
-        title: Retours
-      help: Aide
-      homepage_title: Vers la page d'accueil de la bouffecoop
-      logout: Te déconnecter
-      profile: Profil
-    memberships:
-      current_members:
-        drop: désinscrire
-        no_members: ! '%{group} n''a aucun membre pour le moment.'
-      members:
-        already_members: Sont déjà membre
-        desc: Sur cette page, tu peux gérer les membres de l'équipe, et aussi %{link} un nouveau membre.
-        invite: engrainer
-        invite_someone: Inviter quelqu'unE
-        no_members_yet: Ne sont pas encore membre
-        title: Membre de %{group}
-      non_members:
-        add: ajouter
     open_orders:
       ending: Clôture le
       no_open_orders: Il n'y a aucune commande en cours en ce moment
