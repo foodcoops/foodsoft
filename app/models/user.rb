@@ -149,8 +149,8 @@ class User < ActiveRecord::Base
      self.groups.find(:all, :conditions => {:type => ""})
   end
 
-  def self.authenticate(nick, password)
-    user = (find_by_nick(nick) or find_by_email(nick))
+  def self.authenticate(login, password)
+    user = (find_by_nick(login) or find_by_email(login))
     if user && user.has_password(password)
       user
     else
