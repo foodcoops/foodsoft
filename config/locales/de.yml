@@ -853,10 +853,7 @@ de:
     no_ordergroups: Leider bist Du kein Mitglied einer Bestellgruppe
     ordergroup:
       account_summary: Kontoauszug
-      description: Beschreibung
-      funds: ! 'Verfügbares Guthaben:'
       invite: Neue Person einladen
-      people: Personen
       search: Suchen ...
       title: Meine Bestellgruppe
     ordergroup_cancelled: Du bist jetzt kein Mitglied der Gruppe %{group} mehr.
@@ -1394,7 +1391,6 @@ de:
           name: Bitte ändern
         edit_stock_article:
           price: <ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>
-        supplier: 
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
       task:

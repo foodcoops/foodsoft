@@ -646,7 +646,7 @@ en:
         title: Invoice %{number}
     order_articles:
       edit:
-        stock_alert: 
+        stock_alert: The price of stock articles cannot be changed!
         title: Update article
       new:
         title: Add delivered article to order
@@ -1395,7 +1395,6 @@ en:
           name: Please modify
         edit_stock_article:
           price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
-        supplier: 
       supplier:
         min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
       task:

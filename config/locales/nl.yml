@@ -26,15 +26,15 @@ nl:
         description: Omschrijving
         name: Naam
       delivery:
-        delivered_on: 
-        note: 
-        supplier: 
+        delivered_on: Leverdatum
+        note: Notitie
+        supplier: Leverancier
       financial_transaction:
         amount: bedrag
         note: notitie
       group_order_article:
-        ordergroup_id: 
-        result: 
+        ordergroup_id: Huishouden
+        result: Hoeveelheid
       invoice:
         amount: Bedrag
         date: Factuurdatum
@@ -47,12 +47,12 @@ nl:
         paid_on: Betaald op
         supplier: Leverancier
       message:
-        body: 
-        group_id: 
-        private: 
-        recipient_tokens: 
-        sent_to_all: 
-        subject: 
+        body: Bericht
+        group_id: Groep
+        private: Privé
+        recipient_tokens: Geadresseerden
+        sent_to_all: Aan alle leden sturen
+        subject: Onderwerp
       order:
         ends: Eindigt op
         note: Notitie
@@ -71,22 +71,22 @@ nl:
         name: Naam
         user_tokens: Leden
       page:
-        body: 
+        body: Bericht
         parent_id: 
-        title: 
+        title: Titel
       stock_article:
         price: Prijs
         quantity: Aantal
         quantity_available: Beschikbaar
         supplier: Leverancier
       stock_taking:
-        date: 
-        note: 
+        date: Datum
+        note: Notitie
       supplier:
         address: Adres
         contact_person: Contactpersoon
         customer_number: Klantnummer
-        customer_number_short: 
+        customer_number_short: Klantnr.
         delivery_days: Bezorgdagen
         email: Email
         fax: Fax
@@ -99,14 +99,14 @@ nl:
         phone2: Telefoon 2
         url: Homepage
       task:
-        description: 
-        done: 
-        due_date: 
-        duration: 
-        name: 
-        required_users: 
-        user_list: 
-        workgroup: 
+        description: Beschrijving
+        done: Gedaan?
+        due_date: Voor wanneer?
+        duration: Tijdsduur
+        name: Naam
+        required_users: Aantal
+        user_list: Verantwoordelijken
+        workgroup: Werkgroep
       user:
         email: Email
         first_name: Voornaam
@@ -123,7 +123,7 @@ nl:
       workgroup:
         description: Omschrijving
         name: Naam
-        next_weekly_tasks_number: 
+        next_weekly_tasks_number: Hoeveel weken vooruit moet de taak zichtbaar zijn?
         role_admin: Beheer
         role_article_meta: Artikelen
         role_finance: Financiën
@@ -297,7 +297,7 @@ nl:
       error_parse: ! '%{msg} ... in regel %{line}'
       error_update: ! 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
-        notice: ! '%{count} artikel zijn geanalyseerd'
+        notice: ! '%{count} artikelen zijn geanalyseerd'
       sync:
         notice: Catalogus is bijgewerkt
         shared_alert: ! '%{supplier} is niet aan een externe database gekoppeld'
@@ -393,9 +393,9 @@ nl:
       title: 
     form:
       actions: 
-      article: 
-      category: 
-      create_from_blank: 
+      article: Artikel
+      category: Categorie
+      create_from_blank: Nieuwe artikel invoeren
       create_stock_article: 
       price: 
       quantity: 
@@ -639,7 +639,7 @@ nl:
         title: Factuur %{number}
     order_articles:
       edit:
-        stock_alert: 
+        stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!
         title: Artikel bijwerken
       new:
         title: Geleverd artikel aan bestelling toevoegen
@@ -850,10 +850,7 @@ nl:
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
     ordergroup:
       account_summary: Rekeningafschrift
-      description: Omschrijving
-      funds: ! 'Beschikbaar krediet:'
       invite: Iemand uitnodigen
-      people: Personen
       search: Zoeken ...
       title: Mijn huishouden
     ordergroup_cancelled: Je bent geen lid meer van de groep %{group}.
@@ -1279,7 +1276,7 @@ nl:
       price: Totaalprijs
     articles_by_groups:
       fc_price: FC-Prijs
-      fc_price_desc: Prijs inclusief belasting, borg en foodcoop-toeslag
+      fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop marge
       name: Naam
       price: Totaalprijs
       unit: Eenheid
@@ -1328,7 +1325,6 @@ nl:
           name: 
         edit_stock_article:
           price: 
-        supplier: 
       supplier:
         min_order_quantity: 
       task:
