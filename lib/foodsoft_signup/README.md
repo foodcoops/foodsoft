@@ -1,13 +1,18 @@
 FoodsoftSignup
 ==============
 
-This project adds support for signup form to
+This project adds support for a signup form to
 [foodsoft](https://github.com/foodcoops/foodsoft).
 At `/:foodcoop/login/signup` there is a new form where prospective members can
 fill in their details and create an account (with an ordergroup). This allows
 them to login to foodsoft, but only when their account is approved by an
 administrator can they access all areas of the site. Typically, one would
 restrict placing an order to approved accounts only.
+
+'''Note:''' this plugin uses [deface](http://rubygems.org/gems/deface); you may
+want to [precompile templates](https://github.com/spree/deface/blob/master/README.markdown#production--precompiling)
+in production for performance reasons.
+
 
 Configuration
 -------------
