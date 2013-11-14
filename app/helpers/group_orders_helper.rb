@@ -16,6 +16,17 @@ module GroupOrdersHelper
     link_to order.name, path, options
   end
 
+  def link_to_ordering_price(order, options = {})
+    if group_order = order.group_order(current_user.ordergroup)
+      price = group_order.price
+      path = group_order_path(group_order)
+    else
+      price = 0
+      path = new_group_order_path(:order_id => order.id)
+    end
+    link_to number_to_currency(price), path, options
+  end
+
   # Return css class names for order result table
 
   def order_article_class_name(quantity, tolerance, result)
