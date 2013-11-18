@@ -797,7 +797,6 @@ en:
   helpers:
     application:
       edit_user: Edit user
-      nick_fallback: (empty username)
       role_admin: Admin
       role_article_meta: Articles
       role_finance: Finance
@@ -1285,7 +1284,7 @@ en:
         headings: Heading
         italic: italic
         list_item_1: First list item
-        list_item_2: Secound list item
+        list_item_2: Second list item
         noformat: No wiki-formatting
         ordered_list: Numbered list
         section_block: Block formatting
