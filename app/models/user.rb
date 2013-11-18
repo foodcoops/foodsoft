@@ -27,13 +27,17 @@ class User < ActiveRecord::Base
   
   validates_presence_of :email
   validates_presence_of :password, :on => :create
-  validates_length_of :nick, :in => 2..25, :allow_nil => !FoodsoftConfig[:use_nick]
-  validates_uniqueness_of :nick, :case_sensitive => false, :allow_nil => !FoodsoftConfig[:use_nick]
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_uniqueness_of :email, :case_sensitive => false
   validates_length_of :first_name, :in => 2..50
   validates_confirmation_of :password
   validates_length_of :password, :in => 5..25, :allow_blank => true
+  # allow nick to be nil depending on foodcoop config
+  # TODO Rails 4 may have a more beautiful way
+  #   http://stackoverflow.com/questions/19845910/conditional-allow-nil-part-of-validation
+  validates_length_of :nick, :in => 2..25, :allow_nil => true, :unless => Proc.new { FoodsoftConfig[:use_nick] }
+  validates_length_of :nick, :in => 2..25, :allow_nil => false, :if => Proc.new { FoodsoftConfig[:use_nick] }
+  validates_uniqueness_of :nick, :case_sensitive => false, :allow_nil => true # allow_nil in length validation
 
   before_validation :set_password
   after_initialize do
