@@ -1262,9 +1262,7 @@ nl:
       login: Aanmelden
       nojs: Opgelet, cookies en javascript moeten toegelaten worden! %{link} uitzetten, alsjeblieft.
       noscript: NoScript
-      password: Wachtwoord
       title: Foodsoft aanmelden
-      user: Gebruiker
   shared:
     articles:
       ordered: Besteld

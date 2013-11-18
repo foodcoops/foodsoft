@@ -1335,9 +1335,7 @@ fr:
       login: Te connecter
       nojs: Attention, les cookies et le javascript doivent être activés! Merci de désactiver %{link}.
       noscript: NoScript
-      password: Mot de passe
       title: Te connecter à Foodsoft
-      user: Identifiant
   shared:
     articles:
       ordered: Commandé

@@ -12,6 +12,6 @@
     - @financial_transactions.each do |t|
       %tr
         %td= format_time(t.created_on)
-        %td= h t.user.nil? ? '??' : t.user.nick
+        %td= h show_user(t.user)
         %td= h t.note
         %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}= number_to_currency(t.amount)

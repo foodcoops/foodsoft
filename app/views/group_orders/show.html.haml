@@ -22,7 +22,7 @@
       - else
         = t '.not_ordered'
     - if @order.closed?
-      %p= t '.closed_by', user: @order.updated_by.nick
+      %p= t '.closed_by', user: show_user(@order.updated_by)
       = link_to t('.comment'), "#comments"
 
 // Article box
