@@ -853,10 +853,7 @@ de:
     no_ordergroups: Leider bist Du kein Mitglied einer Bestellgruppe
     ordergroup:
       account_summary: Kontoauszug
-      description: Beschreibung
-      funds: ! 'Verfügbares Guthaben:'
       invite: Neue Person einladen
-      people: Personen
       search: Suchen ...
       title: Meine Bestellgruppe
     ordergroup_cancelled: Du bist jetzt kein Mitglied der Gruppe %{group} mehr.
@@ -906,8 +903,6 @@ de:
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
-    application1:
-      title: Foodsoft - %{title}
     email:
       footer: ! '--
 
@@ -1367,28 +1362,6 @@ de:
       search_user: Nach Nutzerin suchen
       title: Wöchentliche Jobs
       user_not_found: Keine Nutzerin gefunden
-    loginInfo:
-      edit_profile: Profil bearbeiten
-      feedback:
-        desc: Fehler gefunden? Vorschlag? Idee? Kritik?
-        title: Feedback
-      help: Hilfe
-      homepage_title: Foodcoop Homepage besuchen
-      logout: Abmelden
-      profile: Profil
-    memberships:
-      current_members:
-        drop: entfernen
-        no_members: ! '%{group} hat keine Mitglieder.'
-      members:
-        already_members: Sind schon Mitglieder
-        desc: Hier kannst Du Mitglieder der Gruppe verwalten oder ein neues Foodcoop-Mitglied in die Gruppe %{link}.
-        invite: einladen
-        invite_someone: Person einladen
-        no_members_yet: Sind noch keine Mitglieder
-        title: Mitglieder von %{group}
-      non_members:
-        add: hinzufügen
     open_orders:
       ending: Ende
       no_open_orders: Derzeit gibt es keine laufenden Bestellungen
@@ -1416,7 +1389,6 @@ de:
           name: Bitte ändern
         edit_stock_article:
           price: <ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>
-        supplier: 
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
       task:

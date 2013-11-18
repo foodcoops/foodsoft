@@ -31,17 +31,19 @@ gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 gem 'inherited_resources'
 gem 'localize_input', git: "git://github.com/bennibu/localize_input.git"
-gem 'wikicloth'
 gem 'daemons'
 gem 'twitter-bootstrap-rails'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 gem 'meta_search'
-gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git' # Use this instead of rubygem
 gem 'acts_as_tree'
 gem "rails-settings-cached", "0.2.4"
 gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
+
+# we use the git version of acts_as_versioned, and need to include it in this Gemfile
+gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
+gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
 
 group :production do
   gem 'exception_notification'
@@ -78,10 +80,9 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
-  # version requirements to avoid problem http://stackoverflow.com/questions/18114544
-  gem 'capybara', '~> 2.1.0'
+  gem 'capybara'
   # webkit and poltergeist don't seem to work yet
-  gem 'selenium-webdriver', '~> 2.35.1'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'simplecov', require: false
   # need to include rspec components before i18n-spec or rake fails in test environment

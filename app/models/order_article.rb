@@ -90,7 +90,8 @@ class OrderArticle < ActiveRecord::Base
   end
 
   def ordered_quantities_equal_to_group_orders?
-    (units_to_order * price.unit_quantity) == group_orders_sum[:quantity]
+    # the rescue is a workaround for units_to_order not being defined in integration tests
+    (units_to_order * price.unit_quantity) == group_orders_sum[:quantity] rescue false
   end
 
   # Updates order_article and belongings during balancing process

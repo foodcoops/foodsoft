@@ -1,5 +1,0 @@
-<ul class="autocomplete">
-<% for user in @users do -%>
-  <li><span class="nick"><%= show_user(user) %></span><span class="informal"> (<%= user.ordergroup.try(:name) %>)</span></li>
-<% end -%>
-</ul>
