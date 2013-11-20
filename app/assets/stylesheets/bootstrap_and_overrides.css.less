@@ -242,3 +242,23 @@ tr.unavailable {
 .input-append button.add-on {
   height: inherit;
 }
+
+// inputs that are "in the background" - less visible
+.less-visible {
+  color: #ddd;
+  input {
+    color: #ddd;
+    border-color: #eee;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: rgba(0, 0, 0, 0.05);
+    box-shadow: rgba(0, 0, 0, 0.05);
+  }
+}
+.less-visible:hover {
+  color: @textColor;
+  input {
+    color: @textColor;
+    border-color: @inputBorder;
+  }
+}
+

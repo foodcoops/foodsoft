@@ -5,21 +5,43 @@
     = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
     %h3= t '.title'
   .modal-body
-    = f.input :availability
+    /= f.input :availability
     = f.input :name
+    = f.input :unit do
+      .inline-inputs
+        = f.input_field :unit_quantity, class: 'input-mini', title: Article.human_attribute_name(:unit_quantity)
+        &times;
+        = f.input_field :unit, class: 'input-mini', title: Article.human_attribute_name(:unit)
+        %span#unit_divide_container.less-visible
+          &nbsp;per&nbsp;
+          = f.input_field :unit, class: 'input-mini', id: 'article_unit_divide'
+
     = f.input :origin
     = f.input :manufacturer
-    = f.input :unit
     = f.input :note
     = f.association :article_category
+    / TODO labels
 
-    = f.input :price
-    = f.input :unit_quantity
+    = f.input :price do
+      .inline-inputs
+        .input-prepend
+          %span.add-on= t 'number.currency.format.unit'
+          = f.input_field :price, class: 'input-mini'
+        .input-prepend
+          = f.label :tax, style: 'width: auto; margin-right: 10px; margin-left: 10px;'
+          .input-append
+            = f.input_field :tax, class: 'input-mini'
+            %span.add-on %
+
+    = f.input :deposit do
+      .inline-inputs
+        .input-prepend
+          %span.add-on= t 'number.currency.format.unit'
+          = f.input_field :deposit, class: 'input-mini'
+        %span#gross_price{style: 'margin-left: 10px'}
+          = Article.human_attribute_name(:gross_price) + ' ' + number_to_currency(@article.gross_price) rescue nil
+
     = f.input :order_number
-    = f.input :tax, :wrapper => :append do
-      = f.input_field :tax
-      %span.add-on %
-    = f.input :deposit
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'
