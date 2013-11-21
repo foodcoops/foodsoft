@@ -88,5 +88,6 @@ group :test do
   # need to include rspec components before i18n-spec or rake fails in test environment
   gem 'rspec-core'
   gem 'rspec-expectations'
+  gem 'rspec-rerun'
   gem 'i18n-spec'
 end
