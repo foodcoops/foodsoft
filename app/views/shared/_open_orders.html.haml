@@ -7,10 +7,10 @@
     %table.table.table-striped
       %thead
         %tr
-          %th= t '.supplier'
-          %th= t '.ending'
+          %th= heading_helper Order, :name
+          %th= heading_helper Order, :ends
           %th= t '.who_ordered'
-          %th= t '.total'
+          %th= heading_helper GroupOrder, :price
       %tbody
         - total = 0
         - Order.open.each do |order|
