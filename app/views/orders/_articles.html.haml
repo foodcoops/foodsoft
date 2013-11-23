@@ -1,8 +1,8 @@
 %table.table.table-hover
   %thead
     %tr
-      %th= t '.name'
-      %th= t '.unit_quantity'
+      %th= heading_helper Article, :name
+      %th= heading_helper Article, :unit_quantity
       %th= t '.prices'
       %th= t '.units_ordered'
       - unless order.stockit?

@@ -30,8 +30,11 @@ en:
         note: Note
         supplier: Supplier
       financial_transaction:
-        amount: amount
-        note: note
+        amount: Amount
+        created_on: Date
+        note: Note
+        ordergroup: Ordergroup
+        user: Entered by
       group_order_article:
         ordergroup_id: Ordergroup
         result: Amount
@@ -54,9 +57,12 @@ en:
         sent_to_all: Send to all members
         subject: Subject
       order:
+        created_by: Created by
         ends: Ends at
+        name: Supplier
         note: Note
         starts: Starts at
+        status: Status
       order_article:
         units_to_order: Amount of units
         update_current_price: Globally update current price
@@ -592,21 +598,13 @@ en:
         paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
         title: New transaction
       new_collection:
-        amount: Amount
         new_ordergroup: Add new order group
-        note: Note
-        ordergroup: Order group
         save: Save transaction
-        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement
+        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement.
         title: Updating more accounts
       ordergroup:
         remove: Remove
         remove_group: Remove group
-      transactions:
-        amount: Amount
-        date: Date
-        note: Note
-        who: Who
     group_order_articles:
       form:
         amount_change_for: Change amount for %{article}
@@ -1159,10 +1157,8 @@ en:
   orders:
     articles:
       article_count: ! 'Ordered articles:'
-      name: Name
       prices: Net/gross price
       prices_sum: ! 'Sum (net/gross price):'
-      unit_quantity: Unit quantity
       units_full: Full units
       units_ordered: Units ordered
     create:
@@ -1181,26 +1177,18 @@ en:
       notice: The order has been closed.
     form:
       ignore_warnings: Ignore warnings
-      name: Name
-      note: Note
-      origin: Origin
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
-      supplier: Producer
       title: Article
-      unit_quantity: Unit quantity
     index:
       action_end: Close
       confirm_delete: Do you really want to delete the order?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
       ended_orders: Closed orders
-      ending: End
       new_order: Create new order
       no_open_orders: There are currently no open orders.
-      note: Note
       open_orders: Current orders
-      supplier: Supplier
       title: Manage orders
     model:
       error_closed: Order was already settled
@@ -1212,17 +1200,11 @@ en:
       warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/ purchased within this open stock order. If you uncheck them here, all existing orders/ purchases of these articles will be deleted and it will not be accounted for them.'
     new:
       title: Create new order
-    orders:
-      ending: End
-      start: Start
-      status: Status
-      supplier: Supplier
     show:
       action_end: Close!
       amounts: ! 'Net/gross sum:'
       articles: Article overview
       articles_ordered: ! 'Ordered articles:'
-      begin: ! 'Begin:'
       comments:
         title: Comments
       comments_link: Comments
@@ -1230,7 +1212,6 @@ en:
       confirm_end: ! 'Do you really want to close the order %{order}?
 
         There is no going back.'
-      created_by: ! 'Created by:'
       download:
         article_pdf: Article PDF
         download_file: Download file
@@ -1239,12 +1220,9 @@ en:
         group_pdf: Group PDF
         matrix_pdf: Matrix PDF
         title: Download
-      ending: ! 'End:'
       group_orders: ! 'Group orders:'
-      note: ! 'Note:'
       sort_article: Sorted in articles
       sort_group: Sorted in groups
-      supplier: ! 'Supplier:'
       title: ! 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
     state:
