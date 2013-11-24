@@ -20,9 +20,9 @@ en:
         supplier: Supplier
         tax: VAT
         unit: Unit
-        units: Units
         unit_quantity: Unit quantity
         unit_quantity_short: U.Q.
+        units: Units
       article_category:
         description: Description
         name: Name
@@ -37,12 +37,12 @@ en:
         ordergroup: Ordergroup
         user: Entered by
       group_order:
-        updated_by: Last ordered by
         price: Order sum
+        updated_by: Last ordered by
       group_order_article:
         ordergroup_id: Ordergroup
-        result: Amount
         quantity: Amount
+        result: Amount
         tolerance: Tolerance
         total_price: Sum
       invoice:
@@ -79,8 +79,8 @@ en:
       order_comment:
         text: Add comment to this order ...
       ordergroup:
-        available_funds: Available credit
         account_balance: Account balance
+        available_funds: Available credit
         contact_address: Address
         contact_person: Contact person
         contact_phone: Phone
@@ -93,8 +93,8 @@ en:
         parent_id: Parent page
         title: Title
       stock_article:
-        price: Price
         available: Available
+        price: Price
         quantity_available: Available quantity
         quantity_available_short: Avail.
       stock_taking:
@@ -435,7 +435,7 @@ en:
       article: Article
       price: Netprice
       sum: Sum
-      sum_diff: Gross - adjusted invoice ammount
+      sum_diff: Gross - adjusted invoice amount
       sum_gross: Gross sum
       sum_net: Net sum
       title: Show delivery
@@ -728,6 +728,7 @@ en:
       title: Orders
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
+      units: Units
       units_full: Filled units
       units_total: Total units
     index:

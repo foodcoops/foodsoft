@@ -22,6 +22,7 @@ nl:
         unit: Eenheid
         unit_quantity: Groothandelseenheid
         unit_quantity_short: Gr.Eenh.
+        units: Eenheden
       article_category:
         description: Omschrijving
         name: Naam
@@ -30,11 +31,20 @@ nl:
         note: Notitie
         supplier: Leverancier
       financial_transaction:
-        amount: bedrag
-        note: notitie
+        amount: Bedrag
+        created_on: Datum
+        note: Notitie
+        ordergroup: Huishouden
+        user: Ingevuld door
+      group_order:
+        price: Totaal bestelling
+        updated_by: Laatst besteld door
       group_order_article:
         ordergroup_id: Huishouden
+        quantity: Hoeveelheid
         result: Hoeveelheid
+        tolerance: Tolerantie
+        total_price: Som
       invoice:
         amount: Bedrag
         date: Factuurdatum
@@ -54,15 +64,23 @@ nl:
         sent_to_all: Aan alle leden sturen
         subject: Onderwerp
       order:
+        closed_by: Afgerekend door
+        created_by: Geopend door
         ends: Eindigt op
+        name: Leverancier
         note: Notitie
         starts: Start op
+        status: 
       order_article:
+        missing_units: Missende eenheden
+        missing_units_short: 
         units_to_order: Aantal eenheden
         update_current_price: Huidige prijs overal bijwerken
       order_comment:
         text: Commentaar voor deze bestelling toevoegen ...
       ordergroup:
+        account_balance: Tegoed
+        available_funds: Beschikbaar tegoed
         contact_address: Adres
         contact_person: Contactpersoon
         contact_phone: Telefoon
@@ -75,10 +93,10 @@ nl:
         parent_id: Ouderpagina
         title: Titel
       stock_article:
+        available: Beschikbaar
         price: Prijs
-        quantity: Aantal
         quantity_available: Beschikbaar
-        supplier: Leverancier
+        quantity_available_short: 
       stock_taking:
         date: Datum
         note: Notitie
@@ -92,6 +110,7 @@ nl:
         fax: Fax
         is_subscribed: geabonneerd?
         min_order_quantity: Minimale bestelhoeveelheid
+        min_order_quantity_short: 
         name: Naam
         note: Notitie
         order_howto: Hoe te bestellen
@@ -395,10 +414,10 @@ nl:
       actions: Taken
       article: Artikel
       category: Categorie
-      create_from_blank: Nieuwe artikel invoeren
-      create_stock_article: Voorraadartikel maken
+      create_from_blank: Nieuw voorraadartikel invoeren
+      create_stock_article: Voorraadartikel invoeren
       price: Netto prijs
-      quantity: Hoeveelheid
+      quantity: Aantal
       title_fill_quantities: 2. Hoeveel mag er geleverd worden
       title_finish_delivery: 3. Levering afmaken
       title_select_stock_articles: 1. Kies voorraadartikelen
@@ -406,28 +425,28 @@ nl:
     index:
       confirm_delete: Zeker weten?
       new_delivery: Nieuwe levering maken voor %{supplier}
-      title: 
-    invoice_amount: 
-    invoice_net_amount: 
+      title: ! '%{supplier} leveringen'
+    invoice_amount: Factuurbedrag
+    invoice_net_amount: Netto factuurbedrag
     new:
-      title: 
+      title: Nieuwe levering van %{supplier}
     show:
-      amount: 
-      article: 
-      price: 
-      sum: 
-      sum_diff: 
-      sum_gross: 
-      sum_net: 
-      title: 
-      title_articles: 
-      unit: 
+      amount: Aantal
+      article: Artikel
+      price: Netto prijs
+      sum: Som
+      sum_diff: Bruto - aangepast factuurbedrag
+      sum_gross: Brutosom
+      sum_net: Nettosom
+      title: Levering tonen
+      title_articles: Artikel
+      unit: Eenheid
     stock_article_for_adding:
-      action_add_to_delivery: 
-      action_edit: 
-      action_other_price: 
+      action_add_to_delivery: Voeg toe aan levering
+      action_edit: Bewerk
+      action_other_price: Kopieer
     stock_article_form:
-      copy_stock_article: 
+      copy_stock_article: kopieer het voorraadartikel
     stock_change_fields:
       remove_article: Artikel uit levering halen
     suppliers_overview: Leverancieroverzicht
@@ -482,7 +501,7 @@ nl:
       notice: Bericht verstuurd. Vriendelijk bedankt!
     new:
       first_paragraph: Probleem gevonden? Voorstel? Idee? Verbeterpunt? We horen graag je feedback.
-      second_paragraph: 
+      second_paragraph: Dit bericht wordt verstuurd naar de ontwikkelaars van de bestelsoftware. Voor vragen over de organisatie van je foodcoop kun je je tot de lokale organisatie wenden.
       send: Verzenden
       title: Feedback geven
   finance:
@@ -572,7 +591,7 @@ nl:
         create:
           notice: De transactie is opgeslagen.
         create_collection:
-          alert: 
+          alert: ! 'Er is een fout opgetreden: %{error}'
           error_note_required: Notitie ontbreekt.
           notice: Alle transacties zijn opgeslagen.
       index:
@@ -585,21 +604,13 @@ nl:
         paragraph: 
         title: Nieuwe transactie
       new_collection:
-        amount: Bedrag
         new_ordergroup: Nog een huishouden toevoegen
-        note: Notitie
-        ordergroup: Huishouden
         save: Transactie opslaan
-        sidebar: 
-        title: 
+        sidebar: Hier kun je meerdere tegoeden tegelijk bijwerken. Bijvoorbeeld alle overschrijvingen van leden van een bankafschrift.
+        title: Meerdere tegoeden bijwerken
       ordergroup:
         remove: Verwijderen
         remove_group: Huishouden verwijderen
-      transactions:
-        amount: Bedrag
-        date: Datum
-        note: Notitie
-        who: Wie
     group_order_articles:
       form:
         amount_change_for: 
@@ -651,7 +662,7 @@ nl:
       ordergroups:
         account_balance: Tegoed
         account_statement: Rekeningafschrift
-        contact: 
+        contact: Contactpersoon
         name: Naam
         new_transaction: Nieuwe transactie
     update:
@@ -702,30 +713,14 @@ nl:
       notfound: Foute URL, dit is niet jouw bestelling.
     form:
       action_save: Bestelling opslaan
-      amount: Hoeveelheid
-      available: Beschikbaar
-      available_funds: Beschikbaar tegoed
-      created_by: Aangemaakt door
-      ending: Einde
-      funds: Krediet
-      last_update: Laatst bestelt
-      manufacturer: Producent
-      min_quantity: Min. bestelhoeveelheid
-      name: Naam
       new_funds: Nieuw tegoed
-      note: Notitie
       price: Prijs
       reset_article_search: 
       search_article: Artikel zoeken...
-      sum: Som
       sum_amount: ! 'Huidig totaalbedrag:'
-      supplier: Leverancier
       title: Bestellen
-      tolerance: Tolerantie
       total_sum_amount: Totalbedrag
       total_tolerance: Totale tolerantie
-      unit: Eenheid
-      unit_missing: Missende eenheden
       units: Eenheden
       units_full: Volle eenheden
       units_total: Totaal aantal
@@ -737,8 +732,6 @@ nl:
         title: Niet afgerekende bestellingen
         total_sum: Totaal
       funds:
-        account_balance: Tegoed
-        available_funds: 
         finished_orders: niet afgerekende bestellingen
         open_orders: Lopende bestellingen
         title: Credit
@@ -747,14 +740,9 @@ nl:
       not_enough_apples: Om te bestellen heb je minimaal %{stop_ordering_under} appels nodig. Momenteel heeft je huishouden slechts %{apples} appels.
     order:
       title: Artikelen
-    orders:
-      ending: Einde
-      sum: Som
-      supplier: Leveranciers
     show:
       articles:
         edit_order: Order aanpassen
-        name: Naam
         not_ordered_msg: Je hebt nog niets bestelt
         order_closed_msg: Sorry, deze bestelling is gesloten.
         order_nopen_title: Waarbij rekening gehouden is met bestellingen van anderen
@@ -764,21 +752,14 @@ nl:
         ordered: Besteld
         ordered_title: Hoeveelheid + tolerantie
         show_hide: Niet bestelde artikelen tonen/verbergen
-        sum: Som
+        show_note: 
         title: Artikeloverzicht
-        total_price: Totaalprijs
         unit_price: Stuksprijs
-        units: Eenheden
-      closed_by: Afgerekend door %{user}
       comment: Notitie
       comments:
-        title: 
-      ending: Einde
+        title: Commentaar
       not_ordered: Je hebt niets bestelt.
-      note: Notitie
-      order_sum: 
       sum: Som
-      supplier: Leveranciers
       title: Jouw bestelling voor %{order}
     switch_order:
       remaining: nog %{remaining}
@@ -1091,10 +1072,8 @@ nl:
   orders:
     articles:
       article_count: ! 'Bestelde artikelen:'
-      name: Naam
       prices: Netto/bruto prijs
       prices_sum: ! 'Totaal (netto/bruto prijs):'
-      unit_quantity: Groothandelseenheid
       units_full: Volle eenheden
       units_ordered: Bestelde eenheden
     create:
@@ -1113,26 +1092,18 @@ nl:
       notice: De bestelling is gesloten.
     form:
       ignore_warnings: Waarschuwingen negeren
-      name: Naam
-      note: Notitie
-      origin: Herkomst
       prices: Prijs (netto/FC)
       select_all: Alles selecteren
       stockit: Beschikbaar
-      supplier: Producent
       title: Artikel
-      unit_quantity: 
     index:
       action_end: Sluiten
       confirm_delete: Wil je de bestelling werkelijk verwijderen?
       confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
       ended_orders: Gesloten bestellingen
-      ending: 
       new_order: 
       no_open_orders: Er zijn momenteel geen lopende bestellingen.
-      note: 
       open_orders: Lopende bestellingen
-      supplier: 
       title: 
     model:
       error_closed: Bestelling was al afgerekend
@@ -1144,17 +1115,11 @@ nl:
       warning_ordered_stock: 
     new:
       title: 
-    orders:
-      ending: 
-      start: Start
-      status: 
-      supplier: Leverancier
     show:
       action_end: Sluiten!
       amounts: 
       articles: Artikeloverzicht
       articles_ordered: ! 'Bestelde artikelen:'
-      begin: ! 'Begin:'
       comments:
         title: Commentaar
       comments_link: Commentaar
@@ -1162,7 +1127,6 @@ nl:
       confirm_end: ! 'Wil je de bestelling %{order} echt sluiten?
 
         Hierna kan zij niet opnieuw geopend worden.'
-      created_by: ! 'Geopend door:'
       download:
         article_pdf: Artikelen PDF
         download_file: Bestand downloaden
@@ -1171,12 +1135,9 @@ nl:
         group_pdf: Huishoudens PDF
         matrix_pdf: Matrix PDF
         title: Downloaden
-      ending: ! 'Einde:'
       group_orders: ! 'Ledenbestellingen:'
-      note: ! 'Notitie:'
       sort_article: Gesorteerd naar artikel
       sort_group: Gesorteerd naar huishouden
-      supplier: 
       title: 
       warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
     state:
@@ -1299,12 +1260,9 @@ nl:
       title: Wekelijkse taken
       user_not_found: Geen gebruiker gevonden
     open_orders:
-      ending: Einde
       no_open_orders: Er zijn momenteel geen lopende bestellingen.
       not_enough_apples: 
-      supplier: Leverancier
       title: Lopende bestellingen
-      total: Som
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
     workgroup_members:
@@ -1324,7 +1282,7 @@ nl:
         copy_stock_article:
           name: 
         edit_stock_article:
-          price: 
+          price: <ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>
       supplier:
         min_order_quantity: 
       task:
