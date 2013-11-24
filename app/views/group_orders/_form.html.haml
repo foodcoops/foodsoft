@@ -38,10 +38,11 @@
         %dd= @order.supplier.min_order_quantity
       %dt= t '.sum_amount'
       %dd= number_to_currency @order.sum
-      %dt= heading_helper GroupOrder, :updated_by
-      %dd
-        = show_user(@group_order.updated_by) if @group_order.updated_by
-        (#{format_time(@group_order.updated_on)})
+      - unless @group_order.new_record?
+        %dt= heading_helper GroupOrder, :updated_by
+        %dd
+          = show_user(@group_order.updated_by)
+          (#{format_time(@group_order.updated_on)})
       %dt= heading_helper Ordergroup, :available_funds
       %dd= number_to_currency(@ordering_data[:available_funds])
 
