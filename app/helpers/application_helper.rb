@@ -84,8 +84,8 @@ module ApplicationHelper
     i18nopts = options.select {|a| !['short'].include?(a) }
     s = model.human_attribute_name(attribute, i18nopts)
     if options[:short]
-      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({defaults: ''}))
-      s = raw "<abbr title='#{s}'>#{sshort}</abbr>" unless sshort.empty?
+      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({fallback: true, default: ''}))
+      s = raw "<abbr title='#{s}'>#{sshort}</abbr>" unless sshort.blank?
     end
     s
   end
