@@ -728,7 +728,6 @@ en:
       title: Orders
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
-      units: Units
       units_full: Filled units
       units_total: Total units
     index:

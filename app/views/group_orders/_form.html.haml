@@ -134,7 +134,7 @@
                 .pull-left
                   #{heading_helper Article, :manufacturer}: #{order_article.article.manufacturer}
                   %br/
-                  #{t '.units'}: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
+                  #{heading_helper Article, :units}: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
                   %br/
                   #{heading_helper Article, :note}: #{order_article.article.note}
                   %br/
