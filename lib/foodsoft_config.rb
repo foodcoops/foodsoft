@@ -9,6 +9,8 @@ class FoodsoftConfig
       set_config Rails.env
       # Overwrite scope to have a better namescope than 'production'
       self.scope = config[:default_scope] or raise "No default_scope is set"
+      # Set defaults for backward-compatibility
+      set_missing
     end
 
     # Set config and database connection for specific foodcoop
@@ -44,6 +46,14 @@ class FoodsoftConfig
       database_config = ActiveRecord::Base.configurations[Rails.env]
       database_config.merge!(config[:database]) if config[:database].present?
       ActiveRecord::Base.establish_connection(database_config)
+    end
+
+    # When new options are introduced, put backward-compatible defaults here, so that
+    # configuration files that haven't been updated, still work as they did.
+    def set_missing
+      config.replace({
+        use_nick: true
+      }.merge(config))
     end
 
   end

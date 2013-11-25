@@ -1284,7 +1284,7 @@ en:
         headings: Heading
         italic: italic
         list_item_1: First list item
-        list_item_2: Secound list item
+        list_item_2: Second list item
         noformat: No wiki-formatting
         ordered_list: Numbered list
         section_block: Block formatting
@@ -1332,9 +1332,7 @@ en:
       login: Login
       nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
-      password: Password
       title: Foodsoft login
-      user: User
   shared:
     articles:
       ordered: Ordered

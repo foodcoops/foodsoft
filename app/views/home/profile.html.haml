@@ -3,7 +3,7 @@
 .row-fluid
   .span7
     %h3
-      = h(t('.user.title', user: @current_user.nick))
+      = h(t('.user.title', user: show_user))
       %small= t '.user.since', when: distance_of_time_in_words(Time.now, @current_user.created_on)
     = simple_form_for(@current_user, :url => update_profile_path) do |f|
       = render :partial => 'shared/user_form_fields', :locals => {:f => f}

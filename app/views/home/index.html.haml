@@ -57,7 +57,7 @@
         - for ft in current_user.ordergroup.financial_transactions.limit(5).order('created_on DESC')
           %tr
             %td= format_time(ft.created_on)
-            %td= h(ft.user.nil? ? '?' : ft.user.nick)
+            %td= h(show_user(ft.user))
             %td= h(ft.note)
             - color = ft.amount < 0 ? 'red' : 'black'
             %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)

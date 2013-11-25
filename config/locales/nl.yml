@@ -58,8 +58,8 @@ nl:
         note: Notitie
         starts: Start op
       order_article:
-        units_to_order: 
-        update_current_price: 
+        units_to_order: Aantal eenheden
+        update_current_price: Huidige prijs overal bijwerken
       order_comment:
         text: Commentaar voor deze bestelling toevoegen ...
       ordergroup:
@@ -67,12 +67,12 @@ nl:
         contact_person: Contactpersoon
         contact_phone: Telefoon
         description: Omschrijving
-        ignore_apple_restriction: 
+        ignore_apple_restriction: Bestelstop vanwege appelpunten negeren
         name: Naam
         user_tokens: Leden
       page:
         body: Bericht
-        parent_id: 
+        parent_id: Ouderpagina
         title: Titel
       stock_article:
         price: Prijs
@@ -354,10 +354,10 @@ nl:
       error_nosel: Je hebt geen artikelen geselecteerd
     parse_upload:
       body: <p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>
-      title: 
+      title: Artikelen uploaden
     sync:
       outlist:
-        alert_used: 
+        alert_used: Opgelet, %{article} wordt gebruikt in een lopende bestelling. Haal het eerst uit de bestelling.
         body: ! 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
@@ -382,7 +382,7 @@ nl:
       title: Artikelen uploaden voor %{supplier}
   deliveries:
     add_stock_change:
-      how_many_units: 
+      how_many_units: ! 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
     create:
       notice: Levering is aangemaakt. Vergeet niet een factuur te maken!
     create_stock_article:
@@ -390,22 +390,22 @@ nl:
     destroy:
       notice: Levering is verwijdered.
     edit:
-      title: 
+      title: Levering aanpassen
     form:
-      actions: 
+      actions: Taken
       article: Artikel
       category: Categorie
       create_from_blank: Nieuwe artikel invoeren
-      create_stock_article: 
-      price: 
-      quantity: 
-      title_fill_quantities: 
-      title_finish_delivery: 
-      title_select_stock_articles: 
-      unit: 
+      create_stock_article: Voorraadartikel maken
+      price: Netto prijs
+      quantity: Hoeveelheid
+      title_fill_quantities: 2. Hoeveel mag er geleverd worden
+      title_finish_delivery: 3. Levering afmaken
+      title_select_stock_articles: 1. Kies voorraadartikelen
+      unit: Eenheid
     index:
-      confirm_delete: 
-      new_delivery: 
+      confirm_delete: Zeker weten?
+      new_delivery: Nieuwe levering maken voor %{supplier}
       title: 
     invoice_amount: 
     invoice_net_amount: 
@@ -429,12 +429,12 @@ nl:
     stock_article_form:
       copy_stock_article: 
     stock_change_fields:
-      remove_article: 
-    suppliers_overview: 
+      remove_article: Artikel uit levering halen
+    suppliers_overview: Leverancieroverzicht
     update:
       notice: Levering is bijgewerkt.
     update_stock_article:
-      notice: 
+      notice: Voorraadartikel "%{name}" is bijgewerkt.
   documents:
     order_by_articles:
       filename: Bestelling %{name}-%{date} - Artikellijst
@@ -483,8 +483,8 @@ nl:
     new:
       first_paragraph: Probleem gevonden? Voorstel? Idee? Verbeterpunt? We horen graag je feedback.
       second_paragraph: 
-      send: 
-      title: 
+      send: Verzenden
+      title: Feedback geven
   finance:
     balancing:
       close:
@@ -555,7 +555,7 @@ nl:
         no_closed_orders: Momenteel zijn er geen gesloten bestellingen.
         state: Status
       summary:
-        changed: 
+        changed: Waarden zijn gewijzigd!
         duration: Van %{starts} tot %{ends}
         fc_amount: ! 'FC-bedrag:'
         fc_profit: FC Winst
@@ -603,7 +603,7 @@ nl:
     group_order_articles:
       form:
         amount_change_for: 
-        result_hint: 
+        result_hint: ! 'Eenheid: %{unit}'
     index:
       amount: Bedrag
       amount_fc: Bedrag(FC)
@@ -684,7 +684,7 @@ nl:
         title: Werkgroepen
       workgroup:
         edit: Groep bewerken
-        show_tasks: 
+        show_tasks: Alle taken weergeven
   group_orders:
     archive:
       desc: Bekijk hier alle %{link}.
@@ -716,7 +716,7 @@ nl:
       note: Notitie
       price: Prijs
       reset_article_search: 
-      search_article: 
+      search_article: Artikel zoeken...
       sum: Som
       sum_amount: ! 'Huidig totaalbedrag:'
       supplier: Leverancier
@@ -949,11 +949,11 @@ nl:
     dateformat: ! '%d %b'
     feedback:
       header: ! '%{user} schreef op %{date}:'
-      subject: 
+      subject: Feedback van %{email}
     foodsoft_message:
       footer: 
     invite:
-      subject: 
+      subject: Uitnodiging voor de foodcoop
       text: 
     negative_balance:
       subject: 
@@ -1009,21 +1009,21 @@ nl:
     create:
       notice: Bericht is opgeslagen en wordt verzonden.
     index:
-      new: 
-      title: 
+      new: Nieuw bericht
+      title: Berichten
     messages:
-      reply: 
+      reply: Antwoorden
     model:
-      reply_header: 
-      reply_indent: 
-      reply_subject: 
+      reply_header: ! '%{user} schreef op %{when}:'
+      reply_indent: ! '> %{line}'
+      reply_subject: ! 'Re: %{subject}'
     new:
       list:
-        desc: 
+        desc: ! 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
         mail: bijvoorbeeld door een email te sturen naar %{email}.
-        subscribe: 
-        subscribe_msg: 
-        wiki: 
+        subscribe: Lees meer over de mailing-lijst op %{link}.
+        subscribe_msg: Mogelijk moet je je eerst aanmelden voor de mailing-lijst.
+        wiki: Wiki (mailing-lijst pagina)
       no_user_found: Geen gebruiker gevonden
       search: Zoeken ...
       search_user: Gebruiker zoeken
@@ -1152,28 +1152,30 @@ nl:
     show:
       action_end: Sluiten!
       amounts: 
-      articles: 
-      articles_ordered: 
-      begin: 
+      articles: Artikeloverzicht
+      articles_ordered: ! 'Bestelde artikelen:'
+      begin: ! 'Begin:'
       comments:
-        title: 
-      comments_link: 
+        title: Commentaar
+      comments_link: Commentaar
       confirm_delete: 
-      confirm_end: 
-      created_by: 
+      confirm_end: ! 'Wil je de bestelling %{order} echt sluiten?
+
+        Hierna kan zij niet opnieuw geopend worden.'
+      created_by: ! 'Geopend door:'
       download:
-        article_pdf: 
-        download_file: 
-        fax_pdf: 
-        fax_txt: 
-        group_pdf: 
-        matrix_pdf: 
-        title: 
-      ending: 
-      group_orders: 
-      note: 
-      sort_article: 
-      sort_group: 
+        article_pdf: Artikelen PDF
+        download_file: Bestand downloaden
+        fax_pdf: Fax PDF
+        fax_txt: Fax text
+        group_pdf: Huishoudens PDF
+        matrix_pdf: Matrix PDF
+        title: Downloaden
+      ending: ! 'Einde:'
+      group_orders: ! 'Ledenbestellingen:'
+      note: ! 'Notitie:'
+      sort_article: Gesorteerd naar artikel
+      sort_group: Gesorteerd naar huishouden
       supplier: 
       title: 
       warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
@@ -1213,17 +1215,17 @@ nl:
         heading: 
         headings: 
         italic: 
-        list_item_1: 
-        list_item_2: 
-        noformat: 
-        ordered_list: 
-        section_block: 
-        section_character: 
-        section_link: 
-        section_table: 
-        see_tables: 
-        tables_link: 
-        text: 
+        list_item_1: Eerste in de lijst
+        list_item_2: Tweede in de lijst
+        noformat: Zonder wiki-opmaak
+        ordered_list: Genummerde lijst
+        section_block: Paragrafen
+        section_character: Tekens
+        section_link: Links
+        section_table: Tabellen
+        see_tables: zie %{tables_link}
+        tables_link: Tabellen
+        text: tekst
         title: 
         unordered_list: 
         wiki_link_ex: 
@@ -1262,9 +1264,7 @@ nl:
       login: Aanmelden
       nojs: Opgelet, cookies en javascript moeten toegelaten worden! %{link} uitzetten, alsjeblieft.
       noscript: NoScript
-      password: Wachtwoord
       title: Foodsoft aanmelden
-      user: Gebruiker
   shared:
     articles:
       ordered: Besteld
