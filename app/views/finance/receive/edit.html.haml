@@ -1,0 +1,10 @@
+- title "Receiving #{@order.name}"
+
+= form_tag(finance_receive_path(@order), :method => :put) do
+  %section#results
+    = render 'edit_articles'
+  .form-actions
+    = submit_tag t('.submit'), class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), finance_order_index_path
+
+%p= link_to_top

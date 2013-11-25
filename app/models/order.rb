@@ -166,6 +166,9 @@ class Order < ActiveRecord::Base
             goa.save_results!
             # Delete no longer required order-history (group_order_article_quantities) and
             # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
+            #    A: Yes, we do - for redistributing articles when the number of articles
+            #       delivered changes, and for statistics on popular articles. Records
+            #       with both tolerance and quantity zero can be deleted.
             #goa.group_order_article_quantities.clear
           end
         end

@@ -144,6 +144,10 @@ Foodsoft::Application.routes.draw do
         resources :order_articles
       end
 
+      resources :receive do
+        get :add_article
+      end
+
       resources :group_order_articles do
         member do
           put :update_result

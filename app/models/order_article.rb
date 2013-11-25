@@ -12,8 +12,8 @@ class OrderArticle < ActiveRecord::Base
   validate :article_and_price_exist
   validates_uniqueness_of :article_id, scope: :order_id
 
-  scope :ordered, :conditions => "units_to_order > 0"
-  scope :ordered_or_member, -> { includes(:group_order_articles).where("units_to_order > 0 OR group_order_articles.result > 0") }
+  scope :ordered, -> { where("units_to_order > 0 OR units_billed > 0 OR units_received > 0") }
+  scope :ordered_or_member, -> { includes(:group_order_articles).where("units_to_order > 0 OR units_billed > 0 OR units_received > 0 OR group_order_articles.result > 0") }
 
   before_create :init_from_balancing
   after_destroy :update_ordergroup_prices
@@ -34,7 +34,14 @@ class OrderArticle < ActiveRecord::Base
   def price
     article_price || article
   end
-  
+
+  # latest information on available units
+  def units
+    return units_received unless units_received.nil?
+    return units_billed unless units_billed.nil?
+    units_to_order
+  end
+
   # Count quantities of belonging group_orders. 
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
@@ -92,6 +99,18 @@ class OrderArticle < ActiveRecord::Base
   def ordered_quantities_equal_to_group_orders?
     # the rescue is a workaround for units_to_order not being defined in integration tests
     (units_to_order * price.unit_quantity) == group_orders_sum[:quantity] rescue false
+  end
+
+  def redistribute(quantity)
+    # recompute
+    group_order_articles.each {|goa| goa.save_results! quantity }
+
+    # Update GroupOrder prices & Ordergroup stats
+    # TODO only affected group_orders, and once after redistributing all articles
+    order.group_orders.each(&:update_price!)
+    order.ordergroups.each(&:update_stats!)
+
+    # TODO notifications
   end
 
   # Updates order_article and belongings during balancing process

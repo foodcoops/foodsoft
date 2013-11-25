@@ -1,0 +1,76 @@
+- content_for :javascript do
+  :javascript
+
+    function update_delta(input) {
+      var units = $(input).val();
+      var expected = $(input).data('units-expected');
+      var html;
+
+      if (units.replace(/\s/g,"")=="") {
+        // no value
+        html = '';
+      } else if (isNaN(units)) {
+        html = '<i class="icon-remove" style="color: red"></i>';
+      } else if (units == expected) {
+        // equal value
+        html = '<i class="icon-ok" style="color: green"></i>';
+      } else if (units < expected) {
+        html = '<span style="color: red">- '+(expected-units)+'</span>';
+      } else /*if (units> expected)*/ {
+        html = '<span style="color: green">+ '+(units-expected)+'</span>';
+      }
+
+      $(input).closest('tr').find('.units_delta').html(html);
+    }
+
+    $(document).on('change', 'input[data-units-expected]', function() {
+      update_delta(this);
+    });
+
+    $(function() {
+      $('input[data-units-expected]').each(function() {
+        update_delta(this);
+      });
+
+      $('#add_article').removeAttr('disabled').select2({
+        placeholder: '#{t '.add_article'}',
+        data: #{articles_for_select2(@order).to_json},
+        // TODO implement adding a new article, like in deliveries
+      }).on('change', function(e) {
+        var selectedArticle = $(e.currentTarget).select2('data');
+        if(!selectedArticle) {
+          return false;
+        }
+
+        $.ajax({
+          url: '#{finance_receive_add_article_path(@order)}',
+          type: 'get',
+          data: {article_id: selectedArticle.id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+        $('#add_article').select2('data', null);
+        return true;
+      });
+      
+    });
+
+
+%table.ordered-articles.table.table-striped.stupidtable
+  %thead
+    %tr
+      %th.sort{:data => {:sort => 'string'}}= t('.number')
+      %th.sort{:data => {:sort => 'string'}}= t('.article')
+      %th= heading_helper GroupOrderArticle, :units
+      %th Members
+      %th Ordered
+      %th Invoice
+      %th Received
+      %th
+  %tbody#result_table
+    - @order_articles.each do |order_article|
+      = render :partial => 'edit_article', :locals => {:order_article => order_article}
+  %tfoot
+    %tr
+      %th{:colspan => 8}
+        %input#add_article{:style => 'width: 500px;'}
+

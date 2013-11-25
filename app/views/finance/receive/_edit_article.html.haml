@@ -1,0 +1,16 @@
+= fields_for 'order_articles', order_article, index: order_article.id do |form|
+  %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
+    - order_title = []
+    - order_title.append t('.manufacturer')+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
+    - order_title.append t('.note')+': ' + order_article.article.note unless order_article.article.note.to_s.empty?
+    - units_expected = (order_article.units_billed or order_article.units_to_order)
+    %td= order_article.article.order_number
+    %td.name{title: order_title.join("\n")}= order_article.article.name
+    %td #{order_article.article.unit_quantity} &times; #{order_article.article.unit}
+    %td #{order_article.quantity} + #{order_article.tolerance}
+    %td= order_article.units_to_order
+    %td= order_article.units_billed
+    %td
+      = form.text_field :units_received, class: 'input-mini', data: {'units-expected' => units_expected}
+      / TODO add almost invisible text_field for entering single units
+    %td.units_delta

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130920201529) do
+ActiveRecord::Schema.define(:version => 20130930132511) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -195,6 +195,8 @@ ActiveRecord::Schema.define(:version => 20130920201529) do
     t.integer "units_to_order",   :default => 0, :null => false
     t.integer "lock_version",     :default => 0, :null => false
     t.integer "article_price_id"
+    t.integer "units_billed"
+    t.integer "units_received"
   end
 
   add_index "order_articles", ["order_id", "article_id"], :name => "index_order_articles_on_order_id_and_article_id", :unique => true

@@ -24,8 +24,4 @@ FactoryGirl.define do
     end
   end
 
-  # requires order and article
-  factory :order_article do
-  end
-
 end

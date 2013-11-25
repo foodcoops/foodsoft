@@ -560,6 +560,7 @@ en:
         last_edited_by: Last edited by
         name: Supplier
         no_closed_orders: At the moment there are no closed orders.
+        receive: receive
         state: State
       summary:
         changed: Data was changed!
