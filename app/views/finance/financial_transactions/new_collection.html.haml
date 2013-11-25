@@ -21,13 +21,13 @@
 
 = form_tag finance_create_transaction_collection_path do
   %p
-    %b= t('.note')
+    %b= heading_helper FinancialTransaction, :note
     = text_field_tag :note, params[:note], class: 'input-xlarge', required: 'required'
   %p
     %table#ordergroups{:style => "width:20em"}
       %tr
-        %th= t('.ordergroup')
-        %th= t('.amount')
+        %th= heading_helper FinancialTransaction, :ordergroup
+        %th= heading_helper FinancialTransaction, :amount
       = render :partial => 'ordergroup', :collection => [1, 2, 3]
   %p
     = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn'

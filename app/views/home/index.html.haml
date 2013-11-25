@@ -50,10 +50,10 @@
       %h3= t '.my_ordergroup.transactions.title'
       %table.table.table-striped
         %tr
-          %th= t '.my_ordergroup.transactions.when'
-          %th= t '.my_ordergroup.transactions.where'
-          %th= t '.my_ordergroup.transactions.note'
-          %th= t '.my_ordergroup.transactions.amount'
+          %th= heading_helper FinancialTransaction, :created_on
+          %th= heading_helper FinancialTransaction, :user
+          %th= heading_helper FinancialTransaction, :note
+          %th= heading_helper FinancialTransaction, :amount
         - for ft in current_user.ordergroup.financial_transactions.limit(5).order('created_on DESC')
           %tr
             %td= format_time(ft.created_on)
