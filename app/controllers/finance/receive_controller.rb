@@ -18,7 +18,7 @@ class Finance::ReceiveController < Finance::BaseController
         end
       end
 
-      flash[:notice] = I18n.t('receive.update.notice')
+      flash[:notice] = I18n.t('finance.receive.update.notice')
       redirect_to finance_order_index_path
     end
   end

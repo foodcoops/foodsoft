@@ -662,6 +662,15 @@ en:
         contact: Contact
         name: Name
         new_transaction: New transaction
+    receive:
+      add_article:
+        notice: Article "%{name}" was added to the order.
+      edit:
+        submit: Receive order
+      edit_articles:
+        add_article: Add article
+      update:
+        notice: Updated received article amounts for order
     update:
       notice: Invoice was updated
   foodcoop:
