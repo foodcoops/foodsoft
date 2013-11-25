@@ -20,7 +20,9 @@
             - if group_order = order.group_order(ordergroup)
               - total += group_order.price
               %td= "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
-              %td.numeric= link_to_ordering_price(order)
+              %td.numeric
+                = link_to_ordering(order, show: true) do
+                  - number_to_currency(group_order.price)
             - else
               %td{:colspan => 2}
       - if total > 0
