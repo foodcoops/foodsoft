@@ -8,9 +8,14 @@
     %td.name{title: order_title.join("\n")}= order_article.article.name
     %td #{order_article.article.unit_quantity} &times; #{order_article.article.unit}
     %td #{order_article.quantity} + #{order_article.tolerance}
-    %td= order_article.units_to_order
-    %td= order_article.units_billed
     %td
-      = form.text_field :units_received, class: 'input-mini', data: {'units-expected' => units_expected}
+      = order_article.units_to_order
+      %i.package pkg
+    %td
+      - unless order_article.units_billed.nil?
+        = order_article.units_billed
+        %i.package pkg
+    %td
+      = form.text_field :units_received, class: 'input-nano package', data: {'units-expected' => units_expected}
       / TODO add almost invisible text_field for entering single units
     %td.units_delta
