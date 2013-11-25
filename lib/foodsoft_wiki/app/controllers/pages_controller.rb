@@ -51,7 +51,7 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = current_user.pages.build(params[:page])
+    @page = Page.new(params[:page].merge({:user => current_user}))
 
     if params[:preview]
       render :action => 'new'
