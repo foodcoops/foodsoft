@@ -3,8 +3,21 @@
 = form_tag(finance_receive_path(@order), :method => :put) do
   %section#results
     = render 'edit_articles'
+
   .form-actions
-    = submit_tag t('.submit'), class: 'btn btn-primary'
-    = link_to t('ui.or_cancel'), finance_order_index_path
+    .pull-left
+      Surplus to
+      = label_tag :rest_to_tolerance, class: 'inline' do
+        = check_box_tag :rest_to_tolerance, 1, true
+        member tolerance,
+      %span{style: 'color: grey'}
+        and
+        = label_tag :rest_to_stock, class: 'inline' do
+          = check_box_tag :rest_to_stock, 1, false, disabled: true
+          stock
+
+    .pull-right
+      = submit_tag t('.submit'), class: 'btn btn-primary'
+      = link_to t('ui.or_cancel'), finance_order_index_path
 
 %p= link_to_top

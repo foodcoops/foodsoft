@@ -102,16 +102,50 @@ class OrderArticle < ActiveRecord::Base
     (units_to_order * price.unit_quantity) == group_orders_sum[:quantity] rescue false
   end
 
-  def redistribute(quantity)
-    # recompute
-    group_order_articles.each {|goa| goa.save_results! quantity }
+  # redistribute articles over ordergroups
+  #   quantity       Number of units to distribute
+  #   surplus        What to do when there are more articles than ordered quantity
+  #                    :tolerance   fill member orders' tolerance
+  #                    :stock       move to stock
+  #                    nil          nothing; for catching the remaining count
+  #   update_totals  Whether to update group_order and ordergroup totals
+  # returns array with counts for each surplus method
+  def redistribute(quantity, surplus = [:tolerance], update_totals = true)
+    qty_left = quantity
+    counts = [0] * surplus.length
+
+    if surplus.index(:tolerance).nil?
+      qty_for_members = [qty_left, self.quantity].min
+    else
+      qty_for_members = [qty_left, self.quantity+self.tolerance].min
+      counts[surplus.index(:tolerance)] = [0, qty_for_members-self.quantity].max
+    end
+
+    # Recompute
+    group_order_articles.each {|goa| goa.save_results! qty_for_members }
+    qty_left -= qty_for_members
+
+    # if there's anything left, move to stock if wanted
+    if qty_left > 0 and surplus.index(:stock)
+      counts[surplus.index(:stock)] = qty_left
+      # 1) find existing stock article with same name, unit, price
+      # 2) if not found, create new stock article
+      #      avoiding duplicate stock article names
+    end
+    if qty_left > 0 and surplus.index(nil)
+      counts[surplus.index(nil)] = qty_left
+    end
 
     # Update GroupOrder prices & Ordergroup stats
     # TODO only affected group_orders, and once after redistributing all articles
-    order.group_orders.each(&:update_price!)
-    order.ordergroups.each(&:update_stats!)
+    if update_totals
+      update_ordergroup_prices
+      order.ordergroups.each(&:update_stats!)
+    end
 
     # TODO notifications
+
+    counts
   end
 
   # Updates order_article and belongings during balancing process
@@ -173,7 +207,7 @@ class OrderArticle < ActiveRecord::Base
     # updates prices of ALL ordergroups - these are actually too many
     # in case of performance issues, update only ordergroups, which ordered this article
     # CAUTION: in after_destroy callback related records (e.g. group_order_articles) are already non-existent
-    order.group_orders.each { |go| go.update_price! }
+    order.group_orders.each(&:update_price!)
   end
 
 end

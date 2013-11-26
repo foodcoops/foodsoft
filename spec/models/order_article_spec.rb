@@ -67,21 +67,21 @@ describe OrderArticle do
 
     it 'does nothing when nothing has changed' do
       set_quantities [3,2], [1,3], [1,0]
-      oa.redistribute 6
+      expect(oa.redistribute 6, [:tolerance, nil]).to eq [1, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result).map(&:to_i)).to eq [4, 1, 1]
     end
 
     it 'works when there is nothing to distribute' do
       set_quantities [3,2], [1,3], [1,0]
-      oa.redistribute 0
+      expect(oa.redistribute 0, [:tolerance, nil]).to eq [0, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result)).to eq [0, 0, 0]
     end
 
     it 'works when quantity needs to be reduced' do
       set_quantities [3,2], [1,3], [1,0]
-      oa.redistribute 4
+      expect(oa.redistribute 4, [:tolerance, nil]).to eq [0, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result)).to eq [3, 1, 0]
     end
@@ -89,16 +89,30 @@ describe OrderArticle do
     it 'works when quantity is increased within quantity' do
       set_quantities [3,0], [2,0], [2,0]
       expect([goa1, goa2, goa3].map(&:result)).to eq [3, 2, 1]
-      oa.redistribute 7
+      expect(oa.redistribute 7, [:tolerance, nil]).to eq [0, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result).map(&:to_i)).to eq [3, 2, 2]
     end
 
     it 'works when there is just one for the first' do
       set_quantities [3,2], [1,3], [1,0]
-      oa.redistribute 1
+      expect(oa.redistribute 1, [:tolerance, nil]).to eq [0, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result)).to eq [1, 0, 0]
+    end
+
+    it 'works when there is tolerance and left-over' do
+      set_quantities [3,2], [1,1], [1,0]
+      expect(oa.redistribute 10, [:tolerance, nil]).to eq [3, 2]
+      goa_reload
+      expect([goa1, goa2, goa3].map(&:result)).to eq [5, 2, 1]
+    end
+
+    it 'works when redistributing without tolerance' do
+      set_quantities [3,2], [1,3], [1,0]
+      expect(oa.redistribute 8, [nil]).to eq [3]
+      goa_reload
+      expect([goa1, goa2, goa3].map(&:result)).to eq [3, 1, 1]
     end
 
   end
