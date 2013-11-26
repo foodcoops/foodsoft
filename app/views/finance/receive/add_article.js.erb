@@ -11,4 +11,6 @@ $('div.container-fluid').prepend(
   
   $('.ordered-articles tbody').append(article_for_adding);
   updateSort('.ordered-articles');
+
+  $('#order_articles_<%= @order_article.id %>_units_received').focus();
 })();
