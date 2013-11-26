@@ -12,8 +12,9 @@ class OrderArticle < ActiveRecord::Base
   validate :article_and_price_exist
   validates_uniqueness_of :article_id, scope: :order_id
 
-  scope :ordered, -> { where("units_to_order > 0 OR units_billed > 0 OR units_received > 0") }
-  scope :ordered_or_member, -> { includes(:group_order_articles).where("units_to_order > 0 OR units_billed > 0 OR units_received > 0 OR group_order_articles.result > 0") }
+  _ordered_sql = "units_to_order > 0 OR units_billed > 0 OR units_received > 0"
+  scope :ordered, -> { where(_ordered_sql) }
+  scope :ordered_or_member, -> { includes(:group_order_articles).where("#{_ordered_sql} OR group_order_articles.result > 0") }
 
   before_create :init_from_balancing
   after_destroy :update_ordergroup_prices
