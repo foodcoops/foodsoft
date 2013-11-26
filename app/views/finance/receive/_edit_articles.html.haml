@@ -1,6 +1,8 @@
 - content_for :javascript do
   :javascript
 
+    var new_article_data = #{articles_for_select2(@order, @order_articles.map(&:article_id)).to_json};
+
     function update_delta(input) {
       var units = $(input).val();
       var expected = $(input).data('units-expected');
@@ -32,9 +34,13 @@
         update_delta(this);
       });
 
-      $('#add_article').removeAttr('disabled').select2({
+      init_add_article('#add_article');
+    });
+
+    function init_add_article(sel) {
+      $(sel).removeAttr('disabled').select2({
         placeholder: '#{t '.add_article'}',
-        data: #{articles_for_select2(@order).to_json},
+        data: new_article_data,
         // TODO implement adding a new article, like in deliveries
       }).on('change', function(e) {
         var selectedArticle = $(e.currentTarget).select2('data');
@@ -48,11 +54,17 @@
           data: {article_id: selectedArticle.id},
           contentType: 'application/json; charset=UTF-8'
         });
+        // clear selection
         $('#add_article').select2('data', null);
+        // remove newly added item from list of items
+        new_article_data = $.grep(new_article_data, function(el, i) {
+          return el.id != selectedArticle.id;
+        });
+        init_add_article(sel)
         return true;
       });
-      
-    });
+    }
+
 
 
 %table.ordered-articles.table.table-striped.stupidtable
