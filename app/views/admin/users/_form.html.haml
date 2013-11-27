@@ -1,5 +1,25 @@
 = simple_form_for([:admin, @user]) do |f|
-  = render 'shared/user_form_fields', f: f, password_autocomplete: false
+  / use layout to pass block http://stackoverflow.com/questions/2951105#2952056
+  = render layout: 'shared/user_form_fields', locals: {f: f, password_autocomplete: false} do
+    = f.input :ordergroup, as: 'select', collection: Ordergroup.order(:name), selected: (@user.ordergroup.id rescue ''), include_blank: true
+    = f.fields_for :ordergroup do |ogf|
+      // TODO enable client-side validations for form fields only when fields are used; for now keep required false
+      = ogf.input :contact_address, wrapper_html: {style: 'display: none', class: 'for-ordergroup'}, required: false
   .form-actions
     = f.submit
     = link_to t('ui.or_cancel'), :back
+
+- content_for :javascript do
+  :javascript
+    // allow to add new ordergroup inline
+    $(function() {
+      $('select#user_ordergroup').prepend('<option value="new">#{escape_javascript '(new ordergroup)'}</option>');
+      $('select#user_ordergroup').on('change', function() {
+        var els = $('.for-ordergroup');
+        if ($('option:selected[value="new"]', this).length > 0) {
+          els.show('fast');
+        } else {
+          els.hide('fast');
+        }
+      });
+    });
