@@ -16,7 +16,7 @@
   .clearfix
 
   -# XXX only show dashboard on non-admin items
-  - unless ['home', 'group_orders', 'invites'].include?(controller.controller_name)
+  - unless ['home', 'group_orders', 'invites', 'mollie_ideal'].include?(controller.controller_name)
     .navbar
       .navbar-inner
         .container
