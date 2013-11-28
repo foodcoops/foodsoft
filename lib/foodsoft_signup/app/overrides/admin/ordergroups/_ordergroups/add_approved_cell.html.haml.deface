@@ -1,0 +1,4 @@
+/ insert_top 'tbody tr'
+%td.approved
+  - if ordergroup.approved?
+    = raw t('ui.marks.success')
