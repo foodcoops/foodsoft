@@ -45,6 +45,7 @@ module FoodsoftSignup
     if user.nil? or user.ordergroup.nil?
       c.redirect_to c.root_url, alert: I18n.t('foodsoft_signup.errors.no_ordergroup')
     elsif !user.ordergroup.approved?
+      Rails.logger.debug "access denied for page #{c.params[:controller]}\##{c.action_name}"
       c.redirect_to c.root_url, alert: I18n.t('foodsoft_signup.errors.not_approved')
     end
   end
