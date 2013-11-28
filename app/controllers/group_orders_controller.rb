@@ -31,6 +31,11 @@ class GroupOrdersController < ApplicationController
 
   def show
     @order= @group_order.order
+    @articles_grouped_by_category = @group_order.group_order_articles.ordered.
+        includes(:group_order, :order_article => {:article => :article_category}).
+        order('articles.name').
+        group_by { |a| a.order_article.article.article_category.name }.
+        sort { |a, b| a[0] <=> b[0] }
   end
 
   def edit
