@@ -32,10 +32,10 @@
               - oa = goa.order_article
               - r = {quantity: goa.quantity, tolerance: goa.tolerance, result: goa.result, sub_total: goa.total_price(oa)}
               %tr{class: cycle('even', 'odd', name: 'articles') + " order-article " + order_article_class_name(r[:quantity], r[:tolerance], r[:result])}
-                %td{style: "width:40%"}
-                  = oa.article.name
-                  - unless oa.article.note.blank?
-                    = image_tag("lamp_grey.png", {alt: t('.articles.show_note'), size: "15x16", border: "0", onmouseover: "$('#note_#{oa.id}').show();", onmouseout: "$('#note_#{oa.id}').hide();"})
+                - order_title = []
+                - order_title.append Article.human_attribute_name(:manufacturer)+': ' + oa.article.manufacturer unless oa.article.manufacturer.to_s.empty?
+                - order_title.append Article.human_attribute_name(:note)+': ' + oa.article.note unless oa.article.note.to_s.empty?
+                %td.name{style: "width:40%", title: order_title.join("\n")}= oa.article.name
                 %td #{oa.price.unit_quantity} &times; #{oa.article.unit}
                 %td= number_to_currency(oa.price.fc_price)
                 %td
