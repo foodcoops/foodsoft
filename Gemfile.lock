@@ -11,20 +11,27 @@ GIT
     i18n-js (2.1.2)
       i18n
 
-GIT
-  remote: git://github.com/technoweenie/acts_as_versioned.git
-  revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
+PATH
+  remote: lib/foodsoft_adyen
   specs:
-    acts_as_versioned (0.6.0)
-      activerecord (>= 3.0.9)
+    foodsoft_adyen (0.0.1)
+      adyen
+      jquery_mobile_rails
+      rails (~> 3.2.13)
 
 PATH
-  remote: lib/foodsoft_wiki
+  remote: lib/foodsoft_mollie
   specs:
-    foodsoft_wiki (0.0.1)
-      acts_as_versioned
-      rails (~> 3.2.15)
-      wikicloth
+    foodsoft_mollie (0.0.1)
+      ideal-mollie
+      rails (~> 3.2.13)
+
+PATH
+  remote: lib/foodsoft_signup
+  specs:
+    foodsoft_signup (0.0.1)
+      deface (~> 1.0.0)
+      rails (~> 3.2.13)
 
 GEM
   remote: https://rubygems.org/
@@ -59,6 +66,7 @@ GEM
       multi_json (~> 1.0)
     acts_as_tree (1.4.0)
       activerecord (>= 3.0.0)
+    adyen (1.4.0)
     afm (0.2.0)
     arel (3.0.3)
     better_errors (1.0.1)
@@ -101,10 +109,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    colorize (0.6.0)
     commonjs (0.2.7)
     daemons (1.1.9)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
+    deface (1.0.0)
+      colorize (>= 0.5.8)
+      nokogiri (~> 1.6.0)
+      rails (>= 3.1)
     diff-lcs (1.2.5)
     docile (1.1.0)
     erubis (2.7.0)
@@ -113,7 +126,6 @@ GEM
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
     execjs (2.0.2)
-    expression_parser (0.9.0)
     factory_girl (4.3.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.3.0)
@@ -121,6 +133,10 @@ GEM
       railties (>= 3.0.0)
     faker (1.2.0)
       i18n (~> 0.5)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     ffi (1.9.3)
     haml (4.0.4)
       tilt
@@ -138,6 +154,12 @@ GEM
     i18n (0.6.5)
     i18n-spec (0.4.0)
       iso
+    ideal-mollie (1.0.4)
+      faraday (~> 0.8.0)
+      faraday_middleware (~> 0.9.0)
+      multi_xml (~> 0.5.2)
+      nokogiri (~> 1.5)
+      rake (> 0.9.0)
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
       responders (~> 1.0.0.rc)
@@ -147,6 +169,8 @@ GEM
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery_mobile_rails (1.3.2)
+      railties (>= 3.1.0)
     json (1.8.1)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -179,6 +203,8 @@ GEM
     mini_portile (0.5.2)
     mono_logger (1.1.0)
     multi_json (1.8.2)
+    multi_xml (0.5.5)
+    multipart-post (1.2.0)
     mysql2 (0.3.14)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
@@ -337,9 +363,6 @@ GEM
     whenever (0.8.4)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
-    wikicloth (0.8.0)
-      builder
-      expression_parser
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -348,7 +371,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tree
-  acts_as_versioned!
   better_errors
   binding_of_caller
   bootstrap-datepicker-rails
@@ -364,7 +386,9 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails (~> 4.0)
   faker
-  foodsoft_wiki!
+  foodsoft_adyen!
+  foodsoft_mollie!
+  foodsoft_signup!
   haml-rails
   i18n-js!
   i18n-spec
