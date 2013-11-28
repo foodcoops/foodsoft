@@ -748,7 +748,8 @@ nl:
       title: Artikelen
     show:
       articles:
-        edit_order: Order aanpassen
+        edit_order: Bestelling aanpassen
+        no_articles: Je hebt geen artikelen in deze bestelling.
         not_ordered_msg: Je hebt nog niets bestelt
         order_closed_msg: Sorry, deze bestelling is gesloten.
         order_nopen_title: Waarbij rekening gehouden is met bestellingen van anderen
@@ -764,6 +765,7 @@ nl:
       comment: Notitie
       comments:
         title: Commentaar
+      continue: Doorgaan
       not_ordered: Je hebt niets bestelt.
       sum: Som
       title: Jouw bestelling voor %{order}

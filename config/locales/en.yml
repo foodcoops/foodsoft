@@ -768,6 +768,7 @@ en:
     show:
       articles:
         edit_order: Edit order
+        no_articles: You have no articles in this order.
         not_ordered_msg: You didn’t place an order yet
         order_closed_msg: Sorry, this order is closed.
         order_nopen_title: Considering current orders of all groups
@@ -783,6 +784,7 @@ en:
       comment: Comment
       comments:
         title: Comments
+      continue: Continue
       not_ordered: You didn’t order.
       sum: Sum
       title: Your order result for %{order}

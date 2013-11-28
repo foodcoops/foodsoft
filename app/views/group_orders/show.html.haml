@@ -4,7 +4,7 @@
 // Article box
 %section
   .column_content#result
-    - if @group_order
+    - if @group_order and @articles_grouped_by_category.count > 0
       %table.table.table-hover
         %thead
           %tr
@@ -49,11 +49,15 @@
           %tr{class: cycle('even', 'odd', name: 'articles')}
             %th{colspan: "5"}= heading_helper GroupOrder, :price
             %th= number_to_currency(@group_order.price)
-      %p{style: 'text-align: right'}
-        = link_to(t('.articles.edit_order'), edit_group_order_path(@group_order, order_id: @order.id), class: 'btn') if @order.open?
-        = link_to 'Continue', root_path(anchor: ''), class: 'btn btn-primary'
-      %br/
-      = link_to_top
+    - elsif @articles_grouped_by_category.count == 0
+      = t '.articles.no_articles'
     - else
       = t '.articles.order_closed_msg'
+  %p{style: 'text-align: right'}
+    - if @order.open?
+      = link_to_ordering @order, class: 'btn' do
+        - t '.articles.edit_order'
+    = link_to t('.continue'), root_path(anchor: ''), class: 'btn btn-primary'
+  %br/
+  = link_to_top
 
