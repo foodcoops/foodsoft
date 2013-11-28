@@ -1,7 +1,7 @@
 = simple_form_for([:admin, @user]) do |f|
   / use layout to pass block http://stackoverflow.com/questions/2951105#2952056
   = render layout: 'shared/user_form_fields', locals: {f: f} do
-    = f.fields_for (@user.ordergroup or Ordergroup.new(params[:user][:ordergroup])) do |ogf|
+    = f.fields_for (@user.ordergroup or Ordergroup.new((params[:user][:ordergroup] rescue nil))) do |ogf|
       = ogf.input :id, label: User.human_attribute_name(:ordergroup), as: 'select', collection: Ordergroup.undeleted.order(:name), selected: (@user.ordergroup.id rescue nil), include_blank: true, required: false
       // TODO enable client-side validations for form fields only when fields are used; for now keep required false
       %div.for-ordergroup{style: 'display: none'}
@@ -16,7 +16,7 @@
     // allow to add new ordergroup inline
     $(function() {
       $('select#user_ordergroup_id').prepend('<option value="new">#{escape_javascript '(new ordergroup)'}</option>');
-      if (#{params[:user][:ordergroup][:id]=='new' ? 'true' : 'false'}) {
+      if (#{(params[:user][:ordergroup][:id] rescue nil)=='new' ? 'true' : 'false'}) {
         $('option[value="new"]').attr('selected', 'selected');
         $('.for-ordergroup').show();
       }
