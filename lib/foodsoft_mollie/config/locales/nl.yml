@@ -1,0 +1,13 @@
+nl:
+  payments:
+    mollie_ideal:
+      new:
+        title: 'Betalen'
+      form:
+        amount_pay: 'Te betalen bedrag'
+        bank: 'Jouw bank'
+        submit: 'Betalen'
+      controller:
+        result:
+          notice: 'Je account is opgewaardeerd.'
+          failed: 'Betaling mislukt.'
