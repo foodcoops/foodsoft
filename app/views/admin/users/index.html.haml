@@ -1,7 +1,7 @@
 - title t '.title'
 
 - content_for :actionbar do
-  = link_to t('.new_user'), new_admin_user_path, class: 'btn btn-primary'
+  = link_to t('.new_user'), new_admin_user_path(:user => {:ordergroup => {:id => 'new'}}), class: 'btn btn-primary'
 
 - content_for :sidebar do
   %p= t('.first_paragraph', url: link_to(t('.new_users'), new_admin_user_path)).html_safe    

@@ -6,7 +6,7 @@
       // TODO enable client-side validations for form fields only when fields are used; for now keep required false
       %div.for-ordergroup{style: 'display: none'}
         = ogf.input :contact_address
-        = ogf.input :ignore_apple_restriction, :label => false, :inline_label => true
+        -#= ogf.input :ignore_apple_restriction, :label => false, :inline_label => true
   .form-actions
     = f.submit
     = link_to t('ui.or_cancel'), :back
@@ -18,6 +18,9 @@
       $('select#user_ordergroup_id').prepend('<option value="new">#{escape_javascript '(new ordergroup)'}</option>');
       if (#{(params[:user][:ordergroup][:id] rescue nil)=='new' ? 'true' : 'false'}) {
         $('option[value="new"]').attr('selected', 'selected');
+        if ($('select#user_ordergroup_id').hasClass('select2-offscreen')) {
+          $('select#user_ordergroup_id').select2('val', 'new');
+        }
         $('.for-ordergroup').show();
       }
       $('select#user_ordergroup_id').on('change', function() {
