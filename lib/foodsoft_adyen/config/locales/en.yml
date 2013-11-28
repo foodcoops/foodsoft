@@ -1,0 +1,7 @@
+en:
+  payments:
+    navigation:
+      pin: PIN terminal
+    adyen_pin:
+      index:
+        title: PIN payment

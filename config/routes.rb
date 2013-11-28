@@ -18,26 +18,19 @@ Foodsoft::Application.routes.draw do
 
     match '/login' => 'sessions#new', :as => 'login'
     match '/logout' => 'sessions#destroy', :as => 'logout'
-    get '/login/forgot_password' => 'login#forgot_password', as: :forgot_password
-    get '/login/new_password' => 'login#new_password', as: :new_password
+    get   '/login/forgot_password' => 'login#forgot_password', as: :forgot_password
+    post  '/login/reset_password' => 'login#reset_password', as: :reset_password
+    get   '/login/new_password' => 'login#new_password', as: :new_password
+    get   '/login/update_password' => 'login#update_password', as: :update_password
     match '/login/accept_invitation/:token' => 'login#accept_invitation', as: :accept_invitation
     resources :sessions, :only => [:new, :create, :destroy]
 
     ########### User specific
 
     match '/home/profile' => 'home#profile', :as => 'my_profile'
+    put   '/home/update_profile' => 'home#update_profile', :as => 'update_profile'
     match '/home/ordergroup' => 'home#ordergroup', :as => 'my_ordergroup'
     match '/home/cancel_membership' => 'home#cancel_membership', :as => 'cancel_membership'
-
-    ############ Wiki
-
-    resources :pages do
-      get :all, :on => :collection
-      get :version, :on => :member
-      get :revert, :on => :member
-    end
-    match '/wiki/:permalink' => 'pages#show', :as => 'wiki_page' # , :constraints => {:permalink => /[^\s]+/}
-    match '/wiki' => 'pages#show', :defaults => {:permalink => 'Home'}, :as => 'wiki'
 
     ############ Orders, ordering
 
@@ -190,9 +183,6 @@ Foodsoft::Application.routes.draw do
     ############## The rest
 
     resources :users, :only => [:index]
-
-    # TODO: This is very error prone. Better deactivate this catch all route
-    match ':controller(/:action(/:id))(.:format)'
 
   end # End of /:foodcoop scope
 end

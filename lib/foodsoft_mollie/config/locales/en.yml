@@ -1,0 +1,13 @@
+en:
+  payments:
+    mollie_ideal:
+      new:
+        title: 'Credit your account'
+      form:
+        amount_pay: 'Amount to pay'
+        bank: 'Your bank'
+        submit: 'Pay at your bank'
+      controller:
+        result:
+          notice: 'Your account has been credited.'
+          failed: 'Payment failed.'

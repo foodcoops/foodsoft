@@ -9,10 +9,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:nick], params[:password])
     if user
-      session[:user_id] = user.id
-      session[:scope] = FoodsoftConfig.scope  # Save scope in session to not allow switching between foodcoops with one account
-      session[:locale] = user.locale
-
+      login user
       if session[:return_to].present?
         redirect_to_url = session[:return_to]
         session[:return_to] = nil
@@ -27,7 +24,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    logout
     if defined? FoodsoftConfig[:homepage]
       redirect_to FoodsoftConfig[:homepage]
     else

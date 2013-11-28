@@ -2,7 +2,7 @@ module TasksHelper
 
   def task_assignments(task)
     task.assignments.map do |ass|
-      content_tag :span, ass.user.nick, :class => (ass.accepted? ? 'accepted' : 'unaccepted')
+      content_tag :span, show_user(ass.user), :class => (ass.accepted? ? 'accepted' : 'unaccepted')
     end.join(", ").html_safe
   end
 

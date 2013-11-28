@@ -110,7 +110,7 @@ class Article < ActiveRecord::Base
   
   # to get the correspondent shared article
   def shared_article
-    @shared_article ||= self.supplier.shared_supplier.shared_articles.find_by_number(self.order_number)
+    @shared_article ||= self.supplier.shared_supplier.shared_articles.find_by_number(self.order_number) rescue nil
   end
   
   # convert units in foodcoop-size

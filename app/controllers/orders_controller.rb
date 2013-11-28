@@ -54,6 +54,9 @@ class OrdersController < ApplicationController
               end
         send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf'
       end
+      format.text do
+        send_data text_fax_template, filename: @order.name+'.txt', type: 'text/plain'
+      end
     end
   end
 
@@ -107,12 +110,14 @@ class OrdersController < ApplicationController
   rescue => error
     redirect_to orders_url, alert: I18n.t('errors.general_msg', :msg => error.message)
   end
+
+  protected
   
   # Renders the fax-text-file
   # e.g. for easier use with online-fax-software, which don't accept pdf-files
+  # TODO move to text template
   def text_fax_template
-    order = Order.find(params[:id])
-    supplier = order.supplier
+    supplier = @order.supplier
     contact = FoodsoftConfig[:contact].symbolize_keys
     text = I18n.t('orders.fax.heading', :name => FoodsoftConfig[:name])
     text += "\n#{Supplier.human_attribute_name(:customer_number)}: #{supplier.customer_number}" unless supplier.customer_number.blank?
@@ -123,15 +128,13 @@ class OrdersController < ApplicationController
     text += "****** " + I18n.t('orders.fax.articles') + "\n\n"
     text += I18n.t('orders.fax.number') + "   " + I18n.t('orders.fax.amount') + "   " + I18n.t('orders.fax.name') + "\n"
     # now display all ordered articles
-    order.order_articles.ordered.all(:include => [:article, :article_price]).each do |oa|
+    @order.order_articles.ordered.all(:include => [:article, :article_price]).each do |oa|
       number = oa.article.order_number
       (8 - number.size).times { number += " " }
       quantity = oa.units_to_order.to_i.to_s
       quantity = " " + quantity if quantity.size < 2
       text += "#{number}   #{quantity}    #{oa.article.name}\n"
     end
-    send_data text,
-                :type => 'text/plain; charset=utf-8; header=present',
-                :disposition => "attachment; filename=#{order.name}"
+    text
   end
 end

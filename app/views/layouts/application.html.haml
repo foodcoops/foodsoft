@@ -3,7 +3,7 @@
     %li= link_to t('navigation.dashboard'), root_path(anchor: '')
     %li.dropdown
       %a.dropdown-toggle(data-toggle="dropdown" href="#")
-        = current_user.name
+        = show_user current_user
         %b.caret
       %ul.dropdown-menu
         %li= link_to t('.profile'), my_profile_path

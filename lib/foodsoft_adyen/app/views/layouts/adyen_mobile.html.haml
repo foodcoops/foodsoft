@@ -1,0 +1,18 @@
+- content_for :head do
+  = stylesheet_link_tag "payments/adyen_mobile", :media => "all"
+
+- content_for :javascript do
+  = javascript_include_tag "payments/adyen_mobile"
+
+= render layout: 'layouts/header' do
+  %div{:data => {:role => :page}}
+
+    - if show_title?
+      %div{:data => {:role => :header, :position => :fixed}}
+        %h1= yield(:title)
+
+    %div#messages
+      = bootstrap_flash
+
+    %div{:data => {:role => :content}}
+      = yield

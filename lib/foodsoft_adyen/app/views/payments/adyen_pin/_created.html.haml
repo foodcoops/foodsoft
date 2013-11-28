@@ -1,0 +1,21 @@
+- if params[:result] == 'APPROVED'
+  %h3.ui-title Payment done
+  %p Thanks! Your account will be updated in a couple of minutes.
+
+- elsif params[:result] == 'CANCELLED'
+  %h3.ui-title Payment cancelled
+  %p The transaction was cancelled. #{params[:cancelMessage]}
+
+- elsif params[:result] == 'DECLINED'
+  %h3.ui-title Payment declined
+  %p I'm sorry, it didn't work out. #{params[:declineMessage]}
+
+- else
+  %h3.ui-title Payment failed
+  %p Something went wrong, sorry! #{params[:errorMessage]}
+
+
+= link_to t('ui.close'), '#', :data => { :role => :button, :rel => :back, :theme => 'b' }
+- if params[:result] != 'APPROVED' and @ordergroup
+  = link_to 'Retry', new_payments_adyen_pin_path(:ordergroup_id => @ordergroup.id), :data => {:role => :button, :ajax => :false}
+

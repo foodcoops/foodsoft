@@ -1,9 +1,9 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t '.supplier'
-      %th= t '.ending'
-      %th= t '.sum'
+      %th= heading_helper Order, :name
+      %th= heading_helper Order, :ends
+      %th= heading_helper GroupOrder, :price
   %tbody
     - total = 0
     - for order in orders

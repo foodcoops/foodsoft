@@ -1,0 +1,8 @@
+-ident = 20 * level
+%tr
+  %td{:style => "padding-left: #{ident}px"}
+    = link_to page.title, wiki_page_path(page.permalink)
+  %td #{show_user page.user} (#{format_datetime_timespec(page.updated_at, t('.date_format'))})
+-if siteMap == 1
+  -for child in page.children.all
+    = render :partial => 'page_list_item', :locals => {:page => child, :level => level+1, :siteMap => 1}

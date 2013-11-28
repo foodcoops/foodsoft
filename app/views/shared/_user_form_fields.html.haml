@@ -1,10 +1,17 @@
-= f.input :nick
 = f.input :first_name
 = f.input :last_name
 = f.input :email
+/ need :required because :use_nil option to user model validators break the required mark
+= f.input :nick, required: true if FoodsoftConfig[:use_nick]
+/ Don't autocomplete passwords. When editing one's own profile page, it only fills
+/ in one of the two passwords fields, which is annoying when editing other preferences.
+/ When an admin edits another user's profile, this will fill in his own password,
+/ which is dangerous.
+= f.input :password, :required => f.object.new_record?, input_html: {autocomplete: 'off'}
+= f.input :password_confirmation, :required => f.object.new_record?, input_html: {autocomplete: 'off'}
 = f.input :phone
-= f.input :password, :required => f.object.new_record?
-= f.input :password_confirmation
+
+= yield f if block_given?
 
 = f.simple_fields_for :settings_attributes do |s|
   = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
@@ -19,7 +26,8 @@
             = t 'simple_form.labels.settings.settings_group.privacy'
         = profile.input 'phone_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['phone_is_public'] }
         = profile.input 'email_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['email_is_public'] }
-        = profile.input 'name_is_public',   as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }
+        - if FoodsoftConfig[:use_nick]
+          = profile.input 'name_is_public', as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }
   
     .settings-group
       -#%div{class: 'control-group'}

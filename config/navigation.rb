@@ -3,6 +3,11 @@
 
 SimpleNavigation::Configuration.run do |navigation|
 
+  # allow engines to add to the menu - https://gist.github.com/mjtko/4873ee0c112b6bd646f8
+  engines = Rails.application.railties.engines.select { |e| e.respond_to?(:navigation) }
+  # to include an engine but keep it from modifying the menu:
+  #engines.reject! { |e| e.instance_of? FoodsoftMyplugin::Engine }
+
   navigation.items do |primary|
     primary.dom_class = 'nav'
 
@@ -33,7 +38,10 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :categories, I18n.t('navigation.articles.categories'), article_categories_path, id: nil, if: Proc.new { current_user.role_admin? }
       subnav.item :finance_home, 'Financial overview', finance_root_path, if: Proc.new { current_user.role_finance? }
       subnav.item :invoices, I18n.t('navigation.finances.invoices'), finance_invoices_path, id: nil, if: Proc.new { current_user.role_finance? }
+      subnav.item :adyen_pin, I18n.t('payments.navigation.pin'), payments_adyen_pin_path if defined? FoodsoftAdyen
     end
+
+    engines.each { |e| e.navigation(primary, self) }
   end
 
 end

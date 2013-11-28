@@ -93,6 +93,22 @@ $(function() {
         $(this).parents('form').submit();
     });
 
+    // The autocomplete attribute is used for both autocompletion and storing
+    // for passwords, it's nice to store it when editing one's own profile,
+    // but never autocomplete. When the data-autocomplete attribute is 'off',
+    // any autocompleted values are removed again.
+    // This is only implemented for passwords.
+    $('input[type="password"][autocomplete="off"]').each(function() {
+      // add dummy password field for autocompletion after losing username field focus
+      $(this).before('<input type="password" name="_x_autocomplete_workaround" style="display:none"/>');
+      // make sure we don't receive the remembered password by accident
+      $(this).parentsUntil('form').on('submit', function(ev) {
+        $('input[name="_x_autocomplete_workaround"]').val('');
+      });
+      // if the browser already filled it in here, clear the password
+      $(this).val('');
+    });
+
     $(document).on('change', '[data-redirect-to]', function() {
         var newLocation = $(this).children(':selected').val();
         if (newLocation != "") {

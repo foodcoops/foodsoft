@@ -22,6 +22,7 @@ en:
         unit: Unit
         unit_quantity: Unit quantity
         unit_quantity_short: U.Q.
+        units: Units
       article_category:
         description: Description
         name: Name
@@ -30,11 +31,20 @@ en:
         note: Note
         supplier: Supplier
       financial_transaction:
-        amount: amount
-        note: note
+        amount: Amount
+        created_on: Date
+        note: Note
+        ordergroup: Ordergroup
+        user: Entered by
+      group_order:
+        price: Order sum
+        updated_by: Last ordered by
       group_order_article:
         ordergroup_id: Ordergroup
+        quantity: Amount
         result: Amount
+        tolerance: Tolerance
+        total_price: Sum
       invoice:
         amount: Amount
         date: Billing date
@@ -54,15 +64,23 @@ en:
         sent_to_all: Send to all members
         subject: Subject
       order:
+        closed_by: Settled by
+        created_by: Created by
         ends: Ends at
+        name: Supplier
         note: Note
         starts: Starts at
+        status: Status
       order_article:
+        missing_units: Missing units
+        missing_units_short: Missing
         units_to_order: Amount of units
         update_current_price: Globally update current price
       order_comment:
         text: Add comment to this order ...
       ordergroup:
+        account_balance: Account balance
+        available_funds: Available credit
         contact_address: Address
         contact_person: Contact person
         contact_phone: Phone
@@ -75,10 +93,10 @@ en:
         parent_id: Parent page
         title: Title
       stock_article:
+        available: Available
         price: Price
-        quantity: Quantity
         quantity_available: Available quantity
-        supplier: Supplier
+        quantity_available_short: Avail.
       stock_taking:
         date: Date
         note: Note
@@ -92,6 +110,7 @@ en:
         fax: Fax
         is_subscribed: subscribed?
         min_order_quantity: Minimum order quantity
+        min_order_quantity_short: Min. quantity
         name: Name
         note: Note
         order_howto: How to order
@@ -416,7 +435,7 @@ en:
       article: Article
       price: Netprice
       sum: Sum
-      sum_diff: Gross - adjusted invoice ammount
+      sum_diff: Gross - adjusted invoice amount
       sum_gross: Gross sum
       sum_net: Net sum
       title: Show delivery
@@ -603,21 +622,13 @@ en:
         type_cash: cash delivery day
         type_other: other (add note)
       new_collection:
-        amount: Amount
         new_ordergroup: Add new order group
-        note: Note
-        ordergroup: Order group
         save: Save transaction
-        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement
+        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement.
         title: Updating more accounts
       ordergroup:
         remove: Remove
         remove_group: Remove group
-      transactions:
-        amount: Amount
-        date: Date
-        note: Note
-        who: Who
     group_order_articles:
       form:
         amount_change_for: Change amount for %{article}
@@ -657,7 +668,7 @@ en:
         title: Invoice %{number}
     order_articles:
       edit:
-        stock_alert: 
+        stock_alert: The price of stock articles cannot be changed!
         title: Update article
       new:
         title: Add delivered article to order
@@ -721,30 +732,14 @@ en:
       notfound: Incorrect URL, this is not your order.
     form:
       action_save: Save order
-      amount: Amount
-      available: Available
-      available_funds: Available credits
-      created_by: Created by
-      ending: End
-      funds: Credit
-      last_update: Last ordered
-      manufacturer: Manufacturer
-      min_quantity: Minimum quantity
-      name: Name
       new_funds: New account balance
-      note: Note
       price: Price
       reset_article_search: Reset search
       search_article: Search for article...
-      sum: Sum
       sum_amount: Current amount
-      supplier: Supplier
       title: Orders
-      tolerance: Tolerance
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
-      unit: Unit
-      unit_missing: Missing units
       units: Units
       units_full: Filled units
       units_total: Total units
@@ -756,9 +751,7 @@ en:
         title: Unsettled orders
         total_sum: Total sum
       funds:
-        account_balance: Account balance
-        available_funds: Available credit
-        finished_orders: unsettled orders
+        finished_orders: Unsettled orders
         open_orders: Current orders
         title: Credit
       title: Orders overview
@@ -772,14 +765,9 @@ en:
       title_note: This supplier has a minimum order quantity of %{amount}.
     order:
       title: Articles
-    orders:
-      ending: End
-      sum: Sum
-      supplier: Suppliers
     show:
       articles:
         edit_order: Edit order
-        name: Name
         not_ordered_msg: You didn’t place an order yet
         order_closed_msg: Sorry, this order is closed.
         order_nopen_title: Considering current orders of all groups
@@ -789,21 +777,14 @@ en:
         ordered: Ordered
         ordered_title: Amount + tolerance
         show_hide: Show/hide articles not ordered
-        sum: Sum
+        show_note: Show note
         title: Article overview
-        total_price: Total price
         unit_price: Unit price
-        units: Units
-      closed_by: Settled by %{user}
       comment: Comment
       comments:
         title: Comments
-      ending: End
       not_ordered: You didn’t order.
-      note: Note
-      order_sum: Order sum
       sum: Sum
-      supplier: Suppliers
       title: Your order result for %{order}
     switch_order:
       open_remaining: ! '%{remaining} remaining'
@@ -879,10 +860,7 @@ en:
     no_ordergroups: You are unfortunately not a member of an ordergroup.
     ordergroup:
       account_summary: Account Statement
-      description: description
-      funds: ! 'Available credit:'
       invite: Invite a new Person
-      people: People
       search: Search ...
       title: My ordergroup
     ordergroup_cancelled: You cancelled membership of the group %{group}.
@@ -932,8 +910,6 @@ en:
     ordering:
       confirm_change: Modifications to this order will be lost when you change the order. Do you want to lose the changes you made and continue?
   layouts:
-    application1:
-      title: Foodsoft - %{title}
     email:
       footer: ! '--
 
@@ -1183,10 +1159,8 @@ en:
   orders:
     articles:
       article_count: ! 'Ordered articles:'
-      name: Name
       prices: Net/gross price
       prices_sum: ! 'Sum (net/gross price):'
-      unit_quantity: Unit quantity
       units_full: Full units
       units_ordered: Units ordered
     create:
@@ -1205,26 +1179,18 @@ en:
       notice: The order has been closed.
     form:
       ignore_warnings: Ignore warnings
-      name: Name
-      note: Note
-      origin: Origin
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
-      supplier: Producer
       title: Article
-      unit_quantity: Unit quantity
     index:
       action_end: Close
       confirm_delete: Do you really want to delete the order?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
       ended_orders: Closed orders
-      ending: End
       new_order: Create new order
       no_open_orders: There are currently no open orders.
-      note: Note
       open_orders: Current orders
-      supplier: Supplier
       title: Manage orders
     model:
       error_closed: Order was already settled
@@ -1236,17 +1202,11 @@ en:
       warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/ purchased within this open stock order. If you uncheck them here, all existing orders/ purchases of these articles will be deleted and it will not be accounted for them.'
     new:
       title: Create new order
-    orders:
-      ending: End
-      start: Start
-      status: Status
-      supplier: Supplier
     show:
       action_end: Close!
       amounts: ! 'Net/gross sum:'
       articles: Article overview
       articles_ordered: ! 'Ordered articles:'
-      begin: ! 'Begin:'
       comments:
         title: Comments
       comments_link: Comments
@@ -1254,7 +1214,6 @@ en:
       confirm_end: ! 'Do you really want to close the order %{order}?
 
         There is no going back.'
-      created_by: ! 'Created by:'
       download:
         article_pdf: Article PDF
         download_file: Download file
@@ -1263,12 +1222,9 @@ en:
         group_pdf: Group PDF
         matrix_pdf: Matrix PDF
         title: Download
-      ending: ! 'End:'
       group_orders: ! 'Group orders:'
-      note: ! 'Note:'
       sort_article: Sorted in articles
       sort_group: Sorted in groups
-      supplier: ! 'Supplier:'
       title: ! 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
     state:
@@ -1308,7 +1264,7 @@ en:
         headings: Heading
         italic: italic
         list_item_1: First list item
-        list_item_2: Secound list item
+        list_item_2: Second list item
         noformat: No wiki-formatting
         ordered_list: Numbered list
         section_block: Block formatting
@@ -1356,9 +1312,7 @@ en:
       login: Login
       nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
-      password: Password
       title: Foodsoft login
-      user: User
   shared:
     articles:
       ordered: Ordered
@@ -1392,35 +1346,10 @@ en:
       search_user: Search user
       title: Weekly jobs
       user_not_found: No user found
-    loginInfo:
-      edit_profile: Edit profile
-      feedback:
-        desc: Found a bug? Suggestions? Review?
-        title: Feedback
-      help: Help
-      homepage_title: Visit Foodcoop Homepage
-      logout: Logout
-      profile: Profile
-    memberships:
-      current_members:
-        drop: remove
-        no_members: ! '%{group} has no members.'
-      members:
-        already_members: Are already members
-        desc: Here you can manage members of the group or invite a new Foodcoop-member to the group %{link}.
-        invite: invite
-        invite_someone: Invite someone
-        no_members_yet: Are not members yet
-        title: Members of %{group}
-      non_members:
-        add: add
     open_orders:
-      ending: Ending
       no_open_orders: There are no current orders
       not_enough_apples: Attention your order group has too few apple points to place an order!
-      supplier: Supplier
       title: Current orders
-      total: Sum
       total_sum: Total sum
       who_ordered: Who ordered?
     workgroup_members:
@@ -1441,7 +1370,6 @@ en:
           name: Please modify
         edit_stock_article:
           price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
-        supplier: 
       supplier:
         min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
       task:

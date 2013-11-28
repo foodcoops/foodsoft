@@ -23,7 +23,7 @@ class Ordergroup < Group
     "#{contact_phone} (#{contact_person})"
   end
   def non_members
-    User.all(:order => 'nick').reject { |u| (users.include?(u) || u.ordergroup) }
+    User.natural_order.all.reject { |u| (users.include?(u) || u.ordergroup) }
   end
 
   def value_of_open_orders(exclude = nil)
@@ -101,13 +101,21 @@ class Ordergroup < Group
   def account_updated
     financial_transactions.last.try(:created_on) || created_on
   end
+
+  def self.build_from_user(user, attributes = {})
+    og = Ordergroup.new({:name => name_from_user(user), :user_ids => [user.id]})
+    og.contact_person = user.name unless user.name.blank?
+    og.contact_phone = user.phone unless user.phone.blank?
+    og.update_attributes attributes
+    og
+  end
   
   private
 
   # Make sure, that a user can only be in one ordergroup
   def uniqueness_of_members
     users.each do |user|
-      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.nick) if user.groups.where(:type => 'Ordergroup').size > 1
+      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.display) if user.groups.where(:type => 'Ordergroup').size > 1
     end
   end
 
@@ -119,6 +127,17 @@ class Ordergroup < Group
       message = group.first.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message
     end
+  end
+
+  # generate an unique ordergroup name from a user
+  def self.name_from_user(user)
+    name = user.display
+    suffix = 2
+    while Ordergroup.where(name: name).exists? do
+      name = "#{user.display} (#{suffix})"
+      suffix += 1
+    end
+    name
   end
  
 end

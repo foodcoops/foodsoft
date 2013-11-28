@@ -7,16 +7,16 @@
 // Order summary
 .well
   %dl.dl-horizontal
-    %dt= t '.supplier'
+    %dt= heading_helper(Order, :name) + ':'
     %dd= @order.name
     - if @note.present?
-      %dt= t '.note'
+      %dt= heading_helper(Order, :note) + ':'
       %dd= @order.note
-    %dt= t '.created_by'
-    %dd= link_to_user_message_if_valid(@order.created_by)
-    %dt= t '.begin'
+    %dt= heading_helper(Order, :created_by) + ':'
+    %dd= show_user_link(@order.created_by)
+    %dt= heading_helper(Order, :starts) + ':'
     %dd= format_time(@order.starts)
-    %dt= t '.ending'
+    %dt= heading_helper(Order, :ends) + ':'
     %dd= format_time(@order.ends)
     %dt= t '.group_orders'
     %dd #{@order.group_orders.count} (#{@order.group_orders.includes(:ordergroup).all.map {|g| g.ordergroup.name}.join(', ')})
@@ -50,7 +50,7 @@
         %li= order_pdf(@order, :articles, t('.download.article_pdf'))
         %li= order_pdf(@order, :matrix, t('.download.matrix_pdf'))
         %li= order_pdf(@order, :fax, t('.download.fax_pdf'))
-        %li= link_to t('.download.fax_txt'), {action: 'text_fax_template', id: @order }, {title: t('.download.download_file')}
+        %li= link_to t('.download.fax_txt'), order_path(@order, format: :txt), {title: t('.download.download_file')}
 
 %section#articles_table
   = render 'articles', order: @order

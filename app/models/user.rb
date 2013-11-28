@@ -8,32 +8,38 @@ class User < ActiveRecord::Base
   
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
-  #has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
-  def ordergroup
-    Ordergroup.joins(:memberships).where(memberships: {user_id: self.id}).first
-  end
 
   has_many :workgroups, :through => :memberships, :source => :group, :class_name => "Workgroup"
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments
   has_many :send_messages, :class_name => "Message", :foreign_key => "sender_id"
-  has_many :pages, :foreign_key => 'updated_by'
   has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
-  
+
+  # we cannot use has_one because user is STI and there's both a has_one and has_many relation
+  #has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
+  # workaround using ordergroup and ordergroup= (below)
+  def ordergroup
+    groups.where(:type => 'Ordergroup').first
+  end
+
   attr_accessor :password, :settings_attributes
   
   # makes the current_user (logged-in-user) available in models
   cattr_accessor :current_user
   
-  validates_presence_of :nick, :email
+  validates_presence_of :email
   validates_presence_of :password, :on => :create
-  validates_length_of :nick, :in => 2..25
-  validates_uniqueness_of :nick, :case_sensitive => false
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_uniqueness_of :email, :case_sensitive => false
   validates_length_of :first_name, :in => 2..50
   validates_confirmation_of :password
   validates_length_of :password, :in => 5..25, :allow_blank => true
+  # allow nick to be nil depending on foodcoop config
+  # TODO Rails 4 may have a more beautiful way
+  #   http://stackoverflow.com/questions/19845910/conditional-allow-nil-part-of-validation
+  validates_length_of :nick, :in => 2..25, :allow_nil => true, :unless => Proc.new { FoodsoftConfig[:use_nick] }
+  validates_length_of :nick, :in => 2..25, :allow_nil => false, :if => Proc.new { FoodsoftConfig[:use_nick] }
+  validates_uniqueness_of :nick, :case_sensitive => false, :allow_nil => true # allow_nil in length validation
 
   before_validation :set_password
   after_initialize do
@@ -55,6 +61,22 @@ class User < ActiveRecord::Base
       end
       self.settings.merge!(key, value)
     end
+  end
+
+  # sorted by display name
+  def self.natural_order
+    # would be sensible to match ApplicationController#show_user
+    if FoodsoftConfig[:use_nick]
+      order('nick ASC')
+    else
+      order('first_name ASC, last_name ASC')
+    end
+  end
+
+  # search by (nick)name
+  def self.natural_search(q)
+    # we always use both nick and name, to make sure a user is found
+    where("CONCAT(first_name, CONCAT(' ', last_name)) LIKE :q OR nick LIKE :q", q: "%#{q}%")
   end
   
   def locale
@@ -133,9 +155,8 @@ class User < ActiveRecord::Base
      self.groups.find(:all, :conditions => {:type => ""})
   end
 
-  def self.authenticate(nick, password)
-    user = find_by_nick(nick)
-    user or user = where('nick LIKE ?', nick)
+  def self.authenticate(login, password)
+    user = (find_by_nick(login) or find_by_email(login))
     if user && user.has_password(password)
       user
     else
@@ -143,8 +164,41 @@ class User < ActiveRecord::Base
     end
   end
 
-  def nick_with_ordergroup
-    "#{nick} (#{ordergroup.try(:name)})"
+  # XXX this is view-related; need to move out things like token_attributes
+  #     then this can be removed
+  def display
+    # would be sensible to match ApplicationHelper#show_user
+    if FoodsoftConfig[:use_nick]
+      nick.nil? ? I18n.t('helpers.application.nick_fallback') : nick
+    else
+      name
+    end
+  end
+
+  def token_attributes
+    # would be sensible to match ApplicationController#show_user
+    #   this should not be part of the model anyway
+    {:id => id, :name => "#{display} (#{ordergroup.try(:name)})"}
+  end
+
+  # for nested form with ordergroup
+  def ordergroup=(attributes)
+    if attributes[:id].blank? or attributes[:id] == 'new'
+      # dissociate the existing ordergroup
+      #   deleting the association doesn't work, as it sets the association's group to zero
+      ordergroup.user_ids = ordergroup.user_ids.reject {|i| i==self.id} if ordergroup
+      return if attributes[:id].blank?
+    end
+    if attributes[:id] == 'new'
+      # create a new ordergroup
+      Ordergroup.build_from_user(self, attributes.reject {|i| i=='id'})
+    elsif ordergroup.nil?
+      # create a new relation
+      Membership.create(user_id: self.id, group_id: attributes[:id])
+    elsif attributes[:id] != ordergroup.id
+      # update relation
+      ordergroup.memberships.first.update_attributes(group_id: attributes[:id])
+    end
   end
 
 end
