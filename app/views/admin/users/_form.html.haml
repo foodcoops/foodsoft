@@ -16,8 +16,10 @@
     // allow to add new ordergroup inline
     $(function() {
       $('select#user_ordergroup_id').prepend('<option value="new">#{escape_javascript '(new ordergroup)'}</option>');
-      if (#{params[:user][:ordergroup][:id]=='new' ? 'true' : 'false'})
+      if (#{params[:user][:ordergroup][:id]=='new' ? 'true' : 'false'}) {
         $('option[value="new"]').attr('selected', 'selected');
+        $('.for-ordergroup').show();
+      }
       $('select#user_ordergroup_id').on('change', function() {
         var els = $('.for-ordergroup');
         if ($('option:selected[value="new"]', this).length > 0) {
@@ -25,5 +27,5 @@
         } else {
           els.hide('fast');
         }
-      }).change();
+      });
     });
