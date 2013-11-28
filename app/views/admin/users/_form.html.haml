@@ -1,10 +1,12 @@
 = simple_form_for([:admin, @user]) do |f|
   / use layout to pass block http://stackoverflow.com/questions/2951105#2952056
   = render layout: 'shared/user_form_fields', locals: {f: f} do
-    = f.input :ordergroup, as: 'select', collection: Ordergroup.order(:name), selected: (@user.ordergroup.id rescue ''), include_blank: true
-    = f.fields_for :ordergroup do |ogf|
+    = f.fields_for (@user.ordergroup or Ordergroup.new) do |ogf|
+      = ogf.input :id, label: User.human_attribute_name(:ordergroup), as: 'select', collection: Ordergroup.undeleted.order(:name), selected: (@user.ordergroup.id rescue nil), include_blank: true, required: false
       // TODO enable client-side validations for form fields only when fields are used; for now keep required false
-      = ogf.input :contact_address, wrapper_html: {style: 'display: none', class: 'for-ordergroup'}, required: false
+      %div.for-ordergroup{style: 'display: none'}
+        = ogf.input :contact_address
+        = ogf.input :ignore_apple_restriction, :label => false, :inline_label => true
   .form-actions
     = f.submit
     = link_to t('ui.or_cancel'), :back
@@ -13,8 +15,8 @@
   :javascript
     // allow to add new ordergroup inline
     $(function() {
-      $('select#user_ordergroup').prepend('<option value="new">#{escape_javascript '(new ordergroup)'}</option>');
-      $('select#user_ordergroup').on('change', function() {
+      $('select#user_ordergroup_id').prepend('<option value="new">#{escape_javascript '(new ordergroup)'}</option>');
+      $('select#user_ordergroup_id').on('change', function() {
         var els = $('.for-ordergroup');
         if ($('option:selected[value="new"]', this).length > 0) {
           els.show('fast');

@@ -96,6 +96,14 @@ class Ordergroup < Group
   def account_updated
     financial_transactions.last.try(:created_on) || created_on
   end
+
+  def self.build_from_user(user, attributes = {})
+    og = Ordergroup.new({:name => name_from_user(user), :user_ids => [user.id]})
+    og.contact_person = user.name unless user.name.blank?
+    og.contact_phone = user.phone unless user.phone.blank?
+    og.update_attributes attributes
+    og
+  end
   
   private
 
@@ -114,6 +122,17 @@ class Ordergroup < Group
       message = group.first.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message
     end
+  end
+
+  # generate an unique ordergroup name from a user
+  def self.name_from_user(user)
+    name = user.display
+    suffix = 2
+    while Ordergroup.where(name: name).exists? do
+      name = "#{user.display} (#{suffix})"
+      suffix += 1
+    end
+    name
   end
  
 end
