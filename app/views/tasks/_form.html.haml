@@ -3,7 +3,7 @@
     $(function() {
       $("#task_user_list").select2_remote({
         remote_url: '#{users_path(:format => :json)}',
-        remote_init: #{search_data(@task.users, proc {|u| u.nick_with_ordergroup})[:results].to_json },
+        remote_init: #{search_data(@task.users, proc {|u| show_user u})[:results].to_json },
       });
     });
 

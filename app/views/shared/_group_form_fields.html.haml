@@ -27,7 +27,7 @@
       $("##{f.object.class.to_s.underscore}_user_tokens").select2_remote({
         tags: true,
         remote_url: '#{users_path(:format => :json)}',
-        remote_init: #{search_data(f.object.users, proc {|u| u.nick_with_ordergroup})[:results].to_json}
+        remote_init: #{search_data(f.object.users, proc {|u| show_user u})[:results].to_json}
       });
     });
 
