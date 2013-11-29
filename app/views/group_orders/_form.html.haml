@@ -48,13 +48,13 @@
         - if @order.stockit?
           %th{style: 'width:120px'}= heading_helper StockArticle, :supplier
         %th{style: "width:13px;"}
-        %th{style: "width:4.5em;"}= t '.price'
         %th{style: "width:4.5em;"}= heading_helper Article, :unit
+        %th{style: "width:4.5em;"}= t '.price'
         - if @order.stockit?
           %th(style="width:20px")= heading_helper StockArticle, :available
           %th#col_required= heading_helper GroupOrderArticle, :quantity
         - elsif has_tolerance
-          %th{style: "width:70px;"}= heading_helper OrderArticle, :missing_units, short: true
+          %th{colspan: 2}= 'All members' #heading_helper OrderArticle, :missing_units, short: true
           %th#col_required= heading_helper GroupOrderArticle, :quantity
           %th#col_tolerance= heading_helper GroupOrderArticle, :tolerance
         - else
@@ -67,7 +67,7 @@
           %td
             = category
             %i.icon-tag
-          %td{colspan: "9"}
+          %td{colspan: "10"}
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
             - order_title = []
@@ -77,13 +77,25 @@
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15
             %td= h order_article.article.origin
-            %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
             %td= order_article.article.unit
-            %td
-              - if @order.stockit?
-                = @ordering_data[:order_articles][order_article.id][:quantity_available]
-              - elsif @ordering_data[:order_articles][order_article.id][:unit] > 1
-                %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
+            %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
+            %td{style: 'width: 2em; text-align: right; padding-right: 0;'}
+              %span{id: "total_units_#{order_article.id}"}= order_article.units_to_order * order_article.price.unit_quantity
+              %span{style: 'width: 0.5em; display: inline-block; color: #888;'}= @ordering_data[:order_articles][order_article.id][:unit] > 1 ? '+' : '&nbsp;'.html_safe
+            - if @order.stockit?
+              %td= @ordering_data[:order_articles][order_article.id][:quantity_available]
+            - elsif @ordering_data[:order_articles][order_article.id][:unit] > 1
+              %td{style: 'width: 7em'}
+                / TODO compute progress bar lengths here as well
+                - content_for :javascript do
+                  :javascript
+                    $(function() { update(#{order_article.id}, #{@ordering_data[:order_articles][order_article.id][:quantity]}, #{@ordering_data[:order_articles][order_article.id][:tolerance]}); });
+                .progress{id: "progress_#{order_article.id}", style: 'margin: 0'}
+                  .bar{style: "width: 0%; color: #ccf; text-shadow: none;"}
+                  .bar{style: "width: 0%; background: inherit; color: #ddd; text-shadow: none;"}
+            - else
+              - if has_tolerance
+                %td
 
             %td.quantity
               -# we consider 1(used) + 2(unused) quantity display to be confusing; just show total requested

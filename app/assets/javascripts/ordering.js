@@ -119,12 +119,24 @@ function update(item, quantity, tolerance) {
     }
     $('#price_' + item + '_display').html(I18n.l("currency", itemTotal[item]));
 
-    // update missing units
-    var missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
-    if (missing_units < 0) {
-        missing_units = 0;
+    // update unit counters
+    var total_quantity = quantityOthers[item] + Number(quantity);
+    var total_tolerance = toleranceOthers[item] + Number(tolerance);
+
+    // see also OrderArticle#calculate_units_to_order and OrderArticle#missing_units
+    var total_units = Math.floor(total_quantity/unit[item]);
+    var remainder = total_quantity % unit[item];
+    var tolerance_available = total_tolerance;
+    if (remainder > 0 && (remainder + total_tolerance) >= unit[item]) {
+      total_units += 1
+      tolerance_available -= unit[item];
     }
-    $('#missing_units_' + item).html(String(missing_units));
+    var progress_units = Math.min(unit[item], remainder + tolerance_available)
+
+    $('#total_units_' + item).html(String(total_units*unit[item]));
+    // TODO order of updating progress depends on whether increasing or decreasing
+    $('#progress_'+item+' .bar:nth-child(1)').width(String(Math.floor(100*progress_units/unit[item]))+'%').html(String(remainder+tolerance_available));
+    $('#progress_'+item+' .bar:nth-child(2)').width(String(Math.floor(100-100*progress_units/unit[item]))+'%').html(String(unit[item]-progress_units));
 
     // update balance
     updateBalance();
