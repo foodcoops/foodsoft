@@ -26,7 +26,7 @@
           } else if ( (sum_others + total) >= min_order_quantity) {
             text = '#{j t('.status_enough_affected')}';
           } else {
-            var amount = asMoney(min_order_quantity-sum_others-total+0.5, 0);
+            var amount = I18n.toCurrency(min_order_quantity-sum_others-total+0.5, {precision: 0});
             text = '#{j t('.status_needed_approx')}'.replace('%{amount}', amount);
           }
           $('#min_quantity_text').text(text);
