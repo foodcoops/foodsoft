@@ -29,7 +29,7 @@
         %i.icon.icon-remove
 
 = render :partial => 'heading'
-= render :partial => 'min_quantity_notice'
+= render :partial => 'min_quantity_notice' unless @order.stockit?
 
 - unless @order.note.blank?
   %p
