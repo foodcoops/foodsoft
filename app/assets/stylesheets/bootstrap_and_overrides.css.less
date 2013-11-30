@@ -140,6 +140,31 @@ span.unused {
   .quantity, .tolerance {
     white-space: nowrap;
   }
+  .units_all {
+    width: 2em;
+    text-align: right;
+    padding-right: 0;
+    .plus {
+        width: 0.5em;
+        display: inline-block;
+        color: #888;
+    }
+  }
+  .units_pack {
+    width: 7em;
+    .progress {
+      margin: 0;
+      .bar:first-child {
+        color: #ccf;
+        text-shadow: none;
+      }
+      .bar:last-child {
+        color: #ddd;
+        background: inherit;
+        text-shadow: none;
+      }
+    }
+  }
 }
 
 #order-footer, .article-info {
