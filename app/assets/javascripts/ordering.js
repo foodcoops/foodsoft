@@ -123,20 +123,28 @@ function update(item, quantity, tolerance) {
     var total_quantity = quantityOthers[item] + Number(quantity);
     var total_tolerance = toleranceOthers[item] + Number(tolerance);
 
-    // see also OrderArticle#calculate_units_to_order and OrderArticle#missing_units
-    var total_units = Math.floor(total_quantity/unit[item]);
+    // same as OrderArticle#calculate_units_to_order
+    var units_to_order = Math.floor(total_quantity/unit[item]);
     var remainder = total_quantity % unit[item];
-    var tolerance_available = total_tolerance;
-    if (remainder > 0 && (remainder + total_tolerance) >= unit[item]) {
-      total_units += 1
-      tolerance_available -= unit[item];
-    }
-    var progress_units = Math.min(unit[item], remainder + tolerance_available)
+    units_to_order += ((remainder > 0) && (remainder + total_tolerance >= unit[item]) ? 1 : 0)
 
-    $('#total_units_' + item).html(String(total_units*unit[item]));
-    // TODO order of updating progress depends on whether increasing or decreasing
-    $('#progress_'+item+' .bar:nth-child(1)').width(String(Math.floor(100*progress_units/unit[item]))+'%').html(String(remainder+tolerance_available));
-    $('#progress_'+item+' .bar:nth-child(2)').width(String(Math.floor(100-100*progress_units/unit[item]))+'%').html(String(unit[item]-progress_units));
+    var progress_units = total_quantity+total_tolerance - units_to_order*unit[item];
+    var progress_pct = Math.floor(Math.min(100, 100*progress_units/unit[item]));
+
+    $('#unit_to_order_'+item).html(String(units_to_order*unit[item]));
+    // progess bar update
+    //   update decreasing number first, to make sure that together it's no more than 100%
+    //   otherwise one of the numbers in the progress bar may temporarily disappear
+    var bars = [
+      [$('#progress_'+item+' .bar:nth-child(1)'), progress_pct,     progress_units],
+      [$('#progress_'+item+' .bar:nth-child(2)'), 100-progress_pct, Math.max(0, unit[item]-progress_units)]
+    ];
+    if (Number(bars[0][0].html()) < progress_units) bars.reverse();
+    $.each(bars, function(i, bar) {
+      bar[0]
+        .width(String(bar[1])+'%')
+	.html(String(bar[2]));
+    });
 
     // update balance
     updateBalance();

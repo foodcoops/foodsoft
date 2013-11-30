@@ -80,19 +80,20 @@
             %td= order_article.article.unit
             %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
             %td{style: 'width: 2em; text-align: right; padding-right: 0;'}
-              %span{id: "total_units_#{order_article.id}"}= order_article.units_to_order * order_article.price.unit_quantity
+              %span{id: "unit_to_order_#{order_article.id}"}= order_article.units_to_order * order_article.price.unit_quantity
               %span{style: 'width: 0.5em; display: inline-block; color: #888;'}= @ordering_data[:order_articles][order_article.id][:unit] > 1 ? '+' : '&nbsp;'.html_safe
             - if @order.stockit?
               %td= @ordering_data[:order_articles][order_article.id][:quantity_available]
             - elsif @ordering_data[:order_articles][order_article.id][:unit] > 1
               %td{style: 'width: 7em'}
-                / TODO compute progress bar lengths here as well
-                - content_for :javascript do
-                  :javascript
-                    $(function() { update(#{order_article.id}, #{@ordering_data[:order_articles][order_article.id][:quantity]}, #{@ordering_data[:order_articles][order_article.id][:tolerance]}); });
+                - uq = @ordering_data[:order_articles][order_article.id][:unit]
+                - progress_units = order_article.quantity+order_article.tolerance - order_article.units_to_order*uq
+                - progress_pct = [100, 100*progress_units/uq].min.to_i
                 .progress{id: "progress_#{order_article.id}", style: 'margin: 0'}
-                  .bar{style: "width: 0%; color: #ccf; text-shadow: none;"}
-                  .bar{style: "width: 0%; background: inherit; color: #ddd; text-shadow: none;"}
+                  .bar{style: "width: #{progress_pct}%; color: #ccf; text-shadow: none;"}
+                    = progress_units
+                  .bar{style: "width: #{100-progress_pct}%; background: inherit; color: #ddd; text-shadow: none;"}
+                    = [0, uq - progress_units].max
             - else
               - if has_tolerance
                 %td
