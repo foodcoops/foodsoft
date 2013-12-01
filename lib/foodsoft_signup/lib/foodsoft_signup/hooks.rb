@@ -37,15 +37,16 @@ module FoodsoftSignup
     user and user.ordergroup and user.ordergroup.approved? and return true
     # maybe the page is always allowed, test if member can go here
     always_access = FoodsoftConfig[:unapproved_allow_access] or
-      %w(home login sessions feedback pages#show pages#all group_orders#archive payments)
+      %w(home login sessions signup feedback pages#show pages#all group_orders#archive)
     if always_access.member?("#{c.params[:controller]}") or
        always_access.member?("#{c.params[:controller]}\##{c.action_name}")
       return true
     end
     if user.nil? or user.ordergroup.nil?
+      Rails.logger.warn "FoodsoftSignup: ordergroup required for #{c.params[:controller]}\##{c.action_name}"
       c.redirect_to c.root_url, alert: I18n.t('foodsoft_signup.errors.no_ordergroup')
     elsif !user.ordergroup.approved?
-      Rails.logger.debug "access denied for page #{c.params[:controller]}\##{c.action_name}"
+      Rails.logger.warn "FoodsoftSignup: ordergroup approval required for #{c.params[:controller]}\##{c.action_name}"
       c.redirect_to c.root_url, alert: I18n.t('foodsoft_signup.errors.not_approved')
     end
   end
