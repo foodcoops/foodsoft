@@ -28,16 +28,17 @@ This plugin is configured in the foodcoop configuration in foodsoft's
   # Array of which pages are accesible to ordergroups that are not approved.
   # Values are controller names (`pages`) or actions combined with controller
   # names (`pages#show`). If not set, the default is:
-  # `home login sessions feedback pages#show pages#all group_orders#archive payments`
+  # `home login sessions signup feedback pages#show pages#all group_orders#archive`
+  # When you're using a payment plugin for approval, add its controller here.
   unapproved_allow_access:
   - home
   - login
   - sessions
+  - signup
   - feedback
   - pages#show
   - pages#all
   - group_orders#archive
-  - payments
 
   # Message to show when ordergroup is not yet approved. If not set, a concise
   # default message will be shown.
