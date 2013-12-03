@@ -13,5 +13,5 @@
     - @tasks.each do |task|
       %tr
         %td= task.due_date unless task.due_date.nil?
-        %td= link_to t('.task_format', name: task.name, duration: task.duration), :controller => "tasks", :action => "show", :id => task
+        %td= link_to t('.task_format', name: task.name, duration: task.duration), task_path(task)
         %td= task_assignments task

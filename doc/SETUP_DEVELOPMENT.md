@@ -66,7 +66,7 @@ If you want to have more control, you can do these steps manually as
 explained here.
 
 
-1. **Configure datebase**
+1. **Configure database**
 
    Create the database configuration from the default:
    ```sh

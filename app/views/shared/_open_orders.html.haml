@@ -7,10 +7,10 @@
     %table.table.table-striped
       %thead
         %tr
-          %th= t '.supplier'
-          %th= t '.ending'
+          %th= heading_helper Order, :name
+          %th= heading_helper Order, :ends
           %th= t '.who_ordered'
-          %th= t '.total'
+          %th= heading_helper GroupOrder, :price
       %tbody
         - total = 0
         - Order.open.each do |order|
@@ -19,7 +19,7 @@
             %td= format_time(order.ends) unless order.ends.nil?
             - if group_order = order.group_order(ordergroup)
               - total += group_order.price
-              %td= "#{group_order.updated_by.nick} (#{format_time(group_order.updated_on)})"
+              %td= "#{show_user group_order.updated_by} (#{format_time(group_order.updated_on)})"
               %td.numeric= number_to_currency(group_order.price)
             - else
               %td{:colspan => 2}

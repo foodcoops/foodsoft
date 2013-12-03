@@ -12,7 +12,7 @@
   %dd
     - members = group.users
     = "(#{members.size})"
-    = members.collect(&:nick).join(", ")
+    = members.collect{|u| show_user(u)}.join(", ")
   - unless group.is_a?(Workgroup)
     %dt= t '.apple_limit'
     %dd= group.ignore_apple_restriction ? t('.deactivated') : t('.activated')

@@ -17,7 +17,7 @@
       - @page.versions.reverse.each do |version|
         %li
           = link_to I18n.l(version.updated_at, :format => t('.date_format')), version_page_path(@page, :version => version.lock_version)
-          = "(#{User.find_by_id(version.updated_by).try(:nick)})"
+          = "(#{show_user(User.find_by_id(version.updated_by))})"
 
   - unless @page.children.empty?
     #subpages.well.well-small{:style => "display:none"}
@@ -48,4 +48,4 @@
     %i.icon-edit= t '.edit'
   = link_to t('.delete'), @page, class: 'btn btn-danger', :method => :delete,
     :confirm => t('.delete_confirm')
-  != '| ' + t('.last_updated', user: h(@page.user.try(:nick)), when: format_datetime(@page.updated_at))
+  != '| ' + t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))

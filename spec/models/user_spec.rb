@@ -49,6 +49,16 @@ describe User do
     it 'has a unique email' do
       expect(build(:user, email: "#{user.email}")).to be_invalid
     end
+
+    it 'can authenticate using email address' do
+      expect(User.authenticate(user.email, 'blahblah')).to be_true
+    end
+
+    it 'can authenticate when there is no nick' do
+      user.nick = nil
+      expect(user).to be_valid
+      expect(User.authenticate(user.email, 'blahblah')).to be_true
+    end
   end
 
   describe 'admin' do
