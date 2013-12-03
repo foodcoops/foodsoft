@@ -15,9 +15,9 @@
     %table.table.table-striped
       %thead
         %tr
-          %th= t '.supplier'
-          %th= t '.ending'
-          %th= t '.note'
+          %th= heading_helper Order, :name
+          %th= heading_helper Order, :ends
+          %th= heading_helper Order, :note
           %th{colspan: "2"}
       %tbody
         - for order in @open_orders

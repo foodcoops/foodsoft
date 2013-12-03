@@ -22,6 +22,7 @@ de:
         unit: Einheit
         unit_quantity: Gebindegröße
         unit_quantity_short: GebGr
+        units: Gebinde
       article_category:
         description: Beschreibung
         name: Name
@@ -31,10 +32,19 @@ de:
         supplier: Lieferantin
       financial_transaction:
         amount: Betrag
+        created_on: Datum
         note: Notiz
+        ordergroup: Bestellgruppe
+        user: 
+      group_order:
+        price: Bestellsumme
+        updated_by: Zuletzt bestellt
       group_order_article:
         ordergroup_id: Bestellgruppe
+        quantity: Menge
         result: Menge
+        tolerance: Toleranz
+        total_price: Summe
       invoice:
         amount: Betrag
         date: Rechnungsdatum
@@ -54,15 +64,23 @@ de:
         sent_to_all: An alle Mitglieder schicken
         subject: Betreff
       order:
+        closed_by: Abgerechnet von
+        created_by: Erstellt von
         ends: Endet am
+        name: Lieferant
         note: Notiz
         starts: Läuft vom
+        status: 
       order_article:
+        missing_units: Fehlende Einheiten
+        missing_units_short: 
         units_to_order: Menge
         update_current_price: Globalen Preis aktualisieren
       order_comment:
         text: Kommentiere diese Bestellung ...
       ordergroup:
+        account_balance: Kontostand
+        available_funds: Verfügbares Guthaben
         contact_address: Adresse
         contact_person: Kontaktperson
         contact_phone: Telefon
@@ -75,10 +93,10 @@ de:
         parent_id: Oberseite
         title: Titel
       stock_article:
+        available: Verfügbar
         price: Nettopreis
-        quantity: Lagerbestand
         quantity_available: Verfügbarer Bestand
-        supplier: Lieferant
+        quantity_available_short: 
       stock_taking:
         date: Datum
         note: Notiz
@@ -92,6 +110,7 @@ de:
         fax: FAX
         is_subscribed: abonniert?
         min_order_quantity: Mindestbestellmenge
+        min_order_quantity_short: 
         name: Name
         note: Notiz
         order_howto: Howto Bestellen
@@ -588,21 +607,13 @@ de:
         paragraph: Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.
         title: Neue Transaktion
       new_collection:
-        amount: Betrag
         new_ordergroup: Weitere Bestellgruppe hinzufügen
-        note: Notiz
-        ordergroup: Bestellgruppe
         save: Transaktionen speichern
         sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualsieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
         title: Mehrere Konten aktualisieren
       ordergroup:
         remove: Entfernen
         remove_group: Gruppe enfernen
-      transactions:
-        amount: Betrag
-        date: Datum
-        note: Notiz
-        who: Wer
     group_order_articles:
       form:
         amount_change_for: Mengenänderung für %{article}
@@ -705,30 +716,14 @@ de:
       notfound: Fehlerhafte URL, das ist nicht Deine Bestellung.
     form:
       action_save: Bestellung speichern
-      amount: Menge
-      available: Verfügbar
-      available_funds: Verfügbares Guthaben
-      created_by: Erstellt von
-      ending: Ende
-      funds: Guthaben
-      last_update: Zuletzt bestellt
-      manufacturer: Hersteller
-      min_quantity: Mindestbestellmenge
-      name: Name
       new_funds: Neuer Kontostand
-      note: Notiz
       price: Preis
       reset_article_search: Suche zurücksetzen
       search_article: Artikel suchen...
-      sum: Summe
       sum_amount: ! 'Gesamtbestellmenge bisher:'
-      supplier: Lieferant
       title: Bestellen
-      tolerance: Toleranz
       total_sum_amount: Gesamtbetrag
       total_tolerance: Gesamt-Toleranz
-      unit: Einheit
-      unit_missing: Fehlende Einheiten
       units: Gebinde
       units_full: Volle Gebinde
       units_total: Gesamt-Einheiten
@@ -740,8 +735,6 @@ de:
         title: Nicht abgerechnete Bestellungen
         total_sum: Gesamtsumme
       funds:
-        account_balance: Kontostand
-        available_funds: verfügbares Guthaben
         finished_orders: nicht abgerechnete Bestellungen
         open_orders: Laufende Bestellungen
         title: Guthaben
@@ -750,14 +743,9 @@ de:
       not_enough_apples: Um zu Bestellen brauchst Du mindestends %{stop_ordering_under} Äpfel. Momentan hat Deine Bestellgruppe aber nur %{apples} Äpfel.
     order:
       title: Artikel
-    orders:
-      ending: Ende
-      sum: Summe
-      supplier: Lieferantin
     show:
       articles:
         edit_order: Bestellung anpassen
-        name: Name
         not_ordered_msg: Du hast noch nicht bestellt
         order_closed_msg: Die Bestellung is leider schon zu Ende. Beim nächsten mal früher aufstehen...
         order_nopen_title: Unter Berücksichtigung der derzeitigen Bestellungen aller Gruppen
@@ -767,21 +755,14 @@ de:
         ordered: Bestellt
         ordered_title: Menge + Toleranz
         show_hide: Zeige/Verstecke nicht bestellte Artikel
-        sum: Summe
+        show_note: 
         title: Artikelübersicht
-        total_price: Gesamtpreis
         unit_price: Einzelpreis
-        units: Gebinde
-      closed_by: Abgerechnet von %{user}
       comment: Kommentare lesen/schreiben
       comments:
         title: Kommentare
-      ending: Ende
       not_ordered: Du hast nicht bestellt.
-      note: Notiz
-      order_sum: Bestellsumme
       sum: Summe
-      supplier: Lieferantin
       title: Dein Bestellergebnis für %{order}
     switch_order:
       remaining: noch %{remaining}
@@ -853,10 +834,7 @@ de:
     no_ordergroups: Leider bist Du kein Mitglied einer Bestellgruppe
     ordergroup:
       account_summary: Kontoauszug
-      description: Beschreibung
-      funds: ! 'Verfügbares Guthaben:'
       invite: Neue Person einladen
-      people: Personen
       search: Suchen ...
       title: Meine Bestellgruppe
     ordergroup_cancelled: Du bist jetzt kein Mitglied der Gruppe %{group} mehr.
@@ -906,8 +884,6 @@ de:
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
-    application1:
-      title: Foodsoft - %{title}
     email:
       footer: ! '--
 
@@ -1160,10 +1136,8 @@ de:
   orders:
     articles:
       article_count: ! 'Bestellte Artikel:'
-      name: Name
       prices: Netto-/Bruttopreis
       prices_sum: ! 'Summe (Netto/Brutto-Preise):'
-      unit_quantity: Gebinde
       units_full: Volle Gebinde
       units_ordered: Bestellte Einheiten
     create:
@@ -1182,26 +1156,18 @@ de:
       notice: Die Bestellung wurde beendet.
     form:
       ignore_warnings: Warnungen ignorieren
-      name: Name
-      note: Notiz
-      origin: Herkunft
       prices: Price (netto/FC)
       select_all: Alle auswählen
       stockit: Verfügbar
-      supplier: Hersteller
       title: Artikel
-      unit_quantity: Gebinde
     index:
       action_end: Beenden
       confirm_delete: Willst Du wirklich die Bestellung löschen?
       confirm_end: Willst Du wirklich die Bestellung %{order} beenden? Es gibt kein zurück.
       ended_orders: Beendete Bestellungen
-      ending: Ende
       new_order: Neue Bestellung anlegen
       no_open_orders: Derzeit gibt es keine laufende Bestellungen.
-      note: Notiz
       open_orders: Laufende Bestellungen
-      supplier: Lieferantin
       title: Bestellungen verwalten
     model:
       error_closed: Bestellung wurde schon abgerechnet
@@ -1213,17 +1179,11 @@ de:
       warning_ordered_stock: ! 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
     new:
       title: Neue Bestellung anlegen
-    orders:
-      ending: Ende
-      start: Start
-      status: Status
-      supplier: Lieferantin
     show:
       action_end: Beenden!
       amounts: ! 'Netto/Bruttosumme:'
       articles: Artikelübersicht
       articles_ordered: ! 'Bestellte Artikel:'
-      begin: ! 'Beginn:'
       comments:
         title: Kommentare
       comments_link: Kommentare
@@ -1231,7 +1191,6 @@ de:
       confirm_end: ! 'Willst Du wirklich die Bestellung %{order} beenden?
 
         Es gibt kein zurück.'
-      created_by: ! 'Erstellt von:'
       download:
         article_pdf: Artikel PDF
         download_file: Download file
@@ -1240,12 +1199,9 @@ de:
         group_pdf: Gruppen PDF
         matrix_pdf: Matrix PDF
         title: Download
-      ending: ! 'Ende:'
       group_orders: ! 'Gruppenbestellungen:'
-      note: ! 'Notiz:'
       sort_article: Sortiert nach Artikeln
       sort_group: Sortiert nach Gruppen
-      supplier: ! 'Lieferantin:'
       title: ! 'Bestellung: %{name}'
       warn_not_closed: Achtung, Bestellung wurde noch nicht abgerechnet.
     state:
@@ -1333,9 +1289,7 @@ de:
       login: Anmelden
       nojs: Achtung, Cookies und Javascript müssen aktiviert sein! %{link} bitte abschalten.
       noscript: NoScript
-      password: Passwort
       title: Foodsoft anmelden
-      user: Benutzerin
   shared:
     articles:
       ordered: Bestellt
@@ -1369,35 +1323,10 @@ de:
       search_user: Nach Nutzerin suchen
       title: Wöchentliche Jobs
       user_not_found: Keine Nutzerin gefunden
-    loginInfo:
-      edit_profile: Profil bearbeiten
-      feedback:
-        desc: Fehler gefunden? Vorschlag? Idee? Kritik?
-        title: Feedback
-      help: Hilfe
-      homepage_title: Foodcoop Homepage besuchen
-      logout: Abmelden
-      profile: Profil
-    memberships:
-      current_members:
-        drop: entfernen
-        no_members: ! '%{group} hat keine Mitglieder.'
-      members:
-        already_members: Sind schon Mitglieder
-        desc: Hier kannst Du Mitglieder der Gruppe verwalten oder ein neues Foodcoop-Mitglied in die Gruppe %{link}.
-        invite: einladen
-        invite_someone: Person einladen
-        no_members_yet: Sind noch keine Mitglieder
-        title: Mitglieder von %{group}
-      non_members:
-        add: hinzufügen
     open_orders:
-      ending: Ende
       no_open_orders: Derzeit gibt es keine laufenden Bestellungen
       not_enough_apples: Achtung, Deine Bestellgruppe hat zu wenig Äpfel um Bestellen zu können!
-      supplier: Lieferantin
       title: Laufende Bestellungen
-      total: Summe
       total_sum: Gesamtsumme
       who_ordered: Wer hat bestellt?
     workgroup_members:
@@ -1418,7 +1347,6 @@ de:
           name: Bitte ändern
         edit_stock_article:
           price: <ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>
-        supplier: 
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
       task:

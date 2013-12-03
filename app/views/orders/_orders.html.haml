@@ -2,10 +2,10 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= sort_link_helper t('.supplier'), "supplier"
-      %th= t '.start'
-      %th= sort_link_helper t('.ending'), "ends"
-      %th= t '.status'
+      %th= sort_link_helper heading_helper(Order, :supplier), "supplier"
+      %th= heading_helper Order, :starts
+      %th= sort_link_helper heading_helper(Order, :ends), "ends"
+      %th= heading_helper Order, :status
       %th{:colspan => "2"}
   %tbody
     - @orders.each do |order|

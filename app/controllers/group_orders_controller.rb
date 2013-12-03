@@ -65,7 +65,7 @@ class GroupOrdersController < ApplicationController
   private
 
   # Returns true if @current_user is member of an Ordergroup.
-  # Used as a :before_filter by OrderingController.
+  # Used as a :before_filter by OrdersController.
   def ensure_ordergroup_member
     @ordergroup = @current_user.ordergroup
     if @ordergroup.nil?

@@ -1,4 +1,4 @@
-- title @user.nick
+- title show_user(@user)
 
 .row-fluid
   .span3
@@ -6,8 +6,9 @@
       %h4= t '.person'
       %p= t '.member_since', time: distance_of_time_in_words(Time.now, @user.created_on)
       %dl
-        %dt= t '.nick'
-        %dd= @user.nick
+        - if FoodsoftConfig[:use_nick]
+          %dt= t '.nick'
+          %dd= @user.nick
         %dt= t '.name'
         %dd= h @user.name
         %dt= t '.email'
