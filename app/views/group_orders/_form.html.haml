@@ -68,11 +68,7 @@
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
             %td.name
-              - unless order_article.article.info_url.blank?
-                = link_to order_article.article.info_url, target: '_blank' do
-                  %i.icon-info-sign
-              - else
-                %i.icon-info-sign
+              = article_info_icon order_article.article
               = order_article.article.name
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15

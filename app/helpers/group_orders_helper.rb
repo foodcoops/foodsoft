@@ -36,4 +36,14 @@ module GroupOrdersHelper
 
     {group_order_article: goa, quantity: quantity, tolerance: tolerance, result: result, sub_total: sub_total}
   end
+
+  def article_info_icon(article)
+    icon = "<i class='icon-info-sign'></i>".html_safe
+    unless article.info_url.blank?
+      link_to icon, article.info_url, target: '_blank'
+    else
+      icon
+    end
+  end
+
 end

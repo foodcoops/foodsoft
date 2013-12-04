@@ -59,11 +59,7 @@
               - r = get_order_results(oa, @group_order.id)
               %tr{class: cycle('even', 'odd', name: 'articles') + " order-article " + order_article_class_name(r[:quantity], r[:tolerance], r[:result])}
                 %td.name{style: "width:40%"}
-                  - unless oa.article.info_url.blank?
-                    = link_to oa.article.info_url, target: '_blank' do
-                      %i.icon-info-sign
-                  - else
-                    %i.icon-info-sign
+                  = article_info_icon oa.article
                   = oa.article.name
                   - unless oa.article.note.blank?
                     = image_tag("lamp_grey.png", {alt: "Notiz anzeigen", size: "15x16", border: "0", onmouseover: "$('note_#{oa.id}').show();", onmouseout: "$('note_#{oa.id}').hide();"})
