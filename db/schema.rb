@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130920201529) do
     t.datetime "deleted_at"
     t.string   "type"
     t.integer  "quantity",                                          :default => 0
+    t.string   "info_url"
   end
 
   add_index "articles", ["article_category_id"], :name => "index_articles_on_article_category_id"
@@ -302,6 +303,7 @@ ActiveRecord::Schema.define(:version => 20130920201529) do
     t.integer  "shared_supplier_id"
     t.string   "min_order_quantity"
     t.datetime "deleted_at"
+    t.string   "article_info_url"
   end
 
   add_index "suppliers", ["name"], :name => "index_suppliers_on_name", :unique => true

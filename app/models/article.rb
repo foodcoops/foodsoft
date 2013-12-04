@@ -155,6 +155,11 @@ class Article < ActiveRecord::Base
     update_column :deleted_at, Time.now
   end
 
+  # product information url, fallback to optional supplier-wide value
+  def info_url
+    self[:info_url] or supplier.article_info_url(self)
+  end
+
   protected
   
   # Checks if the article is in use before it will deleted

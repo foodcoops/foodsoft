@@ -35,7 +35,9 @@
                 - order_title = []
                 - order_title.append Article.human_attribute_name(:manufacturer)+': ' + oa.article.manufacturer unless oa.article.manufacturer.to_s.empty?
                 - order_title.append Article.human_attribute_name(:note)+': ' + oa.article.note unless oa.article.note.to_s.empty?
-                %td.name{style: "width:40%", title: order_title.join("\n")}= oa.article.name
+                %td.name{style: "width:40%", title: order_title.join("\n")}
+                  = article_info_icon oa.article
+                  = oa.article.name
                 %td #{oa.price.unit_quantity} &times; #{oa.article.unit}
                 %td= number_to_currency(oa.price.fc_price)
                 %td

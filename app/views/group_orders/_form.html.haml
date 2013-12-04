@@ -73,7 +73,9 @@
             - order_title = []
             - order_title.append t('.manufacturer')+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
             - order_title.append t('.note')+': ' + order_article.article.note unless order_article.article.note.to_s.empty?
-            %td.name{title: order_title.join("\n")}= order_article.article.name
+            %td.name{title: order_title.join("\n")}
+              = article_info_icon order_article.article
+              = order_article.article.name
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15
             %td= h order_article.article.origin

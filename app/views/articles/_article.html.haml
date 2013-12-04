@@ -1,12 +1,14 @@
 %tr{class: row_classes(article)}[article]
-  %td= check_box_tag 'selected_articles[]', article.id.to_s, false, {:id => "checkbox_#{article.id}", 'data-ignore-onchange' => true}
-  %td{'data-check-this' => "#checkbox_#{article.id}", :class => 'click-me'}= article.name
+  %td= check_box_tag 'selected_articles[]', article.id.to_s, false, {:id => "checkbox_#{article.id}", :data => {'ignore-onchange' => true}}
+  %td.name.click-me{:data => {'check-this' => "#checkbox_#{article.id}"}}
+    = article_info_icon article
+    = article.name
   %td= article.origin
   %td= truncate(article.article_category.name, :length => 11) if article.article_category
   %td= article.unit
   %td= truncate(article.note, :length => 11)
   %td= article.unit_quantity
-  %td{:class => "currency"}
+  %td.currency
     %acronym{:title => t('.last_update', last_update: format_date(article.updated_at), gross_price: number_to_currency(article.gross_price))}
       = number_to_currency(article.price)
   %td= number_to_percentage(article.tax) if article.tax != 0
