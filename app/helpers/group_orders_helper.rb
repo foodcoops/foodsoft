@@ -1,4 +1,7 @@
 module GroupOrdersHelper
+
+  include ArticlesHelper # for article_info_icon
+
   def data_to_js(ordering_data)
     ordering_data[:order_articles].map { |id, data|
       [id, data[:price], data[:unit], data[:total_price], data[:others_quantity], data[:others_tolerance], data[:used_quantity], data[:quantity_available]]
@@ -35,15 +38,6 @@ module GroupOrdersHelper
     end
 
     {group_order_article: goa, quantity: quantity, tolerance: tolerance, result: result, sub_total: sub_total}
-  end
-
-  def article_info_icon(article)
-    icon = "<i class='icon-info-sign'></i>".html_safe
-    unless article.info_url.blank?
-      link_to icon, article.info_url, target: '_blank'
-    else
-      icon
-    end
   end
 
 end
