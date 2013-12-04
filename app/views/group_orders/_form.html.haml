@@ -70,10 +70,7 @@
           %td{colspan: "9"}
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
-            - order_title = []
-            - order_title.append t('.manufacturer')+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
-            - order_title.append t('.note')+': ' + order_article.article.note unless order_article.article.note.to_s.empty?
-            %td.name{title: order_title.join("\n")}
+            %td.name{title: article_info_title(order_article.article)}
               = article_info_icon order_article.article
               = order_article.article.name
             - if @order.stockit?
