@@ -468,7 +468,7 @@ nl:
       rows:
       - Artikel
       - Besteld
-      - Gekregen
+      - Hoeveelheid
       - Prijs
       - Gr.Eenh.
       - Eenheid
@@ -700,9 +700,9 @@ nl:
     archive:
       desc: Bekijk hier alle %{link}.
       open_orders: lopende bestellingen
-      title: Vorige bestellingen van %{group}
+      title: Bestellingen van %{group}
       title_closed: afgerekend
-      title_open: gesloten
+      title_open: gesloten/niet afgerekend
     create:
       error_general: De bestelling kon niet bijgewerkt worden vanwege een fout.
       error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon de bestelling niet bijgewerkt worden.
@@ -738,18 +738,11 @@ nl:
       title: Besteloverzicht
     messages:
       not_enough_apples: Om te bestellen heb je minimaal %{stop_ordering_under} appels nodig. Momenteel heeft je huishouden slechts %{apples} appels.
-    min_quantity_notice:
-      status_enough_others: Er is voldoende besteld om te kunnen leveren.
-      status_enough_affected: Als je jouw bestelling opslaat, is er voldoende besteld om te kunnen leveren. Bedankt!
-      status_needed: Er is nog %{amount} nodig aan bestellingen om te kunnen leveren.
-      status_needed_approx: Er is nog ca. %{amount} nodig aan bestellingen om te kunnen leveren.
-      title_note: Deze leverancier heeft een minimum bestelbedrag van %{amount}.
     order:
       title: Artikelen
     show:
       articles:
-        edit_order: Bestelling aanpassen
-        no_articles: Je hebt geen artikelen in deze bestelling.
+        edit_order: Order aanpassen
         not_ordered_msg: Je hebt nog niets bestelt
         order_closed_msg: Sorry, deze bestelling is gesloten.
         order_nopen_title: Waarbij rekening gehouden is met bestellingen van anderen
@@ -765,14 +758,11 @@ nl:
       comment: Notitie
       comments:
         title: Commentaar
-      continue: Doorgaan
       not_ordered: Je hebt niets bestelt.
       sum: Som
       title: Jouw bestelling voor %{order}
     switch_order:
-      open_remaining: ! 'nog %{remaining} open'
-      when_finished: ! 'gesloten sinds %{date}'
-      when_closed: ! 'afgerekend sinds %{date}'
+      remaining: nog %{remaining}
       title: Lopende bestellingen
     update:
       error_general: Er is een probleem opgetreden, de bestelling kon niet bijgewerkt worden.
@@ -837,8 +827,6 @@ nl:
         desc: Er zijn %{size}
         title: open taken
       title: Beginpagina
-      to_archive: Bekijk je %{archive_link}.
-      to_archive_link: vorige bestellingen
       your_tasks: Jouw taken
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
     ordergroup:
@@ -1458,8 +1446,12 @@ nl:
       warning_periodic: 
     error_not_found: 
     form:
+      search:
+        hint: 
+        noresult: 
+        placeholder: 
       submit:
-        periodic:
+        periodic: 
     index:
       show_group_tasks: 
       title: 

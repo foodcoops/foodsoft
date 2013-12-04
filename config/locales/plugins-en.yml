@@ -1,0 +1,48 @@
+en:
+  activerecord:
+    attributes:
+      ordergroup:
+        approved: Membership approved
+        approved_short: Approved
+  finance:
+    financial_transactions:
+      new:
+        membership_fee_note: An amount of %{fee} or more will approve the membership.
+  foodsoft_signup:
+    approval:
+      msg: Your membership needs to be approved before you can participate.
+    errors:
+      no_ordergroup: You need an ordergroup to be able to go there.
+      not_approved: Your membership needs to be approved before you can go there.
+    membership_fee:
+      transaction_note: Membership fee for ordergroup
+    payment:
+      msg: You still need to pay your membership fee, which you can %{link}.
+      msg_link: do online
+      pay_label: Membership fee
+      pay_title: Pay your membership
+  payments:
+    adyen_pin:
+      index:
+        title: PIN payment
+    mollie_ideal:
+      controller:
+        result:
+          failed: Payment failed.
+          notice: Your account has been credited.
+      form:
+        amount_pay: Amount to pay
+        bank: Your bank
+        submit: Pay at your bank
+      new:
+        title: Credit your account
+    navigation:
+      pin: PIN terminal
+  signup:
+    controller:
+      disabled: You cannot signup yourself for %{foodcoop}. Please contact us to become a member.
+      notice: Congratulations, your account has been created.
+    signup:
+      body: <p>Do you want to become a member of %{foodcoop}? Then please fill in this form!</p>
+      submit: Create a Foodsoft account
+      title: Join %{name}

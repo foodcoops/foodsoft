@@ -1,0 +1,23 @@
+nl:
+  group_orders:
+    archive:
+      title: Vorige bestellingen van %{group}
+      title_open: gesloten
+    min_quantity_notice:
+      status_enough_others: Er is voldoende besteld om te kunnen leveren.
+      status_enough_affected: Als je jouw bestelling opslaat, is er voldoende besteld om te kunnen leveren. Bedankt!
+      status_needed: Er is nog %{amount} nodig aan bestellingen om te kunnen leveren.
+      status_needed_approx: Er is nog ca. %{amount} nodig aan bestellingen om te kunnen leveren.
+      title_note: Deze leverancier heeft een minimum bestelbedrag van %{amount}.
+    show:
+      articles:
+        no_articles: Je hebt geen artikelen in deze bestelling.
+      continue: Doorgaan
+    switch_order:
+      open_remaining: ! 'nog %{remaining} open'
+      when_finished: ! 'gesloten sinds %{date}'
+      when_closed: ! 'afgerekend sinds %{date}'
+  home:
+    index:
+      to_archive: Bekijk je %{archive_link}.
+      to_archive_link: vorige bestellingen

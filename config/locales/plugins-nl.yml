@@ -1,0 +1,48 @@
+nl:
+  activerecord:
+    attributes:
+      ordergroup:
+        approved: Lidmaatschap bevestigd
+        approved_short: Bevestigd
+  finance:
+    financial_transactions:
+      new:
+        membership_fee_note: Bij %{fee} of meer wordt dit huishouden bevestigd als lid.
+  foodsoft_signup:
+    approval:
+      msg: Je lidmaatschap moet bevestigd worden voordat je kunt bestellen.
+    errors:
+      no_ordergroup: Je moet lid zijn van een huishouden om hierheen te gaan.
+      not_approved: Je lidmaatschap moet worden bevestigd voor je hier naartoe kan.
+    membership_fee:
+      transaction_note: Lidmaatschap voor huishouden
+    payment:
+      msg: Je moet het lidmaatschapsgeld nog betalen, dat kun je %{link}.
+      msg_link: online doen
+      pay_label: Lidmaatschapsgeld
+      pay_title: Betaal je lidmaatschap
+  payments:
+    adyen_pin:
+      index:
+        title: Pinbetaling
+    mollie_ideal:
+      controller:
+        result:
+          failed: Betaling mislukt.
+          notice: Je account is opgewaardeerd.
+      form:
+        amount_pay: Te betalen bedrag
+        bank: Jouw bank
+        submit: Betalen
+      new:
+        title: Betalen
+    navigation:
+      pin: PIN terminal
+  signup:
+    controller:
+      disabled: Je kunt je niet zelf aanmelden voor %{foodcoop}. Neem daarvoor contact met ons op.
+      notice: Gefeliciteerd, je hebt nu een account.
+    signup:
+      body: <p>Wil je lid worden van %{foodcoop}? Vul dan dit formulier in!</p>
+      submit: Account maken
+      title: Lid worden van %{name}

@@ -470,14 +470,11 @@ en:
       - Ordered
       - Received
       - Price
-      - Unit Q.
+      - Unit quantity
       - Unit
       - Sum
       sum: Sum
       title: ! 'Order sorted by group: %{name}, closed at %{date}'
-      multiple:
-        title: Multiple orders sorted by group
-        filename: Multiple orders - by group
     order_fax:
       filename: Order %{name}-%{date} - Fax
       rows:
@@ -597,12 +594,6 @@ en:
     create:
       notice: Invoice was created
     financial_transactions:
-      account_info:
-        available_funds: Available funds
-        balance: Balance of account
-        finished_orders: Value of finished orders
-        last_updated_at: (the account balance was last updated at %{when})
-        open_orders: Value of open orders
       controller:
         create:
           notice: The transaction was saved.
@@ -611,16 +602,14 @@ en:
           error_note_required: Note is required!
           notice: All transactions were saved.
       index:
+        balance: ! 'Balance of account: %{balance}'
+        last_updated_at: (last updated %{when} ago)
         new_transaction: Create new transaction
         search_placeholder: Search ...
         title: Account statement for %{name}
       new:
         paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
         title: New transaction
-        type: Type
-        type_pin: PIN delivery day
-        type_cash: cash delivery day
-        type_other: other (add note)
       new_collection:
         new_ordergroup: Add new order group
         save: Save transaction
@@ -679,7 +668,6 @@ en:
         title: Manage accounts
       ordergroups:
         account_balance: Account balance
-        available_funds: Available funds
         account_statement: Account statement
         contact: Contact
         name: Name
@@ -757,18 +745,11 @@ en:
       title: Orders overview
     messages:
       not_enough_apples: You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.
-    min_quantity_notice:
-      status_enough_others: The order is large enough to be delivered.
-      status_enough_affected: After saving your order, the order will be large enough for delivery. Thank you!
-      status_needed: Still %{amount} needs to be ordered so that delivery is possible.
-      status_needed_approx: About %{amount} still needs to be ordered so that delivery is possible.
-      title_note: This supplier has a minimum order quantity of %{amount}.
     order:
       title: Articles
     show:
       articles:
         edit_order: Edit order
-        no_articles: You have no articles in this order.
         not_ordered_msg: You didn’t place an order yet
         order_closed_msg: Sorry, this order is closed.
         order_nopen_title: Considering current orders of all groups
@@ -784,14 +765,11 @@ en:
       comment: Comment
       comments:
         title: Comments
-      continue: Continue
       not_ordered: You didn’t order.
       sum: Sum
       title: Your order result for %{order}
     switch_order:
-      open_remaining: ! '%{remaining} remaining'
-      when_finished: ! 'closed since %{date}'
-      when_closed: ! 'settled since %{date}'
+      remaining: ! '%{remaining} remaining'
       title: Current orders
     update:
       error_general: The order couldn’t be updated due to a bug.
@@ -856,8 +834,6 @@ en:
         desc: There is/are %{size}
         title: Open tasks
       title: Homepage
-      to_archive: See your %{archive_link}.
-      to_archive_link: previous orders
       your_tasks: Your tasks
     no_ordergroups: You are unfortunately not a member of an ordergroup.
     ordergroup:
@@ -1097,6 +1073,9 @@ en:
         subscribe: You can find more about the mailing-list at %{link}.
         subscribe_msg: You may have to subscribe to the mailing-list first.
         wiki: Wiki (page Mailing-List)
+      no_user_found: No user found
+      search: Search ...
+      search_user: Search user
       title: New message
     show:
       all_messages: All messages
@@ -1535,6 +1514,10 @@ en:
       warning_periodic: <strong>Warning:</strong> This task is part of a group of <em>weekly tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>.
     error_not_found: No workgroup found
     form:
+      search:
+        hint: Search for user
+        noresult: No user found
+        placeholder: Search ...
       submit:
         periodic: Save weekly task
     index:
