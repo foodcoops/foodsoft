@@ -108,6 +108,9 @@ gem 'localeapp'" >>Gemfile
 fi
 # TODO add more extensive database seed
 
+# XXX don't use redis for now
+echo "Resque.inline = true" >config/initializers/resque.rb
+
 # and push = deploy
 git add -A
 git commit -q -m "heroku changes for environment ${RAILS_ENV}" -a
