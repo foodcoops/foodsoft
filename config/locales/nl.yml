@@ -95,8 +95,10 @@ nl:
       stock_article:
         available: Beschikbaar
         price: Prijs
+        quantity: Op voorraad
         quantity_available: Beschikbaar
         quantity_available_short: Besch.
+        quantity_ordered: Besteld
       stock_taking:
         date: Datum
         note: Notitie
@@ -289,7 +291,7 @@ nl:
       title: Categorie bewerken
     index:
       confirm_delete: Weet je het zeker?
-      new: Nieuwe categorie maken
+      new: Nieuwe categorie
       title: Categoriën
     new:
       title: Nieuwe categorie maken
@@ -365,7 +367,7 @@ nl:
         restrict_region: Alleen uit de regio
         title: Artikel importeren
       new: Nieuw artikel
-      new_order: Bestelling aanmaken
+      new_order: Nieuwe bestelling
       search_placeholder: Naam ...
       title: Artikelen van %{supplier} (%{count})
       upload: Artikelen uploaden
@@ -942,16 +944,55 @@ nl:
       header: ! '%{user} schreef op %{date}:'
       subject: Feedback van %{email}
     foodsoft_message:
-      footer: 
+      footer: ! 'Antwoorden: %{reply_url}
+
+        Bericht online lezen: %{msg_url}
+
+        Berichtinstellingen: %{profile_url}'
     invite:
       subject: Uitnodiging voor de foodcoop
-      text: 
+      text: ! 'Hallo!
+
+
+        %{user} <%{mail}> heeft je uitgenodigd om deel te worden van de groep "%{group}".
+
+        Om lid te worden van de foodcoop en de uitnodiging te accepteren, ga naar: %{link}
+
+        Dit kan maar een keer en uiterlijk tot %{expires}.
+
+
+        Groeten van de foodcoop.'
     negative_balance:
-      subject: 
-      text: 
+      subject: Negatief tegoed
+      text: ! 'Beste %{group},
+
+
+        Je tegoed is onder nul gekomen op %{when}: %{balance}
+
+
+        Er werd %{amount} afgeschreven voor "%{note}" door %{user}.
+
+
+        Zorg er alsjeblieft voor dat tegoed weer positief wordt.
+
+
+
+        Hartlijke groet van %{foodcoop}.'
     not_enough_users_assigned:
-      subject: 
-      text: 
+      subject: ! '"%{task}" heeft nog mensen nodig!'
+      text: ! 'Beste %{user},
+
+
+        De taak ''%{task}'' van jouw werkgroep op %{when} kan nog iemand gebruiken!
+
+
+        Als je je hiervoor nog niet aangemeld hebt is dit je kans:
+
+
+        %{workgroup_tasks_url}
+
+
+        Jouw taken: %{user_tasks_url}'
     order_result:
       subject: ! 'Bestelling gesloten: %{name}'
       text0: ! 'Beste %{ordergroup}.
@@ -1124,7 +1165,7 @@ nl:
       warning_ordered: ! 'Opgelet: rood gemarkeerde artikelen zijn al besteld door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen van deze artikelen verwijderd.'
       warning_ordered_stock: ! 'Opgelet: rood gemarkeerde artikelen zijn al besteld of gekocht door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen/-aankopen van deze artikelen verwijderd, en worden ze niet afgerekend.'
     new:
-      title: Nieuwe bestelling maken
+      title: Nieuwe bestelling openen
     show:
       action_end: Sluiten!
       amounts: ! 'Totaal netto/bruto:'
@@ -1257,7 +1298,7 @@ nl:
       access: Toegang tot
       activated: actief
       address: Adres
-      apple_limit: 
+      apple_limit: Appelpunten bestellingslimiet
       contact: Contact
       deactivated: inactief
       description: Beschrijving
@@ -1330,33 +1371,34 @@ nl:
     'yes': Ja
   stock_takings:
     create:
-      notice: Inventarisatie is aangelegd.
+      notice: Inventaris is opgenomen.
     edit:
-      title: 
+      title: Inventaris aanpassen
     index:
-      new_inventory: 
-      title: 
+      new_inventory: Nieuwe inventaris opnemen
+      title: Inventarisoverzicht
     new:
-      create: 
+      amount: Aantal
+      create: aanmaken
       stock_articles: Voorraadartikelen
       temp_inventory: tijdelijke inventaris
-      text_deviations: 
-      text_need_articles: 
-      title: 
+      text_deviations: Vul alle afwijkingen in van de %{inv_link}. Als er minder is dan vermeld, gebruik dan een negatief getal.
+      text_need_articles: Je moet een nieuw voorraadartikel %{create_link} voordat je het hier kunt gebruiken.
+      title: Inventaris opnemen
     show:
-      amount: 
-      article: 
-      confirm_delete: 
-      date: 
-      note: 
-      overview: 
-      supplier: 
-      title: 
-      unit: 
+      amount: Aantal
+      article: Artikel
+      confirm_delete: Wil je de inventaris echt verwijderen?
+      date: Datum
+      note: Notitie
+      overview: Inventarisoverzicht
+      supplier: Leverancier
+      title: Inventarisoverzicht
+      unit: Eenheid
     stock_takings:
-      confirm_delete: 
-      date: 
-      note: 
+      confirm_delete: Weet je zeker dat je dit wilt verwijderen?
+      date: Datum
+      note: Notitie
     update:
       notice: Inventarisatie is bijgewerkt.
   stockit:
@@ -1369,39 +1411,26 @@ nl:
     form:
       price_hint: Om chaos te voorkomen, kun je de prijs van bestaande voorraadartikelen niet aanpassen.
     index:
-      article:
-        article: Artikel
-        available: beschikbaar
-        category: Categorie
-        ordered: besteld
-        price: Prijs
-        stock: Op voorraad
-        supplier: Leverancier
-        unit: Eenheid
-        vat: BTW
       confirm_delete: Weet je zeker dat je dit wilt verwijderen?
       new_delivery: Nieuwe levering ...
       new_stock_article: Nieuw voorraadartikel
-      new_stock_taking: Inventaris aanleggen
+      new_stock_taking: Inventaris nemen
       order_online: Voorraadbestelling openen
-      show_stock_takings: 
-      stock_count: 
-      stock_worth: 
-      title: 
-      toggle_unavailable: 
-      view_options: 
+      show_stock_takings: Inventarisoverzicht
+      stock_count: ! 'Aantal artikelen:'
+      stock_worth: ! 'Waarde van huidige voorraad:'
+      title: Voorraad (%{article_count})
+      toggle_unavailable: Niet beschikbare artikelen tonen/verbergen
+      view_options: Weergave
     new:
-      search_text: 
-      title: 
+      search_text: ! 'Artikelen zoeken in alle catalogi:'
+      title: Nieuw voorraadartikel maken
     show:
-      change_quantity: 
-      datetime: 
-      delivery: 
-      new_quantity: 
-      order: 
-      reason: 
-      stock_changes: 
-      stock_taking: 
+      change_quantity: Verandering
+      datetime: Tijd
+      new_quantity: Nieuw aantal
+      reason: Reden
+      stock_changes: Verloop
     stock_create:
       notice: Voorraadsartikel is opgeslagen.
     stock_update:

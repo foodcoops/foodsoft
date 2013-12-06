@@ -95,8 +95,10 @@ de:
       stock_article:
         available: Verfügbar
         price: Nettopreis
+        quantity: im Lager
         quantity_available: Verfügbarer Bestand
         quantity_available_short: Verf.
+        quantity_ordered: Davon bestellt
       stock_taking:
         date: Datum
         note: Notiz
@@ -1425,16 +1427,6 @@ de:
     form:
       price_hint: Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.
     index:
-      article:
-        article: Artikel
-        available: verfügbar
-        category: Kategorie
-        ordered: davon bestellt
-        price: Preis
-        stock: im Lager
-        supplier: Lieferantin
-        unit: Einheit
-        vat: MwSt
       confirm_delete: Bist Du sicher?
       new_delivery: Neue Lieferung ..
       new_stock_article: Neuen Lagerartikel anlegen
@@ -1452,12 +1444,9 @@ de:
     show:
       change_quantity: Veränderung
       datetime: Zeitpunkt
-      delivery: Lieferung
       new_quantity: Neuer Bestand
-      order: Bestellung
       reason: Ereignis
       stock_changes: Verlauf des Lagerbestands
-      stock_taking: Inventur
     stock_create:
       notice: Lagerartikel wurde gespeichert.
     stock_update:
