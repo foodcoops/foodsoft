@@ -1447,12 +1447,9 @@ en:
     show:
       change_quantity: Change
       datetime: Time
-      delivery: Delivery
       new_quantity: New quantity
-      order: Order
       reason: Reason
       stock_changes: Stock quantity changes
-      stock_taking: Inventory
     stock_create:
       notice: Stock article was created.
     stock_update:
