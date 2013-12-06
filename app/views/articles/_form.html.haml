@@ -5,7 +5,7 @@
     = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
     %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
   .modal-body
-    /= f.input :availability
+    = f.input :availability
     = f.input :name
     = f.input :unit do
       .inline-inputs
@@ -13,11 +13,9 @@
         &times;
         = f.input_field :unit, class: 'input-mini', title: Article.human_attribute_name(:unit)
         %span#unit_divide_container.less-visible
-          &nbsp;per&nbsp;
+          = f.label :unit, label: "&nbsp;per&nbsp;".html_safe
           = f.input_field :unit, class: 'input-mini', id: 'article_unit_divide'
 
-    = f.input :origin
-    = f.input :manufacturer
     = f.input :note
     = f.association :article_category
     / TODO labels
@@ -42,6 +40,8 @@
           = Article.human_attribute_name(:fc_price)
           %span#fc_price= number_to_currency(@article.fc_price) rescue nil
 
+    = f.input :origin
+    = f.input :manufacturer
     = f.input :order_number
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
