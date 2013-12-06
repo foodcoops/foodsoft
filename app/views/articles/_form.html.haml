@@ -12,9 +12,6 @@
         = f.input_field :unit_quantity, class: 'input-mini', title: Article.human_attribute_name(:unit_quantity)
         &times;
         = f.input_field :unit, class: 'input-mini', title: Article.human_attribute_name(:unit)
-        %span#unit_divide_container.less-visible
-          = f.label :unit, label: "&nbsp;per&nbsp;".html_safe
-          = f.input_field :unit, class: 'input-mini', id: 'article_unit_divide'
 
     = f.input :note
     = f.association :article_category
