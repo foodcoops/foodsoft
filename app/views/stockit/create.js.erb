@@ -1,0 +1,26 @@
+$('div.container-fluid').prepend('<%= j(render(
+  :partial => 'shared/alert_success',
+  :locals => {
+    :alert_message => t('.notice', :name => @stock_article.name)
+  }
+)) %>');
+
+    <%##########################################################################
+    # Publish/subscribe pattern for loose coupling of
+    #   (1) AJAX database manipulation and
+    #   (2) DOM updates for the particular view
+    ############################################################################
+    # * THIS FINISHES STEP (1)
+    # * publish/trigger event(s) which reflect(s) the database manipulation
+    # * attach enough information to the event to allow for a proper response of
+    #   the views in step (2)
+    #
+    # WARNING: remember not to attach secret information (e.g. full JSON of
+    # database entries) - these events are dispatched in the user's browser!
+    %>
+$(document).trigger({
+  type: 'StockArticle#create',
+  stock_article_id: <%= @stock_article.id %>
+});
+
+$('#modalContainer').modal('hide');

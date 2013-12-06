@@ -1,15 +1,15 @@
-$('div.container-fluid').prepend(
-  '<%= j(render(:partial => 'shared/alert_success', :locals => {:alert_message => t('.notice', :name => @stock_article.name)})) %>'
-);
-
 (function() {
   // update entry in stock_article table
   
   $('#stock_articles_for_adding tr').removeClass('success');
   
-  var stock_article_for_adding = $(
-    '<%= j(render(:partial => 'stock_article_for_adding', :locals => {:article => @stock_article, :delivery => @delivery})) %>'
-  ).addClass('success');
+  var stock_article_for_adding = $('<%= j(render(
+    :partial => 'stock_article_for_adding',
+    :locals => {
+      :article => @stock_article,
+      :delivery => @delivery
+    }
+  )) %>').addClass('success');
   
   $('#stock_article_<%= @stock_article.id %>').replaceWith(stock_article_for_adding);
   updateSort('#stock_articles_for_adding');
@@ -28,5 +28,3 @@ $('div.container-fluid').prepend(
   
   updateSort('#stock_changes');
 })();
-
-$('#modalContainer').modal('hide');

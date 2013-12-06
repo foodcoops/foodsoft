@@ -1,0 +1,10 @@
+(function() {
+  var stock_article_row = $('<%= j(render(
+    :partial => 'stock_article',
+    :locals => {
+      :stock_article => @stock_article
+    }
+  )) %>');
+
+  $('#stockArticle-<%= @stock_article.id %>').replaceWith(stock_article_row);
+})();

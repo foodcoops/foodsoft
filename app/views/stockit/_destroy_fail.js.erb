@@ -1,0 +1,6 @@
+$('div.container-fluid').prepend('<%= j(render(
+  :partial => 'shared/alert_error',
+  :locals => {
+    :alert_message => fail_msg
+  }
+)) %>');
