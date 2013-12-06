@@ -470,7 +470,7 @@ en:
       - Ordered
       - Received
       - Price
-      - Unit quantity
+      - Unit Q.
       - Unit
       - Sum
       sum: Sum
@@ -515,13 +515,13 @@ en:
     balancing:
       close:
         alert: ! 'An error occured while accounting: %{message}'
-        notice: Order was accounted succesfully, the balance of the account was updated.
+        notice: Order was settled succesfully, the balance of the account was updated.
       close_direct:
-        alert: ! 'Order can not be closed: %{message}'
-        notice: Order was closed.
+        alert: ! 'Order can not be settled: %{message}'
+        notice: Order was settled.
       confirm:
-        clear: Close
-        first_paragraph: ! 'When the order is closed, all group accounts will be updated.<br />The accounts will be charged as follows:'
+        clear: Settle
+        first_paragraph: ! 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
         or_cancel: or back to accounting
         title: Settle order
       edit_results_by_articles:
@@ -557,7 +557,7 @@ en:
         articles_overview: Overview of articles
         comment_on_transaction: Here you can add a comment to your accounting.
         comments: Comments
-        confirm_order: Close order
+        confirm_order: Settle order
         create_invoice: Create invoice
         edit_note: Edit note
         edit_order: Edit order
@@ -572,8 +572,8 @@ en:
       orders:
         clear: accounting
         cleared: accounted (%{amount})
-        close: close directly
-        confirm: Do you really want to fully close the order?
+        close: settle directly
+        confirm: Do you really want to settle the order?
         end: End
         ended: closed
         last_edited_by: Last edited by
@@ -723,7 +723,7 @@ en:
       new_funds: New account balance
       price: Price
       reset_article_search: Reset search
-      search_article: Search for article...
+      search_article: Search for articles...
       sum_amount: Current amount
       title: Orders
       total_sum_amount: Total amount
@@ -814,7 +814,7 @@ en:
         view_all: See all messages
       my_ordergroup:
         funds: ! '| Available Credit:'
-        last_update: Last Update was %{when} ago
+        last_update: Last update was %{when} ago
         title: My ordergroup
         transactions:
           amount: Amount
@@ -856,7 +856,7 @@ en:
       admin: Administration
       finances:
         accounts: Update accounts
-        settle: To account orders
+        settle: Account orders
         title: Finances
       foodcoop: Foodcoop
       members: Members
@@ -1179,8 +1179,8 @@ en:
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: ! 'Order: %{name}, until %{ends}'
       stock: Stock
-      warning_ordered: ! 'Warning: Articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted.'
-      warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/ purchased within this open stock order. If you uncheck them here, all existing orders/ purchases of these articles will be deleted and it will not be accounted for them.'
+      warning_ordered: ! 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted.'
+      warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them.'
     new:
       title: Create new order
     show:
@@ -1220,7 +1220,7 @@ en:
       recent_changes: Recent changes
       search:
         action: Search
-        placeholder: Page title ..
+        placeholder: Page title ...
       site_map: Sitemap
       title: All Wiki pages
       title_list: List of pages
@@ -1352,7 +1352,7 @@ en:
         edit_stock_article:
           price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
       supplier:
-        min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
+        min_order_quantity: The minimum amount which has to be ordered will be shown during the order process and should motivate ordering
       task:
         duration: How long will the task take, 1-3 hours
         required_users: How many users will be needed in total?
@@ -1438,7 +1438,7 @@ en:
         unit: Unit
         vat: VAT
       confirm_delete: Are you sure you want to delete?
-      new_delivery: New delivery ..
+      new_delivery: New delivery ...
       new_stock_article: Add new stock article
       new_stock_taking: Add inventory
       order_online: Put stock order online

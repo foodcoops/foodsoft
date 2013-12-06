@@ -738,7 +738,7 @@ fr:
       price: Prix
       reset_article_search: 
       search_article: 
-      sum_amount: ! 'Quantité déjà commandée:'
+      sum_amount: Quantité déjà commandée
       title: Commander
       total_sum_amount: Montant total
       total_tolerance: Tolérance totale

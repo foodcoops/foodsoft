@@ -7,7 +7,7 @@ de:
         availability_short: verf.
         deposit: Pfand
         fc_price: Endpreis
-        fc_price_short: 
+        fc_price_short: FC-Preis
         fc_share: FoodCoop-Aufschlag
         fc_share_short: FC-Aufschlag
         gross_price: Bruttopreis
@@ -96,7 +96,7 @@ de:
         available: Verfügbar
         price: Nettopreis
         quantity_available: Verfügbarer Bestand
-        quantity_available_short: 
+        quantity_available_short: Verf.
       stock_taking:
         date: Datum
         note: Notiz
@@ -277,7 +277,7 @@ de:
         name: Name
   application:
     controller:
-      error_authn: 
+      error_authn: Anmeldung erforderlich!
       error_denied: 
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
   article_categories:
@@ -373,7 +373,7 @@ de:
       error_nosel: Du hast keine Artikel ausgewählt
     parse_upload:
       body: <p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
-      title: 
+      title: Artikel hochladen
     sync:
       outlist:
         alert_used: Achtung, %{article} wird gerade in einer laufenden Bestellung verwendet. Bitte erst Bestellung anpassen.
@@ -513,11 +513,11 @@ de:
         alert: ! 'Ein Fehler ist beim Abrechnen aufgetreten: %{message}'
         notice: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert.
       close_direct:
-        alert: ! 'Bestellung kann nicht geschlossen werden: %{message}'
-        notice: Bestellung wurde geschlossen.
+        alert: ! 'Bestellung kann nicht abgerechnet werden: %{message}'
+        notice: Bestellung wurde abgerechnet.
       confirm:
-        clear: Abschließen
-        first_paragraph: ! 'Wenn die Bestellung abgeschlossen wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
+        clear: Abrechnen
+        first_paragraph: ! 'Wenn die Bestellung abgerechnet wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
         or_cancel: oder zurück zur Abrechnung
         title: Bestellung abrechnen
       edit_results_by_articles:
@@ -553,7 +553,7 @@ de:
         articles_overview: Artikelübersicht
         comment_on_transaction: Hier kannst Du deine Abrechnung kommentieren
         comments: Kommentare
-        confirm_order: Bestellung abschließen
+        confirm_order: Bestellung abrechnen
         create_invoice: Rechnung anlegen
         edit_note: Notiz bearbeiten
         edit_order: Bestellung bearbeiten
@@ -568,8 +568,8 @@ de:
       orders:
         clear: abrechnen
         cleared: abgerechnet (%{amount})
-        close: direkt schließen
-        confirm: Wirklich die Bestellung schließen setzen?
+        close: direkt abrechnen
+        confirm: Wirklich die Bestellung abrechnen?
         end: Ende
         ended: beendet
         last_edited_by: Zuletzt bearbeitet von
@@ -720,7 +720,7 @@ de:
       price: Preis
       reset_article_search: Suche zurücksetzen
       search_article: Artikel suchen...
-      sum_amount: ! 'Gesamtbestellmenge bisher:'
+      sum_amount: Gesamtbestellmenge bisher
       title: Bestellen
       total_sum_amount: Gesamtbetrag
       total_tolerance: Gesamt-Toleranz

@@ -70,10 +70,10 @@ nl:
         name: Leverancier
         note: Notitie
         starts: Start op
-        status: 
+        status: Status
       order_article:
         missing_units: Missende eenheden
-        missing_units_short: 
+        missing_units_short: Nodig
         units_to_order: Aantal eenheden
         update_current_price: Huidige prijs overal bijwerken
       order_comment:
@@ -89,14 +89,14 @@ nl:
         name: Naam
         user_tokens: Leden
       page:
-        body: Bericht
+        body: Inhoud
         parent_id: Ouderpagina
         title: Titel
       stock_article:
         available: Beschikbaar
         price: Prijs
         quantity_available: Beschikbaar
-        quantity_available_short: 
+        quantity_available_short: Besch.
       stock_taking:
         date: Datum
         note: Notitie
@@ -110,7 +110,7 @@ nl:
         fax: Fax
         is_subscribed: geabonneerd?
         min_order_quantity: Minimale bestelhoeveelheid
-        min_order_quantity_short: 
+        min_order_quantity_short: Min. bestelling
         name: Naam
         note: Notitie
         order_howto: Hoe te bestellen
@@ -235,7 +235,7 @@ nl:
       new:
         title: Nieuwe gebruiker toevoegen
       show:
-        confirm: Wil je %{user} daadwerkelijk eruit zetten?
+        confirm: Wil je %{user} daadwerkelijk verwijderen?
         email: E-mail
         groupabos: Groepslidmaatschappen
         member_since: Lid sinds %{time}
@@ -468,7 +468,7 @@ nl:
       rows:
       - Artikel
       - Besteld
-      - Hoeveelheid
+      - Gekregen
       - Prijs
       - Gr.Eenh.
       - Eenheid
@@ -477,7 +477,14 @@ nl:
       title: ! 'Huishoudenslijst van bestelling: %{name}, gesloten op %{date}'
     order_fax:
       filename: Bestelling %{name}-%{date} - Fax
-      rows: 
+      rows:
+      - Nummer
+      - Aantal
+      - Naam
+      - Gr.Eenh.
+      - Eenheid
+      - Prijs/eenh.
+      - Subtotaal
       total: Totaal
     order_matrix:
       filename: Bestelling %{name}-%{date} - Sorteermatrix
@@ -510,13 +517,13 @@ nl:
         alert: ! 'Er trad een fout op bij het afrekenen: %{message}'
         notice: Bestelling is succesvol afgerekend, de tegoeden van de leden zijn bijgewerkt.
       close_direct:
-        alert: ! 'Bestelling kan niet gesloten worden: %{message}'
-        notice: Bestelling is gesloten
+        alert: ! 'Bestelling kan niet afgerekend worden: %{message}'
+        notice: Bestelling is afgerekend.
       confirm:
-        clear: Sluiten
-        first_paragraph: ! 'Wanneer de bestelling gesloten wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
-        or_cancel: of terug naar afrekenen
-        title: Order afrekenen
+        clear: Afrekenen
+        first_paragraph: ! 'Wanneer de bestelling afgerekend wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
+        or_cancel: of terug naar balans
+        title: Bestelling afrekenen
       edit_results_by_articles:
         add_article: Artikel toevoegen
         amount: Aantal
@@ -550,7 +557,7 @@ nl:
         articles_overview: Artikeloverzicht
         comment_on_transaction: Hier kun je een notitie aan de afrekening toevoegen.
         comments: Notities
-        confirm_order: Bestelling afsluiten
+        confirm_order: Afrekenen
         create_invoice: Rekening toevoegen
         edit_note: Notitie bewerken
         edit_order: Bestelling bewerken
@@ -558,12 +565,12 @@ nl:
         invoice: Factuur
         notes_and_journal: Notities/Protocol
         summary: Samenvatting
-        title: ! '%{name} afrekenen'
+        title: Balans van %{name}
         view_options: Weergaveopties
       order_article:
         confirm: Weet je het zeker?
       orders:
-        clear: afrekenen
+        clear: balans
         cleared: afgerekend (%{amount})
         close: direct afrekenen
         confirm: Weet je zeker dat de je bestelling wilt afrekenen?
@@ -582,8 +589,8 @@ nl:
         groups_amount: ! 'Bedrag van huishoudens:'
         net_amount: ! 'Netto bedrag:'
         reload: Samenvatting verversen
-        with_extra_charge: 
-        without_extra_charge: 
+        with_extra_charge: ! 'inclusief marge:'
+        without_extra_charge: ! 'zonder marge:'
     create:
       notice: Rekening is gemaakt
     financial_transactions:
@@ -601,7 +608,7 @@ nl:
         search_placeholder: Zoeken ...
         title: Rekeningoverzicht voor %{name}
       new:
-        paragraph: 
+        paragraph: Hier kun je het tegoed van huishouden <b>%{name}</b> ophogen en verlagen.
         title: Nieuwe transactie
       new_collection:
         new_ordergroup: Nog een huishouden toevoegen
@@ -613,7 +620,7 @@ nl:
         remove_group: Huishouden verwijderen
     group_order_articles:
       form:
-        amount_change_for: 
+        amount_change_for: Hoeveelheid %{article}
         result_hint: ! 'Eenheid: %{unit}'
     index:
       amount: Bedrag
@@ -715,9 +722,9 @@ nl:
       action_save: Bestelling opslaan
       new_funds: Nieuw tegoed
       price: Prijs
-      reset_article_search: 
-      search_article: Artikel zoeken...
-      sum_amount: ! 'Huidig totaalbedrag:'
+      reset_article_search: Alles tonen
+      search_article: Artikelen zoeken...
+      sum_amount: Huidig totaalbedrag
       title: Bestellen
       total_sum_amount: Totalbedrag
       total_tolerance: Totale tolerantie
@@ -742,7 +749,7 @@ nl:
       title: Artikelen
     show:
       articles:
-        edit_order: Order aanpassen
+        edit_order: Bestelling aanpassen
         not_ordered_msg: Je hebt nog niets bestelt
         order_closed_msg: Sorry, deze bestelling is gesloten.
         order_nopen_title: Waarbij rekening gehouden is met bestellingen van anderen
@@ -752,7 +759,7 @@ nl:
         ordered: Besteld
         ordered_title: Hoeveelheid + tolerantie
         show_hide: Niet bestelde artikelen tonen/verbergen
-        show_note: 
+        show_note: Opmerking
         title: Artikeloverzicht
         unit_price: Stuksprijs
       comment: Notitie
@@ -795,10 +802,12 @@ nl:
       required_users: Nog %{count} leden nodig!
   home:
     apple_bar:
-      desc: 
+      desc: ! 'Deze balk laat zien hoeveel taken je gedaan hebt per bestelhoeveelheid, vergeleken met het gemiddelde van de foodcoop.
+
+        Praktisch: voor iedere %{amount} aan totale bestellingen moet je een taak te doen!'
       more_info: Meer informatie
-      points: 
-      warning: 
+      points: ! 'Appelpuntenstand: %{points}'
+      warning: Opgelet, als je minder dan %{threshold} appelpunten hebt, kun je geen bestelling plaatsen!
     changes_saved: Wijzigingen opgeslagen.
     index:
       due_date_format: ! '%A %d %B'
@@ -817,7 +826,7 @@ nl:
           when: Wanneer
           where: Wie
       ordergroup:
-        title: 
+        title: Betrokkenheid van je huishouden
       tasks_move:
         action: Taken op je nemen/annuleren
         desc: Je bent voor de volgende taken verantwoordelijk.
@@ -826,7 +835,7 @@ nl:
         action: open taken
         desc: Er zijn %{size}
         title: open taken
-      title: Beginpagina
+      title: Hoofdpagina
       your_tasks: Jouw taken
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
     ordergroup:
@@ -846,10 +855,10 @@ nl:
         since: ! '(gebruiker sinds: %{when})'
         title: ! '%{user}'
     start_nav:
-      admin: 
+      admin: Administratie
       finances:
         accounts: Tegoeden bijwerken
-        settle: Bestelling afrekenen
+        settle: Bestellingen afrekenen
         title: Financiën
       foodcoop: Foodcoop
       members: Leden
@@ -879,7 +888,7 @@ nl:
     success: Persoon is uitgenodigd.
   js:
     ordering:
-      confirm_change: 
+      confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
   layouts:
     email:
       footer: ! '--
@@ -1058,7 +1067,7 @@ nl:
     tasks: Taken
     wiki:
       all_pages: Alle Pagina's
-      home: Begin
+      home: Hoofdpagina
       title: Wiki
     workgroups: Werkgroepen
   ordergroups:
@@ -1101,29 +1110,29 @@ nl:
       confirm_delete: Wil je de bestelling werkelijk verwijderen?
       confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
       ended_orders: Gesloten bestellingen
-      new_order: 
+      new_order: Nieuwe bestelling openen
       no_open_orders: Er zijn momenteel geen lopende bestellingen.
       open_orders: Lopende bestellingen
-      title: 
+      title: Bestellingen beheren
     model:
       error_closed: Bestelling was al afgerekend
-      error_nosel: 
-      error_starts_before_ends: 
+      error_nosel: Er moet minstens één artikel geselecteerd zijn
+      error_starts_before_ends: moet na de startdatum zijn (of niet ingevuld worden)
       notice_close: ! 'Bestelling: %{name}, tot %{ends}'
       stock: Voorraad
-      warning_ordered: 
-      warning_ordered_stock: 
+      warning_ordered: ! 'Opgelet: rood gemarkeerde artikelen zijn al besteld door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen van deze artikelen verwijderd.'
+      warning_ordered_stock: ! 'Opgelet: rood gemarkeerde artikelen zijn al besteld of gekocht door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen/-aankopen van deze artikelen verwijderd, en worden ze niet afgerekend.'
     new:
-      title: 
+      title: Nieuwe bestelling maken
     show:
       action_end: Sluiten!
-      amounts: 
+      amounts: ! 'Totaal netto/bruto:'
       articles: Artikeloverzicht
       articles_ordered: ! 'Bestelde artikelen:'
       comments:
         title: Commentaar
       comments_link: Commentaar
-      confirm_delete: 
+      confirm_delete: Wil je deze bestelling echt verwijderen?
       confirm_end: ! 'Wil je de bestelling %{order} echt sluiten?
 
         Hierna kan zij niet opnieuw geopend worden.'
@@ -1138,7 +1147,7 @@ nl:
       group_orders: ! 'Ledenbestellingen:'
       sort_article: Gesorteerd naar artikel
       sort_group: Gesorteerd naar huishouden
-      title: 
+      title: ! 'Bestelling: %{name}'
       warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
     state:
       closed: afgerekend
@@ -1148,34 +1157,34 @@ nl:
       notice: De bestelling is bijgewerkt.
   pages:
     all:
-      new_page: 
-      recent_changes: 
+      new_page: Nieuwe pagina maken
+      recent_changes: Recente wijzigingen
       search:
-        action: 
-        placeholder: 
-      site_map: 
-      title: 
-      title_list: 
+        action: Zoeken
+        placeholder: Pagina titel ...
+      site_map: Sitemap
+      title: Alle wikipagina's
+      title_list: Paginalijst
     body:
-      title_toc: 
+      title_toc: Inhoud
     create:
       notice: Pagina is gemaakt.
     cshow:
-      error_noexist: 
+      error_noexist: Pagina bestaat niet!
       redirect_notice: Doorverwezen van %{page} ...
     destroy:
       notice: De pagina '%{page}' en alle subpagina's zijn verwijderd.
     edit:
-      title: 
-    error_stale_object: 
+      title: Pagina bewerken
+    error_stale_object: Opgelet, de pagina is net veranderd door een ander. Probeer het alsjeblieft opnieuw.
     form:
       help:
-        bold: 
-        external_link_ex: 
-        external_links: 
-        heading: 
-        headings: 
-        italic: 
+        bold: vet
+        external_link_ex: Externe pagina
+        external_links: Links naar pagina's op andere websites
+        heading: niveau %{level}
+        headings: Kop
+        italic: italic
         list_item_1: Eerste in de lijst
         list_item_2: Tweede in de lijst
         noformat: Zonder wiki-opmaak
@@ -1187,35 +1196,35 @@ nl:
         see_tables: zie %{tables_link}
         tables_link: Tabellen
         text: tekst
-        title: 
-        unordered_list: 
-        wiki_link_ex: 
-        wiki_links: 
-      preview: 
-    last_updated: 
+        title: Korte opmaakhulp
+        unordered_list: Itemlijst
+        wiki_link_ex: Foodsoft wiki pagina
+        wiki_links: Wiki-links
+      preview: Voorbeeld
+    last_updated: Laatst bijgewerkt
     new:
-      title: 
+      title: Nieuwe wiki pagina
     page_list_item:
-      date_format: 
+      date_format: ! '%a, %d %B %Y %H:%M:%S'
     show:
-      date_format: 
-      delete: 
-      delete_confirm: 
-      edit: 
-      last_updated: 
-      subpages: 
-      title_versions: 
-      versions: 
-    title: 
+      date_format: ! '%d-%m-%y %H:%M'
+      delete: Pagina verwijderen
+      delete_confirm: ! 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
+      edit: Pagina bewerken
+      last_updated: Laatst bijgewerkt door <b>%{user}</b> op %{when}
+      subpages: kindpagina's
+      title_versions: Versies
+      versions: Versies (%{count})
+    title: Titel
     update:
       notice: Pagina is bijgewerkt.
     version:
-      author: 
-      date_format: 
-      revert: 
-      title: 
-      title_version: 
-      view_current: 
+      author: ! 'Auteur: %{user}'
+      date_format: ! '%a, %d-%m-%Y, %H:%M'
+      revert: Deze versie terugzetten
+      title: ! '%{title} - versie %{version}'
+      title_version: Versie
+      view_current: Huidige versie bekijken
   sessions:
     logged_in: Ingelogd!
     logged_out: Uitgelogd!
@@ -1261,7 +1270,7 @@ nl:
       user_not_found: Geen gebruiker gevonden
     open_orders:
       no_open_orders: Er zijn momenteel geen lopende bestellingen.
-      not_enough_apples: 
+      not_enough_apples: Opgelet, je huishouden heeft niet genoeg appelpunten om te kunnen bestellen!
       title: Lopende bestellingen
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
@@ -1269,26 +1278,26 @@ nl:
       title: Groepsleden
   simple_form:
     error_notification:
-      default_message: 
+      default_message: Problemen gevonden, controleer alsjeblieft de invoer.
     hints:
       article:
         unit: ! 'Bijvoorbeeld: KG of 1L of 500g'
       message:
-        private: 
+        private: Bericht wordt niet getoond in de Foodsoft inbox.
       order_article:
-        units_to_order: 
-        update_current_price: 
+        units_to_order: Als je het aantal geleverde eenheden wijzigt, moet je daarna de hoeveelheden voor huishoudens aanpassen. Klik daarvoor op de artikelnaam. Als je dit vergeet, kunnen huishoudens belast worden voor artikelen die ze niet hebben gekregen!
+        update_current_price: Ook prijs in huidige besteling aanpassen
       stock_article:
         copy_stock_article:
-          name: 
+          name: Wijzigen alsjeblieft
         edit_stock_article:
           price: <ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>
       supplier:
-        min_order_quantity: 
+        min_order_quantity: De minimum bestelhoeveelheid wordt getoond bij het bestellen en is bedoeld om leden te motiveren genoeg te bestellen.
       task:
-        duration: 
-        required_users: 
-      tax: 
+        duration: Hoe lang de taak duurt, 1-3 uur.
+        required_users: Hoeveel mensen zijn in totaal nodig?
+      tax: Percentage
     labels:
       settings:
         messages:
@@ -1328,8 +1337,8 @@ nl:
       title: 
     new:
       create: 
-      stock_articles: 
-      temp_inventory: 
+      stock_articles: Voorraadartikelen
+      temp_inventory: tijdelijke inventaris
       text_deviations: 
       text_need_articles: 
       title: 
@@ -1351,29 +1360,29 @@ nl:
       notice: Inventarisatie is bijgewerkt.
   stockit:
     check:
-      not_empty: 
+      not_empty: ! '%{name} kon niet worden verwijderd, de inventaris is niet leeg.'
     destroy:
       notice: Artikel %{name} is verwijdered.
     edit:
-      title: 
+      title: Voorraadartikelen bewerken
     form:
-      price_hint: 
+      price_hint: Om chaos te voorkomen, kun je de prijs van bestaande voorraadartikelen niet aanpassen.
     index:
       article:
-        article: 
-        available: 
-        category: 
-        ordered: 
-        price: 
-        stock: 
-        supplier: 
-        unit: 
-        vat: 
-      confirm_delete: 
-      new_delivery: 
-      new_stock_article: 
-      new_stock_taking: 
-      order_online: 
+        article: Artikel
+        available: beschikbaar
+        category: Categorie
+        ordered: besteld
+        price: Prijs
+        stock: Op voorraad
+        supplier: Leverancier
+        unit: Eenheid
+        vat: BTW
+      confirm_delete: Weet je zeker dat je dit wilt verwijderen?
+      new_delivery: Nieuwe levering ...
+      new_stock_article: Nieuw voorraadartikel
+      new_stock_taking: Inventaris aanleggen
+      order_online: Voorraadbestelling openen
       show_stock_takings: 
       stock_count: 
       stock_worth: 
@@ -1402,29 +1411,29 @@ nl:
     destroy:
       notice: Leverancier is verwijderd
     edit:
-      title: 
+      title: Leverancier bewerken
     index:
-      action_import: 
-      action_new: 
-      articles: 
-      confirm_del: 
-      deliveries: 
-      stock: 
-      title: 
+      action_import: Leverancier uit externe database importeren
+      action_new: Leverancier toevoegen
+      articles: artikelen (%{count})
+      confirm_del: Leverancier %{name} echt verwijderen?
+      deliveries: leveringen (%{count})
+      stock: op voorraad (%{count})
+      title: Leveranciers
     new:
-      title: 
-    shared_supplier_note: 
+      title: Nieuwe leverancier
+    shared_supplier_note: Leverancier is verbonden met de externe database.
     shared_suppliers:
-      body: 
-      subscribe: 
-      subscribe_again: 
-      supplier: 
-      title: 
+      body: <p>Hier kun je leveranciers in de externe database zien.</p> <p>Als je een externe leverancier importeert, wordt er een nieuwe leverancier aangemaakt die verbonden is met de externe database.</p>
+      subscribe: Importeren
+      subscribe_again: Nogmaals importeren
+      supplier: Leverancier
+      title: Externe lijsten
     show:
-      confirm_delete: 
-      last_deliveries: 
-      new_delivery: 
-      show_deliveries: 
+      confirm_delete: Zeker weten?
+      last_deliveries: Laatste leveringen
+      new_delivery: Levering aanmaken
+      show_deliveries: Alle leveringen tonen
     update:
       notice: Leverancier is bijgewerkt
   tasks:
@@ -1447,9 +1456,9 @@ nl:
     error_not_found: 
     form:
       search:
-        hint: 
-        noresult: 
-        placeholder: 
+        hint: Gebruiker zoeken
+        noresult: Geen gebruiker gevonden
+        placeholder: Zoeken ...
       submit:
         periodic: 
     index:
@@ -1521,8 +1530,8 @@ nl:
   workgroups:
     edit:
       title: Werkgroep bewerken
-    error_last_admin_group: 
-    error_last_admin_role: 
+    error_last_admin_group: De laatste groep met admin-rechten mag niet verwijderd worden (anders kun je er niet meer in).
+    error_last_admin_role: Je kunt admin-privileges voor de laatste groep met admin-rechten niet weghalen (anders kun je er niet meer in).
     index:
       title: Werkgroepen
     update:
