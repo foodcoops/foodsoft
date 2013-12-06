@@ -22,6 +22,7 @@ fr:
         unit: Unité
         unit_quantity: Unités par lot
         unit_quantity_short: 
+        units: Lots
       article_category:
         description: Description
         name: Nom
@@ -30,11 +31,20 @@ fr:
         note: 
         supplier: Fournisseuse_r
       financial_transaction:
-        amount: montant
-        note: note
+        amount: Montant
+        created_on: Date
+        note: Note
+        ordergroup: Cellule
+        user: 
+      group_order:
+        price: Total de la commande
+        updated_by: Dernière commande
       group_order_article:
         ordergroup_id: Cellul
+        quantity: Quantité
         result: Quantité
+        tolerance: 
+        total_price: Total
       invoice:
         amount: Montant
         date: Date de facturation
@@ -54,15 +64,23 @@ fr:
         sent_to_all: Envoyer à tous les membres
         subject: Sujet
       order:
+        closed_by: Décompté par
+        created_by: Établi par
         ends: Clôture le
+        name: FournisseurE
         note: 
         starts: Ouverture le
+        status: 
       order_article:
+        missing_units: Unités manquantes
+        missing_units_short: 
         units_to_order: Quantité
         update_current_price: Mettre à jour le prix global
       order_comment:
         text: Commenter cette commande...
       ordergroup:
+        account_balance: Crédit initial
+        available_funds: Crédit disponible
         contact_address: Adresse
         contact_person: Personne à contacter
         contact_phone: Téléphone
@@ -75,10 +93,10 @@ fr:
         parent_id: Page parente
         title: Titre
       stock_article:
+        available: Disponible
         price: Prix net
-        quantity: 
         quantity_available: 
-        supplier: FournisseurE
+        quantity_available_short: 
       stock_taking:
         date: 
         note: 
@@ -92,6 +110,7 @@ fr:
         fax: Fa
         is_subscribed: abonné?
         min_order_quantity: Quantité minimale à commander
+        min_order_quantity_short: 
         name: Nom
         note: Note
         order_howto: Comment commander
@@ -328,7 +347,8 @@ fr:
       unit_quantity_desc: Unités par lot
       unit_quantity_short: U/L
     form:
-      title: Ajouter un nouvel article
+      title_edit: 
+      title_new: Ajouter un nouvel article
     import_search_results:
       action_import: importer
       already_imported: déjà importé
@@ -602,21 +622,13 @@ fr:
         paragraph: Cet espace permet de rajouter ou d'enlever du crédit à la cellule <b>%{name}</b>.
         title: Nouvelle transaction
       new_collection:
-        amount: Montant
         new_ordergroup: Créer d'autres cellules
-        note: Note
-        ordergroup: Cellule
         save: Sauvegarder les transactions
         sidebar: ! "Cet espace permet de mettre à jour plusieurs comptes simultanément, \npar exemple pour saisir les versements des cellules sur leurs comptes à partir d'un relevé."
         title: Mettre à jour plusieurs comptes
       ordergroup:
         remove: Supprimer
         remove_group: Supprimer cette cellule
-      transactions:
-        amount: Montant
-        date: Date
-        note: Note
-        who: Qui?
     group_order_articles:
       form:
         amount_change_for: Modification de la quantité de %{article}
@@ -723,30 +735,14 @@ fr:
       notfound: ! ' Mauvaise adresse, ce n''est pas ta commande.'
     form:
       action_save: Enregistrer ta commande
-      amount: Quantité
-      available: Disponible
-      available_funds: Crédit disponible
-      created_by: Établi par
-      ending: Clôture le
-      funds: Crédit
-      last_update: Dernière commande
-      manufacturer: Produit par
-      min_quantity: Quantité minimale
-      name: Nom
       new_funds: Nouveau solde
-      note: Note
       price: Prix
       reset_article_search: 
       search_article: 
-      sum: Prix total
-      sum_amount: ! 'Quantité déjà commandée:'
-      supplier: Fourni par
+      sum_amount: Quantité déjà commandée
       title: Commander
-      tolerance: Tolérance
       total_sum_amount: Montant total
       total_tolerance: Tolérance totale
-      unit: Unité
-      unit_missing: Unités manquantes
       units: Lots
       units_full: Lots complet
       units_total: Unités déjà commandées
@@ -758,8 +754,6 @@ fr:
         title: Commandes par encore décomptées
         total_sum: Total
       funds:
-        account_balance: Crédit initial
-        available_funds: Crédit disponible
         finished_orders: montant prévu des commandes non décomptées
         open_orders: montant des commandes en cours
         title: Crédit
@@ -770,14 +764,9 @@ fr:
         alors que vous n''en avez que %{apples} pour le moment.'
     order:
       title: Article
-    orders:
-      ending: Clôture le
-      sum: Total
-      supplier: FournisseusE_r
     show:
       articles:
         edit_order: Modifier ta commande
-        name: Nom
         not_ordered_msg: Tu n'as pas encore commandé
         order_closed_msg: Désolé, cette commande a déjà été fermée. Il faudra te réveiller plus tôt la prochaine fois
         order_nopen_title: En tenant compte des commandes en cours de toutes les cellules
@@ -787,21 +776,14 @@ fr:
         ordered: Quantité souhaitée
         ordered_title: Quantité + tolérance
         show_hide: Montrer/cacher les articles non commandés
-        sum: Total
+        show_note: 
         title: Aperçu des articles
-        total_price: Prix
         unit_price: Prix unitaire
-        units: Lots
-      closed_by: Décompté par %{user}
       comment: Lire/écrire des commentaire
       comments:
         title: Commentaire
-      ending: Clôture le
       not_ordered: Tu n'as pas commandé.
-      note: Note
-      order_sum: Total de la commande
       sum: Total
-      supplier: Fourni par
       title: Ta part de la commande %{order}
     switch_order:
       remaining: encore %{remaining}
@@ -1164,10 +1146,8 @@ fr:
   orders:
     articles:
       article_count: ! 'Articles commandés:'
-      name: Nom
       prices: Prix brut/net
       prices_sum: ! 'Totaux (des prix bruts/nets):'
-      unit_quantity: Unités par lots x Lots
       units_full: Lots complet
       units_ordered: Unités commandées
     create:
@@ -1186,26 +1166,18 @@ fr:
       notice: La commande a été close.
     form:
       ignore_warnings: 
-      name: Nom
-      note: Note
-      origin: Origine
       prices: Prix (net/coop)
       select_all: Tout sélectionner
       stockit: Disponible
-      supplier: Productrice_teur
       title: Article
-      unit_quantity: Lots
     index:
       action_end: Terminer
       confirm_delete: Vraiment supprimer la commande?
       confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
       ended_orders: Commandes closes
-      ending: Clôture le
       new_order: Définir une nouvelle commande
       no_open_orders: Il n'y a aucune commande en cours en ce moment.
-      note: Note
       open_orders: Commandes en cours
-      supplier: FournisseusE_r
       title: Gestion des commandes
     model:
       error_closed: Cette commande a déjà été décomptée
@@ -1217,23 +1189,16 @@ fr:
       warning_ordered_stock: 
     new:
       title: Définir une nouvelle commande
-    orders:
-      ending: Clôture le
-      start: Début
-      status: Statut
-      supplier: FournisseurE
     show:
       action_end: Clore!
       amounts: ! 'Total net/brut:'
       articles: Aperçu des articles
       articles_ordered: ! 'Articles commandés:'
-      begin: ! 'Début:'
       comments:
         title: Commentaire
       comments_link: Commenaire
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment terminer la commande %{order}? Pas d'annulation possible.
-      created_by: ! 'Créée par:'
       download:
         article_pdf: Liste des articles en PDF
         download_file: Télécharger
@@ -1242,12 +1207,9 @@ fr:
         group_pdf: Liste des cellules en PDF
         matrix_pdf: Matrice de distribution en PDF
         title: Télécharger
-      ending: ! 'Clôture le:'
       group_orders: ! 'Commandes des cellules:'
-      note: ! 'Note:'
       sort_article: Trié par article
       sort_group: Trié par cellules
-      supplier: FournisseurE
       title: ! 'Commande: %{name}'
       warn_not_closed: Attention, cette commande n'a pas encore été décomptée!
     state:
@@ -1370,12 +1332,9 @@ fr:
       title: Boulots hebdomadaires
       user_not_found: Aucune utilisatrice n'a été trouvée.
     open_orders:
-      ending: Clôture le
       no_open_orders: Il n'y a aucune commande en cours en ce moment
       not_enough_apples: Désolé, ta cellule n'a pas assez de glands pour pouvoir commander!
-      supplier: FournisseusE_r
       title: Commandes en cours
-      total: Total
       total_sum: Total
       who_ordered: Qui a commandé?
     workgroup_members:

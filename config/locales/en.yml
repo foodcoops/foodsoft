@@ -22,6 +22,7 @@ en:
         unit: Unit
         unit_quantity: Unit quantity
         unit_quantity_short: U.Q.
+        units: Units
       article_category:
         description: Description
         name: Name
@@ -30,11 +31,20 @@ en:
         note: Note
         supplier: Supplier
       financial_transaction:
-        amount: amount
-        note: note
+        amount: Amount
+        created_on: Date
+        note: Note
+        ordergroup: Ordergroup
+        user: Entered by
+      group_order:
+        price: Order sum
+        updated_by: Last ordered by
       group_order_article:
         ordergroup_id: Ordergroup
+        quantity: Amount
         result: Amount
+        tolerance: Tolerance
+        total_price: Sum
       invoice:
         amount: Amount
         date: Billing date
@@ -54,15 +64,23 @@ en:
         sent_to_all: Send to all members
         subject: Subject
       order:
+        closed_by: Settled by
+        created_by: Created by
         ends: Ends at
+        name: Supplier
         note: Note
         starts: Starts at
+        status: Status
       order_article:
+        missing_units: Missing units
+        missing_units_short: Missing
         units_to_order: Amount of units
         update_current_price: Globally update current price
       order_comment:
         text: Add comment to this order ...
       ordergroup:
+        account_balance: Account balance
+        available_funds: Available credit
         contact_address: Address
         contact_person: Contact person
         contact_phone: Phone
@@ -75,10 +93,10 @@ en:
         parent_id: Parent page
         title: Title
       stock_article:
+        available: Available
         price: Price
-        quantity: Quantity
         quantity_available: Available quantity
-        supplier: Supplier
+        quantity_available_short: Avail.
       stock_taking:
         date: Date
         note: Note
@@ -92,6 +110,7 @@ en:
         fax: Fax
         is_subscribed: subscribed?
         min_order_quantity: Minimum order quantity
+        min_order_quantity_short: Min. quantity
         name: Name
         note: Note
         order_howto: How to order
@@ -328,7 +347,8 @@ en:
       unit_quantity_desc: Unit quantity
       unit_quantity_short: Quantity
     form:
-      title: Add new article
+      title_edit: Edit article
+      title_new: Add new article
     import_search_results:
       action_import: import
       already_imported: already imported
@@ -416,7 +436,7 @@ en:
       article: Article
       price: Netprice
       sum: Sum
-      sum_diff: Gross - adjusted invoice ammount
+      sum_diff: Gross - adjusted invoice amount
       sum_gross: Gross sum
       sum_net: Net sum
       title: Show delivery
@@ -451,7 +471,7 @@ en:
       - Ordered
       - Received
       - Price
-      - Unit quantity
+      - Unit Q.
       - Unit
       - Sum
       sum: Sum
@@ -496,13 +516,13 @@ en:
     balancing:
       close:
         alert: ! 'An error occured while accounting: %{message}'
-        notice: Order was accounted succesfully, the balance of the account was updated.
+        notice: Order was settled succesfully, the balance of the account was updated.
       close_direct:
-        alert: ! 'Order can not be closed: %{message}'
-        notice: Order was closed.
+        alert: ! 'Order can not be settled: %{message}'
+        notice: Order was settled.
       confirm:
-        clear: Close
-        first_paragraph: ! 'When the order is closed, all group accounts will be updated.<br />The accounts will be charged as follows:'
+        clear: Settle
+        first_paragraph: ! 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
         or_cancel: or back to accounting
         title: Settle order
       edit_results_by_articles:
@@ -538,7 +558,7 @@ en:
         articles_overview: Overview of articles
         comment_on_transaction: Here you can add a comment to your accounting.
         comments: Comments
-        confirm_order: Close order
+        confirm_order: Settle order
         create_invoice: Create invoice
         edit_note: Edit note
         edit_order: Edit order
@@ -553,8 +573,8 @@ en:
       orders:
         clear: accounting
         cleared: accounted (%{amount})
-        close: close directly
-        confirm: Do you really want to fully close the order?
+        close: settle directly
+        confirm: Do you really want to settle the order?
         end: End
         ended: closed
         last_edited_by: Last edited by
@@ -592,21 +612,13 @@ en:
         paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
         title: New transaction
       new_collection:
-        amount: Amount
         new_ordergroup: Add new order group
-        note: Note
-        ordergroup: Order group
         save: Save transaction
-        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement
+        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement.
         title: Updating more accounts
       ordergroup:
         remove: Remove
         remove_group: Remove group
-      transactions:
-        amount: Amount
-        date: Date
-        note: Note
-        who: Who
     group_order_articles:
       form:
         amount_change_for: Change amount for %{article}
@@ -709,30 +721,14 @@ en:
       notfound: Incorrect URL, this is not your order.
     form:
       action_save: Save order
-      amount: Amount
-      available: Available
-      available_funds: Available credits
-      created_by: Created by
-      ending: End
-      funds: Credit
-      last_update: Last ordered
-      manufacturer: Manufacturer
-      min_quantity: Minimum quantity
-      name: Name
       new_funds: New account balance
-      note: Note
       price: Price
       reset_article_search: Reset search
-      search_article: Search for article...
-      sum: Sum
+      search_article: Search for articles...
       sum_amount: Current amount
-      supplier: Supplier
       title: Orders
-      tolerance: Tolerance
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
-      unit: Unit
-      unit_missing: Missing units
       units: Units
       units_full: Filled units
       units_total: Total units
@@ -744,9 +740,7 @@ en:
         title: Unsettled orders
         total_sum: Total sum
       funds:
-        account_balance: Account balance
-        available_funds: Available credit
-        finished_orders: unsettled orders
+        finished_orders: Unsettled orders
         open_orders: Current orders
         title: Credit
       title: Orders overview
@@ -754,14 +748,9 @@ en:
       not_enough_apples: You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.
     order:
       title: Articles
-    orders:
-      ending: End
-      sum: Sum
-      supplier: Suppliers
     show:
       articles:
         edit_order: Edit order
-        name: Name
         not_ordered_msg: You didn’t place an order yet
         order_closed_msg: Sorry, this order is closed.
         order_nopen_title: Considering current orders of all groups
@@ -771,21 +760,14 @@ en:
         ordered: Ordered
         ordered_title: Amount + tolerance
         show_hide: Show/hide articles not ordered
-        sum: Sum
+        show_note: Show note
         title: Article overview
-        total_price: Total price
         unit_price: Unit price
-        units: Units
-      closed_by: Settled by %{user}
       comment: Comment
       comments:
         title: Comments
-      ending: End
       not_ordered: You didn’t order.
-      note: Note
-      order_sum: Order sum
       sum: Sum
-      supplier: Suppliers
       title: Your order result for %{order}
     switch_order:
       remaining: ! '%{remaining} remaining'
@@ -833,7 +815,7 @@ en:
         view_all: See all messages
       my_ordergroup:
         funds: ! '| Available Credit:'
-        last_update: Last Update was %{when} ago
+        last_update: Last update was %{when} ago
         title: My ordergroup
         transactions:
           amount: Amount
@@ -875,7 +857,7 @@ en:
       admin: Administration
       finances:
         accounts: Update accounts
-        settle: To account orders
+        settle: Account orders
         title: Finances
       foodcoop: Foodcoop
       members: Members
@@ -1159,10 +1141,8 @@ en:
   orders:
     articles:
       article_count: ! 'Ordered articles:'
-      name: Name
       prices: Net/gross price
       prices_sum: ! 'Sum (net/gross price):'
-      unit_quantity: Unit quantity
       units_full: Full units
       units_ordered: Units ordered
     create:
@@ -1181,26 +1161,18 @@ en:
       notice: The order has been closed.
     form:
       ignore_warnings: Ignore warnings
-      name: Name
-      note: Note
-      origin: Origin
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
-      supplier: Producer
       title: Article
-      unit_quantity: Unit quantity
     index:
       action_end: Close
       confirm_delete: Do you really want to delete the order?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
       ended_orders: Closed orders
-      ending: End
       new_order: Create new order
       no_open_orders: There are currently no open orders.
-      note: Note
       open_orders: Current orders
-      supplier: Supplier
       title: Manage orders
     model:
       error_closed: Order was already settled
@@ -1208,21 +1180,15 @@ en:
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: ! 'Order: %{name}, until %{ends}'
       stock: Stock
-      warning_ordered: ! 'Warning: Articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted.'
-      warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/ purchased within this open stock order. If you uncheck them here, all existing orders/ purchases of these articles will be deleted and it will not be accounted for them.'
+      warning_ordered: ! 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted.'
+      warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them.'
     new:
       title: Create new order
-    orders:
-      ending: End
-      start: Start
-      status: Status
-      supplier: Supplier
     show:
       action_end: Close!
       amounts: ! 'Net/gross sum:'
       articles: Article overview
       articles_ordered: ! 'Ordered articles:'
-      begin: ! 'Begin:'
       comments:
         title: Comments
       comments_link: Comments
@@ -1230,7 +1196,6 @@ en:
       confirm_end: ! 'Do you really want to close the order %{order}?
 
         There is no going back.'
-      created_by: ! 'Created by:'
       download:
         article_pdf: Article PDF
         download_file: Download file
@@ -1239,12 +1204,9 @@ en:
         group_pdf: Group PDF
         matrix_pdf: Matrix PDF
         title: Download
-      ending: ! 'End:'
       group_orders: ! 'Group orders:'
-      note: ! 'Note:'
       sort_article: Sorted in articles
       sort_group: Sorted in groups
-      supplier: ! 'Supplier:'
       title: ! 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
     state:
@@ -1259,7 +1221,7 @@ en:
       recent_changes: Recent changes
       search:
         action: Search
-        placeholder: Page title ..
+        placeholder: Page title ...
       site_map: Sitemap
       title: All Wiki pages
       title_list: List of pages
@@ -1367,12 +1329,9 @@ en:
       title: Weekly jobs
       user_not_found: No user found
     open_orders:
-      ending: Ending
       no_open_orders: There are no current orders
       not_enough_apples: Attention your order group has too few apple points to place an order!
-      supplier: Supplier
       title: Current orders
-      total: Sum
       total_sum: Total sum
       who_ordered: Who ordered?
     workgroup_members:
@@ -1394,7 +1353,7 @@ en:
         edit_stock_article:
           price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
       supplier:
-        min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
+        min_order_quantity: The minimum amount which has to be ordered will be shown during the order process and should motivate ordering
       task:
         duration: How long will the task take, 1-3 hours
         required_users: How many users will be needed in total?
@@ -1480,7 +1439,7 @@ en:
         unit: Unit
         vat: VAT
       confirm_delete: Are you sure you want to delete?
-      new_delivery: New delivery ..
+      new_delivery: New delivery ...
       new_stock_article: Add new stock article
       new_stock_taking: Add inventory
       order_online: Put stock order online
