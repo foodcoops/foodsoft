@@ -1398,6 +1398,7 @@ en:
       new_inventory: Create new inventory
       title: Inventory overview
     new:
+      amount: Amount
       create: create
       stock_articles: Stock articles
       temp_inventory: temporary inventory

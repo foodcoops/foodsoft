@@ -1392,6 +1392,7 @@ de:
       new_inventory: Neue Inventur anlegen
       title: Inventurübersicht
     new:
+      amount: Menge
       create: anlegen
       stock_articles: Lagerartikel
       temp_inventory: vorläufigen Lagerbestand
