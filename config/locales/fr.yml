@@ -347,7 +347,8 @@ fr:
       unit_quantity_desc: Unités par lot
       unit_quantity_short: U/L
     form:
-      title: Ajouter un nouvel article
+      title_edit: 
+      title_new: Ajouter un nouvel article
     import_search_results:
       action_import: importer
       already_imported: déjà importé

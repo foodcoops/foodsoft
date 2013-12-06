@@ -347,7 +347,8 @@ de:
       unit_quantity_desc: Gebindegröße
       unit_quantity_short: GebGr
     form:
-      title: Neuen Artikel einfügen
+      title_edit: Artikel bearbeiten
+      title_new: Neuen Artikel einfügen
     import_search_results:
       action_import: importieren
       already_imported: schon importiert

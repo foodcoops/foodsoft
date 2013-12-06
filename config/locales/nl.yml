@@ -347,7 +347,8 @@ nl:
       unit_quantity_desc: Groothandelsverpakkingsgrootte
       unit_quantity_short: Gr.Eenh.
     form:
-      title: Nieuw artikel toevoegen
+      title_edit: Artikel bewerken
+      title_new: Nieuw artikel toevoegen
     import_search_results:
       action_import: importeren
       already_imported: reeds geïmporteerd
