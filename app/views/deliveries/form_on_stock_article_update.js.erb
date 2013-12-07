@@ -1,7 +1,5 @@
-$('div.container-fluid').prepend(
-  '<%= j(render(:partial => 'shared/alert_success', :locals => {:alert_message => t('.notice', :name => @stock_article.name)})) %>'
-);
-
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
 (function() {
   // update entry in stock_article table
   
@@ -28,5 +26,3 @@ $('div.container-fluid').prepend(
   
   updateSort('#stock_changes');
 })();
-
-$('#modalContainer').modal('hide');

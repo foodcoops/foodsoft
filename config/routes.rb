@@ -88,8 +88,7 @@ Foodsoft::Application.routes.draw do
     resources :stock_articles, :to => 'stockit' do
       get :copy
       collection do
-        get :articles_search
-        get :fill_new_stock_article_form
+        get :derive
         
         get :index_on_stock_article_create
         get :index_on_stock_article_update
@@ -102,15 +101,12 @@ Foodsoft::Application.routes.draw do
       get :shared_suppliers, :on => :collection
 
       resources :deliveries do
-        post :add_stock_change, :on => :collection
-        
-        get :new_stock_article, :on => :collection
-        get :copy_stock_article, :on => :collection
-        get :derive_stock_article, :on => :collection
-        post :create_stock_article, :on => :collection
-        
-        get :edit_stock_article, :on => :collection
-        put :update_stock_article, :on => :collection
+        collection do
+          post :add_stock_change
+          
+          get :form_on_stock_article_create
+          get :form_on_stock_article_update
+        end
       end
 
       resources :articles do
