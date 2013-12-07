@@ -1330,7 +1330,7 @@ nl:
         units_to_order: Als je het aantal geleverde eenheden wijzigt, moet je daarna de hoeveelheden voor huishoudens aanpassen. Klik daarvoor op de artikelnaam. Als je dit vergeet, kunnen huishoudens belast worden voor artikelen die ze niet hebben gekregen!
         update_current_price: Ook prijs in huidige besteling aanpassen
       stock_article:
-        copy_stock_article:
+        copy:
           name: Wijzigen alsjeblieft
         edit_stock_article:
           price: <ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>

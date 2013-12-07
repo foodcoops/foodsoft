@@ -1353,7 +1353,7 @@ fr:
         units_to_order: 
         update_current_price: Modifie aussi le prix des commandes en cours
       stock_article:
-        copy_stock_article:
+        copy:
           name: Merci de modifier
         edit_stock_article:
           price: <ul><li>Modification du prix enregistrée. </li><li>Si nécessaire %{stock_article_copy_link}.</li></ul>
