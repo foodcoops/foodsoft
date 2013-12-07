@@ -1398,6 +1398,8 @@ nl:
   stockit:
     check:
       not_empty: ! '%{name} kon niet worden verwijderd, de inventaris is niet leeg.'
+    copy:
+      title: 
     create:
       notice: Nieuw voorraadsartikel "%{name}" gemaakt.
     destroy:

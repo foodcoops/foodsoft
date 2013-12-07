@@ -1418,6 +1418,8 @@ en:
   stockit:
     check:
       not_empty: ! '%{name} could not be deleted, the inventory is not zero.'
+    copy:
+      title: Copy stock article
     create:
       notice: New stock article %{name} was created.
     destroy:

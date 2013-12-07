@@ -1414,6 +1414,8 @@ de:
   stockit:
     check:
       not_empty: ! '%{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null.'
+    copy:
+      title: Lagerartikel kopieren
     create:
       notice: Neuer Lagerartikel »%{name}« gespeichert.
     destroy:
@@ -1444,7 +1446,7 @@ de:
       new_quantity: Neuer Bestand
       reason: Ereignis
       stock_changes: Verlauf des Lagerbestands
-    update_stock_article:
+    update:
       notice: Lagerartikel »%{name}« aktualisiert.
   suppliers:
     create:

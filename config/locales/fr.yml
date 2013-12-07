@@ -1423,6 +1423,8 @@ fr:
   stockit:
     check:
       not_empty: ! '%{name} ne peut pas être supprimé, car il y en a encore en stock.'
+    copy:
+      title: 
     create:
       notice: L'article "%{name}" a été ajouté au stock.
     destroy:
