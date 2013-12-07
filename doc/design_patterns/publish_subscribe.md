@@ -12,29 +12,29 @@ The process can be divided in two steps: **1.** AJAX database manipulation and *
 
 **(iii)** The database manipulation is finished by the rendering of, e.g., `stock_articles/create.js.erb`. The key task there is to **publish** the database changes by calling `trigger`, i.e.,
 
-        $(document).trigger({
-          type: 'StockArticle#create',
-          stock_article_id: <%= @stock_article.id %>
-        });
+    $(document).trigger({
+      type: 'StockArticle#create',
+      stock_article_id: <%= @stock_article.id %>
+    });
 
 ### 2. DOM updates for the particular view
 **(i)** Each view has the opportunity to **subscribe** to particular events of the previous step. A very simple example is the update of the `stock_articles/index` view after `StockArticle#destroy`:
 
-        $(document).on('StockArticle#destroy', function(e) {
-          $('#stockArticle-' + e.stock_article_id).remove();
-        });
+    $(document).on('StockArticle#destroy', function(e) {
+      $('#stockArticle-' + e.stock_article_id).remove();
+    });
 
 However, in most of the situations you will like to use the full power of the MVC framework in order to read new data from the database and render some partial. Let us consider this slightly more advanced case in the following.
 
 The view `stock_articles/index` could listen (amongst others) to `StockArticle#create` like this:
 
-        $(document).on('StockArticle#create', function(e) {
-          $.ajax({
-            url: '#{index_on_stock_article_create_stock_articles_path}',
-            type: 'get',
-            data: {id: e.stock_article_id},
-            contentType: 'application/json; charset=UTF-8'
-          });
-        });
+    $(document).on('StockArticle#create', function(e) {
+      $.ajax({
+        url: '#{index_on_stock_article_create_stock_articles_path}',
+        type: 'get',
+        data: {id: e.stock_article_id},
+        contentType: 'application/json; charset=UTF-8'
+      });
+    });
 
 **(ii)** The action `StockArticles#index_on_stock_article_create` is a special helper action to handle DOM updates of the `stock_articles/index` view after the creation of a new `StockArticle` with the given `id`.
