@@ -1,7 +1,7 @@
 %tr{:class => stock_article_classes(stock_article), :id => "stockArticle-#{stock_article.id}"}
   %td= link_to stock_article.name, stock_article
   %td= stock_article.quantity
-  %td= stock_article.quantity - stock_article.quantity_available
+  %td= stock_article.quantity_ordered
   %th= stock_article.quantity_available
   %td= stock_article.unit
   %td= stock_article.price

@@ -95,8 +95,10 @@ en:
       stock_article:
         available: Available
         price: Price
+        quantity: In stock
         quantity_available: Available quantity
         quantity_available_short: Avail.
+        quantity_ordered: Ordered
       stock_taking:
         date: Date
         note: Note
@@ -1396,6 +1398,7 @@ en:
       new_inventory: Create new inventory
       title: Inventory overview
     new:
+      amount: Amount
       create: create
       stock_articles: Stock articles
       temp_inventory: temporary inventory
@@ -1430,16 +1433,6 @@ en:
     form:
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
     index:
-      article:
-        article: Article
-        available: available
-        category: Category
-        ordered: ordered
-        price: Price
-        stock: In stock
-        supplier: Supplier
-        unit: Unit
-        vat: VAT
       confirm_delete: Are you sure you want to delete?
       new_delivery: New delivery ...
       new_stock_article: Add new stock article
@@ -1457,12 +1450,9 @@ en:
     show:
       change_quantity: Change
       datetime: Time
-      delivery: Delivery
       new_quantity: New quantity
-      order: Order
       reason: Reason
       stock_changes: Stock quantity changes
-      stock_taking: Inventory
     stock_article:
       confirm_delete: Are you sure you want to delete the stock article »%{name}«?
     update:

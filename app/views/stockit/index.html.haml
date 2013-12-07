@@ -56,15 +56,15 @@
 %table.table.table-hover#articles
   %thead
     %tr
-      %th= t '.article.article'
-      %th= t '.article.stock'
-      %th= t '.article.ordered'
-      %th= t '.article.available'
-      %th= t '.article.unit'
-      %th= t '.article.price'
-      %th= t '.article.vat'
-      %th= t '.article.supplier'
-      %th= t '.article.category'
+      %th= Article.model_name.human
+      %th= heading_helper StockArticle, :quantity
+      %th= heading_helper StockArticle, :quantity_ordered
+      %th= heading_helper StockArticle, :available
+      %th= heading_helper StockArticle, :unit
+      %th= heading_helper StockArticle, :price
+      %th= heading_helper StockArticle, :tax
+      %th= heading_helper StockArticle, :supplier
+      %th= heading_helper StockArticle, :article_category
       %th
   %tbody#articles-tbody
     - for stock_article in @stock_articles
