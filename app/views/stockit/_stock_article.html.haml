@@ -2,7 +2,7 @@
   %td= link_to stock_article.name, stock_article
   %td= stock_article.quantity
   %td= stock_article.quantity_ordered
-  %th= stock_article.quantity_available
+  %td.main_info= stock_article.quantity_available
   %td= stock_article.unit
   %td= stock_article.price
   %td= number_to_percentage stock_article.tax
