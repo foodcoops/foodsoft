@@ -1425,7 +1425,7 @@ en:
     check:
       not_empty: ! '%{name} could not be deleted, the inventory is not zero.'
     create:
-      notice: New stock article »%{name}« was created.
+      notice: New stock article %{name} was created.
     destroy:
       notice: Article »%{name}« was deleted.
     edit:
