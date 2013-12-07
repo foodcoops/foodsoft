@@ -407,8 +407,6 @@ en:
       how_many_units: ! 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
-    create_stock_article:
-      notice: The new stock article "%{name}" was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
@@ -448,15 +446,11 @@ en:
       action_add_to_delivery: Add to delivery
       action_edit: Edit
       action_other_price: Copy
-    stock_article_form:
-      copy_stock_article: Copy stock article
     stock_change_fields:
       remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
     update:
       notice: Delivery was updated.
-    update_stock_article:
-      notice: The stock article "%{name}" was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
@@ -1431,6 +1425,7 @@ en:
     edit:
       title: Edit stock articles
     form:
+      copy_stock_article: copy stock article
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
     index:
       confirm_delete: Are you sure you want to delete?
