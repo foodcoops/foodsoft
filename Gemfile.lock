@@ -114,6 +114,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     commonjs (0.2.7)
+    connection_pool (1.2.0)
     content_for_in_controllers (0.0.2)
     coveralls (0.7.0)
       multi_json (~> 1.3)
@@ -387,6 +388,7 @@ DEPENDENCIES
   client_side_validations
   client_side_validations-simple_form
   coffee-rails (~> 3.2.1)
+  connection_pool
   coveralls
   daemons
   database_cleaner

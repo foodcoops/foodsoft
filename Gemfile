@@ -86,6 +86,7 @@ group :test do
   # webkit and poltergeist don't seem to work yet
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'connection_pool'
   # need to include rspec components before i18n-spec or rake fails in test environment
   gem 'rspec-core'
   gem 'rspec-expectations'
