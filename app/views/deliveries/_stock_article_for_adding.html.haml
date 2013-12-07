@@ -1,4 +1,7 @@
-- css_class = ( @delivery and @delivery.includes_article? article ) ? ( 'unavailable' ) : ( false )
+- disable_delivery_action = ( @delivery and @delivery.includes_article? article )
+- css_class = ( disable_delivery_action ) ? ( 'unavailable' ) : ( false )
+- deliver_button_disabled = ( disable_delivery_action ) ? ( 'disabled' ) : ( false )
+
 %tr{:id => "stock_article_#{article.id}", :class => css_class}
   %td= article.name
   %td{:data => {:toggle => :tooltip, :title => render(:partial => 'shared/article_price_info', :locals => {:article => article})}}= number_to_currency article.price
@@ -7,5 +10,4 @@
   %td
     = link_to t('.action_edit'), edit_stock_article_path(article), remote: true, class: 'btn btn-mini'
     = link_to t('.action_other_price'), stock_article_copy_path(article), remote: true, class: 'btn btn-mini'
-    - deliver_button_disabled = ( @delivery and @delivery.includes_article? article ) ? ( 'disabled' ) : ( false )
     = link_to t('.action_add_to_delivery'), add_stock_change_supplier_deliveries_path(@supplier, :stock_article_id => article.id), :method => :post, remote: true, class: 'button-add-stock-change btn btn-mini btn-primary', disabled: deliver_button_disabled
