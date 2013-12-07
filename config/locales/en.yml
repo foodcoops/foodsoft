@@ -1427,7 +1427,7 @@ en:
     create:
       notice: New stock article %{name} was created.
     destroy:
-      notice: Article »%{name}« was deleted.
+      notice: Article %{name} was deleted.
     edit:
       title: Edit stock articles
     form:
@@ -1454,9 +1454,9 @@ en:
       reason: Reason
       stock_changes: Stock quantity changes
     stock_article:
-      confirm_delete: Are you sure you want to delete the stock article »%{name}«?
+      confirm_delete: Are you sure you want to delete the stock article %{name}?
     update:
-      notice: Stock article »%{name}« was saved.
+      notice: Stock article %{name} was saved.
   suppliers:
     create:
       notice: Supplier was created
