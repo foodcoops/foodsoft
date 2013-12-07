@@ -14,4 +14,13 @@ module StockitHelper
       link_to t('.stock_taking'), stock_taking_path(stock_change.stock_taking)
     end
   end
+  
+  def stock_article_price_hint(stock_article)
+    t('simple_form.hints.stock_article.edit_stock_article.price',
+      :stock_article_copy_link => link_to(t('.copy_stock_article'),
+        stock_article_copy_path(stock_article),
+        :remote => true
+      )
+    )
+  end
 end

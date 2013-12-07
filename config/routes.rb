@@ -86,9 +86,15 @@ Foodsoft::Application.routes.draw do
     end
 
     resources :stock_articles, :to => 'stockit' do
+      get :copy
       collection do
         get :articles_search
         get :fill_new_stock_article_form
+        
+        get :index_on_stock_article_create
+        get :index_on_stock_article_update
+        
+        get :show_on_stock_article_update
       end
     end
 
