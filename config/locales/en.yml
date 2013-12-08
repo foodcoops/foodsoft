@@ -415,6 +415,7 @@ en:
       actions: Tasks
       article: Article
       category: Category
+      confirm_foreign_supplier_reedit: The stock article %{name} was successfully saved. However, it belongs to a different supplier than this delivery. Would you like to edit the stock article again?
       create_from_blank: Create new article
       create_stock_article: Create stock article
       price: Netprice

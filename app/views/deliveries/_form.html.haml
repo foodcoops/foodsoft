@@ -44,7 +44,7 @@
           $.ajax({
             url: '#{new_stock_article_path}',
             type: 'get',
-            data: {stock_article: {name: selectedArticle.text}},
+            data: {stock_article: {name: selectedArticle.text, supplier_id: #{@supplier.id}}},
             contentType: 'application/json; charset=UTF-8'
           });
           $('#new_stock_article').select2('data', null);

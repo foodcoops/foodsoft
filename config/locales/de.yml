@@ -413,6 +413,7 @@ de:
       actions: Optionen
       article: Artikel
       category: Kategorie
+      confirm_foreign_supplier_reedit: Der Lagerartikel »%{name}« wurde erfolgreich gespeichert. Er gehört jedoch nicht zu dem Lieferanten dieser Lieferung. Möchtest Du diesen Lagerartikel erneut bearbeiten?
       create_from_blank: Ohne Vorlage anlegen
       create_stock_article: Lagerartikel anlegen
       price: Nettopreis
