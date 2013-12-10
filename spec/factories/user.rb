@@ -7,6 +7,10 @@ FactoryGirl.define do
     first_name { Faker::Name.first_name }
     email { Faker::Internet.email }
     password { new_random_password }
+    # The signup plugin prohibits certain actions when the ordergroup is not approved.
+    #   To make normal tests succeed, default to true. To test the approval feature,
+    #   just pass `:approved => false` when creating a new user in the tests.
+    approved { true } if defined? FoodsoftSignup
 
     factory :admin do
       sequence(:nick) { |n| "admin#{n}" }
