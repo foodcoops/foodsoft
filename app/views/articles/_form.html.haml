@@ -7,7 +7,7 @@
   .modal-body
     = f.input :availability
     = f.input :name
-    .twocol
+    .fold-line
       = f.input :unit_quantity, label: Article.human_attribute_name(:unit),
           input_html: {class: 'input-mini', title: Article.human_attribute_name(:unit_quantity)}
       = f.input :unit, label: '&times;'.html_safe,
@@ -17,7 +17,7 @@
     = f.association :article_category
     / TODO labels
 
-    .twocol
+    .fold-line
       = f.input :price do
         .input-prepend
           %span.add-on= t 'number.currency.format.unit'
@@ -26,6 +26,7 @@
         .input-append
           = f.input_field :tax, class: 'input-mini'
           %span.add-on %
+    .fold-line
       = f.input :deposit do
         .input-prepend
           %span.add-on= t 'number.currency.format.unit'

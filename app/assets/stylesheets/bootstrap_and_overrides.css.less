@@ -248,16 +248,20 @@ tr.unavailable {
   margin: 0;
 }
 
-// two-column layout in forms (landscape tablet and wider only)
+// multiple-column layout in forms (landscape tablet and wider only)
 @media (min-width: 768px) {
-  .form-horizontal .twocol {
-    .control-group:nth-child(odd) {
+  .form-horizontal .fold-line {
+    .control-group {
       float: left;
     }
-    .control-group:nth-child(even) {
+    .control-group + .control-group {
       .control-label {
         width: auto;
         margin: 0 10px;
+      }
+      .controls {
+        float: left;
+        margin-left: 0;
       }
       // fix margin somehow off
       // XXX there must be a better way
@@ -265,6 +269,12 @@ tr.unavailable {
       .help-block {
 	margin-top: 0;
         margin-bottom: 20px;
+      }
+    }
+    .control-group:last-child {
+      float: none;
+      .controls {
+        float: none;
       }
     }
   }
