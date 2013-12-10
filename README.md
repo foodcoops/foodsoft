@@ -32,6 +32,12 @@ and automate [deployment](https://github.com/foodcoop-adam/foodsoft/blob/master/
 very much a work in progress.
 
 
+Notes specific to this fork
+---------------------------
+
+This fork has enabled some plugins that aren't upstream. To make migration easier, we have included database migrations for these plugins. As a developer, that means: when you add a migration to an enabled plugin, please use `rake railties:install:migrations` and commit to install those in "db/migrate" as well.
+
+
 License
 -------
 

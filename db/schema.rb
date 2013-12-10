@@ -11,7 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130920201529) do
+ActiveRecord::Schema.define(:version => 20131203224238) do
+
+  create_table "adyen_notifications", :force => true do |t|
+    t.boolean  "live",                                :default => false, :null => false
+    t.string   "event_code",            :limit => 40,                    :null => false
+    t.string   "psp_reference",         :limit => 50,                    :null => false
+    t.string   "original_reference"
+    t.string   "merchant_reference",                                     :null => false
+    t.string   "merchant_account_code",                                  :null => false
+    t.datetime "event_date",                                             :null => false
+    t.boolean  "success",                             :default => false, :null => false
+    t.string   "payment_method"
+    t.string   "operations"
+    t.text     "reason"
+    t.string   "currency",              :limit => 3
+    t.integer  "value"
+    t.boolean  "processed",                           :default => false, :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
+  end
+
+  add_index "adyen_notifications", ["psp_reference", "event_code", "success"], :name => "adyen_notification_uniqueness", :unique => true
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -139,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20130920201529) do
     t.text     "stats"
     t.integer  "next_weekly_tasks_number",                               :default => 8
     t.boolean  "ignore_apple_restriction",                               :default => false
+    t.boolean  "approved",                                               :default => false
   end
 
   add_index "groups", ["name"], :name => "index_groups_on_name", :unique => true
@@ -146,8 +168,8 @@ ActiveRecord::Schema.define(:version => 20130920201529) do
   create_table "invites", :force => true do |t|
     t.string   "token",      :default => "", :null => false
     t.datetime "expires_at",                 :null => false
-    t.integer  "group_id",   :default => 0,  :null => false
-    t.integer  "user_id",    :default => 0,  :null => false
+    t.integer  "group_id"
+    t.integer  "user_id"
     t.string   "email",      :default => "", :null => false
   end
 
