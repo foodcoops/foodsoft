@@ -30,6 +30,10 @@ FactoryGirl.define do
       # workaround to avoid needing to save the ordergroup
       #   avoids e.g. error after logging in related to applebar
       after :create do |group| Ordergroup.find(group.id).update_stats! end
+      # The signup plugin prohibits certain actions when the ordergroup is not approved.
+      #   To make normal tests succeed, default to true. To test the approval feature,
+      #   just pass `:approved => false` when creating a new user in the tests.
+      approved { true } if defined? FoodsoftSignup
     end
   end
 
