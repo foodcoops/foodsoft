@@ -802,6 +802,7 @@ en:
       message:
         create: send message
     tasks:
+      task_title: ! '%{name} (%{duration}h)'
       required_users: ! '%{count} members are still needed!'
   home:
     apple_bar:
@@ -1491,11 +1492,6 @@ en:
       notice: You have accepted the task
     archive:
       title: Task archive
-    archive_tasks:
-      due_date: Due date
-      task: Subject
-      task_format: ! '%{name} (%{duration}h)'
-      who: People in charge
     create:
       notice: Task has been created
     destroy:
@@ -1519,11 +1515,8 @@ en:
       accept_task: Accept task
       done: Done
       done_q: Done?
-      due_date: Due date
       mark_done: Mark task as done
       reject_task: Reject task
-      task: subject
-      task_format: ! '%{name} (%{duration}h)'
       who: Who is doing it?
       who_hint: (How much are still needed?)
     nav:
