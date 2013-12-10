@@ -36,8 +36,8 @@ module FoodsoftSignup
     user and user.role_admin? and return true
     user and user.ordergroup and user.ordergroup.approved? and return true
     # maybe the page is always allowed, test if member can go here
-    always_access = FoodsoftConfig[:unapproved_allow_access] or
-      %w(home login sessions signup feedback pages#show pages#all group_orders#archive)
+    always_access = (FoodsoftConfig[:unapproved_allow_access] or
+      %w(home login sessions signup feedback pages#show pages#all group_orders#archive))
     if always_access.member?("#{c.params[:controller]}") or
        always_access.member?("#{c.params[:controller]}\##{c.action_name}")
       return true
