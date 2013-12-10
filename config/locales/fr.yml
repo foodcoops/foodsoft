@@ -124,7 +124,7 @@ fr:
         done: Fait?
         due_date: Echéance
         duration: Durée
-        name: Nom
+        name: 
         required_users: Nombre de personnes nécessaires
         user_list: Responsables inscritEs
         workgroup: Équipe
@@ -819,6 +819,7 @@ fr:
         create: Envoyer un message
     tasks:
       required_users: Il manque encore %{count} camarades!
+      task_title: ! '%{name} (%{duration}h)'
   home:
     apple_bar:
       desc: ! 'Ce système de glands sert à comparer la durée du travail collectif auquel ta cellule a contribué (rapportée à la quantité commandée) avec
@@ -1500,11 +1501,6 @@ fr:
       notice: Tu as accepté ce boulot
     archive:
       title: Historique du boulot
-    archive_tasks:
-      due_date: Échéance
-      task: Sujet
-      task_format: ! '%{name} (%{duration}h)'
-      who: Personnes en charge
     create:
       notice: Le boulot a bien été défini.
     destroy:
@@ -1532,11 +1528,8 @@ fr:
       accept_task: Te charger de ce boulot
       done: Effectué
       done_q: Effectué?
-      due_date: À faire pour le
       mark_done: Marquer ce boulot comme étant effectué
       reject_task: Refuser ce boulot
-      task: Description
-      task_format: ! '%{name} (%{duration}h)'
       who: Qui le fait?
       who_hint: (Combien manquent encore?)
     nav:

@@ -124,8 +124,8 @@ nl:
         done: Gedaan?
         due_date: Voor wanneer?
         duration: Tijdsduur
-        name: Naam
-        required_users: Aantal
+        name: Activiteit
+        required_users: Aantal mensen
         user_list: Verantwoordelijken
         workgroup: Werkgroep
       user:
@@ -208,7 +208,7 @@ nl:
         here: hier
       index:
         first_paragraph: Hier kun je %{url} toevoegen, bewerken en verwijderen.
-        new_ordergroup: Nieuw huishouden toevoegen
+        new_ordergroup: Nieuw huishouden
         new_ordergroups: nieuwe huishoudens
         second_paragraph: ! 'Bedenk het <em>onderscheid tussen werkgroep en huishouden</em>: een huishouden heeft een rekening en kan bestellen. in een <em>%{url}</em> (bijv. sorteergroep) werken leden samen om taken te vervullen. Leden kunnen slechts lid zijn van éen huishouden, maar van meerdere werkgroepen.'
         title: Huishoudens
@@ -231,7 +231,7 @@ nl:
         title: Lid bewerken
       index:
         first_paragraph: Hier kun je gebruikers %{url}, bewerken en wissen.
-        new_user: Nieuwe gebruiker toevoegen
+        new_user: Nieuwe gebruiker
         new_users: toevoegen
         title: Gebruikers admin
       new:
@@ -263,11 +263,11 @@ nl:
         here: hier
       index:
         first_paragraph: Hier kun je %{url} toevoegen, bewerken en wissen.
-        new_workgroup: Nieuwe werkgroep creëren
+        new_workgroup: Nieuwe werkgroep
         new_workgroups: nieuwe werkgroepen
         ordergroup: huishouden
         second_paragraph: ! 'Let op het verschil tussen een <em>groep</em> en een </em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organizeren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
-        title: werkgroepen
+        title: Werkgroepen
       new:
         title: Werkgroep toevoegen
       show:
@@ -803,6 +803,7 @@ nl:
         create: bericht versturen
     tasks:
       required_users: Nog %{count} leden nodig!
+      task_title: ! '%{name} (%{duration}u)'
   home:
     apple_bar:
       desc: ! 'Deze balk laat zien hoeveel taken je gedaan hebt per bestelhoeveelheid, vergeleken met het gemiddelde van de foodcoop.
@@ -1108,7 +1109,7 @@ nl:
       title: Bestellingen
     tasks: Taken
     wiki:
-      all_pages: Alle Pagina's
+      all_pages: Alle pagina's
       home: Hoofdpagina
       title: Wiki
     workgroups: Werkgroepen
@@ -1470,75 +1471,67 @@ nl:
     accept:
       notice: Je hebt de taak geaccepteerd
     archive:
-      title: 
-    archive_tasks:
-      due_date: 
-      task: 
-      task_format: 
-      who: 
+      title: Takenarchief
     create:
       notice: Taak is aangemaakt
     destroy:
       notice: Taak is verwijderd
     edit:
-      title: 
-      warning_periodic: 
-    error_not_found: 
+      title: Taak bewerken
+      warning_periodic: <strong>Opgelet:</strong> deze taak is onderdeel van een <em>wekelijkse taak</em>. Wanneer deze opslaat, zal de uitzondering als een normale taak worden opgeslagen.
+    error_not_found: Geen werkgroep gevonden
     form:
       search:
         hint: Gebruiker zoeken
         noresult: Geen gebruiker gevonden
         placeholder: Zoeken ...
       submit:
-        periodic: 
+        periodic: Wekelijkse taak bewaren
     index:
-      show_group_tasks: 
-      title: 
-      title_non_group: 
+      show_group_tasks: Groepstaken tonen
+      title: Taken
+      title_non_group: Taken voor iedereen!
     list:
-      accept_task: 
-      done: 
-      done_q: 
-      due_date: 
-      mark_done: 
-      reject_task: 
-      task: 
-      task_format: 
-      who: 
-      who_hint: 
+      accept_task: Taak accepteren
+      done: Gedaan
+      done_q: Gedaan?
+      mark_done: Taak als gedaan markeren
+      reject_task: Taak laten vallen
+      who: Wie doet het?
+      who_hint: (Hoeveel zijn er nog nodig?)
     nav:
-      all_tasks: 
-      archive: 
-      group_tasks: 
-      my_tasks: 
-      new_task: 
-      pages: 
+      all_tasks: Alle taken
+      archive: Gedane taken (archief)
+      group_tasks: Groepstaken
+      my_tasks: Mijn taken
+      new_task: Nieuwe taak
+      pages: Pagina's
     new:
-      title: 
-    repeated: 
+      title: Nieuwe taken maken
+    repeated: Taak wordt wekelijks herhaald
     set_done:
       notice: De status van de taak is aangepast
     show:
-      accept_task: 
-      confirm_delete_group: 
-      confirm_delete_single: 
-      delete_group: 
-      hours: 
-      mark_done: 
-      reject_task: 
-      title: 
+      accept_task: Accepteren
+      confirm_delete_group: Deze en alle volgende taken echt verwijderen?
+      confirm_delete_single: Weet je zeker dat je deze taak wilt verwijderen?
+      delete_group: Deze en volgende taken verwijderen
+      hours: ! '%{count}u'
+      mark_done: Als gedaan markeren
+      reject_task: Taak laten vallen
+      title: Taak bekijken
     update:
       notice: Taak is bijgewerkt
       notice_converted: Taak is bijgewerkt en omgezet naar een eenmalige taak.
     user:
-      more: 
-      tasks_link: 
-      title: 
-      title_accepted: 
-      title_open: 
+      more: Niets voor jou? %{tasks_link} is vast wat te doen
+      tasks_link: Hier
+      title: Mijn taken
+      title_accepted: Aangenomen taken
+      title_open: Open taken
     workgroup:
-      title: 
-      title_all: 
+      title: Taken voor %{workgroup}
+      title_all: Alle groepstaken
   ui:
     close: Sluiten
     delete: Verwijder
@@ -1552,11 +1545,11 @@ nl:
     show: Tonen
   views:
     pagination:
-      first: 
-      last: 
-      next: 
-      previous: 
-      truncate: 
+      first: ! '&laquo;'
+      last: ! '&raquo;'
+      next: ! '&rsaquo;'
+      previous: ! '&lsaquo;'
+      truncate: ! '...'
   workgroups:
     edit:
       title: Werkgroep bewerken

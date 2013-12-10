@@ -124,9 +124,9 @@ de:
         done: Erledigt?
         due_date: Wann erledigen?
         duration: Dauer
-        name: Name
+        name: 
         required_users: Anzahl
-        user_list: Verantwortliche
+        user_list: Verantwortlichen
         workgroup: Arbeitsgruppe
       user:
         email: Email
@@ -799,6 +799,7 @@ de:
         create: Nachricht verschicken
     tasks:
       required_users: Es fehlen %{count} Mitstreiterinnen!
+      task_title: ! '%{name} (%{duration}h)'
   home:
     apple_bar:
       desc: ! 'Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop. Konkret: Pro %{amount} Bestellsumme solltest Du eine Aufgabe machen!'
@@ -1487,11 +1488,6 @@ de:
       notice: Du hast die Aufgabe übernommen
     archive:
       title: Aufgabenarchiv
-    archive_tasks:
-      due_date: Fälligkeitsdatum
-      task: Betreff
-      task_format: ! '%{name} (%{duration}h)'
-      who: Verantwortliche Menschen
     create:
       notice: Aufgabe wurde erstellt
     destroy:
@@ -1515,11 +1511,8 @@ de:
       accept_task: Aufgabe übernehmen
       done: Erledigt
       done_q: Erledigt?
-      due_date: Fälligkeit
       mark_done: Aufgabe als erledigt markieren
       reject_task: Aufgabe ablehnen
-      task: Betreff
-      task_format: ! '%{name} (%{duration}h)'
       who: Wer machts?
       who_hint: (Wie viele werden noch benötigt?)
     nav:

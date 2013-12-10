@@ -124,9 +124,9 @@ en:
         done: Done?
         due_date: Due date
         duration: Duration
-        name: Name
+        name: Activity
         required_users: People required
-        user_list: Responsible user
+        user_list: Responsible users
         workgroup: Workgroup
       user:
         email: Email
@@ -802,8 +802,8 @@ en:
       message:
         create: send message
     tasks:
-      task_title: ! '%{name} (%{duration}h)'
       required_users: ! '%{count} members are still needed!'
+      task_title: ! '%{name} (%{duration}h)'
   home:
     apple_bar:
       desc: ! 'This shows the proportion of completed tasks to the volume of orders for your ordergroup in comparison to the average of the Foodcoop. In practice: for every %{amount} of total orders, you should execute a task!'
