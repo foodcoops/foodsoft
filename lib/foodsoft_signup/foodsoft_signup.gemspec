@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Foodsoft plugin to allow prospective members to signup themselves."
   s.description = "This plugin allows prospective members to create a new foodsoft account (and ordergroup). Only when their ordergroup is approved by an administrator, can they order (this is configurable)."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
   #s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.13"
