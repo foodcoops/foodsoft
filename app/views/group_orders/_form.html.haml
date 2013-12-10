@@ -48,17 +48,18 @@
         - if @order.stockit?
           %th{style: 'width:120px'}= heading_helper StockArticle, :supplier
         %th{style: "width:13px;"}
-        %th{style: "width:4.5em;"}= t '.price'
         %th{style: "width:4.5em;"}= heading_helper Article, :unit
+        %th{style: "width:4.5em;"}= t '.price'
         - if @order.stockit?
           %th(style="width:20px")= heading_helper StockArticle, :available
           %th#col_required= heading_helper GroupOrderArticle, :quantity
         - elsif has_tolerance
-          %th{style: "width:70px;"}= heading_helper OrderArticle, :missing_units, short: true
+          %th{colspan: 2}= t '.units_all'
           %th#col_required= heading_helper GroupOrderArticle, :quantity
           %th#col_tolerance= heading_helper GroupOrderArticle, :tolerance
         - else
           %th
+            %abbr{title: t('.units_all')}= t '.units_all_short'
           %th#col_required= heading_helper GroupOrderArticle, :quantity
         %th{style: "width:15px;"}= heading_helper GroupOrderArticle, :total_price
     %tbody.list
@@ -67,7 +68,7 @@
           %td
             = category
             %i.icon-tag
-          %td{colspan: "9"}
+          %td{colspan: "10"}
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
             %td.name{title: article_info_title(order_article.article)}
@@ -76,13 +77,26 @@
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15
             %td= h order_article.article.origin
-            %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
             %td= order_article.article.unit
-            %td
-              - if @order.stockit?
-                = @ordering_data[:order_articles][order_article.id][:quantity_available]
-              - elsif @ordering_data[:order_articles][order_article.id][:unit] > 1
-                %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
+            %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
+            %td.units_all
+              %span{id: "unit_to_order_#{order_article.id}"}= order_article.units_to_order * order_article.price.unit_quantity
+              %span.plus= @ordering_data[:order_articles][order_article.id][:unit] > 1 ? '+' : '&nbsp;'.html_safe
+            - if @order.stockit?
+              %td= @ordering_data[:order_articles][order_article.id][:quantity_available]
+            - elsif @ordering_data[:order_articles][order_article.id][:unit] > 1
+              %td.units_pack
+                - uq = @ordering_data[:order_articles][order_article.id][:unit]
+                - progress_units = order_article.quantity+order_article.tolerance - order_article.units_to_order*uq
+                - progress_pct = [100, 100*progress_units/uq].min.to_i
+                .progress{id: "progress_#{order_article.id}"}
+                  .bar{style: "width: #{progress_pct}%;"}
+                    = progress_units
+                  .bar{style: "width: #{100-progress_pct}%;"}
+                    = [0, uq - progress_units].max
+            - else
+              - if has_tolerance
+                %td
 
             %td.quantity
               -# we consider 1(used) + 2(unused) quantity display to be confusing; just show total requested

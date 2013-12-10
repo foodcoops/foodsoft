@@ -729,6 +729,8 @@ en:
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
       units: Units
+      units_all: All members
+      units_all_short: All
       units_full: Filled units
       units_total: Total units
     index:
