@@ -2,6 +2,10 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+# need to include this before requiring some other gems
+#   http://stackoverflow.com/questions/20361428
+I18n.enforce_available_locales = true
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))

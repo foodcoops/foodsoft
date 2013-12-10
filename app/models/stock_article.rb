@@ -14,10 +14,14 @@ class StockArticle < Article
 
   # Check for unclosed orders and substract its ordered quantity
   def quantity_available
-    quantity - OrderArticle.where(article_id: id).
+    quantity - quantity_ordered
+  end
+
+  def quantity_ordered
+    OrderArticle.where(article_id: id).
         joins(:order).where("orders.state = 'open' OR orders.state = 'finished'").sum(:units_to_order)
   end
-  
+
   def quantity_history
     stock_changes.reorder('stock_changes.created_at ASC').map{|s| s.quantity}.cumulative_sum
   end

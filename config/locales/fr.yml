@@ -95,8 +95,10 @@ fr:
       stock_article:
         available: Disponible
         price: Prix net
+        quantity: en Stock
         quantity_available: 
         quantity_available_short: 
+        quantity_ordered: Commandés
       stock_taking:
         date: 
         note: 
@@ -122,7 +124,7 @@ fr:
         done: Fait?
         due_date: Echéance
         duration: Durée
-        name: Nom
+        name: 
         required_users: Nombre de personnes nécessaires
         user_list: Responsables inscritEs
         workgroup: Équipe
@@ -158,21 +160,21 @@ fr:
               exclusion: répétition hebdomadaire invalide pour un boulot déjà effectué
     models:
       article: Article
-      article_category: la nouvelle catégorie
-      delivery: le nouveau réapprovisionnement
-      financial_transaction: la transaction
-      invoice: la nouvelle facture
+      article_category: Catégorie
+      delivery: Réapprovisionnement
+      financial_transaction: Transaction
+      invoice: Facture
       message: Message
-      order: la nouvelle commande
+      order: Commande
       order_article: Article à commander
-      order_comment: un nouveau commentaire
-      ordergroup: la nouvelle cellule
+      order_comment: Commentaire
+      ordergroup: Cellule
       stock_article: l'article à stocker
       stock_taking: Inventaire
       supplier: FournisseusE_r
-      task: comme nouveau boulot
-      user: le nouveau membre
-      workgroup: la nouvelle équipe
+      task: Boulot
+      user: Membre
+      workgroup: Équipe
   admin:
     access_to: accès à
     actions: Actions
@@ -347,7 +349,8 @@ fr:
       unit_quantity_desc: Unités par lot
       unit_quantity_short: U/L
     form:
-      title: Ajouter un nouvel article
+      title_edit: 
+      title_new: Ajouter un nouvel article
     import_search_results:
       action_import: importer
       already_imported: déjà importé
@@ -738,7 +741,7 @@ fr:
       price: Prix
       reset_article_search: 
       search_article: 
-      sum_amount: ! 'Quantité déjà commandée:'
+      sum_amount: Quantité déjà commandée
       title: Commander
       total_sum_amount: Montant total
       total_tolerance: Tolérance totale
@@ -816,6 +819,7 @@ fr:
         create: Envoyer un message
     tasks:
       required_users: Il manque encore %{count} camarades!
+      task_title: ! '%{name} (%{duration}h)'
   home:
     apple_bar:
       desc: ! 'Ce système de glands sert à comparer la durée du travail collectif auquel ta cellule a contribué (rapportée à la quantité commandée) avec
@@ -1398,6 +1402,7 @@ fr:
       new_inventory: Inventorier le stock
       title: Aperçu  de l'inventaire
     new:
+      amount: 
       create: ajouter
       stock_articles: Articles en stock
       temp_inventory: l'inventaire courant
@@ -1432,16 +1437,6 @@ fr:
     form:
       price_hint: Pour éviter que ça soit le bazar, les prix des articles en stock ne peuvent plus être modifiés.
     index:
-      article:
-        article: Article
-        available: disponible
-        category: Catégorie
-        ordered: commandés
-        price: Prix
-        stock: en Stock
-        supplier: FournisseusE_r
-        unit: Unité
-        vat: TVA
       confirm_delete: T'es sûrE de ton coup?
       new_delivery: Réapprovisionner le stock...
       new_stock_article: Ajouter un article au stock
@@ -1459,12 +1454,9 @@ fr:
     show:
       change_quantity: Modification
       datetime: Temps
-      delivery: Réapprovisionnement
       new_quantity: Nouveau stock
-      order: Commande
       reason: Raison
       stock_changes: Afficher l'historique
-      stock_taking: Inventaire
     stock_create:
       notice: L'article a été sauvegardé.
     stock_update:
@@ -1509,11 +1501,6 @@ fr:
       notice: Tu as accepté ce boulot
     archive:
       title: Historique du boulot
-    archive_tasks:
-      due_date: Échéance
-      task: Sujet
-      task_format: ! '%{name} (%{duration}h)'
-      who: Personnes en charge
     create:
       notice: Le boulot a bien été défini.
     destroy:
@@ -1541,11 +1528,8 @@ fr:
       accept_task: Te charger de ce boulot
       done: Effectué
       done_q: Effectué?
-      due_date: À faire pour le
       mark_done: Marquer ce boulot comme étant effectué
       reject_task: Refuser ce boulot
-      task: Description
-      task_format: ! '%{name} (%{duration}h)'
       who: Qui le fait?
       who_hint: (Combien manquent encore?)
     nav:

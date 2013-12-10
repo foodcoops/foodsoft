@@ -13,4 +13,8 @@ module TasksHelper
                   title: I18n.t('helpers.tasks.required_users', :count => task.still_required_users)
     end
   end
+
+  def task_title(task)
+    I18n.t('helpers.tasks.task_title', name: task.name, duration: task.duration)
+  end
 end

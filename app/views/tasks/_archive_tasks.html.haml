@@ -5,13 +5,13 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t '.due_date'
-      %th= t '.task'
-      %th= t '.who'
+      %th= heading_helper Task, :due_date
+      %th= heading_helper Task, :name
+      %th= heading_helper Task, :user_list
       %th
   %tbody
     - @tasks.each do |task|
       %tr
         %td= task.due_date unless task.due_date.nil?
-        %td= link_to t('.task_format', name: task.name, duration: task.duration), task_path(task)
+        %td= link_to task_title(task), task_path(task)
         %td= task_assignments task
