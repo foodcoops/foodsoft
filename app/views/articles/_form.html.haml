@@ -46,12 +46,12 @@
 
 :javascript
   var form = $('form.edit_article, form.new_article');
-  $('#article_price, #article_tax, #article_deposit', form).on('change', function() {
+  $('#article_price, #article_tax, #article_deposit', form).on('change keyup', function() {
     var price = parseFloat($('#article_price', form).val());
     var tax = parseFloat($('#article_tax', form).val());
     var deposit = parseFloat($('#article_deposit', form).val());
     // Article#gross_price and Article#fc_price
     var gross_price = (price + deposit) * (tax / 100 + 1);
     var fc_price = gross_price  * (#{FoodsoftConfig[:price_markup].to_f} / 100 + 1);
-    $('#fc_price').html(I18n.l("currency", fc_price));
+    $('#fc_price').html($.isNumeric(fc_price) ? I18n.l("currency", fc_price) : '&#133;');
   });
