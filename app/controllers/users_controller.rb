@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     @users = User.natural_search(params[:q])
     respond_to do |format|
-      format.json { render :json => @users.map(&:token_attributes) }
+      format.json { render :json => search_data(@users, proc {|o| o.display }) }
     end
   end
 

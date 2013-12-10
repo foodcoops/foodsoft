@@ -3,8 +3,7 @@
 
 = yield
 
-= f.input :user_tokens, :as => :string,
-  :input_html => { 'data-pre' => f.object.users.map(&:token_attributes).to_json }
+= f.input :user_tokens, :as => :string
 
 - content_for :javascript do
   :javascript
