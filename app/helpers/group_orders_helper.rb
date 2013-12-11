@@ -9,17 +9,17 @@ module GroupOrdersHelper
 
   # Returns a link to the page where a group_order can be edited.
   # If the option :show is true, the link is for showing the group_order.
-  def link_to_ordering(order, options = {})
+  def link_to_ordering(order, options = {}, &block)
     group_order = order.group_order(current_user.ordergroup)
     path = if options[:show] and group_order
-             group_order_path(group_order)
-           elsif group_order
-             edit_group_order_path(group_order, :order_id => order.id)
-           else
-             new_group_order_path(:order_id => order.id)
-           end
+            group_order_path(group_order)
+          elsif group_order
+            edit_group_order_path(group_order, :order_id => order.id)
+          else
+            new_group_order_path(:order_id => order.id)
+          end
     options.delete(:show)
-    name = block_given? ? yield(order, group_order) : order.name
+    name = block_given? ? capture(&block) : order.name
     path ? link_to(name, path, options) : name
   end
 
