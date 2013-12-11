@@ -15,6 +15,7 @@ de:
         name: Name
         note: Notiz
         order_number: Bestellnummer
+        order_number_short: Nr.
         origin: Herkunft
         price: Nettopreis
         supplier: Lieferantin
@@ -81,6 +82,7 @@ de:
       ordergroup:
         account_balance: Kontostand
         available_funds: Verfügbares Guthaben
+        contact: Kontakt
         contact_address: Adresse
         contact_person: Kontaktperson
         contact_phone: Telefon
@@ -131,6 +133,7 @@ de:
       user:
         email: Email
         first_name: Vorname
+        last_login: Letzter login
         last_name: Nachname
         name: Name
         nick: Benutzername
@@ -177,7 +180,6 @@ de:
       workgroup: Arbeitsgruppe
   admin:
     access_to: Zugriff auf
-    actions: Aktionen
     base:
       index:
         all_ordergroups: Alle Bestellgruppen
@@ -215,11 +217,6 @@ de:
         workgroup: Arbeitsgruppe
       new:
         title: Bestellgruppe anlegen
-      ordergroups:
-        address: Adresse
-        contact: Kontakt
-        members: Mitglieder
-        name: Name
       show:
         confirm: Bist Du sicher?
         edit: Gruppe/Mitglieder bearbeiten
@@ -238,20 +235,11 @@ de:
         title: Neue Benutzerin anlegen
       show:
         confirm: Willst du %{user} wirklich rausschmeißen?
-        email: Email
         groupabos: Gruppenabos
         member_since: Mitglied seit %{time}
-        name: Name
-        nick: Nick
         person: Person
-        phone: Telefon
         preference: Einstellungen
         send_message: Nachricht senden
-      users:
-        email: Email
-        last_login: Letzter login
-        login: Login
-        name: Name
     workgroups:
       destroy:
         error: ! 'Arbeitsgruppe konnte nicht gelöscht werden: %{error}'
@@ -339,15 +327,6 @@ de:
       submit: Alle Artikel aktualisieren
       title: Alle Artikel von %{supplier} bearbeiten
       warning: Achtung, alle Artikel werden aktualisiert!
-    edit_all_table:
-      available_desc: verfügbar
-      available_short: verf.
-      order_number_desc: Bestellnummer
-      order_number_short: Best.Nr.
-      price_desc: Netto!
-      price_short: Preis
-      unit_quantity_desc: Gebindegröße
-      unit_quantity_short: GebGr
     form:
       title_edit: Artikel bearbeiten
       title_new: Neuen Artikel einfügen
@@ -412,17 +391,11 @@ de:
     edit:
       title: Lieferung bearbeiten
     form:
-      actions: Optionen
-      article: Artikel
-      category: Kategorie
       create_from_blank: Ohne Vorlage anlegen
       create_stock_article: Lagerartikel anlegen
-      price: Nettopreis
-      quantity: Menge
       title_fill_quantities: 2. Liefermenge angeben
       title_finish_delivery: 3. Lieferung abschließen
       title_select_stock_articles: 1. Lagerartikel auswählen
-      unit: Einheit
     index:
       confirm_delete: Bist Du sicher?
       new_delivery: Neue Lieferung für %{supplier} anlegen
@@ -432,16 +405,12 @@ de:
     new:
       title: Neue Lieferung von %{supplier}
     show:
-      amount: Menge
-      article: Artikel
-      price: Nettopreis
       sum: Summe
       sum_diff: Brutto - bereinigter Rechnungsbetrag
       sum_gross: Bruttosumme
       sum_net: Nettosumme
       title: Lieferung anzeigen
       title_articles: Artikel
-      unit: Einheit
     stock_article_for_adding:
       action_add_to_delivery: Liefern
       action_edit: Bearbeiten
@@ -526,16 +495,10 @@ de:
       edit_results_by_articles:
         add_article: Artikel hinzufügen
         amount: Menge
-        amount_per_unit: GebGr * Einheit
-        article: Artikel
         gross: Brutto
         net: Netto
-        number: Nr.
-        refund: Pfand
-        tax: MwSt
       group_order_articles:
         add_group: Gruppe hinzufügen
-        group: Gruppe
         total: Gesamtpreis
         total_fc: Summe (FC-Preis)
         units: Einheiten
@@ -622,18 +585,12 @@ de:
         amount_change_for: Mengenänderung für %{article}
         result_hint: ! 'Einheit: %{unit}'
     index:
-      amount: Betrag
       amount_fc: Betrag(FC)
-      clear: Abrechnen
-      date: Datum
       end: Ende
       everything_cleared: Super, alles schon abgerechnet...
-      group: Gruppe
       last_transactions: Letzte Überweisungen
-      note: Notiz
       open_transactions: Noch nicht abgerechnet
       show_all: alle anzeigen
-      supplier: Lieferantin
       title: Finanzbereich
       unpaid_invoices: Unbezahlte Rechnungen
     invoices:
@@ -644,7 +601,6 @@ de:
         title: Rechnungen
       invoices:
         confirm_delete: Bist Du sicher?
-        delivery: Lieferung
       linked: Diese Rechnung ist mit %{what_link} verknüpft.
       linked_delivery: einer Lieferung
       linked_order: einer Bestellung
@@ -666,10 +622,7 @@ de:
         search_placeholder: Suchen ...
         title: Konten verwalten
       ordergroups:
-        account_balance: Kontostand
         account_statement: Kontoauszug
-        contact: Kontakt
-        name: Name
         new_transaction: Neue Transaktion
     update:
       notice: Rechnung wurde aktualisiert.
@@ -680,10 +633,6 @@ de:
         only_active: Nur aktive
         only_active_desc: (mindestens einmal in den letzten 3 Monaten bestellt)
         title: Bestellgruppen
-      ordergroups:
-        last_ordered: zuletzt bestellt
-        name: Name
-        user: Mitglieder
     users:
       index:
         body: <p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.</p> <p>Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>
@@ -817,12 +766,8 @@ de:
         last_update: Letzte Aktualisiering ist %{when} her
         title: Meine Bestellgruppe
         transactions:
-          amount: Betrag
-          note: Notiz
           title: Letzte Transaktionen
           view: Kontoauszug anzeigen
-          when: Wann
-          where: Wer
       ordergroup:
         title: Engagement Deiner Bestellgruppe
       tasks_move:
@@ -1306,20 +1251,14 @@ de:
     articles_by_groups:
       fc_price: FC-Preis
       fc_price_desc: Preis incl. MwSt, Pfand und Foodcoop-Aufschlag
-      name: Name
       price: Gesamtpreis
-      unit: Einheit
       unit_quantity: GebGr
       unit_quantity_desc: Gebindegröße
     group:
       access: Zugriff auf
       activated: aktiviert
-      address: Adresse
       apple_limit: Äpfel-Bestellbeschränkung
-      contact: Kontakt
       deactivated: deaktiviert
-      description: Beschreibung
-      members: Mitglieder
       no_weekly_job: kein wöchentlicher Job definiert
       weekly_job: Wöchentlicher Job
     group_form_fields:
@@ -1549,6 +1488,7 @@ de:
       title: Aufgaben für %{workgroup}
       title_all: Alle Aufgaben der Gruppe
   ui:
+    actions: Aktionen
     close: Schließen
     delete: Löschen
     edit: Bearbeiten
