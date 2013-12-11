@@ -4,11 +4,11 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t '.name'
-      %th= t '.contact'
-      %th= t '.address'
-      %th= t '.members'
-      %th= t 'admin.actions'
+      %th= heading_helper Ordergroup, :name
+      %th= heading_helper Ordergroup, :contact
+      %th= heading_helper Ordergroup, :contact_address
+      %th= heading_helper Ordergroup, :user_tokens
+      %th= t 'ui.actions'
   %tbody
     - for ordergroup in @ordergroups
       %tr{:class => cycle('even','odd', :name => 'groups')}

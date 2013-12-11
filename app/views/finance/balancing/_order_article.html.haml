@@ -5,7 +5,7 @@
   = order_article.units_to_order
   - unless order_article.ordered_quantities_equal_to_group_orders?
     %span{:style => "color:red;font-weight: bold"} !
-%td= order_article.price.unit_quantity.to_s + ' * ' + order_article.article.unit.to_s
+%td #{order_article.price.unit_quantity} &times; #{order_article.article.unit}
 %td
   = number_to_currency(order_article.price.price, :unit => "")
   :plain
@@ -16,7 +16,7 @@
   :plain
     /
   = number_to_currency(order_article.total_gross_price, :unit => "")
-%td= order_article.price.tax
+%td #{order_article.price.tax}%
 %td= order_article.price.deposit
 %td
   = link_to t('ui.edit'), edit_finance_order_order_article_path(order_article.order, order_article), remote: true,

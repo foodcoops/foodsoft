@@ -5,9 +5,9 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t '.name'
-      %th= t '.user'
-      %th= t '.last_ordered'
+      %th= heading_helper Ordergroup, :name
+      %th= heading_helper Ordergroup, :user_tokens
+      %th= heading_helper Ordergroup, :last_ordered
 
   %tbody
     - for ordergroup in @ordergroups

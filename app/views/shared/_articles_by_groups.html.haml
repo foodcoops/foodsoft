@@ -1,7 +1,7 @@
 %table.table.table-hover
   %thead
     %tr
-      %th{:style => "width:40%"}= t '.name'
+      %th{:style => "width:40%"}= heading_helper Article, :name
       %th
         %acronym{:title => t('shared.articles.ordered_desc')}= t 'shared.articles.ordered'
       %th
@@ -10,7 +10,7 @@
         %acronym{:title => t('.fc_price_desc')}= t '.fc_price'
       %th
         %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity'
-      %th= t '.unit'
+      %th= heading_helper Article, :unit
       %th= t '.price'
 
   - for group_order in order.group_orders.ordered

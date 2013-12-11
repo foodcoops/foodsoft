@@ -15,6 +15,7 @@ en:
         name: Name
         note: Note
         order_number: Order number
+        order_number_short: Nr.
         origin: Origin
         price: Price (net)
         supplier: Supplier
@@ -81,6 +82,7 @@ en:
       ordergroup:
         account_balance: Account balance
         available_funds: Available credit
+        contact: Contact
         contact_address: Address
         contact_person: Contact person
         contact_phone: Phone
@@ -131,6 +133,7 @@ en:
       user:
         email: Email
         first_name: First name
+        last_login: Last login
         last_name: Last name
         name: Name
         nick: Username
@@ -177,7 +180,6 @@ en:
       workgroup: Workgroup
   admin:
     access_to: access to
-    actions: Actions
     base:
       index:
         all_ordergroups: All ordergroups
@@ -215,11 +217,6 @@ en:
         workgroup: workgroup
       new:
         title: Create ordergroup
-      ordergroups:
-        address: Address
-        contact: Contact
-        members: Members
-        name: Name
       show:
         confirm: Are you sure?
         edit: Edit group/members
@@ -238,20 +235,11 @@ en:
         title: Create new user
       show:
         confirm: Do you really want to kick out %{user}?
-        email: Email
         groupabos: Group subscriptions
         member_since: Member since %{time}
-        name: Name
-        nick: Nick
         person: Person
-        phone: Phone
         preference: Preferences
         send_message: Send message
-      users:
-        email: email
-        last_login: last login
-        login: login
-        name: name
     workgroups:
       destroy:
         error: ! 'Workgroup could not be deleted: %{error}'
@@ -339,15 +327,6 @@ en:
       submit: Update all articles
       title: Edit all articles from %{supplier}
       warning: ! 'Warning: all articles will be updated!'
-    edit_all_table:
-      available_desc: available
-      available_short: avail
-      order_number_desc: Order number
-      order_number_short: Ordernr.
-      price_desc: Net price
-      price_short: Price
-      unit_quantity_desc: Unit quantity
-      unit_quantity_short: Quantity
     form:
       title_edit: Edit article
       title_new: Add new article
@@ -414,17 +393,11 @@ en:
     edit:
       title: Edit delivery
     form:
-      actions: Tasks
-      article: Article
-      category: Category
       create_from_blank: Create new article
       create_stock_article: Create stock article
-      price: Netprice
-      quantity: Quantity
       title_fill_quantities: 2. Set delivery quantities
       title_finish_delivery: 3. Finish delivery
       title_select_stock_articles: 1. Select stock articles
-      unit: Unit
     index:
       confirm_delete: Are you sure?
       new_delivery: ! 'Create new delivery for %{supplier} '
@@ -434,16 +407,12 @@ en:
     new:
       title: New delivery from %{supplier}
     show:
-      amount: Amount
-      article: Article
-      price: Netprice
       sum: Sum
       sum_diff: Gross - adjusted invoice amount
       sum_gross: Gross sum
       sum_net: Net sum
       title: Show delivery
-      title_articles: Article
-      unit: Unit
+      title_articles: Articles
     stock_article_for_adding:
       action_add_to_delivery: Add to delivery
       action_edit: Edit
@@ -530,16 +499,10 @@ en:
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
-        amount_per_unit: Unit quantity * Unit
-        article: Article
         gross: Gross
         net: Net
-        number: Nr.
-        refund: Deposit
-        tax: Tax
       group_order_articles:
         add_group: Add group
-        group: Group
         total: Total costs
         total_fc: Sum (FC-price)
         units: Units
@@ -626,18 +589,12 @@ en:
         amount_change_for: Change amount for %{article}
         result_hint: ! 'Unit: %{unit}'
     index:
-      amount: Amount
       amount_fc: Amount(FC)
-      clear: To account
-      date: Date
       end: End
       everything_cleared: Great, everything is accounted...
-      group: Group
       last_transactions: Recent transactions
-      note: Note
       open_transactions: Unsettled orders
       show_all: show all
-      supplier: Supplier
       title: Finances
       unpaid_invoices: Unpaid invoices
     invoices:
@@ -648,7 +605,6 @@ en:
         title: Invoices
       invoices:
         confirm_delete: Are you sure?
-        delivery: Delivery
       linked: This invoice is linked to %{what_link}.
       linked_delivery: a delivery
       linked_order: an order
@@ -670,10 +626,7 @@ en:
         search_placeholder: Search ...
         title: Manage accounts
       ordergroups:
-        account_balance: Account balance
         account_statement: Account statement
-        contact: Contact
-        name: Name
         new_transaction: New transaction
     update:
       notice: Invoice was updated
@@ -684,10 +637,6 @@ en:
         only_active: Only active groups
         only_active_desc: (have placed order at least once in the last 3 months)
         title: Ordergroups
-      ordergroups:
-        last_ordered: Last ordered
-        name: Name
-        user: Users
     users:
       index:
         body: <p>Here you can write a message to the members of your Foodcoop.</p> <p>You have to approve in your %{profile_link} that your contact details are visible.</p>
@@ -821,12 +770,8 @@ en:
         last_update: Last update was %{when} ago
         title: My ordergroup
         transactions:
-          amount: Amount
-          note: Note
           title: Last Transactions
           view: Show account statement
-          when: When
-          where: Who
       ordergroup:
         title: Engagement of your ordergroup
       tasks_move:
@@ -1310,20 +1255,14 @@ en:
     articles_by_groups:
       fc_price: FC-Price
       fc_price_desc: Price including taxes, deposit and Foodcoop-charge
-      name: Name
       price: Total price
-      unit: Unit
       unit_quantity: Lot quantity
       unit_quantity_desc: How many units per lot.
     group:
       access: Access to
       activated: activated
-      address: Address
       apple_limit: Apple points order limit
-      contact: Contact
       deactivated: deactivated
-      description: Description
-      members: Members
       no_weekly_job: No weekly job defined
       weekly_job: Weekly job
     group_form_fields:
@@ -1553,6 +1492,7 @@ en:
       title: Tasks for %{workgroup}
       title_all: All group tasks
   ui:
+    actions: Actions
     close: Close
     delete: Delete
     edit: Edit
