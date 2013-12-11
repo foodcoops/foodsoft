@@ -1,3 +1,3 @@
-= t '.header', user: @user.nick, date: I18n.l(Time.now, :format => :short)
+= t '.header', user: show_user(@user), date: I18n.l(Time.now, :format => :short)
 \
 = @feedback

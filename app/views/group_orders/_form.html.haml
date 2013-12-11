@@ -30,7 +30,7 @@
         %dt= t '.note'
         %dd= @order.note
       %dt= t '.created_by'
-      %dd= link_to_user_message_if_valid(@order.created_by)
+      %dd= show_user_link(@order.created_by)
       %dt= t '.ending'
       %dd= format_time(@order.ends)
       - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
@@ -40,7 +40,7 @@
       %dd= number_to_currency @order.sum
       %dt= t '.last_update'
       %dd
-        = @group_order.updated_by.nick if @group_order.updated_by
+        = show_user(@group_order.updated_by) if @group_order.updated_by
         (#{format_time(@group_order.updated_on)})
       %dt= t '.funds'
       %dd= number_to_currency(@ordering_data[:available_funds])

@@ -1,5 +1,5 @@
 - comments.each do |comment|
   .comment[comment]
     %strong= comment.user.try(:ordergroup_name)
-    %small (#{comment.user.try(:nick)} am #{format_time(comment.created_at)}):
+    %small (#{show_user comment.user} am #{format_time(comment.created_at)}):
     = simple_format(comment.text)

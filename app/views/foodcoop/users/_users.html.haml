@@ -4,7 +4,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= heading_helper User, :nick
+      - if FoodsoftConfig[:use_nick]
+        %th= heading_helper User, :nick
       %th= heading_helper User, :name
       %th= heading_helper User, :email
       %th= heading_helper User, :phone
@@ -13,8 +14,9 @@
   %tbody
     - for user in @users
       %tr
-        %td= user.nick
-        %td= user.name  if @current_user.role_admin? || user.settings.profile["name_is_public"]
+        - if FoodsoftConfig[:use_nick]
+          %td= show_user user
+        %td= user.name  if @current_user.role_admin? || user.settings.profile["name_is_public"] || !FoodsoftConfig[:use_nick]
         %td= user.email if @current_user.role_admin? || user.settings.profile["email_is_public"]
         %td= user.phone if @current_user.role_admin? || user.settings.profile["phone_is_public"]
         %td= user.ordergroup_name

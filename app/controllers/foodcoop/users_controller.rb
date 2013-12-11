@@ -1,19 +1,16 @@
 class Foodcoop::UsersController < ApplicationController
 
   def index
-    @users = User.order('nick ASC')
+    @users = User.natural_order
 
     # if somebody uses the search field:
-    unless params[:user_name].blank?
-      @users = @users.where("first_name LIKE :user_name OR last_name LIKE :user_name OR nick LIKE :user_name",
-                            user_name: "%#{params[:user_name]}%")
-    end
+    @users = @users.natural_search(params[:user_name]) unless params[:user_name].blank?
 
     if params[:ordergroup_name]
       @users = @users.joins(:groups).where("groups.type = 'Ordergroup' AND groups.name LIKE ?", "%#{params[:ordergroup_name]}%")
     end
 
-    @users = @users.page(params[:page]).per(@per_page).order('users.nick ASC')
+    @users = @users.page(params[:page]).per(@per_page)
 
     respond_to do |format|
       format.html # index.html.haml
