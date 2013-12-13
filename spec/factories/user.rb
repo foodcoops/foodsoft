@@ -18,6 +18,13 @@ FactoryGirl.define do
       end
     end
 
+    # user with an ordergroup (independent of the signup plugin being loaded)
+    factory :user_and_ordergroup do
+      after :create do |user, evaluator|
+        create :ordergroup, user_ids: [user.id]
+      end
+    end
+
     # user with administrator access
     factory :admin do
       sequence(:nick) { |n| "admin#{n}" }

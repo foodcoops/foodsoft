@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 describe GroupOrderArticle do
-  let(:user) { create :user, groups: [create(:ordergroup)] }
+  let(:user) { create :user_and_ordergroup }
   let(:order) { create(:order) }
   let(:go) { create :group_order, order: order, ordergroup: user.ordergroup }
   let(:goa) { create :group_order_article, group_order: go, order_article: order.order_articles.first }
