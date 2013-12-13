@@ -14,7 +14,7 @@ module FoodsoftSignup
   def self.signup_warning(c, user)
     unless user.nil?
       if user.ordergroup.nil?
-        c.flash.now[:warning] = I18n.t('foodsoft_signup.errors.require_ordergroup')
+        c.flash.now[:warning] = I18n.t('foodsoft_signup.errors.no_ordergroup')
       elsif !user.ordergroup.approved?
         c.flash.now[:warning] = approval_msg(c)
       end
