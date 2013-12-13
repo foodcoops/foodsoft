@@ -21,7 +21,7 @@ if defined? FoodsoftSignup
       it 'can create a new user and unapproved ordergroup' do
         FoodsoftConfig.config[:signup] = true
         visit signup_path
-        user = build :user
+        user = build :_user
         ordergroup = build :ordergroup
         fill_in 'user_nick', :with => user.nick if FoodsoftConfig[:use_nick]
         fill_in 'user_first_name', :with => user.first_name
@@ -45,7 +45,7 @@ if defined? FoodsoftSignup
     describe :type => :feature do
       let(:order) { create :order }
       let(:ordergroup) { create :ordergroup, :user_ids => [user.id], :approved => false }
-      let(:user) { create :user }
+      let(:user) { create :_user }
       before { ordergroup; login user }
 
       it 'disallows ordering when not approved' do
