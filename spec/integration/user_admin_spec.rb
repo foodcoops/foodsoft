@@ -7,7 +7,7 @@ describe 'user admin', :type => :feature do
 
 
   describe 'can create a user', :type => :feature, :js => true do
-    let(:user) { build :user }
+    let(:user) { build :_user }
 
     it 'without ordergroup' do
       visit new_admin_user_path
@@ -39,7 +39,7 @@ describe 'user admin', :type => :feature do
 
 
   describe 'can edit a user', :type => :feature, :js => true do
-    let(:user) { create :user }
+    let(:user) { create :_user }
 
     it 'and associate it to an existing ordergroup' do
       ordergroup = create :ordergroup
