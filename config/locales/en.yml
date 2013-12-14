@@ -88,6 +88,7 @@ en:
         contact_phone: Phone
         description: Description
         ignore_apple_restriction: Ignore order stop by apple points restriction
+        last_order: Last order
         name: Name
         user_tokens: Members
       page:
