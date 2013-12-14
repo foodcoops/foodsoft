@@ -107,10 +107,10 @@
   %table.table#stock_changes.stupidtable
     %thead
       %tr
-        %th.default-sort{:data => {:sort => 'string'}}= t '.article'
+        %th.default-sort{:data => {:sort => 'string'}}= Article.model_name.human
         %th= heading_helper StockArticle, :price
         %th= heading_helper StockArticle, :unit
-        %th= heading_helper StockChange, :quantity
+        %th= heading_helper GroupOrderArticle, :quantity  # quantity to order, although technically this will be a StockChange
         %th= t 'ui.actions'
     %tbody
       = f.simple_fields_for :stock_changes do |stock_change_form|
