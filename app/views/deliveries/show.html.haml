@@ -19,7 +19,7 @@
     %tr
       %th= Article.model_name.human
       %th= heading_helper StockArticle, :unit
-      %th.numeric= heading_helper StockChange, :quantity
+      %th.numeric= heading_helper GroupOrderArticle, :quantity  # quantity to order, although technically this will be a StockChange
       %th.numeric= heading_helper Article, :price
       %th.numeric= t '.sum'
   %tbody
