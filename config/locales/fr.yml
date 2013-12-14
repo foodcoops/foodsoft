@@ -88,6 +88,7 @@ fr:
         contact_phone: Téléphone
         description: Description
         ignore_apple_restriction: Pour cette cellule, ne pas bloquer les commandes en cas de manque de glands
+        last_order: dernière commande
         name: Nom
         user_tokens: Membres
       page:

@@ -88,6 +88,7 @@ de:
         contact_phone: Telefon
         description: Beschreibung
         ignore_apple_restriction: Bestellstop bei zu wenig Äpfeln ignorieren
+        last_order: Zuletst bestellt
         name: Name
         user_tokens: Mitglieder
       page:
