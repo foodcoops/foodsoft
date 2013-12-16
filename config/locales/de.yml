@@ -35,7 +35,7 @@ de:
         created_on: Datum
         note: Notiz
         ordergroup: Bestellgruppe
-        user: 
+        user: Eingetragen von
       group_order:
         price: Bestellsumme
         updated_by: Zuletzt bestellt
@@ -70,10 +70,10 @@ de:
         name: Lieferant
         note: Notiz
         starts: Läuft vom
-        status: 
+        status: Status
       order_article:
         missing_units: Fehlende Einheiten
-        missing_units_short: 
+        missing_units_short: Fehlende
         units_to_order: Menge
         update_current_price: Globalen Preis aktualisieren
       order_comment:
@@ -124,7 +124,7 @@ de:
         done: Erledigt?
         due_date: Wann erledigen?
         duration: Dauer
-        name: 
+        name: Aufgabe
         required_users: Anzahl
         user_list: Verantwortlichen
         workgroup: Arbeitsgruppe
@@ -280,7 +280,7 @@ de:
   application:
     controller:
       error_authn: Anmeldung erforderlich!
-      error_denied: 
+      error_denied: Kein Zugriff!
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
   article_categories:
     create:
@@ -758,7 +758,7 @@ de:
         ordered: Bestellt
         ordered_title: Menge + Toleranz
         show_hide: Zeige/Verstecke nicht bestellte Artikel
-        show_note: 
+        show_note: Notiz zeigen
         title: Artikelübersicht
         unit_price: Einzelpreis
       comment: Kommentare lesen/schreiben
@@ -1297,9 +1297,9 @@ de:
   shared:
     articles:
       ordered: Bestellt
-      ordered_desc: 
+      ordered_desc: Anzahl der Artikel die durch das Mitglied bestellt wurden (Menge + Toleranz)
       received: Bekommen
-      received_desc: 
+      received_desc: Anzahl der Artikel die ein Mitglied erhält
     articles_by_articles:
       ordergroup: Bestellgruppe
       price: Gesamtpreis
