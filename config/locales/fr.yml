@@ -396,6 +396,7 @@ fr:
     edit:
       title: Modifier le réapprovisionnement
     form:
+      confirm_foreign_supplier_reedit: 
       create_from_blank: Ajouter un nouvel article quelconque
       create_stock_article: Ajouter un article au stock
       title_fill_quantities: 2. Définir la quantité à livrer
@@ -1365,15 +1366,15 @@ fr:
     check:
       not_empty: ! '%{name} ne peut pas être supprimé, car il y en a encore en stock.'
     copy:
-      title: 
+      title: Copier l'article
     create:
-      notice: L'article "%{name}" a été ajouté au stock.
+      notice: 
     destroy:
       notice: L'article %{name} a bien été supprimé du stock.
     edit:
       title: Modifier l'article
     form:
-      copy_stock_article: Copier l'article
+      copy_stock_article: copier l'article
       price_hint: Pour éviter que ça soit le bazar, les prix des articles en stock ne peuvent plus être modifiés.
     index:
       confirm_delete: T'es sûrE de ton coup?
@@ -1396,6 +1397,8 @@ fr:
       new_quantity: Nouveau stock
       reason: Raison
       stock_changes: Afficher l'historique
+    stock_article:
+      confirm_delete: 
     update:
       notice: Les données de l'article "%{name}" ont été mises à jour.
   suppliers:

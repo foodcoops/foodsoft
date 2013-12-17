@@ -392,6 +392,7 @@ nl:
     edit:
       title: Levering aanpassen
     form:
+      confirm_foreign_supplier_reedit: 
       create_from_blank: Nieuw voorraadartikel invoeren
       create_stock_article: Voorraadartikel invoeren
       title_fill_quantities: 2. Hoeveel mag er geleverd worden
@@ -1340,15 +1341,15 @@ nl:
     check:
       not_empty: ! '%{name} kon niet worden verwijderd, de inventaris is niet leeg.'
     copy:
-      title: 
+      title: kopieer het voorraadartikel
     create:
-      notice: Nieuw voorraadsartikel "%{name}" gemaakt.
+      notice: Voorraadartikel "%{name}" is aangemaakt.
     destroy:
       notice: Artikel %{name} is verwijdered.
     edit:
       title: Voorraadartikelen bewerken
     form:
-      copy_stock_article: kopieer het voorraadartikel
+      copy_stock_article: vooraadartikel kopiëren
       price_hint: Om chaos te voorkomen, kun je de prijs van bestaande voorraadartikelen niet aanpassen.
     index:
       confirm_delete: Weet je zeker dat je dit wilt verwijderen?
@@ -1371,6 +1372,8 @@ nl:
       new_quantity: Nieuw aantal
       reason: Reden
       stock_changes: Verloop
+    stock_article:
+      confirm_delete: 
     update:
       notice: Voorraadartikel "%{name}" is bijgewerkt.
   suppliers:

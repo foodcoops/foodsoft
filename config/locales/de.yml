@@ -1388,6 +1388,8 @@ de:
       new_quantity: Neuer Bestand
       reason: Ereignis
       stock_changes: Verlauf des Lagerbestands
+    stock_article:
+      confirm_delete: 
     update:
       notice: Lagerartikel »%{name}« aktualisiert.
   suppliers:

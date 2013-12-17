@@ -1363,7 +1363,7 @@ en:
     copy:
       title: Copy stock article
     create:
-      notice: New stock article %{name} was created.
+      notice: New stock article "%{name}" was created.
     destroy:
       notice: Article %{name} was deleted.
     edit:
