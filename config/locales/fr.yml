@@ -15,6 +15,7 @@ fr:
         name: Nom
         note: Note
         order_number: ! 'Numéro '
+        order_number_short: Numéro
         origin: Lieu de production
         price: Prix net
         supplier: 
@@ -81,11 +82,13 @@ fr:
       ordergroup:
         account_balance: Crédit initial
         available_funds: Crédit disponible
+        contact: Contact
         contact_address: Adresse
         contact_person: Personne à contacter
         contact_phone: Téléphone
         description: Description
         ignore_apple_restriction: Pour cette cellule, ne pas bloquer les commandes en cas de manque de glands
+        last_order: dernière commande
         name: Nom
         user_tokens: Membres
       page:
@@ -131,6 +134,7 @@ fr:
       user:
         email: Email
         first_name: Prénom
+        last_login: Dernière connection
         last_name: Nom de famille
         name: Nom
         nick: Identifiant
@@ -177,7 +181,6 @@ fr:
       workgroup: Équipe
   admin:
     access_to: accès à
-    actions: Actions
     base:
       index:
         all_ordergroups: Toutes les cellules
@@ -215,11 +218,6 @@ fr:
         workgroup: équipe
       new:
         title: Définir une nouvelle cellule
-      ordergroups:
-        address: Adresse
-        contact: Contact
-        members: Membres
-        name: Nom
       show:
         confirm: T'es sûrE de ton coup?
         edit: Modifier les données sur les cellules et/ou leurs membres
@@ -238,20 +236,11 @@ fr:
         title: Ajouter unE nouveLLE_eau membre
       show:
         confirm: Veux-tu vraiment expulser %{user}?
-        email: Email
         groupabos: Participation à des équipes
         member_since: Membre depuis %{time}
-        name: Nom
-        nick: Identifiant
         person: Personne
-        phone: Numéro de téléphone
         preference: Préférences
         send_message: Envoyer un message
-      users:
-        email: email
-        last_login: dernière connection
-        login: identifiant
-        name: nom
     workgroups:
       destroy:
         error: ! 'Cette équipe n''a pas pu être supprimée: %{error}'
@@ -339,15 +328,6 @@ fr:
       submit: Mettre à jour tous les articles
       title: Modifier tous les articles de %{supplier}
       warning: Attention, tous les articles sont en train d'être mis à jour!
-    edit_all_table:
-      available_desc: disponible
-      available_short: disp.
-      order_number_desc: numéro de commande
-      order_number_short: n°
-      price_desc: Prix net
-      price_short: Prix
-      unit_quantity_desc: Unités par lot
-      unit_quantity_short: U/L
     form:
       title_edit: 
       title_new: Ajouter un nouvel article
@@ -416,17 +396,11 @@ fr:
     edit:
       title: Modifier le réapprovisionnement
     form:
-      actions: Options
-      article: Article
-      category: Catégorie
       create_from_blank: Ajouter un nouvel article quelconque
       create_stock_article: Ajouter un article au stock
-      price: Prix net
-      quantity: Quantité
       title_fill_quantities: 2. Définir la quantité à livrer
       title_finish_delivery: 3. Clore le réapprovisionnement
       title_select_stock_articles: 1. Choisir les articles en stock
-      unit: Unité
     index:
       confirm_delete: T'es sûrE de ton coup?
       new_delivery: Réapprovisionner le stock par %{supplier}
@@ -436,16 +410,12 @@ fr:
     new:
       title: Réapprovisionner le stock par %{supplier}
     show:
-      amount: Quantité
-      article: Article
-      price: Prix net
       sum: Prix total
       sum_diff: montant brut - montant net
       sum_gross: prix total brut
       sum_net: prix total net
       title: Afficher le réapprovisionnement
-      title_articles: Article
-      unit: Unité
+      title_articles: Articles
     stock_article_for_adding:
       action_add_to_delivery: Commander
       action_edit: Modifier
@@ -534,16 +504,10 @@ fr:
       edit_results_by_articles:
         add_article: Ajouter un article
         amount: Quantité
-        amount_per_unit: Poids d'un lot
-        article: Article
         gross: Brut
         net: Net
-        number: Numéro
-        refund: Consigne
-        tax: TVA
       group_order_articles:
         add_group: Créer un nouveau groupe
-        group: Groupe
         total: Prix total
         total_fc: Prix total (pour la boufcoop)
         units: Nombre d'unités
@@ -630,18 +594,12 @@ fr:
         amount_change_for: Modification de la quantité de %{article}
         result_hint: 
     index:
-      amount: Montant
       amount_fc: Montant(boufcoop)
-      clear: Décompter
-      date: Date
       end: Fin
       everything_cleared: Super, tout est a déjà été décompté!
-      group: Cellule
       last_transactions: Dernières transactions
-      note: Note
       open_transactions: à décompter
       show_all: tout afficher
-      supplier: FournisseusE_r
       title: Espace trésorerie
       unpaid_invoices: Factures à régler
     invoices:
@@ -652,7 +610,6 @@ fr:
         title: Factures
       invoices:
         confirm_delete: T'es sûrE de ton coup?
-        delivery: Réapprovisionnement
       linked: Cette facture est associée à %{what_link}.
       linked_delivery: un réapprovisionnement
       linked_order: une commande
@@ -674,10 +631,7 @@ fr:
         search_placeholder: Rechercher ...
         title: Crédits des cellules
       ordergroups:
-        account_balance: Crédit disponible
         account_statement: Relevé de compte
-        contact: 
-        name: Nom
         new_transaction: Nouvelle transaction
     update:
       notice: La facture a été mise à jour.
@@ -688,10 +642,6 @@ fr:
         only_active: Seulement les cellules en activité
         only_active_desc: (ayant commandé au moins une fois au cours des 3 derniers mois)
         title: Cellules
-      ordergroups:
-        last_ordered: dernière commande
-        name: Nom
-        user: Membres
     users:
       index:
         body: ! '<p>Cette page sert à envoyer des messages aux autres membres de la coop.</p>
@@ -837,12 +787,8 @@ fr:
         last_update: La dernière mise à jour date du %{when}
         title: Ta cellule
         transactions:
-          amount: Montant
-          note: Note
           title: Dernière transactions
           view: Afficher un relevé de compte
-          when: Quand?
-          where: Qui?
       ordergroup:
         title: Niveau de participation de ta cellule
       tasks_move:
@@ -1307,20 +1253,14 @@ fr:
     articles_by_groups:
       fc_price: Prix coop
       fc_price_desc: Prix avec TVA, consigne et part de la coop inclus.
-      name: Nom
       price: Prix total
-      unit: Unité
       unit_quantity: U/L
       unit_quantity_desc: Unités par lot
     group:
       access: Accès à
       activated: activé
-      address: Adresse
       apple_limit: Minimum de glands
-      contact: Contact
       deactivated: désactivé
-      description: Description
-      members: Membre
       no_weekly_job: aucun boulot hebdomadaire n'a été défini
       weekly_job: Boulot hebdomadaire
     group_form_fields:
@@ -1563,6 +1503,7 @@ fr:
       title: Agenda de l'%{workgroup}
       title_all: Boulot prévu pour l'équipe
   ui:
+    actions: Actions
     close: Fermer
     delete: Supprimer
     edit: Modifier

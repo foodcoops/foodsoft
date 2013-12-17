@@ -107,11 +107,11 @@
   %table#stock_articles_for_adding.table.table-hover.stupidtable
     %thead
       %tr
-        %th.default-sort{:data => {:sort => 'string'}}= t '.article'
-        %th= t '.price'
-        %th= t '.unit'
-        %th= t '.category'
-        %th= t '.actions'
+        %th.default-sort{:data => {:sort => 'string'}}= Article.model_name.human
+        %th= heading_helper StockArticle, :price
+        %th= heading_helper StockArticle, :unit
+        %th= heading_helper StockArticle, :article_category
+        %th= t 'ui.actions'
     %tfoot
       %tr
         %th{:colspan => 5}
@@ -127,11 +127,11 @@
   %table.table#stock_changes.stupidtable
     %thead
       %tr
-        %th.default-sort{:data => {:sort => 'string'}}= t '.article'
-        %th= t '.price'
-        %th= t '.unit'
-        %th= t '.quantity'
-        %th= t '.actions'
+        %th.default-sort{:data => {:sort => 'string'}}= Article.model_name.human
+        %th= heading_helper StockArticle, :price
+        %th= heading_helper StockArticle, :unit
+        %th= heading_helper GroupOrderArticle, :quantity  # quantity to order, although technically this will be a StockChange
+        %th= t 'ui.actions'
     %tbody
       = f.simple_fields_for :stock_changes do |stock_change_form|
         = render :partial => 'stock_change_fields', :locals => {:f => stock_change_form}
