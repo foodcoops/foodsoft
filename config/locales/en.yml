@@ -387,13 +387,12 @@ en:
       how_many_units: ! 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
-    create_stock_article:
-      notice: The new stock article "%{name}" was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
       title: Edit delivery
     form:
+      confirm_foreign_supplier_reedit: The stock article %{name} was successfully saved. However, it belongs to a different supplier than this delivery. Would you like to edit the stock article again?
       create_from_blank: Create new article
       create_stock_article: Create stock article
       title_fill_quantities: 2. Set delivery quantities
@@ -418,15 +417,11 @@ en:
       action_add_to_delivery: Add to delivery
       action_edit: Edit
       action_other_price: Copy
-    stock_article_form:
-      copy_stock_article: Copy stock article
     stock_change_fields:
       remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
     update:
       notice: Delivery was updated.
-    update_stock_article:
-      notice: The stock article "%{name}" was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
@@ -1284,14 +1279,14 @@ en:
       default_message: Errors were found. Please check the form.
     hints:
       article:
-        unit: ! 'For example: KG or 1L or 500g'
+        unit: e.g. KG or 1L or 500g
       message:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
         units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
         update_current_price: Also update the price of the current order
       stock_article:
-        copy_stock_article:
+        copy:
           name: Please modify
         edit_stock_article:
           price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
@@ -1365,11 +1360,16 @@ en:
   stockit:
     check:
       not_empty: ! '%{name} could not be deleted, the inventory is not zero.'
+    copy:
+      title: Copy stock article
+    create:
+      notice: New stock article %{name} was created.
     destroy:
       notice: Article %{name} was deleted.
     edit:
       title: Edit stock articles
     form:
+      copy_stock_article: copy stock article
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
     index:
       confirm_delete: Are you sure you want to delete?
@@ -1392,10 +1392,10 @@ en:
       new_quantity: New quantity
       reason: Reason
       stock_changes: Stock quantity changes
-    stock_create:
-      notice: Stock article was created.
-    stock_update:
-      notice: Stock article was saved.
+    stock_article:
+      confirm_delete: Are you sure you want to delete the stock article %{name}?
+    update:
+      notice: Stock article %{name} was saved.
   suppliers:
     create:
       notice: Supplier was created

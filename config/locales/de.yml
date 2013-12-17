@@ -36,7 +36,7 @@ de:
         created_on: Datum
         note: Notiz
         ordergroup: Bestellgruppe
-        user: 
+        user: Eingetragen von
       group_order:
         price: Bestellsumme
         updated_by: Zuletzt bestellt
@@ -71,10 +71,10 @@ de:
         name: Lieferant
         note: Notiz
         starts: Läuft vom
-        status: 
+        status: Status
       order_article:
         missing_units: Fehlende Einheiten
-        missing_units_short: 
+        missing_units_short: Fehlende
         units_to_order: Menge
         update_current_price: Globalen Preis aktualisieren
       order_comment:
@@ -127,7 +127,7 @@ de:
         done: Erledigt?
         due_date: Wann erledigen?
         duration: Dauer
-        name: 
+        name: Aufgabe
         required_users: Anzahl
         user_list: Verantwortlichen
         workgroup: Arbeitsgruppe
@@ -269,7 +269,7 @@ de:
   application:
     controller:
       error_authn: Anmeldung erforderlich!
-      error_denied: 
+      error_denied: Kein Zugriff!
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
   article_categories:
     create:
@@ -385,13 +385,12 @@ de:
       how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
     create:
       notice: Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!
-    create_stock_article:
-      notice: Neuer Lagerartikel »%{name}« gespeichert.
     destroy:
       notice: Lieferung wurde gelöscht.
     edit:
       title: Lieferung bearbeiten
     form:
+      confirm_foreign_supplier_reedit: Der Lagerartikel »%{name}« wurde erfolgreich gespeichert. Er gehört jedoch nicht zu dem Lieferanten dieser Lieferung. Möchtest Du diesen Lagerartikel erneut bearbeiten?
       create_from_blank: Ohne Vorlage anlegen
       create_stock_article: Lagerartikel anlegen
       title_fill_quantities: 2. Liefermenge angeben
@@ -416,15 +415,11 @@ de:
       action_add_to_delivery: Liefern
       action_edit: Bearbeiten
       action_other_price: Kopieren
-    stock_article_form:
-      copy_stock_article: Lagerartikel kopieren
     stock_change_fields:
       remove_article: Artikel aus Lieferung entfernen
     suppliers_overview: Lieferantenübersicht
     update:
       notice: Lieferung wurde aktualisiert.
-    update_stock_article:
-      notice: Lagerartikel »%{name}« aktualisiert.
   documents:
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
@@ -708,7 +703,7 @@ de:
         ordered: Bestellt
         ordered_title: Menge + Toleranz
         show_hide: Zeige/Verstecke nicht bestellte Artikel
-        show_note: 
+        show_note: Notiz zeigen
         title: Artikelübersicht
         unit_price: Einzelpreis
       comment: Kommentare lesen/schreiben
@@ -1243,9 +1238,9 @@ de:
   shared:
     articles:
       ordered: Bestellt
-      ordered_desc: 
+      ordered_desc: Anzahl der Artikel die durch das Mitglied bestellt wurden (Menge + Toleranz)
       received: Bekommen
-      received_desc: 
+      received_desc: Anzahl der Artikel die ein Mitglied erhält
     articles_by_articles:
       ordergroup: Bestellgruppe
       price: Gesamtpreis
@@ -1287,7 +1282,7 @@ de:
         units_to_order: Wenn Du die Gesamtanzahl gelieferter Gebinde änderst, musst Du auch die individuelle Anzahl der einzelnen Bestellgruppen anpassen, indem Du auf den Artikelnamen klickst. Sie werden nicht automatisch neuberechnet und andernfalls werden den Bestellgruppen Artikel in Rechnung gestellt, die nicht geliefert wurden!
         update_current_price: Ändert auch den Preis für aktuelle Bestellungen
       stock_article:
-        copy_stock_article:
+        copy:
           name: Bitte ändern
         edit_stock_article:
           price: <ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>
@@ -1361,11 +1356,16 @@ de:
   stockit:
     check:
       not_empty: ! '%{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null.'
+    copy:
+      title: Lagerartikel kopieren
+    create:
+      notice: Neuer Lagerartikel »%{name}« gespeichert.
     destroy:
       notice: Artikel %{name} gelöscht.
     edit:
       title: Lagerartikel bearbeiten
     form:
+      copy_stock_article: Lagerartikel kopieren
       price_hint: Um Chaos zu vermeiden können bis auf weiteres die Preise von angelegten Lagerartikeln nicht mehr verändert werden.
     index:
       confirm_delete: Bist Du sicher?
@@ -1388,10 +1388,8 @@ de:
       new_quantity: Neuer Bestand
       reason: Ereignis
       stock_changes: Verlauf des Lagerbestands
-    stock_create:
-      notice: Lagerartikel wurde gespeichert.
-    stock_update:
-      notice: Lagerartikel wurde gespeichert.
+    update:
+      notice: Lagerartikel »%{name}« aktualisiert.
   suppliers:
     create:
       notice: Lieferant wurde erstellt

@@ -3,6 +3,30 @@
   :javascript
     $(function() {
       $('tr.unavailable').hide();
+      
+      // Subscribe to database changes.
+      // See publish/subscribe design pattern in /doc.
+      $(document).on('StockArticle#create', function(e) {
+        $.ajax({
+          url: '#{index_on_stock_article_create_stock_articles_path}',
+          type: 'get',
+          data: {id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+      
+      $(document).on('StockArticle#destroy', function(e) {
+        $('#stockArticle-' + e.stock_article_id).remove();
+      });
+      
+      $(document).on('StockArticle#update', function(e) {
+        $.ajax({
+          url: '#{index_on_stock_article_update_stock_articles_path}',
+          type: 'get',
+          data: {id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
     })
 
 .well.well-small
@@ -17,7 +41,7 @@
     .btn-group
       = link_to_if @current_user.role_orders?, t('.order_online'), new_order_path(supplier_id: 0),
         class: 'btn', class: 'btn btn-primary'
-      = link_to t('.new_stock_article'), new_stock_article_path, class: 'btn'
+      = link_to t('.new_stock_article'), new_stock_article_path, remote: true, class: 'btn'
       = link_to t('.new_stock_taking'), new_stock_taking_path, class: 'btn'
       = link_to t('.show_stock_takings'), stock_takings_path, class: 'btn'
 
@@ -42,22 +66,9 @@
       %th= heading_helper StockArticle, :supplier
       %th= heading_helper StockArticle, :article_category
       %th
-  %tbody
-    - for article in @stock_articles
-      %tr{:class => stock_article_classes(article), :id => "stockArticle-#{article.id}"}
-        %td= link_to article.name, article
-        %td= article.quantity
-        %td= article.quantity_ordered
-        %th= article.quantity_available
-        %td= article.unit
-        %td= article.price
-        %td= number_to_percentage article.tax
-        %td= link_to article.supplier.name, article.supplier
-        %td= article.article_category.name
-        %td
-          = link_to t('ui.edit'), edit_stock_article_path(article), class: 'btn btn-mini'
-          = link_to t('ui.delete'), article, :method => :delete, :confirm => t('.confirm_delete'),
-            class: 'btn btn-mini btn-danger', :remote => true
+  %tbody#articles-tbody
+    - for stock_article in @stock_articles
+      = render :partial => 'stock_article', :locals => {:stock_article => stock_article}
 %p
   = t '.stock_worth'
   = number_to_currency StockArticle.stock_value

@@ -7,20 +7,51 @@
   .modal-body
     = f.input :availability
     = f.input :name
-    = f.input :origin
-    = f.input :manufacturer
-    = f.input :unit
+    .fold-line
+      = f.input :unit_quantity, label: Article.human_attribute_name(:unit),
+          input_html: {class: 'input-mini', title: Article.human_attribute_name(:unit_quantity)}
+      = f.input :unit, label: '&times;'.html_safe,
+           input_html: {class: 'input-mini', title: Article.human_attribute_name(:unit)}
+
     = f.input :note
     = f.association :article_category
+    / TODO labels
 
-    = f.input :price
-    = f.input :unit_quantity
+    .fold-line
+      = f.input :price do
+        .input-prepend
+          %span.add-on= t 'number.currency.format.unit'
+          = f.input_field :price, class: 'input-mini'
+      = f.input :tax do
+        .input-append
+          = f.input_field :tax, class: 'input-mini'
+          %span.add-on %
+    .fold-line
+      = f.input :deposit do
+        .input-prepend
+          %span.add-on= t 'number.currency.format.unit'
+          = f.input_field :deposit, class: 'input-mini'
+      .control-group
+        %label.control-label{for: 'article_fc_price'}
+          = Article.human_attribute_name(:fc_price)
+        .controls.control-text#article_fc_price
+          = number_to_currency(@article.fc_price) rescue nil
+
+    = f.input :origin
+    = f.input :manufacturer
     = f.input :order_number
-    = f.input :tax, :wrapper => :append do
-      = f.input_field :tax
-      %span.add-on %
-    = f.input :deposit
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'
 
+:javascript
+  var form = $('form.edit_article, form.new_article');
+  $('#article_price, #article_tax, #article_deposit', form).on('change keyup', function() {
+    var price = parseFloat($('#article_price', form).val());
+    var tax = parseFloat($('#article_tax', form).val());
+    var deposit = parseFloat($('#article_deposit', form).val());
+    // Article#gross_price and Article#fc_price
+    var gross_price = (price + deposit) * (tax / 100 + 1);
+    var fc_price = gross_price  * (#{FoodsoftConfig[:price_markup].to_f} / 100 + 1);
+    $('#article_fc_price').html($.isNumeric(fc_price) ? I18n.l("currency", fc_price) : '&#133;');
+  });

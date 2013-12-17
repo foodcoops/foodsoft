@@ -17,6 +17,9 @@ Getting started
     ```
     git clone https://github.com/foodcoops/foodsoft.git
     ```
+   This brings up the bleeding-edge development version, which might contain some
+   unfinished parts. If you want to be safe, choose the last release:
+   `git checkout $(git tag -l | grep ^v | sort -rn | head -n1)`
 
 1. Install RVM and Ruby 1.9.3 (if you have not done so before):
    ```
