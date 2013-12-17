@@ -101,49 +101,51 @@ class GroupOrderArticle < ActiveRecord::Base
   # See description of the ordering algorithm in the general application documentation for details.
   def calculate_result
     @calculate_result ||= begin
-      quantity = tolerance = 0
-      stockit = order_article.article.is_a?(StockArticle)
+      quantity = tolerance = total_quantity = 0
 
       # Get total
-      total = stockit ? order_article.article.quantity : order_article.units_to_order * order_article.price.unit_quantity
-      logger.debug("<#{order_article.article.name}>.unitsToOrder => items ordered: #{order_article.units_to_order} => #{total}")
+      if order_article.article.is_a?(StockArticle)
+        total = order_article.article.quantity
+        logger.debug "<#{order_article.article.name}> (stock) => #{total}"
+      else
+        total = order_article.units_to_order * order_article.price.unit_quantity
+        logger.debug "<#{order_article.article.name}> units_to_order #{order_article.units_to_order} => #{total}"
+      end
 
-      if (total > 0)
+      if total > 0
         # In total there are enough units ordered. Now check the individual result for the ordergroup (group_order).
         #
         # Get all GroupOrderArticleQuantities for this OrderArticle...
         order_quantities = GroupOrderArticleQuantity.all(
             :conditions => ["group_order_article_id IN (?)", order_article.group_order_article_ids], :order => 'created_on')
-        logger.debug("GroupOrderArticleQuantity records found: #{order_quantities.size}")
+        logger.debug "GroupOrderArticleQuantity records found: #{order_quantities.size}"
 
         # Determine quantities to be ordered...
-        total_quantity = i = 0
-        while (i < order_quantities.size && total_quantity < total)
-          q = (order_quantities[i].quantity <= total - total_quantity ? order_quantities[i].quantity : total - total_quantity)
+        order_quantities.each do |goaq|
+          q = [goaq.quantity, total - total_quantity].min
           total_quantity += q
-          if (order_quantities[i].group_order_article_id == self.id)
-            logger.debug("increasing quantity by #{q}")
+          if goaq.group_order_article_id == self.id
+            logger.debug "increasing quantity by #{q}"
             quantity += q
           end
-          i += 1
+          break if total_quantity >= total
         end
 
         # Determine tolerance to be ordered...
-        if (total_quantity < total)
-          logger.debug("determining additional items to be ordered from tolerance")
-          i = 0
-          while (i < order_quantities.size && total_quantity < total)
-            q = (order_quantities[i].tolerance <= total - total_quantity ? order_quantities[i].tolerance : total - total_quantity)
+        if total_quantity < total
+          logger.debug "determining additional items to be ordered from tolerance"
+          order_quantities.each do |goaq|
+            q = [goaq.tolerance, total - total_quantity].min
             total_quantity += q
-            if (order_quantities[i].group_order_article_id == self.id)
-              logger.debug("increasing tolerance by #{q}")
+            if goaq.group_order_article_id == self.id
+              logger.debug "increasing tolerance by #{q}"
               tolerance += q
             end
-            i += 1
+            break if total_quantity >= total
           end
         end
 
-        logger.debug("determined quantity/tolerance/total: #{quantity} / #{tolerance} / #{quantity + tolerance}")
+        logger.debug "determined quantity/tolerance/total: #{quantity} / #{tolerance} / #{quantity + tolerance}"
       end
 
       {:quantity => quantity, :tolerance => tolerance, :total => quantity + tolerance}
