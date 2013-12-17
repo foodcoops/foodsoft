@@ -411,8 +411,6 @@ fr:
       how_many_units: Combien d unités (%{unit}) de l article %{name} doivent-elles être livrées?
     create:
       notice: Le réapprovisionnement a bien a été défini. Attention à ne pas oublier de déposer la facture correspondante!
-    create_stock_article:
-      notice: L'article "%{name}" a été ajouté au stock.
     destroy:
       notice: Le réapprovisionnement a été annulé.
     edit:
@@ -452,15 +450,11 @@ fr:
       action_add_to_delivery: Commander
       action_edit: Modifier
       action_other_price: Copier
-    stock_article_form:
-      copy_stock_article: Copier l'article
     stock_change_fields:
       remove_article: Retirer l'article de cette commande
     suppliers_overview: Liste des fournisseusEs_rs
     update:
       notice: La commande a été actualisée
-    update_stock_article:
-      notice: Les données de l'article "%{name}" ont été mises à jour.
   documents:
     order_by_articles:
       filename: Commande %{name}-%{date} - Trier par
@@ -1354,7 +1348,7 @@ fr:
         units_to_order: 
         update_current_price: Modifie aussi le prix des commandes en cours
       stock_article:
-        copy_stock_article:
+        copy:
           name: Merci de modifier
         edit_stock_article:
           price: <ul><li>Modification du prix enregistrée. </li><li>Si nécessaire %{stock_article_copy_link}.</li></ul>
@@ -1430,11 +1424,16 @@ fr:
   stockit:
     check:
       not_empty: ! '%{name} ne peut pas être supprimé, car il y en a encore en stock.'
+    copy:
+      title: 
+    create:
+      notice: L'article "%{name}" a été ajouté au stock.
     destroy:
       notice: L'article %{name} a bien été supprimé du stock.
     edit:
       title: Modifier l'article
     form:
+      copy_stock_article: Copier l'article
       price_hint: Pour éviter que ça soit le bazar, les prix des articles en stock ne peuvent plus être modifiés.
     index:
       confirm_delete: T'es sûrE de ton coup?
@@ -1457,10 +1456,8 @@ fr:
       new_quantity: Nouveau stock
       reason: Raison
       stock_changes: Afficher l'historique
-    stock_create:
-      notice: L'article a été sauvegardé.
-    stock_update:
-      notice: L'article a été sauvegardé.
+    update:
+      notice: Les données de l'article "%{name}" ont été mises à jour.
   suppliers:
     create:
       notice: FournisseusE_r misE à jour

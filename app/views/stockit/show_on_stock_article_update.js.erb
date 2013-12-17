@@ -1,0 +1,13 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function() {
+  var stock_article_details = $('<%= j(render(
+    :partial => 'stock_article_details',
+    :locals => {
+      :stock_article => @stock_article
+    }
+  )) %>');
+
+  $('#stockArticleDetails').replaceWith(stock_article_details);
+  $('h1').first().text('<%= j(@stock_article.name) %>');
+})();

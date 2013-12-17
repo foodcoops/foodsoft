@@ -1,0 +1,15 @@
+$('div.container-fluid').prepend('<%= j(render(
+  :partial => 'shared/alert_success',
+  :locals => {
+    :alert_message => t('.notice', :name => @stock_article.name)
+  }
+)) %>');
+
+// Publish database changes.
+// See publish/subscribe design pattern in /doc.
+$(document).trigger({
+  type: 'StockArticle#update',
+  stock_article_id: <%= @stock_article.id %>
+});
+
+$('#modalContainer').modal('hide');

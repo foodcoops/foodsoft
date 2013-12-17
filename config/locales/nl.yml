@@ -407,8 +407,6 @@ nl:
       how_many_units: ! 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
     create:
       notice: Levering is aangemaakt. Vergeet niet een factuur te maken!
-    create_stock_article:
-      notice: Nieuw voorraadsartikel "%{name}" gemaakt.
     destroy:
       notice: Levering is verwijdered.
     edit:
@@ -448,15 +446,11 @@ nl:
       action_add_to_delivery: Voeg toe aan levering
       action_edit: Bewerk
       action_other_price: Kopieer
-    stock_article_form:
-      copy_stock_article: kopieer het voorraadartikel
     stock_change_fields:
       remove_article: Artikel uit levering halen
     suppliers_overview: Leverancieroverzicht
     update:
       notice: Levering is bijgewerkt.
-    update_stock_article:
-      notice: Voorraadartikel "%{name}" is bijgewerkt.
   documents:
     order_by_articles:
       filename: Bestelling %{name}-%{date} - Artikellijst
@@ -1331,7 +1325,7 @@ nl:
         units_to_order: Als je het aantal geleverde eenheden wijzigt, moet je daarna de hoeveelheden voor huishoudens aanpassen. Klik daarvoor op de artikelnaam. Als je dit vergeet, kunnen huishoudens belast worden voor artikelen die ze niet hebben gekregen!
         update_current_price: Ook prijs in huidige besteling aanpassen
       stock_article:
-        copy_stock_article:
+        copy:
           name: Wijzigen alsjeblieft
         edit_stock_article:
           price: <ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>
@@ -1405,11 +1399,16 @@ nl:
   stockit:
     check:
       not_empty: ! '%{name} kon niet worden verwijderd, de inventaris is niet leeg.'
+    copy:
+      title: 
+    create:
+      notice: Nieuw voorraadsartikel "%{name}" gemaakt.
     destroy:
       notice: Artikel %{name} is verwijdered.
     edit:
       title: Voorraadartikelen bewerken
     form:
+      copy_stock_article: kopieer het voorraadartikel
       price_hint: Om chaos te voorkomen, kun je de prijs van bestaande voorraadartikelen niet aanpassen.
     index:
       confirm_delete: Weet je zeker dat je dit wilt verwijderen?
@@ -1432,10 +1431,8 @@ nl:
       new_quantity: Nieuw aantal
       reason: Reden
       stock_changes: Verloop
-    stock_create:
-      notice: Voorraadsartikel is opgeslagen.
-    stock_update:
-      notice: Voorraadsartikel is bijgewerkt.
+    update:
+      notice: Voorraadartikel "%{name}" is bijgewerkt.
   suppliers:
     create:
       notice: Leverancier is aangemaakt.

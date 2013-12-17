@@ -1,0 +1,9 @@
+$('#modalContainer').html('<%= j(render(
+  :partial => "form",
+  :locals => {
+    :title => t('.title'),
+    :stock_article => @stock_article
+  }
+)) %>');
+
+$('#modalContainer').modal();
