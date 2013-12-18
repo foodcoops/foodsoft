@@ -8,7 +8,8 @@ class OrdersController < ApplicationController
   
   # List orders
   def index
-    @open_orders = Order.open
+    @open_orders = Order.open.includes(:supplier)
+    @orders_in_progress = Order.finished_not_closed.includes(:supplier)
     @per_page = 15
     if params['sort']
       sort = case params['sort']
@@ -20,7 +21,7 @@ class OrdersController < ApplicationController
     else
       sort = "ends DESC"
     end
-    @orders = Order.page(params[:page]).per(@per_page).order(sort).where("state != 'open'").includes(:supplier)
+    @orders = Order.closed.page(params[:page]).per(@per_page).includes(:supplier).order(sort)
   end
 
   # Gives a view for the results to a specific order
