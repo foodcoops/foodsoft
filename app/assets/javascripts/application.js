@@ -107,6 +107,11 @@ $(function() {
         return false;
     });
 
+    // Disable action of disabled buttons
+    $(document).on('click', 'a.disabled', function() {
+        return false;
+    });
+
     // Show and hide loader on ajax callbacks
     $('*[data-remote]').bind('ajax:beforeSend', function() {
         $('#loader').show();
