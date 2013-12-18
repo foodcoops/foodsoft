@@ -1116,10 +1116,11 @@ en:
       action_end: Close
       confirm_delete: Do you really want to delete the order?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
-      ended_orders: Closed orders
+      closed_orders: Settled orders
       new_order: Create new order
       no_open_orders: There are currently no open orders.
       open_orders: Current orders
+      orders_in_progress: Closed, in progress
       title: Manage orders
     model:
       error_closed: Order was already settled
