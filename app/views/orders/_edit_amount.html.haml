@@ -8,7 +8,7 @@
     %td.name{title: order_title.join("\n")}= order_article.article.name
     %td #{order_article.article.unit_quantity} &times; #{order_article.article.unit}
     %td #{order_article.quantity} + #{order_article.tolerance}
-    %td
+    -#%td # TODO implements invoice screen
       = order_article.units_to_order
       %i.package pkg
     %td
