@@ -3,22 +3,22 @@
 
 %section
   %dl.dl-horizontal
-    %dt= Task.human_attribute_name(:name)
+    %dt= heading_helper Task, :name
     %dd= @task.name
     - if @task.description.present?
-      %dt= Task.human_attribute_name(:description)
+      %dt= heading_helper Task, :description
       %dd= simple_format(@task.description)
     - if @task.due_date.present?
-      %dt= Task.human_attribute_name(:due_date)
+      %dt= heading_helper Task, :due_date
       %dd 
         = format_date(@task.due_date)
         - if @task.periodic?
           %i.icon-repeat{title: t('tasks.repeated')}
-    %dt= Task.human_attribute_name(:duration)
+    %dt= heading_helper Task, :duration
     %dd= t('.hours', count: @task.duration)
-    %dt= Task.human_attribute_name(:user_list)
+    %dt= heading_helper Task, :user_list
     %dd= task_assignments(@task)
-    %dt= Task.human_attribute_name(:workgroup)
+    %dt= heading_helper Task, :workgroup
     %dd
       - if @task.workgroup
         = link_to @task.workgroup.name, workgroup_tasks_path(workgroup_id: @task.workgroup_id)

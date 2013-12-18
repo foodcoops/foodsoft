@@ -11,14 +11,14 @@
   %table.table.table-hover#articleList
     %tr
       %th= check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
-      %th= t '.name'
-      %th= t '.note'
+      %th= heading_helper Article, :name
+      %th= heading_helper Article, :note
       - if @order.stockit?
         %th= t '.stockit'
       - else
-        %th= t '.origin'
-        %th= t '.supplier'
-        %th= t '.unit_quantity'
+        %th= heading_helper Article, :origin
+        %th= heading_helper Article, :manufacturer
+        %th= heading_helper Article, :unit_quantity
       %th= t '.prices'
     - for category_name, articles in @order.articles_for_ordering
       %tr.article-category

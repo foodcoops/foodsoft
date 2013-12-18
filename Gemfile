@@ -65,15 +65,15 @@ group :development do
   gem 'quiet_assets'
   
   # Deploy with Capistrano
-  gem 'capistrano', '2.13.5'
-  gem 'capistrano-ext'
+  gem 'capistrano', '2.13.5', require: false
+  gem 'capistrano-ext', require: false
   #gem 'common_deploy', require: false, path: '../../common_deploy' # pending foodcoops/foodsoft#34,  git: 'git://github.com/fsmanuel/common_deploy.git'
   # Avoid having content-length warnings
   gem 'thin'
 end
 
 group :development, :test do
-  gem 'ruby-prof'
+  gem 'ruby-prof', require: false
 end
 
 group :test do
@@ -84,10 +84,12 @@ group :test do
   # webkit and poltergeist don't seem to work yet
   gem 'selenium-webdriver'
   gem 'database_cleaner'
-  gem 'simplecov', require: false
   # need to include rspec components before i18n-spec or rake fails in test environment
   gem 'rspec-core'
   gem 'rspec-expectations'
   gem 'rspec-rerun'
   gem 'i18n-spec'
+  # code coverage
+  gem 'simplecov', require: false
+  gem 'coveralls', require: false
 end

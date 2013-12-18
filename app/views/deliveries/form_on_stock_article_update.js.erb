@@ -1,0 +1,47 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function(w) {
+  // update entry in stock_article table
+  
+  $('#stock_articles_for_adding tr').removeClass('success');
+  
+  $('#stock_article_<%= @stock_article.id %>').remove();
+  
+  if(<%= @supplier.id != @stock_article.supplier.id %>) {
+    // the stock_article does _NOT_ belong to the current supplier
+    var try_again = w.confirm('<%= j(
+      t('deliveries.form.confirm_foreign_supplier_reedit', :name => @stock_article.name)
+    ) %>');
+    
+    if(try_again) {
+      $.ajax({
+        url: '<%= j edit_stock_article_path(@stock_article) %>',
+        type: 'get',
+        contentType: 'application/json; charset=UTF-8'
+      });
+    }
+  }
+  else {
+    // the stock_article _DOES_ belong to the current supplier
+    var stock_article_for_adding = $(
+      '<%= j(render(:partial => 'stock_article_for_adding', :locals => {:article => @stock_article})) %>'
+    ).addClass('success');
+    
+    $('#stock_articles_for_adding tbody').append(stock_article_for_adding);
+    updateSort('#stock_articles_for_adding');
+  }
+  
+  mark_article_for_delivery(<%= @stock_article.id %>);
+  
+  // update entry in stock_changes table
+  
+  $('#stock_changes tr').removeClass('success');
+  
+  var stock_change_entry = $('#stock_change_stock_article_<%= @stock_article.id %>');
+  $('.stock_article_name', stock_change_entry).text('<%= j(@stock_article.name) %>');
+  $('.unit', stock_change_entry).text('<%= j(@stock_article.unit) %>');
+  
+  stock_change_entry.addClass('success');
+  
+  updateSort('#stock_changes');
+})(window);

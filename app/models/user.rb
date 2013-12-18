@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_uniqueness_of :email, :case_sensitive => false
+  validates_presence_of :first_name # for simple_form validations
   validates_length_of :first_name, :in => 2..50
   validates_confirmation_of :password
   validates_length_of :password, :in => 5..25, :allow_blank => true

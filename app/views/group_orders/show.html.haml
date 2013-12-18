@@ -9,21 +9,22 @@
 .well
   // Order summary
   %dl.dl-horizontal
-    %dt= t '.supplier'
+    %dt= heading_helper Order, :name
     %dd= @order.name
-    %dt= t '.note'
+    %dt= heading_helper Order, :note
     %dd= @order.note
-    %dt= t '.ending'
+    %dt= heading_helper Order, :ends
     %dd= format_time(@order.ends)
-    %dt= t '.order_sum'
+    %dt= heading_helper GroupOrder, :price
     %dd
       - if @group_order
         = number_to_currency(@group_order.price)
       - else
         = t '.not_ordered'
     - if @order.closed?
-      %p= t '.closed_by', user: show_user(@order.updated_by)
-      = link_to t('.comment'), "#comments"
+      %dt= heading_helper Order, :closed_by
+      %dd= show_user_link @order.updated_by
+      %p= link_to t('.comment'), "#comments"
 
 // Article box
 %section
@@ -35,8 +36,8 @@
       %table.table.table-hover
         %thead
           %tr
-            %th{style: "width:40%"}= t '.articles.name'
-            %th= t '.articles.units'
+            %th{style: "width:40%"}= heading_helper Article, :name
+            %th= heading_helper Article, :units
             %th= t '.articles.unit_price'
             %th
               %abbr{title: t('.articles.ordered_title')}= t '.articles.ordered'
@@ -46,7 +47,7 @@
                   = t '.articles.order_open'
                 - else
                   = t '.articles.order_not_open'
-            %th= t '.articles.total_price'
+            %th= heading_helper GroupOrderArticle, :total_price
         %tbody
           - for category_name, order_articles in @order.articles_grouped_by_category
             %tr.article-category
@@ -61,7 +62,7 @@
                 %td{style: "width:40%"}
                   = oa.article.name
                   - unless oa.article.note.blank?
-                    = image_tag("lamp_grey.png", {alt: "Notiz anzeigen", size: "15x16", border: "0", onmouseover: "$('note_#{oa.id}').show();", onmouseout: "$('note_#{oa.id}').hide();"})
+                    = image_tag("lamp_grey.png", {alt: t('.articles.show_note'), size: "15x16", border: "0", onmouseover: "$('#note_#{oa.id}').show();", onmouseout: "$('#note_#{oa.id}').hide();"})
                 %td= "#{oa.price.unit_quantity} x #{oa.article.unit}"
                 %td= number_to_currency(oa.price.fc_price)
                 %td
@@ -73,7 +74,7 @@
                 %tr{id: "note_#{oa.id}", class: "note even", style: "display:none"}
                   %td{colspan: "6"}=h oa.article.note
           %tr{class: cycle('even', 'odd', name: 'articles')}
-            %th{colspan: "5"}= t '.articles.sum'
+            %th{colspan: "5"}= heading_helper GroupOrder, :price
             %th= number_to_currency(@group_order.price)
       %br/
       = link_to_top
