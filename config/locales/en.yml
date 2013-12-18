@@ -1114,6 +1114,7 @@ en:
       title: Article
     index:
       action_end: Close
+      action_receive: Receive
       confirm_delete: Do you really want to delete the order?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
       closed_orders: Settled orders

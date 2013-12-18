@@ -19,7 +19,7 @@
           %td= show_user(order.updated_by)
           %td
             - unless order.closed?
-              = link_to t('.receive'), edit_finance_receive_path(order), class: 'btn btn-mini'
+              = link_to t('orders.index.action_receive'), receive_order_path(order), class: 'btn btn-mini'
               = link_to t('.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-mini btn-primary'
               = link_to t('.close'), close_direct_finance_order_path(order),
                 :confirm => t('.confirm'), :method => :put, class: 'btn btn-mini'

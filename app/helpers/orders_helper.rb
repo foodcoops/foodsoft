@@ -15,4 +15,14 @@ module OrdersHelper
     options += [[I18n.t('helpers.orders.option_stock'), url_for(action: 'new', supplier_id: 0)]]
     options_for_select(options)
   end
+
+  def units_history_line(order_article)
+    if order_article.order.open?
+      nil
+    else
+      units_info = "#{order_article.units_to_order} ordered"
+      units_info += ", #{order_article.units_billed} billed" unless order_article.units_billed.nil?
+      units_info += ", #{order_article.units_received} received" unless order_article.units_received.nil?
+    end
+  end
 end

@@ -1,8 +1,9 @@
 %td.closed
   = link_to order_article.article.name, '#', 'data-toggle-this' => "#group_order_articles_#{order_article.id}"
 %td= order_article.article.order_number
-%td
-  = order_article.units_to_order
+%td{title: units_history_line(order_article)}
+  = order_article.units
+  %i.package pkg
   - unless order_article.ordered_quantities_equal_to_group_orders?
     %span{:style => "color:red;font-weight: bold"} !
 %td #{order_article.price.unit_quantity} &times; #{order_article.article.unit}

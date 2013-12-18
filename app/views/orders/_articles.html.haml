@@ -36,11 +36,7 @@
               %td= "#{order_article.quantity} + #{order_article.tolerance}"
             - else
               %td= "#{order_article.quantity}"
-            - unless order.open?
-              - units_info = "#{order_article.units_to_order} ordered"
-              - units_info += ", #{order_article.units_billed} billed" unless order_article.units_billed.nil?
-              - units_info += ", #{order_article.units_received} received" unless order_article.units_received.nil?
-            %td{title: units_info}
+            %td{title: units_history_line(order_article)}
               = units
               %i.package pkg
 %p
