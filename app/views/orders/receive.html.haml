@@ -1,8 +1,8 @@
 - title "Receiving #{@order.name}"
 
-= form_tag(finance_receive_path(@order), :method => :put) do
+= form_tag(receive_order_path(@order)) do
   %section#results
-    = render 'edit_articles'
+    = render 'edit_amounts'
 
   .form-actions
     .pull-left
@@ -18,6 +18,6 @@
 
     .pull-right
       = submit_tag t('.submit'), class: 'btn btn-primary'
-      = link_to t('ui.or_cancel'), finance_order_index_path
+      = link_to t('ui.or_cancel'), order_path(@order)
 
 %p= link_to_top

@@ -31,6 +31,9 @@
         = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
         = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
           confirm: t('.confirm_end', order: @order.name)
+      - elsif not @order.closed?
+        -# TODO btn-success class only if not received before
+        = link_to t('orders.index.receive'), receive_order_path(@order), class: 'btn btn-success'
       - unless @order.closed?
         = link_to t('ui.delete'), @order, confirm: t('.confirm_delete'), method: :delete,
           class: 'btn btn-danger'

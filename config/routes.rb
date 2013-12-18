@@ -38,6 +38,10 @@ Foodsoft::Application.routes.draw do
       member do
         post :finish
         post :add_comment
+
+        get :receive
+        post :receive
+        get :add_article
       end
     end
 
@@ -144,10 +148,6 @@ Foodsoft::Application.routes.draw do
         end
 
         resources :order_articles
-      end
-
-      resources :receive do
-        get :add_article
       end
 
       resources :group_order_articles do

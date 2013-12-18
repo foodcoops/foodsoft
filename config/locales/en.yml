@@ -541,7 +541,6 @@ en:
         last_edited_by: Last edited by
         name: Supplier
         no_closed_orders: At the moment there are no closed orders.
-        receive: receive
         state: State
       summary:
         changed: Data was changed!
@@ -625,15 +624,6 @@ en:
       ordergroups:
         account_statement: Account statement
         new_transaction: New transaction
-    receive:
-      add_article:
-        notice: Article "%{name}" was added to the order.
-      edit:
-        submit: Receive order
-      edit_articles:
-        add_article: Add article
-      update:
-        notice: Updated received article amounts for order
     update:
       notice: Invoice was updated
   foodcoop:
@@ -1093,6 +1083,9 @@ en:
       error_single_group: ! '%{user} is already a member of another ordergroup'
       invalid_balance: is not a valid number
   orders:
+    add_article:
+      title: Add article
+      notice: Article "%{name}" was added to the order.
     articles:
       article_count: ! 'Ordered articles:'
       prices: Net/gross price
@@ -1138,6 +1131,8 @@ en:
       warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them.'
     new:
       title: Create new order
+    receive:
+      submit: Receive order
     show:
       action_end: Close!
       amounts: ! 'Net/gross sum:'

@@ -54,7 +54,7 @@
               %td= truncate(order.note)
               %td
                 -# TODO btn-success class only if not received before
-                = link_to t('.receive'), edit_finance_receive_path(order), class: 'btn btn-small btn-success'
+                = link_to t('.receive'), receive_order_path(order), class: 'btn btn-small btn-success'
 
               %td
                 = link_to t('ui.edit'), '#', class: 'btn btn-small disabled'
