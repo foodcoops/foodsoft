@@ -1121,7 +1121,7 @@ en:
       new_order: Create new order
       no_open_orders: There are currently no open orders.
       open_orders: Current orders
-      orders_in_progress: Closed, in progress
+      orders_in_progress: In process
       title: Manage orders
     model:
       error_closed: Order was already settled
