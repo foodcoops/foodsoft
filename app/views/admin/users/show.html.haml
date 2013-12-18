@@ -7,13 +7,13 @@
       %p= t '.member_since', time: distance_of_time_in_words(Time.now, @user.created_on)
       %dl
         - if FoodsoftConfig[:use_nick]
-          %dt= t '.nick'
+          %dt= heading_helper User, :nick
           %dd= @user.nick
-        %dt= t '.name'
+        %dt= heading_helper User, :name
         %dd= h @user.name
-        %dt= t '.email'
+        %dt= heading_helper User, :email
         %dd= @user.email
-        %dt= t '.phone'
+        %dt= heading_helper User, :phone
         %dd= @user.phone
         %dt= t 'admin.access_to'
         %dd= format_roles(@user)

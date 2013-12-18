@@ -17,10 +17,10 @@
 %table.table.table-striped(style="width:500px")
   %thead
     %tr
-      %th= t '.article'
-      %th= t '.unit'
-      %th.numeric= t '.amount'
-      %th.numeric= t '.price'
+      %th= Article.model_name.human
+      %th= heading_helper StockArticle, :unit
+      %th.numeric= heading_helper GroupOrderArticle, :quantity  # quantity to order, although technically this will be a StockChange
+      %th.numeric= heading_helper Article, :price
       %th.numeric= t '.sum'
   %tbody
     - total_net, total_gross = 0,0

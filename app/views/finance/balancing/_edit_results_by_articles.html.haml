@@ -1,14 +1,14 @@
 %table.ordered-articles.table.table-striped
   %thead
     %tr
-      %th= sort_link_helper t('.article'), "name"
-      %th= sort_link_helper t('.number'), "order_number"
+      %th= sort_link_helper Article.model_name.human, "name"
+      %th= sort_link_helper Article.human_attribute_name(:order_number_short), "order_number"
       %th= t('.amount')
-      %th= t('.amount_per_unit')
+      %th= heading_helper Article, :units
       %th= t('.net')
       %th= t('.gross')
-      %th= t('.tax')
-      %th= t('.refund')
+      %th= heading_helper Article, :tax
+      %th= heading_helper Article, :deposit
       %th{:colspan => "2"}
         = link_to t('.add_article'), new_finance_order_order_article_path(@order), remote: true,
           class: 'btn btn-small'

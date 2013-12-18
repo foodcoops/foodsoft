@@ -1,14 +1,14 @@
 %dl
-  %dt= t('.description') + ':'
+  %dt= heading_helper(Ordergroup, :description) + ':'
   %dd=h group.description
   - if group.is_a?(Ordergroup) and (@current_user.role_admin? or @current_user.role_finance?)
-    %dt= t('.contact') + ':'
+    %dt= heading_helper(Ordergroup, :contact) + ':'
     %dd=h group.contact
-    %dt= t('.address') + ':'
+    %dt= heading_helper(Ordergroup, :contact_address) + ':'
     %dd= link_to_gmaps group.contact_address
   %dt= t('.access') + ':'
   %dd= format_roles(group)
-  %dt= t('.members') + ':'
+  %dt= heading_helper(Ordergroup, :user_tokens) + ':'
   %dd
     - members = group.users
     = "(#{members.size})"

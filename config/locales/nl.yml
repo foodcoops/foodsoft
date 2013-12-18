@@ -15,6 +15,7 @@ nl:
         name: Naam
         note: Notitie
         order_number: Ordernummer
+        order_number_short: Nr.
         origin: Herkomst
         price: Netto prijs
         supplier: Leverancier
@@ -81,11 +82,13 @@ nl:
       ordergroup:
         account_balance: Tegoed
         available_funds: Beschikbaar tegoed
+        contact: Contact
         contact_address: Adres
         contact_person: Contactpersoon
         contact_phone: Telefoon
         description: Omschrijving
         ignore_apple_restriction: Bestelstop vanwege appelpunten negeren
+        last_order: Laatste bestelling
         name: Naam
         user_tokens: Leden
       page:
@@ -131,6 +134,7 @@ nl:
       user:
         email: Email
         first_name: Voornaam
+        last_login: Laatste login
         last_name: Achternaam
         name: Naam
         nick: Gebruikersnaam
@@ -177,7 +181,6 @@ nl:
       workgroup: Werkgroep
   admin:
     access_to: toegang tot
-    actions: Acties
     base:
       index:
         all_ordergroups: Alle huishoudens
@@ -215,11 +218,6 @@ nl:
         workgroup: werkgroep
       new:
         title: Huishouden toevoegen
-      ordergroups:
-        address: Adres
-        contact: Contact
-        members: Leden
-        name: Naam
       show:
         confirm: Weet je het zeker?
         edit: Groep/leden bewerken
@@ -238,20 +236,11 @@ nl:
         title: Nieuwe gebruiker toevoegen
       show:
         confirm: Wil je %{user} daadwerkelijk verwijderen?
-        email: E-mail
         groupabos: Groepslidmaatschappen
         member_since: Lid sinds %{time}
-        name: Naam
-        nick: Gebruikersnaam
         person: Persoon
-        phone: Telefoon
         preference: Voorkeuren
         send_message: Bericht versturen
-      users:
-        email: e-mail
-        last_login: laatste login
-        login: login
-        name: naam
     workgroups:
       destroy:
         error: ! 'Werkgroep kon niet gewist worden: %{error}'
@@ -339,15 +328,6 @@ nl:
       submit: Alle artikelen bijwerken
       title: Alle artikelen van %{supplier} bewerken
       warning: Let op, alle artikelen worden bijgewerkt!
-    edit_all_table:
-      available_desc: beschikbaar
-      available_short: besch.
-      order_number_desc: Bestelnummer
-      order_number_short: Best.nr.
-      price_desc: Netto prijs
-      price_short: Prijs
-      unit_quantity_desc: Groothandelsverpakkingsgrootte
-      unit_quantity_short: Gr.Eenh.
     form:
       title_edit: Artikel bewerken
       title_new: Nieuw artikel toevoegen
@@ -407,24 +387,17 @@ nl:
       how_many_units: ! 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
     create:
       notice: Levering is aangemaakt. Vergeet niet een factuur te maken!
-    create_stock_article:
-      notice: Nieuw voorraadsartikel "%{name}" gemaakt.
     destroy:
       notice: Levering is verwijdered.
     edit:
       title: Levering aanpassen
     form:
-      actions: Taken
-      article: Artikel
-      category: Categorie
+      confirm_foreign_supplier_reedit: 
       create_from_blank: Nieuw voorraadartikel invoeren
       create_stock_article: Voorraadartikel invoeren
-      price: Netto prijs
-      quantity: Aantal
       title_fill_quantities: 2. Hoeveel mag er geleverd worden
       title_finish_delivery: 3. Levering afmaken
       title_select_stock_articles: 1. Kies voorraadartikelen
-      unit: Eenheid
     index:
       confirm_delete: Zeker weten?
       new_delivery: Nieuwe levering maken voor %{supplier}
@@ -434,29 +407,21 @@ nl:
     new:
       title: Nieuwe levering van %{supplier}
     show:
-      amount: Aantal
-      article: Artikel
-      price: Netto prijs
       sum: Som
       sum_diff: Bruto - aangepast factuurbedrag
       sum_gross: Brutosom
       sum_net: Nettosom
       title: Levering tonen
-      title_articles: Artikel
-      unit: Eenheid
+      title_articles: Artikelen
     stock_article_for_adding:
       action_add_to_delivery: Voeg toe aan levering
       action_edit: Bewerk
       action_other_price: Kopieer
-    stock_article_form:
-      copy_stock_article: kopieer het voorraadartikel
     stock_change_fields:
       remove_article: Artikel uit levering halen
     suppliers_overview: Leverancieroverzicht
     update:
       notice: Levering is bijgewerkt.
-    update_stock_article:
-      notice: Voorraadartikel "%{name}" is bijgewerkt.
   documents:
     order_by_articles:
       filename: Bestelling %{name}-%{date} - Artikellijst
@@ -530,16 +495,10 @@ nl:
       edit_results_by_articles:
         add_article: Artikel toevoegen
         amount: Aantal
-        amount_per_unit: Gr.Eenh.
-        article: Artikel
         gross: Bruto
         net: Netto
-        number: Nr.
-        refund: Statiegeld
-        tax: BTW
       group_order_articles:
         add_group: Huishouden toevoegen
-        group: Huishouden
         total: Totale prijs
         total_fc: Som (FC-prijs)
         units: Eenheden
@@ -626,18 +585,12 @@ nl:
         amount_change_for: Hoeveelheid %{article}
         result_hint: ! 'Eenheid: %{unit}'
     index:
-      amount: Bedrag
       amount_fc: Bedrag(FC)
-      clear: Afrekenen
-      date: Datum
       end: Einde
       everything_cleared: Mooi zo, alles is verrekend...
-      group: Groep
       last_transactions: Recente transacties
-      note: Notitie
       open_transactions: Nog niet afgerekend
       show_all: alle tonen
-      supplier: Leverancier
       title: Financiën
       unpaid_invoices: Onbetaalde facturen
     invoices:
@@ -648,7 +601,6 @@ nl:
         title: Facturen
       invoices:
         confirm_delete: Weet je het zeker?
-        delivery: Levering
       linked: Deze factuur is aan %{what_link} gekoppeld.
       linked_delivery: een levering
       linked_order: een bestelling
@@ -670,10 +622,7 @@ nl:
         search_placeholder: Zoeken ...
         title: Tegoeden beheren
       ordergroups:
-        account_balance: Tegoed
         account_statement: Rekeningafschrift
-        contact: Contactpersoon
-        name: Naam
         new_transaction: Nieuwe transactie
     update:
       notice: Factuur is bijgewerkt
@@ -684,10 +633,6 @@ nl:
         only_active: Alleen actieve
         only_active_desc: (minstens eenmaal in de laatste 3 maanden besteld)
         title: Huishoudens
-      ordergroups:
-        last_ordered: laatste besteld
-        name: Naam
-        user: Leden
     users:
       index:
         body: <p>Hier kun je leden van deze foodcoop een bericht sturen.</p> <p>Om je eigen contactgegevens te laten zien, moet je die vrijgeven op %{profile_link}.</p>
@@ -825,12 +770,8 @@ nl:
         last_update: Laatst gewijzigd %{when} geleden
         title: Mijn huishouden
         transactions:
-          amount: Bedrag
-          note: Notitie
           title: Laatste transacties
           view: Rekeningafschrift tonen
-          when: Wanneer
-          where: Wie
       ordergroup:
         title: Betrokkenheid van je huishouden
       tasks_move:
@@ -1292,20 +1233,14 @@ nl:
     articles_by_groups:
       fc_price: FC-Prijs
       fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop marge
-      name: Naam
       price: Totaalprijs
-      unit: Eenheid
       unit_quantity: Gr.Eenh.
       unit_quantity_desc: Hoeveel eenheden per groothandelsverpakking
     group:
       access: Toegang tot
       activated: actief
-      address: Adres
       apple_limit: Appelpunten bestellingslimiet
-      contact: Contact
       deactivated: inactief
-      description: Beschrijving
-      members: Leden
       no_weekly_job: geen wekelijkse taak ingesteld
       weekly_job: wekelijkse taak
     group_form_fields:
@@ -1333,7 +1268,7 @@ nl:
         units_to_order: Als je het aantal geleverde eenheden wijzigt, moet je daarna de hoeveelheden voor huishoudens aanpassen. Klik daarvoor op de artikelnaam. Als je dit vergeet, kunnen huishoudens belast worden voor artikelen die ze niet hebben gekregen!
         update_current_price: Ook prijs in huidige besteling aanpassen
       stock_article:
-        copy_stock_article:
+        copy:
           name: Wijzigen alsjeblieft
         edit_stock_article:
           price: <ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>
@@ -1407,11 +1342,16 @@ nl:
   stockit:
     check:
       not_empty: ! '%{name} kon niet worden verwijderd, de inventaris is niet leeg.'
+    copy:
+      title: kopieer het voorraadartikel
+    create:
+      notice: Voorraadartikel "%{name}" is aangemaakt.
     destroy:
       notice: Artikel %{name} is verwijdered.
     edit:
       title: Voorraadartikelen bewerken
     form:
+      copy_stock_article: vooraadartikel kopiëren
       price_hint: Om chaos te voorkomen, kun je de prijs van bestaande voorraadartikelen niet aanpassen.
     index:
       confirm_delete: Weet je zeker dat je dit wilt verwijderen?
@@ -1434,10 +1374,10 @@ nl:
       new_quantity: Nieuw aantal
       reason: Reden
       stock_changes: Verloop
-    stock_create:
-      notice: Voorraadsartikel is opgeslagen.
-    stock_update:
-      notice: Voorraadsartikel is bijgewerkt.
+    stock_article:
+      confirm_delete: 
+    update:
+      notice: Voorraadartikel "%{name}" is bijgewerkt.
   suppliers:
     create:
       notice: Leverancier is aangemaakt.
@@ -1535,6 +1475,7 @@ nl:
       title: Taken voor %{workgroup}
       title_all: Alle groepstaken
   ui:
+    actions: Acties
     close: Sluiten
     delete: Verwijder
     edit: Bewerk

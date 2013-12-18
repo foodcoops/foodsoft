@@ -1,0 +1,26 @@
+#stockArticleDetails
+  %dl.dl-horizontal
+    %dt= heading_helper(StockArticle, :supplier)
+    %dd= link_to stock_article.supplier.name, stock_article.supplier
+    %dt= heading_helper(StockArticle, :name)
+    %dd= stock_article.name
+    %dt= heading_helper(StockArticle, :unit)
+    %dd= stock_article.unit
+    %dt= heading_helper(StockArticle, :price)
+    %dd= number_to_currency stock_article.price
+    %dt= heading_helper(StockArticle, :tax)
+    %dd= number_to_percentage stock_article.tax
+    %dt= heading_helper(StockArticle, :deposit)
+    %dd= number_to_currency stock_article.deposit
+    %dt= heading_helper(StockArticle, :fc_price)
+    %dd= number_to_currency stock_article.fc_price
+    %dt= heading_helper(StockArticle, :article_category)
+    %dd= stock_article.article_category.name
+    %dt= heading_helper(StockArticle, :note)
+    %dd= stock_article.note
+    %dt= heading_helper(StockArticle, :quantity)
+    %dd= stock_article.quantity
+    %dt= heading_helper(StockArticle, :quantity_available)
+    %dd= stock_article.quantity_available
+  .form-actions
+    = link_to t('ui.edit'), edit_stock_article_path(stock_article), remote: true, class: 'btn'

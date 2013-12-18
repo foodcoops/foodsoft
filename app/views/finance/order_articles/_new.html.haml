@@ -3,7 +3,7 @@
     = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
     %h3= t '.title'
   .modal-body
-    = form.input :article_id
+    = form.input :article_id, :label => Article.model_name.human # Why do we need the label?
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = form.submit class: 'btn btn-primary'
