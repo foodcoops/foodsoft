@@ -6,7 +6,7 @@ $('div.container-fluid').prepend(
   $('.ordered-articles tr').removeClass('success');
   
   var article_for_adding = $(
-    '<%= j(render(:partial => 'edit_article', :locals => {:order_article => @order_article})) %>'
+    '<%= j(render(:partial => 'edit_amount', :locals => {:order_article => @order_article})) %>'
   ).addClass('success');
   
   $('.ordered-articles tbody').append(article_for_adding);
