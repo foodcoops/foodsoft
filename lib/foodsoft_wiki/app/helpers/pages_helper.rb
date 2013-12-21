@@ -3,6 +3,8 @@ module PagesHelper
 
   def wikified_body(body, title = nil)
     WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html.html_safe
+  rescue
+    "Sorry, the page could not be parsed." # try the following with line breaks: === one === == two == = three =
   end
 
   def link_to_wikipage(page, text = nil)
