@@ -171,8 +171,8 @@ class OrdersController < ApplicationController
           # which makes received_changed? not work anymore
           oa.attributes = oa_params
           counts[0] += 1 if oa.units_received_changed?
-          cunits[0] += oa.units_received * oa.article.unit_quantity
           unless oa.units_received.blank?
+            cunits[0] += oa.units_received * oa.article.unit_quantity
             oacounts = oa.redistribute oa.units_received * oa.price.unit_quantity, rest_to
             oacounts.each_with_index {|c,i| cunits[i+1]+=c; counts[i+1]+=1 if c>0 }
           end
