@@ -25,7 +25,7 @@
   - if FoodsoftConfig[:mailing_list].blank?
     = f.input :sent_to_all, :as => :boolean
   - else
-    %b= t '.list.desc', list: mail_to(FoodsoftConfig[:mailing_list])
+    %b= t('.list.desc', list: mail_to(FoodsoftConfig[:mailing_list])).html_safe
     %br/
     %small{:style => "color:grey"}
       = t '.list.subscribe_msg'
@@ -33,7 +33,7 @@
       - if FoodsoftConfig[:mailing_list_subscribe].blank?
         = t '.list.subscribe', link: link_to(t('.list.wiki'), wiki_page_path('MailingListe'))
       - else
-        = t '.list.mail', email: mail_to(FoodsoftConfig[:mailing_list_subscribe])
+        = t('.list.mail', email: mail_to(FoodsoftConfig[:mailing_list_subscribe])).html_safe
 
   #recipients
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.find_all_by_id(@message.recipients_ids).map { |u| u.token_attributes }.to_json }
