@@ -19,6 +19,7 @@
 //= require_self
 //= require ordering
 //= require stupidtable
+//= require mozilla-autocomplete-workaround
 
 // allow touch devices to work on click events
 //   http://stackoverflow.com/a/16221066
