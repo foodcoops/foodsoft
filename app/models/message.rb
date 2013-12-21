@@ -49,7 +49,7 @@ class Message < ActiveRecord::Base
     @reply_to = Message.find(message_id)
     add_recipients([@reply_to.sender])
     self.subject = I18n.t('messages.model.reply_subject', :subject => @reply_to.subject)
-    self.body = I18n.t('messages.model.reply_header', :user => @reply_to.sender.nick, :when => I18n.l(@reply_to.created_at, :format => :short)) + "\n"
+    self.body = I18n.t('messages.model.reply_header', :user => @reply_to.sender.display, :when => I18n.l(@reply_to.created_at, :format => :short)) + "\n"
     @reply_to.body.each_line{ |l| self.body += I18n.t('messages.model.reply_indent', :line => l) }
   end
 
@@ -64,7 +64,7 @@ class Message < ActiveRecord::Base
   end
 
   def sender_name
-    system_message? ? I18n.t('layouts.foodsoft') : sender.nick rescue "??"
+    system_message? ? I18n.t('layouts.foodsoft') : sender.display rescue "?"
   end
 
   def recipients
@@ -77,7 +77,7 @@ class Message < ActiveRecord::Base
         begin
           Mailer.foodsoft_message(self, user).deliver
         rescue
-          Rails.logger.warn "Deliver failed for #{user.nick}: #{user.email}"
+          Rails.logger.warn "Deliver failed for user \##{user.id}: #{user.email}"
         end
       end
     end

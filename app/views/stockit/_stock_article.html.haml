@@ -1,0 +1,14 @@
+%tr{:class => stock_article_classes(stock_article), :id => "stockArticle-#{stock_article.id}"}
+  %td= link_to stock_article.name, stock_article
+  %td= stock_article.quantity
+  %td= stock_article.quantity_ordered
+  %td.main_info= stock_article.quantity_available
+  %td= stock_article.unit
+  %td= stock_article.price
+  %td= number_to_percentage stock_article.tax
+  %td= link_to stock_article.supplier.name, stock_article.supplier
+  %td= stock_article.article_category.name
+  %td
+    = link_to t('ui.edit'), edit_stock_article_path(stock_article), remote: true, class: 'btn btn-mini'
+    = link_to t('ui.delete'), stock_article, :method => :delete, :confirm => t('.confirm_delete', :name => stock_article.name),
+      class: 'btn btn-mini btn-danger', :remote => true

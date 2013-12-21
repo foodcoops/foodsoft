@@ -4,7 +4,7 @@
   %ul.nav.nav-pills.pull-right
     %li.dropdown
       %a.dropdown-toggle(data-toggle="dropdown" href="#")
-        = current_user.nick
+        = show_user current_user
         %b.caret
       %ul.dropdown-menu
         %li= link_to t('.profile'), my_profile_path

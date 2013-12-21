@@ -23,7 +23,12 @@ class Ordergroup < Group
     "#{contact_phone} (#{contact_person})"
   end
   def non_members
-    User.all(:order => 'nick').reject { |u| (users.include?(u) || u.ordergroup) }
+    User.natural_order.all.reject { |u| (users.include?(u) || u.ordergroup) }
+  end
+
+  # the most recent order this ordergroup was participating in
+  def last_order
+    orders.order('orders.starts DESC').first
   end
 
   def value_of_open_orders(exclude = nil)
@@ -102,7 +107,7 @@ class Ordergroup < Group
   # Make sure, that a user can only be in one ordergroup
   def uniqueness_of_members
     users.each do |user|
-      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.nick) if user.groups.where(:type => 'Ordergroup').size > 1
+      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.display) if user.groups.where(:type => 'Ordergroup').size > 1
     end
   end
 

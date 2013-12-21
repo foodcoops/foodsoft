@@ -27,22 +27,23 @@
     %h2= @order.name
     %dl.dl-horizontal
       - unless @order.note.blank?
-        %dt= t '.note'
+        %dt= heading_helper Order, :note
         %dd= @order.note
-      %dt= t '.created_by'
-      %dd= link_to_user_message_if_valid(@order.created_by)
-      %dt= t '.ending'
+      %dt= heading_helper Order, :created_by
+      %dd= show_user_link(@order.created_by)
+      %dt= heading_helper Order, :ends
       %dd= format_time(@order.ends)
       - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
-        %dt= t '.min_quantity'
+        %dt= heading_helper Supplier, :min_order_quantity, short: true
         %dd= @order.supplier.min_order_quantity
       %dt= t '.sum_amount'
       %dd= number_to_currency @order.sum
-      %dt= t '.last_update'
-      %dd
-        = @group_order.updated_by.nick if @group_order.updated_by
-        (#{format_time(@group_order.updated_on)})
-      %dt= t '.funds'
+      - unless @group_order.new_record?
+        %dt= heading_helper GroupOrder, :updated_by
+        %dd
+          = show_user(@group_order.updated_by)
+          (#{format_time(@group_order.updated_on)})
+      %dt= heading_helper Ordergroup, :available_funds
       %dd= number_to_currency(@ordering_data[:available_funds])
 
   .well.pull-right
@@ -65,20 +66,20 @@
   %table.table.table-hover
     %thead
       %tr
-        %th= t '.name'
+        %th= heading_helper Article, :name
         - if @order.stockit?
-          %th{style: 'width:120px'}= t '.supplier'
+          %th{style: 'width:120px'}= heading_helper StockArticle, :supplier
         %th{style: "width:13px;"}
         %th{style: "width:4.5em;"}= t '.price'
-        %th{style: "width:4.5em;"}= t '.unit'
+        %th{style: "width:4.5em;"}= heading_helper Article, :unit
         - unless @order.stockit?
-          %th{style: "width:70px;"}= t '.unit_missing'
-          %th#col_required= t '.amount'
-          %th#col_tolerance= t '.tolerance'
+          %th{style: "width:70px;"}= heading_helper OrderArticle, :missing_units, short: true
+          %th#col_required= heading_helper GroupOrderArticle, :quantity
+          %th#col_tolerance= heading_helper GroupOrderArticle, :tolerance
         - else
-          %th(style="width:20px")= t '.available'
-          %th#col_required= t '.amount'
-        %th{style: "width:15px;"}= t '.sum'
+          %th(style="width:20px")= heading_helper StockArticle, :available
+          %th#col_required= heading_helper GroupOrderArticle, :quantity
+        %th{style: "width:15px;"}= heading_helper GroupOrderArticle, :total_price
     %tbody.list
       - @order.articles_grouped_by_category.each do |category, order_articles|
         %tr.list-heading.article-category
@@ -132,11 +133,11 @@
                   %span{id: "t_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
                   %br/
                 .pull-left
-                  #{t '.manufacturer'}: #{order_article.article.manufacturer}
+                  #{heading_helper Article, :manufacturer}: #{order_article.article.manufacturer}
                   %br/
-                  #{t '.units'}: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
+                  #{heading_helper Article, :units}: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
                   %br/
-                  #{t '.note'}: #{order_article.article.note}
+                  #{heading_helper Article, :note}: #{order_article.article.note}
                   %br/
   #order-footer
     #info-box
@@ -147,7 +148,7 @@
           %td.currency
             %span#total_price= number_to_currency(@group_order.price)
         %tr
-          %td= t('.available_funds') + ':'
+          %td= heading_helper(Ordergroup, :available_funds) + ':'
           %td.currency= number_to_currency(@ordering_data[:available_funds])
         %tr
           %td= t('.new_funds') + ':'

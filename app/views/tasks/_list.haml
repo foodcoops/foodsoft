@@ -1,9 +1,9 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t '.due_date'
+      %th= heading_helper Task, :due_date
       %th
-      %th= t '.task'
+      %th= heading_helper Task, :name
       %th{:colspan => '2'}
         = t '.who'
         %small= t '.who_hint'
@@ -15,7 +15,7 @@
         %td
           - if task.periodic?
             %i.icon-repeat{title: t('tasks.repeated')}
-        %td= link_to t('.task_format', name: task.name, duration: task.duration), task_path(task)
+        %td= link_to task_title(task), task_path(task)
         %td
           = task_assignments task
           = highlighted_required_users task

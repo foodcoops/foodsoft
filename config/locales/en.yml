@@ -15,6 +15,7 @@ en:
         name: Name
         note: Note
         order_number: Order number
+        order_number_short: Nr.
         origin: Origin
         price: Price (net)
         supplier: Supplier
@@ -22,6 +23,7 @@ en:
         unit: Unit
         unit_quantity: Unit quantity
         unit_quantity_short: U.Q.
+        units: Units
       article_category:
         description: Description
         name: Name
@@ -30,11 +32,20 @@ en:
         note: Note
         supplier: Supplier
       financial_transaction:
-        amount: amount
-        note: note
+        amount: Amount
+        created_on: Date
+        note: Note
+        ordergroup: Ordergroup
+        user: Entered by
+      group_order:
+        price: Order sum
+        updated_by: Last ordered by
       group_order_article:
         ordergroup_id: Ordergroup
+        quantity: Amount
         result: Amount
+        tolerance: Tolerance
+        total_price: Sum
       invoice:
         amount: Amount
         date: Billing date
@@ -54,20 +65,30 @@ en:
         sent_to_all: Send to all members
         subject: Subject
       order:
+        closed_by: Settled by
+        created_by: Created by
         ends: Ends at
+        name: Supplier
         note: Note
         starts: Starts at
+        status: Status
       order_article:
+        missing_units: Missing units
+        missing_units_short: Missing
         units_to_order: Amount of units
         update_current_price: Globally update current price
       order_comment:
         text: Add comment to this order ...
       ordergroup:
+        account_balance: Account balance
+        available_funds: Available credit
+        contact: Contact
         contact_address: Address
         contact_person: Contact person
         contact_phone: Phone
         description: Description
         ignore_apple_restriction: Ignore order stop by apple points restriction
+        last_order: Last order
         name: Name
         user_tokens: Members
       page:
@@ -75,10 +96,12 @@ en:
         parent_id: Parent page
         title: Title
       stock_article:
+        available: Available
         price: Price
-        quantity: Quantity
+        quantity: In stock
         quantity_available: Available quantity
-        supplier: Supplier
+        quantity_available_short: Avail.
+        quantity_ordered: Ordered
       stock_taking:
         date: Date
         note: Note
@@ -92,6 +115,7 @@ en:
         fax: Fax
         is_subscribed: subscribed?
         min_order_quantity: Minimum order quantity
+        min_order_quantity_short: Min. quantity
         name: Name
         note: Note
         order_howto: How to order
@@ -103,13 +127,14 @@ en:
         done: Done?
         due_date: Due date
         duration: Duration
-        name: Name
+        name: Activity
         required_users: People required
-        user_list: Responsible user
+        user_list: Responsible users
         workgroup: Workgroup
       user:
         email: Email
         first_name: First name
+        last_login: Last login
         last_name: Last name
         name: Name
         nick: Username
@@ -156,7 +181,6 @@ en:
       workgroup: Workgroup
   admin:
     access_to: access to
-    actions: Actions
     base:
       index:
         all_ordergroups: All ordergroups
@@ -194,11 +218,6 @@ en:
         workgroup: workgroup
       new:
         title: Create ordergroup
-      ordergroups:
-        address: Address
-        contact: Contact
-        members: Members
-        name: Name
       show:
         confirm: Are you sure?
         edit: Edit group/members
@@ -217,20 +236,11 @@ en:
         title: Create new user
       show:
         confirm: Do you really want to kick out %{user}?
-        email: Email
         groupabos: Group subscriptions
         member_since: Member since %{time}
-        name: Name
-        nick: Nick
         person: Person
-        phone: Phone
         preference: Preferences
         send_message: Send message
-      users:
-        email: email
-        last_login: last login
-        login: login
-        name: name
     workgroups:
       destroy:
         error: ! 'Workgroup could not be deleted: %{error}'
@@ -318,17 +328,9 @@ en:
       submit: Update all articles
       title: Edit all articles from %{supplier}
       warning: ! 'Warning: all articles will be updated!'
-    edit_all_table:
-      available_desc: available
-      available_short: avail
-      order_number_desc: Order number
-      order_number_short: Ordernr.
-      price_desc: Net price
-      price_short: Price
-      unit_quantity_desc: Unit quantity
-      unit_quantity_short: Quantity
     form:
-      title: Add new article
+      title_edit: Edit article
+      title_new: Add new article
     import_search_results:
       action_import: import
       already_imported: already imported
@@ -385,24 +387,17 @@ en:
       how_many_units: ! 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
       notice: Delivery was created. Please don’t forget to create invoice!
-    create_stock_article:
-      notice: The new stock article "%{name}" was saved.
     destroy:
       notice: Delivery was deleted.
     edit:
       title: Edit delivery
     form:
-      actions: Tasks
-      article: Article
-      category: Category
+      confirm_foreign_supplier_reedit: The stock article %{name} was successfully saved. However, it belongs to a different supplier than this delivery. Would you like to edit the stock article again?
       create_from_blank: Create new article
       create_stock_article: Create stock article
-      price: Netprice
-      quantity: Quantity
       title_fill_quantities: 2. Set delivery quantities
       title_finish_delivery: 3. Finish delivery
       title_select_stock_articles: 1. Select stock articles
-      unit: Unit
     index:
       confirm_delete: Are you sure?
       new_delivery: ! 'Create new delivery for %{supplier} '
@@ -412,29 +407,21 @@ en:
     new:
       title: New delivery from %{supplier}
     show:
-      amount: Amount
-      article: Article
-      price: Netprice
       sum: Sum
-      sum_diff: Gross - adjusted invoice ammount
+      sum_diff: Gross - adjusted invoice amount
       sum_gross: Gross sum
       sum_net: Net sum
       title: Show delivery
-      title_articles: Article
-      unit: Unit
+      title_articles: Articles
     stock_article_for_adding:
       action_add_to_delivery: Add to delivery
       action_edit: Edit
       action_other_price: Copy
-    stock_article_form:
-      copy_stock_article: Copy stock article
     stock_change_fields:
       remove_article: Remove article from delivery
     suppliers_overview: Supplier overview
     update:
       notice: Delivery was updated.
-    update_stock_article:
-      notice: The stock article "%{name}" was updated.
   documents:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
@@ -451,7 +438,7 @@ en:
       - Ordered
       - Received
       - Price
-      - Unit quantity
+      - Unit Q.
       - Unit
       - Sum
       sum: Sum
@@ -496,28 +483,22 @@ en:
     balancing:
       close:
         alert: ! 'An error occured while accounting: %{message}'
-        notice: Order was accounted succesfully, the balance of the account was updated.
+        notice: Order was settled succesfully, the balance of the account was updated.
       close_direct:
-        alert: ! 'Order can not be closed: %{message}'
-        notice: Order was closed.
+        alert: ! 'Order can not be settled: %{message}'
+        notice: Order was settled.
       confirm:
-        clear: Close
-        first_paragraph: ! 'When the order is closed, all group accounts will be updated.<br />The accounts will be charged as follows:'
+        clear: Settle
+        first_paragraph: ! 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
         or_cancel: or back to accounting
         title: Settle order
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
-        amount_per_unit: Unit quantity * Unit
-        article: Article
         gross: Gross
         net: Net
-        number: Nr.
-        refund: Deposit
-        tax: Tax
       group_order_articles:
         add_group: Add group
-        group: Group
         total: Total costs
         total_fc: Sum (FC-price)
         units: Units
@@ -538,7 +519,7 @@ en:
         articles_overview: Overview of articles
         comment_on_transaction: Here you can add a comment to your accounting.
         comments: Comments
-        confirm_order: Close order
+        confirm_order: Settle order
         create_invoice: Create invoice
         edit_note: Edit note
         edit_order: Edit order
@@ -553,8 +534,8 @@ en:
       orders:
         clear: accounting
         cleared: accounted (%{amount})
-        close: close directly
-        confirm: Do you really want to fully close the order?
+        close: settle directly
+        confirm: Do you really want to settle the order?
         end: End
         ended: closed
         last_edited_by: Last edited by
@@ -592,38 +573,24 @@ en:
         paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
         title: New transaction
       new_collection:
-        amount: Amount
         new_ordergroup: Add new order group
-        note: Note
-        ordergroup: Order group
         save: Save transaction
-        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement
+        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement.
         title: Updating more accounts
       ordergroup:
         remove: Remove
         remove_group: Remove group
-      transactions:
-        amount: Amount
-        date: Date
-        note: Note
-        who: Who
     group_order_articles:
       form:
         amount_change_for: Change amount for %{article}
         result_hint: ! 'Unit: %{unit}'
     index:
-      amount: Amount
       amount_fc: Amount(FC)
-      clear: To account
-      date: Date
       end: End
       everything_cleared: Great, everything is accounted...
-      group: Group
       last_transactions: Recent transactions
-      note: Note
       open_transactions: Unsettled orders
       show_all: show all
-      supplier: Supplier
       title: Finances
       unpaid_invoices: Unpaid invoices
     invoices:
@@ -634,7 +601,6 @@ en:
         title: Invoices
       invoices:
         confirm_delete: Are you sure?
-        delivery: Delivery
       linked: This invoice is linked to %{what_link}.
       linked_delivery: a delivery
       linked_order: an order
@@ -656,10 +622,7 @@ en:
         search_placeholder: Search ...
         title: Manage accounts
       ordergroups:
-        account_balance: Account balance
         account_statement: Account statement
-        contact: Contact
-        name: Name
         new_transaction: New transaction
     update:
       notice: Invoice was updated
@@ -670,10 +633,6 @@ en:
         only_active: Only active groups
         only_active_desc: (have placed order at least once in the last 3 months)
         title: Ordergroups
-      ordergroups:
-        last_ordered: Last ordered
-        name: Name
-        user: Users
     users:
       index:
         body: <p>Here you can write a message to the members of your Foodcoop.</p> <p>You have to approve in your %{profile_link} that your contact details are visible.</p>
@@ -709,30 +668,14 @@ en:
       notfound: Incorrect URL, this is not your order.
     form:
       action_save: Save order
-      amount: Amount
-      available: Available
-      available_funds: Available credits
-      created_by: Created by
-      ending: End
-      funds: Credit
-      last_update: Last ordered
-      manufacturer: Manufacturer
-      min_quantity: Minimum quantity
-      name: Name
       new_funds: New account balance
-      note: Note
       price: Price
       reset_article_search: Reset search
-      search_article: Search for article...
-      sum: Sum
+      search_article: Search for articles...
       sum_amount: Current amount
-      supplier: Supplier
       title: Orders
-      tolerance: Tolerance
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
-      unit: Unit
-      unit_missing: Missing units
       units: Units
       units_full: Filled units
       units_total: Total units
@@ -744,9 +687,7 @@ en:
         title: Unsettled orders
         total_sum: Total sum
       funds:
-        account_balance: Account balance
-        available_funds: Available credit
-        finished_orders: unsettled orders
+        finished_orders: Unsettled orders
         open_orders: Current orders
         title: Credit
       title: Orders overview
@@ -754,14 +695,9 @@ en:
       not_enough_apples: You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.
     order:
       title: Articles
-    orders:
-      ending: End
-      sum: Sum
-      supplier: Suppliers
     show:
       articles:
         edit_order: Edit order
-        name: Name
         not_ordered_msg: You didn’t place an order yet
         order_closed_msg: Sorry, this order is closed.
         order_nopen_title: Considering current orders of all groups
@@ -771,21 +707,14 @@ en:
         ordered: Ordered
         ordered_title: Amount + tolerance
         show_hide: Show/hide articles not ordered
-        sum: Sum
+        show_note: Show note
         title: Article overview
-        total_price: Total price
         unit_price: Unit price
-        units: Units
-      closed_by: Settled by %{user}
       comment: Comment
       comments:
         title: Comments
-      ending: End
       not_ordered: You didn’t order.
-      note: Note
-      order_sum: Order sum
       sum: Sum
-      supplier: Suppliers
       title: Your order result for %{order}
     switch_order:
       remaining: ! '%{remaining} remaining'
@@ -819,6 +748,7 @@ en:
         create: send message
     tasks:
       required_users: ! '%{count} members are still needed!'
+      task_title: ! '%{name} (%{duration}h)'
   home:
     apple_bar:
       desc: ! 'This shows the proportion of completed tasks to the volume of orders for your ordergroup in comparison to the average of the Foodcoop. In practice: for every %{amount} of total orders, you should execute a task!'
@@ -833,15 +763,11 @@ en:
         view_all: See all messages
       my_ordergroup:
         funds: ! '| Available Credit:'
-        last_update: Last Update was %{when} ago
+        last_update: Last update was %{when} ago
         title: My ordergroup
         transactions:
-          amount: Amount
-          note: Note
           title: Last Transactions
           view: Show account statement
-          when: When
-          where: Who
       ordergroup:
         title: Engagement of your ordergroup
       tasks_move:
@@ -875,7 +801,7 @@ en:
       admin: Administration
       finances:
         accounts: Update accounts
-        settle: To account orders
+        settle: Account orders
         title: Finances
       foodcoop: Foodcoop
       members: Members
@@ -1159,10 +1085,8 @@ en:
   orders:
     articles:
       article_count: ! 'Ordered articles:'
-      name: Name
       prices: Net/gross price
       prices_sum: ! 'Sum (net/gross price):'
-      unit_quantity: Unit quantity
       units_full: Full units
       units_ordered: Units ordered
     create:
@@ -1181,26 +1105,18 @@ en:
       notice: The order has been closed.
     form:
       ignore_warnings: Ignore warnings
-      name: Name
-      note: Note
-      origin: Origin
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
-      supplier: Producer
       title: Article
-      unit_quantity: Unit quantity
     index:
       action_end: Close
       confirm_delete: Do you really want to delete the order?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
       ended_orders: Closed orders
-      ending: End
       new_order: Create new order
       no_open_orders: There are currently no open orders.
-      note: Note
       open_orders: Current orders
-      supplier: Supplier
       title: Manage orders
     model:
       error_closed: Order was already settled
@@ -1208,21 +1124,15 @@ en:
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: ! 'Order: %{name}, until %{ends}'
       stock: Stock
-      warning_ordered: ! 'Warning: Articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted.'
-      warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/ purchased within this open stock order. If you uncheck them here, all existing orders/ purchases of these articles will be deleted and it will not be accounted for them.'
+      warning_ordered: ! 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted.'
+      warning_ordered_stock: ! 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them.'
     new:
       title: Create new order
-    orders:
-      ending: End
-      start: Start
-      status: Status
-      supplier: Supplier
     show:
       action_end: Close!
       amounts: ! 'Net/gross sum:'
       articles: Article overview
       articles_ordered: ! 'Ordered articles:'
-      begin: ! 'Begin:'
       comments:
         title: Comments
       comments_link: Comments
@@ -1230,7 +1140,6 @@ en:
       confirm_end: ! 'Do you really want to close the order %{order}?
 
         There is no going back.'
-      created_by: ! 'Created by:'
       download:
         article_pdf: Article PDF
         download_file: Download file
@@ -1239,12 +1148,9 @@ en:
         group_pdf: Group PDF
         matrix_pdf: Matrix PDF
         title: Download
-      ending: ! 'End:'
       group_orders: ! 'Group orders:'
-      note: ! 'Note:'
       sort_article: Sorted in articles
       sort_group: Sorted in groups
-      supplier: ! 'Supplier:'
       title: ! 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
     state:
@@ -1259,7 +1165,7 @@ en:
       recent_changes: Recent changes
       search:
         action: Search
-        placeholder: Page title ..
+        placeholder: Page title ...
       site_map: Sitemap
       title: All Wiki pages
       title_list: List of pages
@@ -1284,7 +1190,7 @@ en:
         headings: Heading
         italic: italic
         list_item_1: First list item
-        list_item_2: Secound list item
+        list_item_2: Second list item
         noformat: No wiki-formatting
         ordered_list: Numbered list
         section_block: Block formatting
@@ -1332,9 +1238,7 @@ en:
       login: Login
       nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
-      password: Password
       title: Foodsoft login
-      user: User
   shared:
     articles:
       ordered: Ordered
@@ -1347,20 +1251,14 @@ en:
     articles_by_groups:
       fc_price: FC-Price
       fc_price_desc: Price including taxes, deposit and Foodcoop-charge
-      name: Name
       price: Total price
-      unit: Unit
       unit_quantity: Lot quantity
       unit_quantity_desc: How many units per lot.
     group:
       access: Access to
       activated: activated
-      address: Address
       apple_limit: Apple points order limit
-      contact: Contact
       deactivated: deactivated
-      description: Description
-      members: Members
       no_weekly_job: No weekly job defined
       weekly_job: Weekly job
     group_form_fields:
@@ -1369,12 +1267,9 @@ en:
       title: Weekly jobs
       user_not_found: No user found
     open_orders:
-      ending: Ending
       no_open_orders: There are no current orders
       not_enough_apples: Attention your order group has too few apple points to place an order!
-      supplier: Supplier
       title: Current orders
-      total: Sum
       total_sum: Total sum
       who_ordered: Who ordered?
     workgroup_members:
@@ -1384,19 +1279,19 @@ en:
       default_message: Errors were found. Please check the form.
     hints:
       article:
-        unit: ! 'For example: KG or 1L or 500g'
+        unit: e.g. KG or 1L or 500g
       message:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
         units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
         update_current_price: Also update the price of the current order
       stock_article:
-        copy_stock_article:
+        copy:
           name: Please modify
         edit_stock_article:
           price: <ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>
       supplier:
-        min_order_quantity: The minimum amount which has to be orderd will be shown during the order process and should motivate ordering
+        min_order_quantity: The minimum amount which has to be ordered will be shown during the order process and should motivate ordering
       task:
         duration: How long will the task take, 1-3 hours
         required_users: How many users will be needed in total?
@@ -1439,6 +1334,7 @@ en:
       new_inventory: Create new inventory
       title: Inventory overview
     new:
+      amount: Amount
       create: create
       stock_articles: Stock articles
       temp_inventory: temporary inventory
@@ -1464,25 +1360,20 @@ en:
   stockit:
     check:
       not_empty: ! '%{name} could not be deleted, the inventory is not zero.'
+    copy:
+      title: Copy stock article
+    create:
+      notice: New stock article "%{name}" was created.
     destroy:
       notice: Article %{name} was deleted.
     edit:
       title: Edit stock articles
     form:
+      copy_stock_article: copy stock article
       price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
     index:
-      article:
-        article: Article
-        available: available
-        category: Category
-        ordered: ordered
-        price: Price
-        stock: In stock
-        supplier: Supplier
-        unit: Unit
-        vat: VAT
       confirm_delete: Are you sure you want to delete?
-      new_delivery: New delivery ..
+      new_delivery: New delivery ...
       new_stock_article: Add new stock article
       new_stock_taking: Add inventory
       order_online: Put stock order online
@@ -1498,16 +1389,13 @@ en:
     show:
       change_quantity: Change
       datetime: Time
-      delivery: Delivery
       new_quantity: New quantity
-      order: Order
       reason: Reason
       stock_changes: Stock quantity changes
-      stock_taking: Inventory
-    stock_create:
-      notice: Stock article was created.
-    stock_update:
-      notice: Stock article was saved.
+    stock_article:
+      confirm_delete: Are you sure you want to delete the stock article %{name}?
+    update:
+      notice: Stock article %{name} was saved.
   suppliers:
     create:
       notice: Supplier was created
@@ -1544,11 +1432,6 @@ en:
       notice: You have accepted the task
     archive:
       title: Task archive
-    archive_tasks:
-      due_date: Due date
-      task: Subject
-      task_format: ! '%{name} (%{duration}h)'
-      who: People in charge
     create:
       notice: Task has been created
     destroy:
@@ -1572,11 +1455,8 @@ en:
       accept_task: Accept task
       done: Done
       done_q: Done?
-      due_date: Due date
       mark_done: Mark task as done
       reject_task: Reject task
-      task: subject
-      task_format: ! '%{name} (%{duration}h)'
       who: Who is doing it?
       who_hint: (How much are still needed?)
     nav:
@@ -1613,6 +1493,7 @@ en:
       title: Tasks for %{workgroup}
       title_all: All group tasks
   ui:
+    actions: Actions
     close: Close
     delete: Delete
     edit: Edit

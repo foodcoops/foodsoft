@@ -84,8 +84,8 @@ module ApplicationHelper
     i18nopts = options.select {|a| !['short'].include?(a) }
     s = model.human_attribute_name(attribute, i18nopts)
     if options[:short]
-      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({defaults: ''}))
-      s = raw "<abbr title='#{s}'>#{sshort}</abbr>" unless sshort.empty?
+      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({fallback: true, default: ''}))
+      s = raw "<abbr title='#{s}'>#{sshort}</abbr>" unless sshort.blank?
     end
     s
   end
@@ -155,13 +155,6 @@ module ApplicationHelper
       :target => "_blank"
   end
   
-  # offers a link for writing message to user
-  # checks for nil (useful for relations)
-  def link_to_user_message_if_valid(user)
-    user.nil? ? '??' : link_to(user.nick, new_message_path('message[mail_to]' => user.id),
-                               :title => I18n.t('helpers.application.write_message'))
-  end
-
   def bootstrap_flash
     flash_messages = []
     flash.each do |type, message|
@@ -181,6 +174,34 @@ module ApplicationHelper
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:li, msg) }.join
     render :partial => 'shared/base_errors', :locals => {:error_messages => messages}
+  end
+
+  # show a user, depending on settings
+  def show_user(user=@current_user, options = {})
+    if user.nil?
+      "?"
+    elsif FoodsoftConfig[:use_nick]
+      if options[:full] and options[:markup]
+        raw "<b>#{h user.nick}</b> (#{h user.first_name} #{h user.last_name})"
+      elsif options[:full]
+        "#{user.nick} (#{user.first_name} #{user.last_name})"
+      else
+        # when use_nick was changed from false to true, users may exist without nick
+        user.nick.nil? ? I18n.t('helpers.application.nick_fallback') : user.nick
+      end
+    else
+      "#{user.first_name} #{user.last_name}" + (options[:unique] ? " (\##{user.id})" : '')
+    end
+  end
+
+  # render user presentation linking to default action (write message)
+  def show_user_link(user=@current_user)
+    if user.nil?
+      show_user user
+    else
+      link_to show_user(user), new_message_path('message[mail_to]' => user.id),
+                               :title => I18n.t('helpers.application.write_message')
+    end
   end
 
 end

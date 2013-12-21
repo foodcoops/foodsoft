@@ -15,6 +15,7 @@ fr:
         name: Nom
         note: Note
         order_number: ! 'Numéro '
+        order_number_short: Numéro
         origin: Lieu de production
         price: Prix net
         supplier: 
@@ -22,6 +23,7 @@ fr:
         unit: Unité
         unit_quantity: Unités par lot
         unit_quantity_short: 
+        units: Lots
       article_category:
         description: Description
         name: Nom
@@ -30,11 +32,20 @@ fr:
         note: 
         supplier: Fournisseuse_r
       financial_transaction:
-        amount: montant
-        note: note
+        amount: Montant
+        created_on: Date
+        note: Note
+        ordergroup: Cellule
+        user: 
+      group_order:
+        price: Total de la commande
+        updated_by: Dernière commande
       group_order_article:
         ordergroup_id: Cellul
+        quantity: Quantité
         result: Quantité
+        tolerance: 
+        total_price: Total
       invoice:
         amount: Montant
         date: Date de facturation
@@ -54,20 +65,30 @@ fr:
         sent_to_all: Envoyer à tous les membres
         subject: Sujet
       order:
+        closed_by: Décompté par
+        created_by: Établi par
         ends: Clôture le
+        name: FournisseurE
         note: 
         starts: Ouverture le
+        status: 
       order_article:
+        missing_units: Unités manquantes
+        missing_units_short: 
         units_to_order: Quantité
         update_current_price: Mettre à jour le prix global
       order_comment:
         text: Commenter cette commande...
       ordergroup:
+        account_balance: Crédit initial
+        available_funds: Crédit disponible
+        contact: Contact
         contact_address: Adresse
         contact_person: Personne à contacter
         contact_phone: Téléphone
         description: Description
         ignore_apple_restriction: Pour cette cellule, ne pas bloquer les commandes en cas de manque de glands
+        last_order: dernière commande
         name: Nom
         user_tokens: Membres
       page:
@@ -75,10 +96,12 @@ fr:
         parent_id: Page parente
         title: Titre
       stock_article:
+        available: Disponible
         price: Prix net
-        quantity: 
+        quantity: en Stock
         quantity_available: 
-        supplier: FournisseurE
+        quantity_available_short: 
+        quantity_ordered: Commandés
       stock_taking:
         date: 
         note: 
@@ -92,6 +115,7 @@ fr:
         fax: Fa
         is_subscribed: abonné?
         min_order_quantity: Quantité minimale à commander
+        min_order_quantity_short: 
         name: Nom
         note: Note
         order_howto: Comment commander
@@ -103,13 +127,14 @@ fr:
         done: Fait?
         due_date: Echéance
         duration: Durée
-        name: Nom
+        name: 
         required_users: Nombre de personnes nécessaires
         user_list: Responsables inscritEs
         workgroup: Équipe
       user:
         email: Email
         first_name: Prénom
+        last_login: Dernière connection
         last_name: Nom de famille
         name: Nom
         nick: Identifiant
@@ -139,24 +164,23 @@ fr:
               exclusion: répétition hebdomadaire invalide pour un boulot déjà effectué
     models:
       article: Article
-      article_category: la nouvelle catégorie
-      delivery: le nouveau réapprovisionnement
-      financial_transaction: la transaction
-      invoice: la nouvelle facture
+      article_category: Catégorie
+      delivery: Réapprovisionnement
+      financial_transaction: Transaction
+      invoice: Facture
       message: Message
-      order: la nouvelle commande
+      order: Commande
       order_article: Article à commander
-      order_comment: un nouveau commentaire
-      ordergroup: la nouvelle cellule
+      order_comment: Commentaire
+      ordergroup: Cellule
       stock_article: l'article à stocker
       stock_taking: Inventaire
       supplier: FournisseusE_r
-      task: comme nouveau boulot
-      user: le nouveau membre
-      workgroup: la nouvelle équipe
+      task: Boulot
+      user: Membre
+      workgroup: Équipe
   admin:
     access_to: accès à
-    actions: Actions
     base:
       index:
         all_ordergroups: Toutes les cellules
@@ -194,11 +218,6 @@ fr:
         workgroup: équipe
       new:
         title: Définir une nouvelle cellule
-      ordergroups:
-        address: Adresse
-        contact: Contact
-        members: Membres
-        name: Nom
       show:
         confirm: T'es sûrE de ton coup?
         edit: Modifier les données sur les cellules et/ou leurs membres
@@ -217,20 +236,11 @@ fr:
         title: Ajouter unE nouveLLE_eau membre
       show:
         confirm: Veux-tu vraiment expulser %{user}?
-        email: Email
         groupabos: Participation à des équipes
         member_since: Membre depuis %{time}
-        name: Nom
-        nick: Identifiant
         person: Personne
-        phone: Numéro de téléphone
         preference: Préférences
         send_message: Envoyer un message
-      users:
-        email: email
-        last_login: dernière connection
-        login: identifiant
-        name: nom
     workgroups:
       destroy:
         error: ! 'Cette équipe n''a pas pu être supprimée: %{error}'
@@ -318,17 +328,9 @@ fr:
       submit: Mettre à jour tous les articles
       title: Modifier tous les articles de %{supplier}
       warning: Attention, tous les articles sont en train d'être mis à jour!
-    edit_all_table:
-      available_desc: disponible
-      available_short: disp.
-      order_number_desc: numéro de commande
-      order_number_short: n°
-      price_desc: Prix net
-      price_short: Prix
-      unit_quantity_desc: Unités par lot
-      unit_quantity_short: U/L
     form:
-      title: Ajouter un nouvel article
+      title_edit: 
+      title_new: Ajouter un nouvel article
     import_search_results:
       action_import: importer
       already_imported: déjà importé
@@ -389,24 +391,17 @@ fr:
       how_many_units: Combien d unités (%{unit}) de l article %{name} doivent-elles être livrées?
     create:
       notice: Le réapprovisionnement a bien a été défini. Attention à ne pas oublier de déposer la facture correspondante!
-    create_stock_article:
-      notice: L'article "%{name}" a été ajouté au stock.
     destroy:
       notice: Le réapprovisionnement a été annulé.
     edit:
       title: Modifier le réapprovisionnement
     form:
-      actions: Options
-      article: Article
-      category: Catégorie
+      confirm_foreign_supplier_reedit: 
       create_from_blank: Ajouter un nouvel article quelconque
       create_stock_article: Ajouter un article au stock
-      price: Prix net
-      quantity: Quantité
       title_fill_quantities: 2. Définir la quantité à livrer
       title_finish_delivery: 3. Clore le réapprovisionnement
       title_select_stock_articles: 1. Choisir les articles en stock
-      unit: Unité
     index:
       confirm_delete: T'es sûrE de ton coup?
       new_delivery: Réapprovisionner le stock par %{supplier}
@@ -416,29 +411,21 @@ fr:
     new:
       title: Réapprovisionner le stock par %{supplier}
     show:
-      amount: Quantité
-      article: Article
-      price: Prix net
       sum: Prix total
       sum_diff: montant brut - montant net
       sum_gross: prix total brut
       sum_net: prix total net
       title: Afficher le réapprovisionnement
-      title_articles: Article
-      unit: Unité
+      title_articles: Articles
     stock_article_for_adding:
       action_add_to_delivery: Commander
       action_edit: Modifier
       action_other_price: Copier
-    stock_article_form:
-      copy_stock_article: Copier l'article
     stock_change_fields:
       remove_article: Retirer l'article de cette commande
     suppliers_overview: Liste des fournisseusEs_rs
     update:
       notice: La commande a été actualisée
-    update_stock_article:
-      notice: Les données de l'article "%{name}" ont été mises à jour.
   documents:
     order_by_articles:
       filename: Commande %{name}-%{date} - Trier par
@@ -518,16 +505,10 @@ fr:
       edit_results_by_articles:
         add_article: Ajouter un article
         amount: Quantité
-        amount_per_unit: Poids d'un lot
-        article: Article
         gross: Brut
         net: Net
-        number: Numéro
-        refund: Consigne
-        tax: TVA
       group_order_articles:
         add_group: Créer un nouveau groupe
-        group: Groupe
         total: Prix total
         total_fc: Prix total (pour la boufcoop)
         units: Nombre d'unités
@@ -602,38 +583,24 @@ fr:
         paragraph: Cet espace permet de rajouter ou d'enlever du crédit à la cellule <b>%{name}</b>.
         title: Nouvelle transaction
       new_collection:
-        amount: Montant
         new_ordergroup: Créer d'autres cellules
-        note: Note
-        ordergroup: Cellule
         save: Sauvegarder les transactions
         sidebar: ! "Cet espace permet de mettre à jour plusieurs comptes simultanément, \npar exemple pour saisir les versements des cellules sur leurs comptes à partir d'un relevé."
         title: Mettre à jour plusieurs comptes
       ordergroup:
         remove: Supprimer
         remove_group: Supprimer cette cellule
-      transactions:
-        amount: Montant
-        date: Date
-        note: Note
-        who: Qui?
     group_order_articles:
       form:
         amount_change_for: Modification de la quantité de %{article}
         result_hint: 
     index:
-      amount: Montant
       amount_fc: Montant(boufcoop)
-      clear: Décompter
-      date: Date
       end: Fin
       everything_cleared: Super, tout est a déjà été décompté!
-      group: Cellule
       last_transactions: Dernières transactions
-      note: Note
       open_transactions: à décompter
       show_all: tout afficher
-      supplier: FournisseusE_r
       title: Espace trésorerie
       unpaid_invoices: Factures à régler
     invoices:
@@ -644,7 +611,6 @@ fr:
         title: Factures
       invoices:
         confirm_delete: T'es sûrE de ton coup?
-        delivery: Réapprovisionnement
       linked: Cette facture est associée à %{what_link}.
       linked_delivery: un réapprovisionnement
       linked_order: une commande
@@ -666,10 +632,7 @@ fr:
         search_placeholder: Rechercher ...
         title: Crédits des cellules
       ordergroups:
-        account_balance: Crédit disponible
         account_statement: Relevé de compte
-        contact: 
-        name: Nom
         new_transaction: Nouvelle transaction
     update:
       notice: La facture a été mise à jour.
@@ -680,10 +643,6 @@ fr:
         only_active: Seulement les cellules en activité
         only_active_desc: (ayant commandé au moins une fois au cours des 3 derniers mois)
         title: Cellules
-      ordergroups:
-        last_ordered: dernière commande
-        name: Nom
-        user: Membres
     users:
       index:
         body: ! '<p>Cette page sert à envoyer des messages aux autres membres de la coop.</p>
@@ -723,30 +682,14 @@ fr:
       notfound: ! ' Mauvaise adresse, ce n''est pas ta commande.'
     form:
       action_save: Enregistrer ta commande
-      amount: Quantité
-      available: Disponible
-      available_funds: Crédit disponible
-      created_by: Établi par
-      ending: Clôture le
-      funds: Crédit
-      last_update: Dernière commande
-      manufacturer: Produit par
-      min_quantity: Quantité minimale
-      name: Nom
       new_funds: Nouveau solde
-      note: Note
       price: Prix
       reset_article_search: 
       search_article: 
-      sum: Prix total
-      sum_amount: ! 'Quantité déjà commandée:'
-      supplier: Fourni par
+      sum_amount: Quantité déjà commandée
       title: Commander
-      tolerance: Tolérance
       total_sum_amount: Montant total
       total_tolerance: Tolérance totale
-      unit: Unité
-      unit_missing: Unités manquantes
       units: Lots
       units_full: Lots complet
       units_total: Unités déjà commandées
@@ -758,8 +701,6 @@ fr:
         title: Commandes par encore décomptées
         total_sum: Total
       funds:
-        account_balance: Crédit initial
-        available_funds: Crédit disponible
         finished_orders: montant prévu des commandes non décomptées
         open_orders: montant des commandes en cours
         title: Crédit
@@ -770,14 +711,9 @@ fr:
         alors que vous n''en avez que %{apples} pour le moment.'
     order:
       title: Article
-    orders:
-      ending: Clôture le
-      sum: Total
-      supplier: FournisseusE_r
     show:
       articles:
         edit_order: Modifier ta commande
-        name: Nom
         not_ordered_msg: Tu n'as pas encore commandé
         order_closed_msg: Désolé, cette commande a déjà été fermée. Il faudra te réveiller plus tôt la prochaine fois
         order_nopen_title: En tenant compte des commandes en cours de toutes les cellules
@@ -787,21 +723,14 @@ fr:
         ordered: Quantité souhaitée
         ordered_title: Quantité + tolérance
         show_hide: Montrer/cacher les articles non commandés
-        sum: Total
+        show_note: 
         title: Aperçu des articles
-        total_price: Prix
         unit_price: Prix unitaire
-        units: Lots
-      closed_by: Décompté par %{user}
       comment: Lire/écrire des commentaire
       comments:
         title: Commentaire
-      ending: Clôture le
       not_ordered: Tu n'as pas commandé.
-      note: Note
-      order_sum: Total de la commande
       sum: Total
-      supplier: Fourni par
       title: Ta part de la commande %{order}
     switch_order:
       remaining: encore %{remaining}
@@ -835,6 +764,7 @@ fr:
         create: Envoyer un message
     tasks:
       required_users: Il manque encore %{count} camarades!
+      task_title: ! '%{name} (%{duration}h)'
   home:
     apple_bar:
       desc: ! 'Ce système de glands sert à comparer la durée du travail collectif auquel ta cellule a contribué (rapportée à la quantité commandée) avec
@@ -858,12 +788,8 @@ fr:
         last_update: La dernière mise à jour date du %{when}
         title: Ta cellule
         transactions:
-          amount: Montant
-          note: Note
           title: Dernière transactions
           view: Afficher un relevé de compte
-          when: Quand?
-          where: Qui?
       ordergroup:
         title: Niveau de participation de ta cellule
       tasks_move:
@@ -1164,10 +1090,8 @@ fr:
   orders:
     articles:
       article_count: ! 'Articles commandés:'
-      name: Nom
       prices: Prix brut/net
       prices_sum: ! 'Totaux (des prix bruts/nets):'
-      unit_quantity: Unités par lots x Lots
       units_full: Lots complet
       units_ordered: Unités commandées
     create:
@@ -1186,26 +1110,18 @@ fr:
       notice: La commande a été close.
     form:
       ignore_warnings: 
-      name: Nom
-      note: Note
-      origin: Origine
       prices: Prix (net/coop)
       select_all: Tout sélectionner
       stockit: Disponible
-      supplier: Productrice_teur
       title: Article
-      unit_quantity: Lots
     index:
       action_end: Terminer
       confirm_delete: Vraiment supprimer la commande?
       confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
       ended_orders: Commandes closes
-      ending: Clôture le
       new_order: Définir une nouvelle commande
       no_open_orders: Il n'y a aucune commande en cours en ce moment.
-      note: Note
       open_orders: Commandes en cours
-      supplier: FournisseusE_r
       title: Gestion des commandes
     model:
       error_closed: Cette commande a déjà été décomptée
@@ -1217,23 +1133,16 @@ fr:
       warning_ordered_stock: 
     new:
       title: Définir une nouvelle commande
-    orders:
-      ending: Clôture le
-      start: Début
-      status: Statut
-      supplier: FournisseurE
     show:
       action_end: Clore!
       amounts: ! 'Total net/brut:'
       articles: Aperçu des articles
       articles_ordered: ! 'Articles commandés:'
-      begin: ! 'Début:'
       comments:
         title: Commentaire
       comments_link: Commenaire
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment terminer la commande %{order}? Pas d'annulation possible.
-      created_by: ! 'Créée par:'
       download:
         article_pdf: Liste des articles en PDF
         download_file: Télécharger
@@ -1242,12 +1151,9 @@ fr:
         group_pdf: Liste des cellules en PDF
         matrix_pdf: Matrice de distribution en PDF
         title: Télécharger
-      ending: ! 'Clôture le:'
       group_orders: ! 'Commandes des cellules:'
-      note: ! 'Note:'
       sort_article: Trié par article
       sort_group: Trié par cellules
-      supplier: FournisseurE
       title: ! 'Commande: %{name}'
       warn_not_closed: Attention, cette commande n'a pas encore été décomptée!
     state:
@@ -1335,9 +1241,7 @@ fr:
       login: Te connecter
       nojs: Attention, les cookies et le javascript doivent être activés! Merci de désactiver %{link}.
       noscript: NoScript
-      password: Mot de passe
       title: Te connecter à Foodsoft
-      user: Identifiant
   shared:
     articles:
       ordered: Commandé
@@ -1350,20 +1254,14 @@ fr:
     articles_by_groups:
       fc_price: Prix coop
       fc_price_desc: Prix avec TVA, consigne et part de la coop inclus.
-      name: Nom
       price: Prix total
-      unit: Unité
       unit_quantity: U/L
       unit_quantity_desc: Unités par lot
     group:
       access: Accès à
       activated: activé
-      address: Adresse
       apple_limit: Minimum de glands
-      contact: Contact
       deactivated: désactivé
-      description: Description
-      members: Membre
       no_weekly_job: aucun boulot hebdomadaire n'a été défini
       weekly_job: Boulot hebdomadaire
     group_form_fields:
@@ -1372,12 +1270,9 @@ fr:
       title: Boulots hebdomadaires
       user_not_found: Aucune utilisatrice n'a été trouvée.
     open_orders:
-      ending: Clôture le
       no_open_orders: Il n'y a aucune commande en cours en ce moment
       not_enough_apples: Désolé, ta cellule n'a pas assez de glands pour pouvoir commander!
-      supplier: FournisseusE_r
       title: Commandes en cours
-      total: Total
       total_sum: Total
       who_ordered: Qui a commandé?
     workgroup_members:
@@ -1394,7 +1289,7 @@ fr:
         units_to_order: 
         update_current_price: Modifie aussi le prix des commandes en cours
       stock_article:
-        copy_stock_article:
+        copy:
           name: Merci de modifier
         edit_stock_article:
           price: <ul><li>Modification du prix enregistrée. </li><li>Si nécessaire %{stock_article_copy_link}.</li></ul>
@@ -1442,6 +1337,7 @@ fr:
       new_inventory: Inventorier le stock
       title: Aperçu  de l'inventaire
     new:
+      amount: 
       create: ajouter
       stock_articles: Articles en stock
       temp_inventory: l'inventaire courant
@@ -1469,23 +1365,18 @@ fr:
   stockit:
     check:
       not_empty: ! '%{name} ne peut pas être supprimé, car il y en a encore en stock.'
+    copy:
+      title: Copier l'article
+    create:
+      notice: 
     destroy:
       notice: L'article %{name} a bien été supprimé du stock.
     edit:
       title: Modifier l'article
     form:
+      copy_stock_article: copier l'article
       price_hint: Pour éviter que ça soit le bazar, les prix des articles en stock ne peuvent plus être modifiés.
     index:
-      article:
-        article: Article
-        available: disponible
-        category: Catégorie
-        ordered: commandés
-        price: Prix
-        stock: en Stock
-        supplier: FournisseusE_r
-        unit: Unité
-        vat: TVA
       confirm_delete: T'es sûrE de ton coup?
       new_delivery: Réapprovisionner le stock...
       new_stock_article: Ajouter un article au stock
@@ -1503,16 +1394,13 @@ fr:
     show:
       change_quantity: Modification
       datetime: Temps
-      delivery: Réapprovisionnement
       new_quantity: Nouveau stock
-      order: Commande
       reason: Raison
       stock_changes: Afficher l'historique
-      stock_taking: Inventaire
-    stock_create:
-      notice: L'article a été sauvegardé.
-    stock_update:
-      notice: L'article a été sauvegardé.
+    stock_article:
+      confirm_delete: 
+    update:
+      notice: Les données de l'article "%{name}" ont été mises à jour.
   suppliers:
     create:
       notice: FournisseusE_r misE à jour
@@ -1553,11 +1441,6 @@ fr:
       notice: Tu as accepté ce boulot
     archive:
       title: Historique du boulot
-    archive_tasks:
-      due_date: Échéance
-      task: Sujet
-      task_format: ! '%{name} (%{duration}h)'
-      who: Personnes en charge
     create:
       notice: Le boulot a bien été défini.
     destroy:
@@ -1585,11 +1468,8 @@ fr:
       accept_task: Te charger de ce boulot
       done: Effectué
       done_q: Effectué?
-      due_date: À faire pour le
       mark_done: Marquer ce boulot comme étant effectué
       reject_task: Refuser ce boulot
-      task: Description
-      task_format: ! '%{name} (%{duration}h)'
       who: Qui le fait?
       who_hint: (Combien manquent encore?)
     nav:
@@ -1626,6 +1506,7 @@ fr:
       title: Agenda de l'%{workgroup}
       title_all: Boulot prévu pour l'équipe
   ui:
+    actions: Actions
     close: Fermer
     delete: Supprimer
     edit: Modifier

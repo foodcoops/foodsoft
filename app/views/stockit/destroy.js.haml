@@ -1,8 +1,0 @@
--# please polish the following line if you know how, same in partial _destroy_fail
-var successDiv = $('<div class="alert fade in alert-success"><a class="close" data-dismiss="alert" href="#">#{escape_javascript(t('ui.marks.close').html_safe)}</a></div>');
-
-successDiv.append(document.createTextNode('#{escape_javascript(t('.notice', name: @article.name))}'));
-$('div.container-fluid').prepend(successDiv);
-
-$('#stockArticle-#{@article.id}').remove();
--# WARNING: Do not use a simple .fadeOut() above, because it conflicts with the show/hide function of unavailable articles.

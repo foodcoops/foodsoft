@@ -1,6 +1,11 @@
 # encoding: utf-8
 # ActionMailer class that handles all emails for the FoodSoft.
 class Mailer < ActionMailer::Base
+  # XXX Quick fix to allow the use of show_user. Proper take would be one of
+  #     (1) Use draper, decorate user
+  #     (2) Create a helper with this method, include here and in ApplicationHelper
+  helper :application
+  include ApplicationHelper
 
   layout 'email'  # Use views/layouts/email.txt.erb
 
@@ -15,7 +20,7 @@ class Mailer < ActionMailer::Base
 
     mail subject: "[#{FoodsoftConfig[:name]}] " + message.subject,
          to: recipient.email,
-         from: "#{message.sender.nick} <#{message.sender.email}>"
+         from: "#{show_user(message.sender)} <#{message.sender.email}>"
   end
 
   # Sends an email with instructions on how to reset the password.
@@ -26,7 +31,7 @@ class Mailer < ActionMailer::Base
     @link = new_password_url(id: @user.id, token: @user.reset_password_token)
 
     mail :to => @user.email,
-         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.reset_password.subject', :username => @user.nick)
+         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.reset_password.subject', :username => show_user(@user))
   end
     
   # Sends an invite email.
@@ -75,7 +80,7 @@ class Mailer < ActionMailer::Base
     @feedback = feedback
 
     mail :to => FoodsoftConfig[:notification]["error_recipients"],
-         :from => "#{user.nick} <#{user.email}>",
+         :from => "#{show_user user} <#{user.email}>",
          :sender => FoodsoftConfig[:notification]["sender_address"],
          :errors_to => FoodsoftConfig[:notification]["sender_address"],
          :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.feedback.subject', :email => user.email)

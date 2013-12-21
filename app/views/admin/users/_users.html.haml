@@ -4,17 +4,19 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t '.login'
-      %th= t '.name'
-      %th= t '.email'
+      - if FoodsoftConfig[:use_nick]
+        %th= heading_helper User, :nick
+      %th= heading_helper User, :name
+      %th= heading_helper User, :email
       %th= t 'admin.access_to'
-      %th= t '.last_login'
-      %th(colspan="2")= t 'admin.actions'
+      %th= heading_helper User, :last_login
+      %th(colspan="2")= t 'ui.actions'
   %tbody
     - for user in @users 
       %tr
-        %td= link_to user.nick, [:admin, user]
-        %td= user.name
+        %td= link_to show_user(user), [:admin, user]
+        - if FoodsoftConfig[:use_nick]
+          %td= user.name
         %td= user.email
         %td= format_roles(user)
         %td= format_time(user.last_login)

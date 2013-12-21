@@ -8,9 +8,9 @@
     %table.table.table-striped
       %thead
         %tr
-          %th= t('.date')
-          %th.numeric= t('.amount')
-          %th= t('.supplier')
+          %th= heading_helper Invoice, :date
+          %th.numeric= heading_helper Invoice, :amount
+          %th= heading_helper Invoice, :supplier
           %th
       %tbody
         - for invoice in @unpaid_invoices
@@ -26,10 +26,10 @@
     %table.table.table-striped
       %thead
         %tr
-          %th= t('.date')
-          %th= t('.group')
-          %th= t('.note')
-          %th.numeric= t('.amount')
+          %th= heading_helper FinancialTransaction, :created_on
+          %th= heading_helper FinancialTransaction, :ordergroup
+          %th= heading_helper FinancialTransaction, :note
+          %th.numeric= heading_helper FinancialTransaction, :amount
       %tbody
         - @financial_transactions.each do |ft|
           %tr
@@ -45,8 +45,8 @@
       %table.table.table-striped
         %thead
           %tr
-            %th= t('.supplier')
-            %th= t('.end')
+            %th= heading_helper Order, :name
+            %th= t '.end'
             %th.numeric= t('.amount_fc')
             %th 
         %tbody
@@ -55,6 +55,6 @@
               %td= order.name
               %td= format_date(order.ends)
               %td.numeric= number_to_currency(order.sum(:fc))
-              %td= link_to t('.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-mini'
+              %td= link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-mini'
     - else
       = t('.everything_cleared')

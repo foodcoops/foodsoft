@@ -42,9 +42,9 @@
         }
         if('new' == selectedArticle.id) {
           $.ajax({
-            url: '#{new_stock_article_supplier_deliveries_path(@supplier)}',
+            url: '#{new_stock_article_path}',
             type: 'get',
-            data: {stock_article: {name: selectedArticle.text}},
+            data: {stock_article: {name: selectedArticle.text, supplier_id: #{@supplier.id}}},
             contentType: 'application/json; charset=UTF-8'
           });
           $('#new_stock_article').select2('data', null);
@@ -52,7 +52,7 @@
         }
         if('' != selectedArticle.id) {
           $.ajax({
-            url: '#{derive_stock_article_supplier_deliveries_path(@supplier)}',
+            url: '#{derive_stock_articles_path}',
             type: 'get',
             data: {old_article_id: selectedArticle.id},
             contentType: 'application/json; charset=UTF-8'
@@ -60,6 +60,26 @@
           $('#new_stock_article').select2('data', null);
           return true;
         }
+      });
+      
+      // Subscribe to database changes.
+      // See publish/subscribe design pattern in /doc.
+      $(document).on('StockArticle#create', function(e) {
+        $.ajax({
+          url: '#{form_on_stock_article_create_supplier_deliveries_path(@supplier)}',
+          type: 'get',
+          data: {id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+      
+      $(document).on('StockArticle#update', function(e) {
+        $.ajax({
+          url: '#{form_on_stock_article_update_supplier_deliveries_path(@supplier)}',
+          type: 'get',
+          data: {id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
       });
     });
     
@@ -87,16 +107,16 @@
   %table#stock_articles_for_adding.table.table-hover.stupidtable
     %thead
       %tr
-        %th.default-sort{:data => {:sort => 'string'}}= t '.article'
-        %th= t '.price'
-        %th= t '.unit'
-        %th= t '.category'
-        %th= t '.actions'
+        %th.default-sort{:data => {:sort => 'string'}}= Article.model_name.human
+        %th= heading_helper StockArticle, :price
+        %th= heading_helper StockArticle, :unit
+        %th= heading_helper StockArticle, :article_category
+        %th= t 'ui.actions'
     %tfoot
       %tr
         %th{:colspan => 5}
           - if articles_for_select2(@supplier).empty?
-            = link_to t('.create_stock_article'), new_stock_article_supplier_deliveries_path(@supplier), :remote => true, :class => 'btn'
+            = link_to t('.create_stock_article'), new_stock_article_path, :remote => true, :class => 'btn'
           - else
             %input#new_stock_article{:style => 'width: 500px;'}
     %tbody
@@ -107,11 +127,11 @@
   %table.table#stock_changes.stupidtable
     %thead
       %tr
-        %th.default-sort{:data => {:sort => 'string'}}= t '.article'
-        %th= t '.price'
-        %th= t '.unit'
-        %th= t '.quantity'
-        %th= t '.actions'
+        %th.default-sort{:data => {:sort => 'string'}}= Article.model_name.human
+        %th= heading_helper StockArticle, :price
+        %th= heading_helper StockArticle, :unit
+        %th= heading_helper GroupOrderArticle, :quantity  # quantity to order, although technically this will be a StockChange
+        %th= t 'ui.actions'
     %tbody
       = f.simple_fields_for :stock_changes do |stock_change_form|
         = render :partial => 'stock_change_fields', :locals => {:f => stock_change_form}

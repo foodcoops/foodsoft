@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718183101) do
+ActiveRecord::Schema.define(:version => 20130920201529) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -324,7 +324,7 @@ ActiveRecord::Schema.define(:version => 20130718183101) do
   add_index "tasks", ["workgroup_id"], :name => "index_tasks_on_workgroup_id"
 
   create_table "users", :force => true do |t|
-    t.string   "nick",                   :default => "", :null => false
+    t.string   "nick"
     t.string   "password_hash",          :default => "", :null => false
     t.string   "password_salt",          :default => "", :null => false
     t.string   "first_name",             :default => "", :null => false

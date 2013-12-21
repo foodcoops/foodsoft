@@ -2,7 +2,8 @@ module PagesHelper
   include WikiCloth
 
   def wikified_body(body, title = nil)
-    WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html.html_safe
+    render_opts = {:locale => I18n.locale} # workaround for wikicloth 0.8.0 https://github.com/nricciar/wikicloth/pull/59
+    WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html(render_opts).html_safe
   rescue
     "Sorry, the page could not be parsed." # try the following with line breaks: === one === == two == = three =
   end
