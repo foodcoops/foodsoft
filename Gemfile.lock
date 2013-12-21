@@ -23,6 +23,7 @@ PATH
   specs:
     foodsoft_wiki (0.0.1)
       acts_as_versioned
+      diffy
       rails (~> 3.2.15)
       wikicloth
 
@@ -112,6 +113,7 @@ GEM
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
+    diffy (3.0.1)
     docile (1.1.1)
     erubis (2.7.0)
     eventmachine (1.0.3)

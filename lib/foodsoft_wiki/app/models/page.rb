@@ -1,3 +1,5 @@
+require "diffy"
+
 class Page < ActiveRecord::Base
   include ActsAsTree
 
@@ -31,6 +33,24 @@ class Page < ActiveRecord::Base
   def set_permalink
     unless title.blank?
       self.permalink = Page.count == 0 ? "Home" : Page.permalink(title)
+    end
+  end
+  
+  def diff
+    current = versions.order('id DESC').first
+    old = versions.order('id DESC').second
+    
+    if old
+      o = ''
+      Diffy::Diff.new(old.body, current.body).each do |line|
+        case line
+        when /^\+/ then o += "#{line.chomp}\n" unless line.chomp == "+"
+        when /^-/ then o += "#{line.chomp}\n" unless line.chomp == "-"
+        end
+      end
+      o
+    else
+      current.body
     end
   end
 

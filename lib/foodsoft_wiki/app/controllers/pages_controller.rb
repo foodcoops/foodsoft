@@ -114,6 +114,10 @@ class PagesController < ApplicationController
               end
       @pages.order(order)
     end
+    respond_to do |format|
+      format.html
+      format.rss { render :layout => false }
+    end
   end
 
   def version
