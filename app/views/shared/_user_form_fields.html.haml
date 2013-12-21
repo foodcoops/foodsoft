@@ -1,12 +1,18 @@
-- if FoodsoftConfig[:use_nick]
-  -# use_nil option to user model validators break required mark
-  = f.input :nick, required: true
 = f.input :first_name
 = f.input :last_name
 = f.input :email
-= f.input :phone
+-# need :required because :use_nil option on user model validators break the required mark
+= f.input :nick, required: true if FoodsoftConfig[:use_nick]
+-# You probably would pass 'autocomplete: 'off'` to the form encapsulating this partial.
+  When editing one's own profile page, it only fills in one of the two
+  passwords fields, which is annoying when editing other preferences.  When an
+  admin edits another user's profile, this will fill in his own password, which
+  is dangerous.
+  Still it doesn't always work. Therefore, add a dummy field that isn't remembered.
+  See also https://github.com/foodcoops/foodsoft/wiki/Form-autocompletion
 = f.input :password, :required => f.object.new_record?
-= f.input :password_confirmation
+= f.input :password_confirmation, :required => f.object.new_record?
+= f.input :phone
 
 = f.simple_fields_for :settings_attributes do |s|
   = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
