@@ -53,8 +53,9 @@
               %td= format_time(order.ends)
               %td= truncate(order.note)
               %td
-                -# TODO btn-success class only if not received before
-                = link_to t('.action_receive'), receive_order_path(order), class: 'btn btn-small btn-success'
+                - unless order.stockit?
+                  -# TODO btn-success class only if not received before
+                  = link_to t('.action_receive'), receive_order_path(order), class: 'btn btn-small btn-success'
 
               %td
                 = link_to t('ui.edit'), '#', class: 'btn btn-small disabled', tabindex: -1
