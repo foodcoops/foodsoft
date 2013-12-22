@@ -80,8 +80,8 @@ class ApplicationController < ActionController::Base
 
   # checks if the current_user is member of given group.
   # if fails the user will redirected to startpage
-  def authenticate_membership_or_admin
-    @group = Group.find(params[:id])
+  def authenticate_membership_or_admin(group_id = params[:id])
+    @group = Group.find(group_id)
     unless @group.member?(@current_user) or @current_user.role_admin?
       redirect_to root_path, alert: I18n.t('application.controller.error_members_only')
     end
