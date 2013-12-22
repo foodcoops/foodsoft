@@ -1,4 +1,4 @@
-= simple_form_for([:admin, @user]) do |f|
+= simple_form_for([:admin, @user], html: {autocomplete: 'off'}) do |f|
   = render 'shared/user_form_fields', f: f
   .form-actions
     = f.submit
