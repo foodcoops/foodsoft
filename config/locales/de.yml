@@ -1167,7 +1167,7 @@ de:
       title_list: Seiten-Liste
     body:
       title_toc: Inhalt
-      wikicloth_exception: <span class="alert alert-error">Entschuldigung, ein Fehler ist aufgetreten. Möglicherweise ist ein ungewöhnlicher Text die Ursache. Bearbeiten der Seite kann helfen, diesen Fehler zu beseitigen.</span>
+      wikicloth_exception: Entschuldigung, ein Fehler ist aufgetreten. Möglicherweise ist ein ungewöhnlicher Text die Ursache. Bearbeiten der Seite kann helfen, diesen Fehler zu beseitigen.
     create:
       notice: Seite wurde angelegt
     cshow:

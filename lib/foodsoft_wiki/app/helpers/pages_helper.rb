@@ -5,7 +5,7 @@ module PagesHelper
     render_opts = {:locale => I18n.locale} # workaround for wikicloth 0.8.0 https://github.com/nricciar/wikicloth/pull/59
     WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html(render_opts).html_safe
   rescue
-    t('.wikicloth_exception').html_safe # try the following with line breaks: === one === == two == = three =
+    "<span class='alert alert-error'>#{t '.wikicloth_exception'}</span>".html_safe # try the following with line breaks: === one === == two == = three =
   end
 
   def link_to_wikipage(page, text = nil)
