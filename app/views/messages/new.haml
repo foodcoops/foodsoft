@@ -31,7 +31,7 @@
       = t '.list.subscribe_msg'
       %br/
       - if FoodsoftConfig[:mailing_list_subscribe].blank?
-        = t '.list.subscribe', link: link_to(t('.list.wiki'), wiki_page_path('MailingListe'))
+        = t('.list.subscribe', link: link_to(t('.list.wiki'), wiki_page_path('MailingListe'))).html_safe
       - else
         = t('.list.mail', email: mail_to(FoodsoftConfig[:mailing_list_subscribe])).html_safe
 
