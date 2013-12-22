@@ -6,7 +6,7 @@
 -# you can disable password autocompletion by passing `password_autocomplete: false` to this partial
 -# see also https://github.com/foodcoops/foodsoft/wiki/Form-autocompletion
 - password_autocomplete = nil unless defined?(:password_autocomplete)
-- passwd_opts = (password_autocomplete.nil? ? {} : {autocomplete: password_autocomplete ? 'on' : 'off'})
+- passwd_opts = (password_autocomplete.nil? ? {} : {autocomplete: password_autocomplete ? 'on' : 'off', data: {store: 'on'}})
 = f.input :password, :required => f.object.new_record?, input_html: passwd_opts
 = f.input :password_confirmation, :required => f.object.new_record?, input_html: passwd_opts
 = f.input :phone
