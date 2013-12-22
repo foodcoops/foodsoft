@@ -73,8 +73,15 @@ class User < ActiveRecord::Base
 
   # search by (nick)name
   def self.natural_search(q)
-    # we always use both nick and name, to make sure a user is found
-    where("CONCAT(first_name, CONCAT(' ', last_name)) LIKE :q OR nick LIKE :q", q: "%#{q}%")
+    q = q.strip
+    users = User.arel_table
+    # full string as nickname
+    match_nick = users[:nick].matches("%#{q}%")
+    # or each word matches either first or last name
+    match_name = q.split.map do |a|
+        users[:first_name].matches("%#{a}%").or users[:last_name].matches("%#{a}%")
+    end.reduce(:and)
+    User.where(match_nick.or match_name)
   end
   
   def locale
