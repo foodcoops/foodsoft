@@ -14,7 +14,7 @@ class InvitesController < ApplicationController
 
       respond_to do |format|
         format.html do
-          redirect_to back_or_default_path, notice: I18n.t('invites.success')
+          redirect_to root_path, notice: I18n.t('invites.success')
         end
         format.js { render layout: false }
       end

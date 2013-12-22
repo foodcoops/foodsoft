@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :available_locales
 
   protect_from_forgery
-  before_filter  :select_foodcoop, :authenticate, :store_controller, :items_per_page, :set_redirect_to
+  before_filter  :select_foodcoop, :authenticate, :store_controller, :items_per_page
   after_filter  :remove_controller
 
   
@@ -126,18 +126,6 @@ class ApplicationController < ActionController::Base
     else
       @per_page = 20
     end
-  end
-
-  def set_redirect_to
-    session[:redirect_to] = params[:redirect_to] if params[:redirect_to]
-  end
-
-  def back_or_default_path(default = root_path)
-    if session[:redirect_to].present?
-      default = session[:redirect_to]
-      session[:redirect_to] = nil
-    end
-    default
   end
 
   # Always stay in foodcoop url scope
