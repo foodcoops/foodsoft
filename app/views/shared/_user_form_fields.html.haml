@@ -3,12 +3,13 @@
 = f.input :email
 -# need :required because :use_nil option on user model validators break the required mark
 = f.input :nick, required: true if FoodsoftConfig[:use_nick]
--# you can disable password autocompletion by passing `password_autocomplete: false` to this partial
+-# You can control password autocompletion by passing `password_autocomplete` to this partial.
+-# Possible values: undefined/nil, true, false, 'store-only'
 -# see also https://github.com/foodcoops/foodsoft/wiki/Form-autocompletion
 - password_autocomplete = nil unless defined?(:password_autocomplete)
-- passwd_opts = (password_autocomplete.nil? ? {} : {autocomplete: password_autocomplete ? 'on' : 'off'})
-= f.input :password, :required => f.object.new_record?, input_html: passwd_opts
-= f.input :password_confirmation, :required => f.object.new_record?, input_html: passwd_opts
+- password_html = autocomplete_flag_to_password_html(password_autocomplete)
+= f.input :password, :required => f.object.new_record?, input_html: password_html
+= f.input :password_confirmation, :required => f.object.new_record?, input_html: password_html
 = f.input :phone
 
 = f.simple_fields_for :settings_attributes do |s|
