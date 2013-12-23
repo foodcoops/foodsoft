@@ -4,8 +4,8 @@
 %td{title: units_history_line(order_article)}
   = order_article.units
   %i.package pkg
-  - unless order_article.ordered_quantities_equal_to_group_orders?
-    %span{:style => "color:red;font-weight: bold"} !
+  - if s=order_article.ordered_quantities_different_from_group_orders?
+    %span{:style => "color:red;font-weight: bold"}= s
 %td #{order_article.price.unit_quantity} &times; #{order_article.article.unit}
 %td
   = number_to_currency(order_article.price.price, :unit => "")

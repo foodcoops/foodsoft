@@ -97,9 +97,16 @@ class OrderArticle < ActiveRecord::Base
     units_to_order * price.unit_quantity * price.gross_price
   end
 
-  def ordered_quantities_equal_to_group_orders?
-    # the rescue is a workaround for units_to_order not being defined in integration tests
-    (units_to_order * price.unit_quantity) == group_orders_sum[:quantity] rescue false
+  def ordered_quantities_different_from_group_orders?(ordered_mark="!", billed_mark="?", received_mark="?")
+    if not units_received.nil?
+      ((units_received * price.unit_quantity) == group_orders_sum[:quantity]) ? false : received_mark
+    elsif not units_billed.nil?
+      ((units_billed * price.unit_quantity) == group_orders_sum[:quantity]) ? false : billed_mark
+    elsif not units_to_order.nil?
+      ((units_to_order * price.unit_quantity) == group_orders_sum[:quantity]) ? false : ordered_mark
+    else
+      nil # can happen in integration tests
+    end
   end
 
   # redistribute articles over ordergroups
