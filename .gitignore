@@ -3,6 +3,7 @@ tmp/**/*
 config/app_config.yml
 config/database.yml
 config/initializers/secret_token.rb
+config/initializers/rss_token.rb
 db/*.sqlite3
 nbproject/
 config/environments/development.rb
