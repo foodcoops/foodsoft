@@ -271,6 +271,7 @@ en:
       error_authn: Authentication required!
       error_denied: Access denied!
       error_members_only: This action is only available to members of the group!
+      error_token: Access denied (invalid token)!
   article_categories:
     create:
       notice: Category was stored
