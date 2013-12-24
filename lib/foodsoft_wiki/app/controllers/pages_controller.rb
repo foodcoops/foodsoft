@@ -1,6 +1,11 @@
 # encoding: utf-8
 class PagesController < ApplicationController
 
+  skip_before_filter :authenticate, :only => :all
+  before_filter :only => :all do
+    authenticate_or_token(['wiki', 'all'])
+  end
+
   def index
     @page = Page.find_by_permalink "Home"
 

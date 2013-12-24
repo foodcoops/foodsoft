@@ -2,10 +2,8 @@ module PagesHelper
   include WikiCloth
 
   def rss_meta_tag
-    if FoodsoftConfig[:rss_token]
-      url = all_pages_url(:format => :rss, :token => FoodsoftConfig[:rss_token])
-      tag('link', :rel => "alternate", :type => "application/rss+xml", :title => "RSS", :href => url).html_safe
-    end
+    url = all_pages_rss
+    tag('link', :rel => "alternate", :type => "application/rss+xml", :title => "RSS", :href => url).html_safe
   end
 
   def wikified_body(body, title = nil)
@@ -63,5 +61,11 @@ module PagesHelper
     else
       Array.new
     end
+  end
+
+  # return url for all_pages rss feed
+  def all_pages_rss(options={})
+    token = TokenVerifier.new(['wiki', 'all'])
+    all_pages_url({:format => 'rss', :token => token.generate}.merge(options))
   end
 end
