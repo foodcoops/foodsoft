@@ -1,3 +1,5 @@
+require 'stringio'
+
 # put in here all foodsoft tasks
 # => :environment loads the environment an gives easy access to the application
 
@@ -23,8 +25,6 @@ module Colors
 end
 include Colors
 
-require 'stringio'
-
 namespace :foodsoft do
   desc "Setup foodsoft"
   task :setup_development do
@@ -34,6 +34,7 @@ namespace :foodsoft do
     setup_development
     setup_database
     setup_secret_token
+    setup_rss_token
     start_mailcatcher
     puts yellow "All done! Your foodcoft should be running smoothly."
     start_server
@@ -82,10 +83,11 @@ end
 
 def setup_app_config
   file = 'config/app_config.yml'
+  sample = Rails.root.join("#{file}.SAMPLE")
   return nil if skip?(file)
   
   puts yellow "Copying #{file}..."
-  %x( cp #{Rails.root.join("#{file}.SAMPLE")} #{Rails.root.join(file)} )
+  %x( cp #{sample} #{Rails.root.join(file)} )
   reminder(file)
 end
 
@@ -108,6 +110,15 @@ def setup_secret_token
   %x( touch #{Rails.root.join("#{file}")}; echo 'Foodsoft::Application.config.secret_token = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
 end
 
+def setup_rss_token
+  file = 'config/initializers/rss_token.rb'
+  return nil if skip?(file)
+  
+  puts yellow "Generating rss_token and writing to #{file}..."
+  secret = SecureRandom.hex
+  %x( touch #{Rails.root.join("#{file}")}; echo 'FoodsoftConfig.config.rss_token = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
+end
+
 def start_mailcatcher
   mailcatcher = ask("Do you want to start mailcatcher?\nOptions:\n(y) Yes\n(n) No", ["y","n"])
   if mailcatcher === "y"
@@ -119,6 +130,8 @@ end
 def start_server
   puts blue "Start your server running 'bundle exec rails s' and visit http://localhost:3000"
 end
+
+# Helper Methods
 
 def ask(question, answers = false)
   puts question
@@ -149,3 +162,4 @@ def capture_stdout
 ensure
   $stdout = STDOUT
 end
+

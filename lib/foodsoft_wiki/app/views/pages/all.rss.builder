@@ -8,7 +8,7 @@ xml.rss :version => "2.0" do
     for page in @pages
       xml.item do
         xml.title page.title
-        xml.description page.diff
+        xml.description page.diff, :type => "html"
         xml.author User.find(page.updated_by).display
         xml.pubDate page.updated_at.to_s(:rfc822)
         xml.link wiki_page_path(page.permalink)

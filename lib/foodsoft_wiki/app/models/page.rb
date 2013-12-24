@@ -1,5 +1,3 @@
-require "diffy"
-
 class Page < ActiveRecord::Base
   include ActsAsTree
 
@@ -44,8 +42,8 @@ class Page < ActiveRecord::Base
       o = ''
       Diffy::Diff.new(old.body, current.body).each do |line|
         case line
-        when /^\+/ then o += "#{line.chomp}\n" unless line.chomp == "+"
-        when /^-/ then o += "#{line.chomp}\n" unless line.chomp == "-"
+        when /^\+/ then o += "#{line.chomp}<br />" unless line.chomp == "+"
+        when /^-/ then o += "#{line.chomp}<br />" unless line.chomp == "-"
         end
       end
       o

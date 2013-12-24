@@ -31,7 +31,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def authenticated_for_rss?
+    controller_name == "pages" && action_name == "all" && defined?(FoodsoftWiki::Engine) && FoodsoftConfig[:rss_token] && params[:token] == FoodsoftConfig[:rss_token]
+  end
+  
   def authenticate(role = 'any')
+    # RSS works with a token
+    return true if authenticated_for_rss?
+    
     # Attempt to retrieve authenticated user from controller instance or session...
     if !current_user
       # No user at all: redirect to login page.

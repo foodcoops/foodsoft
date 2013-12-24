@@ -1,6 +1,13 @@
 module PagesHelper
   include WikiCloth
 
+  def rss_meta_tag
+    if FoodsoftConfig[:rss_token]
+      url = all_pages_url(:format => :rss, :token => FoodsoftConfig[:rss_token])
+      tag('link', :rel => "alternate", :type => "application/rss+xml", :title => "RSS", :href => url).html_safe
+    end
+  end
+
   def wikified_body(body, title = nil)
     render_opts = {:locale => I18n.locale} # workaround for wikicloth 0.8.0 https://github.com/nricciar/wikicloth/pull/59
     WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html(render_opts).html_safe
