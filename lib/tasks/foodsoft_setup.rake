@@ -116,7 +116,7 @@ def setup_rss_token
   
   puts yellow "Generating rss_token and writing to #{file}..."
   secret = SecureRandom.hex
-  %x( touch #{Rails.root.join("#{file}")}; echo 'FoodsoftConfig.config.rss_token = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
+  %x( touch #{Rails.root.join("#{file}")}; echo 'FoodsoftConfig.config[:rss_token] = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
 end
 
 def start_mailcatcher
