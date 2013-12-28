@@ -1361,6 +1361,8 @@ de:
       title: Lagerartikel kopieren
     create:
       notice: Neuer Lagerartikel »%{name}« gespeichert.
+    derive:
+      title: Lagerartikel aus Vorlage erstellen
     destroy:
       notice: Artikel %{name} gelöscht.
     edit:
