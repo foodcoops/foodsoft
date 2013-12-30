@@ -203,5 +203,5 @@ module ApplicationHelper
                                :title => I18n.t('helpers.application.write_message')
     end
   end
-
+  
 end
