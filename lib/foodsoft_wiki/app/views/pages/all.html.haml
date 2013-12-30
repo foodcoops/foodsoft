@@ -9,7 +9,7 @@
       %li= link_to t('.recent_changes'), all_pages_path(:view => 'recent_changes')
       %li= link_to t('.title_list'), all_pages_path(:view => 'title_list')
       %li= link_to t('.site_map'), all_pages_path(:view => 'site_map')
-      %li= link_to image_tag('icons/feed-icon-14x14.png', :alt => 'RSS Feed'), all_pages_rss
+      %li= link_to image_tag('icons/feed-icon-14x14.png', :alt => 'RSS Feed'), all_pages_rss_url
     = form_tag all_pages_path, method: :get, class: 'form-search pull-right' do
       = text_field_tag :name, params[:name], class: 'input-medium search-query',
         placeholder: t('.search.placeholder')
