@@ -1365,6 +1365,8 @@ en:
       title: Copy stock article
     create:
       notice: New stock article "%{name}" was created.
+    derive:
+      title: Add stock article using template
     destroy:
       notice: Article %{name} was deleted.
     edit:
