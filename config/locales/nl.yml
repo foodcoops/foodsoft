@@ -27,6 +27,11 @@ nl:
       article_category:
         description: Omschrijving
         name: Naam
+      article_price:
+        deposit: Statiegeld
+        price: Netto prijs
+        tax: BTW
+        unit_quantity: Groothandelseenheid
       delivery:
         delivered_on: Leverdatum
         note: Notitie
