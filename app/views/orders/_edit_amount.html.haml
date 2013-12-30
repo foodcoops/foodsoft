@@ -1,21 +1,28 @@
+# NOTE: if you modify tiny details here you must also change them in `receive_on_order_article_update.js.erb`
 = fields_for 'order_articles', order_article, index: order_article.id do |form|
-  %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
+  %tr{id: "order_article_#{order_article.id}", class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
     - order_title = []
     - order_title.append Article.human_attribute_name(:manufacturer)+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
     - order_title.append Article.human_attribute_name(:note)+': ' + order_article.article.note unless order_article.article.note.to_s.empty?
     - units_expected = (order_article.units_billed or order_article.units_to_order)
     %td= order_article.article.order_number
     %td.name{title: order_title.join("\n")}= order_article.article.name
-    %td #{order_article.article.unit_quantity} &times; #{order_article.article.unit}
+    %td.unit= order_article.article.unit
     %td #{order_article.quantity} + #{order_article.tolerance}
     %td
       = order_article.units_to_order
       %i.package pkg
+      %span.article_unit_quantity (&times; #{order_article.article.unit_quantity})
+    %td.article_price= number_to_currency order_article.article.price
     -#%td # TODO implement invoice screen
       - unless order_article.units_billed.nil?
         = order_article.units_billed
         %i.package pkg
     %td
       = form.text_field :units_received, class: 'input-nano package', data: {'units-expected' => units_expected}
+      %span.article_price_unit_quantity (&times; #{order_article.article_price.unit_quantity})
       / TODO add almost invisible text_field for entering single units
+    %td.article_price_price= number_to_currency order_article.article_price.price
     %td.units_delta
+    %td
+      = link_to t('ui.edit'), edit_finance_order_order_article_path(order_article.order, order_article), remote: true, class: 'btn btn-mini'

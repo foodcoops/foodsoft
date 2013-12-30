@@ -126,6 +126,12 @@ class OrdersController < ApplicationController
       redirect_to @order
     end
   end
+  
+  def receive_on_order_article_update # See publish/subscribe design pattern in /doc.
+    @order_article = OrderArticle.find(params[:order_article_id])
+    
+    render :layout => false
+  end
 
   protected
   

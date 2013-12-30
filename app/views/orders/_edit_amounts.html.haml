@@ -74,12 +74,15 @@
     %tr
       %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :order_number, short: true
       %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :name
-      %th= heading_helper GroupOrderArticle, :units
+      %th= heading_helper Article, :unit
       %th Members
       %th Ordered
+      %th= heading_helper Article, :price
       -#%th Invoice # TODO implement invoice screen
       %th Received
+      %th= heading_helper ArticlePrice, :price
       %th
+      %th= t 'ui.actions'
   %tbody#result_table
     - @order_articles.each do |order_article|
       = render :partial => 'edit_amount', :locals => {:order_article => order_article}

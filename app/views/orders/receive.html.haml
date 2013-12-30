@@ -1,3 +1,18 @@
+- content_for :javascript do
+  :javascript
+    $(function() {
+      // Subscribe to database changes.
+      // See publish/subscribe design pattern in /doc.
+      $(document).on('OrderArticle#update', function(e) {
+        $.ajax({
+          url: '#{receive_on_order_article_update_order_path(@order)}',
+          type: 'get',
+          data: {order_article_id: e.order_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+    });
+
 - title "Receiving #{@order.name}"
 
 = form_tag(receive_order_path(@order)) do

@@ -42,6 +42,8 @@ Foodsoft::Application.routes.draw do
         get :receive
         post :receive
         get :add_article
+        
+        get :receive_on_order_article_update
       end
     end
 

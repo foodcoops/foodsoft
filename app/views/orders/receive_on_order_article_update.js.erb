@@ -1,0 +1,30 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function(w) {
+  var order_article_entry = $('#order_article_<%= @order_article.id %>');
+  
+  $('.name', order_article_entry).text(
+    '<%= j @order_article.article.name %>'
+  );
+  
+  $('.unit', order_article_entry).text(
+    '<%= j @order_article.article.unit %>'
+  );
+  
+  $('.article_unit_quantity', order_article_entry).text(
+    '(× <%= @order_article.article.unit_quantity %>)'
+  );
+  
+  $('.article_price', order_article_entry).text(
+    '<%= j number_to_currency @order_article.article.price %>'
+  );
+  
+  $('.article_price_unit_quantity', order_article_entry).text(
+    '(× <%= @order_article.article_price.unit_quantity %>)'
+  );
+  
+  $('.article_price_price', order_article_entry).text(
+    '<%= j number_to_currency @order_article.article_price.price %>'
+  );
+})(window);
+
