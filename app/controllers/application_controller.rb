@@ -94,6 +94,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate_or_token(prefix, role = 'any')
+    if not params[:token].blank?
+      unless TokenVerifier.new(prefix).verify(params[:token])
+        redirect_to root_path, alert: I18n.t('application.controller.error_token')
+      end
+    else
+      authenticate(role)
+    end
+  end
+
   # Stores this controller instance as a thread local varibale to be accessible from outside ActionController/ActionView.
   def store_controller
     Thread.current[:application_controller] = self

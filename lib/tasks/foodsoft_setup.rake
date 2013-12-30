@@ -34,7 +34,6 @@ namespace :foodsoft do
     setup_development
     setup_database
     setup_secret_token
-    setup_rss_token
     start_mailcatcher
     puts yellow "All done! Your foodcoft should be running smoothly."
     start_server
@@ -108,15 +107,6 @@ def setup_secret_token
   Rake::Task["secret"].reenable
   secret = capture_stdout { Rake::Task["secret"].invoke }
   %x( touch #{Rails.root.join("#{file}")}; echo 'Foodsoft::Application.config.secret_token = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
-end
-
-def setup_rss_token
-  file = 'config/initializers/rss_token.rb'
-  return nil if skip?(file)
-  
-  puts yellow "Generating rss_token and writing to #{file}..."
-  secret = SecureRandom.hex
-  %x( touch #{Rails.root.join("#{file}")}; echo 'FoodsoftConfig.config[:rss_token] = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
 end
 
 def start_mailcatcher
