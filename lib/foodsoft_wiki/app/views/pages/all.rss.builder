@@ -12,7 +12,7 @@ xml.rss :version => "2.0" do
         xml.author User.find(page.updated_by).display
         xml.pubDate page.updated_at.to_s(:rfc822)
         xml.link wiki_page_path(page.permalink)
-        xml.guid wiki_page_path(page.permalink)
+        xml.guid page.updated_at.to_i
       end
     end
   end

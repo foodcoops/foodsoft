@@ -35,8 +35,8 @@ class Page < ActiveRecord::Base
   end
   
   def diff
-    current = versions.order('id DESC').first
-    old = versions.order('id DESC').second
+    current = versions.latest
+    old = versions.where(["page_id = ? and lock_version < ?", current.page_id, current.lock_version]).order('lock_version DESC').first
     
     if old
       o = ''
