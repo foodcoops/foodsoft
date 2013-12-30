@@ -29,6 +29,12 @@ class Finance::BalancingController < Finance::BaseController
 
     render layout: false if request.xhr?
   end
+  
+  def new_on_order_article_update # See publish/subscribe design pattern in /doc.
+    @order_article = OrderArticle.find(params[:order_article_id])
+    
+    render :layout => false
+  end
 
   def update_summary
     @order = Order.find(params[:id])
