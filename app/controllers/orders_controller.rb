@@ -106,17 +106,6 @@ class OrdersController < ApplicationController
     redirect_to orders_url, alert: I18n.t('errors.general_msg', :msg => error.message)
   end
 
-  # ajax add article
-  def add_article
-    @order = Order.find(params[:id])
-    @order_article = @order.order_articles.where(:article_id => params[:article_id]).includes(:article).first
-    # we need to create the order article if it's not part of the current order
-    if @order_article.nil?
-      @order_article = @order.order_articles.build({order: @order, article_id: params[:article_id]})
-      @order_article.save!
-    end
-  end
-
   def receive
     @order = Order.find(params[:id])
     unless request.post?
@@ -125,6 +114,12 @@ class OrdersController < ApplicationController
       flash[:notice] = "Order received: " + update_order_amounts
       redirect_to @order
     end
+  end
+  
+  def receive_on_order_article_create # See publish/subscribe design pattern in /doc.
+    @order_article = OrderArticle.find(params[:order_article_id])
+    
+    render :layout => false
   end
   
   def receive_on_order_article_update # See publish/subscribe design pattern in /doc.

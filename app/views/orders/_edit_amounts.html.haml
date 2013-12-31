@@ -1,9 +1,5 @@
-- new_articles = (@order.supplier.articles rescue @order.articles)
-- new_article_data = articles_for_select2(new_articles, @order_articles.map(&:article_id)) {|a| "#{a.name} (#{a.unit_quantity}⨯#{a.unit})" }
 - content_for :javascript do
   :javascript
-
-    var new_article_data = #{new_article_data.to_json};
 
     function update_delta(input) {
       var units = $(input).val();
@@ -35,45 +31,13 @@
       $('input[data-units-expected]').each(function() {
         update_delta(this);
       });
-
-      init_add_article('#add_article');
     });
 
-    function init_add_article(sel) {
-      $(sel).removeAttr('disabled').select2({
-        placeholder: '#{t 'orders.add_article.title'}',
-        data: new_article_data,
-        // TODO implement adding a new article, like in deliveries
-      }).on('change', function(e) {
-        var selectedArticle = $(e.currentTarget).select2('data');
-        if(!selectedArticle) {
-          return false;
-        }
-
-        $.ajax({
-          url: '#{add_article_order_path(@order)}',
-          type: 'get',
-          data: {article_id: selectedArticle.id},
-          contentType: 'application/json; charset=UTF-8'
-        });
-        // clear selection
-        $('#add_article').select2('data', null);
-        // remove newly added item from list of items
-        new_article_data = $.grep(new_article_data, function(el, i) {
-          return el.id != selectedArticle.id;
-        });
-        init_add_article(sel)
-        return true;
-      });
-    }
-
-
-
-%table.ordered-articles.table.table-striped.stupidtable
+%table#order_articles.ordered-articles.table.table-striped.stupidtable
   %thead
     %tr
       %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :order_number, short: true
-      %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :name
+      %th.default-sort.sort{:data => {:sort => 'string'}}= heading_helper Article, :name
       %th= heading_helper Article, :unit
       %th Members
       %th Ordered
@@ -83,11 +47,11 @@
       %th= heading_helper ArticlePrice, :price
       %th
       %th= t 'ui.actions'
+  %tfoot
+    %tr
+      %th{:colspan => 10}
+        = link_to t('.add_article'), new_order_order_article_path(@order), remote: true, class: 'btn btn-small'
   %tbody#result_table
     - @order_articles.each do |order_article|
       = render :partial => 'edit_amount', :locals => {:order_article => order_article}
-  %tfoot
-    %tr
-      %th{:colspan => 8}
-        %input#add_article{:style => 'width: 500px;'}
 
