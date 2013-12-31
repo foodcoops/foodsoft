@@ -27,6 +27,11 @@ fr:
       article_category:
         description: Description
         name: Nom
+      article_price:
+        deposit: Consigne
+        price: Prix net
+        tax: TVA
+        unit_quantity: Unités par lot
       delivery:
         delivered_on: Date de réapprovisionnement
         note: 

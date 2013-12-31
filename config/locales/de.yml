@@ -27,6 +27,11 @@ de:
       article_category:
         description: Beschreibung
         name: Name
+      article_price:
+        deposit: Pfand
+        price: Nettopreis
+        tax: MwSt
+        unit_quantity: Gebindegröße
       delivery:
         delivered_on: Lieferdatum
         note: Notiz

@@ -27,6 +27,11 @@ en:
       article_category:
         description: Description
         name: Name
+      article_price:
+        deposit: Deposit
+        price: Price (net)
+        tax: VAT
+        unit_quantity: Unit quantity
       delivery:
         delivered_on: Delivery date
         note: Note
