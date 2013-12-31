@@ -1,4 +1,4 @@
-# NOTE: if you modify tiny details here you must also change them in `receive_on_order_article_update.js.erb`
+-# NOTE: if you modify tiny details here you must also change them in `receive_on_order_article_update.js.erb`
 = fields_for 'order_articles', order_article, index: order_article.id do |form|
   %tr{id: "order_article_#{order_article.id}", class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
     - order_title = []
