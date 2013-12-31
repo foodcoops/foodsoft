@@ -10,7 +10,7 @@
       %th= heading_helper Article, :tax
       %th= heading_helper Article, :deposit
       %th{:colspan => "2"}
-        = link_to t('.add_article'), new_finance_order_order_article_path(@order), remote: true,
+        = link_to t('.add_article'), new_order_order_article_path(@order), remote: true,
           class: 'btn btn-small'
   %tbody#result_table
     - for order_article in @articles

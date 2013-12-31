@@ -1,6 +1,6 @@
-class Finance::OrderArticlesController < ApplicationController
+class OrderArticlesController < ApplicationController
 
-  before_filter :authenticate_finance
+  before_filter :authenticate_finance_or_orders
 
   layout false  # We only use this controller to serve js snippets, no need for layout rendering
 

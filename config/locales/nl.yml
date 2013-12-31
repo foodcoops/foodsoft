@@ -615,12 +615,6 @@ nl:
       show:
         back: Terug
         title: Factuur %{number}
-    order_articles:
-      edit:
-        stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!
-        title: Artikel bijwerken
-      new:
-        title: Geleverd artikel aan bestelling toevoegen
     ordergroups:
       index:
         new_transaction: Nieuwe transacties toevoegen
@@ -1067,6 +1061,12 @@ nl:
     model:
       error_single_group: ! '%{user} behoort al tot een ander huishouden'
       invalid_balance: is geen geldig nummer
+  order_articles:
+    edit:
+      stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!
+      title: Artikel bijwerken
+    new:
+      title: Geleverd artikel aan bestelling toevoegen
   orders:
     articles:
       article_count: ! 'Bestelde artikelen:'

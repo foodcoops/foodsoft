@@ -1,4 +1,4 @@
-module Finance::OrderArticlesHelper
+module OrderArticlesHelper
 
   def new_order_articles_collection
     if @order.stockit?

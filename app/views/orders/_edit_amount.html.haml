@@ -25,4 +25,4 @@
     %td.article_price_price= number_to_currency order_article.article_price.price
     %td.units_delta
     %td
-      = link_to t('ui.edit'), edit_finance_order_order_article_path(order_article.order, order_article), remote: true, class: 'btn btn-mini'
+      = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true, class: 'btn btn-mini'

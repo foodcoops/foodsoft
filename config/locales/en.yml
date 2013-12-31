@@ -615,12 +615,6 @@ en:
       show:
         back: Back
         title: Invoice %{number}
-    order_articles:
-      edit:
-        stock_alert: The price of stock articles cannot be changed!
-        title: Update article
-      new:
-        title: Add delivered article to order
     ordergroups:
       index:
         new_transaction: Add new transactions
@@ -1087,6 +1081,12 @@ en:
     model:
       error_single_group: ! '%{user} is already a member of another ordergroup'
       invalid_balance: is not a valid number
+  order_articles:
+    edit:
+      stock_alert: The price of stock articles cannot be changed!
+      title: Update article
+    new:
+      title: Add delivered article to order
   orders:
     add_article:
       title: Add article

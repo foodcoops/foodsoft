@@ -625,12 +625,6 @@ fr:
       show:
         back: Retour
         title: Facture %{number}
-    order_articles:
-      edit:
-        stock_alert: 
-        title: Mettre à jour la liste des article
-      new:
-        title: 
     ordergroups:
       index:
         new_transaction: Saisir une nouvelle transaction
@@ -1092,6 +1086,12 @@ fr:
     model:
       error_single_group: ! '%{user} fait déjà partie d''une autre cellule'
       invalid_balance: n'est pas un nombre valide
+  order_articles:
+    edit:
+      stock_alert: 
+      title: Mettre à jour la liste des article
+    new:
+      title: 
   orders:
     articles:
       article_count: ! 'Articles commandés:'

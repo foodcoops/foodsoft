@@ -20,8 +20,8 @@
 %td #{order_article.price.tax}%
 %td= order_article.price.deposit
 %td
-  = link_to t('ui.edit'), edit_finance_order_order_article_path(order_article.order, order_article), remote: true,
+  = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true,
     class: 'btn btn-mini'
 %td
-  = link_to t('ui.delete'), finance_order_order_article_path(order_article.order, order_article), method: :delete,
+  = link_to t('ui.delete'), order_order_article_path(order_article.order, order_article), method: :delete,
     remote: true, confirm: t('.confirm'), class: 'btn btn-danger btn-mini'
