@@ -11,6 +11,15 @@
           contentType: 'application/json; charset=UTF-8'
         });
       });
+      
+      $(document).on('OrderArticle#create', function(e) {
+        $.ajax({
+          url: '#{new_on_order_article_create_finance_order_path(@order)}',
+          type: 'get',
+          data: {order_article_id: e.order_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
     });
 
 - title t('.title', name: @order.name)

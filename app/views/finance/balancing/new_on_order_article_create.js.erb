@@ -1,0 +1,10 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function(w) {
+  $('#result_table').prepend(
+    '<%= j render('finance/balancing/order_article_result', order_article: @order_article) %>'
+  );
+  
+  $('#summaryChangedWarning').show();
+})(window);
+

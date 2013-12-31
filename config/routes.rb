@@ -150,6 +150,7 @@ Foodsoft::Application.routes.draw do
           put :close
           put :close_direct
           
+          get :new_on_order_article_create
           get :new_on_order_article_update
         end
       end
