@@ -78,6 +78,7 @@ fr:
         starts: Ouverture le
         status: 
       order_article:
+        article: Article
         missing_units: Unités manquantes
         missing_units_short: 
         units_to_order: Quantité

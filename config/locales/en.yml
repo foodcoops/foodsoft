@@ -78,6 +78,7 @@ en:
         starts: Starts at
         status: Status
       order_article:
+        article: Article
         missing_units: Missing units
         missing_units_short: Missing
         units_to_order: Amount of units

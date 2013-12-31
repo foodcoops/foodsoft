@@ -78,6 +78,7 @@ nl:
         starts: Start op
         status: Status
       order_article:
+        article: Artikel
         missing_units: Missende eenheden
         missing_units_short: Nodig
         units_to_order: Aantal eenheden

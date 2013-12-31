@@ -1,9 +1,10 @@
 = simple_form_for [@order, @order_article], remote: true do |form|
+  = form.association :order, as: :hidden
   .modal-header
     = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
     %h3= t '.title'
   .modal-body
-    = form.input :article_id, as: :select, collection: new_order_articles_collection, :label => Article.model_name.human # Why do we need the label?
+    = form.association :article, collection: new_order_articles_collection
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = form.submit class: 'btn btn-primary'

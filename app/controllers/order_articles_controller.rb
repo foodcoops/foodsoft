@@ -18,11 +18,11 @@ class OrderArticlesController < ApplicationController
     if @order_article and @order_article.units_to_order == 0
       @order_article.units_to_order = 1
     else
-      @order_article = @order.order_articles.build(params[:order_article])
+      @order_article = OrderArticle.new(params[:order_article])
     end
-    unless @order_article.save
-      render action: :new
-    end
+    @order_article.save!
+  rescue
+    render action: :new
   end
 
   def edit

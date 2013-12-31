@@ -78,6 +78,7 @@ de:
         starts: Läuft vom
         status: Status
       order_article:
+        article: Artikel
         missing_units: Fehlende Einheiten
         missing_units_short: Fehlende
         units_to_order: Menge
