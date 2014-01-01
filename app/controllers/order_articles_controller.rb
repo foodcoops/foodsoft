@@ -11,7 +11,7 @@ class OrderArticlesController < ApplicationController
 
   def create
     @order = Order.find(params[:order_id])
-    # The article may with zero units ordered - in that case find and set amount to nonzero.
+    # The article may be ordered with zero units - in that case do not complain.
     #   If order_article is ordered and a new order_article is created, an error message will be
     #   given mentioning that the article already exists, which is desired.
     @order_article = @order.order_articles.where(:article_id => params[:order_article][:article_id]).first
