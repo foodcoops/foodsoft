@@ -208,7 +208,6 @@ class OrderArticle < ActiveRecord::Base
   def init_from_balancing
     if order.present? and order.finished?
       self.article_price = article.article_prices.first
-      self.units_to_order = 1
     end
   end
 

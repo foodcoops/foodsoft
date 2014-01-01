@@ -16,7 +16,7 @@ module DeliveriesHelper
     block_given? or block = Proc.new {|a| "#{a.name} (#{number_to_currency a.price}/#{a.unit})" }
     articles.map do |a|
       {:id => a.id, :text => block.call(a)}
-    end
+    end.unshift({:id => '', :text => ''})
   end
   
   def articles_for_table(articles)

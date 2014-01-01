@@ -1,3 +1,5 @@
+- new_articles = (@order.supplier.articles rescue @order.articles)
+- new_article_data = articles_for_select2(new_articles, @order_articles.map(&:article_id)) {|a| "#{a.name} (#{a.unit_quantity}⨯#{a.unit})"}
 - content_for :javascript do
   :javascript
 
@@ -31,7 +33,31 @@
       $('input[data-units-expected]').each(function() {
         update_delta(this);
       });
+      
+      init_add_article('#add_article');
     });
+    
+    function init_add_article(sel) {
+      $(sel).removeAttr('disabled').select2({
+        placeholder: '#{j t('orders.add_article.title')}',
+        formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
+        // TODO implement adding a new article, like in deliveries
+      }).on('change', function(e) {
+        var selectedArticle = $(e.currentTarget).select2('data');
+        if(!selectedArticle) {
+          return false;
+        }
+
+        $.ajax({
+          url: '#{order_order_articles_path(@order)}',
+          type: 'post',
+          data: JSON.stringify({order_article: {article_id: selectedArticle.id}}),
+          contentType: 'application/json; charset=UTF-8'
+        });
+        
+        $('#add_article').select2('data', null);
+      }).select2('data', null);
+    }
 
 %table#order_articles.ordered-articles.table.table-striped.stupidtable
   %thead
@@ -50,7 +76,9 @@
   %tfoot
     %tr
       %th{:colspan => 10}
-        = link_to t('.add_article'), new_order_order_article_path(@order), remote: true, class: 'btn btn-small'
+        %select#add_article{:style => 'width: 500px;'}
+          - new_article_data.each do |option|
+            %option{id: "add_article_#{option[:id]}", value: option[:id]}= option[:text]
   %tbody#result_table
     - @order_articles.each do |order_article|
       = render :partial => 'edit_amount', :locals => {:order_article => order_article}

@@ -6,7 +6,7 @@ class OrderArticlesController < ApplicationController
 
   def new
     @order = Order.find(params[:order_id])
-    @order_article = @order.order_articles.build
+    @order_article = @order.order_articles.build(params[:order_article])
   end
 
   def create
@@ -15,9 +15,7 @@ class OrderArticlesController < ApplicationController
     #   If order_article is ordered and a new order_article is created, an error message will be
     #   given mentioning that the article already exists, which is desired.
     @order_article = @order.order_articles.where(:article_id => params[:order_article][:article_id]).first
-    if @order_article and @order_article.units_to_order == 0
-      @order_article.units_to_order = 1 # FIXME: this is ugly if used in the receive form
-    else
+    unless (@order_article and @order_article.units_to_order == 0)
       @order_article = @order.order_articles.build(params[:order_article])
     end
     @order_article.save!

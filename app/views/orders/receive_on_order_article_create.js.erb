@@ -1,6 +1,8 @@
 // Handle more advanced DOM update after AJAX database manipulation.
 // See publish/subscribe design pattern in /doc.
 (function(w) {
+  $('#order_article_<%= @order_article.id %>').remove(); // just to be sure: remove table row which is added below
+  
   $('#order_articles tr').removeClass('success');
   
   var order_article_entry = $(
@@ -9,5 +11,7 @@
   
   $('#order_articles tbody').append(order_article_entry);
   updateSort('#order_articles');
+  
+  $('#add_article_<%= @order_article.article.id %>').remove(); // remove option to add this article
 })(window);
 
