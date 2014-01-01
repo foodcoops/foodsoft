@@ -18,7 +18,7 @@ class OrderArticlesController < ApplicationController
     if @order_article and @order_article.units_to_order == 0
       @order_article.units_to_order = 1 # FIXME: this is ugly if used in the receive form
     else
-      @order_article = OrderArticle.new(params[:order_article])
+      @order_article = @order.order_articles.build(params[:order_article])
     end
     @order_article.save!
   rescue
