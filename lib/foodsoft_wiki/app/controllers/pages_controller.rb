@@ -5,6 +5,9 @@ class PagesController < ApplicationController
   before_filter :only => :all do
     authenticate_or_token(['wiki', 'all'])
   end
+  before_filter do
+    content_for :head, view_context.rss_meta_tag
+  end
 
   def index
     @page = Page.find_by_permalink "Home"

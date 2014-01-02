@@ -8,9 +8,7 @@
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     //%link(href="images/favicon.ico" rel="shortcut icon")
-    - if respond_to? :rss_meta_tag
-      = rss_meta_tag
-      
+    
     = yield(:head)
 
   %body
