@@ -89,12 +89,9 @@ class ApplicationController < ActionController::Base
 
   def authenticate_or_token(prefix, role = 'any')
     if not params[:token].blank?
-      token = begin
+      begin
         TokenVerifier.new(prefix).verify(params[:token])
-      rescue
-      end
-      
-      unless token
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
         redirect_to root_path, alert: I18n.t('application.controller.error_token')
       end
     else
