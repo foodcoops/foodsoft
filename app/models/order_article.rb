@@ -89,12 +89,12 @@ class OrderArticle < ActiveRecord::Base
 
   # Calculate price for ordered quantity.
   def total_price
-    units_to_order * price.unit_quantity * price.price
+    units * price.unit_quantity * price.price
   end
 
   # Calculate gross price for ordered qunatity.
   def total_gross_price
-    units_to_order * price.unit_quantity * price.gross_price
+    units * price.unit_quantity * price.gross_price
   end
 
   def ordered_quantities_different_from_group_orders?(ordered_mark="!", billed_mark="?", received_mark="?")
