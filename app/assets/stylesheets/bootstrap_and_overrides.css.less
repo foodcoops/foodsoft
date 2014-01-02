@@ -263,12 +263,17 @@ tr.unavailable {
 }
 
 // show package icon after amount of package numbers
-.package {
+input.package {
   background: url(package-bg.png) no-repeat right center;
 }
 i.package {
-  width: 18px;
-  color: transparent; // hide text inside
+  background: url(package-bg.png) no-repeat left center;
+  min-width: 18px;
+  padding-left: 20px;
+  font-style: normal;
+}
+.package {
+  color: #999;
 }
 .input-nano {
   width: 30px;

@@ -65,12 +65,11 @@
       %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :order_number, short: true
       %th.default-sort.sort{:data => {:sort => 'string'}}= heading_helper Article, :name
       %th= heading_helper Article, :unit
+      %th= heading_helper Article, :price
       %th Members
       %th Ordered
-      %th= heading_helper Article, :price
       -#%th Invoice # TODO implement invoice screen
       %th Received
-      %th= heading_helper ArticlePrice, :price
       %th
       %th= t 'ui.actions'
   %tfoot

@@ -25,4 +25,13 @@ module OrdersHelper
       units_info += ", #{order_article.units_received} received" unless order_article.units_received.nil?
     end
   end
+
+  # can be article or article_price
+  def pkg_helper(article, icon=true)
+    if icon
+      "<i class='package'> &times; #{article.unit_quantity}</i>".html_safe
+    else
+      "<span class='package'> &times; #{article.unit_quantity}</span>".html_safe
+    end
+  end
 end

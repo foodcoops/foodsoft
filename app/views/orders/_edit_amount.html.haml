@@ -8,21 +8,19 @@
     %td= order_article.article.order_number
     %td.name{title: order_title.join("\n")}= order_article.article.name
     %td.unit= order_article.article.unit
+    %td.article_price= number_to_currency order_article.article.price
     %td #{order_article.quantity} + #{order_article.tolerance}
     %td
       = order_article.units_to_order
-      %i.package pkg
-      %span.article_unit_quantity (&times; #{order_article.article.unit_quantity})
-    %td.article_price= number_to_currency order_article.article.price
+      = pkg_helper order_article.article
     -#%td # TODO implement invoice screen
       - unless order_article.units_billed.nil?
         = order_article.units_billed
-        %i.package pkg
+        = pkg_helper order_article.article
     %td
       = form.text_field :units_received, class: 'input-nano package', data: {'units-expected' => units_expected}
-      %span.article_price_unit_quantity (&times; #{order_article.article_price.unit_quantity})
+      = pkg_helper order_article.article_price, false
       / TODO add almost invisible text_field for entering single units
-    %td.article_price_price= number_to_currency order_article.article_price.price
     %td.units_delta
     %td
       = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true, class: 'btn btn-mini'
