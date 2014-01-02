@@ -62,8 +62,7 @@
     }
     
     function unlock_receive_input_field() {
-      var order_article_entry = $(this).closest('tr');
-      $('.units_received', order_article_entry).removeAttr('readonly');
+      $('.units_received', $(this).closest('tr')).prop('readonly', false);
       $(this).remove();
     }
 
