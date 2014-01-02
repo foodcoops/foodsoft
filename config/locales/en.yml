@@ -27,6 +27,11 @@ en:
       article_category:
         description: Description
         name: Name
+      article_price:
+        deposit: Deposit
+        price: Price (net)
+        tax: VAT
+        unit_quantity: Unit quantity
       delivery:
         delivered_on: Delivery date
         note: Note
@@ -1178,6 +1183,7 @@ en:
       title_list: List of pages
     body:
       title_toc: Content
+      wikicloth_exception: "I'm sorry to report that an error occured when interpreting the wiki page: %{msg}. Please try to fix it, and save the page again."
     create:
       notice: Page was created
     cshow:
@@ -1371,6 +1377,8 @@ en:
       title: Copy stock article
     create:
       notice: New stock article "%{name}" was created.
+    derive:
+      title: Add stock article using template
     destroy:
       notice: Article %{name} was deleted.
     edit:

@@ -126,6 +126,15 @@ $(function() {
         $(this).children('input[type="submit"]').attr('disabled', 'disabled');
     });
 
+    // The autocomplete attribute is used for both autocompletion and storing
+    // for passwords, it's nice to store it when editing one's own profile,
+    // but never autocomplete. Only implemented for passwords.
+    $('input[type="password"][autocomplete="off"][data-store="on"]').each(function() {
+      $(this).on('change', function() {
+        $(this).removeAttr('autocomplete');
+      });
+    });
+
     // Use bootstrap datepicker for dateinput
     $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
 
