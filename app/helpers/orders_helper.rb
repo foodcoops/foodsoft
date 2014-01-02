@@ -35,6 +35,11 @@ module OrdersHelper
     end
   end
   
+  def article_price_change_hint(order_article)
+    return nil if order_article.article.price == order_article.article_price.price
+    "<i class='icon icon-asterisk' title='#{j t('.old_price', default: 'Old price')}: #{number_to_currency order_article.article.price}'></i>".html_safe
+  end
+  
   def receive_input_field(form)
     order_article = form.object
     units_expected = (order_article.units_billed or order_article.units_to_order)
