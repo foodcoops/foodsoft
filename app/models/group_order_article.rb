@@ -190,7 +190,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
   # Check if the result deviates from the result_computed
   def result_manually_changed?
-    result != result_computed
+    result != result_computed unless result.nil?
   end
 end
 
