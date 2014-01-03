@@ -62,7 +62,7 @@
     }
     
     function unlock_receive_input_field() {
-      $('.units_received', $(this).closest('tr')).prop('readonly', false);
+      $('.units_received', $(this).closest('tr')).prop('disabled', false);
       $(this).remove();
     }
 

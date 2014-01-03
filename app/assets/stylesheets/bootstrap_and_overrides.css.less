@@ -265,6 +265,10 @@ tr.unavailable {
 // show package icon after amount of package numbers
 input.package {
   background: url(package-bg.png) no-repeat right center;
+  // disabled and readonly definitions though
+  &[disabled], &[readonly] {
+    background-color: @inputDisabledBackground;
+  }
 }
 i.package {
   background: url(package-bg.png) no-repeat left center;
@@ -275,6 +279,7 @@ i.package {
 .package {
   color: #999;
 }
+
 .input-nano {
   width: 30px;
 }
