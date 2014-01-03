@@ -4,8 +4,8 @@
   // get old element and update the cell which is reused
   var old_order_article_entry = $('#order_article_<%= @order_article.id %>');
   
-  $('td.units_received_cell .package', old_order_article_entry).text(
-    '× <%= @order_article.article_price.unit_quantity %>'
+  $('td.units_received_cell span.package', old_order_article_entry).replaceWith(
+    '<%= j pkg_helper(@order_article.article_price, false) %>'
   );
   
   // render new element and inject dynamic cell
