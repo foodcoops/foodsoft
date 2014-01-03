@@ -8,7 +8,7 @@
     %td.name{title: order_title.join("\n")}= order_article.article.name
     %td.unit= order_article.article.unit
     %td.article_price
-      = number_to_currency order_article.article.price
+      = number_to_currency order_article.article_price.price
       = article_price_change_hint(order_article)
     %td #{order_article.quantity} + #{order_article.tolerance}
     %td
