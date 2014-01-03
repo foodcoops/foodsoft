@@ -3,10 +3,10 @@
 %td= order_article.article.order_number
 %td{title: units_history_line(order_article)}
   = order_article.units
-  %i.package pkg
+  = pkg_helper order_article.article_price
   - if s=order_article.ordered_quantities_different_from_group_orders?
     %span{:style => "color:red;font-weight: bold"}= s
-%td #{order_article.price.unit_quantity} &times; #{order_article.article.unit}
+%td #{order_article.article.unit}
 %td
   = number_to_currency(order_article.price.price, :unit => "")
   :plain

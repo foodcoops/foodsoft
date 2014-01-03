@@ -55,6 +55,12 @@ body {
 
 @mainRedColor: #ED0606;
 
+@articleUsedColor: green;
+@articleUnusedColor: red;
+@articleUnavailColor: #999;
+@articleUpdatedColor: #468847;
+
+
 .logo {
   margin: 10px 0 0 30px;
   float: left;
@@ -135,10 +141,10 @@ table {
 
 // ordering
 .used {
-  color: green;
+  color: @articleUsedColor;
 }
 .unused {
-  color: red;
+  color: @articleUnusedColor;
 }
 
 #order-footer, .article-info {
@@ -202,11 +208,11 @@ tr.order-article:hover .article-info {
 // ********* Articles
 
 tr.just-updated {
-  color: #468847;
+  color: @articleUpdatedColor;
 }
 
 tr.unavailable {
-  color: #999;
+  color: @articleUnavailColor;
 }
 
 // articles edit all
@@ -276,9 +282,11 @@ i.package {
   padding-left: 20px;
   font-style: normal;
 }
-.package {
-  color: #999;
-}
+@packageDim: 35%;
+.package              { color: tint(@textColor, @packageDim); }
+.used        .package { color: tint(@articleUsedColor, @packageDim); }
+.unused      .package { color: tint(@articleUnusedColor, @packageDim); }
+.unavailable .package { color: @articleUnavailColor; }
 
 .input-nano {
   width: 30px;

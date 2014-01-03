@@ -2,7 +2,7 @@
   %thead
     %tr
       %th= heading_helper Article, :name
-      %th= heading_helper Article, :units
+      %th= heading_helper Article, :unit
       %th= t '.prices'
       - if order.stockit?
         %th= t '.units_ordered'
@@ -27,8 +27,10 @@
         - cssclass = (units > 0 ? 'used' : (order_article.quantity > 0 ? 'unused' : 'unavailable'))
         %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + cssclass}
           %td=h order_article.article.name
-          %td #{unit_quantity} &times; #{order_article.article.unit}
-          %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
+          %td= order_article.article.unit
+          %td
+            = "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
+            = article_price_change_hint(order_article, gross: true)
           - if order.stockit?
             %td= units
           - else
@@ -38,7 +40,7 @@
               %td= "#{order_article.quantity}"
             %td{title: units_history_line(order_article)}
               = units
-              %i.package pkg
+              = pkg_helper order_article.price
 %p
   = t '.prices_sum'
   = "#{number_to_currency(total_net)} / #{number_to_currency(total_gross)}"

@@ -28,6 +28,7 @@ module OrdersHelper
 
   # can be article or article_price
   def pkg_helper(article, icon=true)
+    return nil if article.unit_quantity == 1
     if icon
       "<i class='package'> &times; #{article.unit_quantity}</i>".html_safe
     else
@@ -35,9 +36,11 @@ module OrdersHelper
     end
   end
   
-  def article_price_change_hint(order_article)
+  def article_price_change_hint(order_article, gross=false)
     return nil if order_article.article.price == order_article.article_price.price
-    "<i class='icon icon-asterisk' title='#{j t('.old_price', default: 'Old price')}: #{number_to_currency order_article.article.price}'></i>".html_safe
+    title = "#{t('.old_price')}: #{number_to_currency order_article.article.price}"
+    title += " / #{number_to_currency order_article.article.gross_price}" if gross
+    "<i class='icon-asterisk' title='#{j title}'></i>".html_safe
   end
   
   def receive_input_field(form)

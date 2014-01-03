@@ -4,7 +4,7 @@
       %th= sort_link_helper Article.model_name.human, "name"
       %th= sort_link_helper Article.human_attribute_name(:order_number_short), "order_number"
       %th= t('.amount')
-      %th= heading_helper Article, :units
+      %th= heading_helper Article, :unit
       %th= t('.net')
       %th= t('.gross')
       %th= heading_helper Article, :tax
