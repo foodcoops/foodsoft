@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130930132511) do
+ActiveRecord::Schema.define(:version => 20140102170431) do
 
   create_table "article_categories", :force => true do |t|
     t.string "name",        :default => "", :null => false
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20130930132511) do
     t.integer  "tolerance",                                      :default => 0, :null => false
     t.datetime "updated_on",                                                    :null => false
     t.decimal  "result",           :precision => 8, :scale => 3
+    t.decimal  "result_computed",  :precision => 8, :scale => 3
   end
 
   add_index "group_order_articles", ["group_order_id", "order_article_id"], :name => "goa_index", :unique => true
