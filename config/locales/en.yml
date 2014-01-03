@@ -274,7 +274,8 @@ en:
   application:
     controller:
       error_authn: Authentication required!
-      error_denied: Access denied!
+      error_denied: You are not allowed to view the requested page. If you think you should, ask an administrator to give you appropriate permissions. If you have access to multiple user accounts, you might want to %{sign_in}.
+      error_denied_sign_in: sign in as another user
       error_members_only: This action is only available to members of the group!
   article_categories:
     create:

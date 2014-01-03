@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def deny_access
     session[:return_to] = request.original_url
-    redirect_to login_url, :alert => I18n.t('application.controller.error_denied')
+    redirect_to root_url, alert: I18n.t('application.controller.error_denied', sign_in: ActionController::Base.helpers.link_to(t('application.controller.error_denied_sign_in'), login_path))
   end
 
   private
