@@ -165,9 +165,11 @@ class GroupOrderArticle < ActiveRecord::Base
     self[:result] || calculate_result[type]
   end
 
-  # This is used during order.finish!.
+  # This is used for automatic distribution, e.g., in order.finish! or when receiving orders
   def save_results!(article_total = nil)
-    self.update_attribute(:result, calculate_result(article_total)[:total])
+    new_result = calculate_result(article_total)[:total]
+    self.update_attribute(:result_computed, new_result)
+    self.update_attribute(:result, new_result)
   end
 
   # Returns total price for this individual article
@@ -186,6 +188,10 @@ class GroupOrderArticle < ActiveRecord::Base
     end
   end
 
+  # Check if the result deviates from the result_computed
+  def result_manually_changed?
+    result != result_computed
+  end
 end
 
 

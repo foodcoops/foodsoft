@@ -1102,6 +1102,8 @@ en:
       notice: The order was created.
     edit:
       title: Edit order
+    edit_amount:
+      locked_to_protect_manual_update: The distribution of this article among the ordergroups was changed manually. This field is locked in order to protect those changes.
     fax:
       amount: Amount
       articles: Articles

@@ -34,4 +34,14 @@ module OrdersHelper
       "<span class='package'> &times; #{article.unit_quantity}</span>".html_safe
     end
   end
+  
+  def receive_input_field(form)
+    order_article = form.object
+    units_expected = (order_article.units_billed or order_article.units_to_order)
+    form.text_field :units_received, class: 'input-nano package units_received',
+      data: {'units-expected' => units_expected},
+      readonly: order_article.result_manually_changed? ? "readonly" : nil,
+      title: order_article.result_manually_changed? ? t('.locked_to_protect_manual_update') : nil,
+      autocomplete: 'off'
+  end
 end

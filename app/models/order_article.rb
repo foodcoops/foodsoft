@@ -195,6 +195,11 @@ class OrderArticle < ActiveRecord::Base
     units = 0 if units < 0
     units
   end
+  
+  # Check if the result of any associated GroupOrderArticle was overridden manually
+  def result_manually_changed?
+    group_order_articles.any? {|goa| goa.result_manually_changed?}
+  end
 
   private
   

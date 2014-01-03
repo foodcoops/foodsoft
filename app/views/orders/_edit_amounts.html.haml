@@ -35,6 +35,8 @@
       });
       
       init_add_article('#add_article');
+      
+      $('.unlocker', '#order_articles tbody').on('click', unlock_receive_input_field);
     });
     
     function init_add_article(sel) {
@@ -57,6 +59,12 @@
         
         $('#add_article').select2('data', null);
       }).select2('data', null);
+    }
+    
+    function unlock_receive_input_field() {
+      var order_article_entry = $(this).closest('tr');
+      $('.units_received', order_article_entry).removeAttr('readonly');
+      $(this).remove();
     }
 
 %table#order_articles.ordered-articles.table.table-striped.stupidtable

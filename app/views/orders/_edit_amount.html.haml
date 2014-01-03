@@ -4,7 +4,6 @@
     - order_title = []
     - order_title.append Article.human_attribute_name(:manufacturer)+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
     - order_title.append Article.human_attribute_name(:note)+': ' + order_article.article.note unless order_article.article.note.to_s.empty?
-    - units_expected = (order_article.units_billed or order_article.units_to_order)
     %td= order_article.article.order_number
     %td.name{title: order_title.join("\n")}= order_article.article.name
     %td.unit= order_article.article.unit
@@ -18,8 +17,10 @@
         = order_article.units_billed
         = pkg_helper order_article.article
     %td
-      = form.text_field :units_received, class: 'input-nano package', data: {'units-expected' => units_expected}
+      = receive_input_field(form)
       = pkg_helper order_article.article_price, false
+      - if order_article.result_manually_changed?
+        %input{type: :button, value: t('.override', default: 'Override'), class: 'btn btn-small unlocker'}
       / TODO add almost invisible text_field for entering single units
     %td.units_delta
     %td
