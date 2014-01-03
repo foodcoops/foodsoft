@@ -30,7 +30,19 @@ body {
 // Example:
 // @linkColor: #ff0000;
 
-// Custom styles
+
+// main ui colours
+@mainRedColor: #ED0606;
+
+// article status
+@articleUsedColor: green;
+@articleUnusedColor: red;
+@articleUnavailColor: #999;
+@articleUpdatedColor: #468847;
+
+// dim colors by this amount when the information is less important
+@nonessentialDim: 35%;
+
 
 // Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
 .dl-horizontal { 
@@ -52,13 +64,6 @@ body {
 .tooltip-inner .table {
   margin-bottom: 0;
 }
-
-@mainRedColor: #ED0606;
-
-@articleUsedColor: green;
-@articleUnusedColor: red;
-@articleUnavailColor: #999;
-@articleUpdatedColor: #468847;
 
 
 .logo {
@@ -258,6 +263,13 @@ tr.unavailable {
   }
 }
 
+// it's a bit distracting
+.icon-asterisk {
+  font-size: 80%;
+  vertical-align: middle;
+  padding-bottom: 0.4ex;
+}
+
 // allow buttons as input add-on (with proper height)
 .input-append button.add-on {
   height: inherit;
@@ -282,10 +294,9 @@ i.package {
   padding-left: 20px;
   font-style: normal;
 }
-@packageDim: 35%;
-.package              { color: tint(@textColor, @packageDim); }
-.used        .package { color: tint(@articleUsedColor, @packageDim); }
-.unused      .package { color: tint(@articleUnusedColor, @packageDim); }
+.package              { color: tint(@textColor, @nonessentialDim); }
+.used        .package { color: tint(@articleUsedColor, @nonessentialDim); }
+.unused      .package { color: tint(@articleUnusedColor, @nonessentialDim); }
 .unavailable .package { color: @articleUnavailColor; }
 
 .input-nano {

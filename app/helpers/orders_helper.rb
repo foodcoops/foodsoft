@@ -38,7 +38,7 @@ module OrdersHelper
   
   def article_price_change_hint(order_article, gross=false)
     return nil if order_article.article.price == order_article.price.price
-    title = "#{t('.old_price')}: #{number_to_currency order_article.article.price}"
+    title = "#{t('helpers.orders.old_price')}: #{number_to_currency order_article.article.price}"
     title += " / #{number_to_currency order_article.article.gross_price}" if gross
     "<i class='icon-asterisk' title='#{j title}'></i>".html_safe
   end

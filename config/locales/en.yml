@@ -738,6 +738,7 @@ en:
       new_invoice: New invoice
       show_invoice: Show invoice
     orders:
+      old_price: Old price
       option_choose: Choose supplier/stock
       option_stock: Stock
       order_pdf: Create PDF
