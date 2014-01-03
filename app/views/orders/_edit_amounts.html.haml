@@ -62,8 +62,8 @@
     }
     
     function unlock_receive_input_field() {
-      $('.units_received', $(this).closest('tr')).prop('disabled', false);
-      $(this).remove();
+      $('.units_received', $(this).closest('tr')).prop('disabled', false).focus();
+      $(this).replaceWith('<i class="icon icon-warning-sign add-on"></i>');
     }
 
 %table#order_articles.ordered-articles.table.table-striped.stupidtable

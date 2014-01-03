@@ -46,10 +46,21 @@ module OrdersHelper
   def receive_input_field(form)
     order_article = form.object
     units_expected = (order_article.units_billed or order_article.units_to_order)
-    form.text_field :units_received, class: 'input-nano package units_received',
+    
+    # unlock button, to prevent overwriting if it was manually distributed
+    input_html = ''
+    if order_article.result_manually_changed?
+      input_html += '<span class="input-prepend intable">' +
+        button_tag(nil, type: :button, class: 'btn unlocker', title: t('.locked_to_protect_unlock_button')) {'<i class="icon icon-unlock"></i>'.html_safe}
+    end
+    
+    input_html += form.text_field :units_received, class: 'input input-nano package units_received',
       data: {'units-expected' => units_expected},
       disabled: order_article.result_manually_changed?,
       title: order_article.result_manually_changed? ? t('.locked_to_protect_manual_update') : nil,
       autocomplete: 'off'
+    
+    input_html += '</span>' if order_article.result_manually_changed?
+    input_html.html_safe
   end
 end
