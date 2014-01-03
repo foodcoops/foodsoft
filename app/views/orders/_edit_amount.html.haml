@@ -21,9 +21,10 @@
     %td.units_received_cell
       = receive_input_field(form)
       = pkg_helper order_article.article_price, false
-      - if order_article.result_manually_changed?
-        %input{type: :button, value: t('.override', default: 'Override'), class: 'btn btn-small unlocker'}
       / TODO add almost invisible text_field for entering single units
     %td.units_delta
     %td
-      = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true, class: 'btn btn-mini'
+      = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true, class: 'btn btn-small'
+      - if order_article.result_manually_changed?
+        = button_tag nil, class: 'btn btn-small unlocker', title: t('.locked_to_protect_unlock_button') do
+          %i.icon-unlock

@@ -1103,7 +1103,8 @@ en:
     edit:
       title: Edit order
     edit_amount:
-      locked_to_protect_manual_update: The distribution of this article among the ordergroups was changed manually. This field is locked in order to protect those changes.
+      locked_to_protect_manual_update: The distribution of this article among the ordergroups was changed manually. This field is locked in order to protect those changes. To redistribute anyway, press the unlock button and change the amount.
+      locked_to_protect_unlock_button: Press this button to unlock the received field. Any previous manual changes will be overwritten and the article will be redistributed over the ordergroups.
     fax:
       amount: Amount
       articles: Articles
