@@ -24,7 +24,7 @@
       / TODO add almost invisible text_field for entering single units
     %td.units_delta
     %td
-      = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true, class: 'btn btn-small'
+      = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article, without_units: true), remote: true, class: 'btn btn-small'
       - if order_article.result_manually_changed?
         = button_tag nil, class: 'btn btn-small unlocker', title: t('.locked_to_protect_unlock_button') do
           %i.icon-unlock
