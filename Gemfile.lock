@@ -23,6 +23,7 @@ PATH
   specs:
     foodsoft_wiki (0.0.1)
       acts_as_versioned
+      content_for_in_controllers
       diffy
       rails (~> 3.2.15)
       wikicloth
@@ -373,7 +374,6 @@ DEPENDENCIES
   client_side_validations
   client_side_validations-simple_form
   coffee-rails (~> 3.2.1)
-  content_for_in_controllers
   coveralls
   daemons
   database_cleaner

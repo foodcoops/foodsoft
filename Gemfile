@@ -44,7 +44,6 @@ gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
 gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
-gem 'content_for_in_controllers'
 
 group :production do
   gem 'exception_notification'
