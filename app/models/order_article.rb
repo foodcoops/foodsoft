@@ -110,7 +110,7 @@ class OrderArticle < ActiveRecord::Base
           # Updates also price attributes of article if update_current_price is selected
           if update_current_price
             article.update_attributes!(price_attributes)
-            self.article_price = article.article_prices.first # Assign new created article price to order article
+            self.article_price = article.article_prices.first and save # Assign new created article price to order article
           else
             # Creates a new article_price if neccessary
             # Set created_at timestamp to order ends, to make sure the current article price isn't changed
