@@ -1,6 +1,14 @@
 # encoding: utf-8
 class PagesController < ApplicationController
 
+  skip_before_filter :authenticate, :only => :all
+  before_filter :only => :all do
+    authenticate_or_token(['wiki', 'all'])
+  end
+  before_filter do
+    content_for :head, view_context.rss_meta_tag
+  end
+
   def index
     @page = Page.find_by_permalink "Home"
 
@@ -113,6 +121,10 @@ class PagesController < ApplicationController
           'title DESC'
               end
       @pages.order(order)
+    end
+    respond_to do |format|
+      format.html
+      format.rss { render :layout => false }
     end
   end
 
