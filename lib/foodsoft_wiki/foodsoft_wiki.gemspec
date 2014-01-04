@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.15"
   s.add_dependency 'wikicloth'
   s.add_dependency 'acts_as_versioned' # need git version, make sure that is included in foodsoft's Gemfile
-
+  s.add_dependency 'diffy'
+  s.add_dependency 'content_for_in_controllers'
   s.add_development_dependency "sqlite3"
 end

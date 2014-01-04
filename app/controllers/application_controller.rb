@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
+  
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
     if !current_user
@@ -84,6 +84,18 @@ class ApplicationController < ActionController::Base
     @group = Group.find(params[:id])
     unless @group.member?(@current_user) or @current_user.role_admin?
       redirect_to root_path, alert: I18n.t('application.controller.error_members_only')
+    end
+  end
+
+  def authenticate_or_token(prefix, role = 'any')
+    if not params[:token].blank?
+      begin
+        TokenVerifier.new(prefix).verify(params[:token])
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
+        redirect_to root_path, alert: I18n.t('application.controller.error_token')
+      end
+    else
+      authenticate(role)
     end
   end
 
