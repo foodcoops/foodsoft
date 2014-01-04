@@ -81,7 +81,7 @@ fr:
         missing_units: Unités manquantes
         missing_units_short: 
         units_to_order: Quantité
-        update_current_price: Mettre à jour le prix global
+        update_global_price: Mettre à jour le prix global
       order_comment:
         text: Commenter cette commande...
       ordergroup:
@@ -1292,7 +1292,7 @@ fr:
         private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       order_article:
         units_to_order: 
-        update_current_price: Modifie aussi le prix des commandes en cours
+        update_global_price: # ATTENTION, MEANING CHANGED. OLD (NOW WRONG) TRANSLATION WAS 'Modifie aussi le prix des commandes en cours'
       stock_article:
         copy:
           name: Merci de modifier

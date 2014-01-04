@@ -81,7 +81,7 @@ de:
         missing_units: Fehlende Einheiten
         missing_units_short: Fehlende
         units_to_order: Menge
-        update_current_price: Globalen Preis aktualisieren
+        update_global_price: Globalen Preis aktualisieren
       order_comment:
         text: Kommentiere diese Bestellung ...
       ordergroup:
@@ -1287,7 +1287,7 @@ de:
         private: Nachricht erscheint nicht im Foodsoft Posteingang
       order_article:
         units_to_order: Wenn Du die Gesamtanzahl gelieferter Gebinde änderst, musst Du auch die individuelle Anzahl der einzelnen Bestellgruppen anpassen, indem Du auf den Artikelnamen klickst. Sie werden nicht automatisch neuberechnet und andernfalls werden den Bestellgruppen Artikel in Rechnung gestellt, die nicht geliefert wurden!
-        update_current_price: Ändert auch den Preis für aktuelle Bestellungen
+        update_global_price: Ändert auch den Preis für zukünftige Bestellungen
       stock_article:
         copy:
           name: Bitte ändern

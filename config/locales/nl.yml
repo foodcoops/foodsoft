@@ -81,7 +81,7 @@ nl:
         missing_units: Missende eenheden
         missing_units_short: Nodig
         units_to_order: Aantal eenheden
-        update_current_price: Huidige prijs overal bijwerken
+        update_global_price: Huidige prijs overal bijwerken
       order_comment:
         text: Commentaar voor deze bestelling toevoegen ...
       ordergroup:
@@ -1269,7 +1269,7 @@ nl:
         private: Bericht wordt niet getoond in de Foodsoft inbox.
       order_article:
         units_to_order: Als je het aantal geleverde eenheden wijzigt, moet je daarna de hoeveelheden voor huishoudens aanpassen. Klik daarvoor op de artikelnaam. Als je dit vergeet, kunnen huishoudens belast worden voor artikelen die ze niet hebben gekregen!
-        update_current_price: Ook prijs in huidige besteling aanpassen
+        update_global_price: # ATTENTION, MEANING CHANGED. OLD (NOW WRONG) TRANSLATION WAS 'Ook prijs in huidige besteling aanpassen'
       stock_article:
         copy:
           name: Wijzigen alsjeblieft

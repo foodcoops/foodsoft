@@ -1,7 +1,7 @@
 # An OrderArticle represents a single Article that is part of an Order.
 class OrderArticle < ActiveRecord::Base
 
-  attr_reader :update_current_price
+  attr_reader :update_global_price
 
   belongs_to :order
   belongs_to :article
@@ -107,8 +107,8 @@ class OrderArticle < ActiveRecord::Base
       if price_attributes.present?
         article_price.attributes = price_attributes
         if article_price.changed?
-          # Updates also price attributes of article if update_current_price is selected
-          if update_current_price
+          # Updates also price attributes of article if update_global_price is selected
+          if update_global_price
             article.update_attributes!(price_attributes)
             self.article_price = article.article_prices.first and save # Assign new created article price to order article
           else
@@ -124,8 +124,8 @@ class OrderArticle < ActiveRecord::Base
     end
   end
 
-  def update_current_price=(value)
-    @update_current_price = (value == true or value == '1') ?  true : false
+  def update_global_price=(value)
+    @update_global_price = (value == true or value == '1') ?  true : false
   end
 
   # Units missing for the next full unit_quantity of the article
