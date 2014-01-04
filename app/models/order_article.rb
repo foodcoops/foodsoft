@@ -115,6 +115,12 @@ class OrderArticle < ActiveRecord::Base
             # Creates a new article_price if neccessary
             # Set created_at timestamp to order ends, to make sure the current article price isn't changed
             create_article_price!(price_attributes.merge(created_at: order.ends)) and save
+            # TODO: The price_attributes do not include an article_id so that
+            #   the entry in the database will not "know" which article is
+            #   referenced. Let us check the effect of that and change it or
+            #   comment on the meaning.
+            #   Possibly this is the real reason why the global price is not
+            #   affected instead of the `created_at: order.ends` injection.
           end
 
           # Updates ordergroup values
