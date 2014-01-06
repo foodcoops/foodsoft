@@ -5,7 +5,7 @@
   - if @invoice.delivery
     %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
   - if @invoice.order
-    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), @invoice.order)).html_safe
+    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), new_finance_order_path(order_id: @invoice.order.id))).html_safe
 
   = f.association :supplier, hint: false
   = f.input :number

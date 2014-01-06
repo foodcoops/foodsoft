@@ -27,6 +27,11 @@ de:
       article_category:
         description: Beschreibung
         name: Name
+      article_price:
+        deposit: Pfand
+        price: Nettopreis
+        tax: MwSt
+        unit_quantity: Gebindegröße
       delivery:
         delivered_on: Lieferdatum
         note: Notiz
@@ -269,7 +274,8 @@ de:
   application:
     controller:
       error_authn: Anmeldung erforderlich!
-      error_denied: Kein Zugriff!
+      error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine Administratorin, dass sie Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
+      error_denied_sign_in: als ein anderer Benutzer anmelden
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
   article_categories:
     create:
@@ -1165,6 +1171,7 @@ de:
       title_list: Seiten-Liste
     body:
       title_toc: Inhalt
+      wikicloth_exception: "Entschuldigung, ein Fehler ist beim Anzeigen der Wikiseite aufgetreten: »%{msg}«. Bearbeiten der Seite kann helfen, diesen Fehler zu beseitigen."
     create:
       notice: Seite wurde angelegt
     cshow:
@@ -1358,6 +1365,8 @@ de:
       title: Lagerartikel kopieren
     create:
       notice: Neuer Lagerartikel »%{name}« gespeichert.
+    derive:
+      title: Lagerartikel aus Vorlage erstellen
     destroy:
       notice: Artikel %{name} gelöscht.
     edit:

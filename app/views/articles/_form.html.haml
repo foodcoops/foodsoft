@@ -7,35 +7,14 @@
   .modal-body
     = f.input :availability
     = f.input :name
-    .fold-line
-      = f.input :unit_quantity, label: Article.human_attribute_name(:unit),
-          input_html: {class: 'input-mini', title: Article.human_attribute_name(:unit_quantity)}
-      = f.input :unit, label: '&times;'.html_safe,
-           input_html: {class: 'input-mini', title: Article.human_attribute_name(:unit)}
+
+    = render partial: 'shared/article_fields_units', locals: {f: f}
 
     = f.input :note
     = f.association :article_category
     / TODO labels
 
-    .fold-line
-      = f.input :price do
-        .input-prepend
-          %span.add-on= t 'number.currency.format.unit'
-          = f.input_field :price, class: 'input-mini'
-      = f.input :tax do
-        .input-append
-          = f.input_field :tax, class: 'input-mini'
-          %span.add-on %
-    .fold-line
-      = f.input :deposit do
-        .input-prepend
-          %span.add-on= t 'number.currency.format.unit'
-          = f.input_field :deposit, class: 'input-mini'
-      .control-group
-        %label.control-label{for: 'article_fc_price'}
-          = Article.human_attribute_name(:fc_price)
-        .controls.control-text#article_fc_price
-          = number_to_currency(@article.fc_price) rescue nil
+    = render partial: 'shared/article_fields_price', locals: {f: f}
 
     = f.input :origin
     = f.input :manufacturer
@@ -45,14 +24,3 @@
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'
 
-:javascript
-  var form = $('form.edit_article, form.new_article');
-  $('#article_price, #article_tax, #article_deposit', form).on('change keyup', function() {
-    var price = parseFloat($('#article_price', form).val());
-    var tax = parseFloat($('#article_tax', form).val());
-    var deposit = parseFloat($('#article_deposit', form).val());
-    // Article#gross_price and Article#fc_price
-    var gross_price = (price + deposit) * (tax / 100 + 1);
-    var fc_price = gross_price  * (#{FoodsoftConfig[:price_markup].to_f} / 100 + 1);
-    $('#article_fc_price').html($.isNumeric(fc_price) ? I18n.l("currency", fc_price) : '&#133;');
-  });

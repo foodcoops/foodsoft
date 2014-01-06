@@ -1,14 +1,16 @@
 = f.input :first_name
 = f.input :last_name
 = f.input :email
-/ need :required because :use_nil option to user model validators break the required mark
+
+-# need :required because :use_nil option on user model validators break the required mark
 = f.input :nick, required: true if FoodsoftConfig[:use_nick]
-/ Don't autocomplete passwords. When editing one's own profile page, it only fills
-/ in one of the two passwords fields, which is annoying when editing other preferences.
-/ When an admin edits another user's profile, this will fill in his own password,
-/ which is dangerous.
-= f.input :password, :required => f.object.new_record?, input_html: {autocomplete: 'off'}
-= f.input :password_confirmation, :required => f.object.new_record?, input_html: {autocomplete: 'off'}
+-# You can control password autocompletion by passing `password_autocomplete` to this partial.
+-# Possible values: undefined/nil, true, false, 'store-only'
+-# see also https://github.com/foodcoops/foodsoft/wiki/Form-autocompletion
+- password_autocomplete = nil unless defined?(:password_autocomplete)
+- password_html = autocomplete_flag_to_password_html(password_autocomplete)
+= f.input :password, :required => f.object.new_record?, input_html: password_html
+= f.input :password_confirmation, :required => f.object.new_record?, input_html: password_html
 = f.input :phone
 
 = yield f if block_given?

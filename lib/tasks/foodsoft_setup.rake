@@ -1,3 +1,5 @@
+require 'stringio'
+
 # put in here all foodsoft tasks
 # => :environment loads the environment an gives easy access to the application
 
@@ -22,8 +24,6 @@ module Colors
   end
 end
 include Colors
-
-require 'stringio'
 
 namespace :foodsoft do
   desc "Setup foodsoft"
@@ -82,10 +82,11 @@ end
 
 def setup_app_config
   file = 'config/app_config.yml'
+  sample = Rails.root.join("#{file}.SAMPLE")
   return nil if skip?(file)
   
   puts yellow "Copying #{file}..."
-  %x( cp #{Rails.root.join("#{file}.SAMPLE")} #{Rails.root.join(file)} )
+  %x( cp #{sample} #{Rails.root.join(file)} )
   reminder(file)
 end
 
@@ -120,6 +121,8 @@ def start_server
   puts blue "Start your server running 'bundle exec rails s' and visit http://localhost:3000"
 end
 
+# Helper Methods
+
 def ask(question, answers = false)
   puts question
   input = STDIN.gets.chomp
@@ -149,3 +152,4 @@ def capture_stdout
 ensure
   $stdout = STDOUT
 end
+
