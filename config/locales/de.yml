@@ -81,6 +81,7 @@ de:
         article: Artikel
         missing_units: Fehlende Einheiten
         missing_units_short: Fehlende
+        units_received: Erhalten
         units_to_order: Menge
         update_current_price: Globalen Preis aktualisieren
       order_comment:
@@ -1130,6 +1131,13 @@ de:
       warning_ordered_stock: ! 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
     new:
       title: Neue Bestellung anlegen
+    receive:
+      add_article: Artikel hinzufügen
+      consider_member_tolerance: Toleranz berücksichtigen
+      rest_to_stock: Rest ins Lager
+      submit: Bestellung in Empfang nehmen
+      surplus_options: 'Verteilungsoptionen:'
+      title: »%{order}« in Empfang nehmen
     show:
       action_end: Beenden!
       amounts: ! 'Netto/Bruttosumme:'

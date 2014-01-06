@@ -81,6 +81,7 @@ en:
         article: Article
         missing_units: Missing units
         missing_units_short: Missing
+        units_received: Received
         units_to_order: Amount of units
         update_current_price: Globally update current price
       order_comment:
@@ -1090,9 +1091,6 @@ en:
     new:
       title: Add delivered article to order
   orders:
-    add_article:
-      title: Add article
-      notice: Article "%{name}" was added to the order.
     articles:
       article_count: ! 'Ordered articles:'
       prices: Net/gross price
@@ -1144,7 +1142,12 @@ en:
     new:
       title: Create new order
     receive:
+      add_article: Add article
+      consider_member_tolerance: consider tolerance
+      rest_to_stock: rest to stock
       submit: Receive order
+      surplus_options: 'Distribution options:'
+      title: Receiving %{order}
     show:
       action_end: Close!
       amounts: ! 'Net/gross sum:'

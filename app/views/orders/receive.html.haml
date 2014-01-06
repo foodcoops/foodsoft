@@ -22,24 +22,22 @@
       });
     });
 
-- title "Receiving #{@order.name}"
+- title t('.title', order: @order.name)
 
 = form_tag(receive_order_path(@order)) do
-  %section#results
+  %fieldset#results
     = render 'edit_amounts'
 
   .form-actions
     .pull-left
-      Surplus to
-      = label_tag :rest_to_tolerance, class: 'inline' do
+      %b.checkbox.inline
+        = t '.surplus_options'
+      = label_tag :rest_to_tolerance, class: 'checkbox inline' do
         = check_box_tag :rest_to_tolerance, 1, true
-        member tolerance,
-      %span{style: 'color: grey'}
-        and
-        = label_tag :rest_to_stock, class: 'inline' do
-          = check_box_tag :rest_to_stock, 1, false, disabled: true
-          stock
-
+        = t '.consider_member_tolerance'
+      = label_tag :rest_to_stock, class: 'checkbox inline' do
+        = check_box_tag :rest_to_stock, 1, false, disabled: true
+        %span{style: 'color: grey'}= t '.rest_to_stock'
     .pull-right
       = submit_tag t('.submit'), class: 'btn btn-primary'
       = link_to t('ui.or_cancel'), order_path(@order)
