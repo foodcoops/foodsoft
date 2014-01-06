@@ -33,6 +33,24 @@ class Page < ActiveRecord::Base
       self.permalink = Page.count == 0 ? "Home" : Page.permalink(title)
     end
   end
+  
+  def diff
+    current = versions.latest
+    old = versions.where(["page_id = ? and lock_version < ?", current.page_id, current.lock_version]).order('lock_version DESC').first
+    
+    if old
+      o = ''
+      Diffy::Diff.new(old.body, current.body).each do |line|
+        case line
+        when /^\+/ then o += "#{line.chomp}<br />" unless line.chomp == "+"
+        when /^-/ then o += "#{line.chomp}<br />" unless line.chomp == "-"
+        end
+      end
+      o
+    else
+      current.body
+    end
+  end
 
   protected
 

@@ -1,6 +1,10 @@
 module PagesHelper
   include WikiCloth
 
+  def rss_meta_tag
+    tag('link', :rel => "alternate", :type => "application/rss+xml", :title => "RSS", :href => all_pages_rss_url).html_safe
+  end
+
   def wikified_body(body, title = nil)
     render_opts = {:locale => I18n.locale} # workaround for wikicloth 0.8.0 https://github.com/nricciar/wikicloth/pull/59
     WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html(render_opts).html_safe
@@ -58,5 +62,11 @@ module PagesHelper
     else
       Array.new
     end
+  end
+
+  # return url for all_pages rss feed
+  def all_pages_rss_url(options={})
+    token = TokenVerifier.new(['wiki', 'all']).generate
+    all_pages_url({:format => 'rss', :token => token}.merge(options))
   end
 end
