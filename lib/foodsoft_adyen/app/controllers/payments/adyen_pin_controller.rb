@@ -44,7 +44,7 @@ class Payments::AdyenPinController < ApplicationController
       description: encode_notification_data({g: ordergroup.id}, ordergroup.name),
       callback: created_payments_adyen_pin_url(:ordergroup_id => ordergroup.id), # or use opt sessionId
       callbackAutomatic: 0,
-      start_immediately: true
+      #start_immediately: 1  # enable this to skip the enter amount screen in the Adyen app
     }
     if request.user_agent.match '\bAndroid\b'
       return "http://www.adyen.com/android-app/payment?#{opts.to_query}"
