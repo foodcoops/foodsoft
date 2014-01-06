@@ -8,7 +8,6 @@ class Payments::AdyenPinController < ApplicationController
   def index
     @ordergroups = Ordergroup.undeleted
     @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
-    @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
   end
 
   # show form for initiating a new payment
