@@ -20,9 +20,9 @@ module OrdersHelper
     if order_article.order.open?
       nil
     else
-      units_info = "#{order_article.units_to_order} ordered"
-      units_info += ", #{order_article.units_billed} billed" unless order_article.units_billed.nil?
-      units_info += ", #{order_article.units_received} received" unless order_article.units_received.nil?
+      units_info = "#{order_article.units_to_order} #{heading_helper OrderArticle, :units_to_order}"
+      units_info += ", #{order_article.units_billed} #{heading_helper OrderArticle, :units_billed}" unless order_article.units_billed.nil?
+      units_info += ", #{order_article.units_received} #{heading_helper OrderArticle, :units_received}" unless order_article.units_received.nil?
     end
   end
 
