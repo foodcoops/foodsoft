@@ -1,3 +1,12 @@
 /*
  *= require jquery.mobile
  */
+
+/* styling the .ui-li removes the gradient, but it keeps the saturation ... */
+.positive-balance .ui-li {
+  background-color: #dfd;
+}
+.positive-balance:hover .ui-li {
+  background-color: #cec;
+}
+
