@@ -18,7 +18,7 @@ class Payments::AdyenPinController < ApplicationController
 
   # initiate pin payment using Adyen app
   def create
-    redirect_to adyen_pin_url(@ordergroup, @ordergroup.get_available_funds)
+    redirect_to adyen_pin_url(@ordergroup, [-@ordergroup.get_available_funds, 0].max)
   end
 
   # callback url after payment
