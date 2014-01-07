@@ -11,9 +11,9 @@ Gem::Specification.new do |s|
   s.email       = ["dev-foodsoft@willem.engen.nl"]
   s.homepage    = "https://github.com/foodcoop-adam/foodsoft"
   s.summary     = "Adyen payment plugin for foodsoft."
-  s.description = "TODO: Description of FoodsoftAdyen."
+  s.description = "Integration with Adyen's payment solution. Currently supports notifications and PIN payments via the mobile app."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.13"

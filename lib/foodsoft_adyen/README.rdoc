@@ -4,9 +4,10 @@ This project adds support for Adyen payments to Foodsoft.
 
 * Make sure the gem is uncommented in foodsoft's `Gemfile`
 * Enter your Adyen account details in `config/environments/production.rb` (or `development.rb`)
+* When using the signup plugin, add `payments/adyen_notifications` to `unapproved_allow_access` in `config/app_config.yml`
 
 
-== Configuration
+== Adyen configuration
 
 The Adyen notifications API is used to credit accounts. That means that you
 need to enable notifications the Adyen customer area:
