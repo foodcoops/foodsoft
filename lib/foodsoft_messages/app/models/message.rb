@@ -75,7 +75,7 @@ class Message < ActiveRecord::Base
     for user in recipients
       if user.receive_email?
         begin
-          Mailer.foodsoft_message(self, user).deliver
+          MessagesMailer.foodsoft_message(self, user).deliver
         rescue
           Rails.logger.warn "Deliver failed for user \##{user.id}: #{user.email}"
         end
