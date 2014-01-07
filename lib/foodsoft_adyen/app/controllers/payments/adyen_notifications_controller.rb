@@ -6,19 +6,21 @@ class Payments::AdyenNotificationsController < ApplicationController
   before_filter :authenticate_adyen, :only => [:notify]
 
   class WrongCurrencyException < Exception; end
-  class UserNotFoundException < Exception; end
+  class OrdergroupNotFoundException < Exception; end
   class NotificationDataException < Exception; end
 
   def notify
     notification = AdyenNotification.log(params)
+    logger.debug 'foodsoft_adyen: notify'
     if notification.successful_authorisation?
       data = decode_notification_data(notification.merchant_reference)
-      (user = User.find(data[:g])) rescue raise UserNotFoundException
+      logger.debug "foodsoft_adyen: new notification with data #{data.inspect}"
+      (ordergroup = Ordergroup.find(data[:g])) rescue raise OrdergroupNotFoundException
       notification.currency == Rails.configuration.foodsoft_adyen.currency or raise WrongCurrencyException
       notice = "#{notification.payment_method} payment (Adyen #{notification.psp_reference})"
       amount = notification.value/100.0
-      @transaction = FinancialTransaction.new(:user=>user, :ordergroup=>user.ordergroup, :amount=>amount, :note=>notice)
-      @transaction.add_transaction!
+      (user = User.new).id = 0 # 0 is system user, may not exist in database
+      ordergroup.add_financial_transaction!(amount, notice, user)
       logger.debug 'foodsoft_adyen: handled authorisation notification'
     else
       logger.debug 'foodsoft_adyen: nothing to do'
@@ -26,7 +28,7 @@ class Payments::AdyenNotificationsController < ApplicationController
     ws_return :accepted
   rescue NotificationDataException => e
     ws_return :rejected, "merchant_reference #{e}"
-  rescue UserNotFoundException
+  rescue OrdergroupNotFoundException
     ws_return :rejected, 'merchant_reference does not contain a valid user'
   rescue WrongCurrencyException
     ws_return :rejected, "foodsoft_adyen configuration only accepts currency #{Rails.configuration.foodsoft_adyen.currency}"
