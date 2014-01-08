@@ -84,9 +84,9 @@ en:
         missing_units_short: Missing
         quantity: Desired amount
         quantity_short: Desired
-        units_received: Received amount of units
+        units_received: Received units
         units_received_short: Received
-        units_to_order: Ordered amount of units
+        units_to_order: Ordered units
         units_to_order_short: Ordered
         update_current_price: Globally update current price
       order_comment:
