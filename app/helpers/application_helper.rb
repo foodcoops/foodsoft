@@ -81,10 +81,10 @@ module ApplicationHelper
   #   heading, with an abbreviation title of 'foo'.
   #  Other options are passed through to I18n.
   def heading_helper(model, attribute, options = {})
-    i18nopts = options.select {|a| !['short'].include?(a) }
+    i18nopts = options.select {|a| !['short'].include?(a) }.merge({count: 2})
     s = model.human_attribute_name(attribute, i18nopts)
     if options[:short]
-      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({fallback: true, default: ''}))
+      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({fallback: true, default: '', count: 2}))
       s = raw "<abbr title='#{s}'>#{sshort}</abbr>" unless sshort.blank?
     end
     s
