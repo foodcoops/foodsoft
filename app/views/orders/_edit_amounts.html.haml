@@ -25,7 +25,7 @@
       $(input).closest('tr').find('.units_delta').html(html);
     }
 
-    $(document).on('change', 'input[data-units-expected]', function() {
+    $(document).on('change keyup', 'input[data-units-expected]', function() {
       update_delta(this);
     });
 
