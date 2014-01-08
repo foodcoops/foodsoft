@@ -32,6 +32,7 @@
     %h2= t '.ordergroup.title'
     = render :partial => "apple_bar", :locals => {:apple_bar => AppleBar.new(current_user.ordergroup)}
 
+/ The following line is an ugly hack to allow targeting this point with a deface/ nokogiri CSS selector. If anyone finds a better selector please remove these lines and replace the selector in lib/foodsoft_messages/app/overrides/home/index/messages.html.haml.deface
 - #messages
 
 - if current_user.ordergroup
