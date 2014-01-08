@@ -1,0 +1,6 @@
+/ replace 'erb:contains("messages")'
+- unless Message.public.empty?
+  %section#messages
+    %h2= t '.messages.title'
+    = render 'messages/messages', messages: Message.public.order('created_at DESC').limit(5), pagination: false
+    %p= link_to t('.messages.view_all'), messages_path
