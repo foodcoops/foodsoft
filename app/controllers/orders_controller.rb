@@ -111,7 +111,8 @@ class OrdersController < ApplicationController
     unless request.post?
       @order_articles = @order.order_articles.ordered.includes(:article)
     else
-      flash[:notice] = "Order received: " + update_order_amounts
+      s = update_order_amounts
+      flash[:notice] = (s ? I18n.t('orders.receive.notice', :msg => s) : I18n.t('orders.receive.notice_none'))
       redirect_to @order
     end
   end
@@ -156,6 +157,7 @@ class OrdersController < ApplicationController
   end
 
   def update_order_amounts
+    return if not params[:order_articles]
     # where to leave remainder during redistribution
     rest_to = []
     rest_to << :tolerance if params[:rest_to_tolerance]
@@ -183,10 +185,12 @@ class OrdersController < ApplicationController
         end
       end
     end
-    notice = " #{counts.shift} articles (#{cunits.shift} units) updated"
-    notice += ", #{counts.shift} (#{cunits.shift}) using tolerance" if params[:rest_to_tolerance]
-    notice += ", #{counts.shift} (#{cunits.shift}) go to stock if foodsoft would support that" if params[:rest_to_stock]
-    notice += ", #{counts.shift} (#{cunits.shift}) left over"
+    notice = I18n.t('orders.update_order_amounts.msg1', count: counts.shift, units: cunits.shift)
+    notice += ", " + I18n.t('orders.update_order_amounts.msg2', count: counts.shift, units: cunits.shift) if params[:rest_to_tolerance]
+    notice += ", " + I18n.t('orders.update_order_amounts.msg3', count: counts.shift, units: cunits.shift) if params[:rest_to_stock]
+    if counts[0]>0 or cunits[0]>0
+      notice += ", " + I18n.t('orders.update_order_amounts.msg4', count: counts.shift, units: cunits.shift)
+    end
   end
 
 end

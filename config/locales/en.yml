@@ -80,13 +80,19 @@ en:
         supplier: Supplier
       order_article:
         article: Article
-        missing_units: Missing units
+        missing_units:
+          one: Missing unit
+          other: Missing units
         missing_units_short: Missing
         quantity: Desired amount
         quantity_short: Desired
-        units_received: Received units
+        units_received:
+          one: Received unit
+          other: Received units
         units_received_short: Received
-        units_to_order: Ordered units
+        units_to_order:
+          one: Ordered unit
+          other: Ordered units
         units_to_order_short: Ordered
         update_current_price: Globally update current price
       order_comment:
@@ -1149,6 +1155,8 @@ en:
     receive:
       add_article: Add article
       consider_member_tolerance: consider tolerance
+      notice: ! 'Order received: %{msg}'
+      notice_none: No new articles to receive
       rest_to_stock: rest to stock
       submit: Receive order
       surplus_options: 'Distribution options:'
@@ -1184,6 +1192,11 @@ en:
       open: open
     update:
       notice: The order was updated.
+    update_order_amounts:
+      msg1: "%{count} articles (%{units} units) updated"
+      msg2: "%{count} (%{units}) using tolerance"
+      msg3: "%{count} (%{units}) go to stock if foodsoft would support that [don't translate]"
+      msg4: "%{count} (%{units}) left over"
   pages:
     all:
       new_page: Create new page
