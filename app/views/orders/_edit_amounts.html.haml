@@ -41,7 +41,7 @@
     
     function init_add_article(sel) {
       $(sel).removeAttr('disabled').select2({
-        placeholder: '#{j t('orders.add_article.title')}',
+        placeholder: '#{j t('orders.receive.add_article')}',
         formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
         // TODO implement adding a new article, like in deliveries
       }).on('change', function(e) {
@@ -66,17 +66,17 @@
       $(this).replaceWith('<i class="icon icon-warning-sign add-on"></i>');
     }
 
-%table#order_articles.ordered-articles.table.table-striped.stupidtable
+%table#order_articles.ordered-articles.table.table-striped.stupidtable{style: 'margin-bottom: 0'}
   %thead
     %tr
       %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :order_number, short: true
       %th.default-sort.sort{:data => {:sort => 'string'}}= heading_helper Article, :name
       %th= heading_helper Article, :unit
       %th= heading_helper Article, :price
-      %th Members
-      %th Ordered
+      %th= heading_helper OrderArticle, :units_to_order, short: true
+      %th= heading_helper OrderArticle, :quantity, short: true
       -#%th Invoice # TODO implement invoice screen
-      %th Received
+      %th= heading_helper OrderArticle, :units_received, short: true
       %th
       %th= t 'ui.actions'
   %tfoot
@@ -85,6 +85,7 @@
         %select#add_article{:style => 'width: 500px;'}
           - new_article_data.each do |option|
             %option{id: "add_article_#{option[:id]}", value: option[:id]}= option[:text]
+
   %tbody#result_table
     - @order_articles.each do |order_article|
       = render :partial => 'edit_amount', :locals => {:order_article => order_article}

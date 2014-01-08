@@ -77,11 +77,17 @@ en:
         note: Note
         starts: Starts at
         status: Status
+        supplier: Supplier
       order_article:
         article: Article
         missing_units: Missing units
         missing_units_short: Missing
-        units_to_order: Amount of units
+        quantity: Desired amount
+        quantity_short: Desired
+        units_received: Received amount of units
+        units_received_short: Received
+        units_to_order: Ordered amount of units
+        units_to_order_short: Ordered
         update_current_price: Globally update current price
       order_comment:
         text: Add comment to this order ...
@@ -1090,9 +1096,6 @@ en:
     new:
       title: Add delivered article to order
   orders:
-    add_article:
-      title: Add article
-      notice: Article "%{name}" was added to the order.
     articles:
       article_count: ! 'Ordered articles:'
       prices: Net/gross price
@@ -1104,7 +1107,7 @@ en:
     edit:
       title: Edit order
     edit_amount:
-      locked_to_protect_manual_update: The distribution of this article among the ordergroups was changed manually. This field is locked in order to protect those changes. To redistribute anyway, press the unlock button and change the amount.
+      locked_to_protect_manual_update: The distribution of this article among the ordergroups was changed manually. This field was locked in order to protect those changes. To redistribute anyway, press the unlock button and change the amount.
       locked_to_protect_unlock_button: Press this button to unlock the received field. Any previous manual changes will be overwritten and the article will be redistributed over the ordergroups.
     fax:
       amount: Amount
@@ -1144,7 +1147,12 @@ en:
     new:
       title: Create new order
     receive:
+      add_article: Add article
+      consider_member_tolerance: consider tolerance
+      rest_to_stock: rest to stock
       submit: Receive order
+      surplus_options: 'Distribution options:'
+      title: Receiving %{order}
     show:
       action_end: Close!
       amounts: ! 'Net/gross sum:'

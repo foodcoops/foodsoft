@@ -77,11 +77,17 @@ de:
         note: Notiz
         starts: Läuft vom
         status: Status
+        supplier: Lieferant
       order_article:
         article: Artikel
         missing_units: Fehlende Einheiten
-        missing_units_short: Fehlende
-        units_to_order: Menge
+        missing_units_short: Fehlend
+        quantity: Gewünschte Einheiten
+        quantity_short: Gewünscht
+        units_received: Gelieferte Gebinde
+        units_received_short: Geliefert
+        units_to_order: Bestellte Gebinde
+        units_to_order_short: Bestellt
         update_current_price: Globalen Preis aktualisieren
       order_comment:
         text: Kommentiere diese Bestellung ...
@@ -1095,6 +1101,9 @@ de:
       notice: Die Bestellung wurde erstellt.
     edit:
       title: Bestellung bearbeiten
+    edit_amount:
+      locked_to_protect_manual_update: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Dieses Eingabefeld wurde gesperrt, um die manuellen Änderungen zu bewahren. Um den Artikel neu zu verteilen, drücke den Entsperrknopf und ändere die gelieferte Menge.
+      locked_to_protect_unlock_button: Drücke diesen Knopf, um das Eingabefeld für die gelieferte Menge zu entsperren. Vorherige manuelle Änderungen werden überschrieben und der Artikel wird wieder automatisch auf die Bestellgruppen aufgeteilt, wenn Du die Menge änderst.
     fax:
       amount: Menge
       articles: Artikel
@@ -1113,12 +1122,14 @@ de:
       title: Artikel
     index:
       action_end: Beenden
+      action_receive: In Empfang nehmen
+      closed_orders: Abgerechnete Bestellungen
       confirm_delete: Willst Du wirklich die Bestellung löschen?
       confirm_end: Willst Du wirklich die Bestellung %{order} beenden? Es gibt kein zurück.
-      ended_orders: Beendete Bestellungen
       new_order: Neue Bestellung anlegen
       no_open_orders: Derzeit gibt es keine laufende Bestellungen.
       open_orders: Laufende Bestellungen
+      orders_in_progress: In Bearbeitung
       title: Bestellungen verwalten
     model:
       error_closed: Bestellung wurde schon abgerechnet
@@ -1130,6 +1141,13 @@ de:
       warning_ordered_stock: ! 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
     new:
       title: Neue Bestellung anlegen
+    receive:
+      add_article: Artikel hinzufügen
+      consider_member_tolerance: Toleranz berücksichtigen
+      rest_to_stock: Rest ins Lager
+      submit: Bestellung in Empfang nehmen
+      surplus_options: 'Verteilungsoptionen:'
+      title: »%{order}« in Empfang nehmen
     show:
       action_end: Beenden!
       amounts: ! 'Netto/Bruttosumme:'

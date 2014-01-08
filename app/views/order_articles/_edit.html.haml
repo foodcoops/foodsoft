@@ -7,9 +7,9 @@
       = hidden_field_tag :without_units, true
     - else
       .fold-line
-        = form.input :units_to_order, label: 'Amount ordered', hint: '', input_html: {class: 'input-nano'}
+        = form.input :units_to_order, hint: '', input_html: {class: 'input-nano'}
         -#= form.input :units_billed, label: 'invoice', input_html: {class: 'input-nano'}
-        = form.input :units_received, label: 'received', input_html: {class: 'input-nano'}
+        = form.input :units_received, input_html: {class: 'input-nano'}
         %p.help-block= t 'simple_form.hints.order_article.units_to_order'
 
       .foo{style: 'clear:both'}
