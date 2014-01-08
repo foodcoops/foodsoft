@@ -26,6 +26,14 @@ describe 'receiving an order', :type => :feature do
     oa.reload
   end
 
+  def check_quantities(units, q1, q2)
+    reload_articles
+    expect(oa.units).to eq units
+    expect(goa1.result).to be_within(1e-3).of q1
+    expect(goa2.result).to be_within(1e-3).of q2
+  end
+
+
   describe :type => :feature, :js => true do
     before { login admin }
 
@@ -51,12 +59,10 @@ describe 'receiving an order', :type => :feature do
     it 'does not change anything when received is ordered' do
       set_quantities [2,0], [3,2]
       visit receive_order_path(order)
-      expect {
-        fill_in "order_articles_#{oa.id}_units_received", :with => oa.units_to_order
-        find('input[type="submit"]').click
-        expect(page).to have_selector('body')
-        reload_articles
-      }.to_not change{[oa.units, goa1.result, goa2.result]}
+      fill_in "order_articles_#{oa.id}_units_received", :with => oa.units_to_order
+      find('input[type="submit"]').click
+      expect(page).to have_selector('body')
+      check_quantities 2,  2, 4
     end
 
     it 'redistributes properly when received is more' do
@@ -65,10 +71,7 @@ describe 'receiving an order', :type => :feature do
       fill_in "order_articles_#{oa.id}_units_received", :with => 3
       find('input[type="submit"]').click
       expect(page).to have_selector('body')
-      reload_articles
-      expect(oa.units).to eq 3
-      expect(goa1.result).to be_within(1e-3).of 2
-      expect(goa2.result).to be_within(1e-3).of 5
+      check_quantities 3,  2, 5
     end
 
     it 'redistributes properly when received is less' do
@@ -77,10 +80,7 @@ describe 'receiving an order', :type => :feature do
       fill_in "order_articles_#{oa.id}_units_received", :with => 1
       find('input[type="submit"]').click
       expect(page).to have_selector('body')
-      reload_articles
-      expect(oa.units).to eq 1
-      expect(goa1.result).to be_within(1e-3).of 2
-      expect(goa2.result).to be_within(1e-3).of 1
+      check_quantities 1,  2, 1
     end
 
     it 'has a locked field when edited elsewhere' do
@@ -89,6 +89,16 @@ describe 'receiving an order', :type => :feature do
       goa1.save!
       visit receive_order_path(order)
       expect(find("#order_articles_#{oa.id}_units_received")).to be_disabled
+    end
+
+    it 'leaves locked rows alone when submitted' do
+      set_quantities [2,0], [3,2]
+      goa1.result = goa1.result + 1
+      goa1.save!
+      visit receive_order_path(order)
+      find('input[type="submit"]').click
+      expect(page).to have_selector('body')
+      check_quantities 2,  3, 4
     end
 
   end
