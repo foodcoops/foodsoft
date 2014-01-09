@@ -233,9 +233,9 @@ tr.unavailable {
   margin-bottom: 0;
 }
 
-// entering units
+// allow content to appear without sudden table change (receive)
 .units_delta {
-  width: 2em;
+  min-width: 3.5em;
 }
 
 // ********* Tweaks & fixes
@@ -297,9 +297,16 @@ input.package {
 i.package {
   .package-image(left);
   min-width: 18px;
+  min-height: 18px;
+  vertical-align: baseline;
   font-style: normal;
   padding-left: 20px;
-  @media (max-width: 768px) { padding-left: 0; }
+  @media (max-width: 979px) { padding-left: 0; }
+}
+i.package.icon-only {
+  padding-left: 6px;
+  background-position: right;
+  display: inline-block;
 }
 .package              { color: tint(@textColor, @nonessentialDim); }
 .used        .package { color: tint(@articleUsedColor, @nonessentialDim); }

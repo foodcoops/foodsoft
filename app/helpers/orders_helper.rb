@@ -27,13 +27,26 @@ module OrdersHelper
   end
 
   # can be article or article_price
-  def pkg_helper(article, icon=true)
+  #   icon: `false` to not show the icon
+  #   soft_uq: `true` to hide unit quantity specifier on small screens
+  #            sensible in tables with multiple columns calling `pkg_helper`
+  def pkg_helper(article, options={})
     return nil if article.unit_quantity == 1
-    if icon
-      "<i class='package'> &times; #{article.unit_quantity}</i>".html_safe
+    uq_text = "&times; #{article.unit_quantity}"
+    uq_text = "<span class='hidden-phone'>#{uq_text}</span>" if options[:soft_uq]
+    if options[:icon].nil? or options[:icon]
+      pkg_helper_icon(uq_text).html_safe
     else
-      "<span class='package'> &times; #{article.unit_quantity}</span>".html_safe
+      pkg_helper_icon(uq_text, tag: 'span').html_safe
     end
+  end
+  def pkg_helper_icon(c=nil, options={})
+    options = {tag: 'i', class: ''}.merge(options)
+    if c.nil?
+      c = "&nbsp;"
+      options[:class] += " icon-only"
+    end
+    "<#{options[:tag]} class='package #{options[:class]}'>#{c}</#{options[:tag]}>"
   end
   
   def article_price_change_hint(order_article, gross=false)

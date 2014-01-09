@@ -17,10 +17,10 @@
     -#%td # TODO implement invoice screen
       - unless order_article.units_billed.nil?
         = order_article.units_billed
-        = pkg_helper order_article.article
+        = pkg_helper order_article.article, soft_uq: true
     %td.units_received_cell
       = receive_input_field(form)
-      = pkg_helper order_article.article_price, false
+      = pkg_helper order_article.article_price, icon: false, soft_uq: true
       / TODO add almost invisible text_field for entering single units
     %td.units_delta
     %td

@@ -16,10 +16,13 @@
       } else if (units == expected) {
         // equal value
         html = '<i class="icon-ok" style="color: green"></i>';
-      } else if (units < expected) {
-        html = '<span style="color: red">- '+(expected-units)+'</span>';
-      } else /*if (units> expected)*/ {
-        html = '<span style="color: green">+ '+(units-expected)+'</span>';
+      } else {
+        if (units < expected) {
+          html = '<span style="color: red">- '+(expected-units)+'</span>';
+        } else /*if (units> expected)*/ {
+          html = '<span style="color: green">+ '+(units-expected)+'</span>';
+        }
+        html += '#{j pkg_helper_icon}';
       }
 
       $(input).closest('tr').find('.units_delta').html(html);
