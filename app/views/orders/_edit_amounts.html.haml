@@ -29,14 +29,14 @@
       update_delta(this);
     });
 
+    $(document).on('click', '#order_articles .unlocker', unlock_receive_input_field);
+
     $(function() {
       $('input[data-units-expected]').each(function() {
         update_delta(this);
       });
       
       init_add_article('#add_article');
-      
-      $('.unlocker', '#order_articles tbody').on('click', unlock_receive_input_field);
     });
     
     function init_add_article(sel) {
