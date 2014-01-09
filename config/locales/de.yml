@@ -281,7 +281,8 @@ de:
   application:
     controller:
       error_authn: Anmeldung erforderlich!
-      error_denied: Kein Zugriff!
+      error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine Administratorin, dass sie Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
+      error_denied_sign_in: als ein anderer Benutzer anmelden
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
   article_categories:
     create:

@@ -26,11 +26,11 @@ class ApplicationController < ActionController::Base
 
   def deny_access
     session[:return_to] = request.original_url
-    redirect_to login_url, :alert => I18n.t('application.controller.error_denied')
+    redirect_to root_url, alert: I18n.t('application.controller.error_denied', sign_in: ActionController::Base.helpers.link_to(t('application.controller.error_denied_sign_in'), login_path))
   end
 
   private
-
+  
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
     if !current_user
@@ -89,6 +89,18 @@ class ApplicationController < ActionController::Base
     @group = Group.find(group_id)
     unless @group.member?(@current_user) or @current_user.role_admin?
       redirect_to root_path, alert: I18n.t('application.controller.error_members_only')
+    end
+  end
+
+  def authenticate_or_token(prefix, role = 'any')
+    if not params[:token].blank?
+      begin
+        TokenVerifier.new(prefix).verify(params[:token])
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
+        redirect_to root_path, alert: I18n.t('application.controller.error_token')
+      end
+    else
+      authenticate(role)
     end
   end
 

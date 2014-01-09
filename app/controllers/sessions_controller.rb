@@ -28,6 +28,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:return_to] = nil
     redirect_to login_url, :notice => I18n.t('sessions.logged_out')
   end
 end

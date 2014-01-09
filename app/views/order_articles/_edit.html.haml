@@ -17,18 +17,16 @@
 
     = simple_fields_for :article, @order_article.article do |f|
       = f.input :name
-      = f.input :order_number
-      = f.input :unit
 
-    - if @order_article.article.is_a?(StockArticle)
-      %div.alert= t '.stock_alert'
-    - else
-      = simple_fields_for :article_price, @order_article.article_price do |f|
-        = f.input :unit_quantity
-        = f.input :price
-        = f.input :tax
-        = f.input :deposit
+      - if @order_article.article.is_a?(StockArticle)
+        %div.alert= t '.stock_alert'
+      - else
+        = simple_fields_for :article_price, @order_article.article_price do |fprice|
+          = render partial: 'shared/article_fields_units', locals: {f_unit: f, f_uq: fprice}
+          = render partial: 'shared/article_fields_price', locals: {f: fprice}
+
       = form.input :update_current_price, as: :boolean
+      = f.input :order_number
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = form.submit class: 'btn btn-primary'

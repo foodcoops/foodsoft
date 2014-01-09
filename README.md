@@ -1,6 +1,7 @@
 FoodSoft
 =========
-[![Build Status](https://travis-ci.org/foodcoops/foodsoft.png)](https://travis-ci.org/foodcoops/foodsoft)
+[![Build Status](https://travis-ci.org/foodcoops/foodsoft.png?branch=master)](https://travis-ci.org/foodcoops/foodsoft)
+[![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.png?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.png)](https://codeclimate.com/github/foodcoops/foodsoft)
 [![Dependency Status](https://gemnasium.com/foodcoops/foodsoft.png)](https://gemnasium.com/foodcoops/foodsoft)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/foodcoops/foodsoft/trend.png)](https://bitdeli.com/foodcoops "Bitdeli Badge")
