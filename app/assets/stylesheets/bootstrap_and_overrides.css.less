@@ -281,16 +281,21 @@ tr.unavailable {
   display: inline;
 }
 
-// show package icon after amount of package numbers
+// show package icon after amount of wholesale units
+.package-image (@align) {
+  background-image: url(package-bg.png);
+  background-repeat: no-repeat;
+  background-position: @align center;
+}
 input.package {
-  background: url(package-bg.png) no-repeat right center;
+  .package-image(right);
   // disabled and readonly definitions though
   &[disabled], &[readonly] {
     background-color: @inputDisabledBackground;
   }
 }
 i.package {
-  background: url(package-bg.png) no-repeat left center;
+  .package-image(left);
   min-width: 18px;
   font-style: normal;
   padding-left: 20px;
