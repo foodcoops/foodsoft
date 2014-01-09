@@ -5,7 +5,7 @@
   var old_order_article_entry = $('#order_article_<%= @order_article.id %>');
   
   $('td.units_received_cell span.package', old_order_article_entry).replaceWith(
-    '<%= j pkg_helper(@order_article.article_price, false) %>'
+    '<%= j pkg_helper(@order_article.article_price, icon: false) %>'
   );
   
   // render new element and inject dynamic cell
