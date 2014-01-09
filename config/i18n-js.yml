@@ -1,4 +1,10 @@
 # only serve selected strings for i18n-js to keep filesize down
 translations:
 - file: 'app/assets/javascripts/i18n/translations.js'
-  only: ['*.js.*', '*.number.*', '*.date.formats.*']
+  only: [
+   '*.js.*',
+   '*.number.*',
+   '*.date.formats.*',
+   # foodsoft-specific texts to keep js with normal translations
+   '*.orders.edit_amount.*'
+  ]

@@ -32,48 +32,47 @@ module OrdersHelper
   #            sensible in tables with multiple columns calling `pkg_helper`
   def pkg_helper(article, options={})
     return nil if article.unit_quantity == 1
-    uq_text = "&times; #{article.unit_quantity}"
-    uq_text = "<span class='hidden-phone'>#{uq_text}</span>" if options[:soft_uq]
+    uq_text = "&times; #{article.unit_quantity}".html_safe
+    uq_text = content_tag(:span, uq_text, class: 'hidden-phone') if options[:soft_uq]
     if options[:icon].nil? or options[:icon]
-      pkg_helper_icon(uq_text).html_safe
+      pkg_helper_icon(uq_text)
     else
-      pkg_helper_icon(uq_text, tag: 'span').html_safe
+      pkg_helper_icon(uq_text, tag: :span)
     end
   end
   def pkg_helper_icon(c=nil, options={})
     options = {tag: 'i', class: ''}.merge(options)
     if c.nil?
-      c = "&nbsp;"
+      c = "&nbsp;".html_safe
       options[:class] += " icon-only"
     end
-    "<#{options[:tag]} class='package #{options[:class]}'>#{c}</#{options[:tag]}>"
+    content_tag(options[:tag], c, class: "package #{options[:class]}").html_safe
   end
   
   def article_price_change_hint(order_article, gross=false)
     return nil if order_article.article.price == order_article.price.price
     title = "#{t('helpers.orders.old_price')}: #{number_to_currency order_article.article.price}"
     title += " / #{number_to_currency order_article.article.gross_price}" if gross
-    "<i class='icon-asterisk' title='#{j title}'></i>".html_safe
+    content_tag(:i, nil, class: 'icon-asterisk', title: j(title)).html_safe
   end
   
   def receive_input_field(form)
     order_article = form.object
     units_expected = (order_article.units_billed or order_article.units_to_order)
     
-    # unlock button, to prevent overwriting if it was manually distributed
-    input_html = ''
-    if order_article.result_manually_changed?
-      input_html += '<span class="input-prepend intable">' +
-        button_tag(nil, type: :button, class: 'btn unlocker', title: t('.locked_to_protect_unlock_button')) {'<i class="icon icon-unlock"></i>'.html_safe}
-    end
-    
-    input_html += form.text_field :units_received, class: 'input input-nano package units_received',
+    input_html = form.text_field :units_received, class: 'input input-nano package units_received',
       data: {'units-expected' => units_expected},
       disabled: order_article.result_manually_changed?,
-      title: order_article.result_manually_changed? ? t('.locked_to_protect_manual_update') : nil,
       autocomplete: 'off'
     
-    input_html += '</span>' if order_article.result_manually_changed?
+    if order_article.result_manually_changed?
+      input_html = content_tag(:span, class: 'input-prepend intable', title: t('.field_locked_title', default: '')) {
+        button_tag(nil, type: :button, class: 'btn unlocker') {
+          content_tag(:i, nil, class: 'icon icon-unlock')
+        } + input_html
+      }
+    end
+
     input_html.html_safe
   end
 end

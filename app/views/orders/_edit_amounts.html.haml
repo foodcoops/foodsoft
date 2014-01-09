@@ -66,6 +66,7 @@
     
     function unlock_receive_input_field() {
       $('.units_received', $(this).closest('tr')).prop('disabled', false).focus();
+      $(this).closest('.input-prepend').prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
       $(this).replaceWith('<i class="icon icon-warning-sign add-on"></i>');
     }
 
