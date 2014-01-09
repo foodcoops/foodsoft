@@ -28,9 +28,7 @@
         %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + cssclass}
           %td=h order_article.article.name
           %td= order_article.article.unit
-          %td
-            = "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
-            = article_price_change_hint(order_article, gross: true)
+          %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
           - if order.stockit?
             %td= units
           - else
