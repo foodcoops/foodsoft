@@ -1,7 +1,12 @@
+# Foodsoft 3.2.2
+(10 Jan 2014)
+
+* Bugfix: password reset form was broken.
+
 # Foodsoft 3.2.1
 (30 December 2013)
 
-* Security hotfix. Existing users could leverage admin privileges.
+* Security hotfix: existing users could leverage admin privileges.
 
 # Foodsoft 3.2.0
 (16 December 2013)
