@@ -80,13 +80,19 @@ de:
         supplier: Lieferant
       order_article:
         article: Artikel
-        missing_units: Fehlende Einheiten
+        missing_units:
+          one: Fehlende Einheite
+          other: Fehlende Einheiten
         missing_units_short: Fehlend
         quantity: Gewünschte Einheiten
         quantity_short: Gewünscht
-        units_received: Gelieferte Gebinde
+        units_received:
+          one: Geliefertes Gebinde
+          other: Gelieferte Gebinde
         units_received_short: Geliefert
-        units_to_order: Bestellte Gebinde
+        units_to_order:
+          one: Bestelltes Gebinde
+          other: Bestellte Gebinde
         units_to_order_short: Bestellt
         update_current_price: Globalen Preis aktualisieren
       order_comment:
@@ -284,6 +290,7 @@ de:
       error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine Administratorin, dass sie Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
       error_denied_sign_in: als ein anderer Benutzer anmelden
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
+      error_token: Zugriff verweigert (ungültiger Token)!
   article_categories:
     create:
       notice: Die Kategorie wurde gespeichert
@@ -383,7 +390,9 @@ de:
       update:
         body: ! 'Jeder Artikel wird doppelt angezeigt: die alten Werte sind grau und die Textfelder sind mit den aktuellen Werten vorausgefüllt. Abweichungen zu den alten Artikeln sind gelb markiert.'
         title: Aktualisieren ...
-        update_msg: ! '%{count} Artikel müssen aktualisiert werden.'
+        update_msg:
+          one: Ein Artikel muss aktualisiert werden.
+          other: ! '%{count} Artikel müssen aktualisiert werden.'
     upload:
       body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert.</p> <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden.</p> <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>
       fields:
@@ -475,7 +484,9 @@ de:
       - FC-Preis
       - Menge
       title: ! 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
-      total: Insgesamt %{count} Artikel
+      total:
+        one: Insgesamt ein Artikel
+        other: ! 'Insgesamt %{count} Artikel'
   errors:
     general: Ein Problem ist aufgetreten.
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
@@ -741,6 +752,7 @@ de:
       new_invoice: Rechnung anlegen
       show_invoice: Rechnung anzeigen
     orders:
+      old_price: Alter Preis
       option_choose: Lieferantin/Lager auswählen
       option_stock: Lager
       order_pdf: PDF erstellen
@@ -1103,8 +1115,8 @@ de:
     edit:
       title: Bestellung bearbeiten
     edit_amount:
-      locked_to_protect_manual_update: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Dieses Eingabefeld wurde gesperrt, um die manuellen Änderungen zu bewahren. Um den Artikel neu zu verteilen, drücke den Entsperrknopf und ändere die gelieferte Menge.
-      locked_to_protect_unlock_button: Drücke diesen Knopf, um das Eingabefeld für die gelieferte Menge zu entsperren. Vorherige manuelle Änderungen werden überschrieben und der Artikel wird wieder automatisch auf die Bestellgruppen aufgeteilt, wenn Du die Menge änderst.
+      field_locked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Das Eingabefeld wurde gesperrt, um die manuellen Änderungen zu bewahren. Um den Artikel neu zu verteilen, drücke den Entsperrknopf und ändere die gelieferte Menge.
+      field_unlocked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Wenn du die gelieferte Menge änderst, werden die vorherigen manuellen Änderungen überschrieben.
     fax:
       amount: Menge
       articles: Artikel
@@ -1145,6 +1157,8 @@ de:
     receive:
       add_article: Artikel hinzufügen
       consider_member_tolerance: Toleranz berücksichtigen
+      notice: ! 'Bestellung in Empfang genommen: %{msg}'
+      notice_none: Keine neuen Artikel für den Empfang ausgewählt.
       rest_to_stock: Rest ins Lager
       submit: Bestellung in Empfang nehmen
       surplus_options: 'Verteilungsoptionen:'
@@ -1180,6 +1194,11 @@ de:
       open: laufend
     update:
       notice: Die Bestellung wurde aktualisiert.
+    update_order_amounts:
+      update_order_amounts:
+      msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
+      msg2: "%{count} (%{units}) Toleranzmenge"
+      msg4: "%{count} (%{units}) übrig"
   pages:
     all:
       new_page: Neue Seite anlegen
