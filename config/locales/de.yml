@@ -80,19 +80,13 @@ de:
         supplier: Lieferant
       order_article:
         article: Artikel
-        missing_units:
-          one: Fehlende Einheite
-          other: Fehlende Einheiten
+        missing_units: Fehlende Einheiten
         missing_units_short: Fehlend
         quantity: Gewünschte Einheiten
         quantity_short: Gewünscht
-        units_received:
-          one: Geliefertes Gebinde
-          other: Gelieferte Gebinde
+        units_received: Gelieferte Gebinde
         units_received_short: Geliefert
-        units_to_order:
-          one: Bestelltes Gebinde
-          other: Bestellte Gebinde
+        units_to_order: Bestellte Gebinde
         units_to_order_short: Bestellt
         update_current_price: Globalen Preis aktualisieren
       order_comment:
