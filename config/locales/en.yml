@@ -1136,9 +1136,9 @@ en:
     index:
       action_end: Close
       action_receive: Receive
+      closed_orders: Settled orders
       confirm_delete: Do you really want to delete the order?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
-      closed_orders: Settled orders
       new_order: Create new order
       no_open_orders: There are currently no open orders.
       open_orders: Current orders
