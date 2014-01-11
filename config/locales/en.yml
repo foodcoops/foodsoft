@@ -1211,7 +1211,7 @@ en:
       title_list: List of pages
     body:
       title_toc: Content
-      wikicloth_exception: "I'm sorry to report that an error occured when interpreting the wiki page: %{msg}. Please try to fix it, and save the page again."
+      wikicloth_exception: ! 'I''m sorry to report that an error occured when interpreting the wiki page: %{msg}. Please try to fix it, and save the page again.'
     create:
       notice: Page was created
     cshow:

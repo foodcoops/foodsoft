@@ -275,8 +275,10 @@ nl:
   application:
     controller:
       error_authn: Inloggen vereist.
-      error_denied: Geen toegang.
+      error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je mogelijk %{sign_in}.
+      error_denied_sign_in: inloggen als een andere gebruiker
       error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
+      error_token: Geen toegang (ongeldig token)!
   article_categories:
     create:
       notice: Categorie is opgeslagen
@@ -398,7 +400,7 @@ nl:
     edit:
       title: Levering aanpassen
     form:
-      confirm_foreign_supplier_reedit: 
+      confirm_foreign_supplier_reedit: Voorraadartikel "%{name}" is opgeslagen, maar het hoort bij een andere leverancier dan die van deze levering. Wil je het voorraadartikel aanpassen?
       create_from_blank: Nieuw voorraadartikel invoeren
       create_stock_article: Voorraadartikel invoeren
       title_fill_quantities: 2. Hoeveel mag er geleverd worden
@@ -1157,6 +1159,7 @@ nl:
       title_list: Paginalijst
     body:
       title_toc: Inhoud
+      wikicloth_exception: ! 'Sorry, het is niet gelukt de paginainhoud te begrijpen: %{msg}. Probeer het op te lossen en de pagina opnieuw op te slaan.'
     create:
       notice: Pagina is gemaakt.
     cshow:
@@ -1350,6 +1353,8 @@ nl:
       title: kopieer het voorraadartikel
     create:
       notice: Voorraadartikel "%{name}" is aangemaakt.
+    derive:
+      title: Voorraadartikel van product maken
     destroy:
       notice: Artikel %{name} is verwijdered.
     edit:
@@ -1379,7 +1384,7 @@ nl:
       reason: Reden
       stock_changes: Verloop
     stock_article:
-      confirm_delete: 
+      confirm_delete: Voorraadartikel "%{name}" echt verwijderen?
     update:
       notice: Voorraadartikel "%{name}" is bijgewerkt.
   suppliers:

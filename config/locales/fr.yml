@@ -276,7 +276,9 @@ fr:
     controller:
       error_authn: 
       error_denied: 
+      error_denied_sign_in: 
       error_members_only: 
+      error_token: 
   article_categories:
     create:
       notice: La catégorie a bien été définie.
@@ -1180,6 +1182,7 @@ fr:
       title_list: Liste des pages
     body:
       title_toc: Contenu
+      wikicloth_exception: 
     create:
       notice: La page a bien été créée.
     cshow:
@@ -1375,6 +1378,8 @@ fr:
       title: Copier l'article
     create:
       notice: 
+    derive:
+      title: 
     destroy:
       notice: L'article %{name} a bien été supprimé du stock.
     edit:
