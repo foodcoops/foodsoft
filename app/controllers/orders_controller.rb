@@ -163,9 +163,10 @@ class OrdersController < ApplicationController
     rest_to << :tolerance if params[:rest_to_tolerance]
     rest_to << :stock if params[:rest_to_stock]
     rest_to << nil
-    # count what happens to the articles
-    counts = [0] * (rest_to.length+2)
-    cunits = [0] * (rest_to.length+2)
+    # count what happens to the articles:
+    #   changed, rest_to_tolerance, rest_to_stock, left_over
+    counts = [0] * 4
+    cunits = [0] * 4
     OrderArticle.transaction do
       params[:order_articles].each do |oa_id, oa_params|
         unless oa_params.blank?
@@ -185,12 +186,15 @@ class OrdersController < ApplicationController
         end
       end
     end
-    notice = I18n.t('orders.update_order_amounts.msg1', count: counts.shift, units: cunits.shift)
-    notice += ", " + I18n.t('orders.update_order_amounts.msg2', count: counts.shift, units: cunits.shift) if params[:rest_to_tolerance]
-    notice += ", " + I18n.t('orders.update_order_amounts.msg3', count: counts.shift, units: cunits.shift) if params[:rest_to_stock]
-    if counts[0]>0 or cunits[0]>0
-      notice += ", " + I18n.t('orders.update_order_amounts.msg4', count: counts.shift, units: cunits.shift)
+    return nil if counts[0] == 0
+    notice = []
+    notice << I18n.t('orders.update_order_amounts.msg1', count: counts[0], units: cunits[0])
+    notice << I18n.t('orders.update_order_amounts.msg2', count: counts[1], units: cunits[1]) if params[:rest_to_tolerance]
+    notice << I18n.t('orders.update_order_amounts.msg3', count: counts[2], units: cunits[2]) if params[:rest_to_stock]
+    if counts[3]>0 or cunits[3]>0
+      notice << I18n.t('orders.update_order_amounts.msg4', count: counts[3], units: cunits[3])
     end
+    notice.join(', ')
   end
 
 end
