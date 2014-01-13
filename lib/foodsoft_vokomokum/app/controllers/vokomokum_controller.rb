@@ -2,9 +2,10 @@
 class VokomokumController < ApplicationController
 
   skip_before_filter :authenticate, :only => :login
+  before_filter :authenticate_finance, :only => :export_amounts
 
   def login
-    raise FoodsoftVokomokum::AuthnException if not request.post? or params[:Mem].blank?
+    request.post? or raise FoodsoftVokomokum::AuthnException.new('Vokomokum login needs POST')
 
     userinfo = FoodsoftVokomokum.check_user(params[:Mem])
     user = update_or_create_user(userinfo[:id],
@@ -12,10 +13,17 @@ class VokomokumController < ApplicationController
                                  userinfo[:first_name],
                                  userinfo[:last_name])
     super user
-    redirect_to root_url, notice: "Welkom, Vokomokum lid ##{userinfo[:id]}!"
+    redirect_to root_url
 
-  rescue FoodsoftVokomokum::AuthnException
-    redirect_to FoodsoftConfig[:vokomokum_login_url]
+  rescue FoodsoftVokomokum::AuthnException => e
+    Rails.logger.warn "Vokomokum authentication failed: #{e.message}"
+    redirect_to FoodsoftConfig[:vokomokum_members_url]
+  end
+
+  def export_amounts
+    order = Order.find(params[:order_id])
+    amounts = Hash[order.group_orders.map{|go| [go.ordergroup, go.price] }]
+    send_data FoodsoftVokomokum.export_amounts(amounts), filename: order.name+'-vers.txt', type: 'text/plain'
   end
 
 
