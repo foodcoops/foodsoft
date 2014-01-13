@@ -58,9 +58,12 @@ module OrdersHelper
   
   def receive_input_field(form)
     order_article = form.object
-    units_expected = (order_article.units_billed or order_article.units_to_order)
+    units_expected = (order_article.units_billed or order_article.units_to_order) *
+      1.0 * order_article.article.unit_quantity / order_article.article_price.unit_quantity
     
-    input_html = form.text_field :units_received, class: 'input input-nano package units_received',
+    input_classes = 'input input-nano units_received'
+    input_classes += ' package' unless order_article.article_price.unit_quantity == 1
+    input_html = form.text_field :units_received, class: input_classes,
       data: {'units-expected' => units_expected},
       disabled: order_article.result_manually_changed?,
       autocomplete: 'off'
