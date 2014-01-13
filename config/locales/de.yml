@@ -277,6 +277,7 @@ de:
       error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine Administratorin, dass sie Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
       error_denied_sign_in: als ein anderer Benutzer anmelden
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
+      error_token: 
   article_categories:
     create:
       notice: Die Kategorie wurde gespeichert
@@ -1171,7 +1172,7 @@ de:
       title_list: Seiten-Liste
     body:
       title_toc: Inhalt
-      wikicloth_exception: "Entschuldigung, ein Fehler ist beim Anzeigen der Wikiseite aufgetreten: »%{msg}«. Bearbeiten der Seite kann helfen, diesen Fehler zu beseitigen."
+      wikicloth_exception: ! 'Entschuldigung, ein Fehler ist beim Anzeigen der Wikiseite aufgetreten: »%{msg}«. Bearbeiten der Seite kann helfen, diesen Fehler zu beseitigen.'
     create:
       notice: Seite wurde angelegt
     cshow:

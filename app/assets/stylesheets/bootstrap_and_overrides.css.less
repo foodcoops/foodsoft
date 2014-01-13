@@ -267,6 +267,10 @@ tr.unavailable {
 
 // ********* Tweaks & fixes
 
+// Fix bootstrap dropdown menu on mobile
+// https://github.com/twbs/bootstrap/issues/4550#issuecomment-31916049
+.dropdown-backdrop { position: static; }
+
 // need more space for supplier&order information (in German, at least)
 .dl-horizontal {
   dt { width: 160px; }
@@ -285,6 +289,18 @@ tr.unavailable {
   width: inherit;
 }
  
+// center table rows vertically (including form elements)
+table.table {
+  td, th {
+    vertical-align: middle;
+  }
+  select, textarea, input, .uneditable-input,
+  .input-append, .input-prepend {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+
 .settings {
   .settings-group {
     margin-bottom: 10px;
