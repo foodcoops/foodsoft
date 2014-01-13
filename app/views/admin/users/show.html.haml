@@ -37,4 +37,3 @@
   = link_to t('ui.edit'), edit_admin_user_path(@user), class: 'btn'
   = link_to t('ui.delete'), [:admin, @user], :confirm => t('.confirm', user: @user.first_name),
     :method => :delete, class: 'btn btn-danger'
-  = link_to t('.send_message'), new_message_path(:message => {:mail_to => @user.id}), class: 'btn'
