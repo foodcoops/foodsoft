@@ -17,4 +17,15 @@ module MessagesHelper
     link_to(link_text.html_safe, new_message_path(message: messages_params), class: 'btn',
             title: I18n.t('helpers.submit.message.create'))
   end
+
+  # render user presentation linking to default action (write message)
+  def show_user_link(user=@current_user)
+    if user.nil?
+      show_user user
+    else
+      link_to show_user(user), new_message_path('message[mail_to]' => user.id),
+                               :title => I18n.t('helpers.application.write_message')
+    end
+  end
+
 end
