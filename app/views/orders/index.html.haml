@@ -11,12 +11,12 @@
 
 .well
   - if not @open_orders.empty?
-    %h2= t '.open_orders'
-  - elsif not @orders_in_progress.empty?
-    %h2= t '.orders_in_progress'
+    %h2= t '.orders_open'
+  - elsif not @finished_orders.empty?
+    %h2= t '.orders_finished'
   - else
-    = t '.no_open_orders'
-  - unless @open_orders.empty? and @orders_in_progress.empty?
+    = t '.no_open_or_finished_orders'
+  - unless @open_orders.empty? and @finished_orders.empty?
     %table.table.table-striped
       %thead
         %tr
@@ -42,12 +42,12 @@
                 = link_to t('ui.delete'), order, confirm: t('.confirm_delete'), method: :delete,
                   class: 'btn btn-small btn-danger'
 
-        - unless @orders_in_progress.empty?
+        - unless @finished_orders.empty?
           - unless @open_orders.empty?
             %tr
               %td{colspan: 6}
-                %h2= t '.orders_in_progress'
-          - for order in @orders_in_progress
+                %h2= t '.orders_finished'
+          - for order in @finished_orders
             %tr
               %td= order.name
               %td= format_time(order.ends)
@@ -62,10 +62,7 @@
                 = link_to t('ui.show'), order, class: 'btn btn-small'
                 = link_to t('ui.delete'), order, confirm: t('.confirm_delete'), method: :delete,
                   class: 'btn btn-small btn-danger'
-        - else
-          %tr
-            %td{colspan: 6}= t '.no_orders_in_progress'
 
-%h2= t '.closed_orders'
+%h2= t '.orders_settled'
 #orders_table
   = render partial: 'orders'

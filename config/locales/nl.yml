@@ -1101,10 +1101,11 @@ nl:
       action_end: Sluiten
       confirm_delete: Wil je de bestelling werkelijk verwijderen?
       confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
-      ended_orders: Gesloten bestellingen
       new_order: Nieuwe bestelling openen
-      no_open_orders: Er zijn momenteel geen lopende bestellingen.
-      open_orders: Lopende bestellingen
+      no_open_or_finished_orders: Er zijn momenteel geen open of gesloten bestellingen.
+      orders_finished: Gesloten
+      orders_open: Open
+      orders_settled: Afgerekend
       title: Bestellingen beheren
     model:
       error_closed: Bestelling was al afgerekend

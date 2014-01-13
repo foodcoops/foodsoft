@@ -1126,10 +1126,11 @@ fr:
       action_end: Terminer
       confirm_delete: Vraiment supprimer la commande?
       confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
-      ended_orders: Commandes closes
       new_order: Définir une nouvelle commande
-      no_open_orders: Il n'y a aucune commande en cours en ce moment.
-      open_orders: Commandes en cours
+      no_open_or_finished_orders: Il n'y a aucune commande en cours en ce moment.
+      orders_finished: Close
+      orders_open: En cours
+      orders_settled: Décomptée
       title: Gestion des commandes
     model:
       error_closed: Cette commande a déjà été décomptée

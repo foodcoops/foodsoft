@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   # List orders
   def index
     @open_orders = Order.open.includes(:supplier)
-    @orders_in_progress = Order.finished_not_closed.includes(:supplier)
+    @finished_orders = Order.finished_not_closed.includes(:supplier)
     @per_page = 15
     if params['sort']
       sort = case params['sort']

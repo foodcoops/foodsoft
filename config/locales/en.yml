@@ -1130,13 +1130,13 @@ en:
     index:
       action_end: Close
       action_receive: Receive
-      closed_orders: Settled orders
       confirm_delete: Do you really want to delete the order?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
       new_order: Create new order
-      no_open_orders: There are currently no open orders.
-      open_orders: Current orders
-      orders_in_progress: In process
+      no_open_or_finished_orders: There are currently no open or closed orders.
+      orders_finished: Closed
+      orders_open: Open
+      orders_settled: Settled
       title: Manage orders
     model:
       error_closed: Order was already settled

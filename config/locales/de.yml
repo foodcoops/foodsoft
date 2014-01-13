@@ -1130,13 +1130,13 @@ de:
     index:
       action_end: Beenden
       action_receive: In Empfang nehmen
-      closed_orders: Abgerechnete Bestellungen
       confirm_delete: Willst Du wirklich die Bestellung löschen?
       confirm_end: Willst Du wirklich die Bestellung %{order} beenden? Es gibt kein zurück.
       new_order: Neue Bestellung anlegen
-      no_open_orders: Derzeit gibt es keine laufende Bestellungen.
-      open_orders: Laufende Bestellungen
-      orders_in_progress: In Bearbeitung
+      no_open_or_finished_orders: Derzeit gibt es keine laufende oder beendete Bestellungen.
+      orders_finished: Beendet
+      orders_open: Laufend
+      orders_settled: Abgerechnet
       title: Bestellungen verwalten
     model:
       error_closed: Bestellung wurde schon abgerechnet
