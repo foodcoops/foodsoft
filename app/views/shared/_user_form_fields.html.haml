@@ -12,7 +12,7 @@
 = f.input :password_confirmation, :required => f.object.new_record?, input_html: password_html
 = f.input :phone
 
-= yield f if block_given?
+= captured if defined? captured
 
 = f.simple_fields_for :settings_attributes do |s|
   = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
