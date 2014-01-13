@@ -1,12 +1,13 @@
 = simple_form_for([:admin, @user]) do |f|
-  / use layout to pass block http://stackoverflow.com/questions/2951105#2952056
-  = render layout: 'shared/user_form_fields', locals: {f: f, password_autocomplete: false} do
+  -# use capture to pass block http://stackoverflow.com/a/15492819/2866660 (the layout method breaks deface)
+  - capt = capture do
     = f.fields_for (@user.ordergroup or Ordergroup.new((params[:user][:ordergroup] rescue nil))) do |ogf|
       = ogf.input :id, label: User.human_attribute_name(:ordergroup), as: 'select', collection: Ordergroup.undeleted.order(:name), selected: (@user.ordergroup.id rescue nil), include_blank: true, required: false
       // TODO enable client-side validations for form fields only when fields are used; for now keep required false
       %div.for-ordergroup{style: 'display: none'}
         = ogf.input :contact_address
         -#= ogf.input :ignore_apple_restriction, :label => false, :inline_label => true
+  = render partial: 'shared/user_form_fields', locals: {f: f, password_autocomplete: false, captured: capt}
   .form-actions
     = f.submit
     = link_to t('ui.or_cancel'), :back
