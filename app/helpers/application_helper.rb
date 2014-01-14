@@ -194,7 +194,7 @@ module ApplicationHelper
     end
   end
 
-  # render user presentation
+  # render user presentation linking to default action (plugins can override this)
   def show_user_link(user=@current_user)
     show_user user
   end
