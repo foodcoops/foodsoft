@@ -18,14 +18,4 @@ module MessagesHelper
             title: I18n.t('helpers.submit.message.create'))
   end
 
-  # render user presentation linking to default action (write message)
-  def show_user_link(user=@current_user)
-    if user.nil?
-      show_user user
-    else
-      link_to show_user(user), new_message_path('message[mail_to]' => user.id),
-                               :title => I18n.t('helpers.messages.write_message')
-    end
-  end
-
 end
