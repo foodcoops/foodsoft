@@ -1,4 +1,5 @@
-/ replace 'erb:contains("messages")'
+/ replace 'erb[silent]:contains("dashboard_middle_mark")'
+-# FIXME: should use insert_after instead of replace
 - unless Message.public.empty?
   %section#messages
     %h2= t '.messages.title'

@@ -3,6 +3,12 @@
 - content_for(:sidebar) do
   = render :partial => 'start_nav'
 
+/ Plugins may insert content after the following marker with:
+/ insert_after 'erb[silent]:contains("dashboard_top_mark")'
+/ In case order matters, use deface's sequence option.
+/ FIXME: uncommenting the following line leads to a syntax error
+/- # dashboard_top_mark
+
 - unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks.size == 0
   %section.row-fluid
     - unless @next_tasks.empty?
@@ -32,8 +38,10 @@
     %h2= t '.ordergroup.title'
     = render :partial => "apple_bar", :locals => {:apple_bar => AppleBar.new(current_user.ordergroup)}
 
-/ The following line is an ugly hack to allow targeting this point with a deface/ nokogiri CSS selector. If anyone finds a better selector please remove these lines and replace the selector in lib/foodsoft_messages/app/overrides/home/index/messages.html.haml.deface
-- #messages
+/ Plugins may insert content after the following marker with:
+/ insert_after 'erb[silent]:contains("dashboard_middle_mark")'
+/ In case order matters, use deface's sequence option.
+- # dashboard_middle_mark
 
 - if current_user.ordergroup
   // Ordergroup overview
@@ -60,3 +68,8 @@
             %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
       %br/
       %p= link_to t('.my_ordergroup.transactions.view'), my_ordergroup_path
+
+/ Plugins may insert content after the following marker with:
+/ insert_after 'erb[silent]:contains("dashboard_bottom_mark")'
+/ In case order matters, use deface's sequence option.
+- # dashboard_bottom_mark
