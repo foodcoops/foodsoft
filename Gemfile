@@ -65,9 +65,11 @@ group :development do
   gem 'quiet_assets'
   
   # Deploy with Capistrano
-  gem 'capistrano', '2.13.5', require: false
-  gem 'capistrano-ext', require: false
-  #gem 'common_deploy', require: false, path: '../../common_deploy' # pending foodcoops/foodsoft#34,  git: 'git://github.com/fsmanuel/common_deploy.git'
+  gem 'capistrano', '~> 3.0', require: false
+  # https://github.com/capistrano/rails/issues/48#issuecomment-31443739
+  gem 'capistrano-rvm', github: 'capistrano/rvm', require: false
+  gem 'capistrano-bundler', '>= 1.1.0', require: false
+  gem 'capistrano-rails', require: false
   # Avoid having content-length warnings
   gem 'thin'
 end
