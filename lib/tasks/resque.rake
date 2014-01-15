@@ -4,7 +4,7 @@ def run_worker(queue, count = 1)
   puts "Starting #{count} worker(s) with QUEUE: #{queue}"
   ops = {:pgroup => true, :err => ["log/resque_worker_foodsoft_notifier.log", "a"], 
                           :out => ["log/resque_worker_foodsoft_notifier.log", "a"]}
-  env_vars = {"QUEUE" => queue.to_s, "PIDFILE" => "tmp/pids/resque_worker_foodsoft_notifier.pid", "VERBOSE" => "1"}
+  env_vars = {"QUEUE" => queue.to_s, "PIDFILE" => "tmp/pids/resque_worker_foodsoft_notifier.pid"}
   count.times {
     ## Using Kernel.spawn and Process.detach because regular system() call would
     ## cause the processes to quit when capistrano finishes
