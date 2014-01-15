@@ -22,7 +22,7 @@ namespace :deploy do
       task :config => ['deploy:set_rails_env'] do
         require 'securerandom'
         on roles(:app), in: :groups do
-          db_name = fetch(:unique_app_name).gsub(/[^-_a-z0-9]/i, '')
+          db_name = (fetch(:db_user) or fetch(:application))
           db_passwd = SecureRandom.urlsafe_base64(24).to_s
           db_yaml = {
             fetch(:rails_env).to_s => {

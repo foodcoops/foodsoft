@@ -14,8 +14,6 @@ set :user,                'deploy'              # ssh deploy user
 set :default_stage,       'staging'             # default environment, see config/deploy/
 set :keep_releases,       10
 set :repo_url,            'git://github.com/foodcoops/foodsoft.git'
-set :unique_app_name,     fetch(:application)   # for more complex setups, this can be customised
-                                                # XXX how to get rails environment in here?
 set :deploy_to,            "/www/apps/#{fetch :unique_app_name}"
 
 # more settings which are probably ok
