@@ -3,11 +3,8 @@
 - content_for(:sidebar) do
   = render :partial => 'start_nav'
 
-/ Plugins may insert content after the following marker with:
-/ insert_after 'erb[silent]:contains("dashboard_top_mark")'
-/ In case order matters, use deface's sequence option.
-/ FIXME: uncommenting the following line leads to a syntax error
-/- # dashboard_top_mark
+-# placeholder deface to add content using erb[silent]:contains()
+- '<dashboard_top_mark>'
 
 - unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks.size == 0
   %section.row-fluid
@@ -38,10 +35,8 @@
     %h2= t '.ordergroup.title'
     = render :partial => "apple_bar", :locals => {:apple_bar => AppleBar.new(current_user.ordergroup)}
 
-/ Plugins may insert content after the following marker with:
-/ insert_after 'erb[silent]:contains("dashboard_middle_mark")'
-/ In case order matters, use deface's sequence option.
-- # dashboard_middle_mark
+-# placeholder deface to add content using erb[silent]:contains()
+- '<dashboard_middle_mark>'
 
 - if current_user.ordergroup
   // Ordergroup overview
@@ -69,7 +64,5 @@
       %br/
       %p= link_to t('.my_ordergroup.transactions.view'), my_ordergroup_path
 
-/ Plugins may insert content after the following marker with:
-/ insert_after 'erb[silent]:contains("dashboard_bottom_mark")'
-/ In case order matters, use deface's sequence option.
-- # dashboard_bottom_mark
+-# placeholder deface to add content using erb[silent]:contains()
+- '<dashboard_bottom_mark>'
