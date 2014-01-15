@@ -62,9 +62,4 @@ class HomeController < ApplicationController
     redirect_to my_profile_path
   end
 
-  # redirect to root, going to default foodcoop when none given
-  def redirect_to_foodcoop
-    redirect_to root_path
-  end
-
 end
