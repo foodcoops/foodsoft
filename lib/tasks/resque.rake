@@ -24,7 +24,11 @@ namespace :resque do
   
   desc "Quit running workers"
   task :stop_workers do
-    pids = File.read('tmp/pids/resque_worker_foodsoft_notifier.pid').split("\n")
+    begin
+      pids = File.read('tmp/pids/resque_worker_foodsoft_notifier.pid').split("\n")
+    rescue Errno::ENOENT
+      pids = []
+    end
     if pids.empty?
       puts "No workers to kill"
     else
