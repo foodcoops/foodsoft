@@ -1,0 +1,18 @@
+- title t('.title')
+
+-# payment response dialog
+- unless params[:result].blank?
+  %div#paymentResult{:data => {:role => :popup, 'overlay-theme' => 'a', :shadow => :true, :immediate => :true, :transition => 'pop'}}
+    %div{:data => {:role => :content}}
+      = render :partial => "created"
+
+  - content_for :javascript do
+    :javascript
+      // auto-close dialog so next member can use it
+      setTimeout(function() {
+        $('#paymentResult').popup('close');
+      }, 8*1000);
+
+#orderGroupsTable
+  = render :partial => "ordergroups"
+

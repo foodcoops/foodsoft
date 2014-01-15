@@ -1,6 +1,8 @@
 # encoding: utf-8
 module OrdersHelper
 
+  include ArticlesHelper # for article_info_icon
+
   def update_articles_link(order, text, view)
     link_to text, order_path(order, view: view), remote: true
   end
@@ -15,4 +17,5 @@ module OrdersHelper
     options += [[I18n.t('helpers.orders.option_stock'), url_for(action: 'new', supplier_id: 0)]]
     options_for_select(options)
   end
+
 end

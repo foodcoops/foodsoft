@@ -20,11 +20,15 @@ class Article < ActiveRecord::Base
   validates_numericality_of :price, :greater_than_or_equal_to => 0
   validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
-  validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type]
+  validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit]
   
   # Callbacks
   before_save :update_price_history
   before_destroy :check_article_in_use
+
+  def title
+    "#{name} (#{unit})"
+  end
   
   # The financial gross, net plus tax and deposti
   def gross_price
@@ -149,6 +153,11 @@ class Article < ActiveRecord::Base
   def mark_as_deleted
     check_article_in_use
     update_column :deleted_at, Time.now
+  end
+
+  # product information url, fallback to optional supplier-wide value
+  def info_url
+    self[:info_url] or supplier.article_info_url(self)
   end
 
   protected

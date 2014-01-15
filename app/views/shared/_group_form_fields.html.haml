@@ -3,8 +3,7 @@
 
 = yield
 
-= f.input :user_tokens, :as => :string,
-  :input_html => { 'data-pre' => f.object.users.map(&:token_attributes).to_json }
+= f.input :user_tokens, :as => :string
 
 - content_for :javascript do
   :javascript
@@ -24,13 +23,10 @@
         toggleWeeklyTaskFields();
       });
 
-      $("##{f.object.class.to_s.underscore}_user_tokens").tokenInput("#{users_path(:format => :json)}", {
-        crossDomain: false,
-        prePopulate: $("##{f.object.class.to_s.underscore}_user_tokens").data("pre"),
-        hintText: '#{t('.search_user')}',
-        noResultText: '#{t('.user_not_found')}',
-        searchingText: '#{t('.search')}',
-        theme: 'facebook'
+      $("##{f.object.class.to_s.underscore}_user_tokens").select2_remote({
+        tags: true,
+        remote_url: '#{users_path(:format => :json)}',
+        remote_init: #{search_data(f.object.users, proc {|u| show_user u})[:results].to_json}
       });
     });
 

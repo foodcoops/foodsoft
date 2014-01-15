@@ -5,9 +5,7 @@
 
 - content_for :sidebar do
   .well.well-small
-    %strong= t('.balance', balance: number_to_currency(@ordergroup.account_balance))
-    %br/
-    %small= t('.last_updated_at', when: distance_of_time_in_words(Time.now, @ordergroup.account_updated))
+    = render 'account_info', ordergroup: @ordergroup
 .well.well-small
   = form_tag finance_ordergroup_transactions_path(@ordergroup), :method => :get, :remote => true,
     'data-submit-onchange' => true, class: 'form-search' do

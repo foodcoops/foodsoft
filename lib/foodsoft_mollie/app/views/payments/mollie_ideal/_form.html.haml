@@ -1,0 +1,10 @@
+= form_tag payments_mollie_path, method: :post do
+  .controls
+    = label_tag 'amount', ((params[:label] or t('.amount_pay')))
+    .input-prepend
+      %span.add-on= t 'number.currency.format.unit'
+      = number_field_tag 'amount', @amount, min: 0, readonly: (params[:fixed]=='true'), class: 'input-mini'
+    = label_tag 'bank_id', t('.bank')
+    = select_tag 'bank_id', options_from_collection_for_select(@banks, 'id', 'name')
+  = submit_tag t('.submit')
+

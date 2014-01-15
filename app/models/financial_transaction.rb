@@ -11,7 +11,8 @@ class FinancialTransaction < ActiveRecord::Base
 
   # Use this save method instead of simple save and after callback
   def add_transaction!
-    ordergroup.add_financial_transaction! amount, note, user
+    # re-find ordergroup to make sure it isn't read-only
+    Ordergroup.find(ordergroup.id).add_financial_transaction! amount, note, user
   end
 end
 

@@ -1,0 +1,7 @@
+/ insert_after '.span7 h3'
+%p
+  You can update your personal details in the
+  = link_to 'member system', "#{FoodsoftConfig[:vokomokum_members_url]}/member/#{@current_user.id}/edit"
+  = '.'
+
+

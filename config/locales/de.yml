@@ -559,6 +559,9 @@ de:
     create:
       notice: Rechnung wurde erstellt.
     financial_transactions:
+      account_info:
+        balance: Kontostand
+        last_updated_at: (Der Konstostand ist zuletzt aktualisiert vor %{when})
       controller:
         create:
           notice: Die Transaktion wurde gespeichert.
@@ -567,8 +570,6 @@ de:
           error_note_required: Notiz wird benötigt!
           notice: Alle Transaktionen wurden gespeichert.
       index:
-        balance: ! 'Kontostand: %{balance}'
-        last_updated_at: (zuletzt aktualisiert vor %{when})
         new_transaction: Neue Transaktion anlegen
         search_placeholder: Suchen ...
         title: Kontoauszug für %{name}
@@ -720,7 +721,7 @@ de:
       sum: Summe
       title: Dein Bestellergebnis für %{order}
     switch_order:
-      remaining: noch %{remaining}
+      open_remaining: noch %{remaining}
       title: Laufende Bestellungen
     update:
       error_general: Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.
@@ -1021,9 +1022,6 @@ de:
         subscribe: Erklärungen zum Verteiler findest Du im %{link}.
         subscribe_msg: Eventuell musst Du Dich dem Verteiler erst bekannt machen.
         wiki: Wiki (Abschnitt Mailing-Liste)
-      no_user_found: Keine Nutzerin gefunden
-      search: Suche ...
-      search_user: Nach Nutzerin suchen
       title: Neue Nachricht
     show:
       all_messages: Nachricht im Überblick
@@ -1447,10 +1445,6 @@ de:
       warning_periodic: <strong>Warnung:</strong> Diese Aufgabe ist Teil einer Gruppe von <em>wöchentlichen Aufgaben</em>. Beim Speichern wird sie aus der Gruppe ausgeschlossen und in eine <em>gewöhnliche Aufgabe</em> umgewandelt.
     error_not_found: Keine Arbeitsgruppe gefunden
     form:
-      search:
-        hint: Nach Nutzerin suchen
-        noresult: Keine Nutzerin gefunden
-        placeholder: Suche ...
       submit:
         periodic: Wöchentliche Aufgabe speichern
     index:

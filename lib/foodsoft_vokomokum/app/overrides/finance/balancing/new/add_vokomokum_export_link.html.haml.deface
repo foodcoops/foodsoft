@@ -1,0 +1,2 @@
+/ insert_bottom '#editOrderNav ul'
+%li= link_to t('.export_amounts'), finance_vokomokum_export_amounts_path(order_id: @order.id)

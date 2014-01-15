@@ -1,0 +1,4 @@
+/ insert_bottom 'erb:contains("input"):contains("email"), erb:contains("input"):contains("first_name"), erb:contains("input"):contains("last_name")'
+, :readonly => params[:controller]=='home'
+
+

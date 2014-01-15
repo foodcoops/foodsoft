@@ -2,7 +2,7 @@
 class Finance::BalancingController < Finance::BaseController
 
   def index
-    @orders = Order.finished.page(params[:page]).per(@per_page).order('ends DESC')
+    @orders = Order.finished.page(params[:page]).per(@per_page)
   end
 
   def new

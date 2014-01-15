@@ -684,6 +684,8 @@ nl:
       total_sum_amount: Totalbedrag
       total_tolerance: Totale tolerantie
       units: Eenheden
+      units_all: Alle leden
+      units_all_short: Allen
       units_full: Volle eenheden
       units_total: Totaal aantal
     index:

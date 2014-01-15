@@ -16,7 +16,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'select2-rails'
+gem 'select2-rails', '>= 3.4.0'
 gem 'bootstrap-datepicker-rails'
 gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
 gem 'i18n-js', git: 'git://github.com/fnando/i18n-js.git' # to avoid US-ASCII js.erb error
@@ -42,8 +42,12 @@ gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
-gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
-gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
+#gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
+#gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
+
+gem 'foodsoft_mollie', path: 'lib/foodsoft_mollie'
+gem 'foodsoft_adyen', path: 'lib/foodsoft_adyen'
+gem 'foodsoft_signup', path: 'lib/foodsoft_signup'
 
 group :production do
   gem 'exception_notification'
@@ -65,9 +69,11 @@ group :development do
   gem 'quiet_assets'
   
   # Deploy with Capistrano
-  gem 'capistrano', '2.13.5', require: false
-  gem 'capistrano-ext', require: false
-  #gem 'common_deploy', require: false, path: '../../common_deploy' # pending foodcoops/foodsoft#34,  git: 'git://github.com/fsmanuel/common_deploy.git'
+  gem 'capistrano', '~> 3.0', require: false
+  # https://github.com/capistrano/rails/issues/48#issuecomment-31443739
+  gem 'capistrano-rvm', github: 'capistrano/rvm', require: false
+  gem 'capistrano-bundler', '>= 1.1.0', require: false
+  gem 'capistrano-rails', require: false
   # Avoid having content-length warnings
   gem 'thin'
 end

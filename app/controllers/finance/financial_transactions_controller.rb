@@ -28,9 +28,19 @@ class Finance::FinancialTransactionsController < ApplicationController
 
   def new
     @financial_transaction = @ordergroup.financial_transactions.build
+    # pre-fill amount to bring balance to zero - including unfinished and open orders!! #foodcoop-adam
+    if @ordergroup.get_available_funds < 0
+      @financial_transaction.amount = -@ordergroup.get_available_funds
+    end
   end
 
   def create
+    # handle note radio buttons
+    if params[:type] == 'pin'
+      params[:financial_transaction][:note] = 'PIN delivery day. ' + params[:financial_transaction][:note]
+    elsif params[:type] == 'cash'
+      params[:financial_transaction][:note] = 'cash delivery day. ' + params[:financial_transaction][:note]
+    end
     @financial_transaction = FinancialTransaction.new(params[:financial_transaction])
     @financial_transaction.user = current_user
     @financial_transaction.add_transaction!

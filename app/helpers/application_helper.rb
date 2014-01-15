@@ -29,7 +29,7 @@ module ApplicationHelper
   
   # Link-collection for per_page-options when using the pagination-plugin
   def items_per_page(options = {})
-    per_page_options = options[:per_page_options] || [20, 50, 100]
+    per_page_options = options[:per_page_options] || [20, 50, 100, 500]
     current = options[:current] || @per_page
     params = params || {}
 
@@ -138,6 +138,10 @@ module ApplicationHelper
       :method => :get
     }
     link_to(text, options[:url], remote_options.merge(options))
+  end
+
+  def search_data(query, field)
+    controller.search_data(query, field)
   end
 
   def format_roles(record)

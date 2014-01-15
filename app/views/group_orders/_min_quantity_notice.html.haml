@@ -1,0 +1,35 @@
+- min_order_quantity = (Float(@order.supplier.min_order_quantity) rescue 0)
+- unless @order.supplier.min_order_quantity.blank? or min_order_quantity > 0
+  %p
+    %i= t('simple_form.labels.supplier.min_order_quantity') + ': ' +  @order.supplier.min_order_quantity
+
+- if min_order_quantity > 0
+  %p
+    %i#min_quantity_text{title: t('.title_note', amount: number_to_currency(min_order_quantity))}
+      - if min_order_quantity > @order.sum(:gross)
+        = t '.status_needed', amount: number_to_currency(min_order_quantity-@order.sum(:gross)+0.5, precision: 0) 
+      -# else
+        = t '.status_enough_others'
+
+  - content_for :javascript do
+    -# The dynamic computation is approximate, since the minimum order quantity is based on
+    -# gross amounts, and the group_order screen only has net amounts. To give an estimation,
+    -# we add the markup to the minimum order quantity. This does not take into account deposit.
+    :javascript
+      $(function() {
+        var sum_others = #{@order.sum(:fc) - @group_order.price};
+        var min_order_quantity = #{min_order_quantity * (1+FoodsoftConfig[:price_markup]/100)};
+        $(document).bind('foodsoft:group_order_sum_changed', function(evt, total, balance) {
+          var text;
+          if ( sum_others >= min_order_quantity) {
+            text = '#{j t('.status_enough_others')}';
+          } else if ( (sum_others + total) >= min_order_quantity) {
+            text = '#{j t('.status_enough_affected')}';
+          } else {
+            var amount = I18n.toCurrency(min_order_quantity-sum_others-total+0.5, {precision: 0});
+            text = '#{j t('.status_needed_approx')}'.replace('%{amount}', amount);
+          }
+          $('#min_quantity_text').text(text);
+        });
+      });
+

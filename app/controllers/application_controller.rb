@@ -12,7 +12,33 @@ class ApplicationController < ActionController::Base
   def self.current
     Thread.current[:application_controller]
   end
-  
+
+  # return search data from query
+  #   this is public because it can also be called from a view - to
+  #   be able to initialize input fields (select2&friends)
+  def search_data(query, field)
+    # is_a? on ActiveRecord doesn't work http://stackoverflow.com/questions/7828666
+    if query.respond_to? :offset
+      limit = (params[:limit] or 10)
+      offset = (params[:offset] or 0)
+      data = query.limit(limit).offset(offset)
+    else
+      data = query
+    end
+    {
+      :total => query.count,
+      :results =>
+        if field.respond_to? :call
+          data.map {|o| {id: o.id, text: field.call(o)} }
+        else
+          # ActiveRecord.pluck() doesn't always work here because of relations
+          # http://meltingice.net/2013/06/11/pluck-multiple-columns-rails/
+          query.respond_to? :offset and query = query.select(:id).select(field)
+          data.map {|o| {id: o.id, text: o[field] } }
+        end
+    }
+  end
+
   protected
 
   def current_user
@@ -30,12 +56,23 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
+
+  def login(user)
+    session[:user_id] = user.id
+    session[:scope] = FoodsoftConfig.scope  # Save scope in session to not allow switching between foodcoops with one account
+    session[:locale] = user.locale
+  end
+
+  def logout
+    session[:user_id] = nil
+    session[:return_to] = nil
+  end
+
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
     if !current_user
       # No user at all: redirect to login page.
-      session[:user_id] = nil
+      logout
       session[:return_to] = request.original_url
       redirect_to login_url, :alert => I18n.t('application.controller.error_authn')
     else
@@ -133,7 +170,7 @@ class ApplicationController < ActionController::Base
   end
 
   def items_per_page
-    if params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100
+    if params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 500
       @per_page = params[:per_page].to_i
     else
       @per_page = 20

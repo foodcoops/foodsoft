@@ -1,0 +1,1 @@
+/ remove '.span5 erb:contains("new_invite_path"), .span5 erb:contains("cancel_membership_path")'

@@ -25,11 +25,16 @@ class Order < ActiveRecord::Base
   after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
-  scope :open, where(state: 'open').order('ends DESC')
-  scope :finished, where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC')
-  scope :finished_not_closed, where(state: 'finished').order('ends DESC')
-  scope :closed, where(state: 'closed').order('ends DESC')
+  # joins needn't be readonly - https://github.com/rails/rails/issues/10769
+  scope :ordered_open, includes(:supplier).readonly(false).order('ends ASC', 'suppliers.name ASC')
+  scope :ordered_finished, includes(:supplier).readonly(false).order('DATE(ends) DESC', 'suppliers.name ASC')
+
+  scope :open, where(state: 'open').ordered_open
+  scope :finished, where(state: ['finished', 'closed']).ordered_finished
+  scope :finished_not_closed, where(state: 'finished').ordered_finished
+  scope :closed, where(state: 'closed').ordered_finished
   scope :stockit, where(supplier_id: 0).order('ends DESC')
+
 
   def stockit?
     supplier_id == 0

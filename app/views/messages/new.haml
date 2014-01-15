@@ -1,13 +1,10 @@
 - content_for :javascript do
   :javascript
     $(function() {
-      $('#message_recipient_tokens').tokenInput("#{users_path(:format => :json)}", {
-        crossDomain: false,
-        prePopulate: $('#message_recipient_tokens').data('pre'),
-        hintText: '#{t '.search_user'}',
-        noResultText: '#{t '.no_user_found'}',
-        searchingText: '#{t '.search'}',
-        theme: 'facebook'
+      $('#message_recipient_tokens').select2_remote({
+        tags: true,
+        remote_url: '#{users_path(:format => :json)}',
+        remote_init: #{search_data(@message.recipients, proc {|u| show_user u})[:results].to_json},
       });
 
       $('#message_sent_to_all').click(function() {
@@ -36,7 +33,7 @@
         = t('.list.mail', email: mail_to(FoodsoftConfig[:mailing_list_subscribe])).html_safe
 
   #recipients
-    = f.input :recipient_tokens, :input_html => { 'data-pre' => User.find_all_by_id(@message.recipients_ids).map(&:token_attributes).to_json }
+    = f.input :recipient_tokens
     = f.input :group_id, :as => :select, :collection => Group.undeleted.order('type DESC, name ASC').all.reject { |g| g.memberships.empty? }
   = f.input :private
   = f.input :subject, input_html: {class: 'input-xxlarge'}

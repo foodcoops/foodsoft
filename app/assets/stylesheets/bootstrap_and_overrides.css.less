@@ -57,7 +57,7 @@ body {
 
 .logo {
   margin: 10px 0 0 30px;
-  float: left;
+  text-align: center;
   font-size: 35px;
   font-weight: bold;
   display: block;
@@ -140,6 +140,36 @@ span.used {
 span.unused {
   color: red;
 }
+.order-article {
+  .quantity, .tolerance {
+    white-space: nowrap;
+  }
+  .units_all {
+    width: 2em;
+    text-align: right;
+    padding-right: 0;
+    .plus {
+        width: 0.5em;
+        display: inline-block;
+        color: #888;
+    }
+  }
+  .units_pack {
+    width: 7em;
+    .progress {
+      margin: 0;
+      .bar:first-child {
+        color: #ccf;
+        text-shadow: none;
+      }
+      .bar:last-child {
+        color: #ddd;
+        background: inherit;
+        text-shadow: none;
+      }
+    }
+  }
+}
 
 #order-footer, .article-info {
   text-align: left;
@@ -150,7 +180,6 @@ span.unused {
   border-top: 2px solid #78B74E;
 
   #total-sum {
-    width: 22em;
     margin: .5em 2em 0 0;
     float: right;
     #order-button {
@@ -159,7 +188,16 @@ span.unused {
       input:disabled {
         background-color: red; }
     }
+    .currency {
+      min-width: 5em;
+      text-align: right;
+    }
   }
+}
+
+.new_group_order, .edit_group_order {
+  // extra margin below to make sure all rows are visible
+  margin-bottom: 140px;
 }
 
 #order-footer {
@@ -198,6 +236,10 @@ tr.order-article:hover .article-info {
   display: block;
 }
 
+td.name > .icon-info-sign {
+  color: #ddd;
+}
+
 
 // ********* Articles
 
@@ -215,6 +257,13 @@ tr.unavailable {
     border-color: red;
   }
 }
+.input-nano {
+  width: 40px;
+}
+.input-fill {
+  width: 90%;
+  min-width: 150px
+}
 
 // ********* Tweaks & fixes
 
@@ -228,6 +277,18 @@ tr.unavailable {
   dd { margin-left: 170px; }
 }
 
+// somehow select2 miscalculates its width; this width fits in forms
+.select2-container {
+  width: 219px;
+}
+// a bit more space for multi-select values
+.select2-container.select2-container-multi {
+  width: 400px;
+}
+.select2-container.input-small {
+  width: inherit;
+}
+ 
 // center table rows vertically (including form elements)
 table.table {
   td, th {
@@ -254,7 +315,10 @@ table.table {
     margin-bottom: 5px;
   }
   .control-group.select {
-    margin-bottom: 15px
+    margin-bottom: 15px;
+  }
+  .control-group:last-child {
+    margin-bottom: 10px;
   }
 }
 

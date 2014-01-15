@@ -1,0 +1,12 @@
+%h2
+  = @order.name
+  - unless @order.ends.nil?
+    %span{style: 'font-weight: normal; font-size: 50%; vertical-align: middle;'}
+      - if @order.open?
+        = t 'group_orders.switch_order.open_remaining', remaining: time_ago_in_words(@order.ends)
+      - elsif @order.finished?
+        = t 'group_orders.switch_order.when_finished', date: format_date(@order.ends)
+      - elsif @order.closed?
+        = t 'group_orders.switch_order.when_closed', date: format_date(@order.ends)
+
+

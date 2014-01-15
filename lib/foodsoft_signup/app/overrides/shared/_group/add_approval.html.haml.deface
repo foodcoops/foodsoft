@@ -1,0 +1,3 @@
+/ insert_bottom 'dl'
+%dt= Ordergroup.human_attribute_name(:approved) + ':'
+%dd= group.approved? ? t('simple_form.yes') : t('simple_form.no')

@@ -83,10 +83,9 @@ class StockitController < ApplicationController
       :locals => { :fail_msg => I18n.t('errors.general_msg', :msg => error.message) }
   end
 
-  #TODO: Fix this!!
   def articles_search
-    @articles = Article.not_in_stock.limit(8).where('name LIKE ?', "%#{params[:term]}%")
-    render :json => @articles.map(&:name)
+    articles = Article.not_in_stock.where('name LIKE ?', "%#{params[:q]}%")
+    render :json => search_data(articles, :name)
   end
 
   def fill_new_stock_article_form

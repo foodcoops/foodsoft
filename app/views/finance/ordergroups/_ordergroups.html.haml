@@ -6,14 +6,14 @@
     %tr
       %th= sort_link_helper heading_helper(Ordergroup, :name), "name", :per_page => @per_page
       %th= heading_helper Ordergroup, :contact
-      %th.numeric= sort_link_helper heading_helper(Ordergroup, :account_balance), "account_balance", :per_page => @per_page
+      %th.numeric= sort_link_helper heading_helper(Ordergroup, :available_funds), "available_funds", :per_page => @per_page
       %th
   %tbody
     - for ordergroup in @ordergroups
       %tr
         %td= ordergroup.name
         %td= ordergroup.contact
-        %td.numeric= number_to_currency(ordergroup.account_balance)
+        %td.numeric= number_to_currency(ordergroup.available_funds)
         %td
           = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-mini'
           = link_to t('.account_statement'), finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-mini'

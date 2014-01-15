@@ -38,6 +38,15 @@
   - else
     = t '.no_open_orders'
 
+
+.btn-toolbar.pull-right
+  .btn-group
+    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+      = t '.last_order_week'
+      %span.caret
+    %ul.dropdown-menu
+      %li= order_pdf(@orders_last_order_day.map(&:id).join('+'), :groups, t('orders.show.download.group_pdf'))
+
 %h2= t '.ended_orders'
 #orders_table
   = render partial: 'orders'

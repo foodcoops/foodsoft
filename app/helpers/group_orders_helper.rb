@@ -1,4 +1,7 @@
 module GroupOrdersHelper
+
+  include ArticlesHelper # for article_info_icon
+
   def data_to_js(ordering_data)
     ordering_data[:order_articles].map { |id, data|
       [id, data[:price], data[:unit], data[:total_price], data[:others_quantity], data[:others_tolerance], data[:used_quantity], data[:quantity_available]]
@@ -43,4 +46,5 @@ module GroupOrdersHelper
 
     {group_order_article: goa, quantity: quantity, tolerance: tolerance, result: result, sub_total: sub_total}
   end
+
 end

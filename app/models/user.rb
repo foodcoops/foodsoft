@@ -8,17 +8,20 @@ class User < ActiveRecord::Base
   
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
-  #has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
-  def ordergroup
-    Ordergroup.joins(:memberships).where(memberships: {user_id: self.id}).first
-  end
 
   has_many :workgroups, :through => :memberships, :source => :group, :class_name => "Workgroup"
   has_many :assignments, :dependent => :destroy
   has_many :tasks, :through => :assignments
   has_many :send_messages, :class_name => "Message", :foreign_key => "sender_id"
   has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
-  
+
+  # we cannot use has_one because user is STI and there's both a has_one and has_many relation
+  #has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
+  # workaround using ordergroup and ordergroup= (below)
+  def ordergroup
+    groups.where(:type => 'Ordergroup').first
+  end
+
   attr_accessor :password, :settings_attributes
   
   # makes the current_user (logged-in-user) available in models
@@ -184,6 +187,26 @@ class User < ActiveRecord::Base
     # would be sensible to match ApplicationController#show_user
     #   this should not be part of the model anyway
     {:id => id, :name => "#{display} (#{ordergroup.try(:name)})"}
+  end
+
+  # for nested form with ordergroup
+  def ordergroup=(attributes)
+    if attributes[:id].blank? or attributes[:id] == 'new'
+      # dissociate the existing ordergroup
+      #   deleting the association doesn't work, as it sets the association's group to zero
+      ordergroup.user_ids = ordergroup.user_ids.reject {|i| i==self.id} if ordergroup
+      return if attributes[:id].blank?
+    end
+    if attributes[:id] == 'new'
+      # create a new ordergroup (this already makes the association)
+      Ordergroup.build_from_user(self, attributes.reject {|i| i=='id'})
+    elsif ordergroup.nil?
+      # create a new relation
+      memberships << Membership.new(group_id: attributes[:id])
+    elsif attributes[:id] != ordergroup.id
+      # update relation
+      ordergroup.memberships.first.update_attributes(group_id: attributes[:id])
+    end
   end
 
 end

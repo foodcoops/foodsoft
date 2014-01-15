@@ -98,6 +98,7 @@ function update(item, quantity, tolerance) {
     }
     $('#q_used_' + item).html(String(q_used));
     $('#q_unused_' + item).html(String(quantity - q_used));
+    $('#q_grouptotal_' + item).html(String(Number(quantity)));
     $('#q_total_' + item).html(String(Number(quantity) + quantityOthers[item]));
 
     // update used/unused tolerance
@@ -106,6 +107,7 @@ function update(item, quantity, tolerance) {
         t_used = Math.min(available, tolerance);
         $('#t_used_' + item).html(String(t_used));
         $('#t_unused_' + item).html(String(tolerance - t_used));
+        $('#t_grouptotal_' + item).html(String(Number(tolerance)));
         $('#t_total_' + item).html(String(Number(tolerance) + toleranceOthers[item]));
     }
 
@@ -117,12 +119,32 @@ function update(item, quantity, tolerance) {
     }
     $('#price_' + item + '_display').html(I18n.l("currency", itemTotal[item]));
 
-    // update missing units
-    var missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
-    if (missing_units < 0) {
-        missing_units = 0;
-    }
-    $('#missing_units_' + item).html(String(missing_units));
+    // update unit counters
+    var total_quantity = quantityOthers[item] + Number(quantity);
+    var total_tolerance = toleranceOthers[item] + Number(tolerance);
+
+    // same as OrderArticle#calculate_units_to_order
+    var units_to_order = Math.floor(total_quantity/unit[item]);
+    var remainder = total_quantity % unit[item];
+    units_to_order += ((remainder > 0) && (remainder + total_tolerance >= unit[item]) ? 1 : 0)
+
+    var progress_units = total_quantity+total_tolerance - units_to_order*unit[item];
+    var progress_pct = Math.floor(Math.min(100, 100*progress_units/unit[item]));
+
+    $('#unit_to_order_'+item).html(String(units_to_order*unit[item]));
+    // progess bar update
+    //   update decreasing number first, to make sure that together it's no more than 100%
+    //   otherwise one of the numbers in the progress bar may temporarily disappear
+    var bars = [
+      [$('#progress_'+item+' .bar:nth-child(1)'), progress_pct,     progress_units],
+      [$('#progress_'+item+' .bar:nth-child(2)'), 100-progress_pct, Math.max(0, unit[item]-progress_units)]
+    ];
+    if (Number(bars[0][0].html()) < progress_units) bars.reverse();
+    $.each(bars, function(i, bar) {
+      bar[0]
+        .width(String(bar[1])+'%')
+	.html(String(bar[2]));
+    });
 
     // update balance
     updateBalance();
@@ -147,6 +169,7 @@ function updateBalance() {
     }
     $('#total_price').html(I18n.l("currency", total));
     var balance = groupBalance - total;
+    $(document).triggerHandler({type: 'foodsoft:group_order_sum_changed'}, total, balance);
     $('#new_balance').html(I18n.l("currency", balance));
     $('#total_balance').val(I18n.l("currency", balance));
     // determine bgcolor and submit button state according to balance

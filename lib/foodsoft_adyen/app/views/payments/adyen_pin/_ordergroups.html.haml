@@ -1,0 +1,6 @@
+%ul{:data => {:role => :listview, :filter => :true}}
+  - for ordergroup in @ordergroups
+    %li{:class => ordergroup.get_available_funds < 0 ? '' : 'positive-balance'}
+      = link_to new_payments_adyen_pin_path(:ordergroup_id => ordergroup.id), :data => { :ajax => :false } do
+        = ordergroup.name
+        %p.ui-li-aside= ordergroup.users.map(&:name).join ','

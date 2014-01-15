@@ -12,6 +12,7 @@
 
       $(document).on('click', 'a[data-add-transaction]', function() {
         $('#ordergroups').append(ordergroup);
+        newElementsReady();
         return false;
       });
     });

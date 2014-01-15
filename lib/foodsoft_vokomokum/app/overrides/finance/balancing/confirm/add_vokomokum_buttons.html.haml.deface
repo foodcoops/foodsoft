@@ -1,0 +1,7 @@
+/ replace '.form-actions erb[loud]:contains("link_to"):contains("close_finance_order_path")'
+= link_to t('foodsoft_vokomokum.finance.balancing.submit-veggie'), close_finance_order_path(@order, vokomokum_cat: 'Groente'), method: :put, class: 'btn btn-primary'
+&nbsp;
+= link_to t('foodsoft_vokomokum.finance.balancing.submit-cheese'), close_finance_order_path(@order, vokomokum_cat: 'Kaas'), method: :put, class: 'btn btn-primary'
+&nbsp;
+= link_to t('foodsoft_vokomokum.finance.balancing.submit-misc'), close_finance_order_path(@order, vokomokum_cat: 'Misc.'), method: :put, class: 'btn btn-primary'
+&nbsp;

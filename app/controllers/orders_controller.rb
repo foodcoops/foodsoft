@@ -10,23 +10,29 @@ class OrdersController < ApplicationController
   def index
     @open_orders = Order.open
     @per_page = 15
+    @orders = Order.page(params[:page]).per(@per_page).
+                where("state != 'open'").ordered_finished.
+                includes(:supplier)
     if params['sort']
       sort = case params['sort']
                when "supplier"  then "suppliers.name, ends DESC"
-               when "ends"   then "ends DESC"
+               when "ends"   then "ends DESC, suppliers.name"
                when "supplier_reverse"  then "suppliers.name DESC"
-               when "ends_reverse"   then "ends"
+               when "ends_reverse"   then "ends, suppliers.name"
                end
-    else
-      sort = "ends DESC"
+      sort and @orders = @orders.reorder(sort)
     end
-    @orders = Order.page(params[:page]).per(@per_page).order(sort).where("state != 'open'").includes(:supplier)
+
+    last_finished = Order.finished.maximum(:ends)
+    @orders_last_order_day = (Order.finished.where(ends: last_finished.weeks_ago(1)..last_finished) rescue []) # TODO Rails 4: rescue Order.none
   end
 
   # Gives a view for the results to a specific order
   # Renders also the pdf
   def show
-    @order= Order.find(params[:id])
+    # start of multiple-order support
+    @order_ids = params[:id].split('+').map(&:to_i)
+    @order = Order.find(@order_ids.first)
 
     respond_to do |format|
       format.html
@@ -41,7 +47,7 @@ class OrdersController < ApplicationController
       end
       format.pdf do
         pdf = case params[:document]
-                when 'groups' then OrderByGroups.new(@order)
+                when 'groups' then @order_ids.length == 1 ? OrderByGroups.new(@order) : MultipleOrdersByGroups.new(@order_ids)
                 when 'articles' then OrderByArticles.new(@order)
                 when 'fax' then OrderFax.new(@order)
                 when 'matrix' then OrderMatrix.new(@order)

@@ -19,8 +19,11 @@
           %td= show_user(order.updated_by)
           %td
             - unless order.closed?
-              = link_to t('.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-mini btn-primary'
-              = link_to t('.close'), close_direct_finance_order_path(order),
-                :confirm => t('.confirm'), :method => :put, class: 'btn btn-mini'
+              - if order.invoice
+                = link_to 'show invoice', finance_invoice_path(order.invoice), class: 'btn btn-mini'
+              - else
+                = link_to 'enter invoice', new_finance_invoice_path(:order_id => order, :supplier_id => order.supplier), class: 'btn btn-mini'
+              = link_to 'receive order', new_finance_order_path(order_id: order.id), class: 'btn btn-mini btn-primary'
+              -#= link_to t('.close'), close_direct_finance_order_path(order), :confirm => t('.confirm'), :method => :put, class: 'btn btn-mini'
 - else
   %i= t('.no_closed_orders')

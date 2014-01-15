@@ -1,6 +1,7 @@
 = f.input :first_name
 = f.input :last_name
 = f.input :email
+
 -# need :required because :use_nil option on user model validators break the required mark
 = f.input :nick, required: true if FoodsoftConfig[:use_nick]
 -# You can control password autocompletion by passing `password_autocomplete` to this partial.
@@ -12,12 +13,14 @@
 = f.input :password_confirmation, :required => f.object.new_record?, input_html: password_html
 = f.input :phone
 
+= captured if defined? captured
+
 = f.simple_fields_for :settings_attributes do |s|
   = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
     = profile.input 'language', as: :select,  collection: available_locales, required: false, selected: f.object.settings.profile['language']
   
   .settings
-    .settings-group
+    -#.settings-group
       = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
 
         %div{class: 'control-group h_wrapper'}
@@ -26,17 +29,17 @@
         = profile.input 'phone_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['phone_is_public'] }
         = profile.input 'email_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['email_is_public'] }
         - if FoodsoftConfig[:use_nick]
-          = profile.input 'name_is_public',   as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }
+          = profile.input 'name_is_public', as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }
   
     .settings-group
-      %div{class: 'control-group'}
+      -#%div{class: 'control-group'}
         %h5{class: 'controls'}
           = t 'simple_form.labels.settings.settings_group.messages'
         
-      = s.simple_fields_for :messages, defaults: { inline_label: true, label: false } do |messages|
+      -#= s.simple_fields_for :messages, defaults: { inline_label: true, label: false } do |messages|
         = messages.input 'send_as_email',   as: :boolean, input_html: { checked: f.object.settings.messages['send_as_email'] }
       = s.simple_fields_for :notify, defaults: { inline_label: true, label: false } do |notify|
         = notify.input 'order_finished',    as: :boolean, input_html: { checked: f.object.settings.notify['order_finished'] }
-        = notify.input 'negative_balance',  as: :boolean, input_html: { checked: f.object.settings.notify['negative_balance'] }
-        = notify.input 'upcoming_tasks',    as: :boolean, input_html: { checked: f.object.settings.notify['upcoming_tasks'] }
+        -#= notify.input 'negative_balance',  as: :boolean, input_html: { checked: f.object.settings.notify['negative_balance'] }
+        -#= notify.input 'upcoming_tasks',    as: :boolean, input_html: { checked: f.object.settings.notify['upcoming_tasks'] }
 

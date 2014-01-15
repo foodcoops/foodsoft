@@ -5,28 +5,41 @@ GIT
     localize_input (0.1.0)
 
 GIT
+  remote: git://github.com/capistrano/rvm.git
+  revision: 6aa7cb9d75361c802f466b54d0e345b7237ea3bb
+  specs:
+    capistrano-rvm (0.1.1)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+
+GIT
   remote: git://github.com/fnando/i18n-js.git
   revision: eab4137f83777963f0ebe6960704a7f64fd8911d
   specs:
     i18n-js (2.1.2)
       i18n
 
-GIT
-  remote: git://github.com/technoweenie/acts_as_versioned.git
-  revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
+PATH
+  remote: lib/foodsoft_adyen
   specs:
-    acts_as_versioned (0.6.0)
-      activerecord (>= 3.0.9)
+    foodsoft_adyen (0.0.1)
+      adyen
+      jquery_mobile_rails
+      rails (~> 3.2.13)
 
 PATH
-  remote: lib/foodsoft_wiki
+  remote: lib/foodsoft_mollie
   specs:
-    foodsoft_wiki (0.0.1)
-      acts_as_versioned
-      content_for_in_controllers
-      diffy
-      rails (~> 3.2.15)
-      wikicloth
+    foodsoft_mollie (0.0.1)
+      ideal-mollie
+      rails (~> 3.2.13)
+
+PATH
+  remote: lib/foodsoft_signup
+  specs:
+    foodsoft_signup (0.0.1)
+      deface (~> 1.0.0)
+      rails (~> 3.2.13)
 
 GEM
   remote: https://rubygems.org/
@@ -61,6 +74,7 @@ GEM
       multi_json (~> 1.0)
     acts_as_tree (1.5.0)
       activerecord (>= 3.0.0)
+    adyen (1.4.0)
     afm (0.2.0)
     arel (3.0.3)
     better_errors (1.1.0)
@@ -74,14 +88,16 @@ GEM
     bullet (4.7.1)
       activesupport
       uniform_notifier (>= 1.4.0)
-    capistrano (2.13.5)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
-    capistrano-ext (1.2.1)
-      capistrano (>= 1.0.0)
+    capistrano (3.1.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-bundler (1.1.1)
+      capistrano (~> 3.0)
+      sshkit (>= 1.2.0)
+    capistrano-rails (1.1.0)
+      capistrano (>= 3.0.0)
+      capistrano-bundler (>= 1.0.0)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -103,8 +119,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    colorize (0.6.0)
     commonjs (0.2.7)
-    content_for_in_controllers (0.0.2)
     coveralls (0.7.0)
       multi_json (~> 1.3)
       rest-client
@@ -114,8 +130,11 @@ GEM
     daemons (1.1.9)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
+    deface (1.0.0)
+      colorize (>= 0.5.8)
+      nokogiri (~> 1.6.0)
+      rails (>= 3.1)
     diff-lcs (1.2.5)
-    diffy (3.0.1)
     docile (1.1.1)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -123,7 +142,6 @@ GEM
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
     execjs (2.0.2)
-    expression_parser (0.9.0)
     factory_girl (4.3.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.3.0)
@@ -131,6 +149,10 @@ GEM
       railties (>= 3.0.0)
     faker (1.2.0)
       i18n (~> 0.5)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     ffi (1.9.3)
     haml (4.0.5)
       tilt
@@ -143,11 +165,16 @@ GEM
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hashery (2.1.1)
-    highline (1.6.20)
     hike (1.2.3)
     i18n (0.6.9)
     i18n-spec (0.4.0)
       iso
+    ideal-mollie (1.0.4)
+      faraday (~> 0.8.0)
+      faraday_middleware (~> 0.9.0)
+      multi_xml (~> 0.5.2)
+      nokogiri (~> 1.5)
+      rake (> 0.9.0)
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
       responders (~> 1.0.0.rc)
@@ -157,6 +184,8 @@ GEM
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery_mobile_rails (1.3.2)
+      railties (>= 3.1.0)
     json (1.8.1)
     kaminari (0.15.0)
       actionpack (>= 3.0.0)
@@ -188,14 +217,12 @@ GEM
     mini_portile (0.5.2)
     mono_logger (1.1.0)
     multi_json (1.8.2)
+    multi_xml (0.5.5)
+    multipart-post (1.2.0)
     mysql2 (0.3.14)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     pdf-reader (1.3.3)
@@ -261,7 +288,6 @@ GEM
       vegas (~> 0.1.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rinku (1.7.3)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -321,6 +347,10 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.8)
+    sshkit (1.3.0)
+      net-scp (>= 1.1.2)
+      net-ssh
+      term-ansicolor
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     therubyracer (0.12.0)
@@ -353,10 +383,6 @@ GEM
     whenever (0.9.0)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
-    wikicloth (0.8.1)
-      builder
-      expression_parser
-      rinku
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -365,13 +391,14 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tree
-  acts_as_versioned!
   better_errors
   binding_of_caller
   bootstrap-datepicker-rails
   bullet
-  capistrano (= 2.13.5)
-  capistrano-ext
+  capistrano (~> 3.0)
+  capistrano-bundler (>= 1.1.0)
+  capistrano-rails
+  capistrano-rvm!
   capybara
   client_side_validations
   client_side_validations-simple_form
@@ -382,7 +409,9 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails (~> 4.0)
   faker
-  foodsoft_wiki!
+  foodsoft_adyen!
+  foodsoft_mollie!
+  foodsoft_signup!
   haml-rails
   i18n-js!
   i18n-spec
@@ -407,7 +436,7 @@ DEPENDENCIES
   rspec-rerun
   ruby-prof
   sass-rails (~> 3.2.3)
-  select2-rails
+  select2-rails (>= 3.4.0)
   selenium-webdriver
   simple-navigation
   simple-navigation-bootstrap

@@ -64,7 +64,10 @@ class Ordergroup < Group
     # Get hours for every job of each user in period
     jobs = users.sum { |u| u.tasks.done.sum(:duration, :conditions => ["updated_on > ?", APPLE_MONTH_AGO.month.ago]) }
     # Get group_order.price for every finished order in this period
-    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).sum(:price)
+    # cannot use merge on joined scope - at least until after rails 3.2.13
+    #   https://github.com/rails/rails/issues/10303
+    #   what's meant here is: where(:orders...) --> merge(Order.finished)
+    orders_sum = group_orders.includes(:order).where(:orders=>{:state=>['finished','closed']}).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).sum(:price)
 
     @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
@@ -89,7 +92,9 @@ class Ordergroup < Group
         !ignore_apple_restriction and
         apples < FoodsoftConfig[:stop_ordering_under] and
         group_orders.count > 5 and
-        group_orders.joins(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).count > 2
+        group_orders.joins(:order).
+        where(:orders=>{:state=>['finished','closed']}). # see comment in update_stats!
+        where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).count > 2
   end
 
   # Global average
@@ -100,6 +105,16 @@ class Ordergroup < Group
 
   def account_updated
     financial_transactions.last.try(:created_on) || created_on
+  end
+
+  def self.build_from_user(user, attributes = {})
+    og = Ordergroup.new({:name => name_from_user(user)})
+    og.contact_person = user.name unless user.name.blank?
+    og.contact_phone = user.phone unless user.phone.blank?
+    og.update_attributes attributes
+    # create membership (vs. setting user_ids) to allow new users to associate
+    user.memberships << Membership.new(group: og)
+    og
   end
   
   private
@@ -119,6 +134,17 @@ class Ordergroup < Group
       message = group.first.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message
     end
+  end
+
+  # generate an unique ordergroup name from a user
+  def self.name_from_user(user)
+    name = user.display
+    suffix = 2
+    while Ordergroup.where(name: name).exists? do
+      name = "#{user.display} (#{suffix})"
+      suffix += 1
+    end
+    name
   end
  
 end

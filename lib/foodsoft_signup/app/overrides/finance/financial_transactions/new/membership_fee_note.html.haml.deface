@@ -1,0 +1,4 @@
+/ insert_bottom 'p:first'
+- unless FoodsoftConfig[:membership_fee].blank?
+  - unless @ordergroup.approved?
+    = ' ' + t('.membership_fee_note', fee: number_to_currency(FoodsoftConfig[:membership_fee]))

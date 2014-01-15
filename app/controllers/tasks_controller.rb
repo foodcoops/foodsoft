@@ -1,6 +1,5 @@
 # encoding: utf-8
 class TasksController < ApplicationController
-  #auto_complete_for :user, :nick
   
   def index
     @non_group_tasks = Task.non_group.includes(assignments: :user)

@@ -1,0 +1,10 @@
+/ insert_top 'thead tr'
+- content_for :head do
+  :css
+    table .approved {
+      overflow: hidden;
+      text-overflow: clip;
+      width: 1.5em;
+      max-width: 1.5em;
+    }
+%th.approved= heading_helper Ordergroup, :approved, short: true

@@ -14,8 +14,12 @@ class GroupOrder < ActiveRecord::Base
   validates_numericality_of :price
   validates_uniqueness_of :ordergroup_id, :scope => :order_id   # order groups can only order once per order
 
-  scope :in_open_orders, joins(:order).merge(Order.open)
-  scope :in_finished_orders, joins(:order).merge(Order.finished_not_closed)
+  # cannot use merge on joined scope - at least until after rails 3.2.13
+  # https://github.com/rails/rails/issues/10303
+  #scope :in_open_orders, joins(:order).merge(Order.open)
+  #scope :in_finished_orders, joins(:order).merge(Order.finished_not_closed)
+  scope :in_open_orders, joins(:order).where(:orders => {:state => 'open'})
+  scope :in_finished_orders, joins(:order).where(:orders => {:state => 'finished'})
 
   scope :ordered, :include => :ordergroup, :order => 'groups.name'
 

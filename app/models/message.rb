@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
 
   serialize :recipients_ids, Array
-  attr_accessor :sent_to_all, :group_id, :recipient_tokens, :reply_to
+  attr_accessor :sent_to_all, :group_id, :reply_to
   
   scope :pending, where(:email_state => 0)
   scope :sent, where(:email_state => 1)
@@ -38,6 +38,10 @@ class Message < ActiveRecord::Base
   def group_id=(group_id)
     @group_id = group_id
     add_recipients Group.find(group_id).users unless group_id.blank?
+  end
+
+  def recipient_tokens
+    self.recipients_ids.join(",")
   end
 
   def recipient_tokens=(ids)
