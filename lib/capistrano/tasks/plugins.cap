@@ -1,0 +1,51 @@
+# Capistrano tasks for enabling/disabling foodsoft plugins in the Gemfile
+#
+# Please note that the foodsoft plugins should be present already in the
+# Gemfile, either commented out or not.
+#
+# To automatically enable the desired plugins on deployment, create the
+# file `config/plugins.yml` in the shared directory, containing the
+# key `enabled` with a list of enabled plugin names (without foodsoft_).
+# Then add to your `config/deploy.rb`:
+#   before 'bundler:install', 'enable_plugins:auto'
+
+desc 'Enable only the foodsoft plugins, cap enable_plugins PLUGINS=wiki,messages'
+task :enable_plugins do
+  on roles(:app), in: :groups do
+    unless env['PLUGINS'].nil?
+      enable_foodsoft_plugins(ENV['PLUGINS'].split(/,\s*/))
+    else
+      raise 'You need to set the PLUGINS environment variable to enable specific plugins'
+    end
+  end
+end
+
+namespace :enable_plugins do
+
+  desc 'Enable the foodsoft plugins specified in shared/config/plugins.yml, if it exists (key `enabled`).'
+  task 'auto' do
+    on roles(:app), in: :groups do
+      text = capture :cat, shared_path.join('config/plugins.yml'), '||true'
+      if text
+        plugins = YAML.load(text)
+        enable_foodsoft_plugins(plugins['enabled']) if plugins and not plugins['enabled'].nil?
+      end
+    end
+  end
+
+end
+
+# need to run in role
+def enable_foodsoft_plugins(plugins)
+  gemfile = capture :cat, release_path.join('Gemfile')
+  gemfile.gsub! /^\s*(#)?\s*(gem\s+(['"])foodsoft_(.*?)\3)/ do |c|
+    (plugins.index($4) ? '' : '#') + $2
+  end
+  upload! StringIO.new(gemfile), release_path.join('Gemfile')
+  # since we updated the Gemfile, we need to run bundler in non-deployment mode
+  new_bundle_flags = fetch(:bundle_flags).split(/\s+/)
+  new_bundle_flags.reject! {|o| o=='--deployment'}
+  new_bundle_flags << '--no-deployment'
+  set :bundle_flags, new_bundle_flags.join(' ')
+end
+

@@ -42,5 +42,8 @@ namespace :deploy do
 
   after :finishing, 'deploy:cleanup'
 
+  # see lib/capistrano/tasks/plugins.cap
+  #before 'bundler:install', 'enable_plugins:auto'
+
 end
 
