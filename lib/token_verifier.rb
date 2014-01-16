@@ -31,7 +31,8 @@ class TokenVerifier < ActiveSupport::MessageVerifier
   protected
 
   def self.secret
-    Foodsoft::Application.config.secret_token
+    # secret_key_base for Rails 4, but Rails 3 initializer may still be used
+    Foodsoft::Application.config.secret_key_base or Foodsoft::Application.config.secret_token
   end
 
 end

@@ -70,7 +70,7 @@ namespace :deploy do
       require 'securerandom'
       on roles(:app), in: :groups do
         secret = SecureRandom.hex(64)
-        text = "Foodsoft::Application.config.secret_token = \"#{secret}\""
+        text = "Foodsoft::Application.config.secret_key_base = \"#{secret}\""
         execute :mkdir, '-p', shared_path.join("config/initializers")
         upload! StringIO.new(text), shared_path.join("config/initializers/secret_token.rb")
       end

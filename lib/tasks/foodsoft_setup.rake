@@ -106,7 +106,7 @@ def setup_secret_token
   puts yellow "Generating secret_token and writing to #{file}..."
   Rake::Task["secret"].reenable
   secret = capture_stdout { Rake::Task["secret"].invoke }
-  %x( touch #{Rails.root.join("#{file}")}; echo 'Foodsoft::Application.config.secret_token = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
+  %x( touch #{Rails.root.join("#{file}")}; echo 'Foodsoft::Application.config.secret_key_base = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
 end
 
 def start_mailcatcher
