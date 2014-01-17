@@ -79,4 +79,23 @@ module OrdersHelper
 
     input_html.html_safe
   end
+
+  def ordergroup_count(order)
+    group_orders = order.group_orders.includes(:ordergroup)
+    txt = "#{group_orders.count} #{Ordergroup.model_name.human count: group_orders.count}"
+    if group_orders.count == 0
+      return txt
+    else
+      desc = group_orders.all.map {|g| g.ordergroup.name}.join(', ')
+      content_tag(:abbr, txt, title: desc).html_safe
+    end
+  end
+
+  def supplier_link(order_or_supplier)
+    if order_or_supplier.kind_of?(Order) and order_or_supplier.stockit?
+      link_to(order_or_supplier.name, stock_articles_path).html_safe
+    else
+      link_to(@order.supplier.name, supplier_path(@order.supplier)).html_safe
+    end
+  end
 end
