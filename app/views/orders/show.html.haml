@@ -41,7 +41,7 @@
 
   .btn-toolbar
     .btn-group.view_buttons
-      = update_articles_link @order, t('.articles'), :default, class: 'btn active'
+      = update_articles_link @order, t('.articles'), :default, class: 'btn'
       = update_articles_link @order, t('.sort_group'), :groups, class: 'btn'
       = update_articles_link @order, t('.sort_article'), :articles, class: 'btn'
 
@@ -69,15 +69,8 @@
         class: 'btn btn-danger'
 
 
--# unless @order.open?
-  %ul.nav.nav-pills
-    %li= update_articles_link(@order, t('.articles'), :default)
-    %li= update_articles_link(@order, t('.sort_group'), :groups)
-    %li= update_articles_link(@order, t('.sort_article'), :articles)
-    %li= link_to t('.comments_link'), '#comments'
-
 %section#articles_table
-  = render 'articles', order: @order
+  = render @partial, order: @order
 
 %h2= t '.comments.title'
 #comments
@@ -103,5 +96,5 @@
       $('#query').attr('placeholder', placeholder);
     }
     $(function() {
-      activate_search('default', '#{j t('.search_placeholder.default')}');
+      activate_search('#{j @view}', '#{j t(".search_placeholder.#{@view}")}');
     });
