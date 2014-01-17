@@ -1,8 +1,9 @@
 # encoding: utf-8
 module OrdersHelper
 
-  def update_articles_link(order, text, view)
-    link_to text, order_path(order, view: view), remote: true
+  def update_articles_link(order, text, view, options={})
+    options.merge!({remote: true, id: "view_#{view}_btn"})
+    link_to text, order_path(order, view: view), options
   end
 
   def order_pdf(order, document, text)

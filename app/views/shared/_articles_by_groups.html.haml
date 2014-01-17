@@ -1,5 +1,5 @@
-%table.table.table-hover
-  %thead
+%table.table.table-hover.list
+  %thead.list-heading
     %tr
       %th{:style => "width:40%"}= heading_helper Article, :name
       %th
@@ -14,18 +14,17 @@
       %th= t '.price'
 
   - for group_order in order.group_orders.ordered
-    %thead
+    %tbody
       %tr
         %th{:colspan => "7"}
-          %h4= group_order.ordergroup.name
-    %tbody
+          %h4.name= group_order.ordergroup.name
       - total = 0
       - for goa in group_order.group_order_articles.ordered.all(:include => :order_article)
         - fc_price = goa.order_article.price.fc_price
         - subTotal = fc_price * goa.result
         - total += subTotal
         %tr{:class => [cycle('even', 'odd', :name => 'articles'), if goa.result == 0 then 'unavailable' end]}
-          %td{:style => "width:40%"}=h goa.order_article.article.name
+          %td.name{:style => "width:40%"}=h goa.order_article.article.name
           %td= "#{goa.quantity} + #{goa.tolerance}"
           %td
             %b= goa.result
@@ -33,10 +32,9 @@
           %td= goa.order_article.price.unit_quantity
           %td= goa.order_article.article.unit
           %td= number_to_currency(subTotal)
-
-    %tr{:class => cycle('even', 'odd', :name => 'articles')}
-      %th{:colspan => "6"} Summe
-      %th= number_to_currency(total)
-    %tr
-      %th(colspan="7")
-    - reset_cycle("articles")
+      %tr{:class => cycle('even', 'odd', :name => 'articles')}
+        %th{:colspan => "6"} Summe
+        %th= number_to_currency(total)
+      %tr
+        %th(colspan="7")
+      - reset_cycle("articles")

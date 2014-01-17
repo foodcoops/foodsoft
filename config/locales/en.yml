@@ -1178,6 +1178,11 @@ en:
         matrix_pdf: Matrix PDF
         title: Download
       group_orders: ! 'Group orders:'
+      search_placeholder:
+        default: Search for articles...
+        groups: Search for ordergroups...
+        articles: Search for articles...
+      search_reset: Reset search
       sort_article: Sorted in articles
       sort_group: Sorted in groups
       title: ! 'Order: %{name}'

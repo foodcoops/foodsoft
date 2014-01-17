@@ -10,9 +10,9 @@
         %th= 'Members'
         %th= t '.units_full'
     - total_net, total_gross, counter = 0, 0, 0
-  %tbody
+  %tbody.list
     - order.articles_grouped_by_category.each do |category_name, order_articles|
-      %tr.article-category
+      %tr.list-heading.article-category
         %td
           = category_name
           %i.icon-tag
@@ -26,7 +26,7 @@
         - total_gross += units * unit_quantity * gross_price
         - cssclass = (units > 0 ? 'used' : (order_article.quantity > 0 ? 'unused' : 'unavailable'))
         %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + cssclass}
-          %td=h order_article.article.name
+          %td.name=h order_article.article.name
           %td= order_article.article.unit
           %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
           - if order.stockit?
