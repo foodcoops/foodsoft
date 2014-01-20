@@ -88,7 +88,7 @@ en:
         units_received_short: Received
         units_to_order: Ordered units
         units_to_order_short: Ordered
-        update_current_price: Globally update current price
+        update_global_price: Globally update current price
       order_comment:
         text: Add comment to this order ...
       ordergroup:
@@ -1319,7 +1319,7 @@ en:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
         units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
-        update_current_price: Also update the price of the current order
+        update_global_price: Also update the price of future orders
       stock_article:
         copy:
           name: Please modify
