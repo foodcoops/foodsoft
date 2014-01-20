@@ -31,4 +31,11 @@ class SessionsController < ApplicationController
     session[:return_to] = nil
     redirect_to login_url, :notice => I18n.t('sessions.logged_out')
   end
+
+  # redirect to root, going to default foodcoop when none given
+  # this may not be so much session-related, but it must be somewhere
+  def redirect_to_foodcoop
+    redirect_to root_path
+  end
+
 end

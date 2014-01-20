@@ -6,7 +6,7 @@ Foodsoft::Application.routes.draw do
 
   get "sessions/new"
 
-  root :to => redirect("/#{FoodsoftConfig.scope}")
+  root :to => 'sessions#redirect_to_foodcoop'
 
 
   scope '/:foodcoop' do
