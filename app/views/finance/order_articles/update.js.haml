@@ -1,4 +1,0 @@
-$('#modalContainer').modal('hide');
-$('#order_article_#{@order_article.id}').html('#{j(render('finance/balancing/order_article', order_article: @order_article))}');
-$('#group_order_articles_#{@order_article.id}').html('#{j(render('finance/balancing/group_order_articles', order_article: @order_article))}');
-$('#summaryChangedWarning').show();

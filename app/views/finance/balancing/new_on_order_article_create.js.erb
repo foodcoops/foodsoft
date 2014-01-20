@@ -1,0 +1,16 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function(w) {
+  $('#order_article_<%= @order_article.id %>').remove(); // just to be sure: remove table row which is added below
+  
+  $('#ordered-articles tr').removeClass('success');
+  
+  var order_article_entry = $(
+    '<%= j render('finance/balancing/order_article_result', order_article: @order_article) %>'
+  ).addClass('success');
+  
+  $('#result_table').prepend(order_article_entry);
+  
+  $('#summaryChangedWarning').show();
+})(window);
+

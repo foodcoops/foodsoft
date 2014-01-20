@@ -78,6 +78,7 @@ nl:
         starts: Start op
         status: Status
       order_article:
+        article: Artikel
         missing_units: Missende eenheden
         missing_units_short: Nodig
         units_to_order: Aantal eenheden
@@ -617,12 +618,6 @@ nl:
       show:
         back: Terug
         title: Factuur %{number}
-    order_articles:
-      edit:
-        stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!
-        title: Artikel bijwerken
-      new:
-        title: Geleverd artikel aan bestelling toevoegen
     ordergroups:
       index:
         new_transaction: Nieuwe transacties toevoegen
@@ -1069,6 +1064,12 @@ nl:
     model:
       error_single_group: ! '%{user} behoort al tot een ander huishouden'
       invalid_balance: is geen geldig nummer
+  order_articles:
+    edit:
+      stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!
+      title: Artikel bijwerken
+    new:
+      title: Geleverd artikel aan bestelling toevoegen
   orders:
     articles:
       article_count: ! 'Bestelde artikelen:'
@@ -1100,10 +1101,11 @@ nl:
       action_end: Sluiten
       confirm_delete: Wil je de bestelling werkelijk verwijderen?
       confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
-      ended_orders: Gesloten bestellingen
       new_order: Nieuwe bestelling openen
-      no_open_orders: Er zijn momenteel geen lopende bestellingen.
-      open_orders: Lopende bestellingen
+      no_open_or_finished_orders: Er zijn momenteel geen open of gesloten bestellingen.
+      orders_finished: Gesloten
+      orders_open: Open
+      orders_settled: Afgerekend
       title: Bestellingen beheren
     model:
       error_closed: Bestelling was al afgerekend

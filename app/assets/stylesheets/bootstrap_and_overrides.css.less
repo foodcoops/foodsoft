@@ -30,7 +30,19 @@ body {
 // Example:
 // @linkColor: #ff0000;
 
-// Custom styles
+
+// main ui colours
+@mainRedColor: #ED0606;
+
+// article status
+@articleUsedColor: green;
+@articleUnusedColor: red;
+@articleUnavailColor: #999;
+@articleUpdatedColor: #468847;
+
+// dim colors by this amount when the information is less important
+@nonessentialDim: 35%;
+
 
 // Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
 .dl-horizontal { 
@@ -39,7 +51,8 @@ body {
 
 // Do not use additional margin for input in table
 .form-horizontal .control-group.control-group-intable,
-.form-horizontal .controls.controls-intable {
+.form-horizontal .controls.controls-intable,
+.input-prepend.intable {
   margin: 0;
 }
 
@@ -53,7 +66,6 @@ body {
   margin-bottom: 0;
 }
 
-@mainRedColor: #ED0606;
 
 .logo {
   margin: 10px 0 0 30px;
@@ -134,11 +146,11 @@ table {
 }
 
 // ordering
-span.used {
-  color: green;
+.used {
+  color: @articleUsedColor;
 }
-span.unused {
-  color: red;
+.unused {
+  color: @articleUnusedColor;
 }
 
 #order-footer, .article-info {
@@ -202,11 +214,11 @@ tr.order-article:hover .article-info {
 // ********* Articles
 
 tr.just-updated {
-  color: #468847;
+  color: @articleUpdatedColor;
 }
 
 tr.unavailable {
-  color: #999;
+  color: @articleUnavailColor;
 }
 
 // articles edit all
@@ -214,6 +226,16 @@ tr.unavailable {
   input, select {
     border-color: red;
   }
+}
+
+// editable article list can be more compact
+.ordered-articles input {
+  margin-bottom: 0;
+}
+
+// allow content to appear without sudden table change (receive)
+.units_delta {
+  min-width: 3.5em;
 }
 
 // ********* Tweaks & fixes
@@ -258,9 +280,58 @@ table.table {
   }
 }
 
+// it's a bit distracting
+.icon-asterisk {
+  font-size: 80%;
+  vertical-align: middle;
+  padding-bottom: 0.4ex;
+}
+
 // allow buttons as input add-on (with proper height)
 .input-append button.add-on {
   height: inherit;
+}
+
+// inline form elements
+.inline {
+  display: inline;
+}
+
+// show package icon after amount of wholesale units
+.package-image (@align) {
+  background-image: url(package-bg.png);
+  background-repeat: no-repeat;
+  background-position: @align center;
+}
+input.package {
+  .package-image(right);
+  // disabled and readonly definitions though
+  &[disabled], &[readonly] {
+    background-color: @inputDisabledBackground;
+  }
+}
+i.package {
+  .package-image(left);
+  min-width: 18px;
+  min-height: 18px;
+  vertical-align: baseline;
+  font-style: normal;
+  padding-left: 20px;
+  @media (max-width: 979px) { padding-left: 0; }
+}
+i.package.icon-only {
+  padding-left: 6px;
+  background-position: right;
+  display: inline-block;
+}
+.package              { color: tint(@textColor, @nonessentialDim); }
+.used        .package { color: tint(@articleUsedColor, @nonessentialDim); }
+.unused      .package { color: tint(@articleUnusedColor, @nonessentialDim); }
+.unavailable .package { color: @articleUnavailColor; }
+
+// very small inputs - need !important for responsive selectors
+.input-nano {
+  width: 30px !important;
 }
 
 // get rid of extra space on bottom of dialog with form
@@ -297,10 +368,22 @@ table.table {
         float: none;
       }
     }
+    // allow to add a hint for the whole line
+    > .help-block {
+      clear: both;
+      margin-left: 180px;
+      position: relative;
+      top: -2.5ex;
+    }
   }
 }
 // allow to have indicator text instead of input with same markup
 .control-text {
   margin-top: 5px;
 }
- 
+
+// unlock button same size as warning sign
+.input-prepend button.unlocker {
+  padding-right: 6px;
+  padding-left: 7px;
+}

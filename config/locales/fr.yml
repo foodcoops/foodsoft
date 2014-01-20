@@ -78,6 +78,7 @@ fr:
         starts: Ouverture le
         status: 
       order_article:
+        article: Article
         missing_units: Unités manquantes
         missing_units_short: 
         units_to_order: Quantité
@@ -627,12 +628,6 @@ fr:
       show:
         back: Retour
         title: Facture %{number}
-    order_articles:
-      edit:
-        stock_alert: 
-        title: Mettre à jour la liste des article
-      new:
-        title: 
     ordergroups:
       index:
         new_transaction: Saisir une nouvelle transaction
@@ -1094,6 +1089,12 @@ fr:
     model:
       error_single_group: ! '%{user} fait déjà partie d''une autre cellule'
       invalid_balance: n'est pas un nombre valide
+  order_articles:
+    edit:
+      stock_alert: 
+      title: Mettre à jour la liste des article
+    new:
+      title: 
   orders:
     articles:
       article_count: ! 'Articles commandés:'
@@ -1125,10 +1126,11 @@ fr:
       action_end: Terminer
       confirm_delete: Vraiment supprimer la commande?
       confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
-      ended_orders: Commandes closes
       new_order: Définir une nouvelle commande
-      no_open_orders: Il n'y a aucune commande en cours en ce moment.
-      open_orders: Commandes en cours
+      no_open_or_finished_orders: Il n'y a aucune commande en cours en ce moment.
+      orders_finished: Close
+      orders_open: En cours
+      orders_settled: Décomptée
       title: Gestion des commandes
     model:
       error_closed: Cette commande a déjà été décomptée

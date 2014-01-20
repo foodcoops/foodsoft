@@ -99,57 +99,63 @@ class GroupOrderArticle < ActiveRecord::Base
   # Returns a hash with three keys: :quantity / :tolerance / :total
   # 
   # See description of the ordering algorithm in the general application documentation for details.
-  def calculate_result
-    @calculate_result ||= begin
-      quantity = tolerance = total_quantity = 0
+  def calculate_result(total = nil)
+    # return memoized result unless a total is given
+    return @calculate_result if total.nil? and not @calculate_result.nil?
 
-      # Get total
-      if order_article.article.is_a?(StockArticle)
-        total = order_article.article.quantity
-        logger.debug "<#{order_article.article.name}> (stock) => #{total}"
-      else
-        total = order_article.units_to_order * order_article.price.unit_quantity
-        logger.debug "<#{order_article.article.name}> units_to_order #{order_article.units_to_order} => #{total}"
+    quantity = tolerance = total_quantity = 0
+
+    # Get total
+    if not total.nil?
+      logger.debug "<#{order_article.article.name}> => #{total} (given)"
+    elsif order_article.article.is_a?(StockArticle)
+      total = order_article.article.quantity
+      logger.debug "<#{order_article.article.name}> (stock) => #{total}"
+    else
+      total = order_article.units_to_order * order_article.price.unit_quantity
+      logger.debug "<#{order_article.article.name}> units_to_order #{order_article.units_to_order} => #{total}"
+    end
+
+    if total > 0
+      # In total there are enough units ordered. Now check the individual result for the ordergroup (group_order).
+      #
+      # Get all GroupOrderArticleQuantities for this OrderArticle...
+      order_quantities = GroupOrderArticleQuantity.all(
+          :conditions => ["group_order_article_id IN (?)", order_article.group_order_article_ids], :order => 'created_on')
+      logger.debug "GroupOrderArticleQuantity records found: #{order_quantities.size}"
+
+      # Determine quantities to be ordered...
+      order_quantities.each do |goaq|
+        q = [goaq.quantity, total - total_quantity].min
+        total_quantity += q
+        if goaq.group_order_article_id == self.id
+          logger.debug "increasing quantity by #{q}"
+          quantity += q
+        end
+        break if total_quantity >= total
       end
 
-      if total > 0
-        # In total there are enough units ordered. Now check the individual result for the ordergroup (group_order).
-        #
-        # Get all GroupOrderArticleQuantities for this OrderArticle...
-        order_quantities = GroupOrderArticleQuantity.all(
-            :conditions => ["group_order_article_id IN (?)", order_article.group_order_article_ids], :order => 'created_on')
-        logger.debug "GroupOrderArticleQuantity records found: #{order_quantities.size}"
-
-        # Determine quantities to be ordered...
+      # Determine tolerance to be ordered...
+      if total_quantity < total
+        logger.debug "determining additional items to be ordered from tolerance"
         order_quantities.each do |goaq|
-          q = [goaq.quantity, total - total_quantity].min
+          q = [goaq.tolerance, total - total_quantity].min
           total_quantity += q
           if goaq.group_order_article_id == self.id
-            logger.debug "increasing quantity by #{q}"
-            quantity += q
+            logger.debug "increasing tolerance by #{q}"
+            tolerance += q
           end
           break if total_quantity >= total
         end
-
-        # Determine tolerance to be ordered...
-        if total_quantity < total
-          logger.debug "determining additional items to be ordered from tolerance"
-          order_quantities.each do |goaq|
-            q = [goaq.tolerance, total - total_quantity].min
-            total_quantity += q
-            if goaq.group_order_article_id == self.id
-              logger.debug "increasing tolerance by #{q}"
-              tolerance += q
-            end
-            break if total_quantity >= total
-          end
-        end
-
-        logger.debug "determined quantity/tolerance/total: #{quantity} / #{tolerance} / #{quantity + tolerance}"
       end
 
-      {:quantity => quantity, :tolerance => tolerance, :total => quantity + tolerance}
+      logger.debug "determined quantity/tolerance/total: #{quantity} / #{tolerance} / #{quantity + tolerance}"
     end
+
+    # memoize result unless a total is given
+    r = {:quantity => quantity, :tolerance => tolerance, :total => quantity + tolerance}
+    @calculate_result = r if total.nil?
+    r
   end
 
   # Returns order result,
@@ -159,9 +165,11 @@ class GroupOrderArticle < ActiveRecord::Base
     self[:result] || calculate_result[type]
   end
 
-  # This is used during order.finish!.
-  def save_results!
-    self.update_attribute(:result, calculate_result[:total])
+  # This is used for automatic distribution, e.g., in order.finish! or when receiving orders
+  def save_results!(article_total = nil)
+    new_result = calculate_result(article_total)[:total]
+    self.update_attribute(:result_computed, new_result)
+    self.update_attribute(:result, new_result)
   end
 
   # Returns total price for this individual article
@@ -180,6 +188,10 @@ class GroupOrderArticle < ActiveRecord::Base
     end
   end
 
+  # Check if the result deviates from the result_computed
+  def result_manually_changed?
+    result != result_computed unless result.nil?
+  end
 end
 
 

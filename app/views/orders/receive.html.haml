@@ -1,0 +1,45 @@
+- content_for :javascript do
+  :javascript
+    $(function() {
+      // Subscribe to database changes.
+      // See publish/subscribe design pattern in /doc.
+      $(document).on('OrderArticle#update', function(e) {
+        $.ajax({
+          url: '#{receive_on_order_article_update_order_path(@order)}',
+          type: 'get',
+          data: {order_article_id: e.order_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+      
+      $(document).on('OrderArticle#create', function(e) {
+        $.ajax({
+          url: '#{receive_on_order_article_create_order_path(@order)}',
+          type: 'get',
+          data: {order_article_id: e.order_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+    });
+
+- title t('.title', order: @order.name)
+
+= form_tag(receive_order_path(@order)) do
+  %fieldset#results
+    = render 'edit_amounts'
+
+  .form-actions
+    .pull-left
+      %b.checkbox.inline
+        = t '.surplus_options'
+      = label_tag :rest_to_tolerance, class: 'checkbox inline' do
+        = check_box_tag :rest_to_tolerance, 1, true
+        = t '.consider_member_tolerance'
+      = label_tag :rest_to_stock, class: 'checkbox inline' do
+        = check_box_tag :rest_to_stock, 1, false, disabled: true
+        %span{style: 'color: grey'}= t '.rest_to_stock'
+    .pull-right
+      = submit_tag t('.submit'), class: 'btn btn-primary'
+      = link_to t('ui.or_cancel'), order_path(@order)
+
+%p= link_to_top

@@ -1,0 +1,9 @@
+// Publish database changes.
+// See publish/subscribe design pattern in /doc.
+$(document).trigger({
+  type: 'OrderArticle#update',
+  order_article_id: <%= @order_article.id %>
+});
+
+$('#modalContainer').modal('hide');
+

@@ -1,0 +1,35 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function(w) {
+  // get old element and update the cell which is reused
+  var old_order_article_entry = $('#order_article_<%= @order_article.id %>');
+  
+  // update package info after input
+  $('td.units_received_cell span.package', old_order_article_entry).remove();
+  $('<%= j pkg_helper(@order_article.article_price, icon: false) %>')
+    .appendTo($('td.units_received_cell', old_order_article_entry));
+
+  // update package icon on input too
+  $('input', old_order_article_entry).toggleClass('package', <%= @order_article.article_price.unit_quantity == 1 ? 'false' : 'true' %>);
+
+  // update expected units, since unit_quantity may have been changed
+  $('input', old_order_article_entry).data('units-expected', <%=
+    (@order_article.units_billed or @order_article.units_to_order) *
+      1.0 * @order_article.article.unit_quantity / @order_article.article_price.unit_quantity
+  %>);
+  
+  // render new element and inject dynamic cell
+  var new_order_article_entry = $(
+    '<%= j render(partial: 'edit_amount', locals: {order_article: @order_article}) %>'
+  );
+  
+  $('td.units_received_cell', new_order_article_entry).replaceWith(
+    $('td.units_received_cell', old_order_article_entry)
+  );
+  
+  // finally replace the OrderArticle entry
+  old_order_article_entry.replaceWith(new_order_article_entry);
+  
+  update_delta($('input.units_received', new_order_article_entry));
+})(window);
+

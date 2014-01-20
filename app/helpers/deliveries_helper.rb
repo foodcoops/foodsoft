@@ -10,12 +10,17 @@ module DeliveriesHelper
     end
   end
   
-  def articles_for_select2(supplier)
-    supplier.articles.undeleted.reorder('articles.name ASC').map {|a| {:id => a.id, :text => "#{a.name} (#{number_to_currency a.price}/#{a.unit})"} }
+  def articles_for_select2(articles, except = [], &block)
+    articles = articles.reorder('articles.name ASC')
+    articles.reject! {|a| not except.index(a.id).nil? } if except
+    block_given? or block = Proc.new {|a| "#{a.name} (#{number_to_currency a.price}/#{a.unit})" }
+    articles.map do |a|
+      {:id => a.id, :text => block.call(a)}
+    end.unshift({:id => '', :text => ''})
   end
   
-  def stock_articles_for_table(supplier)
-    supplier.stock_articles.undeleted.reorder('articles.name ASC')
+  def articles_for_table(articles)
+    articles.undeleted.reorder('articles.name ASC')
   end
   
   def stock_change_remove_link(stock_change_form)

@@ -20,7 +20,7 @@
       
       $('#new_stock_article').removeAttr('disabled').select2({
         placeholder: '#{t '.create_stock_article'}',
-        data: #{articles_for_select2(@supplier).to_json},
+        data: #{articles_for_select2(@supplier.articles).to_json},
         createSearchChoice: function(term) {
           return {
             id: 'new',
@@ -115,12 +115,12 @@
     %tfoot
       %tr
         %th{:colspan => 5}
-          - if articles_for_select2(@supplier).empty?
+          - if @supplier.articles.empty?
             = link_to t('.create_stock_article'), new_stock_article_path, :remote => true, :class => 'btn'
           - else
             %input#new_stock_article{:style => 'width: 500px;'}
     %tbody
-      - for article in stock_articles_for_table(@supplier)
+      - for article in articles_for_table(@supplier.stock_articles)
         = render :partial => 'stock_article_for_adding', :locals => {:article => article}
     
   %h2= t '.title_fill_quantities'

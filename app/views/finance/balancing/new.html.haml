@@ -1,3 +1,27 @@
+- content_for :javascript do
+  :javascript
+    $(function() {
+      // Subscribe to database changes.
+      // See publish/subscribe design pattern in /doc.
+      $(document).on('OrderArticle#update', function(e) {
+        $.ajax({
+          url: '#{new_on_order_article_update_finance_order_path(@order)}',
+          type: 'get',
+          data: {order_article_id: e.order_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+      
+      $(document).on('OrderArticle#create', function(e) {
+        $.ajax({
+          url: '#{new_on_order_article_create_finance_order_path(@order)}',
+          type: 'get',
+          data: {order_article_id: e.order_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+    });
+
 - title t('.title', name: @order.name)
 
 - content_for :sidebar do

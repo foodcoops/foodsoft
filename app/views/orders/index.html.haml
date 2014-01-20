@@ -10,8 +10,13 @@
         %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1
 
 .well
-  %h2= t '.open_orders'
-  - unless @open_orders.empty?
+  - if not @open_orders.empty?
+    %h2= t '.orders_open'
+  - elsif not @finished_orders.empty?
+    %h2= t '.orders_finished'
+  - else
+    = t '.no_open_or_finished_orders'
+  - unless @open_orders.empty? and @finished_orders.empty?
     %table.table.table-striped
       %thead
         %tr
@@ -20,24 +25,44 @@
           %th= heading_helper Order, :note
           %th{colspan: "2"}
       %tbody
-        - for order in @open_orders
-        - tr_class = " active" if order.expired?
-          %tr{class: tr_class}
-            %td= order.name
-            %td= format_time(order.ends) unless order.ends.nil?
-            %td= truncate(order.note)
-            %td= link_to t('.action_end'), finish_order_path(order),
-              confirm: t('.confirm_end', order: order.name), method: :post,
-              class: 'btn btn-small btn-success'
+        - unless @open_orders.empty?
+          - for order in @open_orders
+            - tr_class = " active" if order.expired?
+            %tr{class: tr_class}
+              %td= order.name
+              %td= format_time(order.ends) unless order.ends.nil?
+              %td= truncate(order.note)
+              %td= link_to t('.action_end'), finish_order_path(order),
+                confirm: t('.confirm_end', order: order.name), method: :post,
+                class: 'btn btn-small btn-success'
 
-            %td
-              = link_to t('ui.show'), order, class: 'btn btn-small'
-              = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-small'
-              = link_to t('ui.delete'), order, confirm: t('.confirm_delete'), method: :delete,
-                class: 'btn btn-small btn-danger'
-  - else
-    = t '.no_open_orders'
+              %td
+                = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-small'
+                = link_to t('ui.show'), order, class: 'btn btn-small'
+                = link_to t('ui.delete'), order, confirm: t('.confirm_delete'), method: :delete,
+                  class: 'btn btn-small btn-danger'
 
-%h2= t '.ended_orders'
+        - unless @finished_orders.empty?
+          - unless @open_orders.empty?
+            %tr
+              %td{colspan: 6}
+                %h2= t '.orders_finished'
+          - for order in @finished_orders
+            %tr
+              %td= order.name
+              %td= format_time(order.ends)
+              %td= truncate(order.note)
+              %td
+                - unless order.stockit?
+                  -# TODO btn-success class only if not received before
+                  = link_to t('.action_receive'), receive_order_path(order), class: 'btn btn-small btn-success'
+
+              %td
+                = link_to t('ui.edit'), '#', class: 'btn btn-small disabled', tabindex: -1
+                = link_to t('ui.show'), order, class: 'btn btn-small'
+                = link_to t('ui.delete'), order, confirm: t('.confirm_delete'), method: :delete,
+                  class: 'btn btn-small btn-danger'
+
+%h2= t '.orders_settled'
 #orders_table
   = render partial: 'orders'

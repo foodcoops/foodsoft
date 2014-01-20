@@ -77,10 +77,17 @@ de:
         note: Notiz
         starts: Läuft vom
         status: Status
+        supplier: Lieferant
       order_article:
+        article: Artikel
         missing_units: Fehlende Einheiten
-        missing_units_short: Fehlende
-        units_to_order: Menge
+        missing_units_short: Fehlend
+        quantity: Gewünschte Einheiten
+        quantity_short: Gewünscht
+        units_received: Gelieferte Gebinde
+        units_received_short: Geliefert
+        units_to_order: Bestellte Gebinde
+        units_to_order_short: Bestellt
         update_current_price: Globalen Preis aktualisieren
       order_comment:
         text: Kommentiere diese Bestellung ...
@@ -277,7 +284,7 @@ de:
       error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine Administratorin, dass sie Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
       error_denied_sign_in: als ein anderer Benutzer anmelden
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
-      error_token: 
+      error_token: Zugriff verweigert (ungültiger Token)!
   article_categories:
     create:
       notice: Die Kategorie wurde gespeichert
@@ -377,7 +384,9 @@ de:
       update:
         body: ! 'Jeder Artikel wird doppelt angezeigt: die alten Werte sind grau und die Textfelder sind mit den aktuellen Werten vorausgefüllt. Abweichungen zu den alten Artikeln sind gelb markiert.'
         title: Aktualisieren ...
-        update_msg: ! '%{count} Artikel müssen aktualisiert werden.'
+        update_msg:
+          one: Ein Artikel muss aktualisiert werden.
+          other: ! '%{count} Artikel müssen aktualisiert werden.'
     upload:
       body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert.</p> <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden.</p> <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>
       fields:
@@ -469,7 +478,9 @@ de:
       - FC-Preis
       - Menge
       title: ! 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
-      total: Insgesamt %{count} Artikel
+      total:
+        one: Insgesamt ein Artikel
+        other: ! 'Insgesamt %{count} Artikel'
   errors:
     general: Ein Problem ist aufgetreten.
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
@@ -613,12 +624,6 @@ de:
       show:
         back: Züruck
         title: Rechnung %{number}
-    order_articles:
-      edit:
-        stock_alert: Preise von Lagerartikeln können nicht geändert werden!
-        title: Artikel aktualisieren
-      new:
-        title: Neuer gelieferter Artikel die Bestellung
     ordergroups:
       index:
         new_transaction: Neue Überweisungen eingeben
@@ -741,6 +746,7 @@ de:
       new_invoice: Rechnung anlegen
       show_invoice: Rechnung anzeigen
     orders:
+      old_price: Alter Preis
       option_choose: Lieferantin/Lager auswählen
       option_stock: Lager
       order_pdf: PDF erstellen
@@ -1085,6 +1091,12 @@ de:
     model:
       error_single_group: ! '%{user} ist schon in einer anderen Bestellgruppe'
       invalid_balance: ist keine gültige Zahl
+  order_articles:
+    edit:
+      stock_alert: Preise von Lagerartikeln können nicht geändert werden!
+      title: Artikel aktualisieren
+    new:
+      title: Neuer gelieferter Artikel der Bestellung
   orders:
     articles:
       article_count: ! 'Bestellte Artikel:'
@@ -1096,6 +1108,9 @@ de:
       notice: Die Bestellung wurde erstellt.
     edit:
       title: Bestellung bearbeiten
+    edit_amount:
+      field_locked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Das Eingabefeld wurde gesperrt, um die manuellen Änderungen zu bewahren. Um den Artikel neu zu verteilen, drücke den Entsperrknopf und ändere die gelieferte Menge.
+      field_unlocked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Wenn du die gelieferte Menge änderst, werden die vorherigen manuellen Änderungen überschrieben.
     fax:
       amount: Menge
       articles: Artikel
@@ -1114,12 +1129,14 @@ de:
       title: Artikel
     index:
       action_end: Beenden
+      action_receive: In Empfang nehmen
       confirm_delete: Willst Du wirklich die Bestellung löschen?
       confirm_end: Willst Du wirklich die Bestellung %{order} beenden? Es gibt kein zurück.
-      ended_orders: Beendete Bestellungen
       new_order: Neue Bestellung anlegen
-      no_open_orders: Derzeit gibt es keine laufende Bestellungen.
-      open_orders: Laufende Bestellungen
+      no_open_or_finished_orders: Derzeit gibt es keine laufende oder beendete Bestellungen.
+      orders_finished: Beendet
+      orders_open: Laufend
+      orders_settled: Abgerechnet
       title: Bestellungen verwalten
     model:
       error_closed: Bestellung wurde schon abgerechnet
@@ -1131,6 +1148,15 @@ de:
       warning_ordered_stock: ! 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
     new:
       title: Neue Bestellung anlegen
+    receive:
+      add_article: Artikel hinzufügen
+      consider_member_tolerance: Toleranz berücksichtigen
+      notice: ! 'Bestellung in Empfang genommen: %{msg}'
+      notice_none: Keine neuen Artikel für den Empfang ausgewählt.
+      rest_to_stock: Rest ins Lager
+      submit: Bestellung in Empfang nehmen
+      surplus_options: 'Verteilungsoptionen:'
+      title: »%{order}« in Empfang nehmen
     show:
       action_end: Beenden!
       amounts: ! 'Netto/Bruttosumme:'
@@ -1162,6 +1188,11 @@ de:
       open: laufend
     update:
       notice: Die Bestellung wurde aktualisiert.
+    update_order_amounts:
+      update_order_amounts:
+      msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
+      msg2: "%{count} (%{units}) Toleranzmenge"
+      msg4: "%{count} (%{units}) übrig"
   pages:
     all:
       new_page: Neue Seite anlegen

@@ -1,0 +1,99 @@
+- new_articles = (@order.supplier.articles rescue @order.articles)
+- new_article_data = articles_for_select2(new_articles, @order_articles.map(&:article_id)) {|a| "#{a.name} (#{a.unit_quantity}⨯#{a.unit})"}
+- content_for :javascript do
+  :javascript
+
+    function update_delta(input) {
+      var units = $(input).val();
+      var expected = $(input).data('units-expected');
+      var delta = Math.round((units-expected)*100)/100.0;
+      var html;
+
+      if (units.replace(/\s/g,"")=="") {
+        // no value
+        html = '';
+      } else if (isNaN(units)) {
+        html = '<i class="icon-remove" style="color: red"></i>';
+      } else if (delta == 0) {
+        // equal value
+        html = '<i class="icon-ok" style="color: green"></i>';
+      } else {
+        if (delta < 0) {
+          html = '<span style="color: red">- '+(-delta)+'</span>';
+        } else /*if (units> expected)*/ {
+          html = '<span style="color: green">+ '+(delta)+'</span>';
+        }
+        // show package icon only if the receive field has one
+        if ($(input).hasClass('package')) {
+          html += '#{j pkg_helper_icon}';
+        }
+      }
+
+      $(input).closest('tr').find('.units_delta').html(html);
+    }
+
+    $(document).on('change keyup', 'input[data-units-expected]', function() {
+      update_delta(this);
+    });
+
+    $(document).on('click', '#order_articles .unlocker', unlock_receive_input_field);
+
+    $(function() {
+      $('input[data-units-expected]').each(function() {
+        update_delta(this);
+      });
+      
+      init_add_article('#add_article');
+    });
+    
+    function init_add_article(sel) {
+      $(sel).removeAttr('disabled').select2({
+        placeholder: '#{j t('orders.receive.add_article')}',
+        formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
+        // TODO implement adding a new article, like in deliveries
+      }).on('change', function(e) {
+        var selectedArticle = $(e.currentTarget).select2('data');
+        if(!selectedArticle) {
+          return false;
+        }
+
+        $.ajax({
+          url: '#{order_order_articles_path(@order)}',
+          type: 'post',
+          data: JSON.stringify({order_article: {article_id: selectedArticle.id}}),
+          contentType: 'application/json; charset=UTF-8'
+        });
+        
+        $('#add_article').select2('data', null);
+      }).select2('data', null);
+    }
+    
+    function unlock_receive_input_field() {
+      $('.units_received', $(this).closest('tr')).prop('disabled', false).focus();
+      $(this).closest('.input-prepend').prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
+      $(this).replaceWith('<i class="icon icon-warning-sign add-on"></i>');
+    }
+
+%table#order_articles.ordered-articles.table.table-striped.stupidtable{style: 'margin-bottom: 0'}
+  %thead
+    %tr
+      %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :order_number, short: true
+      %th.default-sort.sort{:data => {:sort => 'string'}}= heading_helper Article, :name
+      %th= heading_helper Article, :unit
+      %th= heading_helper Article, :price
+      %th= heading_helper OrderArticle, :quantity, short: true
+      %th= heading_helper OrderArticle, :units_to_order, short: true
+      -#%th Invoice # TODO implement invoice screen
+      %th= heading_helper OrderArticle, :units_received, short: true
+      %th
+      %th= t 'ui.actions'
+  %tbody#result_table
+    - @order_articles.each do |order_article|
+      = render :partial => 'edit_amount', :locals => {:order_article => order_article}
+  %tfoot
+    %tr
+      %th{:colspan => 10}
+        %select#add_article{:style => 'width: 500px;'}
+          - new_article_data.each do |option|
+            %option{id: "add_article_#{option[:id]}", value: option[:id]}= option[:text]
+

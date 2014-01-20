@@ -1,11 +1,12 @@
 %td.closed
   = link_to order_article.article.name, '#', 'data-toggle-this' => "#group_order_articles_#{order_article.id}"
 %td= order_article.article.order_number
-%td
-  = order_article.units_to_order
-  - unless order_article.ordered_quantities_equal_to_group_orders?
-    %span{:style => "color:red;font-weight: bold"} !
-%td #{order_article.price.unit_quantity} &times; #{order_article.article.unit}
+%td{title: units_history_line(order_article)}
+  = order_article.units
+  = pkg_helper order_article.article_price
+  - if s=order_article.ordered_quantities_different_from_group_orders?
+    %span{:style => "color:red;font-weight: bold"}= s
+%td #{order_article.article.unit}
 %td
   = number_to_currency(order_article.price.price, :unit => "")
   :plain
@@ -19,8 +20,8 @@
 %td #{order_article.price.tax}%
 %td= order_article.price.deposit
 %td
-  = link_to t('ui.edit'), edit_finance_order_order_article_path(order_article.order, order_article), remote: true,
+  = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true,
     class: 'btn btn-mini'
 %td
-  = link_to t('ui.delete'), finance_order_order_article_path(order_article.order, order_article), method: :delete,
+  = link_to t('ui.delete'), order_order_article_path(order_article.order, order_article), method: :delete,
     remote: true, confirm: t('.confirm'), class: 'btn btn-danger btn-mini'
