@@ -77,12 +77,18 @@ fr:
         note: 
         starts: Ouverture le
         status: 
+        supplier: 
       order_article:
         article: Article
         missing_units: Unités manquantes
         missing_units_short: 
+        quantity: 
+        quantity_short: 
+        units_received: 
+        units_received_short: 
         units_to_order: Quantité
-        update_current_price: Mettre à jour le prix global
+        units_to_order_short: 
+        update_global_price: Mettre à jour le prix global
       order_comment:
         text: Commenter cette commande...
       ordergroup:
@@ -756,6 +762,7 @@ fr:
       new_invoice: Ajouter une nouvelle facture
       show_invoice: Afficher la facture
     orders:
+      old_price: 
       option_choose: Choix d'unE fournisseusE_r
       option_stock: Stock
       order_pdf: Générer un PDF
@@ -1081,6 +1088,12 @@ fr:
       home: Page d'accueil
       title: Wiki
     workgroups: Équipes
+  order_articles:
+    edit:
+      stock_alert: 
+      title: Mettre à jour la liste des article
+    new:
+      title: 
   ordergroups:
     edit:
       title: Modifier les cellules
@@ -1089,12 +1102,6 @@ fr:
     model:
       error_single_group: ! '%{user} fait déjà partie d''une autre cellule'
       invalid_balance: n'est pas un nombre valide
-  order_articles:
-    edit:
-      stock_alert: 
-      title: Mettre à jour la liste des article
-    new:
-      title: 
   orders:
     articles:
       article_count: ! 'Articles commandés:'
@@ -1106,6 +1113,9 @@ fr:
       notice: La commande a bien été définie.
     edit:
       title: Modifier la commande
+    edit_amount:
+      field_locked_title: 
+      field_unlocked_title: 
     fax:
       amount: Quantité
       articles: Articles
@@ -1124,6 +1134,7 @@ fr:
       title: Article
     index:
       action_end: Terminer
+      action_receive: 
       confirm_delete: Vraiment supprimer la commande?
       confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
       new_order: Définir une nouvelle commande
@@ -1142,6 +1153,15 @@ fr:
       warning_ordered_stock: 
     new:
       title: Définir une nouvelle commande
+    receive:
+      add_article: 
+      consider_member_tolerance: 
+      notice: 
+      notice_none: 
+      rest_to_stock: 
+      submit: 
+      surplus_options: 
+      title: 
     show:
       action_end: Clore!
       amounts: ! 'Total net/brut:'
@@ -1171,6 +1191,12 @@ fr:
       open: en cours
     update:
       notice: La commande a été mise à jour.
+    update_order_amounts:
+      msg1: 
+      msg2: 
+      msg3: 
+      msg4: 
+      update_order_amounts: 
   pages:
     all:
       new_page: Créer une nouvelle page
@@ -1297,7 +1323,7 @@ fr:
         private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       order_article:
         units_to_order: 
-        update_current_price: Modifie aussi le prix des commandes en cours
+        update_global_price: 
       stock_article:
         copy:
           name: Merci de modifier

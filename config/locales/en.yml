@@ -88,7 +88,7 @@ en:
         units_received_short: Received
         units_to_order: Ordered units
         units_to_order_short: Ordered
-        update_current_price: Globally update current price
+        update_global_price: Globally update current price
       order_comment:
         text: Add comment to this order ...
       ordergroup:
@@ -1085,6 +1085,12 @@ en:
       home: Home
       title: Wiki
     workgroups: Workgroups
+  order_articles:
+    edit:
+      stock_alert: The price of stock articles cannot be changed!
+      title: Update article
+    new:
+      title: Add delivered article to order
   ordergroups:
     edit:
       title: Edit ordergroups
@@ -1093,12 +1099,6 @@ en:
     model:
       error_single_group: ! '%{user} is already a member of another ordergroup'
       invalid_balance: is not a valid number
-  order_articles:
-    edit:
-      stock_alert: The price of stock articles cannot be changed!
-      title: Update article
-    new:
-      title: Add delivered article to order
   orders:
     articles:
       article_count: ! 'Ordered articles:'
@@ -1157,7 +1157,7 @@ en:
       notice_none: No new articles to receive
       rest_to_stock: rest to stock
       submit: Receive order
-      surplus_options: 'Distribution options:'
+      surplus_options: ! 'Distribution options:'
       title: Receiving %{order}
     show:
       action_end: Close!
@@ -1198,10 +1198,11 @@ en:
     update:
       notice: The order was updated.
     update_order_amounts:
-      msg1: "%{count} articles (%{units} units) updated"
-      msg2: "%{count} (%{units}) using tolerance"
-      msg3: "%{count} (%{units}) go to stock if foodsoft would support that [don't translate]"
-      msg4: "%{count} (%{units}) left over"
+      msg1: ! '%{count} articles (%{units} units) updated'
+      msg2: ! '%{count} (%{units}) using tolerance'
+      msg3: ! '%{count} (%{units}) go to stock if foodsoft would support that [don''t translate]'
+      msg4: ! '%{count} (%{units}) left over'
+      update_order_amounts: 
   pages:
     all:
       new_page: Create new page
@@ -1328,7 +1329,7 @@ en:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:
         units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
-        update_current_price: Also update the price of the current order
+        update_global_price: Also update the price of future orders
       stock_article:
         copy:
           name: Please modify

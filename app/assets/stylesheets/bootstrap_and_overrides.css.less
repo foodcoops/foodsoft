@@ -240,6 +240,10 @@ tr.unavailable {
 
 // ********* Tweaks & fixes
 
+// Fix bootstrap dropdown menu on mobile
+// https://github.com/twbs/bootstrap/issues/4550#issuecomment-31916049
+.dropdown-backdrop { position: static; }
+
 // need more space for supplier&order information (in German, at least)
 .dl-horizontal {
   dt { width: 160px; }
