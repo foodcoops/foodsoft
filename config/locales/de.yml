@@ -480,7 +480,7 @@ de:
       title: ! 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
       total:
         one: Insgesamt ein Artikel
-        other: ! 'Insgesamt %{count} Artikel'
+        other: Insgesamt %{count} Artikel
   errors:
     general: Ein Problem ist aufgetreten.
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
@@ -1083,6 +1083,12 @@ de:
       home: Startseite
       title: Wiki
     workgroups: Arbeitsgruppen
+  order_articles:
+    edit:
+      stock_alert: Preise von Lagerartikeln können nicht geändert werden!
+      title: Artikel aktualisieren
+    new:
+      title: Neuer gelieferter Artikel der Bestellung
   ordergroups:
     edit:
       title: Bestellgruppe bearbeiten
@@ -1091,12 +1097,6 @@ de:
     model:
       error_single_group: ! '%{user} ist schon in einer anderen Bestellgruppe'
       invalid_balance: ist keine gültige Zahl
-  order_articles:
-    edit:
-      stock_alert: Preise von Lagerartikeln können nicht geändert werden!
-      title: Artikel aktualisieren
-    new:
-      title: Neuer gelieferter Artikel der Bestellung
   orders:
     articles:
       article_count: ! 'Bestellte Artikel:'
@@ -1155,7 +1155,7 @@ de:
       notice_none: Keine neuen Artikel für den Empfang ausgewählt.
       rest_to_stock: Rest ins Lager
       submit: Bestellung in Empfang nehmen
-      surplus_options: 'Verteilungsoptionen:'
+      surplus_options: ! 'Verteilungsoptionen:'
       title: »%{order}« in Empfang nehmen
     show:
       action_end: Beenden!
@@ -1189,10 +1189,11 @@ de:
     update:
       notice: Die Bestellung wurde aktualisiert.
     update_order_amounts:
-      update_order_amounts:
-      msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
-      msg2: "%{count} (%{units}) Toleranzmenge"
-      msg4: "%{count} (%{units}) übrig"
+      msg1: ! '%{count} Artikel (%{units} Einheiten) aktualisiert'
+      msg2: ! '%{count} (%{units}) Toleranzmenge'
+      msg3: 
+      msg4: ! '%{count} (%{units}) übrig'
+      update_order_amounts: 
   pages:
     all:
       new_page: Neue Seite anlegen

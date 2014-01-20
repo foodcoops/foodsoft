@@ -77,11 +77,17 @@ nl:
         note: Notitie
         starts: Start op
         status: Status
+        supplier: 
       order_article:
         article: Artikel
         missing_units: Missende eenheden
         missing_units_short: Nodig
+        quantity: 
+        quantity_short: 
+        units_received: 
+        units_received_short: 
         units_to_order: Aantal eenheden
+        units_to_order_short: 
         update_global_price: Huidige prijs overal bijwerken
       order_comment:
         text: Commentaar voor deze bestelling toevoegen ...
@@ -740,6 +746,7 @@ nl:
       new_invoice: Nieuwe rekening
       show_invoice: Rekening tonen
     orders:
+      old_price: 
       option_choose: Leverancier/voorraad kiezen
       option_stock: Voorraad
       order_pdf: PDF maken
@@ -1056,6 +1063,12 @@ nl:
       home: Hoofdpagina
       title: Wiki
     workgroups: Werkgroepen
+  order_articles:
+    edit:
+      stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!
+      title: Artikel bijwerken
+    new:
+      title: Geleverd artikel aan bestelling toevoegen
   ordergroups:
     edit:
       title: Huidhouden bewerken
@@ -1064,12 +1077,6 @@ nl:
     model:
       error_single_group: ! '%{user} behoort al tot een ander huishouden'
       invalid_balance: is geen geldig nummer
-  order_articles:
-    edit:
-      stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!
-      title: Artikel bijwerken
-    new:
-      title: Geleverd artikel aan bestelling toevoegen
   orders:
     articles:
       article_count: ! 'Bestelde artikelen:'
@@ -1081,6 +1088,9 @@ nl:
       notice: De bestelling is aangemaakt.
     edit:
       title: Bestelling aanpassen
+    edit_amount:
+      field_locked_title: 
+      field_unlocked_title: 
     fax:
       amount: Aantal
       articles: Artikelen
@@ -1099,6 +1109,7 @@ nl:
       title: Artikel
     index:
       action_end: Sluiten
+      action_receive: 
       confirm_delete: Wil je de bestelling werkelijk verwijderen?
       confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
       new_order: Nieuwe bestelling openen
@@ -1117,6 +1128,15 @@ nl:
       warning_ordered_stock: ! 'Opgelet: rood gemarkeerde artikelen zijn al besteld of gekocht door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen/-aankopen van deze artikelen verwijderd, en worden ze niet afgerekend.'
     new:
       title: Nieuwe bestelling openen
+    receive:
+      add_article: 
+      consider_member_tolerance: 
+      notice: 
+      notice_none: 
+      rest_to_stock: 
+      submit: 
+      surplus_options: 
+      title: 
     show:
       action_end: Sluiten!
       amounts: ! 'Totaal netto/bruto:'
@@ -1148,6 +1168,12 @@ nl:
       open: lopend
     update:
       notice: De bestelling is bijgewerkt.
+    update_order_amounts:
+      msg1: 
+      msg2: 
+      msg3: 
+      msg4: 
+      update_order_amounts: 
   pages:
     all:
       new_page: Nieuwe pagina maken
@@ -1274,7 +1300,7 @@ nl:
         private: Bericht wordt niet getoond in de Foodsoft inbox.
       order_article:
         units_to_order: Als je het aantal geleverde eenheden wijzigt, moet je daarna de hoeveelheden voor huishoudens aanpassen. Klik daarvoor op de artikelnaam. Als je dit vergeet, kunnen huishoudens belast worden voor artikelen die ze niet hebben gekregen!
-        update_global_price: # ATTENTION, MEANING CHANGED. OLD (NOW WRONG) TRANSLATION WAS 'Ook prijs in huidige besteling aanpassen'
+        update_global_price: Prijs ook aanpassen voor toekomstige bestellingen
       stock_article:
         copy:
           name: Wijzigen alsjeblieft
