@@ -11,10 +11,9 @@ set :branch,              ENV["REVISION"] || ENV["BRANCH_NAME"] || "master"
 set :application,         'foodsoft'            # application name (whatever you like)
 set :domain,              'order.foodcoop.test' # host
 set :user,                'deploy'              # ssh deploy user
-set :default_stage,       'staging'             # default environment, see config/deploy/
 set :keep_releases,       10
 set :repo_url,            'git://github.com/foodcoops/foodsoft.git'
-set :deploy_to,            "/www/apps/#{fetch :unique_app_name}"
+set :deploy_to,            "/www/apps/#{fetch :application}-#{fetch :stage}"
 
 # more settings which are probably ok
 set :log_level,           :info
