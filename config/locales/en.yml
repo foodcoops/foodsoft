@@ -7,6 +7,7 @@ en:
         availability_short: avail.
         deposit: Deposit
         fc_price: FoodCoop price
+        fc_price_desc: Price including taxes, deposit and Foodcoop-charge
         fc_price_short: FC price
         fc_share: FoodCoop margin
         fc_share_short: FC margin
@@ -1297,9 +1298,8 @@ en:
       ordergroup: Ordergroup
       price: Total price
     articles_by_groups:
-      fc_price: FC-Price
-      fc_price_desc: Price including taxes, deposit and Foodcoop-charge
       price: Total price
+      price_sum: Sum
       unit_quantity: Lot quantity
       unit_quantity_desc: How many units per lot.
     group:

@@ -2,21 +2,19 @@
   %thead.list-heading
     %tr
       %th{:style => "width:40%"}= heading_helper Article, :name
-      %th
-        %acronym{:title => t('shared.articles.ordered_desc')}= t 'shared.articles.ordered'
-      %th
-        %acronym{:title => t('shared.articles.received_desc')}= t 'shared.articles.received'
-      %th
-        %acronym{:title => t('.fc_price_desc')}= t '.fc_price'
-      %th
-        %acronym{:title => t('.unit_quantity_desc')}= t '.unit_quantity'
       %th= heading_helper Article, :unit
+      %th.center
+        %acronym{:title => t('shared.articles.ordered_desc')}= t 'shared.articles.ordered'
+      %th.center{colspan: 2}
+        %acronym{:title => t('shared.articles.received_desc')}= t 'shared.articles.received'
+      %th{colspan: 2}= heading_helper Article, :fc_price, short: true
       %th= t '.price'
+      %th= #heading_helper Article, :unit_quantity, short: true
 
   - for group_order in order.group_orders.ordered
     %tbody
-      %tr
-        %th{:colspan => "7"}
+      %tr.list-heading
+        %th{:colspan => "9"}
           %h4.name= group_order.ordergroup.name
       - total = 0
       - for goa in group_order.group_order_articles.ordered.all(:include => :order_article)
@@ -25,16 +23,19 @@
         - total += subTotal
         %tr{:class => [cycle('even', 'odd', :name => 'articles'), if goa.result == 0 then 'unavailable' end]}
           %td.name{:style => "width:40%"}=h goa.order_article.article.name
-          %td= "#{goa.quantity} + #{goa.tolerance}"
-          %td
-            %b= goa.result
-          %td= number_to_currency(fc_price)
-          %td= goa.order_article.price.unit_quantity
           %td= goa.order_article.article.unit
+          %td.center= "#{goa.quantity} + #{goa.tolerance}"
+          %td.center
+            %b= goa.result
+          %td.symbol &times;
+          %td= number_to_currency(fc_price)
+          %td.symbol =
           %td= number_to_currency(subTotal)
+          %td= pkg_helper goa.order_article.price
       %tr{:class => cycle('even', 'odd', :name => 'articles')}
-        %th{:colspan => "6"} Summe
+        %th{:colspan => "7"}= t '.price_sum'
         %th= number_to_currency(total)
+        %th
       %tr
-        %th(colspan="7")
+        %th(colspan="9")
       - reset_cycle("articles")

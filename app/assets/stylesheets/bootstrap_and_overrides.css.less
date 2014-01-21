@@ -104,7 +104,7 @@ table {
     content: ' \25B2';
   }
 
-  tr.article-category {
+  tr.list-heading {
     background-color: #efefef;
     td:first-child {
       text-align: left;
@@ -124,6 +124,10 @@ table {
   tr.selected td {
     background-color: @successBackground;
   }
+}
+
+.center, td.center, th.center {
+  text-align: center;
 }
 
 // Tasks ..
@@ -237,6 +241,18 @@ tr.unavailable {
 .units_delta {
   min-width: 3.5em;
 }
+
+// small cells with just a 'x' or '='
+td.symbol, th.symbol {
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+}
+.symbol              { color: tint(@textColor, @nonessentialDim); }
+.used        .symbol { color: tint(@articleUsedColor, @nonessentialDim); }
+.unused      .symbol { color: tint(@articleUnusedColor, @nonessentialDim); }
+.unavailable .symbol { color: @articleUnavailColor; }
+
 
 // ********* Tweaks & fixes
 
