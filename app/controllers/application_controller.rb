@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
       # No user at all: redirect to login page.
       session[:user_id] = nil
       session[:return_to] = request.original_url
-      redirect_to login_url, :alert => I18n.t('application.controller.error_authn')
+      redirect_to_login :alert => I18n.t('application.controller.error_authn')
     else
       # We have an authenticated user, now check role...
       # Roles gets the user through his memberships.
@@ -102,6 +102,11 @@ class ApplicationController < ActionController::Base
     else
       authenticate(role)
     end
+  end
+
+  # Redirect to the login page, used in authenticate, plugins can override this.
+  def redirect_to_login(options={})
+    redirect_to login_url, options
   end
 
   # Stores this controller instance as a thread local varibale to be accessible from outside ActionController/ActionView.
