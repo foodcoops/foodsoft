@@ -1,5 +1,7 @@
 @import "twitter/bootstrap/bootstrap";
 @import "twitter/bootstrap/responsive";
+@import "delta_input";
+
 body {
   padding-top: 10px;
 }
@@ -252,6 +254,15 @@ td.symbol, th.symbol {
 .used        .symbol { color: tint(@articleUsedColor, @nonessentialDim); }
 .unused      .symbol { color: tint(@articleUnusedColor, @nonessentialDim); }
 .unavailable .symbol { color: @articleUnavailColor; }
+
+// hide symbols completely on small screens to save space
+@media (max-width: 768px) {
+  .symbol {
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
 
 
 // ********* Tweaks & fixes

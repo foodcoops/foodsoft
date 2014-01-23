@@ -83,12 +83,14 @@ module ApplicationHelper
   #   be overridden by the option 'desc'.
   #  Other options are passed through to I18n.
   def heading_helper(model, attribute, options = {})
-    i18nopts = options.select {|a| !['short', 'desc'].include?(a) }.merge({count: 2})
+    i18nopts = {count: 2}.merge(options.select {|a| !['short', 'desc'].include?(a) })
     s = model.human_attribute_name(attribute, i18nopts)
     if options[:short]
-      desc = (options[:desc] or model.human_attribute_name("#{attribute}_desc".to_sym, options.merge({fallback: true, default: '', count: 2}))) 
+      desc = options[:desc]
+      desc ||= model.human_attribute_name("#{attribute}_desc".to_sym, options.merge({fallback: true, default: '', count: 2}))
+      desc.blank? and desc = s
       sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({fallback: true, default: '', count: 2}))
-      s = raw "<abbr title='#{desc or s}'>#{sshort}</abbr>" unless sshort.blank?
+      s = raw "<abbr title='#{desc}'>#{sshort}</abbr>" unless sshort.blank?
     end
     s
   end

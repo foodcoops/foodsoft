@@ -1,0 +1,11 @@
+%tbody{id: "oa_#{order_article.id}"}
+  - if not defined?(heading) or heading
+    %tr.list-heading
+      %th.name{:colspan => "4"}>
+        = order_article.article.name + ' '
+        = "(#{order_article.article.unit}, #{number_to_currency order_article.price.fc_price}"
+        - pkg_info = pkg_helper(order_article.price)
+        = ", #{pkg_info}".html_safe unless pkg_info.blank?
+        )
+  - for goa in order_article.group_order_articles.ordered
+    = render 'shared/articles_by/article_single_goa', goa: goa, edit: (edit rescue nil)

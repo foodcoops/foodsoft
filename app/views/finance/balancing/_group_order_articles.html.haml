@@ -4,38 +4,31 @@
       %tr
         %td
         %td{:style => "width:8em"}= Ordergroup.model_name.human
-        %td= t('.units')
+        -#%td.center= t('.units')
+        %td.center
+          %acronym{:title => t('shared.articles.received_desc')}= t 'shared.articles.received'
         %td= t('.total')
         %td{:colspan => "3",:style => "width:14em"}
-          = link_to t('.add_group'), new_finance_group_order_article_path(order_article_id: order_article.id),
+          = link_to t('.add_group'), new_group_order_article_path(order_article_id: order_article.id),
             remote: true, class: 'btn btn-mini'
     %tbody
+      - totals = {result: 0}
       - for group_order_article in order_article.group_order_articles.select { |goa| goa.result > 0 }
         %tr[group_order_article]
           %td
           %td{:style=>"width:50%"}
             = group_order_article.group_order.ordergroup.name
-          %td{:id => "group_order_article_#{group_order_article.id}_quantity", :style => "white-space:nowrap"}
-            = group_order_article.result
-            = link_to "+", update_result_finance_group_order_article_path(group_order_article, modifier: '+'),
-              method: :put, remote: true, class: 'btn btn-mini'
-            = link_to "-", update_result_finance_group_order_article_path(group_order_article, modifier: '-'),
-              method: :put, remote: true, class: 'btn btn-mini'
-          %td.numeric
-            = number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result)
+          %td.center= group_order_article_edit_result(group_order_article)
+          %td.numeric= number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result)
           %td.actions{:style=>"width:1em"}
-            = link_to t('ui.edit'), edit_finance_group_order_article_path(group_order_article), remote: true,
-              class: 'btn btn-mini'
-          %td.actions{:style=>"width:1em"}
-            = link_to t('ui.delete'), finance_group_order_article_path(group_order_article), method: :delete,
+            = link_to t('ui.delete'), group_order_article_path(group_order_article), method: :delete,
               remote: true, class: 'btn btn-mini btn-danger'
           %td
+        - totals[:result] += group_order_article.result
     %tfoot
       %tr
         %td
         %td{:style => "width:8em"}= t('.total_fc')
-        %td{:id => "group_orders_sum_quantity_#{order_article.id}"}
-          = order_article.group_orders_sum[:quantity]
-        %td.numeric{:id => "group_orders_sum_price_#{order_article.id}"}
-          = number_to_currency(order_article.group_orders_sum[:price])
+        %td.center= totals[:result]
+        %td.numeric= number_to_currency(order_article.group_orders_sum[:price])
         %td{:colspan => "3"}

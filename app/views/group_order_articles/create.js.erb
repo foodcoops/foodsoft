@@ -1,0 +1,10 @@
+$('#modalContainer').modal('hide');
+
+// trigger hooks for views
+$(document).trigger({
+  type: 'GroupOrderArticle#create',
+  order_article_id: <%= @group_order_article.order_article_id %>,
+  group_order_id: <%= @group_order_article.group_order_id %>,
+  group_order_article_id: <%= @group_order_article.id %>,
+  group_order_article_price: <%= @group_order_article.total_price %>
+});
