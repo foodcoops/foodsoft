@@ -57,7 +57,9 @@ class Supplier < ActiveRecord::Base
           }
           updated_articles << [article, unequal_attributes]
         end
-      else
+      # Articles with no order number can be used to put non-shared articles
+      # in a shared supplier, with sync keeping them.
+      elsif not article.order_number.blank?
         # article isn't in external database anymore
         outlisted_articles << article
       end

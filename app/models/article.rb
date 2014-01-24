@@ -61,7 +61,7 @@ class Article < ActiveRecord::Base
   # false will returned and self.shared_updated_on will be updated
   def shared_article_changed?
     # skip early if the timestamp hasn't changed
-    unless self.shared_updated_on == self.shared_article.updated_on
+    unless self.shared_article.nil? or self.shared_updated_on == self.shared_article.updated_on
       
       # try to convert units
       # convert supplier's price and unit_quantity into fc-size
@@ -106,6 +106,7 @@ class Article < ActiveRecord::Base
   
   # to get the correspondent shared article
   def shared_article
+    self.order_number.blank? and return nil
     @shared_article ||= self.supplier.shared_supplier.shared_articles.find_by_number(self.order_number) rescue nil
   end
   
