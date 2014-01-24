@@ -227,6 +227,7 @@ class ArticlesController < ApplicationController
     if @updated_articles.empty? && @outlisted_articles.empty?
       redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.sync.notice')
     end
+    @ignored_article_count = @supplier.articles.where(order_number: [nil, '']).count
   end
 
   # Updates, deletes articles when sync form is submitted

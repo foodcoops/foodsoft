@@ -14,6 +14,8 @@
             .alert= t '.alert_used', article: article.name
   - else
     %i= t '.outlist.body_skip'
+  - if @ignored_article_count > 0
+    %i= t '.outlist.body_ignored', count: @ignored_article_count
   %hr/
   %h2= t '.update.title'
   %p
