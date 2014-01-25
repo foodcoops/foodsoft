@@ -10,7 +10,7 @@
         theme: 'facebook'
       });
 
-      $('#message_sent_to_all').click(function() {
+      $('#message_sent_to_all').on('touchclick', function() {
         if ($(this).is(':checked')) {
           $('#recipients').slideUp();
         } else {

@@ -19,6 +19,7 @@
 //= require_self
 //= require ordering
 //= require stupidtable
+//= require touchclick
 
 // Load following statements, when DOM is ready
 $(function() {
