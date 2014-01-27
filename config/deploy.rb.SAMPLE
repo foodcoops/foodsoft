@@ -1,43 +1,48 @@
-require 'bundler/setup'
-require 'common_deploy'
+#
+# Capistrano 3 deployment configuration
+#
+#   http://www.capistranorb.com/
+#   https://semaphoreapp.com/blog/2013/11/26/capistrano-3-upgrade-guide.html
 
-set :application,         'foodsoft'
-set :domain,              'foodsoft.com'
-set :user,                'foodsoft'
-set :default_stage,       'staging' # staging and production are available via (set :stages, ["staging", "production"])
-set :keep_releases,       5
-set :repository,          'git://github.com/foodcoops/foodsoft.git'
-set(:deploy_to)           { "/mnt/apps/#{application}_#{stage}" }
+# defaults that can be updated from the environment
+set :branch,              ENV["REVISION"] || ENV["BRANCH_NAME"] || "master"
 
+# you probably want to change these
+set :application,         'foodsoft'            # application name (whatever you like)
+set :domain,              'order.foodcoop.test' # host
+set :user,                'deploy'              # ssh deploy user
+set :keep_releases,       10
+set :repo_url,            'git://github.com/foodcoops/foodsoft.git'
+set :deploy_to,            "/www/apps/#{fetch :application}-#{fetch :stage}"
 
-# resque worker
-role :resque_worker,      domain
-role :resque_scheduler,   domain
-set  :workers,            { "foodsoft_notifier" => 1 }
+# more settings which are probably ok
+set :log_level,           :info
+set :linked_files,        %w{config/database.yml config/app_config.yml config/initializers/secret_token.rb}
+set :linked_dirs,         %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
+# assuming one server for everything, with one user for deploy and one for resque
+server fetch(:domain), user: fetch(:user), roles: [:web, :app, :resque, :db]
 
-# rvm
+# if you use RVM, uncomment the line in Capfile, and optionally uncomment rvm settings
 # set :rvm_ruby_string,     :local
 
+# task hooks
+namespace :deploy do
 
-server domain, :web, :app, :db
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # tell mod_passenger to reload the application
+      execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
 
-# Loads all needed capistrano extensions
-load_extensions :bundler,
-  # :rvm, # if you are using rvm on your server uncomment this line
-  :passenger,
-  :multistage,
-  :resque,
-  :whenever,
-  :assets
+  after :restart, 'resque:restart'
 
+  after :finishing, 'deploy:cleanup'
 
-# clean up old releases on each deploy
-after "deploy:restart", "deploy:cleanup"
+  # see lib/capistrano/tasks/plugins.cap
+  #before 'bundler:install', 'enable_plugins:auto'
 
-# restart resque
-after "deploy:restart", "resque:restart"
+end
 
-# install rvm and ruby on every deploy
-# before 'deploy', 'rvm:install_rvm'  # update RVM
-# before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)

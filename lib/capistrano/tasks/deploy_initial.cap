@@ -1,0 +1,101 @@
+# Capistrano tasks for the initial setup
+
+namespace :deploy do
+
+  desc 'Creates and initialises a new foodsoft instance'
+  task :initial do
+    before 'deploy:check:linked_files', 'deploy:initial:touch_shared'
+    before 'deploy:updated', 'deploy:initial:secret_token'
+    before 'deploy:updated', 'deploy:initial:app_config'
+    before 'deploy:updated', 'deploy:initial:db:config'
+    before 'deploy:updated', 'deploy:initial:db:create'
+    before 'deploy:migrate', 'deploy:initial:db:load'
+  end
+  after :initial, :deploy
+
+
+  namespace :initial do
+
+    namespace :db do
+
+      desc 'Generate new database.yml with random password'
+      task :config => ['deploy:set_rails_env'] do
+        require 'securerandom'
+        on roles(:app), in: :groups do
+          db_name = (fetch(:db_user) or fetch(:application))
+          db_passwd = SecureRandom.urlsafe_base64(24).to_s
+          db_yaml = {
+            fetch(:rails_env).to_s => {
+              'adapter' => 'mysql2',
+              'encoding' => 'utf8',
+              'database' => db_name,
+              'username' => db_name,
+              'password' => db_passwd,
+            }
+          }
+          execute :mkdir, '-p', shared_path.join("config")
+          upload! StringIO.new(db_yaml.to_yaml), shared_path.join("config/database.yml")
+        end
+      end
+
+      # assumes mysql access setup (~/.my.cnf), with permissions
+      desc 'Create database new database'
+      task :create => ['deploy:set_rails_env'] do
+        on roles(:app), in: :sequence do
+          config = capture :cat, shared_path.join("config/database.yml")
+          config = YAML.load(config)[fetch(:rails_env).to_s]
+          # http://www.grahambrooks.com/blog/create-mysql-database-with-capistrano/
+          execute :mysql, "--execute='CREATE DATABASE IF NOT EXISTS `#{config['database']}`';"
+          execute :mysql, "--execute='GRANT ALL ON `#{config['database']}`.* TO \"#{config['username']}\" IDENTIFIED BY \"#{config['password']}\";'"
+        end
+      end
+
+      desc 'Load database schema'
+      task :load => ['deploy:set_rails_env'] do
+        on roles(:app), in: :groups do
+          # workaround nonexistent release_path on first deploy
+          path = releases_path.join(capture(:ls, releases_path).split("\n").sort.last)
+          within path do
+            with rails_env: fetch(:rails_env) do
+              execute :rake, 'db:schema:load'
+            end
+          end
+        end
+      end
+    end
+
+    desc 'Writes a new secret token'
+    task :secret_token do
+      require 'securerandom'
+      on roles(:app), in: :groups do
+        secret = SecureRandom.hex(64)
+        text = "Foodsoft::Application.config.secret_token = \"#{secret}\""
+        execute :mkdir, '-p', shared_path.join("config/initializers")
+        upload! StringIO.new(text), shared_path.join("config/initializers/secret_token.rb")
+      end
+    end
+
+    desc 'Creates a default app_config.yml'
+    task :app_config do
+      on roles(:app), in: :groups do
+        execute :mkdir, '-p', shared_path.join("config")
+        # workaround nonexistent release_path on first deploy
+        path = releases_path.join(capture(:ls, releases_path).split("\n").sort.last)
+        execute :cp, path.join("config/app_config.yml.SAMPLE"), shared_path.join("config/app_config.yml")
+      end
+    end
+
+    desc 'Touches the shared configuration files (for initial deploy)'
+    task :touch_shared do
+      on roles(:app), in: :groups do
+        execute :mkdir, '-p', shared_path.join("config/initializers")
+        execute :touch, shared_path.join("config/initializers/secret_token.rb")
+        execute :touch, shared_path.join("config/app_config.yml")
+        execute :touch, shared_path.join("config/database.yml")
+      end
+    end
+
+  end
+
+end
+
