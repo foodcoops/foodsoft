@@ -8,11 +8,6 @@ class UserNotifier
     self.send method_name, args
   end
 
-  def self.message_deliver(args)
-    message_id = args.first
-    Message.find(message_id).deliver
-  end
-
   def self.finished_order(args)
     order_id = args.first
     Order.find(order_id).group_orders.each do |group_order|
