@@ -1,0 +1,7 @@
+$('#articles_table').html('<%= j render(@partial, order: @order) %>');
+
+$('.view_buttons a').each(function() {
+  $(this).toggleClass('active', $(this).attr('id') == 'view_<%= j params[:view] %>_btn');
+});
+
+activate_search('<%= j params[:view] %>', '<%= j I18n.t("orders.show.search_placeholder.#{params[:view]}") %>');

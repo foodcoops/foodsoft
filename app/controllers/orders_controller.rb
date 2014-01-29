@@ -28,16 +28,17 @@ class OrdersController < ApplicationController
   # Renders also the pdf
   def show
     @order= Order.find(params[:id])
+    @view = (params[:view] or 'default').gsub(/[^-_a-zA-Z0-9]/, '')
+    @partial = case @view
+                 when 'default' then 'articles'
+                 when 'groups'then 'shared/articles_by_groups'
+                 when 'articles'then 'shared/articles_by_articles'
+                 else 'articles'
+               end
 
     respond_to do |format|
       format.html
       format.js do
-        @partial = case params[:view]
-                     when 'default' then "articles"
-                     when 'groups'then 'shared/articles_by_groups'
-                     when 'articles'then 'shared/articles_by_articles'
-                     else 'articles'
-                   end
         render :layout => false
       end
       format.pdf do

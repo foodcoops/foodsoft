@@ -1,5 +1,5 @@
-%table.table.table-hover
-  %thead
+%table.table.table-hover.list
+  %thead.list-heading
     %tr
       %th{:style => 'width:70%'}= t '.ordergroup'
       %th
@@ -9,12 +9,11 @@
       %th= t '.price'
 
   - for order_article in order.order_articles.ordered.all(:include => [:article, :article_price])
-    %thead
+    %tbody
       %tr
-        %th{:colspan => "4"}
+        %th.name{:colspan => "4"}
           = order_article.article.name
           = "(#{order_article.article.unit} | #{order_article.price.unit_quantity} | #{number_to_currency(order_article.price.gross_price)})"
-    %tbody
       - for goa in order_article.group_order_articles.ordered
         %tr{:class => [cycle('even', 'odd', :name => 'groups'), if goa.result == 0 then 'unavailable' end]}
           %td{:style => "width:70%"}=h goa.group_order.ordergroup.name

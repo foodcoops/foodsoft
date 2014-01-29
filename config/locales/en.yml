@@ -184,7 +184,9 @@ en:
       order: Order
       order_article: Order article
       order_comment: Order comment
-      ordergroup: Ordergroup
+      ordergroup:
+        one: Ordergroup
+        other: Ordergroups
       stock_article: Stock article
       stock_taking: Stock taking
       supplier: Supplier
@@ -1169,6 +1171,8 @@ en:
       confirm_end: ! 'Do you really want to close the order %{order}?
 
         There is no going back.'
+      description1: ! '%{state} order from %{supplier} created by %{who}, open from %{starts} until %{ends}.'
+      description2: ! '%{ordergroups} ordered %{article_count} articles, with a total value of %{net_sum} / %{gross_sum} (net / gross).'
       download:
         article_pdf: Article PDF
         download_file: Download file
@@ -1178,6 +1182,11 @@ en:
         matrix_pdf: Matrix PDF
         title: Download
       group_orders: ! 'Group orders:'
+      search_placeholder:
+        default: Search for articles...
+        groups: Search for ordergroups...
+        articles: Search for articles...
+      search_reset: Reset search
       sort_article: Sorted in articles
       sort_group: Sorted in groups
       title: ! 'Order: %{name}'
