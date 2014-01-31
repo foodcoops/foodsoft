@@ -23,16 +23,17 @@ module OrdersHelper
     if order_article.order.open?
       nil
     else
-      units_info = ''
+      units_info = []
       [:units_to_order, :units_billed, :units_received].map do |unit|
         if n = order_article.send(unit)
-          i18nkey = if units_info.blank? and options[:plain] then unit else "#{unit}_short" end
-          units_info += n.to_s + ' '
-          units_info += pkg_helper(order_article.price) + ' ' unless options[:plain] or n == 0
-          units_info += OrderArticle.human_attribute_name(i18nkey, count: n)
+          i18nkey = if units_info.empty? and options[:plain] then unit else "#{unit}_short" end
+          line = n.to_s + ' '
+          line += pkg_helper(order_article.price) + ' ' unless options[:plain] or n == 0
+          line += OrderArticle.human_attribute_name(i18nkey, count: n)
+          units_info << line
         end
       end
-      units_info.html_safe
+      units_info.join(', ').html_safe
     end
   end
 
@@ -41,7 +42,7 @@ module OrdersHelper
   #   soft_uq: `true` to hide unit quantity specifier on small screens
   #            sensible in tables with multiple columns calling `pkg_helper`
   def pkg_helper(article, options={})
-    return nil if not article or article.unit_quantity == 1
+    return '' if not article or article.unit_quantity == 1
     uq_text = "&times; #{article.unit_quantity}".html_safe
     uq_text = content_tag(:span, uq_text, class: 'hidden-phone') if options[:soft_uq]
     if options[:icon].nil? or options[:icon]
