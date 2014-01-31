@@ -41,7 +41,7 @@ module OrdersHelper
   #   soft_uq: `true` to hide unit quantity specifier on small screens
   #            sensible in tables with multiple columns calling `pkg_helper`
   def pkg_helper(article, options={})
-    return nil if article.unit_quantity == 1
+    return nil if not article or article.unit_quantity == 1
     uq_text = "&times; #{article.unit_quantity}".html_safe
     uq_text = content_tag(:span, uq_text, class: 'hidden-phone') if options[:soft_uq]
     if options[:icon].nil? or options[:icon]
