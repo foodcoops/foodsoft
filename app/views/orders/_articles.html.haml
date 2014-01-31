@@ -36,7 +36,7 @@
               %td= "#{order_article.quantity} + #{order_article.tolerance}"
             - else
               %td= "#{order_article.quantity}"
-            %td{title: units_history_line(order_article)}
+            %td{title: units_history_line(order_article, plain: true)}
               = units
               = pkg_helper order_article.price
 %p

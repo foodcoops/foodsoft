@@ -18,13 +18,21 @@ module OrdersHelper
     options_for_select(options)
   end
 
-  def units_history_line(order_article)
+  # "1 ordered units, 2 billed, 2 received"
+  def units_history_line(order_article, options={})
     if order_article.order.open?
       nil
     else
-      units_info = "#{order_article.units_to_order} #{OrderArticle.human_attribute_name :units_to_order, count: order_article.units_to_order}"
-      units_info += ", #{order_article.units_billed} #{OrderArticle.human_attribute_name :units_billed_short, count: order_article.units_billed}" unless order_article.units_billed.nil?
-      units_info += ", #{order_article.units_received} #{OrderArticle.human_attribute_name :units_received_short, count: order_article.units_received}" unless order_article.units_received.nil?
+      units_info = ''
+      [:units_to_order, :units_billed, :units_received].map do |unit|
+        if n = order_article.send(unit)
+          i18nkey = if units_info.blank? and options[:plain] then unit else "#{unit}_short" end
+          units_info += n.to_s + ' '
+          units_info += pkg_helper(order_article.price) + ' ' unless options[:plain] or n == 0
+          units_info += OrderArticle.human_attribute_name(i18nkey, count: n)
+        end
+      end
+      units_info.html_safe
     end
   end
 
