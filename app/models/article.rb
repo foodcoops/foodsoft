@@ -100,7 +100,7 @@ class Article < ActiveRecord::Base
   # compare attributes from different articles. used for auto-synchronization
   # returns array of symbolized unequal attributes
   def self.compare_attributes(attributes)
-    unequal_attributes = attributes.select { |name, values| values[0] != values[1] }
+    unequal_attributes = attributes.select { |name, values| values[0] != values[1] and not (values[0].blank? and values[1].blank?) }
     unequal_attributes.collect { |pair| pair[0] }
   end
   
