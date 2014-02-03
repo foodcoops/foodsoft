@@ -5,6 +5,7 @@ namespace :deploy do
   desc 'Creates and initialises a new foodsoft instance'
   task :initial do
     before 'deploy:check:linked_files', 'deploy:initial:touch_shared'
+    before 'deploy:symlink:linked_files', 'deploy:initial:copy_shared'
     before 'deploy:updated', 'deploy:initial:secret_token'
     before 'deploy:updated', 'deploy:initial:app_config'
     before 'deploy:updated', 'deploy:initial:db:config'
@@ -88,10 +89,21 @@ namespace :deploy do
     desc 'Touches the shared configuration files (for initial deploy)'
     task :touch_shared do
       on roles(:app), in: :groups do
-        execute :mkdir, '-p', shared_path.join("config/initializers")
-        execute :touch, shared_path.join("config/initializers/secret_token.rb")
-        execute :touch, shared_path.join("config/app_config.yml")
-        execute :touch, shared_path.join("config/database.yml")
+        fetch(:linked_files).each do |file|
+          execute :touch, shared_path.join(file)
+        end
+      end
+    end
+
+    desc 'Copies existing shared configuration files'
+    task :copy_shared do
+      on roles(:app), in: :groups do
+        # workaround nonexistent release_path on first deploy
+        path = releases_path.join(capture(:ls, releases_path).split("\n").sort.last)
+        fetch(:linked_files).each do |file|
+          # TODO copy only if existing destination has zero length
+          execute "[ -e '#{path.join(file)}' ] && cp '#{path.join(file)}' '#{shared_path.join(file)}'"
+        end
       end
     end
 

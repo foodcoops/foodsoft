@@ -17,7 +17,7 @@ set :deploy_to,            "/www/apps/#{fetch :application}-#{fetch :stage}"
 
 # more settings which are probably ok
 set :log_level,           :info
-set :linked_files,        %w{config/database.yml config/app_config.yml config/initializers/secret_token.rb}
+set :linked_files,        %w{config/database.yml config/app_config.yml config/initializers/secret_token.rb config/initializers/session_store.rb}
 set :linked_dirs,         %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # assuming one server for everything, with one user for deploy and one for resque
