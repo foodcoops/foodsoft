@@ -164,20 +164,20 @@ function updateBalance() {
 }
 
 $(function() {
-    $('input[data-increase_quantity]').click(function() {
+    $('input[data-increase_quantity]').on('touchclick', function() {
         increaseQuantity($(this).data('increase_quantity'));
     });
-    $('input[data-decrease_quantity]').click(function() {
+    $('input[data-decrease_quantity]').on('touchclick', function() {
         decreaseQuantity($(this).data('decrease_quantity'));
     });
-    $('input[data-increase_tolerance]').click(function() {
+    $('input[data-increase_tolerance]').on('touchclick', function() {
         increaseTolerance($(this).data('increase_tolerance'));
     });
-    $('input[data-decrease_tolerance]').click(function() {
+    $('input[data-decrease_tolerance]').on('touchclick', function() {
         decreaseTolerance($(this).data('decrease_tolerance'));
     });
 
-    $('a[data-confirm_switch_order]').click(function() {
+    $('a[data-confirm_switch_order]').on('touchclick', function() {
         return (!modified || confirm(I18n.t('js.ordering.confirm_change')));
     });
 });
