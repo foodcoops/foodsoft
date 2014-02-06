@@ -11,7 +11,7 @@
           = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
           = article.name
           - if article.in_open_order
-            .alert= t '.alert_used', article: article.name
+            .alert= t '.outlist.alert_used', article: article.name
   - else
     %i= t '.outlist.body_skip'
   %hr/
