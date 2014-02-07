@@ -377,6 +377,9 @@ en:
       outlist:
         alert_used: Warning, %{article} is used in an open order. Please remove it from the order first.
         body: ! 'The following articles were removed from the list and will be <b>deleted</b>:'
+        body_ignored:
+          one: One article without order number was skipped.
+          other: ! '%{count} articles without order number were skipped.'
         body_skip: No articles to delete.
         title: Remove from list ...
       price_short: Price
