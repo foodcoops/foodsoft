@@ -18,7 +18,7 @@ module OrdersHelper
     options_for_select(options)
   end
 
-  # "1 ordered units, 2 billed, 2 received"
+  # "1×2 ordered, 2×2 billed, 2×2 received"
   def units_history_line(order_article, options={})
     if order_article.order.open?
       nil
@@ -26,10 +26,9 @@ module OrdersHelper
       units_info = []
       [:units_to_order, :units_billed, :units_received].map do |unit|
         if n = order_article.send(unit)
-          i18nkey = if units_info.empty? and options[:plain] then unit else "#{unit}_short" end
           line = n.to_s + ' '
-          line += pkg_helper(order_article.price) + ' ' unless options[:plain] or n == 0
-          line += OrderArticle.human_attribute_name(i18nkey, count: n)
+          line += pkg_helper(order_article.price, options) + ' ' unless n == 0
+          line += OrderArticle.human_attribute_name("#{unit}_short", count: n)
           units_info << line
         end
       end
@@ -39,13 +38,16 @@ module OrdersHelper
 
   # can be article or article_price
   #   icon: `false` to not show the icon
+  #   plain: `true` to not use html (implies icon: false)
   #   soft_uq: `true` to hide unit quantity specifier on small screens
   #            sensible in tables with multiple columns calling `pkg_helper`
   def pkg_helper(article, options={})
     return '' if not article or article.unit_quantity == 1
-    uq_text = "&times; #{article.unit_quantity}".html_safe
+    uq_text = "× #{article.unit_quantity}"
     uq_text = content_tag(:span, uq_text, class: 'hidden-phone') if options[:soft_uq]
-    if options[:icon].nil? or options[:icon]
+    if options[:plain]
+      uq_text
+    elsif options[:icon].nil? or options[:icon]
       pkg_helper_icon(uq_text)
     else
       pkg_helper_icon(uq_text, tag: :span)

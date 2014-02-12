@@ -98,3 +98,5 @@
     $(function() {
       activate_search('#{j @view}', '#{j t(".search_placeholder.#{@view}")}');
     });
+
+= render 'shared/articles_by/common', order: @order

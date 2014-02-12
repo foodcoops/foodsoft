@@ -53,6 +53,8 @@ Foodsoft::Application.routes.draw do
       get :archive, :on => :collection
     end
 
+    resources :group_order_articles
+
     resources :order_comments, :only => [:new, :create]
 
     ############ Foodcoop orga
@@ -152,12 +154,6 @@ Foodsoft::Application.routes.draw do
           
           get :new_on_order_article_create
           get :new_on_order_article_update
-        end
-      end
-
-      resources :group_order_articles do
-        member do
-          put :update_result
         end
       end
 

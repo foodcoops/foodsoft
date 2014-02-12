@@ -7,7 +7,6 @@
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.de
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.nl
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
-//= require jquery.observe_field
 //= require list
 //= require list.unlist
 //= require list.delay
@@ -20,6 +19,7 @@
 //= require ordering
 //= require stupidtable
 //= require touchclick
+//= require delta_input
 
 // Load following statements, when DOM is ready
 $(function() {
@@ -69,17 +69,32 @@ $(function() {
         return false;
     });
 
-    // Submit form when changing text of an input field
-    // Use jquery observe_field plugin
-    $('form[data-submit-onchange] input[type=text]').each(function() {
-        $(this).observe_field(1, function() {
-            $(this).parents('form').submit();
-        });
+    // Submit form when clicking on checkbox
+    $(document).on('click', 'form[data-submit-onchange] input[type=checkbox]:not(input[data-ignore-onchange])', function() {
+        $(this).parents('form').submit();
     });
 
-    // Submit form when clicking on checkbox
-    $('form[data-submit-onchange] input[type=checkbox]:not(input[data-ignore-onchange])').click(function() {
-        $(this).parents('form').submit();
+    // Submit form when changing text of an input field.
+    // Wubmission will be done after 500ms of not typed, unless data-submit-onchange=changed,
+    // in which case it happens when the input box loses its focus ('changed' event).
+    $(document).on('changed keyup focusin', 'form[data-submit-onchange] input[type=text]', function(e) {
+        var input = $(this);
+        // when form has data-submit-onchange=changed, don't do updates while typing
+        if (e.type!='changed' && input.parents('form[data-submit-onchange=changed]')) {
+          return true;
+        }
+        // remember old value when it's getting the focus
+        if (e.type=='focusin') {
+          input.data('old-value', input.val());
+          return true;
+        }
+        // trigger timeout to submit form when value was changed
+        clearTimeout(input.data('submit-timeout-id'));
+        input.data('submit-timeout-id', setTimeout(function() {
+          if (input.val() != input.data('old-value')) input.parents('form').submit();
+          input.removeData('submit-timeout-id');
+          input.removeData('old-value');
+        }, 500));
     });
 
     $('[data-redirect-to]').bind('change', function() {

@@ -7,6 +7,7 @@ de:
         availability_short: verf.
         deposit: Pfand
         fc_price: Endpreis
+        fc_price_desc: Preis incl. MwSt, Pfand und Foodcoop-Aufschlag
         fc_price_short: FC-Preis
         fc_share: FoodCoop-Aufschlag
         fc_share_short: FC-Aufschlag
@@ -1285,9 +1286,8 @@ de:
       ordergroup: Bestellgruppe
       price: Gesamtpreis
     articles_by_groups:
-      fc_price: FC-Preis
-      fc_price_desc: Preis incl. MwSt, Pfand und Foodcoop-Aufschlag
       price: Gesamtpreis
+      price_sum: Summe
       unit_quantity: GebGr
       unit_quantity_desc: Gebindegröße
     group:

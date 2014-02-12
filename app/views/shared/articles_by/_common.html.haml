@@ -1,0 +1,30 @@
+-# common javascript for updating articles_by views
+-# include this in all pages that use articles_by views (directly or via ajax)
+= content_for :javascript do
+  :javascript
+    $(document).on('GroupOrderArticle#update', function(e) {
+
+      var el_goa = $('#goa_'+e.group_order_article_id);
+
+      // update total price of group_order_article
+      //   show localised value, store raw number in data attribute
+      var el_price = $('.price', el_goa);
+      var old_price = el_price.data('value');
+      if (el_price.length) {
+        el_price.text(I18n.l('currency', e.group_order_article_price));
+        el_price.data('value', e.group_order_article_price);
+      }
+
+      // group_order_article is greyed when result==0
+      el_goa.toggleClass('unavailable', $('input#r_'+e.group_order_article_id, el_goa).val()==0);
+
+      // update total price of group_order, order_article and/or ordergroup, when present
+      var el_sum = $('#group_order_'+e.group_order_id+', #single_ordergroup_total, #single_order_article_total');
+      var el_price_sum = $('.price_sum', el_sum);
+      if (el_price_sum.length) {
+        var old_price_sum = el_price_sum.data('value');
+        var new_price_sum = old_price_sum - old_price + e.group_order_article_price;
+        el_price_sum.text(I18n.l('currency', new_price_sum));
+        el_price_sum.data('value', new_price_sum);
+      }
+    });

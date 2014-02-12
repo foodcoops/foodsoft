@@ -7,6 +7,7 @@ en:
         availability_short: avail.
         deposit: Deposit
         fc_price: FoodCoop price
+        fc_price_desc: Price including taxes, deposit and Foodcoop-charge
         fc_price_short: FC price
         fc_share: FoodCoop margin
         fc_share_short: FC margin
@@ -599,10 +600,6 @@ en:
       ordergroup:
         remove: Remove
         remove_group: Remove group
-    group_order_articles:
-      form:
-        amount_change_for: Change amount for %{article}
-        result_hint: ! 'Unit: %{unit}'
     index:
       amount_fc: Amount(FC)
       end: End
@@ -736,6 +733,10 @@ en:
       error_general: The order couldn’t be updated due to a bug.
       error_stale: Someone else has ordered in the meantime, couldn't update the order.
       notice: The order was saved.
+  group_order_articles:
+    form:
+      amount_change_for: Change amount for %{article}
+      result_hint: ! 'Unit: %{unit}'
   helpers:
     application:
       edit_user: Edit user
@@ -1293,15 +1294,9 @@ en:
       ordered_desc: Number of articles as ordered by member (amount + tolerance)
       received: Received
       received_desc: Number of articles that (will be) received by member
-    articles_by_articles:
-      ordergroup: Ordergroup
+    articles_by:
       price: Total price
-    articles_by_groups:
-      fc_price: FC-Price
-      fc_price_desc: Price including taxes, deposit and Foodcoop-charge
-      price: Total price
-      unit_quantity: Lot quantity
-      unit_quantity_desc: How many units per lot.
+      price_sum: Sum
     group:
       access: Access to
       activated: activated

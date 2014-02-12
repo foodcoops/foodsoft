@@ -1,0 +1,15 @@
+%tbody{id: "group_order_#{group_order.id}"}
+  - if not defined?(heading) or heading
+    %tr.list-heading
+      %th{colspan: 9}
+        %h4.name= group_order.ordergroup.name
+  - total = 0
+  - for goa in group_order.group_order_articles.ordered.all(:include => :order_article)
+    - total += goa.total_price
+    = render 'shared/articles_by/group_single_goa', goa: goa, edit: (edit rescue nil)
+  %tr{class: cycle('even', 'odd', :name => 'articles')}
+    %th{colspan: 7}= t 'shared.articles_by.price_sum'
+    %th.price_sum{colspan: 2, data: {value: total}}= number_to_currency(total)
+  %tr
+    %th{colspan: 9}
+  - reset_cycle("articles")

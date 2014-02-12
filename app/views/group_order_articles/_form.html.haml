@@ -1,11 +1,11 @@
-= simple_form_for [:finance, @group_order_article], remote: true do |form|
+= simple_form_for @group_order_article, remote: true do |form|
   = form.hidden_field :order_article_id
   .modal-header
     = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
     %h3= t('.amount_change_for', article: @order_article.article.name)
   .modal-body
     = form.input :ordergroup_id, as: :select, collection: Ordergroup.all.map { |g| [g.name, g.id] }
-    = form.input :result, hint: I18n.t('finance.group_order_articles.form.result_hint', unit: @order_article.article.unit) # Why do we need the full prefix?
+    = form.input :result, hint: I18n.t('group_order_articles.form.result_hint', unit: @order_article.article.unit) # Why do we need the full prefix?
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = form.submit t('ui.save'), class: 'btn btn-primary'

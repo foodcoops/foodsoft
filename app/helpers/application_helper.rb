@@ -78,14 +78,19 @@ module ApplicationHelper
   # When the 'short' option is true, abbreviations will be used:
   #   When there is a non-empty model attribute 'foo', it looks for
   #   the model attribute translation 'foo_short' and use that as
-  #   heading, with an abbreviation title of 'foo'.
+  #   heading, with an abbreviation title of 'foo'. If a translation
+  #   'foo_desc' is present, that is used instead, but that can be
+  #   be overridden by the option 'desc'.
   #  Other options are passed through to I18n.
   def heading_helper(model, attribute, options = {})
-    i18nopts = options.select {|a| !['short'].include?(a) }.merge({count: 2})
+    i18nopts = {count: 2}.merge(options.select {|a| !['short', 'desc'].include?(a) })
     s = model.human_attribute_name(attribute, i18nopts)
     if options[:short]
+      desc = options[:desc]
+      desc ||= model.human_attribute_name("#{attribute}_desc".to_sym, options.merge({fallback: true, default: '', count: 2}))
+      desc.blank? and desc = s
       sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({fallback: true, default: '', count: 2}))
-      s = raw "<abbr title='#{s}'>#{sshort}</abbr>" unless sshort.blank?
+      s = raw "<abbr title='#{desc}'>#{sshort}</abbr>" unless sshort.blank?
     end
     s
   end

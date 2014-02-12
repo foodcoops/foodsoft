@@ -5,9 +5,9 @@ module Finance::BalancingHelper
       when 'edit_results' then
         'edit_results_by_articles'
       when 'groups_overview' then
-        'shared/articles_by_groups'
+        'shared/articles_by/groups'
       when 'articles_overview' then
-        'shared/articles_by_articles'
+        'shared/articles_by/articles'
     end
   end
 end

@@ -1,5 +1,7 @@
 @import "twitter/bootstrap/bootstrap";
 @import "twitter/bootstrap/responsive";
+@import "delta_input";
+
 body {
   padding-top: 10px;
 }
@@ -104,7 +106,7 @@ table {
     content: ' \25B2';
   }
 
-  tr.article-category {
+  tr.list-heading {
     background-color: #efefef;
     td:first-child {
       text-align: left;
@@ -124,6 +126,10 @@ table {
   tr.selected td {
     background-color: @successBackground;
   }
+}
+
+.center, td.center, th.center {
+  text-align: center;
 }
 
 // Tasks ..
@@ -237,6 +243,27 @@ tr.unavailable {
 .units_delta {
   min-width: 3.5em;
 }
+
+// small cells with just a 'x' or '='
+td.symbol, th.symbol {
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+}
+.symbol              { color: tint(@textColor, @nonessentialDim); }
+.used        .symbol { color: tint(@articleUsedColor, @nonessentialDim); }
+.unused      .symbol { color: tint(@articleUnusedColor, @nonessentialDim); }
+.unavailable .symbol { color: @articleUnavailColor; }
+
+// hide symbols completely on small screens to save space
+@media (max-width: 768px) {
+  .symbol {
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+
 
 // ********* Tweaks & fixes
 
