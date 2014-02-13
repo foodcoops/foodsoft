@@ -124,7 +124,7 @@ class Order < ActiveRecord::Base
     total = 0
     if type == :net || type == :gross || type == :fc
       for oa in order_articles.ordered.includes(:article, :article_price)
-        quantity = oa.units_to_order * oa.price.unit_quantity
+        quantity = oa.units * oa.price.unit_quantity
         case type
           when :net
             total += quantity * oa.price.price

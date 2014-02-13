@@ -27,7 +27,7 @@ class OrderMatrix < OrderPdf
                               a.article.unit,
                               a.price.unit_quantity,
                               number_with_precision(a.price.fc_price, precision: 2),
-                              a.units_to_order]
+                              a.units]
     end
 
     table order_articles_data, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
