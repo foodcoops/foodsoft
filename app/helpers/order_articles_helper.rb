@@ -1,10 +1,19 @@
 module OrderArticlesHelper
 
-  def new_order_articles_collection
+  def new_order_articles_collection(&block)
     if @order.stockit?
-      StockArticle.undeleted.reorder('articles.name')
+      articles = StockArticle.undeleted.reorder('articles.name')
     else
-      @order.supplier.articles.undeleted.reorder('articles.name')
+      articles = @order.supplier.articles.undeleted.reorder('articles.name')
     end
+    unless block_given?
+      block = Proc.new do |a|
+        pkg_info = pkg_helper(a, plain: true)
+        a.name + ' ' +
+           "(#{a.unit}" +
+          (pkg_info.blank? ? '' : " #{pkg_info}") + ")"
+      end
+    end
+    articles.map {|a| block.call(a)}
   end
 end
