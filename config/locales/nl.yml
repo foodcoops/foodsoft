@@ -376,7 +376,9 @@ nl:
       outlist:
         alert_used: Opgelet, %{article} wordt gebruikt in een lopende bestelling. Haal het eerst uit de bestelling.
         body: 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
-        body_ignored: 
+        body_ignored:
+          one: Er is een artikel zonder ondernummer overslagen.
+          other: '%{count} artikelen zonder odernummer zijn overgeslagen.'
         body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
       price_short: prijs
@@ -1071,8 +1073,8 @@ nl:
     edit:
       title: Bestelling aanpassen
     edit_amount:
-      field_locked_title: 
-      field_unlocked_title: 
+      field_locked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast, daarom is dit veld beschermd. Om dit artikel toch te herverdelen en de handmatige wijzigingen teniet te doen kun je op de knop met het slot drukken.
+      field_unlocked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast. Als je de hoeveelheid hier verandert, worden deze handmatige aanpassingen overschreven.
     fax:
       amount: Aantal
       articles: Artikelen
@@ -1131,8 +1133,8 @@ nl:
       confirm_end: |-
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
-      description1: 
-      description2: 
+      description1: '%{state} bestelling van %{supplier}, geopend door %{who}, open van %{starts} tot %{ends}.'
+      description2: '%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarden van %{net_sum} / %{gross_sum} (netto / bruto).'
       download:
         article_pdf: Artikelen PDF
         download_file: Bestand downloaden
@@ -1143,9 +1145,9 @@ nl:
         title: Downloaden
       group_orders: 'Ledenbestellingen:'
       search_placeholder:
-        articles: 
-        default: 
-        groups: 
+        articles: Artikelen zoeken...
+        default: Artikelen zoeken...
+        groups: Huishoudens zoeken...
       search_reset: 
       sort_article: Gesorteerd naar artikel
       sort_group: Gesorteerd naar huishouden
@@ -1251,7 +1253,7 @@ nl:
       received_desc: Hoeveel artikelen het lid is toegewezen danwel heeft gekregen
     articles_by:
       price: Totaalprijs
-      price_sum: 
+      price_sum: Som
     group:
       access: Toegang tot
       activated: actief
