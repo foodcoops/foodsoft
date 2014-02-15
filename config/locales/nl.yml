@@ -7,6 +7,7 @@ nl:
         availability_short: leverb.
         deposit: Statiegeld
         fc_price: Foodcoop prijs
+        fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop marge.
         fc_price_short: FC prijs
         fc_share: Foodcoop marge
         fc_share_short: FC marge
@@ -86,7 +87,7 @@ nl:
         quantity_short: Gewenst
         units_received: Ontvangen eenheden
         units_received_short: Ontvangen
-        units_to_order: Aantal eenheden
+        units_to_order: Bestelde eenheden
         units_to_order_short: Besteld
         update_global_price: Huidige prijs overal bijwerken
       order_comment:
@@ -214,7 +215,7 @@ nl:
     confirm: Wil je %{name} daadwerkelijk wissen?
     ordergroups:
       destroy:
-        error: ! 'Bestellingsgroep kon niet gewist worden: %{error}'
+        error: 'Bestellingsgroep kon niet gewist worden: %{error}'
         notice: Huishouden is verwijderd
       edit:
         title: Huishouden bewerken
@@ -225,7 +226,7 @@ nl:
         first_paragraph: Hier kun je %{url} toevoegen, bewerken en verwijderen.
         new_ordergroup: Nieuw huishouden
         new_ordergroups: nieuwe huishoudens
-        second_paragraph: ! 'Bedenk het <em>onderscheid tussen werkgroep en huishouden</em>: een huishouden heeft een rekening en kan bestellen. in een <em>%{url}</em> (bijv. sorteergroep) werken leden samen om taken te vervullen. Leden kunnen slechts lid zijn van éen huishouden, maar van meerdere werkgroepen.'
+        second_paragraph: 'Bedenk het <em>onderscheid tussen werkgroep en huishouden</em>: een huishouden heeft een rekening en kan bestellen. in een <em>%{url}</em> (bijv. sorteergroep) werken leden samen om taken te vervullen. Leden kunnen slechts lid zijn van éen huishouden, maar van meerdere werkgroepen.'
         title: Huishoudens
         workgroup: werkgroep
       new:
@@ -255,7 +256,7 @@ nl:
         send_message: Bericht versturen
     workgroups:
       destroy:
-        error: ! 'Werkgroep kon niet gewist worden: %{error}'
+        error: 'Werkgroep kon niet gewist worden: %{error}'
         notice: Werkgroep is gewist
       edit:
         title: Werkgroep bewerken
@@ -267,7 +268,7 @@ nl:
         new_workgroup: Nieuwe werkgroep
         new_workgroups: nieuwe werkgroepen
         ordergroup: huishouden
-        second_paragraph: ! 'Let op het verschil tussen een <em>groep</em> en een </em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organizeren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
+        second_paragraph: 'Let op het verschil tussen een <em>groep</em> en een </em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organizeren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
         title: Werkgroepen
       new:
         title: Werkgroep toevoegen
@@ -289,7 +290,7 @@ nl:
     create:
       notice: Categorie is opgeslagen
     destroy:
-      error: ! 'Categorie kon niet gewist worden: %{message}'
+      error: 'Categorie kon niet gewist worden: %{message}'
     edit:
       title: Categorie bewerken
     index:
@@ -303,7 +304,7 @@ nl:
   articles:
     article:
       confirm_delete: Weet je het zeker?
-      last_update: ! 'laatst bijgewerkt: %{last_update} | bruto: %{gross_price}'
+      last_update: 'laatst bijgewerkt: %{last_update} | bruto: %{gross_price}'
     articles:
       confirm_delete: Weet je zeker dat je alle artikelen wilt verwijderen?
       option_available: Artikelen beschikbaar maken
@@ -318,13 +319,13 @@ nl:
         notice: Er zijn %{count} nieuwe artikelen opgeslagen.
       error_invalid: Er zijn artikelen die een fout hebben
       error_nosel: Geen artikelen geselecteerd
-      error_parse: ! '%{msg} ... in regel %{line}'
-      error_update: ! 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
+      error_parse: '%{msg} ... in regel %{line}'
+      error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
-        notice: ! '%{count} artikelen zijn geanalyseerd'
+        notice: '%{count} artikelen zijn geanalyseerd'
       sync:
         notice: Catalogus is bijgewerkt
-        shared_alert: ! '%{supplier} is niet aan een externe database gekoppeld'
+        shared_alert: '%{supplier} is niet aan een externe database gekoppeld'
       update_all:
         notice: Alle artikelen en prijzen zijn bijgewerkt.
       update_sel:
@@ -336,9 +337,9 @@ nl:
         notice: Alle artikelen en prijzen zijn bijgewerkt.
     destroy_active_article:
       drop: verwijderen
-      note: ! '%{article} is deel van een lopende bestelling en kan niet verwijderd worden. Het artikel graag eerst uit de bestelling(en) %{drop_link}.'
+      note: '%{article} is deel van een lopende bestelling en kan niet verwijderd worden. Het artikel graag eerst uit de bestelling(en) %{drop_link}.'
     edit_all:
-      note: ! 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestellingsnummer.'
+      note: 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestellingsnummer.'
       submit: Alle artikelen bijwerken
       title: Alle artikelen van %{supplier} bewerken
       warning: Let op, alle artikelen worden bijgewerkt!
@@ -366,7 +367,7 @@ nl:
       title: Artikelen van %{supplier} (%{count})
       upload: Artikelen uploaden
     model:
-      error_in_use: ! '%{article} kan niet gewist worden, want deze is deel van een lopende bestelling!'
+      error_in_use: '%{article} kan niet gewist worden, want deze is deel van een lopende bestelling!'
       error_nosel: Je hebt geen artikelen geselecteerd
     parse_upload:
       body: <p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>
@@ -374,7 +375,8 @@ nl:
     sync:
       outlist:
         alert_used: Opgelet, %{article} wordt gebruikt in een lopende bestelling. Haal het eerst uit de bestelling.
-        body: ! 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
+        body: 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
+        body_ignored: 
         body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
       price_short: prijs
@@ -382,7 +384,7 @@ nl:
       title: Artikelen met externe database synchroniseren
       unit_quantity_short: Gr.Eenh.
       update:
-        body: ! 'Ieder artikel wordt tweemaal getoond: oude waarden zijn grijs, en de tekstvelden bevatten de nieuwe waarden. Verschillen met de oude artikelen zijn geel gemarkeerd.'
+        body: 'Ieder artikel wordt tweemaal getoond: oude waarden zijn grijs, en de tekstvelden bevatten de nieuwe waarden. Verschillen met de oude artikelen zijn geel gemarkeerd.'
         title: Bijwerken ...
         update_msg:
           one: Er moet éen artikel bijgewerkt worden.
@@ -398,7 +400,7 @@ nl:
       title: Artikelen uploaden voor %{supplier}
   deliveries:
     add_stock_change:
-      how_many_units: ! 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
+      how_many_units: 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
     create:
       notice: Levering is aangemaakt. Vergeet niet een factuur te maken!
     destroy:
@@ -415,7 +417,7 @@ nl:
     index:
       confirm_delete: Zeker weten?
       new_delivery: Nieuwe levering maken voor %{supplier}
-      title: ! '%{supplier} leveringen'
+      title: '%{supplier} leveringen'
     invoice_amount: Factuurbedrag
     invoice_net_amount: Netto factuurbedrag
     new:
@@ -444,7 +446,7 @@ nl:
       - Besteld
       - Ontvangen
       - Prijs
-      title: ! 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
+      title: 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
     order_by_groups:
       filename: Bestelling %{name}-%{date} - Huishoudenslijst
       rows:
@@ -456,7 +458,7 @@ nl:
       - Eenheid
       - Som
       sum: Som
-      title: ! 'Huishoudenslijst van bestelling: %{name}, gesloten op %{date}'
+      title: 'Huishoudenslijst van bestelling: %{name}, gesloten op %{date}'
     order_fax:
       filename: Bestelling %{name}-%{date} - Fax
       rows:
@@ -477,14 +479,14 @@ nl:
       - Gr.Eenh.
       - Foodcoop-prijs
       - Aantal
-      title: ! 'Sorteermatrix van bestelling: %{name}, gesloten op %{date}'
+      title: 'Sorteermatrix van bestelling: %{name}, gesloten op %{date}'
       total:
         one: In totaal éen artikel
         other: In totaal %{count} artikelen
   errors:
     general: Er is een probleem opgetreden.
     general_again: Er is een fout opgetreden. Probeer het opnieuw.
-    general_msg: ! 'Er is een probleem opgetreden: %{msg}'
+    general_msg: 'Er is een probleem opgetreden: %{msg}'
   feedback:
     create:
       notice: Bericht verstuurd. Vriendelijk bedankt!
@@ -496,14 +498,14 @@ nl:
   finance:
     balancing:
       close:
-        alert: ! 'Er trad een fout op bij het afrekenen: %{message}'
+        alert: 'Er trad een fout op bij het afrekenen: %{message}'
         notice: Bestelling is succesvol afgerekend, de tegoeden van de leden zijn bijgewerkt.
       close_direct:
-        alert: ! 'Bestelling kan niet afgerekend worden: %{message}'
+        alert: 'Bestelling kan niet afgerekend worden: %{message}'
         notice: Bestelling is afgerekend.
       confirm:
         clear: Afrekenen
-        first_paragraph: ! 'Wanneer de bestelling afgerekend wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
+        first_paragraph: 'Wanneer de bestelling afgerekend wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
         or_cancel: of terug naar balans
         title: Bestelling afrekenen
       edit_results_by_articles:
@@ -520,14 +522,14 @@ nl:
         title: Gesloten bestellingen
       invoice:
         edit: Factuur bewerken
-        invoice_amount: ! 'Factuurbedrag:'
-        invoice_date: ! 'Factuurdatum:'
-        invoice_number: ! 'Factuurnummer:'
-        minus_refund_calculated: ! '- statiegeld berekend:'
+        invoice_amount: 'Factuurbedrag:'
+        invoice_date: 'Factuurdatum:'
+        invoice_number: 'Factuurnummer:'
+        minus_refund_calculated: '- statiegeld berekend:'
         new: factuur toevoegen
-        new_body: ! 'Een factuur aan deze rekening toevoegen:'
-        plus_refund_credited: ! '+ statiegeld teruggekregen:'
-        refund_adjusted_amount: ! 'bedrag gecorrigeerd voor statiegeld:'
+        new_body: 'Een factuur aan deze rekening toevoegen:'
+        plus_refund_credited: '+ statiegeld teruggekregen:'
+        refund_adjusted_amount: 'bedrag gecorrigeerd voor statiegeld:'
       new:
         alert: Opgelet, bestelling is al afgerekend
         articles_overview: Artikeloverzicht
@@ -559,14 +561,14 @@ nl:
       summary:
         changed: Waarden zijn gewijzigd!
         duration: Van %{starts} tot %{ends}
-        fc_amount: ! 'FC-bedrag:'
+        fc_amount: 'FC-bedrag:'
         fc_profit: FC Winst
-        gross_amount: ! 'Bruto bedrag:'
-        groups_amount: ! 'Bedrag van huishoudens:'
-        net_amount: ! 'Netto bedrag:'
+        gross_amount: 'Bruto bedrag:'
+        groups_amount: 'Bedrag van huishoudens:'
+        net_amount: 'Netto bedrag:'
         reload: Samenvatting verversen
-        with_extra_charge: ! 'inclusief marge:'
-        without_extra_charge: ! 'zonder marge:'
+        with_extra_charge: 'inclusief marge:'
+        without_extra_charge: 'zonder marge:'
     create:
       notice: Rekening is gemaakt
     financial_transactions:
@@ -574,11 +576,11 @@ nl:
         create:
           notice: De transactie is opgeslagen.
         create_collection:
-          alert: ! 'Er is een fout opgetreden: %{error}'
+          alert: 'Er is een fout opgetreden: %{error}'
           error_note_required: Notitie ontbreekt.
           notice: Alle transacties zijn opgeslagen.
       index:
-        balance: ! 'Tegoed: %{balance}'
+        balance: 'Tegoed: %{balance}'
         last_updated_at: (laatst bijgewerkt %{when} geleden)
         new_transaction: Nieuwe transactie toevoegen
         search_placeholder: Zoeken ...
@@ -594,10 +596,6 @@ nl:
       ordergroup:
         remove: Verwijderen
         remove_group: Huishouden verwijderen
-    group_order_articles:
-      form:
-        amount_change_for: Hoeveelheid %{article}
-        result_hint: ! 'Eenheid: %{unit}'
     index:
       amount_fc: Bedrag(FC)
       end: Einde
@@ -659,6 +657,10 @@ nl:
       workgroup:
         edit: Groep bewerken
         show_tasks: Alle taken weergeven
+  group_order_articles:
+    form:
+      amount_change_for: Hoeveelheid %{article}
+      result_hint: 'Eenheid: %{unit}'
   group_orders:
     archive:
       desc: Bekijk hier alle %{link}.
@@ -757,23 +759,23 @@ nl:
         create: bericht versturen
     tasks:
       required_users: Nog %{count} leden nodig!
-      task_title: ! '%{name} (%{duration}u)'
+      task_title: '%{name} (%{duration}u)'
   home:
     apple_bar:
-      desc: ! 'Deze balk laat zien hoeveel taken je gedaan hebt per bestelhoeveelheid, vergeleken met het gemiddelde van de foodcoop.
-
-        Praktisch: voor iedere %{amount} aan totale bestellingen moet je een taak te doen!'
+      desc: |-
+        Deze balk laat zien hoeveel taken je gedaan hebt per bestelhoeveelheid, vergeleken met het gemiddelde van de foodcoop.
+        Praktisch: voor iedere %{amount} aan totale bestellingen moet je een taak te doen!
       more_info: Meer informatie
-      points: ! 'Appelpuntenstand: %{points}'
+      points: 'Appelpuntenstand: %{points}'
       warning: Opgelet, als je minder dan %{threshold} appelpunten hebt, kun je geen bestelling plaatsen!
     changes_saved: Wijzigingen opgeslagen.
     index:
-      due_date_format: ! '%A %d %B'
+      due_date_format: '%A %d %B'
       messages:
         title: Nieuwste berichten
         view_all: Alle berichten bekijken
       my_ordergroup:
-        funds: ! '| Beschikbaar tegoed:'
+        funds: '| Beschikbaar tegoed:'
         last_update: Laatst gewijzigd %{when} geleden
         title: Mijn huishouden
         transactions:
@@ -806,8 +808,8 @@ nl:
         title: Je bent lid van de volgende groepen
       title: Mijn Profiel
       user:
-        since: ! '(gebruiker sinds: %{when})'
-        title: ! '%{user}'
+        since: '(gebruiker sinds: %{when})'
+        title: '%{user}'
     start_nav:
       admin: Administratie
       finances:
@@ -845,13 +847,11 @@ nl:
       confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
   layouts:
     email:
-      footer: ! '--
-
+      footer: |-
+        --
         Foodsoft: %{foodsoft}
-
         Foodcoop-Homepage: %{foodcoop}
-
-        Help: %{help}'
+        Help: %{help}
     foodsoft: Foodsoft
     header:
       feedback:
@@ -890,104 +890,86 @@ nl:
       submit: Nieuw wachtwoord opslaan
       title: Nieuw wachtwoord
   mailer:
-    dateformat: ! '%d %b'
+    dateformat: '%d %b'
     feedback:
-      header: ! '%{user} schreef op %{date}:'
+      header: '%{user} schreef op %{date}:'
       subject: Feedback van %{email}
     foodsoft_message:
-      footer: ! 'Antwoorden: %{reply_url}
-
+      footer: |-
+        Antwoorden: %{reply_url}
         Bericht online lezen: %{msg_url}
-
-        Berichtinstellingen: %{profile_url}'
+        Berichtinstellingen: %{profile_url}
     invite:
       subject: Uitnodiging voor de foodcoop
-      text: ! 'Hallo!
-
+      text: |-
+        Hallo!
 
         %{user} <%{mail}> heeft je uitgenodigd om deel te worden van de groep "%{group}".
-
         Om lid te worden van de foodcoop en de uitnodiging te accepteren, ga naar: %{link}
-
         Dit kan maar een keer en uiterlijk tot %{expires}.
 
-
-        Groeten van de foodcoop.'
+        Groeten van de foodcoop.
     negative_balance:
       subject: Negatief tegoed
-      text: ! 'Beste %{group},
-
+      text: |-
+        Beste %{group},
 
         Je tegoed is onder nul gekomen op %{when}: %{balance}
 
-
         Er werd %{amount} afgeschreven voor "%{note}" door %{user}.
-
 
         Zorg er alsjeblieft voor dat tegoed weer positief wordt.
 
 
-
-        Hartlijke groet van %{foodcoop}.'
+        Hartlijke groet van %{foodcoop}.
     not_enough_users_assigned:
-      subject: ! '"%{task}" heeft nog mensen nodig!'
-      text: ! 'Beste %{user},
+      subject: '"%{task}" heeft nog mensen nodig!'
+      text: |-
+        Beste %{user},
 
-
-        De taak ''%{task}'' van jouw werkgroep op %{when} kan nog iemand gebruiken!
-
+        De taak '%{task}' van jouw werkgroep op %{when} kan nog iemand gebruiken!
 
         Als je je hiervoor nog niet aangemeld hebt is dit je kans:
 
-
         %{workgroup_tasks_url}
 
-
-        Jouw taken: %{user_tasks_url}'
+        Jouw taken: %{user_tasks_url}
     order_result:
-      subject: ! 'Bestelling gesloten: %{name}'
-      text0: ! 'Beste %{ordergroup}.
-
+      subject: 'Bestelling gesloten: %{name}'
+      text0: |
+        Beste %{ordergroup}.
 
         De bestelling voor "%{order}" is om %{when} gesloten door %{user}.
-
         De volgende artikelen zijn voor jouw huishouden besteld:
-
-'
-      text1: ! 'o Totaal: %{sum}
-
+      text1: |-
+        o Totaal: %{sum}
 
         Je kunt de bestelling online bekijken: %{order_url}
 
 
-
-        Vriendelijke groet van %{foodcoop}.'
+        Vriendelijke groet van %{foodcoop}.
     reset_password:
       subject: Nieuw wachtwoord voor %{username}
-      text: ! 'Beste %{user},
-
+      text: |-
+        Beste %{user},
 
         Jij (of iemand anders) heeft een nieuw wachtwoord aangevraagd voor het foodcoop ordersysteem.
-
         Ga naar de volgende pagina om een nieuw wachtwoord in te voeren: %{link}
-
         Dit kan slechts éenmaal gedaan worden, en op zijn laatst op %{expires}.
-
         Wanneer je je wachtwoord niet wilt veranderen, hoef je niets te doen; dan blijft je huidige wachtwoord geldig.
 
-
-        Groeten van je foodcoop!'
+        Groeten van je foodcoop!
     upcoming_tasks:
-      nextweek: ! 'Taken voor komende week:'
+      nextweek: 'Taken voor komende week:'
       subject: Er is een taak te doen!
-      text0: ! 'Beste %{user},
+      text0: |-
+        Beste %{user},
 
+        Je bent opgegeven voor "%{task}". Deze taak is morgen te vervullen (%{when})!
+      text1: |-
+        Mijn taken: %{user_tasks_url}
 
-        Je bent opgegeven voor "%{task}". Deze taak is morgen te vervullen (%{when})!'
-      text1: ! 'Mijn taken: %{user_tasks_url}
-
-
-        Groeten van %{foodcoop}.'
+        Groeten van %{foodcoop}.
   messages:
     create:
       notice: Bericht is opgeslagen en wordt verzonden.
@@ -997,12 +979,12 @@ nl:
     messages:
       reply: Antwoorden
     model:
-      reply_header: ! '%{user} schreef op %{when}:'
-      reply_indent: ! '> %{line}'
-      reply_subject: ! 'Re: %{subject}'
+      reply_header: '%{user} schreef op %{when}:'
+      reply_indent: '> %{line}'
+      reply_subject: 'Re: %{subject}'
     new:
       list:
-        desc: ! 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
+        desc: 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
         mail: bijvoorbeeld door een email te sturen naar %{email}.
         subscribe: Lees meer over de mailing-lijst op %{link}.
         subscribe_msg: Mogelijk moet je je eerst aanmelden voor de mailing-lijst.
@@ -1013,10 +995,10 @@ nl:
       title: Nieuw bericht
     show:
       all_messages: Berichtenoverzicht
-      from: ! 'Van:'
+      from: 'Van:'
       reply: Antwoorden
-      sent_on: ! 'Verzonden:'
-      subject: ! 'Onderwerp:'
+      sent_on: 'Verzonden:'
+      subject: 'Onderwerp:'
       title: Bericht lezen
   model:
     delivery:
@@ -1075,13 +1057,13 @@ nl:
     index:
       title: Huishoudens
     model:
-      error_single_group: ! '%{user} behoort al tot een ander huishouden'
+      error_single_group: '%{user} behoort al tot een ander huishouden'
       invalid_balance: is geen geldig nummer
   orders:
     articles:
-      article_count: ! 'Bestelde artikelen:'
+      article_count: 'Bestelde artikelen:'
       prices: Netto/bruto prijs
-      prices_sum: ! 'Totaal (netto/bruto prijs):'
+      prices_sum: 'Totaal (netto/bruto prijs):'
       units_full: Volle eenheden
       units_ordered: Bestelde eenheden
     create:
@@ -1122,33 +1104,35 @@ nl:
       error_closed: Bestelling was al afgerekend
       error_nosel: Er moet minstens één artikel geselecteerd zijn
       error_starts_before_ends: moet na de startdatum zijn (of niet ingevuld worden)
-      notice_close: ! 'Bestelling: %{name}, tot %{ends}'
+      notice_close: 'Bestelling: %{name}, tot %{ends}'
       stock: Voorraad
-      warning_ordered: ! 'Opgelet: rood gemarkeerde artikelen zijn al besteld door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen van deze artikelen verwijderd.'
-      warning_ordered_stock: ! 'Opgelet: rood gemarkeerde artikelen zijn al besteld of gekocht door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen/-aankopen van deze artikelen verwijderd, en worden ze niet afgerekend.'
+      warning_ordered: 'Opgelet: rood gemarkeerde artikelen zijn al besteld door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen van deze artikelen verwijderd.'
+      warning_ordered_stock: 'Opgelet: rood gemarkeerde artikelen zijn al besteld of gekocht door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen/-aankopen van deze artikelen verwijderd, en worden ze niet afgerekend.'
     new:
       title: Nieuwe bestelling openen
     receive:
       add_article: Artikel toevoegen
       consider_member_tolerance: verdelen over tolerantie van leden
-      notice: ! 'Bestelling ontvangen: %{msg}'
+      notice: 'Bestelling ontvangen: %{msg}'
       notice_none: Geen nieuwe artikelen te ontvangen
       rest_to_stock: naar voorraad
       submit: Bestelling ontvangen
-      surplus_options: ! 'Overschot verdelen over:'
-      title: ! 'Ontvangen: %{order}'
+      surplus_options: 'Overschot:'
+      title: 'Ontvangen: %{order}'
     show:
       action_end: Sluiten!
-      amounts: ! 'Totaal netto/bruto:'
+      amounts: 'Totaal netto/bruto:'
       articles: Artikeloverzicht
-      articles_ordered: ! 'Bestelde artikelen:'
+      articles_ordered: 'Bestelde artikelen:'
       comments:
         title: Commentaar
       comments_link: Commentaar
       confirm_delete: Wil je deze bestelling echt verwijderen?
-      confirm_end: ! 'Wil je de bestelling %{order} echt sluiten?
-
-        Hierna kan zij niet opnieuw geopend worden.'
+      confirm_end: |-
+        Wil je de bestelling %{order} echt sluiten?
+        Hierna kan zij niet opnieuw geopend worden.
+      description1: 
+      description2: 
       download:
         article_pdf: Artikelen PDF
         download_file: Bestand downloaden
@@ -1157,10 +1141,15 @@ nl:
         group_pdf: Huishoudens PDF
         matrix_pdf: Matrix PDF
         title: Downloaden
-      group_orders: ! 'Ledenbestellingen:'
+      group_orders: 'Ledenbestellingen:'
+      search_placeholder:
+        articles: 
+        default: 
+        groups: 
+      search_reset: 
       sort_article: Gesorteerd naar artikel
       sort_group: Gesorteerd naar huishouden
-      title: ! 'Bestelling: %{name}'
+      title: 'Bestelling: %{name}'
       warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
     state:
       closed: afgerekend
@@ -1169,11 +1158,10 @@ nl:
     update:
       notice: De bestelling is bijgewerkt.
     update_order_amounts:
-      msg1: 
-      msg2: 
+      msg1: '%{count} artikelen (%{units} eenheden) bijgewerkt'
+      msg2: '%{count} (%{units}) naar tolerantie'
       msg3: 
-      msg4: 
-      update_order_amounts: 
+      msg4: '%{count} (%{units}) overgebleven'
   pages:
     all:
       new_page: Nieuwe pagina maken
@@ -1186,7 +1174,7 @@ nl:
       title_list: Paginalijst
     body:
       title_toc: Inhoud
-      wikicloth_exception: ! 'Sorry, het is niet gelukt de paginainhoud te begrijpen: %{msg}. Probeer het op te lossen en de pagina opnieuw op te slaan.'
+      wikicloth_exception: 'Sorry, het is niet gelukt de paginainhoud te begrijpen: %{msg}. Probeer het op te lossen en de pagina opnieuw op te slaan.'
     create:
       notice: Pagina is gemaakt.
     cshow:
@@ -1225,11 +1213,11 @@ nl:
     new:
       title: Nieuwe wiki pagina
     page_list_item:
-      date_format: ! '%a, %d %B %Y %H:%M:%S'
+      date_format: '%a, %d %B %Y %H:%M:%S'
     show:
-      date_format: ! '%d-%m-%y %H:%M'
+      date_format: '%d-%m-%y %H:%M'
       delete: Pagina verwijderen
-      delete_confirm: ! 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
+      delete_confirm: 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
       edit: Pagina bewerken
       last_updated: Laatst bijgewerkt door <b>%{user}</b> op %{when}
       subpages: kindpagina's
@@ -1239,10 +1227,10 @@ nl:
     update:
       notice: Pagina is bijgewerkt.
     version:
-      author: ! 'Auteur: %{user}'
-      date_format: ! '%a, %d-%m-%Y, %H:%M'
+      author: 'Auteur: %{user}'
+      date_format: '%a, %d-%m-%Y, %H:%M'
       revert: Deze versie terugzetten
-      title: ! '%{title} - versie %{version}'
+      title: '%{title} - versie %{version}'
       title_version: Versie
       view_current: Huidige versie bekijken
   sessions:
@@ -1261,15 +1249,9 @@ nl:
       ordered_desc: Hoeveel artikelen het lid besteld heeft (aantal + tolerantie)
       received: Ontvangen
       received_desc: Hoeveel artikelen het lid is toegewezen danwel heeft gekregen
-    articles_by_articles:
-      ordergroup: Huishouden
+    articles_by:
       price: Totaalprijs
-    articles_by_groups:
-      fc_price: FC-Prijs
-      fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop marge
-      price: Totaalprijs
-      unit_quantity: Gr.Eenh.
-      unit_quantity_desc: Hoeveel eenheden per groothandelsverpakking
+      price_sum: 
     group:
       access: Toegang tot
       activated: actief
@@ -1295,7 +1277,7 @@ nl:
       default_message: Problemen gevonden, controleer alsjeblieft de invoer.
     hints:
       article:
-        unit: ! 'Bijvoorbeeld: KG of 1L of 500g'
+        unit: 'Bijvoorbeeld: KG of 1L of 500g'
       message:
         private: Bericht wordt niet getoond in de Foodsoft inbox.
       order_article:
@@ -1338,7 +1320,7 @@ nl:
             fr: Frans
             nl: Nederlands
     required:
-      mark: ! '*'
+      mark: '*'
       text: verplicht
     'yes': Ja
   stock_takings:
@@ -1375,7 +1357,7 @@ nl:
       notice: Inventarisatie is bijgewerkt.
   stockit:
     check:
-      not_empty: ! '%{name} kon niet worden verwijderd, de inventaris is niet leeg.'
+      not_empty: '%{name} kon niet worden verwijderd, de inventaris is niet leeg.'
     copy:
       title: kopieer het voorraadartikel
     create:
@@ -1396,13 +1378,13 @@ nl:
       new_stock_taking: Inventaris nemen
       order_online: Voorraadbestelling openen
       show_stock_takings: Inventarisoverzicht
-      stock_count: ! 'Aantal artikelen:'
-      stock_worth: ! 'Waarde van huidige voorraad:'
+      stock_count: 'Aantal artikelen:'
+      stock_worth: 'Waarde van huidige voorraad:'
       title: Voorraad (%{article_count})
       toggle_unavailable: Niet beschikbare artikelen tonen/verbergen
       view_options: Weergave
     new:
-      search_text: ! 'Artikelen zoeken in alle catalogi:'
+      search_text: 'Artikelen zoeken in alle catalogi:'
       title: Nieuw voorraadartikel maken
     show:
       change_quantity: Verandering
@@ -1494,7 +1476,7 @@ nl:
       confirm_delete_group: Deze en alle volgende taken echt verwijderen?
       confirm_delete_single: Weet je zeker dat je deze taak wilt verwijderen?
       delete_group: Deze en volgende taken verwijderen
-      hours: ! '%{count}u'
+      hours: '%{count}u'
       mark_done: Als gedaan markeren
       reject_task: Taak laten vallen
       title: Taak bekijken
@@ -1516,7 +1498,7 @@ nl:
     delete: Verwijder
     edit: Bewerk
     marks:
-      close: ! '&times;'
+      close: '&times;'
       success: <i class="icon icon-ok"></i>
     or_cancel: of annuleren
     please_wait: Een moment alstublieft...
@@ -1524,11 +1506,11 @@ nl:
     show: Tonen
   views:
     pagination:
-      first: ! '&laquo;'
-      last: ! '&raquo;'
-      next: ! '&rsaquo;'
-      previous: ! '&lsaquo;'
-      truncate: ! '...'
+      first: '&laquo;'
+      last: '&raquo;'
+      next: '&rsaquo;'
+      previous: '&lsaquo;'
+      truncate: '...'
   workgroups:
     edit:
       title: Werkgroep bewerken
