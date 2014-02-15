@@ -38,8 +38,6 @@ if ! heroku apps | grep -q "^$APP\s"; then
 	heroku create "$APP" --region "$REGION"
 	heroku addons:add heroku-postgresql:dev --app "$APP"
 	heroku pg:promote `heroku config | grep 'HEROKU_POSTGRESQL_.*_URL' | cut -d: -f1`
-	# user-env-compile needed because config.assets.initialize_on_precompile is true
-	heroku labs:enable user-env-compile --app "$APP"
 fi
 heroku config:set RACK_ENV="${RAILS_ENV}" RAILS_ENV="${RAILS_ENV}" --app "$APP"
 
@@ -58,6 +56,7 @@ sed -i "s|^\\(\\s*gem\\s\\+'sqlite3'\\)|#\1|" Gemfile
 sed -i "s|^\\(\\s*sqlite3\\b\)|#\1|" Gemfile.lock
 # make sure postgresql db is present, as it is the default heroku db
 echo "
+gem 'rails_12factor'
 gem 'pg'" >>Gemfile
 # always use unicorn
 echo "
@@ -102,6 +101,7 @@ end
 EOF
 	echo "
 gem 'localeapp'" >>Gemfile
+	bundle install --quiet
 	# also do not cache so we get locale updates
 	sed -i 's|\(#\s*\)\?\(config\.cache_classes\)\s*=.*|\2 = false|' config/environments/${RAILS_ENV}.rb
 	bundle exec localeapp pull
