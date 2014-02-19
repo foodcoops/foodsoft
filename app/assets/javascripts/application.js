@@ -57,7 +57,7 @@ $(function() {
     });
 
     // Submit form when changing a select menu.
-    $(document).on('change', 'form[data-submit-onchange] select', function() {
+    $(document).on('change', 'form[data-submit-onchange] select:not([data-ignore-onchange])', function() {
         var confirmMessage = $(this).children(':selected').data('confirm');
         if (confirmMessage) {
             if (confirm(confirmMessage)) {
@@ -70,14 +70,14 @@ $(function() {
     });
 
     // Submit form when clicking on checkbox
-    $(document).on('click', 'form[data-submit-onchange] input[type=checkbox]:not(input[data-ignore-onchange])', function() {
+    $(document).on('click', 'form[data-submit-onchange] input[type=checkbox]:not([data-ignore-onchange])', function() {
         $(this).parents('form').submit();
     });
 
     // Submit form when changing text of an input field.
     // Submission will be done after 500ms of not typed, unless data-submit-onchange=changed,
     // in which case it happens when the input box loses its focus ('changed' event).
-    $(document).on('changed keyup focusin', 'form[data-submit-onchange] input[type=text]', function(e) {
+    $(document).on('changed keyup focusin', 'form[data-submit-onchange] input[type=text]:not([data-ignore-onchange])', function(e) {
         var input = $(this);
         // when form has data-submit-onchange=changed, don't do updates while typing
         if (e.type!='changed' && input.parents('form[data-submit-onchange=changed]').length>0) {
