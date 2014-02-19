@@ -75,12 +75,12 @@ $(function() {
     });
 
     // Submit form when changing text of an input field.
-    // Wubmission will be done after 500ms of not typed, unless data-submit-onchange=changed,
+    // Submission will be done after 500ms of not typed, unless data-submit-onchange=changed,
     // in which case it happens when the input box loses its focus ('changed' event).
     $(document).on('changed keyup focusin', 'form[data-submit-onchange] input[type=text]', function(e) {
         var input = $(this);
         // when form has data-submit-onchange=changed, don't do updates while typing
-        if (e.type!='changed' && input.parents('form[data-submit-onchange=changed]')) {
+        if (e.type!='changed' && input.parents('form[data-submit-onchange=changed]').length>0) {
           return true;
         }
         // remember old value when it's getting the focus
