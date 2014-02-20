@@ -28,7 +28,7 @@
             = check_box_tag :checkall, 1, false, 'data-check-all' => '#articlesInListForm', 'data-ignore-onchange' => true
             %select{:name => "selected_action", 'data-submit-onchange' => true}
               %option{:value => '', :selected => 'selected'}= t '.option_select'
-              %option{:value => "destroy", 'data-confirm' => t('.confirm_delete')}= t '.option_delete'
+              %option{:value => "destroy", :data => {:confirm  => t('.confirm_delete')}}= t '.option_delete'
               %option{:value => "setNotAvailable"}= t '.option_not_available'
               %option{:value => "setAvailable"}= t '.option_available'
             = hidden_field_tag 'supplier_id', @supplier.id

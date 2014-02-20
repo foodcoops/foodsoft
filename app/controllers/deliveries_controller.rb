@@ -4,7 +4,7 @@ class DeliveriesController < ApplicationController
   before_filter :find_supplier, :exclude => :fill_new_stock_article_form
   
   def index
-    @deliveries = @supplier.deliveries.all :order => 'delivered_on DESC'
+    @deliveries = @supplier.deliveries.order('delivered_on DESC')
   end
 
   def show

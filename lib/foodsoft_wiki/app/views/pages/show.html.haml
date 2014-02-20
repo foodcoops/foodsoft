@@ -47,5 +47,5 @@
   = link_to edit_page_path(@page), class: 'btn btn-primary' do
     %i.icon-edit= t '.edit'
   = link_to t('.delete'), @page, class: 'btn btn-danger', :method => :delete,
-    :confirm => t('.delete_confirm')
+    :data => {:confirm => t('.delete_confirm')}
   != '| ' + t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))

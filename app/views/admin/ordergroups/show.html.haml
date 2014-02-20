@@ -2,5 +2,5 @@
 
 %section= render 'shared/group', group: @ordergroup
 = link_to t('ui.edit'), edit_admin_ordergroup_path(@ordergroup), class: 'btn'
-= link_to t('ui.delete'), [:admin, @ordergroup], :confirm => t('.confirm'), :method => :delete, class: 'btn btn-danger'
+= link_to t('ui.delete'), [:admin, @ordergroup], :data => {:confirm => t('.confirm')}, :method => :delete, class: 'btn btn-danger'
 = link_to t('.send_message'), new_message_path(:message => {:group_id => @ordergroup.id}), class: 'btn'

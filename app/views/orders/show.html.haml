@@ -59,15 +59,14 @@
 
     - if @order.open?
       = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
-        confirm: t('.confirm_end', order: @order.name)
+        data: {confirm: t('.confirm_end', order: @order.name)}
       = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
     - elsif not @order.closed? and not @order.stockit?
       -# TODO btn-success class only if not received before
       = link_to t('orders.index.action_receive'), receive_order_path(@order), class: 'btn btn-success'
     - unless @order.closed?
-      = link_to t('ui.delete'), @order, confirm: t('.confirm_delete'), method: :delete,
+      = link_to t('ui.delete'), @order, data_confirm: t('.confirm_delete'), method: :delete,
         class: 'btn btn-danger'
-
 
 %section#articles_table
   = render @partial, order: @order

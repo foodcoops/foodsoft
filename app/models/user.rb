@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   
   validates_presence_of :email
   validates_presence_of :password, :on => :create
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   validates_uniqueness_of :email, :case_sensitive => false
   validates_presence_of :first_name # for simple_form validations
   validates_length_of :first_name, :in => 2..50
@@ -157,7 +157,7 @@ class User < ActiveRecord::Base
  
   #Returns an array with the users groups (but without the Ordergroups -> because tpye=>"")
   def member_of_groups()
-     self.groups.find(:all, :conditions => {:type => ""})
+     self.groups.where(type: '')
   end
 
   def self.authenticate(login, password)

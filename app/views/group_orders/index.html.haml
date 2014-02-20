@@ -34,6 +34,6 @@
 - unless Order.closed.empty?
   %section
     %h2= t '.closed_orders.title'
-    = render :partial => "orders", :locals => {:orders => Order.closed.all(:limit => 5), :pagination => false}
+    = render :partial => "orders", :locals => {:orders => Order.closed.limit(5), :pagination => false}
     %br/
     = link_to t('.closed_orders.more'), archive_group_orders_path

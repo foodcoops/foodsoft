@@ -21,5 +21,5 @@
         %td= format_roles(user)
         %td= format_time(user.last_login)
         %td= link_to t('ui.edit'), edit_admin_user_path(user), class: 'btn btn-mini'
-        %td= link_to t('ui.delete'), [:admin, user], :confirm => t('admin.confirm', name: user.name),
+        %td= link_to t('ui.delete'), [:admin, user], :data => {:confirm => t('admin.confirm', name: user.name)},
             :method => :delete, class: 'btn btn-danger btn-mini'

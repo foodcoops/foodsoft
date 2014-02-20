@@ -1,19 +1,17 @@
 # A sample Gemfile
 source "https://rubygems.org"
-ruby "1.9.3"
+ruby "2.0.0"
 
-gem "rails", '~> 3.2.9'
+gem "rails", '~> 4.0.0'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'less-rails'
-  gem 'uglifier', '>= 1.0.3'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
-end
+
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'less-rails'
+gem 'uglifier', '>= 1.0.3'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
+
 
 gem 'jquery-rails'
 gem 'select2-rails'
@@ -27,19 +25,20 @@ gem 'prawn'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
+gem 'client_side_validations', git: 'git://github.com/bcardarella/client_side_validations.git', branch: '4-0-beta'
+gem 'client_side_validations-simple_form', git: 'git://github.com/saveritemedical/client_side_validations-simple_form.git'
 gem 'inherited_resources'
 gem 'localize_input', git: "git://github.com/bennibu/localize_input.git"
 gem 'daemons'
 gem 'twitter-bootstrap-rails'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
-gem 'meta_search'
+gem 'ransack'
 gem 'acts_as_tree'
-gem "rails-settings-cached", "0.2.4"
+gem "rails-settings-cached", "0.3.1"
 gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
+gem 'protected_attributes'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'

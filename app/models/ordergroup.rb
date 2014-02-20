@@ -62,9 +62,9 @@ class Ordergroup < Group
 
   def update_stats!
     # Get hours for every job of each user in period
-    jobs = users.sum { |u| u.tasks.done.sum(:duration, :conditions => ["updated_on > ?", APPLE_MONTH_AGO.month.ago]) }
+    jobs = users.to_a.sum { |u| u.tasks.done.where('updated_on > ?', APPLE_MONTH_AGO.month.ago).sum(:duration) }
     # Get group_order.price for every finished order in this period
-    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).sum(:price)
+    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).references(:orders).sum(:price)
 
     @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
@@ -113,8 +113,8 @@ class Ordergroup < Group
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
-    group = Ordergroup.where('groups.name = ?', name)
-    group = group.where('groups.id != ?', self.id) unless new_record?
+    group = Ordergroup.where(name: name)
+    group = group.where.not(id: self.id) unless new_record?
     if group.exists?
       message = group.first.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message

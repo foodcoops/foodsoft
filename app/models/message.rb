@@ -4,9 +4,9 @@ class Message < ActiveRecord::Base
   serialize :recipients_ids, Array
   attr_accessor :sent_to_all, :group_id, :recipient_tokens, :reply_to
   
-  scope :pending, where(:email_state => 0)
-  scope :sent, where(:email_state => 1)
-  scope :public, where(:private => false)
+  scope :pending, -> { where(:email_state => 0) }
+  scope :sent, -> { where(:email_state => 1) }
+  scope :public, -> { where(:private => false) }
 
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {

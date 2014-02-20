@@ -16,13 +16,13 @@ class Finance::BalancingController < Finance::BaseController
     sort_param = params['sort'] || 'name'
     @articles = case sort_param
                   when 'name' then
-                    OrderArticle.sort_by_name(@articles)
+                    @articles.order('articles.name ASC')
                   when 'name_reverse' then
-                    OrderArticle.sort_by_name(@articles).reverse
+                    @articles.order('articles.name DESC')
                   when 'order_number' then
-                    OrderArticle.sort_by_order_number(@articles)
+                    @articles.order('articles.order_number ASC')
                   when 'order_number_reverse' then
-                    OrderArticle.sort_by_order_number(@articles).reverse
+                    @articles.order('articles.order_number DESC')
                   else
                     @articles
                 end

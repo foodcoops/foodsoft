@@ -15,6 +15,6 @@ class Admin::WorkgroupsController < Admin::BaseController
     @workgroup.destroy
     redirect_to admin_workgroups_url, notice: t('admin.workgroups.destroy.notice')
   rescue => error
-    redirect_to admin_workgroups_url, alert: t('admin.workgroups.destroy.error')
+    redirect_to admin_workgroups_url, alert: t('admin.workgroups.destroy.error', error: error.message)
   end
 end

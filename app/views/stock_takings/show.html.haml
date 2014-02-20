@@ -13,7 +13,7 @@
     %th= t '.supplier'
     %th= t '.unit'
     %th= t '.amount'
-  - for stock_change in @stock_taking.stock_changes.all
+  - for stock_change in @stock_taking.stock_changes
     %tr
       %td= stock_change.stock_article.name
       %td= stock_change.stock_article.supplier.name
@@ -23,5 +23,5 @@
 .btn-group
   = link_to t('ui.edit'), edit_stock_taking_path(@stock_taking), class: 'btn'
   = link_to t('.overview'), stock_takings_path, class: 'btn'
-  = link_to t('ui.delete'), @stock_taking, :method => :delete, :confirm => t('.confirm_delete'),
+  = link_to t('ui.delete'), @stock_taking, :method => :delete, :data => {:confirm => t('.confirm_delete')},
     class: 'btn btn-danger'

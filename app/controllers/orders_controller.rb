@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
     else
       sort = "ends DESC"
     end
-    @orders = Order.closed.page(params[:page]).per(@per_page).includes(:supplier).order(sort)
+    @orders = Order.closed.includes(:supplier).order(sort).page(params[:page]).per(@per_page)
   end
 
   # Gives a view for the results to a specific order
@@ -145,7 +145,7 @@ class OrdersController < ApplicationController
     text += "****** " + I18n.t('orders.fax.articles') + "\n\n"
     text += I18n.t('orders.fax.number') + "   " + I18n.t('orders.fax.amount') + "   " + I18n.t('orders.fax.name') + "\n"
     # now display all ordered articles
-    @order.order_articles.ordered.all(:include => [:article, :article_price]).each do |oa|
+    @order.order_articles.ordered.includes([:article, :article_price]).each do |oa|
       number = oa.article.order_number
       (8 - number.size).times { number += " " }
       quantity = oa.units_to_order.to_i.to_s

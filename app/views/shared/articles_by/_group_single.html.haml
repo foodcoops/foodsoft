@@ -4,7 +4,7 @@
       %th{colspan: 9}
         %h4.name= group_order.ordergroup.name
   - total = 0
-  - for goa in group_order.group_order_articles.ordered.all(:include => :order_article)
+  - for goa in group_order.group_order_articles.ordered.includes(:order_article)
     - total += goa.total_price
     = render 'shared/articles_by/group_single_goa', goa: goa, edit: (edit rescue nil)
   %tr{class: cycle('even', 'odd', :name => 'articles')}

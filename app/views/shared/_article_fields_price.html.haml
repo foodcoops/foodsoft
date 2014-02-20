@@ -19,7 +19,7 @@
       = number_to_currency(f.object.fc_price) rescue nil
 
 -# do this inline, since it's being used in ajax forms only
-- field = f.object.class.model_name.underscore
+- field = f.object.class.model_name.to_s.underscore
 :javascript
   var form = $('#article_fc_price').closest('form');
   $('##{field}_price, ##{field}_tax, ##{field}_deposit', form).on('change keyup', function() {

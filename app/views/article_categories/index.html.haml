@@ -15,5 +15,5 @@
         %td= article_category.description
         %td
           = link_to t('ui.edit'), edit_article_category_path(article_category), class: 'btn btn-mini'
-          = link_to t('ui.delete'), article_category, :method => :delete, :confirm => t('.confirm_delete'),
+          = link_to t('ui.delete'), article_category, :method => :delete, :data => {:confirm => t('.confirm_delete')},
             class: 'btn btn-mini btn-danger'

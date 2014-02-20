@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   has_many :group_orders, :dependent => :destroy
   has_many :ordergroups, :through => :group_orders
   has_one :invoice
-  has_many :comments, :class_name => "OrderComment", :order => "created_at"
+  has_many :comments, -> { order('created_at') }, :class_name => "OrderComment"
   has_many :stock_changes
   belongs_to :supplier
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
@@ -25,11 +25,11 @@ class Order < ActiveRecord::Base
   after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
-  scope :open, where(state: 'open').order('ends DESC')
-  scope :finished, where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC')
-  scope :finished_not_closed, where(state: 'finished').order('ends DESC')
-  scope :closed, where(state: 'closed').order('ends DESC')
-  scope :stockit, where(supplier_id: 0).order('ends DESC')
+  scope :open, -> { where(state: 'open').order('ends DESC') }
+  scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
+  scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
+  scope :closed, -> { where(state: 'closed').order('ends DESC') }
+  scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
 
   def stockit?
     supplier_id == 0
@@ -43,12 +43,12 @@ class Order < ActiveRecord::Base
     if stockit?
       # make sure to include those articles which are no longer available
       # but which have already been ordered in this stock order
-      StockArticle.available.all(:include => :article_category,
-        :order => 'article_categories.name, articles.name').reject{ |a|
+      StockArticle.available.includes(:article_category).
+        order('article_categories.name, articles.name').reject{ |a|
         a.quantity_available <= 0 and not a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else
-      supplier.articles.available.all.group_by { |a| a.article_category.name }
+      supplier.articles.available.group_by { |a| a.article_category.name }
     end
   end
 
@@ -107,7 +107,7 @@ class Order < ActiveRecord::Base
   end
 
   def articles_sort_by_category
-    order_articles.all(:include => [:article], :order => 'articles.name').sort do |a,b|
+    order_articles.includes(:article).order('articles.name').sort do |a,b|
       a.article.article_category.name <=> b.article.article_category.name
     end
   end
@@ -168,7 +168,7 @@ class Order < ActiveRecord::Base
         # Update order_articles. Save the current article_price to keep price consistency
         # Also save results for each group_order_result
         # Clean up
-        order_articles.all(:include => :article).each do |oa|
+        order_articles.includes(:article).each do |oa|
           oa.update_attribute(:article_price, oa.article.article_prices.first)
           oa.group_order_articles.each do |goa|
             goa.save_results!
@@ -199,7 +199,7 @@ class Order < ActiveRecord::Base
     transaction_note = I18n.t('orders.model.notice_close', :name => name,
                               :ends => ends.strftime(I18n.t('date.formats.default')))
 
-    gos = group_orders.all(:include => :ordergroup)       # Fetch group_orders
+    gos = group_orders.includes(:ordergroup)              # Fetch group_orders
     gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
 
     transaction do                                        # Start updating account balances
@@ -209,7 +209,7 @@ class Order < ActiveRecord::Base
       end
 
       if stockit?                                         # Decreases the quantity of stock_articles
-        for oa in order_articles.all(:include => :article)
+        for oa in order_articles.includes(:article)
           oa.update_results!                              # Update units_to_order of order_article
           stock_changes.create! :stock_article => oa.article, :quantity => oa.units_to_order*-1
         end
@@ -236,7 +236,7 @@ class Order < ActiveRecord::Base
   end
 
   def keep_ordered_articles
-    chosen_order_articles = order_articles.find_all_by_article_id(article_ids)
+    chosen_order_articles = order_articles.where(article_id: article_ids)
     to_be_removed = order_articles - chosen_order_articles
     to_be_removed_but_ordered = to_be_removed.select { |a| a.quantity > 0 or a.tolerance > 0 }
     unless to_be_removed_but_ordered.empty? or ignore_warnings

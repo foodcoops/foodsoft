@@ -26,6 +26,6 @@
                   = link_to t('orders.index.action_receive'), '#', class: 'btn btn-mini disabled'
               = link_to t('.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-mini btn-primary'
               = link_to t('.close'), close_direct_finance_order_path(order),
-                :confirm => t('.confirm'), :method => :put, class: 'btn btn-mini'
+                :data => {:confirm => t('.confirm')}, :method => :patch, class: 'btn btn-mini'
 - else
   %i= t('.no_closed_orders')

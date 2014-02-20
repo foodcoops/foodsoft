@@ -17,7 +17,7 @@ class Group < ActiveRecord::Base
   
   # Returns all NONmembers and a checks for possible multiple Ordergroup-Memberships
   def non_members
-    User.natural_order.all.reject { |u| users.include?(u) }
+    User.natural_order.reject { |u| users.include?(u) }
   end
 
   def user_tokens=(ids)

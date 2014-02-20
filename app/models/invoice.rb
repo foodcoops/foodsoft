@@ -7,7 +7,7 @@ class Invoice < ActiveRecord::Base
   validates_presence_of :supplier_id
   validates_numericality_of :amount, :deposit, :deposit_credit
 
-  scope :unpaid, :conditions => { :paid_on => nil }
+  scope :unpaid, -> { where(paid_on: nil) }
 
   # Replace numeric seperator with database format
   localize_input_of :amount, :deposit, :deposit_credit

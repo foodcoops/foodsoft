@@ -2,12 +2,9 @@ class Delivery < ActiveRecord::Base
 
   belongs_to :supplier
   has_one :invoice
-  has_many :stock_changes,
-    :dependent => :destroy,
-    :include => 'stock_article',
-    :order => 'articles.name ASC'
+  has_many :stock_changes, -> { includes(:stock_article).order('articles.name ASC') }, :dependent => :destroy
 
-  scope :recent, :order => 'created_at DESC', :limit => 10
+  scope :recent, -> { order('created_at DESC').limit(10) }
 
   validates_presence_of :supplier_id, :delivered_on
   validate :stock_articles_must_be_unique

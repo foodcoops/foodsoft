@@ -3,6 +3,7 @@
 class DeltaInput < SimpleForm::Inputs::StringInput
   # for now, need to pass id or it won't work
   def input
+    @input_html_options[:type] = 'text'
     @input_html_options[:data] ||= {}
     @input_html_options[:data][:delta] ||= 1
     @input_html_options[:autocomplete] ||= 'off'

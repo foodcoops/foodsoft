@@ -23,7 +23,7 @@ describe Order do
     it 'is not closed by default'   do expect(order).to_not be_closed end
 
     it 'has valid order articles' do
-      order.order_articles.all.each {|oa| expect(oa).to be_valid }
+      order.order_articles.each {|oa| expect(oa).to be_valid }
     end
 
     it 'can be finished' do

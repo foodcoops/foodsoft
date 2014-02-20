@@ -15,7 +15,7 @@
         %td
           = link_to t('ui.show'), [@supplier, delivery], class: 'btn btn-mini'
           = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,delivery), class: 'btn btn-mini'
-          = link_to t('ui.delete'), [@supplier,delivery], :confirm => t('.confirm_delete'), :method => :delete,
+          = link_to t('ui.delete'), [@supplier,delivery], :data => {:confirm => t('.confirm_delete')}, :method => :delete,
           class: 'btn btn-mini btn-danger'
 
 = link_to t('.new_delivery', supplier: @supplier.name), new_supplier_delivery_path(@supplier), class: 'btn btn-primary'

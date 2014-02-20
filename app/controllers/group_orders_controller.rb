@@ -74,8 +74,7 @@ class GroupOrdersController < ApplicationController
   end
 
   def ensure_open_order
-    @order = Order.find((params[:order_id] || params[:group_order][:order_id]),
-                        :include => [:supplier, :order_articles])
+    @order = Order.includes([:supplier, :order_articles]).find(params[:order_id] || params[:group_order][:order_id])
     unless @order.open?
       flash[:notice] = I18n.t('group_orders.errors.closed')
       redirect_to :action => 'index'

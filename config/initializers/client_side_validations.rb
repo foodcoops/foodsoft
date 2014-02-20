@@ -1,9 +1,10 @@
 # ClientSideValidations Initializer
 
+# DISABLED FOR RAILS4
 # Uncomment to disable uniqueness validator, possible security issue
 #  Disabled because of possible security issue and because of bug
 #  https://github.com/bcardarella/client_side_validations/pull/532
-ClientSideValidations::Config.disabled_validators = [:uniqueness]
+#ClientSideValidations::Config.disabled_validators = [:uniqueness]
 
 # Uncomment to validate number format with current I18n locale
 #  Foodsoft is currently using localize_input which is activated on certain

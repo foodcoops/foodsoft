@@ -24,4 +24,4 @@
         %td
           = link_to t('ui.edit'), edit_supplier_path(supplier), class: 'btn btn-mini'
           = link_to t('ui.delete'), supplier_path(supplier), method: :delete,
-            confirm: t('.confirm_del', name: supplier.name), class: 'btn btn-mini btn-danger'
+            :data => {confirm: t('.confirm_del', name: supplier.name)}, class: 'btn btn-mini btn-danger'

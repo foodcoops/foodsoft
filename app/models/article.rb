@@ -7,11 +7,11 @@ class Article < ActiveRecord::Base
   # Associations
   belongs_to :supplier
   belongs_to :article_category
-  has_many :article_prices, :order => "created_at DESC"
+  has_many :article_prices, -> { order("created_at DESC") }
 
   scope :undeleted, -> { where(deleted_at: nil) }
   scope :available, -> { undeleted.where(availability: true) }
-  scope :not_in_stock, :conditions => {:type => nil}
+  scope :not_in_stock, -> { where(type: nil) }
 
   # Validations
   validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category
@@ -44,7 +44,7 @@ class Article < ActiveRecord::Base
   # If the article is used in an open Order, the Order will be returned.
   def in_open_order
     @in_open_order ||= begin
-      order_articles = OrderArticle.all(:conditions => ['order_id IN (?)', Order.open.collect(&:id)])
+      order_articles = OrderArticle.where(order_id: Order.open.collect(&:id))
       order_article = order_articles.detect {|oa| oa.article_id == id }
       order_article ? order_article.order : nil
     end

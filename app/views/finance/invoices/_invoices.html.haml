@@ -27,5 +27,5 @@
         %td= link_to format_date(invoice.order.ends), new_finance_order_path(order_id: invoice.order_id) if invoice.order
         %td= truncate(invoice.note)
         %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
-        %td= link_to t('ui.delete'), finance_invoice_path(invoice), :confirm => t('.confirm_delete'), :method => :delete,
+        %td= link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('.confirm_delete')}, :method => :delete,
           class: 'btn btn-danger btn-mini'

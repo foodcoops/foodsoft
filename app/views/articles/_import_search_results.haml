@@ -1,7 +1,7 @@
 - if @articles.empty?
   %p= t '.not_found'
 - else
-  = pagination_links_remote @articles, :params => {:search => search_params}
+  = pagination_links_remote @articles, :params => {:q => search_params}
   %table.table.table-striped
     %thead
       %tr
@@ -16,7 +16,7 @@
     %tbody
       - for article in @articles
         %tr
-          %td= highlight article.name, params[:search][:name_contains_all]
+          %td= highlight article.name, params[:q][:name_cont_all]
           %td= article.origin
           %td= article.manufacturer
           %td= article.note

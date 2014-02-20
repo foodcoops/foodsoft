@@ -30,8 +30,8 @@
   - unless @task.done?
     = link_to t('.mark_done'), set_done_task_path(@task), method: :post, class: 'btn'
   = link_to t('ui.edit'), edit_task_path(@task), class: 'btn'
-  = link_to t('ui.delete'), task_path(@task), :method => :delete, :confirm => t('.confirm_delete_single'),
+  = link_to t('ui.delete'), task_path(@task), :method => :delete, :data => {:confirm => t('.confirm_delete_single')},
     class: 'btn btn-danger'
   - if @task.periodic?
     = link_to t('.delete_group'), task_path(@task, periodic: true), method: :delete, 
-      confirm: t('.confirm_delete_group'), class: 'btn btn-danger'
+      :data => {confirm: t('.confirm_delete_group')}, class: 'btn btn-danger'

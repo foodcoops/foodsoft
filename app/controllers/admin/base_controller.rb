@@ -3,8 +3,8 @@ class Admin::BaseController < ApplicationController
   
   def index
     @user = self.current_user
-    @groups = Group.find(:all, :limit => 10, :order => 'created_on DESC', :conditions => {:deleted_at => nil})
-    @users = User.find(:all, :limit => 10, :order => 'created_on DESC')
+    @groups = Group.where(deleted_at: nil).order('created_on DESC').limit(10)
+    @users = User.order('created_on DESC').limit(10)
   end
   
 end

@@ -60,13 +60,13 @@ class OrderMatrix < OrderPdf
       # Collect group results
       groups_data = [header]
 
-      @order.group_orders.includes(:ordergroup).all.each do |group_order|
+      @order.group_orders.includes(:ordergroup).each do |group_order|
 
         group_result = [group_order.ordergroup.name.truncate(20)]
 
         for order_article in current_order_articles
           # get the Ordergroup result for this order_article
-          goa = order_article.group_order_articles.first conditions: { group_order_id: group_order.id }
+          goa = order_article.group_order_articles.where(group_order_id: group_order.id).first
           group_result << ((goa.nil? || goa.result == 0) ? "" : goa.result.to_i)
         end
         groups_data << group_result

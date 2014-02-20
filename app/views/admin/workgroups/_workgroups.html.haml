@@ -16,5 +16,5 @@
         %td= format_roles(workgroup)
         %td
           = link_to t('ui.edit'), edit_admin_workgroup_path(workgroup), class: 'btn btn-mini'
-          = link_to t('ui.delete'), [:admin, workgroup], :confirm => t('admin.confirm', name: workgroup.name),
+          = link_to t('ui.delete'), [:admin, workgroup], :data => {:confirm => t('admin.confirm', name: workgroup.name)},
             :method => :delete, class: 'btn btn-mini btn-danger'

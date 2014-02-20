@@ -19,5 +19,5 @@
             remote: true, class: 'btn btn-success btn-small'
           - if membership.group.type != 'Ordergroup'
             %td= link_to t('.groups.cancel'), cancel_membership_path(membership_id: membership),
-              confirm: t('.groups.cancel_confirm'), method: :post,
+              :data => {confirm: t('.groups.cancel_confirm')}, method: :post,
               class: 'btn btn-danger btn-small'

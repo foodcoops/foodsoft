@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.15"
+  s.add_dependency "rails"
   s.add_dependency 'wikicloth'
   s.add_dependency 'acts_as_versioned' # need git version, make sure that is included in foodsoft's Gemfile
   s.add_dependency 'diffy'

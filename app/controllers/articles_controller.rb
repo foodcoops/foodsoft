@@ -199,11 +199,11 @@ class ArticlesController < ApplicationController
   # renders a view to import articles in local database
   #   
   def shared
-    # build array of keywords, required for meta search _all suffix
-    params[:search][:name_contains_all] = params[:search][:name_contains_all].split(' ') if params[:search]
+    # build array of keywords, required for ransack _all suffix
+    params[:q][:name_cont_all] = params[:q][:name_cont_all].split(' ') if params[:q]
     # Build search with meta search plugin
-    @search = @supplier.shared_supplier.shared_articles.search(params[:search])
-    @articles = @search.page(params[:page]).per(10)
+    @search = @supplier.shared_supplier.shared_articles.search(params[:q])
+    @articles = @search.result.page(params[:page]).per(10)
     render :layout => false
   end
   

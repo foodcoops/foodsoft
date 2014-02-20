@@ -13,7 +13,7 @@ module OrdersHelper
 
   def options_for_suppliers_to_select
     options = [[I18n.t('helpers.orders.option_choose')]]
-    options += Supplier.all.map {|s| [ s.name, url_for(action: "new", supplier_id: s)] }
+    options += Supplier.map {|s| [ s.name, url_for(action: "new", supplier_id: s)] }
     options += [[I18n.t('helpers.orders.option_stock'), url_for(action: 'new', supplier_id: 0)]]
     options_for_select(options)
   end
@@ -98,7 +98,7 @@ module OrdersHelper
     if group_orders.count == 0
       return txt
     else
-      desc = group_orders.all.map {|g| g.ordergroup.name}.join(', ')
+      desc = group_orders.includes(:ordergroup).map {|g| g.ordergroup.name}.join(', ')
       content_tag(:abbr, txt, title: desc).html_safe
     end
   end

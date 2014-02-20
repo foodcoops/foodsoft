@@ -14,4 +14,4 @@
   %td= link_to t('ui.edit'), edit_supplier_article_path(@supplier, article),
       :remote => true, class: 'btn btn-mini'
   %td= link_to t('ui.delete'), [@supplier, article],
-      :method => :delete, :confirm => t('.confirm_delete'), :remote => true, class: 'btn btn-mini btn-danger'
+      :method => :delete, :data => {:confirm => t('.confirm_delete')}, :remote => true, class: 'btn btn-mini btn-danger'
