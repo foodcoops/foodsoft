@@ -207,5 +207,16 @@ module ApplicationHelper
   def show_user_link(user=@current_user)
     show_user user
   end
+
+  # allow truncate to add title when tooltip option is given
+  def truncate(text, options={}, &block)
+    return text if not text or text.length <= (options[:length] or 30)
+    text_truncated = super(text, options, &block)
+    if options[:tooltip]
+      content_tag :span, text_truncated, title: text
+    else
+      text_truncated
+    end
+  end
   
 end
