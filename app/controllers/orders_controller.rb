@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
 
   # Page to create a new order.
   def new
-    @order = Order.new :ends => 4.days.from_now, :supplier_id => params[:supplier_id]
+    @order = Order.new starts: Time.now, ends: 4.days.from_now, supplier_id: params[:supplier_id]
   end
 
   # Save a new order.

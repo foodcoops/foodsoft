@@ -1,8 +1,9 @@
 = simple_form_for @order do |f|
   = f.hidden_field :supplier_id
-  = f.input :note, input_html: {rows: 8}
-  = f.input :starts, input_html: {class: 'input-small'}
-  = f.input :ends, input_html: {class: 'input-small'}
+  .fold-line
+    = f.input :starts, as: :date_picker_time
+    = f.input :ends, as: :date_picker_time
+  = f.input :note, input_html: {rows: 2, class: 'input-xxlarge'}
 
   %h2= t '.title'
   - if @order.errors.has_key?(:articles)
@@ -18,7 +19,7 @@
       - else
         %th= heading_helper Article, :origin
         %th= heading_helper Article, :manufacturer
-        %th= heading_helper Article, :unit_quantity
+        %th= heading_helper Article, :units
       %th= t '.prices'
     - for category_name, articles in @order.articles_for_ordering
       %tr.article-category
@@ -37,13 +38,16 @@
         %tr{class: row_class, id: article.id}
           %td= check_box_tag "order[article_ids][]", article.id, included, :id => "checkbox_#{article.id}"
           %td.click-me{'data-check-this' => "#checkbox_#{article.id}"}= article.name
-          %td=h truncate article.note, :length => 25
+          %td= truncate article.note, length: 25, tooltip: true
           - if @order.stockit?
             %td= "#{article.quantity_available} * #{article.unit}"
           - else
-            %td=h truncate article.origin, :length => 15
-            %td=h truncate article.manufacturer, :length => 15
-            %td= "#{article.unit_quantity} x #{article.unit}"
+            %td= truncate article.origin, length: 15, tooltip: true
+            %td= truncate article.manufacturer, length: 15, tooltip: true
+            %td
+              = article.unit
+              - if article.unit_quantity > 1
+                %span{style: 'color: grey'} &times; #{article.unit_quantity}#{pkg_helper_icon}
           %td= "#{number_to_currency(article.price)} / #{number_to_currency(article.fc_price)}"
     %tr
       %td
