@@ -34,6 +34,13 @@ default: &defaults
   # documentation URL for the apples&pears work system
   applepear_url: https://github.com/foodcoops/foodsoft/wiki/%C3%84pfel-u.-Birnen
 
+  # Default language
+  #default_locale: en
+  # By default, foodsoft takes the language from the webbrowser/operating system.
+  # In case you really want foodsoft in a certain language by default, set this to true.
+  # When members are logged in, the language from their profile settings is still used.
+  #ignore_browser_locale: false
+
   # price markup in percent
   price_markup: 2.0
 
