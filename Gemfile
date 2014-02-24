@@ -44,6 +44,8 @@ gem 'protected_attributes'
 gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
 gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
 
+#gem 'foodsoft_signup', path: 'lib/foodsoft_signup'
+
 group :production do
   gem 'exception_notification'
 end
