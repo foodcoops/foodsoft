@@ -350,17 +350,18 @@ en:
       title_new: Add new article
     import_search_results:
       action_import: import
-      already_imported: already imported
+      action_edit_import: edit import
+      already_imported: imported
       not_found: No articles found
     index:
       change_supplier: Change supplier ...
       edit_all: Edit all
       ext_db:
-        import: Search/Import
+        import: Import article
         sync: Synchronise
-        title: External databank
       import:
-        placeholder: Name ...
+        category: Directly import into category
+        placeholder: Search by name ...
         restrict_region: Restrict to region only
         title: Import article
       new: New article
