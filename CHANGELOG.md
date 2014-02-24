@@ -1,3 +1,19 @@
+# Foodsoft 3.3.0
+(24 Feb 2014)
+
+* New improvements the stock section.
+* New receive screen for redistributing articles when the order is closed. Members with orders and finance permission are now able to change the amount received, and redistribute that over the members.
+* Amounts received by ordergroups can now be edited directly in the ordergroup and article list.
+* Redesigned article edit dialog.
+* Do not offer to add deleted articles in the balancing screen.
+* Work nicely with browsers remembering passwords.
+* Add RSS feed for wiki updates (navigate to Wiki -> All pages).
+* Clearer error message when a wiki page contains a syntax error.
+* More graceful response on access denied errors.
+* Touch devices are now better supported.
+* Added some missing translations.
+* Other small fixes.
+
 # Foodsoft 3.2.0
 (16 December 2013)
 
