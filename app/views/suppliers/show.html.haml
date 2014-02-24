@@ -1,0 +1,85 @@
+- title @supplier.name
+
+- content_for :actionbar do
+  = link_to t('suppliers.index.articles', count: @supplier.articles.undeleted.count), supplier_articles_path(@supplier), class: 'btn'
+  - if @supplier.stock_articles.undeleted.count > 0
+    = link_to t('suppliers.index.stock', count: @supplier.stock_articles.undeleted.count), stock_articles_path, class: 'btn'
+
+.row-fluid
+  .span6
+    - if shared_supplier = @supplier.shared_supplier
+      .alert.alert-info
+        = t 'suppliers.shared_supplier_note'
+
+    %dl.dl-horizontal
+      %dt= heading_helper(Supplier, :address) + ':'
+      %dd= @supplier.address
+      %dt= heading_helper(Supplier, :phone) + ':'
+      %dd= @supplier.phone
+      %dt= heading_helper(Supplier, :phone2) + ':'
+      %dd= @supplier.phone2
+      %dt= heading_helper(Supplier, :fax) + ':'
+      %dd= @supplier.fax
+      %dt= heading_helper(Supplier, :email) + ':'
+      %dd= @supplier.email
+      %dt= heading_helper(Supplier, :url) + ':'
+      %dd= link_to @supplier.url, @supplier.url
+      %dt= heading_helper(Supplier, :contact_person) + ':'
+      %dd= @supplier.contact_person
+      %dt= heading_helper(Supplier, :customer_number) + ':'
+      %dd= @supplier.customer_number
+      %dt= heading_helper(Supplier, :delivery_days) + ':'
+      %dd= @supplier.delivery_days
+      %dt= heading_helper(Supplier, :order_howto) + ':'
+      %dd= @supplier.order_howto
+      %dt= heading_helper(Supplier, :note) + ':'
+      %dd= @supplier.note
+      %dt= heading_helper(Supplier, :min_order_quantity) + ':'
+      %dd= @supplier.min_order_quantity
+
+    .clearfix
+    - if @current_user.role_suppliers?
+      .form-actions
+        = link_to t('ui.edit'), edit_supplier_path(@supplier), class: 'btn'
+        = link_to t('ui.delete'), @supplier, :data => {:confirm => t('.confirm_delete')}, :method => :delete, class: 'btn btn-danger'
+
+  - if @deliveries.count > 0
+    .span6
+      .pull-right
+        = link_to t('.show_deliveries'), supplier_deliveries_path(@supplier), class: 'btn'
+        = link_to t('.new_delivery'), new_supplier_delivery_path(@supplier), class: 'btn'
+      %h2= t '.last_deliveries'
+      %table.table.table-horizontal
+        %thead
+          %tr
+            %th= heading_helper Delivery, :date
+            %th= heading_helper Delivery, :amount
+        %tbody
+          - for delivery in @deliveries
+            %tr
+              %td= link_to delivery.delivered_on, [@supplier, delivery]
+              %td= link_to_invoice(delivery)
+
+  - if @orders.count > 0
+    .span6
+      %h2= t '.last_orders'
+      %table.table.table-horizontal
+        %thead
+          %tr
+            %th= heading_helper Order, :starts
+            %th= heading_helper Order, :ends
+            %th= heading_helper Order, :status
+            %th= heading_helper Order, :updated_by
+        %tbody
+          - for order in @orders
+            %tr
+              - if current_user.role_orders?
+                %td= link_to format_time(order.starts), order_path(order)
+              - else
+                %td= format_time(order.starts)
+              %td= format_time(order.ends) unless order.ends.nil?
+              - if current_user.role_finance? and not order.open?
+                %td= link_to I18n.t("orders.state.#{order.state}"), new_finance_order_path(order_id: order.id)
+              - else
+                %td= I18n.t("orders.state.#{order.state}")
+              %td= show_user(order.updated_by)

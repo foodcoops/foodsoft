@@ -31,6 +31,8 @@ class Order < ActiveRecord::Base
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
   scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
 
+  scope :recent, -> { order('starts DESC').limit(10) }
+
   def stockit?
     supplier_id == 0
   end
