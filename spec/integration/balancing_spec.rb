@@ -133,6 +133,7 @@ describe 'settling an order', :type => :feature do
         fill_in 'group_order_article_result', :with => 8
         find('input[type="submit"]').click
       end
+      expect(page).to_not have_selector('form#new_group_order_article')
       expect(page).to have_content(user.ordergroup.name)
       goa = GroupOrderArticle.last
       expect(goa).to_not be_nil
@@ -161,6 +162,20 @@ describe 'settling an order', :type => :feature do
       end
       expect(goa1.reload.result).to eq 7
       expect(find("#group_order_articles_#{oa.id} tfoot td:nth-child(3)").text.to_f).to eq 8
+    end
+
+    it 'can add an article' do
+      new_article = create :article, supplier: supplier
+      expect(page).to_not have_content(new_article.name)
+      click_link I18n.t('finance.balancing.edit_results_by_articles.add_article')
+      expect(page).to have_selector('form#new_order_article')
+      within('#new_order_article') do
+        select new_article.name, :from => 'order_article_article_id'
+        find('input[type="submit"]').click
+      end
+      expect(page).to_not have_selector('form#new_order_article')
+      expect(page).to have_content(new_article.name)
+      expect(order.order_articles.where(article_id: new_article.id)).to_not be nil
     end
 
   end

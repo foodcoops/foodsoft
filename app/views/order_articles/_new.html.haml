@@ -3,7 +3,7 @@
     = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
     %h3= t '.title'
   .modal-body
-    = form.association :article, collection: new_order_articles_collection
+    = form.association :article, collection: @order.supplier_articles, label_method: lambda {|a| article_label_with_unit(a)}
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = form.submit class: 'btn btn-primary'

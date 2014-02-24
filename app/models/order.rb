@@ -52,6 +52,14 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def supplier_articles
+    if stockit?
+      StockArticle.undeleted.reorder('articles.name')
+    else
+      supplier.articles.undeleted.reorder('articles.name')
+    end
+  end
+
   # Save ids, and create/delete order_articles after successfully saved the order
   def article_ids=(ids)
     @article_ids = ids
