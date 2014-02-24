@@ -11,6 +11,7 @@ class SuppliersController < ApplicationController
   def show
     @supplier = Supplier.find(params[:id])
     @deliveries = @supplier.deliveries.recent
+    @orders = @supplier.orders.recent
   end
 
   # new supplier

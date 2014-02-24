@@ -79,6 +79,7 @@ en:
         starts: Starts at
         status: Status
         supplier: Supplier
+        updated_by: Last edited by
       order_article:
         article: Article
         missing_units: Missing units
@@ -558,7 +559,6 @@ en:
         confirm: Do you really want to settle the order?
         end: End
         ended: closed
-        last_edited_by: Last edited by
         name: Supplier
         no_closed_orders: At the moment there are no closed orders.
         state: State
@@ -1466,9 +1466,10 @@ en:
       title: External lists
     show:
       confirm_delete: Are you sure?
-      last_deliveries: Last deliveries
-      new_delivery: Create new delivery
-      show_deliveries: Show all deliveries
+      last_deliveries: Recent deliveries
+      last_orders: Last orders
+      new_delivery: New delivery
+      show_deliveries: Show all
     update:
       notice: Supplier was updated
   tasks:
