@@ -1,0 +1,4 @@
+// update shared article button on create, so that the article will be shown as imported
+// reloading the list doesn't work because it breaks paging :(
+$('#shared_article_<%= article.shared_article.id %> .actions')
+  .html('<%= j content_tag(:i, I18n.t('articles.import_search_results.already_imported'), class: 'icon-ok')%>');

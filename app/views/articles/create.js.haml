@@ -1,2 +1,3 @@
 $('#modalContainer').modal('hide');
 $('#listbody').prepend('#{escape_javascript(render(@article))}');
+= render 'import_article_added', article: @article if @article.shared_article
