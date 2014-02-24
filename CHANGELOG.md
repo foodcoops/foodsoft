@@ -1,3 +1,9 @@
+# Foodsoft 4.0.0
+(24 Feb 2014)
+
+Note: when you value stability, please wait for foodsoft 4.1.0.
+* Upgrade to Rails 4 (#214)
+
 # Foodsoft 3.3.0
 (24 Feb 2014)
 
