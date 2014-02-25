@@ -9,13 +9,16 @@ namespace :resque do
     desc "#{action.capitalize} Resque workers"
     task action => ['deploy:set_rails_env'] do
       on roles(:resque), in: :groups do
-        within current_path do
-          cmd = command(:rake, "resque:#{action}_workers", "RAILS_ENV=#{fetch(:rails_env)}")
-          if fetch(:run_user).nil? or fetch(:run_user) == local_user
-            execute cmd
+
+        SSHKit.config.command_map[:rake_as_run_user] =
+          unless fetch(:run_user).nil? or fetch(:run_user) == fetch(:user)
+            "sudo -u '#{fetch(:run_user)}' "
           else
-            execute 'sudo', '-u', fetch(:run_user), cmd
-          end
+            ''
+          end + SSHKit.config.command_map[:rake]
+
+        within current_path do
+          execute :rake_as_run_user, "'resque:#{action}_workers'", "RAILS_ENV='#{fetch(:rails_env)}'"
         end
       end
     end
