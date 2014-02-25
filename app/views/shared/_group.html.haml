@@ -13,6 +13,6 @@
     - members = group.users
     = "(#{members.size})"
     = members.collect{|u| show_user(u)}.join(", ")
-  - unless group.is_a?(Workgroup)
+  - if group.is_a?(Ordergroup) and FoodsoftConfig[:use_apple_points]
     %dt= t '.apple_limit'
     %dd= group.ignore_apple_restriction ? t('.deactivated') : t('.activated')

@@ -27,7 +27,7 @@
   = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}
 
 // Stats
-- if current_user.ordergroup
+- if current_user.ordergroup and FoodsoftConfig[:use_apple_points]
   %section
     %h2= t '.ordergroup.title'
     = render :partial => "apple_bar", :locals => {:apple_bar => AppleBar.new(current_user.ordergroup)}

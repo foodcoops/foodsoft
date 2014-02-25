@@ -48,6 +48,9 @@ default: &defaults
   # Comment out this option to activate this restriction
   # stop_ordering_under: 75
 
+  # Comment out to completely hide apple points (be sure to comment stop_ordering_under)
+  # use_apple_points: false
+
   # ordergroups can only order when their balance is higher than or equal to this
   # not fully enforced right now, since the check is only client-side
   # minimum_balance: 0

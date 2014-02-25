@@ -52,7 +52,8 @@ class FoodsoftConfig
     # configuration files that haven't been updated, still work as they did.
     def set_missing
       config.replace({
-        use_nick: true
+        use_nick: true,
+        use_apple_points: true
       }.merge(config))
     end
 
