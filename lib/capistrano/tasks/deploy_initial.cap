@@ -102,7 +102,7 @@ namespace :deploy do
         path = releases_path.join(capture(:ls, releases_path).split("\n").sort.last)
         fetch(:linked_files).each do |file|
           # TODO copy only if existing destination has zero length
-          execute "[ -e '#{path.join(file)}' ] && cp '#{path.join(file)}' '#{shared_path.join(file)}'"
+          execute "if [ -e '#{path.join(file)}' ]; then cp '#{path.join(file)}' '#{shared_path.join(file)}'; fi"
         end
       end
     end
