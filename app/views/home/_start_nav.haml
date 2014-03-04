@@ -4,7 +4,6 @@
     %li.nav-header= t '.foodcoop'
     %li= link_to t('.members'), foodcoop_users_path
     %li= link_to t('.tasks'), user_tasks_path
-    %li= link_to t('.write_message'), new_message_path
 
     - has_ordergroup = !@current_user.ordergroup.nil?
     - has_orders_role = @current_user.role_orders?
