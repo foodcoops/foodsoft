@@ -849,11 +849,10 @@ nl:
       confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
   layouts:
     email:
-      footer: |-
-        --
-        Foodsoft: %{foodsoft}
-        Foodcoop-Homepage: %{foodcoop}
-        Help: %{help}
+      footer_1_separator: '--'
+      footer_2_foodsoft: 'Foodsoft: %{url}'
+      footer_3_homepage: 'Foodcoop: %{url}'
+      footer_4_help: 'Help: %{url}'
     foodsoft: Foodsoft
     header:
       feedback:

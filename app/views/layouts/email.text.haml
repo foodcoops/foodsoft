@@ -1,3 +1,6 @@
 = yield
 \
-= t '.footer', foodsoft: root_url, foodcoop: FoodsoftConfig[:homepage], help: FoodsoftConfig[:help_url]
+= t '.footer_1_separator'
+= t '.footer_2_foodsoft', url: root_url
+= t '.footer_3_homepage', url: FoodsoftConfig[:homepage] if FoodsoftConfig[:homepage]
+= t '.footer_4_help', url: FoodsoftConfig[:help_url] if FoodsoftConfig[:help_url]
