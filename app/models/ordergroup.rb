@@ -106,7 +106,7 @@ class Ordergroup < Group
     og = Ordergroup.new({:name => name_from_user(user)})
     og.contact_person = user.name unless user.name.blank?
     og.contact_phone = user.phone unless user.phone.blank?
-    og.update_attributes attributes
+    og.assign_attributes attributes
     # create membership (vs. setting user_ids) to allow new users to associate
     user.memberships << Membership.new(group: og)
     og
