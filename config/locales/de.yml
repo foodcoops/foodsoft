@@ -847,11 +847,10 @@ de:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
     email:
-      footer: |
-        --
-        Foodsoft: %{foodsoft}
-        Foodcoop-Homepage: %{foodcoop}
-        Hilfe: %{help}
+      footer_1_separator: '--'
+      footer_2_foodsoft: 'Foodsoft: %{url}'
+      footer_3_homepage: 'Foodcoop: %{url}'
+      footer_4_help: 'Hilfe: %{url}'
     foodsoft: Foodsoft
     header:
       feedback:
