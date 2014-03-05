@@ -1,0 +1,1437 @@
+hu:
+  activerecord:
+    attributes:
+      article:
+        article_category: Kategória
+        availability: Árucikk elérhető?
+        availability_short: elérhető
+        deposit: Előleg
+        fc_price: FoodCoop ár
+        fc_price_desc: 
+        fc_price_short: FC ár
+        fc_share: FoodCoop margó
+        fc_share_short: FC margó
+        gross_price: Bruttó ár
+        manufacturer: Gyártó
+        name: Név
+        note: Jegyzet
+        order_number: Rendelési szám
+        order_number_short: 
+        origin: Származás
+        price: Ár (nettó)
+        supplier: Szállító
+        tax: Adó
+        unit: Egység
+        unit_quantity: Mennyiségi egység
+        unit_quantity_short: M.E.
+        units: Mennyiség
+      article_category:
+        description: Leírás
+        name: Név
+      article_price:
+        deposit: 
+        price: Ár (nettó)
+        tax: Adó
+        unit_quantity: Mennyiségi egység
+      delivery:
+        delivered_on: Szállítási határidő
+        note: Jegyzet
+        supplier: Szállitó
+      financial_transaction:
+        amount: Mennyiség
+        created_on: 
+        note: Jegyzet
+        ordergroup: 
+        user: 
+      group_order:
+        price: 
+        updated_by: 
+      group_order_article:
+        ordergroup_id: Rendelési csoport
+        quantity: Mennyiség
+        result: Mennyiség
+        tolerance: 
+        total_price: 
+      invoice:
+        amount: Összeg
+        date: Számlázási dátum
+        delivery: Szállítás
+        deposit: Fizetett előleg
+        deposit_credit: Visszafizetett előleg
+        note: Jegyzet
+        number: Szám
+        order: Rendelés
+        paid_on: Fizetve
+        supplier: Szállító
+      message:
+        body: Üzenet
+        group_id: Csoport
+        private: Privát
+        recipient_tokens: Címzettek
+        sent_to_all: Küldés mindenkinek
+        subject: Tárgy
+      order:
+        closed_by: 
+        created_by: 
+        ends: Összesen
+        name: 
+        note: Jegyzet
+        starts: Kelt
+        status: 
+        supplier: 
+      order_article:
+        article: 
+        missing_units: Hiányzó mennyiség
+        missing_units_short: Hiányzik
+        quantity: 
+        quantity_short: 
+        units_received: 
+        units_received_short: 
+        units_to_order: 
+        units_to_order_short: 
+        update_global_price: Teljeskörű árfrissítés
+      order_comment:
+        text: Jegyet hozzáadása ...
+      ordergroup:
+        account_balance: 
+        available_funds: 
+        contact: 
+        contact_address: Cím
+        contact_person: Kapcsolattartó személy
+        contact_phone: Telefon
+        description: Leírás
+        ignore_apple_restriction: 
+        last_order: 
+        name: Név
+        user_tokens: Tagok
+      page:
+        body: Szöveg
+        parent_id: 
+        title: Cím
+      stock_article:
+        available: 
+        price: Ár
+        quantity: 
+        quantity_available: Elérhető mennyiség
+        quantity_available_short: 
+        quantity_ordered: 
+      stock_taking:
+        date: Dátum
+        note: Jegyzet
+      supplier:
+        address: Cím
+        contact_person: Kapcsolattartó személy
+        customer_number: Vevő szám
+        customer_number_short: Vevő szám
+        delivery_days: Szállítási napok
+        email: Email
+        fax: Fax
+        is_subscribed: 
+        min_order_quantity: Minimum rendelési mennyiség
+        min_order_quantity_short: 
+        name: Név
+        note: Jegyzet
+        order_howto: Hogyan rendeljen
+        phone: Telefone
+        phone2: Telefon 2
+        url: Nyitóoldal
+      task:
+        description: Leírás
+        done: Kész?
+        due_date: Határidő
+        duration: Időtartam
+        name: 
+        required_users: Emberi erőforrás szükséges
+        user_list: 
+        workgroup: Munkacsoport
+      user:
+        email: Email
+        first_name: Keresztnév
+        last_login: 
+        last_name: Vezetéknév
+        name: Név
+        nick: Felhasználónév
+        ordergroup: Rendelési csoport
+        password: Jelszó
+        password_confirmation: Jelszó ismétlése
+        phone: Telefon
+        workgroup: Munkacsoportok
+      workgroup:
+        description: Leírás
+        name: Név
+        next_weekly_tasks_number: 
+        role_admin: Adminisztráció
+        role_article_meta: Árucikk adatbázis
+        role_finance: Pénzügyek
+        role_orders: 
+        role_suppliers: Szállítók
+        user_tokens: Felhasználók
+    errors:
+      has_many_left: 
+      models:
+        task:
+          attributes:
+            done:
+              exclusion: 
+    models:
+      article: Cikk
+      article_category: Cikk kategória
+      delivery: Szállítás
+      financial_transaction: Pénzügyi tranzakciók
+      invoice: Számla
+      message: Üzenet
+      order: Szállítás
+      order_article: Rendelési cikk
+      order_comment: Rendelési komment
+      ordergroup: Rendelési csoport
+      stock_article: 
+      stock_taking: 
+      supplier: Szállító
+      task: 
+      user: Felhasználó
+      workgroup: Munkacsoport
+  admin:
+    access_to: 
+    base:
+      index:
+        all_ordergroups: 
+        all_users: 
+        all_workgroups: 
+        created_at: 
+        first_paragraph: 
+        groupname: 
+        members: 
+        name: 
+        new_ordergroup: 
+        new_user: 
+        new_workgroup: 
+        newest_groups: 
+        newest_users: 
+        title: 
+        type: 
+        username: 
+    confirm: 
+    ordergroups:
+      destroy:
+        error: 
+        notice: 
+      edit:
+        title: 
+      form:
+        first_paragraph: 
+        here: 
+      index:
+        first_paragraph: 
+        new_ordergroup: 
+        new_ordergroups: 
+        second_paragraph: 
+        title: 
+        workgroup: 
+      new:
+        title: 
+      show:
+        confirm: 
+        edit: 
+        send_message: 
+        title: 
+    search_placeholder: 
+    users:
+      edit:
+        title: 
+      index:
+        first_paragraph: 
+        new_user: 
+        new_users: 
+        title: 
+      new:
+        title: 
+      show:
+        confirm: 
+        groupabos: 
+        member_since: 
+        person: 
+        preference: 
+        send_message: 
+    workgroups:
+      destroy:
+        error: 
+        notice: 
+      edit:
+        title: 
+      form:
+        first_paragraph: 
+        here: 
+      index:
+        first_paragraph: 
+        new_workgroup: 
+        new_workgroups: 
+        ordergroup: 
+        second_paragraph: 
+        title: 
+      new:
+        title: 
+      show:
+        confirm: 
+        edit: 
+        title: 
+      workgroups:
+        members: 
+        name: 
+  application:
+    controller:
+      error_authn: 
+      error_denied: 
+      error_denied_sign_in: 
+      error_members_only: 
+      error_token: 
+  article_categories:
+    create:
+      notice: Kategoria elmentve
+    destroy:
+      error: 'A kategoria nem törölhető: %{message}'
+    edit:
+      title: Kategória szerkesztése
+    index:
+      confirm_delete: Biztos?
+      new: Új kategória hozzáadása
+      title: Cikk kategóriák
+    new:
+      title: Új kategória hozzáadása
+    update:
+      notice: Kategória frissítve
+  articles:
+    article:
+      confirm_delete: 
+      last_update: 
+    articles:
+      confirm_delete: 
+      option_available: 
+      option_delete: 
+      option_not_available: 
+      option_select: 
+      price_netto: 
+      unit_quantity_desc: 
+      unit_quantity_short: 
+    controller:
+      create_from_upload:
+        notice: 
+      error_invalid: 
+      error_nosel: 
+      error_parse: 
+      error_update: 
+      parse_upload:
+        notice: 
+      sync:
+        notice: 
+        shared_alert: 
+      update_all:
+        notice: 
+      update_sel:
+        notice_avail: 
+        notice_destroy: 
+        notice_noaction: 
+        notice_unavail: 
+      update_sync:
+        notice: 
+    destroy_active_article:
+      drop: 
+      note: 
+    edit_all:
+      note: 
+      submit: 
+      title: 
+      warning: 
+    form:
+      title_edit: 
+      title_new: 
+    import_search_results:
+      action_import: 
+      already_imported: 
+      not_found: 
+    index:
+      change_supplier: 
+      edit_all: 
+      ext_db:
+        import: 
+        sync: 
+        title: 
+      import:
+        placeholder: 
+        restrict_region: 
+        title: 
+      new: 
+      new_order: 
+      search_placeholder: 
+      title: 
+      upload: 
+    model:
+      error_in_use: 
+      error_nosel: 
+    parse_upload:
+      body: 
+      title: 
+    sync:
+      outlist:
+        alert_used: 
+        body: 
+        body_ignored: 
+        body_skip: 
+        title: 
+      price_short: 
+      submit: 
+      title: 
+      unit_quantity_short: 
+      update:
+        body: 
+        title: 
+        update_msg: 
+    upload:
+      body: 
+      fields:
+        season_amount: 
+        season_price: 
+        status: 
+      file_label: 
+      submit: 
+      title: 
+  deliveries:
+    add_stock_change:
+      how_many_units: 
+    create:
+      notice: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+    form:
+      confirm_foreign_supplier_reedit: 
+      create_from_blank: 
+      create_stock_article: 
+      title_fill_quantities: 
+      title_finish_delivery: 
+      title_select_stock_articles: 
+    index:
+      confirm_delete: 
+      new_delivery: 
+      title: 
+    invoice_amount: 
+    invoice_net_amount: 
+    new:
+      title: 
+    show:
+      sum: 
+      sum_diff: 
+      sum_gross: 
+      sum_net: 
+      title: 
+      title_articles: 
+    stock_article_for_adding:
+      action_add_to_delivery: 
+      action_edit: 
+      action_other_price: 
+    stock_change_fields:
+      remove_article: 
+    suppliers_overview: 
+    update:
+      notice: 
+  documents:
+    order_by_articles:
+      filename: 
+      rows: 
+      title: 
+    order_by_groups:
+      filename: 
+      rows: 
+      sum: 
+      title: 
+    order_fax:
+      filename: 
+      rows: 
+      total: 
+    order_matrix:
+      filename: 
+      heading: 
+      rows: 
+      title: 
+      total: 
+  errors:
+    general: 
+    general_again: 
+    general_msg: 
+  feedback:
+    create:
+      notice: Visszajelzés sikeresen elküldve. Köszönjük!
+    new:
+      first_paragraph: Hibát talált? Véleménye, ötlete, javaslata van? Örömmel fogadjuk a visszajelzéseket.
+      second_paragraph: Kérjük vegye figyelembe, hogy a Foodsoft Csapata csak a program karbantartásáért felelős. Ha kérdése van a helyi Foodcoop szervezettel kapcsolatban, kérjük forduljon az illetékes kapcsolattartó személyhez.
+      send: Küldés
+      title: Visszajelzés küldése
+  finance:
+    balancing:
+      close:
+        alert: 
+        notice: 
+      close_direct:
+        alert: 
+        notice: 
+      confirm:
+        clear: 
+        first_paragraph: 
+        or_cancel: 
+        title: 
+      edit_results_by_articles:
+        add_article: 
+        amount: 
+        gross: 
+        net: 
+      group_order_articles:
+        add_group: 
+        total: 
+        total_fc: 
+        units: 
+      index:
+        title: 
+      invoice:
+        edit: 
+        invoice_amount: 
+        invoice_date: 
+        invoice_number: 
+        minus_refund_calculated: 
+        new: 
+        new_body: 
+        plus_refund_credited: 
+        refund_adjusted_amount: 
+      new:
+        alert: 
+        articles_overview: 
+        comment_on_transaction: 
+        comments: 
+        confirm_order: 
+        create_invoice: 
+        edit_note: 
+        edit_order: 
+        groups_overview: 
+        invoice: 
+        notes_and_journal: 
+        summary: 
+        title: 
+        view_options: 
+      order_article:
+        confirm: 
+      orders:
+        clear: 
+        cleared: 
+        close: 
+        confirm: 
+        end: 
+        ended: 
+        last_edited_by: 
+        name: 
+        no_closed_orders: 
+        state: 
+      summary:
+        changed: 
+        duration: 
+        fc_amount: 
+        fc_profit: 
+        gross_amount: 
+        groups_amount: 
+        net_amount: 
+        reload: 
+        with_extra_charge: 
+        without_extra_charge: 
+    create:
+      notice: 
+    financial_transactions:
+      controller:
+        create:
+          notice: 
+        create_collection:
+          alert: 
+          error_note_required: 
+          notice: 
+      index:
+        balance: 
+        last_updated_at: 
+        new_transaction: 
+        search_placeholder: 
+        title: 
+      new:
+        paragraph: 
+        title: 
+      new_collection:
+        new_ordergroup: 
+        save: 
+        sidebar: 
+        title: 
+      ordergroup:
+        remove: 
+        remove_group: 
+    index:
+      amount_fc: 
+      end: 
+      everything_cleared: 
+      last_transactions: 
+      open_transactions: 
+      show_all: 
+      title: 
+      unpaid_invoices: 
+    invoices:
+      edit:
+        title: 
+      index:
+        action_new: 
+        title: 
+      invoices:
+        confirm_delete: 
+      linked: 
+      linked_delivery: 
+      linked_order: 
+      new:
+        back: 
+        title: 
+      show:
+        back: 
+        title: 
+    ordergroups:
+      index:
+        new_transaction: 
+        search_placeholder: 
+        title: 
+      ordergroups:
+        account_statement: 
+        new_transaction: 
+    update:
+      notice: 
+  foodcoop:
+    ordergroups:
+      index:
+        name: Név ...
+        only_active: Csak aktív csoportok
+        only_active_desc: 
+        title: Rendelési csoport
+    users:
+      index:
+        body: |-
+          <p>Itt tud üzenetet küldeni az Őn Foodcoop felhasználóinak.</p> <p>Ehhez engedélyeznie kell az Ön profilján  %{profile_link} az elérhetőség láthatóságát..
+          </p>
+        ph_name: Név ...
+        ph_ordergroup: Rendelési csoport ...
+        profile_link: opciók
+        title: Felhasználók
+    workgroups:
+      edit:
+        invite_link: itt
+        invite_new: Új tag meghívása %{invite_link}.
+        title: Csoport szerkesztése
+      index:
+        body: <p>A csoport szerkesztése csak tajgjainak számára elérhető.<br/> Ha tagja szeretne lenni a csoportnak, kérjük küldjön egy üzenetet a tagoknak.</p>
+        title: Munkacsoport
+      workgroup:
+        edit: Csoport szerkesztése
+        show_tasks: Mutasd az összes feladatot
+  group_order_articles:
+    form:
+      amount_change_for: 
+      result_hint: 
+  group_orders:
+    archive:
+      desc: 
+      open_orders: 
+      title: 
+      title_closed: 
+      title_open: 
+    create:
+      error_general: 
+      error_stale: 
+      notice: 
+    errors:
+      closed: 
+      no_member: 
+      notfound: 
+    form:
+      action_save: 
+      new_funds: 
+      price: 
+      reset_article_search: 
+      search_article: 
+      sum_amount: 
+      title: 
+      total_sum_amount: 
+      total_tolerance: 
+      units: 
+      units_full: 
+      units_total: 
+    index:
+      closed_orders:
+        more: 
+        title: 
+      finished_orders:
+        title: 
+        total_sum: 
+      funds:
+        finished_orders: 
+        open_orders: 
+        title: 
+      title: 
+    messages:
+      not_enough_apples: 
+    order:
+      title: 
+    show:
+      articles:
+        edit_order: 
+        not_ordered_msg: 
+        order_closed_msg: 
+        order_nopen_title: 
+        order_not_open: 
+        order_now: 
+        order_open: 
+        ordered: 
+        ordered_title: 
+        show_hide: 
+        show_note: 
+        title: 
+        unit_price: 
+      comment: 
+      comments:
+        title: 
+      not_ordered: 
+      sum: 
+      title: 
+    switch_order:
+      remaining: 
+      title: 
+    update:
+      error_general: 
+      error_stale: 
+      notice: 
+  helpers:
+    application:
+      edit_user: Felhasználó szerkesztése
+      role_admin: Admin
+      role_article_meta: Cikkek
+      role_finance: Pénzügyek
+      role_orders: Rendelések
+      role_suppliers: Szállítók
+      show_google_maps: Mutasd  a Google térképén
+      sort_by: Rendezés %{text} szerint
+      write_message: Üzenet küldése
+    deliveries:
+      new_invoice: Új számla
+      show_invoice: Számla mutatása
+    orders:
+      old_price: 
+      option_choose: Válasszon szállítót/raktárt
+      option_stock: Raktár
+      order_pdf: PDF készítése
+    submit:
+      invite:
+        create: Meghívó küldése
+      message:
+        create: Küldés
+    tasks:
+      required_users: '%{count} tag még szükséges!'
+      task_title: 
+  home:
+    apple_bar:
+      desc: 
+      more_info: További információ
+      points: Ön jelenlegi apple pontjai:%{points}
+      warning: Figyelmeztetés, ha önnek kevesebb mint %{threshold} apple pontja van, a rendelés nem engedélyezett!
+    changes_saved: Változtatások elmentve.
+    index:
+      due_date_format: '%A %d %B'
+      messages:
+        title: 
+        view_all: 
+      my_ordergroup:
+        funds: 
+        last_update: 
+        title: 
+        transactions:
+          title: 
+          view: 
+      ordergroup:
+        title: 
+      tasks_move:
+        action: 
+        desc: 
+        title: 
+      tasks_open:
+        action: 
+        desc: 
+        title: 
+      title: Főoldal
+      your_tasks: Feladati
+    no_ordergroups: Sajnos ön nem tagja egyik rendelési csoportnak sem.
+    ordergroup:
+      account_summary: 
+      invite: Új személy meghívása
+      search: Keresés ...
+      title: Rendelési csoportjaim
+    ordergroup_cancelled: Ön törölte a tagságát ebben a csoportban %{group}.
+    profile:
+      groups:
+        cancel: 
+        cancel_confirm: 
+        invite: 
+        title: 
+      title: Profilom
+      user:
+        since: 
+        title: 
+    start_nav:
+      admin: Adminisztráció
+      finances:
+        accounts: 
+        settle: 
+        title: 
+      foodcoop: Foodcoop
+      members: Felhasználók
+      new_ordergroup: Új rendelési csoport
+      new_user: Új felhasználó
+      orders:
+        end: 
+        overview: 
+        title: 
+      products:
+        edit: 
+        edit_stock: 
+        edit_suppliers: 
+        title: 
+      tasks: 
+      title: 
+      write_message: 
+  invites:
+    errors:
+      already_member: 
+    modal_form:
+      body: 
+      title: 
+    new:
+      action: 
+      body: 
+    success: 
+  js:
+    ordering:
+      confirm_change: 
+  layouts:
+    email:
+      footer: |-
+        Foodsoft: %{foodsoft}
+        Foodcoop-Kezdőlap: %{foodcoop}
+        Segítség: %{help}
+    foodsoft: Foodsoft
+    header:
+      feedback:
+        desc: Hibát talált? Javaslat? Ötlet? Vélemény?
+        title: Visszajelzés
+      footer: Foodsoft, nyilt forráskódú program non-profit bevásárló közösségek kezelésére.
+      help: Segítség
+      logout: Kilépés
+      ordergroup: Rendelésicsoporortjaim
+      profile: Profil szerkesztése
+    logo: <span>food</span>soft
+  lib:
+    order_pdf:
+      page: 
+  login:
+    accept_invitation:
+      body: 
+      submit: Foodsoft fiók létrehozása
+      title: 
+    controller:
+      accept_invitation:
+        notice: Gratulálunk, az Ön fiókja létrejött. Most már be tud jelentkezni.
+      error_group_invalid: A csoport ahová meg lett hívva már nem létezik.
+      error_invite_invalid: A meghívó időtartama lejárt.
+      error_token_invalid: Érvénytelen vagy lejárt kód. Kérem próbálja újra.
+      reset_password:
+        notice: Ha az Ön e-mailcíme regisztrálva van, hamarosan kap üzenetben egy linket amellyel helyreállíthatja a jelszavát.
+      update_password:
+        notice: A jelszó frissítve lett. Most már be tud jelentkezni.
+    forgot_password:
+      body: <p>Nem gond, megadhat új jelszót.</p> <p>Kérem adja meg az itt regisztrált e-mailcímét és kapni fog egy üzenetet további információkkal.</p>
+      submit: Új jelszó kérése
+      title: Elfelejtette jelszavát?
+    new_password:
+      body: <p>Új jelszó megadása <b>%{user}</b></p>
+      submit: Jelszó mentése
+      title: Új jelszó
+  mailer:
+    dateformat: 
+    feedback:
+      header: 
+      subject: 
+    foodsoft_message:
+      footer: 
+    invite:
+      subject: 
+      text: 
+    negative_balance:
+      subject: 
+      text: 
+    not_enough_users_assigned:
+      subject: 
+      text: 
+    order_result:
+      subject: 
+      text0: 
+      text1: 
+    reset_password:
+      subject: 
+      text: 
+    upcoming_tasks:
+      nextweek: 
+      subject: 
+      text0: 
+      text1: 
+  messages:
+    create:
+      notice: Üzenet mentve és küldés...
+    index:
+      new: 
+      title: 
+    messages:
+      reply: 
+    model:
+      reply_header: 
+      reply_indent: 
+      reply_subject: 
+    new:
+      list:
+        desc: 
+        mail: 
+        subscribe: 
+        subscribe_msg: 
+        wiki: 
+      no_user_found: 
+      search: 
+      search_user: 
+      title: 
+    show:
+      all_messages: 
+      from: 
+      reply: 
+      sent_on: 
+      subject: 
+      title: 
+  model:
+    delivery:
+      each_stock_article_must_be_unique: 
+    membership:
+      no_admin_delete: 
+    order_article:
+      error_price: 
+    page:
+      redirect: 
+    user:
+      no_ordergroup: 
+  navigation:
+    admin:
+      home: Áttekintés
+      ordergroups: Rendelési csoportok
+      title: Adminisztráció
+      users: Tagok
+      workgroups: Munka csoportok
+    articles:
+      categories: Kategóriák
+      stock: Készlet
+      suppliers: Szállítok/Árúcikkek
+      title: Cikkek
+    dashboard: Kezdőlap
+    finances:
+      accounts: Felhasználók kezelése
+      balancing: Lezárt rendelések
+      home: Áttekintés
+      invoices: Számlák
+      title: 
+    foodcoop: Foodcoop
+    members: Tagok
+    messages: Üzenetek
+    ordergroups: Rendelési csoportok
+    orders:
+      archive: 
+      manage: 
+      ordering: 
+      title: 
+    tasks: Feladatok
+    wiki:
+      all_pages: 
+      home: 
+      title: 
+    workgroups: Munka csoportok
+  order_articles:
+    edit:
+      stock_alert: 
+      title: 
+    new:
+      title: 
+  ordergroups:
+    edit:
+      title: 
+    index:
+      title: 
+    model:
+      error_single_group: 
+      invalid_balance: 
+  orders:
+    articles:
+      article_count: 'Megrendelt cikkek:'
+      prices: Netto/Bruttó ár
+      prices_sum: Össz.(nettó/bruttó ár)
+      units_full: 
+      units_ordered: 
+    create:
+      notice: Rendelés létrehozva.
+    edit:
+      title: Rendelés szerkesztése
+    edit_amount:
+      field_locked_title: 
+      field_unlocked_title: 
+    fax:
+      amount: Mennyiség
+      articles: Cikkek
+      delivery_day: Szállítási nap
+      heading: Rendelés  %{name} -tól
+      name: Név
+      number: Szám
+      to_address: Szállítási cím
+    finish:
+      notice: Rendelés lezárva.
+    form:
+      ignore_warnings: Figyelmeztetés figyelmenkívülhagyása
+      prices: 
+      select_all: 
+      stockit: 
+      title: 
+    index:
+      action_end: 
+      action_receive: 
+      confirm_delete: 
+      confirm_end: 
+      new_order: 
+      no_open_or_finished_orders: 
+      orders_finished: 
+      orders_open: 
+      orders_settled: 
+      title: 
+    model:
+      error_closed: 
+      error_nosel: 
+      error_starts_before_ends: 
+      notice_close: 
+      stock: 
+      warning_ordered: 
+      warning_ordered_stock: 
+    new:
+      title: 
+    receive:
+      add_article: 
+      consider_member_tolerance: 
+      notice: 
+      notice_none: 
+      rest_to_stock: 
+      submit: 
+      surplus_options: 
+      title: 
+    show:
+      action_end: 
+      amounts: 
+      articles: 
+      articles_ordered: 
+      comments:
+        title: 
+      comments_link: 
+      confirm_delete: 
+      confirm_end: 
+      description1: 
+      description2: 
+      download:
+        article_pdf: 
+        download_file: 
+        fax_pdf: 
+        fax_txt: 
+        group_pdf: 
+        matrix_pdf: 
+        title: 
+      group_orders: 
+      search_placeholder:
+        articles: 
+        default: 
+        groups: 
+      search_reset: 
+      sort_article: 
+      sort_group: 
+      title: 
+      warn_not_closed: 
+    state:
+      closed: 
+      finished: 
+      open: 
+    update:
+      notice: 
+    update_order_amounts:
+      msg1: 
+      msg2: 
+      msg3: 
+      msg4: 
+  pages:
+    all:
+      new_page: 
+      recent_changes: 
+      search:
+        action: 
+        placeholder: 
+      site_map: 
+      title: 
+      title_list: 
+    body:
+      title_toc: 
+      wikicloth_exception: 
+    create:
+      notice: 
+    cshow:
+      error_noexist: 
+      redirect_notice: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+    error_stale_object: 
+    form:
+      help:
+        bold: 
+        external_link_ex: 
+        external_links: 
+        heading: 
+        headings: 
+        italic: 
+        list_item_1: 
+        list_item_2: 
+        noformat: 
+        ordered_list: 
+        section_block: 
+        section_character: 
+        section_link: 
+        section_table: 
+        see_tables: 
+        tables_link: 
+        text: 
+        title: 
+        unordered_list: 
+        wiki_link_ex: 
+        wiki_links: 
+      preview: 
+    last_updated: 
+    new:
+      title: 
+    page_list_item:
+      date_format: 
+    show:
+      date_format: 
+      delete: 
+      delete_confirm: 
+      edit: 
+      last_updated: 
+      subpages: 
+      title_versions: 
+      versions: 
+    title: 
+    update:
+      notice: 
+    version:
+      author: 
+      date_format: 
+      revert: 
+      title: 
+      title_version: 
+      view_current: 
+  sessions:
+    logged_in: 
+    logged_out: 
+    login_invalid: 
+    new:
+      forgot_password: 
+      login: 
+      nojs: 
+      noscript: 
+      title: 
+  shared:
+    articles:
+      ordered: 
+      ordered_desc: 
+      received: 
+      received_desc: 
+    articles_by:
+      price: 
+      price_sum: 
+    group:
+      access: 
+      activated: 
+      apple_limit: 
+      deactivated: 
+      no_weekly_job: 
+      weekly_job: 
+    group_form_fields:
+      search: 
+      search_user: 
+      title: 
+      user_not_found: 
+    open_orders:
+      no_open_orders: 
+      not_enough_apples: 
+      title: 
+      total_sum: 
+      who_ordered: 
+    workgroup_members:
+      title: 
+  simple_form:
+    error_notification:
+      default_message: 
+    hints:
+      article:
+        unit: 
+      message:
+        private: 
+      order_article:
+        units_to_order: 
+        update_global_price: 
+      stock_article:
+        copy:
+          name: 
+        edit_stock_article:
+          price: 
+      supplier:
+        min_order_quantity: 
+      task:
+        duration: 
+        required_users: 
+      tax: 
+    labels:
+      settings:
+        messages:
+          send_as_email: 
+        notify:
+          negative_balance: 
+          order_finished: 
+          upcoming_tasks: 
+        profile:
+          email_is_public: 
+          language: 
+          name_is_public: 
+          phone_is_public: 
+        settings_group:
+          messages: 
+          privacy: 
+    'no': 
+    options:
+      settings:
+        profile:
+          language:
+            de: 
+            en: 
+            fr: 
+            nl: 
+    required:
+      mark: 
+      text: 
+    'yes': 
+  stock_takings:
+    create:
+      notice: 
+    edit:
+      title: 
+    index:
+      new_inventory: 
+      title: 
+    new:
+      amount: 
+      create: 
+      stock_articles: 
+      temp_inventory: 
+      text_deviations: 
+      text_need_articles: 
+      title: 
+    show:
+      amount: 
+      article: 
+      confirm_delete: 
+      date: 
+      note: 
+      overview: 
+      supplier: 
+      title: 
+      unit: 
+    stock_takings:
+      confirm_delete: 
+      date: 
+      note: 
+    update:
+      notice: 
+  stockit:
+    check:
+      not_empty: 
+    copy:
+      title: 
+    create:
+      notice: 
+    derive:
+      title: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+    form:
+      copy_stock_article: 
+      price_hint: 
+    index:
+      confirm_delete: 
+      new_delivery: 
+      new_stock_article: 
+      new_stock_taking: 
+      order_online: 
+      show_stock_takings: 
+      stock_count: 
+      stock_worth: 
+      title: 
+      toggle_unavailable: 
+      view_options: 
+    new:
+      search_text: 
+      title: 
+    show:
+      change_quantity: 
+      datetime: 
+      new_quantity: 
+      reason: 
+      stock_changes: 
+    stock_article:
+      confirm_delete: 
+    update:
+      notice: 
+  suppliers:
+    create:
+      notice: Szállító létrehozva
+    destroy:
+      notice: Szállító törölve
+    edit:
+      title: Szállító szerkesztése
+    index:
+      action_import: Szállító importálása külső adatbázisból
+      action_new: Új szállító létrehozása
+      articles: Árúcikkek (%{count})
+      confirm_del: Tényeg törölni akarja a szállítót %{name}?
+      deliveries: Szállítások (%{count})
+      stock: Raktáron (%{count})
+      title: Szállítók
+    new:
+      title: Új szállító
+    shared_supplier_note: Szállító a külső adatbázissal összekötve.
+    shared_suppliers:
+      body: <p>Itt láthatja a szállítókat a külső adatbázisból.</p> <p>Külső szállítókat feliratkozással importálhat (lásd lejebb)</p> <p>Az új szállító kapcsolatban lesz a külső adatbázissal.</p>
+      subscribe: Feliratkozás
+      subscribe_again: Feliratkozás megint
+      supplier: Szállító
+      title: Külső listák
+    show:
+      confirm_delete: Biztos?
+      last_deliveries: Utolsó szállítások
+      new_delivery: Új szállítás létrehozása
+      show_deliveries: Mutasd az összes szállítást
+    update:
+      notice: Szállító frissítve
+  tasks:
+    accept:
+      notice: 
+    archive:
+      title: 
+    create:
+      notice: 
+    destroy:
+      notice: 
+    edit:
+      title: 
+      warning_periodic: 
+    error_not_found: 
+    form:
+      search:
+        hint: 
+        noresult: 
+        placeholder: 
+      submit:
+        periodic: 
+    index:
+      show_group_tasks: 
+      title: 
+      title_non_group: 
+    list:
+      accept_task: 
+      done: 
+      done_q: 
+      mark_done: 
+      reject_task: 
+      who: 
+      who_hint: 
+    nav:
+      all_tasks: 
+      archive: 
+      group_tasks: 
+      my_tasks: 
+      new_task: 
+      pages: 
+    new:
+      title: 
+    repeated: 
+    set_done:
+      notice: 
+    show:
+      accept_task: 
+      confirm_delete_group: 
+      confirm_delete_single: 
+      delete_group: 
+      hours: 
+      mark_done: 
+      reject_task: 
+      title: 
+    update:
+      notice: 
+      notice_converted: 
+    user:
+      more: 
+      tasks_link: 
+      title: 
+      title_accepted: 
+      title_open: 
+    workgroup:
+      title: 
+      title_all: 
+  ui:
+    actions: Akciók
+    close: 
+    delete: 
+    edit: 
+    marks:
+      close: 
+      success: 
+    or_cancel: 
+    please_wait: 
+    save: 
+    show: 
+  views:
+    pagination:
+      first: '&laquo;'
+      last: '&raquo;'
+      next: '&rsaquo;'
+      previous: '&lsaquo;'
+      truncate: '...'
+  workgroups:
+    edit:
+      title: Munkacsoport szerkesztése
+    error_last_admin_group: Az utolsó csoport admin jogokkal nem szabad törölni
+    error_last_admin_role: Az utolsó csoport admin szerepet tölt be, amit nem lehet visszavonni
+    index:
+      title: Munkacsoportok
+    update:
+      notice: Munkacsoport frissítve

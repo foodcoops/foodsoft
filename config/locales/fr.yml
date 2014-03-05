@@ -861,11 +861,10 @@ fr:
       confirm_change: 
   layouts:
     email:
-      footer: |-
-        --
-        Foodsoft: %{foodsoft}
-        Accueil de la Boufcoop: %{foodcoop}
-        Aide: %{help}
+      footer_1_separator: '--'
+      footer_2_foodsoft: 'Foodsoft: %{url}'
+      footer_3_homepage: 'Boufcoop: %{url}'
+      footer_4_help: 'Aide: %{url}'
     foodsoft: Foodsoft
     header:
       feedback:
