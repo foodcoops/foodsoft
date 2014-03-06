@@ -1180,6 +1180,7 @@ en:
       download:
         article_pdf: Article PDF
         download_file: Download file
+        fax_csv: Fax CSV
         fax_pdf: Fax PDF
         fax_txt: Fax text
         group_pdf: Group PDF

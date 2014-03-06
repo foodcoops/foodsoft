@@ -50,8 +50,11 @@ class OrdersController < ApplicationController
               end
         send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf'
       end
+      format.csv do
+        send_data OrderCsv.new(@order).to_csv, filename: @order.name+'.csv', type: 'text/csv'
+      end
       format.text do
-        send_data text_fax_template, filename: @order.name+'.txt', type: 'text/plain'
+        send_data OrderTxt.new(@order).to_txt, filename: @order.name+'.txt', type: 'text/plain'
       end
     end
   end
@@ -130,31 +133,6 @@ class OrdersController < ApplicationController
 
   protected
   
-  # Renders the fax-text-file
-  # e.g. for easier use with online-fax-software, which don't accept pdf-files
-  # TODO move to text template
-  def text_fax_template
-    supplier = @order.supplier
-    contact = FoodsoftConfig[:contact].symbolize_keys
-    text = I18n.t('orders.fax.heading', :name => FoodsoftConfig[:name])
-    text += "\n#{Supplier.human_attribute_name(:customer_number)}: #{supplier.customer_number}" unless supplier.customer_number.blank?
-    text += "\n" + I18n.t('orders.fax.delivery_day')
-    text += "\n\n#{supplier.name}\n#{supplier.address}\n#{Supplier.human_attribute_name(:fax)}: #{supplier.fax}\n\n"
-    text += "****** " + I18n.t('orders.fax.to_address') + "\n\n"
-    text += "#{FoodsoftConfig[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
-    text += "****** " + I18n.t('orders.fax.articles') + "\n\n"
-    text += I18n.t('orders.fax.number') + "   " + I18n.t('orders.fax.amount') + "   " + I18n.t('orders.fax.name') + "\n"
-    # now display all ordered articles
-    @order.order_articles.ordered.includes([:article, :article_price]).each do |oa|
-      number = oa.article.order_number
-      (8 - number.size).times { number += " " }
-      quantity = oa.units_to_order.to_i.to_s
-      quantity = " " + quantity if quantity.size < 2
-      text += "#{number}   #{quantity}    #{oa.article.name}\n"
-    end
-    text
-  end
-
   def update_order_amounts
     return if not params[:order_articles]
     # where to leave remainder during redistribution
