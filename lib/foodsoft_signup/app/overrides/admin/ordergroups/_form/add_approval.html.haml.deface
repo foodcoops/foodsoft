@@ -1,0 +1,4 @@
+/ insert_after 'erb[loud]:contains("ignore_apple_restriction")'
+.control-group
+  = f.input :approved, :label => false, :inline_label => true
+

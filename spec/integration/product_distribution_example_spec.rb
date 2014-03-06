@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 
 describe 'product distribution', :type => :feature do
   let(:admin) { create :admin }
-  let(:user_a) { create :user, groups: [create(:ordergroup)] }
-  let(:user_b) { create :user, groups: [create(:ordergroup)] }
+  let(:user_a) { create :user_and_ordergroup }
+  let(:user_b) { create :user_and_ordergroup }
   let(:supplier) { create :supplier }
   let(:article) { create :article, supplier: supplier, unit_quantity: 5 }
   let(:order) { create(:order, supplier: supplier, article_ids: [article.id]) }
