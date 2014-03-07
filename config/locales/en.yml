@@ -748,10 +748,11 @@ en:
       role_suppliers: Suppliers
       show_google_maps: Show it on Google maps
       sort_by: Sort by %{text}
-      write_message: Write message
     deliveries:
       new_invoice: New invoice
       show_invoice: Show invoice
+    messages:
+      write_message: Write message
     orders:
       old_price: Old price
       option_choose: Choose supplier/stock
@@ -896,11 +897,6 @@ en:
     feedback:
       header: '%{user} wrote at %{date}:'
       subject: Feedback from %{email}
-    foodsoft_message:
-      footer: |
-        Reply: %{reply_url}
-        See message online: %{msg_url}
-        Messaging options: %{profile_url}
     invite:
       subject: Invitation to the Foodcoop
       text: |
@@ -1007,6 +1003,12 @@ en:
       sent_on: 'Sent:'
       subject: 'Subject:'
       title: Show message
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Reply: %{reply_url}
+        See message online: %{msg_url}
+        Messaging options: %{profile_url}
   model:
     delivery:
       each_stock_article_must_be_unique: Each stock article must not be listed more than once.

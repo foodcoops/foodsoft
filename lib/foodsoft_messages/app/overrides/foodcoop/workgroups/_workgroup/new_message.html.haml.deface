@@ -1,0 +1,2 @@
+/ insert_after 'erb:contains("tasks")'
+= link_to_new_message message_params: {group_id: workgroup.id}

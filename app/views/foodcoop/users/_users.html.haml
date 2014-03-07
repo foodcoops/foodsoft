@@ -21,5 +21,4 @@
         %td= user.phone if @current_user.role_admin? || user.settings.profile["phone_is_public"]
         %td= user.ordergroup_name
         %td= user.workgroups.collect(&:name).join(', ')
-        %td= link_to_new_message(message_params: {mail_to: user.id})
 

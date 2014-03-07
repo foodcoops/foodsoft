@@ -1,0 +1,77 @@
+en:
+  activerecord:
+    attributes:
+      message:
+        body: Body
+        group_id: Group
+        private: Private
+        recipient_tokens: Recipients
+        sent_to_all: Send to all members
+        subject: Subject
+    models:
+      message: Message
+  admin:
+    ordergroups:
+      show:
+        send_message: Send message
+    users:
+      show:
+        send_message: Send message
+  helpers:
+    messages:
+      write_message: Write message
+    submit:
+      message:
+        create: send message
+  home:
+    index:
+      messages:
+        title: Newest Messages
+        view_all: See all messages
+    start_nav:
+      write_message: Write message
+  messages:
+    create:
+      notice: Message is saved and will be sent.
+    index:
+      new: New message
+      title: Messages
+    messages:
+      reply: Reply
+    model:
+      reply_header: ! '%{user} wrote on %{when}:'
+      reply_indent: ! '> %{line}'
+      reply_subject: ! 'Re: %{subject}'
+    new:
+      list:
+        desc: ! 'Please send messages to all using the mailing-list: %{list}'
+        mail: for example with an email to %{email}.
+        subscribe: You can find more about the mailing-list at %{link}.
+        subscribe_msg: You may have to subscribe to the mailing-list first.
+        wiki: Wiki (page Mailing-List)
+      no_user_found: No user found
+      search: Search ...
+      search_user: Search user
+      title: New message
+    show:
+      all_messages: All messages
+      from: ! 'From:'
+      reply: Reply
+      sent_on: ! 'Sent:'
+      subject: ! 'Subject:'
+      title: Show message
+  messages_mailer:
+    foodsoft_message:
+      footer: ! 'Reply: %{reply_url}
+
+        See message online: %{msg_url}
+
+        Messaging options: %{profile_url}
+
+'
+  navigation:
+    messages: Messages
+  simple_form:
+    hints:
+      message:
+        private: Message doesn’t show in Foodsoft mail inbox
