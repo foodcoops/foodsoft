@@ -17,7 +17,6 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :members, I18n.t('navigation.members'), foodcoop_users_path, id: nil
       subnav.item :workgroups, I18n.t('navigation.workgroups'), foodcoop_workgroups_path, id: nil
       subnav.item :ordergroups, I18n.t('navigation.ordergroups'), foodcoop_ordergroups_path, id: nil
-      subnav.item :messages, I18n.t('navigation.messages'), messages_path, id: nil
       subnav.item :tasks, I18n.t('navigation.tasks'), tasks_path, id: nil
     end
 

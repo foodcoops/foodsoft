@@ -2,6 +2,5 @@
   %h3= workgroup.name
   = render :partial => 'shared/group', :locals => { :group => workgroup }
   = link_to t('.show_tasks'), workgroup_tasks_path(workgroup_id: workgroup), class: 'btn'
-  = link_to_new_message message_params: {group_id: workgroup.id}
   - if workgroup.member?(current_user)
     = link_to t('.edit'), edit_foodcoop_workgroup_path(workgroup), class: 'btn'
