@@ -15,5 +15,4 @@
         %td= ordergroup.name
         %td=h ordergroup.users.collect { |u| show_user(u) }.join(", ")
         %td= format_date ordergroup.last_order.try(:starts)
-        %td= link_to_new_message(message_params: {group_id: ordergroup.id})
 

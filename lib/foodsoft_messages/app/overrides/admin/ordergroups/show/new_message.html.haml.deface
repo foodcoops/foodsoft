@@ -1,0 +1,2 @@
+/ insert_after 'erb:contains("delete")'
+= link_to t('.send_message'), new_message_path(:message => {:group_id => @ordergroup.id}), class: 'btn'

@@ -1,0 +1,2 @@
+/ insert_bottom 'tbody tr'
+%td= link_to_new_message(message_params: {mail_to: user.id})

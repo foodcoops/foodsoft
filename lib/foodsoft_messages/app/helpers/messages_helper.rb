@@ -17,4 +17,5 @@ module MessagesHelper
     link_to(link_text.html_safe, new_message_path(message: messages_params), class: 'btn',
             title: I18n.t('helpers.submit.message.create'))
   end
+
 end
