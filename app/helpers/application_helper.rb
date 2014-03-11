@@ -199,14 +199,9 @@ module ApplicationHelper
     end
   end
 
-  # render user presentation linking to default action (write message)
+  # render user presentation linking to default action (plugins can override this)
   def show_user_link(user=@current_user)
-    if user.nil?
-      show_user user
-    else
-      link_to show_user(user), new_message_path('message[mail_to]' => user.id),
-                               :title => I18n.t('helpers.application.write_message')
-    end
+    show_user user
   end
   
 end

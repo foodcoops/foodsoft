@@ -1,0 +1,2 @@
+/ insert_after 'erb:contains("tasks")'
+%li= link_to t('.write_message'), new_message_path
