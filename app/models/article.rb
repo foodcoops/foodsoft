@@ -117,6 +117,7 @@ class Article < ActiveRecord::Base
   # returns nil if units are eqal
   def convert_units
     if unit != shared_article.unit
+      # legacy, used by foodcoops in Germany
       if shared_article.unit == "KI" and unit == "ST" # 'KI' means a box, with a different amount of items in it
         # try to match the size out of its name, e.g. "banana 10-12 St" => 10
         new_unit_quantity = /[0-9\-\s]+(St)/.match(shared_article.name).to_s.to_i
@@ -126,13 +127,13 @@ class Article < ActiveRecord::Base
         else
           false
         end
-      else # get factors for fc and supplier
-        fc_unit_factor = FoodsoftConfig[:units][self.unit]
-        supplier_unit_factor = FoodsoftConfig[:units][self.shared_article.unit]
-        if fc_unit_factor and supplier_unit_factor
-          convertion_factor = fc_unit_factor / supplier_unit_factor
-          new_price = BigDecimal((convertion_factor * shared_article.price).to_s).round(2)
-          new_unit_quantity = ( 1 / convertion_factor) * shared_article.unit_quantity
+      else # use ruby-units to convert
+        fc_unit = (::Unit.new(unit) rescue nil)
+        supplier_unit = (::Unit.new(shared_article.unit) rescue nil)
+        if fc_unit and supplier_unit and fc_unit =~ supplier_unit
+          conversion_factor = (fc_unit.convert_to(supplier_unit.units) / supplier_unit).scalar
+          new_price = shared_article.price * conversion_factor
+          new_unit_quantity = shared_article.unit_quantity / conversion_factor
           [new_price, new_unit_quantity]
         else
           false

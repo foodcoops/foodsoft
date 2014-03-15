@@ -91,22 +91,6 @@ default: &defaults
     encoding: utf8
     socket: /opt/lampp/var/mysql/mysql.sock
 
-  # auto-units-conversion
-  # this is used for automatic article-synchronization to handle different units
-  # e.g. when foodcoop-unit should be 500g and supplier-unit is 1kg
-  units:
-    KG: 1
-    1kg: 1
-    500g: 0.5
-    400g: 0.4
-    300g: 0.3
-    250g: 0.25
-    200g: 0.2
-    150g: 0.15
-    125g: 0.125
-    100g: 0.1
-    50g: 0.05
-
 development:
   <<: *defaults
 
