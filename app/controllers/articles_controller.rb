@@ -208,9 +208,15 @@ class ArticlesController < ApplicationController
   end
   
   # fills a form whith values of the selected shared_article
+  # when the direct parameter is set and the article is valid, it is imported directly
   def import
     @article = SharedArticle.find(params[:shared_article_id]).build_new_article(@supplier)
-    render :action => 'new', :layout => false
+    @article.article_category_id = params[:article_category_id] unless params[:article_category_id].blank?
+    if params[:direct] and not params[:article_category_id].blank? and @article.valid? and @article.save
+      render :action => 'create', :layout => false
+    else
+      render :action => 'new', :layout => false
+    end
   end
   
   # sync all articles with the external database
