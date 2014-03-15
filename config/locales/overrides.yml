@@ -6,12 +6,12 @@ en:
   number:
     currency:
       format:
-        unit: ! '€ '
+        unit: ! "€\u202f"
 nl:
   number:
     currency:
       format:
-        delimiter: ! ' '
-        unit: ! '€ '
+        delimiter: ! "\u202f"
+        unit: ! "€\u202f"
     format:
-      delimiter: ! ' '
+      delimiter: ! "\u202f"

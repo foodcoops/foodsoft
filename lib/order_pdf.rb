@@ -11,6 +11,7 @@ class OrderPdf < Prawn::Document
     #options[:bottom_margin] ||= 40
     super(options)
     @order = order
+    @options = options
   end
 
   def to_pdf
@@ -28,5 +29,10 @@ class OrderPdf < Prawn::Document
   # Helper method to test pdf via rails console: OrderByGroups.new(order).save_tmp
   def save_tmp
     File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.pdf", 'w') {|f| f.write(to_pdf.force_encoding("UTF-8")) }
+  end
+
+  # XXX avoid underscore instead of unicode whitespace in pdf :/
+  def number_to_currency(number, options={})
+    super(number, options).gsub("\u202f", ' ')
   end
 end
