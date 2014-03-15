@@ -143,7 +143,7 @@ class ApplicationController < ActionController::Base
   end
 
   def items_per_page
-    if params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 100
+    if params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 500
       @per_page = params[:per_page].to_i
     else
       @per_page = 20
