@@ -85,7 +85,8 @@ class Ordergroup < Group
   # The restriction can be deactivated for each ordergroup.
   # Only ordergroups, which have participated in more than 5 orders in total and more than 2 orders in apple time period
   def not_enough_apples?
-    FoodsoftConfig[:stop_ordering_under].present? and
+    FoodsoftConfig[:use_apple_points] and
+        FoodsoftConfig[:stop_ordering_under].present? and
         !ignore_apple_restriction and
         apples < FoodsoftConfig[:stop_ordering_under] and
         group_orders.count > 5 and

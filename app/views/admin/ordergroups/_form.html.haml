@@ -5,7 +5,8 @@
     = f.input :contact_person
     = f.input :contact_phone
     = f.input :contact_address
-    = f.input :ignore_apple_restriction, :label => false, :inline_label => true
+    - if FoodsoftConfig[:use_apple_points]
+      = f.input :ignore_apple_restriction, :label => false, :inline_label => true
   .form-actions
     = f.button :submit
     = link_to t('ui.or_cancel'), :back
