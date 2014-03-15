@@ -25,13 +25,14 @@ module Foodsoft
       end
 
       def default_language
-        ::I18n.default_locale
+        FoodsoftConfig[:default_locale] or ::I18n.default_locale
       end
 
       protected
 
       def select_language_according_to_priority
-        language = explicitly_requested_language || session_language || user_settings_language || browser_language
+        language = explicitly_requested_language || session_language || user_settings_language
+        language ||= browser_language unless FoodsoftConfig[:ignore_browser_locale]
         language.to_sym unless language.blank?
       end
 
