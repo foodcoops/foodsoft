@@ -79,6 +79,7 @@ fr:
         starts: Ouverture le
         status: Statut
         supplier: Fournisseu-r-se
+        updated_by: 
       order_article:
         article: Article
         missing_units: Unités manquantes
@@ -347,6 +348,7 @@ fr:
       title_edit: 
       title_new: Ajouter un nouvel article
     import_search_results:
+      action_edit_import: 
       action_import: importer
       already_imported: déjà importé
       not_found: Aucun article n'a été trouvé
@@ -356,8 +358,8 @@ fr:
       ext_db:
         import: Rechercher/Importer
         sync: Synchroniser
-        title: Base de données externe
       import:
+        category: 
         placeholder: Nom...
         restrict_region: Seulement les articles régionaux
         title: Importer cet article
@@ -559,7 +561,6 @@ fr:
         confirm: Veux-tu vraiment terminer la commande?
         end: Fin
         ended: closes
-        last_edited_by: Dernières modifications effectuées par
         name: FournisseusE_r
         no_closed_orders: Aucune commande n'a encore été close.
         state: Statut
@@ -754,10 +755,11 @@ fr:
       role_suppliers: FournisseusEs_rs
       show_google_maps: Afficher la position sur Google maps
       sort_by: Trier par %{text}
-      write_message: Écrire un message
     deliveries:
       new_invoice: Ajouter une nouvelle facture
       show_invoice: Afficher la facture
+    messages:
+      write_message: Écrire un message
     orders:
       old_price: 
       option_choose: Choix d'unE fournisseusE_r
@@ -861,7 +863,7 @@ fr:
       confirm_change: 
   layouts:
     email:
-      footer_1_separator: '--'
+      footer_1_separator: --
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Boufcoop: %{url}'
       footer_4_help: 'Aide: %{url}'
@@ -915,11 +917,6 @@ fr:
     feedback:
       header: 'Le %{date}, %{user} a écrit:'
       subject: Retour de %{email}
-    foodsoft_message:
-      footer: |-
-        Répondre: %{reply_url}
-        Afficher ce message dans ton navigateur: %{msg_url}
-        Préférences des messages: %{profile_url}
     invite:
       subject: Invitation à participer à une Bouffecoop
       text: |-
@@ -1011,6 +1008,12 @@ fr:
       sent_on: 'Envoyé le:'
       subject: 'Sujet:'
       title: Afficher le contenu du message
+  messages_mailer:
+    foodsoft_message:
+      footer: |-
+        Répondre: %{reply_url}
+        Afficher ce message dans ton navigateur: %{msg_url}
+        Préférences des messages: %{profile_url}
   model:
     delivery:
       each_stock_article_must_be_unique: Chaque article à stocker ne peut apparaître qu'une seule fois dans la commande.
@@ -1145,6 +1148,7 @@ fr:
       download:
         article_pdf: Liste des articles en PDF
         download_file: Télécharger
+        fax_csv: 
         fax_pdf: Fax au format PDF
         fax_txt: Fax au format texte
         group_pdf: Liste des cellules en PDF
@@ -1437,6 +1441,7 @@ fr:
     show:
       confirm_delete: Tu es sûrE de ton coup?
       last_deliveries: Dernières livraisons
+      last_orders: 
       new_delivery: Réapprovisionner le stock
       show_deliveries: Afficher tous les réapprovisionnements
     update:

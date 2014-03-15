@@ -79,6 +79,7 @@ nl:
         starts: Start op
         status: Status
         supplier: Leverancier
+        updated_by: Laatst aangepast door
       order_article:
         article: Artikel
         missing_units: Missende eenheden
@@ -347,8 +348,9 @@ nl:
       title_edit: Artikel bewerken
       title_new: Nieuw artikel toevoegen
     import_search_results:
+      action_edit_import: 
       action_import: importeren
-      already_imported: reeds geïmporteerd
+      already_imported: geïmporteerd
       not_found: Geen artikelen gevonden
     index:
       change_supplier: Leverancier wisselen ...
@@ -356,8 +358,8 @@ nl:
       ext_db:
         import: Zoeken/importeren
         sync: Synchroniseren
-        title: Externe database
       import:
+        category: Direct in categorie importeren
         placeholder: Naam
         restrict_region: Alleen uit de regio
         title: Artikel importeren
@@ -556,7 +558,6 @@ nl:
         confirm: Weet je zeker dat de je bestelling wilt afrekenen?
         end: Einde
         ended: gesloten
-        last_edited_by: Laatst aangepast door
         name: Leverancier
         no_closed_orders: Momenteel zijn er geen gesloten bestellingen.
         state: Status
@@ -745,10 +746,11 @@ nl:
       role_suppliers: Leveranciers
       show_google_maps: Op Google maps bekijken
       sort_by: Sorteren op %{text}
-      write_message: Bericht schrijven
     deliveries:
       new_invoice: Nieuwe rekening
       show_invoice: Rekening tonen
+    messages:
+      write_message: Bericht schrijven
     orders:
       old_price: Oude prijs
       option_choose: Leverancier/voorraad kiezen
@@ -849,7 +851,7 @@ nl:
       confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
   layouts:
     email:
-      footer_1_separator: '--'
+      footer_1_separator: --
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
@@ -895,11 +897,6 @@ nl:
     feedback:
       header: '%{user} schreef op %{date}:'
       subject: Feedback van %{email}
-    foodsoft_message:
-      footer: |-
-        Antwoorden: %{reply_url}
-        Bericht online lezen: %{msg_url}
-        Berichtinstellingen: %{profile_url}
     invite:
       subject: Uitnodiging voor de foodcoop
       text: |-
@@ -1001,6 +998,12 @@ nl:
       sent_on: 'Verzonden:'
       subject: 'Onderwerp:'
       title: Bericht lezen
+  messages_mailer:
+    foodsoft_message:
+      footer: |-
+        Antwoorden: %{reply_url}
+        Bericht online lezen: %{msg_url}
+        Berichtinstellingen: %{profile_url}
   model:
     delivery:
       each_stock_article_must_be_unique: In een levering mag ieder voorraadsartikel maar een keer voorkomen.
@@ -1137,6 +1140,7 @@ nl:
       download:
         article_pdf: Artikelen PDF
         download_file: Bestand downloaden
+        fax_csv: Fax CSV
         fax_pdf: Fax PDF
         fax_txt: Fax text
         group_pdf: Huishoudens PDF
@@ -1424,6 +1428,7 @@ nl:
     show:
       confirm_delete: Zeker weten?
       last_deliveries: Laatste leveringen
+      last_orders: Recente bestellingen
       new_delivery: Levering aanmaken
       show_deliveries: Alle leveringen tonen
     update:

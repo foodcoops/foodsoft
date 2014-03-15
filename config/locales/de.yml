@@ -79,6 +79,7 @@ de:
         starts: Läuft vom
         status: Status
         supplier: Lieferant
+        updated_by: 
       order_article:
         article: Artikel
         missing_units: Fehlende Einheiten
@@ -347,6 +348,7 @@ de:
       title_edit: Artikel bearbeiten
       title_new: Neuen Artikel einfügen
     import_search_results:
+      action_edit_import: 
       action_import: importieren
       already_imported: schon importiert
       not_found: Keine Artikel gefunden
@@ -356,8 +358,8 @@ de:
       ext_db:
         import: Suchen/Importieren
         sync: Synchronisieren
-        title: Externe Datenbank
       import:
+        category: 
         placeholder: Name ...
         restrict_region: Nur aus der Region
         title: Artikel importieren
@@ -556,7 +558,6 @@ de:
         confirm: Wirklich die Bestellung abrechnen?
         end: Ende
         ended: beendet
-        last_edited_by: Zuletzt bearbeitet von
         name: Lieferantin
         no_closed_orders: Derzeit gibt es keine beendeten Bestellungen.
         state: Status
@@ -745,10 +746,11 @@ de:
       role_suppliers: Lieferanten
       show_google_maps: Show it on Google maps
       sort_by: Nach %{text} sortieren
-      write_message: Nachricht_schreiben
     deliveries:
       new_invoice: Rechnung anlegen
       show_invoice: Rechnung anzeigen
+    messages:
+      write_message: Nachricht_schreiben
     orders:
       old_price: Alter Preis
       option_choose: Lieferantin/Lager auswählen
@@ -847,7 +849,7 @@ de:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
     email:
-      footer_1_separator: '--'
+      footer_1_separator: --
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
@@ -893,11 +895,6 @@ de:
     feedback:
       header: '%{user} schrieb am %{date}:'
       subject: Feedback von %{email}
-    foodsoft_message:
-      footer: |
-        Antworten: %{reply_url}
-        Nachricht online einsehen: %{msg_url}
-        Nachrichten-Einstellungen: %{profile_url}
     invite:
       subject: Einlading in die Foodcoop
       text: |
@@ -997,6 +994,12 @@ de:
       sent_on: 'Gesendet:'
       subject: 'Betreff:'
       title: Nachricht anzeigen
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Antworten: %{reply_url}
+        Nachricht online einsehen: %{msg_url}
+        Nachrichten-Einstellungen: %{profile_url}
   model:
     delivery:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
@@ -1133,6 +1136,7 @@ de:
       download:
         article_pdf: Artikel PDF
         download_file: Download file
+        fax_csv: 
         fax_pdf: Fax PDF
         fax_txt: Fax Text
         group_pdf: Gruppen PDF
@@ -1420,6 +1424,7 @@ de:
     show:
       confirm_delete: Bist Du sicher?
       last_deliveries: Letzte Lieferungen
+      last_orders: 
       new_delivery: Neue Lieferung anlegen
       show_deliveries: Zeige alle Lieferungen
     update:
