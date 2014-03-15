@@ -8,7 +8,7 @@
         %th= t('.name')
         %th= t('.end')
         %th= t('.state')
-        %th= t('.last_edited_by')
+        %th= heading_helper Order, :updated_by
         %th
     %tbody
       - @orders.each do |order|
