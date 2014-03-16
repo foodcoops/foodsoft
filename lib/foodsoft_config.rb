@@ -26,7 +26,7 @@ class FoodsoftConfig
     # Provides a nice accessor for config values
     # FoodsoftConfig[:name] # => 'FC Test'
     def [](key)
-      config[key]
+      RailsSettings::CachedSettings["foodcoop.#{self.scope}.#{key}"] || config[key]
     end
 
     # Loop through each foodcoop and executes the given block after setup config and database
