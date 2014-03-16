@@ -1,9 +1,37 @@
+# Foodcoop-specific configuration.
+#
+# This is loaded from +config/app_config.yml+, which contains a root
+# key for each environment (plus an optional +defaults+ key). When using
+# the multicoops feature (+multicoops+ is set to +true+ for the environment),
+# each foodcoop has its own key.
+#
+# In addition to the configuration file, values can be overridden in the database
+# using {RailsSettings::CachedSettings} as +foodcoop.<foodcoop_scope>.**+.
+#
 class FoodsoftConfig
-  mattr_accessor :scope, :config
+
+  # @!attribute scope
+  #   Returns the current foodcoop scope for the multicoops feature, otherwise
+  #   the value of the foodcoop configuration key +default_scope+ is used.
+  #   @return [String] The current foodcoop scope.
+  mattr_accessor :scope
+  # @!attribute config
+  #   Returns a {ActiveSupport::HashWithIndifferentAccess Hash} with the current
+  #   scope's configuration from the configuration file. Note that this does not
+  #   include values that were changed in the database.
+  #   @return [ActiveSupport::HashWithIndifferentAccess] Current configuration from configuration file.
+  mattr_accessor :config
+
+  # Configuration file location.
+  #   Taken from environment variable +FOODSOFT_APP_CONFIG+,
+  #   or else +config/app_config.yml+.
   APP_CONFIG_FILE = ENV['FOODSOFT_APP_CONFIG'] || 'config/app_config.yml'
   # Rails.logger isn't ready yet - and we don't want to litter rspec invocation with this msg
   puts "-> Loading app configuration from #{APP_CONFIG_FILE}" unless defined? RSpec
-  APP_CONFIG = YAML.load(File.read(File.expand_path(APP_CONFIG_FILE, Rails.root)))
+  # Loaded configuration
+  APP_CONFIG = ActiveSupport::HashWithIndifferentAccess.new(
+    YAML.load(File.read(File.expand_path(APP_CONFIG_FILE, Rails.root)))
+  )
 
   class << self
 
@@ -16,17 +44,71 @@ class FoodsoftConfig
       set_missing
     end
 
-    # Set config and database connection for specific foodcoop
-    # Only needed in multi coop mode
+    # Set config and database connection for specific foodcoop.
+    #
+    # Only needed in multi coop mode.
+    # @param foodcoop [String, Symbol] Foodcoop to select.
     def select_foodcoop(foodcoop)
       set_config foodcoop
       setup_database
     end
 
-    # Provides a nice accessor for config values
-    # FoodsoftConfig[:name] # => 'FC Test'
+    # Return configuration value for the currently selected foodcoop.
+    #
+    # First tries to read configuration from the database (cached),
+    # then from the configuration files.
+    #
+    #     FoodsoftConfig[:name] # => 'FC Test'
+    #
+    # @param key [String, Symbol]
+    # @return [Object] Value of the key.
     def [](key)
-      RailsSettings::CachedSettings["foodcoop.#{self.scope}.#{key}"] || config[key]
+      if allowed_key?(key)
+        value = RailsSettings::CachedSettings["foodcoop.#{self.scope}.#{key}"]
+        value = config[key] if value.nil?
+        value
+      else
+        config[key]
+      end
+    end
+
+    # Store configuration in the database.
+    #
+    # If value is equal to what's defined in the configuration file, remove key from the database.
+    # @param key [String, Symbol] Key
+    # @param value [Object] Value
+    # @return [Boolean] Whether storing succeeded (fails when key is not allowed to be set in database).
+    def []=(key, value)
+      return false unless allowed_key?(key)
+      # try to figure out type ...
+      value = case value
+                when 'true' then true
+                when 'false' then false
+                when /^[-+0-9]+$/ then value.to_i
+                when /^[-+0-9.]+([eE][-+0-9]+)?$/ then value.to_f
+                when '' then nil
+                else value
+              end
+      # then update database
+      if config[key] == value or (config[key].nil? and value == false)
+        # delete (ok if it was already deleted)
+        begin
+          RailsSettings::CachedSettings.destroy "foodcoop.#{self.scope}.#{key}"
+        rescue RailsSettings::Settings::SettingNotFound
+        end
+      else
+        # or store
+        RailsSettings::CachedSettings["foodcoop.#{self.scope}.#{key}"] = value
+      end
+      return true
+    end
+
+    # @return [Array<String>] Configuration keys that are set (either in +app_config.yml+ or database).
+    def keys
+      keys = RailsSettings::CachedSettings.get_all("foodcoop.#{self.scope}.").try(:keys) || []
+      keys.map! {|k| k.gsub /^foodcoop\.#{self.scope}\./, ''}
+      keys += config.keys
+      keys.map(&:to_s).uniq
     end
 
     # Loop through each foodcoop and executes the given block after setup config and database
@@ -41,11 +123,18 @@ class FoodsoftConfig
       end
     end
 
+    # @return [Boolean] Whether this key may be set in the database
+    def allowed_key?(key)
+      # fast check for keys without nesting
+      return !self.config[:protected].keys.include?(key)
+      # @todo allow to check nested keys as well
+    end
+
     private
 
     def set_config(foodcoop)
       raise "No config for this environment (#{foodcoop}) available!" if APP_CONFIG[foodcoop].nil?
-      self.config = APP_CONFIG[foodcoop].symbolize_keys
+      self.config = APP_CONFIG[foodcoop]
       self.scope = foodcoop
       set_missing
     end
@@ -62,7 +151,18 @@ class FoodsoftConfig
       config.replace({
         use_nick: true,
         use_apple_points: true,
-        foodsoft_url: 'https://github.com/foodcoops/foodsoft'
+        # English is the default language, and this makes it show up as default.
+        default_locale: 'en',
+        foodsoft_url: 'https://github.com/foodcoops/foodsoft',
+        # The following keys cannot be set by foodcoops themselves.
+        protected: {
+          multi_coop_install: nil,
+          default_scope: nil,
+          notification: nil,
+          shared_lists: nil,
+          protected: nil,
+          database: nil
+        }
       }.merge(config))
     end
 

@@ -1,0 +1,4 @@
+/ insert_bottom ':root'
+= config_use_heading form, :use_messages, label: 'Messages' do
+  = config_input form, :mailing_list, as: :string, input_html: {class: 'input-xlarge'}
+  = config_input form, :mailing_list_subscribe, as: :string, input_html: {class: 'input-xlarge'}

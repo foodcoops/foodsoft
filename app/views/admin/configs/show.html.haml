@@ -1,0 +1,13 @@
+- title t('admin.configs.tabs.title'), false
+
+= simple_form_for :config, method: :patch do |f|
+
+  = render 'tabs', url: nil
+
+  .tab-content
+    - for tab in @tabs
+      .tab-pane{class: ('active' if @current_tab==tab), id: "tab-#{tab}"}= render "tab_#{tab}", form: f
+
+  .form-actions
+    = f.submit t('.submit'), class: 'btn btn-primary'
+

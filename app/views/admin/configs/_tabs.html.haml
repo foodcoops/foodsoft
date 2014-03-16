@@ -1,0 +1,11 @@
+%ul.nav.nav-tabs.nav-tabs-with-heading
+  %li.heading
+    %h1= t '.title'
+
+  - for tab in @tabs
+    - url = action_name == 'show' ? nil : admin_config_path(tab: tab)
+    %li{class: ('active' if @current_tab==tab)}= link_to t("config.tabs.#{tab}"), "#{url}#tab-#{tab}", data: ({toggle: 'tab'} unless url)
+
+  -# make this a button to give some indicator that navigation away might lose changes
+  %li.pull-right{class: ('active' if @current_tab=='list')}
+    = link_to t('config.tabs.list'), list_admin_config_path, class: ('btn' unless @current_tab=='list')

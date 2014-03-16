@@ -140,6 +140,23 @@ table {
   text-align: center;
 }
 
+// Navigation with embedded tabs
+.nav-tabs-with-heading {
+  > li {
+    line-height: 40px;
+    margin-top: 16.5px;
+    a { padding-bottom: 9px; }
+  }
+  > li.heading {
+    > h1, > h2, > h3 {
+      font-size: 31.5px;
+      line-height: 40px;
+      margin: 0;
+    }
+    margin: 10px 1em 5px 0;
+  }
+}
+
 // Tasks ..
 .accepted {
   color: #468847;
@@ -321,6 +338,15 @@ table.table {
   }
   .control-group.select {
     margin-bottom: 15px
+  }
+}
+
+// inline (boolean) position after/before heading
+label {
+  h1, h2, h3, h4 {
+    input[type=checkbox] {
+      margin: auto 0.3em auto 0.3em;
+    }
   }
 }
 

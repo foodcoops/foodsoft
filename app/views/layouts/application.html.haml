@@ -10,9 +10,9 @@
         %li= link_to t('.profile'), my_profile_path
         %li= link_to t('.ordergroup'), my_ordergroup_path
         %li= link_to t('.logout'), logout_path
-    %li{class: ('disabled' if FoodsoftConfig.config[:homepage].blank?)}
-      = link_to FoodsoftConfig.config[:name], FoodsoftConfig.config[:homepage]
-    %li= link_to t('.help'), FoodsoftConfig.config[:help_url]
+    %li{class: ('disabled' if FoodsoftConfig[:homepage].blank?)}
+      = link_to FoodsoftConfig[:name], FoodsoftConfig[:homepage]
+    %li= link_to t('.help'), FoodsoftConfig[:help_url]
     %li= link_to t('.feedback.title'), new_feedback_path, title: t('.feedback.desc')
   .clearfix
 

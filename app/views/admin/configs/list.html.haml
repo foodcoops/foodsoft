@@ -1,0 +1,16 @@
+- title t('.title'), false
+
+= render 'tabs'
+
+%table.table
+  %thead
+    %tr
+      %th= t '.key'
+      %th= t '.value'
+  %tbody
+    - @keys.each do |key|
+      %tr
+        %td
+          %tt= key
+        %td{style: if @cfg[key] != @dfl[key] then 'font-weight: bold' end}
+          = show_config_value key, @cfg[key]
