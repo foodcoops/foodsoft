@@ -4,7 +4,6 @@ FoodSoft
 [![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.png?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.png)](https://codeclimate.com/github/foodcoops/foodsoft)
 [![Dependency Status](https://gemnasium.com/foodcoops/foodsoft.png)](https://gemnasium.com/foodcoops/foodsoft)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/foodcoops/foodsoft/trend.png)](https://bitdeli.com/foodcoops "Bitdeli Badge")
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
 
