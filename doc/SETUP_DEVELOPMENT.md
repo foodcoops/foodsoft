@@ -6,8 +6,8 @@ foodsoft project from the git repository. Now you are only a few steps away
 from trying it out and then jumping into development.
 
 **System requirements**:
-[RVM](https://rvm.io/rvm/install),
-[Ruby 1.9.3](https://www.ruby-lang.org/en/downloads/) and
+[RVM](https://rvm.io/rvm/install) (recommended),
+[Ruby 2.0](https://www.ruby-lang.org/en/downloads/) and
 [Bundler](http://bundler.io/).
 
 Getting started
@@ -21,12 +21,15 @@ Getting started
    unfinished parts. If you want to be safe, choose the last release:
    `git checkout $(git tag -l | grep ^v | sort -rn | head -n1)`
 
-1. Install RVM and Ruby 1.9.3 (if you have not done so before):
+1. Install RVM and Ruby 2.0 (if you have not done so before):
    ```
    \curl -L https://get.rvm.io | bash
    source ~/.rvm/scripts/rvm
-   rvm install 1.9.3
+   rvm install 2.0
    ```
+
+    We try to keep foodsoft compatible with Ruby 1.9.3 as well as any later versions,
+    so if you have those and don't want to use RVM, that might actually work.
 
 2. Install Ruby dependencies:
    ```
@@ -147,4 +150,3 @@ explained here.
    ```
    http://localhost:1080
    ```
-
