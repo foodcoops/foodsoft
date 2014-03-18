@@ -22,15 +22,16 @@ describe 'receiving an order', :type => :feature do
 
   # reload all group_order_articles
   def reload_articles
-    [goa1, goa2].map(&:reload)
+    goa1.reload unless goa1.destroyed?
+    goa2.reload unless goa2.destroyed?
     oa.reload
   end
 
   def check_quantities(units, q1, q2)
     reload_articles
     expect(oa.units).to eq units
-    expect(goa1.result).to be_within(1e-3).of q1
-    expect(goa2.result).to be_within(1e-3).of q2
+    expect(goa1.destroyed? ? 0 : goa1.result).to be_within(1e-3).of q1
+    expect(goa2.destroyed? ? 0 : goa2.result).to be_within(1e-3).of q2
   end
 
 
