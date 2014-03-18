@@ -9,7 +9,6 @@ describe GroupOrderArticle do
   it 'has zero quantity by default'    do expect(goa.quantity).to eq(0) end
   it 'has zero tolerance by default'   do expect(goa.tolerance).to eq(0) end
   it 'has zero result by default'      do expect(goa.result).to eq(0) end
-  it 'is not ordered by default'       do expect(GroupOrderArticle.ordered.where(:id => goa.id).exists?).to be_false end
   it 'has zero total price by default' do expect(goa.total_price).to eq(0) end
 
   describe do
@@ -39,8 +38,7 @@ describe GroupOrderArticle do
     it 'can unorder a product' do
       goa.update_quantities(rand(1..99), rand(0..99))
       goa.update_quantities(0, 0)
-      expect(goa.quantity).to eq(0)
-      expect(goa.tolerance).to eq(0)
+      expect(GroupOrderArticle.exists?(goa.id)).to be_false
     end
   end
 
