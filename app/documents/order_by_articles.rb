@@ -25,8 +25,8 @@ class OrderByArticles < OrderPdf
       rows.unshift I18n.t('documents.order_by_articles.rows') # table header
 
       text "#{order_article.article.name} (#{order_article.article.unit} | #{order_article.price.unit_quantity.to_s} | #{number_with_precision(order_article.price.fc_price, precision: 2)})",
-           style: :bold, size: 10
-      table rows, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+           style: :bold, size: fontsize(10)
+      table rows, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
         table.column(0).width = 200
         table.columns(1..3).align = :right
         table.column(2).font_style = :bold
@@ -36,7 +36,8 @@ class OrderByArticles < OrderPdf
         # dim rows which were ordered but not received
         dimrows.each { |ri| table.row(ri).text_color = '999999' }
       end
-      move_down 10
+
+      down_or_page
     end
   end
 

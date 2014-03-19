@@ -17,7 +17,7 @@ class OrderMatrix < OrderPdf
 
     text I18n.t('documents.order_matrix.heading'), style: :bold
     move_down 5
-    text I18n.t('documents.order_matrix.total', :count => order_articles.size), size: 8
+    text I18n.t('documents.order_matrix.total', :count => order_articles.size), size: fontsize(8)
     move_down 10
 
     order_articles_data = [I18n.t('documents.order_matrix.rows')]
@@ -30,7 +30,7 @@ class OrderMatrix < OrderPdf
                               a.units]
     end
 
-    table order_articles_data, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+    table order_articles_data, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
       table.cells.border_width = 1
       table.cells.border_color = '666666'
     end
@@ -75,7 +75,7 @@ class OrderMatrix < OrderPdf
       # Make table
       column_widths = [85]
       (MAX_ARTICLES_PER_PAGE + 1).times { |i| column_widths << 41 unless i == 0 }
-      table groups_data, column_widths: column_widths, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+      table groups_data, column_widths: column_widths, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
         table.cells.border_width = 1
         table.cells.border_color = '666666'
         table.row_colors = ['ffffff','ececec']
