@@ -14,22 +14,22 @@ class OrderFax < OrderPdf
 
     # From paragraph
     bounding_box [margin_box.right-200,margin_box.top], width: 200 do
-      text FoodsoftConfig[:name], size: 9, align: :right
+      text FoodsoftConfig[:name], size: fontsize(9), align: :right
       move_down 5
-      text contact[:street], size: 9, align: :right
+      text contact[:street], size: fontsize(9), align: :right
       move_down 5
-      text "#{contact[:zip_code]} #{contact[:city]}", size: 9, align: :right
+      text "#{contact[:zip_code]} #{contact[:city]}", size: fontsize(9), align: :right
       move_down 5
       unless @order.supplier.try(:customer_number).blank?
-        text "#{Supplier.human_attribute_name :customer_number}: #{@order.supplier[:customer_number]}", size: 9, align: :right
+        text "#{Supplier.human_attribute_name :customer_number}: #{@order.supplier[:customer_number]}", size: fontsize(9), align: :right
         move_down 5
       end
       unless contact[:phone].blank?
-        text "#{Supplier.human_attribute_name :phone}: #{contact[:phone]}", size: 9, align: :right
+        text "#{Supplier.human_attribute_name :phone}: #{contact[:phone]}", size: fontsize(9), align: :right
         move_down 5
       end
       unless contact[:email].blank?
-        text "#{Supplier.human_attribute_name :email}: #{contact[:email]}", size: 9, align: :right
+        text "#{Supplier.human_attribute_name :email}: #{contact[:email]}", size: fontsize(9), align: :right
       end
     end
 
@@ -70,7 +70,7 @@ class OrderFax < OrderPdf
        number_to_currency(subtotal)]
     end
     data << [I18n.t('documents.order_fax.total'), nil, nil, nil, nil, nil, number_to_currency(total)]
-    table data, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+    table data, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
       table.header = true
       table.cells.border_width = 1
       table.cells.border_color = '666666'
@@ -82,7 +82,7 @@ class OrderFax < OrderPdf
       table.row(data.length-1).columns(0).borders = [:top, :bottom, :left]
       table.row(data.length-1).border_top_width = 2
     end
-              #font_size: 8,
+              #font_size: fontsize(8),
               #vertical_padding: 3,
               #border_style: :grid,
               #headers: ["BestellNr.", "Menge","Name", "Gebinde", "Einheit","Preis/Einheit"],

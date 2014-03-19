@@ -35,8 +35,8 @@ class OrderByGroups < OrderPdf
       rows << [ I18n.t('documents.order_by_groups.sum'), nil, nil, nil, nil, nil, number_with_precision(total, precision: 2)]
       rows.unshift I18n.t('documents.order_by_groups.rows') # Table Header
 
-      text group_order.ordergroup.name, size: 9, style: :bold
-      table rows, width: 500, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+      text group_order.ordergroup.name, size: fontsize(9), style: :bold
+      table rows, width: 500, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
         # borders
         table.cells.borders = []
         table.row(0).borders = [:bottom]
@@ -54,7 +54,7 @@ class OrderByGroups < OrderPdf
         dimrows.each { |ri| table.row(ri).text_color = '999999' }
       end
 
-      move_down 15
+      down_or_page 15
     end
 
   end

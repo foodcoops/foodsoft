@@ -67,6 +67,14 @@ default: &defaults
   # Members of a user's groups and administrators can still see full names.
   use_nick: false
 
+  # Base font size for generated PDF documents
+  #pdf_font_size: 12
+  # Page size for generated PDF documents
+  #pdf_page_size: A4
+  # Some documents (like group and article PDFs) can include page breaks
+  # after each sublist.
+  #pdf_add_page_breaks: true
+
   # email address to be used as sender
   email_sender: foodsoft@foodcoop.test
 
