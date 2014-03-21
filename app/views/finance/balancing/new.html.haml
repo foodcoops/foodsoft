@@ -48,12 +48,18 @@
     #comments= render :partial => 'shared/comments', locals: {comments: @order.comments.includes(:user)}
 
 - content_for :actionbar do
+  - unless @order.invoice or @order.stockit?
+    = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
+      class: 'btn'
   .btn-group
-    - unless @order.invoice or @order.stockit?
-      = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
-        class: 'btn'
     - unless @order.closed?
       = link_to t('.confirm_order'), confirm_finance_order_path(@order), class: 'btn btn-primary'
+      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+        %span.caret
+      %ul.dropdown-menu
+        %li= link_to t('.confirm_order'), confirm_finance_order_path(@order)
+        %li= link_to t('.close_direct'), close_direct_finance_order_path(@order), method: :patch,
+          data: {confirm: t('.close_direct_confirm')}
 
   #editOrderNav.btn-group.pull-right
     = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do

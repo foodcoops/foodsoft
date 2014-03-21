@@ -540,6 +540,8 @@ nl:
         comment_on_transaction: Hier kun je een notitie aan de afrekening toevoegen.
         comments: Notities
         confirm_order: Afrekenen
+        close_direct: Afrekenen overslaan
+        close_direct_confirm: 'Je staat op het punt de bestelling af te sluiten zonder de bedragen in rekening te brengen bij de huishoudens. Doe dit alleen wanneer je deze bedragen al handmatig hebt afgeschreven, of als je echt weet wat je doet!'
         create_invoice: Rekening toevoegen
         edit_note: Notitie bewerken
         edit_order: Bestelling bewerken
@@ -554,8 +556,6 @@ nl:
       orders:
         clear: balans
         cleared: afgerekend (%{amount})
-        close: direct afrekenen
-        confirm: Weet je zeker dat de je bestelling wilt afrekenen?
         end: Einde
         ended: gesloten
         name: Leverancier
