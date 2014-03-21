@@ -224,6 +224,7 @@ class Order < ActiveRecord::Base
   # Close the order directly, without automaticly updating ordergroups account balances
   def close_direct!(user)
     raise I18n.t('orders.model.error_closed') if closed?
+    comments.create(user: user, text: I18n.t('orders.model.close_direct_message'))
     update_attributes! state: 'closed', updated_by: user
   end
 

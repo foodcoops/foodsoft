@@ -542,6 +542,8 @@ en:
         comment_on_transaction: Here you can add a comment to your accounting.
         comments: Comments
         confirm_order: Settle order
+        close_direct: Skip settling
+        close_direct_confirm: 'You are about to settle the order without charging member acounts. Do this only when you have already debited member accounts manually, or if you really know what you are doing.'
         create_invoice: Create invoice
         edit_note: Edit note
         edit_order: Edit order
@@ -556,8 +558,6 @@ en:
       orders:
         clear: accounting
         cleared: accounted (%{amount})
-        close: settle directly
-        confirm: Do you really want to settle the order?
         end: End
         ended: closed
         name: Supplier
@@ -1110,6 +1110,7 @@ en:
       orders_settled: Settled
       title: Manage orders
     model:
+      close_direct_message: Order settled without charging member accounts.
       error_closed: Order was already settled
       error_nosel: At least one article must be selected
       error_starts_before_ends: must be after the start date (or remain empty)
