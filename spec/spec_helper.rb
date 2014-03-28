@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
+ENV["FOODSOFT_APP_CONFIG"] ||= 'spec/app_config.yml' # load special foodsoft config
 require_relative 'support/coverage' # needs to be first
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
