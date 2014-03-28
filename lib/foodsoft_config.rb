@@ -1,6 +1,9 @@
 class FoodsoftConfig
   mattr_accessor :scope, :config
-  APP_CONFIG = YAML.load(File.read(File.join(Rails.root, "/config/app_config.yml")))
+  APP_CONFIG_FILE = ENV['FOODSOFT_APP_CONFIG'] || 'config/app_config.yml'
+  # Rails.logger isn't ready yet - and we don't want to litter rspec invocation with this msg
+  puts "-> Loading app configuration from #{APP_CONFIG_FILE}" unless defined? RSpec
+  APP_CONFIG = YAML.load(File.read(File.expand_path(APP_CONFIG_FILE, Rails.root)))
 
   class << self
 

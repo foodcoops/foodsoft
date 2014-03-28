@@ -1,0 +1,33 @@
+# Minimal Foodsoft configuration
+#
+# Without those settings, Foodsoft may not even work.
+# This file is used when running tests. When plugins would modify foodsoft behaviour
+# and they are enabled in the sample configuration, there is stable base to test with.
+
+default: &defaults
+  multi_coop_install: false
+  default_scope: 'f'
+
+  host: localhost
+
+  name: FC Minimal
+  contact:
+    email: fc@minimal.test
+
+  # true by default to keep compat with older installations, but test with false here
+  use_nick: false
+
+  # do we really need the following ones?
+  price_markup: 5.0
+  tax_default: 6.0
+  email_sender: noreply@minimal.test
+
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
