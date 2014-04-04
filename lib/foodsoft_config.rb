@@ -60,5 +60,11 @@ class FoodsoftConfig
       }.merge(config))
     end
 
+    # reload original configuration file, e.g. in between tests
+    def reload!(filename = APP_CONFIG_FILE)
+      APP_CONFIG.clear.merge! YAML.load(File.read(File.expand_path(filename, Rails.root)))
+      init
+    end
+
   end
 end
