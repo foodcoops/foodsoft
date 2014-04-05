@@ -286,6 +286,7 @@ nl:
       error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je mogelijk %{sign_in}.
       error_denied_sign_in: inloggen als een andere gebruiker
       error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
+      error_plugin_disabled: Deze actie is momenteel uitgeschakeld.
       error_token: Geen toegang (ongeldig token)!
   article_categories:
     create:

@@ -67,6 +67,12 @@ default: &defaults
   # Members of a user's groups and administrators can still see full names.
   use_nick: false
 
+  # Most plugins can be enabled/disabled here as well. Messages and wiki are enabled
+  # by default and need to be set to false to disable. Most other plugins needs to
+  # be enabled before they do anything.
+  #use_wiki: true
+  #use_messages: true
+
   # Base font size for generated PDF documents
   #pdf_font_size: 12
   # Page size for generated PDF documents
@@ -86,8 +92,8 @@ default: &defaults
   notification:
     error_recipients:
       - admin@foodcoop.test
-    sender_address: "\"FoodSoft Error\" <foodsoft@foodcoop.test>"
-    email_prefix: "[FoodSoft]"
+    sender_address: "\"Foodsoft Error\" <foodsoft@foodcoop.test>"
+    email_prefix: "[Foodsoft]"
 
   # Access to sharedLists, the external article-database
   shared_lists:

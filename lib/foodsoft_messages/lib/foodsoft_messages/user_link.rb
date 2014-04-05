@@ -6,7 +6,7 @@ module FoodsoftMessages
 
         # modify user presentation link to writing a message for the user
         def show_user_link(user=@current_user)
-          if user.nil?
+          if user.nil? or not FoodsoftMessages.enabled?
             show_user user
           else
             link_to show_user(user), new_message_path('message[mail_to]' => user.id),

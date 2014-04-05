@@ -1,5 +1,7 @@
 class MessagesController < ApplicationController
 
+  before_filter -> { require_plugin_enabled FoodsoftMessages }
+
   # Renders the "inbox" action.
   def index
     @messages = Message.public.page(params[:page]).per(@per_page).order('created_at DESC').includes(:sender)

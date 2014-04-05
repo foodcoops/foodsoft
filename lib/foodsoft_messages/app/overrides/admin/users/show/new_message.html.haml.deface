@@ -1,2 +1,3 @@
 / insert_after 'erb:contains("delete")'
-= link_to t('.send_message'), new_message_path(:message => {:mail_to => @user.id}), class: 'btn'
+- if FoodsoftMessages.enabled?
+  = link_to t('.send_message'), new_message_path(:message => {:mail_to => @user.id}), class: 'btn'

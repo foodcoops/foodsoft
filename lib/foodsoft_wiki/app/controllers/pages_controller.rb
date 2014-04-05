@@ -1,5 +1,6 @@
 # encoding: utf-8
 class PagesController < ApplicationController
+  before_filter -> { require_plugin_enabled FoodsoftWiki }
 
   skip_before_filter :authenticate, :only => :all
   before_filter :only => :all do

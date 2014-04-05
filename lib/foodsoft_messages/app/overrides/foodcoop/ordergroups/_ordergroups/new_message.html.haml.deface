@@ -1,2 +1,3 @@
 / insert_bottom 'tbody tr'
-%td= link_to_new_message(message_params: {group_id: ordergroup.id})
+- if FoodsoftMessages.enabled?
+  %td= link_to_new_message(message_params: {group_id: ordergroup.id})

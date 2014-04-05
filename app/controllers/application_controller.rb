@@ -104,6 +104,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Many plugins can be turned on and off on the fly with a `use_` configuration option.
+  # To disable a controller in the plugin, you can use this as a `before_action`:
+  #
+  #     class MypluginController < ApplicationController
+  #       before_filter -> { require_plugin_enabled FoodsoftMyplugin }
+  #     end
+  #
+  def require_plugin_enabled(plugin)
+    unless plugin.enabled?
+      redirect_to root_path, alert: I18n.t('application.controller.error_plugin_disabled')
+    end
+  end
+
   # Redirect to the login page, used in authenticate, plugins can override this.
   def redirect_to_login(options={})
     redirect_to login_url, options

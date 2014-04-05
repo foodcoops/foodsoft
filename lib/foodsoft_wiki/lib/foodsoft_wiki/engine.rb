@@ -1,6 +1,7 @@
 module FoodsoftWiki
   class Engine < ::Rails::Engine
     def navigation(primary, ctx)
+      return unless FoodsoftWiki.enabled?
       primary.item :wiki, I18n.t('navigation.wiki.title'), '#', id: nil do |subnav|
         subnav.item :wiki_home, I18n.t('navigation.wiki.home'), ctx.wiki_path, id: nil
         subnav.item :all_pages, I18n.t('navigation.wiki.all_pages'), ctx.all_pages_path, id: nil
