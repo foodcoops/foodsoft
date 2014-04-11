@@ -376,6 +376,7 @@ en:
       error_nosel: You have selected no articles
     parse_upload:
       body: <p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>
+      submit: Upload
       title: Upload articles
     sync:
       outlist:
