@@ -43,6 +43,7 @@ class FoodsoftConfig
       raise "No config for this environment (#{foodcoop}) available!" if APP_CONFIG[foodcoop].nil?
       self.config = APP_CONFIG[foodcoop].symbolize_keys
       self.scope = foodcoop
+      set_missing
     end
 
     def setup_database
