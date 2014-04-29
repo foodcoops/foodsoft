@@ -1,7 +1,7 @@
 = f.input :name
 = f.input :description, as: :text, input_html: {rows: 4}
 
-= yield
+= captured if defined? captured
 
 = f.input :user_tokens, :as => :string,
   :input_html => { 'data-pre' => f.object.users.map(&:token_attributes).to_json }

@@ -2,7 +2,7 @@
 
 %p= t('.invite_new', invite_link: link_to(t('.invite_link'), new_invite_path(id: @workgroup.id))).html_safe
 = simple_form_for [:foodcoop, @workgroup] do |f|
-  = render :partial => 'shared/group_form_fields', :locals => {:f => f}
+  = render 'shared/group_form_fields', f: f
   .form-actions
     = f.submit
     = link_to t('ui.or_cancel'), foodcoop_workgroups_path
