@@ -12,19 +12,11 @@ GIT
     localize_input (0.1.0)
 
 GIT
-  remote: git://github.com/capistrano/rvm.git
-  revision: dc35ec5e7a74a422250bd6ff5e8885c8b742d0e5
-  specs:
-    capistrano-rvm (0.1.1)
-      capistrano (~> 3.0)
-      sshkit (~> 1.2)
-
-GIT
   remote: git://github.com/fnando/i18n-js.git
-  revision: eab4137f83777963f0ebe6960704a7f64fd8911d
+  revision: 90118cd74f1a622e04ac6c8fa82b6298c5f0b28a
   specs:
-    i18n-js (2.1.2)
-      i18n
+    i18n-js (3.0.0.rc5)
+      i18n (~> 0.6)
 
 GIT
   remote: git://github.com/saveritemedical/client_side_validations-simple_form.git
@@ -85,22 +77,21 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    acts_as_tree (1.5.0)
+    acts_as_tree (1.6.0)
       activerecord (>= 3.0.0)
     arel (4.0.2)
-    atomic (1.1.16)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-datepicker-rails (1.3.0.1)
+    bootstrap-datepicker-rails (1.3.0.2)
       railties (>= 3.0)
     builder (3.1.4)
-    bullet (4.8.0)
+    bullet (4.9.0)
       activesupport
-      uniform_notifier (>= 1.4.0)
-    capistrano (3.1.0)
+      uniform_notifier (~> 1.6.0)
+    capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
@@ -110,13 +101,16 @@ GEM
     capistrano-rails (1.1.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.1)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    childprocess (0.5.1)
+    childprocess (0.5.3)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     coderay (1.1.0)
@@ -127,7 +121,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    colorize (0.7.0)
+    colorize (0.7.2)
     commonjs (0.2.7)
     connection_pool (2.0.0)
     content_for_in_controllers (0.0.2)
@@ -145,7 +139,7 @@ GEM
       nokogiri (~> 1.6.0)
       rails (>= 3.1)
     diff-lcs (1.2.5)
-    diffy (3.0.3)
+    diffy (3.0.4)
     docile (1.1.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -211,15 +205,15 @@ GEM
     mini_portile (0.5.3)
     minitest (4.7.5)
     mono_logger (1.1.0)
-    multi_json (1.9.2)
+    multi_json (1.10.0)
     mysql2 (0.3.15)
-    net-scp (1.1.2)
+    net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.8.0)
+    net-ssh (2.9.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     pdf-core (0.2.5)
-    polyamorous (0.6.4)
+    polyamorous (1.0.0)
       activerecord (>= 3.0)
     polyglot (0.3.4)
     prawn (1.0.0)
@@ -230,7 +224,7 @@ GEM
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
-    rack-protection (1.5.2)
+    rack-protection (1.5.3)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -254,11 +248,13 @@ GEM
       activesupport (= 4.0.4)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.2.0)
-    ransack (1.1.0)
+    rake (10.3.1)
+    ransack (1.2.3)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
-      polyamorous (~> 0.6.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.0.0)
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -292,18 +288,18 @@ GEM
       rspec-mocks (~> 2.14.0)
     rspec-rerun (0.1.3)
       rspec (>= 2.11.0)
-    ruby-prof (0.14.2)
+    ruby-prof (0.15.1)
     ruby-units (1.4.5)
-    rubyzip (1.1.2)
-    sass (3.2.18)
-    sass-rails (4.0.2)
+    rubyzip (1.1.3)
+    sass (3.2.19)
+    sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
-      sprockets-rails (~> 2.0.0)
-    select2-rails (3.5.4)
+      sprockets-rails (~> 2.0)
+    select2-rails (3.5.7)
       thor (~> 0.14)
-    selenium-webdriver (2.40.0)
+    selenium-webdriver (2.41.0)
       childprocess (>= 0.5.0)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
@@ -313,15 +309,15 @@ GEM
     simple-navigation-bootstrap (1.0.0)
       railties (>= 3.1)
       simple-navigation (>= 3.7.0)
-    simple_form (3.0.1)
-      actionpack (>= 4.0.0, < 4.1)
-      activemodel (>= 4.0.0, < 4.1)
+    simple_form (3.0.2)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
-    sinatra (1.4.4)
+    sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
@@ -340,9 +336,9 @@ GEM
     sqlite3 (1.3.9)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
-    sshkit (1.3.0)
+    sshkit (1.4.0)
       net-scp (>= 1.1.2)
-      net-ssh
+      net-ssh (>= 2.8.0)
       term-ansicolor
     term-ansicolor (1.3.0)
       tins (~> 1.0)
@@ -354,10 +350,9 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     thor (0.19.1)
-    thread_safe (0.3.1)
-      atomic (>= 1.1.7, < 2)
+    thread_safe (0.3.3)
     tilt (1.4.1)
-    tins (1.0.1)
+    tins (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -371,7 +366,7 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    uniform_notifier (1.4.0)
+    uniform_notifier (1.6.1)
     vegas (0.1.11)
       rack (>= 1.0.0)
     websocket (1.0.7)
@@ -395,10 +390,10 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-datepicker-rails
   bullet
-  capistrano (~> 3.0)
+  capistrano (~> 3.2.0)
   capistrano-bundler (>= 1.1.0)
   capistrano-rails
-  capistrano-rvm!
+  capistrano-rvm
   capybara
   client_side_validations!
   client_side_validations-simple_form!

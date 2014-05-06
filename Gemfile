@@ -66,9 +66,8 @@ group :development do
   gem 'quiet_assets'
   
   # Deploy with Capistrano
-  gem 'capistrano', '~> 3.0', require: false
-  # https://github.com/capistrano/rails/issues/48#issuecomment-31443739
-  gem 'capistrano-rvm', github: 'capistrano/rvm', require: false
+  gem 'capistrano', '~> 3.2.0', require: false
+  gem 'capistrano-rvm', require: false
   gem 'capistrano-bundler', '>= 1.1.0', require: false
   gem 'capistrano-rails', require: false
   # Avoid having content-length warnings
