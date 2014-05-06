@@ -590,8 +590,10 @@ en:
         balance: 'Balance of account: %{balance}'
         last_updated_at: (last updated %{when} ago)
         new_transaction: Create new transaction
-        search_placeholder: Search ...
         title: Account statement for %{name}
+      index_collection:
+        title: Financial transactions
+        show_groups: Manage accounts
       new:
         paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
         title: New transaction
@@ -603,6 +605,8 @@ en:
       ordergroup:
         remove: Remove
         remove_group: Remove group
+      transactions_search:
+        search_placeholder: Search note ...
     index:
       amount_fc: Amount(FC)
       end: End
@@ -633,6 +637,7 @@ en:
       index:
         new_transaction: Add new transactions
         search_placeholder: Search ...
+        show_all: All transactions
         title: Manage accounts
       ordergroups:
         account_statement: Account statement

@@ -1,0 +1,8 @@
+- title t('.title')
+
+- content_for :actionbar do
+  = link_to t('.show_groups'), finance_ordergroups_path, class: 'btn'
+
+= render 'transactions_search', url: finance_transactions_path
+
+#transactions= render 'transactions', with_ordergroup: true
