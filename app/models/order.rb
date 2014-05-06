@@ -46,7 +46,7 @@ class Order < ActiveRecord::Base
       # make sure to include those articles which are no longer available
       # but which have already been ordered in this stock order
       StockArticle.available.includes(:article_category).
-        order('article_categories.name, articles.name').reject{ |a|
+        order('article_categories.name', 'articles.name').reject{ |a|
         a.quantity_available <= 0 and not a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else

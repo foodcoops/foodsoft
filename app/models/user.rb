@@ -65,9 +65,9 @@ class User < ActiveRecord::Base
   def self.natural_order
     # would be sensible to match ApplicationController#show_user
     if FoodsoftConfig[:use_nick]
-      order('nick ASC')
+      order('nick')
     else
-      order('first_name ASC, last_name ASC')
+      order('first_name', 'last_name')
     end
   end
 

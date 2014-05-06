@@ -37,7 +37,7 @@
 
   #recipients
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.where(id: @message.recipients_ids).map(&:token_attributes).to_json }
-    = f.input :group_id, :as => :select, :collection => Group.undeleted.order('type DESC, name ASC').reject { |g| g.memberships.empty? }
+    = f.input :group_id, :as => :select, :collection => Group.undeleted.order('type DESC', 'name ASC').reject { |g| g.memberships.empty? }
   = f.input :private
   = f.input :subject, input_html: {class: 'input-xxlarge'}
   = f.input :body, input_html: {class: 'input-xxlarge'}
