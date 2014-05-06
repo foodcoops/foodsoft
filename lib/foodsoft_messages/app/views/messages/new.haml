@@ -40,7 +40,7 @@
     = f.input :group_id, :as => :select, :collection => Group.undeleted.order('type DESC', 'name ASC').reject { |g| g.memberships.empty? }
   = f.input :private
   = f.input :subject, input_html: {class: 'input-xxlarge'}
-  = f.input :body, input_html: {class: 'input-xxlarge'}
+  = f.input :body, input_html: {class: 'input-xxlarge', rows: 13}
   .form-actions
     = f.submit class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), :back
