@@ -286,6 +286,7 @@ de:
       error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine Administratorin, dass sie Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
       error_denied_sign_in: als ein anderer Benutzer anmelden
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
+      error_plugin_disabled: 
       error_token: Zugriff verweigert (ungültiger Token)!
   article_categories:
     create:
@@ -373,6 +374,7 @@ de:
       error_nosel: Du hast keine Artikel ausgewählt
     parse_upload:
       body: <p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
+      submit: 
       title: Artikel hochladen
     sync:
       outlist:
@@ -537,6 +539,8 @@ de:
       new:
         alert: Achtung, Bestellung wurde schon abgerechnet
         articles_overview: Artikelübersicht
+        close_direct: 
+        close_direct_confirm: 
         comment_on_transaction: Hier kannst Du deine Abrechnung kommentieren
         comments: Kommentare
         confirm_order: Bestellung abrechnen
@@ -554,8 +558,6 @@ de:
       orders:
         clear: abrechnen
         cleared: abgerechnet (%{amount})
-        close: direkt abrechnen
-        confirm: Wirklich die Bestellung abrechnen?
         end: Ende
         ended: beendet
         name: Lieferantin
@@ -1101,8 +1103,9 @@ de:
       orders_settled: Abgerechnet
       title: Bestellungen verwalten
     model:
+      close_direct_message: 
       error_closed: Bestellung wurde schon abgerechnet
-      error_nosel: Es muss mindestens ein Artikel ausgewählt sein
+      error_nosel: Es muss mindestens ein Artikel ausgewählt sein.
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: 'Bestellung: %{name}, bis %{ends}'
       stock: Lager

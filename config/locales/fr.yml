@@ -79,7 +79,7 @@ fr:
         starts: Ouverture le
         status: Statut
         supplier: Fournisseu-r-se
-        updated_by: 
+        updated_by: Dernière modification par
       order_article:
         article: Article
         missing_units: Unités manquantes
@@ -118,18 +118,18 @@ fr:
         quantity_ordered: Commandés
       stock_taking:
         date: Date
-        note: 
+        note: Note
       supplier:
         address: Adresse
         contact_person: Contact
         customer_number: Numéro de client de la coop
-        customer_number_short: 
+        customer_number_short: Num. de client
         delivery_days: Jours de livraison
         email: Email
         fax: Fa
         is_subscribed: abonné?
         min_order_quantity: Prix minimum d'une commande
-        min_order_quantity_short: 
+        min_order_quantity_short: Qté min.
         name: Nom
         note: Note
         order_howto: Comment commander
@@ -141,7 +141,7 @@ fr:
         done: Fait?
         due_date: Echéance
         duration: Durée
-        name: 
+        name: Activité
         required_users: Nombre de personnes nécessaires
         user_list: Responsables inscritEs
         workgroup: Équipe
@@ -282,11 +282,12 @@ fr:
         name: nom
   application:
     controller:
-      error_authn: 
-      error_denied: 
-      error_denied_sign_in: 
-      error_members_only: 
-      error_token: 
+      error_authn: Identification requise!
+      error_denied: Ton compte n'es pas autorisé à accéder à cette page pour le moment. Si tu penses que ce n'est pas normal, demande à un-e administrateur-rice de modifier les permissions. Si tu as plusieurs comptes, il faut peut-être que tu %{sign_in}
+      error_denied_sign_in: te reconnectes
+      error_members_only: Cette action ne peut être effectuée que par les membres du groupe.
+      error_plugin_disabled: 
+      error_token: Accès interdit (jeton invalide)!
   article_categories:
     create:
       notice: La catégorie a bien été définie.
@@ -345,10 +346,10 @@ fr:
       title: Modifier tous les articles de %{supplier}
       warning: Attention, tous les articles sont en train d'être mis à jour!
     form:
-      title_edit: 
+      title_edit: Modifier cet article
       title_new: Ajouter un nouvel article
     import_search_results:
-      action_edit_import: 
+      action_edit_import: modifier les données importées
       action_import: importer
       already_imported: déjà importé
       not_found: Aucun article n'a été trouvé
@@ -359,7 +360,7 @@ fr:
         import: Rechercher/Importer
         sync: Synchroniser
       import:
-        category: 
+        category: Importer directement dans une catégorie
         placeholder: Nom...
         restrict_region: Seulement les articles régionaux
         title: Importer cet article
@@ -375,12 +376,15 @@ fr:
       body: |-
         <p><i>Merci de vérifier les articles importés.</i></p>
         <p><i>Attention, les doublons ne sont pas automatiquement détectés.</p></i>.
-      title: 
+      submit: Téléverser
+      title: Téléverser des articles
     sync:
       outlist:
-        alert_used: 
+        alert_used: Attention, %{article} fait partie d'une commande en cours! Il faut d'abord le supprimer de cette commande.
         body: 'Les articles suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
-        body_ignored: 
+        body_ignored:
+          one: Un article sans numéro de commande a été ignoré.
+          other: '%{count} articles sans numéro de commande ont été ignorés.'
         body_skip: Aucun article à supprimer.
         title: Exclure de la liste...
       price_short: Prix
@@ -390,7 +394,9 @@ fr:
       update:
         body: 'Chaque article apparaît deux fois: les anciennes données sont rappelées en gris, et les champs du formulaire ont été préremplis avec les nouvelles valeurs. Les changements sont marqués en jaune.'
         title: Mettre à jour...
-        update_msg: 
+        update_msg:
+          one: Un article doit être mis à jour.
+          other: '%{count} articles doivent être mis à jour.'
     upload:
       body: |-
         <p>Le fichier doit être au format texte et son nom doit se terminer par l'extension ".csv". La première ligne sera ignorée lors de l'importation.</p>
@@ -413,7 +419,7 @@ fr:
     edit:
       title: Modifier le réapprovisionnement
     form:
-      confirm_foreign_supplier_reedit: 
+      confirm_foreign_supplier_reedit: 'L''article en stock %{name} a bien été sauvegardé. Mais un problème a été détecté: l''article provient d''unE autre fournisseurE que celleui dont provient cette livraison. Modifier l''article à nouvau?'
       create_from_blank: Ajouter un nouvel article quelconque
       create_stock_article: Ajouter un article au stock
       title_fill_quantities: 2. Définir la quantité à livrer
@@ -474,7 +480,7 @@ fr:
       - Unité
       - Prix/Unité
       - Prix unitaire
-      total: 
+      total: Total
     order_matrix:
       filename: Commande %{name}-%{date} - Tableau de répartition
       heading: Liste des articles
@@ -540,6 +546,8 @@ fr:
       new:
         alert: Attention, cette commande a déjà été décomptée
         articles_overview: Aperçu des articles
+        close_direct: 
+        close_direct_confirm: 
         comment_on_transaction: Ici, tu peux faire part de tes commentaires concernant le décompte de la facture
         comments: Commentaire
         confirm_order: Terminer la commande
@@ -557,8 +565,6 @@ fr:
       orders:
         clear: décompter
         cleared: déjà décompté (%{amount})
-        close: finaliser maintenant
-        confirm: Veux-tu vraiment terminer la commande?
         end: Fin
         ended: closes
         name: FournisseusE_r
@@ -583,7 +589,7 @@ fr:
           notice: La transaction a été sauvegardée.
         create_collection:
           alert: 'Une erreur s''est produite: %{error}'
-          error_note_required: 
+          error_note_required: Le commentaire ne peut pas être laissé vide.
           notice: Les transactions ont été sauvegardées.
       index:
         balance: 'Solde: %{balance}'
@@ -670,7 +676,7 @@ fr:
   group_order_articles:
     form:
       amount_change_for: Modification de la quantité de %{article}
-      result_hint: 
+      result_hint: 'Unité: %{unit}'
   group_orders:
     archive:
       desc: Accéder à toutes les %{link}.
@@ -690,8 +696,8 @@ fr:
       action_save: Enregistrer ta commande
       new_funds: Nouveau solde
       price: Prix
-      reset_article_search: 
-      search_article: 
+      reset_article_search: Réinitialiser la recherche
+      search_article: Rechercher des articles...
       sum_amount: Quantité déjà commandée
       title: Commander
       total_sum_amount: Montant total
@@ -729,7 +735,7 @@ fr:
         ordered: Quantité souhaitée
         ordered_title: Quantité + tolérance
         show_hide: Montrer/cacher les articles non commandés
-        show_note: 
+        show_note: Afficher le commentaire
         title: Aperçu des articles
         unit_price: Prix unitaire
       comment: Lire/écrire des commentaire
@@ -761,13 +767,13 @@ fr:
     messages:
       write_message: Écrire un message
     orders:
-      old_price: 
+      old_price: Ancien prix
       option_choose: Choix d'unE fournisseusE_r
       option_stock: Stock
       order_pdf: Générer un PDF
     submit:
       invite:
-        create: Envoyer une invitatio
+        create: Envoyer une invitation
       message:
         create: Envoyer un message
     tasks:
@@ -852,7 +858,7 @@ fr:
     errors:
       already_member: est déjà membre de la Boufcoop.
     modal_form:
-      body: Sur cette page, tu peux inviter une personne dans la cellule <b>%{group}<b> qui n'est pas encore membre de la Boufcoop. </p> <p>Après sa première connexion elle sera automatiquement membre de la cellule. </p>
+      body: <p>Sur cette page, tu peux inviter une personne qui n'est pas encore membre de la Boufcoop à rejoindre la cellule <b>%{group}</b> .</p><p>Lors de sa première connexion elle sera automatiquement membre de la cellule. </p>
       title: Engrainer une personne
     new:
       action: Engrainer!
@@ -860,7 +866,7 @@ fr:
     success: La_le membre a été engrainéE avec succès!
   js:
     ordering:
-      confirm_change: 
+      confirm_change: Les changements apportés à cette commande vont être perdus. Est-ce que tu veux vraiment continuer?
   layouts:
     email:
       footer_1_separator: --
@@ -1061,10 +1067,10 @@ fr:
     workgroups: Équipes
   order_articles:
     edit:
-      stock_alert: 
+      stock_alert: Le prix d'articles déjà en stock ne peut pas être modifié!
       title: Mettre à jour la liste des article
     new:
-      title: 
+      title: Ajouter l'article à une commande
   ordergroups:
     edit:
       title: Modifier les cellules
@@ -1085,8 +1091,8 @@ fr:
     edit:
       title: Modifier la commande
     edit_amount:
-      field_locked_title: 
-      field_unlocked_title: 
+      field_locked_title: La répartition de cet article entre les cellules a été modifiée manuellement, et ce champ a été verrouillé pour éviter tout nouveau changement intempestif. Si tu veux tout de même effectuer un changement, cliques d'abord sur "Déverouiller".
+      field_unlocked_title: La répartition de cet article entre les cellules a été modifiée manuellement. Toute nouvelle modification entrainera une perte de la valeur enregistrée actuellement.
     fax:
       amount: Quantité
       articles: Articles
@@ -1098,14 +1104,14 @@ fr:
     finish:
       notice: La commande a été close.
     form:
-      ignore_warnings: 
+      ignore_warnings: Ignorer les avertissements
       prices: Prix (net/coop)
       select_all: Tout sélectionner
       stockit: Disponible
       title: Article
     index:
       action_end: Terminer
-      action_receive: 
+      action_receive: Réceptionner
       confirm_delete: Vraiment supprimer la commande?
       confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
       new_order: Définir une nouvelle commande
@@ -1115,24 +1121,25 @@ fr:
       orders_settled: Décomptée
       title: Gestion des commandes
     model:
+      close_direct_message: 
       error_closed: Cette commande a déjà été décomptée
-      error_nosel: Au minimum un article doit être sélectionné
+      error_nosel: Au minimum un article doit être sélectionné.
       error_starts_before_ends: doit être postérieur à la date de début de la commande (ou bien être laissé vierge)
       notice_close: 'Commande: %{name}, jusqu''au %{ends}'
       stock: Stock
-      warning_ordered: 
-      warning_ordered_stock: 
+      warning_ordered: 'Attention: les articles en rouge ont déjà été commandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
+      warning_ordered_stock: 'Attention: les articles en rouge ont déjà été demandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
     new:
       title: Définir une nouvelle commande
     receive:
-      add_article: 
-      consider_member_tolerance: 
-      notice: 
-      notice_none: 
-      rest_to_stock: 
-      submit: 
-      surplus_options: 
-      title: 
+      add_article: Ajouter un article
+      consider_member_tolerance: prendre en compte la tolérance
+      notice: 'Commande recue: %{msg}'
+      notice_none: Aucun nouvel article à réceptionner
+      rest_to_stock: stock restant
+      submit: Réceptionner la commande
+      surplus_options: 'Options de répartition:'
+      title: Réception de la commande %{order}
     show:
       action_end: Clore!
       amounts: 'Total net/brut:'
@@ -1143,12 +1150,12 @@ fr:
       comments_link: Commenaire
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment terminer la commande %{order}? Pas d'annulation possible.
-      description1: 
-      description2: 
+      description1: Commande %{state} de %{supplier} créée par %{who}, ouverte du %{starts} au %{ends}.
+      description2: '%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)'
       download:
         article_pdf: Liste des articles en PDF
         download_file: Télécharger
-        fax_csv: 
+        fax_csv: Fax CSV
         fax_pdf: Fax au format PDF
         fax_txt: Fax au format texte
         group_pdf: Liste des cellules en PDF
@@ -1156,10 +1163,10 @@ fr:
         title: Télécharger
       group_orders: 'Commandes des cellules:'
       search_placeholder:
-        articles: 
-        default: 
-        groups: 
-      search_reset: 
+        articles: Rechercher des articles...
+        default: Rechercher des articles...
+        groups: Rechercher des cellules...
+      search_reset: Réinitialiser la recherche
       sort_article: Trié par article
       sort_group: Trié par cellules
       title: 'Commande: %{name}'
@@ -1171,10 +1178,10 @@ fr:
     update:
       notice: La commande a été mise à jour.
     update_order_amounts:
-      msg1: 
-      msg2: 
+      msg1: '%{count} articles (%{units} unités) ont été mis à jour'
+      msg2: '%{count} (%{units}) après prise en compte des tolérances'
       msg3: 
-      msg4: 
+      msg4: '%{count} (%{units}) restants'
   pages:
     all:
       new_page: Créer une nouvelle page
@@ -1187,7 +1194,7 @@ fr:
       title_list: Liste des pages
     body:
       title_toc: Contenu
-      wikicloth_exception: 
+      wikicloth_exception: 'Une erreur s''est produite lors de l''interprétation de la page wiki: %{msg}. Essaye de la corriger et de sauvegarder à nouveau.'
     create:
       notice: La page a bien été créée.
     cshow:
@@ -1259,12 +1266,12 @@ fr:
   shared:
     articles:
       ordered: Commandé
-      ordered_desc: 
+      ordered_desc: Nombre d'articles demandés par la cellule (quantité + tolérance)
       received: Reçu
-      received_desc: 
+      received_desc: Nombre d'articles qui seront octroyés à la cellule
     articles_by:
       price: Prix total
-      price_sum: 
+      price_sum: Total
     group:
       access: Accès à
       activated: activé
@@ -1294,8 +1301,8 @@ fr:
       message:
         private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       order_article:
-        units_to_order: 
-        update_global_price: 
+        units_to_order: Attention, toute modification du nombre total d'unités réceptionées pour un article doit être répercuté manuellement sur les quantités attribuées à chaque cellule (pour cela, cliques sur le nom de l'article concerné). Si ce n'est pas fait, les cellules risquent d'être facturées pour des articles qu'elles n'ont jamais recus!
+        update_global_price: Mettre à jour le prix pour les commandes futures
       stock_article:
         copy:
           name: Merci de modifier
@@ -1345,7 +1352,7 @@ fr:
       new_inventory: Inventorier le stock
       title: Aperçu  de l'inventaire
     new:
-      amount: 
+      amount: Quantité
       create: ajouter
       stock_articles: Articles en stock
       temp_inventory: l'inventaire courant
@@ -1376,9 +1383,9 @@ fr:
     copy:
       title: Copier l'article
     create:
-      notice: 
+      notice: L'article %{name} a été ajouté à la liste des articles en stock.
     derive:
-      title: 
+      title: Ajouter un article au stock en utilisant un modèle
     destroy:
       notice: L'article %{name} a bien été supprimé du stock.
     edit:
@@ -1395,7 +1402,7 @@ fr:
       show_stock_takings: Historique des inventaires
       stock_count: 'Nombre d''articles:'
       stock_worth: 'Valeur actuelle du stock:'
-      title: 
+      title: Stock (%{article_count})
       toggle_unavailable: Afficher/cacher les articles actuellement indisponibles
       view_options: Préférences d'affichage
     new:
@@ -1408,7 +1415,7 @@ fr:
       reason: Raison
       stock_changes: Afficher l'historique
     stock_article:
-      confirm_delete: 
+      confirm_delete: Es-tu sûr de vouloir supprimer l'article %{name} du stock?
     update:
       notice: Les données de l'article "%{name}" ont été mises à jour.
   suppliers:
@@ -1441,7 +1448,7 @@ fr:
     show:
       confirm_delete: Tu es sûrE de ton coup?
       last_deliveries: Dernières livraisons
-      last_orders: 
+      last_orders: Dernières commande
       new_delivery: Réapprovisionner le stock
       show_deliveries: Afficher tous les réapprovisionnements
     update:
@@ -1487,7 +1494,7 @@ fr:
       group_tasks: Sélectionner une équipe
       my_tasks: Ton agenda
       new_task: Définir un nouveau boulot
-      pages: 
+      pages: Page
     new:
       title: Définition d'un nouveau boulot
     repeated: Ce boulot a lieu toutes les semaines.
@@ -1496,7 +1503,7 @@ fr:
     show:
       accept_task: Te charger de ce boulot.
       confirm_delete_group: Veux-tu vraiment supprimer ce boulot hebdomadaire?
-      confirm_delete_single: 
+      confirm_delete_single: Es-tu sûr de vouloir supprimer ce boulot?
       delete_group: Supprimer ce boulot
       hours: '%{count}h'
       mark_done: Marquer comme effectué

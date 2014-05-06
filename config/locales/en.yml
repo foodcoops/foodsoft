@@ -541,11 +541,11 @@ en:
       new:
         alert: Attention, order was already accounted
         articles_overview: Overview of articles
+        close_direct: Skip settling
+        close_direct_confirm: You are about to settle the order without charging member accounts. Do this only when you have already debited member accounts manually, or if you really know what you are doing.
         comment_on_transaction: Here you can add a comment to your accounting.
         comments: Comments
         confirm_order: Settle order
-        close_direct: Skip settling
-        close_direct_confirm: 'You are about to settle the order without charging member acounts. Do this only when you have already debited member accounts manually, or if you really know what you are doing.'
         create_invoice: Create invoice
         edit_note: Edit note
         edit_order: Edit order
@@ -1114,12 +1114,12 @@ en:
     model:
       close_direct_message: Order settled without charging member accounts.
       error_closed: Order was already settled
-      error_nosel: At least one article must be selected
+      error_nosel: At least one article must be selected. You may want to delete the order instead?
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: 'Order: %{name}, until %{ends}'
       stock: Stock
-      warning_ordered: 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted.'
-      warning_ordered_stock: 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them.'
+      warning_ordered: 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted. To proceed, confirm below.'
+      warning_ordered_stock: 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them. Confirm below to proceed.'
     new:
       title: Create new order
     receive:

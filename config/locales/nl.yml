@@ -286,7 +286,7 @@ nl:
       error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je mogelijk %{sign_in}.
       error_denied_sign_in: inloggen als een andere gebruiker
       error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
-      error_plugin_disabled: Deze actie is momenteel uitgeschakeld.
+      error_plugin_disabled: Deze optie is momenteel uitgeschakeld.
       error_token: Geen toegang (ongeldig token)!
   article_categories:
     create:
@@ -381,8 +381,8 @@ nl:
         alert_used: Opgelet, %{article} wordt gebruikt in een lopende bestelling. Haal het eerst uit de bestelling.
         body: 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_ignored:
-          one: Er is een artikel zonder ondernummer overslagen.
-          other: '%{count} artikelen zonder odernummer zijn overgeslagen.'
+          one: Er is één artikel zonder ordernummer overslagen.
+          other: '%{count} artikelen zonder ordernummer zijn overgeslagen.'
         body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
       price_short: prijs
@@ -539,11 +539,11 @@ nl:
       new:
         alert: Opgelet, bestelling is al afgerekend
         articles_overview: Artikeloverzicht
+        close_direct: Afrekenen overslaan
+        close_direct_confirm: Je staat op het punt de bestelling af te sluiten zonder de bedragen in rekening te brengen bij de huishoudens. Doe dit alleen wanneer je deze bedragen al handmatig hebt afgeschreven, of als je echt weet wat je doet!
         comment_on_transaction: Hier kun je een notitie aan de afrekening toevoegen.
         comments: Notities
         confirm_order: Afrekenen
-        close_direct: Afrekenen overslaan
-        close_direct_confirm: 'Je staat op het punt de bestelling af te sluiten zonder de bedragen in rekening te brengen bij de huishoudens. Doe dit alleen wanneer je deze bedragen al handmatig hebt afgeschreven, of als je echt weet wat je doet!'
         create_invoice: Rekening toevoegen
         edit_note: Notitie bewerken
         edit_order: Bestelling bewerken
@@ -1107,13 +1107,14 @@ nl:
       orders_settled: Afgerekend
       title: Bestellingen beheren
     model:
+      close_direct_message: Bestelling afgerekend zonder bedragen in rekening te brengen bij huishoudens.
       error_closed: Bestelling was al afgerekend
-      error_nosel: Er moet minstens één artikel geselecteerd zijn
+      error_nosel: Er moet minstens één artikel geselecteerd zijn. Mogelijk wil je de bestelling verwijderen?
       error_starts_before_ends: moet na de startdatum zijn (of niet ingevuld worden)
       notice_close: 'Bestelling: %{name}, tot %{ends}'
       stock: Voorraad
-      warning_ordered: 'Opgelet: rood gemarkeerde artikelen zijn al besteld door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen van deze artikelen verwijderd.'
-      warning_ordered_stock: 'Opgelet: rood gemarkeerde artikelen zijn al besteld of gekocht door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen/-aankopen van deze artikelen verwijderd, en worden ze niet afgerekend.'
+      warning_ordered: 'Opgelet: rood gemarkeerde artikelen zijn al besteld door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen van deze artikelen verwijderd. Bevestig onderaan om hiermee verder te gaan.'
+      warning_ordered_stock: 'Opgelet: rood gemarkeerde artikelen zijn al besteld of gekocht door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen/-aankopen van deze artikelen verwijderd, en worden ze niet afgerekend. Bevestig onderaan om hiermee verder te gaan.'
     new:
       title: Nieuwe bestelling openen
     receive:
