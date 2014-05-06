@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Finance::FinancialTransactionsController < ApplicationController
   before_filter :authenticate_finance
-  before_filter :find_ordergroup, :except => [:new_collection, :create_collection]
+  before_filter :find_ordergroup, :except => [:new_collection, :create_collection, :index_collection]
   inherit_resources
 #  belongs_to :ordergroup
 
@@ -19,11 +19,21 @@ class Finance::FinancialTransactionsController < ApplicationController
       sort = "created_on DESC"
     end
 
-    @financial_transactions = @ordergroup.financial_transactions.includes(:user).order(sort).
-        page(params[:page]).per(@per_page)
-    if params[:query].present?
-      @financial_transactions = @financial_transactions.where('note LIKE ?', "%#{params[:query]}%")
+    @q = FinancialTransaction.search(params[:q])
+    @financial_transactions_all = @q.result(distinct: true).includes(:user).order(sort)
+    @financial_transactions_all = @financial_transactions_all.where(ordergroup_id: @ordergroup.id) if @ordergroup
+    @financial_transactions = @financial_transactions_all.page(params[:page]).per(@per_page)
+
+    respond_to do |format|
+      format.js; format.html { render }
+      format.csv do
+        send_data FinancialTransactionsCsv.new(@financial_transactions_all).to_csv, filename: 'transactions.csv', type: 'text/csv'
+      end
     end
+  end
+
+  def index_collection
+    index
   end
 
   def new

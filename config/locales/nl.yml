@@ -588,8 +588,10 @@ nl:
         balance: 'Tegoed: %{balance}'
         last_updated_at: (laatst bijgewerkt %{when} geleden)
         new_transaction: Nieuwe transactie toevoegen
-        search_placeholder: Zoeken ...
         title: Rekeningoverzicht voor %{name}
+      index_collection:
+        title: Financiële transacties
+        show_groups: Tegoeden
       new:
         paragraph: Hier kun je het tegoed van huishouden <b>%{name}</b> ophogen en verlagen.
         title: Nieuwe transactie
@@ -601,6 +603,8 @@ nl:
       ordergroup:
         remove: Verwijderen
         remove_group: Huishouden verwijderen
+      transactions_search:
+        search_placeholder: Zoeken in notitie...
     index:
       amount_fc: Bedrag(FC)
       end: Einde
@@ -631,6 +635,7 @@ nl:
       index:
         new_transaction: Nieuwe transacties toevoegen
         search_placeholder: Zoeken ...
+        show_all: Transactieoverzicht
         title: Tegoeden beheren
       ordergroups:
         account_statement: Rekeningafschrift
