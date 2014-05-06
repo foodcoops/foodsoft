@@ -48,6 +48,8 @@
     %tr
       %td
         = check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
+        -# also when all are deselected, make sure this parameter is sent (controller removes empty values again)
+        = hidden_field_tag "order[article_ids][]", nil
       %td{:colspan => "6"}= t '.select_all'
 
   - if (@template_orders && !@template_orders.empty?)

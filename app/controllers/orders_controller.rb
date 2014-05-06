@@ -5,6 +5,7 @@
 class OrdersController < ApplicationController
   
   before_filter :authenticate_orders
+  before_filter :remove_empty_article, only: [:create, :update]
   
   # List orders
   def index
@@ -172,6 +173,10 @@ class OrdersController < ApplicationController
       notice << I18n.t('orders.update_order_amounts.msg4', count: counts[3], units: cunits[3])
     end
     notice.join(', ')
+  end
+
+  def remove_empty_article
+    params[:order][:article_ids].reject!(&:blank?) if params[:order] and params[:order][:article_ids]
   end
 
 end
