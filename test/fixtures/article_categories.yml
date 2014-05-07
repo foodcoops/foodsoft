@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-fruits:
-  name: Fruits
-  description: fruits and only fruits
-vegi:
-  name: Vegetables
-other:
-  name: Other stuff
-

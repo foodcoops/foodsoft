@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
-  group: admins
-  user: admin
-second:
-  group: bananas
-  user: test
-  
-
