@@ -13,7 +13,8 @@ class RenderCSV
   end
 
   def to_csv
-    CSV.generate @options do |csv|
+    options = @options.select {|k| %w(col_sep row_sep encoding).include? k.to_s}
+    CSV.generate options do |csv|
       if h = header
         csv << h
       end
