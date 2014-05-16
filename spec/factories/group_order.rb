@@ -5,6 +5,7 @@ FactoryGirl.define do
   # requires order
   factory :group_order do
     ordergroup { create(:user, groups: [FactoryGirl.create(:ordergroup)]).ordergroup }
+    order { create :order }
   end
 
 end
