@@ -185,12 +185,12 @@ class GroupOrderArticle < ActiveRecord::Base
   def total_price(order_article = self.order_article)
     if order_article.order.open?
       if FoodsoftConfig[:tolerance_is_costly]
-        order_article.article.fc_price * (quantity + tolerance)
+        order_article.article.fc_price(group_order.ordergroup) * (quantity + tolerance)
       else
-        order_article.article.fc_price * quantity
+        order_article.article.fc_price(group_order.ordergroup) * quantity
       end
     else
-      order_article.price.fc_price * result
+      order_article.price.fc_price(group_order.ordergroup) * result
     end
   end
 

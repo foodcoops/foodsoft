@@ -149,9 +149,9 @@ class Order < ActiveRecord::Base
         for goa in go.group_order_articles
           case type
             when :groups
-              total += goa.result * goa.order_article.price.fc_price
+              total += goa.result * goa.order_article.price.fc_price(goa.group_order.ordergroup)
             when :groups_without_markup
-              total += goa.result * goa.order_article.price.gross_price
+              total += goa.result * goa.order_article.price.gross_price(goa.group_order.ordergroup)
           end
         end
       end

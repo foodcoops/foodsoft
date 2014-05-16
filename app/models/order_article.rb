@@ -35,8 +35,8 @@ class OrderArticle < ActiveRecord::Base
   # Count quantities of belonging group_orders. 
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
-    quantity = group_order_articles.collect(&:result).sum
-    {:quantity => quantity, :price => quantity * price.fc_price}
+    quantity, fc_price = group_order_articles.inject([0,0]) {|sum, goa| [sum[0]+goa.result, sum[1]+goa.total_price]}
+    {:quantity => quantity, :price => fc_price}
   end
 
   # Update quantity/tolerance/units_to_order from group_order_articles

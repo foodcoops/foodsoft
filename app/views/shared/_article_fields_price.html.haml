@@ -26,9 +26,9 @@
     var price = parseFloat($('##{field}_price', form).val());
     var tax = parseFloat($('##{field}_tax', form).val());
     var deposit = parseFloat($('##{field}_deposit', form).val());
-    // Article#gross_price and Article#fc_price
+    // ArticlePrice#gross_price and ArticlePrice#fc_price
     var gross_price = (price + deposit) * (tax / 100 + 1);
-    var fc_price = gross_price  * (#{FoodsoftConfig[:price_markup].to_f} / 100 + 1);
+    var fc_price = gross_price  * (#{ArticlePrice.markup_pct.to_f} / 100 + 1);
     $('#article_fc_price').html($.isNumeric(fc_price) ? I18n.l("currency", fc_price) : '&#133;');
   });
 
