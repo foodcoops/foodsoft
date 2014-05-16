@@ -31,7 +31,13 @@ class ArticlePrice < ActiveRecord::Base
 
   # The markup percentage for the foodcoop-member.
   def self.markup_pct(group=nil)
-    FoodsoftConfig[:price_markup]
+    if group.present?
+      group.markup_pct
+    elsif list = FoodsoftConfig[:price_markup_list]
+      list[FoodsoftConfig[:price_markup]]['markup'].to_f
+    else
+      FoodsoftConfig[:price_markup].to_f
+    end
   end
 end
 

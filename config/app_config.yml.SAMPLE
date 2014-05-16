@@ -41,8 +41,21 @@ default: &defaults
   # When members are logged in, the language from their profile settings is still used.
   #ignore_browser_locale: false
 
-  # price markup in percent
+  # Price markup in percent
   price_markup: 2.0
+  # Alternatively, ordergroups can have different price levels as defined by
+  # `price_markup_list`. The key is an identifier (which shouldn't change),
+  # and contains `markup` with the markup percentage and an optional `name`.
+  # `price_markup` then is the default markup, pointing to an identifier.
+  #price_markup: volunteer
+  #price_markup_list:
+  #  reduction:
+  #    markup: 1
+  #  volunteer:
+  #    markup: 2.5
+  #  pickup:
+  #    markup: 5
+  #    name: Pick-up only
 
   # default vat percentage for new articles
   tax_default: 7.0

@@ -104,6 +104,7 @@ en:
         ignore_apple_restriction: Ignore order stop by apple points restriction
         last_order: Last order
         name: Name
+        price_markup_key: Foodcoop margin
         user_tokens: Members
       page:
         body: Body

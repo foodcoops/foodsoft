@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102170431) do
+ActiveRecord::Schema.define(version: 20140516125606) do
 
   create_table "article_categories", force: true do |t|
     t.string "name",        default: "", null: false
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 20140102170431) do
     t.text     "stats"
     t.integer  "next_weekly_tasks_number",                         default: 8
     t.boolean  "ignore_apple_restriction",                         default: false
+    t.string   "price_markup_key"
   end
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree

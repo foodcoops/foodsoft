@@ -104,6 +104,7 @@ nl:
         ignore_apple_restriction: Bestelstop vanwege appelpunten negeren
         last_order: Laatste bestelling
         name: Naam
+        price_markup_key: Foodcoop marge
         user_tokens: Leden
       page:
         body: Inhoud
