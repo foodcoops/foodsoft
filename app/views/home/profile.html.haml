@@ -10,7 +10,7 @@
       .form-actions
         = submit_tag t('ui.save'), class: 'btn'
   .span5
-    %h2= t '.groups.title'
+    %h3= t '.groups.title'
     %table.table.table-striped
       - @current_user.memberships.each do |membership|
         %tr
@@ -21,3 +21,6 @@
             %td= link_to t('.groups.cancel'), cancel_membership_path(membership_id: membership),
               :data => {confirm: t('.groups.cancel_confirm')}, method: :post,
               class: 'btn btn-danger btn-small'
+    - if FoodsoftConfig[:price_markup_list]
+      %h4= heading_helper(Ordergroup, :price_markup_key)
+      %p= price_markup_title(@current_user.ordergroup.price_markup_key)
