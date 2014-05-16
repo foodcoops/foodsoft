@@ -23,4 +23,4 @@
               class: 'btn btn-danger btn-small'
     - if FoodsoftConfig[:price_markup_list]
       %h4= heading_helper(Ordergroup, :price_markup_key)
-      %p= price_markup_title(@current_user.ordergroup.price_markup_key)
+      %p= show_price_markup @current_user.ordergroup, format: :full

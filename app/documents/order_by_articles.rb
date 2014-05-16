@@ -18,7 +18,7 @@ class OrderByArticles < OrderPdf
         rows << [goa.group_order.ordergroup.name,
                   "#{goa.quantity} + #{goa.tolerance}",
                  goa.result,
-                 number_with_precision(order_article.price.fc_price * goa.result, precision: 2)]
+                 number_with_precision(goa.total_price(order_article), precision: 2)]
         dimrows << rows.length if goa.result == 0
       end
       next if rows.length == 0

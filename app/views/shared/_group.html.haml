@@ -15,7 +15,7 @@
     = members.collect{|u| show_user(u)}.join(", ")
   - if group.is_a?(Ordergroup) and FoodsoftConfig[:price_markup_list]
     %dt= heading_helper(Ordergroup, :price_markup_key) + ':'
-    %dd= price_markup_title group.price_markup_key
+    %dd= show_price_markup group, format: :full
   - if group.is_a?(Ordergroup) and FoodsoftConfig[:use_apple_points]
     %dt= t '.apple_limit'
     %dd= group.ignore_apple_restriction ? t('.deactivated') : t('.activated')

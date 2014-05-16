@@ -1,5 +1,7 @@
 %tr{class: if goa.result == 0 then 'unavailable' end, id: "goa_#{goa.id}"}
-  %td{:style => "width:70%"}= goa.group_order.ordergroup.name
+  %td{:style => "width:70%"}
+    = goa.group_order.ordergroup.name
+    = show_price_markup goa.group_order.ordergroup, format: :icon, optional: true
   %td.center= "#{goa.quantity} + #{goa.tolerance}"
   %td.center.input-delta= (edit or true rescue true) ? group_order_article_edit_result(goa) : goa.result
   %td.price{data: {value: goa.total_price}}= number_to_currency(goa.total_price)

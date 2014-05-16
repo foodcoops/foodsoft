@@ -19,7 +19,7 @@ class OrderByGroups < OrderPdf
 
       group_order_articles = group_order.group_order_articles.ordered
       group_order_articles.each do |goa|
-        price = goa.order_article.price.fc_price
+        price = goa.order_article.price.fc_price(group_order.ordergroup)
         sub_total = price * goa.result
         total += sub_total
         rows <<  [goa.order_article.article.name,

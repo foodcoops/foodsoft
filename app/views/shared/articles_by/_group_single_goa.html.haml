@@ -4,7 +4,7 @@
   %td.center= "#{goa.quantity} + #{goa.tolerance}"
   %td.center.input-delta= (edit or true rescue true) ? group_order_article_edit_result(goa) : goa.result
   %td.symbol &times;
-  %td= number_to_currency(goa.order_article.price.fc_price)
+  %td= number_to_currency(goa.order_article.price.fc_price(goa.group_order.ordergroup))
   %td.symbol =
   %td.price{data: {value: goa.total_price}}= number_to_currency(goa.total_price)
   %td= pkg_helper goa.order_article.price

@@ -1,8 +1,10 @@
 %tbody{id: "group_order_#{group_order.id}"}
   - if not defined?(heading) or heading
     %tr.list-heading
-      %th{colspan: 9}
+      %th{colspan: 7}
         %h4.name= group_order.ordergroup.name
+      %th.price_markup_note{colspan: 3}
+        = show_price_markup group_order.ordergroup, format: :percent_label, optional: true
   - total = 0
   - for goa in group_order.group_order_articles.ordered.includes(:order_article)
     - total += goa.total_price
