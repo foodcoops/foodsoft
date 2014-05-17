@@ -1051,6 +1051,10 @@ nl:
       home: Hoofdpagina
       title: Wiki
     workgroups: Werkgroepen
+  number:
+    percentage:
+      format:
+        strip_insignificant_zeros: true
   order_articles:
     edit:
       stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!

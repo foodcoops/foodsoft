@@ -1065,6 +1065,10 @@ fr:
       home: Page d'accueil
       title: Wiki
     workgroups: Équipes
+  number:
+    percentage:
+      format:
+        strip_insignificant_zeros: true
   order_articles:
     edit:
       stock_alert: Le prix d'articles déjà en stock ne peut pas être modifié!

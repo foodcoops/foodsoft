@@ -1047,6 +1047,10 @@ de:
       home: Startseite
       title: Wiki
     workgroups: Arbeitsgruppen
+  number:
+    percentage:
+      format:
+        strip_insignificant_zeros: true
   order_articles:
     edit:
       stock_alert: Preise von Lagerartikeln können nicht geändert werden!
