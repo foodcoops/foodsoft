@@ -58,6 +58,8 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   # gem "rails-i18n-debug"
+  # chrome debugging extension https://github.com/dejan/rails_panel
+  gem 'meta_request'
   
   # Get infos when not using proper eager loading
   gem 'bullet'
