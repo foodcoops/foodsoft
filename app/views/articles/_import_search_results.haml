@@ -15,7 +15,7 @@
     %tbody
       - for article in @articles
         %tr{id: "shared_article_#{article.id}"}
-          %td= highlight article.name, params[:q][:name_cont_all]
+          %td= highlight article.name, search_params[:name_cont_all]
           %td= article.origin
           %td= article.manufacturer
           %td{title: article.note}= truncate(article.note, length: 11)

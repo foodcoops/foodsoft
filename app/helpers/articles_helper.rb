@@ -14,6 +14,7 @@ module ArticlesHelper
 
   # Flatten search params, used in import from external database
   def search_params
+    return {} unless params[:q]
     Hash[params[:q].map { |k,v| [k, (v.is_a?(Array) ? v.join(" ") : v)] }]
   end
 end
