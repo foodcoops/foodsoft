@@ -118,9 +118,9 @@ class Article < ActiveRecord::Base
           :manufacturer => [self.manufacturer, self.shared_article.manufacturer.to_s],
           :origin => [self.origin, self.shared_article.origin],
           :unit => [self.unit, new_unit],
-          :price => [self.price, new_price],
+          :price => [self.price.to_f.round(2), new_price.to_f.round(2)],
           :tax => [self.tax, self.shared_article.tax],
-          :deposit => [self.deposit, self.shared_article.deposit],
+          :deposit => [self.deposit.to_f.round(2), self.shared_article.deposit.to_f.round(2)],
           # take care of different num-objects.
           :unit_quantity => [self.unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
           :note => [self.note.to_s, self.shared_article.note.to_s]
