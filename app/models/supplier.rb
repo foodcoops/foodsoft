@@ -30,11 +30,11 @@ class Supplier < ActiveRecord::Base
     new_articles = Array.new
     for article in articles.undeleted
       # try to find the associated shared_article
-      shared_article = article.shared_article
+      shared_article = article.shared_article(self)
 
       if shared_article # article will be updated
         
-        unequal_attributes = article.shared_article_changed?
+        unequal_attributes = article.shared_article_changed?(self)
         unless unequal_attributes.blank? # skip if shared_article has not been changed
           
           # try to convert different units

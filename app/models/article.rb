@@ -100,9 +100,10 @@ class Article < ActiveRecord::Base
   # unequal attributes will returned in array
   # if only the timestamps differ and the attributes are equal, 
   # false will returned and self.shared_updated_on will be updated
-  def shared_article_changed?
+  def shared_article_changed?(supplier = self.supplier)
     # skip early if the timestamp hasn't changed
-    unless self.shared_article.nil? or self.shared_updated_on == self.shared_article.updated_on
+    shared_article = self.shared_article(supplier)
+    unless shared_article.nil? or self.shared_updated_on == shared_article.updated_on
       
       # try to convert units
       # convert supplier's price and unit_quantity into fc-size
@@ -110,27 +111,27 @@ class Article < ActiveRecord::Base
       new_unit = self.unit
       unless new_price and new_unit_quantity
         # if convertion isn't possible, take shared_article-price/unit_quantity
-        new_price, new_unit_quantity, new_unit = self.shared_article.price, self.shared_article.unit_quantity, self.shared_article.unit
+        new_price, new_unit_quantity, new_unit = shared_article.price, shared_article.unit_quantity, shared_article.unit
       end
       
       # check if all attributes differ
       unequal_attributes = Article.compare_attributes(
         {
-          :name => [self.name, self.shared_article.name],
-          :manufacturer => [self.manufacturer, self.shared_article.manufacturer.to_s],
-          :origin => [self.origin, self.shared_article.origin],
+          :name => [self.name, shared_article.name],
+          :manufacturer => [self.manufacturer, shared_article.manufacturer.to_s],
+          :origin => [self.origin, shared_article.origin],
           :unit => [self.unit, new_unit],
           :price => [self.price.to_f.round(2), new_price.to_f.round(2)],
-          :tax => [self.tax, self.shared_article.tax],
-          :deposit => [self.deposit.to_f.round(2), self.shared_article.deposit.to_f.round(2)],
+          :tax => [self.tax, shared_article.tax],
+          :deposit => [self.deposit.to_f.round(2), shared_article.deposit.to_f.round(2)],
           # take care of different num-objects.
           :unit_quantity => [self.unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
-          :note => [self.note.to_s, self.shared_article.note.to_s]
+          :note => [self.note.to_s, shared_article.note.to_s]
         }
       )
       if unequal_attributes.empty?            
         # when attributes not changed, update timestamp of article
-        self.update_attribute(:shared_updated_on, self.shared_article.updated_on)
+        self.update_attribute(:shared_updated_on, shared_article.updated_on)
         false
       else
         unequal_attributes
@@ -146,9 +147,9 @@ class Article < ActiveRecord::Base
   end
   
   # to get the correspondent shared article
-  def shared_article
+  def shared_article(supplier = self.supplier)
     self.order_number.blank? and return nil
-    @shared_article ||= self.supplier.shared_supplier.shared_articles.find_by_number(self.order_number) rescue nil
+    @shared_article ||= supplier.shared_supplier.shared_articles.find_by_number(self.order_number) rescue nil
   end
   
   # convert units in foodcoop-size
