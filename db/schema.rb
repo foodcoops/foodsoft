@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318173000) do
+ActiveRecord::Schema.define(version: 20140521142651) do
 
   create_table "article_categories", force: true do |t|
     t.string "name",        default: "", null: false
@@ -317,6 +317,7 @@ ActiveRecord::Schema.define(version: 20140318173000) do
     t.integer  "shared_supplier_id"
     t.string   "min_order_quantity"
     t.datetime "deleted_at"
+    t.string   "shared_sync_method"
   end
 
   add_index "suppliers", ["name"], name: "index_suppliers_on_name", unique: true, using: :btree

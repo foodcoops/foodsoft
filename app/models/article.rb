@@ -59,7 +59,9 @@ class Article < ActiveRecord::Base
   validates_numericality_of :price, :greater_than_or_equal_to => 0
   validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
-  validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type]
+  #validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type], if: Proc.new {|a| a.supplier.shared_sync_method.blank? or a.supplier.shared_sync_method == 'import' }
+  #validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit, :unit_quantity]
+  validate :uniqueness_of_name
   
   # Callbacks
   before_save :update_price_history
@@ -214,4 +216,18 @@ class Article < ActiveRecord::Base
   def price_changed?
     changed.detect { |attr| attr == 'price' || 'tax' || 'deposit' || 'unit_quantity' } ? true : false
   end
+
+  # We used have the name unique per supplier+deleted_at+type. With the addition of shared_sync_method all,
+  # this came in the way, and we now allow duplicate names for the 'all' methods - expecting foodcoops to
+  # make their own choice among products with different units by making articles available/unavailable.
+  def uniqueness_of_name
+    matches = Article.where(name: name, supplier_id: supplier_id, deleted_at: deleted_at, type: type)
+    matches = matches.where.not(id: id) unless new_record?
+    if supplier.shared_sync_method.blank? or supplier.shared_sync_method == 'import'
+      errors.add :name, :taken if matches.any?
+    else
+      errors.add :name, :taken_with_unit if matches.where(unit: unit, unit_quantity: unit_quantity).any?
+    end
+  end
+
 end

@@ -2,6 +2,7 @@ module ArticlesHelper
   
   # useful for highlighting attributes, when synchronizing articles
   def highlight_new(unequal_attributes, attribute)
+    return unless unequal_attributes
     unequal_attributes.detect {|a| a == attribute} ? "background-color: yellow" : ""
   end
 

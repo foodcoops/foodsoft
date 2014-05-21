@@ -14,5 +14,13 @@ class SharedSupplier < ActiveRecord::Base
     whitelist = %w(name address phone fax email url delivery_days note)
     attributes.select { |k,_v| whitelist.include?(k) }
   end
+
+  # return list of synchronisation methods available for this supplier
+  def shared_sync_methods
+    methods = []
+    methods += %w(all_available all_unavailable) if shared_articles.count < 200
+    methods += %w(import) # perhaps, in the future: if shared_articles.count > 20
+    methods
+  end
 end
 

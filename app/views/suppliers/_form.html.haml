@@ -16,6 +16,8 @@
   = f.input :order_howto, as: :text, input_html: {rows: 5}
   = f.input :note, as: :text, input_html: {rows: 5}
   = f.input :min_order_quantity
+  - if @supplier.shared_supplier
+    = f.input :shared_sync_method, collection: shared_sync_method_collection(@supplier.shared_supplier), input_html: {class: 'input-xlarge'}, include_blank: false, disabled: @supplier.shared_supplier.shared_sync_methods.count < 2
   .form-actions
     = f.submit class: 'btn'
     = link_to t('ui.or_cancel'), suppliers_path

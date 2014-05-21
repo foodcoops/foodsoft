@@ -108,7 +108,7 @@ describe Article do
 
     it 'does not synchronise when it has no order number' do
       article.update_attributes :order_number => nil
-      expect(supplier.sync_all).to eq [[], []]
+      expect(supplier.sync_all).to eq [[], [], []]
     end
   end
 end

@@ -10,6 +10,7 @@
     - if shared_supplier = @supplier.shared_supplier
       .alert.alert-info
         = t 'suppliers.shared_supplier_note'
+        = t "suppliers.shared_supplier_methods.#{@supplier.shared_sync_method}"
 
     %dl.dl-horizontal
       %dt= heading_helper(Supplier, :address) + ':'
