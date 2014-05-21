@@ -26,7 +26,7 @@ en:
         unit_quantity_short: U.Q.
         units: Units
       article_category:
-        description: Description
+        description: Import names
         name: Name
       article_price:
         deposit: Deposit
@@ -1299,6 +1299,8 @@ en:
     hints:
       article:
         unit: e.g. KG or 1L or 500g
+      article_category:
+        description: comma-separated list of category names recognised at import/synchronisation
       message:
         private: Message doesn’t show in Foodsoft mail inbox
       order_article:

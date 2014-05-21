@@ -26,7 +26,7 @@ nl:
         unit_quantity_short: Colli
         units: Eenheden
       article_category:
-        description: Omschrijving
+        description: Import namen
         name: Naam
       article_price:
         deposit: Statiegeld
@@ -1294,6 +1294,8 @@ nl:
     hints:
       article:
         unit: 'Bijvoorbeeld: KG of 1L of 500g'
+      article_category:
+        description: komma-gescheiden lijst van namen die herkend worden bij uploaden/synchroniseren
       message:
         private: Bericht wordt niet getoond in de Foodsoft inbox.
       order_article:

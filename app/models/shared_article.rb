@@ -19,6 +19,7 @@ class SharedArticle < ActiveRecord::Base
         :deposit => deposit,
         :unit_quantity => unit_quantity,
         :order_number => number,
+        :article_category => ArticleCategory.find_match(category),
         # convert to db-compatible-string
         :shared_updated_on => updated_on.to_formatted_s(:db)
     )

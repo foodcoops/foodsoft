@@ -148,7 +148,7 @@ class ArticlesController < ApplicationController
       no_category = ArticleCategory.new
       articles.each do |row|
         # fallback to Others category
-        category = (ArticleCategory.find_by_name(row[:category]) or no_category)
+        category = (ArticleCategory.find_match(row[:category]) or no_category)
         # creates a new article and price
         article = Article.new( :name => row[:name], 
                                :note => row[:note],
