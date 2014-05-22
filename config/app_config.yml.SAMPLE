@@ -56,6 +56,9 @@ default: &defaults
   #  pickup:
   #    markup: 5
   #    name: Pick-up only
+  # Default price markup format to show to members, `full` by default.
+  # One of `percent` `percent_label` `full` `full_label` `icon` `label`
+  #price_markup_member_format: full
 
   # default vat percentage for new articles
   tax_default: 7.0
