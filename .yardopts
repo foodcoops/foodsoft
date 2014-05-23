@@ -1,0 +1,1 @@
+-o doc/api --plugin yard-activerecord --no-private --protected app/**/*.rb db/schema.rb - *.md doc/**/*.md LICENSE

@@ -13,6 +13,8 @@ public/**/*_cached.*
 .get-dump.yml
 .sass-cache/
 doc/app/
+doc/api/
+.yarddoc/
 # Deployment tools
 Capfile
 config/deploy.rb
