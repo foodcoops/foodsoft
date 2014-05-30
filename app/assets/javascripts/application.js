@@ -77,15 +77,16 @@ $(function() {
     // Submit form when changing text of an input field.
     // Submission will be done after 500ms of not typed, unless data-submit-onchange=changed,
     // in which case it happens when the input box loses its focus ('changed' event).
-    $(document).on('changed keyup focusin', 'form[data-submit-onchange] input[type=text]:not([data-ignore-onchange])', function(e) {
+    // (changeDate is for bootstrap-datepicker)
+    $(document).on('changed keyup focusin changeDate', 'form[data-submit-onchange] input[type=text]:not([data-ignore-onchange])', function(e) {
         var input = $(this);
         // when form has data-submit-onchange=changed, don't do updates while typing
-        if (e.type!='changed' && input.parents('form[data-submit-onchange=changed]').length>0) {
+        if (e.type!='changed' && e.type!='changeDate' && input.parents('form[data-submit-onchange=changed]').length>0) {
           return true;
         }
-        // remember old value when it's getting the focus
+        // remember old value when it's getting the focus (unless we already have a change pending)
         if (e.type=='focusin') {
-          input.data('old-value', input.val());
+          if (!input.data('submit-timeout-id')) input.data('old-value', input.val());
           return true;
         }
         // trigger timeout to submit form when value was changed

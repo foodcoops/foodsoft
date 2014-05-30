@@ -40,8 +40,12 @@ module ApplicationHelper
       link_to(per_page, params, :remote => true, class: link_class)
     end
 
-    content_tag :div, class: 'btn-group pull-right' do
+    if options[:wrap] == false
       links.join.html_safe
+    else
+      content_tag :div, class: 'btn-group pull-right' do
+        links.join.html_safe
+      end
     end
 
   end

@@ -1,0 +1,22 @@
+.well.well-small
+  = search_form_for @q, url: url,
+        html: {data: {'submit-onchange' => true}, method: :get, remote: true, class: 'form-search'} do |f|
+    = f.text_field :note_cont, class: 'search-query', placeholder: t('.search_placeholder')
+
+    &nbsp;
+    = label_tag 'q_created_on_gteq', FinancialTransaction.human_attribute_name(:created_on)
+    &nbsp;
+    .input-append.input-prepend
+      = f.text_field :created_on_gteq, class: 'input-small datepicker'
+      %span.add-on -
+      = f.text_field :created_on_lteq, class: 'input-small search-query datepicker'
+
+    &nbsp;
+    = label_tag 'q_amount_gteq', FinancialTransaction.human_attribute_name(:amount)
+    &nbsp;
+    .input-append.input-prepend
+      %span.add-on= t 'number.currency.format.unit'
+      = f.text_field :amount_gteq, class: 'input-mini'
+      %span.add-on -
+      = f.text_field :amount_lteq, class: 'input-mini search-query'
+

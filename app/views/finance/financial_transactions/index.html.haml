@@ -8,11 +8,7 @@
     %strong= t('.balance', balance: number_to_currency(@ordergroup.account_balance))
     %br/
     %small= t('.last_updated_at', when: distance_of_time_in_words(Time.now, @ordergroup.account_updated))
-.well.well-small
-  = form_tag finance_ordergroup_transactions_path(@ordergroup), :method => :get, :remote => true,
-    'data-submit-onchange' => true, class: 'form-search' do
-    = text_field_tag :query, params[:query], class: 'input-medium search-query',
-      placeholder: t('.search_placeholder')
 
+= render 'transactions_search', url: finance_ordergroup_transactions_path(@ordergroup)
 
 #transactions= render 'transactions'
