@@ -61,7 +61,7 @@ class Mailer < ActionMailer::Base
     @transaction  = transaction
 
     mail :to => user.email,
-         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.negative_balance')
+         :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.negative_balance.subject')
   end
 
   def feedback(user, feedback)
