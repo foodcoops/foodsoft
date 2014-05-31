@@ -6,11 +6,9 @@ Setup
 
 1. Initialise your [Capistrano](http://capistranorb.com/) setup
 
-      ```sh
-      bundle exec cap install
-      sed -i 's|^# \(require.*rails.*\)|\1|' Capfile
-      cp config/deploy.rb.SAMPLE config/deploy.rb
-      ```
+       bundle exec cap install
+       sed -i 's|^# \(require.*rails.*\)|\1|' Capfile
+       cp config/deploy.rb.SAMPLE config/deploy.rb
 
    When you're using [RVM](http://rvm.io/) on the server you may want to
    uncomment the corresponding line in `Capfile`.

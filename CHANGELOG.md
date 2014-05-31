@@ -2,6 +2,7 @@
 (24 Feb 2014)
 
 Note: when you value stability, please wait for foodsoft 4.1.0.
+
 * Upgrade to Rails 4 (#214)
 
 # Foodsoft 3.3.0
@@ -24,6 +25,7 @@ Note: when you value stability, please wait for foodsoft 4.1.0.
 (16 December 2013)
 
 It's been a year since the previous release. Much has changed. Big changes have been:
+
 * Translations to English, Dutch and French.
 * Improved usability of delivery creation.
 * The possibility to extend foodsoft with plugins (the wiki is now optional).
