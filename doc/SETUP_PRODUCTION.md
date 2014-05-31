@@ -9,3 +9,5 @@ or mail some of us directly at
 [developers@foodcoop.nl](mailto:developers@foodcoop.nl) or foodsoft (at)
 foodcoops.net.
 
+* [Passenger](https://www.phusionpassenger.com/) may be convenient.
+* Redis is required for production by default.
