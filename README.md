@@ -4,6 +4,7 @@ Foodsoft
 [![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.png?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.png)](https://codeclimate.com/github/foodcoops/foodsoft)
 [![Dependency Status](https://gemnasium.com/foodcoops/foodsoft.png)](https://gemnasium.com/foodcoops/foodsoft)
+[![yard docs](http://b.repl.ca/v1/yard-docs-blue.png)](http://rubydoc.info/github/foodcoops/foodsoft/frames)
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
 
@@ -17,7 +18,7 @@ More information about using this software and contributing can be found on the 
 Developing
 ----------
 
-Get foodsoft [running locally](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_DEVELOPMENT.md),
+Get foodsoft [running locally](doc/SETUP_DEVELOPMENT.md),
 then visit our [Developing Guidelines](https://github.com/foodcoops/foodsoft/wiki/Developing-Guidelines)
 page on the wiki.
 
@@ -25,15 +26,13 @@ page on the wiki.
 Deploying
 ---------
 
-Setup foodsoft to [run in production](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_PRODUCTION.md),
-and automate [deployment](https://github.com/foodcoops/foodsoft/blob/master/doc/DEPLOYMENT.md). This section is
+Setup foodsoft to [run in production](doc/SETUP_PRODUCTION.md),
+and automate [deployment](doc/DEPLOYMENT.md). This section is
 very much a work in progress.
 
 
 License
 -------
 
-GPL version 3 or later, please see
-[LICENSE](https://github.com/foodcoops/foodsoft/blob/master/LICENSE)
-for the full text.
+GPL version 3 or later, please see [LICENSE](LICENSE.md) for the full text.
 
