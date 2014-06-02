@@ -32,7 +32,8 @@ class Order < ActiveRecord::Base
   scope :recent, -> { order('starts DESC').limit(10) }
 
   # Allow separate inputs for date and time
-  include DateTimeAttribute
+  #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
+  include DateTimeAttributeValidate
   date_time_attribute :starts, :ends
 
   def stockit?
