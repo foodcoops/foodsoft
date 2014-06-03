@@ -15,15 +15,15 @@ nl:
         manufacturer: Producent
         name: Naam
         note: Notitie
-        order_number: Ordernummer
+        order_number: Artikelnummer
         order_number_short: Nr.
         origin: Herkomst
         price: Netto prijs
         supplier: Leverancier
         tax: BTW
         unit: Eenheid
-        unit_quantity: Groothandelseenheid
-        unit_quantity_short: Gr.Eenh.
+        unit_quantity: Colligroote
+        unit_quantity_short: Colli
         units: Eenheden
       article_category:
         description: Omschrijving
@@ -32,7 +32,7 @@ nl:
         deposit: Statiegeld
         price: Netto prijs
         tax: BTW
-        unit_quantity: Groothandelseenheid
+        unit_quantity: Colligrootte
       delivery:
         delivered_on: Leverdatum
         note: Notitie
@@ -181,7 +181,7 @@ nl:
       article_category: Categorie
       delivery: Levering
       financial_transaction: Financiële transactie
-      invoice: Rekening
+      invoice: Factuur
       message: Bericht
       order: Bestelling
       order_article: Bestellingsartikel
@@ -314,8 +314,8 @@ nl:
       option_not_available: Artikelen onbeschikbaar maken
       option_select: Kies actie ...
       price_netto: Prijs
-      unit_quantity_desc: Groothandelsverpakkingsgrootte
-      unit_quantity_short: Gr.Eenh.
+      unit_quantity_desc: Aantal eenheden per doos (colli)
+      unit_quantity_short: Colli
     controller:
       create_from_upload:
         notice: Er zijn %{count} nieuwe artikelen opgeslagen.
@@ -381,14 +381,14 @@ nl:
         alert_used: Opgelet, %{article} wordt gebruikt in een lopende bestelling. Haal het eerst uit de bestelling.
         body: 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_ignored:
-          one: Er is één artikel zonder ordernummer overslagen.
-          other: '%{count} artikelen zonder ordernummer zijn overgeslagen.'
+          one: Er is één artikel zonder artikelnummer overslagen.
+          other: '%{count} artikelen zonder artikelnummer zijn overgeslagen.'
         body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
       price_short: prijs
       submit: Alles synchroniseren
       title: Artikelen met externe database synchroniseren
-      unit_quantity_short: Gr.Eenh.
+      unit_quantity_short: Colli
       update:
         body: 'Ieder artikel wordt tweemaal getoond: oude waarden zijn grijs, en de tekstvelden bevatten de nieuwe waarden. Verschillen met de oude artikelen zijn geel gemarkeerd.'
         title: Bijwerken ...
@@ -460,7 +460,7 @@ nl:
       - Besteld
       - Gekregen
       - Prijs
-      - Gr.Eenh.
+      - Colli
       - Eenheid
       - Som
       sum: Som
@@ -471,7 +471,7 @@ nl:
       - Nummer
       - Aantal
       - Naam
-      - Gr.Eenh.
+      - Colli
       - Eenheid
       - Prijs/eenh.
       - Subtotaal
@@ -533,7 +533,7 @@ nl:
         invoice_number: 'Factuurnummer:'
         minus_refund_calculated: '- statiegeld berekend:'
         new: factuur toevoegen
-        new_body: 'Een factuur aan deze rekening toevoegen:'
+        new_body: 'Een factuur aan deze bestelling toevoegen:'
         plus_refund_credited: '+ statiegeld teruggekregen:'
         refund_adjusted_amount: 'bedrag gecorrigeerd voor statiegeld:'
       new:
@@ -544,7 +544,7 @@ nl:
         comment_on_transaction: Hier kun je een notitie aan de afrekening toevoegen.
         comments: Notities
         confirm_order: Afrekenen
-        create_invoice: Rekening toevoegen
+        create_invoice: Factuur toevoegen
         edit_note: Notitie bewerken
         edit_order: Bestelling bewerken
         groups_overview: Overzicht per huishouden
@@ -566,16 +566,16 @@ nl:
       summary:
         changed: Waarden zijn gewijzigd!
         duration: Van %{starts} tot %{ends}
-        fc_amount: 'FC-bedrag:'
-        fc_profit: FC Winst
-        gross_amount: 'Bruto bedrag:'
-        groups_amount: 'Bedrag van huishoudens:'
-        net_amount: 'Netto bedrag:'
+        fc_amount: 'Verkoopwaarde:'
+        fc_profit: 'FC overschot:'
+        gross_amount: 'Bruto waarde:'
+        groups_amount: 'Totaal huishoudens:'
+        net_amount: 'Netto waarde:'
         reload: Samenvatting verversen
         with_extra_charge: 'inclusief marge:'
         without_extra_charge: 'zonder marge:'
     create:
-      notice: Rekening is gemaakt
+      notice: Rekening is gemaakt.
     financial_transactions:
       controller:
         create:
@@ -590,8 +590,8 @@ nl:
         new_transaction: Nieuwe transactie toevoegen
         title: Rekeningoverzicht voor %{name}
       index_collection:
-        title: Financiële transacties
         show_groups: Tegoeden
+        title: Financiële transacties
       new:
         paragraph: Hier kun je het tegoed van huishouden <b>%{name}</b> ophogen en verlagen.
         title: Nieuwe transactie
@@ -604,7 +604,7 @@ nl:
         remove: Verwijderen
         remove_group: Huishouden verwijderen
       transactions_search:
-        search_placeholder: Zoeken in notitie...
+        search_placeholder: Zoeken in notitie ...
     index:
       amount_fc: Bedrag(FC)
       end: Einde
@@ -754,8 +754,8 @@ nl:
       show_google_maps: Op Google maps bekijken
       sort_by: Sorteren op %{text}
     deliveries:
-      new_invoice: Nieuwe rekening
-      show_invoice: Rekening tonen
+      new_invoice: Nieuwe factuur
+      show_invoice: Factuur tonen
     messages:
       write_message: Bericht schrijven
     orders:
@@ -816,7 +816,7 @@ nl:
         cancel: Verlaat groep
         cancel_confirm: Weet je zeker dat je deze groep wilt verlaten?
         invite: Nieuw lid uitnodigen
-        title: Je bent lid van de volgende groepen
+        title: Je bent lid van de groepen
       title: Mijn Profiel
       user:
         since: '(gebruiker sinds: %{when})'
@@ -888,7 +888,7 @@ nl:
       error_invite_invalid: Deze uitnodiging is niet (meer) geldig.
       error_token_invalid: Onjuist of verlopen token. Probeer het opnieuw.
       reset_password:
-        notice: Als je e-mailadres hier is geregistreerd, krijg je een bericht met een link om je wachtwoord opnieuw in te stellen.
+        notice: 'Als je e-mailadres hier is geregistreerd, krijg je een bericht met een link om je wachtwoord opnieuw in te stellen. Tip: kijk ook in je spam-folder.'
       update_password:
         notice: Je wachtwoord is veranderd. Nu kun je weer inloggen.
     forgot_password:
@@ -1084,7 +1084,7 @@ nl:
     create:
       notice: De bestelling is aangemaakt.
     edit:
-      title: Bestelling aanpassen
+      title: 'Bestelling aanpassen: %{name}'
     edit_amount:
       field_locked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast, daarom is dit veld beschermd. Om dit artikel toch te herverdelen en de handmatige wijzigingen teniet te doen kun je op de knop met het slot drukken.
       field_unlocked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast. Als je de hoeveelheid hier verandert, worden deze handmatige aanpassingen overschreven.
@@ -1163,7 +1163,7 @@ nl:
         articles: Artikelen zoeken...
         default: Artikelen zoeken...
         groups: Huishoudens zoeken...
-      search_reset: 
+      search_reset: Zoekopdracht wissen
       sort_article: Per artikel
       sort_group: Per huishouden
       title: 'Bestelling: %{name}'

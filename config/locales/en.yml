@@ -317,7 +317,7 @@ en:
       option_select: Select action ...
       price_netto: Price
       unit_quantity_desc: Unit quantity
-      unit_quantity_short: Quantity
+      unit_quantity_short: U.Q.
     controller:
       create_from_upload:
         notice: '%{count} new articles were saved.'
@@ -450,7 +450,7 @@ en:
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
       rows:
-      - Order group
+      - Ordergroup
       - Ordered
       - Received
       - Price
@@ -568,16 +568,16 @@ en:
       summary:
         changed: Data was changed!
         duration: From %{starts} till %{ends}
-        fc_amount: 'FC-amount:'
-        fc_profit: FC Profit
-        gross_amount: 'Gross amount:'
-        groups_amount: 'Group amounts:'
-        net_amount: 'Net amount:'
+        fc_amount: 'Sales value:'
+        fc_profit: 'FC surplus:'
+        gross_amount: 'Gross value:'
+        groups_amount: 'Ordergroups sum:'
+        net_amount: 'Net value:'
         reload: Reload summary
         with_extra_charge: 'with extra charge:'
         without_extra_charge: 'without extra charge:'
     create:
-      notice: Invoice was created
+      notice: Invoice was created.
     financial_transactions:
       controller:
         create:
@@ -592,15 +592,15 @@ en:
         new_transaction: Create new transaction
         title: Account statement for %{name}
       index_collection:
-        title: Financial transactions
         show_groups: Manage accounts
+        title: Financial transactions
       new:
-        paragraph: Here you can credit and debit money for the order group <b>%{name}</b>.
+        paragraph: Here you can credit and debit money for the ordergroup <b>%{name}</b>.
         title: New transaction
       new_collection:
-        new_ordergroup: Add new order group
+        new_ordergroup: Add new ordergroup
         save: Save transaction
-        sidebar: Here you can update more accounts at the same time. For example all transfers of the order group from one account statement.
+        sidebar: Here you can update more accounts at the same time. For example all transfers of the ordergroup from one account statement.
         title: Updating more accounts
       ordergroup:
         remove: Remove
@@ -655,7 +655,7 @@ en:
       index:
         body: <p>Here you can write a message to the members of your Foodcoop.</p> <p>You have to approve in your %{profile_link} that your contact details are visible.</p>
         ph_name: Name ...
-        ph_ordergroup: Order group ...
+        ph_ordergroup: Ordergroup ...
         profile_link: options
         title: Users
     workgroups:
@@ -686,7 +686,7 @@ en:
       notice: The order was saved.
     errors:
       closed: This order is already closed.
-      no_member: You are not a member of an order group.
+      no_member: You are not a member of an ordergroup.
       notfound: Incorrect URL, this is not your order.
     form:
       action_save: Save order
@@ -816,7 +816,7 @@ en:
         cancel: Leave group
         cancel_confirm: Are you sure you want to leave this group?
         invite: Invite new members
-        title: You are member of the following groups
+        title: You are member of the groups
       title: My Profile
       user:
         since: '(member since: %{when})'
@@ -888,7 +888,7 @@ en:
       error_invite_invalid: Your invite is not valid (anymore).
       error_token_invalid: Invalid or expired token. Please try again.
       reset_password:
-        notice: If your email is registered here, you will receive a message with a link to reset your password.
+        notice: If your email is registered here, you will receive a message with a link to reset your password. You may need to check your spam folder.
       update_password:
         notice: Your password was updated. You can login now.
     forgot_password:
@@ -1026,7 +1026,7 @@ en:
     page:
       redirect: Redirect to [[%{title}]]...
     user:
-      no_ordergroup: no order group
+      no_ordergroup: no ordergroup
   navigation:
     admin:
       home: Overview
@@ -1089,7 +1089,7 @@ en:
     create:
       notice: The order was created.
     edit:
-      title: ! 'Edit order: %{name}'
+      title: 'Edit order: %{name}'
     edit_amount:
       field_locked_title: The distribution of this article among the ordergroups was changed manually. This field is locked to protect those changes. To redistribute and overwrite those changes, press the unlock button and change the amount.
       field_unlocked_title: The distribution of this article among the ordergroups was changed manually. When you change the amount, those manual changes will be overwritten.
@@ -1288,7 +1288,7 @@ en:
       user_not_found: No user found
     open_orders:
       no_open_orders: There are no current orders
-      not_enough_apples: Attention your order group has too few apple points to place an order!
+      not_enough_apples: Attention your ordergroup has too few apple points to place an order!
       title: Current orders
       total_sum: Total sum
       who_ordered: Who ordered?
