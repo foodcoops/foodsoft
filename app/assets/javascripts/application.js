@@ -140,7 +140,7 @@ $(function() {
     });
 
     // Use bootstrap datepicker for dateinput
-    $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale});
+    $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale, todayHighlight: true});
 
     // bootstrap tooltips (for price)
     //   Extra options don't work when using selector, so override defaults

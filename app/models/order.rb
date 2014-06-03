@@ -1,7 +1,6 @@
 # encoding: utf-8
 #
 class Order < ActiveRecord::Base
-
   attr_accessor :ignore_warnings
 
   # Associations
@@ -30,8 +29,12 @@ class Order < ActiveRecord::Base
   scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
   scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
-
   scope :recent, -> { order('starts DESC').limit(10) }
+
+  # Allow separate inputs for date and time
+  #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
+  include DateTimeAttributeValidate
+  date_time_attribute :starts, :ends
 
   def stockit?
     supplier_id == 0

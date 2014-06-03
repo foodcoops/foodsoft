@@ -1,3 +1,10 @@
 - title t('.title')
 
 = render 'form'
+
+- content_for :javascript do
+  :javascript
+    // select all articles by default
+    $(function() {
+      $('#checkall').click();
+    });

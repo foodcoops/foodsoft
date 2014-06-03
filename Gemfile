@@ -16,6 +16,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'date_time_attribute'
 gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
 gem 'i18n-js', git: 'git://github.com/fnando/i18n-js.git' # to avoid US-ASCII js.erb error
 gem 'rails-i18n'
@@ -92,7 +93,7 @@ group :test do
   gem 'database_cleaner'
   gem 'connection_pool'
   # need to include rspec components before i18n-spec or rake fails in test environment
-  gem 'rspec-core'
+  gem 'rspec-core', '= 2.14.8' # version until we're ready for rspec 3.0
   gem 'rspec-expectations'
   gem 'rspec-rerun'
   gem 'i18n-spec'
