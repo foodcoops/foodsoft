@@ -112,7 +112,7 @@ fr:
       stock_article:
         available: Disponible
         price: Prix net
-        quantity: en Stock
+        quantity: en stock
         quantity_available: Quantité disponible
         quantity_available_short: Disp.
         quantity_ordered: Commandés
@@ -187,7 +187,7 @@ fr:
       order_article: Article à commander
       order_comment: Commentaire
       ordergroup: Cellule
-      stock_article: l'article à stocker
+      stock_article: l'article à ajouter au cellier
       stock_taking: Inventaire
       supplier: FournisseusE_r
       task: Boulot
@@ -411,7 +411,7 @@ fr:
       title: '%{supplier} / Transférer les données sur l''article'
   deliveries:
     add_stock_change:
-      how_many_units: Combien d unités (%{unit}) de l article %{name} doivent-elles être livrées?
+      how_many_units: Combien d'unités (%{unit}) de l'article %{name} doivent-elles être livrées?
     create:
       notice: Le réapprovisionnement a bien a été défini. Attention à ne pas oublier de déposer la facture correspondante!
     destroy:
@@ -419,20 +419,20 @@ fr:
     edit:
       title: Modifier le réapprovisionnement
     form:
-      confirm_foreign_supplier_reedit: 'L''article en stock %{name} a bien été sauvegardé. Mais un problème a été détecté: l''article provient d''unE autre fournisseurE que celleui dont provient cette livraison. Modifier l''article à nouvau?'
+      confirm_foreign_supplier_reedit: 'L''article %{name} a bien été ajouté au cellier. Mais un problème a été détecté: l''article provient d''unE autre fournisseurE que celleui dont provient cette livraison. Modifier l''article à nouvau?'
       create_from_blank: Ajouter un nouvel article quelconque
-      create_stock_article: Ajouter un article au stock
+      create_stock_article: Ajouter un article au cellier
       title_fill_quantities: 2. Définir la quantité à livrer
       title_finish_delivery: 3. Clore le réapprovisionnement
-      title_select_stock_articles: 1. Choisir les articles en stock
+      title_select_stock_articles: 1. Choisir les articles dans le cellier
     index:
       confirm_delete: T'es sûrE de ton coup?
-      new_delivery: Réapprovisionner le stock par %{supplier}
+      new_delivery: Réapprovisionner le cellier par %{supplier}
       title: '%{supplier}/Réapprovisionnements'
     invoice_amount: Montant de la facture
     invoice_net_amount: Montant net de la facture
     new:
-      title: Réapprovisionner le stock par %{supplier}
+      title: Réapprovisionner le cellier par %{supplier}
     show:
       sum: Prix total
       sum_diff: montant brut - montant net
@@ -574,8 +574,8 @@ fr:
         changed: Les données ont été modifiées!
         duration: von %{starts} bis %{ends}
         fc_amount: 'Montant boufcoop:'
-        fc_profit: Gain de la boufcoop
-        gross_amount: Montant brut
+        fc_profit: 'Gain de la boufcoop:'
+        gross_amount: 'Montant brut:'
         groups_amount: 'Montant pour chaque cellule:'
         net_amount: 'Montant net:'
         reload: Actualiser le résumé
@@ -595,8 +595,10 @@ fr:
         balance: 'Solde: %{balance}'
         last_updated_at: (dernière mise à jour il y a %{when})
         new_transaction: Ajouter une nouvelle transaction
-        search_placeholder: Rechercher ...
         title: Relevé de compte pour %{name}
+      index_collection:
+        show_groups: 
+        title: 
       new:
         paragraph: Cet espace permet de rajouter ou d'enlever du crédit à la cellule <b>%{name}</b>.
         title: Nouvelle transaction
@@ -608,6 +610,8 @@ fr:
       ordergroup:
         remove: Supprimer
         remove_group: Supprimer cette cellule
+      transactions_search:
+        search_placeholder: 
     index:
       amount_fc: Montant(boufcoop)
       end: Fin
@@ -638,6 +642,7 @@ fr:
       index:
         new_transaction: Saisir une nouvelle transaction
         search_placeholder: Rechercher ...
+        show_all: 
         title: Crédits des cellules
       ordergroups:
         account_statement: Relevé de compte
@@ -769,7 +774,7 @@ fr:
     orders:
       old_price: Ancien prix
       option_choose: Choix d'unE fournisseusE_r
-      option_stock: Stock
+      option_stock: Cellier
       order_pdf: Générer un PDF
     submit:
       invite:
@@ -827,7 +832,7 @@ fr:
         cancel: Quitter cette équipe
         cancel_confirm: T'es sûrE de vouloir partir?
         invite: Engrainer de nouveaux membres
-        title: Tu fais partie des équipes suivantes
+        title: Tu fais partie des équipes
       title: Ton profil
       user:
         since: '(Membre depuis: %{when})'
@@ -848,7 +853,7 @@ fr:
         title: Commandes
       products:
         edit: Mettre à jour les articles
-        edit_stock: Gérer les stocks
+        edit_stock: Gérer le cellier
         edit_suppliers: Gérer les fournisseusEs_rs
         title: Gérer les articles
       tasks: Ton boulot
@@ -1022,7 +1027,7 @@ fr:
         Préférences des messages: %{profile_url}
   model:
     delivery:
-      each_stock_article_must_be_unique: Chaque article à stocker ne peut apparaître qu'une seule fois dans la commande.
+      each_stock_article_must_be_unique: Chaque article du cellier ne peut apparaître qu'une seule fois dans la commande.
     membership:
       no_admin_delete: 'Pas moyen de quitter le navire: tu es le ou la dernièrE administratrice à bord!'
     order_article:
@@ -1040,7 +1045,7 @@ fr:
       workgroups: Équipes
     articles:
       categories: Catégories
-      stock: Gestion du stock
+      stock: Gestion du cellier
       suppliers: FournisseusEs_rs/Articles
       title: Articles
     dashboard: Tableau de bord
@@ -1071,7 +1076,7 @@ fr:
         strip_insignificant_zeros: true
   order_articles:
     edit:
-      stock_alert: Le prix d'articles déjà en stock ne peut pas être modifié!
+      stock_alert: Le prix d'articles déjà présents dans le cellier ne peut plus être modifié!
       title: Mettre à jour la liste des article
     new:
       title: Ajouter l'article à une commande
@@ -1093,7 +1098,7 @@ fr:
     create:
       notice: La commande a bien été définie.
     edit:
-      title: Modifier la commande
+      title: 'Modifier la commande: %{name}'
     edit_amount:
       field_locked_title: La répartition de cet article entre les cellules a été modifiée manuellement, et ce champ a été verrouillé pour éviter tout nouveau changement intempestif. Si tu veux tout de même effectuer un changement, cliques d'abord sur "Déverouiller".
       field_unlocked_title: La répartition de cet article entre les cellules a été modifiée manuellement. Toute nouvelle modification entrainera une perte de la valeur enregistrée actuellement.
@@ -1111,7 +1116,7 @@ fr:
       ignore_warnings: Ignorer les avertissements
       prices: Prix (net/coop)
       select_all: Tout sélectionner
-      stockit: Disponible
+      stockit: En stoc
       title: Article
     index:
       action_end: Terminer
@@ -1130,7 +1135,7 @@ fr:
       error_nosel: Au minimum un article doit être sélectionné.
       error_starts_before_ends: doit être postérieur à la date de début de la commande (ou bien être laissé vierge)
       notice_close: 'Commande: %{name}, jusqu''au %{ends}'
-      stock: Stock
+      stock: Cellier
       warning_ordered: 'Attention: les articles en rouge ont déjà été commandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
       warning_ordered_stock: 'Attention: les articles en rouge ont déjà été demandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
     new:
@@ -1311,7 +1316,7 @@ fr:
         copy:
           name: Merci de modifier
         edit_stock_article:
-          price: <ul><li>Modification du prix enregistrée. </li><li>Si nécessaire %{stock_article_copy_link}.</li></ul>
+          price: <ul><li>Modification du prix interdite. </li><li>Si nécessaire %{stock_article_copy_link}.</li></ul>
       supplier:
         min_order_quantity: Ce prix minimum sera affiché avec la liste de commande et permet de motiver les membres
       task:
@@ -1353,22 +1358,22 @@ fr:
     edit:
       title: Modifier les données de l'inventaire
     index:
-      new_inventory: Inventorier le stock
+      new_inventory: Inventorier le cellier
       title: Aperçu  de l'inventaire
     new:
       amount: Quantité
       create: ajouter
-      stock_articles: Articles en stock
+      stock_articles: Articles du cellier
       temp_inventory: l'inventaire courant
       text_deviations: |-
         Saisir ici les déviations constatées par rapport à %{inv_link}.
         En cas de manque, utiliser un signe '-'.
       text_need_articles: Si certains articles n'apparaissent pas sur l'inventaire courant, il faut les y %{create_link} directement.
-      title: Inventorier le stock
+      title: Inventorier le cellier
     show:
       amount: Quantité
       article: Article
-      confirm_delete: Vraiment annuler cet inventaire?
+      confirm_delete: Veux-tu vraiment annuler cet inventaire?
       date: Date
       note: Note
       overview: Aperçu de l'inventaire
@@ -1387,31 +1392,31 @@ fr:
     copy:
       title: Copier l'article
     create:
-      notice: L'article %{name} a été ajouté à la liste des articles en stock.
+      notice: L'article %{name} a été ajouté à la liste des articles du cellier.
     derive:
-      title: Ajouter un article au stock en utilisant un modèle
+      title: Ajouter un article au cellier en utilisant un modèle
     destroy:
-      notice: L'article %{name} a bien été supprimé du stock.
+      notice: L'article %{name} a bien été supprimé du cellier.
     edit:
       title: Modifier l'article
     form:
       copy_stock_article: copier l'article
-      price_hint: Pour éviter que ça soit le bazar, les prix des articles en stock ne peuvent plus être modifiés.
+      price_hint: Pour éviter que ça soit le bazar, les prix des articles du cellier ne peuvent plus être modifiés.
     index:
       confirm_delete: T'es sûrE de ton coup?
-      new_delivery: Réapprovisionner le stock...
-      new_stock_article: Ajouter un article au stock
-      new_stock_taking: Inventorier le stock
-      order_online: Définir une commande à partir du stock
+      new_delivery: Réapprovisionner le cellier...
+      new_stock_article: Ajouter un article au cellier
+      new_stock_taking: Inventorier le cellier
+      order_online: Définir une commande à partir du cellier
       show_stock_takings: Historique des inventaires
       stock_count: 'Nombre d''articles:'
-      stock_worth: 'Valeur actuelle du stock:'
-      title: Stock (%{article_count})
+      stock_worth: 'Valeur actuelle du cellier:'
+      title: Cellier (%{article_count})
       toggle_unavailable: Afficher/cacher les articles actuellement indisponibles
       view_options: Préférences d'affichage
     new:
       search_text: 'Rechercher des articles dans tous les catalogues:'
-      title: Ajouter un article au stock
+      title: Ajouter un article au cellier
     show:
       change_quantity: Modification
       datetime: Temps
@@ -1419,7 +1424,7 @@ fr:
       reason: Raison
       stock_changes: Afficher l'historique
     stock_article:
-      confirm_delete: Es-tu sûr de vouloir supprimer l'article %{name} du stock?
+      confirm_delete: Es-tu sûr de vouloir supprimer l'article %{name} du cellier?
     update:
       notice: Les données de l'article "%{name}" ont été mises à jour.
   suppliers:
@@ -1453,7 +1458,7 @@ fr:
       confirm_delete: Tu es sûrE de ton coup?
       last_deliveries: Dernières livraisons
       last_orders: Dernières commande
-      new_delivery: Réapprovisionner le stock
+      new_delivery: Réapprovisionner le cellier
       show_deliveries: Afficher tous les réapprovisionnements
     update:
       notice: Les données du_de la fournisseurE ont été mises à jour

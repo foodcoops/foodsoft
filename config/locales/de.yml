@@ -567,7 +567,7 @@ de:
         changed: Daten wurden verändert!
         duration: von %{starts} bis %{ends}
         fc_amount: 'FC-Betrag:'
-        fc_profit: FC Gewinn
+        fc_profit: 'FC Gewinn:'
         gross_amount: 'Bruttobetrag:'
         groups_amount: 'Gruppenbeträge:'
         net_amount: 'Nettobetrag:'
@@ -588,8 +588,10 @@ de:
         balance: 'Kontostand: %{balance}'
         last_updated_at: (zuletzt aktualisiert vor %{when})
         new_transaction: Neue Transaktion anlegen
-        search_placeholder: Suchen ...
         title: Kontoauszug für %{name}
+      index_collection:
+        show_groups: 
+        title: 
       new:
         paragraph: Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.
         title: Neue Transaktion
@@ -601,6 +603,8 @@ de:
       ordergroup:
         remove: Entfernen
         remove_group: Gruppe enfernen
+      transactions_search:
+        search_placeholder: 
     index:
       amount_fc: Betrag(FC)
       end: Ende
@@ -631,6 +635,7 @@ de:
       index:
         new_transaction: Neue Überweisungen eingeben
         search_placeholder: Suchen ...
+        show_all: 
         title: Konten verwalten
       ordergroups:
         account_statement: Kontoauszug
@@ -1075,7 +1080,7 @@ de:
     create:
       notice: Die Bestellung wurde erstellt.
     edit:
-      title: Bestellung bearbeiten
+      title: 'Bestellung bearbeiten: %{name}'
     edit_amount:
       field_locked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Das Eingabefeld wurde gesperrt, um die manuellen Änderungen zu bewahren. Um den Artikel neu zu verteilen, drücke den Entsperrknopf und ändere die gelieferte Menge.
       field_unlocked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Wenn du die gelieferte Menge änderst, werden die vorherigen manuellen Änderungen überschrieben.
