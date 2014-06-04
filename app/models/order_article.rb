@@ -184,10 +184,11 @@ class OrderArticle < ActiveRecord::Base
     @update_global_price = (value == true or value == '1') ?  true : false
   end
 
-  # Units missing for the next full unit_quantity of the article
+  # @return [Number] Units missing for the last +unit_quantity+ of the article.
   def missing_units
     units = article.unit_quantity - ((quantity  % article.unit_quantity) + tolerance)
     units = 0 if units < 0
+    units = 0 if units == article.unit_quantity
     units
   end
   

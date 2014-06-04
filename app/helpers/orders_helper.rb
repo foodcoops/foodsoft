@@ -125,10 +125,14 @@ module OrdersHelper
   end
 
   # @param order_article [OrderArticle]
-  # @return [String] CSS class for +OrderArticle+ in table for admins
+  # @return [String] CSS class for +OrderArticle+ in table for admins (+used+, +partused+, +unused+ or +unavailable+).
   def order_article_class(order_article)
     if order_article.units > 0
-      'used'
+      if order_article.missing_units == 0
+        'used'
+      else
+        'partused'
+      end
     elsif order_article.quantity > 0
       'unused'
     else
