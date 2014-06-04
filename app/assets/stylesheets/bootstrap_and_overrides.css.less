@@ -38,6 +38,7 @@ body {
 
 // article status
 @articleUsedColor: green;
+@articlePartusedColor: #d50;
 @articleUnusedColor: red;
 @articleUnavailColor: #999;
 @articleUpdatedColor: #468847;
@@ -158,6 +159,9 @@ table {
 .unused {
   color: @articleUnusedColor;
 }
+.partused {
+  color: @articlePartusedColor;
+}
 
 #order-footer, .article-info {
   text-align: left;
@@ -253,6 +257,7 @@ td.symbol, th.symbol {
 .symbol              { color: tint(@textColor, @nonessentialDim); }
 .used        .symbol { color: tint(@articleUsedColor, @nonessentialDim); }
 .unused      .symbol { color: tint(@articleUnusedColor, @nonessentialDim); }
+.partused    .symbol { color: tint(@articlePartusedColor, @nonessentialDim); }
 .unavailable .symbol { color: @articleUnavailColor; }
 
 // hide symbols completely on small screens to save space
@@ -359,6 +364,7 @@ i.package.icon-only {
 .package              { color: tint(@textColor, @nonessentialDim); }
 .used        .package { color: tint(@articleUsedColor, @nonessentialDim); }
 .unused      .package { color: tint(@articleUnusedColor, @nonessentialDim); }
+.partused    .package { color: tint(@articlePartusedColor, @nonessentialDim); }
 .unavailable .package { color: @articleUnavailColor; }
 
 // very small inputs - need !important for responsive selectors
