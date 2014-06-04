@@ -1,6 +1,6 @@
 ###!
 Copyright (c) 2013 Derek Petersen https://github.com/tuxracer/touchclick MIT License
-https://raw2.github.com/tuxracer/touchclick/3.0.1/src/touchclick.coffee
+https://github.com/tuxracer/touchclick/raw/3.1.0/src/touchclick.coffee
 ###
 
 $ = if typeof jQuery is 'function' then jQuery else require 'jquery'
@@ -56,9 +56,9 @@ events = (type) ->
     $el[type] 'click', (e) ->
       e.preventDefault()
 
-  if window.navigator.msPointerEnabled
-    $el[type] 'MSPointerDown', touchstart
-    $el[type] 'MSPointerUp', touchend
+  if window.navigator.pointerEnabled
+    $el[type] 'pointerdown', touchstart
+    $el[type] 'pointerup', touchend
   else
     $el[type] 'touchstart mousedown', touchstart
     $el[type] 'touchmove mouseout', touchmove
