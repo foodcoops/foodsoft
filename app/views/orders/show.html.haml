@@ -66,7 +66,7 @@
       -# TODO btn-success class only if not received before
       = link_to t('orders.index.action_receive'), receive_order_path(@order), class: 'btn btn-success'
     - unless @order.closed?
-      = link_to t('ui.delete'), @order, data_confirm: t('.confirm_delete'), method: :delete,
+      = link_to t('ui.delete'), @order, data: {confirm: t('.confirm_delete')}, method: :delete,
         class: 'btn btn-danger'
 
 %section#articles_table
