@@ -398,8 +398,7 @@ de:
     upload:
       body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert.</p> <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden.</p> <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>
       fields:
-        season_amount: Staffelmenge
-        season_price: Staffelpreis
+        reserved: 
         status: Status (x=ausgelistet)
       file_label: Bitte wähle eine kompatible Datei aus
       submit: Datei hochladen

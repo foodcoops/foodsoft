@@ -403,8 +403,7 @@ fr:
         <p>Les champs doivent être délimités par des points-virgules (';'), et le texte compris entre guillemets ("texte...")</p>
         <p>L'encodage du fichier doit être UTF-8. L'ordre des colonnes est:</p>
       fields:
-        season_amount: Quantité échelonnée
-        season_price: Prix échelonné
+        reserved: 
         status: Statut (x=exclu)
       file_label: Merci de choisir un fichier compatible
       submit: Transférer le fichier
