@@ -40,4 +40,7 @@ Foodsoft::Application.configure do
   # Mailcatcher can be installed by gem install mailcatcher
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
+
+  # Run resque tasks as part of the main app (not recommended for production)
+  Resque.inline = true
 end

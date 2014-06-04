@@ -36,4 +36,7 @@ Foodsoft::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Run resque tasks as part of the main app
+  Resque.inline = true
 end

@@ -21,14 +21,14 @@ Getting started
    unfinished parts. If you want to be safe, choose the last release:
    `git checkout $(git tag -l | grep ^v | sort -rn | head -n1)`
 
-1. Install RVM and Ruby 2.0 (if you have not done so before):
+1. Install RVM and Ruby 2 (if you have not done so before):
 
        \curl -L https://get.rvm.io | bash
        source ~/.rvm/scripts/rvm
        rvm install 2.0
 
     We try to keep foodsoft compatible with Ruby 1.9.3 as well as any later versions,
-    so if you have those and don't want to use RVM, that might actually work.
+    so if you use this and don't want to use RVM, that might actually work.
 
 2. Install Ruby dependencies:
 
@@ -121,16 +121,16 @@ explained here.
 
 
 6. (optional) Get **background jobs** done
- 
-   We use for time intensive tasks a background job queue, at the moment resque
-   with redis as key/value store.  Install redis (in ubuntu the package
-   redis-server works out of the box) and start the resque worker with:
 
-       rake resque:work QUEUE=foodsoft_notifier
+   Time intensive tasks may block the web request. To run these in a separate
+   task, you can install Redis and enable Resque:
+
+   * Comment `Resque.inline = true` in `config/environments/development.rb`
+   * Install [Redis](http://redis.io/) (Ubuntu package `redis-server`)
+   * Run the worker: `rake resque:work QUEUE=foodsoft_notifier`
 
    To have look on the current queue, failed jobs etc start the resque server with
-
-       resque-web
+   `resque-web`.
 
 
 7. (optional) **View mails in browser** instead in your logs
