@@ -24,8 +24,7 @@
         - units = order_article.units
         - total_net += units * unit_quantity * net_price
         - total_gross += units * unit_quantity * gross_price
-        - cssclass = (units > 0 ? 'used' : (order_article.quantity > 0 ? 'unused' : 'unavailable'))
-        %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + cssclass}
+        %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + order_article_class(order_article)}
           %td.name=h order_article.article.name
           %td= order_article.article.unit
           %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"

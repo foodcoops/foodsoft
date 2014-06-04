@@ -7,6 +7,11 @@ module OrdersHelper
     link_to text, order_path(order, view: view), options
   end
 
+  # @param order [Order]
+  # @param document [String] Document to display, one of +groups+, +articles+, +fax+, +matrix+
+  # @param text [String] Link text
+  # @return [String] Link to order document
+  # @see OrdersController#show
   def order_pdf(order, document, text)
     link_to text, order_path(order, document: document, format: :pdf), title: I18n.t('helpers.orders.order_pdf')
   end
@@ -36,11 +41,12 @@ module OrdersHelper
     end
   end
 
-  # can be article or article_price
-  #   icon: `false` to not show the icon
-  #   plain: `true` to not use html (implies icon: false)
-  #   soft_uq: `true` to hide unit quantity specifier on small screens
-  #            sensible in tables with multiple columns calling `pkg_helper`
+  # @param article [Article]
+  # @option options [String] :icon +false+ to hide the icon
+  # @option options [String] :plain +true+ to not use HTML (implies +icon+=+false+)
+  # @option options [String] :soft_uq +true+ to hide unit quantity specifier on small screens.
+  #   Sensible in tables with multiple columns.
+  # @return [String] Text showing unit and unit quantity when applicable.
   def pkg_helper(article, options={})
     return '' if not article or article.unit_quantity == 1
     uq_text = "× #{article.unit_quantity}"
@@ -53,6 +59,9 @@ module OrdersHelper
       pkg_helper_icon(uq_text, tag: :span)
     end
   end
+  # @param c [Symbol, String] Tag to use
+  # @option options [String] :class CSS class(es) (in addition to +package+)
+  # @return [String] Icon used for displaying the unit quantity
   def pkg_helper_icon(c=nil, options={})
     options = {tag: 'i', class: ''}.merge(options)
     if c.nil?
@@ -92,6 +101,8 @@ module OrdersHelper
     input_html.html_safe
   end
 
+  # @param order [Order]
+  # @return [String] Number of ordergroups participating in order with groups in title.
   def ordergroup_count(order)
     group_orders = order.group_orders.includes(:ordergroup)
     txt = "#{group_orders.count} #{Ordergroup.model_name.human count: group_orders.count}"
@@ -103,11 +114,25 @@ module OrdersHelper
     end
   end
 
+  # @param order_or_supplier [Order, Supplier] Order or supplier to link to
+  # @return [String] Link to order or supplier, showing its name.
   def supplier_link(order_or_supplier)
     if order_or_supplier.kind_of?(Order) and order_or_supplier.stockit?
       link_to(order_or_supplier.name, stock_articles_path).html_safe
     else
       link_to(@order.supplier.name, supplier_path(@order.supplier)).html_safe
+    end
+  end
+
+  # @param order_article [OrderArticle]
+  # @return [String] CSS class for +OrderArticle+ in table for admins
+  def order_article_class(order_article)
+    if order_article.units > 0
+      'used'
+    elsif order_article.quantity > 0
+      'unused'
+    else
+      'unavailable'
     end
   end
 end
