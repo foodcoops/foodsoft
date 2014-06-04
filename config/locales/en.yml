@@ -400,8 +400,7 @@ en:
     upload:
       body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
       fields:
-        season_amount: Scaled amount
-        season_price: Scaled price
+        reserved: (Reserved)
         status: Status (x=skip)
       file_label: Please choose a compatible file
       submit: Upload file

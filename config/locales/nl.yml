@@ -398,8 +398,7 @@ nl:
     upload:
       body: <p>Het bestand moet een utf-8 tekstbestand zijn met als extensie '.csv'. De eerste regel wordt overgeslagen.</p> <p>Velden moeten met een puntkomma (';') gescheiden worden, en tekst mag tussen dubbele aanhalingstekstens ("Tekst...") staan.</p> <p>Volgende van de kolommen:</p>
       fields:
-        season_amount: 
-        season_price: 
+        reserved: (Leeg)
         status: Status (x=overslaan)
       file_label: Graag een compatibel bestand uitkiezen
       submit: Bestand uploaden
