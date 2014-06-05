@@ -36,7 +36,7 @@ gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 gem 'ransack'
 gem 'acts_as_tree'
-gem "rails-settings-cached", "0.3.1"
+gem 'rails-settings-cached'
 gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 gem 'protected_attributes'
