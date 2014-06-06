@@ -1,13 +1,50 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
 
+  # @!attribute name
+  #   @return [String] Article name
+  # @!attribute unit
+  #   @return [String] Unit, e.g. +kg+, +2 L+ or +5 pieces+.
+  # @!attribute note
+  #   @return [String] Short line with optional extra article information.
+  # @!attribute availability
+  #   @return [Boolean] Whether this article is available within the Foodcoop.
+  # @!attribute manufacturer
+  #   @return [String] Original manufacturer.
+  # @!attribute origin
+  #   Where the article was produced.
+  #   ISO 3166-1 2-letter country code, optionally prefixed with region.
+  #   E.g. +NL+ or +Sicily, IT+ or +Berlin, DE+.
+  #   @return [String] Production origin.
+  #   @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
+  # @!attribute price
+  #   @return [Number] Net price
+  #   @see ArticlePrice#price
+  # @!attribute tax
+  #   @return [Number] VAT percentage (10 is 10%).
+  #   @see ArticlePrice#tax
+  # @!attribute deposit
+  #   @return [Number] Deposit
+  #   @see ArticlePrice#deposit
+  # @!attribute unit_quantity
+  #   @return [Number] Number of units in wholesale package (box).
+  #   @see ArticlePrice#unit_quantity
+  # @!attribute order_number
+  # Order number, this can be used by the supplier to identify articles.
+  # This is required when using the shared database functionality.
+  #   @return [String] Order number.
+  # @!attribute article_category
+  #   @return [ArticleCategory] Category this article is in.
+  belongs_to :article_category
+  # @!attribute supplier
+  #   @return [Supplier] Supplier this article belongs to.
+  belongs_to :supplier
+  # @!attribute article_prices
+  #   @return [Array<ArticlePrice>] Price history (current price first).
+  has_many :article_prices, -> { order("created_at DESC") }
+
   # Replace numeric seperator with database format
   localize_input_of :price, :tax, :deposit
-
-  # Associations
-  belongs_to :supplier
-  belongs_to :article_category
-  has_many :article_prices, -> { order("created_at DESC") }
 
   scope :undeleted, -> { where(deleted_at: nil) }
   scope :available, -> { undeleted.where(availability: true) }
