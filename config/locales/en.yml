@@ -862,11 +862,12 @@ en:
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
     foodsoft: Foodsoft
+    footer:
+      revision: revision %{revision}
     header:
       feedback:
         desc: Found a bug? Suggestions? Ideas? Review?
         title: Feedback
-      footer: Foodsoft, open source software to manage a non-profit food coop.
       help: Help
       logout: Logout
       ordergroup: My ordergroup

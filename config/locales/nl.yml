@@ -862,11 +862,12 @@ nl:
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
     foodsoft: Foodsoft
+    footer:
+      revision: revisie %{revision}
     header:
       feedback:
         desc: Foutje gevonden? Suggesties? Ideeën? Commentaar?
         title: Feedback
-      footer: Foodsoft, open source software voor non-profit voedselcoops.
       help: Help
       logout: Uitloggen
       ordergroup: Mijn huishouden

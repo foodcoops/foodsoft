@@ -64,4 +64,9 @@ module Foodsoft
     config.assets.precompile += [ 'vendor/assets/javascripts/*.js' ]
 
   end
+
+  # Foodsoft version
+  VERSION = File.read(Rails.root.join('VERSION')).strip
+  # Current revision, or +nil+
+  REVISION = (File.read(Rails.root.join('REVISION')).strip rescue nil)
 end

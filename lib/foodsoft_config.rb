@@ -61,7 +61,8 @@ class FoodsoftConfig
     def set_missing
       config.replace({
         use_nick: true,
-        use_apple_points: true
+        use_apple_points: true,
+        foodsoft_url: 'https://github.com/foodcoops/foodsoft'
       }.merge(config))
     end
 

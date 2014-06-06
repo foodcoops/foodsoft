@@ -860,11 +860,12 @@ de:
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
     foodsoft: Foodsoft
+    footer:
+      revision: Revision %{revision}
     header:
       feedback:
         desc: Fehler gefunden? Vorschlag? Idee? Kritik?
         title: Feedback
-      footer: Foodsoft, open source software to manage a non-profit food coop.
       help: Hilfe
       logout: Abmelden
       ordergroup: Meine Bestellgruppe

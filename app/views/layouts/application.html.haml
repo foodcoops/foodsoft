@@ -48,6 +48,5 @@
             %h1= yield(:title)
         = yield
 
-    %footer
-      %p= t '.footer'
+    = render 'layouts/footer'
   #modalContainer.modal.hide.fade(tabindex="-1" role="dialog")

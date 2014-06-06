@@ -1,0 +1,13 @@
+- unless FoodsoftConfig[:page_footer].to_s == 'blank'
+  %footer
+    .pull-right
+      = link_to_unless FoodsoftConfig[:foodsoft_url].blank?, I18n.t('layouts.foodsoft'), FoodsoftConfig[:foodsoft_url]
+      - if Foodsoft::REVISION.blank?
+        = "v#{Foodsoft::VERSION}"
+      - else
+        %abbr{title: t('.revision', revision: Foodsoft::REVISION)}= "v#{Foodsoft::VERSION}"
+    %p
+      - if (s = FoodsoftConfig[:page_footer]).blank?
+        = link_to FoodsoftConfig[:name], FoodsoftConfig[:homepage]
+      - else
+        = raw s
