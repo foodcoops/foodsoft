@@ -10,6 +10,8 @@ class ArticleCategory < ActiveRecord::Base
   #   @return [Array<Article>] Articles with this category.
   has_many :articles
 
+  normalize_attributes :name, :description
+
   validates :name, :presence => true, :uniqueness => true, :length => { :in => 2..20 }
 
   before_destroy :check_for_associated_articles

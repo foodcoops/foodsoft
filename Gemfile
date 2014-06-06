@@ -41,6 +41,7 @@ gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 gem 'protected_attributes'
 gem 'ruby-units'
+gem 'attribute_normalizer'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
