@@ -119,7 +119,7 @@ function update(item, quantity, tolerance) {
 
     // update missing units
     var missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
-    if (missing_units < 0) {
+    if (missing_units < 0 || missing_units == unit[item]) {
         missing_units = 0;
     }
     $('#missing_units_' + item).html(String(missing_units));
