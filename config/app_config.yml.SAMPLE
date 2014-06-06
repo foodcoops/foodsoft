@@ -34,6 +34,9 @@ default: &defaults
   # documentation URL for the apples&pears work system
   applepear_url: https://github.com/foodcoops/foodsoft/wiki/%C3%84pfel-u.-Birnen
 
+  # custom foodsoft software URL (used in footer)
+  #foodsoft_url: https://github.com/foodcoops/foodsoft
+
   # Default language
   #default_locale: en
   # By default, foodsoft takes the language from the webbrowser/operating system.
@@ -80,6 +83,9 @@ default: &defaults
   # Some documents (like group and article PDFs) can include page breaks
   # after each sublist.
   #pdf_add_page_breaks: true
+
+  # Page footer (html allowed). Default is a Foodsoft footer. Set to `blank` for no footer.
+  #page_footer: <a href="http://www.foodcoop.test/">FC Test</a> is supported by <a href="http://www.hoster.test/">Hoster</a>.
 
   # email address to be used as sender
   email_sender: foodsoft@foodcoop.test
