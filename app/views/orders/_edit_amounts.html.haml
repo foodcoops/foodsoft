@@ -1,4 +1,4 @@
-- new_articles = (@order.supplier.articles rescue @order.articles)
+- new_articles = (@order.supplier.articles.undeleted rescue @order.articles)
 - new_article_data = articles_for_select2(new_articles, @order_articles.map(&:article_id)) {|a| "#{a.name} (#{a.unit_quantity}⨯#{a.unit})"}
 - content_for :javascript do
   :javascript
