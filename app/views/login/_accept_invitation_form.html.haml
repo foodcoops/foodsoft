@@ -6,7 +6,7 @@
 -# empty paragraph in case when invitation_form_text does not have <p></p>
 %p
 
-- form_url = local_assigns[:accept_invitation_path]
+- form_url = local_assigns[:form_url] || accept_invitation_path
 = simple_form_for @user, url: form_url do |form|
   - unless @invite and @invite.group
     - capt = capture do
