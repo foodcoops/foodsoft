@@ -2,9 +2,10 @@ Foodsoft
 =========
 [![Build Status](https://travis-ci.org/foodcoops/foodsoft.png?branch=master)](https://travis-ci.org/foodcoops/foodsoft)
 [![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.png?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
+[![Docs Status](http://inch-ci.org/github/foodcoops/foodsoft.png?branch=master)](http://inch-ci.org/github/foodcoops/foodsoft)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.png)](https://codeclimate.com/github/foodcoops/foodsoft)
 [![Dependency Status](https://gemnasium.com/foodcoops/foodsoft.png)](https://gemnasium.com/foodcoops/foodsoft)
-[![yard docs](http://b.repl.ca/v1/yard-docs-blue.png)](http://rubydoc.info/github/foodcoops/foodsoft/frames)
+[![Documentation](http://b.repl.ca/v1/yard-docs-blue.png)](http://rubydoc.info/github/foodcoops/foodsoft/frames)
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
 
