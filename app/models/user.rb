@@ -5,28 +5,57 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   include RailsSettings::Extend
   #TODO: acts_as_paraniod ??
-  
-  has_many :memberships, :dependent => :destroy
-  has_many :groups, :through => :memberships
 
+  # @!attribute memberships
+  #   @return [Array<Membership>]
+  has_many :memberships, :dependent => :destroy
+  # @!attribute groups
+  #   @return [Array<Group>]
+  has_many :groups, :through => :memberships
+  # @!attribute workgroups
+  #   @return [Array<Workgroup>]
   has_many :workgroups, :through => :memberships, :source => :group, :class_name => "Workgroup"
+  # @!attribute assignments
+  #   @return [Array<Assignment>]
   has_many :assignments, :dependent => :destroy
+  # @!attribute tasks
+  #   @return [Array<Task>]
   has_many :tasks, :through => :assignments
+  # @!attribute send_messages
+  #   @return [Array<Message>] Messages sent by user
+  #   @todo Rename to +sent_messages+ (proper English)
+  #   @todo Move to messages plugin
   has_many :send_messages, :class_name => "Message", :foreign_key => "sender_id"
+  # @!attribute created_orders
+  #   @return [Array<Order>] Orders created by user.
   has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
 
-  # we cannot use has_one because user is STI and there's both a has_one and has_many relation
-  #has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"
-  # workaround using ordergroup and ordergroup= (below)
+  # @!attribute ordergroup
+  #   @return [Ordergroup] The ordergroup of this member.
+  #   @see #ordergroup=
   def ordergroup
+    # An alternative option would be to use
+    #   has_one :membership
+    #   has_one :ordergroup, :through => :membership, :source => :group, :class_name => "Ordergroup"
+    # (note that +has_one+ cannot work through a +has_many+ relation) but this caused some tests to fail.
     groups.where(:type => 'Ordergroup').first
   end
 
-  attr_accessor :password, :settings_attributes
-  
-  # makes the current_user (logged-in-user) available in models
+  # @!attribute password
+  #   This is not populated from the database, only used to set a new password.
+  #   @return [String] New password to be stored.
+  attr_accessor :password
+  # @!attribute settings_attributes
+  #   New settings to be stored.
+  #   Values +'0'+ and +'1'+ will be converted to booleans first.
+  #   @return [Hash{String => String}] New settings to be stored.
+  attr_accessor :settings_attributes
+
+  # @!attribute current_user
+  #   Makes the current_user (logged-in-user) available in models.
+  #   @return [User] Current logged-in user
   cattr_accessor :current_user
-  
+
   validates_presence_of :email
   validates_presence_of :password, :on => :create
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
