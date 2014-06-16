@@ -6,9 +6,13 @@ foodsoft project from the git repository. Now you are only a few steps away
 from trying it out and then jumping into development.
 
 **System requirements**:
-[RVM](https://rvm.io/rvm/install) (recommended),
-[Ruby 2.0](https://www.ruby-lang.org/en/downloads/) and
-[Bundler](http://bundler.io/).
+[RVM](https://rvm.io/rvm/install),
+[Ruby 1.9.3+](https://www.ruby-lang.org/en/downloads/),
+[Bundler](http://bundler.io/),
+[MySQL](http://mysql.com/)/[PostgreSQL](http://www.postgresql.org/)/[SQLite](http://sqlite.org/).
+
+**Optional**:
+[Redis](http://redis.io/).
 
 Getting started
 ---------------
@@ -21,7 +25,7 @@ Getting started
    unfinished parts. If you want to be safe, choose the last release:
    `git checkout $(git tag -l | grep ^v | sort -rn | head -n1)`
 
-1. Install RVM and Ruby 2 (if you have not done so before):
+1. Install RVM and Ruby 1.9.3+ (if you have not done so before):
 
        \curl -L https://get.rvm.io | bash
        source ~/.rvm/scripts/rvm
@@ -30,22 +34,46 @@ Getting started
     We try to keep foodsoft compatible with Ruby 1.9.3 as well as any later versions,
     so if you use this and don't want to use RVM, that might actually work.
 
-2. Install Ruby dependencies:
+2. Install system dependencies.
+
+   For Debian/Ubuntu, that's
+   [libv8-dev](https://packages.debian.org/stable/libv8-dev)
+   [libmysqlclient-dev](https://packages.debian.org/stable/libmysqlclient-dev)
+   [libxml2-dev](https://packages.debian.org/stable/libxml2-dev)
+   [libxslt1-dev](https://packages.debian.org/stable/libxslt1-dev)
+   [libffi-dev](https://packages.debian.org/stable/libffi-dev)
+   [libreadline-dev](https://packages.debian.org/stable/libreadline-dev):
+
+       # Debian/Ubuntu
+       sudo apt-get install libv8-dev libmysqlclient-dev libxml2-dev libxslt1-dev libffi-dev libreadline-dev
+
+   For CentOS/Redhat you need
+   [v8](https://apps.fedoraproject.org/packages/v8)
+   [community-mysql-devel](https://apps.fedoraproject.org/packages/community-mysql-devel)
+   [libxml2-devel](https://apps.fedoraproject.org/packages/libxml2-devel)
+   [libxslt-devel](https://apps.fedoraproject.org/packages/libxslt-devel)
+   [libffi-devel](https://apps.fedoraproject.org/packages/libffi-devel)
+   [readline-devel](https://apps.fedoraproject.org/packages/readline-devel):
+
+       # CentOS/Redhat
+       sudo yum install v8 community-mysql-devel libxml2-devel libxslt-devel libffi-devel readline-devel
+
+3. Install Ruby dependencies:
 
        bundle install
 
-3. Setup your development environment:
+4. Setup your development environment:
 
        rake foodsoft:setup_development
 
    This will interactively prompt with several questions relating to your
    required environment.
 
-4. Start rails by running:
+5. Start rails by running:
 
        bundle exec rails s
 
-5. Open your favorite browser and open the web application at:
+6. Open your favorite browser and open the web application at:
 
        http://localhost:3000/
 
@@ -53,11 +81,11 @@ Getting started
    [kitten video](https://www.youtube.com/watch?v=9Iq5yCoHp4o)
    while it's loading.
 
-6. Login using the default credentials: `admin/secret`
+7. Login using the default credentials: `admin/secret`
 
-7. Change the admin password, just in case.
+8. Change the admin password, just in case.
 
-8. Have phun!
+9. Have phun!
 
 
 
