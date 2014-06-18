@@ -1,5 +1,5 @@
 # encoding: utf-8
-# ActionMailer class that handles all emails for the FoodSoft.
+# ActionMailer class that handles all emails for Foodsoft.
 class Mailer < ActionMailer::Base
   # XXX Quick fix to allow the use of show_user. Proper take would be one of
   #     (1) Use draper, decorate user
@@ -9,7 +9,7 @@ class Mailer < ActionMailer::Base
 
   layout 'email'  # Use views/layouts/email.txt.erb
 
-  default from: "FoodSoft <#{FoodsoftConfig[:email_sender]}>",
+  default from: "Foodsoft <#{FoodsoftConfig[:email_sender]}>",
           sender: FoodsoftConfig[:email_sender],
           errors_to: FoodsoftConfig[:email_sender]
   

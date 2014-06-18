@@ -951,7 +951,7 @@ de:
       text: |
         Hallo %{user},
 
-        du (oder jemand anderes) hat auf der FoodSoft-Website ein neues Passwort angefordert.
+        du (oder jemand anderes) hat auf der Foodsoft-Website ein neues Passwort angefordert.
         Um ein neues Passwort einzugeben, gehe zu: %{link}
         Dieser Link kann nur einmal aufgerufen werden und läuft am %{expires} ab.
         Wenn du das Passwort nicht ändern möchtest oder diese Email nicht ausgelöst hast, brauchst du nichts zu tun.

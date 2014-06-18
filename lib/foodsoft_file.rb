@@ -1,5 +1,5 @@
-# Module for FoodSoft-File import
-# The FoodSoft-File is a cvs-file, with semicolon-seperatet columns
+# Module for Foodsoft-File import
+# The Foodsoft-File is a cvs-file, with columns separated by semicolons
 
 require 'csv'
 

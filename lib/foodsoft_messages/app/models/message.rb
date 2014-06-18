@@ -58,7 +58,7 @@ class Message < ActiveRecord::Base
     add_recipients([user])
   end
 
-  # Returns true if this message is a system message, i.e. was sent automatically by the FoodSoft itself.
+  # Returns true if this message is a system message, i.e. was sent automatically by Foodsoft itself.
   def system_message?    
     self.sender_id.nil?
   end
