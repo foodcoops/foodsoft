@@ -6,8 +6,8 @@ require 'foodsoft_wiki/engine'
 
 module FoodsoftWiki
   # Return whether the wiki is used or not.
-  # Enabled by default since it used to be part of the foodsoft core.
+  # Enabled by default in {FoodsoftConfig} since it used to be part of the foodsoft core.
   def self.enabled?
-    FoodsoftConfig[:use_wiki] != false
+    FoodsoftConfig[:use_wiki]
   end
 end

@@ -60,10 +60,14 @@ class FoodsoftConfig
     #
     #     FoodsoftConfig[:name] # => 'FC Test'
     #
+    # To avoid errors when the database is not yet setup (when loading
+    # the initial database schema), cached settings are only being read
+    # when the settings table exists.
+    #
     # @param key [String, Symbol]
     # @return [Object] Value of the key.
     def [](key)
-      if allowed_key?(key)
+      if RailsSettings::CachedSettings.table_exists? and allowed_key?(key)
         value = RailsSettings::CachedSettings["foodcoop.#{self.scope}.#{key}"]
         value = config[key] if value.nil?
         value
@@ -146,10 +150,13 @@ class FoodsoftConfig
     end
 
     # When new options are introduced, put backward-compatible defaults here, so that
-    # configuration files that haven't been updated, still work as they did.
+    # configuration files that haven't been updated, still work as they did. This also
+    # makes sure that the configuration editor picks up the defaults.
     def set_missing
       config.replace({
         use_nick: true,
+        use_wiki: true,
+        use_messages: true,
         use_apple_points: true,
         # English is the default language, and this makes it show up as default.
         default_locale: 'en',

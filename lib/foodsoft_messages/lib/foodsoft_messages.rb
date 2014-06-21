@@ -4,8 +4,8 @@ require "deface"
 
 module FoodsoftMessages
   # Return whether messages are used or not.
-  # Enabled by default since it used to be part of the foodsoft core.
+  # Enabled by default in {FoodsoftConfig} since it used to be part of the foodsoft core.
   def self.enabled?
-    FoodsoftConfig[:use_messages] != false
+    FoodsoftConfig[:use_messages]
   end
 end
