@@ -130,7 +130,7 @@ class FoodsoftConfig
     # @return [Boolean] Whether this key may be set in the database
     def allowed_key?(key)
       # fast check for keys without nesting
-      return !self.config[:protected].keys.include?(key)
+      return !self.config[:protected].keys.include?(key.to_s)
       # @todo allow to check nested keys as well
     end
 

@@ -1,12 +1,14 @@
 module Admin::ConfigsHelper
   # Returns form input for configuration key.
   #   For configuration keys that contain a {Hash}, {ActiveView::Helpers::FormBuilder#fields_for fields_for} can be used.
+  #   When the key is not {FoodsoftConfig#allowed_key? allowed}, +nil+ is returned.
   # @param form [ActionView::Helpers::FormBuilder] Form object.
   # @param key [Symbol, String] Configuration key.
   # @param options [Hash] Options passed to the form builder.
   # @option options [Boolean] :required Wether field is shown as required (default not).
   # @return [String] Form input for configuration key.
   def config_input(form, key, options = {}, &block)
+    return unless @cfg.allowed_key? key
     options[:label] = config_input_label(form, key)
     options[:required] ||= false
     options[:input_html] ||= {}
@@ -36,6 +38,7 @@ module Admin::ConfigsHelper
   # @see config_input
   # @todo find out how to pass +checked_value+ and +unchecked_value+ to +input_field+
   def config_input_field(form, key, options = {})
+    return unless @cfg.allowed_key? :key
     config_input_field_options form, key, options
     config_input_tooltip_options form, key, options
     if options[:as] == :boolean
