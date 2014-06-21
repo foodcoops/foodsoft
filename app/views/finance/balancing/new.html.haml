@@ -61,7 +61,7 @@
         %li= link_to t('.close_direct'), close_direct_finance_order_path(@order), method: :patch,
           data: {confirm: t('.close_direct_confirm')}
 
-  #editOrderNav.btn-group.pull-right
+  #editOrderNav.btn-group
     = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
       = t('.view_options')
       %span.caret
