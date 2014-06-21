@@ -80,8 +80,6 @@ end
 
 group :development, :test do
   gem 'ruby-prof', require: false
-  gem 'yard-activerecord', require: false
-  #gem 'yard-rails-plugin', github: 'ogeidix/yard-rails-plugin', tag: 'v0.0.1', require: false
 end
 
 group :test do
