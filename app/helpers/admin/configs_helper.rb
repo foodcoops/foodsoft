@@ -16,8 +16,8 @@ module Admin::ConfigsHelper
     config_input_tooltip_options form, key, options[:input_html]
     if options[:as] == :boolean
       options[:input_html][:checked] = 'checked' if options[:input_html].delete(:value)
-      options[:checked_value] = true
-      options[:unchecked_value] = false
+      options[:checked_value] = 'true' if options[:checked_value].nil?
+      options[:unchecked_value] = 'false' if options[:unchecked_value].nil?
     elsif options[:collection] or options[:as] == :select
       options[:selected] = options[:input_html].delete(:value)
       return form.input key, options, &block
@@ -36,14 +36,18 @@ module Admin::ConfigsHelper
 
   # @return [String] Form input field for configuration key.
   # @see config_input
+  # @option options [String] :checked_value Value for boolean when checked (default +true+)
+  # @option options [String] :unchecked_value Value for boolean when not checked (default +false+)
   # @todo find out how to pass +checked_value+ and +unchecked_value+ to +input_field+
   def config_input_field(form, key, options = {})
     return unless @cfg.allowed_key? :key
     config_input_field_options form, key, options
     config_input_tooltip_options form, key, options
     if options[:as] == :boolean
+      checked_value = options.delete(:checked_value) || 'true'
+      unchecked_value = options.delete(:unchecked_value) || 'false'
       options[:checked] = 'checked' if options.delete(:value)
-      form.hidden_field(key, value: false, as: :hidden) + form.check_box(key, options, true, false)
+      form.hidden_field(key, value: unchecked_value, as: :hidden) + form.check_box(key, options, checked_value, false)
     else
       form.input_field key, options
     end
