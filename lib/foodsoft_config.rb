@@ -36,6 +36,8 @@ class FoodsoftConfig
   class << self
 
     def init
+      # Gather program-default configuration
+      self.default_config = get_default_config
       # Load initial config from development or production
       set_config Rails.env
       # Overwrite scope to have a better namescope than 'production'
@@ -134,6 +136,40 @@ class FoodsoftConfig
       # @todo allow to check nested keys as well
     end
 
+
+    protected
+
+    # @!attribute default_config
+    #   Returns the program-default foodcoop configuration.
+    #
+    #   Plugins (engines in Rails terms) can easily add to the default
+    #   configuration by defining a method +default_foodsoft_config+ in
+    #   their engine and modify the {Hash} passed.
+    #
+    #   When modifying this, please make sure to use default values that
+    #   match old behaviour. For example, when the wiki was made optional
+    #   and turned into a plugin, the configuration item +use_wiki+ was
+    #   introduced with a default value of +true+ (set in the wiki plugin):
+    #
+    #      module FoodsoftWiki
+    #         class Engine < ::Rails::Engine
+    #           def default_foodsoft_config(cfg)
+    #             cfg[:use_wiki] = true # keep backward compatibility
+    #           end
+    #         end
+    #       end
+    #
+    #   @return [Hash] Default configuration values
+    mattr_accessor :default_config
+
+    # Reload original configuration file, e.g. in between tests.
+    # @param filename [String] Override configuration file
+    def reload!(filename = APP_CONFIG_FILE)
+      APP_CONFIG.clear.merge! YAML.load(File.read(File.expand_path(filename, Rails.root)))
+      init
+    end
+
+
     private
 
     def set_config(foodcoop)
@@ -152,11 +188,16 @@ class FoodsoftConfig
     # When new options are introduced, put backward-compatible defaults here, so that
     # configuration files that haven't been updated, still work as they did. This also
     # makes sure that the configuration editor picks up the defaults.
+    # @see #default_foodsoft_config
     def set_missing
-      config.replace({
+      config.replace(default_config.merge(config))
+    end
+
+    # @return [Hash] Program-default foodcoop configuration.
+    # @see #default_config
+    def get_default_config
+      cfg = {
         use_nick: true,
-        use_wiki: true,
-        use_messages: true,
         use_apple_points: true,
         # English is the default language, and this makes it show up as default.
         default_locale: 'en',
@@ -170,13 +211,11 @@ class FoodsoftConfig
           protected: nil,
           database: nil
         }
-      }.merge(config))
-    end
-
-    # reload original configuration file, e.g. in between tests
-    def reload!(filename = APP_CONFIG_FILE)
-      APP_CONFIG.clear.merge! YAML.load(File.read(File.expand_path(filename, Rails.root)))
-      init
+      }
+      # allow engines to easily add to this
+      engines = Rails.application.railties.engines.select { |e| e.respond_to?(:default_foodsoft_config) }
+      engines.each { |e| e.default_foodsoft_config(cfg) }
+      cfg
     end
 
   end

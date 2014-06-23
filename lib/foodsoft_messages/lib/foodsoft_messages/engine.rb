@@ -11,5 +11,9 @@ module FoodsoftMessages
         sub_nav.items.insert(i, sub_nav.items.delete_at(-1))
       end
     end
+
+    def default_foodsoft_config(cfg)
+      cfg[:use_messages] = true
+    end
   end
 end
