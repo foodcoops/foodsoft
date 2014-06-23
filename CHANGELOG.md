@@ -1,3 +1,28 @@
+# Foodsoft 4.1.0
+(23 Jun 2014)
+
+* Add pdf configuration options for fontsize, pagesize and -breaks (#274)
+* Performance improvement: zero quantities are not stored anymore, which is especially noticable in large order lists. (#273)
+* The potentially dangerous 'settle directly' button was moved to the order's balancing screen. (#276)
+* New screen to view all transactions (#285)
+* Extract message system to plugin (#271)
+* Cleanup email footer (#269)
+* Cleanup website footer (#295)
+* Use member language when sending mails
+* Be more intelligent when parsing units during shared database sync (using ruby-units) (#272)
+* Give articles that will be ordered but have a shortage a different colour (#293)
+* Add order fax CSV in addition to PDF and text (#270)
+* Add configuration for default language (#264)
+* Make apple points optional (#266)
+* Allow 500 items per page (#265)
+* Cleaner and expanded show supplier view (#262)
+* External database user-interface tweaks (#261)
+* Cleanup form for creating a new order (#263)
+* Fix member ordering on Internet Explorer 11+
+* Don't wrap around number when displaying currency
+* Don't display superfluous zeroes for numbers
+* Fix sort order in orders overview
+
 # Foodsoft 4.0.0
 (24 Feb 2014)
 
