@@ -79,7 +79,7 @@ de:
         starts: Läuft vom
         status: Status
         supplier: Lieferant
-        updated_by: 
+        updated_by: Zuletzt geändert von
       order_article:
         article: Artikel
         missing_units: Fehlende Einheiten
@@ -286,7 +286,7 @@ de:
       error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine Administratorin, dass sie Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
       error_denied_sign_in: als ein anderer Benutzer anmelden
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
-      error_plugin_disabled: 
+      error_plugin_disabled: Diese Funktion ist derzeit nicht aktiviert.
       error_token: Zugriff verweigert (ungültiger Token)!
   article_categories:
     create:
@@ -349,7 +349,6 @@ de:
       title_edit: Artikel bearbeiten
       title_new: Neuen Artikel einfügen
     import_search_results:
-      action_edit_import: 
       action_import: importieren
       already_imported: schon importiert
       not_found: Keine Artikel gefunden
@@ -360,7 +359,7 @@ de:
         import: Suchen/Importieren
         sync: Synchronisieren
       import:
-        category: 
+        category: Direkt in Kategorie importieren
         placeholder: Name ...
         restrict_region: Nur aus der Region
         title: Artikel importieren
@@ -374,7 +373,7 @@ de:
       error_nosel: Du hast keine Artikel ausgewählt
     parse_upload:
       body: <p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
-      submit: 
+      submit: Hochladen
       title: Artikel hochladen
     sync:
       outlist:
@@ -398,7 +397,7 @@ de:
     upload:
       body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert.</p> <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden.</p> <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>
       fields:
-        reserved: 
+        reserved: (geschützt)
         status: Status (x=ausgelistet)
       file_label: Bitte wähle eine kompatible Datei aus
       submit: Datei hochladen
@@ -538,8 +537,8 @@ de:
       new:
         alert: Achtung, Bestellung wurde schon abgerechnet
         articles_overview: Artikelübersicht
-        close_direct: 
-        close_direct_confirm: 
+        close_direct: Abrechnung überspringen
+        close_direct_confirm: Du bist dabei die Bestellung abzuschließen, ohne die Mitgliederkonten zu belasten. Das sollte nur getan werden, wenn die Mitgliederkonten manuell belastet wurden oder wenn Du wirklich weißt, was Du tust.
         comment_on_transaction: Hier kannst Du deine Abrechnung kommentieren
         comments: Kommentare
         confirm_order: Bestellung abrechnen
@@ -589,8 +588,8 @@ de:
         new_transaction: Neue Transaktion anlegen
         title: Kontoauszug für %{name}
       index_collection:
-        show_groups: 
-        title: 
+        show_groups: Konten verwalten
+        title: Finanztransaktionen
       new:
         paragraph: Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.
         title: Neue Transaktion
@@ -603,7 +602,7 @@ de:
         remove: Entfernen
         remove_group: Gruppe enfernen
       transactions_search:
-        search_placeholder: 
+        search_placeholder: Suche nach ...
     index:
       amount_fc: Betrag(FC)
       end: Ende
@@ -634,7 +633,7 @@ de:
       index:
         new_transaction: Neue Überweisungen eingeben
         search_placeholder: Suchen ...
-        show_all: 
+        show_all: Alle Transaktionen
         title: Konten verwalten
       ordergroups:
         account_statement: Kontoauszug
@@ -948,7 +947,7 @@ de:
       text1: "o Gesamtpreis: %{sum}\n\nBestelling unline einsehen: %{order_url}\n\n\nViele Grüße von %{foodcoop} "
     reset_password:
       subject: Neues Password für %{username}
-      text: |
+      text: |-
         Hallo %{user},
 
         du (oder jemand anderes) hat auf der Foodsoft-Website ein neues Passwort angefordert.
@@ -1112,7 +1111,7 @@ de:
       orders_settled: Abgerechnet
       title: Bestellungen verwalten
     model:
-      close_direct_message: 
+      close_direct_message: Die Bestellung wurde abgechlossen, ohne die Mitgliederkonten zu belasten.
       error_closed: Bestellung wurde schon abgerechnet
       error_nosel: Es muss mindestens ein Artikel ausgewählt sein.
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
@@ -1148,7 +1147,7 @@ de:
       download:
         article_pdf: Artikel PDF
         download_file: Download file
-        fax_csv: 
+        fax_csv: Fax CSV
         fax_pdf: Fax PDF
         fax_txt: Fax Text
         group_pdf: Gruppen PDF
@@ -1436,7 +1435,7 @@ de:
     show:
       confirm_delete: Bist Du sicher?
       last_deliveries: Letzte Lieferungen
-      last_orders: 
+      last_orders: Letzte Bestellungen
       new_delivery: Neue Lieferung anlegen
       show_deliveries: Zeige alle Lieferungen
     update:

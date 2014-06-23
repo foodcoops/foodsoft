@@ -351,7 +351,6 @@ en:
       title_edit: Edit article
       title_new: Add new article
     import_search_results:
-      action_edit_import: edit import
       action_import: import
       already_imported: imported
       not_found: No articles found
@@ -892,7 +891,7 @@ en:
       update_password:
         notice: Your password was updated. You can login now.
     forgot_password:
-      body: <p>No Problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>
+      body: <p>No problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>
       submit: Request new password
       title: Forgot password?
     new_password:

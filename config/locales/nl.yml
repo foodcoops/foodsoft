@@ -349,7 +349,6 @@ nl:
       title_edit: Artikel bewerken
       title_new: Nieuw artikel toevoegen
     import_search_results:
-      action_edit_import: 
       action_import: importeren
       already_imported: geïmporteerd
       not_found: Geen artikelen gevonden
