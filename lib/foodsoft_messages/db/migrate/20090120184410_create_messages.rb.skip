@@ -1,3 +1,9 @@
+# This migration has a ".skip" suffix to prevent it from being recognised as
+# a migration. While this migration is relevant for the messages plugin, it
+# was already included in stock foodsoft when messages were part of its core.
+# `rake db:install:migrations` would install this migration, resulting in an
+# attempt to create an already existing messages table.
+#
 # extracted from 20090120184410_road_to_version_three.rb
 class CreateMessages < ActiveRecord::Migration
   def self.up
