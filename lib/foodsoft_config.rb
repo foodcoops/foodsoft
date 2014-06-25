@@ -8,6 +8,26 @@
 # In addition to the configuration file, values can be overridden in the database
 # using {RailsSettings::CachedSettings} as +foodcoop.<foodcoop_scope>.**+.
 #
+# Some values may not be set in the database (e.g. the database connection to
+# sharedlists, or +default_scope+), these are defined as children of the
+# +protected+ key. The default contains a sensible list, but you can modify
+# that. Here's an almost minimal example:
+#
+#     default:
+#       default_scope: f
+#       host: order.foodstuff.test      # hostname for urls in emails
+#
+#       name: Fairy Foodstuff           # the name of our foodcoop
+#       contact:
+#         # ...
+#         email: fairy@foodstuff.test   # general contact email address
+#
+#       price_markup: 6                 # foodcoop margin
+#
+#       protected:
+#         shared_lists: false           # allow database connection override
+#         use_messages: true            # foodcoops can't disable the use of messages
+#
 class FoodsoftConfig
 
   # @!attribute scope
@@ -132,10 +152,14 @@ class FoodsoftConfig
     # @return [Boolean] Whether this key may be set in the database
     def allowed_key?(key)
       # fast check for keys without nesting
-      return !self.config[:protected].keys.include?(key.to_s)
+      return !self.config[:protected][key]
       # @todo allow to check nested keys as well
     end
 
+    # @return [Hash] Full configuration.
+    def to_hash
+      Hash[keys.map {|k| [k, self[k]]} ]
+    end
 
     protected
 
@@ -185,16 +209,19 @@ class FoodsoftConfig
       ActiveRecord::Base.establish_connection(database_config)
     end
 
-    # When new options are introduced, put backward-compatible defaults here, so that
-    # configuration files that haven't been updated, still work as they did. This also
-    # makes sure that the configuration editor picks up the defaults.
-    # @see #default_foodsoft_config
+    # Completes foodcoop configuration with program defaults.
+    # @see #foodsoft_config
     def set_missing
-      config.replace(default_config.merge(config))
+      config.replace(default_config.deep_merge(config))
     end
 
+    # Returns program-default configuration.
+    #   When new options are introduced, put backward-compatible defaults here, so that
+    #   configuration files that haven't been updated, still work as they did. This also
+    #   makes sure that the configuration editor picks up the defaults.
     # @return [Hash] Program-default foodcoop configuration.
     # @see #default_config
+    # @see #set_missing
     def get_default_config
       cfg = {
         use_nick: true,
@@ -202,14 +229,14 @@ class FoodsoftConfig
         # English is the default language, and this makes it show up as default.
         default_locale: 'en',
         foodsoft_url: 'https://github.com/foodcoops/foodsoft',
-        # The following keys cannot be set by foodcoops themselves.
+        # The following keys cannot, by default, be set by foodcoops themselves.
         protected: {
-          multi_coop_install: nil,
-          default_scope: nil,
-          notification: nil,
-          shared_lists: nil,
-          protected: nil,
-          database: nil
+          multi_coop_install: true,
+          default_scope: true,
+          notification: true,
+          shared_lists: true,
+          protected: true,
+          database: true
         }
       }
       # allow engines to easily add to this

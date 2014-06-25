@@ -41,6 +41,7 @@ module Admin::ConfigsHelper
   # @todo find out how to pass +checked_value+ and +unchecked_value+ to +input_field+
   def config_input_field(form, key, options = {})
     return unless @cfg.allowed_key? :key
+    options[:required] ||= false
     config_input_field_options form, key, options
     config_input_tooltip_options form, key, options
     if options[:as] == :boolean
