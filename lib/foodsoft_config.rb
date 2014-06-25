@@ -240,7 +240,7 @@ class FoodsoftConfig
         }
       }
       # allow engines to easily add to this
-      engines = Rails.application.railties.engines.select { |e| e.respond_to?(:default_foodsoft_config) }
+      engines = Rails::Engine::Railties.engines.select { |e| e.respond_to?(:default_foodsoft_config) }
       engines.each { |e| e.default_foodsoft_config(cfg) }
       cfg
     end
