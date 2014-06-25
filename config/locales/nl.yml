@@ -487,6 +487,7 @@ nl:
       pdf_font_size: Tekstgrootte
       pdf_page_size: Paginaformaat
       pdf_add_page_breaks: "Nieuwe pagina's"
+      time_zone: Tijdzone
   deliveries:
     add_stock_change:
       how_many_units: 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'

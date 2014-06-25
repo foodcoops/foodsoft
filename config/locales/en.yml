@@ -504,6 +504,7 @@ en:
       pdf_font_size: Font size
       pdf_page_size: Page size
       pdf_add_page_breaks: Page breaks
+      time_zone: Time zone
   deliveries:
     add_stock_change:
       how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'

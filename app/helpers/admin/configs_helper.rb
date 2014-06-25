@@ -7,6 +7,7 @@ module Admin::ConfigsHelper
   # @param options [Hash] Options passed to the form builder.
   # @option options [Boolean] :required Wether field is shown as required (default not).
   # @return [String] Form input for configuration key.
+  # @todo find way to pass current value to time_zone input without using default
   def config_input(form, key, options = {}, &block)
     return unless @cfg.allowed_key? key
     options[:label] = config_input_label(form, key)
@@ -20,6 +21,9 @@ module Admin::ConfigsHelper
       options[:unchecked_value] = 'false' if options[:unchecked_value].nil?
     elsif options[:collection] or options[:as] == :select
       options[:selected] = options[:input_html].delete(:value)
+      return form.input key, options, &block
+    elsif options[:as] == :time_zone
+      options[:default] = options[:input_html].delete(:value)
       return form.input key, options, &block
     end
     form.input key, options, &block

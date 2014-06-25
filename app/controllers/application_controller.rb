@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter  :select_foodcoop, :authenticate, :store_controller, :items_per_page
   after_filter  :remove_controller
+  around_filter :set_time_zone
 
   
   # Returns the controller handling the current request.
@@ -167,5 +168,16 @@ class ApplicationController < ActionController::Base
   def default_url_options(options = {})
     {foodcoop: FoodsoftConfig.scope}
   end
-  
+
+  # Set timezone according to foodcoop preference.
+  # @see http://stackoverflow.com/questions/4362663/timezone-with-rails-3
+  # @see http://archives.ryandaigle.com/articles/2008/1/25/what-s-new-in-edge-rails-easier-timezones
+  def set_time_zone
+    old_time_zone = Time.zone
+    Time.zone = FoodsoftConfig[:time_zone] if FoodsoftConfig[:time_zone]
+    yield
+  ensure
+    Time.zone = old_time_zone
+  end
+
 end

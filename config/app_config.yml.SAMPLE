@@ -37,6 +37,8 @@ default: &defaults
   # In case you really want foodsoft in a certain language by default, set this to true.
   # When members are logged in, the language from their profile settings is still used.
   #ignore_browser_locale: false
+  # Default timezone, e.g. UTC, Amsterdam, Berlin, etc.
+  #time_zone: Berlin
 
   # price markup in percent
   price_markup: 2.0
