@@ -28,6 +28,9 @@
 #         shared_lists: false           # allow database connection override
 #         use_messages: true            # foodcoops can't disable the use of messages
 #
+# When you like to whitelist protected attributes, define an entry +all: true+,
+# then you can whitelist specific attributes setting them to +false+.
+#
 class FoodsoftConfig
 
   # @!attribute scope
@@ -152,7 +155,11 @@ class FoodsoftConfig
     # @return [Boolean] Whether this key may be set in the database
     def allowed_key?(key)
       # fast check for keys without nesting
-      return !self.config[:protected][key]
+      if self.config[:protected].include? key
+        return !self.config[:protected][key]
+      else
+        return !self.config[:protected][:all]
+      end
       # @todo allow to check nested keys as well
     end
 

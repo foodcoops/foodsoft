@@ -5,11 +5,11 @@ describe FoodsoftConfig do
   let(:other_name) { Faker::Lorem.words(rand(2..4)).join(' ') }
 
   it 'returns a default value' do
-    expect(FoodsoftConfig[:protected][:database]).to be_true
+    expect(FoodsoftConfig[:protected][:database]).to be true
   end
 
   it 'returns an empty default value' do
-    expect(FoodsoftConfig[:protected][:LIUhniuyGNKUQTWfbiOQIWYexngo78hqexul]).to be_false
+    expect(FoodsoftConfig[:protected][:LIUhniuyGNKUQTWfbiOQIWYexngo78hqexul]).to be nil
   end
 
   it 'returns a configuration value' do
@@ -58,6 +58,20 @@ describe FoodsoftConfig do
       FoodsoftConfig[:name] = name
       expect(FoodsoftConfig[:name]).to eq name
     end
+  end
+
+  it 'can protect all values' do
+    old_name = FoodsoftConfig[:name]
+    FoodsoftConfig.config[:protected][:all] = true
+    FoodsoftConfig[:name] = name
+    expect(FoodsoftConfig[:name]).to eq old_name
+  end
+
+  it 'can whitelist a value' do
+    FoodsoftConfig.config[:protected][:all] = true
+    FoodsoftConfig.config[:protected][:name] = false
+    FoodsoftConfig[:name] = name
+    expect(FoodsoftConfig[:name]).to eq name
   end
 
   describe 'has indifferent access', type: :feature do
