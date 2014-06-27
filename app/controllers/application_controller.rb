@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter  :select_foodcoop, :authenticate, :store_controller, :items_per_page
   after_filter  :remove_controller
-  around_filter :set_time_zone
+  around_filter :set_time_zone, :set_currency
 
   
   # Returns the controller handling the current request.
@@ -178,6 +178,18 @@ class ApplicationController < ActionController::Base
     yield
   ensure
     Time.zone = old_time_zone
+  end
+
+  # Set currency according to foodcoop preference.
+  # @see #set_time_zone
+  def set_currency
+    old_currency = ::I18n.t('number.currency.format.unit')
+    new_currency = FoodsoftConfig[:currency_unit] || ''
+    new_currency += "\u202f" if FoodsoftConfig[:currency_space]
+    ::I18n.backend.store_translations(::I18n.locale, number: {currency: {format: {unit: new_currency}}})
+    yield
+  ensure
+    ::I18n.backend.store_translations(::I18n.locale, number: {currency: {format: {unit: old_currency}}})
   end
 
 end

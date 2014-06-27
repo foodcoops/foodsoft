@@ -450,6 +450,8 @@ en:
       contact:
         email: General contact email address, shown on website as well as some forms.
         street: Address, typically this will be your delivery and pick-up location.
+      currency_unit: Currency symbol for displaying prices.
+      currency_space: Whether to add whitespace after the currency symbol.
       homepage: Website of your foodcoop.
       help_url: Documentation website.
       applepear_url: Website where the apple and pear system for tasks is explained.
@@ -481,6 +483,8 @@ en:
         country: Country
         email: Email
         phone: Phone
+      currency_unit: Currency
+      currency_space: add space
       homepage: Homepage
       help_url: Documentation URL
       applepear_url: Apple system URL
