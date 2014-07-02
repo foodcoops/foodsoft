@@ -116,18 +116,15 @@ $(function() {
         return false;
     });
 
-    // Show and hide loader on ajax callbacks
-    $('*[data-remote]').bind('ajax:beforeSend', function() {
-        $('#loader').show();
-    });
-
-    $('*[data-remote]').bind('ajax:complete', function() {
-        $('#loader').hide();
-    });
-
-    // Disable submit button on ajax forms
-    $('form[data-remote]').bind('ajax:beforeSend', function() {
-        $(this).children('input[type="submit"]').attr('disabled', 'disabled');
+    // Handle ajax errors
+    //     render json: {error: "can't except this!"}, status: :unprocessable_entity
+    $(document).ajaxError(function(ev, xhr, settings, exception) {
+        try {
+            msg = xhr.responseJSON.error;
+        } catch(err) {
+            msg = I18n.t('errors.general');
+        }
+        alert(msg);
     });
 
     // The autocomplete attribute is used for both autocompletion and storing

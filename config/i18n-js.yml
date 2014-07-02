@@ -3,6 +3,7 @@ translations:
 - file: 'app/assets/javascripts/i18n/translations.js'
   only: [
    '*.js.*',
+   '*.errors.*',
    '*.number.*',
    '*.date.formats.*',
    # foodsoft-specific texts to keep js with normal translations
