@@ -1,1 +1,1 @@
-$('#transactions').html('<%= escape_javascript(render("transactions")) %>');
+$('#transactions').html('<%= escape_javascript(render("transactions", with_csv: true)) %>');
