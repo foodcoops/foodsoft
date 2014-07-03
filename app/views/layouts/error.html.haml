@@ -1,0 +1,10 @@
+- try_again = @error.status >= 500 and @error.status < 600
+= render layout: 'layouts/application' do
+  .alert{class: if @error.status<500 then 'alert-warning' elsif @error.status<600 then 'alert-danger' else '' end}
+    %h2= t 'layouts.error.title'
+    %p
+      = yield
+      = t 'layouts.error.admin_notified' if try_again
+    - if try_again
+      %p= t 'layouts.error.what_next'
+  = link_to t('layouts.error.go_back'), 'javascript:history.go(-1)', class: 'btn btn-default'

@@ -33,6 +33,13 @@ GIT
     acts_as_versioned (0.6.0)
       activerecord (>= 3.0.9)
 
+GIT
+  remote: git://github.com/wvengen/better_exception_app.git
+  revision: c3a4a39ae73ed466f34a3b00683405473b8291e0
+  specs:
+    better_exception_app (0.1.1)
+      rails (>= 3.2)
+
 PATH
   remote: lib/foodsoft_messages
   specs:
@@ -398,6 +405,7 @@ DEPENDENCIES
   acts_as_versioned!
   attribute_normalizer
   better_errors
+  better_exception_app!
   binding_of_caller
   bootstrap-datepicker-rails
   bullet
