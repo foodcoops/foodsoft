@@ -49,6 +49,7 @@ gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
 gem 'foodsoft_messages', path: 'lib/foodsoft_messages'
 
 group :production do
+  gem 'better_exception_app', github: 'wvengen/better_exception_app'
   gem 'exception_notification'
 end
 

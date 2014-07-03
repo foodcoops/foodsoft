@@ -189,5 +189,11 @@ Foodsoft::Application.routes.draw do
 
     resources :users, :only => [:index]
 
+    ############## Error handling (definition needed because of :foodcoop scope)
+
+    scope module: :better_exception_app do
+      get ':status' => 'http_errors#show', :status => /\d{3}/, :as => :http_error
+    end
+
   end # End of /:foodcoop scope
 end

@@ -860,6 +860,11 @@ en:
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
+    error:
+      title: Whoops
+      admin_notified: We have been notified and will look at the problem.
+      what_next: Please go back or try again some time later.
+      go_back: Go back
     foodsoft: Foodsoft
     footer:
       revision: revision %{revision}

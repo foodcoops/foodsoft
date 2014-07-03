@@ -860,6 +860,11 @@ nl:
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
+    error:
+      title: Oeps
+      admin_notified: We zijn op de hoogte gebracht en gaan ernaar kijken.
+      what_next: Ga terug of probeer het later nog eens.
+      go_back: Terug
     foodsoft: Foodsoft
     footer:
       revision: revisie %{revision}
