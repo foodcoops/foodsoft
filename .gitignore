@@ -20,4 +20,6 @@ Capfile
 config/deploy.rb
 config/deploy/*
 .localeapp
+log/localeapp.yml
 .bundle
+rspec.failures
