@@ -16,7 +16,7 @@ Diese Mengen repraesentieren die Gesamtbestellung, also alle Bestellgruppen.
 
 ## Eine Bestellgruppe bestellt...
 Die Methode `OrdersController#order` schickt uns die Bestellenseite. Mit dieser
-Oberflaeche koennen die Bestellgruppena die vorher ausgewaehlten Artikel
+Oberflaeche koennen die Bestellgruppen die vorher ausgewaehlten Artikel
 bestellen. Mittels den Buttons werden dabei live, also clientseitig, die
 Preise ermittelt und der Gesamtpreis berechnet. Ist der Gesamtpreis groeßer als
 der aktuelle Gruppenkontostand, so wird die Preisspalte rot unterlegt und die
