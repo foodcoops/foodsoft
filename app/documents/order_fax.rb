@@ -58,7 +58,7 @@ class OrderFax < OrderPdf
     # Articles
     total = 0
     data = [I18n.t('documents.order_fax.rows')]
-    data += @order.order_articles.ordered.includes(:article).collect do |a|
+    data += @order.order_articles.ordered.includes(:article).order('articles.order_number, articles.name').collect do |a|
       subtotal = a.units_to_order * a.price.unit_quantity * a.price.price
       total += subtotal
       [a.article.order_number,
