@@ -30,9 +30,9 @@ describe Article do
   end
 
   it 'knows when it is deleted' do
-    expect(supplier.deleted?).to be_false
+    expect(supplier.deleted?).to be false
     supplier.mark_as_deleted
-    expect(supplier.deleted?).to be_true
+    expect(supplier.deleted?).to be true
   end
 
   it 'keeps a price history' do
@@ -70,7 +70,7 @@ describe Article do
 
     it 'can find updates' do
       changed = article.shared_article_changed?
-      expect(changed).to_not be_false
+      expect(changed).to_not be_falsey
       expect(changed.length).to be > 1
     end
 
@@ -81,12 +81,12 @@ describe Article do
       article.update_attributes updated_article.attributes.reject{|k,v| k=='id' or k=='type'}
       expect(article.name).to eq(shared_article.name)
       # now synchronising shouldn't change anything anymore
-      expect(article.shared_article_changed?).to be_false
+      expect(article.shared_article_changed?).to be_falsey
     end
 
     it 'does not need to synchronise an imported article' do
       article = SharedArticle.find(shared_article.id).build_new_article(supplier)
-      expect(article.shared_article_changed?).to be_false
+      expect(article.shared_article_changed?).to be_falsey
     end
 
     it 'adapts to foodcoop units when synchronising' do

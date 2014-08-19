@@ -16,18 +16,18 @@ describe User do
 
   describe 'does not have the role' do
     let(:user) { create :user }
-    it 'admin'        do expect(user.role_admin?).to be_false end
-    it 'finance'      do expect(user.role_finance?).to be_false end
-    it 'article_meta' do expect(user.role_article_meta?).to be_false end
-    it 'suppliers'    do expect(user.role_suppliers?).to be_false end
-    it 'orders'       do expect(user.role_orders?).to be_false end
+    it 'admin'        do expect(user.role_admin?).to be_falsey end
+    it 'finance'      do expect(user.role_finance?).to be_falsey end
+    it 'article_meta' do expect(user.role_article_meta?).to be_falsey end
+    it 'suppliers'    do expect(user.role_suppliers?).to be_falsey end
+    it 'orders'       do expect(user.role_orders?).to be_falsey end
   end
 
   describe do
     let(:user) { create :user, password: 'blahblah' }
 
     it 'can authenticate with correct password' do
-      expect(User.authenticate(user.nick, 'blahblah')).to be_true
+      expect(User.authenticate(user.nick, 'blahblah')).to be_truthy
     end
     it 'can not authenticate with incorrect password' do
       expect(User.authenticate(user.nick, 'foobar')).to be_nil
@@ -51,19 +51,19 @@ describe User do
     end
 
     it 'can authenticate using email address' do
-      expect(User.authenticate(user.email, 'blahblah')).to be_true
+      expect(User.authenticate(user.email, 'blahblah')).to be_truthy
     end
 
     it 'can authenticate when there is no nick' do
       user.nick = nil
       expect(user).to be_valid
-      expect(User.authenticate(user.email, 'blahblah')).to be_true
+      expect(User.authenticate(user.email, 'blahblah')).to be_truthy
     end
   end
 
   describe 'admin' do
     let(:user) { create :admin }
-    it 'default admin role' do expect(user.role_admin?).to be_true end
+    it 'default admin role' do expect(user.role_admin?).to be_truthy end
   end
 
 end

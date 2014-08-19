@@ -38,7 +38,7 @@ describe GroupOrderArticle do
     it 'can unorder a product' do
       goa.update_quantities(rand(1..99), rand(0..99))
       goa.update_quantities(0, 0)
-      expect(GroupOrderArticle.exists?(goa.id)).to be_false
+      expect(GroupOrderArticle.exists?(goa.id)).to be false
     end
   end
 

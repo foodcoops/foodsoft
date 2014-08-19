@@ -92,8 +92,7 @@ group :test do
   gem 'database_cleaner'
   gem 'connection_pool'
   # need to include rspec components before i18n-spec or rake fails in test environment
-  gem 'rspec-core', '= 2.14.8' # version until we're ready for rspec 3.0
-  gem 'rspec-expectations'
+  gem 'rspec-core', '~> 2.99'  # almost ready for RSpec 3
   gem 'rspec-rerun'
   gem 'i18n-spec'
   # code coverage

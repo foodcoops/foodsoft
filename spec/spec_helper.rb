@@ -28,10 +28,10 @@ RSpec.configure do |config|
   #config.use_transactional_fixtures = true
   # We use capybara with selenium, and need database_cleaner
   config.before(:each) do
-    DatabaseCleaner.strategy = (example.metadata[:js] ? :truncation : :transaction)
+    DatabaseCleaner.strategy = (RSpec.current_example.metadata[:js] ? :truncation : :transaction)
     DatabaseCleaner.start
     # maximise window so that buttons can be found on popups
-    example.metadata[:js] and page.driver.browser.manage.window.maximize
+    RSpec.current_example.metadata[:js] and page.driver.browser.manage.window.maximize
   end
   config.after(:each) do
     DatabaseCleaner.clean
