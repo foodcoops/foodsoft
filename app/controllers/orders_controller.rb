@@ -145,23 +145,24 @@ class OrdersController < ApplicationController
     #   changed, rest_to_tolerance, rest_to_stock, left_over
     counts = [0] * 4
     cunits = [0] * 4
-    OrderArticle.transaction do
-      params[:order_articles].each do |oa_id, oa_params|
-        unless oa_params.blank?
-          oa = OrderArticle.find(oa_id)
-          # update attributes; don't use update_attribute because it calls save
-          # which makes received_changed? not work anymore
-          oa.attributes = oa_params
-          if oa.units_received_changed?
-            counts[0] += 1 
-            unless oa.units_received.blank?
-              cunits[0] += oa.units_received * oa.article.unit_quantity
-              oacounts = oa.redistribute oa.units_received * oa.price.unit_quantity, rest_to
-              oacounts.each_with_index {|c,i| cunits[i+1]+=c; counts[i+1]+=1 if c>0 }
-            end
+    # This was once wrapped in a transaction, but caused
+    # "MySQL lock timeout exceeded" errors. It's ok to do
+    # this article-by-article anway.
+    params[:order_articles].each do |oa_id, oa_params|
+      unless oa_params.blank?
+        oa = OrderArticle.find(oa_id)
+        # update attributes; don't use update_attribute because it calls save
+        # which makes received_changed? not work anymore
+        oa.attributes = oa_params
+        if oa.units_received_changed?
+          counts[0] += 1
+          unless oa.units_received.blank?
+            cunits[0] += oa.units_received * oa.article.unit_quantity
+            oacounts = oa.redistribute oa.units_received * oa.price.unit_quantity, rest_to
+            oacounts.each_with_index {|c,i| cunits[i+1]+=c; counts[i+1]+=1 if c>0 }
           end
-          oa.save!
         end
+        oa.save!
       end
     end
     return nil if counts[0] == 0
