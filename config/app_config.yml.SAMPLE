@@ -87,6 +87,9 @@ default: &defaults
   # Page footer (html allowed). Default is a Foodsoft footer. Set to `blank` for no footer.
   #page_footer: <a href="http://www.foodcoop.test/">FC Test</a> is supported by <a href="http://www.hoster.test/">Hoster</a>.
 
+  # Custom css for the foodcoop
+  #custom_css: 'body { background-color: #fcffba; }'
+
   # email address to be used as sender
   email_sender: foodsoft@foodcoop.test
 
