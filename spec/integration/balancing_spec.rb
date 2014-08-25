@@ -112,6 +112,7 @@ describe 'settling an order', :type => :feature do
         fill_in :order_article_units_to_order, :with => 0
         find('input[type="submit"]').click
       end
+      sleep 0.5 # workaround "javascript error" "e is null"
       expect(page).to have_selector("#order_article_#{oa.id}")
       # make sure it still works after reloading
       visit new_finance_order_path(order_id: order.id)
