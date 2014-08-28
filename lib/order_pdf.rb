@@ -50,10 +50,25 @@ class OrderPdf < Prawn::Document
 
   # add pagebreak or vertical whitespace, depending on configuration
   def down_or_page(space=10)
-    if FoodsoftConfig[:pdf_add_page_breaks]
+    if pdf_add_page_breaks?
       start_new_page
     else
       move_down space
+    end
+  end
+
+  protected
+
+  # return whether pagebreak or vertical whitespace is used for breaks
+  def pdf_add_page_breaks?(docid=nil)
+    docid ||= self.class.name.underscore
+    cfg = FoodsoftConfig[:pdf_add_page_breaks]
+    if cfg.is_a? Array
+      cfg.index(docid.to_s).any?
+    elsif cfg.is_a? Hash
+      cfg[docid.to_s]
+    else
+      cfg
     end
   end
 end

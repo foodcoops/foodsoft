@@ -83,6 +83,11 @@ default: &defaults
   # Some documents (like group and article PDFs) can include page breaks
   # after each sublist.
   #pdf_add_page_breaks: true
+  # Alternatively, this can be set for each document.
+  #pdf_add_page_breaks:
+  #  order_by_groups: true
+  #  order_by_articles: true
+
 
   # Page footer (html allowed). Default is a Foodsoft footer. Set to `blank` for no footer.
   #page_footer: <a href="http://www.foodcoop.test/">FC Test</a> is supported by <a href="http://www.hoster.test/">Hoster</a>.
