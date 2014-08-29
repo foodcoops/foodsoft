@@ -1,6 +1,8 @@
 -# NOTE: if you modify tiny details here you must also change them in `receive_on_order_article_update.js.erb`
 = fields_for 'order_articles', order_article, index: order_article.id do |form|
-  %tr{id: "order_article_#{order_article.id}", class: "#{cycle('even', 'odd', name: 'articles')} order-article", valign: "top"}
+  - cssclass = "order-article #{cycle('even', 'odd', name: 'articles')}"
+  - cssclass += " unavailable" if (order_article.units_billed||order_article.units_to_order)==0 and order_article.units_received.nil?
+  %tr{id: "order_article_#{order_article.id}", class: cssclass, valign: "top"}
     - order_title = []
     - order_title.append Article.human_attribute_name(:manufacturer)+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
     - order_title.append Article.human_attribute_name(:note)+': ' + order_article.article.note unless order_article.article.note.to_s.empty?

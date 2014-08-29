@@ -30,6 +30,9 @@
       }
 
       $(input).closest('tr').find('.units_delta').html(html);
+
+      // un-dim row when received is nonzero
+      $(input).closest('tr').toggleClass('unavailable', expected == 0 && html=='');
     }
 
     $(document).on('change keyup', 'input[data-units-expected]', function() {
