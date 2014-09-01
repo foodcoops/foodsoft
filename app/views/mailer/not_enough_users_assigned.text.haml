@@ -1,1 +1,1 @@
-= t '.text', user: @user.first_name, task: @task.name, when: I18n.l(@task.due_date, format: t('mailer.dateformat')), workgroup_tasks_url: workgroup_tasks_url(workgroup_id: task.workgroup_id), user_tasks_url: user_tasks_url
+= raw t '.text', user: @user.first_name, task: @task.name, when: I18n.l(@task.due_date, format: t('mailer.dateformat')), workgroup_tasks_url: workgroup_tasks_url(workgroup_id: task.workgroup_id), user_tasks_url: user_tasks_url

@@ -1,6 +1,6 @@
-= t '.text', user: @invite.user.name, mail: @invite.user.email, group: @invite.group.name, link: @link, expires: I18n.l(@invite.expires_at)
+= raw t '.text', user: @invite.user.name, mail: @invite.user.email, group: @invite.group.name, link: @link, expires: I18n.l(@invite.expires_at)
 -# append english text only if the locale is not english
 - if not I18n.locale.to_s.start_with?('en')
   =======
   \
-  = t '.text', user: @invite.user.name, mail: @invite.user.email, group: @invite.group.name, link: @link, expires: I18n.l(@invite.expires_at, locale: :en), locale: :en
+  = raw t '.text', user: @invite.user.name, mail: @invite.user.email, group: @invite.group.name, link: @link, expires: I18n.l(@invite.expires_at, locale: :en), locale: :en

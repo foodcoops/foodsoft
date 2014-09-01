@@ -1,4 +1,4 @@
-= @message.body
+= raw @message.body
 ======================================================================
 \
-= t '.footer', reply_url: new_message_url('message[reply_to]' => @message.id), msg_url: message_url(@message), profile_url: my_profile_url
+= raw t '.footer', reply_url: new_message_url('message[reply_to]' => @message.id), msg_url: message_url(@message), profile_url: my_profile_url

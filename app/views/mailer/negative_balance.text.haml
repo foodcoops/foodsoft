@@ -1,1 +1,1 @@
-= raw t '.text', group: h(@group.name), when: format_time(@transaction.created_on), balance: number_to_currency(@group.account_balance), amount: number_to_currency(@transaction.amount), note: h(@transaction.note), user: h(show_user(@transaction.user)), foodcoop: h(FoodsoftConfig[:name])
+= raw t '.text', group: @group.name, when: format_time(@transaction.created_on), balance: number_to_currency(@group.account_balance), amount: number_to_currency(@transaction.amount), note: @transaction.note, user: show_user(@transaction.user), foodcoop: FoodsoftConfig[:name]
