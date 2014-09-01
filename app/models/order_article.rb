@@ -186,9 +186,9 @@ class OrderArticle < ActiveRecord::Base
 
   # @return [Number] Units missing for the last +unit_quantity+ of the article.
   def missing_units
-    units = article.unit_quantity - ((quantity  % article.unit_quantity) + tolerance)
+    units = price.unit_quantity - ((quantity  % price.unit_quantity) + tolerance)
     units = 0 if units < 0
-    units = 0 if units == article.unit_quantity
+    units = 0 if units == price.unit_quantity
     units
   end
   
