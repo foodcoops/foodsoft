@@ -472,7 +472,9 @@ en:
       page_footer: 'Shown on each page at the bottom. Enter "blank" to disable the footer completely.'
       pdf_font_size: Base font size for PDF documents (12 is standard).
       pdf_page_size: 'Page size for PDF documents, typically "A4" or "letter".'
-      pdf_add_page_breaks: Add page breaks when starting a new section.
+      pdf_add_page_breaks:
+        order_by_articles: Put each article on a separate page.
+        order_by_groups: Put each ordergroup on a separate page.
       tolerance_is_costly: "Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order."
     keys:
       name: Name

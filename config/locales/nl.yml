@@ -453,7 +453,9 @@ nl:
       page_footer: 'Wordt op iedere pagina getoond. Vul "blank" in om de voettekst helemaal weg te halen.'
       pdf_font_size: Basis tekstgrootte voor PDF bestanden (standaard 12).
       pdf_page_size: 'Paginaformaat voor PDF bestanden, meestal "A4" of "letter".'
-      pdf_add_page_breaks: Secties op een nieuwe pagina beginnen.
+      pdf_add_page_breaks:
+        order_by_articles: Ieder artikel op een nieuwe pagina.
+        order_by_groups: Ieder huishouden op een nieuwe pagina.
       tolerance_is_costly: "Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen."
     keys:
       name: Naam
