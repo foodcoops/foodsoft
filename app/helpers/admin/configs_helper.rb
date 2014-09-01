@@ -121,9 +121,11 @@ module Admin::ConfigsHelper
   def config_input_field_options(form, key, options)
     cfg_path = form.lookup_model_names[1..-1] + [key]
     # set current value
-    value = @cfg
-    cfg_path.each {|n| value = value[n] unless value.nil? }
-    options[:value] ||= value
+    unless options.has_key?(:value)
+      value = @cfg
+      cfg_path.each {|n| value = value[n.to_sym] if value.respond_to? :[] }
+      options[:value] = value
+    end
     options
   end
 end
