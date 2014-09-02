@@ -221,7 +221,7 @@ module ApplicationHelper
 
   # @return [String] path to foodcoop CSS style (with MD5 parameter for caching)
   def foodcoop_css_path(options={})
-    super(options.merge({md5: Digest::MD5.hexdigest(FoodsoftConfig[:custom_css])}))
+    super(options.merge({md5: Digest::MD5.hexdigest(FoodsoftConfig[:custom_css].to_s)}))
   end
 
   # @return [String] stylesheet tag for foodcoop CSS style (+custom_css+ foodcoop config)
