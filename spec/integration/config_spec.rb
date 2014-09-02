@@ -2,6 +2,7 @@ require_relative '../spec_helper'
 
 describe 'admin/configs', type: :feature do
   let(:name) { Faker::Lorem.words(rand(2..4)).join(' ') }
+  let(:email) { Faker::Internet.email }
 
   describe type: :feature, js: true do
     let(:admin) { create :admin }
@@ -33,6 +34,16 @@ describe 'admin/configs', type: :feature do
         expect(find_field('config_name').value).to eq FoodsoftConfig[:name]
       end
       expect(get_full_config).to eq orig_values
+    end
+
+    it 'can modify a nested value' do
+      visit admin_config_path
+      fill_in 'config_contact_email', with: email
+      within('form.config') do
+        find('input[type="submit"]').click
+        expect(find_field('config_contact_email').value).to eq email
+      end
+      expect(FoodsoftConfig[:contact][:email]).to eq email
     end
 
     def get_full_config

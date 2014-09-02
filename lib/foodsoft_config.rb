@@ -249,7 +249,9 @@ class FoodsoftConfig
     # Normalize value recursively (which can be entered as strings, but we want to store it properly)
     def normalize_value(value)
       value = value.map(&:normalize_value) if value.is_a? Array
-      value = Hash[ value.to_a.map{|a| [a[0], normalize_value(a[1])]} ] if value.is_a? Hash
+      if value.is_a? Hash
+        value = ActiveSupport::HashWithIndifferentAccess[ value.to_a.map{|a| [a[0], normalize_value(a[1])]} ]
+      end
       case value
         when 'true' then true
         when 'false' then false
