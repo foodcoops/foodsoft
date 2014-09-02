@@ -423,7 +423,7 @@ en:
     add_stock_change:
       how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
-      notice: Delivery was created. Please don’t forget to create invoice!
+      notice: Delivery was created. Please don’t forget to add an invoice!
     destroy:
       notice: Delivery was deleted.
     edit:
@@ -559,7 +559,7 @@ en:
         comment_on_transaction: Here you can add a comment to your accounting.
         comments: Comments
         confirm_order: Settle order
-        create_invoice: Create invoice
+        create_invoice: Add invoice
         edit_note: Edit note
         edit_order: Edit order
         groups_overview: Overview of groups
@@ -1337,7 +1337,7 @@ en:
         messages:
           send_as_email: Receive messages as emails.
         notify:
-          negative_balance: Inform me when my order group has a negative balance.
+          negative_balance: Inform me when my ordergroup has a negative balance.
           order_finished: Inform me about my order result (when the order is closed).
           upcoming_tasks: Remind me of upcoming tasks.
         profile:

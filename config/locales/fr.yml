@@ -3,7 +3,7 @@ fr:
     attributes:
       article:
         article_category: Catégorie
-        availability: l'article est-il disponible?
+        availability: le produit est-il disponible actuellement?
         availability_short: disp.
         deposit: Consigne
         fc_price: Prix final
@@ -11,17 +11,17 @@ fr:
         fc_price_short: Prix pour les membres
         fc_share: Marge de la coop
         fc_share_short: Marge de la coop
-        gross_price: Prix brut
-        manufacturer: ProductRICE_eur
+        gross_price: Prix TTC
+        manufacturer: Product-rice-eur
         name: Nom
         note: Note
         order_number: 'Numéro '
         order_number_short: Numéro
         origin: Lieu de production
-        price: Prix net
+        price: Prix HT
         supplier: Fournisseu-r-se
         tax: TVA
-        unit: Taille des lots proposés
+        unit: Unité
         unit_quantity: Unités par lot
         unit_quantity_short: U.
         units: Lots
@@ -30,13 +30,13 @@ fr:
         name: Nom
       article_price:
         deposit: Consigne
-        price: Prix net
+        price: Prix HT
         tax: TVA
         unit_quantity: Unités par lot
       delivery:
         delivered_on: Date de réapprovisionnement
         note: Note
-        supplier: Fournisseuse_r
+        supplier: Fournisseur-e
       financial_transaction:
         amount: Montant
         created_on: Date
@@ -47,7 +47,7 @@ fr:
         price: Total de la commande
         updated_by: Dernière commande
       group_order_article:
-        ordergroup_id: Cellul
+        ordergroup_id: Cellule
         quantity: Quantité
         result: Quantité
         tolerance: Tolérance
@@ -62,7 +62,7 @@ fr:
         number: Numéro
         order: Commande
         paid_on: Payée le
-        supplier: Fournisseuse_r
+        supplier: Fournisseur-e
       message:
         body: Contenu
         group_id: Cellule ou équipe
@@ -74,7 +74,7 @@ fr:
         closed_by: Décompté par
         created_by: Établi par
         ends: Clôture le
-        name: FournisseurE
+        name: Fournisseur-e
         note: Note
         starts: Ouverture le
         status: Statut
@@ -82,7 +82,7 @@ fr:
         updated_by: Dernière modification par
       order_article:
         article: Article
-        missing_units: Unités manquantes
+        missing_units: Nombre d'unités manquantes pour compléter le lot en cours
         missing_units_short: Manquant
         quantity: Quantité demandée
         quantity_short: Demandé
@@ -111,7 +111,7 @@ fr:
         title: Titre
       stock_article:
         available: Disponible
-        price: Prix net
+        price: Prix HT
         quantity: en stock
         quantity_available: Quantité disponible
         quantity_available_short: Disp.
@@ -126,7 +126,7 @@ fr:
         customer_number_short: Num. de client
         delivery_days: Jours de livraison
         email: Email
-        fax: Fa
+        fax: Fax
         is_subscribed: abonné?
         min_order_quantity: Prix minimum d'une commande
         min_order_quantity_short: Qté min.
@@ -164,10 +164,10 @@ fr:
         name: Nom
         next_weekly_tasks_number: Combien de temps en avance les boulots doivent ils être annoncés sur le site?
         role_admin: Administration
-        role_article_meta: Base de données des articles
+        role_article_meta: Base de données des produits
         role_finance: Trésorerie
         role_orders: Gestion des commandes
-        role_suppliers: Contact avec les fournisseusEs_rs
+        role_suppliers: Contact avec les fournisseur-e-s
         user_tokens: Membres
     errors:
       has_many_left: est encore associé à une %{collection}!
@@ -189,7 +189,7 @@ fr:
       ordergroup: Cellule
       stock_article: l'article à ajouter au cellier
       stock_taking: Inventaire
-      supplier: FournisseusE_r
+      supplier: Fournisseur-e
       task: Boulot
       user: Membre
       workgroup: Équipe
@@ -298,7 +298,7 @@ fr:
     index:
       confirm_delete: T'es sûrE de ton coup?
       new: Créer une nouvelle catérogie
-      title: Catégories d'articles
+      title: Catégories de produits
     new:
       title: Créer une nouvelle catégorie
     update:
@@ -306,9 +306,9 @@ fr:
   articles:
     article:
       confirm_delete: T'es sûrE de ton coup?
-      last_update: 'dernière modification: %{last_update} | brut: %{gross_price}'
+      last_update: 'dernière modification: %{last_update} | TTC: %{gross_price}'
     articles:
-      confirm_delete: Tu veux vraiment supprimer tous ces articles?
+      confirm_delete: Tu veux vraiment supprimer tous ces produits?
       option_available: Marquer comme disponible(s)
       option_delete: Supprimer
       option_not_available: Marquer comme indisponible(s)
@@ -318,42 +318,42 @@ fr:
       unit_quantity_short: U/L
     controller:
       create_from_upload:
-        notice: '%{count} nouveaux articles on été sauvegardés.'
-      error_invalid: La description des articles comporte des erreurs.
-      error_nosel: Aucun article n'a été sélectionné
+        notice: '%{count} nouveaux produits on été sauvegardés.'
+      error_invalid: La description des produits comporte des erreurs.
+      error_nosel: Aucun produit n'a été sélectionné
       error_parse: '%{msg} ... à la ligne %{line}'
-      error_update: 'Une erreur s''est produite lors de la mise à jour de l''article "%{article}": %{msg}'
+      error_update: 'Une erreur s''est produite lors de la mise à jour du produit "%{article}": %{msg}'
       parse_upload:
-        notice: '%{count} articles ont été examinés avec succès.'
+        notice: '%{count} produits ont été examinés avec succès.'
       sync:
         notice: Le catalogue est à jour
-        shared_alert: '%{supplier} n''est pas associé à une base de données extérieure.'
+        shared_alert: '%{supplier} n''est pas dans l''annuaire mutualisé.'
       update_all:
-        notice: Les articles et les prix ont été mis à jour.
+        notice: Les produits et les prix ont été mis à jour.
       update_sel:
         notice_avail: Les articles sélectionnés ont été marqués comme disponibles.
-        notice_destroy: Les articles sélectionnés ont été supprimés.
+        notice_destroy: Les produits sélectionnés ont été supprimés.
         notice_noaction: Aucune action n'a été spécifiée!
-        notice_unavail: Les articles sélectionnés ont été marqués comme indisponibles.
+        notice_unavail: Les produits sélectionnés ont été marqués comme indisponibles.
       update_sync:
-        notice: Les articles et les prix ont été mis à jour.
+        notice: Les produits et les prix ont été mis à jour.
     destroy_active_article:
       drop: supprimer
       note: '%{article} apparaît dans des listes de commande en cours et ne peut donc être supprimé. Il faut d''abord %{drop_link} des listes de commande.'
     edit_all:
-      note: 'Les champs obligatoires sont: le nom, l''unité, le prix net et le numéro de commande.'
-      submit: Mettre à jour tous les articles
-      title: Modifier tous les articles de %{supplier}
-      warning: Attention, tous les articles sont en train d'être mis à jour!
+      note: 'Les champs obligatoires sont: le nom, l''unité, le prix HT et le numéro de commande.'
+      submit: Mettre à jour tous les produits
+      title: Modifier tous les produits de %{supplier}
+      warning: Attention, tous les produits vont être mis à jour!
     form:
-      title_edit: Modifier cet article
-      title_new: Ajouter un nouvel article
+      title_edit: Modifier ce produit
+      title_new: Ajouter un nouveau produit
     import_search_results:
       action_import: importer
       already_imported: déjà importé
-      not_found: Aucun article n'a été trouvé
+      not_found: Aucun produit correspondant n'a été trouvé
     index:
-      change_supplier: Changer de fournisseusE_r...
+      change_supplier: Changer de fournisseur-e...
       edit_all: Tout modifier
       ext_db:
         import: Rechercher/Importer
@@ -361,41 +361,41 @@ fr:
       import:
         category: Importer directement dans une catégorie
         placeholder: Nom...
-        restrict_region: Seulement les articles régionaux
-        title: Importer cet article
-      new: Nouvel article
+        restrict_region: Seulement les produits régionaux
+        title: Importer ce produit
+      new: Nouveau produit
       new_order: Définir une nouvelle commande
       search_placeholder: Nom...
-      title: Articles de %{supplier} (%{count})
-      upload: Transférer les articles
+      title: Produits de %{supplier} (%{count})
+      upload: Transférer les produits
     model:
       error_in_use: '%{article} ne peut pas être supprimé car il fait partie d''une liste de commande en cours!'
-      error_nosel: Aucun article n'a été sélectionné
+      error_nosel: Aucun produit n'a été sélectionné
     parse_upload:
       body: |-
-        <p><i>Merci de vérifier les articles importés.</i></p>
+        <p><i>Merci de vérifier les produits importés.</i></p>
         <p><i>Attention, les doublons ne sont pas automatiquement détectés.</p></i>.
       submit: Téléverser
       title: Téléverser des articles
     sync:
       outlist:
         alert_used: Attention, %{article} fait partie d'une commande en cours! Il faut d'abord le supprimer de cette commande.
-        body: 'Les articles suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
+        body: 'Les produits suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
         body_ignored:
-          one: Un article sans numéro de commande a été ignoré.
-          other: '%{count} articles sans numéro de commande ont été ignorés.'
-        body_skip: Aucun article à supprimer.
+          one: Un produit sans numéro de commande a été ignoré.
+          other: '%{count} produits sans numéro de commande ont été ignorés.'
+        body_skip: Aucun produi à supprimer.
         title: Exclure de la liste...
-      price_short: Prix
+      price_short: Prix unitaire
       submit: Tout supprimer ou mettre à jour.
-      title: Synchroniser les articles avec la base de données extérieure
+      title: Synchroniser les produits avec les données de l'annuaire mutualisé
       unit_quantity_short: U/L
       update:
-        body: 'Chaque article apparaît deux fois: les anciennes données sont rappelées en gris, et les champs du formulaire ont été préremplis avec les nouvelles valeurs. Les changements sont marqués en jaune.'
+        body: 'Chaque produit apparaît deux fois: les anciennes données sont rappelées en gris, et les champs du formulaire ont été préremplis avec les nouvelles valeurs. Les changements sont marqués en jaune.'
         title: Mettre à jour...
         update_msg:
           one: Un article doit être mis à jour.
-          other: '%{count} articles doivent être mis à jour.'
+          other: '%{count} produits doivent être mis à jour.'
     upload:
       body: |-
         <p>Le fichier doit être au format texte et son nom doit se terminer par l'extension ".csv". La première ligne sera ignorée lors de l'importation.</p>
@@ -406,7 +406,7 @@ fr:
         status: Statut (x=exclu)
       file_label: Merci de choisir un fichier compatible
       submit: Transférer le fichier
-      title: '%{supplier} / Transférer les données sur l''article'
+      title: '%{supplier} / Transférer les données sur les produits'
   deliveries:
     add_stock_change:
       how_many_units: Combien d'unités (%{unit}) de l'article %{name} doivent-elles être livrées?
@@ -417,34 +417,34 @@ fr:
     edit:
       title: Modifier le réapprovisionnement
     form:
-      confirm_foreign_supplier_reedit: 'L''article %{name} a bien été ajouté au cellier. Mais un problème a été détecté: l''article provient d''unE autre fournisseurE que celleui dont provient cette livraison. Modifier l''article à nouvau?'
+      confirm_foreign_supplier_reedit: 'L''article %{name} a bien été ajouté au cellier. Mais un problème a été détecté: l''article provient d''un-e autre fournisseur-e que celleui dont provient cette livraison. Modifier l''article à nouvau?'
       create_from_blank: Ajouter un nouvel article quelconque
       create_stock_article: Ajouter un article au cellier
-      title_fill_quantities: 2. Définir la quantité à livrer
+      title_fill_quantities: 2. Définir les quantités livrées
       title_finish_delivery: 3. Clore le réapprovisionnement
-      title_select_stock_articles: 1. Choisir les articles dans le cellier
+      title_select_stock_articles: 1. Choisir les produits dans le cellier
     index:
       confirm_delete: T'es sûrE de ton coup?
-      new_delivery: Réapprovisionner le cellier par %{supplier}
+      new_delivery: Approvisionner le cellier par %{supplier}
       title: '%{supplier}/Réapprovisionnements'
     invoice_amount: Montant de la facture
-    invoice_net_amount: Montant net de la facture
+    invoice_net_amount: Montant HT de la facture
     new:
-      title: Réapprovisionner le cellier par %{supplier}
+      title: Approvisionnement du cellier par %{supplier}
     show:
       sum: Prix total
-      sum_diff: montant brut - montant net
+      sum_diff: montant TTC - montant HT
       sum_gross: prix total brut
       sum_net: prix total net
       title: Afficher le réapprovisionnement
-      title_articles: Articles
+      title_articles: Produits
     stock_article_for_adding:
-      action_add_to_delivery: Commander
+      action_add_to_delivery: Approvisionner
       action_edit: Modifier
       action_other_price: Copier
     stock_change_fields:
       remove_article: Retirer l'article de cette commande
-    suppliers_overview: Liste des fournisseusEs_rs
+    suppliers_overview: Liste des fournisseur-e-s
     update:
       notice: La commande a été actualisée
   documents:
@@ -455,7 +455,7 @@ fr:
       - 
       - Quantité
       - Prix
-      title: 'Ordre des articles pour la commande: %{name}, close le %{date}'
+      title: 'Ordre des produits pour la commande: %{name}, clôturée le %{date}'
     order_by_groups:
       filename: Commande %{name}-%{date} - Répartition par cellules
       rows:
@@ -467,31 +467,31 @@ fr:
       - Unité
       - Prix total
       sum: prix total
-      title: 'Répartition par cellules pour la commande: %{name}, close le %{date}'
+      title: 'Répartition par cellules pour la commande: %{name}, clôturée le %{date}'
     order_fax:
       filename: Commande %{name}-%{date} - Fax
       rows:
       - Numéro
       - Quantité
-      - Nom
-      - Nombre de lots
+      - Nom du produit
+      - Nombre d'unités
       - Unité
-      - Prix/Unité
       - Prix unitaire
+      - Prix
       total: Total
     order_matrix:
       filename: Commande %{name}-%{date} - Tableau de répartition
-      heading: Liste des articles
+      heading: Liste des produits
       rows:
-      - Article
+      - Nom du produit
       - Unité
-      - Nombre de lots
+      - Nombre d'unités
       - Prix coop
       - Quantité
-      title: 'Tableau de répartition pour la commande: %{name}; close le %{date}'
+      title: 'Tableau de répartition pour la commande: %{name}; clôturée le %{date}'
       total:
-        one: Un seul article
-        other: '%{count} articles au total'
+        one: Un seul produit
+        other: '%{count} produits au total'
   errors:
     general: Un problème a été rencontré.
     general_again: Une erreur s'est produite. Merci de réessayer.
@@ -512,25 +512,25 @@ fr:
         alert: 'Une erreur s''est produite lors du décompte: %{message}'
         notice: La commande a été décomptée avec succès, et les comptes des membres ont été mis à jour.
       close_direct:
-        alert: 'Impossible de clore cette commande: %{message}'
-        notice: La commande a été close avec succès.
+        alert: 'Impossible de clôturer cette commande: %{message}'
+        notice: La commande a été clôturée avec succès.
       confirm:
         clear: Terminer
-        first_paragraph: "Lorsque la commande sera close, les comptes seront mis à jour en conséquence.\n<br/>\nLes décomptes pour cette commande s'élèveront comme suit: "
+        first_paragraph: "Lorsque la commande sera clôturée, les comptes seront mis à jour en conséquence.\n<br/>\nLes décomptes pour cette commande s'élèveront comme suit: "
         or_cancel: ou retourner au décompte
         title: Décompter la commande
       edit_results_by_articles:
-        add_article: Ajouter un article
+        add_article: Ajouter un produit
         amount: Quantité
         gross: Brut
         net: Net
       group_order_articles:
-        add_group: Créer un nouveau groupe
+        add_group: Ajouter une cellule
         total: Prix total
         total_fc: Prix total (pour la boufcoop)
         units: Nombre d'unités
       index:
-        title: Commandes closes
+        title: Commandes clôturées
       invoice:
         edit: Modifier la facture
         invoice_amount: 'Montant de la facture:'
@@ -543,9 +543,9 @@ fr:
         refund_adjusted_amount: Montant recalculé en excluant les consignes
       new:
         alert: Attention, cette commande a déjà été décomptée
-        articles_overview: Aperçu des articles
-        close_direct: Sauter terminer
-        close_direct_confirm: Vous êtes sur le point de terminer l'ordre sans charger les comptes des membres. Ne le faites que si vous avez déjà débité les comptes des membres manuellement, ou si vous savez vraiment ce que vous faites.
+        articles_overview: Aperçu des produits
+        close_direct: Ne pas décompter
+        close_direct_confirm: Vous êtes sur le point de valider le décompte sans débiter les comptes des membres. Ne le faites que si vous avez déjà débité les comptes  manuellement, ou si vous savez vraiment ce que vous faites.
         comment_on_transaction: Ici, tu peux faire part de tes commentaires concernant le décompte de la facture
         comments: Commentaire
         confirm_order: Terminer la commande
@@ -564,18 +564,18 @@ fr:
         clear: décompter
         cleared: déjà décompté (%{amount})
         end: Fin
-        ended: closes
-        name: FournisseusE_r
-        no_closed_orders: Aucune commande n'a encore été close.
+        ended: clôturées
+        name: Fournisseur-e
+        no_closed_orders: Aucune commande n'a encore été clôturée.
         state: Statut
       summary:
         changed: Les données ont été modifiées!
         duration: von %{starts} bis %{ends}
         fc_amount: 'Montant boufcoop:'
         fc_profit: 'Gain de la boufcoop:'
-        gross_amount: 'Montant brut:'
-        groups_amount: 'Montant pour chaque cellule:'
-        net_amount: 'Montant net:'
+        gross_amount: 'Montant TTC:'
+        groups_amount: 'Montant payés par les cellules:'
+        net_amount: 'Montant HT:'
         reload: Actualiser le résumé
         with_extra_charge: 'avec supplément:'
         without_extra_charge: 'sans supplément:'
@@ -623,7 +623,7 @@ fr:
       edit:
         title: Modifier cette facture
       index:
-        action_new: Définir une nouvelle facture
+        action_new: Ajouter une facture
         title: Factures
       invoices:
         confirm_delete: T'es sûrE de ton coup?
@@ -632,7 +632,7 @@ fr:
       linked_order: une commande
       new:
         back: Retour
-        title: Définir une nouvelle facture
+        title: Ajouter une facture
       show:
         back: Retour
         title: Facture %{number}
@@ -686,13 +686,13 @@ fr:
       open_orders: commandes en cours
       title: commandes de %{group}
       title_closed: déjà décomptées
-      title_open: closes/pas encore décomptées
+      title_open: clôturées mais non décomptées
     create:
       error_general: Suite à une erreur, la commande n'a pu être mise à jour.
       error_stale: La commande n'a pas pu être mise à jour car quelqu'un d'autre a commandé entre temps.
       notice: Ta commande a bien été enregistrée.
     errors:
-      closed: La commande est déjà close.
+      closed: La commande est déjà clôturée.
       no_member: Tu n'es encore membre d'aucune cellule.
       notfound: ' Mauvaise adresse, ce n''est pas ta commande.'
     form:
@@ -700,7 +700,7 @@ fr:
       new_funds: Nouveau solde
       price: Prix
       reset_article_search: Réinitialiser la recherche
-      search_article: Rechercher des articles...
+      search_article: Rechercher des produits...
       sum_amount: Quantité déjà commandée
       title: Commander
       total_sum_amount: Montant total
@@ -730,16 +730,16 @@ fr:
       articles:
         edit_order: Modifier ta commande
         not_ordered_msg: Tu n'as pas encore commandé
-        order_closed_msg: Désolé, cette commande a déjà été finalisée. Il faudra te réveiller plus tôt la prochaine fois
+        order_closed_msg: Désolé, cette commande a déjà été clôturée. Il faudra te réveiller plus tôt la prochaine fois
         order_nopen_title: En tenant compte des commandes en cours de toutes les cellules
         order_not_open: Déjà reçu
         order_now: Voilà ta chance!
         order_open: Quantité à prévoir
         ordered: Quantité souhaitée
         ordered_title: Quantité + tolérance
-        show_hide: Montrer/cacher les articles non commandés
+        show_hide: Montrer/cacher les produits non commandés
         show_note: Afficher le commentaire
-        title: Aperçu des articles
+        title: Aperçu des produits
         unit_price: Prix unitaire
       comment: Lire/écrire des commentaire
       comments:
@@ -761,7 +761,7 @@ fr:
       role_article_meta: Article
       role_finance: Finances
       role_orders: Commande
-      role_suppliers: FournisseusEs_rs
+      role_suppliers: Fournisseur-e
       show_google_maps: Afficher la position sur Google maps
       sort_by: Trier par %{text}
     deliveries:
@@ -771,7 +771,7 @@ fr:
       write_message: Écrire un message
     orders:
       old_price: Ancien prix
-      option_choose: Choix d'unE fournisseusE_r
+      option_choose: Choix d'un-e fournisseur-e
       option_stock: Cellier
       order_pdf: Générer un PDF
     submit:
@@ -850,10 +850,10 @@ fr:
         overview: Aperçu des commandes
         title: Commandes
       products:
-        edit: Mettre à jour les articles
+        edit: Mettre à jour les produits
         edit_stock: Gérer le cellier
-        edit_suppliers: Gérer les fournisseusEs_rs
-        title: Gérer les articles
+        edit_suppliers: Gérer les fournisseur-e-s
+        title: Gérer les produits
       tasks: Ton boulot
       title: Aller à...
       write_message: Écrire un message
@@ -861,7 +861,9 @@ fr:
     errors:
       already_member: est déjà membre de la Boufcoop.
     modal_form:
-      body: <p>Sur cette page, tu peux inviter une personne qui n'est pas encore membre de la Boufcoop à rejoindre la cellule <b>%{group}</b> .</p><p>Lors de sa première connexion elle sera automatiquement membre de la cellule. </p>
+      body: |-
+        <p>Sur cette page, tu peux inviter une personne qui n'est pas encore membre de la boufcoop à rejoindre la cellule ou l'équipe <b>%{group}</b> .</p>
+        <p>Lors de sa prochaine connexion elle en deviendra automatiquement membre. </p>
       title: Engrainer une personne
     new:
       action: Engrainer!
@@ -960,7 +962,7 @@ fr:
         CherEs %{ordergroup},
 
         La commande pour "%{order}" a été finalisée le %{when} par %{user}.
-        Voilà la liste des articles qui ont été commandés pour vous:
+        Voilà la liste des produits qui ont été commandés pour vous:
       text1: |-
         Prix total: %{sum}
         Afficher sur le site: %{order_url}
@@ -1007,7 +1009,7 @@ fr:
         subscribe: Pour plus d'explications concernant la mailing list, consulte le %{link}
         subscribe_msg: Il faudra peut être d'abord t'inscrire à la mailing list.
         wiki: wiki (section mailing list)
-      no_user_found: 'AucunE membre correspondantE n''a été trouvéE '
+      no_user_found: Aucun-e membre trouvée avec cet identifiant
       search: Rechercher ...
       search_user: Rechercher unE membre
       title: Nouveau message
@@ -1045,8 +1047,8 @@ fr:
     articles:
       categories: Catégories
       stock: Gestion du cellier
-      suppliers: FournisseusEs_rs/Articles
-      title: Articles
+      suppliers: Annuaire
+      title: Produits
     dashboard: Tableau de bord
     finances:
       accounts: Crédits des cellules
@@ -1063,7 +1065,7 @@ fr:
       manage: Gestion des commandes
       ordering: Passer une commande
       title: Commandes
-    tasks: Boulot
+    tasks: Agenda
     wiki:
       all_pages: Toutes les pages
       home: Page d'accueil
@@ -1075,10 +1077,10 @@ fr:
         strip_insignificant_zeros: true
   order_articles:
     edit:
-      stock_alert: Le prix d'articles déjà présents dans le cellier ne peut plus être modifié!
-      title: Mettre à jour la liste des article
+      stock_alert: Le prix de produits présents dans le cellier ne peut plus être modifié!
+      title: Mettre à jour la liste des produits
     new:
-      title: Ajouter l'article à une commande
+      title: Ajouter le produit à une commande
   ordergroups:
     edit:
       title: Modifier les cellules
@@ -1089,9 +1091,9 @@ fr:
       invalid_balance: n'est pas un nombre valide
   orders:
     articles:
-      article_count: 'Articles commandés:'
-      prices: Prix brut/net
-      prices_sum: 'Totaux (des prix bruts/nets):'
+      article_count: 'Produits commandés:'
+      prices: Prix TTC/HT
+      prices_sum: 'Totaux (des prix TTC/HT):'
       units_full: Lots complet
       units_ordered: Unités commandées
     create:
@@ -1103,22 +1105,22 @@ fr:
       field_unlocked_title: La répartition de cet article entre les cellules a été modifiée manuellement. Toute nouvelle modification entrainera une perte de la valeur enregistrée actuellement.
     fax:
       amount: Quantité
-      articles: Articles
+      articles: Produits
       delivery_day: Jour de livraison
       heading: Commande pour %{name}
       name: Nom
       number: Numéro
       to_address: Adresse du destinataire
     finish:
-      notice: La commande a été close.
+      notice: La commande a été clôturée.
     form:
       ignore_warnings: Ignorer les avertissements
-      prices: Prix (net/coop)
+      prices: Prix (HT/coop)
       select_all: Tout sélectionner
       stockit: En stoc
       title: Article
     index:
-      action_end: Terminer
+      action_end: Clôturer
       action_receive: Réceptionner
       confirm_delete: Vraiment supprimer la commande?
       confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
@@ -1135,8 +1137,8 @@ fr:
       error_starts_before_ends: doit être postérieur à la date de début de la commande (ou bien être laissé vierge)
       notice_close: 'Commande: %{name}, jusqu''au %{ends}'
       stock: Cellier
-      warning_ordered: 'Attention: les articles en rouge ont déjà été commandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
-      warning_ordered_stock: 'Attention: les articles en rouge ont déjà été demandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
+      warning_ordered: 'Attention: les produits en rouge ont déjà été commandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
+      warning_ordered_stock: 'Attention: les produits en rouge ont déjà été demandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
     new:
       title: Définir une nouvelle commande
     receive:
@@ -1149,15 +1151,15 @@ fr:
       surplus_options: 'Options de répartition:'
       title: Réception de la commande %{order}
     show:
-      action_end: Clore!
+      action_end: Clôturer!
       amounts: 'Total net/brut:'
-      articles: Aperçu des articles
-      articles_ordered: 'Articles commandés:'
+      articles: Aperçu des produits
+      articles_ordered: 'Produits commandés:'
       comments:
         title: Commentaire
       comments_link: Commenaire
       confirm_delete: Veux-tu vraiment supprimer la commande?
-      confirm_end: Veux tu vraiment terminer la commande %{order}? Pas d'annulation possible.
+      confirm_end: Veux tu vraiment clôturer la commande %{order}? Pas d'annulation possible.
       description1: Commande %{state} de %{supplier} créée par %{who}, ouverte du %{starts} au %{ends}.
       description2: '%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)'
       download:
@@ -1167,7 +1169,7 @@ fr:
         fax_pdf: Fax au format PDF
         fax_txt: Fax au format texte
         group_pdf: Liste des cellules en PDF
-        matrix_pdf: Matrice de distribution en PDF
+        matrix_pdf: Matrice de répartition en PDF
         title: Télécharger
       group_orders: 'Commandes des cellules:'
       search_placeholder:
@@ -1181,7 +1183,7 @@ fr:
       warn_not_closed: Attention, cette commande n'a pas encore été décomptée!
     state:
       closed: décomptée
-      finished: close
+      finished: clôturée
       open: en cours
     update:
       notice: La commande a été mise à jour.
@@ -1291,7 +1293,7 @@ fr:
       search: Recherche...
       search_user: Rechercher par utilisatrice
       title: Boulots hebdomadaires
-      user_not_found: Aucune utilisatrice n'a été trouvée.
+      user_not_found: Aucun-e membre ne correspond à ce nom
     open_orders:
       no_open_orders: Il n'y a aucune commande en cours en ce moment
       not_enough_apples: Désolé, ta cellule n'a pas assez de glands pour pouvoir commander!
@@ -1376,7 +1378,7 @@ fr:
       date: Date
       note: Note
       overview: Aperçu de l'inventaire
-      supplier: FournisseusE_r
+      supplier: Fournisseur-e
       title: Afficher l'inventaire
       unit: Unité
     stock_takings:
@@ -1403,7 +1405,7 @@ fr:
       price_hint: Pour éviter que ça soit le bazar, les prix des articles du cellier ne peuvent plus être modifiés.
     index:
       confirm_delete: T'es sûrE de ton coup?
-      new_delivery: Réapprovisionner le cellier...
+      new_delivery: Approvisionner le cellier...
       new_stock_article: Ajouter un article au cellier
       new_stock_taking: Inventorier le cellier
       order_online: Définir une commande à partir du cellier
@@ -1428,39 +1430,39 @@ fr:
       notice: Les données de l'article "%{name}" ont été mises à jour.
   suppliers:
     create:
-      notice: FournisseusE_r misE à jour
+      notice: Fournisseur-e mis-e à jour
     destroy:
-      notice: FournisseusE_r suppriméE
+      notice: Fournisseur-e supprimé-e
     edit:
-      title: Modifier le/la fournisseurE
+      title: Modifier le-la fournisseur-e
     index:
-      action_import: Importer unE fournisseurE d'une base de données extérieure
-      action_new: Ajouter unE fournisseurE
+      action_import: Importer des données depuis l'annuaire mutualisé
+      action_new: Ajouter un-e fournisseur-e
       articles: Articles (%{count})
-      confirm_del: Attention, veux-tu vraiment supprimer le/la fournisseurE %{name}?
+      confirm_del: Attention, veux-tu vraiment supprimer le-la fournisseur-e %{name}?
       deliveries: Livraisons (%{count})
       stock: en stock (%{count})
-      title: FournisseurEs
+      title: Fournisseur-e-s
     new:
-      title: Ajouter unE fournisseurE
-    shared_supplier_note: Le/la fournisseurE a été associé a la base de données extérieure.
+      title: Ajouter un-e fournisseur-e
+    shared_supplier_note: Le-la fournisseur-e a été connecté à l'annuaire mutualisé.
     shared_suppliers:
       body: |-
-        <p>Les fournisseurEs de la base de données extérieure sont affichéEs ici.</p>
-        <p>Tu peux encore en importer des nouveaux, en t'y abonnant ci-dessous.</p>
-        <p>De cette façon, le/la fournisseurE est automatiquement ajoutéE à la base de données.</p>
+        <p>Les fournisseur-e-s de l'annuaire mutualisé sont affiché-e-s ici.</p>
+        <p>Tu peux les ajouter à l'annuaire de ta coop en t'y abonnant ci-dessous.</p>
+        <p>Tu seras alors redirigé vers la page d'ajout de fournisseur-e préremplie, et il te suffira de valider.</p>
       subscribe: s'abonner
       subscribe_again: s'abonner à nouveau
-      supplier: FournisseurE
+      supplier: Fournisseur-e
       title: Listes externes
     show:
       confirm_delete: Tu es sûrE de ton coup?
       last_deliveries: Dernières livraisons
       last_orders: Dernières commande
-      new_delivery: Réapprovisionner le cellier
+      new_delivery: Approvisionner le cellier
       show_deliveries: Afficher tous les réapprovisionnements
     update:
-      notice: Les données du_de la fournisseurE ont été mises à jour
+      notice: Les données du-de la fournisseur-e ont été mises à jour
   tasks:
     accept:
       notice: Tu as accepté ce boulot
@@ -1487,7 +1489,7 @@ fr:
     index:
       show_group_tasks: Afficher l'agenda de cette équipe
       title: Agenda
-      title_non_group: Boulots ouverts à tous
+      title_non_group: Boulots ouverts à tou-te-s
     list:
       accept_task: Te charger de ce boulot
       done: Effectué

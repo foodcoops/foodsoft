@@ -406,7 +406,7 @@ nl:
     add_stock_change:
       how_many_units: 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
     create:
-      notice: Levering is aangemaakt. Vergeet niet een factuur te maken!
+      notice: Levering is aangemaakt. Vergeet niet een factuur toe te voegen!
     destroy:
       notice: Levering is verwijdered.
     edit:
