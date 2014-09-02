@@ -1,0 +1,9 @@
+= config_input form, :default_locale,
+               collection: I18n.available_locales.map {|l| [t("simple_form.options.settings.profile.language.#{l}"), l]}
+= config_input form, :ignore_browser_locale, as: :boolean
+= config_input form, :time_zone, as: :time_zone, include_blank: true, input_html: {class: 'input-xlarge'}
+= config_input form, :currency_unit do
+  = config_input_field form, :currency_unit, class: 'input-mini'
+  %label.inline
+    = config_input_label form, :currency_space
+    = config_input_field form, :currency_space, as: :boolean

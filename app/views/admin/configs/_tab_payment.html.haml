@@ -1,0 +1,12 @@
+= config_input form, :price_markup do
+  .input-append
+    = config_input_field form, :price_markup, as: :decimal, class: 'input-mini'
+    %span.add-on %
+= config_input form, :tax_default do
+  .input-append
+    = config_input_field form, :tax_default, as: :decimal, class: 'input-mini'
+    %span.add-on %
+= config_input form, :minimum_balance do
+  .input-prepend
+    %span.add-on= t 'number.currency.format.unit'
+    = config_input_field form, :minimum_balance, as: :decimal, class: 'input-small'

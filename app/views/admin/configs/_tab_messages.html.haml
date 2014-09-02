@@ -1,0 +1,7 @@
+%fieldset
+  %label
+    %h4= t '.emails_title'
+  = config_input form, :email_from, as: :string, input_html: {class: 'input-xlarge', placeholder: "#{@cfg[:name]} <#{@cfg[:contact][:email]}>"}
+  = config_input form, :email_replyto, as: :string, input_html: {class: 'input-xlarge'}
+-# sender is better configured by server administrator, since it affects SPF records
+-#= config_input form, :email_sender, as: :string, input_html: {class: 'input-xlarge'}

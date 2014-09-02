@@ -1,0 +1,10 @@
+= config_input form, :name, required: true, input_html: {class: 'input-xlarge'}
+= form.fields_for :contact do |c|
+  = config_input c, :street, input_html: {class: 'input-xlarge'}
+  .fold-line
+    = config_input c, :zip_code, input_html: {class: 'input-mini'}
+    = config_input c, :city, input_html: {class: 'input-medium'}
+  = config_input c, :country, as: :string, input_html: {class: 'input-xlarge'}
+  = config_input c, :email, required: true, input_html: {class: 'input-xlarge'}
+  = config_input c, :phone, input_html: {class: 'input-medium'}
+= config_input form, :homepage, required: true, as: :url, input_html: {class: 'input-xlarge'}

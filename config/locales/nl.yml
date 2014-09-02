@@ -213,6 +213,22 @@ nl:
         title: Administratie
         type: Type
         username: Gebruikersnaam
+    configs:
+      list:
+        title: Configuratielijst
+        key: Sleutel
+        value: Inhoud
+      show:
+        title: Configuratie
+        submit: Opslaan
+      tab_layout:
+        pdf_title: PDF documenten
+      tabs:
+        title: Configuratie
+      tab_messages:
+        emails_title: Emailinstellingen
+      update:
+        notice: Configuratie opgeslagen.
     confirm: Wil je %{name} daadwerkelijk wissen?
     ordergroups:
       destroy:
@@ -402,6 +418,80 @@ nl:
       file_label: Graag een compatibel bestand uitkiezen
       submit: Bestand uploaden
       title: Artikelen uploaden voor %{supplier}
+  config:
+    tabs:
+      foodcoop: Foodcoop
+      payment: Financiën
+      language: Taal
+      messages: Berichten
+      tasks: Taken
+      layout: Layout
+      others: Overig
+      list: Lijst
+    hints:
+      name: De naam van de foodcoop.
+      contact:
+        email: Algemeen contactadres, zowel voor op de website als in formulieren.
+        street: Adres, meestal is dit het aflever- en ophaaladres.
+      custom_css: De layout van deze site kan gewijzigd worden door hier cascading stylesheets (CSS) in te voeren. Laat het leeg voor de standaardstijl.
+      homepage: Website van de foodcoop.
+      help_url: Documentatie website.
+      applepear_url: Website waar het appelpunten systeem wordt uitgelegd.
+      ignore_browser_locale: Negeer de taal van de computer wanneer iemand nog geen taal gekozen heeft.
+      price_markup: Percentage dat bovenop het brutobedrag wordt gedaan voor foodcoop leden.
+      tax_default: Standaard BTW percentage voor nieuwe artikelen.
+      stop_ordering_under: Leden kunnen slechts bestellen als ze dit aantal appelpunten hebben of meer.
+      minimum_balance: Leden kunnen slechts bestellen wanneer hun tegoed groter of gelijk is aan dit bedrag.
+      use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
+      use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
+      use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
+      use_wiki: "Gebruik wiki pagina's."
+      email_sender: "Emails worden verzonden vanaf dit emailadres. Om te voorkomen dat emails als spam worden tegengehouden, is het te adviseren het adres van de webserver op te nemen in het SPF record van het email domein."
+      email_from: "Emails zullen lijken verzonden te zijn vanaf dit email adres. Laat het veld leeg om het contactadres van de foodcoop te gebruiken."
+      email_replyto: Vul dit in als je antwoord op mails van Foodsoft wilt ontvangen op een ander adres dan het bovenstaande.
+      mailing_list: Mailing-lijst adres om te gebruiken in plaats van het berichtensysteem voor emails naar alle leden.
+      mailing_list_subscribe: Emailadres waar leden zich kunnen aanmelden voor de mailing-lijst.
+      page_footer: 'Wordt op iedere pagina getoond. Vul "blank" in om de voettekst helemaal weg te halen.'
+      pdf_font_size: Basis tekstgrootte voor PDF bestanden (standaard 12).
+      pdf_page_size: 'Paginaformaat voor PDF bestanden, meestal "A4" of "letter".'
+      pdf_add_page_breaks:
+        order_by_articles: Ieder artikel op een nieuwe pagina.
+        order_by_groups: Ieder huishouden op een nieuwe pagina.
+      tolerance_is_costly: "Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen."
+    keys:
+      name: Naam
+      contact:
+        street: Straat
+        zip_code: Postcode
+        city: Stad
+        country: Land
+        email: Email
+        phone: Telefoon
+      custom_css: Aangepaste CSS
+      homepage: Homepage
+      help_url: Documentatie URL
+      applepear_url: Appelsysteem uitleg URL
+      default_locale: Standaardtaal
+      ignore_browser_locale: Browsertaal negeren
+      price_markup: Foodcoop marge
+      tax_default: Standaard BTW
+      tolerance_is_costly: Tolerantie is duur
+      stop_ordering_under: Minimum appelpunten
+      use_apple_points: Appelpunten
+      minimum_balance: Minimum tegoed
+      use_nick: Bijnamen gebruiken
+      use_messages: Berichten gebruiken
+      use_wiki: Wiki gebruiken
+      email_sender: Sender adres
+      email_from: From adres
+      email_replyto: Reply-to adres
+      mailing_list: Mailing-lijst
+      mailing_list_subscribe: Mailing-lijst aanmelden
+      page_footer: Voettkest
+      pdf_font_size: Tekstgrootte
+      pdf_page_size: Paginaformaat
+      pdf_add_page_breaks: "Nieuwe pagina's"
+      time_zone: Tijdzone
   deliveries:
     add_stock_change:
       how_many_units: 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
@@ -1023,6 +1113,7 @@ nl:
       no_ordergroup: geen huishouden
   navigation:
     admin:
+      config: Instellingen
       home: Overzicht
       ordergroups: Huishoudens
       title: Administratie

@@ -66,18 +66,6 @@ ActiveRecord::Schema.define(version: 20140521142651) do
 
   add_index "assignments", ["user_id", "task_id"], name: "index_assignments_on_user_id_and_task_id", unique: true, using: :btree
 
-  create_table "configurable_settings", force: true do |t|
-    t.integer "configurable_id"
-    t.string  "configurable_type"
-    t.integer "targetable_id"
-    t.string  "targetable_type"
-    t.string  "name",              default: "", null: false
-    t.string  "value_type"
-    t.text    "value"
-  end
-
-  add_index "configurable_settings", ["name"], name: "index_configurable_settings_on_name", using: :btree
-
   create_table "deliveries", force: true do |t|
     t.integer  "supplier_id"
     t.date     "delivered_on"

@@ -13,6 +13,9 @@ default: &defaults
   contact:
     email: fc@minimal.test
 
+  # required by configuration form (but otherwise not)
+  homepage: http://www.minimal.test/
+
   # true by default to keep compat with older installations, but test with false here
   use_nick: false
 

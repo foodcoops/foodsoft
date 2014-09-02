@@ -1,0 +1,15 @@
+= config_input form, :page_footer, as: :text, input_html: {class: 'input-xxlarge', rows: 2, placeholder: "#{link_to(FoodsoftConfig[:name], FoodsoftConfig[:homepage])}"}
+= config_input form, :custom_css, as: :text, input_html: {class: 'input-xxlarge', rows: 3}
+
+%h4= t '.pdf_title'
+.fold-line
+  = config_input form, :pdf_font_size, as: :integer, input_html: {class: 'input-mini'}
+  = config_input form, :pdf_page_size, input_html: {class: 'input-medium'}
+= config_input form, :pdf_add_page_breaks do
+  = form.simple_fields_for :pdf_add_page_breaks do |fields|
+    %label
+      = config_input_field fields, :order_by_groups, as: :boolean
+      = t 'config.hints.pdf_add_page_breaks.order_by_groups'
+    %label
+      = config_input_field fields, :order_by_articles, as: :boolean
+      = t 'config.hints.pdf_add_page_breaks.order_by_articles'

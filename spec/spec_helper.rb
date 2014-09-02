@@ -35,6 +35,8 @@ RSpec.configure do |config|
   end
   config.after(:each) do
     DatabaseCleaner.clean
+    # Need to clear cache for RailsSettings::CachedSettings
+    Rails.cache.clear
   end
 
   # reload foodsoft configuration, so that tests can use FoodsoftConfig.config[:foo]=x
