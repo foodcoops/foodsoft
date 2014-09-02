@@ -109,15 +109,7 @@ class FoodsoftConfig
     # @return [Boolean] Whether storing succeeded (fails when key is not allowed to be set in database).
     def []=(key, value)
       return false unless allowed_key?(key)
-      # try to figure out type ...
-      value = case value
-                when 'true' then true
-                when 'false' then false
-                when /^[-+0-9]+$/ then value.to_i
-                when /^[-+0-9.]+([eE][-+0-9]+)?$/ then value.to_f
-                when '' then nil
-                else value
-              end
+      value = normalize_value value
       # then update database
       if config[key] == value or (config[key].nil? and value == false)
         # delete (ok if it was already deleted)
@@ -253,6 +245,21 @@ class FoodsoftConfig
       engines.each { |e| e.default_foodsoft_config(cfg) }
       cfg
     end
+
+    # Normalize value recursively (which can be entered as strings, but we want to store it properly)
+    def normalize_value(value)
+      value = value.map(&:normalize_value) if value.is_a? Array
+      value = Hash[ value.to_a.map{|a| [a[0], normalize_value(a[1])]} ] if value.is_a? Hash
+      case value
+        when 'true' then true
+        when 'false' then false
+        when /^[-+0-9]+$/ then value.to_i
+        when /^[-+0-9.]+([eE][-+0-9]+)?$/ then value.to_f
+        when '' then nil
+        else value
+      end
+    end
+
 
   end
 end
