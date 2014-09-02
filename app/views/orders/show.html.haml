@@ -55,7 +55,8 @@
           %li= order_pdf(@order, :articles, t('.download.article_pdf'))
           %li= order_pdf(@order, :matrix, t('.download.matrix_pdf'))
           %li= order_pdf(@order, :fax, t('.download.fax_pdf'))
-          %li= link_to t('.download.fax_txt'), order_path(@order, format: :txt), {title: t('.download.download_file')}
+          - unless @order.stockit?
+            %li= link_to t('.download.fax_txt'), order_path(@order, format: :txt), {title: t('.download.download_file')}
           %li= link_to t('.download.fax_csv'), order_path(@order, format: :csv), {title: t('.download.download_file')}
 
     - if @order.open?

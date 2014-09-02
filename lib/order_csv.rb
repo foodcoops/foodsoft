@@ -20,7 +20,7 @@ class OrderCsv < RenderCSV
               oa.article.order_number,
               oa.article.name,
               oa.article.unit + (oa.price.unit_quantity > 1 ? " × #{oa.price.unit_quantity}" : ''),
-              number_to_currency(oa.article_price.price * oa.article_price.unit_quantity),
+              number_to_currency(oa.article.price * oa.article.unit_quantity),
               number_to_currency(oa.total_price)
             ]
     end
