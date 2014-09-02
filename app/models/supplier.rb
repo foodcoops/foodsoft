@@ -9,12 +9,13 @@ class Supplier < ActiveRecord::Base
 
   include ActiveModel::MassAssignmentSecurity
   attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
-                  :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity
+                  :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity, :shared_sync_method
 
   validates :name, :presence => true, :length => { :in => 4..30 }
   validates :phone, :presence => true, :length => { :in => 8..25 }
   validates :address, :presence => true, :length => { :in => 8..50 }
   validates_length_of :order_howto, :note, maximum: 250
+  validate :valid_shared_sync_method
   validate :uniqueness_of_name
 
   scope :undeleted, -> { where(deleted_at: nil) }
@@ -22,16 +23,18 @@ class Supplier < ActiveRecord::Base
   # sync all articles with the external database
   # returns an array with articles(and prices), which should be updated (to use in a form)
   # also returns an array with outlisted_articles, which should be deleted
+  # also returns an array with new articles, which should be added (depending on shared_sync_method)
   def sync_all
     updated_articles = Array.new
     outlisted_articles = Array.new
+    new_articles = Array.new
     for article in articles.undeleted
       # try to find the associated shared_article
-      shared_article = article.shared_article
+      shared_article = article.shared_article(self)
 
       if shared_article # article will be updated
         
-        unequal_attributes = article.shared_article_changed?
+        unequal_attributes = article.shared_article_changed?(self)
         unless unequal_attributes.blank? # skip if shared_article has not been changed
           
           # try to convert different units
@@ -63,7 +66,21 @@ class Supplier < ActiveRecord::Base
         outlisted_articles << article
       end
     end
-    return [updated_articles, outlisted_articles]
+    # Find any new articles, unless the import is manual
+    unless shared_sync_method == 'import'
+      for shared_article in shared_supplier.shared_articles
+        unless articles.undeleted.find_by_order_number(shared_article.number)
+          new_articles << shared_article.build_new_article(self)
+        end
+      end
+    end
+    return [updated_articles, outlisted_articles, new_articles]
+  end
+
+  # default value
+  def shared_sync_method
+    return unless shared_supplier
+    self[:shared_sync_method] || 'import'
   end
 
   def deleted?
@@ -78,6 +95,13 @@ class Supplier < ActiveRecord::Base
   end
 
   protected
+
+  # make sure the shared_sync_method is allowed for the shared supplier
+  def valid_shared_sync_method
+    if shared_supplier and !shared_supplier.shared_sync_methods.include?(shared_sync_method)
+      errors.add :name, :included
+    end
+  end
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name

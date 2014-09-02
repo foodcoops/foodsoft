@@ -18,7 +18,8 @@
 
     - if @supplier.shared_supplier
       .btn-group
-        = link_to t('.ext_db.import'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-primary'
+        - if @supplier.shared_sync_method == 'import'
+          = link_to t('.ext_db.import'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-primary'
         = link_to t('.ext_db.sync'), sync_supplier_articles_path(@supplier), method: :post, class: 'btn btn-success'
 
     .btn-group

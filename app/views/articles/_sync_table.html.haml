@@ -1,0 +1,53 @@
+%table.table
+  %thead
+    %tr
+      %th= heading_helper Article, :name
+      %th= heading_helper Article, :note
+      %th= heading_helper Article, :manufacturer
+      %th= heading_helper Article, :origin
+      %th= heading_helper Article, :unit
+      %th= heading_helper Article, :unit_quantity, short: true
+      %th= heading_helper Article, :price
+      %th= heading_helper Article, :tax
+      %th= heading_helper Article, :deposit
+      %th= heading_helper Article, :article_category
+  %tbody
+    - articles.each do |changed_article, attrs|
+      - unless changed_article.new_record?
+        - article = Article.find(changed_article.id)
+        %tr{:style => 'color:grey'}
+          %td= article.name
+          %td= article.note
+          %td= article.manufacturer
+          %td= article.origin
+          %td= article.unit
+          %td= article.unit_quantity
+          %td= number_to_currency article.price
+          %td= number_to_percentage article.tax
+          %td= number_to_currency article.deposit
+          %td= article.article_category.name if article.article_category
+      %tr
+        = fields_for "#{field}[]", changed_article do |form|
+          %td{:style => highlight_new(attrs, :name)}
+            = form.text_field 'name', :size => 0
+            - hidden_fields.each do |field|
+              = form.hidden_field field
+          %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-small'
+          %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-small'
+          %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'input-mini'
+          %td{:style => highlight_new(attrs, :unit)}= form.text_field 'unit', class: 'input-mini'
+          %td{:style => highlight_new(attrs, :unit_quantity)}= form.text_field 'unit_quantity', class: 'input-mini'
+          %td{:style => highlight_new(attrs, :price)}
+            .input-prepend
+              %span.add-on= t 'number.currency.format.unit'
+              = form.text_field 'price', class: 'input-mini', style: 'width: 45px'
+          %td{:style => highlight_new(attrs, :tax)}
+            .input-append
+              = form.text_field 'tax', class: 'input-mini', style: 'width: 45px'
+              %span.add-on %
+          %td{:style => highlight_new(attrs, :deposit)}
+            .input-prepend
+              %span.add-on= t 'number.currency.format.unit'
+              = form.text_field 'deposit', class: 'input-mini', style: 'width: 45px'
+          %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
+            {include_blank: true}, class: 'input-small'

@@ -22,6 +22,9 @@ ActiveSupport.on_load(:after_initialize) do
   SharedArticle.class_eval do
     alias_attribute :number, :order_number
     alias_attribute :updated_on, :updated_at
+    def category
+      ArticleCategory.find(article_category_id).name
+    end
     def self.find_by_number(n)
       find_by_order_number(n)
     end

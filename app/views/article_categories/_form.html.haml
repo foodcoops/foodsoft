@@ -1,6 +1,6 @@
 = simple_form_for @article_category do |f|
   = f.input :name
-  = f.input :description
+  = f.input :description, as: :text, input_html: {class: 'input-xxlarge'}
   .form-actions
     = f.submit class: 'btn'
     = link_to t('ui.or_cancel'), article_categories_path

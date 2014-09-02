@@ -1,72 +1,39 @@
 - title t('.title')
 
 = form_tag update_synchronized_supplier_articles_path(@supplier) do
-  %h2= t '.outlist.title'
-  %p
-  - unless @outlisted_articles.empty?
-    = t('.outlist.body').html_safe
-    %ul
-      - for article in @outlisted_articles
-        %li
-          = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
-          = article.name
-          - if article.in_open_order
-            .alert= t '.outlist.alert_used', article: article.name
-  - else
-    %i= t '.outlist.body_skip'
+  - if @outlisted_articles.any?
+    %h2= t '.outlist.title'
+    %p
+      = t('.outlist.body').html_safe
+      %ul
+        - for article in @outlisted_articles
+          %li
+            = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
+            = article.name
+            - if article.in_open_order
+              .alert= t '.outlist.alert_used', article: article.name
+    %hr/
+
+  - if @updated_articles.any?
+    %h2= t '.update.title'
+    %p
+      %i
+        = t '.update.update_msg', count: @updated_articles.size
+        = t '.update.body'
+    = render 'sync_table', articles: @updated_articles, field: 'articles', hidden_fields: %w(shared_updated_on)
+    %hr/
+
+  - if @new_articles.any?
+    %h2= t '.upnew.title'
+    %p
+      %i= t '.upnew.body_count', count: @new_articles.length
+    = render 'sync_table', articles: @new_articles, field: 'new_articles', hidden_fields: %w(shared_updated_on order_number)
+    %hr/
+
   - if @ignored_article_count > 0
-    %i= t '.outlist.body_ignored', count: @ignored_article_count
-  %hr/
-  %h2= t '.update.title'
-  %p
-    %i
-      = t '.update.update_msg', count: @updated_articles.size
-      = t '.update.body'
-  %table.table
-    %thead
-      %tr
-        %th= heading_helper Article, :name
-        %th= heading_helper Article, :note
-        %th= heading_helper Article, :manufacturer
-        %th= heading_helper Article, :origin
-        %th= heading_helper Article, :unit
-        %th= heading_helper Article, :unit_quantity, short: true
-        %th= heading_helper Article, :price
-        %th= heading_helper Article, :tax
-        %th= heading_helper Article, :deposit
-        %th= heading_helper Article, :article_category
-    %tbody
-      - @updated_articles.each do |updated_article, attrs|
-        - article = Article.find(updated_article.id)
-        %tr{:style => 'color:grey'}
-          %td= article.name
-          %td= article.note
-          %td= article.manufacturer
-          %td= article.origin
-          %td= article.unit
-          %td= article.unit_quantity
-          %td= article.price
-          %td= article.tax
-          %td= article.deposit
-          %td= article.article_category.name if article.article_category
-        %tr
-          = fields_for 'articles[]', updated_article do |form|
-            %td{:style => highlight_new(attrs, :name)}
-              = form.text_field 'name', :size => 0
-              = form.hidden_field 'shared_updated_on'
-            %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-small'
-            %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-small'
-            %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'input-mini'
-            %td{:style => highlight_new(attrs, :unit)}= form.text_field 'unit', class: 'input-mini'
-            %td{:style => highlight_new(attrs, :unit_quantity)}= form.text_field 'unit_quantity', class: 'input-mini'
-            %td{:style => highlight_new(attrs, :price)}= form.text_field 'price', class: 'input-mini'
-            %td{:style => highlight_new(attrs, :tax), class: 'input-append'}
-              = form.text_field 'tax', class: 'input-mini'
-              %span.add-on %
-            %td{:style => highlight_new(attrs, :deposit)}= form.text_field 'deposit', class: 'input-mini'
-            %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
-              {include_blank: true}, class: 'input-small'
-  %hr/
+    %p
+      %i= t '.outlist.body_ignored', count: @ignored_article_count
+
   = hidden_field 'supplier', 'id'
   = submit_tag t('.submit'), class: 'btn btn-primary'
   = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)

@@ -148,7 +148,7 @@ class ArticlesController < ApplicationController
       no_category = ArticleCategory.new
       articles.each do |row|
         # fallback to Others category
-        category = (ArticleCategory.find_by_name(row[:category]) or no_category)
+        category = (ArticleCategory.find_match(row[:category]) or no_category)
         # creates a new article and price
         article = Article.new( :name => row[:name], 
                                :note => row[:note],
@@ -227,10 +227,10 @@ class ArticlesController < ApplicationController
       redirect_to supplier_articles_url(@supplier), :alert => I18n.t('articles.controller.sync.shared_alert', :supplier => @supplier.name)
     end
     # sync articles against external database
-    @updated_articles, @outlisted_articles = @supplier.sync_all
+    @updated_articles, @outlisted_articles, @new_articles = @supplier.sync_all
     # convert to db-compatible-string
     @updated_articles.each {|a, b| a.shared_updated_on = a.shared_updated_on.to_formatted_s(:db)}
-    if @updated_articles.empty? && @outlisted_articles.empty?
+    if @updated_articles.empty? && @outlisted_articles.empty? && @new_articles.empty?
       redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.sync.notice')
     end
     @ignored_article_count = @supplier.articles.where(order_number: [nil, '']).count
@@ -246,8 +246,21 @@ class ArticlesController < ApplicationController
         end
 
         # Update articles
-        params[:articles].each do |id, attrs|
-          Article.find(id).update_attributes! attrs
+        if params[:articles]
+          params[:articles].each do |id, attrs|
+            Article.find(id).update_attributes! attrs
+          end
+        end
+
+        # Add new articles
+        if params[:new_articles]
+          params[:new_articles].each do |attrs|
+            article = Article.new attrs
+            article.supplier = @supplier
+            article.availability = true if @supplier.shared_sync_method == 'all_available'
+            article.availability = false if @supplier.shared_sync_method == 'all_unavailable'
+            article.save!
+          end
         end
       end
 
