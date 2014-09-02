@@ -8,7 +8,6 @@ default: &defaults
   multi_coop_install: false
   default_scope: 'f'
 
-  host: localhost
 
   name: FC Minimal
   contact:

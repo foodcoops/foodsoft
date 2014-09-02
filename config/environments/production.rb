@@ -75,6 +75,9 @@ Foodsoft::Application.configure do
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
+  # Configure hostname for action mailer (can be overridden in foodcoop config)
+  config.action_mailer.default_url_options = { host: `hostname -f`, protocol: 'https' }
+
   # Use sendmail to avoid ssl cert problems
   config.action_mailer.delivery_method = :sendmail
 

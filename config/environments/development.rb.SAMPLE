@@ -33,8 +33,8 @@ Foodsoft::Application.configure do
   # Required for i18n-js
   config.assets.initialize_on_precompile = true
 
-  # Configure hostname for action mailer
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  # Configure hostname for action mailer (can be overridden in foodcoop config)
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000, protocol: 'http' }
 
   # Mailcatcher config, start mailcatcher from console with 'mailcatcher'
   # Mailcatcher can be installed by gem install mailcatcher

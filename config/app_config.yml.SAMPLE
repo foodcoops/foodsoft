@@ -8,12 +8,6 @@ default: &defaults
   # If multi_coop_install you have to use a coop name, which you you wanna be selected by default
   default_scope: 'f'
 
-  # http config for this host
-  # Required for action mailer
-  protocol: http
-  host: localhost
-  port: 3000
-
   # name of this foodcoop
   name: FC Test
   # foodcoop contact information (used for FAX messages)
@@ -105,6 +99,11 @@ default: &defaults
       - admin@foodcoop.test
     sender_address: "\"Foodsoft Error\" <foodsoft@foodcoop.test>"
     email_prefix: "[Foodsoft]"
+
+  # http config for this host to generate links in emails (uses environment config when not set)
+  #protocol: http
+  #host: localhost
+  #port: 3000
 
   # Access to sharedLists, the external article-database
   shared_lists:
