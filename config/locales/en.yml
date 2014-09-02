@@ -452,6 +452,7 @@ en:
         street: Address, typically this will be your delivery and pick-up location.
       currency_unit: Currency symbol for displaying prices.
       currency_space: Whether to add whitespace after the currency symbol.
+      custom_css: To modify the layout of this site, you can enter style modifications using the cascading stylesheets (CSS) language. Leave blank for the default style.
       homepage: Website of your foodcoop.
       help_url: Documentation website.
       applepear_url: Website where the apple and pear system for tasks is explained.
@@ -487,6 +488,7 @@ en:
         phone: Phone
       currency_unit: Currency
       currency_space: add space
+      custom_css: Custom CSS
       homepage: Homepage
       help_url: Documentation URL
       applepear_url: Apple system URL

@@ -433,6 +433,7 @@ nl:
       contact:
         email: Algemeen contactadres, zowel voor op de website als in formulieren.
         street: Adres, meestal is dit het aflever- en ophaaladres.
+      custom_css: De layout van deze site kan gewijzigd worden door hier cascading stylesheets (CSS) in te voeren. Laat het leeg voor de standaardstijl.
       homepage: Website van de foodcoop.
       help_url: Documentatie website.
       applepear_url: Website waar het appelpunten systeem wordt uitgelegd.
@@ -466,6 +467,7 @@ nl:
         country: Land
         email: Email
         phone: Telefoon
+      custom_css: Aangepaste CSS
       homepage: Homepage
       help_url: Documentatie URL
       applepear_url: Appelsysteem uitleg URL
