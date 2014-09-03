@@ -8,6 +8,7 @@ class OrderCsv < RenderCSV
       Article.human_attribute_name(:order_number),
       Article.human_attribute_name(:name),
       Article.human_attribute_name(:unit),
+      Article.human_attribute_name(:unit_quantity_short),
       ArticlePrice.human_attribute_name(:price),
       OrderArticle.human_attribute_name(:total_price)
     ]
@@ -19,10 +20,12 @@ class OrderCsv < RenderCSV
               oa.units_to_order,
               oa.article.order_number,
               oa.article.name,
-              oa.article.unit + (oa.price.unit_quantity > 1 ? " × #{oa.price.unit_quantity}" : ''),
-              number_to_currency(oa.article.price * oa.article.unit_quantity),
+              oa.article.unit,
+              oa.price.unit_quantity > 1 ? oa.price.unit_quantity : nil,
+              number_to_currency(oa.price.price * oa.price.unit_quantity),
               number_to_currency(oa.total_price)
             ]
     end
   end
+
 end

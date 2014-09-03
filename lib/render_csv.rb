@@ -36,8 +36,8 @@ class RenderCSV
     File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.csv", 'w') {|f| f.write(to_csv.force_encoding(encoding)) }
   end
 
-  # XXX avoid encoding confusion when using unicode whitespace
+  # XXX disable unit to avoid encoding problems, both in unit and whitespace. Also allows computations in spreadsheet.
   def number_to_currency(number, options={})
-    super(number, options).gsub("\u202f", ' ')
+    super(number, options.merge({unit: nil}))
   end
 end
