@@ -4,15 +4,11 @@
 require 'foodsoft_config'
 FoodsoftConfig.init
 
-# Set action mailer default host for url generating
-url_options = {
-    :host => FoodsoftConfig[:host],
-    :protocol => FoodsoftConfig[:protocol]
-}
-url_options.merge!({:port => FoodsoftConfig[:port]}) if FoodsoftConfig[:port]
-
 Foodsoft::Application.configure do
-  config.action_mailer.default_url_options = url_options
+  # Set action mailer default host for url generating
+  [:protocol, :host, :port].each do |k|
+    config.action_mailer.default_url_options[k] = FoodsoftConfig[k] if FoodsoftConfig[k]
+  end
   
   if %w(production).include? Rails.env 
     # Configuration of the exception_notification plugin
