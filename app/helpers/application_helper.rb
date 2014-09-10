@@ -164,7 +164,14 @@ module ApplicationHelper
       :target => "_blank"
   end
   
-  def bootstrap_flash
+  # Returns flash messages html.
+  #
+  # Use this instead of twitter-bootstrap's +bootstrap_flash+ method for safety, until
+  # CVE-2014-4920 is fixed.
+  #
+  # @return [String] Flash message html.
+  # @see http://blog.nvisium.com/2014/03/reflected-xss-vulnerability-in-twitter.html
+  def bootstrap_flash_patched
     flash_messages = []
     flash.each do |type, message|
       type = :success if type == :notice

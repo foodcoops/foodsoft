@@ -32,7 +32,7 @@
         .span3
           = yield(:sidebar)
         .span9
-          = bootstrap_flash
+          = bootstrap_flash_patched
           - if content_for?(:actionbar)
             .btn-toolbar.pull-right= yield(:actionbar)
           - if show_title?
@@ -40,7 +40,7 @@
               %h1= yield(:title)
           = yield
       - else
-        = bootstrap_flash
+        = bootstrap_flash_patched
         - if content_for?(:actionbar)
           .btn-toolbar.pull-right= yield(:actionbar)
         - if show_title?
