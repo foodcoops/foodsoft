@@ -150,7 +150,7 @@ class ArticlesController < ApplicationController
         # fallback to Others category
         category = (ArticleCategory.find_match(row[:category]) or no_category)
         # creates a new article and price
-        article = Article.new( :name => row[:name], 
+        article = @supplier.articles.build(:name => row[:name], 
                                :note => row[:note],
                                :manufacturer => row[:manufacturer],
                                :origin => row[:origin],
