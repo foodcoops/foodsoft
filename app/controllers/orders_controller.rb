@@ -114,7 +114,7 @@ class OrdersController < ApplicationController
   def receive
     @order = Order.find(params[:id])
     unless request.post?
-      @order_articles = @order.order_articles.ordered.includes(:article).order('articles.order_number, articles.name')
+      @order_articles = @order.order_articles.ordered_or_member.includes(:article).order('articles.order_number, articles.name')
     else
       s = update_order_amounts
       flash[:notice] = (s ? I18n.t('orders.receive.notice', :msg => s) : I18n.t('orders.receive.notice_none'))
