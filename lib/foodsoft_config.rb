@@ -51,16 +51,16 @@ class FoodsoftConfig
   #   Taken from environment variable +FOODSOFT_APP_CONFIG+,
   #   or else +config/app_config.yml+.
   APP_CONFIG_FILE = ENV['FOODSOFT_APP_CONFIG'] || 'config/app_config.yml'
-  # Rails.logger isn't ready yet - and we don't want to litter rspec invocation with this msg
-  puts "-> Loading app configuration from #{APP_CONFIG_FILE}" unless defined? RSpec
   # Loaded configuration
-  APP_CONFIG = ActiveSupport::HashWithIndifferentAccess.new(
-    YAML.load(File.read(File.expand_path(APP_CONFIG_FILE, Rails.root)))
-  )
+  APP_CONFIG = ActiveSupport::HashWithIndifferentAccess.new
 
   class << self
 
-    def init
+    # Load and initialize foodcoop configuration file.
+    # @param filename [String] Override configuration file
+    def init(filename = APP_CONFIG_FILE)
+      Rails.logger.info "Loading app configuration from #{APP_CONFIG_FILE}"
+      APP_CONFIG.clear.merge! YAML.load(File.read(File.expand_path(filename, Rails.root)))
       # Gather program-default configuration
       self.default_config = get_default_config
       # Load initial config from development or production
@@ -186,13 +186,6 @@ class FoodsoftConfig
     #
     #   @return [Hash] Default configuration values
     mattr_accessor :default_config
-
-    # Reload original configuration file, e.g. in between tests.
-    # @param filename [String] Override configuration file
-    def reload!(filename = APP_CONFIG_FILE)
-      APP_CONFIG.clear.merge! YAML.load(File.read(File.expand_path(filename, Rails.root)))
-      init
-    end
 
 
     private

@@ -42,7 +42,7 @@ RSpec.configure do |config|
   # reload foodsoft configuration, so that tests can use FoodsoftConfig.config[:foo]=x
   # without messing up tests run after that
   config.before(:each) do
-    FoodsoftConfig.send :reload!
+    FoodsoftConfig.init
   end
 
   # If true, the base class of anonymous controllers will be inferred
