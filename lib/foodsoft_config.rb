@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 # Foodcoop-specific configuration.
 #
 # This is loaded from +config/app_config.yml+, which contains a root
