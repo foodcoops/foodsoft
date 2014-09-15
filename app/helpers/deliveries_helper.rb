@@ -24,9 +24,9 @@ module DeliveriesHelper
   end
   
   def stock_change_remove_link(stock_change_form)
-    return link_to t('.remove_article'), "#", :class => 'remove_new_stock_change btn btn-small' if stock_change_form.object.new_record?
+    return link_to t('deliveries.stock_change_fields.remove_article'), "#", :class => 'remove_new_stock_change btn btn-small' if stock_change_form.object.new_record?
     output = stock_change_form.hidden_field :_destroy
-    output += link_to t('.remove_article'), "#", :class => 'destroy_stock_change btn btn-small'
+    output += link_to t('deliveries.stock_change_fields.remove_article'), "#", :class => 'destroy_stock_change btn btn-small'
     return output.html_safe
   end
   

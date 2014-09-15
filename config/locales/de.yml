@@ -135,6 +135,7 @@ de:
         order_howto: Howto Bestellen
         phone: Telefon
         phone2: Telefon 2
+        shared_sync_method: 
         url: Homepage
       task:
         description: Beschreibung
@@ -172,6 +173,15 @@ de:
     errors:
       has_many_left: ist noch mit einem/r %{collection} verknüpft!
       models:
+        article:
+          attributes:
+            name:
+              taken: 
+              taken_with_unit: 
+        supplier:
+          attributes:
+            shared_sync_method:
+              included: 
         task:
           attributes:
             done:
@@ -213,6 +223,22 @@ de:
         title: Administration
         type: Typ
         username: Benutzername
+    configs:
+      list:
+        key: 
+        title: 
+        value: 
+      show:
+        submit: 
+        title: 
+      tab_layout:
+        pdf_title: 
+      tab_messages:
+        emails_title: 
+      tabs:
+        title: 
+      update:
+        notice: 
     confirm: Willst du %{name} wirklich löschen?
     ordergroups:
       destroy:
@@ -394,14 +420,95 @@ de:
         update_msg:
           one: Ein Artikel muss aktualisiert werden.
           other: '%{count} Artikel müssen aktualisiert werden.'
+      upnew:
+        body_count: 
+        title: 
     upload:
-      body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert.</p> <p>Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden.</p> <p>Als Zeichensatz wird UTF-8 erwartet. Korrekte Reihenfolge der Spalten:</p>
+      body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert. Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden. Als Zeichensatz wird UTF-8 erwartet.</p> <p>Reihenfolge der Spalten:</p>
       fields:
         reserved: (geschützt)
         status: Status (x=ausgelistet)
       file_label: Bitte wähle eine kompatible Datei aus
       submit: Datei hochladen
       title: '%{supplier} / Artikel hochladen'
+  config:
+    hints:
+      applepear_url: 
+      contact:
+        email: 
+        street: 
+      currency_space: 
+      currency_unit: 
+      custom_css: 
+      email_from: 
+      email_replyto: 
+      email_sender: 
+      help_url: 
+      homepage: 
+      ignore_browser_locale: 
+      mailing_list: 
+      mailing_list_subscribe: 
+      minimum_balance: 
+      name: 
+      page_footer: 
+      pdf_add_page_breaks:
+        order_by_articles: 
+        order_by_groups: 
+      pdf_font_size: 
+      pdf_page_size: 
+      price_markup: 
+      stop_ordering_under: 
+      tax_default: 
+      tolerance_is_costly: 
+      use_apple_points: 
+      use_messages: 
+      use_nick: 
+      use_wiki: 
+    keys:
+      applepear_url: 
+      contact:
+        city: 
+        country: 
+        email: 
+        phone: 
+        street: 
+        zip_code: 
+      currency_space: 
+      currency_unit: 
+      custom_css: 
+      default_locale: 
+      email_from: 
+      email_replyto: 
+      email_sender: 
+      help_url: 
+      homepage: 
+      ignore_browser_locale: 
+      mailing_list: 
+      mailing_list_subscribe: 
+      minimum_balance: 
+      name: 
+      page_footer: 
+      pdf_add_page_breaks: 
+      pdf_font_size: 
+      pdf_page_size: 
+      price_markup: 
+      stop_ordering_under: 
+      tax_default: 
+      time_zone: 
+      tolerance_is_costly: 
+      use_apple_points: 
+      use_messages: 
+      use_nick: 
+      use_wiki: 
+    tabs:
+      foodcoop: 
+      language: 
+      layout: 
+      list: 
+      messages: 
+      others: 
+      payment: 
+      tasks: 
   deliveries:
     add_stock_change:
       how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
@@ -744,6 +851,7 @@ de:
   helpers:
     application:
       edit_user: Mitglieder bearbeiten
+      nick_fallback: 
       role_admin: Admin
       role_article_meta: Artikel
       role_finance: Finanzen
@@ -1019,6 +1127,7 @@ de:
       no_ordergroup: keine Bestellgruppe
   navigation:
     admin:
+      config: 
       home: Übersicht
       ordergroups: Bestellgruppen
       title: Administration
@@ -1083,6 +1192,8 @@ de:
     edit_amount:
       field_locked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Das Eingabefeld wurde gesperrt, um die manuellen Änderungen zu bewahren. Um den Artikel neu zu verteilen, drücke den Entsperrknopf und ändere die gelieferte Menge.
       field_unlocked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Wenn du die gelieferte Menge änderst, werden die vorherigen manuellen Änderungen überschrieben.
+    edit_amounts:
+      no_articles_available: 
     fax:
       amount: Menge
       articles: Artikel
@@ -1290,6 +1401,8 @@ de:
     hints:
       article:
         unit: z.B. KG oder 1L oder 500g
+      article_category:
+        description: 
       message:
         private: Nachricht erscheint nicht im Foodsoft Posteingang
       order_article:
@@ -1425,6 +1538,10 @@ de:
       title: Lieferanten
     new:
       title: Neue Lieferantin
+    shared_supplier_methods:
+      all_available: 
+      all_unavailable: 
+      import: 
     shared_supplier_note: Lieferantin ist mit externer Datenbank verknüpft.
     shared_suppliers:
       body: <p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>
@@ -1507,6 +1624,7 @@ de:
       title_all: Alle Aufgaben der Gruppe
   ui:
     actions: Aktionen
+    cancel: Abbrechen
     close: Schließen
     delete: Löschen
     edit: Bearbeiten

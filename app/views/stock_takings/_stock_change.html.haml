@@ -1,7 +1,7 @@
 %p
   = simple_fields_for "stock_taking[stock_change_attributes][]", stock_change do |form|
     = form.hidden_field :stock_article_id
-    = t '.amount'
+    = StockArticle.human_attribute_name :amount
     (#{stock_change.stock_article.quantity_available})
     = form.text_field :quantity, :size => 5, :autocomplete => 'off'
     %span{:data => {:toggle => :tooltip, :title => render(:partial => 'shared/article_price_info', :locals => {:article => stock_change.stock_article})}}

@@ -6,11 +6,11 @@ fr:
         availability: le produit est-il disponible actuellement?
         availability_short: disp.
         deposit: Consigne
-        fc_price: Prix final
+        fc_price: Prix pour les membres
         fc_price_desc: Prix avec TVA, consigne et part de la coop inclus.
-        fc_price_short: Prix pour les membres
+        fc_price_short: Prix final
         fc_share: Marge de la coop
-        fc_share_short: Marge de la coop
+        fc_share_short: Marge
         gross_price: Prix TTC
         manufacturer: Product-rice-eur
         name: Nom
@@ -135,6 +135,7 @@ fr:
         order_howto: Comment commander
         phone: Téléphone
         phone2: Autre téléphone
+        shared_sync_method: 
         url: Site web
       task:
         description: Description
@@ -172,6 +173,15 @@ fr:
     errors:
       has_many_left: est encore associé à une %{collection}!
       models:
+        article:
+          attributes:
+            name:
+              taken: 
+              taken_with_unit: 
+        supplier:
+          attributes:
+            shared_sync_method:
+              included: 
         task:
           attributes:
             done:
@@ -213,6 +223,22 @@ fr:
         title: Administration
         type: type
         username: identifiant
+    configs:
+      list:
+        key: 
+        title: 
+        value: 
+      show:
+        submit: 
+        title: 
+      tab_layout:
+        pdf_title: 
+      tab_messages:
+        emails_title: 
+      tabs:
+        title: 
+      update:
+        notice: 
     confirm: Veux-tu vraiment supprimer %{name}?
     ordergroups:
       destroy:
@@ -396,17 +422,95 @@ fr:
         update_msg:
           one: Un article doit être mis à jour.
           other: '%{count} produits doivent être mis à jour.'
+      upnew:
+        body_count: 
+        title: 
     upload:
-      body: |-
-        <p>Le fichier doit être au format texte et son nom doit se terminer par l'extension ".csv". La première ligne sera ignorée lors de l'importation.</p>
-        <p>Les champs doivent être délimités par des points-virgules (';'), et le texte compris entre guillemets ("texte...")</p>
-        <p>L'encodage du fichier doit être UTF-8. L'ordre des colonnes est:</p>
+      body: 
       fields:
         reserved: (Reservé)
         status: Statut (x=exclu)
       file_label: Merci de choisir un fichier compatible
       submit: Transférer le fichier
       title: '%{supplier} / Transférer les données sur les produits'
+  config:
+    hints:
+      applepear_url: 
+      contact:
+        email: 
+        street: 
+      currency_space: 
+      currency_unit: 
+      custom_css: 
+      email_from: 
+      email_replyto: 
+      email_sender: 
+      help_url: 
+      homepage: 
+      ignore_browser_locale: 
+      mailing_list: 
+      mailing_list_subscribe: 
+      minimum_balance: 
+      name: 
+      page_footer: 
+      pdf_add_page_breaks:
+        order_by_articles: 
+        order_by_groups: 
+      pdf_font_size: 
+      pdf_page_size: 
+      price_markup: 
+      stop_ordering_under: 
+      tax_default: 
+      tolerance_is_costly: 
+      use_apple_points: 
+      use_messages: 
+      use_nick: 
+      use_wiki: 
+    keys:
+      applepear_url: 
+      contact:
+        city: 
+        country: 
+        email: 
+        phone: 
+        street: 
+        zip_code: 
+      currency_space: 
+      currency_unit: 
+      custom_css: 
+      default_locale: 
+      email_from: 
+      email_replyto: 
+      email_sender: 
+      help_url: 
+      homepage: 
+      ignore_browser_locale: 
+      mailing_list: 
+      mailing_list_subscribe: 
+      minimum_balance: 
+      name: 
+      page_footer: 
+      pdf_add_page_breaks: 
+      pdf_font_size: 
+      pdf_page_size: 
+      price_markup: 
+      stop_ordering_under: 
+      tax_default: 
+      time_zone: 
+      tolerance_is_costly: 
+      use_apple_points: 
+      use_messages: 
+      use_nick: 
+      use_wiki: 
+    tabs:
+      foodcoop: 
+      language: 
+      layout: 
+      list: 
+      messages: 
+      others: 
+      payment: 
+      tasks: 
   deliveries:
     add_stock_change:
       how_many_units: Combien d'unités (%{unit}) de l'article %{name} doivent-elles être livrées?
@@ -757,6 +861,7 @@ fr:
   helpers:
     application:
       edit_user: Modifier la liste des membres
+      nick_fallback: 
       role_admin: Administrateur
       role_article_meta: Article
       role_finance: Finances
@@ -1039,6 +1144,7 @@ fr:
       no_ordergroup: aucune cellule
   navigation:
     admin:
+      config: 
       home: Aperçu
       ordergroups: Cellules
       title: Administration
@@ -1103,6 +1209,8 @@ fr:
     edit_amount:
       field_locked_title: La répartition de cet article entre les cellules a été modifiée manuellement, et ce champ a été verrouillé pour éviter tout nouveau changement intempestif. Si tu veux tout de même effectuer un changement, cliques d'abord sur "Déverouiller".
       field_unlocked_title: La répartition de cet article entre les cellules a été modifiée manuellement. Toute nouvelle modification entrainera une perte de la valeur enregistrée actuellement.
+    edit_amounts:
+      no_articles_available: 
     fax:
       amount: Quantité
       articles: Produits
@@ -1308,6 +1416,8 @@ fr:
     hints:
       article:
         unit: par exemple. kg ou 1l ou 500g
+      article_category:
+        description: 
       message:
         private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       order_article:
@@ -1445,6 +1555,10 @@ fr:
       title: Fournisseur-e-s
     new:
       title: Ajouter un-e fournisseur-e
+    shared_supplier_methods:
+      all_available: 
+      all_unavailable: 
+      import: 
     shared_supplier_note: Le-la fournisseur-e a été connecté à l'annuaire mutualisé.
     shared_suppliers:
       body: |-
@@ -1533,6 +1647,7 @@ fr:
       title_all: Boulot prévu pour l'équipe
   ui:
     actions: Actions
+    cancel: Annuler
     close: Fermer
     delete: Supprimer
     edit: Modifier

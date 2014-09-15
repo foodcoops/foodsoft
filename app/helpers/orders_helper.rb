@@ -91,7 +91,7 @@ module OrdersHelper
       autocomplete: 'off'
     
     if order_article.result_manually_changed?
-      input_html = content_tag(:span, class: 'input-prepend intable', title: t('.field_locked_title', default: '')) {
+      input_html = content_tag(:span, class: 'input-prepend intable', title: t('orders.edit_amount.field_locked_title', default: '')) {
         button_tag(nil, type: :button, class: 'btn unlocker') {
           content_tag(:i, nil, class: 'icon icon-unlock')
         } + input_html

@@ -227,18 +227,18 @@ en:
         username: username
     configs:
       list:
-        title: Configuration list
         key: Key
+        title: Configuration list
         value: Value
       show:
-        title: Configuration
         submit: Save
+        title: Configuration
       tab_layout:
         pdf_title: PDF documents
-      tabs:
-        title: Configuration
       tab_messages:
         emails_title: Sending email
+      tabs:
+        title: Configuration
       update:
         notice: Configuration saved.
     confirm: Do you really want to delete %{name}?
@@ -425,10 +425,10 @@ en:
       upnew:
         body_count:
           one: There is one new article to add.
-          other: 'There are %{count} articles to add.'
+          other: There are %{count} articles to add.
         title: Add new ...
     upload:
-      body: <p>The file has to be a text file with the ending '.csv' The first line will be ignored when imported</p> <p>The fields have to be separated with semicolons (';') and the text enclosed by double quotation marks ("text...").</p> <p>As character set UTF-8 is demanded. Correct order of the column:</p>
+      body: <p>The file has to be a text file with the ending <tt>.csv</tt>. The first line will be ignored when imported, fields are separated by semicolons (';'), and text may be enclosed by double quotation marks ("text..."). Default character-set is utf-8.</p> <p>Column order:</p>
       fields:
         reserved: (Reserved)
         status: Status (x=skip)
@@ -436,83 +436,83 @@ en:
       submit: Upload file
       title: '%{supplier} / upload articles'
   config:
-    tabs:
-      foodcoop: Foodcoop
-      payment: Finances
-      language: Language
-      messages: Messages
-      tasks: Tasks
-      layout: Layout
-      others: Other
-      list: List
     hints:
-      name: The name of your foodcoop.
+      applepear_url: Website where the apple and pear system for tasks is explained.
       contact:
         email: General contact email address, shown on website as well as some forms.
         street: Address, typically this will be your delivery and pick-up location.
-      currency_unit: Currency symbol for displaying prices.
       currency_space: Whether to add whitespace after the currency symbol.
+      currency_unit: Currency symbol for displaying prices.
       custom_css: To modify the layout of this site, you can enter style modifications using the cascading stylesheets (CSS) language. Leave blank for the default style.
-      homepage: Website of your foodcoop.
-      help_url: Documentation website.
-      applepear_url: Website where the apple and pear system for tasks is explained.
-      ignore_browser_locale: "Ignore the language of user's computer when the user has not chosen a language yet."
-      price_markup: Percentage that is added to the gross price for foodcoop members.
-      tax_default: Default VAT percentage for new articles.
-      stop_ordering_under: Members can only order when they have at least this many apple points.
-      minimum_balance: Members can only order when their account balance is above or equal to this amount.
-      use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
-      use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
-      use_messages: Allow members to communicate with each other within Foodsoft.
-      use_wiki: Enable editable wiki pages.
-      email_sender: "Emails will appear to be sent from this email address. To avoid emails sent being classified as spam, the webserver may need to be registered in the SPF record of the email address's domain."
-      email_from: "Emails will appear to be from this email address. Leave empty to use the foodcoop's contact address."
+      email_from: Emails will appear to be from this email address. Leave empty to use the foodcoop's contact address.
       email_replyto: Set this when you want to receive replies from emails sent by Foodsoft on a different address than the above.
+      email_sender: Emails will appear to be sent from this email address. To avoid emails sent being classified as spam, the webserver may need to be registered in the SPF record of the email address's domain.
+      help_url: Documentation website.
+      homepage: Website of your foodcoop.
+      ignore_browser_locale: Ignore the language of user's computer when the user has not chosen a language yet.
       mailing_list: Mailing-list email address to use instead of the messaging system for mail to all members.
       mailing_list_subscribe: Email address where members can send an email to for subscribing.
-      page_footer: 'Shown on each page at the bottom. Enter "blank" to disable the footer completely.'
-      pdf_font_size: Base font size for PDF documents (12 is standard).
-      pdf_page_size: 'Page size for PDF documents, typically "A4" or "letter".'
+      minimum_balance: Members can only order when their account balance is above or equal to this amount.
+      name: The name of your foodcoop.
+      page_footer: Shown on each page at the bottom. Enter "blank" to disable the footer completely.
       pdf_add_page_breaks:
         order_by_articles: Put each article on a separate page.
         order_by_groups: Put each ordergroup on a separate page.
-      tolerance_is_costly: "Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order."
+      pdf_font_size: Base font size for PDF documents (12 is standard).
+      pdf_page_size: Page size for PDF documents, typically "A4" or "letter".
+      price_markup: Percentage that is added to the gross price for foodcoop members.
+      stop_ordering_under: Members can only order when they have at least this many apple points.
+      tax_default: Default VAT percentage for new articles.
+      tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
+      use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
+      use_messages: Allow members to communicate with each other within Foodsoft.
+      use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
+      use_wiki: Enable editable wiki pages.
     keys:
-      name: Name
+      applepear_url: Apple system help URL
       contact:
-        street: Street
-        zip_code: Postcode
         city: City
         country: Country
         email: Email
         phone: Phone
-      currency_unit: Currency
+        street: Street
+        zip_code: Postcode
       currency_space: add space
+      currency_unit: Currency
       custom_css: Custom CSS
-      homepage: Homepage
-      help_url: Documentation URL
-      applepear_url: Apple system URL
       default_locale: Default language
-      ignore_browser_locale: Ignore browser language
-      price_markup: Foodcoop margin
-      tax_default: Default VAT
-      tolerance_is_costly: Tolerance is costly
-      stop_ordering_under: Minimum apple points
-      use_apple_points: Apple points
-      minimum_balance: Minimum account balance
-      use_nick: Use nicknames
-      use_messages: Enable messages
-      use_wiki: Enable wiki
-      email_sender: Sender address
       email_from: From address
       email_replyto: Reply-to address
+      email_sender: Sender address
+      help_url: Documentation URL
+      homepage: Homepage
+      ignore_browser_locale: Ignore browser language
       mailing_list: Mailing-list
       mailing_list_subscribe: Mailing-list subscribe
+      minimum_balance: Minimum account balance
+      name: Name
       page_footer: Page footer
+      pdf_add_page_breaks: Page breaks
       pdf_font_size: Font size
       pdf_page_size: Page size
-      pdf_add_page_breaks: Page breaks
+      price_markup: Foodcoop margin
+      stop_ordering_under: Minimum apple points
+      tax_default: Default VAT
       time_zone: Time zone
+      tolerance_is_costly: Tolerance is costly
+      use_apple_points: Apple points
+      use_messages: Enable messages
+      use_nick: Use nicknames
+      use_wiki: Enable wiki
+    tabs:
+      foodcoop: Foodcoop
+      language: Language
+      layout: Layout
+      list: List
+      messages: Messages
+      others: Other
+      payment: Finances
+      tasks: Tasks
   deliveries:
     add_stock_change:
       how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
@@ -569,7 +569,7 @@ en:
       - Ordered
       - Received
       - Price
-      - Unit Q.
+      - U.Q.
       - Unit
       - Sum
       sum: Sum
@@ -855,6 +855,7 @@ en:
   helpers:
     application:
       edit_user: Edit user
+      nick_fallback: (no username)
       role_admin: Admin
       role_article_meta: Articles
       role_finance: Finance
@@ -1202,6 +1203,8 @@ en:
     edit_amount:
       field_locked_title: The distribution of this article among the ordergroups was changed manually. This field is locked to protect those changes. To redistribute and overwrite those changes, press the unlock button and change the amount.
       field_unlocked_title: The distribution of this article among the ordergroups was changed manually. When you change the amount, those manual changes will be overwritten.
+    edit_amounts:
+      no_articles_available: No articles to add.
     fax:
       amount: Amount
       articles: Articles
@@ -1546,11 +1549,11 @@ en:
       title: Suppliers
     new:
       title: New supplier
-    shared_supplier_note: Supplier is connected to the external database.
     shared_supplier_methods:
-      import: Articles are imported manually.
-      all_available: New articles are available by default.
-      all_unavailable: New articles are not available by default.
+      all_available: All articles (new are available)
+      all_unavailable: All articles (new are unavailable)
+      import: Choose articles to import
+    shared_supplier_note: Supplier is connected to the external database.
     shared_suppliers:
       body: <p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>
       subscribe: Subscribe
@@ -1632,6 +1635,7 @@ en:
       title_all: All group tasks
   ui:
     actions: Actions
+    cancel: Cancel
     close: Close
     delete: Delete
     edit: Edit

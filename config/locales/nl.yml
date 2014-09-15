@@ -135,6 +135,7 @@ nl:
         order_howto: Hoe te bestellen
         phone: Telefoon
         phone2: Telefoon 2
+        shared_sync_method: Hoe synchroniseren
         url: Homepage
       task:
         description: Beschrijving
@@ -172,6 +173,15 @@ nl:
     errors:
       has_many_left: is nog met een %{collection} verbonden!
       models:
+        article:
+          attributes:
+            name:
+              taken: naam bestaat al
+              taken_with_unit: de combinatie van naam en eenheid bestaat al
+        supplier:
+          attributes:
+            shared_sync_method:
+              included: is geen geldige keuze voor deze leverancier
         task:
           attributes:
             done:
@@ -215,18 +225,18 @@ nl:
         username: Gebruikersnaam
     configs:
       list:
-        title: Configuratielijst
         key: Sleutel
+        title: Configuratielijst
         value: Inhoud
       show:
-        title: Configuratie
         submit: Opslaan
+        title: Configuratie
       tab_layout:
         pdf_title: PDF documenten
-      tabs:
-        title: Configuratie
       tab_messages:
         emails_title: Emailinstellingen
+      tabs:
+        title: Configuratie
       update:
         notice: Configuratie opgeslagen.
     confirm: Wil je %{name} daadwerkelijk wissen?
@@ -410,8 +420,13 @@ nl:
         update_msg:
           one: Er moet éen artikel bijgewerkt worden.
           other: Er moeten %{count} artikelen bijgewerkt worden.
+      upnew:
+        body_count:
+          one: Er is éen nieuw artikel.
+          other: Er zijn %{count} nieuwe artikelen.
+        title: Toevoegen ...
     upload:
-      body: <p>Het bestand moet een utf-8 tekstbestand zijn met als extensie '.csv'. De eerste regel wordt overgeslagen.</p> <p>Velden moeten met een puntkomma (';') gescheiden worden, en tekst mag tussen dubbele aanhalingstekstens ("Tekst...") staan.</p> <p>Volgende van de kolommen:</p>
+      body: <p>Een komma-gescheiden utf-8 bestand wordt verwacht met extensie <tt>.csv</tt>. De eerste regel bevat kolomhoofden, velden worden met een puntkomma (';') gescheiden, en tekst mag tussen dubbele aanhalingstekens staan ("Tekst...").</p> <p>Volgorde van de kolommen:</p>
       fields:
         reserved: (Leeg)
         status: Status (x=overslaan)
@@ -419,79 +434,83 @@ nl:
       submit: Bestand uploaden
       title: Artikelen uploaden voor %{supplier}
   config:
-    tabs:
-      foodcoop: Foodcoop
-      payment: Financiën
-      language: Taal
-      messages: Berichten
-      tasks: Taken
-      layout: Layout
-      others: Overig
-      list: Lijst
     hints:
-      name: De naam van de foodcoop.
+      applepear_url: Website waar het appelpunten systeem wordt uitgelegd.
       contact:
         email: Algemeen contactadres, zowel voor op de website als in formulieren.
         street: Adres, meestal is dit het aflever- en ophaaladres.
+      currency_space: Spatie toevoegen na valutasymbool.
+      currency_unit: Valutasymbool voor het tonen van prijzen.
       custom_css: De layout van deze site kan gewijzigd worden door hier cascading stylesheets (CSS) in te voeren. Laat het leeg voor de standaardstijl.
-      homepage: Website van de foodcoop.
-      help_url: Documentatie website.
-      applepear_url: Website waar het appelpunten systeem wordt uitgelegd.
-      ignore_browser_locale: Negeer de taal van de computer wanneer iemand nog geen taal gekozen heeft.
-      price_markup: Percentage dat bovenop het brutobedrag wordt gedaan voor foodcoop leden.
-      tax_default: Standaard BTW percentage voor nieuwe artikelen.
-      stop_ordering_under: Leden kunnen slechts bestellen als ze dit aantal appelpunten hebben of meer.
-      minimum_balance: Leden kunnen slechts bestellen wanneer hun tegoed groter of gelijk is aan dit bedrag.
-      use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
-      use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
-      use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
-      use_wiki: "Gebruik wiki pagina's."
-      email_sender: "Emails worden verzonden vanaf dit emailadres. Om te voorkomen dat emails als spam worden tegengehouden, is het te adviseren het adres van de webserver op te nemen in het SPF record van het email domein."
-      email_from: "Emails zullen lijken verzonden te zijn vanaf dit email adres. Laat het veld leeg om het contactadres van de foodcoop te gebruiken."
+      email_from: Emails zullen lijken verzonden te zijn vanaf dit email adres. Laat het veld leeg om het contactadres van de foodcoop te gebruiken.
       email_replyto: Vul dit in als je antwoord op mails van Foodsoft wilt ontvangen op een ander adres dan het bovenstaande.
+      email_sender: Emails worden verzonden vanaf dit emailadres. Om te voorkomen dat emails als spam worden tegengehouden, is het te adviseren het adres van de webserver op te nemen in het SPF record van het email domein.
+      help_url: Documentatie website.
+      homepage: Website van de foodcoop.
+      ignore_browser_locale: Negeer de taal van de computer wanneer iemand nog geen taal gekozen heeft.
       mailing_list: Mailing-lijst adres om te gebruiken in plaats van het berichtensysteem voor emails naar alle leden.
       mailing_list_subscribe: Emailadres waar leden zich kunnen aanmelden voor de mailing-lijst.
-      page_footer: 'Wordt op iedere pagina getoond. Vul "blank" in om de voettekst helemaal weg te halen.'
-      pdf_font_size: Basis tekstgrootte voor PDF bestanden (standaard 12).
-      pdf_page_size: 'Paginaformaat voor PDF bestanden, meestal "A4" of "letter".'
+      minimum_balance: Leden kunnen slechts bestellen wanneer hun tegoed groter of gelijk is aan dit bedrag.
+      name: De naam van de foodcoop.
+      page_footer: Wordt op iedere pagina getoond. Vul "blank" in om de voettekst helemaal weg te halen.
       pdf_add_page_breaks:
         order_by_articles: Ieder artikel op een nieuwe pagina.
         order_by_groups: Ieder huishouden op een nieuwe pagina.
-      tolerance_is_costly: "Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen."
+      pdf_font_size: Basis tekstgrootte voor PDF bestanden (standaard 12).
+      pdf_page_size: Paginaformaat voor PDF bestanden, meestal "A4" of "letter".
+      price_markup: Percentage dat bovenop het brutobedrag wordt gedaan voor foodcoop leden.
+      stop_ordering_under: Leden kunnen slechts bestellen als ze dit aantal appelpunten hebben of meer.
+      tax_default: Standaard BTW percentage voor nieuwe artikelen.
+      tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
+      use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
+      use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
+      use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
+      use_wiki: Gebruik wiki pagina's.
     keys:
-      name: Naam
+      applepear_url: Appelsysteem uitleg URL
       contact:
-        street: Straat
-        zip_code: Postcode
         city: Stad
         country: Land
         email: Email
         phone: Telefoon
+        street: Straat
+        zip_code: Postcode
+      currency_space: spatie toevoegen
+      currency_unit: Valuta
       custom_css: Aangepaste CSS
-      homepage: Homepage
-      help_url: Documentatie URL
-      applepear_url: Appelsysteem uitleg URL
       default_locale: Standaardtaal
-      ignore_browser_locale: Browsertaal negeren
-      price_markup: Foodcoop marge
-      tax_default: Standaard BTW
-      tolerance_is_costly: Tolerantie is duur
-      stop_ordering_under: Minimum appelpunten
-      use_apple_points: Appelpunten
-      minimum_balance: Minimum tegoed
-      use_nick: Bijnamen gebruiken
-      use_messages: Berichten gebruiken
-      use_wiki: Wiki gebruiken
-      email_sender: Sender adres
       email_from: From adres
       email_replyto: Reply-to adres
+      email_sender: Sender adres
+      help_url: Documentatie URL
+      homepage: Homepage
+      ignore_browser_locale: Browsertaal negeren
       mailing_list: Mailing-lijst
       mailing_list_subscribe: Mailing-lijst aanmelden
-      page_footer: Voettkest
+      minimum_balance: Minimum tegoed
+      name: Naam
+      page_footer: Voettekst
+      pdf_add_page_breaks: Nieuwe pagina's
       pdf_font_size: Tekstgrootte
       pdf_page_size: Paginaformaat
-      pdf_add_page_breaks: "Nieuwe pagina's"
+      price_markup: Foodcoop marge
+      stop_ordering_under: Minimum appelpunten
+      tax_default: Standaard BTW
       time_zone: Tijdzone
+      tolerance_is_costly: Tolerantie is duur
+      use_apple_points: Appelpunten
+      use_messages: Berichten gebruiken
+      use_nick: Bijnamen gebruiken
+      use_wiki: Wiki gebruiken
+    tabs:
+      foodcoop: Foodcoop
+      language: Taal
+      layout: Layout
+      list: Lijst
+      messages: Berichten
+      others: Overig
+      payment: Financiën
+      tasks: Taken
   deliveries:
     add_stock_change:
       how_many_units: 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
@@ -546,7 +565,7 @@ nl:
       rows:
       - Artikel
       - Besteld
-      - Gekregen
+      - Ontvangen
       - Prijs
       - Colli
       - Eenheid
@@ -834,6 +853,7 @@ nl:
   helpers:
     application:
       edit_user: Gebruiker bewerken
+      nick_fallback: (geen gebruikersnaam)
       role_admin: Admin
       role_article_meta: Artikelen
       role_finance: Financiën
@@ -1178,6 +1198,8 @@ nl:
     edit_amount:
       field_locked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast, daarom is dit veld beschermd. Om dit artikel toch te herverdelen en de handmatige wijzigingen teniet te doen kun je op de knop met het slot drukken.
       field_unlocked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast. Als je de hoeveelheid hier verandert, worden deze handmatige aanpassingen overschreven.
+    edit_amounts:
+      no_articles_available: Geen artikelen om toe te voegen.
     fax:
       amount: Aantal
       articles: Artikelen
@@ -1384,7 +1406,7 @@ nl:
       default_message: Problemen gevonden, controleer alsjeblieft de invoer.
     hints:
       article:
-        unit: 'Bijvoorbeeld: KG of 1L of 500g'
+        unit: 'Bijv.: KG of 1L of 500g'
       article_category:
         description: komma-gescheiden lijst van namen die herkend worden bij uploaden/synchroniseren
       message:
@@ -1522,6 +1544,10 @@ nl:
       title: Leveranciers
     new:
       title: Nieuwe leverancier
+    shared_supplier_methods:
+      all_available: Alle artikelen (nieuwe zijn beschikbaar)
+      all_unavailable: Alle artikelen (nieuwe worden onbeschikbaar)
+      import: Artikelen kiezen uit lijst
     shared_supplier_note: Leverancier is verbonden met de externe database.
     shared_suppliers:
       body: <p>Hier kun je leveranciers in de externe database zien.</p> <p>Als je een externe leverancier importeert, wordt er een nieuwe leverancier aangemaakt die verbonden is met de externe database.</p>
@@ -1604,6 +1630,7 @@ nl:
       title_all: Alle groepstaken
   ui:
     actions: Acties
+    cancel: Annuleren
     close: Sluiten
     delete: Verwijder
     edit: Bewerk
