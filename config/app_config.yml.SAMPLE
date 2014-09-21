@@ -123,6 +123,11 @@ default: &defaults
     encoding: utf8
     socket: /opt/lampp/var/mysql/mysql.sock
 
+  # Uncomment to add tracking code for web statistics, e.g. piwik
+  #webstats_tracking_code: |
+  #  <!-- Piwik -->
+  #  ......
+
 development:
   <<: *defaults
 
