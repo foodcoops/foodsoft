@@ -57,6 +57,10 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include SessionHelper
+
+  # Automatically determine spec from directory structure, see:
+  # https://www.relishapp.com/rspec/rspec-rails/v/3-0/docs/directory-structure
+  config.infer_spec_type_from_file_location!
 end
 
 module Faker
