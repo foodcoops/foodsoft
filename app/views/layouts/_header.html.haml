@@ -8,7 +8,7 @@
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     //%link(href="images/favicon.ico" rel="shortcut icon")
-    
+
     = yield(:head)
     = foodcoop_css_tag
 
@@ -25,3 +25,4 @@
       I18n.locale = "#{I18n.locale}";
       I18n.fallbacks = true;
     = yield(:javascript)
+    = raw FoodsoftConfig[:webstats_tracking_code]
