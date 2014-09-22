@@ -38,6 +38,6 @@ class RenderCSV
 
   # XXX disable unit to avoid encoding problems, both in unit and whitespace. Also allows computations in spreadsheet.
   def number_to_currency(number, options={})
-    super(number, options.merge({unit: nil}))
+    super(number, options.merge({unit: ''}))
   end
 end
