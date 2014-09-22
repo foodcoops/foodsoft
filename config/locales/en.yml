@@ -468,6 +468,7 @@ en:
       use_messages: Allow members to communicate with each other within Foodsoft.
       use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
       use_wiki: Enable editable wiki pages.
+      webstats_tracking_code: Tracking code for web analytics (like Piwik or Google analytics). Leave empty for no tracking.
     keys:
       applepear_url: Apple system help URL
       contact:
@@ -504,6 +505,7 @@ en:
       use_messages: Enable messages
       use_nick: Use nicknames
       use_wiki: Enable wiki
+      webstats_tracking_code: Tracking code
     tabs:
       foodcoop: Foodcoop
       language: Language

@@ -91,8 +91,13 @@ default: &defaults
   # Page footer (html allowed). Default is a Foodsoft footer. Set to `blank` for no footer.
   #page_footer: <a href="http://www.foodcoop.test/">FC Test</a> is supported by <a href="http://www.hoster.test/">Hoster</a>.
 
-  # Custom css for the foodcoop
+  # Custom CSS for the foodcoop
   #custom_css: 'body { background-color: #fcffba; }'
+
+  # Uncomment to add tracking code for web statistics, e.g. for Piwik. (Added to bottom of page)
+  #webstats_tracking_code: |
+  #  <!-- Piwik -->
+  #  ......
 
   # email address to be used as sender
   email_sender: foodsoft@foodcoop.test
@@ -122,11 +127,6 @@ default: &defaults
     password:
     encoding: utf8
     socket: /opt/lampp/var/mysql/mysql.sock
-
-  # Uncomment to add tracking code for web statistics, e.g. piwik
-  #webstats_tracking_code: |
-  #  <!-- Piwik -->
-  #  ......
 
 development:
   <<: *defaults
