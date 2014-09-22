@@ -1,11 +1,11 @@
-# Groups organize the User. 
+# Groups organize the User.
 # A Member gets the roles from the Group
 class Group < ActiveRecord::Base
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :users, :through => :memberships
 
   validates :name, :presence => true, :length => {:in => 1..25}
-  
+
   attr_reader :user_tokens
 
   scope :undeleted, -> { where(deleted_at: nil) }
@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
   def member?(user)
     memberships.find_by_user_id(user.id)
   end
-  
+
   # Returns all NONmembers and a checks for possible multiple Ordergroup-Memberships
   def non_members
     User.natural_order.reject { |u| users.include?(u) }
@@ -37,5 +37,3 @@ class Group < ActiveRecord::Base
     end
   end
 end
-
-
