@@ -97,7 +97,7 @@ module Admin::ConfigsHelper
     elsif value.is_a? Enumerable
       content_tag :ul, value.map {|v| content_tag :li, h(v)}.join.html_safe
     elsif key =~ /url|website|www|homepage/
-      link_to(value, value).html_safe
+      link_to(value, value.to_s).html_safe
     else
       value
     end
