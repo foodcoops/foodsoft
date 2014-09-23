@@ -49,7 +49,7 @@ class GroupOrdersController < ApplicationController
       redirect_to group_orders_url, :alert => I18n.t('group_orders.update.error_general')
     end
   end
-  
+
   # Shows all Orders of the Ordergroup
   # if selected, it shows all orders of the foodcoop
   def archive
@@ -74,11 +74,13 @@ class GroupOrdersController < ApplicationController
   end
 
   def ensure_open_order
-    @order = Order.includes([:supplier, :order_articles]).find(params[:order_id] || params[:group_order][:order_id])
+    @order = Order.includes([:supplier, :order_articles]).find(order_id_param)
     unless @order.open?
       flash[:notice] = I18n.t('group_orders.errors.closed')
       redirect_to :action => 'index'
     end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')  
   end
 
   def ensure_my_group_order
@@ -93,6 +95,10 @@ class GroupOrdersController < ApplicationController
                   alert: t('not_enough_apples', scope: 'group_orders.messages', apples: @ordergroup.apples,
                            stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
     end
+  end
+
+  def order_id_param
+    params[:order_id] || (params[:group_order] && params[:group_order][:order_id])
   end
 
 end
