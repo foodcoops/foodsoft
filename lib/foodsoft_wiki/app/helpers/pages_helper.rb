@@ -6,8 +6,11 @@ module PagesHelper
   end
 
   def wikified_body(body, title = nil)
-    render_opts = {:locale => I18n.locale} # workaround for wikicloth 0.8.0 https://github.com/nricciar/wikicloth/pull/59
-    WikiCloth.new({:data => body+"\n", :link_handler => Wikilink.new, :params => {:referer => title}}).to_html(render_opts).html_safe
+    WikiCloth.new(:data => body+"\n",
+                  :link_handler => Wikilink.new,
+                  :params => {:referer => title})
+                  .to_html(wikicloth_render_options)
+                  .html_safe
   rescue => e
     "<span class='alert alert-error'>#{t('.wikicloth_exception', :msg => e)}</span>".html_safe # try the following with line breaks: === one === == two == = three =
   end
@@ -44,11 +47,12 @@ module PagesHelper
 
       toc << "*" * number + " #{name}\n"
     end
-    logger.debug toc.inspect
-    unless toc.blank?
-      toc = WikiCloth.new({:data => toc, :link_handler => Wikilink.new}).to_html
 
-      toc.gsub(/<li>([^<>\n]*)/) do
+    unless toc.blank?
+      WikiCloth.new(:data => toc,
+                    :link_handler => Wikilink.new)
+                    .to_html(wikicloth_render_options)
+                    .gsub(/<li>([^<>\n]*)/) do
         name = $1
         anchor = name.gsub(/\s/, '_').gsub(/[^a-zA-Z_]/, '')
         "<li><a href='##{anchor}'>#{name.truncate(20)}</a>"
@@ -68,5 +72,11 @@ module PagesHelper
   def all_pages_rss_url(options={})
     token = TokenVerifier.new(['wiki', 'all']).generate
     all_pages_url({:format => 'rss', :token => token}.merge(options))
+  end
+
+  private
+
+  def wikicloth_render_options
+    {:locale => I18n.locale} # workaround for wikicloth 0.8.0 https://github.com/nricciar/wikicloth/pull/59
   end
 end
