@@ -1,6 +1,7 @@
 - title t('admin.configs.tabs.title'), false
 
-= simple_form_for :config, method: :patch do |f|
+-# disable validations, because browsers can't handle inputs hidden in another tab
+= simple_form_for :config, method: :patch, html: {novalidate: true} do |f|
 
   = render 'tabs', url: nil
 
