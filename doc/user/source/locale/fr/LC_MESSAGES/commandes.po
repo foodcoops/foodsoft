@@ -1,0 +1,320 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: foodsoft 4.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-02 17:17\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/commandes.rst:3
+msgid "Commander"
+msgstr ""
+
+#: ../../source/commandes.rst:6
+msgid "L'idée générale"
+msgstr ""
+
+#: ../../source/commandes.rst:8
+msgid ""
+"Le principe de foodsoft est que pour recevoir leurs produits, les cellules "
+"s’associent pour passer des **commandes** aux fournisseur-e-s. Voilà comment"
+" ça se passe :"
+msgstr ""
+
+#: ../../source/commandes.rst:11
+msgid ""
+"une liste de commande correspondant à un-e fournisseur-e, par exemple ‘Sucre"
+" et services’, est d’abord mise en ligne par un-e membre de la boufcoop,"
+msgstr ""
+
+#: ../../source/commandes.rst:12
+msgid ""
+"cette liste reste accessible pendant un certain temps à tou-te-s les "
+"membres, qui peuvent choisir la quantité des différents produits qu’illes "
+"souhaitent commander,"
+msgstr ""
+
+#: ../../source/commandes.rst:13
+msgid ""
+"à la date prévue, la commande est clôturée, on ne peut plus la modifier,"
+msgstr ""
+
+#: ../../source/commandes.rst:14
+msgid ""
+"une personne se charge alors de récupérer les quantités de chaque produit et"
+" de contacter le-la fournisseur-e,"
+msgstr ""
+
+#: ../../source/commandes.rst:15
+msgid ""
+"les produits sont livrés. Il arrive que la livraison ne corresponde pas "
+"exactement à la commande (erreurs, produits indisponibles, quiproquos, "
+"changement de prix de dernière minute, pertes...)."
+msgstr ""
+
+#: ../../source/commandes.rst:16
+msgid ""
+"les produits sont répartis entre les cellules, en restant au plus proche de "
+"leurs souhaits initiaux,"
+msgstr ""
+
+#: ../../source/commandes.rst:17
+msgid ""
+"une personne compare attentivement les quantités effectivement reçues par "
+"chaque cellule et leurs commandes, et effectue le **décompte** final de la "
+"commande."
+msgstr ""
+
+#: ../../source/commandes.rst:19
+msgid ""
+"Les commandes peuvent donc être dans trois états : **en cours**, "
+"**clôturées** ou **décomptées**. La phase de décompte permet de s’assurer "
+"que ce qui est payé par les cellules correspond bien à ce qu’elles ont reçu."
+" Elle est expliquée plus en détail dans la section :ref:`tresorerie`. Pour "
+"commander, chaque cellule dispose d’un certain crédit. Le crédit actuel de "
+"ta cellule est affiché sur ton tableau de bord. Des informations plus "
+"détaillées sont fournies sur la page *Passer une commande*, accessible sous "
+"l’onglet *Commandes* du menu principal. Le crédit y est décomposé en trois "
+"parties :"
+msgstr ""
+
+#: ../../source/commandes.rst:26
+msgid "crédit engagé dans des commandes en cours,"
+msgstr ""
+
+#: ../../source/commandes.rst:27
+msgid ""
+"crédit engagé dans des commandes déjà clôturées, mais pas encore décomptées,"
+msgstr ""
+
+#: ../../source/commandes.rst:28
+msgid "crédit disponible"
+msgstr ""
+
+#: ../../source/commandes.rst:31
+msgid "Passer une commande"
+msgstr ""
+
+#: ../../source/commandes.rst:33
+msgid ""
+"Une fois sur la page *Passer une commande*, accessible sous l’onglet "
+"*Commandes* du menu principal, si tu cliques sur le nom d’un-e fournisseur-e"
+" pour le-laquelle il exsite une commande en cours, tu atteris sur la liste "
+"de commande. L’encart en haut à gauche réunit quelques informations utiles "
+"sur la commande :"
+msgstr ""
+
+#: ../../source/commandes.rst:36
+msgid "la personne qui a créé la liste,"
+msgstr ""
+
+#: ../../source/commandes.rst:37
+msgid ""
+"la date de clôture prévue, à partir de laquelle la commande ne sera plus "
+"modifiable,"
+msgstr ""
+
+#: ../../source/commandes.rst:38
+msgid "le montant déjà engagé par toutes les cellules sur cette commande,"
+msgstr ""
+
+#: ../../source/commandes.rst:39
+msgid "le crédit disponible de ta cellule."
+msgstr ""
+
+#: ../../source/commandes.rst:42
+msgid "Choisir des produits"
+msgstr ""
+
+#: ../../source/commandes.rst:44
+msgid ""
+"Tu trouveras en dessous de cet encart la liste des produits proposés pour "
+"cette commande. Il ne s’agit par forcément de tous les produits du-de la "
+"fournisseur-e, puisque la personne qui crée la liste de commande a eu la "
+"possibilité d’en sélectionner seulement un sous-ensemble (voir "
+":ref:`gestion`)."
+msgstr ""
+
+#: ../../source/commandes.rst:48
+msgid ""
+"Pour chaque produit, il te faut choisir le nombre d’unités que tu souhaites "
+"commander. L’unité varie suivant le produit (1kg, 75cl, ...), et est donc "
+"indiquée dans la colonne *unité* du tableau (4ème colonne). Le prix d’une "
+"unité est indiqué dans la colonne *prix* (3ème colonne). Pour augmenter ou "
+"réduire le nombre d’unités que tu souhaites pour ta cellule, utilises les "
+"boutons + et - de la 6ème colonne (quantité)."
+msgstr ""
+
+#: ../../source/commandes.rst:53
+msgid ""
+"Comme les produits sont proposés par le-la fournisseur-e sous forme de lots "
+"(voir :ref:`lots`), tant qu’il manque des unités pour compléter le lot en "
+"cours, tu n’est pas sûr-e de recevoir le produit. Ce nombre est affiché dans"
+" la 5ème colonne (*Manquant*). Le nombre d’unités que tu n’est pas sûr-e de "
+"recevoir apparaît en rouge, tandis que le nombre qui apparaît en vert est "
+"sûr."
+msgstr ""
+
+#: ../../source/commandes.rst:59
+msgid "Tolérance"
+msgstr ""
+
+#: ../../source/commandes.rst:61
+msgid ""
+"La quantité que tu indiques comme *tolérance* est un maximum que tu es "
+"prêt-e à recevoir, en plus de la quantité commandée normalement, au cas où "
+"cela permette de compléter un lot au moment de la clotûre de la commande. Si"
+" il n’y a pas de lot à compléter, cette quantité sera simplement ignorée. Le"
+" fait de mettre une tolérance non nulle lors de tes commandes est bénéfique "
+"pour l’ensemble de la boufcoop, car cela augmente les chances de compléter "
+"certains lots qui sinon ne pourraient pas être commandés. De plus, cela peut"
+" même encourager d’autres personnes qui ont encore plus besoin du produit "
+"que toi à passer commande, car tu leur donneras plus d’espoir que le lot "
+"soit complété."
+msgstr ""
+
+#: ../../source/commandes.rst:69
+msgid "**Exemple** :"
+msgstr ""
+
+#: ../../source/commandes.rst:71
+msgid ""
+"La cellule Banane a vraiment besoin de 3 plaquettes de chocolat. Mais le "
+"chocolat ne peut être livré qu’en lots de 8 plaquettes. Banane commande donc"
+" 3 plaquettes, plus une tolérance de 2, le maximum qu’elle puisse se "
+"permettre de payer, en espérant qu’une autre cellule complète la commande."
+msgstr ""
+
+#: ../../source/commandes.rst:75
+msgid ""
+"Le lendemain, la cellule Figue voit cela. Elle n’a besoin que d’une seule "
+"plaquette, et la commande donc. A ce stade, il y a 4 plaquettes en commande "
+"ferme, plus une tolérance de 2, donc le lot ne peut toujours pas être "
+"complété ! Heureusement, la cellule Pomme voit qu’il ne manque que deux "
+"plaquettes pour compléter le lot, elle est sûre d’avoir son chocolat. Elle "
+"en commande trois plaquettes."
+msgstr ""
+
+#: ../../source/commandes.rst:80
+msgid ""
+"La coop recoit donc 8 plaquettes. Figue et Pomme ont leurs plaquettes "
+"commandées, et il en reste donc 4. Banane recoit donc ses 3 plaquettes, plus"
+" 1 en bonus, ce qui entre bien dans sa marge de tolérance. Tout le monde est"
+" content, alors que si personne n’avait pas indiqué de tolérance, la "
+"livraison n’aurait peut-être même pas été possible !"
+msgstr ""
+
+#: ../../source/commandes.rst:89
+msgid "Gestion des commandes"
+msgstr ""
+
+#: ../../source/commandes.rst:91
+msgid ""
+"La page de *Gestion des commandes* est accessible sous l’onglet *Commandes* "
+"du menu principal, mais seulement si tu fais partie d’une équipe qui y a "
+"accès. Cette option peut être configurée par un-e administrat-rice-eur dans "
+"les paramètres de chaque équipe."
+msgstr ""
+
+#: ../../source/commandes.rst:96
+msgid "Définir une nouvelle commande"
+msgstr ""
+
+#: ../../source/commandes.rst:98
+msgid ""
+"Pour définir une nouvelle commande, clique sur le bouton en haut à droite de"
+" la page, et sélectionne le nom d’un-e fournisseur-e. Tu peux alors choisir "
+"les dates d’ouverture et de clôture de la commande, ainsi que les articles "
+"que tu souhaites y faire apparaître. La liste des articles peut être "
+"modifiée à partir de l’:ref:`annuaire`. Une fois la commande créée, elle "
+"apparaîtra dans la liste des commande en cours et les cellules pourront "
+"commencer à commander."
+msgstr ""
+
+#: ../../source/commandes.rst:105
+msgid "Clôture et envoi"
+msgstr ""
+
+#: ../../source/commandes.rst:107
+msgid ""
+"Pour clôturer la commande, clique sur le bouton *Clôturer* à partir de la "
+"page *Gestion des commandes*. La date de clôture est donnée à titre "
+"indicatif, les commandes doivent toujours être clôturées manuellement. Une "
+"fois la commande clôturée, tu atteris sur la page de résumé des quantités "
+"commandées. Tu peux aussi accéder à cette page à partir de la *Gestion des "
+"commandes*, en cliquant sur le bouton *Afficher* à droite de la commande "
+"clôturée souhaitée."
+msgstr ""
+
+#: ../../source/commandes.rst:113
+msgid ""
+"Le plus pratique pour transmettre la commande au-à la fournisseur-e est le "
+"*Fax au format PDF*, accessible depuis le menu *Télécharger* (même si tu "
+"l’envoies par email et non par fax). En effet, le tableau obtenu résume "
+"simplement le nombre de lots à commander pour chaque produit, ainsi que le "
+"prix, mais ne fait pas mention de la répartition entre les cellules (ce qui "
+"n’intérresse en général pas le-la fournisseur-e)."
+msgstr ""
+
+#: ../../source/commandes.rst:119
+msgid "Réception et vérification"
+msgstr ""
+
+#: ../../source/commandes.rst:121
+msgid ""
+"Une fois la livraison arrivée à bon port, il peut être judicieux de vérifier"
+" son contenu afin de prendre en compte les éventuels changements par rapport"
+" à la commande (produits indisponibles, changements de prix...). Le bouton "
+"*Réceptionner* accessible depuis la page de *Gestion des commandes* permet "
+"de valider cette étape de vérification. Le tableau qui s’affiche récapitule "
+"les quantités commandées pour chaque produit, et il faut alors saisir dans "
+"la colonne adéquate la quantité effectivement recue après vérification. En "
+"cliquant sur le bouton *Modifier*, on peut même changer le prix de chaque "
+"produit si il s’est avéré qu’il y a eu une erreur. Finalement, on peut même "
+"ajouter un produit à la liste si la livraison contient des produits qui "
+"n’étaient pas présents dans la liste de commande (cadeaux, changements de "
+"dernière minute...)."
+msgstr ""
+
+#: ../../source/commandes.rst:130
+msgid ""
+"Si on le souhaite, il est possible de laisser des commentaires (en bas de la"
+" page de gestion de la commande) pour garder trace de tous ces changements, "
+"ce qui pourra être utile lors du décompte et de la facturation (voir "
+":ref:`tresorerie`)."
+msgstr ""
+
+#: ../../source/commandes.rst:135
+msgid "Répartition entre les cellules"
+msgstr ""
+
+#: ../../source/commandes.rst:137
+msgid ""
+"Pour aider à la répartition entre les cellules, le mieux est de télécharger "
+"la *Matrice de répartition en PDF*, accessible depuis le menu *Télécharger* "
+"sur la page récapitulative de toute commande clôturée. Le fichier PDF que tu"
+" obtiendras est composé d’abord d’un tableau des produits et de leurs "
+"quantités, puis d’un grand tableau à double entrée, dont les colonnes sont "
+"les produits, et les lignes sont les articles, avec à l’intersection le "
+"nombre d’unités de chaque produit que doit recevoir la cellule "
+"correspondante."
+msgstr ""
+
+#: ../../source/commandes.rst:142
+msgid ""
+"Si il y a des problèmes lors de la répartition, il peut être utile de le "
+"noter aussi dans les commentaires de la commande."
+msgstr ""
+
+#: ../../source/commandes.rst:146
+msgid "Facturation et décompte"
+msgstr ""
+
+#: ../../source/commandes.rst:148
+msgid "Voir la section :ref:`tresorerie`."
+msgstr ""

@@ -1,0 +1,83 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: foodsoft 4.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-02 17:17\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/administration.rst:3
+msgid "Administrer"
+msgstr ""
+
+#: ../../source/administration.rst:5
+msgid ""
+"Les fonction d'aministration sont accessibles uniquement aux équipes pour "
+"lesquelles les permissions nécessaires ont été activées."
+msgstr ""
+
+#: ../../source/administration.rst:8
+msgid "Ajout d'une cellule"
+msgstr ""
+
+#: ../../source/administration.rst:10
+msgid ""
+"La liste des *cellules* est accessible sous l'onglet *Administration* du "
+"menu principal. Pour *Définir une nouvelle cellule*, clique sur le bouton "
+"bleu en haut à droite de la page, et remplis le formulaire. Le mieux est de "
+"laisser le champ *Membres* vide, et d'inviter les membres par email comme "
+"précisé ci-dessous."
+msgstr ""
+
+#: ../../source/administration.rst:15
+msgid "Nouveau-nouvelles membres"
+msgstr ""
+
+#: ../../source/administration.rst:17
+msgid ""
+"Si un-e personne souhaite rejoindre la boufcoop, elle doit obligatoirement "
+"rejoindre une cellule. Pour ajouter de nouv-eaux-elles membres, le mieux "
+"donc est de les inviter directement à rejoindre une cellule. Si la personne "
+"ne souhaite rejoindre aucune des cellules déjà existantes, il faut donc "
+"commencer par lui en créer une. Ensuite, clique sur le bouton *Modifier* en "
+"face du nom de la cellule dans la liste, puis sur le lien *Invite de "
+"nouveaux membres ici* tout en haut de la page. Entre l'adresse mail de la "
+"personne dans le formulaire qui s'affiche, puis clique sur *Envoyer une "
+"invitation*. La personne recevra alors un message contenant les informations"
+" nécessaires pour s'inscrire. Elle pourra ensuite saisir ses données "
+"personelles et commencer à utiliser Foodsoft."
+msgstr ""
+
+#: ../../source/administration.rst:27
+msgid "Gestion des équipes"
+msgstr ""
+
+#: ../../source/administration.rst:29
+msgid ""
+"La création et la composition des équipes s'effectue depuis la page "
+"*Équipes* sous l'onglet *Administration* du menu principal. Pour *Définir "
+"une nouvelle équipe*, clique sur le bouton bleu en haut à droite de la page."
+" Choisir un *nom*, et saisis une *description* du rôle de l'équipe. Coche "
+"ensuite les cases correspondant aux fonctionnalités de Foodsoft auxquelles "
+"cette équipe aura accès. Ensuite, pour chaque membre qui fera partie de "
+"l'équipe, commence à saisir les premières lettres de sont identifiant dans "
+"le champ *Membres*, puis clique sur l'identifiant dans liste déroulante qui "
+"apparaît."
+msgstr ""
+
+#: ../../source/administration.rst:36
+msgid "Données des membres"
+msgstr ""
+
+#: ../../source/administration.rst:38
+msgid ""
+"La base de données des *membres* est aussi accessible sous l'onglet "
+"*Administration* du menu principal. Cependant, il est rare que l"
+"'administrat-eur-rice ait à modifier directement ces informations, qui sont "
+"en général plutôt de la responsabilité des membres elleux mêmes."
+msgstr ""

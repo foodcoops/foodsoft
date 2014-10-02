@@ -1,0 +1,102 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: foodsoft 4.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-02 17:17\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/structure.rst:5
+msgid "Structure de la boufcoop"
+msgstr ""
+
+#: ../../source/structure.rst:8
+msgid "Membres"
+msgstr ""
+
+#: ../../source/structure.rst:10
+msgid ""
+"La coop est avant tout constituée par ses membres. Chaque membre dispose "
+"d’un compte utilisat-rice-eur, protégé par un mot de passe. Ton profil "
+"utilisat-rice-eur peut être configuré depuis le menu avec la petite flèche "
+"en haut à droite de n’importe quelle page. Tu peux ainsi"
+msgstr ""
+
+#: ../../source/structure.rst:15
+msgid ""
+"mettre à dispositions des autres membres des infos pour te contacter (email,"
+" téléphone...),"
+msgstr ""
+
+#: ../../source/structure.rst:16
+msgid "changer ton mot de passe,"
+msgstr ""
+
+#: ../../source/structure.rst:17
+msgid "choisir ta langue parmi celles disponibles,"
+msgstr ""
+
+#: ../../source/structure.rst:18
+msgid "définir tes options de confidentialité,"
+msgstr ""
+
+#: ../../source/structure.rst:19
+msgid ""
+"choisir les mails d’avertissement que tu recevras de la part de foodsoft "
+"dans différents cas."
+msgstr ""
+
+#: ../../source/structure.rst:22
+msgid "Cellules"
+msgstr ""
+
+#: ../../source/structure.rst:24
+msgid ""
+"Les cellules sont des groupes de membres qui ont décidé de s’associer pour "
+"passer leurs commandes ensemble (souvent parce qu’illes vivent ou au moins "
+"cuisinent ensemble). Tout membre de la coop doit être membre d’une cellule "
+"pour pouvoir commander. Pour le moment, un compte utilisat-eur-ice ne peut "
+"appartenir qu’à une seule cellule à la fois. Si un-e membre souhaite "
+"commander via plusieurs cellules, il lui faut donc plusieurs comptes."
+msgstr ""
+
+#: ../../source/structure.rst:30
+msgid ""
+"Tu peux accéder à un résumé des informations concernant *ta cellule* en "
+"cliquant sur ton identifiant en haut à droite de n'importe quelle page du "
+"site. Cependant, pour modifier les données de contact (adresse, etc.), il te"
+" faut contacter une personne administratrice du site."
+msgstr ""
+
+#: ../../source/structure.rst:34
+msgid "Équipes"
+msgstr ""
+
+#: ../../source/structure.rst:36
+msgid ""
+"Les équipes sont des groupes de membres qui ont décidé de s’associer pour "
+"effectuer régulièrement certains types de boulots ensemble. Un-e membre peut"
+" sans problème appartenir à plusieurs équipes. Le regroupement en équipe est"
+" utile pour mieux organiser les boulots, pour communiquer en petits groupes "
+"sans spammer tou-t-e-s les membres, et permet aussi une bien meilleure "
+"lisibilité pour les nouvelles-nouveaux membres. Un autre intérêt des équipes"
+" est que les permissions d’accès aux pages de foodsoft peuvent être "
+"restreintes suivant l’appartenance à une équipe, ce qui permet d’éviter des "
+"fausses manipulations, et aussi de ne pas noyer tout-e-s les membres avec "
+"des fonctionnalités qui ne leurs sont pas utiles."
+msgstr ""
+
+#: ../../source/structure.rst:44
+msgid ""
+"Attention à bien noter la différence entre une équipe et une cellule: chaque"
+" membre fait partie d'une cellule, qui possède un certain crédit servant à "
+"payer les commandes, tandis qu'une équipe (par exemple l'équipe "
+"distribution) s'occupe des boulots utiles à la boufcoop. Les membres "
+"appartiennent toujours à une et une seule cellule, mais peuvent faire partie"
+" de plusieurs équipes."
+msgstr ""

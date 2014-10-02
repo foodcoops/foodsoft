@@ -1,0 +1,49 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: foodsoft 4.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-02 17:17\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/communication.rst:3
+msgid "Communiquer"
+msgstr ""
+
+#: ../../source/communication.rst:6
+msgid "Wiki"
+msgstr ""
+
+#: ../../source/communication.rst:8
+msgid ""
+"Le Wiki est accessible depuis le menu principal de foodsoft. Il est en "
+"souvent utilisé pour publier les compte-rendus de réunions et de la "
+"documentation interne expliquant le fonctionnement de la boufcoop."
+msgstr ""
+
+#: ../../source/communication.rst:11
+msgid ""
+"Pour créer une nouvelle page, va dans *Toutes les pages*, puis *Créer une "
+"nouvelle page*. Ensuite, écris le contenu en utilisant l’assistant de mise "
+"en forme sur la droite pour obtenir un joli rendu. Malheureusement la "
+"version actuelle ne permet pas d’insérer des images."
+msgstr ""
+
+#: ../../source/communication.rst:16
+msgid "Messagerie"
+msgstr ""
+
+#: ../../source/communication.rst:18
+msgid ""
+"La *Messagerie* interne est accessible depuis le menu principal, sous "
+"l’onglet *Boufcoop*. Son fonctionnement est similaire à celui d'un forum. "
+"Lors de l'envoi d'un message, on peut l'adresser à tou-te-s les membres "
+"d'une même cellule ou d'une même équipe. Les membres peuvent configurer leur"
+" profil pour recevoir ou non ces messages dans leur boîte mail, ou seulement"
+" sur Foodsoft."
+msgstr ""
