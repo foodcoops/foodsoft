@@ -20,7 +20,7 @@ Foodsoft::Application.routes.draw do
     get   '/login/forgot_password' => 'login#forgot_password', as: :forgot_password
     post  '/login/reset_password' => 'login#reset_password', as: :reset_password
     get   '/login/new_password' => 'login#new_password', as: :new_password
-    put   '/login/update_password' => 'login#update_password', as: :update_password
+    patch '/login/update_password' => 'login#update_password', as: :update_password
     match '/login/accept_invitation/:token' => 'login#accept_invitation', as: :accept_invitation, via: [:get, :post]
     resources :sessions, :only => [:new, :create, :destroy]
 
@@ -42,7 +42,7 @@ Foodsoft::Application.routes.draw do
 
         get :receive
         post :receive
-        
+
         get :receive_on_order_article_create
         get :receive_on_order_article_update
       end
@@ -98,10 +98,10 @@ Foodsoft::Application.routes.draw do
       get :copy
       collection do
         get :derive
-        
+
         get :index_on_stock_article_create
         get :index_on_stock_article_update
-        
+
         get :show_on_stock_article_update
       end
     end
@@ -112,7 +112,7 @@ Foodsoft::Application.routes.draw do
       resources :deliveries do
         collection do
           post :add_stock_change
-          
+
           get :form_on_stock_article_create
           get :form_on_stock_article_update
         end
@@ -150,7 +150,7 @@ Foodsoft::Application.routes.draw do
           get :confirm
           patch :close
           patch :close_direct
-          
+
           get :new_on_order_article_create
           get :new_on_order_article_update
         end
