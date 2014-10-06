@@ -502,7 +502,7 @@ en:
       time_zone: Time zone
       tolerance_is_costly: Tolerance is costly
       use_apple_points: Apple points
-      use_messages: Enable messages
+      use_messages: Messages
       use_nick: Use nicknames
       use_wiki: Enable wiki
       webstats_tracking_code: Tracking code

@@ -17,6 +17,15 @@ en:
     users:
       show:
         send_message: Send message
+  config:
+    hints:
+      mailing_list: Mailing-list email address to use instead of the messaging system for mail to all members.
+      mailing_list_subscribe: Email address where members can send an email to for subscribing.
+      use_messages: Allow members to communicate with each other within Foodsoft.
+    keys:
+      use_messages: Messages
+      mailing_list: Mailing-list
+      mailing_list_subscribe: Mailing-list subscribe
   helpers:
     messages:
       write_message: Write message

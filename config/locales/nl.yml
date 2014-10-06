@@ -499,7 +499,7 @@ nl:
       time_zone: Tijdzone
       tolerance_is_costly: Tolerantie is duur
       use_apple_points: Appelpunten
-      use_messages: Berichten gebruiken
+      use_messages: Berichten
       use_nick: Bijnamen gebruiken
       use_wiki: Wiki gebruiken
     tabs:
