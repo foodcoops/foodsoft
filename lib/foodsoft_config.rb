@@ -225,6 +225,7 @@ class FoodsoftConfig
         currency_unit: '€',
         currency_space: true,
         foodsoft_url: 'https://github.com/foodcoops/foodsoft',
+        contact: {}, # avoid errors when undefined
         # The following keys cannot, by default, be set by foodcoops themselves.
         protected: {
           multi_coop_install: true,
