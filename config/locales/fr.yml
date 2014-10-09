@@ -1374,7 +1374,7 @@ fr:
   sessions:
     logged_in: Connecté!
     logged_out: Déconnecté!
-    login_invalid: Identifiant ou mot de passe invalide
+    login_invalid_nick: Identifiant ou mot de passe invalide
     new:
       forgot_password: Mot de passe oublié?
       login: Te connecter

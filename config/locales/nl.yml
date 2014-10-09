@@ -1365,7 +1365,8 @@ nl:
   sessions:
     logged_in: Ingelogd!
     logged_out: Uitgelogd!
-    login_invalid: Onjuiste gebruikersnaam of wachtwoord
+    login_invalid_nick: Gebruikersnaam of wachtwoord onjuist
+    login_invalid_email: Emailadres of wachtwoord onjuist
     new:
       forgot_password: Wachtwoord vergeten?
       login: Aanmelden

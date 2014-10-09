@@ -1359,7 +1359,8 @@ de:
   sessions:
     logged_in: Angemeldet!
     logged_out: Abgemeldet!
-    login_invalid: Ungültiger Benutzername oder Passwort
+    login_invalid_nick: Ungültiger Benutzername oder Passwort
+    login_invalid_email: Ungültiger Email oder Passwort
     new:
       forgot_password: Passwort vergessen?
       login: Anmelden

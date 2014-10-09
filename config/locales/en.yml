@@ -1372,7 +1372,8 @@ en:
   sessions:
     logged_in: Logged in!
     logged_out: Logged out!
-    login_invalid: Invalid username or password
+    login_invalid_nick: Invalid username or password
+    login_invalid_email: Invalid email address or password
     new:
       forgot_password: Forgot password?
       login: Login

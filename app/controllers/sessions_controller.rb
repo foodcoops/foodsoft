@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       end
       redirect_to redirect_to_url, :notice => I18n.t('sessions.logged_in')
     else
-      flash.now.alert = I18n.t('sessions.login_invalid')
+      flash.now.alert = I18n.t(FoodsoftConfig[:use_nick] ? 'sessions.login_invalid_nick' : 'sessions.login_invalid_email')
       render "new"
     end
   end
