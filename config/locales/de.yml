@@ -121,21 +121,21 @@ de:
         note: Notiz
       supplier:
         address: Adresse
-        contact_person: Ansprechparter_in
+        contact_person: Ansprechpartner
         customer_number: Kundennummer
         customer_number_short: Kundennr.
         delivery_days: Liefertage
-        email: Email
-        fax: FAX
+        email: E-Mail
+        fax: Fax
         is_subscribed: abonniert?
         min_order_quantity: Mindestbestellmenge
-        min_order_quantity_short: 
+        min_order_quantity_short: Menge (mind.)
         name: Name
         note: Notiz
-        order_howto: Howto Bestellen
+        order_howto: Kurzanleitung Bestellen
         phone: Telefon
         phone2: Telefon 2
-        shared_sync_method: 
+        shared_sync_method: Syncronisierungsmethode
         url: Homepage
       task:
         description: Beschreibung
@@ -147,7 +147,7 @@ de:
         user_list: Verantwortlichen
         workgroup: Arbeitsgruppe
       user:
-        email: Email
+        email: E-Mail
         first_name: Vorname
         last_login: Letzter login
         last_name: Nachname
@@ -176,12 +176,12 @@ de:
         article:
           attributes:
             name:
-              taken: 
-              taken_with_unit: 
+              taken: Name ist bereits vergeben
+              taken_with_unit: Name und Einheit sind bereits vergeben
         supplier:
           attributes:
             shared_sync_method:
-              included: 
+              included: ist keine gültige Auswahl für diesen Lieferanten
         task:
           attributes:
             done:
@@ -218,32 +218,32 @@ de:
         new_ordergroup: Neue Bestellgruppe
         new_user: Neue Benutzerin
         new_workgroup: Neue Arbeitsgruppe
-        newest_groups: Neuste Gruppen
-        newest_users: Neuste Benutzerinnen
+        newest_groups: Neueste Gruppen
+        newest_users: Neueste Benutzer/innen
         title: Administration
         type: Typ
         username: Benutzername
     configs:
       list:
-        key: 
-        title: 
-        value: 
+        key: Schlüssel
+        title: Liste der Einstellungen
+        value: Wert
       show:
-        submit: 
-        title: 
+        submit: Speichern
+        title: Einstellungen
       tab_layout:
-        pdf_title: 
+        pdf_title: PDF-Dokumente
       tab_messages:
-        emails_title: 
+        emails_title: E-Mails versenden
       tabs:
-        title: 
+        title: Einstellungen
       update:
-        notice: 
+        notice: Einstellungen gespeichert.
     confirm: Willst du %{name} wirklich löschen?
     ordergroups:
       destroy:
-        error: 'Bestellgruppe konnte nicht gelöscht werden: %{error}'
-        notice: Bestellgruppe wurde gelöscht
+        error: 'Bestellgruppe konnte nicht als gelöscht markiert werden: %{error}'
+        notice: Bestellgruppe wurde als gelöscht markiert
       edit:
         title: Bestellgruppe bearbeiten
       form:
@@ -253,7 +253,7 @@ de:
         first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
         new_ordergroup: Neue Bestellgruppe anlegen
         new_ordergroups: neue Bestellgruppen
-        second_paragraph: 'Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>: Eine Bestellgruppe hat ein Konto und kann Essen bestellen. In einer <em>%{url}</em> (z.b. ''Soritiergruppe'') koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten. Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.'
+        second_paragraph: 'Beachte dabei den <em>Unterschied zwischen Gruppe und Bestellgruppe</em>: Eine Bestellgruppe hat ein Konto und kann Essen bestellen. In einer <em>%{url}</em> (z.b. ''Sortiergruppe'') koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten. Nutzer/innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.'
         title: Bestellgruppen
         workgroup: Arbeitsgruppe
       new:
@@ -266,14 +266,14 @@ de:
     search_placeholder: Name ...
     users:
       edit:
-        title: Benutzerin bearbeiten
+        title: Benutzer/in bearbeiten
       index:
-        first_paragraph: Hier kannst du Benutzer_innen %{url}, bearbeiten und natürlich auch löschen.
-        new_user: Neue Benutzerin anlegen
+        first_paragraph: Hier kannst du Benutzer/innen %{url}, bearbeiten und natürlich auch löschen.
+        new_user: Neue/n Benutzer/in anlegen
         new_users: neu anlegen
-        title: Admin/Benutzerinnen
+        title: Benutzer/innen verwalten
       new:
-        title: Neue Benutzerin anlegen
+        title: Neue/n Benutzer/in anlegen
       show:
         confirm: Willst du %{user} wirklich rausschmeißen?
         groupabos: Gruppenabos
@@ -295,7 +295,7 @@ de:
         new_workgroup: Neue Arbeitsgruppe anlegen
         new_workgroups: neue Arbeitsgruppen
         ordergroup: Bestellgruppe
-        second_paragraph: 'Beachte dabei den Unterschied zwischen <em>Gruppe</em> und <em>Bestellgruppe</em>: eine <em>%{url}</em> hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. ''Soritiergruppe'') koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten. Nutzer_innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.'
+        second_paragraph: 'Beachte dabei den Unterschied zwischen <em>Gruppe</em> und <em>Bestellgruppe</em>: eine <em>%{url}</em> hat ein Konto und kann Essen bestellen. In einer Arbeitsgruppe (z.b. ''Sortiergruppe'') koordinieren sich die Mitglieder mittels Aufgaben und Nachrichten. Benutzer/innen können immer nur einer Bestellgruppe, aber beliebig vielen anderen Gruppen angehören.'
         title: Arbeitsgruppen
       new:
         title: Arbeitsgruppe anlegen
@@ -309,7 +309,7 @@ de:
   application:
     controller:
       error_authn: Anmeldung erforderlich!
-      error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine Administratorin, dass sie Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
+      error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine/n Administrator/in, dass sie/er Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
       error_denied_sign_in: als ein anderer Benutzer anmelden
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
       error_plugin_disabled: Diese Funktion ist derzeit nicht aktiviert.
@@ -421,8 +421,10 @@ de:
           one: Ein Artikel muss aktualisiert werden.
           other: '%{count} Artikel müssen aktualisiert werden.'
       upnew:
-        body_count: 
-        title: 
+        body_count:
+          one: Es gibt einen neuen Artikel hinzuzufügen.
+          other: Es gibt %{count} Artikel hinzuzufügen.
+        title: Neuen hinzufügen ...
     upload:
       body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert. Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden. Als Zeichensatz wird UTF-8 erwartet.</p> <p>Reihenfolge der Spalten:</p>
       fields:
@@ -433,82 +435,84 @@ de:
       title: '%{supplier} / Artikel hochladen'
   config:
     hints:
-      applepear_url: 
+      applepear_url: Seite, auf der das Äpfel- und Birnensystem für Aufgaben erklärt wird.
       contact:
-        email: 
-        street: 
-      currency_space: 
-      currency_unit: 
-      custom_css: 
-      email_from: 
-      email_replyto: 
-      email_sender: 
-      help_url: 
-      homepage: 
-      ignore_browser_locale: 
-      mailing_list: 
-      mailing_list_subscribe: 
-      minimum_balance: 
-      name: 
-      page_footer: 
+        email: E-Mail Adresse zur allgemeinen Kontaktaufnahme, die auf der Webseite und in einigen Formularen gezeigt wird.
+        street: Anschrift; üblicherweise ist dies Euer Liefer- und Abholort.
+      currency_space: Leerzeichen beim Währungssymbol hinzufügen.
+      currency_unit: Währungssymbol zur Anzeige von Preisen.
+      custom_css: Um das Layout der Seite anzupassen, kannst Du CSS verwenden. Kann leer gelassen werden, um den Standard Stil zu verwenden.
+      email_from: E-Mails werden so aussehen, als ob sie von dieser Adresse gesendet wurden. Kann leer gelassen werden, um die Kontaktadresse der Foodcoop zu benutzen.
+      email_replyto: Setze diese Adresse, wenn Du Antworten auf Foodsoft E-Mails auf eine andere, als die oben angegebene Absenderadresse bekommen möchtest.
+      email_sender: E-Mails werden so aussehen, als ob sie von dieser Adresse versendet wurden. Um zu vermeiden, dass E-Mails dadurch als Spam eingeordnet werden, muss der Webserver möglicherweise im SPF Eintrag der Domain der E-Mail Adresse eingetragen werden.
+      help_url: Link zur Dokumentationsseite
+      homepage: Webseite der Foodcoop
+      ignore_browser_locale: Ignoriere die Sprache des Computers des Anwenders, wenn der Anwender noch keine Sprache gewählt hat.
+      mailing_list: Die E-Mail Adresse einer Mailing-Liste, die anstatt des Foodsoft Nachrichtensystems für eine Mail an alle Mitglieder verwendet wird.
+      mailing_list_subscribe: E-Mail Adresse zum Anmelden an die Mailingliste
+      minimum_balance: Mitglieder können nur bestellen, wenn ihr Kontostand mindestens diesem Betrag entspricht.
+      name: Der Name Deiner Foodcoop
+      page_footer: Dies wird in der Fußzeile jeder Seite angezeigt. Wird es leer gelassen, wird die Fußzeile komplett deaktiviert.
       pdf_add_page_breaks:
-        order_by_articles: 
-        order_by_groups: 
-      pdf_font_size: 
-      pdf_page_size: 
-      price_markup: 
-      stop_ordering_under: 
-      tax_default: 
-      tolerance_is_costly: 
-      use_apple_points: 
-      use_messages: 
-      use_nick: 
-      use_wiki: 
+        order_by_articles: Jeden Artikel auf eine eigene Seite bringen
+        order_by_groups: Jede Bestellgruppe auf eine eigene Seite bringen
+      pdf_font_size: Standardmäßige Schriftgröße für PDF Dokumente (12 ist der Standardwert)
+      pdf_page_size: Seitengröße für PDF Dokumente, normalerweise "A4"
+      price_markup: Prozentsatz, welcher als Aufschlag auf alle Preise addiert wird
+      stop_ordering_under: Mitglieder können nur bestellen, wenn sie mindestens diese Anzahl von Apfel-Punkten haben.
+      tax_default: Standard Mehrwertsteuersatz für neue Artikel
+      tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
+      use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
+      use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
+      use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
+      use_wiki: Änderbare Wiki Seiten aktivieren
+      webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
     keys:
-      applepear_url: 
+      applepear_url: Hilfe URL für das Äpfel Punktesystem zum Engagement
       contact:
-        city: 
-        country: 
-        email: 
-        phone: 
-        street: 
-        zip_code: 
-      currency_space: 
-      currency_unit: 
-      custom_css: 
-      default_locale: 
-      email_from: 
-      email_replyto: 
-      email_sender: 
-      help_url: 
-      homepage: 
-      ignore_browser_locale: 
-      mailing_list: 
-      mailing_list_subscribe: 
-      minimum_balance: 
-      name: 
-      page_footer: 
-      pdf_add_page_breaks: 
-      pdf_font_size: 
-      pdf_page_size: 
-      price_markup: 
-      stop_ordering_under: 
-      tax_default: 
-      time_zone: 
-      tolerance_is_costly: 
-      use_apple_points: 
-      use_messages: 
-      use_nick: 
-      use_wiki: 
+        city: Stadt
+        country: Land
+        email: E-Mail
+        phone: Telefon
+        street: Straße
+        zip_code: Postleitzahl
+      currency_space: Leerzeichen hinzufügen
+      currency_unit: Währung
+      custom_css: Angepasstes CSS
+      default_locale: Standardsprache
+      email_from: Absenderadresse
+      email_replyto: Antwortadresse
+      email_sender: Senderadresse
+      help_url: URL Dokumentation
+      homepage: Homepage
+      ignore_browser_locale: Browsersprache ignorieren
+      mailing_list: Mailingliste
+      mailing_list_subscribe: Mailingliste anmelden
+      minimum_balance: Minimaler Kontostand
+      name: Name
+      page_footer: Fußzeile Webseite
+      pdf_add_page_breaks: Seitenwechsel
+      pdf_font_size: Schriftgrösse
+      pdf_page_size: Seitenformat
+      price_markup: Foodcoop Marge
+      stop_ordering_under: Apfelpunkte Minimum
+      tax_default: Mehrwertsteuer
+      time_zone: Zeitzone
+      tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
+      use_apple_points: Apfelpunkte verwenden
+      use_messages: Nachrichten
+      use_nick: Benutzernamen verwenden
+      use_wiki: Wiki verwenden
+      webstats_tracking_code: Code für Websiteanalysetool
     tabs:
-      foodcoop: 
-      language: 
-      layout: 
-      list: 
-      messages: 
-      others: 
-      payment: 
-      tasks: 
+      foodcoop: Foodcoop
+      language: Sprache
+      layout: Layout
+      list: Liste
+      messages: Nachrichten
+      others: Sonstiges
+      payment: Finanzen
+      tasks: Aufgaben
   deliveries:
     add_stock_change:
       how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
@@ -672,7 +676,7 @@ de:
         changed: Daten wurden verändert!
         duration: von %{starts} bis %{ends}
         fc_amount: 'FC-Betrag:'
-        fc_profit: 'FC Gewinn:'
+        fc_profit: FC Gewinn
         gross_amount: 'Bruttobetrag:'
         groups_amount: 'Gruppenbeträge:'
         net_amount: 'Nettobetrag:'
@@ -851,7 +855,7 @@ de:
   helpers:
     application:
       edit_user: Mitglieder bearbeiten
-      nick_fallback: 
+      nick_fallback: (kein Benutzername)
       role_admin: Admin
       role_article_meta: Artikel
       role_finance: Finanzen
@@ -863,7 +867,7 @@ de:
       new_invoice: Rechnung anlegen
       show_invoice: Rechnung anzeigen
     messages:
-      write_message: Nachricht_schreiben
+      write_message: Nachricht schreiben
     orders:
       old_price: Alter Preis
       option_choose: Lieferantin/Lager auswählen
@@ -887,7 +891,7 @@ de:
     index:
       due_date_format: '%A, %d. %b'
       messages:
-        title: Neuste Nachrichten
+        title: Neueste Nachrichten
         view_all: Alle Nachrichten einsehen
       my_ordergroup:
         funds: '| Verfügbares Guthaben:'
@@ -956,7 +960,7 @@ de:
     new:
       action: Einlading abschicken
       body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
-    success: Benutzerin wurde erfolgreich eingeladen.
+    success: Benutzer/in wurde erfolgreich eingeladen.
   js:
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
@@ -1052,7 +1056,7 @@ de:
 
         die Bestelling für "%{order}" wurde am %{when} von %{user} beendet.
         Für Euch wurden die folgenden Artikel bestellt:
-      text1: "o Gesamtpreis: %{sum}\n\nBestelling unline einsehen: %{order_url}\n\n\nViele Grüße von %{foodcoop} "
+      text1: "o Gesamtpreis: %{sum}\n\nBestellung online einsehen: %{order_url}\n\n\nViele Grüße von %{foodcoop} "
     reset_password:
       subject: Neues Password für %{username}
       text: |-
@@ -1061,7 +1065,7 @@ de:
         du (oder jemand anderes) hat auf der Foodsoft-Website ein neues Passwort angefordert.
         Um ein neues Passwort einzugeben, gehe zu: %{link}
         Dieser Link kann nur einmal aufgerufen werden und läuft am %{expires} ab.
-        Wenn du das Passwort nicht ändern möchtest oder diese Email nicht ausgelöst hast, brauchst du nichts zu tun.
+        Wenn du das Passwort nicht ändern möchtest oder diese E-Mail nicht ausgelöst hast, brauchst du nichts zu tun.
         Dein bisheriges Passwort wurde nicht geändert.
 
 
@@ -1093,16 +1097,16 @@ de:
     new:
       list:
         desc: 'Nachrichten an alle verschickst Du bitte über den Verteiler: %{list}'
-        mail: z.b. mit einer Mail an %{email}.
+        mail: z.b. mit einer E-Mail an %{email}.
         subscribe: Erklärungen zum Verteiler findest Du im %{link}.
         subscribe_msg: Eventuell musst Du Dich dem Verteiler erst bekannt machen.
         wiki: Wiki (Abschnitt Mailing-Liste)
-      no_user_found: Keine Nutzerin gefunden
+      no_user_found: Kein/e Benutzer/in gefunden
       search: Suche ...
-      search_user: Nach Nutzerin suchen
+      search_user: Nach Bernutzer/in suchen
       title: Neue Nachricht
     show:
-      all_messages: Nachricht im Überblick
+      all_messages: Nachrichten im Überblick
       from: 'Von:'
       reply: Antworten
       sent_on: 'Gesendet:'
@@ -1127,11 +1131,11 @@ de:
       no_ordergroup: keine Bestellgruppe
   navigation:
     admin:
-      config: 
+      config: Einstellungen
       home: Übersicht
       ordergroups: Bestellgruppen
       title: Administration
-      users: Benutzerinnen
+      users: Benutzer/innen
       workgroups: Arbeitsgruppen
     articles:
       categories: Kategorien
@@ -1193,7 +1197,7 @@ de:
       field_locked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Das Eingabefeld wurde gesperrt, um die manuellen Änderungen zu bewahren. Um den Artikel neu zu verteilen, drücke den Entsperrknopf und ändere die gelieferte Menge.
       field_unlocked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Wenn du die gelieferte Menge änderst, werden die vorherigen manuellen Änderungen überschrieben.
     edit_amounts:
-      no_articles_available: 
+      no_articles_available: Keine Artikel zum hinzufügen verfügbar
     fax:
       amount: Menge
       articles: Artikel
@@ -1359,8 +1363,8 @@ de:
   sessions:
     logged_in: Angemeldet!
     logged_out: Abgemeldet!
-    login_invalid_nick: Ungültiger Benutzername oder Passwort
-    login_invalid_email: Ungültiger Email oder Passwort
+    login_invalid_email: Ungültige E-Mail Adresse oder Passwort
+    login_invalid_nick: Benutzername oder Passwort ungültig
     new:
       forgot_password: Passwort vergessen?
       login: Anmelden
@@ -1403,7 +1407,7 @@ de:
       article:
         unit: z.B. KG oder 1L oder 500g
       article_category:
-        description: 
+        description: Kommagetrennte Liste von Kategorienamen die beim Import/Datenabgleich erkannt wurden
       message:
         private: Nachricht erscheint nicht im Foodsoft Posteingang
       order_article:
@@ -1418,12 +1422,12 @@ de:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
       task:
         duration: Wie lange dauert die Aufgabe, 1-3 Stunden
-        required_users: Wieviel Benutzerinnen werden insgesamt benötigt?
+        required_users: Wieviel Benutzer/innen werden insgesamt benötigt?
       tax: In Prozent, Standard sind 7,0
     labels:
       settings:
         messages:
-          send_as_email: Bekomme Nachrichten als Emails.
+          send_as_email: Bekomme Nachrichten als E-Mails.
         notify:
           negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
           order_finished: Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).
@@ -1540,9 +1544,9 @@ de:
     new:
       title: Neue Lieferantin
     shared_supplier_methods:
-      all_available: 
-      all_unavailable: 
-      import: 
+      all_available: Alle Artikel (neue sind verfügbar)
+      all_unavailable: Alle Artikel (neue sind nicht verfügbar)
+      import: Artikel zum Import auswählen
     shared_supplier_note: Lieferantin ist mit externer Datenbank verknüpft.
     shared_suppliers:
       body: <p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>

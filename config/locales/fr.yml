@@ -466,6 +466,7 @@ fr:
       use_messages: 
       use_nick: 
       use_wiki: 
+      webstats_tracking_code: 
     keys:
       applepear_url: 
       contact:
@@ -502,6 +503,7 @@ fr:
       use_messages: 
       use_nick: 
       use_wiki: 
+      webstats_tracking_code: 
     tabs:
       foodcoop: 
       language: 
@@ -676,7 +678,7 @@ fr:
         changed: Les données ont été modifiées!
         duration: von %{starts} bis %{ends}
         fc_amount: 'Montant boufcoop:'
-        fc_profit: 'Gain de la boufcoop:'
+        fc_profit: Gain de la boufcoop
         gross_amount: 'Montant TTC:'
         groups_amount: 'Montant payés par les cellules:'
         net_amount: 'Montant HT:'
@@ -1374,6 +1376,7 @@ fr:
   sessions:
     logged_in: Connecté!
     logged_out: Déconnecté!
+    login_invalid_email: 
     login_invalid_nick: Identifiant ou mot de passe invalide
     new:
       forgot_password: Mot de passe oublié?

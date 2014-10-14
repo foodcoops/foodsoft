@@ -242,8 +242,8 @@ nl:
     confirm: Wil je %{name} daadwerkelijk wissen?
     ordergroups:
       destroy:
-        error: 'Bestellingsgroep kon niet gewist worden: %{error}'
-        notice: Huishouden is verwijderd
+        error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
+        notice: Huishouden is gemarkeerd als verwijderd
       edit:
         title: Huishouden bewerken
       form:
@@ -283,8 +283,8 @@ nl:
         send_message: Bericht versturen
     workgroups:
       destroy:
-        error: 'Werkgroep kon niet gewist worden: %{error}'
-        notice: Werkgroep is gewist
+        error: 'Werkgroep kon niet verwijderd worden: %{error}'
+        notice: Werkgroep is verwijderd
       edit:
         title: Werkgroep bewerken
       form:
@@ -466,6 +466,7 @@ nl:
       use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
       use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
       use_wiki: Gebruik wiki pagina's.
+      webstats_tracking_code: Tracking code voor bezoeker statistieken (zoals Piwik of Google analytics). Leeg laten als geen tracking gewenst is.
     keys:
       applepear_url: Appelsysteem uitleg URL
       contact:
@@ -502,6 +503,7 @@ nl:
       use_messages: Berichten
       use_nick: Bijnamen gebruiken
       use_wiki: Wiki gebruiken
+      webstats_tracking_code: Tracking code
     tabs:
       foodcoop: Foodcoop
       language: Taal
@@ -674,7 +676,7 @@ nl:
         changed: Waarden zijn gewijzigd!
         duration: Van %{starts} tot %{ends}
         fc_amount: 'Verkoopwaarde:'
-        fc_profit: 'FC overschot:'
+        fc_profit: FC overschot
         gross_amount: 'Bruto waarde:'
         groups_amount: 'Totaal huishoudens:'
         net_amount: 'Netto waarde:'
@@ -1365,8 +1367,8 @@ nl:
   sessions:
     logged_in: Ingelogd!
     logged_out: Uitgelogd!
-    login_invalid_nick: Gebruikersnaam of wachtwoord onjuist
-    login_invalid_email: Emailadres of wachtwoord onjuist
+    login_invalid_email: Onjuist emailadres of wachtwoord
+    login_invalid_nick: Onjuiste gebruikersnaam of wachtwoord
     new:
       forgot_password: Wachtwoord vergeten?
       login: Aanmelden

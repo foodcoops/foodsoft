@@ -244,8 +244,8 @@ en:
     confirm: Do you really want to delete %{name}?
     ordergroups:
       destroy:
-        error: 'Ordergroup could not be deleted: %{error}'
-        notice: Ordergroup was deleted
+        error: 'Ordergroup could not be marked as deleted: %{error}'
+        notice: Ordergroup was marked as deleted
       edit:
         title: Edit ordergroup
       form:
@@ -678,7 +678,7 @@ en:
         changed: Data was changed!
         duration: From %{starts} till %{ends}
         fc_amount: 'Sales value:'
-        fc_profit: 'FC surplus:'
+        fc_profit: FC surplus
         gross_amount: 'Gross value:'
         groups_amount: 'Ordergroups sum:'
         net_amount: 'Net value:'
@@ -1372,8 +1372,8 @@ en:
   sessions:
     logged_in: Logged in!
     logged_out: Logged out!
-    login_invalid_nick: Invalid username or password
     login_invalid_email: Invalid email address or password
+    login_invalid_nick: Invalid username or password
     new:
       forgot_password: Forgot password?
       login: Login
@@ -1659,7 +1659,7 @@ en:
   workgroups:
     edit:
       title: Edit workgroup
-    error_last_admin_group: The last group with admin rights must not be deleted
+    error_last_admin_group: The last group with admin rights may not be deleted
     error_last_admin_role: Admin role for the last group with admin rights cannot be withdrawn
     index:
       title: Workgroups
