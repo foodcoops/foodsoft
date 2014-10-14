@@ -1,3 +1,18 @@
+# Foodsoft 4.2.0
+(14 Oct 2014)
+
+* Allow foodcoops to configure their settings (#298)
+* Allow foodcoops to add a CSS style (#306)
+* Allow foodcoops to enter a tracking code for web statistics (#331)
+* Times are now shown in the foodcoop's timezone (#282)
+* Synchronisation improvements: category matching + full assortment sync (#287)
+* Fix strange characters in text mails (don't escape HTML)
+* Allow to set page break options for each document
+* Allow to receive >200 articles (#305)
+* Show articles ordered by members but not by foodcoop dimmed in receive
+* Order articles by number then name in Fax PDF and receive (for easier checking)
+* Show message when errors occur in dynamic interaction (ajax) (#300)
+
 # Foodsoft 4.1.0
 (23 Jun 2014)
 
