@@ -130,7 +130,7 @@ class Article < ActiveRecord::Base
           # take care of different num-objects.
           :unit_quantity => [self.unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
           :note => [self.note.to_s, shared_article.note.to_s]
-        }
+        }.delete_if {|k,v| sync_skip_columns.include? k}
       )
       if unequal_attributes.empty?            
         # when attributes not changed, update timestamp of article

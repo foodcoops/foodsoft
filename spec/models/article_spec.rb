@@ -98,7 +98,7 @@ describe Article do
       article.unit = '200g'
       article.shared_updated_on -= 1 # to make update do something
       article.save!
-      # TODO get sync functionality in article
+      # @todo get sync functionality in article
       updated_article = supplier.sync_all[0].select{|s| s[0].id==article.id}.first[0]
       article.update_attributes! updated_article.attributes.reject{|k,v| k=='id' or k=='type'}
       expect(article.unit).to eq '200g'
@@ -110,5 +110,13 @@ describe Article do
       article.update_attributes :order_number => nil
       expect(supplier.sync_all).to eq [[], [], []]
     end
+
+    it 'does not need to synchronise skipped columns' do
+      article = SharedArticle.find(shared_article.id).build_new_article(supplier)
+      article.sync_skip_columns = [:name]
+      shared_article.update_attributes! name: Faker::Lorem.characters(rand(10..15))
+      expect(article.shared_article_changed?).to be_falsey
+    end
+
   end
 end
