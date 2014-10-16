@@ -224,7 +224,8 @@ class Article < ActiveRecord::Base
   def uniqueness_of_name
     matches = Article.where(name: name, supplier_id: supplier_id, deleted_at: deleted_at, type: type)
     matches = matches.where.not(id: id) unless new_record?
-    if supplier.shared_sync_method.blank? or supplier.shared_sync_method == 'import'
+    # supplier should always be there - except, perhaps, on initialization (on seeding)
+    if supplier and (supplier.shared_sync_method.blank? or supplier.shared_sync_method == 'import')
       errors.add :name, :taken if matches.any?
     else
       errors.add :name, :taken_with_unit if matches.where(unit: unit, unit_quantity: unit_quantity).any?
