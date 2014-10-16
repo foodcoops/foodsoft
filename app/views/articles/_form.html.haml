@@ -6,7 +6,11 @@
     %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
   .modal-body
     = f.input :availability
-    = f.input :name
+    = f.input :name do
+      .input-append
+        = f.input_field :name, disabled: true
+        %span.add-on
+          = f.input_field :availability, as: :boolean
 
     = render partial: 'shared/article_fields_units', locals: {f: f}
 
