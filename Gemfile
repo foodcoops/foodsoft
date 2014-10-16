@@ -18,7 +18,7 @@ gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'date_time_attribute'
 gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
-gem 'i18n-js', git: 'git://github.com/fnando/i18n-js.git' # to avoid US-ASCII js.erb error
+gem 'i18n-js', '~> 3.0.0.rc6'
 gem 'rails-i18n'
 
 gem 'mysql2'
@@ -45,7 +45,7 @@ gem 'ruby-units'
 gem 'attribute_normalizer'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
-gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
+gem 'acts_as_versioned', github: 'technoweenie/acts_as_versioned'
 gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
 gem 'foodsoft_messages', path: 'lib/foodsoft_messages'
 
