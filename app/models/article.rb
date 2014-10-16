@@ -44,7 +44,7 @@ class Article < ActiveRecord::Base
   has_many :article_prices, -> { order("created_at DESC") }
   # @!attribute sync_skip_columns
   #   @return [Array<Symbol>] Columns that are not sync'ed
-  serialize :sync_skip_columns, Array
+  serialize :sync_skip_columns, SymbolArraySerializer
 
   # Replace numeric seperator with database format
   localize_input_of :price, :tax, :deposit

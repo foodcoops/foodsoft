@@ -6,22 +6,18 @@
     %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
   .modal-body
     = f.input :availability
-    = f.input :name do
-      .input-append
-        = f.input_field :name, disabled: true
-        %span.add-on
-          = f.input_field :availability, as: :boolean
+    = input_with_sync f, :name
 
     = render partial: 'shared/article_fields_units', locals: {f: f}
 
-    = f.input :note
+    = input_with_sync f, :note
     = f.association :article_category
     / TODO labels
 
     = render partial: 'shared/article_fields_price', locals: {f: f}
 
-    = f.input :origin
-    = f.input :manufacturer
+    = input_with_sync f, :origin
+    = input_with_sync f, :manufacturer
     = f.input :order_number
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
