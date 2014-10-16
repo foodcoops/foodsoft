@@ -42,6 +42,9 @@ class Article < ActiveRecord::Base
   # @!attribute article_prices
   #   @return [Array<ArticlePrice>] Price history (current price first).
   has_many :article_prices, -> { order("created_at DESC") }
+  # @!attribute sync_skip_columns
+  #   @return [Array<Symbol>] Columns that are not sync'ed
+  serialize :sync_skip_columns, Array
 
   # Replace numeric seperator with database format
   localize_input_of :price, :tax, :deposit

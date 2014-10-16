@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140921104907) do
     t.datetime "deleted_at"
     t.string   "type"
     t.integer  "quantity",                                    default: 0
+    t.string   "sync_skip_columns"
   end
 
   add_index "articles", ["article_category_id"], name: "index_articles_on_article_category_id", using: :btree
