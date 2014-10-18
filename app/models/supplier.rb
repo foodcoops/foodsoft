@@ -56,7 +56,7 @@ class Supplier < ActiveRecord::Base
             :tax => shared_article.tax,
             :deposit => shared_article.deposit,
             :note => shared_article.note
-          }
+          }.delete_if {|k,v| sync_skip_columns.include? k}
           updated_articles << [article, unequal_attributes]
         end
       # Articles with no order number can be used to put non-shared articles
