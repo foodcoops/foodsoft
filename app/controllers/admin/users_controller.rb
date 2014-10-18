@@ -9,4 +9,10 @@ class Admin::UsersController < Admin::BaseController
 
     @users = @users.page(params[:page]).per(@per_page)
   end
+
+  def sudo
+    @user = User.find(params[:id])
+    login @user
+    redirect_to root_path, notice: I18n.t('admin.users.controller.sudo_done', user: @user.name)
+  end
 end

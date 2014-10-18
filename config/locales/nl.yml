@@ -275,12 +275,14 @@ nl:
       new:
         title: Nieuwe gebruiker toevoegen
       show:
-        confirm: Wil je %{user} daadwerkelijk verwijderen?
+        confirm_delete: Wil je %{user} daadwerkelijk verwijderen?
+        confirm_sudo: Als je doorgaat, neem je de identiteit aan van gebruiker %{user}. Vergeet hierna niet uit te loggen!
         groupabos: Groepslidmaatschappen
         member_since: Lid sinds %{time}
         person: Persoon
         preference: Voorkeuren
         send_message: Bericht versturen
+        sudo: Inloggen als
     workgroups:
       destroy:
         error: 'Werkgroep kon niet verwijderd worden: %{error}'

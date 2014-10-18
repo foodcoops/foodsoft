@@ -275,7 +275,7 @@ fr:
       new:
         title: Ajouter unE nouveLLE_eau membre
       show:
-        confirm: Veux-tu vraiment expulser %{user}?
+        confirm_delete: Veux-tu vraiment expulser %{user}?
         groupabos: Participation à des équipes
         member_since: Membre depuis %{time}
         person: Personne
