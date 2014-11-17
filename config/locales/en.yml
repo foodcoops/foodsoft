@@ -267,6 +267,8 @@ en:
         title: Ordergroup %{name}
     search_placeholder: name ..
     users:
+      controller:
+        sudo_done: You are now logged in as %{user}. Be careful, and do not forget to log out when done!
       edit:
         title: Edit user
       index:
@@ -277,12 +279,14 @@ en:
       new:
         title: Create new user
       show:
-        confirm: Do you really want to kick out %{user}?
+        confirm_delete: Do you really want to delete %{user}?
+        confirm_sudo: "If you continue, you will take on the identity of %{user}. Do not forget to log out when you're done!"
         groupabos: Group subscriptions
         member_since: Member since %{time}
         person: Person
         preference: Preferences
         send_message: Send message
+        sudo: Take on identity
     workgroups:
       destroy:
         error: 'Workgroup could not be deleted: %{error}'

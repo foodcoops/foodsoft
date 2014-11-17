@@ -172,7 +172,9 @@ Foodsoft::Application.routes.draw do
     namespace :admin do
       root :to => 'base#index'
 
-      resources :users
+      resources :users do
+        post :sudo, :on => :member
+      end
 
       resources :workgroups do
         get :memberships, :on => :member
