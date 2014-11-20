@@ -33,8 +33,6 @@
         %h5{class: 'controls'}
           = t 'simple_form.labels.settings.settings_group.messages'
         
-      = s.simple_fields_for :messages, defaults: { inline_label: true, label: false } do |messages|
-        = messages.input 'send_as_email',   as: :boolean, input_html: { checked: f.object.settings.messages['send_as_email'] }
       = s.simple_fields_for :notify, defaults: { inline_label: true, label: false } do |notify|
         = notify.input 'order_finished',    as: :boolean, input_html: { checked: f.object.settings.notify['order_finished'] }
         = notify.input 'negative_balance',  as: :boolean, input_html: { checked: f.object.settings.notify['negative_balance'] }

@@ -1,0 +1,4 @@
+/ insert_before 'erb:contains("simple_fields_for :notify")'
+- if FoodsoftMessages.enabled?
+  = s.simple_fields_for :messages, defaults: { inline_label: true, label: false } do |messages|
+    = messages.input 'send_as_email',   as: :boolean, input_html: { checked: f.object.settings.messages['send_as_email'] }
