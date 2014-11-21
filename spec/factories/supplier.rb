@@ -7,7 +7,7 @@ FactoryGirl.define do
     phone { Faker::PhoneNumber.phone_number }
     address { Faker::Address.street_address }
 
-    ignore do
+    transient do
       article_count 0
     end
 
@@ -16,6 +16,8 @@ FactoryGirl.define do
       article_count = rand(1..99) if article_count == true
       create_list :article, article_count, supplier: supplier
     end
+
+    factory :shared_supplier, class: SharedSupplier
   end
 
 end

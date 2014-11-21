@@ -6,7 +6,7 @@ class Message < ActiveRecord::Base
   
   scope :pending, -> { where(:email_state => 0) }
   scope :sent, -> { where(:email_state => 1) }
-  scope :public, -> { where(:private => false) }
+  scope :pub, -> { where(:private => false) }
 
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {

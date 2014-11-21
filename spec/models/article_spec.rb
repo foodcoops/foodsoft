@@ -59,9 +59,8 @@ describe Article do
   end
 
   describe 'connected to a shared database', :type => :feature do
-    let(:shared_supplier) { create(:supplier) }
-    let(:shared_article) { create :article, supplier: shared_supplier, order_number: Faker::Lorem.characters(rand(1..12)) }
-    let(:supplier) { create :supplier, shared_supplier_id: shared_supplier.id }
+    let(:shared_article) { create :shared_article }
+    let(:supplier) { create :supplier, shared_supplier_id: shared_article.supplier_id }
     let(:article) { create :article, supplier: supplier, order_number: shared_article.order_number }
 
     it 'can be found in the shared database' do
@@ -85,7 +84,7 @@ describe Article do
     end
 
     it 'does not need to synchronise an imported article' do
-      article = SharedArticle.find(shared_article.id).build_new_article(supplier)
+      article = shared_article.build_new_article(supplier)
       expect(article.shared_article_changed?).to be_falsey
     end
 
@@ -93,7 +92,7 @@ describe Article do
       shared_article.unit = '1kg'
       shared_article.unit_quantity = 1
       shared_article.save!
-      article = SharedArticle.find(shared_article.id).build_new_article(supplier)
+      article = shared_article.build_new_article(supplier)
       article.article_category = create :article_category
       article.unit = '200g'
       article.shared_updated_on -= 1 # to make update do something

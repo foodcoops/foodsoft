@@ -47,7 +47,6 @@ class User < ActiveRecord::Base
   end
   
   after_save do
-    return if settings_attributes.nil?
     settings_attributes.each do |key, value|
       value.each do |k, v|
         case v
@@ -58,7 +57,7 @@ class User < ActiveRecord::Base
         end
       end
       self.settings.merge!(key, value)
-    end
+    end if settings_attributes
   end
 
   # sorted by display name

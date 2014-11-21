@@ -11,8 +11,6 @@
 //= require list.unlist
 //= require list.delay
 //= require list.reset
-//= require rails.validations
-//= require rails.validations.simple_form
 //= require i18n
 //= require i18n/translations
 //= require_self

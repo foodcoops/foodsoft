@@ -12,7 +12,7 @@ module DeliveriesHelper
   
   def articles_for_select2(articles, except = [], &block)
     articles = articles.reorder('articles.name ASC')
-    articles.reject! {|a| not except.index(a.id).nil? } if except
+    articles = articles.reject {|a| not except.index(a.id).nil? } if except
     block_given? or block = Proc.new {|a| "#{a.name} (#{number_to_currency a.price}/#{a.unit})" }
     articles.map do |a|
       {:id => a.id, :text => block.call(a)}

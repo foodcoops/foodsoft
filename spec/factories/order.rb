@@ -7,7 +7,7 @@ FactoryGirl.define do
     supplier { create :supplier, article_count: (article_count.nil? ? true : article_count) }
     article_ids { supplier.articles.map(&:id) unless supplier.nil? }
 
-    ignore do
+    transient do
       article_count true
     end
 

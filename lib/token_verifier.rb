@@ -1,3 +1,5 @@
+# Generic token verifier with foodcoop scope
+# @todo use +Rails.application.message_verifier+ when possible
 class TokenVerifier < ActiveSupport::MessageVerifier
 
   def initialize(prefix)

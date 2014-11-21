@@ -1,12 +1,11 @@
 # A sample Gemfile
 source "https://rubygems.org"
-ruby "2.0.0"
 
-gem "rails", '~> 4.0.0'
+gem "rails", '~> 4.1'
 
 
-gem 'sass-rails',   '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '>= 4.0' # version to avoid bundle getting confused
+gem 'coffee-rails'
 gem 'less-rails'
 gem 'uglifier', '>= 1.0.3'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -27,12 +26,10 @@ gem 'prawn-table'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
-gem 'client_side_validations', git: 'git://github.com/bcardarella/client_side_validations.git', branch: '4-0-beta'
-gem 'client_side_validations-simple_form', git: 'git://github.com/saveritemedical/client_side_validations-simple_form.git'
 gem 'inherited_resources'
 gem 'localize_input', git: "git://github.com/bennibu/localize_input.git"
 gem 'daemons'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '~> 2.2.8'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 gem 'ransack'
@@ -56,6 +53,10 @@ end
 group :development do
   gem 'sqlite3'
   gem 'mailcatcher'
+
+  # allow to use `debugger` https://github.com/conradirwin/pry-rescue
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
   
   # Better error output
   gem 'better_errors'
@@ -85,7 +86,7 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'factory_girl_rails'
   gem 'faker'
   gem 'capybara'
   # webkit and poltergeist don't seem to work yet
