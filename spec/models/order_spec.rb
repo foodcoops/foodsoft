@@ -44,4 +44,21 @@ describe Order do
 
   end
 
+  describe 'with a default end date' do
+    let(:order) { create :order }
+    before do
+      FoodsoftConfig[:order_schedule] = {ends: {recurr: 'FREQ=WEEKLY;BYDAY=MO', time: '9:00'}}
+      order.init_dates
+    end
+
+    it 'to have a correct date' do
+      expect(order.ends.to_date).to eq Date.today.next_week.at_beginning_of_week(:monday)
+    end
+
+    it 'to have a correct time' do
+      expect(order.ends.strftime('%H:%M')).to eq '09:00'
+    end
+
+  end
+
 end

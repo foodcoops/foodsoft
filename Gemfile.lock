@@ -11,6 +11,13 @@ GIT
     acts_as_versioned (0.6.0)
       activerecord (>= 3.0.9)
 
+GIT
+  remote: git://github.com/wvengen/ice_cube.git
+  revision: addacaab715c70c5a9b736767ae98032e8efab92
+  branch: issues/50-from_ical-rebased
+  specs:
+    ice_cube (0.12.1)
+
 PATH
   remote: lib/foodsoft_messages
   specs:
@@ -266,6 +273,12 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.1)
+    recurring_select (1.2.1)
+      coffee-rails (>= 3.1)
+      ice_cube (>= 0.11)
+      jquery-rails (>= 3.0)
+      rails (>= 3.2)
+      sass-rails (>= 3.1)
     redis (3.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
@@ -423,6 +436,7 @@ DEPENDENCIES
   haml-rails
   i18n-js (~> 3.0.0.rc6)
   i18n-spec
+  ice_cube!
   inherited_resources
   jquery-rails
   kaminari
@@ -442,6 +456,7 @@ DEPENDENCIES
   rails-i18n
   rails-settings-cached
   ransack
+  recurring_select
   resque
   rspec-core (~> 2.99)
   rspec-rails

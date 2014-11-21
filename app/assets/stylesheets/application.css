@@ -4,4 +4,5 @@
 *= require token-input-bootstrappy
 *= require bootstrap-datepicker
 *= require list.unlist
+*= require recurring_select
 */

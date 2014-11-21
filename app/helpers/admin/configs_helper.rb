@@ -6,11 +6,12 @@ module Admin::ConfigsHelper
   # @param key [Symbol, String] Configuration key.
   # @param options [Hash] Options passed to the form builder.
   # @option options [Boolean] :required Wether field is shown as required (default not).
+  # @option options [Array<IceCube::Rule>] :rules Rules for +as: :recurring_select+
   # @return [String] Form input for configuration key.
   # @todo find way to pass current value to time_zone input without using default
   def config_input(form, key, options = {}, &block)
     return unless @cfg.allowed_key? key
-    options[:label] = config_input_label(form, key)
+    options[:label] ||= config_input_label(form, key)
     options[:required] ||= false
     options[:input_html] ||= {}
     config_input_field_options form, key, options[:input_html]
@@ -26,6 +27,7 @@ module Admin::ConfigsHelper
       options[:default] = options[:input_html].delete(:value)
       return form.input key, options, &block
     end
+    block ||= proc { config_input_field form, key, options.merge(options[:input_html]) } if options[:as] == :select_recurring
     form.input key, options, &block
   end
 
@@ -53,6 +55,11 @@ module Admin::ConfigsHelper
       unchecked_value = options.delete(:unchecked_value) || 'false'
       options[:checked] = 'checked' if v=options.delete(:value) and v!='false'
       form.hidden_field(key, value: unchecked_value, as: :hidden) + form.check_box(key, options, checked_value, false)
+    elsif options[:as] == :select_recurring
+      options[:value] = FoodsoftDateUtil.rule_from(options[:value])
+      options[:rules] ||= []
+      options[:rules].unshift options[:value] unless options[:value].blank?
+      form.select_recurring key, options.delete(:rules).uniq, options
     else
       form.input_field key, options
     end
@@ -123,7 +130,7 @@ module Admin::ConfigsHelper
     # set current value
     unless options.has_key?(:value)
       value = @cfg
-      cfg_path.each {|n| value = value[n.to_sym] if value.respond_to? :[] }
+      cfg_path.each {|n| value = value[n] if value.respond_to? :[] }
       options[:value] = value
     end
     options

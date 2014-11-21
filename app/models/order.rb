@@ -95,6 +95,21 @@ class Order < ActiveRecord::Base
     !ends.nil? && ends < Time.now
   end
 
+  # sets up first guess of dates when initializing a new object
+  # I guess `def initialize` would work, but it's tricky http://stackoverflow.com/questions/1186400
+  def init_dates
+    self.starts ||= Time.now
+    if FoodsoftConfig[:order_schedule]
+      # try to be smart when picking a reference day
+      last = (DateTime.parse(FoodsoftConfig[:order_schedule][:initial]) rescue nil)
+      last ||= Order.finished.reorder(:starts).first.try(:starts)
+      last ||= self.starts
+      # adjust end date
+      self.ends ||= FoodsoftDateUtil.next_occurrence last, self.starts, FoodsoftConfig[:order_schedule][:ends]
+    end
+    self
+  end
+
   # search GroupOrder of given Ordergroup
   def group_order(ordergroup)
     group_orders.where(:ordergroup_id => ordergroup.id).first

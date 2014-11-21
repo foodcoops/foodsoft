@@ -10,3 +10,9 @@
   .input-prepend
     %span.add-on= t 'number.currency.format.unit'
     = config_input_field form, :minimum_balance, as: :decimal, class: 'input-small'
+
+= form.simple_fields_for :order_schedule do |fields|
+  = fields.simple_fields_for 'ends' do |fields|
+    .fold-line
+      = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'input-xlarge'}
+      = config_input fields, 'time', input_html: {class: 'input-mini'}
