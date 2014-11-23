@@ -8,22 +8,7 @@
 
 - content_for :javascript do
   :javascript
-    function toggleWeeklyTaskFields() {
-      if ($('#workgroup_weekly_task').is(':checked')) {
-        $('#weekly_task_fields .control-group').show();
-        $('#weekly_task_fields input').removeAttr('disabled');
-      } else {
-        $('#weekly_task_fields .control-group').hide();
-        $('#weekly_task_fields input').attr('disabled', 'disabled');
-      }
-    }
-
     $(function() {
-      toggleWeeklyTaskFields();
-      $('#workgroup_weekly_task').click(function() {
-        toggleWeeklyTaskFields();
-      });
-
       $("##{f.object.class.to_s.underscore}_user_tokens").tokenInput("#{users_path(:format => :json)}", {
         crossDomain: false,
         prePopulate: $("##{f.object.class.to_s.underscore}_user_tokens").data("pre"),

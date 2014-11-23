@@ -163,7 +163,6 @@ nl:
       workgroup:
         description: Omschrijving
         name: Naam
-        next_weekly_tasks_number: Hoeveel weken vooruit moet de taak zichtbaar zijn?
         role_admin: Beheer
         role_article_meta: Artikelen
         role_finance: Financiën
@@ -1391,12 +1390,9 @@ nl:
       activated: actief
       apple_limit: Appelpunten bestellingslimiet
       deactivated: inactief
-      no_weekly_job: geen wekelijkse taak ingesteld
-      weekly_job: wekelijkse taak
     group_form_fields:
       search: Zoeken ...
       search_user: Gebruiker zoeken
-      title: Wekelijkse taken
       user_not_found: Geen gebruiker gevonden
     open_orders:
       no_open_orders: Er zijn momenteel geen lopende bestellingen.
