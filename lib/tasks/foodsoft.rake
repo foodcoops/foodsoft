@@ -40,7 +40,9 @@ namespace :foodsoft do
   task :create_upcoming_periodic_tasks => :environment do
     for tg in PeriodicTaskGroup.all
       if tg.has_next_task?
-        while tg.next_task_date.nil? or tg.next_task_date < Date.today + 50
+        create_until = Date.today + FoodsoftConfig[:tasks_upfront_days].to_i + 1
+        rake_say "creating until #{create_until}"
+        while tg.next_task_date.nil? or tg.next_task_date < create_until
           tg.create_next_task
         end
       end

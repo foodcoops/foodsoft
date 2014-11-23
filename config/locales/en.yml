@@ -237,6 +237,8 @@ en:
         pdf_title: PDF documents
       tab_messages:
         emails_title: Sending email
+      tab_tasks:
+        periodic_title: Periodic tasks
       tabs:
         title: Configuration
       update:
@@ -467,6 +469,8 @@ en:
       price_markup: Percentage that is added to the gross price for foodcoop members.
       stop_ordering_under: Members can only order when they have at least this many apple points.
       tax_default: Default VAT percentage for new articles.
+      tasks_period_days: Number of days between two instances of a periodic task.
+      tasks_upfront_days: How many days upfront to schedule tasks from a periodic task.
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
       use_messages: Allow members to communicate with each other within Foodsoft.
@@ -502,6 +506,8 @@ en:
       pdf_page_size: Page size
       price_markup: Foodcoop margin
       stop_ordering_under: Minimum apple points
+      tasks_period_days: Period
+      tasks_upfront_days: Create upfront
       tax_default: Default VAT
       time_zone: Time zone
       tolerance_is_costly: Tolerance is costly

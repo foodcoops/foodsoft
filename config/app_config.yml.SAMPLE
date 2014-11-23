@@ -55,14 +55,19 @@ default: &defaults
 
   # Ordergroups, which have less than 75 apples should not be allowed to make new orders
   # Comment out this option to activate this restriction
-  # stop_ordering_under: 75
+  #stop_ordering_under: 75
 
   # Comment out to completely hide apple points (be sure to comment stop_ordering_under)
-  # use_apple_points: false
+  #use_apple_points: false
 
   # ordergroups can only order when their balance is higher than or equal to this
   # not fully enforced right now, since the check is only client-side
-  # minimum_balance: 0
+  #minimum_balance: 0
+
+  # how many days there are between two periodic tasks
+  #tasks_period_days: 7
+  # how many days upfront periodic tasks are created
+  #tasks_upfront_days: 49
 
   # When use_nick is enabled, there will be a nickname field in the user form,
   # and the option to show a nickname instead of full name to foodcoop members.
