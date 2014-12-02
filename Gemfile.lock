@@ -19,14 +19,14 @@ GIT
     ice_cube (0.12.1)
 
 PATH
-  remote: lib/foodsoft_messages
+  remote: plugins/messages
   specs:
     foodsoft_messages (0.0.1)
       deface (~> 1.0.0)
       rails
 
 PATH
-  remote: lib/foodsoft_wiki
+  remote: plugins/wiki
   specs:
     foodsoft_wiki (0.0.1)
       acts_as_versioned

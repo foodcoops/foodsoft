@@ -45,8 +45,8 @@ gem 'recurring_select'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', github: 'technoweenie/acts_as_versioned'
-gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
-gem 'foodsoft_messages', path: 'lib/foodsoft_messages'
+gem 'foodsoft_wiki', path: 'plugins/wiki'
+gem 'foodsoft_messages', path: 'plugins/messages'
 
 group :production do
   gem 'exception_notification'
