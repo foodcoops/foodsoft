@@ -64,6 +64,15 @@ default: &defaults
   # not fully enforced right now, since the check is only client-side
   # minimum_balance: 0
 
+  # default order schedule, used to provide initial dates for new orders
+  # (recurring dates in ical format; no spaces!)
+  #order_schedule:
+  #  ends:
+  #    recurr: FREQ=WEEKLY;INTERVAL=2;BYDAY=MO
+  #    time: '9:00'
+  #  # reference point, this is generally the first pickup day; empty is often ok
+  #  #initial:
+
   # When use_nick is enabled, there will be a nickname field in the user form,
   # and the option to show a nickname instead of full name to foodcoop members.
   # Members of a user's groups and administrators can still see full names.

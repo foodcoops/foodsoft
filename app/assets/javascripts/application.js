@@ -18,6 +18,7 @@
 //= require stupidtable
 //= require touchclick
 //= require delta_input
+//= require recurring_select
 
 // Load following statements, when DOM is ready
 $(function() {

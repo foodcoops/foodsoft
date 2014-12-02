@@ -458,6 +458,11 @@ en:
       mailing_list_subscribe: Email address where members can send an email to for subscribing.
       minimum_balance: Members can only order when their account balance is above or equal to this amount.
       name: The name of your foodcoop.
+      order_schedule:
+        initial: Schedule starts at this date.
+        ends:
+          recurr: Schedule for default order closing date.
+          time: Default time when orders are closed.
       page_footer: Shown on each page at the bottom. Enter "blank" to disable the footer completely.
       pdf_add_page_breaks:
         order_by_articles: Put each article on a separate page.
@@ -496,6 +501,11 @@ en:
       mailing_list_subscribe: Mailing-list subscribe
       minimum_balance: Minimum account balance
       name: Name
+      order_schedule:
+        initial: Schedule start
+        ends:
+          recurr: Order ends
+          time: time
       page_footer: Page footer
       pdf_add_page_breaks: Page breaks
       pdf_font_size: Font size

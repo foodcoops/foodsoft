@@ -48,9 +48,18 @@ describe 'admin/configs', type: :feature do
 
     def get_full_config
       cfg = FoodsoftConfig.to_hash.deep_dup
-      cfg.each {|k,v| v.reject! {|k,v| v.blank?} if v.is_a? Hash}
-      cfg.reject! {|k,v| v.blank?}
-      cfg
+      compact_hash_deep!(cfg)
+    end
+
+    def compact_hash_deep!(h)
+      h.each do |k,v|
+        if v.is_a? Hash
+          compact_hash_deep!(v)
+          v.reject! {|k,v| v.blank?}
+        end
+      end
+      h.reject! {|k,v| v.blank?}
+      h
     end
 
   end

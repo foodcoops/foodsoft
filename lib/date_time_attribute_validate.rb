@@ -42,7 +42,7 @@ module DateTimeAttributeValidate
           self.instance_variable_get("@#{attribute}_date_value") || self.send("#{attribute}_date").try {|e| e.strftime('%Y-%m-%d')}
         end
         define_method("#{attribute}_time_value") do
-          self.instance_variable_get("@#{attribute}_time_value") || self.send("#{attribute}_time").try {|e| e.strftime('%H:%m')}
+          self.instance_variable_get("@#{attribute}_time_value") || self.send("#{attribute}_time").try {|e| e.strftime('%H:%M')}
         end
 
         private
