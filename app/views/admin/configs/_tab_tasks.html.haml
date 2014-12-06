@@ -1,3 +1,15 @@
 -#= config_use_heading form, :use_tasks do
+%fieldset
+  %label
+    %h4= t '.periodic_title'
+  = config_input form, :tasks_period_days do
+    .input-append
+      = config_input_field form, :tasks_period_days, as: :numeric, class: 'input-mini'
+      %span.add-on days
+  = config_input form, :tasks_upfront_days do
+    .input-append
+      = config_input_field form, :tasks_upfront_days, as: :numeric, class: 'input-mini'
+      %span.add-on days
+
 = config_use_heading form, :use_apple_points do
   = config_input form, :stop_ordering_under, as: :numeric, input_html: {class: 'input-small'}

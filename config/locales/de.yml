@@ -163,7 +163,6 @@ de:
       workgroup:
         description: Beschreibung
         name: Name
-        next_weekly_tasks_number: Für wieviel Wochen im Voraus sollen Aufgaben erstellt werden?
         role_admin: Administration
         role_article_meta: Artikeldatenbank
         role_finance: Finanzen
@@ -185,7 +184,7 @@ de:
         task:
           attributes:
             done:
-              exclusion: erledigte Aufgaben können nicht wöchentlich wiederholt werden
+              exclusion: erledigte Aufgaben können nicht wiederholt werden
     models:
       article: Artikel
       article_category: Artikelkategorie
@@ -1385,12 +1384,9 @@ de:
       activated: aktiviert
       apple_limit: Äpfel-Bestellbeschränkung
       deactivated: deaktiviert
-      no_weekly_job: kein wöchentlicher Job definiert
-      weekly_job: Wöchentlicher Job
     group_form_fields:
       search: Suche ...
       search_user: Nach Nutzerin suchen
-      title: Wöchentliche Jobs
       user_not_found: Keine Nutzerin gefunden
     open_orders:
       no_open_orders: Derzeit gibt es keine laufenden Bestellungen

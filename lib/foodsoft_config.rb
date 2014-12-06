@@ -226,6 +226,8 @@ class FoodsoftConfig
         currency_space: true,
         foodsoft_url: 'https://github.com/foodcoops/foodsoft',
         contact: {}, # avoid errors when undefined
+        tasks_period_days: 7,
+        tasks_upfront_days: 49,
         # The following keys cannot, by default, be set by foodcoops themselves.
         protected: {
           multi_coop_install: true,

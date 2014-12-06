@@ -163,7 +163,6 @@ fr:
       workgroup:
         description: Description
         name: Nom
-        next_weekly_tasks_number: Combien de temps en avance les boulots doivent ils être annoncés sur le site?
         role_admin: Administration
         role_article_meta: Base de données des produits
         role_finance: Trésorerie
@@ -185,7 +184,7 @@ fr:
         task:
           attributes:
             done:
-              exclusion: répétition hebdomadaire invalide pour un boulot déjà effectué
+              exclusion: répétition invalide pour un boulot déjà effectué
     models:
       article: Article
       article_category: Catégorie
@@ -1398,12 +1397,9 @@ fr:
       activated: activé
       apple_limit: Minimum de glands
       deactivated: désactivé
-      no_weekly_job: aucun boulot hebdomadaire n'a été défini
-      weekly_job: Boulot hebdomadaire
     group_form_fields:
       search: Recherche...
       search_user: Rechercher par utilisatrice
-      title: Boulots hebdomadaires
       user_not_found: Aucun-e membre ne correspond à ce nom
     open_orders:
       no_open_orders: Il n'y a aucune commande en cours en ce moment

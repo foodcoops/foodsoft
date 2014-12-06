@@ -36,8 +36,8 @@ class Task < ActiveRecord::Base
   end
 
 
-  # find all tasks in the next week (or another number of days)
-  def self.next_assigned_tasks_for(user, number = 7)
+  # find all tasks in the period (or another number of days)
+  def self.next_assigned_tasks_for(user, number = FoodsoftConfig[:tasks_period_days].to_i)
     user.tasks.undone.where(assignments: {accepted: true}).
         where(["tasks.due_date >= ? AND tasks.due_date <= ?", Time.now, number.days.from_now])
   end

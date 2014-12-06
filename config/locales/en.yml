@@ -163,7 +163,6 @@ en:
       workgroup:
         description: Description
         name: Name
-        next_weekly_tasks_number: For how many weeks in advance would you like to define tasks?
         role_admin: Administration
         role_article_meta: Article database
         role_finance: Finances
@@ -185,7 +184,7 @@ en:
         task:
           attributes:
             done:
-              exclusion: finished tasks may not be repeated weekly
+              exclusion: finished tasks may not be repeated
     models:
       article: Article
       article_category: Article category
@@ -237,6 +236,8 @@ en:
         pdf_title: PDF documents
       tab_messages:
         emails_title: Sending email
+      tab_tasks:
+        periodic_title: Periodic tasks
       tabs:
         title: Configuration
       update:
@@ -472,6 +473,8 @@ en:
       price_markup: Percentage that is added to the gross price for foodcoop members.
       stop_ordering_under: Members can only order when they have at least this many apple points.
       tax_default: Default VAT percentage for new articles.
+      tasks_period_days: Number of days between two periodic tasks (default 7, which is a week).
+      tasks_upfront_days: For how many days in advance you would like to schedule periodic tasks.
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
       use_messages: Allow members to communicate with each other within Foodsoft.
@@ -512,6 +515,8 @@ en:
       pdf_page_size: Page size
       price_markup: Foodcoop margin
       stop_ordering_under: Minimum apple points
+      tasks_period_days: Period
+      tasks_upfront_days: Create upfront
       tax_default: Default VAT
       time_zone: Time zone
       tolerance_is_costly: Tolerance is costly
@@ -1408,12 +1413,9 @@ en:
       activated: activated
       apple_limit: Apple points order limit
       deactivated: deactivated
-      no_weekly_job: No weekly job defined
-      weekly_job: Weekly job
     group_form_fields:
       search: Search ...
       search_user: Search user
-      title: Weekly jobs
       user_not_found: No user found
     open_orders:
       no_open_orders: There are no current orders
