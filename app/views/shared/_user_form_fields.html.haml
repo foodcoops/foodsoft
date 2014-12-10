@@ -6,11 +6,14 @@
 -# You can control password autocompletion by passing `password_autocomplete` to this partial.
 -# Possible values: undefined/nil, true, false, 'store-only'
 -# see also https://github.com/foodcoops/foodsoft/wiki/Form-autocompletion
-- password_autocomplete = nil unless defined?(:password_autocomplete)
-- password_html = autocomplete_flag_to_password_html(password_autocomplete)
+- password_html = autocomplete_flag_to_password_html(local_assigns[:password_autocomplete])
 = f.input :password, :required => f.object.new_record?, input_html: password_html
 = f.input :password_confirmation, :required => f.object.new_record?, input_html: password_html
 = f.input :phone
+
+- if local_assigns[:with_address] && (f.object.ordergroup || f.object.new_record?)
+  = f.fields_for [:ordergroup, f.object.ordergroup || Ordergroup.new] do |ogf|
+    = ogf.input :contact_address, label: t('activerecord.attributes.ordergroup.contact_address'), required: false
 
 = f.simple_fields_for :settings_attributes do |s|
   = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|

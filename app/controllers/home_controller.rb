@@ -15,7 +15,8 @@ class HomeController < ApplicationController
   end
 
   def update_profile
-    if @current_user.update_attributes(params[:user])
+    if @current_user.update_attributes(user_params)
+      @current_user.ordergroup.update_attributes(ordergroup_params) if ordergroup_params
       session[:locale] = @current_user.locale
       redirect_to my_profile_url, notice: I18n.t('home.changes_saved')
     else
@@ -60,6 +61,22 @@ class HomeController < ApplicationController
       flash[:error] = I18n.t('errors.general')
     end
     redirect_to my_profile_path
+  end
+
+  protected
+
+  def user_params
+    params
+      .require(:user)
+      .permit(:first_name, :last_name, :email, :phone,
+              :password, :password_confirmation).merge(params[:user].slice(:settings_attributes))
+  end
+
+  def ordergroup_params
+    params
+      .require(:user)
+      .require(:ordergroup)
+      .permit(:contact_address)
   end
 
 end
