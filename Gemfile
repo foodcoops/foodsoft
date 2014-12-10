@@ -17,7 +17,7 @@ gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'date_time_attribute'
 gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
-gem 'i18n-js', '~> 3.0.0.rc6'
+gem 'i18n-js', '~> 3.0.0.rc8'
 gem 'rails-i18n'
 
 gem 'mysql2'
