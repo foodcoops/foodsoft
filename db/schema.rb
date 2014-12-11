@@ -122,23 +122,23 @@ ActiveRecord::Schema.define(version: 20140921104907) do
   add_index "group_orders", ["ordergroup_id"], name: "index_group_orders_on_ordergroup_id", using: :btree
 
   create_table "groups", force: true do |t|
-    t.string   "type",                                             default: "",    null: false
-    t.string   "name",                                             default: "",    null: false
+    t.string   "type",                                              default: "",    null: false
+    t.string   "name",                                              default: "",    null: false
     t.string   "description"
-    t.decimal  "account_balance",          precision: 8, scale: 2, default: 0,     null: false
-    t.datetime "created_on",                                                       null: false
-    t.boolean  "role_admin",                                       default: false, null: false
-    t.boolean  "role_suppliers",                                   default: false, null: false
-    t.boolean  "role_article_meta",                                default: false, null: false
-    t.boolean  "role_finance",                                     default: false, null: false
-    t.boolean  "role_orders",                                      default: false, null: false
+    t.decimal  "account_balance",          precision: 12, scale: 2, default: 0,     null: false
+    t.datetime "created_on",                                                        null: false
+    t.boolean  "role_admin",                                        default: false, null: false
+    t.boolean  "role_suppliers",                                    default: false, null: false
+    t.boolean  "role_article_meta",                                 default: false, null: false
+    t.boolean  "role_finance",                                      default: false, null: false
+    t.boolean  "role_orders",                                       default: false, null: false
     t.datetime "deleted_at"
     t.string   "contact_person"
     t.string   "contact_phone"
     t.string   "contact_address"
     t.text     "stats"
-    t.integer  "next_weekly_tasks_number",                         default: 8
-    t.boolean  "ignore_apple_restriction",                         default: false
+    t.integer  "next_weekly_tasks_number",                          default: 8
+    t.boolean  "ignore_apple_restriction",                          default: false
   end
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
