@@ -73,7 +73,7 @@ nl:
       order:
         closed_by: Afgerekend door
         created_by: Geopend door
-        ends: Eindigt op
+        ends: sluit op
         name: Leverancier
         note: Notitie
         starts: Start op
@@ -234,6 +234,8 @@ nl:
         pdf_title: PDF documenten
       tab_messages:
         emails_title: Emailinstellingen
+      tab_tasks:
+        periodic_title: Periodieke taken
       tabs:
         title: Configuratie
       update:
@@ -264,6 +266,8 @@ nl:
         title: Huishouden %{name}
     search_placeholder: naam ...
     users:
+      controller:
+        sudo_done: Je bent nu ingelogd als %{user}. Wees voorzichtig, en vergeet niet uit te loggen als je klaar bent!
       edit:
         title: Lid bewerken
       index:
@@ -348,13 +352,13 @@ nl:
         notice: Er zijn %{count} nieuwe artikelen opgeslagen.
       error_invalid: Er zijn artikelen die een fout hebben
       error_nosel: Geen artikelen geselecteerd
-      error_parse: '%{msg} ... in regel %{line}'
+      error_parse: "%{msg} ... in regel %{line}"
       error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
-        notice: '%{count} artikelen zijn geanalyseerd'
+        notice: "%{count} artikelen zijn geanalyseerd"
       sync:
         notice: Catalogus is bijgewerkt
-        shared_alert: '%{supplier} is niet aan een externe database gekoppeld'
+        shared_alert: "%{supplier} is niet aan een externe database gekoppeld"
       update_all:
         notice: Alle artikelen en prijzen zijn bijgewerkt.
       update_sel:
@@ -366,7 +370,7 @@ nl:
         notice: Alle artikelen en prijzen zijn bijgewerkt.
     destroy_active_article:
       drop: verwijderen
-      note: '%{article} is deel van een lopende bestelling en kan niet verwijderd worden. Het artikel graag eerst uit de bestelling(en) %{drop_link}.'
+      note: "%{article} is deel van een lopende bestelling en kan niet verwijderd worden. Het artikel graag eerst uit de bestelling(en) %{drop_link}."
     edit_all:
       note: 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestellingsnummer.'
       submit: Alle artikelen bijwerken
@@ -396,10 +400,10 @@ nl:
       title: Artikelen van %{supplier} (%{count})
       upload: Artikelen uploaden
     model:
-      error_in_use: '%{article} kan niet gewist worden, want deze is deel van een lopende bestelling!'
+      error_in_use: "%{article} kan niet gewist worden, want deze is deel van een lopende bestelling!"
       error_nosel: Je hebt geen artikelen geselecteerd
     parse_upload:
-      body: <p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>
+      body: "<p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>"
       submit: Uploaden
       title: Artikelen uploaden
     sync:
@@ -408,7 +412,7 @@ nl:
         body: 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_ignored:
           one: Er is één artikel zonder artikelnummer overslagen.
-          other: '%{count} artikelen zonder artikelnummer zijn overgeslagen.'
+          other: "%{count} artikelen zonder artikelnummer zijn overgeslagen."
         body_skip: Er zijn geen artikelen om te verwijderen.
         title: Uit de lijst halen ...
       price_short: prijs
@@ -429,7 +433,7 @@ nl:
     upload:
       body: <p>Een komma-gescheiden utf-8 bestand wordt verwacht met extensie <tt>.csv</tt>. De eerste regel bevat kolomhoofden, velden worden met een puntkomma (';') gescheiden, en tekst mag tussen dubbele aanhalingstekens staan ("Tekst...").</p> <p>Volgorde van de kolommen:</p>
       fields:
-        reserved: (Leeg)
+        reserved: "(Leeg)"
         status: Status (x=overslaan)
       file_label: Graag een compatibel bestand uitkiezen
       submit: Bestand uploaden
@@ -453,6 +457,11 @@ nl:
       mailing_list_subscribe: Emailadres waar leden zich kunnen aanmelden voor de mailing-lijst.
       minimum_balance: Leden kunnen slechts bestellen wanneer hun tegoed groter of gelijk is aan dit bedrag.
       name: De naam van de foodcoop.
+      order_schedule:
+        ends:
+          recurr: Schema voor datum waarop de bestelling sluit.
+          time: Standaard tijd wanneer de bestelling sluit.
+        initial: Bestelschema start op deze datum.
       page_footer: Wordt op iedere pagina getoond. Vul "blank" in om de voettekst helemaal weg te halen.
       pdf_add_page_breaks:
         order_by_articles: Ieder artikel op een nieuwe pagina.
@@ -461,6 +470,8 @@ nl:
       pdf_page_size: Paginaformaat voor PDF bestanden, meestal "A4" of "letter".
       price_markup: Percentage dat bovenop het brutobedrag wordt gedaan voor foodcoop leden.
       stop_ordering_under: Leden kunnen slechts bestellen als ze dit aantal appelpunten hebben of meer.
+      tasks_period_days: Aantal dagen tussen twee periodieke taken (standaard 7, een week)
+      tasks_upfront_days: Hoeveel dagen vantevoren je periodieke taken wil aanmaken.
       tax_default: Standaard BTW percentage voor nieuwe artikelen.
       tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
@@ -491,12 +502,19 @@ nl:
       mailing_list_subscribe: Mailing-lijst aanmelden
       minimum_balance: Minimum tegoed
       name: Naam
+      order_schedule:
+        ends:
+          recurr: Bestelling sluit
+          time: tijd
+        initial: Start bestelschema
       page_footer: Voettekst
       pdf_add_page_breaks: Nieuwe pagina's
       pdf_font_size: Tekstgrootte
       pdf_page_size: Paginaformaat
       price_markup: Foodcoop marge
       stop_ordering_under: Minimum appelpunten
+      tasks_period_days: Periode
+      tasks_upfront_days: Vantevoren
       tax_default: Standaard BTW
       time_zone: Tijdzone
       tolerance_is_costly: Tolerantie is duur
@@ -533,7 +551,7 @@ nl:
     index:
       confirm_delete: Zeker weten?
       new_delivery: Nieuwe levering maken voor %{supplier}
-      title: '%{supplier} leveringen'
+      title: "%{supplier} leveringen"
     invoice_amount: Factuurbedrag
     invoice_net_amount: Netto factuurbedrag
     new:
@@ -641,10 +659,10 @@ nl:
         invoice_amount: 'Factuurbedrag:'
         invoice_date: 'Factuurdatum:'
         invoice_number: 'Factuurnummer:'
-        minus_refund_calculated: '- statiegeld berekend:'
+        minus_refund_calculated: "- statiegeld berekend:"
         new: factuur toevoegen
         new_body: 'Een factuur aan deze bestelling toevoegen:'
-        plus_refund_credited: '+ statiegeld teruggekregen:'
+        plus_refund_credited: "+ statiegeld teruggekregen:"
         refund_adjusted_amount: 'bedrag gecorrigeerd voor statiegeld:'
       new:
         alert: Opgelet, bestelling is al afgerekend
@@ -696,7 +714,7 @@ nl:
           notice: Alle transacties zijn opgeslagen.
       index:
         balance: 'Tegoed: %{balance}'
-        last_updated_at: (laatst bijgewerkt %{when} geleden)
+        last_updated_at: "(laatst bijgewerkt %{when} geleden)"
         new_transaction: Nieuwe transactie toevoegen
         title: Rekeningoverzicht voor %{name}
       index_collection:
@@ -757,14 +775,14 @@ nl:
       index:
         name: Naam ...
         only_active: Alleen actieve
-        only_active_desc: (minstens eenmaal in de laatste 3 maanden besteld)
+        only_active_desc: "(minstens eenmaal in de laatste 3 maanden besteld)"
         title: Huishoudens
     users:
       index:
-        body: <p>Hier kun je leden van deze foodcoop een bericht sturen.</p> <p>Om je eigen contactgegevens te laten zien, moet je die vrijgeven op %{profile_link}.</p>
+        body: "<p>Hier kun je leden van deze foodcoop een bericht sturen. Om je eigen contactgegevens te laten zien, moet je die vrijgeven in je %{profile_link}.</p>"
         ph_name: Naam ...
         ph_ordergroup: Huishouden ...
-        profile_link: Instellingen
+        profile_link: profiel
         title: Leden
     workgroups:
       edit:
@@ -772,7 +790,7 @@ nl:
         invite_new: Nieuwe leden kun je %{invite_link} uitnodigen.
         title: Groep bewerken
       index:
-        body: <p>De groep kan alleen aangepast worden door leden ervan.<br/> Als je lid wilt worden van een groep, stuur dan een bericht aan een van de leden.</p>
+        body: "<p>De groep kan alleen aangepast worden door leden ervan.<br/> Als je lid wilt worden van een groep, stuur dan een bericht aan een van de leden.</p>"
         title: Werkgroepen
       workgroup:
         edit: Groep bewerken
@@ -856,7 +874,7 @@ nl:
   helpers:
     application:
       edit_user: Gebruiker bewerken
-      nick_fallback: (geen gebruikersnaam)
+      nick_fallback: "(geen gebruikersnaam)"
       role_admin: Admin
       role_article_meta: Artikelen
       role_finance: Financiën
@@ -881,7 +899,7 @@ nl:
         create: bericht versturen
     tasks:
       required_users: Nog %{count} leden nodig!
-      task_title: '%{name} (%{duration}u)'
+      task_title: "%{name} (%{duration}u)"
   home:
     apple_bar:
       desc: |-
@@ -892,12 +910,12 @@ nl:
       warning: Opgelet, als je minder dan %{threshold} appelpunten hebt, kun je geen bestelling plaatsen!
     changes_saved: Wijzigingen opgeslagen.
     index:
-      due_date_format: '%A %d %B'
+      due_date_format: "%A %d %B"
       messages:
         title: Nieuwste berichten
         view_all: Alle berichten bekijken
       my_ordergroup:
-        funds: '| Beschikbaar tegoed:'
+        funds: "| Beschikbaar tegoed:"
         last_update: Laatst gewijzigd %{when} geleden
         title: Mijn huishouden
         transactions:
@@ -930,8 +948,8 @@ nl:
         title: Je bent lid van de groepen
       title: Mijn Profiel
       user:
-        since: '(gebruiker sinds: %{when})'
-        title: '%{user}'
+        since: "(gebruiker sinds: %{when})"
+        title: "%{user}"
     start_nav:
       admin: Administratie
       finances:
@@ -958,18 +976,18 @@ nl:
     errors:
       already_member: is al lid van de foodcoop.
     modal_form:
-      body: <p>Hier kun je iemand die nog geen lid is uitnodigen voor de groep<b>%{group}</b>.</p> <p>Na aanmelding is hij of zij automatisch lid van deze groep.</p>
+      body: "<p>Hier kun je iemand die nog geen lid is uitnodigen voor de groep<b>%{group}</b>.</p> <p>Na aanmelding is hij of zij automatisch lid van deze groep.</p>"
       title: Iemand uitnodigen
     new:
       action: Uitnodiging versturen
-      body: <p>Hier kun je iemand die nog geen lid is, uitnodigen voor de groep <b>%{group}</b>.</p>
+      body: "<p>Hier kun je iemand die nog geen lid is, uitnodigen voor de groep <b>%{group}</b>.</p>"
     success: Persoon is uitgenodigd.
   js:
     ordering:
       confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
   layouts:
     email:
-      footer_1_separator: --
+      footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
@@ -984,13 +1002,13 @@ nl:
       logout: Uitloggen
       ordergroup: Mijn huishouden
       profile: Profiel aanpassen
-    logo: <span>food</span>soft
+    logo: "<span>food</span>soft"
   lib:
     order_pdf:
       page: Pagina %{number}
   login:
     accept_invitation:
-      body: <p>Je bent uitgenodigd als lid voor foodcoop %{foodcoop} in de groep <b>%{group}</b>.</p> <p>Als je wilt meedoen, vul dan dit formulier in.</p> <p>Natuurlijk zullen we je informatie niet delen met anderen. Je kunt zelf aangeven, welke informatie voor andere leden beschikbaar is (maar beheerders hebben daar altijd toegang toe).</p>
+      body: "<p>Je bent uitgenodigd als lid voor foodcoop %{foodcoop} in de groep <b>%{group}</b>.</p> <p>Als je wilt meedoen, vul dan dit formulier in.</p> <p>Natuurlijk zullen we je informatie niet delen met anderen. Je kunt zelf aangeven, welke informatie voor andere leden beschikbaar is (maar beheerders hebben daar altijd toegang toe).</p>"
       submit: Foodsoft account aanmaken
       title: Uitnodiging voor %{name}
     controller:
@@ -1004,17 +1022,17 @@ nl:
       update_password:
         notice: Je wachtwoord is veranderd. Nu kun je weer inloggen.
     forgot_password:
-      body: <p>Geen probleem, je kunt hier een nieuw wachtwoord instellen.</p> <p>Vul het emailadres in waarmee je je hebt geregistreerd, dan krijg je een email met verdere instructies.</p>
+      body: "<p>Geen probleem, je kunt hier een nieuw wachtwoord instellen.</p> <p>Vul het emailadres in waarmee je je hebt geregistreerd, dan krijg je een email met verdere instructies.</p>"
       submit: Nieuw wachtwoord aanvragen
       title: Wachtwoord vergeten?
     new_password:
-      body: <p>Geef nieuw wachtwoord voor <b>%{user}</b></p>
+      body: "<p>Geef nieuw wachtwoord voor <b>%{user}</b></p>"
       submit: Nieuw wachtwoord opslaan
       title: Nieuw wachtwoord
   mailer:
-    dateformat: '%d %b'
+    dateformat: "%d %b"
     feedback:
-      header: '%{user} schreef op %{date}:'
+      header: "%{user} schreef op %{date}:"
       subject: Feedback van %{email}
     invite:
       subject: Uitnodiging voor de foodcoop
@@ -1096,8 +1114,8 @@ nl:
     messages:
       reply: Antwoorden
     model:
-      reply_header: '%{user} schreef op %{when}:'
-      reply_indent: '> %{line}'
+      reply_header: "%{user} schreef op %{when}:"
+      reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
       list:
@@ -1185,7 +1203,7 @@ nl:
     index:
       title: Huishoudens
     model:
-      error_single_group: '%{user} behoort al tot een ander huishouden'
+      error_single_group: "%{user} behoort al tot een ander huishouden"
       invalid_balance: is geen geldig nummer
   orders:
     articles:
@@ -1262,8 +1280,8 @@ nl:
       confirm_end: |-
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
-      description1: '%{state} bestelling van %{supplier}, geopend door %{who}, open van %{starts} tot %{ends}.'
-      description2: '%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto).'
+      description1: "%{state} bestelling van %{supplier}, geopend door %{who}, open van %{starts} tot %{ends}."
+      description2: "%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto)."
       download:
         article_pdf: Artikelen PDF
         download_file: Bestand downloaden
@@ -1290,10 +1308,10 @@ nl:
     update:
       notice: De bestelling is bijgewerkt.
     update_order_amounts:
-      msg1: '%{count} artikelen (%{units} eenheden) bijgewerkt'
-      msg2: '%{count} (%{units}) naar tolerantie'
+      msg1: "%{count} artikelen (%{units} eenheden) bijgewerkt"
+      msg2: "%{count} (%{units}) naar tolerantie"
       msg3: 
-      msg4: '%{count} (%{units}) overgebleven'
+      msg4: "%{count} (%{units}) overgebleven"
   pages:
     all:
       new_page: Nieuwe pagina maken
@@ -1345,9 +1363,9 @@ nl:
     new:
       title: Nieuwe wiki pagina
     page_list_item:
-      date_format: '%a, %d %B %Y %H:%M:%S'
+      date_format: "%a, %d %B %Y %H:%M:%S"
     show:
-      date_format: '%d-%m-%y %H:%M'
+      date_format: "%d-%m-%y %H:%M"
       delete: Pagina verwijderen
       delete_confirm: 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
       edit: Pagina bewerken
@@ -1360,9 +1378,9 @@ nl:
       notice: Pagina is bijgewerkt.
     version:
       author: 'Auteur: %{user}'
-      date_format: '%a, %d-%m-%Y, %H:%M'
+      date_format: "%a, %d-%m-%Y, %H:%M"
       revert: Deze versie terugzetten
-      title: '%{title} - versie %{version}'
+      title: "%{title} - versie %{version}"
       title_version: Versie
       view_current: Huidige versie bekijken
   sessions:
@@ -1419,7 +1437,7 @@ nl:
         copy:
           name: Wijzigen alsjeblieft
         edit_stock_article:
-          price: <ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>
+          price: "<ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>"
       supplier:
         min_order_quantity: De minimum bestelhoeveelheid wordt getoond bij het bestellen en is bedoeld om leden te motiveren genoeg te bestellen.
       task:
@@ -1452,7 +1470,7 @@ nl:
             fr: Frans
             nl: Nederlands
     required:
-      mark: '*'
+      mark: "*"
       text: verplicht
     'yes': Ja
   stock_takings:
@@ -1489,7 +1507,7 @@ nl:
       notice: Inventarisatie is bijgewerkt.
   stockit:
     check:
-      not_empty: '%{name} kon niet worden verwijderd, de inventaris is niet leeg.'
+      not_empty: "%{name} kon niet worden verwijderd, de inventaris is niet leeg."
     copy:
       title: kopieer het voorraadartikel
     create:
@@ -1551,7 +1569,7 @@ nl:
       import: Artikelen kiezen uit lijst
     shared_supplier_note: Leverancier is verbonden met de externe database.
     shared_suppliers:
-      body: <p>Hier kun je leveranciers in de externe database zien.</p> <p>Als je een externe leverancier importeert, wordt er een nieuwe leverancier aangemaakt die verbonden is met de externe database.</p>
+      body: "<p>Hier kun je leveranciers in de externe database zien.</p> <p>Als je een externe leverancier importeert, wordt er een nieuwe leverancier aangemaakt die verbonden is met de externe database.</p>"
       subscribe: Importeren
       subscribe_again: Nogmaals importeren
       supplier: Leverancier
@@ -1575,7 +1593,7 @@ nl:
       notice: Taak is verwijderd
     edit:
       title: Taak bewerken
-      warning_periodic: <strong>Opgelet:</strong> deze taak is onderdeel van een <em>wekelijkse taak</em>. Wanneer deze opslaat, zal de uitzondering als een normale taak worden opgeslagen.
+      warning_periodic: "<strong>Opgelet:</strong> deze taak is onderdeel van een <em>wekelijkse taak</em>. Wanneer deze opslaat, zal de uitzondering als een normale taak worden opgeslagen."
     error_not_found: Geen werkgroep gevonden
     form:
       search:
@@ -1595,7 +1613,7 @@ nl:
       mark_done: Taak als gedaan markeren
       reject_task: Taak laten vallen
       who: Wie doet het?
-      who_hint: (Hoeveel zijn er nog nodig?)
+      who_hint: "(Hoeveel zijn er nog nodig?)"
     nav:
       all_tasks: Alle taken
       archive: Gedane taken (archief)
@@ -1613,7 +1631,7 @@ nl:
       confirm_delete_group: Deze en alle volgende taken echt verwijderen?
       confirm_delete_single: Weet je zeker dat je deze taak wilt verwijderen?
       delete_group: Deze en volgende taken verwijderen
-      hours: '%{count}u'
+      hours: "%{count}u"
       mark_done: Als gedaan markeren
       reject_task: Taak laten vallen
       title: Taak bekijken
@@ -1636,7 +1654,7 @@ nl:
     delete: Verwijder
     edit: Bewerk
     marks:
-      close: '&times;'
+      close: "&times;"
       success: <i class="icon icon-ok"></i>
     or_cancel: of annuleren
     please_wait: Een moment alstublieft...
@@ -1644,11 +1662,11 @@ nl:
     show: Tonen
   views:
     pagination:
-      first: '&laquo;'
-      last: '&raquo;'
-      next: '&rsaquo;'
-      previous: '&lsaquo;'
-      truncate: '...'
+      first: "&laquo;"
+      last: "&raquo;"
+      next: "&rsaquo;"
+      previous: "&lsaquo;"
+      truncate: "..."
   workgroups:
     edit:
       title: Werkgroep bewerken

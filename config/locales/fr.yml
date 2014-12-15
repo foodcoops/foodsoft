@@ -72,7 +72,7 @@ fr:
         subject: Sujet
       order:
         closed_by: Décompté par
-        created_by: Établi par
+        created_by: "Établi par"
         ends: Clôture le
         name: Fournisseur-e
         note: Note
@@ -145,7 +145,7 @@ fr:
         name: Activité
         required_users: Nombre de personnes nécessaires
         user_list: Responsables inscritEs
-        workgroup: Équipe
+        workgroup: "Équipe"
       user:
         email: Email
         first_name: Prénom
@@ -158,8 +158,8 @@ fr:
         password_confirmation: Confirmation du mot de passe
         phone: Téléphone
         workgroup:
-          one: Équipe
-          other: Équipes
+          one: "Équipe"
+          other: "Équipes"
       workgroup:
         description: Description
         name: Nom
@@ -184,7 +184,7 @@ fr:
         task:
           attributes:
             done:
-              exclusion: répétition invalide pour un boulot déjà effectué
+              exclusion: répétition hebdomadaire invalide pour un boulot déjà effectué
     models:
       article: Article
       article_category: Catégorie
@@ -201,7 +201,7 @@ fr:
       supplier: Fournisseur-e
       task: Boulot
       user: Membre
-      workgroup: Équipe
+      workgroup: "Équipe"
   admin:
     access_to: accès à
     base:
@@ -234,6 +234,8 @@ fr:
         pdf_title: 
       tab_messages:
         emails_title: 
+      tab_tasks:
+        periodic_title: 
       tabs:
         title: 
       update:
@@ -254,7 +256,7 @@ fr:
         new_ordergroups: créées
         second_paragraph: 'Attention à bien noter la <em>différence entre une équipe et une cellule</em>: chaque membre fait partie d''une cellule, qui possède un certain crédit servant à payer les commandes, tandis qu''une <em> %{url} </em> (par exemple l''équipe distribution) s''occupe des boulots utiles à la boufcoop. Les membres appartiennent toujours à une et une seule cellule, mais peuvent faire partie de plusieurs équipes.'
         title: Cellules
-        workgroup: équipe
+        workgroup: "équipe"
       new:
         title: Définir une nouvelle cellule
       show:
@@ -264,6 +266,8 @@ fr:
         title: Cellule %{name}
     search_placeholder: nom ...
     users:
+      controller:
+        sudo_done: 
       edit:
         title: modifier les données sur le_la membre
       index:
@@ -275,11 +279,13 @@ fr:
         title: Ajouter unE nouveLLE_eau membre
       show:
         confirm_delete: Veux-tu vraiment expulser %{user}?
+        confirm_sudo: 
         groupabos: Participation à des équipes
         member_since: Membre depuis %{time}
         person: Personne
         preference: Préférences
         send_message: Envoyer un message
+        sudo: 
     workgroups:
       destroy:
         error: 'Cette équipe n''a pas pu être supprimée: %{error}'
@@ -295,13 +301,13 @@ fr:
         new_workgroups: nouvelles équipes
         ordergroup: cellule
         second_paragraph: 'Attention à bien noter la <em>différence entre une équipe et une cellule</em>: chaque membre fait partie d''une <em>%{url}</em>, qui possède un certain crédit servant à payer les commandes, tandis qu''une équipe (par exemple l''équipe distribution) s''occupe des boulots utiles à la boufcoop. Les membres appartiennent toujours à une et une seule cellule, mais peuvent faire partie de plusieurs équipes.'
-        title: Équipes
+        title: "Équipes"
       new:
         title: Définir une nouvelle équipe
       show:
         confirm: T'es sûrE de ton coup?
         edit: Modifier les données sur l'équipe et/ou ses membres
-        title: Équipe %{name}
+        title: "Équipe %{name}"
       workgroups:
         members: membres
         name: nom
@@ -343,16 +349,16 @@ fr:
       unit_quantity_short: U/L
     controller:
       create_from_upload:
-        notice: '%{count} nouveaux produits on été sauvegardés.'
+        notice: "%{count} nouveaux produits on été sauvegardés."
       error_invalid: La description des produits comporte des erreurs.
       error_nosel: Aucun produit n'a été sélectionné
-      error_parse: '%{msg} ... à la ligne %{line}'
+      error_parse: "%{msg} ... à la ligne %{line}"
       error_update: 'Une erreur s''est produite lors de la mise à jour du produit "%{article}": %{msg}'
       parse_upload:
-        notice: '%{count} produits ont été examinés avec succès.'
+        notice: "%{count} produits ont été examinés avec succès."
       sync:
         notice: Le catalogue est à jour
-        shared_alert: '%{supplier} n''est pas dans l''annuaire mutualisé.'
+        shared_alert: "%{supplier} n'est pas dans l'annuaire mutualisé."
       update_all:
         notice: Les produits et les prix ont été mis à jour.
       update_sel:
@@ -364,7 +370,7 @@ fr:
         notice: Les produits et les prix ont été mis à jour.
     destroy_active_article:
       drop: supprimer
-      note: '%{article} apparaît dans des listes de commande en cours et ne peut donc être supprimé. Il faut d''abord %{drop_link} des listes de commande.'
+      note: "%{article} apparaît dans des listes de commande en cours et ne peut donc être supprimé. Il faut d'abord %{drop_link} des listes de commande."
     edit_all:
       note: 'Les champs obligatoires sont: le nom, l''unité, le prix HT et le numéro de commande.'
       submit: Mettre à jour tous les produits
@@ -394,7 +400,7 @@ fr:
       title: Produits de %{supplier} (%{count})
       upload: Transférer les produits
     model:
-      error_in_use: '%{article} ne peut pas être supprimé car il fait partie d''une liste de commande en cours!'
+      error_in_use: "%{article} ne peut pas être supprimé car il fait partie d'une liste de commande en cours!"
       error_nosel: Aucun produit n'a été sélectionné
     parse_upload:
       body: |-
@@ -408,7 +414,7 @@ fr:
         body: 'Les produits suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
         body_ignored:
           one: Un produit sans numéro de commande a été ignoré.
-          other: '%{count} produits sans numéro de commande ont été ignorés.'
+          other: "%{count} produits sans numéro de commande ont été ignorés."
         body_skip: Aucun produi à supprimer.
         title: Exclure de la liste...
       price_short: Prix unitaire
@@ -420,18 +426,18 @@ fr:
         title: Mettre à jour...
         update_msg:
           one: Un article doit être mis à jour.
-          other: '%{count} produits doivent être mis à jour.'
+          other: "%{count} produits doivent être mis à jour."
       upnew:
         body_count: 
         title: 
     upload:
       body: 
       fields:
-        reserved: (Reservé)
+        reserved: "(Reservé)"
         status: Statut (x=exclu)
       file_label: Merci de choisir un fichier compatible
       submit: Transférer le fichier
-      title: '%{supplier} / Transférer les données sur les produits'
+      title: "%{supplier} / Transférer les données sur les produits"
   config:
     hints:
       applepear_url: 
@@ -451,6 +457,11 @@ fr:
       mailing_list_subscribe: 
       minimum_balance: 
       name: 
+      order_schedule:
+        ends:
+          recurr: 
+          time: 
+        initial: 
       page_footer: 
       pdf_add_page_breaks:
         order_by_articles: 
@@ -459,6 +470,8 @@ fr:
       pdf_page_size: 
       price_markup: 
       stop_ordering_under: 
+      tasks_period_days: 
+      tasks_upfront_days: 
       tax_default: 
       tolerance_is_costly: 
       use_apple_points: 
@@ -489,12 +502,19 @@ fr:
       mailing_list_subscribe: 
       minimum_balance: 
       name: 
+      order_schedule:
+        ends:
+          recurr: 
+          time: 
+        initial: 
       page_footer: 
       pdf_add_page_breaks: 
       pdf_font_size: 
       pdf_page_size: 
       price_markup: 
       stop_ordering_under: 
+      tasks_period_days: 
+      tasks_upfront_days: 
       tax_default: 
       time_zone: 
       tolerance_is_costly: 
@@ -531,7 +551,7 @@ fr:
     index:
       confirm_delete: T'es sûrE de ton coup?
       new_delivery: Approvisionner le cellier par %{supplier}
-      title: '%{supplier}/Réapprovisionnements'
+      title: "%{supplier}/Réapprovisionnements"
     invoice_amount: Montant de la facture
     invoice_net_amount: Montant HT de la facture
     new:
@@ -596,7 +616,7 @@ fr:
       title: 'Tableau de répartition pour la commande: %{name}; clôturée le %{date}'
       total:
         one: Un seul produit
-        other: '%{count} produits au total'
+        other: "%{count} produits au total"
   errors:
     general: Un problème a été rencontré.
     general_again: Une erreur s'est produite. Merci de réessayer.
@@ -696,7 +716,7 @@ fr:
           notice: Les transactions ont été sauvegardées.
       index:
         balance: 'Solde: %{balance}'
-        last_updated_at: (dernière mise à jour il y a %{when})
+        last_updated_at: "(dernière mise à jour il y a %{when})"
         new_transaction: Ajouter une nouvelle transaction
         title: Relevé de compte pour %{name}
       index_collection:
@@ -720,7 +740,7 @@ fr:
       end: Fin
       everything_cleared: Super, tout est a déjà été décompté!
       last_transactions: Dernières transactions
-      open_transactions: à décompter
+      open_transactions: "à décompter"
       show_all: tout afficher
       title: Espace trésorerie
       unpaid_invoices: Factures à régler
@@ -757,13 +777,11 @@ fr:
       index:
         name: Rechercher...
         only_active: Seulement les cellules en activité
-        only_active_desc: (ayant commandé au moins une fois au cours des 3 derniers mois)
+        only_active_desc: "(ayant commandé au moins une fois au cours des 3 derniers mois)"
         title: Cellules
     users:
       index:
-        body: |-
-          <p>Cette page sert à envoyer des messages aux autres membres de la coop.</p>
-          <p>Si tu veux que tes coordonnées soient visibles par les autres, il faut le spécifier dans tes %{profile_link}. </p>
+        body: "<p>Cette page sert à envoyer des messages aux autres membres de la coop. Si tu veux que tes coordonnées soient visibles par les autres, il faut le spécifier dans tes %{profile_link}. </p>"
         ph_name: Nom ...
         ph_ordergroup: Cellule ...
         profile_link: préférences
@@ -777,7 +795,7 @@ fr:
         body: |-
           <p>Seuls les membres d'une équipe peuvent la modifier.</p>
           <p>Tu peux rejoindre une équipe en contactant un de ses membres.</p>
-        title: Équipes
+        title: "Équipes"
       workgroup:
         edit: Modifier la cellule
         show_tasks: Afficher tous les boulots
@@ -799,7 +817,7 @@ fr:
     errors:
       closed: La commande est déjà clôturée.
       no_member: Tu n'es encore membre d'aucune cellule.
-      notfound: ' Mauvaise adresse, ce n''est pas ta commande.'
+      notfound: " Mauvaise adresse, ce n'est pas ta commande."
     form:
       action_save: Enregistrer ta commande
       new_funds: Nouveau solde
@@ -874,7 +892,7 @@ fr:
       new_invoice: Ajouter une nouvelle facture
       show_invoice: Afficher la facture
     messages:
-      write_message: Écrire un message
+      write_message: "Écrire un message"
     orders:
       old_price: Ancien prix
       option_choose: Choix d'un-e fournisseur-e
@@ -887,7 +905,7 @@ fr:
         create: Envoyer un message
     tasks:
       required_users: Il manque encore %{count} camarades!
-      task_title: '%{name} (%{duration}h)'
+      task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
       desc: |-
@@ -901,12 +919,12 @@ fr:
         (ce seuil est fixé par la coop)
     changes_saved: Les modifications ont été sauvegardées.
     index:
-      due_date_format: '%A, %d. %b'
+      due_date_format: "%A, %d. %b"
       messages:
         title: Derniers messages reçus
         view_all: Afficher tous les messages
       my_ordergroup:
-        funds: '| Crédit disponible:'
+        funds: "| Crédit disponible:"
         last_update: La dernière mise à jour date du %{when}
         title: Ta cellule
         transactions:
@@ -939,8 +957,8 @@ fr:
         title: Tu fais partie des équipes
       title: Ton profil
       user:
-        since: '(Membre depuis: %{when})'
-        title: '%{user}'
+        since: "(Membre depuis: %{when})"
+        title: "%{user}"
     start_nav:
       admin: Administration
       finances:
@@ -962,7 +980,7 @@ fr:
         title: Gérer les produits
       tasks: Ton boulot
       title: Aller à...
-      write_message: Écrire un message
+      write_message: "Écrire un message"
   invites:
     errors:
       already_member: est déjà membre de la Boufcoop.
@@ -973,14 +991,14 @@ fr:
       title: Engrainer une personne
     new:
       action: Engrainer!
-      body: <p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>
+      body: "<p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>"
     success: La_le membre a été engrainéE avec succès!
   js:
     ordering:
       confirm_change: Les changements apportés à cette commande vont être perdus. Est-ce que tu veux vraiment continuer?
   layouts:
     email:
-      footer_1_separator: --
+      footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Boufcoop: %{url}'
       footer_4_help: 'Aide: %{url}'
@@ -1027,11 +1045,11 @@ fr:
       submit: Demander un nouveau mot de passe
       title: Mot de passe oublié?
     new_password:
-      body: <p>Merci de saisir le nouveau mot de passe souhaité pour <b>%{user}</b></p>
+      body: "<p>Merci de saisir le nouveau mot de passe souhaité pour <b>%{user}</b></p>"
       submit: Sauvegarder le nouveau mot de passe
       title: Nouveau mot de passe
   mailer:
-    dateformat: '%d %b'
+    dateformat: "%d %b"
     feedback:
       header: 'Le %{date}, %{user} a écrit:'
       subject: Retour de %{email}
@@ -1106,7 +1124,7 @@ fr:
       reply: Répondre
     model:
       reply_header: 'Le %{when}, %{user} a écrit:'
-      reply_indent: '> %{line}'
+      reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
       list:
@@ -1150,7 +1168,7 @@ fr:
       ordergroups: Cellules
       title: Administration
       users: Membres
-      workgroups: Équipes
+      workgroups: "Équipes"
     articles:
       categories: Catégories
       stock: Gestion du cellier
@@ -1177,7 +1195,7 @@ fr:
       all_pages: Toutes les pages
       home: Page d'accueil
       title: Wiki
-    workgroups: Équipes
+    workgroups: "Équipes"
   number:
     percentage:
       format:
@@ -1194,7 +1212,7 @@ fr:
     index:
       title: Cellule
     model:
-      error_single_group: '%{user} fait déjà partie d''une autre cellule'
+      error_single_group: "%{user} fait déjà partie d'une autre cellule"
       invalid_balance: n'est pas un nombre valide
   orders:
     articles:
@@ -1270,7 +1288,7 @@ fr:
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment clôturer la commande %{order}? Pas d'annulation possible.
       description1: Commande %{state} de %{supplier} créée par %{who}, ouverte du %{starts} au %{ends}.
-      description2: '%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)'
+      description2: "%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)"
       download:
         article_pdf: Liste des articles en PDF
         download_file: Télécharger
@@ -1297,10 +1315,10 @@ fr:
     update:
       notice: La commande a été mise à jour.
     update_order_amounts:
-      msg1: '%{count} articles (%{units} unités) ont été mis à jour'
-      msg2: '%{count} (%{units}) après prise en compte des tolérances'
+      msg1: "%{count} articles (%{units} unités) ont été mis à jour"
+      msg2: "%{count} (%{units}) après prise en compte des tolérances"
       msg3: 
-      msg4: '%{count} (%{units}) restants'
+      msg4: "%{count} (%{units}) restants"
   pages:
     all:
       new_page: Créer une nouvelle page
@@ -1335,7 +1353,7 @@ fr:
         list_item_1: Premier item
         list_item_2: Deuxième item
         noformat: Pas de formatage
-        ordered_list: Énumérations
+        ordered_list: "Énumérations"
         section_block: Format de paragraphe
         section_character: Format de charactère
         section_link: Format des liens
@@ -1352,9 +1370,9 @@ fr:
     new:
       title: Ajouter une nouvelle page au Wiki
     page_list_item:
-      date_format: '%a, %d. %B %Y %H:%M:%S'
+      date_format: "%a, %d. %B %Y %H:%M:%S"
     show:
-      date_format: '%d.%m.%y %H:%M'
+      date_format: "%d.%m.%y %H:%M"
       delete: Supprimer la page
       delete_confirm: Attention, tous les contenus seront aussi supprimés. T'es sûrE de ton coup?
       edit: Modifier la page
@@ -1367,9 +1385,9 @@ fr:
       notice: La page a été mise à jour
     version:
       author: 'Auteur: %{user}'
-      date_format: '%a, %d.%m.%Y, %H:%M heure'
+      date_format: "%a, %d.%m.%Y, %H:%M heure"
       revert: Revenir à cette version
-      title: '%{title} - Version %{version}'
+      title: "%{title} - Version %{version}"
       title_version: Versio
       view_current: Afficher la version actuelle
   sessions:
@@ -1426,7 +1444,7 @@ fr:
         copy:
           name: Merci de modifier
         edit_stock_article:
-          price: <ul><li>Modification du prix interdite. </li><li>Si nécessaire %{stock_article_copy_link}.</li></ul>
+          price: "<ul><li>Modification du prix interdite. </li><li>Si nécessaire %{stock_article_copy_link}.</li></ul>"
       supplier:
         min_order_quantity: Ce prix minimum sera affiché avec la liste de commande et permet de motiver les membres
       task:
@@ -1459,7 +1477,7 @@ fr:
             fr: Français
             nl: Néerlandais
     required:
-      mark: '*'
+      mark: "*"
       text: requis
     'yes': Oui
   stock_takings:
@@ -1498,7 +1516,7 @@ fr:
       notice: Les données de l'inventaire ont été mises à jour.
   stockit:
     check:
-      not_empty: '%{name} ne peut pas être supprimé, car il y en a encore en stock.'
+      not_empty: "%{name} ne peut pas être supprimé, car il y en a encore en stock."
     copy:
       title: Copier l'article
     create:
@@ -1610,7 +1628,7 @@ fr:
       mark_done: Marquer ce boulot comme étant effectué
       reject_task: Refuser ce boulot
       who: Qui le fait?
-      who_hint: (Combien manquent encore?)
+      who_hint: "(Combien manquent encore?)"
     nav:
       all_tasks: L'agenda de la boufcoop
       archive: Boulots déjà effectués (archives)
@@ -1628,7 +1646,7 @@ fr:
       confirm_delete_group: Veux-tu vraiment supprimer ce boulot hebdomadaire?
       confirm_delete_single: Es-tu sûr de vouloir supprimer ce boulot?
       delete_group: Supprimer ce boulot
-      hours: '%{count}h'
+      hours: "%{count}h"
       mark_done: Marquer comme effectué
       reject_task: Refuser ce boulot
       title: Afficher la description du boulot
@@ -1651,7 +1669,7 @@ fr:
     delete: Supprimer
     edit: Modifier
     marks:
-      close: '&times;'
+      close: "&times;"
       success: <i class="icon icon-ok"></i>
     or_cancel: ou annuler
     please_wait: Merci de patienter...
@@ -1659,17 +1677,17 @@ fr:
     show: Afficher
   views:
     pagination:
-      first: '&laquo;'
-      last: '&raquo;'
-      next: '&rsaquo;'
-      previous: '&lsaquo;'
-      truncate: '...'
+      first: "&laquo;"
+      last: "&raquo;"
+      next: "&rsaquo;"
+      previous: "&lsaquo;"
+      truncate: "..."
   workgroups:
     edit:
       title: Modifier l'équipe
     error_last_admin_group: Impossible de supprimer la dernière cellule avec privilèges administratrices.
     error_last_admin_role: 'Les privilèges administratrices ne peuvent pas être retirés à la dernière cellule qui les possède. '
     index:
-      title: Équipes
+      title: "Équipes"
     update:
       notice: L'équipe a été mise à jour

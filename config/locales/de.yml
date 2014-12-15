@@ -184,7 +184,7 @@ de:
         task:
           attributes:
             done:
-              exclusion: erledigte Aufgaben können nicht wiederholt werden
+              exclusion: erledigte Aufgaben können nicht wöchentlich wiederholt werden
     models:
       article: Artikel
       article_category: Artikelkategorie
@@ -234,6 +234,8 @@ de:
         pdf_title: PDF-Dokumente
       tab_messages:
         emails_title: E-Mails versenden
+      tab_tasks:
+        periodic_title: 
       tabs:
         title: Einstellungen
       update:
@@ -264,6 +266,8 @@ de:
         title: Bestellgruppe %{name}
     search_placeholder: Name ...
     users:
+      controller:
+        sudo_done: 
       edit:
         title: Benutzer/in bearbeiten
       index:
@@ -274,12 +278,14 @@ de:
       new:
         title: Neue/n Benutzer/in anlegen
       show:
-        confirm: Willst du %{user} wirklich rausschmeißen?
+        confirm_delete: Willst du %{user} wirklich rausschmeißen?
+        confirm_sudo: 
         groupabos: Gruppenabos
         member_since: Mitglied seit %{time}
         person: Person
         preference: Einstellungen
         send_message: Nachricht senden
+        sudo: 
     workgroups:
       destroy:
         error: 'Arbeitsgruppe konnte nicht gelöscht werden: %{error}'
@@ -346,13 +352,13 @@ de:
         notice: Es wurden %{count} neue Artikel gespeichert.
       error_invalid: Artikel sind fehlerhaft
       error_nosel: Du hast keine Artikel ausgewählt
-      error_parse: '%{msg} ... in Zeile %{line}'
+      error_parse: "%{msg} ... in Zeile %{line}"
       error_update: 'Es trat ein Fehler beim Aktualisieren des Artikels ''%{article}'' auf: %{msg}'
       parse_upload:
-        notice: '%{count} Artikel sind erfolgreich analysiert.'
+        notice: "%{count} Artikel sind erfolgreich analysiert."
       sync:
         notice: Der Katalog ist aktuell
-        shared_alert: '%{supplier} ist nicht mit einer externen Datenbank verknüpft.'
+        shared_alert: "%{supplier} ist nicht mit einer externen Datenbank verknüpft."
       update_all:
         notice: Alle Artikel und Preise wurden aktualisiert
       update_sel:
@@ -364,7 +370,7 @@ de:
         notice: Alle Artikel und Preise wurden aktualisiert
     destroy_active_article:
       drop: entfernen
-      note: '%{article} wird in laufenden Bestellungen verwendet und kann nicht gelöscht werden. Bitte zuerst den Artikel aus den Bestellungen %{drop_link}.'
+      note: "%{article} wird in laufenden Bestellungen verwendet und kann nicht gelöscht werden. Bitte zuerst den Artikel aus den Bestellungen %{drop_link}."
     edit_all:
       note: 'Pflichtfelder sind: Name, Einheit, (netto) Preis und Bestellnummer.'
       submit: Alle Artikel aktualisieren
@@ -394,10 +400,10 @@ de:
       title: Artikel von %{supplier} (%{count})
       upload: Artikel hochladen
     model:
-      error_in_use: '%{article} kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!'
+      error_in_use: "%{article} kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!"
       error_nosel: Du hast keine Artikel ausgewählt
     parse_upload:
-      body: <p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>
+      body: "<p><i>Bitte überprufe die engelesenen Artikel.</i></p> <p><i>Achtung, momentan gibt es keine Überprüfung auf doppelte Artikel.</i></p>"
       submit: Hochladen
       title: Artikel hochladen
     sync:
@@ -406,7 +412,7 @@ de:
         body: 'Folgende Artikel wurden ausgelistet und werden <b>gelöscht</b>:'
         body_ignored:
           one: Ein Artikel ohne Bestellnummer wurde übersprungen.
-          other: '%{count} Artikel ohne Bestellnummer wurden übersprungen.'
+          other: "%{count} Artikel ohne Bestellnummer wurden übersprungen."
         body_skip: Es müssen keine Artikel gelöscht werden.
         title: Auslisten ...
       price_short: Preis
@@ -418,7 +424,7 @@ de:
         title: Aktualisieren ...
         update_msg:
           one: Ein Artikel muss aktualisiert werden.
-          other: '%{count} Artikel müssen aktualisiert werden.'
+          other: "%{count} Artikel müssen aktualisiert werden."
       upnew:
         body_count:
           one: Es gibt einen neuen Artikel hinzuzufügen.
@@ -427,11 +433,11 @@ de:
     upload:
       body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert. Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden. Als Zeichensatz wird UTF-8 erwartet.</p> <p>Reihenfolge der Spalten:</p>
       fields:
-        reserved: (geschützt)
+        reserved: "(geschützt)"
         status: Status (x=ausgelistet)
       file_label: Bitte wähle eine kompatible Datei aus
       submit: Datei hochladen
-      title: '%{supplier} / Artikel hochladen'
+      title: "%{supplier} / Artikel hochladen"
   config:
     hints:
       applepear_url: Seite, auf der das Äpfel- und Birnensystem für Aufgaben erklärt wird.
@@ -451,6 +457,11 @@ de:
       mailing_list_subscribe: E-Mail Adresse zum Anmelden an die Mailingliste
       minimum_balance: Mitglieder können nur bestellen, wenn ihr Kontostand mindestens diesem Betrag entspricht.
       name: Der Name Deiner Foodcoop
+      order_schedule:
+        ends:
+          recurr: 
+          time: 
+        initial: 
       page_footer: Dies wird in der Fußzeile jeder Seite angezeigt. Wird es leer gelassen, wird die Fußzeile komplett deaktiviert.
       pdf_add_page_breaks:
         order_by_articles: Jeden Artikel auf eine eigene Seite bringen
@@ -459,12 +470,14 @@ de:
       pdf_page_size: Seitengröße für PDF Dokumente, normalerweise "A4"
       price_markup: Prozentsatz, welcher als Aufschlag auf alle Preise addiert wird
       stop_ordering_under: Mitglieder können nur bestellen, wenn sie mindestens diese Anzahl von Apfel-Punkten haben.
+      tasks_period_days: 
+      tasks_upfront_days: 
       tax_default: Standard Mehrwertsteuersatz für neue Artikel
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
-      use_wiki: Änderbare Wiki Seiten aktivieren
+      use_wiki: "Änderbare Wiki Seiten aktivieren"
       webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
     keys:
       applepear_url: Hilfe URL für das Äpfel Punktesystem zum Engagement
@@ -489,12 +502,19 @@ de:
       mailing_list_subscribe: Mailingliste anmelden
       minimum_balance: Minimaler Kontostand
       name: Name
+      order_schedule:
+        ends:
+          recurr: 
+          time: 
+        initial: 
       page_footer: Fußzeile Webseite
       pdf_add_page_breaks: Seitenwechsel
       pdf_font_size: Schriftgrösse
       pdf_page_size: Seitenformat
       price_markup: Foodcoop Marge
       stop_ordering_under: Apfelpunkte Minimum
+      tasks_period_days: 
+      tasks_upfront_days: 
       tax_default: Mehrwertsteuer
       time_zone: Zeitzone
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
@@ -531,7 +551,7 @@ de:
     index:
       confirm_delete: Bist Du sicher?
       new_delivery: Neue Lieferung für %{supplier} anlegen
-      title: '%{supplier}/Lieferungen'
+      title: "%{supplier}/Lieferungen"
     invoice_amount: Rechnungsbetrag
     invoice_net_amount: bereinigter Rechnungsbetrag
     new:
@@ -639,10 +659,10 @@ de:
         invoice_amount: 'Rechnungsbetrag:'
         invoice_date: 'Rechnungsdatum:'
         invoice_number: 'Rechnungsnummer:'
-        minus_refund_calculated: '- Pfand berechnet:'
+        minus_refund_calculated: "- Pfand berechnet:"
         new: neue Rechnung erstellen
         new_body: 'Eine Rechnung für diese Bestellung anlegen:'
-        plus_refund_credited: '+ Pfand gutgeschrieben:'
+        plus_refund_credited: "+ Pfand gutgeschrieben:"
         refund_adjusted_amount: 'pfandbereinigter Betrag:'
       new:
         alert: Achtung, Bestellung wurde schon abgerechnet
@@ -659,7 +679,7 @@ de:
         invoice: Rechnung
         notes_and_journal: Notizen/Protokoll
         summary: Zusammenfassung
-        title: '%{name} abrechnen'
+        title: "%{name} abrechnen"
         view_options: Ansichtsoptionen
       order_article:
         confirm: Bist du sicher?
@@ -694,7 +714,7 @@ de:
           notice: Alle Transaktionen wurden gespeichert.
       index:
         balance: 'Kontostand: %{balance}'
-        last_updated_at: (zuletzt aktualisiert vor %{when})
+        last_updated_at: "(zuletzt aktualisiert vor %{when})"
         new_transaction: Neue Transaktion anlegen
         title: Kontoauszug für %{name}
       index_collection:
@@ -755,11 +775,11 @@ de:
       index:
         name: Name ...
         only_active: Nur aktive
-        only_active_desc: (mindestens einmal in den letzten 3 Monaten bestellt)
+        only_active_desc: "(mindestens einmal in den letzten 3 Monaten bestellt)"
         title: Bestellgruppen
     users:
       index:
-        body: <p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben.</p> <p>Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>
+        body: "<p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben. Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>"
         ph_name: Name ...
         ph_ordergroup: Bestellgruppe ...
         profile_link: Einstellungen
@@ -770,7 +790,7 @@ de:
         invite_new: Neue Mitglieder kannst du %{invite_link} einladen.
         title: Gruppe bearbeiten
       index:
-        body: <p>Das bearbeiten von Gruppen ist nur für Mitglieder der Gruppe möglich.<br/> Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.</p>
+        body: "<p>Das bearbeiten von Gruppen ist nur für Mitglieder der Gruppe möglich.<br/> Wenn du einer Gruppe beitreten willst, dann schreib doch den Mitgliedern eine Nachricht.</p>"
         title: Arbeitsgruppen
       workgroup:
         edit: Gruppe bearbeiten
@@ -854,7 +874,7 @@ de:
   helpers:
     application:
       edit_user: Mitglieder bearbeiten
-      nick_fallback: (kein Benutzername)
+      nick_fallback: "(kein Benutzername)"
       role_admin: Admin
       role_article_meta: Artikel
       role_finance: Finanzen
@@ -879,21 +899,21 @@ de:
         create: Nachricht verschicken
     tasks:
       required_users: Es fehlen %{count} Mitstreiterinnen!
-      task_title: '%{name} (%{duration}h)'
+      task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
       desc: 'Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop. Konkret: Pro %{amount} Bestellsumme solltest Du eine Aufgabe machen!'
       more_info: Mehr Informationen
       points: 'Deine aktueller Äpfelpunktestand: %{points}'
       warning: Achtung, hast Du weniger als %{threshold} Äpfel, darfst Du nicht mehr bestellen!
-    changes_saved: Änderungen wurden gespeichert.
+    changes_saved: "Änderungen wurden gespeichert."
     index:
-      due_date_format: '%A, %d. %b'
+      due_date_format: "%A, %d. %b"
       messages:
         title: Neueste Nachrichten
         view_all: Alle Nachrichten einsehen
       my_ordergroup:
-        funds: '| Verfügbares Guthaben:'
+        funds: "| Verfügbares Guthaben:"
         last_update: Letzte Aktualisiering ist %{when} her
         title: Meine Bestellgruppe
         transactions:
@@ -926,8 +946,8 @@ de:
         title: Du bist Mitglied in folgenden Gruppen
       title: Mein Profil
       user:
-        since: '(Mitglied seit: %{when})'
-        title: '%{user}'
+        since: "(Mitglied seit: %{when})"
+        title: "%{user}"
     start_nav:
       admin: Administration
       finances:
@@ -954,18 +974,18 @@ de:
     errors:
       already_member: ist bereits in Verwendung. Person ist schon Mitglied der Foodcoop.
     modal_form:
-      body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p> <p>Die Person ist dann nach erstmaliger Anmeldung automatisch Mitglied dieser Gruppe.</p>
+      body: "<p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p> <p>Die Person ist dann nach erstmaliger Anmeldung automatisch Mitglied dieser Gruppe.</p>"
       title: Person einladen
     new:
       action: Einlading abschicken
-      body: <p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>
+      body: "<p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>"
     success: Benutzer/in wurde erfolgreich eingeladen.
   js:
     ordering:
-      confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
+      confirm_change: "Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?"
   layouts:
     email:
-      footer_1_separator: --
+      footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
@@ -980,13 +1000,13 @@ de:
       logout: Abmelden
       ordergroup: Meine Bestellgruppe
       profile: Profil bearbeiten
-    logo: <span>food</span>soft
+    logo: "<span>food</span>soft"
   lib:
     order_pdf:
       page: Seite %{number}
   login:
     accept_invitation:
-      body: <p>Du bist eingeladen worden als Mitglied der Gruppe <b>%{group}</b> in der Foodcoop %{foodcoop} mitzumachen.</p> <p>Wenn Du mitmachen möchtest, dann fülle bitte dieses Formular aus.</p> <p>Deine Daten werden selbstverständlich nicht an Dritte, aus was auch immer für Gründen, weitergeben. Du kannst auch entscheiden, wieviel deiner persönlichen Daten für alle einsehbar sein sollen. 'Alle' bedeutet hier alle Foodcoop-Mitglieder. Die Administratoren haben aber jederzeit Zugriff auf deine Daten.</p>
+      body: "<p>Du bist eingeladen worden als Mitglied der Gruppe <b>%{group}</b> in der Foodcoop %{foodcoop} mitzumachen.</p> <p>Wenn Du mitmachen möchtest, dann fülle bitte dieses Formular aus.</p> <p>Deine Daten werden selbstverständlich nicht an Dritte, aus was auch immer für Gründen, weitergeben. Du kannst auch entscheiden, wieviel deiner persönlichen Daten für alle einsehbar sein sollen. 'Alle' bedeutet hier alle Foodcoop-Mitglieder. Die Administratoren haben aber jederzeit Zugriff auf deine Daten.</p>"
       submit: Foodsoft Account erstellen
       title: Einlading in die %{name}
     controller:
@@ -1000,17 +1020,17 @@ de:
       update_password:
         notice: Dein Passwort wurde aktualisiert. Du kannst Dich jetzt anmelden.
     forgot_password:
-      body: <p>Kein Problem, Du kannst dir einfach ein neues Passwort zulegen.</p> <p>Dazu musst hier die E-Mail-Adresse eingeben, mit der Du in der Foodsoft angemeldet bist. Du erhälst dann eine E-Mail mit weiteren Instruktionen.</p>
+      body: "<p>Kein Problem, Du kannst dir einfach ein neues Passwort zulegen.</p> <p>Dazu musst hier die E-Mail-Adresse eingeben, mit der Du in der Foodsoft angemeldet bist. Du erhälst dann eine E-Mail mit weiteren Instruktionen.</p>"
       submit: Neues Passwort anfordern
       title: Passwort vergessen?
     new_password:
-      body: <p>Bitte neues Passwort für <b>%{user}</b> eingeben.</p>
+      body: "<p>Bitte neues Passwort für <b>%{user}</b> eingeben.</p>"
       submit: Neues passwort speichern
       title: Neues Passwort
   mailer:
-    dateformat: '%d. %b'
+    dateformat: "%d. %b"
     feedback:
-      header: '%{user} schrieb am %{date}:'
+      header: "%{user} schrieb am %{date}:"
       subject: Feedback von %{email}
     invite:
       subject: Einlading in die Foodcoop
@@ -1090,8 +1110,8 @@ de:
     messages:
       reply: Antworten
     model:
-      reply_header: '%{user} schrieb am %{when}:'
-      reply_indent: '> %{line}'
+      reply_header: "%{user} schrieb am %{when}:"
+      reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
       list:
@@ -1131,7 +1151,7 @@ de:
   navigation:
     admin:
       config: Einstellungen
-      home: Übersicht
+      home: "Übersicht"
       ordergroups: Bestellgruppen
       title: Administration
       users: Benutzer/innen
@@ -1145,7 +1165,7 @@ de:
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen
-      home: Übersicht
+      home: "Übersicht"
       invoices: Rechnungen
       title: Finanzen
     foodcoop: Foodcoop
@@ -1179,7 +1199,7 @@ de:
     index:
       title: Bestellgruppen
     model:
-      error_single_group: '%{user} ist schon in einer anderen Bestellgruppe'
+      error_single_group: "%{user} ist schon in einer anderen Bestellgruppe"
       invalid_balance: ist keine gültige Zahl
   orders:
     articles:
@@ -1243,7 +1263,7 @@ de:
       rest_to_stock: Rest ins Lager
       submit: Bestellung in Empfang nehmen
       surplus_options: 'Verteilungsoptionen:'
-      title: »%{order}« in Empfang nehmen
+      title: "»%{order}« in Empfang nehmen"
     show:
       action_end: Beenden!
       amounts: 'Netto/Bruttosumme:'
@@ -1256,8 +1276,8 @@ de:
       confirm_end: |-
         Willst Du wirklich die Bestellung %{order} beenden?
         Es gibt kein zurück.
-      description1: '%{state} Bestellung von %{supplier} angelegt von %{who}, läuft von %{starts} bis %{ends}.'
-      description2: '%{ordergroups} haben %{article_count} Artikel mit einem Gesamtwert von %{net_sum} / %{gross_sum} (netto / brutto) bestellt.'
+      description1: "%{state} Bestellung von %{supplier} angelegt von %{who}, läuft von %{starts} bis %{ends}."
+      description2: "%{ordergroups} haben %{article_count} Artikel mit einem Gesamtwert von %{net_sum} / %{gross_sum} (netto / brutto) bestellt."
       download:
         article_pdf: Artikel PDF
         download_file: Download file
@@ -1284,10 +1304,10 @@ de:
     update:
       notice: Die Bestellung wurde aktualisiert.
     update_order_amounts:
-      msg1: '%{count} Artikel (%{units} Einheiten) aktualisiert'
-      msg2: '%{count} (%{units}) Toleranzmenge'
+      msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
+      msg2: "%{count} (%{units}) Toleranzmenge"
       msg3: 
-      msg4: '%{count} (%{units}) übrig'
+      msg4: "%{count} (%{units}) übrig"
   pages:
     all:
       new_page: Neue Seite anlegen
@@ -1317,7 +1337,7 @@ de:
         external_link_ex: Externe Seite
         external_links: Externe Links
         heading: Ebene %{level}
-        headings: Überschriften
+        headings: "Überschriften"
         italic: kursiv
         list_item_1: Erster Punkt
         list_item_2: Zweiter Punkt
@@ -1339,9 +1359,9 @@ de:
     new:
       title: Neue Wikiseite anlegen
     page_list_item:
-      date_format: '%a, %d. %B %Y %H:%M:%S'
+      date_format: "%a, %d. %B %Y %H:%M:%S"
     show:
-      date_format: '%d.%m.%y %H:%M'
+      date_format: "%d.%m.%y %H:%M"
       delete: Seite löschen
       delete_confirm: Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?
       edit: Seite bearbeiten
@@ -1354,9 +1374,9 @@ de:
       notice: Seite wurde aktualisiert
     version:
       author: 'Autor: %{user}'
-      date_format: '%a, %d.%m.%Y, %H:%M Uhr'
+      date_format: "%a, %d.%m.%Y, %H:%M Uhr"
       revert: Auf diese Version zurücksetzen
-      title: '%{title} - Version %{version}'
+      title: "%{title} - Version %{version}"
       title_version: Version
       view_current: Aktuelle Version sehen
   sessions:
@@ -1382,7 +1402,7 @@ de:
     group:
       access: Zugriff auf
       activated: aktiviert
-      apple_limit: Äpfel-Bestellbeschränkung
+      apple_limit: "Äpfel-Bestellbeschränkung"
       deactivated: deaktiviert
     group_form_fields:
       search: Suche ...
@@ -1408,12 +1428,12 @@ de:
         private: Nachricht erscheint nicht im Foodsoft Posteingang
       order_article:
         units_to_order: Wenn Du die Gesamtanzahl gelieferter Gebinde änderst, musst Du auch die individuelle Anzahl der einzelnen Bestellgruppen anpassen, indem Du auf den Artikelnamen klickst. Sie werden nicht automatisch neuberechnet und andernfalls werden den Bestellgruppen Artikel in Rechnung gestellt, die nicht geliefert wurden!
-        update_global_price: Ändert auch den Preis für zukünftige Bestellungen
+        update_global_price: "Ändert auch den Preis für zukünftige Bestellungen"
       stock_article:
         copy:
           name: Bitte ändern
         edit_stock_article:
-          price: <ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>
+          price: "<ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>"
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
       task:
@@ -1446,7 +1466,7 @@ de:
             fr: Französisch
             nl: Niederländisch
     required:
-      mark: '*'
+      mark: "*"
       text: benötigt
     'yes': Ja
   stock_takings:
@@ -1483,7 +1503,7 @@ de:
       notice: Inventur wurde aktualisiert.
   stockit:
     check:
-      not_empty: '%{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null.'
+      not_empty: "%{name} kann nicht gelöscht werden. Der Lagerbestand ist nicht null."
     copy:
       title: Lagerartikel kopieren
     create:
@@ -1545,7 +1565,7 @@ de:
       import: Artikel zum Import auswählen
     shared_supplier_note: Lieferantin ist mit externer Datenbank verknüpft.
     shared_suppliers:
-      body: <p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>
+      body: "<p>Hier werden die Lieferantinnen der externen Datenbank angezeigt.</p> <p>Ihr könnt externe Lieferantinnen importieren, indem ihr sie einfach abonniert. (siehe unten)</p> <p>Damit wird eine neue Lieferantin angelegt und mit der externen Datenbank verknüpft.</p>"
       subscribe: abonnieren
       subscribe_again: erneut abonnieren
       supplier: Lieferantin
@@ -1569,7 +1589,7 @@ de:
       notice: Aufgabe wurde gelöscht
     edit:
       title: Aufgabe bearbeiten
-      warning_periodic: <strong>Warnung:</strong> Diese Aufgabe ist Teil einer Gruppe von <em>wöchentlichen Aufgaben</em>. Beim Speichern wird sie aus der Gruppe ausgeschlossen und in eine <em>gewöhnliche Aufgabe</em> umgewandelt.
+      warning_periodic: "<strong>Warnung:</strong> Diese Aufgabe ist Teil einer Gruppe von <em>wöchentlichen Aufgaben</em>. Beim Speichern wird sie aus der Gruppe ausgeschlossen und in eine <em>gewöhnliche Aufgabe</em> umgewandelt."
     error_not_found: Keine Arbeitsgruppe gefunden
     form:
       search:
@@ -1589,7 +1609,7 @@ de:
       mark_done: Aufgabe als erledigt markieren
       reject_task: Aufgabe ablehnen
       who: Wer machts?
-      who_hint: (Wie viele werden noch benötigt?)
+      who_hint: "(Wie viele werden noch benötigt?)"
     nav:
       all_tasks: Alle Aufgaben
       archive: Erledigte Aufgaben (Archiv)
@@ -1607,7 +1627,7 @@ de:
       confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
       confirm_delete_single: Die Aufgabe wirklich löschen?
       delete_group: Aufgabe und folgende löschen
-      hours: '%{count}h'
+      hours: "%{count}h"
       mark_done: Als erledigt markieren
       reject_task: Aufgabe ablehnen
       title: Aufgabe anzeigen
@@ -1630,7 +1650,7 @@ de:
     delete: Löschen
     edit: Bearbeiten
     marks:
-      close: '&times;'
+      close: "&times;"
       success: <i class="icon icon-ok"></i>
     or_cancel: oder abbrechen
     please_wait: Bitte warten...
@@ -1638,11 +1658,11 @@ de:
     show: Anzeigen
   views:
     pagination:
-      first: '&laquo;'
-      last: '&raquo;'
-      next: '&rsaquo;'
-      previous: '&lsaquo;'
-      truncate: '...'
+      first: "&laquo;"
+      last: "&raquo;"
+      next: "&rsaquo;"
+      previous: "&lsaquo;"
+      truncate: "..."
   workgroups:
     edit:
       title: Arbeitsgruppe bearbeiten
