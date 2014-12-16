@@ -46,20 +46,19 @@ class HomeController < ApplicationController
       @financial_transactions = @financial_transactions.where("note LIKE ?", "%#{params[:query]}%") if params[:query].present?
 
     else
-      redirect_to root_path, :alert => I18n.t('home.no_ordergroups')
+      redirect_to root_path, alert: I18n.t('home.no_ordergroups')
     end
   end
 
   # cancel personal memberships direct from the myProfile-page
   def cancel_membership
-    membership = Membership.find(params[:membership_id])
-    if membership.user == current_user
-      membership.destroy
-      flash[:notice] = I18n.t('home.ordergroup_cancelled', :group => membership.group.name)
+    if params[:membership_id]
+      membership = @current_user.memberships.find!(params[:membership_id])
     else
-      flash[:error] = I18n.t('errors.general')
+      membership = @current_user.memberships.find_by_group_id!(params[:group_id])
     end
-    redirect_to my_profile_path
+    membership.destroy
+    redirect_to my_profile_path, notice: I18n.t('home.ordergroup_cancelled', :group => membership.group.name)
   end
 
 end
