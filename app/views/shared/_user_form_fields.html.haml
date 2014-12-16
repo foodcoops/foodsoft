@@ -13,7 +13,9 @@
 
 - if local_assigns[:with_address] && (f.object.ordergroup || f.object.new_record?)
   = f.fields_for [:ordergroup, f.object.ordergroup || Ordergroup.new] do |ogf|
-    = ogf.input :contact_address, label: t('activerecord.attributes.ordergroup.contact_address'), required: false
+    - address_hint = f.object.ordergroup.users.count > 1 ? t('.contact_address_hint') : nil
+    = ogf.input :contact_address, label: t('activerecord.attributes.ordergroup.contact_address'), required: false,
+                input_html: { title: address_hint, data: {toggle: 'tooltip', placement: 'right'} }
 
 = f.simple_fields_for :settings_attributes do |s|
   = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|

@@ -1423,6 +1423,8 @@ en:
       title: Current orders
       total_sum: Total sum
       who_ordered: Who ordered?
+    user_form_fields:
+      contact_address_hint: The address of your ordergroup. If you update this, it changes for other members of the ordergroup as well.
     workgroup_members:
       title: Group memberships
   simple_form:
