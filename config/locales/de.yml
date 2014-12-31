@@ -235,7 +235,7 @@ de:
       tab_messages:
         emails_title: E-Mails versenden
       tab_tasks:
-        periodic_title: 
+        periodic_title: Wiederkehrende Aufgaben
       tabs:
         title: Einstellungen
       update:
@@ -267,7 +267,7 @@ de:
     search_placeholder: Name ...
     users:
       controller:
-        sudo_done: 
+        sudo_done: Du bist jetzt als Benutzer %{user} angemeldet. Sei vorsichtig und melde dich ab, wenn du fertig bist!
       edit:
         title: Benutzer/in bearbeiten
       index:
@@ -278,14 +278,14 @@ de:
       new:
         title: Neue/n Benutzer/in anlegen
       show:
-        confirm_delete: Willst du %{user} wirklich rausschmeißen?
-        confirm_sudo: 
+        confirm_delete: Willst du den Benutzer %{user} wirklich löschen?
+        confirm_sudo: Wenn du fortsetzt, dann wirst du als Benutzer %{user} angemeldet. Sei vorsichtig und melde dich ab, wenn du fertig bist!
         groupabos: Gruppenabos
         member_since: Mitglied seit %{time}
         person: Person
         preference: Einstellungen
         send_message: Nachricht senden
-        sudo: 
+        sudo: Als anderer Benutzer anmelden
     workgroups:
       destroy:
         error: 'Arbeitsgruppe konnte nicht gelöscht werden: %{error}'
@@ -459,9 +459,9 @@ de:
       name: Der Name Deiner Foodcoop
       order_schedule:
         ends:
-          recurr: 
-          time: 
-        initial: 
+          recurr: Standarddatum für den Bestellschluss
+          time: Standardzeit für den Bestellschluss
+        initial: Bestellungen starten an diesem Datum
       page_footer: Dies wird in der Fußzeile jeder Seite angezeigt. Wird es leer gelassen, wird die Fußzeile komplett deaktiviert.
       pdf_add_page_breaks:
         order_by_articles: Jeden Artikel auf eine eigene Seite bringen
@@ -470,8 +470,8 @@ de:
       pdf_page_size: Seitengröße für PDF Dokumente, normalerweise "A4"
       price_markup: Prozentsatz, welcher als Aufschlag auf alle Preise addiert wird
       stop_ordering_under: Mitglieder können nur bestellen, wenn sie mindestens diese Anzahl von Apfel-Punkten haben.
-      tasks_period_days: 
-      tasks_upfront_days: 
+      tasks_period_days: Anzahl der Tage zwischen Bestellungen (Standard 7 - für eine Woche)
+      tasks_upfront_days: Anzahl der Tage, für welche du im Voraus wiederkehrende Aufgaben definieren möchtest
       tax_default: Standard Mehrwertsteuersatz für neue Artikel
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
@@ -504,17 +504,17 @@ de:
       name: Name
       order_schedule:
         ends:
-          recurr: 
-          time: 
-        initial: 
+          recurr: Bestellschluss
+          time: Zeit
+        initial: Bestellstart
       page_footer: Fußzeile Webseite
       pdf_add_page_breaks: Seitenwechsel
       pdf_font_size: Schriftgrösse
       pdf_page_size: Seitenformat
       price_markup: Foodcoop Marge
       stop_ordering_under: Apfelpunkte Minimum
-      tasks_period_days: 
-      tasks_upfront_days: 
+      tasks_period_days: Zeitintervall
+      tasks_upfront_days: Im Voraus
       tax_default: Mehrwertsteuer
       time_zone: Zeitzone
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
@@ -1414,6 +1414,8 @@ de:
       title: Laufende Bestellungen
       total_sum: Gesamtsumme
       who_ordered: Wer hat bestellt?
+    user_form_fields:
+      contact_address_hint: Die Adresse deiner Bestellgruppe. Wenn du sie aktualisierst, wird sie auch bei den anderen Mitgliedern deiner Bestellgruppe aktualisiert.
     workgroup_members:
       title: Mitglieder der Gruppen
   simple_form:

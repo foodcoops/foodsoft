@@ -880,7 +880,7 @@ fr:
   helpers:
     application:
       edit_user: Modifier la liste des membres
-      nick_fallback: 
+      nick_fallback: "(aucun identifiant)"
       role_admin: Administrateur
       role_article_meta: Article
       role_finance: Finances
@@ -1393,7 +1393,7 @@ fr:
   sessions:
     logged_in: Connecté!
     logged_out: Déconnecté!
-    login_invalid_email: 
+    login_invalid_email: Email ou mot de passe invalide
     login_invalid_nick: Identifiant ou mot de passe invalide
     new:
       forgot_password: Mot de passe oublié?
@@ -1425,6 +1425,8 @@ fr:
       title: Commandes en cours
       total_sum: Total
       who_ordered: Qui a commandé?
+    user_form_fields:
+      contact_address_hint: 
     workgroup_members:
       title: Membres des équipes
   simple_form:

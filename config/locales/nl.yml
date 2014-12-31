@@ -1418,6 +1418,8 @@ nl:
       title: Lopende bestellingen
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
+    user_form_fields:
+      contact_address_hint: Het adres van je huishouden. Als je dit wijzigt, verandert het ook voor de andere leden van je huishouden.
     workgroup_members:
       title: Groepsleden
   simple_form:
