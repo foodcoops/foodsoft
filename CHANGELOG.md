@@ -1,3 +1,15 @@
+# Foodsoft 4.3.0
+(31 Dec 2014)
+
+* Allow to edit address from user profile (#332)
+* Cleanup groups in user profile screen (bf6a31)
+* Allow admins to login as a different user (#323)
+* Hide message preferences when messages are disabled (618856)
+* Allow to specify an order schedule for new orders (#329)
+* Allow to configure how many weeks tasks are scheduled upfront (#324)
+* Allow account balance to become really large or small (#332)
+* Plugins moved to a new directory (#330)
+
 # Foodsoft 4.2.0
 (14 Oct 2014)
 
