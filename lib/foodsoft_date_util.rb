@@ -6,8 +6,6 @@ module FoodsoftDateUtil
       schedule.add_recurrence_rule rule_from(options[:recurr])
       # @todo handle ical parse errors
       occ = (schedule.next_occurrence(from).to_time rescue nil)
-    else
-      occ = start
     end
     if occ and options[:time]
       occ = occ.beginning_of_day.advance(seconds: Time.parse(options[:time]).seconds_since_midnight)
