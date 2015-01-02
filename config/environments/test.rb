@@ -19,7 +19,7 @@ Foodsoft::Application.configure do
   config.assets.initialize_on_precompile = true
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  config.serve_static_files = true
   config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.

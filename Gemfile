@@ -1,10 +1,10 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "rails", '~> 4.1'
+gem "rails", '~> 4.2'
 
 
-gem 'sass-rails', '>= 4.0' # version to avoid bundle getting confused
+gem 'sass-rails'
 gem 'coffee-rails'
 gem 'less-rails'
 gem 'uglifier', '>= 1.0.3'
@@ -26,7 +26,6 @@ gem 'prawn-table'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
-gem 'inherited_resources'
 gem 'localize_input', git: "git://github.com/bennibu/localize_input.git"
 gem 'daemons'
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
@@ -55,6 +54,7 @@ end
 group :development do
   gem 'sqlite3'
   gem 'mailcatcher'
+  gem 'web-console', '~> 2.0'
 
   # allow to use `debugger` https://github.com/conradirwin/pry-rescue
   gem 'pry-rescue'
