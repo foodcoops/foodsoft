@@ -173,9 +173,9 @@ class Article < ActiveRecord::Base
         fc_unit = (::Unit.new(unit) rescue nil)
         supplier_unit = (::Unit.new(shared_article.unit) rescue nil)
         if fc_unit and supplier_unit and fc_unit =~ supplier_unit
-          conversion_factor = (fc_unit.convert_to(supplier_unit.units) / supplier_unit).scalar
-          new_price = shared_article.price * conversion_factor
-          new_unit_quantity = shared_article.unit_quantity / conversion_factor
+          conversion_factor = (supplier_unit / fc_unit).to_base.to_r
+          new_price = shared_article.price / conversion_factor
+          new_unit_quantity = shared_article.unit_quantity * conversion_factor
           [new_price, new_unit_quantity]
         else
           false
