@@ -20,6 +20,13 @@ if defined? RubyUnits
     unit.kind       = :counting
   end
 
+  RubyUnits::Unit.define('bag') do |unit|
+    unit.definition = RubyUnits::Unit.new('1 each')
+    unit.aliases    = %w{bag bags blt sachet sachets} # locale: en
+    unit.aliases   += %w{zak zakken zakje zakjes}     # locale: nl
+    unit.kind       = :counting
+  end
+
   # we use pc for piece, not parsec
   RubyUnits::Unit.redefine!('parsec') do |unit|
     unit.aliases = unit.aliases.reject {|u| u=='pc'}
