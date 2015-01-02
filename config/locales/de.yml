@@ -1003,7 +1003,7 @@ de:
     logo: "<span>food</span>soft"
   lib:
     order_pdf:
-      page: Seite %{number}
+      page: Seite %{number} von %{count}
   login:
     accept_invitation:
       body: "<p>Du bist eingeladen worden als Mitglied der Gruppe <b>%{group}</b> in der Foodcoop %{foodcoop} mitzumachen.</p> <p>Wenn Du mitmachen möchtest, dann fülle bitte dieses Formular aus.</p> <p>Deine Daten werden selbstverständlich nicht an Dritte, aus was auch immer für Gründen, weitergeben. Du kannst auch entscheiden, wieviel deiner persönlichen Daten für alle einsehbar sein sollen. 'Alle' bedeutet hier alle Foodcoop-Mitglieder. Die Administratoren haben aber jederzeit Zugriff auf deine Daten.</p>"

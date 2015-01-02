@@ -1005,7 +1005,7 @@ nl:
     logo: "<span>food</span>soft"
   lib:
     order_pdf:
-      page: Pagina %{number}
+      page: Pagina %{number} van %{count}
   login:
     accept_invitation:
       body: "<p>Je bent uitgenodigd als lid voor foodcoop %{foodcoop} in de groep <b>%{group}</b>.</p> <p>Als je wilt meedoen, vul dan dit formulier in.</p> <p>Natuurlijk zullen we je informatie niet delen met anderen. Je kunt zelf aangeven, welke informatie voor andere leden beschikbaar is (maar beheerders hebben daar altijd toegang toe).</p>"

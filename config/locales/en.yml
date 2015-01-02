@@ -1005,7 +1005,7 @@ en:
     logo: "<span>food</span>soft"
   lib:
     order_pdf:
-      page: Page %{number}
+      page: Page %{number} of %{count}
   login:
     accept_invitation:
       body: "<p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>"

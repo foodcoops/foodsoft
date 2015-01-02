@@ -1016,7 +1016,7 @@ fr:
     logo: coop
   lib:
     order_pdf:
-      page: page %{number}
+      page: page %{number} de %{count}
   login:
     accept_invitation:
       body: |
