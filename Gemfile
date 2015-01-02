@@ -47,6 +47,10 @@ gem 'acts_as_versioned', github: 'technoweenie/acts_as_versioned'
 gem 'foodsoft_wiki', path: 'plugins/wiki'
 gem 'foodsoft_messages', path: 'plugins/messages'
 
+# plugins not enabled by default
+#gem 'foodsoft_uservoice', path: 'plugins/uservoice'
+
+
 group :production do
   gem 'exception_notification'
 end
