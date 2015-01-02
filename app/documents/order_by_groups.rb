@@ -13,6 +13,8 @@ class OrderByGroups < OrderPdf
   def body
     # Start rendering
     @order.group_orders.ordered.each do |group_order|
+      down_or_page 15
+
       total = 0
       rows = []
       dimrows = []
@@ -53,8 +55,6 @@ class OrderByGroups < OrderPdf
         # dim rows which were ordered but not received
         dimrows.each { |ri| table.row(ri).text_color = '999999' }
       end
-
-      down_or_page 15
     end
 
   end
