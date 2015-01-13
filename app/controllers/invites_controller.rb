@@ -10,7 +10,7 @@ class InvitesController < ApplicationController
     authenticate_membership_or_admin params[:invite][:group_id]
     @invite = Invite.new(params[:invite])
     if @invite.save
-      Mailer.invite(@invite).deliver
+      Mailer.invite(@invite).deliver_now
 
       respond_to do |format|
         format.html do
