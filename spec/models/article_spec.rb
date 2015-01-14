@@ -85,6 +85,7 @@ describe Article do
 
     it 'does not need to synchronise an imported article' do
       article = shared_article.build_new_article(supplier)
+      article.article_category = create :article_category
       expect(article.shared_article_changed?).to be_falsey
     end
 
