@@ -41,7 +41,7 @@ class Admin::ConfigsController < Admin::BaseController
   def parse_recurring_selects!(config)
     if config
       for k in [:pickup, :ends] do
-        if config[k] and config[k][:recurr]
+        if config[k] && config[k][:recurr]
           config[k][:recurr] = ActiveSupport::JSON.decode(config[k][:recurr])
           config[k][:recurr] = FoodsoftDateUtil.rule_from(config[k][:recurr]).to_ical if config[k][:recurr]
         end

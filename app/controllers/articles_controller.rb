@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
   
   def create
     @article = Article.new(params[:article])
-    if @article.valid? and @article.save
+    if @article.valid? && @article.save
       render :layout => false
     else
       render :action => 'new', :layout => false
@@ -148,7 +148,7 @@ class ArticlesController < ApplicationController
       no_category = ArticleCategory.new
       articles.each do |row|
         # fallback to Others category
-        category = (ArticleCategory.find_match(row[:category]) or no_category)
+        category = (ArticleCategory.find_match(row[:category]) || no_category)
         # creates a new article and price
         article = @supplier.articles.build(:name => row[:name], 
                                :note => row[:note],
@@ -160,7 +160,7 @@ class ArticlesController < ApplicationController
                                :unit_quantity => row[:unit_quantity],
                                :order_number => row[:number],
                                :deposit => row[:deposit],
-                               :tax => (row[:tax] or FoodsoftConfig[:tax_default]))
+                               :tax => (row[:tax] || FoodsoftConfig[:tax_default]))
         # stop parsing, when an article isn't valid
         unless article.valid?
           raise I18n.t('articles.controller.error_parse', :msg => article.errors.full_messages.join(", "), :line => (articles.index(row) + 2).to_s)
@@ -212,7 +212,7 @@ class ArticlesController < ApplicationController
   def import
     @article = SharedArticle.find(params[:shared_article_id]).build_new_article(@supplier)
     @article.article_category_id = params[:article_category_id] unless params[:article_category_id].blank?
-    if params[:direct] and not params[:article_category_id].blank? and @article.valid? and @article.save
+    if params[:direct] && !params[:article_category_id].blank? && @article.valid? && @article.save
       render :action => 'create', :layout => false
     else
       render :action => 'new', :layout => false

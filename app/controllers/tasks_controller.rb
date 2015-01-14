@@ -46,7 +46,7 @@ class TasksController < ApplicationController
     @task.attributes=(params[:task])
     if @task.errors.empty? && @task.save
       flash[:notice] = I18n.t('tasks.update.notice')
-      if was_periodic and not @task.periodic?
+      if was_periodic && !@task.periodic?
         flash[:notice] = I18n.t('tasks.update.notice_converted')
       end
       if @task.workgroup

@@ -41,7 +41,7 @@ class StockitController < ApplicationController
 
   def create
     @stock_article = StockArticle.new(params[:stock_article])
-    if @stock_article.valid? and @stock_article.save
+    if @stock_article.valid? && @stock_article.save
       render :layout => false
     else
       render :action => 'new', :layout => false

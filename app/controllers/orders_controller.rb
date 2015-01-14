@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
   # Renders also the pdf
   def show
     @order= Order.find(params[:id])
-    @view = (params[:view] or 'default').gsub(/[^-_a-zA-Z0-9]/, '')
+    @view = (params[:view] || 'default').gsub(/[^-_a-zA-Z0-9]/, '')
     @partial = case @view
                  when 'default'  then 'articles'
                  when 'groups'   then 'shared/articles_by/groups'
@@ -170,14 +170,14 @@ class OrdersController < ApplicationController
     notice << I18n.t('orders.update_order_amounts.msg1', count: counts[0], units: cunits[0])
     notice << I18n.t('orders.update_order_amounts.msg2', count: counts[1], units: cunits[1]) if params[:rest_to_tolerance]
     notice << I18n.t('orders.update_order_amounts.msg3', count: counts[2], units: cunits[2]) if params[:rest_to_stock]
-    if counts[3]>0 or cunits[3]>0
+    if counts[3]>0 || cunits[3]>0
       notice << I18n.t('orders.update_order_amounts.msg4', count: counts[3], units: cunits[3])
     end
     notice.join(', ')
   end
 
   def remove_empty_article
-    params[:order][:article_ids].reject!(&:blank?) if params[:order] and params[:order][:article_ids]
+    params[:order][:article_ids].reject!(&:blank?) if params[:order] && params[:order][:article_ids]
   end
 
 end

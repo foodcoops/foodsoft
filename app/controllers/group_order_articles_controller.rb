@@ -20,7 +20,7 @@ class GroupOrderArticlesController < ApplicationController
     goa = GroupOrderArticle.where(group_order_id: @group_order_article.group_order_id,
                                   order_article_id: @order_article.id).first
 
-    if goa and goa.update_attributes(params[:group_order_article])
+    if goa && goa.update_attributes(params[:group_order_article])
       @group_order_article = goa
 
       update_summaries(@group_order_article)
@@ -50,7 +50,7 @@ class GroupOrderArticlesController < ApplicationController
   def destroy
     # only destroy if quantity and tolerance was zero already, so that we don't
     # lose what the user ordered, if any
-    if @group_order_article.quantity > 0 or @group_order_article.tolerance >0
+    if @group_order_article.quantity > 0 || @group_order_article.tolerance >0
       @group_order_article.update_attribute(:result, 0)
     else
       @group_order_article.destroy
