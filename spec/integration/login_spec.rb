@@ -12,7 +12,7 @@ describe LoginController, :type => :feature do
     it 'sends a reset email' do
       post reset_password_path, user: {email: user.email}
       email = ActionMailer::Base.deliveries.first
-      expect((email.to rescue [])).to eq [user.email]
+      expect(email.to).to eq [user.email]
     end
   end
 

@@ -32,6 +32,8 @@ RSpec.configure do |config|
     DatabaseCleaner.start
     # maximise window so that buttons can be found on popups
     RSpec.current_example.metadata[:js] and page.driver.browser.manage.window.maximize
+    # clean slate mail queues, not sure why needed - https://github.com/rspec/rspec-rails/issues/661
+    ActionMailer::Base.deliveries.clear
   end
   config.after(:each) do
     DatabaseCleaner.clean
