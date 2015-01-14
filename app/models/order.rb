@@ -50,7 +50,7 @@ class Order < ActiveRecord::Base
       # but which have already been ordered in this stock order
       StockArticle.available.includes(:article_category).
         order('article_categories.name', 'articles.name').reject{ |a|
-        a.quantity_available <= 0 and not a.ordered_in_order?(self)
+        a.quantity_available <= 0 && !a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else
       supplier.articles.available.group_by { |a| a.article_category.name }
@@ -260,8 +260,8 @@ class Order < ActiveRecord::Base
   def keep_ordered_articles
     chosen_order_articles = order_articles.where(article_id: article_ids)
     to_be_removed = order_articles - chosen_order_articles
-    to_be_removed_but_ordered = to_be_removed.select { |a| a.quantity > 0 or a.tolerance > 0 }
-    unless to_be_removed_but_ordered.empty? or ignore_warnings
+    to_be_removed_but_ordered = to_be_removed.select { |a| a.quantity > 0 || a.tolerance > 0 }
+    unless to_be_removed_but_ordered.empty? || ignore_warnings
       errors.add(:articles, I18n.t(stockit? ? 'orders.model.warning_ordered_stock' : 'orders.model.warning_ordered'))
       @erroneous_article_ids = to_be_removed_but_ordered.map { |a| a.article_id }
     end

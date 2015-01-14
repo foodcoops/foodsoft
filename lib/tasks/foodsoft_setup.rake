@@ -126,7 +126,7 @@ end
 def ask(question, answers = false)
   puts question
   input = STDIN.gets.chomp
-  if input.blank? or (answers and !answers.include?(input))
+  if input.blank? || (answers && !answers.include?(input))
     puts red "Your Input is not valid. Try again!"
     input = ask(question, answers)
   end

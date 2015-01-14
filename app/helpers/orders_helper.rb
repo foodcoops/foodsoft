@@ -48,12 +48,12 @@ module OrdersHelper
   #   Sensible in tables with multiple columns.
   # @return [String] Text showing unit and unit quantity when applicable.
   def pkg_helper(article, options={})
-    return '' if not article or article.unit_quantity == 1
+    return '' if !article || article.unit_quantity == 1
     uq_text = "× #{article.unit_quantity}"
     uq_text = content_tag(:span, uq_text, class: 'hidden-phone') if options[:soft_uq]
     if options[:plain]
       uq_text
-    elsif options[:icon].nil? or options[:icon]
+    elsif options[:icon].nil? || options[:icon]
       pkg_helper_icon(uq_text)
     else
       pkg_helper_icon(uq_text, tag: :span)
@@ -80,7 +80,7 @@ module OrdersHelper
   
   def receive_input_field(form)
     order_article = form.object
-    units_expected = (order_article.units_billed or order_article.units_to_order) *
+    units_expected = (order_article.units_billed || order_article.units_to_order) *
       1.0 * order_article.article.unit_quantity / order_article.article_price.unit_quantity
     
     input_classes = 'input input-nano units_received'
@@ -117,7 +117,7 @@ module OrdersHelper
   # @param order_or_supplier [Order, Supplier] Order or supplier to link to
   # @return [String] Link to order or supplier, showing its name.
   def supplier_link(order_or_supplier)
-    if order_or_supplier.kind_of?(Order) and order_or_supplier.stockit?
+    if order_or_supplier.kind_of?(Order) && order_or_supplier.stockit?
       link_to(order_or_supplier.name, stock_articles_path).html_safe
     else
       link_to(@order.supplier.name, supplier_path(@order.supplier)).html_safe

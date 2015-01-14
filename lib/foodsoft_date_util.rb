@@ -7,7 +7,7 @@ module FoodsoftDateUtil
       # @todo handle ical parse errors
       occ = (schedule.next_occurrence(from).to_time rescue nil)
     end
-    if occ and options[:time]
+    if occ && options[:time]
       occ = occ.beginning_of_day.advance(seconds: Time.parse(options[:time]).seconds_since_midnight)
     end
     occ

@@ -19,7 +19,7 @@ module DateTimeAttributeValidate
           if self.instance_variable_get("@#{attribute}_is_set")
             date = self.instance_variable_get("@#{attribute}_date_value")
             time = self.instance_variable_get("@#{attribute}_time_value")
-            if date.blank? and time.blank?
+            if date.blank? && time.blank?
               self.send("#{attribute}=", nil)
             end
           end
@@ -50,11 +50,11 @@ module DateTimeAttributeValidate
         # validate date and time
         define_method("#{attribute}_datetime_value_valid") do
           date = self.instance_variable_get("@#{attribute}_date_value")
-          unless date.blank? or (Date.parse(date) rescue nil)
+          unless date.blank? || (Date.parse(date) rescue nil)
             errors.add(attribute, "is not a valid date") # @todo I18n
           end
           time = self.instance_variable_get("@#{attribute}_time_value")
-          unless time.blank? or (Time.parse(time) rescue nil)
+          unless time.blank? || (Time.parse(time) rescue nil)
             errors.add(attribute, "is not a valid time") # @todo I18n
           end
         end

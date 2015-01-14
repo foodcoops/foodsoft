@@ -28,7 +28,7 @@ namespace :enable_plugins do
       text = capture :cat, shared_path.join('config/plugins.yml'), '||true'
       if text
         plugins = YAML.load(text)
-        enable_foodsoft_plugins(plugins['enabled']) if plugins and not plugins['enabled'].nil?
+        enable_foodsoft_plugins(plugins['enabled']) if plugins && !plugins['enabled'].nil?
       end
     end
   end

@@ -122,13 +122,13 @@ class OrderArticle < ActiveRecord::Base
     qty_left -= qty_for_members
 
     # if there's anything left, move to stock if wanted
-    if qty_left > 0 and surplus.index(:stock)
+    if qty_left > 0 && surplus.index(:stock)
       counts[surplus.index(:stock)] = qty_left
       # 1) find existing stock article with same name, unit, price
       # 2) if not found, create new stock article
       #      avoiding duplicate stock article names
     end
-    if qty_left > 0 and surplus.index(nil)
+    if qty_left > 0 && surplus.index(nil)
       counts[surplus.index(nil)] = qty_left
     end
 
@@ -181,7 +181,7 @@ class OrderArticle < ActiveRecord::Base
   end
 
   def update_global_price=(value)
-    @update_global_price = (value == true or value == '1') ?  true : false
+    @update_global_price = (value == true || value == '1') ?  true : false
   end
 
   # @return [Number] Units missing for the last +unit_quantity+ of the article.
@@ -207,7 +207,7 @@ class OrderArticle < ActiveRecord::Base
 
   # Associate with current article price if created in a finished order
   def init_from_balancing
-    if order.present? and order.finished?
+    if order.present? && order.finished?
       self.article_price = article.article_prices.first
     end
   end

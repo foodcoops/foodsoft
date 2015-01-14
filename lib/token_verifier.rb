@@ -15,7 +15,7 @@ class TokenVerifier < ActiveSupport::MessageVerifier
 
   def verify(message)
     r = super(message)
-    raise InvalidMessage unless r.is_a?(Array) and r.length >= 2 and r.length <= 3
+    raise InvalidMessage unless r.is_a?(Array) && r.length >= 2 && r.length <= 3
     raise InvalidScope unless r[0] == FoodsoftConfig.scope
     raise InvalidPrefix unless r[1] == @_prefix
     # return original message
@@ -34,7 +34,7 @@ class TokenVerifier < ActiveSupport::MessageVerifier
 
   def self.secret
     # secret_key_base for Rails 4, but Rails 3 initializer may still be used
-    Foodsoft::Application.config.secret_key_base or Foodsoft::Application.config.secret_token
+    Foodsoft::Application.config.secret_key_base || Foodsoft::Application.config.secret_token
   end
 
 end

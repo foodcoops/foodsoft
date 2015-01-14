@@ -160,7 +160,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(login, password)
-    user = (find_by_nick(login) or find_by_email(login))
+    user = find_by_nick(login) || find_by_email(login)
     if user && user.has_password(password)
       user
     else

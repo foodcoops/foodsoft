@@ -39,7 +39,7 @@ class Supplier < ActiveRecord::Base
           
           # try to convert different units
           new_price, new_unit_quantity = article.convert_units
-          if new_price and new_unit_quantity
+          if new_price && new_unit_quantity
             article.price = new_price
             article.unit_quantity = new_unit_quantity
           else
@@ -98,7 +98,7 @@ class Supplier < ActiveRecord::Base
 
   # make sure the shared_sync_method is allowed for the shared supplier
   def valid_shared_sync_method
-    if shared_supplier and !shared_supplier.shared_sync_methods.include?(shared_sync_method)
+    if shared_supplier && !shared_supplier.shared_sync_methods.include?(shared_sync_method)
       errors.add :name, :included
     end
   end

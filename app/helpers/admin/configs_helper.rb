@@ -17,10 +17,10 @@ module Admin::ConfigsHelper
     config_input_field_options form, key, options[:input_html]
     config_input_tooltip_options form, key, options[:input_html]
     if options[:as] == :boolean
-      options[:input_html][:checked] = 'checked' if v=options[:input_html].delete(:value) and v!='false'
+      options[:input_html][:checked] = 'checked' if v=options[:input_html].delete(:value) && v!='false'
       options[:checked_value] = 'true' if options[:checked_value].nil?
       options[:unchecked_value] = 'false' if options[:unchecked_value].nil?
-    elsif options[:collection] or options[:as] == :select
+    elsif options[:collection] || options[:as] == :select
       options[:selected] = options[:input_html].delete(:value)
       return form.input key, options, &block
     elsif options[:as] == :time_zone
@@ -53,7 +53,7 @@ module Admin::ConfigsHelper
     if options[:as] == :boolean
       checked_value = options.delete(:checked_value) || 'true'
       unchecked_value = options.delete(:unchecked_value) || 'false'
-      options[:checked] = 'checked' if v=options.delete(:value) and v!='false'
+      options[:checked] = 'checked' if v=options.delete(:value) && v!='false'
       form.hidden_field(key, value: unchecked_value, as: :hidden) + form.check_box(key, options, checked_value, false)
     elsif options[:as] == :select_recurring
       options[:value] = FoodsoftDateUtil.rule_from(options[:value])

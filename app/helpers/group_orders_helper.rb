@@ -11,7 +11,7 @@ module GroupOrdersHelper
   # If the option :show is true, the link is for showing the group_order.
   def link_to_ordering(order, options = {}, &block)
     group_order = order.group_order(current_user.ordergroup)
-    path = if options[:show] and group_order
+    path = if options[:show] && group_order
             group_order_path(group_order)
           elsif group_order
             edit_group_order_path(group_order, :order_id => order.id)

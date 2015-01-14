@@ -11,7 +11,7 @@ namespace :resque do
       on roles(:resque), in: :groups do
 
         SSHKit.config.command_map[:rake_as_run_user] =
-          unless fetch(:run_user).nil? or fetch(:run_user) == fetch(:user)
+          unless fetch(:run_user).nil? || fetch(:run_user) == fetch(:user)
             "sudo -u '#{fetch(:run_user)}' "
           else
             ''

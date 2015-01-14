@@ -103,13 +103,13 @@ class Article < ActiveRecord::Base
   def shared_article_changed?(supplier = self.supplier)
     # skip early if the timestamp hasn't changed
     shared_article = self.shared_article(supplier)
-    unless shared_article.nil? or self.shared_updated_on == shared_article.updated_on
+    unless shared_article.nil? || self.shared_updated_on == shared_article.updated_on
       
       # try to convert units
       # convert supplier's price and unit_quantity into fc-size
       new_price, new_unit_quantity = self.convert_units
       new_unit = self.unit
-      unless new_price and new_unit_quantity
+      unless new_price && new_unit_quantity
         # if convertion isn't possible, take shared_article-price/unit_quantity
         new_price, new_unit_quantity, new_unit = shared_article.price, shared_article.unit_quantity, shared_article.unit
       end
@@ -142,7 +142,7 @@ class Article < ActiveRecord::Base
   # compare attributes from different articles. used for auto-synchronization
   # returns array of symbolized unequal attributes
   def self.compare_attributes(attributes)
-    unequal_attributes = attributes.select { |name, values| values[0] != values[1] and not (values[0].blank? and values[1].blank?) }
+    unequal_attributes = attributes.select { |name, values| values[0] != values[1] && !(values[0].blank? && values[1].blank?) }
     unequal_attributes.collect { |pair| pair[0] }
   end
   
@@ -160,10 +160,10 @@ class Article < ActiveRecord::Base
   def convert_units
     if unit != shared_article.unit
       # legacy, used by foodcoops in Germany
-      if shared_article.unit == "KI" and unit == "ST" # 'KI' means a box, with a different amount of items in it
+      if shared_article.unit == "KI" && unit == "ST" # 'KI' means a box, with a different amount of items in it
         # try to match the size out of its name, e.g. "banana 10-12 St" => 10
         new_unit_quantity = /[0-9\-\s]+(St)/.match(shared_article.name).to_s.to_i
-        if new_unit_quantity and new_unit_quantity > 0
+        if new_unit_quantity && new_unit_quantity > 0
           new_price = (shared_article.price/new_unit_quantity.to_f).round(2)
           [new_price, new_unit_quantity]
         else
@@ -172,7 +172,7 @@ class Article < ActiveRecord::Base
       else # use ruby-units to convert
         fc_unit = (::Unit.new(unit) rescue nil)
         supplier_unit = (::Unit.new(shared_article.unit) rescue nil)
-        if fc_unit and supplier_unit and fc_unit =~ supplier_unit
+        if fc_unit && supplier_unit && fc_unit =~ supplier_unit
           conversion_factor = (supplier_unit / fc_unit).to_base.to_r
           new_price = shared_article.price / conversion_factor
           new_unit_quantity = shared_article.unit_quantity * conversion_factor
@@ -225,7 +225,7 @@ class Article < ActiveRecord::Base
     matches = Article.where(name: name, supplier_id: supplier_id, deleted_at: deleted_at, type: type)
     matches = matches.where.not(id: id) unless new_record?
     # supplier should always be there - except, perhaps, on initialization (on seeding)
-    if supplier and (supplier.shared_sync_method.blank? or supplier.shared_sync_method == 'import')
+    if supplier && (supplier.shared_sync_method.blank? || supplier.shared_sync_method == 'import')
       errors.add :name, :taken if matches.any?
     else
       errors.add :name, :taken_with_unit if matches.where(unit: unit, unit_quantity: unit_quantity).any?

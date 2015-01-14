@@ -94,7 +94,7 @@ class FoodsoftConfig
     # @param key [String, Symbol]
     # @return [Object] Value of the key.
     def [](key)
-      if RailsSettings::CachedSettings.table_exists? and allowed_key?(key)
+      if RailsSettings::CachedSettings.table_exists? && allowed_key?(key)
         value = RailsSettings::CachedSettings["foodcoop.#{self.scope}.#{key}"]
         value = config[key] if value.nil?
         value
@@ -113,7 +113,7 @@ class FoodsoftConfig
       return false unless allowed_key?(key)
       value = normalize_value value
       # then update database
-      if config[key] == value or (config[key].nil? and value == false)
+      if config[key] == value || (config[key].nil? && value == false)
         # delete (ok if it was already deleted)
         begin
           RailsSettings::CachedSettings.destroy "foodcoop.#{self.scope}.#{key}"

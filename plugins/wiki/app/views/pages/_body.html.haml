@@ -1,7 +1,7 @@
 - content = wikified_body @page.body, @page.title
 - toc = generate_toc @page.body
 
-- unless toc.blank? or params[:preview]
+- unless toc.blank? || params[:preview]
   - content_for :sidebar do
     #wikitoc.well.well-small
       %h3= t '.title_toc'

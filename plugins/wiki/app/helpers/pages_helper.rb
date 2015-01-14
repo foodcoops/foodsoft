@@ -62,7 +62,7 @@ module PagesHelper
 
   def parent_pages_to_select(current_page)
     unless current_page.homepage? # Homepage is the page trees root!
-      Page.non_redirected.reject { |p| p == current_page or p.ancestors.include?(current_page) }
+      Page.non_redirected.reject { |p| p == current_page || p.ancestors.include?(current_page) }
     else
       Array.new
     end

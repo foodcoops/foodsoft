@@ -4,7 +4,7 @@ require "foodsoft_uservoice/engine"
 module FoodsoftUservoice
   # enabled when configured, but can still be disabled by use_uservoice option
   def self.enabled?
-    FoodsoftConfig[:use_uservoice] != false and FoodsoftConfig[:uservoice]
+    FoodsoftConfig[:use_uservoice] != false && FoodsoftConfig[:uservoice]
   end
 
   module LoadUservoice

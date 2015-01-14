@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def format_datetime_timespec(time, format)
-    I18n.l(time, :format => format) unless (time.nil? or format.nil?)
+    I18n.l(time, :format => format) unless (time.nil? || format.nil?)
   end
   
   # Creates ajax-controlled-links for pagination
@@ -92,7 +92,7 @@ module ApplicationHelper
     if options[:short]
       desc = options[:desc]
       desc ||= model.human_attribute_name("#{attribute}_desc".to_sym, options.merge({fallback: true, default: '', count: 2}))
-      desc.blank? and desc = s
+      desc.blank? && desc = s
       sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({fallback: true, default: '', count: 2}))
       s = raw "<abbr title='#{desc}'>#{sshort}</abbr>" unless sshort.blank?
     end
@@ -187,7 +187,7 @@ module ApplicationHelper
   # render base errors in a form after failed validation
   # http://railsapps.github.io/twitter-bootstrap-rails.html
   def base_errors resource
-    return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
+    return '' if resource.errors.empty? || resource.errors[:base].empty?
     messages = resource.errors[:base].map { |msg| content_tag(:li, msg) }.join
     render :partial => 'shared/base_errors', :locals => {:error_messages => messages}
   end
@@ -197,7 +197,7 @@ module ApplicationHelper
     if user.nil?
       "?"
     elsif FoodsoftConfig[:use_nick]
-      if options[:full] and options[:markup]
+      if options[:full] && options[:markup]
         raw "<b>#{h user.nick}</b> (#{h user.first_name} #{h user.last_name})"
       elsif options[:full]
         "#{user.nick} (#{user.first_name} #{user.last_name})"
@@ -217,7 +217,7 @@ module ApplicationHelper
 
   # allow truncate to add title when tooltip option is given
   def truncate(text, options={}, &block)
-    return text if not text or text.length <= (options[:length] or 30)
+    return text if !text || text.length <= (options[:length] || 30)
     text_truncated = super(text, options, &block)
     if options[:tooltip]
       content_tag :span, text_truncated, title: text

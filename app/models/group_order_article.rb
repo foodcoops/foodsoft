@@ -36,7 +36,7 @@ class GroupOrderArticle < ActiveRecord::Base
     logger.debug("Current quantity = #{self.quantity}, tolerance = #{self.tolerance}")
 
     # When quantity and tolerance are zero, we don't serve any purpose
-    if quantity == 0 and tolerance == 0
+    if quantity == 0 && tolerance == 0
       logger.debug("Self-destructing since requested quantity and tolerance are zero")
       destroy!
       return
@@ -108,7 +108,7 @@ class GroupOrderArticle < ActiveRecord::Base
   # See description of the ordering algorithm in the general application documentation for details.
   def calculate_result(total = nil)
     # return memoized result unless a total is given
-    return @calculate_result if total.nil? and not @calculate_result.nil?
+    return @calculate_result if total.nil? && !@calculate_result.nil?
 
     quantity = tolerance = total_quantity = 0
 
