@@ -72,10 +72,9 @@ class HomeController < ApplicationController
   end
 
   def ordergroup_params
-    params
-      .require(:user)
-      .require(:ordergroup)
-      .permit(:contact_address)
+    if params[:user][:ordergroup]
+      params.require(:user).require(:ordergroup).permit(:contact_address)
+    end
   end
 
 end
