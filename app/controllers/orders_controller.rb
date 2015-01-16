@@ -3,10 +3,10 @@
 # Controller for managing orders, i.e. all actions that require the "orders" role.
 # Normal ordering actions of members of order groups is handled by the OrderingController.
 class OrdersController < ApplicationController
-  
+
   before_filter :authenticate_orders
   before_filter :remove_empty_article, only: [:create, :update]
-  
+
   # List orders
   def index
     @open_orders = Order.open.includes(:supplier)
@@ -82,7 +82,7 @@ class OrdersController < ApplicationController
   # Page to edit an exsiting order.
   # editing finished orders is done in FinanceController
   def edit
-    @order = Order.find(params[:id], :include => :articles)
+    @order = Order.includes(:articles).find(params[:id])
   end
 
   # Update an existing order.
@@ -101,7 +101,7 @@ class OrdersController < ApplicationController
     Order.find(params[:id]).destroy
     redirect_to :action => 'index'
   end
-  
+
   # Finish a current order.
   def finish
     order = Order.find(params[:id])
@@ -121,19 +121,19 @@ class OrdersController < ApplicationController
       redirect_to @order
     end
   end
-  
+
   def receive_on_order_article_create # See publish/subscribe design pattern in /doc.
     @order_article = OrderArticle.find(params[:order_article_id])
     render :layout => false
   end
-  
+
   def receive_on_order_article_update # See publish/subscribe design pattern in /doc.
     @order_article = OrderArticle.find(params[:order_article_id])
     render :layout => false
   end
 
   protected
-  
+
   def update_order_amounts
     return if not params[:order_articles]
     # where to leave remainder during redistribution
