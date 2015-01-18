@@ -42,6 +42,8 @@ gem 'ruby-units'
 gem 'attribute_normalizer'
 gem 'ice_cube', github: 'wvengen/ice_cube', branch: 'issues/50-from_ical-rebased' # fork until merged
 gem 'recurring_select'
+gem 'roo', '~> 1.13.2'
+gem 'spreadsheet'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', github: 'technoweenie/acts_as_versioned'

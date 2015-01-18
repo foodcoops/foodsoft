@@ -14,13 +14,13 @@
               .alert= t '.outlist.alert_used', article: article.name
     %hr/
 
-  - if @updated_articles.any?
+  - if @updated_article_pairs.any?
     %h2= t '.update.title'
     %p
       %i
-        = t '.update.update_msg', count: @updated_articles.size
+        = t '.update.update_msg', count: @updated_article_pairs.size
         = t '.update.body'
-    = render 'sync_table', articles: @updated_articles, field: 'articles', hidden_fields: %w(shared_updated_on)
+    = render 'sync_table', articles: @updated_article_pairs, field: 'articles', hidden_fields: %w(shared_updated_on)
     %hr/
 
   - if @new_articles.any?

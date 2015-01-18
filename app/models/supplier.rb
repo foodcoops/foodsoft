@@ -34,30 +34,9 @@ class Supplier < ActiveRecord::Base
       shared_article = article.shared_article(self)
 
       if shared_article # article will be updated
-        
         unequal_attributes = article.shared_article_changed?(self)
         unless unequal_attributes.blank? # skip if shared_article has not been changed
-          
-          # try to convert different units
-          new_price, new_unit_quantity = article.convert_units
-          if new_price && new_unit_quantity
-            article.price = new_price
-            article.unit_quantity = new_unit_quantity
-          else
-            article.price = shared_article.price
-            article.unit_quantity = shared_article.unit_quantity
-            article.unit = shared_article.unit
-          end
-          # update other attributes
-          article.attributes = {
-            :name => shared_article.name,
-            :manufacturer => shared_article.manufacturer,
-            :origin => shared_article.origin,
-            :shared_updated_on => shared_article.updated_on,
-            :tax => shared_article.tax,
-            :deposit => shared_article.deposit,
-            :note => shared_article.note
-          }
+          article.attributes = unequal_attributes
           updated_articles << [article, unequal_attributes]
         end
       # Articles with no order number can be used to put non-shared articles
