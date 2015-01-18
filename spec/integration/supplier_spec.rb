@@ -60,21 +60,25 @@ describe 'supplier', :type => :feature do
       expect(page).to have_content(article.name)
     end
 
-    it 'can import articles' do
-      article_category.save!
-      visit upload_supplier_articles_path(supplier)
-      attach_file 'articles_file', Rails.root.join('spec/fixtures/foodsoft_file_01.csv')
-      find('input[type="submit"]').click
 
-      expect(find("#articles_0_note").value).to eq "bio ◎"
-      expect(find("#articles_1_name").value).to eq "Pijnboompitten"
+    Dir.glob('spec/fixtures/foodsoft_file_01.*') do |file|
+      it "can import articles from #{file}" do
+        article_category.save!
+        visit upload_supplier_articles_path(supplier)
+        attach_file 'articles_file', Rails.root.join(file)
+        find('input[type="submit"]').click
 
-      4.times do |i|
-        select article_category.name, :from => "articles_#{i}_article_category_id"
+        expect(find("tr:nth-child(1) #new_articles__note").value).to eq "bio ◎"
+        expect(find("tr:nth-child(2) #new_articles__name").value).to eq "Pijnboompitten"
+
+        4.times do |i|
+          all("tr:nth-child(#{i+1}) select > option")[1].select_option
+        end
+        find('input[type="submit"]').click
+        expect(page).to have_content("Pijnboompitten")
+
+        expect(supplier.articles.count).to eq 4
       end
-      find('input[type="submit"]').click
-
-      expect(supplier.articles.count).to eq 4
     end
   end
 
