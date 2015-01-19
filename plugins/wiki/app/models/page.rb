@@ -28,6 +28,14 @@ class Page < ActiveRecord::Base
     permalink == "Home"
   end
 
+  def public_front_page?
+    permalink == "Public_frontpage"
+  end
+
+  def self.public_front_page
+    where(permalink: "Public_frontpage").first
+  end
+
   def set_permalink
     unless title.blank?
       self.permalink = Page.count == 0 ? "Home" : Page.permalink(title)

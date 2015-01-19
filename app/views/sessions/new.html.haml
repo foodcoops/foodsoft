@@ -10,6 +10,9 @@
   .alert.alert-error
     != t '.nojs', link: link_to(t('.noscript'), "http://noscript.net/")
 
+- if defined?(FoodsoftWiki) && (page = Page.public_front_page)
+  = wikified_body page.body, page.title
+
 = form_tag sessions_path, class: 'form-horizontal' do
   .control-group
     %label(for='nick' class='control-label')
