@@ -1,6 +1,10 @@
 module FoodsoftWiki
   class WikiParser < WikiCloth::Parser
 
+    template do |template|
+      Foodsoft::ExpansionVariables.get(template)
+    end
+
     url_for do |page|
       url_for page
     end
