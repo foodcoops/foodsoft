@@ -226,6 +226,12 @@ module ApplicationHelper
     end
   end
 
+  # Expand variables in text
+  # @see Foodsoft::ExpansionVariables#expand
+  def expand(text, options={})
+    Foodsoft::ExpansionVariables.expand(text, options)
+  end
+
   # @return [String] path to foodcoop CSS style (with MD5 parameter for caching)
   def foodcoop_css_path(options={})
     super(options.merge({md5: Digest::MD5.hexdigest(FoodsoftConfig[:custom_css].to_s)}))

@@ -10,4 +10,4 @@
       - if (s = FoodsoftConfig[:page_footer]).blank?
         = link_to FoodsoftConfig[:name], FoodsoftConfig[:homepage]
       - else
-        = raw s
+        = raw expand s
