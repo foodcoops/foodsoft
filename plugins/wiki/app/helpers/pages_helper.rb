@@ -6,13 +6,12 @@ module PagesHelper
   end
 
   def wikified_body(body, title = nil)
-    WikiCloth.new(:data => body+"\n",
-                  :link_handler => Wikilink.new,
-                  :params => {:referer => title})
-                  .to_html(wikicloth_render_options)
-                  .html_safe
+    FoodsoftWiki::WikiParser.new(data: body+"\n", params: {referer: title}).to_html.html_safe
   rescue => e
-    "<span class='alert alert-error'>#{t('.wikicloth_exception', :msg => e)}</span>".html_safe # try the following with line breaks: === one === == two == = three =
+    # try the following with line breaks: === one === == two == = three =
+    content_tag :span, class: 'alert alert-error' do
+      I18n.t '.wikicloth_exception', :msg => e
+    end.html_safe
   end
 
   def link_to_wikipage(page, text = nil)
@@ -49,10 +48,7 @@ module PagesHelper
     end
 
     unless toc.blank?
-      WikiCloth.new(:data => toc,
-                    :link_handler => Wikilink.new)
-                    .to_html(wikicloth_render_options)
-                    .gsub(/<li>([^<>\n]*)/) do
+      FoodsoftWiki::WikiParser.new(data: toc).to_html.gsub(/<li>([^<>\n]*)/) do
         name = $1
         anchor = name.gsub(/\s/, '_').gsub(/[^a-zA-Z_]/, '')
         "<li><a href='##{anchor}'>#{name.truncate(20)}</a>"
@@ -74,9 +70,4 @@ module PagesHelper
     all_pages_url({:format => 'rss', :token => token}.merge(options))
   end
 
-  private
-
-  def wikicloth_render_options
-    {:locale => I18n.locale} # workaround for wikicloth 0.8.0 https://github.com/nricciar/wikicloth/pull/59
-  end
 end
