@@ -1,0 +1,4 @@
+/ insert_after 'erb:contains("title t(\'.title\'")'
+- content_for :actionbar do
+  - if FoodsoftMessages.enabled?
+    = link_to_new_message message_params: {order_id: @order.id}

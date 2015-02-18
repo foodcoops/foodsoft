@@ -40,6 +40,13 @@ class Message < ActiveRecord::Base
     add_recipients Group.find(group_id).users unless group_id.blank?
   end
 
+  def order_id=(order_id)
+    @order_id = order_id
+    for ordergroup in Order.find(order_id).ordergroups
+      add_recipients ordergroup.users
+    end
+  end
+
   def recipient_tokens=(ids)
     @recipient_tokens = ids
     add_recipients ids.split(",").collect { |id| User.find(id) }
