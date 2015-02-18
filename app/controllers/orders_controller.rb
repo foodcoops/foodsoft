@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
     else
       sort = "ends DESC"
     end
+    @suppliers = Supplier.having_articles.order('suppliers.name')
     @orders = Order.closed.includes(:supplier).reorder(sort).page(params[:page]).per(@per_page)
   end
 

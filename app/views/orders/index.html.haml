@@ -6,7 +6,7 @@
       = t '.new_order'
       %span.caret
     %ul.dropdown-menu
-      - Supplier.where(id: Article.undeleted.select(:supplier_id).distinct).order('suppliers.name ASC').each do |supplier|
+      - for supplier in @suppliers
         %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1
 
 .well

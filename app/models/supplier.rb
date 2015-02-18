@@ -19,6 +19,7 @@ class Supplier < ActiveRecord::Base
   validate :uniqueness_of_name
 
   scope :undeleted, -> { where(deleted_at: nil) }
+  scope :having_articles, -> { where(id: Article.undeleted.select(:supplier_id).distinct) }
 
   # sync all articles with the external database
   # returns an array with articles(and prices), which should be updated (to use in a form)
