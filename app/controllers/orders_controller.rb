@@ -63,6 +63,7 @@ class OrdersController < ApplicationController
   # Page to create a new order.
   def new
     @order = Order.new(supplier_id: params[:supplier_id]).init_dates
+    @order.article_ids = Order.find(params[:order_id]).article_ids if params[:order_id]
   end
 
   # Save a new order.
