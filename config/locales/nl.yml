@@ -1653,6 +1653,7 @@ nl:
     actions: Acties
     cancel: Annuleren
     close: Sluiten
+    copy: Kopiëren
     delete: Verwijder
     edit: Bewerk
     marks:

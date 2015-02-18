@@ -1658,6 +1658,7 @@ en:
     actions: Actions
     cancel: Cancel
     close: Close
+    copy: Copy
     delete: Delete
     edit: Edit
     marks:
