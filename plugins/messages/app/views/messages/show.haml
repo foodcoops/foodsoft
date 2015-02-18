@@ -6,6 +6,9 @@
       %td= t '.from'
       %td=h @message.sender_name
     %tr
+      %td= t '.to'
+      %td= @message.recipients.map {|e| e.name}.join(', ')
+    %tr
       %td= t '.subject'
       %td
         %b=h @message.subject
