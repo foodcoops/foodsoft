@@ -6,6 +6,7 @@ class MessagesMailer < Mailer
 
     mail subject: "[#{FoodsoftConfig[:name]}] " + message.subject,
          to: recipient.email,
-         from: "#{show_user(message.sender)} <#{message.sender.email}>"
+         from: "#{show_user(message.sender)} via Foodsoft <#{FoodsoftConfig[:email_sender]}>",
+         reply_to: "#{show_user(message.sender)} <#{message.sender.email}>"
   end
 end
