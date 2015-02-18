@@ -1131,6 +1131,7 @@ de:
       sent_on: 'Gesendet:'
       subject: 'Betreff:'
       title: Nachricht anzeigen
+      to: 'An:'
   messages_mailer:
     foodsoft_message:
       footer: |

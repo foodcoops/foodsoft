@@ -1140,6 +1140,7 @@ en:
       sent_on: 'Sent:'
       subject: 'Subject:'
       title: Show message
+      to: 'To:'
   messages_mailer:
     foodsoft_message:
       footer: |
