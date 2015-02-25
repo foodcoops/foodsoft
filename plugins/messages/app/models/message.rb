@@ -1,9 +1,11 @@
 class Message < ActiveRecord::Base
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
+  belongs_to :group, :class_name => "Group", :foreign_key => "group_id"
+  belongs_to :reply_to_message, :class_name => "Message", :foreign_key => "reply_to"
 
   serialize :recipients_ids, Array
-  attr_accessor :sent_to_all, :group_id, :recipient_tokens, :reply_to
-  
+  attr_accessor :sent_to_all, :recipient_tokens
+
   scope :pending, -> { where(:email_state => 0) }
   scope :sent, -> { where(:email_state => 1) }
   scope :pub, -> { where(:private => false) }
@@ -26,6 +28,7 @@ class Message < ActiveRecord::Base
   end
 
   def clean_up_recipient_ids
+    add_recipients Group.find(group_id).users unless group_id.blank?
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
     self.recipients_ids = User.all.collect(&:id) if sent_to_all == "1"
   end
@@ -35,22 +38,9 @@ class Message < ActiveRecord::Base
     self.recipients_ids += users.collect(&:id) unless users.blank?
   end
 
-  def group_id=(group_id)
-    @group_id = group_id
-    add_recipients Group.find(group_id).users unless group_id.blank?
-  end
-
   def recipient_tokens=(ids)
     @recipient_tokens = ids
     add_recipients ids.split(",").collect { |id| User.find(id) }
-  end
-
-  def reply_to=(message_id)
-    @reply_to = Message.find(message_id)
-    add_recipients([@reply_to.sender])
-    self.subject = I18n.t('messages.model.reply_subject', :subject => @reply_to.subject)
-    self.body = I18n.t('messages.model.reply_header', :user => @reply_to.sender.display, :when => I18n.l(@reply_to.created_at, :format => :short)) + "\n"
-    @reply_to.body.each_line{ |l| self.body += I18n.t('messages.model.reply_indent', :line => l) }
   end
 
   def mail_to=(user_id)

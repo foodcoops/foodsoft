@@ -22,6 +22,11 @@
 - title t('.title')
 
 = simple_form_for @message do |f|
+  = f.hidden_field :reply_to
+
+  - if @message.reply_to
+    %p= t('.reply_to', link: link_to(t('.message'), message_path(@message.reply_to))).html_safe
+
   - if FoodsoftConfig[:mailing_list].blank?
     = f.input :sent_to_all, :as => :boolean
   - else

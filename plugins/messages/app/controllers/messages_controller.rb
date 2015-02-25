@@ -10,8 +10,18 @@ class MessagesController < ApplicationController
   # Creates a new message object.
   def new
     @message = Message.new(params[:message])
-    if @message.reply_to && !@message.reply_to.is_readable_for?(current_user)
-      redirect_to new_message_url, alert: 'Nachricht ist privat!'
+
+    if @message.reply_to
+      original_message = Message.find(@message.reply_to)
+      if original_message.is_readable_for?(current_user)
+        @message.add_recipients [original_message.sender]
+        @message.group_id = original_message.group_id
+        @message.subject = I18n.t('messages.model.reply_subject', :subject => original_message.subject)
+        @message.body = I18n.t('messages.model.reply_header', :user => original_message.sender.display, :when => I18n.l(original_message.created_at, :format => :short)) + "\n"
+        original_message.body.each_line{ |l| @message.body += I18n.t('messages.model.reply_indent', :line => l) }
+      else
+        redirect_to new_message_url, alert: 'Nachricht ist privat!'
+      end
     end
   end
 
