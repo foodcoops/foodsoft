@@ -1120,16 +1120,20 @@ de:
         subscribe: Erklärungen zum Verteiler findest Du im %{link}.
         subscribe_msg: Eventuell musst Du Dich dem Verteiler erst bekannt machen.
         wiki: Wiki (Abschnitt Mailing-Liste)
+      message: Nachricht
       no_user_found: Kein/e Benutzer/in gefunden
+      reply_to: Diese Nachricht ist eine Antwort auf eine andere %{link}.
       search: Suche ...
       search_user: Nach Bernutzer/in suchen
       title: Neue Nachricht
     show:
       all_messages: Nachrichten im Überblick
       from: 'Von:'
+      group: 'Gruppe:'
       reply: Antworten
       sent_on: 'Gesendet:'
       subject: 'Betreff:'
+      reply_to: 'Antwort auf:'
       title: Nachricht anzeigen
       to: 'An:'
   messages_mailer:

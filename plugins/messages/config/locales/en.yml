@@ -58,14 +58,18 @@ en:
         subscribe: You can find more about the mailing-list at %{link}.
         subscribe_msg: You may have to subscribe to the mailing-list first.
         wiki: Wiki (page Mailing-List)
+      message: message
       no_user_found: No user found
+      reply_to: This message is an reply to an other %{link}.
       search: Search ...
       search_user: Search user
       title: New message
     show:
       all_messages: All messages
       from: ! 'From:'
+      group: 'Group:'
       reply: Reply
+      reply_to: 'Reply to:'
       sent_on: ! 'Sent:'
       subject: ! 'Subject:'
       title: Show message

@@ -180,7 +180,9 @@ ActiveRecord::Schema.define(version: 20140921104907) do
 
   create_table "messages", force: true do |t|
     t.integer  "sender_id"
+    t.integer  "reply_to"
     t.text     "recipients_ids"
+    t.integer  "group_id"
     t.string   "subject",                        null: false
     t.text     "body"
     t.integer  "email_state",    default: 0,     null: false
