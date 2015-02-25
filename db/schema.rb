@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211210719) do
+ActiveRecord::Schema.define(version: 20150227161931) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -186,6 +186,8 @@ ActiveRecord::Schema.define(version: 20141211210719) do
     t.integer  "email_state",    limit: 4,     default: 0,     null: false
     t.boolean  "private",        limit: 1,     default: false
     t.datetime "created_at"
+    t.integer  "reply_to",       limit: 4
+    t.integer  "group_id",       limit: 4
   end
 
   create_table "order_articles", force: :cascade do |t|
