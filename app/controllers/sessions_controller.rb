@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:nick], params[:password])
     if user
+      user.update_attribute(:last_login, Time.now)
       login user
       if session[:return_to].present?
         redirect_to_url = session[:return_to]

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :available_locales
 
   protect_from_forgery
-  before_filter  :select_foodcoop, :authenticate, :store_controller, :items_per_page
+  before_filter  :select_foodcoop, :authenticate, :set_user_last_activity, :store_controller, :items_per_page
   after_filter  :remove_controller
   around_filter :set_time_zone, :set_currency
 
@@ -113,6 +113,13 @@ class ApplicationController < ActionController::Base
       end
     else
       authenticate(role)
+    end
+  end
+
+  def set_user_last_activity
+    if current_user && (session[:last_activity] == nil || session[:last_activity] < 1.minutes.ago)
+      current_user.update_attribute(:last_activity, Time.now)
+      session[:last_activity] = Time.now
     end
   end
 

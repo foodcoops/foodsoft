@@ -15,6 +15,10 @@
         %dd= @user.email
         %dt= heading_helper User, :phone
         %dd= @user.phone
+        %dt= heading_helper User, :last_login
+        %dd= format_time(@user.last_login)
+        %dt= heading_helper User, :last_activity
+        %dd= format_time(@user.last_activity)
         %dt= t 'admin.access_to'
         %dd= format_roles(@user)
   .span5
