@@ -154,6 +154,7 @@ GEM
     diff-lcs (1.2.5)
     diffy (3.0.7)
     docile (1.1.5)
+    enum_help (0.0.14)
     erubis (2.7.0)
     eventmachine (1.0.4)
     exception_notification (4.0.1)
@@ -473,6 +474,7 @@ DEPENDENCIES
   daemons
   database_cleaner
   date_time_attribute
+  enum_help
   exception_notification
   factory_girl_rails
   faker

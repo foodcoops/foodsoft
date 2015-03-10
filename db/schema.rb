@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140921104907) do
 
   create_table "financial_transactions", force: true do |t|
     t.integer  "ordergroup_id",                         default: 0, null: false
+    t.integer  "cost_type,                              default: 0, null: false
     t.decimal  "amount",        precision: 8, scale: 2, default: 0, null: false
     t.text     "note",                                              null: false
     t.integer  "user_id",                               default: 0, null: false

@@ -10,8 +10,10 @@ class FinancialTransaction < ActiveRecord::Base
 
   localize_input_of :amount
 
+  enum cost_type: [:credit , :membership_fee, :deposit]
+
   # Use this save method instead of simple save and after callback
   def add_transaction!
-    ordergroup.add_financial_transaction! amount, note, user
+    ordergroup.add_financial_transaction! cost_type, amount, note, user
   end
 end

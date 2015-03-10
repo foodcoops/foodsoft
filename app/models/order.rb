@@ -225,7 +225,7 @@ class Order < ActiveRecord::Base
     transaction do                                        # Start updating account balances
       for group_order in gos
         price = group_order.price * -1                    # decrease! account balance
-        group_order.ordergroup.add_financial_transaction!(price, transaction_note, user)
+        group_order.ordergroup.add_financial_transaction!(:credit, price, transaction_note, user)
       end
 
       if stockit?                                         # Decreases the quantity of stock_articles
@@ -287,4 +287,3 @@ class Order < ActiveRecord::Base
   end
 
 end
-

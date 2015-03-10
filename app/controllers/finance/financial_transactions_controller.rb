@@ -58,7 +58,7 @@ class Finance::FinancialTransactionsController < ApplicationController
     params[:financial_transactions].each do |trans|
       # ignore empty amount fields ...
       unless trans[:amount].blank?
-        Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(trans[:amount], params[:note], @current_user)
+        Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(params[:cost_type].to_i, trans[:amount], params[:note], @current_user)
       end
     end
     redirect_to finance_ordergroups_url, notice: I18n.t('finance.financial_transactions.controller.create_collection.notice')

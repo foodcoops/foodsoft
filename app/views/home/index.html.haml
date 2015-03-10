@@ -53,14 +53,24 @@
           %th= heading_helper FinancialTransaction, :created_on
           %th= heading_helper FinancialTransaction, :user
           %th= heading_helper FinancialTransaction, :note
-          %th= heading_helper FinancialTransaction, :amount
+          %th= heading_helper FinancialTransaction, :deposit
+          %th= heading_helper FinancialTransaction, :memebership_fee
+          %th= heading_helper FinancialTransaction, :credit
         - for ft in current_user.ordergroup.financial_transactions.limit(5).order('created_on DESC')
           %tr
             %td= format_time(ft.created_on)
             %td= h(show_user(ft.user))
             %td= h(ft.note)
             - color = ft.amount < 0 ? 'red' : 'black'
-            %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
+            %td.currency{:style => "color:#{color}; width:5em"}
+              - if ft.deposit?
+                = number_to_currency(ft.amount)
+            %td.currency{:style => "color:#{color}; width:5em"}
+              - if ft.membership_fee?
+                = number_to_currency(ft.amount)
+            %td.currency{:style => "color:#{color}; width:5em"}
+              - if ft.credit?
+                = number_to_currency(ft.amount)
       %br/
       %p= link_to t('.my_ordergroup.transactions.view'), my_ordergroup_path
 

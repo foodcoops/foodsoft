@@ -40,6 +40,9 @@ de:
       financial_transaction:
         amount: Betrag
         created_on: Datum
+        credit: Guthaben
+        deposit: Kaution
+        memebership_fee: Mitgliedsbeitrag
         note: Notiz
         ordergroup: Bestellgruppe
         user: Eingetragen von

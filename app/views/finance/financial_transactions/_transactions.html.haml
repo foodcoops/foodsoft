@@ -17,7 +17,9 @@
         %th= heading_helper FinancialTransaction, :ordergroup
       %th= heading_helper FinancialTransaction, :user
       %th= sort_link_helper heading_helper(FinancialTransaction, :note), "note"
-      %th= sort_link_helper heading_helper(FinancialTransaction, :amount), "amount"
+      %th= sort_link_helper heading_helper(FinancialTransaction, :deposit), "amount"
+      %th= sort_link_helper heading_helper(FinancialTransaction, :memebership_fee), "amount"
+      %th= sort_link_helper heading_helper(FinancialTransaction, :credit), "amount"
   %tbody
     - @financial_transactions.each do |t|
       %tr
@@ -26,4 +28,12 @@
           %td= h link_to t.ordergroup.name, finance_ordergroup_transactions_path(t.ordergroup)
         %td= h show_user(t.user)
         %td= h t.note
-        %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}= number_to_currency(t.amount)
+        %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}
+          - if t.deposit?
+            = number_to_currency(t.amount)
+        %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}
+          - if t.membership_fee?
+            = number_to_currency(t.amount)
+        %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}
+          - if t.credit?
+            = number_to_currency(t.amount)

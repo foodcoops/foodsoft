@@ -24,6 +24,9 @@
     %b= heading_helper FinancialTransaction, :note
     = text_field_tag :note, params[:note], class: 'input-xlarge', required: 'required'
   %p
+    %b= heading_helper FinancialTransaction, :cost_type
+    = select_tag :cost_type, options_for_select(FinancialTransaction.cost_types, params[:cost_type])
+  %p
     %table#ordergroups{:style => "width:20em"}
       %tr
         %th= heading_helper FinancialTransaction, :ordergroup

@@ -14,7 +14,7 @@ describe 'product distribution', :type => :feature do
     before do
       [user_a, user_b].each do |user|
         ordergroup = Ordergroup.find(user.ordergroup.id)
-        ordergroup.add_financial_transaction! 5000, 'for ordering', admin
+        ordergroup.add_financial_transaction! :credit, 5000, 'for ordering', admin
       end
     end
 
