@@ -16,6 +16,7 @@ class MessagesController < ApplicationController
       if original_message.is_readable_for?(current_user)
         @message.add_recipients [original_message.sender]
         @message.group_id = original_message.group_id
+        @message.private = original_message.private
         @message.subject = I18n.t('messages.model.reply_subject', :subject => original_message.subject)
         @message.body = I18n.t('messages.model.reply_header', :user => original_message.sender.display, :when => I18n.l(original_message.created_at, :format => :short)) + "\n"
         original_message.body.each_line{ |l| @message.body += I18n.t('messages.model.reply_indent', :line => l) }
