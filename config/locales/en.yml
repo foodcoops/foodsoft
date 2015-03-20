@@ -1386,6 +1386,11 @@ en:
     title: Title
     update:
       notice: Page was updated
+    variables:
+      title: Foodsoft variables
+      description: Variables return information from somewhere else. When you use the variable, it will be replaced by its value when displayed. Foodsoft has a number of pre-defined variables, such as the name and address of your foodcoop, the software version, and the number of members and suppliers. See the table below for all variables. You can use these in wiki pages as well as in the footer (from the configuration screen).
+      variable: Variable
+      value: Current value
     version:
       author: 'Author: %{user}'
       date_format: "%a, %d-%m-%Y, %H:%M"

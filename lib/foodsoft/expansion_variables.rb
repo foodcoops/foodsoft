@@ -40,7 +40,7 @@ module Foodsoft
       'supplier_count'          => ->{ Supplier.undeleted.count },
       'active_supplier_count'   => ->{ active_supplier_count },
       'active_suppliers'        => ->{ active_suppliers },
-      'first_order_date'        => ->{ I18n.l Order.first.created_at.to_date }
+      'first_order_date'        => ->{ I18n.l Order.first.try{|o| o.starts.to_date} }
     }
 
     # Return expanded variable

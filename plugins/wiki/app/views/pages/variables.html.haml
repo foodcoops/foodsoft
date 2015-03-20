@@ -1,0 +1,16 @@
+- title t '.title'
+
+%p= t '.description'
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th= t '.variable'
+      %th= t '.value'
+  %tbody
+    - @variables.each do |key, value|
+      %tr
+        %td
+          %tt= "{{#{key}}}"
+        %td
+          = value

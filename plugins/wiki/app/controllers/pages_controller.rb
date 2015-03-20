@@ -1,6 +1,7 @@
 # encoding: utf-8
 class PagesController < ApplicationController
   before_filter -> { require_plugin_enabled FoodsoftWiki }
+  before_filter :catch_special_pages, only: [:show, :new]
 
   skip_before_filter :authenticate, :only => :all
   before_filter :only => :all do
@@ -139,5 +140,19 @@ class PagesController < ApplicationController
     @page.revert_to!(params[:version].to_i)
 
     redirect_to wiki_page_path(@page.permalink)
+  end
+
+  def variables
+    keys = Foodsoft::ExpansionVariables.variables.keys
+    @variables = Hash[keys.map {|k| [k, Foodsoft::ExpansionVariables.get(k)]}]
+    render 'variables'
+  end
+
+  private
+
+  def catch_special_pages
+    if params[:id] == 'Help:Foodsoft_variables'
+      variables
+    end
   end
 end
