@@ -1345,20 +1345,24 @@ en:
       help:
         bold: bold
         external_link_ex: External page
-        external_links: External links
+        external_links: External
         heading: level %{level}
         headings: Heading
         italic: italic
+        image_links: Images
+        image_link_title: Image title
+        link_lists: More on lists
+        link_table: Table formatting
+        link_templates: Templates
+        link_variables: Foodsoft variables
         list_item_1: First list item
         list_item_2: Second list item
-        noformat: No wiki-formatting
+        noformat: No formatting
         ordered_list: Numbered list
         section_block: Block formatting
         section_character: Character formatting
         section_link: Link formatting
-        section_table: Table formatting
-        see_tables: see %{tables_link}
-        tables_link: Tables
+        section_more: More topics
         text: text
         title: Quick formatting help
         unordered_list: Item list

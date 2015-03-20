@@ -1345,7 +1345,7 @@ nl:
         italic: italic
         list_item_1: Eerste in de lijst
         list_item_2: Tweede in de lijst
-        noformat: Zonder wiki-opmaak
+        noformat: Zonder opmaak
         ordered_list: Genummerde lijst
         section_block: Paragrafen
         section_character: Tekens

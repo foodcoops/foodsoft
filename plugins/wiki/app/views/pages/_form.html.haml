@@ -17,7 +17,7 @@
         = link_to t('ui.or_cancel'), @page
 
   .span4
-    %h3= t '.help.title'
+    %h3(style='margin-top: 0')= t '.help.title'
     %table.table
       %tbody
         %tr
@@ -45,24 +45,20 @@
           %td= t '.help.headings'
           %td
             %pre
-              \== #{t '.help.heading', level: 1} ==
-            %pre
-              \=== #{t '.help.heading', level: 2} ===
-            %pre
-              \==== #{t '.help.heading', level: 3} ====
+              \== #{t '.help.heading', level: 1} == <br>
+              \=== #{t '.help.heading', level: 2} === <br>
+              \==== #{t '.help.heading', level: 3} ==== <br>
         %tr
           %td= t '.help.unordered_list'
           %td
             %pre
-              * #{t '.help.list_item_1'}
-            %pre
-              ** #{t '.help.list_item_2'}
+              * #{t '.help.list_item_1'} <br>
+              * #{t '.help.list_item_2'}
         %tr
           %td= t '.help.ordered_list'
           %td
             %pre
-              \# #{t '.help.list_item_1'}
-            %pre
+              \# #{t '.help.list_item_1'} <br>
               \# #{t '.help.list_item_2'}
         %tr
           %td(colspan=2)
@@ -78,8 +74,16 @@
             %pre
               [http://example.net #{t '.help.external_link_ex'}]
         %tr
-          %td(colspan=2)
-            %b= t '.help.section_table'
+          %td= t '.help.image_links'
+          %td
+            %pre
+              [[Image:http://example.net/image.jpg|#{t '.help.image_link_title'}]]
         %tr
-          %td!= t '.help.see_tables', tables_link: link_to(t('.help.tables_link'), "http://www.mediawiki.org/wiki/Help:Tables", :target => '_blank')
-
+          %td(colspan=2)
+            %b= t '.help.section_more'
+        %tr
+          %td(colspan=2)
+            %ul
+              %li!= link_to t('.help.link_table'), '//www.mediawiki.org/wiki/Help:Tables', target: '_blank'
+              %li!= link_to t('.help.link_lists'), '//www.mediawiki.org/wiki/Help:Lists', target: '_blank'
+              %li!= link_to t('.help.link_templates'), '//www.mediawiki.org/wiki/Help:Templates', target: '_blank'
