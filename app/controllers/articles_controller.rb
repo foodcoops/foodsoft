@@ -139,6 +139,7 @@ class ArticlesController < ApplicationController
   def parse_upload
     uploaded_file = params[:articles]['file']
     options = {filename: uploaded_file.original_filename}
+    # @todo move parsing to model (concern)
     @updated_article_pairs, @outlisted_articles, @new_articles = [], [], []
     FoodsoftFile::parse uploaded_file.tempfile, options do |status, new_attrs, line|
       article = @supplier.articles.where(order_number: new_attrs[:order_number]).first
@@ -162,7 +163,6 @@ class ArticlesController < ApplicationController
 
     end
     @ignored_article_count = 0
-    render :sync
   rescue => error
     redirect_to upload_supplier_articles_path(@supplier), :alert => I18n.t('errors.general_msg', :msg => error.message)
   end
