@@ -434,13 +434,23 @@ en:
           other: There are %{count} articles to add.
         title: Add new ...
     upload:
-      body: <p>The file has to be a text file with the ending <tt>.csv</tt>. The first line will be ignored when imported, fields are separated by semicolons (';'), and text may be enclosed by double quotation marks ("text..."). Default character-set is utf-8.</p> <p>Column order:</p>
       fields:
         reserved: "(Reserved)"
         status: Status (x=skip)
       file_label: Please choose a compatible file
+      sample:
+        juices: Juices
+        nuts: Nuts
+        organic: Organic
+        supplier_1: Nuttyfarm
+        supplier_2: Brownfields
+        supplier_3: Greenfields
+        tomato_juice: Tomato juice
+        walnuts: Walnuts
       submit: Upload file
-      title: "%{supplier} / upload articles"
+      text_1: 'Here you can upload a spreadsheet to update the articles of %{supplier}. Excel (xls, xlsx) and OpenOffice (ods) spreadsheets are accepted, as well as comma-separated files (csv, columns separated by ";" with utf-8 encoding). Only the first sheet will be imported, and columns must be in the following order:'
+      text_2: 'The rows shown here are examples. When there is an "x" in the first column, the article is outlisted and will be removed. This allows you to edit the spreadsheet and quickly remove many articles at once, for example when articles become unavailable with the supplier. The category will be matched to your Foodsoft category list (both by category name and import names).'
+      title: "Upload articles of %{supplier}"
   config:
     hints:
       applepear_url: Website where the apple and pear system for tasks is explained.
