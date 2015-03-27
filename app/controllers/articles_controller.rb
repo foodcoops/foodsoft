@@ -139,28 +139,9 @@ class ArticlesController < ApplicationController
   def parse_upload
     uploaded_file = params[:articles]['file']
     options = {filename: uploaded_file.original_filename}
-    # @todo move parsing to model (concern)
-    @updated_article_pairs, @outlisted_articles, @new_articles = [], [], []
-    FoodsoftFile::parse uploaded_file.tempfile, options do |status, new_attrs, line|
-      article = @supplier.articles.where(order_number: new_attrs[:order_number]).first
-      new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
-      new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
-      new_article = @supplier.articles.build(new_attrs)
-
-      if status.nil? && article.nil?
-        @new_articles << new_article
-      elsif status.nil? && article.present?
-        unequal_attributes = article.unequal_attributes(new_article)
-        article.attributes = unequal_attributes
-        @updated_article_pairs << [article, unequal_attributes]
-      elsif status == :outlisted && article.present?
-        @outlisted_articles << article
-
-      # stop when there is a parsing error
-      elsif status.is_a? String
-        raise I18n.t('articles.controller.error_parse', :msg => status, :line => line.to_s)
-      end
-
+    @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_from_file uploaded_file.tempfile, options
+    if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
+      redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.parse_upload.notice')
     end
     @ignored_article_count = 0
   rescue => error

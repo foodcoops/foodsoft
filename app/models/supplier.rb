@@ -26,9 +26,7 @@ class Supplier < ActiveRecord::Base
   # also returns an array with outlisted_articles, which should be deleted
   # also returns an array with new articles, which should be added (depending on shared_sync_method)
   def sync_all
-    updated_articles = Array.new
-    outlisted_articles = Array.new
-    new_articles = Array.new
+    updated_article_pairs, outlisted_articles, new_articles = [], [], []
     for article in articles.undeleted
       # try to find the associated shared_article
       shared_article = article.shared_article(self)
@@ -37,7 +35,7 @@ class Supplier < ActiveRecord::Base
         unequal_attributes = article.shared_article_changed?(self)
         unless unequal_attributes.blank? # skip if shared_article has not been changed
           article.attributes = unequal_attributes
-          updated_articles << [article, unequal_attributes]
+          updated_article_pairs << [article, unequal_attributes]
         end
       # Articles with no order number can be used to put non-shared articles
       # in a shared supplier, with sync keeping them.
@@ -54,7 +52,42 @@ class Supplier < ActiveRecord::Base
         end
       end
     end
-    return [updated_articles, outlisted_articles, new_articles]
+    return [updated_article_pairs, outlisted_articles, new_articles]
+  end
+
+  # Synchronise articles with spreadsheet.
+  #
+  # @param file [File] Spreadsheet file to parse
+  # @param options [Hash] Options passed to {FoodsoftFile#parse} except when listed here.
+  # @option options [Boolean] :outlist_absent Set to +true+ to remove articles not in spreadsheet.
+  def sync_from_file(file, options={})
+    updated_article_pairs, outlisted_articles, new_articles = [], [], []
+    FoodsoftFile::parse file, options do |status, new_attrs, line|
+      article = articles.undeleted.where(order_number: new_attrs[:order_number]).first
+      new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
+      new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
+      new_article = articles.build(new_attrs)
+
+      if status.nil?
+        if article.nil?
+          new_articles << new_article
+        else
+          unequal_attributes = article.unequal_attributes(new_article)
+          unless unequal_attributes.empty?
+            article.attributes = unequal_attributes
+            updated_article_pairs << [article, unequal_attributes]
+          end
+        end
+      elsif status == :outlisted && article.present?
+        outlisted_articles << article
+
+      # stop when there is a parsing error
+      elsif status.is_a? String
+        # @todo move I18n key to model
+        raise I18n.t('articles.model.error_parse', :msg => status, :line => line.to_s)
+      end
+    end
+    return [updated_article_pairs, outlisted_articles, new_articles]
   end
 
   # default value

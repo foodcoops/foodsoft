@@ -355,12 +355,11 @@ en:
         notice: "%{count} new articles were saved."
       error_invalid: There are errors in articles
       error_nosel: No articles selected
-      error_parse: "%{msg} ... in line %{line}"
       error_update: 'An error occured when updating article ''%{article}'': %{msg}'
       parse_upload:
-        notice: "%{count} articles were succesfully analysed."
+        notice: Articles are already up to date.
       sync:
-        notice: Catalog is up to date
+        notice: Articles are already up to date.
         shared_alert: "%{supplier} is not linked to an external database"
       update_all:
         notice: All articles and prices were updated.
@@ -405,6 +404,7 @@ en:
     model:
       error_in_use: "%{article} can not be deleted because the article is part of a current order!"
       error_nosel: You have selected no articles
+      error_parse: "%{msg} ... in line %{line}"
     parse_upload:
       body: "<p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>"
       submit: Process upload
