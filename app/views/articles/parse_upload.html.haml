@@ -1,6 +1,7 @@
 - title t('.title', supplier: @supplier.name)
 
 = form_tag update_synchronized_supplier_articles_path(@supplier) do
+  = hidden_field_tag :from_action, 'parse_upload'
   = render 'sync'
   .form-actions
     = submit_tag t('.submit'), class: 'btn btn-primary'

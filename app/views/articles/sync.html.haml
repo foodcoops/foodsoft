@@ -1,6 +1,8 @@
 - title t('.title')
 
 = form_tag update_synchronized_supplier_articles_path(@supplier) do
+  = hidden_field_tag :from_action, 'sync'
   = render 'sync'
-  = submit_tag t('.submit'), class: 'btn btn-primary'
-  = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)
+  .form-actions
+    = submit_tag t('.submit'), class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)

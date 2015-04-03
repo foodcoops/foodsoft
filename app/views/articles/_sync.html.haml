@@ -27,6 +27,6 @@
   = render 'sync_table', articles: @new_articles, field: 'new_articles', hidden_fields: %w(shared_updated_on order_number)
   %hr/
 
-- if @ignored_article_count > 0
+- if ignored_article_count > 0
   %p
-    %i= t '.outlist.body_ignored', count: @ignored_article_count
+    %i= t '.outlist.body_ignored', count: ignored_article_count

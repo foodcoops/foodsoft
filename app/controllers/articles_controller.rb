@@ -160,48 +160,40 @@ class ArticlesController < ApplicationController
     if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
       redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.sync.notice')
     end
-    @ignored_article_count = @supplier.articles.where(order_number: [nil, '']).count
   end
 
   # Updates, deletes articles when upload or sync form is submitted
   def update_synchronized
-    begin
-      Article.transaction do
-        # delete articles
-        if params[:outlisted_articles]
-          Article.find(params[:outlisted_articles].keys).each(&:mark_as_deleted)
-        end
+    @outlisted_articles = Article.find(params[:outlisted_articles].try(:keys)||[])
+    @updated_articles = Article.find(params[:articles].try(:keys)||[])
+    @updated_articles.map{|a| a.assign_attributes(params[:articles][a.id.to_s]) }
+    @new_articles = (params[:new_articles]||[]).map{|a| @supplier.articles.build(a) }
 
-        # Update articles
-        if params[:articles]
-          params[:articles].each do |id, attrs|
-            Article.find(id).update_attributes! attrs
-          end
-        end
-
-        # Add new articles
-        if params[:new_articles]
-          params[:new_articles].each do |attrs|
-            article = Article.new attrs
-            article.supplier = @supplier
-            article.availability = true if @supplier.shared_sync_method == 'all_available'
-            article.availability = false if @supplier.shared_sync_method == 'all_unavailable'
-            article.save!
-          end
-        end
+    has_error = false
+    Article.transaction do
+      # delete articles
+      @outlisted_articles.each(&:mark_as_deleted)
+      # Update articles
+      @updated_articles.map{|a| a.save or has_error=true }
+      # Add new articles
+      @new_articles.each do |article|
+        article.availability = true if @supplier.shared_sync_method == 'all_available'
+        article.availability = false if @supplier.shared_sync_method == 'all_unavailable'
+        article.save or has_error=true
       end
 
-      # Successfully done.
+      raise ActiveRecord::Rollback if has_error
+    end
+
+    if !has_error
       redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_sync.notice')
-
-    rescue ActiveRecord::RecordInvalid => invalid
-      # An error has occurred, transaction has been rolled back.
-      redirect_to supplier_articles_path(@supplier),
-                  alert: I18n.t('articles.controller.error_update', :article => invalid.record.name, :msg => invalid.record.errors.full_messages)
-
-    rescue => error
-      redirect_to supplier_articles_path(@supplier),
-                  alert: I18n.t('errors.general_msg', :msg => error.message)
+    else
+      @updated_article_pairs = @updated_articles.map do |article|
+        orig_article = Article.find(article.id)
+        [article, orig_article.unequal_attributes(article)]
+      end
+      flash.now.alert = I18n.t('articles.controller.error_invalid')
+      render params[:from_action] == 'sync' ? :sync : :parse_upload
     end
   end
 
@@ -225,6 +217,18 @@ class ArticlesController < ApplicationController
       render :action => 'create', :layout => false
     else
       render :action => 'new', :layout => false
+    end
+  end
+
+  private
+
+  # @return [Number] Number of articles not taken into account when syncing (having no number)
+  helper_method \
+  def ignored_article_count
+    if action_name == 'sync' || params[:from_action] == 'sync'
+      @ignored_article_count ||= @supplier.articles.where(order_number: [nil, '']).count
+    else
+      0
     end
   end
 end

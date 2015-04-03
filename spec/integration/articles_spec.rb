@@ -72,6 +72,19 @@ describe ArticlesController, :type => :feature do
       end
     end
 
+    describe "handles missing data" do
+      it do
+        find('input[type="submit"]').click # to overview
+        find('input[type="submit"]').click # missing category, re-show form
+        expect(find('tr.alert')).to be_present
+        expect(supplier.articles.count).to eq 0
+
+        all("tr select > option")[1].select_option
+        find('input[type="submit"]').click # now it should succeed
+        expect(supplier.articles.count).to eq 1
+      end
+    end
+
     #describe "can remove an existing article" do
     #  let!(:article) { create :article, supplier: supplier, name: 'Foobar', order_number: 99999 }
     #  it do
