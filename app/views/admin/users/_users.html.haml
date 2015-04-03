@@ -9,17 +9,17 @@
       %th= heading_helper User, :name
       %th= heading_helper User, :email
       %th= t 'admin.access_to'
-      %th= heading_helper User, :last_login
+      %th= heading_helper User, :last_activity
       %th(colspan="2")= t 'ui.actions'
   %tbody
-    - for user in @users 
+    - for user in @users
       %tr
         %td= link_to show_user(user), [:admin, user]
         - if FoodsoftConfig[:use_nick]
           %td= user.name
         %td= user.email
         %td= format_roles(user)
-        %td= format_time(user.last_login)
+        %td= format_time(user.last_activity)
         %td= link_to t('ui.edit'), edit_admin_user_path(user), class: 'btn btn-mini'
         %td= link_to t('ui.delete'), [:admin, user], :data => {:confirm => t('admin.confirm', name: user.name)},
             :method => :delete, class: 'btn btn-danger btn-mini'

@@ -149,6 +149,7 @@ en:
       user:
         email: Email
         first_name: First name
+        last_activity: Last activity
         last_login: Last login
         last_name: Last name
         name: Name
