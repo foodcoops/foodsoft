@@ -18,7 +18,7 @@
         - if FoodsoftConfig[:use_nick]
           %td= user.name
         %td= user.email
-        %td= format_roles(user)
+        %td= format_roles(user, true)
         %td= format_time(user.last_activity)
         %td= link_to t('ui.edit'), edit_admin_user_path(user), class: 'btn btn-mini'
         %td= link_to t('ui.delete'), [:admin, user], :data => {:confirm => t('admin.confirm', name: user.name)},

@@ -37,3 +37,4 @@ License
 
 GPL version 3 or later, please see [LICENSE](LICENSE.md) for the full text.
 
+Thanks to [Icons8](http://icons8.com/) for letting us use their icons.

@@ -2,11 +2,11 @@
 = simple_form_for [:admin, @workgroup] do |f|
   - captured = capture do
     %h4= t 'admin.access_to'
-    = f.input :role_admin
-    = f.input :role_finance
     = f.input :role_suppliers
     = f.input :role_article_meta
     = f.input :role_orders
+    = f.input :role_finance
+    = f.input :role_admin
   = render 'shared/group_form_fields', :f => f, captured: captured
   .form-actions
     = f.button :submit
