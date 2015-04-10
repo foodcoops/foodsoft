@@ -23,7 +23,7 @@ class MultipleOrdersByArticles < OrderPdf
       has_units_str = ''
       for goa in order_article.group_order_articles.ordered
         units = result_in_units(goa, order_article.article)
-        rows << [show_group(goa.group_order.ordergroup),
+        rows << [goa.group_order.ordergroup.name,
                  goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity,
                  goa.result,
                  units,

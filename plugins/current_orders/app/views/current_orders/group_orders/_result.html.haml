@@ -36,7 +36,7 @@
             %td
               = oa.article.unit
               %span{style: 'opacity: 0.4; margin-left: 1em;'}= pkg_helper(oa.price, soft_uq: true)
-            %td= number_to_currency oa.price.fc_price(@ordergroup)
+            %td= number_to_currency oa.price.fc_price
             %td
               = r[:quantity]
               = "+ #{r[:tolerance]}" if oa.price.unit_quantity > 1

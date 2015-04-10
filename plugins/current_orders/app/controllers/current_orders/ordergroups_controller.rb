@@ -1,6 +1,6 @@
 # encoding: utf-8
 class CurrentOrders::OrdergroupsController < ApplicationController
-  
+
   before_filter :authenticate_orders
   before_filter :find_group_orders, only: [:index, :show]
 
@@ -31,7 +31,7 @@ class CurrentOrders::OrdergroupsController < ApplicationController
   def find_group_orders
     @order_ids = Order.finished_not_closed.map(&:id)
 
-    @all_ordergroups = Ordergroup.undeleted.order(:name).all
+    @all_ordergroups = Ordergroup.undeleted.order(:name).to_a
     @ordered_group_ids = GroupOrder.where(order_id: @order_ids).pluck('DISTINCT(ordergroup_id)')
     @all_ordergroups.sort_by! {|o| @ordered_group_ids.include?(o.id) ? o.name : "ZZZZZ#{o.name}" }
 
@@ -40,4 +40,8 @@ class CurrentOrders::OrdergroupsController < ApplicationController
               where(group_orders: {order_id: @order_ids, ordergroup_id: @ordergroup.id}).ordered.all unless @ordergroup.nil?
   end
 
+  helper_method \
+  def articles_for_adding
+    OrderArticle.includes(:article, :article_price).where(order_id: @order_ids)
+  end
 end

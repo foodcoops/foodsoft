@@ -9,15 +9,9 @@
           %acronym{:title => t('shared.articles.ordered_desc')}= t 'shared.articles.ordered'
         %th.center{style: 'width: 88px'}
           %acronym{:title => t('shared.articles.received_desc')}= t 'shared.articles.received'
-        %th.nowrap.dimmed
         %th.symbol
         %th= heading_helper Article, :fc_price, short: true
         %th.symbol
-        %td.center
-          .btn-group
-            - if true #if units and units.units != order_article.article.unit
-              = link_to t('current_orders.articles.ordergroups.piece'), current_orders_ordergroups_path(id: @ordergroup.id), remote: true, class: "btn btn-small #{'active' unless params[:base_unit]}"
-              = link_to t('current_orders.articles.ordergroups.unit'), current_orders_ordergroups_path(id: @ordergroup.id, base_unit: true), remote: true, class: "btn btn-small #{'active' if params[:base_unit]}"
 
     - total = 0
     %tbody.list
@@ -28,22 +22,21 @@
 
       - else
         %tr
-          %td{colspan: 11}
-            %i No articles for #{show_group(@ordergroup)} in the current orders.
+          %td{colspan: 9}
+            %i No articles for #{@ordergroup.name} in the current orders.
 
     %tfoot
       %tr
-        %td{colspan: 10}
-          - new_articles = OrderArticle.includes(:article, :article_price).where(order_id: @order_ids)
-          - new_article_data = articles_for_select2(new_articles) {|a| "#{a.article.name} (#{a.article.unit}, #{number_to_currency a.price.fc_price})"}
+        %td{colspan: 9}
+          - new_article_data = articles_for_select2(articles_for_adding) {|a| "#{a.article.name} (#{a.article.unit}, #{number_to_currency a.price.fc_price})"}
           = form_for GroupOrderArticle.new, remote: true, html: {'data-submit-onchange' => true, style: 'margin: 0'} do |f|
             = f.select :order_article_id,
                 options_for_select(new_article_data.map {|a| [a[:text], a[:id]]}),
                 {}, {style: 'width: 500px', 'data-placeholder' => t('.add_new') }
             = f.hidden_field :ordergroup_id, value: @ordergroup.id
         %tr#single_ordergroup_total{:class => cycle('even', 'odd', :name => 'articles')}
-          %th{colspan: 9}= t 'shared.articles_by.price_sum'
-          %th.price_sum{colspan: 2, data: {value: total}}= number_to_currency(total)
+          %th{colspan: 8}= t 'shared.articles_by.price_sum'
+          %th.price_sum{data: {value: total}}= number_to_currency(total)
 
 
   .well#payment_bar

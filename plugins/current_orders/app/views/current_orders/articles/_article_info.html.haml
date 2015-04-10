@@ -5,13 +5,13 @@
   -# @todo unduplicate from group_orders's order_article_info
   %p
     - if order_article.article.manufacturer.blank?
-      = raw t 'group_orders.order_article_info.supplied_by', supplier: content_tag(:em, supplier_link(order_article.article.supplier))
+      = raw t '.supplied_by', supplier: content_tag(:em, supplier_link(order_article.article.supplier))
     - elsif order_article.article.supplier.name == order_article.article.manufacturer
-      = raw t 'group_orders.order_article_info.supplied_and_made_by', manufacturer: content_tag(:em, supplier_link(order_article.article.supplier))
+      = raw t '.supplied_and_made_by', manufacturer: content_tag(:em, supplier_link(order_article.article.supplier))
     - else
-      = raw t 'group_orders.order_article_info.supplied_by_made_by', supplier: content_tag(:em, supplier_link(order_article.article.supplier)), manufacturer: content_tag(:em, order_article.article.manufacturer)
+      = raw t '.supplied_by_made_by', supplier: content_tag(:em, supplier_link(order_article.article.supplier)), manufacturer: content_tag(:em, order_article.article.manufacturer)
     - unless order_article.article.origin.blank?
-      = raw t 'group_orders.order_article_info.origin_in', origin: content_tag(:em, order_article.article.origin)
+      = raw t '.origin_in', origin: content_tag(:em, order_article.article.origin)
 
     - pkg_info = pkg_helper(order_article.price)
     = ", #{pkg_info}".html_safe unless pkg_info.blank?
@@ -19,4 +19,4 @@
     = ", "
     = Article.human_attribute_name(:fc_price_short) + ": "
     = number_to_currency(order_article.price.fc_price)
-    = t 'current_orders.articles.article_info.unit', unit: order_article.article.unit
+    = t '.unit', unit: order_article.article.unit

@@ -2,10 +2,15 @@ en:
   current_orders:
     articles:
       article:
+        counts: '%{ordergroups} ordergroups ordered %{articles} different articles.'
         no_selection: Choose an article to show who ordered it, or download pick lists at the right.
       article_info:
-        from: from %{supplier}
+        origin_in: in %{origin}
+        supplied_by: from %{supplier}
+        supplied_and_made_by: made by %{manufacturer}
+        supplied_by_made_by: from %{supplier} made by %{manufacturer}
         unit: per %{unit}
+        from: from %{supplier}
       form:
         article_placeholder: Search articles...
         current_orders: All current orders
@@ -23,9 +28,9 @@ en:
     ordergroups:
       articles:
         add_new: Add an article...
+        no_selection: Choose an ordergroup to show the articles.
       form:
         ordergroup_placeholder: Choose an ordergroup...
-        no_selection: Choose an ordergroup to show the articles.
       index:
         title: Articles for ordergroup
       payment_bar:

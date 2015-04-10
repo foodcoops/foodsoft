@@ -1,7 +1,7 @@
 .well
   = form_tag current_orders_ordergroups_path, method: :get, 'data-submit-onchange' => true, style: 'margin: 0' do
     = select_tag 'id',
-      options_for_select(@all_ordergroups.map { |g| [ show_group(g), g.id, {class: ('muted' unless @ordered_group_ids.include? g.id)}] }, (@ordergroup.id rescue '')),
+      options_for_select(@all_ordergroups.map { |g| [ g.name, g.id, {class: ('muted' unless @ordered_group_ids.include? g.id)}] }, (@ordergroup.id rescue '')),
         include_blank: true, id: 'ordergroup_select', style: 'min-width: 300px',
         'data-placeholder' => t('.ordergroup_placeholder'), 'data-submit-on-change' => :true
   -#.form-search.pull-right # see below why this is disabled
@@ -69,4 +69,3 @@
       });
       */
     });
-

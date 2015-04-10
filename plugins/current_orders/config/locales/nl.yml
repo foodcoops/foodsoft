@@ -2,6 +2,7 @@ nl:
   current_orders:
     articles:
       article:
+        counts: '%{ordergroups} huishoudens bestelden %{articles} verschillende artikelen.'
         no_selection: Kies een artikel om te zien wie het besteld heeft, of download verdeellijsten rechtsboven.
       article_info:
         from: van %{supplier}
