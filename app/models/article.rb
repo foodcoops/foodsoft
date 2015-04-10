@@ -62,26 +62,37 @@ class Article < ActiveRecord::Base
   #validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type], if: Proc.new {|a| a.supplier.shared_sync_method.blank? or a.supplier.shared_sync_method == 'import' }
   #validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit, :unit_quantity]
   validate :uniqueness_of_name
-  
+
   # Callbacks
   before_save :update_price_history
   before_destroy :check_article_in_use
-  
+
   # The financial gross, net plus tax and deposti
   def gross_price
     ((price + deposit) * (tax / 100 + 1)).round(2)
+  end
+
+  # Amount for VAT (excl. tax over foodcoop margin)
+  def tax_price
+    ((price + deposit) * (tax / 100)).round(2)
   end
 
   # The price for the foodcoop-member.
   def fc_price
     (gross_price  * (FoodsoftConfig[:price_markup] / 100 + 1)).round(2)
   end
-  
+
+  # Unit of the whole pack/box/unit_quantity
+  # @return [Unit] Full unit, or +nil+ if unit couldn't be parsed
+  def pack_unit
+    ::Unit.new(unit) * unit_quantity rescue nil
+  end
+
   # Returns true if article has been updated at least 2 days ago
   def recently_updated
     updated_at > 2.days.ago
   end
-  
+
   # If the article is used in an open Order, the Order will be returned.
   def in_open_order
     @in_open_order ||= begin
@@ -90,21 +101,21 @@ class Article < ActiveRecord::Base
       order_article ? order_article.order : nil
     end
   end
-  
+
   # Returns true if the article has been ordered in the given order at least once
   def ordered_in_order?(order)
     order.order_articles.where(article_id: id).where('quantity > 0').one?
   end
-  
+
   # this method checks, if the shared_article has been changed
   # unequal attributes will returned in array
-  # if only the timestamps differ and the attributes are equal, 
+  # if only the timestamps differ and the attributes are equal,
   # false will returned and self.shared_updated_on will be updated
   def shared_article_changed?(supplier = self.supplier)
     # skip early if the timestamp hasn't changed
     shared_article = self.shared_article(supplier)
     unless shared_article.nil? || self.shared_updated_on == shared_article.updated_on
-      
+
       # try to convert units
       # convert supplier's price and unit_quantity into fc-size
       new_price, new_unit_quantity = self.convert_units
@@ -113,7 +124,7 @@ class Article < ActiveRecord::Base
         # if convertion isn't possible, take shared_article-price/unit_quantity
         new_price, new_unit_quantity, new_unit = shared_article.price, shared_article.unit_quantity, shared_article.unit
       end
-      
+
       # check if all attributes differ
       unequal_attributes = Article.compare_attributes(
         {
@@ -129,7 +140,7 @@ class Article < ActiveRecord::Base
           :note => [self.note.to_s, shared_article.note.to_s]
         }
       )
-      if unequal_attributes.empty?            
+      if unequal_attributes.empty?
         # when attributes not changed, update timestamp of article
         self.update_attribute(:shared_updated_on, shared_article.updated_on)
         false
@@ -138,20 +149,20 @@ class Article < ActiveRecord::Base
       end
     end
   end
-  
+
   # compare attributes from different articles. used for auto-synchronization
   # returns array of symbolized unequal attributes
   def self.compare_attributes(attributes)
     unequal_attributes = attributes.select { |name, values| values[0] != values[1] && !(values[0].blank? && values[1].blank?) }
     unequal_attributes.collect { |pair| pair[0] }
   end
-  
+
   # to get the correspondent shared article
   def shared_article(supplier = self.supplier)
     self.order_number.blank? and return nil
     @shared_article ||= supplier.shared_supplier.shared_articles.find_by_number(self.order_number) rescue nil
   end
-  
+
   # convert units in foodcoop-size
   # uses unit factors in app_config.yml to calc the price/unit_quantity
   # returns new price and unit_quantity in array, when calc is possible => [price, unit_quanity]
@@ -196,7 +207,7 @@ class Article < ActiveRecord::Base
   end
 
   protected
-  
+
   # Checks if the article is in use before it will deleted
   def check_article_in_use
     raise I18n.t('articles.model.error_in_use', :article => self.name.to_s) if self.in_open_order

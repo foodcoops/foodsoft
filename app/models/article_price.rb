@@ -34,10 +34,16 @@ class ArticlePrice < ActiveRecord::Base
     ((price + deposit) * (tax / 100 + 1)).round(2)
   end
 
+  # Tax price = (price + deposit) * VAT%/100%
+  # @return [Number] Amount for VAT (excl. tax over foodcoop margin)
+  # @todo remove code-duplication with Article
+  def tax_price
+    ((price + deposit) * (tax / 100)).round(2)
+  end
+
   # @return [Number] Price for the foodcoop-member.
   # @todo remove code-duplication with Article
   def fc_price
     (gross_price  * (FoodsoftConfig[:price_markup] / 100 + 1)).round(2)
   end
 end
-
