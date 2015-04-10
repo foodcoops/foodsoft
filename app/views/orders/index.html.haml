@@ -54,8 +54,7 @@
               %td= truncate(order.note)
               %td
                 - unless order.stockit?
-                  -# TODO btn-success class only if not received before
-                  = link_to t('.action_receive'), receive_order_path(order), class: 'btn btn-small btn-success'
+                  = receive_button order
 
               %td
                 = link_to t('ui.copy'), new_order_path(order_id: order, supplier_id: order.supplier), class: 'btn btn-small'

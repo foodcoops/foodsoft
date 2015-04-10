@@ -139,4 +139,18 @@ module OrdersHelper
       'unavailable'
     end
   end
+
+  # Button for receiving an order.
+  #   If the order hasn't been received before, the button is shown in green.
+  # @param order [Order]
+  # @option options [String] :class Classes added to the button's class attribute.
+  # @return [String] Order receive button.
+  def receive_button(order, options={})
+    if order.stockit?
+      content_tag :div, t('orders.index.action_receive'), class: "btn disabled #{options[:class]}"
+    else
+      was_received = order.order_articles.where('units_received IS NOT NULL').any?
+      link_to t('orders.index.action_receive'), receive_order_path(order), class: "btn#{' btn-success' unless was_received} #{options[:class]}"
+    end
+  end
 end

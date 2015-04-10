@@ -64,8 +64,7 @@
         data: {confirm: t('.confirm_end', order: @order.name)}
       = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
     - elsif not @order.closed? and not @order.stockit?
-      -# TODO btn-success class only if not received before
-      = link_to t('orders.index.action_receive'), receive_order_path(@order), class: 'btn btn-success'
+      = receive_button @order
     - unless @order.closed?
       = link_to t('ui.delete'), @order, data: {confirm: t('.confirm_delete')}, method: :delete,
         class: 'btn btn-danger'
