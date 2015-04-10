@@ -1,0 +1,20 @@
+-# this needs to be in a separate file from show.html.erb to allow deface overrides
+- content_for :javascript do
+  :javascript
+    function activate_search(view, placeholder) {
+      new List(document.body, {
+        valueNames: ['name'],
+        engine: 'unlist',
+        plugins: [
+          ['reset', {highlightClass: 'btn-primary'}],
+          ['delay', {delayedSearchTime: 500}],
+        ],
+        // make large pages work too (as we don't have paging)
+        page: 10000,
+        indexAsync: true
+      });
+      $('#query').attr('placeholder', placeholder);
+    }
+    $(function() {
+      activate_search('#{j @view}', '#{j t(".search_placeholder.#{@view}")}');
+    });
