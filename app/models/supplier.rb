@@ -61,6 +61,7 @@ class Supplier < ActiveRecord::Base
   # @param options [Hash] Options passed to {FoodsoftFile#parse} except when listed here.
   # @option options [Boolean] :outlist_absent Set to +true+ to remove articles not in spreadsheet.
   def sync_from_file(file, options={})
+    all_order_numbers = []
     updated_article_pairs, outlisted_articles, new_articles = [], [], []
     FoodsoftFile::parse file, options do |status, new_attrs, line|
       article = articles.undeleted.where(order_number: new_attrs[:order_number]).first
@@ -86,6 +87,11 @@ class Supplier < ActiveRecord::Base
         # @todo move I18n key to model
         raise I18n.t('articles.model.error_parse', :msg => status, :line => line.to_s)
       end
+
+      all_order_numbers << article.order_number if article
+    end
+    if options[:outlist_absent]
+      outlisted_articles += articles.undeleted.where.not(id: all_order_numbers+[nil])
     end
     return [updated_article_pairs, outlisted_articles, new_articles]
   end
@@ -126,4 +132,3 @@ class Supplier < ActiveRecord::Base
     end
   end
 end
-

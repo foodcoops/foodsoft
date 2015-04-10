@@ -85,14 +85,17 @@ describe ArticlesController, :type => :feature do
       end
     end
 
-    #describe "can remove an existing article" do
-    #  let!(:article) { create :article, supplier: supplier, name: 'Foobar', order_number: 99999 }
-    #  it do
-    #    find('input[type="submit"]').click
-    #    expect(find("#outlisted_articles_#{article.id}")).to be_present
-    #    find('input[type="submit"]').click
-    #    expect(Article.where(id: article.id)).to be_empty
-    #  end
-    #end
+    describe "can remove an existing article" do
+      let!(:article) { create :article, supplier: supplier, name: 'Foobar', order_number: 99999 }
+      it do
+        check('articles_outlist_absent')
+        find('input[type="submit"]').click
+        expect(find("#outlisted_articles_#{article.id}", visible: :all)).to be_present
+
+        all("tr select > option")[1].select_option
+        find('input[type="submit"]').click
+        expect(article.reload.deleted?).to be true
+      end
+    end
   end
 end

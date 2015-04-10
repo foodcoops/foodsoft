@@ -69,9 +69,17 @@
 %p= t '.text_2'
 
 = form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
-   :html => { :multipart => true } do |f|
-  %label(for="articles_file")= t '.file_label'
-  = f.file_field "file"
+   :html => { multipart: true, class: "form-horizontal" } do |f|
+
+  .control-group
+    %label(for="articles_file")= t '.file_label'
+    = f.file_field "file"
+
+  .control-group
+    %label(for="articles_outlist_absent")
+      = f.check_box "outlist_absent"
+      = t '.outlist_absent'
+
   .form-actions
     = submit_tag t('.submit'), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)
