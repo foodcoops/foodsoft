@@ -42,9 +42,7 @@ class Message < ActiveRecord::Base
 
   def order_id=(order_id)
     @order_id = order_id
-    for ordergroup in Order.find(order_id).ordergroups
-      add_recipients ordergroup.users
-    end
+    add_recipients Order.find(order_id).users_ordered unless order_id.blank?
   end
 
   def recipient_tokens=(ids)
