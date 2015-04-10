@@ -10,10 +10,12 @@ module OrdersHelper
   # @param order [Order]
   # @param document [String] Document to display, one of +groups+, +articles+, +fax+, +matrix+
   # @param text [String] Link text
+  # @param options [Hash] Options passed to +link_to+
   # @return [String] Link to order document
   # @see OrdersController#show
-  def order_pdf(order, document, text)
-    link_to text, order_path(order, document: document, format: :pdf), title: I18n.t('helpers.orders.order_pdf')
+  def order_pdf(order, document, text, options={})
+    options = options.merge(title: I18n.t('helpers.orders.order_pdf'))
+    link_to text, order_path(order, document: document, format: :pdf), options
   end
 
   def options_for_suppliers_to_select
@@ -70,26 +72,26 @@ module OrdersHelper
     end
     content_tag(options[:tag], c, class: "package #{options[:class]}").html_safe
   end
-  
+
   def article_price_change_hint(order_article, gross=false)
     return nil if order_article.article.price == order_article.price.price
     title = "#{t('helpers.orders.old_price')}: #{number_to_currency order_article.article.price}"
     title += " / #{number_to_currency order_article.article.gross_price}" if gross
     content_tag(:i, nil, class: 'icon-asterisk', title: j(title)).html_safe
   end
-  
+
   def receive_input_field(form)
     order_article = form.object
     units_expected = (order_article.units_billed || order_article.units_to_order) *
       1.0 * order_article.article.unit_quantity / order_article.article_price.unit_quantity
-    
+
     input_classes = 'input input-nano units_received'
     input_classes += ' package' unless order_article.article_price.unit_quantity == 1
     input_html = form.text_field :units_received, class: input_classes,
       data: {'units-expected' => units_expected},
       disabled: order_article.result_manually_changed?,
       autocomplete: 'off'
-    
+
     if order_article.result_manually_changed?
       input_html = content_tag(:span, class: 'input-prepend intable', title: t('orders.edit_amount.field_locked_title', default: '')) {
         button_tag(nil, type: :button, class: 'btn unlocker') {
