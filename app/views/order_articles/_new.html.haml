@@ -1,6 +1,6 @@
 = simple_form_for [@order, @order_article], remote: true do |form|
   .modal-header
-    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    = close_button :modal
     %h3= t '.title'
   .modal-body
     = form.association :article, collection: @order.supplier_articles, label_method: lambda {|a| article_label_with_unit(a)}

@@ -233,6 +233,14 @@ module ApplicationHelper
     Foodsoft::ExpansionVariables.expand(text, options)
   end
 
+  # @param dismiss [String, Symbol] Bootstrap dismiss value (modal, alert)
+  # @return [String] HTML for close button dismissing
+  def close_button(dismiss)
+    content_tag :button, type: 'button', class: 'close', data: {dismiss: dismiss} do
+      I18n.t('ui.marks.close').html_safe
+    end
+  end
+
   # @return [String] path to foodcoop CSS style (with MD5 parameter for caching)
   def foodcoop_css_path(options={})
     super(options.merge({md5: Digest::MD5.hexdigest(FoodsoftConfig[:custom_css].to_s)}))

@@ -1,6 +1,6 @@
 = simple_form_for @invite, remote: true do |form|
   .modal-header
-    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    = close_button :modal
     %h3= t '.title'
   .modal-body
     = t('.body', group: @invite.group.name).html_safe

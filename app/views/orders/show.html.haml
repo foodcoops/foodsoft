@@ -1,7 +1,7 @@
 - title t('.title', name: @order.name)
 
 .well
-  %button{type: "button", class: "close", data: {dismiss: 'alert'}}= t('ui.marks.close').html_safe
+  = close_button :alert
   %p
     = raw t '.description1',
                state: t("orders.state.#{@order.state}").capitalize,

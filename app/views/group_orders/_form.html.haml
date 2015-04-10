@@ -23,7 +23,7 @@
 
 .row-fluid
   .well.pull-left
-    %button{type: "button", class: "close", data: {dismiss: 'alert'}}= '&times;'.html_safe
+    = close_button :alert
     %h2= @order.name
     %dl.dl-horizontal
       - unless @order.note.blank?
@@ -47,7 +47,7 @@
       %dd= number_to_currency(@ordering_data[:available_funds])
 
   .well.pull-right
-    %button{type: "button", class: "close", data: {dismiss: 'alert'}}= '&times;'.html_safe
+    = close_button :alert
     = render 'switch_order', current_order: @order
 
 .row-fluid

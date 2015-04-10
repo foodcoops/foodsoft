@@ -1,10 +1,9 @@
 = simple_form_for @order, url: update_note_finance_order_path(@order), remote: true, method: :put do |f|
   .modal-header
-    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    = close_button :modal
     %h3 Notiz bearbeiten
   .modal-body
     = f.input :note, input_html: {class: 'input-xlarge'}
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit t('ui.save'), class: 'btn btn-primary'
-

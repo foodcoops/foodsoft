@@ -1,6 +1,6 @@
 = simple_form_for stock_article, remote: true, :validate => true do |f|
   .modal-header
-    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    = close_button :modal
     %h3= title
   .modal-body
     = f.association :supplier

@@ -2,7 +2,7 @@
   = f.hidden_field :shared_updated_on
   = f.hidden_field :supplier_id
   .modal-header
-    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    = close_button :modal
     %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
   .modal-body
     = f.input :availability
@@ -22,4 +22,3 @@
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'
-

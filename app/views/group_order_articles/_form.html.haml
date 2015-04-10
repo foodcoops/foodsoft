@@ -1,7 +1,7 @@
 = simple_form_for @group_order_article, remote: true do |form|
   = form.hidden_field :order_article_id
   .modal-header
-    = link_to t('ui.marks.close').html_safe, '#', class: 'close', data: {dismiss: 'modal'}
+    = close_button :modal
     %h3= t('.amount_change_for', article: @order_article.article.name)
   .modal-body
     = form.input :ordergroup_id, as: :select, collection: Ordergroup.all.map { |g| [g.name, g.id] }
