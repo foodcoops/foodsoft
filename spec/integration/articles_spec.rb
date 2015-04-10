@@ -63,12 +63,14 @@ describe ArticlesController, :type => :feature do
     end
 
     describe "can update existing article" do
-      let!(:article) { create :article, supplier: supplier, name: 'Foobar', order_number: 1 }
+      let!(:article) { create :article, supplier: supplier, name: 'Foobar', order_number: 1, unit: '250 g' }
       it do
         find('input[type="submit"]').click
         expect(find("#articles_#{article.id}_name").value).to eq 'Tomatoes'
         find('input[type="submit"]').click
-        expect(article.reload.name).to eq 'Tomatoes'
+        article.reload
+        expect(article.name).to eq 'Tomatoes'
+        expect([article.unit, article.unit_quantity, article.price]).to eq ['500 g', 20, 1.2]
       end
     end
 
@@ -95,6 +97,18 @@ describe ArticlesController, :type => :feature do
         all("tr select > option")[1].select_option
         find('input[type="submit"]').click
         expect(article.reload.deleted?).to be true
+      end
+    end
+
+    describe "can convert units when updating" do
+      let!(:article) { create :article, supplier: supplier, order_number: 1, unit: '250 g' }
+      it do
+        check('articles_convert_units')
+        find('input[type="submit"]').click
+        expect(find("#articles_#{article.id}_name").value).to eq 'Tomatoes'
+        find('input[type="submit"]').click
+        article.reload
+        expect([article.unit, article.unit_quantity, article.price]).to eq ['250 g', 40, 0.6]
       end
     end
   end

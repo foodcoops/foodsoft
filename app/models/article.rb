@@ -116,11 +116,16 @@ class Article < ActiveRecord::Base
   end
 
   # Return article attributes that were changed (incl. unit conversion)
-  # @param [Article] New article to update self
+  # @param new_article [Article] New article to update self
+  # @option options [Boolean] :convert_units Omit or set to +true+ to keep current unit and recompute unit quantity and price.
   # @return [Hash<Symbol, Object>] Attributes with new values
-  def unequal_attributes(new_article)
-    # try to convert different units
-    new_price, new_unit_quantity = convert_units(new_article)
+  def unequal_attributes(new_article, options={})
+    # try to convert different units when desired
+    if options[:convert_units] == false
+      new_price, new_unit_quantity = nil, nil
+    else
+      new_price, new_unit_quantity = convert_units(new_article)
+    end
     if new_price && new_unit_quantity
       new_unit = self.unit
     else

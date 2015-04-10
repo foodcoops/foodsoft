@@ -438,7 +438,9 @@ en:
         reserved: "(Reserved)"
         status: Status (x=skip)
       file_label: Please choose a compatible file
-      outlist_absent: Delete articles not in uploaded file
+      options:
+        convert_units: Keep current units, recompute unit quantity and price (like synchronize)
+        outlist_absent: Delete articles not in uploaded file
       sample:
         juices: Juices
         nuts: Nuts

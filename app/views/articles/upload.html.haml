@@ -78,7 +78,10 @@
   .control-group
     %label(for="articles_outlist_absent")
       = f.check_box "outlist_absent"
-      = t '.outlist_absent'
+      = t '.options.outlist_absent'
+    %label(for="articles_convert_units")
+      = f.check_box "convert_units"
+      = t '.options.convert_units'
 
   .form-actions
     = submit_tag t('.submit'), class: 'btn btn-primary'
