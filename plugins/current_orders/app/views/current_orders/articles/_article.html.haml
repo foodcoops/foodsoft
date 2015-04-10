@@ -1,0 +1,9 @@
+#order_article
+
+  - if order_article
+    = render 'article_info', order_article: order_article
+    = render 'ordergroups', order_article: order_article
+
+  - else
+    %h2= t('current_orders.articles.index.title')
+    %i#articles_by_articles= t '.no_selection'

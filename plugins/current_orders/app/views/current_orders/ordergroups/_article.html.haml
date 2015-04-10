@@ -1,0 +1,18 @@
+-# @todo move multiplier to model & unduplicate with shared/articles_by/
+- multiplier, unit = 1, '× ' + goa.order_article.article.unit
+- if local_assigns[:base_unit] and unit = goa.order_article.article.unit_unit
+  - multiplier = unit.scalar
+  - unit = unit.units
+-# output row
+%tr{:class => [cycle('even', 'odd', :name => 'articles'), if goa.result == 0 then 'unavailable' end], id: "goa_#{goa.id}"}
+  %td.name= goa.order_article.article.name
+  %td{title: goa.order_article.order.name}= link_to goa.order_article.order.name.truncate(15), goa.order_article.order
+  %td= goa.order_article.article.unit
+  %td.center= "#{goa.quantity} + #{goa.tolerance}"
+  %td.center.input-delta= group_order_article_edit_result(goa, multiplier: multiplier, edit: local_assigns[:edit]||true)
+  %td.nowrap.dimmed= unit if multiplier != 1
+  %td.symbol
+    &times;
+  %td= number_to_currency goa.order_article.price.fc_price(@ordergroup)/multiplier
+  %td.symbol =
+  %td.price{data: {value: goa.total_price}}= number_to_currency goa.total_price

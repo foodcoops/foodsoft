@@ -1,0 +1,2 @@
+$('#article_list li:not(.keep)').remove();
+$('#article_list').append('<%= j(render('articles', orders: @current_orders)) %>');

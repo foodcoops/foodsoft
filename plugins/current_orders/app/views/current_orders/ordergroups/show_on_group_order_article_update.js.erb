@@ -1,0 +1,7 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function(w) {
+  // table update is done by group_order_article hook already
+  $('#to_pay_message').html('<%= j to_pay_message(@ordergroup) %>');
+})(window);
+

@@ -1,0 +1,4 @@
+- @order_articles.includes(:order => :supplier).reorder('suppliers.name, articles.article_category_id, articles.name').group_by {|oa| oa.order.name}.each do |name, articles|
+  %li.nav-header= name
+  - articles.each do |oa|
+    %li= link_to oa.article.name, current_orders_articles_path(order: oa.order.id, id: oa.id, anchor: 'order_article'), remote: true

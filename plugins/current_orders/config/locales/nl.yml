@@ -1,0 +1,55 @@
+nl:
+  current_orders:
+    articles:
+      article:
+        no_selection: Kies een artikel om te zien wie het besteld heeft, of download verdeellijsten rechtsboven.
+      article_info:
+        from: van %{supplier}
+        unit: per %{unit}
+      form:
+        article_placeholder: Zoek artikelen...
+        current_orders: Alle huidige bestellingen
+      index:
+        title: Artikelen verdelen
+      ordergroups:
+        piece: st
+        add_new: Huishouden toevoegen...
+      show:
+        title: ! '%{name} verdelen'
+    ordergroups:
+      articles:
+        add_new: Artikel toevoegen...
+      form:
+        ordergroup_placeholder: Kies een huishouden...
+        no_selection: Kies een huishouden om de artikelen te tonen.
+      index:
+        title: Artikelen voor huishouden
+      payment_bar:
+        account_balance: Account balance
+        new_pin: PIN
+        new_transaction: Nieuwe transactie
+        payment: ! 'Betaling:'
+      show:
+        title: Artikelen voor %{name}
+    orders:
+      receive:
+        title: Bestellingen ontvangen
+        no_finished_orders: Er zijn momenteel geen bestellingen die ontvangen hoeven te worden.
+  documents:
+    multiple_orders_by_articles:
+      filename: Huidige bestellingen per artikel
+      title: Huidige bestellingen - per artikel
+    multiple_orders_by_groups:
+      filename: Huidige bestellingen per huishouden
+      title: Huidige bestellingen - per huishouden
+  js:
+    current_orders:
+      articles:
+        above: '%{count} meer dan<br>beschikbaar'
+        below: '%{count} blijft over'
+        equal: alles verdeeld
+  helpers:
+    current_orders:
+      pay_done: Alles betaald
+      pay_none: Niets te betalen
+      pay_amount: Te betalen %{amount}
