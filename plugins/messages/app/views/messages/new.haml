@@ -10,13 +10,15 @@
         theme: 'facebook'
       });
 
-      $('#message_sent_to_all').on('touchclick', function() {
+      $('#message_sent_to_all').on('change', function() {
         if ($(this).is(':checked')) {
           $('#recipients').slideUp();
         } else {
           $('#recipients').slideDown();
         }
       });
+      // make sure state is correct when loading
+      $('#recipients').toggle(!$('#message_sent_to_all').is(':checked'));
     });
 
 - title t('.title')
