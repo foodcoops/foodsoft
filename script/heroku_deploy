@@ -38,8 +38,8 @@ if ! heroku apps | grep -q "^$APP\s"; then
 	heroku create "$APP" --region "$REGION"
 	heroku addons:add heroku-postgresql:dev --app "$APP"
 	heroku pg:promote `heroku config | grep 'HEROKU_POSTGRESQL_.*_URL' | cut -d: -f1`
+  heroku config:set RACK_ENV="${RAILS_ENV}" RAILS_ENV="${RAILS_ENV}" --app "$APP"
 fi
-heroku config:set RACK_ENV="${RAILS_ENV}" RAILS_ENV="${RAILS_ENV}" --app "$APP"
 
 # create temporary branch with heroku-specific changes
 touch ._tmp_havestash
@@ -77,7 +77,7 @@ if [ ! -e config/app_config.yml ]; then
 	cp config/app_config.yml.SAMPLE config/app_config.yml
 fi
 # keep secret token from currently deployed app, else generate new one
-heroku git:remote --app="$APP" >/dev/null 2>&1
+git remote | grep -q heroku || heroku git:remote --app="$APP" >/dev/null 2>&1
 if git show heroku/master:config/initializers/secret_token.rb >/dev/null 2>&1; then
 	git show heroku/master:config/initializers/secret_token.rb >config/initializers/secret_token.rb
 else
