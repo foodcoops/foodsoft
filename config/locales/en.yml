@@ -1124,6 +1124,7 @@ en:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
+      hint_private: Message doesn’t show in Foodsoft mail inbox
       list:
         desc: 'Please send messages to all using the mailing-list: %{list}'
         mail: for example with an email to %{email}.
@@ -1446,8 +1447,6 @@ en:
         unit: e.g. KG or 1L or 500g
       article_category:
         description: comma-separated list of category names recognised at import/synchronisation
-      message:
-        private: Message doesn’t show in Foodsoft mail inbox
       order_article:
         units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
         update_global_price: Also update the price of future orders

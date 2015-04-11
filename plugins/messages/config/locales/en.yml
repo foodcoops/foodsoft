@@ -52,6 +52,7 @@ en:
       reply_indent: ! '> %{line}'
       reply_subject: ! 'Re: %{subject}'
     new:
+      hint_private: Message doesn’t show in Foodsoft mail inbox
       list:
         desc: ! 'Please send messages to all using the mailing-list: %{list}'
         mail: for example with an email to %{email}.
@@ -84,7 +85,3 @@ en:
 '
   navigation:
     messages: Messages
-  simple_form:
-    hints:
-      message:
-        private: Message doesn’t show in Foodsoft mail inbox
