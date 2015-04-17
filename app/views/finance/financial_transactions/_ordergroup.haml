@@ -1,7 +1,7 @@
 %tr.transaction
   %td
     = select_tag 'financial_transactions[][ordergroup_id]',
-      options_for_select(Ordergroup.order(:name).map { |g| [ g.name, g.id ] })
+      options_for_select(Ordergroup.undeleted.order(:name).map { |g| [ g.name, g.id ] })
   %td= text_field_tag 'financial_transactions[][amount]', nil, class: 'input-small'
   %td= link_to t('.remove'), "#", :title => t('.remove_group'), 'data-remove-transaction' => true,
     class: 'btn btn-small'
