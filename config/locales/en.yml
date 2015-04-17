@@ -358,6 +358,7 @@ en:
       error_update: 'An error occured when updating article ''%{article}'': %{msg}'
       parse_upload:
         notice: Articles are already up to date.
+        no_file: Please select a file to upload
       sync:
         notice: Articles are already up to date.
         shared_alert: "%{supplier} is not linked to an external database"

@@ -137,7 +137,7 @@ class ArticlesController < ApplicationController
 
   # Update articles from a spreadsheet
   def parse_upload
-    uploaded_file = params[:articles]['file']
+    uploaded_file = params[:articles]['file'] or raise I18n.t('articles.controller.parse_upload.no_file')
     options = {filename: uploaded_file.original_filename}
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
@@ -174,7 +174,12 @@ class ArticlesController < ApplicationController
     has_error = false
     Article.transaction do
       # delete articles
-      @outlisted_articles.each(&:mark_as_deleted)
+      begin
+        @outlisted_articles.each(&:mark_as_deleted)
+      rescue
+        # raises an exception when used in current order
+        has_error = true
+      end
       # Update articles
       @updated_articles.map{|a| a.save or has_error=true }
       # Add new articles
