@@ -1,5 +1,7 @@
 # encoding: utf-8
 class Supplier < ActiveRecord::Base
+  include MarkAsDeletedWithName
+
   has_many :articles, -> { where(:type => nil).includes(:article_category).order('article_categories.name', 'articles.name') }
   has_many :stock_articles, -> { includes(:article_category).order('article_categories.name', 'articles.name') }
   has_many :orders
@@ -109,7 +111,7 @@ class Supplier < ActiveRecord::Base
 
   def mark_as_deleted
     transaction do
-      update_column :deleted_at, Time.now
+      super
       articles.each(&:mark_as_deleted)
     end
   end

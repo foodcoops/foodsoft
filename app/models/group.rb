@@ -1,6 +1,9 @@
+# encoding: utf-8
 # Groups organize the User.
 # A Member gets the roles from the Group
 class Group < ActiveRecord::Base
+  include MarkAsDeletedWithName
+
   has_many :memberships, dependent: :destroy
   has_many :users, :through => :memberships
 
@@ -32,8 +35,8 @@ class Group < ActiveRecord::Base
     # TODO: Checks for participating in not closed orders
     transaction do
       memberships.destroy_all
-      # TODO: What should happen to users?
-      update_column :deleted_at, Time.now
+      # @todo what should happen to the users?
+      super
     end
   end
 end
