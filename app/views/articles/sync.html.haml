@@ -1,39 +1,8 @@
 - title t('.title')
 
 = form_tag update_synchronized_supplier_articles_path(@supplier) do
-  - if @outlisted_articles.any?
-    %h2= t '.outlist.title'
-    %p
-      = t('.outlist.body').html_safe
-      %ul
-        - for article in @outlisted_articles
-          %li
-            = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
-            = article.name
-            - if article.in_open_order
-              .alert= t '.outlist.alert_used', article: article.name
-    %hr/
-
-  - if @updated_articles.any?
-    %h2= t '.update.title'
-    %p
-      %i
-        = t '.update.update_msg', count: @updated_articles.size
-        = t '.update.body'
-    = render 'sync_table', articles: @updated_articles, field: 'articles', hidden_fields: %w(shared_updated_on)
-    %hr/
-
-  - if @new_articles.any?
-    %h2= t '.upnew.title'
-    %p
-      %i= t '.upnew.body_count', count: @new_articles.length
-    = render 'sync_table', articles: @new_articles, field: 'new_articles', hidden_fields: %w(shared_updated_on order_number)
-    %hr/
-
-  - if @ignored_article_count > 0
-    %p
-      %i= t '.outlist.body_ignored', count: @ignored_article_count
-
-  = hidden_field 'supplier', 'id'
-  = submit_tag t('.submit'), class: 'btn btn-primary'
-  = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)
+  = hidden_field_tag :from_action, 'sync'
+  = render 'sync'
+  .form-actions
+    = submit_tag t('.submit'), class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)

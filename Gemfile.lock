@@ -333,6 +333,10 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    roo (1.13.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
     rspec (2.99.0)
       rspec-core (~> 2.99.0)
       rspec-expectations (~> 2.99.0)
@@ -354,6 +358,7 @@ GEM
       rspec-mocks (~> 2.99.0)
     rspec-rerun (0.3.0)
       rspec
+    ruby-ole (1.2.11.8)
     ruby-prof (0.15.6)
     ruby-units (1.4.5)
     ruby_parser (3.6.5)
@@ -395,6 +400,8 @@ GEM
       eventmachine (~> 1.0.0)
       thin (~> 1.5.0)
     slop (3.6.0)
+    spreadsheet (1.0.0)
+      ruby-ole (>= 1.0)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -510,6 +517,7 @@ DEPENDENCIES
   ransack
   recurring_select
   resque
+  roo (~> 1.13.2)
   rspec-core (~> 2.99)
   rspec-rails
   rspec-rerun
@@ -522,6 +530,7 @@ DEPENDENCIES
   simple-navigation-bootstrap
   simple_form
   simplecov
+  spreadsheet
   sqlite3
   therubyracer
   thin

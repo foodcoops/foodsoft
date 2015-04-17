@@ -1,20 +1,25 @@
-# Module for Foodsoft-File import
-# The Foodsoft-File is a cvs-file, with columns separated by semicolons
+require 'roo'
 
-require 'csv'
+# Foodsoft-file import
+class FoodsoftFile
 
-module FoodsoftFile
-  
   # parses a string from a foodsoft-file
   # returns two arrays with articles and outlisted_articles
   # the parsed article is a simple hash
-  def self.parse(file)
-    articles, outlisted_articles = Array.new, Array.new
-    row_index = 2
-    ::CSV.parse(file.read.force_encoding('utf-8'), {:col_sep => ";", :headers => true}) do |row|
-      # check if the line is empty
-      unless row[2] == "" || row[2].nil?        
-        article = {:number => row[1],
+  def self.parse(file, options = {})
+    filepath = file.is_a?(String) ? file : file.to_path
+    filename = options.delete(:filename) || filepath
+    fileext = File.extname(filename)
+    options[:csv_options] = {col_sep: ';', encoding: 'utf-8'}.merge(options[:csv_options]||{})
+    s = Roo::Spreadsheet.open(filepath, options.merge({extension: fileext}))
+
+    row_index = 1
+    s.each do |row|
+      if row_index == 1
+        # @todo try to detect headers; for now using the index is ok
+
+      elsif !row[2].blank?
+        article = {:order_number => row[1],
                    :name => row[2],
                    :note => row[3],
                    :manufacturer => row[4],
@@ -24,20 +29,13 @@ module FoodsoftFile
                    :tax => row[8],
                    :deposit => (row[9].nil? ? "0" : row[9]),
                    :unit_quantity => row[10],
-                   :scale_quantity => row[11],
-                   :scale_price => row[12],
-                   :category => row[13]}
-        case row[0]
-        when "x"
-          # check if the article is outlisted
-          outlisted_articles << article
-        else
-          articles << article
-        end
+                   :article_category => row[13]}
+        status = row[0] && row[0].strip.downcase == 'x' ? :outlisted : nil
+        yield status, article, row_index
       end
       row_index += 1
     end
-    return [articles, outlisted_articles]
+    row_index
   end
-    
+
 end

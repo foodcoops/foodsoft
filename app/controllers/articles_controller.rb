@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
     @article = @supplier.articles.build(:tax => FoodsoftConfig[:tax_default])
     render :layout => false
   end
-  
+
   def create
     @article = Article.new(params[:article])
     if @article.valid? && @article.save
@@ -44,12 +44,12 @@ class ArticlesController < ApplicationController
       render :action => 'new', :layout => false
     end
   end
-  
+
   def edit
     @article = Article.find(params[:id])
     render :action => 'new', :layout => false
   end
-  
+
   # Updates one Article and highlights the line if succeded
   def update
     @article = Article.find(params[:id])
@@ -66,8 +66,8 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.mark_as_deleted unless @order = @article.in_open_order # If article is in an active Order, the Order will be returned
     render :layout => false
-  end   
-  
+  end
+
   # Renders a form for editing all articles from a supplier
   def edit_all
     @articles = @supplier.articles.undeleted
@@ -102,7 +102,7 @@ class ArticlesController < ApplicationController
       redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_all.notice')
     end
   end
-  
+
   # makes different actions on selected articles
   def update_selected
     raise I18n.t('articles.controller.error_nosel') if params[:selected_articles].nil?
@@ -129,75 +129,83 @@ class ArticlesController < ApplicationController
     redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page]),
                 :alert => I18n.t('errors.general_msg', :msg => error)
   end
- 
+
   # lets start with parsing articles from uploaded file, yeah
   # Renders the upload form
   def upload
   end
- 
-  # parses the articles from a csv and creates a form-table with the parsed data.
-  # the csv must have the following format:
-  # status | number | name | note | manufacturer | origin | unit | clear price | unit_quantity | tax | deposit | scale quantity | scale price | category
-  # the first line will be ignored. 
-  # field-seperator: ";"
-  # text-seperator: ""
+
+  # Update articles from a spreadsheet
   def parse_upload
-    begin
-      @articles = Array.new
-      articles, outlisted_articles = FoodsoftFile::parse(params[:articles]["file"])
-      no_category = ArticleCategory.new
-      articles.each do |row|
-        # fallback to Others category
-        category = (ArticleCategory.find_match(row[:category]) || no_category)
-        # creates a new article and price
-        article = @supplier.articles.build(:name => row[:name], 
-                               :note => row[:note],
-                               :manufacturer => row[:manufacturer],
-                               :origin => row[:origin],
-                               :unit => row[:unit],
-                               :article_category => category,
-                               :price => row[:price],
-                               :unit_quantity => row[:unit_quantity],
-                               :order_number => row[:number],
-                               :deposit => row[:deposit],
-                               :tax => (row[:tax] || FoodsoftConfig[:tax_default]))
-        # stop parsing, when an article isn't valid
-        unless article.valid?
-          raise I18n.t('articles.controller.error_parse', :msg => article.errors.full_messages.join(", "), :line => (articles.index(row) + 2).to_s)
-        end
-        @articles << article
-      end
-      flash.now[:notice] = I18n.t('articles.controller.parse_upload.notice', :count => @articles.size)
-    rescue => error
-      redirect_to upload_supplier_articles_path(@supplier), :alert => I18n.t('errors.general_msg', :msg => error.message)
+    uploaded_file = params[:articles]['file'] or raise I18n.t('articles.controller.parse_upload.no_file')
+    options = {filename: uploaded_file.original_filename}
+    options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
+    options[:convert_units] = (params[:articles]['convert_units'] == '1')
+    @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_from_file uploaded_file.tempfile, options
+    if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
+      redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.parse_upload.notice')
+    end
+    @ignored_article_count = 0
+  rescue => error
+    redirect_to upload_supplier_articles_path(@supplier), :alert => I18n.t('errors.general_msg', :msg => error.message)
+  end
+
+  # sync all articles with the external database
+  # renders a form with articles, which should be updated
+  def sync
+    # check if there is an shared_supplier
+    unless @supplier.shared_supplier
+      redirect_to supplier_articles_url(@supplier), :alert => I18n.t('articles.controller.sync.shared_alert', :supplier => @supplier.name)
+    end
+    # sync articles against external database
+    @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_all
+    if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
+      redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.sync.notice')
     end
   end
- 
-  # creates articles from form
-  def create_from_upload
-    begin
-      Article.transaction do
-        invalid_articles = false
-        @articles = []
-        params[:articles].each do |_key, article_attributes|
-          @articles << (article = @supplier.articles.build(article_attributes))
-          invalid_articles = true unless article.save
-        end
 
-        raise I18n.t('articles.controller.error_invalid') if invalid_articles
+  # Updates, deletes articles when upload or sync form is submitted
+  def update_synchronized
+    @outlisted_articles = Article.find(params[:outlisted_articles].try(:keys)||[])
+    @updated_articles = Article.find(params[:articles].try(:keys)||[])
+    @updated_articles.map{|a| a.assign_attributes(params[:articles][a.id.to_s]) }
+    @new_articles = (params[:new_articles]||[]).map{|a| @supplier.articles.build(a) }
+
+    has_error = false
+    Article.transaction do
+      # delete articles
+      begin
+        @outlisted_articles.each(&:mark_as_deleted)
+      rescue
+        # raises an exception when used in current order
+        has_error = true
       end
-      # Successfully done.
-      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.create_from_upload.notice', :count => @articles.size)
+      # Update articles
+      @updated_articles.map{|a| a.save or has_error=true }
+      # Add new articles
+      @new_articles.each do |article|
+        article.availability = true if @supplier.shared_sync_method == 'all_available'
+        article.availability = false if @supplier.shared_sync_method == 'all_unavailable'
+        article.save or has_error=true
+      end
 
-    rescue => error
-      # An error has occurred, transaction has been rolled back.
-      flash.now[:error] = I18n.t('errors.general_msg', :msg => error.message)
-      render :parse_upload
+      raise ActiveRecord::Rollback if has_error
+    end
+
+    if !has_error
+      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_sync.notice')
+    else
+      @updated_article_pairs = @updated_articles.map do |article|
+        orig_article = Article.find(article.id)
+        [article, orig_article.unequal_attributes(article)]
+      end
+      flash.now.alert = I18n.t('articles.controller.error_invalid')
+      render params[:from_action] == 'sync' ? :sync : :parse_upload
     end
   end
-  
+
   # renders a view to import articles in local database
-  #   
+  #
   def shared
     # build array of keywords, required for ransack _all suffix
     params[:q][:name_cont_all] = params[:q][:name_cont_all].split(' ') if params[:q]
@@ -206,7 +214,7 @@ class ArticlesController < ApplicationController
     @articles = @search.result.page(params[:page]).per(10)
     render :layout => false
   end
-  
+
   # fills a form whith values of the selected shared_article
   # when the direct parameter is set and the article is valid, it is imported directly
   def import
@@ -218,63 +226,16 @@ class ArticlesController < ApplicationController
       render :action => 'new', :layout => false
     end
   end
-  
-  # sync all articles with the external database
-  # renders a form with articles, which should be updated
-  def sync
-    # check if there is an shared_supplier
-    unless @supplier.shared_supplier
-      redirect_to supplier_articles_url(@supplier), :alert => I18n.t('articles.controller.sync.shared_alert', :supplier => @supplier.name)
-    end
-    # sync articles against external database
-    @updated_articles, @outlisted_articles, @new_articles = @supplier.sync_all
-    # convert to db-compatible-string
-    @updated_articles.each {|a, b| a.shared_updated_on = a.shared_updated_on.to_formatted_s(:db)}
-    if @updated_articles.empty? && @outlisted_articles.empty? && @new_articles.empty?
-      redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.sync.notice')
-    end
-    @ignored_article_count = @supplier.articles.where(order_number: [nil, '']).count
-  end
 
-  # Updates, deletes articles when sync form is submitted
-  def update_synchronized
-    begin
-      Article.transaction do
-        # delete articles
-        if params[:outlisted_articles]
-          Article.find(params[:outlisted_articles].keys).each(&:mark_as_deleted)
-        end
+  private
 
-        # Update articles
-        if params[:articles]
-          params[:articles].each do |id, attrs|
-            Article.find(id).update_attributes! attrs
-          end
-        end
-
-        # Add new articles
-        if params[:new_articles]
-          params[:new_articles].each do |attrs|
-            article = Article.new attrs
-            article.supplier = @supplier
-            article.availability = true if @supplier.shared_sync_method == 'all_available'
-            article.availability = false if @supplier.shared_sync_method == 'all_unavailable'
-            article.save!
-          end
-        end
-      end
-
-      # Successfully done.
-      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_sync.notice')
-
-    rescue ActiveRecord::RecordInvalid => invalid
-      # An error has occurred, transaction has been rolled back.
-      redirect_to supplier_articles_path(@supplier),
-                  alert: I18n.t('articles.controller.error_update', :article => invalid.record.name, :msg => invalid.record.errors.full_messages)
-
-    rescue => error
-      redirect_to supplier_articles_path(@supplier),
-                  alert: I18n.t('errors.general_msg', :msg => error.message)
+  # @return [Number] Number of articles not taken into account when syncing (having no number)
+  helper_method \
+  def ignored_article_count
+    if action_name == 'sync' || params[:from_action] == 'sync'
+      @ignored_article_count ||= @supplier.articles.where(order_number: [nil, '']).count
+    else
+      0
     end
   end
 end

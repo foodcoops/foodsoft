@@ -404,7 +404,7 @@ nl:
       error_nosel: Je hebt geen artikelen geselecteerd
     parse_upload:
       body: "<p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>"
-      submit: Uploaden
+      submit: Upload verwerken
       title: Artikelen uploaden
     sync:
       outlist:

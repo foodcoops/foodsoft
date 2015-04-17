@@ -1,24 +1,88 @@
 - title t('.title', supplier: @supplier.name)
-= t('.body').html_safe
-%pre
-  = [t('.fields.status'),
-     Article.human_attribute_name(:order_number),
-     Article.human_attribute_name(:name),
-     Article.human_attribute_name(:note),
-     Article.human_attribute_name(:manufacturer),
-     Article.human_attribute_name(:origin),
-     Article.human_attribute_name(:unit),
-     Article.human_attribute_name(:price),
-     Article.human_attribute_name(:tax),
-     Article.human_attribute_name(:deposit),
-     Article.human_attribute_name(:unit_quantity),
-     t('.fields.reserved'),
-     t('.fields.reserved'),
-     Article.human_attribute_name(:article_category)].join(" | ")
+
+%p= t '.text_1', supplier: @supplier.name
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th= t '.field.status'
+      %th= Article.human_attribute_name(:order_number)
+      %th= Article.human_attribute_name(:name)
+      %th= Article.human_attribute_name(:note)
+      %th= Article.human_attribute_name(:manufacturer)
+      %th= Article.human_attribute_name(:origin)
+      %th= Article.human_attribute_name(:unit)
+      %th= Article.human_attribute_name(:price)
+      %th= Article.human_attribute_name(:tax)
+      %th= Article.human_attribute_name(:deposit)
+      %th= Article.human_attribute_name(:unit_quantity)
+      %th.muted= t '.fields.reserved'
+      %th.muted= t '.fields.reserved'
+      %th= Article.human_attribute_name(:article_category)
+  %tbody
+    %tr
+      %td
+      %td 1234A
+      %td= t '.sample.walnuts'
+      %td
+      %td= t '.sample.supplier_1'
+      %td CA
+      %td 500 gr
+      %td 8.90
+      %td= FoodsoftConfig[:tax_default] || 6
+      %td 0
+      %td 6
+      %td
+      %td
+      %td= t '.sample.nuts'
+    %tr
+      %td x
+      %td 4321Z
+      %td= t '.sample.tomato_juice'
+      %td= t '.sample.organic'
+      %td= t '.sample.supplier_2'
+      %td IN
+      %td 1.5 l
+      %td 4.35
+      %td= FoodsoftConfig[:tax_default] || 6
+      %td 0
+      %td 1
+      %td
+      %td
+      %td= t '.sample.juices'
+    %tr
+      %td
+      %td 4322Q
+      %td= t '.sample.tomato_juice'
+      %td= t '.sample.organic'
+      %td= t '.sample.supplier_3'
+      %td TR
+      %td 1.2 l
+      %td 4.02
+      %td= FoodsoftConfig[:tax_default] || 6
+      %td 0
+      %td 2
+      %td
+      %td
+      %td= t '.sample.juices'
+
+%p= t '.text_2'
 
 = form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
-   :html => { :multipart => true } do |f|
-  %label(for="articles_file")= t '.file_label'
-  = f.file_field "file"
+   :html => { multipart: true, class: "form-horizontal" } do |f|
+
+  .control-group
+    %label(for="articles_file")= t '.file_label'
+    = f.file_field "file"
+
+  .control-group
+    %label(for="articles_outlist_absent")
+      = f.check_box "outlist_absent"
+      = t '.options.outlist_absent'
+    %label(for="articles_convert_units")
+      = f.check_box "convert_units"
+      = t '.options.convert_units'
+
   .form-actions
-    = submit_tag t('.submit'), class: 'btn'
+    = submit_tag t('.submit'), class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)

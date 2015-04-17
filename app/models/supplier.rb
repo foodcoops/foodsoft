@@ -26,39 +26,16 @@ class Supplier < ActiveRecord::Base
   # also returns an array with outlisted_articles, which should be deleted
   # also returns an array with new articles, which should be added (depending on shared_sync_method)
   def sync_all
-    updated_articles = Array.new
-    outlisted_articles = Array.new
-    new_articles = Array.new
+    updated_article_pairs, outlisted_articles, new_articles = [], [], []
     for article in articles.undeleted
       # try to find the associated shared_article
       shared_article = article.shared_article(self)
 
       if shared_article # article will be updated
-        
         unequal_attributes = article.shared_article_changed?(self)
         unless unequal_attributes.blank? # skip if shared_article has not been changed
-          
-          # try to convert different units
-          new_price, new_unit_quantity = article.convert_units
-          if new_price && new_unit_quantity
-            article.price = new_price
-            article.unit_quantity = new_unit_quantity
-          else
-            article.price = shared_article.price
-            article.unit_quantity = shared_article.unit_quantity
-            article.unit = shared_article.unit
-          end
-          # update other attributes
-          article.attributes = {
-            :name => shared_article.name,
-            :manufacturer => shared_article.manufacturer,
-            :origin => shared_article.origin,
-            :shared_updated_on => shared_article.updated_on,
-            :tax => shared_article.tax,
-            :deposit => shared_article.deposit,
-            :note => shared_article.note
-          }
-          updated_articles << [article, unequal_attributes]
+          article.attributes = unequal_attributes
+          updated_article_pairs << [article, unequal_attributes]
         end
       # Articles with no order number can be used to put non-shared articles
       # in a shared supplier, with sync keeping them.
@@ -75,7 +52,49 @@ class Supplier < ActiveRecord::Base
         end
       end
     end
-    return [updated_articles, outlisted_articles, new_articles]
+    return [updated_article_pairs, outlisted_articles, new_articles]
+  end
+
+  # Synchronise articles with spreadsheet.
+  #
+  # @param file [File] Spreadsheet file to parse
+  # @param options [Hash] Options passed to {FoodsoftFile#parse} except when listed here.
+  # @option options [Boolean] :outlist_absent Set to +true+ to remove articles not in spreadsheet.
+  # @option options [Boolean] :convert_units Omit or set to +true+ to keep current units, recomputing unit quantity and price.
+  def sync_from_file(file, options={})
+    all_order_numbers = []
+    updated_article_pairs, outlisted_articles, new_articles = [], [], []
+    FoodsoftFile::parse file, options do |status, new_attrs, line|
+      article = articles.undeleted.where(order_number: new_attrs[:order_number]).first
+      new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
+      new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
+      new_article = articles.build(new_attrs)
+
+      if status.nil?
+        if article.nil?
+          new_articles << new_article
+        else
+          unequal_attributes = article.unequal_attributes(new_article, options.slice(:convert_units))
+          unless unequal_attributes.empty?
+            article.attributes = unequal_attributes
+            updated_article_pairs << [article, unequal_attributes]
+          end
+        end
+      elsif status == :outlisted && article.present?
+        outlisted_articles << article
+
+      # stop when there is a parsing error
+      elsif status.is_a? String
+        # @todo move I18n key to model
+        raise I18n.t('articles.model.error_parse', :msg => status, :line => line.to_s)
+      end
+
+      all_order_numbers << article.order_number if article
+    end
+    if options[:outlist_absent]
+      outlisted_articles += articles.undeleted.where.not(id: all_order_numbers+[nil])
+    end
+    return [updated_article_pairs, outlisted_articles, new_articles]
   end
 
   # default value
@@ -114,4 +133,3 @@ class Supplier < ActiveRecord::Base
     end
   end
 end
-
