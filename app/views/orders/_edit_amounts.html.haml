@@ -82,7 +82,7 @@
     %tr
       %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :order_number, short: true
       %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :name
-      %th= heading_helper Article, :unit
+      %th.sort{:data => {:sort => 'string'}}= heading_helper Article, :unit
       %th= heading_helper Article, :price
       %th= heading_helper OrderArticle, :quantity, short: true
       %th= heading_helper OrderArticle, :units_to_order, short: true
