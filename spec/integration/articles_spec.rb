@@ -1,14 +1,14 @@
 # encoding: utf-8
 require_relative '../spec_helper'
 
-describe ArticlesController, :type => :feature do
+feature ArticlesController do
   let(:user) { create :user, groups:[create(:workgroup, role_article_meta: true)] }
   let (:supplier) { create :supplier }
   let!(:article_category) { create :article_category }
   before { login user }
 
-  describe ":index", :type => :feature, :js => true do
-    before { visit supplier_articles_path(supplier) }
+  describe ':index', js: true do
+    before { visit supplier_articles_path(supplier_id: supplier.id) }
 
     it 'can visit supplier articles path' do
       expect(page).to have_content(supplier.name)
@@ -35,11 +35,11 @@ describe ArticlesController, :type => :feature do
     end
   end
 
-  describe ":upload", :type => :feature, :js => true do
+  describe ':upload' do
     let(:filename) { 'foodsoft_file_02.csv' }
     let(:file)     { Rails.root.join("spec/fixtures/#{filename}") }
     before do
-      visit upload_supplier_articles_path(supplier)
+      visit upload_supplier_articles_path(supplier_id: supplier.id)
       attach_file 'articles_file', file
     end
 

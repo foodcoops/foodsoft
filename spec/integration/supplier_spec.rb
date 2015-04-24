@@ -1,10 +1,10 @@
 # encoding: utf-8
 require_relative '../spec_helper'
 
-describe SuppliersController, :type => :feature do
+feature 'supplier' do
   let(:supplier) { create :supplier }
 
-  describe :type => :feature, :js => true do
+  describe 'create new' do
     let(:user) { create :user, groups:[create(:workgroup, role_suppliers: true)] }
     before { login user }
 

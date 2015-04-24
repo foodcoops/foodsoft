@@ -1,12 +1,12 @@
 require_relative '../spec_helper'
 
-describe 'the session', :type => :feature do
+feature 'the session' do
   let(:user) { create :user }
 
-  describe 'login page', :type => :feature do
+  describe 'login page' do
     it 'is accessible' do
-      get login_path
-      expect(response).to be_success
+      visit login_path
+      expect(page).to have_selector('input[type=password]')
     end
     it 'logs me in' do
       login user

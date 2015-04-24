@@ -1,42 +1,45 @@
 require_relative '../spec_helper'
 
-describe LoginController, :type => :feature do
+feature LoginController do
   let(:user) { create :user }
 
-  describe 'forgot password', :type => :feature do
+  describe 'forgot password' do
+    before { visit forgot_password_path }
     it 'is accessible' do
-      get forgot_password_path
-      expect(response).to be_success
+      expect(page).to have_selector 'input[id=user_email]'
     end
 
     it 'sends a reset email' do
-      post reset_password_path, user: {email: user.email}
+      fill_in 'user_email', with: user.email
+      find('input[type=submit]').click
+      expect(page).to have_selector '.alert-success'
       email = ActionMailer::Base.deliveries.first
       expect(email.to).to eq [user.email]
     end
   end
 
-  describe 'reset password', :type => :feature do
+  describe 'and reset it' do
     let(:token) { user.reset_password_token }
     let(:newpass) { user.new_random_password }
-    before do
-      post reset_password_path, user: {email: user.email}
-      user.reload
-    end
+    before { user.request_password_reset! }
+    before { visit new_password_path(id: user.id, token: token) }
 
     it 'is accessible' do
-      get new_password_path, id: user.id, token: token
-      expect(response).to be_success
+      expect(page).to have_selector 'input[type=password]'
     end
 
-    it 'is not accessible with wrong token' do
-      get new_password_path, id: user.id, token: '123'
-      expect(response).to_not be_success
+    describe 'with wrong token' do
+      let(:token) { 'foobar' }
+      it 'is not accessible' do
+        expect(page).to have_selector '.alert-error'
+        expect(page).to_not have_selector 'input[type=password]'
+      end
     end
 
     it 'changes the password' do
-      patch update_password_path, id: user.id, token: token, user: {password: newpass, password_confirmation: newpass}
-      expect(page).to_not have_selector('.alert-error')
+      fill_in 'user_password', with: newpass
+      fill_in 'user_password_confirmation', with: newpass
+      find('input[type=submit]').click
       expect(User.authenticate(user.email, newpass)).to eq user
     end
   end

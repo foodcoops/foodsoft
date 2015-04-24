@@ -15,12 +15,7 @@ class LoginController < ApplicationController
     end
 
     if (user = User.find_by_email(params[:user][:email]))
-      user.reset_password_token = user.new_random_password(16)
-      user.reset_password_expires = Time.now.advance(:days => 2)
-      if user.save
-        Mailer.reset_password(user).deliver_now
-        logger.debug("Sent password reset email to #{user.email}.")
-      end
+      user.request_password_reset!
     end
     redirect_to login_url, :notice => I18n.t('login.controller.reset_password.notice')
   end

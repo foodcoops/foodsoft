@@ -4,10 +4,7 @@ ENV["FOODSOFT_APP_CONFIG"] ||= 'spec/app_config.yml' # load special foodsoft con
 require_relative 'support/coverage' # needs to be first
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
-
 require 'capybara/rails'
-require 'capybara/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -58,7 +55,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include SessionHelper
+  config.include SessionHelper, type: :feature
 
   # Automatically determine spec from directory structure, see:
   # https://www.relishapp.com/rspec/rspec-rails/v/3-0/docs/directory-structure
@@ -76,8 +73,8 @@ module Faker
 end
 
 # include default foodsoft scope in urls, so that *_path works
-ActionDispatch::Integration::Runner.class_eval do
-  undef default_url_options
+# https://github.com/rspec/rspec-rails/issues/255
+class ActionDispatch::Routing::RouteSet
   def default_url_options(options={})
       {foodcoop: FoodsoftConfig.scope}.merge(options)
   end

@@ -119,7 +119,21 @@ class User < ActiveRecord::Base
     end
     r
   end
-  
+
+  # Generates password reset token and sends email
+  # @return [Boolean] Whether it succeeded or not
+  def request_password_reset!
+    self.reset_password_token = new_random_password(16)
+    self.reset_password_expires = Time.now.advance(days: 2)
+    if save!
+      Mailer.reset_password(self).deliver_now
+      logger.debug("Sent password reset email to #{email}.")
+      true
+    else
+      false
+    end
+  end
+
   # Checks the admin role
   def role_admin?
     groups.detect {|group| group.role_admin?}
