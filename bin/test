@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Set test variables
+export DATABASE_URL=mysql2://root:secret@mysql/test
+export RAILS_ENV=test
+
+# Start virtuals X environment to allow integration testing via firefox/iceweasel
+export DISPLAY=:99
+Xvfb :99 &
+
+# Start tests
+rspec
