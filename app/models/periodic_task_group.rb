@@ -25,6 +25,20 @@ class PeriodicTaskGroup < ActiveRecord::Base
     end
   end
 
+  def update_tasks_including(template_task)
+    group_tasks = tasks + [template_task]
+    tasks.each do |task|
+      task.update!(name: template_task.name,
+                   description: template_task.description,
+                   duration: template_task.duration,
+                   required_users: template_task.required_users,
+                   workgroup: template_task.workgroup)
+    end
+    group_tasks.each do |task|
+      task.update_columns(periodic_task_group_id: self.id)
+    end
+  end
+
   protected
 
   # @return [Number] Number of days between two periodic tasks

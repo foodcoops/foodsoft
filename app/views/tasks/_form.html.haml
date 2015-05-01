@@ -26,6 +26,6 @@
   = f.input :done
   .form-actions
     = f.submit class: 'btn btn-primary'
-    - if @task.new_record?
+    - if @task.new_record? or @task.periodic?
       = f.submit t('.submit.periodic'), name: 'periodic', class: 'btn'
     = link_to t('ui.or_cancel'), :back

@@ -42,9 +42,11 @@ class TasksController < ApplicationController
   
   def update
     @task = Task.find(params[:id])
+    task_group = @task.periodic_task_group
     was_periodic = @task.periodic?
     @task.attributes=(params[:task])
     if @task.errors.empty? && @task.save
+      task_group.update_tasks_including(@task) if params[:periodic]
       flash[:notice] = I18n.t('tasks.update.notice')
       if was_periodic && !@task.periodic?
         flash[:notice] = I18n.t('tasks.update.notice_converted')
