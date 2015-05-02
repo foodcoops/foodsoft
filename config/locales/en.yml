@@ -355,12 +355,13 @@ en:
         notice: "%{count} new articles were saved."
       error_invalid: There are errors in articles
       error_nosel: No articles selected
+      error_parse: "%{msg} ... in line %{line}"
       error_update: 'An error occured when updating article ''%{article}'': %{msg}'
       parse_upload:
-        notice: Articles are already up to date.
-        no_file: Please select a file to upload
+        no_file: Please select a file to upload.
+        notice: "%{count} articles were succesfully analysed."
       sync:
-        notice: Articles are already up to date.
+        notice: Catalog is up to date
         shared_alert: "%{supplier} is not linked to an external database"
       update_all:
         notice: All articles and prices were updated.
@@ -405,7 +406,6 @@ en:
     model:
       error_in_use: "%{article} can not be deleted because the article is part of a current order!"
       error_nosel: You have selected no articles
-      error_parse: "%{msg} ... in line %{line}"
     parse_upload:
       body: "<p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>"
       submit: Process upload
@@ -440,8 +440,8 @@ en:
         status: Status (x=skip)
       file_label: Please choose a compatible file
       options:
-        convert_units: Keep current units, recompute unit quantity and price (like synchronize)
-        outlist_absent: Delete articles not in uploaded file
+        convert_units: Keep current units, recompute unit quantity and price (like synchronize).
+        outlist_absent: Delete articles not in uploaded file.
       sample:
         juices: Juices
         nuts: Nuts
@@ -453,8 +453,8 @@ en:
         walnuts: Walnuts
       submit: Upload file
       text_1: 'Here you can upload a spreadsheet to update the articles of %{supplier}. Excel (xls, xlsx) and OpenOffice (ods) spreadsheets are accepted, as well as comma-separated files (csv, columns separated by ";" with utf-8 encoding). Only the first sheet will be imported, and columns must be in the following order:'
-      text_2: 'The rows shown here are examples. When there is an "x" in the first column, the article is outlisted and will be removed. This allows you to edit the spreadsheet and quickly remove many articles at once, for example when articles become unavailable with the supplier. The category will be matched to your Foodsoft category list (both by category name and import names).'
-      title: "Upload articles of %{supplier}"
+      text_2: The rows shown here are examples. When there is an "x" in the first column, the article is outlisted and will be removed. This allows you to edit the spreadsheet and quickly remove many articles at once, for example when articles become unavailable with the supplier. The category will be matched to your Foodsoft category list (both by category name and import names).
+      title: Upload articles of %{supplier}
   config:
     hints:
       applepear_url: Website where the apple and pear system for tasks is explained.
@@ -959,11 +959,11 @@ en:
       groups:
         cancel: Leave group
         cancel_confirm: Are you sure you want to leave this group?
-        invite: Invite new members
+        invite: Invite new member
         title: You are member of the groups
       title: My Profile
       user:
-        since: "(member since: %{when})"
+        since: "(member for %{when})"
         title: "%{user}"
     start_nav:
       admin: Administration
@@ -991,7 +991,7 @@ en:
     errors:
       already_member: is already in use. Person is already a member of this Foodcoop.
     modal_form:
-      body: "<p>Here you can invite a person to a group <b>%{group}</b>, who is not yet a member of the foodcoop.</p> <p>After being added for the first time, the person is automatically a member of this group.</p>"
+      body: "<p>Here you can invite someone who isn't part of the foodcoop to join your ordergroup <b>%{group}</b>. After the invitation is accepted, the person will be able to add (and remove) articles to your order.</p> <p>This is a great way to introduce someone to the foodcoop, or to order with multiple people in the same household.</p>"
       title: Invite person
     new:
       action: Send invite
@@ -1360,13 +1360,13 @@ en:
     form:
       help:
         bold: bold
-        external_link_ex: External page
+        external_link_ex: External link
         external_links: External
         heading: level %{level}
         headings: Heading
-        italic: italic
-        image_links: Images
         image_link_title: Image title
+        image_links: Images
+        italic: italic
         link_lists: More on lists
         link_table: Table formatting
         link_templates: Templates
@@ -1403,10 +1403,10 @@ en:
     update:
       notice: Page was updated
     variables:
-      title: Foodsoft variables
       description: Variables return information from somewhere else. When you use the variable, it will be replaced by its value when displayed. Foodsoft has a number of pre-defined variables, such as the name and address of your foodcoop, the software version, and the number of members and suppliers. See the table below for all variables. You can use these in wiki pages as well as in the footer (from the configuration screen).
-      variable: Variable
+      title: Foodsoft variables
       value: Current value
+      variable: Variable
     version:
       author: 'Author: %{user}'
       date_format: "%a, %d-%m-%Y, %H:%M"
@@ -1624,7 +1624,7 @@ en:
       notice: Task has been deleted
     edit:
       title: Edit task
-      warning_periodic: "<strong>Warning:</strong> This task is part of a group of <em>weekly tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>."
+      warning_periodic: "<strong>Warning:</strong> This task is part of a group of <em>recurring tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>."
     error_not_found: No workgroup found
     form:
       search:
@@ -1632,7 +1632,7 @@ en:
         noresult: No user found
         placeholder: Search ...
       submit:
-        periodic: Save weekly task
+        periodic: Save recurring task
     index:
       show_group_tasks: Show group tasks
       title: Tasks
@@ -1653,8 +1653,8 @@ en:
       new_task: Create new task
       pages: Pages
     new:
-      title: Create new tasks
-    repeated: Task is repeated weekly
+      title: Create new task
+    repeated: Task is recurring
     set_done:
       notice: The state of the task has been updated
     show:

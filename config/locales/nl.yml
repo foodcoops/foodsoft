@@ -149,6 +149,7 @@ nl:
       user:
         email: Email
         first_name: Voornaam
+        last_activity: Laatst actief
         last_login: Laatste login
         last_name: Achternaam
         name: Naam
@@ -355,6 +356,7 @@ nl:
       error_parse: "%{msg} ... in regel %{line}"
       error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
+        no_file: Kies een bestand om te uploaden.
         notice: "%{count} artikelen zijn geanalyseerd"
       sync:
         notice: Catalogus is bijgewerkt
@@ -431,12 +433,25 @@ nl:
           other: Er zijn %{count} nieuwe artikelen.
         title: Toevoegen ...
     upload:
-      body: <p>Een komma-gescheiden utf-8 bestand wordt verwacht met extensie <tt>.csv</tt>. De eerste regel bevat kolomhoofden, velden worden met een puntkomma (';') gescheiden, en tekst mag tussen dubbele aanhalingstekens staan ("Tekst...").</p> <p>Volgorde van de kolommen:</p>
       fields:
         reserved: "(Leeg)"
         status: Status (x=overslaan)
       file_label: Graag een compatibel bestand uitkiezen
+      options:
+        convert_units: Bestaande eenheden behouden, herbereken groothandelseenheid en prijs (net als synchronizeren).
+        outlist_absent: Artikelen die niet in het bestand voorkomen, verwijderen.
+      sample:
+        juices: Sappen
+        nuts: Noten
+        organic: Bio
+        supplier_1: De Notenboerderij
+        supplier_2: De bruine boer
+        supplier_3: Groenteveld
+        tomato_juice: Tomatensap
+        walnuts: Walnoten
       submit: Bestand uploaden
+      text_1: 'Hier kun je een spreadsheet uploaden om de artikelen van %{supplier} bij te werken. Zowel Excel (xls, xlsx) als OpenOffice (ods) spreadsheets worden gelezen, evenals csv-bestanden (kolommen geschieden door ";", utf-8 encoding). Alleen de eerste sheet wordt geïmporteerd, en kolommen worden verwacht in deze volgorde:'
+      text_2: De rijen hier getoond zijn voorbeelden. Een "x" in de eerste kolom geeft aan dat het artikel niet meer beschikbaar is en zal worden verwijderd. Hiermee kun je snel meerdere artikelen tegelijk verwijderen. De categorie wordt gematched met de Foodsoft categorielijst (zowel met de categorienaam als de bijbehorende importnamen).
       title: Artikelen uploaden voor %{supplier}
   config:
     hints:
@@ -948,7 +963,7 @@ nl:
         title: Je bent lid van de groepen
       title: Mijn Profiel
       user:
-        since: "(gebruiker sinds: %{when})"
+        since: "(gebruiker sinds %{when})"
         title: "%{user}"
     start_nav:
       admin: Administratie
@@ -976,7 +991,7 @@ nl:
     errors:
       already_member: is al lid van de foodcoop.
     modal_form:
-      body: "<p>Hier kun je iemand die nog geen lid is uitnodigen voor de groep<b>%{group}</b>.</p> <p>Na aanmelding is hij of zij automatisch lid van deze groep.</p>"
+      body: "<p>Hier kun je iemand uitnodigen om deel te worden van de foodcoop in jouw bestelgroep <b>%{group}</b>. Als de uitnodiging is geaccepteerd, zal hij of zij artikelen kunnen toevoegen (en verwijderen) aan jouw bestelling.</p> <p>Dit is een makkelijke manier om een vriend of vriendin de foodcoop eens uit te laten proberen, of om met huisgenoten samen bestellingen te doen.</p>"
       title: Iemand uitnodigen
     new:
       action: Uitnodiging versturen
@@ -1118,6 +1133,7 @@ nl:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
+      hint_private: Bericht wordt niet getoond in de Foodsoft inbox
       list:
         desc: 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
         mail: bijvoorbeeld door een email te sturen naar %{email}.
@@ -1135,6 +1151,7 @@ nl:
       sent_on: 'Verzonden:'
       subject: 'Onderwerp:'
       title: Bericht lezen
+      to: 'Aan:'
   messages_mailer:
     foodsoft_message:
       footer: |-
@@ -1338,11 +1355,17 @@ nl:
     form:
       help:
         bold: vet
-        external_link_ex: Externe pagina
-        external_links: Links naar pagina's op andere websites
+        external_link_ex: Externe link
+        external_links: Extern
         heading: niveau %{level}
         headings: Kop
+        image_link_title: Titel van afbeelding
+        image_links: Plaatjes
         italic: italic
+        link_lists: Meer over lijsten
+        link_table: Tabellen
+        link_templates: Sjablonen
+        link_variables: Foodsoft variabelen
         list_item_1: Eerste in de lijst
         list_item_2: Tweede in de lijst
         noformat: Zonder opmaak
@@ -1350,9 +1373,7 @@ nl:
         section_block: Paragrafen
         section_character: Tekens
         section_link: Links
-        section_table: Tabellen
-        see_tables: zie %{tables_link}
-        tables_link: Tabellen
+        section_more: Meer onderwerpen
         text: tekst
         title: Korte opmaakhulp
         unordered_list: Itemlijst
@@ -1376,6 +1397,11 @@ nl:
     title: Titel
     update:
       notice: Pagina is bijgewerkt.
+    variables:
+      description: Variabelen geven informatie van elders. Als je een variabele gebruikt, wordt deze bij het tonen vervangen door zijn waarde. Foodsoft heeft een aantal voorgedefiniëerde variabelen, zoals naam en adres van je foodcoop, softwareversie, en het aantal leden en leveranciers. De tabel hieronder laat alle beschikbare variabelen zien. Je kunt deze gebruiken in wiki-pagina's en in de voettekst (die in het configuratiescherm aangepast kan worden).
+      title: Foodsoft variabelen
+      value: Huidige waarde
+      variable: Variabele
     version:
       author: 'Auteur: %{user}'
       date_format: "%a, %d-%m-%Y, %H:%M"
@@ -1430,8 +1456,6 @@ nl:
         unit: 'Bijv.: KG of 1L of 500g'
       article_category:
         description: komma-gescheiden lijst van namen die herkend worden bij uploaden/synchroniseren
-      message:
-        private: Bericht wordt niet getoond in de Foodsoft inbox.
       order_article:
         units_to_order: Als je het aantal geleverde eenheden wijzigt, moet je daarna de hoeveelheden voor huishoudens aanpassen. Klik daarvoor op de artikelnaam. Als je dit vergeet, kunnen huishoudens belast worden voor artikelen die ze niet hebben gekregen!
         update_global_price: Prijs ook aanpassen voor toekomstige bestellingen
@@ -1595,7 +1619,7 @@ nl:
       notice: Taak is verwijderd
     edit:
       title: Taak bewerken
-      warning_periodic: "<strong>Opgelet:</strong> deze taak is onderdeel van een <em>wekelijkse taak</em>. Wanneer deze opslaat, zal de uitzondering als een normale taak worden opgeslagen."
+      warning_periodic: "<strong>Opgelet:</strong> deze taak is onderdeel van een <em>terugkerende taak</em>. Wanneer je deze opslaat, zal dit als uitzondering worden opgeslagen."
     error_not_found: Geen werkgroep gevonden
     form:
       search:
@@ -1603,7 +1627,7 @@ nl:
         noresult: Geen gebruiker gevonden
         placeholder: Zoeken ...
       submit:
-        periodic: Wekelijkse taak bewaren
+        periodic: Terugkerende taak bewaren
     index:
       show_group_tasks: Groepstaken tonen
       title: Taken
@@ -1624,8 +1648,8 @@ nl:
       new_task: Nieuwe taak
       pages: Pagina's
     new:
-      title: Nieuwe taken maken
-    repeated: Taak wordt wekelijks herhaald
+      title: Nieuwe taak
+    repeated: Deze taak wordt herhaald.
     set_done:
       notice: De status van de taak is aangepast
     show:

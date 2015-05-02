@@ -149,6 +149,7 @@ fr:
       user:
         email: Email
         first_name: Prénom
+        last_activity: 
         last_login: Dernière connection
         last_name: Nom de famille
         name: Nom
@@ -355,6 +356,7 @@ fr:
       error_parse: "%{msg} ... à la ligne %{line}"
       error_update: 'Une erreur s''est produite lors de la mise à jour du produit "%{article}": %{msg}'
       parse_upload:
+        no_file: 
         notice: "%{count} produits ont été examinés avec succès."
       sync:
         notice: Le catalogue est à jour
@@ -431,13 +433,26 @@ fr:
         body_count: 
         title: 
     upload:
-      body: 
       fields:
         reserved: "(Reservé)"
         status: Statut (x=exclu)
       file_label: Merci de choisir un fichier compatible
+      options:
+        convert_units: 
+        outlist_absent: 
+      sample:
+        juices: 
+        nuts: 
+        organic: 
+        supplier_1: 
+        supplier_2: 
+        supplier_3: 
+        tomato_juice: 
+        walnuts: 
       submit: Transférer le fichier
-      title: "%{supplier} / Transférer les données sur les produits"
+      text_1: 
+      text_2: 
+      title: Transférer les données sur les produits de %{supplier}
   config:
     hints:
       applepear_url: 
@@ -957,7 +972,7 @@ fr:
         title: Tu fais partie des équipes
       title: Ton profil
       user:
-        since: "(Membre depuis: %{when})"
+        since: "(Membre depuis %{when})"
         title: "%{user}"
     start_nav:
       admin: Administration
@@ -985,9 +1000,7 @@ fr:
     errors:
       already_member: est déjà membre de la Boufcoop.
     modal_form:
-      body: |-
-        <p>Sur cette page, tu peux inviter une personne qui n'est pas encore membre de la boufcoop à rejoindre la cellule ou l'équipe <b>%{group}</b> .</p>
-        <p>Lors de sa prochaine connexion elle en deviendra automatiquement membre. </p>
+      body: 
       title: Engrainer une personne
     new:
       action: Engrainer!
@@ -1127,6 +1140,7 @@ fr:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
+      hint_private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       list:
         desc: Pour envoyer un message à tout le monde, passe par la mailing list "%{list}"
         mail: par exemple en envoyant un email à %{email}
@@ -1144,6 +1158,7 @@ fr:
       sent_on: 'Envoyé le:'
       subject: 'Sujet:'
       title: Afficher le contenu du message
+      to: 
   messages_mailer:
     foodsoft_message:
       footer: |-
@@ -1345,11 +1360,17 @@ fr:
     form:
       help:
         bold: gra
-        external_link_ex: Pages extérieures
-        external_links: Liens externes
+        external_link_ex: Page extérieure
+        external_links: Externe
         heading: Plan %{level}
         headings: En-tête
+        image_link_title: 
+        image_links: 
         italic: italique
+        link_lists: 
+        link_table: Format des tableaux
+        link_templates: 
+        link_variables: 
         list_item_1: Premier item
         list_item_2: Deuxième item
         noformat: Pas de formatage
@@ -1357,9 +1378,7 @@ fr:
         section_block: Format de paragraphe
         section_character: Format de charactère
         section_link: Format des liens
-        section_table: Format des tableaux
-        see_tables: Voir %{tables_link}
-        tables_link: Tableaux
+        section_more: 
         text: texte
         title: Assistant de mise en forme rapide
         unordered_list: Liste non ordonnée
@@ -1383,6 +1402,11 @@ fr:
     title: Titre
     update:
       notice: La page a été mise à jour
+    variables:
+      description: 
+      title: 
+      value: 
+      variable: 
     version:
       author: 'Auteur: %{user}'
       date_format: "%a, %d.%m.%Y, %H:%M heure"
@@ -1437,8 +1461,6 @@ fr:
         unit: par exemple. kg ou 1l ou 500g
       article_category:
         description: 
-      message:
-        private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       order_article:
         units_to_order: Attention, toute modification du nombre total d'unités réceptionées pour un article doit être répercuté manuellement sur les quantités attribuées à chaque cellule (pour cela, cliques sur le nom de l'article concerné). Si ce n'est pas fait, les cellules risquent d'être facturées pour des articles qu'elles n'ont jamais recus!
         update_global_price: Mettre à jour le prix pour les commandes futures
@@ -1668,7 +1690,7 @@ fr:
     actions: Actions
     cancel: Annuler
     close: Fermer
-    copy: Copier
+    copy: 
     delete: Supprimer
     edit: Modifier
     marks:

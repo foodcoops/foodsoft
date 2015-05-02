@@ -356,6 +356,7 @@ de:
       error_parse: "%{msg} ... in Zeile %{line}"
       error_update: 'Es trat ein Fehler beim Aktualisieren des Artikels ''%{article}'' auf: %{msg}'
       parse_upload:
+        no_file: 
         notice: "%{count} Artikel sind erfolgreich analysiert."
       sync:
         notice: Der Katalog ist aktuell
@@ -432,12 +433,25 @@ de:
           other: Es gibt %{count} Artikel hinzuzufügen.
         title: Neuen hinzufügen ...
     upload:
-      body: <p>Die Datei muss eine Textdatei mit der Endung '.csv' sein. Die erste Zeile wird beim Einlesen ignoriert. Die Felder müssen mit einem Semikolon (';') getrennt und der Text mit doppelten Anführungszeichen ("Text...") umklammert werden. Als Zeichensatz wird UTF-8 erwartet.</p> <p>Reihenfolge der Spalten:</p>
       fields:
         reserved: "(geschützt)"
         status: Status (x=ausgelistet)
       file_label: Bitte wähle eine kompatible Datei aus
+      options:
+        convert_units: 
+        outlist_absent: 
+      sample:
+        juices: 
+        nuts: 
+        organic: 
+        supplier_1: 
+        supplier_2: 
+        supplier_3: 
+        tomato_juice: 
+        walnuts: 
       submit: Datei hochladen
+      text_1: 
+      text_2: 
       title: "%{supplier} / Artikel hochladen"
   config:
     hints:
@@ -943,11 +957,11 @@ de:
       groups:
         cancel: Mitgliedschaft beenden
         cancel_confirm: Bist Du sicher, dass Du Deine Mitgliedschaft beenden willst?
-        invite: Neue Mitglieder einladen
+        invite: Neues Mitglied einladen
         title: Du bist Mitglied in folgenden Gruppen
       title: Mein Profil
       user:
-        since: "(Mitglied seit: %{when})"
+        since: "(Mitglied seit %{when})"
         title: "%{user}"
     start_nav:
       admin: Administration
@@ -975,7 +989,7 @@ de:
     errors:
       already_member: ist bereits in Verwendung. Person ist schon Mitglied der Foodcoop.
     modal_form:
-      body: "<p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p> <p>Die Person ist dann nach erstmaliger Anmeldung automatisch Mitglied dieser Gruppe.</p>"
+      body: 
       title: Person einladen
     new:
       action: Einlading abschicken
@@ -1115,28 +1129,25 @@ de:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
+      hint_private: Nachricht erscheint nicht im Foodsoft Posteingang
       list:
         desc: 'Nachrichten an alle verschickst Du bitte über den Verteiler: %{list}'
         mail: z.b. mit einer E-Mail an %{email}.
         subscribe: Erklärungen zum Verteiler findest Du im %{link}.
         subscribe_msg: Eventuell musst Du Dich dem Verteiler erst bekannt machen.
         wiki: Wiki (Abschnitt Mailing-Liste)
-      message: Nachricht
       no_user_found: Kein/e Benutzer/in gefunden
-      reply_to: Diese Nachricht ist eine Antwort auf eine andere %{link}.
       search: Suche ...
       search_user: Nach Bernutzer/in suchen
       title: Neue Nachricht
     show:
       all_messages: Nachrichten im Überblick
       from: 'Von:'
-      group: 'Gruppe:'
       reply: Antworten
       sent_on: 'Gesendet:'
       subject: 'Betreff:'
-      reply_to: 'Antwort auf:'
       title: Nachricht anzeigen
-      to: 'An:'
+      to: 
   messages_mailer:
     foodsoft_message:
       footer: |
@@ -1341,20 +1352,24 @@ de:
       help:
         bold: fett
         external_link_ex: Externe Seite
-        external_links: Externe Links
+        external_links: Extern
         heading: Ebene %{level}
         headings: "Überschriften"
+        image_link_title: 
+        image_links: 
         italic: kursiv
+        link_lists: 
+        link_table: Tabellenformatierung
+        link_templates: 
+        link_variables: 
         list_item_1: Erster Punkt
         list_item_2: Zweiter Punkt
-        noformat: Keine Wiki- Formatierung
+        noformat: Keine Formatierung
         ordered_list: Listen mit Zahlen
         section_block: Block-Formatierung
         section_character: Zeichenformatierung
         section_link: Link-Formatierung
-        section_table: Tabellenformatierung
-        see_tables: Siehe %{tables_link}
-        tables_link: Tabellen
+        section_more: 
         text: text
         title: Schnelle Formatierungshilfe
         unordered_list: Listen mit Punkten
@@ -1378,6 +1393,11 @@ de:
     title: Titel
     update:
       notice: Seite wurde aktualisiert
+    variables:
+      description: 
+      title: 
+      value: 
+      variable: 
     version:
       author: 'Autor: %{user}'
       date_format: "%a, %d.%m.%Y, %H:%M Uhr"
@@ -1432,8 +1452,6 @@ de:
         unit: z.B. KG oder 1L oder 500g
       article_category:
         description: Kommagetrennte Liste von Kategorienamen die beim Import/Datenabgleich erkannt wurden
-      message:
-        private: Nachricht erscheint nicht im Foodsoft Posteingang
       order_article:
         units_to_order: Wenn Du die Gesamtanzahl gelieferter Gebinde änderst, musst Du auch die individuelle Anzahl der einzelnen Bestellgruppen anpassen, indem Du auf den Artikelnamen klickst. Sie werden nicht automatisch neuberechnet und andernfalls werden den Bestellgruppen Artikel in Rechnung gestellt, die nicht geliefert wurden!
         update_global_price: "Ändert auch den Preis für zukünftige Bestellungen"
@@ -1627,7 +1645,7 @@ de:
       pages: Seiten
     new:
       title: Neue Aufgabe erstellen
-    repeated: Aufgabe wird wöchentlich wiederholt
+    repeated: Aufgabe wird wiederholt
     set_done:
       notice: Aufgabenstatus wurde aktualisiert
     show:
@@ -1655,7 +1673,7 @@ de:
     actions: Aktionen
     cancel: Abbrechen
     close: Schließen
-    copy: Kopieren
+    copy: 
     delete: Löschen
     edit: Bearbeiten
     marks:
