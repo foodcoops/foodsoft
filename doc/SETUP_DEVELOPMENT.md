@@ -5,6 +5,10 @@ Gratulations, if you read this file locally, you have successfully cloned the
 foodsoft project from the git repository. Now you are only a few steps away
 from trying it out and then jumping into development.
 
+This document describes how to setup Foodsoft for development on your local system.
+Alternatively, you [run Foodsoft using Docker](SETUP_DOCKER.md).
+
+
 **System requirements**:
 [RVM](https://rvm.io/rvm/install),
 [Ruby 1.9.3+](https://www.ruby-lang.org/en/downloads/),
