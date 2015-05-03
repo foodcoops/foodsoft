@@ -118,11 +118,25 @@ function update(item, quantity, tolerance) {
     $('#price_' + item + '_display').html(I18n.l("currency", itemTotal[item]));
 
     // update missing units
-    var missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
-    if (missing_units < 0 || missing_units == unit[item]) {
+    var missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item]),
+        missing_units_css = '';
+    if (missing_units < 0) {
         missing_units = 0;
+        missing_units_css = '';
+    } else if (missing_units == unit[item]) {
+        missing_units = 0;
+        missing_units_css = 'missing-none';
+    } else if (missing_units == 1) {
+        missing_units_css = 'missing-few';
+    } else {
+        missing_units_css = 'missing-many';
     }
-    $('#missing_units_' + item).html(String(missing_units));
+    $('#missing_units_' + item)
+        .html(String(missing_units))
+        .closest('tr')
+        .removeClass('missing-many missing-few missing-none')
+        .addClass(missing_units_css);
+
 
     // update balance
     updateBalance();
