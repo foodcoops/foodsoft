@@ -1,6 +1,6 @@
 # Foodsoft on Docker
 
-This document explains setup and using docker the foodsoft with docker.
+This document explains setting up and using Foodsoft with Docker.
 
 ## Requirements
 
@@ -23,9 +23,6 @@ to be pulled from docker registry and a lot dependencies needs to be installed.)
 
     docker-compose run app rake foodsoft:setup_development
 
-TODO: Right know this is not gonna work because of the new database
-configuration via ENV variable. See Notes below.
-
 ## Usage
 
 Start containers (in foreground, stop them with `CTRL-C`)
@@ -39,6 +36,10 @@ Run a rails/rake command
 Open a rails console
 
     docker-compose run app rails c
+
+Setup the test database
+
+    docker-compose run app rake db:setup RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mysql/test
 
 Run the tests
 
@@ -64,5 +65,5 @@ docker commit -m "Updated rails" <Container ID> foodsoft_app
 
 ### Database configuration
 
-TO make thins easier we use the ENV Variable DATABASE_URL. But to make this
-work, the shouldn't be any config/database.yml file!
+To make this easier we use the environment variable `DATABASE_URL`
+(and `TEST_DATABASE_URL` when using the testing script).
