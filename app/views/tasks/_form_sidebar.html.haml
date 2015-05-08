@@ -1,15 +1,2 @@
-- content_for :javascript do
-  :javascript
-    $(function() {
-      $("#task_user_list").tokenInput("#{users_path(:format => :json)}", {
-        crossDomain: false,
-        prePopulate: $("#task_user_list").data("pre"),
-        hintText: '#{escape_javascript(t('.search.hint'))}',
-        noResultText: '#{escape_javascript(t('.search.noresult'))}',
-        searchingText: '#{escape_javascript(t('.search.placeholder'))}',
-        theme: 'facebook'
-      });
-    });
-
 - content_for :sidebar do
   = render "shared/workgroup_members"

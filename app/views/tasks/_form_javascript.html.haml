@@ -1,0 +1,14 @@
+- content_for :javascript do
+  :javascript
+    $(function() {
+      $("#task_user_list").tokenInput("#{users_path(:format => :json)}", {
+        crossDomain: false,
+        prePopulate: $("#task_user_list").data("pre"),
+        hintText: '#{escape_javascript(t('tasks.form.search.hint'))}',
+        noResultText: '#{escape_javascript(t('tasks.form.search.noresult'))}',
+        searchingText: '#{escape_javascript(t('tasks.form.search.placeholder'))}',
+        theme: 'facebook'
+      });
+    });
+
+
