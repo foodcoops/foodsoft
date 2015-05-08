@@ -1,0 +1,11 @@
+.git
+.idea
+.sass-cache
+log
+config/database.yml
+public/assets
+public/system
+tmp/*
+vendor/bundle
+coverage
+*.sql*

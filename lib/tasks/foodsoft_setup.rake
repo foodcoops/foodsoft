@@ -58,6 +58,10 @@ end
 
 def setup_database
   file = 'config/database.yml'
+  if ENV['DATABASE_URL']
+    puts blue "DATABASE_URL found, please remember to also set it when running Foodsoft"
+    return nil
+  end
   return nil if skip?(file)
   
   database = ask("What kind of database do you use?\nOptions:\n(1) MySQL\n(2) SQLite", ["1","2"])
@@ -110,6 +114,7 @@ def setup_secret_token
 end
 
 def start_mailcatcher
+  return nil if ENV['MAILCATCHER_PORT'] # skip when it has an existing Docker container
   mailcatcher = ask("Do you want to start mailcatcher?\nOptions:\n(y) Yes\n(n) No", ["y","n"])
   if mailcatcher === "y"
     puts yellow "Starting mailcatcher at http://localhost:1080..."
