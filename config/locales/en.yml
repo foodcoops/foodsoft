@@ -1624,6 +1624,8 @@ en:
       notice: Task has been deleted
     edit:
       title: Edit task
+      title_periodic: Edit recurring task
+      submit_periodic: Save recurring task
       warning_periodic: "<strong>Warning:</strong> This task is part of a group of <em>recurring tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>."
     error_not_found: No workgroup found
     form:
@@ -1654,6 +1656,7 @@ en:
       pages: Pages
     new:
       title: Create new task
+      submit_periodic: Create recurring task
     repeated: Task is recurring
     set_done:
       notice: The state of the task has been updated
@@ -1661,7 +1664,9 @@ en:
       accept_task: Accept task
       confirm_delete_group: Really delete this and all subsequent tasks?
       confirm_delete_single: Are you sure you want to delete the task?
+      confirm_delete_single_from_group: Are you sure you want to delete this task (and keep related recurring tasks)?
       delete_group: Delete task and subsequent
+      edit_group: Edit recurring
       hours: "%{count}h"
       mark_done: Mark task as done
       reject_task: Reject task
