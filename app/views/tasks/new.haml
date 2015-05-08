@@ -1,3 +1,10 @@
 - title t('.title')
 
-= render 'form'
+= render 'form_sidebar'
+
+= simple_form_for @task do |form|
+  = render 'form', form: form, periodic: nil
+  .form-actions
+    = form.submit class: 'btn btn-primary'
+    = form.submit t('.submit_periodic'), name: 'periodic', class: 'btn'
+    = link_to t('ui.or_cancel'), :back

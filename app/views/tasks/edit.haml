@@ -1,3 +1,15 @@
-- title t('.title')
+- title @periodic ? t('.title_periodic') : t('.title')
 
-= render 'form'
+- if @task.periodic? && !@periodic
+  .alert.alert-info= raw t('tasks.edit.warning_periodic')
+
+= render 'form_sidebar'
+
+= simple_form_for @task do |form|
+  = render 'form', form: form, periodic: @periodic
+  .form-actions
+    - if @periodic
+      = form.submit t('.submit_periodic'), name: 'periodic', class: 'btn btn-primary'
+    - else
+      = form.submit class: 'btn btn-primary'
+    = link_to t('ui.or_cancel'), :back
