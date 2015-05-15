@@ -1,3 +1,25 @@
+# Foodsoft 4.4.0
+(15 May 2015)
+
+* Let upload provide same functionality as shared database sync (#113, #361)
+* Read Excel and Openoffice spreadsheets in upload (#113, #361)
+* Allow to add text to login page using wiki (edit `Public_frontpage`)
+* Add expansion variables for footer and wiki pages
+* Enable editing of recurring tasks (#152)
+* Show only suppliers with articles for new orders (#347)
+* Show recipients of messages (#354)
+* Allow to open an order based on a previous one (#348)
+* Allow to send message to people who ordered (#350)
+* Remember when user was last active (#357)
+* Use icons for permissions
+* Improve header and footer in PDFs
+* Get rid of last empty page in PDFs
+* Add uservoice plugin for gathering user feedback (#333)
+* Fix message mails not always being delivered by setting sender (#349)
+* Fix sync when unit has no name (#337)
+* Fix updating profile when user has no ordergroup
+* Fix deleted ordergroups being shown (#362)
+
 # Foodsoft 4.3.0
 (31 Dec 2014)
 
