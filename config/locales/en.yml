@@ -1623,9 +1623,9 @@ en:
     destroy:
       notice: Task has been deleted
     edit:
+      submit_periodic: Save recurring task
       title: Edit task
       title_periodic: Edit recurring task
-      submit_periodic: Save recurring task
       warning_periodic: "<strong>Warning:</strong> This task is part of a group of <em>recurring tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>."
     error_not_found: No workgroup found
     form:
@@ -1655,8 +1655,8 @@ en:
       new_task: Create new task
       pages: Pages
     new:
-      title: Create new task
       submit_periodic: Create recurring task
+      title: Create new task
     repeated: Task is recurring
     set_done:
       notice: The state of the task has been updated

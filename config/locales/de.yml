@@ -356,7 +356,7 @@ de:
       error_parse: "%{msg} ... in Zeile %{line}"
       error_update: 'Es trat ein Fehler beim Aktualisieren des Artikels ''%{article}'' auf: %{msg}'
       parse_upload:
-        no_file: 
+        no_file: Bitte eine Datei zum hochladen auswählen.
         notice: "%{count} Artikel sind erfolgreich analysiert."
       sync:
         notice: Der Katalog ist aktuell
@@ -431,28 +431,28 @@ de:
         body_count:
           one: Es gibt einen neuen Artikel hinzuzufügen.
           other: Es gibt %{count} Artikel hinzuzufügen.
-        title: Neuen hinzufügen ...
+        title: Neue hinzufügen ...
     upload:
       fields:
         reserved: "(geschützt)"
         status: Status (x=ausgelistet)
       file_label: Bitte wähle eine kompatible Datei aus
       options:
-        convert_units: 
-        outlist_absent: 
+        convert_units: Derzeitige Einheiten beibehalten, berechne Mengeneinheit und Preis (wie Synchronisieren).
+        outlist_absent: Artikel löschen, die nicht in der hochgeladenen Datei sind.
       sample:
-        juices: 
-        nuts: 
-        organic: 
-        supplier_1: 
-        supplier_2: 
-        supplier_3: 
-        tomato_juice: 
-        walnuts: 
+        juices: Säfte
+        nuts: Nüsse
+        organic: Bio
+        supplier_1: Nussfarm
+        supplier_2: Braune Felder
+        supplier_3: Grüne Felder
+        tomato_juice: Tomatensaft
+        walnuts: Walnüsse
       submit: Datei hochladen
-      text_1: 
-      text_2: 
-      title: "%{supplier} / Artikel hochladen"
+      text_1: 'Du kannst hier eine Tabelle hochladen, um die Artikel des Lieferanten %{supplier} zu aktualisieren. Excel (xls, xlsx) und OpenOffice (ods) Tabellen werden akzeptiert, darüber hinaus Dateien im Format "csv" (comma-separated values, mit dem Spaltentrennzeichen ";" und utf-8 Kodierung). Nur das erste Tabellenblatt wird importiert und die Spalten müssen in der folgenden Anordnung vorliegen:'
+      text_2: Die hier gezeigten Spalten sind Beispiele. Ist ein "x" in der ersten Spalte, wird der Artikel aussortiert und entfernt. Das erlaubt Dir die Tabelle zu ändern und schnell viele Artikel auf ein Mal zu entfernen, zum Beispiel wenn Artkiel des Lieferanten nicht mehr verfügbar sind. Die Kategorie wird der Foodsoft Kategorie zugeordnet (durch die Kategorienamen und die Importnamen).
+      title: Artikel des Lieferanten %{supplier} hochladen
   config:
     hints:
       applepear_url: Seite, auf der das Äpfel- und Birnensystem für Aufgaben erklärt wird.
@@ -989,7 +989,7 @@ de:
     errors:
       already_member: ist bereits in Verwendung. Person ist schon Mitglied der Foodcoop.
     modal_form:
-      body: 
+      body: "<p>Hier kannst Du jemanden einladen, der nicht Teil der Foodcoop ist, deiner Bestellgruppe <b>%{group}</b> beizutreten. Nachdem die Einladung angenommen wurde, wird die Person in der Lage sein, Artikel zu deiner Bestellung hinzuzufügen (und zu entfernen).</p> <p>Dies ist eine praktische Funktion, um jemanden in die Foodcoop einzuladen oder mit mehreren Leuten in einem Haushalt zu bestellen.</p>"
       title: Person einladen
     new:
       action: Einlading abschicken
@@ -1147,7 +1147,7 @@ de:
       sent_on: 'Gesendet:'
       subject: 'Betreff:'
       title: Nachricht anzeigen
-      to: 
+      to: 'An:'
   messages_mailer:
     foodsoft_message:
       footer: |
@@ -1355,13 +1355,13 @@ de:
         external_links: Extern
         heading: Ebene %{level}
         headings: "Überschriften"
-        image_link_title: 
-        image_links: 
+        image_link_title: Bildtitel
+        image_links: Bilder
         italic: kursiv
-        link_lists: 
+        link_lists: Mehr
         link_table: Tabellenformatierung
-        link_templates: 
-        link_variables: 
+        link_templates: Vorlagen
+        link_variables: Foodsoft Variablen
         list_item_1: Erster Punkt
         list_item_2: Zweiter Punkt
         noformat: Keine Formatierung
@@ -1369,7 +1369,7 @@ de:
         section_block: Block-Formatierung
         section_character: Zeichenformatierung
         section_link: Link-Formatierung
-        section_more: 
+        section_more: Mehr Themen
         text: text
         title: Schnelle Formatierungshilfe
         unordered_list: Listen mit Punkten
@@ -1394,10 +1394,10 @@ de:
     update:
       notice: Seite wurde aktualisiert
     variables:
-      description: 
-      title: 
-      value: 
-      variable: 
+      description: Variablen geben Informationen wieder, die an anderer Stelle definiert wurden. Wenn Du die Variable benutzt, wird sie mit ihrem Wert ersetzt, wenn sie angezeigt wird. Foodsoft hat eine Reihe von vordefinierten Variablen, wie zum Beispiel Name und Adresse deiner Foodcoop, Softwareversion und die Anzahl der Mitglieder und Lieferanten. In der Tabelle unten sind alle Variablen aufgeführt. Du kannst diese in Wiki-Seiten und der Fusszeile (in den Einstellungen) nutzen.
+      title: Foodsoft-Variablen
+      value: Aktueller Wert
+      variable: Variable
     version:
       author: 'Autor: %{user}'
       date_format: "%a, %d.%m.%Y, %H:%M Uhr"
@@ -1614,7 +1614,9 @@ de:
     destroy:
       notice: Aufgabe wurde gelöscht
     edit:
+      submit_periodic: Wiederkehrende Aufgabe speichern
       title: Aufgabe bearbeiten
+      title_periodic: Wiederkehrende Aufgabe ändern
       warning_periodic: "<strong>Warnung:</strong> Diese Aufgabe ist Teil einer Gruppe von <em>wöchentlichen Aufgaben</em>. Beim Speichern wird sie aus der Gruppe ausgeschlossen und in eine <em>gewöhnliche Aufgabe</em> umgewandelt."
     error_not_found: Keine Arbeitsgruppe gefunden
     form:
@@ -1623,7 +1625,7 @@ de:
         noresult: Keine Nutzerin gefunden
         placeholder: Suche ...
       submit:
-        periodic: Wöchentliche Aufgabe speichern
+        periodic: Wiederkehrende Aufgabe speichern
     index:
       show_group_tasks: Gruppenaufgaben anzeigen
       title: Aufgaben
@@ -1644,6 +1646,7 @@ de:
       new_task: Neue Aufgabe erstellen
       pages: Seiten
     new:
+      submit_periodic: Wiederkehrende Aufgabe anlegen
       title: Neue Aufgabe erstellen
     repeated: Aufgabe wird wiederholt
     set_done:
@@ -1652,7 +1655,9 @@ de:
       accept_task: Aufgabe übernehmen
       confirm_delete_group: Diese und alle folgenden wöchentlichen Aufgaben wirklich löschen?
       confirm_delete_single: Die Aufgabe wirklich löschen?
+      confirm_delete_single_from_group: Bist Du sicher, dass Du diese Aufgabe löschen möchtest (und in Bezug stehende wiederkehrende Aufgabe behalten möchtest)?
       delete_group: Aufgabe und folgende löschen
+      edit_group: Wiederkehrende ändern
       hours: "%{count}h"
       mark_done: Als erledigt markieren
       reject_task: Aufgabe ablehnen
@@ -1673,7 +1678,7 @@ de:
     actions: Aktionen
     cancel: Abbrechen
     close: Schließen
-    copy: 
+    copy: kopieren
     delete: Löschen
     edit: Bearbeiten
     marks:

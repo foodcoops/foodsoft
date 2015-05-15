@@ -1618,7 +1618,9 @@ nl:
     destroy:
       notice: Taak is verwijderd
     edit:
+      submit_periodic: Terugkerende taak opslaan
       title: Taak bewerken
+      title_periodic: Terugkerende taak bewerken
       warning_periodic: "<strong>Opgelet:</strong> deze taak is onderdeel van een <em>terugkerende taak</em>. Wanneer je deze opslaat, zal dit als uitzondering worden opgeslagen."
     error_not_found: Geen werkgroep gevonden
     form:
@@ -1648,7 +1650,8 @@ nl:
       new_task: Nieuwe taak
       pages: Pagina's
     new:
-      title: Nieuwe taak
+      submit_periodic: Terugkerende taak aanmaken
+      title: Nieuwe taak maken
     repeated: Deze taak wordt herhaald.
     set_done:
       notice: De status van de taak is aangepast
@@ -1656,7 +1659,9 @@ nl:
       accept_task: Accepteren
       confirm_delete_group: Deze en alle volgende taken echt verwijderen?
       confirm_delete_single: Weet je zeker dat je deze taak wilt verwijderen?
-      delete_group: Deze en volgende taken verwijderen
+      confirm_delete_single_from_group: Weet je zeker dat je deze taak wilt verwijderen (en de terugkerende taak behouden)?
+      delete_group: Deze en volgende verwijderen
+      edit_group: Terugkerende taak bewerken
       hours: "%{count}u"
       mark_done: Als gedaan markeren
       reject_task: Taak laten vallen

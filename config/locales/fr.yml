@@ -1628,7 +1628,9 @@ fr:
     destroy:
       notice: Le boulot a été supprimé
     edit:
+      submit_periodic: 
       title: Modifier les données du boulot
+      title_periodic: 
       warning_periodic: |-
         <strong>Avertissement:</strong>
         Ce boulot fait partie d'une série de boulots <em>hebdomadaires</em>.
@@ -1661,6 +1663,7 @@ fr:
       new_task: Définir un nouveau boulot
       pages: Page
     new:
+      submit_periodic: 
       title: Définition d'un nouveau boulot
     repeated: Ce boulot a lieu toutes les semaines.
     set_done:
@@ -1669,7 +1672,9 @@ fr:
       accept_task: Te charger de ce boulot.
       confirm_delete_group: Veux-tu vraiment supprimer ce boulot hebdomadaire?
       confirm_delete_single: Es-tu sûr de vouloir supprimer ce boulot?
+      confirm_delete_single_from_group: 
       delete_group: Supprimer ce boulot
+      edit_group: 
       hours: "%{count}h"
       mark_done: Marquer comme effectué
       reject_task: Refuser ce boulot
