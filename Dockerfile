@@ -37,4 +37,4 @@ COPY . $WORKDIR
 
 EXPOSE 3000
 
-CMD ["rails", "server"]
+CMD ["rails", "server", "--binding", "0.0.0.0"]
