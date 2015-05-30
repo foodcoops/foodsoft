@@ -41,7 +41,7 @@ gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 gem 'protected_attributes'
 gem 'ruby-units'
 gem 'attribute_normalizer'
-gem 'ice_cube', github: 'wvengen/ice_cube', branch: 'issues/50-from_ical-rebased' # fork until merged
+gem 'ice_cube', '~> 0.13.0'
 gem 'recurring_select'
 gem 'roo', '~> 1.13.2'
 gem 'spreadsheet'
