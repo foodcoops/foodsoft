@@ -330,10 +330,13 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    roo (1.13.2)
+    roo (2.0.0)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
+    roo-xls (1.0.0)
       nokogiri
-      rubyzip
-      spreadsheet (> 0.6.4)
+      roo (>= 2.0.0beta1, < 3)
+      spreadsheet (> 0.9.0)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -517,7 +520,8 @@ DEPENDENCIES
   ransack
   recurring_select
   resque
-  roo (~> 1.13.2)
+  roo (~> 2.0.0)
+  roo-xls
   rspec-core (~> 3.2)
   rspec-legacy_formatters
   rspec-rails

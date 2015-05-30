@@ -43,7 +43,8 @@ gem 'ruby-units'
 gem 'attribute_normalizer'
 gem 'ice_cube', '~> 0.13.0'
 gem 'recurring_select'
-gem 'roo', '~> 1.13.2'
+gem 'roo', '~> 2.0.0'
+gem 'roo-xls'
 gem 'spreadsheet'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
