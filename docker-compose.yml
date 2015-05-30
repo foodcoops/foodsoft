@@ -1,5 +1,6 @@
 app: &app
   build: .
+  command: bundle exec rails server --binding 0.0.0.0
   volumes:
     - .:/usr/src/app
   ports:
