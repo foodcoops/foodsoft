@@ -107,7 +107,6 @@ group :test do
   # need to include rspec components before i18n-spec or rake fails in test environment
   gem 'rspec-core', '~> 3.2'
   gem 'rspec-rerun'
-  gem 'rspec-legacy_formatters'
   gem 'i18n-spec'
   # code coverage
   gem 'simplecov', require: false

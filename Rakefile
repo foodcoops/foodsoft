@@ -4,5 +4,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
+require 'rspec-rerun/tasks'
 
 Foodsoft::Application.load_tasks
