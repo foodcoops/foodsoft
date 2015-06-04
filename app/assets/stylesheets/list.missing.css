@@ -1,0 +1,11 @@
+.list .missing-many td, .list .missing-many:hover td {
+	background-color: #ebbebe;
+}
+
+.list .missing-few td, .list .missing-few:hover td {
+	background-color: #ffee75;
+}
+
+.list .missing-none td, .list .missing-none:hover td {
+	background-color: #E4EED6;
+}

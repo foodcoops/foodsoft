@@ -118,11 +118,27 @@ function update(item, quantity, tolerance) {
     $('#price_' + item + '_display').html(I18n.l("currency", itemTotal[item]));
 
     // update missing units
-    var missing_units = unit[item] - (((quantityOthers[item] + Number(quantity)) % unit[item]) + Number(tolerance) + toleranceOthers[item])
-    if (missing_units < 0 || missing_units == unit[item]) {
+    var missing_units = calcMissingItems(unit[item], quantityOthers[item] + Number(quantity), toleranceOthers[item] + Number(tolerance)),
+        missing_units_css = '';
+
+    if (missing_units <= 0 || missing_units == unit[item]) {
         missing_units = 0;
+        if (units > 0) {
+            missing_units_css = 'missing-none';
+        } else {
+            missing_units_css = '';
+        }
+    } else if (missing_units == 1) {
+        missing_units_css = 'missing-few';
+    } else {
+        missing_units_css = 'missing-many';
     }
-    $('#missing_units_' + item).html(String(missing_units));
+    $('#missing_units_' + item)
+        .html(String(missing_units))
+        .closest('tr')
+        .removeClass('missing-many missing-few missing-none')
+        .addClass(missing_units_css);
+
 
     // update balance
     updateBalance();
@@ -132,6 +148,11 @@ function calcUnits(unitSize, quantity, tolerance) {
     var units = Math.floor(quantity / unitSize)
     var remainder = quantity % unitSize
     return units + ((remainder > 0) && (remainder + tolerance >= unitSize) ? 1 : 0)
+}
+
+function calcMissingItems(unitSize, quantity, tolerance) {
+    var remainder = quantity % unitSize
+    return remainder > 0 && remainder + tolerance < unitSize ? unitSize - remainder - tolerance : 0
 }
 
 function unitCompletedFromTolerance(unitSize, quantity, tolerance) {
