@@ -27,7 +27,7 @@ gem 'prawn-table'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
-gem 'inherited_resources', git: 'git://github.com/josevalim/inherited_resources.git', branch: 'rails-4-2'
+gem 'inherited_resources'
 gem 'localize_input', git: "git://github.com/bennibu/localize_input.git"
 gem 'daemons'
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
