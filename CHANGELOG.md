@@ -1,3 +1,8 @@
+# Foodsoft 4.4.1
+(5 Jun 2015)
+
+* Fix external dependency causing installation failure (#369)
+
 # Foodsoft 4.4.0
 (15 May 2015)
 
