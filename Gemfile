@@ -46,6 +46,7 @@ gem 'recurring_select'
 gem 'roo', '~> 2.0.0'
 gem 'roo-xls'
 gem 'spreadsheet'
+gem 'gaffe'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', github: 'technoweenie/acts_as_versioned'
