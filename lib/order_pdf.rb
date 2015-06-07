@@ -16,6 +16,17 @@ class OrderPdf < Prawn::Document
   end
 
   def to_pdf
+    # Use ttf for better utf-8 compability
+    font_families.update(
+      "OpenSans" => {
+        bold: font_path("OpenSans-Bold.ttf"),
+        italic: font_path("OpenSans-Italic.ttf"),
+        bold_italic: font_path("OpenSans-BoldItalic.ttf"),
+        normal: font_path("OpenSans-Regular.ttf")
+      }
+    )
+    font "OpenSans"
+
     font_size fontsize(12)
 
     # Define header
@@ -85,5 +96,9 @@ class OrderPdf < Prawn::Document
     else
       cfg
     end
+  end
+
+  def font_path(name)
+    File.join(Rails.root, "vendor", "assets", "fonts", name)
   end
 end
