@@ -68,9 +68,9 @@ class Message < ActiveRecord::Base
   end
 
   def recipients
-    User.find(recipients_ids)
+    User.where(id: recipients_ids)
   end
-  
+
   def deliver
     for user in recipients
       if user.receive_email?
