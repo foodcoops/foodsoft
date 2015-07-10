@@ -18,12 +18,13 @@ class MultipleOrdersByGroups < OrderPdf
     @ordergroups
   end
 
+  # @todo refactor to reduce common code with order_by_groups
   def body
     # Start rendering
     ordergroups.each do |ordergroup|
       down_or_page 15
 
-      totals = {net_price: 0, deposit: 0, gross_price: 0, fc_price: 0, fc_markup_price: 0}
+      total = 0
       taxes = Hash.new {0}
       rows = []
       dimrows = []
@@ -31,48 +32,35 @@ class MultipleOrdersByGroups < OrderPdf
       has_tolerance = group_order_articles.where('article_prices.unit_quantity > 1').any?
 
       group_order_articles.each do |goa|
-        price = goa.order_article.price
-        goa_totals = goa.total_prices
-        totals[:net_price] += goa_totals[:net_price]
-        totals[:deposit] += goa_totals[:deposit]
-        totals[:gross_price] += goa_totals[:gross_price]
-        totals[:fc_price] += goa_totals[:price]
-        totals[:fc_markup_price] += goa_totals[:fc_markup_price]
-        taxes[goa.order_article.price.tax.to_f.round(2)] += goa_totals[:fc_tax_price]
+        price = goa.order_article.price.fc_price
+        sub_total = goa.total_price
+        total += sub_total
         rows <<  [goa.order_article.article.name,
                   goa.group_order.order.name.truncate(10, omission: ''),
-                  number_to_currency(price.fc_price(goa.group_order.ordergroup)),
+                  number_to_currency(price),
                   goa.order_article.article.unit,
                   goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity,
                   goa.result,
-                  result_in_units(goa),
-                  number_to_currency(goa_totals[:price]),
+                  number_to_currency(sub_total),
                   (goa.order_article.price.unit_quantity if has_tolerance)]
         dimrows << rows.length if goa.result == 0
       end
       next if rows.length == 0
 
       # total
-      rows << [{content: I18n.t('documents.order_by_groups.sum'), colspan: 7}, number_to_currency(totals[:fc_price]), nil]
-      # price details
-      price_details = []
-      price_details << "#{Article.human_attribute_name :price} #{number_to_currency totals[:net_price]}" if totals[:net_price] > 0
-      price_details << "#{Article.human_attribute_name :deposit} #{number_to_currency totals[:deposit]}" if totals[:deposit] > 0
-      taxes.each do |tax, tax_price|
-        price_details << "#{Article.human_attribute_name :tax} #{number_to_percentage tax} #{number_to_currency tax_price}" if tax_price > 0
-      end
-      price_details << "#{Article.human_attribute_name :fc_share_short} #{number_to_percentage ordergroup.markup_pct} #{number_to_currency totals[:fc_markup_price]}"
-      rows << [{content: ('  ' + price_details.join('; ') if totals[:fc_price] > 0), colspan: 8}]
+      rows << [{content: I18n.t('documents.order_by_groups.sum'), colspan: 6}, number_to_currency(total), nil]
 
       # table header
-      rows.unshift I18n.t('documents.order_by_groups.rows').dup
-      rows.first.insert(1, Article.human_attribute_name(:supplier))
-      rows.first[5] = {content: rows.first[5], colspan: 2}
-      if has_tolerance
-        rows.first[-1] = {image: "#{Rails.root}/app/assets/images/package-bg.png", scale: 0.6, position: :center}
-      else
-        rows.first[-1] = nil
-      end
+      rows.unshift [
+        OrderArticle.human_attribute_name(:article),
+        Article.human_attribute_name(:supplier),
+        I18n.t('documents.order_by_groups.rows')[3],
+        Article.human_attribute_name(:unit),
+        I18n.t('shared.articles.ordered'),
+        I18n.t('shared.articles.received'),
+        I18n.t('shared.articles_by.price_sum'),
+        has_tolerance ? {image: "#{Rails.root}/app/assets/images/package-bg.png", scale: 0.6, position: :center} : nil
+      ]
 
       text ordergroup.name, size: fontsize(13), style: :bold
       table rows, width: bounds.width, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
@@ -83,27 +71,20 @@ class MultipleOrdersByGroups < OrderPdf
         table.rows(0).border_width = 1
         table.rows(0).border_color = '666666'
         table.rows(0).column(5).font_style = :bold
-        table.row(rows.length-3).border_width = 1
-        table.row(rows.length-3).border_color = '666666'
-        table.row(rows.length-2).borders = []
+        table.row(rows.length-2).border_width = 1
+        table.row(rows.length-2).border_color = '666666'
         table.row(rows.length-1).borders = []
 
-        # bottom row with price details
-        table.row(rows.length-1).text_color = '999999'
-        table.row(rows.length-1).size = fontsize(7)
-        table.row(rows.length-1).padding = [0, 5, 0, 5]
-        table.row(rows.length-1).height = 0 if totals[:fc_price] == 0
-
-        table.column(0).width = 150 # @todo would like to set minimum width here
+        table.column(0).width = 180 # @todo would like to set minimum width here
         table.column(1).width = 62
         table.column(2).align = :right
-        table.column(5..7).font_style = :bold
+        table.column(5..6).font_style = :bold
         table.columns(3..5).align = :center
-        table.column(6..7).align = :right
-        table.column(8).align = :center
+        table.column(6).align = :right
+        table.column(7).align = :center
         # dim rows not relevant for members
         table.column(4).text_color = '999999'
-        table.column(8).text_color = '999999'
+        table.column(7).text_color = '999999'
         # hide unit_quantity if there's no tolerance anyway
         table.column(-1).width = has_tolerance ? 20 : 0
 
