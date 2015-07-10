@@ -1685,6 +1685,7 @@ en:
       title_all: All group tasks
   ui:
     actions: Actions
+    back: Back
     cancel: Cancel
     close: Close
     copy: Copy

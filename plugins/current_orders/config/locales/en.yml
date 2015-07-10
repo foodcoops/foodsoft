@@ -1,4 +1,9 @@
 en:
+  config:
+    hints:
+      use_current_orders: Enable the current_orders plugin. Allows members with the order permission to change member amounts in multiple orders, using three new screens in the Orders menu. Especially useful for pick-up days.
+    keys:
+      use_current_orders: Extra distribute screens
   current_orders:
     articles:
       article:
@@ -15,13 +20,17 @@ en:
         article_placeholder: Search articles...
         current_orders: All current orders
       index:
-        title: Distribute article
+        title: Distribute articles
       ordergroups:
         piece: pc
         unit: unit
         add_new: Add an ordergroup...
       show:
-        title: ! 'Distribute %{name}'
+        title: ! '%{name}'
+    navigation:
+      receive: Receive
+      articles: Distribute
+      ordergroups: Member orders
     group_orders:
       index:
         title: Your current orders
@@ -62,5 +71,3 @@ en:
         above: '%{count} more<br>than available'
         below: '%{count} left over'
         equal: all distributed
-  ui:
-    back: Back

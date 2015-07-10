@@ -1,4 +1,9 @@
 nl:
+  config:
+    hints:
+      use_current_orders: De current_orders plugin aanzetten. Hiermee kunnen leden met bestelling-toegang bestelaantallen van leden aanpassen in meerdere bestellingen tegelijk. Hiervoor zijn drie nieuwe items in het Bestellingen-menu. Bedoeld voor gebruik op een ophaaldag.
+    keys:
+      use_current_orders: Extra verdeelschermen
   current_orders:
     articles:
       article:
@@ -17,6 +22,10 @@ nl:
         add_new: Huishouden toevoegen...
       show:
         title: ! '%{name} verdelen'
+    navigation:
+      receive: Ontvangen
+      articles: Verdelen
+      ordergroups: Ledenbestellingen
     ordergroups:
       articles:
         add_new: Artikel toevoegen...
