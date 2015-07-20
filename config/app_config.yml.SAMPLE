@@ -132,15 +132,18 @@ default: &defaults
   #host: localhost
   #port: 3000
 
-  # Access to sharedLists, the external article-database
-  shared_lists:
-    adapter: mysql2
-    host: localhost
-    database: sharedlists_development
-    username: root
-    password:
-    encoding: utf8
-    socket: /opt/lampp/var/mysql/mysql.sock
+  # Access to sharedlists, the external article-database.
+  # This allows a foodcoop to subscribe to a selection of a supplier's full assortment,
+  # and makes it possible to share data with several foodcoops. Using this requires installing
+  # an additional application with a separate database.
+  #shared_lists:
+  #  adapter: mysql2
+  #  host: localhost
+  #  database: sharedlists_development
+  #  username: root
+  #  password:
+  #  encoding: utf8
+  #  socket: /opt/lampp/var/mysql/mysql.sock
 
 development:
   <<: *defaults
