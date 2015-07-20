@@ -38,7 +38,7 @@ gem 'acts_as_tree'
 gem 'rails-settings-cached'
 gem 'resque'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
-gem 'protected_attributes'
+gem 'protected_attributes', '= 1.1.0' # 1.1.0 until tests work work with higher versions
 gem 'ruby-units'
 gem 'attribute_normalizer'
 gem 'ice_cube', '~> 0.13.0'
