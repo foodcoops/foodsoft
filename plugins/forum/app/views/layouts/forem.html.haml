@@ -1,0 +1,15 @@
+= render layout: 'layouts/header' do
+  .logo
+    = t('layouts.logo').html_safe
+  %ul.nav.nav-pills.pull-right
+    %li= link_to 'Foodsoft', '/f/', title: 'Foodsoft'
+  .clearfix
+
+  = stylesheet_link_tag "forem"
+  = stylesheet_link_tag "forem-bootstrap"
+  = javascript_include_tag "forem"
+
+  = yield
+
+  = render 'layouts/footer'
+  #modalContainer.modal.hide.fade(tabindex="-1" role="dialog")
