@@ -1,0 +1,8 @@
+/ insert_before '#articles_table'
+- if FoodsoftCurrentOrders.enabled?
+  - unless @orders.nil? or @orders.empty? or @order_articles.nil? or @order_articles.empty?
+    - content_for :actionbar do
+      = link_to url_for(controller: 'current_orders/orders', action: 'my', id: @orders.map(&:id).join('+'), format: 'pdf'), class: 'btn' do
+        = glyph :download
+        PDF
+

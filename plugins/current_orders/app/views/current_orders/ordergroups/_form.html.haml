@@ -1,0 +1,71 @@
+.well
+  = form_tag current_orders_ordergroups_path, method: :get, 'data-submit-onchange' => true, style: 'margin: 0' do
+    = select_tag 'id',
+      options_for_select(@all_ordergroups.map { |g| [ g.name, g.id, {class: ('muted' unless @ordered_group_ids.include? g.id)}] }, (@ordergroup.id rescue '')),
+        include_blank: true, id: 'ordergroup_select', style: 'min-width: 300px',
+        'data-placeholder' => t('.ordergroup_placeholder'), 'data-submit-on-change' => :true
+  -#.form-search.pull-right # see below why this is disabled
+    .input-append
+      = text_field_tag :query, params[:query], class: 'search-query delayed-search resettable', disabled: @ordergroup.nil?,
+        'placeholder' => t('orders.show.search_placeholder.articles')
+      %button.add-on.btn.reset-search{:type => :button, :title => t('orders.show.search_reset')}
+        %i.icon.icon-remove
+
+
+    - if @ordergroup and FoodsoftConfig[:price_markup_list]
+      %span.price_markup_note{style: 'margin-left: 1em'}= show_price_markup @ordergroup, format: :full_label, optional: true
+
+#articles_by_groups
+  = render 'articles'
+
+= render 'shared/articles_by/common', order: @order
+
+
+- content_for :javascript do
+  :javascript
+
+    $(function() {
+      // TODO group by ordered / not-ordered
+      $('#ordergroup_select').select2();
+
+      // add article
+      $('#group_order_article_order_article_id').select2({
+        placeholder: '#{j t('orders.receive.add_article')}',
+        formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
+      });
+      $(document).on('GroupOrderArticle#create', function(e) {
+        var base_unit = $('#articles_by_groups_table').data('base-unit');
+        // reset selection
+        $('#group_order_article_order_article_id').select2('data', null);
+        // update table
+        $.ajax({
+          url: '#{show_on_group_order_article_create_current_orders_ordergroups_path}',
+          type: 'get',
+          data: {group_order_article_id: e.group_order_article_id, base_unit: base_unit}
+        });
+      });
+
+      $(document).on('GroupOrderArticle#update', function(e) {
+        $.ajax({
+          url: '#{show_on_group_order_article_update_current_orders_ordergroups_path}',
+          type: 'get',
+          data: {group_order_id: e.group_order_id, group_order_article_id: e.group_order_article_id}
+        });
+      });
+
+      // article search
+      // DO NOT USE because listjs can't handle updates https://github.com/javve/list.js/issues/86
+      /*
+      new List(document.body, {
+        valueNames: ['name'],
+        engine: 'unlist',
+        plugins: [
+          ['reset', {highlightClass: 'btn-primary'}],
+          ['delay', {delayedSearchTime: 500}],
+        ],
+        // make large pages work too (as we don't have paging)
+        page: 10000,
+        indexAsync: true
+      });
+      */
+    });

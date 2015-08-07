@@ -1,0 +1,2 @@
+/ insert_after 'erb:contains(":use_nick")'
+= config_input form, :use_current_orders, as: :boolean

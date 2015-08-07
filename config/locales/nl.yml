@@ -1680,6 +1680,7 @@ nl:
       title_all: Alle groepstaken
   ui:
     actions: Acties
+    back: Terug
     cancel: Annuleren
     close: Sluiten
     copy: Kopiëren

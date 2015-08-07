@@ -1,0 +1,46 @@
+- if @ordergroup
+  %table.table.table-hover#articles_by_groups_table{data: {'base-unit' => params[:base_unit]}}
+    %thead
+      %tr
+        %th{style: 'width: 35%'}= heading_helper Article, :name
+        %th= Order.model_name.human
+        %th= heading_helper Article, :unit
+        %th.center
+          %acronym{:title => t('shared.articles.ordered_desc')}= t 'shared.articles.ordered'
+        %th.center{style: 'width: 88px'}
+          %acronym{:title => t('shared.articles.received_desc')}= t 'shared.articles.received'
+        %th.symbol
+        %th= heading_helper Article, :fc_price, short: true
+        %th.symbol
+
+    - total = 0
+    %tbody.list
+      - if @goas and @goas.length > 0
+        - for goa in @goas
+          - total += goa.total_price
+          = render 'article', goa: goa, base_unit: params[:base_unit]
+
+      - else
+        %tr
+          %td{colspan: 9}
+            %i No articles for #{@ordergroup.name} in the current orders.
+
+    %tfoot
+      %tr
+        %td{colspan: 9}
+          - new_article_data = articles_for_select2(articles_for_adding) {|a| "#{a.article.name} (#{a.article.unit}, #{number_to_currency a.price.fc_price})"}
+          = form_for GroupOrderArticle.new, remote: true, html: {'data-submit-onchange' => true, style: 'margin: 0'} do |f|
+            = f.select :order_article_id,
+                options_for_select(new_article_data.map {|a| [a[:text], a[:id]]}),
+                {}, {style: 'width: 500px', 'data-placeholder' => t('.add_new') }
+            = f.hidden_field :ordergroup_id, value: @ordergroup.id
+        %tr#single_ordergroup_total{:class => cycle('even', 'odd', :name => 'articles')}
+          %th{colspan: 8}= t 'shared.articles_by.price_sum'
+          %th.price_sum{data: {value: total}}= number_to_currency(total)
+
+
+  .well#payment_bar
+    = render 'payment_bar', ordergroup: @ordergroup
+
+- else
+  %i= t '.no_selection'

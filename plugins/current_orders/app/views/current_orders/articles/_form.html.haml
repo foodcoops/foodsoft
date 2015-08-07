@@ -1,0 +1,74 @@
+.row-fluid
+
+  .span4
+    .well
+      %ul.nav.nav-list#article_list
+        %li.keep
+          = search_form_for @q, url: current_orders_articles_path, method: 'get', html: {data: {'submit-onchange' => true}, class: 'form-search'}, remote: true do |f|
+            .input-append
+              = f.text_field :article_name_cont, placeholder: t('.article_placeholder'), class: 'search-query input-block-level resettable'
+              %button.add-on.btn.reset-search{type: 'button'}
+                %i.icon.icon-remove
+        = render 'articles', orders: @current_orders
+
+  .span8
+    = render 'actions'
+    = render 'article', order_article: @order_article
+    = render 'shared/articles_by/common'
+
+
+- content_for :javascript do
+  :javascript
+
+    // update number of received items - would prefer to do this server-side to
+    // keep working when showing a partial list, but this avoids an extra ajax call
+    $(document).on('GroupOrderArticle#update #update_articles_summary', function(e) {
+      var count_sum = 0;
+      // number of received items
+      $('#articles_by_articles input[data-delta]').each(function() {
+        count_sum += Number($(this).val());
+      });
+      $('#single_order_article_total .count_sum').html(count_sum);
+      // delta
+      // @todo partial code-duplication with orders/_edit_amounts
+      var expected = $('#single_order_article_delta .units_delta').data('quantity-expected');
+      var delta = Math.round((count_sum - expected)*100)/100.0;
+      if (isNaN(delta)) {
+        html = '';
+        color = 'inherit';
+      } else if (delta == 0) {
+        html = I18n.t('js.current_orders.articles.equal');
+        color = 'green';
+        //$('#single_order_article_total .count_sum').html(count_sum + ' <i class="icon-ok"></i>');
+      } else if (delta < 0) {
+        html = I18n.t('js.current_orders.articles.below', {count: -delta});
+        color = 'inherit';
+      } else {
+        html = I18n.t('js.current_orders.articles.above', {count: delta});
+        color = 'red';
+      }
+      $('#single_order_article_delta .units_delta').html(html).attr('style', 'color: '+color);
+      $('#single_order_article_total .count_sum').attr('style', 'color: '+color);
+    });
+
+    $(document).on('#update_articles_summary', function() {
+      // initialize add ordergroup control
+      $('#group_order_article_ordergroup_id').select2().select2('data', null);
+    });
+
+    $(function() {
+      // initialize when loaded as html
+      $(document).trigger('#update_articles_summary');
+    });
+
+    $(document).on('GroupOrderArticle#create', function(e) {
+      var base_unit = $('#articles_by_articles').data('base-unit');
+      // reset selection
+      $('#group_order_article_ordergroup_id').select2('data', null);
+      // update table
+      $.ajax({
+        url: '#{show_on_group_order_article_create_current_orders_articles_path}',
+        type: 'get',
+        data: {group_order_article_id: e.group_order_article_id, base_unit: base_unit}
+      });
+    });

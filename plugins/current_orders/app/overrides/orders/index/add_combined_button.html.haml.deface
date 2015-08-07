@@ -1,0 +1,9 @@
+/ insert_before 'h2:contains(".orders_finished")'
+- if FoodsoftCurrentOrders.enabled?
+  .btn-group.pull-right#orders_finished_toolbar
+    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+      = t 'orders.show.download.title'
+      %span.caret
+    %ul.dropdown-menu
+      %li= link_to t('orders.show.download.group_pdf'), current_orders_orders_path(document: :groups, format: :pdf)
+      %li= link_to t('orders.show.download.article_pdf'), current_orders_orders_path(document: :articles, format: :pdf)

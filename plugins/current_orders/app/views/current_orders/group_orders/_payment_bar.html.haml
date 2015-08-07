@@ -1,0 +1,8 @@
+.pull-right
+  = link_to t('ui.back'), root_path(anchor: ''), class: 'btn'
+
+%p.pull-left
+  = link_to t('current_orders.ordergroups.payment_bar.account_balance'), my_ordergroup_path
+  = number_to_currency (ordergroup.account_balance)
+
+%p#to_pay_message{style: 'text-align: center'}= to_pay_message(ordergroup)

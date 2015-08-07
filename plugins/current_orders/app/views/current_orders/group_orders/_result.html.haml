@@ -1,0 +1,55 @@
+-# XXX code duplication of foodcoop-adam's app/views/group_orders/show.html.haml
+- if @articles_grouped_by_category.count > 0
+  %table.table.table-hover
+    %thead
+      %tr
+        %th{style: "width:40%"}= heading_helper Article, :name
+        %th= heading_helper Article, :unit
+        %th= t 'group_orders.show.articles.unit_price'
+        %th
+          %abbr{title: t('group_orders.show.articles.ordered_title')}= t 'group_orders.show.articles.ordered'
+        %th
+          %abbr{title: t('group_orders.show.articles.order_nopen_title')}
+            - if (@order.open? rescue true)
+              = t 'group_orders.show.articles.order_open'
+            - else
+              = t 'group_orders.show.articles.order_not_open'
+        %th= heading_helper GroupOrderArticle, :total_price
+    %tbody
+      - group_order_sum = 0
+      - for category_name, goas in @articles_grouped_by_category
+        %tr.article-category.list-heading
+          %td
+            = category_name
+            %i.icon-tag
+          %td{colspan: "9"}
+        - goas.each do |goa|
+          - # get the order-results for the ordergroup
+          - oa = goa.order_article
+          - r = {quantity: goa.quantity, tolerance: goa.tolerance, result: goa.result, sub_total: goa.total_price(oa)}
+          - group_order_sum += r[:sub_total]
+          %tr{class: cycle('even', 'odd', name: 'articles') + " order-article " + order_article_class_name(r[:quantity], r[:tolerance], r[:result])}
+            -# article_info is present in foodcoop-adam only
+            %td.name{style: "width:40%", title: (article_info_title(oa.article) rescue nil)}
+              = article_info_icon oa.article rescue nil
+              = oa.article.name
+            %td
+              = oa.article.unit
+              %span{style: 'opacity: 0.4; margin-left: 1em;'}= pkg_helper(oa.price, soft_uq: true)
+            %td= number_to_currency oa.price.fc_price
+            %td
+              = r[:quantity]
+              = "+ #{r[:tolerance]}" if oa.price.unit_quantity > 1
+            %td= r[:result] > 0 ? r[:result] : "0"
+            %td= number_to_currency(r[:sub_total])
+          - unless oa.article.note.blank?
+            %tr{id: "note_#{oa.id}", class: "note even", style: "display:none"}
+              %td{colspan: "6"}=h oa.article.note
+      %tr{class: cycle('even', 'odd', name: 'articles')}
+        %th{colspan: "5"}= heading_helper GroupOrder, :price
+        %th= number_to_currency(group_order_sum)
+- elsif @articles_grouped_by_category.count == 0
+  = t 'group_orders.show.articles.no_articles'
+- else
+  = t 'group_orders.show.articles.order_closed_msg'
+

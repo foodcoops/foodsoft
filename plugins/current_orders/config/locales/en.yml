@@ -1,0 +1,73 @@
+en:
+  config:
+    hints:
+      use_current_orders: Enable the current_orders plugin. Allows members with the order permission to change member amounts in multiple orders, using three new screens in the Orders menu. Especially useful for pick-up days.
+    keys:
+      use_current_orders: Extra distribute screens
+  current_orders:
+    articles:
+      article:
+        counts: '%{ordergroups} ordergroups ordered %{articles} different articles.'
+        no_selection: Choose an article to show who ordered it, or download pick lists at the right.
+      article_info:
+        origin_in: in %{origin}
+        supplied_by: from %{supplier}
+        supplied_and_made_by: made by %{manufacturer}
+        supplied_by_made_by: from %{supplier} made by %{manufacturer}
+        unit: per %{unit}
+        from: from %{supplier}
+      form:
+        article_placeholder: Search articles...
+        current_orders: All current orders
+      index:
+        title: Distribute articles
+      ordergroups:
+        piece: pc
+        unit: unit
+        add_new: Add an ordergroup...
+      show:
+        title: ! '%{name}'
+    navigation:
+      receive: Receive
+      articles: Distribute
+      ordergroups: Member orders
+    group_orders:
+      index:
+        title: Your current orders
+    ordergroups:
+      articles:
+        add_new: Add an article...
+        no_selection: Choose an ordergroup to show the articles.
+      form:
+        ordergroup_placeholder: Choose an ordergroup...
+      index:
+        title: Articles for ordergroup
+      payment_bar:
+        account_balance: Account balance
+        new_pin: PIN
+        new_transaction: New transaction
+        payment: ! 'Payment:'
+      show:
+        title: Articles for %{name}
+    orders:
+      receive:
+        title: Receive orders
+        no_finished_orders: There are currently no orders to receive.
+  documents:
+    multiple_orders_by_articles:
+      filename: Current orders sorted by article
+      title: Current orders - by article
+    multiple_orders_by_groups:
+      filename: Current orders sorted by group
+      title: Current orders - by group
+  helpers:
+    current_orders:
+      pay_done: Fully paid
+      pay_none: Nothing to pay
+      pay_amount: To pay %{amount}
+  js:
+    current_orders:
+      articles:
+        above: '%{count} more<br>than available'
+        below: '%{count} left over'
+        equal: all distributed

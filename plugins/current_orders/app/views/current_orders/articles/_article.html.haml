@@ -1,0 +1,13 @@
+#order_article
+
+  - if order_article
+    = render 'article_info', order_article: order_article
+    = render 'ordergroups', order_article: order_article
+
+  - else
+    %h2= t('current_orders.articles.index.title')
+    #articles_by_articles
+      %p
+        %i= t '.counts', ordergroups: Ordergroup.joins(:orders).where(orders: {state: 'finished'}).count(distinct: true), articles: @order_articles.count
+      %p
+        %i= t '.no_selection'

@@ -1,0 +1,7 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function(w) {
+  $('#goa_<%= @goa.id %>').remove(); // just to be sure: remove table row which is added below
+  $('#articles_by_articles tbody').append('<%= j render('shared/articles_by/article_single_goa', goa: @goa, base_unit: params[:base_unit]) %>').addClass('success');
+})(window);
+

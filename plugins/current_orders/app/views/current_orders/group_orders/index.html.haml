@@ -1,0 +1,13 @@
+- title t('.title')
+
+// Article box
+%section
+  .column_content#result
+    = render 'result'
+
+  .well
+    = render 'payment_bar', ordergroup: @ordergroup
+
+  %br/
+  = link_to_top
+

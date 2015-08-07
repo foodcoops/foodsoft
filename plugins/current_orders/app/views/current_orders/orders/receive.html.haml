@@ -1,0 +1,24 @@
+- title t('.title')
+
+.well
+  - if @orders.empty?
+    = t '.no_finished_orders'
+  - else
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= heading_helper Order, :name
+          %th= heading_helper Order, :ends
+          %th= heading_helper Order, :note
+          %th{colspan: "2"}
+      %tbody
+        - for order in @orders
+          %tr
+            %td= order.name
+            %td= format_time(order.ends)
+            %td= truncate(order.note)
+            %td= receive_button order, class: 'btn-small' unless order.stockit?
+            %td
+              = link_to t('ui.show'), order, class: 'btn btn-small'
+              = order_pdf order, :fax, t('orders.show.download.fax_pdf'), class: 'btn btn-small'
+

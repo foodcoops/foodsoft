@@ -1,0 +1,3 @@
+$('#order_article').replaceWith('<%= j(render('article', order_article: @order_article)) if @order_article %>');
+// add javascript improvements (delta)
+$(document).trigger('#update_articles_summary');
