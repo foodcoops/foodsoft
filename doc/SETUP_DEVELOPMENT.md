@@ -73,6 +73,10 @@ Getting started
    This will interactively prompt with several questions relating to your
    required environment.
 
+   **Important**: After selecting your database type, `rake` will create the file `config/database.yml`,
+   which then then be edited with working `username` and `password` credentials for the database. These fields
+   must be added for *development* AND (temporary) *test* databases.
+
 5. Start rails by running:
 
         bundle exec rails s
