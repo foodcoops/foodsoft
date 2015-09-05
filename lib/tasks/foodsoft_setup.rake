@@ -75,7 +75,7 @@ def setup_database
   
   reminder(file)
   
-  puts blue "Setup your database before you continue!"
+  puts blue "IMPORTANT:  Edit (rake-generated) config/database.yml with valid username and password for EACH env before continuing!"
   finished = ask("Finished?\nOptions:\n(y) Yes", ["y"])
   if finished
     Rake::Task["db:setup"].reenable
