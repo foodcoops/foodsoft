@@ -1,4 +1,4 @@
-if Rails.env.production? || Rails.env.staging? || true
+if Rails.env.production? || Rails.env.staging?
   Gaffe.configure do |config|
     config.errors_controller = 'ErrorsController'
   end
