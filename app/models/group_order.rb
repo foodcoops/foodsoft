@@ -15,7 +15,7 @@ class GroupOrder < ActiveRecord::Base
   validates_uniqueness_of :ordergroup_id, :scope => :order_id   # order groups can only order once per order
 
   scope :in_open_orders, -> { joins(:order).merge(Order.open) }
-  scope :in_finished_orders, -> { joins(:order).merge(Order.finished_not_closed) }
+  scope :in_closed_orders, -> { joins(:order).merge(Order.closed_or_after) }
 
   scope :ordered, -> { includes(:ordergroup).order('groups.name') }
 
@@ -28,7 +28,7 @@ class GroupOrder < ActiveRecord::Base
     data[:order_articles] = {}
     order.articles_grouped_by_category.each do |article_category, order_articles|
       order_articles.each do |order_article|
-        
+
         # Get the result of last time ordering, if possible
         goa = group_order_articles.detect { |goa| goa.order_article_id == order_article.id }
 
@@ -86,4 +86,3 @@ class GroupOrder < ActiveRecord::Base
   end
 
 end
-

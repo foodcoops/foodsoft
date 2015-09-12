@@ -17,20 +17,48 @@ class Order < ActiveRecord::Base
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
   # Validations
-  validates_presence_of :starts
-  validate :starts_before_ends, :include_articles
+  validate :ends_after_starts, :include_articles
   validate :keep_ordered_articles
 
   # Callbacks
   after_save :save_order_articles, :update_price_of_group_orders
 
-  # Finders
-  scope :open, -> { where(state: 'open').order('ends DESC') }
-  scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
-  scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
-  scope :closed, -> { where(state: 'closed').order('ends DESC') }
+  # Scopes
   scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
+  # @return [Array<Order>] Orders that are open for members to order
+  # @see #open?
+  scope :open, ->{ opened }
+
+  # State machine
+  include AASM
+  include AASMBeforeAfter
+  aasm column: :state do
+    state :opened, initial: true
+    state :closed
+    state :finished
+    state :foo
+
+    event :close do
+      transitions from: :opened, to: :closed
+      after { self.ends = Time.now }
+      after :update_whom
+      after :perform_close
+      after :send_close_mails
+    end
+    event :finish do
+      transitions from: :closed, to: :finished
+      after :update_whom
+      after :perform_finish
+      after :update_profit
+    end
+    event :finish_direct do
+      transitions from: :closed, to: :finished
+      after :update_whom
+      after :update_profit
+      after :add_finish_direct_message
+    end
+  end
 
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
@@ -39,6 +67,17 @@ class Order < ActiveRecord::Base
 
   def stockit?
     supplier_id == 0
+  end
+
+  # Return whether this order is open to members
+  #
+  # This is a separate method from the state-machine to be able to have
+  # multiple states in which members can order. E.g. for a 'reduce shortages'
+  # state.
+  # @see #open
+  # @return [Boolean] Whether this order is open to members for ordering
+  def open?
+    opened?
   end
 
   def name
@@ -80,18 +119,6 @@ class Order < ActiveRecord::Base
     @erroneous_article_ids ||= []
   end
 
-  def open?
-    state == "open"
-  end
-
-  def finished?
-    state == "finished"
-  end
-
-  def closed?
-    state == "closed"
-  end
-
   def expired?
     !ends.nil? && ends < Time.now
   end
@@ -103,7 +130,7 @@ class Order < ActiveRecord::Base
     if FoodsoftConfig[:order_schedule]
       # try to be smart when picking a reference day
       last = (DateTime.parse(FoodsoftConfig[:order_schedule][:initial]) rescue nil)
-      last ||= Order.finished.reorder(:starts).first.try(:starts)
+      last ||= Order.finished_or_after.reorder(:starts).first.try(:starts)
       last ||= self.starts
       # adjust end date
       self.ends ||= FoodsoftDateUtil.next_occurrence last, self.starts, FoodsoftConfig[:order_schedule][:ends]
@@ -178,80 +205,11 @@ class Order < ActiveRecord::Base
     total
   end
 
-  # Finishes this order. This will set the order state to "finish" and the end property to the current time.
-  # Ignored if the order is already finished.
-  def finish!(user)
-    unless finished?
-      Order.transaction do
-        # set new order state (needed by notify_order_finished)
-        update_attributes!(:state => 'finished', :ends => Time.now, :updated_by => user)
-
-        # Update order_articles. Save the current article_price to keep price consistency
-        # Also save results for each group_order_result
-        # Clean up
-        order_articles.includes(:article).each do |oa|
-          oa.update_attribute(:article_price, oa.article.article_prices.first)
-          oa.group_order_articles.each do |goa|
-            goa.save_results!
-            # Delete no longer required order-history (group_order_article_quantities) and
-            # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
-            #    A: Yes, we do - for redistributing articles when the number of articles
-            #       delivered changes, and for statistics on popular articles. Records
-            #       with both tolerance and quantity zero can be deleted.
-            #goa.group_order_article_quantities.clear
-          end
-        end
-
-        # Update GroupOrder prices
-        group_orders.each(&:update_price!)
-
-        # Stats
-        ordergroups.each(&:update_stats!)
-
-        # Notifications
-        Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'finished_order', self.id)
-      end
-    end
-  end
-
-  # Sets order.status to 'close' and updates all Ordergroup.account_balances
-  def close!(user)
-    raise I18n.t('orders.model.error_closed') if closed?
-    transaction_note = I18n.t('orders.model.notice_close', :name => name,
-                              :ends => ends.strftime(I18n.t('date.formats.default')))
-
-    gos = group_orders.includes(:ordergroup)              # Fetch group_orders
-    gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
-
-    transaction do                                        # Start updating account balances
-      for group_order in gos
-        price = group_order.price * -1                    # decrease! account balance
-        group_order.ordergroup.add_financial_transaction!(price, transaction_note, user)
-      end
-
-      if stockit?                                         # Decreases the quantity of stock_articles
-        for oa in order_articles.includes(:article)
-          oa.update_results!                              # Update units_to_order of order_article
-          stock_changes.create! :stock_article => oa.article, :quantity => oa.units_to_order*-1
-        end
-      end
-
-      self.update_attributes! :state => 'closed', :updated_by => user, :foodcoop_result => profit
-    end
-  end
-
-  # Close the order directly, without automaticly updating ordergroups account balances
-  def close_direct!(user)
-    raise I18n.t('orders.model.error_closed') if closed?
-    comments.create(user: user, text: I18n.t('orders.model.close_direct_message'))
-    update_attributes! state: 'closed', updated_by: user
-  end
-
   protected
 
-  def starts_before_ends
-    delta = Rails.env.test? ? 1 : 0 # since Rails 4.2 tests appear to have time differences, with this validation failing
-    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if (ends && starts && ends <= (starts-delta))
+  def ends_after_starts
+    return unless ends && starts
+    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if ends < starts
   end
 
   def include_articles
@@ -281,11 +239,69 @@ class Order < ActiveRecord::Base
 
   private
 
+  def update_whom(*args, user: nil)
+    self.updated_by = user if user
+  end
+
+  def perform_close
+    # Update order_articles. Save the current article_price to keep price consistency
+    # Also save results for each group_order_result
+    order_articles.includes(:article, :group_order_articles).find_each do |oa|
+      oa.update_attribute(:article_price, oa.article.article_prices.first)
+      oa.group_order_articles.each do |goa|
+        goa.save_results!
+        # Delete no longer required order-history (group_order_article_quantities) and
+        # TODO: Do we need articles, which aren't ordered? (units_to_order == 0 ?)
+        #    A: Yes, we do - for redistributing articles when the number of articles
+        #       delivered changes, and for statistics on popular articles. Records
+        #       with both tolerance and quantity zero can be deleted.
+        #goa.group_order_article_quantities.clear
+      end
+    end
+
+    # Update GroupOrder prices
+    group_orders.each(&:update_price!)
+
+    # Stats
+    ordergroups.each(&:update_stats!)
+  end
+
+  def send_close_mails
+    Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'closed_order', id)
+  end
+
+  def perform_finish
+    transaction_note = I18n.t('orders.model.notice_close',
+      name: name, ends: ends.strftime(I18n.t('date.formats.default')))
+
+    gos = group_orders.includes(:ordergroup) # Fetch group_orders
+    gos.each(&:update_price!)                # Update prices of group_orders
+
+    # Start updating account balances
+    gos.each do |group_order|
+      price = -group_order.price                   # decrease! account balance
+      group_order.ordergroup.add_financial_transaction!(price, transaction_note, finished_by)
+    end
+
+    if stockit?                              # Decreases the quantity of stock_articles
+      for oa in order_articles.includes(:article)
+        oa.update_results!                         # Update units_to_order of order_article
+        stock_changes.create! stock_article: oa.article, quantity: -oa.units_to_order
+      end
+    end
+  end
+
+  def update_profit
+    self.foodcoop_result = profit
+  end
+
   # Updates the "price" attribute of GroupOrders or GroupOrderResults
   # This will be either the maximum value of a current order or the actual order value of a finished order.
   def update_price_of_group_orders
     group_orders.each { |group_order| group_order.update_price! }
   end
 
+  def add_finish_direct_message(*args, user: nil)
+    comments.create user: user, text: I18n.t('orders.model.close_direct_message')
+  end
 end
-

@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   # List orders
   def index
     @open_orders = Order.open.includes(:supplier)
-    @finished_orders = Order.finished_not_closed.includes(:supplier)
+    @closed_orders = Order.closed.includes(:supplier)
     @per_page = 15
     if params['sort']
       sort = case params['sort']
@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
       sort = "ends DESC"
     end
     @suppliers = Supplier.having_articles.order('suppliers.name')
-    @orders = Order.closed.includes(:supplier).reorder(sort).page(params[:page]).per(@per_page)
+    @orders = Order.finished_or_after.includes(:supplier).reorder(sort).page(params[:page]).per(@per_page)
   end
 
   # Gives a view for the results to a specific order
@@ -81,8 +81,8 @@ class OrdersController < ApplicationController
     end
   end
 
-  # Page to edit an exsiting order.
-  # editing finished orders is done in FinanceController
+  # Page to edit an existing order.
+  # editing closed orders is done in FinanceController
   def edit
     @order = Order.includes(:articles).find(params[:id])
   end
@@ -104,11 +104,11 @@ class OrdersController < ApplicationController
     redirect_to :action => 'index'
   end
 
-  # Finish a current order.
-  def finish
+  # Close a current order.
+  def close
     order = Order.find(params[:id])
-    order.finish!(@current_user)
-    redirect_to order, notice: I18n.t('orders.finish.notice')
+    order.close!(@current_user)
+    redirect_to order, notice: I18n.t('orders.finish.notice') # @todo rename finish to close
   rescue => error
     redirect_to orders_url, alert: I18n.t('errors.general_msg', :msg => error.message)
   end

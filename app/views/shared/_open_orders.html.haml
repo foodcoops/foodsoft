@@ -3,7 +3,8 @@
   - if ordergroup.not_enough_apples?
     .alert
       = t '.not_enough_apples'
-  - unless Order.open.empty?
+  - orders = Order.open
+  - unless orders.empty?
     %table.table.table-striped
       %thead
         %tr
@@ -13,7 +14,7 @@
           %th.numeric= heading_helper GroupOrder, :price
       %tbody
         - total = 0
-        - Order.open.each do |order|
+        - orders.each do |order|
           %tr
             %td= link_to_ordering(order)
             %td= format_time(order.ends) unless order.ends.nil?

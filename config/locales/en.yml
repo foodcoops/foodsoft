@@ -1265,15 +1265,15 @@ en:
       stockit: In stock
       title: Article
     index:
-      action_end: Close
+      action_close: Close
       action_receive: Receive
+      confirm_close: Do you really want to close the order %{order}? There is no going back.
       confirm_delete: Do you really want to delete the order?
-      confirm_end: Do you really want to close the order %{order}? There is no going back.
       new_order: Create new order
-      no_open_or_finished_orders: There are currently no open or closed orders.
-      orders_finished: Closed
+      no_open_or_closed_orders: There are currently no open or closed orders.
+      orders_closed: Closed
       orders_open: Open
-      orders_settled: Settled
+      orders_finished: Settled
       title: Manage orders
     model:
       close_direct_message: Order settled without charging member accounts.
@@ -1329,8 +1329,8 @@ en:
       title: 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
     state:
-      closed: settled
-      finished: closed
+      closed: closed
+      finished: settled
       open: open
     update:
       notice: The order was updated.

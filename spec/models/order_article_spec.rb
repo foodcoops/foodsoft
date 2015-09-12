@@ -19,7 +19,7 @@ describe OrderArticle do
 
   it 'knows how many items there are' do
     oa.units_to_order = rand(1..99)
-    expect(oa.units).to eq oa.units_to_order 
+    expect(oa.units).to eq oa.units_to_order
     oa.units_billed = rand(1..99)
     expect(oa.units).to eq oa.units_billed
     oa.units_received = rand(1..99)
@@ -50,7 +50,7 @@ describe OrderArticle do
       goa2.update_quantities(*q2)
       goa3.update_quantities(*q3)
       oa.update_results!
-      order.finish!(admin)
+      order.close!(admin)
       goa_reload
     end
 

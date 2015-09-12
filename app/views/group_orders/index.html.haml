@@ -13,27 +13,27 @@
         %td.numeric= number_to_currency(@ordergroup.value_of_open_orders)
       %tr
         %td= '- ' + t('.funds.finished_orders')
-        %td.numeric= number_to_currency(@ordergroup.value_of_finished_orders)
+        %td.numeric= number_to_currency(@ordergroup.value_of_closed_orders)
       %tr
         %th= heading_helper Ordergroup, :available_funds
         %th.numeric= number_to_currency(@ordergroup.get_available_funds)
 
-= render :partial => "shared/open_orders", :locals => {:ordergroup => @ordergroup}
-
-// finished orders
-- unless Order.finished_not_closed.empty?
-  %section
-    %h2= t '.finished_orders.title'
-    = render :partial => "orders", :locals => {:orders => Order.finished_not_closed, :pagination => false}
-    - if @ordergroup.value_of_finished_orders > 0
-      %p
-        = t('.finished_orders.total_sum') + ':'
-        %b= number_to_currency(@ordergroup.value_of_finished_orders)
+= render partial: "shared/open_orders", :locals => {:ordergroup => @ordergroup}
 
 // closed orders
-- unless Order.closed.empty?
+- if @closed_orders
+  %section
+    %h2= t '.finished_orders.title'
+    = render partial: "orders", :locals => {orders: @closed_orders, pagination: false}
+    - if @ordergroup.value_of_closed_orders > 0
+      %p
+        = t('.finished_orders.total_sum') + ':'
+        %b= number_to_currency(@ordergroup.value_of_closed_orders)
+
+// finished orders
+- if @finished_orders
   %section
     %h2= t '.closed_orders.title'
-    = render :partial => "orders", :locals => {:orders => Order.closed.limit(5), :pagination => false}
+    = render partial: "orders", :locals => {orders: @finished_orders.limit(5), pagination: false}
     %br/
     = link_to t('.closed_orders.more'), archive_group_orders_path

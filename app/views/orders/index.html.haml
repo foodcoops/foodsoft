@@ -12,11 +12,11 @@
 .well
   - if not @open_orders.empty?
     %h2= t '.orders_open'
-  - elsif not @finished_orders.empty?
-    %h2= t '.orders_finished'
+  - elsif not @closed_orders.empty?
+    %h2= t '.orders_closed'
   - else
-    = t '.no_open_or_finished_orders'
-  - unless @open_orders.empty? and @finished_orders.empty?
+    = t '.no_open_or_closed_orders'
+  - unless @open_orders.empty? and @closed_orders.empty?
     %table.table.table-striped
       %thead
         %tr
@@ -32,8 +32,8 @@
               %td= order.name
               %td= format_time(order.ends) unless order.ends.nil?
               %td= truncate(order.note)
-              %td= link_to t('.action_end'), finish_order_path(order),
-                data: {confirm: t('.confirm_end', order: order.name)}, method: :post,
+              %td= link_to t('.action_close'), close_order_path(order),
+                data: {confirm: t('.confirm_close', order: order.name)}, method: :post,
                 class: 'btn btn-small btn-success'
 
               %td
@@ -42,19 +42,19 @@
                 = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
                   class: 'btn btn-small btn-danger'
 
-        - unless @finished_orders.empty?
+        - unless @closed_orders.empty?
           - unless @open_orders.empty?
             %tr
               %td{colspan: 6}
-                %h2= t '.orders_finished'
-          - for order in @finished_orders
+                %h2= t '.orders_closed'
+          - @closed_orders.each do |order|
             %tr
               %td= order.name
               %td= format_time(order.ends)
               %td= truncate(order.note)
               %td
                 - unless order.stockit?
-                  = receive_button order
+                  = receive_button order, class: 'btn-small'
 
               %td
                 = link_to t('ui.copy'), new_order_path(order_id: order, supplier_id: order.supplier), class: 'btn btn-small'
@@ -62,6 +62,6 @@
                 = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
                   class: 'btn btn-small btn-danger'
 
-%h2= t '.orders_settled'
+%h2= t '.orders_finished'
 #orders_table
   = render partial: 'orders'

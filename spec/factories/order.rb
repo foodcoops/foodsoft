@@ -3,7 +3,6 @@ require 'factory_girl'
 FactoryGirl.define do
 
   factory :order do
-    starts { Time.now }
     supplier { create :supplier, article_count: (article_count.nil? ? true : article_count) }
     article_ids { supplier.articles.map(&:id) unless supplier.nil? }
 

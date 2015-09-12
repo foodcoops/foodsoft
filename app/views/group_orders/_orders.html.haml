@@ -13,4 +13,4 @@
         %td= format_time(order.ends)
         %td.numeric= group_order ? number_to_currency(group_order.price) : "--"
 - if pagination
-  = pagination_links_remote @closed_orders
+  = pagination_links_remote orders

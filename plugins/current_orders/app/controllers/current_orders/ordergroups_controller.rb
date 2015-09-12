@@ -29,7 +29,7 @@ class CurrentOrders::OrdergroupsController < ApplicationController
   protected
 
   def find_group_orders
-    @order_ids = Order.finished_not_closed.map(&:id)
+    @order_ids = Order.closed_not_finished.pluck(:id)
 
     @all_ordergroups = Ordergroup.undeleted.order(:name).to_a
     @ordered_group_ids = GroupOrder.where(order_id: @order_ids).pluck('DISTINCT(ordergroup_id)')

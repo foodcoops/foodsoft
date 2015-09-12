@@ -1,5 +1,5 @@
 - unless @orders.empty?
-  - if Order.finished.count > 20
+  - if @orders.count > 20
     = items_per_page
   = pagination_links_remote @orders
   %table.table.table-striped
@@ -15,10 +15,10 @@
         %tr{:class => cycle("even","odd", :name => "order")}
           %td= link_to truncate(order.name), new_finance_order_path(order_id: order.id)
           %td=h format_time(order.ends) unless order.ends.nil?
-          %td= order.closed? ? t('.cleared', amount: number_to_currency(order.foodcoop_result)) : t('.ended')
+          %td= order.finished_or_after? ? t('.ended') : t('.cleared', amount: number_to_currency(order.foodcoop_result))
           %td= show_user(order.updated_by)
           %td
-            - unless order.closed?
+            - unless order.finished_or_after?
               - if current_user.role_orders?
                 - unless order.stockit?
                   = link_to t('orders.index.action_receive'), receive_order_path(order), class: 'btn btn-small'

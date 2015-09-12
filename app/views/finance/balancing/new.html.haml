@@ -11,7 +11,7 @@
           contentType: 'application/json; charset=UTF-8'
         });
       });
-      
+
       $(document).on('OrderArticle#create', function(e) {
         $.ajax({
           url: '#{new_on_order_article_create_finance_order_path(@order)}',
@@ -40,7 +40,7 @@
       - unless @order.note.blank?
         = simple_format @order.note
       - else
-        %p= t('.comment_on_transaction') 
+        %p= t('.comment_on_transaction')
     = link_to t('.edit_note'), edit_note_finance_order_path(@order), remote: true
 
   .well.well-small
@@ -52,13 +52,14 @@
     = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
       class: 'btn'
   .btn-group
-    - unless @order.closed?
+    - unless @order.finished_or_after?
       = link_to t('.confirm_order'), confirm_finance_order_path(@order), class: 'btn btn-primary'
       = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
         %span.caret
       %ul.dropdown-menu
         %li= link_to t('.confirm_order'), confirm_finance_order_path(@order)
-        %li= link_to t('.close_direct'), close_direct_finance_order_path(@order), method: :patch,
+        -# @todo rename close_direct to finish_direct in i18n (2x)
+        %li= link_to t('.close_direct'), finish_direct_finance_order_path(@order), method: :patch,
           data: {confirm: t('.close_direct_confirm')}
 
   #editOrderNav.btn-group

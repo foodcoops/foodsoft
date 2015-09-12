@@ -27,7 +27,7 @@ class CurrentOrders::ArticlesController < ApplicationController
   protected
 
   def find_order_and_order_article
-    @current_orders = Order.finished_not_closed
+    @current_orders = Order.closed_upto(:finished)
     unless params[:order_id].blank?
       @order = Order.find(params[:order_id])
       @order_articles = @order.order_articles

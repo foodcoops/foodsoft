@@ -32,7 +32,7 @@ class OrderArticle < ActiveRecord::Base
     units_to_order
   end
 
-  # Count quantities of belonging group_orders. 
+  # Count quantities of belonging group_orders.
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
     quantity = group_order_articles.collect(&:result).sum
@@ -46,7 +46,7 @@ class OrderArticle < ActiveRecord::Base
       tolerance = group_order_articles.collect(&:tolerance).sum
       update_attributes(:quantity => quantity, :tolerance => tolerance,
                         :units_to_order => calculate_units_to_order(quantity, tolerance))
-    elsif order.finished?
+    elsif order.closed_or_after? # @todo perhaps deny if finished_or_after?
       update_attribute(:units_to_order, group_order_articles.collect(&:result).sum)
     end
   end
@@ -191,23 +191,23 @@ class OrderArticle < ActiveRecord::Base
     units = 0 if units == price.unit_quantity
     units
   end
-  
+
   # Check if the result of any associated GroupOrderArticle was overridden manually
   def result_manually_changed?
     group_order_articles.any? {|goa| goa.result_manually_changed?}
   end
 
   private
-  
+
   def article_and_price_exist
     errors.add(:article, I18n.t('model.order_article.error_price')) if !(article = Article.find(article_id)) || article.fc_price.nil?
   rescue
     errors.add(:article, I18n.t('model.order_article.error_price'))
   end
 
-  # Associate with current article price if created in a finished order
+  # Associate with current article price if created in a closed order
   def init_from_balancing
-    if order.present? && order.finished?
+    if order.present? && order.closed_or_after?
       self.article_price = article.article_prices.first
     end
   end
@@ -220,4 +220,3 @@ class OrderArticle < ActiveRecord::Base
   end
 
 end
-

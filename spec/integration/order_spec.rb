@@ -38,7 +38,7 @@ feature Order, js: true do
 
   it 'can close an order' do
     setup_and_close_order
-    expect(order).to be_finished
+    expect(order).to be_closed
     expect(page).to_not have_link I18n.t('orders.index.action_end')
     expect(oa.units_to_order).to eq 1
   end
@@ -49,7 +49,7 @@ feature Order, js: true do
     oa.update_results!
     # and close the order
     visit orders_path
-    click_link_or_button I18n.t('orders.index.action_end')
+    click_link_or_button I18n.t('orders.index.action_close')
     accept_alert
     sleep 0.8
     order.reload

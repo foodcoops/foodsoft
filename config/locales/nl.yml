@@ -1255,15 +1255,15 @@ nl:
       stockit: Beschikbaar
       title: Artikel
     index:
-      action_end: Sluiten
+      action_close: Sluiten
       action_receive: Ontvangen
+      confirm_close: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
       confirm_delete: Wil je de bestelling werkelijk verwijderen?
-      confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
       new_order: Nieuwe bestelling openen
-      no_open_or_finished_orders: Er zijn momenteel geen open of gesloten bestellingen.
-      orders_finished: Gesloten
+      no_open_or_closed_orders: Er zijn momenteel geen open of gesloten bestellingen.
+      orders_closed: Gesloten
       orders_open: Open
-      orders_settled: Afgerekend
+      orders_finished: Afgerekend
       title: Bestellingen beheren
     model:
       close_direct_message: Bestelling afgerekend zonder bedragen in rekening te brengen bij huishoudens.
@@ -1319,8 +1319,8 @@ nl:
       title: 'Bestelling: %{name}'
       warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
     state:
-      closed: afgerekend
-      finished: gesloten
+      finished: afgerekend
+      closed: gesloten
       open: lopende
     update:
       notice: De bestelling is bijgewerkt.

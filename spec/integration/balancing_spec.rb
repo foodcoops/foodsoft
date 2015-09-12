@@ -15,7 +15,7 @@ feature 'settling an order', js: true do
     goa1.update_quantities(3, 0)
     goa2.update_quantities(1, 0)
     oa.update_results!
-    order.finish!(admin)
+    order.close!(admin)
     goa1.reload
     goa2.reload
   end

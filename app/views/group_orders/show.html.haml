@@ -21,7 +21,7 @@
         = number_to_currency(@group_order.price)
       - else
         = t '.not_ordered'
-    - if @order.closed?
+    - if @order.closed_or_after?
       %dt= heading_helper Order, :closed_by
       %dd= show_user_link @order.updated_by
       %p= link_to t('.comment'), "#comments"

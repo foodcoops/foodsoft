@@ -19,27 +19,29 @@ describe Order do
     let(:order) { create :order }
 
     it 'is open by default'         do expect(order).to be_open end
-    it 'is not finished by default' do expect(order).to_not be_finished end
     it 'is not closed by default'   do expect(order).to_not be_closed end
+    it 'is not finished by default' do expect(order).to_not be_finished end
 
     it 'has valid order articles' do
       order.order_articles.each {|oa| expect(oa).to be_valid }
     end
 
-    it 'can be finished' do
-      # TODO randomise user
-      order.finish!(User.first)
-      expect(order).to_not be_open
-      expect(order).to be_finished
-      expect(order).to_not be_closed
-    end
-
     it 'can be closed' do
       # TODO randomise user
-      order.finish!(User.first)
       order.close!(User.first)
       expect(order).to_not be_open
       expect(order).to be_closed
+      expect(order).to_not be_finished
+      expect(order.updated_by).to eq User.first
+    end
+
+    it 'can be finished' do
+      # TODO randomise user
+      order.close!(User.first)
+      order.finish!(User.first)
+      expect(order).to_not be_open
+      expect(order).to be_finished
+      expect(order.updated_by).to eq User.first
     end
 
   end

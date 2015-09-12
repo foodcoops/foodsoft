@@ -1026,7 +1026,7 @@ fr:
       logout: Déconnexion
       ordergroup: Ta cellule
       profile: Ton profil
-    logo: coop
+    logo: "<span>food</span>soft"
   lib:
     order_pdf:
       page: page %{number} de %{count}
@@ -1262,15 +1262,15 @@ fr:
       stockit: En stoc
       title: Article
     index:
-      action_end: Clôturer
+      action_close: Clôturer
       action_receive: Réceptionner
+      confirm_close: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
       confirm_delete: Vraiment supprimer la commande?
-      confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
       new_order: Définir une nouvelle commande
-      no_open_or_finished_orders: Il n'y a aucune commande en cours en ce moment.
-      orders_finished: Close
+      no_open_or_closed_orders: Il n'y a aucune commande en cours en ce moment.
+      orders_closed: Close
       orders_open: En cours
-      orders_settled: Décomptée
+      orders_finished: Décomptée
       title: Gestion des commandes
     model:
       close_direct_message: Ordre décomptée sans charger les comptes des membres.
@@ -1324,8 +1324,8 @@ fr:
       title: 'Commande: %{name}'
       warn_not_closed: Attention, cette commande n'a pas encore été décomptée!
     state:
-      closed: décomptée
-      finished: clôturée
+      closed: clôturée
+      finished: décomptée
       open: en cours
     update:
       notice: La commande a été mise à jour.

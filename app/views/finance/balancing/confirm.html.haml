@@ -6,5 +6,5 @@
       %td= group_order.ordergroup.name
       %td.numeric= number_to_currency(group_order.price)
 .form-actions
-  = link_to t('.clear'), close_finance_order_path(@order), method: :patch, class: 'btn btn-primary'
+  = link_to t('.clear'), finish_finance_order_path(@order), method: :patch, class: 'btn btn-primary'
   = link_to t('.or_cancel'), new_finance_order_path(order_id: @order.id)

@@ -16,7 +16,7 @@ feature 'receiving an order', js: true do
     goa1.update_quantities(*q1)
     goa2.update_quantities(*q2)
     oa.update_results!
-    order.finish!(admin)
+    order.close!(admin)
     reload_articles
   end
 

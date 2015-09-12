@@ -4,7 +4,7 @@ class CurrentOrders::GroupOrdersController < ApplicationController
 
   def index
     # XXX code duplication lib/foodsoft_current_orders/app/controllers/current_orders/ordergroups_controller.rb
-    @order_ids = Order.where(state: ['open', 'finished']).all.map(&:id)
+    @order_ids = Order.open_upto_finished.pluck(:id)
     @goas = GroupOrderArticle.includes(:group_order => :ordergroup).includes(:order_article).
               where(group_orders: {order_id: @order_ids, ordergroup_id: @ordergroup.id}).ordered
     @articles_grouped_by_category = @goas.includes(:order_article => {:article => :article_category}).

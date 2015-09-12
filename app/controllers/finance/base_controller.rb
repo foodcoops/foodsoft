@@ -3,7 +3,7 @@ class Finance::BaseController < ApplicationController
 
   def index
     @financial_transactions = FinancialTransaction.order('created_on DESC').limit(8)
-    @orders = Order.finished_not_closed
+    @orders = Order.closed
     @unpaid_invoices = Invoice.unpaid
 
     render template: 'finance/index'

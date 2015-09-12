@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Ordergroups can order, they are "children" of the class Group
-# 
+#
 # Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
 class Ordergroup < Group
@@ -34,21 +34,21 @@ class Ordergroup < Group
   def value_of_open_orders(exclude = nil)
     group_orders.in_open_orders.reject{|go| go == exclude}.collect(&:price).sum
   end
-  
-  def value_of_finished_orders(exclude = nil)
-    group_orders.in_finished_orders.reject{|go| go == exclude}.collect(&:price).sum
+
+  def value_of_closed_orders(exclude = nil)
+    group_orders.in_closed_orders.reject{|go| go == exclude}.collect(&:price).sum
   end
 
   # Returns the available funds for this order group (the account_balance minus price of all non-closed GroupOrders of this group).
   # * exclude (GroupOrder): exclude this GroupOrder from the calculation
   def get_available_funds(exclude = nil)
-    account_balance - value_of_open_orders(exclude) - value_of_finished_orders(exclude)
+    account_balance - value_of_open_orders(exclude) - value_of_closed_orders(exclude)
   end
 
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.
   def add_financial_transaction!(amount, note, user)
-    transaction do      
+    transaction do
       t = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
       t.save!
       self.account_balance = financial_transactions.sum('amount')
@@ -63,8 +63,8 @@ class Ordergroup < Group
   def update_stats!
     # Get hours for every job of each user in period
     jobs = users.to_a.sum { |u| u.tasks.done.where('updated_on > ?', APPLE_MONTH_AGO.month.ago).sum(:duration) }
-    # Get group_order.price for every finished order in this period
-    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).references(:orders).sum(:price)
+    # Get group_order.price for every closed order in this period
+    orders_sum = group_orders_for_apples.sum(:price)
 
     @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
@@ -74,7 +74,7 @@ class Ordergroup < Group
     stats[:jobs_size].to_f / stats[:orders_sum].to_f rescue 0
   end
 
-  # This is the ordergroup job per euro performance 
+  # This is the ordergroup job per euro performance
   # in comparison to the hole foodcoop average
   def apples
     ((avg_jobs_per_euro / Ordergroup.avg_jobs_per_euro) * 100).to_i rescue 0
@@ -90,7 +90,7 @@ class Ordergroup < Group
         !ignore_apple_restriction &&
         apples < FoodsoftConfig[:stop_ordering_under] &&
         group_orders.count > 5 &&
-        group_orders.joins(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).count > 2
+        group_orders_for_apples.count > 2
   end
 
   # Global average
@@ -102,7 +102,7 @@ class Ordergroup < Group
   def account_updated
     financial_transactions.last.try(:created_on) || created_on
   end
-  
+
   private
 
   # Make sure, that a user can only be in one ordergroup
@@ -121,6 +121,9 @@ class Ordergroup < Group
       errors.add :name, message
     end
   end
- 
-end
 
+  def group_orders_for_apples
+    group_orders.joins(:order).merge(Order.closed_or_after).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago)
+  end
+
+end

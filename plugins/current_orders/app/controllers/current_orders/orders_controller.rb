@@ -7,7 +7,8 @@ class CurrentOrders::OrdersController < ApplicationController
     @order_ids = if params[:id]
                    params[:id].split('+').map(&:to_i)
                  else
-                   Order.finished_not_closed.all.map(&:id)
+                   # @todo move to CurrentOrders method
+                   Order.closed_not_finished.pluck(:id)
                  end
     @view = (params[:view] or 'default').gsub(/[^-_a-zA-Z0-9]/, '')
 

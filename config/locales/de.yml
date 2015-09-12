@@ -1251,15 +1251,15 @@ de:
       stockit: Verfügbar
       title: Artikel
     index:
-      action_end: Beenden
-      action_receive: In Empfang nehmen
+      action_close: Beenden
+      action_receive: Empfangen
+      confirm_close: Willst Du wirklich die Bestellung %{order} beenden? Es gibt kein zurück.
       confirm_delete: Willst Du wirklich die Bestellung löschen?
-      confirm_end: Willst Du wirklich die Bestellung %{order} beenden? Es gibt kein zurück.
       new_order: Neue Bestellung anlegen
-      no_open_or_finished_orders: Derzeit gibt es keine laufende oder beendete Bestellungen.
-      orders_finished: Beendet
+      no_open_or_closed_orders: Derzeit gibt es keine laufende oder beendete Bestellungen.
+      orders_closed: Beendet
       orders_open: Laufend
-      orders_settled: Abgerechnet
+      orders_finished: Abgerechnet
       title: Bestellungen verwalten
     model:
       close_direct_message: Die Bestellung wurde abgechlossen, ohne die Mitgliederkonten zu belasten.
@@ -1315,8 +1315,8 @@ de:
       title: 'Bestellung: %{name}'
       warn_not_closed: Achtung, Bestellung wurde noch nicht abgerechnet.
     state:
-      closed: abgerechnet
-      finished: beendet
+      closed: beendet
+      finished: abgerechnet
       open: laufend
     update:
       notice: Die Bestellung wurde aktualisiert.
@@ -1678,7 +1678,7 @@ de:
     actions: Aktionen
     cancel: Abbrechen
     close: Schließen
-    copy: kopieren
+    copy: Kopieren
     delete: Löschen
     edit: Bearbeiten
     marks:

@@ -27,9 +27,9 @@ class GroupOrderArticle < ActiveRecord::Base
     group_order.try!(:ordergroup_id)
   end
 
-  # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties 
+  # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties
   # and the associated GroupOrderArticleQuantities chronologically.
-  # 
+  #
   # See description of the ordering algorithm in the general application documentation for details.
   def update_quantities(quantity, tolerance)
     logger.debug("GroupOrderArticle[#{id}].update_quantities(#{quantity}, #{tolerance})")
@@ -104,7 +104,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
   # Determines how many items of this article the Ordergroup receives.
   # Returns a hash with three keys: :quantity / :tolerance / :total
-  # 
+  #
   # See description of the ordering algorithm in the general application documentation for details.
   def calculate_result(total = nil)
     # return memoized result unless a total is given
@@ -166,12 +166,12 @@ class GroupOrderArticle < ActiveRecord::Base
 
   # Returns order result,
   # either calcualted on the fly or fetched from result attribute
-  # Result is set when finishing the order.
+  # Result is set when closing the order.
   def result(type = :total)
     self[:result] || calculate_result[type]
   end
 
-  # This is used for automatic distribution, e.g., in order.finish! or when receiving orders
+  # This is used for automatic distribution, e.g., in order.close! or when receiving orders
   def save_results!(article_total = nil)
     new_result = calculate_result(article_total)[:total]
     self.update_attribute(:result_computed, new_result)
@@ -179,8 +179,8 @@ class GroupOrderArticle < ActiveRecord::Base
   end
 
   # Returns total price for this individual article
-  # Until the order is finished this will be the maximum price or
-  # the minimum price depending on configuration. When the order is finished it
+  # Until the order is closed this will be the maximum price or
+  # the minimum price depending on configuration. When the order is closed it
   # will be the value depending of the article results.
   def total_price(order_article = self.order_article)
     if order_article.order.open?
@@ -199,5 +199,3 @@ class GroupOrderArticle < ActiveRecord::Base
     result != result_computed unless result.nil?
   end
 end
-
-

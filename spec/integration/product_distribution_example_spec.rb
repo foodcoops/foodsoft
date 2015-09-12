@@ -40,7 +40,7 @@ feature 'product distribution', js: true do
     find('input[type=submit]').click
     expect(page).to have_selector('body')
     # die zuteilung
-    order.finish!(admin)
+    order.close!(admin)
     oa.reload
     # Endstand: insg. Bestellt wurden 6(1)
     expect(oa.quantity).to eq(6)

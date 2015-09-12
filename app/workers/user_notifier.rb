@@ -8,7 +8,7 @@ class UserNotifier
     self.send method_name, args
   end
 
-  def self.finished_order(args)
+  def self.closed_order(args)
     order_id = args.first
     Order.find(order_id).group_orders.each do |group_order|
       group_order.ordergroup.users.each do |user|

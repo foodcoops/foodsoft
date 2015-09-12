@@ -37,7 +37,7 @@ Foodsoft::Application.routes.draw do
 
     resources :orders do
       member do
-        post :finish
+        post :close
         post :add_comment
 
         get :receive
@@ -148,8 +148,8 @@ Foodsoft::Application.routes.draw do
           put :update_note
 
           get :confirm
-          patch :close
-          patch :close_direct
+          patch :finish
+          patch :finish_direct
 
           get :new_on_order_article_create
           get :new_on_order_article_update

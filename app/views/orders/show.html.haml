@@ -24,10 +24,10 @@
       = heading_helper(Order, :note) + ': '
       = @order.note
 
--# Proposing to remove this warning, since there is a valid period when the order is not settled yet.
+-# @todo Proposing to remove this warning, since there is a valid period when the order is not settled yet.
 -# Perhaps when the pickup day has been, or when the order isn't settled a week after it has been
 -# closed, this message could be shown.
--#- if @order.finished? and !@order.closed?
+-#- if @order.closed_or_after? && !@order.finished_or_after?
   .alert.alert-warning
     = t '.warn_not_closed'
 
@@ -60,12 +60,12 @@
           %li= link_to t('.download.fax_csv'), order_path(@order, format: :csv), {title: t('.download.download_file')}
 
     - if @order.open?
-      = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
+      = link_to t('.action_end'), close_order_path(@order), method: :post, class: 'btn btn-success',
         data: {confirm: t('.confirm_end', order: @order.name)}
       = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
-    - elsif not @order.closed? and not @order.stockit?
+    - elsif !@order.finished_or_after? && !@order.stockit?
       = receive_button @order
-    - unless @order.closed?
+    - unless @order.finished_or_after?
       = link_to t('ui.delete'), @order, data: {confirm: t('.confirm_delete')}, method: :delete,
         class: 'btn btn-danger'
 

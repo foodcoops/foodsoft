@@ -10,7 +10,7 @@
           %abbr{title: t('group_orders.show.articles.ordered_title')}= t 'group_orders.show.articles.ordered'
         %th
           %abbr{title: t('group_orders.show.articles.order_nopen_title')}
-            - if (@order.open? rescue true)
+            - if @order.try(:open?)
               = t 'group_orders.show.articles.order_open'
             - else
               = t 'group_orders.show.articles.order_not_open'
@@ -52,4 +52,3 @@
   = t 'group_orders.show.articles.no_articles'
 - else
   = t 'group_orders.show.articles.order_closed_msg'
-

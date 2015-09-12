@@ -9,6 +9,9 @@ class GroupOrdersController < ApplicationController
 
   # Index page.
   def index
+    @open_orders = Order.open
+    @closed_orders = Order.closed
+    @finished_orders = Order.finished_or_after.page(params[:page]).per(10)
   end
 
   def new
@@ -50,11 +53,10 @@ class GroupOrdersController < ApplicationController
     end
   end
 
-  # Shows all Orders of the Ordergroup
-  # if selected, it shows all orders of the foodcoop
+  # Shows all orders of the foodcoop
   def archive
-    # get only orders belonging to the ordergroup
-    @closed_orders = Order.closed.page(params[:page]).per(10)
+    @closed_orders = Order.closed
+    @finished_orders = Order.finished_or_after.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # archive.html.haml
@@ -80,7 +82,7 @@ class GroupOrdersController < ApplicationController
       redirect_to :action => 'index'
     end
   rescue ActiveRecord::RecordNotFound
-    redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')  
+    redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')
   end
 
   def ensure_my_group_order
