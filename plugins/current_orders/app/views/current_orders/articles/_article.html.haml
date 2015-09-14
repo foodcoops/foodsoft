@@ -8,6 +8,6 @@
     %h2= t('current_orders.articles.index.title')
     #articles_by_articles
       %p
-        %i= t '.counts', ordergroups: Ordergroup.joins(:orders).where(orders: {state: 'finished'}).count(distinct: true), articles: @order_articles.count
+        %i= t '.counts', ordergroups: Ordergroup.joins(:orders).merge(Order.closed).count(distinct: true), articles: @order_articles.count
       %p
         %i= t '.no_selection'

@@ -5,7 +5,7 @@
       %th= sort_link_helper heading_helper(Order, :supplier), "supplier"
       %th= heading_helper Order, :starts
       %th= sort_link_helper heading_helper(Order, :ends), "ends"
-      %th= heading_helper Order, :status
+      %th= heading_helper Order, :state
       %th{:colspan => "2"}
   %tbody
     - @orders.each do |order|
@@ -13,5 +13,5 @@
         %td= order.name
         %td= format_time(order.starts)
         %td= format_time(order.ends)
-        %td= t(order.state, scope: 'orders.state')
+        %td= order.aasm.human_state
         %td= link_to t('ui.show'), order, class: 'btn btn-small'

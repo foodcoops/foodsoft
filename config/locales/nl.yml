@@ -77,7 +77,10 @@ nl:
         name: Leverancier
         note: Notitie
         starts: Start op
-        status: Status
+        state: Status
+        state/finished: afgerekend
+        state/closed: gesloten
+        state/open: lopende
         supplier: Leverancier
         updated_by: Laatst aangepast door
       order_article:
@@ -1318,16 +1321,12 @@ nl:
       sort_group: Per huishouden
       title: 'Bestelling: %{name}'
       warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
-    state:
-      finished: afgerekend
-      closed: gesloten
-      open: lopende
     update:
       notice: De bestelling is bijgewerkt.
     update_order_amounts:
       msg1: "%{count} artikelen (%{units} eenheden) bijgewerkt"
       msg2: "%{count} (%{units}) naar tolerantie"
-      msg3: 
+      msg3:
       msg4: "%{count} (%{units}) overgebleven"
   pages:
     all:

@@ -77,7 +77,10 @@ fr:
         name: Fournisseur-e
         note: Note
         starts: Ouverture le
-        status: Statut
+        state: Statut
+        state/closed: clôturée
+        state/finished: décomptée
+        state/open: en cours
         supplier: Fournisseu-r-se
         updated_by: Dernière modification par
       order_article:
@@ -135,7 +138,7 @@ fr:
         order_howto: Comment commander
         phone: Téléphone
         phone2: Autre téléphone
-        shared_sync_method: 
+        shared_sync_method:
         url: Site web
       task:
         description: Description
@@ -149,7 +152,7 @@ fr:
       user:
         email: Email
         first_name: Prénom
-        last_activity: 
+        last_activity:
         last_login: Dernière connection
         last_name: Nom de famille
         name: Nom
@@ -176,12 +179,12 @@ fr:
         article:
           attributes:
             name:
-              taken: 
-              taken_with_unit: 
+              taken:
+              taken_with_unit:
         supplier:
           attributes:
             shared_sync_method:
-              included: 
+              included:
         task:
           attributes:
             done:
@@ -225,22 +228,22 @@ fr:
         username: identifiant
     configs:
       list:
-        key: 
-        title: 
-        value: 
+        key:
+        title:
+        value:
       show:
-        submit: 
-        title: 
+        submit:
+        title:
       tab_layout:
-        pdf_title: 
+        pdf_title:
       tab_messages:
-        emails_title: 
+        emails_title:
       tab_tasks:
-        periodic_title: 
+        periodic_title:
       tabs:
-        title: 
+        title:
       update:
-        notice: 
+        notice:
     confirm: Veux-tu vraiment supprimer %{name}?
     ordergroups:
       destroy:
@@ -268,7 +271,7 @@ fr:
     search_placeholder: nom ...
     users:
       controller:
-        sudo_done: 
+        sudo_done:
       edit:
         title: modifier les données sur le_la membre
       index:
@@ -280,13 +283,13 @@ fr:
         title: Ajouter unE nouveLLE_eau membre
       show:
         confirm_delete: Veux-tu vraiment expulser %{user}?
-        confirm_sudo: 
+        confirm_sudo:
         groupabos: Participation à des équipes
         member_since: Membre depuis %{time}
         person: Personne
         preference: Préférences
         send_message: Envoyer un message
-        sudo: 
+        sudo:
     workgroups:
       destroy:
         error: 'Cette équipe n''a pas pu être supprimée: %{error}'
@@ -356,7 +359,7 @@ fr:
       error_parse: "%{msg} ... à la ligne %{line}"
       error_update: 'Une erreur s''est produite lors de la mise à jour du produit "%{article}": %{msg}'
       parse_upload:
-        no_file: 
+        no_file:
         notice: "%{count} produits ont été examinés avec succès."
       sync:
         notice: Le catalogue est à jour
@@ -430,123 +433,123 @@ fr:
           one: Un article doit être mis à jour.
           other: "%{count} produits doivent être mis à jour."
       upnew:
-        body_count: 
-        title: 
+        body_count:
+        title:
     upload:
       fields:
         reserved: "(Reservé)"
         status: Statut (x=exclu)
       file_label: Merci de choisir un fichier compatible
       options:
-        convert_units: 
-        outlist_absent: 
+        convert_units:
+        outlist_absent:
       sample:
-        juices: 
-        nuts: 
-        organic: 
-        supplier_1: 
-        supplier_2: 
-        supplier_3: 
-        tomato_juice: 
-        walnuts: 
+        juices:
+        nuts:
+        organic:
+        supplier_1:
+        supplier_2:
+        supplier_3:
+        tomato_juice:
+        walnuts:
       submit: Transférer le fichier
-      text_1: 
-      text_2: 
+      text_1:
+      text_2:
       title: Transférer les données sur les produits de %{supplier}
   config:
     hints:
-      applepear_url: 
+      applepear_url:
       contact:
-        email: 
-        street: 
-      currency_space: 
-      currency_unit: 
-      custom_css: 
-      email_from: 
-      email_replyto: 
-      email_sender: 
-      help_url: 
-      homepage: 
-      ignore_browser_locale: 
-      mailing_list: 
-      mailing_list_subscribe: 
-      minimum_balance: 
-      name: 
+        email:
+        street:
+      currency_space:
+      currency_unit:
+      custom_css:
+      email_from:
+      email_replyto:
+      email_sender:
+      help_url:
+      homepage:
+      ignore_browser_locale:
+      mailing_list:
+      mailing_list_subscribe:
+      minimum_balance:
+      name:
       order_schedule:
         ends:
-          recurr: 
-          time: 
-        initial: 
-      page_footer: 
+          recurr:
+          time:
+        initial:
+      page_footer:
       pdf_add_page_breaks:
-        order_by_articles: 
-        order_by_groups: 
-      pdf_font_size: 
-      pdf_page_size: 
-      price_markup: 
-      stop_ordering_under: 
-      tasks_period_days: 
-      tasks_upfront_days: 
-      tax_default: 
-      tolerance_is_costly: 
-      use_apple_points: 
-      use_messages: 
-      use_nick: 
-      use_wiki: 
-      webstats_tracking_code: 
+        order_by_articles:
+        order_by_groups:
+      pdf_font_size:
+      pdf_page_size:
+      price_markup:
+      stop_ordering_under:
+      tasks_period_days:
+      tasks_upfront_days:
+      tax_default:
+      tolerance_is_costly:
+      use_apple_points:
+      use_messages:
+      use_nick:
+      use_wiki:
+      webstats_tracking_code:
     keys:
-      applepear_url: 
+      applepear_url:
       contact:
-        city: 
-        country: 
-        email: 
-        phone: 
-        street: 
-        zip_code: 
-      currency_space: 
-      currency_unit: 
-      custom_css: 
-      default_locale: 
-      email_from: 
-      email_replyto: 
-      email_sender: 
-      help_url: 
-      homepage: 
-      ignore_browser_locale: 
-      mailing_list: 
-      mailing_list_subscribe: 
-      minimum_balance: 
-      name: 
+        city:
+        country:
+        email:
+        phone:
+        street:
+        zip_code:
+      currency_space:
+      currency_unit:
+      custom_css:
+      default_locale:
+      email_from:
+      email_replyto:
+      email_sender:
+      help_url:
+      homepage:
+      ignore_browser_locale:
+      mailing_list:
+      mailing_list_subscribe:
+      minimum_balance:
+      name:
       order_schedule:
         ends:
-          recurr: 
-          time: 
-        initial: 
-      page_footer: 
-      pdf_add_page_breaks: 
-      pdf_font_size: 
-      pdf_page_size: 
-      price_markup: 
-      stop_ordering_under: 
-      tasks_period_days: 
-      tasks_upfront_days: 
-      tax_default: 
-      time_zone: 
-      tolerance_is_costly: 
-      use_apple_points: 
-      use_messages: 
-      use_nick: 
-      use_wiki: 
-      webstats_tracking_code: 
+          recurr:
+          time:
+        initial:
+      page_footer:
+      pdf_add_page_breaks:
+      pdf_font_size:
+      pdf_page_size:
+      price_markup:
+      stop_ordering_under:
+      tasks_period_days:
+      tasks_upfront_days:
+      tax_default:
+      time_zone:
+      tolerance_is_costly:
+      use_apple_points:
+      use_messages:
+      use_nick:
+      use_wiki:
+      webstats_tracking_code:
     tabs:
-      foodcoop: 
-      language: 
-      layout: 
-      list: 
-      messages: 
-      others: 
-      payment: 
-      tasks: 
+      foodcoop:
+      language:
+      layout:
+      list:
+      messages:
+      others:
+      payment:
+      tasks:
   deliveries:
     add_stock_change:
       how_many_units: Combien d'unités (%{unit}) de l'article %{name} doivent-elles être livrées?
@@ -592,7 +595,7 @@ fr:
       filename: Commande %{name}-%{date} - Trier par
       rows:
       - Cellule
-      - 
+      -
       - Quantité
       - Prix
       title: 'Ordre des produits pour la commande: %{name}, clôturée le %{date}'
@@ -1000,7 +1003,7 @@ fr:
     errors:
       already_member: est déjà membre de la Boufcoop.
     modal_form:
-      body: 
+      body:
       title: Engrainer une personne
     new:
       action: Engrainer!
@@ -1158,7 +1161,7 @@ fr:
       sent_on: 'Envoyé le:'
       subject: 'Sujet:'
       title: Afficher le contenu du message
-      to: 
+      to:
   messages_mailer:
     foodsoft_message:
       footer: |-
@@ -1178,7 +1181,7 @@ fr:
       no_ordergroup: aucune cellule
   navigation:
     admin:
-      config: 
+      config:
       home: Aperçu
       ordergroups: Cellules
       title: Administration
@@ -1244,7 +1247,7 @@ fr:
       field_locked_title: La répartition de cet article entre les cellules a été modifiée manuellement, et ce champ a été verrouillé pour éviter tout nouveau changement intempestif. Si tu veux tout de même effectuer un changement, cliques d'abord sur "Déverouiller".
       field_unlocked_title: La répartition de cet article entre les cellules a été modifiée manuellement. Toute nouvelle modification entrainera une perte de la valeur enregistrée actuellement.
     edit_amounts:
-      no_articles_available: 
+      no_articles_available:
     fax:
       amount: Quantité
       articles: Produits
@@ -1323,16 +1326,12 @@ fr:
       sort_group: Trié par cellules
       title: 'Commande: %{name}'
       warn_not_closed: Attention, cette commande n'a pas encore été décomptée!
-    state:
-      closed: clôturée
-      finished: décomptée
-      open: en cours
     update:
       notice: La commande a été mise à jour.
     update_order_amounts:
       msg1: "%{count} articles (%{units} unités) ont été mis à jour"
       msg2: "%{count} (%{units}) après prise en compte des tolérances"
-      msg3: 
+      msg3:
       msg4: "%{count} (%{units}) restants"
   pages:
     all:
@@ -1364,13 +1363,13 @@ fr:
         external_links: Externe
         heading: Plan %{level}
         headings: En-tête
-        image_link_title: 
-        image_links: 
+        image_link_title:
+        image_links:
         italic: italique
-        link_lists: 
+        link_lists:
         link_table: Format des tableaux
-        link_templates: 
-        link_variables: 
+        link_templates:
+        link_variables:
         list_item_1: Premier item
         list_item_2: Deuxième item
         noformat: Pas de formatage
@@ -1378,7 +1377,7 @@ fr:
         section_block: Format de paragraphe
         section_character: Format de charactère
         section_link: Format des liens
-        section_more: 
+        section_more:
         text: texte
         title: Assistant de mise en forme rapide
         unordered_list: Liste non ordonnée
@@ -1403,10 +1402,10 @@ fr:
     update:
       notice: La page a été mise à jour
     variables:
-      description: 
-      title: 
-      value: 
-      variable: 
+      description:
+      title:
+      value:
+      variable:
     version:
       author: 'Auteur: %{user}'
       date_format: "%a, %d.%m.%Y, %H:%M heure"
@@ -1450,7 +1449,7 @@ fr:
       total_sum: Total
       who_ordered: Qui a commandé?
     user_form_fields:
-      contact_address_hint: 
+      contact_address_hint:
     workgroup_members:
       title: Membres des équipes
   simple_form:
@@ -1460,7 +1459,7 @@ fr:
       article:
         unit: par exemple. kg ou 1l ou 500g
       article_category:
-        description: 
+        description:
       order_article:
         units_to_order: Attention, toute modification du nombre total d'unités réceptionées pour un article doit être répercuté manuellement sur les quantités attribuées à chaque cellule (pour cela, cliques sur le nom de l'article concerné). Si ce n'est pas fait, les cellules risquent d'être facturées pour des articles qu'elles n'ont jamais recus!
         update_global_price: Mettre à jour le prix pour les commandes futures
@@ -1597,9 +1596,9 @@ fr:
     new:
       title: Ajouter un-e fournisseur-e
     shared_supplier_methods:
-      all_available: 
-      all_unavailable: 
-      import: 
+      all_available:
+      all_unavailable:
+      import:
     shared_supplier_note: Le-la fournisseur-e a été connecté à l'annuaire mutualisé.
     shared_suppliers:
       body: |-
@@ -1628,9 +1627,9 @@ fr:
     destroy:
       notice: Le boulot a été supprimé
     edit:
-      submit_periodic: 
+      submit_periodic:
       title: Modifier les données du boulot
-      title_periodic: 
+      title_periodic:
       warning_periodic: |-
         <strong>Avertissement:</strong>
         Ce boulot fait partie d'une série de boulots <em>hebdomadaires</em>.
@@ -1663,7 +1662,7 @@ fr:
       new_task: Définir un nouveau boulot
       pages: Page
     new:
-      submit_periodic: 
+      submit_periodic:
       title: Définition d'un nouveau boulot
     repeated: Ce boulot a lieu toutes les semaines.
     set_done:
@@ -1672,9 +1671,9 @@ fr:
       accept_task: Te charger de ce boulot.
       confirm_delete_group: Veux-tu vraiment supprimer ce boulot hebdomadaire?
       confirm_delete_single: Es-tu sûr de vouloir supprimer ce boulot?
-      confirm_delete_single_from_group: 
+      confirm_delete_single_from_group:
       delete_group: Supprimer ce boulot
-      edit_group: 
+      edit_group:
       hours: "%{count}h"
       mark_done: Marquer comme effectué
       reject_task: Refuser ce boulot
@@ -1695,7 +1694,7 @@ fr:
     actions: Actions
     cancel: Annuler
     close: Fermer
-    copy: 
+    copy:
     delete: Supprimer
     edit: Modifier
     marks:

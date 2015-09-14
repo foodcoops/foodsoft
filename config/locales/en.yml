@@ -76,8 +76,11 @@ en:
         ends: Ends at
         name: Supplier
         note: Note
+        state: State
+        state/closed: closed
+        state/finished: settled
+        state/open: open
         starts: Starts at
-        status: Status
         supplier: Supplier
         updated_by: Last edited by
       order_article:
@@ -1328,10 +1331,6 @@ en:
       sort_group: Sorted in groups
       title: 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
-    state:
-      closed: closed
-      finished: settled
-      open: open
     update:
       notice: The order was updated.
     update_order_amounts:

@@ -77,7 +77,10 @@ de:
         name: Lieferant
         note: Notiz
         starts: Läuft vom
-        status: Status
+        state: Status
+        state/closed: beendet
+        state/finished: abgerechnet
+        state/open: laufend
         supplier: Lieferant
         updated_by: Zuletzt geändert von
       order_article:
@@ -1314,16 +1317,12 @@ de:
       sort_group: Sortiert nach Gruppen
       title: 'Bestellung: %{name}'
       warn_not_closed: Achtung, Bestellung wurde noch nicht abgerechnet.
-    state:
-      closed: beendet
-      finished: abgerechnet
-      open: laufend
     update:
       notice: Die Bestellung wurde aktualisiert.
     update_order_amounts:
       msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
       msg2: "%{count} (%{units}) Toleranzmenge"
-      msg3: 
+      msg3:
       msg4: "%{count} (%{units}) übrig"
   pages:
     all:
