@@ -54,7 +54,8 @@ module Admin::ConfigsHelper
       checked_value = options.delete(:checked_value) || 'true'
       unchecked_value = options.delete(:unchecked_value) || 'false'
       options[:checked] = 'checked' if v=options.delete(:value) && v!='false'
-      form.hidden_field(key, value: unchecked_value, as: :hidden) + form.check_box(key, options, checked_value, false)
+      # different key for hidden field so that allow clocking on label focuses the control
+      form.hidden_field(key, id: "#{key}_", value: unchecked_value, as: :hidden) + form.check_box(key, options, checked_value, false)
     elsif options[:as] == :select_recurring
       options[:value] = FoodsoftDateUtil.rule_from(options[:value])
       options[:rules] ||= []
@@ -109,6 +110,13 @@ module Admin::ConfigsHelper
     else
       value
     end
+  end
+
+  # @return [String] Tooltip element (span)
+  # @param form [ActionView::Helpers::FormBuilder] Form object.
+  # @param key [Symbol, String] Configuration key of a boolean (e.g. +use_messages+).
+  def config_tooltip(form, key, options={}, &block)
+    content_tag :span, config_input_tooltip_options(form, key, options), &block
   end
 
   private

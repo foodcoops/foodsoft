@@ -11,8 +11,18 @@
     %span.add-on= t 'number.currency.format.unit'
     = config_input_field form, :minimum_balance, as: :decimal, class: 'input-small'
 
+%h4= t '.schedule_title'
 = form.simple_fields_for :order_schedule do |fields|
+  #boxfill-schedule.collapse{class: ('in' if FoodsoftConfig[:use_boxfill])}
+    = fields.simple_fields_for 'boxfill' do |fields|
+      .fold-line
+        = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'input-xlarge'}
+        = config_input fields, 'time', input_html: {class: 'input-mini'}
   = fields.simple_fields_for 'ends' do |fields|
     .fold-line
       = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'input-xlarge'}, allow_blank: true
       = config_input fields, 'time', input_html: {class: 'input-mini'}
+  -# can't use collapse and tooltip on same element :/
+  = config_input form, :use_boxfill, as: :boolean do
+    = config_tooltip form, :use_boxfill do
+      = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {toggle: 'collapse', target: '#boxfill-schedule'}

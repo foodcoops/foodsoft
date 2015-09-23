@@ -35,7 +35,7 @@ class Order < ActiveRecord::Base
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
   include DateTimeAttributeValidate
-  date_time_attribute :starts, :ends
+  date_time_attribute :starts, :boxfill, :ends
 
   def stockit?
     supplier_id == 0
@@ -92,8 +92,16 @@ class Order < ActiveRecord::Base
     state == "closed"
   end
 
+  def boxfill?
+    FoodsoftConfig[:use_boxfill] && open? && boxfill.present? && boxfill < Time.now
+  end
+
+  def is_boxfill_useful?
+    FoodsoftConfig[:use_boxfill] && supplier.try(:has_tolerance?)
+  end
+
   def expired?
-    !ends.nil? && ends < Time.now
+    ends.present? && ends < Time.now
   end
 
   # sets up first guess of dates when initializing a new object
@@ -105,7 +113,8 @@ class Order < ActiveRecord::Base
       last = (DateTime.parse(FoodsoftConfig[:order_schedule][:initial]) rescue nil)
       last ||= Order.finished.reorder(:starts).first.try(:starts)
       last ||= self.starts
-      # adjust end date
+      # adjust boxfill and end date
+      self.boxfill ||= FoodsoftDateUtil.next_occurrence last, self.starts, FoodsoftConfig[:order_schedule][:boxfill] if is_boxfill_useful?
       self.ends ||= FoodsoftDateUtil.next_occurrence last, self.starts, FoodsoftConfig[:order_schedule][:ends]
     end
     self
@@ -251,7 +260,9 @@ class Order < ActiveRecord::Base
 
   def starts_before_ends
     delta = Rails.env.test? ? 1 : 0 # since Rails 4.2 tests appear to have time differences, with this validation failing
-    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if (ends && starts && ends <= (starts-delta))
+    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if ends && starts && ends <= (starts-delta)
+    errors.add(:ends, I18n.t('orders.model.error_boxfill_before_ends')) if ends && boxfill && ends <= (boxfill-delta)
+    errors.add(:boxfill, I18n.t('orders.model.error_starts_before_boxfill')) if boxfill && starts && boxfill <= (starts-delta)
   end
 
   def include_articles
@@ -288,4 +299,3 @@ class Order < ActiveRecord::Base
   end
 
 end
-

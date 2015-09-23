@@ -2,6 +2,7 @@
   = f.hidden_field :supplier_id
   .fold-line
     = f.input :starts, as: :date_picker_time
+    = f.input :boxfill, as: :date_picker_time if @order.is_boxfill_useful?
     = f.input :ends, as: :date_picker_time
   = f.input :note, input_html: {rows: 2, class: 'input-xxlarge'}
 
