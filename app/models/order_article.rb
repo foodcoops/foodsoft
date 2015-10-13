@@ -223,17 +223,17 @@ class OrderArticle < ActiveRecord::Base
 
   # Throws an exception when the changed article decreases the amount of filled boxes.
   def enforce_boxfill
-    # Either nothing changes, or
-    # missing_units becomes less and the amount doesn't decrease, or
+    # Either nothing changes, or the tolerance increases,
+    # missing_units decreases and the amount doesn't decrease, or
     # tolerance was moved to quantity. Only then are changes allowed in the boxfill phase.
     delta_q = quantity - quantity_was
     delta_t = tolerance - tolerance_was
     delta_mis = missing_units - missing_units_was
     delta_box = units_to_order - units_to_order_was
-    unless (delta_q == 0 && delta_t == 0) ||
+    unless (delta_q == 0 && delta_t >= 0) ||
            (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
            (delta_q > 0 && delta_q == -delta_t)
-      raise ActiveRecord::RecordNotSaved.new("Change not acceptable in boxfill phase, sorry.", self)
+      raise ActiveRecord::RecordNotSaved.new("Change not acceptable in boxfill phase for '#{article.name}', sorry.", self)
     end
   end
 
