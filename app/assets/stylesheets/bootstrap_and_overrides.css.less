@@ -48,7 +48,7 @@ body {
 
 
 // Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
-.dl-horizontal { 
+.dl-horizontal {
     dd { .clearfix(); }
 }
 
@@ -129,7 +129,7 @@ table {
   th.left, td.left     { text-align: left; }
   th.right, td.right   { text-align: right; }
   th.center, td.center { text-align: center; }
-  
+
   td.main_info {
     font-weight: bold;
   }
@@ -194,9 +194,16 @@ table {
 }
 .unused {
   color: @articleUnusedColor;
+  margin-right: 0.5em;
 }
 .partused {
   color: @articlePartusedColor;
+}
+.btn-ordering, .btn-group .btn-ordering {
+  font-size: 10px;
+  line-height: 14px;
+  padding: 4px 8px;
+  margin-top: -2px;
 }
 
 #order-footer, .article-info {

@@ -5,11 +5,11 @@
 //
 // Call setDecimalSeparator(char) to overwrite the default character "." with a localized value.
 
-var modified = false    		// indicates if anything has been clicked on this page
-var groupBalance = 0;			// available group money
-var minimumBalance = 0;                 // minimum group balance for the order to be succesful
+var modified = false;           // indicates if anything has been clicked on this page
+var groupBalance = 0;           // available group money
+var minimumBalance = 0;         // minimum group balance for the order to be succesful
 var toleranceIsCostly = true;   // default tolerance behaviour
-var isStockit = false;          // Wheter the order is from stock oder normal supplier
+var isStockit = false;          // Whether the order is from stock oder normal supplier
 
 // Article data arrays:
 var price = new Array();
@@ -139,8 +139,6 @@ function update(item, quantity, tolerance) {
         .removeClass('missing-many missing-few missing-none')
         .addClass(missing_units_css);
 
-
-    // update balance
     updateBalance();
 }
 
@@ -185,16 +183,16 @@ function updateBalance() {
 }
 
 $(function() {
-    $('input[data-increase_quantity]').on('touchclick', function() {
+    $('a[data-increase_quantity]').on('touchclick', function() {
         increaseQuantity($(this).data('increase_quantity'));
     });
-    $('input[data-decrease_quantity]').on('touchclick', function() {
+    $('a[data-decrease_quantity]').on('touchclick', function() {
         decreaseQuantity($(this).data('decrease_quantity'));
     });
-    $('input[data-increase_tolerance]').on('touchclick', function() {
+    $('a[data-increase_tolerance]').on('touchclick', function() {
         increaseTolerance($(this).data('increase_tolerance'));
     });
-    $('input[data-decrease_tolerance]').on('touchclick', function() {
+    $('a[data-decrease_tolerance]').on('touchclick', function() {
         decreaseTolerance($(this).data('decrease_tolerance'));
     });
 
