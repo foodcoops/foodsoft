@@ -13,12 +13,12 @@ var isStockit = false;          // Whether the order is from stock oder normal s
 
 // Article data arrays:
 var price = new Array();
-var unit = new Array();  		// items per order unit
-var itemTotal = new Array();    // total item price
+var unit = new Array();              // items per order unit
+var itemTotal = new Array();         // total item price
 var quantityOthers = new Array();
 var toleranceOthers = new Array();
-var itemsAllocated = new Array();  // how many items the group has been allocated and should definitely get
-var quantityAvailable = new Array();  // stock_order. how many items are currently in stock
+var itemsAllocated = new Array();    // how many items the group has been allocated and should definitely get
+var quantityAvailable = new Array(); // stock_order. how many items are currently in stock
 
 function setToleranceBehaviour(value) {
     toleranceIsCostly = value;
@@ -48,27 +48,37 @@ function addData(orderArticleId, itemPrice, itemUnit, itemSubtotal, itemQuantity
 }
 
 function increaseQuantity(item) {
-    var value = Number($('#q_' + item).val()) + 1;
+    var $el   = $('#q_' + item),
+        value = Number($el.val()) + 1,
+        max   = $el.data('max');
+    if (value > max) { value = max; }
     if (!isStockit || (value <= (quantityAvailable[item] + itemsAllocated[item]))) {
         update(item, value, $('#t_' + item).val());
     }
 }
 
 function decreaseQuantity(item) {
-    var value = Number($('#q_' + item).val()) - 1;
-    if (value >= 0) {
+    var $el   = $('#q_' + item),
+        value = Number($el.val()) - 1,
+        min   = $el.data('min') || 0;
+    if (value >= min) {
         update(item, value, $('#t_' + item).val());
     }
 }
 
 function increaseTolerance(item) {
-    var value = Number($('#t_' + item).val()) + 1;
+    var $el   = $('#t_' + item),
+        value = Number($el.val()) + 1;
+        max   = $el.data('max');
+    if (value > max) { value = max; }
     update(item, $('#q_' + item).val(), value);
 }
 
 function decreaseTolerance(item) {
-    var value = Number($('#t_' + item).val()) - 1;
-    if (value >= 0) {
+    var $el   = $('#t_' + item),
+        value = Number($el.val()) - 1,
+        min   = $el.data('min') || 0;
+    if (value >= min) {
         update(item, $('#q_' + item).val(), value);
     }
 }
@@ -140,6 +150,7 @@ function update(item, quantity, tolerance) {
         .addClass(missing_units_css);
 
     updateBalance();
+    updateButtons($('#q_'+item).closest('tr'));
 }
 
 function calcUnits(unitSize, quantity, tolerance) {
@@ -182,6 +193,26 @@ function updateBalance() {
     }
 }
 
+function updateButtons($el) {
+    // enable/disable buttons depending on min/max vs. value
+    $el.find('a[data-increase_quantity]').each(function() {
+      var $q = $el.find('#q_'+$(this).data('increase_quantity'));
+      $(this).toggleClass('disabled', $q.val() >= $q.data('max'));
+    });
+    $el.find('a[data-decrease_quantity]').each(function() {
+      var $q = $el.find('#q_'+$(this).data('decrease_quantity'));
+      $(this).toggleClass('disabled', $q.val() <= ($q.data('min')||0));
+    });
+    $el.find('a[data-increase_tolerance]').each(function() {
+      var $t = $el.find('#t_'+$(this).data('increase_tolerance'));
+      $(this).toggleClass('disabled', $t.val() >= $t.data('max'));
+    });
+    $el.find('a[data-decrease_tolerance]').each(function() {
+      var $t = $el.find('#t_'+$(this).data('decrease_tolerance'));
+      $(this).toggleClass('disabled', $t.val() <= ($t.data('min')||0));
+    });
+}
+
 $(function() {
     $('a[data-increase_quantity]').on('touchclick', function() {
         increaseQuantity($(this).data('increase_quantity'));
@@ -199,4 +230,6 @@ $(function() {
     $('a[data-confirm_switch_order]').on('touchclick', function() {
         return (!modified || confirm(I18n.t('js.ordering.confirm_change')));
     });
+
+    updateButtons($(document));
 });
