@@ -102,7 +102,7 @@
                 %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
 
             %td.quantity
-              %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", size: "2", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:quantity]}/
+              %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:quantity], 'data-min' => (@ordering_data[:order_articles][order_article.id][:quantity] if @order.boxfill?), 'data-max' => (@ordering_data[:order_articles][order_article.id][:quantity]+@ordering_data[:order_articles][order_article.id][:missing_units] if @order.boxfill?)}/
               %span.used{id: "q_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_quantity]
               +
               %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
@@ -113,7 +113,7 @@
                   %i.icon-minus
 
             %td.tolerance{style: ('display:none' if @order.stockit?)}
-              %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", size: "2", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance]}/
+              %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance], 'data-min' => (@ordering_data[:order_articles][order_article.id][:tolerance] if @order.boxfill?)}/
               - if (@ordering_data[:order_articles][order_article.id][:unit] > 1)
                 %span.used{id: "t_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_tolerance]
                 +
