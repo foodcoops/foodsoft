@@ -59,6 +59,7 @@ module Admin::ConfigsHelper
       options[:value] = FoodsoftDateUtil.rule_from(options[:value])
       options[:rules] ||= []
       options[:rules].unshift options[:value] unless options[:value].blank?
+      options[:rules].push [I18n.t('recurring_select.not_recurring'), '{}'] if options.delete(:allow_blank) # blank after current value
       form.select_recurring key, options.delete(:rules).uniq, options
     else
       form.input_field key, options
@@ -73,7 +74,7 @@ module Admin::ConfigsHelper
     head = content_tag :label do
      lbl = options[:label] || config_input_label(form, key)
      field = config_input_field(form, key, as: :boolean, boolean_style: :inline,
-                                data: {toggle: 'collapse', target: "##{key}-fields"}) 
+                                data: {toggle: 'collapse', target: "##{key}-fields"})
      content_tag :h4 do
        # put in span to keep space for tooltip at right
        content_tag :span, (lbl + field).html_safe, config_input_tooltip_options(form, key, {})

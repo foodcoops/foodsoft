@@ -14,5 +14,5 @@
 = form.simple_fields_for :order_schedule do |fields|
   = fields.simple_fields_for 'ends' do |fields|
     .fold-line
-      = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'input-xlarge'}
+      = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'input-xlarge'}, allow_blank: true
       = config_input fields, 'time', input_html: {class: 'input-mini'}
