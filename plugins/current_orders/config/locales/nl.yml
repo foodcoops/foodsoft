@@ -10,8 +10,12 @@ nl:
         counts: '%{ordergroups} huishoudens bestelden %{articles} verschillende artikelen.'
         no_selection: Kies een artikel om te zien wie het besteld heeft, of download verdeellijsten rechtsboven.
       article_info:
-        from: van %{supplier}
+        origin_in: uit %{origin}
+        supplied_by: van %{supplier}
+        supplied_and_made_by: gemaakt door %{manufacturer}
+        supplied_by_made_by: van %{supplier} gemaakt door %{manufacturer}
         unit: per %{unit}
+        from: van %{supplier}
       form:
         article_placeholder: Zoek artikelen...
         current_orders: Alle huidige bestellingen
@@ -19,6 +23,7 @@ nl:
         title: Artikelen verdelen
       ordergroups:
         piece: st
+        unit: eenh
         add_new: Huishouden toevoegen...
       show:
         title: ! '%{name} verdelen'
@@ -26,12 +31,15 @@ nl:
       receive: Ontvangen
       articles: Verdelen
       ordergroups: Ledenbestellingen
+    group_orders:
+      index:
+        title: Je huidige bestellingen
     ordergroups:
       articles:
         add_new: Artikel toevoegen...
+        no_selection: Kies een huishouden om de artikelen te tonen.
       form:
         ordergroup_placeholder: Kies een huishouden...
-        no_selection: Kies een huishouden om de artikelen te tonen.
       index:
         title: Artikelen voor huishouden
       payment_bar:
@@ -52,14 +60,14 @@ nl:
     multiple_orders_by_groups:
       filename: Huidige bestellingen per huishouden
       title: Huidige bestellingen - per huishouden
+  helpers:
+    current_orders:
+      pay_done: Alles betaald
+      pay_none: Niets te betalen
+      pay_amount: Te betalen %{amount}
   js:
     current_orders:
       articles:
         above: '%{count} meer dan<br>beschikbaar'
         below: '%{count} blijft over'
         equal: alles verdeeld
-  helpers:
-    current_orders:
-      pay_done: Alles betaald
-      pay_none: Niets te betalen
-      pay_amount: Te betalen %{amount}
