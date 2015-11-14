@@ -6,12 +6,14 @@ foodsoft project from the git repository. Now you are only a few steps away
 from trying it out and then jumping into development.
 
 This document describes how to setup Foodsoft for development on your local system.
-Alternatively, you [run Foodsoft using Docker](SETUP_DOCKER.md).
+Alternatively, you [run Foodsoft using Docker](SETUP_DOCKER.md). Or if you just want to
+run Foodsoft without changing its code, the
+[Turnkey Linux Foodsoft appliance](http://www.turnkeylinux.org/foodsoft) may be useful.
 
 
 **System requirements**:
 [RVM](https://rvm.io/rvm/install),
-[Ruby 1.9.3+](https://www.ruby-lang.org/en/downloads/),
+[Ruby 2+](https://www.ruby-lang.org/en/downloads/),
 [Bundler](http://bundler.io/),
 [MySQL](http://mysql.com/)/[PostgreSQL](http://www.postgresql.org/)/[SQLite](http://sqlite.org/).
 
@@ -29,13 +31,13 @@ Getting started
    unfinished parts. If you want to be safe, choose the last release:
    `git checkout $(git tag -l | grep ^v | sort -rn | head -n1)`
 
-1. Install RVM and Ruby 1.9.3+ (if you have not done so before):
+1. Install RVM and Ruby 2+ (if you have not done so before):
 
         \curl -L https://get.rvm.io | bash
         source ~/.rvm/scripts/rvm
         rvm install 2.0
 
-    We try to keep foodsoft compatible with Ruby 1.9.3 as well as any later versions,
+    We try to keep Foodsoft compatible with Ruby 1.9.3 as well as any later versions,
     so if you use this and don't want to use RVM, that might actually work.
 
 2. Install system dependencies.
@@ -180,4 +182,3 @@ explained here.
    From now on you have a smtp server listening on 1025. To see the emails go to
 
         http://localhost:1080
-
