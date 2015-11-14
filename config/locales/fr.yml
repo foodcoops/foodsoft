@@ -636,6 +636,13 @@ fr:
     general: Un problème a été rencontré.
     general_again: Une erreur s'est produite. Merci de réessayer.
     general_msg: 'Une erreur s''est produite: %{msg}'
+    internal_server_error:
+      text1: 
+      text2: 
+      title: 
+    not_found:
+      text: 
+      title: 
   feedback:
     create:
       notice: Ton commentaire a été transmis avec succès. Merci
@@ -771,10 +778,8 @@ fr:
       linked_delivery: un réapprovisionnement
       linked_order: une commande
       new:
-        back: Retour
         title: Ajouter une facture
       show:
-        back: Retour
         title: Facture %{number}
     ordergroups:
       index:
@@ -1693,6 +1698,7 @@ fr:
       title_all: Boulot prévu pour l'équipe
   ui:
     actions: Actions
+    back: Retour
     cancel: Annuler
     close: Fermer
     copy: 

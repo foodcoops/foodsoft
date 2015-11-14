@@ -188,7 +188,7 @@ en:
               exclusion: finished tasks may not be repeated
     models:
       article: Article
-      article_category: Article category
+      article_category: Category
       delivery: Delivery
       financial_transaction: Financial transaction
       invoice: Invoice
@@ -638,13 +638,13 @@ en:
     general: A problem has occured.
     general_again: A problem has occured. Please try again.
     general_msg: 'A problem has occured: %{msg}'
-    not_found:
-      title: Page not found
-      text: This page does not appear to exist, sorry!
     internal_server_error:
-      title: Internal server error
       text1: An unexpected error has occured. Sorry!
       text2: We've been notified. If this remains a problem, please tell us so.
+      title: Internal server error
+    not_found:
+      text: This page does not appear to exist, sorry!
+      title: Page not found
   feedback:
     create:
       notice: Your feedback was sent successfully. Thanks a lot!

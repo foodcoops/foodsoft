@@ -188,7 +188,7 @@ de:
               exclusion: erledigte Aufgaben können nicht wöchentlich wiederholt werden
     models:
       article: Artikel
-      article_category: Artikelkategorie
+      article_category: Kategorie
       delivery: Lieferung
       financial_transaction: Kontotransaktion
       invoice: Rechnung
@@ -636,6 +636,13 @@ de:
     general: Ein Problem ist aufgetreten.
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
     general_msg: 'Ein Fehler ist aufgetreten: %{msg}'
+    internal_server_error:
+      text1: 
+      text2: 
+      title: 
+    not_found:
+      text: 
+      title: 
   feedback:
     create:
       notice: Das Feedback wurde erfolgreich verschickt. Vielen Dank!
@@ -769,10 +776,8 @@ de:
       linked_delivery: einer Lieferung
       linked_order: einer Bestellung
       new:
-        back: Züruck
         title: Neue Rechnung anlegen
       show:
-        back: Züruck
         title: Rechnung %{number}
     ordergroups:
       index:
@@ -929,7 +934,7 @@ de:
         view_all: Alle Nachrichten einsehen
       my_ordergroup:
         funds: "| Verfügbares Guthaben:"
-        last_update: Letzte Aktualisiering ist %{when} her
+        last_update: Letzte Aktualisierung vor %{when}
         title: Meine Bestellgruppe
         transactions:
           title: Letzte Transaktionen
@@ -992,7 +997,7 @@ de:
       body: "<p>Hier kannst Du jemanden einladen, der nicht Teil der Foodcoop ist, deiner Bestellgruppe <b>%{group}</b> beizutreten. Nachdem die Einladung angenommen wurde, wird die Person in der Lage sein, Artikel zu deiner Bestellung hinzuzufügen (und zu entfernen).</p> <p>Dies ist eine praktische Funktion, um jemanden in die Foodcoop einzuladen oder mit mehreren Leuten in einem Haushalt zu bestellen.</p>"
       title: Person einladen
     new:
-      action: Einlading abschicken
+      action: Einladung abschicken
       body: "<p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>"
     success: Benutzer/in wurde erfolgreich eingeladen.
   js:
@@ -1023,7 +1028,7 @@ de:
     accept_invitation:
       body: "<p>Du bist eingeladen worden als Mitglied der Gruppe <b>%{group}</b> in der Foodcoop %{foodcoop} mitzumachen.</p> <p>Wenn Du mitmachen möchtest, dann fülle bitte dieses Formular aus.</p> <p>Deine Daten werden selbstverständlich nicht an Dritte, aus was auch immer für Gründen, weitergeben. Du kannst auch entscheiden, wieviel deiner persönlichen Daten für alle einsehbar sein sollen. 'Alle' bedeutet hier alle Foodcoop-Mitglieder. Die Administratoren haben aber jederzeit Zugriff auf deine Daten.</p>"
       submit: Foodsoft Account erstellen
-      title: Einlading in die %{name}
+      title: Einladung in die %{name}
     controller:
       accept_invitation:
         notice: Herzlichen Glückwunsch, Dein Account wurde erstellt. Du kannst Dich nun einloggen.
@@ -1048,7 +1053,7 @@ de:
       header: "%{user} schrieb am %{date}:"
       subject: Feedback von %{email}
     invite:
-      subject: Einlading in die Foodcoop
+      subject: Einladung in die Foodcoop
       text: |
         Hallo!
 
@@ -1060,11 +1065,11 @@ de:
         Grüße sendet die Foodsoft!
     negative_balance:
       subject: Gruppenkonto im Minus
-      text: |
+      text: |-
         Liebe %{group},
 
 
-        euer Kontostand is durch eine Buching am %{when} ins Minus gerutscht: %{balance}
+        euer Kontostand is durch eine Buchung am %{when} ins Minus gerutscht: %{balance}
         Es wurden %{amount} für "%{note}" abgebucht, die Buchung wurde von %{user} erstellt.
         Bitte zahlt so bald wie möglich wieder Geld ein, un das Gruppenkonto auszugleichen.
 
@@ -1085,10 +1090,10 @@ de:
         Deine Aufgaben: %{user_tasks_url}
     order_result:
       subject: 'Bestellung beendet: %{name}'
-      text0: |
+      text0: |-
         Liebe %{ordergroup},
 
-        die Bestelling für "%{order}" wurde am %{when} von %{user} beendet.
+        die Bestellung für "%{order}" wurde am %{when} von %{user} beendet.
         Für Euch wurden die folgenden Artikel bestellt:
       text1: "o Gesamtpreis: %{sum}\n\nBestellung online einsehen: %{order_url}\n\n\nViele Grüße von %{foodcoop} "
     reset_password:
@@ -1162,7 +1167,7 @@ de:
     order_article:
       error_price: muss angegeben sein und einen aktuellen Preis haben
     page:
-      redirect: Weiterleiting auf [[%{title}]]...
+      redirect: Weiterleitung auf [[%{title}]]...
     user:
       no_ordergroup: keine Bestellgruppe
   navigation:
@@ -1676,6 +1681,7 @@ de:
       title_all: Alle Aufgaben der Gruppe
   ui:
     actions: Aktionen
+    back: Züruck
     cancel: Abbrechen
     close: Schließen
     copy: kopieren

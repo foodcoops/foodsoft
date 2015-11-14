@@ -636,6 +636,13 @@ nl:
     general: Er is een probleem opgetreden.
     general_again: Er is een fout opgetreden. Probeer het opnieuw.
     general_msg: 'Er is een probleem opgetreden: %{msg}'
+    internal_server_error:
+      text1: Een onverwachte fout is opgetreden. Sorry!
+      text2: We zijn op de hoogte gesteld. Als het probleem blijft bestaan, neem dan gerust contact op.
+      title: Interne serverfout
+    not_found:
+      text: Deze pagina bestaat niet, sorry!
+      title: Pagina niet gevonden
   feedback:
     create:
       notice: Bericht verstuurd. Vriendelijk bedankt!
@@ -769,10 +776,8 @@ nl:
       linked_delivery: een levering
       linked_order: een bestelling
       new:
-        back: Terug
         title: Nieuwe factuur toevoegen
       show:
-        back: Terug
         title: Factuur %{number}
     ordergroups:
       index:
