@@ -144,6 +144,8 @@ default: &defaults
   #  password:
   #  encoding: utf8
   #  socket: /opt/lampp/var/mysql/mysql.sock
+  # Instead of defining all details here, you can also point to an entry in database.yml.
+  #shared_lists: shared_lists
 
 development:
   <<: *defaults
