@@ -48,7 +48,7 @@ body {
 
 
 // Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
-.dl-horizontal { 
+.dl-horizontal {
     dd { .clearfix(); }
 }
 
@@ -119,6 +119,9 @@ table {
     td:first-child {
       text-align: left;
     }
+    small {
+      color: inherit; // keep it readable instead of gray
+    }
   }
   th.numeric, td.numeric {
     text-align: right;
@@ -129,7 +132,7 @@ table {
   th.left, td.left     { text-align: left; }
   th.right, td.right   { text-align: right; }
   th.center, td.center { text-align: center; }
-  
+
   td.main_info {
     font-weight: bold;
   }
