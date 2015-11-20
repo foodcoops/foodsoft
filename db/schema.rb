@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301000000) do
+ActiveRecord::Schema.define(version: 20150923190747) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20150301000000) do
     t.integer  "article_category_id", limit: 4,                           default: 0,    null: false
     t.string   "unit",                limit: 255,                         default: "",   null: false
     t.string   "note",                limit: 255
-    t.boolean  "availability",        limit: 1,                           default: true, null: false
+    t.boolean  "availability",                                            default: true, null: false
     t.string   "manufacturer",        limit: 255
     t.string   "origin",              limit: 255
     t.datetime "shared_updated_on"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20150301000000) do
   create_table "assignments", force: :cascade do |t|
     t.integer "user_id",  limit: 4, default: 0,     null: false
     t.integer "task_id",  limit: 4, default: 0,     null: false
-    t.boolean "accepted", limit: 1, default: false
+    t.boolean "accepted",           default: false
   end
 
   add_index "assignments", ["user_id", "task_id"], name: "index_assignments_on_user_id_and_task_id", unique: true, using: :btree
@@ -127,18 +127,18 @@ ActiveRecord::Schema.define(version: 20150301000000) do
     t.string   "description",              limit: 255
     t.decimal  "account_balance",                        precision: 12, scale: 2, default: 0,     null: false
     t.datetime "created_on",                                                                      null: false
-    t.boolean  "role_admin",               limit: 1,                              default: false, null: false
-    t.boolean  "role_suppliers",           limit: 1,                              default: false, null: false
-    t.boolean  "role_article_meta",        limit: 1,                              default: false, null: false
-    t.boolean  "role_finance",             limit: 1,                              default: false, null: false
-    t.boolean  "role_orders",              limit: 1,                              default: false, null: false
+    t.boolean  "role_admin",                                                      default: false, null: false
+    t.boolean  "role_suppliers",                                                  default: false, null: false
+    t.boolean  "role_article_meta",                                               default: false, null: false
+    t.boolean  "role_finance",                                                    default: false, null: false
+    t.boolean  "role_orders",                                                     default: false, null: false
     t.datetime "deleted_at"
     t.string   "contact_person",           limit: 255
     t.string   "contact_phone",            limit: 255
     t.string   "contact_address",          limit: 255
     t.text     "stats",                    limit: 65535
     t.integer  "next_weekly_tasks_number", limit: 4,                              default: 8
-    t.boolean  "ignore_apple_restriction", limit: 1,                              default: false
+    t.boolean  "ignore_apple_restriction",                                        default: false
   end
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 20150301000000) do
     t.string   "subject",        limit: 255,                   null: false
     t.text     "body",           limit: 65535
     t.integer  "email_state",    limit: 4,     default: 0,     null: false
-    t.boolean  "private",        limit: 1,     default: false
+    t.boolean  "private",                      default: false
     t.datetime "created_at"
     t.integer  "reply_to",       limit: 4
     t.integer  "group_id",       limit: 4
@@ -224,6 +224,7 @@ ActiveRecord::Schema.define(version: 20150301000000) do
     t.integer  "updated_by_user_id", limit: 4
     t.decimal  "foodcoop_result",                  precision: 8, scale: 2
     t.integer  "created_by_user_id", limit: 4
+    t.datetime "boxfill"
   end
 
   add_index "orders", ["state"], name: "index_orders_on_state", using: :btree
@@ -316,7 +317,7 @@ ActiveRecord::Schema.define(version: 20150301000000) do
     t.string   "name",                   limit: 255, default: "",    null: false
     t.string   "description",            limit: 255
     t.date     "due_date"
-    t.boolean  "done",                   limit: 1,   default: false
+    t.boolean  "done",                               default: false
     t.integer  "workgroup_id",           limit: 4
     t.datetime "created_on",                                         null: false
     t.datetime "updated_on",                                         null: false

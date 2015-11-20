@@ -27,9 +27,9 @@ class GroupOrderArticle < ActiveRecord::Base
     group_order.try!(:ordergroup_id)
   end
 
-  # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties 
+  # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties
   # and the associated GroupOrderArticleQuantities chronologically.
-  # 
+  #
   # See description of the ordering algorithm in the general application documentation for details.
   def update_quantities(quantity, tolerance)
     logger.debug("GroupOrderArticle[#{id}].update_quantities(#{quantity}, #{tolerance})")
@@ -104,7 +104,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
   # Determines how many items of this article the Ordergroup receives.
   # Returns a hash with three keys: :quantity / :tolerance / :total
-  # 
+  #
   # See description of the ordering algorithm in the general application documentation for details.
   def calculate_result(total = nil)
     # return memoized result unless a total is given
@@ -199,5 +199,3 @@ class GroupOrderArticle < ActiveRecord::Base
     result != result_computed unless result.nil?
   end
 end
-
-

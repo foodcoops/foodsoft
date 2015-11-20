@@ -32,7 +32,7 @@ class OrderArticle < ActiveRecord::Base
     units_to_order
   end
 
-  # Count quantities of belonging group_orders. 
+  # Count quantities of belonging group_orders.
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
     quantity = group_order_articles.collect(&:result).sum
@@ -42,10 +42,11 @@ class OrderArticle < ActiveRecord::Base
   # Update quantity/tolerance/units_to_order from group_order_articles
   def update_results!
     if order.open?
-      quantity = group_order_articles.collect(&:quantity).sum
-      tolerance = group_order_articles.collect(&:tolerance).sum
-      update_attributes(:quantity => quantity, :tolerance => tolerance,
-                        :units_to_order => calculate_units_to_order(quantity, tolerance))
+      self.quantity = group_order_articles.collect(&:quantity).sum
+      self.tolerance = group_order_articles.collect(&:tolerance).sum
+      self.units_to_order = calculate_units_to_order(quantity, tolerance)
+      enforce_boxfill if order.boxfill?
+      save!
     elsif order.finished?
       update_attribute(:units_to_order, group_order_articles.collect(&:result).sum)
     end
@@ -186,19 +187,20 @@ class OrderArticle < ActiveRecord::Base
 
   # @return [Number] Units missing for the last +unit_quantity+ of the article.
   def missing_units
-    units = price.unit_quantity - ((quantity  % price.unit_quantity) + tolerance)
-    units = 0 if units < 0
-    units = 0 if units == price.unit_quantity
-    units
+    _missing_units(price.unit_quantity, quantity, tolerance)
   end
-  
+
+  def missing_units_was
+    _missing_units(price.unit_quantity, quantity_was, tolerance_was)
+  end
+
   # Check if the result of any associated GroupOrderArticle was overridden manually
   def result_manually_changed?
     group_order_articles.any? {|goa| goa.result_manually_changed?}
   end
 
   private
-  
+
   def article_and_price_exist
     errors.add(:article, I18n.t('model.order_article.error_price')) if !(article = Article.find(article_id)) || article.fc_price.nil?
   rescue
@@ -219,5 +221,26 @@ class OrderArticle < ActiveRecord::Base
     order.group_orders.each(&:update_price!)
   end
 
-end
+  # Throws an exception when the changed article decreases the amount of filled boxes.
+  def enforce_boxfill
+    # Either nothing changes, or the tolerance increases,
+    # missing_units decreases and the amount doesn't decrease, or
+    # tolerance was moved to quantity. Only then are changes allowed in the boxfill phase.
+    delta_q = quantity - quantity_was
+    delta_t = tolerance - tolerance_was
+    delta_mis = missing_units - missing_units_was
+    delta_box = units_to_order - units_to_order_was
+    unless (delta_q == 0 && delta_t >= 0) ||
+           (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
+           (delta_q > 0 && delta_q == -delta_t)
+      raise ActiveRecord::RecordNotSaved.new("Change not acceptable in boxfill phase for '#{article.name}', sorry.", self)
+    end
+  end
 
+  def _missing_units(unit_quantity, quantity, tolerance)
+    units = unit_quantity - ((quantity  % unit_quantity) + tolerance)
+    units = 0 if units < 0
+    units = 0 if units == unit_quantity
+    units
+  end
+end

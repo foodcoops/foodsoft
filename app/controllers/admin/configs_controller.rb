@@ -40,7 +40,7 @@ class Admin::ConfigsController < Admin::BaseController
   # turn recurring rules into something palatable
   def parse_recurring_selects!(config)
     if config
-      for k in [:pickup, :ends] do
+      for k in [:pickup, :boxfill, :ends] do
         if config[k]
           # allow clearing it using dummy value '{}' ('' would break recurring_select)
           if config[k][:recurr].present? && config[k][:recurr] != '{}'

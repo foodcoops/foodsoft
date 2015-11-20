@@ -71,6 +71,7 @@ en:
         sent_to_all: Send to all members
         subject: Subject
       order:
+        boxfill: Fill boxes after
         closed_by: Settled by
         created_by: Created by
         ends: Ends at
@@ -237,6 +238,8 @@ en:
         pdf_title: PDF documents
       tab_messages:
         emails_title: Sending email
+      tab_payment:
+        schedule_title: Ordering schedule
       tab_tasks:
         periodic_title: Periodic tasks
       tabs:
@@ -478,6 +481,9 @@ en:
         ends:
           recurr: Schedule for default order closing date.
           time: Default time when orders are closed.
+        boxfill:
+          recurr: Schedule for when the box-fill phase starts by default.
+          time: Default time when the box-fill phase of the ordering starts.
         initial: Schedule starts at this date.
       page_footer: Shown on each page at the bottom. Enter "blank" to disable the footer completely.
       pdf_add_page_breaks:
@@ -492,6 +498,7 @@ en:
       tax_default: Default VAT percentage for new articles.
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
+      use_boxfill: When enabled, near end of an order, members are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
       use_messages: Allow members to communicate with each other within Foodsoft.
       use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
       use_wiki: Enable editable wiki pages.
@@ -523,6 +530,9 @@ en:
         ends:
           recurr: Order ends
           time: time
+        boxfill:
+          recurr: Box fill after
+          time: time
         initial: Schedule start
       page_footer: Page footer
       pdf_add_page_breaks: Page breaks
@@ -536,6 +546,7 @@ en:
       time_zone: Time zone
       tolerance_is_costly: Tolerance is costly
       use_apple_points: Apple points
+      use_boxfill: Box-fill phase
       use_messages: Messages
       use_nick: Use nicknames
       use_wiki: Enable wiki
@@ -1279,6 +1290,8 @@ en:
       close_direct_message: Order settled without charging member accounts.
       error_closed: Order was already settled
       error_nosel: At least one article must be selected. You may want to delete the order instead?
+      error_boxfill_before_ends: must be after the box-fill date (or remain empty)
+      error_starts_before_boxfill: must be after the start date (or remain empty)
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: 'Order: %{name}, until %{ends}'
       stock: Stock

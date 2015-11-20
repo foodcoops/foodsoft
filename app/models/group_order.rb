@@ -28,7 +28,7 @@ class GroupOrder < ActiveRecord::Base
     data[:order_articles] = {}
     order.articles_grouped_by_category.each do |article_category, order_articles|
       order_articles.each do |order_article|
-        
+
         # Get the result of last time ordering, if possible
         goa = group_order_articles.detect { |goa| goa.order_article_id == order_article.id }
 
@@ -58,8 +58,10 @@ class GroupOrder < ActiveRecord::Base
       group_order_article = group_order_articles.where(order_article_id: order_article.id).first_or_create
 
       # Get ordered quantities and update group_order_articles/_quantities...
-      quantities = group_order_articles_attributes.fetch(order_article.id.to_s, {:quantity => 0, :tolerance => 0})
-      group_order_article.update_quantities(quantities[:quantity].to_i, quantities[:tolerance].to_i)
+      if group_order_articles_attributes
+        quantities = group_order_articles_attributes.fetch(order_article.id.to_s, {:quantity => 0, :tolerance => 0})
+        group_order_article.update_quantities(quantities[:quantity].to_i, quantities[:tolerance].to_i)
+      end
 
       # Also update results for the order_article
       logger.debug "[save_group_order_articles] update order_article.results!"
@@ -86,4 +88,3 @@ class GroupOrder < ActiveRecord::Base
   end
 
 end
-
