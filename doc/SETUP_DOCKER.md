@@ -4,8 +4,8 @@ This document explains setting up and using Foodsoft with Docker.
 
 ## Requirements
 
-* Docker (=> 1.5)
-* Docker Compose (=> 1.1)
+* Docker (=> 1.9.1)
+* Docker Compose (=> 1.4)
 * Nothing more, no ruby, mysql, redis etc!
 
 For installing instructions see https://docs.docker.com/installation/.
@@ -49,19 +49,16 @@ Jump in a running container for debugging.
 
     docker exec -ti foodsoft_app_1 bash
 
+Receiving mails
+
+Go to http://localhost:1080.
+
 ## Notes
 
 ### Gemfile updates
 
-This is bit tricky, as the gemfiles are stored in the container and so we have
-to rebuild the container each time we change the Gemfile. To avoid installing
-all the gems from scratch we can use this workaround:
-
-```bash
-docker-compose run app bundle update rails # Update Gemfile.lock file
-docker ps -a # Look for the last exited container and grab the Container ID
-docker commit -m "Updated rails" <Container ID> foodsoft_app
-```
+As we use a special container (`bundle`, see `docker-compose.yml`) you only
+have to run the bundle command as normally: `docker-compose run app bundle`
 
 ### Database configuration
 
