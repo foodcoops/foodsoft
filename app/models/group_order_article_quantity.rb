@@ -4,10 +4,6 @@
 class GroupOrderArticleQuantity < ActiveRecord::Base
 
   belongs_to :group_order_article
-  
-  validates_presence_of :group_order_article_id
-  validates_inclusion_of :quantity, :in => 0..99
-  validates_inclusion_of :tolerance, :in => 0..99
-  
-end
 
+  validates_presence_of :group_order_article_id
+end
