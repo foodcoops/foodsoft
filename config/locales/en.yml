@@ -276,6 +276,9 @@ en:
     users:
       controller:
         sudo_done: You are now logged in as %{user}. Be careful, and do not forget to log out when done!
+      destroy:
+        error: 'User could not be deleted: %{error}'
+        notice: User was deleted
       edit:
         title: Edit user
       index:

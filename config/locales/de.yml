@@ -271,6 +271,9 @@ de:
     users:
       controller:
         sudo_done: Du bist jetzt als Benutzer %{user} angemeldet. Sei vorsichtig und melde dich ab, wenn du fertig bist!
+      destroy:
+        error: 'Benutzer/in konnte nicht gelöscht werden: %{error}'
+        notice: Benutzer/in wurde gelöscht
       edit:
         title: Benutzer/in bearbeiten
       index:
