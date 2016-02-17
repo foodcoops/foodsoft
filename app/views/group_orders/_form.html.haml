@@ -33,6 +33,8 @@
       %dd= show_user_link(@order.created_by)
       %dt= heading_helper Order, :ends
       %dd= format_time(@order.ends)
+      %dt= heading_helper Order, :pickup
+      %dd= format_date(@order.pickup)
       - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
         %dt= heading_helper Supplier, :min_order_quantity, short: true
         %dd= @order.supplier.min_order_quantity

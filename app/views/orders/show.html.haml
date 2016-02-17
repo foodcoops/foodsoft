@@ -8,7 +8,8 @@
                supplier: supplier_link(@order),
                who: show_user_link(@order.created_by),
                starts: format_time(@order.starts),
-               ends: format_time(@order.ends)
+               ends: format_time(@order.ends),
+               pickup: format_date(@order.pickup)
     %br
     = raw t '.description2',
                ordergroups: ordergroup_count(@order),

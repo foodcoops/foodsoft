@@ -78,6 +78,7 @@ de:
         ends: Endet am
         name: Lieferant
         note: Notiz
+        pickup: Abholung
         starts: Läuft vom
         status: Status
         supplier: Lieferant
@@ -1303,7 +1304,7 @@ de:
       confirm_end: |-
         Willst Du wirklich die Bestellung %{order} beenden?
         Es gibt kein zurück.
-      description1: "%{state} Bestellung von %{supplier} angelegt von %{who}, läuft von %{starts} bis %{ends}."
+      description1: "%{state} Bestellung von %{supplier} angelegt von %{who}, läuft von %{starts} bis %{ends} und kann voraussichtlich am %{pickup} abgeholt werden."
       description2: "%{ordergroups} haben %{article_count} Artikel mit einem Gesamtwert von %{net_sum} / %{gross_sum} (netto / brutto) bestellt."
       download:
         article_pdf: Artikel PDF
