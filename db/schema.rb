@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217152621) do
+ActiveRecord::Schema.define(version: 20160217164552) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -140,6 +140,8 @@ ActiveRecord::Schema.define(version: 20160217152621) do
     t.text     "stats",                    limit: 65535
     t.integer  "next_weekly_tasks_number", limit: 4,                              default: 8
     t.boolean  "ignore_apple_restriction",                                        default: false
+    t.date     "break_start"
+    t.date     "break_end"
   end
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
