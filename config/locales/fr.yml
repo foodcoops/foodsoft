@@ -54,6 +54,8 @@ fr:
         total_price: Total
       invoice:
         amount: Montant
+        created_at: Créé le
+        created_by: "Établi par"
         date: Date de facturation
         delivery: Réapprovisionnement
         deposit: Consigne facturée

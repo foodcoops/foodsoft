@@ -54,6 +54,8 @@ en:
         total_price: Sum
       invoice:
         amount: Amount
+        created_at: Created at
+        created_by: Created by
         date: Billing date
         delivery: Delivery
         deposit: Deposit charged

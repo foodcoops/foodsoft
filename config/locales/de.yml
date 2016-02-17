@@ -54,6 +54,8 @@ de:
         total_price: Summe
       invoice:
         amount: Betrag
+        created_at: Erstellt am
+        created_by: Erstellt von
         date: Rechnungsdatum
         delivery: Lieferung
         deposit: Pfand berechnet

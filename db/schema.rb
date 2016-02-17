@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923190747) do
+ActiveRecord::Schema.define(version: 20160217124256) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 20150923190747) do
     t.decimal  "deposit_credit",               precision: 8, scale: 2, default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by_user_id"
   end
 
   add_index "invoices", ["delivery_id"], name: "index_invoices_on_delivery_id", using: :btree

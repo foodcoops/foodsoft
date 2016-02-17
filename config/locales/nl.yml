@@ -54,6 +54,8 @@ nl:
         total_price: Som
       invoice:
         amount: Bedrag
+        created_at: Gemaakt op
+        created_by: Gemaakt door
         date: Factuurdatum
         delivery: Levering
         deposit: Statiegeld in rekening gebracht

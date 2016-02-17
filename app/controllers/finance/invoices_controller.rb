@@ -20,6 +20,7 @@ class Finance::InvoicesController < ApplicationController
 
   def create
     @invoice = Invoice.new(params[:invoice])
+    @invoice.created_by = current_user
 
     if @invoice.save
       flash[:notice] = I18n.t('finance.create.notice')

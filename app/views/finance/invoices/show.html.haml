@@ -1,6 +1,12 @@
 - title t('.title', number: @invoice.number)
 
 %p
+  %b= heading_helper(Invoice, :created_at) + ':'
+  = format_time(@invoice.created_at)
+%p
+  %b= heading_helper(Invoice, :created_by) + ':'
+  = show_user(@invoice.created_by)
+%p
   %b= heading_helper(Invoice, :supplier) + ':'
   = @invoice.supplier.name
 

@@ -7,6 +7,11 @@
   - if @invoice.order
     %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), new_finance_order_path(order_id: @invoice.order.id))).html_safe
 
+  - if @invoice.created_at
+    = f.input :created_at do
+      = format_time(@invoice.created_at)
+    = f.input :created_by do
+      = show_user(@invoice.created_by)
   = f.association :supplier, hint: false
   = f.input :number
   = f.input :date, as: :date_picker
