@@ -1,0 +1,8 @@
+%section.well
+  %h3= messagegroup.name
+  = render :partial => 'shared/group', :locals => { :group => messagegroup }
+  = link_to_new_message(message_params: {group_id: messagegroup.id})
+  - if messagegroup.member?(current_user)
+    = link_to t('.leave'), leave_messagegroup_path(messagegroup), class: 'btn', method: :post
+  - else
+    = link_to t('.join'), join_messagegroup_path(messagegroup), class: 'btn', method: :post
