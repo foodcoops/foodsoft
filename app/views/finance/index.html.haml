@@ -15,7 +15,7 @@
       %tbody
         - for invoice in @unpaid_invoices
           %tr
-            %td= format_date(invoice.date)
+            %td= link_to h(format_date(invoice.date)), finance_invoice_path(invoice)
             %td.numeric= number_to_currency(invoice.amount)
             %td= invoice.supplier.name
             %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
