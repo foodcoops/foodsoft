@@ -20,7 +20,7 @@
       %tr
         %td= link_to h(invoice.number), finance_invoice_path(invoice)
         %td= invoice.supplier.name
-        %td= format_date invoice.date
+        %td= link_to h(format_date invoice.date), finance_invoice_path(invoice)
         %td= format_date invoice.paid_on
         %td= number_to_currency invoice.amount
         %td= link_to Delivery.model_name.human, [invoice.supplier,invoice.delivery] if invoice.delivery
