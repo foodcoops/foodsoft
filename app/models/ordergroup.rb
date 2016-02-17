@@ -26,6 +26,13 @@ class Ordergroup < Group
     User.natural_order.all.reject { |u| (users.include?(u) || u.ordergroup) }
   end
 
+  def last_user_activity
+    last_active_user = users.order('users.last_activity DESC').first
+    if last_active_user
+      last_active_user.last_activity
+    end
+  end
+
   # the most recent order this ordergroup was participating in
   def last_order
     orders.order('orders.starts DESC').first

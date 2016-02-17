@@ -106,6 +106,7 @@ en:
         description: Description
         ignore_apple_restriction: Ignore order stop by apple points restriction
         last_order: Last order
+        last_user_activity: Last activity
         name: Name
         user_tokens: Members
       page:
