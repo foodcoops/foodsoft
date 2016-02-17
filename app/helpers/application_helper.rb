@@ -150,7 +150,7 @@ module ApplicationHelper
   end
 
   def format_roles(record, icon=false)
-    roles = %w(suppliers article_meta orders finance admin)
+    roles = %w(suppliers article_meta orders finance invoices admin)
     roles.select! {|role| record.send "role_#{role}?"}
     names = Hash[roles.map{|r| [r, I18n.t("helpers.application.role_#{r}")]}]
     if icon

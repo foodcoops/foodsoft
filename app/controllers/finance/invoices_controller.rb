@@ -1,11 +1,13 @@
 class Finance::InvoicesController < ApplicationController
 
+  before_filter :find_invoice, only: [:show, :edit, :update, :destroy]
+  before_filter :ensure_can_edit, only: [:edit, :update, :destroy]
+
   def index
     @invoices = Invoice.includes(:supplier, :deliveries, :orders).order('date DESC').page(params[:page]).per(@per_page)
   end
 
   def show
-    @invoice = Invoice.find(params[:id])
   end
 
   def new
@@ -15,7 +17,6 @@ class Finance::InvoicesController < ApplicationController
   end
 
   def edit
-    @invoice = Invoice.find(params[:id])
   end
 
   def create
@@ -36,8 +37,6 @@ class Finance::InvoicesController < ApplicationController
   end
 
   def update
-    @invoice = Invoice.find(params[:id])
-
     if @invoice.update_attributes(params[:invoice])
       redirect_to [:finance, @invoice], notice: I18n.t('finance.update.notice')
     else
@@ -46,9 +45,21 @@ class Finance::InvoicesController < ApplicationController
   end
 
   def destroy
-    @invoice = Invoice.find(params[:id])
     @invoice.destroy
 
     redirect_to finance_invoices_url
+  end
+
+  private
+
+  def find_invoice
+    @invoice = Invoice.find(params[:id])
+  end
+
+  # Returns true if @current_user can edit the invoice..
+  def ensure_can_edit
+    unless @invoice.user_can_edit?(current_user)
+      deny_access
+    end
   end
 end

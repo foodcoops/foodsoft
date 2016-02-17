@@ -169,6 +169,7 @@ nl:
         role_admin: Beheer
         role_article_meta: Artikelen
         role_finance: Financiën
+        role_invoices: Facturen
         role_orders: Bestellingen
         role_suppliers: Leveranciers
         user_tokens: Leden
@@ -900,6 +901,7 @@ nl:
       role_admin: Admin
       role_article_meta: Artikelen
       role_finance: Financiën
+      role_invoices: Facturen
       role_orders: Bestelling
       role_suppliers: Leveranciers
       show_google_maps: Op Google maps bekijken

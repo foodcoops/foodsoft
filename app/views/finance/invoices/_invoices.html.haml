@@ -32,6 +32,10 @@
             = ', ' if index > 0
             = link_to format_date(order.ends), new_finance_order_path(order_id: order)
         %td= truncate(invoice.note)
-        %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
-        %td= link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('.confirm_delete')}, :method => :delete,
-          class: 'btn btn-danger btn-mini'
+        %td
+          - if invoice.user_can_edit?(current_user)
+            = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
+        %td
+          - if invoice.user_can_edit?(current_user)
+            = link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('.confirm_delete')}, :method => :delete,
+            class: 'btn btn-danger btn-mini'
