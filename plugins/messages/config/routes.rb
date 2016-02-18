@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope '/:foodcoop' do
     resources :messages, :only => [:index, :show, :new, :create]
+    resources :messagethreads, :only => [:index, :show]
 
     resources :messagegroups, only: [:index] do
       member do

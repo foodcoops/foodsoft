@@ -42,6 +42,17 @@ de:
     messagegroup:
       join: Nachrichtengruppe beitreten
       leave: Nachrichtengruppe verlassen
+  messages:
+    index:
+      messagethreads: Nachrichtenverläufe
+  messagethreads:
+    index:
+      messages: Nachrichten
+      new: Neue Nachricht
+      title: Nachrichtenverläufe
+    show:
+      all_messagethreads: Alle Nachrichtenverläufe
+      reply: Antworten
   navigation:
     admin:
       messagegroups: Nachrichtengruppen
