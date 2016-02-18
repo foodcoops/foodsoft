@@ -43,6 +43,7 @@ class Message < ActiveRecord::Base
   def group_id=(group_id)
     @group_id = group_id
     add_recipients Group.find(group_id).users unless group_id.blank?
+    super
   end
 
   def order_id=(order_id)
