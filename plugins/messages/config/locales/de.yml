@@ -1,0 +1,59 @@
+de:
+  activerecord:
+    attributes:
+      messagegroup:
+        description: Beschreibung
+        name: Name
+        user_tokens: Mitglieder
+    models:
+      messagegroup: Nachrichtengruppe
+  admin:
+    messagegroups:
+      destroy:
+        error: 'Nachrichtengruppe konnte nicht als gelöscht markiert werden: %{error}'
+        notice: Nachrichtengruppe wurde als gelöscht markiert
+      edit:
+        title: Nachrichtengruppe bearbeiten
+      index:
+        first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
+        new_messagegroup: Neue Nachrichtengruppe anlegen
+        new_messagegroups: neue Nachrichtengruppe
+        title: Nachrichtengruppen
+      new:
+        title: Nachrichtengruppe anlegen
+      show:
+        confirm: Bist Du sicher?
+        edit: Gruppe/Mitglieder bearbeiten
+        send_message: Nachricht senden
+        title: Nachrichtengruppe %{name}
+      messagegroups:
+        members: Mitglieder
+        name: Name
+  messagegroups:
+    index:
+      body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
+      title: Nachrichtengruppen
+    join:
+      error: 'Nachrichtengruppe konnte nicht begetreten werden: %{error}'
+      notice: Nachrichtengruppe wurde beigetreten
+    leave:
+      error: 'Nachrichtengruppe konnte nicht verlassen werden: %{error}'
+      notice: Nachrichtengruppe wurde verlassen
+    messagegroup:
+      join: Nachrichtengruppe beitreten
+      leave: Nachrichtengruppe verlassen
+  messages:
+    index:
+      message_threads: Nachrichtenverläufe
+  message_threads:
+    index:
+      messages: Nachrichten
+      new: Neue Nachricht
+      title: Nachrichtenverläufe
+    show:
+      all_message_threads: Alle Nachrichtenverläufe
+      reply: Antworten
+  navigation:
+    admin:
+      messagegroups: Nachrichtengruppen
+    messagegroups: Nachrichtengruppen

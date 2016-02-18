@@ -13,6 +13,9 @@ class MessagesController < ApplicationController
 
     if @message.reply_to
       original_message = Message.find(@message.reply_to)
+      if original_message.reply_to
+        @message.reply_to = original_message.reply_to
+      end
       if original_message.is_readable_for?(current_user)
         @message.add_recipients [original_message.sender]
         @message.group_id = original_message.group_id

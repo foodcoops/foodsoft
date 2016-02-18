@@ -43,6 +43,7 @@ en:
     create:
       notice: Message is saved and will be sent.
     index:
+      message_threads: View as threads
       new: New message
       title: Messages
     messages:
@@ -74,6 +75,14 @@ en:
       sent_on: ! 'Sent:'
       subject: ! 'Subject:'
       title: Show message
+  message_threads:
+    index:
+      messages: View as messages
+      new: New message
+      title: Message threads
+    show:
+      all_message_threads: All message threads
+      reply: Reply
   messages_mailer:
     foodsoft_message:
       footer: ! 'Reply: %{reply_url}

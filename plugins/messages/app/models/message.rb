@@ -9,6 +9,8 @@ class Message < ActiveRecord::Base
   scope :pending, -> { where(:email_state => 0) }
   scope :sent, -> { where(:email_state => 1) }
   scope :pub, -> { where(:private => false) }
+  scope :threads, -> { where(:reply_to => nil) }
+  scope :thread, -> (id) { where("id = ? OR reply_to = ?", id, id) }
 
   # Values for the email_state attribute: :none, :pending, :sent, :failed
   EMAIL_STATE = {
@@ -69,6 +71,10 @@ class Message < ActiveRecord::Base
 
   def recipients
     User.where(id: recipients_ids)
+  end
+
+  def last_reply
+    Message.where(reply_to: self.id).order(:created_at).last
   end
 
   def deliver

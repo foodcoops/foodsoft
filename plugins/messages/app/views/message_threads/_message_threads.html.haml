@@ -1,0 +1,19 @@
+- if pagination
+  - if Message.pub.count > 20
+    = items_per_page
+  = pagination_links_remote message_threads
+
+- unless message_threads.empty?
+  %table.table.table-striped
+    %tbody
+      - for message in message_threads
+        %tr
+          %td
+            %b= link_to message.subject, message_thread_path(message)
+          %td= h(message.sender_name)
+          - if message.last_reply
+            %td= format_time(message.last_reply.created_at)
+            %td= h(message.last_reply.sender_name)
+          - else
+            %td{:colspan => "2"}
+//          %td= link_to t('.reply'), new_message_path(:message => {:reply_to => message.id}), class: 'btn'

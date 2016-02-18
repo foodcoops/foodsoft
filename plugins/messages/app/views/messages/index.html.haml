@@ -1,6 +1,7 @@
 - title t('.title')
 
 - content_for :actionbar do
+  = link_to t('.message_threads'), message_threads_path, class: 'btn'
   = link_to t('.new'), new_message_path, class: 'btn btn-primary'
 #messages
   = render 'messages', messages: @messages, pagination: true
