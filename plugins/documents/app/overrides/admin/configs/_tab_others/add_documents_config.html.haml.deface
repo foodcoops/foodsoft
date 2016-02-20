@@ -1,0 +1,2 @@
+/ insert_before ':root:first-child'
+= config_input form, :use_documents, as: :boolean

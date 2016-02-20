@@ -1,0 +1,8 @@
+- title t('.title')
+
+= simple_form_for(@document) do |f|
+  = f.input :name, as: :string
+  = f.input :data, as: :file
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to t('ui.or_cancel'), :back
