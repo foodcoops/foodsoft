@@ -1,0 +1,8 @@
+= simple_form_for([:admin, @bank_account]) do |f|
+  = f.input :name
+  = f.input :iban
+  = f.input :description, as: :text, input_html: {class: 'input-xxlarge'}
+  = f.input :balance
+  .form-actions
+    = f.submit class: 'btn'
+    = link_to t('ui.or_cancel'), admin_bank_accounts_path

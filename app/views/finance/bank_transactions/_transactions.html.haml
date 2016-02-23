@@ -1,0 +1,18 @@
+.pull-right
+  - if @bank_transactions.total_pages > 1
+    .btn-group= items_per_page wrap: false
+= pagination_links_remote @bank_transactions
+%table.table.table-striped
+  %thead
+    %tr
+      %th= sort_link_helper heading_helper(BankTransaction, :booking_date), "booking_date"
+      %th= heading_helper(BankTransaction, :text)
+      %th= heading_helper(BankTransaction, :reference)
+      %th= sort_link_helper heading_helper(BankTransaction, :amount), "amount"
+  %tbody
+    - @bank_transactions.each do |t|
+      %tr
+        %td= h link_to format_date(t.booking_date), finance_bank_transaction_path(t)
+        %td= h t.text
+        %td= h t.reference
+        %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}= number_to_currency(t.amount)

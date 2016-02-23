@@ -216,6 +216,20 @@ en:
       workgroup: Workgroup
   admin:
     access_to: access to
+    bank_accounts:
+      create:
+        notice: Bank account was created
+      destroy:
+        error: 'Bank account could not be deleted: %{message}'
+        notice: Bank account was deleted
+      edit:
+        title: Edit bank account
+      index:
+        title: Bank Accounts
+      new:
+        title: Create bank account
+      update:
+        notice: Bank account was updated
     base:
       index:
         all_ordergroups: All ordergroups
@@ -748,6 +762,18 @@ en:
         reload: Reload summary
         with_extra_charge: 'with extra charge:'
         without_extra_charge: 'without extra charge:'
+    bank_accounts:
+      controller:
+        import:
+          alert: 'An error occured: %{error}'
+          notice: '%{count} new transactions have been imported'
+      index:
+        account_statement: Account statement
+        title: Bank Accounts
+    bank_transactions:
+      index:
+        search_placeholder: Search ...
+        title: Bank transactions for %{name}
     create:
       notice: Invoice was created.
     financial_transactions:
@@ -1210,6 +1236,7 @@ en:
       no_ordergroup: no ordergroup
   navigation:
     admin:
+      bank_accounts: Bank Accounts
       config: Configuration
       home: Overview
       ordergroups: Ordergroups
@@ -1225,6 +1252,7 @@ en:
     finances:
       accounts: Manage accounts
       balancing: Account orders
+      bank_accounts: Bank Accounts
       home: Overview
       invoices: Invoices
       title: Finances
