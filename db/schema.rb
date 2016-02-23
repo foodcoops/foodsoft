@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217194036) do
+ActiveRecord::Schema.define(version: 20160218151041) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -169,6 +169,8 @@ ActiveRecord::Schema.define(version: 20160217194036) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_user_id"
+    t.string   "attachment_mime"
+    t.binary   "attachment_data"
   end
 
   add_index "invoices", ["supplier_id"], name: "index_invoices_on_supplier_id", using: :btree

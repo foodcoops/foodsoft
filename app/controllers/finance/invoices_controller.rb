@@ -54,6 +54,13 @@ class Finance::InvoicesController < ApplicationController
     redirect_to finance_invoices_url
   end
 
+  def attachment
+    @invoice = Invoice.find(params[:invoice_id])
+    type = MIME::Types[@invoice.attachment_mime].first
+    filename = 'attachment_' + @invoice.id.to_s + '.' + type.preferred_extension
+    send_data(@invoice.attachment_data, :filename => filename, :type => type)
+  end
+
   private
 
   # Returns true if @current_user can edit the invoice..

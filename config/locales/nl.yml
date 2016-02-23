@@ -54,9 +54,11 @@ nl:
         total_price: Som
       invoice:
         amount: Bedrag
+        attachment: Bijlage
         created_at: Gemaakt op
         created_by: Gemaakt door
         date: Factuurdatum
+        delete_attachment: Verwijder bijlage
         deliveries: Levering
         deposit: Statiegeld in rekening gebracht
         deposit_credit: Statiegeld teruggekregen
@@ -1697,6 +1699,7 @@ nl:
     close: Sluiten
     copy: Kopiëren
     delete: Verwijder
+    download: Downloaden
     edit: Bewerk
     marks:
       close: "&times;"
