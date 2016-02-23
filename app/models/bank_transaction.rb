@@ -8,6 +8,11 @@ class BankTransaction < ActiveRecord::Base
   # Replace numeric seperator with database format
   localize_input_of :amount
 
+  def related_ordergroup
+    user = User.find_by(:iban => iban)
+    user.nil? ? nil : user.ordergroup
+  end
+
   def image_url
     'data:image/png;base64,' + Base64.encode64(self.image)
   end

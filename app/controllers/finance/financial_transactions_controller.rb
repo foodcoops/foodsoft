@@ -39,6 +39,10 @@ class Finance::FinancialTransactionsController < ApplicationController
   def new
     @financial_transaction = @ordergroup.financial_transactions.build
     @financial_transaction.financial_transaction_type = FinancialTransactionType.first
+    unless params[:bank_transaction_id].nil?
+      @bank_transaction = BankTransaction.find(params[:bank_transaction_id])
+      @financial_transaction.amount = @bank_transaction.amount
+    end
   end
 
   def create

@@ -391,6 +391,7 @@ ActiveRecord::Schema.define(version: 20160220000000) do
     t.datetime "last_login"
     t.datetime "last_activity"
     t.datetime "deleted_at"
+    t.string   "iban"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
