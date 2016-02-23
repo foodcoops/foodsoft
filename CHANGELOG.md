@@ -1,3 +1,12 @@
+# Foodsoft 4.5.0
+
+* Improve Docker setup. 
+* ...
+
+If you've used the Docker configuration before, please make sure to delete
+the old files (`sudo rm -Rf tmp/* log/*`) and rebuild the container with
+`docker-compose build`.
+
 # Foodsoft 4.4.1
 (5 Jun 2015)
 
