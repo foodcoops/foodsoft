@@ -4,10 +4,15 @@ rvm:
   - 2.1
 services:
   - redis-server
+addons:
+  apt:
+    packages:
+      - metacity
 env: COVERALLS=1
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3 && metacity --sm-disable --replace 2> metacity.err &
 cache: bundler
 bundler_args:
   - "--without development --deployment --jobs=3 --retry=3"
