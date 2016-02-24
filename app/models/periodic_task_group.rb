@@ -19,6 +19,20 @@ class PeriodicTaskGroup < ActiveRecord::Base
     self.save
   end
 
+  def create_tasks_until(create_until)
+    if has_next_task?
+      while next_task_date.nil? || next_task_date < create_until
+        create_next_task
+      end
+    end
+  end
+
+  def create_tasks_for_upfront_days
+    create_until = Date.today + FoodsoftConfig[:tasks_upfront_days].to_i + 1
+    create_tasks_until create_until
+    create_until
+  end
+
   def exclude_tasks_before(task)
     tasks.where("due_date < '#{task.due_date}'").each do |t|
       t.update_attribute(:periodic_task_group, nil)
