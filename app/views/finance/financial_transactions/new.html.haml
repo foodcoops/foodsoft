@@ -5,6 +5,10 @@
 = simple_form_for @financial_transaction, :url => finance_ordergroup_transactions_path(@ordergroup),
   :validate => true do |f|
   = f.hidden_field :ordergroup_id
+  - if FinancialTransactionType.count > 1
+    = f.association :financial_transaction_type, :as => :radio_buttons
+  - else
+    = f.association :financial_transaction_type, :as => :hidden
   = f.input :amount
   = f.input :note, :as => :text
   .form-actions

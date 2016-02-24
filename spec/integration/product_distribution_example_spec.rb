@@ -1,6 +1,8 @@
 require_relative '../spec_helper'
 
 feature 'product distribution', js: true do
+  let(:ftc) { create :financial_transaction_class }
+  let(:ftt) { create :financial_transaction_type, financial_transaction_class: ftc }
   let(:admin) { create :admin }
   let(:user_a) { create :user, groups: [create(:ordergroup)] }
   let(:user_b) { create :user, groups: [create(:ordergroup)] }
@@ -13,7 +15,7 @@ feature 'product distribution', js: true do
     # make sure users have enough money to order
     [user_a, user_b].each do |user|
       ordergroup = Ordergroup.find(user.ordergroup.id)
-      ordergroup.add_financial_transaction! 5000, 'for ordering', admin
+      ordergroup.add_financial_transaction! 5000, 'for ordering', admin, ftt
     end
     order # make sure order is referenced
   end

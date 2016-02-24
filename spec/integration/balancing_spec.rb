@@ -1,6 +1,8 @@
 require_relative '../spec_helper'
 
 feature 'settling an order', js: true do
+  let(:ftc) { create :financial_transaction_class }
+  let(:ftt) { create :financial_transaction_type, financial_transaction_class: ftc }
   let(:admin) { create :user, groups:[create(:workgroup, role_finance: true)] }
   let(:user) { create :user, groups:[create(:ordergroup)] }
   let(:supplier) { create :supplier }

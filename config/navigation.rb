@@ -45,6 +45,8 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :users, I18n.t('navigation.admin.users'), admin_users_path
       subnav.item :ordergroups, I18n.t('navigation.admin.ordergroups'), admin_ordergroups_path
       subnav.item :workgroups, I18n.t('navigation.admin.workgroups'), admin_workgroups_path
+      subnav.item :financial_transaction_classes, I18n.t('navigation.admin.financial_transaction_classes'), admin_financial_transaction_classes_path
+      subnav.item :financial_transaction_types, I18n.t('navigation.admin.financial_transaction_types'), admin_financial_transaction_types_path
       subnav.item :config, I18n.t('navigation.admin.config'), admin_config_path
     end
 
