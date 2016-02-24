@@ -1303,6 +1303,7 @@ de:
       confirm_end: |-
         Willst Du wirklich die Bestellung %{order} beenden?
         Es gibt kein zurück.
+      create_invoice: Rechnung anlegen
       description1: "%{state} Bestellung von %{supplier} angelegt von %{who}, läuft von %{starts} bis %{ends}."
       description2: "%{ordergroups} haben %{article_count} Artikel mit einem Gesamtwert von %{net_sum} / %{gross_sum} (netto / brutto) bestellt."
       download:
@@ -1320,6 +1321,7 @@ de:
         default: Suche nach Artikeln ...
         groups: Suche nach Bestellgruppen ...
       search_reset: Suche zurücksetzen
+      show_invoice: Rechnung anzeigen
       sort_article: Sortiert nach Artikeln
       sort_group: Sortiert nach Gruppen
       title: 'Bestellung: %{name}'

@@ -1325,6 +1325,7 @@ en:
       confirm_end: |-
         Do you really want to close the order %{order}?
         There is no going back.
+      create_invoice: Add invoice
       description1: "%{state} order from %{supplier} created by %{who}, open from %{starts} until %{ends}."
       description2: "%{ordergroups} ordered %{article_count} articles, with a total value of %{net_sum} / %{gross_sum} (net / gross)."
       download:
@@ -1342,6 +1343,7 @@ en:
         default: Search for articles...
         groups: Search for ordergroups...
       search_reset: Reset search
+      show_invoice: Show invoice
       sort_article: Sorted in articles
       sort_group: Sorted in groups
       title: 'Order: %{name}'

@@ -1,5 +1,13 @@
 - title t('.title', name: @order.name)
 
+- if current_user.role_finance? || current_user.role_invoices?
+  - content_for :actionbar do
+    - if @order.invoice.present?
+      = link_to t('.show_invoice'), finance_invoice_path(@order.invoice), class: 'btn'
+    - elsif @order.closed?
+      = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
+        class: 'btn'
+
 .well
   = close_button :alert
   %p

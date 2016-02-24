@@ -1311,6 +1311,7 @@ fr:
       comments_link: Commenaire
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment clôturer la commande %{order}? Pas d'annulation possible.
+      create_invoice: Ajouter une facture
       description1: Commande %{state} de %{supplier} créée par %{who}, ouverte du %{starts} au %{ends}.
       description2: "%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)"
       download:
@@ -1328,6 +1329,7 @@ fr:
         default: Rechercher des articles...
         groups: Rechercher des cellules...
       search_reset: Réinitialiser la recherche
+      show_invoice: Afficher la facture
       sort_article: Trié par article
       sort_group: Trié par cellules
       title: 'Commande: %{name}'

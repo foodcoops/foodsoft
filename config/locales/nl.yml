@@ -1306,6 +1306,7 @@ nl:
       confirm_end: |-
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
+      create_invoice: Factuur toevoegen
       description1: "%{state} bestelling van %{supplier}, geopend door %{who}, open van %{starts} tot %{ends}."
       description2: "%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto)."
       download:
@@ -1323,6 +1324,7 @@ nl:
         default: Artikelen zoeken...
         groups: Huishoudens zoeken...
       search_reset: Zoekopdracht wissen
+      show_invoice: Factuur tonen
       sort_article: Per artikel
       sort_group: Per huishouden
       title: 'Bestelling: %{name}'
