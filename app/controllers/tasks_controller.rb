@@ -22,6 +22,7 @@ class TasksController < ApplicationController
       @task.periodic_task_group = PeriodicTaskGroup.new
     end
     if @task.save
+      @task.periodic_task_group.create_tasks_for_upfront_days if params[:periodic]
       redirect_to tasks_url, :notice => I18n.t('tasks.create.notice')
     else
       render :template => "tasks/new"
