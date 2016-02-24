@@ -48,6 +48,7 @@ class Finance::FinancialTransactionsController < ApplicationController
   def create
     @financial_transaction = FinancialTransaction.new(params[:financial_transaction])
     @financial_transaction.user = current_user
+    @financial_transaction.money_transfer = BankTransaction.find(params[:bank_transaction_id]).money_transfer_autocreate unless params[:bank_transaction_id].nil?
     @financial_transaction.add_transaction!
     redirect_to finance_ordergroup_transactions_url(@ordergroup), notice: I18n.t('finance.financial_transactions.controller.create.notice')
   rescue ActiveRecord::RecordInvalid => error
@@ -56,16 +57,20 @@ class Finance::FinancialTransactionsController < ApplicationController
   end
 
   def new_collection
+    unless params[:bank_transaction_id].nil?
+      @bank_transaction = BankTransaction.find(params[:bank_transaction_id])
+    end
   end
 
   def create_collection
     raise I18n.t('finance.financial_transactions.controller.create_collection.error_note_required') if params[:note].blank?
     type = FinancialTransactionType.find_by_id(params[:type])
     type = FinancialTransactionType.first if type.nil?
+    money_transfer = BankTransaction.find(params[:bank_transaction_id]).money_transfer_autocreate unless params[:bank_transaction_id].nil?
     params[:financial_transactions].each do |trans|
       # ignore empty amount fields ...
       unless trans[:amount].blank?
-        Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(trans[:amount], params[:note], @current_user, type)
+        Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(trans[:amount], params[:note], @current_user, type, money_transfer)
       end
     end
     redirect_to finance_ordergroups_url, notice: I18n.t('finance.financial_transactions.controller.create_collection.notice')

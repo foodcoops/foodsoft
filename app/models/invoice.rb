@@ -4,6 +4,7 @@ class Invoice < ActiveRecord::Base
 
   belongs_to :supplier
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
+  belongs_to :money_transfer
   has_many :deliveries
   has_many :orders
 

@@ -15,7 +15,7 @@ feature 'product distribution', js: true do
     # make sure users have enough money to order
     [user_a, user_b].each do |user|
       ordergroup = Ordergroup.find(user.ordergroup.id)
-      ordergroup.add_financial_transaction! 5000, 'for ordering', admin, ftt
+      ordergroup.add_financial_transaction! 5000, 'for ordering', admin, ftt, nil
     end
     order # make sure order is referenced
   end

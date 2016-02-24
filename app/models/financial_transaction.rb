@@ -4,6 +4,7 @@ class FinancialTransaction < ActiveRecord::Base
   belongs_to :ordergroup
   belongs_to :user
   belongs_to :financial_transaction_type
+  belongs_to :money_transfer
 
   validates_presence_of :amount, :note, :user_id, :ordergroup_id
   validates_numericality_of :amount, greater_then: -100_000,
@@ -13,6 +14,6 @@ class FinancialTransaction < ActiveRecord::Base
 
   # Use this save method instead of simple save and after callback
   def add_transaction!
-    ordergroup.add_financial_transaction! amount, note, user, financial_transaction_type
+    ordergroup.add_financial_transaction! amount, note, user, financial_transaction_type, money_transfer
   end
 end

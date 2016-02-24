@@ -51,6 +51,41 @@
   %b= heading_helper(Invoice, :note) + ':'
   =h @invoice.note
 
+- if @invoice.money_transfer
+  %hr
+  - if @invoice.money_transfer.bank_transactions.count > 0
+    %h3= t('.related_bank_transactions')
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= heading_helper BankTransaction, :booking_date
+          %th= heading_helper BankTransaction, :text
+          %th= heading_helper BankTransaction, :reference
+          %th= heading_helper BankTransaction, :amount
+      %tbody
+        - @invoice.money_transfer.bank_transactions.each do |t|
+          %tr
+            %td= link_to format_date(t.booking_date), finance_bank_transaction_path(t)
+            %td= t.text
+            %td= t.reference
+            %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}= number_to_currency(t.amount)
+  - if @invoice.money_transfer.financial_transactions.count > 0
+    %h3= t('.related_financial_transactions')
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= heading_helper FinancialTransaction, :created_on
+          %th= heading_helper FinancialTransaction, :ordergroup
+          %th= heading_helper FinancialTransaction, :note
+          %th.numeric= heading_helper FinancialTransaction, :amount
+      %tbody
+        - @invoice.money_transfer.financial_transactions.each do |ft|
+          %tr
+            %td= format_date(ft.created_on)
+            %td= link_to h(ft.ordergroup.name), finance_ordergroup_transactions_path(ft.ordergroup)
+            %td= ft.note
+            %td.numeric{:style => "color:#{ft.amount < 0 ? 'red' : 'black'}"}= number_to_currency(ft.amount)
+
 - if @invoice.user_can_edit?(current_user)
   = link_to t('ui.edit'), edit_finance_invoice_path(@invoice), class: 'btn'
 = link_to t('ui.or_cancel'), finance_invoices_path

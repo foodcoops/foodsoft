@@ -18,5 +18,7 @@
         %td= h t.reference
         %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}= number_to_currency(t.amount)
         %td
-          - unless t.related_ordergroup.nil?
+          - if t.related_ordergroup.nil?
+            = link_to t('.add_financial_transaction'), finance_new_transaction_collection_path(:bank_transaction_id => t), class: 'btn btn-mini'
+          - else
             = link_to t('.add_financial_transaction'), new_finance_ordergroup_transaction_path(t.related_ordergroup, :bank_transaction_id => t), class: 'btn btn-mini'

@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20160220000000) do
     t.text    "text"
     t.text    "receipt"
     t.binary  "image"
+    t.integer "money_transfer_id"
   end
 
   create_table "deliveries", force: :cascade do |t|
@@ -123,6 +124,7 @@ ActiveRecord::Schema.define(version: 20160220000000) do
     t.integer  "user_id",       limit: 4,                             default: 0, null: false
     t.datetime "created_on",                                                      null: false
     t.integer  "financial_transaction_type_id",                                   null: false
+    t.integer  "money_transfer_id"
   end
 
   add_index "financial_transactions", ["ordergroup_id"], name: "index_financial_transactions_on_ordergroup_id", using: :btree
@@ -212,6 +214,7 @@ ActiveRecord::Schema.define(version: 20160220000000) do
     t.integer  "created_by_user_id"
     t.string   "attachment_mime"
     t.binary   "attachment_data"
+    t.integer  "money_transfer_id"
   end
 
   add_index "invoices", ["supplier_id"], name: "index_invoices_on_supplier_id", using: :btree
@@ -233,6 +236,10 @@ ActiveRecord::Schema.define(version: 20160220000000) do
     t.datetime "created_at"
     t.integer  "reply_to",       limit: 4
     t.integer  "group_id",       limit: 4
+  end
+
+  create_table "money_transfers", force: :cascade do |t|
+    t.string "description"
   end
 
   create_table "order_articles", force: :cascade do |t|
