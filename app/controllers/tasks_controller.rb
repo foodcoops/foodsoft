@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   #auto_complete_for :user, :nick
 
   def index
-    @non_group_tasks = Task.non_group.includes(assignments: :user)
+    @non_group_tasks = Task.non_group.order('due_date', 'name').includes(assignments: :user)
     @groups = Workgroup.includes(open_tasks: {assignments: :user})
   end
 
