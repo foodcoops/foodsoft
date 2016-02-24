@@ -951,9 +951,8 @@ de:
         desc: Du bis für Aufgaben verantwortlich.
         title: Aufgaben übernehmen
       tasks_open:
-        action: offene Aufgabe(n)
-        desc: Es gibt %{size}
         title: Offene Aufgaben
+        view_all: Alle Aufgaben anzeigen
       title: Startseite
       your_tasks: Deine Aufgaben
     no_ordergroups: Leider bist Du kein Mitglied einer Bestellgruppe
@@ -1452,6 +1451,14 @@ de:
       title: Laufende Bestellungen
       total_sum: Gesamtsumme
       who_ordered: Wer hat bestellt?
+    task_list:
+      accept_task: Aufgabe übernehmen
+      done: Erledigt
+      done_q: Erledigt?
+      mark_done: Aufgabe als erledigt markieren
+      reject_task: Aufgabe ablehnen
+      who: Wer machts?
+      who_hint: "(Wie viele werden noch benötigt?)"
     user_form_fields:
       contact_address_hint: Die Adresse deiner Bestellgruppe. Wenn du sie aktualisierst, wird sie auch bei den anderen Mitgliedern deiner Bestellgruppe aktualisiert.
     workgroup_members:
@@ -1642,14 +1649,6 @@ de:
       show_group_tasks: Gruppenaufgaben anzeigen
       title: Aufgaben
       title_non_group: Aufgaben für alle!
-    list:
-      accept_task: Aufgabe übernehmen
-      done: Erledigt
-      done_q: Erledigt?
-      mark_done: Aufgabe als erledigt markieren
-      reject_task: Aufgabe ablehnen
-      who: Wer machts?
-      who_hint: "(Wie viele werden noch benötigt?)"
     nav:
       all_tasks: Alle Aufgaben
       archive: Erledigte Aufgaben (Archiv)

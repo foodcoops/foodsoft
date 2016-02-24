@@ -964,9 +964,8 @@ en:
         desc: You are responsible for these tasks.
         title: Take over tasks
       tasks_open:
-        action: open task(s)
-        desc: There is/are %{size}
         title: Open tasks
+        view_all: Show all tasks
       title: Homepage
       your_tasks: Your tasks
     no_ordergroups: You are unfortunately not a member of an ordergroup.
@@ -1474,6 +1473,14 @@ en:
       title: Current orders
       total_sum: Total sum
       who_ordered: Who ordered?
+    task_list:
+      accept_task: Accept task
+      done: Done
+      done_q: Done?
+      mark_done: Mark task as done
+      reject_task: Reject task
+      who: Who is doing it?
+      who_hint: "(How much are still needed?)"
     user_form_fields:
       contact_address_hint: The address of your ordergroup. If you update this, it changes for other members of the ordergroup as well.
     workgroup_members:
@@ -1664,14 +1671,6 @@ en:
       show_group_tasks: Show group tasks
       title: Tasks
       title_non_group: Tasks for all!
-    list:
-      accept_task: Accept task
-      done: Done
-      done_q: Done?
-      mark_done: Mark task as done
-      reject_task: Reject task
-      who: Who is doing it?
-      who_hint: "(How much are still needed?)"
     nav:
       all_tasks: All tasks
       archive: Completed tasks (archive)

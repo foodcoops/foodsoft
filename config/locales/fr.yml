@@ -961,9 +961,8 @@ fr:
         desc: Tu as du boulot de prévu.
         title: Accepter des boulot
       tasks_open:
-        action: boulot(s) disponible(s)
-        desc: Il y a %{size}
         title: Boulots disponibles
+        view_all: Afficher tous les boulots
       title: Page d'accueil
       your_tasks: Voilà le boulot que tu as accepté en ce moment
     no_ordergroups: Tu ne fais encore partie d'aucune cellule
@@ -1460,6 +1459,14 @@ fr:
       title: Commandes en cours
       total_sum: Total
       who_ordered: Qui a commandé?
+    task_list:
+      accept_task: Te charger de ce boulot
+      done: Effectué
+      done_q: Effectué?
+      mark_done: Marquer ce boulot comme étant effectué
+      reject_task: Refuser ce boulot
+      who: Qui le fait?
+      who_hint: "(Combien manquent encore?)"
     user_form_fields:
       contact_address_hint: 
     workgroup_members:
@@ -1658,14 +1665,6 @@ fr:
       show_group_tasks: Afficher l'agenda de cette équipe
       title: Agenda
       title_non_group: Boulots ouverts à tou-te-s
-    list:
-      accept_task: Te charger de ce boulot
-      done: Effectué
-      done_q: Effectué?
-      mark_done: Marquer ce boulot comme étant effectué
-      reject_task: Refuser ce boulot
-      who: Qui le fait?
-      who_hint: "(Combien manquent encore?)"
     nav:
       all_tasks: L'agenda de la boufcoop
       archive: Boulots déjà effectués (archives)

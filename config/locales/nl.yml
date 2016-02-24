@@ -952,9 +952,8 @@ nl:
         desc: Je bent voor de volgende taken verantwoordelijk.
         title: Taken op je nemen
       tasks_open:
-        action: open taken
-        desc: Er zijn %{size}
         title: open taken
+        view_all: Alle taken bekijken
       title: Hoofdpagina
       your_tasks: Jouw taken
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
@@ -1455,6 +1454,14 @@ nl:
       title: Lopende bestellingen
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
+    task_list:
+      accept_task: Taak accepteren
+      done: Gedaan
+      done_q: Gedaan?
+      mark_done: Taak als gedaan markeren
+      reject_task: Taak laten vallen
+      who: Wie doet het?
+      who_hint: "(Hoeveel zijn er nog nodig?)"
     user_form_fields:
       contact_address_hint: Het adres van je huishouden. Als je dit wijzigt, verandert het ook voor de andere leden van je huishouden.
     workgroup_members:
@@ -1645,14 +1652,6 @@ nl:
       show_group_tasks: Groepstaken tonen
       title: Taken
       title_non_group: Taken voor iedereen!
-    list:
-      accept_task: Taak accepteren
-      done: Gedaan
-      done_q: Gedaan?
-      mark_done: Taak als gedaan markeren
-      reject_task: Taak laten vallen
-      who: Wie doet het?
-      who_hint: "(Hoeveel zijn er nog nodig?)"
     nav:
       all_tasks: Alle taken
       archive: Gedane taken (archief)
