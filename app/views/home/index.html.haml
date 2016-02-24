@@ -6,7 +6,7 @@
 -# placeholder deface to add content using erb[silent]:contains()
 - '<dashboard_top_mark>'
 
-- unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks.size == 0
+- unless @unaccepted_tasks.empty? && @next_tasks.empty?
   %section.row-fluid
     - unless @next_tasks.empty?
       .span3.well
@@ -20,11 +20,12 @@
         %h4= t '.tasks_move.title'
         = t '.tasks_move.desc'
         = link_to t('.tasks_move.action'), user_tasks_path
-    - unless @unassigned_tasks.size == 0
-      .span3.well
-        %h4= t '.tasks_open.title'
-        = t '.tasks_open.desc', size: @unassigned_tasks.size
-        = link_to t('.tasks_open.action'), tasks_path
+
+- if @unassigned_tasks.size > 0
+  %section
+    %h2= t '.tasks_open.title'
+    = render 'shared/task_list', tasks: @unassigned_tasks
+    = link_to t('.tasks_open.view_all'), tasks_path
 
 - if current_user.ordergroup
   = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}

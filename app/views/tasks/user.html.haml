@@ -4,14 +4,13 @@
 - unless @unaccepted_tasks.empty?
   %section
     %h3= t '.title_open'
-    = render 'list', tasks: @unaccepted_tasks
+    = render 'shared/task_list', tasks: @unaccepted_tasks
 
 %section
   %h3= t '.title_accepted'
   - unless @accepted_tasks.empty?
-    = render 'list', tasks: @accepted_tasks
+    = render 'shared/task_list', tasks: @accepted_tasks
   - else
     = t('.more', tasks_link: link_to(t('.tasks_link'), tasks_path)).html_safe
   %br/
   = link_to_top
-
