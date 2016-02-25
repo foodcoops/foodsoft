@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217124256) do
+ActiveRecord::Schema.define(version: 20160217134742) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.date     "delivered_on"
     t.datetime "created_at"
     t.text     "note",         limit: 65535
+    t.integer  "invoice_id"
   end
 
   add_index "deliveries", ["supplier_id"], name: "index_deliveries_on_supplier_id", using: :btree
@@ -155,8 +156,6 @@ ActiveRecord::Schema.define(version: 20160217124256) do
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "supplier_id",    limit: 4
-    t.integer  "delivery_id",    limit: 4
-    t.integer  "order_id",       limit: 4
     t.string   "number",         limit: 255
     t.date     "date"
     t.date     "paid_on"
@@ -169,7 +168,6 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.integer  "created_by_user_id"
   end
 
-  add_index "invoices", ["delivery_id"], name: "index_invoices_on_delivery_id", using: :btree
   add_index "invoices", ["supplier_id"], name: "index_invoices_on_supplier_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
@@ -226,6 +224,7 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.decimal  "foodcoop_result",                  precision: 8, scale: 2
     t.integer  "created_by_user_id", limit: 4
     t.datetime "boxfill"
+    t.integer  "invoice_id"
   end
 
   add_index "orders", ["state"], name: "index_orders_on_state", using: :btree

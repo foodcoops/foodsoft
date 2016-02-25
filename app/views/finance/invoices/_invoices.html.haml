@@ -10,8 +10,8 @@
       %th= heading_helper Invoice, :date
       %th= heading_helper Invoice, :paid_on
       %th= heading_helper Invoice, :amount
-      %th= heading_helper Invoice, :delivery
-      %th= heading_helper Invoice, :order
+      %th= heading_helper Invoice, :deliveries
+      %th= heading_helper Invoice, :orders
       %th= heading_helper Invoice, :note
       %th
       %th
@@ -23,8 +23,14 @@
         %td= link_to h(format_date invoice.date), finance_invoice_path(invoice)
         %td= format_date invoice.paid_on
         %td= number_to_currency invoice.amount
-        %td= link_to Delivery.model_name.human, [invoice.supplier,invoice.delivery] if invoice.delivery
-        %td= link_to format_date(invoice.order.ends), new_finance_order_path(order_id: invoice.order_id) if invoice.order
+        %td><
+          - invoice.deliveries.each_with_index do |delivery, index|
+            = ', ' if index > 0
+            = link_to format_date(delivery.delivered_on), [delivery.supplier,delivery]
+        %td><
+          - invoice.orders.each_with_index do |order, index|
+            = ', ' if index > 0
+            = link_to format_date(order.ends), new_finance_order_path(order_id: order)
         %td= truncate(invoice.note)
         %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
         %td= link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('.confirm_delete')}, :method => :delete,
