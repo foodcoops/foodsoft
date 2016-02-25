@@ -29,6 +29,10 @@ de:
       messagegroups:
         members: Mitglieder
         name: Name
+  home:
+    index:
+      messagethreads:
+        view_all: Alle Nachrichteverläufe anzeigen
   messagegroups:
     index:
       body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
@@ -45,14 +49,24 @@ de:
   messages:
     index:
       messagethreads: Nachrichtenverläufe
+    thread:
+      all_messagethreads: Alle Nachrichtenverläufe
+      reply: Antworten
   messagethreads:
+    groupmessagethreads:
+      show_messagethreads: Alle Nachrichtenverläufe anzeigen
     index:
       messages: Nachrichten
       new: Neue Nachricht
+      other: Allgemeine Nachrichten
       title: Nachrichtenverläufe
+    messagethreads:
+      last_reply_at: Letze Antwort am
+      last_reply_by: Letze Antwort von
+      started_at: Gestartet am
+      started_by: Gestartet von
     show:
-      all_messagethreads: Alle Nachrichtenverläufe
-      reply: Antworten
+      other: Allgemeine Nachrichten
   navigation:
     admin:
       messagegroups: Nachrichtengruppen

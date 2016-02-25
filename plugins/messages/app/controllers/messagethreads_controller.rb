@@ -3,10 +3,11 @@ class MessagethreadsController < ApplicationController
   before_filter -> { require_plugin_enabled FoodsoftMessages }
 
   def index
-    @messagethreads = Message.pub.threads.page(params[:page]).per(@per_page).order(created_at: :desc).includes(:sender)
+    @groups = Group.order(:name)
   end
 
   def show
-    @messages = Message.thread(params[:id]).order(:created_at)
+    @group = Group.find_by_id(params[:id])
+    @messagethreads = Message.pub.threads.where(group: @group).page(params[:page]).per(@per_page).order(created_at: :desc)
   end
 end

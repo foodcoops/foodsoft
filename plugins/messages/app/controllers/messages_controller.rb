@@ -47,4 +47,8 @@ class MessagesController < ApplicationController
       redirect_to messages_url, alert: 'Nachricht ist privat!'
     end
   end
+
+  def thread
+    @messages = Message.thread(params[:id]).order(:created_at)
+  end
 end

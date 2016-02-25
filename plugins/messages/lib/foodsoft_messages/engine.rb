@@ -7,7 +7,7 @@ module FoodsoftMessages
         sub_nav.items <<
           SimpleNavigation::Item.new(primary, :messagegroups, I18n.t('navigation.messagegroups'), context.messagegroups_path)
         sub_nav.items <<
-          SimpleNavigation::Item.new(primary, :messages, I18n.t('navigation.messages'), context.messages_path)
+          SimpleNavigation::Item.new(primary, :messagethreads, I18n.t('navigation.messages'), context.messagethreads_path)
         # move to right before tasks item
         if i = sub_nav.items.index(sub_nav[:tasks])
           sub_nav.items.insert(i, sub_nav.items.delete_at(-1))
