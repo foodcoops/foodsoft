@@ -2,7 +2,7 @@
 class OrderMatrix < OrderPdf
 
   MAX_ARTICLES_PER_PAGE = 16 # How many order_articles shoud written on a page
-  
+
   def filename
     I18n.t('documents.order_matrix.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
   end
@@ -62,7 +62,7 @@ class OrderMatrix < OrderPdf
 
       @order.group_orders.includes(:ordergroup).each do |group_order|
 
-        group_result = [group_order.ordergroup.name.truncate(20)]
+        group_result = [group_order.ordergroup_name.truncate(20)]
 
         for order_article in current_order_articles
           # get the Ordergroup result for this order_article

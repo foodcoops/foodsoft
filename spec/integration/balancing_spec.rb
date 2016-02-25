@@ -40,8 +40,8 @@ feature 'settling an order', js: true do
     expect(page).to have_selector("#group_order_articles_#{oa.id}")
     within("#group_order_articles_#{oa.id}") do
       # make sure these ordergroup names are in the list for this product
-      expect(page).to have_content(go1.ordergroup.name)
-      expect(page).to have_content(go2.ordergroup.name)
+      expect(page).to have_content(go1.ordergroup_name)
+      expect(page).to have_content(go2.ordergroup_name)
       # and that their order results match what we expect
       expect(page).to have_selector("#r_#{goa1.id}")
       expect(find("#r_#{goa1.id}").value.to_f).to eq(3)
