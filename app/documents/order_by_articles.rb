@@ -17,7 +17,7 @@ class OrderByArticles < OrderPdf
       rows = []
       dimrows = []
       for goa in order_article.group_order_articles.ordered
-        rows << [goa.group_order.ordergroup.name,
+        rows << [goa.group_order.ordergroup_name,
                   "#{goa.quantity} + #{goa.tolerance}",
                  goa.result,
                  number_to_currency(goa.total_price(order_article))]

@@ -87,4 +87,8 @@ class GroupOrder < ActiveRecord::Base
     end
   end
 
+  def ordergroup_name
+    ordergroup.name
+  end
+
 end
