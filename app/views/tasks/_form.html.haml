@@ -5,7 +5,7 @@
 - unless local_assigns[:periodic]
   = form.input :user_list, :as => :string, :input_html => { 'data-pre' => form.object.users.map(&:token_attributes).to_json }
 = form.input :required_users
-= form.association :workgroup
+= form.association :workgroup, collection: Workgroup.order(:name)
 = form.input :due_date, as: :date_picker
 - unless local_assigns[:periodic]
   = form.input :done
