@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217194036) do
+ActiveRecord::Schema.define(version: 20160224201529) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20160217194036) do
   add_index "group_order_articles", ["order_article_id"], name: "index_group_order_articles_on_order_article_id", using: :btree
 
   create_table "group_orders", force: :cascade do |t|
-    t.integer  "ordergroup_id",      limit: 4,                         default: 0, null: false
+    t.integer  "ordergroup_id",      limit: 4
     t.integer  "order_id",           limit: 4,                         default: 0, null: false
     t.decimal  "price",                        precision: 8, scale: 2, default: 0, null: false
     t.integer  "lock_version",       limit: 4,                         default: 0, null: false

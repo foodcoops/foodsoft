@@ -1170,6 +1170,8 @@ de:
   model:
     delivery:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
+    group_order:
+      stock_ordergroup_name: Lager (%{user})
     membership:
       no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
     order_article:
@@ -1327,6 +1329,7 @@ de:
       show_invoice: Rechnung anzeigen
       sort_article: Sortiert nach Artikeln
       sort_group: Sortiert nach Gruppen
+      stock_order: Lagerbestellung
       title: 'Bestellung: %{name}'
       warn_not_closed: Achtung, Bestellung wurde noch nicht abgerechnet.
     state:

@@ -31,6 +31,7 @@ class Order < ActiveRecord::Base
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
   scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
+  scope :stock_group_order, -> { group_orders.where(ordergroup_id: nil).first }
 
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
@@ -123,6 +124,10 @@ class Order < ActiveRecord::Base
   # search GroupOrder of given Ordergroup
   def group_order(ordergroup)
     group_orders.where(:ordergroup_id => ordergroup.id).first
+  end
+
+  def stock_group_order
+    group_orders.where(:ordergroup_id => nil).first
   end
 
   # Returns OrderArticles in a nested Array, grouped by category and ordered by article name.
@@ -234,8 +239,10 @@ class Order < ActiveRecord::Base
 
     transaction do                                        # Start updating account balances
       for group_order in gos
-        price = group_order.price * -1                    # decrease! account balance
-        group_order.ordergroup.add_financial_transaction!(price, transaction_note, user)
+        if group_order.ordergroup
+          price = group_order.price * -1                  # decrease! account balance
+          group_order.ordergroup.add_financial_transaction!(price, transaction_note, user)
+        end
       end
 
       if stockit?                                         # Decreases the quantity of stock_articles

@@ -1190,6 +1190,8 @@ en:
   model:
     delivery:
       each_stock_article_must_be_unique: Each stock article must not be listed more than once.
+    group_order:
+      stock_ordergroup_name: Stock (%{user})
     membership:
       no_admin_delete: Membership can not be withdrawn as you are the last administrator.
     order_article:
@@ -1349,6 +1351,7 @@ en:
       show_invoice: Show invoice
       sort_article: Sorted in articles
       sort_group: Sorted in groups
+      stock_order: Stock Order
       title: 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
     state:
