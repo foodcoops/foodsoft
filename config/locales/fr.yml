@@ -57,12 +57,12 @@ fr:
         created_at: Créé le
         created_by: "Établi par"
         date: Date de facturation
-        delivery: Réapprovisionnement
+        deliveries: Réapprovisionnement
         deposit: Consigne facturée
         deposit_credit: Consigne remboursée
         note: Note
         number: Numéro
-        order: Commande
+        orders: Commande
         paid_on: Payée le
         supplier: Fournisseur-e
       message:

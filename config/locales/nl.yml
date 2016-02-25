@@ -57,12 +57,12 @@ nl:
         created_at: Gemaakt op
         created_by: Gemaakt door
         date: Factuurdatum
-        delivery: Levering
+        deliveries: Levering
         deposit: Statiegeld in rekening gebracht
         deposit_credit: Statiegeld teruggekregen
         note: Notitie
         number: Nummer
-        order: Bestelling
+        orders: Bestelling
         paid_on: Betaald op
         supplier: Leverancier
       message:

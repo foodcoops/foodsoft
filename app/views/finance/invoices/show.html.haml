@@ -10,14 +10,20 @@
   %b= heading_helper(Invoice, :supplier) + ':'
   = @invoice.supplier.name
 
-- if @invoice.delivery
+- if @invoice.deliveries.count > 0
   %p
-    %b= heading_helper(Invoice, :delivery) + ':'
-    = t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
-- if @invoice.order
+    %b= heading_helper(Invoice, :deliveries) + ':'
+    %span><
+      - @invoice.deliveries.order(:delivered_on).each_with_index do |delivery, index|
+        = ', ' if index > 0
+        = link_to format_date(delivery.delivered_on), [delivery.supplier,delivery]
+- if @invoice.orders.count > 0
   %p
-    %b= heading_helper(Invoice, :order) + ':'
-    = t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), @invoice.order)).html_safe
+    %b= heading_helper(Invoice, :orders) + ':'
+    %span><
+      - @invoice.orders.order(:ends).each_with_index do |order, index|
+        = ', ' if index > 0
+        = link_to format_date(order.ends), new_finance_order_path(order_id: order)
 
 %p
   %b= heading_helper(Invoice, :number) + ':'

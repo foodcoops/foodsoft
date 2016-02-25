@@ -1,7 +1,7 @@
 class Delivery < ActiveRecord::Base
 
   belongs_to :supplier
-  has_one :invoice
+  belongs_to :invoice
   has_many :stock_changes, -> { includes(:stock_article).order('articles.name ASC') }, :dependent => :destroy
 
   scope :recent, -> { order('created_at DESC').limit(10) }

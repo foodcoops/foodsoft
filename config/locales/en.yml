@@ -57,12 +57,12 @@ en:
         created_at: Created at
         created_by: Created by
         date: Billing date
-        delivery: Delivery
+        deliveries: Delivery
         deposit: Deposit charged
         deposit_credit: Deposit returned
         note: Note
         number: Number
-        order: Order
+        orders: Order
         paid_on: Paid on
         supplier: Supplier
       message:

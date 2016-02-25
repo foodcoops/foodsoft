@@ -1,7 +1,7 @@
 class Finance::InvoicesController < ApplicationController
 
   def index
-    @invoices = Invoice.includes(:supplier, :delivery, :order).order('date DESC').page(params[:page]).per(@per_page)
+    @invoices = Invoice.includes(:supplier, :deliveries, :orders).order('date DESC').page(params[:page]).per(@per_page)
   end
 
   def show
@@ -9,9 +9,9 @@ class Finance::InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.new :supplier_id => params[:supplier_id],
-                           :delivery_id => params[:delivery_id],
-                           :order_id => params[:order_id]
+    @invoice = Invoice.new :supplier_id => params[:supplier_id]
+    @invoice.deliveries << Delivery.find_by_id(params[:delivery_id]) if params[:delivery_id]
+    @invoice.orders << Order.find_by_id(params[:order_id]) if params[:order_id]
   end
 
   def edit
@@ -24,9 +24,9 @@ class Finance::InvoicesController < ApplicationController
 
     if @invoice.save
       flash[:notice] = I18n.t('finance.create.notice')
-      if @invoice.order
+      if @invoice.orders.count == 1
         # Redirect to balancing page
-        redirect_to new_finance_order_url(order_id: @invoice.order.id)
+        redirect_to new_finance_order_url(order_id: @invoice.orders.first.id)
       else
         redirect_to [:finance, @invoice]
       end

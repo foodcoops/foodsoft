@@ -1,11 +1,11 @@
 = simple_form_for([:finance, @invoice]) do |f|
-  = f.hidden_field :delivery_id
-  = f.hidden_field :order_id
+  = f.association :deliveries, multiple: true, as: :hidden
+  = f.association :orders, multiple: true, as: :hidden
 
-  - if @invoice.delivery
-    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
-  - if @invoice.order
-    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), new_finance_order_path(order_id: @invoice.order.id))).html_safe
+  - if @invoice.deliveries.first
+    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.deliveries.first])).html_safe
+  - if @invoice.orders.first
+    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), new_finance_order_path(order_id: @invoice.orders.first.id))).html_safe
 
   - if @invoice.created_at
     = f.input :created_at do

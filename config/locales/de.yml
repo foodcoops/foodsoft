@@ -57,12 +57,12 @@ de:
         created_at: Erstellt am
         created_by: Erstellt von
         date: Rechnungsdatum
-        delivery: Lieferung
+        deliveries: Lieferung
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
         note: Notiz
         number: Nummer
-        order: Bestellung
+        orders: Bestellung
         paid_on: Bezahlt am
         supplier: Lieferant
       message:
