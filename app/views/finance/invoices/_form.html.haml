@@ -19,7 +19,7 @@
           = Invoice.human_attribute_name(:created_by)
         .controls.control-text#article_fc_price
           = show_user @invoice.created_by
-  = f.association :supplier, hint: false
+  = f.association :supplier, collection: Supplier.order(:name), hint: false
   = f.input :number
   = f.input :date, as: :date_picker
   - if current_user.role_finance?
