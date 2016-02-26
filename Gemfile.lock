@@ -15,7 +15,9 @@ PATH
   remote: plugins/messages
   specs:
     foodsoft_messages (0.0.1)
+      base32
       deface (~> 1.0.0)
+      mail
       rails
 
 PATH
@@ -71,6 +73,7 @@ GEM
     addressable (2.4.0)
     arel (6.0.3)
     attribute_normalizer (1.2.0)
+    base32 (0.3.2)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -534,3 +537,6 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   web-console (~> 2.0)
   whenever
+
+BUNDLED WITH
+   1.10.6

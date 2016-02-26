@@ -14,5 +14,9 @@ gem 'foodsoft_messages', path: 'lib/foodsoft_messages'
 This plugin introduces the foodcoop config option `use_messages`, which can be
 set to `false` to disable messages. May be useful in multicoop deployments.
 
+To allow members to respond to messages via email, see the config option
+`reply_email_domain` and the rake task `foodsoft:parse_reply_email`. We need to
+add some documentation on setting it up, though.
+
 This plugin is part of the foodsoft package and uses the GPL-3 license (see
 foodsoft's LICENSE for the full license text).
