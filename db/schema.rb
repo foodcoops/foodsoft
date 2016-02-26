@@ -236,6 +236,8 @@ ActiveRecord::Schema.define(version: 20160224201529) do
     t.datetime "created_at"
     t.integer  "reply_to",       limit: 4
     t.integer  "group_id",       limit: 4
+    t.string   "salt"
+    t.binary   "received_email"
   end
 
   create_table "money_transfers", force: :cascade do |t|

@@ -1,3 +1,5 @@
+require "base32"
+
 class Message < ActiveRecord::Base
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
   belongs_to :group, :class_name => "Group", :foreign_key => "group_id"
@@ -23,6 +25,7 @@ class Message < ActiveRecord::Base
   validates_length_of :subject, :in => 1..255
   validates_inclusion_of :email_state, :in => EMAIL_STATE.values
 
+  before_create :create_salt
   before_validation :clean_up_recipient_ids, :on => :create
 
   def self.deliver(message_id)
@@ -61,8 +64,18 @@ class Message < ActiveRecord::Base
     add_recipients([user])
   end
 
+  def mail_hash_for_user(user)
+    digest = Digest::SHA1.new
+    digest.update self.id.to_s
+    digest.update ":"
+    digest.update salt
+    digest.update ":"
+    digest.update user.id.to_s
+    Base32.encode digest.digest
+  end
+
   # Returns true if this message is a system message, i.e. was sent automatically by Foodsoft itself.
-  def system_message?    
+  def system_message?
     self.sender_id.nil?
   end
 
@@ -94,6 +107,10 @@ class Message < ActiveRecord::Base
   def is_readable_for?(user)
     !private || sender == user || recipients_ids.include?(user.id)
   end
+
+  private
+
+  def create_salt
+    self.salt = [Array.new(6){rand(256).chr}.join].pack("m").chomp
+  end
 end
-
-

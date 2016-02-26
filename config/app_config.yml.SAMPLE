@@ -116,6 +116,9 @@ default: &defaults
   # email address to be used as sender
   email_sender: foodsoft@foodcoop.test
 
+  # domain to be used for reply emails
+  #reply_email_domain: reply.foodcoop.test
+
   # If your foodcoop uses a mailing list instead of internal messaging system
   #mailing_list: list@example.org
   #mailing_list_subscribe: list-subscribe@example.org
