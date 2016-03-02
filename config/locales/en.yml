@@ -54,15 +54,18 @@ en:
         total_price: Sum
       invoice:
         amount: Amount
+        attachment: Attachment
         created_at: Created at
         created_by: Created by
         date: Billing date
-        delivery: Delivery
+        delete_attachment: Delete attachment
+        deliveries: Delivery
         deposit: Deposit charged
         deposit_credit: Deposit returned
+        net_amount: Amount adjusted for refund
         note: Note
         number: Number
-        order: Order
+        orders: Order
         paid_on: Paid on
         supplier: Supplier
       message:
@@ -79,6 +82,7 @@ en:
         ends: Ends at
         name: Supplier
         note: Note
+        pickup: Pickup
         starts: Starts at
         status: Status
         supplier: Supplier
@@ -99,6 +103,7 @@ en:
       ordergroup:
         account_balance: Account balance
         available_funds: Available credit
+        break: (Last) break
         contact: Contact
         contact_address: Address
         contact_person: Contact person
@@ -106,6 +111,7 @@ en:
         description: Description
         ignore_apple_restriction: Ignore order stop by apple points restriction
         last_order: Last order
+        last_user_activity: Last activity
         name: Name
         user_tokens: Members
       page:
@@ -170,6 +176,7 @@ en:
         role_admin: Administration
         role_article_meta: Article database
         role_finance: Finances
+        role_invoices: Invoices
         role_orders: Order management
         role_suppliers: Suppliers
         user_tokens: Members
@@ -210,6 +217,20 @@ en:
       workgroup: Workgroup
   admin:
     access_to: access to
+    bank_accounts:
+      create:
+        notice: Bank account was created
+      destroy:
+        error: 'Bank account could not be deleted: %{message}'
+        notice: Bank account was deleted
+      edit:
+        title: Edit bank account
+      index:
+        title: Bank Accounts
+      new:
+        title: Create bank account
+      update:
+        notice: Bank account was updated
     base:
       index:
         all_ordergroups: All ordergroups
@@ -276,6 +297,9 @@ en:
     users:
       controller:
         sudo_done: You are now logged in as %{user}. Be careful, and do not forget to log out when done!
+      destroy:
+        error: 'User could not be deleted: %{error}'
+        notice: User was deleted
       edit:
         title: Edit user
       index:
@@ -739,6 +763,18 @@ en:
         reload: Reload summary
         with_extra_charge: 'with extra charge:'
         without_extra_charge: 'without extra charge:'
+    bank_accounts:
+      controller:
+        import:
+          alert: 'An error occured: %{error}'
+          notice: '%{count} new transactions have been imported'
+      index:
+        account_statement: Account statement
+        title: Bank Accounts
+    bank_transactions:
+      index:
+        search_placeholder: Search ...
+        title: Bank transactions for %{name}
     create:
       notice: Invoice was created.
     financial_transactions:
@@ -782,6 +818,8 @@ en:
     invoices:
       edit:
         title: Edit invoice
+      form:
+        attachment_hint: Only JPEG and PDF are allowed.
       index:
         action_new: Create new invoice
         title: Invoices
@@ -812,6 +850,8 @@ en:
         only_active: Only active groups
         only_active_desc: "(have placed order at least once in the last 3 months)"
         title: Ordergroups
+      ordergroups:
+        break: '%{start} - %{end}'
     users:
       index:
         body: "<p>Here you can write a message to the members of your Foodcoop. If you'd like others to contact you, please enable it in your %{profile_link}.</p>"
@@ -913,6 +953,7 @@ en:
       role_admin: Admin
       role_article_meta: Articles
       role_finance: Finance
+      role_invoices: Invoices
       role_orders: Orders
       role_suppliers: Suppliers
       show_google_maps: Show it on Google maps
@@ -961,9 +1002,8 @@ en:
         desc: You are responsible for these tasks.
         title: Take over tasks
       tasks_open:
-        action: open task(s)
-        desc: There is/are %{size}
         title: Open tasks
+        view_all: Show all tasks
       title: Homepage
       your_tasks: Your tasks
     no_ordergroups: You are unfortunately not a member of an ordergroup.
@@ -1184,8 +1224,12 @@ en:
   model:
     delivery:
       each_stock_article_must_be_unique: Each stock article must not be listed more than once.
+    group_order:
+      stock_ordergroup_name: Stock (%{user})
     membership:
       no_admin_delete: Membership can not be withdrawn as you are the last administrator.
+    invoice:
+      invalid_mime: has an invalide MIME type (%{mime})
     order_article:
       error_price: must be specified and have a current price price
     page:
@@ -1194,6 +1238,7 @@ en:
       no_ordergroup: no ordergroup
   navigation:
     admin:
+      bank_accounts: Bank Accounts
       config: Configuration
       home: Overview
       ordergroups: Ordergroups
@@ -1209,6 +1254,7 @@ en:
     finances:
       accounts: Manage accounts
       balancing: Account orders
+      bank_accounts: Bank Accounts
       home: Overview
       invoices: Invoices
       title: Finances
@@ -1322,7 +1368,8 @@ en:
       confirm_end: |-
         Do you really want to close the order %{order}?
         There is no going back.
-      description1: "%{state} order from %{supplier} created by %{who}, open from %{starts} until %{ends}."
+      create_invoice: Add invoice
+      description1: "%{state} order from %{supplier} created by %{who}, open from %{starts} until %{ends} and can be picked up on %{pickup}."
       description2: "%{ordergroups} ordered %{article_count} articles, with a total value of %{net_sum} / %{gross_sum} (net / gross)."
       download:
         article_pdf: Article PDF
@@ -1339,8 +1386,10 @@ en:
         default: Search for articles...
         groups: Search for ordergroups...
       search_reset: Reset search
+      show_invoice: Show invoice
       sort_article: Sorted in articles
       sort_group: Sorted in groups
+      stock_order: Stock Order
       title: 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
     state:
@@ -1458,7 +1507,9 @@ en:
       access: Access to
       activated: activated
       apple_limit: Apple points order limit
+      break: 'from %{start} to %{end}'
       deactivated: deactivated
+      no_break: 'no break'
     group_form_fields:
       search: Search ...
       search_user: Search user
@@ -1469,6 +1520,14 @@ en:
       title: Current orders
       total_sum: Total sum
       who_ordered: Who ordered?
+    task_list:
+      accept_task: Accept task
+      done: Done
+      done_q: Done?
+      mark_done: Mark task as done
+      reject_task: Reject task
+      who: Who is doing it?
+      who_hint: "(How much are still needed?)"
     user_form_fields:
       contact_address_hint: The address of your ordergroup. If you update this, it changes for other members of the ordergroup as well.
     workgroup_members:
@@ -1659,14 +1718,6 @@ en:
       show_group_tasks: Show group tasks
       title: Tasks
       title_non_group: Tasks for all!
-    list:
-      accept_task: Accept task
-      done: Done
-      done_q: Done?
-      mark_done: Mark task as done
-      reject_task: Reject task
-      who: Who is doing it?
-      who_hint: "(How much are still needed?)"
     nav:
       all_tasks: All tasks
       archive: Completed tasks (archive)
@@ -1710,6 +1761,7 @@ en:
     close: Close
     copy: Copy
     delete: Delete
+    download: Download
     edit: Edit
     marks:
       close: "&times;"

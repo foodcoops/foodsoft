@@ -12,7 +12,8 @@ class GroupOrdersController < ApplicationController
   end
 
   def new
-    @group_order = @order.group_orders.build(:ordergroup => @ordergroup, :updated_by => current_user)
+    ordergroup = params[:stock_order] ? nil : @ordergroup
+    @group_order = @order.group_orders.build(:ordergroup => ordergroup, :updated_by => current_user)
     @ordering_data = @group_order.load_data
   end
 
@@ -80,13 +81,14 @@ class GroupOrdersController < ApplicationController
       redirect_to :action => 'index'
     end
   rescue ActiveRecord::RecordNotFound
-    redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')  
+    redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')
   end
 
   def ensure_my_group_order
-    @group_order = @ordergroup.group_orders.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')
+    @group_order = GroupOrder.find_by_id(params[:id])
+    if @group_order.ordergroup != @ordergroup && (@group_order.ordergroup || !current_user.role_orders?)
+      redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')
+    end
   end
 
   def enough_apples?

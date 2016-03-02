@@ -156,7 +156,9 @@ Foodsoft::Application.routes.draw do
         end
       end
 
-      resources :invoices
+      resources :invoices do
+        get :attachment
+      end
 
       resources :ordergroups, only: [:index] do
         resources :financial_transactions, as: :transactions
@@ -165,12 +167,28 @@ Foodsoft::Application.routes.draw do
 
       get 'transactions/new_collection' => 'financial_transactions#new_collection', as: 'new_transaction_collection'
       post 'transactions/create_collection' => 'financial_transactions#create_collection', as: 'create_transaction_collection'
+
+      resources :bank_accounts, only: [:index] do
+        member do
+          get :import
+          post :parse_upload
+        end
+
+        resources :bank_transactions, as: :transactions
+      end
+
+      resources :bank_transactions
+
     end
 
     ########### Administration
 
     namespace :admin do
       root to: 'base#index'
+
+      resources :financial_transaction_classes
+
+      resources :financial_transaction_types
 
       resources :users do
         post :sudo, on: :member
@@ -183,6 +201,8 @@ Foodsoft::Application.routes.draw do
       resources :ordergroups do
         get :memberships, on: :member
       end
+
+      resources :bank_accounts
 
       resource :config, only: [:show, :update] do
         get :list

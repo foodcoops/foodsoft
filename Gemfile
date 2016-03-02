@@ -47,11 +47,13 @@ gem 'roo', '~> 2.0.0'
 gem 'roo-xls'
 gem 'spreadsheet'
 gem 'gaffe'
+gem 'ruby-filemagic'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', github: 'technoweenie/acts_as_versioned'
 gem 'foodsoft_wiki', path: 'plugins/wiki'
 gem 'foodsoft_messages', path: 'plugins/messages'
+gem 'foodsoft_documents', path: 'plugins/documents'
 
 # plugins not enabled by default
 #gem 'foodsoft_current_orders', path: 'plugins/current_orders'

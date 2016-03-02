@@ -17,7 +17,7 @@
         %tr[group_order_article]
           %td
           %td{:style=>"width:50%"}
-            = group_order_article.group_order.ordergroup.name
+            = group_order_article.group_order.ordergroup_name
           %td.center= group_order_article_edit_result(group_order_article)
           %td.numeric= number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result)
           %td.actions{:style=>"width:1em"}

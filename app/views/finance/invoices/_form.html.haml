@@ -1,24 +1,27 @@
 = simple_form_for([:finance, @invoice]) do |f|
-  = f.hidden_field :delivery_id
-  = f.hidden_field :order_id
+  = f.association :deliveries, multiple: true, as: :hidden
+  = f.association :orders, multiple: true, as: :hidden
 
-  - if @invoice.delivery
-    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.delivery])).html_safe
-  - if @invoice.order
-    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), new_finance_order_path(order_id: @invoice.order.id))).html_safe
+  - if @invoice.deliveries.first
+    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.deliveries.first])).html_safe
+  - if @invoice.orders.first
+    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), new_finance_order_path(order_id: @invoice.orders.first.id))).html_safe
 
   - if @invoice.created_at
     = f.input :created_at do
       = format_time(@invoice.created_at)
     = f.input :created_by do
       = show_user(@invoice.created_by)
-  = f.association :supplier, hint: false
+  = f.association :supplier, collection: Supplier.order(:name), hint: false
   = f.input :number
   = f.input :date, as: :date_picker
-  = f.input :paid_on, as: :date_picker
+  - if current_user.role_finance?
+    = f.input :paid_on, as: :date_picker
   = f.input :amount, as: :string
   = f.input :deposit, as: :string
   = f.input :deposit_credit, as: :string
+  = f.input :attachment, as: :file, hint: t('.attachment_hint')
+  = f.input :delete_attachment, as: :boolean
   = f.input :note
   .form-actions
     = f.submit class: 'btn'

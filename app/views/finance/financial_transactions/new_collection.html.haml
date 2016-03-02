@@ -20,6 +20,12 @@
   .well.well-small= t('.sidebar')
 
 = form_tag finance_create_transaction_collection_path do
+  - if @bank_transaction
+    = hidden_field_tag 'bank_transaction_id', @bank_transaction.id
+  - if FinancialTransactionType.count > 1
+    %p
+      %b= heading_helper FinancialTransaction, :financial_transaction_type
+      = select_tag :type, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] })
   %p
     %b= heading_helper FinancialTransaction, :note
     = text_field_tag :note, params[:note], class: 'input-xlarge', required: 'required'

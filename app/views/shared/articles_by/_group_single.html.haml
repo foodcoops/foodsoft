@@ -2,7 +2,7 @@
   - if not defined?(heading) or heading
     %tr.list-heading
       %th{colspan: 9}
-        %h4.name= group_order.ordergroup.name
+        %h4.name= group_order.ordergroup_name
   - total = 0
   - for goa in group_order.group_order_articles.ordered.includes(:order_article)
     - total += goa.total_price

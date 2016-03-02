@@ -20,7 +20,9 @@ class User < ActiveRecord::Base
   has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
   
   attr_accessor :password, :settings_attributes
-  
+
+  scope :undeleted, -> { where(deleted_at: nil) }
+
   # makes the current_user (logged-in-user) available in models
   cattr_accessor :current_user
   
@@ -143,7 +145,12 @@ class User < ActiveRecord::Base
   def role_finance?
     groups.detect {|group| group.role_finance?}
   end
-  
+
+  # Checks the invoices role
+  def role_invoices?
+    groups.detect {|group| group.role_invoices?}
+  end
+
   # Checks the article_meta role
   def role_article_meta?
     groups.detect {|group| group.role_article_meta?}
@@ -171,6 +178,14 @@ class User < ActiveRecord::Base
   #Returns an array with the users groups (but without the Ordergroups -> because tpye=>"")
   def member_of_groups()
      self.groups.where(type: '')
+  end
+
+  def deleted?
+    deleted_at.present?
+  end
+
+  def mark_as_deleted
+    update_column :deleted_at, Time.now
   end
 
   def self.authenticate(login, password)

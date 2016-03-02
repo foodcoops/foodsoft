@@ -1,0 +1,10 @@
+- title t('.title')
+
+- content_for :actionbar do
+  = link_to t('.messages'), messages_path, class: 'btn'
+  = link_to t('.new'), new_message_path, class: 'btn btn-primary'
+
+= render 'groupmessagethreads', group: nil, name: t('.other'), id: 0
+
+- for group in @groups
+  = render 'groupmessagethreads', group: group, name: group.name, id: group.id

@@ -54,15 +54,18 @@ fr:
         total_price: Total
       invoice:
         amount: Montant
+        attachment: Appendice
         created_at: Créé le
         created_by: "Établi par"
         date: Date de facturation
-        delivery: Réapprovisionnement
+        delete_attachment: Supprimer appendice
+        deliveries: Réapprovisionnement
         deposit: Consigne facturée
         deposit_credit: Consigne remboursée
+        net_amount: Montant recalculé en excluant les consignes
         note: Note
         number: Numéro
-        order: Commande
+        orders: Commande
         paid_on: Payée le
         supplier: Fournisseur-e
       message:
@@ -169,6 +172,7 @@ fr:
         role_admin: Administration
         role_article_meta: Base de données des produits
         role_finance: Trésorerie
+        role_invoices: Facture
         role_orders: Gestion des commandes
         role_suppliers: Contact avec les fournisseur-e-s
         user_tokens: Membres
@@ -178,12 +182,12 @@ fr:
         article:
           attributes:
             name:
-              taken: 
-              taken_with_unit: 
+              taken:
+              taken_with_unit:
         supplier:
           attributes:
             shared_sync_method:
-              included: 
+              included:
         task:
           attributes:
             done:
@@ -271,6 +275,9 @@ fr:
     users:
       controller:
         sudo_done: 
+      destroy:
+        error: 'La ajouter n''a pas pu être dissoute: %{error}'
+        notice: La ajouter a été supprimée
       edit:
         title: modifier les données sur le_la membre
       index:
@@ -906,6 +913,7 @@ fr:
       role_admin: Administrateur
       role_article_meta: Article
       role_finance: Finances
+      role_invoices: Facture
       role_orders: Commande
       role_suppliers: Fournisseur-e
       show_google_maps: Afficher la position sur Google maps
@@ -959,9 +967,8 @@ fr:
         desc: Tu as du boulot de prévu.
         title: Accepter des boulot
       tasks_open:
-        action: boulot(s) disponible(s)
-        desc: Il y a %{size}
         title: Boulots disponibles
+        view_all: Afficher tous les boulots
       title: Page d'accueil
       your_tasks: Voilà le boulot que tu as accepté en ce moment
     no_ordergroups: Tu ne fais encore partie d'aucune cellule
@@ -1309,6 +1316,7 @@ fr:
       comments_link: Commenaire
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment clôturer la commande %{order}? Pas d'annulation possible.
+      create_invoice: Ajouter une facture
       description1: Commande %{state} de %{supplier} créée par %{who}, ouverte du %{starts} au %{ends}.
       description2: "%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)"
       download:
@@ -1326,6 +1334,7 @@ fr:
         default: Rechercher des articles...
         groups: Rechercher des cellules...
       search_reset: Réinitialiser la recherche
+      show_invoice: Afficher la facture
       sort_article: Trié par article
       sort_group: Trié par cellules
       title: 'Commande: %{name}'
@@ -1456,6 +1465,14 @@ fr:
       title: Commandes en cours
       total_sum: Total
       who_ordered: Qui a commandé?
+    task_list:
+      accept_task: Te charger de ce boulot
+      done: Effectué
+      done_q: Effectué?
+      mark_done: Marquer ce boulot comme étant effectué
+      reject_task: Refuser ce boulot
+      who: Qui le fait?
+      who_hint: "(Combien manquent encore?)"
     user_form_fields:
       contact_address_hint: 
     workgroup_members:
@@ -1654,14 +1671,6 @@ fr:
       show_group_tasks: Afficher l'agenda de cette équipe
       title: Agenda
       title_non_group: Boulots ouverts à tou-te-s
-    list:
-      accept_task: Te charger de ce boulot
-      done: Effectué
-      done_q: Effectué?
-      mark_done: Marquer ce boulot comme étant effectué
-      reject_task: Refuser ce boulot
-      who: Qui le fait?
-      who_hint: "(Combien manquent encore?)"
     nav:
       all_tasks: L'agenda de la boufcoop
       archive: Boulots déjà effectués (archives)
@@ -1705,6 +1714,7 @@ fr:
     close: Fermer
     copy: 
     delete: Supprimer
+    download: Télécharger
     edit: Modifier
     marks:
       close: "&times;"

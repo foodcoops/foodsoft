@@ -9,9 +9,9 @@ class Order < ActiveRecord::Base
   has_many :group_orders, :dependent => :destroy
   has_many :ordergroups, :through => :group_orders
   has_many :users_ordered, :through => :ordergroups, :source => :users
-  has_one :invoice
   has_many :comments, -> { order('created_at') }, :class_name => "OrderComment"
   has_many :stock_changes
+  belongs_to :invoice
   belongs_to :supplier
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
@@ -31,6 +31,7 @@ class Order < ActiveRecord::Base
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
   scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
+  scope :stock_group_order, -> { group_orders.where(ordergroup_id: nil).first }
 
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
@@ -123,6 +124,10 @@ class Order < ActiveRecord::Base
   # search GroupOrder of given Ordergroup
   def group_order(ordergroup)
     group_orders.where(:ordergroup_id => ordergroup.id).first
+  end
+
+  def stock_group_order
+    group_orders.where(:ordergroup_id => nil).first
   end
 
   # Returns OrderArticles in a nested Array, grouped by category and ordered by article name.
@@ -234,8 +239,10 @@ class Order < ActiveRecord::Base
 
     transaction do                                        # Start updating account balances
       for group_order in gos
-        price = group_order.price * -1                    # decrease! account balance
-        group_order.ordergroup.add_financial_transaction!(price, transaction_note, user)
+        if group_order.ordergroup
+          price = group_order.price * -1                    # decrease! account balance
+          group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, FinancialTransactionType.first, nil) # TODO: make type a config option
+        end
       end
 
       if stockit?                                         # Decreases the quantity of stock_articles

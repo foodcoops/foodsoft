@@ -6,7 +6,7 @@
 -# placeholder deface to add content using erb[silent]:contains()
 - '<dashboard_top_mark>'
 
-- unless @unaccepted_tasks.empty? && @next_tasks.empty? && @unassigned_tasks.size == 0
+- unless @unaccepted_tasks.empty? && @next_tasks.empty?
   %section.row-fluid
     - unless @next_tasks.empty?
       .span3.well
@@ -20,11 +20,12 @@
         %h4= t '.tasks_move.title'
         = t '.tasks_move.desc'
         = link_to t('.tasks_move.action'), user_tasks_path
-    - unless @unassigned_tasks.size == 0
-      .span3.well
-        %h4= t '.tasks_open.title'
-        = t '.tasks_open.desc', size: @unassigned_tasks.size
-        = link_to t('.tasks_open.action'), tasks_path
+
+- if @unassigned_tasks.size > 0
+  %section
+    %h2= t '.tasks_open.title'
+    = render 'shared/task_list', tasks: @unassigned_tasks
+    = link_to t('.tasks_open.view_all'), tasks_path
 
 - if current_user.ordergroup
   = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}
@@ -52,15 +53,27 @@
         %tr
           %th= heading_helper FinancialTransaction, :created_on
           %th= heading_helper FinancialTransaction, :user
+          - if FinancialTransactionType.count > 1
+            %th= heading_helper FinancialTransaction, :financial_transaction_type
           %th= heading_helper FinancialTransaction, :note
-          %th= heading_helper FinancialTransaction, :amount
+          - FinancialTransactionClass.table_columns.each do |fc|
+            %th
+              - if fc.name?
+                = fc.name
+              - else
+                = heading_helper FinancialTransaction, :amount
         - for ft in current_user.ordergroup.financial_transactions.limit(5).order('created_on DESC')
           %tr
             %td= format_time(ft.created_on)
             %td= h(show_user(ft.user))
+            - if FinancialTransactionType.count > 1
+              %td= h(ft.financial_transaction_type.name)
             %td= h(ft.note)
             - color = ft.amount < 0 ? 'red' : 'black'
-            %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
+            - FinancialTransactionClass.table_columns.each do |fc|
+              %td{:style => "color:#{color}; width:5em", :class => "currency"}
+                - if ft.financial_transaction_type.financial_transaction_class == fc
+                  = number_to_currency(ft.amount)
       %br/
       %p= link_to t('.my_ordergroup.transactions.view'), my_ordergroup_path
 

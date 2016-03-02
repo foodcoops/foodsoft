@@ -1,12 +1,13 @@
 language: ruby
 sudo: false
-rvm: 
+rvm:
   - 2.1
 services:
   - redis-server
 addons:
   apt:
     packages:
+      - libmagic-dev
       - metacity
 env: COVERALLS=1
 before_install:

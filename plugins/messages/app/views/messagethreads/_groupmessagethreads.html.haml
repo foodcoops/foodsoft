@@ -1,0 +1,8 @@
+- messagethreads = Message.pub.threads.where(group: group).order(created_at: :desc).limit(5)
+- unless messagethreads.empty?
+  %section
+    %h3
+      = name
+      %small= link_to t('.show_messagethreads'), messagethread_path(id)
+    = render 'messagethreads', messagethreads: messagethreads, pagination: false
+    = link_to_top

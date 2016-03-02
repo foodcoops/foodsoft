@@ -54,15 +54,18 @@ de:
         total_price: Summe
       invoice:
         amount: Betrag
+        attachment: Anhang
         created_at: Erstellt am
         created_by: Erstellt von
         date: Rechnungsdatum
-        delivery: Lieferung
+        delete_attachment: Anhang löschen
+        deliveries: Lieferung
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
+        net_amount: Pfandbereinigter Betrag
         note: Notiz
         number: Nummer
-        order: Bestellung
+        orders: Bestellung
         paid_on: Bezahlt am
         supplier: Lieferant
       message:
@@ -78,6 +81,7 @@ de:
         ends: Endet am
         name: Lieferant
         note: Notiz
+        pickup: Abholung
         starts: Läuft vom
         status: Status
         supplier: Lieferant
@@ -98,6 +102,7 @@ de:
       ordergroup:
         account_balance: Kontostand
         available_funds: Verfügbares Guthaben
+        break: (Letzte) Pause
         contact: Kontakt
         contact_address: Adresse
         contact_person: Kontaktperson
@@ -105,6 +110,7 @@ de:
         description: Beschreibung
         ignore_apple_restriction: Bestellstop bei zu wenig Äpfeln ignorieren
         last_order: Zuletst bestellt
+        last_user_activity: Zuletzt aktiv
         name: Name
         user_tokens: Mitglieder
       page:
@@ -169,6 +175,7 @@ de:
         role_admin: Administration
         role_article_meta: Artikeldatenbank
         role_finance: Finanzen
+        role_invoices: Rechnungen
         role_orders: Bestellverwaltung
         role_suppliers: Lieferanten
         user_tokens: Mitglieder
@@ -271,6 +278,9 @@ de:
     users:
       controller:
         sudo_done: Du bist jetzt als Benutzer %{user} angemeldet. Sei vorsichtig und melde dich ab, wenn du fertig bist!
+      destroy:
+        error: 'Benutzer/in konnte nicht gelöscht werden: %{error}'
+        notice: Benutzer/in wurde gelöscht
       edit:
         title: Benutzer/in bearbeiten
       index:
@@ -769,6 +779,8 @@ de:
     invoices:
       edit:
         title: Rechnung bearbeiten
+      form:
+        attachment_hint: Es sind nur JPEG und PDF erlaubt.
       index:
         action_new: Neue Rechnung anlegen
         title: Rechnungen
@@ -799,6 +811,8 @@ de:
         only_active: Nur aktive
         only_active_desc: "(mindestens einmal in den letzten 3 Monaten bestellt)"
         title: Bestellgruppen
+      ordergroups:
+        break: '%{start} - %{end}'
     users:
       index:
         body: "<p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben. Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>"
@@ -900,6 +914,7 @@ de:
       role_admin: Admin
       role_article_meta: Artikel
       role_finance: Finanzen
+      role_invoices: Rechnungen
       role_orders: Bestellung
       role_suppliers: Lieferanten
       show_google_maps: Show it on Google maps
@@ -948,9 +963,8 @@ de:
         desc: Du bis für Aufgaben verantwortlich.
         title: Aufgaben übernehmen
       tasks_open:
-        action: offene Aufgabe(n)
-        desc: Es gibt %{size}
         title: Offene Aufgaben
+        view_all: Alle Aufgaben anzeigen
       title: Startseite
       your_tasks: Deine Aufgaben
     no_ordergroups: Leider bist Du kein Mitglied einer Bestellgruppe
@@ -1164,8 +1178,12 @@ de:
   model:
     delivery:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
+    group_order:
+      stock_ordergroup_name: Lager (%{user})
     membership:
       no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
+    invoice:
+      invalid_mime: hat einen ungültigen MIME-Typ (%{mime})
     order_article:
       error_price: muss angegeben sein und einen aktuellen Preis haben
     page:
@@ -1300,7 +1318,8 @@ de:
       confirm_end: |-
         Willst Du wirklich die Bestellung %{order} beenden?
         Es gibt kein zurück.
-      description1: "%{state} Bestellung von %{supplier} angelegt von %{who}, läuft von %{starts} bis %{ends}."
+      create_invoice: Rechnung anlegen
+      description1: "%{state} Bestellung von %{supplier} angelegt von %{who}, läuft von %{starts} bis %{ends} und kann voraussichtlich am %{pickup} abgeholt werden."
       description2: "%{ordergroups} haben %{article_count} Artikel mit einem Gesamtwert von %{net_sum} / %{gross_sum} (netto / brutto) bestellt."
       download:
         article_pdf: Artikel PDF
@@ -1317,8 +1336,10 @@ de:
         default: Suche nach Artikeln ...
         groups: Suche nach Bestellgruppen ...
       search_reset: Suche zurücksetzen
+      show_invoice: Rechnung anzeigen
       sort_article: Sortiert nach Artikeln
       sort_group: Sortiert nach Gruppen
+      stock_order: Lagerbestellung
       title: 'Bestellung: %{name}'
       warn_not_closed: Achtung, Bestellung wurde noch nicht abgerechnet.
     state:
@@ -1436,7 +1457,9 @@ de:
       access: Zugriff auf
       activated: aktiviert
       apple_limit: "Äpfel-Bestellbeschränkung"
+      break: 'von %{start} bis %{end}'
       deactivated: deaktiviert
+      no_break: 'keine Pause'
     group_form_fields:
       search: Suche ...
       search_user: Nach Nutzerin suchen
@@ -1447,6 +1470,14 @@ de:
       title: Laufende Bestellungen
       total_sum: Gesamtsumme
       who_ordered: Wer hat bestellt?
+    task_list:
+      accept_task: Aufgabe übernehmen
+      done: Erledigt
+      done_q: Erledigt?
+      mark_done: Aufgabe als erledigt markieren
+      reject_task: Aufgabe ablehnen
+      who: Wer machts?
+      who_hint: "(Wie viele werden noch benötigt?)"
     user_form_fields:
       contact_address_hint: Die Adresse deiner Bestellgruppe. Wenn du sie aktualisierst, wird sie auch bei den anderen Mitgliedern deiner Bestellgruppe aktualisiert.
     workgroup_members:
@@ -1637,14 +1668,6 @@ de:
       show_group_tasks: Gruppenaufgaben anzeigen
       title: Aufgaben
       title_non_group: Aufgaben für alle!
-    list:
-      accept_task: Aufgabe übernehmen
-      done: Erledigt
-      done_q: Erledigt?
-      mark_done: Aufgabe als erledigt markieren
-      reject_task: Aufgabe ablehnen
-      who: Wer machts?
-      who_hint: "(Wie viele werden noch benötigt?)"
     nav:
       all_tasks: Alle Aufgaben
       archive: Erledigte Aufgaben (Archiv)
@@ -1688,6 +1711,7 @@ de:
     close: Schließen
     copy: kopieren
     delete: Löschen
+    download: Herunterladen
     edit: Bearbeiten
     marks:
       close: "&times;"

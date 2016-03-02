@@ -1,0 +1,70 @@
+- title t('.title', import_id: @bank_transaction.import_id)
+
+%p
+  %b= heading_helper(BankTransaction, :import_id) + ':'
+  = @bank_transaction.import_id
+%p
+  %b= heading_helper(BankTransaction, :booking_date) + ':'
+  = @bank_transaction.booking_date
+%p
+  %b= heading_helper(BankTransaction, :value_date) + ':'
+  = @bank_transaction.value_date
+%p
+  %b= heading_helper(BankTransaction, :amount) + ':'
+  = number_to_currency(@bank_transaction.amount)
+%p
+  %b= heading_helper(BankTransaction, :booking_type) + ':'
+  = @bank_transaction.booking_type
+%p
+  %b= heading_helper(BankTransaction, :iban) + ':'
+  = @bank_transaction.iban
+%p
+  %b= heading_helper(BankTransaction, :reference) + ':'
+  = @bank_transaction.reference
+%p
+  %b= heading_helper(BankTransaction, :text) + ':'
+  = @bank_transaction.text
+
+- unless @bank_transaction.receipt.blank?
+  %pre= preserve @bank_transaction.receipt
+- if @bank_transaction.image
+  %p= image_tag @bank_transaction.image_url
+
+- if @bank_transaction.money_transfer
+  %hr
+  - if @bank_transaction.money_transfer.financial_transactions.count > 0
+    %h3= t('.related_financial_transactions')
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= heading_helper FinancialTransaction, :created_on
+          %th= heading_helper FinancialTransaction, :ordergroup
+          %th= heading_helper FinancialTransaction, :note
+          %th.numeric= heading_helper FinancialTransaction, :amount
+      %tbody
+        - @bank_transaction.money_transfer.financial_transactions.each do |ft|
+          %tr
+            %td= format_date(ft.created_on)
+            %td= link_to h(ft.ordergroup.name), finance_ordergroup_transactions_path(ft.ordergroup)
+            %td= ft.note
+            %td.numeric{:style => "color:#{ft.amount < 0 ? 'red' : 'black'}"}= number_to_currency(ft.amount)
+  - if @bank_transaction.money_transfer.invoices.count > 0
+    %h3= t('.related_invoices')
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= heading_helper Invoice, :number
+          %th= heading_helper Invoice, :supplier
+          %th= heading_helper Invoice, :date
+          %th= heading_helper Invoice, :paid_on
+          %th= heading_helper Invoice, :amount
+      %tbody
+        - for invoice in @bank_transaction.money_transfer.invoices
+          %tr
+            %td= link_to h(invoice.number), finance_invoice_path(invoice)
+            %td= invoice.supplier.name
+            %td= link_to h(format_date invoice.date), finance_invoice_path(invoice)
+            %td= format_date invoice.paid_on
+            %td= number_to_currency invoice.amount
+
+= link_to t('ui.or_cancel'), finance_bank_account_transactions_path(@bank_transaction.bank_account)

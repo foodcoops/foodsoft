@@ -1,5 +1,13 @@
 - title t('.title', name: @order.name)
 
+- if current_user.role_finance? || current_user.role_invoices?
+  - content_for :actionbar do
+    - if @order.invoice.present?
+      = link_to t('.show_invoice'), finance_invoice_path(@order.invoice), class: 'btn'
+    - elsif @order.closed?
+      = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
+        class: 'btn'
+
 .well
   = close_button :alert
   %p
@@ -8,7 +16,8 @@
                supplier: supplier_link(@order),
                who: show_user_link(@order.created_by),
                starts: format_time(@order.starts),
-               ends: format_time(@order.ends)
+               ends: format_time(@order.ends),
+               pickup: format_date(@order.pickup)
     %br
     = raw t '.description2',
                ordergroups: ordergroup_count(@order),
@@ -62,6 +71,10 @@
     - if @order.open?
       = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
         data: {confirm: t('.confirm_end', order: @order.name)}
+      - if @order.stock_group_order
+        = link_to t('.stock_order'), edit_group_order_path(@order.stock_group_order, :order_id => @order.id), class: 'btn'
+      - else
+        = link_to t('.stock_order'), new_group_order_path(:order_id => @order.id, :stock_order => true), class: 'btn'
       = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
     - elsif not @order.closed? and not @order.stockit?
       = receive_button @order

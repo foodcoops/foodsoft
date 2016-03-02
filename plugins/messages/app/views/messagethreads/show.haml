@@ -1,0 +1,7 @@
+- if @group.nil?
+  - title t '.other'
+- else
+  - title @group.name
+
+#messagethreads
+  = render 'messagethreads', messagethreads: @messagethreads, pagination: true

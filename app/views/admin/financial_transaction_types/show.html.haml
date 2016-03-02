@@ -1,0 +1,8 @@
+- title t '.title', name: @financial_transaction_type.name
+
+%p
+  %b= heading_helper(FinancialTransactionType, :financial_transaction_class) + ':'
+  = @financial_transaction_type.financial_transaction_class.name
+
+= link_to t('ui.edit'), edit_admin_financial_transaction_type_path(@financial_transaction_type), class: 'btn'
+= link_to t('ui.delete'), [:admin, @financial_transaction_type], :data => {:confirm => t('.confirm')}, :method => :delete, class: 'btn btn-danger'

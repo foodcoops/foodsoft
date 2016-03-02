@@ -3,6 +3,7 @@
   %thead
     %tr
       %th= sort_link_helper heading_helper(Order, :supplier), "supplier"
+      %th= sort_link_helper heading_helper(Order, :pickup), "pickup"
       %th= heading_helper Order, :starts
       %th= sort_link_helper heading_helper(Order, :ends), "ends"
       %th= heading_helper Order, :status
@@ -11,6 +12,7 @@
     - @orders.each do |order|
       %tr
         %td= order.name
+        %td= format_date(order.pickup)
         %td= format_time(order.starts)
         %td= format_time(order.ends)
         %td= t(order.state, scope: 'orders.state')

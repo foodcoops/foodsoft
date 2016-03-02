@@ -7,6 +7,8 @@
     %tr
       %th= heading_helper Ordergroup, :name
       %th= heading_helper Ordergroup, :user_tokens
+      %th= heading_helper Ordergroup, :break
+      %th= heading_helper Ordergroup, :last_user_activity
       %th= heading_helper Ordergroup, :last_order
 
   %tbody
@@ -14,5 +16,9 @@
       %tr
         %td= ordergroup.name
         %td=h ordergroup.users.collect { |u| show_user(u) }.join(", ")
+        - if ordergroup.break_start? or ordergroup.break_end?
+          %td= raw t '.break', start: format_date(ordergroup.break_start), end: format_date(ordergroup.break_end)
+        - else
+          %td
+        %td= format_date ordergroup.last_user_activity
         %td= format_date ordergroup.last_order.try(:starts)
-

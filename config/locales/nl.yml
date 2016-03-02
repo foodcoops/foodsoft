@@ -54,15 +54,18 @@ nl:
         total_price: Som
       invoice:
         amount: Bedrag
+        attachment: Bijlage
         created_at: Gemaakt op
         created_by: Gemaakt door
         date: Factuurdatum
-        delivery: Levering
+        delete_attachment: Verwijder bijlage
+        deliveries: Levering
         deposit: Statiegeld in rekening gebracht
         deposit_credit: Statiegeld teruggekregen
+        net_amount: Bedrag gecorrigeerd voor statiegeld
         note: Notitie
         number: Nummer
-        order: Bestelling
+        orders: Bestelling
         paid_on: Betaald op
         supplier: Leverancier
       message:
@@ -169,6 +172,7 @@ nl:
         role_admin: Beheer
         role_article_meta: Artikelen
         role_finance: Financiën
+        role_invoices: Facturen
         role_orders: Bestellingen
         role_suppliers: Leveranciers
         user_tokens: Leden
@@ -271,6 +275,9 @@ nl:
     users:
       controller:
         sudo_done: Je bent nu ingelogd als %{user}. Wees voorzichtig, en vergeet niet uit te loggen als je klaar bent!
+      destroy:
+        error: 'Gebruiker kon niet verwijderd worden: %{error}'
+        notice: Gebruiker is verwijderd
       edit:
         title: Lid bewerken
       index:
@@ -900,6 +907,7 @@ nl:
       role_admin: Admin
       role_article_meta: Artikelen
       role_finance: Financiën
+      role_invoices: Facturen
       role_orders: Bestelling
       role_suppliers: Leveranciers
       show_google_maps: Op Google maps bekijken
@@ -950,9 +958,8 @@ nl:
         desc: Je bent voor de volgende taken verantwoordelijk.
         title: Taken op je nemen
       tasks_open:
-        action: open taken
-        desc: Er zijn %{size}
         title: open taken
+        view_all: Alle taken bekijken
       title: Hoofdpagina
       your_tasks: Jouw taken
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
@@ -1304,6 +1311,7 @@ nl:
       confirm_end: |-
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
+      create_invoice: Factuur toevoegen
       description1: "%{state} bestelling van %{supplier}, geopend door %{who}, open van %{starts} tot %{ends}."
       description2: "%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto)."
       download:
@@ -1321,6 +1329,7 @@ nl:
         default: Artikelen zoeken...
         groups: Huishoudens zoeken...
       search_reset: Zoekopdracht wissen
+      show_invoice: Factuur tonen
       sort_article: Per artikel
       sort_group: Per huishouden
       title: 'Bestelling: %{name}'
@@ -1451,6 +1460,14 @@ nl:
       title: Lopende bestellingen
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
+    task_list:
+      accept_task: Taak accepteren
+      done: Gedaan
+      done_q: Gedaan?
+      mark_done: Taak als gedaan markeren
+      reject_task: Taak laten vallen
+      who: Wie doet het?
+      who_hint: "(Hoeveel zijn er nog nodig?)"
     user_form_fields:
       contact_address_hint: Het adres van je huishouden. Als je dit wijzigt, verandert het ook voor de andere leden van je huishouden.
     workgroup_members:
@@ -1641,14 +1658,6 @@ nl:
       show_group_tasks: Groepstaken tonen
       title: Taken
       title_non_group: Taken voor iedereen!
-    list:
-      accept_task: Taak accepteren
-      done: Gedaan
-      done_q: Gedaan?
-      mark_done: Taak als gedaan markeren
-      reject_task: Taak laten vallen
-      who: Wie doet het?
-      who_hint: "(Hoeveel zijn er nog nodig?)"
     nav:
       all_tasks: Alle taken
       archive: Gedane taken (archief)
@@ -1692,6 +1701,7 @@ nl:
     close: Sluiten
     copy: Kopiëren
     delete: Verwijder
+    download: Downloaden
     edit: Bewerk
     marks:
       close: "&times;"

@@ -20,6 +20,7 @@ class Task < ActiveRecord::Base
   validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 0
   validates_length_of :description, maximum: 250
   validates :done, exclusion: { in: [true] }, if: :periodic?, on: :create
+  validates_presence_of :due_date, if: :periodic?
 
   before_save :exclude_from_periodic_task_group, if: :changed?, unless: :new_record?
   after_save :update_ordergroup_stats

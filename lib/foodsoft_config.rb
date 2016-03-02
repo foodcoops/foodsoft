@@ -80,6 +80,10 @@ class FoodsoftConfig
       setup_database
     end
 
+    def select_multifoodcoop(foodcoop)
+      select_foodcoop foodcoop if config[:multi_coop_install]
+    end
+
     # Return configuration value for the currently selected foodcoop.
     #
     # First tries to read configuration from the database (cached),
@@ -134,15 +138,20 @@ class FoodsoftConfig
       keys.map(&:to_s).uniq
     end
 
+    # @return [Array<String>] Valid names of foodcoops.
+    def foodcoops
+      if config[:multi_coop_install]
+        APP_CONFIG.keys.reject { |coop| coop =~ /^(default|development|test|production)$/ }
+      else
+        config[:default_scope]
+      end
+    end
+
     # Loop through each foodcoop and executes the given block after setup config and database
     def each_coop
-      if config[:multi_coop_install]
-        APP_CONFIG.keys.reject { |coop| coop =~ /^(default|development|test|production)$/ }.each do |coop|
-          select_foodcoop coop
-          yield coop
-        end
-      else
-        yield config[:default_scope]
+      foodcoops.each do |coop|
+        select_multifoodcoop coop
+        yield coop
       end
     end
 

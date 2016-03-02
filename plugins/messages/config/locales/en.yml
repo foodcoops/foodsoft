@@ -8,9 +8,35 @@ en:
         recipient_tokens: Recipients
         sent_to_all: Send to all members
         subject: Subject
+      messagegroup:
+        description: Description
+        name: Name
+        user_tokens: Members
     models:
       message: Message
+      messagegroup: Messagegroup
   admin:
+    messagegroups:
+      destroy:
+        error: 'Messagegroup could not be deleted: %{error}'
+        notice: Messagegroup was deleted
+      edit:
+        title: Edit messagegroup
+      index:
+        first_paragraph: Here you can create %{url}, edit and delete them.
+        new_messagegroup: Create new messagegroup
+        new_messagegroups: new messagegroups
+        title: Messagegroups
+      new:
+        title: Create messagegroup
+      show:
+        confirm: Are you sure?
+        edit: Edit group/members
+        send_message: Send message
+        title: Messagegroup %{name}
+      messagegroups:
+        members: Members
+        name: Name
     ordergroups:
       show:
         send_message: Send message
@@ -39,10 +65,24 @@ en:
         view_all: See all messages
     start_nav:
       write_message: Write message
+  messagegroups:
+    index:
+      body: You can join or leave any of the messagegroups.
+      title: Messagegroups
+    join:
+      error: 'Messagegroup could not be joined: %{error}'
+      notice: Messagegroup was joined
+    leave:
+      error: 'Messagegroup could not be left: %{error}'
+      notice: Messagegroup was left
+    messagegroup:
+      join: Join messagegroup
+      leave: Leave messagegroup
   messages:
     create:
       notice: Message is saved and will be sent.
     index:
+      messagethreads: Nachrichtenverläufe
       new: New message
       title: Messages
     messages:
@@ -74,6 +114,14 @@ en:
       sent_on: ! 'Sent:'
       subject: ! 'Subject:'
       title: Show message
+  messagethreads:
+    index:
+      messages: Messages
+      new: New message
+      title: Messagethreads
+    show:
+      all_messagethreads: All messagethreads
+      reply: Reply
   messages_mailer:
     foodsoft_message:
       footer: ! 'Reply: %{reply_url}
@@ -84,4 +132,7 @@ en:
 
 '
   navigation:
+    admin:
+      messagegroups: Messagegroups
+    messagegroups: Messagegroups
     messages: Messages

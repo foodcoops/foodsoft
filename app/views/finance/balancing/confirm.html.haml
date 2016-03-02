@@ -3,7 +3,7 @@
 %table.table.table-striped{:style => "width:35em"}
   - for group_order in @order.group_orders
     %tr{:class => cycle('even', 'odd')}
-      %td= group_order.ordergroup.name
+      %td= group_order.ordergroup_name
       %td.numeric= number_to_currency(group_order.price)
 .form-actions
   = link_to t('.clear'), close_finance_order_path(@order), method: :patch, class: 'btn btn-primary'

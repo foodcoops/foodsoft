@@ -26,6 +26,13 @@ class Ordergroup < Group
     User.natural_order.all.reject { |u| (users.include?(u) || u.ordergroup) }
   end
 
+  def last_user_activity
+    last_active_user = users.order('users.last_activity DESC').first
+    if last_active_user
+      last_active_user.last_activity
+    end
+  end
+
   # the most recent order this ordergroup was participating in
   def last_order
     orders.order('orders.starts DESC').first
@@ -47,9 +54,9 @@ class Ordergroup < Group
 
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.
-  def add_financial_transaction!(amount, note, user)
-    transaction do      
-      t = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user)
+  def add_financial_transaction!(amount, note, user, financial_transaction_type, money_transfer)
+    transaction do
+      t = FinancialTransaction.new(:ordergroup => self, :amount => amount, :note => note, :user => user, :financial_transaction_type => financial_transaction_type, :money_transfer => money_transfer)
       t.save!
       self.account_balance = financial_transactions.sum('amount')
       save!

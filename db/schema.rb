@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217124256) do
+ActiveRecord::Schema.define(version: 20160224201529) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -66,14 +66,56 @@ ActiveRecord::Schema.define(version: 20160217124256) do
 
   add_index "assignments", ["user_id", "task_id"], name: "index_assignments_on_user_id_and_task_id", unique: true, using: :btree
 
+  create_table "bank_accounts", force: :cascade do |t|
+    t.string   "name",                                 null: false
+    t.string   "iban"
+    t.string   "description"
+    t.decimal  "balance",     precision: 12, scale: 2, null: false
+    t.datetime "last_import"
+  end
+
+  create_table "bank_transactions", force: :cascade do |t|
+    t.integer "bank_account_id",                         null: false
+    t.string  "import_id"
+    t.date    "booking_date"
+    t.date    "value_date"
+    t.decimal "amount",          precision: 8, scale: 2, null: false
+    t.string  "type"
+    t.string  "iban"
+    t.string  "reference"
+    t.text    "text"
+    t.text    "receipt"
+    t.binary  "image"
+    t.integer "money_transfer_id"
+  end
+
   create_table "deliveries", force: :cascade do |t|
     t.integer  "supplier_id",  limit: 4
     t.date     "delivered_on"
     t.datetime "created_at"
     t.text     "note",         limit: 65535
+    t.integer  "invoice_id"
   end
 
   add_index "deliveries", ["supplier_id"], name: "index_deliveries_on_supplier_id", using: :btree
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "mime"
+    t.binary   "data"
+    t.integer  "created_by_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "financial_transaction_classes", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "financial_transaction_types", force: :cascade do |t|
+    t.string  "name",                           null: false
+    t.integer "financial_transaction_class_id", null: false
+  end
 
   create_table "financial_transactions", force: :cascade do |t|
     t.integer  "ordergroup_id", limit: 4,                             default: 0, null: false
@@ -81,6 +123,8 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.text     "note",          limit: 65535,                                     null: false
     t.integer  "user_id",       limit: 4,                             default: 0, null: false
     t.datetime "created_on",                                                      null: false
+    t.integer  "financial_transaction_type_id",                                   null: false
+    t.integer  "money_transfer_id"
   end
 
   add_index "financial_transactions", ["ordergroup_id"], name: "index_financial_transactions_on_ordergroup_id", using: :btree
@@ -109,7 +153,7 @@ ActiveRecord::Schema.define(version: 20160217124256) do
   add_index "group_order_articles", ["order_article_id"], name: "index_group_order_articles_on_order_article_id", using: :btree
 
   create_table "group_orders", force: :cascade do |t|
-    t.integer  "ordergroup_id",      limit: 4,                         default: 0, null: false
+    t.integer  "ordergroup_id",      limit: 4
     t.integer  "order_id",           limit: 4,                         default: 0, null: false
     t.decimal  "price",                        precision: 8, scale: 2, default: 0, null: false
     t.integer  "lock_version",       limit: 4,                         default: 0, null: false
@@ -139,6 +183,9 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.text     "stats",                    limit: 65535
     t.integer  "next_weekly_tasks_number", limit: 4,                              default: 8
     t.boolean  "ignore_apple_restriction",                                        default: false
+    t.date     "break_start"
+    t.date     "break_end"
+    t.boolean  "role_invoices",                                                   default: false, null: false
   end
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
@@ -155,8 +202,6 @@ ActiveRecord::Schema.define(version: 20160217124256) do
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "supplier_id",    limit: 4
-    t.integer  "delivery_id",    limit: 4
-    t.integer  "order_id",       limit: 4
     t.string   "number",         limit: 255
     t.date     "date"
     t.date     "paid_on"
@@ -167,9 +212,11 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_user_id"
+    t.string   "attachment_mime"
+    t.binary   "attachment_data"
+    t.integer  "money_transfer_id"
   end
 
-  add_index "invoices", ["delivery_id"], name: "index_invoices_on_delivery_id", using: :btree
   add_index "invoices", ["supplier_id"], name: "index_invoices_on_supplier_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
@@ -189,6 +236,12 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.datetime "created_at"
     t.integer  "reply_to",       limit: 4
     t.integer  "group_id",       limit: 4
+    t.string   "salt"
+    t.binary   "received_email"
+  end
+
+  create_table "money_transfers", force: :cascade do |t|
+    t.string "description"
   end
 
   create_table "order_articles", force: :cascade do |t|
@@ -226,6 +279,8 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.decimal  "foodcoop_result",                  precision: 8, scale: 2
     t.integer  "created_by_user_id", limit: 4
     t.datetime "boxfill"
+    t.integer  "invoice_id"
+    t.date     "pickup"
   end
 
   add_index "orders", ["state"], name: "index_orders_on_state", using: :btree
@@ -344,6 +399,8 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.datetime "reset_password_expires"
     t.datetime "last_login"
     t.datetime "last_activity"
+    t.datetime "deleted_at"
+    t.string   "iban"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

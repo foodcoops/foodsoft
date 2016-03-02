@@ -6,8 +6,14 @@
     %dd=h group.contact
     %dt= heading_helper(Ordergroup, :contact_address) + ':'
     %dd= link_to_gmaps group.contact_address
-  %dt= t('.access') + ':'
-  %dd= format_roles(group)
+    %dt= heading_helper(Ordergroup, :break) + ':'
+    - if group.break_start? or group.break_end?
+      %dd= raw t '.break', start: format_date(group.break_start), end: format_date(group.break_end)
+    - else
+      %dd= t '.no_break'
+  - if group.is_a?(Workgroup)
+    %dt= t('.access') + ':'
+    %dd= format_roles(group)
   %dt= heading_helper(Ordergroup, :user_tokens) + ':'
   %dd
     - members = group.users

@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   #auto_complete_for :user, :nick
 
   def index
-    @non_group_tasks = Task.non_group.includes(assignments: :user)
+    @non_group_tasks = Task.non_group.order('due_date', 'name').includes(assignments: :user)
     @groups = Workgroup.includes(open_tasks: {assignments: :user})
   end
 
@@ -22,6 +22,7 @@ class TasksController < ApplicationController
       @task.periodic_task_group = PeriodicTaskGroup.new
     end
     if @task.save
+      @task.periodic_task_group.create_tasks_for_upfront_days if params[:periodic]
       redirect_to tasks_url, :notice => I18n.t('tasks.create.notice')
     else
       render :template => "tasks/new"

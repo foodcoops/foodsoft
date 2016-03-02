@@ -1,7 +1,9 @@
 class Finance::InvoicesController < ApplicationController
 
+  before_filter :ensure_can_edit, only: [:edit, :update, :destroy]
+
   def index
-    @invoices = Invoice.includes(:supplier, :delivery, :order).order('date DESC').page(params[:page]).per(@per_page)
+    @invoices = Invoice.includes(:supplier, :deliveries, :orders).order('date DESC').page(params[:page]).per(@per_page)
   end
 
   def show
@@ -9,9 +11,9 @@ class Finance::InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.new :supplier_id => params[:supplier_id],
-                           :delivery_id => params[:delivery_id],
-                           :order_id => params[:order_id]
+    @invoice = Invoice.new :supplier_id => params[:supplier_id]
+    @invoice.deliveries << Delivery.find_by_id(params[:delivery_id]) if params[:delivery_id]
+    @invoice.orders << Order.find_by_id(params[:order_id]) if params[:order_id]
   end
 
   def edit
@@ -24,9 +26,9 @@ class Finance::InvoicesController < ApplicationController
 
     if @invoice.save
       flash[:notice] = I18n.t('finance.create.notice')
-      if @invoice.order
+      if @invoice.orders.count == 1
         # Redirect to balancing page
-        redirect_to new_finance_order_url(order_id: @invoice.order.id)
+        redirect_to new_finance_order_url(order_id: @invoice.orders.first.id)
       else
         redirect_to [:finance, @invoice]
       end
@@ -50,5 +52,22 @@ class Finance::InvoicesController < ApplicationController
     @invoice.destroy
 
     redirect_to finance_invoices_url
+  end
+
+  def attachment
+    @invoice = Invoice.find(params[:invoice_id])
+    type = MIME::Types[@invoice.attachment_mime].first
+    filename = 'attachment_' + @invoice.id.to_s + '.' + type.preferred_extension
+    send_data(@invoice.attachment_data, :filename => filename, :type => type)
+  end
+
+  private
+
+  # Returns true if @current_user can edit the invoice..
+  def ensure_can_edit
+    @invoice = Invoice.find(params[:id])
+    unless @invoice.user_can_edit?(current_user)
+      deny_access
+    end
   end
 end

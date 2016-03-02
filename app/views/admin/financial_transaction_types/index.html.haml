@@ -1,0 +1,21 @@
+- title t '.title'
+
+- content_for :actionbar do
+  = link_to t('.new_financial_transaction_type'), new_admin_financial_transaction_type_path, class: 'btn btn-primary'
+
+- content_for :sidebar do
+  %p= t('.first_paragraph', url: link_to(t('.new_financial_transaction_types'), new_admin_financial_transaction_type_path)).html_safe
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t '.name'
+      %th= t 'ui.actions'
+  %tbody
+    - for financial_transaction_type in @financial_transaction_types
+      %tr
+        %td= link_to financial_transaction_type.name, [:admin, financial_transaction_type]
+        %td
+          = link_to t('ui.edit'), edit_admin_financial_transaction_type_path(financial_transaction_type), class: 'btn btn-mini'
+          = link_to t('ui.delete'), [:admin, financial_transaction_type], :data => {:confirm => t('admin.confirm', name: financial_transaction_type.name)},
+            :method => :delete, class: 'btn btn-mini btn-danger'

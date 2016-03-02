@@ -4,7 +4,7 @@
 - unless @non_group_tasks.empty?
   %section
     %h3= t '.title_non_group'
-    = render 'list', tasks: @non_group_tasks
+    = render 'shared/task_list', tasks: @non_group_tasks
 
 
 - for group in @groups
@@ -14,5 +14,5 @@
       %h3
         = group.name
         %small= link_to t('.show_group_tasks'), workgroup_tasks_path(workgroup_id: group)
-      = render 'list', tasks: tasks
+      = render 'shared/task_list', tasks: tasks
       = link_to_top
