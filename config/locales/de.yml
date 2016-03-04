@@ -245,7 +245,6 @@ de:
         title: Einstellungen
       update:
         notice: Einstellungen gespeichert.
-    confirm: Willst du %{name} wirklich löschen?
     ordergroups:
       destroy:
         error: 'Bestellgruppe konnte nicht als gelöscht markiert werden: %{error}'
@@ -1697,6 +1696,7 @@ de:
     back: Züruck
     cancel: Abbrechen
     close: Schließen
+    confirm_delete: Willst du %{name} wirklich löschen?
     confirm_restore: Willst du %{name} wirklich wiederherstellen?
     copy: kopieren
     delete: Löschen

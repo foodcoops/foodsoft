@@ -244,7 +244,6 @@ nl:
         title: Configuratie
       update:
         notice: Configuratie opgeslagen.
-    confirm: Wil je %{name} daadwerkelijk wissen?
     ordergroups:
       destroy:
         error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
@@ -1696,6 +1695,7 @@ nl:
     back: Terug
     cancel: Annuleren
     close: Sluiten
+    confirm_delete: Wil je %{name} daadwerkelijk wissen?
     copy: Kopiëren
     delete: Verwijder
     edit: Bewerk

@@ -19,5 +19,5 @@
         %td= format_date ordergroup.last_user_activity
         %td
           = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
-          = link_to t('ui.delete'), [:admin, ordergroup], :data => {:confirm => t('admin.confirm', name: ordergroup.name)},
+          = link_to t('ui.delete'), [:admin, ordergroup], :data => {:confirm => t('ui.confirm_delete', name: ordergroup.name)},
             :method => :delete, class: 'btn btn-mini btn-danger'
