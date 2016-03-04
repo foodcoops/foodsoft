@@ -1,5 +1,5 @@
 -# XXX code duplication of foodcoop-adam's app/views/group_orders/show.html.haml
-- if @articles_grouped_by_category.count > 0
+- if @articles_grouped_by_category.any?
   %table.table.table-hover
     %thead
       %tr
