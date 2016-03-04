@@ -13,6 +13,10 @@ class Invoice < ActiveRecord::Base
   # Replace numeric seperator with database format
   localize_input_of :amount, :deposit, :deposit_credit
 
+  def user_can_edit?(user)
+    user.role_finance? || (user.role_invoices? && !self.paid_on && self.created_by.id == user.id)
+  end
+
   # Amount without deposit
   def net_amount
     amount - deposit + deposit_credit

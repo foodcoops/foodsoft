@@ -169,6 +169,7 @@ fr:
         role_admin: Administration
         role_article_meta: Base de données des produits
         role_finance: Trésorerie
+        role_invoices: Facture
         role_orders: Gestion des commandes
         role_suppliers: Contact avec les fournisseur-e-s
         user_tokens: Membres
@@ -178,12 +179,12 @@ fr:
         article:
           attributes:
             name:
-              taken: 
-              taken_with_unit: 
+              taken:
+              taken_with_unit:
         supplier:
           attributes:
             shared_sync_method:
-              included: 
+              included:
         task:
           attributes:
             done:
@@ -906,6 +907,7 @@ fr:
       role_admin: Administrateur
       role_article_meta: Article
       role_finance: Finances
+      role_invoices: Facture
       role_orders: Commande
       role_suppliers: Fournisseur-e
       show_google_maps: Afficher la position sur Google maps

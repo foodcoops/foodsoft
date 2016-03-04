@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217124256) do
+ActiveRecord::Schema.define(version: 20160217194036) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20160217124256) do
     t.boolean  "role_article_meta",                                               default: false, null: false
     t.boolean  "role_finance",                                                    default: false, null: false
     t.boolean  "role_orders",                                                     default: false, null: false
+    t.boolean  "role_invoices",                                                   default: false, null: false
     t.datetime "deleted_at"
     t.string   "contact_person",           limit: 255
     t.string   "contact_phone",            limit: 255

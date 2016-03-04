@@ -1,5 +1,7 @@
 class Finance::InvoicesController < ApplicationController
 
+  before_filter :ensure_can_edit, only: [:edit, :update, :destroy]
+
   def index
     @invoices = Invoice.includes(:supplier, :delivery, :order).order('date DESC').page(params[:page]).per(@per_page)
   end
@@ -50,5 +52,15 @@ class Finance::InvoicesController < ApplicationController
     @invoice.destroy
 
     redirect_to finance_invoices_url
+  end
+
+  private
+
+  # Returns true if @current_user can edit the invoice..
+  def ensure_can_edit
+    @invoice = Invoice.find(params[:id])
+    unless @invoice.user_can_edit?(current_user)
+      deny_access
+    end
   end
 end
