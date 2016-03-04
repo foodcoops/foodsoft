@@ -272,6 +272,9 @@ nl:
     users:
       controller:
         sudo_done: Je bent nu ingelogd als %{user}. Wees voorzichtig, en vergeet niet uit te loggen als je klaar bent!
+      destroy:
+        error: 'Gebruiker kon niet verwijderd worden: %{error}'
+        notice: Gebruiker is verwijderd
       edit:
         title: Lid bewerken
       index:

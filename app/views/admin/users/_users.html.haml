@@ -1,4 +1,4 @@
-- if User.count > 20
+- if User.undeleted.count > 20
   = items_per_page
 = pagination_links_remote @users
 %table.table.table-striped
@@ -21,5 +21,10 @@
         %td= format_roles(user, true)
         %td= format_time(user.last_activity)
         %td= link_to t('ui.edit'), edit_admin_user_path(user), class: 'btn btn-mini'
-        %td= link_to t('ui.delete'), [:admin, user], :data => {:confirm => t('admin.confirm', name: user.name)},
-            :method => :delete, class: 'btn btn-danger btn-mini'
+        %td
+          - if user.deleted?
+            = link_to t('ui.restore'), restore_admin_user_path(user), :data => {:confirm => t('ui.confirm_restore', name: user.name)},
+                :method => :post, class: 'btn btn-success btn-mini'
+          - else
+            = link_to t('ui.delete'), [:admin, user], :data => {:confirm => t('admin.confirm', name: user.name)},
+                :method => :delete, class: 'btn btn-danger btn-mini'
