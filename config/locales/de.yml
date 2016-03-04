@@ -647,12 +647,12 @@ de:
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
     general_msg: 'Ein Fehler ist aufgetreten: %{msg}'
     internal_server_error:
-      text1: 
-      text2: 
-      title: 
+      text1: Ein unerwarteter Fehler ist aufgretreten. Entschuldigung!
+      text2: Wir wurden benachrichtigt. Fall das Problem weiterhin besteht, gib uns bitte bescheid.
+      title: Interner Server Fehler
     not_found:
-      text: 
-      title: 
+      text: Diese Seite existiert anscheinend nicht. Entschuldigung!
+      title: Seite nicht gefunden
   feedback:
     create:
       notice: Das Feedback wurde erfolgreich verschickt. Vielen Dank!
@@ -1340,7 +1340,7 @@ de:
     update_order_amounts:
       msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
       msg2: "%{count} (%{units}) Toleranzmenge"
-      msg3: 
+      msg3:
       msg4: "%{count} (%{units}) übrig"
   pages:
     all:
