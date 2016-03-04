@@ -10,14 +10,14 @@
   %b= heading_helper(Invoice, :supplier) + ':'
   = @invoice.supplier.name
 
-- if @invoice.deliveries.count > 0
+- if @invoice.deliveries.any?
   %p
     %b= heading_helper(Invoice, :deliveries) + ':'
     %span><
       - @invoice.deliveries.order(:delivered_on).each_with_index do |delivery, index|
         = ', ' if index > 0
         = link_to format_date(delivery.delivered_on), [delivery.supplier,delivery]
-- if @invoice.orders.count > 0
+- if @invoice.orders.any?
   %p
     %b= heading_helper(Invoice, :orders) + ':'
     %span><

@@ -24,7 +24,7 @@
           %td.right
             = link_to t('.groups.invite'), new_invite_path(id: @current_user.ordergroup),
                       remote: true, class: 'btn btn-success btn-small'
-    - if @current_user.workgroups.count > 0
+    - if @current_user.workgroups.any?
       %h3= User.human_attribute_name(:workgroup, count: 2)
       %table.table.table-striped
         - @current_user.workgroups.each do |workgroup|

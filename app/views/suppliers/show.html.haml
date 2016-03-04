@@ -2,7 +2,7 @@
 
 - content_for :actionbar do
   = link_to t('suppliers.index.articles', count: @supplier.articles.undeleted.count), supplier_articles_path(@supplier), class: 'btn'
-  - if @supplier.stock_articles.undeleted.count > 0
+  - if @supplier.stock_articles.undeleted.any?
     = link_to t('suppliers.index.stock', count: @supplier.stock_articles.undeleted.count), stock_articles_path, class: 'btn'
 
 .row-fluid
@@ -44,7 +44,7 @@
         = link_to t('ui.edit'), edit_supplier_path(@supplier), class: 'btn'
         = link_to t('ui.delete'), @supplier, :data => {:confirm => t('.confirm_delete')}, :method => :delete, class: 'btn btn-danger'
 
-  - if @deliveries.count > 0
+  - if @deliveries.any?
     .span6
       .pull-right
         = link_to t('.show_deliveries'), supplier_deliveries_path(@supplier), class: 'btn'
@@ -61,7 +61,7 @@
               %td= link_to delivery.delivered_on, [@supplier, delivery]
               %td= link_to_invoice(delivery)
 
-  - if @orders.count > 0
+  - if @orders.any?
     .span6
       %h2= t '.last_orders'
       %table.table.table-horizontal
