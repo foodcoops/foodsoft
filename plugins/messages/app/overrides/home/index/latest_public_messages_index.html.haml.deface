@@ -4,4 +4,7 @@
     %section#messages
       %h2= t '.messages.title'
       = render 'messages/messages', messages: Message.pub.order('created_at DESC').limit(5), pagination: false
-      %p= link_to t('.messages.view_all'), messages_path
+      %p
+        = link_to t('.messages.view_all'), messages_path
+        != ' | '
+        = link_to t('.message_threads.view_all'), message_threads_path

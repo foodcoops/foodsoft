@@ -5,15 +5,23 @@
 
 - unless message_threads.empty?
   %table.table.table-striped
+    %thead
+      %tr
+        %th= heading_helper Message, :subject
+        %th= t '.started_at'
+        %th= t '.started_by'
+        %th= t '.last_reply_at'
+        %th= t '.last_reply_by'
     %tbody
       - for message in message_threads
         %tr
           %td
-            %b= link_to message.subject, message_thread_path(message)
-          %td= h(message.sender_name)
+            %b= link_to message.subject, thread_message_path(message)
+          %td= format_time message.created_at
+          %td= show_user message.sender
           - if message.last_reply
-            %td= format_time(message.last_reply.created_at)
-            %td= h(message.last_reply.sender_name)
+            %td= format_time message.last_reply.created_at
+            %td= show_user message.last_reply.sender
           - else
             %td{:colspan => "2"}
 //          %td= link_to t('.reply'), new_message_path(:message => {:reply_to => message.id}), class: 'btn'

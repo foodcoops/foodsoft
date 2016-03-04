@@ -1,0 +1,17 @@
+- thread_message = @messages.first
+- if thread_message.group
+  - title thread_message.subject + ' (' + thread_message.group.name + ')'
+- else
+  - title thread_message.subject
+
+- for message in @messages
+  .panel.panel-default{:style => "width:40em"}
+    .panel-heading
+      %b= h(message.sender_name)
+      = format_time(message.created_at)
+    .panel-body= simple_format(h(message.body))
+
+%p
+  = link_to t('.reply'), new_message_path(:message => {:reply_to => thread_message.id}), class: 'btn'
+  |
+  = link_to t('.all_message_threads'), message_threads_path

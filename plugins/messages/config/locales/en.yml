@@ -75,13 +75,19 @@ en:
       sent_on: ! 'Sent:'
       subject: ! 'Subject:'
       title: Show message
+    thread:
+      all_message_threads: All message threads
   message_threads:
+    groupmessage_threads:
+      show_message_threads: show all
     index:
       messages: View as messages
       new: New message
+      other: General
       title: Message threads
     show:
       all_message_threads: All message threads
+      other: General
       reply: Reply
   messages_mailer:
     foodsoft_message:
