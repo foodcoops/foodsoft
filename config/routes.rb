@@ -173,6 +173,7 @@ Foodsoft::Application.routes.draw do
       root to: 'base#index'
 
       resources :users do
+        post :restore, on: :member
         post :sudo, on: :member
       end
 

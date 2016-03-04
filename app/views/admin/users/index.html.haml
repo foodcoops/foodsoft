@@ -4,13 +4,16 @@
   = link_to t('.new_user'), new_admin_user_path, class: 'btn btn-primary'
 
 - content_for :sidebar do
-  %p= t('.first_paragraph', url: link_to(t('.new_users'), new_admin_user_path)).html_safe    
+  %p= t('.first_paragraph', url: link_to(t('.new_users'), new_admin_user_path)).html_safe
 
 .well.well-small
   = form_tag admin_users_path, :method => :get, :remote => true,
     'data-submit-onchange' => true, class: 'form-search' do
     = text_field_tag :user_name, params[:user_name], class: 'input-medium search-query',
       placeholder: t('admin.search_placeholder')
+    %label{:for => 'show_deleted'}
+      = check_box_tag 'show_deleted', 1, params[:show_deleted]
+      = t '.show_deleted'
 
 #users
   = render "users"

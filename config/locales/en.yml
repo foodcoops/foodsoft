@@ -278,15 +278,22 @@ en:
     users:
       controller:
         sudo_done: You are now logged in as %{user}. Be careful, and do not forget to log out when done!
+      destroy:
+        error: 'User could not be deleted: %{error}'
+        notice: User was deleted
       edit:
         title: Edit user
       index:
         first_paragraph: Here you can %{url}, edit and delete users.
         new_user: Create new user
         new_users: create new
+        show_deleted: Show deleted users
         title: User admin
       new:
         title: Create new user
+      restore:
+        error: 'User could not be restored: %{error}'
+        notice: User was restored
       show:
         confirm_delete: Do you really want to remove %{user}?
         confirm_sudo: If you continue, you will take on the identity of %{user}. Do not forget to log out when you're done!
@@ -1712,6 +1719,7 @@ en:
     back: Back
     cancel: Cancel
     close: Close
+    confirm_restore: Do you really want to restore %{name}?
     copy: Copy
     delete: Delete
     edit: Edit
@@ -1720,6 +1728,7 @@ en:
       success: <i class="icon icon-ok"></i>
     or_cancel: or cancel
     please_wait: Please wait...
+    restore: Restore
     save: Save
     show: Show
   views:

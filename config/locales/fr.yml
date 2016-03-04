@@ -272,6 +272,9 @@ fr:
     users:
       controller:
         sudo_done: 
+      destroy:
+        error: 'La ajouter n''a pas pu être dissoute: %{error}'
+        notice: La ajouter a été supprimée
       edit:
         title: modifier les données sur le_la membre
       index:

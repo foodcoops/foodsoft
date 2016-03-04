@@ -273,15 +273,22 @@ de:
     users:
       controller:
         sudo_done: Du bist jetzt als Benutzer %{user} angemeldet. Sei vorsichtig und melde dich ab, wenn du fertig bist!
+      destroy:
+        error: 'Benutzer/in konnte nicht gelöscht werden: %{error}'
+        notice: Benutzer/in wurde gelöscht
       edit:
         title: Benutzer/in bearbeiten
       index:
         first_paragraph: Hier kannst du Benutzer/innen %{url}, bearbeiten und natürlich auch löschen.
         new_user: Neue/n Benutzer/in anlegen
         new_users: neu anlegen
+        show_deleted: Gelöschte Benutzer anzeigen
         title: Benutzer/innen verwalten
       new:
         title: Neue/n Benutzer/in anlegen
+      restore:
+        error: 'Benutzer/in konnte nicht wiederhergestellt werden: %{error}'
+        notice: Benutzer/in wurde wiederhergestellt
       show:
         confirm_delete: Willst du den Benutzer %{user} wirklich löschen?
         confirm_sudo: Wenn du fortsetzt, dann wirst du als Benutzer %{user} angemeldet. Sei vorsichtig und melde dich ab, wenn du fertig bist!
@@ -1690,6 +1697,7 @@ de:
     back: Züruck
     cancel: Abbrechen
     close: Schließen
+    confirm_restore: Willst du %{name} wirklich wiederherstellen?
     copy: kopieren
     delete: Löschen
     edit: Bearbeiten
@@ -1698,6 +1706,7 @@ de:
       success: <i class="icon icon-ok"></i>
     or_cancel: oder abbrechen
     please_wait: Bitte warten...
+    restore: Wiederherstellen
     save: Speichern
     show: Anzeigen
   views:

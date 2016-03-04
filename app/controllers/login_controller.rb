@@ -14,7 +14,7 @@ class LoginController < ApplicationController
       redirect_to forgot_password_url, alert: I18n.t('errors.general_again') and return
     end
 
-    if (user = User.find_by_email(params[:user][:email]))
+    if (user = User.undeleted.find_by_email(params[:user][:email]))
       user.request_password_reset!
     end
     redirect_to login_url, :notice => I18n.t('login.controller.reset_password.notice')
