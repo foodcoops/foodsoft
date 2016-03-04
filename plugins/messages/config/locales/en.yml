@@ -14,26 +14,27 @@ en:
         user_tokens: Members
     models:
       message: Message
-      messagegroup: Messagegroup
+      messagegroup: Message group
   admin:
     messagegroups:
       destroy:
-        error: 'Messagegroup could not be deleted: %{error}'
-        notice: Messagegroup was deleted
+        error: 'Message group could not be deleted: %{error}'
+        notice: Message group was deleted
       edit:
-        title: Edit messagegroup
+        title: Edit message group
       index:
         first_paragraph: Here you can create %{url}, edit and delete them.
-        new_messagegroup: Create new messagegroup
-        new_messagegroups: new messagegroups
-        title: Messagegroups
+        new_messagegroup: Create new message group
+        new_messagegroups: new message groups
+        second_paragraph: "A message group is like a mailing-list. Members can subscribe to (and unsubscribe from) the lists they're interested in, from their profile."
+        title: Message groups
       new:
-        title: Create messagegroup
+        title: Create message group
       show:
         confirm: Are you sure?
         edit: Edit group/members
         send_message: Send message
-        title: Messagegroup %{name}
+        title: Message group %{name}
       messagegroups:
         members: Members
         name: Name
@@ -61,28 +62,31 @@ en:
   home:
     index:
       messages:
-        title: Newest Messages
+        title: Newest messages
         view_all: See all messages
     start_nav:
       write_message: Write message
   messagegroups:
     index:
-      body: You can join or leave any of the messagegroups.
-      title: Messagegroups
+      body: 'A message group is like a mailing-list: you can join (or leave) any of them to receive the updates sent to that group.'
+      title: Message groups
     join:
-      error: 'Messagegroup could not be joined: %{error}'
-      notice: Messagegroup was joined
+      error: 'Could not join message group: %{error}'
+      notice: Joined message group
     leave:
       error: 'Messagegroup could not be left: %{error}'
-      notice: Messagegroup was left
+      notice: Left message group
     messagegroup:
-      join: Join messagegroup
-      leave: Leave messagegroup
+      join: Join message group
+      leave: Leave message group
   messages:
+    actionbar:
+      message_threads: Show as threads
+      messagegroups: Subscribe to groups
+      messages: Show as list
     create:
       notice: Message is saved and will be sent.
     index:
-      message_threads: View as threads
       new: New message
       title: Messages
     messages:
@@ -116,11 +120,11 @@ en:
       title: Show message
     thread:
       all_message_threads: All message threads
+      reply: Reply
   message_threads:
     groupmessage_threads:
       show_message_threads: show all
     index:
-      messages: View as messages
       new: New message
       other: General
       title: Message threads
@@ -139,6 +143,8 @@ en:
 '
   navigation:
     admin:
-      messagegroups: Messagegroups
-    messagegroups: Messagegroups
+      messagegroups: Message groups
     messages: Messages
+  shared:
+    user_form_fields:
+      messagegroups: Join or leave message groups
