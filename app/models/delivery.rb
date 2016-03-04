@@ -20,7 +20,24 @@ class Delivery < ActiveRecord::Base
   def includes_article?(article)
     self.stock_changes.map{|stock_change| stock_change.stock_article.id}.include? article.id
   end
-  
+
+  def sum(type = :gross)
+    total = 0
+    for sc in stock_changes
+      article = sc.stock_article
+      quantity = sc.quantity
+      case type
+        when :net
+          total += quantity * article.price
+        when :gross
+          total += quantity * article.gross_price
+        when :fc
+          total += quantity * article.fc_price
+      end
+    end
+    total
+  end
+
   protected
   
   def stock_articles_must_be_unique

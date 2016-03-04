@@ -60,6 +60,7 @@ fr:
         deliveries: Réapprovisionnement
         deposit: Consigne facturée
         deposit_credit: Consigne remboursée
+        net_amount: Montant recalculé en excluant les consignes
         note: Note
         number: Numéro
         orders: Commande

@@ -60,6 +60,7 @@ nl:
         deliveries: Levering
         deposit: Statiegeld in rekening gebracht
         deposit_credit: Statiegeld teruggekregen
+        net_amount: Bedrag gecorrigeerd voor statiegeld
         note: Notitie
         number: Nummer
         orders: Bestelling

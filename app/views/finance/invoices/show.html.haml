@@ -1,5 +1,7 @@
 - title t('.title', number: @invoice.number)
 
+- total = 0
+
 %p
   %b= heading_helper(Invoice, :created_at) + ':'
   = format_time(@invoice.created_at)
@@ -15,15 +17,21 @@
     %b= heading_helper(Invoice, :deliveries) + ':'
     %span><
       - @invoice.deliveries.order(:delivered_on).each_with_index do |delivery, index|
+        - sum = delivery.sum
+        - total += sum
         = ', ' if index > 0
         = link_to format_date(delivery.delivered_on), [delivery.supplier,delivery]
+        = ' (' + number_to_currency(sum) + ')'
 - if @invoice.orders.any?
   %p
     %b= heading_helper(Invoice, :orders) + ':'
     %span><
       - @invoice.orders.order(:ends).each_with_index do |order, index|
+        - sum = order.sum
+        - total += sum
         = ', ' if index > 0
         = link_to format_date(order.ends), new_finance_order_path(order_id: order)
+        = ' (' + number_to_currency(sum) + ')'
 
 %p
   %b= heading_helper(Invoice, :number) + ':'
@@ -43,6 +51,13 @@
 %p
   %b= heading_helper(Invoice, :deposit_credit) + ':'
   = number_to_currency @invoice.deposit_credit
+%p
+  %b= heading_helper(Invoice, :net_amount) + ':'
+  = number_to_currency @invoice.net_amount
+- if @invoice.deliveries.any? || @invoice.orders.any?
+  %p
+    %b= heading_helper(Invoice, :total) + ':'
+    = number_to_currency total
 %p
   %b= heading_helper(Invoice, :note) + ':'
   =h @invoice.note
