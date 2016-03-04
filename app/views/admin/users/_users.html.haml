@@ -26,5 +26,5 @@
             = link_to t('ui.restore'), restore_admin_user_path(user), :data => {:confirm => t('ui.confirm_restore', name: user.name)},
                 :method => :post, class: 'btn btn-success btn-mini'
           - else
-            = link_to t('ui.delete'), [:admin, user], :data => {:confirm => t('admin.confirm', name: user.name)},
+            = link_to t('ui.delete'), [:admin, user], :data => {:confirm => t('ui.confirm_delete', name: user.name)},
                 :method => :delete, class: 'btn btn-danger btn-mini'

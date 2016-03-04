@@ -244,7 +244,6 @@ fr:
         title: 
       update:
         notice: 
-    confirm: Veux-tu vraiment supprimer %{name}?
     ordergroups:
       destroy:
         error: 'La cellule n''a pas pu être dissoute: %{error}'
@@ -1709,6 +1708,7 @@ fr:
     back: Retour
     cancel: Annuler
     close: Fermer
+    confirm_delete: Veux-tu vraiment supprimer %{name}?
     copy: 
     delete: Supprimer
     edit: Modifier

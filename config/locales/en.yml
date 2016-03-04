@@ -250,7 +250,6 @@ en:
         title: Configuration
       update:
         notice: Configuration saved.
-    confirm: Do you really want to delete %{name}?
     ordergroups:
       destroy:
         error: 'Ordergroup could not be marked as deleted: %{error}'
@@ -1719,6 +1718,7 @@ en:
     back: Back
     cancel: Cancel
     close: Close
+    confirm_delete: Do you really want to delete %{name}?
     confirm_restore: Do you really want to restore %{name}?
     copy: Copy
     delete: Delete
