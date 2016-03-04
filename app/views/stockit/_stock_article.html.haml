@@ -10,5 +10,5 @@
   %td= stock_article.article_category.name
   %td
     = link_to t('ui.edit'), edit_stock_article_path(stock_article), remote: true, class: 'btn btn-mini'
-    = link_to t('ui.delete'), stock_article, :method => :delete, :data => {:confirm => t('.confirm_delete', :name => stock_article.name)},
+    = link_to t('ui.delete'), stock_article, :method => :delete, :data => {:confirm => t('ui.confirm_delete', :name => stock_article.name)},
       class: 'btn btn-mini btn-danger', :remote => true

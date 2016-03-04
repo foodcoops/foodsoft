@@ -42,7 +42,7 @@
     - if @current_user.role_suppliers?
       .form-actions
         = link_to t('ui.edit'), edit_supplier_path(@supplier), class: 'btn'
-        = link_to t('ui.delete'), @supplier, :data => {:confirm => t('.confirm_delete')}, :method => :delete, class: 'btn btn-danger'
+        = link_to t('ui.delete'), @supplier, :data => {:confirm => t('ui.confirm_delete', name: @supplier.name)}, :method => :delete, class: 'btn btn-danger'
 
   - if @deliveries.any?
     .span6

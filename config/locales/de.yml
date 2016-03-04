@@ -289,7 +289,6 @@ de:
         error: 'Benutzer/in konnte nicht wiederhergestellt werden: %{error}'
         notice: Benutzer/in wurde wiederhergestellt
       show:
-        confirm_delete: Willst du den Benutzer %{user} wirklich löschen?
         confirm_sudo: Wenn du fortsetzt, dann wirst du als Benutzer %{user} angemeldet. Sei vorsichtig und melde dich ab, wenn du fertig bist!
         groupabos: Gruppenabos
         member_since: Mitglied seit %{time}
@@ -338,7 +337,6 @@ de:
     edit:
       title: Kategorie ändern
     index:
-      confirm_delete: Bist Du sicher?
       new: Neue Kategorie anlegen
       title: Artikelkategorien
     new:
@@ -347,7 +345,6 @@ de:
       notice: Die Kategorie wurde aktualisiert
   articles:
     article:
-      confirm_delete: Bist du sicher?
       last_update: 'zuletzt geändert: %{last_update} | Brutto: %{gross_price}'
     articles:
       confirm_delete: Willst Du wirklich alle gewählten Artikel löschen?
@@ -780,8 +777,6 @@ de:
       index:
         action_new: Neue Rechnung anlegen
         title: Rechnungen
-      invoices:
-        confirm_delete: Bist Du sicher?
       linked: Diese Rechnung ist mit %{what_link} verknüpft.
       linked_delivery: einer Lieferung
       linked_order: einer Bestellung
@@ -1589,8 +1584,6 @@ de:
       new_quantity: Neuer Bestand
       reason: Ereignis
       stock_changes: Verlauf des Lagerbestands
-    stock_article:
-      confirm_delete: Möchtest Du den Lagerartikel %{name} wirklich löschen?
     update:
       notice: Lagerartikel »%{name}« aktualisiert.
   suppliers:
@@ -1622,7 +1615,6 @@ de:
       supplier: Lieferantin
       title: Externe Listen
     show:
-      confirm_delete: Bist Du sicher?
       last_deliveries: Letzte Lieferungen
       last_orders: Letzte Bestellungen
       new_delivery: Neue Lieferung anlegen
