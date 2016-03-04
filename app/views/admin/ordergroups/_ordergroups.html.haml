@@ -5,17 +5,18 @@
   %thead
     %tr
       %th= heading_helper Ordergroup, :name
-      %th= heading_helper Ordergroup, :contact
-      %th= heading_helper Ordergroup, :contact_address
       %th= heading_helper Ordergroup, :user_tokens
+      %th= heading_helper Ordergroup, :contact_address
+      %th= heading_helper Ordergroup, :last_user_activity
       %th= t 'ui.actions'
   %tbody
     - for ordergroup in @ordergroups
       %tr{:class => cycle('even','odd', :name => 'groups')}
         %td= link_to ordergroup.name, [:admin, ordergroup]
-        %td= ordergroup.contact
+        %td{title: ordergroup_members_title(ordergroup)}
+          %abbr{title: ordergroup_members_title(ordergroup)}= ordergroup.users.size
         %td= link_to_gmaps ordergroup.contact_address
-        %td= ordergroup.users.size
+        %td= format_date ordergroup.last_user_activity
         %td
           = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
           = link_to t('ui.delete'), [:admin, ordergroup], :data => {:confirm => t('admin.confirm', name: ordergroup.name)},
