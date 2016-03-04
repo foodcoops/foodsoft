@@ -170,6 +170,7 @@ en:
         role_admin: Administration
         role_article_meta: Article database
         role_finance: Finances
+        role_invoices: Invoices
         role_orders: Order management
         role_suppliers: Suppliers
         user_tokens: Members
@@ -913,6 +914,7 @@ en:
       role_admin: Admin
       role_article_meta: Articles
       role_finance: Finance
+      role_invoices: Invoices
       role_orders: Orders
       role_suppliers: Suppliers
       show_google_maps: Show it on Google maps

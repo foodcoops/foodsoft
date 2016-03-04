@@ -169,6 +169,7 @@ de:
         role_admin: Administration
         role_article_meta: Artikeldatenbank
         role_finance: Finanzen
+        role_invoices: Rechnungen
         role_orders: Bestellverwaltung
         role_suppliers: Lieferanten
         user_tokens: Mitglieder
@@ -900,6 +901,7 @@ de:
       role_admin: Admin
       role_article_meta: Artikel
       role_finance: Finanzen
+      role_invoices: Rechnungen
       role_orders: Bestellung
       role_suppliers: Lieferanten
       show_google_maps: Show it on Google maps

@@ -33,10 +33,10 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :categories, I18n.t('navigation.articles.categories'), article_categories_path
     end
 
-    primary.item :finance, I18n.t('navigation.finances.title'), '#', if: Proc.new { current_user.role_finance? } do |subnav|
-      subnav.item :finance_home, I18n.t('navigation.finances.home'), finance_root_path
-      subnav.item :accounts, I18n.t('navigation.finances.accounts'), finance_ordergroups_path
-      subnav.item :balancing, I18n.t('navigation.finances.balancing'), finance_order_index_path
+    primary.item :finance, I18n.t('navigation.finances.title'), '#', if: Proc.new { current_user.role_finance? || current_user.role_invoices? } do |subnav|
+      subnav.item :finance_home, I18n.t('navigation.finances.home'), finance_root_path, if: Proc.new { current_user.role_finance? }
+      subnav.item :accounts, I18n.t('navigation.finances.accounts'), finance_ordergroups_path, if: Proc.new { current_user.role_finance? }
+      subnav.item :balancing, I18n.t('navigation.finances.balancing'), finance_order_index_path, if: Proc.new { current_user.role_finance? }
       subnav.item :invoices, I18n.t('navigation.finances.invoices'), finance_invoices_path
     end
 
