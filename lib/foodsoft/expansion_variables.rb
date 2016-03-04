@@ -34,7 +34,7 @@ module Foodsoft
       'foodsoft.version'        => Foodsoft::VERSION,
       'foodsoft.revision'       => Foodsoft::REVISION,
 
-      'user_count'              => ->{ User.count },
+      'user_count'              => ->{ User.undeleted.count },
       'ordergroup_count'        => ->{ Ordergroup.undeleted.count },
       'active_ordergroup_count' => ->{ active_ordergroup_count },
       'supplier_count'          => ->{ Supplier.undeleted.count },
