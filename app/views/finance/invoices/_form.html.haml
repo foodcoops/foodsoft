@@ -8,10 +8,17 @@
     %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), new_finance_order_path(order_id: @invoice.orders.first.id))).html_safe
 
   - if @invoice.created_at
-    = f.input :created_at do
-      = format_time(@invoice.created_at)
-    = f.input :created_by do
-      = show_user(@invoice.created_by)
+    .fold-line
+      .control-group
+        %label.control-label{for: 'created_at'}
+          = Invoice.human_attribute_name(:created_at)
+        .controls.control-text#article_fc_price
+          = format_date @invoice.created_at
+      .control-group
+        %label.control-label{for: 'created_by'}
+          = Invoice.human_attribute_name(:created_by)
+        .controls.control-text#article_fc_price
+          = show_user @invoice.created_by
   = f.association :supplier, hint: false
   = f.input :number
   = f.input :date, as: :date_picker
