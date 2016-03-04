@@ -100,6 +100,7 @@ en:
       ordergroup:
         account_balance: Account balance
         available_funds: Available credit
+        break: (Last) break
         contact: Contact
         contact_address: Address
         contact_person: Contact person
@@ -818,6 +819,8 @@ en:
         only_active: Only active groups
         only_active_desc: "(have placed order at least once in the last 3 months)"
         title: Ordergroups
+      ordergroups:
+        break: '%{start} - %{end}'
     users:
       index:
         body: "<p>Here you can write a message to the members of your Foodcoop. If you'd like others to contact you, please enable it in your %{profile_link}.</p>"
@@ -1466,6 +1469,7 @@ en:
       access: Access to
       activated: activated
       apple_limit: Apple points order limit
+      break: 'from %{start} to %{end}'
       deactivated: deactivated
     group_form_fields:
       search: Search ...

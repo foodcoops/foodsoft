@@ -99,6 +99,7 @@ de:
       ordergroup:
         account_balance: Kontostand
         available_funds: Verfügbares Guthaben
+        break: (Letzte) Pause
         contact: Kontakt
         contact_address: Adresse
         contact_person: Kontaktperson
@@ -805,6 +806,8 @@ de:
         only_active: Nur aktive
         only_active_desc: "(mindestens einmal in den letzten 3 Monaten bestellt)"
         title: Bestellgruppen
+      ordergroups:
+        break: '%{start} - %{end}'
     users:
       index:
         body: "<p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben. Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>"
@@ -1444,6 +1447,7 @@ de:
       access: Zugriff auf
       activated: aktiviert
       apple_limit: "Äpfel-Bestellbeschränkung"
+      break: 'von %{start} bis %{end}'
       deactivated: deaktiviert
     group_form_fields:
       search: Suche ...
