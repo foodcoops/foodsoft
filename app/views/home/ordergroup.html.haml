@@ -12,7 +12,8 @@
       %p
         %b= heading_helper(Ordergroup, :user_tokens) + ':'
         = @ordergroup.memberships.map{|m| show_user m.user}.join(', ')
-      = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
+      - unless FoodsoftConfig[:disable_invite]
+        = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
   .span8
     %h2= t('.account_summary')
     .well.well-small

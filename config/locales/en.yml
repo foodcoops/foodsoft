@@ -332,8 +332,8 @@ en:
       error_authn: Authentication required!
       error_denied: You are not allowed to view the requested page. If you think you should, ask an administrator to give you appropriate permissions. If you have access to multiple user accounts, you might want to %{sign_in}.
       error_denied_sign_in: sign in as another user
+      error_feature_disabled: This feature is currently disabled.
       error_members_only: This action is only available to members of the group!
-      error_plugin_disabled: This feature is currently disabled.
       error_token: Access denied (invalid token)!
   article_categories:
     create:
@@ -526,6 +526,7 @@ en:
       currency_unit: Currency
       custom_css: Custom CSS
       default_locale: Default language
+      disable_invite: Disable invites
       email_from: From address
       email_replyto: Reply-to address
       email_sender: Sender address

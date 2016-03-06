@@ -1,4 +1,5 @@
-%p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @workgroup.id), remote: true)).html_safe
+- unless FoodsoftConfig[:disable_invite]
+  %p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @workgroup.id), remote: true)).html_safe
 = simple_form_for [:admin, @workgroup] do |f|
   - captured = capture do
     %h4= t 'admin.access_to'

@@ -1,6 +1,7 @@
 - title t('.title')
 
-%p= t('.invite_new', invite_link: link_to(t('.invite_link'), new_invite_path(id: @workgroup.id))).html_safe
+- unless FoodsoftConfig[:disable_invite]
+  %p= t('.invite_new', invite_link: link_to(t('.invite_link'), new_invite_path(id: @workgroup.id))).html_safe
 = simple_form_for [:foodcoop, @workgroup] do |f|
   = render 'shared/group_form_fields', f: f
   .form-actions

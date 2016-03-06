@@ -327,8 +327,8 @@ de:
       error_authn: Anmeldung erforderlich!
       error_denied: Du darfst die gewünschte Seite nicht sehen. Wenn Du denkst, dass Du dürfen solltest, frage eine/n Administrator/in, dass sie/er Dir die entsprechenden Rechte einräumt. Falls Du Zugang zu mehreren Benutzerkonten hast, möchtest Du Dich vielleicht %{sign_in}.
       error_denied_sign_in: als ein anderer Benutzer anmelden
+      error_feature_disabled: Diese Funktion ist derzeit nicht aktiviert.
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
-      error_plugin_disabled: Diese Funktion ist derzeit nicht aktiviert.
       error_token: Zugriff verweigert (ungültiger Token)!
   article_categories:
     create:
@@ -517,6 +517,7 @@ de:
       currency_unit: Währung
       custom_css: Angepasstes CSS
       default_locale: Standardsprache
+      disable_invite: Einladungen deaktivieren
       email_from: Absenderadresse
       email_replyto: Antwortadresse
       email_sender: Senderadresse
