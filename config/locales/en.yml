@@ -769,6 +769,7 @@ en:
         paragraph: Here you can credit and debit money for the ordergroup <b>%{name}</b>.
         title: New transaction
       new_collection:
+        add_all_ordergroups: Add all ordergroups
         new_ordergroup: Add new ordergroup
         save: Save transaction
         sidebar: Here you can update more accounts at the same time. For example all transfers of the ordergroup from one account statement.

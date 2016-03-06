@@ -2,7 +2,7 @@
 
 - content_for :javascript do
   :javascript
-    var ordergroup = "#{escape_javascript(render('ordergroup'))}"
+    var ordergroup = $($.parseHTML("#{escape_javascript(render('ordergroup'))}"));
 
     $(function() {
       $(document).on('touchclick', 'a[data-remove-transaction]', function() {
@@ -11,7 +11,21 @@
       });
 
       $(document).on('touchclick', 'a[data-add-transaction]', function() {
-        $('#ordergroups').append(ordergroup);
+        ordergroup.clone().appendTo('#ordergroups');
+        return false;
+      });
+
+      $(document).on('touchclick', 'a[data-add-all-ordergroups]', function() {
+        var value = prompt("#{escape_javascript(heading_helper(FinancialTransaction, :amount))}:");
+        if (value === null)
+          return false;
+        $('#ordergroups > tbody > tr').remove();
+        var options = ordergroup.find('td > select > option').each(function() {
+          var row = ordergroup.clone();
+          row.find('td > input').val(value);
+          row.find('td > select').val(this.value);
+          row.appendTo('#ordergroups');
+        });
         return false;
       });
     });
@@ -25,12 +39,15 @@
     = text_field_tag :note, params[:note], class: 'input-xlarge', required: 'required'
   %p
     %table#ordergroups{:style => "width:20em"}
-      %tr
-        %th= heading_helper FinancialTransaction, :ordergroup
-        %th= heading_helper FinancialTransaction, :amount
-      = render :partial => 'ordergroup', :collection => [1, 2, 3]
+      %thead
+        %tr
+          %th= heading_helper FinancialTransaction, :ordergroup
+          %th= heading_helper FinancialTransaction, :amount
+      %tbody
+        = render :partial => 'ordergroup', :collection => [1, 2, 3]
   %p
     = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn'
+    = link_to t('.add_all_ordergroups'), '#', 'data-add-all-ordergroups' => true, class: 'btn'
   .form-actions
     = submit_tag t('.save'), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), finance_ordergroups_path
