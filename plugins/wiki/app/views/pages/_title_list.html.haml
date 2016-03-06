@@ -1,8 +1,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t 'pages.title'
-      %th= t 'pages.last_updated'
+      %th= sort_link_helper t('pages.title'), "title", :remote => false
+      %th= sort_link_helper t('pages.last_updated'), "last_updated", :remote => false
   %tbody
     - for page in @pages
       = render :partial => "page_list_item", :locals => {:page => page, :level => 0, :siteMap => 0}

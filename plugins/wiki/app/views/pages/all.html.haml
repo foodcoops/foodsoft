@@ -6,7 +6,6 @@
 .navbar
   .navbar-inner
     %ul.nav
-      %li= link_to t('.recent_changes'), all_pages_path(:view => 'recent_changes')
       %li= link_to t('.title_list'), all_pages_path(:view => 'title_list')
       %li= link_to t('.site_map'), all_pages_path(:view => 'site_map')
       %li= link_to image_tag('icons/feed-icon-14x14.png', :alt => 'RSS Feed'), all_pages_rss_url
