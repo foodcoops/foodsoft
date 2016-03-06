@@ -12,12 +12,16 @@
         %li= link_to t('.subpages'), "#subpages", 'data-toggle-this' => '#subpages'
 
   #versions.well.well-small{:style => "display:none"}
-    %h3= t '.title_versions'
-    %ul.unstyled
-      - @page.versions.reverse.each do |version|
-        %li
-          = link_to I18n.l(version.updated_at, :format => t('.date_format')), version_page_path(@page, :version => version.lock_version)
-          = "(#{show_user(User.find_by_id(version.updated_by))})"
+    = form_tag diff_page_path(@page), :method => :get do
+      %h3= t '.title_versions'
+      %ul.unstyled
+        - @page.versions.reverse.each_with_index do |version, index|
+          %li
+            = radio_button_tag :old, version.lock_version, index == 1
+            = radio_button_tag :new, version.lock_version, index == 0
+            = link_to I18n.l(version.updated_at, :format => t('.date_format')), version_page_path(@page, :version => version.lock_version)
+            = "(#{show_user(User.find_by_id(version.updated_by))})"
+      = submit_tag t('.diff'), class: 'btn'
 
   - unless @page.children.empty?
     #subpages.well.well-small{:style => "display:none"}

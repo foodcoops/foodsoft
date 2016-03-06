@@ -130,6 +130,13 @@ class PagesController < ApplicationController
     end
   end
 
+  def diff
+    @page = Page.find(params[:id])
+    @old_version = Page::Version.find_by_page_id_and_lock_version params[:id], params[:old]
+    @new_version = Page::Version.find_by_page_id_and_lock_version params[:id], params[:new]
+    @diff = Diffy::Diff.new(@old_version.body, @new_version.body).to_s(:html)
+  end
+
   def version
     @page = Page.find(params[:id])
     @version = Page::Version.find_by_page_id_and_lock_version params[:id], params[:version]
