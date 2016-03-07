@@ -4,8 +4,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= t '.name'
-      %th= t '.members'
+      %th= Messagegroup.human_attribute_name :name
+      %th= Messagegroup.human_attribute_name :user_tokens
       %th= t 'ui.actions'
   %tbody
     - for messagegroup in @messagegroups

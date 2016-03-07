@@ -23,17 +23,15 @@ de:
       new:
         title: Nachrichtengruppe anlegen
       show:
-        confirm: Bist Du sicher?
-        edit: Gruppe/Mitglieder bearbeiten
         send_message: Nachricht senden
         title: Nachrichtengruppe %{name}
-      messagegroups:
-        members: Mitglieder
-        name: Name
   home:
     index:
-      message_threads:
-        view_all: Alle Nachrichteverläufe anzeigen
+      messages:
+        view_all:
+          text: '%{messages} oder %{threads} anzeigen'
+          messages:
+          threads:
   messagegroups:
     index:
       body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
@@ -52,10 +50,7 @@ de:
       message_threads:
       messagegroups:
       messages:
-    create:
-      notice: Message is saved and will be sent.
-    index:
-      message_threads: Nachrichtenverläufe
+      new: Neue Nachricht
     thread:
       all_message_threads: Alle Nachrichtenverläufe
       reply: Antworten
@@ -63,7 +58,6 @@ de:
     groupmessage_threads:
       show_message_threads: Alle Nachrichtenverläufe anzeigen
     index:
-      new: Neue Nachricht
       other: Allgemeine Nachrichten
       title: Nachrichtenverläufe
     message_threads:
@@ -73,7 +67,6 @@ de:
       started_by: Gestartet von
     show:
       other: Allgemeine Nachrichten
-      reply: Antworten
   navigation:
     admin:
       messagegroups: Nachrichtengruppen

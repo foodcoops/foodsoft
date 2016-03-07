@@ -31,13 +31,8 @@ en:
       new:
         title: Create message group
       show:
-        confirm: Are you sure?
-        edit: Edit group/members
         send_message: Send message
         title: Message group %{name}
-      messagegroups:
-        members: Members
-        name: Name
     ordergroups:
       show:
         send_message: Send message
@@ -63,7 +58,10 @@ en:
     index:
       messages:
         title: Newest messages
-        view_all: See all messages
+        view_all:
+          text: 'Show %{messages} or %{threads}'
+          messages: all messages
+          threads: threads
     start_nav:
       write_message: Write message
   messagegroups:
@@ -84,10 +82,10 @@ en:
       message_threads: Show as threads
       messagegroups: Subscribe to groups
       messages: Show as list
+      new: New message
     create:
       notice: Message is saved and will be sent.
     index:
-      new: New message
       title: Messages
     messages:
       reply: Reply
@@ -96,6 +94,7 @@ en:
       reply_indent: ! '> %{line}'
       reply_subject: ! 'Re: %{subject}'
     new:
+      error_private: Sorry, this message is private.
       hint_private: Message doesn’t show in Foodsoft mail inbox
       list:
         desc: ! 'Please send messages to all using the mailing-list: %{list}'
@@ -125,13 +124,15 @@ en:
     groupmessage_threads:
       show_message_threads: show all
     index:
-      new: New message
       other: General
       title: Message threads
+    message_threads:
+      last_reply_at: Last replied at
+      last_reply_by: Last replied by
+      started_at: Started at
+      started_by: Started by
     show:
-      all_message_threads: All message threads
       other: General
-      reply: Reply
   messages_mailer:
     foodsoft_message:
       footer: ! 'Reply: %{reply_url}

@@ -5,5 +5,5 @@
   - if Messagegroup.any?
     .controls
       = link_to messagegroups_path do
-        = t('shared.user_form_fields.messagegroups')
+        = t '.messagegroups'
         %i.icon.icon-chevron-right
