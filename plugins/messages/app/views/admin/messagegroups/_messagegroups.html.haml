@@ -1,0 +1,18 @@
+- if Messagegroup.count > 20
+  = items_per_page
+= pagination_links_remote @messagegroups
+%table.table.table-striped
+  %thead
+    %tr
+      %th= Messagegroup.human_attribute_name :name
+      %th= Messagegroup.human_attribute_name :user_tokens
+      %th= t 'ui.actions'
+  %tbody
+    - for messagegroup in @messagegroups
+      %tr
+        %td= link_to messagegroup.name, [:admin, messagegroup]
+        %td= messagegroup.users.size
+        %td
+          = link_to t('ui.edit'), edit_admin_messagegroup_path(messagegroup), class: 'btn btn-mini'
+          = link_to t('ui.delete'), [:admin, messagegroup], :data => {:confirm => t('admin.confirm', name: messagegroup.name)},
+            :method => :delete, class: 'btn btn-mini btn-danger'

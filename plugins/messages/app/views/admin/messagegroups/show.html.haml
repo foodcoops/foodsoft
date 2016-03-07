@@ -1,0 +1,6 @@
+- title t '.title', name: @messagegroup.name
+
+%section= render 'shared/group', group: @messagegroup
+= link_to t('ui.edit'), edit_admin_messagegroup_path(@messagegroup), class: 'btn'
+= link_to t('ui.delete'), [:admin, @messagegroup], :data => {:confirm => t('ui.confirm_delete', name: @messagegroup.name)}, :method => :delete, class: 'btn btn-danger'
+= link_to t('.send_message'), new_message_path(:message => {:group_id => @messagegroup.id}), class: 'btn'

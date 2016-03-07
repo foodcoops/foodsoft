@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
         @message.body = I18n.t('messages.model.reply_header', :user => original_message.sender.display, :when => I18n.l(original_message.created_at, :format => :short)) + "\n"
         original_message.body.each_line{ |l| @message.body += I18n.t('messages.model.reply_indent', :line => l) }
       else
-        redirect_to new_message_url, alert: 'Nachricht ist privat!'
+        redirect_to new_message_url, alert: I18n.t('messages.new.error_private')
       end
     end
   end

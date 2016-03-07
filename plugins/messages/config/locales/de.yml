@@ -18,21 +18,20 @@ de:
         first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
         new_messagegroup: Neue Nachrichtengruppe anlegen
         new_messagegroups: neue Nachrichtengruppe
+        second_paragraph: Eine Nachrichtengruppe ist wie ein Mail-Verteilen. Mitglieder können Verteiler in ihrem Profil abonnieren (und auch wieder abbestellen) an denen sie interessiert sind.
         title: Nachrichtengruppen
       new:
         title: Nachrichtengruppe anlegen
       show:
-        confirm: Bist Du sicher?
-        edit: Gruppe/Mitglieder bearbeiten
         send_message: Nachricht senden
         title: Nachrichtengruppe %{name}
-      messagegroups:
-        members: Mitglieder
-        name: Name
   home:
     index:
-      message_threads:
-        view_all: Alle Nachrichteverläufe anzeigen
+      messages:
+        view_all:
+          text: '%{messages} oder %{threads} anzeigen'
+          messages:
+          threads:
   messagegroups:
     index:
       body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
@@ -47,8 +46,11 @@ de:
       join: Nachrichtengruppe beitreten
       leave: Nachrichtengruppe verlassen
   messages:
-    index:
-      message_threads: Nachrichtenverläufe
+    actionbar:
+      message_threads:
+      messagegroups:
+      messages:
+      new: Neue Nachricht
     thread:
       all_message_threads: Alle Nachrichtenverläufe
       reply: Antworten
@@ -56,8 +58,6 @@ de:
     groupmessage_threads:
       show_message_threads: Alle Nachrichtenverläufe anzeigen
     index:
-      messages: Nachrichten
-      new: Neue Nachricht
       other: Allgemeine Nachrichten
       title: Nachrichtenverläufe
     message_threads:
@@ -70,4 +70,3 @@ de:
   navigation:
     admin:
       messagegroups: Nachrichtengruppen
-    messagegroups: Nachrichtengruppen

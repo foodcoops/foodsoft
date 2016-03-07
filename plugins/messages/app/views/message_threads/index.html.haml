@@ -1,8 +1,6 @@
 - title t('.title')
 
-- content_for :actionbar do
-  = link_to t('.messages'), messages_path, class: 'btn'
-  = link_to t('.new'), new_message_path, class: 'btn btn-primary'
+= render 'messages/actionbar', active: 'message_threads'
 
 = render 'groupmessage_threads', group: nil, name: t('.other'), id: 0
 

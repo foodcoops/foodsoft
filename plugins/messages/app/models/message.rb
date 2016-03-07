@@ -6,7 +6,7 @@ class Message < ActiveRecord::Base
   belongs_to :reply_to_message, :class_name => "Message", :foreign_key => "reply_to"
 
   serialize :recipients_ids, Array
-  attr_accessor :sent_to_all, :recipient_tokens
+  attr_accessor :send_to_all, :recipient_tokens
 
   scope :pending, -> { where(:email_state => 0) }
   scope :sent, -> { where(:email_state => 1) }
@@ -35,7 +35,7 @@ class Message < ActiveRecord::Base
   def clean_up_recipient_ids
     add_recipients Group.find(group_id).users unless group_id.blank?
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
-    self.recipients_ids = User.all.collect(&:id) if sent_to_all == "1"
+    self.recipients_ids = User.all.collect(&:id) if send_to_all == "1"
   end
 
   def add_recipients(users)

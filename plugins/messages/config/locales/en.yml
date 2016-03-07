@@ -6,11 +6,33 @@ en:
         group_id: Group
         private: Private
         recipient_tokens: Recipients
-        sent_to_all: Send to all members
+        send_to_all: Send to all members
         subject: Subject
+      messagegroup:
+        description: Description
+        name: Name
+        user_tokens: Members
     models:
       message: Message
+      messagegroup: Message group
   admin:
+    messagegroups:
+      destroy:
+        error: 'Message group could not be deleted: %{error}'
+        notice: Message group was deleted
+      edit:
+        title: Edit message group
+      index:
+        first_paragraph: Here you can create %{url}, edit and delete them.
+        new_messagegroup: Create new message group
+        new_messagegroups: new message groups
+        second_paragraph: "A message group is like a mailing-list. Members can subscribe to (and unsubscribe from) the lists they're interested in, from their profile."
+        title: Message groups
+      new:
+        title: Create message group
+      show:
+        send_message: Send message
+        title: Message group %{name}
     ordergroups:
       show:
         send_message: Send message
@@ -35,16 +57,35 @@ en:
   home:
     index:
       messages:
-        title: Newest Messages
-        view_all: See all messages
+        title: Newest messages
+        view_all:
+          text: 'Show %{messages} or %{threads}'
+          messages: all messages
+          threads: threads
     start_nav:
       write_message: Write message
+  messagegroups:
+    index:
+      body: 'A message group is like a mailing-list: you can join (or leave) any of them to receive the updates sent to that group.'
+      title: Message groups
+    join:
+      error: 'Could not join message group: %{error}'
+      notice: Joined message group
+    leave:
+      error: 'Messagegroup could not be left: %{error}'
+      notice: Left message group
+    messagegroup:
+      join: Join message group
+      leave: Leave message group
   messages:
+    actionbar:
+      message_threads: Show as threads
+      messagegroups: Subscribe to groups
+      messages: Show as list
+      new: New message
     create:
       notice: Message is saved and will be sent.
     index:
-      message_threads: View as threads
-      new: New message
       title: Messages
     messages:
       reply: Reply
@@ -53,6 +94,7 @@ en:
       reply_indent: ! '> %{line}'
       reply_subject: ! 'Re: %{subject}'
     new:
+      error_private: Sorry, this message is private.
       hint_private: Message doesn’t show in Foodsoft mail inbox
       list:
         desc: ! 'Please send messages to all using the mailing-list: %{list}'
@@ -77,18 +119,20 @@ en:
       title: Show message
     thread:
       all_message_threads: All message threads
+      reply: Reply
   message_threads:
     groupmessage_threads:
       show_message_threads: show all
     index:
-      messages: View as messages
-      new: New message
       other: General
       title: Message threads
+    message_threads:
+      last_reply_at: Last replied at
+      last_reply_by: Last replied by
+      started_at: Started at
+      started_by: Started by
     show:
-      all_message_threads: All message threads
       other: General
-      reply: Reply
   messages_mailer:
     foodsoft_message:
       footer: ! 'Reply: %{reply_url}
@@ -99,4 +143,9 @@ en:
 
 '
   navigation:
+    admin:
+      messagegroups: Message groups
     messages: Messages
+  shared:
+    user_form_fields:
+      messagegroups: Join or leave message groups

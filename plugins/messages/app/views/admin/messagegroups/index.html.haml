@@ -1,0 +1,15 @@
+- title t '.title'
+
+- content_for :actionbar do
+  = link_to t('.new_messagegroup'), new_admin_messagegroup_path, class: 'btn btn-primary'
+
+- content_for :sidebar do
+  %p= t('.first_paragraph', url: link_to(t('.new_messagegroups'), new_admin_messagegroup_path)).html_safe
+  %p= t '.second_paragraph'
+.well.well-small
+  = form_tag admin_messagegroups_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :query, params[:query], class: 'input-medium search-query',
+      placeholder: t('admin.search_placeholder')
+#messagegroups
+  = render "messagegroups"

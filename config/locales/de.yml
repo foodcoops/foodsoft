@@ -71,7 +71,7 @@ de:
         group_id: Gruppe
         private: Privat
         recipient_tokens: Empfänger_innen
-        sent_to_all: An alle Mitglieder schicken
+        send_to_all: An alle Mitglieder schicken
         subject: Betreff
       order:
         closed_by: Abgerechnet von

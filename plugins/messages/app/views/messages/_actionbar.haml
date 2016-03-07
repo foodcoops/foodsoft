@@ -1,0 +1,8 @@
+- content_for :actionbar do
+  .btn-group
+    = link_to message_threads_path, class: "btn #{'active' if active == 'message_threads'}" do
+      %i.icon.icon-align-left{title: t('.message_threads')}
+    = link_to messages_path, class: "btn #{'active' if active == 'messages'}" do
+      %i.icon.icon-align-justify{title: t('.messages')}
+  = link_to t('.messagegroups'), messagegroups_path, class: 'btn'
+  = link_to t('.new'), new_message_path, class: 'btn btn-primary'

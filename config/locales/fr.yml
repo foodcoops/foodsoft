@@ -71,7 +71,7 @@ fr:
         group_id: Cellule ou équipe
         private: Privé
         recipient_tokens: Destinataires
-        sent_to_all: Envoyer à tous les membres
+        send_to_all: Envoyer à tous les membres
         subject: Sujet
       order:
         closed_by: Décompté par
