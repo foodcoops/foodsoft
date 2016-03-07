@@ -32,6 +32,8 @@ en:
       redirect_notice: Redirected from %{page} ...
     destroy:
       notice: The page '%{page}' and all subpages have been deleted successfully.
+    diff:
+      title: "%{title} - changes from version %{old} to %{new}"
     edit:
       title: Edit page
     error_stale_object: Warning, the page has just been edited by someone else. Please try again.
@@ -68,6 +70,7 @@ en:
       date_format: ! '%d-%m-%y %H:%M'
       delete: Delete page
       delete_confirm: ! 'Warning: all subpages will be deleted as well. Are you sure?'
+      diff: Compare versions
       edit: Edit page
       last_updated: Last updated by <b>%{user}</b> on %{when}
       subpages: subpages

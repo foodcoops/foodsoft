@@ -1,0 +1,6 @@
+de:
+  pages:
+    diff:
+      title: "%{title} - Änderung von Version %{old} auf %{new}"
+    show:
+      diff: Versionen vergleichen

@@ -1,0 +1,7 @@
+- title t('.title', title: @page.title, old: @old_version.lock_version, new: @new_version.lock_version)
+
+%style= Diffy::CSS
+= raw @diff
+
+%hr
+= link_to t('ui.back'), 'javascript:history.go(-1)', class: 'btn btn-primary'
