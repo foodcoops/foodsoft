@@ -10,7 +10,7 @@
         theme: 'facebook'
       });
 
-      $('#message_sent_to_all').on('change', function() {
+      $('#message_send_to_all').on('change', function() {
         if ($(this).is(':checked')) {
           $('#recipients').slideUp();
         } else {
@@ -18,7 +18,7 @@
         }
       });
       // make sure state is correct when loading
-      $('#recipients').toggle(!$('#message_sent_to_all').is(':checked'));
+      $('#recipients').toggle(!$('#message_send_to_all').is(':checked'));
     });
 
 - title t('.title')
@@ -30,7 +30,7 @@
     %p= t('.reply_to', link: link_to(t('.message'), message_path(@message.reply_to))).html_safe
 
   - if FoodsoftConfig[:mailing_list].blank?
-    = f.input :sent_to_all, :as => :boolean
+    = f.input :send_to_all, :as => :boolean
   - else
     %b= t('.list.desc', list: mail_to(FoodsoftConfig[:mailing_list])).html_safe
     %br/

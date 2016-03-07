@@ -6,7 +6,7 @@ en:
         group_id: Group
         private: Private
         recipient_tokens: Recipients
-        sent_to_all: Send to all members
+        send_to_all: Send to all members
         subject: Subject
       messagegroup:
         description: Description

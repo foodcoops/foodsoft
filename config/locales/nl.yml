@@ -70,7 +70,7 @@ nl:
         group_id: Groep
         private: Privé
         recipient_tokens: Geadresseerden
-        sent_to_all: Aan alle leden sturen
+        send_to_all: Aan alle leden sturen
         subject: Onderwerp
       order:
         closed_by: Afgerekend door
