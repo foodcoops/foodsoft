@@ -1693,12 +1693,12 @@ de:
       title_all: Alle Aufgaben der Gruppe
   ui:
     actions: Aktionen
-    back: Züruck
+    back: Zurück
     cancel: Abbrechen
     close: Schließen
     confirm_delete: Willst du %{name} wirklich löschen?
     confirm_restore: Willst du %{name} wirklich wiederherstellen?
-    copy: kopieren
+    copy: Kopieren
     delete: Löschen
     edit: Bearbeiten
     marks:
