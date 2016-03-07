@@ -754,6 +754,7 @@ de:
         paragraph: Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.
         title: Neue Transaktion
       new_collection:
+        add_all_ordergroups: Alle Bestellgruppen hinzufügen
         new_ordergroup: Weitere Bestellgruppe hinzufügen
         save: Transaktionen speichern
         sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualsieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
