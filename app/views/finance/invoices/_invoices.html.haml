@@ -37,5 +37,5 @@
             = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
         %td
           - if invoice.user_can_edit?(current_user)
-            = link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('.confirm_delete')}, :method => :delete,
+            = link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('ui.confirm_delete', name: invoice.number)}, :method => :delete,
             class: 'btn btn-danger btn-mini'

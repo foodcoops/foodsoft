@@ -285,7 +285,6 @@ fr:
       new:
         title: Ajouter unE nouveLLE_eau membre
       show:
-        confirm_delete: Veux-tu vraiment expulser %{user}?
         confirm_sudo: 
         groupabos: Participation à des équipes
         member_since: Membre depuis %{time}
@@ -334,7 +333,6 @@ fr:
     edit:
       title: Modifier la catégorie
     index:
-      confirm_delete: T'es sûrE de ton coup?
       new: Créer une nouvelle catérogie
       title: Catégories de produits
     new:
@@ -343,7 +341,6 @@ fr:
       notice: La catégorie a été mise à jour
   articles:
     article:
-      confirm_delete: T'es sûrE de ton coup?
       last_update: 'dernière modification: %{last_update} | TTC: %{gross_price}'
     articles:
       confirm_delete: Tu veux vraiment supprimer tous ces produits?
@@ -778,8 +775,6 @@ fr:
       index:
         action_new: Ajouter une facture
         title: Factures
-      invoices:
-        confirm_delete: T'es sûrE de ton coup?
       linked: Cette facture est associée à %{what_link}.
       linked_delivery: un réapprovisionnement
       linked_order: une commande
@@ -1596,8 +1591,6 @@ fr:
       new_quantity: Nouveau stock
       reason: Raison
       stock_changes: Afficher l'historique
-    stock_article:
-      confirm_delete: Es-tu sûr de vouloir supprimer l'article %{name} du cellier?
     update:
       notice: Les données de l'article "%{name}" ont été mises à jour.
   suppliers:
@@ -1632,7 +1625,6 @@ fr:
       supplier: Fournisseur-e
       title: Listes externes
     show:
-      confirm_delete: Tu es sûrE de ton coup?
       last_deliveries: Dernières livraisons
       last_orders: Dernières commande
       new_delivery: Approvisionner le cellier

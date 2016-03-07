@@ -295,7 +295,6 @@ en:
         error: 'User could not be restored: %{error}'
         notice: User was restored
       show:
-        confirm_delete: Do you really want to remove %{user}?
         confirm_sudo: If you continue, you will take on the identity of %{user}. Do not forget to log out when you're done!
         groupabos: Group subscriptions
         member_since: Member since %{time}
@@ -344,7 +343,6 @@ en:
     edit:
       title: Edit category
     index:
-      confirm_delete: Are you sure?
       new: Add new category
       title: Article categories
     new:
@@ -353,7 +351,6 @@ en:
       notice: Category was updated
   articles:
     article:
-      confirm_delete: Are you sure?
       last_update: 'last updated: %{last_update} | gross: %{gross_price}'
     articles:
       confirm_delete: Do you really want to delete all selected articles?
@@ -794,8 +791,6 @@ en:
       index:
         action_new: Create new invoice
         title: Invoices
-      invoices:
-        confirm_delete: Are you sure?
       linked: This invoice is linked to %{what_link}.
       linked_delivery: a delivery
       linked_order: an order
@@ -1612,8 +1607,6 @@ en:
       new_quantity: New quantity
       reason: Reason
       stock_changes: Stock quantity changes
-    stock_article:
-      confirm_delete: Are you sure you want to delete the stock article %{name}?
     update:
       notice: Stock article %{name} was saved.
   suppliers:
@@ -1645,7 +1638,6 @@ en:
       supplier: Supplier
       title: External lists
     show:
-      confirm_delete: Are you sure?
       last_deliveries: Recent deliveries
       last_orders: Last orders
       new_delivery: New delivery

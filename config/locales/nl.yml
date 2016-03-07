@@ -285,7 +285,6 @@ nl:
       new:
         title: Nieuwe gebruiker toevoegen
       show:
-        confirm_delete: Wil je %{user} daadwerkelijk verwijderen?
         confirm_sudo: Als je doorgaat, neem je de identiteit aan van gebruiker %{user}. Vergeet hierna niet uit te loggen!
         groupabos: Groepslidmaatschappen
         member_since: Lid sinds %{time}
@@ -334,7 +333,6 @@ nl:
     edit:
       title: Categorie bewerken
     index:
-      confirm_delete: Weet je het zeker?
       new: Nieuwe categorie
       title: Categoriën
     new:
@@ -343,7 +341,6 @@ nl:
       notice: Categorie is bijgewerkt.
   articles:
     article:
-      confirm_delete: Weet je het zeker?
       last_update: 'laatst bijgewerkt: %{last_update} | bruto: %{gross_price}'
     articles:
       confirm_delete: Weet je zeker dat je alle artikelen wilt verwijderen?
@@ -776,8 +773,6 @@ nl:
       index:
         action_new: Nieuwe factuur toevoegen
         title: Facturen
-      invoices:
-        confirm_delete: Weet je het zeker?
       linked: Deze factuur is aan %{what_link} gekoppeld.
       linked_delivery: een levering
       linked_order: een bestelling
@@ -1589,8 +1584,6 @@ nl:
       new_quantity: Nieuw aantal
       reason: Reden
       stock_changes: Verloop
-    stock_article:
-      confirm_delete: Voorraadartikel "%{name}" echt verwijderen?
     update:
       notice: Voorraadartikel "%{name}" is bijgewerkt.
   suppliers:
@@ -1622,7 +1615,6 @@ nl:
       supplier: Leverancier
       title: Externe lijsten
     show:
-      confirm_delete: Zeker weten?
       last_deliveries: Laatste leveringen
       last_orders: Recente bestellingen
       new_delivery: Levering aanmaken
