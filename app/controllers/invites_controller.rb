@@ -1,6 +1,7 @@
 class InvitesController < ApplicationController
 
   before_filter :authenticate_membership_or_admin_for_invites
+  before_filter -> { require_config_disabled :disable_invite }
   
   def new
     @invite = Invite.new(:user => @current_user, :group => @group)

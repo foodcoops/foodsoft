@@ -132,7 +132,13 @@ class ApplicationController < ActionController::Base
   #
   def require_plugin_enabled(plugin)
     unless plugin.enabled?
-      redirect_to root_path, alert: I18n.t('application.controller.error_plugin_disabled')
+      redirect_to root_path, alert: I18n.t('application.controller.error_feature_disabled')
+    end
+  end
+
+  def require_config_disabled(config)
+    if FoodsoftConfig[config]
+      redirect_to root_path, alert: I18n.t('application.controller.error_feature_disabled')
     end
   end
 

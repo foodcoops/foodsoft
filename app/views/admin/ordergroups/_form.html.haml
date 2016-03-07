@@ -1,4 +1,4 @@
-- unless @ordergroup.new_record?
+- unless @ordergroup.new_record? || FoodsoftConfig[:disable_invite]
   %p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @ordergroup.id), remote: true)).html_safe
 = simple_form_for [:admin, @ordergroup] do |f|
   - captured = capture do

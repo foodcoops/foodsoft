@@ -322,8 +322,8 @@ fr:
       error_authn: Identification requise!
       error_denied: Ton compte n'es pas autorisé à accéder à cette page pour le moment. Si tu penses que ce n'est pas normal, demande à un-e administrateur-rice de modifier les permissions. Si tu as plusieurs comptes, il faut peut-être que tu %{sign_in}
       error_denied_sign_in: te reconnectes
+      error_feature_disabled: Cette fonction est désactivée.
       error_members_only: Cette action ne peut être effectuée que par les membres du groupe.
-      error_plugin_disabled: Cette fonction est désactivée.
       error_token: Accès interdit (jeton invalide)!
   article_categories:
     create:
