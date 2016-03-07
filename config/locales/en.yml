@@ -60,6 +60,7 @@ en:
         deliveries: Delivery
         deposit: Deposit charged
         deposit_credit: Deposit returned
+        net_amount: Amount adjusted for refund
         note: Note
         number: Number
         orders: Order

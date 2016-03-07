@@ -60,6 +60,7 @@ de:
         deliveries: Lieferung
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
+        net_amount: Pfandbereinigter Betrag
         note: Notiz
         number: Nummer
         orders: Bestellung
