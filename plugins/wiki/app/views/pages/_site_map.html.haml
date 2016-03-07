@@ -8,5 +8,5 @@
       = render :partial => 'page_list_item', :locals => {:page => homepage, :level => 0, :siteMap => 1}
   %tbody
     - for page in @pages
-      - if page.id != homepage.try(:id)
+      - if page.id != homepage.try(:id) && !page.parent_id?
         = render :partial => 'page_list_item', :locals => {:page => page, :level => 0, :siteMap => 1}

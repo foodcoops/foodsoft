@@ -108,22 +108,23 @@ class PagesController < ApplicationController
 
   def all
     @pages = Page.non_redirected
-    @partial = params[:view] || 'recent_changes'
+    @partial = params[:view] || 'title_list'
 
     if params[:name]
-      @pages = @pages.where("title LIKE ?", "%#{params[:name]}%").limit(20).order('updated_at DESC')
+      @pages = @pages.where("title LIKE ?", "%#{params[:name]}%").limit(20)
       @partial = 'title_list'
-    else
-      order = case @partial
-        when 'recent_changes' then
-          'updated_at DESC'
-        when 'site_map' then
-          'created_at DESC'
-        when 'title_list' then
-          'title DESC'
-              end
-      @pages.order(order)
     end
+    if params[:sort]
+      sort = case params[:sort]
+               when "title"                then "title"
+               when "title_reverse"        then "title DESC"
+               when "last_updated"         then "updated_at DESC"
+               when "last_updated_reverse" then "updated_at"
+               end
+    else
+      sort = "title"
+    end
+    @pages = @pages.order(sort)
     respond_to do |format|
       format.html
       format.rss { render :layout => false }

@@ -1,8 +1,0 @@
-%table.table.table-striped
-  %thead
-    %tr
-      %th= t 'pages.title'
-      %th= t 'pages.last_updated'
-  %tbody
-    - for page in @pages
-      = render :partial => "page_list_item", :locals => {:page => page, :level => 0, :siteMap => 0}
