@@ -7,6 +7,13 @@ class Finance::BankAccountsController < Finance::BaseController
 
   def import
     @bank_account = BankAccount.find(params[:id])
+    import_method = @bank_account.find_import_method
+    if import_method
+      count = import_method.call(@bank_account)
+      redirect_to finance_bank_account_transactions_url(@bank_account), notice: t('finance.bank_accounts.controller.import.notice', :count => count)
+    end
+  rescue => error
+    redirect_to finance_bank_account_transactions_url(@bank_account), :alert => I18n.t('errors.general_msg', :msg => error.message)
   end
 
   def parse_upload
