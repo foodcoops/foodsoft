@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(version: 20160224201529) do
     t.integer  "next_weekly_tasks_number", limit: 4,                              default: 8
     t.boolean  "ignore_apple_restriction",                                        default: false
     t.boolean  "role_invoices",                                                   default: false, null: false
+    t.date     "break_start"
+    t.date     "break_end"
   end
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree
