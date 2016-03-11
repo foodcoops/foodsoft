@@ -24,3 +24,5 @@ http://localhost:3002/f/api/v1/financial_transactions/1?access_token=12345...
 
 ### /:scope/api/v1/orders
 
+### /:scope/api/v1/article_categories
+
