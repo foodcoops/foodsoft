@@ -11,6 +11,7 @@ class UserNotifier
   def self.finished_order(args)
     order_id = args.first
     Order.find(order_id).group_orders.each do |group_order|
+      next if group_order.ordergroup.nil?
       group_order.ordergroup.users.each do |user|
         begin
           I18n.with_locale(user.settings['profile']['language']) do

@@ -1,4 +1,4 @@
-= raw t '.text0', ordergroup: @group_order.ordergroup.name, order: @order.name, when: I18n.l(@order.ends), user: show_user(@order.updated_by)
+= raw t '.text0', ordergroup: @group_order.ordergroup_name, order: @order.name, when: I18n.l(@order.ends), user: show_user(@order.updated_by)
 - for group_order_article in @group_order.group_order_articles.ordered.all(:include => :order_article)
   - article = group_order_article.order_article.article
   \- #{article.name}:  #{group_order_article.result} x #{article.unit} = #{group_order_article.result * article.fc_price}
