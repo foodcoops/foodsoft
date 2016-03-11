@@ -1,24 +1,20 @@
 = simple_form_for([:finance, @invoice]) do |f|
-  = f.association :deliveries, multiple: true, as: :hidden
-  = f.association :orders, multiple: true, as: :hidden
-
-  - if @invoice.deliveries.first
-    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_delivery'), [@invoice.supplier,@invoice.deliveries.first])).html_safe
-  - if @invoice.orders.first
-    %p= t('finance.invoices.linked', what_link: link_to(t('finance.invoices.linked_order'), new_finance_order_path(order_id: @invoice.orders.first.id))).html_safe
-
-  .fold-line
-    .control-group
-      %label.control-label{for: 'created_at'}
-        = Invoice.human_attribute_name(:created_at)
-      .controls.control-text#article_fc_price
-        = format_date @invoice.created_at
-    .control-group
-      %label.control-label{for: 'created_by'}
-        = Invoice.human_attribute_name(:created_by)
-      .controls.control-text#article_fc_price
-        = show_user @invoice.created_by
+  - if @invoice.created_at
+    .fold-line
+      .control-group
+        %label.control-label{for: 'created_at'}
+          = Invoice.human_attribute_name(:created_at)
+        .controls.control-text#article_fc_price
+          = format_date @invoice.created_at
+      .control-group
+        %label.control-label{for: 'created_by'}
+          = Invoice.human_attribute_name(:created_by)
+        .controls.control-text#article_fc_price
+          = show_user @invoice.created_by
   = f.association :supplier, collection: Supplier.order(:name), hint: false
+  - if Delivery.any?
+    = f.association :deliveries, collection: @deliveries_collection, input_html: {size: 10}, multiple: true, label_method: method(:format_delivery_item)
+  = f.association :orders, collection: @orders_collection, multiple: true, label_method: method(:format_order_item)
   = f.input :number
   = f.input :date, as: :date_picker
   - if current_user.role_finance?
@@ -30,3 +26,5 @@
   .form-actions
     = f.submit class: 'btn'
     = link_to t('ui.or_cancel'), :back
+
+= render :partial => 'form_js', :locals => {:invoice_id => invoice_id}

@@ -14,9 +14,21 @@ class Finance::InvoicesController < ApplicationController
     @invoice = Invoice.new :supplier_id => params[:supplier_id]
     @invoice.deliveries << Delivery.find_by_id(params[:delivery_id]) if params[:delivery_id]
     @invoice.orders << Order.find_by_id(params[:order_id]) if params[:order_id]
+    fill_deliveries_and_orders_collection @invoice.id, @invoice.supplier_id
   end
 
   def edit
+    fill_deliveries_and_orders_collection @invoice.id, @invoice.supplier_id
+  end
+
+  def form_on_supplier_id_change
+    fill_deliveries_and_orders_collection params[:invoice_id], params[:supplier_id]
+    render :layout => false
+  end
+
+  def fill_deliveries_and_orders_collection(invoice_id, supplier_id)
+    @deliveries_collection = Delivery.where('invoice_id = ? OR (invoice_id IS NULL AND supplier_id = ?)', invoice_id, supplier_id).order(:delivered_on)
+    @orders_collection = Order.where('invoice_id = ? OR (invoice_id IS NULL AND supplier_id = ? AND state = ?)', invoice_id, supplier_id, 'finished').order(:ends)
   end
 
   def create

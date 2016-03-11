@@ -773,9 +773,6 @@ nl:
       index:
         action_new: Nieuwe factuur toevoegen
         title: Facturen
-      linked: Deze factuur is aan %{what_link} gekoppeld.
-      linked_delivery: een levering
-      linked_order: een bestelling
       new:
         title: Nieuwe factuur toevoegen
       show:

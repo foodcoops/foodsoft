@@ -780,9 +780,6 @@ de:
       index:
         action_new: Neue Rechnung anlegen
         title: Rechnungen
-      linked: Diese Rechnung ist mit %{what_link} verknüpft.
-      linked_delivery: einer Lieferung
-      linked_order: einer Bestellung
       new:
         title: Neue Rechnung anlegen
       show:

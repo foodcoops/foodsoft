@@ -793,9 +793,6 @@ en:
       index:
         action_new: Create new invoice
         title: Invoices
-      linked: This invoice is linked to %{what_link}.
-      linked_delivery: a delivery
-      linked_order: an order
       new:
         title: Create new invoice
       show:

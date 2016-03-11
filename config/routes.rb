@@ -156,7 +156,9 @@ Foodsoft::Application.routes.draw do
         end
       end
 
-      resources :invoices
+      resources :invoices do
+        get :form_on_supplier_id_change, on: :collection
+      end
 
       resources :ordergroups, only: [:index] do
         resources :financial_transactions, as: :transactions

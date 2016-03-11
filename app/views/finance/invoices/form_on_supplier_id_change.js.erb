@@ -1,0 +1,16 @@
+<%
+deliveries_data = @deliveries_collection.map {|d| { id: d.id, text: format_delivery_item(d) } }
+orders_data = @orders_collection.map {|o| { id: o.id, text: format_order_item(o) } }
+%>
+(function() {
+  function update_select2(id, data) {
+    var ele = $(id);
+    if (!ele.length)
+      return;
+    ele.select2("destroy");
+    ele.html("");
+    ele.select2({data: data});
+  }
+  update_select2("#invoice_delivery_ids", <%= raw deliveries_data.to_json %>);
+  update_select2("#invoice_order_ids", <%= raw orders_data.to_json %>);
+})();

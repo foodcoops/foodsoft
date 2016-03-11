@@ -1,0 +1,14 @@
+- content_for :javascript do
+  :javascript
+    $(function() {
+      if ($('#invoice_delivery_ids').length)
+        $('#invoice_delivery_ids').select2();
+      $('#invoice_order_ids').select2();
+      $('#invoice_supplier_id').change(function(e) {
+        $.ajax({
+          url: '#{form_on_supplier_id_change_finance_invoices_path}',
+          type: 'get',
+          data: {invoice_id: #{invoice_id}, supplier_id: $('#invoice_supplier_id').val()}
+        });
+      });
+    });
