@@ -10,7 +10,8 @@
       %th= heading_helper Invoice, :date
       %th= heading_helper Invoice, :paid_on
       %th= heading_helper Invoice, :amount
-      %th= heading_helper Invoice, :deliveries
+      - if Delivery.any?
+        %th= heading_helper Invoice, :deliveries
       %th= heading_helper Invoice, :orders
       %th= heading_helper Invoice, :note
       %th
@@ -23,10 +24,11 @@
         %td= link_to h(format_date invoice.date), finance_invoice_path(invoice)
         %td= format_date invoice.paid_on
         %td= number_to_currency invoice.amount
-        %td><
-          - invoice.deliveries.each_with_index do |delivery, index|
-            = ', ' if index > 0
-            = link_to format_date(delivery.delivered_on), [delivery.supplier,delivery]
+        - if Delivery.any?
+          %td><
+            - invoice.deliveries.each_with_index do |delivery, index|
+              = ', ' if index > 0
+              = link_to format_date(delivery.delivered_on), [delivery.supplier,delivery]
         %td><
           - invoice.orders.each_with_index do |order, index|
             = ', ' if index > 0
