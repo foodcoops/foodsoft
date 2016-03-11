@@ -775,9 +775,6 @@ fr:
       index:
         action_new: Ajouter une facture
         title: Factures
-      linked: Cette facture est associée à %{what_link}.
-      linked_delivery: un réapprovisionnement
-      linked_order: une commande
       new:
         title: Ajouter une facture
       show:
