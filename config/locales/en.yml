@@ -101,6 +101,7 @@ en:
         account_balance: Account balance
         available_funds: Available credit
         break: (Last) break
+        break_until: until
         contact: Contact
         contact_address: Address
         contact_person: Contact person
