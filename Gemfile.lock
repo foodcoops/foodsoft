@@ -292,6 +292,7 @@ GEM
     rack (1.6.9)
     rack-contrib (1.7.0)
       rack (~> 1.4)
+    rack-cors (0.2.9)
     rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
@@ -536,6 +537,7 @@ DEPENDENCIES
   pry-rescue
   pry-stack_explorer
   quiet_assets
+  rack-cors
   rails (~> 4.2)
   rails-assets-listjs (= 0.2.0.beta.4)
   rails-i18n

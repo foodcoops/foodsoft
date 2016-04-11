@@ -62,6 +62,14 @@ module Foodsoft
     # Load legacy scripts from vendor
     config.assets.precompile += [ 'vendor/assets/javascripts/*.js' ]
 
+    # CORS for API
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        # @todo allow any scope
+        resource '/f/api/v1/*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
   end
 
   # Foodsoft version
