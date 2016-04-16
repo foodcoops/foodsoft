@@ -232,7 +232,7 @@ class ArticlesController < ApplicationController
   # @return [Number] Number of articles not taken into account when syncing (having no number)
   def ignored_article_count
     if action_name == 'sync' || params[:from_action] == 'sync'
-      @ignored_article_count ||= @supplier.articles.where(order_number: [nil, '']).count
+      @ignored_article_count ||= @supplier.articles.undeleted.where(order_number: [nil, '']).count
     else
       0
     end
