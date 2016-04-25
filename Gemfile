@@ -5,7 +5,6 @@ gem "rails", '~> 4.2'
 
 
 gem 'sass-rails'
-gem 'coffee-rails'
 gem 'less-rails'
 gem 'uglifier', '>= 1.0.3'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

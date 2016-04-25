@@ -477,7 +477,6 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capybara
-  coffee-rails
   connection_pool
   coveralls
   daemons
