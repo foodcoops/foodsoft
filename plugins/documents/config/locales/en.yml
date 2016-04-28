@@ -1,0 +1,29 @@
+en:
+  activerecord:
+    attributes:
+      document:
+        created_at: Created at
+        created_by_user_id: Created by
+        data: Data
+        mime: MIME type
+        name: Name
+  config:
+    hints:
+      use_documents: Add a basic document sharing page to the foodcoop menu.
+    keys:
+      use_documents: Enable documents
+  navigation:
+    documents: Documents
+  documents:
+    create:
+      error: 'Document could not be created: %{error}'
+      notice: Document was created
+    destroy:
+      error: 'Document could not be deleted: %{error}'
+      no_right: You do not have enough rights to delete the document
+      notice: Document was deleted
+    index:
+      new: Upload new document
+      title: Documents
+    new:
+      title: New Document

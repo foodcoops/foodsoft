@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 20160226000000) do
 
   add_index "deliveries", ["supplier_id"], name: "index_deliveries_on_supplier_id", using: :btree
 
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "mime"
+    t.binary   "data"
+    t.integer  "created_by_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "financial_transactions", force: :cascade do |t|
     t.integer  "ordergroup_id", limit: 4,                             default: 0, null: false
     t.decimal  "amount",                      precision: 8, scale: 2, default: 0, null: false
@@ -110,7 +119,7 @@ ActiveRecord::Schema.define(version: 20160226000000) do
   add_index "group_order_articles", ["order_article_id"], name: "index_group_order_articles_on_order_article_id", using: :btree
 
   create_table "group_orders", force: :cascade do |t|
-    t.integer  "ordergroup_id",      limit: 4
+    t.integer  "ordergroup_id",      limit: 4,                         default: 0, null: false
     t.integer  "order_id",           limit: 4,                         default: 0, null: false
     t.decimal  "price",                        precision: 8, scale: 2, default: 0, null: false
     t.integer  "lock_version",       limit: 4,                         default: 0, null: false
@@ -141,8 +150,6 @@ ActiveRecord::Schema.define(version: 20160226000000) do
     t.integer  "next_weekly_tasks_number", limit: 4,                              default: 8
     t.boolean  "ignore_apple_restriction",                                        default: false
     t.boolean  "role_invoices",                                                   default: false, null: false
-    t.date     "break_start"
-    t.date     "break_end"
   end
 
   add_index "groups", ["name"], name: "index_groups_on_name", unique: true, using: :btree

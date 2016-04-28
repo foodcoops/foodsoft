@@ -51,6 +51,7 @@ gem 'gaffe'
 gem 'acts_as_versioned', github: 'technoweenie/acts_as_versioned'
 gem 'foodsoft_wiki', path: 'plugins/wiki'
 gem 'foodsoft_messages', path: 'plugins/messages'
+gem 'foodsoft_documents', path: 'plugins/documents'
 
 # plugins not enabled by default
 #gem 'foodsoft_current_orders', path: 'plugins/current_orders'
