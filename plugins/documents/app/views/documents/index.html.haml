@@ -1,0 +1,7 @@
+- title t('.title')
+
+- content_for :actionbar do
+  = link_to t('.new'), new_document_path, class: 'btn btn-primary'
+
+#documentsTable
+  = render :partial => "documents"

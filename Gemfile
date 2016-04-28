@@ -56,6 +56,7 @@ gem 'foodsoft_messages', path: 'plugins/messages'
 # plugins not enabled by default
 #gem 'foodsoft_current_orders', path: 'plugins/current_orders'
 #gem 'foodsoft_uservoice', path: 'plugins/uservoice'
+#gem 'foodsoft_documents', path: 'plugins/documents'
 
 
 group :production do
