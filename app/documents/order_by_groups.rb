@@ -37,7 +37,7 @@ class OrderByGroups < OrderPdf
       rows << [ I18n.t('documents.order_by_groups.sum'), nil, nil, nil, nil, nil, number_to_currency(total)]
       rows.unshift I18n.t('documents.order_by_groups.rows') # Table Header
 
-      text group_order.ordergroup.name, size: fontsize(9), style: :bold
+      text group_order.ordergroup_name, size: fontsize(9), style: :bold
       table rows, width: 500, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
         # borders
         table.cells.borders = [:bottom]
