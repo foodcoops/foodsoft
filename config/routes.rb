@@ -251,6 +251,7 @@ Foodsoft::Application.routes.draw do
         resources :financial_transactions, only: [:index, :show]
         resources :orders, only: [:index, :show]
         resources :order_articles, only: [:index, :show]
+        resources :group_order_articles, only: [:index, :show]
         resources :article_categories, only: [:index]
       end
     end
