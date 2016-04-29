@@ -1,9 +1,10 @@
 class Api::V1::OrdersController < Api::V1::BaseController
+  include CollectionScope
 
   before_action :authenticate
 
   def index
-    render json: scope
+    render json: search_scope
   end
 
   def show
@@ -15,5 +16,4 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def scope
     Order.open.includes(:supplier)
   end
-
 end

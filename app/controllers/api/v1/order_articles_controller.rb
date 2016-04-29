@@ -1,9 +1,10 @@
 class Api::V1::OrderArticlesController < Api::V1::BaseController
+  include CollectionScope
 
   before_action :authenticate
 
   def index
-    render json: scope
+    render json: search_scope
   end
 
   def show
