@@ -2,6 +2,7 @@
   %thead
     %tr
       %th= heading_helper Order, :name
+      %th= heading_helper Order, :pickup
       %th= heading_helper Order, :ends
       %th= heading_helper GroupOrder, :price
   %tbody
@@ -10,6 +11,7 @@
       - order_class = group_order ? "" : "color:grey"
       %tr{:class=> cycle('even', 'odd', :name => 'orders'), :style => order_class}
         %td= group_order.present? ? link_to(order.name, group_order_path(group_order)) : order.name
+        %td= format_date(order.pickup)
         %td= format_time(order.ends)
         %td.numeric= group_order ? number_to_currency(group_order.price) : "--"
 - if pagination

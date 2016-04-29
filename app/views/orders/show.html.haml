@@ -11,12 +11,23 @@
 .well
   = close_button :alert
   %p
-    = raw t '.description1',
+    - description1 = raw t '.description1_order',
                state: t("orders.state.#{@order.state}").capitalize,
                supplier: supplier_link(@order),
-               who: show_user_link(@order.created_by),
-               starts: format_time(@order.starts),
-               ends: format_time(@order.ends)
+               who: show_user_link(@order.created_by)
+    - description1 += ' '
+    - if @order.ends
+      - description1 += raw t '.description1_period.starts_ends',
+                 starts: format_time(@order.starts),
+                 ends: format_time(@order.ends)
+    - else
+      - description1 += raw t '.description1_period.starts',
+                 starts: format_time(@order.starts)
+    - if @order.pickup
+      - description1 += ' '
+      - description1 += raw t '.description1_period.pickup',
+                 pickup: format_date(@order.pickup)
+    = description1 + '.'
     %br
     = raw t '.description2',
                ordergroups: ordergroup_count(@order),

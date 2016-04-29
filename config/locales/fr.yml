@@ -1314,7 +1314,11 @@ fr:
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment clôturer la commande %{order}? Pas d'annulation possible.
       create_invoice: Ajouter une facture
-      description1: Commande %{state} de %{supplier} créée par %{who}, ouverte du %{starts} au %{ends}.
+      description1_order: "Commande %{state} de %{supplier} créée par %{who},"
+      description1_period:
+        starts: "ouverte du %{starts}"
+        starts_ends: "ouverte du %{starts} au %{ends}"
+        pickup:
       description2: "%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)"
       download:
         article_pdf: Liste des articles en PDF

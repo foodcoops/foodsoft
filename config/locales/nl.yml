@@ -1309,7 +1309,11 @@ nl:
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
       create_invoice: Factuur toevoegen
-      description1: "%{state} bestelling van %{supplier}, geopend door %{who}, open van %{starts} tot %{ends}."
+      description1_order: "%{state} bestelling van %{supplier}, geopend door %{who},"
+      description1_period:
+        starts: "open van %{starts}"
+        starts_ends: "open van %{starts} tot %{ends}"
+        pickup:
       description2: "%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto)."
       download:
         article_pdf: Artikelen PDF
