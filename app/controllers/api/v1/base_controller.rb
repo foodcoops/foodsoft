@@ -14,7 +14,7 @@ class Api::V1::BaseController < ApplicationController
 
   # @return [User] Current user, or +nil+ if no valid token.
   def current_user
-    @current_user ||= User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    @current_user ||= User.undeleted.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
   end
 
   # @return [Ordergroup] Current user's ordergroup, or +nil+ if no valid token or user has no ordergroup.

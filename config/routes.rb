@@ -10,9 +10,7 @@ Foodsoft::Application.routes.draw do
 
   scope '/:foodcoop' do
 
-    use_doorkeeper do
-      skip_controllers :applications, :authorized_applications
-    end
+    use_doorkeeper
 
     # Root path
     root to: 'home#index'

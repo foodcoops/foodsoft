@@ -1,5 +1,5 @@
 class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
-  include CollectionScope
+  include Concerns::CollectionScope
 
   before_action :authenticate
 

@@ -1,4 +1,4 @@
-module CollectionScope
+module Concerns::CollectionScope
   extend ActiveSupport::Concern
 
   private

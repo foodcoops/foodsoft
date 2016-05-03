@@ -4,19 +4,16 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
-    User.find_by_id(session[:user_id]) || redirect_to(login_url)
+    authenticate
   end
 
   resource_owner_from_credentials do
     User.authenticate(params[:username], params[:password])
   end
 
-  # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
-  # admin_authenticator do
-  #   # Put your admin authentication logic here.
-  #   # Example implementation:
-  #   Admin.find_by_id(session[:admin_id]) || redirect_to(new_admin_session_url)
-  # end
+  admin_authenticator do
+    authenticate_admin
+  end
 
   # Authorization Code expiration time (default 10 minutes).
   # authorization_code_expires_in 10.minutes
@@ -102,7 +99,14 @@ Doorkeeper.configure do
   # skip_authorization do |resource_owner, client|
   #   client.superapp? or resource_owner.admin?
   # end
+  skip_authorization { true } # right now only admins can add apps, so this is ok
 
   # WWW-Authenticate Realm (default "Doorkeeper").
   realm "Foodsoft"
+end
+
+# my take on https://github.com/doorkeeper-gem/doorkeeper/issues/465
+ActiveSupport.on_load(:after_initialize) do
+  Doorkeeper::ApplicationController.send :include, Concerns::FoodcoopScope
+  Doorkeeper::ApplicationController.send :include, Concerns::Auth
 end
