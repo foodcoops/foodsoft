@@ -18,7 +18,7 @@ which provides an OAuth2 provider.
 
 ### Authorization code flow
 
-This is the recommended flow (certainly when building a web-app), where
+This is the recommended flow for server-side web applications, where
 members login with Foodsoft, then redirected to the app, which then obtains
 an access token using the authorization code supplied at redirection.
 
@@ -37,6 +37,23 @@ Foodsoft account by default, since apps can only be created by admins. If you
 want to change that, see disable `skip_authorization` in `config/initializers/doorkeeper.rb`.
 
 [Read more](https://github.com/doorkeeper-gem/doorkeeper/wiki/authorization-flow).
+
+
+### Implicit flow
+
+This is the recommended flow for client-side web applications. It looks a lot
+like the authorization code flow, but when redirecting back to the app, the
+access token is available directly as part of the url _fragment_ (`window.location.hash`).
+
+This flow also needs to be registered in Foodsoft as in the authorization code flow.
+You only need the client_id though, not the secret.
+
+**note** please make sure you understand sections
+[4.4.2](http://tools.ietf.org/html/rfc6819#section-4.4.2) and
+[4.4.3](http://tools.ietf.org/html/rfc6819#section-4.4.3) of the OAuth2 Thread
+Model document before using this flow.
+
+You may find Doorkeeper's [implicit_grant_test](https://github.com/doorkeeper-gem/doorkeeper/blob/master/spec/requests/flows/implicit_grant_spec.rb) useful.
 
 
 ### Password credentials flow
