@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Ordergroups can order, they are "children" of the class Group
-# 
+#
 # Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
 class Ordergroup < Group
@@ -13,7 +13,8 @@ class Ordergroup < Group
 
   has_many :financial_transactions
   has_many :group_orders
-  has_many :orders, :through => :group_orders
+  has_many :group_order_articles, through: :group_orders
+  has_many :orders, through: :group_orders
 
   validates_numericality_of :account_balance, :message => I18n.t('ordergroups.model.invalid_balance')
   validate :uniqueness_of_name, :uniqueness_of_members
@@ -54,7 +55,7 @@ class Ordergroup < Group
   def value_of_open_orders(exclude = nil)
     group_orders.in_open_orders.reject{|go| go == exclude}.collect(&:price).sum
   end
-  
+
   def value_of_finished_orders(exclude = nil)
     group_orders.in_finished_orders.reject{|go| go == exclude}.collect(&:price).sum
   end
@@ -94,7 +95,7 @@ class Ordergroup < Group
     stats[:jobs_size].to_f / stats[:orders_sum].to_f rescue 0
   end
 
-  # This is the ordergroup job per euro performance 
+  # This is the ordergroup job per euro performance
   # in comparison to the hole foodcoop average
   def apples
     ((avg_jobs_per_euro / Ordergroup.avg_jobs_per_euro) * 100).to_i rescue 0
@@ -122,7 +123,7 @@ class Ordergroup < Group
   def account_updated
     financial_transactions.last.try(:created_on) || created_on
   end
-  
+
   private
 
   # Make sure, that a user can only be in one ordergroup
@@ -141,6 +142,5 @@ class Ordergroup < Group
       errors.add :name, message
     end
   end
- 
-end
 
+end

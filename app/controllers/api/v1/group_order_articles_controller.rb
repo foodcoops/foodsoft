@@ -1,7 +1,7 @@
 class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   include Concerns::CollectionScope
 
-  before_action :authenticate
+  before_action :require_ordergroup
 
   def index
     render json: scope
@@ -14,6 +14,6 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   private
 
   def scope
-    GroupOrderArticle.joins(:group_order => :order).merge(Order.open)
+    current_ordergroup.group_order_articles.joins(:group_order => :order).merge(Order.open)
   end
 end
