@@ -21,6 +21,7 @@
       %thead
         %tr
           %th= heading_helper Order, :name
+          %th= heading_helper Order, :pickup
           %th= heading_helper Order, :ends
           %th= heading_helper Order, :note
           %th{colspan: "2"}
@@ -30,6 +31,7 @@
             - tr_class = " active" if order.expired?
             %tr{class: tr_class}
               %td= order.name
+              %td= format_date(order.pickup) unless order.pickup.nil?
               %td= format_time(order.ends) unless order.ends.nil?
               %td= truncate(order.note)
               %td= link_to t('.action_end'), finish_order_path(order),
@@ -50,6 +52,7 @@
           - for order in @finished_orders
             %tr
               %td= order.name
+              %td= format_date(order.pickup) unless order.pickup.nil?
               %td= format_time(order.ends)
               %td= truncate(order.note)
               %td

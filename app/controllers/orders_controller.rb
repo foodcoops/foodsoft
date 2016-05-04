@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
     if params['sort']
       sort = case params['sort']
                when "supplier"         then "suppliers.name, ends DESC"
+               when "pickup"           then "pickup DESC"
                when "ends"             then "ends DESC"
                when "supplier_reverse" then "suppliers.name DESC"
                when "ends_reverse"     then "ends"

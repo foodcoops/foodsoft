@@ -80,6 +80,7 @@ en:
         ends: Ends at
         name: Supplier
         note: Note
+        pickup: Pickup
         starts: Starts at
         status: Status
         supplier: Supplier
@@ -1332,7 +1333,11 @@ en:
         Do you really want to close the order %{order}?
         There is no going back.
       create_invoice: Add invoice
-      description1: "%{state} order from %{supplier} created by %{who}, open from %{starts} until %{ends}."
+      description1_order: "%{state} order from %{supplier} created by %{who},"
+      description1_period:
+        starts: "open from %{starts}"
+        starts_ends: "open from %{starts} until %{ends}"
+        pickup: "and can be picked up on %{pickup}"
       description2: "%{ordergroups} ordered %{article_count} articles, with a total value of %{net_sum} / %{gross_sum} (net / gross)."
       download:
         article_pdf: Article PDF

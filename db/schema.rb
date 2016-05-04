@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20160226000000) do
     t.decimal  "foodcoop_result",                  precision: 8, scale: 2
     t.integer  "created_by_user_id", limit: 4
     t.datetime "boxfill"
+    t.date     "pickup"
     t.integer  "invoice_id"
   end
 

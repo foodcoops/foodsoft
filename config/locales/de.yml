@@ -79,6 +79,7 @@ de:
         ends: Endet am
         name: Lieferant
         note: Notiz
+        pickup: Abholung
         starts: Läuft vom
         status: Status
         supplier: Lieferant
@@ -1309,7 +1310,11 @@ de:
         Willst Du wirklich die Bestellung %{order} beenden?
         Es gibt kein zurück.
       create_invoice: Rechnung anlegen
-      description1: "%{state} Bestellung von %{supplier} angelegt von %{who}, läuft von %{starts} bis %{ends}."
+      description1_order: "%{state} Bestellung von %{supplier} angelegt von %{who},"
+      description1_period:
+        starts: "läuft von %{starts}"
+        starts_ends: "läuft von %{starts} bis %{ends}"
+        pickup: "und kann am %{pickup} abgeholt werden"
       description2: "%{ordergroups} haben %{article_count} Artikel mit einem Gesamtwert von %{net_sum} / %{gross_sum} (netto / brutto) bestellt."
       download:
         article_pdf: Artikel PDF
