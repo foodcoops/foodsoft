@@ -10,6 +10,14 @@ corresponding line in the `Gemfile`, or add:
 gem 'foodsoft_documents', path: 'lib/foodsoft_documents'
 ```
 
+Then activate the plugin (explained [here](https://github.com/foodcoops/foodsoft/wiki/Plugins#installing-a-plugin)):
+
+```
+bundle install
+rake railties:install:migrations
+rake db:migrate
+```
+
 This plugin introduces the foodcoop config option `use_documents`, which can be
 set to `true` to enable documents. May be useful in multicoop deployments.
 
