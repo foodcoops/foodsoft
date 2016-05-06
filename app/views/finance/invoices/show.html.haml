@@ -59,6 +59,10 @@
     %b= heading_helper(Invoice, :total) + ':'
     = number_to_currency total
 %p
+  %b= heading_helper(Invoice, :attachment) + ':'
+  - if @invoice.attachment_data
+    = link_to t('ui.download'), finance_invoice_attachment_path(@invoice)
+%p
   %b= heading_helper(Invoice, :note) + ':'
   =h @invoice.note
 

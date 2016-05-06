@@ -54,9 +54,11 @@ en:
         total_price: Sum
       invoice:
         amount: Amount
+        attachment: Attachment
         created_at: Created at
         created_by: Created by
         date: Billing date
+        delete_attachment: Delete attachment
         deliveries: Delivery
         deposit: Deposit charged
         deposit_credit: Deposit returned
@@ -793,6 +795,8 @@ en:
     invoices:
       edit:
         title: Edit invoice
+      form:
+        attachment_hint: Only JPEG and PDF are allowed.
       index:
         action_new: Create new invoice
         title: Invoices
@@ -1196,6 +1200,8 @@ en:
       stock_ordergroup_name: Stock (%{user})
     membership:
       no_admin_delete: Membership can not be withdrawn as you are the last administrator.
+    invoice:
+      invalid_mime: has an invalide MIME type (%{mime})
     order_article:
       error_price: must be specified and have a current price price
     page:
@@ -1727,6 +1733,7 @@ en:
     confirm_restore: Do you really want to restore %{name}?
     copy: Copy
     delete: Delete
+    download: Download
     edit: Edit
     marks:
       close: "&times;"

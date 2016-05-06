@@ -359,6 +359,7 @@ GEM
     rspec-rerun (1.1.0)
       rspec (~> 3.0)
     rspec-support (3.4.1)
+    ruby-filemagic (0.7.1)
     ruby-ole (1.2.12)
     ruby-prof (0.15.9)
     ruby-units (2.0.0)
@@ -519,6 +520,7 @@ DEPENDENCIES
   rspec-core (~> 3.2)
   rspec-rails
   rspec-rerun
+  ruby-filemagic
   ruby-prof
   ruby-units
   sass-rails
