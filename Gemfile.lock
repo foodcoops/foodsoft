@@ -12,6 +12,14 @@ GIT
       activerecord (>= 3.0.9)
 
 PATH
+  remote: plugins/documents
+  specs:
+    foodsoft_documents (0.0.1)
+      deface (~> 1.0.0)
+      rails
+      ruby-filemagic
+
+PATH
   remote: plugins/messages
   specs:
     foodsoft_messages (0.0.1)
@@ -486,6 +494,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   faker
+  foodsoft_documents!
   foodsoft_messages!
   foodsoft_wiki!
   gaffe

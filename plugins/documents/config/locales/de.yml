@@ -1,0 +1,29 @@
+de:
+  activerecord:
+    attributes:
+      document:
+        created_at: Erstellt am
+        created_by_user_id: Erstellt von
+        data: Daten
+        mime: MIME-Typ
+        name: Name
+  config:
+    hints:
+      use_documents: Einfache Dokumentenverwaltung aktivieren
+    keys:
+      use_documents: Dokumente verwenden
+  navigation:
+    documents: Dokumente
+  documents:
+    create:
+      error: 'Dokument konnte nicht erstellt werden: %{error}'
+      notice: Dokument wurde erstellt
+    destroy:
+      error: 'Dokument konnt nicht gelöscht werden: %{error}'
+      no_right: Du hast nicht genügend Rechte um die Datei zu löschen
+      notice: Dokument wurde gelöscht
+    index:
+      new: Neues Dokument anlegen
+      title: Dokumente
+    new:
+      title: Neues Dokument
