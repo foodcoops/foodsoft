@@ -23,7 +23,8 @@
   = f.input :deposit, as: :string
   = f.input :deposit_credit, as: :string
   = f.input :attachment, as: :file, hint: t('.attachment_hint')
-  = f.input :delete_attachment, as: :boolean
+  - if f.object.attachment_data.present?
+    = f.input :delete_attachment, as: :boolean
   = f.input :note
   .form-actions
     = f.submit class: 'btn'
