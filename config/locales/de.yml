@@ -54,9 +54,11 @@ de:
         total_price: Summe
       invoice:
         amount: Betrag
+        attachment: Anhang
         created_at: Erstellt am
         created_by: Erstellt von
         date: Rechnungsdatum
+        delete_attachment: Anhang löschen
         deliveries: Lieferung
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
@@ -779,6 +781,8 @@ de:
     invoices:
       edit:
         title: Rechnung bearbeiten
+      form:
+        attachment_hint: Es sind nur JPEG und PDF erlaubt.
       index:
         action_new: Neue Rechnung anlegen
         title: Rechnungen
@@ -1175,6 +1179,8 @@ de:
       stock_ordergroup_name: Lager (%{user})
     membership:
       no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
+    invoice:
+      invalid_mime: hat einen ungültigen MIME-Typ (%{mime})
     order_article:
       error_price: muss angegeben sein und einen aktuellen Preis haben
     page:
@@ -1704,6 +1710,7 @@ de:
     confirm_restore: Willst du %{name} wirklich wiederherstellen?
     copy: Kopieren
     delete: Löschen
+    download: Herunterladen
     edit: Bearbeiten
     marks:
       close: "&times;"

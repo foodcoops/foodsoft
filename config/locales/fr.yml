@@ -54,9 +54,11 @@ fr:
         total_price: Total
       invoice:
         amount: Montant
+        attachment: Appendice
         created_at: Créé le
         created_by: "Établi par"
         date: Date de facturation
+        delete_attachment: Supprimer appendice
         deliveries: Réapprovisionnement
         deposit: Consigne facturée
         deposit_credit: Consigne remboursée
@@ -1705,6 +1707,7 @@ fr:
     confirm_delete: Veux-tu vraiment supprimer %{name}?
     copy: 
     delete: Supprimer
+    download: Télécharger
     edit: Modifier
     marks:
       close: "&times;"

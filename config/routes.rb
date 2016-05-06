@@ -157,6 +157,7 @@ Foodsoft::Application.routes.draw do
       end
 
       resources :invoices do
+        get :attachment
         get :form_on_supplier_id_change, on: :collection
       end
 

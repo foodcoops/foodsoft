@@ -169,6 +169,8 @@ ActiveRecord::Schema.define(version: 20160226000000) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_user_id"
+    t.string   "attachment_mime"
+    t.binary   "attachment_data"
   end
 
   add_index "invoices", ["supplier_id"], name: "index_invoices_on_supplier_id", using: :btree
