@@ -48,10 +48,11 @@ Getting started
    [libxml2-dev](https://packages.debian.org/stable/libxml2-dev)
    [libxslt1-dev](https://packages.debian.org/stable/libxslt1-dev)
    [libffi-dev](https://packages.debian.org/stable/libffi-dev)
-   [libreadline-dev](https://packages.debian.org/stable/libreadline-dev):
+   [libreadline-dev](https://packages.debian.org/stable/libreadline-dev)
+   [libmagic-dev](https://packages.debian.org/stable/libmagic-dev):
 
         # Debian/Ubuntu
-        sudo apt-get install libv8-dev libmysqlclient-dev libxml2-dev libxslt1-dev libffi-dev libreadline-dev
+        sudo apt-get install libv8-dev libmysqlclient-dev libxml2-dev libxslt1-dev libffi-dev libreadline-dev libmagic-dev
 
    For CentOS/Redhat you need
    [v8](https://apps.fedoraproject.org/packages/v8)
@@ -59,10 +60,11 @@ Getting started
    [libxml2-devel](https://apps.fedoraproject.org/packages/libxml2-devel)
    [libxslt-devel](https://apps.fedoraproject.org/packages/libxslt-devel)
    [libffi-devel](https://apps.fedoraproject.org/packages/libffi-devel)
-   [readline-devel](https://apps.fedoraproject.org/packages/readline-devel):
+   [readline-devel](https://apps.fedoraproject.org/packages/readline-devel)
+   [file-devel](https://apps.fedoraproject.org/packages/file-devel):
 
         # CentOS/Redhat
-        sudo yum install v8 community-mysql-devel libxml2-devel libxslt-devel libffi-devel readline-devel
+        sudo yum install v8 community-mysql-devel libxml2-devel libxslt-devel libffi-devel readline-devel file-devel
 
 3. Install Ruby dependencies:
 
