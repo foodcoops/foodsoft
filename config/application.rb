@@ -67,7 +67,7 @@ module Foodsoft
       allow do
         origins '*'
         # @todo allow any scope
-        resource '/f/api/v1/*', :headers => :any, :methods => [:get, :post, :options]
+        resource '/f/api/v1/*', :headers => :any, :methods => :any
       end
     end
   end
