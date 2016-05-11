@@ -45,7 +45,9 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   private
 
   def scope
-    current_ordergroup.group_order_articles.joins(:group_order => :order).merge(Order.open)
+    current_ordergroup.group_order_articles.
+      preload(:order_article => :article).
+      joins(:group_order => :order).merge(Order.open)
   end
 
   def order_articles_scope
