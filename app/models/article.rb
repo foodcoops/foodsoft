@@ -43,6 +43,12 @@ class Article < ActiveRecord::Base
   # @!attribute article_prices
   #   @return [Array<ArticlePrice>] Price history (current price first).
   has_many :article_prices, -> { order("created_at DESC") }
+  # @!attribute order_articles
+  #   @return [Array<OrderArticle>] Order articles for this article.
+  has_many :order_articles
+  # @!attribute order
+  #   @return [Array<Order>] Orders this article appears in.
+  has_many :orders, through: :order_articles
 
   # Replace numeric seperator with database format
   localize_input_of :price, :tax, :deposit

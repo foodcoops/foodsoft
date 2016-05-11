@@ -4,7 +4,7 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   before_action :require_ordergroup
 
   def index
-    render json: scope
+    render json: search_scope
   end
 
   def show

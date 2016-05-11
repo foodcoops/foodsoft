@@ -8,7 +8,7 @@ module Concerns::CollectionScope
   end
 
   def search_scope
-    params[:q] ? scope.ransack(params[:q]).result : scope
+    params[:q] ? scope.ransack(params[:q]).result(distinct: true) : scope
   end
 
 end
