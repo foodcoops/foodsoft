@@ -4,7 +4,7 @@ module Concerns::CollectionScope
   private
 
   def scope
-    raise NotImplementedError, "Please override #scope when you use the Api::Scope concern"
+    raise NotImplementedError, "Please override #scope when you use Concerns::CollectionScope"
   end
 
   def search_scope

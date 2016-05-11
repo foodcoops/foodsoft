@@ -1,7 +1,7 @@
 class Api::V1::BaseController < ApplicationController
   protect_from_forgery with: :null_session
 
-  before_action :destroy_session
+  before_action :skip_session
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_handler
   rescue_from Api::Errors::PermissionRequired, with: :permission_required_handler
 
@@ -27,7 +27,7 @@ class Api::V1::BaseController < ApplicationController
     current_user.ordergroup or raise Api::Errors::PermissionRequired
   end
 
-  def destroy_session
+  def skip_session
     request.session_options[:skip] = true
   end
 
