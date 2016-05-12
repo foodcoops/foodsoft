@@ -4,7 +4,7 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   before_action :require_ordergroup
 
   def index
-    render json: search_scope
+    render_collection search_scope
   end
 
   def show
@@ -44,6 +44,10 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
 
   private
 
+  def per_page
+    nil # disable pagination
+  end
+
   def scope
     current_ordergroup.group_order_articles.
       preload(:order_article => :article).
@@ -55,10 +59,10 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   end
 
   def create_params
-    params.permit(:order_article_id, :quantity, :tolerance)
+    params.require(:data).permit(:order_article_id, :quantity, :tolerance)
   end
 
   def update_params
-    params.permit(:quantity, :tolerance)
+    params.require(:data).permit(:quantity, :tolerance)
   end
 end

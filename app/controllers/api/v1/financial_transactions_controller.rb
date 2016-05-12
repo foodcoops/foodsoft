@@ -1,19 +1,20 @@
 class Api::V1::FinancialTransactionsController < Api::V1::BaseController
+  include Concerns::CollectionScope
 
   before_action :require_ordergroup
 
   def index
-    ft = current_ordergroup.financial_transactions.map { |t| t.id }
-    render json: ft
+    render_collection search_scope
   end
 
   def show
-    ft = FinancialTransaction.find_by! id: params.require(:id), ordergroup: current_ordergroup
-    render json: {
-      user: show_user(ft.user),
-      amount: ft.amount.to_f,
-      note: ft.note
-    }
+    render json: scope.find(params.require(:id))
+  end
+
+  private
+
+  def scope
+    current_ordergroup.financial_transactions
   end
 
 end

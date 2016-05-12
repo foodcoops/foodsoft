@@ -4,7 +4,7 @@ class Api::V1::OrderArticlesController < Api::V1::BaseController
   before_action :authenticate
 
   def index
-    render json: search_scope
+    render_collection search_scope
   end
 
   def show
