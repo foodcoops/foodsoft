@@ -4,16 +4,16 @@ class StockitController < ApplicationController
     @stock_articles = StockArticle.undeleted.includes(:supplier, :article_category).
         order('suppliers.name, article_categories.name, articles.name')
   end
-  
+
   def index_on_stock_article_create # See publish/subscribe design pattern in /doc.
     @stock_article = StockArticle.find(params[:id])
-    
+
     render :layout => false
   end
 
   def index_on_stock_article_update # See publish/subscribe design pattern in /doc.
     @stock_article = StockArticle.find(params[:id])
-    
+
     render :layout => false
   end
 
@@ -24,43 +24,41 @@ class StockitController < ApplicationController
 
     render :layout => false
   end
-  
+
   # (2) StockArticle as template
   def copy
     @stock_article = StockArticle.find(params[:stock_article_id]).dup
-    
+
     render :layout => false
   end
-  
+
   # (3) non-stock Article as template
   def derive
     @stock_article = Article.find(params[:old_article_id]).becomes(StockArticle).dup
-    
+
     render :layout => false
   end
 
   def create
-    @stock_article = StockArticle.new(params[:stock_article])
-    if @stock_article.valid? && @stock_article.save
-      render :layout => false
-    else
-      render :action => 'new', :layout => false
-    end
+    @stock_article = StockArticle.new({quantity: 0}.merge(params[:stock_article]))
+    @stock_article.save!
+    render :layout => false
+  rescue ActiveRecord::RecordInvalid
+    render :action => 'new', :layout => false
   end
 
   def edit
     @stock_article = StockArticle.find(params[:id])
-    
+
     render :layout => false
   end
 
   def update
     @stock_article = StockArticle.find(params[:id])
-    if @stock_article.update_attributes(params[:stock_article])
-      render :layout => false
-    else
-      render :action => 'edit', :layout => false
-    end
+    @stock_article.update_attributes!(params[:stock_article])
+    render :layout => false
+  rescue ActiveRecord::RecordInvalid
+    render :action => 'edit', :layout => false
   end
 
   def show
@@ -70,7 +68,7 @@ class StockitController < ApplicationController
 
   def show_on_stock_article_update # See publish/subscribe design pattern in /doc.
     @stock_article = StockArticle.find(params[:id])
-    
+
     render :layout => false
   end
 

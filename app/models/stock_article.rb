@@ -5,6 +5,8 @@ class StockArticle < Article
 
   scope :available, -> { undeleted.where('quantity > 0') }
 
+  validates :quantity, presence: true, numericality: {greater_than_or_equal_to: 0}
+
   before_destroy :check_quantity
 
   # Update the quantity of items in stock
@@ -46,4 +48,3 @@ class StockArticle < Article
     true
   end
 end
-
