@@ -15,7 +15,8 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
     GroupOrderArticle.transaction do
       oa = order_articles_scope.find(create_params.require(:order_article_id))
       go = current_ordergroup.group_orders.find_or_create_by!(order_id: oa.order_id)
-      goa = go.group_order_articles.create!(create_params)
+      goa = go.group_order_articles.create!(order_article: oa)
+      goa.update_quantities((create_params[:quantity] || 0).to_i, (create_params[:tolerance] || 0).to_i)
       oa.update_results!
       go.update_price!
       render json: goa
