@@ -13,6 +13,10 @@ class Api::V1::FinancialTransactionsController < Api::V1::BaseController
 
   private
 
+  def max_per_page
+    nil
+  end
+
   def scope
     current_ordergroup.financial_transactions
   end

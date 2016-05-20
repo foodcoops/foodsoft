@@ -7,6 +7,14 @@ class Api::V1::ArticleCategoriesController < Api::V1::BaseController
 
   private
 
+  def max_per_page
+    nil
+  end
+
+  def default_per_page
+    nil
+  end
+
   def scope
     ArticleCategory.all
   end

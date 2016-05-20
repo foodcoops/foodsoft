@@ -44,8 +44,8 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
 
   private
 
-  def per_page
-    nil # disable pagination
+  def max_per_page
+    nil
   end
 
   def scope
