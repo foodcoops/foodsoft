@@ -107,6 +107,7 @@ end
 
 # my take on https://github.com/doorkeeper-gem/doorkeeper/issues/465
 ActiveSupport.on_load(:after_initialize) do
+  Doorkeeper::ApplicationController.send :include, Concerns::Locale
   Doorkeeper::ApplicationController.send :include, Concerns::FoodcoopScope
   Doorkeeper::ApplicationController.send :include, Concerns::Auth
 end

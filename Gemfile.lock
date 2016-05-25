@@ -156,6 +156,7 @@ GEM
     docile (1.1.5)
     doorkeeper (4.3.1)
       railties (>= 4.2)
+    doorkeeper-i18n (4.0.0)
     email_reply_trimmer (0.1.8)
     erubi (1.7.0)
     erubis (2.7.0)
@@ -509,6 +510,7 @@ DEPENDENCIES
   database_cleaner
   date_time_attribute
   doorkeeper
+  doorkeeper-i18n
   exception_notification
   factory_bot_rails
   faker

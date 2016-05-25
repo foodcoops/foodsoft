@@ -30,6 +30,7 @@ gem 'inherited_resources'
 gem 'localize_input', git: "https://github.com/bennibu/localize_input.git"
 gem 'daemons'
 gem 'doorkeeper'
+gem 'doorkeeper-i18n'
 gem 'rack-cors', require: 'rack/cors'
 gem 'active_model_serializers', '~> 0.10.0.rc4'
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
