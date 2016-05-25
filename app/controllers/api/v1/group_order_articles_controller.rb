@@ -2,6 +2,8 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   include Concerns::CollectionScope
 
   before_action :require_ordergroup
+  before_action :require_minimum_balance, only: [:create, :update] # destroy is ok
+  # @todo allow decreasing amounts when minimum balance isn't met
 
   def index
     render_collection search_scope
@@ -65,5 +67,12 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
 
   def update_params
     params.require(:data).permit(:quantity, :tolerance)
+  end
+
+  def require_minimum_balance
+    minimum_balance = FoodsoftConfig[:minimum_balance] or return
+    if current_ordergroup.account_balance < minimum_balance
+      raise Api::Errors::PermissionRequired.new("Sorry, your account balance is below the minimum of #{minimum_balance}.")
+    end
   end
 end

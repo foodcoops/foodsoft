@@ -3,6 +3,8 @@ class Api::V1::BaseController < ApplicationController
 
   before_action :skip_session
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_handler
+  rescue_from ActiveRecord::RecordNotSaved, with: :not_acceptable_handler
+  rescue_from ActiveRecord::RecordInvalid, with: :not_acceptable_handler
   rescue_from Api::Errors::PermissionRequired, with: :permission_required_handler
 
   private
@@ -31,16 +33,23 @@ class Api::V1::BaseController < ApplicationController
     request.session_options[:skip] = true
   end
 
-  def not_found_handler
-    render status: 404, json: {error: 'not_found', error_description: 'Not found'}
+  def not_found_handler(e)
+    # remove where-clauses from error message (not suitable for end-users)
+    msg = e.message.try {|m| m.sub(/\s*\[.*?\]\s*$/, '')} || 'Not found'
+    render status: 404, json: {error: 'not_found', error_description: msg}
+  end
+
+  def not_acceptable_handler(e)
+    render status: 422, json: {error: 'not_acceptable', error_description: e.message || 'Data not acceptable' }
   end
 
   def doorkeeper_unauthorized_render_options(error:)
     {json: {error: error.name, error_description: error.description}}
   end
 
-  def permission_required_handler
-    render status: 403, json: {error: 'forbidden', error_description: 'Forbidden, user has no access'}
+  def permission_required_handler(e)
+    msg = e.message || 'Forbidden, user has no access'
+    render status: 403, json: {error: 'forbidden', error_description: msg}
   end
 
   # @todo something with ApplicationHelper#show_user
