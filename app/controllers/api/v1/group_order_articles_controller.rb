@@ -72,7 +72,7 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   def require_minimum_balance
     minimum_balance = FoodsoftConfig[:minimum_balance] or return
     if current_ordergroup.account_balance < minimum_balance
-      raise Api::Errors::PermissionRequired.new("Sorry, your account balance is below the minimum of #{minimum_balance}.")
+      raise Api::Errors::PermissionRequired.new(t('application.controller.error_minimum_balance', min: minimum_balance))
     end
   end
 end
