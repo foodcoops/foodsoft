@@ -51,9 +51,11 @@ if ! git checkout -b "$BRANCH"; then
 	echo "Could not create to temporary branch '$BRANCH', aborting." 1>&2
 	exit 1
 fi
-# remove sqlite3 dependency as it doesn't install on heroku
+# remove sqlite3 + filemagic dependency as they don't install on heroku
 sed -i "s|^\\(\\s*gem\\s\\+'sqlite3'\\)|#\1|" Gemfile
 sed -i "s|^\\(\\s*sqlite3\\b\)|#\1|" Gemfile.lock
+sed -i "s|^\\(\\s*gem\\s\\+'ruby-filemagic'\\)|#\1|" Gemfile
+sed -i "s|^\\(\\s*ruby-filemagic\\b\)|#\1|" Gemfile.lock
 # make sure postgresql db is present, as it is the default heroku db
 echo "
 gem 'rails_12factor'
