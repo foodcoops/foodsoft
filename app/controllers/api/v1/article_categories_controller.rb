@@ -5,6 +5,10 @@ class Api::V1::ArticleCategoriesController < Api::V1::BaseController
     render json: search_scope
   end
 
+  def show
+    render json: scope.find(params.require(:id))
+  end
+
   private
 
   def max_per_page

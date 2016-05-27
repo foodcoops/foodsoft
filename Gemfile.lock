@@ -93,6 +93,13 @@ GEM
       activerecord (>= 3.0.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    apivore (1.6.2)
+      actionpack (>= 4, < 6)
+      hashie (~> 3.3)
+      json-schema (~> 2.5)
+      rspec (~> 3)
+      rspec-expectations (~> 3.1)
+      rspec-mocks (~> 3.1)
     arel (6.0.4)
     attribute_normalizer (1.2.0)
     base32 (0.3.2)
@@ -190,6 +197,7 @@ GEM
     has_scope (0.7.1)
       actionpack (>= 4.1, < 5.2)
       activesupport (>= 4.1, < 5.2)
+    hashie (3.5.7)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -216,6 +224,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.1.0)
+    json-schema (2.8.0)
+      addressable (>= 2.4)
     jsonapi-renderer (0.2.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -497,6 +507,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0.rc4)
   acts_as_tree
   acts_as_versioned!
+  apivore
   attribute_normalizer
   better_errors
   binding_of_caller

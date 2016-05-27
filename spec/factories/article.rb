@@ -3,6 +3,7 @@ require 'factory_bot'
 FactoryBot.define do
 
   factory :_article do
+    sequence(:name) { |n| Faker::Lorem.words(rand(2..4)).join(' ') + " ##{n}" }
     unit { Faker::Unit.unit }
     price { rand(0.1..26.0).round(2) }
     tax { [6, 21].sample }
@@ -10,15 +11,19 @@ FactoryBot.define do
     unit_quantity { rand(5) < 3 ? 1 : rand(1..20) }
 
     factory :article do
-      sequence(:name) { |n| Faker::Lorem.words(rand(2..4)).join(' ') + " ##{n}" }
-      supplier { create :supplier }
-      article_category { create :article_category }
+      supplier
+      article_category
     end
 
     factory :shared_article, class: SharedArticle do
-      sequence(:name) { |n| Faker::Lorem.words(rand(2..4)).join(' ') + " s##{n}" }
       order_number { Faker::Lorem.characters(rand(1..12)) }
-      supplier { create :shared_supplier }
+      supplier factory: :shared_supplier
+    end
+
+    factory :stock_article, class: StockArticle do
+      supplier_id 0
+      quantity { rand(20) + 1 }
+      article_category
     end
   end
 

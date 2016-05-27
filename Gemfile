@@ -109,4 +109,6 @@ group :test do
   # code coverage
   gem 'simplecov', require: false
   gem 'coveralls', require: false
+  # api
+  gem 'apivore', require: false
 end
