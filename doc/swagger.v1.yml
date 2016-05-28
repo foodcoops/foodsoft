@@ -20,7 +20,7 @@ paths:
         - 1. User
       responses:
         200:
-          description: user data
+          description: success
           schema:
             type: object
             properties:
@@ -43,7 +43,7 @@ paths:
         - $ref: '#/parameters/per_page'
       responses:
         200:
-          description: article categories
+          description: success
           schema:
             type: object
             properties:
@@ -57,14 +57,14 @@ paths:
         - foodsoft_auth: ['all']
   /article_categories/{id}:
     parameters:
-      - $ref: '#/parameters/idQ'
+      - $ref: '#/parameters/idInUrl'
     get:
       summary: find article category by id
       tags:
         - 2. Category
       responses:
         200:
-          description: article category
+          description: success
           schema:
             type: object
             properties:
@@ -101,14 +101,14 @@ paths:
         - foodsoft_auth: ['all']
   /orders/{id}:
     parameters:
-      - $ref: '#/parameters/idQ'
+      - $ref: '#/parameters/idInUrl'
     get:
       summary: find order by id
       tags:
         - 3. Order
       responses:
         200:
-          description: order
+          description: success
           schema:
             type: object
             properties:
@@ -131,7 +131,7 @@ paths:
         - $ref: '#/parameters/per_page'
       responses:
         200:
-          description: order articles
+          description: success
           schema:
             type: object
             properties:
@@ -145,14 +145,14 @@ paths:
         - foodsoft_auth: ['all']
   /order_articles/{id}:
     parameters:
-      - $ref: '#/parameters/idQ'
+      - $ref: '#/parameters/idInUrl'
     get:
       summary: find order article by id
       tags:
         - 4. OrderArticle
       responses:
         200:
-          description: order article
+          description: success
           schema:
             type: object
             properties:
@@ -175,7 +175,7 @@ paths:
         - $ref: '#/parameters/per_page'
       responses:
         200:
-          description: order articles
+          description: success
           schema:
             type: object
             properties:
@@ -191,16 +191,53 @@ paths:
             $ref: '#/definitions/Error403'
       security:
         - foodsoft_auth: ['all']
+    post:
+      summary: create a new group order article
+      tags:
+        - 5. GroupOrderArticle
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              order_article_id:
+                $ref: '#/definitions/GroupOrderArticle/properties/order_article_id'
+              quantity:
+                $ref: '#/definitions/GroupOrderArticle/properties/quantity'
+              tolerance:
+                $ref: '#/definitions/GroupOrderArticle/properties/tolerance'
+            required: ['order_article_id']
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            description: newly created group order article
+            properties:
+              data:
+                $ref: '#/definitions/GroupOrderArticle'
+        403:
+          description: user has no ordergroup, or minimum balance is below the limit
+          schema:
+            $ref: '#/definitions/Error403'
+        422:
+          description: invalid input (e.g. change not acceptable in boxfill phase)
+          schema:
+            $ref: '#/definitions/Error422'
+      security:
+        - foodsoft_auth: ['all']
   /group_order_articles/{id}:
     parameters:
-      - $ref: '#/parameters/idQ'
+      - $ref: '#/parameters/idInUrl'
     get:
       summary: find a member's group order article by id
       tags:
         - 5. GroupOrderArticle
       responses:
         200:
-          description: order article
+          description: success
           schema:
             type: object
             properties:
@@ -216,18 +253,77 @@ paths:
             $ref: '#/definitions/Error404'
       security:
         - foodsoft_auth: ['all']
+    patch:
+      summary: update a group order article
+      tags:
+        - 5. GroupOrderArticle
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              quantity:
+                $ref: '#/definitions/GroupOrderArticle/properties/quantity'
+              tolerance:
+                $ref: '#/definitions/GroupOrderArticle/properties/tolerance'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            description: updated group order article
+            properties:
+              data:
+                $ref: '#/definitions/GroupOrderArticle'
+        403:
+          description: user has no ordergroup, or minimum balance is below the limit
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+        422:
+          description: invalid input (e.g. change not acceptable in boxfill phase)
+          schema:
+            $ref: '#/definitions/Error422'
+      security:
+        - foodsoft_auth: ['all']
+    delete:
+      summary: remove an group order article
+      tags:
+        - 5. GroupOrderArticle
+      responses:
+        204:
+          description: success
+        403:
+          description: user has no ordergroup, or minimum balance is below the limit
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+        422:
+          description: invalid input (e.g. change not acceptable in boxfill phase)
+          schema:
+            $ref: '#/definitions/Error422'
+      security:
+        - foodsoft_auth: ['all']
 
   /financial_transactions:
     get:
       summary: financial transactions of the member's ordergroup
       tags:
-        - 6. Financial Transaction
+        - 6. FinancialTransaction
       parameters:
         - $ref: '#/parameters/page'
         - $ref: '#/parameters/per_page'
       responses:
         200:
-          description: financial transactions
+          description: success
           schema:
             type: object
             properties:
@@ -245,14 +341,14 @@ paths:
         - foodsoft_auth: ['all']
   /financial_transactions/{id}:
     parameters:
-      - $ref: '#/parameters/idQ'
+      - $ref: '#/parameters/idInUrl'
     get:
       summary: find financial transaction by id
       tags:
-        - 6. Financial Transaction
+        - 6. FinancialTransaction
       responses:
         200:
-          description: financial transaction
+          description: success
           schema:
             type: object
             properties:
@@ -271,7 +367,7 @@ paths:
 
 parameters:
   # url parameters
-  idQ:
+  idInUrl:
     name: id
     type: integer
     in: path
