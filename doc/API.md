@@ -1,13 +1,27 @@
 # Foodsoft API
 
+Foodsoft currently provides a JSON REST API that gives access to _member_ operations
+like listing open orders, updating the ordergroup's order, and listing financial
+transactions. (Later versions of the API might include admin-related functionality.)
 
-## Endpoints
+The API is documented using [Open API 2.0](https://github.com/OAI/OpenAPI-Specification)
+/ [Swagger](http://swagger.io/) in [swagger.v1.yml](swagger.v1.yml).
+This provides a machine-readable reference that is used for
+[running tests](https://github.com/westfieldlabs/apivore) and providing documentation.
 
-### /:scope/api/v1/financial_transactions
+## API endpoint documentation
 
-### /:scope/api/v1/orders
+&gt;&gt; [View API documentation](http://petstore.swagger.io/?https%3A%2F%2Fcdn.rawgit.com%2Ffoodcoops%2Ffoodsoft%2Fmaster%2Fdoc%2Fswagger.v1.yml) &lt;&lt;
 
-### /:scope/api/v1/article_categories
+The above documentation can communicate with the API directly on a local development
+installation of Foodsoft at [http://localhost:3000/f](http://localhost:3000/f). You'll need
+to give access to the application by running in the rails console
+
+```ruby
+app = Doorkeeper::Application.new
+app.name = 'Swagger'; app.scopes = 'all'; app.uid = 'your-client-id'; app.redirect_uri = 'http://petstore.swagger.io/o2c.html'
+app.save!
+```
 
 
 ## Security
@@ -50,7 +64,7 @@ You only need the client_id though, not the secret.
 
 **note** please make sure you understand sections
 [4.4.2](http://tools.ietf.org/html/rfc6819#section-4.4.2) and
-[4.4.3](http://tools.ietf.org/html/rfc6819#section-4.4.3) of the OAuth2 Thread
+[4.4.3](http://tools.ietf.org/html/rfc6819#section-4.4.3) of the OAuth2 Threat
 Model document before using this flow.
 
 You may find Doorkeeper's [implicit_grant_test](https://github.com/doorkeeper-gem/doorkeeper/blob/master/spec/requests/flows/implicit_grant_spec.rb) useful.
@@ -72,4 +86,3 @@ Now use this token as value for the `access_token` when accessing the API, like
 http://localhost:3002/f/api/v1/financial_transactions/1?access_token=12345...
 
 [Read more](https://github.com/doorkeeper-gem/doorkeeper/wiki/Client-Credentials-flow).
-
