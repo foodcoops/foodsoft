@@ -27,7 +27,8 @@ class Api::V1::OrderArticlesController < Api::V1::BaseController
     elsif ordered == 'member'
       scope.joins(:group_order_articles).merge(current_ordergroup.group_order_articles)
     elsif ordered == 'all'
-      scope.where('quantity > 0 OR tolerance > 0')
+      table = scope.arel_table
+      scope.where(table[:quantity].gt(0).or(table[:tolerance].gt(0)))
     elsif ordered == 'supplier'
       scope.ordered
     else

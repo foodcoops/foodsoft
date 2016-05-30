@@ -22,6 +22,14 @@ class ArticleCategory < ActiveRecord::Base
 
   before_destroy :check_for_associated_articles
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id name)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(articles order_articles orders)
+  end
+
   # Find a category that matches a category name; may return nil.
   # TODO more intelligence like remembering earlier associations (global and/or per-supplier)
   def self.find_match(category)

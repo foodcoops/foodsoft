@@ -74,6 +74,14 @@ class Article < ActiveRecord::Base
   before_save :update_price_history
   before_destroy :check_article_in_use
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id name supplier_id article_category_id unit note manufacturer origin unit_quantity order_number)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(article_category supplier order_articles orders)
+  end
+
   # Returns true if article has been updated at least 2 days ago
   def recently_updated
     updated_at > 2.days.ago
