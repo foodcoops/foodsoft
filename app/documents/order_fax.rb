@@ -1,8 +1,12 @@
 # encoding: utf-8
 class OrderFax < OrderPdf
 
+  BATCH_SIZE = 250
+
+  attr_reader :order
+
   def filename
-    I18n.t('documents.order_fax.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
+    I18n.t('documents.order_fax.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
   end
 
   def title
@@ -20,8 +24,8 @@ class OrderFax < OrderPdf
       move_down 5
       text "#{contact[:zip_code]} #{contact[:city]}", size: fontsize(9), align: :right
       move_down 5
-      unless @order.supplier.try(:customer_number).blank?
-        text "#{Supplier.human_attribute_name :customer_number}: #{@order.supplier[:customer_number]}", size: fontsize(9), align: :right
+      unless order.supplier.try(:customer_number).blank?
+        text "#{Supplier.human_attribute_name :customer_number}: #{order.supplier[:customer_number]}", size: fontsize(9), align: :right
         move_down 5
       end
       unless contact[:phone].blank?
@@ -35,12 +39,12 @@ class OrderFax < OrderPdf
 
     # Recipient
     bounding_box [margin_box.left,margin_box.top-60], width: 200 do
-      text @order.name
+      text order.name
       move_down 5
-      text @order.supplier.try(:address).to_s
-      unless @order.supplier.try(:fax).blank?
+      text order.supplier.try(:address).to_s
+      unless order.supplier.try(:fax).blank?
         move_down 5
-        text "#{Supplier.human_attribute_name :fax}: #{@order.supplier[:fax]}"
+        text "#{Supplier.human_attribute_name :fax}: #{order.supplier[:fax]}"
       end
     end
 
@@ -50,24 +54,24 @@ class OrderFax < OrderPdf
     move_down 10
     text "#{Delivery.human_attribute_name :delivered_on}:"
     move_down 10
-    unless @order.supplier.try(:contact_person).blank?
-      text "#{Supplier.human_attribute_name :contact_person}: #{@order.supplier[:contact_person]}"
+    unless order.supplier.try(:contact_person).blank?
+      text "#{Supplier.human_attribute_name :contact_person}: #{order.supplier[:contact_person]}"
       move_down 10
     end
 
     # Articles
     total = 0
     data = [I18n.t('documents.order_fax.rows')]
-    data += @order.order_articles.ordered.includes(:article).order('articles.order_number, articles.name').collect do |a|
-      subtotal = a.units_to_order * a.price.unit_quantity * a.price.price
+    each_order_article do |oa|
+      subtotal = oa.units_to_order * oa.price.unit_quantity * oa.price.price
       total += subtotal
-      [a.article.order_number,
-       a.units_to_order,
-       a.article.name,
-       a.price.unit_quantity,
-       a.article.unit,
-       number_to_currency(a.price.price),
-       number_to_currency(subtotal)]
+      data << [oa.article.order_number,
+               oa.units_to_order,
+               oa.article.name,
+               oa.price.unit_quantity,
+               oa.article.unit,
+               number_to_currency(oa.price.price),
+               number_to_currency(subtotal)]
     end
     data << [I18n.t('documents.order_fax.total'), nil, nil, nil, nil, nil, number_to_currency(total)]
     table data, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
@@ -87,6 +91,19 @@ class OrderFax < OrderPdf
               #border_style: :grid,
               #headers: ["BestellNr.", "Menge","Name", "Gebinde", "Einheit","Preis/Einheit"],
               #align: {0 => :left}
+  end
+
+  private
+
+  def order_articles
+    order.order_articles.ordered.
+      joins(:article).
+      order('articles.order_number').order('articles.name').
+      preload(:article, :article_price)
+  end
+
+  def each_order_article
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE) {|oa| yield oa }
   end
 
 end
