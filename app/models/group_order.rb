@@ -1,5 +1,6 @@
 # A GroupOrder represents an Order placed by an Ordergroup.
 class GroupOrder < ActiveRecord::Base
+  include FindEachWithOrder
 
   attr_accessor :group_order_articles_attributes
 
