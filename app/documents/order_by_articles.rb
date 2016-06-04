@@ -1,22 +1,28 @@
 # encoding: utf-8
 class OrderByArticles < OrderPdf
 
+  # optimal value depends on the average number of ordergroups ordering an article
+  #   as well as the available memory
+  BATCH_SIZE = 50
+
+  attr_reader :order
+
   def filename
-    I18n.t('documents.order_by_articles.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
+    I18n.t('documents.order_by_articles.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
   end
 
   def title
-    I18n.t('documents.order_by_articles.title', :name => @order.name,
-      :date => @order.ends.strftime(I18n.t('date.formats.default')))
+    I18n.t('documents.order_by_articles.title', :name => order.name,
+      :date => order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
-    @order.order_articles.ordered.each do |order_article|
+    each_order_article do |order_article|
       down_or_page
 
       rows = []
       dimrows = []
-      for goa in order_article.group_order_articles.ordered
+      each_group_order_article_for(order_article) do |goa|
         rows << [goa.group_order.ordergroup_name,
                   "#{goa.quantity} + #{goa.tolerance}",
                  goa.result,
@@ -42,6 +48,29 @@ class OrderByArticles < OrderPdf
         end
       end
     end
+  end
+
+  private
+
+  def order_articles
+    order.order_articles.ordered.
+      joins(:article).
+      preload(:article_price). # don't join but preload article_price, just in case it went missing
+      preload(:group_order_articles => {:group_order => :ordergroup})
+  end
+
+  def each_order_article
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE) {|oa| yield oa }
+  end
+
+  def group_order_articles_for(order_article)
+    goas = order_article.group_order_articles.to_a
+    goas.sort_by! {|goa| goa.group_order.ordergroup_name }
+    goas
+  end
+
+  def each_group_order_article_for(group_order)
+    group_order_articles_for(group_order).each {|goa| yield goa }
   end
 
 end
