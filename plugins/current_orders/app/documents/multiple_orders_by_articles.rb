@@ -2,28 +2,30 @@
 class MultipleOrdersByArticles < OrderPdf
   include OrdersHelper
 
+  # optimal value depends on the average number of ordergroups ordering an article
+  #   as well as the available memory
+  BATCH_SIZE = 50
+
+  attr_reader :order
+
   def filename
-    I18n.t('documents.multiple_orders_by_articles.filename', count: @order.count) + '.pdf'
+    I18n.t('documents.multiple_orders_by_articles.filename', count: order.count) + '.pdf'
   end
 
   def title
-    I18n.t('documents.multiple_orders_by_articles.title', count: @order.count)
-  end
-
-  def order_articles
-    @order_articles ||= OrderArticle.joins(:order, :article).where(:orders => {:id => @order}).ordered.reorder('orders.id, articles.name')
+    I18n.t('documents.multiple_orders_by_articles.title', count: order.count)
   end
 
   # @todo refactor to reduce common code with order_by_articles
   def body
-    order_articles.each do |order_article|
+    each_order_article do |order_article|
       down_or_page
 
       rows = []
       dimrows = []
       has_units_str = ''
-      for goa in order_article.group_order_articles.ordered
-        rows << [goa.group_order.ordergroup.name,
+      each_group_order_article_for(order_article) do |goa|
+        rows << [goa.group_order.ordergroup_name,
                  goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity,
                  goa.result,
                  number_to_currency(goa.total_price(order_article))]
@@ -68,6 +70,28 @@ class MultipleOrdersByArticles < OrderPdf
 
   def pdf_add_page_breaks?
     super 'order_by_articles'
+  end
+
+  def order_articles
+    OrderArticle.where(order_id: order).ordered.
+      includes(:article).references(:article).
+      reorder('order_articles.order_id, articles.name').
+      preload(:article_price). # preload not join, just in case it went missing
+      preload(:order, :group_order_articles => {:group_order => :ordergroup})
+  end
+
+  def each_order_article
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE) {|oa| yield oa }
+  end
+
+  def group_order_articles_for(order_article)
+    goas = order_article.group_order_articles.to_a
+    goas.sort_by! {|goa| goa.group_order.ordergroup_name }
+    goas
+  end
+
+  def each_group_order_article_for(group_order)
+    group_order_articles_for(group_order).each {|goa| yield goa }
   end
 
 end
