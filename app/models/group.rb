@@ -2,6 +2,7 @@
 # Groups organize the User.
 # A Member gets the roles from the Group
 class Group < ActiveRecord::Base
+  include FindEachWithOrder
   include MarkAsDeletedWithName
 
   has_many :memberships, dependent: :destroy

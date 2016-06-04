@@ -2,36 +2,34 @@
 class MultipleOrdersByGroups < OrderPdf
   include OrdersHelper
 
+  # optimal value depends on the number of articles ordered on average by each
+  #   ordergroup as well as the available memory
+  BATCH_SIZE = 50
+
+  attr_reader :order
+
   def filename
-    I18n.t('documents.multiple_orders_by_groups.filename', count: @order.count) + '.pdf'
+    I18n.t('documents.multiple_orders_by_groups.filename', count: order.count) + '.pdf'
   end
 
   def title
-    I18n.t('documents.multiple_orders_by_groups.title', count: @order.count)
-  end
-
-  def ordergroups
-    unless @ordergroups
-      @ordergroups = Ordergroup.joins(:orders).where(orders: {id: @order}).select('distinct(groups.id)').select('groups.*').reorder(:name)
-      @ordergroups = @ordergroups.where(id: @options[:ordergroup]) if @options[:ordergroup]
-    end
-    @ordergroups
+    I18n.t('documents.multiple_orders_by_groups.title', count: order.count)
   end
 
   # @todo refactor to reduce common code with order_by_groups
   def body
     # Start rendering
-    ordergroups.each do |ordergroup|
+    each_ordergroup do |ordergroup|
       down_or_page 15
 
       total = 0
       taxes = Hash.new {0}
       rows = []
       dimrows = []
-      group_order_articles = GroupOrderArticle.ordered.joins(:group_order => :order).where(:group_orders =>{:ordergroup_id => ordergroup.id}).where(:orders => {id: @order}).includes(:order_article => :article_price).reorder('orders.id')
-      has_tolerance = group_order_articles.where('article_prices.unit_quantity > 1').any?
+      has_tolerance = false
 
-      group_order_articles.each do |goa|
+      each_group_order_article_for(ordergroup)  do |goa|
+        has_tolerance = true if goa.order_article.price.unit_quantity > 1
         price = goa.order_article.price.fc_price
         sub_total = goa.total_price
         total += sub_total
@@ -42,7 +40,7 @@ class MultipleOrdersByGroups < OrderPdf
                   goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity,
                   goa.result,
                   number_to_currency(sub_total),
-                  (goa.order_article.price.unit_quantity if has_tolerance)]
+                  goa.order_article.price.unit_quantity]
         dimrows << rows.length if goa.result == 0
       end
       next if rows.length == 0
@@ -59,8 +57,11 @@ class MultipleOrdersByGroups < OrderPdf
         I18n.t('shared.articles.ordered'),
         I18n.t('shared.articles.received'),
         I18n.t('shared.articles_by.price_sum'),
-        has_tolerance ? {image: "#{Rails.root}/app/assets/images/package-bg.png", scale: 0.6, position: :center} : nil
+        {image: "#{Rails.root}/app/assets/images/package-bg.png", scale: 0.6, position: :center}
       ]
+
+      # last column showing unit_quantity is useless if they're all one
+      rows.each {|row| row[-1] = nil} unless has_tolerance
 
       text ordergroup.name, size: fontsize(13), style: :bold
       table rows, width: bounds.width, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
@@ -101,6 +102,37 @@ class MultipleOrdersByGroups < OrderPdf
 
   def pdf_add_page_breaks?
     super 'order_by_groups'
+  end
+
+  def ordergroups
+    s = Ordergroup.
+          includes(:group_orders).
+          where(group_orders: {order_id: order}).
+          group(:id).
+          reorder(:name)
+    s = s.where(id: @options[:ordergroup]) if @options[:ordergroup]
+    s
+  end
+
+  def each_ordergroup
+    ordergroups.find_in_batches_with_order(batch_size: BATCH_SIZE) do |ordergroups|
+      @group_order_article_batch = GroupOrderArticle.
+        joins(:group_order).
+        where(group_orders: {order_id: order}).
+        where(group_orders: {ordergroup_id: ordergroups.map(&:id)}).
+        order('group_orders.order_id, group_order_articles.id').
+        preload(group_orders: {order: :supplier}).
+        preload(order_article: [:article, :article_price, :order])
+      ordergroups.each {|ordergroup| yield ordergroup }
+    end
+  end
+
+  def group_order_articles_for(ordergroup)
+    @group_order_article_batch.select {|goa| goa.group_order.ordergroup_id == ordergroup.id }
+  end
+
+  def each_group_order_article_for(ordergroup)
+    group_order_articles_for(ordergroup).each {|goa| yield goa }
   end
 
 end
