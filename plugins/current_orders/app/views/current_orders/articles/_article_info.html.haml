@@ -5,11 +5,11 @@
   -# @todo unduplicate from group_orders's order_article_info
   %p
     - if order_article.article.manufacturer.blank?
-      = raw t '.supplied_by', supplier: content_tag(:em, supplier_link(order_article.article.supplier))
-    - elsif order_article.article.supplier.name == order_article.article.manufacturer
-      = raw t '.supplied_and_made_by', manufacturer: content_tag(:em, supplier_link(order_article.article.supplier))
+      = raw t '.supplied_by', supplier: content_tag(:em, supplier_link(order_article.order))
+    - elsif order_article.article.supplier && order_article.article.supplier.name == order_article.article.manufacturer
+      = raw t '.supplied_and_made_by', manufacturer: content_tag(:em, supplier_link(order_article.order))
     - else
-      = raw t '.supplied_by_made_by', supplier: content_tag(:em, supplier_link(order_article.article.supplier)), manufacturer: content_tag(:em, order_article.article.manufacturer)
+      = raw t '.supplied_by_made_by', supplier: content_tag(:em, supplier_link(order_article.order)), manufacturer: content_tag(:em, order_article.article.manufacturer)
     - unless order_article.article.origin.blank?
       = raw t '.origin_in', origin: content_tag(:em, order_article.article.origin)
 
