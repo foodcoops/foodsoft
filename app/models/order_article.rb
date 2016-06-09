@@ -1,5 +1,6 @@
 # An OrderArticle represents a single Article that is part of an Order.
 class OrderArticle < ActiveRecord::Base
+  include FindEachWithOrder
 
   attr_reader :update_global_price
 
