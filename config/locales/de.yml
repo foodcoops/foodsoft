@@ -76,6 +76,7 @@ de:
         send_to_all: An alle Mitglieder schicken
         subject: Betreff
       order:
+        boxfill: 
         closed_by: Abgerechnet von
         created_by: Erstellt von
         ends: Endet am
@@ -102,7 +103,8 @@ de:
       ordergroup:
         account_balance: Kontostand
         available_funds: Verfügbares Guthaben
-        break: (Letzte) Pause
+        break: "(Letzte) Pause"
+        break_until: 
         contact: Kontakt
         contact_address: Adresse
         contact_person: Kontaktperson
@@ -244,6 +246,8 @@ de:
         pdf_title: PDF-Dokumente
       tab_messages:
         emails_title: E-Mails versenden
+      tab_payment:
+        schedule_title: 
       tab_tasks:
         periodic_title: Wiederkehrende Aufgaben
       tabs:
@@ -485,6 +489,9 @@ de:
       minimum_balance: Mitglieder können nur bestellen, wenn ihr Kontostand mindestens diesem Betrag entspricht.
       name: Der Name Deiner Foodcoop
       order_schedule:
+        boxfill:
+          recurr: 
+          time: 
         ends:
           recurr: Standarddatum für den Bestellschluss
           time: Standardzeit für den Bestellschluss
@@ -502,6 +509,7 @@ de:
       tax_default: Standard Mehrwertsteuersatz für neue Artikel
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
+      use_boxfill: 
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
       use_wiki: "Änderbare Wiki Seiten aktivieren"
@@ -531,6 +539,9 @@ de:
       minimum_balance: Minimaler Kontostand
       name: Name
       order_schedule:
+        boxfill:
+          recurr: 
+          time: 
         ends:
           recurr: Bestellschluss
           time: Zeit
@@ -547,6 +558,7 @@ de:
       time_zone: Zeitzone
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
       use_apple_points: Apfelpunkte verwenden
+      use_boxfill: 
       use_messages: Nachrichten
       use_nick: Benutzernamen verwenden
       use_wiki: Wiki verwenden
@@ -809,7 +821,7 @@ de:
         only_active_desc: "(mindestens einmal in den letzten 3 Monaten bestellt)"
         title: Bestellgruppen
       ordergroups:
-        break: '%{start} - %{end}'
+        break: "%{start} - %{end}"
     users:
       index:
         body: "<p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben. Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>"
@@ -1177,10 +1189,10 @@ de:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
     group_order:
       stock_ordergroup_name: Lager (%{user})
-    membership:
-      no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
     invoice:
       invalid_mime: hat einen ungültigen MIME-Typ (%{mime})
+    membership:
+      no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
     order_article:
       error_price: muss angegeben sein und einen aktuellen Preis haben
     page:
@@ -1285,8 +1297,10 @@ de:
       title: Bestellungen verwalten
     model:
       close_direct_message: Die Bestellung wurde abgechlossen, ohne die Mitgliederkonten zu belasten.
+      error_boxfill_before_ends: 
       error_closed: Bestellung wurde schon abgerechnet
       error_nosel: Es muss mindestens ein Artikel ausgewählt sein.
+      error_starts_before_boxfill: 
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: 'Bestellung: %{name}, bis %{ends}'
       stock: Lager
@@ -1318,9 +1332,9 @@ de:
       create_invoice: Rechnung anlegen
       description1_order: "%{state} Bestellung von %{supplier} angelegt von %{who},"
       description1_period:
-        starts: "läuft von %{starts}"
-        starts_ends: "läuft von %{starts} bis %{ends}"
-        pickup: "und kann am %{pickup} abgeholt werden"
+        pickup: und kann am %{pickup} abgeholt werden
+        starts: läuft von %{starts}
+        starts_ends: läuft von %{starts} bis %{ends}
       description2: "%{ordergroups} haben %{article_count} Artikel mit einem Gesamtwert von %{net_sum} / %{gross_sum} (netto / brutto) bestellt."
       download:
         article_pdf: Artikel PDF
@@ -1352,7 +1366,7 @@ de:
     update_order_amounts:
       msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
       msg2: "%{count} (%{units}) Toleranzmenge"
-      msg3:
+      msg3: 
       msg4: "%{count} (%{units}) übrig"
   pages:
     all:
@@ -1458,7 +1472,7 @@ de:
       access: Zugriff auf
       activated: aktiviert
       apple_limit: "Äpfel-Bestellbeschränkung"
-      break: 'von %{start} bis %{end}'
+      break: von %{start} bis %{end}
       deactivated: deaktiviert
     group_form_fields:
       search: Suche ...
@@ -1703,12 +1717,12 @@ de:
       title_all: Alle Aufgaben der Gruppe
   ui:
     actions: Aktionen
-    back: Zurück
+    back: Züruck
     cancel: Abbrechen
     close: Schließen
     confirm_delete: Willst du %{name} wirklich löschen?
     confirm_restore: Willst du %{name} wirklich wiederherstellen?
-    copy: Kopieren
+    copy: kopieren
     delete: Löschen
     download: Herunterladen
     edit: Bearbeiten

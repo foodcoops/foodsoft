@@ -103,7 +103,7 @@ en:
       ordergroup:
         account_balance: Account balance
         available_funds: Available credit
-        break: (Last) break
+        break: "(Last) break"
         break_until: until
         contact: Contact
         contact_address: Address
@@ -491,12 +491,12 @@ en:
       minimum_balance: Members can only order when their account balance is above or equal to this amount.
       name: The name of your foodcoop.
       order_schedule:
-        ends:
-          recurr: Schedule for default order closing date.
-          time: Default time when orders are closed.
         boxfill:
           recurr: Schedule for when the box-fill phase starts by default.
           time: Default time when the box-fill phase of the ordering starts.
+        ends:
+          recurr: Schedule for default order closing date.
+          time: Default time when orders are closed.
         initial: Schedule starts at this date.
       page_footer: Shown on each page at the bottom. Enter "blank" to disable the footer completely.
       pdf_add_page_breaks:
@@ -541,11 +541,11 @@ en:
       minimum_balance: Minimum balance
       name: Name
       order_schedule:
-        ends:
-          recurr: Order ends
-          time: time
         boxfill:
           recurr: Box fill after
+          time: time
+        ends:
+          recurr: Order ends
           time: time
         initial: Schedule start
       page_footer: Page footer
@@ -823,7 +823,7 @@ en:
         only_active_desc: "(have placed order at least once in the last 3 months)"
         title: Ordergroups
       ordergroups:
-        break: '%{start} - %{end}'
+        break: "%{start} - %{end}"
     users:
       index:
         body: "<p>Here you can write a message to the members of your Foodcoop. If you'd like others to contact you, please enable it in your %{profile_link}.</p>"
@@ -1198,10 +1198,10 @@ en:
       each_stock_article_must_be_unique: Each stock article must not be listed more than once.
     group_order:
       stock_ordergroup_name: Stock (%{user})
+    invoice:
+      invalid_mime: has an invalid MIME type (%{mime})
     membership:
       no_admin_delete: Membership can not be withdrawn as you are the last administrator.
-    invoice:
-      invalid_mime: has an invalide MIME type (%{mime})
     order_article:
       error_price: must be specified and have a current price price
     page:
@@ -1306,9 +1306,9 @@ en:
       title: Manage orders
     model:
       close_direct_message: Order settled without charging member accounts.
+      error_boxfill_before_ends: must be after the box-fill date (or remain empty)
       error_closed: Order was already settled
       error_nosel: At least one article must be selected. You may want to delete the order instead?
-      error_boxfill_before_ends: must be after the box-fill date (or remain empty)
       error_starts_before_boxfill: must be after the start date (or remain empty)
       error_starts_before_ends: must be after the start date (or remain empty)
       notice_close: 'Order: %{name}, until %{ends}'
@@ -1339,11 +1339,11 @@ en:
         Do you really want to close the order %{order}?
         There is no going back.
       create_invoice: Add invoice
-      description1_order: "%{state} order from %{supplier} created by %{who},"
+      description1_order: "%{state} order from %{supplier} opened by %{who},"
       description1_period:
-        starts: "open from %{starts}"
-        starts_ends: "open from %{starts} until %{ends}"
-        pickup: "and can be picked up on %{pickup}"
+        pickup: and can be picked up on %{pickup}
+        starts: open from %{starts}
+        starts_ends: open from %{starts} until %{ends}
       description2: "%{ordergroups} ordered %{article_count} articles, with a total value of %{net_sum} / %{gross_sum} (net / gross)."
       download:
         article_pdf: Article PDF
@@ -1481,7 +1481,7 @@ en:
       access: Access to
       activated: activated
       apple_limit: Apple points order limit
-      break: 'from %{start} to %{end}'
+      break: from %{start} to %{end}
       deactivated: deactivated
     group_form_fields:
       search: Search ...

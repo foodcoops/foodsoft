@@ -76,11 +76,13 @@ fr:
         send_to_all: Envoyer à tous les membres
         subject: Sujet
       order:
+        boxfill: 
         closed_by: Décompté par
         created_by: "Établi par"
         ends: Clôture le
         name: Fournisseur-e
         note: Note
+        pickup: 
         starts: Ouverture le
         status: Statut
         supplier: Fournisseu-r-se
@@ -101,6 +103,8 @@ fr:
       ordergroup:
         account_balance: Crédit initial
         available_funds: Crédit disponible
+        break: 
+        break_until: 
         contact: Contact
         contact_address: Adresse
         contact_person: Personne à contacter
@@ -108,6 +112,7 @@ fr:
         description: Description
         ignore_apple_restriction: Pour cette cellule, ne pas bloquer les commandes en cas de manque de glands
         last_order: dernière commande
+        last_user_activity: 
         name: Nom
         user_tokens: Membres
       page:
@@ -182,12 +187,12 @@ fr:
         article:
           attributes:
             name:
-              taken:
-              taken_with_unit:
+              taken: 
+              taken_with_unit: 
         supplier:
           attributes:
             shared_sync_method:
-              included:
+              included: 
         task:
           attributes:
             done:
@@ -241,6 +246,8 @@ fr:
         pdf_title: 
       tab_messages:
         emails_title: 
+      tab_payment:
+        schedule_title: 
       tab_tasks:
         periodic_title: 
       tabs:
@@ -283,9 +290,13 @@ fr:
         first_paragraph: Sur cette page, tu peux %{url}, modifier ou bien retirer des membres.
         new_user: Ajouter unE nouveLLE_eau membre
         new_users: ajouter
+        show_deleted: 
         title: Administration des membres
       new:
         title: Ajouter unE nouveLLE_eau membre
+      restore:
+        error: 
+        notice: 
       show:
         confirm_sudo: 
         groupabos: Participation à des équipes
@@ -478,6 +489,9 @@ fr:
       minimum_balance: 
       name: 
       order_schedule:
+        boxfill:
+          recurr: 
+          time: 
         ends:
           recurr: 
           time: 
@@ -495,6 +509,7 @@ fr:
       tax_default: 
       tolerance_is_costly: 
       use_apple_points: 
+      use_boxfill: 
       use_messages: 
       use_nick: 
       use_wiki: 
@@ -512,6 +527,7 @@ fr:
       currency_unit: 
       custom_css: 
       default_locale: 
+      disable_invite: 
       email_from: 
       email_replyto: 
       email_sender: 
@@ -523,6 +539,9 @@ fr:
       minimum_balance: 
       name: 
       order_schedule:
+        boxfill:
+          recurr: 
+          time: 
         ends:
           recurr: 
           time: 
@@ -539,6 +558,7 @@ fr:
       time_zone: 
       tolerance_is_costly: 
       use_apple_points: 
+      use_boxfill: 
       use_messages: 
       use_nick: 
       use_wiki: 
@@ -753,6 +773,7 @@ fr:
         paragraph: Cet espace permet de rajouter ou d'enlever du crédit à la cellule <b>%{name}</b>.
         title: Nouvelle transaction
       new_collection:
+        add_all_ordergroups: 
         new_ordergroup: Créer d'autres cellules
         save: Sauvegarder les transactions
         sidebar: "Cet espace permet de mettre à jour plusieurs comptes simultanément, \npar exemple pour saisir les versements des cellules sur leurs comptes à partir d'un relevé."
@@ -774,6 +795,8 @@ fr:
     invoices:
       edit:
         title: Modifier cette facture
+      form:
+        attachment_hint: 
       index:
         action_new: Ajouter une facture
         title: Factures
@@ -799,6 +822,8 @@ fr:
         only_active: Seulement les cellules en activité
         only_active_desc: "(ayant commandé au moins une fois au cours des 3 derniers mois)"
         title: Cellules
+      ordergroups:
+        break: 
     users:
       index:
         body: "<p>Cette page sert à envoyer des messages aux autres membres de la coop. Si tu veux que tes coordonnées soient visibles par les autres, il faut le spécifier dans tes %{profile_link}. </p>"
@@ -1173,6 +1198,10 @@ fr:
   model:
     delivery:
       each_stock_article_must_be_unique: Chaque article du cellier ne peut apparaître qu'une seule fois dans la commande.
+    group_order:
+      stock_ordergroup_name: 
+    invoice:
+      invalid_mime: 
     membership:
       no_admin_delete: 'Pas moyen de quitter le navire: tu es le ou la dernièrE administratrice à bord!'
     order_article:
@@ -1279,8 +1308,10 @@ fr:
       title: Gestion des commandes
     model:
       close_direct_message: Ordre décomptée sans charger les comptes des membres.
+      error_boxfill_before_ends: 
       error_closed: Cette commande a déjà été décomptée
       error_nosel: Au minimum un article doit être sélectionné.
+      error_starts_before_boxfill: 
       error_starts_before_ends: doit être postérieur à la date de début de la commande (ou bien être laissé vierge)
       notice_close: 'Commande: %{name}, jusqu''au %{ends}'
       stock: Cellier
@@ -1308,11 +1339,11 @@ fr:
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment clôturer la commande %{order}? Pas d'annulation possible.
       create_invoice: Ajouter une facture
-      description1_order: "Commande %{state} de %{supplier} créée par %{who},"
+      description1_order: Commande %{state} de %{supplier} créée par %{who},
       description1_period:
-        starts: "ouverte du %{starts}"
-        starts_ends: "ouverte du %{starts} au %{ends}"
-        pickup:
+        pickup: 
+        starts: ouverte du %{starts}
+        starts_ends: ouverte du %{starts} au %{ends}
       description2: "%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)"
       download:
         article_pdf: Liste des articles en PDF
@@ -1332,6 +1363,7 @@ fr:
       show_invoice: Afficher la facture
       sort_article: Trié par article
       sort_group: Trié par cellules
+      stock_order: 
       title: 'Commande: %{name}'
       warn_not_closed: Attention, cette commande n'a pas encore été décomptée!
     state:
@@ -1449,6 +1481,7 @@ fr:
       access: Accès à
       activated: activé
       apple_limit: Minimum de glands
+      break: 
       deactivated: désactivé
     group_form_fields:
       search: Recherche...
@@ -1705,6 +1738,7 @@ fr:
     cancel: Annuler
     close: Fermer
     confirm_delete: Veux-tu vraiment supprimer %{name}?
+    confirm_restore: 
     copy: 
     delete: Supprimer
     download: Télécharger
@@ -1714,6 +1748,7 @@ fr:
       success: <i class="icon icon-ok"></i>
     or_cancel: ou annuler
     please_wait: Merci de patienter...
+    restore: 
     save: Sauvegarder
     show: Afficher
   views:

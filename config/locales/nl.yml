@@ -58,7 +58,7 @@ nl:
         created_at: Gemaakt op
         created_by: Gemaakt door
         date: Factuurdatum
-        delete_attachment: Verwijder bijlage
+        delete_attachment: Bijlage verwijderen
         deliveries: Levering
         deposit: Statiegeld in rekening gebracht
         deposit_credit: Statiegeld teruggekregen
@@ -76,11 +76,13 @@ nl:
         send_to_all: Aan alle leden sturen
         subject: Onderwerp
       order:
+        boxfill: Dozen vullen na
         closed_by: Afgerekend door
         created_by: Geopend door
         ends: sluit op
         name: Leverancier
         note: Notitie
+        pickup: Ophaaldag
         starts: Start op
         status: Status
         supplier: Leverancier
@@ -101,6 +103,8 @@ nl:
       ordergroup:
         account_balance: Tegoed
         available_funds: Beschikbaar tegoed
+        break: "(Laatste) pauze"
+        break_until: tot
         contact: Contact
         contact_address: Adres
         contact_person: Contactpersoon
@@ -108,6 +112,7 @@ nl:
         description: Omschrijving
         ignore_apple_restriction: Bestelstop vanwege appelpunten negeren
         last_order: Laatste bestelling
+        last_user_activity: Laatst actief
         name: Naam
         user_tokens: Leden
       page:
@@ -241,6 +246,8 @@ nl:
         pdf_title: PDF documenten
       tab_messages:
         emails_title: Emailinstellingen
+      tab_payment:
+        schedule_title: Bestelrooster
       tab_tasks:
         periodic_title: Periodieke taken
       tabs:
@@ -283,9 +290,13 @@ nl:
         first_paragraph: Hier kun je gebruikers %{url}, bewerken en wissen.
         new_user: Nieuwe gebruiker
         new_users: toevoegen
+        show_deleted: Verwijderde gebruikers tonen
         title: Gebruikers admin
       new:
         title: Nieuwe gebruiker toevoegen
+      restore:
+        error: 'Gebruiker kon niet opnieuw actief gemaakt worden: %{error}'
+        notice: Gebruiker is opnieuw actief
       show:
         confirm_sudo: Als je doorgaat, neem je de identiteit aan van gebruiker %{user}. Vergeet hierna niet uit te loggen!
         groupabos: Groepslidmaatschappen
@@ -324,7 +335,7 @@ nl:
       error_authn: Inloggen vereist.
       error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je mogelijk %{sign_in}.
       error_denied_sign_in: inloggen als een andere gebruiker
-      error_feature_disabled: Deze optie is momenteel uitgeschakeld.
+      error_feature_disabled: Deze functie is momenteel niet actief.
       error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
       error_token: Geen toegang (ongeldig token)!
   article_categories:
@@ -478,6 +489,9 @@ nl:
       minimum_balance: Leden kunnen slechts bestellen wanneer hun tegoed groter of gelijk is aan dit bedrag.
       name: De naam van de foodcoop.
       order_schedule:
+        boxfill:
+          recurr: Standaard rooster voor wanneer dozen vullen begint.
+          time: Standaard tijd voor wanneer dozen vullen begint.
         ends:
           recurr: Schema voor datum waarop de bestelling sluit.
           time: Standaard tijd wanneer de bestelling sluit.
@@ -495,6 +509,7 @@ nl:
       tax_default: Standaard BTW percentage voor nieuwe artikelen.
       tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
+      use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
       use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
       use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
       use_wiki: Gebruik wiki pagina's.
@@ -512,6 +527,7 @@ nl:
       currency_unit: Valuta
       custom_css: Aangepaste CSS
       default_locale: Standaardtaal
+      disable_invite: Uitnodigingen deactiveren
       email_from: From adres
       email_replyto: Reply-to adres
       email_sender: Sender adres
@@ -523,6 +539,9 @@ nl:
       minimum_balance: Minimum tegoed
       name: Naam
       order_schedule:
+        boxfill:
+          recurr: Dozen vullen na
+          time: tijd
         ends:
           recurr: Bestelling sluit
           time: tijd
@@ -539,6 +558,7 @@ nl:
       time_zone: Tijdzone
       tolerance_is_costly: Tolerantie is duur
       use_apple_points: Appelpunten
+      use_boxfill: Dozen vullen fase
       use_messages: Berichten
       use_nick: Bijnamen gebruiken
       use_wiki: Wiki gebruiken
@@ -751,6 +771,7 @@ nl:
         paragraph: Hier kun je het tegoed van huishouden <b>%{name}</b> ophogen en verlagen.
         title: Nieuwe transactie
       new_collection:
+        add_all_ordergroups: Alle huishoudens toevoegen
         new_ordergroup: Nog een huishouden toevoegen
         save: Transactie opslaan
         sidebar: Hier kun je meerdere tegoeden tegelijk bijwerken. Bijvoorbeeld alle overschrijvingen van leden van een bankafschrift.
@@ -772,6 +793,8 @@ nl:
     invoices:
       edit:
         title: Factuur bewerken
+      form:
+        attachment_hint: Alleen JPEG en PDF zijn toegestaan.
       index:
         action_new: Nieuwe factuur toevoegen
         title: Facturen
@@ -797,6 +820,8 @@ nl:
         only_active: Alleen actieve
         only_active_desc: "(minstens eenmaal in de laatste 3 maanden besteld)"
         title: Huishoudens
+      ordergroups:
+        break: "%{start} - %{end}"
     users:
       index:
         body: "<p>Hier kun je leden van deze foodcoop een bericht sturen. Om je eigen contactgegevens te laten zien, moet je die vrijgeven in je %{profile_link}.</p>"
@@ -898,7 +923,7 @@ nl:
       role_admin: Admin
       role_article_meta: Artikelen
       role_finance: Financiën
-      role_invoices: Facturen
+      role_invoices: Rekeningen
       role_orders: Bestelling
       role_suppliers: Leveranciers
       show_google_maps: Op Google maps bekijken
@@ -950,7 +975,7 @@ nl:
         title: Taken op je nemen
       tasks_open:
         title: open taken
-        view_all: Alle taken bekijken
+        view_all: Alle taken tonen
       title: Hoofdpagina
       your_tasks: Jouw taken
     no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
@@ -1166,6 +1191,10 @@ nl:
   model:
     delivery:
       each_stock_article_must_be_unique: In een levering mag ieder voorraadsartikel maar een keer voorkomen.
+    group_order:
+      stock_ordergroup_name: Voorraad (%{user})
+    invoice:
+      invalid_mime: heeft ongeldig MIME type (%{mime})
     membership:
       no_admin_delete: Lidmaatschap kan niet beeindigd worden. Je bent de laatste administrator.
     order_article:
@@ -1272,8 +1301,10 @@ nl:
       title: Bestellingen beheren
     model:
       close_direct_message: Bestelling afgerekend zonder bedragen in rekening te brengen bij huishoudens.
+      error_boxfill_before_ends: moet na de dozen-vul-datum zijn (of leeg blijven)
       error_closed: Bestelling was al afgerekend
       error_nosel: Er moet minstens één artikel geselecteerd zijn. Mogelijk wil je de bestelling verwijderen?
+      error_starts_before_boxfill: moet na de startdatum zijn (of leeg blijven)
       error_starts_before_ends: moet na de startdatum zijn (of niet ingevuld worden)
       notice_close: 'Bestelling: %{name}, tot %{ends}'
       stock: Voorraad
@@ -1302,12 +1333,12 @@ nl:
       confirm_end: |-
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
-      create_invoice: Factuur toevoegen
-      description1_order: "%{state} bestelling van %{supplier}, geopend door %{who},"
+      create_invoice: Rekening toevoegen
+      description1_order: "%{state} order van %{supplier} geopend door %{who},"
       description1_period:
-        starts: "open van %{starts}"
-        starts_ends: "open van %{starts} tot %{ends}"
-        pickup:
+        pickup: en kan opgehaald worden op %{pickup}
+        starts: open van %{starts}
+        starts_ends: open van %{starts} tot %{ends}
       description2: "%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto)."
       download:
         article_pdf: Artikelen PDF
@@ -1324,9 +1355,10 @@ nl:
         default: Artikelen zoeken...
         groups: Huishoudens zoeken...
       search_reset: Zoekopdracht wissen
-      show_invoice: Factuur tonen
+      show_invoice: Rekening tonen
       sort_article: Per artikel
       sort_group: Per huishouden
+      stock_order: Voorraadbestelling
       title: 'Bestelling: %{name}'
       warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
     state:
@@ -1444,6 +1476,7 @@ nl:
       access: Toegang tot
       activated: actief
       apple_limit: Appelpunten bestellingslimiet
+      break: van %{start} tot %{end}
       deactivated: inactief
     group_form_fields:
       search: Zoeken ...
@@ -1459,7 +1492,7 @@ nl:
       accept_task: Taak accepteren
       done: Gedaan
       done_q: Gedaan?
-      mark_done: Taak als gedaan markeren
+      mark_done: Als gedaan markeren
       reject_task: Taak laten vallen
       who: Wie doet het?
       who_hint: "(Hoeveel zijn er nog nodig?)"
@@ -1691,16 +1724,18 @@ nl:
     back: Terug
     cancel: Annuleren
     close: Sluiten
-    confirm_delete: Wil je %{name} daadwerkelijk wissen?
+    confirm_delete: Wil je %{name} echt verwijderen?
+    confirm_restore: Wil je %{name} echt opnieuw actief maken?
     copy: Kopiëren
     delete: Verwijder
-    download: Downloaden
+    download: Download
     edit: Bewerk
     marks:
       close: "&times;"
       success: <i class="icon icon-ok"></i>
     or_cancel: of annuleren
     please_wait: Een moment alstublieft...
+    restore: Herstellen
     save: Opslaan
     show: Tonen
   views:
