@@ -40,9 +40,9 @@ gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 gem 'protected_attributes', '= 1.1.0' # 1.1.0 until tests work work with higher versions
 gem 'ruby-units'
 gem 'attribute_normalizer'
-gem 'ice_cube', '~> 0.13.0'
+gem 'ice_cube'
 gem 'recurring_select'
-gem 'roo', '~> 2.0.0'
+gem 'roo'
 gem 'roo-xls'
 gem 'spreadsheet'
 gem 'gaffe'
