@@ -1,4 +1,5 @@
 # Foodsoft 4.5.0
+(28 June 2016)
 
 * Improve Docker setup. (#399)
 * Speedup generation of most PDFs (#433)
