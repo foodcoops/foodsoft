@@ -37,6 +37,12 @@ nl:
         delivered_on: Leverdatum
         note: Notitie
         supplier: Leverancier
+      document:
+        created_at: Upload op
+        created_by_user_id: Upload door
+        data: Data
+        mime: MIME-type
+        name: Naam
       financial_transaction:
         amount: Bedrag
         created_on: Datum
@@ -58,7 +64,7 @@ nl:
         created_at: Gemaakt op
         created_by: Gemaakt door
         date: Factuurdatum
-        delete_attachment: Bijlage verwijderen
+        delete_attachment: Verwijder bijlage
         deliveries: Levering
         deposit: Statiegeld in rekening gebracht
         deposit_credit: Statiegeld teruggekregen
@@ -335,7 +341,7 @@ nl:
       error_authn: Inloggen vereist.
       error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je mogelijk %{sign_in}.
       error_denied_sign_in: inloggen als een andere gebruiker
-      error_feature_disabled: Deze functie is momenteel niet actief.
+      error_feature_disabled: Deze optie is momenteel niet actief.
       error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
       error_token: Geen toegang (ongeldig token)!
   article_categories:
@@ -510,6 +516,8 @@ nl:
       tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
+      use_current_orders: De current_orders plugin aanzetten. Hiermee kunnen leden met bestelling-toegang bestelaantallen van leden aanpassen in meerdere bestellingen tegelijk. Hiervoor zijn drie nieuwe items in het Bestellingen-menu. Bedoeld voor gebruik op een ophaaldag.
+      use_documents: Geeft een simpele manier om documenten te delen in het foodcoop menu.
       use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
       use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
       use_wiki: Gebruik wiki pagina's.
@@ -559,6 +567,8 @@ nl:
       tolerance_is_costly: Tolerantie is duur
       use_apple_points: Appelpunten
       use_boxfill: Dozen vullen fase
+      use_current_orders: Extra verdeelschermen
+      use_documents: Documenten delen
       use_messages: Berichten
       use_nick: Bijnamen gebruiken
       use_wiki: Wiki gebruiken
@@ -572,6 +582,54 @@ nl:
       others: Overig
       payment: Financiën
       tasks: Taken
+  current_orders:
+    articles:
+      article:
+        counts: "%{ordergroups} huishoudens bestelden %{articles} verschillende artikelen."
+        no_selection: Kies een artikel om te zien wie het besteld heeft, of download verdeellijsten rechtsboven.
+      article_info:
+        from: van %{supplier}
+        origin_in: uit %{origin}
+        supplied_and_made_by: gemaakt door %{manufacturer}
+        supplied_by: van %{supplier}
+        supplied_by_made_by: van %{supplier} gemaakt door %{manufacturer}
+        unit: per %{unit}
+      form:
+        article_placeholder: Zoek artikelen...
+        current_orders: Alle huidige bestellingen
+      index:
+        title: Artikelen verdelen
+      ordergroups:
+        add_new: Huishouden toevoegen...
+        piece: st
+        unit: eenh
+      show:
+        title: "%{name} verdelen"
+    group_orders:
+      index:
+        title: Je huidige bestellingen
+    navigation:
+      articles: Verdelen
+      ordergroups: Ledenbestellingen
+      receive: Ontvangen
+    ordergroups:
+      articles:
+        add_new: Artikel toevoegen...
+        no_selection: Kies een huishouden om de artikelen te tonen.
+      form:
+        ordergroup_placeholder: Kies een huishouden...
+      index:
+        title: Artikelen voor huishouden
+      payment_bar:
+        account_balance: Account balance
+        new_transaction: Nieuwe transactie
+        payment: 'Betaling:'
+      show:
+        title: Artikelen voor %{name}
+    orders:
+      receive:
+        no_finished_orders: Er zijn momenteel geen bestellingen die ontvangen hoeven te worden.
+        title: Bestellingen ontvangen
   deliveries:
     add_stock_change:
       how_many_units: 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
@@ -613,6 +671,24 @@ nl:
     update:
       notice: Levering is bijgewerkt.
   documents:
+    create:
+      error: 'Document kon niet gemaakt worden: %{error}'
+      notice: Document is gemaakt
+    destroy:
+      error: 'Document kon niet verwijderd worden: %{error}'
+      no_right: Je hebt niet genoeg rechten om het document te verwijderen
+      notice: Document is verwijderd
+    index:
+      new: Nieuw document uploaden
+      title: Documenten
+    multiple_orders_by_articles:
+      filename: Huidige bestellingen per artikel
+      title: Huidige bestellingen - per artikel
+    multiple_orders_by_groups:
+      filename: Huidige bestellingen per huishouden
+      title: Huidige bestellingen - per huishouden
+    new:
+      title: Nieuw document
     order_by_articles:
       filename: Bestelling %{name}-%{date} - Artikellijst
       rows:
@@ -928,6 +1004,10 @@ nl:
       role_suppliers: Leveranciers
       show_google_maps: Op Google maps bekijken
       sort_by: Sorteren op %{text}
+    current_orders:
+      pay_amount: Te betalen %{amount}
+      pay_done: Alles betaald
+      pay_none: Niets te betalen
     deliveries:
       new_invoice: Nieuwe factuur
       show_invoice: Factuur tonen
@@ -1028,6 +1108,11 @@ nl:
       body: "<p>Hier kun je iemand die nog geen lid is, uitnodigen voor de groep <b>%{group}</b>.</p>"
     success: Persoon is uitgenodigd.
   js:
+    current_orders:
+      articles:
+        above: "%{count} meer dan<br>beschikbaar"
+        below: "%{count} blijft over"
+        equal: alles verdeeld
     ordering:
       confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
   layouts:
@@ -1217,6 +1302,7 @@ nl:
       suppliers: Leveranciers/producten
       title: Producten
     dashboard: Dashboard
+    documents: Documenten
     finances:
       accounts: Ledenbetalingen
       balancing: Bestellingen afrekenen

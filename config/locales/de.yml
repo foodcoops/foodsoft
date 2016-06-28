@@ -37,6 +37,12 @@ de:
         delivered_on: Lieferdatum
         note: Notiz
         supplier: Lieferantin
+      document:
+        created_at: Erstellt am
+        created_by_user_id: Erstellt von
+        data: Daten
+        mime: MIME-Typ
+        name: Name
       financial_transaction:
         amount: Betrag
         created_on: Datum
@@ -76,7 +82,7 @@ de:
         send_to_all: An alle Mitglieder schicken
         subject: Betreff
       order:
-        boxfill: 
+        boxfill: Kisten füllen nach
         closed_by: Abgerechnet von
         created_by: Erstellt von
         ends: Endet am
@@ -104,7 +110,7 @@ de:
         account_balance: Kontostand
         available_funds: Verfügbares Guthaben
         break: "(Letzte) Pause"
-        break_until: 
+        break_until: bis
         contact: Kontakt
         contact_address: Adresse
         contact_person: Kontaktperson
@@ -510,6 +516,8 @@ de:
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
       use_boxfill: 
+      use_current_orders: 
+      use_documents: Einfache Dokumentenverwaltung aktivieren
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
       use_wiki: "Änderbare Wiki Seiten aktivieren"
@@ -559,6 +567,8 @@ de:
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
       use_apple_points: Apfelpunkte verwenden
       use_boxfill: 
+      use_current_orders: 
+      use_documents: Dokumente verwenden
       use_messages: Nachrichten
       use_nick: Benutzernamen verwenden
       use_wiki: Wiki verwenden
@@ -572,6 +582,54 @@ de:
       others: Sonstiges
       payment: Finanzen
       tasks: Aufgaben
+  current_orders:
+    articles:
+      article:
+        counts: "%{ordergroups} Bestellgruppen bestellten %{articles} verschiedene Produkte."
+        no_selection: 
+      article_info:
+        from: von %{supplier}
+        origin_in: in %{origin}
+        supplied_and_made_by: produziert von %{manufacturer}
+        supplied_by: von %{supplier}
+        supplied_by_made_by: von %{supplier} produziert von %{manufacturer}
+        unit: pro %{unit}
+      form:
+        article_placeholder: Artikel suchen...
+        current_orders: Alle Aktuelle Bestellungen
+      index:
+        title: Artikel verteilen
+      ordergroups:
+        add_new: Bestellgruppe hinzufügen
+        piece: St.
+        unit: Einheit
+      show:
+        title: "%{name}"
+    group_orders:
+      index:
+        title: Deine Aktuelle Bestellungen
+    navigation:
+      articles: Verteilen
+      ordergroups: Gruppenbestellungen
+      receive: In Empfang nehmen
+    ordergroups:
+      articles:
+        add_new: Artikel hinzufügen...
+        no_selection: Wahl eine Bestellgruppe um die Artikel zu zeigen.
+      form:
+        ordergroup_placeholder: Bestellgruppe auswählen...
+      index:
+        title: Artikel für Bestellgruppe
+      payment_bar:
+        account_balance: Kontostand
+        new_transaction: Neue Transaktion
+        payment: 'Zahlung:'
+      show:
+        title: Artikel für %{name}
+    orders:
+      receive:
+        no_finished_orders: Jetzt gibt es keine Bestellungen in Empfang zu nehmen.
+        title: Bestellungen in Empfang nehmen
   deliveries:
     add_stock_change:
       how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
@@ -613,6 +671,24 @@ de:
     update:
       notice: Lieferung wurde aktualisiert.
   documents:
+    create:
+      error: 'Dokument konnte nicht erstellt werden: %{error}'
+      notice: Dokument wurde erstellt
+    destroy:
+      error: 'Dokument konnt nicht gelöscht werden: %{error}'
+      no_right: Du hast nicht genügend Rechte um die Datei zu löschen
+      notice: Dokument wurde gelöscht
+    index:
+      new: Neues Dokument anlegen
+      title: Dokumente
+    multiple_orders_by_articles:
+      filename: Artikelsortierung aktueller Bestellungen
+      title: Aktuelle Bestellungen - Artikelsortierung
+    multiple_orders_by_groups:
+      filename: Gruppensortierung aktueller Bestellungen
+      title: Aktuelle Bestellungen - Gruppensortierung
+    new:
+      title: Neues Dokument
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
       rows:
@@ -928,6 +1004,10 @@ de:
       role_suppliers: Lieferanten
       show_google_maps: Show it on Google maps
       sort_by: Nach %{text} sortieren
+    current_orders:
+      pay_amount: zu bezahlen %{amount}
+      pay_done: vollständig bezahlt
+      pay_none: nichts zu bezahlen
     deliveries:
       new_invoice: Rechnung anlegen
       show_invoice: Rechnung anzeigen
@@ -1026,6 +1106,11 @@ de:
       body: "<p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>"
     success: Benutzer/in wurde erfolgreich eingeladen.
   js:
+    current_orders:
+      articles:
+        above: "%{count} mehr<br>als verfügbar"
+        below: "%{count} übrig"
+        equal: alle verteilt
     ordering:
       confirm_change: "Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?"
   layouts:
@@ -1213,6 +1298,7 @@ de:
       suppliers: Lieferanten/Artikel
       title: Artikel
     dashboard: Dashboard
+    documents: Dokumente
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen

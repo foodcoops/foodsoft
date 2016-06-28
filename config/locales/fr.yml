@@ -37,6 +37,12 @@ fr:
         delivered_on: Date de réapprovisionnement
         note: Note
         supplier: Fournisseur-e
+      document:
+        created_at: 
+        created_by_user_id: 
+        data: 
+        mime: 
+        name: 
       financial_transaction:
         amount: Montant
         created_on: Date
@@ -510,6 +516,8 @@ fr:
       tolerance_is_costly: 
       use_apple_points: 
       use_boxfill: 
+      use_current_orders: 
+      use_documents: 
       use_messages: 
       use_nick: 
       use_wiki: 
@@ -559,6 +567,8 @@ fr:
       tolerance_is_costly: 
       use_apple_points: 
       use_boxfill: 
+      use_current_orders: 
+      use_documents: 
       use_messages: 
       use_nick: 
       use_wiki: 
@@ -572,6 +582,54 @@ fr:
       others: 
       payment: 
       tasks: 
+  current_orders:
+    articles:
+      article:
+        counts: 
+        no_selection: 
+      article_info:
+        from: 
+        origin_in: 
+        supplied_and_made_by: 
+        supplied_by: 
+        supplied_by_made_by: 
+        unit: 
+      form:
+        article_placeholder: 
+        current_orders: 
+      index:
+        title: 
+      ordergroups:
+        add_new: 
+        piece: 
+        unit: 
+      show:
+        title: 
+    group_orders:
+      index:
+        title: 
+    navigation:
+      articles: 
+      ordergroups: 
+      receive: 
+    ordergroups:
+      articles:
+        add_new: 
+        no_selection: 
+      form:
+        ordergroup_placeholder: 
+      index:
+        title: 
+      payment_bar:
+        account_balance: 
+        new_transaction: 
+        payment: 
+      show:
+        title: 
+    orders:
+      receive:
+        no_finished_orders: 
+        title: 
   deliveries:
     add_stock_change:
       how_many_units: Combien d'unités (%{unit}) de l'article %{name} doivent-elles être livrées?
@@ -613,6 +671,24 @@ fr:
     update:
       notice: La commande a été actualisée
   documents:
+    create:
+      error: 
+      notice: 
+    destroy:
+      error: 
+      no_right: 
+      notice: 
+    index:
+      new: 
+      title: 
+    multiple_orders_by_articles:
+      filename: 
+      title: 
+    multiple_orders_by_groups:
+      filename: 
+      title: 
+    new:
+      title: 
     order_by_articles:
       filename: Commande %{name}-%{date} - Trier par
       rows:
@@ -934,6 +1010,10 @@ fr:
       role_suppliers: Fournisseur-e
       show_google_maps: Afficher la position sur Google maps
       sort_by: Trier par %{text}
+    current_orders:
+      pay_amount: 
+      pay_done: 
+      pay_none: 
     deliveries:
       new_invoice: Ajouter une nouvelle facture
       show_invoice: Afficher la facture
@@ -1037,6 +1117,11 @@ fr:
       body: "<p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>"
     success: La_le membre a été engrainéE avec succès!
   js:
+    current_orders:
+      articles:
+        above: 
+        below: 
+        equal: 
     ordering:
       confirm_change: Les changements apportés à cette commande vont être perdus. Est-ce que tu veux vraiment continuer?
   layouts:
@@ -1199,7 +1284,7 @@ fr:
     delivery:
       each_stock_article_must_be_unique: Chaque article du cellier ne peut apparaître qu'une seule fois dans la commande.
     group_order:
-      stock_ordergroup_name: 
+      stock_ordergroup_name: Cellier (%{user})
     invoice:
       invalid_mime: 
     membership:
@@ -1224,6 +1309,7 @@ fr:
       suppliers: Annuaire
       title: Produits
     dashboard: Tableau de bord
+    documents: 
     finances:
       accounts: Crédits des cellules
       balancing: Décompte des commandes
