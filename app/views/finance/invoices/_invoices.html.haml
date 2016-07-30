@@ -15,7 +15,6 @@
       %th= heading_helper Invoice, :orders
       %th= heading_helper Invoice, :note
       %th
-      %th
   %tbody
     - for invoice in @invoices
       %tr
@@ -36,8 +35,6 @@
         %td= truncate(invoice.note)
         %td
           - if invoice.user_can_edit?(current_user)
-            = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
-        %td
-          - if invoice.user_can_edit?(current_user)
+            = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-xs btn-default'
             = link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('ui.confirm_delete', name: invoice.number)}, :method => :delete,
-            class: 'btn btn-danger btn-mini'
+            class: 'btn btn-danger btn-xs'

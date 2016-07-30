@@ -18,8 +18,8 @@
         %td= shared_supplier.delivery_days
         %td
           - if shared_supplier.suppliers.any?
-            %i.icon-ok
+            = glyph 'ok'
             = associated_supplier_names(shared_supplier)
-            = link_to t('.subscribe_again'), new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn'
+            = link_to t('.subscribe_again'), new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn btn-default'
           - else
-            = link_to t('.subscribe'), new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn'
+            = link_to t('.subscribe'), new_supplier_path(:shared_supplier_id => shared_supplier), class: 'btn btn-default'

@@ -7,5 +7,5 @@
     = form.input :ordergroup_id, as: :select, collection: Ordergroup.undeleted.map { |g| [g.name, g.id] }
     = form.input :result, hint: I18n.t('group_order_articles.form.result_hint', unit: @order_article.article.unit) # Why do we need the full prefix?
   .modal-footer
-    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}
     = form.submit t('ui.save'), class: 'btn btn-primary'

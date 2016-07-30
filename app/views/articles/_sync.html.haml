@@ -8,7 +8,7 @@
           = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
           = article.name
           - if article.in_open_order
-            .alert= t '.outlist.alert_used', article: article.name
+            .alert.alert-warning= t '.outlist.alert_used', article: article.name
   %hr/
 
 - if @updated_article_pairs.any?

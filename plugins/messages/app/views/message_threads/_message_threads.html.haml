@@ -24,4 +24,4 @@
             %td= show_user message.last_reply.sender
           - else
             %td{:colspan => "2"}
-//          %td= link_to t('.reply'), new_message_path(:message => {:reply_to => message.id}), class: 'btn'
+//          %td= link_to t('.reply'), new_message_path(:message => {:reply_to => message.id}), class: 'btn btn-default'

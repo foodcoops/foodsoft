@@ -1,16 +1,15 @@
 - title t('.title'), false
 
-.row-fluid
-  .span7
+.row
+  .col-md-7
     %h3
       = h(t('.user.title', user: show_user))
       %small= t '.user.since', when: distance_of_time_in_words(Time.now, @current_user.created_on)
-    = simple_form_for(@current_user, :url => update_profile_path) do |f|
+    = simple_form_for @current_user, url: update_profile_path do |f|
       = render :partial => 'shared/user_form_fields', :locals => {:f => f, :password_autocomplete => 'store-only', with_address: true}
-      .form-actions
-        = submit_tag t('ui.save'), class: 'btn'
+      = simple_form_submit(f)
 
-  .span5
+  .col-md-5
     - if @current_user.ordergroup
       %h3= User.human_attribute_name(:ordergroup, count: 1)
       %table.table.table-striped
@@ -24,7 +23,7 @@
           %td.right
             - unless FoodsoftConfig[:disable_invite]
               = link_to t('.groups.invite'), new_invite_path(id: @current_user.ordergroup),
-                        remote: true, class: 'btn btn-success btn-small'
+                        remote: true, class: 'btn btn-success btn-sm'
     - if @current_user.workgroups.any?
       %h3= User.human_attribute_name(:workgroup, count: 2)
       %table.table.table-striped
@@ -34,4 +33,4 @@
             %td.right
               = link_to t('.groups.cancel'), cancel_membership_path(group_id: workgroup),
                         :data => {confirm: t('.groups.cancel_confirm')}, method: :post,
-                        class: 'btn btn-danger btn-small'
+                        class: 'btn btn-danger btn-sm'

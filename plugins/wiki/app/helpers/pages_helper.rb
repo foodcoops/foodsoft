@@ -9,7 +9,7 @@ module PagesHelper
     FoodsoftWiki::WikiParser.new(data: body+"\n", params: {referer: title}).to_html.html_safe
   rescue => e
     # try the following with line breaks: === one === == two == = three =
-    content_tag :span, class: 'alert alert-error' do
+    content_tag :span, class: 'alert alert-danger' do
       I18n.t '.wikicloth_exception', :msg => e
     end.html_safe
   end

@@ -7,16 +7,16 @@
 - '<dashboard_top_mark>'
 
 - unless @unaccepted_tasks.empty? && @next_tasks.empty?
-  %section.row-fluid
+  %section.row
     - unless @next_tasks.empty?
-      .span3.well
+      .col-md-3.well
         %h4= t '.your_tasks'
         %dl
           - @next_tasks.each do |task|
             %dt= l task.due_date, format: t('.due_date_format')
             %dd= link_to task.name, task_path(task)
     - unless @unaccepted_tasks.empty?
-      .span3.well
+      .col-md-3.well
         %h4= t '.tasks_move.title'
         = t '.tasks_move.desc'
         = link_to t('.tasks_move.action'), user_tasks_path

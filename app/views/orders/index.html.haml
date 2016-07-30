@@ -5,7 +5,7 @@
     = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-primary dropdown-toggle' do
       = t '.new_order'
       %span.caret
-    %ul.dropdown-menu
+    %ul.dropdown-menu.pull-right
       - for supplier in @suppliers
         %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1
 
@@ -36,13 +36,13 @@
               %td= truncate(order.note)
               %td= link_to t('.action_end'), finish_order_path(order),
                 data: {confirm: t('.confirm_end', order: order.name)}, method: :post,
-                class: 'btn btn-small btn-success'
+                class: 'btn btn-sm btn-success'
 
               %td
-                = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-small'
-                = link_to t('ui.show'), order, class: 'btn btn-small'
+                = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-sm btn-default'
+                = link_to t('ui.show'), order, class: 'btn btn-sm btn-default'
                 = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
-                  class: 'btn btn-small btn-danger'
+                  class: 'btn btn-sm btn-danger'
 
         - unless @finished_orders.empty?
           - unless @open_orders.empty?
@@ -60,10 +60,10 @@
                   = receive_button order
 
               %td
-                = link_to t('ui.copy'), new_order_path(order_id: order, supplier_id: order.supplier), class: 'btn btn-small'
-                = link_to t('ui.show'), order, class: 'btn btn-small'
+                = link_to t('ui.copy'), new_order_path(order_id: order, supplier_id: order.supplier), class: 'btn btn-sm btn-default'
+                = link_to t('ui.show'), order, class: 'btn btn-sm btn-default'
                 = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
-                  class: 'btn btn-small btn-danger'
+                  class: 'btn btn-sm btn-danger'
 
 %h2= t '.orders_settled'
 #orders_table

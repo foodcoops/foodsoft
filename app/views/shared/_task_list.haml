@@ -14,18 +14,18 @@
         %td= format_date(task.due_date) unless task.due_date.nil?
         %td
           - if task.periodic?
-            %i.icon-repeat{title: t('tasks.repeated')}
+            %i.glyphicon.glyphicon-repeat{title: t('tasks.repeated')}
         %td= link_to task_title(task), task_path(task)
         %td
           = task_assignments task
           = highlighted_required_users task
         %td
           - if !task.is_accepted?(current_user)
-            = link_to t('.accept_task'), accept_task_path(task), method: :post, class: 'btn btn-small'
-            = link_to t('.reject_task'), reject_task_path(task), method: :post, class: 'btn btn-small' if task.is_assigned?(current_user)
+            = link_to t('.accept_task'), accept_task_path(task), method: :post, class: 'btn btn-sm btn-default'
+            = link_to t('.reject_task'), reject_task_path(task), method: :post, class: 'btn btn-sm btn-default' if task.is_assigned?(current_user)
           - elsif !task.done
-            = link_to set_done_task_path(task), method: :post, class: 'btn btn-small',
+            = link_to set_done_task_path(task), method: :post, class: 'btn btn-sm btn-default',
               title: t('.mark_done') do
-              %i.icon-ok= t '.done_q'
+              %i.glyphicon.glyphicon-ok= t '.done_q'
           - else
-            %i.icon-ok= t '.done'
+            %i.glyphicon.glyphicon-ok= t '.done'

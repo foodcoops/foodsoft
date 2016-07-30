@@ -31,7 +31,7 @@
     });
 
 - content_for :sidebar do
-  .well.well-small= t('.sidebar')
+  .well.well-sm= t('.sidebar')
 
 = form_tag finance_create_transaction_collection_path do
   %p
@@ -46,8 +46,8 @@
       %tbody
         = render :partial => 'ordergroup', :collection => [1, 2, 3]
   %p
-    = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn'
-    = link_to t('.add_all_ordergroups'), '#', 'data-add-all-ordergroups' => true, class: 'btn'
+    = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn btn-default'
+    = link_to t('.add_all_ordergroups'), '#', 'data-add-all-ordergroups' => true, class: 'btn btn-default'
   .form-actions
     = submit_tag t('.save'), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), finance_ordergroups_path

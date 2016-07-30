@@ -1,37 +1,19 @@
 @import "twitter/bootstrap/bootstrap";
-@import "twitter/bootstrap/responsive";
 @import "delta_input";
 
 body {
   padding-top: 10px;
 }
 
-// Set the correct sprite paths
-@iconSpritePath: image-url('twitter/bootstrap/glyphicons-halflings.png');
-@iconWhiteSpritePath: image-url('twitter/bootstrap/glyphicons-halflings-white.png');
+// Fonts
+@glyphiconsEotPath: font-url("glyphicons-halflings-regular.eot");
+@glyphiconsEotPath_iefix: font-url("glyphicons-halflings-regular.eot?#iefix");
+@glyphiconsWoffPath: font-url("glyphicons-halflings-regular.woff");
+@glyphiconsTtfPath: font-url("glyphicons-halflings-regular.ttf");
+@glyphiconsSvgPath: font-url("glyphicons-halflings-regular.svg#glyphicons_halflingsregular");
+@import "twitter/bootstrap/glyphicons";
 
-// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-@fontAwesomeEotPath: asset-url('fontawesome-webfont.eot');
-@fontAwesomeEotPath_iefix: asset-url('fontawesome-webfont.eot?#iefix');
-@fontAwesomeWoffPath: asset-url('fontawesome-webfont.woff');
-@fontAwesomeTtfPath: asset-url('fontawesome-webfont.ttf');
-@fontAwesomeSvgPath: asset-url('fontawesome-webfont.svg#fontawesomeregular');
-@import 'fontawesome/font-awesome';
-
-// Glyphicons
-//@import "twitter/bootstrap/sprites.less";
-
-// Your custom LESS stylesheets goes here
-//
-// Since bootstrap was imported above you have access to its mixins which
-// you may use and inherit here
-//
-// If you'd like to override bootstrap's own variables, you can do so here as well
-// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
-//
-// Example:
-// @linkColor: #ff0000;
-
+//@import 'fontawesome/font-awesome';
 
 // main ui colours
 @mainRedColor: #ED0606;
@@ -46,6 +28,32 @@ body {
 // dim colors by this amount when the information is less important
 @nonessentialDim: 35%;
 
+//<---- Bootstrap 3 CSS adaptations
+label {
+  font-weight: normal;
+  text-align: right;
+}
+h5 {
+  font-weight: bold;
+}
+// token-input-list as form element
+.form-group .token-input-list-facebook {
+  width: 100%;
+}
+// somehow we get extra padding
+.navbar > .container-fluid > .navbar-form:first-child {
+  padding-left: 0;
+}
+// heading in well needs no top margin
+.well > h1:first-child, .well > h2:first-child, .well > h3:first-child, .well > h4:first-child {
+  margin-top: 0;
+}
+//---->
+
+// keep top and main navbar closer together
+#navbar-top { margin-bottom: 8px; }
+// don't show empty main navbar in sm responsive mode
+#navbar-main { min-height: 0; }
 
 // Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
 .dl-horizontal {
@@ -53,7 +61,7 @@ body {
 }
 
 // Do not use additional margin for input in table
-.form-horizontal .control-group.control-group-intable,
+.form-horizontal .form-group.form-group-intable,
 .form-horizontal .controls.controls-intable,
 .input-prepend.intable {
   margin: 0;
@@ -71,9 +79,7 @@ body {
 
 
 .logo {
-  margin: 10px 0 0 30px;
-  float: left;
-  font-size: 35px;
+  font-size: 33px;
   font-weight: bold;
   display: block;
   color: @mainRedColor;
@@ -100,7 +106,7 @@ footer {
   border-top: 1px solid #e4e4e4;
 
   a {
-    color: mix(#888, @linkColor, 70%);
+    color: mix(#888, @link-color, 70%);
   }
 }
 
@@ -127,7 +133,7 @@ table {
     text-align: right;
   }
   td.odd {
-    background-color: @tableBackgroundAccent;
+    background-color: @table-bg-accent;
   }
   th.left, td.left     { text-align: left; }
   th.right, td.right   { text-align: right; }
@@ -138,7 +144,7 @@ table {
   }
 
   tr.selected td {
-    background-color: @successBackground;
+    background-color: @state-success-bg;
   }
 }
 
@@ -186,7 +192,7 @@ table {
     display: none;
   }
   .mw-headline a {
-    color: @textColor;
+    color: @text-color;
     text-decoration: none;
   }
 }
@@ -209,9 +215,13 @@ table {
   margin-top: -2px;
 }
 
+#order-table {
+  margin-bottom: 80px; // avoid bottom rows obstruction by #order-footer
+}
+
 #order-footer, .article-info {
   text-align: left;
-  z-index: 1;
+  z-index: 5;
   position: fixed;
   bottom: 0;
   background-color: #E4EED6;
@@ -300,7 +310,7 @@ td.symbol, th.symbol {
   padding-right: 0;
   text-align: center;
 }
-.symbol              { color: tint(@textColor, @nonessentialDim); }
+.symbol              { color: tint(@text-color, @nonessentialDim); }
 .used        .symbol { color: tint(@articleUsedColor, @nonessentialDim); }
 .unused      .symbol { color: tint(@articleUnusedColor, @nonessentialDim); }
 .partused    .symbol { color: tint(@articlePartusedColor, @nonessentialDim); }
@@ -335,8 +345,8 @@ td.symbol, th.symbol {
 
 // center table rows vertically (including form elements)
 table.table {
-  td, th {
-    vertical-align: middle;
+  & > thead, & > tbody, & > tfoot {
+    & > tr > td, & > tr > th { vertical-align: middle; }
   }
   select, textarea, input, .uneditable-input,
   .input-append, .input-prepend {
@@ -352,13 +362,13 @@ table.table {
       margin: 5px 0 0 0;
     }
   }
-  .control-group {
+  .form-group {
     margin-bottom: 5px;
   }
-  .control-group.h_wrapper {
+  .form-group.h_wrapper {
     margin-bottom: 5px;
   }
-  .control-group.select {
+  .form-group.select {
     margin-bottom: 15px
   }
 }
@@ -383,11 +393,6 @@ label {
   padding-bottom: 0.4ex;
 }
 
-// allow buttons as input add-on (with proper height)
-.input-append button.add-on {
-  height: inherit;
-}
-
 // inline form elements
 .inline {
   display: inline;
@@ -403,7 +408,7 @@ input.package {
   .package-image(right);
   // disabled and readonly definitions though
   &[disabled], &[readonly] {
-    background-color: @inputDisabledBackground;
+    background-color: @input-bg-disabled;
   }
 }
 i.package {
@@ -420,7 +425,7 @@ i.package.icon-only {
   background-position: right;
   display: inline-block;
 }
-.package              { color: tint(@textColor, @nonessentialDim); }
+.package              { color: tint(@text-color, @nonessentialDim); }
 .used        .package { color: tint(@articleUsedColor, @nonessentialDim); }
 .unused      .package { color: tint(@articleUnusedColor, @nonessentialDim); }
 .partused    .package { color: tint(@articlePartusedColor, @nonessentialDim); }
@@ -428,7 +433,7 @@ i.package.icon-only {
 
 // very small inputs - need !important for responsive selectors
 .input-nano {
-  width: 30px !important;
+  width: 55px !important;
 }
 
 // get rid of extra space on bottom of dialog with form
@@ -439,10 +444,10 @@ i.package.icon-only {
 // multiple-column layout in forms (landscape tablet and wider only)
 @media (min-width: 768px) {
   .form-horizontal .fold-line {
-    .control-group {
+    .form-group {
       float: left;
     }
-    .control-group + .control-group {
+    .form-group + .form-group {
       .control-label {
         width: auto;
         margin: 0 10px;
@@ -459,7 +464,7 @@ i.package.icon-only {
         margin-bottom: 20px;
       }
     }
-    .control-group:last-child {
+    .form-group:last-child {
       float: none;
       .controls {
         float: none;
@@ -479,40 +484,8 @@ i.package.icon-only {
   margin-top: 5px;
 }
 
-// unlock button same size as warning sign
-.input-prepend button.unlocker {
+// small unlock and exclamation mark button with equal size
+button.unlocker {
   padding-right: 6px;
   padding-left: 7px;
-}
-
-// TODO: Remove the .panel defines after updating Bootstrap to >=3.0
-.panel {
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-}
-
-.panel-default {
-  border-color: #ddd;
-}
-
-.panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px
-}
-
-.panel-default > .panel-heading {
-  color: #333;
-  background-color: #f5f5f5;
-  border-color: #ddd
-}
-
-.panel-body {
-  padding: 15px;
-  padding-bottom: 0px;
 }

@@ -2,8 +2,8 @@
 
 %p
   %i= t '.first_paragraph'
-.row-fluid
-  .span6
+.row
+  .col-md-6
     %section
       %h2= t '.newest_users'
       %table.table.table-striped
@@ -19,10 +19,9 @@
             - if FoodsoftConfig[:use_nick]
               %td= link_to user.name
             %td= format_date(user.created_on)
-      = link_to t('.all_users'), admin_users_path
-      |
-      = link_to t('.new_user'), new_admin_user_path, class: 'btn btn-primary btn-small'
-  .span6
+      = link_to t('.all_users'), admin_users_path, class: 'btn btn-default btn-sm'
+      = link_to t('.new_user'), new_admin_user_path, class: 'btn btn-primary btn-sm'
+  .col-md-6
     %section
       %h2= t '.newest_groups'
       %table.table.table-striped
@@ -36,10 +35,8 @@
             %td= link_to group.name, [:admin, group]
             %td= group.class.model_name.human
             %td= group.users.size
-      = link_to t('.all_ordergroups'), admin_ordergroups_path
-      |
-      = link_to t('.new_ordergroup'), new_admin_ordergroup_path, class: 'btn btn-primary btn-small'
-      |
-      = link_to t('.all_workgroups'), admin_workgroups_path
-      |
-      = link_to t('.new_workgroup'), new_admin_workgroup_path, class: 'btn btn-primary btn-small'
+      = link_to t('.all_ordergroups'), admin_ordergroups_path, class: 'btn btn-default btn-sm'
+      = link_to t('.new_ordergroup'), new_admin_ordergroup_path, class: 'btn btn-primary btn-sm'
+      &nbsp;
+      = link_to t('.all_workgroups'), admin_workgroups_path, class: 'btn btn-default btn-sm'
+      = link_to t('.new_workgroup'), new_admin_workgroup_path, class: 'btn btn-primary btn-sm'

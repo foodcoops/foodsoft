@@ -52,5 +52,5 @@
           %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
             {include_blank: true}, class: 'input-small'
       - unless changed_article.errors.empty?
-        %tr.alert
+        %tr.alert.alert-warning
           %td(colspan=11)= changed_article.errors.full_messages.join(', ')

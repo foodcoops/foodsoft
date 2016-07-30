@@ -157,6 +157,8 @@ GEM
     faker (1.6.3)
       i18n (~> 0.5)
     ffi (1.9.10)
+    font-awesome-rails (4.5.0.0)
+      railties (>= 3.2, < 5.0)
     gaffe (1.1.0)
       rails (>= 4.0.0)
     git-version-bump (0.15.1)
@@ -306,7 +308,7 @@ GEM
       activesupport (= 4.2.6)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (11.2.0)
+    rake (11.2.2)
     ransack (1.7.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -430,10 +432,10 @@ GEM
     tilt (2.0.5)
     tins (1.6.0)
     ttfunk (1.4.0)
-    twitter-bootstrap-rails (2.2.8)
+    twitter-bootstrap-rails (3.2.2)
       actionpack (>= 3.1)
-      execjs
-      rails (>= 3.1)
+      execjs (>= 2.2.2, >= 2.2)
+      less-rails (>= 2.5.0)
       railties (>= 3.1)
     twitter-text (1.13.4)
       unf (~> 0.1.0)
@@ -488,6 +490,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   faker
+  font-awesome-rails
   foodsoft_messages!
   foodsoft_wiki!
   gaffe
@@ -528,7 +531,7 @@ DEPENDENCIES
   sass-rails
   select2-rails
   selenium-webdriver
-  simple-navigation (~> 3.14.0)
+  simple-navigation
   simple-navigation-bootstrap
   simple_form
   simplecov
@@ -536,7 +539,7 @@ DEPENDENCIES
   sqlite3
   therubyracer
   thin
-  twitter-bootstrap-rails (~> 2.2.8)
+  twitter-bootstrap-rails (~> 3.2)
   uglifier (>= 1.0.3)
   web-console (~> 2.0)
   whenever

@@ -18,6 +18,6 @@
         %td= link_to_gmaps ordergroup.contact_address
         %td= format_date ordergroup.last_user_activity
         %td
-          = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
+          = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-xs btn-default'
           = link_to t('ui.delete'), [:admin, ordergroup], :data => {:confirm => t('ui.confirm_delete', name: ordergroup.name)},
-            :method => :delete, class: 'btn btn-mini btn-danger'
+            :method => :delete, class: 'btn btn-xs btn-danger'

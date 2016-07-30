@@ -2,14 +2,14 @@
   %p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @workgroup.id), remote: true)).html_safe
 = simple_form_for [:admin, @workgroup] do |f|
   - captured = capture do
-    %h4= t 'admin.access_to'
-    = f.input :role_suppliers
-    = f.input :role_article_meta
-    = f.input :role_orders
-    = f.input :role_finance
-    = f.input :role_invoices
-    = f.input :role_admin
+    .form-group
+      .col-md-offset-2.col-md-10
+        %h5= t 'admin.access_to'
+        %div= f.input_field :role_suppliers, inline_label: true
+        %div= f.input_field :role_article_meta, inline_label: true
+        %div= f.input_field :role_orders, inline_label: true
+        %div= f.input_field :role_finance, inline_label: true
+        %div= f.input_field :role_invoices, inline_label: true
+        %div= f.input_field :role_admin, inline_label: true
   = render 'shared/group_form_fields', :f => f, captured: captured
-  .form-actions
-    = f.button :submit
-    = link_to t('ui.or_cancel'), :back
+  = simple_form_submit(f)

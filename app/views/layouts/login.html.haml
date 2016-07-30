@@ -1,8 +1,8 @@
 = render layout: 'layouts/header' do
   .container
     .row
-      .span6.offset3
-        = bootstrap_flash_patched
+      .col-md-6.col-md-offset-3
+        = bootstrap_flash
         - if show_title?
           .page-header
             %h1= yield(:title)

@@ -2,7 +2,7 @@
 = fields_for 'order_articles', order_article, index: order_article.id do |form|
   - cssclass = "order-article #{cycle('even', 'odd', name: 'articles')}"
   - cssclass += " unavailable" if (order_article.units_billed||order_article.units_to_order)==0 and order_article.units_received.nil?
-  %tr{id: "order_article_#{order_article.id}", class: cssclass, valign: "top"}
+  %tr{id: "order_article_#{order_article.id}", class: cssclass}
     - order_title = []
     - order_title.append Article.human_attribute_name(:manufacturer)+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
     - order_title.append Article.human_attribute_name(:note)+': ' + order_article.article.note unless order_article.article.note.to_s.empty?
@@ -26,4 +26,4 @@
       / TODO add almost invisible text_field for entering single units
     %td.units_delta
     %td
-      = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article, without_units: true), remote: true, class: 'btn btn-small'
+      = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article, without_units: true), remote: true, class: 'btn btn-sm btn-default'

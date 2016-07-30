@@ -17,8 +17,7 @@
             %td= order.name
             %td= format_time(order.ends)
             %td= truncate(order.note)
-            %td= receive_button order, class: 'btn-small' unless order.stockit?
+            %td= receive_button order, class: 'btn btn-sm btn-default' unless order.stockit?
             %td
-              = link_to t('ui.show'), order, class: 'btn btn-small'
-              = order_pdf order, :fax, t('orders.show.download.fax_pdf'), class: 'btn btn-small'
-
+              = link_to t('ui.show'), order, class: 'btn btn-sm btn-default'
+              = order_pdf order, :fax, t('orders.show.download.fax_pdf'), class: 'btn btn-sm btn-default'

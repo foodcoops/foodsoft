@@ -3,5 +3,4 @@
   = form.hidden_field :user_id
   = form.hidden_field :group_id
   = form.input :email
-  = form.submit t('.action')
-  = link_to t('ui.or_cancel'), :back
+  = simple_form_submit(form, label: t('.action'))

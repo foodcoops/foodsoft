@@ -6,6 +6,4 @@
 = t('.body', group: h(@invite.group.name), foodcoop: h(FoodsoftConfig[:name])).html_safe
 = simple_form_for @user, url: accept_invitation_path do |form|
   = render partial: 'shared/user_form_fields', locals: {f: form}
-  .form-actions
-    = submit_tag t('.submit'), class: 'btn'
-
+  = simple_form_submit(form, label: t('.submit'), cancel: false)

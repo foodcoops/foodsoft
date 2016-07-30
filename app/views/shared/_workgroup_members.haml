@@ -1,15 +1,14 @@
-.well.well-small
+.well.well-sm
   %h4= t '.title'
-  #groupMembers.accordion
+  #groupMembers.panel-group
     - Workgroup.all.each do |workgroup|
-      .accordion-group
-        .accoridon-heading
+      .panel.panel-default
+        .panel-heading
           = link_to workgroup.name, "#collapse#{workgroup.id}", data: {toggle: 'collapse', parent: '#groupMembers'}
-        %div{id: "collapse#{workgroup.id}", class: 'accordion-body collapse'}
-          .accordion-inner
-            %ul.unstyled
+        %div{id: "collapse#{workgroup.id}", class: 'panel-collapse collapse'}
+          .panel-body
+            %ul.list-unstyled
               - workgroup.users.includes(:groups).natural_order.each do |user|
                 %li
                   = show_user(user)
                   %small (#{user.ordergroup.try(:name)})
-

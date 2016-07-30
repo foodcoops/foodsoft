@@ -15,6 +15,5 @@
         %td= ordergroup.contact
         %td.numeric= number_to_currency(ordergroup.account_balance)
         %td
-          = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-mini'
-          = link_to t('.account_statement'), finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-mini'
-        
+          = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-xs btn-default'
+          = link_to t('.account_statement'), finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-xs btn-default'

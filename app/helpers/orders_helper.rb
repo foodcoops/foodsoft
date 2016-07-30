@@ -52,7 +52,7 @@ module OrdersHelper
   def pkg_helper(article, options={})
     return '' if !article || article.unit_quantity == 1
     uq_text = "× #{article.unit_quantity}"
-    uq_text = content_tag(:span, uq_text, class: 'hidden-phone') if options[:soft_uq]
+    uq_text = content_tag(:span, uq_text, class: 'hidden-xs') if options[:soft_uq]
     if options[:plain]
       uq_text
     elsif options[:icon].nil? || options[:icon]
@@ -85,7 +85,7 @@ module OrdersHelper
     units_expected = (order_article.units_billed || order_article.units_to_order) *
       1.0 * order_article.article.unit_quantity / order_article.article_price.unit_quantity
 
-    input_classes = 'input input-nano units_received'
+    input_classes = 'input input-nano form-control units_received'
     input_classes += ' package' unless order_article.article_price.unit_quantity == 1
     input_html = form.text_field :units_received, class: input_classes,
       data: {'units-expected' => units_expected},
@@ -93,11 +93,11 @@ module OrdersHelper
       autocomplete: 'off'
 
     if order_article.result_manually_changed?
-      input_html = content_tag(:span, class: 'input-prepend intable', title: t('orders.edit_amount.field_locked_title', default: '')) {
-        button_tag(nil, type: :button, class: 'btn unlocker') {
-          content_tag(:i, nil, class: 'icon icon-unlock')
-        } + input_html
-      }
+      input_html = content_tag(:span, class: 'input-group intable', title: t('orders.edit_amount.field_locked_title', default: '')) do
+        content_tag(:span, class: 'input-group-btn') do
+          button_tag(nil, type: :button, class: 'btn btn-default unlocker') { glyph(:lock) }
+        end + input_html
+      end
     end
 
     input_html.html_safe
@@ -149,10 +149,10 @@ module OrdersHelper
   # @return [String] Order receive button.
   def receive_button(order, options={})
     if order.stockit?
-      content_tag :div, t('orders.index.action_receive'), class: "btn disabled #{options[:class]}"
+      content_tag :div, t('orders.index.action_receive'), class: "btn btn-default disabled #{options[:class]}"
     else
       was_received = order.order_articles.where('units_received IS NOT NULL').any?
-      link_to t('orders.index.action_receive'), receive_order_path(order), class: "btn#{' btn-success' unless was_received} #{options[:class]}"
+      link_to t('orders.index.action_receive'), receive_order_path(order), class: "btn #{was_received ? 'btn-success' : 'btn-default'} #{options[:class]}"
     end
   end
 end

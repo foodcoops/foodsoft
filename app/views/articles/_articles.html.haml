@@ -15,18 +15,19 @@
       %th{:style => "width: 5em;"}= heading_helper Article, :price
       %th{:style => "width: 3.5em;"}= heading_helper Article, :tax
       %th{:style => "width: 4em;"}= heading_helper Article, :deposit
-      %th{:style => "width: 3em;"}
-      
+      %th
+
   %tbody#listbody
-    
+
     - unless @articles.empty?
       - for article in @articles
         = render(article)
       %tfoot
         %tr
-          %td{:colspan => '11'}
-            = check_box_tag :checkall, 1, false, 'data-check-all' => '#articlesInListForm', 'data-ignore-onchange' => true
-            %select{:name => "selected_action", 'data-submit-onchange' => true}
+          %td.form-inline{colspan: 11}
+            .checkbox
+              = check_box_tag :checkall, 1, false, 'data-check-all' => '#articlesInListForm', 'data-ignore-onchange' => true
+            %select{name: 'selected_action', 'data-submit-onchange' => true, class: 'form-control'}
               %option{:value => '', :selected => 'selected'}= t '.option_select'
               %option{:value => "destroy", :data => {:confirm  => t('.confirm_delete')}}= t '.option_delete'
               %option{:value => "setNotAvailable"}= t '.option_not_available'

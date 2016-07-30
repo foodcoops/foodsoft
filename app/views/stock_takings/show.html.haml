@@ -1,6 +1,6 @@
 - title t('.title')
 
-.well.well-small
+.well.well-sm
   %dl.dl-horizontal
     %dt= t '.date'
     %dd= format_date @stock_taking.date
@@ -20,8 +20,7 @@
       %td= stock_change.stock_article.unit
       %td= stock_change.quantity
 
-.btn-group
-  = link_to t('ui.edit'), edit_stock_taking_path(@stock_taking), class: 'btn'
-  = link_to t('.overview'), stock_takings_path, class: 'btn'
-  = link_to t('ui.delete'), @stock_taking, :method => :delete, :data => {:confirm => t('.confirm_delete')},
-    class: 'btn btn-danger'
+= link_to t('ui.edit'), edit_stock_taking_path(@stock_taking), class: 'btn btn-default'
+= link_to t('.overview'), stock_takings_path, class: 'btn btn-default'
+= link_to t('ui.delete'), @stock_taking, :method => :delete, :data => {:confirm => t('.confirm_delete')},
+  class: 'btn btn-danger'

@@ -1,7 +1,7 @@
 - title t('.title'), false
 
-.row-fluid
-  .span4
+.row
+  .col-md-4
     %h2= @ordergroup.name
     .well
       - unless @ordergroup.description.blank?
@@ -14,11 +14,9 @@
         = @ordergroup.memberships.map{|m| show_user m.user}.join(', ')
       - unless FoodsoftConfig[:disable_invite]
         = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
-  .span8
+  .col-md-8
     %h2= t('.account_summary')
-    .well.well-small
-      = form_tag my_ordergroup_path, :method => :get, :remote => true,
-        'data-submit-onchange' => true, class: 'form-search' do
-        = text_field_tag :query, params[:query], class: 'input-medium search-query',
-          placeholder: t('.search')
+    .navbar.navbar-default
+      = form_tag my_ordergroup_path, method: :get, remote: true, 'data-submit-onchange' => true, class: 'navbar-form' do
+        = text_field_tag :query, params[:query], class: 'form-control', placeholder: t('.search')
     #transactions= render "finance/financial_transactions/transactions", with_csv: false

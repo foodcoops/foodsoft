@@ -3,30 +3,31 @@
 - content_for :sidebar do
   %p
     = link_to edit_page_path(@page), class: 'btn btn-primary' do
-      %i.icon-edit= t '.edit'
-  .well.well-small
+      = glyph 'edit'
+      = t '.edit'
+  .well.well-sm
     %ul.nav.nav-list
       %li
       %li= link_to t('.versions', count: @page.versions.count), "#versions", 'data-toggle-this' => '#versions'
       - unless @page.children.empty?
         %li= link_to t('.subpages'), "#subpages", 'data-toggle-this' => '#subpages'
 
-  #versions.well.well-small{:style => "display:none"}
+  #versions.well.well-sm{:style => "display:none"}
     = form_tag diff_page_path(@page), :method => :get do
       %h3= t '.title_versions'
-      %ul.unstyled
+      %ul.list-unstyled
         - @page.versions.reverse.each_with_index do |version, index|
           %li
             = radio_button_tag :old, version.lock_version, index == 1
             = radio_button_tag :new, version.lock_version, index == 0
             = link_to I18n.l(version.updated_at, :format => t('.date_format')), version_page_path(@page, :version => version.lock_version)
             = "(#{show_user(User.find_by_id(version.updated_by))})"
-      = submit_tag t('.diff'), class: 'btn'
+      = submit_tag t('.diff'), class: 'btn btn-default'
 
   - unless @page.children.empty?
-    #subpages.well.well-small{:style => "display:none"}
+    #subpages.well.well-sm{:style => "display:none"}
       %h3= t '.subpages'
-      %ul.unstyled
+      %ul.list-unstyled
         - @page.children.each do |page|
           %li= link_to_wikipage(page)
 
@@ -49,7 +50,8 @@
 %hr.clear/
 %p
   = link_to edit_page_path(@page), class: 'btn btn-primary' do
-    %i.icon-edit= t '.edit'
+    = glyph 'edit'
+    = t '.edit'
   = link_to t('.delete'), @page, class: 'btn btn-danger', :method => :delete,
     :data => {:confirm => t('.delete_confirm')}
   != '| ' + t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))

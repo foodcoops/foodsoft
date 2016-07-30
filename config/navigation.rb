@@ -9,7 +9,7 @@ SimpleNavigation::Configuration.run do |navigation|
   #engines.reject! { |e| e.instance_of? FoodsoftMyplugin::Engine }
 
   navigation.items do |primary|
-    primary.dom_class = 'nav'
+    primary.dom_class = 'nav navbar-nav'
 
     primary.item :dashboard_nav_item, I18n.t('navigation.dashboard'), root_path(anchor: '')
 

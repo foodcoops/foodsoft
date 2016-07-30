@@ -18,7 +18,6 @@ en:
       new_page: Create new page
       recent_changes: Recent changes
       search:
-        action: Search
         placeholder: Page title ..
       site_map: Sitemap
       title: All Wiki pages

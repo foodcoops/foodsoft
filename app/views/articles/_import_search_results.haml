@@ -27,7 +27,7 @@
           %td.actions
             - logger.debug "[debug] #{article.attributes.inspect}"
             - if @supplier.articles.undeleted.where(order_number: article.number).exists?
-              %i.icon-ok= t '.already_imported'
+              %i.glyphicon.glyphicon-ok= t '.already_imported'
             - else
               = link_to t('.action_import'), import_supplier_articles_path(@supplier, shared_article_id: article.id, direct: true),
-                remote: true, class: 'btn btn-small btn-success'
+                remote: true, class: 'btn btn-sm btn-success'

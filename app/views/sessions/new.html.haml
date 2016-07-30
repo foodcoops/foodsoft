@@ -7,26 +7,26 @@
 - title t('.title')
 
 %noscript
-  .alert.alert-error
+  .alert.alert-danger
     != t '.nojs', link: link_to(t('.noscript'), "http://noscript.net/")
 
 - if defined?(FoodsoftWiki) && (page = Page.public_front_page)
   = wikified_body page.body, page.title
 
 = form_tag sessions_path, class: 'form-horizontal' do
-  .control-group
-    %label(for='nick' class='control-label')
+  .form-group
+    %label.col-sm-3.control-label(for='nick')
       = User.human_attribute_name (FoodsoftConfig[:use_nick] ? :user : :email)
-    .controls
-      = text_field_tag 'nick', nil, autocapitalize: 'off', autocorrect: 'off'
+    .col-sm-6
+      = text_field_tag 'nick', nil, autocapitalize: 'off', autocorrect: 'off', class: 'form-control'
 
-  .control-group
-    %label(for='password' class='control-label')
+  .form-group
+    %label.col-sm-3.control-label(for='password')
       = User.human_attribute_name :password
-    .controls
-      = password_field_tag 'password', nil, autocapitalize: 'off', autocorrect: 'off'
+    .col-sm-6
+      = password_field_tag 'password', nil, autocapitalize: 'off', autocorrect: 'off', class: 'form-control'
 
-  .control-group
-    .controls
-      = submit_tag t('.login'), class: 'btn'
+  .form-group
+    .col-sm-offset-3.col-sm-6
+      = submit_tag t('.login'), class: 'btn btn-primary'
       = link_to t('.forgot_password'), forgot_password_path

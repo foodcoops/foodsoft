@@ -31,5 +31,5 @@
             %span.add-on %
           %td= form.text_field 'deposit', class: 'input-mini'
         - unless article.errors.empty?
-          %tr.alert
+          %tr.alert.alert-warning
             %td(colspan="10")= article.errors.full_messages.join(", ")

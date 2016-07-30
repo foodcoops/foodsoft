@@ -7,9 +7,7 @@
 
 = simple_form_for @task do |form|
   = render 'form', form: form, periodic: @periodic
-  .form-actions
-    - if @periodic
-      = form.submit t('.submit_periodic'), name: 'periodic', class: 'btn btn-primary'
-    - else
-      = form.submit class: 'btn btn-primary'
-    = link_to t('ui.or_cancel'), :back
+  - if @periodic
+    = simple_form_submit(form, t('.submit_periodic'), name: 'periodic')
+  - else
+    = simple_form_submit(form)

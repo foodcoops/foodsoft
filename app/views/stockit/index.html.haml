@@ -3,7 +3,7 @@
   :javascript
     $(function() {
       $('tr.unavailable').hide();
-      
+
       // Subscribe to database changes.
       // See publish/subscribe design pattern in /doc.
       $(document).on('StockArticle#create', function(e) {
@@ -14,11 +14,11 @@
           contentType: 'application/json; charset=UTF-8'
         });
       });
-      
+
       $(document).on('StockArticle#destroy', function(e) {
         $('#stockArticle-' + e.stock_article_id).remove();
       });
-      
+
       $(document).on('StockArticle#update', function(e) {
         $.ajax({
           url: '#{index_on_stock_article_update_stock_articles_path}',
@@ -29,10 +29,10 @@
       });
     })
 
-.well.well-small
+.well.well-sm
   .btn-toolbar
     .btn-group.pull-right
-      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
         = t '.view_options'
         %span.caret
       %ul.dropdown-menu
@@ -40,13 +40,13 @@
 
     .btn-group
       = link_to_if @current_user.role_orders?, t('.order_online'), new_order_path(supplier_id: 0),
-        class: 'btn', class: 'btn btn-primary'
-      = link_to t('.new_stock_article'), new_stock_article_path, remote: true, class: 'btn'
-      = link_to t('.new_stock_taking'), new_stock_taking_path, class: 'btn'
-      = link_to t('.show_stock_takings'), stock_takings_path, class: 'btn'
+        class: 'btn btn-primary'
+      = link_to t('.new_stock_article'), new_stock_article_path, remote: true, class: 'btn btn-default'
+      = link_to t('.new_stock_taking'), new_stock_taking_path, class: 'btn btn-default'
+      = link_to t('.show_stock_takings'), stock_takings_path, class: 'btn btn-default'
 
     .btn-group
-      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
         = t '.new_delivery'
         %span.caret
       %ul.dropdown-menu
@@ -75,4 +75,3 @@
   |
   =t '.stock_count'
   = StockArticle.available.count
-

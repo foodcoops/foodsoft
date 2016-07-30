@@ -31,7 +31,7 @@ feature Order, js: true do
   it 'can create a new order' do
     visit new_order_path(supplier_id: article.supplier.id)
     expect(page).to have_text I18n.t('orders.new.title')
-    find('input[type="submit"]').click
+    find('[type="submit"]').click
     expect(Order.count).to eq 1
     expect(Order.first.supplier).to eq article.supplier
   end

@@ -27,6 +27,6 @@
   %p= simple_format(h(@message.body))
   %hr/
   %p
-    = link_to t('.reply'), new_message_path(:message => {:reply_to => @message.id}), class: 'btn'
+    = link_to t('.reply'), new_message_path(:message => {:reply_to => @message.id}), class: 'btn btn-default'
     |
     = link_to t('.all_messages'), messages_path

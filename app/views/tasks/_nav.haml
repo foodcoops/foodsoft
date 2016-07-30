@@ -2,12 +2,14 @@
   = link_to t('.new_task'), new_task_path, class: 'btn btn-primary'
 
 - content_for :sidebar do
-  .well.well-small
-    %ul.nav.nav-list
-      %li.nav-header= t '.pages'
-      %li= link_to t('.my_tasks'), user_tasks_path
-      %li= link_to t('.all_tasks'), tasks_path
-      %li= link_to t('.archive'), archive_tasks_path
-      %li.nav-header= t '.group_tasks'
-      - for group in Workgroup.all
-        %li= link_to group.name, workgroup_tasks_path(workgroup_id: group.id)
+  .well.well-sm
+    %nav.panel.panel-default
+      .panel-heading= t '.pages'
+      .list-group
+        = link_to t('.my_tasks'), user_tasks_path, class: 'list-group-item'
+        = link_to t('.all_tasks'), tasks_path, class: 'list-group-item'
+        = link_to t('.archive'), archive_tasks_path, class: 'list-group-item'
+      .panel-heading= t '.group_tasks'
+      .list-group
+        - for group in Workgroup.all
+          = link_to group.name, workgroup_tasks_path(workgroup_id: group.id), class: 'list-group-item'

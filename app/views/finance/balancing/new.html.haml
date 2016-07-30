@@ -11,7 +11,7 @@
           contentType: 'application/json; charset=UTF-8'
         });
       });
-      
+
       $(document).on('OrderArticle#create', function(e) {
         $.ajax({
           url: '#{new_on_order_article_create_finance_order_path(@order)}',
@@ -26,35 +26,35 @@
 - title t('.title', name: @order.name)
 
 - content_for :sidebar do
-  .well.well-small
+  .well
     %h3= t('.summary')
     #summary= render 'summary', order: @order
 
-  .well.well-small
+  .well
     %h3= t('.invoice')
     #invoice= render 'invoice', invoice: @order.invoice
 
-  .well.well-small
+  .well
     %h3= t('.notes_and_journal')
     #note
       - unless @order.note.blank?
         = simple_format @order.note
       - else
-        %p= t('.comment_on_transaction') 
+        %p= t('.comment_on_transaction')
     = link_to t('.edit_note'), edit_note_finance_order_path(@order), remote: true
 
-  .well.well-small
+  .well
     %h3= t('.comments')
     #comments= render :partial => 'shared/comments', locals: {comments: @order.comments.includes(:user)}
 
 - content_for :actionbar do
   - unless @order.invoice or @order.stockit?
     = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
-      class: 'btn'
+      class: 'btn btn-default'
   .btn-group
     - unless @order.closed?
       = link_to t('.confirm_order'), confirm_finance_order_path(@order), class: 'btn btn-primary'
-      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
         %span.caret
       %ul.dropdown-menu
         %li= link_to t('.confirm_order'), confirm_finance_order_path(@order)
@@ -62,16 +62,13 @@
           data: {confirm: t('.close_direct_confirm')}
 
   #editOrderNav.btn-group
-    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
       = t('.view_options')
       %span.caret
-    %ul.dropdown-menu
-      %li= link_to t('.edit_order'), new_finance_order_path(order_id: @order.id, view: 'edit_results'),
-        remote: true
-      %li= link_to t('.groups_overview'), new_finance_order_path(order_id: @order.id, view: 'groups_overview'),
-        remote: true
-      %li= link_to t('.articles_overview'), new_finance_order_path(order_id: @order.id, view: 'articles_overview'),
-        remote: true
+    %ul.dropdown-menu.pull-right
+      %li= link_to t('.edit_order'), new_finance_order_path(order_id: @order.id, view: 'edit_results'), remote: true
+      %li= link_to t('.groups_overview'), new_finance_order_path(order_id: @order.id, view: 'groups_overview'), remote: true
+      %li= link_to t('.articles_overview'), new_finance_order_path(order_id: @order.id, view: 'articles_overview'), remote: true
 
 %section#results
   = render 'edit_results_by_articles'

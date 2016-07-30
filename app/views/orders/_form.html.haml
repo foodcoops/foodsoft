@@ -9,7 +9,7 @@
 
   %h2= t '.title'
   - if @order.errors.has_key?(:articles)
-    .alert.alert-error
+    .alert.alert-danger
       = @order.errors.get(:articles).join(" ")
   %table.table.table-hover#articleList
     %tr
@@ -28,7 +28,7 @@
         %td
         %td{:colspan => "6", :style => "text-align:left"}
           = category_name
-          %i.icon-tag
+          = glyph 'tag'
       - for article in articles
         / check if the article is selected or has an error
         - included = @order.article_ids.include?(article.id.to_s)
@@ -60,11 +60,8 @@
 
   - if (@template_orders && !@template_orders.empty?)
     = render :partial => 'template_orders_script'
-
-  .form-actions
-    = f.submit class: 'btn'
-    = link_to t('ui.or_cancel'), orders_path
-    - unless @order.erroneous_article_ids.empty?
-      &nbsp;
-      = check_box_tag 'order[ignore_warnings]'
-      = t '.ignore_warnings'
+    = simple_form_submit(f, cancel: :mid) do
+      - unless @order.erroneous_article_ids.empty?
+        &nbsp;
+        = check_box_tag 'order[ignore_warnings]'
+        = t '.ignore_warnings'

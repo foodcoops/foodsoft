@@ -14,11 +14,11 @@
       });
     });
 
-.row-fluid
-  .span6
+.row
+  .col-md-6
     = render :partial => 'stock_article_details', :locals => {:stock_article => @stock_article}
-  
-  .span6
+
+  .col-md-6
     %h2= t('.stock_changes')
     %table.table.table-hover#stock_changes
       %thead

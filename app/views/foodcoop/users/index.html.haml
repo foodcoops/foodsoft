@@ -3,16 +3,14 @@
 %section
   = t('.body', profile_link: link_to(t('.profile_link'), my_profile_path)).html_safe
 
-  .well
-    = form_tag foodcoop_users_path, :method => :get, :remote => true,
-      'data-submit-onchange' => true, class: 'form-search' do
-
-      = text_field_tag :user_name, params[:user_name], class: 'input-medium search-query',
-        placeholder: t('.ph_name')
-      = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'input-medium search-query',
-        placeholder: t('.ph_ordergroup')
-      %button.btn
-        %i.icon-search
+  .navbar.navbar-default
+    = form_tag foodcoop_users_path, method: :get, remote: true, 'data-submit-onchange' => true, class: 'navbar-form' do
+      .form-group
+        = text_field_tag :user_name, params[:user_name], class: 'form-control', placeholder: t('.ph_name')
+      .form-group
+        = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'form-control', placeholder: t('.ph_ordergroup')
+      .form-group
+        %button.btn.btn-default= glyph 'search'
 
   #users
     = render :partial => "users"

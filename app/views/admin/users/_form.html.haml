@@ -1,5 +1,3 @@
 = simple_form_for([:admin, @user]) do |f|
   = render 'shared/user_form_fields', f: f, password_autocomplete: false
-  .form-actions
-    = f.submit
-    = link_to t('ui.or_cancel'), :back
+  = simple_form_submit(f)

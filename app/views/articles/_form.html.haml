@@ -1,4 +1,4 @@
-= simple_form_for [@supplier, @article], :validate => true, :remote => true do |f|
+= simple_form_for [@supplier, @article], validate: true, remote: true do |f|
   = f.hidden_field :shared_updated_on
   = f.hidden_field :supplier_id
   .modal-header
@@ -20,5 +20,5 @@
     = f.input :manufacturer
     = f.input :order_number
   .modal-footer
-    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'

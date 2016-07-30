@@ -5,12 +5,12 @@
     = f.input :contact_person
     = f.input :contact_phone
     = f.input :contact_address
-    .fold-line
-      = f.input :break_start, as: :date_picker, label: Ordergroup.human_attribute_name('break')
-      = f.input :break_end, as: :date_picker, label: Ordergroup.human_attribute_name('break_until')
+    = f.input :break_start, label: Ordergroup.human_attribute_name('break'), as: :date_picker do
+      .input-group
+        = f.input_field :break_start, as: :date_picker
+        .input-group-addon= Ordergroup.human_attribute_name('break_until')
+        = f.input_field :break_end, as: :date_picker
     - if FoodsoftConfig[:use_apple_points]
-      = f.input :ignore_apple_restriction, :label => false, :inline_label => true
+      = f.input :ignore_apple_restriction
   = render 'shared/group_form_fields', f: f, captured: captured
-  .form-actions
-    = f.button :submit
-    = link_to t('ui.or_cancel'), :back
+  = simple_form_submit(f)

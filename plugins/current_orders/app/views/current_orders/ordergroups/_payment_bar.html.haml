@@ -2,7 +2,7 @@
   .pull-right
     = t('.payment')
     - if current_user.role_finance?
-      = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn'
+      = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-default'
 
 %p.pull-left
   - if current_user.role_finance?

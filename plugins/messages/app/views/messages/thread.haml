@@ -12,6 +12,6 @@
     .panel-body= simple_format(h(message.body))
 
 %p
-  = link_to t('.reply'), new_message_path(:message => {:reply_to => thread_message.id}), class: 'btn'
+  = link_to t('.reply'), new_message_path(:message => {:reply_to => thread_message.id}), class: 'btn btn-default'
   |
   = link_to t('.all_message_threads'), message_threads_path

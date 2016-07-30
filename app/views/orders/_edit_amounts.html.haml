@@ -13,10 +13,10 @@
         // no value
         html = '';
       } else if (isNaN(units)) {
-        html = '<i class="icon-remove" style="color: red"></i>';
+        html = '<i class="glyphicon glyphicon-remove" style="color: red"></i>';
       } else if (delta == 0) {
         // equal value
-        html = '<i class="icon-ok" style="color: green"></i>';
+        html = '<i class="glyphicon glyphicon-ok" style="color: green"></i>';
       } else {
         if (delta < 0) {
           html = '<span style="color: red">- '+(-delta)+'</span>';
@@ -74,9 +74,10 @@
     }
 
     function unlock_receive_input_field() {
-      $('.units_received', $(this).closest('tr')).prop('disabled', false).focus();
-      $(this).closest('.input-prepend').prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
-      $(this).replaceWith('<i class="icon icon-warning-sign add-on"></i>');
+      var $container = $(this).closest('.input-group');
+      $container.prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
+      $container.find('.units_received').prop('disabled', false).focus();
+      $container.find('.glyphicon').removeClass('glyphicon-lock').addClass('glyphicon-warning-sign');
     }
 
 %table#order_articles.ordered-articles.table.table-striped.stupidtable{style: 'margin-bottom: 0'}

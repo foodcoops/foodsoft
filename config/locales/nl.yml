@@ -1456,7 +1456,7 @@ nl:
     update_order_amounts:
       msg1: "%{count} artikelen (%{units} eenheden) bijgewerkt"
       msg2: "%{count} (%{units}) naar tolerantie"
-      msg3: 
+      msg3:
       msg4: "%{count} (%{units}) overgebleven"
   pages:
     all:
@@ -1818,7 +1818,7 @@ nl:
     edit: Bewerk
     marks:
       close: "&times;"
-      success: <i class="icon icon-ok"></i>
+      success: <i class="glyphicon glyphicon-ok"></i>
     or_cancel: of annuleren
     please_wait: Een moment alstublieft...
     restore: Herstellen

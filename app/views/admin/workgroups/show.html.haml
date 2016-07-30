@@ -1,5 +1,5 @@
 - title t '.title', name: @workgroup.name
 
 %section= render 'shared/group', group: @workgroup
-= link_to t('ui.edit'), edit_admin_workgroup_path(@workgroup), class: 'btn'
+= link_to t('ui.edit'), edit_admin_workgroup_path(@workgroup), class: 'btn btn-default'
 = link_to t('ui.delete'), [:admin, @workgroup], :data => {:confirm => t('.confirm')}, :method => :delete, class: 'btn btn-danger'

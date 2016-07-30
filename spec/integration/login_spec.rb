@@ -31,7 +31,7 @@ feature LoginController do
     describe 'with wrong token' do
       let(:token) { 'foobar' }
       it 'is not accessible' do
-        expect(page).to have_selector '.alert-error'
+        expect(page).to have_selector '.alert-danger'
         expect(page).to_not have_selector 'input[type=password]'
       end
     end

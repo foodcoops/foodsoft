@@ -35,8 +35,8 @@ module ApplicationHelper
 
     links = per_page_options.map do |per_page|
       params.merge!({:per_page => per_page})
-      link_class = 'btn'
-      link_class << ' disabled' if per_page == current
+      link_class = 'btn btn-default'
+      link_class << ' active' if per_page == current
       link_to(per_page, params, :remote => true, class: link_class)
     end
 
@@ -102,7 +102,7 @@ module ApplicationHelper
   # Generates a link to the top of the website
   def link_to_top
     link_to '#' do
-      content_tag :i, nil, class: 'icon-arrow-up icon-large'
+      content_tag :i, nil, class: 'glyphicon glyphicon-arrow-up glyphicon-large'
     end
   end
 
@@ -163,26 +163,6 @@ module ApplicationHelper
   def link_to_gmaps(address)
     link_to h(address), "http://maps.google.com/?q=#{h(address)}", :title => I18n.t('helpers.application.show_google_maps'),
       :target => "_blank"
-  end
-
-  # Returns flash messages html.
-  #
-  # Use this instead of twitter-bootstrap's +bootstrap_flash+ method for safety, until
-  # CVE-2014-4920 is fixed.
-  #
-  # @return [String] Flash message html.
-  # @see http://blog.nvisium.com/2014/03/reflected-xss-vulnerability-in-twitter.html
-  def bootstrap_flash_patched
-    flash_messages = []
-    flash.each do |type, message|
-      type = :success if type == 'notice'
-      type = :error   if type == 'alert'
-      text = content_tag(:div,
-                         content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => "close", "data-dismiss" => "alert") +
-                             message, :class => "alert fade in alert-#{type}")
-      flash_messages << text if message
-    end
-    flash_messages.join("\n").html_safe
   end
 
   # render base errors in a form after failed validation
@@ -251,6 +231,28 @@ module ApplicationHelper
   def foodcoop_css_tag(options={})
     unless FoodsoftConfig[:custom_css].blank?
       stylesheet_link_tag foodcoop_css_path, media: 'all'
+    end
+  end
+
+  # Submit form control for simple_form forms
+  #
+  # SimpleForm's wrappers API doesn't support buttons, so we need to come up with
+  # a standard way to generate form submit buttons.
+  #
+  # Generates a submit button and an _or cancel_ link.
+  #
+  # When a block is given, its output is put in there as well. This is tricky right now,
+  # since this method doesn't _render_ so the block needs to _return_. Meaning you can't
+  # use `=` in haml but need to use `-` and concat :(
+  #
+  # @see SimpleForm::submit
+  def simple_form_submit(form, label = nil, cancel: :end, **options)
+    form.input :submit, wrapper: :horizontal_submit do
+      render_cancel = proc { (' ' + link_to(t('ui.or_cancel'), :back)).html_safe }
+      form.submit(label, class: 'btn btn-primary', **options) +
+        (cancel == :mid ? render_cancel.call : '') +
+        (block_given? ? ' ' + yield : '').to_s.html_safe +
+        (cancel == :end ? render_cancel.call : '')
     end
   end
 

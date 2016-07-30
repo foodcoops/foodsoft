@@ -1,7 +1,7 @@
 - orders = Order.open.reject{ |order| order == current_order }
 - unless orders.empty?
   %h2= t '.title'
-  %ul.unstyled
+  %ul.list-unstyled
     - orders.each do |order|
       %li
         = link_to_ordering(order, 'data-confirm_switch_order' => true)

@@ -10,18 +10,18 @@ feature 'the session' do
     end
     it 'logs me in' do
       login user
-      expect(page).to_not have_selector('.alert-error')
+      expect(page).to_not have_selector('.alert-danger')
     end
     it 'does not log me in with wrong password' do
-      login user.nick, 'XX'+user.password 
-      expect(page).to have_selector('.alert-error')
+      login user.nick, 'XX'+user.password
+      expect(page).to have_selector('.alert-danger')
     end
     it 'can log me in using an email address' do
       visit login_path
       fill_in 'nick', :with => user.email
       fill_in 'password', :with => user.password
       find('input[type=submit]').click
-      expect(page).to_not have_selector('.alert-error')
+      expect(page).to_not have_selector('.alert-danger')
     end
   end
 

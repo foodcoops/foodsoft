@@ -63,6 +63,7 @@ en:
         attachment: Attachment
         created_at: Created at
         created_by: Created by
+        created_by_short: by
         date: Billing date
         delete_attachment: Delete attachment
         deliveries: Delivery
@@ -1468,7 +1469,6 @@ en:
       new_page: Create new page
       recent_changes: Recent changes
       search:
-        action: Search
         placeholder: Page title ...
       site_map: Sitemap
       title: All Wiki pages
@@ -1823,7 +1823,7 @@ en:
     edit: Edit
     marks:
       close: "&times;"
-      success: <i class="icon icon-ok"></i>
+      success: <i class="glyphicon glyphicon-ok"></i>
     or_cancel: or cancel
     please_wait: Please wait...
     restore: Restore

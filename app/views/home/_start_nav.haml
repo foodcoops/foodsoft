@@ -1,33 +1,38 @@
-.well.well-small
+.well.well-sm.hidden-xs.hidden-sm
   %h3= t '.title'
-  %ul.nav.nav-list
-    %li.nav-header= t '.foodcoop'
-    %li= link_to t('.members'), foodcoop_users_path
-    %li= link_to t('.tasks'), user_tasks_path
+  %nav
+    .panel.panel-default
+      .panel-heading= t '.foodcoop'
+      .list-group
+        = link_to t('.members'), foodcoop_users_path, class: 'list-group-item'
+        = link_to t('.tasks'), user_tasks_path, class: 'list-group-item'
 
-    - has_ordergroup = !@current_user.ordergroup.nil?
-    - has_orders_role = @current_user.role_orders?
-    - if has_ordergroup || has_orders_role
-      %li.nav-header= t '.orders.title'
-      - if has_ordergroup
-        %li= link_to t('.orders.overview'), group_orders_path
-      - if has_orders_role
-        %li= link_to t('.orders.end'), :controller => 'orders'
-    // Articles
-    - if @current_user.role_article_meta? || @current_user.role_suppliers?
-      %li.nav-header= t '.products.title'
-      %li= link_to t('.products.edit'), suppliers_path
-      %li= link_to t('.products.edit_stock'), :controller => 'stockit'
-      %li= link_to t('.products.edit_suppliers'), suppliers_path
+      - has_ordergroup = !@current_user.ordergroup.nil?
+      - has_orders_role = @current_user.role_orders?
+      - if has_ordergroup || has_orders_role
+        .panel-heading= t '.orders.title'
+        .list-group
+          = link_to t('.orders.overview'), group_orders_path, class: 'list-group-item' if has_ordergroup
+          = link_to t('.orders.end'), orders_path, class: 'list-group-item' if has_orders_role
 
-    // Finance
-    - if @current_user.role_finance?
-      %li.nav-header= t '.finances.title'
-      %li= link_to t('.finances.accounts'), finance_new_transaction_collection_path
-      %li= link_to t('.finances.settle'), finance_root_path
+      // Articles
+      - if @current_user.role_article_meta? || @current_user.role_suppliers?
+        .panel-heading= t '.products.title'
+        .list-group
+          = link_to t('.products.edit'), suppliers_path, class: 'list-group-item'
+          = link_to t('.products.edit_stock'), stock_articles_path, class: 'list-group-item'
+          = link_to t('.products.edit_suppliers'), suppliers_path, class: 'list-group-item'
 
-    // Administration
-    - if @current_user.role_admin?
-      %li.nav-header= t '.admin'
-      %li= link_to t('.new_ordergroup'), new_admin_ordergroup_path
-      %li= link_to t('.new_user'), new_admin_user_path
+      // Finance
+      - if @current_user.role_finance?
+        .panel-heading= t '.finances.title'
+        .list-group
+          = link_to t('.finances.accounts'), finance_new_transaction_collection_path, class: 'list-group-item'
+          = link_to t('.finances.settle'), finance_root_path, class: 'list-group-item'
+
+      // Administration
+      - if @current_user.role_admin?
+        .panel-heading= t '.admin'
+        .list-group
+          = link_to t('.new_ordergroup'), new_admin_ordergroup_path, class: 'list-group-item'
+          = link_to t('.new_user'), new_admin_user_path, class: 'list-group-item'

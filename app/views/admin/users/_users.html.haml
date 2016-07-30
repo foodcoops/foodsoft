@@ -10,7 +10,7 @@
       %th= heading_helper User, :email
       %th= t 'admin.access_to'
       %th= heading_helper User, :last_activity
-      %th(colspan="2")= t 'ui.actions'
+      %th= t 'ui.actions'
   %tbody
     - for user in @users
       %tr
@@ -20,11 +20,11 @@
         %td= user.email
         %td= format_roles(user, true)
         %td= format_time(user.last_activity)
-        %td= link_to t('ui.edit'), edit_admin_user_path(user), class: 'btn btn-mini'
         %td
+          = link_to t('ui.edit'), edit_admin_user_path(user), class: 'btn btn-default btn-xs'
           - if user.deleted?
             = link_to t('ui.restore'), restore_admin_user_path(user), :data => {:confirm => t('ui.confirm_restore', name: user.name)},
-                :method => :post, class: 'btn btn-success btn-mini'
+                :method => :post, class: 'btn btn-success btn-xs'
           - else
             = link_to t('ui.delete'), [:admin, user], :data => {:confirm => t('ui.confirm_delete', name: user.name)},
-                :method => :delete, class: 'btn btn-danger btn-mini'
+                :method => :delete, class: 'btn btn-danger btn-xs'

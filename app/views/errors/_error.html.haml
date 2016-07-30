@@ -1,9 +1,9 @@
 - title local_assigns[:title], false
 
 - unless login_layout?
-  %i.hidden-phone.large-error-icon.icon-exclamation-sign
-%div(class="#{login_layout? ? '' : 'span6'}")
+  %i.hidden-xs.large-error-icon.glyphicon.glyphicon-exclamation-sign
+%div(class="#{login_layout? ? '' : 'col-md-6'}")
   %h1= local_assigns[:title]
-  %div(class='alert alert-#{local_assigns[:type] || 'warn'}')
+  %div(class='alert alert-#{local_assigns[:type] || 'warning'}')
     = local_assigns[:page]
   = link_to t('ui.back'), 'javascript:history.go(-1)', class: 'btn btn-primary'
