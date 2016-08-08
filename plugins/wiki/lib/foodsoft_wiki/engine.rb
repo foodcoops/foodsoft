@@ -15,5 +15,9 @@ module FoodsoftWiki
     def default_foodsoft_config(cfg)
       cfg[:use_wiki] = true
     end
+
+    initializer "foodsoft_wiki.assets.precompile" do |app|
+      app.config.assets.precompile += %w(icons/feed-icon-14x14.png)
+    end
   end
 end
