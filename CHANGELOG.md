@@ -1,3 +1,9 @@
+## Foodsoft 4.5.1
+(12 August 2016)
+
+* Fix adding articles in the delivery and receive screens
+* Fix overview of all wiki pages
+
 # Foodsoft 4.5.0
 (28 June 2016)
 
