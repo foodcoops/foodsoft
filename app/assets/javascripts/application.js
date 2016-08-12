@@ -1,6 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require select2
+//= require select2-full
 //= require twitter/bootstrap
 //= require jquery.tokeninput
 //= require bootstrap-datepicker/core
@@ -19,6 +19,8 @@
 //= require touchclick
 //= require delta_input
 //= require recurring_select
+
+$.fn.select2.defaults.set('theme', 'bootstrap');
 
 // Load following statements, when DOM is ready
 $(function() {
@@ -151,7 +153,7 @@ $(function() {
     $(document).tooltip({
       selector: '[data-toggle~="tooltip"]',
     });
-    
+
     // See stupidtable.js for initialization of local table sorting
 });
 
@@ -177,5 +179,3 @@ function highlightRow(checkbox) {
 function setHiddenId(text, li) {
   $('hidden_id').value = li.id;
 }
-
-

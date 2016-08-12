@@ -53,7 +53,8 @@
 
     $(document).on('#update_articles_summary', function() {
       // initialize add ordergroup control
-      $('#group_order_article_ordergroup_id').select2().select2('data', null);
+      $('#group_order_article_ordergroup_id').select2();
+      $('#group_order_article_ordergroup_id').val('').trigger('change');
     });
 
     $(function() {
@@ -64,7 +65,7 @@
     $(document).on('GroupOrderArticle#create', function(e) {
       var base_unit = $('#articles_by_articles').data('base-unit');
       // reset selection
-      $('#group_order_article_ordergroup_id').select2('data', null);
+      $('#group_order_article_ordergroup_id').val('').trigger('change');
       // update table
       $.ajax({
         url: '#{show_on_group_order_article_create_current_orders_articles_path}',

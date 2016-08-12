@@ -36,7 +36,7 @@
       $(document).on('GroupOrderArticle#create', function(e) {
         var base_unit = $('#articles_by_groups_table').data('base-unit');
         // reset selection
-        $('#group_order_article_order_article_id').select2('data', null);
+        $('#group_order_article_order_article_id').val('').trigger('change');
         // update table
         $.ajax({
           url: '#{show_on_group_order_article_create_current_orders_ordergroups_path}',

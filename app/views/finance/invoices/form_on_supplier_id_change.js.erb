@@ -3,8 +3,8 @@ deliveries_data = @deliveries_collection.map {|d| { id: d.id, text: format_deliv
 orders_data = @orders_collection.map {|o| { id: o.id, text: format_order_item(o) } }
 %>
 (function() {
-  function update_select2(id, data) {
-    var ele = $(id);
+  function update_select2(sel, data) {
+    var ele = $(sel);
     if (!ele.length)
       return;
     ele.select2("destroy");

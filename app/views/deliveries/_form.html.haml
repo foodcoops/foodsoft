@@ -3,7 +3,7 @@
     $(function() {
       $('#stock_changes').on('touchclick', '.destroy_stock_change', function() {
         $(this).prev('input').val('1'); // check for destruction
-        
+
         var stock_change = $(this).closest('tr');
         stock_change.hide(); // do not remove (to ensure destruction)
         stock_change.removeAttr('id'); // remove id to allow re-adding
@@ -17,37 +17,31 @@
         mark_article_for_delivery( stock_change.data('id') );
         return false;
       })
-      
+
       $('#new_stock_article').removeAttr('disabled').select2({
+        tags: true,
         placeholder: '#{t '.create_stock_article'}',
         data: #{articles_for_select2(@supplier.articles).to_json},
-        createSearchChoice: function(term) {
+        createTag: function(data) {
           return {
             id: 'new',
-            text: term
+            name: data.term, // store for ajax request
+            text: data.term + ' (#{t '.create_from_blank'})'
           };
-        },
-        formatResult: function(result, container, query, escapeMarkup) {
-          if(result.id == 'new') {
-            return result.text + ' (#{t '.create_from_blank'})';
-          }
-          var markup=[];
-          Select2.util.markMatch(result.text, query.term, markup, escapeMarkup);
-          return markup.join("");
         }
-      }).on('change', function(e) {
-        var selectedArticle = $(e.currentTarget).select2('data');
-        if(!selectedArticle) {
+      }).on('select2:select', function(e) {
+        var selectedArticle = e.params.data;
+        if (!selectedArticle) {
           return false;
         }
         if('new' == selectedArticle.id) {
           $.ajax({
             url: '#{new_stock_article_path}',
             type: 'get',
-            data: {stock_article: {name: selectedArticle.text, supplier_id: #{@supplier.id}}},
+            data: {stock_article: {name: selectedArticle.name, supplier_id: #{@supplier.id}}},
             contentType: 'application/json; charset=UTF-8'
           });
-          $('#new_stock_article').select2('data', null);
+          $('#new_stock_article').val('').trigger('change');
           return true;
         }
         if('' != selectedArticle.id) {
@@ -57,11 +51,11 @@
             data: {old_article_id: selectedArticle.id},
             contentType: 'application/json; charset=UTF-8'
           });
-          $('#new_stock_article').select2('data', null);
+          $('#new_stock_article').val('').trigger('change');
           return true;
         }
       });
-      
+
       // Subscribe to database changes.
       // See publish/subscribe design pattern in /doc.
       $(document).on('StockArticle#create', function(e) {
@@ -72,7 +66,7 @@
           contentType: 'application/json; charset=UTF-8'
         });
       });
-      
+
       $(document).on('StockArticle#update', function(e) {
         $.ajax({
           url: '#{form_on_stock_article_update_supplier_deliveries_path(@supplier)}',
@@ -82,7 +76,7 @@
         });
       });
     });
-    
+
     function mark_article_for_delivery(stock_article_id) {
       var articleTr = $('#stock_article_' + stock_article_id);
       if( is_article_available_for_delivery(stock_article_id) ) {
@@ -102,7 +96,7 @@
   = f.error_notification
   = base_errors f.object
   = f.association :supplier, :as => :hidden
-  
+
   %h2= t '.title_select_stock_articles'
   %table#stock_articles_for_adding.table.table-hover.stupidtable
     %thead
@@ -118,11 +112,11 @@
           - if @supplier.articles.empty?
             = link_to t('.create_stock_article'), new_stock_article_path, :remote => true, :class => 'btn'
           - else
-            %input#new_stock_article{:style => 'width: 500px;'}
+            %select#new_stock_article{:style => 'width: 500px;'}
     %tbody
       - for article in articles_for_table(@supplier.stock_articles)
         = render :partial => 'stock_article_for_adding', :locals => {:article => article}
-    
+
   %h2= t '.title_fill_quantities'
   %table.table#stock_changes.stupidtable
     %thead
@@ -135,7 +129,7 @@
     %tbody
       = f.simple_fields_for :stock_changes do |stock_change_form|
         = render :partial => 'stock_change_fields', :locals => {:f => stock_change_form}
-  
+
   %h2= t '.title_finish_delivery'
   = f.input :delivered_on, as: :date_picker
   = f.input :note, input_html: {size: '35x4'}

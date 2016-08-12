@@ -45,32 +45,34 @@
       $('input[data-units-expected]').each(function() {
         update_delta(this);
       });
-      
+
       init_add_article('#add_article');
     });
-    
+
     function init_add_article(sel) {
       $(sel).removeAttr('disabled').select2({
         placeholder: '#{j t('orders.receive.add_article')}',
         formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
         // TODO implement adding a new article, like in deliveries
       }).on('change', function(e) {
-        var selectedArticle = $(e.currentTarget).select2('data');
-        if(!selectedArticle) {
+        var $input = $(e.target);
+        var selectedArticleId = $input.val();
+        if(!selectedArticleId) {
           return false;
         }
 
         $.ajax({
           url: '#{order_order_articles_path(@order)}',
           type: 'post',
-          data: JSON.stringify({order_article: {article_id: selectedArticle.id}}),
+          data: JSON.stringify({order_article: {article_id: selectedArticleId}}),
           contentType: 'application/json; charset=UTF-8'
         });
-        
-        $('#add_article').select2('data', null);
-      }).select2('data', null);
+
+        $input.val('').trigger('change');
+      });
+      $(sel).val('').trigger('change');
     }
-    
+
     function unlock_receive_input_field() {
       $('.units_received', $(this).closest('tr')).prop('disabled', false).focus();
       $(this).closest('.input-prepend').prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
@@ -99,4 +101,3 @@
         %select#add_article{:style => 'width: 500px;'}
           - new_article_data.each do |option|
             %option{id: "add_article_#{option[:id]}", value: option[:id]}= option[:text]
-
