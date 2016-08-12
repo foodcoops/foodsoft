@@ -88,7 +88,7 @@ class GroupOrder < ActiveRecord::Base
   end
 
   def ordergroup_name
-    ordergroup ? ordergroup.name : I18n.t('model.group_order.stock_ordergroup_name', :user => updated_by.name)
+    ordergroup ? ordergroup.name : I18n.t('model.group_order.stock_ordergroup_name', :user => updated_by.try(:name) || '?')
   end
 
 end
