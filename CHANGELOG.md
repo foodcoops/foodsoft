@@ -1,4 +1,4 @@
-## Foodsoft 4.5.1
+# Foodsoft 4.5.1
 (12 August 2016)
 
 * Fix adding articles in the delivery and receive screens
