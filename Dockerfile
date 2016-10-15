@@ -6,6 +6,7 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y \
       mysql-client \
       libv8-dev \
+      libmagic-dev \
       libmysqlclient-dev \
       xvfb \
       iceweasel && \
