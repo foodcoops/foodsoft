@@ -26,7 +26,7 @@ class OrderMatrix < OrderPdf
       order_articles_data << [a.article.name,
                               a.article.unit,
                               a.price.unit_quantity,
-                              number_with_precision(a.price.fc_price, precision: 2),
+                              number_with_precision(article_price(a), precision: 2),
                               a.units]
     end
 
@@ -82,6 +82,19 @@ class OrderMatrix < OrderPdf
       end
 
     end
+  end
+
+  private
+
+  # Return price for article.
+  #
+  # This is a separate method so that plugins can override it.
+  #
+  # @param article [Article]
+  # @return [Number] Price to show
+  # @see https://github.com/foodcoops/foodsoft/issues/445
+  def article_price(article)
+    article.price.fc_price
   end
 
 end

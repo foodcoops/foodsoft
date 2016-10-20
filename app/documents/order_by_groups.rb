@@ -26,7 +26,7 @@ class OrderByGroups < OrderPdf
       dimrows = []
 
       each_group_order_article_for(group_order) do |goa|
-        price = goa.order_article.price.fc_price
+        price = order_article_price(goa.order_article)
         sub_total = price * goa.result
         total += sub_total
         rows <<  [goa.order_article.article.name,
@@ -72,6 +72,17 @@ class OrderByGroups < OrderPdf
   end
 
   private
+
+  # Return price for order_article.
+  #
+  # This is a separate method so that plugins can override it.
+  #
+  # @param article [OrderArticle]
+  # @return [Number] Price to show
+  # @see https://github.com/foodcoops/foodsoft/issues/445
+  def order_article_price(order_article)
+    order_article.price.fc_price
+  end
 
   def group_orders
     order.group_orders.ordered.
