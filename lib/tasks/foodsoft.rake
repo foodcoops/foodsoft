@@ -63,6 +63,19 @@ namespace :foodsoft do
     server.start
     server.join
   end
+
+  desc "Import and assign bank transactions"
+  task :import_and_assign_bank_transactions => :environment do
+    if FoodsoftConfig[:use_bank_accounts]
+      for ba in BankAccount.all
+        import_method = ba.find_import_method
+        next unless import_method
+        import_count = import_method.call(ba)
+        assign_count = ba.assign_unchecked_transactions
+        rake_say "#{ba.name}: imported #{import_count}, assigned #{assign_count}"
+      end
+    end
+  end
 end
 
 # Helper
