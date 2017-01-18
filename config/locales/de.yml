@@ -143,6 +143,7 @@ de:
         delivery_days: Liefertage
         email: E-Mail
         fax: Fax
+        iban: IBAN
         is_subscribed: abonniert?
         min_order_quantity: Mindestbestellmenge
         min_order_quantity_short: Menge (mind.)
@@ -165,6 +166,7 @@ de:
       user:
         email: E-Mail
         first_name: Vorname
+        iban: IBAN
         last_activity: Letzte Aktivität
         last_login: Letzter login
         last_name: Nachname
@@ -518,6 +520,7 @@ de:
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
       use_current_orders: 
       use_documents: Einfache Dokumentenverwaltung aktivieren
+      use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
       use_wiki: "Änderbare Wiki Seiten aktivieren"
@@ -569,6 +572,7 @@ de:
       use_boxfill: Kistenauffüllphase
       use_current_orders: 
       use_documents: Dokumente verwenden
+      use_iban: IBAN verwenden
       use_messages: Nachrichten
       use_nick: Benutzernamen verwenden
       use_wiki: Wiki verwenden

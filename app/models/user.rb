@@ -41,6 +41,8 @@ class User < ActiveRecord::Base
   validates_length_of :nick, :in => 2..25, :allow_nil => true, :unless => Proc.new { FoodsoftConfig[:use_nick] }
   validates_length_of :nick, :in => 2..25, :allow_nil => false, :if => Proc.new { FoodsoftConfig[:use_nick] }
   validates_uniqueness_of :nick, :case_sensitive => false, :allow_nil => true # allow_nil in length validation
+  validates_format_of :iban, :with => /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, :allow_blank => true
+  validates_uniqueness_of :iban, :case_sensitive => false, :allow_blank => true
 
   before_validation :set_password
   after_initialize do

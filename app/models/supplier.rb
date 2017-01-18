@@ -10,12 +10,14 @@ class Supplier < ActiveRecord::Base
   belongs_to :shared_supplier  # for the sharedLists-App
 
   include ActiveModel::MassAssignmentSecurity
-  attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
+  attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number, :iban,
                   :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity, :shared_sync_method
 
   validates :name, :presence => true, :length => { :in => 4..30 }
   validates :phone, :presence => true, :length => { :in => 8..25 }
   validates :address, :presence => true, :length => { :in => 8..50 }
+  validates_format_of :iban, :with => /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, :allow_blank => true
+  validates_uniqueness_of :iban, :case_sensitive => false, :allow_blank => true
   validates_length_of :order_howto, :note, maximum: 250
   validate :valid_shared_sync_method
   validate :uniqueness_of_name

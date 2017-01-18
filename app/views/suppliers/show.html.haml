@@ -29,6 +29,9 @@
       %dd= @supplier.contact_person
       %dt= heading_helper(Supplier, :customer_number) + ':'
       %dd= @supplier.customer_number
+      - if FoodsoftConfig[:use_iban]
+        %dt= heading_helper(Supplier, :iban) + ':'
+        %dd= @supplier.iban
       %dt= heading_helper(Supplier, :delivery_days) + ':'
       %dd= @supplier.delivery_days
       %dt= heading_helper(Supplier, :order_howto) + ':'
