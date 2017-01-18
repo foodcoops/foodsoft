@@ -12,6 +12,8 @@
   = f.input :url
   = f.input :contact_person
   = f.input :customer_number
+  - if FoodsoftConfig[:use_iban]
+    = f.input :iban
   = f.input :delivery_days
   = f.input :order_howto, as: :text, input_html: {rows: 5}
   = f.input :note, as: :text, input_html: {rows: 5}

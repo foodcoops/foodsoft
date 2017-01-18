@@ -143,6 +143,7 @@ fr:
         delivery_days: Jours de livraison
         email: Email
         fax: Fax
+        iban: IBAN
         is_subscribed: abonné?
         min_order_quantity: Prix minimum d'une commande
         min_order_quantity_short: Qté min.
@@ -165,6 +166,7 @@ fr:
       user:
         email: Email
         first_name: Prénom
+        iban: IBAN
         last_activity: 
         last_login: Dernière connection
         last_name: Nom de famille

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226000000) do
+ActiveRecord::Schema.define(version: 20161001000000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -317,6 +317,7 @@ ActiveRecord::Schema.define(version: 20160226000000) do
     t.string   "min_order_quantity", limit: 255
     t.datetime "deleted_at"
     t.string   "shared_sync_method", limit: 255
+    t.string   "iban"
   end
 
   add_index "suppliers", ["name"], name: "index_suppliers_on_name", unique: true, using: :btree
@@ -352,6 +353,7 @@ ActiveRecord::Schema.define(version: 20160226000000) do
     t.datetime "last_login"
     t.datetime "last_activity"
     t.datetime "deleted_at"
+    t.string   "iban"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

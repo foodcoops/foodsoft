@@ -10,6 +10,8 @@
 = f.input :password, :required => f.object.new_record?, input_html: password_html
 = f.input :password_confirmation, :required => f.object.new_record?, input_html: password_html
 = f.input :phone
+- if FoodsoftConfig[:use_iban]
+  = f.input :iban
 
 - if local_assigns[:with_address] && (f.object.ordergroup || f.object.new_record?)
   = f.fields_for [:ordergroup, f.object.ordergroup || Ordergroup.new] do |ogf|

@@ -143,6 +143,7 @@ nl:
         delivery_days: Bezorgdagen
         email: Email
         fax: Fax
+        iban: IBAN
         is_subscribed: geabonneerd?
         min_order_quantity: Minimale bestelhoeveelheid
         min_order_quantity_short: Min. bestelling
@@ -165,6 +166,7 @@ nl:
       user:
         email: Email
         first_name: Voornaam
+        iban: IBAN
         last_activity: Laatst actief
         last_login: Laatste login
         last_name: Achternaam
