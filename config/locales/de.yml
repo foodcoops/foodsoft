@@ -82,7 +82,7 @@ de:
         send_to_all: An alle Mitglieder schicken
         subject: Betreff
       order:
-        boxfill: Kisten füllen nach
+        boxfill: Kistenfüllen ab
         closed_by: Abgerechnet von
         created_by: Erstellt von
         ends: Endet am
@@ -253,7 +253,7 @@ de:
       tab_messages:
         emails_title: E-Mails versenden
       tab_payment:
-        schedule_title: 
+        schedule_title: Bestellschema
       tab_tasks:
         periodic_title: Wiederkehrende Aufgaben
       tabs:
@@ -496,8 +496,8 @@ de:
       name: Der Name Deiner Foodcoop
       order_schedule:
         boxfill:
-          recurr: 
-          time: 
+          recurr: Standarddatum für den Begin der Kistenauffüllphase
+          time: Standardzeit für den Begin der Kistenauffüllphase
         ends:
           recurr: Standarddatum für den Bestellschluss
           time: Standardzeit für den Bestellschluss
@@ -515,7 +515,7 @@ de:
       tax_default: Standard Mehrwertsteuersatz für neue Artikel
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
-      use_boxfill: 
+      use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
       use_current_orders: 
       use_documents: Einfache Dokumentenverwaltung aktivieren
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
@@ -548,8 +548,8 @@ de:
       name: Name
       order_schedule:
         boxfill:
-          recurr: 
-          time: 
+          recurr: Kistenauffüllen ab
+          time: Zeit
         ends:
           recurr: Bestellschluss
           time: Zeit
@@ -566,7 +566,7 @@ de:
       time_zone: Zeitzone
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
       use_apple_points: Apfelpunkte verwenden
-      use_boxfill: 
+      use_boxfill: Kistenauffüllphase
       use_current_orders: 
       use_documents: Dokumente verwenden
       use_messages: Nachrichten
@@ -586,7 +586,7 @@ de:
     articles:
       article:
         counts: "%{ordergroups} Bestellgruppen bestellten %{articles} verschiedene Produkte."
-        no_selection: 
+        no_selection: Wähle einen Artikel, um anzuzeigen wer ihn bestellt hat oder downloade eine Abholliste rechts.
       article_info:
         from: von %{supplier}
         origin_in: in %{origin}
@@ -1383,10 +1383,10 @@ de:
       title: Bestellungen verwalten
     model:
       close_direct_message: Die Bestellung wurde abgechlossen, ohne die Mitgliederkonten zu belasten.
-      error_boxfill_before_ends: 
+      error_boxfill_before_ends: muss nach dem Kistenauffülldatum liegen (oder leer bleiben)
       error_closed: Bestellung wurde schon abgerechnet
       error_nosel: Es muss mindestens ein Artikel ausgewählt sein.
-      error_starts_before_boxfill: 
+      error_starts_before_boxfill: muss nach dem Bestellstart liegen (oder leer bleiben)
       error_starts_before_ends: muss nach dem Bestellstart liegen (oder leer bleiben)
       notice_close: 'Bestellung: %{name}, bis %{ends}'
       stock: Lager
