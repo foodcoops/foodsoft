@@ -179,6 +179,7 @@ Foodsoft::Application.routes.draw do
 
       resources :bank_accounts, only: [:index] do
         member do
+          get :assign_unchecked_transactions
           get :import
           post :parse_upload
         end
