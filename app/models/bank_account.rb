@@ -12,4 +12,14 @@ class BankAccount < ApplicationRecord
   # @return [Function] Method wich can be called to import transaction from a bank or nil if unsupported
   def find_import_method
   end
+
+  def assign_unlinked_transactions
+    count = 0
+    bank_transactions.without_financial_link.includes(:supplier, :user).each do |t|
+      if t.assign_to_ordergroup || t.assign_to_invoice
+        count += 1
+      end
+    end
+    count
+  end
 end

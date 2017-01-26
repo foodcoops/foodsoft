@@ -33,4 +33,48 @@ class BankTransaction < ApplicationRecord
   def image_url
     'data:image/png;base64,' + Base64.encode64(self.image)
   end
+
+  def assign_to_invoice
+    return false unless supplier
+
+    content = text
+    content += "\n" + reference if reference.present?
+    invoices = supplier.invoices.unpaid.select {|i| content.include? i.number}
+    invoices_sum = invoices.map(&:amount).sum
+    return false if amount != -invoices_sum
+
+    transaction do
+      link = FinancialLink.new
+      invoices.each {|i| i.update_attributes! financial_link: link, paid_on: date }
+      update_attribute :financial_link, link
+    end
+
+    return true
+  end
+
+  def assign_to_ordergroup
+    m = BankTransactionReference.parse(reference)
+    return unless m
+
+    return false if m[:parts].values.sum != amount
+    group = Ordergroup.find_by_id(m[:group])
+    return false unless group
+    usr = m[:user] ? User.find_by_id(m[:user]) : group.users.first
+    return false unless usr
+
+    transaction do
+      note = "ID=#{id} (#{amount})"
+      link = FinancialLink.new
+
+      m[:parts].each do |short, value|
+        ftt = FinancialTransactionType.find_by_name_short(short)
+        return false unless ftt
+        group.add_financial_transaction! value, note, usr, ftt, link if value > 0
+      end
+
+      update_attribute :financial_link, link
+    end
+
+    return true
+  end
 end

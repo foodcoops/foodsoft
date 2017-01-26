@@ -1,6 +1,7 @@
 - title t('.title', name: @bank_account.name, balance: number_to_currency(@bank_account.balance))
 
 - content_for :actionbar do
+  = link_to t('.assign_unlinked_transactions'), assign_unlinked_transactions_finance_bank_account_path(@bank_account), class: 'btn'
   = link_to t('.import_transaction'), import_finance_bank_account_path(@bank_account), class: 'btn btn-primary'
 
 .well.well-small

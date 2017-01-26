@@ -5,6 +5,14 @@ class Finance::BankAccountsController < Finance::BaseController
     redirect_to finance_bank_account_transactions_url(@bank_accounts.first) if @bank_accounts.count == 1
   end
 
+  def assign_unlinked_transactions
+    @bank_account = BankAccount.find(params[:id])
+    count = @bank_account.assign_unlinked_transactions
+    redirect_to finance_bank_account_transactions_url(@bank_account), notice: t('finance.bank_accounts.controller.assign.notice', count: count)
+  rescue => error
+    redirect_to finance_bank_account_transactions_url(@bank_account), alert: t('errors.general_msg', msg: error.message)
+  end
+
   def import
     @bank_account = BankAccount.find(params[:id])
     import_method = @bank_account.find_import_method

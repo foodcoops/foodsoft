@@ -775,6 +775,8 @@ en:
         without_extra_charge: 'without extra charge:'
     bank_accounts:
       controller:
+        assign:
+          notice: '%{count} transactions have been assigned'
         import:
           notice: '%{count} new transactions have been imported'
       index:
