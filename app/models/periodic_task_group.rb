@@ -10,9 +10,10 @@ class PeriodicTaskGroup < ActiveRecord::Base
   def create_next_task
     template_task = tasks.first
     self.next_task_date ||= template_task.due_date + period_days
-    
+
     next_task = template_task.dup
-    next_task.due_date = next_task_date    
+    next_task.due_date = next_task_date
+    next_task.done = false
     next_task.save
 
     self.next_task_date += period_days
