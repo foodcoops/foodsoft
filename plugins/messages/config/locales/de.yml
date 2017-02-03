@@ -30,8 +30,8 @@ de:
       messages:
         view_all:
           text: '%{messages} oder %{threads} anzeigen'
-          messages:
-          threads:
+          messages: Nachrichten
+          threads: Nachrichtenverläufe
   messagegroups:
     index:
       body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
@@ -47,9 +47,9 @@ de:
       leave: Nachrichtengruppe verlassen
   messages:
     actionbar:
-      message_threads:
-      messagegroups:
-      messages:
+      message_threads: Als Verläufe anzeigen
+      messagegroups: Nachrichtengruppen beitreten
+      messages: Als Liste anzeigen
       new: Neue Nachricht
     thread:
       all_message_threads: Alle Nachrichtenverläufe
@@ -70,3 +70,6 @@ de:
   navigation:
     admin:
       messagegroups: Nachrichtengruppen
+  shared:
+    user_form_fields:
+      messagegroups: Nachrichtengruppen beitreten oder verlassen
