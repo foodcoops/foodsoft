@@ -1041,7 +1041,10 @@ de:
       due_date_format: "%A, %d. %b"
       messages:
         title: Neueste Nachrichten
-        view_all: Alle Nachrichten einsehen
+        view_all:
+          text: '%{messages} oder %{threads} anzeigen'
+          messages: Nachrichten
+          threads: Nachrichtenverläufe
       my_ordergroup:
         funds: "| Verfügbares Guthaben:"
         last_update: Letzte Aktualisierung vor %{when}
