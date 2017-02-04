@@ -1,9 +1,32 @@
 require "mail"
+require "mini-smtp-server"
+
+class ReplyEmailSmtpServer < MiniSmtpServer
+
+  def new_message_event(message_hash)
+    m = /<(?<recipient>[^<>]+)>/.match(message_hash[:to])
+    raise "invalid format for RCPT TO" if m.nil?
+    hande_mail(m[:recipient], message_hash[:data])
+  rescue => error
+    rake_say error.message
+  end
+
+end
 
 namespace :foodsoft do
   desc "Parse incoming email on stdin (options: RECIPIENT=f.1.2.a1b2c3d3e5)"
   task :parse_reply_email => :environment do
     hande_mail(ENV['RECIPIENT'], STDIN.read)
+  end
+
+  desc "Start STMP server for incoming email (options: PORT=25, HOST=0.0.0.0)"
+  task :reply_email_smtp_server => :environment do
+    port = ENV['PORT'].to_i
+    host = ENV['HOST']
+    rake_say "Started SMTP server for incomming email on port #{port}."
+    server = ReplyEmailSmtpServer.new(port, host)
+    server.start
+    server.join
   end
 end
 
