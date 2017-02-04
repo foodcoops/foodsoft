@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
   s.add_dependency "base32"
   s.add_dependency "deface", "~> 1.0.0"
   s.add_dependency "mail"
+  s.add_dependency "mini-smtp-server"
+  s.add_dependency "gserver"
 
   s.add_development_dependency "sqlite3"
 end
