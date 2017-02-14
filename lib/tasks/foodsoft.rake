@@ -39,7 +39,7 @@ namespace :foodsoft do
   desc "Create upcoming periodic tasks"
   task :create_upcoming_periodic_tasks => :environment do
     for tg in PeriodicTaskGroup.all
-      created_until tg.create_tasks_for_upfront_days
+      created_until = tg.create_tasks_for_upfront_days
       rake_say "created until #{created_until}"
     end
   end
