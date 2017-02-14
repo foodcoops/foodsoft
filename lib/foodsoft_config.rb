@@ -143,7 +143,7 @@ class FoodsoftConfig
       if config[:multi_coop_install]
         APP_CONFIG.keys.reject { |coop| coop =~ /^(default|development|test|production)$/ }
       else
-        config[:default_scope]
+        [config[:default_scope]]
       end
     end
 
