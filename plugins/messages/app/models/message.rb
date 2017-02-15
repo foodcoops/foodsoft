@@ -35,7 +35,7 @@ class Message < ActiveRecord::Base
   def clean_up_recipient_ids
     add_recipients Group.find(group_id).users unless group_id.blank?
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
-    self.recipients_ids = User.all.collect(&:id) if send_to_all == "1"
+    self.recipients_ids = User.undeleted.collect(&:id) if send_to_all == "1"
   end
 
   def add_recipients(users)
