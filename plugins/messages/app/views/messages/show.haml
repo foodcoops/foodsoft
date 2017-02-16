@@ -7,7 +7,7 @@
       %td=h @message.sender_name
     %tr
       %td= t '.to'
-      %td= @message.recipients.map {|e| e.name}.join(', ')
+      %td= @message.recipients.map(&:display).join(', ')
     - if @message.group
       %tr
         %td= t '.group'
