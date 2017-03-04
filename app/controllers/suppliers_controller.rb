@@ -61,7 +61,7 @@ class SuppliersController < ApplicationController
   
   # gives a list with all available shared_suppliers
   def shared_suppliers
-    @shared_suppliers = SharedSupplier.find(:all)
+    @shared_suppliers = SharedSupplier.all
   end
   
 end
