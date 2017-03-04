@@ -30,6 +30,8 @@ class HomeController < ApplicationController
 
     unless @ordergroup.nil?
 
+      @ordergroup = Ordergroup.include_transaction_class_sum.find(@ordergroup)
+
       if params['sort']
         sort = case params['sort']
         when "date"  then "created_on"

@@ -16,8 +16,12 @@
       - if with_ordergroup
         %th= heading_helper FinancialTransaction, :ordergroup
       %th= heading_helper FinancialTransaction, :user
+      - if FinancialTransactionType.has_multiple_types
+        %th= heading_helper FinancialTransaction, :financial_transaction_type
       %th= sort_link_helper heading_helper(FinancialTransaction, :note), "note"
-      %th= sort_link_helper heading_helper(FinancialTransaction, :amount), "amount"
+      - FinancialTransactionClass.sorted.each do |c|
+        %th
+          = sort_link_helper c.display, "amount"
   %tbody
     - @financial_transactions.each do |t|
       %tr
@@ -29,5 +33,10 @@
         - if with_ordergroup
           %td= h link_to t.ordergroup.name, finance_ordergroup_transactions_path(t.ordergroup)
         %td= h show_user(t.user)
+        - if FinancialTransactionType.has_multiple_types
+          %td= h t.financial_transaction_type.name
         %td= h t.note
-        %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}= number_to_currency(t.amount)
+        - FinancialTransactionClass.sorted.each do |c|
+          %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}
+            - if t.financial_transaction_type.financial_transaction_class == c
+              = number_to_currency(t.amount)
