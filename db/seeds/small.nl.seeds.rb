@@ -178,8 +178,12 @@ seed_group_orders
 
 ## Finances
 
-FinancialTransaction.create(:id => 1, :ordergroup_id => 5, :amount => -0.35E2, :note => "Membership fee for ordergroup", :user_id => 0, :created_on => 'Sat, 18 Jan 2014 00:38:48 UTC +00:00')
-FinancialTransaction.create(:id => 3, :ordergroup_id => 6, :amount => -0.35E2, :note => "Membership fee for ordergroup", :user_id => 0, :created_on => 'Sat, 25 Jan 2014 20:20:37 UTC +00:00')
-FinancialTransaction.create(:id => 4, :ordergroup_id => 7, :amount => -0.35E2, :note => "Membership fee for ordergroup", :user_id => 0, :created_on => 'Mon, 27 Jan 2014 16:22:14 UTC +00:00')
-FinancialTransaction.create(:id => 5, :ordergroup_id => 5, :amount => 0.35E2, :note => "iDEAL payment", :user_id => 1, :created_on => 'Wed, 05 Feb 2014 16:49:24 UTC +00:00')
-FinancialTransaction.create(:id => 6, :ordergroup_id => 8, :amount => 0.90E2, :note => "Bank transfer", :user_id => 2, :created_on => 'Mon, 17 Feb 2014 16:19:34 UTC +00:00')
+FinancialTransactionClass.create(:id => 1, :name => "Other")
+
+FinancialTransactionType.create(:id => 1, :name => "Foodcoop", :financial_transaction_class_id => 1)
+
+FinancialTransaction.create(:id => 1, :ordergroup_id => 5, :amount => -0.35E2, :note => "Membership fee for ordergroup", :user_id => 0, :created_on => 'Sat, 18 Jan 2014 00:38:48 UTC +00:00', :financial_transaction_type_id => 1)
+FinancialTransaction.create(:id => 3, :ordergroup_id => 6, :amount => -0.35E2, :note => "Membership fee for ordergroup", :user_id => 0, :created_on => 'Sat, 25 Jan 2014 20:20:37 UTC +00:00', :financial_transaction_type_id => 1)
+FinancialTransaction.create(:id => 4, :ordergroup_id => 7, :amount => -0.35E2, :note => "Membership fee for ordergroup", :user_id => 0, :created_on => 'Mon, 27 Jan 2014 16:22:14 UTC +00:00', :financial_transaction_type_id => 1)
+FinancialTransaction.create(:id => 5, :ordergroup_id => 5, :amount => 0.35E2, :note => "iDEAL payment", :user_id => 1, :created_on => 'Wed, 05 Feb 2014 16:49:24 UTC +00:00', :financial_transaction_type_id => 1)
+FinancialTransaction.create(:id => 6, :ordergroup_id => 8, :amount => 0.90E2, :note => "Bank transfer", :user_id => 2, :created_on => 'Mon, 17 Feb 2014 16:19:34 UTC +00:00', :financial_transaction_type_id => 1)

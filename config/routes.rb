@@ -149,7 +149,7 @@ Foodsoft::Application.routes.draw do
           put :update_note
 
           get :confirm
-          patch :close
+          post :close
           patch :close_direct
 
           get :new_on_order_article_create
