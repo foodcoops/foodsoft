@@ -60,7 +60,7 @@ class FoodsoftConfig
     # @param filename [String] Override configuration file
     def init(filename = APP_CONFIG_FILE)
       Rails.logger.info "Loading app configuration from #{APP_CONFIG_FILE}"
-      APP_CONFIG.clear.merge! YAML.load(File.read(File.expand_path(filename, Rails.root)))
+      APP_CONFIG.clear.merge! YAML.load(ERB.new(File.read(File.expand_path(filename, Rails.root))).result)
       # Gather program-default configuration
       self.default_config = get_default_config
       # Load initial config from development or production
