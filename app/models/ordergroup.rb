@@ -27,6 +27,18 @@ class Ordergroup < Group
     User.natural_order.all.reject { |u| (users.include?(u) || u.ordergroup) }
   end
 
+  def self.include_transaction_class_sum
+    columns = ['groups.*']
+    FinancialTransactionClass.all.each do |c|
+      columns << "sum(CASE financial_transaction_types.financial_transaction_class_id WHEN #{c.id} THEN financial_transactions.amount ELSE 0 END) AS sum_of_class_#{c.id}"
+    end
+
+    select(columns.join(', '))
+      .joins('LEFT JOIN financial_transactions ON groups.id = financial_transactions.ordergroup_id')
+      .joins('LEFT JOIN financial_transaction_types ON financial_transaction_types.id = financial_transactions.financial_transaction_type_id')
+      .group('groups.id')
+  end
+
   def last_user_activity
     last_active_user = users.order('users.last_activity DESC').first
     if last_active_user

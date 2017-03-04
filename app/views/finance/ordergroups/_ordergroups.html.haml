@@ -6,15 +6,19 @@
     %tr
       %th= sort_link_helper heading_helper(Ordergroup, :name), "name", :per_page => @per_page
       %th= heading_helper Ordergroup, :contact
-      %th.numeric= sort_link_helper heading_helper(Ordergroup, :account_balance), "account_balance", :per_page => @per_page
+      - FinancialTransactionClass.sorted.each do |c|
+        - name = FinancialTransactionClass.has_multiple_classes ? c.display : heading_helper(Ordergroup, :account_balance)
+        %th.numeric= sort_link_helper name, "sum_of_class_#{c.id}"
       %th
   %tbody
     - for ordergroup in @ordergroups
       %tr
         %td= ordergroup.name
         %td= ordergroup.contact
-        %td.numeric= number_to_currency(ordergroup.account_balance)
+        - FinancialTransactionClass.sorted.each do |c|
+          - amount = ordergroup["sum_of_class_#{c.id}"]
+          %td.numeric{:style => "color:#{amount < 0 ? 'red' : 'black'}"}
+            = number_to_currency amount
         %td
           = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-mini'
           = link_to t('.account_statement'), finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-mini'
-        

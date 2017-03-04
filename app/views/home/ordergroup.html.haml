@@ -13,6 +13,11 @@
         %p
           %b= heading_helper(Ordergroup, :available_funds) + ':'
           = number_to_currency(@ordergroup.get_available_funds())
+      - if FinancialTransactionClass.has_multiple_classes
+        - FinancialTransactionClass.sorted.each do |c|
+          %p
+            %b= c.display + ':'
+            = number_to_currency(@ordergroup["sum_of_class_#{c.id}"])
       %p
         %b= heading_helper(Ordergroup, :user_tokens) + ':'
         = @ordergroup.memberships.map{|m| show_user m.user}.join(', ')

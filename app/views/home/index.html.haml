@@ -67,15 +67,24 @@
         %tr
           %th= heading_helper FinancialTransaction, :created_on
           %th= heading_helper FinancialTransaction, :user
+          - if FinancialTransactionType.has_multiple_types
+            %th= heading_helper FinancialTransaction, :financial_transaction_type
           %th= heading_helper FinancialTransaction, :note
-          %th= heading_helper FinancialTransaction, :amount
+          - FinancialTransactionClass.sorted.each do |fc|
+            %th
+              = fc.display
         - for ft in current_user.ordergroup.financial_transactions.limit(5).order('created_on DESC')
           %tr
             %td= format_time(ft.created_on)
             %td= h(show_user(ft.user))
+            - if FinancialTransactionType.has_multiple_types
+              %td= h(ft.financial_transaction_type.name)
             %td= h(ft.note)
             - color = ft.amount < 0 ? 'red' : 'black'
-            %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
+            - FinancialTransactionClass.sorted.each do |fc|
+              %td{:style => "color:#{color}; width:5em", :class => "currency"}
+                - if ft.financial_transaction_type.financial_transaction_class == fc
+                  = number_to_currency(ft.amount)
 
 -# placeholder deface to add content using erb[silent]:contains()
 - '<dashboard_bottom_mark>'
