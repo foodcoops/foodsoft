@@ -92,13 +92,23 @@ ActiveRecord::Schema.define(version: 20171110000000) do
     t.text "note"
   end
 
+  create_table "financial_transaction_classes", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "financial_transaction_types", force: :cascade do |t|
+    t.string  "name",                           null: false
+    t.integer "financial_transaction_class_id", null: false
+  end
+
   create_table "financial_transactions", force: :cascade do |t|
-    t.integer  "ordergroup_id",     limit: 4,                             default: 0, null: false
-    t.decimal  "amount",                          precision: 8, scale: 2, default: 0, null: false
-    t.text     "note",              limit: 65535,                                     null: false
-    t.integer  "user_id",           limit: 4,                             default: 0, null: false
-    t.datetime "created_on",                                                          null: false
+    t.integer  "ordergroup_id",                 limit: 4,                             default: 0, null: false
+    t.decimal  "amount",                                      precision: 8, scale: 2, default: 0, null: false
+    t.text     "note",                          limit: 65535,                                     null: false
+    t.integer  "user_id",                       limit: 4,                             default: 0, null: false
+    t.datetime "created_on",                                                                      null: false
     t.integer  "financial_link_id"
+    t.integer  "financial_transaction_type_id",                                                   null: false
   end
 
   add_index "financial_transactions", ["ordergroup_id"], name: "index_financial_transactions_on_ordergroup_id", using: :btree

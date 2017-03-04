@@ -55,10 +55,11 @@ class Finance::FinancialTransactionsController < ApplicationController
 
   def create_collection
     raise I18n.t('finance.financial_transactions.controller.create_collection.error_note_required') if params[:note].blank?
+    type = FinancialTransactionType.find_by_id(params.permit(:type))
     params[:financial_transactions].each do |trans|
       # ignore empty amount fields ...
       unless trans[:amount].blank?
-        Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(trans[:amount], params[:note], @current_user)
+        Ordergroup.find(trans[:ordergroup_id]).add_financial_transaction!(trans[:amount], params[:note], @current_user, type)
       end
     end
     redirect_to finance_ordergroups_url, notice: I18n.t('finance.financial_transactions.controller.create_collection.notice')
