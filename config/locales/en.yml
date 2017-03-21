@@ -264,6 +264,7 @@ en:
         title: Configuration
       update:
         notice: Configuration saved.
+    confirm: Are you sure?
     ordergroups:
       destroy:
         error: 'Ordergroup could not be marked as deleted: %{error}'
