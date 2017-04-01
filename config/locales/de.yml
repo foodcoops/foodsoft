@@ -262,6 +262,7 @@ de:
         title: Einstellungen
       update:
         notice: Einstellungen gespeichert.
+    confirm: Bist Du sicher?
     ordergroups:
       destroy:
         error: 'Bestellgruppe konnte nicht als gelöscht markiert werden: %{error}'
@@ -1042,8 +1043,8 @@ de:
       messages:
         title: Neueste Nachrichten
         view_all:
-          text: '%{messages} oder %{threads} anzeigen'
           messages: Nachrichten
+          text: "%{messages} oder %{threads} anzeigen"
           threads: Nachrichtenverläufe
       my_ordergroup:
         funds: "| Verfügbares Guthaben:"
@@ -1810,12 +1811,12 @@ de:
       title_all: Alle Aufgaben der Gruppe
   ui:
     actions: Aktionen
-    back: Züruck
+    back: Zurück
     cancel: Abbrechen
     close: Schließen
     confirm_delete: Willst du %{name} wirklich löschen?
     confirm_restore: Willst du %{name} wirklich wiederherstellen?
-    copy: kopieren
+    copy: Kopieren
     delete: Löschen
     download: Herunterladen
     edit: Bearbeiten

@@ -1045,8 +1045,8 @@ en:
       messages:
         title: Newest Messages
         view_all:
-          text: 'Show %{messages} or %{threads}'
           messages: all messages
+          text: Show %{messages} or %{threads}
           threads: threads
       my_ordergroup:
         funds: "| Available Credit:"

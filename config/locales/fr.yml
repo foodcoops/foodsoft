@@ -38,11 +38,11 @@ fr:
         note: Note
         supplier: Fournisseur-e
       document:
-        created_at: 
-        created_by_user_id: 
+        created_at: Crée à
+        created_by_user_id: Crée par
         data: 
         mime: 
-        name: 
+        name: Nom
       financial_transaction:
         amount: Montant
         created_on: Date
@@ -109,8 +109,8 @@ fr:
       ordergroup:
         account_balance: Crédit initial
         available_funds: Crédit disponible
-        break: 
-        break_until: 
+        break: "(dernière) pause"
+        break_until: "à"
         contact: Contact
         contact_address: Adresse
         contact_person: Personne à contacter
@@ -118,7 +118,7 @@ fr:
         description: Description
         ignore_apple_restriction: Pour cette cellule, ne pas bloquer les commandes en cas de manque de glands
         last_order: dernière commande
-        last_user_activity: 
+        last_user_activity: dernière activité
         name: Nom
         user_tokens: Membres
       page:
@@ -167,7 +167,7 @@ fr:
         email: Email
         first_name: Prénom
         iban: IBAN
-        last_activity: 
+        last_activity: dernière activité
         last_login: Dernière connection
         last_name: Nom de famille
         name: Nom
@@ -249,19 +249,20 @@ fr:
         value: 
       show:
         submit: 
-        title: 
+        title: configuration
       tab_layout:
         pdf_title: 
       tab_messages:
-        emails_title: 
+        emails_title: Envoyer mail
       tab_payment:
         schedule_title: 
       tab_tasks:
         periodic_title: 
       tabs:
-        title: 
+        title: Configuration
       update:
         notice: 
+    confirm: T'es sûrE de ton coup?
     ordergroups:
       destroy:
         error: 'La cellule n''a pas pu être dissoute: %{error}'
@@ -304,7 +305,7 @@ fr:
         title: Ajouter unE nouveLLE_eau membre
       restore:
         error: 
-        notice: 
+        notice: User était restauré
       show:
         confirm_sudo: 
         groupabos: Participation à des équipes
@@ -465,14 +466,14 @@ fr:
         convert_units: 
         outlist_absent: 
       sample:
-        juices: 
-        nuts: 
-        organic: 
+        juices: Jus
+        nuts: Noix
+        organic: biologique
         supplier_1: 
-        supplier_2: 
-        supplier_3: 
-        tomato_juice: 
-        walnuts: 
+        supplier_2: champs bruns
+        supplier_3: champs verts
+        tomato_juice: Jus de tomate
+        walnuts: Noix
       submit: Transférer le fichier
       text_1: 
       text_2: 
@@ -490,12 +491,12 @@ fr:
       email_replyto: 
       email_sender: 
       help_url: 
-      homepage: 
+      homepage: Site de votre coop.
       ignore_browser_locale: 
       mailing_list: 
       mailing_list_subscribe: 
       minimum_balance: 
-      name: 
+      name: Le nom de votre coop.
       order_schedule:
         boxfill:
           recurr: 
@@ -520,6 +521,7 @@ fr:
       use_boxfill: 
       use_current_orders: 
       use_documents: 
+      use_iban: 
       use_messages: 
       use_nick: 
       use_wiki: 
@@ -527,14 +529,14 @@ fr:
     keys:
       applepear_url: 
       contact:
-        city: 
-        country: 
-        email: 
-        phone: 
-        street: 
-        zip_code: 
+        city: Ville
+        country: Pays
+        email: Mail
+        phone: Numéro
+        street: Rue
+        zip_code: Code postal
       currency_space: 
-      currency_unit: 
+      currency_unit: Monnaie
       custom_css: 
       default_locale: 
       disable_invite: 
@@ -547,7 +549,7 @@ fr:
       mailing_list: 
       mailing_list_subscribe: 
       minimum_balance: 
-      name: 
+      name: Nom
       order_schedule:
         boxfill:
           recurr: 
@@ -571,17 +573,18 @@ fr:
       use_boxfill: 
       use_current_orders: 
       use_documents: 
-      use_messages: 
+      use_iban: 
+      use_messages: Messages
       use_nick: 
       use_wiki: 
       webstats_tracking_code: 
     tabs:
       foodcoop: 
-      language: 
+      language: Langue
       layout: 
-      list: 
-      messages: 
-      others: 
+      list: Liste
+      messages: Messages
+      others: Autre
       payment: 
       tasks: 
   current_orders:
@@ -590,10 +593,10 @@ fr:
         counts: 
         no_selection: 
       article_info:
-        from: 
+        from: de %{supplier}
         origin_in: 
-        supplied_and_made_by: 
-        supplied_by: 
+        supplied_and_made_by: fait par %{manufacturer}
+        supplied_by: de %{supplier}
         supplied_by_made_by: 
         unit: 
       form:
@@ -627,7 +630,7 @@ fr:
         new_transaction: 
         payment: 
       show:
-        title: 
+        title: Articles pour %{name}
     orders:
       receive:
         no_finished_orders: 
@@ -682,7 +685,7 @@ fr:
       notice: 
     index:
       new: 
-      title: 
+      title: Documents
     multiple_orders_by_articles:
       filename: 
       title: 
@@ -1050,7 +1053,10 @@ fr:
       due_date_format: "%A, %d. %b"
       messages:
         title: Derniers messages reçus
-        view_all: Afficher tous les messages
+        view_all:
+          messages: tous les messages
+          text: Afficher %{messages} ou %{threads}
+          threads: 
       my_ordergroup:
         funds: "| Crédit disponible:"
         last_update: La dernière mise à jour date du %{when}
@@ -1299,7 +1305,7 @@ fr:
       no_ordergroup: aucune cellule
   navigation:
     admin:
-      config: 
+      config: Configuration
       home: Aperçu
       ordergroups: Cellules
       title: Administration
@@ -1311,7 +1317,7 @@ fr:
       suppliers: Annuaire
       title: Produits
     dashboard: Tableau de bord
-    documents: 
+    documents: Documents
     finances:
       accounts: Crédits des cellules
       balancing: Décompte des commandes
@@ -1496,7 +1502,7 @@ fr:
         heading: Plan %{level}
         headings: En-tête
         image_link_title: 
-        image_links: 
+        image_links: Images
         italic: italique
         link_lists: 
         link_table: Format des tableaux
@@ -1569,7 +1575,7 @@ fr:
       access: Accès à
       activated: activé
       apple_limit: Minimum de glands
-      break: 
+      break: de %{start} à %{end}
       deactivated: désactivé
     group_form_fields:
       search: Recherche...

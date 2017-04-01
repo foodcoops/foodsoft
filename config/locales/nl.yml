@@ -262,6 +262,7 @@ nl:
         title: Configuratie
       update:
         notice: Configuratie opgeslagen.
+    confirm: Weet je het zeker?
     ordergroups:
       destroy:
         error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
@@ -520,6 +521,7 @@ nl:
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
       use_current_orders: De current_orders plugin aanzetten. Hiermee kunnen leden met bestelling-toegang bestelaantallen van leden aanpassen in meerdere bestellingen tegelijk. Hiervoor zijn drie nieuwe items in het Bestellingen-menu. Bedoeld voor gebruik op een ophaaldag.
       use_documents: Geeft een simpele manier om documenten te delen in het foodcoop menu.
+      use_iban: Om leverancier en gebruiker een extra veld te geven voor het internationale bankrekeningnummer (IBAN).
       use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
       use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
       use_wiki: Gebruik wiki pagina's.
@@ -571,6 +573,7 @@ nl:
       use_boxfill: Dozen vullen fase
       use_current_orders: Extra verdeelschermen
       use_documents: Documenten delen
+      use_iban: IBAN gebruiken
       use_messages: Berichten
       use_nick: Bijnamen gebruiken
       use_wiki: Wiki gebruiken
@@ -1041,7 +1044,10 @@ nl:
       due_date_format: "%A %d %B"
       messages:
         title: Nieuwste berichten
-        view_all: Alle berichten bekijken
+        view_all:
+          messages: Alle berichten
+          text: "%{messages} of %{threads} bekijken"
+          threads: conversaties
       my_ordergroup:
         funds: "| Beschikbaar tegoed:"
         last_update: Laatst gewijzigd %{when} geleden
