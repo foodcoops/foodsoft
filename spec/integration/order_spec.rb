@@ -29,9 +29,10 @@ feature Order, js: true do
   end
 
   it 'can create a new order' do
-    visit new_order_path(supplier_id: article.supplier.id)
+    visit new_order_path(supplier_id: article.supplier_id)
     expect(page).to have_text I18n.t('orders.new.title')
     find('input[type="submit"]').click
+    expect(page).to have_selector('.alert-success')
     expect(Order.count).to eq 1
     expect(Order.first.supplier).to eq article.supplier
   end
@@ -50,8 +51,7 @@ feature Order, js: true do
     # and close the order
     visit orders_path
     click_link_or_button I18n.t('orders.index.action_end')
-    accept_alert
-    sleep 0.8
+    expect(page).to have_selector('.alert-success')
     order.reload
     oa.reload
   end

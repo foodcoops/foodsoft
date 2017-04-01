@@ -6,29 +6,17 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 
+Capybara.javascript_driver = :webkit
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
-  # ## Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  #config.use_transactional_fixtures = true
-  # We use capybara with selenium, and need database_cleaner
+  # We use capybara with webkit, and need database_cleaner
   config.before(:each) do
     DatabaseCleaner.strategy = (RSpec.current_example.metadata[:js] ? :truncation : :transaction)
     DatabaseCleaner.start
-    # maximise window so that buttons can be found on popups
-    RSpec.current_example.metadata[:js] and page.driver.browser.manage.window.maximize
     # clean slate mail queues, not sure why needed - https://github.com/rspec/rspec-rails/issues/661
     ActionMailer::Base.deliveries.clear
   end
