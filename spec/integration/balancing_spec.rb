@@ -53,7 +53,6 @@ feature 'settling an order', js: true do
   it 'keeps ordered quantities when article is deleted from resulting order' do
     within("#order_article_#{oa.id}") do
       click_link I18n.t('ui.delete')
-      page.driver.browser.switch_to.alert.accept
     end
     expect(page).to_not have_selector("#order_article_#{oa.id}")
     expect(OrderArticle.exists?(oa.id)).to be true
@@ -70,7 +69,6 @@ feature 'settling an order', js: true do
     goa2.destroy
     within("#order_article_#{oa.id}") do
       click_link I18n.t('ui.delete')
-      page.driver.browser.switch_to.alert.accept
     end
     expect(page).to_not have_selector("#order_article_#{oa.id}")
     expect(OrderArticle.exists?(oa.id)).to be false
@@ -146,10 +144,8 @@ feature 'settling an order', js: true do
     click_link article.name
     within("#group_order_articles_#{oa.id}") do
       fill_in "r_#{goa1.id}", :with => 5
-      # leave input box and wait a bit so that update is sent using ajax
-      find("#r_#{goa1.id}").native.send_keys :tab
-      sleep 1
     end
+    expect(page).to have_selector('#summaryChangedWarning') # becomes visible after request is done
     expect(goa1.reload.result).to eq 5
     expect(find("#group_order_articles_#{oa.id} tfoot td:nth-child(3)").text.to_f).to eq 6
   end
@@ -158,8 +154,8 @@ feature 'settling an order', js: true do
     click_link article.name
     within("#group_order_article_#{goa1.id}") do
       4.times { find('button[data-increment]').click }
-      sleep 1
     end
+    expect(page).to have_selector('#summaryChangedWarning') # becomes visible after request is done
     expect(goa1.reload.result).to eq 7
     expect(find("#group_order_articles_#{oa.id} tfoot td:nth-child(3)").text.to_f).to eq 8
   end
