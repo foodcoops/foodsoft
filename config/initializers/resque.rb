@@ -1,2 +1,2 @@
 # Initializer to configure resque daemon
-Resque.redis = ENV.fetch("REDIS_URL", "redis://localhost:6379")
+Resque.redis = ENV['REDIS_URL'] if ENV['REDIS_URL']
