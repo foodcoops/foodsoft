@@ -17,6 +17,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails"
-  s.add_dependency "deface", "~> 1.0.0"
+  s.add_dependency "deface", "~> 1.0"
   s.add_dependency "ruby-filemagic"
 end
