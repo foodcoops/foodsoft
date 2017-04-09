@@ -12,7 +12,7 @@ set :application,         'foodsoft'            # application name (whatever you
 set :domain,              'order.foodcoop.test' # host
 set :user,                'deploy'              # ssh deploy user
 set :keep_releases,       10
-set :repo_url,            'git://github.com/foodcoops/foodsoft.git'
+set :repo_url,            'https://github.com/foodcoops/foodsoft.git'
 set :deploy_to,            "/www/apps/#{fetch :application}-#{fetch :stage}"
 
 # more settings which are probably ok

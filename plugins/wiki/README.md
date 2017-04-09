@@ -10,7 +10,7 @@ add the following to foodsoft's Gemfile:
 
 ```Gemfile
 # we use the git version of acts_as_versioned, so this needs to be in foodsoft's Gemfile
-gem 'acts_as_versioned', git: 'git://github.com/technoweenie/acts_as_versioned.git'
+gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
 gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
 ```
 
