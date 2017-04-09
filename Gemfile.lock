@@ -1,11 +1,11 @@
 GIT
-  remote: git://github.com/bennibu/localize_input.git
+  remote: https://github.com/bennibu/localize_input.git
   revision: 5eb188d2525a073d09e142cf8b0b04e6ace6e7b0
   specs:
     localize_input (0.1.0)
 
 GIT
-  remote: git://github.com/technoweenie/acts_as_versioned.git
+  remote: https://github.com/technoweenie/acts_as_versioned.git
   revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
   specs:
     acts_as_versioned (0.6.0)
