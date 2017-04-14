@@ -1,3 +1,13 @@
+# Foodsoft 4.5.2
+(17 April 2017)
+
+* The messages plugin can now receive replies by email when setup (#459)
+* Add Copy button for settled orders (#383)
+* Fix to not send messages to deleted users (462)
+* Fix to allow adding an invoice to finished orders (925727)
+* Fix to make sure new periodic tasks aren't done (#454)
+* Fixes for several security vulnerabilities
+
 # Foodsoft 4.5.1
 (12 August 2016)
 
