@@ -519,7 +519,7 @@ de:
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
-      use_current_orders: 
+      use_current_orders: Aktiviere Plugin zur erweiterten Bearbeitung laufender Bestellungen. Dies erlaubt Mitgliedern mit Bestellrechten, mehrere Bestellungen gleichzeitig zu bearbeiten (in drei zusätzlichen Ansichten unter dem Menüpunkt Bestellungen). Insbesondere hilfreich für Anpassungen an Liefertagen.
       use_documents: Einfache Dokumentenverwaltung aktivieren
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
@@ -571,7 +571,7 @@ de:
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
       use_apple_points: Apfelpunkte verwenden
       use_boxfill: Kistenauffüllphase
-      use_current_orders: 
+      use_current_orders: Erweiterte Bearbeitungsansicht
       use_documents: Dokumente verwenden
       use_iban: IBAN verwenden
       use_messages: Nachrichten
