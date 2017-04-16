@@ -150,6 +150,11 @@ default: &defaults
   # Instead of defining all details here, you can also point to an entry in database.yml.
   #shared_lists: shared_lists
 
+  # Uncomment to add tracking code for web statistics, e.g. piwik
+  #webstats_tracking_code: |
+  #  <!-- Piwik -->
+  #  ......
+
 development:
   <<: *defaults
 
