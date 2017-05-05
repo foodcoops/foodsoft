@@ -1,7 +1,7 @@
 %td.closed
   = link_to order_article.article.name, '#', 'data-toggle-this' => "#group_order_articles_#{order_article.id}"
 %td= order_article.article.order_number
-%td{title: units_history_line(order_article)}
+%td{title: units_history_line(order_article, :plain => true)}
   = order_article.units
   = pkg_helper order_article.article_price
   - if s=order_article.ordered_quantities_different_from_group_orders?
