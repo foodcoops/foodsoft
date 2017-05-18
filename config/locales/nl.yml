@@ -874,6 +874,8 @@ nl:
         reload: Samenvatting verversen
         with_extra_charge: 'inclusief marge:'
         without_extra_charge: 'zonder marge:'
+      edit_note:
+        title: Bewerk ordernotitie
     create:
       notice: Rekening is gemaakt.
     financial_links:
