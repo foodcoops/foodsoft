@@ -853,6 +853,8 @@ en:
         first_paragraph: 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
         or_cancel: or back to accounting
         title: Settle order
+      edit_note:
+        title: Edit order note
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
@@ -888,7 +890,7 @@ en:
         edit_order: Edit order
         groups_overview: Overview of groups
         invoice: Invoice
-        notes_and_journal: Notes/Protocol
+        notes_and_journal: Order Notes
         summary: Summary
         title: Accounting %{name}
         view_options: Viewing options
