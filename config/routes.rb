@@ -179,6 +179,13 @@ Foodsoft::Application.routes.draw do
     namespace :admin do
       root to: 'base#index'
 
+      resources :finances, only: [:index] do
+        get :update_transaction_types, on: :collection
+      end
+
+      resources :financial_transaction_classes
+      resources :financial_transaction_types
+
       resources :users do
         post :restore, on: :member
         post :sudo, on: :member
