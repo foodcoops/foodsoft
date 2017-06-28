@@ -86,7 +86,7 @@ class OrderByGroups < OrderPdf
 
   def group_orders
     order.group_orders.ordered.
-      joins(:ordergroup).order('groups.name').
+      includes(:ordergroup).order('groups.name').
       preload(:group_order_articles => {:order_article => [:article, :article_price]})
   end
 
