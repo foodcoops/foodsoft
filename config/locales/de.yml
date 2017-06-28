@@ -1418,6 +1418,7 @@ de:
   navigation:
     admin:
       config: Einstellungen
+      finance: Finanzen
       home: Übersicht
       mail_delivery_status: E-Mail Probleme
       messagegroups: Nachrichtengruppen

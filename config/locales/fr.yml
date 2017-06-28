@@ -1416,6 +1416,7 @@ fr:
   navigation:
     admin:
       config: Configuration
+      finance: Trésorerie
       home: Aperçu
       mail_delivery_status: 
       messagegroups: 

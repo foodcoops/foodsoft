@@ -1,0 +1,5 @@
+= simple_form_for [:admin, @financial_transaction_class] do |f|
+  = f.input :name
+  .form-actions
+    = f.button :submit
+    = link_to t('ui.or_cancel'), :back

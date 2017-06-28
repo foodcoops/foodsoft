@@ -46,6 +46,7 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :ordergroups, I18n.t('navigation.admin.ordergroups'), admin_ordergroups_path
       subnav.item :workgroups, I18n.t('navigation.admin.workgroups'), admin_workgroups_path
       subnav.item :mail_delivery_status, I18n.t('navigation.admin.mail_delivery_status'), admin_mail_delivery_status_index_path
+      subnav.item :finances, I18n.t('navigation.admin.finance'), admin_finances_path
       subnav.item :config, I18n.t('navigation.admin.config'), admin_config_path
     end
 

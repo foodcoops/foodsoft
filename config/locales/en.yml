@@ -1428,6 +1428,7 @@ en:
   navigation:
     admin:
       config: Configuration
+      finance: Finances
       home: Overview
       mail_delivery_status: Email problems
       messagegroups: Message groups

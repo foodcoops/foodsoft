@@ -1418,6 +1418,7 @@ nl:
   navigation:
     admin:
       config: Instellingen
+      finance: Financiën
       home: Overzicht
       mail_delivery_status: Emailproblemen
       messagegroups: Berichtengroepen
