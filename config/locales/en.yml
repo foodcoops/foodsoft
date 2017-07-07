@@ -49,6 +49,11 @@ en:
         note: Note
         ordergroup: Ordergroup
         user: Entered by
+      financial_transaction_class:
+        name: Name
+      financial_transaction_type:
+        name: Name
+        financial_transaction_class: Financial transaction class
       group_order:
         price: Order sum
         updated_by: Last ordered by
@@ -235,6 +240,8 @@ en:
       article_category: Category
       delivery: Delivery
       financial_transaction: Financial transaction
+      financial_transaction_class: Financial transaction class
+      financial_transaction_type: Financial transaction type
       invoice: Invoice
       message: Message
       messagegroup: Message group
@@ -291,6 +298,22 @@ en:
       update:
         notice: Configuration saved.
     confirm: Are you sure?
+    finances:
+      index:
+        first_paragraph: Here you can manage the financial transaction classes and the corresponding financial transaction types. Every financial transaction has a type, which you have to select at every transaction, if you created more than one type. The financial transaction classes can be use to group the financial transaction types and will be shown as additional columns in the account overview, if there have been created more than one.
+        new_financial_transaction_class: Add new financial transaction class
+        title: Finances
+      transaction_types:
+        name: Name
+        new_financial_transaction_type: Add new financial transaction type
+    financial_transaction_classes:
+      form:
+        title_edit: Edit financial transaction class
+        title_new: Add new financial transaction class
+    financial_transaction_types:
+      form:
+        title_edit: Edit financial transaction type
+        title_new: Add new financial transaction type
     mail_delivery_status:
       destroy_all:
         notice: All email problems were deleted

@@ -49,6 +49,11 @@ de:
         note: Notiz
         ordergroup: Bestellgruppe
         user: Eingetragen von
+      financial_transaction_class:
+        name: Name
+      financial_transaction_type:
+        name: Name
+        financial_transaction_class: Finanztransaktionsklasse
       group_order:
         price: Bestellsumme
         updated_by: Zuletzt bestellt
@@ -235,6 +240,8 @@ de:
       article_category: Kategorie
       delivery: Lieferung
       financial_transaction: Kontotransaktion
+      financial_transaction_class: Finanztransaktionsklasse
+      financial_transaction_type: Finanztransaktionstyp
       invoice: Rechnung
       message: Nachricht
       messagegroup: Nachrichtengruppe
@@ -289,6 +296,22 @@ de:
       update:
         notice: Einstellungen gespeichert.
     confirm: Bist Du sicher?
+    finances:
+      index:
+        first_paragraph: Hier kannst du die Finanztransaktionsklassen und die dazugehörigen Finanztransaktionstypen verwalten. Jede Finanztansaktion hat einen bestimmten Typ, den du bei jeder Transaktion auswählen muss, falls du mehr als einen Typ angelegt hast. Die Finanztransaktionsklassen können zur Gruppierung der Finanztransaktionstypen verwendet werden und werden in der Kontoübersicht als weitere Spalten angezeigt, falls mehrere angelegt wurden.
+        new_financial_transaction_class: Neue Finanztransaktionsklasse anlegen
+        title: Finanzen
+      transaction_types:
+        name: Name
+        new_financial_transaction_type: Neuen Finanztransaktionstyp anlegen
+    financial_transaction_classes:
+      form:
+        title_edit: Finanztransaktionsklasse bearbeiten
+        title_new: Finanztransaktionsklasse anlegen
+    financial_transaction_types:
+      form:
+        title_edit: Finanztransaktionstyp bearbeiten
+        title_new: Finanztransaktionstyp anlegen
     mail_delivery_status:
       destroy_all:
         notice: Alle E-Mail Probleme wurden gelöscht
