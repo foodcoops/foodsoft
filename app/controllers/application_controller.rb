@@ -172,6 +172,7 @@ class ApplicationController < ActionController::Base
           # Set Config and database connection
           FoodsoftConfig.select_foodcoop params[:foodcoop]
         rescue => error
+          FoodsoftConfig.select_foodcoop FoodsoftConfig.config[:default_scope]
           redirect_to root_url, alert: error.message
         end
       else
