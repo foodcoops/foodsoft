@@ -164,6 +164,11 @@ describe 'API v1', type: :apivore, order: :defined do
         end
       end
     end
+
+    # config
+    context do
+      it { is_expected.to validate(:get, '/config', 200, auth) }
+    end
   end
 
   # financial_transactions

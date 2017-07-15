@@ -386,6 +386,17 @@ paths:
       security:
         - foodsoft_auth: ['all']
 
+  /config:
+    get:
+      summary: configuration variables
+      tags:
+        - 7. General
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+
 parameters:
   # url parameters
   idInUrl:
