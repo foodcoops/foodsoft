@@ -247,6 +247,7 @@ Foodsoft::Application.routes.draw do
       namespace :v1 do
         resource :user, only: [:show]
         resource :config, only: [:show]
+        resource :navigation, only: [:show]
         resources :financial_transactions, only: [:index, :show]
         resources :orders, only: [:index, :show]
         resources :order_articles, only: [:index, :show]
