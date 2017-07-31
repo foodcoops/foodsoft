@@ -13,7 +13,8 @@ ENV RAILS_ENV=production
 
 WORKDIR /usr/src/app
 COPY . ./
-RUN bundle install --without development --without test && \
+RUN git rev-parse --short HEAD > REVISION && \
+    bundle install --without development --without test && \
     whenever --update-crontab
 
 EXPOSE 3000
