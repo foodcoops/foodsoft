@@ -51,6 +51,9 @@ gem 'exception_notification'
 gem 'gaffe'
 gem 'ruby-filemagic'
 gem 'midi-smtp-server'
+gem 'easybank', git: "https://github.com/paroga/ruby-easybank.git"
+gem 'holvi', git: "https://github.com/paroga/ruby-holvi.git"
+gem 'sparkasse', git: "https://github.com/paroga/ruby-sparkasse.git"
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
