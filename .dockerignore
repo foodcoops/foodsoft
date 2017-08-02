@@ -3,6 +3,7 @@
 .sass-cache
 log
 config/database.yml
+doc
 public/assets
 public/system
 tmp/*
