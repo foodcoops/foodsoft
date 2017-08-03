@@ -5,7 +5,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get clean
 
-ENV RAILS_ENV=production
+ENV RAILS_ENV=production \
+    RAILS_SERVE_STATIC_FILES=true
 
 WORKDIR /usr/src/app
 COPY . ./
