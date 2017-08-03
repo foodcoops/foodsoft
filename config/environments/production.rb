@@ -78,8 +78,20 @@ Foodsoft::Application.configure do
   # Configure hostname for action mailer (can be overridden in foodcoop config)
   config.action_mailer.default_url_options = { host: `hostname -f`, protocol: 'https' }
 
-  # Use sendmail to avoid ssl cert problems
-  config.action_mailer.delivery_method = :sendmail
+  if ENV['SMTP_ADDRESS'].present?
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = { address: ENV['SMTP_ADDRESS'] }
+    config.action_mailer.smtp_settings[:port] = ENV['SMTP_PORT'] if ENV['SMTP_PORT'].present?
+    config.action_mailer.smtp_settings[:domain] = ENV['SMTP_DOMAIN'] if ENV['SMTP_DOMAIN'].present?
+    config.action_mailer.smtp_settings[:user_name] = ENV['SMTP_USER_NAME'] if ENV['SMTP_USER_NAME'].present?
+    config.action_mailer.smtp_settings[:password] = ENV['SMTP_PASSWORD'] if ENV['SMTP_PASSWORD'].present?
+    config.action_mailer.smtp_settings[:authentication] = ENV['SMTP_AUTHENTICATION'] if ENV['SMTP_AUTHENTICATION'].present?
+    config.action_mailer.smtp_settings[:enable_starttls_auto] = ENV['SMTP_ENABLE_STARTTLS_AUTO'] == 'true' if ENV['SMTP_ENABLE_STARTTLS_AUTO'].present?
+    config.action_mailer.smtp_settings[:openssl_verify_mode] = ENV['SMTP_OPENSSL_VERIFY_MODE'] if ENV['SMTP_OPENSSL_VERIFY_MODE'].present?
+  else
+    # Use sendmail as default to avoid ssl cert problems
+    config.action_mailer.delivery_method = :sendmail
+  end
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
