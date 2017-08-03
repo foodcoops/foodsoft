@@ -19,6 +19,22 @@ RUN buildDeps='libmagic-dev' && \
     apt-get purge -y --auto-remove $buildDeps && \
     whenever --update-crontab
 
+# Add a temporary mysql-server for assets precompilation
+RUN export DATABASE_URL=mysql2://localhost/temp && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get install -y mysql-server && \
+    /etc/init.d/mysql start && \
+    cp config/app_config.yml.SAMPLE config/app_config.yml && \
+    bundle exec rake db:setup && \
+    bundle exec rake assets:precompile && \
+    rm config/app_config.yml && \
+    rm -rf tmp/* && \
+    /etc/init.d/mysql stop && \
+    rm -rf /run/mysqld /tmp/* /var/lib/mysql /var/log/mysql* && \
+    apt-get purge -y --auto-remove mysql-server && \
+    rm -rf /var/lib/apt/lists/*
+
 EXPOSE 3000
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
