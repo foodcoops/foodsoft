@@ -3,6 +3,7 @@ sudo: false
 rvm:
   - 2.1
 services:
+  - mysql
   - redis-server
 addons:
   apt:
@@ -18,7 +19,8 @@ bundler_args:
   - "--without development --deployment --jobs=3 --retry=3"
 before_script:
   - "bundle exec rake foodsoft:setup:stock_config"
-  - "mysql -e 'create database foodsoft_test;'"
+  - "mysql -e 'create database foodsoft_test default character set utf8 default collate utf8_general_ci;'"
+  - "mysql -e 'grant all on foodsoft_test.* to travis;'"
   - 'printf "test:\n  adapter: mysql2\n  database: foodsoft_test\n  username: travis\n  encoding: utf8\n" >config/database.yml'
   - 'bundle exec rake db:schema:load RAILS_ENV=test'
 script: bundle exec rake rspec-rerun:spec
