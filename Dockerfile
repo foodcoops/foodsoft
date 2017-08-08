@@ -17,6 +17,8 @@ RUN buildDeps='libmagic-dev' && \
     rm -rf /var/lib/apt/lists/* && \
     bundle install --deployment --without development test && \
     apt-get purge -y --auto-remove $buildDeps && \
+    mkdir -p log && \
+    ln -sfn /dev/stdout log/production.log && \
     whenever --update-crontab
 
 # Add a temporary mysql-server for assets precompilation
