@@ -19,7 +19,7 @@ RUN buildDeps='libmagic-dev' && \
     apt-get purge -y --auto-remove $buildDeps && \
     mkdir -p log && \
     ln -sfn /dev/stdout log/production.log && \
-    whenever --update-crontab
+    bundle exec whenever --update-crontab
 
 # Add a temporary mysql-server for assets precompilation
 RUN export DATABASE_URL=mysql2://localhost/temp && \
