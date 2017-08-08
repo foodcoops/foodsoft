@@ -36,6 +36,7 @@ gem 'ransack'
 gem 'acts_as_tree'
 gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 https://github.com/huacnlee/rails-settings-cached/issues/73
 gem 'resque'
+gem 'thin'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 gem 'protected_attributes', '= 1.1.0' # 1.1.0 until tests work work with higher versions
 gem 'ruby-units'
@@ -90,8 +91,6 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-bundler', '>= 1.1.0', require: false
   gem 'capistrano-rails', require: false
-  # Avoid having content-length warnings
-  gem 'thin'
 end
 
 group :development, :test do
