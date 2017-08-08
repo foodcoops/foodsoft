@@ -17,6 +17,7 @@ RUN buildDeps='libmagic-dev' && \
     rm -rf /var/lib/apt/lists/* && \
     bundle install --deployment --without development test && \
     apt-get purge -y --auto-remove $buildDeps && \
+    echo "Foodsoft::Application.config.secret_token = ENV['SECRET_KEY_BASE']" > config/initializers/secret_token.rb && \
     mkdir -p log && \
     ln -sfn /dev/stdout log/production.log && \
     bundle exec whenever --update-crontab
