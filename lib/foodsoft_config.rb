@@ -80,6 +80,10 @@ class FoodsoftConfig
       setup_database
     end
 
+    def select_default_foodcoop
+      select_foodcoop config[:default_scope]
+    end
+
     def select_multifoodcoop(foodcoop)
       select_foodcoop foodcoop if config[:multi_coop_install]
     end
