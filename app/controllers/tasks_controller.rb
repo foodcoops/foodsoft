@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   def index
     @non_group_tasks = Task.non_group.order('due_date', 'name').includes(assignments: :user)
-    @groups = Workgroup.includes(open_tasks: {assignments: :user})
+    @groups = Workgroup.order(:name).includes(open_tasks: {assignments: :user})
   end
 
   def user

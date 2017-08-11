@@ -9,5 +9,5 @@
       %li= link_to t('.all_tasks'), tasks_path
       %li= link_to t('.archive'), archive_tasks_path
       %li.nav-header= t '.group_tasks'
-      - for group in Workgroup.all
+      - for group in Workgroup.order(:name)
         %li= link_to group.name, workgroup_tasks_path(workgroup_id: group.id)
