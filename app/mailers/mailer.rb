@@ -49,6 +49,23 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.order_result.subject', name: group_order.order.name)
   end
 
+  # Sends order result to the supplier
+  def order_result_supplier(user, order, options = {})
+    @user     = user
+    @order    = order
+    @supplier = order.supplier
+
+    add_order_result_attachments order, options
+
+    subject = I18n.t('mailer.order_result_supplier.subject', :name => order.supplier.name)
+    subject += " (#{I18n.t('activerecord.attributes.order.pickup')}: #{format_date(order.pickup)})" if order.pickup
+
+    mail to: order.supplier.email,
+         cc: user,
+         reply_to: user,
+         subject: subject
+  end
+
   # Notify user if account balance is less than zero
   def negative_balance(user,transaction)
     @group        = user.ordergroup
@@ -115,6 +132,12 @@ class Mailer < ActionMailer::Base
     message.deliver_now
   rescue => error
     MailDeliveryStatus.create email: message.to[0], message: error.message
+  end
+
+  # separate method to allow plugins to mess with the attachments
+  def add_order_result_attachments(order, options = {})
+    attachments['order.pdf'] = OrderFax.new(order, options).to_pdf
+    attachments['order.csv'] = OrderCsv.new(order, options).to_csv
   end
 
 end

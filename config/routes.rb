@@ -39,6 +39,7 @@ Foodsoft::Application.routes.draw do
       member do
         post :finish
         post :add_comment
+        post :send_result_to_supplier
 
         get :receive
         post :receive

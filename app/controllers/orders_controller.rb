@@ -114,6 +114,15 @@ class OrdersController < ApplicationController
     redirect_to orders_url, alert: I18n.t('errors.general_msg', :msg => error.message)
   end
 
+  # Send a order to the supplier.
+  def send_result_to_supplier
+    order = Order.find(params[:id])
+    Mailer.order_result_supplier(@current_user, order).deliver_now
+    redirect_to order, notice: I18n.t('orders.send_to_supplier.notice')
+  rescue => error
+    redirect_to order, alert: I18n.t('errors.general_msg', :msg => error.message)
+  end
+
   def receive
     @order = Order.find(params[:id])
     unless request.post?

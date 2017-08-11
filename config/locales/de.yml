@@ -1220,6 +1220,18 @@ de:
         die Bestellung für "%{order}" wurde am %{when} von %{user} beendet.
         Für euch wurden die folgenden Artikel bestellt:
       text1: "o Gesamtpreis: %{sum}\n\nBestellung online einsehen: %{order_url}\n\n\nViele Grüße von %{foodcoop} "
+    order_result_supplier:
+      subject: Neue Bestellung für %{name}
+      text: |
+        Guten Tag,
+
+        die Foodcoop %{foodcoop} möchte gerne eine Bestellung abgeben.
+
+        Im Anhang befinden sich ein PDF und eine CSV-Tabelle.
+
+        Mit freundlichen Grüßen
+        %{user}
+        %{foodcoop}
     reset_password:
       subject: Neues Password für %{username}
       text: |-
@@ -1418,6 +1430,8 @@ de:
       submit: Bestellung in Empfang nehmen
       surplus_options: 'Verteilungsoptionen:'
       title: "»%{order}« in Empfang nehmen"
+    send_to_supplier:
+      notice: Die Bestellung wurde an die Lieferantin geschickt.
     show:
       action_end: Beenden!
       amounts: 'Netto/Bruttosumme:'
@@ -1452,6 +1466,7 @@ de:
         default: Suche nach Artikeln ...
         groups: Suche nach Bestellgruppen ...
       search_reset: Suche zurücksetzen
+      send_to_supplier: An Lieferantin schicken
       show_invoice: Rechnung anzeigen
       sort_article: Sortiert nach Artikeln
       sort_group: Sortiert nach Gruppen
