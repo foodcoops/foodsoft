@@ -66,7 +66,7 @@ def hande_mail(recipient, received_email)
     group: original_message.group,
     private: original_message.private,
     received_email: received_email,
-    subject: mail.subject
+    subject: mail.subject.gsub("[#{FoodsoftConfig[:name]}] ", "")
   if original_message.reply_to
     message.reply_to_message = original_message.reply_to_message
   else
