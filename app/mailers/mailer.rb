@@ -63,7 +63,7 @@ class Mailer < ActionMailer::Base
     @feedback = feedback
 
     mail to: FoodsoftConfig[:notification][:error_recipients],
-         :from => "#{show_user user} <#{user.email}>",
+         from: user,
          subject: I18n.t('mailer.feedback.subject', email: user.email)
   end
 
@@ -77,6 +77,11 @@ class Mailer < ActionMailer::Base
 
   def mail(args)
     args[:subject] = "[#{FoodsoftConfig[:name]}] #{args[:subject]}"
+
+    if args[:from].is_a? User
+      args[:reply_to] = args[:from] unless args[:reply_to]
+      args[:from] = "#{show_user args[:from]} via #{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>"
+    end
 
     [:bcc, :cc, :reply_to, :sender, :to].each do |k|
       user = args[k]

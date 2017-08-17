@@ -7,13 +7,11 @@ class MessagesMailer < Mailer
     if reply_email_domain
       hash = message.mail_hash_for_user recipient
       reply_to = "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig.scope}.#{message.id}.#{recipient.id}.#{hash}@#{reply_email_domain}>"
-    else
-      reply_to = "#{show_user(message.sender)} <#{message.sender.email}>"
     end
 
     mail subject: message.subject,
          to: recipient,
-         from: "#{show_user(message.sender)} via #{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
+         from: message.sender,
          reply_to: reply_to
   end
 end
