@@ -76,6 +76,7 @@ class Mailer < ActionMailer::Base
   end
 
   def mail(args)
+    args[:message_id] = "#{Mail.random_tag}@#{default_url_options[:host]}" unless args[:message_id]
     args[:subject] = "[#{FoodsoftConfig[:name]}] #{args[:subject]}"
 
     if args[:from].is_a? User
