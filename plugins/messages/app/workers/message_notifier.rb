@@ -7,10 +7,8 @@ class MessageNotifier < UserNotifier
 
     message.recipients.each do |recipient|
       if recipient.receive_email?
-        begin
-          MessagesMailer.foodsoft_message(recipient, message).deliver
-        rescue
-          Rails.logger.warn "Deliver failed for user \##{recipient.id}: #{recipient.email}"
+        Mailer.deliver_now_with_user_locale recipient do
+          MessagesMailer.foodsoft_message(recipient, message)
         end
       end
     end

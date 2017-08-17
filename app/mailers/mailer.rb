@@ -92,4 +92,17 @@ class Mailer < ActionMailer::Base
     super
   end
 
+  def self.deliver_now_with_user_locale(user, &block)
+    I18n.with_locale(user.settings['profile']['language']) do
+      self.deliver_now &block
+    end
+  end
+
+  def self.deliver_now
+    message = yield
+    message.deliver_now
+  rescue => error
+    Rails.logger.warn "Can't deliver mail to #{message.to[0]}: #{error.message}"
+  end
+
 end

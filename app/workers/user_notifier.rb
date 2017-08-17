@@ -13,12 +13,10 @@ class UserNotifier
     Order.find(order_id).group_orders.each do |group_order|
       next if group_order.ordergroup.nil?
       group_order.ordergroup.users.each do |user|
-        begin
-          I18n.with_locale(user.settings['profile']['language']) do
-            Mailer.order_result(user, group_order).deliver if user.settings.notify["order_finished"]
+        if user.settings.notify['order_finished']
+          Mailer.deliver_now_with_user_locale user do
+            Mailer.order_result(user, group_order)
           end
-        rescue
-          Rails.logger.warn "Can't deliver mail to #{user.email}"
         end
       end
     end
@@ -31,12 +29,10 @@ class UserNotifier
     transaction = FinancialTransaction.find transaction_id
 
     Ordergroup.find(ordergroup_id).users.each do |user|
-      begin
-        I18n.with_locale(user.settings['profile']['language']) do
-          Mailer.negative_balance(user, transaction).deliver if user.settings.notify["negative_balance"]
+      if user.settings.notify['negative_balance']
+        Mailer.deliver_now_with_user_locale user do
+          Mailer.negative_balance(user, transaction)
         end
-      rescue
-        Rails.logger.warn "Can't deliver mail to #{user.email}"
       end
     end
   end
