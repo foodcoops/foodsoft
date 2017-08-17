@@ -1171,7 +1171,7 @@ nl:
     dateformat: "%d %b"
     feedback:
       header: "%{user} schreef op %{date}:"
-      subject: Feedback van %{email}
+      subject: Feedback voor Foodsoft
     invite:
       subject: Uitnodiging voor de foodcoop
       text: |-

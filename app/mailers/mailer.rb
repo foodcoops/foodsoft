@@ -64,7 +64,7 @@ class Mailer < ActionMailer::Base
 
     mail to: FoodsoftConfig[:notification][:error_recipients],
          from: user,
-         subject: I18n.t('mailer.feedback.subject', email: user.email)
+         subject: I18n.t('mailer.feedback.subject')
   end
 
   def not_enough_users_assigned(task, user)

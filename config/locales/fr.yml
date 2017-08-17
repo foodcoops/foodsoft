@@ -1188,7 +1188,7 @@ fr:
     dateformat: "%d %b"
     feedback:
       header: 'Le %{date}, %{user} a écrit:'
-      subject: Retour de %{email}
+      subject: Feedback pour Foodsoft
     invite:
       subject: Invitation à participer à une Bouffecoop
       text: |-
