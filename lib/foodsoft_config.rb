@@ -78,6 +78,7 @@ class FoodsoftConfig
     def select_foodcoop(foodcoop)
       set_config foodcoop
       setup_database
+      setup_mailing
     end
 
     def select_default_foodcoop
@@ -218,6 +219,13 @@ class FoodsoftConfig
       database_config = ActiveRecord::Base.configurations[Rails.env]
       database_config = database_config.merge(config[:database]) if config[:database].present?
       ActiveRecord::Base.establish_connection(database_config)
+    end
+
+    def setup_mailing
+      [:protocol, :host, :port, :script_name].each do |k|
+        ActionMailer::Base.default_url_options[k] = self[k] if self[k]
+      end
+      ActionMailer::Base.default_url_options[:foodcoop] = scope
     end
 
     # Completes foodcoop configuration with program defaults.

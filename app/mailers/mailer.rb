@@ -16,7 +16,6 @@ class Mailer < ActionMailer::Base
   # Sends an email with instructions on how to reset the password.
   # Assumes user.setResetPasswordToken has been successfully called already.
   def reset_password(user)
-    set_foodcoop_scope
     @user = user
     @link = new_password_url(id: @user.id, token: @user.reset_password_token)
 
@@ -26,7 +25,6 @@ class Mailer < ActionMailer::Base
     
   # Sends an invite email.
   def invite(invite)
-    set_foodcoop_scope
     @invite = invite
     @link = accept_invitation_url(token: @invite.token)
 
@@ -36,7 +34,6 @@ class Mailer < ActionMailer::Base
 
   # Notify user of upcoming task.
   def upcoming_tasks(user, task)
-    set_foodcoop_scope
     @user = user
     @task = task
 
@@ -46,7 +43,6 @@ class Mailer < ActionMailer::Base
 
   # Sends order result for specific Ordergroup
   def order_result(user, group_order)
-    set_foodcoop_scope
     @order        = group_order.order
     @group_order  = group_order
 
@@ -56,7 +52,6 @@ class Mailer < ActionMailer::Base
 
   # Notify user if account balance is less than zero
   def negative_balance(user,transaction)
-    set_foodcoop_scope
     @group        = user.ordergroup
     @transaction  = transaction
 
@@ -65,7 +60,6 @@ class Mailer < ActionMailer::Base
   end
 
   def feedback(user, feedback)
-    set_foodcoop_scope
     @user = user
     @feedback = feedback
 
@@ -77,7 +71,6 @@ class Mailer < ActionMailer::Base
   end
 
   def not_enough_users_assigned(task, user)
-    set_foodcoop_scope
     @task = task
     @user = user
 
@@ -85,14 +78,4 @@ class Mailer < ActionMailer::Base
          :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.not_enough_users_assigned.subject', :task => task.name)
   end
 
-  private
-
-  # @todo this global stuff gives threading problems when foodcoops have different values! - pass args to `url_for` instead
-  def set_foodcoop_scope(foodcoop = FoodsoftConfig.scope)
-    [:protocol, :host, :port, :script_name].each do |k|
-      ActionMailer::Base.default_url_options[k] = FoodsoftConfig[k] if FoodsoftConfig[k]
-    end
-    ActionMailer::Base.default_url_options[:foodcoop] = foodcoop
-  end
-  
 end

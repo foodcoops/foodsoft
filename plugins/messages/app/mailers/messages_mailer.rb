@@ -1,7 +1,6 @@
 class MessagesMailer < Mailer
   # Sends an email copy of the given internal foodsoft message.
   def foodsoft_message(message, recipient)
-    set_foodcoop_scope
     @message = message
 
     reply_email_domain = FoodsoftConfig[:reply_email_domain]
