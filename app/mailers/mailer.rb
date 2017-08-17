@@ -9,8 +9,9 @@ class Mailer < ActionMailer::Base
 
   layout 'email'  # Use views/layouts/email.txt.erb
 
-  default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>"
-  
+  default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
+          'X-Auto-Response-Suppress' => 'All'
+
   # Sends an email with instructions on how to reset the password.
   # Assumes user.setResetPasswordToken has been successfully called already.
   def reset_password(user)
@@ -20,7 +21,7 @@ class Mailer < ActionMailer::Base
     mail :to => @user.email,
          :subject => "[#{FoodsoftConfig[:name]}] " + I18n.t('mailer.reset_password.subject', :username => show_user(@user))
   end
-    
+
   # Sends an invite email.
   def invite(invite)
     @invite = invite
