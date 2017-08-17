@@ -9,7 +9,7 @@ class Mailer < ActionMailer::Base
 
   layout 'email'  # Use views/layouts/email.txt.erb
 
-  default from: "Foodsoft <#{FoodsoftConfig[:email_sender]}>"
+  default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>"
   
   # Sends an email with instructions on how to reset the password.
   # Assumes user.setResetPasswordToken has been successfully called already.
