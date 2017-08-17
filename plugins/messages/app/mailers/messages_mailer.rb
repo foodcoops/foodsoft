@@ -11,7 +11,7 @@ class MessagesMailer < Mailer
       reply_to = "#{show_user(message.sender)} <#{message.sender.email}>"
     end
 
-    mail subject: "[#{FoodsoftConfig[:name]}] " + message.subject,
+    mail subject: message.subject,
          to: recipient.email,
          from: "#{show_user(message.sender)} via #{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
          reply_to: reply_to
