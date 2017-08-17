@@ -18,7 +18,7 @@ class Mailer < ActionMailer::Base
     @user = user
     @link = new_password_url(id: @user.id, token: @user.reset_password_token)
 
-    mail :to => @user.email,
+    mail to: user,
          subject: I18n.t('mailer.reset_password.subject', username: show_user(user))
   end
 
@@ -27,7 +27,7 @@ class Mailer < ActionMailer::Base
     @invite = invite
     @link = accept_invitation_url(token: @invite.token)
 
-    mail :to => @invite.email,
+    mail to: invite.email,
          subject: I18n.t('mailer.invite.subject')
   end
 
@@ -36,7 +36,7 @@ class Mailer < ActionMailer::Base
     @user = user
     @task = task
 
-    mail :to => user.email,
+    mail to: user,
          subject: I18n.t('mailer.upcoming_tasks.subject')
   end
 
@@ -45,7 +45,7 @@ class Mailer < ActionMailer::Base
     @order        = group_order.order
     @group_order  = group_order
 
-    mail :to => user.email,
+    mail to: user,
          subject: I18n.t('mailer.order_result.subject', name: group_order.order.name)
   end
 
@@ -54,7 +54,7 @@ class Mailer < ActionMailer::Base
     @group        = user.ordergroup
     @transaction  = transaction
 
-    mail :to => user.email,
+    mail to: user,
          subject: I18n.t('mailer.negative_balance.subject')
   end
 
@@ -62,7 +62,7 @@ class Mailer < ActionMailer::Base
     @user = user
     @feedback = feedback
 
-    mail :to => FoodsoftConfig[:notification]["error_recipients"],
+    mail to: FoodsoftConfig[:notification][:error_recipients],
          :from => "#{show_user user} <#{user.email}>",
          subject: I18n.t('mailer.feedback.subject', email: user.email)
   end
@@ -71,12 +71,18 @@ class Mailer < ActionMailer::Base
     @task = task
     @user = user
 
-    mail :to => user.email,
+    mail to: user,
          subject: I18n.t('mailer.not_enough_users_assigned.subject', task: task.name)
   end
 
   def mail(args)
     args[:subject] = "[#{FoodsoftConfig[:name]}] #{args[:subject]}"
+
+    [:bcc, :cc, :reply_to, :sender, :to].each do |k|
+      user = args[k]
+      args[k] = "#{show_user user} <#{user.email}>" if user.is_a? User
+    end
+
     super
   end
 

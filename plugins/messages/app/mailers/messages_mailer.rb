@@ -12,7 +12,7 @@ class MessagesMailer < Mailer
     end
 
     mail subject: message.subject,
-         to: recipient.email,
+         to: recipient,
          from: "#{show_user(message.sender)} via #{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
          reply_to: reply_to
   end
