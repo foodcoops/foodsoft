@@ -22,7 +22,7 @@ gem 'rails-i18n'
 
 gem 'mysql2'
 gem 'prawn'
-gem 'prawn-table'
+gem 'prawn-table', :git => 'https://github.com/straydogstudio/prawn-table.git', ref: '759a27b6'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'

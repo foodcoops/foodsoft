@@ -732,6 +732,7 @@ de:
       - Artikel
       - Einheit
       - Gebinde
+      - Nettopreis
       - FC-Preis
       - Menge
       title: 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
