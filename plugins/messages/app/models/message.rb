@@ -28,10 +28,6 @@ class Message < ActiveRecord::Base
   before_create :create_salt
   before_validation :clean_up_recipient_ids, :on => :create
 
-  def self.deliver(message_id)
-    find(message_id).deliver
-  end
-
   def clean_up_recipient_ids
     add_recipients Group.find(group_id).users unless group_id.blank?
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
@@ -89,19 +85,6 @@ class Message < ActiveRecord::Base
 
   def last_reply
     Message.where(reply_to: self.id).order(:created_at).last
-  end
-
-  def deliver
-    for user in recipients
-      if user.receive_email?
-        begin
-          MessagesMailer.foodsoft_message(self, user).deliver
-        rescue
-          Rails.logger.warn "Deliver failed for user \##{user.id}: #{user.email}"
-        end
-      end
-    end
-    update_attribute(:email_state, 1)
   end
 
   def is_readable_for?(user)
