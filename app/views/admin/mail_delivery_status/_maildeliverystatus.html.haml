@@ -1,0 +1,26 @@
+- if MailDeliveryStatus.count > 20
+  = items_per_page
+= pagination_links_remote @maildeliverystatus
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper MailDeliveryStatus, :created_at
+      %th= heading_helper MailDeliveryStatus, :email
+      %th= heading_helper MailDeliveryStatus, :message
+      %th= t 'ui.actions'
+  %tbody
+    - for maildeliverystatus in @maildeliverystatus
+      %tr{:class => cycle('even','odd', :name => 'groups')}
+        %td= format_time maildeliverystatus.created_at
+        %td
+          - if user = maildeliverystatus.user
+            = link_to maildeliverystatus.email, [:admin, user]
+          - else
+            = maildeliverystatus.email
+        %td
+          - if maildeliverystatus.attachment_data
+            = link_to maildeliverystatus.message, [:admin, maildeliverystatus]
+          - else
+            = maildeliverystatus.message
+        %td
+          = link_to t('ui.delete'), [:admin, maildeliverystatus], :method => :delete, class: 'btn btn-mini btn-danger'

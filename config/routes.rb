@@ -188,6 +188,10 @@ Foodsoft::Application.routes.draw do
         get :memberships, on: :member
       end
 
+      resources :mail_delivery_status, only: [:index, :show, :destroy] do
+        delete :index, on: :collection, action: :destroy_all
+      end
+
       resource :config, only: [:show, :update] do
         get :list
       end

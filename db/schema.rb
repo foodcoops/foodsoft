@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001000000) do
+ActiveRecord::Schema.define(version: 20170801000000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -174,6 +174,16 @@ ActiveRecord::Schema.define(version: 20161001000000) do
   end
 
   add_index "invoices", ["supplier_id"], name: "index_invoices_on_supplier_id", using: :btree
+
+  create_table "mail_delivery_status", force: :cascade do |t|
+    t.datetime "created_at"
+    t.string   "email",           null: false
+    t.string   "message",         null: false
+    t.string   "attachment_mime"
+    t.binary   "attachment_data"
+  end
+
+  add_index "mail_delivery_status", ["email"], name: "index_mail_delivery_status_on_email", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer "group_id", limit: 4, default: 0, null: false

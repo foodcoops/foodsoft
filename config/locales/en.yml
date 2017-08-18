@@ -74,6 +74,10 @@ en:
         orders: Order
         paid_on: Paid on
         supplier: Supplier
+      mail_delivery_status:
+        created_at: Time
+        email: Email
+        message: Message
       order:
         boxfill: Fill boxes after
         closed_by: Settled by
@@ -258,6 +262,12 @@ en:
       update:
         notice: Configuration saved.
     confirm: Are you sure?
+    mail_delivery_status:
+      destroy_all:
+        notice: All email problems were deleted
+      index:
+        destroy_all: Delete all email problems
+        title: Email problems
     ordergroups:
       destroy:
         error: 'Ordergroup could not be marked as deleted: %{error}'
@@ -308,7 +318,10 @@ en:
         person: Person
         preference: Preferences
         send_message: Send message
+        show_email_problems: Show email problems
         sudo: Take on identity
+      users:
+        show_email_problems: Show email problems
     workgroups:
       destroy:
         error: 'Workgroup could not be deleted: %{error}'
@@ -1298,6 +1311,7 @@ en:
     admin:
       config: Configuration
       home: Overview
+      mail_delivery_status: Email problems
       ordergroups: Ordergroups
       title: Administration
       users: Users
