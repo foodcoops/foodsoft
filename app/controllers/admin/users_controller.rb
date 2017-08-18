@@ -3,6 +3,7 @@ class Admin::UsersController < Admin::BaseController
 
   def index
     @users = params[:show_deleted] ? User.deleted : User.undeleted
+    @users = @users.includes(:mail_delivery_status)
 
     # if somebody uses the search field:
     @users = @users.natural_search(params[:user_name]) unless params[:user_name].blank?

@@ -74,6 +74,10 @@ de:
         orders: Bestellung
         paid_on: Bezahlt am
         supplier: Lieferant
+      mail_delivery_status:
+        created_at: Zeitpunkt
+        email: E-Mail
+        message: Nachicht
       order:
         boxfill: Kistenfüllen ab
         closed_by: Abgerechnet von
@@ -256,6 +260,12 @@ de:
       update:
         notice: Einstellungen gespeichert.
     confirm: Bist Du sicher?
+    mail_delivery_status:
+      destroy_all:
+        notice: Alle E-Mail Probleme wurden gelöscht
+      index:
+        destroy_all: Alle E-Mail Probleme löschen
+        title: E-Mail Probleme
     ordergroups:
       destroy:
         error: 'Bestellgruppe konnte nicht als gelöscht markiert werden: %{error}'
@@ -306,7 +316,10 @@ de:
         person: Person
         preference: Einstellungen
         send_message: Nachricht senden
+        show_email_problems: Zeige E-Mail Probleme
         sudo: Als anderer Benutzer anmelden
+      users:
+        show_email_problems: Zeige E-Mail Probleme
     workgroups:
       destroy:
         error: 'Arbeitsgruppe konnte nicht gelöscht werden: %{error}'
@@ -1289,6 +1302,7 @@ de:
     admin:
       config: Einstellungen
       home: "Übersicht"
+      mail_delivery_status: E-Mail Probleme
       ordergroups: Bestellgruppen
       title: Administration
       users: Benutzer/innen

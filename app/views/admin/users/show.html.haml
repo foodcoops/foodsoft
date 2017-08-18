@@ -12,7 +12,10 @@
         %dt= heading_helper User, :name
         %dd= h @user.name
         %dt= heading_helper User, :email
-        %dd= @user.email
+        %dd
+          = @user.email
+          - if @user.mail_delivery_status.any?
+            = link_to t('.show_email_problems'), admin_mail_delivery_status_index_path(email: @user.email), class: 'btn btn-warning btn-mini'
         %dt= heading_helper User, :phone
         %dd= @user.phone
         %dt= heading_helper User, :last_login

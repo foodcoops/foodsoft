@@ -1,0 +1,7 @@
+- title t('.title')
+
+- content_for :actionbar do
+  = link_to t('.destroy_all'), admin_mail_delivery_status_index_path, :method => :delete, class: 'btn btn-danger'
+
+#maildeliverystatus
+  = render "maildeliverystatus"

@@ -102,7 +102,7 @@ class Mailer < ActionMailer::Base
     message = yield
     message.deliver_now
   rescue => error
-    Rails.logger.warn "Can't deliver mail to #{message.to[0]}: #{error.message}"
+    MailDeliveryStatus.create email: message.to[0], message: error.message
   end
 
 end
