@@ -10,15 +10,68 @@
         theme: 'facebook'
       });
 
-      $('#message_send_to_all').on('change', function() {
-        if ($(this).is(':checked')) {
-          $('#recipients').slideUp();
-        } else {
+      function slideRecipients() {
+        if ($('#message_send_to_all').is(':checked')) {
           $('#recipients').slideDown();
+        } else {
+          $('#recipients').slideUp();
         }
-      });
-      // make sure state is correct when loading
-      $('#recipients').toggle(!$('#message_send_to_all').is(':checked'));
+      }
+
+      function updateSlideState() {
+        switch($('input[name="message[send_method]"]:checked').val()) {
+        case 'all':
+          $('#workgroup').slideUp();
+          $('#ordergroup').slideUp();
+          $('#messagegroup').slideUp();
+          $('#order').slideUp();
+          $('#recipients').slideUp();
+          break;
+
+        case 'workgroup':
+          $('#workgroup').slideDown();
+          $('#ordergroup').slideUp();
+          $('#messagegroup').slideUp();
+          $('#order').slideUp();
+          $('#recipients').slideDown();
+          break;
+
+        case 'ordergroup':
+          $('#workgroup').slideUp();
+          $('#ordergroup').slideDown();
+          $('#messagegroup').slideUp();
+          $('#order').slideUp();
+          $('#recipients').slideDown();
+          break;
+
+        case 'messagegroup':
+          $('#workgroup').slideUp();
+          $('#ordergroup').slideUp();
+          $('#messagegroup').slideDown();
+          $('#order').slideUp();
+          $('#recipients').slideDown();
+          break;
+
+        case 'order':
+          $('#workgroup').slideUp();
+          $('#ordergroup').slideUp();
+          $('#messagegroup').slideUp();
+          $('#order').slideDown();
+          $('#recipients').slideDown();
+          break;
+
+        case 'recipients':
+          $('#workgroup').slideUp();
+          $('#ordergroup').slideUp();
+          $('#messagegroup').slideUp();
+          $('#order').slideUp();
+          $('#recipients').slideDown();
+          break;
+        }
+      }
+
+      $('input[name="message[send_method]"]').on('click', updateSlideState);
+      updateSlideState();
     });
 
 - title t('.title')
@@ -29,9 +82,7 @@
   - if @message.reply_to
     %p= t('.reply_to', link: link_to(t('.message'), message_path(@message.reply_to))).html_safe
 
-  - if FoodsoftConfig[:mailing_list].blank?
-    = f.input :send_to_all, :as => :boolean
-  - else
+  - unless FoodsoftConfig[:mailing_list].blank?
     %b= t('.list.desc', list: mail_to(FoodsoftConfig[:mailing_list])).html_safe
     %br/
     %small{:style => "color:grey"}
@@ -42,9 +93,20 @@
       - else
         = t('.list.mail', email: mail_to(FoodsoftConfig[:mailing_list_subscribe])).html_safe
 
+  - send_method_collection = [:workgroup, :ordergroup, :messagegroup, :order, :recipients]
+  - send_method_collection.unshift :all if FoodsoftConfig[:mailing_list].blank?
+  = f.input :send_method, :as => :radio_buttons, :collection => send_method_collection, :label => false, :label_method => ->(obj){ t("activerecord.attributes.message.send_method.#{obj}") }
+
+  #workgroup
+    = f.input :workgroup_id, :as => :select, include_blank: false, :collection => Workgroup.undeleted.order(:name).includes(:memberships).reject { |g| g.memberships.empty? }
+  #ordergroup
+    = f.input :ordergroup_id, :as => :select, include_blank: false, :collection => Ordergroup.undeleted.order(:name).includes(:memberships).reject { |g| g.memberships.empty? }
+  #messagegroup
+    = f.input :messagegroup_id, :as => :select, include_blank: false, :collection => Messagegroup.undeleted.order(:name)
+  #order
+    = f.input :order_id, :as => :select, include_blank: false, :collection => Order.finished_not_closed.order('pickup DESC').includes(:supplier).limit(25)
   #recipients
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.where(id: @message.recipients_ids).map(&:token_attributes).to_json }
-    = f.input :group_id, :as => :select, :collection => Group.undeleted.order('type DESC', 'name ASC').reject { |g| g.memberships.empty? }
   = f.input :private, inline_label: t('.hint_private')
   = f.input :subject, input_html: {class: 'input-xxlarge'}
   = f.input :body, input_html: {class: 'input-xxlarge', rows: 13}

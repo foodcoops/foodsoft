@@ -6,7 +6,7 @@ class Message < ActiveRecord::Base
   belongs_to :reply_to_message, :class_name => "Message", :foreign_key => "reply_to"
 
   serialize :recipients_ids, Array
-  attr_accessor :send_to_all, :recipient_tokens
+  attr_accessor :send_method, :recipient_tokens, :order_id
 
   scope :pending, -> { where(:email_state => 0) }
   scope :sent, -> { where(:email_state => 1) }
@@ -25,13 +25,18 @@ class Message < ActiveRecord::Base
   validates_length_of :subject, :in => 1..255
   validates_inclusion_of :email_state, :in => EMAIL_STATE.values
 
+  after_initialize do
+    @send_method ||= 'recipients'
+  end
+
   before_create :create_salt
   before_validation :clean_up_recipient_ids, :on => :create
 
   def clean_up_recipient_ids
     add_recipients Group.find(group_id).users unless group_id.blank?
+    add_recipients Order.find(order_id).users_ordered unless order_id.blank?
     self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
-    self.recipients_ids = User.undeleted.collect(&:id) if send_to_all == "1"
+    self.recipients_ids = User.undeleted.collect(&:id) if send_method == 'all'
   end
 
   def add_recipients(users)
@@ -40,14 +45,42 @@ class Message < ActiveRecord::Base
   end
 
   def group_id=(group_id)
-    @group_id = group_id
-    add_recipients Group.find(group_id).users unless group_id.blank?
+    group = Group.find(group_id) unless group_id.blank?
+    if group
+      @send_method = 'workgroup' if group.type == 'Workgroup'
+      @send_method = 'ordergroup' if group.type == 'Ordergroup'
+      @send_method = 'messagegroup' if group.type == 'Messagegroup'
+    end
     super
+  end
+
+  def workgroup_id
+    @group_id if send_method == 'workgroup'
+  end
+
+  def ordergroup_id
+    @group_id if send_method == 'ordergroup'
+  end
+
+  def messagegroup_id
+    @group_id if send_method == 'messagegroup'
+  end
+
+  def workgroup_id=(workgroup_id)
+    @group_id = workgroup_id if send_method == 'workgroup'
+  end
+
+  def ordergroup_id=(ordergroup_id)
+    @group_id = ordergroup_id if send_method == 'ordergroup'
+  end
+
+  def messagegroup_id=(messagegroup_id)
+    @group_id = messagegroup_id if send_method == 'messagegroup'
   end
 
   def order_id=(order_id)
     @order_id = order_id
-    add_recipients Order.find(order_id).users_ordered unless order_id.blank?
+    @send_method ||= 'order'
   end
 
   def recipient_tokens=(ids)

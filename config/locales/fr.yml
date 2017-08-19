@@ -76,10 +76,8 @@ fr:
         supplier: Fournisseur-e
       message:
         body: Contenu
-        group_id: Cellule ou équipe
         private: Privé
         recipient_tokens: Destinataires
-        send_to_all: Envoyer à tous les membres
         subject: Sujet
       order:
         boxfill: 

@@ -74,13 +74,6 @@ de:
         orders: Bestellung
         paid_on: Bezahlt am
         supplier: Lieferant
-      message:
-        body: Inhalt
-        group_id: Gruppe
-        private: Privat
-        recipient_tokens: Empfänger_innen
-        send_to_all: An alle Mitglieder schicken
-        subject: Betreff
       order:
         boxfill: Kistenfüllen ab
         closed_by: Abgerechnet von

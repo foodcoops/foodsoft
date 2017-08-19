@@ -74,13 +74,6 @@ en:
         orders: Order
         paid_on: Paid on
         supplier: Supplier
-      message:
-        body: Body
-        group_id: Group
-        private: Private
-        recipient_tokens: Recipients
-        send_to_all: Send to all members
-        subject: Subject
       order:
         boxfill: Fill boxes after
         closed_by: Settled by

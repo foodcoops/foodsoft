@@ -3,11 +3,20 @@ en:
     attributes:
       message:
         body: Body
-        group_id: Group
+        messagegroup_id: Messagegroup
+        order_id: Order
+        ordergroup_id: Ordergroup
         private: Private
-        recipient_tokens: Recipients
-        send_to_all: Send to all members
+        recipient_tokens: (Additional) recipients
+        send_method:
+          all: Send to all members
+          recipients: Send to specific members
+          order: Send to members, who participated at an order
+          ordergroup: Send to members of a ordergroup
+          messagegroup: Send to members of a messagegroup
+          workgroup: Send to members of a workgroup
         subject: Subject
+        workgroup_id: Workgroup
       messagegroup:
         description: Description
         name: Name
