@@ -12,7 +12,8 @@
         %li= link_to t('.logout'), logout_path
     %li{class: ('disabled' if FoodsoftConfig[:homepage].blank?)}
       = link_to FoodsoftConfig[:name], FoodsoftConfig[:homepage]
-    %li= link_to t('.help'), FoodsoftConfig[:help_url]
+    - if FoodsoftConfig[:help_url]
+      %li= link_to t('.help'), FoodsoftConfig[:help_url]
     %li= link_to t('.feedback.title'), new_feedback_path, title: t('.feedback.desc')
   .clearfix
 
