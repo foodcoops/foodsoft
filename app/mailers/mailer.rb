@@ -89,6 +89,12 @@ class Mailer < ActionMailer::Base
       args[k] = "#{show_user user} <#{user.email}>" if user.is_a? User
     end
 
+    reply_email_domain = FoodsoftConfig[:reply_email_domain]
+    if reply_email_domain && !args[:return_path]
+      address = Mail::Parsers::AddressListsParser.new.parse(args[:to]).addresses.first
+      args[:return_path] = "<#{FoodsoftConfig.scope}.bounce+#{address.local}=#{address.domain}@#{reply_email_domain}>"
+    end
+
     super
   end
 
