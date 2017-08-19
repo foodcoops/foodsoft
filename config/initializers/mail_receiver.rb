@@ -1,0 +1,1 @@
+FoodsoftMailReceiver.register BounceMailReceiver
