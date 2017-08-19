@@ -76,10 +76,8 @@ nl:
         supplier: Leverancier
       message:
         body: Bericht
-        group_id: Groep
         private: Privé
         recipient_tokens: Geadresseerden
-        send_to_all: Aan alle leden sturen
         subject: Onderwerp
       order:
         boxfill: Dozen vullen na

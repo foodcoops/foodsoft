@@ -1,6 +1,22 @@
 de:
   activerecord:
     attributes:
+      message:
+        body: Inhalt
+        messagegroup_id: Nachrichtengruppe
+        order_id: Bestellung
+        ordergroup_id: Bestellgruppe
+        private: Privat
+        recipient_tokens: (Zusätzliche) Empfänger_innen
+        send_method:
+          all: An alle Mitglieder schicken
+          recipients: An ausgewählte Mitglieder schicken
+          order: An die Mitglieder schicken, die bei einer Bestellung etwas bestellt haben
+          ordergroup: An die Mitglieder einer Bestellgruppe schicken
+          messagegroup: An die Mitglieder einer Nachrichtengruppe schicken
+          workgroup: An die Mitglieder einer Arbeitsgruppe schicken
+        subject: Betreff
+        workgroup_id: Arbeitsgruppe
       messagegroup:
         description: Beschreibung
         name: Name
