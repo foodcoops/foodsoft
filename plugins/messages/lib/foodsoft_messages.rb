@@ -1,4 +1,5 @@
 require "foodsoft_messages/engine"
+require "foodsoft_messages/mail_receiver"
 require "foodsoft_messages/user_link"
 require "deface"
 

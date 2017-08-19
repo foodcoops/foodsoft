@@ -43,6 +43,21 @@ namespace :foodsoft do
       rake_say "created until #{created_until}"
     end
   end
+
+  desc "Parse incoming email on stdin (options: RECIPIENT=foodcoop.handling)"
+  task :parse_reply_email => :environment do
+    FoodsoftMailReceiver.received ENV['RECIPIENT'], STDIN.read
+  end
+
+  desc "Start STMP server for incoming email (options: SMTP_SERVER_PORT=2525, SMTP_SERVER_HOST=0.0.0.0)"
+  task :reply_email_smtp_server => :environment do
+    port = ENV['SMTP_SERVER_PORT'].present? ? ENV['SMTP_SERVER_PORT'].to_i : 2525
+    host = ENV['SMTP_SERVER_HOST']
+    rake_say "Started SMTP server for incoming email on port #{port}."
+    server = FoodsoftMailReceiver.new port, host
+    server.start
+    server.join
+  end
 end
 
 # Helper

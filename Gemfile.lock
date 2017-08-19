@@ -24,9 +24,7 @@ PATH
     foodsoft_messages (0.0.1)
       base32
       deface (~> 1.0)
-      gserver
       mail
-      mini-smtp-server
       rails
 
 PATH
@@ -172,7 +170,6 @@ GEM
     git-version-bump (0.15.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    gserver (0.0.1)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -240,10 +237,10 @@ GEM
       rack-contrib (~> 1.1)
       railties (>= 3.0.0, < 5.1.0)
     method_source (0.8.2)
+    midi-smtp-server (2.1.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini-smtp-server (0.0.2)
     mini_portile2 (2.2.0)
     minitest (5.10.1)
     mono_logger (1.1.0)
@@ -518,6 +515,7 @@ DEPENDENCIES
   localize_input!
   mailcatcher
   meta_request
+  midi-smtp-server
   mysql2
   prawn
   prawn-table
