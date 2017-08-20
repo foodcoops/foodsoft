@@ -18,12 +18,14 @@ namespace :foodsoft do
 
   desc "Notify workgroup of upcoming weekly task"
   task :notify_users_of_weekly_task => :environment do
-    for workgroup in Workgroup.all
-      for task in workgroup.tasks.where(due_date: 7.days.from_now.to_date)
-        unless task.enough_users_assigned?
-          puts "Notify workgroup: #{workgroup.name} for task #{task.name}"
+    tasks = Task.where(done: false, due_date: 7.day.from_now.to_date)
+    for task in tasks
+      unless task.enough_users_assigned?
+        workgroup = task.workgroup
+        if workgroup
+          rake_say "Notify workgroup: #{workgroup.name} for task #{task.name}"
           for user in workgroup.users
-            if user.settings.messages['send_as_email'] == "1" && !user.email.blank?
+            if user.receive_email?
               begin
                 Mailer.not_enough_users_assigned(task, user).deliver_now
               rescue
