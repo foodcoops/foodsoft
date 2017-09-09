@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# Run single command from Procfile
+#
+# This script is a basic replacement for foreman when running on Docker. When
+# starting the docker instance, specify as command `script/start <type>`.
+# `type` is looked up in `Procfile` and the command is started. This allows e.g.
+# docker-compose to run multiple process/dyno types from a single image, without
+# needing to know the exact command (which may change over time).
+#
+if [ ! "$1" ]; then
+  echo "Usage: $0 <process type>" 1>&2
+  echo
+  echo "Note that some process types need the PORT environment variable."
+  exit 1
+fi
+
+CMD=`cat Procfile | grep "^$1:" | cut -d: -f2-`
+if [ ! "$CMD" ]; then
+  echo "Process type $1 not found in Procfile" 1>&2
+  exit 1
+fi
+
+exec /bin/sh -c "$CMD"

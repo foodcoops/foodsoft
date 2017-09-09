@@ -141,18 +141,7 @@ explained here.
    Edit `app_config.yml` to suit your needs or just keep the defaults for now.
 
 
-4. **Secret token**
-
-   The user session are stored in cookies. Do avoid misusing the cookies and
-   its sensitive information, rails will encrypt it with a token. So copy the
-   config file
-
-        cp config/initializers/secret_token.rb.SAMPLE config/initializers/secret_token.rb
-
-   and modify the token!! You can run `bundle exec rake secret`
-
-
-5. **Create database (schema) and load defaults**
+4. **Create database (schema) and load defaults**
 
         rake db:setup
 
@@ -160,7 +149,7 @@ explained here.
    password 'secret'.
 
 
-6. (optional) Get **background jobs** done
+5. (optional) Get **background jobs** done
 
    Time intensive tasks may block the web request. To run these in a separate
    task, you can install Redis and enable Resque:
@@ -173,7 +162,7 @@ explained here.
    `resque-web`.
 
 
-7. (optional) **View mails in browser** instead in your logs
+6. (optional) **View mails in browser** instead in your logs
 
    We use mailcatcher in development mode to view all delivered mails in a
    browser interface.  Just install mailcatcher with gem install mailcatcher
