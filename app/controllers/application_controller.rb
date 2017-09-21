@@ -38,6 +38,17 @@ class ApplicationController < ActionController::Base
     session[:locale] = user.locale
   end
 
+  def login_and_redirect_to_return_to(user, *args)
+    login user
+    if session[:return_to].present?
+      redirect_to_url = session[:return_to]
+      session[:return_to] = nil
+    else
+      redirect_to_url = root_url
+    end
+    redirect_to redirect_to_url, *args
+  end
+
   def logout
     session[:user_id] = nil
     session[:return_to] = nil

@@ -1,0 +1,6 @@
+de:
+  discourse:
+    callback:
+      invalid_nonce: Ungültige nonce
+      invalid_signature: Ungültige Signature
+      logged_in: Angemeldet!

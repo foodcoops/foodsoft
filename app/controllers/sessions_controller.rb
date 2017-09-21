@@ -10,14 +10,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:nick], params[:password])
     if user
       user.update_attribute(:last_login, Time.now)
-      login user
-      if session[:return_to].present?
-        redirect_to_url = session[:return_to]
-        session[:return_to] = nil
-      else
-        redirect_to_url = root_url
-      end
-      redirect_to redirect_to_url, :notice => I18n.t('sessions.logged_in')
+      login_and_redirect_to_return_to user, :notice => I18n.t('sessions.logged_in')
     else
       flash.now.alert = I18n.t(FoodsoftConfig[:use_nick] ? 'sessions.login_invalid_nick' : 'sessions.login_invalid_email')
       render "new"
