@@ -1,0 +1,5 @@
+/ insert_after 'noscript'
+- if FoodsoftDiscourse.enabled?
+  .center
+    = link_to t('.discourse_login'), discourse_initiate_path, class: 'btn btn-primary'
+  %hr

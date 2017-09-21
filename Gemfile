@@ -53,6 +53,7 @@ gem 'ruby-filemagic'
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
 gem 'foodsoft_wiki', path: 'plugins/wiki'
 gem 'foodsoft_messages', path: 'plugins/messages'
+gem 'foodsoft_discourse', path: 'plugins/discourse'
 
 # plugins not enabled by default
 #gem 'foodsoft_current_orders', path: 'plugins/current_orders'
