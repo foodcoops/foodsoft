@@ -89,7 +89,7 @@ class Mailer < ActionMailer::Base
 
   # @todo this global stuff gives threading problems when foodcoops have different values! - pass args to `url_for` instead
   def set_foodcoop_scope(foodcoop = FoodsoftConfig.scope)
-    [:protocol, :host, :port].each do |k|
+    [:protocol, :host, :port, :script_name].each do |k|
       ActionMailer::Base.default_url_options[k] = FoodsoftConfig[k] if FoodsoftConfig[k]
     end
     ActionMailer::Base.default_url_options[:foodcoop] = foodcoop

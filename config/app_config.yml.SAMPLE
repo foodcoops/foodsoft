@@ -134,6 +134,7 @@ default: &defaults
   #protocol: http
   #host: localhost
   #port: 3000
+  #script_name: "/"
 
   # Access to sharedlists, the external article-database.
   # This allows a foodcoop to subscribe to a selection of a supplier's full assortment,
