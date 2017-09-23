@@ -177,19 +177,16 @@ class ApplicationController < ActionController::Base
   # It uses the subdomain to select the appropriate section in the config files
   # Use this method as a before filter (first filter!) in ApplicationController
   def select_foodcoop
-    if FoodsoftConfig[:multi_coop_install]
-      if params[:foodcoop].present?
-        begin
-          # Set Config and database connection
-          FoodsoftConfig.select_foodcoop params[:foodcoop]
-        rescue => error
-          FoodsoftConfig.select_default_foodcoop
-          redirect_to root_url, alert: error.message
-        end
-      else
-        FoodsoftConfig.select_default_foodcoop
-        redirect_to root_url
-      end
+    return unless FoodsoftConfig[:multi_coop_install]
+
+    foodcoop = params[:foodcoop]
+    if foodcoop.blank?
+      FoodsoftConfig.select_default_foodcoop
+      redirect_to root_url
+    elsif FoodsoftConfig.allowed_foodcoop? foodcoop
+      FoodsoftConfig.select_foodcoop foodcoop
+    else
+      raise ActionController::RoutingError.new 'Foodcoop Not Found'
     end
   end
 

@@ -11,9 +11,16 @@ class ErrorsController < ApplicationController
 
   private
 
+  def select_foodcoop
+    foodcoop = params[:foodcoop]
+    if FoodsoftConfig.allowed_foodcoop? foodcoop
+      FoodsoftConfig.select_foodcoop foodcoop
+    else
+      FoodsoftConfig.select_default_foodcoop
+    end
+  end
+
   def current_layout
-    # Need foodcoop for `current_user`, even though it may not be retrieved from the url.
-    params[:foodcoop] ||= session[:scope]
     current_user ? 'application' : 'login'
   end
 

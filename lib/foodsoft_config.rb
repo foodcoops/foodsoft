@@ -159,6 +159,10 @@ class FoodsoftConfig
       end
     end
 
+    def allowed_foodcoop?(foodcoop)
+      foodcoops.include? foodcoop
+    end
+
     # @return [Boolean] Whether this key may be set in the database
     def allowed_key?(key)
       # fast check for keys without nesting
