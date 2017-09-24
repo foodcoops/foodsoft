@@ -7,8 +7,11 @@ module FoodsoftDiscourse
         alias orig_redirect_to_login redirect_to_login
 
         def redirect_to_login(options={})
-          return orig_redirect_to_login(options) unless FoodsoftDiscourse.enabled?
-          redirect_to discourse_initiate_path
+          if FoodsoftDiscourse.enabled? && !FoodsoftConfig[:discourse_sso]
+            redirect_to discourse_initiate_path
+          else
+            orig_redirect_to_login(options)
+          end
         end
 
       end

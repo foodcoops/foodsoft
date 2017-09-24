@@ -142,15 +142,19 @@ class ApplicationController < ActionController::Base
   #     end
   #
   def require_plugin_enabled(plugin)
-    unless plugin.enabled?
-      redirect_to root_path, alert: I18n.t('application.controller.error_feature_disabled')
-    end
+    redirect_to_root_with_feature_disabled_alert unless plugin.enabled?
+  end
+
+  def require_config_enabled(config)
+    redirect_to_root_with_feature_disabled_alert unless FoodsoftConfig[config]
   end
 
   def require_config_disabled(config)
-    if FoodsoftConfig[config]
-      redirect_to root_path, alert: I18n.t('application.controller.error_feature_disabled')
-    end
+    redirect_to_root_with_feature_disabled_alert if FoodsoftConfig[config]
+  end
+
+  def redirect_to_root_with_feature_disabled_alert
+    redirect_to root_path, alert: I18n.t('application.controller.error_feature_disabled')
   end
 
   # Redirect to the login page, used in authenticate, plugins can override this.
