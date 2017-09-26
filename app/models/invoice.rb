@@ -30,7 +30,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def user_can_edit?(user)
-    user.role_finance? || (user.role_invoices? && !self.paid_on && self.created_by.id == user.id)
+    user.role_finance? || (user.role_invoices? && !self.paid_on && self.created_by.try(:id) == user.id)
   end
 
   # Amount without deposit
