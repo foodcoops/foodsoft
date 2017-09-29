@@ -19,7 +19,10 @@ class MessagesMailReceiver
     mail_part = nil
     if mail.multipart?
       for part in mail.parts
-        mail_part = part if MIME::Type.simplified(part.content_type) == "text/plain"
+        content_type = MIME::Type.simplified(part.content_type)
+        if content_type == "text/plain" || !mail_part && content_type == "text/html"
+          mail_part = part
+        end
       end
     else
       mail_part = mail
@@ -28,6 +31,10 @@ class MessagesMailReceiver
     body = mail_part.body.decoded
     unless mail_part.content_type_parameters.nil?
       body = body.force_encoding mail_part.content_type_parameters[:charset]
+    end
+
+    if MIME::Type.simplified(mail_part.content_type) == "text/html"
+      body = Nokogiri::HTML(body).text
     end
 
     message = user.send_messages.new body: body,
