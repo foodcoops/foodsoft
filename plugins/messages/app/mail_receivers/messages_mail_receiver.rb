@@ -1,3 +1,5 @@
+require "email_reply_trimmer"
+
 class MessagesMailReceiver
 
   def self.regexp
@@ -36,6 +38,8 @@ class MessagesMailReceiver
     if MIME::Type.simplified(mail_part.content_type) == "text/html"
       body = Nokogiri::HTML(body).text
     end
+
+    body = EmailReplyTrimmer.trim(body)
 
     message = user.send_messages.new body: body,
       group: original_message.group,

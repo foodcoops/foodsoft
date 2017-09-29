@@ -24,6 +24,7 @@ PATH
     foodsoft_messages (0.0.1)
       base32
       deface (~> 1.0)
+      email_reply_trimmer
       mail
       rails
 
@@ -151,6 +152,7 @@ GEM
     docile (1.1.5)
     domain_name (0.5.20170223)
       unf (>= 0.0.5, < 1.0.0)
+    email_reply_trimmer (0.1.8)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
     exception_notification (4.2.1)
