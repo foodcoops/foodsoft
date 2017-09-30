@@ -1,7 +1,7 @@
 # encoding: utf-8
 class OrderMatrix < OrderPdf
 
-  MAX_ARTICLES_PER_PAGE = 16 # How many order_articles shoud written on a page
+  MAX_ARTICLES_PER_PAGE = 22 # How many order_articles shoud written on a page
 
   def filename
     I18n.t('documents.order_matrix.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
@@ -13,7 +13,7 @@ class OrderMatrix < OrderPdf
   end
 
   def body
-    order_articles = @order.order_articles.ordered
+    order_articles = @order.order_articles.sort_by{|a| a.article.name.downcase}
 
     text I18n.t('documents.order_matrix.heading'), style: :bold
     move_down 5
@@ -21,14 +21,18 @@ class OrderMatrix < OrderPdf
     move_down 10
 
     order_articles_data = [I18n.t('documents.order_matrix.rows')]
+      
 
     order_articles.each do |a|
       order_articles_data << [a.article.name,
                               a.article.unit,
                               a.price.unit_quantity,
+                              number_to_currency(a.price.price * a.price.unit_quantity),
                               number_with_precision(article_price(a), precision: 2),
                               a.units]
     end
+    
+    #order_articles_data.sort_by!{|a| a[0].downcase}
 
     table order_articles_data, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
       table.cells.border_width = 1
@@ -51,12 +55,14 @@ class OrderMatrix < OrderPdf
 
       # Make order_articles header
       header = [""]
+      
       for header_article in current_order_articles
         name = header_article.article.name.gsub(/[-\/]/, " ").gsub(".", ". ")
-        name = name.split.collect { |w| w.truncate(8) }.join(" ")
-        header << name.truncate(30)
+        name = name.split.collect { |w| w.truncate(20) }.join(" ")
+        header << name.truncate(35)+' - ('+header_article.article.unit+')'
+   
       end
-
+   
       # Collect group results
       groups_data = [header]
 
@@ -74,13 +80,22 @@ class OrderMatrix < OrderPdf
 
       # Make table
       column_widths = [85]
-      (MAX_ARTICLES_PER_PAGE + 1).times { |i| column_widths << 41 unless i == 0 }
-      table groups_data, column_widths: column_widths, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
-        table.cells.border_width = 1
-        table.cells.border_color = '666666'
-        table.row_colors = ['ffffff','ececec']
+      (MAX_ARTICLES_PER_PAGE + 1).times { |i| column_widths << 30 unless i == 0 }
+      table groups_data, column_widths: column_widths, cell_style: {size: fontsize(8), overflow: :shrink_to_fit } do |table|
+   
+      table.rows(0).rotate = 90
+      table.rows(0).padding = 2
+      table.rows(0).height = 90
+      table.rows(0).overflow = :truncate 
+      table.rows(0).align = :left
+      table.rows(0).min_font_size = 6
+     # table.rows(0).valign = :bottom
+        
+      table.cells.border_width = 1
+      table.cells.border_color = '666666'
+      table.row_colors = ['ffffff','ececec']
       end
-
+   
     end
   end
 

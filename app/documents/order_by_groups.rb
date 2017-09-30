@@ -47,7 +47,7 @@ class OrderByGroups < OrderPdf
         # borders
         table.cells.borders = [:bottom]
         table.cells.border_width = 0.02
-        table.cells.border_color = 'dddddd'
+        table.cells.border_color = '000000'
         table.rows(0).border_width = 1
         table.rows(0).border_color = '666666'
         table.rows(0).column(5).font_style = :bold
