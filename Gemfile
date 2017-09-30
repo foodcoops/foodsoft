@@ -23,6 +23,7 @@ gem 'rails-i18n'
 gem 'mysql2'
 gem 'prawn'
 gem 'prawn-table'
+gem 'haml', '~> 4.0' # some breaking changes in version 5, remove this line again when fixed
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
