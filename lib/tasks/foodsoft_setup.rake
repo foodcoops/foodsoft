@@ -33,7 +33,6 @@ namespace :foodsoft do
     setup_app_config
     setup_development
     setup_database
-    setup_secret_token
     start_mailcatcher
     puts yellow "All done! Your foodcoft should be running smoothly."
     start_server
@@ -44,7 +43,6 @@ namespace :foodsoft do
     task :stock_config do
       setup_app_config
       setup_development
-      setup_secret_token
     end
   end
 end
@@ -101,16 +99,6 @@ def setup_development
   puts yellow "Copying #{file}..."
   %x( cp #{Rails.root.join("#{file}.SAMPLE")} #{Rails.root.join(file)} )
   reminder(file)
-end
-
-def setup_secret_token
-  file = 'config/initializers/secret_token.rb'
-  return nil if skip?(file)
-  
-  puts yellow "Generating secret_token and writing to #{file}..."
-  Rake::Task["secret"].reenable
-  secret = capture_stdout { Rake::Task["secret"].invoke }
-  %x( touch #{Rails.root.join("#{file}")}; echo 'Foodsoft::Application.config.secret_key_base = "#{secret.chomp}"' > #{Rails.root.join("#{file}")} )
 end
 
 def start_mailcatcher
