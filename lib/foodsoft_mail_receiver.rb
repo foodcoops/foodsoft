@@ -17,7 +17,7 @@ class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
 
     @@registered_classes.each do |klass|
       klass_m = klass.regexp.match(m[:address])
-      return klass.new.received klass_m, data if klass_m
+      return klass.new(klass_m).received(data) if klass_m
     end
 
     raise "invalid format for recipient"
