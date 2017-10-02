@@ -1178,6 +1178,7 @@ en:
     feedback:
       header: "%{user} wrote at %{date}:"
       subject: Feedback for Foodsoft
+    from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Invitation to the Foodcoop
       text: |

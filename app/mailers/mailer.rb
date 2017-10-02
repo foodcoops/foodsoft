@@ -81,7 +81,7 @@ class Mailer < ActionMailer::Base
 
     if args[:from].is_a? User
       args[:reply_to] = args[:from] unless args[:reply_to]
-      args[:from] = "#{show_user args[:from]} via #{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>"
+      args[:from] = "#{I18n.t('mailer.from_via_foodsoft', name: show_user(args[:from]))} <#{FoodsoftConfig[:email_sender]}>"
     end
 
     [:bcc, :cc, :reply_to, :sender, :to].each do |k|

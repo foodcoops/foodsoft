@@ -1170,6 +1170,7 @@ nl:
     feedback:
       header: "%{user} schreef op %{date}:"
       subject: Feedback voor Foodsoft
+    from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Uitnodiging voor de foodcoop
       text: |-
