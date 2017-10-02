@@ -76,11 +76,11 @@ class Mailer < ActionMailer::Base
   end
 
   def mail(args)
-    args[:message_id] = "#{Mail.random_tag}@#{default_url_options[:host]}" unless args[:message_id]
+    args[:message_id] ||= "#{Mail.random_tag}@#{default_url_options[:host]}"
     args[:subject] = "[#{FoodsoftConfig[:name]}] #{args[:subject]}"
 
     if args[:from].is_a? User
-      args[:reply_to] = args[:from] unless args[:reply_to]
+      args[:reply_to] ||= args[:from]
       args[:from] = "#{I18n.t('mailer.from_via_foodsoft', name: show_user(args[:from]))} <#{FoodsoftConfig[:email_sender]}>"
     end
 
