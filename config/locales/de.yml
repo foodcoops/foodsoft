@@ -1193,7 +1193,6 @@ de:
       text: |-
         Liebe %{group},
 
-
         euer Kontostand is durch eine Buchung am %{when} ins Minus gerutscht: %{balance}
         Es wurden %{amount} für "%{note}" abgebucht, die Buchung wurde von %{user} erstellt.
         Bitte zahlt so bald wie möglich wieder Geld ein, un das Gruppenkonto auszugleichen.
@@ -1205,10 +1204,10 @@ de:
       text: |
         Liebe(r) %{user},
 
-        De Job '%{task}' Deiner Arbeitsgruppe ist am %{when} fällig
-        und es fehlen noch Mitstriterinnen!
+        die Aufgabe '%{task}' deiner Arbeitsgruppe ist am %{when} fällig
+        und es fehlen noch Mitstreiter_innen!
 
-        Sofern Du Dich noch nicht für diese Aufgabe eingetragen hast ist des jetzt die Chance:
+        Sofern du dich noch nicht für diese Aufgabe eingetragen hast ist des jetzt die Chance:
 
         %{workgroup_tasks_url}
 
@@ -1216,10 +1215,10 @@ de:
     order_result:
       subject: 'Bestellung beendet: %{name}'
       text0: |-
-        Liebe %{ordergroup},
+        Liebe Bestellgruppe %{ordergroup},
 
         die Bestellung für "%{order}" wurde am %{when} von %{user} beendet.
-        Für Euch wurden die folgenden Artikel bestellt:
+        Für euch wurden die folgenden Artikel bestellt:
       text1: "o Gesamtpreis: %{sum}\n\nBestellung online einsehen: %{order_url}\n\n\nViele Grüße von %{foodcoop} "
     reset_password:
       subject: Neues Password für %{username}
@@ -1242,7 +1241,7 @@ de:
 
         Du bist für "%{task}" eingetragen. Die Aufgabe ist morgen (%{when}) fällig!
       text1: |
-        Meine Aufgaben: %{user_tasks_url}
+        Deine Aufgaben: %{user_tasks_url}
 
 
         Viele Grüße von %{foodcoop}
