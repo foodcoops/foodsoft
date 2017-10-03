@@ -47,6 +47,7 @@ gem 'recurring_select'
 gem 'roo'
 gem 'roo-xls'
 gem 'spreadsheet'
+gem 'exception_notification'
 gem 'gaffe'
 gem 'ruby-filemagic'
 gem 'midi-smtp-server'
@@ -62,10 +63,6 @@ gem 'foodsoft_discourse', path: 'plugins/discourse'
 #gem 'foodsoft_uservoice', path: 'plugins/uservoice'
 #gem 'foodsoft_documents', path: 'plugins/documents'
 
-
-group :production do
-  gem 'exception_notification'
-end
 
 group :development do
   gem 'sqlite3'
