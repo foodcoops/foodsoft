@@ -29,10 +29,16 @@ class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
   end
 
   def on_message_data_event(ctx)
-    @handlers.each do |handler|
-      handler.call(ctx[:message][:data])
+    begin
+      @handlers.each do |handler|
+        handler.call(ctx[:message][:data])
+      end
+    rescue => error
+      ExceptionNotifier.notify_exception(error, data: ctx)
+      raise error
+    ensure
+      @handlers.clear
     end
-    @handlers.clear
   end
 
   def self.find_handler(recipient)
