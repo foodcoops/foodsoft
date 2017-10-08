@@ -13,8 +13,9 @@ default: &defaults
   # true by default to keep compat with older installations, but test with false here
   use_nick: false
 
+  price_markup: 5
+
   # do we really need the following ones?
-  price_markup: 5.0
   tax_default: 6.0
   email_sender: noreply@minimal.test
 
