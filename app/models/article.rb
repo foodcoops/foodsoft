@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Article < ActiveRecord::Base
+  include PriceCalculation
 
   # @!attribute name
   #   @return [String] Article name
@@ -66,16 +67,6 @@ class Article < ActiveRecord::Base
   # Callbacks
   before_save :update_price_history
   before_destroy :check_article_in_use
-
-  # The financial gross, net plus tax and deposti
-  def gross_price
-    ((price + deposit) * (tax / 100 + 1)).round(2)
-  end
-
-  # The price for the foodcoop-member.
-  def fc_price
-    (gross_price  * (FoodsoftConfig[:price_markup] / 100 + 1)).round(2)
-  end
 
   # Returns true if article has been updated at least 2 days ago
   def recently_updated

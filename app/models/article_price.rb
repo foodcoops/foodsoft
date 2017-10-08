@@ -1,4 +1,5 @@
 class ArticlePrice < ActiveRecord::Base
+  include PriceCalculation
 
   # @!attribute price
   #   @return [Number] Net price
@@ -27,17 +28,4 @@ class ArticlePrice < ActiveRecord::Base
   validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
 
-  # Gross price = net price + deposit + tax.
-  # @return [Number] Gross price.
-  # @todo remove code-duplication with Article
-  def gross_price
-    ((price + deposit) * (tax / 100 + 1)).round(2)
-  end
-
-  # @return [Number] Price for the foodcoop-member.
-  # @todo remove code-duplication with Article
-  def fc_price
-    (gross_price  * (FoodsoftConfig[:price_markup] / 100 + 1)).round(2)
-  end
 end
-
