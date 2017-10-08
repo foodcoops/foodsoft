@@ -4,7 +4,7 @@ FactoryGirl.define do
 
   factory :_article do
     unit { Faker::Unit.unit }
-    price { rand(2600) / 100 }
+    price { rand(0.1..26.0).round(2) }
     tax { [6, 21].sample }
     deposit { rand(10) < 8 ? 0 : [0.0, 0.80, 1.20, 12.00].sample }
     unit_quantity { rand(5) < 3 ? 1 : rand(1..20) }
