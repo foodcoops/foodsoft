@@ -152,7 +152,7 @@ GEM
     diffy (3.2.0)
     docile (1.1.5)
     email_reply_trimmer (0.1.8)
-    erubi (1.6.1)
+    erubi (1.7.0)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
     exception_notification (4.2.2)
@@ -172,6 +172,7 @@ GEM
       rails (>= 4.0.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    grease (0.3.1)
     haml (4.0.7)
       tilt
     haml-rails (1.0.0)
@@ -222,8 +223,9 @@ GEM
     kaminari-core (1.0.1)
     less (2.6.0)
       commonjs (~> 0.2.7)
-    less-rails (2.8.0)
+    less-rails (3.0.0)
       actionpack (>= 4.0)
+      grease
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
@@ -284,7 +286,7 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.8)
-    rack-contrib (1.6.0)
+    rack-contrib (1.7.0)
       rack (~> 1.4)
     rack-protection (1.5.3)
       rack
@@ -326,7 +328,7 @@ GEM
     rainbow (2.2.2)
       rake
     rake (12.1.0)
-    ransack (1.8.3)
+    ransack (1.8.4)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
@@ -391,7 +393,7 @@ GEM
     ruby_parser (3.10.1)
       sexp_processor (~> 4.9)
     rubyzip (1.2.1)
-    sass (3.5.1)
+    sass (3.5.2)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
