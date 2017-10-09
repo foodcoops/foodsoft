@@ -54,7 +54,7 @@ namespace :foodsoft do
     port = ENV['SMTP_SERVER_PORT'].present? ? ENV['SMTP_SERVER_PORT'].to_i : 2525
     host = ENV['SMTP_SERVER_HOST']
     rake_say "Started SMTP server for incoming email on port #{port}."
-    server = FoodsoftMailReceiver.new port, host
+    server = FoodsoftMailReceiver.new port, host, 1
     server.start
     server.join
   end
