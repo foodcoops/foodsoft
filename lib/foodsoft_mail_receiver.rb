@@ -25,6 +25,7 @@ class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
     @handlers << self.class.find_handler(recipient)
     rcpt_to
   rescue => error
+    logger.info("Can not accept mail for '#{rcpt_to}': #{error}")
     raise MidiSmtpServer::Smtpd550Exception
   end
 
