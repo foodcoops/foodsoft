@@ -94,7 +94,7 @@ class Mailer < ActionMailer::Base
     end
 
     reply_email_domain = FoodsoftConfig[:reply_email_domain]
-    if reply_email_domain && !args[:return_path]
+    if reply_email_domain && !args[:return_path] && args[:to].is_a?(String)
       #TODO: Remove workaround for https://github.com/mikel/mail/issues/39 after next mail release
       ascii_to = args[:to].encode('ASCII', invalid: :replace, undef: :replace, replace: '_')
       address = Mail::Parsers::AddressListsParser.new.parse(ascii_to).addresses.first
