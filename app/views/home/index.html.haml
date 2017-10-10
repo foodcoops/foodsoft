@@ -45,8 +45,13 @@
     %h2= t '.my_ordergroup.title'
     %p
       %b= current_user.ordergroup.name
-      = t '.my_ordergroup.funds'
-      = number_to_currency(current_user.ordergroup.get_available_funds)
+      = ' | '
+      - if FoodsoftConfig[:charge_members_manually]
+        = heading_helper(Ordergroup, :account_balance) + ':'
+        = number_to_currency(current_user.ordergroup.account_balance)
+      - else
+        = heading_helper(Ordergroup, :available_funds) + ':'
+        = number_to_currency(current_user.ordergroup.get_available_funds)
       %small= t '.my_ordergroup.last_update', when: distance_of_time_in_words(Time.now, current_user.ordergroup.account_updated)
       %h3= t '.my_ordergroup.transactions.title'
       %table.table.table-striped

@@ -1047,7 +1047,6 @@ nl:
           text: "%{messages} of %{threads} bekijken"
           threads: conversaties
       my_ordergroup:
-        funds: "| Beschikbaar tegoed:"
         last_update: Laatst gewijzigd %{when} geleden
         title: Mijn huishouden
         transactions:
