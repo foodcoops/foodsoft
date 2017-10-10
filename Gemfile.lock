@@ -5,13 +5,6 @@ GIT
     localize_input (0.1.0)
 
 GIT
-  remote: https://github.com/straydogstudio/prawn-table.git
-  revision: 759a27b6fef2e682c035fc83f2182e53c3270279
-  ref: 759a27b6
-  specs:
-    prawn-table (0.2.1)
-
-GIT
   remote: https://github.com/technoweenie/acts_as_versioned.git
   revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
   specs:
@@ -262,6 +255,8 @@ GEM
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
     protected_attributes (1.1.0)
       activemodel (>= 4.0.1, < 5.0)
     pry (0.10.3)
@@ -517,7 +512,7 @@ DEPENDENCIES
   meta_request
   mysql2
   prawn
-  prawn-table!
+  prawn-table
   protected_attributes (= 1.1.0)
   pry-rescue
   pry-stack_explorer

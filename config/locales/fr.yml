@@ -732,6 +732,7 @@ fr:
       - Nom du produit
       - Unité
       - Nombre d'unités
+      - Prix HT
       - Prix coop
       - Quantité
       title: 'Tableau de répartition pour la commande: %{name}; clôturée le %{date}'

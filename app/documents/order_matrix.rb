@@ -1,7 +1,7 @@
 # encoding: utf-8
 class OrderMatrix < OrderPdf
 
-  MAX_ARTICLES_PER_PAGE = 22 # How many order_articles shoud written on a page
+  MAX_ARTICLES_PER_PAGE = 21 # How many order_articles shoud written on a page
 
   def filename
     I18n.t('documents.order_matrix.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
@@ -21,7 +21,6 @@ class OrderMatrix < OrderPdf
     move_down 10
 
     order_articles_data = [I18n.t('documents.order_matrix.rows')]
-      
 
     order_articles.each do |a|
       order_articles_data << [a.article.name,
@@ -31,12 +30,11 @@ class OrderMatrix < OrderPdf
                               number_with_precision(article_price(a), precision: 2),
                               a.units]
     end
-    
-    #order_articles_data.sort_by!{|a| a[0].downcase}
 
     table order_articles_data, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
       table.cells.border_width = 1
       table.cells.border_color = '666666'
+      table.column(3).text_color = 'aeaeae'
     end
 
     page_number = 0
@@ -59,7 +57,7 @@ class OrderMatrix < OrderPdf
       for header_article in current_order_articles
         name = header_article.article.name.gsub(/[-\/]/, " ").gsub(".", ". ")
         name = name.split.collect { |w| w.truncate(20) }.join(" ")
-        header << name.truncate(35)+' - ('+header_article.article.unit+')'
+        header << "#{name.truncate(35)} - (#{header_article.article.unit})"
    
       end
    
@@ -79,21 +77,17 @@ class OrderMatrix < OrderPdf
       end
 
       # Make table
-      column_widths = [85]
-      (MAX_ARTICLES_PER_PAGE + 1).times { |i| column_widths << 30 unless i == 0 }
-      table groups_data, column_widths: column_widths, cell_style: {size: fontsize(8), overflow: :shrink_to_fit } do |table|
+      column_widths = [55]
+      (MAX_ARTICLES_PER_PAGE + 1).times { |i| column_widths << 32 unless i == 0 }
+      table groups_data, column_widths: column_widths, cell_style: {size: fontsize(5), overflow: :shrink_to_fit } do |table|
    
-      table.rows(0).rotate = 90
-      table.rows(0).padding = 2
-      table.rows(0).height = 90
-      table.rows(0).overflow = :truncate 
-      table.rows(0).align = :left
-      table.rows(0).min_font_size = 6
-     # table.rows(0).valign = :bottom
-        
-      table.cells.border_width = 1
-      table.cells.border_color = '666666'
-      table.row_colors = ['ffffff','ececec']
+        table.rows(0).padding = 2
+        table.rows(0).height = 35
+        table.rows(0).overflow = :truncate 
+        table.rows(0).min_font_size = 8
+        table.cells.border_width = 1
+        table.cells.border_color = '666666'
+        table.row_colors = ['ffffff','ececec']
       end
    
     end

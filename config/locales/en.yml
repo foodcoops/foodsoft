@@ -734,7 +734,7 @@ en:
       - Article
       - Unit
       - Unit quantity
-      - Netto price
+      - Price (net)
       - FC-Price
       - Amount
       title: 'Order sorting matrix: %{name}, closed at %{date}'

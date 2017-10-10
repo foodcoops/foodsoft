@@ -732,6 +732,7 @@ nl:
       - Artikel
       - Eenheid
       - Gr.Eenh.
+      - Netto prijs
       - Foodcoop-prijs
       - Aantal
       title: 'Sorteermatrix van bestelling: %{name}, gesloten op %{date}'
