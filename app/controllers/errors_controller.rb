@@ -6,7 +6,7 @@ class ErrorsController < ApplicationController
   layout :current_layout
 
   def show
-    render "errors/#{@rescue_response}", status: @status_code
+    render "errors/#{@rescue_response}", formats: :html, status: @status_code
   end
 
   private
