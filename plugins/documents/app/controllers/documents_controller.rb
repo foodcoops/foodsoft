@@ -35,21 +35,21 @@ class DocumentsController < ApplicationController
     end
     @document.created_by = current_user
     @document.save!
-    redirect_to documents_path, notice: I18n.t('documents.create.notice')
+    redirect_to documents_path, notice: t('.notice')
   rescue => error
-    redirect_to documents_path, alert: t('documents.create.error', error: error.message)
+    redirect_to documents_path, alert: t('.error', error: error.message)
   end
 
   def destroy
     @document = Document.find(params[:id])
     if @document.created_by == current_user or current_user.role_admin?
       @document.destroy
-      redirect_to documents_path, notice: t('documents.destroy.notice')
+      redirect_to documents_path, notice: t('.notice')
     else
-      redirect_to documents_path, alert: t('documents.destroy.no_right')
+      redirect_to documents_path, alert: t('.no_right')
     end
   rescue => error
-    redirect_to documents_path, alert: t('documents.destroy.error', error: error.message)
+    redirect_to documents_path, alert: t('.error', error: error.message)
   end
 
   def show
