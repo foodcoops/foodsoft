@@ -41,6 +41,7 @@ class MessagesMailReceiver
       body = Nokogiri::HTML(body).text
     end
 
+    body.encode!(Encoding::default_internal)
     body = EmailReplyTrimmer.trim(body)
 
     message = @user.send_messages.new body: body,
