@@ -533,6 +533,7 @@ de:
   config:
     hints:
       applepear_url: Seite, auf der das Äpfel- und Birnensystem für Aufgaben erklärt wird.
+      charge_members_manually: Wann die Aufzeichnungen über was wer bekommen hat wo anders (z.B. auf Papier) geführt werden und nicht in die Foosoft eingetragen werden, sollte diese Option aktiviert werden. Die Abrechnung muss dann manuell (mittels "Neue Überweisungen eingeben") eingetragen werden. Bestellungen müssen nach wie vor abgerechnet werden, aber das belastet nicht die Konten der Mitglieder.
       contact:
         email: E-Mail Adresse zur allgemeinen Kontaktaufnahme, die auf der Webseite und in einigen Formularen gezeigt wird.
         street: Anschrift; üblicherweise ist dies Euer Liefer- und Abholort.
@@ -581,6 +582,7 @@ de:
       webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
     keys:
       applepear_url: Hilfe URL für das Äpfel Punktesystem zum Engagement
+      charge_members_manually: Mitglieder manuell abrechnen
       contact:
         city: Stadt
         country: Land
@@ -1111,7 +1113,6 @@ de:
           text: "%{messages} oder %{threads} anzeigen"
           threads: Nachrichtenverläufe
       my_ordergroup:
-        funds: "| Verfügbares Guthaben:"
         last_update: Letzte Aktualisierung vor %{when}
         title: Meine Bestellgruppe
         transactions:
