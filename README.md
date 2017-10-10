@@ -36,7 +36,27 @@ very much a work in progress.
 License
 -------
 
-GPL version 3 or later, please see [LICENSE](LICENSE.md) for the full text.
-Some bundled third-party components have [other licenses](vendor/README.md).
+Foodsoft is licensed under the [AGPL](https://www.gnu.org/licenses/agpl-3.0.html)
+license (version 3 or later). Practically this means that you are free to use,
+adapt and redistribute the software, as long as you publish any changes you
+make to the code.
+
+For private use, there are no restrictions, but if you give others access to
+Foodsoft (like running it open to the internet), you must also make your
+changes available under the same license. This can be as easy as
+[forking](https://github.com/foodcoops/foodsoft/fork) the project on Github and
+pushing your changes. You are not required to integrate your changes back into
+the main Foodsoft version (but if you're up for it that would be very welcome).
+
+To make it a little easier, configuration files are exempt, so you can just
+install and configure Foodsoft without having to publish your changes. These
+files are marked as public domain in the file header.
+
+If you have any remaining questions, please
+[open an issue](https://github.com/foodcoops/foodsoft/issues/new) or contact
+the [mailing list](http://foodsoft.51229.x6.nabble.com/foodsoft-discuss-f5.html).
+
+Please see [LICENSE](LICENSE.md) for the full and authoritative text. Some
+bundled third-party components have [other licenses](vendor/README.md).
 
 Thanks to [Icons8](http://icons8.com/) for letting us use their icons.

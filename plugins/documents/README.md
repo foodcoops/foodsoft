@@ -36,5 +36,5 @@ Before this plugin would be enabled by default, at least the latter would need
 to be solved.
 
 
-This plugin is part of the foodsoft package and uses the GPL-3 license (see
+This plugin is part of the foodsoft package and uses the AGPL-3 license (see
 foodsoft's LICENSE for the full license text).

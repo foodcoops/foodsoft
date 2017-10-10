@@ -23,5 +23,5 @@ mails you can also feed every mail via a call to `foodsoft:parse_reply_email`
 into foodsoft. It expects the address given in the `MAIL FROM` command via
 SMTP in the environment variable `RECIPIENT` and the mail body as `STDIN`.
 
-This plugin is part of the foodsoft package and uses the GPL-3 license (see
+This plugin is part of the foodsoft package and uses the AGPL-3 license (see
 foodsoft's LICENSE for the full license text).

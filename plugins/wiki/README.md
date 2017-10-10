@@ -17,5 +17,5 @@ gem 'foodsoft_wiki', path: 'lib/foodsoft_wiki'
 This plugin introduces the foodcoop config option `use_wiki`, which can be set
 to `false` to disable the wiki. May be useful in multicoop deployments.
 
-This plugin is part of the foodsoft package and uses the GPL-3 license (see
+This plugin is part of the foodsoft package and uses the AGPL-3 license (see
 foodsoft's LICENSE for the full license text).
