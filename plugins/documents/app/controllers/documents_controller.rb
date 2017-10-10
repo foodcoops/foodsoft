@@ -54,10 +54,6 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
-    filename = @document.name
-    unless filename.include? '.'
-      filename += '.' + MIME::Types[@document.mime].first.preferred_extension
-    end
-    send_data(@document.data, :filename => filename, :type => @document.mime)
+    send_data(@document.data, filename: @document.filename, type: @document.mime)
   end
 end
