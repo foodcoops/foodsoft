@@ -82,6 +82,12 @@ de:
         boxfill: Kistenfüllen ab
         closed_by: Abgerechnet von
         created_by: Erstellt von
+        end_action: Endeaktion
+        end_actions:
+          auto_close: Bestellung beenden
+          auto_close_and_send: Bestellung beenden und an Lieferantin schicken
+          auto_close_and_send_min_quantity: Bestellung beenden und an Lieferantin schicken sofern die Mindestbestellmenge erreicht wurde
+          no_end_action: Keine automatische Aktion
         ends: Endet am
         name: Lieferant
         note: Notiz

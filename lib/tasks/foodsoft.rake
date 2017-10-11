@@ -1,6 +1,11 @@
 # put in here all foodsoft tasks
 # => :environment loads the environment an gives easy access to the application
 namespace :foodsoft do
+  desc "Finish ended orders"
+  task :finish_ended_orders => :environment do
+    Order.finish_ended!
+  end
+
   desc "Notify users of upcoming tasks"
   task :notify_upcoming_tasks => :environment do
     tasks = Task.where(done: false, due_date: 1.day.from_now.to_date)

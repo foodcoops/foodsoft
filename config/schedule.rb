@@ -11,3 +11,8 @@ end
 every :sunday, :at => '7:14 am' do
   rake "multicoops:run TASK=foodsoft:create_upcoming_periodic_tasks"
 end
+
+# Finish ended orders
+every 1.minute do
+  rake "multicoops:run TASK=foodsoft:finish_ended_orders"
+end

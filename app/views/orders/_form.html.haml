@@ -5,6 +5,9 @@
     = f.input :boxfill, as: :date_picker_time if @order.is_boxfill_useful?
     = f.input :ends, as: :date_picker_time
     = f.input :pickup, as: :date_picker, input_html: {class: 'input-small'}
+  = f.input :end_action, collection: Order.end_actions,include_blank: false,
+    input_html: {class: 'input-xxlarge'}, value_method: ->(k){ k.first },
+    label_method: ->(k){ t("activerecord.attributes.order.end_actions.#{k.first}") }
   = f.input :note, input_html: {rows: 2, class: 'input-xxlarge'}
 
   %h2= t '.title'

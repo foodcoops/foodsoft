@@ -16,6 +16,8 @@ class Order < ActiveRecord::Base
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
+  enum end_action: { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
+
   # Validations
   validates_presence_of :starts
   validate :starts_before_ends, :include_articles
@@ -261,6 +263,34 @@ class Order < ActiveRecord::Base
     raise I18n.t('orders.model.error_closed') if closed?
     comments.create(user: user, text: I18n.t('orders.model.close_direct_message'))
     update_attributes! state: 'closed', updated_by: user
+  end
+
+  def send_to_supplier!(user)
+    Mailer.order_result_supplier(user, self).deliver_now
+    update!(last_sent_mail: Time.now)
+  end
+
+  def do_end_action!
+    if auto_close?
+      finish!(created_by)
+    elsif auto_close_and_send?
+      finish!(created_by)
+      send_to_supplier!(created_by)
+    elsif auto_close_and_send_min_quantity?
+      finish!(created_by)
+      send_to_supplier!(created_by) if order.sum >= order.supplier.min_order_quantity
+    end
+  end
+
+  def self.finish_ended!
+    orders = Order.where.not(end_action: Order.end_actions[:no_end_action]).where(state: 'open').where('ends <= ?', DateTime.now)
+    orders.each do |order|
+      begin
+        order.do_end_action!
+      rescue => error
+        ExceptionNotifier.notify_exception(error, data: {order_id: order.id})
+      end
+    end
   end
 
   protected
