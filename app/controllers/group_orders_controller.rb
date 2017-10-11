@@ -85,7 +85,7 @@ class GroupOrdersController < ApplicationController
   end
 
   def ensure_my_group_order
-    @group_order = GroupOrder.find_by_id(params[:id])
+    @group_order = GroupOrder.find(params[:id])
     if @group_order.ordergroup != @ordergroup && (@group_order.ordergroup || !current_user.role_orders?)
       redirect_to group_orders_url, alert: I18n.t('group_orders.errors.notfound')
     end
