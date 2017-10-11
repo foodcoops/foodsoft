@@ -2,6 +2,20 @@ require_relative '../spec_helper'
 
 describe Order do
 
+  it 'automaticly finishes ended' do
+    create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.from_now
+    create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.ago
+    create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.from_now, end_action: :auto_close
+    order = create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close
+
+    Order.finish_ended!
+    order.reload
+
+    expect(Order.open.count).to eq 3
+    expect(Order.finished.count).to eq 1
+    expect(order).to be_finished
+  end
+
   it 'needs a supplier' do
     expect(build(:order, supplier: nil)).to be_invalid
   end

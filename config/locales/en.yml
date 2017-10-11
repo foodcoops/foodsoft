@@ -82,6 +82,12 @@ en:
         boxfill: Fill boxes after
         closed_by: Settled by
         created_by: Created by
+        end_action: End action
+        end_actions:
+          auto_close: Close the order
+          auto_close_and_send: Close the order and send it to the supplier
+          auto_close_and_send_min_quantity: Close the order and send it to the supplier if the minimum quantity has been reached
+          no_end_action: No automatic action
         ends: Ends at
         name: Supplier
         note: Note

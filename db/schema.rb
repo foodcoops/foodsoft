@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001000000) do
+ActiveRecord::Schema.define(version: 20171001020000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -253,6 +253,7 @@ ActiveRecord::Schema.define(version: 20171001000000) do
     t.date     "pickup"
     t.integer  "invoice_id"
     t.datetime "last_sent_mail"
+    t.integer  "end_action",                                               default: 0,      null: false
   end
 
   add_index "orders", ["state"], name: "index_orders_on_state", using: :btree
