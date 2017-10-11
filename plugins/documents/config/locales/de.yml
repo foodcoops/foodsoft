@@ -9,14 +9,17 @@ de:
         name: Name
   config:
     hints:
+      documents_allowed_extension: Eine Liste an erlaubten Dateiendungen getrennt durch Leerzeichen.
       use_documents: Einfache Dokumentenverwaltung aktivieren
     keys:
+      documents_allowed_extension: Erlaubte Endungen
       use_documents: Dokumente verwenden
   navigation:
     documents: Dokumente
   documents:
     create:
       error: 'Dokument konnte nicht erstellt werden: %{error}'
+      not_allowed_mime: Der Dateityp "%{mime}" ist nicht erlaubt. Bitte kontaktiere einen Administrator um ihn freizuschalten.
       notice: Dokument wurde erstellt
     destroy:
       error: 'Dokument konnt nicht gelöscht werden: %{error}'

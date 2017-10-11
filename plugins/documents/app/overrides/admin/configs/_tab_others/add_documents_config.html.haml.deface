@@ -1,2 +1,3 @@
-/ insert_before ':root:first-child'
-= config_input form, :use_documents, as: :boolean
+/ insert_after ':root:last-child'
+= config_use_heading form, :use_documents do
+  = config_input form, :documents_allowed_extension, as: :string, input_html: {class: 'input-xlarge'}

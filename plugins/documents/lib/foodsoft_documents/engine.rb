@@ -11,5 +11,9 @@ module FoodsoftDocuments
         sub_nav.items.insert(i, sub_nav.items.delete_at(-1))
       end
     end
+
+    def default_foodsoft_config(cfg)
+      cfg[:documents_allowed_extension] = 'gif jpg png txt'
+    end
   end
 end
