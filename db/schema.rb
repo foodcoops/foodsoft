@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 20171001000000) do
 
   add_index "deliveries", ["supplier_id"], name: "index_deliveries_on_supplier_id", using: :btree
 
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "mime"
+    t.binary   "data"
+    t.integer  "created_by_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "financial_transactions", force: :cascade do |t|
     t.integer  "ordergroup_id", limit: 4,                             default: 0, null: false
     t.decimal  "amount",                      precision: 8, scale: 2, default: 0, null: false
