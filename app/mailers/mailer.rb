@@ -98,16 +98,16 @@ class Mailer < ActionMailer::Base
 
     if args[:from].is_a? User
       args[:reply_to] ||= args[:from]
-      args[:from] = "#{I18n.t('mailer.from_via_foodsoft', name: show_user(args[:from]))} <#{FoodsoftConfig[:email_sender]}>"
+      args[:from] = format_address(FoodsoftConfig[:email_sender], I18n.t('mailer.from_via_foodsoft', name: show_user(args[:from])))
     end
 
     [:bcc, :cc, :reply_to, :sender, :to].each do |k|
       user = args[k]
-      args[k] = "#{show_user user} <#{user.email}>" if user.is_a? User
+      args[k] = format_address(user.email, show_user(user)) if user.is_a? User
     end
 
     if contact_email = FoodsoftConfig[:contact][:email]
-      args[:reply_to] ||= "#{FoodsoftConfig[:name]} <#{contact_email}>"
+      args[:reply_to] ||= format_address(contact_email, FoodsoftConfig[:name])
     end
 
     reply_email_domain = FoodsoftConfig[:reply_email_domain]
@@ -138,6 +138,14 @@ class Mailer < ActionMailer::Base
   def add_order_result_attachments(order, options = {})
     attachments['order.pdf'] = OrderFax.new(order, options).to_pdf
     attachments['order.csv'] = OrderCsv.new(order, options).to_csv
+  end
+
+  private
+
+  def format_address(email, name)
+    address = Mail::Address.new email
+    address.display_name = name
+    address.format
   end
 
 end
