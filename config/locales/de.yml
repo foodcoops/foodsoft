@@ -1444,6 +1444,7 @@ de:
       confirm_end: |-
         Willst Du wirklich die Bestellung %{order} beenden?
         Es gibt kein zurück.
+      confirm_send_to_supplier: Die Bestellung wurde bereit am %{when} zur Lieferantin geschickt. Willst du sie wirklich erneut schicken?
       create_invoice: Rechnung anlegen
       description1_order: "%{state} Bestellung von %{supplier} angelegt von %{who},"
       description1_period:

@@ -118,6 +118,7 @@ class OrdersController < ApplicationController
   def send_result_to_supplier
     order = Order.find(params[:id])
     Mailer.order_result_supplier(@current_user, order).deliver_now
+    order.update!(last_sent_mail: Time.now)
     redirect_to order, notice: I18n.t('orders.send_to_supplier.notice')
   rescue => error
     redirect_to order, alert: I18n.t('errors.general_msg', :msg => error.message)

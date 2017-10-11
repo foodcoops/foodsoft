@@ -1454,6 +1454,7 @@ en:
       confirm_end: |-
         Do you really want to close the order %{order}?
         There is no going back.
+      confirm_send_to_supplier: The order has been sent to the supplier already on %{when}. Do you really want to send it again?
       create_invoice: Add invoice
       description1_order: "%{state} order from %{supplier} opened by %{who},"
       description1_period:
