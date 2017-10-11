@@ -9,14 +9,17 @@ en:
         name: Name
   config:
     hints:
+      documents_allowed_extension: A list of allowed filename extensions separated by spaces.
       use_documents: Add a basic document sharing page to the foodcoop menu.
     keys:
+      documents_allowed_extension: Allowed extensions
       use_documents: Enable documents
   navigation:
     documents: Documents
   documents:
     create:
       error: 'Document could not be created: %{error}'
+      not_allowed_mime: The filetype "%{mime}" is not allowed. Please contact an administrator to whitelist it.
       notice: Document was created
     destroy:
       error: 'Document could not be deleted: %{error}'

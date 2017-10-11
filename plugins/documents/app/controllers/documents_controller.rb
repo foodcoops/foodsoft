@@ -26,6 +26,7 @@ class DocumentsController < ApplicationController
     @document = Document.new
     @document.data = params[:document][:data].read
     @document.mime = FileMagic.new(FileMagic::MAGIC_MIME).buffer(@document.data)
+    raise t('.not_allowed_mime', mime: @document.mime) unless allowed_mime? @document.mime
     if params[:document][:name] == ''
       name = params[:document][:data].original_filename
       name = File.basename(name)
@@ -55,5 +56,13 @@ class DocumentsController < ApplicationController
   def show
     @document = Document.find(params[:id])
     send_data(@document.data, filename: @document.filename, type: @document.mime)
+  end
+
+  def allowed_mime?(mime)
+    whitelist = FoodsoftConfig[:documents_allowed_extension].split
+    MIME::Types.type_for(whitelist).each do |type|
+      return true if type.like? mime
+    end
+    false
   end
 end
