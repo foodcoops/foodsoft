@@ -56,12 +56,12 @@ gem 'midi-smtp-server'
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
 gem 'foodsoft_wiki', path: 'plugins/wiki'
 gem 'foodsoft_messages', path: 'plugins/messages'
+gem 'foodsoft_documents', path: 'plugins/documents'
 gem 'foodsoft_discourse', path: 'plugins/discourse'
 
 # plugins not enabled by default
 #gem 'foodsoft_current_orders', path: 'plugins/current_orders'
 #gem 'foodsoft_uservoice', path: 'plugins/uservoice'
-#gem 'foodsoft_documents', path: 'plugins/documents'
 
 
 group :development do

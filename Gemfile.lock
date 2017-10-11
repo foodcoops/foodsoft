@@ -19,6 +19,14 @@ PATH
       rails
 
 PATH
+  remote: plugins/documents
+  specs:
+    foodsoft_documents (0.0.1)
+      deface (~> 1.0)
+      rails
+      ruby-filemagic
+
+PATH
   remote: plugins/messages
   specs:
     foodsoft_messages (0.0.1)
@@ -513,6 +521,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   foodsoft_discourse!
+  foodsoft_documents!
   foodsoft_messages!
   foodsoft_wiki!
   gaffe
