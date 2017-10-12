@@ -108,6 +108,16 @@ default: &defaults
   # Custom CSS for the foodcoop
   #custom_css: 'body { background-color: #fcffba; }'
 
+  # Custom fields for invoice, odergroup, supplier and user.
+  # Check out https://github.com/plataformatec/simple_form for details about the supported options.
+  #custom_fields:
+  #  user:
+  #    - name: address
+  #      label: Address
+  #    - name: birthday
+  #      label: Birthday
+  #      as: date_picker
+
   # Uncomment to add tracking code for web statistics, e.g. for Piwik. (Added to bottom of page)
   #webstats_tracking_code: |
   #  <!-- Piwik -->

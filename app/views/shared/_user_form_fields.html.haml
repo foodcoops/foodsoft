@@ -19,10 +19,11 @@
     = ogf.input :contact_address, label: t('activerecord.attributes.ordergroup.contact_address'), required: false,
                 input_html: { title: address_hint, data: {toggle: 'tooltip', placement: 'right'} }
 
+= render 'shared/custom_form_fields', f: f, type: :user
 = f.simple_fields_for :settings_attributes do |s|
   = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
     = profile.input 'language', as: :select,  collection: available_locales, required: false, selected: f.object.settings.profile['language']
-  
+
   .settings
     .settings-group
       = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|

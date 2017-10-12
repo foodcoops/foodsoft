@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Supplier < ActiveRecord::Base
   include MarkAsDeletedWithName
+  include CustomFields
 
   has_many :articles, -> { where(:type => nil).includes(:article_category).order('article_categories.name', 'articles.name') }
   has_many :stock_articles, -> { includes(:article_category).order('article_categories.name', 'articles.name') }
@@ -10,7 +11,7 @@ class Supplier < ActiveRecord::Base
   belongs_to :shared_supplier  # for the sharedLists-App
 
   include ActiveModel::MassAssignmentSecurity
-  attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number, :iban,
+  attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number, :iban, :custom_fields,
                   :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity, :shared_sync_method
 
   validates :name, :presence => true, :length => { :in => 4..30 }

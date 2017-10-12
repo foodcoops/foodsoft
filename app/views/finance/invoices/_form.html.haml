@@ -22,6 +22,7 @@
   = f.input :amount, as: :string
   = f.input :deposit, as: :string
   = f.input :deposit_credit, as: :string
+  = render 'shared/custom_form_fields', f: f, type: :invoice
   = f.input :attachment, as: :file, hint: t('.attachment_hint')
   - if f.object.attachment_data.present?
     = f.input :delete_attachment, as: :boolean

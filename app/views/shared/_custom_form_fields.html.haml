@@ -1,0 +1,7 @@
+- if FoodsoftConfig[:custom_fields] && FoodsoftConfig[:custom_fields][type]
+  = f.simple_fields_for :custom_fields, defaults: { required: false } do |s|
+    - FoodsoftConfig[:custom_fields][type].each do |options|
+      - options = options.deep_symbolize_keys
+      - name = options.delete(:name)
+      - value = f.object.settings.custom_fields[name]
+      = s.input name, options.deep_merge(input_html: {value:value})
