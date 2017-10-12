@@ -5,6 +5,7 @@
 # Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
 class Ordergroup < Group
+  include CustomFields
 
   APPLE_MONTH_AGO = 6                 # How many month back we will count tasks and orders sum
 

@@ -3,9 +3,9 @@
 require 'digest/sha1'
 # specific user rights through memberships (see Group)
 class User < ActiveRecord::Base
-  include RailsSettings::Extend
+  include CustomFields
   #TODO: acts_as_paraniod ??
-  
+
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
   #has_one :ordergroup, :through => :memberships, :source => :group, :class_name => "Ordergroup"

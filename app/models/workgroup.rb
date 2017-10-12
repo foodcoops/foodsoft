@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Workgroup < Group
-  
+  include CustomFields
+
   has_many :tasks
   # returns all non-finished tasks
   has_many :open_tasks, -> { where(:done => false).order('due_date', 'name') }, :class_name => 'Task'
@@ -25,6 +26,5 @@ class Workgroup < Group
       errors.add(:role_admin, I18n.t('workgroups.error_last_admin_role'))
     end
   end
-  
-end
 
+end

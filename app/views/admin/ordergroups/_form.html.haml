@@ -5,6 +5,7 @@
     = f.input :contact_person
     = f.input :contact_phone
     = f.input :contact_address
+    = render 'shared/custom_form_fields', f: f, type: :ordergroup
     .fold-line
       = f.input :break_start, as: :date_picker, label: Ordergroup.human_attribute_name('break')
       = f.input :break_end, as: :date_picker, label: Ordergroup.human_attribute_name('break_until')
