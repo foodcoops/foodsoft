@@ -896,6 +896,9 @@ en:
         without_extra_charge: 'without extra charge:'
     create:
       notice: Invoice was created.
+    financial_links:
+      show:
+        title: Financial link %{number}
     financial_transactions:
       controller:
         create:

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001020000) do
+ActiveRecord::Schema.define(version: 20171002000000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -85,12 +85,17 @@ ActiveRecord::Schema.define(version: 20171001020000) do
     t.datetime "updated_at"
   end
 
+  create_table "financial_link", force: :cascade do |t|
+    t.text "note"
+  end
+
   create_table "financial_transactions", force: :cascade do |t|
-    t.integer  "ordergroup_id", limit: 4,                             default: 0, null: false
-    t.decimal  "amount",                      precision: 8, scale: 2, default: 0, null: false
-    t.text     "note",          limit: 65535,                                     null: false
-    t.integer  "user_id",       limit: 4,                             default: 0, null: false
-    t.datetime "created_on",                                                      null: false
+    t.integer  "ordergroup_id",     limit: 4,                             default: 0, null: false
+    t.decimal  "amount",                          precision: 8, scale: 2, default: 0, null: false
+    t.text     "note",              limit: 65535,                                     null: false
+    t.integer  "user_id",           limit: 4,                             default: 0, null: false
+    t.datetime "created_on",                                                          null: false
+    t.integer  "financial_link_id"
   end
 
   add_index "financial_transactions", ["ordergroup_id"], name: "index_financial_transactions_on_ordergroup_id", using: :btree
@@ -180,6 +185,7 @@ ActiveRecord::Schema.define(version: 20171001020000) do
     t.integer  "created_by_user_id"
     t.string   "attachment_mime"
     t.binary   "attachment_data"
+    t.integer  "financial_link_id"
   end
 
   add_index "invoices", ["supplier_id"], name: "index_invoices_on_supplier_id", using: :btree

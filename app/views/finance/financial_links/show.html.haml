@@ -1,0 +1,23 @@
+- title t('.title', number: @financial_link.id)
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t '.date'
+      %th= t '.type'
+      %th= t '.description'
+      %th= t '.amount'
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td
+          - if item[:link_to]
+            = link_to format_date(item[:date]), item[:link_to]
+          - else
+            = format_date item[:date]
+        %td= item[:type]
+        %td= item[:description]
+        %td.currency{:style => "color:#{item[:amount] < 0 ? 'red' : 'black'}; width:5em"}= number_to_currency(item[:amount])
+
+%p
+  = @financial_link.note
