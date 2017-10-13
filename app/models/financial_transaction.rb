@@ -3,6 +3,7 @@
 class FinancialTransaction < ActiveRecord::Base
   belongs_to :ordergroup
   belongs_to :user
+  belongs_to :financial_link
 
   validates_presence_of :amount, :note, :user_id, :ordergroup_id
   validates_numericality_of :amount, greater_then: -100_000,

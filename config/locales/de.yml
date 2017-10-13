@@ -892,6 +892,9 @@ de:
         without_extra_charge: 'ohne Aufschlag:'
     create:
       notice: Rechnung wurde erstellt.
+    financial_links:
+      show:
+        title: Finanzlink %{number}
     financial_transactions:
       controller:
         create:

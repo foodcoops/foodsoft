@@ -163,6 +163,8 @@ Foodsoft::Application.routes.draw do
         get :unpaid, on: :collection
       end
 
+      resources :links, controller: 'financial_links', only: [:show]
+
       resources :ordergroups, only: [:index] do
         resources :financial_transactions, as: :transactions
       end

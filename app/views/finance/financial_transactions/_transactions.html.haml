@@ -21,7 +21,11 @@
   %tbody
     - @financial_transactions.each do |t|
       %tr
-        %td= format_time(t.created_on)
+        %td
+          - if t.financial_link
+            = link_to format_time(t.created_on), finance_link_path(t.financial_link)
+          - else
+            = format_time(t.created_on)
         - if with_ordergroup
           %td= h link_to t.ordergroup.name, finance_ordergroup_transactions_path(t.ordergroup)
         %td= h show_user(t.user)
