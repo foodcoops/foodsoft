@@ -3,12 +3,12 @@ class HomeController < ApplicationController
 
   def index
     # unaccepted tasks
-    @unaccepted_tasks = Task.unaccepted_tasks_for(current_user)
+    @unaccepted_tasks = Task.order(:due_date).unaccepted_tasks_for(current_user)
     # task in next week
-    @next_tasks = Task.next_assigned_tasks_for(current_user)
+    @next_tasks = Task.order(:due_date).next_assigned_tasks_for(current_user)
     # count tasks with no responsible person
     # tasks for groups the current user is not a member are ignored
-    @unassigned_tasks = Task.unassigned_tasks_for(current_user)
+    @unassigned_tasks = Task.order(:due_date).unassigned_tasks_for(current_user)
   end
 
   def profile
