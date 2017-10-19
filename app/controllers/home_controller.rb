@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     @next_tasks = Task.order(:due_date).next_assigned_tasks_for(current_user)
     # count tasks with no responsible person
     # tasks for groups the current user is not a member are ignored
-    @unassigned_tasks = Task.order(:due_date).unassigned_tasks_for(current_user)
+    @unassigned_tasks = Task.order(:due_date).next_unassigned_tasks_for(current_user)
   end
 
   def profile

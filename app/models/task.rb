@@ -52,6 +52,16 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def self.next_unassigned_tasks_for(user, max = 2)
+    periodic_task_group_count = {}
+    self.unassigned_tasks_for(user).reject do |item|
+      return false unless item.periodic_task_group
+      count = periodic_task_group_count[item.periodic_task_group] || 0
+      periodic_task_group_count[item.periodic_task_group] = count + 1
+      count >= max
+    end
+  end
+
   def periodic?
     not periodic_task_group.nil?
   end
@@ -59,11 +69,11 @@ class Task < ActiveRecord::Base
   def is_assigned?(user)
     self.assignments.detect {|ass| ass.user_id == user.id }
   end
-  
+
   def is_accepted?(user)
     self.assignments.detect {|ass| ass.user_id == user.id && ass.accepted }
   end
-  
+
   def enough_users_assigned?
     assignments.to_a.count(&:accepted) >= required_users ? true : false
   end
