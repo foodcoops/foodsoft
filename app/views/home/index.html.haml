@@ -23,9 +23,13 @@
 
 - if @unassigned_tasks.size > 0
   %section
-    %h2= t '.tasks_open.title'
+    %h2
+      = t '.tasks_open.title'
+      %small
+        = link_to tasks_path do
+          = t '.tasks_open.view_all'
+          %i.icon.icon-chevron-right
     = render 'shared/task_list', tasks: @unassigned_tasks
-    = link_to t('.tasks_open.view_all'), tasks_path
 
 - if current_user.ordergroup
   = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}
@@ -48,7 +52,12 @@
       = t '.my_ordergroup.funds'
       = number_to_currency(current_user.ordergroup.get_available_funds)
       %small= t '.my_ordergroup.last_update', when: distance_of_time_in_words(Time.now, current_user.ordergroup.account_updated)
-      %h3= t '.my_ordergroup.transactions.title'
+      %h3
+        = t '.my_ordergroup.transactions.title'
+        %small
+          = link_to my_ordergroup_path do
+            = t '.my_ordergroup.transactions.view'
+            %i.icon.icon-chevron-right
       %table.table.table-striped
         %tr
           %th= heading_helper FinancialTransaction, :created_on
@@ -62,8 +71,6 @@
             %td= h(ft.note)
             - color = ft.amount < 0 ? 'red' : 'black'
             %td{:style => "color:#{color}; width:5em", :class => "currency"}= number_to_currency(ft.amount)
-      %br/
-      %p= link_to t('.my_ordergroup.transactions.view'), my_ordergroup_path
 
 -# placeholder deface to add content using erb[silent]:contains()
 - '<dashboard_bottom_mark>'
