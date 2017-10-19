@@ -20,17 +20,8 @@ class MessagesMailReceiver
   def received(data)
     mail = Mail.new data
 
-    mail_part = nil
-    if mail.multipart?
-      for part in mail.parts
-        content_type = MIME::Type.simplified(part.content_type)
-        if content_type == "text/plain" || !mail_part && content_type == "text/html"
-          mail_part = part
-        end
-      end
-    else
-      mail_part = mail
-    end
+    mail_part = get_mail_part(mail)
+    raise "No valid content could be found" if mail_part.nil?
 
     body = mail_part.body.decoded
     unless mail_part.content_type_parameters.nil?
@@ -59,6 +50,22 @@ class MessagesMailReceiver
 
     message.save!
     Resque.enqueue(MessageNotifier, FoodsoftConfig.scope, "message_deliver", message.id)
+  end
+
+  private
+
+  def get_mail_part(mail)
+    return mail unless mail.multipart?
+
+    mail_part = nil
+    for part in mail.parts
+      part = get_mail_part(part)
+      content_type = MIME::Type.simplified(part.content_type)
+      if content_type == "text/plain" || !mail_part && content_type == "text/html"
+        mail_part = part
+      end
+    end
+    mail_part
   end
 
 end
