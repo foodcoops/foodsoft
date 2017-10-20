@@ -28,6 +28,10 @@ class Page < ActiveRecord::Base
     permalink == "Home"
   end
 
+  def self.dashboard
+    where(permalink: "Dashboard").first
+  end
+
   def self.public_front_page
     where(permalink: "Public_frontpage").first
   end

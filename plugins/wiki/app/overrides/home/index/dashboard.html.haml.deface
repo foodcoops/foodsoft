@@ -1,0 +1,3 @@
+/ insert_after 'erb[silent]:contains("<dashboard_top_mark>")'
+- if FoodsoftWiki.enabled? && (page = Page.dashboard)
+  = wikified_body page.body, page.title
