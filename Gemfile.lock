@@ -42,6 +42,7 @@ PATH
     foodsoft_wiki (0.0.1)
       acts_as_versioned
       content_for_in_controllers
+      deface (~> 1.0)
       diffy
       rails
       wikicloth
