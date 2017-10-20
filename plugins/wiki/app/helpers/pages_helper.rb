@@ -6,7 +6,7 @@ module PagesHelper
   end
 
   def wikified_body(body, title = nil)
-    FoodsoftWiki::WikiParser.new(data: body+"\n", params: {referer: title}).to_html.html_safe
+    FoodsoftWiki::WikiParser.new(data: body+"\n", params: {referer: title}).to_html(noedit: true).html_safe
   rescue => e
     # try the following with line breaks: === one === == two == = three =
     content_tag :span, class: 'alert alert-error' do
