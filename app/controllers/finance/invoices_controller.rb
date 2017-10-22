@@ -7,6 +7,10 @@ class Finance::InvoicesController < ApplicationController
     @invoices = Invoice.includes(:supplier, :deliveries, :orders).order('date DESC').page(params[:page]).per(@per_page)
   end
 
+  def unpaid
+    @suppliers = Supplier.includes(:invoices).where('invoices.paid_on IS NULL').references(:invoices)
+  end
+
   def show
   end
 
