@@ -1,0 +1,27 @@
+- title t('.title')
+
+- for supplier in @suppliers
+  - invoices = supplier.invoices.unpaid
+  - if invoices.any?
+    %h3= supplier.name
+    - invoices_sum = 0
+    - invoices_text = []
+    %p
+    - for invoice in invoices
+      - invoices_sum += invoice.amount
+      - invoices_text << invoice.number
+      = link_to finance_invoice_path(invoice) do
+        = format_date invoice.date
+        = ' ' + invoice.number
+      = ' ' + number_to_currency(invoice.amount)
+      %br/
+    %p
+      - if supplier.iban.present?
+        %b= heading_helper(Supplier, :iban) + ':'
+        = supplier.iban
+        %br/
+      %b= t('.invoices_text') + ':'
+      = invoices_text.join(', ')
+      %br/
+      %b= t('.invoices_sum') + ':'
+      = number_to_currency invoices_sum

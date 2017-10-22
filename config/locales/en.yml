@@ -897,6 +897,10 @@ en:
         title: Create new invoice
       show:
         title: Invoice %{number}
+      unpaid:
+        invoices_text: Reference
+        invoices_sum: Total sum
+        title: Unpaid invoices
     ordergroups:
       index:
         new_transaction: Add new transactions

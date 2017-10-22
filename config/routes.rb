@@ -160,6 +160,7 @@ Foodsoft::Application.routes.draw do
       resources :invoices do
         get :attachment
         get :form_on_supplier_id_change, on: :collection
+        get :unpaid, on: :collection
       end
 
       resources :ordergroups, only: [:index] do
