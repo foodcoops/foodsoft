@@ -85,12 +85,6 @@ group :development do
 
   # Hide assets requests in log
   gem 'quiet_assets'
-
-  # Deploy with Capistrano
-  gem 'capistrano', '~> 3.2.0', require: false
-  gem 'capistrano-rvm', require: false
-  gem 'capistrano-bundler', '>= 1.1.0', require: false
-  gem 'capistrano-rails', require: false
 end
 
 group :development, :test do

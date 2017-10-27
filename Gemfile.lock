@@ -104,19 +104,6 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     callsite (0.0.11)
-    capistrano (3.2.1)
-      i18n
-      rake (>= 10.0.0)
-      sshkit (~> 1.3)
-    capistrano-bundler (1.3.0)
-      capistrano (~> 3.1)
-      sshkit (~> 1.2)
-    capistrano-rails (1.3.0)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
-    capistrano-rvm (0.1.2)
-      capistrano (~> 3.0)
-      sshkit (~> 1.2)
     capybara (2.13.0)
       addressable
       mime-types (>= 1.16)
@@ -266,9 +253,6 @@ GEM
     mono_logger (1.1.0)
     multi_json (1.12.2)
     mysql2 (0.4.9)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (4.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     pdf-core (0.7.0)
@@ -446,9 +430,6 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
-    sshkit (1.14.0)
-      net-scp (>= 1.1.2)
-      net-ssh (>= 2.8.0)
     term-ansicolor (1.6.0)
       tins (~> 1.0)
     therubyracer (0.12.3)
@@ -507,10 +488,6 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-datepicker-rails
   bullet
-  capistrano (~> 3.2.0)
-  capistrano-bundler (>= 1.1.0)
-  capistrano-rails
-  capistrano-rvm
   capybara
   capybara-webkit
   connection_pool
@@ -578,4 +555,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.11.2
+   1.15.4
