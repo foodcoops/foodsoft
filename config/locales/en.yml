@@ -78,6 +78,28 @@ en:
         created_at: Time
         email: Email
         message: Message
+      message:
+        body: Body
+        group_id: Group
+        messagegroup_id: Messagegroup
+        order_id: Order
+        ordergroup_id: Ordergroup
+        private: Private
+        recipient_tokens: "(Additional) recipients"
+        send_method:
+          all: Send to all members
+          messagegroup: Send to members of a messagegroup
+          order: Send to members, who participated at an order
+          ordergroup: Send to members of a ordergroup
+          recipients: Send to specific members
+          workgroup: Send to members of a workgroup
+        send_to_all: Send to all members
+        subject: Subject
+        workgroup_id: Workgroup
+      messagegroup:
+        description: Description
+        name: Name
+        user_tokens: Members
       order:
         boxfill: Fill boxes after
         closed_by: Settled by
@@ -215,6 +237,7 @@ en:
       financial_transaction: Financial transaction
       invoice: Invoice
       message: Message
+      messagegroup: Message group
       order: Order
       order_article: Order article
       order_comment: Order comment
@@ -274,6 +297,23 @@ en:
       index:
         destroy_all: Delete all email problems
         title: Email problems
+    messagegroups:
+      destroy:
+        error: 'Message group could not be deleted: %{error}'
+        notice: Message group was deleted
+      edit:
+        title: Edit message group
+      index:
+        first_paragraph: Here you can create %{url}, edit and delete them.
+        new_messagegroup: Create new message group
+        new_messagegroups: new message groups
+        second_paragraph: A message group is like a mailing-list. Members can subscribe to (and unsubscribe from) the lists they're interested in, from their profile.
+        title: Message groups
+      new:
+        title: Create message group
+      show:
+        send_message: Send message
+        title: Message group %{name}
     ordergroups:
       destroy:
         error: 'Ordergroup could not be marked as deleted: %{error}'
@@ -501,6 +541,7 @@ en:
       currency_space: Whether to add whitespace after the currency symbol.
       currency_unit: Currency symbol for displaying prices.
       custom_css: To modify the layout of this site, you can enter style modifications using the cascading stylesheets (CSS) language. Leave blank for the default style.
+      documents_allowed_extension: A list of allowed filename extensions separated by spaces.
       email_from: Emails will appear to be from this email address. Leave empty to use the foodcoop's contact address.
       email_replyto: Set this when you want to receive replies from emails sent by Foodsoft on a different address than the above.
       email_sender: Emails will appear to be sent from this email address. To avoid emails sent being classified as spam, the webserver may need to be registered in the SPF record of the email address's domain.
@@ -554,6 +595,7 @@ en:
       custom_css: Custom CSS
       default_locale: Default language
       disable_invite: Disable invites
+      documents_allowed_extension: Allowed extensions
       email_from: From address
       email_replyto: Reply-to address
       email_sender: Sender address
@@ -689,9 +731,15 @@ en:
     suppliers_overview: Supplier overview
     update:
       notice: Delivery was updated.
+  discourse:
+    callback:
+      invalid_nonce: Invalid nonce
+      invalid_signature: Invalid signature
+      logged_in: Logged in!
   documents:
     create:
       error: 'Document could not be created: %{error}'
+      not_allowed_mime: The filetype "%{mime}" is not allowed. Please contact an administrator to whitelist it.
       notice: Document was created
     destroy:
       error: 'Document could not be deleted: %{error}'
@@ -898,8 +946,8 @@ en:
       show:
         title: Invoice %{number}
       unpaid:
-        invoices_text: Reference
         invoices_sum: Total sum
+        invoices_text: Reference
         title: Unpaid invoices
     ordergroups:
       index:
@@ -1059,7 +1107,7 @@ en:
     index:
       due_date_format: "%A %d %B"
       messages:
-        title: Newest Messages
+        title: Newest messages
         view_all:
           messages: all messages
           text: Show %{messages} or %{threads}
@@ -1277,7 +1325,37 @@ en:
 
 
         Kind regards from %{foodcoop}.
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: show all
+    index:
+      general: General
+      title: Message threads
+    message_threads:
+      last_reply_at: Last replied at
+      last_reply_by: Last replied by
+      started_at: Started at
+      started_by: Started by
+    show: General
+  messagegroups:
+    index:
+      body: 'A message group is like a mailing-list: you can join (or leave) any of them to receive the updates sent to that group.'
+      title: Message groups
+    join:
+      error: 'Could not join message group: %{error}'
+      notice: Joined message group
+    leave:
+      error: 'Messagegroup could not be left: %{error}'
+      notice: Left message group
+    messagegroup:
+      join: Join message group
+      leave: Leave message group
   messages:
+    actionbar:
+      message_threads: Show as threads
+      messagegroups: Subscribe to groups
+      messages: Show as list
+      new: New message
     create:
       notice: Message is saved and will be sent.
     index:
@@ -1290,6 +1368,7 @@ en:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
+      error_private: Sorry, this message is private.
       hint_private: Message doesn’t show in Foodsoft mail inbox
       list:
         desc: 'Please send messages to all using the mailing-list: %{list}'
@@ -1297,18 +1376,25 @@ en:
         subscribe: You can find more about the mailing-list at %{link}.
         subscribe_msg: You may have to subscribe to the mailing-list first.
         wiki: Wiki (page Mailing-List)
+      message: message
       no_user_found: No user found
+      reply_to: This message is an reply to an other %{link}.
       search: Search ...
       search_user: Search user
       title: New message
     show:
       all_messages: All messages
       from: 'From:'
+      group: 'Group:'
       reply: Reply
+      reply_to: 'Reply to:'
       sent_on: 'Sent:'
       subject: 'Subject:'
       title: Show message
       to: 'To:'
+    thread:
+      all_message_threads: All message threads
+      reply: Reply
   messages_mailer:
     foodsoft_message:
       footer: |
@@ -1335,6 +1421,7 @@ en:
       config: Configuration
       home: Overview
       mail_delivery_status: Email problems
+      messagegroups: Message groups
       ordergroups: Ordergroups
       title: Administration
       users: Users
@@ -1525,6 +1612,8 @@ en:
       redirect_notice: Redirected from %{page} ...
     destroy:
       notice: The page '%{page}' and all subpages have been deleted successfully.
+    diff:
+      title: "%{title} - changes from version %{old} to %{new}"
     edit:
       title: Edit page
     error_stale_object: Warning, the page has just been edited by someone else. Please try again.
@@ -1550,6 +1639,9 @@ en:
         section_character: Character formatting
         section_link: Link formatting
         section_more: More topics
+        section_table: Table formatting
+        see_tables: see %{tables_link}
+        tables_link: Tables
         text: text
         title: Quick formatting help
         unordered_list: Item list
@@ -1565,6 +1657,7 @@ en:
       date_format: "%d-%m-%y %H:%M"
       delete: Delete page
       delete_confirm: 'Warning: all subpages will be deleted as well. Are you sure?'
+      diff: Compare versions
       edit: Edit page
       last_updated: Last updated by <b>%{user}</b> on %{when}
       subpages: subpages
@@ -1631,6 +1724,7 @@ en:
       who_hint: "(How much are still needed?)"
     user_form_fields:
       contact_address_hint: The address of your ordergroup. If you update this, it changes for other members of the ordergroup as well.
+      messagegroups: Join or leave message groups
     workgroup_members:
       title: Group memberships
   simple_form:

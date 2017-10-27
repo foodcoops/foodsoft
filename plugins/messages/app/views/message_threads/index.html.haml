@@ -2,7 +2,7 @@
 
 = render 'messages/actionbar', active: 'message_threads'
 
-= render 'groupmessage_threads', group: nil, name: t('.other'), id: 0
+= render 'groupmessage_threads', group: nil, name: t('.general'), id: 0
 
 - for group in @groups
   = render 'groupmessage_threads', group: group, name: group.name, id: group.id

@@ -133,7 +133,7 @@ en:
     groupmessage_threads:
       show_message_threads: show all
     index:
-      other: General
+      general: General
       title: Message threads
     message_threads:
       last_reply_at: Last replied at
@@ -141,7 +141,7 @@ en:
       started_at: Started at
       started_by: Started by
     show:
-      other: General
+      general: General
   messages_mailer:
     foodsoft_message:
       footer: ! 'Reply: %{reply_url}

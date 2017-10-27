@@ -78,6 +78,28 @@ de:
         created_at: Zeitpunkt
         email: E-Mail
         message: Nachicht
+      message:
+        body: Inhalt
+        group_id: Gruppe
+        messagegroup_id: Nachrichtengruppe
+        order_id: Bestellung
+        ordergroup_id: Bestellgruppe
+        private: Privat
+        recipient_tokens: "(Zusätzliche) Empfänger_innen"
+        send_method:
+          all: An alle Mitglieder schicken
+          messagegroup: An die Mitglieder einer Nachrichtengruppe schicken
+          order: An die Mitglieder schicken, die bei einer Bestellung etwas bestellt haben
+          ordergroup: An die Mitglieder einer Bestellgruppe schicken
+          recipients: An ausgewählte Mitglieder schicken
+          workgroup: An die Mitglieder einer Arbeitsgruppe schicken
+        send_to_all: An alle Mitglieder schicken
+        subject: Betreff
+        workgroup_id: Arbeitsgruppe
+      messagegroup:
+        description: Beschreibung
+        name: Name
+        user_tokens: Mitglieder
       order:
         boxfill: Kistenfüllen ab
         closed_by: Abgerechnet von
@@ -215,6 +237,7 @@ de:
       financial_transaction: Kontotransaktion
       invoice: Rechnung
       message: Nachricht
+      messagegroup: Nachrichtengruppe
       order: Bestellung
       order_article: Bestell-Artikel
       order_comment: Kommentar
@@ -272,6 +295,23 @@ de:
       index:
         destroy_all: Alle E-Mail Probleme löschen
         title: E-Mail Probleme
+    messagegroups:
+      destroy:
+        error: 'Nachrichtengruppe konnte nicht als gelöscht markiert werden: %{error}'
+        notice: Nachrichtengruppe wurde als gelöscht markiert
+      edit:
+        title: Nachrichtengruppe bearbeiten
+      index:
+        first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
+        new_messagegroup: Neue Nachrichtengruppe anlegen
+        new_messagegroups: neue Nachrichtengruppe
+        second_paragraph: Eine Nachrichtengruppe ist wie ein Mail-Verteilen. Mitglieder können Verteiler in ihrem Profil abonnieren (und auch wieder abbestellen) an denen sie interessiert sind.
+        title: Nachrichtengruppen
+      new:
+        title: Nachrichtengruppe anlegen
+      show:
+        send_message: Nachricht senden
+        title: Nachrichtengruppe %{name}
     ordergroups:
       destroy:
         error: 'Bestellgruppe konnte nicht als gelöscht markiert werden: %{error}'
@@ -499,6 +539,7 @@ de:
       currency_space: Leerzeichen beim Währungssymbol hinzufügen.
       currency_unit: Währungssymbol zur Anzeige von Preisen.
       custom_css: Um das Layout der Seite anzupassen, kannst Du CSS verwenden. Kann leer gelassen werden, um den Standard Stil zu verwenden.
+      documents_allowed_extension: Eine Liste an erlaubten Dateiendungen getrennt durch Leerzeichen.
       email_from: E-Mails werden so aussehen, als ob sie von dieser Adresse gesendet wurden. Kann leer gelassen werden, um die Kontaktadresse der Foodcoop zu benutzen.
       email_replyto: Setze diese Adresse, wenn Du Antworten auf Foodsoft E-Mails auf eine andere, als die oben angegebene Absenderadresse bekommen möchtest.
       email_sender: E-Mails werden so aussehen, als ob sie von dieser Adresse versendet wurden. Um zu vermeiden, dass E-Mails dadurch als Spam eingeordnet werden, muss der Webserver möglicherweise im SPF Eintrag der Domain der E-Mail Adresse eingetragen werden.
@@ -536,7 +577,7 @@ de:
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
-      use_wiki: "Änderbare Wiki Seiten aktivieren"
+      use_wiki: Änderbare Wiki Seiten aktivieren
       webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
     keys:
       applepear_url: Hilfe URL für das Äpfel Punktesystem zum Engagement
@@ -552,6 +593,7 @@ de:
       custom_css: Angepasstes CSS
       default_locale: Standardsprache
       disable_invite: Einladungen deaktivieren
+      documents_allowed_extension: Erlaubte Endungen
       email_from: Absenderadresse
       email_replyto: Antwortadresse
       email_sender: Senderadresse
@@ -687,9 +729,15 @@ de:
     suppliers_overview: Lieferantenübersicht
     update:
       notice: Lieferung wurde aktualisiert.
+  discourse:
+    callback:
+      invalid_nonce: Ungültige nonce
+      invalid_signature: Ungültige Signature
+      logged_in: Angemeldet!
   documents:
     create:
       error: 'Dokument konnte nicht erstellt werden: %{error}'
+      not_allowed_mime: Der Dateityp "%{mime}" ist nicht erlaubt. Bitte kontaktiere einen Administrator um ihn freizuschalten.
       notice: Dokument wurde erstellt
     destroy:
       error: 'Dokument konnt nicht gelöscht werden: %{error}'
@@ -896,8 +944,8 @@ de:
       show:
         title: Rechnung %{number}
       unpaid:
-        invoices_text: Verwendungszweck
         invoices_sum: Gesamtsumme
+        invoices_text: Verwendungszweck
         title: Unbezahlte Rechnungen
     ordergroups:
       index:
@@ -1053,7 +1101,7 @@ de:
       more_info: Mehr Informationen
       points: 'Deine aktueller Äpfelpunktestand: %{points}'
       warning: Achtung, hast Du weniger als %{threshold} Äpfel, darfst Du nicht mehr bestellen!
-    changes_saved: "Änderungen wurden gespeichert."
+    changes_saved: Änderungen wurden gespeichert.
     index:
       due_date_format: "%A, %d. %b"
       messages:
@@ -1136,7 +1184,7 @@ de:
         below: "%{count} übrig"
         equal: alle verteilt
     ordering:
-      confirm_change: "Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?"
+      confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
     email:
       footer_1_separator: "--"
@@ -1225,7 +1273,7 @@ de:
     order_result:
       subject: 'Bestellung beendet: %{name}'
       text0: |-
-        Liebe Bestellgruppe %{ordergroup},
+        Liebe %{ordergroup},
 
         die Bestellung für "%{order}" wurde am %{when} von %{user} beendet.
         Für euch wurden die folgenden Artikel bestellt:
@@ -1267,7 +1315,37 @@ de:
 
 
         Viele Grüße von %{foodcoop}
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: Alle Nachrichtenverläufe anzeigen
+    index:
+      general: Allgemeine Nachrichten
+      title: Nachrichtenverläufe
+    message_threads:
+      last_reply_at: Letze Antwort am
+      last_reply_by: Letze Antwort von
+      started_at: Gestartet am
+      started_by: Gestartet von
+    show: Allgemeine Nachrichten
+  messagegroups:
+    index:
+      body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
+      title: Nachrichtengruppen
+    join:
+      error: 'Nachrichtengruppe konnte nicht begetreten werden: %{error}'
+      notice: Nachrichtengruppe wurde beigetreten
+    leave:
+      error: 'Nachrichtengruppe konnte nicht verlassen werden: %{error}'
+      notice: Nachrichtengruppe wurde verlassen
+    messagegroup:
+      join: Nachrichtengruppe beitreten
+      leave: Nachrichtengruppe verlassen
   messages:
+    actionbar:
+      message_threads: Als Verläufe anzeigen
+      messagegroups: Nachrichtengruppen beitreten
+      messages: Als Liste anzeigen
+      new: Neue Nachricht
     create:
       notice: Nachricht ist gespeichert und wird versendet.
     index:
@@ -1280,6 +1358,7 @@ de:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
+      error_private: 
       hint_private: Nachricht erscheint nicht im Foodsoft Posteingang
       list:
         desc: 'Nachrichten an alle verschickst Du bitte über den Verteiler: %{list}'
@@ -1287,18 +1366,25 @@ de:
         subscribe: Erklärungen zum Verteiler findest Du im %{link}.
         subscribe_msg: Eventuell musst Du Dich dem Verteiler erst bekannt machen.
         wiki: Wiki (Abschnitt Mailing-Liste)
+      message: 
       no_user_found: Kein/e Benutzer/in gefunden
+      reply_to: 
       search: Suche ...
       search_user: Nach Bernutzer/in suchen
       title: Neue Nachricht
     show:
       all_messages: Nachrichten im Überblick
       from: 'Von:'
+      group: 
       reply: Antworten
+      reply_to: 
       sent_on: 'Gesendet:'
       subject: 'Betreff:'
       title: Nachricht anzeigen
       to: 'An:'
+    thread:
+      all_message_threads: Alle Nachrichtenverläufe
+      reply: Antworten
   messages_mailer:
     foodsoft_message:
       footer: |
@@ -1323,8 +1409,9 @@ de:
   navigation:
     admin:
       config: Einstellungen
-      home: "Übersicht"
+      home: Übersicht
       mail_delivery_status: E-Mail Probleme
+      messagegroups: Nachrichtengruppen
       ordergroups: Bestellgruppen
       title: Administration
       users: Benutzer/innen
@@ -1339,7 +1426,7 @@ de:
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen
-      home: "Übersicht"
+      home: Übersicht
       invoices: Rechnungen
       title: Finanzen
     foodcoop: Foodcoop
@@ -1515,6 +1602,8 @@ de:
       redirect_notice: Weitergeleitet von %{page} ...
     destroy:
       notice: Die Seite '%{page}' und alle Unterseiten wurden erfolgreich gelöscht
+    diff:
+      title: "%{title} - Änderung von Version %{old} auf %{new}"
     edit:
       title: Seite bearbeiten
     error_stale_object: Achtung, die Seite wurde gerade von jemand anderes bearbeitet. Bitte versuche es erneut.
@@ -1524,7 +1613,7 @@ de:
         external_link_ex: Externe Seite
         external_links: Extern
         heading: Ebene %{level}
-        headings: "Überschriften"
+        headings: Überschriften
         image_link_title: Bildtitel
         image_links: Bilder
         italic: kursiv
@@ -1540,6 +1629,9 @@ de:
         section_character: Zeichenformatierung
         section_link: Link-Formatierung
         section_more: Mehr Themen
+        section_table: 
+        see_tables: 
+        tables_link: 
         text: text
         title: Schnelle Formatierungshilfe
         unordered_list: Listen mit Punkten
@@ -1555,6 +1647,7 @@ de:
       date_format: "%d.%m.%y %H:%M"
       delete: Seite löschen
       delete_confirm: Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?
+      diff: Versionen vergleichen
       edit: Seite bearbeiten
       last_updated: Zuletzt bearbeitet von <b>%{user}</b> am %{when}
       subpages: Unterseiten
@@ -1598,7 +1691,7 @@ de:
     group:
       access: Zugriff auf
       activated: aktiviert
-      apple_limit: "Äpfel-Bestellbeschränkung"
+      apple_limit: Äpfel-Bestellbeschränkung
       break: von %{start} bis %{end}
       deactivated: deaktiviert
     group_form_fields:
@@ -1621,6 +1714,7 @@ de:
       who_hint: "(Wie viele werden noch benötigt?)"
     user_form_fields:
       contact_address_hint: Die Adresse deiner Bestellgruppe. Wenn du sie aktualisierst, wird sie auch bei den anderen Mitgliedern deiner Bestellgruppe aktualisiert.
+      messagegroups: Nachrichtengruppen beitreten oder verlassen
     workgroup_members:
       title: Mitglieder der Gruppen
   simple_form:
@@ -1633,7 +1727,7 @@ de:
         description: Kommagetrennte Liste von Kategorienamen die beim Import/Datenabgleich erkannt wurden
       order_article:
         units_to_order: Wenn Du die Gesamtanzahl gelieferter Gebinde änderst, musst Du auch die individuelle Anzahl der einzelnen Bestellgruppen anpassen, indem Du auf den Artikelnamen klickst. Sie werden nicht automatisch neuberechnet und andernfalls werden den Bestellgruppen Artikel in Rechnung gestellt, die nicht geliefert wurden!
-        update_global_price: "Ändert auch den Preis für zukünftige Bestellungen"
+        update_global_price: Ändert auch den Preis für zukünftige Bestellungen
       stock_article:
         copy:
           name: Bitte ändern

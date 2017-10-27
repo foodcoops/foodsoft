@@ -74,15 +74,42 @@ nl:
         orders: Bestelling
         paid_on: Betaald op
         supplier: Leverancier
+      mail_delivery_status:
+        created_at: 
+        email: 
+        message: 
       message:
         body: Bericht
+        group_id: Groep
+        messagegroup_id: 
+        order_id: 
+        ordergroup_id: 
         private: Privé
         recipient_tokens: Geadresseerden
+        send_method:
+          all: 
+          messagegroup: 
+          order: 
+          ordergroup: 
+          recipients: 
+          workgroup: 
+        send_to_all: Aan alle leden sturen
         subject: Onderwerp
+        workgroup_id: 
+      messagegroup:
+        description: 
+        name: 
+        user_tokens: 
       order:
         boxfill: Dozen vullen na
         closed_by: Afgerekend door
         created_by: Geopend door
+        end_action: 
+        end_actions:
+          auto_close: 
+          auto_close_and_send: 
+          auto_close_and_send_min_quantity: 
+          no_end_action: 
         ends: sluit op
         name: Leverancier
         note: Notitie
@@ -210,6 +237,7 @@ nl:
       financial_transaction: Financiële transactie
       invoice: Factuur
       message: Bericht
+      messagegroup: 
       order: Bestelling
       order_article: Bestellingsartikel
       order_comment: Commentaar
@@ -261,6 +289,29 @@ nl:
       update:
         notice: Configuratie opgeslagen.
     confirm: Weet je het zeker?
+    mail_delivery_status:
+      destroy_all:
+        notice: 
+      index:
+        destroy_all: 
+        title: 
+    messagegroups:
+      destroy:
+        error: 
+        notice: 
+      edit:
+        title: 
+      index:
+        first_paragraph: 
+        new_messagegroup: 
+        new_messagegroups: 
+        second_paragraph: 
+        title: 
+      new:
+        title: 
+      show:
+        send_message: 
+        title: 
     ordergroups:
       destroy:
         error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
@@ -311,7 +362,10 @@ nl:
         person: Persoon
         preference: Voorkeuren
         send_message: Bericht versturen
+        show_email_problems: 
         sudo: Inloggen als
+      users:
+        show_email_problems: 
     workgroups:
       destroy:
         error: 'Werkgroep kon niet verwijderd worden: %{error}'
@@ -485,6 +539,7 @@ nl:
       currency_space: Spatie toevoegen na valutasymbool.
       currency_unit: Valutasymbool voor het tonen van prijzen.
       custom_css: De layout van deze site kan gewijzigd worden door hier cascading stylesheets (CSS) in te voeren. Laat het leeg voor de standaardstijl.
+      documents_allowed_extension: 
       email_from: Emails zullen lijken verzonden te zijn vanaf dit email adres. Laat het veld leeg om het contactadres van de foodcoop te gebruiken.
       email_replyto: Vul dit in als je antwoord op mails van Foodsoft wilt ontvangen op een ander adres dan het bovenstaande.
       email_sender: Emails worden verzonden vanaf dit emailadres. Om te voorkomen dat emails als spam worden tegengehouden, is het te adviseren het adres van de webserver op te nemen in het SPF record van het email domein.
@@ -538,6 +593,7 @@ nl:
       custom_css: Aangepaste CSS
       default_locale: Standaardtaal
       disable_invite: Uitnodigingen deactiveren
+      documents_allowed_extension: 
       email_from: From adres
       email_replyto: Reply-to adres
       email_sender: Sender adres
@@ -673,9 +729,15 @@ nl:
     suppliers_overview: Leverancieroverzicht
     update:
       notice: Levering is bijgewerkt.
+  discourse:
+    callback:
+      invalid_nonce: 
+      invalid_signature: 
+      logged_in: 
   documents:
     create:
       error: 'Document kon niet gemaakt worden: %{error}'
+      not_allowed_mime: 
       notice: Document is gemaakt
     destroy:
       error: 'Document kon niet verwijderd worden: %{error}'
@@ -881,6 +943,10 @@ nl:
         title: Nieuwe factuur toevoegen
       show:
         title: Factuur %{number}
+      unpaid:
+        invoices_sum: 
+        invoices_text: 
+        title: 
     ordergroups:
       index:
         new_transaction: Nieuwe transacties toevoegen
@@ -1169,8 +1235,8 @@ nl:
     dateformat: "%d %b"
     feedback:
       header: "%{user} schreef op %{date}:"
-      subject: Feedback voor Foodsoft
-    from_via_foodsoft: "%{name} via Foodsoft"
+      subject: Feedback van %{email}
+    from_via_foodsoft: 
     invite:
       subject: Uitnodiging voor de foodcoop
       text: |-
@@ -1220,6 +1286,9 @@ nl:
 
 
         Vriendelijke groet van %{foodcoop}.
+    order_result_supplier:
+      subject: 
+      text: 
     reset_password:
       subject: Nieuw wachtwoord voor %{username}
       text: |-
@@ -1239,10 +1308,40 @@ nl:
 
         Je bent opgegeven voor "%{task}". Deze taak is morgen te vervullen (%{when})!
       text1: |-
-        Mijn taken: %{user_tasks_url}
+        Je taken: %{user_tasks_url}
 
         Groeten van %{foodcoop}.
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: 
+    index:
+      general: 
+      title: 
+    message_threads:
+      last_reply_at: 
+      last_reply_by: 
+      started_at: 
+      started_by: 
+    show: 
+  messagegroups:
+    index:
+      body: 
+      title: 
+    join:
+      error: 
+      notice: 
+    leave:
+      error: 
+      notice: 
+    messagegroup:
+      join: 
+      leave: 
   messages:
+    actionbar:
+      message_threads: 
+      messagegroups: 
+      messages: 
+      new: 
     create:
       notice: Bericht is opgeslagen en wordt verzonden.
     index:
@@ -1255,6 +1354,7 @@ nl:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
+      error_private: 
       hint_private: Bericht wordt niet getoond in de Foodsoft inbox
       list:
         desc: 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
@@ -1262,18 +1362,25 @@ nl:
         subscribe: Lees meer over de mailing-lijst op %{link}.
         subscribe_msg: Mogelijk moet je je eerst aanmelden voor de mailing-lijst.
         wiki: Wiki (mailing-lijst pagina)
+      message: 
       no_user_found: Geen gebruiker gevonden
+      reply_to: 
       search: Zoeken ...
       search_user: Gebruiker zoeken
       title: Nieuw bericht
     show:
       all_messages: Berichtenoverzicht
       from: 'Van:'
+      group: 
       reply: Antwoorden
+      reply_to: 
       sent_on: 'Verzonden:'
       subject: 'Onderwerp:'
       title: Bericht lezen
       to: 'Aan:'
+    thread:
+      all_message_threads: 
+      reply: 
   messages_mailer:
     foodsoft_message:
       footer: |-
@@ -1299,6 +1406,8 @@ nl:
     admin:
       config: Instellingen
       home: Overzicht
+      mail_delivery_status: 
+      messagegroups: 
       ordergroups: Huishoudens
       title: Administratie
       users: Gebruikers
@@ -1414,6 +1523,8 @@ nl:
       submit: Bestelling ontvangen
       surplus_options: 'Overschot:'
       title: 'Ontvangen: %{order}'
+    send_to_supplier:
+      notice: 
     show:
       action_end: Sluiten!
       amounts: 'Totaal netto/bruto:'
@@ -1426,6 +1537,7 @@ nl:
       confirm_end: |-
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
+      confirm_send_to_supplier: 
       create_invoice: Rekening toevoegen
       description1_order: "%{state} order van %{supplier} geopend door %{who},"
       description1_period:
@@ -1448,6 +1560,7 @@ nl:
         default: Artikelen zoeken...
         groups: Huishoudens zoeken...
       search_reset: Zoekopdracht wissen
+      send_to_supplier: 
       show_invoice: Rekening tonen
       sort_article: Per artikel
       sort_group: Per huishouden
@@ -1485,6 +1598,8 @@ nl:
       redirect_notice: Doorverwezen van %{page} ...
     destroy:
       notice: De pagina '%{page}' en alle subpagina's zijn verwijderd.
+    diff:
+      title: 
     edit:
       title: Pagina bewerken
     error_stale_object: Opgelet, de pagina is net veranderd door een ander. Probeer het alsjeblieft opnieuw.
@@ -1510,6 +1625,9 @@ nl:
         section_character: Tekens
         section_link: Links
         section_more: Meer onderwerpen
+        section_table: 
+        see_tables: 
+        tables_link: 
         text: tekst
         title: Korte opmaakhulp
         unordered_list: Itemlijst
@@ -1525,6 +1643,7 @@ nl:
       date_format: "%d-%m-%y %H:%M"
       delete: Pagina verwijderen
       delete_confirm: 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
+      diff: 
       edit: Pagina bewerken
       last_updated: Laatst bijgewerkt door <b>%{user}</b> op %{when}
       subpages: kindpagina's
@@ -1591,6 +1710,7 @@ nl:
       who_hint: "(Hoeveel zijn er nog nodig?)"
     user_form_fields:
       contact_address_hint: Het adres van je huishouden. Als je dit wijzigt, verandert het ook voor de andere leden van je huishouden.
+      messagegroups: 
     workgroup_members:
       title: Groepsleden
   simple_form:

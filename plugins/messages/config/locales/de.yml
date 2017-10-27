@@ -74,7 +74,7 @@ de:
     groupmessage_threads:
       show_message_threads: Alle Nachrichtenverläufe anzeigen
     index:
-      other: Allgemeine Nachrichten
+      general: Allgemeine Nachrichten
       title: Nachrichtenverläufe
     message_threads:
       last_reply_at: Letze Antwort am
@@ -82,7 +82,7 @@ de:
       started_at: Gestartet am
       started_by: Gestartet von
     show:
-      other: Allgemeine Nachrichten
+      general: Allgemeine Nachrichten
   navigation:
     admin:
       messagegroups: Nachrichtengruppen

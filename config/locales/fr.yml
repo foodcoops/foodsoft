@@ -62,7 +62,7 @@ fr:
         amount: Montant
         attachment: Appendice
         created_at: Créé le
-        created_by: "Établi par"
+        created_by: Établi par
         date: Date de facturation
         delete_attachment: Supprimer appendice
         deliveries: Réapprovisionnement
@@ -74,15 +74,42 @@ fr:
         orders: Commande
         paid_on: Payée le
         supplier: Fournisseur-e
+      mail_delivery_status:
+        created_at: 
+        email: 
+        message: 
       message:
         body: Contenu
+        group_id: Cellule ou équipe
+        messagegroup_id: 
+        order_id: 
+        ordergroup_id: 
         private: Privé
         recipient_tokens: Destinataires
+        send_method:
+          all: 
+          messagegroup: 
+          order: 
+          ordergroup: 
+          recipients: 
+          workgroup: 
+        send_to_all: Envoyer à tous les membres
         subject: Sujet
+        workgroup_id: 
+      messagegroup:
+        description: 
+        name: 
+        user_tokens: 
       order:
         boxfill: 
         closed_by: Décompté par
-        created_by: "Établi par"
+        created_by: Établi par
+        end_action: 
+        end_actions:
+          auto_close: 
+          auto_close_and_send: 
+          auto_close_and_send_min_quantity: 
+          no_end_action: 
         ends: Clôture le
         name: Fournisseur-e
         note: Note
@@ -108,7 +135,7 @@ fr:
         account_balance: Crédit initial
         available_funds: Crédit disponible
         break: "(dernière) pause"
-        break_until: "à"
+        break_until: à
         contact: Contact
         contact_address: Adresse
         contact_person: Personne à contacter
@@ -160,7 +187,7 @@ fr:
         name: Activité
         required_users: Nombre de personnes nécessaires
         user_list: Responsables inscritEs
-        workgroup: "Équipe"
+        workgroup: Équipe
       user:
         email: Email
         first_name: Prénom
@@ -175,8 +202,8 @@ fr:
         password_confirmation: Confirmation du mot de passe
         phone: Téléphone
         workgroup:
-          one: "Équipe"
-          other: "Équipes"
+          one: Équipe
+          other: Équipes
       workgroup:
         description: Description
         name: Nom
@@ -210,6 +237,7 @@ fr:
       financial_transaction: Transaction
       invoice: Facture
       message: Message
+      messagegroup: 
       order: Commande
       order_article: Article à commander
       order_comment: Commentaire
@@ -219,7 +247,7 @@ fr:
       supplier: Fournisseur-e
       task: Boulot
       user: Membre
-      workgroup: "Équipe"
+      workgroup: Équipe
   admin:
     access_to: accès à
     base:
@@ -261,6 +289,29 @@ fr:
       update:
         notice: 
     confirm: T'es sûrE de ton coup?
+    mail_delivery_status:
+      destroy_all:
+        notice: 
+      index:
+        destroy_all: 
+        title: 
+    messagegroups:
+      destroy:
+        error: 
+        notice: 
+      edit:
+        title: 
+      index:
+        first_paragraph: 
+        new_messagegroup: 
+        new_messagegroups: 
+        second_paragraph: 
+        title: 
+      new:
+        title: 
+      show:
+        send_message: 
+        title: 
     ordergroups:
       destroy:
         error: 'La cellule n''a pas pu être dissoute: %{error}'
@@ -276,7 +327,7 @@ fr:
         new_ordergroups: créées
         second_paragraph: 'Attention à bien noter la <em>différence entre une équipe et une cellule</em>: chaque membre fait partie d''une cellule, qui possède un certain crédit servant à payer les commandes, tandis qu''une <em> %{url} </em> (par exemple l''équipe distribution) s''occupe des boulots utiles à la boufcoop. Les membres appartiennent toujours à une et une seule cellule, mais peuvent faire partie de plusieurs équipes.'
         title: Cellules
-        workgroup: "équipe"
+        workgroup: équipe
       new:
         title: Définir une nouvelle cellule
       show:
@@ -311,7 +362,10 @@ fr:
         person: Personne
         preference: Préférences
         send_message: Envoyer un message
+        show_email_problems: 
         sudo: 
+      users:
+        show_email_problems: 
     workgroups:
       destroy:
         error: 'Cette équipe n''a pas pu être supprimée: %{error}'
@@ -327,13 +381,13 @@ fr:
         new_workgroups: nouvelles équipes
         ordergroup: cellule
         second_paragraph: 'Attention à bien noter la <em>différence entre une équipe et une cellule</em>: chaque membre fait partie d''une <em>%{url}</em>, qui possède un certain crédit servant à payer les commandes, tandis qu''une équipe (par exemple l''équipe distribution) s''occupe des boulots utiles à la boufcoop. Les membres appartiennent toujours à une et une seule cellule, mais peuvent faire partie de plusieurs équipes.'
-        title: "Équipes"
+        title: Équipes
       new:
         title: Définir une nouvelle équipe
       show:
         confirm: T'es sûrE de ton coup?
         edit: Modifier les données sur l'équipe et/ou ses membres
-        title: "Équipe %{name}"
+        title: Équipe %{name}
       workgroups:
         members: membres
         name: nom
@@ -485,6 +539,7 @@ fr:
       currency_space: 
       currency_unit: 
       custom_css: 
+      documents_allowed_extension: 
       email_from: 
       email_replyto: 
       email_sender: 
@@ -538,6 +593,7 @@ fr:
       custom_css: 
       default_locale: 
       disable_invite: 
+      documents_allowed_extension: 
       email_from: 
       email_replyto: 
       email_sender: 
@@ -673,9 +729,15 @@ fr:
     suppliers_overview: Liste des fournisseur-e-s
     update:
       notice: La commande a été actualisée
+  discourse:
+    callback:
+      invalid_nonce: 
+      invalid_signature: 
+      logged_in: 
   documents:
     create:
       error: 
+      not_allowed_mime: 
       notice: 
     destroy:
       error: 
@@ -867,7 +929,7 @@ fr:
       end: Fin
       everything_cleared: Super, tout est a déjà été décompté!
       last_transactions: Dernières transactions
-      open_transactions: "à décompter"
+      open_transactions: à décompter
       show_all: tout afficher
       title: Espace trésorerie
       unpaid_invoices: Factures à régler
@@ -883,6 +945,10 @@ fr:
         title: Ajouter une facture
       show:
         title: Facture %{number}
+      unpaid:
+        invoices_sum: 
+        invoices_text: 
+        title: 
     ordergroups:
       index:
         new_transaction: Saisir une nouvelle transaction
@@ -919,7 +985,7 @@ fr:
         body: |-
           <p>Seuls les membres d'une équipe peuvent la modifier.</p>
           <p>Tu peux rejoindre une équipe en contactant un de ses membres.</p>
-        title: "Équipes"
+        title: Équipes
       workgroup:
         edit: Modifier la cellule
         show_tasks: Afficher tous les boulots
@@ -1021,7 +1087,7 @@ fr:
       new_invoice: Ajouter une nouvelle facture
       show_invoice: Afficher la facture
     messages:
-      write_message: "Écrire un message"
+      write_message: Écrire un message
     orders:
       old_price: Ancien prix
       option_choose: Choix d'un-e fournisseur-e
@@ -1111,7 +1177,7 @@ fr:
         title: Gérer les produits
       tasks: Ton boulot
       title: Aller à...
-      write_message: "Écrire un message"
+      write_message: Écrire un message
   invites:
     errors:
       already_member: est déjà membre de la Boufcoop.
@@ -1186,8 +1252,8 @@ fr:
     dateformat: "%d %b"
     feedback:
       header: 'Le %{date}, %{user} a écrit:'
-      subject: Feedback pour Foodsoft
-    from_via_foodsoft: "%{name} via Foodsoft"
+      subject: Retour de %{email}
+    from_via_foodsoft: 
     invite:
       subject: Invitation à participer à une Bouffecoop
       text: |-
@@ -1227,6 +1293,9 @@ fr:
         Afficher sur le site: %{order_url}
 
         Message envoyé automatiquement par %{foodcoop}
+    order_result_supplier:
+      subject: 
+      text: 
     reset_password:
       subject: Nouveau mot de passe pour %{username}
       text: |-
@@ -1249,7 +1318,37 @@ fr:
         Ton agenda: %{user_tasks_url}
 
         Ceci est un rappel automatisé envoyé par %{foodcoop}.
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: 
+    index:
+      general: 
+      title: 
+    message_threads:
+      last_reply_at: 
+      last_reply_by: 
+      started_at: 
+      started_by: 
+    show: 
+  messagegroups:
+    index:
+      body: 
+      title: 
+    join:
+      error: 
+      notice: 
+    leave:
+      error: 
+      notice: 
+    messagegroup:
+      join: 
+      leave: 
   messages:
+    actionbar:
+      message_threads: 
+      messagegroups: 
+      messages: 
+      new: 
     create:
       notice: Le message a bien été sauvegardé et est en cours d'envoi.
     index:
@@ -1262,6 +1361,7 @@ fr:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
+      error_private: 
       hint_private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       list:
         desc: Pour envoyer un message à tout le monde, passe par la mailing list "%{list}"
@@ -1269,18 +1369,25 @@ fr:
         subscribe: Pour plus d'explications concernant la mailing list, consulte le %{link}
         subscribe_msg: Il faudra peut être d'abord t'inscrire à la mailing list.
         wiki: wiki (section mailing list)
+      message: 
       no_user_found: Aucun-e membre trouvée avec cet identifiant
+      reply_to: 
       search: Rechercher ...
       search_user: Rechercher unE membre
       title: Nouveau message
     show:
       all_messages: Aperçu des messages
       from: 'De:'
+      group: 
       reply: Répondre
+      reply_to: 
       sent_on: 'Envoyé le:'
       subject: 'Sujet:'
       title: Afficher le contenu du message
       to: 
+    thread:
+      all_message_threads: 
+      reply: 
   messages_mailer:
     foodsoft_message:
       footer: |-
@@ -1306,10 +1413,12 @@ fr:
     admin:
       config: Configuration
       home: Aperçu
+      mail_delivery_status: 
+      messagegroups: 
       ordergroups: Cellules
       title: Administration
       users: Membres
-      workgroups: "Équipes"
+      workgroups: Équipes
     articles:
       categories: Catégories
       stock: Gestion du cellier
@@ -1337,7 +1446,7 @@ fr:
       all_pages: Toutes les pages
       home: Page d'accueil
       title: Wiki
-    workgroups: "Équipes"
+    workgroups: Équipes
   number:
     percentage:
       format:
@@ -1421,6 +1530,8 @@ fr:
       submit: Réceptionner la commande
       surplus_options: 'Options de répartition:'
       title: Réception de la commande %{order}
+    send_to_supplier:
+      notice: 
     show:
       action_end: Clôturer!
       amounts: 'Total net/brut:'
@@ -1431,6 +1542,7 @@ fr:
       comments_link: Commenaire
       confirm_delete: Veux-tu vraiment supprimer la commande?
       confirm_end: Veux tu vraiment clôturer la commande %{order}? Pas d'annulation possible.
+      confirm_send_to_supplier: 
       create_invoice: Ajouter une facture
       description1_order: Commande %{state} de %{supplier} créée par %{who},
       description1_period:
@@ -1453,6 +1565,7 @@ fr:
         default: Rechercher des articles...
         groups: Rechercher des cellules...
       search_reset: Réinitialiser la recherche
+      send_to_supplier: 
       show_invoice: Afficher la facture
       sort_article: Trié par article
       sort_group: Trié par cellules
@@ -1490,6 +1603,8 @@ fr:
       redirect_notice: Redirigé à partir de %{page}...
     destroy:
       notice: La page '%{page}' et toutes ses descendantes ont bien été supprimées.
+    diff:
+      title: 
     edit:
       title: Modifier cette page
     error_stale_object: Cette page est en cours de modification par unE autre membre. Merci de réessayer plus tard.
@@ -1510,11 +1625,14 @@ fr:
         list_item_1: Premier item
         list_item_2: Deuxième item
         noformat: Pas de formatage
-        ordered_list: "Énumérations"
+        ordered_list: Énumérations
         section_block: Format de paragraphe
         section_character: Format de charactère
         section_link: Format des liens
         section_more: 
+        section_table: 
+        see_tables: 
+        tables_link: 
         text: texte
         title: Assistant de mise en forme rapide
         unordered_list: Liste non ordonnée
@@ -1530,6 +1648,7 @@ fr:
       date_format: "%d.%m.%y %H:%M"
       delete: Supprimer la page
       delete_confirm: Attention, tous les contenus seront aussi supprimés. T'es sûrE de ton coup?
+      diff: 
       edit: Modifier la page
       last_updated: Dernière modification le %{when} par <b>%{user}<b>
       subpages: Sous-pages
@@ -1596,6 +1715,7 @@ fr:
       who_hint: "(Combien manquent encore?)"
     user_form_fields:
       contact_address_hint: 
+      messagegroups: 
     workgroup_members:
       title: Membres des équipes
   simple_form:
@@ -1857,6 +1977,6 @@ fr:
     error_last_admin_group: Impossible de supprimer la dernière cellule avec privilèges administratrices.
     error_last_admin_role: 'Les privilèges administratrices ne peuvent pas être retirés à la dernière cellule qui les possède. '
     index:
-      title: "Équipes"
+      title: Équipes
     update:
       notice: L'équipe a été mise à jour

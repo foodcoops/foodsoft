@@ -28,7 +28,7 @@ en:
     create:
       notice: Page was created
     cshow:
-      error_noexist: Page doesn’t exist!
+      error_noexist: Page doesn't exist!
       redirect_notice: Redirected from %{page} ...
     destroy:
       notice: The page '%{page}' and all subpages have been deleted successfully.
