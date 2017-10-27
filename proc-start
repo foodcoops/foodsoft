@@ -3,7 +3,7 @@
 # Run single command from Procfile
 #
 # This script is a basic replacement for foreman when running on Docker. When
-# starting the docker instance, specify as command `script/start <type>`.
+# starting the docker instance, specify as command `./proc-start <type>`.
 # `type` is looked up in `Procfile` and the command is started. This allows e.g.
 # docker-compose to run multiple process/dyno types from a single image, without
 # needing to know the exact command (which may change over time).
