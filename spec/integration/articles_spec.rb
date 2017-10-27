@@ -18,7 +18,7 @@ feature ArticlesController do
     it 'can create a new article' do
       click_on I18n.t('articles.index.new')
       expect(page).to have_selector('form#new_article')
-      article = FactoryGirl.build :article, supplier: supplier, article_category: article_category
+      article = FactoryBot.build :article, supplier: supplier, article_category: article_category
       within('#new_article') do
         fill_in 'article_name', :with => article.name
         fill_in 'article_unit', :with => article.unit

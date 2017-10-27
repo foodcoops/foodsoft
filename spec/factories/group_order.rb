@@ -1,10 +1,10 @@
-require 'factory_girl'
+require 'factory_bot'
 
-FactoryGirl.define do
+FactoryBot.define do
 
   # requires order
   factory :group_order do
-    ordergroup { create(:user, groups: [FactoryGirl.create(:ordergroup)]).ordergroup }
+    ordergroup { create(:user, groups: [FactoryBot.create(:ordergroup)]).ordergroup }
   end
 
 end

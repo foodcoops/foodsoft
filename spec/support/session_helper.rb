@@ -3,7 +3,7 @@ module SessionHelper
 
   def login(user=nil, password=nil)
     visit login_path
-    user = FactoryGirl.create :user if user.nil?
+    user = FactoryBot.create :user if user.nil?
     if user.instance_of? ::User
       nick, password = user.nick, user.password
     else
