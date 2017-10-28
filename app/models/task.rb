@@ -55,7 +55,7 @@ class Task < ActiveRecord::Base
   def self.next_unassigned_tasks_for(user, max = 2)
     periodic_task_group_count = {}
     self.unassigned_tasks_for(user).reject do |item|
-      return false unless item.periodic_task_group
+      next false unless item.periodic_task_group
       count = periodic_task_group_count[item.periodic_task_group] || 0
       periodic_task_group_count[item.periodic_task_group] = count + 1
       count >= max
