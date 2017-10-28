@@ -1253,7 +1253,7 @@ de:
     negative_balance:
       subject: Gruppenkonto im Minus
       text: |-
-        Liebe %{group},
+        Liebe Bestellgruppe %{group},
 
         euer Kontostand is durch eine Buchung am %{when} ins Minus gerutscht: %{balance}
         Es wurden %{amount} für "%{note}" abgebucht, die Buchung wurde von %{user} erstellt.
@@ -1277,7 +1277,7 @@ de:
     order_result:
       subject: 'Bestellung beendet: %{name}'
       text0: |-
-        Liebe %{ordergroup},
+        Liebe Bestellgruppe %{ordergroup},
 
         die Bestellung für "%{order}" wurde am %{when} von %{user} beendet.
         Für euch wurden die folgenden Artikel bestellt:
@@ -1584,7 +1584,6 @@ de:
     update_order_amounts:
       msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
       msg2: "%{count} (%{units}) Toleranzmenge"
-      msg3: 
       msg4: "%{count} (%{units}) übrig"
   pages:
     all:

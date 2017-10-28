@@ -1594,7 +1594,6 @@ en:
     update_order_amounts:
       msg1: "%{count} articles (%{units} units) updated"
       msg2: "%{count} (%{units}) using tolerance"
-      msg3: "%{count} (%{units}) go to stock if foodsoft would support that [don't translate]"
       msg4: "%{count} (%{units}) left over"
   pages:
     all:

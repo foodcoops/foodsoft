@@ -38,7 +38,7 @@ fr:
         note: Note
         supplier: Fournisseur-e
       document:
-        created_at: Crée à
+        created_at: Créé le
         created_by_user_id: Crée par
         data: 
         mime: 
@@ -75,15 +75,15 @@ fr:
         paid_on: Payée le
         supplier: Fournisseur-e
       mail_delivery_status:
-        created_at: 
-        email: 
+        created_at: Créé le
+        email: Email
         message: 
       message:
         body: Contenu
         group_id: Cellule ou équipe
         messagegroup_id: 
-        order_id: 
-        ordergroup_id: 
+        order_id: Commande
+        ordergroup_id: Cellule
         private: Privé
         recipient_tokens: Destinataires
         send_method:
@@ -95,11 +95,11 @@ fr:
           workgroup: 
         send_to_all: Envoyer à tous les membres
         subject: Sujet
-        workgroup_id: 
+        workgroup_id: Équipe
       messagegroup:
-        description: 
-        name: 
-        user_tokens: 
+        description: Description
+        name: Nom
+        user_tokens: Membres
       order:
         boxfill: 
         closed_by: Décompté par
@@ -1580,7 +1580,6 @@ fr:
     update_order_amounts:
       msg1: "%{count} articles (%{units} unités) ont été mis à jour"
       msg2: "%{count} (%{units}) après prise en compte des tolérances"
-      msg3: 
       msg4: "%{count} (%{units}) restants"
   pages:
     all:

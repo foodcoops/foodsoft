@@ -75,41 +75,41 @@ nl:
         paid_on: Betaald op
         supplier: Leverancier
       mail_delivery_status:
-        created_at: 
-        email: 
-        message: 
+        created_at: Tijd
+        email: Email
+        message: Bericht
       message:
         body: Bericht
         group_id: Groep
-        messagegroup_id: 
-        order_id: 
-        ordergroup_id: 
+        messagegroup_id: Berichtengroep
+        order_id: Bestelling
+        ordergroup_id: Bestelgroep
         private: Privé
         recipient_tokens: Geadresseerden
         send_method:
-          all: 
-          messagegroup: 
-          order: 
-          ordergroup: 
-          recipients: 
-          workgroup: 
+          all: Verzenden naar alle leden
+          messagegroup: Verzenden naar leden van een berichtengroep
+          order: Verzenden naar leden die besteld hebben
+          ordergroup: Verzenden naar leden van een bestelgroep
+          recipients: Verzenden naar specifieke leden
+          workgroup: Verzenden naar leden van een werkgroep
         send_to_all: Aan alle leden sturen
         subject: Onderwerp
-        workgroup_id: 
+        workgroup_id: Werkgroep
       messagegroup:
-        description: 
-        name: 
-        user_tokens: 
+        description: Omschrijving
+        name: Naam
+        user_tokens: Leden
       order:
         boxfill: Dozen vullen na
         closed_by: Afgerekend door
         created_by: Geopend door
-        end_action: 
+        end_action: Sluitingsactie
         end_actions:
-          auto_close: 
-          auto_close_and_send: 
-          auto_close_and_send_min_quantity: 
-          no_end_action: 
+          auto_close: Bestelling sluiten
+          auto_close_and_send: Sluit de bestelling en verzend het naar de leverancier
+          auto_close_and_send_min_quantity: Sluit de bestelling en verzend het naar de leverancier als de minimum bestelhoeveelheid gehaald is
+          no_end_action: Geen automatische actie
         ends: sluit op
         name: Leverancier
         note: Notitie
@@ -237,7 +237,7 @@ nl:
       financial_transaction: Financiële transactie
       invoice: Factuur
       message: Bericht
-      messagegroup: 
+      messagegroup: Berichtengroep
       order: Bestelling
       order_article: Bestellingsartikel
       order_comment: Commentaar
@@ -291,27 +291,27 @@ nl:
     confirm: Weet je het zeker?
     mail_delivery_status:
       destroy_all:
-        notice: 
+        notice: Alle emailproblemen zijn verwijderd
       index:
-        destroy_all: 
-        title: 
+        destroy_all: Alle emailproblemen verwijderen
+        title: Emailproblemen
     messagegroups:
       destroy:
-        error: 
-        notice: 
+        error: 'Berichtengroep kon niet verwijderd worden: %{error}'
+        notice: Berichtengroep is verwijderd
       edit:
-        title: 
+        title: Bewerk berichtengroep
       index:
-        first_paragraph: 
-        new_messagegroup: 
-        new_messagegroups: 
-        second_paragraph: 
-        title: 
+        first_paragraph: Hier kun je %{url} aanmaken, aanpassen en verwijderen.
+        new_messagegroup: Nieuwe berichtengroep maken
+        new_messagegroups: nieuwe berichtengroepen
+        second_paragraph: Een berichtengroep is als een mailing-lijst. Leden kunnen zich aan- en afmelden voor groepen waar ze in geïnteresseerd zijn vanuit hun profiel.
+        title: Berichtengroepen
       new:
-        title: 
+        title: Berichtengroep aanmaken
       show:
-        send_message: 
-        title: 
+        send_message: Bericht verzenden
+        title: Berichtengroep %{name}
     ordergroups:
       destroy:
         error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
@@ -362,10 +362,10 @@ nl:
         person: Persoon
         preference: Voorkeuren
         send_message: Bericht versturen
-        show_email_problems: 
+        show_email_problems: Bekijk emailproblemen
         sudo: Inloggen als
       users:
-        show_email_problems: 
+        show_email_problems: Bekijk emailproblemen
     workgroups:
       destroy:
         error: 'Werkgroep kon niet verwijderd worden: %{error}'
@@ -539,7 +539,7 @@ nl:
       currency_space: Spatie toevoegen na valutasymbool.
       currency_unit: Valutasymbool voor het tonen van prijzen.
       custom_css: De layout van deze site kan gewijzigd worden door hier cascading stylesheets (CSS) in te voeren. Laat het leeg voor de standaardstijl.
-      documents_allowed_extension: 
+      documents_allowed_extension: Lijst van toegestane bestandsextensies, gescheiden door spaties.
       email_from: Emails zullen lijken verzonden te zijn vanaf dit email adres. Laat het veld leeg om het contactadres van de foodcoop te gebruiken.
       email_replyto: Vul dit in als je antwoord op mails van Foodsoft wilt ontvangen op een ander adres dan het bovenstaande.
       email_sender: Emails worden verzonden vanaf dit emailadres. Om te voorkomen dat emails als spam worden tegengehouden, is het te adviseren het adres van de webserver op te nemen in het SPF record van het email domein.
@@ -593,7 +593,7 @@ nl:
       custom_css: Aangepaste CSS
       default_locale: Standaardtaal
       disable_invite: Uitnodigingen deactiveren
-      documents_allowed_extension: 
+      documents_allowed_extension: Toegestane extensies
       email_from: From adres
       email_replyto: Reply-to adres
       email_sender: Sender adres
@@ -731,13 +731,13 @@ nl:
       notice: Levering is bijgewerkt.
   discourse:
     callback:
-      invalid_nonce: 
-      invalid_signature: 
-      logged_in: 
+      invalid_nonce: Onjuiste nonce
+      invalid_signature: Onjuiste digitale handtekening
+      logged_in: Ingelogd!
   documents:
     create:
       error: 'Document kon niet gemaakt worden: %{error}'
-      not_allowed_mime: 
+      not_allowed_mime: Het bestandstype "%{mime}" is niet toegestaan. Vraag de systeembeheerder het toe te staan.
       notice: Document is gemaakt
     destroy:
       error: 'Document kon niet verwijderd worden: %{error}'
@@ -944,9 +944,9 @@ nl:
       show:
         title: Factuur %{number}
       unpaid:
-        invoices_sum: 
-        invoices_text: 
-        title: 
+        invoices_sum: Totale som
+        invoices_text: Referentie
+        title: Onbetaalde rekeningen
     ordergroups:
       index:
         new_transaction: Nieuwe transacties toevoegen
@@ -1235,7 +1235,7 @@ nl:
     feedback:
       header: "%{user} schreef op %{date}:"
       subject: Feedback van %{email}
-    from_via_foodsoft: 
+    from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Uitnodiging voor de foodcoop
       text: |-
@@ -1286,8 +1286,17 @@ nl:
 
         Vriendelijke groet van %{foodcoop}.
     order_result_supplier:
-      subject: 
-      text: 
+      subject: Nieuwe bestelling voor %{name}
+      text: |-
+        Beste mijnheer/mevrouw,
+
+        Foodcoop %{foodcoop} wil graag een bestelling plaatsen.
+
+        Een PDF en spreadsheet vind u meegestuurd.
+
+        Met vriendelijke groet,
+        %{user}
+        %{foodcoop}
     reset_password:
       subject: Nieuw wachtwoord voor %{username}
       text: |-
@@ -1312,35 +1321,35 @@ nl:
         Groeten van %{foodcoop}.
   message_threads:
     groupmessage_threads:
-      show_message_threads: 
+      show_message_threads: alles tonen
     index:
-      general: 
-      title: 
+      general: Algemeen
+      title: Conversaties
     message_threads:
-      last_reply_at: 
-      last_reply_by: 
-      started_at: 
-      started_by: 
-    show: 
+      last_reply_at: Laatst beantwoord op
+      last_reply_by: Laatst beantwoord door
+      started_at: Begonnen op
+      started_by: Begonnen door
+    show: Algemene berichten
   messagegroups:
     index:
-      body: 
-      title: 
+      body: 'Een berichtengroep is als een mailinglijst: je kunt kiezen voor welke je je aanmeld (of afmeld) om berichten te ontvangen die naar die groep verzonden worden.'
+      title: Berichtengroepen
     join:
-      error: 
-      notice: 
+      error: 'Kon niet aanmelden voor berichtengroep: %{error}'
+      notice: Aangemeld voor berichtengroep
     leave:
-      error: 
-      notice: 
+      error: 'Kon niet afmelden van berichtengroep: %{error}'
+      notice: Afgemeld voor berichtengroep
     messagegroup:
-      join: 
-      leave: 
+      join: Aanmelden voor berichtengroep
+      leave: Afmelden van berichtengroep
   messages:
     actionbar:
-      message_threads: 
-      messagegroups: 
-      messages: 
-      new: 
+      message_threads: Toon als conversaties
+      messagegroups: Aanmelden voor groepen
+      messages: Toon als lijst
+      new: Nieuw bericht
     create:
       notice: Bericht is opgeslagen en wordt verzonden.
     index:
@@ -1353,7 +1362,7 @@ nl:
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
-      error_private: 
+      error_private: Sorry, dit bericht is privé.
       hint_private: Bericht wordt niet getoond in de Foodsoft inbox
       list:
         desc: 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
@@ -1361,25 +1370,25 @@ nl:
         subscribe: Lees meer over de mailing-lijst op %{link}.
         subscribe_msg: Mogelijk moet je je eerst aanmelden voor de mailing-lijst.
         wiki: Wiki (mailing-lijst pagina)
-      message: 
+      message: bericht
       no_user_found: Geen gebruiker gevonden
-      reply_to: 
+      reply_to: Dit bericht is een antwoord op %{link}.
       search: Zoeken ...
       search_user: Gebruiker zoeken
       title: Nieuw bericht
     show:
       all_messages: Berichtenoverzicht
       from: 'Van:'
-      group: 
+      group: 'Groep:'
       reply: Antwoorden
-      reply_to: 
+      reply_to: 'Antwoord:'
       sent_on: 'Verzonden:'
       subject: 'Onderwerp:'
       title: Bericht lezen
       to: 'Aan:'
     thread:
-      all_message_threads: 
-      reply: 
+      all_message_threads: Alle conversaties
+      reply: Antwoord
   messages_mailer:
     foodsoft_message:
       footer: |-
@@ -1405,8 +1414,8 @@ nl:
     admin:
       config: Instellingen
       home: Overzicht
-      mail_delivery_status: 
-      messagegroups: 
+      mail_delivery_status: Emailproblemen
+      messagegroups: Berichtengroepen
       ordergroups: Huishoudens
       title: Administratie
       users: Gebruikers
@@ -1523,7 +1532,7 @@ nl:
       surplus_options: 'Overschot:'
       title: 'Ontvangen: %{order}'
     send_to_supplier:
-      notice: 
+      notice: De bestelling is naar de leverancier verzonden.
     show:
       action_end: Sluiten!
       amounts: 'Totaal netto/bruto:'
@@ -1536,7 +1545,7 @@ nl:
       confirm_end: |-
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
-      confirm_send_to_supplier: 
+      confirm_send_to_supplier: De bestelling is al naar de leverancier gestuurd op %{when}. Wil je deze opnieuw verzenden?
       create_invoice: Rekening toevoegen
       description1_order: "%{state} order van %{supplier} geopend door %{who},"
       description1_period:
@@ -1559,7 +1568,7 @@ nl:
         default: Artikelen zoeken...
         groups: Huishoudens zoeken...
       search_reset: Zoekopdracht wissen
-      send_to_supplier: 
+      send_to_supplier: Verzenden naar leverancier
       show_invoice: Rekening tonen
       sort_article: Per artikel
       sort_group: Per huishouden
@@ -1575,7 +1584,6 @@ nl:
     update_order_amounts:
       msg1: "%{count} artikelen (%{units} eenheden) bijgewerkt"
       msg2: "%{count} (%{units}) naar tolerantie"
-      msg3: 
       msg4: "%{count} (%{units}) overgebleven"
   pages:
     all:
@@ -1598,7 +1606,7 @@ nl:
     destroy:
       notice: De pagina '%{page}' en alle subpagina's zijn verwijderd.
     diff:
-      title: 
+      title: "%{title} - veranderingen van versie %{old} tot %{new}"
     edit:
       title: Pagina bewerken
     error_stale_object: Opgelet, de pagina is net veranderd door een ander. Probeer het alsjeblieft opnieuw.
@@ -1624,9 +1632,9 @@ nl:
         section_character: Tekens
         section_link: Links
         section_more: Meer onderwerpen
-        section_table: 
-        see_tables: 
-        tables_link: 
+        section_table: Tabelopmaak
+        see_tables: zie %{tables_link}
+        tables_link: Tabellen
         text: tekst
         title: Korte opmaakhulp
         unordered_list: Itemlijst
@@ -1642,7 +1650,7 @@ nl:
       date_format: "%d-%m-%y %H:%M"
       delete: Pagina verwijderen
       delete_confirm: 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
-      diff: 
+      diff: Versies vergelijken
       edit: Pagina bewerken
       last_updated: Laatst bijgewerkt door <b>%{user}</b> op %{when}
       subpages: kindpagina's
@@ -1709,7 +1717,7 @@ nl:
       who_hint: "(Hoeveel zijn er nog nodig?)"
     user_form_fields:
       contact_address_hint: Het adres van je huishouden. Als je dit wijzigt, verandert het ook voor de andere leden van je huishouden.
-      messagegroups: 
+      messagegroups: Aan- en afmelden voor berichtengroepen
     workgroup_members:
       title: Groepsleden
   simple_form:
