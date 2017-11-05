@@ -37,6 +37,13 @@ PATH
       rails
 
 PATH
+  remote: plugins/polls
+  specs:
+    foodsoft_polls (0.0.1)
+      deface (~> 1.0)
+      rails
+
+PATH
   remote: plugins/wiki
   specs:
     foodsoft_wiki (0.0.1)
@@ -528,6 +535,7 @@ DEPENDENCIES
   foodsoft_discourse!
   foodsoft_documents!
   foodsoft_messages!
+  foodsoft_polls!
   foodsoft_wiki!
   gaffe
   haml (~> 4.0)

@@ -389,6 +389,46 @@ ActiveRecord::Schema.define(version: 20181201000200) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "poll_choices", force: :cascade do |t|
+    t.integer "poll_vote_id", limit: 4, null: false
+    t.integer "choice",       limit: 4, null: false
+    t.integer "value",        limit: 4, null: false
+  end
+
+  add_index "poll_choices", ["poll_vote_id", "choice"], name: "index_poll_choices_on_poll_vote_id_and_choice", unique: true, using: :btree
+
+  create_table "poll_votes", force: :cascade do |t|
+    t.integer  "poll_id",       limit: 4,     null: false
+    t.integer  "user_id",       limit: 4,     null: false
+    t.integer  "ordergroup_id", limit: 4
+    t.text     "note",          limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "poll_votes", ["poll_id", "user_id", "ordergroup_id"], name: "index_poll_votes_on_poll_id_and_user_id_and_ordergroup_id", unique: true, using: :btree
+
+  create_table "polls", force: :cascade do |t|
+    t.integer  "created_by_user_id",                limit: 4,                     null: false
+    t.string   "name",                              limit: 255,                   null: false
+    t.text     "description",                       limit: 65535
+    t.datetime "starts"
+    t.datetime "ends"
+    t.boolean  "one_vote_per_ordergroup",                         default: false, null: false
+    t.text     "required_ordergroup_custom_fields", limit: 65535
+    t.text     "required_user_custom_fields",       limit: 65535
+    t.integer  "voting_method",                     limit: 4,                     null: false
+    t.string   "choices",                           limit: 255,                   null: false
+    t.integer  "final_choice",                      limit: 4
+    t.integer  "multi_select_count",                limit: 4,     default: 0,     null: false
+    t.integer  "min_points",                        limit: 4
+    t.integer  "max_points",                        limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "polls", ["final_choice"], name: "index_polls_on_final_choice", using: :btree
+
   create_table "printer_job_updates", force: :cascade do |t|
     t.integer  "printer_job_id", limit: 4,     null: false
     t.datetime "created_at",                   null: false

@@ -1,0 +1,67 @@
+de:
+  activerecord:
+    attributes:
+      poll:
+        choices: Wahlmöglichkeiten
+        created_at: Erstellt am
+        created_by: Erstellt von
+        description: Beschreibung
+        ends: Endet am
+        name: Name
+        max_points: Maximalpunkte
+        min_points: Minimalpunkte
+        multi_select_count: Maximale Anzahl
+        one_vote_per_ordergroup: Nur eine Stimme pro Bestellgruppe
+        starts: Läuft vom
+        voting_method: Umfragetyp
+        voting_methods:
+          event: Termin
+          single_select: Einzelauswahl
+          multi_select: Mehrfachauswahl
+          points: Punkte
+          resistance_points: Widerstandspunkte
+      poll_vote:
+        name: Name
+        note: Notiz
+        updated_at: Zuletzt aktualisierst
+    models:
+      poll: Umfrage
+  config:
+    hints:
+      use_polls: Einfache Umfragen aktivieren
+    keys:
+      use_polls: Umfragen aktivieren
+  navigation:
+    polls: Umfragen
+  polls:
+    choice:
+      remove: Löschen
+    create:
+      error: 'Umfrage konnte nicht erstellt werden: %{error}'
+      notice: Umfrage wurde erstellt
+    edit:
+      title: Umfrage bearbeiten
+    form:
+      already_voted: Die Wahlmöglichkeiten können icht mehr geändert werden, da bereits Stimmen abgegeben wurden.
+      new_choice: Zusätzliche Wahlmöglichkeit
+      required_ordergroup_custom_field: '''%{label}'' von Bestellgruppe darf nicht leer sein'
+      required_user_custom_field: '''%{label}'' von Benutzer_in darf nicht leer sein'
+    destroy:
+      error: 'Umfrage konnte nicht gelöscht werden: %{error}'
+      no_right: Du hast nicht genügend Rechte um die Umfrage zu löschen
+      notice: Umfrage wurde gelöscht
+    index:
+      new_poll: Neue Umfrage
+      title: Umfragen
+    new:
+      title: Umfrage erstellen
+    polls:
+      vote: Abstimmen
+    show:
+      vote: Abstimmen
+    update:
+      error: 'Umfrage konnte nicht aktualisiert werden: %{error}'
+      notice: Umfrage wurde aktualisiert
+    vote:
+      submit: Abstimmen
+      no_right: Du kannst bei dieser Umfrage nicht teilnehmen

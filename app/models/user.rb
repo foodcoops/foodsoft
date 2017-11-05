@@ -210,6 +210,12 @@ class User < ApplicationRecord
     end
   end
 
+  def self.custom_fields
+    fields = FoodsoftConfig[:custom_fields] && FoodsoftConfig[:custom_fields][:user]
+    return [] unless fields
+    fields.map(&:deep_symbolize_keys)
+  end
+
   # XXX this is view-related; need to move out things like token_attributes
   #     then this can be removed
   def display
