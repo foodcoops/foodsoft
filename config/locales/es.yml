@@ -196,7 +196,7 @@ en:
         last_login: Último login
         last_name: Apellido
         name: Nombre
-        nick: nombre de usuario
+        nick: apodo
         ordergroup: Grupo de pedido
         password: Contraseña
         password_confirmation: Repite la contraseña
@@ -254,109 +254,109 @@ en:
     access_to: access to
     base:
       index:
-        all_ordergroups: All ordergroups
-        all_users: All users
+        all_ordergroups: Todos los grupos de pedido
+        all_users: Todos los usuarios
         all_workgroups: Todos los grupos de trabajo
         created_at: created at
         first_paragraph: Here you can administer Foodsoft groups and users.
-        groupname: group name
+        groupname: nombre del grupo
         members: miembros
-        name: name
+        name: nombre
         new_ordergroup: Nuevo grupo de pedido
-        new_user: Nuevo user
+        new_user: Nuevo usuario/a
         new_workgroup: Nuevo grupo de trabajo
-        newest_groups: newest groups
-        newest_users: newest users
-        title: Administration
-        type: type
-        username: username
+        newest_groups: grupos más nuevos
+        newest_users: usuarios más nuevos
+        title: Administración
+        type: tipo
+        username: nombre de usuario
     configs:
       list:
         key: Key
         title: Configuration list
         value: Value
       show:
-        submit: Save
-        title: Configuration
+        submit: Guarda
+        title: Configuración
       tab_layout:
-        pdf_title: PDF documents
+        pdf_title: documentos PDF
       tab_messages:
-        emails_title: Sending email
+        emails_title: Enviando email
       tab_payment:
         schedule_title: Ordering schedule
       tab_tasks:
-        periodic_title: Periodic tasks
+        periodic_title: Tareas periódicas
       tabs:
-        title: Configuration
+        title: Configuración
       update:
-        notice: Configuration saved.
-    confirm: Are you sure?
+        notice: Configuración guardada.
+    confirm: ¿Estás seguro/a?
     mail_delivery_status:
       destroy_all:
-        notice: All email problems were deleted
+        notice: Se han borrado todos los problemas de email
       index:
-        destroy_all: Delete all email problems
-        title: Email problems
+        destroy_all: Borra todos los problemas de email 
+        title:  Problemas de email
     messagegroups:
       destroy:
         error: 'Message group could not be deleted: %{error}'
-        notice: Message group was deleted
+        notice: El mensaje de grupo ha sido borrado
       edit:
-        title: Edit message group
+        title: Edita mensaje de grupo
       index:
         first_paragraph: Here you can create %{url}, edit and delete them.
-        new_messagegroup: Create new message group
-        new_messagegroups: new message groups
+        new_messagegroup: Crea nuevo mensaje de grupo
+        new_messagegroups: nuevos grupos de mensajes
         second_paragraph: A message group is like a mailing-list. Miembros can subscribe to (and unsubscribe from) the lists they're interested in, from their profile.
         title: Message groups
       new:
-        title: Create message group
+        title: Crea grupo de mensajes
       show:
-        send_message: Send message
+        send_message: Envía mensaje
         title: Message group %{name}
     ordergroups:
       destroy:
         error: 'Grupo de pedido could not be marked as deleted: %{error}'
-        notice: Grupo de pedido was marked as deleted
+        notice: Grupo de pedido se marcó como borrado
       edit:
-        title: Edit ordergroup
-      form:
-        first_paragraph: You can invite new miembros %{url}.
+        title: Edita el grupo de pedido
+        form:
+        first_paragraph: Puedes invitar nuevos miembros %{url}.
         here: aquí
       index:
-        first_paragraph: Here you can add %{url}, and edit or delete groups.
-        new_ordergroup: Add new ordergroup
-        new_ordergroups: new ordergroups
-        second_paragraph: 'Consider the difference between <em>group</em> and <em>ordergroup</em>: An ordergroup has an account and can order food. In a <em>%{url}</em> (for example ''sorting group''), miembros coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple grupo de trabajo.'
+        first_paragraph: Aquí puedes añadir %{url}, y editar o borrar grupos.
+        new_ordergroup: Añade nuevo grupo de pedido
+        new_ordergroups: nuevos grupos de pedido
+        second_paragraph: 'Considera la diferencia entre  <em>grupo</em> y <em>grupo de pedido</em>: Un grupo de pedido tiene una cuenta y puede pedir productos. En una <em>%{url}</em> (por ejemplo ''grupo de hacer cajas''), los miembros se coordinan entre ellos a través de tareas y mensajes. Los usuarios pueden estar sĺo en un grupo de pedido, pero pueden estar en muchos grupos de trabajo.'
         title: Grupos de pedido
         workgroup: grupo de trabajo
       new:
-        title: Create ordergroup
+        title: Crea grupo de pedido
       show:
-        confirm: Are you sure?
-        edit: Edit group/miembros
-        send_message: Send message
+        confirm: ¿Estas seguro/a?
+        edit: Edita grupo/miembros
+        send_message: Envía mensaje
         title: Grupo de pedido %{name}
-    search_placeholder: name ..
+    search_placeholder: nombre ..
     users:
       controller:
-        sudo_done: You are now logged in as %{user}. Be careful, and do not forget to log out when done!
+        sudo_done: Estás logueado como %{user}. Be careful, and do not forget to log out when done!
       destroy:
-        error: 'User could not be deleted: %{error}'
-        notice: User was deleted
+        error: 'El usuario no se ha podido borrar: %{error}'
+        notice: El usuario/a ha sido borrado
       edit:
-        title: Edit user
+        title: Edita usuario/a
       index:
-        first_paragraph: Here you can %{url}, edit and delete users.
-        new_user: Create new user
-        new_users: create new
-        show_deleted: Show deleted users
+        first_paragraph: Aquí puedes %{url}, editar y borar usuarios.
+        new_user: Crea nuevo usuario/a
+        new_users: crea nuevo
+        show_deleted: Muestra usuarios borrados
         title: User admin
       new:
-        title: Create new user
+        title: Crea nuevo usuario
       restore:
-        error: 'User could not be restored: %{error}'
-        notice: User was restored
+        error: 'El usuario/a no se ha podido restaurar: %{error}'
+        notice: El usuario/a ha sido restaurado
       show:
         confirm_sudo: If you continue, you will take on the identity of %{user}. Do not forget to log out when you're done!
         groupabos: Group subscriptions
@@ -364,10 +364,10 @@ en:
         person: Person
         preference: Preferences
         send_message: Send message
-        show_email_problems: Show email problems
+        show_email_problems: Muestra los problemas de email
         sudo: Take on identity
       users:
-        show_email_problems: Show email problems
+        show_email_problems: Muestra los problemas de email
     workgroups:
       destroy:
         error: 'No se pudo borrar el Grupo de trabajo: %{error}'
@@ -375,14 +375,14 @@ en:
       edit:
         title: Editar grupo de trabajo
       form:
-        first_paragraph: You can invite new miembros %{url}.
+        first_paragraph: Puedes invitar nuevos miembros %{url}.
         here: aquí
       index:
-        first_paragraph: Here you can create %{url}, edit and delete them.
+        first_paragraph: Aquí puedes crear %{url}, editar y borrarlos.
         new_workgroup: Crear nuevo grupo de trabajo
         new_workgroups: nuevo grupo de trabajo
         ordergroup: grupo de pedido
-        second_paragraph: 'Consider the difference between a <em>grupo de trabajo</em> and an <em>ordergroup</em>: an <em>%{url}</em> has an account and can order food. In a grupo de trabajo (for example ''sorting group''), miembros coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple grupo de trabajo.'
+        second_paragraph: 'Considera la diferencia entre  <em>grupo</em> y <em>grupo de pedido</em>: Un grupo de pedido tiene una cuenta y puede pedir productos. En una <em>%{url}</em> (por ejemplo ''grupo de hacer cajas''), los miembros se coordinan entre ellos a través de tareas y mensajes. Los usuarios pueden estar sĺo en un grupo de pedido, pero pueden estar en muchos grupos de trabajo.'
         title: Grupo de trabajo
       new:
         title: Crear grupo de trabajo
@@ -397,7 +397,7 @@ en:
     controller:
       error_authn: Authentication required!
       error_denied: You are not allowed to view the requested page. If you think you should, ask an administrator to give you appropriate permissions. If you have access to multiple user accounts, you might want to %{sign_in}.
-      error_denied_sign_in: sign in as another user
+      error_denied_sign_in: entra como otro usuario/a
       error_feature_disabled: This feature is currently disabled.
       error_members_only: This action is only available to miembros of the group!
       error_token: Access denied (invalid token)!
@@ -472,7 +472,7 @@ en:
         sync: Synchronise
       import:
         category: Directly import into category
-        placeholder: Search by name ...
+        placeholder: Busca por nombre ...
         restrict_region: Restrict to region only
         title: Import article
       new: Nuevo article
@@ -568,18 +568,18 @@ en:
       pdf_font_size: Base font size for PDF documents (12 is standard).
       pdf_page_size: Page size for PDF documents, typically "A4" or "letter".
       price_markup: Percentage that is added to the gross price for foodcoop miembros.
-      stop_ordering_under: Miembros can only order when they have at least this many apple points.
-      tasks_period_days: Number of days between two periodic tasks (default 7, which is a week).
-      tasks_upfront_days: For how many days in advance you would like to schedule periodic tasks.
+      stop_ordering_under: Los miembros sólo podrán hacer pedidos cuando tengan al menos esta cantidad de puntos-manzana.
+      tasks_period_days: Número de días entre dos tareas periódicas (por defecto 7, que es una semana).
+      tasks_upfront_days: Con cuántos días de antelación te gustaría programar las tareas periódicas.
       tax_default: Default VAT percentage for new artículos.
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
-      use_apple_points: When the apple point system is enabled, miembros are required to do some tasks to be able to keep ordering.
+      use_apple_points: Cuando el sistema de puntos-manzana está habilitado los miembros deberán realizar algunas tareas para poder hacer pedidos.
       use_boxfill: When enabled, near end of an order, miembros are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
       use_current_orders: Enable the current_orders plugin. Allows miembros with the order permission to change member amounts in multiple orders, using three new screens in the Orders menu. Especially useful for pick-up days.
       use_documents: Add a basic document sharing page to the foodcoop menu.
       use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
       use_messages: Allow members to communicate with each other within Foodsoft.
-      use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
+      use_nick: Muestra y utiliza apodos en lugar de nombres reales. Cuando activas esto debes chequear que todos los usuarios tengan apodo.
       use_wiki: Enable editable wiki pages.
       webstats_tracking_code: Tracking code for web analytics (like Piwik or Google analytics). Leave empty for no tracking.
     keys:
@@ -633,7 +633,7 @@ en:
       use_documents: Enable documents
       use_iban: Use IBAN
       use_messages: Messages
-      use_nick: Use nicknames
+      use_nick: Usa apodos
       use_wiki: Enable wiki
       webstats_tracking_code: Tracking code
     tabs:
@@ -928,7 +928,7 @@ en:
         remove: Remover
         remove_group: Remover grupo
       transactions_search:
-        search_placeholder: Search note ...
+        search_placeholder: Busca note ...
     index:
       amount_fc: Importe(FC)
       end: Fin
@@ -1016,7 +1016,7 @@ en:
       new_funds: Nuevo balance de cuenta
       price: Precio
       reset_article_search: Reset search
-      search_article: Search for artículos...
+      search_article: Busca artículos...
       sum_amount: Current amount
       title: Orders
       total_sum_amount: Total amount
@@ -1071,83 +1071,83 @@ en:
   helpers:
     application:
       edit_user: Edita usuario
-      nick_fallback: "(no username)"
+      nick_fallback: "(no tiene apodo)"
       role_admin: Admin
       role_article_meta: Artículos
       role_finance: Finance
       role_invoices: Invoices
       role_orders: Orders
       role_suppliers: Suppliers
-      show_google_maps: Show it on Google maps
-      sort_by: Sort by %{text}
+      show_google_maps: Muéstralo en Google maps
+      sort_by: Ordena por %{text}
     current_orders:
-      pay_amount: To pay %{amount}
-      pay_done: Fully paid
-      pay_none: Nothing to pay
+      pay_amount: A pagar %{amount}
+      pay_done: Totalmente pagado
+      pay_none: Nada que pagar
     deliveries:
-      new_invoice: Nuevo factura
-      show_invoice: Show factura
+      new_invoice: Nueva factura
+      show_invoice: Muestra la factura
     messages:
-      write_message: Write message
+      write_message: Escribe mensaje
     orders:
-      old_price: Old price
-      option_choose: Choose supplier/stock
+      old_price: Precio anterior
+      option_choose: Elige proveedor/stock
       option_stock: Stock
-      order_pdf: Create PDF
+      order_pdf: Crea PDF
     submit:
       invite:
-        create: send invitation
+        create: envía invitación
       message:
-        create: send message
+        create: envía mensaje
     tasks:
-      required_users: "%{count} miembros are still needed!"
+      required_users: "Aún se necesitan %{count} miembros!"
       task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
-      desc: 'This shows the proportion of completed tasks to the volume of orders for your grupo de pedido in comparison to the average of the Foodcoop. In practice: for every %{amount} of total orders, you should execute a task!'
-      more_info: More information
-      points: 'Your current apple points: %{points}'
-      warning: Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order!
-    changes_saved: Changes saved.
+      desc: 'Esto muestra la proporción de tareas completadas respecto al volumen de pedidos de tu grupo de pedido en comparación con el promedio en Foodcoop. En práctica: por cada %{amount} de pedidos totales, tú deberías hacer una tarea!'
+      more_info: Más información
+      points: 'Tus puntos-manzana: %{points}'
+      warning: Cuidado, si tienes menos de %{threshold} puntos-manzana no puedes hacer un pedido!
+    changes_saved: Guarda los cambios.
     index:
       due_date_format: "%A %d %B"
       messages:
-        title: Newest messages
+        title: Mensajes recientes
         view_all:
-          messages: all messages
-          text: Show %{messages} or %{threads}
-          threads: threads
+          messages: todos los mensajes
+          text: Muestra %{messages} o %{threads}
+          threads: Hilos
       my_ordergroup:
         last_update: Last update was %{when} ago
-        title: My grupo de pedido
+        title: Mi grupo de pedido
         transactions:
-          title: Last Transactions
-          view: Show account statement
+          title: Últimas transacciones
+          view: Muestra el balance de cuenta
       ordergroup:
-        title: Engagement of your grupo de pedido
+        title: Compromiso de tu grupo de pedido
       tasks_move:
-        action: Take over tasks/decline tasks
-        desc: You are responsible for these tasks.
-        title: Take over tasks
+        action: Asumir tareas/rechazar tareas
+        desc: Eres responsable de estas tareas.
+        title: Asumir tareas
       tasks_open:
-        title: Open tasks
-        view_all: Show all tasks
+        title: Tareas abiertas
+        view_all: Muestra todas las tareas
       title: Homepage
-      your_tasks: Your tasks
-    no_ordergroups: You are unfortunately not a member of an grupo de pedido.
+      your_tasks: Tus tareas
+    no_ordergroups: Lamentablemente no eres miembro de ningún grupo de pedido.
     ordergroup:
       account_summary: Account Statement
-      invite: Invite a new Person
-      search: Search ...
-      title: My grupo de pedido
-    ordergroup_cancelled: You cancelled membership of the group %{group}.
+      invite: Invita una nueva persona
+      search: Busca ...
+      title: Mi grupo de pedido
+    ordergroup_cancelled: Has cancelado tu participación en el grupo %{group}.
     profile:
       groups:
-        cancel: Leave group
-        cancel_confirm: Are you sure you want to leave this group?
-        invite: Invite new member
-        title: You are member of the groups
-      title: My Profile
+        cancel: Deja el grupo
+        cancel_confirm: ¿Estás seguro/a de que quieres dejar este grupo?
+        invite: Invita a nuevo miembro/a
+        title: Eres miembro/a de los grupos
+      title: Mi Perfil
       user:
         since: "(member for %{when})"
         title: "%{user}"
@@ -1170,7 +1170,7 @@ en:
         edit_stock: Edit stock
         edit_suppliers: Edit suppliers
         title: Products
-      tasks: My tasks
+      tasks: Mis tareas
       title: Directly to ...
       write_message: Write message
   invites:
@@ -1199,15 +1199,15 @@ en:
       footer_4_help: 'Help: %{url}'
     foodsoft: Foodsoft
     footer:
-      revision: revision %{revision}
+      revision: revisión %{revision}
     header:
       feedback:
         desc: Found a bug? Suggestions? Ideas? Review?
         title: Feedback
-      help: Help
-      logout: Logout
-      ordergroup: My grupo de pedido
-      profile: Edit profile
+      help: Ayuda
+      logout: Salir
+      ordergroup: Mis grupos de pedido
+      profile: Edita perfil
     logo: "<span>food</span>soft"
   lib:
     order_pdf:
@@ -1253,62 +1253,62 @@ en:
 
         Greetings, your Foodsoft Team!
     negative_balance:
-      subject: Negative account balance
+      subject: Balance de cuenta negativo
       text: |
-        Dear %{group},
+        Querido %{group},
 
-        Your account balance has dropped below zero due to a booking on %{when}: %{balance}
+        El balance de vuestra cuenta ha caído bajo cero a causa de una reserva el %{when}: %{balance}
 
-        There was a charge of %{amount} for "%{note}" by %{user}.
+        Hubo un cargo de %{amount} por "%{note}" de %{user}.
 
-        Please deposit your account as soon as possible.
+        Por favor, deposita el dinero a tu cuenta lo antes posible.
 
 
 
-        Kind regards from %{foodcoop}.
+        Muchas gracias, %{foodcoop}.
     not_enough_users_assigned:
-      subject: '"%{task}" still needs people!'
+      subject: '"%{task}" todavía necesita gente!'
       text: |
-        Dear %{user},
+        Querido %{user},
 
-        The Task '%{task}' of your working group is due on %{when},
-        and could use some more contributors!
+        La tarea '%{task}' de tu grupo de trabajo debe hacerse para %{when},
+        y le vendrían bein más voluntarios/as!
 
-        If you haven’t assigned yourself to this task yet it’s your chance now:
+        Si todavía no te has asignado a esta tarea, ahora es tu oportunidad:
 
         %{workgroup_tasks_url}
 
-        Your Tasks: %{user_tasks_url}
+        Tus tareas: %{user_tasks_url}
     order_result:
-      subject: 'Order closed: %{name}'
+      subject: 'Pedido cerrado: %{name}'
       text0: |
-        Dear %{ordergroup},
+        Queridos de %{ordergroup},
 
-        The order for "%{order}" has been closed by %{user} on %{when}.
-        The following articles have been ordered for your ordergroup:
+        El pedido de "%{order}" ha sido cerrado por %{user} en %{when}.
+        Los siguientes artículos se han pedido para tu grupo de pedido:
       text1: |-
-        o Total sum: %{sum}
+        o Suma total: %{sum}
 
-        You can view the order online: %{order_url}
+        Puedes ver el pedido online: %{order_url}
 
 
-        Kind regards from %{foodcoop}.
+        Abrazos %{foodcoop}.
     order_result_supplier:
-      subject: Nuevo order for %{name}
+      subject: Nuevo pedido para %{name}
       text: |
-        Hi!
+        Hola!
 
-        Foodcoop %{foodcoop} would like to place an order.
+        El grupo de consumo %{foodcoop} quiere hacerte un pedido.
 
-        Please find a PDF and spreadsheet attached.
+        Por favor mira el archivo PDF adjunto.
 
-        Kind regards,
+        Abrazos,
         %{user}
         %{foodcoop}
     reset_password:
-      subject: Nuevo password for %{username}
+      subject: Nueva contraseña para %{username}
       text: |
-        Hi %{user},
+        Hola %{user},
 
         You have (or someone else has) requested a new password.
         In order to choose a new password follow this link: %{link}
@@ -1318,17 +1318,17 @@ en:
 
         Greetings, your Foodsoft Team!
     upcoming_tasks:
-      nextweek: 'Tasks for the next week:'
-      subject: Tasks are due!
+      nextweek: 'Tareas para la semana que viene:'
+      subject: Hay tareas que se deben hacer ya!
       text0: |
-        Dear %{user},
+        Querido/a %{user},
 
-        You are asigned to the task "%{task}". This task is due by tomorrow (%{when})!
+        Estás asignado/a a la tarea "%{task}". Esta tarea debería estar realizada para mañana (%{when})!
       text1: |
-        My tasks: %{user_tasks_url}
+        Mis tareas: %{user_tasks_url}
 
 
-        Kind regards from %{foodcoop}.
+        Abrazos de %{foodcoop}.
   message_threads:
     groupmessage_threads:
       show_message_threads: show all
@@ -1356,14 +1356,14 @@ en:
       leave: Leave message group
   messages:
     actionbar:
-      message_threads: Show as threads
+      message_threads: Muestra como hiles
       messagegroups: Subscribe to groups
-      messages: Show as list
-      new: Nuevo message
+      messages: Muestra como lista
+      new: Nuevo mensaje
     create:
       notice: Message is saved and will be sent.
     index:
-      new: Nuevo message
+      new: Nuevo mensaje
       title: Messages
     messages:
       reply: Reply
@@ -1380,21 +1380,21 @@ en:
         subscribe: You can find more about the mailing-list at %{link}.
         subscribe_msg: You may have to subscribe to the mailing-list first.
         wiki: Wiki (page Mailing-List)
-      message: message
+      message: mensaje
       no_user_found: No user found
-      reply_to: This message is an reply to an other %{link}.
-      search: Search ...
-      search_user: Search user
-      title: Nuevo message
+      reply_to: This mensaje is an reply to an other %{link}.
+      search: Busca ...
+      search_user: Busca usuario
+      title: Nuevo mensaje
     show:
       all_messages: All messages
-      from: 'From:'
-      group: 'Group:'
-      reply: Reply
-      reply_to: 'Reply to:'
-      sent_on: 'Sent:'
-      subject: 'Subject:'
-      title: Show message
+      from: 'De:'
+      group: 'Grupo:'
+      reply: Responde
+      reply_to: 'Responde a:'
+      sent_on: 'Enviado:'
+      subject: 'Asunto:'
+      title: Muestra mensaje
       to: 'To:'
     thread:
       all_message_threads: All message threads
@@ -1448,7 +1448,7 @@ en:
     messages: Messages
     ordergroups: Grupo de pedido
     orders:
-      archive: My Orders
+      archive: Mis Orders
       manage: Manage orders
       ordering: Place order!
       title: Orders
@@ -1495,61 +1495,61 @@ en:
     fax:
       amount: Amount
       articles: Artículos
-      delivery_day: Delivery day
-      heading: Order for %{name}
+      delivery_day: Día de entrega
+      heading: Pedido para %{name}
       name: Nombre
-      number: Number
-      to_address: Shipping address
+      number: Número
+      to_address: Dirección de envío
     finish:
-      notice: The order has been closed.
+      notice: El pedido ha sido cerrado.
     form:
-      ignore_warnings: Ignore warnings
-      prices: Prices (net/FC)
-      select_all: Select all
-      stockit: In stock
+      ignore_warnings: Ignorar las advertencias
+      prices: Precios (net/FC)
+      select_all: Selecciona todos
+      stockit: En stock
       title: Artículo
     index:
-      action_end: Close
-      action_receive: Receive
-      confirm_delete: Do you really want to delete the order?
+      action_end: Cerrar
+      action_receive: Recibir
+      confirm_delete: ¿Estás seguro/a de que quieres borrar el pedido?
       confirm_end: Do you really want to close the order %{order}? There is no going back.
-      new_order: Create new order
-      no_open_or_finished_orders: There are currently no open or closed orders.
-      orders_finished: Closed
-      orders_open: Open
-      orders_settled: Settled
-      title: Manage orders
+      new_order: Crea nuevo pedido
+      no_open_or_finished_orders: Por el momento no hay pedidos abiertos ni cerrados.
+      orders_finished: Terminado
+      orders_open: Abierto
+      orders_settled: Cerrado
+      title: Maneja los pedidos
     model:
       close_direct_message: Order settled without charging member accounts.
       error_boxfill_before_ends: must be after the box-fill date (or remain empty)
-      error_closed: Order was already settled
-      error_nosel: At least one article must be selected. You may want to delete the order instead?
+      error_closed: El pedido ya estaba cerrado
+      error_nosel: Debes seleccionar al menos un artículo. Quizás quieres borrar el pedido?
       error_starts_before_boxfill: must be after the start date (or remain empty)
       error_starts_before_ends: must be after the start date (or remain empty)
-      notice_close: 'Order: %{name}, until %{ends}'
+      notice_close: 'Pedido: %{name}, hasta %{ends}'
       stock: Stock
-      warning_ordered: 'Warning: artículos marked red have already been ordered within this open order. If you uncheck them aquí, all existing orders of these artículos will be deleted. To proceed, confirm below.'
-      warning_ordered_stock: 'Warning: Artículos marked red have already been ordered/purchased within this open stock order. If you uncheck them aquí, all existing orders/purchases of these artículos will be deleted and it will not be accounted for them. Confirm below to proceed.'
+      warning_ordered: 'Cuidado: los artículos marcados en rojo ya han sido pedidos en este pedido abierto. Si los deseleccionas aquí, todos los pedidos actuales de estos artículos se borrarán. Para proceder, confirma abajo.'
+      warning_ordered_stock: 'Cuidado: Los artículos marcados en rojo ya han sido pedidos en este pedido de stock. Si los deseleccionas aquí, todos los pedidos y compras de estos artículos se borrarán y no estarán en la contabilidad. Para proceder, confirma abajo.'
     new:
-      title: Create new order
+      title: Crea nuevo pedido
     receive:
-      add_article: Add article
-      consider_member_tolerance: consider tolerance
-      notice: 'Order received: %{msg}'
-      notice_none: No new artículos to receive
+      add_article: Añade artículo
+      consider_member_tolerance: considera la tolerancia
+      notice: 'Pedido recibido: %{msg}'
+      notice_none: Ningún nuevo artículo para recibir
       rest_to_stock: rest to stock
-      submit: Receive order
-      surplus_options: 'Distribution options:'
-      title: Receiving %{order}
+      submit: recibe pedido
+      surplus_options: 'Opciones de distribución:'
+      title: Recibiendo %{order}
     send_to_supplier:
-      notice: The order has been sent to the supplier.
+      notice: El pedido ha sido enviado al proveedor.
     show:
-      action_end: Close!
-      amounts: 'Net/gross sum:'
-      articles: Artículo overview
-      articles_ordered: 'Ordered artículos:'
+      action_end: Cierra!
+      amounts: 'Suma neto/bruto:'
+      articles: Lista de artículos
+      articles_ordered: 'Artículos pedidos:'
       comments:
-        title: Comments
+        title: Comentarios
       comments_link: Comments
       confirm_delete: Do you really want to delete the order?
       confirm_end: |-
@@ -1749,7 +1749,7 @@ en:
       supplier:
         min_order_quantity: The minimum amount which has to be ordered will be shown during the order process and should motivate ordering
       task:
-        duration: How long will the task take, 1-3 hours
+        duration: How long will the tarea take, 1-3 hours
         required_users: How many users will be needed in total?
       tax: In percentage, standard is 7,0
     labels:
@@ -1759,7 +1759,7 @@ en:
         notify:
           negative_balance: Inform me when my ordergroup has a negative balance.
           order_finished: Inform me about my order result (when the order is closed).
-          upcoming_tasks: Remind me of upcoming tasks.
+          upcoming_tasks: Remind me of upcoming tareas.
         profile:
           email_is_public: Email is visible for other miembros.
           language: Language
@@ -1806,7 +1806,7 @@ en:
       note: Note
       overview: Inventory overview
       supplier: Supplier
-      title: Show inventory
+      title: Muestra inventory
       unit: Unit
     stock_takings:
       confirm_delete: Are you sure you want to delete this?
@@ -1843,7 +1843,7 @@ en:
       toggle_unavailable: Show/hide unavailable artículos
       view_options: View options
     new:
-      search_text: 'Search for artículos in all catalogues:'
+      search_text: 'Busca artículos en todos los catálogos:'
       title: Add new stock article
     show:
       change_quantity: Change
@@ -1885,12 +1885,12 @@ en:
       last_deliveries: Recent deliveries
       last_orders: Last orders
       new_delivery: Nuevo delivery
-      show_deliveries: Show all
+      show_deliveries: Muestra all
     update:
       notice: Supplier was updated
   tasks:
     accept:
-      notice: You have accepted the task
+      notice: You have accepted the tarea
     archive:
       title: Task archive
     create:
@@ -1898,58 +1898,58 @@ en:
     destroy:
       notice: Task has been deleted
     edit:
-      submit_periodic: Save recurring task
-      title: Edit task
-      title_periodic: Edit recurring task
-      warning_periodic: "<strong>Warning:</strong> This task is part of a group of <em>recurring tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>."
+      submit_periodic: Save recurring tarea
+      title: Edit tarea
+      title_periodic: Edit recurring tarea
+      warning_periodic: "<strong>Warning:</strong> This tarea is part of a group of <em>recurring tareas</em>. When saving it will be excluded from the group and it will be converted to a <em>regular tarea</em>."
     error_not_found: No grupo de trabajo found
     form:
       search:
-        hint: Search for user
-        noresult: No user found
-        placeholder: Search ...
+        hint: Busca usuarios
+        noresult: No se han encontrado usuarios
+        placeholder: Busca ...
       submit:
-        periodic: Save recurring task
+        periodic: Guarda tarea periódica
     index:
-      show_group_tasks: Show group tasks
-      title: Tasks
-      title_non_group: Tasks for all!
+      show_group_tasks: Muestra tareas del grupo
+      title: Tareas
+      title_non_group: Tareas para todos/as!
     nav:
-      all_tasks: All tasks
-      archive: Completed tasks (archive)
-      group_tasks: Group tasks
-      my_tasks: My tasks
-      new_task: Create new task
-      pages: Pages
+      all_tasks: Todas las tareas
+      archive: Tareas completadas (archive)
+      group_tasks: Tareas del grupo
+      my_tasks: Mis tareas
+      new_task: Crea nueva tarea
+      pages: Páginas
     new:
-      submit_periodic: Create recurring task
-      title: Create new task
-    repeated: Task is recurring
+      submit_periodic: Crea tarea recurrente
+      title: Crea nueva tarea
+    repeated: Esta tarea es recurrente
     set_done:
-      notice: The state of the task has been updated
+      notice: The state of the tarea has been updated
     show:
-      accept_task: Accept task
-      confirm_delete_group: Really delete this and all subsequent tasks?
-      confirm_delete_single: Are you sure you want to delete the task?
-      confirm_delete_single_from_group: Are you sure you want to delete this task (and keep related recurring tasks)?
-      delete_group: Delete task and subsequent
-      edit_group: Edit recurring
+      accept_task: Aceptar tarea
+      confirm_delete_group: Really delete this and all subsequent tareas?
+      confirm_delete_single: Are you sure you want to delete the tarea?
+      confirm_delete_single_from_group: Are you sure you want to delete this tarea (and keep related recurring tareas)?
+      delete_group: Delete tarea and subsequent
+      edit_group: Edita recurrencia
       hours: "%{count}h"
-      mark_done: Mark task as done
-      reject_task: Reject task
-      title: Show task
+      mark_done: Marca tarea como hecha
+      reject_task: Rechaza tarea
+      title: Muestra tarea
     update:
-      notice: Task has been updated
-      notice_converted: Task has been updated and was converted to a non-repeating task.
+      notice: La tarea se ha actualizado
+      notice_converted: Task has been updated and was converted to a non-repeating tarea.
     user:
-      more: Nothing to do? %{tasks_link} are tasks for sure.
+      more: Nothing to do? %{tasks_link} are tareas for sure.
       tasks_link: Here
-      title: My tasks
-      title_accepted: Accepted tasks
-      title_open: Open tasks
+      title: Mis tareas
+      title_accepted: Accepted tareas
+      title_open: Open tareas
     workgroup:
       title: Tasks for %{workgroup}
-      title_all: All group tasks
+      title_all: All group tareas
   ui:
     actions: Actions
     back: Back
