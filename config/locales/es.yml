@@ -234,7 +234,7 @@ en:
       article: Artículo
       article_category: Category
       delivery: Delivery
-      financial_transaction: Financial transaction
+      financial_transaction: Financial transacción
       invoice: Invoice
       message: Message
       messagegroup: Message group
@@ -535,7 +535,7 @@ en:
   config:
     hints:
       applepear_url: Web donde se explica el sistema de manzanas y peras.
-      charge_members_manually: When you keep track of who received what elsewhere (e.g. on paper), and you don't want to enter this into Foodsoft, select this. You'll need to charge member accounts manually (using "Add new transactions"). You still need to settle orders in the balancing screen, but this will not charge any member accounts.
+      charge_members_manually: When you keep track of who received what elsewhere (e.g. on paper), and you don't want to enter this into Foodsoft, select this. You'll need to charge member accounts manually (using "Add new transacciones"). You still need to settle orders in the balancing screen, but this will not charge any member accounts.
       contact:
         email: Dirección email de contacto que aparece en la web y en algunos formularios.
         street: Direción, normalmente el lugar donde se envían y recogen los pedidos.
@@ -685,7 +685,7 @@ en:
         title: Artículos for grupo de pedido
       payment_bar:
         account_balance: Account balance
-        new_transaction: Nuevo transaction
+        new_transaction: Nueva transacción
         payment: 'Payment:'
       show:
         title: Artículo for %{name}
@@ -697,7 +697,7 @@ en:
     add_stock_change:
       how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
-      notice: Delivery was created. Please don’t forget to add an invoice!
+      notice: Delivery was created. Please don’t forget to add an factura!
     destroy:
       notice: Delivery was deleted.
     edit:
@@ -719,7 +719,7 @@ en:
       title: Nuevo envío para %{supplier}
     show:
       sum: Suma
-      sum_diff: Bruto - adjusted invoice amount
+      sum_diff: Bruto - adjusted factura amount
       sum_gross: Suma bruta
       sum_net: Suma neta
       title: Muestra envío
@@ -855,122 +855,122 @@ en:
         new: crea nueva factura
         new_body: 'Crea una factura para este pedido:'
         plus_refund_credited: "+ depósito devuelto:"
-        refund_adjusted_amount: 'amount adjusted for refund:'
+        refund_adjusted_amount: 'importe a devolver:'
       new:
         alert: Attention, order was already accounted
-        articles_overview: Overview of artículos
+        articles_overview: Lista de artículos
         close_direct: Skip settling
         close_direct_confirm: You are about to settle the order without charging member accounts. Do this only when you have already debited member accounts manually, or if you really know what you are doing.
-        comment_on_transaction: Here you can add a comment to your accounting.
-        comments: Comments
-        confirm_order: Settle order
-        create_invoice: Add invoice
-        edit_note: Edit note
-        edit_order: Edit order
-        groups_overview: Overview of groups
-        invoice: Invoice
-        notes_and_journal: Notes/Protocol
-        summary: Summary
-        title: Accounting %{name}
-        view_options: Viewing options
+        comment_on_transaction: Aquí puedes añadir un comentario a tus cuentas
+        comments: Comentarios
+        confirm_order: Cerrar pedido
+        create_invoice: Añadir factura
+        edit_note: Editar note
+        edit_order: Editar pedido
+        groups_overview: Lista de grupos
+        invoice: Factura
+        notes_and_journal: Notas/Protocolo
+        summary: Sumario
+        title: Cuentas %{name}
+        view_options: Opciones de vista
       order_article:
-        confirm: Are you sure?
+        confirm: ¿Estás seguro/a?
       orders:
-        clear: accounting
+        clear: contabilidad
         cleared: accounted (%{amount})
-        end: End
-        ended: closed
-        name: Supplier
-        no_closed_orders: At the moment there are no closed orders.
-        state: State
+        end: Fin
+        ended: cerrado
+        name: Proveedor
+        no_closed_orders: Ahora mismo no hay pedidos cerrados
+        state: Estado
       summary:
-        changed: Data was changed!
-        duration: From %{starts} till %{ends}
-        fc_amount: 'Sales value:'
-        fc_profit: FC surplus
-        gross_amount: 'Bruto value:'
-        groups_amount: 'Grupos de pedido sum:'
-        net_amount: 'Net value:'
-        reload: Reload summary
-        with_extra_charge: 'with extra charge:'
-        without_extra_charge: 'without extra charge:'
+        changed: ¡Han cambiado los datos!
+        duration: Desde %{starts} hasta %{ends}
+        fc_amount: 'Valor de venta:'
+        fc_profit: beneficio FC 
+        gross_amount: 'Valor bruto:'
+        groups_amount: 'Grupos de pedido suma:'
+        net_amount: 'Valor neto:'
+        reload: Actualiza sumario
+        with_extra_charge: 'con cargo extra:'
+        without_extra_charge: 'sin cargo extra:'
     create:
-      notice: Invoice was created.
+      notice: Se ha creado la factura.
     financial_links:
       show:
-        title: Financial link %{number}
+        title: Enlace financiero %{number}
     financial_transactions:
       controller:
         create:
-          notice: The transaction was saved.
+          notice: Se ha guardado la transacción.
         create_collection:
-          alert: 'An error occured: %{error}'
-          error_note_required: Note is required!
-          notice: All transactions were saved.
+          alert: 'Ha ocurrido un error: %{error}'
+          error_note_required: Note se requiere!
+          notice: All transacciones were saved.
       index:
         balance: 'Balance of account: %{balance}'
         last_updated_at: "(last updated %{when} ago)"
-        new_transaction: Create new transaction
-        title: Account statement for %{name}
+        new_transaction: Crea nueva transacción
+        title: Balance de cuentas para %{name}
       index_collection:
-        show_groups: Manage accounts
-        title: Financial transactions
+        show_groups: Manejar cuentas
+        title: Transacciones financieras
       new:
-        paragraph: Here you can credit and debit money for the grupo de pedido <b>%{name}</b>.
-        title: Nuevo transaction
+        paragraph: Aquí puedes poner o quitar dinero del grupo de pedido <b>%{name}</b>.
+        title: Nueva transacción
       new_collection:
-        add_all_ordergroups: Add all grupo de pedido
-        new_ordergroup: Add new grupo de pedido
-        save: Save transaction
+        add_all_ordergroups: Añade todos los grupos de pedido
+        new_ordergroup: Añade nuevo grupo de pedido
+        save: Guarda transacción
         sidebar: Here you can update more accounts at the same time. For example all transfers of the grupo de pedido from one account statement.
-        title: Updating more accounts
+        title: Actualizar más cuentas
       ordergroup:
-        remove: Remove
-        remove_group: Remove group
+        remove: Remover
+        remove_group: Remover grupo
       transactions_search:
         search_placeholder: Search note ...
     index:
-      amount_fc: Amount(FC)
-      end: End
-      everything_cleared: Great, everything is accounted...
-      last_transactions: Recent transactions
-      open_transactions: Unsettled orders
-      show_all: show all
-      title: Finances
-      unpaid_invoices: Unpaid invoices
+      amount_fc: Importe(FC)
+      end: Fin
+      everything_cleared: Genial, todo está contabilizado...
+      last_transactions: Transacciones recientes
+      open_transactions: Pedidos abiertos
+      show_all: muestra todo
+      title: Finanzas
+      unpaid_invoices: Facturas impagas
     invoices:
       edit:
-        title: Edit invoice
+        title: Edita factura
       form:
-        attachment_hint: Only JPEG and PDF are allowed.
+        attachment_hint: Sólo se permiten los formatos JPEG y PDF.
       index:
-        action_new: Create new invoice
-        title: Invoices
+        action_new: Crea nueva factura
+        title: Facturas
       new:
-        title: Create new invoice
+        title: Crea nueva factura
       show:
-        title: Invoice %{number}
+        title: Factura %{number}
       unpaid:
-        invoices_sum: Total sum
-        invoices_text: Reference
-        title: Unpaid invoices
+        invoices_sum: Total suma
+        invoices_text: Referencia
+        title: Facturas impagas
     ordergroups:
       index:
-        new_transaction: Add new transactions
-        search_placeholder: Search ...
-        show_all: All transactions
-        title: Manage accounts
+        new_transaction: Añade nuevas transacciones
+        search_placeholder: Busca...
+        show_all: Todas las transacciones
+        title: Maneja los grupos
       ordergroups:
-        account_statement: Account statement
-        new_transaction: Nuevo transaction
+        account_statement: Balance de cuenta
+        new_transaction: Nueva transacción
     update:
-      notice: Invoice was updated
+      notice: La factura ha sido actualizada
   foodcoop:
     ordergroups:
       index:
         name: Nombre ...
-        only_active: Only active groups
-        only_active_desc: "(have placed order at least once in the last 3 months)"
+        only_active: Sólo grupos activos
+        only_active_desc: "(han hecho al menos un pedido en los últimos 3 meses)"
         title: Grupo de pedido
       ordergroups:
         break: "%{start} - %{end}"
@@ -979,19 +979,19 @@ en:
         body: "<p>Here you can write a message to the miembros of your Foodcoop. If you'd like others to contact you, please enable it in your %{profile_link}.</p>"
         ph_name: Nombre ...
         ph_ordergroup: Grupo de pedido ...
-        profile_link: options
-        title: Users
+        profile_link: opciones
+        title: Usuarios
     workgroups:
       edit:
-        invite_link: here
-        invite_new: You can invite new miembros %{invite_link}.
-        title: Edit group
+        invite_link: aquí
+        invite_new: Puedes invitar a nuevos miembros %{invite_link}.
+        title: Edita el grupo
       index:
         body: "<p>Editing a group is only available to miembros of the group.<br/> If you want to join a group, please send the members a message. </p>"
-        title: Working groups
+        title: Grupos de trabajo
       workgroup:
-        edit: Edit group
-        show_tasks: Show all tasks
+        edit: Edita grupo
+        show_tasks: Muestra todas las tareas
   group_order_articles:
     form:
       amount_change_for: Change amount for %{article}
@@ -999,22 +999,22 @@ en:
   group_orders:
     archive:
       desc: View all %{link} aquí.
-      open_orders: current orders
-      title: Orders of %{group}
-      title_closed: settled
-      title_open: closed/not settled
+      open_orders: pedidos activos
+      title: Pedidos de %{group}
+      title_closed: cerrado
+      title_open: cerrado/abierto
     create:
       error_general: The order couldn’t be updated due to a bug.
       error_stale: Someone else has ordered in the meantime, couldn't update the order.
-      notice: The order was saved.
+      notice: El pedido se ha guardado.
     errors:
-      closed: This order is already closed.
-      no_member: You are not a member of an grupo de pedido.
+      closed: Este pedido ya está cerrado.
+      no_member: No eres miembro de un grupo de pedido.
       notfound: Incorrect URL, this is not your order.
     form:
-      action_save: Save order
-      new_funds: Nuevo account balance
-      price: Price
+      action_save: Guardar pedido
+      new_funds: Nuevo balance de cuenta
+      price: Precio
       reset_article_search: Reset search
       search_article: Search for artículos...
       sum_amount: Current amount
@@ -1042,35 +1042,35 @@ en:
       title: Artículos
     show:
       articles:
-        edit_order: Edit order
-        not_ordered_msg: You didn’t place an order yet
-        order_closed_msg: Sorry, this order is closed.
+        edit_order: Edita pedido
+        not_ordered_msg: No has hecho un pedido aún
+        order_closed_msg: Lo siento, este pedido ya está cerrado.
         order_nopen_title: Considering current orders of all groups
-        order_not_open: Received
-        order_now: This is your chance!
-        order_open: Available
-        ordered: Ordered
-        ordered_title: Amount + tolerance
-        show_hide: Show/hide artículos not ordered
-        show_note: Show note
-        title: Artículo overview
-        unit_price: Unit price
-      comment: Comment
+        order_not_open: Recibido
+        order_now: ¡Esta es tu oportunidad!
+        order_open: Disponible
+        ordered: Pedido
+        ordered_title: Cantidad + tolerancia
+        show_hide: Muestra/esconde artículos no pedidos
+        show_note: Muestra note
+        title: Lista de artículos
+        unit_price: Unidad precio
+      comment: Comentario
       comments:
-        title: Comments
-      not_ordered: You didn’t order.
-      sum: Sum
-      title: Your order result for %{order}
+        title: Comentarios
+      not_ordered: No has pedido.
+      sum: Suma
+      title: Resultado de tu pedido para %{order}
     switch_order:
-      remaining: "%{remaining} remaining"
-      title: Current orders
+      remaining: "quedan aún %{remaining}"
+      title: Pedidos activos
     update:
       error_general: The order couldn’t be updated due to a bug.
       error_stale: Someone else has ordered in the meantime, couldn't update the order.
-      notice: The order was saved.
+      notice: El pedido se ha guardado.
   helpers:
     application:
-      edit_user: Edit user
+      edit_user: Edita usuario
       nick_fallback: "(no username)"
       role_admin: Admin
       role_article_meta: Artículos
@@ -1085,8 +1085,8 @@ en:
       pay_done: Fully paid
       pay_none: Nothing to pay
     deliveries:
-      new_invoice: Nuevo invoice
-      show_invoice: Show invoice
+      new_invoice: Nuevo factura
+      show_invoice: Show factura
     messages:
       write_message: Write message
     orders:
@@ -1556,7 +1556,7 @@ en:
         Do you really want to close the order %{order}?
         There is no going back.
       confirm_send_to_supplier: The order has been sent to the supplier already on %{when}. Do you really want to send it again?
-      create_invoice: Add invoice
+      create_invoice: Add factura
       description1_order: "%{state} order from %{supplier} opened by %{who},"
       description1_period:
         pickup: and can be picked up on %{pickup}
@@ -1564,41 +1564,41 @@ en:
         starts_ends: open from %{starts} until %{ends}
       description2: "%{ordergroups} ordered %{article_count} artículos, with a total value of %{net_sum} / %{gross_sum} (net / gross)."
       download:
-        article_pdf: Artículo PDF
-        download_file: Download file
+        article_pdf: Artículos PDF
+        download_file: Descargar archivo
         fax_csv: Fax CSV
         fax_pdf: Fax PDF
         fax_txt: Fax text
         group_pdf: Group PDF
         matrix_pdf: Matrix PDF
-        title: Download
-      group_orders: 'Group orders:'
+        title: Descargar
+      group_orders: 'Pedidos del grupo:'
       search_placeholder:
-        articles: Search for artículos...
-        default: Search for artículos...
-        groups: Search for ordergroups...
-      search_reset: Reset search
-      send_to_supplier: Send to supplier
-      show_invoice: Show invoice
-      sort_article: Sorted in artículos
-      sort_group: Sorted in groups
-      stock_order: Stock Order
+        articles: Busca artículos...
+        default: Busca por artículos...
+        groups: Buscar por grupo de pedido...
+      search_reset: Reinicia la búsqueda
+      send_to_supplier: Envía al proveedor
+      show_invoice: Muestra factura
+      sort_article: Artículos ordenados
+      sort_group: Separados en grupos
+      stock_order: Pedido para guardar en Stock
       title: 'Order: %{name}'
-      warn_not_closed: Warning, order is not yet settled.
+      warn_not_closed: Cuidado, el pedido todavía no está cerrado.
     state:
-      closed: settled
-      finished: closed
-      open: open
+      closed: cerrado
+      finished: terminado
+      open: abierto
     update:
-      notice: The order was updated.
+      notice: Se actualizó el pedido.
     update_order_amounts:
       msg1: "%{count} artículos (%{units} units) updated"
       msg2: "%{count} (%{units}) using tolerance"
       msg4: "%{count} (%{units}) left over"
   pages:
     all:
-      new_page: Create new page
-      recent_changes: Recent changes
+      new_page: Crea nueva página
+      recent_changes: Cambios recientes
       search:
         action: Search
         placeholder: Page title ...
@@ -1684,50 +1684,50 @@ en:
   sessions:
     logged_in: Logged in!
     logged_out: Logged out!
-    login_invalid_email: Invalid email address or password
-    login_invalid_nick: Invalid username or password
+    login_invalid_email: Dirección de email o contraseña no válidas
+    login_invalid_nick: Usuario o contraseña no válidos
     new:
-      forgot_password: Forgot password?
-      login: Login
+      forgot_password: ¿Has olvidado la contraseña?
+      login: Entra
       nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
       title: Foodsoft login
   shared:
     articles:
-      ordered: Ordered
-      ordered_desc: Number of artículos as ordered by member (amount + tolerance)
-      received: Received
-      received_desc: Number of artículos that (will be) received by member
+      ordered: Pedidos
+      ordered_desc: Número de artículos pedidos por miembro (cantidad + tolerancia)
+      received: Recibido
+      received_desc: Número de artículos que el miembro recibirá
     articles_by:
-      price: Total price
-      price_sum: Sum
+      price: Precio total
+      price_sum: Suma
     group:
-      access: Access to
-      activated: activated
+      access: Acceso a
+      activated: activado
       apple_limit: Apple points order limit
       break: from %{start} to %{end}
-      deactivated: deactivated
+      deactivated: deisactivado
     group_form_fields:
-      search: Search ...
-      search_user: Search user
-      user_not_found: No user found
+      search: Busca ...
+      search_user: Busca usuario
+      user_not_found: No se ha encontrado al usuario
     open_orders:
-      no_open_orders: There are no current orders
+      no_open_orders: No hay pedidos activos
       not_enough_apples: Attention your ordergroup has too few apple points to place an order!
-      title: Current orders
-      total_sum: Total sum
-      who_ordered: Who ordered?
+      title: Pedidos activos
+      total_sum: Suma total
+      who_ordered: ¿Quién ha pedido?
     task_list:
-      accept_task: Accept task
-      done: Done
-      done_q: Done?
-      mark_done: Mark task as done
-      reject_task: Reject task
-      who: Who is doing it?
-      who_hint: "(How much are still needed?)"
+      accept_task: Acepta la tarea
+      done: Hecho
+      done_q: ¿Hecho?
+      mark_done: Marca la tarea como realizada
+      reject_task: Rechaza esta tarea
+      who: ¿Quién la está realizando?
+      who_hint: "(¿Cuánto más se necesita?)"
     user_form_fields:
       contact_address_hint: The address of your ordergroup. If you update this, it changes for other miembros of the ordergroup as well.
-      messagegroups: Join or leave message groups
+      messagegroups: Únete o sal de los mensajes de grupo
     workgroup_members:
       title: Group memberships
   simple_form:
@@ -1743,7 +1743,7 @@ en:
         update_global_price: Also update the price of future orders
       stock_article:
         copy:
-          name: Please modify
+          name: Por favor modifica
         edit_stock_article:
           price: "<ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>"
       supplier:
@@ -1777,6 +1777,7 @@ en:
             en: English
             fr: French
             nl: Dutch
+            es: Español
     required:
       mark: "*"
       text: required
