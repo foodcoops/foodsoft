@@ -1540,15 +1540,6 @@ nl:
         starts: open van %{starts}
         starts_ends: open van %{starts} tot %{ends}
       description2: "%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto)."
-      download:
-        article_pdf: Artikelen PDF
-        download_file: Bestand downloaden
-        fax_csv: Fax CSV
-        fax_pdf: Fax PDF
-        fax_txt: Fax text
-        group_pdf: Huishoudens PDF
-        matrix_pdf: Matrix PDF
-        title: Downloaden
       group_orders: 'Ledenbestellingen:'
       search_placeholder:
         articles: Artikelen zoeken...
@@ -1694,6 +1685,15 @@ nl:
       title: Lopende bestellingen
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
+    order_download_button:
+      article_pdf: Artikelen PDF
+      download_file: Bestand downloaden
+      fax_csv: Fax CSV
+      fax_pdf: Fax PDF
+      fax_txt: Fax text
+      group_pdf: Huishoudens PDF
+      matrix_pdf: Matrix PDF
+      title: Downloaden
     task_list:
       accept_task: Taak accepteren
       done: Gedaan

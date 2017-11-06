@@ -1573,15 +1573,6 @@ en:
         starts: open from %{starts}
         starts_ends: open from %{starts} until %{ends}
       description2: "%{ordergroups} ordered %{article_count} articles, with a total value of %{net_sum} / %{gross_sum} (net / gross)."
-      download:
-        article_pdf: Article PDF
-        download_file: Download file
-        fax_csv: Fax CSV
-        fax_pdf: Fax PDF
-        fax_txt: Fax text
-        group_pdf: Group PDF
-        matrix_pdf: Matrix PDF
-        title: Download
       group_orders: 'Group orders:'
       search_placeholder:
         articles: Search for articles...
@@ -1727,6 +1718,15 @@ en:
       title: Current orders
       total_sum: Total sum
       who_ordered: Who ordered?
+    order_download_button:
+      article_pdf: Article PDF
+      download_file: Download file
+      fax_csv: Fax CSV
+      fax_pdf: Fax PDF
+      fax_txt: Fax text
+      group_pdf: Group PDF
+      matrix_pdf: Matrix PDF
+      title: Download
     task_list:
       accept_task: Accept task
       done: Done

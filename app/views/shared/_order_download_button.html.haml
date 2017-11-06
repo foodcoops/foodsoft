@@ -1,0 +1,12 @@
+.btn-group
+  = link_to '#', class: "btn #{klass} dropdown-toggle", data: {toggle: 'dropdown'} do
+    = t '.title'
+    %span.caret
+  %ul.dropdown-menu
+    %li= order_pdf(order, :groups, t('.group_pdf'))
+    %li= order_pdf(order, :articles, t('.article_pdf'))
+    %li= order_pdf(order, :matrix, t('.matrix_pdf'))
+    %li= order_pdf(order, :fax, t('.fax_pdf'))
+    - unless order.stockit?
+      %li= link_to t('.fax_txt'), order_path(order, format: :txt), {title: t('.download_file')}
+    %li= link_to t('.fax_csv'), order_path(order, format: :csv), {title: t('.download_file')}
