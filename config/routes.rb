@@ -51,6 +51,10 @@ Foodsoft::Application.routes.draw do
       resources :order_articles
     end
 
+    resources :pickups, only: [:index] do
+      post :document, on: :collection
+    end
+
     resources :group_orders do
       get :archive, on: :collection
     end

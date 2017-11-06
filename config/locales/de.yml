@@ -1451,6 +1451,7 @@ de:
       archive: Meine Bestellungen
       manage: Bestellverwaltung
       ordering: Bestellen!
+      pickups: Abholtage
       title: Bestellungen
     tasks: Aufgaben
     wiki:
@@ -1672,6 +1673,17 @@ de:
       title: "%{title} - Version %{version}"
       title_version: Version
       view_current: Aktuelle Version sehen
+  pickups:
+    document:
+      empty_selection: Es muss zumindest eine Bestellung ausgewählt sein.
+      filename: Abholungen für %{date}
+      invalid_document: Ungültiger Dokumententyp
+      title: Abholungen für %{date}
+    index:
+      article_pdf: Artikel PDF
+      group_pdf: Gruppen PDF
+      matrix_pdf: Matrix PDF
+      title: Abholtage
   sessions:
     logged_in: Angemeldet!
     logged_out: Abgemeldet!

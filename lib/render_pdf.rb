@@ -85,7 +85,7 @@ class RenderPDF < Prawn::Document
       }
     )
 
-    header = title
+    header = options[:title] || title
     footer = I18n.l(Time.now, format: :long)
 
     header_size = 0
