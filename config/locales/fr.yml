@@ -1536,15 +1536,6 @@ fr:
         starts: ouverte du %{starts}
         starts_ends: ouverte du %{starts} au %{ends}
       description2: "%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)"
-      download:
-        article_pdf: Liste des articles en PDF
-        download_file: Télécharger
-        fax_csv: Fax CSV
-        fax_pdf: Fax au format PDF
-        fax_txt: Fax au format texte
-        group_pdf: Liste des cellules en PDF
-        matrix_pdf: Matrice de répartition en PDF
-        title: Télécharger
       group_orders: 'Commandes des cellules:'
       search_placeholder:
         articles: Rechercher des articles...
@@ -1690,6 +1681,15 @@ fr:
       title: Commandes en cours
       total_sum: Total
       who_ordered: Qui a commandé?
+    order_download_button:
+      article_pdf: Liste des articles en PDF
+      download_file: Télécharger
+      fax_csv: Fax CSV
+      fax_pdf: Fax au format PDF
+      fax_txt: Fax au format texte
+      group_pdf: Liste des cellules en PDF
+      matrix_pdf: Matrice de répartition en PDF
+      title: Télécharger
     task_list:
       accept_task: Te charger de ce boulot
       done: Effectué

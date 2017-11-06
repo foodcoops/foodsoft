@@ -1563,15 +1563,6 @@ de:
         starts: läuft von %{starts}
         starts_ends: läuft von %{starts} bis %{ends}
       description2: "%{ordergroups} haben %{article_count} Artikel mit einem Gesamtwert von %{net_sum} / %{gross_sum} (netto / brutto) bestellt."
-      download:
-        article_pdf: Artikel PDF
-        download_file: Download file
-        fax_csv: Fax CSV
-        fax_pdf: Fax PDF
-        fax_txt: Fax Text
-        group_pdf: Gruppen PDF
-        matrix_pdf: Matrix PDF
-        title: Download
       group_orders: 'Gruppenbestellungen:'
       search_placeholder:
         articles: Suche nach Artikeln ...
@@ -1717,6 +1708,15 @@ de:
       title: Laufende Bestellungen
       total_sum: Gesamtsumme
       who_ordered: Wer hat bestellt?
+    order_download_button:
+      article_pdf: Artikel PDF
+      download_file: Download file
+      fax_csv: Fax CSV
+      fax_pdf: Fax PDF
+      fax_txt: Fax Text
+      group_pdf: Gruppen PDF
+      matrix_pdf: Matrix PDF
+      title: Download
     task_list:
       accept_task: Aufgabe übernehmen
       done: Erledigt

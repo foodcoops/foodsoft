@@ -65,19 +65,7 @@
       = update_articles_link @order, t('.sort_article'), :articles, class: 'btn'
 
     - unless @order.open?
-      .btn-group
-        = link_to '#', class: 'btn dropdown-toggle', data: {toggle: 'dropdown'} do
-          = t '.download.title'
-          %span.caret
-        %ul.dropdown-menu
-          %li= order_pdf(@order, :groups, t('.download.group_pdf'))
-          %li= order_pdf(@order, :articles, t('.download.article_pdf'))
-          %li= order_pdf(@order, :matrix, t('.download.matrix_pdf'))
-          %li= order_pdf(@order, :fax, t('.download.fax_pdf'))
-          - unless @order.stockit?
-            %li= link_to t('.download.fax_txt'), order_path(@order, format: :txt), {title: t('.download.download_file')}
-          %li= link_to t('.download.fax_csv'), order_path(@order, format: :csv), {title: t('.download.download_file')}
-
+      = render 'shared/order_download_button', order: @order, klass: ''
     - if @order.open?
       = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
         data: {confirm: t('.confirm_end', order: @order.name)}
