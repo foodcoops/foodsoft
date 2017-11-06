@@ -1461,6 +1461,7 @@ en:
       archive: My Orders
       manage: Manage orders
       ordering: Place order!
+      pickups: Pickup days
       title: Orders
     tasks: Tasks
     wiki:
@@ -1682,6 +1683,15 @@ en:
       title: "%{title} - version %{version}"
       title_version: Version
       view_current: See current version
+  pickups:
+    document:
+      empty_selection: At least one order must be selected.
+      invalid_document: Invalid document type
+    index:
+      article_pdf: Article PDF
+      group_pdf: Group PDF
+      matrix_pdf: Matrix PDF
+      title: Pickup days
   sessions:
     logged_in: Logged in!
     logged_out: Logged out!

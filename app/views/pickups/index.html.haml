@@ -1,0 +1,33 @@
+- title t('.title')
+
+- @orders.each do |pickup, orders|
+  = form_tag document_pickups_path do
+    %h2
+      - if pickup
+        = l pickup, format: :long
+      - else
+        = t '.without_pickup'
+      %span{style:'float:right'}
+        = submit_tag t('.article_pdf'), name: 'articles_pdf', class: 'btn'
+        = submit_tag t('.group_pdf'), name: 'groups_pdf', class: 'btn'
+        = submit_tag t('.matrix_pdf'), name: 'matrix_pdf', class: 'btn'
+
+    %table.table.table-striped
+      %thead
+        %tr
+          %th{style:'width:50%'}= heading_helper Order, :name
+          %th{style:'width:50%'}= heading_helper Order, :note
+          %th{style:'width:1px'}= t 'ui.actions'
+      %tbody
+        - for order in orders
+          %tr
+            %td
+              = check_box_tag "orders[]", order.id, true #, style: 'float:left'
+              - if current_user.role_orders?
+                = link_to order.name, order_path(order)
+              - else
+                = order.name
+            %td= truncate order.note
+            %td{style:'white-space:nowrap'}
+              = render 'shared/order_download_button', order: order, klass: 'btn-small'
+              = receive_button order, class: 'btn-small'
