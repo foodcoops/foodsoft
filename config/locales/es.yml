@@ -1,0 +1,1984 @@
+es:
+  activerecord:
+    attributes:
+      article:
+        article_category: Categoría
+        availability: "¿Está disponible este artículo?"
+        availability_short: disp.
+        deposit: Depósito
+        fc_price: Precio del grupo de consumo
+        fc_price_desc: Precio incluyendo impuestos, depósito y cargo del grupo de consumo.
+        fc_price_short: Precio grupo consumo
+        fc_share: Margen del grupo de consumo
+        fc_share_short: Margen gc
+        gross_price: Precio bruto
+        manufacturer: Elaborador-a
+        name: Nombre
+        note: Note
+        order_number: Número de pedido
+        order_number_short: Nr.
+        origin: Origen
+        price: Precio (neto)
+        supplier: Proveedor
+        tax: VAT
+        unit: Unidad
+        unit_quantity: Cantidad de unidades
+        unit_quantity_short: C.U.
+        units: Unidades
+      article_category:
+        description: Importar nombres
+        name: Nombre
+      article_price:
+        deposit: Depósito
+        price: Precio (neto)
+        tax: IVA
+        unit_quantity: Cantidad de unidades
+      delivery:
+        delivered_on: Fecha entrega
+        note: Note
+        supplier: Proveedor
+      document:
+        created_at: Creado en
+        created_by_user_id: Creado por
+        data: Datos
+        mime: Tipo MIME
+        name: Nombre
+      financial_transaction:
+        amount: Importe
+        created_on: Fecha
+        note: Note
+        ordergroup: Grupo de pedido
+        user: Ingresado por
+      group_order:
+        price: Suma de pedidos
+        updated_by: Pedido por última vez por
+      group_order_article:
+        ordergroup_id: Grupo de pedido
+        quantity: Importe
+        result: Importe
+        tolerance: Tolerancia
+        total_price: Suma
+      invoice:
+        amount: Importe
+        attachment: Adjunto
+        created_at: Creado en
+        created_by: Creado por
+        date: Fecha de Pago
+        delete_attachment: Borra adjunto
+        deliveries: Entregas
+        deposit: Depósito cobrado
+        deposit_credit: Depósito devuelto
+        net_amount: Importe ajustado para devolver
+        note: Nota
+        number: Número
+        orders: Pedidos
+        paid_on: Pagado el
+        supplier: Proveedor
+      mail_delivery_status:
+        created_at: Hora
+        email: Email
+        message: Mensaje
+      message:
+        body: Cuerpo
+        group_id: Grupo
+        messagegroup_id: Grupo de mensajes
+        order_id: Pedido
+        ordergroup_id: Grupo de pedido
+        private: Privado
+        recipient_tokens: Destinatarios (adicionales)
+        send_method:
+          all: Enviar a todos los miembros
+          messagegroup: Enviar a los miembros de un grupo de mensajes
+          order: Enviar a los miembros que han participado de un pedido
+          ordergroup: Enviar a los miembros de un grupo de pedido
+          recipients: Enviar a miembros específicos
+          workgroup: Enviar a miembros de un grupo de trabajo
+        send_to_all: Enviar a todos los miembros
+        subject: Asunto
+        workgroup_id: Grupo de trabajo
+      messagegroup:
+        description: Descripción
+        name: Nombre
+        user_tokens: Miembros
+      order:
+        boxfill: Repartir cajas después
+        closed_by: Cerrado por
+        created_by: Creado por
+        end_action: Acción final
+        end_actions:
+          auto_close: Cerrar el pedido
+          auto_close_and_send: Cerrar el pedido y enviar al proveedor
+          auto_close_and_send_min_quantity: Cerrar el pedido y enviar al proveedor si se ha alcanzado el mínimo
+          no_end_action: Ninguna acción automática
+        ends: Finaliza el
+        name: Proveedor
+        note: Note
+        pickup: Recogida
+        starts: Comienza el
+        status: Status
+        supplier: Proveedor
+        updated_by: Editado por última vez por
+      order_article:
+        article: Artículo
+        missing_units: Unidades que faltan
+        missing_units_short: Faltan
+        quantity: Cantidad deseada
+        quantity_short: Deseado
+        units_received: Unidades recibidas
+        units_received_short: Recibido
+        units_to_order: Unidades pedidas
+        units_to_order_short: Pedido
+        update_global_price: Actualizar el precio globalmente
+      order_comment:
+        text: Añade comentario a este pedido ...
+      ordergroup:
+        account_balance: Balance de cuenta
+        available_funds: Crédito disponible
+        break: "(Último) descanso"
+        break_until: hasta
+        contact: Contacto
+        contact_address: Dirección
+        contact_person: Persona de contacto
+        contact_phone: Teléfono
+        description: Descripción
+        ignore_apple_restriction: Ignora el bloqueo del pedido por la restricción de puntos-manzana
+        last_order: "Último pedido"
+        last_user_activity: "Última actividad"
+        name: Nombre
+        user_tokens: Miembros
+      page:
+        body: Cuerpo
+        parent_id: Página madre
+        title: Título
+      stock_article:
+        available: Disponible
+        price: Precio
+        quantity: En stock
+        quantity_available: Cantidad disponible
+        quantity_available_short: Disp.
+        quantity_ordered: Pedidos
+      stock_taking:
+        date: Fecha
+        note: Note
+      supplier:
+        address: Dirección
+        contact_person: Persona de contacto
+        customer_number: Número de cliente
+        customer_number_short: Nr.cliente
+        delivery_days: Días de entrega
+        email: Email
+        fax: Fax
+        iban: IBAN
+        is_subscribed: suscrito?
+        min_order_quantity: Cantidad mínima para pedir
+        min_order_quantity_short: Cant. min.
+        name: Nombre
+        note: Note
+        order_howto: Cómo pedir
+        phone: teléfono
+        phone2: teléfono 2
+        shared_sync_method: Cómo sincronizar
+        url: Web
+      task:
+        description: Descripción
+        done: Hecho?
+        due_date: Fecha
+        duration: Duración
+        name: Actividad
+        required_users: Gente necesaria
+        user_list: Usuarios responsables
+        workgroup: Grupo de trabajo
+      user:
+        email: Email
+        first_name: Nombre
+        iban: IBAN
+        last_activity: "Última actividad"
+        last_login: "Último login"
+        last_name: Apellido
+        name: Nombre
+        nick: apodo
+        ordergroup: Grupo de pedido
+        password: Contraseña
+        password_confirmation: Repite la contraseña
+        phone: Teléfono
+        workgroup:
+          one: Grupo de trabajo
+          other: Grupos de trabajo
+      workgroup:
+        description: Descripción
+        name: Nombre
+        role_admin: Administración
+        role_article_meta: database de artículos
+        role_finance: Finanzas
+        role_invoices: Facturas
+        role_orders: Manejo de pedidos
+        role_suppliers: Proveedores
+        user_tokens: Miembros
+    errors:
+      has_many_left: is still associated with a %{collection}!
+      models:
+        article:
+          attributes:
+            name:
+              taken: ese nombre ya está cogido
+              taken_with_unit: name and unit are already taken
+        supplier:
+          attributes:
+            shared_sync_method:
+              included: no es una opción válida para este proveedor
+        task:
+          attributes:
+            done:
+              exclusion: las tareas completadas no se puede repetir
+    models:
+      article: Artículo
+      article_category: Categoría
+      delivery: Entrega
+      financial_transaction: Transacción financiara
+      invoice: Factura
+      message: Mensaje
+      messagegroup: Grupo de mensajes
+      order: Pedido
+      order_article: Pedir artículo
+      order_comment: Comentario de pedido
+      ordergroup:
+        one: Grupo de pedido
+        other: Grupos de pedido
+      stock_article: 
+      stock_taking: 
+      supplier: Proveedor
+      task: Tarea
+      user: Usuario
+      workgroup: Grupo de trabajo
+  admin:
+    access_to: acceder a
+    base:
+      index:
+        all_ordergroups: Todos los grupos de pedido
+        all_users: Todos los usuarios
+        all_workgroups: Todos los grupos de trabajo
+        created_at: 'creado '
+        first_paragraph: Aquí puedes administrar grupos y usuarios de Foodsoft.
+        groupname: nombre del grupo
+        members: miembros
+        name: nombre
+        new_ordergroup: Nuevo grupo de pedido
+        new_user: Nuevo usuario/a
+        new_workgroup: Nuevo grupo de trabajo
+        newest_groups: grupos más nuevos
+        newest_users: usuarios más nuevos
+        title: Administración
+        type: tipo
+        username: nombre de usuario
+    configs:
+      list:
+        key: Clave
+        title: Lista de configuración
+        value: Valor
+      show:
+        submit: Guarda
+        title: Configuración
+      tab_layout:
+        pdf_title: documentos PDF
+      tab_messages:
+        emails_title: Enviando email
+      tab_payment:
+        schedule_title: Agenda de pedidos
+      tab_tasks:
+        periodic_title: Tareas periódicas
+      tabs:
+        title: Configuración
+      update:
+        notice: Configuración guardada.
+    confirm: "¿Estás seguro/a?"
+    mail_delivery_status:
+      destroy_all:
+        notice: Se han borrado todos los problemas de email
+      index:
+        destroy_all: Borra todos los problemas de email
+        title: Problemas de email
+    messagegroups:
+      destroy:
+        error: 'El grupo de mensajes no se pudo borrar: %{error}'
+        notice: El mensaje de grupo ha sido borrado
+      edit:
+        title: Edita mensaje de grupo
+      index:
+        first_paragraph: 
+        new_messagegroup: Crea nuevo mensaje de grupo
+        new_messagegroups: nuevos grupos de mensajes
+        second_paragraph: Un grupo de mensajes es como una lista de correo. Los miembros se pueden suscribir y desuscribir de las listas en las que están interesados, desde su página de perfil.
+        title: Grupos de mensaje
+      new:
+        title: Crea grupo de mensajes
+      show:
+        send_message: Envía mensaje
+        title: Grupo de mensaje  %{name}
+    ordergroups:
+      destroy:
+        error: 'El grupo de pedidos no se pudo eliminar: %{error}'
+        notice: Grupo de pedido se marcó como borrado
+      edit:
+        title: Edita el grupo de pedido
+      form:
+        first_paragraph: Puedes invitar a nuevos miembros %{url}
+        here: aquí
+      index:
+        first_paragraph: Aquí puedes añadir %{url}, y editar o borrar grupos.
+        new_ordergroup: Añade nuevo grupo de pedido
+        new_ordergroups: nuevos grupos de pedido
+        second_paragraph: 'Considera la diferencia entre  <em>grupo</em> y <em>grupo de pedido</em>: Un grupo de pedido tiene una cuenta y puede pedir productos. En una <em>%{url}</em> (por ejemplo ''grupo de hacer cajas''), los miembros se coordinan entre ellos a través de tareas y mensajes. Los usuarios pueden estar sĺo en un grupo de pedido, pero pueden estar en muchos grupos de trabajo.'
+        title: Grupos de pedido
+        workgroup: grupo de trabajo
+      new:
+        title: Crea grupo de pedido
+      show:
+        confirm: "¿Estas seguro/a?"
+        edit: Edita grupo/miembros
+        send_message: Envía mensaje
+        title: Grupo de pedido %{name}
+    search_placeholder: nombre ..
+    users:
+      controller:
+        sudo_done: Estás logueado como %{user}. Be careful, and do not forget to log out when done!
+      destroy:
+        error: 'El usuario no se ha podido borrar: %{error}'
+        notice: El usuario/a ha sido borrado
+      edit:
+        title: Edita usuario/a
+      index:
+        first_paragraph: Aquí puedes %{url}, editar y borar usuarios.
+        new_user: Crea nuevo usuario/a
+        new_users: crea nuevo
+        show_deleted: Muestra usuarios borrados
+        title: User admin
+      new:
+        title: Crea nuevo usuario
+      restore:
+        error: 'El usuario/a no se ha podido restaurar: %{error}'
+        notice: El usuario/a ha sido restaurado
+      show:
+        confirm_sudo: Si continuas, asumirás la identidad de %{user}. No ovides cerrar sesi[on al terminar.
+        groupabos: Suscripciones al grupo
+        member_since: Miembro desde %{time}
+        person: Persona
+        preference: Preferencias
+        send_message: Enviar mensaje
+        show_email_problems: Muestra los problemas de email
+        sudo: Asumir identidad
+      users:
+        show_email_problems: Muestra los problemas de email
+    workgroups:
+      destroy:
+        error: 'No se pudo borrar el Grupo de trabajo: %{error}'
+        notice: Se ha borrado el grupo de trabajo
+      edit:
+        title: Editar grupo de trabajo
+      form:
+        first_paragraph: Puedes invitar nuevos miembros %{url}.
+        here: aquí
+      index:
+        first_paragraph: Aquí puedes crear %{url}, editar y borrarlos.
+        new_workgroup: Crear nuevo grupo de trabajo
+        new_workgroups: nuevo grupo de trabajo
+        ordergroup: grupo de pedido
+        second_paragraph: 'Considera la diferencia entre  <em>grupo</em> y <em>grupo de pedido</em>: Un grupo de pedido tiene una cuenta y puede pedir productos. En una <em>%{url}</em> (por ejemplo ''grupo de hacer cajas''), los miembros se coordinan entre ellos a través de tareas y mensajes. Los usuarios pueden estar sĺo en un grupo de pedido, pero pueden estar en muchos grupos de trabajo.'
+        title: Grupo de trabajo
+      new:
+        title: Crear grupo de trabajo
+      show:
+        confirm: "¿Estás seguro/a?"
+        edit: Edita grupo/miembros
+        title: Grupo de trabajo %{name}
+      workgroups:
+        members: miembros
+        name: nombre
+  application:
+    controller:
+      error_authn: Es necesaria la autenticación!
+      error_denied: No puedes ver la página requerida. Puede ser que debas pedir a un administrador que te otorgue los permisos necesarios. Si tienes acceso a varias cuentas de usuario, puede ser que tengas que %{sign_in}.
+      error_denied_sign_in: entra como otro usuario/a
+      error_feature_disabled: Esta opción está actualmente deshabilitada
+      error_members_only: Esta acción está sólo disponible para miembros de un grupo.
+      error_token: Acceso denegado (invalid token).
+  article_categories:
+    create:
+      notice: La categoría fue registrada
+    destroy:
+      error: 'La categoría no ha podido ser eliminada: %{message}'
+    edit:
+      title: Edita categoría
+    index:
+      new: Añadir una nueva categoría
+      title: Categorías de artículo
+    new:
+      title: Añade nueva categoría
+    update:
+      notice: La categoría fue actualizada
+  articles:
+    article:
+      last_update: "última actualización: %{last_update} | bruto: %{gross_price}"
+    articles:
+      confirm_delete: "¿Estás segura que quieres borrar todos los artículos seleccionados?"
+      option_available: Haz artículos disponibles
+      option_delete: Borra artículo
+      option_not_available: Haz artículos no disponibles
+      option_select: Selecciona acción ...
+      price_netto: Precio
+      unit_quantity_desc: Cantidad de unidades
+      unit_quantity_short: C.U.
+    controller:
+      create_from_upload:
+        notice: Se han guardado %{count} nuevos artículos.
+      error_invalid: Hay errores en los artículos
+      error_nosel: No se ha seleccionado ningún artículo
+      error_parse: "%{msg} ... en la línea %{line}"
+      error_update: 'Ha ocurrido un error miebtras se actualizaba el artículo ''%{article}'': %{msg}'
+      parse_upload:
+        no_file: Elige un archivo para subir.
+        notice:
+          one: "%{count} artículo fue analizado con éxito."
+          other: "%{count} artículos fueron analizados con éxito."
+      sync:
+        notice: El catálogo está actualizado
+        shared_alert: "%{supplier} no está conectado a una base de datos externa"
+      update_all:
+        notice: Se han actualizado todos los artículos y precios.
+      update_sel:
+        notice_avail: Todos los artículos seleccionados se han marcado como disponibles.
+        notice_destroy: Todos los artículos seleccionados han sido borrados.
+        notice_noaction: No se ha especificado una acción!
+        notice_unavail: Todos los artículos seleccionados se han marcado como no disponibles.
+      update_sync:
+        notice: Se han actualizado todos los artículos y precios.
+    destroy_active_article:
+      drop: eliminar
+      note: "%{article} está siendo utilizado en pedidos activos y no se puede borrar. Por favor, primero ... el artículo de los pedidos %{drop_link}."
+    edit_all:
+      note: 'Los campos necesarios son: nombre, unidad, precio (neto) y número de pedido.'
+      submit: Actualizar todos los artículos
+      title: Editar todos los artículos de %{supplier}
+      warning: "¡Ojo! Todos los artículos serán actualizados"
+    form:
+      title_edit: Editar artículo
+      title_new: Añadir un nuevo artículo
+    import_search_results:
+      action_import: importar
+      already_imported: importado
+      not_found: No se han encontrado articulos
+    index:
+      change_supplier: Cambiar proveedor ...
+      edit_all: Editar todos
+      ext_db:
+        import: Importar artículo
+        sync: Sincronizar
+      import:
+        category: Importar directamente a la categoría
+        placeholder: Busca por nombre ...
+        restrict_region: Restringir a la región solamente
+        title: Importar artículo
+      new: Nuevo artículo
+      new_order: Crear un nuevo pedido
+      search_placeholder: Nombre ...
+      title: Artículo de %{supplier} (%{count})
+      upload: Subir artículos
+    model:
+      error_in_use: "%{article} no puede borrarse porque el artículo es parte de un pedido actual!"
+      error_nosel: No has elegido ningún artículo
+    parse_upload:
+      body: "<p><i>Por favor verifica los artículos.</i></p> <p><i>Advertencia, al momento no hay verificación de artículos duplicados.</i></p>"
+      submit: Procesar archivo subido
+      title: Subir artículos
+    sync:
+      outlist:
+        alert_used: Alerta, %{article} se usa en un pedido abierto. Por favor sácalo del pedido primero.
+        body: 'Los próximos artículos fueron sacados de la lista y serán <b>borrados</b>:'
+        body_ignored:
+          one: Se ha salteado un artículo sin número de pedido.
+          other: Se han salteado %{count} artículos sin número de pedido.
+        body_skip: No hay artículos para borrar.
+        title: Quitar de la lista...
+      price_short: Precio
+      submit: Sincronizar todo
+      title: Sincronizar artículos con la base de datos externa
+      unit_quantity_short: Cantidad de unidad
+      update:
+        body: 'Todos los artículos se muestran dos veces: los valores antiguos están en gris, y los campos de texto tienen los valores nuevos. Las diferencias están marcadas en amarillo.'
+        title: Actualizar ...
+        update_msg:
+          one: Un artículo debe ser actualizado.
+          other: "%{count} artículos deben ser actualizados."
+      upnew:
+        body_count:
+          one: Hay un artículo nuevo por agregar.
+          other: Hay %{count} artículos por agregar.
+        title: Agregar nuevo...
+    upload:
+      fields:
+        reserved: "(reservado)"
+        status: Estado (x=saltar)
+      file_label: Por favor elige un archivo compatible
+      options:
+        convert_units: 'Mantener unidades actuales, recomputar la cantidad y precio de unidades (como sincronizar). '
+        outlist_absent: Borrar artículos que no están en el archivo subido.
+      sample:
+        juices: Jugos
+        nuts: Nueces
+        organic: Orgánico
+        supplier_1: Nuttyfarm
+        supplier_2: Brownfields
+        supplier_3: Greenfields
+        tomato_juice: Jugo de tomate
+        walnuts: Nogal
+      submit: Subir archivo
+      text_1: 'Aquí puedes subir una hoja de cálculo para actualizar los artículos de %{supplier}. Se aceptan los formatos Excel (xls, xlsx) y OpenOffice (ods), al igual que archivos CSV (con columnas separadas por ";" con codificación UTF-8). Solo se importará la primera hoja y las columnas deben estar en el siguiente orden:'
+      text_2: Las hileras que se muestran aquí son ejemplos. Cuando hay una "x" en la primera columna, el artículo se sacará de la lista. Esto te permite editar la hoja de cálculo y rápidamente sacar muchos artículos a la vez, por ejemplo cuando los artículos ya no están disponibles con el proveedor. La categoría se hará coincidir con tu lista de categorías de Foodsoft (tanto por nombre de categoría como nombre de importación).
+      title: Subir artículos de %{supplier}
+  config:
+    hints:
+      applepear_url: Web donde se explica el sistema de manzanas y peras.
+      charge_members_manually: Cuando tienes registro de quién recibió que y en donde (por ejemplo, en papel) y no quieres poner esta información en Foodsoft, selecciona esta opción. Tendrás que cambiar las cuentas de los miembros manualmente (utilizando 'añade nueva transacción'). Todavía tendrás que cerrar los pedidos en la pantalla de balance, pero esto no efectuará el cobro a las cuentas de los miembros.
+      contact:
+        email: Dirección email de contacto que aparece en la web y en algunos formularios.
+        street: Direción, normalmente el lugar donde se envían y recogen los pedidos.
+      currency_space: Agregar un espacio después del símbolo de moneda.
+      currency_unit: Símbolo de moneda para mostrar precios.
+      custom_css: Para modificar el diseño de este sitio, puedes ingresar modificaciones del estilo utilizando CSS. Dejar en blanco para usar el estilo por defecto.
+      documents_allowed_extension: Una lista de extensiones de archivo permitidas, separadas por espacios.
+      email_from: Los emails aparecerán provenientes de esta dirección. Dejar en blanco para usar la dirección de contacto de la cooperativa.
+      email_replyto: Ingresa esta dato cuando quieres recibir respuesta de los correos enviados por Foodsoft a una dirección diferente a la de arriba.
+      email_sender: Los emails aparecerán como enviados por esta dirección. Para evitar que tus mensajes sean clasificados como spam, el servidor web podría tener que ser registrado en el record SPF del dominio de la dirección de correo.
+      help_url: Sitio web de documentación.
+      homepage: Sitio web de tu cooperativa.
+      ignore_browser_locale: Ignorar el lenguaje de la computadora del usuario cuando éste no ha elegido un lenguaje todavía.
+      mailing_list: Lista de correo para usar en lugar del sistema de mensajería para enviar correo a todos los miembros.
+      mailing_list_subscribe: Dirección de email a donde los miembros pueden enviar correo para suscribirse.
+      minimum_balance: Los miembros sólo pueden hacer pedidos cuando su balance de cuenta está por encima o igual a esta cantidad.
+      name: El nombre de tu cooperativa.
+      order_schedule:
+        boxfill:
+          recurr: Programa cuándo la fase de llenado de cajas comienza por defecto.
+          time: 
+        ends:
+          recurr: 
+          time: Fecha por defecto cuando se cierran los pedidos.
+        initial: La agenda comienza en esta fecha.
+      page_footer: Se muestra en cada página en la parte inferior. Dejar vacío para desactivar el pie de página por completo.
+      pdf_add_page_breaks:
+        order_by_articles: Poner cada artículo en una página separada.
+        order_by_groups: Poner cada grupo de pedidos en una página separada.
+      pdf_font_size: Tamaño de fuente base para los documentos de PDF (12 por defecto).
+      pdf_page_size: Tamaño de página para documentos PDF, típicamente "A4" o "carta".
+      price_markup: Porcentaje que se agrega al precio bruto para los miembros de la cooperativa.
+      stop_ordering_under: Los miembros sólo pueden pedir cuando tienen al menos esta cantidad de puntos.
+      tasks_period_days: Número de días entre dos tareas periódicas (por defecto 7, que es una semana).
+      tasks_upfront_days: Con cuántos días de antelación te gustaría programar las tareas periódicas.
+      tax_default: Porcentaje por defecto del IVA para artículos nuevos.
+      tolerance_is_costly: Pide lo que más permita la tolerancia de los miembros (en lugar de sólo lo necesario para llenar la última caja). Permitir esto también incluye la tolerancia en el precio final del pedido abierto de cada miembro.
+      use_apple_points: Cuando el sistema de puntos-manzana está habilitado los miembros deberán realizar algunas tareas para poder hacer pedidos.
+      use_boxfill: Cuando está activado, cerca del cierre de un pedido los miembros no podrán cambiar su pedido a menos que se incremente el valor pedido total. Esto ayudará a llenar las cajas que faltan. Igualmente deberás decidir una fecha de llenado de cajas para los pedidos.
+      use_current_orders: 
+      use_documents: Agregar una página básica de compartir documentos al menú de la cooperativa.
+      use_iban: 
+      use_messages: Permitir que los miembros de comuniquen unos con otros dentro de Foodsoft.
+      use_nick: Muestra y utiliza apodos en lugar de nombres reales. Cuando activas esto debes chequear que todos los usuarios tengan apodo.
+      use_wiki: Activar las páginas editables del wiki.
+      webstats_tracking_code: 
+    keys:
+      applepear_url: Enlace de ayuda para el sistema de puntos-manzana
+      charge_members_manually: Cambia los miembros manualmente
+      contact:
+        city: Ciudad
+        country: País
+        email: Email
+        phone: Teléfono
+        street: Calle
+        zip_code: Código postal
+      currency_space: agregar espacio
+      currency_unit: Moneda
+      custom_css: CSS adicional
+      default_locale: Idioma por defecto
+      disable_invite: Desactivar invitaciones
+      documents_allowed_extension: Extensiones permitidas
+      email_from: Dirección de email de origen
+      email_replyto: Dirección reply-to
+      email_sender: Dirección del remitente
+      help_url: URL de documentación
+      homepage: Página inicial
+      ignore_browser_locale: Ignorar idioma del navegador
+      mailing_list: Lista de correos
+      mailing_list_subscribe: Suscribirse a la lista de correos
+      minimum_balance: Balance mínimo
+      name: Nombre
+      order_schedule:
+        boxfill:
+          recurr: Llenar las cajas luego
+          time: hora
+        ends:
+          recurr: Pedido termin
+          time: hora
+        initial: Inicio agendado
+      page_footer: Pie de página
+      pdf_add_page_breaks: Saltos de página
+      pdf_font_size: Tamaño de fuente
+      pdf_page_size: Tamaño de págin
+      price_markup: Margen de la cooperativa
+      stop_ordering_under: Puntos-manzana mínimos
+      tasks_period_days: Periodo
+      tasks_upfront_days: 
+      tax_default: IVA por defecto
+      time_zone: Zona horaria
+      tolerance_is_costly: 
+      use_apple_points: Puntos-manzana
+      use_boxfill: Fase de llenar las cajas
+      use_current_orders: Pantallas extra de distribución
+      use_documents: Activar documentos
+      use_iban: Usar IBAN
+      use_messages: Mensajes
+      use_nick: Usa apodos
+      use_wiki: Activar wiki
+      webstats_tracking_code: Código de seguimiento
+    tabs:
+      foodcoop: Cooperativa
+      language: Idioma
+      layout: Disposición
+      list: Lista
+      messages: Mensajes
+      others: Otro
+      payment: Finanzas
+      tasks: Tareas
+  current_orders:
+    articles:
+      article:
+        counts: las células %{ordergroups} pidieron %{articles} diferentes artículos.
+        no_selection: Elige un artículo para ver quién lo ha pedido o descarga las listas de recogida a la derecha.
+      article_info:
+        from: de %{supplier}
+        origin_in: en %{origin}
+        supplied_and_made_by: hecho por %{manufacturer}
+        supplied_by: de %{supplier}
+        supplied_by_made_by: de %{supplier} hecho por %{manufacturer}
+        unit: por %{unit}
+      form:
+        article_placeholder: Busca artículos...
+        current_orders: Todos los pedidos activos
+      index:
+        title: Distribuye artículos
+      ordergroups:
+        add_new: Añade un grupo de pedido...
+        piece: pieza
+        unit: unidad
+      show:
+        title: "%{name}"
+    group_orders:
+      index:
+        title: Tus pedidos activos
+    navigation:
+      articles: Distribuye
+      ordergroups: Pedidos de los miembros
+      receive: Recibe
+    ordergroups:
+      articles:
+        add_new: Añade un artículo...
+        no_selection: Elige un grupo de pedido para ver los artículos.
+      form:
+        ordergroup_placeholder: Elige una célula...
+      index:
+        title: Artículos por grupo de pedido
+      payment_bar:
+        account_balance: Balance de cuenta
+        new_transaction: Nueva transacción
+        payment: 'Pago:'
+      show:
+        title: Artículos para %{name}
+    orders:
+      receive:
+        no_finished_orders: En este momento no hay pedidos que recibir.
+        title: Recibir pedidos
+  deliveries:
+    add_stock_change:
+      how_many_units: 'Cuántas unidades (%{unit}) enviar? Nombre del artículo de stock: %{name}.'
+    create:
+      notice: Se ha creado el envío. No olvides añadir una factura!
+    destroy:
+      notice: Se ha borrado el envío.
+    edit:
+      title: Editar entrega
+    form:
+      confirm_foreign_supplier_reedit: 
+      create_from_blank: Crea nuevo artículo
+      create_stock_article: Crea nuevo artículo en stock
+      title_fill_quantities: 2. Define cantidades de envío
+      title_finish_delivery: 3. Termina envío
+      title_select_stock_articles: 1. Selecciona artículos en stock
+    index:
+      confirm_delete: "¿Estás seguro/a?"
+      new_delivery: 'Crea nuevo envío para %{supplier} '
+      title: "%{supplier}/envíos"
+    invoice_amount: Importe factura
+    invoice_net_amount: Importe neto de la factura
+    new:
+      title: Nuevo envío para %{supplier}
+    show:
+      sum: Suma
+      sum_diff: Total bruto-ajustado facturado
+      sum_gross: Suma bruta
+      sum_net: Suma neta
+      title: Muestra envío
+      title_articles: Artículos
+    stock_article_for_adding:
+      action_add_to_delivery: Añade al envío
+      action_edit: Edita
+      action_other_price: Copia
+    stock_change_fields:
+      remove_article: Remueve artículo del envío
+    suppliers_overview: Reseña del proveedor
+    update:
+      notice: El envío ha sido actualizado.
+  discourse:
+    callback:
+      invalid_nonce: 
+      invalid_signature: 
+      logged_in: 
+  documents:
+    create:
+      error: 'El documento no puede ser creado: %{error}'
+      not_allowed_mime: 
+      notice: Se ha creado el documento
+    destroy:
+      error: 'El documento no puede ser borrado: %{error}'
+      no_right: No puedes borrar este documento
+      notice: Se ha borrado el documento
+    index:
+      new: Sube nuevo documento
+      title: Documentos
+    multiple_orders_by_articles:
+      filename: Pedidos activos ordenados por artículo
+      title: Pedidos activos - por artículo
+    multiple_orders_by_groups:
+      filename: Pedidos activos ordenados por grupo
+      title: Pedidos activos - por grupo
+    new:
+      title: Nuevo Documento
+    order_by_articles:
+      filename: Pedido %{name}-%{date} - por artículos
+      rows:
+      - Grupo de pedido
+      - Pedido el
+      - Recibido
+      - Precio
+      title: 'Pedido ordenado por artículos: %{name}, cerrado el %{date}'
+    order_by_groups:
+      filename: Pedido %{name}-%{date} - por grupo
+      rows:
+      - Artículo
+      - Pedido
+      - Recibido
+      - Precio
+      - C.U.
+      - Unidad
+      - Suma
+      sum: Suma
+      title: 'Pedido ordenado por grupo:  %{name}, cerrado el %{date}'
+    order_fax:
+      filename: Pedido %{name}-%{date} - Fax
+      rows:
+      - Número de pedido
+      - Importe
+      - Nombre
+      - Cantidad de unidades
+      - Unidad
+      - Precio/Unidad
+      - Subtotal
+      total: Total
+    order_matrix:
+      filename: 
+      heading: Descripción del artículo
+      rows:
+      - Artículo
+      - Unidad
+      - Cantidad de unidades
+      - Precio al grupo
+      - Importe
+      title: 
+      total: "%{count} artículos in total"
+  errors:
+    general: Ha ocurrido un problema.
+    general_again: Ha ocurrido un problema. Por favor inténtalo de nuevo.
+    general_msg: 'Ha ocurrido un problema: %{msg}'
+    internal_server_error:
+      text1: Ha ocurrido un error interno del servidor. ¡Lo sentimos!
+      text2: Hemos sido notificados. Si esto continúa siendo un problema, por favor dínoslo.
+      title: Error interno del servidor
+    not_found:
+      text: Esta página parece no existir. ¡Lo sentimos!
+      title: Página no encontrada
+  feedback:
+    create:
+      notice: Tus comentarios fueron enviados con éxito. ¡Muchas gracias!
+    new:
+      first_paragraph: "¿Encontraste un error? ¿Tienes sugerencias, ideas o comentarios? Nos gustaría recibir tus comentarios."
+      second_paragraph: 
+      send: Enviar
+      title: Enviar comentarios
+  finance:
+    balancing:
+      close:
+        alert: 'Ocurrió un error en la contabilidad: %{message}'
+        notice: El pedido se ha cerrado con éxito, el balance de la cuenta ha sido actualizado.
+      close_direct:
+        alert: 'El pedido no se puede cerrar: %{message}'
+        notice: El pedido ha sido cerrado
+      confirm:
+        clear: Cierra
+        first_paragraph: 'Cuando el pedido se cierre se actualizarán todas las cuentas del grupo. <br />Las cuentas serán cargadas así:'
+        or_cancel: 
+        title: Cierra el pedido
+      edit_results_by_articles:
+        add_article: Añadir artículo
+        amount: Importe
+        gross: Bruto
+        net: Neto
+      group_order_articles:
+        add_group: Añadir grupo
+        total: Costes totales
+        total_fc: Suma (precio al grupo)
+        units: Unidades
+      index:
+        title: Pedidos cerrados
+      invoice:
+        edit: Editar factura
+        invoice_amount: 'Importe factura:'
+        invoice_date: 'Fecha factura:'
+        invoice_number: 'Número de factura:'
+        minus_refund_calculated: "- depósito descontado:"
+        new: crea nueva factura
+        new_body: 'Crea una factura para este pedido:'
+        plus_refund_credited: "+ depósito devuelto:"
+        refund_adjusted_amount: 'importe a devolver:'
+      new:
+        alert: Atención, este pedido ya ha sido contabilizado
+        articles_overview: Lista de artículos
+        close_direct: 
+        close_direct_confirm: Estás por cerrar el pedido sin cobrar a las cuentas de los miembros. Haz esto sólo cuando ya les has descontado manualmente, o si realmente sabes lo que haces.
+        comment_on_transaction: Aquí puedes añadir un comentario a tus cuentas
+        comments: Comentarios
+        confirm_order: Cerrar pedido
+        create_invoice: Añadir factura
+        edit_note: Editar nota
+        edit_order: Editar pedido
+        groups_overview: Lista de grupos
+        invoice: Factura
+        notes_and_journal: Notas/Protocolo
+        summary: Sumario
+        title: Cuentas %{name}
+        view_options: Opciones de vista
+      order_article:
+        confirm: "¿Estás seguro/a?"
+      orders:
+        clear: contabilidad
+        cleared: contabilizado (%{amount})
+        end: Fin
+        ended: cerrado
+        name: Proveedor
+        no_closed_orders: Ahora mismo no hay pedidos cerrados
+        state: Estado
+      summary:
+        changed: "¡Han cambiado los datos!"
+        duration: Desde %{starts} hasta %{ends}
+        fc_amount: 'Valor de venta:'
+        fc_profit: beneficio FC
+        gross_amount: 'Valor bruto:'
+        groups_amount: 'Grupos de pedido suma:'
+        net_amount: 'Valor neto:'
+        reload: Actualiza sumario
+        with_extra_charge: 'con cargo extra:'
+        without_extra_charge: 'sin cargo extra:'
+    create:
+      notice: Se ha creado la factura.
+    financial_links:
+      show:
+        title: Enlace financiero %{number}
+    financial_transactions:
+      controller:
+        create:
+          notice: Se ha guardado la transacción.
+        create_collection:
+          alert: 'Ha ocurrido un error: %{error}'
+          error_note_required: Note se requiere!
+          notice: Se han guardado todas las transacciones
+      index:
+        balance: 'Balance of account: %{balance}'
+        last_updated_at: "(last updated %{when} ago)"
+        new_transaction: Crea nueva transacción
+        title: Balance de cuentas para %{name}
+      index_collection:
+        show_groups: Manejar cuentas
+        title: Transacciones financieras
+      new:
+        paragraph: Aquí puedes poner o quitar dinero del grupo de pedido <b>%{name}</b>.
+        title: Nueva transacción
+      new_collection:
+        add_all_ordergroups: Añade todos los grupos de pedido
+        new_ordergroup: Añade nuevo grupo de pedido
+        save: Guarda transacción
+        sidebar: Aquí puedes actualizar más cuentas al mismo tiempo. Por ejemplo, todas las transferencias del grupo de pedido de un balance de cuenta.
+        title: Actualizar más cuentas
+      ordergroup:
+        remove: Remover
+        remove_group: Remover grupo
+      transactions_search:
+        search_placeholder: Busca nota ...
+    index:
+      amount_fc: Importe(FC)
+      end: Fin
+      everything_cleared: Genial, todo está contabilizado...
+      last_transactions: Transacciones recientes
+      open_transactions: Pedidos abiertos
+      show_all: muestra todo
+      title: Finanzas
+      unpaid_invoices: Facturas impagas
+    invoices:
+      edit:
+        title: Edita factura
+      form:
+        attachment_hint: Sólo se permiten los formatos JPEG y PDF.
+      index:
+        action_new: Crea nueva factura
+        title: Facturas
+      new:
+        title: Crea nueva factura
+      show:
+        title: Factura %{number}
+      unpaid:
+        invoices_sum: Total suma
+        invoices_text: Referencia
+        title: Facturas impagas
+    ordergroups:
+      index:
+        new_transaction: Añade nuevas transacciones
+        search_placeholder: Busca...
+        show_all: Todas las transacciones
+        title: Maneja los grupos
+      ordergroups:
+        account_statement: Balance de cuenta
+        new_transaction: Nueva transacción
+    update:
+      notice: La factura ha sido actualizada
+  foodcoop:
+    ordergroups:
+      index:
+        name: Nombre ...
+        only_active: Sólo grupos activos
+        only_active_desc: "(han hecho al menos un pedido en los últimos 3 meses)"
+        title: Grupo de pedido
+      ordergroups:
+        break: "%{start} - %{end}"
+    users:
+      index:
+        body: "<p>Desde aquí puedes escribir un mensaje a los miembros de tu cooperativa Foodcoop. Recuerda habilitar en %{profile_link} tus detalles de contacto para que sean visibles.</p>"
+        ph_name: Nombre ...
+        ph_ordergroup: Grupo de pedido ...
+        profile_link: opciones
+        title: Usuarios
+    workgroups:
+      edit:
+        invite_link: aquí
+        invite_new: Puedes invitar a nuevos miembros %{invite_link}.
+        title: Edita el grupo
+      index:
+        body: "<p>La edición de un grupo está disponible sólo para los miembros del grupo.<br/> Si quieres unirte a un grupo, envía un mensaje a los miembros. </p>"
+        title: Grupos de trabajo
+      workgroup:
+        edit: Edita grupo
+        show_tasks: Muestra todas las tareas
+  group_order_articles:
+    form:
+      amount_change_for: Cambia la cantidad de %{article}
+      result_hint: 'Unidad: %{unit}'
+  group_orders:
+    archive:
+      desc: Ver todos %{link} aquí.
+      open_orders: pedidos activos
+      title: Pedidos de %{group}
+      title_closed: cerrado
+      title_open: cerrado/abierto
+    create:
+      error_general: El pedido no se ha podido actualizar a causa de un bug.
+      error_stale: Alguien más ha pedido mientras tanto y no he podido actualizar el pedido.
+      notice: El pedido se ha guardado.
+    errors:
+      closed: Este pedido ya está cerrado.
+      no_member: No eres miembro de un grupo de pedido.
+      notfound: Enlace incorrecto, este no es tu pedido
+    form:
+      action_save: Guardar pedido
+      new_funds: Nuevo balance de cuenta
+      price: Precio
+      reset_article_search: Reinicia la búsqueda
+      search_article: Busca artículos...
+      sum_amount: Cantidad actual
+      title: Pedidos
+      total_sum_amount: Cantidad total
+      total_tolerance: Tolerancia total
+      units: Unidades
+      units_full: Unidades llenas
+      units_total: Total de unidades
+    index:
+      closed_orders:
+        more: más...
+        title: Pedidos cerrados
+      finished_orders:
+        title: Pedidos sin cerrar
+        total_sum: Suma total
+      funds:
+        finished_orders: Pedidos sin cerrar
+        open_orders: Pedidos actuales
+        title: Crédito
+      title: Lista de pedidos
+    messages:
+      not_enough_apples: Necesitas al menos %{stop_ordering_under} puntos-manzana para pedir. En este momento tu grupo de pedido sólo tiene %{apples} puntos-manzana.
+    order:
+      title: Artículos
+    show:
+      articles:
+        edit_order: Edita pedido
+        not_ordered_msg: No has hecho un pedido aún
+        order_closed_msg: Lo siento, este pedido ya está cerrado.
+        order_nopen_title: Considerando los pedidos activos de todos los grupos
+        order_not_open: Recibido
+        order_now: "¡Esta es tu oportunidad!"
+        order_open: Disponible
+        ordered: Pedido
+        ordered_title: Cantidad + tolerancia
+        show_hide: Muestra/esconde artículos no pedidos
+        show_note: Muestra nota
+        title: Lista de artículos
+        unit_price: Unidad precio
+      comment: Comentario
+      comments:
+        title: Comentarios
+      not_ordered: No has pedido.
+      sum: Suma
+      title: Resultado de tu pedido para %{order}
+    switch_order:
+      remaining: quedan aún %{remaining}
+      title: Pedidos activos
+    update:
+      error_general: El pedido no se ha podido actualizar por un problema informático
+      error_stale: Mientras tanto, alguien más ha pedido, y no he podido actualizar el pedido.
+      notice: El pedido se ha guardado.
+  helpers:
+    application:
+      edit_user: Edita usuario
+      nick_fallback: "(no tiene apodo)"
+      role_admin: Admin
+      role_article_meta: Artículos
+      role_finance: Finanzas
+      role_invoices: Facturas
+      role_orders: Pedidos
+      role_suppliers: Proveedores
+      show_google_maps: Muéstralo en Google maps
+      sort_by: Ordena por %{text}
+    current_orders:
+      pay_amount: A pagar %{amount}
+      pay_done: Totalmente pagado
+      pay_none: Nada que pagar
+    deliveries:
+      new_invoice: Nueva factura
+      show_invoice: Muestra la factura
+    messages:
+      write_message: Escribe mensaje
+    orders:
+      old_price: Precio anterior
+      option_choose: Elige proveedor/stock
+      option_stock: Stock
+      order_pdf: Crea PDF
+    submit:
+      invite:
+        create: envía invitación
+      message:
+        create: envía mensaje
+    tasks:
+      required_users: Aún se necesitan %{count} miembros!
+      task_title: "%{name} (%{duration}h)"
+  home:
+    apple_bar:
+      desc: 'Esto muestra la proporción de tareas completadas respecto al volumen de pedidos de tu grupo de pedido en comparación con el promedio en Foodcoop. En práctica: por cada %{amount} de pedidos totales, tú deberías hacer una tarea!'
+      more_info: Más información
+      points: 'Tus puntos-manzana: %{points}'
+      warning: Cuidado, si tienes menos de %{threshold} puntos-manzana no puedes hacer un pedido!
+    changes_saved: Guarda los cambios.
+    index:
+      due_date_format: "%A %d %B"
+      messages:
+        title: Mensajes recientes
+        view_all:
+          messages: todos los mensajes
+          text: Muestra %{messages} o %{threads}
+          threads: Hilos
+      my_ordergroup:
+        last_update: 'La última actualización fue hace %{when} '
+        title: Mi grupo de pedido
+        transactions:
+          title: "Últimas transacciones"
+          view: Muestra el balance de cuenta
+      ordergroup:
+        title: Compromiso de tu grupo de pedido
+      tasks_move:
+        action: Asumir tareas/rechazar tareas
+        desc: Eres responsable de estas tareas.
+        title: Asumir tareas
+      tasks_open:
+        title: Tareas abiertas
+        view_all: Muestra todas las tareas
+      title: Inicio
+      your_tasks: Tus tareas
+    no_ordergroups: Lamentablemente no eres miembro de ningún grupo de pedido.
+    ordergroup:
+      account_summary: Balance de cuenta
+      invite: Invita una nueva persona
+      search: Busca ...
+      title: Mi grupo de pedido
+    ordergroup_cancelled: Has cancelado tu participación en el grupo %{group}.
+    profile:
+      groups:
+        cancel: Deja el grupo
+        cancel_confirm: "¿Estás seguro/a de que quieres dejar este grupo?"
+        invite: Invita a nuevo miembro/a
+        title: Eres miembro/a de los grupos
+      title: Mi Perfil
+      user:
+        since: "(miembro para %{when})"
+        title: "%{user}"
+    start_nav:
+      admin: Administración
+      finances:
+        accounts: Actualizar cuentas
+        settle: Pedidos de la cuenta
+        title: Finanzas
+      foodcoop: 
+      members: Miembros
+      new_ordergroup: Nuevo grupo de pedido
+      new_user: Nuevo miembro
+      orders:
+        end: Finalizar pedidos
+        overview: Todos los pedidos
+        title: Pedidos
+      products:
+        edit: Actualizar productos
+        edit_stock: Edita stock
+        edit_suppliers: Edita proveedores
+        title: Productos
+      tasks: Mis tareas
+      title: Acceso directo a ...
+      write_message: Escribir un mensaje
+  invites:
+    errors:
+      already_member: está en uso. La persona ya es miembro de este Grupo de Consumo.
+    modal_form:
+      body: "<p>Aquí puedes invitar a alguien que no es parte del grupo de autoconsumo a unirse a tu grupo de pedido <b>%{group}</b>. Luego de aceptar la invitación la persona podrá añadir y remover artículos de tu pedido.</p> <p>Esto es una buena manera de intrducir alguien al grupo de autoconsumo, o cuando piden varias personas de la misma casa.</p>"
+      title: Invitar a una persona
+    new:
+      action: Enviar invitación
+      body: "<p>Aquí puedes añadir a una persona al grupo <b>%{group}</b>, aunque todavía no sea miembro de la cooperativa de consumo.</p>"
+    success: El usuario ha sido invitado.
+  js:
+    current_orders:
+      articles:
+        above:
+          one: ''
+          other: "%{count} más<br>de los disponibles"
+        below:
+          one: ''
+          other: 'quedan todavía %{count} '
+        equal: todo distribuido
+    ordering:
+      confirm_change: Las modificaciones sobre este pedido se perderán cuando cambies el pedido. ¿Quieres perder los cambios que has hecho y continuar?
+  layouts:
+    email:
+      footer_1_separator: "--"
+      footer_2_foodsoft: 'Foodsoft: %{url}'
+      footer_3_homepage: 'Foodcoop: %{url}'
+      footer_4_help: 'Ayuda: %{url}'
+    foodsoft: Foodsoft
+    footer:
+      revision: revisión %{revision}
+    header:
+      feedback:
+        desc: "¿Encontrase algún error? ¿Sugerencias? ¿Ideas?"
+        title: 
+      help: Ayuda
+      logout: Salir
+      ordergroup: Mis grupos de pedido
+      profile: Edita perfil
+    logo: "<span>food</span>soft"
+  lib:
+    order_pdf:
+      page: Página %{number} de %{count}
+  login:
+    accept_invitation:
+      body: "<p>Has sido invitado a formar parte de %{foodcoop} como miembro del grupo <b>%{group}</b>.</p> <p>Si quieres participar, es necesario que completes este formulario.</p> <p>Tu información no será compartida con terceros bajo ninguna razón. Puedes decidir qué información personal será visible. 'Todos' hace referencia a todos los miembros de Foodcoop. Sólo los administradores tienen acceso a tu información.</p>"
+      submit: Crear una cuenta en Foodsoft
+      title: Invitación a %{name}
+    controller:
+      accept_invitation:
+        notice: Enhorabuena, tu cuenta ha sido creada. Prueba a conectarte ahora.
+      error_group_invalid: Fuiste invitado/a por un grupo que ya no existe más.
+      error_invite_invalid: Tu invitación no es válida.
+      error_token_invalid: La sesión ha expirado o no es válida. Prueba de nuevo.
+      reset_password:
+        notice: 'Si tu email está ya registrado aquí, recibirás un mensaje con un enlace para '
+      update_password:
+        notice: Tu contraseña ha sido actualizada. Prueba a conectarte ahora.
+    forgot_password:
+      body: "<p>Puedes elegir una nueva contraseña.</p> <p>Completa tu dirección de email con la que te registraste aquí. Recibirás un email con los detalles para recuperar tu contraseña.</p>"
+      submit: Solicita una nueva contraseña
+      title: "¿Olvidaste tu contraseña?"
+    new_password:
+      body: "<p>Completa la nueva contraseña para <b>%{user}</b></p>"
+      submit: Guardar la nueva contraseña
+      title: Nueva contraseña
+  mailer:
+    dateformat: 
+    feedback:
+      header: "%{user} escribió %{date}:"
+      subject: 
+    from_via_foodsoft: "%{name} via Foodsoft"
+    invite:
+      subject: 
+      text: |-
+        Hola!
+
+        %{user} <%{mail}> te ha invitado a unirte al grupo "%{group}".
+        Para aceptar la invitación y unirte al grupo de autoconsumo sigue este enlace: %{link}
+        Este enlace funciona sólo una vez y caducará en %{expires}.
+
+
+        Saludos, el equipo de FoodSoft!
+    negative_balance:
+      subject: Balance de cuenta negativo
+      text: |
+        Querido %{group},
+
+        El balance de vuestra cuenta ha caído bajo cero a causa de una reserva el %{when}: %{balance}
+
+        Hubo un cargo de %{amount} por "%{note}" de %{user}.
+
+        Por favor, deposita el dinero a tu cuenta lo antes posible.
+
+
+
+        Muchas gracias, %{foodcoop}.
+    not_enough_users_assigned:
+      subject: '"%{task}" todavía necesita gente!'
+      text: |
+        Querido %{user},
+
+        La tarea '%{task}' de tu grupo de trabajo debe hacerse para %{when},
+        y le vendrían bein más voluntarios/as!
+
+        Si todavía no te has asignado a esta tarea, ahora es tu oportunidad:
+
+        %{workgroup_tasks_url}
+
+        Tus tareas: %{user_tasks_url}
+    order_result:
+      subject: 'Pedido cerrado: %{name}'
+      text0: |
+        Queridos miebros de %{ordergroup},
+
+        El pedido de "%{order}" ha sido cerrado por %{user} en %{when}.
+        Los siguientes artículos se han pedido para tu grupo de pedido:
+      text1: |-
+        o Suma total: %{sum}
+
+        Puedes ver el pedido online: %{order_url}
+
+
+        Abrazos %{foodcoop}.
+    order_result_supplier:
+      subject: Nuevo pedido para %{name}
+      text: |
+        Hola!
+
+        El grupo de consumo %{foodcoop} quiere hacerte un pedido.
+
+        Por favor mira el archivo PDF adjunto.
+
+        Abrazos,
+        %{user}
+        %{foodcoop}
+    reset_password:
+      subject: Hay tareas que se deben hacer ya!
+      text: 
+    upcoming_tasks:
+      nextweek: 'Tareas para la semana que viene:'
+      subject: Tareas que hay que hacer ya!
+      text0: |-
+        Querido/a %{user},
+
+        Estás asignado a la tarea "%{task}". Esta tarea debería estar lista mañana a las (%{when})!
+      text1: |-
+        Mis tareas: %{user_tasks_url}
+
+
+        Saludos de %{foodcoop}.
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: muestra todos
+    index:
+      general: General
+      title: Hilos de mensaje
+    message_threads:
+      last_reply_at: "Última respuesta el"
+      last_reply_by: "Última respuesta de "
+      started_at: Comenzado el
+      started_by: Comenzado por
+    show: General
+  messagegroups:
+    index:
+      body: 
+      title: Grupos de mensaje
+    join:
+      error: 'No pudo unirse al grupo de mensaje: %{error}'
+      notice: Se ha unido al grupo de mensajes
+    leave:
+      error: 'El grupo de mensajes no se ha podido dejar: %{error}'
+      notice: Se ha dejado el grupo de mensajes
+    messagegroup:
+      join: Unirse al grupo de mensajes
+      leave: Dejar grupo de mensajes
+  messages:
+    actionbar:
+      message_threads: Muestra como hilos
+      messagegroups: 
+      messages: Muestra como lista
+      new: Nuevo mensaje
+    create:
+      notice: 
+    index:
+      new: Nuevo mensaje
+      title: Mensajes
+    messages:
+      reply: Responde
+    model:
+      reply_header: 
+      reply_indent: 
+      reply_subject: 
+    new:
+      error_private: Lo siento, este mensaje es privado.
+      hint_private: 
+      list:
+        desc: 
+        mail: 
+        subscribe: 
+        subscribe_msg: 
+        wiki: 
+      message: mensaje
+      no_user_found: No se ha encontrado el usuario
+      reply_to: 
+      search: Busca ...
+      search_user: Busca usuario
+      title: Nuevo mensaje
+    show:
+      all_messages: Todos los mensajes
+      from: 'De:'
+      group: 'Grupo:'
+      reply: Responde
+      reply_to: 'Responde a:'
+      sent_on: 'Enviado:'
+      subject: 'Asunto:'
+      title: Muestra mensaje
+      to: 'A:'
+    thread:
+      all_message_threads: Todos los hilos de mensaje
+      reply: Responde
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Reply: %{reply_url}
+        See message online: %{msg_url}
+        Messaging options: %{profile_url}
+  model:
+    delivery:
+      each_stock_article_must_be_unique: 
+    group_order:
+      stock_ordergroup_name: 
+    invoice:
+      invalid_mime: 
+    membership:
+      no_admin_delete: 
+    order_article:
+      error_price: 
+    page:
+      redirect: 
+    user:
+      no_ordergroup: no hay célula
+  navigation:
+    admin:
+      config: Configuración
+      home: Resumen
+      mail_delivery_status: Problemas de email
+      messagegroups: 
+      ordergroups: Grupos de pedido
+      title: Administración
+      users: Usuarios
+      workgroups: grupos de trabajo
+    articles:
+      categories: Categorías
+      stock: Stock
+      suppliers: Proveedores/artículos
+      title: Artículos
+    dashboard: Escritorio
+    documents: Documentos
+    finances:
+      accounts: Administrar cuentas
+      balancing: Pedidos de cuenta
+      home: Resumen
+      invoices: Facturas
+      title: Finanzas
+    foodcoop: Grupo de consumo
+    members: Miembros
+    messages: Mensajes
+    ordergroups: Grupo de pedido
+    orders:
+      archive: Mis Pedidos
+      manage: Gestionar pedidos
+      ordering: Hacer pedido!
+      title: Pedidos
+    tasks: Tareas
+    wiki:
+      all_pages: Todas las páginas
+      home: 
+      title: 
+    workgroups: Grupos de trabajo
+  number:
+    percentage:
+      format:
+        strip_insignificant_zeros: true
+  order_articles:
+    edit:
+      stock_alert: 
+      title: Actualizar artículo
+    new:
+      title: Añade artículo enviado al pedido
+  ordergroups:
+    edit:
+      title: Editar células
+    index:
+      title: Grupos de pedido
+    model:
+      error_single_group: "%{user} ya es miembro de otra célula"
+      invalid_balance: 
+  orders:
+    articles:
+      article_count: 'Artículos pedidos:'
+      prices: Precio Neto/Bruto
+      prices_sum: 'Suma (Precio Neto/Bruto):'
+      units_full: Unidades completas
+      units_ordered: Unidades pedidas
+    create:
+      notice: Se ha creado el pedido
+    edit:
+      title: 'Edita pedido: %{name}'
+    edit_amount:
+      field_locked_title: La distribución de este artículo entre los grupos de pedido se ha cambiado a mano. Este campo está bloqueado para proteger esos cambios. Para redistribuir y descartar esos cambios presiona el botón Desbloquear y cambia la cantidad.
+      field_unlocked_title: La distribución de este artículo entre los grupos de pedido se ha cambiado a mano. Cuando cambies las cantidades, esos cambios manuales se perderán.
+    edit_amounts:
+      no_articles_available: Ningún artículo para añadir.
+    fax:
+      amount: Cantidad
+      articles: Artículos
+      delivery_day: Día de entrega
+      heading: Pedido para %{name}
+      name: Nombre
+      number: Número
+      to_address: Dirección de envío
+    finish:
+      notice: El pedido ha sido cerrado.
+    form:
+      ignore_warnings: Ignorar las advertencias
+      prices: Precios (net/FC)
+      select_all: Selecciona todos
+      stockit: En stock
+      title: Artículo
+    index:
+      action_end: Cerrar
+      action_receive: Recibir
+      confirm_delete: "¿Estás seguro/a de que quieres borrar el pedido?"
+      confirm_end: Realmente quieres cerrar el pedido %{order}? No hay vuelta atrás.
+      new_order: Crea nuevo pedido
+      no_open_or_finished_orders: Por el momento no hay pedidos abiertos ni cerrados.
+      orders_finished: Terminado
+      orders_open: Abierto
+      orders_settled: Cerrado
+      title: Maneja los pedidos
+    model:
+      close_direct_message: Pedido cerrado sin cobrar a las cuentas de los miembros.
+      error_boxfill_before_ends: debe ser después de la fecha de llenado de cajas (o permanecer vacía)
+      error_closed: El pedido ya estaba cerrado
+      error_nosel: Debes seleccionar al menos un artículo. Quizás quieres borrar el pedido?
+      error_starts_before_boxfill: 
+      error_starts_before_ends: 
+      notice_close: 'Pedido: %{name}, hasta %{ends}'
+      stock: Stock
+      warning_ordered: 'Cuidado: los artículos marcados en rojo ya han sido pedidos en este pedido abierto. Si los deseleccionas aquí, todos los pedidos actuales de estos artículos se borrarán. Para proceder, confirma abajo.'
+      warning_ordered_stock: 'Cuidado: Los artículos marcados en rojo ya han sido pedidos en este pedido de stock. Si los deseleccionas aquí, todos los pedidos y compras de estos artículos se borrarán y no estarán en la contabilidad. Para proceder, confirma abajo.'
+    new:
+      title: Crea nuevo pedido
+    receive:
+      add_article: Añade artículo
+      consider_member_tolerance: considera la tolerancia
+      notice: 'Pedido recibido: %{msg}'
+      notice_none: Ningún nuevo artículo para recibir
+      rest_to_stock: 
+      submit: recibe pedido
+      surplus_options: 'Opciones de distribución:'
+      title: Recibiendo %{order}
+    send_to_supplier:
+      notice: El pedido ha sido enviado al proveedor.
+    show:
+      action_end: Cierra!
+      amounts: 'Suma neto/bruto:'
+      articles: Lista de artículos
+      articles_ordered: 'Artículos pedidos:'
+      comments:
+        title: Comentarios
+      comments_link: Comentarios
+      confirm_delete: 
+      confirm_end: 
+      confirm_send_to_supplier: 
+      create_invoice: Añade factura
+      description1_order: 
+      description1_period:
+        pickup: 
+        starts: abierto desde %{starts}
+        starts_ends: abierto desde %{starts} hasta %{ends}
+      description2: "%{ordergroups} ha pedido %{article_count} artículos, con un valor total de %{net_sum} / %{gross_sum} (neto / bruto)."
+      download:
+        article_pdf: Artículos PDF
+        download_file: Descargar archivo
+        fax_csv: Fax CSV
+        fax_pdf: Fax PDF
+        fax_txt: Fax text
+        group_pdf: Group PDF
+        matrix_pdf: Matrix PDF
+        title: Descargar
+      group_orders: 'Pedidos del grupo:'
+      search_placeholder:
+        articles: Busca artículos...
+        default: Busca por artículos...
+        groups: Buscar por grupo de pedido...
+      search_reset: Reinicia la búsqueda
+      send_to_supplier: Envía al proveedor
+      show_invoice: Muestra factura
+      sort_article: Artículos ordenados
+      sort_group: Separados en grupos
+      stock_order: Pedido para guardar en Stock
+      title: 'Pedido: %{name}'
+      warn_not_closed: Cuidado, el pedido todavía no está cerrado.
+    state:
+      closed: cerrado
+      finished: terminado
+      open: abierto
+    update:
+      notice: Se actualizó el pedido.
+    update_order_amounts:
+      msg1: "%{count} artículos (%{units} units) actualizados"
+      msg2: 
+      msg4:
+        one: ''
+        other: quedan %{count} (%{units})
+  pages:
+    all:
+      new_page: Crea nueva página
+      recent_changes: Cambios recientes
+      search:
+        action: Busca
+        placeholder: 
+      site_map: 
+      title: 
+      title_list: Lista de páginas
+    body:
+      title_toc: Contenido
+      wikicloth_exception: 
+    create:
+      notice: La página ha sido creada
+    cshow:
+      error_noexist: La página no existe
+      redirect_notice: 
+    destroy:
+      notice: 
+    diff:
+      title: 
+    edit:
+      title: Editar página
+    error_stale_object: 
+    form:
+      help:
+        bold: 
+        external_link_ex: 
+        external_links: 
+        heading: nivel %{level}
+        headings: Título
+        image_link_title: 
+        image_links: 
+        italic: 
+        link_lists: 
+        link_table: 
+        link_templates: 
+        link_variables: 
+        list_item_1: 
+        list_item_2: 
+        noformat: 
+        ordered_list: 
+        section_block: 
+        section_character: 
+        section_link: 
+        section_more: 
+        section_table: 
+        see_tables: 
+        tables_link: 
+        text: 
+        title: 
+        unordered_list: 
+        wiki_link_ex: 
+        wiki_links: 
+      preview: Previsualizar
+    last_updated: 
+    new:
+      title: Crear una nueva página en la wiki
+    page_list_item:
+      date_format: 
+    show:
+      date_format: 
+      delete: Eliminar página
+      delete_confirm: 
+      diff: 
+      edit: 
+      last_updated: 
+      subpages: 
+      title_versions: 
+      versions: 
+    title: Título
+    update:
+      notice: 
+    variables:
+      description: 
+      title: 
+      value: 
+      variable: 
+    version:
+      author: 'Autor/a: %{user}'
+      date_format: 
+      revert: 
+      title: 
+      title_version: 
+      view_current: 
+  sessions:
+    logged_in: "¡Te has conectado!"
+    logged_out: 
+    login_invalid_email: Dirección de email o contraseña no válidas
+    login_invalid_nick: Usuario o contraseña no válidos
+    new:
+      forgot_password: "¿Has olvidado la contraseña?"
+      login: Entra
+      nojs: 
+      noscript: 
+      title: 
+  shared:
+    articles:
+      ordered: Pedidos
+      ordered_desc: Número de artículos pedidos por miembro (cantidad + tolerancia)
+      received: Recibido
+      received_desc: Número de artículos que el miembro recibirá
+    articles_by:
+      price: Precio total
+      price_sum: Suma
+    group:
+      access: Acceso a
+      activated: activado
+      apple_limit: Límite de pedido puntos-manzana
+      break: desde %{start} hasta %{end}
+      deactivated: desactivado
+    group_form_fields:
+      search: Busca ...
+      search_user: Busca usuario
+      user_not_found: No se ha encontrado al usuario
+    open_orders:
+      no_open_orders: No hay pedidos activos
+      not_enough_apples: 'Atención: tu grupo de pedido no tiene suficientes puntos-manzana para hacer un pedido!'
+      title: Pedidos activos
+      total_sum: Suma total
+      who_ordered: "¿Quién ha pedido?"
+    task_list:
+      accept_task: Acepta la tarea
+      done: Hecho
+      done_q: "¿Hecho?"
+      mark_done: Marca la tarea como realizada
+      reject_task: Rechaza esta tarea
+      who: "¿Quién la está realizando?"
+      who_hint: "(¿Cuánto más se necesita?)"
+    user_form_fields:
+      contact_address_hint: La dirección de tu grupo de pedido. Si la cambias, también se cambiará para los demás miembros de tu grupo.
+      messagegroups: "Únete o sal de los mensajes de grupo"
+    workgroup_members:
+      title: Membresías de grupo
+  simple_form:
+    error_notification:
+      default_message: 
+    hints:
+      article:
+        unit: por ej. KG o 1L o 500g
+      article_category:
+        description: 
+      order_article:
+        units_to_order: Si cambias la cantidad total de unidades enviadas también tendrás que cambiar los valores individuales de grupo haciendo click en el nombre del artículo. No serán recalculados automáticamente, así que a los otros grupos de pedido se les podrían ser cobrar artículos que no llegarán!
+        update_global_price: Actualizar el precio para futuros pedidos
+      stock_article:
+        copy:
+          name: Por favor modifica
+        edit_stock_article:
+          price: "<ul><li>Los cambios de precio están prohibidos.</li><li>Si es totalmente necesario, %{stock_article_copy_link}.</li></ul>"
+      supplier:
+        min_order_quantity: La cantidad mínima que se puede pedir será mostrada durante el proceso de pedido y debería motivar que se pida el producto.
+      task:
+        duration: Cuánto se tarda en hacer la tarea, 1-3 horas.
+        required_users: Cuánta gente se necesitará en total?
+      tax: En porcentaje, el estándar es 7,0
+    labels:
+      settings:
+        messages:
+          send_as_email: Recibir mensajes en emails.
+        notify:
+          negative_balance: Infórmame cuando mi grupo de pedido tenga un balance negativo.
+          order_finished: Infórmame acerca del resultado de mi pedido (cuando se cierre).
+          upcoming_tasks: Recordarme las tareas incompletas.
+        profile:
+          email_is_public: El email es visible para otros miembros
+          language: Idioma
+          name_is_public: El nombre es visible para los otros miembros.
+          phone_is_public: El teléfono es visible para los otros miembros.
+        settings_group:
+          messages: Mensajes
+          privacy: Privacidad
+    'no': 'No'
+    options:
+      settings:
+        profile:
+          language:
+            de: Alemán
+            en: Inglés
+            es: Español
+            fr: Francés
+            nl: Neerlandés
+    required:
+      mark: "*"
+      text: requerido
+    'yes': Sí
+  stock_takings:
+    create:
+      notice: 
+    edit:
+      title: 
+    index:
+      new_inventory: 
+      title: 
+    new:
+      amount: 
+      create: crea
+      stock_articles: 
+      temp_inventory: 
+      text_deviations: 
+      text_need_articles: 
+      title: 
+    show:
+      amount: Cantidad
+      article: Artículo
+      confirm_delete: 
+      date: Fecha
+      note: Nota
+      overview: Inventario
+      supplier: Proveedor
+      title: Muestra inventario
+      unit: Unidad
+    stock_takings:
+      confirm_delete: 
+      date: 
+      note: 
+    update:
+      notice: 
+  stockit:
+    check:
+      not_empty: 
+    copy:
+      title: 
+    create:
+      notice: 'Se ha creado el nuevo producto en stock  "%{name}" '
+    derive:
+      title: Añade un artículo en stock desde plantilla
+    destroy:
+      notice: El artículo  %{name} ha sido borrado
+    edit:
+      title: 
+    form:
+      copy_stock_article: 
+      price_hint: 
+    index:
+      confirm_delete: Estás seguro/a de que lo quieres borrar?
+      new_delivery: 
+      new_stock_article: 
+      new_stock_taking: Añade inventario
+      order_online: 
+      show_stock_takings: Resumen del inventario
+      stock_count: Número de artículos
+      stock_worth: 
+      title: 
+      toggle_unavailable: 
+      view_options: Ver opciones
+    new:
+      search_text: 'Busca artículos en todos los catálogos:'
+      title: Añade mi nuevo artículo de stock
+    show:
+      change_quantity: Cambia
+      datetime: 
+      new_quantity: Nueva cantidad
+      reason: Razón
+      stock_changes: 
+    update:
+      notice: 
+  suppliers:
+    create:
+      notice: Se ha creado el proveedor/a
+    destroy:
+      notice: Se ha borrado el proveedor/a
+    edit:
+      title: Edita proveedor/a
+    index:
+      action_import: Importa proveedor de una base de datos externa
+      action_new: Crea un nuevo proveedor/a
+      articles: artículos (%{count})
+      confirm_del: Estas seguro de que quieres borrar al proveedor  %{name}?
+      deliveries:
+        one: ''
+        other: envíos (%{count})
+      stock: en stock (%{count})
+      title: Proveedores
+    new:
+      title: Nuevo proveedor
+    shared_supplier_methods:
+      all_available: Todos los artículos (hay artículos nuevos)
+      all_unavailable: Todos los artículos (no hay artículos nuevos)
+      import: Elige artículos para importar
+    shared_supplier_note: El proveedor está conectado a la base de datos externa
+    shared_suppliers:
+      body: "<p>Aquí se muestran los proveedores de la base de datos externa.</p> <p>Puedes importar proveedores externos suscribiéndote (ver más abajo).</p> <p>Un nuevo proveedor será creado y conectado a la base de datos externa.</p>"
+      subscribe: Suscríbete
+      subscribe_again: Suscríbete de nuevo
+      supplier: Proveedor/a
+      title: Listas externas
+    show:
+      last_deliveries: Envíos recientes
+      last_orders: "Últimos pedidos"
+      new_delivery: Nuevo envío
+      show_deliveries: Muestra todos
+    update:
+      notice: Se ha actualizado el proveedor/a
+  tasks:
+    accept:
+      notice: Has aceptado la tarea
+    archive:
+      title: Archivo de tareas
+    create:
+      notice: La tarea ha sido creada
+    destroy:
+      notice: La tarea ha sido eliminada
+    edit:
+      submit_periodic: Guarda tarea recurrente
+      title: Edita tarea
+      title_periodic: Edita tarea recurrente
+      warning_periodic: "<strong>Cuidado:</strong> esta tarea es parte de un grupo de <em>tareas recurrentes</em>. Cuando guardes, será exccluida del grupo y convertida en una <em>tarea normal</em>."
+    error_not_found: No se ha encontrado el grupo de trabajo
+    form:
+      search:
+        hint: Busca usuarios
+        noresult: No se han encontrado usuarios
+        placeholder: Busca ...
+      submit:
+        periodic: Guarda tarea recurrente
+    index:
+      show_group_tasks: Muestra tareas del grupo
+      title: Tareas
+      title_non_group: Tareas para todos/as!
+    nav:
+      all_tasks: Todas las tareas
+      archive: Tareas completadas (archive)
+      group_tasks: Tareas del grupo
+      my_tasks: Mis tareas
+      new_task: Crea nueva tarea
+      pages: Páginas
+    new:
+      submit_periodic: Crea tarea recurrente
+      title: Crea nueva tarea
+    repeated: Esta tarea es recurrente
+    set_done:
+      notice: Se ha actualizado la condición de la tarea
+    show:
+      accept_task: Aceptar tarea
+      confirm_delete_group: Estás seguro/a de que quieres borrar esta tarea y todas las tareas subsecuentes?
+      confirm_delete_single: Estás seguro/a de que quieres borrar esta tarea?
+      confirm_delete_single_from_group: 'Estás seguro/a de que quieres borrar esta tarea (y mantener las tareas recurrentes relacionadas)? '
+      delete_group: Borrar esta tarea y las subsecuentes
+      edit_group: Edita recurrencia
+      hours: "%{count}h"
+      mark_done: Marca tarea como hecha
+      reject_task: Rechaza tarea
+      title: Muestra tarea
+    update:
+      notice: La tarea se ha actualizado
+      notice_converted: La tarea ha sido actualizada y convertida en una tarea no recurrente.
+    user:
+      more: Nada que hacer? %{tasks_link} seguramente hay tareas.
+      tasks_link: Aquí
+      title: Mis tareas
+      title_accepted: Tareas aceptadas
+      title_open: Open tareas
+    workgroup:
+      title: Tareas para %{workgroup}
+      title_all: Todas las tareas del grupo
+  ui:
+    actions: Acciones
+    back: Volver
+    cancel: Cancelar
+    close: Cerrar
+    confirm_delete: 
+    confirm_restore: 
+    copy: Copia
+    delete: Eliminar
+    download: Descarga
+    edit: Editar
+    marks:
+      close: 
+      success: 
+    or_cancel: o cancelar
+    please_wait: Espera...
+    restore: Restaura
+    save: Guardar
+    show: Mostrar
+  views:
+    pagination:
+      first: 
+      last: 
+      next: 
+      previous: 
+      truncate: 
+  workgroups:
+    edit:
+      title: Edita grupo de trabajo
+    error_last_admin_group: 
+    error_last_admin_role: 
+    index:
+      title: Grupos de trabajo
+    update:
+      notice: El grupo de trabajo se actualizó.
