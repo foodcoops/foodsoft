@@ -1,13 +1,13 @@
 version: '2'
 services:
 
-  web:
-    extends: worker
+  foodsoft:
+    extends: foodsoft_worker
     command: ./proc-start web
     ports:
       - "3000:3000"
 
-  worker:
+  foodsoft_worker:
     build:
       context: .
       dockerfile: Dockerfile-dev
