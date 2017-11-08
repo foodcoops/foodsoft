@@ -6,39 +6,41 @@ class DocumentsController < ApplicationController
   def index
     if params["sort"]
       sort = case params["sort"]
-               when "name" then "name"
+               when "name" then "data IS NULL DESC, name"
                when "created_at" then "created_at"
-               when "name_reverse" then "name DESC"
+               when "name_reverse" then "data IS NULL, name DESC"
                when "created_at_reverse" then "created_at DESC"
              end
     else
-      sort = "name"
+      sort = "data IS NULL DESC, name"
     end
 
-    @documents = Document.page(params[:page]).per(@per_page).order(sort)
+    @documents = Document.where(parent: @document).page(params[:page]).per(@per_page).order(sort)
   end
 
   def new
-    @document = Document.new
+    @document = Document.new parent_id: params[:document_id]
+    @document.mime = '' unless params[:type] == 'folder'
   end
 
   def create
-    @document = Document.new
-    @document.data = params[:document][:data].read
-    @document.mime = FileMagic.new(FileMagic::MAGIC_MIME).buffer(@document.data)
-    raise t('.not_allowed_mime', mime: @document.mime) unless allowed_mime? @document.mime
-    if params[:document][:name] == ''
-      name = params[:document][:data].original_filename
-      name = File.basename(name)
-      @document.name = name.gsub(/[^\w\.\-]/, '_')
-    else
-      @document.name = params[:document][:name]
+    @document = Document.new name: params[:document][:name]
+    @document.parent = Document.find_by_id(params[:document][:parent_id])
+    data = params[:document][:data]
+    if data
+      @document.data = data.read
+      @document.mime = FileMagic.new(FileMagic::MAGIC_MIME).buffer(@document.data)
+      raise t('.not_allowed_mime', mime: @document.mime) unless allowed_mime? @document.mime
+      if @document.name.empty?
+        name = File.basename(data.original_filename)
+        @document.name = name.gsub(/[^\w\.\-]/, '_')
+      end
     end
     @document.created_by = current_user
     @document.save!
-    redirect_to documents_path, notice: t('.notice')
+    redirect_to @document.parent || documents_path, notice: t('.notice')
   rescue => error
-    redirect_to documents_path, alert: t('.error', error: error.message)
+    redirect_to @document.parent || documents_path, alert: t('.error', error: error.message)
   end
 
   def destroy
@@ -55,7 +57,12 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
-    send_data(@document.data, filename: @document.filename, type: @document.mime)
+    if @document.file?
+      send_data(@document.data, filename: @document.filename, type: @document.mime)
+    else
+      index
+      render :index
+    end
   end
 
   def allowed_mime?(mime)

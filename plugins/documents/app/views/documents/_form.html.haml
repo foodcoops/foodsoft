@@ -1,0 +1,12 @@
+= simple_form_for @document, validate: true do |f|
+  = f.hidden_field :parent_id
+  .modal-header
+    = close_button :modal
+    %h3= @document.folder? ? t('.new_folder') : t('.new')
+  .modal-body
+    = f.input :name, as: :string, required: @document.folder?
+    - if @document.file?
+      = f.input :data, as: :file, required: true
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit t('.submit'), class: 'btn btn-primary'

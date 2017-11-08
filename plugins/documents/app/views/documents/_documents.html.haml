@@ -11,7 +11,7 @@
   %tbody
     - for document in @documents
       %tr
-        %td= link_to document.name, document
+        %td= link_to document.name, document, class: "documents-item-#{document.folder? ? 'folder' : 'file'}"
         %td= format_time(document.created_at)
         %td= h show_user(document.created_by)
         %td

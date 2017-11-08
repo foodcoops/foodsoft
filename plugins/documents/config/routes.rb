@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   scope '/:foodcoop' do
 
-    resources :documents
+    resources :documents do
+      get :new
+      get :new_folder
+    end
 
   end
 
