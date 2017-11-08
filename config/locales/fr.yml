@@ -39,7 +39,7 @@ fr:
         supplier: Fournisseur-e
       document:
         created_at: Créé le
-        created_by_user_id: Crée par
+        created_by: Crée par
         data: 
         mime: 
         name: Nom

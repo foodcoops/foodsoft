@@ -39,7 +39,7 @@ nl:
         supplier: Leverancier
       document:
         created_at: Upload op
-        created_by_user_id: Upload door
+        created_by: Upload door
         data: Data
         mime: MIME-type
         name: Naam
@@ -743,6 +743,8 @@ nl:
       error: 'Document kon niet verwijderd worden: %{error}'
       no_right: Je hebt niet genoeg rechten om het document te verwijderen
       notice: Document is verwijderd
+    form:
+      title: Nieuw document
     index:
       new: Nieuw document uploaden
       title: Documenten
@@ -752,8 +754,6 @@ nl:
     multiple_orders_by_groups:
       filename: Huidige bestellingen per huishouden
       title: Huidige bestellingen - per huishouden
-    new:
-      title: Nieuw document
     order_by_articles:
       filename: Bestelling %{name}-%{date} - Artikellijst
       rows:

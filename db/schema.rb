@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002000000) do
+ActiveRecord::Schema.define(version: 20171110000000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -83,7 +83,10 @@ ActiveRecord::Schema.define(version: 20171002000000) do
     t.integer  "created_by_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
   end
+
+  add_index "documents", ["parent_id"], name: "index_documents_on_parent_id", using: :btree
 
   create_table "financial_link", force: :cascade do |t|
     t.text "note"

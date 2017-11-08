@@ -1,7 +1,17 @@
 class Document < ActiveRecord::Base
-  belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
+  include ActsAsTree
 
-  validates_presence_of :data
+  belongs_to :created_by, class_name: 'User', foreign_key: 'created_by_user_id'
+
+  acts_as_tree
+
+  def file?
+    !folder?
+  end
+
+  def folder?
+    mime.nil?
+  end
 
   def filename
     types = MIME::Types[mime]

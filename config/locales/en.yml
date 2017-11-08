@@ -39,7 +39,7 @@ en:
         supplier: Supplier
       document:
         created_at: Created at
-        created_by_user_id: Created by
+        created_by: Created by
         data: Data
         mime: MIME type
         name: Name
@@ -740,15 +740,20 @@ en:
       logged_in: Logged in!
   documents:
     create:
-      error: 'Document could not be created: %{error}'
+      error: 'Document or folder could not be created: %{error}'
       not_allowed_mime: The filetype "%{mime}" is not allowed. Please contact an administrator to whitelist it.
-      notice: Document was created
+      notice: Document or folder was created
     destroy:
-      error: 'Document could not be deleted: %{error}'
-      no_right: You do not have enough rights to delete the document
-      notice: Document was deleted
+      error: 'Document or folder could not be deleted: %{error}'
+      no_right: You do not have enough rights to delete the document or folder
+      notice: Document or folder was deleted
+    form:
+      new: New Document
+      new_folder: new Folder
+      submit: Create
     index:
       new: Upload new document
+      new_folder: Create new folder
       title: Documents
     multiple_orders_by_articles:
       filename: Current orders sorted by article
@@ -756,8 +761,6 @@ en:
     multiple_orders_by_groups:
       filename: Current orders sorted by group
       title: Current orders - by group
-    new:
-      title: New Document
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
       rows:

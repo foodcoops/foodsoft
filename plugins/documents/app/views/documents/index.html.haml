@@ -1,7 +1,21 @@
 - title t('.title')
 
 - content_for :actionbar do
-  = link_to t('.new'), new_document_path, class: 'btn btn-primary'
+  - options = { document_id: @document || 0 }
+  = link_to t('.new_folder'), document_new_path(options.merge(type: :folder)), remote: true, class: 'btn'
+  = link_to t('.new'), document_new_path(options), remote: true, class: 'btn btn-primary'
+
+- if @document
+  %ul.breadcrumb
+    %li
+      = link_to t('.title'), documents_path
+      %span.divider /
+    - for parent_folder in @document.ancestors.reverse
+      %li
+        = link_to parent_folder.name, parent_folder
+        %span.divider /
+    %li.active
+      = @document.name
 
 #documentsTable
   = render :partial => "documents"
