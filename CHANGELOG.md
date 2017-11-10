@@ -1,3 +1,29 @@
+# Foodsoft 4.6.0
+(10 November 2017)
+
+* Foodsoft can now be used in the Spanish language (3b18dc, #525)
+* A Docker image for production use (#482, #497)
+* Allow to send order PDF automatically on specified closing time (#488, #495, #515)
+* The documents plugin is now included by default (#514)
+* A new plugin to integrate login with Discourse forum software (#478, #502)
+* Improved user-interface for selecting who to send a message to (#506)
+* You can now create a wiki page called Dashboard to show on top of the dashboard (#519)
+* A new view for showing unpaid invoices (#520)
+* User, supplier, ordergroups and invoices can now receive custom fields in the app configuration (#516)
+* Cleaner message replies when received by email (#504)
+* Better support for running Foodsoft in a sub-path (#500)
+* Sort workgroup tasks by name (#487)
+* Allow plugins to create links to financial transactions (#517)
+* The license has been changed to AGPL (#513)
+* Fix foodcoop price calculation when changed in database (#506)
+* Fix to notify users of tasks (#494)
+* Fix to not show deleted users in forms (#486)
+* Fix to include stock articles in groups document (#478)
+* Please note that support for deployment with Capistrano has been removed (#491)
+
+Please note that support for deployment with Capistrano has been removed (#491). The license has been changed to
+AGPL: if you are running a modified version of Foodsoft, from this version on, you need to share your changes.
+
 # Foodsoft 4.5.2
 (17 April 2017)
 
