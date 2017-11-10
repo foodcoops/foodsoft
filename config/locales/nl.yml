@@ -533,6 +533,7 @@ nl:
   config:
     hints:
       applepear_url: Website waar het appelpunten systeem wordt uitgelegd.
+      charge_members_manually: Kies deze optie als je elders bijhoudt wie welke producten heeft gekregen (bijvoorbeeld op papier), en dat ook niet naderhand in Foodsoft invoert. Na het afrekenen van bestellingen moet je dan iedere keer bij leden handmatig het in rekening te brengen bedrag afschrijven (gebruik "Nieuwe transacties toevoegen"). Het blijft wel nodig bestellingen af te rekenen, maar dat brengt dan niets in rekening bij leden.
       contact:
         email: Algemeen contactadres, zowel voor op de website als in formulieren.
         street: Adres, meestal is dit het aflever- en ophaaladres.
@@ -581,6 +582,7 @@ nl:
       webstats_tracking_code: Tracking code voor bezoeker statistieken (zoals Piwik of Google analytics). Leeg laten als geen tracking gewenst is.
     keys:
       applepear_url: Appelsysteem uitleg URL
+      charge_members_manually: Leden handmatig afrekenen
       contact:
         city: Stad
         country: Land
@@ -892,6 +894,9 @@ nl:
         without_extra_charge: 'zonder marge:'
     create:
       notice: Rekening is gemaakt.
+    financial_links:
+      show:
+        title: Financiële link %{number}
     financial_transactions:
       controller:
         create:

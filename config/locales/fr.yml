@@ -533,6 +533,7 @@ fr:
   config:
     hints:
       applepear_url: 
+      charge_members_manually: 
       contact:
         email: 
         street: 
@@ -581,6 +582,7 @@ fr:
       webstats_tracking_code: 
     keys:
       applepear_url: 
+      charge_members_manually: 
       contact:
         city: Ville
         country: Pays
@@ -894,6 +896,9 @@ fr:
         without_extra_charge: 'sans supplément:'
     create:
       notice: La facture a bien été définie.
+    financial_links:
+      show:
+        title: 
     financial_transactions:
       controller:
         create:
@@ -1251,8 +1256,8 @@ fr:
     dateformat: "%d %b"
     feedback:
       header: 'Le %{date}, %{user} a écrit:'
-      subject: Retour de %{email}
-    from_via_foodsoft: 
+      subject: Feedback pour Foodsoft
+    from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Invitation à participer à une Bouffecoop
       text: |-

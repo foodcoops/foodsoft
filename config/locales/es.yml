@@ -142,8 +142,8 @@ es:
         contact_phone: Teléfono
         description: Descripción
         ignore_apple_restriction: Ignora el bloqueo del pedido por la restricción de puntos-manzana
-        last_order: "Último pedido"
-        last_user_activity: "Última actividad"
+        last_order: Último pedido
+        last_user_activity: Última actividad
         name: Nombre
         user_tokens: Miembros
       page:
@@ -192,8 +192,8 @@ es:
         email: Email
         first_name: Nombre
         iban: IBAN
-        last_activity: "Última actividad"
-        last_login: "Último login"
+        last_activity: Última actividad
+        last_login: Último login
         last_name: Apellido
         name: Nombre
         nick: apodo
@@ -244,7 +244,7 @@ es:
       ordergroup:
         one: Grupo de pedido
         other: Grupos de pedido
-      stock_article: 
+      stock_article: Artículo de stock
       stock_taking: 
       supplier: Proveedor
       task: Tarea
@@ -417,7 +417,7 @@ es:
       notice: La categoría fue actualizada
   articles:
     article:
-      last_update: "última actualización: %{last_update} | bruto: %{gross_price}"
+      last_update: 'última actualización: %{last_update} | bruto: %{gross_price}'
     articles:
       confirm_delete: "¿Estás segura que quieres borrar todos los artículos seleccionados?"
       option_available: Haz artículos disponibles
@@ -579,7 +579,7 @@ es:
       use_boxfill: Cuando está activado, cerca del cierre de un pedido los miembros no podrán cambiar su pedido a menos que se incremente el valor pedido total. Esto ayudará a llenar las cajas que faltan. Igualmente deberás decidir una fecha de llenado de cajas para los pedidos.
       use_current_orders: 
       use_documents: Agregar una página básica de compartir documentos al menú de la cooperativa.
-      use_iban: 
+      use_iban: Cuando esta opción está habilitada, el proveedor y el usuario pueden guardan también su número de cuenta bancaria internacional (IBAN).
       use_messages: Permitir que los miembros de comuniquen unos con otros dentro de Foodsoft.
       use_nick: Muestra y utiliza apodos en lugar de nombres reales. Cuando activas esto debes chequear que todos los usuarios tengan apodo.
       use_wiki: Activar las páginas editables del wiki.
@@ -628,7 +628,7 @@ es:
       tasks_upfront_days: 
       tax_default: IVA por defecto
       time_zone: Zona horaria
-      tolerance_is_costly: 
+      tolerance_is_costly: La tolerancia es prioritaria
       use_apple_points: Puntos-manzana
       use_boxfill: Fase de llenar las cajas
       use_current_orders: Pantallas extra de distribución
@@ -705,7 +705,7 @@ es:
     edit:
       title: Editar entrega
     form:
-      confirm_foreign_supplier_reedit: 
+      confirm_foreign_supplier_reedit: El artículo de stock %{name} se ha guardado correctamente. Sin embargo pertenece a un proveedor distinto de este envío. ¿Te gustaría volver a editar el artículo?
       create_from_blank: Crea nuevo artículo
       create_stock_article: Crea nuevo artículo en stock
       title_fill_quantities: 2. Define cantidades de envío
@@ -738,8 +738,8 @@ es:
   discourse:
     callback:
       invalid_nonce: 
-      invalid_signature: 
-      logged_in: 
+      invalid_signature: Firma inválida
+      logged_in: Estás adentro!
   documents:
     create:
       error: 'El documento no puede ser creado: %{error}'
@@ -792,7 +792,7 @@ es:
       - Subtotal
       total: Total
     order_matrix:
-      filename: 
+      filename: Pedido %{name}-%{date} - matrix para ordenar
       heading: Descripción del artículo
       rows:
       - Artículo
@@ -832,7 +832,7 @@ es:
       confirm:
         clear: Cierra
         first_paragraph: 'Cuando el pedido se cierre se actualizarán todas las cuentas del grupo. <br />Las cuentas serán cargadas así:'
-        or_cancel: 
+        or_cancel: o vuelve a contabilidad
         title: Cierra el pedido
       edit_results_by_articles:
         add_article: Añadir artículo
@@ -859,7 +859,7 @@ es:
       new:
         alert: Atención, este pedido ya ha sido contabilizado
         articles_overview: Lista de artículos
-        close_direct: 
+        close_direct: Saltearse el cierre de pedido
         close_direct_confirm: Estás por cerrar el pedido sin cobrar a las cuentas de los miembros. Haz esto sólo cuando ya les has descontado manualmente, o si realmente sabes lo que haces.
         comment_on_transaction: Aquí puedes añadir un comentario a tus cuentas
         comments: Comentarios
@@ -1121,7 +1121,7 @@ es:
         last_update: 'La última actualización fue hace %{when} '
         title: Mi grupo de pedido
         transactions:
-          title: "Últimas transacciones"
+          title: Últimas transacciones
           view: Muestra el balance de cuenta
       ordergroup:
         title: Compromiso de tu grupo de pedido
@@ -1331,8 +1331,8 @@ es:
       general: General
       title: Hilos de mensaje
     message_threads:
-      last_reply_at: "Última respuesta el"
-      last_reply_by: "Última respuesta de "
+      last_reply_at: Última respuesta el
+      last_reply_by: 'Última respuesta de '
       started_at: Comenzado el
       started_by: Comenzado por
     show: General
@@ -1365,19 +1365,19 @@ es:
     model:
       reply_header: 
       reply_indent: 
-      reply_subject: 
+      reply_subject: 'Re: %{subject}'
     new:
       error_private: Lo siento, este mensaje es privado.
       hint_private: 
       list:
-        desc: 
-        mail: 
-        subscribe: 
-        subscribe_msg: 
+        desc: 'Envía mensajes a todos los miembros a través de la lista de correo: %{list}'
+        mail: por ejemplo con un email a %{email}.
+        subscribe: Puedes leer más sobre la lista de correos en %{link}.
+        subscribe_msg: Quizás tengas que suscribirte a la lista primero.
         wiki: 
       message: mensaje
       no_user_found: No se ha encontrado el usuario
-      reply_to: 
+      reply_to: Este mensaje es una respuesta a otro %{link}.
       search: Busca ...
       search_user: Busca usuario
       title: Nuevo mensaje
@@ -1402,13 +1402,13 @@ es:
         Messaging options: %{profile_url}
   model:
     delivery:
-      each_stock_article_must_be_unique: 
+      each_stock_article_must_be_unique: Los artículos de stock no pueden ser listados más de una vez.
     group_order:
-      stock_ordergroup_name: 
+      stock_ordergroup_name: Stock (%{user})
     invoice:
-      invalid_mime: 
+      invalid_mime: tiene un tipo de MIME inválido (%{mime})
     membership:
-      no_admin_delete: 
+      no_admin_delete: No te puedes salir de este grupo porque eres el último adimistrador/a.
     order_article:
       error_price: 
     page:
@@ -1420,7 +1420,7 @@ es:
       config: Configuración
       home: Resumen
       mail_delivery_status: Problemas de email
-      messagegroups: 
+      messagegroups: Grupos de mensaje
       ordergroups: Grupos de pedido
       title: Administración
       users: Usuarios
@@ -1459,7 +1459,7 @@ es:
         strip_insignificant_zeros: true
   order_articles:
     edit:
-      stock_alert: 
+      stock_alert: El precio de los artículos de stock no se puede cambiar!
       title: Actualizar artículo
     new:
       title: Añade artículo enviado al pedido
@@ -1470,7 +1470,7 @@ es:
       title: Grupos de pedido
     model:
       error_single_group: "%{user} ya es miembro de otra célula"
-      invalid_balance: 
+      invalid_balance: no es un número válido
   orders:
     articles:
       article_count: 'Artículos pedidos:'
@@ -1519,7 +1519,7 @@ es:
       error_boxfill_before_ends: debe ser después de la fecha de llenado de cajas (o permanecer vacía)
       error_closed: El pedido ya estaba cerrado
       error_nosel: Debes seleccionar al menos un artículo. Quizás quieres borrar el pedido?
-      error_starts_before_boxfill: 
+      error_starts_before_boxfill: tiene que ser después de la fecha de comienzo (o estar vacío)
       error_starts_before_ends: 
       notice_close: 'Pedido: %{name}, hasta %{ends}'
       stock: Stock
@@ -1614,17 +1614,17 @@ es:
       title: 
     edit:
       title: Editar página
-    error_stale_object: 
+    error_stale_object: Cuidado, la página ha sido editada por otra persona. Por favor, intenta de nuevo.
     form:
       help:
         bold: 
-        external_link_ex: 
-        external_links: 
+        external_link_ex: Enlace externo
+        external_links: Externo
         heading: nivel %{level}
         headings: Título
-        image_link_title: 
-        image_links: 
-        italic: 
+        image_link_title: Título de la imagen
+        image_links: Imágenes
+        italic: itálicas
         link_lists: 
         link_table: 
         link_templates: 
@@ -1632,11 +1632,11 @@ es:
         list_item_1: 
         list_item_2: 
         noformat: 
-        ordered_list: 
-        section_block: 
-        section_character: 
-        section_link: 
-        section_more: 
+        ordered_list: Lista numerada
+        section_block: Estilo del párrafo
+        section_character: Estilo de las letras
+        section_link: Estilo de los enlaces
+        section_more: Más temas
         section_table: 
         see_tables: 
         tables_link: 
@@ -1674,8 +1674,8 @@ es:
       date_format: 
       revert: 
       title: 
-      title_version: 
-      view_current: 
+      title_version: Versión
+      view_current: Ver versión actual
   sessions:
     logged_in: "¡Te has conectado!"
     logged_out: 
@@ -1684,7 +1684,7 @@ es:
     new:
       forgot_password: "¿Has olvidado la contraseña?"
       login: Entra
-      nojs: 
+      nojs: Atención, las cookies y el javascript deben ser activados! Por favor desactiva %{link}.
       noscript: 
       title: 
   shared:
@@ -1722,7 +1722,7 @@ es:
       who_hint: "(¿Cuánto más se necesita?)"
     user_form_fields:
       contact_address_hint: La dirección de tu grupo de pedido. Si la cambias, también se cambiará para los demás miembros de tu grupo.
-      messagegroups: "Únete o sal de los mensajes de grupo"
+      messagegroups: Únete o sal de los mensajes de grupo
     workgroup_members:
       title: Membresías de grupo
   simple_form:
@@ -1779,14 +1779,14 @@ es:
     'yes': Sí
   stock_takings:
     create:
-      notice: 
+      notice: El inventario se ha creado con éxito.
     edit:
-      title: 
+      title: Editar inventario
     index:
-      new_inventory: 
-      title: 
+      new_inventory: Crea nuevo inventario
+      title: Resumen del inventario
     new:
-      amount: 
+      amount: Cantidad
       create: crea
       stock_articles: 
       temp_inventory: 
@@ -1811,9 +1811,9 @@ es:
       notice: 
   stockit:
     check:
-      not_empty: 
+      not_empty: "%{name} no se pudo borrar, el inventario no es cero."
     copy:
-      title: 
+      title: Copia artículo de stock
     create:
       notice: 'Se ha creado el nuevo producto en stock  "%{name}" '
     derive:
@@ -1821,21 +1821,21 @@ es:
     destroy:
       notice: El artículo  %{name} ha sido borrado
     edit:
-      title: 
+      title: Edita artículos de stock
     form:
-      copy_stock_article: 
-      price_hint: 
+      copy_stock_article: copia artículos de stock
+      price_hint: Para prevenir el caos no se pueden editar los precios de artículos que ya están en el stock.
     index:
       confirm_delete: Estás seguro/a de que lo quieres borrar?
-      new_delivery: 
-      new_stock_article: 
+      new_delivery: Nueva entrega ...
+      new_stock_article: Añade nuevo artículo de stock
       new_stock_taking: Añade inventario
-      order_online: 
+      order_online: Publica el pedido de stock
       show_stock_takings: Resumen del inventario
       stock_count: Número de artículos
-      stock_worth: 
+      stock_worth: 'Valor actual del stock:'
       title: 
-      toggle_unavailable: 
+      toggle_unavailable: Muestra/esconde los artículos no disponibles
       view_options: Ver opciones
     new:
       search_text: 'Busca artículos en todos los catálogos:'
@@ -1845,9 +1845,9 @@ es:
       datetime: 
       new_quantity: Nueva cantidad
       reason: Razón
-      stock_changes: 
+      stock_changes: Cambio de cantidades en stock
     update:
-      notice: 
+      notice: Se ha guardado el artículo de stock %{name}.
   suppliers:
     create:
       notice: Se ha creado el proveedor/a
@@ -1880,7 +1880,7 @@ es:
       title: Listas externas
     show:
       last_deliveries: Envíos recientes
-      last_orders: "Últimos pedidos"
+      last_orders: Últimos pedidos
       new_delivery: Nuevo envío
       show_deliveries: Muestra todos
     update:
