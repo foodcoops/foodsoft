@@ -11,7 +11,7 @@ Xvfb $DISPLAY -nolisten tcp &
 XVFB_PID=$!
 
 # Start tests
-rspec
+rspec $@
 
 # Cleanup
 kill $XVFB_PID

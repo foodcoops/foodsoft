@@ -1,15 +1,14 @@
-Getting foodsoft running for development
-========================================
+# Getting Foodsoft running for development
 
 Gratulations, if you read this file locally, you have successfully cloned the
 foodsoft project from the git repository. Now you are only a few steps away
 from trying it out and then jumping into development.
 
-This document describes how to setup Foodsoft for development on your local system.
-Alternatively, you [run Foodsoft using Docker](SETUP_DOCKER.md). Or if you just want to
-run Foodsoft without changing its code, the
-[Turnkey Linux Foodsoft appliance](http://www.turnkeylinux.org/foodsoft) may be useful.
-
+This document describes how to setup Foodsoft for development within your local
+system. Another option is to use [docker for development](SETUP_DEVELOPMENT_DOCKER.md).
+If instead you just want to run Foodsoft without changing its code, please refer to
+[hosting](https://foodcoops.github.io/foodsoft-hosting/) or
+[deployment](https://github.com/foodcoops/foodsoft/wiki/Deployment-notes).
 
 **System requirements**:
 [RVM](https://rvm.io/rvm/install),
@@ -20,8 +19,7 @@ run Foodsoft without changing its code, the
 **Optional**:
 [Redis](http://redis.io/).
 
-Getting started
----------------
+### Getting started
 
 0. Clone the repository from GitHub:
 
@@ -100,9 +98,7 @@ Getting started
 9. Have phun!
 
 
-
-Manual configuration
---------------------
+### Manual configuration
 
 The rake task `foodsoft:setup_development` helps you to setup foodsoft.
 If you want to have more control, you can do these steps manually as
@@ -173,3 +169,13 @@ explained here.
    From now on you have a smtp server listening on 1025. To see the emails go to
 
         http://localhost:1080
+
+
+## Docker
+
+To avoid having to go through setting up all dependencies, you can also run Foodsoft
+within a docker image. While the default [`Dockerfile`](../Dockerfile) is setup for production,
+[`Dockerfile.dev`](../Dockerfile.dev) is meant for development. Even better, you can
+use docker-compose (using [`docker-compose.dev.yml`](../docker-compose.dev.yml)) to
+setup the whole stack at once.
+
