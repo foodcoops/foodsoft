@@ -28,9 +28,8 @@ page on the wiki.
 Deploying
 ---------
 
-Setup foodsoft to [run in production](doc/SETUP_PRODUCTION.md),
-and automate [deployment](doc/DEPLOYMENT.md). This section is
-very much a work in progress.
+Setup foodsoft to [run in production](doc/SETUP_PRODUCTION.md), or join an existing
+[hosting platform](https://foodcoops.github.io/foodsoft-hosting/).
 
 
 License
