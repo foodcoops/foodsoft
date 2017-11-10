@@ -1,4 +1,7 @@
-# SQLite version 3.x
+# Foodsoft database configuration for SQLite 3.x
+#
+# This file is in the public domain
+
 development:
   adapter: sqlite3
   database: db/development.sqlite3

@@ -38,5 +38,5 @@ This plugin introduces the foodcoop config option `use_current_orders`, which
 needs to be set to `true` to enable the plugin. This can be done in the
 configuration screen or `config/app_config.yml`.
 
-This plugin is part of the foodsoft package and uses the GPL-3 license or later
-(see foodsoft's LICENSE for the full license text).
+This plugin is part of the foodsoft package and uses the AGPL-3 license (see
+foodsoft's LICENSE for the full license text).

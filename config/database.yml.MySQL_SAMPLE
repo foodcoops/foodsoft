@@ -1,4 +1,9 @@
-# MySQL.  Versions 4.1 and 5.0 are recommended.
+# Foodsoft database configuration for MySQL
+#
+# This file is in the public domain
+#
+#
+# MySQL versions 4.1 and 5.0 are recommended.
 # 
 # Install the MYSQL driver
 #   gem install mysql2

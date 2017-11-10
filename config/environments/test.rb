@@ -1,3 +1,7 @@
+# Foodsoft test configuration.
+#
+# This file is in the public domain.
+
 Foodsoft::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

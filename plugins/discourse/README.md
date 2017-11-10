@@ -22,5 +22,5 @@ If `discourse_sso` is set to `true` Foodsoft will act as an SSO provider for
 Discourse. The `sso url` for Discourse is `/discourse/sso` relative to root url
 of Foodsoft (e.g. `https://foodsoft.example.com/f/discourse/sso`).
 
-This plugin is part of the foodsoft package and uses the GPL-3 license (see
+This plugin is part of the foodsoft package and uses the AGPL-3 license (see
 foodsoft's LICENSE for the full license text).
