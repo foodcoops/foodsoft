@@ -135,7 +135,7 @@ GEM
       tins (~> 1.6)
     crass (1.0.2)
     daemons (1.2.5)
-    database_cleaner (1.6.1)
+    database_cleaner (1.6.2)
     date_time_attribute (0.1.2)
       activesupport (>= 3.0.0)
     debug_inspector (0.0.3)
