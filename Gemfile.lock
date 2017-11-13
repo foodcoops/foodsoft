@@ -231,8 +231,8 @@ GEM
     loofah (2.1.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.6.6)
-      mime-types (>= 1.16, < 4)
+    mail (2.7.0)
+      mini_mime (>= 0.1.1)
     mailcatcher (0.6.5)
       eventmachine (= 1.0.9.1)
       mail (~> 2.3)
@@ -250,6 +250,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
     mono_logger (1.1.0)
@@ -447,10 +448,10 @@ GEM
     tilt (2.0.8)
     tins (1.15.0)
     ttfunk (1.5.1)
-    twitter-bootstrap-rails (2.2.8)
+    twitter-bootstrap-rails (3.2.2)
       actionpack (>= 3.1)
-      execjs
-      rails (>= 3.1)
+      execjs (>= 2.2.2, >= 2.2)
+      less-rails (>= 2.5.0)
       railties (>= 3.1)
     twitter-text (1.14.7)
       unf (~> 0.1.0)
@@ -551,7 +552,7 @@ DEPENDENCIES
   sqlite3
   therubyracer
   thin
-  twitter-bootstrap-rails (~> 2.2.8)
+  twitter-bootstrap-rails (~> 3.2.2)
   uglifier (>= 1.0.3)
   web-console (~> 3.3)
   whenever
