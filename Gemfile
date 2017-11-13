@@ -67,7 +67,7 @@ gem 'foodsoft_discourse', path: 'plugins/discourse'
 group :development do
   gem 'sqlite3'
   gem 'mailcatcher'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.3'
 
   # allow to use `debugger` https://github.com/conradirwin/pry-rescue
   gem 'pry-rescue'
