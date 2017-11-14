@@ -23,14 +23,14 @@ gem 'rails-i18n'
 gem 'mysql2'
 gem 'prawn'
 gem 'prawn-table'
-gem 'haml', '~> 4.0' # some breaking changes in version 5, remove this line again when fixed
+gem 'haml', '~> 5.0' # some breaking changes in version 5, remove this line again when fixed
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
 gem 'inherited_resources'
 gem 'localize_input', git: "https://github.com/bennibu/localize_input.git"
 gem 'daemons'
-gem 'twitter-bootstrap-rails', '~> 2.2.8'
+gem 'twitter-bootstrap-rails', '~> 3.2.2'
 gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
 gem 'simple-navigation-bootstrap'
 gem 'ransack'
@@ -39,7 +39,7 @@ gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 http
 gem 'resque'
 gem 'thin'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
-gem 'protected_attributes', '= 1.1.0' # 1.1.0 until tests work work with higher versions
+gem 'protected_attributes', '1.1.4' # 1.1.0 until tests work work with higher versions
 gem 'ruby-units'
 gem 'attribute_normalizer'
 gem 'ice_cube'
@@ -67,7 +67,7 @@ gem 'foodsoft_discourse', path: 'plugins/discourse'
 group :development do
   gem 'sqlite3'
   gem 'mailcatcher'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.3'
 
   # allow to use `debugger` https://github.com/conradirwin/pry-rescue
   gem 'pry-rescue'
