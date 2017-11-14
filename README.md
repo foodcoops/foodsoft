@@ -1,5 +1,6 @@
 Foodsoft
 =========
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b6f384c3bb4b481d85fbc8df11d31a62)](https://www.codacy.com/app/MySolace/foodsoft?utm_source=github.com&utm_medium=referral&utm_content=MySolace/foodsoft&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/foodcoops/foodsoft.svg?branch=master)](https://travis-ci.org/foodcoops/foodsoft)
 [![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.svg?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
 [![Docs Status](https://inch-ci.org/github/foodcoops/foodsoft.svg?branch=master)](http://inch-ci.org/github/foodcoops/foodsoft)
