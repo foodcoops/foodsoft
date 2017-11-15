@@ -3,8 +3,6 @@ class OrderFax < OrderPdf
 
   BATCH_SIZE = 250
 
-  attr_reader :order
-
   def filename
     I18n.t('documents.order_fax.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
   end

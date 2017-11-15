@@ -55,14 +55,17 @@ en:
         name: Name
         financial_transaction_class: Financial transaction class
       group_order:
+        ordergroup: Ordergroup
         price: Order sum
         updated_by: Last ordered by
       group_order_article:
-        ordergroup_id: Ordergroup
+        ordered: Ordered
         quantity: Amount
+        received: Received
         result: Amount
         tolerance: Tolerance
         total_price: Sum
+        unit_price: Price/Unit
       invoice:
         amount: Amount
         attachment: Attachment
@@ -786,22 +789,9 @@ en:
       title: Current orders - by group
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
-      rows:
-      - Ordergroup
-      - Ordered
-      - Received
-      - Price
       title: 'Order sorted by articles: %{name}, closed at %{date}'
     order_by_groups:
       filename: Order %{name}-%{date} - by group
-      rows:
-      - Article
-      - Ordered
-      - Received
-      - Price
-      - U.Q.
-      - Unit
-      - Sum
       sum: Sum
       title: 'Order sorted by group: %{name}, closed at %{date}'
     order_fax:
@@ -817,17 +807,8 @@ en:
       total: Total
     order_matrix:
       filename: Order %{name}-%{date} - sorting matrix
-      heading: Article overview
-      rows:
-      - Article
-      - Unit
-      - Unit quantity
-      - FC-Price
-      - Amount
+      heading: Article overview (%{count})
       title: 'Order sorting matrix: %{name}, closed at %{date}'
-      total:
-        one: One article in total
-        other: "%{count} articles in total"
   errors:
     general: A problem has occured.
     general_again: A problem has occured. Please try again.
@@ -1236,7 +1217,7 @@ en:
       profile: Edit profile
     logo: "<span>food</span>soft"
   lib:
-    order_pdf:
+    render_pdf:
       page: Page %{number} of %{count}
   login:
     accept_invitation:

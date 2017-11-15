@@ -50,14 +50,17 @@ es:
         ordergroup: Grupo de pedido
         user: Ingresado por
       group_order:
+        ordergroup: Grupo de pedido
         price: Suma de pedidos
         updated_by: Pedido por última vez por
       group_order_article:
-        ordergroup_id: Grupo de pedido
+        ordered: Pedido el
         quantity: Importe
+        received: Recibido
         result: Importe
         tolerance: Tolerancia
         total_price: Suma
+        unit_price: Precio/Unidad
       invoice:
         amount: Importe
         attachment: Adjunto
@@ -762,22 +765,9 @@ es:
       title: Pedidos activos - por grupo
     order_by_articles:
       filename: Pedido %{name}-%{date} - por artículos
-      rows:
-      - Grupo de pedido
-      - Pedido el
-      - Recibido
-      - Precio
       title: 'Pedido ordenado por artículos: %{name}, cerrado el %{date}'
     order_by_groups:
       filename: Pedido %{name}-%{date} - por grupo
-      rows:
-      - Artículo
-      - Pedido
-      - Recibido
-      - Precio
-      - C.U.
-      - Unidad
-      - Suma
       sum: Suma
       title: 'Pedido ordenado por grupo:  %{name}, cerrado el %{date}'
     order_fax:
@@ -793,15 +783,8 @@ es:
       total: Total
     order_matrix:
       filename: Pedido %{name}-%{date} - matrix para ordenar
-      heading: Descripción del artículo
-      rows:
-      - Artículo
-      - Unidad
-      - Cantidad de unidades
-      - Precio al grupo
-      - Importe
+      heading: Descripción del artículo (%{count})
       title: 
-      total: "%{count} artículos in total"
   errors:
     general: Ha ocurrido un problema.
     general_again: Ha ocurrido un problema. Por favor inténtalo de nuevo.
