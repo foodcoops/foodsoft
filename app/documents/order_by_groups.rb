@@ -1,12 +1,6 @@
 # encoding: utf-8
 class OrderByGroups < OrderPdf
 
-  # optimal value depends on the number of articles ordered on average by each
-  #   ordergroup as well as the available memory
-  BATCH_SIZE = 50
-
-  attr_reader :order
-
   def filename
     I18n.t('documents.order_by_groups.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
   end
@@ -17,91 +11,48 @@ class OrderByGroups < OrderPdf
   end
 
   def body
-    # Start rendering
-    each_group_order do |group_order|
-      down_or_page 15
-
-      total = 0
-      rows = []
+    each_ordergroup do |oa_name, oa_total, oa_id|
       dimrows = []
+      rows = [[
+        OrderArticle.human_attribute_name(:article),
+        Article.human_attribute_name(:supplier),
+        GroupOrderArticle.human_attribute_name(:ordered),
+        GroupOrderArticle.human_attribute_name(:received),
+        GroupOrderArticle.human_attribute_name(:unit_price),
+        GroupOrderArticle.human_attribute_name(:total_price)
+      ]]
 
-      each_group_order_article_for(group_order) do |goa|
-        price = order_article_price(goa.order_article)
-        sub_total = price * goa.result
-        total += sub_total
-        rows <<  [goa.order_article.article.name,
-                  goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity,
-                  goa.result,
-                  number_to_currency(price),
-                  goa.order_article.price.unit_quantity,
-                  goa.order_article.article.unit,
-                  number_to_currency(sub_total)]
+      each_group_order_article_for_ordergroup(oa_id) do |goa|
         dimrows << rows.length if goa.result == 0
+        rows <<  [goa.order_article.article.name,
+                  goa.order_article.article.supplier.name,
+                  group_order_article_quantity_with_tolerance(goa),
+                  goa.result,
+                  order_article_price_per_unit(goa.order_article),
+                  number_to_currency(goa.total_price)]
       end
-      next if rows.length == 0
-      rows << [ I18n.t('documents.order_by_groups.sum'), nil, nil, nil, nil, nil, number_to_currency(total)]
-      rows.unshift I18n.t('documents.order_by_groups.rows') # Table Header
+      next unless rows.length > 1
+      rows << [nil, nil, nil, nil, nil, number_to_currency(oa_total)]
 
-      text group_order.ordergroup_name, size: fontsize(9), style: :bold
-      table rows, width: 500, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
-        # borders
-        table.cells.borders = [:bottom]
-        table.cells.border_width = 0.02
-        table.cells.border_color = 'dddddd'
-        table.rows(0).border_width = 1
-        table.rows(0).border_color = '666666'
-        table.rows(0).column(5).font_style = :bold
-        table.row(rows.length-2).border_width = 1
-        table.row(rows.length-2).border_color = '666666'
-        table.row(rows.length-1).borders = []
+      rows.each { |row| row.delete_at 1 } unless @options[:show_supplier]
 
-        table.column(0).width = 240
-        table.column(2).font_style = :bold
-        table.columns(1..4).align = :right
-        table.column(6).align = :right
-        table.column(6).font_style = :bold
+      nice_table oa_name || stock_ordergroup_name, rows, dimrows do |table|
+        table.row(-2).border_width = 1
+        table.row(-2).border_color = '666666'
+        table.row(-1).borders = []
 
-        # dim rows which were ordered but not received
-        dimrows.each do |ri|
-          table.row(ri).text_color = '999999'
-          table.row(ri).columns(0..-1).font_style = nil
+        if @options[:show_supplier]
+          table.column(0).width = bounds.width / 3
+          table.column(1).width = bounds.width / 4
+        else
+          table.column(0).width = bounds.width / 2
         end
+
+        table.columns(-4..-1).align = :right
+        table.column(-3).font_style = :bold
+        table.column(-1).font_style = :bold
       end
     end
-
-  end
-
-  private
-
-  # Return price for order_article.
-  #
-  # This is a separate method so that plugins can override it.
-  #
-  # @param article [OrderArticle]
-  # @return [Number] Price to show
-  # @see https://github.com/foodcoops/foodsoft/issues/445
-  def order_article_price(order_article)
-    order_article.price.fc_price
-  end
-
-  def group_orders
-    order.group_orders.ordered.
-      includes(:ordergroup).order('groups.name').
-      preload(:group_order_articles => {:order_article => [:article, :article_price]})
-  end
-
-  def each_group_order
-    group_orders.find_each_with_order(batch_size: BATCH_SIZE) {|go| yield go }
-  end
-
-  def group_order_articles_for(group_order)
-    goas = group_order.group_order_articles.to_a
-    goas.sort_by!(&:id)
-    goas
-  end
-
-  def each_group_order_article_for(group_order)
-    group_order_articles_for(group_order).each {|goa| yield goa }
   end
 
 end

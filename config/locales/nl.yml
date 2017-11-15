@@ -50,14 +50,17 @@ nl:
         ordergroup: Huishouden
         user: Ingevuld door
       group_order:
+        ordergroup: Huishouden
         price: Totaal bestelling
         updated_by: Laatst besteld door
       group_order_article:
-        ordergroup_id: Huishouden
+        ordered: Besteld
         quantity: Hoeveelheid
+        received: Ontvangen
         result: Hoeveelheid
         tolerance: Tolerantie
         total_price: Som
+        unit_price: Prijs/Eenheid
       invoice:
         amount: Bedrag
         attachment: Bijlage
@@ -758,22 +761,9 @@ nl:
       title: Huidige bestellingen - per huishouden
     order_by_articles:
       filename: Bestelling %{name}-%{date} - Artikellijst
-      rows:
-      - Huishouden
-      - Besteld
-      - Ontvangen
-      - Prijs
       title: 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
     order_by_groups:
       filename: Bestelling %{name}-%{date} - Huishoudenslijst
-      rows:
-      - Artikel
-      - Besteld
-      - Ontvangen
-      - Prijs
-      - Colli
-      - Eenheid
-      - Som
       sum: Som
       title: 'Huishoudenslijst van bestelling: %{name}, gesloten op %{date}'
     order_fax:
@@ -789,17 +779,8 @@ nl:
       total: Totaal
     order_matrix:
       filename: Bestelling %{name}-%{date} - Sorteermatrix
-      heading: Artikeloverzicht
-      rows:
-      - Artikel
-      - Eenheid
-      - Gr.Eenh.
-      - Foodcoop-prijs
-      - Aantal
+      heading: Artikeloverzicht (%{count})
       title: 'Sorteermatrix van bestelling: %{name}, gesloten op %{date}'
-      total:
-        one: In totaal éen artikel
-        other: In totaal %{count} artikelen
   errors:
     general: Er is een probleem opgetreden.
     general_again: Er is een fout opgetreden. Probeer het opnieuw.
@@ -1210,7 +1191,7 @@ nl:
       profile: Profiel aanpassen
     logo: "<span>food</span>soft"
   lib:
-    order_pdf:
+    render_pdf:
       page: Pagina %{number} van %{count}
   login:
     accept_invitation:

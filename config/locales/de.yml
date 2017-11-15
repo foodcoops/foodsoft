@@ -50,14 +50,17 @@ de:
         ordergroup: Bestellgruppe
         user: Eingetragen von
       group_order:
+        ordergroup: Bestellgruppe
         price: Bestellsumme
         updated_by: Zuletzt bestellt
       group_order_article:
-        ordergroup_id: Bestellgruppe
+        ordered: Bestellt
         quantity: Menge
+        received: Bekommen
         result: Menge
         tolerance: Toleranz
         total_price: Summe
+        unit_price: Preis/Einheit
       invoice:
         amount: Betrag
         attachment: Anhang
@@ -761,22 +764,9 @@ de:
       title: Aktuelle Bestellungen - Gruppensortierung
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
-      rows:
-      - Bestellgruppe
-      - Bestellt
-      - Bekommen
-      - Preis
       title: 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
     order_by_groups:
       filename: Bestellung %{name}-%{date} - Gruppensortierung
-      rows:
-      - Artikel
-      - Bestellt
-      - Bekommen
-      - Preis
-      - GebGr
-      - Einheit
-      - Summe
       sum: Summe
       title: 'Gruppensortierung der Bestellung: %{name}, beendet am %{date}'
     order_fax:
@@ -792,17 +782,8 @@ de:
       total: Gesamtpreis
     order_matrix:
       filename: Bestellung %{name}-%{date} - Sortiermatrix
-      heading: Artikelübersicht
-      rows:
-      - Artikel
-      - Einheit
-      - Gebinde
-      - FC-Preis
-      - Menge
+      heading: Artikelübersicht (%{count})
       title: 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
-      total:
-        one: Insgesamt ein Artikel
-        other: Insgesamt %{count} Artikel
   errors:
     general: Ein Problem ist aufgetreten.
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
@@ -1211,7 +1192,7 @@ de:
       profile: Profil bearbeiten
     logo: "<span>food</span>soft"
   lib:
-    order_pdf:
+    render_pdf:
       page: Seite %{number} von %{count}
   login:
     accept_invitation:

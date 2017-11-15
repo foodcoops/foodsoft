@@ -1,104 +1,142 @@
-require "prawn/measurement_extensions"
+class OrderPdf < RenderPDF
 
-class OrderPdf < Prawn::Document
-  include ActionView::Helpers::NumberHelper
+  attr_reader :order
 
   def initialize(order, options = {})
-    options[:page_size] ||= FoodsoftConfig[:pdf_page_size] || "A4"
-    #options[:left_margin]   ||= 40
-    #options[:right_margin]  ||= 40
-    options[:top_margin]    ||= 50
-    #options[:bottom_margin] ||= 40
-    super(options)
     @order = order
-    @options = options
-    @first_page = true
+    @orders = order
+    super(options)
   end
 
-  def to_pdf
-    # Use ttf for better utf-8 compability
-    font_families.update(
-      "OpenSans" => {
-        bold: font_path("OpenSans-Bold.ttf"),
-        italic: font_path("OpenSans-Italic.ttf"),
-        bold_italic: font_path("OpenSans-BoldItalic.ttf"),
-        normal: font_path("OpenSans-Regular.ttf")
-      }
-    )
-    font "OpenSans"
+  def nice_table(name, data, dimrows = [])
+    down_or_page 25
+    text name, size: 10, style: :bold
+    table data, width: bounds.width, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+      # borders
+      table.cells.borders = [:bottom]
+      table.cells.padding_top = 2
+      table.cells.padding_bottom = 4
+      table.cells.border_color = 'dddddd'
+      table.rows(0).border_color = '666666'
 
-    font_size fontsize(12)
-
-    # Define header
-    repeat :all, dynamic: true do
-      s = fontsize(8)
-      # header
-      bounding_box [bounds.left, bounds.top+s*2], width: bounds.width, height: s*1.2 do
-        text title, size: s, align: :center if title
+      # dim rows which were ordered but not received
+      dimrows.each do |ri|
+        table.row(ri).text_color = '999999'
+        table.row(ri).columns(0..-1).font_style = nil
       end
-      # footer
-      bounding_box [bounds.left, bounds.bottom-s], width: bounds.width, height: s*1.2  do
-        text I18n.t('lib.order_pdf.page', number: page_number, count: page_count), size: s, align: :right
-      end
-      bounding_box [bounds.left, bounds.bottom-s], width: bounds.width, height: s*1.2  do
-        text I18n.l(Time.now, format: :long), size: s, align: :left
-      end
-    end
 
-    body  # Add content, which is defined in subclasses
-
-    render  # Render pdf
-  end
-
-  # Helper method to test pdf via rails console: OrderByGroups.new(order).save_tmp
-  def save_tmp
-    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.pdf", 'w') {|f| f.write(to_pdf.force_encoding("UTF-8")) }
-  end
-
-  # XXX avoid underscore instead of unicode whitespace in pdf :/
-  def number_to_currency(number, options={})
-    super(number, options).gsub("\u202f", ' ') if number
-  end
-
-  # return fontsize after scaling it with any configured factor
-  # please use this wherever you're setting a fontsize
-  def fontsize(n)
-    if FoodsoftConfig[:pdf_font_size]
-      n * FoodsoftConfig[:pdf_font_size].to_f/12
-    else
-      n
-    end
-  end
-
-  # add pagebreak or vertical whitespace, depending on configuration
-  def down_or_page(space=10)
-    if @first_page
-      @first_page = false
-      return
-    end
-    if pdf_add_page_breaks?
-      start_new_page
-    else
-      move_down space
+      yield table if block_given?
     end
   end
 
   protected
 
-  # return whether pagebreak or vertical whitespace is used for breaks
-  def pdf_add_page_breaks?(docid=nil)
-    docid ||= self.class.name.underscore
-    cfg = FoodsoftConfig[:pdf_add_page_breaks]
-    if cfg.is_a? Array
-      cfg.index(docid.to_s).any?
-    elsif cfg.is_a? Hash
-      cfg[docid.to_s]
-    else
-      cfg
+  # Return price for order_article.
+  #
+  # This is a separate method so that plugins can override it.
+  #
+  # @param article [OrderArticle]
+  # @return [Number] Price to show
+  # @see https://github.com/foodcoops/foodsoft/issues/445
+  def order_article_price(order_article)
+    order_article.price.fc_price
+  end
+
+  def order_article_price_per_unit(order_article)
+    "#{number_to_currency(order_article_price(order_article))} / #{order_article.article.unit}"
+  end
+
+  def group_order_article_quantity_with_tolerance(goa)
+    goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : "#{goa.quantity}"
+  end
+
+  def group_order_articles(ordergroup)
+    GroupOrderArticle.
+      includes(:group_order).
+      where(group_orders: {order_id: @orders, ordergroup_id: ordergroup})
+  end
+
+  def order_articles
+    OrderArticle.
+      ordered.
+      includes(article: :supplier).
+      includes(group_order_articles: {group_order: :ordergroup}).
+      where(order: @orders).
+      order('suppliers.name, articles.name, groups.name').
+      preload(:article_price)
+  end
+
+  def ordergroups(offset = nil, limit = nil)
+    result = GroupOrder.
+      ordered.
+      where(order: @orders).
+      group('groups.id').
+      offset(offset).
+      limit(limit).
+      pluck('groups.name', 'SUM(group_orders.price)', 'groups.id')
+
+    result.map do |item|
+      [item.first || stock_ordergroup_name] + item[1..-1]
     end
   end
 
-  def font_path(name)
-    File.join(Rails.root, "vendor", "assets", "fonts", name)
+  def each_order_article(&block)
+    order_articles.each(&block)
   end
+
+  def each_ordergroup(&block)
+    ordergroups.each(&block)
+  end
+
+  def each_ordergroup_batch(batch_size)
+    offset = 0
+
+    while true
+      go_records = ordergroups(offset, batch_size)
+
+      break unless go_records.any?
+
+      group_ids = go_records.map(&:third)
+
+      # get quantity for each article and ordergroup
+      goa_records = group_order_articles(group_ids)
+        .group('group_order_articles.order_article_id, group_orders.ordergroup_id')
+        .pluck('group_order_articles.order_article_id', 'group_orders.ordergroup_id', 'SUM(COALESCE(group_order_articles.result, group_order_articles.quantity))')
+
+      # transform the flat list of results in a hash (with the article as key), which contains an array for all ordergroups
+      results = goa_records.group_by(&:first).transform_values do |value|
+        grouped_value = value.group_by(&:second)
+        group_ids.map do |group_id|
+          grouped_value[group_id].try(:first).try(:third)
+        end
+      end
+
+      yield go_records, results
+      offset += batch_size
+    end
+  end
+
+  def each_group_order_article_for_order_article(order_article, &block)
+    order_article.group_order_articles.each(&block)
+  end
+
+  def each_group_order_article_for_ordergroup(ordergroup, &block)
+    group_order_articles(ordergroup)
+      .includes(order_article: {article: [:supplier]})
+      .order('suppliers.name, articles.name')
+      .preload(order_article: [:article_price, :order])
+      .each(&block)
+  end
+
+  def stock_ordergroup_name
+    users = GroupOrder.
+      eager_load(:updated_by).
+      where(order: @orders).
+      where(ordergroup: nil).
+      map(&:updated_by).
+      map{ |u| u.try(&:name) || '?' }
+
+    I18n.t('model.group_order.stock_ordergroup_name', user: users.uniq.sort.join(', '))
+  end
+
 end
