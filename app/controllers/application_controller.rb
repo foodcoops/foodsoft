@@ -68,9 +68,11 @@ class ApplicationController < ActionController::Base
       when "admin"  then current_user.role_admin?
       when "finance"   then  current_user.role_finance?
       when "article_meta" then current_user.role_article_meta?
+      when "pickups" then current_user.role_pickups?
       when "suppliers"  then current_user.role_suppliers?
       when "orders" then current_user.role_orders?
       when "finance_or_orders" then (current_user.role_finance? || current_user.role_orders?)
+      when "pickups_or_orders" then (current_user.role_pickups? || current_user.role_orders?)
       when "any" then true        # no role required
       else false                  # any unknown role will always fail
       end
@@ -81,17 +83,21 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-    
+
   def authenticate_admin
     authenticate('admin')
   end
-    
+
   def authenticate_finance
     authenticate('finance')
   end
-    
+
   def authenticate_article_meta
     authenticate('article_meta')
+  end
+
+  def authenticate_pickups
+    authenticate('pickups')
   end
 
   def authenticate_suppliers
@@ -104,6 +110,10 @@ class ApplicationController < ActionController::Base
 
   def authenticate_finance_or_orders
     authenticate('finance_or_orders')
+  end
+
+  def authenticate_pickups_or_orders
+    authenticate('pickups_or_orders')
   end
 
   # checks if the current_user is member of given group.

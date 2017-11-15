@@ -24,10 +24,7 @@
           %tr
             %td
               = check_box_tag "orders[]", order.id, true #, style: 'float:left'
-              - if current_user.role_orders?
-                = link_to order.name, order_path(order)
-              - else
-                = order.name
+              = link_to order.name, order_path(order)
             %td= truncate order.note
             %td{style:'white-space:nowrap'}
               = render 'shared/order_download_button', order: order, klass: 'btn-small'

@@ -220,6 +220,7 @@ en:
         role_finance: Finances
         role_invoices: Invoices
         role_orders: Order management
+        role_pickups: Pickup days
         role_suppliers: Suppliers
         user_tokens: Members
     errors:
@@ -1084,6 +1085,7 @@ en:
       role_finance: Finance
       role_invoices: Invoices
       role_orders: Orders
+      role_pickups: Pickup days
       role_suppliers: Suppliers
       show_google_maps: Show it on Google maps
       sort_by: Sort by %{text}

@@ -220,6 +220,7 @@ de:
         role_finance: Finanzen
         role_invoices: Rechnungen
         role_orders: Bestellverwaltung
+        role_pickups: Abholtage
         role_suppliers: Lieferanten
         user_tokens: Mitglieder
     errors:
@@ -1082,6 +1083,7 @@ de:
       role_finance: Finanzen
       role_invoices: Rechnungen
       role_orders: Bestellung
+      role_pickups: Abholtage
       role_suppliers: Lieferanten
       show_google_maps: Show it on Google maps
       sort_by: Nach %{text} sortieren
