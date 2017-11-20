@@ -469,7 +469,7 @@ GEM
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
-    whenever (0.9.7)
+    whenever (0.10.0)
       chronic (>= 0.6.3)
     wikicloth (0.8.3)
       builder
