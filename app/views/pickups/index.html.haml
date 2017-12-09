@@ -2,9 +2,9 @@
 
 - @orders.each do |pickup, orders|
   = form_tag document_pickups_path do
-    = hidden_field_tag 'date', l(pickup, format: :long)
     %h2
       - if pickup
+        = hidden_field_tag 'date', l(pickup, format: :long)
         = l pickup, format: :long
       - else
         = t '.without_pickup'
