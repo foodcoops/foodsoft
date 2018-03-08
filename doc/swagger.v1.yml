@@ -2,13 +2,15 @@ swagger: '2.0'
 info:
   title: Foodsoft API v1
   version: '1.0.0'
-  description: |-
+  description: >
     [Foodsoft](https://github.com/foodcoops/foodsoft) is web-based software to manage
     a non-profit food coop (product catalog, ordering, accounting, job scheduling).
+
 
     This is a description of Foodsoft's API v1, which exposes operations that a member
     can do (later API versions may include admin functionality). It includes listing
     open orders, and changing what the member wants to order (in the ordergroup).
+
 
     Note that each food cooperative typically has their own instance (on a shared
     server or their own installation), and there are just as many APIs (if the Foodsoft
@@ -19,7 +21,7 @@ info:
     You may find the search parameters for index endpoints lacking. They are not
     documented here, because there are too many combinations. For now, you'll need
     to resort to [Ransack](https://github.com/activerecord-hackery/ransack) and
-    looking at Foodsoft's <tt>ransackable_*</tt> model class methods.
+    looking at Foodsoft's `ransackable_*` model class methods.
 externalDocs:
   description: General Foodsoft API documentation
   url: https://github.com/foodcoops/foodsoft/blob/master/doc/API.md
@@ -396,6 +398,8 @@ paths:
           description: success
           schema:
             type: object
+      security:
+        - foodsoft_auth: ['all']
 
 parameters:
   # url parameters
