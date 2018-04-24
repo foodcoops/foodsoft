@@ -68,7 +68,7 @@ class Finance::BalancingController < Finance::BaseController
   # Balances the Order, Update of the Ordergroup.account_balances
   def close
     @order = Order.find(params[:id])
-    @type = FinancialTransactionType.find_by_id(params.permit(:type))
+    @type = FinancialTransactionType.find_by_id(params.permit(:type)[:type])
     @order.close!(@current_user, @type)
     redirect_to finance_order_index_url, notice: t('finance.balancing.close.notice')
 
