@@ -35,7 +35,7 @@ If instead you just want to run Foodsoft without changing its code, please refer
         source ~/.rvm/scripts/rvm
         rvm install 2.0
 
-    We try to keep Foodsoft compatible with Ruby 1.9.3 as well as any later versions,
+    We try to keep Foodsoft compatible with Ruby 2.0 as well as any later versions,
     so if you use this and don't want to use RVM, that might actually work.
 
 2. Install system dependencies.
@@ -47,10 +47,11 @@ If instead you just want to run Foodsoft without changing its code, please refer
    [libxslt1-dev](https://packages.debian.org/stable/libxslt1-dev)
    [libffi-dev](https://packages.debian.org/stable/libffi-dev)
    [libreadline-dev](https://packages.debian.org/stable/libreadline-dev)
-   [libmagic-dev](https://packages.debian.org/stable/libmagic-dev):
+   [libmagic-dev](https://packages.debian.org/stable/libmagic-dev)
+   [libqtwebkit-dev](https://packages.debian.org/stable/libqtwebkit-dev):
 
         # Debian/Ubuntu
-        sudo apt-get install libv8-dev libmysqlclient-dev libxml2-dev libxslt1-dev libffi-dev libreadline-dev libmagic-dev
+        sudo apt-get install libv8-dev libmysqlclient-dev libxml2-dev libxslt1-dev libffi-dev libreadline-dev libmagic-dev libqtwebkit-dev
 
    For CentOS/Redhat you need
    [v8](https://apps.fedoraproject.org/packages/v8)
@@ -59,10 +60,11 @@ If instead you just want to run Foodsoft without changing its code, please refer
    [libxslt-devel](https://apps.fedoraproject.org/packages/libxslt-devel)
    [libffi-devel](https://apps.fedoraproject.org/packages/libffi-devel)
    [readline-devel](https://apps.fedoraproject.org/packages/readline-devel)
-   [file-devel](https://apps.fedoraproject.org/packages/file-devel):
+   [file-devel](https://apps.fedoraproject.org/packages/file-devel)
+   [qtwebkit-devel](https://apps.fedoraproject.org/packages/qtwebkit-devel):
 
         # CentOS/Redhat
-        sudo yum install v8 community-mysql-devel libxml2-devel libxslt-devel libffi-devel readline-devel file-devel
+        sudo yum install v8 community-mysql-devel libxml2-devel libxslt-devel libffi-devel readline-devel file-devel qtwebkit-devel
 
 3. Install Ruby dependencies:
 
