@@ -108,7 +108,7 @@ class PagesController < ApplicationController
 
   def all
     @pages = Page.non_redirected
-    @partial = params[:view] || 'title_list'
+    @partial = params[:view] || 'site_map'
 
     if params[:name]
       @pages = @pages.where("title LIKE ?", "%#{params[:name]}%").limit(20)
