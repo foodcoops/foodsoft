@@ -16,6 +16,14 @@ describe Order do
     expect(order).to be_finished
   end
 
+  it 'sends mail if min_order_quantity has been reached' do
+    create :user, groups: [create(:ordergroup)]
+    create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close_and_send_min_quantity
+
+    Order.finish_ended!
+    expect(ActionMailer::Base.deliveries.count).to eq 1
+  end
+
   it 'needs a supplier' do
     expect(build(:order, supplier: nil)).to be_invalid
   end

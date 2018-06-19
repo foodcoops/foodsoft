@@ -278,7 +278,7 @@ class Order < ActiveRecord::Base
       send_to_supplier!(created_by)
     elsif auto_close_and_send_min_quantity?
       finish!(created_by)
-      send_to_supplier!(created_by) if order.sum >= order.supplier.min_order_quantity
+      send_to_supplier!(created_by) if sum >= supplier.min_order_quantity.to_r
     end
   end
 
