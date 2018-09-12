@@ -54,6 +54,7 @@ de:
       financial_transaction_type:
         name: Name
         financial_transaction_class: Finanztransaktionsklasse
+        name_short: Kurzname
       group_order:
         ordergroup: Bestellgruppe
         price: Bestellsumme

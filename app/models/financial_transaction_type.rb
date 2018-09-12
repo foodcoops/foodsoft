@@ -4,6 +4,7 @@ class FinancialTransactionType < ActiveRecord::Base
 
   validates :name, presence: true
   validates_uniqueness_of :name
+  validates_uniqueness_of :name_short, allow_blank: true, allow_nil: true
   validates :financial_transaction_class, presence: true
 
   before_destroy :restrict_deleting_last_financial_transaction_type

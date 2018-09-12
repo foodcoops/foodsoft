@@ -5,6 +5,7 @@
   .modal-body
     = f.input :name
     = f.association :financial_transaction_class, :include_blank => false
+    = f.input :name_short
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'
