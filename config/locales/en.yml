@@ -54,6 +54,7 @@ en:
       financial_transaction_type:
         name: Name
         financial_transaction_class: Financial transaction class
+        abbreviation: Abbreviation
       group_order:
         ordergroup: Ordergroup
         price: Order sum
