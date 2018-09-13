@@ -48,6 +48,7 @@ class Finance::InvoicesController < ApplicationController
         redirect_to [:finance, @invoice]
       end
     else
+      fill_deliveries_and_orders_collection @invoice.id, @invoice.supplier_id
       render :action => "new"
     end
   end
@@ -56,6 +57,7 @@ class Finance::InvoicesController < ApplicationController
     if @invoice.update_attributes(params[:invoice])
       redirect_to [:finance, @invoice], notice: I18n.t('finance.update.notice')
     else
+      fill_deliveries_and_orders_collection @invoice.id, @invoice.supplier_id
       render :edit
     end
   end
