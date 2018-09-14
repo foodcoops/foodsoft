@@ -3,7 +3,16 @@ class Finance::FinancialLinksController < Finance::BaseController
   def show
     @financial_link = FinancialLink.find(params[:id])
 
-    @items = @financial_link.financial_transactions.map do |ft|
+    @items = @financial_link.bank_transactions.map do |bt|
+      {
+        date: bt.date,
+        type: t('activerecord.models.bank_transaction'),
+        description: bt.text,
+        amount: bt.amount,
+        link_to: finance_bank_transaction_path(bt)
+      }
+    end
+    @items += @financial_link.financial_transactions.map do |ft|
       {
         date: ft.created_on,
         type: t('activerecord.models.financial_transaction'),

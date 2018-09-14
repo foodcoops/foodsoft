@@ -1,0 +1,39 @@
+%p
+  %b= heading_helper(BankTransaction, :external_id) + ':'
+  = @bank_transaction.external_id
+%p
+  %b= heading_helper(BankTransaction, :date) + ':'
+  = @bank_transaction.date
+%p
+  %b= heading_helper(BankTransaction, :amount) + ':'
+  = number_to_currency(@bank_transaction.amount)
+%p
+  %b= heading_helper(BankTransaction, :iban) + ':'
+  = @bank_transaction.iban
+  - if user = @bank_transaction.user
+    = " belongs to #{user.display}"
+    - if user.ordergroup
+      = " at "
+      = link_to user.ordergroup.name, finance_ordergroup_transactions_path(user.ordergroup)
+  - elsif supplier = @bank_transaction.supplier
+    = " belongs to "
+    = link_to supplier.name, supplier_path(supplier)
+%p
+  %b= heading_helper(BankTransaction, :reference) + ':'
+  = @bank_transaction.reference
+%p
+  %b= heading_helper(BankTransaction, :text) + ':'
+  = h(@bank_transaction.text).gsub("\n", "<br>").html_safe
+%p
+  %b= heading_helper(BankTransaction, :financial_link) + ':'
+  - if @bank_transaction.financial_link
+    = link_to t('ui.show'), finance_link_path(@bank_transaction.financial_link)
+  - else
+    = link_to t('.add_financial_link'), '/'
+
+- unless @bank_transaction.receipt.blank?
+  %pre= preserve @bank_transaction.receipt
+- if @bank_transaction.image
+  %p= image_tag @bank_transaction.image_url
+
+= link_to t('ui.or_cancel'), finance_bank_account_transactions_path(@bank_transaction.bank_account)

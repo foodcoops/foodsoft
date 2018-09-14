@@ -1,0 +1,12 @@
+- title t('.title', name: @bank_account.name, balance: number_to_currency(@bank_account.balance))
+
+- content_for :actionbar do
+  = link_to t('.import_transaction'), import_finance_bank_account_path(@bank_account), class: 'btn btn-primary'
+
+.well.well-small
+  = form_tag finance_bank_account_transactions_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :query, params[:query], class: 'input-medium search-query',
+      placeholder: t('.search_placeholder')
+
+#transactionsTable= render 'transactions'
