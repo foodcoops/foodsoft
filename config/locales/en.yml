@@ -242,6 +242,7 @@ en:
     models:
       article: Article
       article_category: Category
+      bank_transaction: Bank transaction
       delivery: Delivery
       financial_transaction: Financial transaction
       financial_transaction_class: Financial transaction class
@@ -902,6 +903,17 @@ en:
         reload: Reload summary
         with_extra_charge: 'with extra charge:'
         without_extra_charge: 'without extra charge:'
+    bank_accounts:
+      index:
+        account_statement: Account statement
+        title: Bank Accounts
+    bank_transactions:
+      index:
+        title: Bank transactions for %{name} (%{balance})
+      show:
+        belongs_to_supplier: belongs to supplier
+        belongs_to_user: belongs to user
+        in_ordergroup: in ordergroup
     create:
       notice: Invoice was created.
     financial_links:
@@ -1452,6 +1464,7 @@ en:
     finances:
       accounts: Manage accounts
       balancing: Account orders
+      bank_accounts: Bank Accounts
       home: Overview
       invoices: Invoices
       title: Finances
@@ -1992,6 +2005,7 @@ en:
     please_wait: Please wait...
     restore: Restore
     save: Save
+    search_placeholder: Search ...
     show: Show
   views:
     pagination:

@@ -1,0 +1,22 @@
+.pull-right
+  - if @bank_transactions.total_pages > 1
+    .btn-group= items_per_page wrap: false
+= pagination_links_remote @bank_transactions
+%table.table.table-striped
+  %thead
+    %tr
+      %th= sort_link_helper heading_helper(BankTransaction, :date), "date"
+      %th= heading_helper(BankTransaction, :text)
+      %th= heading_helper(BankTransaction, :reference)
+      %th= sort_link_helper heading_helper(BankTransaction, :amount), "amount"
+      %th= sort_link_helper heading_helper(BankTransaction, :financial_link), "financial_link"
+  %tbody
+    - @bank_transactions.each do |t|
+      %tr
+        %td= h link_to format_date(t.date), finance_bank_transaction_path(t)
+        %td= h(t.text).gsub("\n", "<br>").html_safe
+        %td= h t.reference
+        %td.numeric{style: 'width:5em'}= format_currency t.amount
+        %td
+          - if t.financial_link
+            = link_to t('ui.show'), finance_link_path(t.financial_link)
