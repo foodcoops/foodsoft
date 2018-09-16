@@ -37,6 +37,6 @@
           %td= h t.financial_transaction_type.name
         %td= h t.note
         - FinancialTransactionClass.sorted.each do |c|
-          %td.currency{:style => "color:#{t.amount < 0 ? 'red' : 'black'}; width:5em"}
+          %td.numeric{style: 'width:5em'}
             - if t.financial_transaction_type.financial_transaction_class == c
-              = number_to_currency(t.amount)
+              = format_currency t.amount

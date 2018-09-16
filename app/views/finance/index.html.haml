@@ -36,7 +36,7 @@
             %td= format_date(ft.created_on)
             %td= ft.ordergroup.name
             %td= ft.note
-            %td.numeric{:style => "color:#{ft.amount < 0 ? 'red' : 'black'}"}= number_to_currency(ft.amount)
+            %td.numeric= format_currency ft.amount
   .span6
     %h2
       = t('.open_transactions')

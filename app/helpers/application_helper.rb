@@ -19,6 +19,11 @@ module ApplicationHelper
     I18n.l(time, :format => format) unless (time.nil? || format.nil?)
   end
 
+  def format_currency(amount)
+    class_name = amount < 0 ? 'negative_amout' : 'positive_amount'
+    content_tag :span, number_to_currency(amount), class: class_name
+  end
+
   # Creates ajax-controlled-links for pagination
   def pagination_links_remote(collection, options = {})
     per_page = options[:per_page] || @per_page

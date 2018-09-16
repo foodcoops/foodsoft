@@ -17,8 +17,8 @@
         %td= ordergroup.contact
         - FinancialTransactionClass.sorted.each do |c|
           - amount = ordergroup["sum_of_class_#{c.id}"]
-          %td.numeric{:style => "color:#{amount < 0 ? 'red' : 'black'}"}
-            = number_to_currency amount
+          %td.numeric
+            = format_currency amount
         %td
           = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-mini'
           = link_to t('.account_statement'), finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-mini'
