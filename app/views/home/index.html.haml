@@ -80,11 +80,10 @@
             - if FinancialTransactionType.has_multiple_types
               %td= h(ft.financial_transaction_type.name)
             %td= h(ft.note)
-            - color = ft.amount < 0 ? 'red' : 'black'
             - FinancialTransactionClass.sorted.each do |fc|
-              %td{:style => "color:#{color}; width:5em", :class => "currency"}
+              %td.numeric{style: 'width:5em'}
                 - if ft.financial_transaction_type.financial_transaction_class == fc
-                  = number_to_currency(ft.amount)
+                  = format_currency ft.amount
 
 -# placeholder deface to add content using erb[silent]:contains()
 - '<dashboard_bottom_mark>'
