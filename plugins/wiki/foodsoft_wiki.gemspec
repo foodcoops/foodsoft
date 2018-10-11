@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails"
   s.add_dependency 'wikicloth'
+  s.add_dependency 'twitter-text', '~> 1.14' # wikicloth doesn't support version 2
   s.add_dependency 'acts_as_versioned' # need git version, make sure that is included in foodsoft's Gemfile
   s.add_dependency "deface", "~> 1.0"
   s.add_dependency 'diffy'
