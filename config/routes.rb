@@ -192,6 +192,10 @@ Foodsoft::Application.routes.draw do
       post 'transactions/create_collection' => 'financial_transactions#create_collection', as: 'create_transaction_collection'
 
       resources :bank_accounts, only: [:index] do
+        member do
+          get :import
+        end
+
         resources :bank_transactions, as: :transactions
       end
 
