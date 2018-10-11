@@ -1,7 +1,7 @@
 - title @page.title, false
 
 - content_for :sidebar do
-  %p
+  %p.hidden-print
     = link_to edit_page_path(@page), class: 'btn btn-primary' do
       %i.icon-edit= t '.edit'
   .well.well-small
@@ -48,8 +48,10 @@
 
 %hr.clear/
 %p
-  = link_to edit_page_path(@page), class: 'btn btn-primary' do
-    %i.icon-edit= t '.edit'
-  = link_to t('.delete'), @page, class: 'btn btn-danger', :method => :delete,
-    :data => {:confirm => t('.delete_confirm')}
-  != '| ' + t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))
+  %span.hidden-print
+    = link_to edit_page_path(@page), class: 'btn btn-primary' do
+      %i.icon-edit= t '.edit'
+    = link_to t('.delete'), @page, class: 'btn btn-danger', :method => :delete,
+      :data => {:confirm => t('.delete_confirm')}
+    |
+  != t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))
