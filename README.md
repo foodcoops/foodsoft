@@ -4,7 +4,6 @@ Foodsoft
 [![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.svg?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
 [![Docs Status](https://inch-ci.org/github/foodcoops/foodsoft.svg?branch=master)](http://inch-ci.org/github/foodcoops/foodsoft)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.svg)](https://codeclimate.com/github/foodcoops/foodsoft)
-[![Dependency Status](https://gemnasium.com/foodcoops/foodsoft.svg)](https://gemnasium.com/foodcoops/foodsoft)
 [![Docker Status](https://img.shields.io/docker/build/foodcoops/foodsoft.svg)](https://hub.docker.com/r/foodcoops/foodsoft)
 [![Documentation](https://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/foodcoops/foodsoft)
 
