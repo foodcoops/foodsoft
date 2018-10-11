@@ -6,27 +6,32 @@
 
 - title t('.title', order: @order.name)
 
-.well
-  // Order summary
-  %dl.dl-horizontal
-    %dt= heading_helper Order, :name
-    %dd= @order.name
-    %dt= heading_helper Order, :note
-    %dd= @order.note
-    %dt= heading_helper Order, :ends
-    %dd= format_time(@order.ends)
-    %dt= heading_helper Order, :pickup
-    %dd= format_date(@order.pickup)
-    %dt= heading_helper GroupOrder, :price
-    %dd
-      - if @group_order
-        = number_to_currency(@group_order.price)
-      - else
-        = t '.not_ordered'
-    - if @order.closed?
-      %dt= heading_helper Order, :closed_by
-      %dd= show_user_link @order.updated_by
-      %p= link_to t('.comment'), "#comments"
+.row-fluid
+  .well.pull-left
+    // Order summary
+    %dl.dl-horizontal
+      %dt= heading_helper Order, :name
+      %dd= @order.name
+      %dt= heading_helper Order, :note
+      %dd= @order.note
+      %dt= heading_helper Order, :ends
+      %dd= format_time(@order.ends)
+      %dt= heading_helper Order, :pickup
+      %dd= format_date(@order.pickup)
+      %dt= heading_helper GroupOrder, :price
+      %dd
+        - if @group_order
+          = number_to_currency(@group_order.price)
+        - else
+          = t '.not_ordered'
+      - if @order.closed?
+        %dt= heading_helper Order, :closed_by
+        %dd= show_user_link @order.updated_by
+        %p= link_to t('.comment'), "#comments"
+
+  .well.pull-right
+    = close_button :alert
+    = render 'switch_order', current_order: @order
 
 // Article box
 %section
