@@ -20,3 +20,6 @@
         %td
           - if t.financial_link
             = link_to t('ui.show'), finance_link_path(t.financial_link)
+          - else
+            = link_to t('.add_financial_link'), finance_links_path(bank_transaction: t.id),
+                      method: :post, class: 'btn btn-success btn-mini'
