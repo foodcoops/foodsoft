@@ -10,6 +10,8 @@ class FinancialTransaction < ActiveRecord::Base
   validates_numericality_of :amount, greater_then: -100_000,
     less_than: 100_000
 
+  scope :without_financial_link, -> { where(financial_link: nil) }
+
   localize_input_of :amount
 
   after_initialize do

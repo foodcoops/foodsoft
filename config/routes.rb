@@ -167,7 +167,21 @@ Foodsoft::Application.routes.draw do
         get :unpaid, on: :collection
       end
 
-      resources :links, controller: 'financial_links', only: [:show]
+      resources :links, controller: 'financial_links', only: [:create, :show] do
+        member do
+          get :index_bank_transaction
+          put 'bank_transactions/:bank_transaction', action: 'add_bank_transaction', as: 'add_bank_transaction'
+          delete 'bank_transactions/:bank_transaction', action: 'remove_bank_transaction', as: 'remove_bank_transaction'
+
+          get :index_financial_transaction
+          put 'financial_transactions/:financial_transaction', action: 'add_financial_transaction', as: 'add_financial_transaction'
+          delete 'financial_transactions/:financial_transaction', action: 'remove_financial_transaction', as: 'remove_financial_transaction'
+
+          get :index_invoice
+          put 'invoices/:invoice', action: 'add_invoice', as: 'add_invoice'
+          delete 'invoices/:invoice', action: 'remove_invoice', as: 'remove_invoice'
+        end
+      end
 
       resources :ordergroups, only: [:index] do
         resources :financial_transactions, as: :transactions

@@ -1,5 +1,10 @@
 - title t('.title', number: @financial_link.id)
 
+- content_for :actionbar do
+  = link_to t('.add_bank_transaction'), index_bank_transaction_finance_link_path(@financial_link), remote: true, class: 'btn'
+  = link_to t('.add_financial_transaction'), index_financial_transaction_finance_link_path(@financial_link), remote: true, class: 'btn'
+  = link_to t('.add_invoice'), index_invoice_finance_link_path(@financial_link), remote: true, class: 'btn'
+
 %table.table.table-striped
   %thead
     %tr
@@ -7,6 +12,7 @@
       %th= t '.type'
       %th= t '.description'
       %th= t '.amount'
+      %th
   %tbody
     - @items.each do |item|
       %tr
@@ -18,6 +24,8 @@
         %td= item[:type]
         %td= item[:description]
         %td.numeric{style: 'width:5em'}= format_currency item[:amount]
+        %td= link_to t('ui.delete'), item[:remove_path], :data => {:confirm => t('ui.confirm_delete', name: item[:description])}, :method => :delete,
+          class: 'btn btn-danger btn-mini'
 
 %p
   = @financial_link.note

@@ -12,6 +12,7 @@ class Invoice < ActiveRecord::Base
   validate :valid_attachment
 
   scope :unpaid, -> { where(paid_on: nil) }
+  scope :without_financial_link, -> { where(financial_link: nil) }
 
   attr_accessor :delete_attachment
 

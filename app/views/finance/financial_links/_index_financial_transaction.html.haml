@@ -1,0 +1,22 @@
+.modal-header
+  = close_button :modal
+  %h3= t('.add_invoice')
+.modal-body
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= heading_helper FinancialTransaction, :created_on
+        %th= heading_helper FinancialTransaction, :ordergroup
+        - if FinancialTransactionType.has_multiple_types
+          %th= heading_helper FinancialTransaction, :financial_transaction_type
+        %th= heading_helper FinancialTransaction, :amount
+    %tbody
+      - for t in @financial_transactions
+        %tr
+          %td= link_to format_time(t.created_on), add_financial_transaction_finance_link_path(@financial_link, financial_transaction: t.id), method: :put
+          %td= t.ordergroup.name
+          - if FinancialTransactionType.has_multiple_types
+            %td= h t.financial_transaction_type.name
+          %td= number_to_currency t.amount
+.modal-footer
+  = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}

@@ -25,6 +25,8 @@ class BankTransaction < ActiveRecord::Base
   validates_presence_of :date, :amount, :bank_account_id
   validates_numericality_of :amount
 
+  scope :without_financial_link, -> { where(financial_link: nil) }
+
   # Replace numeric seperator with database format
   localize_input_of :amount
 
