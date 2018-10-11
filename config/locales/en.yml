@@ -905,6 +905,9 @@ en:
         with_extra_charge: 'with extra charge:'
         without_extra_charge: 'without extra charge:'
     bank_accounts:
+      controller:
+        import:
+          notice: '%{count} new transactions have been imported'
       index:
         account_statement: Account statement
         title: Bank Accounts
