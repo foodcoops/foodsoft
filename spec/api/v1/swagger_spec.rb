@@ -108,14 +108,14 @@ describe 'API v1', type: :apivore, order: :defined do
           it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 200, auth({'id' => goa_2.id, '_data' => {'group_order_article' => {'tolerance' => quantity}}})) }
           it { is_expected.to validate(:patch , '/group_order_articles/{id}', 404, auth({'id' => other_goa_1.id, '_data' => {'group_order_article' => {'quantity' => quantity}}})) }
           it { is_expected.to validate(:patch , '/group_order_articles/{id}', 404, auth({'id' => GroupOrderArticle.last.id + 1, '_data' => {'group_order_article' => {'quantity' => quantity}}})) }
-          it { is_expected.to validate(:delete, '/group_order_articles/{id}', 204, auth({'id' => goa_2.id})) }
+          it { is_expected.to validate(:delete, '/group_order_articles/{id}', 200, auth({'id' => goa_2.id})) }
           it { is_expected.to validate(:delete, '/group_order_articles/{id}', 404, auth({'id' => other_goa_1.id})) }
           it { is_expected.to validate(:delete, '/group_order_articles/{id}', 404, auth({'id' => GroupOrderArticle.last.id + 1})) }
 
           context 'with balance below minimum' do
             before { FoodsoftConfig[:minimum_balance] = user.ordergroup.account_balance + 5_000 }
             it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 403, auth({'id' => goa_2.id, '_data' => {'group_order_article' => {'quantity' => 1}}})) }
-            it { is_expected.to validate(:delete, '/group_order_articles/{id}', 204, auth({'id' => goa_2.id})) }
+            it { is_expected.to validate(:delete, '/group_order_articles/{id}', 200, auth({'id' => goa_2.id})) }
           end
         end
 

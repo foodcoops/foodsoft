@@ -10,7 +10,8 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   end
 
   def show
-    render json: scope.find(params.require(:id))
+    goa = scope.find(params.require(:id))
+    render_goa_with_oa(goa)
   end
 
   def create
@@ -21,7 +22,7 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
       goa.update_quantities((create_params[:quantity] || 0).to_i, (create_params[:tolerance] || 0).to_i)
       oa.update_results!
       go.update_price!
-      render json: goa
+      render_goa_with_oa(goa)
     end
   end
 
@@ -31,7 +32,7 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
       goa.update_quantities((update_params[:quantity] || goa.quantity).to_i, (update_params[:tolerance] || goa.tolerance).to_i)
       goa.order_article.update_results!
       goa.group_order.update_price!
-      render json: goa
+      render_goa_with_oa(goa)
     end
   end
 
@@ -41,8 +42,8 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
       goa.destroy!
       goa.order_article.update_results!
       goa.group_order.update_price!
+      render_goa_with_oa(nil, goa.order_article)
     end
-    head :no_content
   end
 
   private
@@ -74,5 +75,13 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
     if current_ordergroup.account_balance < minimum_balance
       raise Api::Errors::PermissionRequired.new(t('application.controller.error_minimum_balance', min: minimum_balance))
     end
+  end
+
+  def render_goa_with_oa(goa, oa = goa.order_article)
+    data = {}
+    data[:group_order_article] = GroupOrderArticleSerializer.new(goa) if goa
+    data[:order_article] = OrderArticleSerializer.new(oa) if oa
+
+    render json: data, root: nil
   end
 end

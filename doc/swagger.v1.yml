@@ -266,6 +266,8 @@ paths:
             properties:
               group_order_article:
                 $ref: '#/definitions/GroupOrderArticle'
+              order_article:
+                $ref: '#/definitions/OrderArticle'
         403:
           description: user has no ordergroup
           schema:
@@ -300,6 +302,8 @@ paths:
             properties:
               group_order_article:
                 $ref: '#/definitions/GroupOrderArticle'
+              order_article:
+                $ref: '#/definitions/OrderArticle'
         403:
           description: user has no ordergroup, or minimum balance is below the limit
           schema:
@@ -319,8 +323,14 @@ paths:
       tags:
         - 5. GroupOrderArticle
       responses:
-        204:
+        200:
           description: success
+          schema:
+            type: object
+            description: updated group order article
+            properties:
+              order_article:
+                $ref: '#/definitions/OrderArticle'
         403:
           description: user has no ordergroup, or minimum balance is below the limit
           schema:
