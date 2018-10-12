@@ -16,12 +16,17 @@ module Concerns::CollectionScope
   end
 
   def per_page
-    [(params[:per_page] || default_per_page).to_i, max_per_page].compact.min
+    # allow max_per_page and default_per_page to be nil as well
+    if params[:per_page]
+      [params[:per_page].to_i, max_per_page].compact.min
+    else
+      default_per_page
+    end
   end
 
   def search_scope
     s = params[:q] ? scope.ransack(params[:q]).result(distinct: true) : scope
-    s = s.page(params[:page].to_i).per(per_page) if per_page >= 0
+    s = s.page(params[:page].to_i).per(per_page) if per_page && per_page >= 0
     s
   end
 
