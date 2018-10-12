@@ -57,10 +57,4 @@ class Api::V1::BaseController < ApplicationController
     user.display
   end
 
-  # Always render with `data` root key
-  # @see https://github.com/rails-api/active_model_serializers/issues/1536
-  def render(*params, **options)
-    super(*params, **({root: 'data'}.merge(options)))
-  end
-
 end

@@ -62,11 +62,11 @@ class Api::V1::GroupOrderArticlesController < Api::V1::BaseController
   end
 
   def create_params
-    params.require(:data).permit(:order_article_id, :quantity, :tolerance)
+    params.require(:group_order_article).permit(:order_article_id, :quantity, :tolerance)
   end
 
   def update_params
-    params.require(:data).permit(:quantity, :tolerance)
+    params.require(:group_order_article).permit(:quantity, :tolerance)
   end
 
   def require_minimum_balance

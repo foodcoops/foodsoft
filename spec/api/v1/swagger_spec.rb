@@ -78,7 +78,7 @@ describe 'API v1', type: :apivore, order: :defined do
       let!(:other_goa_1) { create :group_order_article, group_order: other_go, order_article: oa_1 }
 
       context 'without ordergroup' do
-        it { is_expected.to validate(:post,   '/group_order_articles', 403, auth({'_data' => {'data' => {'order_article_id' => oa_2.id}}})) }
+        it { is_expected.to validate(:post,   '/group_order_articles', 403, auth({'_data' => {'group_order_article' => {'order_article_id' => oa_2.id}}})) }
         it { is_expected.to validate(:get,    '/group_order_articles', 403, auth) }
         # this could return either 404 or 403 - but we want to test this path somehow
         it { is_expected.to validate(:get,    '/group_order_articles/{id}', 403, auth({'id' => other_goa_1.id})) }
@@ -92,29 +92,29 @@ describe 'API v1', type: :apivore, order: :defined do
           let(:quantity) { 1 + rand(10) }
 
           # creating a new group_order_article with zero quantity and tolerance currently creates a new record, but in the future this may not be so
-          it { is_expected.to validate(:post, '/group_order_articles', 200, auth({'_data' => {'data' => {'order_article_id' => oa_2.id}}})) }
-          it { is_expected.to validate(:post, '/group_order_articles', 200, auth({'_data' => {'data' => {'order_article_id' => oa_2.id, 'quantity' => quantity}}})) }
-          it { is_expected.to validate(:post, '/group_order_articles', 200, auth({'_data' => {'data' => {'order_article_id' => oa_2.id, 'tolerance' => quantity}}})) }
+          it { is_expected.to validate(:post, '/group_order_articles', 200, auth({'_data' => {'group_order_article' => {'order_article_id' => oa_2.id}}})) }
+          it { is_expected.to validate(:post, '/group_order_articles', 200, auth({'_data' => {'group_order_article' => {'order_article_id' => oa_2.id, 'quantity' => quantity}}})) }
+          it { is_expected.to validate(:post, '/group_order_articles', 200, auth({'_data' => {'group_order_article' => {'order_article_id' => oa_2.id, 'tolerance' => quantity}}})) }
 
           context 'with balance below minimum' do
             before { FoodsoftConfig[:minimum_balance] = user.ordergroup.account_balance + 5_000 }
-            it { is_expected.to validate(:post, '/group_order_articles', 403, auth({'_data' => {'data' => {'order_article_id' => oa_2.id, 'quantity' => 1}}})) }
+            it { is_expected.to validate(:post, '/group_order_articles', 403, auth({'_data' => {'group_order_article' => {'order_article_id' => oa_2.id, 'quantity' => 1}}})) }
           end
         end
 
         shared_examples "modify group_order_articles" do
           let(:quantity) { 1 + rand(10) }
-          it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 200, auth({'id' => goa_2.id, '_data' => {'data' => {'quantity' => quantity}}})) }
-          it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 200, auth({'id' => goa_2.id, '_data' => {'data' => {'tolerance' => quantity}}})) }
-          it { is_expected.to validate(:patch , '/group_order_articles/{id}', 404, auth({'id' => other_goa_1.id, '_data' => {'data' => {'quantity' => quantity}}})) }
-          it { is_expected.to validate(:patch , '/group_order_articles/{id}', 404, auth({'id' => GroupOrderArticle.last.id + 1, '_data' => {'data' => {'quantity' => quantity}}})) }
+          it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 200, auth({'id' => goa_2.id, '_data' => {'group_order_article' => {'quantity' => quantity}}})) }
+          it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 200, auth({'id' => goa_2.id, '_data' => {'group_order_article' => {'tolerance' => quantity}}})) }
+          it { is_expected.to validate(:patch , '/group_order_articles/{id}', 404, auth({'id' => other_goa_1.id, '_data' => {'group_order_article' => {'quantity' => quantity}}})) }
+          it { is_expected.to validate(:patch , '/group_order_articles/{id}', 404, auth({'id' => GroupOrderArticle.last.id + 1, '_data' => {'group_order_article' => {'quantity' => quantity}}})) }
           it { is_expected.to validate(:delete, '/group_order_articles/{id}', 204, auth({'id' => goa_2.id})) }
           it { is_expected.to validate(:delete, '/group_order_articles/{id}', 404, auth({'id' => other_goa_1.id})) }
           it { is_expected.to validate(:delete, '/group_order_articles/{id}', 404, auth({'id' => GroupOrderArticle.last.id + 1})) }
 
           context 'with balance below minimum' do
             before { FoodsoftConfig[:minimum_balance] = user.ordergroup.account_balance + 5_000 }
-            it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 403, auth({'id' => goa_2.id, '_data' => {'data' => {'quantity' => 1}}})) }
+            it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 403, auth({'id' => goa_2.id, '_data' => {'group_order_article' => {'quantity' => 1}}})) }
             it { is_expected.to validate(:delete, '/group_order_articles/{id}', 204, auth({'id' => goa_2.id})) }
           end
         end
@@ -125,7 +125,7 @@ describe 'API v1', type: :apivore, order: :defined do
           context 'in boxfill phase' do
             before { FoodsoftConfig[:use_boxfill] = true }
             let!(:order) { create :order, article_count: 3, starts: 2.minutes.ago, boxfill: 1.minute.ago }
-            it { is_expected.to validate(:post, '/group_order_articles', 422, auth({'_data' => {'data' => {'order_article_id' => oa_1.id, 'quantity' => 1}}})) }
+            it { is_expected.to validate(:post, '/group_order_articles', 422, auth({'_data' => {'group_order_article' => {'order_article_id' => oa_1.id, 'quantity' => 1}}})) }
           end
         end
 
@@ -156,9 +156,9 @@ describe 'API v1', type: :apivore, order: :defined do
               order.update_attributes! boxfill: 1.minute.ago
             end
 
-            it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 200, auth({'id' => goa_1.id, '_data' => {'data' => {'quantity' => 4}}})) }
-            it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 422, auth({'id' => goa_1.id, '_data' => {'data' => {'quantity' => 2}}})) }
-            it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 422, auth({'id' => goa_1.id, '_data' => {'data' => {'quantity' => 10}}})) }
+            it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 200, auth({'id' => goa_1.id, '_data' => {'group_order_article' => {'quantity' => 4}}})) }
+            it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 422, auth({'id' => goa_1.id, '_data' => {'group_order_article' => {'quantity' => 2}}})) }
+            it { is_expected.to validate(:patch,  '/group_order_articles/{id}', 422, auth({'id' => goa_1.id, '_data' => {'group_order_article' => {'quantity' => 10}}})) }
             it { is_expected.to validate(:delete, '/group_order_articles/{id}', 422, auth({'id' => goa_1.id})) }
           end
         end
