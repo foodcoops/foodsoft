@@ -449,6 +449,9 @@ definitions:
       email:
         type: string
         description: email address
+      locale:
+        type: string
+        description: language code
     required: ['id', 'name', 'email']
   Article:
     type: object
