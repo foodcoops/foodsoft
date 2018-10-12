@@ -2,7 +2,8 @@ class ConfigSerializer < ActiveModel::Serializer
   attributes :name, :homepage, :contact,
              :price_markup, :default_locale, :currency_unit, :currency_space,
              :use_tolerance, :tolerance_is_costly, :use_apple_points,
-             :help_url, :applepear_url, :page_footer_html, :foodsoft
+             :help_url, :applepear_url, :page_footer_html, :webstats_tracking_code_html,
+             :foodsoft
 
   def foodsoft
     {
@@ -21,5 +22,9 @@ class ConfigSerializer < ActiveModel::Serializer
     else
       FoodsoftConfig[:name]
     end
+  end
+
+  def webstats_tracking_code_html
+    FoodsoftConfig[:webstats_tracking_code].presence
   end
 end
