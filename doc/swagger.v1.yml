@@ -1,0 +1,651 @@
+swagger: '2.0'
+info:
+  title: Foodsoft API v1
+  version: '1.0.0'
+  description: >
+    [Foodsoft](https://github.com/foodcoops/foodsoft) is web-based software to manage
+    a non-profit food coop (product catalog, ordering, accounting, job scheduling).
+
+
+    This is a description of Foodsoft's API v1, which exposes operations that a member
+    can do (later API versions may include admin functionality). It includes listing
+    open orders, and changing what the member wants to order (in the ordergroup).
+
+
+    Note that each food cooperative typically has their own instance (on a shared
+    server or their own installation), and there are just as many APIs (if the Foodsoft
+    version is recent enough).
+    This API description points to the default development url with the default
+    Foodsoft scope - that would be [http://localhost:3000/f](http://localhost:3000/f).
+
+    You may find the search parameters for index endpoints lacking. They are not
+    documented here, because there are too many combinations. For now, you'll need
+    to resort to [Ransack](https://github.com/activerecord-hackery/ransack) and
+    looking at Foodsoft's `ransackable_*` model class methods.
+externalDocs:
+  description: General Foodsoft API documentation
+  url: https://github.com/foodcoops/foodsoft/blob/master/doc/API.md
+
+# development url with default scope
+host: localhost:3000
+schemes:
+  - 'http'
+basePath: /f/api/v1
+
+produces:
+  - 'application/json'
+
+paths:
+  /user:
+    get:
+      summary: info about the currently logged-in user
+      tags:
+        - 1. User
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              user:
+                $ref: '#/definitions/User'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+      security:
+        - foodsoft_auth: ['all']
+
+  /article_categories:
+    get:
+      summary: article categories
+      tags:
+        - 2. Category
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              article_categories:
+                type: array
+                items:
+                  $ref: '#/definitions/ArticleCategory'
+              meta:
+                $ref: '#/definitions/Meta'
+      security:
+        - foodsoft_auth: ['all']
+  /article_categories/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find article category by id
+      tags:
+        - 2. Category
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              article_category:
+                $ref: '#/definitions/ArticleCategory'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
+
+  /orders:
+    get:
+      summary: currently open orders
+      tags:
+        - 3. Order
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: orders
+          schema:
+            type: object
+            properties:
+              orders:
+                type: array
+                items:
+                  $ref: '#/definitions/Order'
+              meta:
+                $ref: '#/definitions/Meta'
+      security:
+        - foodsoft_auth: ['all']
+  /orders/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find order by id
+      tags:
+        - 3. Order
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              order:
+                $ref: '#/definitions/Order'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
+
+  /order_articles:
+    get:
+      summary: articles in open orders
+      tags:
+        - 4. OrderArticle
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              order_articles:
+                type: array
+                items:
+                  $ref: '#/definitions/OrderArticle'
+              meta:
+                $ref: '#/definitions/Meta'
+      security:
+        - foodsoft_auth: ['all']
+  /order_articles/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find order article by id
+      tags:
+        - 4. OrderArticle
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              order:
+                $ref: '#/definitions/OrderArticle'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
+
+  /group_order_articles:
+    get:
+      summary: a member's group articles in open orders
+      tags:
+        - 5. GroupOrderArticle
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              group_order_articles:
+                type: array
+                items:
+                  $ref: '#/definitions/GroupOrderArticle'
+              meta:
+                $ref: '#/definitions/Meta'
+        403:
+          description: user has no ordergroup
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['all']
+    post:
+      summary: create a new group order article
+      tags:
+        - 5. GroupOrderArticle
+      parameters:
+        - name: group_order_article
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              order_article_id:
+                $ref: '#/definitions/GroupOrderArticle/properties/order_article_id'
+              quantity:
+                $ref: '#/definitions/GroupOrderArticle/properties/quantity'
+              tolerance:
+                $ref: '#/definitions/GroupOrderArticle/properties/tolerance'
+            required: ['order_article_id']
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            description: newly created group order article
+            properties:
+              group_order_article:
+                $ref: '#/definitions/GroupOrderArticle'
+        403:
+          description: user has no ordergroup, minimum balance is below the limit, or ordergroup has not enough apple points
+          schema:
+            $ref: '#/definitions/Error403'
+        422:
+          description: invalid input (e.g. change not acceptable in boxfill phase)
+          schema:
+            $ref: '#/definitions/Error422'
+      security:
+        - foodsoft_auth: ['all']
+  /group_order_articles/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find a member's group order article by id
+      tags:
+        - 5. GroupOrderArticle
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              group_order_article:
+                $ref: '#/definitions/GroupOrderArticle'
+              order_article:
+                $ref: '#/definitions/OrderArticle'
+        403:
+          description: user has no ordergroup
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
+    patch:
+      summary: update a group order article
+      tags:
+        - 5. GroupOrderArticle
+      parameters:
+        - name: group_order_article
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              quantity:
+                $ref: '#/definitions/GroupOrderArticle/properties/quantity'
+              tolerance:
+                $ref: '#/definitions/GroupOrderArticle/properties/tolerance'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            description: updated group order article
+            properties:
+              group_order_article:
+                $ref: '#/definitions/GroupOrderArticle'
+              order_article:
+                $ref: '#/definitions/OrderArticle'
+        403:
+          description: user has no ordergroup, minimum balance is below the limit, or ordergroup has not enough apple points
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+        422:
+          description: invalid input (e.g. change not acceptable in boxfill phase)
+          schema:
+            $ref: '#/definitions/Error422'
+      security:
+        - foodsoft_auth: ['all']
+    delete:
+      summary: remove an group order article
+      tags:
+        - 5. GroupOrderArticle
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            description: updated group order article
+            properties:
+              order_article:
+                $ref: '#/definitions/OrderArticle'
+        403:
+          description: user has no ordergroup
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+        422:
+          description: invalid input (e.g. change not acceptable in boxfill phase)
+          schema:
+            $ref: '#/definitions/Error422'
+      security:
+        - foodsoft_auth: ['all']
+
+  /financial_transactions:
+    get:
+      summary: financial transactions of the member's ordergroup
+      tags:
+        - 6. FinancialTransaction
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transactions:
+                type: array
+                items:
+                  $ref: '#/definitions/FinancialTransaction'
+              meta:
+                $ref: '#/definitions/Meta'
+        403:
+          description: user has no ordergroup
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['all']
+  /financial_transactions/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find financial transaction by id
+      tags:
+        - 6. FinancialTransaction
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction:
+                $ref: '#/definitions/FinancialTransaction'
+        403:
+          description: user has no ordergroup
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
+
+  /config:
+    get:
+      summary: configuration variables
+      tags:
+        - 7. General
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+      security:
+        - foodsoft_auth: ['all']
+
+parameters:
+  # url parameters
+  idInUrl:
+    name: id
+    type: integer
+    in: path
+    minimum: 1
+    required: true
+
+  # query parameters
+  page:
+    name: page
+    type: integer
+    in: query
+    description: page number
+    minimum: 0
+    default: 0
+  per_page:
+    name: per_page
+    type: integer
+    in: query
+    description: items per page
+    minimum: 0
+    default: 20
+
+definitions:
+  # models
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        description: full name
+      email:
+        type: string
+        description: email address
+      locale:
+        type: string
+        description: language code
+    required: ['id', 'name', 'email']
+  Article:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        description: article name
+      unit:
+        type: string
+        description: unit of single items
+      unit_quantity:
+        type: integer
+        description: number of units per box
+        minimum: 1
+        default: 1
+      note:
+        type: ['string', 'null']
+      manufacturer:
+        type: ['string', 'null']
+      origin:
+        type: ['string', 'null']
+      article_category_id:
+        type: integer
+      quantity_available:
+        type: integer
+    required: ['id', 'name', 'unit', 'unit_quantity', 'article_category_id']
+  ArticleCategory:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required: ['id', 'name']
+  Order:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        description: name of the supplier
+      starts:
+        type: string
+        format: date-time
+        description: opening date
+      ends:
+        type: ['string', 'null']
+        format: date-time
+        description: closing date
+      boxfill:
+        type: ['string', 'null']
+        format: date-time
+        description: when boxfill period begins
+      pickup:
+        type: ['string', 'null']
+        format: date
+        description: when the order can be picked up
+      is_open:
+        type: boolean
+        description: whether the order is currently open (right now always <tt>true</tt>)
+      is_boxfill:
+        type: ['boolean', 'null']
+        description: whether the order is currently in the boxfill period (<tt>null</tt> is not currently used, but may be in the future)
+    required: ['id', 'name', 'starts', 'is_open']
+  OrderArticle:
+    type: object
+    properties:
+      id:
+        type: integer
+      order_id:
+        type: integer
+        description: id of order this order article belongs to
+      price:
+        type: number
+        description: foodcoop price
+      quantity:
+        type: integer
+        description: number of articles ordered by all members as quantity
+      tolerance:
+        type: integer
+        description: number of articles ordered by all members as tolerance
+      units_to_order:
+        type: integer
+        description: number of full boxes ordered if the order would close now
+      article:
+        $ref: '#/definitions/Article'
+    required: ['id', 'order_id', 'price', 'quantity', 'tolerance', 'units_to_order']
+  GroupOrderArticle:
+    type: object
+    properties:
+      id:
+        type: integer
+      order_article_id:
+        type: integer
+      quantity:
+        type: integer
+      tolerance:
+        type: integer
+      result:
+        type: integer
+      total_price:
+        type: number
+    required: ['id', 'order_article_id', 'quantity', 'tolerance', 'result', 'total_price']
+  FinancialTransaction:
+    type: object
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: ['integer', 'null']
+        description: id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)
+      user_name:
+        type: ['string', 'null']
+        description: name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)
+      amount:
+        type: number
+        description: amount credited (negative for a debit transaction)
+      note:
+        type: string
+        description: note entered with the transaction
+      created_on:
+        type: string
+        format: date-time
+        description: when the transaction was entered
+    required: ['id', 'user_id', 'user_name', 'amount', 'note', 'created_at']
+
+  # collection meta object in root of a response
+  Meta:
+    type: object
+    properties:
+      page:
+        type: integer
+        description: page number of the returned collection
+      per_page:
+        type: integer
+        description: number of items per page
+      total_pages:
+        type: integer
+        description: total number of pages
+      total_count:
+        type: integer
+        description: total number of items in the collection
+    required: ['page', 'per_page', 'total_pages', 'total_count']
+
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+        description: error code
+      error_description:
+        type: string
+        description: human-readable error message (localized)
+  Error404:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>not_found</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+  Error401:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>unauthorized</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+  Error403:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>forbidden</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+  Error422:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>not_acceptable</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+
+securityDefinitions:
+  foodsoft_auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: http://localhost:3000/f/oauth/authorize
+    scopes:
+      all: full access to user functions
+      offline_access: retain access after user has logged out

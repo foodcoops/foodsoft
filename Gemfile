@@ -109,4 +109,7 @@ group :test do
   # code coverage
   gem 'simplecov', require: false
   gem 'coveralls', require: false
+  # api
+  gem 'apivore', require: false
+  gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
 end
