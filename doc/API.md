@@ -86,3 +86,9 @@ Now use this token as value for the `access_token` when accessing the API, like
 http://localhost:3002/f/api/v1/financial_transactions/1?access_token=12345...
 
 [Read more](https://github.com/doorkeeper-gem/doorkeeper/wiki/Client-Credentials-flow).
+
+
+## Logout
+
+When the user logs out of Foodsoft, all access tokens are destroyed, except when
+the token's scope includes `offline_access` (so offline applications are possible).

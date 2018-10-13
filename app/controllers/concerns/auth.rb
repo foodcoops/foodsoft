@@ -42,6 +42,7 @@ module Concerns::Auth
   def logout
     session[:user_id] = nil
     session[:return_to] = nil
+    expire_access_tokens
   end
 
   def authenticate(role = 'any')
@@ -124,6 +125,18 @@ module Concerns::Auth
       end
     else
       authenticate(role)
+    end
+  end
+
+  # Expires any access tokens for the current user (unless they have the 'offline_access' scope)
+  # @see https://github.com/doorkeeper-gem/doorkeeper/issues/71#issuecomment-5471317
+  def expire_access_tokens
+    return unless @current_user
+    Doorkeeper::AccessToken.transaction do
+      token_scope = Doorkeeper::AccessToken.where(revoked_at: nil, resource_owner_id: @current_user.id)
+      token_scope.each do |token|
+        token.destroy! unless token.scopes.include?('offline_access')
+      end
     end
   end
 
