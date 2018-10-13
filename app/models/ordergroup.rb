@@ -13,7 +13,8 @@ class Ordergroup < Group
 
   has_many :financial_transactions
   has_many :group_orders
-  has_many :orders, :through => :group_orders
+  has_many :orders, through: :group_orders
+  has_many :group_order_articles, through: :group_orders
 
   validates_numericality_of :account_balance, :message => I18n.t('ordergroups.model.invalid_balance')
   validate :uniqueness_of_name, :uniqueness_of_members

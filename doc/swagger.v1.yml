@@ -238,6 +238,66 @@ paths:
             $ref: '#/definitions/Error404'
       security:
         - foodsoft_auth: ['orders:read', 'orders:write']
+  /order_articles:
+    get:
+      summary: order articles
+      tags:
+        - 2. Order
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+        - $ref: '#/parameters/q_ordered'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              order_articles:
+                type: array
+                items:
+                  $ref: '#/definitions/OrderArticle'
+              meta:
+                $ref: '#/definitions/Meta'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: missing scope or no permission
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['group_orders:user']
+  /order_articles/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find order article by id
+      tags:
+        - 2. Order
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              order_article:
+                $ref: '#/definitions/OrderArticle'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: missing scope or no permission
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['orders:read', 'orders:write']
 
   /financial_transaction_classes:
     get:
@@ -410,6 +470,14 @@ parameters:
     minimum: 0
     default: 20
 
+  # non-ransack query parameters
+  q_ordered:
+    name: q[ordered]
+    type: string
+    in: query
+    description: "'member' show articles ordered by the user's ordergroup, 'all' by all members, and 'supplier' ordered at the supplier"
+    enum: ['member', 'all', 'supplier']
+
 definitions:
   # models
   User:
@@ -525,6 +593,66 @@ definitions:
       is_boxfill:
         type: boolean
         description: if the order is currently in the boxfill phase or not
+
+  Article:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      supplier_id:
+        type: integer
+        description: id of supplier, or 0 for stock articles
+      supplier_name:
+        type: ['string', 'null']
+        description: name of the supplier, or null for stock articles
+      unit:
+        type: string
+        description: amount of each unit, e.g. "100 g" or "kg"
+      unit_quantity:
+        type: integer
+        description: units can only be ordered from the supplier in multiples of unit_quantity
+      note:
+        type: ['string', 'null']
+        description: generic note
+      manufacturer:
+        type: ['string', 'null']
+        description: manufacturer
+      origin:
+        type: ['string', 'null']
+        description: origin, preferably (starting with a) 2-letter ISO country code
+      article_category_id:
+        type: integer
+        description: id of article category
+      quantity_available:
+        type: integer
+        description: number of units available (only present on stock articles)
+    required: ['id', 'name', 'supplier_id', 'supplier_name', 'unit', 'unit_quantity', 'note', 'manufacturer', 'origin', 'article_category_id']
+
+  OrderArticle:
+    type: object
+    properties:
+      id:
+        type: integer
+      order_id:
+        type: integer
+        description: id of order this order article belongs to
+      price:
+        type: number
+        format: float
+        description: foodcoop price
+      quantity:
+        type: integer
+        description: number of units ordered by members
+      tolerance:
+        type: integer
+        description: number of extra units that members are willing to buy to fill a box
+      units_to_order:
+        type: integer
+        description: number of units to order from the supplier
+      article:
+        $ref: '#/definitions/Article'
 
   Navigation:
     type: array

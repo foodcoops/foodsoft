@@ -9,6 +9,16 @@ class StockArticle < Article
 
   before_destroy :check_quantity
 
+  ransack_alias :quantity_available, :quantity # in-line with {StockArticleSerializer}
+
+  def self.ransackable_attributes(auth_object = nil)
+    super(auth_object) - %w(supplier_id) + %w(quantity)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    super(auth_object) - %w(supplier)
+  end
+
   # Update the quantity of items in stock
   def update_quantity!
     update_attribute :quantity, stock_changes.collect(&:quantity).sum
