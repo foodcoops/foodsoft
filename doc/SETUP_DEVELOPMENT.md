@@ -33,9 +33,9 @@ If instead you just want to run Foodsoft without changing its code, please refer
 
         \curl -L https://get.rvm.io | bash
         source ~/.rvm/scripts/rvm
-        rvm install 2.0
+        rvm install 2.3
 
-    We try to keep Foodsoft compatible with Ruby 2.0 as well as any later versions,
+    We try to keep Foodsoft compatible with Ruby 2.3 as well as any later versions,
     so if you use this and don't want to use RVM, that might actually work.
 
 2. Install system dependencies.
