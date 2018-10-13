@@ -120,6 +120,177 @@ paths:
       security:
         - foodsoft_auth: ['finance:user']
 
+  /user/group_order_articles:
+    get:
+      summary: group order articles
+      tags:
+        - 1. User
+        - 2. Order
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+        - $ref: '#/parameters/q_ordered'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              group_order_articles:
+                type: array
+                items:
+                  $ref: '#/definitions/GroupOrderArticle'
+              meta:
+                $ref: '#/definitions/Meta'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: user has no ordergroup or missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['group_orders:user']
+    post:
+      summary: create new group order article
+      tags:
+        - 1. User
+        - 2. Order
+      parameters:
+        - in: body
+          name: body
+          description: group order article to create
+          required: true
+          schema:
+            $ref: '#/definitions/GroupOrderArticleForCreate'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              group_order_article:
+                $ref: '#/definitions/GroupOrderArticle'
+              order_article:
+                $ref: '#/definitions/OrderArticle'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: order article not found in open orders
+          schema:
+            $ref: '#/definitions/Error404'
+        422:
+          description: invalid parameter value or group order article already exists
+          schema:
+            $ref: '#/definitions/Error422'
+  /user/group_order_articles/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find group order article by id
+      tags:
+        - 1. User
+        - 2. Order
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              group_order_article:
+                $ref: '#/definitions/GroupOrderArticle'
+              order_article:
+                $ref: '#/definitions/OrderArticle'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: user has no ordergroup or missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['group_orders:user']
+    patch:
+      summary: update a group order article (but delete if quantity and tolerance are zero)
+      tags:
+        - 1. User
+        - 2. Order
+      parameters:
+        - $ref: '#/parameters/idInUrl'
+        - in: body
+          name: body
+          description: group order article update
+          required: true
+          schema:
+            $ref: '#/definitions/GroupOrderArticleForUpdate'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              group_order_article:
+                $ref: '#/definitions/GroupOrderArticle'
+              order_article:
+                $ref: '#/definitions/OrderArticle'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: order article not found in open orders
+          schema:
+            $ref: '#/definitions/Error404'
+        422:
+          description: invalid parameter value
+          schema:
+            $ref: '#/definitions/Error422'
+    delete:
+      summary: remove group order article
+      tags:
+        - 1. User
+        - 2. Order
+      parameters:
+        - $ref: '#/parameters/idInUrl'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              group_order_article:
+                $ref: '#/definitions/GroupOrderArticle'
+              order_article:
+                $ref: '#/definitions/OrderArticle'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: order article not found in open orders
+          schema:
+            $ref: '#/definitions/Error404'
+
   /financial_transactions:
     get:
       summary: financial transactions
@@ -654,6 +825,39 @@ definitions:
       article:
         $ref: '#/definitions/Article'
 
+  GroupOrderArticleForUpdate:
+    type: object
+    properties:
+      quantity:
+        type: integer
+        description: number of units ordered by the user's ordergroup
+      tolerance:
+        type: integer
+        description: number of extra units the user's ordergroup is willing to buy for filling a box
+  GroupOrderArticleForCreate:
+    allOf:
+      - $ref: '#/definitions/GroupOrderArticleForUpdate'
+      - type: object
+        properties:
+          order_article_id:
+            type: integer
+            description: id of order article
+  GroupOrderArticle:
+    allOf:
+      - $ref: '#/definitions/GroupOrderArticleForCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+          result:
+            type: number
+            format: float
+            description: number of units the user's ordergroup will receive or has received
+          total_price:
+            type: number
+            format: float
+            description: total price of this group order article
+
   Navigation:
     type: array
     items:
@@ -721,6 +925,15 @@ definitions:
         description: '<tt>forbidden</tt> or <tt>invalid_scope</tt>'
       error_description:
         $ref: '#/definitions/Error/properties/error_description'
+  Error422:
+    type: object
+    properties:
+      error:
+        type: string
+        description: unprocessable entity
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+
 
 securityDefinitions:
   foodsoft_auth:
