@@ -469,6 +469,58 @@ paths:
             $ref: '#/definitions/Error404'
       security:
         - foodsoft_auth: ['orders:read', 'orders:write']
+  /article_categories:
+    get:
+      summary: article categories
+      tags:
+        - 2. Category
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              article_categories:
+                type: array
+                items:
+                  $ref: '#/definitions/ArticleCategory'
+              meta:
+                $ref: '#/definitions/Meta'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+
+      security:
+        - foodsoft_auth: ['all']
+  /article_categories/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find article category by id
+      tags:
+        - 2. Category
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              article_category:
+                $ref: '#/definitions/ArticleCategory'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
 
   /financial_transaction_classes:
     get:
@@ -733,6 +785,15 @@ definitions:
         type: string
         description: name of the class of the transaction
     required: ['id', 'name', 'financial_transaction_class_id', 'financial_transaction_class_name']
+
+  ArticleCategory:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required: ['id', 'name']
 
   Order:
     type: object

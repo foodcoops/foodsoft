@@ -9,12 +9,26 @@ class ArticleCategory < ApplicationRecord
   # @!attribute articles
   #   @return [Array<Article>] Articles with this category.
   has_many :articles
+  # @!attribute order_articles
+  #   @return [Array<OrderArticle>] Order articles with this category.
+  has_many :order_articles, through: :articles
+  # @!attribute orders
+  #   @return [Array<Order>] Orders with articles in this category.
+  has_many :orders, through: :order_articles
 
   normalize_attributes :name, :description
 
   validates :name, :presence => true, :uniqueness => true, :length => { :minimum => 2 }
 
   before_destroy :check_for_associated_articles
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id name)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(articles order_articles orders)
+  end
 
   # Find a category that matches a category name; may return nil.
   # TODO more intelligence like remembering earlier associations (global and/or per-supplier)
