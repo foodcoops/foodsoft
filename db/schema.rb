@@ -291,13 +291,14 @@ ActiveRecord::Schema.define(version: 20181201000000) do
   add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: :cascade do |t|
-    t.string   "name",         limit: 255,                null: false
-    t.string   "uid",          limit: 255,                null: false
-    t.string   "secret",       limit: 255,                null: false
-    t.text     "redirect_uri", limit: 65535,              null: false
-    t.string   "scopes",       limit: 255,   default: "", null: false
+    t.string   "name",         limit: 255,                  null: false
+    t.string   "uid",          limit: 255,                  null: false
+    t.string   "secret",       limit: 255,                  null: false
+    t.text     "redirect_uri", limit: 65535,                null: false
+    t.string   "scopes",       limit: 255,   default: "",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "confidential",               default: true, null: false
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
