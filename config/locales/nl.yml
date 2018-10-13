@@ -638,6 +638,7 @@ nl:
       use_wiki: Wiki gebruiken
       webstats_tracking_code: Tracking code
     tabs:
+      applications: Apps
       foodcoop: Foodcoop
       language: Taal
       layout: Layout

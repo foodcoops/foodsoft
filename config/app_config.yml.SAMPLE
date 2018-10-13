@@ -6,6 +6,7 @@ default: &defaults
   multi_coop_install: false
 
   # If multi_coop_install you have to use a coop name, which you you wanna be selected by default
+  # Please use basic characters for scope names, matching /[-a-zA-Z0-9_]+/
   default_scope: 'f'
 
   # name of this foodcoop

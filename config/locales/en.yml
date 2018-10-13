@@ -666,6 +666,7 @@ en:
       use_wiki: Enable wiki
       webstats_tracking_code: Tracking code
     tabs:
+      applications: Apps
       foodcoop: Foodcoop
       language: Language
       layout: Layout
