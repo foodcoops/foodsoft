@@ -51,6 +51,14 @@ class Order < ApplicationRecord
   include DateTimeAttributeValidate
   date_time_attribute :starts, :boxfill, :ends
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id state supplier_id starts boxfill ends pickup)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(supplier articles order_articles)
+  end
+
   def stockit?
     supplier_id.nil?
   end
@@ -111,11 +119,11 @@ class Order < ApplicationRecord
   end
 
   def boxfill?
-    FoodsoftConfig[:use_boxfill] && open? && boxfill.present? && boxfill < Time.now
+    !!FoodsoftConfig[:use_boxfill] && open? && boxfill.present? && boxfill < Time.now
   end
 
   def is_boxfill_useful?
-    FoodsoftConfig[:use_boxfill] && supplier.try(:has_tolerance?)
+    !!FoodsoftConfig[:use_boxfill] && !!supplier.try(:has_tolerance?)
   end
 
   def expired?

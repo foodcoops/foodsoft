@@ -23,6 +23,14 @@ class Supplier < ApplicationRecord
   scope :undeleted, -> { where(deleted_at: nil) }
   scope :having_articles, -> { where(id: Article.undeleted.select(:supplier_id).distinct) }
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id name)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(articles stock_articles orders)
+  end
+
   # sync all articles with the external database
   # returns an array with articles(and prices), which should be updated (to use in a form)
   # also returns an array with outlisted_articles, which should be deleted
