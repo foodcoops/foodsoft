@@ -5,15 +5,24 @@ class GroupOrderArticle < ApplicationRecord
 
   belongs_to :group_order
   belongs_to :order_article
-  has_many   :group_order_article_quantities, :dependent => :destroy
+  has_many   :group_order_article_quantities, dependent: :destroy
 
   validates_presence_of :group_order, :order_article
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
   validate :check_order_not_closed # don't allow changes to closed (aka settled) orders
+  validates :quantity, :tolerance, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
 
   localize_input_of :result
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id quantity tolerance result)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(order_article group_order)
+  end
 
   # Setter used in group_order_article#new
   # We have to create an group_order, if the ordergroup wasn't involved in the order yet
@@ -86,7 +95,7 @@ class GroupOrderArticle < ApplicationRecord
 
     # Check if something went terribly wrong and quantites have not been adjusted as desired.
     if (self.quantity != quantity || self.tolerance != tolerance)
-      raise 'Invalid state: unable to update GroupOrderArticle/-Quantities to desired quantities!'
+      raise ActiveRecord::RecordNotSaved.new('Unable to update GroupOrderArticle/-Quantities to desired quantities!', self)
     end
 
     # Remove zero-only items.

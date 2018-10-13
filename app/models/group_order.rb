@@ -21,6 +21,14 @@ class GroupOrder < ApplicationRecord
 
   scope :ordered, -> { includes(:ordergroup).order('groups.name') }
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id price)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(order group_order_articles)
+  end
+
   # Generate some data for the javascript methods in ordering view
   def load_data
     data = {}

@@ -30,9 +30,9 @@ class Order < ApplicationRecord
 
   # Finders
   scope :started, -> { where('starts <= ?', Time.now) }
-  scope :closed, -> { where(state: 'closed').order('ends DESC') }
-  scope :stockit, -> { where(supplier_id: nil).order('ends DESC') }
-  scope :recent, -> { order('starts DESC').limit(10) }
+  scope :closed, -> { where(state: 'closed').order(ends: :desc) }
+  scope :stockit, -> { where(supplier_id: nil).order(ends: :desc) }
+  scope :recent, -> { order(starts: :desc).limit(10) }
   scope :stock_group_order, -> { group_orders.where(ordergroup_id: nil).first }
   scope :with_invoice, -> { where.not(invoice: nil) }
 
@@ -42,9 +42,9 @@ class Order < ApplicationRecord
   # So orders can
   # 1. ...only transition in one direction (e.g. an order that has been `finished` currently cannot be reopened)
   # 2. ...be set to `closed` when having the `finished` state. (`received` is optional)
-  scope :open, -> { where(state: 'open').order('ends DESC') }
-  scope :finished, -> { where(state: %w[finished received closed]).order('ends DESC') }
-  scope :finished_not_closed, -> { where(state: %w[finished received]).order('ends DESC') }
+  scope :open, -> { where(state: 'open').order(ends: :desc) }
+  scope :finished, -> { where(state: %w[finished received closed]).order(ends: :desc) }
+  scope :finished_not_closed, -> { where(state: %w[finished received]).order(ends: :desc) }
 
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14

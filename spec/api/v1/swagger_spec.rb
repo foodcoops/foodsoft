@@ -27,7 +27,7 @@ describe 'API v1', type: :apivore, order: :defined do
       it_handles_invalid_token_and_scope(:get, '/user')
     end
 
-    context 'financial_transactions' do
+    context 'user/financial_transactions' do
       let(:api_scopes) { ['finance:user'] }
       let(:other_user) { create :user, :ordergroup }
       let!(:other_ft_1) { create :financial_transaction, ordergroup: other_user.ordergroup }
@@ -50,6 +50,82 @@ describe 'API v1', type: :apivore, order: :defined do
 
         it_handles_invalid_token_and_scope(:get, '/user/financial_transactions')
         it_handles_invalid_token_and_scope(:get, '/user/financial_transactions/{id}', ->{ api_auth('id' => ft_2.id) })
+      end
+    end
+
+    context 'user/group_order_articles' do
+      let(:api_scopes) { ['group_orders:user'] }
+      let(:order) { create(:order, article_count: 2) }
+
+      let(:user_2) { create :user, :ordergroup }
+      let(:group_order_2) { create(:group_order, order: order, ordergroup: user_2.ordergroup) }
+      let!(:goa_2) { create :group_order_article, order_article: order.order_articles[0], group_order: group_order_2 }
+      before { group_order_2.update_price!; user_2.ordergroup.update_stats! }
+
+      context 'without ordergroup' do
+        it { is_expected.to validate(:get, '/user/group_order_articles', 403, api_auth) }
+        it { is_expected.to validate(:get, '/user/group_order_articles/{id}', 403, api_auth({'id' => goa_2.id})) }
+      end
+
+      context 'with ordergroup' do
+        let(:user) { create :user, :ordergroup }
+        let(:group_order) { create(:group_order, order: order, ordergroup: user.ordergroup) }
+        let!(:goa) { create :group_order_article, order_article: order.order_articles[0], group_order: group_order }
+        before { group_order.update_price!; user.ordergroup.update_stats! }
+
+        it { is_expected.to validate(:get, '/user/group_order_articles', 200, api_auth) }
+        it { is_expected.to validate(:get, '/user/group_order_articles/{id}', 200, api_auth({'id' => goa.id})) }
+        it { is_expected.to validate(:get, '/user/group_order_articles/{id}', 404, api_auth({'id' => goa_2.id})) }
+        it { is_expected.to validate(:get, '/user/group_order_articles/{id}', 404, api_auth({'id' => GroupOrderArticle.last.id + 1})) }
+
+        let(:create_params) { {'_data' => {group_order_article: {order_article_id: order.order_articles[1].id, quantity: 1}}} }
+        let(:update_params) { {'id' => goa.id, '_data' => {group_order_article: {quantity: goa.quantity + 1, tolerance: 0}}} }
+
+        it { is_expected.to validate(:post, '/user/group_order_articles', 200, api_auth(create_params)) }
+        it { is_expected.to validate(:patch, '/user/group_order_articles/{id}', 200, api_auth(update_params)) }
+        it { is_expected.to validate(:delete, '/user/group_order_articles/{id}', 200, api_auth({'id' => goa.id})) }
+
+        context 'with an existing group_order_article' do
+          let(:create_params) { {'_data' => {group_order_article: {order_article_id: order.order_articles[0].id, quantity: 1}}} }
+
+          it { is_expected.to validate(:post, '/user/group_order_articles', 422, api_auth(create_params)) }
+        end
+
+        context 'with invalid parameter values' do
+          let(:create_params) { {'_data' => {group_order_article: {order_article_id: order.order_articles[0].id, quantity: -1}}} }
+          let(:update_params) { {'id' => goa.id, '_data' => {group_order_article: {quantity: -1, tolerance: 0}}} }
+
+          it { is_expected.to validate(:post, '/user/group_order_articles', 422, api_auth(create_params)) }
+          it { is_expected.to validate(:patch, '/user/group_order_articles/{id}', 422, api_auth(update_params)) }
+        end
+
+        context 'with a closed order' do
+          let(:order) { create(:order, article_count: 2, state: :finished) }
+
+          it { is_expected.to validate(:post, '/user/group_order_articles', 404, api_auth(create_params)) }
+          it { is_expected.to validate(:patch, '/user/group_order_articles/{id}', 404, api_auth(update_params)) }
+          it { is_expected.to validate(:delete, '/user/group_order_articles/{id}', 404, api_auth({'id' => goa.id})) }
+        end
+
+        context 'without enough balance' do
+          before { FoodsoftConfig[:minimum_balance] = 1000 }
+          it { is_expected.to validate(:post, '/user/group_order_articles', 403, api_auth(create_params)) }
+          it { is_expected.to validate(:patch, '/user/group_order_articles/{id}', 403, api_auth(update_params)) }
+          it { is_expected.to validate(:delete, '/user/group_order_articles/{id}', 200, api_auth({'id' => goa.id})) }
+        end
+
+        context 'without enough apple points' do
+          before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true)  }
+          it { is_expected.to validate(:post, '/user/group_order_articles', 403, api_auth(create_params)) }
+          it { is_expected.to validate(:patch, '/user/group_order_articles/{id}', 403, api_auth(update_params)) }
+          it { is_expected.to validate(:delete, '/user/group_order_articles/{id}', 200, api_auth({'id' => goa.id})) }
+        end
+
+        it_handles_invalid_token_and_scope(:get, '/user/group_order_articles')
+        it_handles_invalid_token_and_scope(:post, '/user/group_order_articles', ->{ api_auth(create_params) })
+        it_handles_invalid_token_and_scope(:get, '/user/group_order_articles/{id}', ->{ api_auth({'id' => goa.id}) })
+        it_handles_invalid_token_and_scope(:patch, '/user/group_order_articles/{id}', ->{ api_auth(update_params) })
+        it_handles_invalid_token_and_scope(:delete, '/user/group_order_articles/{id}', ->{ api_auth({'id' => goa.id}) })
       end
     end
 

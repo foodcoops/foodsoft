@@ -266,6 +266,7 @@ Rails.application.routes.draw do
         namespace :user do
           root to: 'users#show'
           resources :financial_transactions, only: [:index, :show]
+          resources :group_order_articles
         end
 
         resources :financial_transaction_classes, only: [:index, :show]
@@ -273,6 +274,7 @@ Rails.application.routes.draw do
         resources :financial_transactions, only: [:index, :show]
         resources :orders, only: [:index, :show]
         resources :order_articles, only: [:index, :show]
+        resources :group_order_articles
       end
     end
 
