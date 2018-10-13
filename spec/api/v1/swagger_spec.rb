@@ -216,6 +216,18 @@ describe 'API v1', type: :apivore, order: :defined do
       it_handles_invalid_token_and_scope(:get, '/order_articles')
       it_handles_invalid_token_and_scope(:get, '/order_articles/{id}', ->{ api_auth({'id' => order_article.id}) })
     end
+
+    context 'article_categories' do
+      let!(:cat_1) { create :article_category }
+      let!(:cat_2) { create :article_category }
+
+      it { is_expected.to validate(:get, '/article_categories', 200, api_auth) }
+      it { is_expected.to validate(:get, '/article_categories/{id}', 200, api_auth({'id' => cat_2.id})) }
+      it { is_expected.to validate(:get, '/article_categories/{id}', 404, api_auth({'id' => cat_2.id + 1})) }
+
+      it_handles_invalid_token(:get, '/article_categories')
+      it_handles_invalid_token(:get, '/article_categories/{id}', ->{ api_auth({'id' => cat_1.id }) })
+    end
   end
 
   # needs to be last context so it is always run at the end
