@@ -241,6 +241,14 @@ Foodsoft::Application.routes.draw do
       end
     end
 
+    ############## API
+
+    namespace :api do
+      namespace :v1 do
+        resource :user, only: [:show]
+      end
+    end
+
     ############## Feedback
 
     resource :feedback, only: [:new, :create], controller: 'feedback'
