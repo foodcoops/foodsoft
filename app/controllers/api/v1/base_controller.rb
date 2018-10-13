@@ -2,6 +2,8 @@ class Api::V1::BaseController < ApplicationController
   protect_from_forgery with: :null_session
 
   before_action :skip_session
+  before_action :authenticate
+
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_handler
   rescue_from ActiveRecord::RecordNotSaved, with: :not_acceptable_handler
   rescue_from ActiveRecord::RecordInvalid, with: :not_acceptable_handler
