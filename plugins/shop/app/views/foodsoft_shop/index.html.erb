@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <meta charset="utf-8" />
+    <title><%= t('layouts.foodsoft') %></title>
+    <%= stylesheet_link_tag 'foodsoft_shop/application', media: 'all' %>
+  </head>
+  <body>
+    <div id="app"></div>
+    <%= javascript_tag do -%>
+    window.foodsoftUrl = '<%= j(@foodsoft_url) %>';
+    window.foodsoftClientId = '<%= j(@foodsoft_client_id) %>';
+    <% end -%>
+    <%= javascript_include_tag 'foodsoft_shop/bundle' %>
+  </body>
+</html>

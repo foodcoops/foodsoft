@@ -51,6 +51,13 @@ PATH
       rails
 
 PATH
+  remote: plugins/shop
+  specs:
+    foodsoft_shop (0.1.0)
+      glyphicons
+      rails
+
+PATH
   remote: plugins/wiki
   specs:
     foodsoft_wiki (0.0.1)
@@ -211,9 +218,10 @@ GEM
       rails (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    glyphicons (1.0.2)
+      tilt
     haml (5.2.1)
       temple (>= 0.8.0)
-      tilt
     haml-rails (2.0.1)
       actionpack (>= 5.1)
       activesupport (>= 5.1)
@@ -592,6 +600,7 @@ DEPENDENCIES
   foodsoft_links!
   foodsoft_messages!
   foodsoft_polls!
+  foodsoft_shop!
   foodsoft_wiki!
   gaffe
   haml

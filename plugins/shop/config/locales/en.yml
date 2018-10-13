@@ -1,0 +1,6 @@
+en:
+  config:
+    hints:
+      use_foodsoft_shop: 'When enabled, member ordering pages are replaced by a redesigned interface (foodsoft-shop): a single screen with articles for all open orders, with a graphical indicator for how far boxes are filled.'
+    keys:
+      use_foodsoft_shop: Use foodsoft-shop
