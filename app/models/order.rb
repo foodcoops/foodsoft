@@ -40,6 +40,14 @@ class Order < ActiveRecord::Base
   include DateTimeAttributeValidate
   date_time_attribute :starts, :boxfill, :ends
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id state supplier_id starts boxfill ends pickup)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(supplier articles order_articles)
+  end
+
   def stockit?
     supplier_id == 0
   end
