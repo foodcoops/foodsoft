@@ -55,6 +55,59 @@ paths:
             $ref: '#/definitions/Error401'
       security:
         - foodsoft_auth: ['all']
+
+  /financial_transactions:
+    get:
+      summary: financial transactions of the member's ordergroup
+      tags:
+        - 6. FinancialTransaction
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transactions:
+                type: array
+                items:
+                  $ref: '#/definitions/FinancialTransaction'
+              meta:
+                $ref: '#/definitions/Meta'
+        403:
+          description: user has no ordergroup
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['all']
+  /financial_transactions/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find financial transaction by id
+      tags:
+        - 6. FinancialTransaction
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction:
+                $ref: '#/definitions/FinancialTransaction'
+        403:
+          description: user has no ordergroup
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
+
   /config:
     get:
       summary: configuration variables
@@ -88,6 +141,31 @@ paths:
       security:
         - foodsoft_auth: ['all']
 
+parameters:
+  # url parameters
+  idInUrl:
+    name: id
+    type: integer
+    in: path
+    minimum: 1
+    required: true
+
+  # query parameters
+  page:
+    name: page
+    type: integer
+    in: query
+    description: page number
+    minimum: 0
+    default: 0
+  per_page:
+    name: per_page
+    type: integer
+    in: query
+    description: items per page
+    minimum: 0
+    default: 20
+
 definitions:
   # models
   User:
@@ -105,6 +183,47 @@ definitions:
         type: string
         description: language code
     required: ['id', 'name', 'email']
+
+  FinancialTransaction:
+    type: object
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: ['integer', 'null']
+        description: id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)
+      user_name:
+        type: ['string', 'null']
+        description: name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)
+      amount:
+        type: number
+        description: amount credited (negative for a debit transaction)
+      note:
+        type: string
+        description: note entered with the transaction
+      created_at:
+        type: string
+        format: date-time
+        description: when the transaction was entered
+    required: ['id', 'user_id', 'user_name', 'amount', 'note', 'created_at']
+
+  # collection meta object in root of a response
+  Meta:
+    type: object
+    properties:
+      page:
+        type: integer
+        description: page number of the returned collection
+      per_page:
+        type: integer
+        description: number of items per page
+      total_pages:
+        type: integer
+        description: total number of pages
+      total_count:
+        type: integer
+        description: total number of items in the collection
+    required: ['page', 'per_page', 'total_pages', 'total_count']
 
   Error:
     type: object

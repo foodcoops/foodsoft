@@ -18,9 +18,25 @@ class FinancialTransaction < ActiveRecord::Base
     initialize_financial_transaction_type
   end
 
+  # @todo remove alias (and rename created_on to created_at below) after #575
+  ransack_alias :created_at, :created_on
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id amount note created_on user_id)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w() # none, and certainly not user until we've secured that more
+  end
+
   # Use this save method instead of simple save and after callback
   def add_transaction!
     ordergroup.add_financial_transaction! amount, note, user, financial_transaction_type
+  end
+
+  # @todo rename in model, see #575
+  def created_at
+    created_on
   end
 
   protected

@@ -29,6 +29,28 @@ describe 'API v1', type: :apivore, order: :defined do
       end
     end
 
+  context 'financial_transactions' do
+    let(:other_user) { create :user, :ordergroup }
+    let!(:other_ft_1) { create :financial_transaction, ordergroup: other_user.ordergroup }
+
+    context 'without ordergroup' do
+      it { is_expected.to validate(:get, '/financial_transactions', 403, auth) }
+      it { is_expected.to validate(:get, '/financial_transactions/{id}', 403, auth({'id' => other_ft_1.id})) }
+    end
+
+    context 'in ordergroup' do
+      let(:user) { create :user, :ordergroup }
+      let!(:ft_1) { create :financial_transaction, ordergroup: user.ordergroup }
+      let!(:ft_2) { create :financial_transaction, ordergroup: user.ordergroup }
+      let!(:ft_3) { create :financial_transaction, ordergroup: user.ordergroup }
+
+      it { is_expected.to validate(:get, '/financial_transactions', 200, auth) }
+      it { is_expected.to validate(:get, '/financial_transactions/{id}', 200, auth({'id' => ft_2.id})) }
+      it { is_expected.to validate(:get, '/financial_transactions/{id}', 404, auth({'id' => other_ft_1.id})) }
+      it { is_expected.to validate(:get, '/financial_transactions/{id}', 404, auth({'id' => FinancialTransaction.last.id + 1})) }
+    end
+  end
+
     context 'config' do
       it { is_expected.to validate(:get, '/config', 200, auth) }
       it { is_expected.to validate(:get, '/config', 401) }
