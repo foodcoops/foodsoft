@@ -43,6 +43,12 @@ class Article < ApplicationRecord
   # @!attribute article_prices
   #   @return [Array<ArticlePrice>] Price history (current price first).
   has_many :article_prices, -> { order("created_at DESC") }
+  # @!attribute order_articles
+  #   @return [Array<OrderArticle>] Order articles for this article.
+  has_many :order_articles
+  # @!attribute order
+  #   @return [Array<Order>] Orders this article appears in.
+  has_many :orders, through: :order_articles
 
   # Replace numeric seperator with database format
   localize_input_of :price, :tax, :deposit
@@ -67,6 +73,14 @@ class Article < ApplicationRecord
   # Callbacks
   before_save :update_price_history
   before_destroy :check_article_in_use
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id name supplier_id article_category_id unit note manufacturer origin unit_quantity order_number)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(article_category supplier order_articles orders)
+  end
 
   # Returns true if article has been updated at least 2 days ago
   def recently_updated

@@ -125,6 +125,21 @@ describe 'API v1', type: :apivore, order: :defined do
       it_handles_invalid_token_and_scope(:get, '/orders')
       it_handles_invalid_token_and_scope(:get, '/orders/{id}', ->{ api_auth({'id' => order.id}) })
     end
+
+    context 'order_articles' do
+      let(:api_scopes) { ['orders:read'] }
+      let!(:order_article) { create(:order, article_count: 1).order_articles.first }
+      let!(:stock_article) { create(:stock_article) }
+      let!(:stock_order_article) { create(:stock_order, article_ids: [stock_article.id]).order_articles.first }
+
+      it { is_expected.to validate(:get, '/order_articles', 200, api_auth) }
+      it { is_expected.to validate(:get, '/order_articles/{id}', 200, api_auth({'id' => order_article.id})) }
+      it { is_expected.to validate(:get, '/order_articles/{id}', 200, api_auth({'id' => stock_order_article.id})) }
+      it { is_expected.to validate(:get, '/order_articles/{id}', 404, api_auth({'id' => Article.last.id + 1})) }
+
+      it_handles_invalid_token_and_scope(:get, '/order_articles')
+      it_handles_invalid_token_and_scope(:get, '/order_articles/{id}', ->{ api_auth({'id' => order_article.id}) })
+    end
   end
 
   # needs to be last context so it is always run at the end
