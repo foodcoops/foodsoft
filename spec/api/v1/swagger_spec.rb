@@ -113,6 +113,18 @@ describe 'API v1', type: :apivore, order: :defined do
       it_handles_invalid_token(:get, '/financial_transaction_types')
       it_handles_invalid_token(:get, '/financial_transaction_types/{id}', ->{ api_auth({'id' => tpy_1.id }) })
     end
+
+    context 'orders' do
+      let(:api_scopes) { ['orders:read'] }
+      let!(:order) { create :order }
+
+      it { is_expected.to validate(:get, '/orders', 200, api_auth) }
+      it { is_expected.to validate(:get, '/orders/{id}', 200, api_auth({'id' => order.id})) }
+      it { is_expected.to validate(:get, '/orders/{id}', 404, api_auth({'id' => Order.last.id + 1})) }
+
+      it_handles_invalid_token_and_scope(:get, '/orders')
+      it_handles_invalid_token_and_scope(:get, '/orders/{id}', ->{ api_auth({'id' => order.id}) })
+    end
   end
 
   # needs to be last context so it is always run at the end
