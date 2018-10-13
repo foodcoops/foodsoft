@@ -20,6 +20,14 @@ class OrderArticle < ActiveRecord::Base
   before_create :init_from_balancing
   after_destroy :update_ordergroup_prices
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w(id order_id article_id quantity tolerance units_to_order)
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w(order article)
+  end
+
   # This method returns either the ArticlePrice or the Article
   # The first will be set, when the the order is finished
   def price

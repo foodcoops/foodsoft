@@ -3,7 +3,6 @@ source "https://rubygems.org"
 
 gem "rails", '~> 4.2'
 
-
 gem 'sass-rails'
 gem 'less-rails'
 gem 'uglifier', '>= 1.0.3'
@@ -30,6 +29,10 @@ gem 'simple_form'
 gem 'inherited_resources'
 gem 'localize_input', git: "https://github.com/bennibu/localize_input.git"
 gem 'daemons'
+gem 'doorkeeper'
+gem 'doorkeeper-i18n'
+gem 'rack-cors', require: 'rack/cors'
+gem 'active_model_serializers', '~> 0.10.0.rc4'
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
 gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
 gem 'simple-navigation-bootstrap'
@@ -106,4 +109,6 @@ group :test do
   # code coverage
   gem 'simplecov', require: false
   gem 'coveralls', require: false
+  # api
+  gem 'apivore', require: false
 end

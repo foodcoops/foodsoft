@@ -10,6 +10,8 @@ Foodsoft::Application.routes.draw do
 
   scope '/:foodcoop' do
 
+    use_doorkeeper
+
     # Root path
     root to: 'home#index'
 
@@ -236,6 +238,21 @@ Foodsoft::Application.routes.draw do
 
       resource :config, only: [:show, :update] do
         get :list
+      end
+    end
+
+    ############## API
+
+    namespace :api do
+      namespace :v1 do
+        resource :user, only: [:show]
+        resource :config, only: [:show]
+        resource :navigation, only: [:show]
+        resources :financial_transactions, only: [:index, :show]
+        resources :orders, only: [:index, :show]
+        resources :order_articles, only: [:index, :show]
+        resources :group_order_articles
+        resources :article_categories, only: [:index, :show]
       end
     end
 
