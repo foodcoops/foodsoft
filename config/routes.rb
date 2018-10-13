@@ -246,6 +246,7 @@ Foodsoft::Application.routes.draw do
     namespace :api do
       namespace :v1 do
         resource :user, only: [:show]
+        resource :config, only: [:show]
       end
     end
 
