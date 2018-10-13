@@ -9,6 +9,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
   validates_presence_of :group_order, :order_article
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
+  validates :quantity, :tolerance, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
   scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
 
@@ -85,7 +86,7 @@ class GroupOrderArticle < ActiveRecord::Base
 
     # Check if something went terribly wrong and quantites have not been adjusted as desired.
     if (self.quantity != quantity || self.tolerance != tolerance)
-      raise 'Invalid state: unable to update GroupOrderArticle/-Quantities to desired quantities!'
+      raise ActiveRecord::RecordNotSaved.new('Unable to update GroupOrderArticle/-Quantities to desired quantities!', self)
     end
 
     # Remove zero-only items.
