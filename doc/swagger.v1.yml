@@ -1,0 +1,90 @@
+swagger: '2.0'
+info:
+  title: Foodsoft API v1
+  version: '1.0.0'
+  description: >
+    [Foodsoft](https://github.com/foodcoops/foodsoft) is web-based software to manage
+    a non-profit food coop (product catalog, ordering, accounting, job scheduling).
+
+
+    This is a description of Foodsoft's API v1, which exposes operations that a member
+    can do (later API versions may include admin functionality). It includes listing
+    open orders, and changing what the member wants to order (in the ordergroup).
+
+
+    Note that each food cooperative typically has their own instance (on a shared
+    server or their own installation), and there are just as many APIs (if the Foodsoft
+    version is recent enough).
+    This API description points to the default development url with the default
+    Foodsoft scope - that would be [http://localhost:3000/f](http://localhost:3000/f).
+
+    You may find the search parameters for index endpoints lacking. They are not
+    documented here, because there are too many combinations. For now, you'll need
+    to resort to [Ransack](https://github.com/activerecord-hackery/ransack) and
+    looking at Foodsoft's `ransackable_*` model class methods.
+externalDocs:
+  description: General Foodsoft API documentation
+  url: https://github.com/foodcoops/foodsoft/blob/master/doc/API.md
+
+# development url with default scope
+host: localhost:3000
+schemes:
+  - 'http'
+basePath: /f/api/v1
+
+produces:
+  - 'application/json'
+
+paths:
+
+definitions:
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+        description: error code
+      error_description:
+        type: string
+        description: human-readable error message (localized)
+  Error404:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>not_found</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+  Error401:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>unauthorized</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+  Error403:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>forbidden</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+  Error422:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>not_acceptable</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+
+securityDefinitions:
+  foodsoft_auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: http://localhost:3000/f/oauth/authorize
+    scopes:
+      all: full access to user functions
+      offline_access: retain access after user has logged out
