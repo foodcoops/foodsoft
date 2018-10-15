@@ -36,8 +36,76 @@ produces:
   - 'application/json'
 
 paths:
+  /user:
+    get:
+      summary: info about the currently logged-in user
+      tags:
+        - 1. User
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              user:
+                $ref: '#/definitions/User'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+      security:
+        - foodsoft_auth: ['all']
+  /config:
+    get:
+      summary: configuration variables
+      tags:
+        - 7. General
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+      security:
+        - foodsoft_auth: ['all']
+  /navigation:
+    get:
+      summary: navigation
+      tags:
+        - 7. General
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+      security:
+        - foodsoft_auth: ['all']
 
 definitions:
+  # models
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        description: full name
+      email:
+        type: string
+        description: email address
+      locale:
+        type: string
+        description: language code
+    required: ['id', 'name', 'email']
+
   Error:
     type: object
     properties:
