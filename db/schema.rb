@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20171201000000) do
 
   add_index "documents", ["parent_id"], name: "index_documents_on_parent_id", using: :btree
 
-  create_table "financial_link", force: :cascade do |t|
+  create_table "financial_links", force: :cascade do |t|
     t.text "note"
   end
 
