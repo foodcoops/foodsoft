@@ -11,10 +11,14 @@ FactoryBot.define do
       article_count true
     end
 
-    # for an order from stock; need to add articles
+    # for an order from stock
     factory :stock_order do
       supplier_id 0
-      # article_ids needs to be supplied
+      after :create do |order, evaluator|
+        article_count = evaluator.article_count
+        article_count = rand(1..99) if article_count == true
+        create_list :stock_article, article_count
+      end
     end
 
     # In the order's after_save callback order articles are created, so

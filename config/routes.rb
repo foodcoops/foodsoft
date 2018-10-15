@@ -248,6 +248,11 @@ Foodsoft::Application.routes.draw do
         resource :user, only: [:show]
         resource :config, only: [:show]
         resource :navigation, only: [:show]
+        resources :financial_transactions, only: [:index, :show]
+        resources :orders, only: [:index, :show]
+        resources :order_articles, only: [:index, :show]
+        resources :group_order_articles
+        resources :article_categories, only: [:index, :show]
       end
     end
 

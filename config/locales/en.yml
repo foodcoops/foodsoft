@@ -429,6 +429,7 @@ en:
       error_denied_sign_in: sign in as another user
       error_feature_disabled: This feature is currently disabled.
       error_members_only: This action is only available to members of the group!
+      error_minimum_balance: Sorry, your account balance is below the minimum of %{min}.
       error_token: Access denied (invalid token)!
   article_categories:
     create:
