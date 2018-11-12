@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201000000) do
+ActiveRecord::Schema.define(version: 20181111162921) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20171201000000) do
     t.decimal  "deposit",                 precision: 8, scale: 2, default: 0, null: false
     t.integer  "unit_quantity", limit: 4
     t.datetime "created_at"
+    t.decimal  "supplier_price",           precision: 8, scale: 2
   end
 
   add_index "article_prices", ["article_id"], name: "index_article_prices_on_article_id", using: :btree
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 20171201000000) do
     t.datetime "deleted_at"
     t.string   "type",                limit: 255
     t.integer  "quantity",            limit: 4,                           default: 0
+    t.decimal  "supplier_price",                  precision: 8, scale: 2
   end
 
   add_index "articles", ["article_category_id"], name: "index_articles_on_article_category_id", using: :btree
