@@ -20,6 +20,9 @@ class ArticlePrice < ActiveRecord::Base
   # @!attribute order_articles
   #   @return [Array<OrderArticle>] Order articles this price is associated with.
   has_many :order_articles
+  # @!attribute supplier_price
+  #   @return [Number] Supplier's case price
+  #   @see Article#supplier_price
 
   localize_input_of :price, :tax, :deposit
 
