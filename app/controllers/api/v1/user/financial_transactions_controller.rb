@@ -1,4 +1,4 @@
-class Api::V1::FinancialTransactionsController < Api::V1::BaseController
+class Api::V1::User::FinancialTransactionsController < Api::V1::BaseController
   include Concerns::CollectionScope
 
   before_action :require_ordergroup

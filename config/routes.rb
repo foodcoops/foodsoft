@@ -245,10 +245,12 @@ Foodsoft::Application.routes.draw do
 
     namespace :api do
       namespace :v1 do
-        resource :user, only: [:show]
         resource :config, only: [:show]
         resource :navigation, only: [:show]
-        resources :financial_transactions, only: [:index, :show]
+        namespace :user do
+          root to: 'users#show'
+          resources :financial_transactions, only: [:index, :show]
+        end
       end
     end
 

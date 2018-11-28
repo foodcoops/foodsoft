@@ -34,8 +34,8 @@ describe 'API v1', type: :apivore, order: :defined do
     let!(:other_ft_1) { create :financial_transaction, ordergroup: other_user.ordergroup }
 
     context 'without ordergroup' do
-      it { is_expected.to validate(:get, '/financial_transactions', 403, auth) }
-      it { is_expected.to validate(:get, '/financial_transactions/{id}', 403, auth({'id' => other_ft_1.id})) }
+      it { is_expected.to validate(:get, '/user/financial_transactions', 403, auth) }
+      it { is_expected.to validate(:get, '/user/financial_transactions/{id}', 403, auth({'id' => other_ft_1.id})) }
     end
 
     context 'in ordergroup' do
@@ -44,10 +44,10 @@ describe 'API v1', type: :apivore, order: :defined do
       let!(:ft_2) { create :financial_transaction, ordergroup: user.ordergroup }
       let!(:ft_3) { create :financial_transaction, ordergroup: user.ordergroup }
 
-      it { is_expected.to validate(:get, '/financial_transactions', 200, auth) }
-      it { is_expected.to validate(:get, '/financial_transactions/{id}', 200, auth({'id' => ft_2.id})) }
-      it { is_expected.to validate(:get, '/financial_transactions/{id}', 404, auth({'id' => other_ft_1.id})) }
-      it { is_expected.to validate(:get, '/financial_transactions/{id}', 404, auth({'id' => FinancialTransaction.last.id + 1})) }
+      it { is_expected.to validate(:get, '/user/financial_transactions', 200, auth) }
+      it { is_expected.to validate(:get, '/user/financial_transactions/{id}', 200, auth({'id' => ft_2.id})) }
+      it { is_expected.to validate(:get, '/user/financial_transactions/{id}', 404, auth({'id' => other_ft_1.id})) }
+      it { is_expected.to validate(:get, '/user/financial_transactions/{id}', 404, auth({'id' => FinancialTransaction.last.id + 1})) }
     end
   end
 

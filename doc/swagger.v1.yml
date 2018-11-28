@@ -56,7 +56,7 @@ paths:
       security:
         - foodsoft_auth: ['all']
 
-  /financial_transactions:
+  /user/financial_transactions:
     get:
       summary: financial transactions of the member's ordergroup
       tags:
@@ -82,7 +82,7 @@ paths:
             $ref: '#/definitions/Error403'
       security:
         - foodsoft_auth: ['all']
-  /financial_transactions/{id}:
+  /user/financial_transactions/{id}:
     parameters:
       - $ref: '#/parameters/idInUrl'
     get:
