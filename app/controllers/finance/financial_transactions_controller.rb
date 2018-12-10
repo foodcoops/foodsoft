@@ -55,7 +55,7 @@ class Finance::FinancialTransactionsController < ApplicationController
 
   def create_collection
     raise I18n.t('finance.financial_transactions.controller.create_collection.error_note_required') if params[:note].blank?
-    type = FinancialTransactionType.find_by_id(params.permit(:type))
+    type = FinancialTransactionType.find_by_id(params[:type_id])
     params[:financial_transactions].each do |trans|
       # ignore empty amount fields ...
       unless trans[:amount].blank?
