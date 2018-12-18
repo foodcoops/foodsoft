@@ -30,13 +30,14 @@ RUN buildDeps='libmagic-dev' && \
     bundle exec whenever >crontab
 
 # compile assets with temporary mysql server
-RUN export DATABASE_URL=mysql2://localhost/temp && \
+RUN export DATABASE_URL=mysql2://localhost/temp?encoding=utf8 && \
     export SECRET_KEY_BASE=thisisnotimportantnow && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get install -y mariadb-server && \
     /etc/init.d/mysql start && \
     cp config/app_config.yml.SAMPLE config/app_config.yml && \
+    cp config/database.yml.MySQL_SAMPLE config/database.yml && \
     bundle exec rake db:setup assets:precompile && \
     rm -Rf config/app_config.yml tmp/* && \
     /etc/init.d/mysql stop && \
