@@ -46,6 +46,8 @@ de:
       financial_transaction:
         amount: Betrag
         created_on: Datum
+        financial_transaction_class: Finanztransaktionsklasse
+        financial_transaction_type: Finanztransaktionstyp
         note: Notiz
         ordergroup: Bestellgruppe
         user: Eingetragen von

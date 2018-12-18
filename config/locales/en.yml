@@ -46,6 +46,8 @@ en:
       financial_transaction:
         amount: Amount
         created_on: Date
+        financial_transaction_class: Financial transaction class
+        financial_transaction_type: Financial transaction type
         note: Note
         ordergroup: Ordergroup
         user: Entered by
