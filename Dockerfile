@@ -39,14 +39,15 @@ RUN export DATABASE_URL=mysql2://localhost/temp?encoding=utf8 && \
     cp config/app_config.yml.SAMPLE config/app_config.yml && \
     cp config/database.yml.MySQL_SAMPLE config/database.yml && \
     bundle exec rake db:setup assets:precompile && \
-    rm -Rf config/app_config.yml tmp/* && \
+    rm -Rf tmp/* && \
     /etc/init.d/mysql stop && \
     rm -Rf /run/mysqld /tmp/* /var/tmp/* /var/lib/mysql /var/log/mysql* && \
     apt-get purge -y --auto-remove mariadb-server && \
     rm -Rf /var/lib/apt/lists/* /var/cache/apt/*
 
-# Make relevant dirs writable for app user
+# Make relevant dirs and files writable for app user
 RUN mkdir -p tmp && \
+    chown nobody config/app_config.yml && \
     chown nobody tmp
 
 # Run app as unprivileged user
