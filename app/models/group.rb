@@ -6,7 +6,7 @@ class Group < ActiveRecord::Base
   include MarkAsDeletedWithName
 
   has_many :memberships, dependent: :destroy
-  has_many :users, :through => :memberships
+  has_many :users, -> { where(deleted_at: nil) }, through: :memberships
 
   validates :name, :presence => true, :length => {:in => 1..25}
 
