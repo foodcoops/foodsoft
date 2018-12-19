@@ -3,6 +3,7 @@
 # Controller for managing orders, i.e. all actions that require the "orders" role.
 # Normal ordering actions of members of order groups is handled by the OrderingController.
 class OrdersController < ApplicationController
+  include Concerns::SendOrderPdf
 
   before_filter :authenticate_pickups_or_orders
   before_filter :authenticate_orders, except: [:receive, :receive_on_order_article_create, :receive_on_order_article_update, :show]
@@ -46,13 +47,7 @@ class OrdersController < ApplicationController
         render :layout => false
       end
       format.pdf do
-        pdf = case params[:document]
-                when 'groups'   then OrderByGroups.new(@order)
-                when 'articles' then OrderByArticles.new(@order)
-                when 'fax'      then OrderFax.new(@order)
-                when 'matrix'   then OrderMatrix.new(@order)
-              end
-        send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf'
+        send_order_pdf @order, params[:document]
       end
       format.csv do
         send_data OrderCsv.new(@order).to_csv, filename: @order.name+'.csv', type: 'text/csv'
