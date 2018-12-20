@@ -1407,6 +1407,8 @@ de:
         Antworten: %{reply_url}
         Nachricht online einsehen: %{msg_url}
         Nachrichten-Einstellungen: %{profile_url}
+      footer_group: |
+        Gesendet an Gruppe: %{group}
   model:
     delivery:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.

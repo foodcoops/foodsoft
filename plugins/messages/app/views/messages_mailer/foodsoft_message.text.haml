@@ -1,4 +1,6 @@
 = raw @message.body
 ======================================================================
 \
+- if @message.group
+  = raw t '.footer_group', group: @message.group.name
 = raw t '.footer', reply_url: new_message_url('message[reply_to]' => @message.id), msg_url: message_url(@message), profile_url: my_profile_url

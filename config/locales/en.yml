@@ -1432,6 +1432,8 @@ en:
         Reply: %{reply_url}
         See message online: %{msg_url}
         Messaging options: %{profile_url}
+      footer_group: |
+        Sent to group: %{group}
   model:
     delivery:
       each_stock_article_must_be_unique: Each stock article must not be listed more than once.
