@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   # Renders the "inbox" action.
   def index
-    @messages = Message.pub.page(params[:page]).per(@per_page).order('created_at DESC').includes(:sender)
+    @messages = Message.readable_for(current_user).page(params[:page]).per(@per_page).order('created_at DESC').includes(:sender)
   end
 
   # Creates a new message object.

@@ -9,9 +9,11 @@ class Message < ApplicationRecord
 
   attr_accessor :send_method, :recipient_tokens, :order_id
 
-  scope :pub, -> { where(:private => false) }
   scope :threads, -> { where(:reply_to => nil) }
   scope :thread, -> (id) { where("id = ? OR reply_to = ?", id, id) }
+  scope :readable_for, -> (user) {
+    joins(:message_recipients).where('private = ? OR message_recipients.user_id = ?', false, user.try(&:id)).distinct
+  }
 
   validates_presence_of :message_recipients, :subject, :body
   validates_length_of :subject, :in => 1..255

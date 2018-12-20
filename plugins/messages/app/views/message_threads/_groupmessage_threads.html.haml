@@ -1,4 +1,4 @@
-- message_threads = Message.pub.threads.where(group: group).order(created_at: :desc).limit(5)
+- message_threads = Message.readable_for(current_user).threads.where(group: group).order(created_at: :desc).limit(5)
 - unless message_threads.empty?
   %section
     %h3
