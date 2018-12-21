@@ -1,9 +1,13 @@
 # encoding: utf-8
 class Admin::OrdergroupsController < Admin::BaseController
   inherit_resources
-  
+
   def index
     @ordergroups = Ordergroup.undeleted.order('name ASC')
+
+    if request.format.csv?
+      send_data OrdergroupsCsv.new(@ordergroups).to_csv, filename: 'ordergroups.csv', type: 'text/csv'
+    end
 
     # if somebody uses the search field:
     unless params[:query].blank?

@@ -39,6 +39,12 @@ class Ordergroup < Group
       .group('groups.id')
   end
 
+  def self.custom_fields
+    fields = FoodsoftConfig[:custom_fields] && FoodsoftConfig[:custom_fields][:ordergroup]
+    return [] unless fields
+    fields.map(&:deep_symbolize_keys)
+  end
+
   def last_user_activity
     last_active_user = users.order('users.last_activity DESC').first
     if last_active_user
