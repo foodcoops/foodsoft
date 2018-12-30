@@ -947,6 +947,7 @@ en:
         add_all_ordergroups: Add all ordergroups
         new_ordergroup: Add new ordergroup
         save: Save transaction
+        set_balance: Set the balance of the ordergroup to the entered amount.
         sidebar: Here you can update more accounts at the same time. For example all transfers of the ordergroup from one account statement.
         title: Updating more accounts
       ordergroup:

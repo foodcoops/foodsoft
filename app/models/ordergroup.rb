@@ -65,6 +65,13 @@ class Ordergroup < Group
     account_balance - value_of_open_orders(exclude) - value_of_finished_orders(exclude)
   end
 
+  def financial_transaction_class_balance(klass)
+    financial_transactions
+      .joins(:financial_transaction_type)
+      .where(financial_transaction_types: {financial_transaction_class_id: klass})
+      .sum(:amount)
+  end
+
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.
   # Throws an exception if it fails.
   def add_financial_transaction!(amount, note, user, transaction_type, link = nil)
