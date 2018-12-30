@@ -37,10 +37,14 @@
   - if FinancialTransactionType.has_multiple_types
     %p
       %b= heading_helper FinancialTransaction, :financial_transaction_type
-      = select_tag :type, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] })
+      = select_tag :type, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] }, params[:type])
   %p
     %b= heading_helper FinancialTransaction, :note
     = text_field_tag :note, params[:note], class: 'input-xlarge', required: 'required'
+  %p
+    %label
+      = check_box_tag :set_balance, true, params[:set_balance]
+      = t('.set_balance')
   %p
     %table#ordergroups{:style => "width:20em"}
       %thead
