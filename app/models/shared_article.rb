@@ -1,4 +1,4 @@
-class SharedArticle < ActiveRecord::Base
+class SharedArticle < ApplicationRecord
 
   # connect to database from sharedLists-Application
   SharedArticle.establish_connection(FoodsoftConfig[:shared_lists])

@@ -1,7 +1,7 @@
 # encoding: utf-8
 # Groups organize the User.
 # A Member gets the roles from the Group
-class Group < ActiveRecord::Base
+class Group < ApplicationRecord
   include FindEachWithOrder
   include MarkAsDeletedWithName
 

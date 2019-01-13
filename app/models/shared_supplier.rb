@@ -1,4 +1,4 @@
-class SharedSupplier < ActiveRecord::Base
+class SharedSupplier < ApplicationRecord
 
   # connect to database from sharedLists-Application
   SharedSupplier.establish_connection(FoodsoftConfig[:shared_lists])
@@ -33,4 +33,3 @@ class SharedSupplier < ActiveRecord::Base
     methods
   end
 end
-

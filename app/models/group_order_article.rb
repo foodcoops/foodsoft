@@ -1,7 +1,7 @@
 # A GroupOrderArticle stores the sum of how many items of an OrderArticle are ordered as part of a GroupOrder.
 # The chronologically order of the Ordergroup - activity are stored in GroupOrderArticleQuantity
 #
-class GroupOrderArticle < ActiveRecord::Base
+class GroupOrderArticle < ApplicationRecord
 
   belongs_to :group_order
   belongs_to :order_article
