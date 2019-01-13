@@ -1,4 +1,4 @@
-class StockTaking < ActiveRecord::Base
+class StockTaking < ApplicationRecord
 
   has_many :stock_changes, :dependent => :destroy
   has_many :stock_articles, :through => :stock_changes
@@ -11,4 +11,3 @@ class StockTaking < ActiveRecord::Base
     end
   end
 end
-

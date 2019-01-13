@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Supplier < ActiveRecord::Base
+class Supplier < ApplicationRecord
   include MarkAsDeletedWithName
   include CustomFields
 

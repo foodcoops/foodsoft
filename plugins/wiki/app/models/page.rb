@@ -1,4 +1,4 @@
-class Page < ActiveRecord::Base
+class Page < ApplicationRecord
   include ActsAsTree
 
   belongs_to :user, :foreign_key => 'updated_by'

@@ -1,4 +1,4 @@
-class BankTransaction < ActiveRecord::Base
+class BankTransaction < ApplicationRecord
 
   # @!attribute external_id
   #   @return [String] Unique Identifier of the transaction within the bank account.

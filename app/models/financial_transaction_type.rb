@@ -1,4 +1,4 @@
-class FinancialTransactionType < ActiveRecord::Base
+class FinancialTransactionType < ApplicationRecord
   belongs_to :financial_transaction_class
   has_many :financial_transactions, dependent: :restrict_with_exception
 

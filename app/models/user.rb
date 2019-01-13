@@ -2,7 +2,7 @@
 
 require 'digest/sha1'
 # specific user rights through memberships (see Group)
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include CustomFields
   #TODO: acts_as_paraniod ??
 
@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :send_messages, :class_name => "Message", :foreign_key => "sender_id"
   has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
   has_many :mail_delivery_status, :class_name => 'MailDeliveryStatus', :foreign_key => 'email', :primary_key => 'email'
-  
+
   attr_accessor :password, :settings_attributes
 
   scope :deleted, -> { where.not(deleted_at: nil) }
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   # makes the current_user (logged-in-user) available in models
   cattr_accessor :current_user
-  
+
   validates_presence_of :email
   validates_presence_of :password, :on => :create
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
@@ -51,14 +51,14 @@ class User < ActiveRecord::Base
     settings.defaults['messages'] = { 'send_as_email' => true }           unless settings.messages
     settings.defaults['notify']   = { 'upcoming_tasks' => true  }         unless settings.notify
   end
-  
+
   after_save do
     settings_attributes.each do |key, value|
       value.each do |k, v|
         case v
           when '1'
             value[k] = true
-          when '0' 
+          when '0'
             value[k] = false
         end
       end
@@ -88,11 +88,11 @@ class User < ActiveRecord::Base
     end.reduce(:and)
     User.where(match_nick.or match_name)
   end
-  
+
   def locale
     settings.profile['language']
   end
-  
+
   def name
     [first_name, last_name].join(" ")
   end
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   def receive_email?
     settings.messages['send_as_email'] && email.present?
   end
-  
+
   # Sets the user's password. It will be stored encrypted along with a random salt.
   def set_password
     unless password.blank?
@@ -108,12 +108,12 @@ class User < ActiveRecord::Base
       self.password_hash, self.password_salt = Digest::SHA1.hexdigest(password + salt), salt
     end
   end
-  
+
   # Returns true if the password argument matches the user's password.
   def has_password(password)
     Digest::SHA1.hexdigest(password + self.password_salt) == self.password_hash
   end
-  
+
   # Returns a random password.
   def new_random_password(size = 3)
     c = %w(b c d f g h j k l m n p qu r s t v w x z ch cr fr nd ng nk nt ph pr rd sh sl sp st th tr)
@@ -144,7 +144,7 @@ class User < ActiveRecord::Base
   def role_admin?
     groups.detect {|group| group.role_admin?}
   end
-  
+
   # Checks the finance role
   def role_finance?
     groups.detect {|group| group.role_finance?}
@@ -228,4 +228,3 @@ class User < ActiveRecord::Base
   end
 
 end
-

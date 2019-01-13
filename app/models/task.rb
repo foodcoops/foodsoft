@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-class Task < ActiveRecord::Base
+class Task < ApplicationRecord
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
   belongs_to :workgroup
@@ -89,7 +89,7 @@ class Task < ActiveRecord::Base
     list = ids.split(",").map(&:to_i)
     new_users = (list - users.collect(&:id)).uniq
     old_users = users.reject { |user| list.include?(user.id) }
-    
+
     self.class.transaction do
       # delete old assignments
       if old_users.any?
@@ -112,7 +112,7 @@ class Task < ActiveRecord::Base
       end
     end
   end
-  
+
   def user_list
     @user_list ||= users.collect(&:id).join(", ")
   end
@@ -126,4 +126,3 @@ class Task < ActiveRecord::Base
     true
   end
 end
-
