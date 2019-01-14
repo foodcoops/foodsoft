@@ -162,8 +162,8 @@ default: &defaults
   # Instead of defining all details here, you can also point to an entry in database.yml.
   #shared_lists: shared_lists
 
-  # default to allow sync only on less than 200 articles
-  #shared_supplier_article_limit: 2000,
+  # default is to allow sync only on less than 200 articles
+  #shared_supplier_article_limit: 200,
 development:
   <<: *defaults
 
