@@ -235,7 +235,9 @@ class Article < ActiveRecord::Base
     if supplier && (supplier.shared_sync_method.blank? || supplier.shared_sync_method == 'import')
       errors.add :name, :taken if matches.any?
     else
-      errors.add :name, :taken_with_unit if matches.where(unit: unit, unit_quantity: unit_quantity).any?
+      if matches.where(unit: unit, unit_quantity: unit_quantity, manufacturer: manufacturer, origin: origin).any?
+        errors.add :name, :taken_with_unit
+      end
     end
   end
 
