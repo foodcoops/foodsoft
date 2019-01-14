@@ -62,7 +62,8 @@ class Article < ActiveRecord::Base
   validates_numericality_of :deposit, :tax
   #validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type], if: Proc.new {|a| a.supplier.shared_sync_method.blank? or a.supplier.shared_sync_method == 'import' }
   #validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit, :unit_quantity]
-  validate :uniqueness_of_name
+  attr_accessor :skip_validation_uniqueness_of_name
+  validate :uniqueness_of_name unless :skip_validation_uniqueness_of_name
 
   # Callbacks
   before_save :update_price_history
@@ -154,7 +155,8 @@ class Article < ActiveRecord::Base
   # to get the correspondent shared article
   def shared_article(supplier = self.supplier)
     self.order_number.blank? and return nil
-    @shared_article ||= supplier.shared_supplier.shared_articles.find_by_number(self.order_number) rescue nil
+    # @shared_article ||= supplier.shared_supplier.shared_articles.find_by_number(self.order_number) rescue nil
+    @shared_article ||= supplier.shared_supplier.find_article_by_number(self.order_number) rescue nil
   end
 
   # convert units in foodcoop-size
