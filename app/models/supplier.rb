@@ -129,7 +129,7 @@ class Supplier < ActiveRecord::Base
   # make sure the shared_sync_method is allowed for the shared supplier
   def valid_shared_sync_method
     if shared_supplier && !shared_supplier.shared_sync_methods.include?(shared_sync_method)
-      errors.add :name, :included
+      errors.add :shared_sync_method, :included
     end
   end
 
