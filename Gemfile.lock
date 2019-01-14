@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/bennibu/localize_input.git
-  revision: 5eb188d2525a073d09e142cf8b0b04e6ace6e7b0
+  remote: https://github.com/carchrae/localize_input.git
+  revision: 597e33bb42a3b0fd58c3ea7d4f5a208c2911b43d
   specs:
     localize_input (0.1.0)
 
@@ -158,6 +158,10 @@ GEM
     doorkeeper (5.0.1)
       railties (>= 4.2)
     doorkeeper-i18n (4.0.0)
+    dotenv (2.6.0)
+    dotenv-rails (2.6.0)
+      dotenv (= 2.6.0)
+      railties (>= 3.2, < 6.0)
     email_reply_trimmer (0.1.12)
     erubi (1.7.1)
     erubis (2.7.0)
@@ -272,6 +276,7 @@ GEM
     nokogiri (1.9.1)
       mini_portile2 (~> 2.4.0)
     pdf-core (0.7.0)
+    pg (0.19.0)
     polyglot (0.3.5)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
@@ -513,6 +518,7 @@ DEPENDENCIES
   date_time_attribute
   doorkeeper
   doorkeeper-i18n
+  dotenv-rails (~> 2.6)
   exception_notification
   factory_bot_rails
   faker
@@ -535,6 +541,7 @@ DEPENDENCIES
   meta_request
   midi-smtp-server
   mysql2 (~> 0.4.0)
+  pg (~> 0.19.0)
   prawn
   prawn-table
   protected_attributes (= 1.1.0)
