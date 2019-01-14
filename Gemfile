@@ -110,3 +110,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'coveralls', require: false
 end
+
+gem "dotenv-rails", "~> 2.6"
+
+gem "pg", "~> 0.19.0"
