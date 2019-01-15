@@ -1,5 +1,5 @@
 class SharedSupplier < ActiveRecord::Base
-  
+
   # connect to database from sharedLists-Application
   SharedSupplier.establish_connection(FoodsoftConfig[:shared_lists])
   # set correct table_name in external DB
@@ -7,6 +7,16 @@ class SharedSupplier < ActiveRecord::Base
 
   has_many :suppliers
   has_many :shared_articles, :foreign_key => :supplier_id
+
+
+  def find_article_by_number(order_number)
+    # note that `shared_articles` uses number instead order_number
+    cached_articles.detect { |a| a.number == order_number }
+  end
+
+  def cached_articles
+    @cached_articles ||= shared_articles.all
+  end
 
   # These set of attributes are used to autofill attributes of new supplier,
   # when created by import from shared supplier feature.
