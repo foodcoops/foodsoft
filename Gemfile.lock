@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/bennibu/localize_input.git
-  revision: 5eb188d2525a073d09e142cf8b0b04e6ace6e7b0
+  remote: https://github.com/carchrae/localize_input.git
+  revision: 597e33bb42a3b0fd58c3ea7d4f5a208c2911b43d
   specs:
     localize_input (0.1.0)
 
