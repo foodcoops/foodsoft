@@ -27,7 +27,7 @@ gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
 gem 'inherited_resources'
-gem 'localize_input', git: "https://github.com/bennibu/localize_input.git"
+gem 'localize_input', git: 'https://github.com/carchrae/localize_input.git'
 gem 'daemons'
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
