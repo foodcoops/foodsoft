@@ -34,42 +34,31 @@ class Supplier < ApplicationRecord
     updated_article_pairs, outlisted_articles, new_articles = [], [], []
     existing_articles = Set.new
     for article in articles.undeleted
-      # puts "checking #{article.description}"
       # try to find the associated shared_article
       shared_article = article.shared_article(self)
 
-      if shared_article && shared_article.available # article will be updated
-        # puts "found shared article, comparing: #{shared_article.build_new_article(self).description}"
-        # puts "found shared article, comparing: #{shared_article.as_json}"
+      if shared_article # article will be updated
         existing_articles.add(shared_article.id)
         unequal_attributes = article.shared_article_changed?(self)
         unless unequal_attributes.blank? # skip if shared_article has not been changed
           article.attributes = unequal_attributes
           updated_article_pairs << [article, unequal_attributes]
-          # puts "changed: #{unequal_attributes}"
-        else
-          # puts "no changes"
         end
-      # Articles with no order number can be used to put non-shared articles
-      # in a shared supplier, with sync keeping them.
-        else
-          if not article.order_number.blank?
-            # article isn't in external database anymore
-            # puts "removing as not in external: #{article.description}"
-            outlisted_articles << article
-          else
-            # puts "not removing because no order_number: #{article.description}"
-          end
+        # Articles with no order number can be used to put non-shared articles
+        # in a shared supplier, with sync keeping them.
+      elsif not article.order_number.blank?
+        # article isn't in external database anymore
+        outlisted_articles << article
       end
     end
     # Find any new articles, unless the import is manual
     if ['all_available', 'all_unavailable'].include?(shared_sync_method)
       # build new articles
       shared_supplier
-        .shared_articles
-        .where(available: true)
-        .where.not(id: existing_articles.to_a)
-        .find_each { |new_shared_article| new_articles << new_shared_article.build_new_article(self) }
+          .shared_articles
+          .where(available: true)
+          .where.not(id: existing_articles.to_a)
+          .find_each { |new_shared_article| new_articles << new_shared_article.build_new_article(self) }
       # make them unavailable when desired
       if shared_sync_method == 'all_unavailable'
         new_articles.each {|new_article| new_article.availability = false }
@@ -106,7 +95,7 @@ class Supplier < ApplicationRecord
       elsif status == :outlisted && article.present?
         outlisted_articles << article
 
-      # stop when there is a parsing error
+        # stop when there is a parsing error
       elsif status.is_a? String
         # @todo move I18n key to model
         raise I18n.t('articles.model.error_parse', :msg => status, :line => line.to_s)
