@@ -53,8 +53,7 @@ class Supplier < ActiveRecord::Base
     end
     # Find any new articles, unless the import is manual
     unless shared_sync_method == 'import'
-      # for shared_article in shared_supplier.shared_articles
-      for shared_article in shared_supplier.shared_articles.all
+      for shared_article in shared_supplier.cached_articles
         if (!existing_articles[shared_article.id] && shared_article.available)
           new_articles << shared_article.build_new_article(self)
         end
