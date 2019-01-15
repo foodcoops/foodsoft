@@ -13,28 +13,16 @@ class SharedSupplier < ActiveRecord::Base
     cached_articles_by_key(['number'])[cache_key([order_number])]
   end
 
-  def find_article_by_name_origin_manufacture(name, origin, manufacturer)
-    cached_articles_by_key(['name', 'origin', 'manufacturer'])[cache_key([name, origin, manufacturer])]
-  end
-
-  def find_article_by_name_manufacture(name, manufacturer)
-    cached_articles_by_key(['name', 'manufacturer'])[cache_key([name, manufacturer])]
-  end
-
+  # generates a consistent lookup key in the cache for a list of key values
   def cache_key(keys)
     keys.join('::')
   end
 
-  def cached_articles
-    # puts "cached #{id}" if @cached_articles
-    # puts "shared supplier not cached #{id}" unless @cached_articles
-    @cached_articles ||= shared_articles.all
-  end
-
+  # indexes all in an in-memory hash for fast lookup (at the cost of the first load)
   def cached_articles_by_key(keys)
     @cached_articles_by_key ||= {}
-    @cached_articles_by_key[keys.join('::')] ||= cached_articles.map do |a|
-      vals = keys.map {|k| a[k]}
+    @cached_articles_by_key[keys.join('::')] ||= shared_articles.all.map do |a|
+      vals = keys.map { |k| a[k] }
       [cache_key(vals), a]
     end.to_h
   end
@@ -49,7 +37,7 @@ class SharedSupplier < ActiveRecord::Base
   # return list of synchronisation methods available for this supplier
   def shared_sync_methods
     methods = []
-    methods += %w(all_available all_unavailable) if shared_articles.count < 200
+    methods += %w(all_available all_unavailable)  if shared_articles.count < (FoodsoftConfig[:shared_supplier_article_limit] || 200)
     methods += %w(import) # perhaps, in the future: if shared_articles.count > 20
     methods
   end
