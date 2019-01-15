@@ -8,23 +8,14 @@ class SharedSupplier < ActiveRecord::Base
   has_many :suppliers
   has_many :shared_articles, :foreign_key => :supplier_id
 
+
   def find_article_by_number(order_number)
-    #note inconsistent naming, order_number = number in supplier db
-    cached_articles_by_key(['number'])[cache_key([order_number])]
+    # note that `shared_articles` uses number instead order_number
+    cached_articles.detect { |a| a.number == order_number }
   end
 
-  # generates a consistent lookup key in the cache for a list of key values
-  def cache_key(keys)
-    keys.join('::')
-  end
-
-  # indexes all in an in-memory hash for fast lookup (at the cost of the first load)
-  def cached_articles_by_key(keys)
-    @cached_articles_by_key ||= {}
-    @cached_articles_by_key[keys.join('::')] ||= shared_articles.all.map do |a|
-      vals = keys.map { |k| a[k] }
-      [cache_key(vals), a]
-    end.to_h
+  def cached_articles
+    @cached_articles ||= shared_articles.all
   end
 
   # These set of attributes are used to autofill attributes of new supplier,
