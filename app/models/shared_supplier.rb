@@ -28,8 +28,9 @@ class SharedSupplier < ApplicationRecord
   # return list of synchronisation methods available for this supplier
   def shared_sync_methods
     methods = []
-    methods += %w(all_available all_unavailable) if shared_articles.count < FoodsoftConfig[:shared_supplier_article_sync_limit]
+    methods += %w(all_available all_unavailable)  if shared_articles.count < (FoodsoftConfig[:shared_supplier_article_limit] || 200)
     methods += %w(import) # perhaps, in the future: if shared_articles.count > 20
     methods
   end
 end
+

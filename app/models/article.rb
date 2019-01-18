@@ -62,7 +62,8 @@ class Article < ApplicationRecord
   validates_numericality_of :deposit, :tax
   #validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type], if: Proc.new {|a| a.supplier.shared_sync_method.blank? or a.supplier.shared_sync_method == 'import' }
   #validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit, :unit_quantity]
-  validate :uniqueness_of_name
+  attr_accessor :skip_validation_uniqueness_of_name
+  validate :uniqueness_of_name unless :skip_validation_uniqueness_of_name
 
   # Callbacks
   before_save :update_price_history
