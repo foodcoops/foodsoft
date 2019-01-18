@@ -1398,7 +1398,7 @@ nl:
     user:
       no_ordergroup: geen huishouden
     group_order_article:
-      order_closed: "bestelling is gesloten en kan niet worden gewijzigd"
+      order_closed: Bestelling is gesloten en kan niet worden gewijzigd
   navigation:
     admin:
       config: Instellingen
