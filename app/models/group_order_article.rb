@@ -5,13 +5,13 @@ class GroupOrderArticle < ApplicationRecord
 
   belongs_to :group_order
   belongs_to :order_article
-  has_many :group_order_article_quantities, :dependent => :destroy
+  has_many   :group_order_article_quantities, :dependent => :destroy
 
   validates_presence_of :group_order, :order_article
-  validates_uniqueness_of :order_article_id, :scope => :group_order_id # just once an article per group order
-  validate :check_order_not_closed  #don't allow changes to closed (aka settled) orders
+  validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
+  validate :check_order_not_closed # don't allow changes to closed (aka settled) orders
 
-  scope :ordered, -> {includes(:group_order => :ordergroup).order('groups.name')}
+  scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
 
   localize_input_of :result
 
@@ -90,11 +90,11 @@ class GroupOrderArticle < ApplicationRecord
     end
 
     # Remove zero-only items.
-    quantities = quantities.reject {|q| q.quantity == 0 && q.tolerance == 0}
+    quantities = quantities.reject { | q | q.quantity == 0 && q.tolerance == 0}
 
     # Save
     transaction do
-      quantities.each {|i| i.save!}
+      quantities.each { | i | i.save! }
       self.group_order_article_quantities = quantities
       save!
     end
