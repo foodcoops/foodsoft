@@ -201,7 +201,7 @@ class GroupOrderArticle < ApplicationRecord
 
   def check_order_not_closed
     if order_article.order.closed?
-      errors.add(:order_article, 'order is closed/settled and cannot be modified')
+      errors.add(:order_article, I18n.t('model.group_order_article.order_closed'))
     end
   end
 end
