@@ -247,10 +247,13 @@ Foodsoft::Application.routes.draw do
       namespace :v1 do
         resource :config, only: [:show]
         resource :navigation, only: [:show]
+
         namespace :user do
           root to: 'users#show'
           resources :financial_transactions, only: [:index, :show]
         end
+
+        resources :financial_transactions, only: [:index, :show]
       end
     end
 

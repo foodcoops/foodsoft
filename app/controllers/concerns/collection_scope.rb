@@ -26,7 +26,7 @@ module Concerns::CollectionScope
 
   def search_scope
     s = scope
-    s = scope.ransack(params[:q]).result(distinct: true) if params[:q]
+    s = scope.ransack(params[:q], auth_object: ransack_auth_object).result(distinct: true) if params[:q]
     s = s.page(params[:page].to_i).per(per_page) if per_page && per_page >= 0
     s
   end
@@ -44,6 +44,15 @@ module Concerns::CollectionScope
       total_pages: (scope.total_count / [1, per_page].max).ceil,
       total_count: scope.total_count
     }.merge(extra)
+  end
+
+  # By default, there are no special ransack search scope authentications.
+  # Controllers can override this to return something else and customize a model's
+  # +ransackable_attributes+ and +ransackable_associations+ to allow searching on more
+  # parameters in one controller than another (e.g. to protect searches that are scoped
+  # to a user, while still allowing all search parameters for another endpoint).
+  def ransack_auth_object
+    nil
   end
 
 end
