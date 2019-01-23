@@ -266,7 +266,9 @@ class Order < ApplicationRecord
   end
 
   def send_to_supplier!(user)
-    Mailer.order_result_supplier(user, self).deliver_now
+    Mailer.deliver_now_with_default_locale do
+      Mailer.order_result_supplier(user, self)
+    end
     update!(last_sent_mail: Time.now)
   end
 
