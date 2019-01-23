@@ -10,7 +10,7 @@ class OrderPdf < RenderPDF
 
   def nice_table(name, data, dimrows = [])
     down_or_page 25
-    text name, size: 10, style: :bold
+    text name, size: 20, style: :bold
     table data, width: bounds.width, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
       # borders
       table.cells.borders = [:bottom]
@@ -44,6 +44,10 @@ class OrderPdf < RenderPDF
 
   def order_article_price_per_unit(order_article)
     "#{number_to_currency(order_article_price(order_article))} / #{order_article.article.unit}"
+  end
+
+  def order_article_unit_per_price(order_article)
+    "#{order_article.article.unit} @ #{number_to_currency(order_article_price(order_article))}"
   end
 
   def group_order_article_quantity_with_tolerance(goa)
