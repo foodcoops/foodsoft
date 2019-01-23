@@ -911,7 +911,7 @@ de:
         with_extra_charge: 'mit Aufschlag:'
         without_extra_charge: 'ohne Aufschlag:'
       edit_note:
-        title: Bestellschein bearbeiten
+        title: Notitie bewerken
     create:
       notice: Rechnung wurde erstellt.
     financial_links:
