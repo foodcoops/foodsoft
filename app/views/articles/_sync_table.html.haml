@@ -10,6 +10,7 @@
       %th= heading_helper Article, :price
       %th= heading_helper Article, :tax
       %th= heading_helper Article, :deposit
+      %th= heading_helper Article, :supplier_price
       %th= heading_helper Article, :article_category
   %tbody
     - articles.each do |changed_article, attrs|
@@ -25,6 +26,7 @@
           %td= number_to_currency article.price
           %td= number_to_percentage article.tax
           %td= number_to_currency article.deposit
+          %td= number_to_currency article.supplier_price
           %td= article.article_category.name if article.article_category
       %tr
         = fields_for "#{field}[]", changed_article do |form|
@@ -49,6 +51,10 @@
             .input-prepend
               %span.add-on= t 'number.currency.format.unit'
               = form.text_field 'deposit', class: 'input-mini', style: 'width: 45px'
+          %td{:style => highlight_new(attrs, :supplier_price)}
+            .input-prepend
+              %span.add-on= t 'number.currency.format.unit'
+              = form.text_field 'supplier_price', class: 'input-mini', style: 'width: 45px'
           %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
             {include_blank: true}, class: 'input-small'
       - unless changed_article.errors.empty?
