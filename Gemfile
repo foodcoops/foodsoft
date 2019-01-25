@@ -72,10 +72,6 @@ group :development do
   gem 'mailcatcher'
   gem 'web-console', '~> 2.0'
 
-  # allow to use `debugger` https://github.com/conradirwin/pry-rescue
-  gem 'pry-rescue'
-  gem 'pry-stack_explorer'
-
   # Better error output
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -92,6 +88,10 @@ end
 
 group :development, :test do
   gem 'ruby-prof', require: false
+
+  # allow to use `debugger` https://github.com/conradirwin/pry-rescue
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end
 
 group :test do
