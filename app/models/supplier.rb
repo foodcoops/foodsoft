@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Supplier < ActiveRecord::Base
+class Supplier < ApplicationRecord
   include MarkAsDeletedWithName
   include CustomFields
 
@@ -32,11 +32,13 @@ class Supplier < ActiveRecord::Base
   # also returns an array with new articles, which should be added (depending on shared_sync_method)
   def sync_all
     updated_article_pairs, outlisted_articles, new_articles = [], [], []
+    existing_articles = Set.new
     for article in articles.undeleted
       # try to find the associated shared_article
       shared_article = article.shared_article(self)
 
       if shared_article # article will be updated
+        existing_articles.add(shared_article.id)
         unequal_attributes = article.shared_article_changed?(self)
         unless unequal_attributes.blank? # skip if shared_article has not been changed
           article.attributes = unequal_attributes
@@ -51,11 +53,11 @@ class Supplier < ActiveRecord::Base
     end
     # Find any new articles, unless the import is manual
     unless shared_sync_method == 'import'
-      for shared_article in shared_supplier.shared_articles
-        unless articles.undeleted.find_by_order_number(shared_article.number)
-          new_articles << shared_article.build_new_article(self)
-        end
-      end
+      shared_supplier
+        .shared_articles
+        .where(available: true)
+        .where.not(id: existing_articles)
+        .each { |shared_article| new_articles << shared_article.build_new_article(self) }
     end
     return [updated_article_pairs, outlisted_articles, new_articles]
   end
@@ -129,7 +131,7 @@ class Supplier < ActiveRecord::Base
   # make sure the shared_sync_method is allowed for the shared supplier
   def valid_shared_sync_method
     if shared_supplier && !shared_supplier.shared_sync_methods.include?(shared_sync_method)
-      errors.add :name, :included
+      errors.add :shared_sync_method, :included
     end
   end
 

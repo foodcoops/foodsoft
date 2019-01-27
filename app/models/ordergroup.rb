@@ -39,6 +39,12 @@ class Ordergroup < Group
       .group('groups.id')
   end
 
+  def self.custom_fields
+    fields = FoodsoftConfig[:custom_fields] && FoodsoftConfig[:custom_fields][:ordergroup]
+    return [] unless fields
+    fields.map(&:deep_symbolize_keys)
+  end
+
   def last_user_activity
     last_active_user = users.order('users.last_activity DESC').first
     if last_active_user
@@ -63,6 +69,13 @@ class Ordergroup < Group
   # * exclude (GroupOrder): exclude this GroupOrder from the calculation
   def get_available_funds(exclude = nil)
     account_balance - value_of_open_orders(exclude) - value_of_finished_orders(exclude)
+  end
+
+  def financial_transaction_class_balance(klass)
+    financial_transactions
+      .joins(:financial_transaction_type)
+      .where(financial_transaction_types: {financial_transaction_class_id: klass})
+      .sum(:amount)
   end
 
   # Creates a new FinancialTransaction for this Ordergroup and updates the account_balance accordingly.

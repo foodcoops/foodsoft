@@ -46,6 +46,8 @@ en:
       financial_transaction:
         amount: Amount
         created_on: Date
+        financial_transaction_class: Financial transaction class
+        financial_transaction_type: Financial transaction type
         note: Note
         ordergroup: Ordergroup
         user: Entered by
@@ -845,6 +847,8 @@ en:
         first_paragraph: 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
         or_cancel: or back to accounting
         title: Settle order
+      edit_note:
+        title: Edit order note
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
@@ -880,7 +884,7 @@ en:
         edit_order: Edit order
         groups_overview: Overview of groups
         invoice: Invoice
-        notes_and_journal: Notes/Protocol
+        notes_and_journal: Order Notes
         summary: Summary
         title: Accounting %{name}
         view_options: Viewing options
@@ -947,6 +951,7 @@ en:
         add_all_ordergroups: Add all ordergroups
         new_ordergroup: Add new ordergroup
         save: Save transaction
+        set_balance: Set the balance of the ordergroup to the entered amount.
         sidebar: Here you can update more accounts at the same time. For example all transfers of the ordergroup from one account statement.
         title: Updating more accounts
       ordergroup:
@@ -1431,6 +1436,8 @@ en:
         Reply: %{reply_url}
         See message online: %{msg_url}
         Messaging options: %{profile_url}
+      footer_group: |
+        Sent to group: %{group}
   model:
     delivery:
       each_stock_article_must_be_unique: Each stock article must not be listed more than once.
@@ -1448,6 +1455,8 @@ en:
       redirect: Redirect to [[%{title}]]...
     user:
       no_ordergroup: no ordergroup
+    group_order_article:
+      order_closed: Order is closed and cannot be modified
   navigation:
     admin:
       config: Configuration

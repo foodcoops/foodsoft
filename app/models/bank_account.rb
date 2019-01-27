@@ -1,4 +1,4 @@
-class BankAccount < ActiveRecord::Base
+class BankAccount < ApplicationRecord
 
   has_many :bank_transactions, dependent: :destroy
 

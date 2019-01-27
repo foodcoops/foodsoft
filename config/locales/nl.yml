@@ -874,6 +874,8 @@ nl:
         reload: Samenvatting verversen
         with_extra_charge: 'inclusief marge:'
         without_extra_charge: 'zonder marge:'
+      edit_note:
+        title: Bewerk ordernotitie
     create:
       notice: Rekening is gemaakt.
     financial_links:
@@ -1397,6 +1399,8 @@ nl:
       redirect: Doorverwijzing naar [[%{title}]]...
     user:
       no_ordergroup: geen huishouden
+    group_order_article:
+      order_closed: Bestelling is gesloten en kan niet worden gewijzigd
   navigation:
     admin:
       config: Instellingen

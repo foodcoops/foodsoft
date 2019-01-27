@@ -46,6 +46,8 @@ de:
       financial_transaction:
         amount: Betrag
         created_on: Datum
+        financial_transaction_class: Finanztransaktionsklasse
+        financial_transaction_type: Finanztransaktionstyp
         note: Notiz
         ordergroup: Bestellgruppe
         user: Eingetragen von
@@ -902,6 +904,8 @@ de:
         reload: Zusammenfassung neu laden
         with_extra_charge: 'mit Aufschlag:'
         without_extra_charge: 'ohne Aufschlag:'
+      edit_note:
+        title: Notitie bewerken
     create:
       notice: Rechnung wurde erstellt.
     financial_links:
@@ -930,6 +934,7 @@ de:
         add_all_ordergroups: Alle Bestellgruppen hinzufügen
         new_ordergroup: Weitere Bestellgruppe hinzufügen
         save: Transaktionen speichern
+        set_balance: Setze den Kontostand der Bestellgrupppe auf den eingegebenen Betrag.
         sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualsieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
         title: Mehrere Konten aktualisieren
       ordergroup:
@@ -1406,6 +1411,8 @@ de:
         Antworten: %{reply_url}
         Nachricht online einsehen: %{msg_url}
         Nachrichten-Einstellungen: %{profile_url}
+      footer_group: |
+        Gesendet an Gruppe: %{group}
   model:
     delivery:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
@@ -1423,6 +1430,8 @@ de:
       redirect: Weiterleitung auf [[%{title}]]...
     user:
       no_ordergroup: keine Bestellgruppe
+    group_order_article:
+      order_closed: Bestellung ist geschlossen und kann nicht geändert werden
   navigation:
     admin:
       config: Einstellungen

@@ -1,4 +1,4 @@
-class StockChange < ActiveRecord::Base
+class StockChange < ApplicationRecord
   belongs_to :delivery
   belongs_to :order
   belongs_to :stock_taking
@@ -16,4 +16,3 @@ class StockChange < ActiveRecord::Base
     stock_article.update_quantity!
   end
 end
-

@@ -1,4 +1,4 @@
-class Delivery < ActiveRecord::Base
+class Delivery < ApplicationRecord
 
   belongs_to :supplier
   belongs_to :invoice
@@ -39,13 +39,11 @@ class Delivery < ActiveRecord::Base
   end
 
   protected
-  
+
   def stock_articles_must_be_unique
     unless stock_changes.reject{|sc| sc.marked_for_destruction?}.map {|sc| sc.stock_article.id}.uniq!.nil?
       errors.add(:base, I18n.t('model.delivery.each_stock_article_must_be_unique'))
     end
   end
-  
+
 end
-
-

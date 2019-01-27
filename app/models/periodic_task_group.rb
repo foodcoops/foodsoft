@@ -1,4 +1,4 @@
-class PeriodicTaskGroup < ActiveRecord::Base
+class PeriodicTaskGroup < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   def has_next_task?

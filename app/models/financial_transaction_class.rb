@@ -1,4 +1,4 @@
-class FinancialTransactionClass < ActiveRecord::Base
+class FinancialTransactionClass < ApplicationRecord
   has_many :financial_transaction_types, dependent: :destroy
 
   validates :name, presence: true
