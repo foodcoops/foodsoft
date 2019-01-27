@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201000000) do
+ActiveRecord::Schema.define(version: 20181111162921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20171201000000) do
     t.decimal  "deposit",        precision: 8, scale: 2, default: 0, null: false
     t.integer  "unit_quantity"
     t.datetime "created_at"
-    t.decimal  "supplier_price", precision: 8, scale: 2
+    t.decimal  "supplier_price",           precision: 8, scale: 2
   end
 
   add_index "article_prices", ["article_id"], name: "index_article_prices_on_article_id", using: :btree

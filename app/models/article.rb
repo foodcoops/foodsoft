@@ -43,6 +43,9 @@ class Article < ApplicationRecord
   # @!attribute article_prices
   #   @return [Array<ArticlePrice>] Price history (current price first).
   has_many :article_prices, -> { order("created_at DESC") }
+  # @!attribute supplier_price
+  #   @return [Number] Supplier's case price
+  #   @see ArticlePrice#supplier_price
 
   # Replace numeric seperator with database format
   localize_input_of :price, :tax, :deposit
