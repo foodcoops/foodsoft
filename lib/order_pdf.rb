@@ -73,7 +73,7 @@ class OrderPdf < RenderPDF
       group('groups.id').
       offset(offset).
       limit(limit).
-      pluck('groups.name', 'SUM(group_orders.price)', 'groups.id')
+      pluck('groups.name', 'SUM(group_orders.price)', 'ordergroup_id')
 
     result.map do |item|
       [item.first || stock_ordergroup_name] + item[1..-1]
@@ -129,10 +129,9 @@ class OrderPdf < RenderPDF
   end
 
   def stock_ordergroup_name
-    users = GroupOrder.
+    users = GroupOrder.stock.
       eager_load(:updated_by).
       where(order: @orders).
-      where(ordergroup: nil).
       map(&:updated_by).
       map{ |u| u.try(&:name) || '?' }
 

@@ -16,6 +16,7 @@ class GroupOrder < ApplicationRecord
 
   scope :in_open_orders, -> { joins(:order).merge(Order.open) }
   scope :in_finished_orders, -> { joins(:order).merge(Order.finished_not_closed) }
+  scope :stock, -> { where(ordergroup: 0) }
 
   scope :ordered, -> { includes(:ordergroup).order('groups.name') }
 
