@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201000000) do
+ActiveRecord::Schema.define(version: 20181201000000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -377,6 +377,25 @@ ActiveRecord::Schema.define(version: 20171201000000) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  create_table "printer_job_updates", force: :cascade do |t|
+    t.integer  "printer_job_id", null: false
+    t.datetime "created_at",     null: false
+    t.string   "state",          null: false
+    t.text     "message"
+  end
+
+  add_index "printer_job_updates", ["printer_job_id", "created_at"], name: "index_printer_job_updates_on_printer_job_id_and_created_at", using: :btree
+
+  create_table "printer_jobs", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "document",            null: false
+    t.integer  "created_by_user_id",  null: false
+    t.integer  "finished_by_user_id"
+    t.datetime "finished_at"
+  end
+
+  add_index "printer_jobs", ["finished_at"], name: "index_printer_jobs_on_finished_at", using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",        limit: 255,   null: false

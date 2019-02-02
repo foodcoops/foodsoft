@@ -649,6 +649,11 @@ de:
       pdf_font_size: Schriftgrösse
       pdf_page_size: Seitenformat
       price_markup: Foodcoop Marge
+      printer_print_order_articles: Artikel PDF drucken
+      printer_print_order_fax: Fax PDF drucken
+      printer_print_order_groups: Gruppen PDF drucken
+      printer_print_order_matrix: Matrix PDF drucken
+      printer_token: Geheimer Token
       stop_ordering_under: Apfelpunkte Minimum
       tasks_period_days: Zeitintervall
       tasks_upfront_days: Im Voraus
@@ -662,6 +667,7 @@ de:
       use_iban: IBAN verwenden
       use_messages: Nachrichten
       use_nick: Benutzernamen verwenden
+      use_printer: Drucker verwenden
       use_wiki: Wiki verwenden
       webstats_tracking_code: Code für Websiteanalysetool
     tabs:
@@ -1109,6 +1115,8 @@ de:
     submit:
       invite:
         create: Einladung verschicken
+      printer_job:
+        create: Druckauftrag erstellen
       message:
         create: Nachricht verschicken
     tasks:
@@ -1461,6 +1469,7 @@ de:
       manage: Bestellverwaltung
       ordering: Bestellen!
       pickups: Abholtage
+      printer_jobs: Druckaufträge
       title: Bestellungen
     tasks: Aufgaben
     wiki:
@@ -1565,6 +1574,7 @@ de:
       confirm_end: |-
         Willst Du wirklich die Bestellung %{order} beenden?
         Es gibt kein zurück.
+      confirm_create_printer_job: Für diese Bestellung wurde bereits ein Druckauftrag erstellt. Willst du einen neuen erstellen?
       confirm_send_to_supplier: Die Bestellung wurde bereit am %{when} zur Lieferantin geschickt. Willst du sie wirklich erneut schicken?
       create_invoice: Rechnung anlegen
       description1_order: "%{state} Bestellung von %{supplier} angelegt von %{who},"
@@ -1704,6 +1714,18 @@ de:
       nojs: Achtung, Cookies und Javascript müssen aktiviert sein! %{link} bitte abschalten.
       noscript: NoScript
       title: Foodsoft anmelden
+  printer_jobs:
+    create:
+      notice: "%{count} Druckaufträge wurden erstellt."
+    destroy:
+      notice: Druckauftrag wurde gelöscht.
+    index:
+      finished: Beendet
+      pending: Ausstehend
+      queued: Warten auf den Bestellschluss
+      title: Druckaufträge
+    show:
+      title: Druckauftrag %{id}
   shared:
     articles:
       ordered: Bestellt

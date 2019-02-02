@@ -1,0 +1,47 @@
+- title t('.title')
+
+- unless @pending_jobs.empty? && @queued_jobs.empty?
+  .well
+    %h2
+      - if @pending_jobs.any?
+        =t '.pending'
+      - else
+        =t '.queued'
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= heading_helper(PrinterJob, :id)
+          %th= heading_helper(PrinterJob, :order)
+          %th= heading_helper(PrinterJob, :pickup)
+          %th= heading_helper(PrinterJob, :document)
+          %th= heading_helper(PrinterJob, :last_update_at)
+          %th= heading_helper(PrinterJob, :last_update_state)
+          %th
+      %tbody
+        - @pending_jobs.each do |j|
+          %tr
+            %td= link_to j.id, j
+            %td= link_to j.order.supplier.name, j.order
+            %td= format_date j.order.pickup
+            %td= link_to j.document, document_printer_job_path(j)
+            %td= format_time j.last_update_at
+            %td= j.last_update_state
+            %td= link_to t('ui.delete'), j, method: :delete, data: {:confirm => t('ui.confirm_delete', name: j.id)},
+                  class: 'btn btn-mini btn-danger'
+        - if @pending_jobs.any?
+          %tr
+            %td{colspan: 7}
+              %h2= t '.queued'
+        - @queued_jobs.each do |j|
+          %tr
+            %td= link_to j.id, j
+            %td= link_to j.order.supplier.name, j.order
+            %td= format_date j.order.pickup
+            %td= link_to j.document, document_printer_job_path(j)
+            %td= format_time j.last_update_at
+            %td= j.last_update_state
+            %td= link_to t('ui.delete'), j, method: :delete, data: {:confirm => t('ui.confirm_delete', name: j.id)},
+                  class: 'btn btn-mini btn-danger'
+
+%h2= t '.finished'
+#jobsTable= render 'jobs'
