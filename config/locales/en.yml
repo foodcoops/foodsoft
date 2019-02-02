@@ -652,6 +652,11 @@ en:
       pdf_font_size: Font size
       pdf_page_size: Page size
       price_markup: Foodcoop margin
+      printer_print_order_articles: Print article PDF
+      printer_print_order_fax: Print fax PDF
+      printer_print_order_groups: Print group PDF
+      printer_print_order_matrix: Print matrix PDF
+      printer_token: Secret token
       stop_ordering_under: Minimum apple points
       tasks_period_days: Period
       tasks_upfront_days: Create upfront
@@ -665,6 +670,7 @@ en:
       use_iban: Use IBAN
       use_messages: Messages
       use_nick: Use nicknames
+      use_printer: Use printer
       use_wiki: Enable wiki
       webstats_tracking_code: Tracking code
     tabs:
@@ -1126,6 +1132,8 @@ en:
     submit:
       invite:
         create: send invitation
+      printer_job:
+        create: create printer job
       message:
         create: send message
     tasks:
@@ -1487,6 +1495,7 @@ en:
       manage: Manage orders
       ordering: Place order!
       pickups: Pickup days
+      printer_jobs: Printer jobs
       title: Orders
     tasks: Tasks
     wiki:
@@ -1591,6 +1600,7 @@ en:
       confirm_end: |-
         Do you really want to close the order %{order}?
         There is no going back.
+      confirm_create_printer_job: A printer job for this order has been created already. Do you want to create a new one?
       confirm_send_to_supplier: The order has been sent to the supplier already on %{when}. Do you really want to send it again?
       create_invoice: Add invoice
       description1_order: "%{state} order from %{supplier} opened by %{who},"
@@ -1730,6 +1740,18 @@ en:
       nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
       title: Foodsoft login
+  printer_jobs:
+    create:
+      notice: Created %{count} printer jobs.
+    destroy:
+      notice: Printer job has been deleted.
+    index:
+      finished: Finished
+      pending: Pending
+      queued: Waiting for order to close
+      title: Printer jobs
+    show:
+      title: Printer job %{id}
   shared:
     articles:
       ordered: Ordered
