@@ -26,7 +26,7 @@ module Concerns::CollectionScope
 
   def search_scope
     s = scope
-    s = scope.ransack(params[:q], auth_object: ransack_auth_object).result(distinct: true) if params[:q]
+    s = s.ransack(params[:q], auth_object: ransack_auth_object).result(distinct: true) if params[:q]
     s = s.page(params[:page].to_i).per(per_page) if per_page && per_page >= 0
     s
   end
