@@ -46,8 +46,12 @@ paths:
           description: not logged-in
           schema:
             $ref: '#/definitions/Error401'
+        403:
+          description: missing scope
+          schema:
+            $ref: '#/definitions/Error403'
       security:
-        - foodsoft_auth: ['all']
+        - foodsoft_auth: ['user:read', 'user:write']
   /config:
     get:
       summary: configuration variables
@@ -62,8 +66,12 @@ paths:
           description: not logged-in
           schema:
             $ref: '#/definitions/Error401'
+        403:
+          description: missing scope or no permission
+          schema:
+            $ref: '#/definitions/Error403'
       security:
-        - foodsoft_auth: ['all']
+        - foodsoft_auth: ['config:user', 'config:read', 'config:write']
   /navigation:
     get:
       summary: navigation
@@ -82,7 +90,7 @@ paths:
           schema:
             $ref: '#/definitions/Error401'
       security:
-        - foodsoft_auth: ['all']
+        - foodsoft_auth: []
 
 definitions:
   # models
@@ -142,6 +150,14 @@ definitions:
         description: '<tt>unauthorized</tt>'
       error_description:
         $ref: '#/definitions/Error/properties/error_description'
+  Error403:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>forbidden</tt> or <tt>invalid_scope</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
 
 securityDefinitions:
   foodsoft_auth:
@@ -149,5 +165,9 @@ securityDefinitions:
     flow: implicit
     authorizationUrl: http://localhost:3000/f/oauth/authorize
     scopes:
-      all: full access to user functions
+      config:user: reading Foodsoft configuration for regular users
+      config:read: reading Foodsoft configuration values
+      config:write: reading and updating Foodsoft configuration values
+      user:read: reading your own user profile
+      user:write: reading and updating your own user profile
       offline_access: retain access after user has logged out

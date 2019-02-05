@@ -9,6 +9,8 @@ The API is documented using [Open API 2.0](https://github.com/OAI/OpenAPI-Specif
 / [Swagger](https://swagger.io/) in [swagger.v1.yml](swagger.v1.yml).
 This provides a machine-readable reference that is used to provide documentation.
 
+**Note:** the current OAuth scopes may be subject to change, until the next release of Foodsoft.
+
 ## API endpoint documentation
 
 &gt;&gt; [View API documentation](http://petstore.swagger.io/?url=https%3A%2F%2Fraw.githubusercontent.com%2Ffoodcoops%2Ffoodsoft%2Fmaster%2Fdoc%2Fswagger.v1.yml) &lt;&lt;

@@ -15,6 +15,7 @@ describe 'API v1', type: :apivore, order: :defined do
 
   context 'has valid paths' do
     context 'user' do
+      let(:api_scopes) { ['user:read'] }
       # create multiple users to make sure we're getting the authenticated user, not just any
       let!(:other_user_1) { create :user }
       let!(:user)         { create :user }
@@ -23,20 +24,23 @@ describe 'API v1', type: :apivore, order: :defined do
       it { is_expected.to validate(:get, '/user', 200, api_auth) }
       it { is_expected.to validate(:get, '/user', 401) }
 
-      context 'with invalid access token' do
-        let(:api_access_token) { 'abc' }
-        it { is_expected.to validate(:get, '/user', 401, api_auth) }
-      end
+      it_handles_invalid_token_and_scope(:get, '/user')
     end
 
     context 'config' do
+      let(:api_scopes) { ['config:user'] }
+
       it { is_expected.to validate(:get, '/config', 200, api_auth) }
       it { is_expected.to validate(:get, '/config', 401) }
+
+      it_handles_invalid_token_and_scope(:get, '/config')
     end
 
     context 'navigation' do
       it { is_expected.to validate(:get, '/navigation', 200, api_auth) }
       it { is_expected.to validate(:get, '/navigation', 401) }
+
+      it_handles_invalid_token(:get, '/navigation')
     end
   end
 
