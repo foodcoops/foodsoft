@@ -1400,6 +1400,7 @@ de:
       title: Neue Nachricht
     show:
       all_messages: Nachrichten im Überblick
+      change_visibility: 'Ändern'
       from: 'Von:'
       group: Gruppe
       reply: Antworten
@@ -1408,9 +1409,14 @@ de:
       subject: 'Betreff:'
       title: Nachricht anzeigen
       to: 'An:'
+      visibility: 'Sichtbarkeit:'
+      visibility_private: 'Privat'
+      visibility_public: 'Öffentlich'
     thread:
       all_message_threads: Alle Nachrichtenverläufe
       reply: Antworten
+    toggle_private:
+      not_allowed: Du kannst die Sichtbarkeit dieser Nachricht nicht ändern.
   messages_mailer:
     foodsoft_message:
       footer: |

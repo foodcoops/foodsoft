@@ -1425,6 +1425,7 @@ en:
       title: New message
     show:
       all_messages: All messages
+      change_visibility: 'Change'
       from: 'From:'
       group: 'Group:'
       reply: Reply
@@ -1433,9 +1434,14 @@ en:
       subject: 'Subject:'
       title: Show message
       to: 'To:'
+      visibility: 'Visibility:'
+      visibility_private: 'Private'
+      visibility_public: 'Public'
     thread:
       all_message_threads: All message threads
       reply: Reply
+    toggle_private:
+      not_allowed: You can not change the visibility of the message.
   messages_mailer:
     foodsoft_message:
       footer: |

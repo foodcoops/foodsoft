@@ -23,6 +23,15 @@
     %tr
       %td= t '.sent_on'
       %td= format_time(@message.created_at)
+    %tr
+      %td= t '.visibility'
+      %td
+        - if @message.private
+          = t '.visibility_private'
+        - else
+          = t '.visibility_public'
+        - if @message.can_toggle_private?(current_user)
+          = link_to t('.change_visibility'), toggle_private_message_path(@message), method: :post, class: 'btn btn-mini'
   %hr/
   %p= simple_format(h(@message.body))
   %hr/

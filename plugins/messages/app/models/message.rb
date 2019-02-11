@@ -124,6 +124,12 @@ class Message < ApplicationRecord
     !private || sender == user || recipients_ids.include?(user.id)
   end
 
+  def can_toggle_private?(user)
+    return true if sender == user
+    return false if private?
+    user.role_admin?
+  end
+
   private
 
   def create_salt
