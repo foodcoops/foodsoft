@@ -15,6 +15,11 @@ info:
     version is recent enough).
     This API description points to the default development url with the default
     Foodsoft scope - that would be [http://localhost:3000/f](http://localhost:3000/f).
+
+    You may find the search parameters for index endpoints lacking. They are not
+    documented here, because there are too many combinations. For now, you'll need
+    to resort to [Ransack](https://github.com/activerecord-hackery/ransack) and
+    looking at Foodsoft's `ransackable_*` model class methods.
 externalDocs:
   description: General Foodsoft API documentation
   url: https://github.com/foodcoops/foodsoft/blob/master/doc/API.md
@@ -52,6 +57,129 @@ paths:
             $ref: '#/definitions/Error403'
       security:
         - foodsoft_auth: ['user:read', 'user:write']
+
+  /user/financial_transactions:
+    get:
+      summary: financial transactions of the member's ordergroup
+      tags:
+        - 1. User
+        - 6. FinancialTransaction
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transactions:
+                type: array
+                items:
+                  $ref: '#/definitions/FinancialTransaction'
+              meta:
+                $ref: '#/definitions/Meta'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: user has no ordergroup or missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['finance:user']
+  /user/financial_transactions/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find financial transaction by id
+      tags:
+        - 1. User
+        - 6. FinancialTransaction
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction:
+                $ref: '#/definitions/FinancialTransaction'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: user has no ordergroup or missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['finance:user']
+
+  /financial_transactions:
+    get:
+      summary: financial transactions
+      tags:
+        - 6. FinancialTransaction
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transactions:
+                type: array
+                items:
+                  $ref: '#/definitions/FinancialTransaction'
+              meta:
+                $ref: '#/definitions/Meta'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: missing scope or no permission
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['finance:read', 'finance:write']
+  /financial_transactions/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find financial transaction by id
+      tags:
+        - 6. FinancialTransaction
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction:
+                $ref: '#/definitions/FinancialTransaction'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: missing scope or no permission
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['finance:read', 'finance:write']
+
   /config:
     get:
       summary: configuration variables
@@ -92,6 +220,31 @@ paths:
       security:
         - foodsoft_auth: []
 
+parameters:
+  # url parameters
+  idInUrl:
+    name: id
+    type: integer
+    in: path
+    minimum: 1
+    required: true
+
+  # query parameters
+  page:
+    name: page
+    type: integer
+    in: query
+    description: page number
+    minimum: 0
+    default: 0
+  per_page:
+    name: per_page
+    type: integer
+    in: query
+    description: items per page
+    minimum: 0
+    default: 20
+
 definitions:
   # models
   User:
@@ -109,6 +262,30 @@ definitions:
         type: string
         description: language code
     required: ['id', 'name', 'email']
+
+  FinancialTransaction:
+    type: object
+    properties:
+      id:
+        type: integer
+      user_id:
+        type: ['integer', 'null']
+        description: id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)
+      user_name:
+        type: ['string', 'null']
+        description: name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)
+      amount:
+        type: number
+        description: amount credited (negative for a debit transaction)
+      note:
+        type: string
+        description: note entered with the transaction
+      created_at:
+        type: string
+        format: date-time
+        description: when the transaction was entered
+    required: ['id', 'user_id', 'user_name', 'amount', 'note', 'created_at']
+
   Navigation:
     type: array
     items:
@@ -124,6 +301,24 @@ definitions:
           $ref: '#/definitions/Navigation'
       required: ['name']
       minProperties: 2 # name+url or name+items
+
+  # collection meta object in root of a response
+  Meta:
+    type: object
+    properties:
+      page:
+        type: integer
+        description: page number of the returned collection
+      per_page:
+        type: integer
+        description: number of items per page
+      total_pages:
+        type: integer
+        description: total number of pages
+      total_count:
+        type: integer
+        description: total number of items in the collection
+    required: ['page', 'per_page', 'total_pages', 'total_count']
 
   Error:
     type: object
@@ -168,6 +363,9 @@ securityDefinitions:
       config:user: reading Foodsoft configuration for regular users
       config:read: reading Foodsoft configuration values
       config:write: reading and updating Foodsoft configuration values
+      finance:user: accessing your own financial transactions
+      finance:read: reading all financial transactions
+      finance:write: reading and creating financial transactions
       user:read: reading your own user profile
       user:write: reading and updating your own user profile
       offline_access: retain access after user has logged out

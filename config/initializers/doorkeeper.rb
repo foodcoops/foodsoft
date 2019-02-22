@@ -49,9 +49,10 @@ Doorkeeper.configure do
   # https://github.com/doorkeeper-gem/doorkeeper/wiki/Using-Scopes
 
   # default is a collection of read-only scopes
-  default_scopes 'config:user', 'user:read'
+  default_scopes 'config:user', 'finance:user', 'user:read'
 
   optional_scopes 'config:read', 'config:write',
+                  'finance:read', 'finance:write',
                   'user:write',
                   'offline_access'
 
