@@ -22,9 +22,16 @@ and Windows!
 Then setup foodsoft development (this will take some time, containers needs
 to be pulled from docker registry and a lot dependencies needs to be installed)
 
-    docker-compose -f docker-compose-dev.yml run foodsoft rake foodsoft:setup_development
+    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
+      bundle exec rake foodsoft:setup_development
 
 Do not enable mailcatcher, because this is already included as a docker image.
+
+Then create an initial database (here seeded with `small.en`) by running
+
+    docker-compose -f docker-compose-dev.yml up -d mariadb && sleep 15
+    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
+      bundle exec rake db:create db:schema:load db:seed:small.en
 
 To avoid having to pass the `-f` argument all the time, it is recommended to setup
 an alias, e.g. by adding the following line to your ~/.bashrc
@@ -42,15 +49,15 @@ Start containers (in foreground, stop them with `Ctrl-C`)
 
 Run a rails/rake command
 
-    docker-compose-dev run --rm foodsoft rake db:migrate
+    docker-compose-dev run --rm foodsoft bundle exec rake db:migrate
 
 Open a rails console
 
-    docker-compose-dev run --rm foodsoft rails c
+    docker-compose-dev run --rm foodsoft bundle exec rails c
 
 Setup the test database
 
-    docker-compose-dev run --rm foodsoft rake db:setup RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test
+    docker-compose-dev run --rm foodsoft bundle exec rake db:setup RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test
 
 Run the tests
 
@@ -71,7 +78,7 @@ Go to [http://localhost:1080](http://localhost:1080)
 
 As the gem bundle is stored in a volume, you can run
 
-    docker-compose-dev run foodsoft bundle install
+    docker-compose-dev run --rm foodsoft bundle install
     docker-compose-dev restart foodsoft foodsoft_worker
 
 Do this each time you update your `Gemfile`.
