@@ -15,6 +15,8 @@ class Ordergroup < Group
   has_many :group_orders
   has_many :orders, :through => :group_orders
 
+  default_scope { order('name') }
+
   validates_numericality_of :account_balance, :message => I18n.t('ordergroups.model.invalid_balance')
   validate :uniqueness_of_name, :uniqueness_of_members
 

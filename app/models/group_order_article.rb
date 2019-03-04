@@ -12,6 +12,8 @@ class GroupOrderArticle < ApplicationRecord
   validate :check_order_not_closed # don't allow changes to closed (aka settled) orders
 
   scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
+  default_scope { joins(:order_article => :article).order('articles.name') }
+
 
   localize_input_of :result
 
