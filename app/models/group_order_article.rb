@@ -11,6 +11,8 @@ class GroupOrderArticle < ApplicationRecord
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
 
   scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
+  default_scope { joins(:order_article => :article).order('articles.name') }
+
 
   localize_input_of :result
 

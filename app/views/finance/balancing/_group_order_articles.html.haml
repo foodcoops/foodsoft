@@ -1,3 +1,4 @@
+
 %td{:colspan => "7"}
   %table.table.table-striped
     %thead
@@ -13,7 +14,8 @@
             remote: true, class: 'btn btn-mini'
     %tbody
       - totals = {result: 0}
-      - for group_order_article in order_article.group_order_articles.select { |goa| goa.result > 0 }
+      - group_order_articles = order_article.group_order_articles.select { |goa| goa.result > 0 }
+      - for group_order_article in group_order_articles.sort_by { | goa | goa.group_order.ordergroup_name  }
         %tr[group_order_article]
           %td
           %td{:style=>"width:50%"}
