@@ -13,6 +13,8 @@ class GroupOrderArticle < ApplicationRecord
 
   # ordered here means the order was placed, not to be confused with sorted!
   scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
+  default_scope { joins(:order_article => :article).order('articles.name') }
+
 
   # use this whenever showing the results to a user
   scope :sorted, -> { joins(:order_article => :article).order('articles.name') }
