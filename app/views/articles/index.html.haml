@@ -9,26 +9,34 @@
       - Supplier.undeleted.where.not(id: @supplier.id).order('suppliers.name ASC').each do |supplier|
         %li= link_to supplier.name, supplier_articles_path(supplier), tabindex: -1
 
-.well.well-small
-  .btn-toolbar
-    = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search pull-right',
-      'data-submit-onchange' => true do
-      = text_field_tag :query, params[:query], class: 'input-medium search-query',
-        placeholder: t('.search_placeholder')
+- if current_user.role_article_meta?
+  .well.well-small
+    .btn-toolbar
+      = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search pull-right',
+        'data-submit-onchange' => true do
+        = text_field_tag :query, params[:query], class: 'input-medium search-query',
+          placeholder: t('.search_placeholder')
 
-    - if @supplier.shared_supplier
+      - if @supplier.shared_supplier
+        .btn-group
+          - if @supplier.shared_sync_method == 'import'
+            = link_to t('.ext_db.import'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-primary'
+          = link_to t('.ext_db.sync'), sync_supplier_articles_path(@supplier), method: :post, class: 'btn btn-success'
+
       .btn-group
-        - if @supplier.shared_sync_method == 'import'
-          = link_to t('.ext_db.import'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-primary'
-        = link_to t('.ext_db.sync'), sync_supplier_articles_path(@supplier), method: :post, class: 'btn btn-success'
+        = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{'btn-primary' unless @supplier.shared_supplier}"
+        = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn'
+        = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn'
+        - if current_user.role_orders?
+          = link_to t('.new_order'), new_order_path(supplier_id: @supplier), class: 'btn'
 
-    .btn-group
-      = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{'btn-primary' unless @supplier.shared_supplier}"
-      = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn'
-      = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn'
-      - if current_user.role_orders?
-        = link_to t('.new_order'), new_order_path(supplier_id: @supplier), class: 'btn'
 
+.row-fluid
+  .span12
+    = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search',
+      'data-submit-onchange' => true do
+      = text_field_tag :query, params[:query], class: 'input-medium search-query icon-search',
+        placeholder: t('.search_placeholder')
 - unless @supplier.shared_supplier.nil?
   #import.well.well-small(style="display:none;")
     = form_tag shared_supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search',
