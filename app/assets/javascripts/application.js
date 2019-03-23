@@ -180,3 +180,40 @@ function highlightRow(checkbox) {
 function setHiddenId(text, li) {
   $('hidden_id').value = li.id;
 }
+
+
+function debounce(wait, func) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        if (wait) {
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+                timeout = null;
+                func.apply(context, args);
+            }, wait);
+        }else{
+            func.apply(context, args);
+        }
+    };
+}
+
+var updateReceived = debounce(1000,
+    function (id, multiplier){
+        var amount = $('#a_'+id);
+        var received = $('#r_'+id);
+        received.val(amount.val() / multiplier);
+        received.submit();
+    }
+);
+
+
+function changed(changed){
+    if (changed===true){
+        this._changed=true;
+    } else
+    if (changed===false){
+        this._changed=false;
+    }
+    return this._changed || false;
+}

@@ -18,163 +18,291 @@
         page: 10000,
         indexAsync: true
       });
+      $('input').keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+      });
     });
 
 - title t('.title'), false
 
 .row-fluid
-  .well.pull-left
-    = close_button :alert
-    %h2= @order.name
-    %dl.dl-horizontal
-      - unless @order.note.blank?
-        %dt= heading_helper Order, :note
-        %dd= @order.note
-      %dt= heading_helper Order, :created_by
-      %dd= show_user_link(@order.created_by)
-      %dt= heading_helper Order, :ends
-      %dd= format_time(@order.ends)
-      %dt= heading_helper Order, :pickup
-      %dd= format_date(@order.pickup)
-      - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
-        %dt= heading_helper Supplier, :min_order_quantity, short: true
-        %dd= @order.supplier.min_order_quantity
-      %dt= t '.sum_amount'
-      %dd= number_to_currency @order.sum
-      - unless @group_order.new_record?
-        %dt= heading_helper GroupOrder, :updated_by
-        %dd
-          = show_user(@group_order.updated_by)
-          (#{format_time(@group_order.updated_on)})
-      %dt= heading_helper Ordergroup, :account_balance
-      %dd= number_to_currency(@ordering_data[:account_balance])
-      - unless FoodsoftConfig[:charge_members_manually]
-        %dt= heading_helper Ordergroup, :available_funds
-        %dd= number_to_currency(@ordering_data[:available_funds])
-
-  .well.pull-right
-    = close_button :alert
-    = render 'switch_order', current_order: @order
+  .alert.alert-danger.center
+    Make sure you push the <strong>#{t('.action_save')}</strong> button or your order won't be placed!
 
 .row-fluid
-  .well.clear
-    .form-search
-      .input-append
-        = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable'
-        %button.add-on.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
-          %i.icon.icon-remove
+  .span12
+    %h2= @order.name
+    %p
+      Order created by #{show_user_link(@order.created_by)}.
+      Please order before #{format_datetime_timespec(@order.ends,'%k:%M %P on %A, %d %B')}.
+      -#- unless @order.stockit? or @order.supplier.min_order_quantity.blank?
+      -#  = heading_helper Supplier, :min_order_quantity, short: true
+      -#  = @order.supplier.min_order_quantity
+      -#= t '.sum_amount'
+      -#= number_to_currency @order.sum
+
+    %p= "Note: #{@order.note}" if @order.note
+
+.row-fluid
+  .accordion{id: 'accordion_help'}
+    .accordion-group
+      .accordion-heading
+        %a.accordion-toggle{:data => { toggle: 'collapse', parent: '#accordion_help'}, href: '#accordion_help_collapse'} Help (click to show/hide)
+      .accordion-body.collapse{id: 'accordion_help_collapse'}
+        .accordion-inner
+          %p
+            <strong>Amount</strong> The colour of the numbers indicates if you will get what you ordered.  For example if you wanted 6 pineapples you might see
+            %span.used 4
+            +
+            %span.unused 2.
+            This indicates that you will get
+            %span.used 4,
+            but the coop doesn't yet have enough for you to get an additional
+            %span.unused 2
+            Perhaps someone else will order more and fill the case, and then you will get all 6.
+          %p
+            <strong>Tolerance</strong> indicates how much extra you are willing to take.  It also shows numbers with the red/green colouring scheme.
+            With tolerance, green means your tolerance will be used (but could be re-allocated to someone else later), and the red value is extra
+            (but may be needed later if we need to fill a new case).  If you are worried about cost or spoilage, you can set it to zero.
+            Please remember that flexibility and sharing help to make the co-op work for everyone.
+
+          %p
+            The website will automatically add tolerance up to $5 when you enter an amount to your order.  If you don't want that, you can decrease
+            it back to zero.  This might seem unfair to force you to take an additional step, but please consider that tolerance is what allows us
+            to fill cases.  If we stick to exact amounts, it is very hard to fill a case and people will get less of what they want.
+          %p
+            .label.label-warning 4 to fill
+            means that we don't have enough yet to fill a case.  Adding 4 to the Amount or adding 4 to Tolerance will ensure the case is filled.
+            If you still see this message at the end of the order, it means you won't get as much as you wanted.
+          %p
+            .label.label-success 2 extra
+            means that 2 units of someone's tolerance is used to fill a case.  If you order 2 of this item, the other member's tolerance
+            won't be used.  Or in other words, they'll get exactly what they wanted instead of 2 extra.  Using up extras is a good thing!
+          %p
+            <strong>Total</strong> On the right you see the total cost of the amount you are ordering.
+            If you add any tolerance, it will show the cost of that below (eg, +$2.50).
+            The tolerance cost is the worst-case extra you may pay if we need to fill a case.  It will only be used as a last resort to fill a case, but
+            if you want to be certain to receive something, add lots of tolerance.  However, you may end up with the whole case to yourself!
+
+-#.row-fluid
+-#  .well.pull-left
+-#    = close_button :alert
+-#    %h2= @order.name
+-#    %dl.dl-horizontal
+-#      - unless @order.note.blank?
+-#        %dt= heading_helper Order, :note
+-#        %dd= @order.note
+-#      %dt= heading_helper Order, :created_by
+-#      %dd= show_user_link(@order.created_by)
+-#      %dt= heading_helper Order, :ends
+-#      %dd= format_time(@order.ends)
+-#      %dt= heading_helper Order, :pickup
+-#      %dd= format_date(@order.pickup)
+-#      - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
+-#        %dt= heading_helper Supplier, :min_order_quantity, short: true
+-#        %dd= @order.supplier.min_order_quantity
+-#      %dt= t '.sum_amount'
+-#      %dd= number_to_currency @order.sum
+-#      - unless @group_order.new_record?
+-#        %dt= heading_helper GroupOrder, :updated_by
+-#        %dd
+-#          = show_user(@group_order.updated_by)
+-#          (#{format_time(@group_order.updated_on)})
+-#      %dt= heading_helper Ordergroup, :account_balance
+-#      %dd= number_to_currency(@ordering_data[:account_balance])
+-#      - unless FoodsoftConfig[:charge_members_manually]
+-#        %dt= heading_helper Ordergroup, :available_funds
+-#        %dd= number_to_currency(@ordering_data[:available_funds])
+-#
+-#  .well.pull-right
+-#    = close_button :alert
+-#    = render 'switch_order', current_order: @order
+
+-#.row-fluid
+-#  .well.clear
+-#    .form-search
+-#      .input-append
+-#        = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable'
+-#        %button.add-on.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
+-#          %i.icon.icon-remove
 
 = form_for @group_order do |f|
   = f.hidden_field :lock_version
   = f.hidden_field :order_id
   = f.hidden_field :updated_by_user_id
   = f.hidden_field :ordergroup_id
+
+  .pull-right
+    = button_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary', type: 'submit', onclick: 'doSubmit();')
+
+
   %table.table.table-hover
     %thead
       %tr
-        %th= heading_helper Article, :name
+        %th{style: 'width: auto;'}
+          .input-append
+            = text_field_tag :article, params[:article], placeholder: 'Name', class: 'delayed-search resettable search-query'
         - if @order.stockit?
-          %th{style: 'width:120px'}= heading_helper StockArticle, :supplier
-        %th{style: "width:13px;"}
-        %th{style: "width:4.5em;"}= t '.price'
-        %th{style: "width:4.5em;"}= heading_helper Article, :unit
+          %th{style: 'width: auto;'}= heading_helper StockArticle, :supplier
+        %th.hidden-phone.center{style: "width:13px;"} Origin
+        %th.hidden-phone.center{style: "width:auto;"}= t '.price'
         - unless @order.stockit?
-          %th{style: "width:70px;"}= heading_helper OrderArticle, :missing_units, short: true
-          %th#col_required= heading_helper GroupOrderArticle, :quantity
-          %th#col_tolerance= heading_helper GroupOrderArticle, :tolerance
+          %th#col_required.center= heading_helper GroupOrderArticle, :quantity
+          %th#col_tolerance.center= heading_helper GroupOrderArticle, :tolerance
         - else
-          %th(style="width:20px")= heading_helper StockArticle, :available
-          %th#col_required= heading_helper GroupOrderArticle, :quantity
-        %th{style: "width:15px;"}= heading_helper GroupOrderArticle, :total_price
+          %th.hidden-phone.center(style="width:20px")= heading_helper StockArticle, :available
+          %th.center#col_required= heading_helper GroupOrderArticle, :quantity
+        %th.right{style: "width:15px;"}= heading_helper GroupOrderArticle, :total_price
     %tbody.list
       - @order.articles_grouped_by_category.each do |category, order_articles|
         %tr.list-heading.article-category
           %td
             = category
             %i.icon-tag
-          %td{colspan: "9"}
+          %td{colspan: "7"}
         - order_articles.each do |order_article|
-          %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article #{get_missing_units_css_class(@ordering_data[:order_articles][order_article.id][:missing_units])}", valign: "top"}
-            %td.name= order_article.article.name
+          - order_article_data = @ordering_data[:order_articles][order_article.id]
+          - total_price = order_article_data[:total_price]
+          - tolerance_price = order_article_data[:tolerance] * order_article_data[:price]
+          - tolerance_shown = order_article_data[:unit] > 1
+          %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article #{get_missing_units_css_class(order_article_data[:missing_units])}", valign: "top"}
+            %td.name
+              %span= order_article.article.name
+              %br/
+              %small= order_article.article.manufacturer
+              - unless order_article.article.note.blank?
+                %blockquote.small
+                  %span #{heading_helper Article, :note}: #{order_article.article.note}
+              .visible-phone #{number_to_currency(order_article_data[:price])} per #{order_article.article.unit}
+              %div
+                %span.label{:class => [ (order_article.units_to_order>0 &&  order_article_data[:extra_available]==0 ? 'label-success' : 'label-warning'),  "units_#{order_article.id}"] }
+                  = 'Filled '
+                  %strong{id: "units_#{order_article.id}"}= order_article.units_to_order
+                  = " x #{@order.stockit? ? order_article.article.quantity_available : order_article_data[:unit]} x #{order_article.article.unit}"
+                %span.label.label-success{:style => ('display: none' unless order_article_data[:extra_available]>0)}
+                  %strong{class: "extra_units_#{order_article.id}" }= order_article_data[:extra_available]
+                  = ' extra'
+                %span.label.label-warning{ :style => ('display: none' unless order_article_data[:missing_units]>0)}
+                  %strong{class: "missing_units_#{order_article.id}"}= order_article_data[:missing_units]
+                  = ' to fill'
+
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15
-            %td= h order_article.article.origin
-            %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
-            %td= order_article.article.unit
-            %td
-              - if @order.stockit?
-                = @ordering_data[:order_articles][order_article.id][:quantity_available]
-              - else
-                %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
-
+            %td.hidden-phone= h order_article.article.origin
+            %td.hidden-phone.right #{number_to_currency(order_article_data[:price])} per #{order_article.article.unit}
+            - if @order.stockit?
+              %td.hidden-phone
+                = order_article_data[:quantity_available]
             %td.quantity
-              %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:quantity], 'data-min' => (@ordering_data[:order_articles][order_article.id][:quantity] if @order.boxfill?), 'data-max' => (@ordering_data[:order_articles][order_article.id][:quantity]+@ordering_data[:order_articles][order_article.id][:missing_units] if @order.boxfill?)}/
-              %span.used{id: "q_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_quantity]
-              +
-              %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
-              .btn-group
-                %a.btn.btn-ordering{'data-increase_quantity' => order_article.id}
-                  %i.icon-plus
-                %a.btn.btn-ordering{'data-decrease_quantity' => order_article.id}
-                  %i.icon-minus
-
-            %td.tolerance{style: ('display:none' if @order.stockit?)}
-              %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance], 'data-min' => (@ordering_data[:order_articles][order_article.id][:tolerance] if @order.boxfill?)}/
-              - if (@ordering_data[:order_articles][order_article.id][:unit] > 1)
-                %span.used{id: "t_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_tolerance]
+              %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", type: "hidden", value: order_article_data[:quantity], 'data-min' => (order_article_data[:quantity] if @order.boxfill?), 'data-max' => (order_article_data[:quantity]+order_article_data[:missing_units] if @order.boxfill?)}/
+              .span12.text-center
+                %span.used{id: "q_used_#{order_article.id}"}= order_article_data[:used_quantity]
                 +
-                %span.unused{id: "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
-                .btn-group
-                  %a.btn.btn-ordering{'data-increase_tolerance' => order_article.id}
-                    %i.icon-plus
-                  %a.btn.btn-ordering{'data-decrease_tolerance' => order_article.id}
+                %span.unused{id: "q_unused_#{order_article.id}"}= order_article_data[:quantity] - order_article_data[:used_quantity]
+                %span amount
+              .visible-phone.span12.text-center
+                %a.btn.btn-small{'data-decrease_quantity' => order_article.id}
+                  %i.icon-minus
+                %a.btn.btn-small{'data-increase_quantity' => order_article.id}
+                  %i.icon-plus
+              - min_quantity =  @order.boxfill? ? order_article_data[:quantity] : 0
+              - max_quantity =  @order.boxfill? ? order_article_data[:quantity]+order_article_data[:missing_units] : ''
+              .span12.text-center.hidden-phone
+                %input{id: "dq_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]",
+                  onkeyup: "update(#{order_article.id},this.value); event.preventDefault(); return false;",
+                  onchange: "update(#{order_article.id},this.value); event.preventDefault(); return false;",
+                  class: 'input-mini', type: "number",
+                  min: min_quantity, 'max' => (max_quantity if @order.boxfill?),
+                  required: true,
+                  value: order_article_data[:quantity],
+                  'data-min' => (min_quantity if @order.boxfill?),
+                  'data-max' => (max_quantity if @order.boxfill?)}
+              %span.label.hidden
+                = 'Everyone' + ':'
+                %span{id: "q_total_#{order_article.id}"}= order_article_data[:quantity] + order_article_data[:others_quantity]
+
+            %td.tolerance.center{style: ('display:none' if @order.stockit?)}
+              - min_tolerance = @order.boxfill? ? order_article_data[:tolerance] : 0
+              %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", type: "hidden", value: order_article_data[:tolerance], 'data-min' => (order_article_data[:tolerance] if @order.boxfill?)}
+              - if (tolerance_shown)
+                .span12.text-center
+                  %span.used{id: "t_used_#{order_article.id}"}= order_article_data[:used_tolerance]
+                  +
+                  %span.unused{id: "t_unused_#{order_article.id}"}= order_article_data[:tolerance] - order_article_data[:used_tolerance]
+                  %span extra
+                .span12.text-center.visible-phone
+                  %a.btn.btn-small{'data-decrease_tolerance' => order_article.id}
                     %i.icon-minus
+                  %a.btn.btn-small{'data-increase_tolerance' => order_article.id}
+                    %i.icon-plus
+                .span12.text-center.hidden-phone
+                  %input.hidden-phone{id: "dt_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]",
+                      onkeyup: "update(#{order_article.id},undefined,this.value); event.preventDefault();",
+                      onchange: "update(#{order_article.id},undefined,this.value); event.preventDefault();",
+                      step: 1, class: 'input-mini', type: "#{tolerance_shown ? 'number' : 'hidden'}",
+                      value: order_article_data[:tolerance],
+                      min: min_tolerance, required: true,
+                      'data-min' => (min_tolerance if @order.boxfill?)}
+
+              %span.label.hidden
+                = 'Everyone' + ':'
+                %span{id: "t_total_#{order_article.id}"}= order_article_data[:tolerance] + order_article_data[:others_tolerance]
 
             %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
-              %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
-              .article-info
-                .article-name= order_article.article.name
-                .pull-right
-                  = t('.units_full') + ':'
-                  %span{id: "units_#{order_article.id}"}= order_article.units_to_order
-                  %br/
-                  = t('.units_total') + ':'
-                  %span{id: "q_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] + @ordering_data[:order_articles][order_article.id][:others_quantity]
-                  %br/
-                  = t('.total_tolerance') + ':'
-                  %span{id: "t_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
-                  %br/
-                .pull-left
-                  #{heading_helper Article, :manufacturer}: #{order_article.article.manufacturer}
-                  %br/
-                  #{heading_helper Article, :units}: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
-                  %br/
-                  #{heading_helper Article, :note}: #{order_article.article.note}
-                  %br/
-  #order-footer
-    #info-box
+              - prices_equal = total_price == (total_price+tolerance_price)
+              %span{id: "price_#{order_article.id}_display"}= number_to_currency(total_price)
+              %span{id: "tolerance_price_#{order_article.id}_display", 'style' => ('display: none' if prices_equal)}="+#{number_to_currency(tolerance_price) if (tolerance_shown)}"
+
+
+
+
+
+  #order-footer-fixed
+    #info-box-fixed
     #total-sum
-      %table
+      %table.pull-right
         %tr
           %td= t('.total_sum_amount') + ':'
           %td.currency
-            %span#total_price= number_to_currency(@group_order.price)
+            %span.total_price= number_to_currency(@group_order.price)
         %tr
-          - if FoodsoftConfig[:charge_members_manually]
-            - old_balance = @ordering_data[:account_balance]
-            %td= heading_helper(Ordergroup, :account_balance) + ':'
-            %td.currency= number_to_currency(@ordering_data[:account_balance])
-          - else
-            - old_balance = @ordering_data[:available_funds]
-            %td= heading_helper(Ordergroup, :available_funds) + ':'
-            %td.currency= number_to_currency(@ordering_data[:available_funds])
+          %td= 'Total maximum*' + ':'
+          %td.currency
+            %span.total_max= number_to_currency(@group_order.price+@ordering_data[:total_tolerance_cost])
+        %tr
+          %td.small{colspan:"2"} * if all tolerance was used (unlikely)
+        %tr
+          %td= heading_helper(Ordergroup, :available_funds) + ':'
+          %td.currency= number_to_currency(@ordering_data[:available_funds])
         %tr
           %td= t('.new_funds') + ':'
           %td.currency
             %strong
-              %span#new_balance= number_to_currency(old_balance - @group_order.price)
-      #order-button
-        = submit_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary' )
-        #{link_to t('ui.or_cancel'), group_orders_path}
-  %input#total_balance{name: "total_balance", type: "hidden", value: @ordergroup.account_balance - @group_order.price}/
+              %span.new_balance= number_to_currency(@ordering_data[:available_funds] - @group_order.price)
+
+
+  .navbar.navbar-fixed-bottom
+    .navbar-inner
+      .container{style: 'padding-left: 20px; padding-right: 20px; '}
+        .center
+          %span.label.credit_label{:class => ( (@ordering_data[:available_funds] - @group_order.price)>0 ? 'label-success' : 'label-important')}
+            %span= 'Credit'
+            %span.new_balance= number_to_currency(@ordering_data[:available_funds] - @group_order.price)
+          %br/
+          %span.label.label-info
+            Total:
+            %span.total_price= number_to_currency(@group_order.price)
+            = '(at most '
+            %span.total_max= number_to_currency(@group_order.price+@ordering_data[:total_tolerance_cost])
+            = ')'
+          %span.pull-left
+            #{link_to 'Back', group_orders_path, class: 'btn'}
+          %span.pull-right
+            = button_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary', type: 'submit', onclick: 'doSubmit();')
+
+
+  %input.total_balance{name: "total_balance", type: "hidden", value: @ordergroup.account_balance - @group_order.price}/
   %input{name: "version", type: "hidden", value: @version}/
