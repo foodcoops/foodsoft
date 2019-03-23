@@ -5,6 +5,13 @@ en:
   date:
     formats:
       short: "%a, %d %b"
+  number:
+    percentage:
+      format:
+        strip_insignificant_zeros: true
+    currency:
+      format:
+        unit: $
   activerecord:
     attributes:
       article:
@@ -1504,10 +1511,6 @@ en:
       home: Home
       title: Wiki
     workgroups: Workgroups
-  number:
-    percentage:
-      format:
-        strip_insignificant_zeros: true
   order_articles:
     edit:
       stock_alert: The price of stock articles cannot be changed!
