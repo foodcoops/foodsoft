@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def format_date(time = Time.now)
-    I18n.l(time.to_date) unless time.nil?
+    I18n.l(time.to_date, format: :short) unless time.nil?
   end
 
   def format_datetime(time = Time.now)

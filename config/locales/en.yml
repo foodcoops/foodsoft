@@ -1,4 +1,10 @@
 en:
+  time:
+    formats:
+      short: "%a %l:%M %P %d %b"
+  date:
+    formats:
+      short: "%a, %d %b"
   activerecord:
     attributes:
       article:
@@ -1150,7 +1156,7 @@ en:
           threads: threads
       my_ordergroup:
         last_update: Last update was %{when} ago
-        title: My ordergroup
+        title: Account
         transactions:
           title: Last Transactions
           view: Show account statement
