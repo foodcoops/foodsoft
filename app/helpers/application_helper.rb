@@ -4,7 +4,7 @@
 module ApplicationHelper
 
   def format_time(time = Time.now)
-    I18n.l(time, :format => "%d.%m.%Y %H:%M") unless time.nil?
+    I18n.l(time, format: :short) unless time.nil?
   end
 
   def format_date(time = Time.now)
