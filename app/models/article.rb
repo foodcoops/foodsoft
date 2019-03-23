@@ -59,7 +59,7 @@ class Article < ApplicationRecord
   # Validations
   validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category
   validates_length_of :name, :in => 4..60
-  validates_length_of :unit, :in => 2..15
+  validates_length_of :unit, :in => 1..15
   validates_numericality_of :price, :greater_than_or_equal_to => 0
   validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
