@@ -102,11 +102,10 @@ default: &defaults
   #  order_by_groups: true
   #  order_by_articles: true
 
-
   # Page footer (html allowed). Default is a Foodsoft footer. Set to `blank` for no footer.
   #page_footer: <a href="http://www.foodcoop.test/">FC Test</a> is supported by <a href="http://www.hoster.test/">Hoster</a>.
 
-  # Custom CSS for the foodcoop
+  # Custom CSS to add
   #custom_css: 'body { background-color: #fcffba; }'
 
   # Custom fields for invoice, odergroup, supplier and user.
@@ -159,11 +158,13 @@ default: &defaults
   #  password:
   #  encoding: utf8
   #  socket: /opt/lampp/var/mysql/mysql.sock
+  #
   # Instead of defining all details here, you can also point to an entry in database.yml.
   #shared_lists: shared_lists
 
-  # default to allow sync only on less than 200 articles
-  #shared_supplier_article_sync_limit: 200,
+  # default to allow automatically adding new articles on sync only when less than 200 articles in total
+  #shared_supplier_article_sync_limit: 200
+
 development:
   <<: *defaults
 
