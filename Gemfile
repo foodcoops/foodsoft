@@ -111,7 +111,7 @@ group :test do
   gem 'coveralls', require: false
 end
 
-gem "dotenv-rails", "~> 2.6"
+gem "dotenv-rails"
 
 gem "pg", "~> 0.19.0"
 gem 'postmark-rails'
