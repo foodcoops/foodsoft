@@ -2,7 +2,7 @@
   %td= check_box_tag 'selected_articles[]', article.id.to_s, false, {:id => "checkbox_#{article.id}", 'data-ignore-onchange' => true}
   %td{'data-check-this' => "#checkbox_#{article.id}", :class => 'click-me'}= article.name
   %td= article.order_number
-  %td= article.note truncate(article.note, :length => 11)
+  %td= truncate(article.note, :length => 11)
   %td= article.origin
   %td= truncate(article.article_category.name, :length => 11) if article.article_category
   %td= article.unit
