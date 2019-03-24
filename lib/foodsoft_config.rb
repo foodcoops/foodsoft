@@ -69,6 +69,8 @@ class FoodsoftConfig
       self.scope = config[:default_scope] or raise "No default_scope is set"
       # Set defaults for backward-compatibility
       set_missing
+      # Set the mailer config when multi coop isn't enabled
+      setup_mailing unless config[:multi_coop_install]
     end
 
     # Set config and database connection for specific foodcoop.
@@ -229,6 +231,8 @@ class FoodsoftConfig
         ActionMailer::Base.default_url_options[k] = self[k] if self[k]
       end
       ActionMailer::Base.default_url_options[:foodcoop] = scope
+
+      puts "mailing config #{ActionMailer::Base.default_url_options}"
     end
 
     # Completes foodcoop configuration with program defaults.
@@ -257,6 +261,9 @@ class FoodsoftConfig
         tasks_period_days: 7,
         tasks_upfront_days: 49,
         shared_supplier_article_sync_limit: 200,
+        host: 'localhost',
+        port: '3000',
+        protocol: 'http',
         # The following keys cannot, by default, be set by foodcoops themselves.
         protected: {
           multi_coop_install: true,
