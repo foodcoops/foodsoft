@@ -73,8 +73,23 @@ describe Supplier do
       end
     end
 
-    # Setting articles to unavailable with sync method all_unavailable
-    # is handled in the articles controller, so no need to test it here.
+    context 'with sync method all_unavailable' do
+      let(:shared_sync_method) { 'all_unavailable' }
+
+      it 'returns the expected articles' do
+        updated_article_pairs, outlisted_articles, new_articles = supplier.sync_all
+
+        expect(updated_article_pairs).to_not be_empty
+        expect(updated_article_pairs[0][0].id).to eq updated_article.id
+        expect(updated_article_pairs[0][1].keys).to include :origin
+
+        expect(outlisted_articles).to eq [removed_article]
+
+        expect(new_articles).to_not be_empty
+        expect(new_articles[0].order_number).to eq new_shared_article.number
+        expect(new_articles[0].availability?).to be false
+      end
+    end
   end
 
 end

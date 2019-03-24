@@ -52,11 +52,16 @@ class Supplier < ApplicationRecord
       end
     end
     # Find any new articles, unless the import is manual
-    unless shared_sync_method == 'import'
+    if ['all_available', 'all_unavailable'].include?(shared_sync_method)
+      # build new articles
       shared_supplier
         .shared_articles
         .where.not(id: existing_articles.to_a)
         .find_each { |new_shared_article| new_articles << new_shared_article.build_new_article(self) }
+      # make them unavailable when desired
+      if shared_sync_method == 'all_unavailable'
+        new_articles.each {|new_article| new_article.availability = false }
+      end
     end
     return [updated_article_pairs, outlisted_articles, new_articles]
   end
