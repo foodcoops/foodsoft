@@ -1469,6 +1469,8 @@ en:
       redirect: Redirect to [[%{title}]]...
     user:
       no_ordergroup: no ordergroup
+    group_order_article:
+      order_closed: Order is closed and cannot be modified
   navigation:
     admin:
       config: Configuration

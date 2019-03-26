@@ -1444,6 +1444,8 @@ de:
       redirect: Weiterleitung auf [[%{title}]]...
     user:
       no_ordergroup: keine Bestellgruppe
+    group_order_article:
+      order_closed: Bestellung ist geschlossen und kann nicht geändert werden
   navigation:
     admin:
       config: Einstellungen

@@ -1399,6 +1399,8 @@ nl:
       redirect: Doorverwijzing naar [[%{title}]]...
     user:
       no_ordergroup: geen huishouden
+    group_order_article:
+      order_closed: Bestelling is gesloten en kan niet worden gewijzigd
   navigation:
     admin:
       config: Instellingen

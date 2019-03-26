@@ -9,6 +9,7 @@ class GroupOrderArticle < ApplicationRecord
 
   validates_presence_of :group_order, :order_article
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
+  validate :check_order_not_closed # don't allow changes to closed (aka settled) orders
 
   scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
 
@@ -194,5 +195,13 @@ class GroupOrderArticle < ApplicationRecord
   # Check if the result deviates from the result_computed
   def result_manually_changed?
     result != result_computed unless result.nil?
+  end
+
+  private
+
+  def check_order_not_closed
+    if order_article.order.closed?
+      errors.add(:order_article, I18n.t('model.group_order_article.order_closed'))
+    end
   end
 end
