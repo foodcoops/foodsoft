@@ -28,6 +28,19 @@
 
 - title t('.title'), false
 
+
+
+-if current_user.ordergroup
+  %div
+    -if current_user.ordergroup.get_available_funds FoodsoftConfig[:minimum_balance]
+      .alert.alert-danger
+        Your balance is
+        = number_to_currency(current_user.ordergroup.get_available_funds)
+        You do not have enough credit to place an order!
+        Please click on this page regarding how to make a payment:
+        = link_to_wikipage_by_permalink('Payments')
+
+
 .row-fluid
   .alert.alert-danger.center
     Make sure you push the <strong>#{t('.action_save')}</strong> button or your order won't be placed!
