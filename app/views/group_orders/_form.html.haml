@@ -186,6 +186,7 @@
               %span= order_article.article.name
               %br/
               %small= order_article.article.manufacturer
+              %small= "(#{order_article.article.order_number})" unless order_article.article.order_number.blank?
               - unless order_article.article.note.blank?
                 %blockquote.small
                   %span #{heading_helper Article, :note}: #{order_article.article.note}
