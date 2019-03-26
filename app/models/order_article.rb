@@ -240,9 +240,14 @@ class OrderArticle < ApplicationRecord
   end
 
   def _missing_units(unit_quantity, quantity, tolerance)
-    units = unit_quantity - ((quantity  % unit_quantity) + tolerance)
-    units = 0 if units < 0
-    units = 0 if units == unit_quantity
-    units
+    begin
+      units = unit_quantity - ((quantity  % unit_quantity) + tolerance)
+      units = 0 if units < 0
+      units = 0 if units == unit_quantity
+      units
+    rescue => e
+      logger.error("order_article=#{id} : failed to compute missing_units for #{article.name} #{article.id} : #{e}")
+      0
+    end
   end
 end
