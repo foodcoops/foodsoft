@@ -32,7 +32,7 @@
 
 -if current_user.ordergroup
   %div
-    -if current_user.ordergroup.get_available_funds FoodsoftConfig[:minimum_balance]
+    -if current_user.ordergroup.get_available_funds < FoodsoftConfig[:minimum_balance]
       .alert.alert-danger
         Your balance is
         = number_to_currency(current_user.ordergroup.get_available_funds)
