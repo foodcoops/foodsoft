@@ -1,5 +1,13 @@
 .well.well-small
   %h3= t '.title'
+
+
+  %div.pull-right
+    %a{ :href => '/f/wiki/Main_Page'}
+      %span.i.icon-edit
+  - if @page = Page.find_by_permalink('Main_Page')
+    = render :partial => 'pages/body', :locals => {  }
+
   %ul.nav.nav-list
     %li.nav-header= t '.foodcoop'
     %li= link_to t('.members'), foodcoop_users_path
