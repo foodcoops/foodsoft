@@ -1,3 +1,34 @@
+
+- content_for :javascript do
+  :javascript
+    var search = debounce(250, function(index,query) {
+        // Declare variables
+        console.log('search on ',index, query);
+        var input, filter, table, tr, td, i, allchecked = true;
+        input = query || document.getElementById("query").value;
+        filter = String(input).toUpperCase();
+        table = document.getElementById("articleList");
+        tr = table.getElementsByTagName("tr");
+        console.log('searching for '+filter);
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[index];
+          if (td) {
+            if (String(td.innerHTML).toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+              var checkbox = $('input[type="checkbox"]', tr[i].getElementsByTagName("td")[0])[0];
+              if (checkbox && checkbox.checked === false){
+                allchecked=false;
+              }
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+        $('#checkall')[0].checked = allchecked;
+      }
+    );
+
 = simple_form_for @order do |f|
   = f.hidden_field :supplier_id
   .fold-line
@@ -5,19 +36,31 @@
     = f.input :boxfill, as: :date_picker_time if @order.is_boxfill_useful?
     = f.input :ends, as: :date_picker_time
     = f.input :pickup, as: :date_picker, input_html: {class: 'input-small'}
-  = f.input :end_action, collection: Order.end_actions,include_blank: false,
-    input_html: {class: 'input-xxlarge'}, value_method: ->(k){ k.first },
-    label_method: ->(k){ t("activerecord.attributes.order.end_actions.#{k.first}") }
+
+
   = f.input :note, input_html: {rows: 2, class: 'input-xxlarge'}
 
+
+
+  .pull-right
+    = f.submit class: 'btn'
+    = link_to t('ui.or_cancel'), orders_path
+    - unless @order.erroneous_article_ids.empty?
+      &nbsp;
+      = check_box_tag 'order[ignore_warnings]'
+      = t '.ignore_warnings'
   %h2= t '.title'
   - if @order.errors.has_key?(:articles)
     .alert.alert-error
       = @order.errors.get(:articles).join(" ")
   %table.table.table-hover#articleList
+    %thead
     %tr
-      %th= check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
-      %th= heading_helper Article, :name
+      %th= check_box_tag 'checkall', '1', false, { 'data-check-all' => '#articleList tr:visible' }
+      %th= search_field_tag :query, params[:query], class: 'input-medium search-query',
+          placeholder: 'Name', onkeyup: 'search(1, event.target.value)', onkeypress: 'return event.keyCode!=13'
+      %th= search_field_tag :query2, params[:query2], class: 'input-medium search-query',
+          placeholder: 'Code/SKU', onkeyup: 'search(2, event.target.value)', onkeypress: 'return event.keyCode!=13'
       %th= heading_helper Article, :note
       - if @order.stockit?
         %th= t '.stockit'
@@ -26,6 +69,7 @@
         %th= heading_helper Article, :manufacturer
         %th= heading_helper Article, :units
       %th= t '.prices'
+    %tbody
     - for category_name, articles in @order.articles_for_ordering
       %tr.article-category
         %td
@@ -43,6 +87,7 @@
         %tr{class: row_class, id: article.id}
           %td= check_box_tag "order[article_ids][]", article.id, included, :id => "checkbox_#{article.id}"
           %td.click-me{'data-check-this' => "#checkbox_#{article.id}"}= article.name
+          %td= article.order_number
           %td= truncate article.note, length: 25, tooltip: true
           - if @order.stockit?
             %td= "#{article.quantity_available} * #{article.unit}"
@@ -53,10 +98,10 @@
               = article.unit
               - if article.unit_quantity > 1
                 %span{style: 'color: grey'} &times; #{article.unit_quantity}#{pkg_helper_icon}
-          %td= "#{number_to_currency(article.price)} / #{number_to_currency(article.fc_price)}"
+          %td= "#{number_to_currency(article.price)} / #{number_to_currency(article.fc_price)} (#{number_to_currency(article.supplier_price)})"
     %tr
       %td
-        = check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
+        = check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList tr:visible' }
         -# also when all are deselected, make sure this parameter is sent (controller removes empty values again)
         = hidden_field_tag "order[article_ids][]", nil
       %td{:colspan => "6"}= t '.select_all'
