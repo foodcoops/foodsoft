@@ -53,6 +53,7 @@ gem 'spreadsheet'
 gem 'exception_notification'
 gem 'gaffe'
 gem 'ruby-filemagic'
+gem 'mime-types'
 gem 'midi-smtp-server'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile

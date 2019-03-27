@@ -534,6 +534,7 @@ DEPENDENCIES
   mailcatcher
   meta_request
   midi-smtp-server
+  mime-types
   mysql2 (~> 0.4.0)
   prawn
   prawn-table
