@@ -4,7 +4,7 @@ en:
       short: "%a %l:%M %P %d %b"
   date:
     formats:
-      short: "%a, %d %b"
+      short: "%a, %d %b %Y"
   number:
     percentage:
       format:
