@@ -137,7 +137,7 @@ en:
         ends: Ends at
         name: Supplier
         note: Note
-        pickup: Pickup
+        pickup: Delivery
         starts: Starts at
         status: Status
         supplier: Supplier
@@ -1342,9 +1342,9 @@ en:
       text: |
         Hi!
 
-        Foodcoop %{foodcoop} would like to place an order.
+        Foodcoop %{foodcoop} would like to place an order.  Please find our order attached.
 
-        Please find a PDF and spreadsheet attached.
+        %{note}
 
         Kind regards,
         %{user}
