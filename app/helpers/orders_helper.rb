@@ -142,6 +142,19 @@ module OrdersHelper
     end
   end
 
+  # short or over
+  def order_article_match_text(order_article)
+    if order_article.units > 0
+      if order_article.missing_units == 0
+        'perfect'
+      else
+        "#{order_article.missing_units} extra"
+      end
+    else
+      "#{order_article.missing_units} short"
+    end
+  end
+
   # Button for receiving an order.
   #   If the order hasn't been received before, the button is shown in green.
   # @param order [Order]

@@ -1,0 +1,28 @@
+- title t('.title', name: @order.name)
+
+
+
+%div
+  .alert.alert-info This will let you swap an article on the order for another article.  Handy if the old one is no longer available.
+  .alert.alert-danger Make sure you choose an alternative that is very similar - it should be the same units (eg, by LB or by CT) so people's order amounts are respected
+
+= simple_form_for @order, url: swap_update_order_path do |form|
+  - articles_for_ordering = @order.articles_for_ordering
+  .form-actions
+    = form.submit class: 'btn'
+  %table.table.table-hover
+    - for oa in @order.order_articles.sort_by{|a|a.article.name}
+      - selected= articles_for_ordering[oa.article.article_category.name].find{|a| a.id == oa.article_id} ? oa.article_id : nil
+      %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + order_article_class(oa)}
+        %td= oa.article.description
+        %td= "#{oa.article.unit} x #{oa.quantity} (+ #{oa.tolerance})"
+        %td= order_article_match_text(oa)
+        -#%td=
+
+        %td= select_tag "order_articles[#{oa.id}][article_id]",
+          options_from_collection_for_select(articles_for_ordering[oa.article.article_category.name],:id,:description, selected),
+          include_blank: true,
+          class: 'input-xxlarge'
+
+  .form-actions
+    = form.submit class: 'btn'

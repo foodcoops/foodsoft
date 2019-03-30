@@ -14,6 +14,16 @@ class SharedSupplier < ApplicationRecord
     cached_articles.detect { |a| a.number == order_number }
   end
 
+  def find_article_by_name_origin_manufacture(name, origin, manufacturer)
+    cached_articles.detect { |a| a.name == name && a.origin == origin && a.manufacturer == manufacturer }
+    # cached_articles_by_key(['name', 'origin', 'manufacturer'])[cache_key([name, origin, manufacturer])]
+  end
+
+  def find_article_by_name_manufacture(name, manufacturer)
+    cached_articles.detect { |a| a.name == name && a.manufacturer == manufacturer }
+    # cached_articles_by_key(['name', 'manufacturer'])[cache_key([name, manufacturer])]
+  end
+
   def cached_articles
     @cached_articles ||= shared_articles.all
   end

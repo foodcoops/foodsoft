@@ -6,7 +6,7 @@
       - for article in @outlisted_articles
         %li
           = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
-          = article.name
+          = "#{article.description}"
           - if article.in_open_order
             .alert= t '.outlist.alert_used', article: article.name
   %hr/

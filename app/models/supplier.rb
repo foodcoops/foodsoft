@@ -34,21 +34,32 @@ class Supplier < ApplicationRecord
     updated_article_pairs, outlisted_articles, new_articles = [], [], []
     existing_articles = Set.new
     for article in articles.undeleted
+      # puts "checking #{article.description}"
       # try to find the associated shared_article
       shared_article = article.shared_article(self)
 
-      if shared_article # article will be updated
+      if shared_article && shared_article.available # article will be updated
+        # puts "found shared article, comparing: #{shared_article.build_new_article(self).description}"
+        # puts "found shared article, comparing: #{shared_article.as_json}"
         existing_articles.add(shared_article.id)
         unequal_attributes = article.shared_article_changed?(self)
         unless unequal_attributes.blank? # skip if shared_article has not been changed
           article.attributes = unequal_attributes
           updated_article_pairs << [article, unequal_attributes]
+          # puts "changed: #{unequal_attributes}"
+        else
+          # puts "no changes"
         end
       # Articles with no order number can be used to put non-shared articles
       # in a shared supplier, with sync keeping them.
-      elsif not article.order_number.blank?
-        # article isn't in external database anymore
-        outlisted_articles << article
+        else
+          if not article.order_number.blank?
+            # article isn't in external database anymore
+            # puts "removing as not in external: #{article.description}"
+            outlisted_articles << article
+          else
+            # puts "not removing because no order_number: #{article.description}"
+          end
       end
     end
     # Find any new articles, unless the import is manual

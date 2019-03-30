@@ -100,6 +100,25 @@ class OrdersController < ApplicationController
     end
   end
 
+  # allow swapping articles in an order for alternatives
+  def swap
+    @order = Order.includes(:articles).find(params[:id])
+  end
+  def swap_update
+    # puts "updating! #{params}"
+    @order = Order.includes(:articles).find(params[:id])
+    @order.order_articles.each do |oa|
+      oa.update_attributes params[:order_articles][oa.id.to_s] if params[:order_articles][oa.id.to_s]
+    end
+    if @order.finished?
+      @order.state = "swapping"
+      finish
+    else
+      redirect_to :action => 'show', :id => @order
+    end
+  end
+
+
   # Delete an order.
   def destroy
     Order.find(params[:id]).destroy

@@ -102,7 +102,8 @@ class Article < ApplicationRecord
       attrs = unequal_attributes(shared_article)
       if attrs.empty?
         # when attributes not changed, update timestamp of article
-        self.update_attribute(:shared_updated_on, shared_article.updated_on)
+        # FIXME: i don't think a boolean check should write - also minor performance hit on this
+        # self.update_attribute(:shared_updated_on, shared_article.updated_on)
         false
       else
         attrs
@@ -157,8 +158,27 @@ class Article < ApplicationRecord
 
   # to get the correspondent shared article
   def shared_article(supplier = self.supplier)
-    self.order_number.blank? and return nil
-    @shared_article ||= supplier.shared_supplier.find_article_by_number(self.order_number) rescue nil
+    # self.order_number.blank? and return nil
+    # @shared_article ||= supplier.shared_supplier.find_article_by_number(self.order_number) rescue nil
+    if @shared_article.nil?
+      unless supplier.shared_supplier.nil?
+        @shared_article ||= supplier.shared_supplier.find_article_by_number(self.order_number)
+        @shared_article ||= supplier.shared_supplier.find_article_by_name_origin_manufacture(self.name, self.origin, self.manufacturer)
+        @shared_article ||= supplier.shared_supplier.find_article_by_name_manufacture(self.name, self.manufacturer)
+      end
+      if @shared_article
+        if @shared_article.linked_to.nil?
+          @shared_article.linked_to=self
+        else
+          # raise "already linked to #{@shared_article.linked_to} not #{self.id}" unless @shared_article.linked_to == self
+          if @shared_article.linked_to != self
+            puts "already linked to #{@shared_article.linked_to} not #{self.id}"
+            @shared_article = false
+          end
+        end
+      end
+    end
+    @shared_article
   end
 
   # convert units in foodcoop-size
@@ -202,6 +222,10 @@ class Article < ApplicationRecord
   def mark_as_deleted
     check_article_in_use
     update_column :deleted_at, Time.now
+  end
+
+  def description
+    "#{name} #{manufacturer} #{origin} #{note} #{unit_quantity} #{unit} #{price}"
   end
 
   protected
