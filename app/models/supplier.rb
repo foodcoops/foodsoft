@@ -67,7 +67,7 @@ class Supplier < ApplicationRecord
       shared_supplier
         .shared_articles
         .where(available: true)
-        .where.not(id: existing_articles)
+        .where.not(id: existing_articles.to_a)
         .each { |shared_article| new_articles << shared_article.build_new_article(self) }
     end
     return [updated_article_pairs, outlisted_articles, new_articles]
