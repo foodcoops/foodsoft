@@ -33,7 +33,7 @@ en:
         origin: Origin
         price: Price (net)
         supplier: Supplier
-        tax: VAT
+        tax: Tax
         unit: Unit
         unit_quantity: Unit quantity
         unit_quantity_short: U.Q.
@@ -44,7 +44,7 @@ en:
       article_price:
         deposit: Deposit
         price: Price (net)
-        tax: VAT
+        tax: Tax
         unit_quantity: Unit quantity
       delivery:
         delivered_on: Delivery date
@@ -53,6 +53,7 @@ en:
       document:
         created_at: Created at
         created_by: Created by
+        created_by_user_id: Created by
         data: Data
         mime: MIME type
         name: Name
@@ -72,7 +73,7 @@ en:
         name_short: Short Name
       group_order:
         ordergroup: Ordergroup
-        price: Order sum
+        price: Your Total
         updated_by: Last ordered by
       group_order_article:
         ordered: Ordered
@@ -80,7 +81,7 @@ en:
         received: Received
         result: Amount
         tolerance: Tolerance
-        total_price: Sum
+        total_price: Total
         unit_price: Price/Unit
       invoice:
         amount: Amount
@@ -90,8 +91,8 @@ en:
         date: Billing date
         delete_attachment: Delete attachment
         deliveries: Delivery
-        deposit: Deposit charged
-        deposit_credit: Deposit returned
+        deposit: Deduct Charges
+        deposit_credit: Refund Credits
         net_amount: Amount adjusted for refund
         note: Note
         number: Number
@@ -521,7 +522,7 @@ en:
         title: Import article
       new: New article
       new_order: Create new order
-      search_placeholder: Name ...
+      search_placeholder: enter search
       title: Articles from %{supplier} (%{count})
       upload: Upload articles
     model:
@@ -615,7 +616,7 @@ en:
       stop_ordering_under: Members can only order when they have at least this many apple points.
       tasks_period_days: Number of days between two periodic tasks (default 7, which is a week).
       tasks_upfront_days: For how many days in advance you would like to schedule periodic tasks.
-      tax_default: Default VAT percentage for new articles.
+      tax_default: Default tax percentage for new articles.
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
       use_boxfill: When enabled, near end of an order, members are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
@@ -668,7 +669,7 @@ en:
       stop_ordering_under: Minimum apple points
       tasks_period_days: Period
       tasks_upfront_days: Create upfront
-      tax_default: Default VAT
+      tax_default: Default tax
       time_zone: Time zone
       tolerance_is_costly: Tolerance is costly
       use_apple_points: Apple points
@@ -810,24 +811,47 @@ en:
       filename: Order %{name}-%{date} - by articles
       title: 'Order sorted by articles: %{name}, closed at %{date}'
     order_by_groups:
-      filename: Order %{name}-%{date} - by group
-      sum: Sum
-      title: 'Order sorted by group: %{name}, closed at %{date}'
+      filename: Bin Sheets %{name} - %{date}
+      rows:
+      - Ordered
+      - Received
+      - Unit
+      - Unit Price
+      - Article
+      -
+      - Total
+      sum: Estimated Total (may be adjusted depending on actual received and spoilage)
+      title: '%{name} Order - %{date} - ordering by %{user_name}'
     order_fax:
       filename: Order %{name}-%{date} - Fax
       rows:
-      - Order Number
-      - Amount
+      - SKU
+      - Cases
+      - Total Quantity
+      - Origin
       - Name
-      - Unit quantity
-      - Unit
-      - Price/Unit
+      - Price
       - Subtotal
       total: Total
+      deliver_on: 'Delivery On: %{date}'
+      ordered_on: 'Order Date: %{date}'
     order_matrix:
-      filename: Order %{name}-%{date} - sorting matrix
-      heading: Article overview (%{count})
-      title: 'Order sorting matrix: %{name}, closed at %{date}'
+      filename: Splitsheets %{name}-%{date}
+      heading: Delivery Checklist Page for Credit/Refunds - GIVE TO ORDERING PERSON
+      rows:
+      - Article
+      - Unit
+      - Unit quantity
+      - Unit Price
+      - Case Price
+      - Cases
+      - Count/Weight
+      - Spoilage (%)
+      title: 'Split sheets: %{name} - %{date} - Ordered by %{user_name}'
+      note: ''
+      total:
+        one: One article in total
+        other: "%{count} articles in total"
   errors:
     general: A problem has occured.
     general_again: A problem has occured. Please try again.
@@ -851,10 +875,13 @@ en:
     balancing:
       close:
         alert: 'An error occured while accounting: %{message}'
-        notice: Order was settled succesfully, the balance of the account was updated.
+        notice: Order was settled succesfully, the balances of members have been charged.
       close_direct:
         alert: 'Order can not be settled: %{message}'
         notice: Order was settled.
+      reopen:
+        alert: 'An error occured while reopening: %{message}'
+        notice: Order was reropened succesfully, the balances of members account have been refunded.
       confirm:
         clear: Settle
         first_paragraph: 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
@@ -870,7 +897,8 @@ en:
       group_order_articles:
         add_group: Add group
         total: Total costs
-        total_fc: Sum (FC-price)
+        total_fc: Total paid by coop members
+        total_supplier: Total paid to supplier
         units: Units
       index:
         title: Closed orders
@@ -879,11 +907,11 @@ en:
         invoice_amount: 'Invoice amount:'
         invoice_date: 'Invoice date:'
         invoice_number: 'Invoice number:'
-        minus_refund_calculated: "- deposit charged:"
-        new: create new invoice
+        minus_refund_calculated: "Deduct Charges:"
+        new: Add invoice
         new_body: 'Create an invoice for this order:'
-        plus_refund_credited: "+ deposit returned:"
-        refund_adjusted_amount: 'amount adjusted for refund:'
+        plus_refund_credited: "Refund Credits:"
+        refund_adjusted_amount: 'Net Charge:'
       new:
         alert: Attention, order was already accounted
         articles_overview: Overview of articles
@@ -892,6 +920,7 @@ en:
         comment_on_transaction: Here you can add a comment to your accounting.
         comments: Comments
         confirm_order: Settle order
+        confirm_reopen_order: Reopen Order
         create_invoice: Add invoice
         edit_note: Edit note
         edit_order: Edit order
@@ -904,8 +933,8 @@ en:
       order_article:
         confirm: Are you sure?
       orders:
-        clear: accounting
-        cleared: accounted (%{amount})
+        clear: Settle Accounts
+        cleared: Accounted (%{amount})
         end: End
         ended: closed
         name: Supplier
@@ -913,15 +942,15 @@ en:
         state: State
       summary:
         changed: Data was changed!
-        duration: From %{starts} till %{ends}
+        duration: Order date %{ends}
         fc_amount: 'Sales value:'
-        fc_profit: FC surplus
+        fc_profit: 'Balance'
         gross_amount: 'Gross value:'
-        groups_amount: 'Ordergroups sum:'
+        groups_amount: 'Members Paid:'
         net_amount: 'Net value:'
         reload: Reload summary
-        with_extra_charge: 'with extra charge:'
-        without_extra_charge: 'without extra charge:'
+        with_extra_charge: 'with markup:'
+        without_extra_charge: ':'
     bank_accounts:
       controller:
         import:
@@ -929,13 +958,13 @@ en:
       index:
         account_statement: Account statement
         title: Bank Accounts
-    bank_transactions:
-      index:
-        title: Bank transactions for %{name} (%{balance})
-      show:
-        belongs_to_supplier: belongs to supplier
-        belongs_to_user: belongs to user
-        in_ordergroup: in ordergroup
+      bank_transactions:
+        index:
+          title: Bank transactions for %{name} (%{balance})
+        show:
+          belongs_to_supplier: belongs to supplier
+          belongs_to_user: belongs to user
+          in_ordergroup: in ordergroup
     create:
       notice: Invoice was created.
     financial_links:
@@ -961,12 +990,12 @@ en:
         paragraph: Here you can credit and debit money for the ordergroup <b>%{name}</b>.
         title: New transaction
       new_collection:
-        add_all_ordergroups: Add all ordergroups
-        new_ordergroup: Add new ordergroup
+        add_all_ordergroups: Add all member accounts
+        new_ordergroup: Add another member
         save: Save transaction
         set_balance: Set the balance of the ordergroup to the entered amount.
-        sidebar: Here you can update more accounts at the same time. For example all transfers of the ordergroup from one account statement.
-        title: Updating more accounts
+        sidebar: Here you can update many member's accounts at the same time. For example, add a monthly charge like a member fee to each member's account.
+        title: Add transaction
       ordergroup:
         remove: Remove
         remove_group: Remove group
@@ -1037,7 +1066,7 @@ en:
         show_tasks: Show all tasks
   group_order_articles:
     form:
-      amount_change_for: Change amount for %{article}
+      amount_change_for: Add Member to Order for %{article}
       result_hint: 'Unit: %{unit}'
   group_orders:
     archive:
@@ -1063,10 +1092,10 @@ en:
       sum_amount: Current amount
       title: Orders
       total_sum_amount: Total amount
-      total_tolerance: Total tolerance
+      total_tolerance: Everyone's Tolerance
       units: Units
-      units_full: Filled units
-      units_total: Total units
+      units_full: Filled
+      units_total: Everyone Wants
     index:
       closed_orders:
         more: more...
@@ -1088,22 +1117,22 @@ en:
         edit_order: Edit order
         not_ordered_msg: You didn’t place an order yet
         order_closed_msg: Sorry, this order is closed.
-        order_nopen_title: Considering current orders of all groups
+        order_nopen_title: The amount you will get considering the current orders of everyone else
         order_not_open: Received
         order_now: This is your chance!
-        order_open: Available
+        order_open: Available to You
         ordered: Ordered
         ordered_title: Amount + tolerance
         show_hide: Show/hide articles not ordered
         show_note: Show note
         title: Article overview
-        unit_price: Unit price
+        unit_price: Price
       comment: Comment
       comments:
         title: Comments
       not_ordered: You didn’t order.
       sum: Sum
-      title: Your order result for %{order}
+      title: "%{order} for %{ordergroup}"
     switch_order:
       remaining: "%{remaining} remaining"
       title: Current orders
@@ -1162,8 +1191,9 @@ en:
           text: Show %{messages} or %{threads}
           threads: threads
       my_ordergroup:
+        funds: "| Available Credit:"
         last_update: Last update was %{when} ago
-        title: Account
+        title: My Account
         transactions:
           title: Last Transactions
           view: Show account statement
@@ -1198,8 +1228,8 @@ en:
     start_nav:
       admin: Administration
       finances:
-        accounts: Update accounts
-        settle: Account orders
+        accounts: Member Accounts
+        settle: Order Accounting
         title: Finances
       foodcoop: Foodcoop
       members: Members
@@ -1241,7 +1271,7 @@ en:
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
-    foodsoft: Foodsoft
+    foodsoft: Food coop
     footer:
       revision: revision %{revision}
     header:
@@ -1252,7 +1282,7 @@ en:
       logout: Logout
       ordergroup: My ordergroup
       profile: Edit profile
-    logo: "<span>food</span>soft"
+    logo: "Food Co-op"
   lib:
     render_pdf:
       page: Page %{number} of %{count}
@@ -1305,7 +1335,7 @@ en:
 
         There was a charge of %{amount} for "%{note}" by %{user}.
 
-        Please deposit your account as soon as possible.
+        Please make a deposit to your account as soon as possible.
 
 
 
@@ -1489,11 +1519,11 @@ en:
     dashboard: Dashboard
     documents: Documents
     finances:
-      accounts: Manage accounts
-      balancing: Account orders
+      accounts: Member Accounts
+      balancing: Order Accounting
       bank_accounts: Bank Accounts
       home: Overview
-      invoices: Invoices
+      invoices: Supplier Invoices
       title: Finances
     foodcoop: Foodcoop
     members: Members
@@ -1528,7 +1558,7 @@ en:
   orders:
     articles:
       article_count: 'Ordered articles:'
-      prices: Net/gross price
+      prices: Net/gross/supplier price
       prices_sum: 'Sum (net/gross price):'
       units_full: Full units
       units_ordered: Units ordered
@@ -1553,7 +1583,7 @@ en:
       notice: The order has been closed.
     form:
       ignore_warnings: Ignore warnings
-      prices: Prices (net/FC)
+      prices: Prices (net/coop/supplier)
       select_all: Select all
       stockit: In stock
       title: Article
@@ -1572,10 +1602,12 @@ en:
       close_direct_message: Order settled without charging member accounts.
       error_boxfill_before_ends: must be after the box-fill date (or remain empty)
       error_closed: Order was already settled
+      error_not_closed: Order isn't already settled
       error_nosel: At least one article must be selected. You may want to delete the order instead?
       error_starts_before_boxfill: must be after the start date (or remain empty)
       error_starts_before_ends: must be after the start date (or remain empty)
-      notice_close: 'Order: %{name}, until %{ends}'
+      notice_close: 'Order: %{name} - %{ends}'
+      notice_reopen: 'Order: %{name} - %{ends} (reopened)'
       stock: Stock
       warning_ordered: 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted. To proceed, confirm below.'
       warning_ordered_stock: 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them. Confirm below to proceed.'
@@ -1590,12 +1622,13 @@ en:
       submit: Receive order
       surplus_options: 'Distribution options:'
       title: Receiving %{order}
+      warning: <strong>Warning:</strong> Do not change received amounts here after printing split sheets!<br/>Changing quantities here may automatically reallocate the amounts received by each member, which means you need to print out new split sheets.
     send_to_supplier:
       notice: The order has been sent to the supplier.
     show:
       action_end: Close!
       amounts: 'Net/gross sum:'
-      articles: Article overview
+      articles: Order Summary
       articles_ordered: 'Ordered articles:'
       comments:
         title: Comments
@@ -1620,8 +1653,8 @@ en:
       search_reset: Reset search
       send_to_supplier: Send to supplier
       show_invoice: Show invoice
-      sort_article: Sorted in articles
-      sort_group: Sorted in groups
+      sort_article: Group by Article
+      sort_group: Group by Member
       stock_order: Stock Order
       title: 'Order: %{name}'
       warn_not_closed: Warning, order is not yet settled.
@@ -1728,9 +1761,9 @@ en:
       invalid_document: Invalid document type
       title: Pickup for %{date}
     index:
-      article_pdf: Article PDF
-      group_pdf: Group PDF
-      matrix_pdf: Matrix PDF
+      article_pdf: Split Sheets for Articles PDF
+      group_pdf: Bin Sheets (for Members) PDF
+      matrix_pdf: Split Sheets (for Receipts) PDF
       title: Pickup days
   sessions:
     logged_in: Logged in!
@@ -1751,7 +1784,7 @@ en:
       received_desc: Number of articles that (will be) received by member
     articles_by:
       price: Total price
-      price_sum: Sum
+      price_sum: Cost
     group:
       access: Access to
       activated: activated
@@ -1765,17 +1798,17 @@ en:
     open_orders:
       no_open_orders: There are no current orders
       not_enough_apples: Attention your ordergroup has too few apple points to place an order!
-      title: Current orders
-      total_sum: Total sum
+      title: Open orders
+      total_sum: Total cost
       who_ordered: Who ordered?
     order_download_button:
-      article_pdf: Article PDF
+      article_pdf: Split Sheets for Articles PDF
       download_file: Download file
-      fax_csv: Fax CSV
-      fax_pdf: Fax PDF
-      fax_txt: Fax text
-      group_pdf: Group PDF
-      matrix_pdf: Matrix PDF
+      fax_csv: Supplier Order CSV
+      fax_pdf: Supplier Order PDF
+      fax_txt: Supplier Order text
+      group_pdf: Bin Sheets (for Members) PDF
+      matrix_pdf: Split Sheets (for Receipts) PDF
       title: Download
     task_list:
       accept_task: Accept task
@@ -1799,7 +1832,7 @@ en:
       article_category:
         description: comma-separated list of category names recognised at import/synchronisation
       order_article:
-        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
+        units_to_order: If you change the received amount, you will need to update each member's amount received so members are charged the correct amount.
         update_global_price: Also update the price of future orders
       stock_article:
         copy:
