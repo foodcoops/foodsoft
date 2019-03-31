@@ -17,4 +17,9 @@ module PriceCalculation
   def add_percent(value, percent)
     (value * (percent * 0.01 + 1)).round(2)
   end
+
+  def supplier_price
+    read_attribute(:supplier_price) || unit_quantity * price
+  end
+
 end

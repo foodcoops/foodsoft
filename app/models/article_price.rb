@@ -32,3 +32,4 @@ class ArticlePrice < ApplicationRecord
   validates_numericality_of :deposit, :tax
 
 end
+
