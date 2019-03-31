@@ -17,7 +17,7 @@ class OrderCsv < RenderCSV
   def data
     @object.order_articles.ordered.includes([:article, :article_price]).all.map do |oa|
       yield [
-              oa.units_to_order,
+              oa.units,
               oa.article.order_number,
               oa.article.name,
               oa.article.unit,

@@ -1572,9 +1572,9 @@ en:
     edit_amounts:
       no_articles_available: No articles to add.
     fax:
-      amount: Amount
+      amount: Cases
       articles: Articles
-      delivery_day: Delivery day
+      delivery_day: 'Delivery On: %{date}'
       heading: Order for %{name}
       name: Name
       number: Number
