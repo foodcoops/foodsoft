@@ -18,35 +18,27 @@ class OrderByGroups < OrderPdf
         GroupOrderArticle.human_attribute_name(:ordered),
         GroupOrderArticle.human_attribute_name(:received),
         GroupOrderArticle.human_attribute_name(:unit_price),
-        OrderArticle.human_attribute_name(:article),
         Article.human_attribute_name(:supplier),
+        OrderArticle.human_attribute_name(:article),
         GroupOrderArticle.human_attribute_name(:total_price)
       ]]
 
       each_group_order_article_for_ordergroup(oa_id) do |goa|
         dimrows << rows.length if goa.result == 0
-        # rows <<  [goa.order_article.article.name,
-        #           goa.order_article.article.supplier.name,
-        #           group_order_article_quantity_with_tolerance(goa),
-        #           goa.result,
-        #           order_article_price_per_unit(goa.order_article),
-        #           number_to_currency(goa.total_price)]
-
         rows << [
             goa.tolerance > 0 ? "#{goa.quantity} (+#{goa.tolerance} extra)" : goa.quantity,
             "#{goa.result}    ____ ",
             order_article_unit_per_price(goa.order_article),
             # goa.order_article.article.unit,
             # number_to_currency(order_article_price(goa.order_article)),
+            goa.order_article.article.supplier.name.truncate(10, omission: ''),
             goa.order_article.article.name,
-            nil, #goa.order_article.price.unit_quantity,
             number_to_currency(goa.total_price)]
-
       end
       next unless rows.length > 1
-      rows << [nil, nil, nil, nil, nil, number_to_currency(oa_total)]
+      rows << [nil, nil, nil, nil, I18n.t('documents.order_by_groups.sum'), number_to_currency(oa_total)]
 
-      # rows.each { |row| row.delete_at 1 } unless @options[:show_supplier]
+      rows.each { |row| row.delete_at 3 } unless @options[:show_supplier]
 
       nice_table oa_name || stock_ordergroup_name, rows, dimrows do |table|
         table.row(-2).border_width = 1
@@ -54,8 +46,9 @@ class OrderByGroups < OrderPdf
         table.row(-1).borders = []
 
         if @options[:show_supplier]
-          table.column(0).width = bounds.width / 3
-          table.column(1).width = bounds.width / 4
+          supplier_width = 60
+          table.column(3).width = supplier_width
+          table.column(4).width = (bounds.width / 2) - supplier_width
         else
           table.column(3).width = bounds.width / 2
         end
