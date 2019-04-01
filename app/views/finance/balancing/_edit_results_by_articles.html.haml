@@ -13,5 +13,11 @@
         = link_to t('.add_article'), new_order_order_article_path(@order), remote: true,
           class: 'btn btn-small' unless @order.closed?
   %tbody#result_table
-    - for order_article in @articles
+    - for order_article in @articles.select { |oa| oa.units > 0 }
+      = render :partial => "order_article_result", :locals => {:order_article => order_article}
+
+    %tr
+      %td{ colspan: 10 } The following were not ordered
+
+    - for order_article in @articles.select { |oa| oa.units == 0 }
       = render :partial => "order_article_result", :locals => {:order_article => order_article}
