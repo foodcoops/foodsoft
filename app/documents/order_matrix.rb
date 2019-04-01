@@ -22,6 +22,8 @@ class OrderMatrix < OrderPdf
   end
 
   def body
+    @orders = [@order] unless @orders.is_a? Array
+
     @orders.each_with_index do |order, _i|
       if order.is_a? Fixnum
         @order = Order.find(order)
