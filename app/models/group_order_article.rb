@@ -11,9 +11,11 @@ class GroupOrderArticle < ApplicationRecord
   validates_uniqueness_of :order_article_id, :scope => :group_order_id    # just once an article per group order
   validate :check_order_not_closed # don't allow changes to closed (aka settled) orders
 
+  # ordered here means the order was placed, not to be confused with sorted!
   scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
-  default_scope { joins(:order_article => :article).order('articles.name') }
 
+  # use this whenever showing the results to a user
+  scope :sorted, -> { joins(:order_article => :article).order('articles.name') }
 
   localize_input_of :result
 
