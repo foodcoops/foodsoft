@@ -88,7 +88,10 @@ Foodsoft::Application.configure do
   # Configure hostname for action mailer (can be overridden in foodcoop config)
   config.action_mailer.default_url_options = { host: `hostname -f`, protocol: 'https' }
 
-  if ENV['SMTP_ADDRESS'].present?
+  if ENV['POSTMARK_API_KEY'].present?
+       config.action_mailer.delivery_method = :postmark
+       config.action_mailer.postmark_settings = { :api_token => ENV['POSTMARK_API_KEY'] }
+  elsif ENV['SMTP_ADDRESS'].present?
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = { address: ENV['SMTP_ADDRESS'] }
     config.action_mailer.smtp_settings[:port] = ENV['SMTP_PORT'] if ENV['SMTP_PORT'].present?
