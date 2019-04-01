@@ -837,16 +837,6 @@ en:
       ordered_on: 'Order Date: %{date}'
     order_matrix:
       filename: Splitsheets %{name}-%{date}
-      heading: Delivery Checklist Page for Credit/Refunds - GIVE TO ORDERING PERSON
-      rows:
-      - Article
-      - Unit
-      - Unit quantity
-      - Unit Price
-      - Case Price
-      - Cases
-      - Count/Weight
-      - Spoilage (%)
       title: 'Split sheets: %{name} - %{date} - Ordered by %{user_name}'
       note: ''
       total:
@@ -1757,14 +1747,14 @@ en:
   pickups:
     document:
       empty_selection: At least one order must be selected.
-      filename: Pickup for %{date}
+      filename: Splitsheets-%{date}
       invalid_document: Invalid document type
-      title: Pickup for %{date}
+      title: Split sheet for %{date}
     index:
-      article_pdf: Split Sheets for Articles PDF
+      article_pdf: (not used) Split Sheets for Articles PDF
       group_pdf: Bin Sheets (for Members) PDF
       matrix_pdf: Split Sheets (for Receipts) PDF
-      title: Pickup days
+      title: Delivery/Split Days
   sessions:
     logged_in: Logged in!
     logged_out: Logged out!
