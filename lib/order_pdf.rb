@@ -73,7 +73,7 @@ class OrderPdf < RenderPDF
       group('groups.id').
       offset(offset).
       limit(limit).
-      pluck('groups.name', 'SUM(group_orders.price)', 'ordergroup_id')
+      pluck('groups.name', 'SUM(group_orders.price)', 'groups.id')
 
     result.map do |item|
       [item.first || stock_ordergroup_name] + item[1..-1]
