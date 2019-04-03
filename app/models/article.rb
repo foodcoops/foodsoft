@@ -261,9 +261,7 @@ class Article < ApplicationRecord
     if supplier && (supplier.shared_sync_method.blank? || supplier.shared_sync_method == 'import')
       errors.add :name, :taken if matches.any?
     else
-      if matches.where(unit: unit, unit_quantity: unit_quantity, manufacturer: manufacturer, origin: origin).any?
-        errors.add :name, :taken_with_unit
-      end
+      errors.add :name, :taken_with_unit if matches.where(unit: unit, unit_quantity: unit_quantity).any?
     end
   end
 
