@@ -1,6 +1,6 @@
 .fold-line
   .split-price-warning
-    .alert.alert-warning Supplier price does not equal (Price * Unit).  If this is not intended use the 'Recalculate Split Price' button to update the price.
+    .alert.alert-warning= t 'shared.article_fields_price.price_warning'
 
 .fold-line
   = f.input :price do
@@ -46,7 +46,8 @@
   function computeSplitPrice(){
     var units = parseFloat($('##{field}_unit_quantity').val());
     var supplierPrice = parseFloat($('##{field}_supplier_price', form).val());
-    var price = ((supplierPrice/units)*100);
+    /* this logic is so we round up the price.  the -0.00001 is to avoid rounding up due to js floating point precision */
+    var price = (((supplierPrice/units)*100)-0.00001);
     price = Math.ceil(price);
     price = price/100;
     return price;
@@ -56,11 +57,7 @@
     var price = computeSplitPrice();
     var oldPrice = parseFloat($('##{field}_price', form).val());
     if (oldPrice == price){
-      window.alert(      [
-      'this button lets you quickly recalculate the split price, but the',
-      'price is still the same!  price = (supplier price/unit)',
-      'did you change unit or supplier price?',
-      ].join(' '));
+      window.alert(I18n.t('js.shared.article_fields_price.price_already_correct'));
       return;
     } else {
       $('##{field}_price', form).val(price);
