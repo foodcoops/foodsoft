@@ -192,13 +192,9 @@ class ArticlesController < ApplicationController
         end
       end
       # Update articles
-      @updated_articles.map{|a| a.save or has_error=true }
+      @updated_articles.each {|a| a.save or has_error=true }
       # Add new articles
-      @new_articles.each do |article|
-        article.availability = true if @supplier.shared_sync_method == 'all_available'
-        article.availability = false if @supplier.shared_sync_method == 'all_unavailable'
-        article.save or has_error=true
-      end
+      @new_articles.each {|a| a.save or has_error=true }
 
       raise ActiveRecord::Rollback if has_error
     end

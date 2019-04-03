@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :messages, :only => [:index, :show, :new, :create] do
       member do
         get :thread
+        post :toggle_private
       end
     end
 

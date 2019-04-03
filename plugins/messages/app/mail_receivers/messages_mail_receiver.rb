@@ -38,12 +38,16 @@ class MessagesMailReceiver
     message = @user.send_messages.new body: body,
       group: @message.group,
       private: @message.private,
-      received_email: data,
-      subject: mail.subject.gsub("[#{FoodsoftConfig[:name]}] ", "")
+      received_email: data
     if @message.reply_to
       message.reply_to_message = @message.reply_to_message
     else
       message.reply_to_message = @message
+    end
+    if mail.subject
+      message.subject = mail.subject.gsub("[#{FoodsoftConfig[:name]}] ", "")
+    else
+      message.subject = I18n.t('messages.model.reply_subject', subject: message.reply_to_message.subject)
     end
     message.add_recipients @message.recipients
     message.add_recipients [@message.sender]

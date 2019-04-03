@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190304020224) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20181201000000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -296,13 +293,14 @@ ActiveRecord::Schema.define(version: 20190304020224) do
   add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: :cascade do |t|
-    t.string   "name",                      null: false
-    t.string   "uid",                       null: false
-    t.string   "secret",                    null: false
-    t.text     "redirect_uri",              null: false
-    t.string   "scopes",       default: "", null: false
+    t.string   "name",         limit: 255,                  null: false
+    t.string   "uid",          limit: 255,                  null: false
+    t.string   "secret",       limit: 255,                  null: false
+    t.text     "redirect_uri", limit: 65535,                null: false
+    t.string   "scopes",       limit: 255,   default: "",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "confidential",               default: true, null: false
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
@@ -382,6 +380,25 @@ ActiveRecord::Schema.define(version: 20190304020224) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  create_table "printer_job_updates", force: :cascade do |t|
+    t.integer  "printer_job_id", null: false
+    t.datetime "created_at",     null: false
+    t.string   "state",          null: false
+    t.text     "message"
+  end
+
+  add_index "printer_job_updates", ["printer_job_id", "created_at"], name: "index_printer_job_updates_on_printer_job_id_and_created_at", using: :btree
+
+  create_table "printer_jobs", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "document",            null: false
+    t.integer  "created_by_user_id",  null: false
+    t.integer  "finished_by_user_id"
+    t.datetime "finished_at"
+  end
+
+  add_index "printer_jobs", ["finished_at"], name: "index_printer_jobs_on_finished_at", using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",        limit: 255, null: false

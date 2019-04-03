@@ -15,6 +15,20 @@ FactoryBot.define do
         create :workgroup, role_admin: true, user_ids: [user.id]
       end
     end
+
+    trait :ordergroup do
+      after :create do |user, evaluator|
+        create :ordergroup, user_ids: [user.id]
+      end
+    end
+
+    [:ordergroup, :finance, :invoices, :article_meta, :suppliers, :pickups, :orders].each do |role|
+      trait "role_#{role}".to_sym do
+        after :create do |user, evaluator|
+          create :workgroup, "role_#{role}" => true, user_ids: [user.id]
+        end
+      end
+    end
   end
 
   factory :group do

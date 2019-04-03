@@ -1,0 +1,7 @@
+/ insert_after 'erb:contains("title t(\'.title\'")'
+- content_for :actionbar do
+  - if FoodsoftPrinter.enabled?
+    = link_to content_tag(:i, nil, class: 'icon-print'), printer_jobs_path(order: @order), method: :post,
+      class: "btn#{' btn-primary' unless @order.printer_jobs.any?}",
+      data: {confirm: @order.printer_jobs.any? && t('.confirm_create_printer_job') },
+      title: t('helpers.submit.printer_job.create')

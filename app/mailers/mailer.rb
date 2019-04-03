@@ -125,6 +125,12 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def self.deliver_now_with_default_locale(&block)
+    I18n.with_locale(FoodsoftConfig[:default_locale]) do
+      self.deliver_now &block
+    end
+  end
+
   def self.deliver_now
     message = yield
     message.deliver_now

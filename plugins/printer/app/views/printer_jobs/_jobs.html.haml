@@ -1,0 +1,22 @@
+.pull-right
+  - if @finished_jobs.total_pages > 1
+    .btn-group= items_per_page wrap: false
+= pagination_links_remote @finished_jobs
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper(PrinterJob, :id)
+      %th= heading_helper(PrinterJob, :order)
+      %th= heading_helper(PrinterJob, :pickup)
+      %th= heading_helper(PrinterJob, :document)
+      %th= heading_helper(PrinterJob, :last_update_state)
+      %th= heading_helper(PrinterJob, :finished_at)
+  %tbody
+    - @finished_jobs.each do |j|
+      %tr
+        %td= link_to j.id, j
+        %td= link_to j.order.supplier.name, j.order
+        %td= format_date j.order.pickup
+        %td= link_to j.document, document_printer_job_path(j)
+        %td= j.last_update_state
+        %td= format_time j.finished_at

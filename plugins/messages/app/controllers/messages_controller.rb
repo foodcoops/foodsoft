@@ -48,6 +48,16 @@ class MessagesController < ApplicationController
     end
   end
 
+  def toggle_private
+    message = Message.find(params[:id])
+    if message.can_toggle_private?(current_user)
+      message.update_attribute :private, !message.private
+      redirect_to message
+    else
+      redirect_to message, alert: I18n.t('messages.toggle_private.not_allowed')
+    end
+  end
+
   def thread
     @messages = Message.thread(params[:id]).order(:created_at)
   end

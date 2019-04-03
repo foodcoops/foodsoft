@@ -1,0 +1,173 @@
+swagger: '2.0'
+info:
+  title: Foodsoft API v1
+  version: '1.0.0'
+  description: >
+    [Foodsoft](https://github.com/foodcoops/foodsoft) is web-based software to manage
+    a non-profit food coop (product catalog, ordering, accounting, job scheduling).
+
+
+    This is a description of Foodsoft's API v1.
+
+
+    Note that each food cooperative typically has their own instance (on a shared
+    server or their own installation), and there are just as many APIs (if the Foodsoft
+    version is recent enough).
+    This API description points to the default development url with the default
+    Foodsoft scope - that would be [http://localhost:3000/f](http://localhost:3000/f).
+externalDocs:
+  description: General Foodsoft API documentation
+  url: https://github.com/foodcoops/foodsoft/blob/master/doc/API.md
+
+# development url with default scope
+host: localhost:3000
+schemes:
+  - 'http'
+basePath: /f/api/v1
+
+produces:
+  - 'application/json'
+
+paths:
+  /user:
+    get:
+      summary: info about the currently logged-in user
+      tags:
+        - 1. User
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              user:
+                $ref: '#/definitions/User'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['user:read', 'user:write']
+  /config:
+    get:
+      summary: configuration variables
+      tags:
+        - 7. General
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: missing scope or no permission
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['config:user', 'config:read', 'config:write']
+  /navigation:
+    get:
+      summary: navigation
+      tags:
+        - 7. General
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              navigation:
+                $ref: '#/definitions/Navigation'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+      security:
+        - foodsoft_auth: []
+
+definitions:
+  # models
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        description: full name
+      email:
+        type: string
+        description: email address
+      locale:
+        type: string
+        description: language code
+    required: ['id', 'name', 'email']
+  Navigation:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          description: title
+        url:
+          type: string
+          description: link
+        items:
+          $ref: '#/definitions/Navigation'
+      required: ['name']
+      minProperties: 2 # name+url or name+items
+
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+        description: error code
+      error_description:
+        type: string
+        description: human-readable error message (localized)
+  Error404:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>not_found</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+  Error401:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>unauthorized</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+  Error403:
+    type: object
+    properties:
+      error:
+        type: string
+        description: '<tt>forbidden</tt> or <tt>invalid_scope</tt>'
+      error_description:
+        $ref: '#/definitions/Error/properties/error_description'
+
+securityDefinitions:
+  foodsoft_auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: http://localhost:3000/f/oauth/authorize
+    scopes:
+      config:user: reading Foodsoft configuration for regular users
+      config:read: reading Foodsoft configuration values
+      config:write: reading and updating Foodsoft configuration values
+      user:read: reading your own user profile
+      user:write: reading and updating your own user profile
+      offline_access: retain access after user has logged out

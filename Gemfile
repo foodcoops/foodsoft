@@ -53,6 +53,7 @@ gem 'spreadsheet'
 gem 'exception_notification'
 gem 'gaffe'
 gem 'ruby-filemagic'
+gem 'mime-types'
 gem 'midi-smtp-server'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
@@ -64,6 +65,7 @@ gem 'foodsoft_discourse', path: 'plugins/discourse'
 
 # plugins not enabled by default
 #gem 'foodsoft_current_orders', path: 'plugins/current_orders'
+#gem 'foodsoft_printer', path: 'plugins/printer'
 #gem 'foodsoft_uservoice', path: 'plugins/uservoice'
 
 
@@ -71,10 +73,6 @@ group :development do
   gem 'sqlite3'
   gem 'mailcatcher'
   gem 'web-console', '~> 2.0'
-
-  # allow to use `debugger` https://github.com/conradirwin/pry-rescue
-  gem 'pry-rescue'
-  gem 'pry-stack_explorer'
 
   # Better error output
   gem 'better_errors'
@@ -92,6 +90,10 @@ end
 
 group :development, :test do
   gem 'ruby-prof', require: false
+
+  # allow to use `debugger` https://github.com/conradirwin/pry-rescue
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end
 
 group :test do
@@ -109,6 +111,9 @@ group :test do
   # code coverage
   gem 'simplecov', require: false
   gem 'coveralls', require: false
+  # api
+  gem 'apivore', require: false
+  gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
 end
 
 gem "dotenv-rails"

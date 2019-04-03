@@ -133,10 +133,9 @@ class OrderPdf < RenderPDF
   end
 
   def stock_ordergroup_name
-    users = GroupOrder.
+    users = GroupOrder.stock.
       eager_load(:updated_by).
       where(order: @orders).
-      where(ordergroup: nil).
       map(&:updated_by).
       map{ |u| u.try(&:name) || '?' }
 

@@ -1,0 +1,36 @@
+- title t('.title', id: @job.id)
+
+%p
+  %b= heading_helper(PrinterJob, :created_by) + ':'
+  = show_user @job.created_by
+%p
+  %b= heading_helper(PrinterJob, :order) + ':'
+  = @job.order.supplier.name
+%p
+  %b= heading_helper(PrinterJob, :pickup) + ':'
+  = @job.order.pickup
+%p
+  %b= heading_helper(PrinterJob, :document) + ':'
+  = @job.document
+- if @job.finished_at
+  %p
+    %b= heading_helper(PrinterJob, :finished_at) + ':'
+    = format_time @job.finished_at
+- if @job.finished_by
+  %p
+    %b= heading_helper(PrinterJob, :finished_by) + ':'
+    = show_user @job.finished_by
+
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper(PrinterJobUpdate, :created_at)
+      %th= heading_helper(PrinterJobUpdate, :state)
+      %th= heading_helper(PrinterJobUpdate, :message)
+  %tbody
+    - @job.printer_job_updates.each do |u|
+      %tr
+        %td= format_time u.created_at
+        %td= u.state
+        %td= u.message
