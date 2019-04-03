@@ -431,7 +431,7 @@ ActiveRecord::Schema.define(version: 20190304020224) do
   end
 
   add_index "shared_articles", ["name"], name: "index_articles_on_name"
-  add_index "shared_articles", ["number", nil], name: "index_articles_on_number_and_shared_supplier_id", unique: true
+  add_index "shared_articles", ["number"], name: "index_articles_on_number_and_shared_supplier_id", unique: true
 
   create_table "shared_suppliers", force: :cascade do |t|
     t.string   "name",                          null: false
