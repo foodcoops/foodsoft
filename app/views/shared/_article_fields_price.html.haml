@@ -68,7 +68,9 @@
   function checkAndNotifyPriceProblem(){
     var price = computeSplitPrice();
     var oldPrice = parseFloat($('##{field}_price', form).val());
-    $('.split-price-warning').toggle(price!=oldPrice);
+
+    var show_warning = $('##{field}_supplier_price', form).val() && price != oldPrice
+    $('.split-price-warning').toggle(show_warning);
   }
 
   $('##{field}_price, ##{field}_supplier_price, ##{field}_unit_quantity', form).on('change keyup', checkAndNotifyPriceProblem);
