@@ -1,4 +1,8 @@
 .fold-line
+  .split-price-warning
+    .alert.alert-warning Supplier price does not equal (Price * Unit).  If this is not intended use the 'Recalculate Split Price' button to update the price.
+
+.fold-line
   = f.input :price do
     .input-prepend
       %span.add-on= t 'number.currency.format.unit'
@@ -36,31 +40,43 @@
     var gross_price = (price + deposit) * (tax / 100 + 1);
     var fc_price = gross_price  * (#{FoodsoftConfig[:price_markup].to_f} / 100 + 1);
     $('#article_fc_price').html($.isNumeric(fc_price) ? I18n.l("currency", fc_price) : '&#133;');
+    checkAndNotifyPriceProblem();
   }
 
-  function updateSplitPrice(){
-    var units = parseFloat($('#article_unit_quantity').val());
-    var supplierPrice = parseFloat($('#article_supplier_price', form).val());
+  function computeSplitPrice(){
+    var units = parseFloat($('##{field}_unit_quantity').val());
+    var supplierPrice = parseFloat($('##{field}_supplier_price', form).val());
     var price = ((supplierPrice/units)*100);
     price = Math.ceil(price);
     price = price/100;
+    return price;
+  }
 
+  function updateSplitPrice(){
+    var price = computeSplitPrice();
     var oldPrice = parseFloat($('##{field}_price', form).val());
     if (oldPrice == price){
       window.alert(      [
       'this button lets you quickly recalculate the split price, but the',
       'price is still the same!  price = (supplier price/unit)',
       'did you change unit or supplier price?',
-      ].join('\n'));
+      ].join(' '));
       return;
-    }else{
+    } else {
       $('##{field}_price', form).val(price);
+      updatePrice();
     }
-
-
   }
 
+  function checkAndNotifyPriceProblem(){
+    var price = computeSplitPrice();
+    var oldPrice = parseFloat($('##{field}_price', form).val());
+    $('.split-price-warning').toggle(price!=oldPrice);
+  }
+
+  $('##{field}_price, ##{field}_supplier_price, ##{field}_unit_quantity', form).on('change keyup', checkAndNotifyPriceProblem);
   $('##{field}_price, ##{field}_tax, ##{field}_deposit', form).on('change keyup', updatePrice);
 
+  checkAndNotifyPriceProblem();
 
 
