@@ -46,10 +46,6 @@ class OrderPdf < RenderPDF
     "#{number_to_currency(order_article_price(order_article))} / #{order_article.article.unit}"
   end
 
-  def order_article_unit_per_price(order_article)
-    "#{order_article.article.unit} @ #{number_to_currency(order_article_price(order_article))}"
-  end
-
   def group_order_article_quantity_with_tolerance(goa)
     goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : "#{goa.quantity}"
   end
