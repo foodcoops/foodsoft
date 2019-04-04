@@ -1,4 +1,4 @@
-%td.closed
+%td.closed.name
   = link_to order_article.article.name, '#', 'data-toggle-this' => "#group_order_articles_#{order_article.id}"
 %td= order_article.article.order_number
 %td{title: units_history_line(order_article, :plain => true)}
