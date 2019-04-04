@@ -86,7 +86,21 @@ class OrderArticle < ApplicationRecord
 
   # Calculate gross price for ordered qunatity.
   def total_gross_price
-    units * price.unit_quantity * price.gross_price
+    if price.supplier_price
+      units * price.supplier_price
+    else
+      units * price.unit_quantity * price.gross_price
+    end
+  end
+
+  # total paid to supplier
+  def total_supplier_price
+    units * price.supplier_price unless price.supplier_price.nil?
+  end
+
+  # true if the supplier price is different than the amount charged to members - allowing for rounding errors
+  def supplier_price_different_than_charged?
+    (total_gross_price - total_price) * 100 > (units * price.unit_quantity)
   end
 
   def ordered_quantities_different_from_group_orders?(ordered_mark="!", billed_mark="?", received_mark="?")

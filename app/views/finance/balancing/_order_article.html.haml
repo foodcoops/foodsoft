@@ -12,7 +12,7 @@
   :plain
     /
   = number_to_currency(order_article.total_price, :unit => "")
-%td
+%td{:style =>("color:red;font-weight: bold" if order_article.supplier_price_different_than_charged?)}
   = number_to_currency(order_article.price.gross_price, :unit => "")
   :plain
     /
