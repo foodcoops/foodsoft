@@ -137,6 +137,7 @@ class Article < ApplicationRecord
         :origin => [self.origin, new_article.origin],
         :unit => [self.unit, new_unit],
         :price => [self.price.to_f.round(2), new_price.to_f.round(2)],
+        :supplier_price => [self.supplier_price.to_f.round(2), new_article.supplier_price.to_f.round(2)],
         :tax => [self.tax, new_article.tax],
         :deposit => [self.deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
         # take care of different num-objects.
@@ -242,13 +243,14 @@ class Article < ApplicationRecord
         :price => price,
         :tax => tax,
         :deposit => deposit,
-        :unit_quantity => unit_quantity
+        :unit_quantity => unit_quantity,
+        :supplier_price => supplier_price
       )
     end
   end
 
   def price_changed?
-    changed.detect { |attr| attr == 'price' || 'tax' || 'deposit' || 'unit_quantity' } ? true : false
+    changed.detect { |attr| attr == 'price' || 'tax' || 'deposit' || 'unit_quantity' || 'supplier_price' } ? true : false
   end
 
   # We used have the name unique per supplier+deleted_at+type. With the addition of shared_sync_method all,
