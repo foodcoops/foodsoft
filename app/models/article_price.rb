@@ -31,12 +31,5 @@ class ArticlePrice < ApplicationRecord
   validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
 
-  def supplier_price
-    unless self[:supplier_price]
-      unit_quantity*price
-    else
-      self[:supplier_price]
-    end
-  end
 end
 
