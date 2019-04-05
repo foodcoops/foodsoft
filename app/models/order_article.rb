@@ -98,6 +98,18 @@ class OrderArticle < ApplicationRecord
     units * price.supplier_price unless price.supplier_price.nil?
   end
 
+  # price rounding error, since we round to the nearest cent/penny
+  def price_rounding_error
+    cost_per = price.supplier_price / price.unit_quantity
+    cost_per_in_cent = cost_per * 100
+    cost_per_in_cent_rounded = cost_per_in_cent.ceil
+    (cost_per_in_cent_rounded - cost_per_in_cent) / 100
+  end
+
+  def total_price_rounding_error
+    units * price.unit_quantity * price_rounding_error
+  end
+
   # true if the supplier price is different than the amount charged to members - allowing for rounding errors
   def supplier_price_different_than_charged?
     (total_gross_price - total_price) * 100 > (units * price.unit_quantity)
