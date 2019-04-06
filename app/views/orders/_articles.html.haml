@@ -20,6 +20,7 @@
       - order_articles.each do |order_article|
         - net_price = order_article.price.price
         - gross_price = order_article.price.gross_price
+        - supplier_price = order_article.price.supplier_price
         - unit_quantity = order_article.price.unit_quantity
         - units = order_article.units
         - total_net += units * unit_quantity * net_price
@@ -27,9 +28,10 @@
         %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + order_article_class(order_article)}
           %td.name
             =h order_article.article.name
-            .span= order_article.article.note
+            - unless order_article.article.note.blank?
+              .span= order_article.article.note
           %td= order_article.article.unit
-          %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
+          %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)} / #{number_to_currency(supplier_price)}"
           - if order.stockit?
             %td= units
           - else
