@@ -141,7 +141,7 @@ class Mailer < ActionMailer::Base
   # separate method to allow plugins to mess with the attachments
   def add_order_result_attachments(order, options = {})
     attachments['order.pdf'] = OrderFax.new(order, options).to_pdf
-    attachments['order.csv'] = OrderCsv.new(order, options).to_csv
+    # attachments['order.csv'] = OrderCsv.new(order, options).to_csv
   end
 
   private
