@@ -282,6 +282,10 @@ tr.unavailable {
   color: @articleUnavailColor;
 }
 
+tr.using-tolerance {
+  background-color: #ede1d4;
+}
+
 // articles edit all
 .field_with_errors {
   input, select {
@@ -436,10 +440,51 @@ i.package.icon-only {
   width: 30px !important;
 }
 
-// get rid of extra space on bottom of dialog with form
-.modal form {
-  margin: 0;
+//// get rid of extra space on bottom of dialog with form
+//.modal form {
+//  margin: 0;
+//}
+
+/* full screen modal thanks to https://github.com/YitzhakAndrade/modal-fullscreen-bootstrap-2.3.2  */
+.modal-fullscreen {
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  margin-left: -50%;
+  width: 100%;
+  background-color: #fff;
 }
+
+.modal-fullscreen.fade.in {
+  bottom: 0;
+  top: 0;
+}
+
+.modal-fullscreen .modal-header [data-dismiss="modal"] {
+  float: right;
+}
+.modal-fullscreen .modal-body {
+  overflow-y: auto;
+}
+.modal-fullscreen .modal-body > * {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+@media (max-width: 767px) {
+  .modal-fullscreen {
+    margin-left: 0;
+  }
+  .modal-fullscreen.fade.in {
+    left: 0;
+    right: 0;
+  }
+}
+
 
 // multiple-column layout in forms (landscape tablet and wider only)
 @media (min-width: 768px) {
@@ -520,6 +565,10 @@ i.package.icon-only {
 .panel-body {
   padding: 15px;
   padding-bottom: 0px;
+}
+
+.navbar-fixed-bottom {
+  position: fixed;
 }
 
 span.positive_amount {
