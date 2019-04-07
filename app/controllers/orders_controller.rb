@@ -16,12 +16,17 @@ class OrdersController < ApplicationController
     @per_page = 15
     if params['sort']
       sort = case params['sort']
-               when "supplier"         then "suppliers.name, ends DESC"
-               when "pickup"           then "pickup DESC"
-               when "ends"             then "ends DESC"
-               when "supplier_reverse" then "suppliers.name DESC"
-               when "ends_reverse"     then "ends"
-               end
+             when "supplier" then
+               "suppliers.name, ends DESC"
+             when "pickup" then
+               "pickup DESC"
+             when "ends" then
+               "ends DESC"
+             when "supplier_reverse" then
+               "suppliers.name DESC"
+             when "ends_reverse" then
+               "ends"
+             end
     else
       sort = "ends DESC"
     end
@@ -32,13 +37,17 @@ class OrdersController < ApplicationController
   # Gives a view for the results to a specific order
   # Renders also the pdf
   def show
-    @order= Order.find(params[:id])
+    @order = Order.find(params[:id])
     @view = (params[:view] || 'default').gsub(/[^-_a-zA-Z0-9]/, '')
     @partial = case @view
-                 when 'default'  then 'articles'
-                 when 'groups'   then 'shared/articles_by/groups'
-                 when 'articles' then 'shared/articles_by/articles'
-                 else 'articles'
+               when 'default' then
+                 'articles'
+               when 'groups' then
+                 'shared/articles_by/groups'
+               when 'articles' then
+                 'shared/articles_by/articles'
+               else
+                 'articles'
                end
 
     respond_to do |format|
@@ -50,18 +59,24 @@ class OrdersController < ApplicationController
         send_order_pdf @order, params[:document]
       end
       format.csv do
-        send_data OrderCsv.new(@order).to_csv, filename: @order.name+'.csv', type: 'text/csv'
+        send_data OrderCsv.new(@order).to_csv, filename: @order.name + '.csv', type: 'text/csv'
       end
       format.text do
-        send_data OrderTxt.new(@order).to_txt, filename: @order.name+'.txt', type: 'text/plain'
+        send_data OrderTxt.new(@order).to_txt, filename: @order.name + '.txt', type: 'text/plain'
       end
     end
   end
 
   # Page to create a new order.
   def new
-    @order = Order.new(supplier_id: params[:supplier_id]).init_dates
-    @order.article_ids = Order.find(params[:order_id]).article_ids if params[:order_id]
+    attributes = {supplier_id: params[:supplier_id]}
+    if params[:order_id]
+      copy_order = Order.find(params[:order_id])
+      attributes.merge!(copy_order.slice(:article_ids, :note,
+                                         :supplier_note, :end_action,
+                                         :boxfill))
+    end
+    @order = Order.new(attributes).init_dates
   end
 
   # Save a new order.
@@ -99,6 +114,7 @@ class OrdersController < ApplicationController
   def swap
     @order = Order.includes(:articles).find(params[:id])
   end
+
   def swap_update
     # puts "updating! #{params}"
     @order = Order.includes(:articles).find(params[:id])
@@ -186,7 +202,7 @@ class OrdersController < ApplicationController
           unless oa.units_received.blank?
             cunits[0] += oa.units_received * oa.article.unit_quantity
             oacounts = oa.redistribute oa.units_received * oa.price.unit_quantity, rest_to
-            oacounts.each_with_index {|c,i| cunits[i+1]+=c; counts[i+1]+=1 if c>0 }
+            oacounts.each_with_index {|c, i| cunits[i + 1] += c; counts[i + 1] += 1 if c > 0}
           end
         end
         oa.save!
@@ -197,7 +213,7 @@ class OrdersController < ApplicationController
     notice << I18n.t('orders.update_order_amounts.msg1', count: counts[0], units: cunits[0])
     notice << I18n.t('orders.update_order_amounts.msg2', count: counts[1], units: cunits[1]) if params[:rest_to_tolerance]
     notice << I18n.t('orders.update_order_amounts.msg3', count: counts[2], units: cunits[2]) if params[:rest_to_stock]
-    if counts[3]>0 || cunits[3]>0
+    if counts[3] > 0 || cunits[3] > 0
       notice << I18n.t('orders.update_order_amounts.msg4', count: counts[3], units: cunits[3])
     end
     notice.join(', ')
