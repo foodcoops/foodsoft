@@ -896,6 +896,7 @@ en:
         add_group: Add group
         total: Total costs
         total_fc: Total paid by coop members
+        balanced_fc: To balance price should be
         total_supplier: Total paid to supplier
         units: Units
       index:
@@ -1334,12 +1335,11 @@ en:
       text: |
         Dear %{group},
 
-        Your account balance has dropped below zero due to a booking on %{when}: %{balance}
+        Your account balance has dropped below zero due to a recent order on %{when}: %{balance}
 
         There was a charge of %{amount} for "%{note}" by %{user}.
 
         Please make a deposit to your account as soon as possible.
-
 
 
         Kind regards from %{foodcoop}.
@@ -1373,11 +1373,11 @@ en:
     order_result_supplier:
       subject: New order for %{name}
       text: |
-        Hi!
+        Hello,
 
-        Foodcoop %{foodcoop} would like to place an order.  Please find our order attached.
+        %{foodcoop} would like to place an order.  Find our order attached.  Please confirm receipt.
 
-        %{note}
+        %{supplier_note}
 
         Kind regards,
         %{user}
