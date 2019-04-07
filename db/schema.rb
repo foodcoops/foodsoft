@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181201000000) do
+ActiveRecord::Schema.define(version: 20190407151303) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -293,14 +296,14 @@ ActiveRecord::Schema.define(version: 20181201000000) do
   add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: :cascade do |t|
-    t.string   "name",         limit: 255,                  null: false
-    t.string   "uid",          limit: 255,                  null: false
-    t.string   "secret",       limit: 255,                  null: false
-    t.text     "redirect_uri", limit: 65535,                null: false
-    t.string   "scopes",       limit: 255,   default: "",   null: false
+    t.string   "name",                        null: false
+    t.string   "uid",                         null: false
+    t.string   "secret",                      null: false
+    t.text     "redirect_uri",                null: false
+    t.string   "scopes",       default: "",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "confidential",               default: true, null: false
+    t.boolean  "confidential", default: true, null: false
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
@@ -344,6 +347,7 @@ ActiveRecord::Schema.define(version: 20181201000000) do
     t.integer  "invoice_id"
     t.datetime "last_sent_mail"
     t.integer  "end_action",                                             default: 0,      null: false
+    t.text     "supplier_note"
   end
 
   add_index "orders", ["state"], name: "index_orders_on_state", using: :btree
