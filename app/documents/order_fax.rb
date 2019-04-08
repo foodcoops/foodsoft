@@ -53,6 +53,10 @@ class OrderFax < OrderPdf
         move_down 5
         text "#{Supplier.human_attribute_name :fax}: #{order.supplier[:fax]}"
       end
+      unless order.supplier.try(:contact_person).blank?
+        move_down 5
+        text "#{Supplier.human_attribute_name :contact_person}: #{order.supplier[:contact_person]}"
+      end
     end
 
     move_down 5
@@ -62,8 +66,9 @@ class OrderFax < OrderPdf
       text I18n.t('documents.order_fax.deliver_on', date: order.pickup.strftime(I18n.t('date.formats.long'))), align: :right
     end
     move_down 10
-    unless order.supplier.try(:contact_person).blank?
-      text "#{Supplier.human_attribute_name :contact_person}: #{order.supplier[:contact_person]}"
+
+    unless order.supplier_note.blank?
+      text "NOTE: #{order.supplier_note}", :inline_format => true
       move_down 10
     end
 
