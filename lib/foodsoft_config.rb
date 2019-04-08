@@ -261,6 +261,7 @@ class FoodsoftConfig
         tasks_period_days: 7,
         tasks_upfront_days: 49,
         shared_supplier_article_sync_limit: 200,
+        per_page: 20,
         host: 'localhost',
         port: '3000',
         protocol: 'http',
