@@ -17,7 +17,7 @@ class OrderFax < OrderPdf
     contact = FoodsoftConfig[:contact].symbolize_keys
 
     # From paragraph
-    bounding_box [margin_box.right-200,margin_box.top], width: 200 do
+    bounding_box [margin_box.right - 200, margin_box.top], width: 200 do
       text FoodsoftConfig[:name], size: fontsize(9), align: :right
       move_down 5
       text contact[:street], size: fontsize(9), align: :right
@@ -41,7 +41,7 @@ class OrderFax < OrderPdf
     end
 
     # Recipient
-    bounding_box [margin_box.left,margin_box.top-60], width: 200 do
+    bounding_box [margin_box.left, margin_box.top - 60], width: 200 do
       text order.name
       move_down 5
       text order.supplier.try(:address).to_s
@@ -70,7 +70,7 @@ class OrderFax < OrderPdf
     # Articles
     data, total = table_data
 
-    column_widths=[30, 40, 90, 40, 210, 60, 70]
+    column_widths = [30, 40, 90, 40, 210, 60, 70]
     data << [nil, nil, nil, nil, nil, I18n.t('documents.order_fax.total'), number_to_currency(total)]
     table data, column_widths: column_widths, cell_style: {size: fontsize(8), font: 'Courier', overflow: :shrink_to_fit} do |table|
       table.header = true
@@ -85,9 +85,9 @@ class OrderFax < OrderPdf
       # table.columns(5).align = :left
       table.row(0).columns(3).align = :center
       # table.columns(3..6).align = :right
-      table.row(data.length-1).columns(0..6).borders = [:top, :bottom]
-      table.row(data.length-1).columns(0).borders = [:top, :bottom]
-      table.row(data.length-1).border_top_width = 2
+      table.row(data.length - 1).columns(0..6).borders = [:top, :bottom]
+      table.row(data.length - 1).columns(0).borders = [:top, :bottom]
+      table.row(data.length - 1).border_top_width = 2
     end
     #font_size: fontsize(8),
     #vertical_padding: 3,
@@ -125,7 +125,7 @@ class OrderFax < OrderPdf
       subtotal = units_to_order * supplier_price
       total += subtotal
 
-      data << [(oa.article.order_number.length < 10 ? oa.article.order_number.sub('PRO-', '') : ''),
+      data << [oa.article.order_number,
                units_to_order,
                "#{total_quantity} #{unit}",
                oa.article.origin,
@@ -162,7 +162,7 @@ class OrderFax < OrderPdf
   def each_order_article
     order_articles
         .find_each_with_order(batch_size: BATCH_SIZE) do |oa|
-      yield oa if oa.units>0
+      yield oa if oa.units > 0
     end
 
   end
