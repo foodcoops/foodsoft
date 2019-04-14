@@ -1,5 +1,21 @@
-%tr{class: if goa.result == 0 then 'unavailable' end, id: "goa_#{goa.id}"}
-  %td{:style => "width:70%"}= goa.group_order.ordergroup_name
-  %td.center= "#{goa.quantity} + #{goa.tolerance}"
+-#- percent_tolerance = ((goa.group_order.price ? goa.group_order.total_tolerance_cost/goa.group_order.price : 0)*100).round
+-#- tolerance_available = goa.tolerance_price_limit-goa.tolerance_price
+%tr{class: if goa.result == 0 then 'unavailable' elsif goa.result > goa.quantity then 'using-tolerance' end, id: "goa_#{goa.id}"}
+  %td{:style => "width:70%"}
+    %span= goa.group_order.ordergroup_name
+    -#%span= "(#{number_to_currency(tolerance_available)} tolerance left)" if tolerance_available > 0
+    -#%br
+    -#%span.small Total tolerance cost #{percent_tolerance}% - (#{number_to_currency(goa.group_order.total_tolerance_cost)} of #{number_to_currency(goa.group_order.price)})
+  %td.center
+    %span.quantity= goa.quantity
+    %span +
+    %span.tolerance= goa.tolerance
   %td.center.input-delta= (edit or true rescue true) ? group_order_article_edit_result(goa) : goa.result
   %td.price{data: {value: goa.total_price}}= number_to_currency(goa.total_price)
+
+
+-#%tr{class: if goa.result == 0 then 'unavailable' end, id: "goa_#{goa.id}"}
+-#  %td{:style => "width:70%"}= goa.group_order.ordergroup_name
+-#  %td.center= "#{goa.quantity} + #{goa.tolerance}"
+-#  %td.center.input-delta= (edit or true rescue true) ? group_order_article_edit_result(goa) : goa.result
+-#  %td.price{data: {value: goa.total_price}}= number_to_currency(goa.total_price)

@@ -8,6 +8,13 @@
             = "(#{order_article.article.unit}, #{number_to_currency order_article.price.fc_price}"
             - pkg_info = pkg_helper(order_article.price)
             = ", #{pkg_info}".html_safe unless pkg_info.blank?
+            = ", #{order_article.units} case ordered for a total of #{order_article.units * order_article.article.unit_quantity} x #{order_article.article.unit}"
             )
   - for goa in order_article.group_order_articles.ordered
     = render 'shared/articles_by/article_single_goa', goa: goa, edit: (edit rescue nil)
+  %tr
+    %td= link_to t('.add_group'), new_group_order_article_path(order_article_id: order_article.id), remote: true, class: 'btn btn-mini'
+    %td
+    %td.center{id:"oa_#{order_article.id}_sum_result"}= order_article.group_order_articles.ordered.collect(&:result).sum
+    %td{id:"oa_#{order_article.id}_sum_price"}= number_to_currency(order_article.group_order_articles.ordered.collect(&:total_price).sum)
+

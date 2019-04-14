@@ -2,6 +2,10 @@
 -# include this in all pages that use articles_by views (directly or via ajax)
 = content_for :javascript do
   :javascript
+    $(document).on('GroupOrderArticle#create', function(e) {
+      window.location.reload();
+    });
+
     $(document).on('GroupOrderArticle#update', function(e) {
 
       var el_goa = $('#goa_'+e.group_order_article_id);
@@ -16,7 +20,10 @@
       }
 
       // group_order_article is greyed when result==0
-      el_goa.toggleClass('unavailable', $('input#r_'+e.group_order_article_id, el_goa).val()==0);
+      var result = $('input#r_'+e.group_order_article_id, el_goa).val();
+      el_goa.toggleClass('unavailable', result==0);
+
+      el_goa.toggleClass('using-tolerance', el_goa.find('span.quantity').text()<result);
 
       // update total price of group_order, order_article and/or ordergroup, when present
       var el_sum = $('#group_order_'+e.group_order_id+', #single_ordergroup_total, #single_order_article_total');
@@ -26,5 +33,32 @@
         var new_price_sum = old_price_sum - old_price + e.group_order_article_price;
         el_price_sum.text(I18n.l('currency', new_price_sum));
         el_price_sum.data('value', new_price_sum);
+      }
+
+      function sumOfColumns(table, columnIndex) {
+        var tot = 0;
+        table.find("tr").children("td:nth-child(" + columnIndex + ")")
+        .each(function() {
+          $this = $(this);
+          if (!$this.hasClass("sum") && $this.html() != "") {
+            console.log('$this.html()',$this.html());
+            var value = Number($this.html().replace('$',''));
+            if (isNaN(value)){
+              value = Number($this.find('input.delta').val());
+            }
+            console.log('value',value);
+            tot += value
+          }
+        });
+        return tot;
+      }
+      var el_oa_table = $('#oa_'+e.order_article_id);
+      if (el_oa_table.length){
+          var sum_result = $('#oa_'+e.order_article_id+'_sum_result');
+          var sum_price = $('#oa_'+e.order_article_id+'_sum_price');
+          sum_result.text('');
+          sum_result.text(sumOfColumns(el_oa_table,3));
+          sum_price.text('');
+          sum_price.text(I18n.l('currency', sumOfColumns(el_oa_table,4)));
       }
     });
