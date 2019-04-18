@@ -24,9 +24,6 @@
           %td.center= group_order_article_edit_result(group_order_article)
           %td.numeric= number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result)
           %td.actions{:style=>"width:1em"}
-            - unless order_article.order.closed?
-              = link_to t('ui.delete'), group_order_article_path(group_order_article), 
-                method: :delete, remote: true, class: 'btn btn-mini btn-danger'
           %td
         - totals[:result] += group_order_article.result
     %tfoot
