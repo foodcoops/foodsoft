@@ -62,7 +62,7 @@ class RenderPDF < Prawn::Document
   BOTTOM_MARGIN = 23
   HEADER_SPACE = 9
   FOOTER_SPACE = 3
-  HEADER_FONT_SIZE = 16
+  HEADER_FONT_SIZE = 8
   FOOTER_FONT_SIZE = 8
   DEFAULT_FONT = 'OpenSans'
 
