@@ -17,12 +17,12 @@
   = number_to_currency(order_article.total_price_rounding_error, :unit => "")
   :plain
     /
-  = number_to_currency(order_article.total_supplier_price, :unit => "")
+  = number_to_currency(order_article.total_supplier_charge, :unit => "")
 %td{:style =>("color:red;font-weight: bold" if order_article.supplier_price_different_than_charged?)}
   = number_to_currency(order_article.price.gross_price, :unit => "")
   :plain
     /
-  = number_to_currency(order_article.total_gross_price, :unit => "")
+  = number_to_currency(order_article.total_supplier_charge, :unit => "")
 %td #{order_article.price.tax}%
 %td= order_article.price.deposit
 %td

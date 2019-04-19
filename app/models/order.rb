@@ -180,7 +180,7 @@ class Order < ApplicationRecord
           when :gross_price_supplier
             total += oa.units * oa.price.supplier_price
           when :rounding_error
-            total += quantity * (oa.price.price-(oa.price.supplier_price/oa.price.unit_quantity.to_f))
+            total += quantity * oa.price_rounding_error
         end
       end
     elsif type == :groups || type == :groups_without_markup

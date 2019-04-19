@@ -12,13 +12,11 @@
         %b Order Totals
     %tr
       %td= t('.groups_amount')
-      %td.numeric= number_to_currency(total_paid_by_members)
+      %td.numeric= number_to_currency(total_paid_by_members-rounding_error)
+      %td.numeric= '+ ' + number_to_currency(rounding_error)
     %tr
       %td Supplier Price:
       %td.numeric= number_to_currency(total_ordered)
-    %tr
-      %td Rounding Error:
-      %td.numeric= number_to_currency(rounding_error)
     %tr
       %td Balance:
       %td.numeric= number_to_currency(total_paid_by_members-total_ordered)

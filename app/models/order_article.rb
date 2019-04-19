@@ -82,18 +82,14 @@ class OrderArticle < ApplicationRecord
     units += ((remainder > 0) && (remainder + tolerance >= unit_size) ? 1 : 0)
   end
 
-  # Calculate price for ordered quantity.
+  # Calculate amount charged to members for ordered quantity.
   def total_price
     units * price.unit_quantity * price.price
   end
 
-  # Calculate gross price for ordered qunatity.
-  def total_gross_price
-    if price.supplier_price
-      units * price.supplier_price
-    else
-      units * price.unit_quantity * price.gross_price
-    end
+  # Calculate supplier charge for ordered quantity.
+  def total_supplier_charge
+    units * price.supplier_price
   end
 
   # rounding error, since we round to the nearest cent/penny
@@ -106,11 +102,6 @@ class OrderArticle < ApplicationRecord
     else
       0
     end
-  end
-
-  # total paid to supplier
-  def total_supplier_price
-    units * price.supplier_price unless price.supplier_price.nil?
   end
 
   # price rounding error, since we round to the nearest cent/penny
@@ -127,7 +118,21 @@ class OrderArticle < ApplicationRecord
 
   # true if the supplier price is different than the amount charged to members - allowing for rounding errors
   def supplier_price_different_than_charged?
-    (total_gross_price - total_price) * 100 > (units * price.unit_quantity)
+    # (total_supplier_price - total_price) * 100 > (units * price.unit_quantity)
+    if units == 0
+      false
+    else
+      !price_balanced
+    end
+  end
+
+  def price_balanced
+    member_total = group_orders_sum
+    total_unit_quantity_ordered = article_price.unit_quantity * units
+    units_received = (member_total[:quantity] / article_price.unit_quantity).round(5)
+    rounding_error = calculate_rounding_error(total_supplier_charge, member_total[:quantity]) * member_total[:quantity]
+    actual_price_per = price.price_rounded_up(price: total_supplier_charge, quantity: member_total[:quantity])
+    actual_price_per == price.price
   end
 
   def ordered_quantities_different_from_group_orders?(ordered_mark = "!", billed_mark = "?", received_mark = "?")
