@@ -895,7 +895,7 @@ en:
       group_order_articles:
         add_group: Add group
         total: Total costs
-        total_fc: Total paid by coop members
+        total_fc: Charged to members
         balanced_fc: To balance price should be
         total_supplier: Total paid to supplier
         units: Units

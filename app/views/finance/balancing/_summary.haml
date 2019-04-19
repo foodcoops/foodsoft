@@ -1,30 +1,50 @@
+- total_ordered = order.sum(:gross_price_supplier)
+- total_paid_by_members = order.sum(:groups)
+- rounding_error = order.sum(:rounding_error)
+
 %b=h order.name
 %br/
 = t('.duration', {starts: format_date(order.starts), ends: format_date(order.ends)})
 %p
   %table
     %tr
-      %td= t('.net_amount')
-      %td.numeric= number_to_currency(order.sum(:net))
-    %tr
-      %td= t('.gross_amount')
-      %td.numeric= number_to_currency(order.sum(:gross))
-    %tr
-      %td= t('.fc_amount')
-      %td.numeric= number_to_currency(order.sum(:fc))
+      %td
+        %b Order Totals
     %tr
       %td= t('.groups_amount')
-      %td.numeric= number_to_currency(order.sum(:groups))
+      %td.numeric= number_to_currency(total_paid_by_members)
     %tr
-      %td
-        = t('.fc_profit')
-        %small= t('.without_extra_charge')
-      %td.numeric= number_to_currency(order.profit(:without_markup => true))
+      %td Supplier Price:
+      %td.numeric= number_to_currency(total_ordered)
     %tr
-      %td
-        = t('.fc_profit')
-        %small= t('.with_extra_charge')        
-      %td#order_profit.numeric= number_to_currency(order.profit)
+      %td Rounding Error:
+      %td.numeric= number_to_currency(rounding_error)
+    %tr
+      %td Balance:
+      %td.numeric= number_to_currency(total_paid_by_members-total_ordered)
+    - if @order.invoice
+      %tr
+        %td
+          %b Invoice
+      %tr
+        %td= t('.groups_amount')
+        %td.numeric= number_to_currency(total_paid_by_members)
+      %tr
+        %td Net Charge:
+        %td.currency= number_to_currency @order.invoice.net_amount
+      - without_markup = number_to_currency(order.profit(:without_markup => true))
+      - with_markup = number_to_currency(order.profit)
+      %tr
+        %td
+          = t('.fc_profit')
+          %small= t('.without_extra_charge')
+        %td.numeric= without_markup
+      - unless with_markup == without_markup
+        %tr
+          %td
+            = t('.fc_profit')
+            %small= t('.with_extra_charge')
+          %td#order_profit.numeric= with_markup
 #summaryChangedWarning.alert(style="display:none;")
   %strong= t '.changed'
   %br/

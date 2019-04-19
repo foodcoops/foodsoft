@@ -1,5 +1,6 @@
 
 %td{:colspan => "7"}
+  %button adj price
   %table.table.table-striped
     %thead
       %tr
@@ -27,9 +28,42 @@
           %td
         - totals[:result] += group_order_article.result
     %tfoot
+      - member_total = order_article.group_orders_sum
+      - total_unit_quantity_ordered = order_article.article_price.unit_quantity * order_article.units
+      - units_received = (member_total[:quantity]/order_article.article_price.unit_quantity).round(5)
+      - rounding_error = order_article.calculate_rounding_error(order_article.total_gross_price,member_total[:quantity])*member_total[:quantity]
+      - actual_price_per = order_article.price.price_rounded_up(price: order_article.total_gross_price, quantity: member_total[:quantity])
+      - price_balanced = actual_price_per==order_article.price.price
+      - price_style = "color:red;font-weight: bold" unless price_balanced
+      - price_style = "color:green" if price_balanced
       %tr
         %td
         %td{:style => "width:8em"}= t('.total_fc')
-        %td.center= totals[:result]
-        %td.numeric= number_to_currency(order_article.group_orders_sum[:price])
-        %td{:colspan => "3"}
+        %td.center{style: price_style}
+          = units_received
+          = pkg_helper order_article.article_price
+          = " = #{totals[:result]}"
+        %td.center= group_order_article_total_amount(totals[:result], order_article)
+        %td.numeric= number_to_currency(member_total[:price]-rounding_error)
+        - if rounding_error >= 0.0001
+          %td{:colspan => "3"}
+            %abbr{title: "plus this amount from rounding-up to cent"}
+              = "(+ #{number_to_currency(rounding_error)})"
+      %tr
+        %td
+        %td{:style => "width:8em"}= t('.total_supplier')
+        %td.center
+          = order_article.units
+          = pkg_helper order_article.article_price
+          = " = #{total_unit_quantity_ordered}"
+        %td.center= group_order_article_total_amount((total_unit_quantity_ordered), order_article)
+        %td.numeric= number_to_currency(order_article.total_gross_price)
+        - if member_total[:quantity] > 0
+          %td{:colspan => "3", :style => price_style}
+            = "#{number_to_currency(actual_price_per)}"
+      %tr
+        %td.center{:colspan => "6", :style => price_style}
+          .span.info
+            .p
+              = "if supplier sent credit, adjust the received amount to #{units_received} otherwise"
+              = "adjust the price from #{number_to_currency(order_article.price.price)} to #{number_to_currency(actual_price_per)}"

@@ -14,9 +14,9 @@ class OrderArticle < ApplicationRecord
   validates_uniqueness_of :article_id, scope: :order_id
 
   _ordered_sql = "order_articles.units_to_order > 0 OR order_articles.units_billed > 0 OR order_articles.units_received > 0"
-  scope :ordered, -> { where(_ordered_sql) }
-  scope :ordered_or_member, -> { includes(:group_order_articles).where("#{_ordered_sql} OR order_articles.quantity > 0 OR group_order_articles.result > 0") }
-  default_scope { includes(:article).order('articles.name') }
+  scope :ordered, -> {where(_ordered_sql)}
+  scope :ordered_or_member, -> {includes(:group_order_articles).where("#{_ordered_sql} OR order_articles.quantity > 0 OR group_order_articles.result > 0")}
+  default_scope {includes(:article).order('articles.name')}
 
   before_create :init_from_balancing
   after_destroy :update_ordergroup_prices
@@ -37,8 +37,11 @@ class OrderArticle < ApplicationRecord
   # Count quantities of belonging group_orders.
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
-    quantity = group_order_articles.collect(&:result).sum
-    {:quantity => quantity, :price => quantity * price.fc_price}
+    unless @group_orders_sum
+      quantity = group_order_articles.collect(&:result).sum
+      @group_orders_sum = {:quantity => quantity, :price => quantity * price.fc_price}
+    end
+    @group_orders_sum
   end
 
   # Update quantity/tolerance/units_to_order from group_order_articles
@@ -93,6 +96,18 @@ class OrderArticle < ApplicationRecord
     end
   end
 
+  # rounding error, since we round to the nearest cent/penny
+  def calculate_rounding_error(supplier_price, unit_quantity)
+    if unit_quantity != 0
+      cost_per = supplier_price / unit_quantity
+      cost_per_in_cent = cost_per * 100
+      cost_per_in_cent_rounded = cost_per_in_cent.ceil
+      (cost_per_in_cent_rounded - cost_per_in_cent) / 100
+    else
+      0
+    end
+  end
+
   # total paid to supplier
   def total_supplier_price
     units * price.supplier_price unless price.supplier_price.nil?
@@ -115,7 +130,7 @@ class OrderArticle < ApplicationRecord
     (total_gross_price - total_price) * 100 > (units * price.unit_quantity)
   end
 
-  def ordered_quantities_different_from_group_orders?(ordered_mark="!", billed_mark="?", received_mark="?")
+  def ordered_quantities_different_from_group_orders?(ordered_mark = "!", billed_mark = "?", received_mark = "?")
     if not units_received.nil?
       ((units_received * price.unit_quantity) == group_orders_sum[:quantity]) ? false : received_mark
     elsif not units_billed.nil?
@@ -142,12 +157,12 @@ class OrderArticle < ApplicationRecord
     if surplus.index(:tolerance).nil?
       qty_for_members = [qty_left, self.quantity].min
     else
-      qty_for_members = [qty_left, self.quantity+self.tolerance].min
-      counts[surplus.index(:tolerance)] = [0, qty_for_members-self.quantity].max
+      qty_for_members = [qty_left, self.quantity + self.tolerance].min
+      counts[surplus.index(:tolerance)] = [0, qty_for_members - self.quantity].max
     end
 
     # Recompute
-    group_order_articles.each {|goa| goa.save_results! qty_for_members }
+    group_order_articles.each {|goa| goa.save_results! qty_for_members}
     qty_left -= qty_for_members
 
     # if there's anything left, move to stock if wanted
@@ -210,7 +225,7 @@ class OrderArticle < ApplicationRecord
   end
 
   def update_global_price=(value)
-    @update_global_price = (value == true || value == '1') ?  true : false
+    @update_global_price = (value == true || value == '1') ? true : false
   end
 
   # @return [Number] Units missing for the last +unit_quantity+ of the article.
@@ -259,15 +274,15 @@ class OrderArticle < ApplicationRecord
     delta_mis = missing_units - missing_units_was
     delta_box = units_to_order - units_to_order_was
     unless (delta_q == 0 && delta_t >= 0) ||
-           (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
-           (delta_q > 0 && delta_q == -delta_t)
+        (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
+        (delta_q > 0 && delta_q == -delta_t)
       raise ActiveRecord::RecordNotSaved.new("Change not acceptable in boxfill phase for '#{article.name}', sorry.", self)
     end
   end
 
   def _missing_units(unit_quantity, quantity, tolerance)
     begin
-      units = unit_quantity - ((quantity  % unit_quantity) + tolerance)
+      units = unit_quantity - ((quantity % unit_quantity) + tolerance)
       units = 0 if units < 0
       units = 0 if units == unit_quantity
       units

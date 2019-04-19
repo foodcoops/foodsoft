@@ -7,9 +7,21 @@ module PriceCalculation
     add_percent(price + deposit, tax)
   end
 
-  # @return [Number] Price for the foodcoop-member.
+    # @return [Number] Price for the foodcoop-member.
   def fc_price
     add_percent(gross_price, FoodsoftConfig[:price_markup])
+  end
+
+  # compute the price per unit, rounding up so co-op doesn't lose money
+  def price_rounded_up(options = {})
+    options[:price] ||= supplier_price
+    options[:quantity] ||= unit_quantity
+    if options[:quantity] == 0
+      0
+    else
+      ((options[:price] / options[:quantity].to_f) * 100).ceil / 100.0
+    end
+
   end
 
   def supplier_price
