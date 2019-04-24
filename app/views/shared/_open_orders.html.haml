@@ -21,7 +21,9 @@
               = link_to_ordering(order)
             %td{ max_width: '200px;'}
               .span= order.note
-              .badge.info= "#{number_to_currency(order.sum(:gross))} ordered by the co-op so far"
+              - count = order.order_articles.ordered.count
+              .badge.info= "#{count} #{'case'.pluralize{count}} filled"
+              .badge.info= "co-op total #{number_to_currency(order.sum(:gross))}"
             %td= format_date(order.pickup) unless order.pickup.nil?
             %td= format_time(order.ends) unless order.ends.nil?
             - if group_order = order.group_order(ordergroup)
