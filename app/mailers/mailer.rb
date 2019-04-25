@@ -46,7 +46,8 @@ class Mailer < ActionMailer::Base
     @group_order  = group_order
 
     mail to: user,
-         subject: I18n.t('mailer.order_result.subject', name: group_order.order.name)
+         subject: I18n.t('mailer.order_result.subject', name: group_order.order.name),
+         reply_to: FoodsoftConfig[:email_from]
   end
 
   # Sends order result to the supplier
@@ -62,7 +63,8 @@ class Mailer < ActionMailer::Base
 
     mail to: order.supplier.email,
          cc: user,
-         reply_to: user,
+         bcc: FoodsoftConfig[:email_from],
+         reply_to: FoodsoftConfig[:email_from],
          subject: subject
   end
 
