@@ -143,6 +143,15 @@ class Order < ApplicationRecord
         sort { |a, b| a[0] <=> b[0] }
   end
 
+  def articles_grouped_by_category_and_ordered_amount
+    @articles_grouped_by_category ||= order_articles.
+        includes([:article_price, :group_order_articles, :article => :article_category]).
+        order('articles.name').
+        group_by(&method(:category_name_and_quantity))
+          .sort { |a, b| a[0] <=> b[0] }
+  end
+
+
   def articles_sort_by_category
     order_articles.includes(:article).order('articles.name').sort do |a,b|
       a.article.article_category.name <=> b.article.article_category.name
@@ -334,6 +343,14 @@ class Order < ApplicationRecord
   end
 
   private
+
+  def category_name_and_quantity(a)
+    if a.quantity > 0
+      ' ' + a.article.article_category.name + ' - partial or filled cases'
+    else
+      a.article.article_category.name + ' - no demand for these items yet'
+    end
+  end
 
   # Updates the "price" attribute of GroupOrders or GroupOrderResults
   # This will be either the maximum value of a current order or the actual order value of a finished order.

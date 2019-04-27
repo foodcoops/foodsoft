@@ -29,7 +29,6 @@
 - title t('.title'), false
 
 
-
 -if current_user.ordergroup
   %div
     -if current_user.ordergroup.get_available_funds < FoodsoftConfig[:minimum_balance]
@@ -170,7 +169,8 @@
           %th.center#col_required= heading_helper GroupOrderArticle, :quantity
         %th.right{style: "width:15px;"}= heading_helper GroupOrderArticle, :total_price
     %tbody.list
-      - @order.articles_grouped_by_category.each do |category, order_articles|
+      - groupings = @order.order_articles.count < 100 ? @order.articles_grouped_by_category : @order.articles_grouped_by_category_and_ordered_amount
+      - groupings.each do |category, order_articles|
         %tr.list-heading.article-category
           %td
             = category
@@ -269,9 +269,6 @@
               - prices_equal = total_price == (total_price+tolerance_price)
               %span{id: "price_#{order_article.id}_display"}= number_to_currency(total_price)
               %span{id: "tolerance_price_#{order_article.id}_display", 'style' => ('display: none' if prices_equal)}="+#{number_to_currency(tolerance_price) if (tolerance_shown)}"
-
-
-
 
 
   #order-footer-fixed
