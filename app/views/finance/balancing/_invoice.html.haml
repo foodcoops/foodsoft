@@ -18,7 +18,14 @@
     %tr
       %td= t('.refund_adjusted_amount')
       %td.curreny= number_to_currency invoice.net_amount
-  %br/
+    %tr
+      %td Invoice Note:
+    %tr
+      %td{colspan: '2'}
+        = simple_form_for [:finance, invoice], remote: true, html: { class: 'form-inline'} do |f|
+          = f.input :note,  label: false, placeholder: 'add accounting balancing notes here', input_html: {  onchange: "$('#save_note_button').click()" }
+          = f.submit 'save note',  class: 'hidden btn btn-mini', id: 'save_note_button'
+
   = link_to t('.edit'), edit_finance_invoice_path(invoice)
 
 - else
