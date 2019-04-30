@@ -4,10 +4,16 @@ module PriceCalculation
   # Gross price = net price + deposit + tax.
   # @return [Number] Gross price.
   def gross_price
-    add_percent(price + deposit, tax)
+    # add_percent(price + deposit, tax)
+    add_percent(price, tax) + deposit
   end
 
-    # @return [Number] Price for the foodcoop-member.
+  def tax_cost
+    # add_percent(price + deposit, tax)
+    add_percent(price, tax) - price
+  end
+
+  # @return [Number] Price for the foodcoop-member.
   def fc_price
     add_percent(gross_price, FoodsoftConfig[:price_markup])
   end

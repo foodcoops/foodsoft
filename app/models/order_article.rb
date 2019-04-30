@@ -39,7 +39,7 @@ class OrderArticle < ApplicationRecord
   def group_orders_sum
     unless @group_orders_sum
       quantity = group_order_articles.collect(&:result).sum
-      @group_orders_sum = {:quantity => quantity, :price => quantity * price.fc_price}
+      @group_orders_sum = {:quantity => quantity, :price => quantity * price.fc_price, :net_price => quantity * price.price}
     end
     @group_orders_sum
   end
@@ -128,9 +128,6 @@ class OrderArticle < ApplicationRecord
 
   def price_balanced
     member_total = group_orders_sum
-    total_unit_quantity_ordered = article_price.unit_quantity * units
-    units_received = (member_total[:quantity] / article_price.unit_quantity).round(5)
-    rounding_error = calculate_rounding_error(total_supplier_charge, member_total[:quantity]) * member_total[:quantity]
     actual_price_per = price.price_rounded_up(price: total_supplier_charge, quantity: member_total[:quantity])
     actual_price_per == price.price
   end
