@@ -1,6 +1,9 @@
 - total_ordered = order.sum(:gross_price_supplier)
-- total_paid_by_members = order.sum(:groups)
 - rounding_error = order.sum(:rounding_error)
+- total_deposit = order.sum(:deposit)
+- total_tax = order.sum(:tax)
+- net_paid_by_members = order.sum(:net)
+- total_paid_by_members = net_paid_by_members+total_deposit+total_tax
 
 %b=h order.name
 %br/
@@ -12,14 +15,27 @@
         %b Order Totals
     %tr
       %td= t('.groups_amount')
-      %td.numeric= number_to_currency(total_paid_by_members-rounding_error)
-      %td.numeric= '+ ' + number_to_currency(rounding_error)
+      %td.numeric= number_to_currency(net_paid_by_members-rounding_error)
+      %td.numeric
+        %abbr{title: "plus this amount from rounding-up to cent"}
+          = '+ ' + number_to_currency(rounding_error)
     %tr
       %td Supplier Price:
       %td.numeric= number_to_currency(total_ordered)
     %tr
-      %td Balance:
-      %td.numeric= number_to_currency(total_paid_by_members-total_ordered)
+      %td Deposits:
+      %td.numeric= number_to_currency(total_deposit)
+    %tr
+      %td Taxes:
+      %td.numeric= number_to_currency(total_tax)
+    %tr
+      %td
+        %abbr{title: "This should be 0.  If it is not, please add a note indicating why the order isn't balanced.  Please also keep in mind that a zero (or close to zero) result does not indicate the prices are correct - but a non-zero balance indicates that there is a problem with the amount charged to members"}
+          Difference:
+      %td.numeric= number_to_currency((total_paid_by_members-(total_ordered+total_deposit+total_tax)).round(2)-rounding_error.round(2))
+      %td.numeric
+        %abbr{title: "plus this amount from rounding-up to cent"}
+          = '+ ' + number_to_currency(rounding_error)
     - if @order.invoice
       %tr
         %td
