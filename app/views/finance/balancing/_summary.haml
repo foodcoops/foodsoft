@@ -50,6 +50,11 @@
       - with_markup = number_to_currency(order.profit)
       %tr
         %td
+          Balance Fix
+          %small= t('.without_extra_charge')
+        %td.numeric= number_to_currency(total_paid_by_members-@order.invoice.net_amount)
+      %tr
+        %td
           = t('.fc_profit')
           %small= t('.without_extra_charge')
         %td.numeric= without_markup
