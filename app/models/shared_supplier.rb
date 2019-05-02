@@ -25,7 +25,7 @@ class SharedSupplier < ApplicationRecord
   end
 
   def cached_articles
-    @cached_articles ||= shared_articles.all
+    @cached_articles ||= shared_articles.where(available: true)
   end
 
   # These set of attributes are used to autofill attributes of new supplier,
