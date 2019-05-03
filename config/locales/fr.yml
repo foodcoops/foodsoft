@@ -2,55 +2,55 @@ fr:
   activerecord:
     attributes:
       article:
-        article_category: Catégorie
-        availability: le produit est-il disponible actuellement?
-        availability_short: disp.
-        deposit: Consigne
-        fc_price: Prix pour les membres
-        fc_price_desc: Prix avec TVA, consigne et part de la coop inclus.
-        fc_price_short: Prix final
-        fc_share: Marge de la coop
-        fc_share_short: Marge
-        gross_price: Prix TTC
-        manufacturer: Product-rice-eur
-        name: Nom
+        article_category: Category
+        availability: Is article available?
+        availability_short: avail.
+        deposit: Deposit
+        fc_price: FoodCoop price
+        fc_price_desc: Price including taxes, deposit and Foodcoop-charge.
+        fc_price_short: FC price
+        fc_share: FoodCoop margin
+        fc_share_short: FC margin
+        gross_price: Gross price
+        manufacturer: Manufacturer
+        name: Name
         note: Note
-        order_number: Numéro 
-        order_number_short: Numéro
-        origin: Lieu de production
-        price: Prix HT
-        supplier: Fournisseu-r-se
-        tax: TVA
-        unit: Unité
-        unit_quantity: Unités par lot
-        unit_quantity_short: U.
-        units: Lots
+        order_number: Order number
+        order_number_short: Nr.
+        origin: Origin
+        price: Price (net)
+        supplier: Supplier
+        tax: VAT
+        unit: Unit
+        unit_quantity: Unit quantity
+        unit_quantity_short: U.Q.
+        units: Units
       article_category:
-        description: Description
-        name: Nom
+        description: Import names
+        name: Name
       article_price:
-        deposit: Consigne
-        price: Prix HT
-        tax: TVA
-        unit_quantity: Unités par lot
+        deposit: Deposit
+        price: Price (net)
+        tax: VAT
+        unit_quantity: Unit quantity
       delivery:
-        delivered_on: Date de réapprovisionnement
+        delivered_on: Delivery date
         note: Note
-        supplier: Fournisseur-e
+        supplier: Supplier
       document:
-        created_at: Créé le
-        created_by: Crée par
+        created_at: Created at
+        created_by: Created by
         data: Data
         mime: MIME type
-        name: Nom
+        name: Name
       financial_transaction:
-        amount: Montant
+        amount: Amount
         created_on: Date
         financial_transaction_class: Financial transaction class
         financial_transaction_type: Financial transaction type
         note: Note
-        ordergroup: Cellule
-        user: Créateur-trice
+        ordergroup: Ordergroup
+        user: Entered by
       financial_transaction_class:
         name: Name
       financial_transaction_type:
@@ -58,45 +58,45 @@ fr:
         financial_transaction_class: Financial transaction class
         name_short: Short Name
       group_order:
-        ordergroup: Cellule
-        price: Total de la commande
-        updated_by: Dernière commande
+        ordergroup: Ordergroup
+        price: Order sum
+        updated_by: Last ordered by
       group_order_article:
-        ordered: Commandée
-        quantity: Quantité
-        received: Quantité
-        result: Quantité
-        tolerance: Tolérance
-        total_price: Total
-        unit_price: Prix/Unité
+        ordered: Ordered
+        quantity: Amount
+        received: Received
+        result: Amount
+        tolerance: Tolerance
+        total_price: Sum
+        unit_price: Price/Unit
       invoice:
-        amount: Montant
-        attachment: Appendice
-        created_at: Créé le
-        created_by: Établi par
-        date: Date de facturation
-        delete_attachment: Supprimer appendice
-        deliveries: Réapprovisionnement
-        deposit: Consigne facturée
-        deposit_credit: Consigne remboursée
-        net_amount: Montant recalculé en excluant les consignes
+        amount: Amount
+        attachment: Attachment
+        created_at: Created at
+        created_by: Created by
+        date: Billing date
+        delete_attachment: Delete attachment
+        deliveries: Delivery
+        deposit: Deposit charged
+        deposit_credit: Deposit returned
+        net_amount: Amount adjusted for refund
         note: Note
-        number: Numéro
-        orders: Commande
-        paid_on: Payée le
-        supplier: Fournisseur-e
+        number: Number
+        orders: Order
+        paid_on: Paid on
+        supplier: Supplier
       mail_delivery_status:
-        created_at: Créé le
+        created_at: Time
         email: Email
         message: Message
       message:
-        body: Contenu
-        group_id: Cellule ou équipe
+        body: Body
+        group_id: Group
         messagegroup_id: Messagegroup
-        order_id: Commande
-        ordergroup_id: Cellule
-        private: Privé
-        recipient_tokens: "Destinataires"
+        order_id: Order
+        ordergroup_id: Ordergroup
+        private: Private
+        recipient_tokens: "(Additional) recipients"
         send_method:
           all: Send to all members
           messagegroup: Send to members of a messagegroup
@@ -104,130 +104,130 @@ fr:
           ordergroup: Send to members of a ordergroup
           recipients: Send to specific members
           workgroup: Send to members of a workgroup
-        send_to_all: Envoyer à tous les membres
-        subject: Sujet
-        workgroup_id: Équipe
+        send_to_all: Send to all members
+        subject: Subject
+        workgroup_id: Workgroup
       messagegroup:
         description: Description
-        name: Nom
-        user_tokens: Membres
+        name: Name
+        user_tokens: Members
       order:
         boxfill: Fill boxes after
-        closed_by: Décompté par
-        created_by: Établi par
+        closed_by: Settled by
+        created_by: Created by
         end_action: End action
         end_actions:
           auto_close: Close the order
           auto_close_and_send: Close the order and send it to the supplier
           auto_close_and_send_min_quantity: Close the order and send it to the supplier if the minimum quantity has been reached
           no_end_action: No automatic action
-        ends: Clôture le
-        name: Fournisseur-e
+        ends: Ends at
+        name: Supplier
         note: Note
         pickup: Pickup
-        starts: Ouverture le
-        status: Statut
-        supplier: Fournisseu-r-se
-        updated_by: Dernière modification par
+        starts: Starts at
+        status: Status
+        supplier: Supplier
+        updated_by: Last edited by
       order_article:
         article: Article
-        missing_units: Nombre d'unités manquantes pour compléter le lot en cours
-        missing_units_short: Manquant
-        quantity: Quantité demandée
-        quantity_short: Demandé
-        units_received: Unités recues
-        units_received_short: Recu
-        units_to_order: Quantité
-        units_to_order_short: Commandé
-        update_global_price: Mettre à jour le prix global
+        missing_units: Missing units
+        missing_units_short: Missing
+        quantity: Desired amount
+        quantity_short: Desired
+        units_received: Received units
+        units_received_short: Received
+        units_to_order: Ordered units
+        units_to_order_short: Ordered
+        update_global_price: Globally update current price
       order_comment:
-        text: Commenter cette commande...
+        text: Add comment to this order ...
       ordergroup:
-        account_balance: Crédit initial
-        available_funds: Crédit disponible
-        break: "(dernière) pause"
-        break_until: à
+        account_balance: Account balance
+        available_funds: Available credit
+        break: "(Last) break"
+        break_until: until
         contact: Contact
-        contact_address: Adresse
-        contact_person: Personne à contacter
-        contact_phone: Téléphone
+        contact_address: Address
+        contact_person: Contact person
+        contact_phone: Phone
         description: Description
-        ignore_apple_restriction: Pour cette cellule, ne pas bloquer les commandes en cas de manque de glands
-        last_order: dernière commande
-        last_user_activity: dernière activité
-        name: Nom
-        user_tokens: Membres
+        ignore_apple_restriction: Ignore order stop by apple points restriction
+        last_order: Last order
+        last_user_activity: Last activity
+        name: Name
+        user_tokens: Members
       page:
-        body: Contenu
-        parent_id: Page parente
-        title: Titre
+        body: Body
+        parent_id: Parent page
+        title: Title
       stock_article:
-        available: Disponible
-        price: Prix HT
-        quantity: en stock
-        quantity_available: Quantité disponible
-        quantity_available_short: Disp.
-        quantity_ordered: Commandés
+        available: Available
+        price: Price
+        quantity: In stock
+        quantity_available: Available quantity
+        quantity_available_short: Avail.
+        quantity_ordered: Ordered
       stock_taking:
         date: Date
         note: Note
       supplier:
-        address: Adresse
-        contact_person: Contact
-        customer_number: Numéro de client de la coop
-        customer_number_short: Num. de client
-        delivery_days: Jours de livraison
+        address: Address
+        contact_person: Contact person
+        customer_number: Customer number
+        customer_number_short: Cust.nr.
+        delivery_days: Delivery days
         email: Email
         fax: Fax
         iban: IBAN
-        is_subscribed: abonné?
-        min_order_quantity: Prix minimum d'une commande
-        min_order_quantity_short: Qté min.
-        name: Nom
+        is_subscribed: subscribed?
+        min_order_quantity: Minimum order quantity
+        min_order_quantity_short: Min. quantity
+        name: Name
         note: Note
-        order_howto: Comment commander
-        phone: Téléphone
-        phone2: Autre téléphone
+        order_howto: How to order
+        phone: Phone
+        phone2: Phone 2
         shared_sync_method: How to synchronize
-        url: Site web
+        url: Homepage
       task:
         description: Description
-        done: Fait?
-        due_date: Echéance
-        duration: Durée
-        name: Activité
-        required_users: Nombre de personnes nécessaires
-        user_list: Responsables inscritEs
-        workgroup: Équipe
+        done: Done?
+        due_date: Due date
+        duration: Duration
+        name: Activity
+        required_users: People required
+        user_list: Responsible users
+        workgroup: Workgroup
       user:
         email: Email
-        first_name: Prénom
+        first_name: First name
         iban: IBAN
-        last_activity: dernière activité
-        last_login: Dernière connection
-        last_name: Nom de famille
-        name: Nom
-        nick: Identifiant
-        ordergroup: Cellule
-        password: Mot de passe
-        password_confirmation: Confirmation du mot de passe
-        phone: Téléphone
+        last_activity: Last activity
+        last_login: Last login
+        last_name: Last name
+        name: Name
+        nick: Username
+        ordergroup: Ordergroup
+        password: Password
+        password_confirmation: Repeat password
+        phone: Telephone
         workgroup:
-          one: Équipe
-          other: Équipes
+          one: Workgroup
+          other: Workgroups
       workgroup:
         description: Description
-        name: Nom
+        name: Name
         role_admin: Administration
-        role_article_meta: Base de données des produits
-        role_finance: Trésorerie
-        role_invoices: Facture
-        role_orders: Gestion des commandes
+        role_article_meta: Article database
+        role_finance: Finances
+        role_invoices: Invoices
+        role_orders: Order management
         role_pickups: Pickup days
-        role_suppliers: Contact avec les fournisseur-e-s
-        user_tokens: Membres
+        role_suppliers: Suppliers
+        user_tokens: Members
     errors:
-      has_many_left: est encore associé à une %{collection}!
+      has_many_left: is still associated with a %{collection}!
       models:
         article:
           attributes:
@@ -241,50 +241,50 @@ fr:
         task:
           attributes:
             done:
-              exclusion: répétition hebdomadaire invalide pour un boulot déjà effectué
+              exclusion: finished tasks may not be repeated
     models:
       article: Article
-      article_category: Catégorie
+      article_category: Category
       bank_transaction: Bank transaction
-      delivery: Réapprovisionnement
-      financial_transaction: Transaction
+      delivery: Delivery
+      financial_transaction: Financial transaction
       financial_transaction_class: Financial transaction class
       financial_transaction_type: Financial transaction type
-      invoice: Facture
+      invoice: Invoice
       message: Message
       messagegroup: Message group
-      order: Commande
-      order_article: Article à commander
-      order_comment: Commentaire
+      order: Order
+      order_article: Order article
+      order_comment: Order comment
       ordergroup:
         one: Ordergroup
         other: Ordergroups
-      stock_article: l'article à ajouter au cellier
-      stock_taking: Inventaire
-      supplier: Fournisseur-e
-      task: Boulot
-      user: Membre
-      workgroup: Équipe
+      stock_article: Stock article
+      stock_taking: Stock taking
+      supplier: Supplier
+      task: Task
+      user: User
+      workgroup: Workgroup
   admin:
-    access_to: accès à
+    access_to: access to
     base:
       index:
-        all_ordergroups: Toutes les cellules
-        all_users: TouTEs les membres
-        all_workgroups: Toutes les équipes
-        created_at: créé le
-        first_paragraph: Les cellules et les membres de la boufcoop peuvent être administrés sur cette page.
-        groupname: nom de la cellule
-        members: membres
-        name: nom
-        new_ordergroup: Nouvelle cellule
-        new_user: NouveLLE_eau membre
-        new_workgroup: Nouvelle équipe
-        newest_groups: Cellules les plus récentes
-        newest_users: Membres les plus récents
+        all_ordergroups: All ordergroups
+        all_users: All users
+        all_workgroups: All workgroups
+        created_at: created at
+        first_paragraph: Here you can administer Foodsoft groups and users.
+        groupname: group name
+        members: members
+        name: name
+        new_ordergroup: New ordergroup
+        new_user: New user
+        new_workgroup: New workgroup
+        newest_groups: newest groups
+        newest_users: newest users
         title: Administration
         type: type
-        username: identifiant
+        username: username
     configs:
       list:
         key: Key
@@ -292,11 +292,11 @@ fr:
         value: Value
       show:
         submit: Save
-        title: configuration
+        title: Configuration
       tab_layout:
         pdf_title: PDF documents
       tab_messages:
-        emails_title: Envoyer mail
+        emails_title: Sending email
       tab_payment:
         schedule_title: Ordering schedule
       tab_tasks:
@@ -305,7 +305,7 @@ fr:
         title: Configuration
       update:
         notice: Configuration saved.
-    confirm: T'es sûrE de ton coup?
+    confirm: Are you sure?
     finances:
       index:
         first_paragraph: Here you can manage the financial transaction classes and the corresponding financial transaction types. Every financial transaction has a type, which you have to select at every transaction, if you created more than one type. The financial transaction classes can be use to group the financial transaction types and will be shown as additional columns in the account overview, if there have been created more than one.
@@ -347,196 +347,196 @@ fr:
         title: Message group %{name}
     ordergroups:
       destroy:
-        error: 'La cellule n''a pas pu être dissoute: %{error}'
-        notice: La cellule a été supprimée
+        error: 'Ordergroup could not be marked as deleted: %{error}'
+        notice: Ordergroup was marked as deleted
       edit:
-        title: Modifier les informations sur la cellule
+        title: Edit ordergroup
       form:
-        first_paragraph: Invite de nouveaux membres %{url}.
-        here: ici
+        first_paragraph: You can invite new members %{url}.
+        here: here
       index:
-        first_paragraph: Sur cette page, des cellules peuvent être %{url}, modifiées ou bien dissoutes.
-        new_ordergroup: Définir une nouvelle cellule
-        new_ordergroups: créées
-        second_paragraph: 'Attention à bien noter la <em>différence entre une équipe et une cellule</em>: chaque membre fait partie d''une cellule, qui possède un certain crédit servant à payer les commandes, tandis qu''une <em> %{url} </em> (par exemple l''équipe distribution) s''occupe des boulots utiles à la boufcoop. Les membres appartiennent toujours à une et une seule cellule, mais peuvent faire partie de plusieurs équipes.'
-        title: Cellules
-        workgroup: équipe
+        first_paragraph: Here you can add %{url}, and edit or delete groups.
+        new_ordergroup: Add new ordergroup
+        new_ordergroups: new ordergroups
+        second_paragraph: 'Consider the difference between <em>group</em> and <em>ordergroup</em>: An ordergroup has an account and can order food. In a <em>%{url}</em> (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
+        title: Ordergroups
+        workgroup: workgroup
       new:
-        title: Définir une nouvelle cellule
+        title: Create ordergroup
       show:
-        confirm: T'es sûrE de ton coup?
-        edit: Modifier les données sur les cellules et/ou leurs membres
-        send_message: Envoyer un message
-        title: Cellule %{name}
-    search_placeholder: nom ...
+        confirm: Are you sure?
+        edit: Edit group/members
+        send_message: Send message
+        title: Ordergroup %{name}
+    search_placeholder: name ..
     users:
       controller:
         sudo_done: You are now logged in as %{user}. Be careful, and do not forget to log out when done!
       destroy:
-        error: 'La ajouter n''a pas pu être dissoute: %{error}'
-        notice: La ajouter a été supprimée
+        error: 'User could not be deleted: %{error}'
+        notice: User was deleted
       edit:
-        title: modifier les données sur le_la membre
+        title: Edit user
       index:
-        first_paragraph: Sur cette page, tu peux %{url}, modifier ou bien retirer des membres.
-        new_user: Ajouter unE nouveLLE_eau membre
-        new_users: ajouter
+        first_paragraph: Here you can %{url}, edit and delete users.
+        new_user: Create new user
+        new_users: create new
         show_deleted: Show deleted users
-        title: Administration des membres
+        title: User admin
       new:
-        title: Ajouter unE nouveLLE_eau membre
+        title: Create new user
       restore:
         error: 'User could not be restored: %{error}'
-        notice: User était restauré
+        notice: User was restored
       show:
         confirm_sudo: If you continue, you will take on the identity of %{user}. Do not forget to log out when you're done!
-        groupabos: Participation à des équipes
-        member_since: Membre depuis %{time}
-        person: Personne
-        preference: Préférences
-        send_message: Envoyer un message
+        groupabos: Group subscriptions
+        member_since: Member since %{time}
+        person: Person
+        preference: Preferences
+        send_message: Send message
         show_email_problems: Show email problems
         sudo: Take on identity
       users:
         show_email_problems: Show email problems
     workgroups:
       destroy:
-        error: 'Cette équipe n''a pas pu être supprimée: %{error}'
-        notice: L'équipe a bien été supprimée
+        error: 'Workgroup could not be deleted: %{error}'
+        notice: Workgroup was deleted
       edit:
-        title: Modifier les données sur l'équipe
+        title: Edit workgroup
       form:
-        first_paragraph: De nouveaux membres peuvent être invités %{url}.
-        here: ici
+        first_paragraph: You can invite new members %{url}.
+        here: here
       index:
-        first_paragraph: Sur cette page, tu peux ajouter, modifier et supprimer des %{url}.
-        new_workgroup: Définir une nouvelle équipe
-        new_workgroups: nouvelles équipes
-        ordergroup: cellule
-        second_paragraph: 'Attention à bien noter la <em>différence entre une équipe et une cellule</em>: chaque membre fait partie d''une <em>%{url}</em>, qui possède un certain crédit servant à payer les commandes, tandis qu''une équipe (par exemple l''équipe distribution) s''occupe des boulots utiles à la boufcoop. Les membres appartiennent toujours à une et une seule cellule, mais peuvent faire partie de plusieurs équipes.'
-        title: Équipes
+        first_paragraph: Here you can create %{url}, edit and delete them.
+        new_workgroup: Create new workgroup
+        new_workgroups: new workgroups
+        ordergroup: ordergroup
+        second_paragraph: 'Consider the difference between a <em>workgroup</em> and an <em>ordergroup</em>: an <em>%{url}</em> has an account and can order food. In a workgroup (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
+        title: Workgroups
       new:
-        title: Définir une nouvelle équipe
+        title: Create workgroup
       show:
-        confirm: T'es sûrE de ton coup?
-        edit: Modifier les données sur l'équipe et/ou ses membres
-        title: Équipe %{name}
+        confirm: Are you sure?
+        edit: Edit group/members
+        title: Workgroup %{name}
       workgroups:
-        members: membres
-        name: nom
+        members: members
+        name: name
   application:
     controller:
-      error_authn: Identification requise!
-      error_denied: Ton compte n'es pas autorisé à accéder à cette page pour le moment. Si tu penses que ce n'est pas normal, demande à un-e administrateur-rice de modifier les permissions. Si tu as plusieurs comptes, il faut peut-être que tu %{sign_in}
-      error_denied_sign_in: te reconnectes
-      error_feature_disabled: Cette fonction est désactivée.
-      error_members_only: Cette action ne peut être effectuée que par les membres du groupe.
-      error_token: Accès interdit (jeton invalide)!
+      error_authn: Authentication required!
+      error_denied: You are not allowed to view the requested page. If you think you should, ask an administrator to give you appropriate permissions. If you have access to multiple user accounts, you might want to %{sign_in}.
+      error_denied_sign_in: sign in as another user
+      error_feature_disabled: This feature is currently disabled.
+      error_members_only: This action is only available to members of the group!
+      error_token: Access denied (invalid token)!
   article_categories:
     create:
-      notice: La catégorie a bien été définie.
+      notice: Category was stored
     destroy:
-      error: 'Cette catégorie n''a pas pu être supprimée: %{message}'
+      error: 'Category could not be deleted: %{message}'
     edit:
-      title: Modifier la catégorie
+      title: Edit category
     index:
-      new: Créer une nouvelle catérogie
-      title: Catégories de produits
+      new: Add new category
+      title: Article categories
     new:
-      title: Créer une nouvelle catégorie
+      title: Add new category
     update:
-      notice: La catégorie a été mise à jour
+      notice: Category was updated
   articles:
     article:
-      last_update: 'dernière modification: %{last_update} | TTC: %{gross_price}'
+      last_update: 'last updated: %{last_update} | gross: %{gross_price}'
     articles:
-      confirm_delete: Tu veux vraiment supprimer tous ces produits?
-      option_available: Marquer comme disponible(s)
-      option_delete: Supprimer
-      option_not_available: Marquer comme indisponible(s)
-      option_select: Choisir une action...
-      price_netto: Prix
-      unit_quantity_desc: Unités par lot
-      unit_quantity_short: U/L
+      confirm_delete: Do you really want to delete all selected articles?
+      option_available: Make articles available
+      option_delete: Delete article
+      option_not_available: Make articles unavailable
+      option_select: Select action ...
+      price_netto: Price
+      unit_quantity_desc: Unit quantity
+      unit_quantity_short: U.Q.
     controller:
       create_from_upload:
-        notice: "%{count} nouveaux produits on été sauvegardés."
-      error_invalid: La description des produits comporte des erreurs.
-      error_nosel: Aucun produit n'a été sélectionné
-      error_parse: "%{msg} ... à la ligne %{line}"
-      error_update: 'Une erreur s''est produite lors de la mise à jour du produit "%{article}": %{msg}'
+        notice: "%{count} new articles were saved."
+      error_invalid: There are errors in articles
+      error_nosel: No articles selected
+      error_parse: "%{msg} ... in line %{line}"
+      error_update: 'An error occured when updating article ''%{article}'': %{msg}'
       parse_upload:
         no_file: Please select a file to upload.
-        notice: "%{count} produits ont été examinés avec succès."
+        notice: "%{count} articles were succesfully analysed."
       sync:
-        notice: Le catalogue est à jour
-        shared_alert: "%{supplier} n'est pas dans l'annuaire mutualisé."
+        notice: Catalog is up to date
+        shared_alert: "%{supplier} is not linked to an external database"
       update_all:
-        notice: Les produits et les prix ont été mis à jour.
+        notice: All articles and prices were updated.
       update_sel:
-        notice_avail: Les articles sélectionnés ont été marqués comme disponibles.
-        notice_destroy: Les produits sélectionnés ont été supprimés.
-        notice_noaction: Aucune action n'a été spécifiée!
-        notice_unavail: Les produits sélectionnés ont été marqués comme indisponibles.
+        notice_avail: All selected articles were set to be available.
+        notice_destroy: All selected articles were deleted.
+        notice_noaction: No action specified!
+        notice_unavail: All selected articles were set to be unavailable.
       update_sync:
-        notice: Les produits et les prix ont été mis à jour.
+        notice: All articles and prices were updated.
     destroy_active_article:
-      drop: supprimer
-      note: "%{article} apparaît dans des listes de commande en cours et ne peut donc être supprimé. Il faut d'abord %{drop_link} des listes de commande."
+      drop: delete
+      note: "%{article} is used in current orders and can not be deleted Please first ... the article from orders %{drop_link}."
     edit_all:
-      note: 'Les champs obligatoires sont: le nom, l''unité, le prix HT et le numéro de commande.'
-      submit: Mettre à jour tous les produits
-      title: Modifier tous les produits de %{supplier}
-      warning: 'Attention, tous les produits vont être mis à jour!'
+      note: 'Mandatory fields are: name, unit, (net) price and order number.'
+      submit: Update all articles
+      title: Edit all articles from %{supplier}
+      warning: 'Warning: all articles will be updated!'
     form:
-      title_edit: Modifier ce produit
-      title_new: Ajouter un nouveau produit
+      title_edit: Edit article
+      title_new: Add new article
     import_search_results:
-      action_import: importer
-      already_imported: déjà importé
-      not_found: Aucun produit correspondant n'a été trouvé
+      action_import: import
+      already_imported: imported
+      not_found: No articles found
     index:
-      change_supplier: Changer de fournisseur-e...
-      edit_all: Tout modifier
+      change_supplier: Change supplier ...
+      edit_all: Edit all
       ext_db:
-        import: Rechercher/Importer
-        sync: Synchroniser
+        import: Import article
+        sync: Synchronise
       import:
-        category: Importer directement dans une catégorie
-        placeholder: Nom...
-        restrict_region: Seulement les produits régionaux
-        title: Importer ce produit
-      new: Nouveau produit
-      new_order: Définir une nouvelle commande
-      search_placeholder: Nom...
-      title: Produits de %{supplier} (%{count})
-      upload: Transférer les produits
+        category: Directly import into category
+        placeholder: Search by name ...
+        restrict_region: Restrict to region only
+        title: Import article
+      new: New article
+      new_order: Create new order
+      search_placeholder: Name ...
+      title: Articles from %{supplier} (%{count})
+      upload: Upload articles
     model:
-      error_in_use: "%{article} ne peut pas être supprimé car il fait partie d'une liste de commande en cours!"
-      error_nosel: Aucun produit n'a été sélectionné
+      error_in_use: "%{article} can not be deleted because the article is part of a current order!"
+      error_nosel: You have selected no articles
     parse_upload:
-      body: "<p><i>Merci de vérifier les produits importés.</i></p>\n<p><i>Attention, les doublons ne sont pas automatiquement détectés.</p></i>."
-      submit: Téléverser
-      title: Téléverser des articles
+      body: "<p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>"
+      submit: Process upload
+      title: Upload articles
     sync:
       outlist:
-        alert_used: Attention, %{article} fait partie d'une commande en cours! Il faut d'abord le supprimer de cette commande.
-        body: 'Les produits suivants ne sont plus dans la liste et seront donc <b>supprimés</b>:'
+        alert_used: Warning, %{article} is used in an open order. Please remove it from the order first.
+        body: 'The following articles were removed from the list and will be <b>deleted</b>:'
         body_ignored:
-          one: Un produit sans numéro de commande a été ignoré.
-          other: "%{count} produits sans numéro de commande ont été ignorés."
-        body_skip: Aucun produi à supprimer.
-        title: Exclure de la liste...
-      price_short: Prix unitaire
-      submit: Tout supprimer ou mettre à jour.
-      title: Synchroniser les produits avec les données de l'annuaire mutualisé
-      unit_quantity_short: U/L
+          one: One article without order number was skipped.
+          other: "%{count} articles without order number were skipped."
+        body_skip: No articles to delete.
+        title: Remove from list ...
+      price_short: Price
+      submit: Synchronize all
+      title: Synchronize articles with external database
+      unit_quantity_short: Unit quantity
       update:
-        body: 'Chaque produit apparaît deux fois: les anciennes données sont rappelées en gris, et les champs du formulaire ont été préremplis avec les nouvelles valeurs. Les changements sont marqués en jaune.'
-        title: Mettre à jour...
+        body: 'Every article is shown twice: old values are gray, while the text fields contain updated values. Differences with the old articles are marked yellow.'
+        title: Update ...
         update_msg:
-          one: Un article doit être mis à jour.
-          other: "%{count} produits doivent être mis à jour."
+          one: One article needs to be updated.
+          other: "%{count} articles need to be updated."
       upnew:
         body_count:
           one: There is one new article to add.
@@ -544,25 +544,25 @@ fr:
         title: Add new ...
     upload:
       fields:
-        reserved: "(Reservé)"
-        status: Statut (x=exclu)
-      file_label: Merci de choisir un fichier compatible
+        reserved: "(Reserved)"
+        status: Status (x=skip)
+      file_label: Please choose a compatible file
       options:
         convert_units: Keep current units, recompute unit quantity and price (like synchronize).
         outlist_absent: Delete articles not in uploaded file.
       sample:
-        juices: Jus
-        nuts: Noix
-        organic: biologique
+        juices: Juices
+        nuts: Nuts
+        organic: Organic
         supplier_1: Nuttyfarm
-        supplier_2: champs bruns
-        supplier_3: champs verts
-        tomato_juice: Jus de tomate
-        walnuts: Noix
-      submit: Transférer le fichier
+        supplier_2: Brownfields
+        supplier_3: Greenfields
+        tomato_juice: Tomato juice
+        walnuts: Walnuts
+      submit: Upload file
       text_1: 'Here you can upload a spreadsheet to update the articles of %{supplier}. Excel (xls, xlsx) and OpenOffice (ods) spreadsheets are accepted, as well as comma-separated files (csv, columns separated by ";" with utf-8 encoding). Only the first sheet will be imported, and columns must be in the following order:'
       text_2: The rows shown here are examples. When there is an "x" in the first column, the article is outlisted and will be removed. This allows you to edit the spreadsheet and quickly remove many articles at once, for example when articles become unavailable with the supplier. The category will be matched to your Foodsoft category list (both by category name and import names).
-      title: Transférer les données sur les produits de %{supplier}
+      title: Upload articles of %{supplier}
   config:
     hints:
       applepear_url: Website where the apple and pear system for tasks is explained.
@@ -578,12 +578,12 @@ fr:
       email_replyto: Set this when you want to receive replies from emails sent by Foodsoft on a different address than the above.
       email_sender: Emails will appear to be sent from this email address. To avoid emails sent being classified as spam, the webserver may need to be registered in the SPF record of the email address's domain.
       help_url: Documentation website.
-      homepage: Site de votre coop.
+      homepage: Website of your foodcoop.
       ignore_browser_locale: Ignore the language of user's computer when the user has not chosen a language yet.
       mailing_list: Mailing-list email address to use instead of the messaging system for mail to all members.
       mailing_list_subscribe: Email address where members can send an email to for subscribing.
       minimum_balance: Members can only order when their account balance is above or equal to this amount.
-      name: Le nom de votre coop.
+      name: The name of your foodcoop.
       order_schedule:
         boxfill:
           recurr: Schedule for when the box-fill phase starts by default.
@@ -617,14 +617,14 @@ fr:
       applepear_url: Apple system help URL
       charge_members_manually: Charge members manually
       contact:
-        city: Ville
-        country: Pays
-        email: Mail
-        phone: Numéro
-        street: Rue
-        zip_code: Code postal
+        city: City
+        country: Country
+        email: Email
+        phone: Phone
+        street: Street
+        zip_code: Postcode
       currency_space: add space
-      currency_unit: Monnaie
+      currency_unit: Currency
       custom_css: Custom CSS
       default_locale: Default language
       disable_invite: Disable invites
@@ -638,7 +638,7 @@ fr:
       mailing_list: Mailing-list
       mailing_list_subscribe: Mailing-list subscribe
       minimum_balance: Minimum balance
-      name: Nom
+      name: Name
       order_schedule:
         boxfill:
           recurr: Box fill after
@@ -676,11 +676,11 @@ fr:
     tabs:
       applications: Apps
       foodcoop: Foodcoop
-      language: Langue
+      language: Language
       layout: Layout
-      list: Liste
+      list: List
       messages: Messages
-      others: Autre
+      others: Other
       payment: Finances
       tasks: Tasks
   current_orders:
@@ -689,10 +689,10 @@ fr:
         counts: "%{ordergroups} ordergroups ordered %{articles} different articles."
         no_selection: Choose an article to show who ordered it, or download pick lists at the right.
       article_info:
-        from: de %{supplier}
+        from: from %{supplier}
         origin_in: in %{origin}
-        supplied_and_made_by: fait par %{manufacturer}
-        supplied_by: de %{supplier}
+        supplied_and_made_by: made by %{manufacturer}
+        supplied_by: from %{supplier}
         supplied_by_made_by: from %{supplier} made by %{manufacturer}
         unit: per %{unit}
       form:
@@ -726,51 +726,51 @@ fr:
         new_transaction: New transaction
         payment: 'Payment:'
       show:
-        title: Articles pour %{name}
+        title: Articles for %{name}
     orders:
       receive:
         no_finished_orders: There are currently no orders to receive.
         title: Receive orders
   deliveries:
     add_stock_change:
-      how_many_units: 'Combien d''unités (%{unit}) de l''article %{name} doivent-elles être livrées?'
+      how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
     create:
-      notice: Le réapprovisionnement a bien a été défini. Attention à ne pas oublier de déposer la facture correspondante!
+      notice: Delivery was created. Please don’t forget to add an invoice!
     destroy:
-      notice: Le réapprovisionnement a été annulé.
+      notice: Delivery was deleted.
     edit:
-      title: Modifier le réapprovisionnement
+      title: Edit delivery
     form:
-      confirm_foreign_supplier_reedit: 'L''article %{name} a bien été ajouté au cellier. Mais un problème a été détecté: l''article provient d''un-e autre fournisseur-e que celleui dont provient cette livraison. Modifier l''article à nouvau?'
-      create_from_blank: Ajouter un nouvel article quelconque
-      create_stock_article: Ajouter un article au cellier
-      title_fill_quantities: 2. Définir les quantités livrées
-      title_finish_delivery: 3. Clore le réapprovisionnement
-      title_select_stock_articles: 1. Choisir les produits dans le cellier
+      confirm_foreign_supplier_reedit: The stock article %{name} was successfully saved. However, it belongs to a different supplier than this delivery. Would you like to edit the stock article again?
+      create_from_blank: Create new article
+      create_stock_article: Create stock article
+      title_fill_quantities: 2. Set delivery quantities
+      title_finish_delivery: 3. Finish delivery
+      title_select_stock_articles: 1. Select stock articles
     index:
-      confirm_delete: T'es sûrE de ton coup?
-      new_delivery: 'Approvisionner le cellier par %{supplier}'
-      title: "%{supplier}/Réapprovisionnements"
-    invoice_amount: Montant de la facture
-    invoice_net_amount: Montant HT de la facture
+      confirm_delete: Are you sure?
+      new_delivery: 'Create new delivery for %{supplier} '
+      title: "%{supplier}/deliveries"
+    invoice_amount: Invoice amount
+    invoice_net_amount: Invoice net amount
     new:
-      title: Approvisionnement du cellier par %{supplier}
+      title: New delivery from %{supplier}
     show:
-      sum: Prix total
-      sum_diff: montant TTC - montant HT
-      sum_gross: prix total brut
-      sum_net: prix total net
-      title: Afficher le réapprovisionnement
-      title_articles: Produits
+      sum: Sum
+      sum_diff: Gross - adjusted invoice amount
+      sum_gross: Gross sum
+      sum_net: Net sum
+      title: Show delivery
+      title_articles: Articles
     stock_article_for_adding:
-      action_add_to_delivery: Approvisionner
-      action_edit: Modifier
-      action_other_price: Copier
+      action_add_to_delivery: Add to delivery
+      action_edit: Edit
+      action_other_price: Copy
     stock_change_fields:
-      remove_article: Retirer l'article de cette commande
-    suppliers_overview: Liste des fournisseur-e-s
+      remove_article: Remove article from delivery
+    suppliers_overview: Supplier overview
     update:
-      notice: La commande a été actualisée
+      notice: Delivery was updated.
   discourse:
     callback:
       invalid_nonce: Invalid nonce
@@ -800,31 +800,31 @@ fr:
       filename: Current orders sorted by group
       title: Current orders - by group
     order_by_articles:
-      filename: Commande %{name}-%{date} - Trier par
-      title: 'Ordre des produits pour la commande: %{name}, clôturée le %{date}'
+      filename: Order %{name}-%{date} - by articles
+      title: 'Order sorted by articles: %{name}, closed at %{date}'
     order_by_groups:
-      filename: Commande %{name}-%{date} - Répartition par cellules
-      sum: prix total
-      title: 'Répartition par cellules pour la commande: %{name}, clôturée le %{date}'
+      filename: Order %{name}-%{date} - by group
+      sum: Sum
+      title: 'Order sorted by group: %{name}, closed at %{date}'
     order_fax:
-      filename: Commande %{name}-%{date} - Fax
+      filename: Order %{name}-%{date} - Fax
       rows:
-        - Numéro
-        - Quantité
-        - Nom du produit
-        - Nombre d'unités
-        - Unité
-        - Prix unitaire
-        - Prix
+        - Order Number
+        - Amount
+        - Name
+        - Unit quantity
+        - Unit
+        - Price/Unit
+        - Subtotal
       total: Total
     order_matrix:
-      filename: Commande %{name}-%{date} - Tableau de répartition
-      heading: Liste des produits (%{count})
-      title: 'Tableau de répartition pour la commande: %{name}; clôturée le %{date}'
+      filename: Order %{name}-%{date} - sorting matrix
+      heading: Article overview (%{count})
+      title: 'Order sorting matrix: %{name}, closed at %{date}'
   errors:
-    general: Un problème a été rencontré.
-    general_again: Une erreur s'est produite. Merci de réessayer.
-    general_msg: 'Une erreur s''est produite: %{msg}'
+    general: A problem has occured.
+    general_again: A problem has occured. Please try again.
+    general_msg: 'A problem has occured: %{msg}'
     internal_server_error:
       text1: An unexpected error has occured. Sorry!
       text2: We've been notified. If this remains a problem, please tell us so.
@@ -834,87 +834,87 @@ fr:
       title: Page not found
   feedback:
     create:
-      notice: Ton commentaire a été transmis avec succès. Merci
+      notice: Your feedback was sent successfully. Thanks a lot!
     new:
-      first_paragraph: Tu as trouvé une erreur? Tu as une proposition, une idée, une critique? Envoie un commentaire!
-      second_paragraph: "Petite remarque: l'équipe de Foodsoft s'occupe seulement de la maintenance du logiciel.\nPour les questions concernants l'organisation de ta boufcoop, il faut contacter les personnes concernées."
-      send: Transmettre
-      title: Laisser un commentaire
+      first_paragraph: Found a bug? Suggestions? Ideas? Reviews? We are happy to hear any feedback.
+      second_paragraph: Please be aware that the Foodsoft Team is only responsible for the maintenance of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.
+      send: Send
+      title: Give feedback
   finance:
     balancing:
       close:
-        alert: 'Une erreur s''est produite lors du décompte: %{message}'
-        notice: La commande a été décomptée avec succès, et les comptes des membres ont été mis à jour.
+        alert: 'An error occured while accounting: %{message}'
+        notice: Order was settled succesfully, the balance of the account was updated.
       close_direct:
-        alert: 'Impossible de clôturer cette commande: %{message}'
-        notice: La commande a été clôturée avec succès.
+        alert: 'Order can not be settled: %{message}'
+        notice: Order was settled.
       confirm:
-        clear: Terminer
-        first_paragraph: "Lorsque la commande sera clôturée, les comptes seront mis à jour en conséquence.\n<br/>\nLes décomptes pour cette commande s'élèveront comme suit: "
-        or_cancel: ou retourner au décompte
-        title: Décompter la commande
+        clear: Settle
+        first_paragraph: 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
+        or_cancel: or back to accounting
+        title: Settle order
       edit_note:
         title: Edit order note
       edit_results_by_articles:
-        add_article: Ajouter un produit
-        amount: Quantité
-        gross: Brut
+        add_article: Add article
+        amount: Amount
+        gross: Gross
         net: Net
       group_order_articles:
-        add_group: Ajouter une cellule
-        total: Prix total
-        total_fc: Prix total (pour la boufcoop)
-        units: Nombre d'unités
+        add_group: Add group
+        total: Total costs
+        total_fc: Sum (FC-price)
+        units: Units
       index:
-        title: Commandes clôturées
+        title: Closed orders
       invoice:
-        edit: Modifier la facture
-        invoice_amount: 'Montant de la facture:'
-        invoice_date: 'Date de la facture:'
-        invoice_number: 'Numéro de la facture:'
-        minus_refund_calculated: "Prix de la consigne:"
-        new: Saisir une nouvelle facture
-        new_body: 'Ajouter une facture pour cette commande'
-        plus_refund_credited: "Remboursement de la consigne"
-        refund_adjusted_amount: 'Montant recalculé en excluant les consignes'
+        edit: Edit invoice
+        invoice_amount: 'Invoice amount:'
+        invoice_date: 'Invoice date:'
+        invoice_number: 'Invoice number:'
+        minus_refund_calculated: "- deposit charged:"
+        new: create new invoice
+        new_body: 'Create an invoice for this order:'
+        plus_refund_credited: "+ deposit returned:"
+        refund_adjusted_amount: 'amount adjusted for refund:'
       new:
-        alert: Attention, cette commande a déjà été décomptée
-        articles_overview: Aperçu des produits
-        close_direct: Ne pas décompter
-        close_direct_confirm: Vous êtes sur le point de valider le décompte sans débiter les comptes des membres. Ne le faites que si vous avez déjà débité les comptes  manuellement, ou si vous savez vraiment ce que vous faites.
-        comment_on_transaction: Ici, tu peux faire part de tes commentaires concernant le décompte de la facture
-        comments: Commentaire
-        confirm_order: Terminer la commande
-        create_invoice: Ajouter une facture
-        edit_note: Modifier la note
-        edit_order: Modifier la commande
-        groups_overview: Aperçu des cellule
-        invoice: Facture
-        notes_and_journal: Notes/Remarques
-        summary: Résumé
-        title: Décompter %{name}
-        view_options: Préférences d'affichage
+        alert: Attention, order was already accounted
+        articles_overview: Overview of articles
+        close_direct: Skip settling
+        close_direct_confirm: You are about to settle the order without charging member accounts. Do this only when you have already debited member accounts manually, or if you really know what you are doing.
+        comment_on_transaction: Here you can add a comment to your accounting.
+        comments: Comments
+        confirm_order: Settle order
+        create_invoice: Add invoice
+        edit_note: Edit note
+        edit_order: Edit order
+        groups_overview: Overview of groups
+        invoice: Invoice
+        notes_and_journal: Order Notes
+        summary: Summary
+        title: Accounting %{name}
+        view_options: Viewing options
       order_article:
-        confirm: T'es sûrE de ton coup?
+        confirm: Are you sure?
       orders:
-        clear: décompter
-        cleared: déjà décompté (%{amount})
-        end: Fin
-        ended: clôturées
-        name: Fournisseur-e
-        no_closed_orders: Aucune commande n'a encore été clôturée.
-        state: Statut
+        clear: accounting
+        cleared: accounted (%{amount})
+        end: End
+        ended: closed
+        name: Supplier
+        no_closed_orders: At the moment there are no closed orders.
+        state: State
       summary:
-        changed: Les données ont été modifiées!
-        duration: von %{starts} bis %{ends}
-        fc_amount: 'Montant boufcoop:'
-        fc_profit: Gain de la boufcoop
-        gross_amount: 'Montant TTC:'
-        groups_amount: 'Montant payés par les cellules:'
-        net_amount: 'Montant HT:'
-        reload: Actualiser le résumé
-        with_extra_charge: 'avec supplément:'
-        without_extra_charge: 'sans supplément:'
+        changed: Data was changed!
+        duration: From %{starts} till %{ends}
+        fc_amount: 'Sales value:'
+        fc_profit: FC surplus
+        gross_amount: 'Gross value:'
+        groups_amount: 'Ordergroups sum:'
+        net_amount: 'Net value:'
+        reload: Reload summary
+        with_extra_charge: 'with extra charge:'
+        without_extra_charge: 'without extra charge:'
     bank_accounts:
       controller:
         import:
@@ -930,298 +930,298 @@ fr:
         belongs_to_user: belongs to user
         in_ordergroup: in ordergroup
     create:
-      notice: La facture a bien été définie.
+      notice: Invoice was created.
     financial_links:
       show:
         title: Financial link %{number}
     financial_transactions:
       controller:
         create:
-          notice: La transaction a été sauvegardée.
+          notice: The transaction was saved.
         create_collection:
-          alert: 'Une erreur s''est produite: %{error}'
-          error_note_required: Le commentaire ne peut pas être laissé vide.
-          notice: Les transactions ont été sauvegardées.
+          alert: 'An error occured: %{error}'
+          error_note_required: Note is required!
+          notice: All transactions were saved.
       index:
-        balance: 'Solde: %{balance}'
-        last_updated_at: "(dernière mise à jour il y a %{when})"
-        new_transaction: Ajouter une nouvelle transaction
-        title: Relevé de compte pour %{name}
+        balance: 'Balance of account: %{balance}'
+        last_updated_at: "(last updated %{when} ago)"
+        new_transaction: Create new transaction
+        title: Account statement for %{name}
       index_collection:
-        show_groups: Gérer les comptes
-        title: Transactions financières
+        show_groups: Manage accounts
+        title: Financial transactions
       new:
-        paragraph: Cet espace permet de rajouter ou d'enlever du crédit à la cellule <b>%{name}</b>.
-        title: Nouvelle transaction
+        paragraph: Here you can credit and debit money for the ordergroup <b>%{name}</b>.
+        title: New transaction
       new_collection:
         add_all_ordergroups: Add all ordergroups
-        new_ordergroup: Créer d'autres cellules
-        save: Sauvegarder les transactions
+        new_ordergroup: Add new ordergroup
+        save: Save transaction
         set_balance: Set the balance of the ordergroup to the entered amount.
-        sidebar: "Cet espace permet de mettre à jour plusieurs comptes simultanément, \npar exemple pour saisir les versements des cellules sur leurs comptes à partir d'un relevé."
-        title: Mettre à jour plusieurs comptes
+        sidebar: Here you can update more accounts at the same time. For example all transfers of the ordergroup from one account statement.
+        title: Updating more accounts
       ordergroup:
-        remove: Supprimer
-        remove_group: Supprimer cette cellule
+        remove: Remove
+        remove_group: Remove group
       transactions_search:
-        search_placeholder: Recherche notes ...
+        search_placeholder: Search note ...
     index:
-      amount_fc: Montant(boufcoop)
-      end: Fin
-      everything_cleared: Super, tout est a déjà été décompté!
-      last_transactions: Dernières transactions
-      open_transactions: à décompter
-      show_all: tout afficher
-      title: Espace trésorerie
-      unpaid_invoices: Factures à régler
+      amount_fc: Amount(FC)
+      end: End
+      everything_cleared: Great, everything is accounted...
+      last_transactions: Recent transactions
+      open_transactions: Unsettled orders
+      show_all: show all
+      title: Finances
+      unpaid_invoices: Unpaid invoices
     invoices:
       edit:
-        title: Modifier cette facture
+        title: Edit invoice
       form:
         attachment_hint: Only JPEG and PDF are allowed.
       index:
-        action_new: Ajouter une facture
-        title: Factures
+        action_new: Create new invoice
+        title: Invoices
       new:
-        title: Ajouter une facture
+        title: Create new invoice
       show:
-        title: Facture %{number}
+        title: Invoice %{number}
       unpaid:
         invoices_sum: Total sum
         invoices_text: Reference
         title: Unpaid invoices
     ordergroups:
       index:
-        new_transaction: Saisir une nouvelle transaction
-        search_placeholder: Rechercher ...
-        show_all: Toutes transactions
-        title: Crédits des cellules
+        new_transaction: Add new transactions
+        search_placeholder: Search ...
+        show_all: All transactions
+        title: Manage accounts
       ordergroups:
-        account_statement: Relevé de compte
-        new_transaction: Nouvelle transaction
+        account_statement: Account statement
+        new_transaction: New transaction
     update:
-      notice: La facture a été mise à jour.
+      notice: Invoice was updated
   foodcoop:
     ordergroups:
       index:
-        name: Rechercher...
-        only_active: Seulement les cellules en activité
-        only_active_desc: "(ayant commandé au moins une fois au cours des 3 derniers mois)"
-        title: Cellules
+        name: Name ...
+        only_active: Only active groups
+        only_active_desc: "(have placed order at least once in the last 3 months)"
+        title: Ordergroups
       ordergroups:
         break: "%{start} - %{end}"
     users:
       index:
-        body: "<p>Cette page sert à envoyer des messages aux autres membres de la coop. Si tu veux que tes coordonnées soient visibles par les autres, il faut le spécifier dans tes %{profile_link}. </p>"
-        ph_name: Nom ...
-        ph_ordergroup: Cellule ...
-        profile_link: préférences
-        title: Membres
+        body: "<p>Here you can write a message to the members of your Foodcoop. If you'd like others to contact you, please enable it in your %{profile_link}.</p>"
+        ph_name: Name ...
+        ph_ordergroup: Ordergroup ...
+        profile_link: options
+        title: Users
     workgroups:
       edit:
-        invite_link: ici
-        invite_new: Tu peux engrainer de nouveaux membres %{invite_link}.
-        title: Modifier cette équipe
+        invite_link: here
+        invite_new: You can invite new members %{invite_link}.
+        title: Edit group
       index:
-        body: "<p>Seuls les membres d'une équipe peuvent la modifier.</p>\n<p>Tu peux rejoindre une équipe en contactant un de ses membres.</p>"
-        title: Équipes
+        body: "<p>Editing a group is only available to members of the group.<br/> If you want to join a group, please send the members a message. </p>"
+        title: Working groups
       workgroup:
-        edit: Modifier la cellule
-        show_tasks: Afficher tous les boulots
+        edit: Edit group
+        show_tasks: Show all tasks
   group_order_articles:
     form:
-      amount_change_for: Modification de la quantité de %{article}
-      result_hint: 'Unité: %{unit}'
+      amount_change_for: Change amount for %{article}
+      result_hint: 'Unit: %{unit}'
   group_orders:
     archive:
-      desc: Accéder à toutes les %{link}.
-      open_orders: commandes en cours
-      title: commandes de %{group}
-      title_closed: déjà décomptées
-      title_open: clôturées mais non décomptées
+      desc: View all %{link} here.
+      open_orders: current orders
+      title: Orders of %{group}
+      title_closed: settled
+      title_open: closed/not settled
     create:
-      error_general: Suite à une erreur, la commande n'a pu être mise à jour.
-      error_stale: La commande n'a pas pu être mise à jour car quelqu'un d'autre a commandé entre temps.
-      notice: Ta commande a bien été enregistrée.
+      error_general: The order couldn’t be updated due to a bug.
+      error_stale: Someone else has ordered in the meantime, couldn't update the order.
+      notice: The order was saved.
     errors:
-      closed: La commande est déjà clôturée.
-      no_member: Tu n'es encore membre d'aucune cellule.
-      notfound: ' Mauvaise adresse, ce n''est pas ta commande.'
+      closed: This order is already closed.
+      no_member: You are not a member of an ordergroup.
+      notfound: Incorrect URL, this is not your order.
     form:
-      action_save: Enregistrer ta commande
-      new_funds: Nouveau solde
-      price: Prix
-      reset_article_search: Réinitialiser la recherche
-      search_article: Rechercher des produits...
-      sum_amount: Quantité déjà commandée
-      title: Commander
-      total_sum_amount: Montant total
-      total_tolerance: Tolérance totale
-      units: Lots
-      units_full: Lots complet
-      units_total: Unités déjà commandées
+      action_save: Save order
+      new_funds: New account balance
+      price: Price
+      reset_article_search: Reset search
+      search_article: Search for articles...
+      sum_amount: Current amount
+      title: Orders
+      total_sum_amount: Total amount
+      total_tolerance: Total tolerance
+      units: Units
+      units_full: Filled units
+      units_total: Total units
     index:
       closed_orders:
-        more: suite...
-        title: Commandes décomptées
+        more: more...
+        title: Settled orders
       finished_orders:
-        title: Commandes par encore décomptées
-        total_sum: Total
+        title: Unsettled orders
+        total_sum: Total sum
       funds:
-        finished_orders: montant prévu des commandes non décomptées
-        open_orders: montant des commandes en cours
-        title: Crédit
-      title: Aperçu des commandes
+        finished_orders: Unsettled orders
+        open_orders: Current orders
+        title: Credit
+      title: Orders overview
     messages:
-      not_enough_apples: "Il faut que ta cellule ait au moins %{stop_ordering_under} glands pour pouvoir commander,\nalors que vous n'en avez que %{apples} pour le moment."
+      not_enough_apples: You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.
     order:
-      title: Article
+      title: Articles
     show:
       articles:
-        edit_order: Modifier ta commande
-        not_ordered_msg: Tu n'as pas encore commandé
-        order_closed_msg: Désolé, cette commande a déjà été clôturée. Il faudra te réveiller plus tôt la prochaine fois
-        order_nopen_title: En tenant compte des commandes en cours de toutes les cellules
-        order_not_open: Déjà reçu
-        order_now: Voilà ta chance!
-        order_open: Quantité à prévoir
-        ordered: Quantité souhaitée
-        ordered_title: Quantité + tolérance
-        show_hide: Montrer/cacher les produits non commandés
-        show_note: Afficher le commentaire
-        title: Aperçu des produits
-        unit_price: Prix unitaire
-      comment: Lire/écrire des commentaire
+        edit_order: Edit order
+        not_ordered_msg: You didn’t place an order yet
+        order_closed_msg: Sorry, this order is closed.
+        order_nopen_title: Considering current orders of all groups
+        order_not_open: Received
+        order_now: This is your chance!
+        order_open: Available
+        ordered: Ordered
+        ordered_title: Amount + tolerance
+        show_hide: Show/hide articles not ordered
+        show_note: Show note
+        title: Article overview
+        unit_price: Unit price
+      comment: Comment
       comments:
-        title: Commentaire
-      not_ordered: Tu n'as pas commandé.
-      sum: Total
-      title: Ta part de la commande %{order}
+        title: Comments
+      not_ordered: You didn’t order.
+      sum: Sum
+      title: Your order result for %{order}
     switch_order:
-      remaining: "encore %{remaining}"
-      title: Commandes en cours
+      remaining: "%{remaining} remaining"
+      title: Current orders
     update:
-      error_general: Suite à une erreur, la commande n'a pu être mise à jour.
-      error_stale: La commande n'a pas pu être mise à jour, car quelqu'un d'autre a commandé entre temps.
-      notice: Ta commande a bien été enregistrée.
+      error_general: The order couldn’t be updated due to a bug.
+      error_stale: Someone else has ordered in the meantime, couldn't update the order.
+      notice: The order was saved.
   helpers:
     application:
-      edit_user: Modifier la liste des membres
-      nick_fallback: "(aucun identifiant)"
-      role_admin: Administrateur
-      role_article_meta: Article
-      role_finance: Finances
-      role_invoices: Facture
-      role_orders: Commande
+      edit_user: Edit user
+      nick_fallback: "(no username)"
+      role_admin: Admin
+      role_article_meta: Articles
+      role_finance: Finance
+      role_invoices: Invoices
+      role_orders: Orders
       role_pickups: Pickup days
-      role_suppliers: Fournisseur-e
-      show_google_maps: Afficher la position sur Google maps
-      sort_by: Trier par %{text}
+      role_suppliers: Suppliers
+      show_google_maps: Show it on Google maps
+      sort_by: Sort by %{text}
     current_orders:
       pay_amount: To pay %{amount}
       pay_done: Fully paid
       pay_none: Nothing to pay
     deliveries:
-      new_invoice: Ajouter une nouvelle facture
-      show_invoice: Afficher la facture
+      new_invoice: New invoice
+      show_invoice: Show invoice
     messages:
-      write_message: Écrire un message
+      write_message: Write message
     orders:
-      old_price: Ancien prix
-      option_choose: Choix d'un-e fournisseur-e
-      option_stock: Cellier
-      order_pdf: Générer un PDF
+      old_price: Old price
+      option_choose: Choose supplier/stock
+      option_stock: Stock
+      order_pdf: Create PDF
     submit:
       invite:
-        create: Envoyer une invitation
+        create: send invitation
       printer_job:
         create: create printer job
       message:
-        create: Envoyer un message
+        create: send message
     tasks:
-      required_users: "Il manque encore %{count} camarades!"
+      required_users: "%{count} members are still needed!"
       task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
-      desc: "Ce système de glands sert à comparer la durée du travail collectif auquel ta cellule a contribué (rapportée à la quantité commandée) avec\nla moyenne du travail effectué par toutes les cellules.\nActuellement, cette moyenne est d'une heure de boulot pour %{amount} commandés."
-      more_info: Plus d'informations
-      points: 'Nombre de glands: %{points}'
-      warning: "Attention, si ta cellule a moins de %{threshold} glands, tu ne pourras plus commander!\n(ce seuil est fixé par la coop)"
-    changes_saved: Les modifications ont été sauvegardées.
+      desc: 'This shows the proportion of completed tasks to the volume of orders for your ordergroup in comparison to the average of the Foodcoop. In practice: for every %{amount} of total orders, you should execute a task!'
+      more_info: More information
+      points: 'Your current apple points: %{points}'
+      warning: Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order!
+    changes_saved: Changes saved.
     index:
-      due_date_format: "%A, %d. %b"
+      due_date_format: "%A %d %B"
       messages:
-        title: Derniers messages reçus
+        title: Newest messages
         view_all:
-          messages: tous les messages
-          text: Afficher %{messages} ou %{threads}
+          messages: all messages
+          text: Show %{messages} or %{threads}
           threads: threads
       my_ordergroup:
-        last_update: La dernière mise à jour date du %{when}
-        title: Ta cellule
+        last_update: Last update was %{when} ago
+        title: My ordergroup
         transactions:
-          title: Dernière transactions
-          view: Afficher un relevé de compte
+          title: Last Transactions
+          view: Show account statement
       ordergroup:
-        title: Niveau de participation de ta cellule
+        title: Engagement of your ordergroup
       tasks_move:
-        action: accepter/refuser des boulots
-        desc: Tu as du boulot de prévu.
-        title: Accepter des boulot
+        action: Take over tasks/decline tasks
+        desc: You are responsible for these tasks.
+        title: Take over tasks
       tasks_open:
-        title: Boulots disponibles
-        view_all: Afficher tous les boulots
-      title: Page d'accueil
-      your_tasks: Voilà le boulot que tu as accepté en ce moment
-    no_ordergroups: Tu ne fais encore partie d'aucune cellule
+        title: Open tasks
+        view_all: Show all tasks
+      title: Homepage
+      your_tasks: Your tasks
+    no_ordergroups: You are unfortunately not a member of an ordergroup.
     ordergroup:
-      account_summary: Relevé de compte
-      invite: Engrainer une nouvelle personne
-      search: Rechercher ...
-      title: Ta cellule
-    ordergroup_cancelled: Tu ne fais plus partie de la cellule %{group}.
+      account_summary: Account Statement
+      invite: Invite a new Person
+      search: Search ...
+      title: My ordergroup
+    ordergroup_cancelled: You cancelled membership of the group %{group}.
     profile:
       groups:
-        cancel: Quitter cette équipe
-        cancel_confirm: T'es sûrE de vouloir partir?
-        invite: Engrainer de nouveaux membres
-        title: Tu fais partie des équipes
-      title: Ton profil
+        cancel: Leave group
+        cancel_confirm: Are you sure you want to leave this group?
+        invite: Invite new member
+        title: You are member of the groups
+      title: My Profile
       user:
-        since: "(Membre depuis %{when})"
+        since: "(member for %{when})"
         title: "%{user}"
     start_nav:
       admin: Administration
       finances:
-        accounts: Gérer les comptes
-        settle: Décompter des commandes
-        title: Espace trésorerie
-      foodcoop: Boufcoop
-      members: Membres
-      new_ordergroup: Définir une nouvelle cellule
-      new_user: Ajouter un nouveau membre
+        accounts: Update accounts
+        settle: Account orders
+        title: Finances
+      foodcoop: Foodcoop
+      members: Members
+      new_ordergroup: New ordergroup
+      new_user: New member
       orders:
-        end: Terminer des commandes
-        overview: Aperçu des commandes
-        title: Commandes
+        end: Close orders
+        overview: Overview of orders
+        title: Orders
       products:
-        edit: Mettre à jour les produits
-        edit_stock: Gérer le cellier
-        edit_suppliers: Gérer les fournisseur-e-s
-        title: Gérer les produits
-      tasks: Ton boulot
-      title: Aller à...
-      write_message: Écrire un message
+        edit: Update products
+        edit_stock: Edit stock
+        edit_suppliers: Edit suppliers
+        title: Products
+      tasks: My tasks
+      title: Directly to ...
+      write_message: Write message
   invites:
     errors:
-      already_member: est déjà membre de la Boufcoop.
+      already_member: is already in use. Person is already a member of this Foodcoop.
     modal_form:
       body: "<p>Here you can invite someone who isn't part of the foodcoop to join your ordergroup <b>%{group}</b>. After the invitation is accepted, the person will be able to add (and remove) articles to your order.</p> <p>This is a great way to introduce someone to the foodcoop, or to order with multiple people in the same household.</p>"
-      title: Engrainer une personne
+      title: Invite person
     new:
-      action: Engrainer!
-      body: "<p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>"
-    success: La_le membre a été engrainéE avec succès!
+      action: Send invite
+      body: "<p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>"
+    success: User was invited successfully.
   js:
     current_orders:
       articles:
@@ -1229,96 +1229,109 @@ fr:
         below: "%{count} left over"
         equal: all distributed
     ordering:
-      confirm_change: Les changements apportés à cette commande vont être perdus. Est-ce que tu veux vraiment continuer?
+      confirm_change: Modifications to this order will be lost when you change the order. Do you want to lose the changes you made and continue?
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
-      footer_3_homepage: 'Boufcoop: %{url}'
-      footer_4_help: 'Aide: %{url}'
+      footer_3_homepage: 'Foodcoop: %{url}'
+      footer_4_help: 'Help: %{url}'
     foodsoft: Foodsoft
     footer:
-      revision: révision %{revision}
+      revision: revision %{revision}
     header:
       feedback:
-        desc: Tu as trouvé une erreur? Tu as des propositions, des idées, des critiques?
-        title: Retours
-      help: Aide
-      logout: Déconnexion
-      ordergroup: Ta cellule
-      profile: Ton profil
-    logo: "coop"
+        desc: Found a bug? Suggestions? Ideas? Review?
+        title: Feedback
+      help: Help
+      logout: Logout
+      ordergroup: My ordergroup
+      profile: Edit profile
+    logo: "<span>food</span>soft"
   lib:
     render_pdf:
-      page: page %{number} de %{count}
+      page: Page %{number} of %{count}
   login:
     accept_invitation:
-      body: "<p>Tu viens d'être invité à rejoindre la cellule \"<b>%{group}</b>\" de la coopérative d'approvisionnement (bouffe-coop) %{foodcoop} ! </p>\n<p>Remplis ce formulaire si tu es d'accord pour être de la partie.</p>\n<p>Ces données ne seront en aucun cas publiées, ou transmises à quiconque d'extérieur à la coop.\nPour des raisons techniques, les membres de la coop qui s'occupent du site internet ont accès aux données,\nmais en ce qui concerne les autres membres de la coop, tu pourras choisir quelles données leurs sont visibles."
-      submit: Créer un compte Foodsoft
-      title: Invitation chez les %{name}
+      body: "<p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>"
+      submit: Create a Foodsoft account
+      title: Invitation to %{name}
     controller:
       accept_invitation:
-        notice: Ton compte vient d'être créé. Bienvenue! Tu peux maintenant te connecter.
-      error_group_invalid: Désolé, la cellule par laquelle tu as été invité a été supprimée entre temps.
-      error_invite_invalid: Ton invitation n'est pas ou plus valide.
-      error_token_invalid: Ton jeton de connexion n'est pas ou plus valide, essaie de cliquer à nouveau sur le lien.
+        notice: Congratulations, your account was created. You can login now.
+      error_group_invalid: The group in which you were invited doesn’t exist anymore.
+      error_invite_invalid: Your invite is not valid (anymore).
+      error_token_invalid: Invalid or expired token. Please try again.
       reset_password:
-        notice: Tu vas maintenant recevoir un message contenant un lien qui te permettra de réinitialiser ton mot de passe. 
+        notice: If your email is registered here, you will receive a message with a link to reset your password. You may need to check your spam folder.
       update_password:
-        notice: Ton mot de passe a été mis à jour. Tu peux maintenant de connecter.
+        notice: Your password was updated. You can login now.
     forgot_password:
-      body: "<p>Pas de problème, nous pouvons générer un nouveau mot de passe pour toi.</p>\n<p>Pour cela, commence par saisir ci-dessous l'adresse email que tu as donné lors de ton inscription.\nTu recevras ensuite un message avec de plus amples instructions.</p>"
-      submit: Demander un nouveau mot de passe
-      title: Mot de passe oublié?
+      body: "<p>No problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>"
+      submit: Request new password
+      title: Forgot password?
     new_password:
-      body: "<p>Merci de saisir le nouveau mot de passe souhaité pour <b>%{user}</b></p>"
-      submit: Sauvegarder le nouveau mot de passe
-      title: Nouveau mot de passe
+      body: "<p>Please fill in the new password for <b>%{user}</b></p>"
+      submit: Save new password
+      title: New password
   mailer:
     dateformat: "%d %b"
     feedback:
-      header: "Le %{date}, %{user} a écrit:"
-      subject: Feedback pour Foodsoft
+      header: "%{user} wrote at %{date}:"
+      subject: Feedback for Foodsoft
     from_via_foodsoft: "%{name} via Foodsoft"
     invite:
-      subject: Invitation à participer à une Bouffecoop
+      subject: Invitation to the Foodcoop
       text: |
-        Salut!
-        %{user} <%{mail}> vient de t'engrainer à rejoindre la cellule "%{group}".
-        Pour accepter cet engrenage et ainsi faire partie de notre Boufcoop, visite: %{link}
-        Ce lien ne sera valide que pour une seule visite et s'autodétruira le %{expires}.
+        Hi!
+
+        %{user} <%{mail}> has invited you to join the group "%{group}".
+        To accept the invitation and to join the foodcoop please follow this link: %{link}
+        This link works only once and expires on %{expires}.
+
+
+        Greetings, your Foodsoft Team!
     negative_balance:
-      subject: Compte dans le rouge!
+      subject: Negative account balance
       text: |
-        CherEs %{group},
+        Dear %{group},
 
-        Votre compte sur la bouffecoop est passé au rouge le %{when}, et son solde actuel est %{balance}.
-        %{amount} ont été prélevés par %{user} en règlement de "%{note}".
-        Il faudrait penser rapidement à remettre du crédit!
+        Your account balance has dropped below zero due to a booking on %{when}: %{balance}
 
-        Message automatisé de %{foodcoop}
+        There was a charge of %{amount} for "%{note}" by %{user}.
+
+        Please deposit your account as soon as possible.
+
+
+
+        Kind regards from %{foodcoop}.
     not_enough_users_assigned:
-      subject: 'Il y a encore besoin de monde pour "%{task}"'
+      subject: '"%{task}" still needs people!'
       text: |
-        CherE %{user},
+        Dear %{user},
 
-        Il manque encore du monde le %{when} pour le boulot "%{task}" dont ton équipe est responsable.
-        Si tu es dispo et ne t'es pas encore inscritE, c'est le moment de le faire:
+        The Task '%{task}' of your working group is due on %{when},
+        and could use some more contributors!
+
+        If you haven’t assigned yourself to this task yet it’s your chance now:
+
         %{workgroup_tasks_url}
 
-        Pour voir ton agenda complet: %{user_tasks_url}
+        Your Tasks: %{user_tasks_url}
     order_result:
-      subject: 'Commande close: %{name}'
+      subject: 'Order closed: %{name}'
       text0: |
-        CherEs %{ordergroup},
+        Dear %{ordergroup},
 
-        La commande pour "%{order}" a été finalisée le %{when} par %{user}.
-        Voilà la liste des produits qui ont été commandés pour vous:
+        The order for "%{order}" has been closed by %{user} on %{when}.
+        The following articles have been ordered for your ordergroup:
       text1: |-
-        Prix total: %{sum}
-        Afficher sur le site: %{order_url}
+        o Total sum: %{sum}
 
-        Message envoyé automatiquement par %{foodcoop}
+        You can view the order online: %{order_url}
+
+
+        Kind regards from %{foodcoop}.
     order_result_supplier:
       subject: New order for %{name}
       text: |
@@ -1332,27 +1345,29 @@ fr:
         %{user}
         %{foodcoop}
     reset_password:
-      subject: Nouveau mot de passe pour %{username}
+      subject: New password for %{username}
       text: |
-        Salut %{user},
+        Hi %{user},
 
-        Toi (ou quelqu'un d'autre) vient de demander un nouveau mot de passe sur le site de la bouffecoop.
-        Pour le choisir, va sur la page suivante: %{link}.
-        Ce lien n'est valide que pour une seule utilisation et expirera le %{expires}.
-        Si tu as changé d'avis ou si tu n'es pas à l'origine de ce mail, aucune action n'est requise de ta part, et ton mot de passe restera inchangé.
+        You have (or someone else has) requested a new password.
+        In order to choose a new password follow this link: %{link}
+        This link works only once and expires on %{expires}.
+        If you don't want to change your password, just ignore this message. Your password hasn't been changed yet.
 
-        Message automatiquement envoyé par Foodsoft.
+
+        Greetings, your Foodsoft Team!
     upcoming_tasks:
-      nextweek: 'Agenda de la semaine prochaine:'
-      subject: Tu as du boulot!
+      nextweek: 'Tasks for the next week:'
+      subject: Tasks are due!
       text0: |
-        CherE %{user},
+        Dear %{user},
 
-        Tu t'es inscritE pour le boulot "%{task}", qui aura lieu demain (%{when}).
+        You are asigned to the task "%{task}". This task is due by tomorrow (%{when})!
       text1: |
-        Ton agenda: %{user_tasks_url}
+        My tasks: %{user_tasks_url}
 
-        Ceci est un rappel automatisé envoyé par %{foodcoop}.
+
+        Kind regards from %{foodcoop}.
   message_threads:
     groupmessage_threads:
       show_message_threads: show all
@@ -1385,41 +1400,41 @@ fr:
       messages: Show as list
       new: New message
     create:
-      notice: Le message a bien été sauvegardé et est en cours d'envoi.
+      notice: Message is saved and will be sent.
     index:
-      new: Nouveau message
+      new: New message
       title: Messages
     messages:
-      reply: Répondre
+      reply: Reply
     model:
-      reply_header: "Le %{when}, %{user} a écrit:"
+      reply_header: "%{user} wrote on %{when}:"
       reply_indent: "> %{line}"
       reply_subject: 'Re: %{subject}'
     new:
       error_private: Sorry, this message is private.
-      hint_private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
+      hint_private: Message doesn’t show in Foodsoft mail inbox
       list:
-        desc: 'Pour envoyer un message à tout le monde, passe par la mailing list "%{list}"'
-        mail: par exemple en envoyant un email à %{email}
-        subscribe: Pour plus d'explications concernant la mailing list, consulte le %{link}
-        subscribe_msg: Il faudra peut être d'abord t'inscrire à la mailing list.
-        wiki: wiki (section mailing list)
+        desc: 'Please send messages to all using the mailing-list: %{list}'
+        mail: for example with an email to %{email}.
+        subscribe: You can find more about the mailing-list at %{link}.
+        subscribe_msg: You may have to subscribe to the mailing-list first.
+        wiki: Wiki (page Mailing-List)
       message: message
-      no_user_found: Aucun-e membre trouvée avec cet identifiant
+      no_user_found: No user found
       reply_to: This message is an reply to an other %{link}.
-      search: Rechercher ...
-      search_user: Rechercher unE membre
-      title: Nouveau message
+      search: Search ...
+      search_user: Search user
+      title: New message
     show:
-      all_messages: Aperçu des messages
+      all_messages: All messages
       change_visibility: 'Change'
-      from: 'De:'
+      from: 'From:'
       group: 'Group:'
-      reply: Répondre
+      reply: Reply
       reply_to: 'Reply to:'
-      sent_on: 'Envoyé le:'
-      subject: 'Sujet:'
-      title: Afficher le contenu du message
+      sent_on: 'Sent:'
+      subject: 'Subject:'
+      title: Show message
       to: 'To:'
       visibility: 'Visibility:'
       visibility_private: 'Private'
@@ -1432,286 +1447,287 @@ fr:
   messages_mailer:
     foodsoft_message:
       footer: |
-        Répondre: %{reply_url}
-        Afficher ce message dans ton navigateur: %{msg_url}
-        Préférences des messages: %{profile_url}
+        Reply: %{reply_url}
+        See message online: %{msg_url}
+        Messaging options: %{profile_url}
       footer_group: |
         Sent to group: %{group}
   model:
     delivery:
-      each_stock_article_must_be_unique: Chaque article du cellier ne peut apparaître qu'une seule fois dans la commande.
+      each_stock_article_must_be_unique: Each stock article must not be listed more than once.
     financial_transaction_type:
       no_delete_last: At least one financial transaction type must exist.
     group_order:
-      stock_ordergroup_name: Cellier (%{user})
+      stock_ordergroup_name: Stock (%{user})
     invoice:
       invalid_mime: has an invalid MIME type (%{mime})
     membership:
-      no_admin_delete: 'Pas moyen de quitter le navire: tu es le ou la dernièrE administratrice à bord!'
+      no_admin_delete: Membership can not be withdrawn as you are the last administrator.
     order_article:
-      error_price: doit être saisi et avoir un prix à jour
+      error_price: must be specified and have a current price price
     page:
-      redirect: Redirection vers [[%{title}]]...
+      redirect: Redirect to [[%{title}]]...
     user:
-      no_ordergroup: aucune cellule
+      no_ordergroup: no ordergroup
     group_order_article:
       order_closed: Order is closed and cannot be modified
   navigation:
     admin:
       config: Configuration
-      finance: Trésorerie
-      home: Aperçu
+      finance: Finances
+      home: Overview
       mail_delivery_status: Email problems
       messagegroups: Message groups
-      ordergroups: Cellules
+      ordergroups: Ordergroups
       title: Administration
-      users: Membres
-      workgroups: Équipes
+      users: Users
+      workgroups: Workgroups
     articles:
-      categories: Catégories
-      stock: Gestion du cellier
-      suppliers: Annuaire
-      title: Produits
-    dashboard: Tableau de bord
+      categories: Categories
+      stock: Stock
+      suppliers: Suppliers/articles
+      title: Articles
+    dashboard: Dashboard
     documents: Documents
     finances:
-      accounts: Crédits des cellules
-      balancing: Décompte des commandes
+      accounts: Manage accounts
+      balancing: Account orders
       bank_accounts: Bank Accounts
-      home: Aperçu
-      invoices: Factures
-      title: Trésorerie
-    foodcoop: Boufcoop
-    members: Membres
+      home: Overview
+      invoices: Invoices
+      title: Finances
+    foodcoop: Foodcoop
+    members: Members
     messages: Messages
-    ordergroups: Cellules
+    ordergroups: Ordergroups
     orders:
-      archive: Historique des commandes
-      manage: Gestion des commandes
-      ordering: Passer une commande
+      archive: My Orders
+      manage: Manage orders
+      ordering: Place order!
       pickups: Pickup days
       printer_jobs: Printer jobs
-      title: Commandes
-    tasks: Agenda
+      title: Orders
+    tasks: Tasks
     wiki:
-      all_pages: Toutes les pages
-      home: Page d'accueil
+      all_pages: All Pages
+      home: Home
       title: Wiki
-    workgroups: Équipes
+    workgroups: Workgroups
   number:
     percentage:
       format:
         strip_insignificant_zeros: true
   order_articles:
     edit:
-      stock_alert: Le prix de produits présents dans le cellier ne peut plus être modifié!
-      title: Mettre à jour la liste des produits
+      stock_alert: The price of stock articles cannot be changed!
+      title: Update article
     new:
-      title: Ajouter le produit à une commande
+      title: Add delivered article to order
   ordergroups:
     edit:
-      title: Modifier les cellules
+      title: Edit ordergroups
     index:
-      title: Cellule
+      title: Ordergroups
     model:
-      error_single_group: "%{user} fait déjà partie d'une autre cellule"
-      invalid_balance: n'est pas un nombre valide
+      error_single_group: "%{user} is already a member of another ordergroup"
+      invalid_balance: is not a valid number
   orders:
     articles:
-      article_count: 'Produits commandés:'
-      prices: Prix TTC/HT
-      prices_sum: 'Totaux (des prix TTC/HT):'
-      units_full: Lots complet
-      units_ordered: Unités commandées
+      article_count: 'Ordered articles:'
+      prices: Net/gross price
+      prices_sum: 'Sum (net/gross price):'
+      units_full: Full units
+      units_ordered: Units ordered
     create:
-      notice: La commande a bien été définie.
+      notice: The order was created.
     edit:
-      title: 'Modifier la commande: %{name}'
+      title: 'Edit order: %{name}'
     edit_amount:
-      field_locked_title: La répartition de cet article entre les cellules a été modifiée manuellement, et ce champ a été verrouillé pour éviter tout nouveau changement intempestif. Si tu veux tout de même effectuer un changement, cliques d'abord sur "Déverouiller".
-      field_unlocked_title: La répartition de cet article entre les cellules a été modifiée manuellement. Toute nouvelle modification entrainera une perte de la valeur enregistrée actuellement.
+      field_locked_title: The distribution of this article among the ordergroups was changed manually. This field is locked to protect those changes. To redistribute and overwrite those changes, press the unlock button and change the amount.
+      field_unlocked_title: The distribution of this article among the ordergroups was changed manually. When you change the amount, those manual changes will be overwritten.
     edit_amounts:
       no_articles_available: No articles to add.
     fax:
-      amount: Quantité
-      articles: Produits
-      delivery_day: Jour de livraison
-      heading: Commande pour %{name}
-      name: Nom
-      number: Numéro
-      to_address: Adresse du destinataire
+      amount: Amount
+      articles: Articles
+      delivery_day: Delivery day
+      heading: Order for %{name}
+      name: Name
+      number: Number
+      to_address: Shipping address
     finish:
-      notice: La commande a été clôturée.
+      notice: The order has been closed.
     form:
-      ignore_warnings: Ignorer les avertissements
-      prices: Prix (HT/coop)
-      select_all: Tout sélectionner
-      stockit: En stoc
+      ignore_warnings: Ignore warnings
+      prices: Prices (net/FC)
+      select_all: Select all
+      stockit: In stock
       title: Article
     index:
-      action_end: Clôturer
-      action_receive: Réceptionner
-      confirm_delete: Vraiment supprimer la commande?
-      confirm_end: Veux tu vraiment mettre fin à la commande %{order}? Attention, il n'y aura pas d'annulation possible.
-      new_order: Définir une nouvelle commande
-      no_open_or_finished_orders: Il n'y a aucune commande en cours en ce moment.
-      orders_finished: Close
-      orders_open: En cours
-      orders_settled: Décomptée
-      title: Gestion des commandes
+      action_end: Close
+      action_receive: Receive
+      confirm_delete: Do you really want to delete the order?
+      confirm_end: Do you really want to close the order %{order}? There is no going back.
+      new_order: Create new order
+      no_open_or_finished_orders: There are currently no open or closed orders.
+      orders_finished: Closed
+      orders_open: Open
+      orders_settled: Settled
+      title: Manage orders
     model:
-      close_direct_message: Ordre décomptée sans charger les comptes des membres.
+      close_direct_message: Order settled without charging member accounts.
       error_boxfill_before_ends: must be after the box-fill date (or remain empty)
-      error_closed: Cette commande a déjà été décomptée
-      error_nosel: Au minimum un article doit être sélectionné.
+      error_closed: Order was already settled
+      error_nosel: At least one article must be selected. You may want to delete the order instead?
       error_starts_before_boxfill: must be after the start date (or remain empty)
-      error_starts_before_ends: doit être postérieur à la date de début de la commande (ou bien être laissé vierge)
-      notice_close: 'Commande: %{name}, jusqu''au %{ends}'
-      stock: Cellier
-      warning_ordered: 'Attention: les produits en rouge ont déjà été commandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
-      warning_ordered_stock: 'Attention: les produits en rouge ont déjà été demandés par des membres. Les décocher ici entrainera leur suppression et les demandes ne pourront donc pas être satisfaites.'
+      error_starts_before_ends: must be after the start date (or remain empty)
+      notice_close: 'Order: %{name}, until %{ends}'
+      stock: Stock
+      warning_ordered: 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted. To proceed, confirm below.'
+      warning_ordered_stock: 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them. Confirm below to proceed.'
     new:
-      title: Définir une nouvelle commande
+      title: Create new order
     receive:
-      add_article: Ajouter un article
-      consider_member_tolerance: prendre en compte la tolérance
-      notice: 'Commande recue: %{msg}'
-      notice_none: Aucun nouvel article à réceptionner
-      rest_to_stock: stock restant
-      submit: Réceptionner la commande
-      surplus_options: 'Options de répartition:'
-      title: Réception de la commande %{order}
+      add_article: Add article
+      consider_member_tolerance: consider tolerance
+      notice: 'Order received: %{msg}'
+      notice_none: No new articles to receive
+      rest_to_stock: rest to stock
+      submit: Receive order
+      surplus_options: 'Distribution options:'
+      title: Receiving %{order}
     send_to_supplier:
       notice: The order has been sent to the supplier.
     show:
-      action_end: Clôturer!
-      amounts: 'Total net/brut:'
-      articles: Aperçu des produits
-      articles_ordered: 'Produits commandés:'
+      action_end: Close!
+      amounts: 'Net/gross sum:'
+      articles: Article overview
+      articles_ordered: 'Ordered articles:'
       comments:
-        title: Commentaire
-      comments_link: Commenaire
-      confirm_delete: Veux-tu vraiment supprimer la commande?
+        title: Comments
+      comments_link: Comments
+      confirm_delete: Do you really want to delete the order?
       confirm_end: |-
-        Veux tu vraiment clôturer la commande %{order}? Pas d'annulation possible.
+        Do you really want to close the order %{order}?
+        There is no going back.
       confirm_create_printer_job: A printer job for this order has been created already. Do you want to create a new one?
       confirm_send_to_supplier: The order has been sent to the supplier already on %{when}. Do you really want to send it again?
-      create_invoice: Ajouter une facture
-      description1_order: "Commande %{state} de %{supplier} créée par %{who},"
+      create_invoice: Add invoice
+      description1_order: "%{state} order from %{supplier} opened by %{who},"
       description1_period:
         pickup: and can be picked up on %{pickup}
-        starts: ouverte du %{starts}
-        starts_ends: ouverte du %{starts} au %{ends}
-      description2: "%{ordergroups} ont commandé %{article_count} articles, pour un montant total de %{net_sum} (net)/ %{gross_sum} (brut)"
-      group_orders: 'Commandes des cellules:'
+        starts: open from %{starts}
+        starts_ends: open from %{starts} until %{ends}
+      description2: "%{ordergroups} ordered %{article_count} articles, with a total value of %{net_sum} / %{gross_sum} (net / gross)."
+      group_orders: 'Group orders:'
       search_placeholder:
-        articles: Rechercher des articles...
-        default: Rechercher des articles...
-        groups: Rechercher des cellules...
-      search_reset: Réinitialiser la recherche
+        articles: Search for articles...
+        default: Search for articles...
+        groups: Search for ordergroups...
+      search_reset: Reset search
       send_to_supplier: Send to supplier
-      show_invoice: Afficher la facture
-      sort_article: Trié par article
-      sort_group: Trié par cellules
+      show_invoice: Show invoice
+      sort_article: Sorted in articles
+      sort_group: Sorted in groups
       stock_order: Stock Order
-      title: 'Commande: %{name}'
-      warn_not_closed: Attention, cette commande n'a pas encore été décomptée!
+      title: 'Order: %{name}'
+      warn_not_closed: Warning, order is not yet settled.
     state:
-      closed: décomptée
-      finished: clôturée
-      open: en cours
+      closed: settled
+      finished: closed
+      open: open
     update:
-      notice: La commande a été mise à jour.
+      notice: The order was updated.
     update_order_amounts:
-      msg1: "%{count} articles (%{units} unités) ont été mis à jour"
-      msg2: "%{count} (%{units}) après prise en compte des tolérances"
-      msg4: "%{count} (%{units}) restants"
+      msg1: "%{count} articles (%{units} units) updated"
+      msg2: "%{count} (%{units}) using tolerance"
+      msg4: "%{count} (%{units}) left over"
   pages:
     all:
-      new_page: Créer une nouvelle page
-      recent_changes: Changement récents
+      new_page: Create new page
+      recent_changes: Recent changes
       search:
-        action: Recherche
-        placeholder: Titre de la page ...
-      site_map: Aide à la navigation
-      title: Toutes les pages du wiki
-      title_list: Liste des pages
+        action: Search
+        placeholder: Page title ...
+      site_map: Sitemap
+      title: All Wiki pages
+      title_list: List of pages
     body:
-      title_toc: Contenu
-      wikicloth_exception: 'Une erreur s''est produite lors de l''interprétation de la page wiki: %{msg}. Essaye de la corriger et de sauvegarder à nouveau.'
+      title_toc: Content
+      wikicloth_exception: 'I''m sorry to report that an error occured when interpreting the wiki page: %{msg}. Please try to fix it, and save the page again.'
     create:
-      notice: La page a bien été créée.
+      notice: Page was created
     cshow:
-      error_noexist: Cette page n'existe pas!
-      redirect_notice: Redirigé à partir de %{page}...
+      error_noexist: Page doesn’t exist!
+      redirect_notice: Redirected from %{page} ...
     destroy:
-      notice: La page '%{page}' et toutes ses descendantes ont bien été supprimées.
+      notice: The page '%{page}' and all subpages have been deleted successfully.
     diff:
       title: "%{title} - changes from version %{old} to %{new}"
     edit:
-      title: Modifier cette page
-    error_stale_object: Cette page est en cours de modification par unE autre membre. Merci de réessayer plus tard.
+      title: Edit page
+    error_stale_object: Warning, the page has just been edited by someone else. Please try again.
     form:
       help:
-        bold: gra
-        external_link_ex: Page extérieure
-        external_links: Externe
-        heading: Plan %{level}
-        headings: En-tête
+        bold: bold
+        external_link_ex: External link
+        external_links: External
+        heading: level %{level}
+        headings: Heading
         image_link_title: Image title
         image_links: Images
-        italic: italique
+        italic: italic
         link_lists: More on lists
-        link_table: Format des tableaux
+        link_table: Table formatting
         link_templates: Templates
         link_variables: Foodsoft variables
-        list_item_1: Premier item
-        list_item_2: Deuxième item
-        noformat: Pas de formatage
-        ordered_list: Énumérations
-        section_block: Format de paragraphe
-        section_character: Format de charactère
-        section_link: Format des liens
+        list_item_1: First list item
+        list_item_2: Second list item
+        noformat: No formatting
+        ordered_list: Numbered list
+        section_block: Block formatting
+        section_character: Character formatting
+        section_link: Link formatting
         section_more: More topics
         section_table: Table formatting
         see_tables: see %{tables_link}
         tables_link: Tables
-        text: texte
-        title: Assistant de mise en forme rapide
-        unordered_list: Liste non ordonnée
-        wiki_link_ex: Page de wiki du Foodsoft
-        wiki_links: Liens Wiki
-      preview: Aperçu
-    last_updated: Dernièrement mis à jour
+        text: text
+        title: Quick formatting help
+        unordered_list: Item list
+        wiki_link_ex: Foodsoft Wiki Page
+        wiki_links: Wiki-links
+      preview: Preview
+    last_updated: Last updated
     new:
-      title: Ajouter une nouvelle page au Wiki
+      title: Create new wiki page
     page_list_item:
-      date_format: "%a, %d. %B %Y %H:%M:%S"
+      date_format: "%a, %d %B %Y %H:%M:%S"
     show:
-      date_format: "%d.%m.%y %H:%M"
-      delete: Supprimer la page
-      delete_confirm: 'Attention, tous les contenus seront aussi supprimés. T''es sûrE de ton coup?'
+      date_format: "%d-%m-%y %H:%M"
+      delete: Delete page
+      delete_confirm: 'Warning: all subpages will be deleted as well. Are you sure?'
       diff: Compare versions
-      edit: Modifier la page
-      last_updated: Dernière modification le %{when} par <b>%{user}<b>
-      subpages: Sous-pages
+      edit: Edit page
+      last_updated: Last updated by <b>%{user}</b> on %{when}
+      subpages: subpages
       title_versions: Versions
       versions: Versions (%{count})
-    title: Titre
+    title: Title
     update:
-      notice: La page a été mise à jour
+      notice: Page was updated
     variables:
       description: Variables return information from somewhere else. When you use the variable, it will be replaced by its value when displayed. Foodsoft has a number of pre-defined variables, such as the name and address of your foodcoop, the software version, and the number of members and suppliers. See the table below for all variables. You can use these in wiki pages as well as in the footer (from the configuration screen).
       title: Foodsoft variables
       value: Current value
       variable: Variable
     version:
-      author: 'Auteur: %{user}'
-      date_format: "%a, %d.%m.%Y, %H:%M heure"
-      revert: Revenir à cette version
-      title: "%{title} - Version %{version}"
-      title_version: Versio
-      view_current: Afficher la version actuelle
+      author: 'Author: %{user}'
+      date_format: "%a, %d-%m-%Y, %H:%M"
+      revert: Revert to this version
+      title: "%{title} - version %{version}"
+      title_version: Version
+      view_current: See current version
   pickups:
     document:
       empty_selection: At least one order must be selected.
@@ -1724,16 +1740,16 @@ fr:
       matrix_pdf: Matrix PDF
       title: Pickup days
   sessions:
-    logged_in: Connecté!
-    logged_out: Déconnecté!
-    login_invalid_email: Email ou mot de passe invalide
-    login_invalid_nick: Identifiant ou mot de passe invalide
+    logged_in: Logged in!
+    logged_out: Logged out!
+    login_invalid_email: Invalid email address or password
+    login_invalid_nick: Invalid username or password
     new:
-      forgot_password: Mot de passe oublié?
-      login: Te connecter
-      nojs: Attention, les cookies et le javascript doivent être activés! Merci de désactiver %{link}.
+      forgot_password: Forgot password?
+      login: Login
+      nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
-      title: Te connecter à Foodsoft
+      title: Foodsoft login
   printer_jobs:
     create:
       notice: Created %{count} printer jobs.
@@ -1748,291 +1764,291 @@ fr:
       title: Printer job %{id}
   shared:
     articles:
-      ordered: Commandé
-      ordered_desc: Nombre d'articles demandés par la cellule (quantité + tolérance)
-      received: Reçu
-      received_desc: Nombre d'articles qui seront octroyés à la cellule
+      ordered: Ordered
+      ordered_desc: Number of articles as ordered by member (amount + tolerance)
+      received: Received
+      received_desc: Number of articles that (will be) received by member
     articles_by:
-      price: Prix total
-      price_sum: Total
+      price: Total price
+      price_sum: Sum
     group:
-      access: Accès à
-      activated: activé
-      apple_limit: Minimum de glands
-      break: de %{start} à %{end}
-      deactivated: désactivé
+      access: Access to
+      activated: activated
+      apple_limit: Apple points order limit
+      break: from %{start} to %{end}
+      deactivated: deactivated
     group_form_fields:
-      search: Recherche...
-      search_user: Rechercher par utilisatrice
-      user_not_found: Aucun-e membre ne correspond à ce nom
+      search: Search ...
+      search_user: Search user
+      user_not_found: No user found
     open_orders:
-      no_open_orders: Il n'y a aucune commande en cours en ce moment
-      not_enough_apples: Désolé, ta cellule n'a pas assez de glands pour pouvoir commander!
-      title: Commandes en cours
-      total_sum: Total
-      who_ordered: Qui a commandé?
+      no_open_orders: There are no current orders
+      not_enough_apples: Attention your ordergroup has too few apple points to place an order!
+      title: Current orders
+      total_sum: Total sum
+      who_ordered: Who ordered?
     order_download_button:
-      article_pdf: Liste des articles en PDF
-      download_file: Télécharger
+      article_pdf: Article PDF
+      download_file: Download file
       fax_csv: Fax CSV
-      fax_pdf: Fax au format PDF
-      fax_txt: Fax au format texte
-      group_pdf: Liste des cellules en PDF
-      matrix_pdf: Matrice de répartition en PDF
-      title: Télécharger
+      fax_pdf: Fax PDF
+      fax_txt: Fax text
+      group_pdf: Group PDF
+      matrix_pdf: Matrix PDF
+      title: Download
     task_list:
-      accept_task: Te charger de ce boulot
-      done: Effectué
-      done_q: Effectué?
-      mark_done: Marquer ce boulot comme étant effectué
-      reject_task: Refuser ce boulot
-      who: Qui le fait?
-      who_hint: "(Combien manquent encore?)"
+      accept_task: Accept task
+      done: Done
+      done_q: Done?
+      mark_done: Mark task as done
+      reject_task: Reject task
+      who: Who is doing it?
+      who_hint: "(How much are still needed?)"
     user_form_fields:
       contact_address_hint: The address of your ordergroup. If you update this, it changes for other members of the ordergroup as well.
       messagegroups: Join or leave message groups
     workgroup_members:
-      title: Membres des équipes
+      title: Group memberships
   simple_form:
     error_notification:
-      default_message: Une erreur s'est produite. Merci de vérifier le formulaire.
+      default_message: Errors were found. Please check the form.
     hints:
       article:
-        unit: par exemple. kg ou 1l ou 500g
+        unit: e.g. KG or 1L or 500g
       article_category:
         description: comma-separated list of category names recognised at import/synchronisation
       order_article:
-        units_to_order: Attention, toute modification du nombre total d'unités réceptionées pour un article doit être répercuté manuellement sur les quantités attribuées à chaque cellule (pour cela, cliques sur le nom de l'article concerné). Si ce n'est pas fait, les cellules risquent d'être facturées pour des articles qu'elles n'ont jamais recus!
-        update_global_price: Mettre à jour le prix pour les commandes futures
+        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
+        update_global_price: Also update the price of future orders
       stock_article:
         copy:
-          name: Merci de modifier
+          name: Please modify
         edit_stock_article:
-          price: "<ul><li>Modification du prix interdite. </li><li>Si nécessaire %{stock_article_copy_link}.</li></ul>"
+          price: "<ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>"
       supplier:
-        min_order_quantity: Ce prix minimum sera affiché avec la liste de commande et permet de motiver les membres
+        min_order_quantity: The minimum amount which has to be ordered will be shown during the order process and should motivate ordering
       task:
-        duration: Combien de temps dure le boulot, 1 à 3 heures
-        required_users: De combien de personnes avons-nous besoin au total?
-      tax: En pourcentage, le standard est de 7,0
+        duration: How long will the task take, 1-3 hours
+        required_users: How many users will be needed in total?
+      tax: In percentage, standard is 7,0
     labels:
       settings:
         messages:
-          send_as_email: Te transmettre les messages de la boufcoop par email
+          send_as_email: Receive messages as emails.
         notify:
-          negative_balance: T'envoyer un avertissement si le compte de ta cellule vire au rouge.
-          order_finished: T'envoyer un résumé de tes commandes après leur finalisation
-          upcoming_tasks: T'envoyer un rappel de tes prochains boulots
+          negative_balance: Inform me when my ordergroup has a negative balance.
+          order_finished: Inform me about my order result (when the order is closed).
+          upcoming_tasks: Remind me of upcoming tasks.
         profile:
-          email_is_public: Permettre aux autres membres de voir ton adresse email.
-          language: Langue
-          name_is_public: Permettre aux autres membres de voir ton vrai nom.
-          phone_is_public: Permettre aux autres membres de voir ton numéro de téléphone.
+          email_is_public: Email is visible for other members.
+          language: Language
+          name_is_public: Name is visible for other members.
+          phone_is_public: Phone number is visible for other members.
         settings_group:
           messages: Messages
-          privacy: Confidentialité
-    'no': 'Non'
+          privacy: Privacy
+    'no': 'No'
     options:
       settings:
         profile:
           language:
-            de: Allemand
-            en: Anglais
-            es: Espagnol
-            fr: Français
-            nl: Néerlandais
+            de: German
+            en: English
+            es: Spanish
+            fr: French
+            nl: Dutch
     required:
       mark: "*"
-      text: requis
-    'yes': 'Oui'
+      text: required
+    'yes': 'Yes'
   stock_takings:
     create:
-      notice: L'inventaire a été créé avec succès.
+      notice: Inventory was created successfully.
     edit:
-      title: Modifier les données de l'inventaire
+      title: Edit inventory
     index:
-      new_inventory: Inventorier le cellier
-      title: Aperçu  de l'inventaire
+      new_inventory: Create new inventory
+      title: Inventory overview
     new:
-      amount: Quantité
-      create: ajouter
-      stock_articles: Articles du cellier
-      temp_inventory: l'inventaire courant
-      text_deviations: "Saisir ici les déviations constatées par rapport à %{inv_link}.\nEn cas de manque, utiliser un signe '-'."
-      text_need_articles: Si certains articles n'apparaissent pas sur l'inventaire courant, il faut les y %{create_link} directement.
-      title: Inventorier le cellier
+      amount: Amount
+      create: create
+      stock_articles: Stock articles
+      temp_inventory: temporary inventory
+      text_deviations: Please fill in all surplus deviations from the %{inv_link}. For reduction, use a a negative number.
+      text_need_articles: You have to %{create_link} a new stock article before you can use it here.
+      title: Create new inventory
     show:
-      amount: Quantité
+      amount: Amount
       article: Article
-      confirm_delete: Veux-tu vraiment annuler cet inventaire?
+      confirm_delete: Do you really want to delete the inventory?
       date: Date
       note: Note
-      overview: Aperçu de l'inventaire
-      supplier: Fournisseur-e
-      title: Afficher l'inventaire
-      unit: Unité
+      overview: Inventory overview
+      supplier: Supplier
+      title: Show inventory
+      unit: Unit
     stock_takings:
-      confirm_delete: T'es sûrE de ton coup?
+      confirm_delete: Are you sure you want to delete this?
       date: Date
       note: Note
     update:
-      notice: Les données de l'inventaire ont été mises à jour.
+      notice: Inventory was updated.
   stockit:
     check:
-      not_empty: "%{name} ne peut pas être supprimé, car il y en a encore en stock."
+      not_empty: "%{name} could not be deleted, the inventory is not zero."
     copy:
-      title: Copier l'article
+      title: Copy stock article
     create:
-      notice: L'article %{name} a été ajouté à la liste des articles du cellier.
+      notice: New stock article "%{name}" was created.
     derive:
-      title: Ajouter un article au cellier en utilisant un modèle
+      title: Add stock article using template
     destroy:
-      notice: L'article %{name} a bien été supprimé du cellier.
+      notice: Article %{name} was deleted.
     edit:
-      title: Modifier l'article
+      title: Edit stock articles
     form:
-      copy_stock_article: copier l'article
-      price_hint: Pour éviter que ça soit le bazar, les prix des articles du cellier ne peuvent plus être modifiés.
+      copy_stock_article: copy stock article
+      price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
     index:
-      confirm_delete: T'es sûrE de ton coup?
-      new_delivery: Approvisionner le cellier...
-      new_stock_article: Ajouter un article au cellier
-      new_stock_taking: Inventorier le cellier
-      order_online: Définir une commande à partir du cellier
-      show_stock_takings: Historique des inventaires
-      stock_count: 'Nombre d''articles:'
-      stock_worth: 'Valeur actuelle du cellier:'
-      title: Cellier (%{article_count})
-      toggle_unavailable: Afficher/cacher les articles actuellement indisponibles
-      view_options: Préférences d'affichage
+      confirm_delete: Are you sure you want to delete?
+      new_delivery: New delivery ...
+      new_stock_article: Add new stock article
+      new_stock_taking: Add inventory
+      order_online: Put stock order online
+      show_stock_takings: Inventory overview
+      stock_count: 'Number of articles:'
+      stock_worth: 'Current stock value:'
+      title: Stock (%{article_count})
+      toggle_unavailable: Show/hide unavailable articles
+      view_options: View options
     new:
-      search_text: 'Rechercher des articles dans tous les catalogues:'
-      title: Ajouter un article au cellier
+      search_text: 'Search for articles in all catalogues:'
+      title: Add new stock article
     show:
-      change_quantity: Modification
-      datetime: Temps
-      new_quantity: Nouveau stock
-      reason: Raison
-      stock_changes: Afficher l'historique
+      change_quantity: Change
+      datetime: Time
+      new_quantity: New quantity
+      reason: Reason
+      stock_changes: Stock quantity changes
     update:
-      notice: Les données de l'article "%{name}" ont été mises à jour.
+      notice: Stock article %{name} was saved.
   suppliers:
     create:
-      notice: Fournisseur-e mis-e à jour
+      notice: Supplier was created
     destroy:
-      notice: Fournisseur-e supprimé-e
+      notice: Supplier was deleted
     edit:
-      title: Modifier le-la fournisseur-e
+      title: Edit supplier
     index:
-      action_import: Importer des données depuis l'annuaire mutualisé
-      action_new: Ajouter un-e fournisseur-e
-      articles: Articles (%{count})
-      confirm_del: Attention, veux-tu vraiment supprimer le-la fournisseur-e %{name}?
-      deliveries: Livraisons (%{count})
-      stock: en stock (%{count})
-      title: Fournisseur-e-s
+      action_import: Import supplier from external database
+      action_new: Create new supplier
+      articles: articles (%{count})
+      confirm_del: Do you really want to delete the supplier %{name}?
+      deliveries: deliveries (%{count})
+      stock: in stock (%{count})
+      title: Suppliers
     new:
-      title: Ajouter un-e fournisseur-e
+      title: New supplier
     shared_supplier_methods:
       all_available: All articles (new are available)
       all_unavailable: All articles (new are unavailable)
       import: Choose articles to import
-    shared_supplier_note: Le-la fournisseur-e a été connecté à l'annuaire mutualisé.
+    shared_supplier_note: Supplier is connected to the external database.
     shared_suppliers:
-      body: "<p>Les fournisseur-e-s de l'annuaire mutualisé sont affiché-e-s ici.</p>\n<p>Tu peux les ajouter à l'annuaire de ta coop en t'y abonnant ci-dessous.</p>\n<p>Tu seras alors redirigé vers la page d'ajout de fournisseur-e préremplie, et il te suffira de valider.</p>"
-      subscribe: s'abonner
-      subscribe_again: s'abonner à nouveau
-      supplier: Fournisseur-e
-      title: Listes externes
+      body: "<p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>"
+      subscribe: Subscribe
+      subscribe_again: Subscribe again
+      supplier: Supplier
+      title: External lists
     show:
-      last_deliveries: Dernières livraisons
-      last_orders: Dernières commande
-      new_delivery: Approvisionner le cellier
-      show_deliveries: Afficher tous les réapprovisionnements
+      last_deliveries: Recent deliveries
+      last_orders: Last orders
+      new_delivery: New delivery
+      show_deliveries: Show all
     update:
-      notice: Les données du-de la fournisseur-e ont été mises à jour
+      notice: Supplier was updated
   tasks:
     accept:
-      notice: Tu as accepté ce boulot
+      notice: You have accepted the task
     archive:
-      title: Historique du boulot
+      title: Task archive
     create:
-      notice: Le boulot a bien été défini.
+      notice: Task has been created
     destroy:
-      notice: Le boulot a été supprimé
+      notice: Task has been deleted
     edit:
       submit_periodic: Save recurring task
-      title: Modifier les données du boulot
+      title: Edit task
       title_periodic: Edit recurring task
-      warning_periodic: "<strong>Avertissement:</strong>\nCe boulot fait partie d'une série de boulots <em>hebdomadaires</em>.\nSi les modifications sont enregistrées, il sera retiré de la série et converti en boulot ordinaire."
-    error_not_found: Aucune équipe n'a été trouvée.
+      warning_periodic: "<strong>Warning:</strong> This task is part of a group of <em>recurring tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>."
+    error_not_found: No workgroup found
     form:
       search:
-        hint: Rechercher unE membre
-        noresult: AucunE membre n'a été trouvéE
-        placeholder: Recherche...
+        hint: Search for user
+        noresult: No user found
+        placeholder: Search ...
       submit:
-        periodic: Définir comme boulot hebdomadaire
+        periodic: Save recurring task
     index:
-      show_group_tasks: Afficher l'agenda de cette équipe
-      title: Agenda
-      title_non_group: Boulots ouverts à tou-te-s
+      show_group_tasks: Show group tasks
+      title: Tasks
+      title_non_group: Tasks for all!
     nav:
-      all_tasks: L'agenda de la boufcoop
-      archive: Boulots déjà effectués (archives)
-      group_tasks: Sélectionner une équipe
-      my_tasks: Ton agenda
-      new_task: Définir un nouveau boulot
-      pages: Page
+      all_tasks: All tasks
+      archive: Completed tasks (archive)
+      group_tasks: Group tasks
+      my_tasks: My tasks
+      new_task: Create new task
+      pages: Pages
     new:
       submit_periodic: Create recurring task
-      title: Définition d'un nouveau boulot
-    repeated: Ce boulot a lieu toutes les semaines.
+      title: Create new task
+    repeated: Task is recurring
     set_done:
-      notice: L'agenda a été mis à jour.
+      notice: The state of the task has been updated
     show:
-      accept_task: Te charger de ce boulot.
-      confirm_delete_group: Veux-tu vraiment supprimer ce boulot hebdomadaire?
-      confirm_delete_single: Es-tu sûr de vouloir supprimer ce boulot?
+      accept_task: Accept task
+      confirm_delete_group: Really delete this and all subsequent tasks?
+      confirm_delete_single: Are you sure you want to delete the task?
       confirm_delete_single_from_group: Are you sure you want to delete this task (and keep related recurring tasks)?
-      delete_group: Supprimer ce boulot
+      delete_group: Delete task and subsequent
       edit_group: Edit recurring
       hours: "%{count}h"
-      mark_done: Marquer comme effectué
-      reject_task: Refuser ce boulot
-      title: Afficher la description du boulot
+      mark_done: Mark task as done
+      reject_task: Reject task
+      title: Show task
     update:
-      notice: La description du boulot a été mise à jour.
-      notice_converted: Le boulot a été converti en boulot ordinaire (sans répétition).
+      notice: Task has been updated
+      notice_converted: Task has been updated and was converted to a non-repeating task.
     user:
-      more: Tu t'ennuies en ce moment? Il y aura sûrement du boulot pour toi %{tasks_link}. 
-      tasks_link: par là-bas
-      title: Ton boulot
-      title_accepted: Boulots acceptés
-      title_open: Boulots disponibles
+      more: Nothing to do? %{tasks_link} are tasks for sure.
+      tasks_link: Here
+      title: My tasks
+      title_accepted: Accepted tasks
+      title_open: Open tasks
     workgroup:
-      title: Agenda de l'%{workgroup}
-      title_all: Boulot prévu pour l'équipe
+      title: Tasks for %{workgroup}
+      title_all: All group tasks
   ui:
     actions: Actions
-    back: Retour
-    cancel: Annuler
-    close: Fermer
-    confirm_delete: Veux-tu vraiment supprimer %{name}?
+    back: Back
+    cancel: Cancel
+    close: Close
+    confirm_delete: Do you really want to delete %{name}?
     confirm_restore: Do you really want to restore %{name}?
     copy: Copy
-    delete: Supprimer
-    download: Télécharger
-    edit: Modifier
+    delete: Delete
+    download: Download
+    edit: Edit
     marks:
       close: "&times;"
       success: <i class="icon icon-ok"></i>
-    or_cancel: ou annuler
-    please_wait: Merci de patienter...
+    or_cancel: or cancel
+    please_wait: Please wait...
     restore: Restore
-    save: Sauvegarder
+    save: Save
     search_placeholder: Search ...
-    show: Afficher
+    show: Show
   views:
     pagination:
       first: "&laquo;"
@@ -2042,10 +2058,10 @@ fr:
       truncate: "..."
   workgroups:
     edit:
-      title: Modifier l'équipe
-    error_last_admin_group: Impossible de supprimer la dernière cellule avec privilèges administratrices.
-    error_last_admin_role: Les privilèges administratrices ne peuvent pas être retirés à la dernière cellule qui les possède. 
+      title: Edit workgroup
+    error_last_admin_group: The last group with admin rights may not be deleted
+    error_last_admin_role: Admin role for the last group with admin rights cannot be withdrawn
     index:
-      title: Équipes
+      title: Workgroups
     update:
-      notice: L'équipe a été mise à jour
+      notice: Workgroup was updated
