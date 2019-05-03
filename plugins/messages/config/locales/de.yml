@@ -2,46 +2,46 @@ de:
   activerecord:
     attributes:
       message:
-        body: Inhalt
-        messagegroup_id: Nachrichtengruppe
-        order_id: Bestellung
-        ordergroup_id: Bestellgruppe
-        private: Privat
-        recipient_tokens: (Zusätzliche) Empfänger_innen
+        body: Body
+        messagegroup_id: Messagegroup
+        order_id: Order
+        ordergroup_id: Ordergroup
+        private: Private
+        recipient_tokens: (Additional) recipients
         send_method:
-          all: An alle Mitglieder schicken
-          recipients: An ausgewählte Mitglieder schicken
-          order: An die Mitglieder schicken, die bei einer Bestellung etwas bestellt haben
-          ordergroup: An die Mitglieder einer Bestellgruppe schicken
-          messagegroup: An die Mitglieder einer Nachrichtengruppe schicken
-          workgroup: An die Mitglieder einer Arbeitsgruppe schicken
-        subject: Betreff
-        workgroup_id: Arbeitsgruppe
+          all: Send to all members
+          recipients: Send to specific members
+          order: Send to members, who participated at an order
+          ordergroup: Send to members of a ordergroup
+          messagegroup: Send to members of a messagegroup
+          workgroup: Send to members of a workgroup
+        subject: Subject
+        workgroup_id: Workgroup
       messagegroup:
-        description: Beschreibung
+        description: Description
         name: Name
-        user_tokens: Mitglieder
+        user_tokens: Members
     models:
       message: Message
-      messagegroup: Nachrichtengruppe
+      messagegroup: Message group
   admin:
     messagegroups:
       destroy:
-        error: 'Nachrichtengruppe konnte nicht als gelöscht markiert werden: %{error}'
-        notice: Nachrichtengruppe wurde als gelöscht markiert
+        error: 'Message group could not be deleted: %{error}'
+        notice: Message group was deleted
       edit:
-        title: Nachrichtengruppe bearbeiten
+        title: Edit message group
       index:
-        first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
-        new_messagegroup: Neue Nachrichtengruppe anlegen
-        new_messagegroups: neue Nachrichtengruppe
-        second_paragraph: "Eine Nachrichtengruppe ist wie ein Mail-Verteilen. Mitglieder können Verteiler in ihrem Profil abonnieren (und auch wieder abbestellen) an denen sie interessiert sind."
-        title: Nachrichtengruppen
+        first_paragraph: Here you can create %{url}, edit and delete them.
+        new_messagegroup: Create new message group
+        new_messagegroups: new message groups
+        second_paragraph: "A message group is like a mailing-list. Members can subscribe to (and unsubscribe from) the lists they're interested in, from their profile."
+        title: Message groups
       new:
-        title: Nachrichtengruppe anlegen
+        title: Create message group
       show:
-        send_message: Nachricht senden
-        title: Nachrichtengruppe %{name}
+        send_message: Send message
+        title: Message group %{name}
     ordergroups:
       show:
         send_message: Send message
@@ -68,30 +68,30 @@ de:
       messages:
         title: Newest messages
         view_all:
-          text: '%{messages} oder %{threads} anzeigen'
-          messages: Nachrichten
-          threads: Nachrichtenverläufe
+          text: 'Show %{messages} or %{threads}'
+          messages: all messages
+          threads: threads
     start_nav:
       write_message: Write message
   messagegroups:
     index:
-      body: 'Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.'
-      title: Nachrichtengruppen
+      body: 'A message group is like a mailing-list: you can join (or leave) any of them to receive the updates sent to that group.'
+      title: Message groups
     join:
-      error: 'Nachrichtengruppe konnte nicht begetreten werden: %{error}'
-      notice: Nachrichtengruppe wurde beigetreten
+      error: 'Could not join message group: %{error}'
+      notice: Joined message group
     leave:
-      error: 'Nachrichtengruppe konnte nicht verlassen werden: %{error}'
-      notice: Nachrichtengruppe wurde verlassen
+      error: 'Messagegroup could not be left: %{error}'
+      notice: Left message group
     messagegroup:
-      join: Nachrichtengruppe beitreten
-      leave: Nachrichtengruppe verlassen
+      join: Join message group
+      leave: Leave message group
   messages:
     actionbar:
-      message_threads: Als Verläufe anzeigen
-      messagegroups: Nachrichtengruppen beitreten
-      messages: Als Liste anzeigen
-      new: Neue Nachricht
+      message_threads: Show as threads
+      messagegroups: Subscribe to groups
+      messages: Show as list
+      new: New message
     create:
       notice: Message is saved and will be sent.
     index:
@@ -127,28 +127,28 @@ de:
       subject: ! 'Subject:'
       title: Show message
     thread:
-      all_message_threads: Alle Nachrichtenverläufe
-      reply: Antworten
+      all_message_threads: All message threads
+      reply: Reply
   message_threads:
     groupmessage_threads:
-      show_message_threads: Alle Nachrichtenverläufe anzeigen
+      show_message_threads: show all
     index:
-      general: Allgemeine Nachrichten
-      title: Nachrichtenverläufe
+      general: General
+      title: Message threads
     message_threads:
-      last_reply_at: Letze Antwort am
-      last_reply_by: Letze Antwort von
-      started_at: Gestartet am
-      started_by: Gestartet von
+      last_reply_at: Last replied at
+      last_reply_by: Last replied by
+      started_at: Started at
+      started_by: Started by
     show:
-      general: Allgemeine Nachrichten
+      general: General
   messages_mailer:
     foodsoft_message:
       footer: ! 'Reply: %{reply_url} See message online: %{msg_url} Messaging options: %{profile_url} '
   navigation:
     admin:
-      messagegroups: Nachrichtengruppen
+      messagegroups: Message groups
     messages: Messages
   shared:
     user_form_fields:
-      messagegroups: Nachrichtengruppen beitreten oder verlassen
+      messagegroups: Join or leave message groups
