@@ -2,55 +2,55 @@ pt-BR:
   activerecord:
     attributes:
       article:
-        article_category: Categoria
-        availability: O artigo está disponível?
-        availability_short: disp.
-        deposit: Depósito
-        fc_price: Preço FoodCoop
-        fc_price_desc: Preço incluindo taxas, depósito e custo-Foodcoop.
-        fc_price_short: Preço FC
-        fc_share: Margem FoodCoop
-        fc_share_short: Margem FC
-        gross_price: Preço bruto
-        manufacturer: Fabricante
-        name: Nome
-        note: Nota
-        order_number: Número do pedido
-        order_number_short: Núm.
-        origin: Origem
-        price: Preço (líquido)
-        supplier: Fornecedor
-        tax: IVA
-        unit: Unidade
-        unit_quantity: Quantidade de unidade
-        unit_quantity_short: Q.U.
-        units: Unidades
+        article_category: Category
+        availability: Is article available?
+        availability_short: avail.
+        deposit: Deposit
+        fc_price: FoodCoop price
+        fc_price_desc: Price including taxes, deposit and Foodcoop-charge.
+        fc_price_short: FC price
+        fc_share: FoodCoop margin
+        fc_share_short: FC margin
+        gross_price: Gross price
+        manufacturer: Manufacturer
+        name: Name
+        note: Note
+        order_number: Order number
+        order_number_short: Nr.
+        origin: Origin
+        price: Price (net)
+        supplier: Supplier
+        tax: VAT
+        unit: Unit
+        unit_quantity: Unit quantity
+        unit_quantity_short: U.Q.
+        units: Units
       article_category:
-        description: Importar nomes
-        name: Nome
+        description: Import names
+        name: Name
       article_price:
-        deposit: Depósito
-        price: Preço (líquido)
-        tax: IVA
-        unit_quantity: Quantidade de unidade
+        deposit: Deposit
+        price: Price (net)
+        tax: VAT
+        unit_quantity: Unit quantity
       delivery:
-        delivered_on: Data de entrega
-        note: Nota
-        supplier: Fornecedor
+        delivered_on: Delivery date
+        note: Note
+        supplier: Supplier
       document:
-        created_at: Criado em
+        created_at: Created at
         created_by: Created by
-        data: Dados
-        mime: Tipo MIME
-        name: Nome
+        data: Data
+        mime: MIME type
+        name: Name
       financial_transaction:
-        amount: Quantidade
-        created_on: Dados
+        amount: Amount
+        created_on: Date
         financial_transaction_class: Financial transaction class
         financial_transaction_type: Financial transaction type
-        note: Nota
-        ordergroup: Grupo de pedidos
-        user: Inserido por
+        note: Note
+        ordergroup: Ordergroup
+        user: Entered by
       financial_transaction_class:
         name: Name
       financial_transaction_type:
@@ -59,44 +59,44 @@ pt-BR:
         name_short: Short Name
       group_order:
         ordergroup: Ordergroup
-        price: Soma do pedido
-        updated_by: Último ordenado por
+        price: Order sum
+        updated_by: Last ordered by
       group_order_article:
         ordered: Ordered
-        quantity: Quantidade
+        quantity: Amount
         received: Received
-        result: Quantidade
-        tolerance: Tolerância
-        total_price: Soma
+        result: Amount
+        tolerance: Tolerance
+        total_price: Sum
         unit_price: Price/Unit
       invoice:
-        amount: Quantidade
-        attachment: Anexo
-        created_at: Criado em
-        created_by: Criado por
-        date: Data de cobrança
-        delete_attachment: Excluir anexo
-        deliveries: Entrega
-        deposit: Depósito cobrado
-        deposit_credit: Depósito retornado
-        net_amount: Quantia ajustada para reembolso
-        note: Nota
-        number: Número
-        orders: Pedido
-        paid_on: Pago em
-        supplier: Fornecedor
+        amount: Amount
+        attachment: Attachment
+        created_at: Created at
+        created_by: Created by
+        date: Billing date
+        delete_attachment: Delete attachment
+        deliveries: Delivery
+        deposit: Deposit charged
+        deposit_credit: Deposit returned
+        net_amount: Amount adjusted for refund
+        note: Note
+        number: Number
+        orders: Order
+        paid_on: Paid on
+        supplier: Supplier
       mail_delivery_status:
         created_at: Time
         email: Email
         message: Message
       message:
-        body: Corpo
-        group_id: Grupo
+        body: Body
+        group_id: Group
         messagegroup_id: Messagegroup
         order_id: Order
         ordergroup_id: Ordergroup
-        private: Privado
-        recipient_tokens: "Recipientes"
+        private: Private
+        recipient_tokens: "(Additional) recipients"
         send_method:
           all: Send to all members
           messagegroup: Send to members of a messagegroup
@@ -104,77 +104,77 @@ pt-BR:
           ordergroup: Send to members of a ordergroup
           recipients: Send to specific members
           workgroup: Send to members of a workgroup
-        send_to_all: Enviar para todos os membros
-        subject: Assuntos
+        send_to_all: Send to all members
+        subject: Subject
         workgroup_id: Workgroup
       messagegroup:
         description: Description
         name: Name
         user_tokens: Members
       order:
-        boxfill: Caixas de preenchimento após
-        closed_by: Estabelecido por 
-        created_by: Criado por
+        boxfill: Fill boxes after
+        closed_by: Settled by
+        created_by: Created by
         end_action: End action
         end_actions:
           auto_close: Close the order
           auto_close_and_send: Close the order and send it to the supplier
           auto_close_and_send_min_quantity: Close the order and send it to the supplier if the minimum quantity has been reached
           no_end_action: No automatic action
-        ends: Termina em
-        name: Fornecedor
-        note: Nota
-        pickup: Pegar
-        starts: Começa em
+        ends: Ends at
+        name: Supplier
+        note: Note
+        pickup: Pickup
+        starts: Starts at
         status: Status
-        supplier: Fornecedor
-        updated_by: Última edição por
+        supplier: Supplier
+        updated_by: Last edited by
       order_article:
-        article: Artigo
-        missing_units: Unidades em falta
-        missing_units_short: Falta de
-        quantity: Quantia desejada
-        quantity_short: Desejada
-        units_received: Unidades recebidas
-        units_received_short: Recebidas
-        units_to_order: Unidades ordenadas
-        units_to_order_short: Ordenadas
-        update_global_price: Atualizar globalmente o preço atual
+        article: Article
+        missing_units: Missing units
+        missing_units_short: Missing
+        quantity: Desired amount
+        quantity_short: Desired
+        units_received: Received units
+        units_received_short: Received
+        units_to_order: Ordered units
+        units_to_order_short: Ordered
+        update_global_price: Globally update current price
       order_comment:
-        text: Adicionar comentário a este pedido...
+        text: Add comment to this order ...
       ordergroup:
-        account_balance: Saldo da conta
-        available_funds: Crédito disponível
-        break: "(Última) quebra"
-        break_until: enquanto
-        contact: Contato
-        contact_address: Endereço
-        contact_person: Pessoa de contato
-        contact_phone: Telefone
-        description: Descrição
-        ignore_apple_restriction: Ignorar parada de pedido pela restrição de pontos de maçã
-        last_order: Último pedido
-        last_user_activity: Última atividade
-        name: Nome
-        user_tokens: Membros
+        account_balance: Account balance
+        available_funds: Available credit
+        break: "(Last) break"
+        break_until: until
+        contact: Contact
+        contact_address: Address
+        contact_person: Contact person
+        contact_phone: Phone
+        description: Description
+        ignore_apple_restriction: Ignore order stop by apple points restriction
+        last_order: Last order
+        last_user_activity: Last activity
+        name: Name
+        user_tokens: Members
       page:
-        body: Corpo
-        parent_id: Página mãe
-        title: Título 
+        body: Body
+        parent_id: Parent page
+        title: Title
       stock_article:
-        available: Disponível 
-        price: Preço 
-        quantity: Em estoque
-        quantity_available: Quantidade disponível 
-        quantity_available_short: Disp.
-        quantity_ordered: Pedido 
+        available: Available
+        price: Price
+        quantity: In stock
+        quantity_available: Available quantity
+        quantity_available_short: Avail.
+        quantity_ordered: Ordered
       stock_taking:
-        date: Data
-        note: Nota
+        date: Date
+        note: Note
       supplier:
-        address: Endereço 
-        contact_person: Pessoa de contato 
-        customer_number: Número de cliente
+        address: Address
+        contact_person: Contact person
+        customer_number: Customer number
         customer_number_short: Cust.nr.
         delivery_days: Delivery days
         email: Email
@@ -227,7 +227,7 @@ pt-BR:
         role_suppliers: Suppliers
         user_tokens: Members
     errors:
-      has_many_left: ainda está associado a um %{collection}!
+      has_many_left: is still associated with a %{collection}!
       models:
         article:
           attributes:
@@ -243,28 +243,28 @@ pt-BR:
             done:
               exclusion: finished tasks may not be repeated
     models:
-      article: Artigo
-      article_category: Categoria
+      article: Article
+      article_category: Category
       bank_transaction: Bank transaction
-      delivery: Entrega
-      financial_transaction: Transação financeira
+      delivery: Delivery
+      financial_transaction: Financial transaction
       financial_transaction_class: Financial transaction class
       financial_transaction_type: Financial transaction type
-      invoice: Fatura
-      message: Mensagem
+      invoice: Invoice
+      message: Message
       messagegroup: Message group
-      order: Pedido
-      order_article: Artigo de pedido
-      order_comment: Comentário de pedido
+      order: Order
+      order_article: Order article
+      order_comment: Order comment
       ordergroup:
-        one: Grupo de pedidos
-        other: Grupos de pedidos
-      stock_article: Artigo de estoque
-      stock_taking: Levantamento de estoque
-      supplier: Fornecedor
-      task: Tarefa
-      user: Usuário
-      workgroup: Grupo de trabalho
+        one: Ordergroup
+        other: Ordergroups
+      stock_article: Stock article
+      stock_taking: Stock taking
+      supplier: Supplier
+      task: Task
+      user: User
+      workgroup: Workgroup
   admin:
     access_to: access to
     base:
@@ -1852,11 +1852,11 @@ pt-BR:
       settings:
         profile:
           language:
-            de: alemão
-            en: inglês
-            es: espanhol
-            fr: francês
-            nl: neerlandês
+            de: German
+            en: English
+            es: Spanish
+            fr: French
+            nl: Dutch
     required:
       mark: "*"
       text: required
