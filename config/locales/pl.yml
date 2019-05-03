@@ -2,41 +2,41 @@ pl:
   activerecord:
     attributes:
       article:
-        article_category: Kategoria
-        availability: Czy produkt jest dostępny?
-        availability_short: dost.
-        deposit: Kaucja
-        fc_price: Cena kooperatywy
-        fc_price_desc: Cena z podatkami, kaucją i opłatą kooperatywy.
-        fc_price_short: Cena koop
-        fc_share: Marża kooperatywy
-        fc_share_short: Marża koop
-        gross_price: Cena brutto
-        manufacturer: Producent
-        name: Nazwa
-        note: Uwagi
-        order_number: Numer zamówienia
-        order_number_short: Nr
-        origin: Źródło
-        price: Cena (netto)
-        supplier: Dostawca
+        article_category: Category
+        availability: Is article available?
+        availability_short: avail.
+        deposit: Deposit
+        fc_price: FoodCoop price
+        fc_price_desc: Price including taxes, deposit and Foodcoop-charge.
+        fc_price_short: FC price
+        fc_share: FoodCoop margin
+        fc_share_short: FC margin
+        gross_price: Gross price
+        manufacturer: Manufacturer
+        name: Name
+        note: Note
+        order_number: Order number
+        order_number_short: Nr.
+        origin: Origin
+        price: Price (net)
+        supplier: Supplier
         tax: VAT
-        unit: Jedn.
-        unit_quantity: Ilość
-        unit_quantity_short: Ilość
-        units: Jedn.
+        unit: Unit
+        unit_quantity: Unit quantity
+        unit_quantity_short: U.Q.
+        units: Units
       article_category:
-        description: Importuj nazwy
-        name: Nazwa
+        description: Import names
+        name: Name
       article_price:
-        deposit: Kaucja
-        price: Cena (netto)
+        deposit: Deposit
+        price: Price (net)
         tax: VAT
-        unit_quantity: Ilość
+        unit_quantity: Unit quantity
       delivery:
-        delivered_on: Data dostawy
-        note: Uwaga
-        supplier: Dostawca
+        delivered_on: Delivery date
+        note: Note
+        supplier: Supplier
       document:
         created_at: Created at
         created_by: Created by
@@ -44,13 +44,13 @@ pl:
         mime: MIME type
         name: Name
       financial_transaction:
-        amount: Kwota
-        created_on: Data
+        amount: Amount
+        created_on: Date
         financial_transaction_class: Financial transaction class
         financial_transaction_type: Financial transaction type
-        note: Uwaga
-        ordergroup: Grupa
-        user: Wpisane przez
+        note: Note
+        ordergroup: Ordergroup
+        user: Entered by
       financial_transaction_class:
         name: Name
       financial_transaction_type:
@@ -59,43 +59,43 @@ pl:
         name_short: Short Name
       group_order:
         ordergroup: Ordergroup
-        price: Suma zamówienia
-        updated_by: Ostatnie zamówienie
+        price: Order sum
+        updated_by: Last ordered by
       group_order_article:
         ordered: Ordered
-        quantity: Kwota
+        quantity: Amount
         received: Received
-        result: Kwota
-        tolerance: Tolerancja
-        total_price: Suma
+        result: Amount
+        tolerance: Tolerance
+        total_price: Sum
         unit_price: Price/Unit
       invoice:
-        amount: Kwota
+        amount: Amount
         attachment: Attachment
         created_at: Created at
         created_by: Created by
-        date: Data kasowania
+        date: Billing date
         delete_attachment: Delete attachment
-        deliveries: Dostawa
-        deposit: Naliczona kaucja
-        deposit_credit: Zwrócona kaucja
+        deliveries: Delivery
+        deposit: Deposit charged
+        deposit_credit: Deposit returned
         net_amount: Amount adjusted for refund
-        note: Uwaga
-        number: Liczba
-        orders: Zamówienie
-        paid_on: Zapłacone
-        supplier: Dostawca
+        note: Note
+        number: Number
+        orders: Order
+        paid_on: Paid on
+        supplier: Supplier
       mail_delivery_status:
         created_at: Time
         email: Email
         message: Message
       message:
-        body: Treść
-        group_id: Grupa
+        body: Body
+        group_id: Group
         messagegroup_id: Messagegroup
         order_id: Order
         ordergroup_id: Ordergroup
-        private: Prywatna
+        private: Private
         recipient_tokens: "(Additional) recipients"
         send_method:
           all: Send to all members
@@ -122,13 +122,13 @@ pl:
           auto_close_and_send_min_quantity: Close the order and send it to the supplier if the minimum quantity has been reached
           no_end_action: No automatic action
         ends: Ends at
-        name: Dostawca
-        note: Uwaga
+        name: Supplier
+        note: Note
         pickup: Pickup
-        starts: Od
-        status: Stan
-        supplier: Dostawca
-        updated_by: Ostatnia zmiana
+        starts: Starts at
+        status: Status
+        supplier: Supplier
+        updated_by: Last edited by
       order_article:
         article: Article
         missing_units: Missing units
@@ -148,23 +148,23 @@ pl:
         break: "(Last) break"
         break_until: until
         contact: Contact
-        contact_address: Adres
-        contact_person: Osoba kontaktowa
-        contact_phone: Telefon
-        description: Opis
-        ignore_apple_restriction: Nie zatrzymuj zamówień przy braku punktów
-        last_order: Ostatnie zamówienie
+        contact_address: Address
+        contact_person: Contact person
+        contact_phone: Phone
+        description: Description
+        ignore_apple_restriction: Ignore order stop by apple points restriction
+        last_order: Last order
         last_user_activity: Last activity
-        name: Nazwa
-        user_tokens: Członkowie
+        name: Name
+        user_tokens: Members
       page:
-        body: Treść
-        parent_id: Strona nadrzędna
-        title: Tytuł
+        body: Body
+        parent_id: Parent page
+        title: Title
       stock_article:
-        available: Dostępny
-        price: Cena
-        quantity: W magazynie
+        available: Available
+        price: Price
+        quantity: In stock
         quantity_available: Available quantity
         quantity_available_short: Avail.
         quantity_ordered: Ordered
@@ -188,30 +188,30 @@ pl:
         order_howto: How to order
         phone: Phone
         phone2: Phone 2
-        shared_sync_method: Jak zsynchronizować
-        url: Strona główna
+        shared_sync_method: How to synchronize
+        url: Homepage
       task:
-        description: Opis
-        done: Gotowe?
-        due_date: Data wykonania
-        duration: Czas trwania
-        name: Czynność
-        required_users: Osoby
-        user_list: Odpowiedzialni użytkownicy
-        workgroup: Grupa robocza
+        description: Description
+        done: Done?
+        due_date: Due date
+        duration: Duration
+        name: Activity
+        required_users: People required
+        user_list: Responsible users
+        workgroup: Workgroup
       user:
-        email: E-mail
-        first_name: Imię
+        email: Email
+        first_name: First name
         iban: IBAN
         last_activity: Last activity
-        last_login: Ostatnie logowanie
-        last_name: Nazwisko
-        name: Nazwa
-        nick: Nazwa użytkownika
-        ordergroup: Grupa
-        password: Hasło
-        password_confirmation: Powtórz hasło
-        phone: Telefon
+        last_login: Last login
+        last_name: Last name
+        name: Name
+        nick: Username
+        ordergroup: Ordergroup
+        password: Password
+        password_confirmation: Repeat password
+        phone: Telephone
         workgroup:
           one: Workgroup
           few: Workgroups
@@ -253,34 +253,34 @@ pl:
       financial_transaction_class: Financial transaction class
       financial_transaction_type: Financial transaction type
       invoice: Invoice
-      message: Wiadomość
+      message: Message
       messagegroup: Message group
-      order: Zamówienie
-      order_article: Zamów produkt
-      order_comment: Komentarz
+      order: Order
+      order_article: Order article
+      order_comment: Order comment
       ordergroup:
         one: Ordergroup
         few: Ordergroups
         many: Ordergroups
         other: Ordergroups
-      stock_article: Artykuł magazynowy
-      stock_taking: Inwentaryzacja
-      supplier: Dostawca
-      task: Zadanie
-      user: Użytkownik
-      workgroup: Grupa robocza
+      stock_article: Stock article
+      stock_taking: Stock taking
+      supplier: Supplier
+      task: Task
+      user: User
+      workgroup: Workgroup
   admin:
-    access_to: dostęp do
+    access_to: access to
     base:
       index:
-        all_ordergroups: Wszystkie grupy
-        all_users: Wszyscy użytkownicy
-        all_workgroups: Wszystkie grupy robocze
-        created_at: stworzony w
-        first_paragraph: Tutaj możesz zarządzać grupami i użytkownikami foodsoft.
-        groupname: nazwa grupy
-        members: członkowie
-        name: nazwa
+        all_ordergroups: All ordergroups
+        all_users: All users
+        all_workgroups: All workgroups
+        created_at: created at
+        first_paragraph: Here you can administer Foodsoft groups and users.
+        groupname: group name
+        members: members
+        name: name
         new_ordergroup: New ordergroup
         new_user: New user
         new_workgroup: New workgroup
@@ -354,14 +354,14 @@ pl:
         error: 'Ordergroup could not be marked as deleted: %{error}'
         notice: Ordergroup was marked as deleted
       edit:
-        title: Edytuj grupę
+        title: Edit ordergroup
       form:
-        first_paragraph: Możesz zaprosić nowych członków %{url}.
-        here: tutaj
+        first_paragraph: You can invite new members %{url}.
+        here: here
       index:
-        first_paragraph: Tutaj możesz dodawać %{url}, edytować lub kasować grupy.
-        new_ordergroup: Dodaj nową grupę
-        new_ordergroups: nowe grupy
+        first_paragraph: Here you can add %{url}, and edit or delete groups.
+        new_ordergroup: Add new ordergroup
+        new_ordergroups: new ordergroups
         second_paragraph: 'Consider the difference between <em>group</em> and <em>ordergroup</em>: An ordergroup has an account and can order food. In a <em>%{url}</em> (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
         title: Ordergroups
         workgroup: workgroup
