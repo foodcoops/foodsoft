@@ -1,0 +1,88 @@
+ach:
+  activerecord:
+    attributes:
+      page:
+        body: crwdns5668:0crwdne5668:0
+        parent_id: crwdns5670:0crwdne5670:0
+        title: crwdns5672:0crwdne5672:0
+  model:
+    page:
+      redirect: crwdns5674:0%{title}crwdne5674:0
+  navigation:
+    wiki:
+      all_pages: crwdns5676:0crwdne5676:0
+      home: crwdns5678:0crwdne5678:0
+      title: crwdns5680:0crwdne5680:0
+  pages:
+    all:
+      new_page: crwdns5682:0crwdne5682:0
+      recent_changes: crwdns5684:0crwdne5684:0
+      search:
+        action: crwdns5686:0crwdne5686:0
+        placeholder: crwdns5688:0crwdne5688:0
+      site_map: crwdns5690:0crwdne5690:0
+      title: crwdns5692:0crwdne5692:0
+      title_list: crwdns5694:0crwdne5694:0
+    body:
+      title_toc: crwdns5696:0crwdne5696:0
+    create:
+      notice: crwdns5698:0crwdne5698:0
+    cshow:
+      error_noexist: crwdns5700:0crwdne5700:0
+      redirect_notice: crwdns5702:0%{page}crwdne5702:0
+    destroy:
+      notice: crwdns5704:0%{page}crwdne5704:0
+    diff:
+      title: "crwdns5706:0%{title}crwdnd5706:0%{old}crwdnd5706:0%{new}crwdne5706:0"
+    edit:
+      title: crwdns5708:0crwdne5708:0
+    error_stale_object: crwdns5710:0crwdne5710:0
+    form:
+      help:
+        bold: crwdns5712:0crwdne5712:0
+        external_link_ex: crwdns5714:0crwdne5714:0
+        external_links: crwdns5716:0crwdne5716:0
+        heading: crwdns5718:0%{level}crwdne5718:0
+        headings: crwdns5720:0crwdne5720:0
+        italic: crwdns5722:0crwdne5722:0
+        list_item_1: crwdns5724:0crwdne5724:0
+        list_item_2: crwdns5726:0crwdne5726:0
+        noformat: crwdns5728:0crwdne5728:0
+        ordered_list: crwdns5730:0crwdne5730:0
+        section_block: crwdns5732:0crwdne5732:0
+        section_character: crwdns5734:0crwdne5734:0
+        section_link: crwdns5736:0crwdne5736:0
+        section_table: crwdns5738:0crwdne5738:0
+        see_tables: crwdns5740:0%{tables_link}crwdne5740:0
+        tables_link: crwdns5742:0crwdne5742:0
+        text: crwdns5744:0crwdne5744:0
+        title: crwdns5746:0crwdne5746:0
+        unordered_list: crwdns5748:0crwdne5748:0
+        wiki_link_ex: crwdns5750:0crwdne5750:0
+        wiki_links: crwdns5752:0crwdne5752:0
+      preview: crwdns5754:0crwdne5754:0
+    last_updated: crwdns5756:0crwdne5756:0
+    new:
+      title: crwdns5758:0crwdne5758:0
+    page_list_item:
+      date_format: ! 'crwdns5760:0%acrwdnd5760:0%dcrwdnd5760:0%Bcrwdnd5760:0%Ycrwdnd5760:0%H:%M:%Scrwdne5760:0'
+    show:
+      date_format: ! 'crwdns5762:0%d-%m-%ycrwdnd5762:0%H:%Mcrwdne5762:0'
+      delete: crwdns5764:0crwdne5764:0
+      delete_confirm: ! 'crwdns5766:0crwdne5766:0'
+      diff: crwdns5768:0crwdne5768:0
+      edit: crwdns5770:0crwdne5770:0
+      last_updated: crwdns5772:0%{user}crwdnd5772:0%{when}crwdne5772:0
+      subpages: crwdns5774:0crwdne5774:0
+      title_versions: crwdns5776:0crwdne5776:0
+      versions: crwdns5778:0%{count}crwdne5778:0
+    title: crwdns5780:0crwdne5780:0
+    update:
+      notice: crwdns5782:0crwdne5782:0
+    version:
+      author: ! 'crwdns5784:0%{user}crwdne5784:0'
+      date_format: ! 'crwdns5786:0%acrwdnd5786:0%d-%m-%Ycrwdnd5786:0%H:%Mcrwdne5786:0'
+      revert: crwdns5788:0crwdne5788:0
+      title: ! 'crwdns5790:0%{title}crwdnd5790:0%{version}crwdne5790:0'
+      title_version: crwdns5792:0crwdne5792:0
+      view_current: crwdns5794:0crwdne5794:0
