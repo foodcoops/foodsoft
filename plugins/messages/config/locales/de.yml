@@ -22,6 +22,7 @@ de:
         name: Name
         user_tokens: Mitglieder
     models:
+      message: Message
       messagegroup: Nachrichtengruppe
   admin:
     messagegroups:
@@ -34,23 +35,47 @@ de:
         first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
         new_messagegroup: Neue Nachrichtengruppe anlegen
         new_messagegroups: neue Nachrichtengruppe
-        second_paragraph: Eine Nachrichtengruppe ist wie ein Mail-Verteilen. Mitglieder können Verteiler in ihrem Profil abonnieren (und auch wieder abbestellen) an denen sie interessiert sind.
+        second_paragraph: "Eine Nachrichtengruppe ist wie ein Mail-Verteilen. Mitglieder können Verteiler in ihrem Profil abonnieren (und auch wieder abbestellen) an denen sie interessiert sind."
         title: Nachrichtengruppen
       new:
         title: Nachrichtengruppe anlegen
       show:
         send_message: Nachricht senden
         title: Nachrichtengruppe %{name}
+    ordergroups:
+      show:
+        send_message: Send message
+    users:
+      show:
+        send_message: Send message
+  config:
+    hints:
+      mailing_list: Mailing-list email address to use instead of the messaging system for mail to all members.
+      mailing_list_subscribe: Email address where members can send an email to for subscribing.
+      use_messages: Allow members to communicate with each other within Foodsoft.
+    keys:
+      use_messages: Messages
+      mailing_list: Mailing-list
+      mailing_list_subscribe: Mailing-list subscribe
+  helpers:
+    messages:
+      write_message: Write message
+    submit:
+      message:
+        create: send message
   home:
     index:
       messages:
+        title: Newest messages
         view_all:
           text: '%{messages} oder %{threads} anzeigen'
           messages: Nachrichten
           threads: Nachrichtenverläufe
+    start_nav:
+      write_message: Write message
   messagegroups:
     index:
-      body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
+      body: 'Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.'
       title: Nachrichtengruppen
     join:
       error: 'Nachrichtengruppe konnte nicht begetreten werden: %{error}'
@@ -67,6 +92,40 @@ de:
       messagegroups: Nachrichtengruppen beitreten
       messages: Als Liste anzeigen
       new: Neue Nachricht
+    create:
+      notice: Message is saved and will be sent.
+    index:
+      title: Messages
+    messages:
+      reply: Reply
+    model:
+      reply_header: ! '%{user} wrote on %{when}:'
+      reply_indent: ! '> %{line}'
+      reply_subject: ! 'Re: %{subject}'
+    new:
+      error_private: Sorry, this message is private.
+      hint_private: Message doesn’t show in Foodsoft mail inbox
+      list:
+        desc: ! 'Please send messages to all using the mailing-list: %{list}'
+        mail: for example with an email to %{email}.
+        subscribe: You can find more about the mailing-list at %{link}.
+        subscribe_msg: You may have to subscribe to the mailing-list first.
+        wiki: Wiki (page Mailing-List)
+      message: message
+      no_user_found: No user found
+      reply_to: This message is an reply to an other %{link}.
+      search: Search ...
+      search_user: Search user
+      title: New message
+    show:
+      all_messages: All messages
+      from: ! 'From:'
+      group: 'Group:'
+      reply: Reply
+      reply_to: 'Reply to:'
+      sent_on: ! 'Sent:'
+      subject: ! 'Subject:'
+      title: Show message
     thread:
       all_message_threads: Alle Nachrichtenverläufe
       reply: Antworten
@@ -83,9 +142,13 @@ de:
       started_by: Gestartet von
     show:
       general: Allgemeine Nachrichten
+  messages_mailer:
+    foodsoft_message:
+      footer: ! 'Reply: %{reply_url} See message online: %{msg_url} Messaging options: %{profile_url} '
   navigation:
     admin:
       messagegroups: Nachrichtengruppen
+    messages: Messages
   shared:
     user_form_fields:
       messagegroups: Nachrichtengruppen beitreten oder verlassen
