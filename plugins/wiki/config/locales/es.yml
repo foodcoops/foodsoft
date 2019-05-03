@@ -1,0 +1,88 @@
+es:
+  activerecord:
+    attributes:
+      page:
+        body: Body
+        parent_id: Parent page
+        title: Title
+  model:
+    page:
+      redirect: Redirect to [[%{title}]]...
+  navigation:
+    wiki:
+      all_pages: All Pages
+      home: Home
+      title: Wiki
+  pages:
+    all:
+      new_page: Create new page
+      recent_changes: Recent changes
+      search:
+        action: Search
+        placeholder: Page title ..
+      site_map: Sitemap
+      title: All Wiki pages
+      title_list: List of pages
+    body:
+      title_toc: Content
+    create:
+      notice: Page was created
+    cshow:
+      error_noexist: Page doesn't exist!
+      redirect_notice: Redirected from %{page} ...
+    destroy:
+      notice: The page '%{page}' and all subpages have been deleted successfully.
+    diff:
+      title: "%{title} - changes from version %{old} to %{new}"
+    edit:
+      title: Edit page
+    error_stale_object: Warning, the page has just been edited by someone else. Please try again.
+    form:
+      help:
+        bold: bold
+        external_link_ex: External page
+        external_links: External links
+        heading: level %{level}
+        headings: Heading
+        italic: italic
+        list_item_1: First list item
+        list_item_2: Second list item
+        noformat: No wiki-formatting
+        ordered_list: Numbered list
+        section_block: Block formatting
+        section_character: Character formatting
+        section_link: Link formatting
+        section_table: Table formatting
+        see_tables: see %{tables_link}
+        tables_link: Tables
+        text: text
+        title: Quick formatting help
+        unordered_list: Item list
+        wiki_link_ex: Foodsoft Wiki Page
+        wiki_links: Wiki-links
+      preview: Preview
+    last_updated: Last updated
+    new:
+      title: Create new wiki page
+    page_list_item:
+      date_format: ! '%a, %d %B %Y %H:%M:%S'
+    show:
+      date_format: ! '%d-%m-%y %H:%M'
+      delete: Delete page
+      delete_confirm: ! 'Warning: all subpages will be deleted as well. Are you sure?'
+      diff: Compare versions
+      edit: Edit page
+      last_updated: Last updated by <b>%{user}</b> on %{when}
+      subpages: subpages
+      title_versions: Versions
+      versions: Versions (%{count})
+    title: Title
+    update:
+      notice: Page was updated
+    version:
+      author: ! 'Author: %{user}'
+      date_format: ! '%a, %d-%m-%Y, %H:%M'
+      revert: Revert to this version
+      title: ! '%{title} - version %{version}'
+      title_version: Version
+      view_current: See current version
