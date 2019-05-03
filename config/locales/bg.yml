@@ -2,15 +2,15 @@ bg:
   activerecord:
     attributes:
       article:
-        article_category: Категория
-        availability: Наличен ли е продукта?
-        availability_short: наличен
-        deposit: Депозит
-        fc_price: Цена на кооператива
+        article_category: Category
+        availability: Is article available?
+        availability_short: avail.
+        deposit: Deposit
+        fc_price: FoodCoop price
         fc_price_desc: Price including taxes, deposit and Foodcoop-charge.
-        fc_price_short: Цена на кр
-        fc_share: Надценка за кооператива
-        fc_share_short: Надценка за кооператива
+        fc_price_short: FC price
+        fc_share: FoodCoop margin
+        fc_share_short: FC margin
         gross_price: Gross price
         manufacturer: Manufacturer
         name: Name
@@ -26,15 +26,15 @@ bg:
         unit_quantity_short: U.Q.
         units: Units
       article_category:
-        description: Описание
-        name: Име
+        description: Import names
+        name: Name
       article_price:
-        deposit: Депозит
+        deposit: Deposit
         price: Price (net)
         tax: VAT
         unit_quantity: Unit quantity
       delivery:
-        delivered_on: Дата на доставка
+        delivered_on: Delivery date
         note: Note
         supplier: Supplier
       document:
@@ -246,16 +246,16 @@ bg:
       article: Article
       article_category: Category
       bank_transaction: Bank transaction
-      delivery: Доставка
-      financial_transaction: Финансова транзакция
+      delivery: Delivery
+      financial_transaction: Financial transaction
       financial_transaction_class: Financial transaction class
       financial_transaction_type: Financial transaction type
-      invoice: Фактура
-      message: Съобщение
+      invoice: Invoice
+      message: Message
       messagegroup: Message group
-      order: Поръчка
+      order: Order
       order_article: Order article
-      order_comment: Коментар за поръчката
+      order_comment: Order comment
       ordergroup:
         one: Ordergroup
         other: Ordergroups
@@ -448,16 +448,16 @@ bg:
       notice: Category was updated
   articles:
     article:
-      last_update: 'посл. обновняване: %{last_update} | gross: %{gross_price}'
+      last_update: 'last updated: %{last_update} | gross: %{gross_price}'
     articles:
-      confirm_delete: Сигурни ли сте, че искате да изтриете всички избрани продукти?
-      option_available: Направете продуктите налични
-      option_delete: Изтрийте продукт
-      option_not_available: Направете продуктите неналични
-      option_select: Изберете действие ...
-      price_netto: Цена
-      unit_quantity_desc: Единично количество
-      unit_quantity_short: Количество
+      confirm_delete: Do you really want to delete all selected articles?
+      option_available: Make articles available
+      option_delete: Delete article
+      option_not_available: Make articles unavailable
+      option_select: Select action ...
+      price_netto: Price
+      unit_quantity_desc: Unit quantity
+      unit_quantity_short: U.Q.
     controller:
       create_from_upload:
         notice: "%{count} new articles were saved."
@@ -496,21 +496,21 @@ bg:
       already_imported: imported
       not_found: No articles found
     index:
-      change_supplier: Сменете снабдителя ...
-      edit_all: Променете всички
+      change_supplier: Change supplier ...
+      edit_all: Edit all
       ext_db:
-        import: Търсене/Внос
-        sync: Синхронизирайте
+        import: Import article
+        sync: Synchronise
       import:
         category: Directly import into category
         placeholder: Search by name ...
         restrict_region: Restrict to region only
         title: Import article
-      new: Нов продукт
-      new_order: Създайте нова поръчка
-      search_placeholder: Име ..
-      title: Продукти от %{supplier} (%{count})
-      upload: Качете продукти
+      new: New article
+      new_order: Create new order
+      search_placeholder: Name ...
+      title: Articles from %{supplier} (%{count})
+      upload: Upload articles
     model:
       error_in_use: "%{article} can not be deleted because the article is part of a current order!"
       error_nosel: You have selected no articles
