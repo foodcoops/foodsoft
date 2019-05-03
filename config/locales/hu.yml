@@ -2,41 +2,41 @@ hu:
   activerecord:
     attributes:
       article:
-        article_category: Kategória
-        availability: Árucikk elérhető?
-        availability_short: elérhető
-        deposit: Előleg
-        fc_price: FoodCoop ár
+        article_category: Category
+        availability: Is article available?
+        availability_short: avail.
+        deposit: Deposit
+        fc_price: FoodCoop price
         fc_price_desc: Price including taxes, deposit and Foodcoop-charge.
-        fc_price_short: FC ár
-        fc_share: FoodCoop margó
-        fc_share_short: FC margó
-        gross_price: Bruttó ár
-        manufacturer: Gyártó
-        name: Név
-        note: Jegyzet
-        order_number: Rendelési szám
+        fc_price_short: FC price
+        fc_share: FoodCoop margin
+        fc_share_short: FC margin
+        gross_price: Gross price
+        manufacturer: Manufacturer
+        name: Name
+        note: Note
+        order_number: Order number
         order_number_short: Nr.
-        origin: Származás
-        price: Ár (nettó)
-        supplier: Szállító
-        tax: Adó
-        unit: Egység
-        unit_quantity: Mennyiségi egység
-        unit_quantity_short: M.E.
-        units: Mennyiség
+        origin: Origin
+        price: Price (net)
+        supplier: Supplier
+        tax: VAT
+        unit: Unit
+        unit_quantity: Unit quantity
+        unit_quantity_short: U.Q.
+        units: Units
       article_category:
-        description: Leírás
-        name: Név
+        description: Import names
+        name: Name
       article_price:
         deposit: Deposit
-        price: Ár (nettó)
-        tax: Adó
-        unit_quantity: Mennyiségi egység
+        price: Price (net)
+        tax: VAT
+        unit_quantity: Unit quantity
       delivery:
-        delivered_on: Szállítási határidő
-        note: Jegyzet
-        supplier: Szállitó
+        delivered_on: Delivery date
+        note: Note
+        supplier: Supplier
       document:
         created_at: Created at
         created_by: Created by
@@ -44,11 +44,11 @@ hu:
         mime: MIME type
         name: Name
       financial_transaction:
-        amount: Mennyiség
+        amount: Amount
         created_on: Date
         financial_transaction_class: Financial transaction class
         financial_transaction_type: Financial transaction type
-        note: Jegyzet
+        note: Note
         ordergroup: Ordergroup
         user: Entered by
       financial_transaction_class:
@@ -63,40 +63,40 @@ hu:
         updated_by: Last ordered by
       group_order_article:
         ordered: Ordered
-        quantity: Mennyiség
+        quantity: Amount
         received: Received
-        result: Mennyiség
+        result: Amount
         tolerance: Tolerance
         total_price: Sum
         unit_price: Price/Unit
       invoice:
-        amount: Összeg
+        amount: Amount
         attachment: Attachment
         created_at: Created at
         created_by: Created by
-        date: Számlázási dátum
+        date: Billing date
         delete_attachment: Delete attachment
-        deliveries: Szállítás
-        deposit: Fizetett előleg
-        deposit_credit: Visszafizetett előleg
+        deliveries: Delivery
+        deposit: Deposit charged
+        deposit_credit: Deposit returned
         net_amount: Amount adjusted for refund
-        note: Jegyzet
-        number: Szám
-        orders: Rendelés
-        paid_on: Fizetve
-        supplier: Szállító
+        note: Note
+        number: Number
+        orders: Order
+        paid_on: Paid on
+        supplier: Supplier
       mail_delivery_status:
         created_at: Time
         email: Email
         message: Message
       message:
-        body: Üzenet
-        group_id: Csoport
+        body: Body
+        group_id: Group
         messagegroup_id: Messagegroup
         order_id: Order
         ordergroup_id: Ordergroup
-        private: Privát
-        recipient_tokens: "Címzettek"
+        private: Private
+        recipient_tokens: "(Additional) recipients"
         send_method:
           all: Send to all members
           messagegroup: Send to members of a messagegroup
@@ -104,8 +104,8 @@ hu:
           ordergroup: Send to members of a ordergroup
           recipients: Send to specific members
           workgroup: Send to members of a workgroup
-        send_to_all: Küldés mindenkinek
-        subject: Tárgy
+        send_to_all: Send to all members
+        subject: Subject
         workgroup_id: Workgroup
       messagegroup:
         description: Description
@@ -121,111 +121,111 @@ hu:
           auto_close_and_send: Close the order and send it to the supplier
           auto_close_and_send_min_quantity: Close the order and send it to the supplier if the minimum quantity has been reached
           no_end_action: No automatic action
-        ends: Összesen
+        ends: Ends at
         name: Supplier
-        note: Jegyzet
+        note: Note
         pickup: Pickup
-        starts: Kelt
+        starts: Starts at
         status: Status
         supplier: Supplier
         updated_by: Last edited by
       order_article:
         article: Article
-        missing_units: Hiányzó mennyiség
-        missing_units_short: Hiányzik
+        missing_units: Missing units
+        missing_units_short: Missing
         quantity: Desired amount
         quantity_short: Desired
         units_received: Received units
         units_received_short: Received
         units_to_order: Ordered units
         units_to_order_short: Ordered
-        update_global_price: Teljeskörű árfrissítés
+        update_global_price: Globally update current price
       order_comment:
-        text: Jegyet hozzáadása ...
+        text: Add comment to this order ...
       ordergroup:
         account_balance: Account balance
         available_funds: Available credit
         break: "(Last) break"
         break_until: until
         contact: Contact
-        contact_address: Cím
-        contact_person: Kapcsolattartó személy
-        contact_phone: Telefon
-        description: Leírás
+        contact_address: Address
+        contact_person: Contact person
+        contact_phone: Phone
+        description: Description
         ignore_apple_restriction: Ignore order stop by apple points restriction
         last_order: Last order
         last_user_activity: Last activity
-        name: Név
-        user_tokens: Tagok
+        name: Name
+        user_tokens: Members
       page:
-        body: Szöveg
+        body: Body
         parent_id: Parent page
-        title: Cím
+        title: Title
       stock_article:
         available: Available
-        price: Ár
+        price: Price
         quantity: In stock
-        quantity_available: Elérhető mennyiség
+        quantity_available: Available quantity
         quantity_available_short: Avail.
         quantity_ordered: Ordered
       stock_taking:
-        date: Dátum
-        note: Jegyzet
+        date: Date
+        note: Note
       supplier:
-        address: Cím
-        contact_person: Kapcsolattartó személy
-        customer_number: Vevő szám
-        customer_number_short: Vevő szám
-        delivery_days: Szállítási napok
+        address: Address
+        contact_person: Contact person
+        customer_number: Customer number
+        customer_number_short: Cust.nr.
+        delivery_days: Delivery days
         email: Email
         fax: Fax
         iban: IBAN
         is_subscribed: subscribed?
-        min_order_quantity: Minimum rendelési mennyiség
+        min_order_quantity: Minimum order quantity
         min_order_quantity_short: Min. quantity
-        name: Név
-        note: Jegyzet
-        order_howto: Hogyan rendeljen
-        phone: Telefone
-        phone2: Telefon 2
+        name: Name
+        note: Note
+        order_howto: How to order
+        phone: Phone
+        phone2: Phone 2
         shared_sync_method: How to synchronize
-        url: Nyitóoldal
+        url: Homepage
       task:
-        description: Leírás
-        done: Kész?
-        due_date: Határidő
-        duration: Időtartam
+        description: Description
+        done: Done?
+        due_date: Due date
+        duration: Duration
         name: Activity
-        required_users: Emberi erőforrás szükséges
+        required_users: People required
         user_list: Responsible users
-        workgroup: Munkacsoport
+        workgroup: Workgroup
       user:
         email: Email
-        first_name: Keresztnév
+        first_name: First name
         iban: IBAN
         last_activity: Last activity
         last_login: Last login
-        last_name: Vezetéknév
-        name: Név
-        nick: Felhasználónév
-        ordergroup: Rendelési csoport
-        password: Jelszó
-        password_confirmation: Jelszó ismétlése
-        phone: Telefon
+        last_name: Last name
+        name: Name
+        nick: Username
+        ordergroup: Ordergroup
+        password: Password
+        password_confirmation: Repeat password
+        phone: Telephone
         workgroup:
           one: Workgroup
           other: Workgroups
       workgroup:
-        description: Leírás
-        name: Név
-        role_admin: Adminisztráció
-        role_article_meta: Árucikk adatbázis
-        role_finance: Pénzügyek
+        description: Description
+        name: Name
+        role_admin: Administration
+        role_article_meta: Article database
+        role_finance: Finances
         role_invoices: Invoices
         role_orders: Order management
         role_pickups: Pickup days
-        role_suppliers: Szállítók
-        user_tokens: Felhasználók
+        role_suppliers: Suppliers
+        user_tokens: Members
     errors:
       has_many_left: is still associated with a %{collection}!
       models:
@@ -243,28 +243,28 @@ hu:
             done:
               exclusion: finished tasks may not be repeated
     models:
-      article: Cikk
-      article_category: Kategória
+      article: Article
+      article_category: Category
       bank_transaction: Bank transaction
-      delivery: Szállítás
-      financial_transaction: Pénzügyi tranzakciók
+      delivery: Delivery
+      financial_transaction: Financial transaction
       financial_transaction_class: Financial transaction class
       financial_transaction_type: Financial transaction type
-      invoice: Számla
-      message: Üzenet
+      invoice: Invoice
+      message: Message
       messagegroup: Message group
-      order: Szállítás
-      order_article: Rendelési cikk
-      order_comment: Rendelési komment
+      order: Order
+      order_article: Order article
+      order_comment: Order comment
       ordergroup:
         one: Ordergroup
         other: Ordergroups
       stock_article: Stock article
       stock_taking: Stock taking
-      supplier: Szállító
+      supplier: Supplier
       task: Task
-      user: Felhasználó
-      workgroup: Munkacsoport
+      user: User
+      workgroup: Workgroup
   admin:
     access_to: access to
     base:
@@ -434,18 +434,18 @@ hu:
       error_token: Access denied (invalid token)!
   article_categories:
     create:
-      notice: Kategoria elmentve
+      notice: Category was stored
     destroy:
-      error: 'A kategoria nem törölhető: %{message}'
+      error: 'Category could not be deleted: %{message}'
     edit:
-      title: Kategória szerkesztése
+      title: Edit category
     index:
-      new: Új kategória hozzáadása
-      title: Cikk kategóriák
+      new: Add new category
+      title: Article categories
     new:
-      title: Új kategória hozzáadása
+      title: Add new category
     update:
-      notice: Kategória frissítve
+      notice: Category was updated
   articles:
     article:
       last_update: 'last updated: %{last_update} | gross: %{gross_price}'
@@ -834,12 +834,12 @@ hu:
       title: Page not found
   feedback:
     create:
-      notice: Visszajelzés sikeresen elküldve. Köszönjük!
+      notice: Your feedback was sent successfully. Thanks a lot!
     new:
-      first_paragraph: Hibát talált? Véleménye, ötlete, javaslata van? Örömmel fogadjuk a visszajelzéseket.
-      second_paragraph: Kérjük vegye figyelembe, hogy a Foodsoft Csapata csak a program karbantartásáért felelős. Ha kérdése van a helyi Foodcoop szervezettel kapcsolatban, kérjük forduljon az illetékes kapcsolattartó személyhez.
-      send: Küldés
-      title: Visszajelzés küldése
+      first_paragraph: Found a bug? Suggestions? Ideas? Reviews? We are happy to hear any feedback.
+      second_paragraph: Please be aware that the Foodsoft Team is only responsible for the maintenance of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.
+      send: Send
+      title: Give feedback
   finance:
     balancing:
       close:
@@ -1004,30 +1004,30 @@ hu:
   foodcoop:
     ordergroups:
       index:
-        name: Név ...
-        only_active: Csak aktív csoportok
+        name: Name ...
+        only_active: Only active groups
         only_active_desc: "(have placed order at least once in the last 3 months)"
-        title: Rendelési csoport
+        title: Ordergroups
       ordergroups:
         break: "%{start} - %{end}"
     users:
       index:
-        body: "<p>Itt tud üzenetet küldeni az Őn Foodcoop felhasználóinak. Ehhez engedélyeznie kell az Ön profilján  %{profile_link} az elérhetőség láthatóságát..\n</p>"
-        ph_name: Név ...
-        ph_ordergroup: Rendelési csoport ...
-        profile_link: opciók
-        title: Felhasználók
+        body: "<p>Here you can write a message to the members of your Foodcoop. If you'd like others to contact you, please enable it in your %{profile_link}.</p>"
+        ph_name: Name ...
+        ph_ordergroup: Ordergroup ...
+        profile_link: options
+        title: Users
     workgroups:
       edit:
-        invite_link: itt
-        invite_new: Új tag meghívása %{invite_link}.
-        title: Csoport szerkesztése
+        invite_link: here
+        invite_new: You can invite new members %{invite_link}.
+        title: Edit group
       index:
-        body: "<p>A csoport szerkesztése csak tajgjainak számára elérhető.<br/> Ha tagja szeretne lenni a csoportnak, kérjük küldjön egy üzenetet a tagoknak.</p>"
-        title: Munkacsoport
+        body: "<p>Editing a group is only available to members of the group.<br/> If you want to join a group, please send the members a message. </p>"
+        title: Working groups
       workgroup:
-        edit: Csoport szerkesztése
-        show_tasks: Mutasd az összes feladatot
+        edit: Edit group
+        show_tasks: Show all tasks
   group_order_articles:
     form:
       amount_change_for: Change amount for %{article}
@@ -1106,48 +1106,48 @@ hu:
       notice: The order was saved.
   helpers:
     application:
-      edit_user: Felhasználó szerkesztése
+      edit_user: Edit user
       nick_fallback: "(no username)"
       role_admin: Admin
-      role_article_meta: Cikkek
-      role_finance: Pénzügyek
+      role_article_meta: Articles
+      role_finance: Finance
       role_invoices: Invoices
-      role_orders: Rendelések
+      role_orders: Orders
       role_pickups: Pickup days
-      role_suppliers: Szállítók
-      show_google_maps: Mutasd  a Google térképén
-      sort_by: Rendezés %{text} szerint
+      role_suppliers: Suppliers
+      show_google_maps: Show it on Google maps
+      sort_by: Sort by %{text}
     current_orders:
       pay_amount: To pay %{amount}
       pay_done: Fully paid
       pay_none: Nothing to pay
     deliveries:
-      new_invoice: Új számla
-      show_invoice: Számla mutatása
+      new_invoice: New invoice
+      show_invoice: Show invoice
     messages:
-      write_message: Üzenet küldése
+      write_message: Write message
     orders:
       old_price: Old price
-      option_choose: Válasszon szállítót/raktárt
-      option_stock: Raktár
-      order_pdf: PDF készítése
+      option_choose: Choose supplier/stock
+      option_stock: Stock
+      order_pdf: Create PDF
     submit:
       invite:
-        create: Meghívó küldése
+        create: send invitation
       printer_job:
         create: create printer job
       message:
-        create: Küldés
+        create: send message
     tasks:
-      required_users: "%{count} tag még szükséges!"
+      required_users: "%{count} members are still needed!"
       task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
       desc: 'This shows the proportion of completed tasks to the volume of orders for your ordergroup in comparison to the average of the Foodcoop. In practice: for every %{amount} of total orders, you should execute a task!'
-      more_info: További információ
-      points: 'Ön jelenlegi apple pontjai:%{points}'
-      warning: Figyelmeztetés, ha önnek kevesebb mint %{threshold} apple pontja van, a rendelés nem engedélyezett!
-    changes_saved: Változtatások elmentve.
+      more_info: More information
+      points: 'Your current apple points: %{points}'
+      warning: Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order!
+    changes_saved: Changes saved.
     index:
       due_date_format: "%A %d %B"
       messages:
@@ -1171,35 +1171,35 @@ hu:
       tasks_open:
         title: Open tasks
         view_all: Show all tasks
-      title: Főoldal
-      your_tasks: Feladati
-    no_ordergroups: Sajnos ön nem tagja egyik rendelési csoportnak sem.
+      title: Homepage
+      your_tasks: Your tasks
+    no_ordergroups: You are unfortunately not a member of an ordergroup.
     ordergroup:
       account_summary: Account Statement
-      invite: Új személy meghívása
-      search: Keresés ...
-      title: Rendelési csoportjaim
-    ordergroup_cancelled: Ön törölte a tagságát ebben a csoportban %{group}.
+      invite: Invite a new Person
+      search: Search ...
+      title: My ordergroup
+    ordergroup_cancelled: You cancelled membership of the group %{group}.
     profile:
       groups:
         cancel: Leave group
         cancel_confirm: Are you sure you want to leave this group?
         invite: Invite new member
         title: You are member of the groups
-      title: Profilom
+      title: My Profile
       user:
         since: "(member for %{when})"
         title: "%{user}"
     start_nav:
-      admin: Adminisztráció
+      admin: Administration
       finances:
         accounts: Update accounts
         settle: Account orders
         title: Finances
       foodcoop: Foodcoop
-      members: Felhasználók
-      new_ordergroup: Új rendelési csoport
-      new_user: Új felhasználó
+      members: Members
+      new_ordergroup: New ordergroup
+      new_user: New member
       orders:
         end: Close orders
         overview: Overview of orders
@@ -1241,12 +1241,12 @@ hu:
       revision: revision %{revision}
     header:
       feedback:
-        desc: Hibát talált? Javaslat? Ötlet? Vélemény?
-        title: Visszajelzés
-      help: Segítség
-      logout: Kilépés
-      ordergroup: Rendelésicsoporortjaim
-      profile: Profil szerkesztése
+        desc: Found a bug? Suggestions? Ideas? Review?
+        title: Feedback
+      help: Help
+      logout: Logout
+      ordergroup: My ordergroup
+      profile: Edit profile
     logo: "<span>food</span>soft"
   lib:
     render_pdf:
@@ -1254,26 +1254,26 @@ hu:
   login:
     accept_invitation:
       body: "<p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>"
-      submit: Foodsoft fiók létrehozása
+      submit: Create a Foodsoft account
       title: Invitation to %{name}
     controller:
       accept_invitation:
-        notice: Gratulálunk, az Ön fiókja létrejött. Most már be tud jelentkezni.
-      error_group_invalid: A csoport ahová meg lett hívva már nem létezik.
-      error_invite_invalid: A meghívó időtartama lejárt.
-      error_token_invalid: Érvénytelen vagy lejárt kód. Kérem próbálja újra.
+        notice: Congratulations, your account was created. You can login now.
+      error_group_invalid: The group in which you were invited doesn’t exist anymore.
+      error_invite_invalid: Your invite is not valid (anymore).
+      error_token_invalid: Invalid or expired token. Please try again.
       reset_password:
-        notice: Ha az Ön e-mailcíme regisztrálva van, hamarosan kap üzenetben egy linket amellyel helyreállíthatja a jelszavát.
+        notice: If your email is registered here, you will receive a message with a link to reset your password. You may need to check your spam folder.
       update_password:
-        notice: A jelszó frissítve lett. Most már be tud jelentkezni.
+        notice: Your password was updated. You can login now.
     forgot_password:
-      body: "<p>Nem gond, megadhat új jelszót.</p> <p>Kérem adja meg az itt regisztrált e-mailcímét és kapni fog egy üzenetet további információkkal.</p>"
-      submit: Új jelszó kérése
-      title: Elfelejtette jelszavát?
+      body: "<p>No problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>"
+      submit: Request new password
+      title: Forgot password?
     new_password:
-      body: "<p>Új jelszó megadása <b>%{user}</b></p>"
-      submit: Jelszó mentése
-      title: Új jelszó
+      body: "<p>Please fill in the new password for <b>%{user}</b></p>"
+      submit: Save new password
+      title: New password
   mailer:
     dateformat: "%d %b"
     feedback:
@@ -1400,7 +1400,7 @@ hu:
       messages: Show as list
       new: New message
     create:
-      notice: Üzenet mentve és küldés...
+      notice: Message is saved and will be sent.
     index:
       new: New message
       title: Messages
@@ -1475,31 +1475,31 @@ hu:
     admin:
       config: Configuration
       finance: Finances
-      home: Áttekintés
+      home: Overview
       mail_delivery_status: Email problems
       messagegroups: Message groups
-      ordergroups: Rendelési csoportok
-      title: Adminisztráció
-      users: Tagok
-      workgroups: Munka csoportok
+      ordergroups: Ordergroups
+      title: Administration
+      users: Users
+      workgroups: Workgroups
     articles:
-      categories: Kategóriák
-      stock: Készlet
-      suppliers: Szállítok/Árúcikkek
-      title: Cikkek
-    dashboard: Kezdőlap
+      categories: Categories
+      stock: Stock
+      suppliers: Suppliers/articles
+      title: Articles
+    dashboard: Dashboard
     documents: Documents
     finances:
-      accounts: Felhasználók kezelése
-      balancing: Lezárt rendelések
+      accounts: Manage accounts
+      balancing: Account orders
       bank_accounts: Bank Accounts
-      home: Áttekintés
-      invoices: Számlák
+      home: Overview
+      invoices: Invoices
       title: Finances
     foodcoop: Foodcoop
-    members: Tagok
-    messages: Üzenetek
-    ordergroups: Rendelési csoportok
+    members: Members
+    messages: Messages
+    ordergroups: Ordergroups
     orders:
       archive: My Orders
       manage: Manage orders
@@ -1507,12 +1507,12 @@ hu:
       pickups: Pickup days
       printer_jobs: Printer jobs
       title: Orders
-    tasks: Feladatok
+    tasks: Tasks
     wiki:
       all_pages: All Pages
       home: Home
       title: Wiki
-    workgroups: Munka csoportok
+    workgroups: Workgroups
   number:
     percentage:
       format:
@@ -1533,32 +1533,32 @@ hu:
       invalid_balance: is not a valid number
   orders:
     articles:
-      article_count: 'Megrendelt cikkek:'
-      prices: Netto/Bruttó ár
-      prices_sum: 'Össz.(nettó/bruttó ár)'
+      article_count: 'Ordered articles:'
+      prices: Net/gross price
+      prices_sum: 'Sum (net/gross price):'
       units_full: Full units
       units_ordered: Units ordered
     create:
-      notice: Rendelés létrehozva.
+      notice: The order was created.
     edit:
-      title: 'Rendelés szerkesztése: %{name}'
+      title: 'Edit order: %{name}'
     edit_amount:
       field_locked_title: The distribution of this article among the ordergroups was changed manually. This field is locked to protect those changes. To redistribute and overwrite those changes, press the unlock button and change the amount.
       field_unlocked_title: The distribution of this article among the ordergroups was changed manually. When you change the amount, those manual changes will be overwritten.
     edit_amounts:
       no_articles_available: No articles to add.
     fax:
-      amount: Mennyiség
-      articles: Cikkek
-      delivery_day: Szállítási nap
-      heading: Rendelés  %{name} -tól
-      name: Név
-      number: Szám
-      to_address: Szállítási cím
+      amount: Amount
+      articles: Articles
+      delivery_day: Delivery day
+      heading: Order for %{name}
+      name: Name
+      number: Number
+      to_address: Shipping address
     finish:
-      notice: Rendelés lezárva.
+      notice: The order has been closed.
     form:
-      ignore_warnings: Figyelmeztetés figyelmenkívülhagyása
+      ignore_warnings: Ignore warnings
       prices: Prices (net/FC)
       select_all: Select all
       stockit: In stock
@@ -1934,39 +1934,39 @@ hu:
       notice: Stock article %{name} was saved.
   suppliers:
     create:
-      notice: Szállító létrehozva
+      notice: Supplier was created
     destroy:
-      notice: Szállító törölve
+      notice: Supplier was deleted
     edit:
-      title: Szállító szerkesztése
+      title: Edit supplier
     index:
-      action_import: Szállító importálása külső adatbázisból
-      action_new: Új szállító létrehozása
-      articles: Árúcikkek (%{count})
-      confirm_del: Tényeg törölni akarja a szállítót %{name}?
-      deliveries: Szállítások (%{count})
-      stock: Raktáron (%{count})
-      title: Szállítók
+      action_import: Import supplier from external database
+      action_new: Create new supplier
+      articles: articles (%{count})
+      confirm_del: Do you really want to delete the supplier %{name}?
+      deliveries: deliveries (%{count})
+      stock: in stock (%{count})
+      title: Suppliers
     new:
-      title: Új szállító
+      title: New supplier
     shared_supplier_methods:
       all_available: All articles (new are available)
       all_unavailable: All articles (new are unavailable)
       import: Choose articles to import
-    shared_supplier_note: Szállító a külső adatbázissal összekötve.
+    shared_supplier_note: Supplier is connected to the external database.
     shared_suppliers:
-      body: "<p>Itt láthatja a szállítókat a külső adatbázisból.</p> <p>Külső szállítókat feliratkozással importálhat (lásd lejebb)</p> <p>Az új szállító kapcsolatban lesz a külső adatbázissal.</p>"
-      subscribe: Feliratkozás
-      subscribe_again: Feliratkozás megint
-      supplier: Szállító
-      title: Külső listák
+      body: "<p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>"
+      subscribe: Subscribe
+      subscribe_again: Subscribe again
+      supplier: Supplier
+      title: External lists
     show:
-      last_deliveries: Utolsó szállítások
+      last_deliveries: Recent deliveries
       last_orders: Last orders
-      new_delivery: Új szállítás létrehozása
-      show_deliveries: Mutasd az összes szállítást
+      new_delivery: New delivery
+      show_deliveries: Show all
     update:
-      notice: Szállító frissítve
+      notice: Supplier was updated
   tasks:
     accept:
       notice: You have accepted the task
@@ -2030,7 +2030,7 @@ hu:
       title: Tasks for %{workgroup}
       title_all: All group tasks
   ui:
-    actions: Akciók
+    actions: Actions
     back: Back
     cancel: Cancel
     close: Close
@@ -2058,10 +2058,10 @@ hu:
       truncate: "..."
   workgroups:
     edit:
-      title: Munkacsoport szerkesztése
-    error_last_admin_group: Az utolsó csoport admin jogokkal nem szabad törölni
-    error_last_admin_role: Az utolsó csoport admin szerepet tölt be, amit nem lehet visszavonni
+      title: Edit workgroup
+    error_last_admin_group: The last group with admin rights may not be deleted
+    error_last_admin_role: Admin role for the last group with admin rights cannot be withdrawn
     index:
-      title: Munkacsoportok
+      title: Workgroups
     update:
-      notice: Munkacsoport frissítve
+      notice: Workgroup was updated
