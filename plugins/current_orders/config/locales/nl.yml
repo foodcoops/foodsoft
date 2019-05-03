@@ -1,73 +1,73 @@
 nl:
   config:
     hints:
-      use_current_orders: De current_orders plugin aanzetten. Hiermee kunnen leden met bestelling-toegang bestelaantallen van leden aanpassen in meerdere bestellingen tegelijk. Hiervoor zijn drie nieuwe items in het Bestellingen-menu. Bedoeld voor gebruik op een ophaaldag.
+      use_current_orders: Enable the current_orders plugin. Allows members with the order permission to change member amounts in multiple orders, using three new screens in the Orders menu. Especially useful for pick-up days.
     keys:
-      use_current_orders: Extra verdeelschermen
+      use_current_orders: Extra distribute screens
   current_orders:
     articles:
       article:
-        counts: '%{ordergroups} huishoudens bestelden %{articles} verschillende artikelen.'
-        no_selection: Kies een artikel om te zien wie het besteld heeft, of download verdeellijsten rechtsboven.
+        counts: '%{ordergroups} ordergroups ordered %{articles} different articles.'
+        no_selection: Choose an article to show who ordered it, or download pick lists at the right.
       article_info:
-        origin_in: uit %{origin}
-        supplied_by: van %{supplier}
-        supplied_and_made_by: gemaakt door %{manufacturer}
-        supplied_by_made_by: van %{supplier} gemaakt door %{manufacturer}
+        origin_in: in %{origin}
+        supplied_by: from %{supplier}
+        supplied_and_made_by: made by %{manufacturer}
+        supplied_by_made_by: from %{supplier} made by %{manufacturer}
         unit: per %{unit}
-        from: van %{supplier}
+        from: from %{supplier}
       form:
-        article_placeholder: Zoek artikelen...
-        current_orders: Alle huidige bestellingen
+        article_placeholder: Search articles...
+        current_orders: All current orders
       index:
-        title: Artikelen verdelen
+        title: Distribute articles
       ordergroups:
-        piece: st
-        unit: eenh
-        add_new: Huishouden toevoegen...
+        piece: pc
+        unit: unit
+        add_new: Add an ordergroup...
       show:
-        title: ! '%{name} verdelen'
+        title: ! '%{name}'
     navigation:
-      receive: Ontvangen
-      articles: Verdelen
-      ordergroups: Ledenbestellingen
+      receive: Receive
+      articles: Distribute
+      ordergroups: Member orders
     group_orders:
       index:
-        title: Je huidige bestellingen
+        title: Your current orders
     ordergroups:
       articles:
-        add_new: Artikel toevoegen...
-        no_selection: Kies een huishouden om de artikelen te tonen.
+        add_new: Add an article...
+        no_selection: Choose an ordergroup to show the articles.
       form:
-        ordergroup_placeholder: Kies een huishouden...
+        ordergroup_placeholder: Choose an ordergroup...
       index:
-        title: Artikelen voor huishouden
+        title: Articles for ordergroup
       payment_bar:
         account_balance: Account balance
         new_pin: PIN
-        new_transaction: Nieuwe transactie
-        payment: ! 'Betaling:'
+        new_transaction: New transaction
+        payment: ! 'Payment:'
       show:
-        title: Artikelen voor %{name}
+        title: Articles for %{name}
     orders:
       receive:
-        title: Bestellingen ontvangen
-        no_finished_orders: Er zijn momenteel geen bestellingen die ontvangen hoeven te worden.
+        title: Receive orders
+        no_finished_orders: There are currently no orders to receive.
   documents:
     multiple_orders_by_articles:
-      filename: Huidige bestellingen per artikel
-      title: Huidige bestellingen - per artikel
+      filename: Current orders sorted by article
+      title: Current orders - by article
     multiple_orders_by_groups:
-      filename: Huidige bestellingen per huishouden
-      title: Huidige bestellingen - per huishouden
+      filename: Current orders sorted by group
+      title: Current orders - by group
   helpers:
     current_orders:
-      pay_done: Alles betaald
-      pay_none: Niets te betalen
-      pay_amount: Te betalen %{amount}
+      pay_done: Fully paid
+      pay_none: Nothing to pay
+      pay_amount: To pay %{amount}
   js:
     current_orders:
       articles:
-        above: '%{count} meer dan<br>beschikbaar'
-        below: '%{count} blijft over'
-        equal: alles verdeeld
+        above: '%{count} more<br>than available'
+        below: '%{count} left over'
+        equal: all distributed
