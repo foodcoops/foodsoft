@@ -1,0 +1,6 @@
+he:
+  discourse:
+    callback:
+      invalid_nonce: Invalid nonce
+      invalid_signature: Invalid signature
+      logged_in: Logged in!
