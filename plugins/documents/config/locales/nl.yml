@@ -1,0 +1,35 @@
+nl:
+  activerecord:
+    attributes:
+      document:
+        created_at: Created at
+        created_by: Created by
+        data: Data
+        mime: MIME type
+        name: Name
+  config:
+    hints:
+      documents_allowed_extension: A list of allowed filename extensions separated by spaces.
+      use_documents: Add a basic document sharing page to the foodcoop menu.
+    keys:
+      documents_allowed_extension: Allowed extensions
+      use_documents: Enable documents
+  navigation:
+    documents: Documents
+  documents:
+    create:
+      error: 'Document or folder could not be created: %{error}'
+      not_allowed_mime: The filetype "%{mime}" is not allowed. Please contact an administrator to whitelist it.
+      notice: Document or folder was created
+    destroy:
+      error: 'Document or folder could not be deleted: %{error}'
+      no_right: You do not have enough rights to delete the document or folder
+      notice: Document or folder was deleted
+    form:
+      new: New Document
+      new_folder: new Folder
+      submit: Create
+    index:
+      new: Upload new document
+      new_folder: Create new folder
+      title: Documents
