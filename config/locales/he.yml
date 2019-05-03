@@ -13,7 +13,7 @@ he:
         fc_share_short: FC margin
         gross_price: Gross price
         manufacturer: Manufacturer
-        name: מוצר
+        name: Name
         note: Note
         order_number: Order number
         order_number_short: Nr.
@@ -21,7 +21,7 @@ he:
         price: Price (net)
         supplier: Supplier
         tax: VAT
-        unit: מידה
+        unit: Unit
         unit_quantity: Unit quantity
         unit_quantity_short: U.Q.
         units: Units
@@ -63,11 +63,11 @@ he:
         updated_by: Last ordered by
       group_order_article:
         ordered: Ordered
-        quantity: כמות
+        quantity: Amount
         received: Received
-        result: כמות
+        result: Amount
         tolerance: Tolerance
-        total_price: סה"כ
+        total_price: Sum
         unit_price: Price/Unit
       invoice:
         amount: Amount
@@ -148,7 +148,7 @@ he:
         break: "(Last) break"
         break_until: until
         contact: Contact
-        contact_address: כתובת
+        contact_address: Address
         contact_person: Contact person
         contact_phone: Phone
         description: Description
@@ -163,7 +163,7 @@ he:
         title: Title
       stock_article:
         available: Available
-        price: מחיר
+        price: Price
         quantity: In stock
         quantity_available: Available quantity
         quantity_available_short: Avail.
@@ -177,7 +177,7 @@ he:
         customer_number: Customer number
         customer_number_short: Cust.nr.
         delivery_days: Delivery days
-        email: אי-מייל
+        email: Email
         fax: Fax
         iban: IBAN
         is_subscribed: subscribed?
@@ -200,18 +200,18 @@ he:
         user_list: Responsible users
         workgroup: Workgroup
       user:
-        email: אי-מייל
-        first_name: שם
+        email: Email
+        first_name: First name
         iban: IBAN
         last_activity: Last activity
         last_login: Last login
-        last_name: שם משפחה
+        last_name: Last name
         name: Name
         nick: Username
         ordergroup: Ordergroup
-        password: סיסמה
-        password_confirmation: חזור על סיסמה
-        phone: פלאפון
+        password: Password
+        password_confirmation: Repeat password
+        phone: Telephone
         workgroup:
           one: Workgroup
           two: Workgroups
@@ -459,7 +459,7 @@ he:
       option_delete: Delete article
       option_not_available: Make articles unavailable
       option_select: Select action ...
-      price_netto: מחיר
+      price_netto: Price
       unit_quantity_desc: Unit quantity
       unit_quantity_short: U.Q.
     controller:
@@ -533,7 +533,7 @@ he:
           other: "%{count} articles without order number were skipped."
         body_skip: No articles to delete.
         title: Remove from list ...
-      price_short: מחיר
+      price_short: Price
       submit: Synchronize all
       title: Synchronize articles with external database
       unit_quantity_short: Unit quantity
@@ -867,7 +867,7 @@ he:
         title: Edit order note
       edit_results_by_articles:
         add_article: Add article
-        amount: כמות
+        amount: Amount
         gross: Gross
         net: Net
       group_order_articles:
@@ -1060,7 +1060,7 @@ he:
     form:
       action_save: Save order
       new_funds: New account balance
-      price: מחיר
+      price: Price
       reset_article_search: Reset search
       search_article: Search for articles...
       sum_amount: Current amount
@@ -1105,11 +1105,11 @@ he:
       comments:
         title: Comments
       not_ordered: You didn’t order.
-      sum: סה"כ
+      sum: Sum
       title: Your order result for %{order}
     switch_order:
       remaining: "%{remaining} remaining"
-      title: הזמנה נוכחית
+      title: Current orders
     update:
       error_general: The order couldn’t be updated due to a bug.
       error_stale: Someone else has ordered in the meantime, couldn't update the order.
@@ -1264,7 +1264,7 @@ he:
   login:
     accept_invitation:
       body: "<p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>"
-      submit: צור משתמש
+      submit: Create a Foodsoft account
       title: Invitation to %{name}
     controller:
       accept_invitation:
@@ -1780,7 +1780,7 @@ he:
       received_desc: Number of articles that (will be) received by member
     articles_by:
       price: Total price
-      price_sum: סה"כ
+      price_sum: Sum
     group:
       access: Access to
       activated: activated
@@ -1847,11 +1847,11 @@ he:
           send_as_email: Receive messages as emails.
         notify:
           negative_balance: Inform me when my ordergroup has a negative balance.
-          order_finished: דווח לי למייל על סכום סופי ביום סגירת ההזמנה
+          order_finished: Inform me about my order result (when the order is closed).
           upcoming_tasks: Remind me of upcoming tasks.
         profile:
           email_is_public: Email is visible for other members.
-          language: שפה
+          language: Language
           name_is_public: Name is visible for other members.
           phone_is_public: Phone number is visible for other members.
         settings_group:
@@ -1880,7 +1880,7 @@ he:
       new_inventory: Create new inventory
       title: Inventory overview
     new:
-      amount: כמות
+      amount: Amount
       create: create
       stock_articles: Stock articles
       temp_inventory: temporary inventory
@@ -1888,7 +1888,7 @@ he:
       text_need_articles: You have to %{create_link} a new stock article before you can use it here.
       title: Create new inventory
     show:
-      amount: כמות
+      amount: Amount
       article: Article
       confirm_delete: Do you really want to delete the inventory?
       date: Date
