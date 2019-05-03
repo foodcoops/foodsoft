@@ -25,7 +25,7 @@ module Foodsoft
 
     # Internationalization.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
-    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '??{-*,}.yml')).map{|p| p.basename('.yml').to_s }
+    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '{??,???}{-*,}.yml')).map{|p| p.basename('.yml').to_s }
     config.i18n.default_locale = :en
 
     # Configure the default encoding used in templates for Ruby 1.9.
