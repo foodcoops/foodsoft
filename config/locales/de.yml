@@ -245,6 +245,7 @@ de:
     models:
       article: Artikel
       article_category: Kategorie
+      bank_transaction: Bank transaction
       delivery: Lieferung
       financial_transaction: Kontotransaktion
       financial_transaction_class: Finanztransaktionsklasse
@@ -255,7 +256,9 @@ de:
       order: Bestellung
       order_article: Bestell-Artikel
       order_comment: Kommentar
-      ordergroup: Bestellgruppe
+      ordergroup:
+        one: Ordergroup
+        other: Ordergroups
       stock_article: Lagerartikel
       stock_taking: Inventur
       supplier: Lieferant
@@ -457,7 +460,7 @@ de:
       unit_quantity_short: GebGr
     controller:
       create_from_upload:
-        notice: Es wurden %{count} neue Artikel gespeichert.
+        notice: "Es wurden %{count} neue Artikel gespeichert."
       error_invalid: Artikel sind fehlerhaft
       error_nosel: Du hast keine Artikel ausgewählt
       error_parse: "%{msg} ... in Zeile %{line}"
@@ -484,7 +487,7 @@ de:
       note: 'Pflichtfelder sind: Name, Einheit, (netto) Preis und Bestellnummer.'
       submit: Alle Artikel aktualisieren
       title: Alle Artikel von %{supplier} bearbeiten
-      warning: Achtung, alle Artikel werden aktualisiert!
+      warning: 'Achtung, alle Artikel werden aktualisiert!'
     form:
       title_edit: Artikel bearbeiten
       title_new: Neuen Artikel einfügen
@@ -730,7 +733,7 @@ de:
         title: Bestellungen in Empfang nehmen
   deliveries:
     add_stock_change:
-      how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
+      how_many_units: 'Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?'
     create:
       notice: Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!
     destroy:
@@ -746,7 +749,7 @@ de:
       title_select_stock_articles: 1. Lagerartikel auswählen
     index:
       confirm_delete: Bist Du sicher?
-      new_delivery: Neue Lieferung für %{supplier} anlegen
+      new_delivery: 'Neue Lieferung für %{supplier} anlegen'
       title: "%{supplier}/Lieferungen"
     invoice_amount: Rechnungsbetrag
     invoice_net_amount: bereinigter Rechnungsbetrag
@@ -806,13 +809,13 @@ de:
     order_fax:
       filename: Bestellung %{name}-%{date} - Fax
       rows:
-      - BestellNr.
-      - Menge
-      - Name
-      - Gebinde
-      - Einheit
-      - Preis/Einheit
-      - Summe
+        - BestellNr.
+        - Menge
+        - Name
+        - Gebinde
+        - Einheit
+        - Preis/Einheit
+        - Summe
       total: Gesamtpreis
     order_matrix:
       filename: Bestellung %{name}-%{date} - Sortiermatrix
@@ -850,6 +853,8 @@ de:
         first_paragraph: 'Wenn die Bestellung abgerechnet wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
         or_cancel: oder zurück zur Abrechnung
         title: Bestellung abrechnen
+      edit_note:
+        title: Notiz bearbeiten
       edit_results_by_articles:
         add_article: Artikel hinzufügen
         amount: Menge
@@ -887,7 +892,7 @@ de:
         invoice: Rechnung
         notes_and_journal: Notizen/Protokoll
         summary: Zusammenfassung
-        title: "%{name} abrechnen"
+        title: '%{name} abrechnen'
         view_options: Ansichtsoptionen
       order_article:
         confirm: Bist du sicher?
@@ -910,8 +915,20 @@ de:
         reload: Zusammenfassung neu laden
         with_extra_charge: 'mit Aufschlag:'
         without_extra_charge: 'ohne Aufschlag:'
-      edit_note:
-        title: Notiz bearbeiten
+    bank_accounts:
+      controller:
+        import:
+          notice: '%{count} new transactions have been imported'
+      index:
+        account_statement: Account statement
+        title: Bank Accounts
+    bank_transactions:
+      index:
+        title: Bank transactions for %{name} (%{balance})
+      show:
+        belongs_to_supplier: belongs to supplier
+        belongs_to_user: belongs to user
+        in_ordergroup: in ordergroup
     create:
       notice: Rechnung wurde erstellt.
     financial_links:
@@ -1081,7 +1098,7 @@ de:
       sum: Summe
       title: Dein Bestellergebnis für %{order}
     switch_order:
-      remaining: noch %{remaining}
+      remaining: "noch %{remaining}"
       title: Laufende Bestellungen
     update:
       error_general: Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.
@@ -1122,7 +1139,7 @@ de:
       message:
         create: Nachricht verschicken
     tasks:
-      required_users: Es fehlen %{count} Mitstreiterinnen!
+      required_users: "Es fehlen %{count} Mitstreiterinnen!"
       task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
@@ -1137,7 +1154,7 @@ de:
         title: Neueste Nachrichten
         view_all:
           messages: Nachrichten
-          text: "%{messages} oder %{threads} anzeigen"
+          text: '%{messages} oder %{threads} anzeigen'
           threads: Nachrichtenverläufe
       my_ordergroup:
         last_update: Letzte Aktualisierung vor %{when}
@@ -1276,7 +1293,7 @@ de:
         Grüße sendet die Foodsoft!
     negative_balance:
       subject: Gruppenkonto im Minus
-      text: |-
+      text: |
         Liebe Bestellgruppe %{group},
 
         euer Kontostand is durch eine Buchung am %{when} ins Minus gerutscht: %{balance}
@@ -1300,12 +1317,18 @@ de:
         Deine Aufgaben: %{user_tasks_url}
     order_result:
       subject: 'Bestellung beendet: %{name}'
-      text0: |-
+      text0: |
         Liebe Bestellgruppe %{ordergroup},
 
         die Bestellung für "%{order}" wurde am %{when} von %{user} beendet.
         Für euch wurden die folgenden Artikel bestellt:
-      text1: "o Gesamtpreis: %{sum}\n\nBestellung online einsehen: %{order_url}\n\n\nViele Grüße von %{foodcoop} "
+      text1: |-
+        o Gesamtpreis: %{sum}
+
+        Bestellung online einsehen: %{order_url}
+
+
+        Viele Grüße von %{foodcoop} 
     order_result_supplier:
       subject: Neue Bestellung für %{name}
       text: |
@@ -1320,7 +1343,7 @@ de:
         %{foodcoop}
     reset_password:
       subject: Neues Password für %{username}
-      text: |-
+      text: |
         Hallo %{user},
 
         du (oder jemand anderes) hat auf der Foodsoft-Website ein neues Passwort angefordert.
@@ -1357,7 +1380,7 @@ de:
     show: Allgemeine Nachrichten
   messagegroups:
     index:
-      body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
+      body: 'Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.'
       title: Nachrichtengruppen
     join:
       error: 'Nachrichtengruppe konnte nicht begetreten werden: %{error}'
@@ -1404,7 +1427,7 @@ de:
       all_messages: Nachrichten im Überblick
       change_visibility: 'Ändern'
       from: 'Von:'
-      group: Gruppe
+      group: 'Gruppe'
       reply: Antworten
       reply_to: 'Antwort auf:'
       sent_on: 'Gesendet:'
@@ -1467,6 +1490,7 @@ de:
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen
+      bank_accounts: Bank Accounts
       home: Übersicht
       invoices: Rechnungen
       title: Finanzen
@@ -1569,7 +1593,7 @@ de:
       rest_to_stock: Rest ins Lager
       submit: Bestellung in Empfang nehmen
       surplus_options: 'Verteilungsoptionen:'
-      title: "»%{order}« in Empfang nehmen"
+      title: '»%{order}« in Empfang nehmen'
     send_to_supplier:
       notice: Die Bestellung wurde an die Lieferantin geschickt.
     show:
@@ -1680,7 +1704,7 @@ de:
     show:
       date_format: "%d.%m.%y %H:%M"
       delete: Seite löschen
-      delete_confirm: Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?
+      delete_confirm: 'Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?'
       diff: Versionen vergleichen
       edit: Seite bearbeiten
       last_updated: Zuletzt bearbeitet von <b>%{user}</b> am %{when}
@@ -1726,7 +1750,7 @@ de:
       title: Foodsoft anmelden
   printer_jobs:
     create:
-      notice: "%{count} Druckaufträge wurden erstellt."
+      notice: '%{count} Druckaufträge wurden erstellt.'
     destroy:
       notice: Druckauftrag wurde gelöscht.
     index:
@@ -1821,7 +1845,7 @@ de:
         settings_group:
           messages: Nachrichten
           privacy: Privatsphäre
-    'no': Nein
+    'no': 'Nein'
     options:
       settings:
         profile:
@@ -1834,7 +1858,7 @@ de:
     required:
       mark: "*"
       text: benötigt
-    'yes': Ja
+    'yes': 'Ja'
   stock_takings:
     create:
       notice: Inventur wurde erfolgreich angelegt.
@@ -2021,6 +2045,7 @@ de:
     please_wait: Bitte warten...
     restore: Wiederherstellen
     save: Speichern
+    search_placeholder: Search ...
     show: Anzeigen
   views:
     pagination:
