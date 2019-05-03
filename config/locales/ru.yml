@@ -2,7 +2,7 @@ ru:
   activerecord:
     attributes:
       article:
-        article_category: Категория
+        article_category: Category
         availability: Is article available?
         availability_short: avail.
         deposit: Deposit
@@ -13,10 +13,10 @@ ru:
         fc_share_short: FC margin
         gross_price: Gross price
         manufacturer: Manufacturer
-        name: Название
+        name: Name
         note: Note
         order_number: Order number
-        order_number_short: '№'
+        order_number_short: Nr.
         origin: Origin
         price: Price (net)
         supplier: Supplier
@@ -27,7 +27,7 @@ ru:
         units: Units
       article_category:
         description: Import names
-        name: Имя
+        name: Name
       article_price:
         deposit: Deposit
         price: Price (net)
@@ -1264,26 +1264,26 @@ ru:
   login:
     accept_invitation:
       body: "<p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>"
-      submit: Создать учетную запись в Foodsoft.
+      submit: Create a Foodsoft account
       title: Invitation to %{name}
     controller:
       accept_invitation:
-        notice: Поздравляем, ваша учётная запись создана. Вы можете войти на сайт.
+        notice: Congratulations, your account was created. You can login now.
       error_group_invalid: The group in which you were invited doesn’t exist anymore.
       error_invite_invalid: Your invite is not valid (anymore).
       error_token_invalid: Invalid or expired token. Please try again.
       reset_password:
         notice: If your email is registered here, you will receive a message with a link to reset your password. You may need to check your spam folder.
       update_password:
-        notice: Ваш пароль обновлён. Вы можете войти на сайт.
+        notice: Your password was updated. You can login now.
     forgot_password:
       body: "<p>No problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>"
-      submit: Запросить новый пароль
-      title: Забыли пароль?
+      submit: Request new password
+      title: Forgot password?
     new_password:
-      body: "<p>Введите новый пароль для пользователя <b>%{user}</b></p>"
-      submit: Сохранить новый пароль
-      title: Новый пароль
+      body: "<p>Please fill in the new password for <b>%{user}</b></p>"
+      submit: Save new password
+      title: New password
   mailer:
     dateformat: "%d %b"
     feedback:
@@ -1497,7 +1497,7 @@ ru:
       stock: Stock
       suppliers: Suppliers/articles
       title: Articles
-    dashboard: Панель
+    dashboard: Dashboard
     documents: Documents
     finances:
       accounts: Manage accounts
@@ -1507,8 +1507,8 @@ ru:
       invoices: Invoices
       title: Finances
     foodcoop: Foodcoop
-    members: Участники
-    messages: Сообщения
+    members: Members
+    messages: Messages
     ordergroups: Ordergroups
     orders:
       archive: My Orders
