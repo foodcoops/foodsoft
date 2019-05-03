@@ -65,4 +65,4 @@
             .span.info
               .p
                 = "if the supplier sent a refund/adjustment then change received amount to #{units_received} otherwise"
-                = "adjust the price to #{(actual_price_per)} #{order_article.price.price} #{price_balanced} to match supplier charges"
+                = "adjust the price to #{number_to_currency(actual_price_per)} to match supplier charges"
