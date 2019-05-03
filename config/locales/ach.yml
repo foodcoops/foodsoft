@@ -1,0 +1,2009 @@
+ach:
+  activerecord:
+    attributes:
+      article:
+        article_category: crwdns2390:0crwdne2390:0
+        availability: crwdns2392:0crwdne2392:0
+        availability_short: crwdns2394:0crwdne2394:0
+        deposit: crwdns2396:0crwdne2396:0
+        fc_price: crwdns2398:0crwdne2398:0
+        fc_price_desc: crwdns2400:0crwdne2400:0
+        fc_price_short: crwdns2402:0crwdne2402:0
+        fc_share: crwdns2404:0crwdne2404:0
+        fc_share_short: crwdns2406:0crwdne2406:0
+        gross_price: crwdns2408:0crwdne2408:0
+        manufacturer: crwdns2410:0crwdne2410:0
+        name: crwdns2412:0crwdne2412:0
+        note: crwdns2414:0crwdne2414:0
+        order_number: crwdns2416:0crwdne2416:0
+        order_number_short: crwdns2418:0crwdne2418:0
+        origin: crwdns2420:0crwdne2420:0
+        price: crwdns2422:0crwdne2422:0
+        supplier: crwdns2424:0crwdne2424:0
+        tax: crwdns2426:0crwdne2426:0
+        unit: crwdns2428:0crwdne2428:0
+        unit_quantity: crwdns2430:0crwdne2430:0
+        unit_quantity_short: crwdns2432:0crwdne2432:0
+        units: crwdns2434:0crwdne2434:0
+      article_category:
+        description: crwdns2436:0crwdne2436:0
+        name: crwdns2438:0crwdne2438:0
+      article_price:
+        deposit: crwdns2440:0crwdne2440:0
+        price: crwdns2442:0crwdne2442:0
+        tax: crwdns2444:0crwdne2444:0
+        unit_quantity: crwdns2446:0crwdne2446:0
+      delivery:
+        delivered_on: crwdns2448:0crwdne2448:0
+        note: crwdns2450:0crwdne2450:0
+        supplier: crwdns2452:0crwdne2452:0
+      document:
+        created_at: crwdns2454:0crwdne2454:0
+        created_by: crwdns2456:0crwdne2456:0
+        data: crwdns2458:0crwdne2458:0
+        mime: crwdns2460:0crwdne2460:0
+        name: crwdns2462:0crwdne2462:0
+      financial_transaction:
+        amount: crwdns2464:0crwdne2464:0
+        created_on: crwdns2466:0crwdne2466:0
+        financial_transaction_class: crwdns2468:0crwdne2468:0
+        financial_transaction_type: crwdns2470:0crwdne2470:0
+        note: crwdns2472:0crwdne2472:0
+        ordergroup: crwdns2474:0crwdne2474:0
+        user: crwdns2476:0crwdne2476:0
+      financial_transaction_class:
+        name: crwdns2478:0crwdne2478:0
+      financial_transaction_type:
+        name: crwdns2480:0crwdne2480:0
+        financial_transaction_class: crwdns2482:0crwdne2482:0
+        name_short: crwdns2484:0crwdne2484:0
+      group_order:
+        ordergroup: crwdns2486:0crwdne2486:0
+        price: crwdns2488:0crwdne2488:0
+        updated_by: crwdns2490:0crwdne2490:0
+      group_order_article:
+        ordered: crwdns2492:0crwdne2492:0
+        quantity: crwdns2494:0crwdne2494:0
+        received: crwdns2496:0crwdne2496:0
+        result: crwdns2498:0crwdne2498:0
+        tolerance: crwdns2500:0crwdne2500:0
+        total_price: crwdns2502:0crwdne2502:0
+        unit_price: crwdns2504:0crwdne2504:0
+      invoice:
+        amount: crwdns2506:0crwdne2506:0
+        attachment: crwdns2508:0crwdne2508:0
+        created_at: crwdns2510:0crwdne2510:0
+        created_by: crwdns2512:0crwdne2512:0
+        date: crwdns2514:0crwdne2514:0
+        delete_attachment: crwdns2516:0crwdne2516:0
+        deliveries: crwdns2518:0crwdne2518:0
+        deposit: crwdns2520:0crwdne2520:0
+        deposit_credit: crwdns2522:0crwdne2522:0
+        net_amount: crwdns2524:0crwdne2524:0
+        note: crwdns2526:0crwdne2526:0
+        number: crwdns2528:0crwdne2528:0
+        orders: crwdns2530:0crwdne2530:0
+        paid_on: crwdns2532:0crwdne2532:0
+        supplier: crwdns2534:0crwdne2534:0
+      mail_delivery_status:
+        created_at: crwdns2536:0crwdne2536:0
+        email: crwdns2538:0crwdne2538:0
+        message: crwdns2540:0crwdne2540:0
+      message:
+        body: crwdns2542:0crwdne2542:0
+        group_id: crwdns2544:0crwdne2544:0
+        messagegroup_id: crwdns2546:0crwdne2546:0
+        order_id: crwdns2548:0crwdne2548:0
+        ordergroup_id: crwdns2550:0crwdne2550:0
+        private: crwdns2552:0crwdne2552:0
+        recipient_tokens: "crwdns2554:0crwdne2554:0"
+        send_method:
+          all: crwdns2556:0crwdne2556:0
+          messagegroup: crwdns2558:0crwdne2558:0
+          order: crwdns2560:0crwdne2560:0
+          ordergroup: crwdns2562:0crwdne2562:0
+          recipients: crwdns2564:0crwdne2564:0
+          workgroup: crwdns2566:0crwdne2566:0
+        send_to_all: crwdns2568:0crwdne2568:0
+        subject: crwdns2570:0crwdne2570:0
+        workgroup_id: crwdns2572:0crwdne2572:0
+      messagegroup:
+        description: crwdns2574:0crwdne2574:0
+        name: crwdns2576:0crwdne2576:0
+        user_tokens: crwdns2578:0crwdne2578:0
+      order:
+        boxfill: crwdns2580:0crwdne2580:0
+        closed_by: crwdns2582:0crwdne2582:0
+        created_by: crwdns2584:0crwdne2584:0
+        end_action: crwdns2586:0crwdne2586:0
+        end_actions:
+          auto_close: crwdns2588:0crwdne2588:0
+          auto_close_and_send: crwdns2590:0crwdne2590:0
+          auto_close_and_send_min_quantity: crwdns2592:0crwdne2592:0
+          no_end_action: crwdns2594:0crwdne2594:0
+        ends: crwdns2596:0crwdne2596:0
+        name: crwdns2598:0crwdne2598:0
+        note: crwdns2600:0crwdne2600:0
+        pickup: crwdns2602:0crwdne2602:0
+        starts: crwdns2604:0crwdne2604:0
+        status: crwdns2606:0crwdne2606:0
+        supplier: crwdns2608:0crwdne2608:0
+        updated_by: crwdns2610:0crwdne2610:0
+      order_article:
+        article: crwdns2612:0crwdne2612:0
+        missing_units: crwdns2614:0crwdne2614:0
+        missing_units_short: crwdns2616:0crwdne2616:0
+        quantity: crwdns2618:0crwdne2618:0
+        quantity_short: crwdns2620:0crwdne2620:0
+        units_received: crwdns2622:0crwdne2622:0
+        units_received_short: crwdns2624:0crwdne2624:0
+        units_to_order: crwdns2626:0crwdne2626:0
+        units_to_order_short: crwdns2628:0crwdne2628:0
+        update_global_price: crwdns2630:0crwdne2630:0
+      order_comment:
+        text: crwdns2632:0crwdne2632:0
+      ordergroup:
+        account_balance: crwdns2634:0crwdne2634:0
+        available_funds: crwdns2636:0crwdne2636:0
+        break: "crwdns2638:0crwdne2638:0"
+        break_until: crwdns2640:0crwdne2640:0
+        contact: crwdns2642:0crwdne2642:0
+        contact_address: crwdns2644:0crwdne2644:0
+        contact_person: crwdns2646:0crwdne2646:0
+        contact_phone: crwdns2648:0crwdne2648:0
+        description: crwdns2650:0crwdne2650:0
+        ignore_apple_restriction: crwdns2652:0crwdne2652:0
+        last_order: crwdns2654:0crwdne2654:0
+        last_user_activity: crwdns2656:0crwdne2656:0
+        name: crwdns2658:0crwdne2658:0
+        user_tokens: crwdns2660:0crwdne2660:0
+      page:
+        body: crwdns2662:0crwdne2662:0
+        parent_id: crwdns2664:0crwdne2664:0
+        title: crwdns2666:0crwdne2666:0
+      stock_article:
+        available: crwdns2668:0crwdne2668:0
+        price: crwdns2670:0crwdne2670:0
+        quantity: crwdns2672:0crwdne2672:0
+        quantity_available: crwdns2674:0crwdne2674:0
+        quantity_available_short: crwdns2676:0crwdne2676:0
+        quantity_ordered: crwdns2678:0crwdne2678:0
+      stock_taking:
+        date: crwdns2680:0crwdne2680:0
+        note: crwdns2682:0crwdne2682:0
+      supplier:
+        address: crwdns2684:0crwdne2684:0
+        contact_person: crwdns2686:0crwdne2686:0
+        customer_number: crwdns2688:0crwdne2688:0
+        customer_number_short: crwdns2690:0crwdne2690:0
+        delivery_days: crwdns2692:0crwdne2692:0
+        email: crwdns2694:0crwdne2694:0
+        fax: crwdns2696:0crwdne2696:0
+        iban: crwdns2698:0crwdne2698:0
+        is_subscribed: crwdns2700:0crwdne2700:0
+        min_order_quantity: crwdns2702:0crwdne2702:0
+        min_order_quantity_short: crwdns2704:0crwdne2704:0
+        name: crwdns2706:0crwdne2706:0
+        note: crwdns2708:0crwdne2708:0
+        order_howto: crwdns2710:0crwdne2710:0
+        phone: crwdns2712:0crwdne2712:0
+        phone2: crwdns2714:0crwdne2714:0
+        shared_sync_method: crwdns2716:0crwdne2716:0
+        url: crwdns2718:0crwdne2718:0
+      task:
+        description: crwdns2720:0crwdne2720:0
+        done: crwdns2722:0crwdne2722:0
+        due_date: crwdns2724:0crwdne2724:0
+        duration: crwdns2726:0crwdne2726:0
+        name: crwdns2728:0crwdne2728:0
+        required_users: crwdns2730:0crwdne2730:0
+        user_list: crwdns2732:0crwdne2732:0
+        workgroup: crwdns2734:0crwdne2734:0
+      user:
+        email: crwdns2736:0crwdne2736:0
+        first_name: crwdns2738:0crwdne2738:0
+        iban: crwdns2740:0crwdne2740:0
+        last_activity: crwdns2742:0crwdne2742:0
+        last_login: crwdns2744:0crwdne2744:0
+        last_name: crwdns2746:0crwdne2746:0
+        name: crwdns2748:0crwdne2748:0
+        nick: crwdns2750:0crwdne2750:0
+        ordergroup: crwdns2752:0crwdne2752:0
+        password: crwdns2754:0crwdne2754:0
+        password_confirmation: crwdns2756:0crwdne2756:0
+        phone: crwdns2758:0crwdne2758:0
+        workgroup:
+          one: crwdns2760:1crwdne2760:1
+          other: crwdns2760:5crwdne2760:5
+      workgroup:
+        description: crwdns2762:0crwdne2762:0
+        name: crwdns2764:0crwdne2764:0
+        role_admin: crwdns2766:0crwdne2766:0
+        role_article_meta: crwdns2768:0crwdne2768:0
+        role_finance: crwdns2770:0crwdne2770:0
+        role_invoices: crwdns2772:0crwdne2772:0
+        role_orders: crwdns2774:0crwdne2774:0
+        role_pickups: crwdns2776:0crwdne2776:0
+        role_suppliers: crwdns2778:0crwdne2778:0
+        user_tokens: crwdns2780:0crwdne2780:0
+    errors:
+      has_many_left: crwdns2782:0%{collection}crwdne2782:0
+      models:
+        article:
+          attributes:
+            name:
+              taken: crwdns2784:0crwdne2784:0
+              taken_with_unit: crwdns2786:0crwdne2786:0
+        supplier:
+          attributes:
+            shared_sync_method:
+              included: crwdns2788:0crwdne2788:0
+        task:
+          attributes:
+            done:
+              exclusion: crwdns2790:0crwdne2790:0
+    models:
+      article: crwdns2792:0crwdne2792:0
+      article_category: crwdns2794:0crwdne2794:0
+      bank_transaction: crwdns2796:0crwdne2796:0
+      delivery: crwdns2798:0crwdne2798:0
+      financial_transaction: crwdns2800:0crwdne2800:0
+      financial_transaction_class: crwdns2802:0crwdne2802:0
+      financial_transaction_type: crwdns2804:0crwdne2804:0
+      invoice: crwdns2806:0crwdne2806:0
+      message: crwdns2808:0crwdne2808:0
+      messagegroup: crwdns2810:0crwdne2810:0
+      order: crwdns2812:0crwdne2812:0
+      order_article: crwdns2814:0crwdne2814:0
+      order_comment: crwdns2816:0crwdne2816:0
+      ordergroup:
+        one: crwdns2818:1crwdne2818:1
+        other: crwdns2818:5crwdne2818:5
+      stock_article: crwdns2820:0crwdne2820:0
+      stock_taking: crwdns2822:0crwdne2822:0
+      supplier: crwdns2824:0crwdne2824:0
+      task: crwdns2826:0crwdne2826:0
+      user: crwdns2828:0crwdne2828:0
+      workgroup: crwdns2830:0crwdne2830:0
+  admin:
+    access_to: crwdns2832:0crwdne2832:0
+    base:
+      index:
+        all_ordergroups: crwdns2834:0crwdne2834:0
+        all_users: crwdns2836:0crwdne2836:0
+        all_workgroups: crwdns2838:0crwdne2838:0
+        created_at: crwdns2840:0crwdne2840:0
+        first_paragraph: crwdns2842:0crwdne2842:0
+        groupname: crwdns2844:0crwdne2844:0
+        members: crwdns2846:0crwdne2846:0
+        name: crwdns2848:0crwdne2848:0
+        new_ordergroup: crwdns2850:0crwdne2850:0
+        new_user: crwdns2852:0crwdne2852:0
+        new_workgroup: crwdns2854:0crwdne2854:0
+        newest_groups: crwdns2856:0crwdne2856:0
+        newest_users: crwdns2858:0crwdne2858:0
+        title: crwdns2860:0crwdne2860:0
+        type: crwdns2862:0crwdne2862:0
+        username: crwdns2864:0crwdne2864:0
+    configs:
+      list:
+        key: crwdns2866:0crwdne2866:0
+        title: crwdns2868:0crwdne2868:0
+        value: crwdns2870:0crwdne2870:0
+      show:
+        submit: crwdns2872:0crwdne2872:0
+        title: crwdns2874:0crwdne2874:0
+      tab_layout:
+        pdf_title: crwdns2876:0crwdne2876:0
+      tab_messages:
+        emails_title: crwdns2878:0crwdne2878:0
+      tab_payment:
+        schedule_title: crwdns2880:0crwdne2880:0
+      tab_tasks:
+        periodic_title: crwdns2882:0crwdne2882:0
+      tabs:
+        title: crwdns2884:0crwdne2884:0
+      update:
+        notice: crwdns2886:0crwdne2886:0
+    confirm: crwdns2888:0crwdne2888:0
+    finances:
+      index:
+        first_paragraph: crwdns2890:0crwdne2890:0
+        new_financial_transaction_class: crwdns2892:0crwdne2892:0
+        title: crwdns2894:0crwdne2894:0
+      transaction_types:
+        name: crwdns2896:0crwdne2896:0
+        new_financial_transaction_type: crwdns2898:0crwdne2898:0
+    financial_transaction_classes:
+      form:
+        title_edit: crwdns2900:0crwdne2900:0
+        title_new: crwdns2902:0crwdne2902:0
+    financial_transaction_types:
+      form:
+        title_edit: crwdns2904:0crwdne2904:0
+        title_new: crwdns2906:0crwdne2906:0
+    mail_delivery_status:
+      destroy_all:
+        notice: crwdns2908:0crwdne2908:0
+      index:
+        destroy_all: crwdns2910:0crwdne2910:0
+        title: crwdns2912:0crwdne2912:0
+    messagegroups:
+      destroy:
+        error: 'crwdns2914:0%{error}crwdne2914:0'
+        notice: crwdns2916:0crwdne2916:0
+      edit:
+        title: crwdns2918:0crwdne2918:0
+      index:
+        first_paragraph: crwdns2920:0%{url}crwdne2920:0
+        new_messagegroup: crwdns2922:0crwdne2922:0
+        new_messagegroups: crwdns2924:0crwdne2924:0
+        second_paragraph: crwdns2926:0crwdne2926:0
+        title: crwdns2928:0crwdne2928:0
+      new:
+        title: crwdns2930:0crwdne2930:0
+      show:
+        send_message: crwdns2932:0crwdne2932:0
+        title: crwdns2934:0%{name}crwdne2934:0
+    ordergroups:
+      destroy:
+        error: 'crwdns2936:0%{error}crwdne2936:0'
+        notice: crwdns2938:0crwdne2938:0
+      edit:
+        title: crwdns2940:0crwdne2940:0
+      form:
+        first_paragraph: crwdns2942:0%{url}crwdne2942:0
+        here: crwdns2944:0crwdne2944:0
+      index:
+        first_paragraph: crwdns2946:0%{url}crwdne2946:0
+        new_ordergroup: crwdns2948:0crwdne2948:0
+        new_ordergroups: crwdns2950:0crwdne2950:0
+        second_paragraph: 'crwdns2952:0%{url}crwdne2952:0'
+        title: crwdns2954:0crwdne2954:0
+        workgroup: crwdns2956:0crwdne2956:0
+      new:
+        title: crwdns2958:0crwdne2958:0
+      show:
+        confirm: crwdns2960:0crwdne2960:0
+        edit: crwdns2962:0crwdne2962:0
+        send_message: crwdns2964:0crwdne2964:0
+        title: crwdns2966:0%{name}crwdne2966:0
+    search_placeholder: crwdns2968:0crwdne2968:0
+    users:
+      controller:
+        sudo_done: crwdns2970:0%{user}crwdne2970:0
+      destroy:
+        error: 'crwdns2972:0%{error}crwdne2972:0'
+        notice: crwdns2974:0crwdne2974:0
+      edit:
+        title: crwdns2976:0crwdne2976:0
+      index:
+        first_paragraph: crwdns2978:0%{url}crwdne2978:0
+        new_user: crwdns2980:0crwdne2980:0
+        new_users: crwdns2982:0crwdne2982:0
+        show_deleted: crwdns2984:0crwdne2984:0
+        title: crwdns2986:0crwdne2986:0
+      new:
+        title: crwdns2988:0crwdne2988:0
+      restore:
+        error: 'crwdns2990:0%{error}crwdne2990:0'
+        notice: crwdns2992:0crwdne2992:0
+      show:
+        confirm_sudo: crwdns2994:0%{user}crwdne2994:0
+        groupabos: crwdns2996:0crwdne2996:0
+        member_since: crwdns2998:0%{time}crwdne2998:0
+        person: crwdns3000:0crwdne3000:0
+        preference: crwdns3002:0crwdne3002:0
+        send_message: crwdns3004:0crwdne3004:0
+        show_email_problems: crwdns3006:0crwdne3006:0
+        sudo: crwdns3008:0crwdne3008:0
+      users:
+        show_email_problems: crwdns3010:0crwdne3010:0
+    workgroups:
+      destroy:
+        error: 'crwdns3012:0%{error}crwdne3012:0'
+        notice: crwdns3014:0crwdne3014:0
+      edit:
+        title: crwdns3016:0crwdne3016:0
+      form:
+        first_paragraph: crwdns3018:0%{url}crwdne3018:0
+        here: crwdns3020:0crwdne3020:0
+      index:
+        first_paragraph: crwdns3022:0%{url}crwdne3022:0
+        new_workgroup: crwdns3024:0crwdne3024:0
+        new_workgroups: crwdns3026:0crwdne3026:0
+        ordergroup: crwdns3028:0crwdne3028:0
+        second_paragraph: 'crwdns3030:0%{url}crwdne3030:0'
+        title: crwdns3032:0crwdne3032:0
+      new:
+        title: crwdns3034:0crwdne3034:0
+      show:
+        confirm: crwdns3036:0crwdne3036:0
+        edit: crwdns3038:0crwdne3038:0
+        title: crwdns3040:0%{name}crwdne3040:0
+      workgroups:
+        members: crwdns3042:0crwdne3042:0
+        name: crwdns3044:0crwdne3044:0
+  application:
+    controller:
+      error_authn: crwdns3046:0crwdne3046:0
+      error_denied: crwdns3048:0%{sign_in}crwdne3048:0
+      error_denied_sign_in: crwdns3050:0crwdne3050:0
+      error_feature_disabled: crwdns3052:0crwdne3052:0
+      error_members_only: crwdns3054:0crwdne3054:0
+      error_token: crwdns3056:0crwdne3056:0
+  article_categories:
+    create:
+      notice: crwdns3058:0crwdne3058:0
+    destroy:
+      error: 'crwdns3060:0%{message}crwdne3060:0'
+    edit:
+      title: crwdns3062:0crwdne3062:0
+    index:
+      new: crwdns3064:0crwdne3064:0
+      title: crwdns3066:0crwdne3066:0
+    new:
+      title: crwdns3068:0crwdne3068:0
+    update:
+      notice: crwdns3070:0crwdne3070:0
+  articles:
+    article:
+      last_update: 'crwdns3072:0%{last_update}crwdnd3072:0%{gross_price}crwdne3072:0'
+    articles:
+      confirm_delete: crwdns3074:0crwdne3074:0
+      option_available: crwdns3076:0crwdne3076:0
+      option_delete: crwdns3078:0crwdne3078:0
+      option_not_available: crwdns3080:0crwdne3080:0
+      option_select: crwdns3082:0crwdne3082:0
+      price_netto: crwdns3084:0crwdne3084:0
+      unit_quantity_desc: crwdns3086:0crwdne3086:0
+      unit_quantity_short: crwdns3088:0crwdne3088:0
+    controller:
+      create_from_upload:
+        notice: "crwdns3090:0%{count}crwdne3090:0"
+      error_invalid: crwdns3092:0crwdne3092:0
+      error_nosel: crwdns3094:0crwdne3094:0
+      error_parse: "crwdns3096:0%{msg}crwdnd3096:0%{line}crwdne3096:0"
+      error_update: 'crwdns3098:0%{article}crwdnd3098:0%{msg}crwdne3098:0'
+      parse_upload:
+        no_file: crwdns3100:0crwdne3100:0
+        notice: "crwdns3102:0%{count}crwdne3102:0"
+      sync:
+        notice: crwdns3104:0crwdne3104:0
+        shared_alert: "crwdns3106:0%{supplier}crwdne3106:0"
+      update_all:
+        notice: crwdns3108:0crwdne3108:0
+      update_sel:
+        notice_avail: crwdns3110:0crwdne3110:0
+        notice_destroy: crwdns3112:0crwdne3112:0
+        notice_noaction: crwdns3114:0crwdne3114:0
+        notice_unavail: crwdns3116:0crwdne3116:0
+      update_sync:
+        notice: crwdns3118:0crwdne3118:0
+    destroy_active_article:
+      drop: crwdns3120:0crwdne3120:0
+      note: "crwdns3122:0%{article}crwdnd3122:0%{drop_link}crwdne3122:0"
+    edit_all:
+      note: 'crwdns3124:0crwdne3124:0'
+      submit: crwdns3126:0crwdne3126:0
+      title: crwdns3128:0%{supplier}crwdne3128:0
+      warning: 'crwdns3130:0crwdne3130:0'
+    form:
+      title_edit: crwdns3132:0crwdne3132:0
+      title_new: crwdns3134:0crwdne3134:0
+    import_search_results:
+      action_import: crwdns3136:0crwdne3136:0
+      already_imported: crwdns3138:0crwdne3138:0
+      not_found: crwdns3140:0crwdne3140:0
+    index:
+      change_supplier: crwdns3142:0crwdne3142:0
+      edit_all: crwdns3144:0crwdne3144:0
+      ext_db:
+        import: crwdns3146:0crwdne3146:0
+        sync: crwdns3148:0crwdne3148:0
+      import:
+        category: crwdns3150:0crwdne3150:0
+        placeholder: crwdns3152:0crwdne3152:0
+        restrict_region: crwdns3154:0crwdne3154:0
+        title: crwdns3156:0crwdne3156:0
+      new: crwdns3158:0crwdne3158:0
+      new_order: crwdns3160:0crwdne3160:0
+      search_placeholder: crwdns3162:0crwdne3162:0
+      title: crwdns3164:0%{supplier}crwdnd3164:0%{count}crwdne3164:0
+      upload: crwdns3166:0crwdne3166:0
+    model:
+      error_in_use: "crwdns3168:0%{article}crwdne3168:0"
+      error_nosel: crwdns3170:0crwdne3170:0
+    parse_upload:
+      body: "crwdns3172:0crwdne3172:0"
+      submit: crwdns3174:0crwdne3174:0
+      title: crwdns3176:0crwdne3176:0
+    sync:
+      outlist:
+        alert_used: crwdns3178:0%{article}crwdne3178:0
+        body: 'crwdns3180:0crwdne3180:0'
+        body_ignored:
+          one: crwdns3182:1crwdne3182:1
+          other: "crwdns3182:5%{count}crwdne3182:5"
+        body_skip: crwdns3184:0crwdne3184:0
+        title: crwdns3186:0crwdne3186:0
+      price_short: crwdns3188:0crwdne3188:0
+      submit: crwdns3190:0crwdne3190:0
+      title: crwdns3192:0crwdne3192:0
+      unit_quantity_short: crwdns3194:0crwdne3194:0
+      update:
+        body: 'crwdns3196:0crwdne3196:0'
+        title: crwdns3198:0crwdne3198:0
+        update_msg:
+          one: crwdns3200:1crwdne3200:1
+          other: "crwdns3200:5%{count}crwdne3200:5"
+      upnew:
+        body_count:
+          one: crwdns3202:1crwdne3202:1
+          other: crwdns3202:5%{count}crwdne3202:5
+        title: crwdns3204:0crwdne3204:0
+    upload:
+      fields:
+        reserved: "crwdns3206:0crwdne3206:0"
+        status: crwdns3208:0crwdne3208:0
+      file_label: crwdns3210:0crwdne3210:0
+      options:
+        convert_units: crwdns3212:0crwdne3212:0
+        outlist_absent: crwdns3214:0crwdne3214:0
+      sample:
+        juices: crwdns3216:0crwdne3216:0
+        nuts: crwdns3218:0crwdne3218:0
+        organic: crwdns3220:0crwdne3220:0
+        supplier_1: crwdns3222:0crwdne3222:0
+        supplier_2: crwdns3224:0crwdne3224:0
+        supplier_3: crwdns3226:0crwdne3226:0
+        tomato_juice: crwdns3228:0crwdne3228:0
+        walnuts: crwdns3230:0crwdne3230:0
+      submit: crwdns3232:0crwdne3232:0
+      text_1: 'crwdns3234:0%{supplier}crwdne3234:0'
+      text_2: crwdns3236:0crwdne3236:0
+      title: crwdns3238:0%{supplier}crwdne3238:0
+  config:
+    hints:
+      applepear_url: crwdns3240:0crwdne3240:0
+      charge_members_manually: crwdns3242:0crwdne3242:0
+      contact:
+        email: crwdns3244:0crwdne3244:0
+        street: crwdns3246:0crwdne3246:0
+      currency_space: crwdns3248:0crwdne3248:0
+      currency_unit: crwdns3250:0crwdne3250:0
+      custom_css: crwdns3252:0crwdne3252:0
+      documents_allowed_extension: crwdns3254:0crwdne3254:0
+      email_from: crwdns3256:0crwdne3256:0
+      email_replyto: crwdns3258:0crwdne3258:0
+      email_sender: crwdns3260:0crwdne3260:0
+      help_url: crwdns3262:0crwdne3262:0
+      homepage: crwdns3264:0crwdne3264:0
+      ignore_browser_locale: crwdns3266:0crwdne3266:0
+      mailing_list: crwdns3268:0crwdne3268:0
+      mailing_list_subscribe: crwdns3270:0crwdne3270:0
+      minimum_balance: crwdns3272:0crwdne3272:0
+      name: crwdns3274:0crwdne3274:0
+      order_schedule:
+        boxfill:
+          recurr: crwdns3276:0crwdne3276:0
+          time: crwdns3278:0crwdne3278:0
+        ends:
+          recurr: crwdns3280:0crwdne3280:0
+          time: crwdns3282:0crwdne3282:0
+        initial: crwdns3284:0crwdne3284:0
+      page_footer: crwdns3286:0crwdne3286:0
+      pdf_add_page_breaks:
+        order_by_articles: crwdns3288:0crwdne3288:0
+        order_by_groups: crwdns3290:0crwdne3290:0
+      pdf_font_size: crwdns3292:0crwdne3292:0
+      pdf_page_size: crwdns3294:0crwdne3294:0
+      price_markup: crwdns3296:0crwdne3296:0
+      stop_ordering_under: crwdns3298:0crwdne3298:0
+      tasks_period_days: crwdns3300:0crwdne3300:0
+      tasks_upfront_days: crwdns3302:0crwdne3302:0
+      tax_default: crwdns3304:0crwdne3304:0
+      tolerance_is_costly: crwdns3306:0crwdne3306:0
+      use_apple_points: crwdns3308:0crwdne3308:0
+      use_boxfill: crwdns3310:0crwdne3310:0
+      use_current_orders: crwdns3312:0crwdne3312:0
+      use_documents: crwdns3314:0crwdne3314:0
+      use_iban: crwdns3316:0crwdne3316:0
+      use_messages: crwdns3318:0crwdne3318:0
+      use_nick: crwdns3320:0crwdne3320:0
+      use_wiki: crwdns3322:0crwdne3322:0
+      webstats_tracking_code: crwdns3324:0crwdne3324:0
+    keys:
+      applepear_url: crwdns3326:0crwdne3326:0
+      charge_members_manually: crwdns3328:0crwdne3328:0
+      contact:
+        city: crwdns3330:0crwdne3330:0
+        country: crwdns3332:0crwdne3332:0
+        email: crwdns3334:0crwdne3334:0
+        phone: crwdns3336:0crwdne3336:0
+        street: crwdns3338:0crwdne3338:0
+        zip_code: crwdns3340:0crwdne3340:0
+      currency_space: crwdns3342:0crwdne3342:0
+      currency_unit: crwdns3344:0crwdne3344:0
+      custom_css: crwdns3346:0crwdne3346:0
+      default_locale: crwdns3348:0crwdne3348:0
+      disable_invite: crwdns3350:0crwdne3350:0
+      documents_allowed_extension: crwdns3352:0crwdne3352:0
+      email_from: crwdns3354:0crwdne3354:0
+      email_replyto: crwdns3356:0crwdne3356:0
+      email_sender: crwdns3358:0crwdne3358:0
+      help_url: crwdns3360:0crwdne3360:0
+      homepage: crwdns3362:0crwdne3362:0
+      ignore_browser_locale: crwdns3364:0crwdne3364:0
+      mailing_list: crwdns3366:0crwdne3366:0
+      mailing_list_subscribe: crwdns3368:0crwdne3368:0
+      minimum_balance: crwdns3370:0crwdne3370:0
+      name: crwdns3372:0crwdne3372:0
+      order_schedule:
+        boxfill:
+          recurr: crwdns3374:0crwdne3374:0
+          time: crwdns3376:0crwdne3376:0
+        ends:
+          recurr: crwdns3378:0crwdne3378:0
+          time: crwdns3380:0crwdne3380:0
+        initial: crwdns3382:0crwdne3382:0
+      page_footer: crwdns3384:0crwdne3384:0
+      pdf_add_page_breaks: crwdns3386:0crwdne3386:0
+      pdf_font_size: crwdns3388:0crwdne3388:0
+      pdf_page_size: crwdns3390:0crwdne3390:0
+      price_markup: crwdns3392:0crwdne3392:0
+      printer_print_order_articles: crwdns3394:0crwdne3394:0
+      printer_print_order_fax: crwdns3396:0crwdne3396:0
+      printer_print_order_groups: crwdns3398:0crwdne3398:0
+      printer_print_order_matrix: crwdns3400:0crwdne3400:0
+      printer_token: crwdns3402:0crwdne3402:0
+      stop_ordering_under: crwdns3404:0crwdne3404:0
+      tasks_period_days: crwdns3406:0crwdne3406:0
+      tasks_upfront_days: crwdns3408:0crwdne3408:0
+      tax_default: crwdns3410:0crwdne3410:0
+      time_zone: crwdns3412:0crwdne3412:0
+      tolerance_is_costly: crwdns3414:0crwdne3414:0
+      use_apple_points: crwdns3416:0crwdne3416:0
+      use_boxfill: crwdns3418:0crwdne3418:0
+      use_current_orders: crwdns3420:0crwdne3420:0
+      use_documents: crwdns3422:0crwdne3422:0
+      use_iban: crwdns3424:0crwdne3424:0
+      use_messages: crwdns3426:0crwdne3426:0
+      use_nick: crwdns3428:0crwdne3428:0
+      use_printer: crwdns3430:0crwdne3430:0
+      use_wiki: crwdns3432:0crwdne3432:0
+      webstats_tracking_code: crwdns3434:0crwdne3434:0
+    tabs:
+      applications: crwdns3436:0crwdne3436:0
+      foodcoop: crwdns3438:0crwdne3438:0
+      language: crwdns3440:0crwdne3440:0
+      layout: crwdns3442:0crwdne3442:0
+      list: crwdns3444:0crwdne3444:0
+      messages: crwdns3446:0crwdne3446:0
+      others: crwdns3448:0crwdne3448:0
+      payment: crwdns3450:0crwdne3450:0
+      tasks: crwdns3452:0crwdne3452:0
+  current_orders:
+    articles:
+      article:
+        counts: "crwdns3454:0%{ordergroups}crwdnd3454:0%{articles}crwdne3454:0"
+        no_selection: crwdns3456:0crwdne3456:0
+      article_info:
+        from: crwdns3458:0%{supplier}crwdne3458:0
+        origin_in: crwdns3460:0%{origin}crwdne3460:0
+        supplied_and_made_by: crwdns3462:0%{manufacturer}crwdne3462:0
+        supplied_by: crwdns3464:0%{supplier}crwdne3464:0
+        supplied_by_made_by: crwdns3466:0%{supplier}crwdnd3466:0%{manufacturer}crwdne3466:0
+        unit: crwdns3468:0%{unit}crwdne3468:0
+      form:
+        article_placeholder: crwdns3470:0crwdne3470:0
+        current_orders: crwdns3472:0crwdne3472:0
+      index:
+        title: crwdns3474:0crwdne3474:0
+      ordergroups:
+        add_new: crwdns3476:0crwdne3476:0
+        piece: crwdns3478:0crwdne3478:0
+        unit: crwdns3480:0crwdne3480:0
+      show:
+        title: "crwdns3482:0%{name}crwdne3482:0"
+    group_orders:
+      index:
+        title: crwdns3484:0crwdne3484:0
+    navigation:
+      articles: crwdns3486:0crwdne3486:0
+      ordergroups: crwdns3488:0crwdne3488:0
+      receive: crwdns3490:0crwdne3490:0
+    ordergroups:
+      articles:
+        add_new: crwdns3492:0crwdne3492:0
+        no_selection: crwdns3494:0crwdne3494:0
+      form:
+        ordergroup_placeholder: crwdns3496:0crwdne3496:0
+      index:
+        title: crwdns3498:0crwdne3498:0
+      payment_bar:
+        account_balance: crwdns3500:0crwdne3500:0
+        new_transaction: crwdns3502:0crwdne3502:0
+        payment: 'crwdns3504:0crwdne3504:0'
+      show:
+        title: crwdns3506:0%{name}crwdne3506:0
+    orders:
+      receive:
+        no_finished_orders: crwdns3508:0crwdne3508:0
+        title: crwdns3510:0crwdne3510:0
+  deliveries:
+    add_stock_change:
+      how_many_units: 'crwdns3512:0%{unit}crwdnd3512:0%{name}crwdne3512:0'
+    create:
+      notice: crwdns3514:0crwdne3514:0
+    destroy:
+      notice: crwdns3516:0crwdne3516:0
+    edit:
+      title: crwdns3518:0crwdne3518:0
+    form:
+      confirm_foreign_supplier_reedit: crwdns3520:0%{name}crwdne3520:0
+      create_from_blank: crwdns3522:0crwdne3522:0
+      create_stock_article: crwdns3524:0crwdne3524:0
+      title_fill_quantities: crwdns3526:0crwdne3526:0
+      title_finish_delivery: crwdns3528:0crwdne3528:0
+      title_select_stock_articles: crwdns3530:0crwdne3530:0
+    index:
+      confirm_delete: crwdns3532:0crwdne3532:0
+      new_delivery: 'crwdns3534:0%{supplier}crwdne3534:0'
+      title: "crwdns3536:0%{supplier}crwdne3536:0"
+    invoice_amount: crwdns3538:0crwdne3538:0
+    invoice_net_amount: crwdns3540:0crwdne3540:0
+    new:
+      title: crwdns3542:0%{supplier}crwdne3542:0
+    show:
+      sum: crwdns3544:0crwdne3544:0
+      sum_diff: crwdns3546:0crwdne3546:0
+      sum_gross: crwdns3548:0crwdne3548:0
+      sum_net: crwdns3550:0crwdne3550:0
+      title: crwdns3552:0crwdne3552:0
+      title_articles: crwdns3554:0crwdne3554:0
+    stock_article_for_adding:
+      action_add_to_delivery: crwdns3556:0crwdne3556:0
+      action_edit: crwdns3558:0crwdne3558:0
+      action_other_price: crwdns3560:0crwdne3560:0
+    stock_change_fields:
+      remove_article: crwdns3562:0crwdne3562:0
+    suppliers_overview: crwdns3564:0crwdne3564:0
+    update:
+      notice: crwdns3566:0crwdne3566:0
+  discourse:
+    callback:
+      invalid_nonce: crwdns3568:0crwdne3568:0
+      invalid_signature: crwdns3570:0crwdne3570:0
+      logged_in: crwdns3572:0crwdne3572:0
+  documents:
+    create:
+      error: 'crwdns3574:0%{error}crwdne3574:0'
+      not_allowed_mime: crwdns3576:0%{mime}crwdne3576:0
+      notice: crwdns3578:0crwdne3578:0
+    destroy:
+      error: 'crwdns3580:0%{error}crwdne3580:0'
+      no_right: crwdns3582:0crwdne3582:0
+      notice: crwdns3584:0crwdne3584:0
+    form:
+      new: crwdns3586:0crwdne3586:0
+      new_folder: crwdns3588:0crwdne3588:0
+      submit: crwdns3590:0crwdne3590:0
+    index:
+      new: crwdns3592:0crwdne3592:0
+      new_folder: crwdns3594:0crwdne3594:0
+      title: crwdns3596:0crwdne3596:0
+    multiple_orders_by_articles:
+      filename: crwdns3598:0crwdne3598:0
+      title: crwdns3600:0crwdne3600:0
+    multiple_orders_by_groups:
+      filename: crwdns3602:0crwdne3602:0
+      title: crwdns3604:0crwdne3604:0
+    order_by_articles:
+      filename: crwdns3606:0%{name}crwdnd3606:0%{date}crwdne3606:0
+      title: 'crwdns3608:0%{name}crwdnd3608:0%{date}crwdne3608:0'
+    order_by_groups:
+      filename: crwdns3610:0%{name}crwdnd3610:0%{date}crwdne3610:0
+      sum: crwdns3612:0crwdne3612:0
+      title: 'crwdns3614:0%{name}crwdnd3614:0%{date}crwdne3614:0'
+    order_fax:
+      filename: crwdns3616:0%{name}crwdnd3616:0%{date}crwdne3616:0
+      rows:
+        - crwdns3618:0crwdne3618:0
+        - crwdns3620:0crwdne3620:0
+        - crwdns3622:0crwdne3622:0
+        - crwdns3624:0crwdne3624:0
+        - crwdns3626:0crwdne3626:0
+        - crwdns3628:0crwdne3628:0
+        - crwdns3630:0crwdne3630:0
+      total: crwdns3632:0crwdne3632:0
+    order_matrix:
+      filename: crwdns3634:0%{name}crwdnd3634:0%{date}crwdne3634:0
+      heading: crwdns3636:0%{count}crwdne3636:0
+      title: 'crwdns3638:0%{name}crwdnd3638:0%{date}crwdne3638:0'
+  errors:
+    general: crwdns3640:0crwdne3640:0
+    general_again: crwdns3642:0crwdne3642:0
+    general_msg: 'crwdns3644:0%{msg}crwdne3644:0'
+    internal_server_error:
+      text1: crwdns3646:0crwdne3646:0
+      text2: crwdns3648:0crwdne3648:0
+      title: crwdns3650:0crwdne3650:0
+    not_found:
+      text: crwdns3652:0crwdne3652:0
+      title: crwdns3654:0crwdne3654:0
+  feedback:
+    create:
+      notice: crwdns3656:0crwdne3656:0
+    new:
+      first_paragraph: crwdns3658:0crwdne3658:0
+      second_paragraph: crwdns3660:0crwdne3660:0
+      send: crwdns3662:0crwdne3662:0
+      title: crwdns3664:0crwdne3664:0
+  finance:
+    balancing:
+      close:
+        alert: 'crwdns3666:0%{message}crwdne3666:0'
+        notice: crwdns3668:0crwdne3668:0
+      close_direct:
+        alert: 'crwdns3670:0%{message}crwdne3670:0'
+        notice: crwdns3672:0crwdne3672:0
+      confirm:
+        clear: crwdns3674:0crwdne3674:0
+        first_paragraph: 'crwdns3676:0crwdne3676:0'
+        or_cancel: crwdns3678:0crwdne3678:0
+        title: crwdns3680:0crwdne3680:0
+      edit_note:
+        title: crwdns3682:0crwdne3682:0
+      edit_results_by_articles:
+        add_article: crwdns3684:0crwdne3684:0
+        amount: crwdns3686:0crwdne3686:0
+        gross: crwdns3688:0crwdne3688:0
+        net: crwdns3690:0crwdne3690:0
+      group_order_articles:
+        add_group: crwdns3692:0crwdne3692:0
+        total: crwdns3694:0crwdne3694:0
+        total_fc: crwdns3696:0crwdne3696:0
+        units: crwdns3698:0crwdne3698:0
+      index:
+        title: crwdns3700:0crwdne3700:0
+      invoice:
+        edit: crwdns3702:0crwdne3702:0
+        invoice_amount: 'crwdns3704:0crwdne3704:0'
+        invoice_date: 'crwdns3706:0crwdne3706:0'
+        invoice_number: 'crwdns3708:0crwdne3708:0'
+        minus_refund_calculated: "crwdns3710:0crwdne3710:0"
+        new: crwdns3712:0crwdne3712:0
+        new_body: 'crwdns3714:0crwdne3714:0'
+        plus_refund_credited: "crwdns3716:0crwdne3716:0"
+        refund_adjusted_amount: 'crwdns3718:0crwdne3718:0'
+      new:
+        alert: crwdns3720:0crwdne3720:0
+        articles_overview: crwdns3722:0crwdne3722:0
+        close_direct: crwdns3724:0crwdne3724:0
+        close_direct_confirm: crwdns3726:0crwdne3726:0
+        comment_on_transaction: crwdns3728:0crwdne3728:0
+        comments: crwdns3730:0crwdne3730:0
+        confirm_order: crwdns3732:0crwdne3732:0
+        create_invoice: crwdns3734:0crwdne3734:0
+        edit_note: crwdns3736:0crwdne3736:0
+        edit_order: crwdns3738:0crwdne3738:0
+        groups_overview: crwdns3740:0crwdne3740:0
+        invoice: crwdns3742:0crwdne3742:0
+        notes_and_journal: crwdns3744:0crwdne3744:0
+        summary: crwdns3746:0crwdne3746:0
+        title: crwdns3748:0%{name}crwdne3748:0
+        view_options: crwdns3750:0crwdne3750:0
+      order_article:
+        confirm: crwdns3752:0crwdne3752:0
+      orders:
+        clear: crwdns3754:0crwdne3754:0
+        cleared: crwdns3756:0%{amount}crwdne3756:0
+        end: crwdns3758:0crwdne3758:0
+        ended: crwdns3760:0crwdne3760:0
+        name: crwdns3762:0crwdne3762:0
+        no_closed_orders: crwdns3764:0crwdne3764:0
+        state: crwdns3766:0crwdne3766:0
+      summary:
+        changed: crwdns3768:0crwdne3768:0
+        duration: crwdns3770:0%{starts}crwdnd3770:0%{ends}crwdne3770:0
+        fc_amount: 'crwdns3772:0crwdne3772:0'
+        fc_profit: crwdns3774:0crwdne3774:0
+        gross_amount: 'crwdns3776:0crwdne3776:0'
+        groups_amount: 'crwdns3778:0crwdne3778:0'
+        net_amount: 'crwdns3780:0crwdne3780:0'
+        reload: crwdns3782:0crwdne3782:0
+        with_extra_charge: 'crwdns3784:0crwdne3784:0'
+        without_extra_charge: 'crwdns3786:0crwdne3786:0'
+    bank_accounts:
+      controller:
+        import:
+          notice: 'crwdns3788:0%{count}crwdne3788:0'
+      index:
+        account_statement: crwdns3790:0crwdne3790:0
+        title: crwdns3792:0crwdne3792:0
+    bank_transactions:
+      index:
+        title: crwdns3794:0%{name}crwdnd3794:0%{balance}crwdne3794:0
+      show:
+        belongs_to_supplier: crwdns3796:0crwdne3796:0
+        belongs_to_user: crwdns3798:0crwdne3798:0
+        in_ordergroup: crwdns3800:0crwdne3800:0
+    create:
+      notice: crwdns3802:0crwdne3802:0
+    financial_links:
+      show:
+        title: crwdns3804:0%{number}crwdne3804:0
+    financial_transactions:
+      controller:
+        create:
+          notice: crwdns3806:0crwdne3806:0
+        create_collection:
+          alert: 'crwdns3808:0%{error}crwdne3808:0'
+          error_note_required: crwdns3810:0crwdne3810:0
+          notice: crwdns3812:0crwdne3812:0
+      index:
+        balance: 'crwdns3814:0%{balance}crwdne3814:0'
+        last_updated_at: "crwdns3816:0%{when}crwdne3816:0"
+        new_transaction: crwdns3818:0crwdne3818:0
+        title: crwdns3820:0%{name}crwdne3820:0
+      index_collection:
+        show_groups: crwdns3822:0crwdne3822:0
+        title: crwdns3824:0crwdne3824:0
+      new:
+        paragraph: crwdns3826:0%{name}crwdne3826:0
+        title: crwdns3828:0crwdne3828:0
+      new_collection:
+        add_all_ordergroups: crwdns3830:0crwdne3830:0
+        new_ordergroup: crwdns3832:0crwdne3832:0
+        save: crwdns3834:0crwdne3834:0
+        set_balance: crwdns3836:0crwdne3836:0
+        sidebar: crwdns3838:0crwdne3838:0
+        title: crwdns3840:0crwdne3840:0
+      ordergroup:
+        remove: crwdns3842:0crwdne3842:0
+        remove_group: crwdns3844:0crwdne3844:0
+      transactions_search:
+        search_placeholder: crwdns3846:0crwdne3846:0
+    index:
+      amount_fc: crwdns3848:0crwdne3848:0
+      end: crwdns3850:0crwdne3850:0
+      everything_cleared: crwdns3852:0crwdne3852:0
+      last_transactions: crwdns3854:0crwdne3854:0
+      open_transactions: crwdns3856:0crwdne3856:0
+      show_all: crwdns3858:0crwdne3858:0
+      title: crwdns3860:0crwdne3860:0
+      unpaid_invoices: crwdns3862:0crwdne3862:0
+    invoices:
+      edit:
+        title: crwdns3864:0crwdne3864:0
+      form:
+        attachment_hint: crwdns3866:0crwdne3866:0
+      index:
+        action_new: crwdns3868:0crwdne3868:0
+        title: crwdns3870:0crwdne3870:0
+      new:
+        title: crwdns3872:0crwdne3872:0
+      show:
+        title: crwdns3874:0%{number}crwdne3874:0
+      unpaid:
+        invoices_sum: crwdns3876:0crwdne3876:0
+        invoices_text: crwdns3878:0crwdne3878:0
+        title: crwdns3880:0crwdne3880:0
+    ordergroups:
+      index:
+        new_transaction: crwdns3882:0crwdne3882:0
+        search_placeholder: crwdns3884:0crwdne3884:0
+        show_all: crwdns3886:0crwdne3886:0
+        title: crwdns3888:0crwdne3888:0
+      ordergroups:
+        account_statement: crwdns3890:0crwdne3890:0
+        new_transaction: crwdns3892:0crwdne3892:0
+    update:
+      notice: crwdns3894:0crwdne3894:0
+  foodcoop:
+    ordergroups:
+      index:
+        name: crwdns3896:0crwdne3896:0
+        only_active: crwdns3898:0crwdne3898:0
+        only_active_desc: "crwdns3900:0crwdne3900:0"
+        title: crwdns3902:0crwdne3902:0
+      ordergroups:
+        break: "crwdns3904:0%{start}crwdnd3904:0%{end}crwdne3904:0"
+    users:
+      index:
+        body: "crwdns3906:0%{profile_link}crwdne3906:0"
+        ph_name: crwdns3908:0crwdne3908:0
+        ph_ordergroup: crwdns3910:0crwdne3910:0
+        profile_link: crwdns3912:0crwdne3912:0
+        title: crwdns3914:0crwdne3914:0
+    workgroups:
+      edit:
+        invite_link: crwdns3916:0crwdne3916:0
+        invite_new: crwdns3918:0%{invite_link}crwdne3918:0
+        title: crwdns3920:0crwdne3920:0
+      index:
+        body: "crwdns3922:0crwdne3922:0"
+        title: crwdns3924:0crwdne3924:0
+      workgroup:
+        edit: crwdns3926:0crwdne3926:0
+        show_tasks: crwdns3928:0crwdne3928:0
+  group_order_articles:
+    form:
+      amount_change_for: crwdns3930:0%{article}crwdne3930:0
+      result_hint: 'crwdns3932:0%{unit}crwdne3932:0'
+  group_orders:
+    archive:
+      desc: crwdns3934:0%{link}crwdne3934:0
+      open_orders: crwdns3936:0crwdne3936:0
+      title: crwdns3938:0%{group}crwdne3938:0
+      title_closed: crwdns3940:0crwdne3940:0
+      title_open: crwdns3942:0crwdne3942:0
+    create:
+      error_general: crwdns3944:0crwdne3944:0
+      error_stale: crwdns3946:0crwdne3946:0
+      notice: crwdns3948:0crwdne3948:0
+    errors:
+      closed: crwdns3950:0crwdne3950:0
+      no_member: crwdns3952:0crwdne3952:0
+      notfound: crwdns3954:0crwdne3954:0
+    form:
+      action_save: crwdns3956:0crwdne3956:0
+      new_funds: crwdns3958:0crwdne3958:0
+      price: crwdns3960:0crwdne3960:0
+      reset_article_search: crwdns3962:0crwdne3962:0
+      search_article: crwdns3964:0crwdne3964:0
+      sum_amount: crwdns3966:0crwdne3966:0
+      title: crwdns3968:0crwdne3968:0
+      total_sum_amount: crwdns3970:0crwdne3970:0
+      total_tolerance: crwdns3972:0crwdne3972:0
+      units: crwdns3974:0crwdne3974:0
+      units_full: crwdns3976:0crwdne3976:0
+      units_total: crwdns3978:0crwdne3978:0
+    index:
+      closed_orders:
+        more: crwdns3980:0crwdne3980:0
+        title: crwdns3982:0crwdne3982:0
+      finished_orders:
+        title: crwdns3984:0crwdne3984:0
+        total_sum: crwdns3986:0crwdne3986:0
+      funds:
+        finished_orders: crwdns3988:0crwdne3988:0
+        open_orders: crwdns3990:0crwdne3990:0
+        title: crwdns3992:0crwdne3992:0
+      title: crwdns3994:0crwdne3994:0
+    messages:
+      not_enough_apples: crwdns3996:0%{stop_ordering_under}crwdnd3996:0%{apples}crwdne3996:0
+    order:
+      title: crwdns3998:0crwdne3998:0
+    show:
+      articles:
+        edit_order: crwdns4000:0crwdne4000:0
+        not_ordered_msg: crwdns4002:0crwdne4002:0
+        order_closed_msg: crwdns4004:0crwdne4004:0
+        order_nopen_title: crwdns4006:0crwdne4006:0
+        order_not_open: crwdns4008:0crwdne4008:0
+        order_now: crwdns4010:0crwdne4010:0
+        order_open: crwdns4012:0crwdne4012:0
+        ordered: crwdns4014:0crwdne4014:0
+        ordered_title: crwdns4016:0crwdne4016:0
+        show_hide: crwdns4018:0crwdne4018:0
+        show_note: crwdns4020:0crwdne4020:0
+        title: crwdns4022:0crwdne4022:0
+        unit_price: crwdns4024:0crwdne4024:0
+      comment: crwdns4026:0crwdne4026:0
+      comments:
+        title: crwdns4028:0crwdne4028:0
+      not_ordered: crwdns4030:0crwdne4030:0
+      sum: crwdns4032:0crwdne4032:0
+      title: crwdns4034:0%{order}crwdne4034:0
+    switch_order:
+      remaining: "crwdns4036:0%{remaining}crwdne4036:0"
+      title: crwdns4038:0crwdne4038:0
+    update:
+      error_general: crwdns4040:0crwdne4040:0
+      error_stale: crwdns4042:0crwdne4042:0
+      notice: crwdns4044:0crwdne4044:0
+  helpers:
+    application:
+      edit_user: crwdns4046:0crwdne4046:0
+      nick_fallback: "crwdns4048:0crwdne4048:0"
+      role_admin: crwdns4050:0crwdne4050:0
+      role_article_meta: crwdns4052:0crwdne4052:0
+      role_finance: crwdns4054:0crwdne4054:0
+      role_invoices: crwdns4056:0crwdne4056:0
+      role_orders: crwdns4058:0crwdne4058:0
+      role_pickups: crwdns4060:0crwdne4060:0
+      role_suppliers: crwdns4062:0crwdne4062:0
+      show_google_maps: crwdns4064:0crwdne4064:0
+      sort_by: crwdns4066:0%{text}crwdne4066:0
+    current_orders:
+      pay_amount: crwdns4068:0%{amount}crwdne4068:0
+      pay_done: crwdns4070:0crwdne4070:0
+      pay_none: crwdns4072:0crwdne4072:0
+    deliveries:
+      new_invoice: crwdns4074:0crwdne4074:0
+      show_invoice: crwdns4076:0crwdne4076:0
+    messages:
+      write_message: crwdns4078:0crwdne4078:0
+    orders:
+      old_price: crwdns4080:0crwdne4080:0
+      option_choose: crwdns4082:0crwdne4082:0
+      option_stock: crwdns4084:0crwdne4084:0
+      order_pdf: crwdns4086:0crwdne4086:0
+    submit:
+      invite:
+        create: crwdns4088:0crwdne4088:0
+      printer_job:
+        create: crwdns4090:0crwdne4090:0
+      message:
+        create: crwdns4092:0crwdne4092:0
+    tasks:
+      required_users: "crwdns4094:0%{count}crwdne4094:0"
+      task_title: "crwdns4096:0%{name}crwdnd4096:0%{duration}crwdne4096:0"
+  home:
+    apple_bar:
+      desc: 'crwdns4098:0%{amount}crwdne4098:0'
+      more_info: crwdns4100:0crwdne4100:0
+      points: 'crwdns4102:0%{points}crwdne4102:0'
+      warning: crwdns4104:0%{threshold}crwdne4104:0
+    changes_saved: crwdns4106:0crwdne4106:0
+    index:
+      due_date_format: "crwdns4108:0%Acrwdnd4108:0%dcrwdnd4108:0%Bcrwdne4108:0"
+      messages:
+        title: crwdns4110:0crwdne4110:0
+        view_all:
+          messages: crwdns4112:0crwdne4112:0
+          text: crwdns4114:0%{messages}crwdnd4114:0%{threads}crwdne4114:0
+          threads: crwdns4116:0crwdne4116:0
+      my_ordergroup:
+        last_update: crwdns4118:0%{when}crwdne4118:0
+        title: crwdns4120:0crwdne4120:0
+        transactions:
+          title: crwdns4122:0crwdne4122:0
+          view: crwdns4124:0crwdne4124:0
+      ordergroup:
+        title: crwdns4126:0crwdne4126:0
+      tasks_move:
+        action: crwdns4128:0crwdne4128:0
+        desc: crwdns4130:0crwdne4130:0
+        title: crwdns4132:0crwdne4132:0
+      tasks_open:
+        title: crwdns4134:0crwdne4134:0
+        view_all: crwdns4136:0crwdne4136:0
+      title: crwdns4138:0crwdne4138:0
+      your_tasks: crwdns4140:0crwdne4140:0
+    no_ordergroups: crwdns4142:0crwdne4142:0
+    ordergroup:
+      account_summary: crwdns4144:0crwdne4144:0
+      invite: crwdns4146:0crwdne4146:0
+      search: crwdns4148:0crwdne4148:0
+      title: crwdns4150:0crwdne4150:0
+    ordergroup_cancelled: crwdns4152:0%{group}crwdne4152:0
+    profile:
+      groups:
+        cancel: crwdns4154:0crwdne4154:0
+        cancel_confirm: crwdns4156:0crwdne4156:0
+        invite: crwdns4158:0crwdne4158:0
+        title: crwdns4160:0crwdne4160:0
+      title: crwdns4162:0crwdne4162:0
+      user:
+        since: "crwdns4164:0%{when}crwdne4164:0"
+        title: "crwdns4166:0%{user}crwdne4166:0"
+    start_nav:
+      admin: crwdns4168:0crwdne4168:0
+      finances:
+        accounts: crwdns4170:0crwdne4170:0
+        settle: crwdns4172:0crwdne4172:0
+        title: crwdns4174:0crwdne4174:0
+      foodcoop: crwdns4176:0crwdne4176:0
+      members: crwdns4178:0crwdne4178:0
+      new_ordergroup: crwdns4180:0crwdne4180:0
+      new_user: crwdns4182:0crwdne4182:0
+      orders:
+        end: crwdns4184:0crwdne4184:0
+        overview: crwdns4186:0crwdne4186:0
+        title: crwdns4188:0crwdne4188:0
+      products:
+        edit: crwdns4190:0crwdne4190:0
+        edit_stock: crwdns4192:0crwdne4192:0
+        edit_suppliers: crwdns4194:0crwdne4194:0
+        title: crwdns4196:0crwdne4196:0
+      tasks: crwdns4198:0crwdne4198:0
+      title: crwdns4200:0crwdne4200:0
+      write_message: crwdns4202:0crwdne4202:0
+  invites:
+    errors:
+      already_member: crwdns4204:0crwdne4204:0
+    modal_form:
+      body: "crwdns4206:0%{group}crwdne4206:0"
+      title: crwdns4208:0crwdne4208:0
+    new:
+      action: crwdns4210:0crwdne4210:0
+      body: "crwdns4212:0%{group}crwdne4212:0"
+    success: crwdns4214:0crwdne4214:0
+  js:
+    current_orders:
+      articles:
+        above: "crwdns4216:0%{count}crwdne4216:0"
+        below: "crwdns4218:0%{count}crwdne4218:0"
+        equal: crwdns4220:0crwdne4220:0
+    ordering:
+      confirm_change: crwdns4222:0crwdne4222:0
+  layouts:
+    email:
+      footer_1_separator: "crwdns4224:0crwdne4224:0"
+      footer_2_foodsoft: 'crwdns4226:0%{url}crwdne4226:0'
+      footer_3_homepage: 'crwdns4228:0%{url}crwdne4228:0'
+      footer_4_help: 'crwdns4230:0%{url}crwdne4230:0'
+    foodsoft: crwdns4232:0crwdne4232:0
+    footer:
+      revision: crwdns4234:0%{revision}crwdne4234:0
+    header:
+      feedback:
+        desc: crwdns4236:0crwdne4236:0
+        title: crwdns4238:0crwdne4238:0
+      help: crwdns4240:0crwdne4240:0
+      logout: crwdns4242:0crwdne4242:0
+      ordergroup: crwdns4244:0crwdne4244:0
+      profile: crwdns4246:0crwdne4246:0
+    logo: "crwdns4248:0crwdne4248:0"
+  lib:
+    render_pdf:
+      page: crwdns4250:0%{number}crwdnd4250:0%{count}crwdne4250:0
+  login:
+    accept_invitation:
+      body: "crwdns4252:0%{foodcoop}crwdnd4252:0%{group}crwdne4252:0"
+      submit: crwdns4254:0crwdne4254:0
+      title: crwdns4256:0%{name}crwdne4256:0
+    controller:
+      accept_invitation:
+        notice: crwdns4258:0crwdne4258:0
+      error_group_invalid: crwdns4260:0crwdne4260:0
+      error_invite_invalid: crwdns4262:0crwdne4262:0
+      error_token_invalid: crwdns4264:0crwdne4264:0
+      reset_password:
+        notice: crwdns4266:0crwdne4266:0
+      update_password:
+        notice: crwdns4268:0crwdne4268:0
+    forgot_password:
+      body: "crwdns4270:0crwdne4270:0"
+      submit: crwdns4272:0crwdne4272:0
+      title: crwdns4274:0crwdne4274:0
+    new_password:
+      body: "crwdns4276:0%{user}crwdne4276:0"
+      submit: crwdns4278:0crwdne4278:0
+      title: crwdns4280:0crwdne4280:0
+  mailer:
+    dateformat: "crwdns4282:0%dcrwdnd4282:0%bcrwdne4282:0"
+    feedback:
+      header: "crwdns4284:0%{user}crwdnd4284:0%{date}crwdne4284:0"
+      subject: crwdns4286:0crwdne4286:0
+    from_via_foodsoft: "crwdns4288:0%{name}crwdne4288:0"
+    invite:
+      subject: crwdns4290:0crwdne4290:0
+      text: |
+        crwdns4292:0%{user}crwdnd4292:0%{mail}crwdnd4292:0%{group}crwdnd4292:0%{link}crwdnd4292:0%{expires}crwdne4292:0
+    negative_balance:
+      subject: crwdns4294:0crwdne4294:0
+      text: |
+        crwdns4296:0%{group}crwdnd4296:0%{when}crwdnd4296:0%{balance}crwdnd4296:0%{amount}crwdnd4296:0%{note}crwdnd4296:0%{user}crwdnd4296:0%{foodcoop}crwdne4296:0
+    not_enough_users_assigned:
+      subject: 'crwdns4298:0%{task}crwdne4298:0'
+      text: |
+        crwdns4300:0%{user}crwdnd4300:0%{task}crwdnd4300:0%{when}crwdnd4300:0%{workgroup_tasks_url}crwdnd4300:0%{user_tasks_url}crwdne4300:0
+    order_result:
+      subject: 'crwdns4302:0%{name}crwdne4302:0'
+      text0: |
+        crwdns4304:0%{ordergroup}crwdnd4304:0%{order}crwdnd4304:0%{user}crwdnd4304:0%{when}crwdne4304:0
+      text1: |-
+        crwdns4306:0%{sum}crwdnd4306:0%{order_url}crwdnd4306:0%{foodcoop}crwdne4306:0
+    order_result_supplier:
+      subject: crwdns4308:0%{name}crwdne4308:0
+      text: |
+        crwdns4310:0%{foodcoop}crwdnd4310:0%{user}crwdnd4310:0%{foodcoop}crwdne4310:0
+    reset_password:
+      subject: crwdns4312:0%{username}crwdne4312:0
+      text: |
+        crwdns4314:0%{user}crwdnd4314:0%{link}crwdnd4314:0%{expires}crwdne4314:0
+    upcoming_tasks:
+      nextweek: 'crwdns4316:0crwdne4316:0'
+      subject: crwdns4318:0crwdne4318:0
+      text0: |
+        crwdns4320:0%{user}crwdnd4320:0%{task}crwdnd4320:0%{when}crwdne4320:0
+      text1: |
+        crwdns4322:0%{user_tasks_url}crwdnd4322:0%{foodcoop}crwdne4322:0
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: crwdns4324:0crwdne4324:0
+    index:
+      general: crwdns4326:0crwdne4326:0
+      title: crwdns4328:0crwdne4328:0
+    message_threads:
+      last_reply_at: crwdns4330:0crwdne4330:0
+      last_reply_by: crwdns4332:0crwdne4332:0
+      started_at: crwdns4334:0crwdne4334:0
+      started_by: crwdns4336:0crwdne4336:0
+    show: crwdns4338:0crwdne4338:0
+  messagegroups:
+    index:
+      body: 'crwdns4340:0crwdne4340:0'
+      title: crwdns4342:0crwdne4342:0
+    join:
+      error: 'crwdns4344:0%{error}crwdne4344:0'
+      notice: crwdns4346:0crwdne4346:0
+    leave:
+      error: 'crwdns4348:0%{error}crwdne4348:0'
+      notice: crwdns4350:0crwdne4350:0
+    messagegroup:
+      join: crwdns4352:0crwdne4352:0
+      leave: crwdns4354:0crwdne4354:0
+  messages:
+    actionbar:
+      message_threads: crwdns4356:0crwdne4356:0
+      messagegroups: crwdns4358:0crwdne4358:0
+      messages: crwdns4360:0crwdne4360:0
+      new: crwdns4362:0crwdne4362:0
+    create:
+      notice: crwdns4364:0crwdne4364:0
+    index:
+      new: crwdns4366:0crwdne4366:0
+      title: crwdns4368:0crwdne4368:0
+    messages:
+      reply: crwdns4370:0crwdne4370:0
+    model:
+      reply_header: "crwdns4372:0%{user}crwdnd4372:0%{when}crwdne4372:0"
+      reply_indent: "crwdns4374:0%{line}crwdne4374:0"
+      reply_subject: 'crwdns4376:0%{subject}crwdne4376:0'
+    new:
+      error_private: crwdns4378:0crwdne4378:0
+      hint_private: crwdns4380:0crwdne4380:0
+      list:
+        desc: 'crwdns4382:0%{list}crwdne4382:0'
+        mail: crwdns4384:0%{email}crwdne4384:0
+        subscribe: crwdns4386:0%{link}crwdne4386:0
+        subscribe_msg: crwdns4388:0crwdne4388:0
+        wiki: crwdns4390:0crwdne4390:0
+      message: crwdns4392:0crwdne4392:0
+      no_user_found: crwdns4394:0crwdne4394:0
+      reply_to: crwdns4396:0%{link}crwdne4396:0
+      search: crwdns4398:0crwdne4398:0
+      search_user: crwdns4400:0crwdne4400:0
+      title: crwdns4402:0crwdne4402:0
+    show:
+      all_messages: crwdns4404:0crwdne4404:0
+      change_visibility: 'crwdns4406:0crwdne4406:0'
+      from: 'crwdns4408:0crwdne4408:0'
+      group: 'crwdns4410:0crwdne4410:0'
+      reply: crwdns4412:0crwdne4412:0
+      reply_to: 'crwdns4414:0crwdne4414:0'
+      sent_on: 'crwdns4416:0crwdne4416:0'
+      subject: 'crwdns4418:0crwdne4418:0'
+      title: crwdns4420:0crwdne4420:0
+      to: 'crwdns4422:0crwdne4422:0'
+      visibility: 'crwdns4424:0crwdne4424:0'
+      visibility_private: 'crwdns4426:0crwdne4426:0'
+      visibility_public: 'crwdns4428:0crwdne4428:0'
+    thread:
+      all_message_threads: crwdns4430:0crwdne4430:0
+      reply: crwdns4432:0crwdne4432:0
+    toggle_private:
+      not_allowed: crwdns4434:0crwdne4434:0
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        crwdns4436:0%{reply_url}crwdnd4436:0%{msg_url}crwdnd4436:0%{profile_url}crwdne4436:0
+      footer_group: |
+        crwdns4438:0%{group}crwdne4438:0
+  model:
+    delivery:
+      each_stock_article_must_be_unique: crwdns4440:0crwdne4440:0
+    financial_transaction_type:
+      no_delete_last: crwdns4442:0crwdne4442:0
+    group_order:
+      stock_ordergroup_name: crwdns4444:0%{user}crwdne4444:0
+    invoice:
+      invalid_mime: crwdns4446:0%{mime}crwdne4446:0
+    membership:
+      no_admin_delete: crwdns4448:0crwdne4448:0
+    order_article:
+      error_price: crwdns4450:0crwdne4450:0
+    page:
+      redirect: crwdns4452:0%{title}crwdne4452:0
+    user:
+      no_ordergroup: crwdns4454:0crwdne4454:0
+    group_order_article:
+      order_closed: crwdns4456:0crwdne4456:0
+  navigation:
+    admin:
+      config: crwdns4458:0crwdne4458:0
+      finance: crwdns4460:0crwdne4460:0
+      home: crwdns4462:0crwdne4462:0
+      mail_delivery_status: crwdns4464:0crwdne4464:0
+      messagegroups: crwdns4466:0crwdne4466:0
+      ordergroups: crwdns4468:0crwdne4468:0
+      title: crwdns4470:0crwdne4470:0
+      users: crwdns4472:0crwdne4472:0
+      workgroups: crwdns4474:0crwdne4474:0
+    articles:
+      categories: crwdns4476:0crwdne4476:0
+      stock: crwdns4478:0crwdne4478:0
+      suppliers: crwdns4480:0crwdne4480:0
+      title: crwdns4482:0crwdne4482:0
+    dashboard: crwdns4484:0crwdne4484:0
+    documents: crwdns4486:0crwdne4486:0
+    finances:
+      accounts: crwdns4488:0crwdne4488:0
+      balancing: crwdns4490:0crwdne4490:0
+      bank_accounts: crwdns4492:0crwdne4492:0
+      home: crwdns4494:0crwdne4494:0
+      invoices: crwdns4496:0crwdne4496:0
+      title: crwdns4498:0crwdne4498:0
+    foodcoop: crwdns4500:0crwdne4500:0
+    members: crwdns4502:0crwdne4502:0
+    messages: crwdns4504:0crwdne4504:0
+    ordergroups: crwdns4506:0crwdne4506:0
+    orders:
+      archive: crwdns4508:0crwdne4508:0
+      manage: crwdns4510:0crwdne4510:0
+      ordering: crwdns4512:0crwdne4512:0
+      pickups: crwdns4514:0crwdne4514:0
+      printer_jobs: crwdns4516:0crwdne4516:0
+      title: crwdns4518:0crwdne4518:0
+    tasks: crwdns4520:0crwdne4520:0
+    wiki:
+      all_pages: crwdns4522:0crwdne4522:0
+      home: crwdns4524:0crwdne4524:0
+      title: crwdns4526:0crwdne4526:0
+    workgroups: crwdns4528:0crwdne4528:0
+  number:
+    percentage:
+      format:
+        strip_insignificant_zeros: true
+  order_articles:
+    edit:
+      stock_alert: crwdns4530:0crwdne4530:0
+      title: crwdns4532:0crwdne4532:0
+    new:
+      title: crwdns4534:0crwdne4534:0
+  ordergroups:
+    edit:
+      title: crwdns4536:0crwdne4536:0
+    index:
+      title: crwdns4538:0crwdne4538:0
+    model:
+      error_single_group: "crwdns4540:0%{user}crwdne4540:0"
+      invalid_balance: crwdns4542:0crwdne4542:0
+  orders:
+    articles:
+      article_count: 'crwdns4544:0crwdne4544:0'
+      prices: crwdns4546:0crwdne4546:0
+      prices_sum: 'crwdns4548:0crwdne4548:0'
+      units_full: crwdns4550:0crwdne4550:0
+      units_ordered: crwdns4552:0crwdne4552:0
+    create:
+      notice: crwdns4554:0crwdne4554:0
+    edit:
+      title: 'crwdns4556:0%{name}crwdne4556:0'
+    edit_amount:
+      field_locked_title: crwdns4558:0crwdne4558:0
+      field_unlocked_title: crwdns4560:0crwdne4560:0
+    edit_amounts:
+      no_articles_available: crwdns4562:0crwdne4562:0
+    fax:
+      amount: crwdns4564:0crwdne4564:0
+      articles: crwdns4566:0crwdne4566:0
+      delivery_day: crwdns4568:0crwdne4568:0
+      heading: crwdns4570:0%{name}crwdne4570:0
+      name: crwdns4572:0crwdne4572:0
+      number: crwdns4574:0crwdne4574:0
+      to_address: crwdns4576:0crwdne4576:0
+    finish:
+      notice: crwdns4578:0crwdne4578:0
+    form:
+      ignore_warnings: crwdns4580:0crwdne4580:0
+      prices: crwdns4582:0crwdne4582:0
+      select_all: crwdns4584:0crwdne4584:0
+      stockit: crwdns4586:0crwdne4586:0
+      title: crwdns4588:0crwdne4588:0
+    index:
+      action_end: crwdns4590:0crwdne4590:0
+      action_receive: crwdns4592:0crwdne4592:0
+      confirm_delete: crwdns4594:0crwdne4594:0
+      confirm_end: crwdns4596:0%{order}crwdne4596:0
+      new_order: crwdns4598:0crwdne4598:0
+      no_open_or_finished_orders: crwdns4600:0crwdne4600:0
+      orders_finished: crwdns4602:0crwdne4602:0
+      orders_open: crwdns4604:0crwdne4604:0
+      orders_settled: crwdns4606:0crwdne4606:0
+      title: crwdns4608:0crwdne4608:0
+    model:
+      close_direct_message: crwdns4610:0crwdne4610:0
+      error_boxfill_before_ends: crwdns4612:0crwdne4612:0
+      error_closed: crwdns4614:0crwdne4614:0
+      error_nosel: crwdns4616:0crwdne4616:0
+      error_starts_before_boxfill: crwdns4618:0crwdne4618:0
+      error_starts_before_ends: crwdns4620:0crwdne4620:0
+      notice_close: 'crwdns4622:0%{name}crwdnd4622:0%{ends}crwdne4622:0'
+      stock: crwdns4624:0crwdne4624:0
+      warning_ordered: 'crwdns4626:0crwdne4626:0'
+      warning_ordered_stock: 'crwdns4628:0crwdne4628:0'
+    new:
+      title: crwdns4630:0crwdne4630:0
+    receive:
+      add_article: crwdns4632:0crwdne4632:0
+      consider_member_tolerance: crwdns4634:0crwdne4634:0
+      notice: 'crwdns4636:0%{msg}crwdne4636:0'
+      notice_none: crwdns4638:0crwdne4638:0
+      rest_to_stock: crwdns4640:0crwdne4640:0
+      submit: crwdns4642:0crwdne4642:0
+      surplus_options: 'crwdns4644:0crwdne4644:0'
+      title: crwdns4646:0%{order}crwdne4646:0
+    send_to_supplier:
+      notice: crwdns4648:0crwdne4648:0
+    show:
+      action_end: crwdns4650:0crwdne4650:0
+      amounts: 'crwdns4652:0crwdne4652:0'
+      articles: crwdns4654:0crwdne4654:0
+      articles_ordered: 'crwdns4656:0crwdne4656:0'
+      comments:
+        title: crwdns4658:0crwdne4658:0
+      comments_link: crwdns4660:0crwdne4660:0
+      confirm_delete: crwdns4662:0crwdne4662:0
+      confirm_end: |-
+        crwdns4664:0%{order}crwdne4664:0
+      confirm_create_printer_job: crwdns4666:0crwdne4666:0
+      confirm_send_to_supplier: crwdns4668:0%{when}crwdne4668:0
+      create_invoice: crwdns4670:0crwdne4670:0
+      description1_order: "crwdns4672:0%{state}crwdnd4672:0%{supplier}crwdnd4672:0%{who}crwdne4672:0"
+      description1_period:
+        pickup: crwdns4674:0%{pickup}crwdne4674:0
+        starts: crwdns4676:0%{starts}crwdne4676:0
+        starts_ends: crwdns4678:0%{starts}crwdnd4678:0%{ends}crwdne4678:0
+      description2: "crwdns4680:0%{ordergroups}crwdnd4680:0%{article_count}crwdnd4680:0%{net_sum}crwdnd4680:0%{gross_sum}crwdne4680:0"
+      group_orders: 'crwdns4682:0crwdne4682:0'
+      search_placeholder:
+        articles: crwdns4684:0crwdne4684:0
+        default: crwdns4686:0crwdne4686:0
+        groups: crwdns4688:0crwdne4688:0
+      search_reset: crwdns4690:0crwdne4690:0
+      send_to_supplier: crwdns4692:0crwdne4692:0
+      show_invoice: crwdns4694:0crwdne4694:0
+      sort_article: crwdns4696:0crwdne4696:0
+      sort_group: crwdns4698:0crwdne4698:0
+      stock_order: crwdns4700:0crwdne4700:0
+      title: 'crwdns4702:0%{name}crwdne4702:0'
+      warn_not_closed: crwdns4704:0crwdne4704:0
+    state:
+      closed: crwdns4706:0crwdne4706:0
+      finished: crwdns4708:0crwdne4708:0
+      open: crwdns4710:0crwdne4710:0
+    update:
+      notice: crwdns4712:0crwdne4712:0
+    update_order_amounts:
+      msg1: "crwdns4714:0%{count}crwdnd4714:0%{units}crwdne4714:0"
+      msg2: "crwdns4716:0%{count}crwdnd4716:0%{units}crwdne4716:0"
+      msg4: "crwdns4718:0%{count}crwdnd4718:0%{units}crwdne4718:0"
+  pages:
+    all:
+      new_page: crwdns4720:0crwdne4720:0
+      recent_changes: crwdns4722:0crwdne4722:0
+      search:
+        action: crwdns4724:0crwdne4724:0
+        placeholder: crwdns4726:0crwdne4726:0
+      site_map: crwdns4728:0crwdne4728:0
+      title: crwdns4730:0crwdne4730:0
+      title_list: crwdns4732:0crwdne4732:0
+    body:
+      title_toc: crwdns4734:0crwdne4734:0
+      wikicloth_exception: 'crwdns4736:0%{msg}crwdne4736:0'
+    create:
+      notice: crwdns4738:0crwdne4738:0
+    cshow:
+      error_noexist: crwdns4740:0crwdne4740:0
+      redirect_notice: crwdns4742:0%{page}crwdne4742:0
+    destroy:
+      notice: crwdns4744:0%{page}crwdne4744:0
+    diff:
+      title: "crwdns4746:0%{title}crwdnd4746:0%{old}crwdnd4746:0%{new}crwdne4746:0"
+    edit:
+      title: crwdns4748:0crwdne4748:0
+    error_stale_object: crwdns4750:0crwdne4750:0
+    form:
+      help:
+        bold: crwdns4752:0crwdne4752:0
+        external_link_ex: crwdns4754:0crwdne4754:0
+        external_links: crwdns4756:0crwdne4756:0
+        heading: crwdns4758:0%{level}crwdne4758:0
+        headings: crwdns4760:0crwdne4760:0
+        image_link_title: crwdns4762:0crwdne4762:0
+        image_links: crwdns4764:0crwdne4764:0
+        italic: crwdns4766:0crwdne4766:0
+        link_lists: crwdns4768:0crwdne4768:0
+        link_table: crwdns4770:0crwdne4770:0
+        link_templates: crwdns4772:0crwdne4772:0
+        link_variables: crwdns4774:0crwdne4774:0
+        list_item_1: crwdns4776:0crwdne4776:0
+        list_item_2: crwdns4778:0crwdne4778:0
+        noformat: crwdns4780:0crwdne4780:0
+        ordered_list: crwdns4782:0crwdne4782:0
+        section_block: crwdns4784:0crwdne4784:0
+        section_character: crwdns4786:0crwdne4786:0
+        section_link: crwdns4788:0crwdne4788:0
+        section_more: crwdns4790:0crwdne4790:0
+        section_table: crwdns4792:0crwdne4792:0
+        see_tables: crwdns4794:0%{tables_link}crwdne4794:0
+        tables_link: crwdns4796:0crwdne4796:0
+        text: crwdns4798:0crwdne4798:0
+        title: crwdns4800:0crwdne4800:0
+        unordered_list: crwdns4802:0crwdne4802:0
+        wiki_link_ex: crwdns4804:0crwdne4804:0
+        wiki_links: crwdns4806:0crwdne4806:0
+      preview: crwdns4808:0crwdne4808:0
+    last_updated: crwdns4810:0crwdne4810:0
+    new:
+      title: crwdns4812:0crwdne4812:0
+    page_list_item:
+      date_format: "crwdns4814:0%acrwdnd4814:0%dcrwdnd4814:0%Bcrwdnd4814:0%Ycrwdnd4814:0%H:%M:%Scrwdne4814:0"
+    show:
+      date_format: "crwdns4816:0%d-%m-%ycrwdnd4816:0%H:%Mcrwdne4816:0"
+      delete: crwdns4818:0crwdne4818:0
+      delete_confirm: 'crwdns4820:0crwdne4820:0'
+      diff: crwdns4822:0crwdne4822:0
+      edit: crwdns4824:0crwdne4824:0
+      last_updated: crwdns4826:0%{user}crwdnd4826:0%{when}crwdne4826:0
+      subpages: crwdns4828:0crwdne4828:0
+      title_versions: crwdns4830:0crwdne4830:0
+      versions: crwdns4832:0%{count}crwdne4832:0
+    title: crwdns4834:0crwdne4834:0
+    update:
+      notice: crwdns4836:0crwdne4836:0
+    variables:
+      description: crwdns4838:0crwdne4838:0
+      title: crwdns4840:0crwdne4840:0
+      value: crwdns4842:0crwdne4842:0
+      variable: crwdns4844:0crwdne4844:0
+    version:
+      author: 'crwdns4846:0%{user}crwdne4846:0'
+      date_format: "crwdns4848:0%acrwdnd4848:0%d-%m-%Ycrwdnd4848:0%H:%Mcrwdne4848:0"
+      revert: crwdns4850:0crwdne4850:0
+      title: "crwdns4852:0%{title}crwdnd4852:0%{version}crwdne4852:0"
+      title_version: crwdns4854:0crwdne4854:0
+      view_current: crwdns4856:0crwdne4856:0
+  pickups:
+    document:
+      empty_selection: crwdns4858:0crwdne4858:0
+      filename: crwdns4860:0%{date}crwdne4860:0
+      invalid_document: crwdns4862:0crwdne4862:0
+      title: crwdns4864:0%{date}crwdne4864:0
+    index:
+      article_pdf: crwdns4866:0crwdne4866:0
+      group_pdf: crwdns4868:0crwdne4868:0
+      matrix_pdf: crwdns4870:0crwdne4870:0
+      title: crwdns4872:0crwdne4872:0
+  sessions:
+    logged_in: crwdns4874:0crwdne4874:0
+    logged_out: crwdns4876:0crwdne4876:0
+    login_invalid_email: crwdns4878:0crwdne4878:0
+    login_invalid_nick: crwdns4880:0crwdne4880:0
+    new:
+      forgot_password: crwdns4882:0crwdne4882:0
+      login: crwdns4884:0crwdne4884:0
+      nojs: crwdns4886:0%{link}crwdne4886:0
+      noscript: crwdns4888:0crwdne4888:0
+      title: crwdns4890:0crwdne4890:0
+  printer_jobs:
+    create:
+      notice: crwdns4892:0%{count}crwdne4892:0
+    destroy:
+      notice: crwdns4894:0crwdne4894:0
+    index:
+      finished: crwdns4896:0crwdne4896:0
+      pending: crwdns4898:0crwdne4898:0
+      queued: crwdns4900:0crwdne4900:0
+      title: crwdns4902:0crwdne4902:0
+    show:
+      title: crwdns4904:0%{id}crwdne4904:0
+  shared:
+    articles:
+      ordered: crwdns4906:0crwdne4906:0
+      ordered_desc: crwdns4908:0crwdne4908:0
+      received: crwdns4910:0crwdne4910:0
+      received_desc: crwdns4912:0crwdne4912:0
+    articles_by:
+      price: crwdns4914:0crwdne4914:0
+      price_sum: crwdns4916:0crwdne4916:0
+    group:
+      access: crwdns4918:0crwdne4918:0
+      activated: crwdns4920:0crwdne4920:0
+      apple_limit: crwdns4922:0crwdne4922:0
+      break: crwdns4924:0%{start}crwdnd4924:0%{end}crwdne4924:0
+      deactivated: crwdns4926:0crwdne4926:0
+    group_form_fields:
+      search: crwdns4928:0crwdne4928:0
+      search_user: crwdns4930:0crwdne4930:0
+      user_not_found: crwdns4932:0crwdne4932:0
+    open_orders:
+      no_open_orders: crwdns4934:0crwdne4934:0
+      not_enough_apples: crwdns4936:0crwdne4936:0
+      title: crwdns4938:0crwdne4938:0
+      total_sum: crwdns4940:0crwdne4940:0
+      who_ordered: crwdns4942:0crwdne4942:0
+    order_download_button:
+      article_pdf: crwdns4944:0crwdne4944:0
+      download_file: crwdns4946:0crwdne4946:0
+      fax_csv: crwdns4948:0crwdne4948:0
+      fax_pdf: crwdns4950:0crwdne4950:0
+      fax_txt: crwdns4952:0crwdne4952:0
+      group_pdf: crwdns4954:0crwdne4954:0
+      matrix_pdf: crwdns4956:0crwdne4956:0
+      title: crwdns4958:0crwdne4958:0
+    task_list:
+      accept_task: crwdns4960:0crwdne4960:0
+      done: crwdns4962:0crwdne4962:0
+      done_q: crwdns4964:0crwdne4964:0
+      mark_done: crwdns4966:0crwdne4966:0
+      reject_task: crwdns4968:0crwdne4968:0
+      who: crwdns4970:0crwdne4970:0
+      who_hint: "crwdns4972:0crwdne4972:0"
+    user_form_fields:
+      contact_address_hint: crwdns4974:0crwdne4974:0
+      messagegroups: crwdns4976:0crwdne4976:0
+    workgroup_members:
+      title: crwdns4978:0crwdne4978:0
+  simple_form:
+    error_notification:
+      default_message: crwdns4980:0crwdne4980:0
+    hints:
+      article:
+        unit: crwdns4982:0crwdne4982:0
+      article_category:
+        description: crwdns4984:0crwdne4984:0
+      order_article:
+        units_to_order: crwdns4986:0crwdne4986:0
+        update_global_price: crwdns4988:0crwdne4988:0
+      stock_article:
+        copy:
+          name: crwdns4990:0crwdne4990:0
+        edit_stock_article:
+          price: "crwdns4992:0%{stock_article_copy_link}crwdne4992:0"
+      supplier:
+        min_order_quantity: crwdns4994:0crwdne4994:0
+      task:
+        duration: crwdns4996:0crwdne4996:0
+        required_users: crwdns4998:0crwdne4998:0
+      tax: crwdns5000:0crwdne5000:0
+    labels:
+      settings:
+        messages:
+          send_as_email: crwdns5002:0crwdne5002:0
+        notify:
+          negative_balance: crwdns5004:0crwdne5004:0
+          order_finished: crwdns5006:0crwdne5006:0
+          upcoming_tasks: crwdns5008:0crwdne5008:0
+        profile:
+          email_is_public: crwdns5010:0crwdne5010:0
+          language: crwdns5012:0crwdne5012:0
+          name_is_public: crwdns5014:0crwdne5014:0
+          phone_is_public: crwdns5016:0crwdne5016:0
+        settings_group:
+          messages: crwdns5018:0crwdne5018:0
+          privacy: crwdns5020:0crwdne5020:0
+    'no': 'crwdns5022:0crwdne5022:0'
+    options:
+      settings:
+        profile:
+          language:
+            de: crwdns5024:0crwdne5024:0
+            en: crwdns5026:0crwdne5026:0
+            es: crwdns5028:0crwdne5028:0
+            fr: crwdns5030:0crwdne5030:0
+            nl: crwdns5032:0crwdne5032:0
+    required:
+      mark: "crwdns5034:0crwdne5034:0"
+      text: crwdns5036:0crwdne5036:0
+    'yes': 'crwdns5038:0crwdne5038:0'
+  stock_takings:
+    create:
+      notice: crwdns5040:0crwdne5040:0
+    edit:
+      title: crwdns5042:0crwdne5042:0
+    index:
+      new_inventory: crwdns5044:0crwdne5044:0
+      title: crwdns5046:0crwdne5046:0
+    new:
+      amount: crwdns5048:0crwdne5048:0
+      create: crwdns5050:0crwdne5050:0
+      stock_articles: crwdns5052:0crwdne5052:0
+      temp_inventory: crwdns5054:0crwdne5054:0
+      text_deviations: crwdns5056:0%{inv_link}crwdne5056:0
+      text_need_articles: crwdns5058:0%{create_link}crwdne5058:0
+      title: crwdns5060:0crwdne5060:0
+    show:
+      amount: crwdns5062:0crwdne5062:0
+      article: crwdns5064:0crwdne5064:0
+      confirm_delete: crwdns5066:0crwdne5066:0
+      date: crwdns5068:0crwdne5068:0
+      note: crwdns5070:0crwdne5070:0
+      overview: crwdns5072:0crwdne5072:0
+      supplier: crwdns5074:0crwdne5074:0
+      title: crwdns5076:0crwdne5076:0
+      unit: crwdns5078:0crwdne5078:0
+    stock_takings:
+      confirm_delete: crwdns5080:0crwdne5080:0
+      date: crwdns5082:0crwdne5082:0
+      note: crwdns5084:0crwdne5084:0
+    update:
+      notice: crwdns5086:0crwdne5086:0
+  stockit:
+    check:
+      not_empty: "crwdns5088:0%{name}crwdne5088:0"
+    copy:
+      title: crwdns5090:0crwdne5090:0
+    create:
+      notice: crwdns5092:0%{name}crwdne5092:0
+    derive:
+      title: crwdns5094:0crwdne5094:0
+    destroy:
+      notice: crwdns5096:0%{name}crwdne5096:0
+    edit:
+      title: crwdns5098:0crwdne5098:0
+    form:
+      copy_stock_article: crwdns5100:0crwdne5100:0
+      price_hint: crwdns5102:0crwdne5102:0
+    index:
+      confirm_delete: crwdns5104:0crwdne5104:0
+      new_delivery: crwdns5106:0crwdne5106:0
+      new_stock_article: crwdns5108:0crwdne5108:0
+      new_stock_taking: crwdns5110:0crwdne5110:0
+      order_online: crwdns5112:0crwdne5112:0
+      show_stock_takings: crwdns5114:0crwdne5114:0
+      stock_count: 'crwdns5116:0crwdne5116:0'
+      stock_worth: 'crwdns5118:0crwdne5118:0'
+      title: crwdns5120:0%{article_count}crwdne5120:0
+      toggle_unavailable: crwdns5122:0crwdne5122:0
+      view_options: crwdns5124:0crwdne5124:0
+    new:
+      search_text: 'crwdns5126:0crwdne5126:0'
+      title: crwdns5128:0crwdne5128:0
+    show:
+      change_quantity: crwdns5130:0crwdne5130:0
+      datetime: crwdns5132:0crwdne5132:0
+      new_quantity: crwdns5134:0crwdne5134:0
+      reason: crwdns5136:0crwdne5136:0
+      stock_changes: crwdns5138:0crwdne5138:0
+    update:
+      notice: crwdns5140:0%{name}crwdne5140:0
+  suppliers:
+    create:
+      notice: crwdns5142:0crwdne5142:0
+    destroy:
+      notice: crwdns5144:0crwdne5144:0
+    edit:
+      title: crwdns5146:0crwdne5146:0
+    index:
+      action_import: crwdns5148:0crwdne5148:0
+      action_new: crwdns5150:0crwdne5150:0
+      articles: crwdns5152:0%{count}crwdne5152:0
+      confirm_del: crwdns5154:0%{name}crwdne5154:0
+      deliveries: crwdns5156:0%{count}crwdne5156:0
+      stock: crwdns5158:0%{count}crwdne5158:0
+      title: crwdns5160:0crwdne5160:0
+    new:
+      title: crwdns5162:0crwdne5162:0
+    shared_supplier_methods:
+      all_available: crwdns5164:0crwdne5164:0
+      all_unavailable: crwdns5166:0crwdne5166:0
+      import: crwdns5168:0crwdne5168:0
+    shared_supplier_note: crwdns5170:0crwdne5170:0
+    shared_suppliers:
+      body: "crwdns5172:0crwdne5172:0"
+      subscribe: crwdns5174:0crwdne5174:0
+      subscribe_again: crwdns5176:0crwdne5176:0
+      supplier: crwdns5178:0crwdne5178:0
+      title: crwdns5180:0crwdne5180:0
+    show:
+      last_deliveries: crwdns5182:0crwdne5182:0
+      last_orders: crwdns5184:0crwdne5184:0
+      new_delivery: crwdns5186:0crwdne5186:0
+      show_deliveries: crwdns5188:0crwdne5188:0
+    update:
+      notice: crwdns5190:0crwdne5190:0
+  tasks:
+    accept:
+      notice: crwdns5192:0crwdne5192:0
+    archive:
+      title: crwdns5194:0crwdne5194:0
+    create:
+      notice: crwdns5196:0crwdne5196:0
+    destroy:
+      notice: crwdns5198:0crwdne5198:0
+    edit:
+      submit_periodic: crwdns5200:0crwdne5200:0
+      title: crwdns5202:0crwdne5202:0
+      title_periodic: crwdns5204:0crwdne5204:0
+      warning_periodic: "crwdns5206:0crwdne5206:0"
+    error_not_found: crwdns5208:0crwdne5208:0
+    form:
+      search:
+        hint: crwdns5210:0crwdne5210:0
+        noresult: crwdns5212:0crwdne5212:0
+        placeholder: crwdns5214:0crwdne5214:0
+      submit:
+        periodic: crwdns5216:0crwdne5216:0
+    index:
+      show_group_tasks: crwdns5218:0crwdne5218:0
+      title: crwdns5220:0crwdne5220:0
+      title_non_group: crwdns5222:0crwdne5222:0
+    nav:
+      all_tasks: crwdns5224:0crwdne5224:0
+      archive: crwdns5226:0crwdne5226:0
+      group_tasks: crwdns5228:0crwdne5228:0
+      my_tasks: crwdns5230:0crwdne5230:0
+      new_task: crwdns5232:0crwdne5232:0
+      pages: crwdns5234:0crwdne5234:0
+    new:
+      submit_periodic: crwdns5236:0crwdne5236:0
+      title: crwdns5238:0crwdne5238:0
+    repeated: crwdns5240:0crwdne5240:0
+    set_done:
+      notice: crwdns5242:0crwdne5242:0
+    show:
+      accept_task: crwdns5244:0crwdne5244:0
+      confirm_delete_group: crwdns5246:0crwdne5246:0
+      confirm_delete_single: crwdns5248:0crwdne5248:0
+      confirm_delete_single_from_group: crwdns5250:0crwdne5250:0
+      delete_group: crwdns5252:0crwdne5252:0
+      edit_group: crwdns5254:0crwdne5254:0
+      hours: "crwdns5256:0%{count}crwdne5256:0"
+      mark_done: crwdns5258:0crwdne5258:0
+      reject_task: crwdns5260:0crwdne5260:0
+      title: crwdns5262:0crwdne5262:0
+    update:
+      notice: crwdns5264:0crwdne5264:0
+      notice_converted: crwdns5266:0crwdne5266:0
+    user:
+      more: crwdns5268:0%{tasks_link}crwdne5268:0
+      tasks_link: crwdns5270:0crwdne5270:0
+      title: crwdns5272:0crwdne5272:0
+      title_accepted: crwdns5274:0crwdne5274:0
+      title_open: crwdns5276:0crwdne5276:0
+    workgroup:
+      title: crwdns5278:0%{workgroup}crwdne5278:0
+      title_all: crwdns5280:0crwdne5280:0
+  ui:
+    actions: crwdns5282:0crwdne5282:0
+    back: crwdns5284:0crwdne5284:0
+    cancel: crwdns5286:0crwdne5286:0
+    close: crwdns5288:0crwdne5288:0
+    confirm_delete: crwdns5290:0%{name}crwdne5290:0
+    confirm_restore: crwdns5292:0%{name}crwdne5292:0
+    copy: crwdns5294:0crwdne5294:0
+    delete: crwdns5296:0crwdne5296:0
+    download: crwdns5298:0crwdne5298:0
+    edit: crwdns5300:0crwdne5300:0
+    marks:
+      close: "crwdns5302:0crwdne5302:0"
+      success: crwdns5304:0crwdne5304:0
+    or_cancel: crwdns5306:0crwdne5306:0
+    please_wait: crwdns5308:0crwdne5308:0
+    restore: crwdns5310:0crwdne5310:0
+    save: crwdns5312:0crwdne5312:0
+    search_placeholder: crwdns5314:0crwdne5314:0
+    show: crwdns5316:0crwdne5316:0
+  views:
+    pagination:
+      first: "crwdns5318:0crwdne5318:0"
+      last: "crwdns5320:0crwdne5320:0"
+      next: "crwdns5322:0crwdne5322:0"
+      previous: "crwdns5324:0crwdne5324:0"
+      truncate: "crwdns5326:0crwdne5326:0"
+  workgroups:
+    edit:
+      title: crwdns5328:0crwdne5328:0
+    error_last_admin_group: crwdns5330:0crwdne5330:0
+    error_last_admin_role: crwdns5332:0crwdne5332:0
+    index:
+      title: crwdns5334:0crwdne5334:0
+    update:
+      notice: crwdns5336:0crwdne5336:0
