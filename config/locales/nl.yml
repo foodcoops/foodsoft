@@ -46,9 +46,17 @@ nl:
       financial_transaction:
         amount: Bedrag
         created_on: Datum
+        financial_transaction_class: Financial transaction class
+        financial_transaction_type: Financial transaction type
         note: Notitie
         ordergroup: Huishouden
         user: Ingevuld door
+      financial_transaction_class:
+        name: Name
+      financial_transaction_type:
+        name: Name
+        financial_transaction_class: Financial transaction class
+        name_short: Short Name
       group_order:
         ordergroup: Huishouden
         price: Totaal bestelling
@@ -88,7 +96,7 @@ nl:
         order_id: Bestelling
         ordergroup_id: Bestelgroep
         private: Privé
-        recipient_tokens: Geadresseerden
+        recipient_tokens: "Geadresseerden"
         send_method:
           all: Verzenden naar alle leden
           messagegroup: Verzenden naar leden van een berichtengroep
@@ -215,6 +223,7 @@ nl:
         role_finance: Financiën
         role_invoices: Facturen
         role_orders: Bestellingen
+        role_pickups: Pickup days
         role_suppliers: Leveranciers
         user_tokens: Leden
     errors:
@@ -236,15 +245,20 @@ nl:
     models:
       article: Artikel
       article_category: Categorie
+      bank_transaction: Bank transaction
       delivery: Levering
       financial_transaction: Financiële transactie
+      financial_transaction_class: Financial transaction class
+      financial_transaction_type: Financial transaction type
       invoice: Factuur
       message: Bericht
       messagegroup: Berichtengroep
       order: Bestelling
       order_article: Bestellingsartikel
       order_comment: Commentaar
-      ordergroup: Huishouden
+      ordergroup:
+        one: Ordergroup
+        other: Ordergroups
       stock_article: Voorraadartikel
       stock_taking: Inventaris
       supplier: Leverancier
@@ -292,6 +306,22 @@ nl:
       update:
         notice: Configuratie opgeslagen.
     confirm: Weet je het zeker?
+    finances:
+      index:
+        first_paragraph: Here you can manage the financial transaction classes and the corresponding financial transaction types. Every financial transaction has a type, which you have to select at every transaction, if you created more than one type. The financial transaction classes can be use to group the financial transaction types and will be shown as additional columns in the account overview, if there have been created more than one.
+        new_financial_transaction_class: Add new financial transaction class
+        title: Finances
+      transaction_types:
+        name: Name
+        new_financial_transaction_type: Add new financial transaction type
+    financial_transaction_classes:
+      form:
+        title_edit: Edit financial transaction class
+        title_new: Add new financial transaction class
+    financial_transaction_types:
+      form:
+        title_edit: Edit financial transaction type
+        title_new: Add new financial transaction type
     mail_delivery_status:
       destroy_all:
         notice: Alle emailproblemen zijn verwijderd
@@ -430,7 +460,7 @@ nl:
       unit_quantity_short: Colli
     controller:
       create_from_upload:
-        notice: Er zijn %{count} nieuwe artikelen opgeslagen.
+        notice: "Er zijn %{count} nieuwe artikelen opgeslagen."
       error_invalid: Er zijn artikelen die een fout hebben
       error_nosel: Geen artikelen geselecteerd
       error_parse: "%{msg} ... in regel %{line}"
@@ -457,7 +487,7 @@ nl:
       note: 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestellingsnummer.'
       submit: Alle artikelen bijwerken
       title: Alle artikelen van %{supplier} bewerken
-      warning: Let op, alle artikelen worden bijgewerkt!
+      warning: 'Let op, alle artikelen worden bijgewerkt!'
     form:
       title_edit: Artikel bewerken
       title_new: Nieuw artikel toevoegen
@@ -506,7 +536,7 @@ nl:
         title: Bijwerken ...
         update_msg:
           one: Er moet éen artikel bijgewerkt worden.
-          other: Er moeten %{count} artikelen bijgewerkt worden.
+          other: "Er moeten %{count} artikelen bijgewerkt worden."
       upnew:
         body_count:
           one: Er is éen nieuw artikel.
@@ -622,6 +652,11 @@ nl:
       pdf_font_size: Tekstgrootte
       pdf_page_size: Paginaformaat
       price_markup: Foodcoop marge
+      printer_print_order_articles: Print article PDF
+      printer_print_order_fax: Print fax PDF
+      printer_print_order_groups: Print group PDF
+      printer_print_order_matrix: Print matrix PDF
+      printer_token: Secret token
       stop_ordering_under: Minimum appelpunten
       tasks_period_days: Periode
       tasks_upfront_days: Vantevoren
@@ -635,6 +670,7 @@ nl:
       use_iban: IBAN gebruiken
       use_messages: Berichten
       use_nick: Bijnamen gebruiken
+      use_printer: Use printer
       use_wiki: Wiki gebruiken
       webstats_tracking_code: Tracking code
     tabs:
@@ -713,7 +749,7 @@ nl:
       title_select_stock_articles: 1. Kies voorraadartikelen
     index:
       confirm_delete: Zeker weten?
-      new_delivery: Nieuwe levering maken voor %{supplier}
+      new_delivery: 'Nieuwe levering maken voor %{supplier}'
       title: "%{supplier} leveringen"
     invoice_amount: Factuurbedrag
     invoice_net_amount: Netto factuurbedrag
@@ -750,9 +786,12 @@ nl:
       no_right: Je hebt niet genoeg rechten om het document te verwijderen
       notice: Document is verwijderd
     form:
-      title: Nieuw document
+      new: New Document
+      new_folder: new Folder
+      submit: Create
     index:
       new: Nieuw document uploaden
+      new_folder: Create new folder
       title: Documenten
     multiple_orders_by_articles:
       filename: Huidige bestellingen per artikel
@@ -770,13 +809,13 @@ nl:
     order_fax:
       filename: Bestelling %{name}-%{date} - Fax
       rows:
-      - Nummer
-      - Aantal
-      - Naam
-      - Colli
-      - Eenheid
-      - Prijs/eenh.
-      - Subtotaal
+        - Nummer
+        - Aantal
+        - Naam
+        - Colli
+        - Eenheid
+        - Prijs/eenh.
+        - Subtotaal
       total: Totaal
     order_matrix:
       filename: Bestelling %{name}-%{date} - Sorteermatrix
@@ -814,6 +853,8 @@ nl:
         first_paragraph: 'Wanneer de bestelling afgerekend wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
         or_cancel: of terug naar balans
         title: Bestelling afrekenen
+      edit_note:
+        title: Bewerk ordernotitie
       edit_results_by_articles:
         add_article: Artikel toevoegen
         amount: Aantal
@@ -874,8 +915,20 @@ nl:
         reload: Samenvatting verversen
         with_extra_charge: 'inclusief marge:'
         without_extra_charge: 'zonder marge:'
-      edit_note:
-        title: Bewerk ordernotitie
+    bank_accounts:
+      controller:
+        import:
+          notice: '%{count} new transactions have been imported'
+      index:
+        account_statement: Account statement
+        title: Bank Accounts
+    bank_transactions:
+      index:
+        title: Bank transactions for %{name} (%{balance})
+      show:
+        belongs_to_supplier: belongs to supplier
+        belongs_to_user: belongs to user
+        in_ordergroup: in ordergroup
     create:
       notice: Rekening is gemaakt.
     financial_links:
@@ -904,6 +957,7 @@ nl:
         add_all_ordergroups: Alle huishoudens toevoegen
         new_ordergroup: Nog een huishouden toevoegen
         save: Transactie opslaan
+        set_balance: Set the balance of the ordergroup to the entered amount.
         sidebar: Hier kun je meerdere tegoeden tegelijk bijwerken. Bijvoorbeeld alle overschrijvingen van leden van een bankafschrift.
         title: Meerdere tegoeden bijwerken
       ordergroup:
@@ -1044,7 +1098,7 @@ nl:
       sum: Som
       title: Jouw bestelling voor %{order}
     switch_order:
-      remaining: nog %{remaining}
+      remaining: "nog %{remaining}"
       title: Lopende bestellingen
     update:
       error_general: Er is een probleem opgetreden, de bestelling kon niet bijgewerkt worden.
@@ -1059,6 +1113,7 @@ nl:
       role_finance: Financiën
       role_invoices: Rekeningen
       role_orders: Bestelling
+      role_pickups: Pickup days
       role_suppliers: Leveranciers
       show_google_maps: Op Google maps bekijken
       sort_by: Sorteren op %{text}
@@ -1079,16 +1134,16 @@ nl:
     submit:
       invite:
         create: uitnodiging versturen
+      printer_job:
+        create: create printer job
       message:
         create: bericht versturen
     tasks:
-      required_users: Nog %{count} leden nodig!
+      required_users: "Nog %{count} leden nodig!"
       task_title: "%{name} (%{duration}u)"
   home:
     apple_bar:
-      desc: |-
-        Deze balk laat zien hoeveel taken je gedaan hebt per bestelhoeveelheid, vergeleken met het gemiddelde van de foodcoop.
-        Praktisch: voor iedere %{amount} aan totale bestellingen moet je een taak te doen!
+      desc: "Deze balk laat zien hoeveel taken je gedaan hebt per bestelhoeveelheid, vergeleken met het gemiddelde van de foodcoop.\nPraktisch: voor iedere %{amount} aan totale bestellingen moet je een taak te doen!"
       more_info: Meer informatie
       points: 'Appelpuntenstand: %{points}'
       warning: Opgelet, als je minder dan %{threshold} appelpunten hebt, kun je geen bestelling plaatsen!
@@ -1099,7 +1154,7 @@ nl:
         title: Nieuwste berichten
         view_all:
           messages: Alle berichten
-          text: "%{messages} of %{threads} bekijken"
+          text: '%{messages} of %{threads} bekijken'
           threads: conversaties
       my_ordergroup:
         last_update: Laatst gewijzigd %{when} geleden
@@ -1227,7 +1282,7 @@ nl:
     from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Uitnodiging voor de foodcoop
-      text: |-
+      text: |
         Hallo!
 
         %{user} <%{mail}> heeft je uitgenodigd om deel te worden van de groep "%{group}".
@@ -1237,7 +1292,7 @@ nl:
         Groeten van de foodcoop.
     negative_balance:
       subject: Negatief tegoed
-      text: |-
+      text: |
         Beste %{group},
 
         Je tegoed is onder nul gekomen op %{when}: %{balance}
@@ -1250,7 +1305,7 @@ nl:
         Hartlijke groet van %{foodcoop}.
     not_enough_users_assigned:
       subject: '"%{task}" heeft nog mensen nodig!'
-      text: |-
+      text: |
         Beste %{user},
 
         De taak '%{task}' van jouw werkgroep op %{when} kan nog iemand gebruiken!
@@ -1276,7 +1331,7 @@ nl:
         Vriendelijke groet van %{foodcoop}.
     order_result_supplier:
       subject: Nieuwe bestelling voor %{name}
-      text: |-
+      text: |
         Beste mijnheer/mevrouw,
 
         Foodcoop %{foodcoop} wil graag een bestelling plaatsen.
@@ -1288,7 +1343,7 @@ nl:
         %{foodcoop}
     reset_password:
       subject: Nieuw wachtwoord voor %{username}
-      text: |-
+      text: |
         Beste %{user},
 
         Jij (of iemand anders) heeft een nieuw wachtwoord aangevraagd voor het foodcoop ordersysteem.
@@ -1300,11 +1355,11 @@ nl:
     upcoming_tasks:
       nextweek: 'Taken voor komende week:'
       subject: Er is een taak te doen!
-      text0: |-
+      text0: |
         Beste %{user},
 
         Je bent opgegeven voor "%{task}". Deze taak is morgen te vervullen (%{when})!
-      text1: |-
+      text1: |
         Je taken: %{user_tasks_url}
 
         Groeten van %{foodcoop}.
@@ -1367,6 +1422,7 @@ nl:
       title: Nieuw bericht
     show:
       all_messages: Berichtenoverzicht
+      change_visibility: 'Change'
       from: 'Van:'
       group: 'Groep:'
       reply: Antwoorden
@@ -1375,18 +1431,27 @@ nl:
       subject: 'Onderwerp:'
       title: Bericht lezen
       to: 'Aan:'
+      visibility: 'Visibility:'
+      visibility_private: 'Private'
+      visibility_public: 'Public'
     thread:
       all_message_threads: Alle conversaties
       reply: Antwoord
+    toggle_private:
+      not_allowed: You can not change the visibility of the message.
   messages_mailer:
     foodsoft_message:
-      footer: |-
+      footer: |
         Antwoorden: %{reply_url}
         Bericht online lezen: %{msg_url}
         Berichtinstellingen: %{profile_url}
+      footer_group: |
+        Sent to group: %{group}
   model:
     delivery:
       each_stock_article_must_be_unique: In een levering mag ieder voorraadsartikel maar een keer voorkomen.
+    financial_transaction_type:
+      no_delete_last: At least one financial transaction type must exist.
     group_order:
       stock_ordergroup_name: Voorraad (%{user})
     invoice:
@@ -1422,6 +1487,7 @@ nl:
     finances:
       accounts: Ledenbetalingen
       balancing: Bestellingen afrekenen
+      bank_accounts: Bank Accounts
       home: Overzicht
       invoices: Facturen
       title: Financiën
@@ -1433,6 +1499,8 @@ nl:
       archive: Mijn bestellingen
       manage: Beheer bestellingen
       ordering: Plaats bestelling!
+      pickups: Pickup days
+      printer_jobs: Printer jobs
       title: Bestellingen
     tasks: Taken
     wiki:
@@ -1537,6 +1605,7 @@ nl:
       confirm_end: |-
         Wil je de bestelling %{order} echt sluiten?
         Hierna kan zij niet opnieuw geopend worden.
+      confirm_create_printer_job: A printer job for this order has been created already. Do you want to create a new one?
       confirm_send_to_supplier: De bestelling is al naar de leverancier gestuurd op %{when}. Wil je deze opnieuw verzenden?
       create_invoice: Rekening toevoegen
       description1_order: "%{state} order van %{supplier} geopend door %{who},"
@@ -1654,6 +1723,17 @@ nl:
       title: "%{title} - versie %{version}"
       title_version: Versie
       view_current: Huidige versie bekijken
+  pickups:
+    document:
+      empty_selection: At least one order must be selected.
+      filename: Pickup for %{date}
+      invalid_document: Invalid document type
+      title: Pickup for %{date}
+    index:
+      article_pdf: Article PDF
+      group_pdf: Group PDF
+      matrix_pdf: Matrix PDF
+      title: Pickup days
   sessions:
     logged_in: Ingelogd!
     logged_out: Uitgelogd!
@@ -1665,6 +1745,18 @@ nl:
       nojs: Opgelet, cookies en javascript moeten toegelaten worden! %{link} uitzetten, alsjeblieft.
       noscript: NoScript
       title: Foodsoft aanmelden
+  printer_jobs:
+    create:
+      notice: Created %{count} printer jobs.
+    destroy:
+      notice: Printer job has been deleted.
+    index:
+      finished: Finished
+      pending: Pending
+      queued: Waiting for order to close
+      title: Printer jobs
+    show:
+      title: Printer job %{id}
   shared:
     articles:
       ordered: Besteld
@@ -1750,7 +1842,7 @@ nl:
         settings_group:
           messages: Berichten
           privacy: Privacy
-    'no': Nee
+    'no': 'Nee'
     options:
       settings:
         profile:
@@ -1763,7 +1855,7 @@ nl:
     required:
       mark: "*"
       text: verplicht
-    'yes': Ja
+    'yes': 'Ja'
   stock_takings:
     create:
       notice: Inventaris is opgenomen.
@@ -1950,6 +2042,7 @@ nl:
     please_wait: Een moment alstublieft...
     restore: Herstellen
     save: Opslaan
+    search_placeholder: Search ...
     show: Tonen
   views:
     pagination:
