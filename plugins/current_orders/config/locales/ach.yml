@@ -1,0 +1,73 @@
+ach:
+  config:
+    hints:
+      use_current_orders: crwdns5338:0crwdne5338:0
+    keys:
+      use_current_orders: crwdns5340:0crwdne5340:0
+  current_orders:
+    articles:
+      article:
+        counts: 'crwdns5342:0%{ordergroups}crwdnd5342:0%{articles}crwdne5342:0'
+        no_selection: crwdns5344:0crwdne5344:0
+      article_info:
+        origin_in: crwdns5346:0%{origin}crwdne5346:0
+        supplied_by: crwdns5348:0%{supplier}crwdne5348:0
+        supplied_and_made_by: crwdns5350:0%{manufacturer}crwdne5350:0
+        supplied_by_made_by: crwdns5352:0%{supplier}crwdnd5352:0%{manufacturer}crwdne5352:0
+        unit: crwdns5354:0%{unit}crwdne5354:0
+        from: crwdns5356:0%{supplier}crwdne5356:0
+      form:
+        article_placeholder: crwdns5358:0crwdne5358:0
+        current_orders: crwdns5360:0crwdne5360:0
+      index:
+        title: crwdns5362:0crwdne5362:0
+      ordergroups:
+        piece: crwdns5364:0crwdne5364:0
+        unit: crwdns5366:0crwdne5366:0
+        add_new: crwdns5368:0crwdne5368:0
+      show:
+        title: ! 'crwdns5370:0%{name}crwdne5370:0'
+    navigation:
+      receive: crwdns5372:0crwdne5372:0
+      articles: crwdns5374:0crwdne5374:0
+      ordergroups: crwdns5376:0crwdne5376:0
+    group_orders:
+      index:
+        title: crwdns5378:0crwdne5378:0
+    ordergroups:
+      articles:
+        add_new: crwdns5380:0crwdne5380:0
+        no_selection: crwdns5382:0crwdne5382:0
+      form:
+        ordergroup_placeholder: crwdns5384:0crwdne5384:0
+      index:
+        title: crwdns5386:0crwdne5386:0
+      payment_bar:
+        account_balance: crwdns5388:0crwdne5388:0
+        new_pin: crwdns5390:0crwdne5390:0
+        new_transaction: crwdns5392:0crwdne5392:0
+        payment: ! 'crwdns5394:0crwdne5394:0'
+      show:
+        title: crwdns5396:0%{name}crwdne5396:0
+    orders:
+      receive:
+        title: crwdns5398:0crwdne5398:0
+        no_finished_orders: crwdns5400:0crwdne5400:0
+  documents:
+    multiple_orders_by_articles:
+      filename: crwdns5402:0crwdne5402:0
+      title: crwdns5404:0crwdne5404:0
+    multiple_orders_by_groups:
+      filename: crwdns5406:0crwdne5406:0
+      title: crwdns5408:0crwdne5408:0
+  helpers:
+    current_orders:
+      pay_done: crwdns5410:0crwdne5410:0
+      pay_none: crwdns5412:0crwdne5412:0
+      pay_amount: crwdns5414:0%{amount}crwdne5414:0
+  js:
+    current_orders:
+      articles:
+        above: 'crwdns5416:0%{count}crwdne5416:0'
+        below: 'crwdns5418:0%{count}crwdne5418:0'
+        equal: crwdns5420:0crwdne5420:0
