@@ -257,8 +257,8 @@ nl:
       order_article: Bestellingsartikel
       order_comment: Commentaar
       ordergroup:
-        one: Ordergroup
-        other: Ordergroups
+        one: Huishouden
+        other: Huishouden
       stock_article: Voorraadartikel
       stock_taking: Inventaris
       supplier: Leverancier
@@ -310,9 +310,9 @@ nl:
       index:
         first_paragraph: Here you can manage the financial transaction classes and the corresponding financial transaction types. Every financial transaction has a type, which you have to select at every transaction, if you created more than one type. The financial transaction classes can be use to group the financial transaction types and will be shown as additional columns in the account overview, if there have been created more than one.
         new_financial_transaction_class: Add new financial transaction class
-        title: Finances
+        title: Financiën
       transaction_types:
-        name: Name
+        name: Naam
         new_financial_transaction_type: Add new financial transaction type
     financial_transaction_classes:
       form:
@@ -670,7 +670,7 @@ nl:
       use_iban: IBAN gebruiken
       use_messages: Berichten
       use_nick: Bijnamen gebruiken
-      use_printer: Use printer
+      use_printer: Printer gebruiken
       use_wiki: Wiki gebruiken
       webstats_tracking_code: Tracking code
     tabs:
@@ -786,12 +786,12 @@ nl:
       no_right: Je hebt niet genoeg rechten om het document te verwijderen
       notice: Document is verwijderd
     form:
-      new: New Document
-      new_folder: new Folder
-      submit: Create
+      new: Nieuw document
+      new_folder: Nieuwe map
+      submit: Aanmaken
     index:
       new: Nieuw document uploaden
-      new_folder: Create new folder
+      new_folder: Nieuwe map
       title: Documenten
     multiple_orders_by_articles:
       filename: Huidige bestellingen per artikel
