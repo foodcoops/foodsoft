@@ -576,7 +576,6 @@ nl:
       tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
-      use_current_orders: De current_orders plugin aanzetten. Hiermee kunnen leden met bestelling-toegang bestelaantallen van leden aanpassen in meerdere bestellingen tegelijk. Hiervoor zijn drie nieuwe items in het Bestellingen-menu. Bedoeld voor gebruik op een ophaaldag.
       use_documents: Geeft een simpele manier om documenten te delen in het foodcoop menu.
       use_iban: Om leverancier en gebruiker een extra veld te geven voor het internationale bankrekeningnummer (IBAN).
       use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
@@ -630,7 +629,6 @@ nl:
       tolerance_is_costly: Tolerantie is duur
       use_apple_points: Appelpunten
       use_boxfill: Dozen vullen fase
-      use_current_orders: Extra verdeelschermen
       use_documents: Documenten delen
       use_iban: IBAN gebruiken
       use_messages: Berichten
@@ -647,54 +645,6 @@ nl:
       others: Overig
       payment: Financiën
       tasks: Taken
-  current_orders:
-    articles:
-      article:
-        counts: "%{ordergroups} huishoudens bestelden %{articles} verschillende artikelen."
-        no_selection: Kies een artikel om te zien wie het besteld heeft, of download verdeellijsten rechtsboven.
-      article_info:
-        from: van %{supplier}
-        origin_in: uit %{origin}
-        supplied_and_made_by: gemaakt door %{manufacturer}
-        supplied_by: van %{supplier}
-        supplied_by_made_by: van %{supplier} gemaakt door %{manufacturer}
-        unit: per %{unit}
-      form:
-        article_placeholder: Zoek artikelen...
-        current_orders: Alle huidige bestellingen
-      index:
-        title: Artikelen verdelen
-      ordergroups:
-        add_new: Huishouden toevoegen...
-        piece: st
-        unit: eenh
-      show:
-        title: "%{name} verdelen"
-    group_orders:
-      index:
-        title: Je huidige bestellingen
-    navigation:
-      articles: Verdelen
-      ordergroups: Ledenbestellingen
-      receive: Ontvangen
-    ordergroups:
-      articles:
-        add_new: Artikel toevoegen...
-        no_selection: Kies een huishouden om de artikelen te tonen.
-      form:
-        ordergroup_placeholder: Kies een huishouden...
-      index:
-        title: Artikelen voor huishouden
-      payment_bar:
-        account_balance: Account balance
-        new_transaction: Nieuwe transactie
-        payment: 'Betaling:'
-      show:
-        title: Artikelen voor %{name}
-    orders:
-      receive:
-        no_finished_orders: Er zijn momenteel geen bestellingen die ontvangen hoeven te worden.
-        title: Bestellingen ontvangen
   deliveries:
     add_stock_change:
       how_many_units: 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
@@ -754,12 +704,6 @@ nl:
     index:
       new: Nieuw document uploaden
       title: Documenten
-    multiple_orders_by_articles:
-      filename: Huidige bestellingen per artikel
-      title: Huidige bestellingen - per artikel
-    multiple_orders_by_groups:
-      filename: Huidige bestellingen per huishouden
-      title: Huidige bestellingen - per huishouden
     order_by_articles:
       filename: Bestelling %{name}-%{date} - Artikellijst
       title: 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
@@ -1062,10 +1006,6 @@ nl:
       role_suppliers: Leveranciers
       show_google_maps: Op Google maps bekijken
       sort_by: Sorteren op %{text}
-    current_orders:
-      pay_amount: Te betalen %{amount}
-      pay_done: Alles betaald
-      pay_none: Niets te betalen
     deliveries:
       new_invoice: Nieuwe factuur
       show_invoice: Factuur tonen
@@ -1168,11 +1108,6 @@ nl:
       body: "<p>Hier kun je iemand die nog geen lid is, uitnodigen voor de groep <b>%{group}</b>.</p>"
     success: Persoon is uitgenodigd.
   js:
-    current_orders:
-      articles:
-        above: "%{count} meer dan<br>beschikbaar"
-        below: "%{count} blijft over"
-        equal: alles verdeeld
     ordering:
       confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
   layouts:

@@ -580,7 +580,6 @@ es:
       tolerance_is_costly: Pide lo que más permita la tolerancia de los miembros (en lugar de sólo lo necesario para llenar la última caja). Permitir esto también incluye la tolerancia en el precio final del pedido abierto de cada miembro.
       use_apple_points: Cuando el sistema de puntos-manzana está habilitado los miembros deberán realizar algunas tareas para poder hacer pedidos.
       use_boxfill: Cuando está activado, cerca del cierre de un pedido los miembros no podrán cambiar su pedido a menos que se incremente el valor pedido total. Esto ayudará a llenar las cajas que faltan. Igualmente deberás decidir una fecha de llenado de cajas para los pedidos.
-      use_current_orders: 
       use_documents: Agregar una página básica de compartir documentos al menú de la cooperativa.
       use_iban: Cuando esta opción está habilitada, el proveedor y el usuario pueden guardan también su número de cuenta bancaria internacional (IBAN).
       use_messages: Permitir que los miembros de comuniquen unos con otros dentro de Foodsoft.
@@ -634,7 +633,6 @@ es:
       tolerance_is_costly: La tolerancia es prioritaria
       use_apple_points: Puntos-manzana
       use_boxfill: Fase de llenar las cajas
-      use_current_orders: Pantallas extra de distribución
       use_documents: Activar documentos
       use_iban: Usar IBAN
       use_messages: Mensajes
@@ -650,54 +648,6 @@ es:
       others: Otro
       payment: Finanzas
       tasks: Tareas
-  current_orders:
-    articles:
-      article:
-        counts: las células %{ordergroups} pidieron %{articles} diferentes artículos.
-        no_selection: Elige un artículo para ver quién lo ha pedido o descarga las listas de recogida a la derecha.
-      article_info:
-        from: de %{supplier}
-        origin_in: en %{origin}
-        supplied_and_made_by: hecho por %{manufacturer}
-        supplied_by: de %{supplier}
-        supplied_by_made_by: de %{supplier} hecho por %{manufacturer}
-        unit: por %{unit}
-      form:
-        article_placeholder: Busca artículos...
-        current_orders: Todos los pedidos activos
-      index:
-        title: Distribuye artículos
-      ordergroups:
-        add_new: Añade un grupo de pedido...
-        piece: pieza
-        unit: unidad
-      show:
-        title: "%{name}"
-    group_orders:
-      index:
-        title: Tus pedidos activos
-    navigation:
-      articles: Distribuye
-      ordergroups: Pedidos de los miembros
-      receive: Recibe
-    ordergroups:
-      articles:
-        add_new: Añade un artículo...
-        no_selection: Elige un grupo de pedido para ver los artículos.
-      form:
-        ordergroup_placeholder: Elige una célula...
-      index:
-        title: Artículos por grupo de pedido
-      payment_bar:
-        account_balance: Balance de cuenta
-        new_transaction: Nueva transacción
-        payment: 'Pago:'
-      show:
-        title: Artículos para %{name}
-    orders:
-      receive:
-        no_finished_orders: En este momento no hay pedidos que recibir.
-        title: Recibir pedidos
   deliveries:
     add_stock_change:
       how_many_units: 'Cuántas unidades (%{unit}) enviar? Nombre del artículo de stock: %{name}.'
@@ -757,12 +707,6 @@ es:
     index:
       new: Sube nuevo documento
       title: Documentos
-    multiple_orders_by_articles:
-      filename: Pedidos activos ordenados por artículo
-      title: Pedidos activos - por artículo
-    multiple_orders_by_groups:
-      filename: Pedidos activos ordenados por grupo
-      title: Pedidos activos - por grupo
     order_by_articles:
       filename: Pedido %{name}-%{date} - por artículos
       title: 'Pedido ordenado por artículos: %{name}, cerrado el %{date}'
@@ -1063,10 +1007,6 @@ es:
       role_suppliers: Proveedores
       show_google_maps: Muéstralo en Google maps
       sort_by: Ordena por %{text}
-    current_orders:
-      pay_amount: A pagar %{amount}
-      pay_done: Totalmente pagado
-      pay_none: Nada que pagar
     deliveries:
       new_invoice: Nueva factura
       show_invoice: Muestra la factura
@@ -1167,15 +1107,6 @@ es:
       body: "<p>Aquí puedes añadir a una persona al grupo <b>%{group}</b>, aunque todavía no sea miembro de la cooperativa de consumo.</p>"
     success: El usuario ha sido invitado.
   js:
-    current_orders:
-      articles:
-        above:
-          one: ''
-          other: "%{count} más<br>de los disponibles"
-        below:
-          one: ''
-          other: 'quedan todavía %{count} '
-        equal: todo distribuido
     ordering:
       confirm_change: Las modificaciones sobre este pedido se perderán cuando cambies el pedido. ¿Quieres perder los cambios que has hecho y continuar?
   layouts:

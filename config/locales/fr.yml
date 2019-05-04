@@ -576,7 +576,6 @@ fr:
       tolerance_is_costly: 
       use_apple_points: 
       use_boxfill: 
-      use_current_orders: 
       use_documents: 
       use_iban: 
       use_messages: 
@@ -630,7 +629,6 @@ fr:
       tolerance_is_costly: 
       use_apple_points: 
       use_boxfill: 
-      use_current_orders: 
       use_documents: 
       use_iban: 
       use_messages: Messages
@@ -646,54 +644,6 @@ fr:
       others: Autre
       payment: 
       tasks: 
-  current_orders:
-    articles:
-      article:
-        counts: 
-        no_selection: 
-      article_info:
-        from: de %{supplier}
-        origin_in: 
-        supplied_and_made_by: fait par %{manufacturer}
-        supplied_by: de %{supplier}
-        supplied_by_made_by: 
-        unit: 
-      form:
-        article_placeholder: 
-        current_orders: 
-      index:
-        title: 
-      ordergroups:
-        add_new: 
-        piece: 
-        unit: 
-      show:
-        title: 
-    group_orders:
-      index:
-        title: 
-    navigation:
-      articles: 
-      ordergroups: 
-      receive: 
-    ordergroups:
-      articles:
-        add_new: 
-        no_selection: 
-      form:
-        ordergroup_placeholder: 
-      index:
-        title: 
-      payment_bar:
-        account_balance: 
-        new_transaction: 
-        payment: 
-      show:
-        title: Articles pour %{name}
-    orders:
-      receive:
-        no_finished_orders: 
-        title: 
   deliveries:
     add_stock_change:
       how_many_units: Combien d'unités (%{unit}) de l'article %{name} doivent-elles être livrées?
@@ -751,12 +701,6 @@ fr:
     index:
       new: 
       title: Documents
-    multiple_orders_by_articles:
-      filename: 
-      title: 
-    multiple_orders_by_groups:
-      filename: 
-      title: 
     new:
       title: 
     order_by_articles:
@@ -1065,10 +1009,6 @@ fr:
       role_suppliers: Fournisseur-e
       show_google_maps: Afficher la position sur Google maps
       sort_by: Trier par %{text}
-    current_orders:
-      pay_amount: 
-      pay_done: 
-      pay_none: 
     deliveries:
       new_invoice: Ajouter une nouvelle facture
       show_invoice: Afficher la facture
@@ -1174,11 +1114,6 @@ fr:
       body: "<p>Sur cette page, tu peux engrainer une personne qui ne fait pas encore partie de la Boufcoop à rejoindre la cellule <b>%{group}</b>"
     success: La_le membre a été engrainéE avec succès!
   js:
-    current_orders:
-      articles:
-        above: 
-        below: 
-        equal: 
     ordering:
       confirm_change: Les changements apportés à cette commande vont être perdus. Est-ce que tu veux vraiment continuer?
   layouts:
