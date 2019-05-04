@@ -684,11 +684,6 @@ fr:
     suppliers_overview: Liste des fournisseur-e-s
     update:
       notice: La commande a été actualisée
-  discourse:
-    callback:
-      invalid_nonce: 
-      invalid_signature: 
-      logged_in: 
   documents:
     create:
       error: 

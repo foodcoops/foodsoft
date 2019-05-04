@@ -721,11 +721,6 @@ en:
     suppliers_overview: Supplier overview
     update:
       notice: Delivery was updated.
-  discourse:
-    callback:
-      invalid_nonce: Invalid nonce
-      invalid_signature: Invalid signature
-      logged_in: Logged in!
   documents:
     create:
       error: 'Document or folder could not be created: %{error}'
