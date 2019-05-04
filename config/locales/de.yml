@@ -603,7 +603,6 @@ de:
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
-      use_current_orders: Aktiviere Plugin zur erweiterten Bearbeitung laufender Bestellungen. Dies erlaubt Mitgliedern mit Bestellrechten, mehrere Bestellungen gleichzeitig zu bearbeiten (in drei zusätzlichen Ansichten unter dem Menüpunkt Bestellungen). Insbesondere hilfreich für Anpassungen an Liefertagen.
       use_documents: Einfache Dokumentenverwaltung aktivieren
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
@@ -662,7 +661,6 @@ de:
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
       use_apple_points: Apfelpunkte verwenden
       use_boxfill: Kistenauffüllphase
-      use_current_orders: Erweiterte Bearbeitungsansicht
       use_documents: Dokumente verwenden
       use_iban: IBAN verwenden
       use_messages: Nachrichten
@@ -680,54 +678,6 @@ de:
       others: Sonstiges
       payment: Finanzen
       tasks: Aufgaben
-  current_orders:
-    articles:
-      article:
-        counts: "%{ordergroups} Bestellgruppen bestellten %{articles} verschiedene Produkte."
-        no_selection: Wähle einen Artikel, um anzuzeigen wer ihn bestellt hat oder downloade eine Abholliste rechts.
-      article_info:
-        from: von %{supplier}
-        origin_in: in %{origin}
-        supplied_and_made_by: produziert von %{manufacturer}
-        supplied_by: von %{supplier}
-        supplied_by_made_by: von %{supplier} produziert von %{manufacturer}
-        unit: pro %{unit}
-      form:
-        article_placeholder: Artikel suchen...
-        current_orders: Alle Aktuelle Bestellungen
-      index:
-        title: Artikel verteilen
-      ordergroups:
-        add_new: Bestellgruppe hinzufügen
-        piece: St.
-        unit: Einheit
-      show:
-        title: "%{name}"
-    group_orders:
-      index:
-        title: Deine Aktuelle Bestellungen
-    navigation:
-      articles: Verteilen
-      ordergroups: Gruppenbestellungen
-      receive: In Empfang nehmen
-    ordergroups:
-      articles:
-        add_new: Artikel hinzufügen...
-        no_selection: Wahl eine Bestellgruppe um die Artikel zu zeigen.
-      form:
-        ordergroup_placeholder: Bestellgruppe auswählen...
-      index:
-        title: Artikel für Bestellgruppe
-      payment_bar:
-        account_balance: Kontostand
-        new_transaction: Neue Transaktion
-        payment: 'Zahlung:'
-      show:
-        title: Artikel für %{name}
-    orders:
-      receive:
-        no_finished_orders: Jetzt gibt es keine Bestellungen in Empfang zu nehmen.
-        title: Bestellungen in Empfang nehmen
   deliveries:
     add_stock_change:
       how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
@@ -790,12 +740,6 @@ de:
       new: Neues Dokument anlegen
       new_folder: Neuen Ordner anlegen
       title: Dokumente
-    multiple_orders_by_articles:
-      filename: Artikelsortierung aktueller Bestellungen
-      title: Aktuelle Bestellungen - Artikelsortierung
-    multiple_orders_by_groups:
-      filename: Gruppensortierung aktueller Bestellungen
-      title: Aktuelle Bestellungen - Gruppensortierung
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
       title: 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
@@ -1100,10 +1044,6 @@ de:
       role_suppliers: Lieferanten
       show_google_maps: Show it on Google maps
       sort_by: Nach %{text} sortieren
-    current_orders:
-      pay_amount: zu bezahlen %{amount}
-      pay_done: vollständig bezahlt
-      pay_none: nichts zu bezahlen
     deliveries:
       new_invoice: Rechnung anlegen
       show_invoice: Rechnung anzeigen
@@ -1206,11 +1146,6 @@ de:
       body: "<p>Hier kannst du eine Person in die Gruppe <b>%{group}</b> einladen, die noch nicht Mitglied der Foodcoop ist.</p>"
     success: Benutzer/in wurde erfolgreich eingeladen.
   js:
-    current_orders:
-      articles:
-        above: "%{count} mehr<br>als verfügbar"
-        below: "%{count} übrig"
-        equal: alle verteilt
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
