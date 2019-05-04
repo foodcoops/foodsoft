@@ -37,12 +37,6 @@ es:
         delivered_on: Fecha entrega
         note: Note
         supplier: Proveedor
-      document:
-        created_at: Creado en
-        created_by: Creado por
-        data: Datos
-        mime: Tipo MIME
-        name: Nombre
       financial_transaction:
         amount: Importe
         created_on: Fecha
@@ -547,7 +541,6 @@ es:
       currency_space: Agregar un espacio después del símbolo de moneda.
       currency_unit: Símbolo de moneda para mostrar precios.
       custom_css: Para modificar el diseño de este sitio, puedes ingresar modificaciones del estilo utilizando CSS. Dejar en blanco para usar el estilo por defecto.
-      documents_allowed_extension: Una lista de extensiones de archivo permitidas, separadas por espacios.
       email_from: Los emails aparecerán provenientes de esta dirección. Dejar en blanco para usar la dirección de contacto de la cooperativa.
       email_replyto: Ingresa esta dato cuando quieres recibir respuesta de los correos enviados por Foodsoft a una dirección diferente a la de arriba.
       email_sender: Los emails aparecerán como enviados por esta dirección. Para evitar que tus mensajes sean clasificados como spam, el servidor web podría tener que ser registrado en el record SPF del dominio de la dirección de correo.
@@ -580,7 +573,6 @@ es:
       tolerance_is_costly: Pide lo que más permita la tolerancia de los miembros (en lugar de sólo lo necesario para llenar la última caja). Permitir esto también incluye la tolerancia en el precio final del pedido abierto de cada miembro.
       use_apple_points: Cuando el sistema de puntos-manzana está habilitado los miembros deberán realizar algunas tareas para poder hacer pedidos.
       use_boxfill: Cuando está activado, cerca del cierre de un pedido los miembros no podrán cambiar su pedido a menos que se incremente el valor pedido total. Esto ayudará a llenar las cajas que faltan. Igualmente deberás decidir una fecha de llenado de cajas para los pedidos.
-      use_documents: Agregar una página básica de compartir documentos al menú de la cooperativa.
       use_iban: Cuando esta opción está habilitada, el proveedor y el usuario pueden guardan también su número de cuenta bancaria internacional (IBAN).
       use_messages: Permitir que los miembros de comuniquen unos con otros dentro de Foodsoft.
       use_nick: Muestra y utiliza apodos en lugar de nombres reales. Cuando activas esto debes chequear que todos los usuarios tengan apodo.
@@ -601,7 +593,6 @@ es:
       custom_css: CSS adicional
       default_locale: Idioma por defecto
       disable_invite: Desactivar invitaciones
-      documents_allowed_extension: Extensiones permitidas
       email_from: Dirección de email de origen
       email_replyto: Dirección reply-to
       email_sender: Dirección del remitente
@@ -633,7 +624,6 @@ es:
       tolerance_is_costly: La tolerancia es prioritaria
       use_apple_points: Puntos-manzana
       use_boxfill: Fase de llenar las cajas
-      use_documents: Activar documentos
       use_iban: Usar IBAN
       use_messages: Mensajes
       use_nick: Usa apodos
@@ -689,19 +679,6 @@ es:
     update:
       notice: El envío ha sido actualizado.
   documents:
-    create:
-      error: 'El documento no puede ser creado: %{error}'
-      not_allowed_mime: 
-      notice: Se ha creado el documento
-    destroy:
-      error: 'El documento no puede ser borrado: %{error}'
-      no_right: No puedes borrar este documento
-      notice: Se ha borrado el documento
-    form:
-      new: Nuevo Documento
-    index:
-      new: Sube nuevo documento
-      title: Documentos
     order_by_articles:
       filename: Pedido %{name}-%{date} - por artículos
       title: 'Pedido ordenado por artículos: %{name}, cerrado el %{date}'
@@ -1340,7 +1317,6 @@ es:
       suppliers: Proveedores/artículos
       title: Artículos
     dashboard: Escritorio
-    documents: Documentos
     finances:
       accounts: Administrar cuentas
       balancing: Pedidos de cuenta

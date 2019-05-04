@@ -1,0 +1,38 @@
+fr:
+  activerecord:
+    attributes:
+      document:
+        created_at: Créé le
+        created_by: Crée par
+        data:
+        mime:
+        name: Nom
+  config:
+    hints:
+      documents_allowed_extension:
+      use_documents:
+    keys:
+      documents_allowed_extension:
+      use_documents:
+  navigation:
+    documents: Documents
+  documents:
+    create:
+      error:
+      not_allowed_mime:
+      notice:
+    destroy:
+      error:
+      no_right:
+      notice:
+    index:
+      new:
+      title: Documents
+    multiple_orders_by_articles:
+      filename:
+      title:
+    multiple_orders_by_groups:
+      filename:
+      title:
+    new:
+      title:

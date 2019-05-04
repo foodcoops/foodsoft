@@ -37,12 +37,6 @@ de:
         delivered_on: Lieferdatum
         note: Notiz
         supplier: Lieferantin
-      document:
-        created_at: Erstellt am
-        created_by: Erstellt von
-        data: Daten
-        mime: MIME-Typ
-        name: Name
       financial_transaction:
         amount: Betrag
         created_on: Datum
@@ -570,7 +564,6 @@ de:
       currency_space: Leerzeichen beim Währungssymbol hinzufügen.
       currency_unit: Währungssymbol zur Anzeige von Preisen.
       custom_css: Um das Layout der Seite anzupassen, kannst Du CSS verwenden. Kann leer gelassen werden, um den Standard Stil zu verwenden.
-      documents_allowed_extension: Eine Liste an erlaubten Dateiendungen getrennt durch Leerzeichen.
       email_from: E-Mails werden so aussehen, als ob sie von dieser Adresse gesendet wurden. Kann leer gelassen werden, um die Kontaktadresse der Foodcoop zu benutzen.
       email_replyto: Setze diese Adresse, wenn Du Antworten auf Foodsoft E-Mails auf eine andere, als die oben angegebene Absenderadresse bekommen möchtest.
       email_sender: E-Mails werden so aussehen, als ob sie von dieser Adresse versendet wurden. Um zu vermeiden, dass E-Mails dadurch als Spam eingeordnet werden, muss der Webserver möglicherweise im SPF Eintrag der Domain der E-Mail Adresse eingetragen werden.
@@ -603,7 +596,6 @@ de:
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
-      use_documents: Einfache Dokumentenverwaltung aktivieren
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
@@ -624,7 +616,6 @@ de:
       custom_css: Angepasstes CSS
       default_locale: Standardsprache
       disable_invite: Einladungen deaktivieren
-      documents_allowed_extension: Erlaubte Endungen
       email_from: Absenderadresse
       email_replyto: Antwortadresse
       email_sender: Senderadresse
@@ -661,7 +652,6 @@ de:
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
       use_apple_points: Apfelpunkte verwenden
       use_boxfill: Kistenauffüllphase
-      use_documents: Dokumente verwenden
       use_iban: IBAN verwenden
       use_messages: Nachrichten
       use_nick: Benutzernamen verwenden
@@ -724,22 +714,6 @@ de:
       invalid_signature: Ungültige Signature
       logged_in: Angemeldet!
   documents:
-    create:
-      error: 'Dokument oder Ordner konnte nicht erstellt werden: %{error}'
-      not_allowed_mime: Der Dateityp "%{mime}" ist nicht erlaubt. Bitte kontaktiere einen Administrator um ihn freizuschalten.
-      notice: Dokument oder Ordner wurde erstellt
-    destroy:
-      error: 'Dokument oder Ordner konnt nicht gelöscht werden: %{error}'
-      no_right: Du hast nicht genügend Rechte um die Datei oder den Ordner zu löschen
-      notice: Dokument oder Ordner wurde gelöscht
-    form:
-      new: Neues Dokument
-      new_folder: Neuer Ordner
-      submit: Erstellen
-    index:
-      new: Neues Dokument anlegen
-      new_folder: Neuen Ordner anlegen
-      title: Dokumente
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
       title: 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
@@ -1398,7 +1372,6 @@ de:
       suppliers: Lieferanten/Artikel
       title: Artikel
     dashboard: Dashboard
-    documents: Dokumente
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen

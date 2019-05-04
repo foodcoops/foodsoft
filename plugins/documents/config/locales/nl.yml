@@ -1,0 +1,32 @@
+nl:
+  activerecord:
+    attributes:
+      document:
+        created_at: Upload op
+        created_by: Upload door
+        data: Data
+        mime: MIME-type
+        name: Naam
+  config:
+    hints:
+      documents_allowed_extension: Lijst van toegestane bestandsextensies, gescheiden door spaties.
+      use_documents: Geeft een simpele manier om documenten te delen in het foodcoop menu.
+    keys:
+      documents_allowed_extension: Toegestane extensies
+      use_documents: Documenten delen
+  navigation:
+    documents: Documenten
+  documents:
+    create:
+      error: 'Document kon niet gemaakt worden: %{error}'
+      not_allowed_mime: Het bestandstype "%{mime}" is niet toegestaan. Vraag de systeembeheerder het toe te staan.
+      notice: Document is gemaakt
+    destroy:
+      error: 'Document kon niet verwijderd worden: %{error}'
+      no_right: Je hebt niet genoeg rechten om het document te verwijderen
+      notice: Document is verwijderd
+    form:
+      title: Nieuw document
+    index:
+      new: Nieuw document uploaden
+      title: Documenten

@@ -37,12 +37,6 @@ fr:
         delivered_on: Date de réapprovisionnement
         note: Note
         supplier: Fournisseur-e
-      document:
-        created_at: Créé le
-        created_by: Crée par
-        data: 
-        mime: 
-        name: Nom
       financial_transaction:
         amount: Montant
         created_on: Date
@@ -543,7 +537,6 @@ fr:
       currency_space: 
       currency_unit: 
       custom_css: 
-      documents_allowed_extension: 
       email_from: 
       email_replyto: 
       email_sender: 
@@ -576,7 +569,6 @@ fr:
       tolerance_is_costly: 
       use_apple_points: 
       use_boxfill: 
-      use_documents: 
       use_iban: 
       use_messages: 
       use_nick: 
@@ -597,7 +589,6 @@ fr:
       custom_css: 
       default_locale: 
       disable_invite: 
-      documents_allowed_extension: 
       email_from: 
       email_replyto: 
       email_sender: 
@@ -629,7 +620,6 @@ fr:
       tolerance_is_costly: 
       use_apple_points: 
       use_boxfill: 
-      use_documents: 
       use_iban: 
       use_messages: Messages
       use_nick: 
@@ -685,19 +675,6 @@ fr:
     update:
       notice: La commande a été actualisée
   documents:
-    create:
-      error: 
-      not_allowed_mime: 
-      notice: 
-    destroy:
-      error: 
-      no_right: 
-      notice: 
-    index:
-      new: 
-      title: Documents
-    new:
-      title: 
     order_by_articles:
       filename: Commande %{name}-%{date} - Trier par
       title: 'Ordre des produits pour la commande: %{name}, clôturée le %{date}'
@@ -1341,7 +1318,6 @@ fr:
       suppliers: Annuaire
       title: Produits
     dashboard: Tableau de bord
-    documents: Documents
     finances:
       accounts: Crédits des cellules
       balancing: Décompte des commandes
