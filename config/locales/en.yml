@@ -573,7 +573,6 @@ en:
       currency_space: Whether to add whitespace after the currency symbol.
       currency_unit: Currency symbol for displaying prices.
       custom_css: To modify the layout of this site, you can enter style modifications using the cascading stylesheets (CSS) language. Leave blank for the default style.
-      documents_allowed_extension: A list of allowed filename extensions separated by spaces.
       email_from: Emails will appear to be from this email address. Leave empty to use the foodcoop's contact address.
       email_replyto: Set this when you want to receive replies from emails sent by Foodsoft on a different address than the above.
       email_sender: Emails will appear to be sent from this email address. To avoid emails sent being classified as spam, the webserver may need to be registered in the SPF record of the email address's domain.
@@ -606,7 +605,6 @@ en:
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
       use_boxfill: When enabled, near end of an order, members are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
-      use_documents: Add a basic document sharing page to the foodcoop menu.
       use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
       use_messages: Allow members to communicate with each other within Foodsoft.
       use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
@@ -627,7 +625,6 @@ en:
       custom_css: Custom CSS
       default_locale: Default language
       disable_invite: Disable invites
-      documents_allowed_extension: Allowed extensions
       email_from: From address
       email_replyto: Reply-to address
       email_sender: Sender address
@@ -664,7 +661,6 @@ en:
       tolerance_is_costly: Tolerance is costly
       use_apple_points: Apple points
       use_boxfill: Box-fill phase
-      use_documents: Enable documents
       use_iban: Use IBAN
       use_messages: Messages
       use_nick: Use nicknames
@@ -722,22 +718,6 @@ en:
     update:
       notice: Delivery was updated.
   documents:
-    create:
-      error: 'Document or folder could not be created: %{error}'
-      not_allowed_mime: The filetype "%{mime}" is not allowed. Please contact an administrator to whitelist it.
-      notice: Document or folder was created
-    destroy:
-      error: 'Document or folder could not be deleted: %{error}'
-      no_right: You do not have enough rights to delete the document or folder
-      notice: Document or folder was deleted
-    form:
-      new: New Document
-      new_folder: new Folder
-      submit: Create
-    index:
-      new: Upload new document
-      new_folder: Create new folder
-      title: Documents
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
       title: 'Order sorted by articles: %{name}, closed at %{date}'
@@ -1418,7 +1398,6 @@ en:
       suppliers: Suppliers/articles
       title: Articles
     dashboard: Dashboard
-    documents: Documents
     finances:
       accounts: Manage accounts
       balancing: Account orders
