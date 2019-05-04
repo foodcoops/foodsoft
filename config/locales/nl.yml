@@ -685,11 +685,6 @@ nl:
     suppliers_overview: Leverancieroverzicht
     update:
       notice: Levering is bijgewerkt.
-  discourse:
-    callback:
-      invalid_nonce: Onjuiste nonce
-      invalid_signature: Onjuiste digitale handtekening
-      logged_in: Ingelogd!
   documents:
     create:
       error: 'Document kon niet gemaakt worden: %{error}'

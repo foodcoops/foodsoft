@@ -688,11 +688,6 @@ es:
     suppliers_overview: Reseña del proveedor
     update:
       notice: El envío ha sido actualizado.
-  discourse:
-    callback:
-      invalid_nonce: 
-      invalid_signature: Firma inválida
-      logged_in: Estás adentro!
   documents:
     create:
       error: 'El documento no puede ser creado: %{error}'
