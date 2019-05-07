@@ -177,7 +177,7 @@ explained here.
 
 To avoid having to go through setting up all dependencies, you can also run Foodsoft
 within a docker image. While the default [`Dockerfile`](../Dockerfile) is setup for production,
-[`Dockerfile.dev`](../Dockerfile.dev) is meant for development. Even better, you can
-use docker-compose (using [`docker-compose.dev.yml`](../docker-compose.dev.yml)) to
+[`Dockerfile-dev`](../Dockerfile-dev) is meant for development. Even better, you can
+use docker-compose (using [`docker-compose-dev.yml`](../docker-compose-dev.yml)) to
 setup the whole stack at once.
 
