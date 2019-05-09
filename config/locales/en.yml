@@ -206,7 +206,7 @@ en:
         url: Homepage
       task:
         description: Description
-        done: Done?
+        done: Mark as Completed
         due_date: Due date
         duration: Duration
         name: Activity
@@ -1174,7 +1174,8 @@ en:
       message:
         create: send message
     tasks:
-      required_users: "%{count} members are still needed!"
+      required_users_unconfirmed: "%{count} members have not confirmed"
+      required_users: "%{count} members are still needed"
       task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
@@ -1836,7 +1837,7 @@ en:
     task_list:
       accept_task: Accept task
       done: Done
-      done_q: Done?
+      done_q: Mark Completed
       mark_done: Mark task as done
       reject_task: Reject task
       who: Who is doing it?
@@ -2054,7 +2055,7 @@ en:
       edit_group: Edit recurring
       hours: "%{count}h"
       mark_done: Mark task as done
-      reject_task: Reject task
+      reject_task: Find someone else to do it
       title: Show task
     update:
       notice: Task has been updated

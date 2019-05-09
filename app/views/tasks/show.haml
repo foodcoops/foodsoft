@@ -25,8 +25,8 @@
 %p
   - if !@task.is_accepted?(current_user)
     = link_to t('.accept_task'), accept_task_path(@task), method: :post, class: 'btn btn-success'
-    - if @task.is_assigned?(current_user)
-      = link_to t('.reject_task'), reject_task_path(@task), method: :post, class: 'btn'
+  - if @task.is_assigned?(current_user)
+    = link_to t('.reject_task'), reject_task_path(@task), method: :post, class: 'btn'
   - unless @task.done?
     = link_to t('.mark_done'), set_done_task_path(@task), method: :post, class: 'btn'
   = link_to t('ui.edit'), edit_task_path(@task), class: 'btn'

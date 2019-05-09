@@ -74,12 +74,20 @@ class Task < ApplicationRecord
     self.assignments.detect {|ass| ass.user_id == user.id && ass.accepted }
   end
 
-  def enough_users_assigned?
+  def enough_users_accepted?
     assignments.to_a.count(&:accepted) >= required_users ? true : false
   end
 
-  def still_required_users
+  def enough_users_assigned?
+    assignments.to_a.length >= required_users ? true : false
+  end
+
+  def unconfirmed_user_count
     required_users - assignments.to_a.count(&:accepted)
+  end
+
+  def still_required_users
+    required_users - assignments.to_a.length
   end
 
   # Get users from comma seperated ids
@@ -106,7 +114,7 @@ class Task < ApplicationRecord
             self.assignments.build :user => user, :accepted => true
           else
             # normal assignement
-            self.assignments.build :user => user
+            self.assignments.build :user => user, accepted: FoodsoftConfig[:task_assigned_without_confirmation]
           end
         end
       end

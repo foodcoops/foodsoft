@@ -1,10 +1,12 @@
 = form.hidden_field :current_user_id
 = form.input :name
 = form.input :description, as: :text, input_html: {rows: 10}
-= form.input :duration, :as => :select, :collection => 1..3
+= form.input :duration, :as => :select, :collection => 1..4
+= form.input :required_users
+
 - unless local_assigns[:periodic]
   = form.input :user_list, :as => :string, :input_html => { 'data-pre' => form.object.users.map(&:token_attributes).to_json }
-= form.input :required_users
+
 = form.association :workgroup, collection: Workgroup.order(:name)
 = form.input :due_date, as: :date_picker
 - unless local_assigns[:periodic]

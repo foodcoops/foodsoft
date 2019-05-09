@@ -265,6 +265,7 @@ class FoodsoftConfig
         host: 'localhost',
         port: '3000',
         protocol: 'http',
+        task_assigned_without_confirmation: false,
         # The following keys cannot, by default, be set by foodcoops themselves.
         protected: {
           multi_coop_install: true,
