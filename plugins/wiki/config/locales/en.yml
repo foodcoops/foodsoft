@@ -5,6 +5,11 @@ en:
         body: Body
         parent_id: Parent page
         title: Title
+  config:
+    hints:
+      use_wiki: Enable editable wiki pages.
+    keys:
+      use_wiki: Enable wiki
   model:
     page:
       redirect: Redirect to [[%{title}]]...
@@ -25,6 +30,7 @@ en:
       title_list: List of pages
     body:
       title_toc: Content
+      wikicloth_exception: 'I''m sorry to report that an error occured when interpreting the wiki page: %{msg}. Please try to fix it, and save the page again.'
     create:
       notice: Page was created
     cshow:
@@ -40,18 +46,25 @@ en:
     form:
       help:
         bold: bold
-        external_link_ex: External page
-        external_links: External links
+        external_link_ex: External link
+        external_links: External
         heading: level %{level}
         headings: Heading
+        image_link_title: Image title
+        image_links: Images
         italic: italic
+        link_lists: More on lists
+        link_table: Table formatting
+        link_templates: Templates
+        link_variables: Foodsoft variables
         list_item_1: First list item
         list_item_2: Second list item
-        noformat: No wiki-formatting
+        noformat: No formatting
         ordered_list: Numbered list
         section_block: Block formatting
         section_character: Character formatting
         section_link: Link formatting
+        section_more: More topics
         section_table: Table formatting
         see_tables: see %{tables_link}
         tables_link: Tables
@@ -79,6 +92,11 @@ en:
     title: Title
     update:
       notice: Page was updated
+    variables:
+      description: Variables return information from somewhere else. When you use the variable, it will be replaced by its value when displayed. Foodsoft has a number of pre-defined variables, such as the name and address of your foodcoop, the software version, and the number of members and suppliers. See the table below for all variables. You can use these in wiki pages as well as in the footer (from the configuration screen).
+      title: Foodsoft variables
+      value: Current value
+      variable: Variable
     version:
       author: ! 'Author: %{user}'
       date_format: ! '%a, %d-%m-%Y, %H:%M'
