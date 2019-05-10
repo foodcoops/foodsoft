@@ -75,28 +75,6 @@ es:
         created_at: Hora
         email: Email
         message: Mensaje
-      message:
-        body: Cuerpo
-        group_id: Grupo
-        messagegroup_id: Grupo de mensajes
-        order_id: Pedido
-        ordergroup_id: Grupo de pedido
-        private: Privado
-        recipient_tokens: Destinatarios (adicionales)
-        send_method:
-          all: Enviar a todos los miembros
-          messagegroup: Enviar a los miembros de un grupo de mensajes
-          order: Enviar a los miembros que han participado de un pedido
-          ordergroup: Enviar a los miembros de un grupo de pedido
-          recipients: Enviar a miembros específicos
-          workgroup: Enviar a miembros de un grupo de trabajo
-        send_to_all: Enviar a todos los miembros
-        subject: Asunto
-        workgroup_id: Grupo de trabajo
-      messagegroup:
-        description: Descripción
-        name: Nombre
-        user_tokens: Miembros
       order:
         boxfill: Repartir cajas después
         closed_by: Cerrado por
@@ -233,8 +211,6 @@ es:
       delivery: Entrega
       financial_transaction: Transacción financiara
       invoice: Factura
-      message: Mensaje
-      messagegroup: Grupo de mensajes
       order: Pedido
       order_article: Pedir artículo
       order_comment: Comentario de pedido
@@ -294,23 +270,6 @@ es:
       index:
         destroy_all: Borra todos los problemas de email
         title: Problemas de email
-    messagegroups:
-      destroy:
-        error: 'El grupo de mensajes no se pudo borrar: %{error}'
-        notice: El mensaje de grupo ha sido borrado
-      edit:
-        title: Edita mensaje de grupo
-      index:
-        first_paragraph: 
-        new_messagegroup: Crea nuevo mensaje de grupo
-        new_messagegroups: nuevos grupos de mensajes
-        second_paragraph: Un grupo de mensajes es como una lista de correo. Los miembros se pueden suscribir y desuscribir de las listas en las que están interesados, desde su página de perfil.
-        title: Grupos de mensaje
-      new:
-        title: Crea grupo de mensajes
-      show:
-        send_message: Envía mensaje
-        title: Grupo de mensaje  %{name}
     ordergroups:
       destroy:
         error: 'El grupo de pedidos no se pudo eliminar: %{error}'
@@ -332,7 +291,6 @@ es:
       show:
         confirm: "¿Estas seguro/a?"
         edit: Edita grupo/miembros
-        send_message: Envía mensaje
         title: Grupo de pedido %{name}
     search_placeholder: nombre ..
     users:
@@ -360,7 +318,6 @@ es:
         member_since: Miembro desde %{time}
         person: Persona
         preference: Preferencias
-        send_message: Enviar mensaje
         show_email_problems: Muestra los problemas de email
         sudo: Asumir identidad
       users:
@@ -547,8 +504,6 @@ es:
       help_url: Sitio web de documentación.
       homepage: Sitio web de tu cooperativa.
       ignore_browser_locale: Ignorar el lenguaje de la computadora del usuario cuando éste no ha elegido un lenguaje todavía.
-      mailing_list: Lista de correo para usar en lugar del sistema de mensajería para enviar correo a todos los miembros.
-      mailing_list_subscribe: Dirección de email a donde los miembros pueden enviar correo para suscribirse.
       minimum_balance: Los miembros sólo pueden hacer pedidos cuando su balance de cuenta está por encima o igual a esta cantidad.
       name: El nombre de tu cooperativa.
       order_schedule:
@@ -574,7 +529,6 @@ es:
       use_apple_points: Cuando el sistema de puntos-manzana está habilitado los miembros deberán realizar algunas tareas para poder hacer pedidos.
       use_boxfill: Cuando está activado, cerca del cierre de un pedido los miembros no podrán cambiar su pedido a menos que se incremente el valor pedido total. Esto ayudará a llenar las cajas que faltan. Igualmente deberás decidir una fecha de llenado de cajas para los pedidos.
       use_iban: Cuando esta opción está habilitada, el proveedor y el usuario pueden guardan también su número de cuenta bancaria internacional (IBAN).
-      use_messages: Permitir que los miembros de comuniquen unos con otros dentro de Foodsoft.
       use_nick: Muestra y utiliza apodos en lugar de nombres reales. Cuando activas esto debes chequear que todos los usuarios tengan apodo.
       use_wiki: Activar las páginas editables del wiki.
       webstats_tracking_code: 
@@ -599,8 +553,6 @@ es:
       help_url: URL de documentación
       homepage: Página inicial
       ignore_browser_locale: Ignorar idioma del navegador
-      mailing_list: Lista de correos
-      mailing_list_subscribe: Suscribirse a la lista de correos
       minimum_balance: Balance mínimo
       name: Nombre
       order_schedule:
@@ -625,7 +577,6 @@ es:
       use_apple_points: Puntos-manzana
       use_boxfill: Fase de llenar las cajas
       use_iban: Usar IBAN
-      use_messages: Mensajes
       use_nick: Usa apodos
       use_wiki: Activar wiki
       webstats_tracking_code: Código de seguimiento
@@ -982,8 +933,6 @@ es:
     deliveries:
       new_invoice: Nueva factura
       show_invoice: Muestra la factura
-    messages:
-      write_message: Escribe mensaje
     orders:
       old_price: Precio anterior
       option_choose: Elige proveedor/stock
@@ -992,8 +941,6 @@ es:
     submit:
       invite:
         create: envía invitación
-      message:
-        create: envía mensaje
     tasks:
       required_users: Aún se necesitan %{count} miembros!
       task_title: "%{name} (%{duration}h)"
@@ -1006,12 +953,6 @@ es:
     changes_saved: Guarda los cambios.
     index:
       due_date_format: "%A %d %B"
-      messages:
-        title: Mensajes recientes
-        view_all:
-          messages: todos los mensajes
-          text: Muestra %{messages} o %{threads}
-          threads: Hilos
       my_ordergroup:
         last_update: 'La última actualización fue hace %{when} '
         title: Mi grupo de pedido
@@ -1067,7 +1008,6 @@ es:
         title: Productos
       tasks: Mis tareas
       title: Acceso directo a ...
-      write_message: Escribir un mensaje
   invites:
     errors:
       already_member: está en uso. La persona ya es miembro de este Grupo de Consumo.
@@ -1210,82 +1150,6 @@ es:
 
 
         Saludos de %{foodcoop}.
-  message_threads:
-    groupmessage_threads:
-      show_message_threads: muestra todos
-    index:
-      general: General
-      title: Hilos de mensaje
-    message_threads:
-      last_reply_at: Última respuesta el
-      last_reply_by: 'Última respuesta de '
-      started_at: Comenzado el
-      started_by: Comenzado por
-    show: General
-  messagegroups:
-    index:
-      body: 
-      title: Grupos de mensaje
-    join:
-      error: 'No pudo unirse al grupo de mensaje: %{error}'
-      notice: Se ha unido al grupo de mensajes
-    leave:
-      error: 'El grupo de mensajes no se ha podido dejar: %{error}'
-      notice: Se ha dejado el grupo de mensajes
-    messagegroup:
-      join: Unirse al grupo de mensajes
-      leave: Dejar grupo de mensajes
-  messages:
-    actionbar:
-      message_threads: Muestra como hilos
-      messagegroups: 
-      messages: Muestra como lista
-      new: Nuevo mensaje
-    create:
-      notice: 
-    index:
-      new: Nuevo mensaje
-      title: Mensajes
-    messages:
-      reply: Responde
-    model:
-      reply_header: 
-      reply_indent: 
-      reply_subject: 'Re: %{subject}'
-    new:
-      error_private: Lo siento, este mensaje es privado.
-      hint_private: 
-      list:
-        desc: 'Envía mensajes a todos los miembros a través de la lista de correo: %{list}'
-        mail: por ejemplo con un email a %{email}.
-        subscribe: Puedes leer más sobre la lista de correos en %{link}.
-        subscribe_msg: Quizás tengas que suscribirte a la lista primero.
-        wiki: 
-      message: mensaje
-      no_user_found: No se ha encontrado el usuario
-      reply_to: Este mensaje es una respuesta a otro %{link}.
-      search: Busca ...
-      search_user: Busca usuario
-      title: Nuevo mensaje
-    show:
-      all_messages: Todos los mensajes
-      from: 'De:'
-      group: 'Grupo:'
-      reply: Responde
-      reply_to: 'Responde a:'
-      sent_on: 'Enviado:'
-      subject: 'Asunto:'
-      title: Muestra mensaje
-      to: 'A:'
-    thread:
-      all_message_threads: Todos los hilos de mensaje
-      reply: Responde
-  messages_mailer:
-    foodsoft_message:
-      footer: |
-        Reply: %{reply_url}
-        See message online: %{msg_url}
-        Messaging options: %{profile_url}
   model:
     delivery:
       each_stock_article_must_be_unique: Los artículos de stock no pueden ser listados más de una vez.
@@ -1306,7 +1170,6 @@ es:
       config: Configuración
       home: Resumen
       mail_delivery_status: Problemas de email
-      messagegroups: Grupos de mensaje
       ordergroups: Grupos de pedido
       title: Administración
       users: Usuarios
@@ -1325,7 +1188,6 @@ es:
       title: Finanzas
     foodcoop: Grupo de consumo
     members: Miembros
-    messages: Mensajes
     ordergroups: Grupo de pedido
     orders:
       archive: Mis Pedidos
@@ -1607,7 +1469,6 @@ es:
       who_hint: "(¿Cuánto más se necesita?)"
     user_form_fields:
       contact_address_hint: La dirección de tu grupo de pedido. Si la cambias, también se cambiará para los demás miembros de tu grupo.
-      messagegroups: Únete o sal de los mensajes de grupo
     workgroup_members:
       title: Membresías de grupo
   simple_form:
@@ -1634,8 +1495,6 @@ es:
       tax: En porcentaje, el estándar es 7,0
     labels:
       settings:
-        messages:
-          send_as_email: Recibir mensajes en emails.
         notify:
           negative_balance: Infórmame cuando mi grupo de pedido tenga un balance negativo.
           order_finished: Infórmame acerca del resultado de mi pedido (cuando se cierre).

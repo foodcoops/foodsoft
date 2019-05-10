@@ -75,28 +75,6 @@ nl:
         created_at: Tijd
         email: Email
         message: Bericht
-      message:
-        body: Bericht
-        group_id: Groep
-        messagegroup_id: Berichtengroep
-        order_id: Bestelling
-        ordergroup_id: Bestelgroep
-        private: Privé
-        recipient_tokens: Geadresseerden
-        send_method:
-          all: Verzenden naar alle leden
-          messagegroup: Verzenden naar leden van een berichtengroep
-          order: Verzenden naar leden die besteld hebben
-          ordergroup: Verzenden naar leden van een bestelgroep
-          recipients: Verzenden naar specifieke leden
-          workgroup: Verzenden naar leden van een werkgroep
-        send_to_all: Aan alle leden sturen
-        subject: Onderwerp
-        workgroup_id: Werkgroep
-      messagegroup:
-        description: Omschrijving
-        name: Naam
-        user_tokens: Leden
       order:
         boxfill: Dozen vullen na
         closed_by: Afgerekend door
@@ -233,8 +211,6 @@ nl:
       delivery: Levering
       financial_transaction: Financiële transactie
       invoice: Factuur
-      message: Bericht
-      messagegroup: Berichtengroep
       order: Bestelling
       order_article: Bestellingsartikel
       order_comment: Commentaar
@@ -292,23 +268,6 @@ nl:
       index:
         destroy_all: Alle emailproblemen verwijderen
         title: Emailproblemen
-    messagegroups:
-      destroy:
-        error: 'Berichtengroep kon niet verwijderd worden: %{error}'
-        notice: Berichtengroep is verwijderd
-      edit:
-        title: Bewerk berichtengroep
-      index:
-        first_paragraph: Hier kun je %{url} aanmaken, aanpassen en verwijderen.
-        new_messagegroup: Nieuwe berichtengroep maken
-        new_messagegroups: nieuwe berichtengroepen
-        second_paragraph: Een berichtengroep is als een mailing-lijst. Leden kunnen zich aan- en afmelden voor groepen waar ze in geïnteresseerd zijn vanuit hun profiel.
-        title: Berichtengroepen
-      new:
-        title: Berichtengroep aanmaken
-      show:
-        send_message: Bericht verzenden
-        title: Berichtengroep %{name}
     ordergroups:
       destroy:
         error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
@@ -330,7 +289,6 @@ nl:
       show:
         confirm: Weet je het zeker?
         edit: Groep/leden bewerken
-        send_message: Bericht sturen
         title: Huishouden %{name}
     search_placeholder: naam ...
     users:
@@ -358,7 +316,6 @@ nl:
         member_since: Lid sinds %{time}
         person: Persoon
         preference: Voorkeuren
-        send_message: Bericht versturen
         show_email_problems: Bekijk emailproblemen
         sudo: Inloggen als
       users:
@@ -543,8 +500,6 @@ nl:
       help_url: Documentatie website.
       homepage: Website van de foodcoop.
       ignore_browser_locale: Negeer de taal van de computer wanneer iemand nog geen taal gekozen heeft.
-      mailing_list: Mailing-lijst adres om te gebruiken in plaats van het berichtensysteem voor emails naar alle leden.
-      mailing_list_subscribe: Emailadres waar leden zich kunnen aanmelden voor de mailing-lijst.
       minimum_balance: Leden kunnen slechts bestellen wanneer hun tegoed groter of gelijk is aan dit bedrag.
       name: De naam van de foodcoop.
       order_schedule:
@@ -570,7 +525,6 @@ nl:
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
       use_iban: Om leverancier en gebruiker een extra veld te geven voor het internationale bankrekeningnummer (IBAN).
-      use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
       use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
       use_wiki: Gebruik wiki pagina's.
       webstats_tracking_code: Tracking code voor bezoeker statistieken (zoals Piwik of Google analytics). Leeg laten als geen tracking gewenst is.
@@ -595,8 +549,6 @@ nl:
       help_url: Documentatie URL
       homepage: Homepage
       ignore_browser_locale: Browsertaal negeren
-      mailing_list: Mailing-lijst
-      mailing_list_subscribe: Mailing-lijst aanmelden
       minimum_balance: Minimum tegoed
       name: Naam
       order_schedule:
@@ -621,7 +573,6 @@ nl:
       use_apple_points: Appelpunten
       use_boxfill: Dozen vullen fase
       use_iban: IBAN gebruiken
-      use_messages: Berichten
       use_nick: Bijnamen gebruiken
       use_wiki: Wiki gebruiken
       webstats_tracking_code: Tracking code
@@ -981,8 +932,6 @@ nl:
     deliveries:
       new_invoice: Nieuwe factuur
       show_invoice: Factuur tonen
-    messages:
-      write_message: Bericht schrijven
     orders:
       old_price: Oude prijs
       option_choose: Leverancier/voorraad kiezen
@@ -991,8 +940,6 @@ nl:
     submit:
       invite:
         create: uitnodiging versturen
-      message:
-        create: bericht versturen
     tasks:
       required_users: Nog %{count} leden nodig!
       task_title: "%{name} (%{duration}u)"
@@ -1007,12 +954,6 @@ nl:
     changes_saved: Wijzigingen opgeslagen.
     index:
       due_date_format: "%A %d %B"
-      messages:
-        title: Nieuwste berichten
-        view_all:
-          messages: Alle berichten
-          text: "%{messages} of %{threads} bekijken"
-          threads: conversaties
       my_ordergroup:
         last_update: Laatst gewijzigd %{when} geleden
         title: Mijn huishouden
@@ -1068,7 +1009,6 @@ nl:
         title: Produkten
       tasks: Mijn taken
       title: Direct naar ...
-      write_message: Bericht schrijven
   invites:
     errors:
       already_member: is al lid van de foodcoop.
@@ -1215,82 +1155,6 @@ nl:
         Je taken: %{user_tasks_url}
 
         Groeten van %{foodcoop}.
-  message_threads:
-    groupmessage_threads:
-      show_message_threads: alles tonen
-    index:
-      general: Algemeen
-      title: Conversaties
-    message_threads:
-      last_reply_at: Laatst beantwoord op
-      last_reply_by: Laatst beantwoord door
-      started_at: Begonnen op
-      started_by: Begonnen door
-    show: Algemene berichten
-  messagegroups:
-    index:
-      body: 'Een berichtengroep is als een mailinglijst: je kunt kiezen voor welke je je aanmeld (of afmeld) om berichten te ontvangen die naar die groep verzonden worden.'
-      title: Berichtengroepen
-    join:
-      error: 'Kon niet aanmelden voor berichtengroep: %{error}'
-      notice: Aangemeld voor berichtengroep
-    leave:
-      error: 'Kon niet afmelden van berichtengroep: %{error}'
-      notice: Afgemeld voor berichtengroep
-    messagegroup:
-      join: Aanmelden voor berichtengroep
-      leave: Afmelden van berichtengroep
-  messages:
-    actionbar:
-      message_threads: Toon als conversaties
-      messagegroups: Aanmelden voor groepen
-      messages: Toon als lijst
-      new: Nieuw bericht
-    create:
-      notice: Bericht is opgeslagen en wordt verzonden.
-    index:
-      new: Nieuw bericht
-      title: Berichten
-    messages:
-      reply: Antwoorden
-    model:
-      reply_header: "%{user} schreef op %{when}:"
-      reply_indent: "> %{line}"
-      reply_subject: 'Re: %{subject}'
-    new:
-      error_private: Sorry, dit bericht is privé.
-      hint_private: Bericht wordt niet getoond in de Foodsoft inbox
-      list:
-        desc: 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
-        mail: bijvoorbeeld door een email te sturen naar %{email}.
-        subscribe: Lees meer over de mailing-lijst op %{link}.
-        subscribe_msg: Mogelijk moet je je eerst aanmelden voor de mailing-lijst.
-        wiki: Wiki (mailing-lijst pagina)
-      message: bericht
-      no_user_found: Geen gebruiker gevonden
-      reply_to: Dit bericht is een antwoord op %{link}.
-      search: Zoeken ...
-      search_user: Gebruiker zoeken
-      title: Nieuw bericht
-    show:
-      all_messages: Berichtenoverzicht
-      from: 'Van:'
-      group: 'Groep:'
-      reply: Antwoorden
-      reply_to: 'Antwoord:'
-      sent_on: 'Verzonden:'
-      subject: 'Onderwerp:'
-      title: Bericht lezen
-      to: 'Aan:'
-    thread:
-      all_message_threads: Alle conversaties
-      reply: Antwoord
-  messages_mailer:
-    foodsoft_message:
-      footer: |-
-        Antwoorden: %{reply_url}
-        Bericht online lezen: %{msg_url}
-        Berichtinstellingen: %{profile_url}
   model:
     delivery:
       each_stock_article_must_be_unique: In een levering mag ieder voorraadsartikel maar een keer voorkomen.
@@ -1314,7 +1178,6 @@ nl:
       finance: Financiën
       home: Overzicht
       mail_delivery_status: Emailproblemen
-      messagegroups: Berichtengroepen
       ordergroups: Huishoudens
       title: Administratie
       users: Gebruikers
@@ -1333,7 +1196,6 @@ nl:
       title: Financiën
     foodcoop: Foodcoop
     members: Leden
-    messages: Berichten
     ordergroups: Huishoudens
     orders:
       archive: Mijn bestellingen
@@ -1615,7 +1477,6 @@ nl:
       who_hint: "(Hoeveel zijn er nog nodig?)"
     user_form_fields:
       contact_address_hint: Het adres van je huishouden. Als je dit wijzigt, verandert het ook voor de andere leden van je huishouden.
-      messagegroups: Aan- en afmelden voor berichtengroepen
     workgroup_members:
       title: Groepsleden
   simple_form:
@@ -1642,8 +1503,6 @@ nl:
       tax: Percentage
     labels:
       settings:
-        messages:
-          send_as_email: Berichten als emails ontvangen.
         notify:
           negative_balance: Informeer me wanneer mijn huishouden een negatief saldo krijgt.
           order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).

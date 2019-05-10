@@ -75,24 +75,6 @@ fr:
         created_at: Créé le
         email: Email
         message: 
-      message:
-        body: Contenu
-        group_id: Cellule ou équipe
-        messagegroup_id: 
-        order_id: Commande
-        ordergroup_id: Cellule
-        private: Privé
-        recipient_tokens: Destinataires
-        send_method:
-          all: 
-          messagegroup: 
-          order: 
-          ordergroup: 
-          recipients: 
-          workgroup: 
-        send_to_all: Envoyer à tous les membres
-        subject: Sujet
-        workgroup_id: Équipe
       messagegroup:
         description: Description
         name: Nom
@@ -233,8 +215,6 @@ fr:
       delivery: Réapprovisionnement
       financial_transaction: Transaction
       invoice: Facture
-      message: Message
-      messagegroup: 
       order: Commande
       order_article: Article à commander
       order_comment: Commentaire
@@ -292,23 +272,6 @@ fr:
       index:
         destroy_all: 
         title: 
-    messagegroups:
-      destroy:
-        error: 
-        notice: 
-      edit:
-        title: 
-      index:
-        first_paragraph: 
-        new_messagegroup: 
-        new_messagegroups: 
-        second_paragraph: 
-        title: 
-      new:
-        title: 
-      show:
-        send_message: 
-        title: 
     ordergroups:
       destroy:
         error: 'La cellule n''a pas pu être dissoute: %{error}'
@@ -330,7 +293,6 @@ fr:
       show:
         confirm: T'es sûrE de ton coup?
         edit: Modifier les données sur les cellules et/ou leurs membres
-        send_message: Envoyer un message
         title: Cellule %{name}
     search_placeholder: nom ...
     users:
@@ -358,7 +320,6 @@ fr:
         member_since: Membre depuis %{time}
         person: Personne
         preference: Préférences
-        send_message: Envoyer un message
         show_email_problems: 
         sudo: 
       users:
@@ -543,8 +504,6 @@ fr:
       help_url: 
       homepage: Site de votre coop.
       ignore_browser_locale: 
-      mailing_list: 
-      mailing_list_subscribe: 
       minimum_balance: 
       name: Le nom de votre coop.
       order_schedule:
@@ -570,7 +529,6 @@ fr:
       use_apple_points: 
       use_boxfill: 
       use_iban: 
-      use_messages: 
       use_nick: 
       use_wiki: 
       webstats_tracking_code: 
@@ -595,8 +553,6 @@ fr:
       help_url: 
       homepage: 
       ignore_browser_locale: 
-      mailing_list: 
-      mailing_list_subscribe: 
       minimum_balance: 
       name: Nom
       order_schedule:
@@ -621,7 +577,6 @@ fr:
       use_apple_points: 
       use_boxfill: 
       use_iban: 
-      use_messages: Messages
       use_nick: 
       use_wiki: 
       webstats_tracking_code: 
@@ -984,8 +939,6 @@ fr:
     deliveries:
       new_invoice: Ajouter une nouvelle facture
       show_invoice: Afficher la facture
-    messages:
-      write_message: Écrire un message
     orders:
       old_price: Ancien prix
       option_choose: Choix d'un-e fournisseur-e
@@ -994,8 +947,6 @@ fr:
     submit:
       invite:
         create: Envoyer une invitation
-      message:
-        create: Envoyer un message
     tasks:
       required_users: Il manque encore %{count} camarades!
       task_title: "%{name} (%{duration}h)"
@@ -1013,12 +964,6 @@ fr:
     changes_saved: Les modifications ont été sauvegardées.
     index:
       due_date_format: "%A, %d. %b"
-      messages:
-        title: Derniers messages reçus
-        view_all:
-          messages: tous les messages
-          text: Afficher %{messages} ou %{threads}
-          threads: 
       my_ordergroup:
         last_update: La dernière mise à jour date du %{when}
         title: Ta cellule
@@ -1074,7 +1019,6 @@ fr:
         title: Gérer les produits
       tasks: Ton boulot
       title: Aller à...
-      write_message: Écrire un message
   invites:
     errors:
       already_member: est déjà membre de la Boufcoop.
@@ -1210,82 +1154,6 @@ fr:
         Ton agenda: %{user_tasks_url}
 
         Ceci est un rappel automatisé envoyé par %{foodcoop}.
-  message_threads:
-    groupmessage_threads:
-      show_message_threads: 
-    index:
-      general: 
-      title: 
-    message_threads:
-      last_reply_at: 
-      last_reply_by: 
-      started_at: 
-      started_by: 
-    show: 
-  messagegroups:
-    index:
-      body: 
-      title: 
-    join:
-      error: 
-      notice: 
-    leave:
-      error: 
-      notice: 
-    messagegroup:
-      join: 
-      leave: 
-  messages:
-    actionbar:
-      message_threads: 
-      messagegroups: 
-      messages: 
-      new: 
-    create:
-      notice: Le message a bien été sauvegardé et est en cours d'envoi.
-    index:
-      new: Nouveau message
-      title: Messages
-    messages:
-      reply: Répondre
-    model:
-      reply_header: 'Le %{when}, %{user} a écrit:'
-      reply_indent: "> %{line}"
-      reply_subject: 'Re: %{subject}'
-    new:
-      error_private: 
-      hint_private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
-      list:
-        desc: Pour envoyer un message à tout le monde, passe par la mailing list "%{list}"
-        mail: par exemple en envoyant un email à %{email}
-        subscribe: Pour plus d'explications concernant la mailing list, consulte le %{link}
-        subscribe_msg: Il faudra peut être d'abord t'inscrire à la mailing list.
-        wiki: wiki (section mailing list)
-      message: 
-      no_user_found: Aucun-e membre trouvée avec cet identifiant
-      reply_to: 
-      search: Rechercher ...
-      search_user: Rechercher unE membre
-      title: Nouveau message
-    show:
-      all_messages: Aperçu des messages
-      from: 'De:'
-      group: 
-      reply: Répondre
-      reply_to: 
-      sent_on: 'Envoyé le:'
-      subject: 'Sujet:'
-      title: Afficher le contenu du message
-      to: 
-    thread:
-      all_message_threads: 
-      reply: 
-  messages_mailer:
-    foodsoft_message:
-      footer: |-
-        Répondre: %{reply_url}
-        Afficher ce message dans ton navigateur: %{msg_url}
-        Préférences des messages: %{profile_url}
   model:
     delivery:
       each_stock_article_must_be_unique: Chaque article du cellier ne peut apparaître qu'une seule fois dans la commande.
@@ -1307,7 +1175,6 @@ fr:
       finance: Trésorerie
       home: Aperçu
       mail_delivery_status: 
-      messagegroups: 
       ordergroups: Cellules
       title: Administration
       users: Membres
@@ -1326,7 +1193,6 @@ fr:
       title: Trésorerie
     foodcoop: Boufcoop
     members: Membres
-    messages: Messages
     ordergroups: Cellules
     orders:
       archive: Historique des commandes
@@ -1606,7 +1472,6 @@ fr:
       who_hint: "(Combien manquent encore?)"
     user_form_fields:
       contact_address_hint: 
-      messagegroups: 
     workgroup_members:
       title: Membres des équipes
   simple_form:
@@ -1633,8 +1498,6 @@ fr:
       tax: En pourcentage, le standard est de 7,0
     labels:
       settings:
-        messages:
-          send_as_email: Te transmettre les messages de la boufcoop par email
         notify:
           negative_balance: T'envoyer un avertissement si le compte de ta cellule vire au rouge.
           order_finished: T'envoyer un résumé de tes commandes après leur finalisation
