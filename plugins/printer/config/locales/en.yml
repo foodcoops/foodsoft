@@ -1,0 +1,32 @@
+en:
+  config:
+    keys:
+      printer_print_order_articles: Print article PDF
+      printer_print_order_fax: Print fax PDF
+      printer_print_order_groups: Print group PDF
+      printer_print_order_matrix: Print matrix PDF
+      printer_token: Secret token
+      use_printer: Use printer
+  helpers:
+    submit:
+      printer_job:
+        create: create printer job
+  navigation:
+    orders:
+      printer_jobs: Printer jobs
+  orders:
+    show:
+      confirm_create_printer_job: A printer job for this order has been created already. Do you want to create a new one?
+  printer_jobs:
+    create:
+      notice: Created %{count} printer jobs.
+    destroy:
+      notice: Printer job has been deleted.
+    index:
+      finished: Finished
+      pending: Pending
+      queued: Waiting for order to close
+      title: Printer jobs
+    show:
+      title: Printer job %{id}
+
