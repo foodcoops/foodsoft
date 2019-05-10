@@ -129,10 +129,6 @@ de:
         last_user_activity: Zuletzt aktiv
         name: Name
         user_tokens: Mitglieder
-      page:
-        body: Inhalt
-        parent_id: Oberseite
-        title: Titel
       stock_article:
         available: Verfügbar
         price: Nettopreis
@@ -553,7 +549,6 @@ de:
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
-      use_wiki: Änderbare Wiki Seiten aktivieren
       webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
     keys:
       applepear_url: Hilfe URL für das Äpfel Punktesystem zum Engagement
@@ -607,7 +602,6 @@ de:
       use_iban: IBAN verwenden
       use_nick: Benutzernamen verwenden
       use_printer: Drucker verwenden
-      use_wiki: Wiki verwenden
       webstats_tracking_code: Code für Websiteanalysetool
     tabs:
       applications: Apps
@@ -1205,8 +1199,6 @@ de:
       no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
     order_article:
       error_price: muss angegeben sein und einen aktuellen Preis haben
-    page:
-      redirect: Weiterleitung auf [[%{title}]]...
     user:
       no_ordergroup: keine Bestellgruppe
     group_order_article:
@@ -1244,10 +1236,6 @@ de:
       printer_jobs: Druckaufträge
       title: Bestellungen
     tasks: Aufgaben
-    wiki:
-      all_pages: Alle Seiten
-      home: Startseite
-      title: Wiki
     workgroups: Arbeitsgruppen
   number:
     percentage:
@@ -1378,92 +1366,6 @@ de:
       msg1: "%{count} Artikel (%{units} Einheiten) aktualisiert"
       msg2: "%{count} (%{units}) Toleranzmenge"
       msg4: "%{count} (%{units}) übrig"
-  pages:
-    all:
-      new_page: Neue Seite anlegen
-      recent_changes: Letzte Änderungen
-      search:
-        action: Suche
-        placeholder: Seitentitle ...
-      site_map: Site Map
-      title: Alle Wikiseiten
-      title_list: Seiten-Liste
-    body:
-      title_toc: Inhalt
-      wikicloth_exception: 'Entschuldigung, ein Fehler ist beim Anzeigen der Wikiseite aufgetreten: »%{msg}«. Bearbeiten der Seite kann helfen, diesen Fehler zu beseitigen.'
-    create:
-      notice: Seite wurde angelegt
-    cshow:
-      error_noexist: Seite existiert nicht!
-      redirect_notice: Weitergeleitet von %{page} ...
-    destroy:
-      notice: Die Seite '%{page}' und alle Unterseiten wurden erfolgreich gelöscht
-    diff:
-      title: "%{title} - Änderung von Version %{old} auf %{new}"
-    edit:
-      title: Seite bearbeiten
-    error_stale_object: Achtung, die Seite wurde gerade von jemand anderes bearbeitet. Bitte versuche es erneut.
-    form:
-      help:
-        bold: fett
-        external_link_ex: Externe Seite
-        external_links: Extern
-        heading: Ebene %{level}
-        headings: Überschriften
-        image_link_title: Bildtitel
-        image_links: Bilder
-        italic: kursiv
-        link_lists: Mehr
-        link_table: Tabellenformatierung
-        link_templates: Vorlagen
-        link_variables: Foodsoft Variablen
-        list_item_1: Erster Punkt
-        list_item_2: Zweiter Punkt
-        noformat: Keine Formatierung
-        ordered_list: Listen mit Zahlen
-        section_block: Block-Formatierung
-        section_character: Zeichenformatierung
-        section_link: Link-Formatierung
-        section_more: Mehr Themen
-        section_table: Tabellenformatierung
-        see_tables: siehe %{tables_link}
-        tables_link: Tabellen
-        text: text
-        title: Schnelle Formatierungshilfe
-        unordered_list: Listen mit Punkten
-        wiki_link_ex: Foodsoft Wiki Seite
-        wiki_links: Wiki-Links
-      preview: Vorschau
-    last_updated: Zuletzt aktualisiert
-    new:
-      title: Neue Wikiseite anlegen
-    page_list_item:
-      date_format: "%a, %d. %B %Y %H:%M:%S"
-    show:
-      date_format: "%d.%m.%y %H:%M"
-      delete: Seite löschen
-      delete_confirm: Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?
-      diff: Versionen vergleichen
-      edit: Seite bearbeiten
-      last_updated: Zuletzt bearbeitet von <b>%{user}</b> am %{when}
-      subpages: Unterseiten
-      title_versions: Versionen
-      versions: Versionen (%{count})
-    title: Titel
-    update:
-      notice: Seite wurde aktualisiert
-    variables:
-      description: Variablen geben Informationen wieder, die an anderer Stelle definiert wurden. Wenn Du die Variable benutzt, wird sie mit ihrem Wert ersetzt, wenn sie angezeigt wird. Foodsoft hat eine Reihe von vordefinierten Variablen, wie zum Beispiel Name und Adresse deiner Foodcoop, Softwareversion und die Anzahl der Mitglieder und Lieferanten. In der Tabelle unten sind alle Variablen aufgeführt. Du kannst diese in Wiki-Seiten und der Fusszeile (in den Einstellungen) nutzen.
-      title: Foodsoft-Variablen
-      value: Aktueller Wert
-      variable: Variable
-    version:
-      author: 'Autor: %{user}'
-      date_format: "%a, %d.%m.%Y, %H:%M Uhr"
-      revert: Auf diese Version zurücksetzen
-      title: "%{title} - Version %{version}"
-      title_version: Version
-      view_current: Aktuelle Version sehen
   pickups:
     document:
       empty_selection: Es muss zumindest eine Bestellung ausgewählt sein.
