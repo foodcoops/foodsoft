@@ -1,4 +1,18 @@
 - title t('.title')
+- content_for :javascript do
+  :javascript
+    $(function() {
+      // Subscribe to database changes.
+      // See publish/subscribe design pattern in /doc.
+      $(document).on('StockArticle#create', function(e) {
+        $.ajax({
+          url: '#{new_on_stock_article_create_stock_takings_path}',
+          type: 'get',
+          data: {stock_article_id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+    });
 
 - content_for :sidebar do
   %p
