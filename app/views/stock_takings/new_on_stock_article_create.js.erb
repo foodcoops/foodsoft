@@ -1,0 +1,14 @@
+// Handle more advanced DOM update after AJAX database manipulation.
+// See publish/subscribe design pattern in /doc.
+(function() {
+  $('#stock_changes p').removeClass('alert alert-success');
+
+  var stock_change = $('<%= j(render(
+    :partial => 'stock_change',
+    :locals => {
+      :stock_change => @stock_change
+    }
+  )) %>').addClass('alert alert-success');
+
+  $('#stock_changes').prepend(stock_change);
+})();
