@@ -3,7 +3,7 @@
 - content_for :sidebar do
   %p
     %i= t('.text_deviations', inv_link: link_to(t('.temp_inventory'), stock_articles_path)).html_safe
-  %p= t('.text_need_articles', create_link: link_to(t('.create'), new_stock_article_path)).html_safe
+  %p= t('.text_need_articles', create_link: link_to(t('.create'), new_stock_article_path, :remote => true)).html_safe
 
 = simple_form_for(@stock_taking) do |f|
   = f.input :date, as: :date_picker
