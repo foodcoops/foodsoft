@@ -10,7 +10,7 @@ class OrderPdf < RenderPDF
 
   def nice_table(name, data, dimrows = [])
     down_or_page 25
-    text name, size: 10, style: :bold
+    text name, size: 18, style: :bold
     table data, width: bounds.width, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
       # borders
       table.cells.borders = [:bottom]
