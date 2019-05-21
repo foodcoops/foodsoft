@@ -1314,6 +1314,28 @@ en:
       body: "<p>Please fill in the new password for <b>%{user}</b></p>"
       submit: Save new password
       title: New password
+    join:
+      title: Join our food-coop
+      body: |
+        <p>
+        Would you like to join our food-coop?
+        </p>
+        <p>
+        Please read our new members guide to understand more about how our co-op operates.
+        <br/> <a class="btn btn-info" target="_blank" href=http://bit.do/mlbg>Learn</a>
+        </p>
+        <p>
+        If it sounds like the co-op is a good fit for you and your family, then please apply by filling out this form
+        <br/>
+        <a href="https://forms.gle/MaGdwCyjmrQZES4g6" class="btn btn-success">Apply</a>
+        </p>
+        <p>
+        We would like you to understand that the co-op does not always take on new members as we want to keep the size managable.
+        That said, if you do not hear back from us (sometimes we are busy or miss emails) please email mlbg-membership@googlegroups.com
+        </p>
+
+
+
   mailer:
     dateformat: "%d %b"
     feedback:
@@ -1784,6 +1806,7 @@ en:
     login_invalid_nick: Invalid username or password
     new:
       forgot_password: Forgot password?
+      join: Join our coop
       login: Login
       nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
       noscript: NoScript
