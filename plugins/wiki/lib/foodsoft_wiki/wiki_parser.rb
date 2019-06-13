@@ -9,10 +9,13 @@ module FoodsoftWiki
       url_for page
     end
 
-    link_attributes_for do |page|
+    link_attributes_for do |page_anchor|
+      page, anchor = page_anchor.split(/#/, 2)
       permalink = Page.permalink(page)
-      if Page.exists?(:permalink => permalink)
-        { href: url_for(:wiki_page_path, permalink: permalink) }
+      if page.empty?
+        { href: '#' + anchor }
+      elsif Page.exists?(:permalink => permalink)
+        { href: url_for(:wiki_page_path, permalink: permalink, anchor: anchor) }
       else
         { href: url_for(:new_page_path, title: page, parent: params[:referer]), class: 'new_wiki_link' }
       end
