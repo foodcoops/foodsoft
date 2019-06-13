@@ -125,6 +125,7 @@ Foodsoft::Application.routes.draw do
       end
 
       resources :articles do
+        get :copy
         collection do
           post :update_selected
           get :edit_all
