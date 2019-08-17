@@ -39,9 +39,9 @@
                 class: 'btn btn-small btn-success'
 
               %td
-                = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-small'
+                -#= link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-small'
                 = link_to t('ui.show'), order, class: 'btn btn-small'
-                = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
+                -#= link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
                   class: 'btn btn-small btn-danger'
 
         - unless @finished_orders.empty?
@@ -62,8 +62,8 @@
               %td
                 = link_to t('ui.copy'), new_order_path(order_id: order, supplier_id: order.supplier), class: 'btn btn-small'
                 = link_to t('ui.show'), order, class: 'btn btn-small'
-                = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
-                  class: 'btn btn-small btn-danger'
+                -#= link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
+                -#  class: 'btn btn-small btn-danger'
 
 %h2= t '.orders_settled'
 #orders_table
