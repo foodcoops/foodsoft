@@ -276,6 +276,28 @@ class Order < ApplicationRecord
     end
   end
 
+  # puts order.status back to 'finished' and reverts charges (adds a credit) to Ordergroup.account_balances
+  def reopen!(user, transaction_type = nil)
+    raise I18n.t('orders.model.error_not_closed') unless closed?
+
+    transaction_note = I18n.t('orders.model.notice_reopen', :name => name,
+                              :ends => ends.strftime(I18n.t('date.formats.default')))
+
+    gos = group_orders.includes(:ordergroup)              # Fetch group_orders
+    # gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
+
+    transaction do                                        # Start updating account balances
+      for group_order in gos
+        if group_order.ordergroup
+          price = group_order.price                       # increase account balance
+          group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type)
+        end
+      end
+
+      self.update_attributes! :state => 'finished', :updated_by => user, :foodcoop_result => nil
+    end
+  end
+
   # Close the order directly, without automaticly updating ordergroups account balances
   def close_direct!(user)
     raise I18n.t('orders.model.error_closed') if closed?

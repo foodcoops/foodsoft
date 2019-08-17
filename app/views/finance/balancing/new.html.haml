@@ -52,7 +52,10 @@
     = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
       class: 'btn'
   .btn-group
-    - unless @order.closed?
+    - if @order.closed?
+      - unless FoodsoftConfig[:charge_members_manually]
+        = link_to t('.confirm_reopen_order'), reopen_finance_order_path(@order), method: :patch, class: 'btn btn-warning'
+    - else
       - if FoodsoftConfig[:charge_members_manually]
         = link_to t('.confirm_order'), close_direct_finance_order_path(@order), class: 'btn btn-primary', method: :patch
       - else

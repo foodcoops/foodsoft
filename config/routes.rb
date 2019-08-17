@@ -161,6 +161,7 @@ Foodsoft::Application.routes.draw do
           get :confirm
           post :close
           patch :close_direct
+          patch :reopen
 
           get :new_on_order_article_create
           get :new_on_order_article_update

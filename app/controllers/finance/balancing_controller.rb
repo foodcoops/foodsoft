@@ -85,4 +85,13 @@ class Finance::BalancingController < Finance::BaseController
     redirect_to finance_order_index_url, alert: t('finance.balancing.close_direct.alert', message: error.message)
   end
 
+  # Balances the Order, Update of the Ordergroup.account_balances
+  def reopen
+    @order = Order.find(params[:id])
+    @order.reopen!(@current_user)
+    redirect_to finance_order_index_url, notice: t('finance.balancing.reopen.notice')
+  rescue => error
+    redirect_to new_finance_order_url(order_id: @order.id), alert: t('finance.balancing.reopen.alert', message: error.message)
+  end
+
 end
