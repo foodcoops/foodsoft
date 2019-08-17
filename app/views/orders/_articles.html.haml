@@ -42,6 +42,8 @@
             %td{title: units_history_line(order_article, plain: true)}
               = units
               = pkg_helper order_article.price
+          %td= link_to t('ui.edit'), edit_supplier_article_path(order_article.article.supplier_id, order_article.article),
+            :remote => true, class: 'btn btn-mini'
 %p
   = t '.prices_sum'
   = "#{number_to_currency(total_net)} / #{number_to_currency(total_gross)}"
