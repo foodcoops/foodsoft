@@ -235,11 +235,25 @@ table {
   }
 }
 
-/* Hide the orders article info for small screens
+/* Restrict orders article info width for small screens
    to prevent the "save order" button to disappear */
 @media only screen and (max-width: 950px) {
   tr.order-article:hover .article-info {
-    display: none;
+    max-width: 25em;
+    overflow-y: scroll;
+    height: 9em;
+  }
+  
+  form.edit_group_order .table {
+    margin-bottom: 6em;
+  }
+
+  div#order-footer {
+    height: 10em;
+  }
+
+  div#total-sum {
+    max-width: 15em;
   }
 }
 
