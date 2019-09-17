@@ -1811,7 +1811,7 @@ de:
           send_as_email: Bekomme Nachrichten als E-Mails.
         notify:
           negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
-          order_finished: Informier mich über meine Bestellergebnisse (nach Ende der Bestellung).
+          order_finished: Informiere mich über meine Bestellergebnisse (nach Ende der Bestellung).
           upcoming_tasks: Erinnere mich an anstehende Aufgaben.
         profile:
           email_is_public: E-Mail ist für Mitglieder sichtbar.
