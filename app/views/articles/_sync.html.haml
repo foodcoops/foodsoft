@@ -16,7 +16,7 @@
   %p
     %i
       = t '.update.update_msg', count: @updated_article_pairs.size
-      = t '.update.body'
+      = t('.update.body').html_safe
   = render 'sync_table', articles: @updated_article_pairs, field: 'articles', hidden_fields: %w(shared_updated_on)
   %hr/
 

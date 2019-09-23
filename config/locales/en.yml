@@ -536,7 +536,7 @@ en:
       title: Upload articles
     sync:
       outlist:
-        alert_used: Warning, %{article} is used in an open order. Please remove it from the order first.
+        alert_used: Warning, %{article} is used in an open order and the name will be appended with the word UNAVAILABLE
         body: 'The following articles were removed from the list and will be <b>deleted</b>:'
         body_ignored:
           one: One article without order number was skipped.
@@ -548,7 +548,7 @@ en:
       title: Synchronize articles with external database
       unit_quantity_short: Unit quantity
       update:
-        body: 'Every article is shown twice: old values are gray, while the text fields contain updated values. Differences with the old articles are marked yellow.'
+        body: 'Every article is shown twice: old values are gray, while the text fields contain updated values. Differences with the old articles are marked yellow.  <i class="icon icon-shopping-cart"></i> indicates the article is used in an open order'
         title: Update ...
         update_msg:
           one: One article needs to be updated.
