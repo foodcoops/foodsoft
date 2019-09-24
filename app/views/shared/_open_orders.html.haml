@@ -8,7 +8,6 @@
       %thead
         %tr
           %th= heading_helper Order, :name
-          %th{width: '30%'}= heading_helper Order, :note
           %th= heading_helper Order, :pickup
           %th= heading_helper Order, :ends
           %th= t '.who_ordered'
@@ -19,11 +18,6 @@
           %tr
             %td
               = link_to_ordering(order)
-            %td{ max_width: '200px;'}
-              .span= order.note
-              - count = order.order_articles.ordered.count
-              .badge.info= "#{count} #{'case'.pluralize{count}} filled"
-              .badge.info= "co-op total #{number_to_currency(order.sum(:gross))}"
             %td= format_date(order.pickup) unless order.pickup.nil?
             %td= format_time(order.ends) unless order.ends.nil?
             - if group_order = order.group_order(ordergroup)
@@ -34,10 +28,26 @@
                   = number_to_currency(group_order.price)
             - else
               %td{:colspan => 2}
+          %tr
+            %td(colspan=5)
+              - count = order.order_articles.ordered.count
+              - cases = order.order_articles.ordered.sum(:units_to_order)
+              .badge.info= "#{count} #{'item'.pluralize{count}} filled"
+              .badge.info= "#{count} #{'case'.pluralize{cases}} ordered"
+              .badge.info= "co-op total #{number_to_currency(order.sum(:gross))}"
+              - if order.supplier.min_order_quantity
+                - if order.supplier.min_order_quantity.to_f > order.sum(:gross)
+                  .badge.badge-warning= "minimum of #{number_to_currency(order.supplier.min_order_quantity)} not met"
+                - else
+                  .badge.badge-success= "minimum of #{number_to_currency(order.supplier.min_order_quantity)} is met"
+          - if order.note
+            %tr
+              %td(colspan=5)
+                .span= order.note.gsub(URI::DEFAULT_PARSER.make_regexp(['http','https']), '<a href="\0">\0</a>').html_safe
       - if total > 0
         %tfooter
           %tr
-            %th(colspan="3")
+            %th(colspan=3)
             %th= t('.total_sum') + ':'
             %th.numeric= number_to_currency(total)
   - else
