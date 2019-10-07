@@ -104,7 +104,7 @@ class Supplier < ApplicationRecord
       all_order_numbers << article.order_number if article
     end
     if options[:outlist_absent]
-      outlisted_articles += articles.undeleted.where.not(id: all_order_numbers+[nil])
+      outlisted_articles += articles.undeleted.where.not(order_number: all_order_numbers+[nil])
     end
     return [updated_article_pairs, outlisted_articles, new_articles]
   end
