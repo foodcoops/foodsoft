@@ -13,12 +13,13 @@
       %th= heading_helper Article, :supplier_price
       %th= heading_helper Article, :article_category
   %tbody
-    - articles.sort_by { |a, b| a.in_open_order ? 0 : 1 }.each do |changed_article, attrs|
+    - articles.sort_by { |a, b| a.errors.empty? ? (@in_open_order.include? a.id ? 0 : 1) : -1 }.each do |changed_article, attrs|
       - unless changed_article.new_record?
-        - article = Article.find(changed_article.id)
+        - article = @articles_map[changed_article.id]
+        - #Article.find(changed_article.id)
         %tr{:style => 'color:grey'}
           %td
-            - if article.in_open_order
+            - if @in_open_order.include? article.id
               %i.icon.icon-shopping-cart
             = article.name
           %td= article.note
