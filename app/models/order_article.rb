@@ -132,7 +132,7 @@ class OrderArticle < ApplicationRecord
   def price_balanced
     member_total = group_orders_sum
     actual_price_per = price.price_rounded_up(price: total_supplier_charge, quantity: member_total[:quantity])
-    actual_price_per == price.price
+    actual_price_per.to_f == price.price.to_f
   end
 
   def ordered_quantities_different_from_group_orders?(ordered_mark = "!", billed_mark = "?", received_mark = "?")
