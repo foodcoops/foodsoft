@@ -9,6 +9,8 @@
       %tr{:class => cycle('even', 'odd')}
         %td= group_order.ordergroup_name
         %td.numeric= number_to_currency(group_order.price)
+  - unless @order.invoice
+    .alert.alert-error You must add a supplier invoice to this order before settling it.
   .form-actions
-    = submit_tag t('.clear'), class: 'btn btn-primary'
+    = submit_tag t('.clear'), class: 'btn btn-primary', disabled: !@order.invoice
     = link_to t('.or_cancel'), new_finance_order_path(order_id: @order.id)
