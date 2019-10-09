@@ -4,7 +4,7 @@
     .alert
       = t '.not_enough_apples'
   - unless Order.open.empty?
-    %table.table.table-striped
+    %table.table
       %thead
         %tr
           %th= heading_helper Order, :name
@@ -30,20 +30,22 @@
               %td{:colspan => 2}
           %tr
             %td(colspan=5)
-              - count = order.order_articles.ordered.count
-              - cases = order.order_articles.ordered.sum(:units_to_order)
-              .badge.info= "#{count} #{'item'.pluralize{count}} filled"
-              .badge.info= "#{count} #{'case'.pluralize{cases}} ordered"
-              .badge.info= "co-op total #{number_to_currency(order.sum(:gross))}"
-              - if order.supplier.min_order_quantity
-                - if order.supplier.min_order_quantity.to_f > order.sum(:gross)
-                  .badge.badge-warning= "minimum of #{number_to_currency(order.supplier.min_order_quantity)} not met"
-                - else
-                  .badge.badge-success= "minimum of #{number_to_currency(order.supplier.min_order_quantity)} is met"
-          - if order.note
-            %tr
-              %td(colspan=5)
-                .span= order.note.gsub(URI::DEFAULT_PARSER.make_regexp(['http','https']), '<a href="\0">\0</a>').html_safe
+              %div.row-fluid
+                - if order.note
+                  .span= order.note.gsub(URI::DEFAULT_PARSER.make_regexp(['http','https']), '<a href="\0">\0</a>').html_safe
+              %div.row-fluid
+                - count = order.order_articles.ordered.count
+                - cases = order.order_articles.ordered.sum(:units_to_order)
+                .badge.info= "#{count} #{'item'.pluralize{count}} filled"
+                .badge.info= "#{count} #{'case'.pluralize{cases}} ordered"
+                .badge.info= "co-op total #{number_to_currency(order.sum(:gross))}"
+                - min_order_value = order.supplier.min_order_quantity.sub('$','').to_f
+                - if min_order_value > 0
+                  - if order.sum(:gross).to_f > min_order_value
+                    .badge.badge-success= "minimum of #{number_to_currency(order.supplier.min_order_quantity)} is met #{order.sum(:gross).to_f}  > #{ order.supplier.min_order_quantity }"
+                  - else
+                    .badge.badge-warning= "minimum of #{number_to_currency(order.supplier.min_order_quantity)} not met #{order.sum(:gross)}"
+
       - if total > 0
         %tfooter
           %tr
