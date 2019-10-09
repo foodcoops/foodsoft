@@ -19,9 +19,14 @@
       %td.numeric
         %abbr{title: "plus this amount from rounding-up to cent"}
           = '+ ' + number_to_currency(rounding_error)
-    %tr
+    - supplier_price_correct = !@order.invoice || number_to_currency(total_ordered) == number_to_currency(@order.invoice.net_amount)
+    %tr{ style: supplier_price_correct  ? "" : "color:red;font-weight: bold" }
       %td Supplier Price:
       %td.numeric= number_to_currency(total_ordered)
+    - unless supplier_price_correct
+      %tr
+        %td{ colspan: 3}
+          .alert.alert-error= "Supplier price should be equal to the net invoice amount (#{number_to_currency @order.invoice.net_amount}). If not, the supplier prices may be wrong on this site.  Please check the supplier invoice for any price changes (eg, sometimes half cases and subs are different).  Any items not being directly charged to members (eg, boxes, shipping, etc) should be shown under Deduct Charges on the invoice."
     %tr
       %td Deposits:
       %td.numeric= number_to_currency(total_deposit)
@@ -55,8 +60,7 @@
       - zero_balance_with_markup = (order_profit_with_markup-rounding_error).abs < 0.01
       - without_markup = zero_balance ? number_to_currency(0) : number_to_currency(order_profit_without_markup-rounding_error)
       - with_markup = zero_balance_with_markup ? number_to_currency(0) : number_to_currency(order_profit_with_markup-rounding_error)
-      - style = zero_balance ? "" : "color:red;font-weight: bold"
-      %tr{ style: style }
+      %tr{ style: zero_balance ? "" : "color:red;font-weight: bold" }
         %td
           = t('.fc_profit')
           %small= t('.without_extra_charge')
@@ -64,7 +68,6 @@
         %td.numeric
           %abbr{title: "plus this amount from rounding-up to cent"}
             = '+ ' + number_to_currency(rounding_error)
-
       - unless with_markup == without_markup
         %tr
           %td
@@ -76,7 +79,9 @@
         %td
           =image_tag 'heyeeyeeyyeyah.gif'
       - else
-        %td balance should be zero!
+        %td{ colspan: 3}
+          .alert.alert-error The balance should always be $0.00.  The rounding error is fine (and expected), and should always be in favour of the co-op.  If the balance is off by a few dollars the coop may not lose money but some members may be overcharged (and some undercharged) so please always make this balanced.  If there is a reason why it is not zero, please add a comment on the invoice below.
+
 #summaryChangedWarning.alert(style="display:none;")
   %strong= t '.changed'
   %br/
