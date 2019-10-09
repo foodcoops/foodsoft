@@ -890,8 +890,8 @@ en:
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
-        gross: Gross
-        net: Net
+        gross: Supplier
+        net: Members
       group_order_articles:
         add_group: Add group
         total: Total costs

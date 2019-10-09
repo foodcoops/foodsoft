@@ -38,7 +38,12 @@ class Invoice < ApplicationRecord
 
   # Amount without deposit
   def net_amount
-    amount - deposit + deposit_credit
+    payable_amount - deposit
+  end
+
+  # Amount after credits
+  def payable_amount
+    amount - deposit_credit
   end
 
   protected

@@ -179,7 +179,7 @@ class Order < ApplicationRecord
     a = [:net, :gross, :fc, :gross_price_supplier, :rounding_error, :tax, :deposit]
     if a.include?(type)
       for oa in order_articles.ordered.includes(:article, :article_price)
-        quantity = oa.units * oa.price.unit_quantity
+        quantity = oa.group_orders_sum[:quantity] #oa.units * oa.price.unit_quantity
         case type
           when :net
             total += quantity * oa.price.price
@@ -190,7 +190,8 @@ class Order < ApplicationRecord
           when :gross_price_supplier
             total += oa.units * oa.price.supplier_price
           when :rounding_error
-            total += quantity * oa.price_rounding_error
+            total += oa.calculate_rounding_error(oa.total_supplier_charge, oa.group_orders_sum[:quantity]) * oa.group_orders_sum[:quantity]
+            # total += quantity * oa.price_rounding_error
           when :tax
             total += quantity * oa.price.tax_cost
           when :deposit

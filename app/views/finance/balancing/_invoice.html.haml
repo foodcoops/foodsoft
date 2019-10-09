@@ -8,16 +8,16 @@
       %td= invoice.date
     %tr
       %td= t('.invoice_amount')
-      %td.curreny= number_to_currency invoice.amount
+      %td.currency= number_to_currency invoice.amount
     %tr
       %td= t('.minus_refund_calculated')
-      %td.curreny= number_to_currency invoice.deposit
+      %td.currency= number_to_currency invoice.deposit
     %tr
       %td= t('.plus_refund_credited')
-      %td.curreny= number_to_currency invoice.deposit_credit
+      %td.currency= number_to_currency invoice.deposit_credit
     %tr
       %td= t('.refund_adjusted_amount')
-      %td.curreny= number_to_currency invoice.net_amount
+      %td.currency= number_to_currency invoice.net_amount
     %tr
       %td Invoice Note:
     %tr

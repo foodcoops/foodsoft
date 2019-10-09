@@ -37,11 +37,10 @@ class OrderArticle < ApplicationRecord
   # Count quantities of belonging group_orders.
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
-    unless @group_orders_sum
+    @group_orders_sum ||= begin
       quantity = group_order_articles.collect(&:result).sum
       @group_orders_sum = {:quantity => quantity, :price => quantity * price.fc_price, :net_price => quantity * price.price}
     end
-    @group_orders_sum
   end
 
   # Update quantity/tolerance/units_to_order from group_order_articles
@@ -90,6 +89,10 @@ class OrderArticle < ApplicationRecord
   # Calculate supplier charge for ordered quantity.
   def total_supplier_charge
     units * price.supplier_price
+  end
+
+  def total_charges_to_members
+    group_orders_sum[:net_price]
   end
 
   # rounding error, since we round to the nearest cent/penny

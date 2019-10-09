@@ -42,28 +42,41 @@
           %b Invoice
       %tr
         %td= t('.groups_amount')
-        %td.numeric= number_to_currency(total_paid_by_members)
+        %td.numeric= number_to_currency(total_paid_by_members-rounding_error)
+        %td.numeric
+          %abbr{title: "plus this amount from rounding-up to cent"}
+            = '+ ' + number_to_currency(rounding_error)
       %tr
         %td Net Charge:
         %td.currency= number_to_currency @order.invoice.net_amount
-      - without_markup = number_to_currency(order.profit(:without_markup => true))
-      - with_markup = number_to_currency(order.profit)
-      %tr
-        %td
-          Balance Fix
-          %small= t('.without_extra_charge')
-        %td.numeric= number_to_currency(total_paid_by_members-@order.invoice.net_amount)
-      %tr
+      - order_profit_with_markup = order.profit
+      - order_profit_without_markup = order.profit(:without_markup => true)
+      - zero_balance = (order_profit_without_markup-rounding_error).abs < 0.01
+      - zero_balance_with_markup = (order_profit_with_markup-rounding_error).abs < 0.01
+      - without_markup = zero_balance ? number_to_currency(0) : number_to_currency(order_profit_without_markup-rounding_error)
+      - with_markup = zero_balance_with_markup ? number_to_currency(0) : number_to_currency(order_profit_with_markup-rounding_error)
+      - style = zero_balance ? "" : "color:red;font-weight: bold"
+      %tr{ style: style }
         %td
           = t('.fc_profit')
           %small= t('.without_extra_charge')
         %td.numeric= without_markup
+        %td.numeric
+          %abbr{title: "plus this amount from rounding-up to cent"}
+            = '+ ' + number_to_currency(rounding_error)
+
       - unless with_markup == without_markup
         %tr
           %td
             = t('.fc_profit')
             %small= t('.with_extra_charge')
           %td#order_profit.numeric= with_markup
+      %tr
+      - if zero_balance
+        %td
+          =image_tag 'heyeeyeeyyeyah.gif'
+      - else
+        %td balance should be zero!
 #summaryChangedWarning.alert(style="display:none;")
   %strong= t '.changed'
   %br/
