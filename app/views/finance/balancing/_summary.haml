@@ -19,7 +19,7 @@
       %td.numeric
         %abbr{title: "plus this amount from rounding-up to cent"}
           = '+ ' + number_to_currency(rounding_error)
-    - supplier_price_correct = !@order.invoice || number_to_currency(total_ordered) == number_to_currency(@order.invoice.net_amount)
+    - supplier_price_correct = !@order.invoice || number_to_currency(total_ordered) == number_to_currency(@order.invoice.net_amount-(total_deposit+total_tax))
     %tr{ style: supplier_price_correct  ? "" : "color:red;font-weight: bold" }
       %td Supplier Price:
       %td.numeric= number_to_currency(total_ordered)
@@ -53,7 +53,7 @@
             = '+ ' + number_to_currency(rounding_error)
       %tr
         %td Net Charge:
-        %td.currency= number_to_currency @order.invoice.net_amount
+        %td.numeric= number_to_currency @order.invoice.net_amount
       - order_profit_with_markup = order.profit
       - order_profit_without_markup = order.profit(:without_markup => true)
       - zero_balance = (order_profit_without_markup-rounding_error).abs < 0.01
