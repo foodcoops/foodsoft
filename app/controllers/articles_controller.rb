@@ -143,9 +143,6 @@ class ArticlesController < ApplicationController
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
     @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_from_file uploaded_file.tempfile, options
-    order_articles ||= OrderArticle.where(order_id: Order.open.where(supplier_id: @supplier.id).collect(&:id))
-    @in_open_order = order_articles.map{ |oa| oa.article.id }.to_set
-    @articles_map = @supplier.articles.map{ |a| [a.id, a] }.to_h
     if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
       redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.parse_upload.notice')
     end

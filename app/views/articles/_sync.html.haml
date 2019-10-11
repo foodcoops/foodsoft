@@ -7,7 +7,7 @@
         %li
           = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
           = "#{article.description}"
-          - if @in_open_order.include? article.id
+          - if article_in_open_order.include? article.id
             .alert= t '.outlist.alert_used', article: article.name
             .alert= article.order_number
   %hr/

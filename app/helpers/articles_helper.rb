@@ -1,5 +1,12 @@
 module ArticlesHelper
-  
+
+
+  def article_in_open_order
+    @article_in_open_order ||= begin
+      order_articles ||= OrderArticle.where(order_id: Order.open.where(supplier_id: @supplier.id).collect(&:id))
+      order_articles.map{ |oa| oa.article.id }.to_set
+    end
+  end
   # useful for highlighting attributes, when synchronizing articles
   def highlight_new(unequal_attributes, attribute)
     return unless unequal_attributes
