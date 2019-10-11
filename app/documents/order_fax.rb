@@ -75,7 +75,7 @@ class OrderFax < OrderPdf
     # Articles
     data, total = table_data
 
-    column_widths = [30, 40, 90, 40, 210, 60, 70]
+    column_widths = [40, 40, 90, 40, 200, 60, 70]
     data << [nil, nil, nil, nil, nil, I18n.t('documents.order_fax.total'), number_to_currency(total)]
     table data, column_widths: column_widths, cell_style: {size: fontsize(8), font: 'Courier', overflow: :shrink_to_fit} do |table|
       table.header = true
