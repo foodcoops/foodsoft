@@ -36,6 +36,11 @@ class ArticlesController < ApplicationController
     render :layout => false
   end
 
+  def copy
+    @article = @supplier.articles.find(params[:article_id]).dup
+    render :layout => false
+  end
+
   def create
     @article = Article.new(params[:article])
     if @article.valid? && @article.save

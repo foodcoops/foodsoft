@@ -15,10 +15,10 @@
       %th{:style => "width: 5em;"}= heading_helper Article, :price
       %th{:style => "width: 3.5em;"}= heading_helper Article, :tax
       %th{:style => "width: 4em;"}= heading_helper Article, :deposit
-      %th{:style => "width: 3em;"}
-      
+      %th
+
   %tbody#listbody
-    
+
     - unless @articles.empty?
       - for article in @articles
         = render(article)
