@@ -131,6 +131,13 @@ class Supplier < ApplicationRecord
     articles.where('articles.unit_quantity > 1').any?
   end
 
+  def sum_on_pickup_date(date, sum_type)
+    @sum_on_pickup_date ||= {}
+    @sum_on_pickup_date[[date, sum_type]] ||= begin
+      orders.where(pickup: date).map { |o| o.sum(sum_type) }.sum
+    end
+  end
+
   protected
 
   # make sure the shared_sync_method is allowed for the shared supplier

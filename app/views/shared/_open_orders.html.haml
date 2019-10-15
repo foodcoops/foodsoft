@@ -38,13 +38,15 @@
                 - cases = order.order_articles.ordered.sum(:units_to_order)
                 .badge.info= "#{count} #{'item'.pluralize{count}} filled"
                 .badge.info= "#{count} #{'case'.pluralize{cases}} ordered"
-                .badge.info= "co-op total #{number_to_currency(order.sum(:gross))}"
+                - order_sum = order.supplier.sum_on_pickup_date(order.pickup, :gross)
+                .badge.info= "#{order.supplier.name} total #{number_to_currency(order_sum)}"
                 - min_order_value = order.supplier.min_order_quantity.sub('$','').to_f
                 - if min_order_value > 0
-                  - if order.sum(:gross).to_f > min_order_value
-                    .badge.badge-success= "minimum of #{number_to_currency(order.supplier.min_order_quantity)} is met #{order.sum(:gross).to_f}  > #{ order.supplier.min_order_quantity }"
+                  - if order_sum.to_f > min_order_value
+                    .badge.badge-success= "minimum met"
                   - else
-                    .badge.badge-warning= "minimum of #{number_to_currency(order.supplier.min_order_quantity)} not met #{order.sum(:gross)}"
+                    - order_value_needed = min_order_value - order_sum
+                    .badge.badge-warning= "#{number_to_currency(order_value_needed)} more to meet minimum"
 
       - if total > 0
         %tfooter
