@@ -35,18 +35,29 @@
                   .span= order.note.gsub(URI::DEFAULT_PARSER.make_regexp(['http','https']), '<a href="\0">\0</a>').html_safe
               %div.row-fluid
                 - count = order.order_articles.ordered.count
+                - not_filled_count = order.order_articles.map{ |oa| oa.missing_units>0 ? 1 : 0 }.sum
                 - cases = order.order_articles.ordered.sum(:units_to_order)
-                .badge.info= "#{count} #{'item'.pluralize{count}} filled"
-                .badge.info= "#{count} #{'case'.pluralize{cases}} ordered"
-                - order_sum = order.supplier.sum_on_pickup_date(order.pickup, :gross)
-                .badge.info= "#{order.supplier.name} total #{number_to_currency(order_sum)}"
+                .badge.badge-info= "#{count} #{'items'.pluralize{count}} filled"
+                .badge.badge-warning= "#{not_filled_count} #{'case'.pluralize{not_filled_count}} to fill" if not_filled_count>0
+                .badge.badge-info= "#{cases} full #{'case'.pluralize{cases}}"
+                - supplier_order_sum = order.supplier.sum_on_pickup_date(order.pickup, :gross)
+                - order_sum = order.sum(:gross)
+                .badge.badge-dark
+                  -#= "#{order.supplier.name} total "
+                  = "co-op total "
+                  - if number_to_currency(order_sum)==number_to_currency(supplier_order_sum)
+                    = number_to_currency(order_sum)
+                  - else
+                    = "#{number_to_currency(order_sum)} of #{number_to_currency(supplier_order_sum)}"
                 - min_order_value = order.supplier.min_order_quantity.sub('$','').to_f
                 - if min_order_value > 0
-                  - if order_sum.to_f > min_order_value
-                    .badge.badge-success= "minimum met"
+                  - if supplier_order_sum.to_f > min_order_value
+                    .badge.badge-success= "#{number_to_currency(min_order_value)} minimum met"
                   - else
-                    - order_value_needed = min_order_value - order_sum
-                    .badge.badge-warning= "#{number_to_currency(order_value_needed)} more to meet minimum"
+                    - order_value_needed = min_order_value - supplier_order_sum
+                    .badge.badge-important= "#{number_to_currency(order_value_needed)} more to meet minimum of #{number_to_currency(min_order_value)}"
+          %tr.list-heading
+            %td(colspan=5)
 
       - if total > 0
         %tfooter
