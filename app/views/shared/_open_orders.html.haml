@@ -37,6 +37,7 @@
                 - count = order.order_articles.ordered.count
                 - not_filled_count = order.order_articles.map{ |oa| oa.missing_units>0 ? 1 : 0 }.sum
                 - cases = order.order_articles.ordered.sum(:units_to_order)
+                - effort = order.split_effort
                 .badge.badge-info= "#{count} #{'items'.pluralize{count}} filled"
                 .badge.badge-warning= "#{not_filled_count} #{'case'.pluralize{not_filled_count}} to fill" if not_filled_count>0
                 .badge.badge-info= "#{cases} full #{'case'.pluralize{cases}}"
@@ -56,6 +57,7 @@
                   - else
                     - order_value_needed = min_order_value - supplier_order_sum
                     .badge.badge-important= "#{number_to_currency(order_value_needed)} more to meet minimum of #{number_to_currency(min_order_value)}"
+                .badge.badge-info= "#{effort} splits"
           %tr.list-heading
             %td(colspan=5)
 

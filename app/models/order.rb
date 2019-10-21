@@ -336,6 +336,10 @@ class Order < ApplicationRecord
     end
   end
 
+  def split_effort
+    @split_effort ||= order_articles.map { |oa| oa.group_order_articles.where.not(quantity: 0).count }.sum
+  end
+
   protected
 
   def starts_before_ends
