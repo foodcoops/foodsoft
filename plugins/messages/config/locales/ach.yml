@@ -15,6 +15,7 @@ ach:
           ordergroup: crwdns5490:0crwdne5490:0
           messagegroup: crwdns5492:0crwdne5492:0
           workgroup: crwdns5494:0crwdne5494:0
+        send_to_all: crwdns5796:0crwdne5796:0
         subject: crwdns5496:0crwdne5496:0
         workgroup_id: crwdns5498:0crwdne5498:0
       messagegroup:
@@ -25,23 +26,6 @@ ach:
       message: crwdns5506:0crwdne5506:0
       messagegroup: crwdns5508:0crwdne5508:0
   admin:
-    messagegroups:
-      destroy:
-        error: 'crwdns5510:0%{error}crwdne5510:0'
-        notice: crwdns5512:0crwdne5512:0
-      edit:
-        title: crwdns5514:0crwdne5514:0
-      index:
-        first_paragraph: crwdns5516:0%{url}crwdne5516:0
-        new_messagegroup: crwdns5518:0crwdne5518:0
-        new_messagegroups: crwdns5520:0crwdne5520:0
-        second_paragraph: "crwdns5522:0crwdne5522:0"
-        title: crwdns5524:0crwdne5524:0
-      new:
-        title: crwdns5526:0crwdne5526:0
-      show:
-        send_message: crwdns5528:0crwdne5528:0
-        title: crwdns5530:0%{name}crwdne5530:0
     ordergroups:
       show:
         send_message: crwdns5532:0crwdne5532:0
@@ -119,6 +103,7 @@ ach:
       title: crwdns5622:0crwdne5622:0
     show:
       all_messages: crwdns5624:0crwdne5624:0
+      change_visibility: 'crwdns5798:0crwdne5798:0'
       from: ! 'crwdns5626:0crwdne5626:0'
       group: 'crwdns5628:0crwdne5628:0'
       reply: crwdns5630:0crwdne5630:0
@@ -126,9 +111,15 @@ ach:
       sent_on: ! 'crwdns5634:0crwdne5634:0'
       subject: ! 'crwdns5636:0crwdne5636:0'
       title: crwdns5638:0crwdne5638:0
+      to: 'crwdns5800:0crwdne5800:0'
+      visibility: 'crwdns5802:0crwdne5802:0'
+      visibility_private: 'crwdns5804:0crwdne5804:0'
+      visibility_public: 'crwdns5806:0crwdne5806:0'
     thread:
       all_message_threads: crwdns5640:0crwdne5640:0
       reply: crwdns5642:0crwdne5642:0
+    toggle_private:
+      not_allowed: crwdns5808:0crwdne5808:0
   message_threads:
     groupmessage_threads:
       show_message_threads: crwdns5644:0crwdne5644:0
@@ -144,7 +135,10 @@ ach:
       general: crwdns5658:0crwdne5658:0
   messages_mailer:
     foodsoft_message:
-      footer: ! 'crwdns5660:0%{reply_url}crwdnd5660:0%{msg_url}crwdnd5660:0%{profile_url}crwdne5660:0'
+      footer: |
+        crwdns5810:0%{reply_url}crwdnd5810:0%{msg_url}crwdnd5810:0%{profile_url}crwdne5810:0
+      footer_group: |
+        crwdns5812:0%{group}crwdne5812:0
   navigation:
     admin:
       messagegroups: crwdns5662:0crwdne5662:0
@@ -152,3 +146,8 @@ ach:
   shared:
     user_form_fields:
       messagegroups: crwdns5666:0crwdne5666:0
+  simple_form:
+    labels:
+      settings:
+        messages:
+          send_as_email: crwdns5814:0crwdne5814:0
