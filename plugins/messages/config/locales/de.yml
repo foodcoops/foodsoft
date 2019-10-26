@@ -20,29 +20,11 @@ de:
         workgroup_id: Arbeitsgruppe
       messagegroup:
         description: Beschreibung
-        name: Name
         user_tokens: Mitglieder
     models:
       message: Nachricht
       messagegroup: Nachrichtengruppe
   admin:
-    messagegroups:
-      destroy:
-        error: 'Nachrichtengruppe konnte nicht als gelöscht markiert werden: %{error}'
-        notice: Nachrichtengruppe wurde als gelöscht markiert
-      edit:
-        title: Nachrichtengruppe bearbeiten
-      index:
-        first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
-        new_messagegroup: Neue Nachrichtengruppe anlegen
-        new_messagegroups: neue Nachrichtengruppe
-        second_paragraph: Eine Nachrichtengruppe ist wie ein Mail-Verteilen. Mitglieder können Verteiler in ihrem Profil abonnieren (und auch wieder abbestellen) an denen sie interessiert sind.
-        title: Nachrichtengruppen
-      new:
-        title: Nachrichtengruppe anlegen
-      show:
-        send_message: Nachricht senden
-        title: Nachrichtengruppe %{name}
     ordergroups:
       show:
         send_message: Nachricht senden
@@ -55,9 +37,9 @@ de:
       mailing_list_subscribe: E-Mail Adresse zum Anmelden an die Mailingliste
       use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
     keys:
+      use_messages: Nachrichten
       mailing_list: Mailingliste
       mailing_list_subscribe: Mailingliste anmelden
-      use_messages: Nachrichten
   helpers:
     messages:
       write_message: Nachricht schreiben
@@ -69,13 +51,12 @@ de:
       messages:
         title: Neueste Nachrichten
         view_all:
-          messages: Nachrichten
           text: '%{messages} oder %{threads} anzeigen'
+          messages: Nachrichten
           threads: Nachrichtenverläufe
-      write_message: Nachricht schreiben
   messagegroups:
     index:
-      body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
+      body: 'Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.'
       title: Nachrichtengruppen
     join:
       error: 'Nachrichtengruppe konnte nicht begetreten werden: %{error}'
@@ -95,19 +76,16 @@ de:
     create:
       notice: Nachricht ist gespeichert und wird versendet.
     index:
-      new: Neue Nachricht
       title: Nachrichten
     messages:
       reply: Antworten
     model:
-      reply_header: "%{user} schrieb am %{when}:"
-      reply_indent: "> %{line}"
-      reply_subject: 'Re: %{subject}'
+      reply_header: ! '%{user} schrieb am %{when}:'
     new:
       error_private: Nachricht ist privat!
       hint_private: Nachricht erscheint nicht im Foodsoft Posteingang
       list:
-        desc: 'Nachrichten an alle verschickst Du bitte über den Verteiler: %{list}'
+        desc: ! 'Nachrichten an alle verschickst Du bitte über den Verteiler: %{list}'
         mail: z.b. mit einer E-Mail an %{email}.
         subscribe: Erklärungen zum Verteiler findest Du im %{link}.
         subscribe_msg: Eventuell musst Du Dich dem Verteiler erst bekannt machen.
@@ -121,12 +99,12 @@ de:
     show:
       all_messages: Nachrichten im Überblick
       change_visibility: 'Ändern'
-      from: 'Von:'
-      group: Gruppe
+      from: ! 'Von:'
+      group: 'Gruppe'
       reply: Antworten
       reply_to: 'Antwort auf:'
-      sent_on: 'Gesendet:'
-      subject: 'Betreff:'
+      sent_on: ! 'Gesendet:'
+      subject: ! 'Betreff:'
       title: Nachricht anzeigen
       to: 'An:'
       visibility: 'Sichtbarkeit:'

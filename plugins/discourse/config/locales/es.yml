@@ -1,6 +1,5 @@
 es:
   discourse:
     callback:
-      invalid_nonce:
       invalid_signature: Firma inválida
       logged_in: Estás adentro!

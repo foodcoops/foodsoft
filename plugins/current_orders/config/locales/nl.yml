@@ -7,33 +7,33 @@ nl:
   current_orders:
     articles:
       article:
-        counts: "%{ordergroups} huishoudens bestelden %{articles} verschillende artikelen."
+        counts: '%{ordergroups} huishoudens bestelden %{articles} verschillende artikelen.'
         no_selection: Kies een artikel om te zien wie het besteld heeft, of download verdeellijsten rechtsboven.
       article_info:
-        from: van %{supplier}
         origin_in: uit %{origin}
-        supplied_and_made_by: gemaakt door %{manufacturer}
         supplied_by: van %{supplier}
+        supplied_and_made_by: gemaakt door %{manufacturer}
         supplied_by_made_by: van %{supplier} gemaakt door %{manufacturer}
         unit: per %{unit}
+        from: van %{supplier}
       form:
         article_placeholder: Zoek artikelen...
         current_orders: Alle huidige bestellingen
       index:
         title: Artikelen verdelen
       ordergroups:
-        add_new: Huishouden toevoegen...
         piece: st
         unit: eenh
+        add_new: Huishouden toevoegen...
       show:
-        title: "%{name} verdelen"
+        title: ! '%{name} verdelen'
+    navigation:
+      receive: Ontvangen
+      articles: Verdelen
+      ordergroups: Ledenbestellingen
     group_orders:
       index:
         title: Je huidige bestellingen
-    navigation:
-      articles: Verdelen
-      ordergroups: Ledenbestellingen
-      receive: Ontvangen
     ordergroups:
       articles:
         add_new: Artikel toevoegen...
@@ -43,15 +43,16 @@ nl:
       index:
         title: Artikelen voor huishouden
       payment_bar:
-        account_balance: Account balance
+        account_balance: Tegoed
+        new_pin: PIN
         new_transaction: Nieuwe transactie
-        payment: 'Betaling:'
+        payment: ! 'Betaling:'
       show:
         title: Artikelen voor %{name}
     orders:
       receive:
-        no_finished_orders: Er zijn momenteel geen bestellingen die ontvangen hoeven te worden.
         title: Bestellingen ontvangen
+        no_finished_orders: Er zijn momenteel geen bestellingen die ontvangen hoeven te worden.
   documents:
     multiple_orders_by_articles:
       filename: Huidige bestellingen per artikel

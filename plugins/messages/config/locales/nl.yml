@@ -3,7 +3,6 @@ nl:
     attributes:
       message:
         body: Bericht
-        group_id: Groep
         messagegroup_id: Berichtengroep
         order_id: Bestelling
         ordergroup_id: Bestelgroep
@@ -11,10 +10,10 @@ nl:
         recipient_tokens: Geadresseerden
         send_method:
           all: Verzenden naar alle leden
-          messagegroup: Verzenden naar leden van een berichtengroep
+          recipients: Verzenden naar specifieke leden
           order: Verzenden naar leden die besteld hebben
           ordergroup: Verzenden naar leden van een bestelgroep
-          recipients: Verzenden naar specifieke leden
+          messagegroup: Verzenden naar leden van een berichtengroep
           workgroup: Verzenden naar leden van een werkgroep
         send_to_all: Aan alle leden sturen
         subject: Onderwerp
@@ -27,23 +26,6 @@ nl:
       message: Bericht
       messagegroup: Berichtengroep
   admin:
-    messagegroups:
-      destroy:
-        error: 'Berichtengroep kon niet verwijderd worden: %{error}'
-        notice: Berichtengroep is verwijderd
-      edit:
-        title: Bewerk berichtengroep
-      index:
-        first_paragraph: Hier kun je %{url} aanmaken, aanpassen en verwijderen.
-        new_messagegroup: Nieuwe berichtengroep maken
-        new_messagegroups: nieuwe berichtengroepen
-        second_paragraph: Een berichtengroep is als een mailing-lijst. Leden kunnen zich aan- en afmelden voor groepen waar ze in geïnteresseerd zijn vanuit hun profiel.
-        title: Berichtengroepen
-      new:
-        title: Berichtengroep aanmaken
-      show:
-        send_message: Bericht verzenden
-        title: Berichtengroep %{name}
     ordergroups:
       show:
         send_message: Bericht sturen
@@ -56,9 +38,9 @@ nl:
       mailing_list_subscribe: Emailadres waar leden zich kunnen aanmelden voor de mailing-lijst.
       use_messages: Laat leden met elkaar communiceren door middel van berichten binnen Foodsoft.
     keys:
+      use_messages: Berichten
       mailing_list: Mailing-lijst
       mailing_list_subscribe: Mailing-lijst aanmelden
-      use_messages: Berichten
   helpers:
     messages:
       write_message: Bericht schrijven
@@ -70,8 +52,8 @@ nl:
       messages:
         title: Nieuwste berichten
         view_all:
+          text: '%{messages} of %{threads} bekijken'
           messages: Alle berichten
-          text: "%{messages} of %{threads} bekijken"
           threads: conversaties
     start_nav:
       write_message: Bericht schrijven
@@ -97,19 +79,18 @@ nl:
     create:
       notice: Bericht is opgeslagen en wordt verzonden.
     index:
-      new: Nieuw bericht
       title: Berichten
     messages:
       reply: Antwoorden
     model:
-      reply_header: "%{user} schreef op %{when}:"
-      reply_indent: "> %{line}"
-      reply_subject: 'Re: %{subject}'
+      reply_header: ! '%{user} schreef op %{when}:'
+      reply_indent: ! '> %{line}'
+      reply_subject: ! 'Re: %{subject}'
     new:
       error_private: Sorry, dit bericht is privé.
       hint_private: Bericht wordt niet getoond in de Foodsoft inbox
       list:
-        desc: 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
+        desc: ! 'Berichten voor alle leden graag via de mailing-lijst verzenden: %{list}'
         mail: bijvoorbeeld door een email te sturen naar %{email}.
         subscribe: Lees meer over de mailing-lijst op %{link}.
         subscribe_msg: Mogelijk moet je je eerst aanmelden voor de mailing-lijst.
@@ -122,17 +103,23 @@ nl:
       title: Nieuw bericht
     show:
       all_messages: Berichtenoverzicht
-      from: 'Van:'
+      change_visibility: 'Veranderen'
+      from: ! 'Van:'
       group: 'Groep:'
       reply: Antwoorden
       reply_to: 'Antwoord:'
-      sent_on: 'Verzonden:'
-      subject: 'Onderwerp:'
+      sent_on: ! 'Verzonden:'
+      subject: ! 'Onderwerp:'
       title: Bericht lezen
       to: 'Aan:'
+      visibility: 'Zichtbaarheid:'
+      visibility_private: 'Privé'
+      visibility_public: 'Publiek'
     thread:
       all_message_threads: Alle conversaties
       reply: Antwoord
+    toggle_private:
+      not_allowed: Je kunt de zichtbaarheid van het bericht niet wijzigen.
   message_threads:
     groupmessage_threads:
       show_message_threads: alles tonen
@@ -144,13 +131,16 @@ nl:
       last_reply_by: Laatst beantwoord door
       started_at: Begonnen op
       started_by: Begonnen door
-    show: Algemene berichten
+    show:
+      general: Algemeen
   messages_mailer:
     foodsoft_message:
-      footer: |-
+      footer: |
         Antwoorden: %{reply_url}
         Bericht online lezen: %{msg_url}
         Berichtinstellingen: %{profile_url}
+      footer_group: |
+        Verzenden aan groep: %{group}
   navigation:
     admin:
       messagegroups: Berichtengroepen

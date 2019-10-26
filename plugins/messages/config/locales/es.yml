@@ -3,7 +3,6 @@ es:
     attributes:
       message:
         body: Cuerpo
-        group_id: Grupo
         messagegroup_id: Grupo de mensajes
         order_id: Pedido
         ordergroup_id: Grupo de pedido
@@ -11,10 +10,10 @@ es:
         recipient_tokens: Destinatarios (adicionales)
         send_method:
           all: Enviar a todos los miembros
-          messagegroup: Enviar a los miembros de un grupo de mensajes
+          recipients: Enviar a miembros específicos
           order: Enviar a los miembros que han participado de un pedido
           ordergroup: Enviar a los miembros de un grupo de pedido
-          recipients: Enviar a miembros específicos
+          messagegroup: Enviar a los miembros de un grupo de mensajes
           workgroup: Enviar a miembros de un grupo de trabajo
         send_to_all: Enviar a todos los miembros
         subject: Asunto
@@ -27,23 +26,6 @@ es:
       message: Mensaje
       messagegroup: Grupo de mensajes
   admin:
-    messagegroups:
-      destroy:
-        error: 'El grupo de mensajes no se pudo borrar: %{error}'
-        notice: El mensaje de grupo ha sido borrado
-      edit:
-        title: Edita mensaje de grupo
-      index:
-        first_paragraph: 
-        new_messagegroup: Crea nuevo mensaje de grupo
-        new_messagegroups: nuevos grupos de mensajes
-        second_paragraph: Un grupo de mensajes es como una lista de correo. Los miembros se pueden suscribir y desuscribir de las listas en las que están interesados, desde su página de perfil.
-        title: Grupos de mensaje
-      new:
-        title: Crea grupo de mensajes
-      show:
-        send_message: Envía mensaje
-        title: Grupo de mensaje %{name}
     ordergroups:
       show:
         send_message: Envía mensaje
@@ -56,9 +38,9 @@ es:
       mailing_list_subscribe: Dirección de email a donde los miembros pueden enviar correo para suscribirse.
       use_messages: Permitir que los miembros de comuniquen unos con otros dentro de Foodsoft.
     keys:
+      use_messages: Mensajes
       mailing_list: Lista de correos
       mailing_list_subscribe: Suscribirse a la lista de correos
-      use_messages: Mensajes
   helpers:
     messages:
       write_message: Escribe mensaje
@@ -70,26 +52,13 @@ es:
       messages:
         title: Mensajes recientes
         view_all:
+          text: 'Muestra %{messages} o %{threads}'
           messages: todos los mensajes
-          text: Muestra %{messages} o %{threads}
           threads: Hilos
     start_nav:
       write_message: Escribir un mensaje
-  message_threads:
-    groupmessage_threads:
-      show_message_threads: muestra todos
-    index:
-      general: General
-      title: Hilos de mensaje
-    message_threads:
-      last_reply_at: Última respuesta el
-      last_reply_by: 'Última respuesta de '
-      started_at: Comenzado el
-      started_by: Comenzado por
-    show: General
   messagegroups:
     index:
-      body: 
       title: Grupos de mensaje
     join:
       error: 'No pudo unirse al grupo de mensaje: %{error}'
@@ -103,29 +72,19 @@ es:
   messages:
     actionbar:
       message_threads: Muestra como hilos
-      messagegroups: 
       messages: Muestra como lista
       new: Nuevo mensaje
-    create:
-      notice: 
     index:
-      new: Nuevo mensaje
       title: Mensajes
     messages:
       reply: Responde
-    model:
-      reply_header: 
-      reply_indent: 
-      reply_subject: 'Re: %{subject}'
     new:
       error_private: Lo siento, este mensaje es privado.
-      hint_private: 
       list:
-        desc: 'Envía mensajes a todos los miembros a través de la lista de correo: %{list}'
+        desc: ! 'Envía mensajes a todos los miembros a través de la lista de correo: %{list}'
         mail: por ejemplo con un email a %{email}.
         subscribe: Puedes leer más sobre la lista de correos en %{link}.
         subscribe_msg: Quizás tengas que suscribirte a la lista primero.
-        wiki: 
       message: mensaje
       no_user_found: No se ha encontrado el usuario
       reply_to: Este mensaje es una respuesta a otro %{link}.
@@ -134,17 +93,27 @@ es:
       title: Nuevo mensaje
     show:
       all_messages: Todos los mensajes
-      from: 'De:'
+      from: ! 'De:'
       group: 'Grupo:'
       reply: Responde
       reply_to: 'Responde a:'
-      sent_on: 'Enviado:'
-      subject: 'Asunto:'
+      sent_on: ! 'Enviado:'
+      subject: ! 'Asunto:'
       title: Muestra mensaje
       to: 'A:'
     thread:
       all_message_threads: Todos los hilos de mensaje
       reply: Responde
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: muestra todos
+    index:
+      title: Hilos de mensaje
+    message_threads:
+      last_reply_at: Última respuesta el
+      last_reply_by: Última respuesta de 
+      started_at: Comenzado el
+      started_by: Comenzado por
   navigation:
     admin:
       messagegroups: Grupos de mensaje

@@ -5,11 +5,6 @@ fr:
         body: Contenu
         parent_id: Page parente
         title: Titre
-  config:
-    hints:
-      use_wiki:
-    keys:
-      use_wiki:
   model:
     page:
       redirect: Redirection vers [[%{title}]]...
@@ -17,7 +12,6 @@ fr:
     wiki:
       all_pages: Toutes les pages
       home: Page d'accueil
-      title: Wiki
   pages:
     all:
       new_page: Créer une nouvelle page
@@ -38,8 +32,6 @@ fr:
       redirect_notice: Redirigé à partir de %{page}...
     destroy:
       notice: La page '%{page}' et toutes ses descendantes ont bien été supprimées.
-    diff:
-      title: 
     edit:
       title: Modifier cette page
     error_stale_object: Cette page est en cours de modification par unE autre membre. Merci de réessayer plus tard.
@@ -50,13 +42,8 @@ fr:
         external_links: Externe
         heading: Plan %{level}
         headings: En-tête
-        image_link_title: 
-        image_links: Images
         italic: italique
-        link_lists: 
         link_table: Format des tableaux
-        link_templates: 
-        link_variables: 
         list_item_1: Premier item
         list_item_2: Deuxième item
         noformat: Pas de formatage
@@ -64,10 +51,6 @@ fr:
         section_block: Format de paragraphe
         section_character: Format de charactère
         section_link: Format des liens
-        section_more: 
-        section_table: 
-        see_tables: 
-        tables_link: 
         text: texte
         title: Assistant de mise en forme rapide
         unordered_list: Liste non ordonnée
@@ -78,29 +61,21 @@ fr:
     new:
       title: Ajouter une nouvelle page au Wiki
     page_list_item:
-      date_format: "%a, %d. %B %Y %H:%M:%S"
+      date_format: ! '%a, %d. %B %Y %H:%M:%S'
     show:
-      date_format: "%d.%m.%y %H:%M"
+      date_format: ! '%d.%m.%y %H:%M'
       delete: Supprimer la page
-      delete_confirm: Attention, tous les contenus seront aussi supprimés. T'es sûrE de ton coup?
-      diff: 
+      delete_confirm: ! 'Attention, tous les contenus seront aussi supprimés. T''es sûrE de ton coup?'
       edit: Modifier la page
       last_updated: Dernière modification le %{when} par <b>%{user}<b>
       subpages: Sous-pages
-      title_versions: Versions
-      versions: Versions (%{count})
     title: Titre
     update:
       notice: La page a été mise à jour
-    variables:
-      description: 
-      title: 
-      value: 
-      variable: 
     version:
-      author: 'Auteur: %{user}'
-      date_format: "%a, %d.%m.%Y, %H:%M heure"
+      author: ! 'Auteur: %{user}'
+      date_format: ! '%a, %d.%m.%Y, %H:%M heure'
       revert: Revenir à cette version
-      title: "%{title} - Version %{version}"
+      title: ! '%{title} - Version %{version}'
       title_version: Versio
       view_current: Afficher la version actuelle

@@ -19,7 +19,6 @@ es:
   documents:
     create:
       error: 'El documento no puede ser creado: %{error}'
-      not_allowed_mime:
       notice: Se ha creado el documento
     destroy:
       error: 'El documento no puede ser borrado: %{error}'

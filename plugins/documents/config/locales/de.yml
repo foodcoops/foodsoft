@@ -6,7 +6,6 @@ de:
         created_by: Erstellt von
         data: Daten
         mime: MIME-Typ
-        name: Name
   config:
     hints:
       documents_allowed_extension: Eine Liste an erlaubten Dateiendungen getrennt durch Leerzeichen.

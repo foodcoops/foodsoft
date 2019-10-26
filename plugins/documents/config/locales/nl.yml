@@ -26,7 +26,10 @@ nl:
       no_right: Je hebt niet genoeg rechten om het document te verwijderen
       notice: Document is verwijderd
     form:
-      title: Nieuw document
+      new: Nieuw document
+      new_folder: nieuwe map
+      submit: Aanmaken
     index:
       new: Nieuw document uploaden
+      new_folder: Nieuwe map
       title: Documenten

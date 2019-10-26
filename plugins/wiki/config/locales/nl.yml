@@ -52,7 +52,7 @@ nl:
         headings: Kop
         image_link_title: Titel van afbeelding
         image_links: Plaatjes
-        italic: italic
+        italic: cursief
         link_lists: Meer over lijsten
         link_table: Tabellen
         link_templates: Sjablonen
@@ -78,11 +78,11 @@ nl:
     new:
       title: Nieuwe wiki pagina
     page_list_item:
-      date_format: "%a, %d %B %Y %H:%M:%S"
+      date_format: ! '%a, %d %B %Y %H:%M:%S'
     show:
-      date_format: "%d-%m-%y %H:%M"
+      date_format: ! '%d-%m-%y %H:%M'
       delete: Pagina verwijderen
-      delete_confirm: 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
+      delete_confirm: ! 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
       diff: Versies vergelijken
       edit: Pagina bewerken
       last_updated: Laatst bijgewerkt door <b>%{user}</b> op %{when}
@@ -98,9 +98,9 @@ nl:
       value: Huidige waarde
       variable: Variabele
     version:
-      author: 'Auteur: %{user}'
-      date_format: "%a, %d-%m-%Y, %H:%M"
+      author: ! 'Auteur: %{user}'
+      date_format: ! '%a, %d-%m-%Y, %H:%M'
       revert: Deze versie terugzetten
-      title: "%{title} - versie %{version}"
+      title: ! '%{title} - versie %{version}'
       title_version: Versie
       view_current: Huidige versie bekijken

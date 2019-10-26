@@ -3,7 +3,7 @@ es:
     attributes:
       article:
         article_category: Categoría
-        availability: "¿Está disponible este artículo?"
+        availability: '¿Está disponible este artículo?'
         availability_short: disp.
         deposit: Depósito
         fc_price: Precio del grupo de consumo
@@ -14,13 +14,10 @@ es:
         gross_price: Precio bruto
         manufacturer: Elaborador-a
         name: Nombre
-        note: Note
         order_number: Número de pedido
-        order_number_short: Nr.
         origin: Origen
         price: Precio (neto)
         supplier: Proveedor
-        tax: VAT
         unit: Unidad
         unit_quantity: Cantidad de unidades
         unit_quantity_short: C.U.
@@ -35,12 +32,16 @@ es:
         unit_quantity: Cantidad de unidades
       delivery:
         delivered_on: Fecha entrega
-        note: Note
         supplier: Proveedor
+      document:
+        created_at: Creado en
+        created_by: Creado por
+        data: Datos
+        mime: Tipo MIME
+        name: Nombre
       financial_transaction:
         amount: Importe
         created_on: Fecha
-        note: Note
         ordergroup: Grupo de pedido
         user: Ingresado por
       group_order:
@@ -73,7 +74,6 @@ es:
         supplier: Proveedor
       mail_delivery_status:
         created_at: Hora
-        email: Email
         message: Mensaje
       order:
         boxfill: Repartir cajas después
@@ -87,10 +87,8 @@ es:
           no_end_action: Ninguna acción automática
         ends: Finaliza el
         name: Proveedor
-        note: Note
         pickup: Recogida
         starts: Comienza el
-        status: Status
         supplier: Proveedor
         updated_by: Editado por última vez por
       order_article:
@@ -130,21 +128,16 @@ es:
         quantity_ordered: Pedidos
       stock_taking:
         date: Fecha
-        note: Note
       supplier:
         address: Dirección
         contact_person: Persona de contacto
         customer_number: Número de cliente
         customer_number_short: Nr.cliente
         delivery_days: Días de entrega
-        email: Email
-        fax: Fax
-        iban: IBAN
         is_subscribed: suscrito?
         min_order_quantity: Cantidad mínima para pedir
         min_order_quantity_short: Cant. min.
         name: Nombre
-        note: Note
         order_howto: Cómo pedir
         phone: teléfono
         phone2: teléfono 2
@@ -160,9 +153,7 @@ es:
         user_list: Usuarios responsables
         workgroup: Grupo de trabajo
       user:
-        email: Email
         first_name: Nombre
-        iban: IBAN
         last_activity: Última actividad
         last_login: Último login
         last_name: Apellido
@@ -186,13 +177,11 @@ es:
         role_suppliers: Proveedores
         user_tokens: Miembros
     errors:
-      has_many_left: is still associated with a %{collection}!
       models:
         article:
           attributes:
             name:
               taken: ese nombre ya está cogido
-              taken_with_unit: name and unit are already taken
         supplier:
           attributes:
             shared_sync_method:
@@ -214,7 +203,6 @@ es:
         one: Grupo de pedido
         other: Grupos de pedido
       stock_article: Artículo de stock
-      stock_taking: 
       supplier: Proveedor
       task: Tarea
       user: Usuario
@@ -226,7 +214,7 @@ es:
         all_ordergroups: Todos los grupos de pedido
         all_users: Todos los usuarios
         all_workgroups: Todos los grupos de trabajo
-        created_at: 'creado '
+        created_at: creado 
         first_paragraph: Aquí puedes administrar grupos y usuarios de Foodsoft.
         groupname: nombre del grupo
         members: miembros
@@ -259,7 +247,7 @@ es:
         title: Configuración
       update:
         notice: Configuración guardada.
-    confirm: "¿Estás seguro/a?"
+    confirm: '¿Estás seguro/a?'
     mail_delivery_status:
       destroy_all:
         notice: Se han borrado todos los problemas de email
@@ -285,7 +273,7 @@ es:
       new:
         title: Crea grupo de pedido
       show:
-        confirm: "¿Estas seguro/a?"
+        confirm: '¿Estas seguro/a?'
         edit: Edita grupo/miembros
         title: Grupo de pedido %{name}
     search_placeholder: nombre ..
@@ -302,7 +290,6 @@ es:
         new_user: Crea nuevo usuario/a
         new_users: crea nuevo
         show_deleted: Muestra usuarios borrados
-        title: User admin
       new:
         title: Crea nuevo usuario
       restore:
@@ -337,7 +324,7 @@ es:
       new:
         title: Crear grupo de trabajo
       show:
-        confirm: "¿Estás seguro/a?"
+        confirm: '¿Estás seguro/a?'
         edit: Edita grupo/miembros
         title: Grupo de trabajo %{name}
       workgroups:
@@ -369,7 +356,7 @@ es:
     article:
       last_update: 'última actualización: %{last_update} | bruto: %{gross_price}'
     articles:
-      confirm_delete: "¿Estás segura que quieres borrar todos los artículos seleccionados?"
+      confirm_delete: '¿Estás segura que quieres borrar todos los artículos seleccionados?'
       option_available: Haz artículos disponibles
       option_delete: Borra artículo
       option_not_available: Haz artículos no disponibles
@@ -379,16 +366,13 @@ es:
       unit_quantity_short: C.U.
     controller:
       create_from_upload:
-        notice: Se han guardado %{count} nuevos artículos.
+        notice: "Se han guardado %{count} nuevos artículos."
       error_invalid: Hay errores en los artículos
       error_nosel: No se ha seleccionado ningún artículo
       error_parse: "%{msg} ... en la línea %{line}"
       error_update: 'Ha ocurrido un error miebtras se actualizaba el artículo ''%{article}'': %{msg}'
       parse_upload:
         no_file: Elige un archivo para subir.
-        notice:
-          one: "%{count} artículo fue analizado con éxito."
-          other: "%{count} artículos fueron analizados con éxito."
       sync:
         notice: El catálogo está actualizado
         shared_alert: "%{supplier} no está conectado a una base de datos externa"
@@ -408,7 +392,7 @@ es:
       note: 'Los campos necesarios son: nombre, unidad, precio (neto) y número de pedido.'
       submit: Actualizar todos los artículos
       title: Editar todos los artículos de %{supplier}
-      warning: "¡Ojo! Todos los artículos serán actualizados"
+      warning: '¡Ojo! Todos los artículos serán actualizados'
     form:
       title_edit: Editar artículo
       title_new: Añadir un nuevo artículo
@@ -445,7 +429,7 @@ es:
         body: 'Los próximos artículos fueron sacados de la lista y serán <b>borrados</b>:'
         body_ignored:
           one: Se ha salteado un artículo sin número de pedido.
-          other: Se han salteado %{count} artículos sin número de pedido.
+          other: "Se han salteado %{count} artículos sin número de pedido."
         body_skip: No hay artículos para borrar.
         title: Quitar de la lista...
       price_short: Precio
@@ -469,15 +453,12 @@ es:
         status: Estado (x=saltar)
       file_label: Por favor elige un archivo compatible
       options:
-        convert_units: 'Mantener unidades actuales, recomputar la cantidad y precio de unidades (como sincronizar). '
+        convert_units: Mantener unidades actuales, recomputar la cantidad y precio de unidades (como sincronizar). 
         outlist_absent: Borrar artículos que no están en el archivo subido.
       sample:
         juices: Jugos
         nuts: Nueces
         organic: Orgánico
-        supplier_1: Nuttyfarm
-        supplier_2: Brownfields
-        supplier_3: Greenfields
         tomato_juice: Jugo de tomate
         walnuts: Nogal
       submit: Subir archivo
@@ -505,9 +486,7 @@ es:
       order_schedule:
         boxfill:
           recurr: Programa cuándo la fase de llenado de cajas comienza por defecto.
-          time: 
         ends:
-          recurr: 
           time: Fecha por defecto cuando se cierran los pedidos.
         initial: La agenda comienza en esta fecha.
       page_footer: Se muestra en cada página en la parte inferior. Dejar vacío para desactivar el pie de página por completo.
@@ -526,14 +505,12 @@ es:
       use_boxfill: Cuando está activado, cerca del cierre de un pedido los miembros no podrán cambiar su pedido a menos que se incremente el valor pedido total. Esto ayudará a llenar las cajas que faltan. Igualmente deberás decidir una fecha de llenado de cajas para los pedidos.
       use_iban: Cuando esta opción está habilitada, el proveedor y el usuario pueden guardan también su número de cuenta bancaria internacional (IBAN).
       use_nick: Muestra y utiliza apodos en lugar de nombres reales. Cuando activas esto debes chequear que todos los usuarios tengan apodo.
-      webstats_tracking_code: 
     keys:
       applepear_url: Enlace de ayuda para el sistema de puntos-manzana
       charge_members_manually: Cambia los miembros manualmente
       contact:
         city: Ciudad
         country: País
-        email: Email
         phone: Teléfono
         street: Calle
         zip_code: Código postal
@@ -565,7 +542,6 @@ es:
       price_markup: Margen de la cooperativa
       stop_ordering_under: Puntos-manzana mínimos
       tasks_period_days: Periodo
-      tasks_upfront_days: 
       tax_default: IVA por defecto
       time_zone: Zona horaria
       tolerance_is_costly: La tolerancia es prioritaria
@@ -600,7 +576,7 @@ es:
       title_finish_delivery: 3. Termina envío
       title_select_stock_articles: 1. Selecciona artículos en stock
     index:
-      confirm_delete: "¿Estás seguro/a?"
+      confirm_delete: '¿Estás seguro/a?'
       new_delivery: 'Crea nuevo envío para %{supplier} '
       title: "%{supplier}/envíos"
     invoice_amount: Importe factura
@@ -634,18 +610,16 @@ es:
     order_fax:
       filename: Pedido %{name}-%{date} - Fax
       rows:
-      - Número de pedido
-      - Importe
-      - Nombre
-      - Cantidad de unidades
-      - Unidad
-      - Precio/Unidad
-      - Subtotal
-      total: Total
+        - Número de pedido
+        - Importe
+        - Nombre
+        - Cantidad de unidades
+        - Unidad
+        - Precio/Unidad
+        - Subtotal
     order_matrix:
       filename: Pedido %{name}-%{date} - matrix para ordenar
       heading: Descripción del artículo (%{count})
-      title: 
   errors:
     general: Ha ocurrido un problema.
     general_again: Ha ocurrido un problema. Por favor inténtalo de nuevo.
@@ -661,8 +635,7 @@ es:
     create:
       notice: Tus comentarios fueron enviados con éxito. ¡Muchas gracias!
     new:
-      first_paragraph: "¿Encontraste un error? ¿Tienes sugerencias, ideas o comentarios? Nos gustaría recibir tus comentarios."
-      second_paragraph: 
+      first_paragraph: '¿Encontraste un error? ¿Tienes sugerencias, ideas o comentarios? Nos gustaría recibir tus comentarios.'
       send: Enviar
       title: Enviar comentarios
   finance:
@@ -718,7 +691,7 @@ es:
         title: Cuentas %{name}
         view_options: Opciones de vista
       order_article:
-        confirm: "¿Estás seguro/a?"
+        confirm: '¿Estás seguro/a?'
       orders:
         clear: contabilidad
         cleared: contabilizado (%{amount})
@@ -728,7 +701,7 @@ es:
         no_closed_orders: Ahora mismo no hay pedidos cerrados
         state: Estado
       summary:
-        changed: "¡Han cambiado los datos!"
+        changed: '¡Han cambiado los datos!'
         duration: Desde %{starts} hasta %{ends}
         fc_amount: 'Valor de venta:'
         fc_profit: beneficio FC
@@ -752,8 +725,6 @@ es:
           error_note_required: Note se requiere!
           notice: Se han guardado todas las transacciones
       index:
-        balance: 'Balance of account: %{balance}'
-        last_updated_at: "(last updated %{when} ago)"
         new_transaction: Crea nueva transacción
         title: Balance de cuentas para %{name}
       index_collection:
@@ -816,8 +787,6 @@ es:
         only_active: Sólo grupos activos
         only_active_desc: "(han hecho al menos un pedido en los últimos 3 meses)"
         title: Grupo de pedido
-      ordergroups:
-        break: "%{start} - %{end}"
     users:
       index:
         body: "<p>Desde aquí puedes escribir un mensaje a los miembros de tu cooperativa Foodcoop. Recuerda habilitar en %{profile_link} tus detalles de contacto para que sean visibles.</p>"
@@ -891,7 +860,7 @@ es:
         order_closed_msg: Lo siento, este pedido ya está cerrado.
         order_nopen_title: Considerando los pedidos activos de todos los grupos
         order_not_open: Recibido
-        order_now: "¡Esta es tu oportunidad!"
+        order_now: '¡Esta es tu oportunidad!'
         order_open: Disponible
         ordered: Pedido
         ordered_title: Cantidad + tolerancia
@@ -906,7 +875,7 @@ es:
       sum: Suma
       title: Resultado de tu pedido para %{order}
     switch_order:
-      remaining: quedan aún %{remaining}
+      remaining: "quedan aún %{remaining}"
       title: Pedidos activos
     update:
       error_general: El pedido no se ha podido actualizar por un problema informático
@@ -916,7 +885,6 @@ es:
     application:
       edit_user: Edita usuario
       nick_fallback: "(no tiene apodo)"
-      role_admin: Admin
       role_article_meta: Artículos
       role_finance: Finanzas
       role_invoices: Facturas
@@ -930,14 +898,12 @@ es:
     orders:
       old_price: Precio anterior
       option_choose: Elige proveedor/stock
-      option_stock: Stock
       order_pdf: Crea PDF
     submit:
       invite:
         create: envía invitación
     tasks:
-      required_users: Aún se necesitan %{count} miembros!
-      task_title: "%{name} (%{duration}h)"
+      required_users: "Aún se necesitan %{count} miembros!"
   home:
     apple_bar:
       desc: 'Esto muestra la proporción de tareas completadas respecto al volumen de pedidos de tu grupo de pedido en comparación con el promedio en Foodcoop. En práctica: por cada %{amount} de pedidos totales, tú deberías hacer una tarea!'
@@ -946,9 +912,8 @@ es:
       warning: Cuidado, si tienes menos de %{threshold} puntos-manzana no puedes hacer un pedido!
     changes_saved: Guarda los cambios.
     index:
-      due_date_format: "%A %d %B"
       my_ordergroup:
-        last_update: 'La última actualización fue hace %{when} '
+        last_update: La última actualización fue hace %{when} 
         title: Mi grupo de pedido
         transactions:
           title: Últimas transacciones
@@ -974,20 +939,18 @@ es:
     profile:
       groups:
         cancel: Deja el grupo
-        cancel_confirm: "¿Estás seguro/a de que quieres dejar este grupo?"
+        cancel_confirm: '¿Estás seguro/a de que quieres dejar este grupo?'
         invite: Invita a nuevo miembro/a
         title: Eres miembro/a de los grupos
       title: Mi Perfil
       user:
         since: "(miembro para %{when})"
-        title: "%{user}"
     start_nav:
       admin: Administración
       finances:
         accounts: Actualizar cuentas
         settle: Pedidos de la cuenta
         title: Finanzas
-      foodcoop: 
       members: Miembros
       new_ordergroup: Nuevo grupo de pedido
       new_user: Nuevo miembro
@@ -1017,25 +980,16 @@ es:
       confirm_change: Las modificaciones sobre este pedido se perderán cuando cambies el pedido. ¿Quieres perder los cambios que has hecho y continuar?
   layouts:
     email:
-      footer_1_separator: "--"
-      footer_2_foodsoft: 'Foodsoft: %{url}'
-      footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Ayuda: %{url}'
-    foodsoft: Foodsoft
     footer:
       revision: revisión %{revision}
     header:
       feedback:
-        desc: "¿Encontrase algún error? ¿Sugerencias? ¿Ideas?"
-        title: 
+        desc: '¿Encontrase algún error? ¿Sugerencias? ¿Ideas?'
       help: Ayuda
       logout: Salir
       ordergroup: Mis grupos de pedido
       profile: Edita perfil
-    logo: "<span>food</span>soft"
-  lib:
-    order_pdf:
-      page: Página %{number} de %{count}
   login:
     accept_invitation:
       body: "<p>Has sido invitado a formar parte de %{foodcoop} como miembro del grupo <b>%{group}</b>.</p> <p>Si quieres participar, es necesario que completes este formulario.</p> <p>Tu información no será compartida con terceros bajo ninguna razón. Puedes decidir qué información personal será visible. 'Todos' hace referencia a todos los miembros de Foodcoop. Sólo los administradores tienen acceso a tu información.</p>"
@@ -1048,26 +1002,22 @@ es:
       error_invite_invalid: Tu invitación no es válida.
       error_token_invalid: La sesión ha expirado o no es válida. Prueba de nuevo.
       reset_password:
-        notice: 'Si tu email está ya registrado aquí, recibirás un mensaje con un enlace para '
+        notice: Si tu email está ya registrado aquí, recibirás un mensaje con un enlace para 
       update_password:
         notice: Tu contraseña ha sido actualizada. Prueba a conectarte ahora.
     forgot_password:
       body: "<p>Puedes elegir una nueva contraseña.</p> <p>Completa tu dirección de email con la que te registraste aquí. Recibirás un email con los detalles para recuperar tu contraseña.</p>"
       submit: Solicita una nueva contraseña
-      title: "¿Olvidaste tu contraseña?"
+      title: '¿Olvidaste tu contraseña?'
     new_password:
       body: "<p>Completa la nueva contraseña para <b>%{user}</b></p>"
       submit: Guardar la nueva contraseña
       title: Nueva contraseña
   mailer:
-    dateformat: 
     feedback:
       header: "%{user} escribió %{date}:"
-      subject: 
-    from_via_foodsoft: "%{name} via Foodsoft"
     invite:
-      subject: 
-      text: |-
+      text: |
         Hola!
 
         %{user} <%{mail}> te ha invitado a unirte al grupo "%{group}".
@@ -1131,15 +1081,14 @@ es:
         %{foodcoop}
     reset_password:
       subject: Hay tareas que se deben hacer ya!
-      text: 
     upcoming_tasks:
       nextweek: 'Tareas para la semana que viene:'
       subject: Tareas que hay que hacer ya!
-      text0: |-
+      text0: |
         Querido/a %{user},
 
         Estás asignado a la tarea "%{task}". Esta tarea debería estar lista mañana a las (%{when})!
-      text1: |-
+      text1: |
         Mis tareas: %{user_tasks_url}
 
 
@@ -1147,16 +1096,10 @@ es:
   model:
     delivery:
       each_stock_article_must_be_unique: Los artículos de stock no pueden ser listados más de una vez.
-    group_order:
-      stock_ordergroup_name: Stock (%{user})
     invoice:
       invalid_mime: tiene un tipo de MIME inválido (%{mime})
     membership:
       no_admin_delete: No te puedes salir de este grupo porque eres el último adimistrador/a.
-    order_article:
-      error_price: 
-    page:
-      redirect: 
     user:
       no_ordergroup: no hay célula
   navigation:
@@ -1170,7 +1113,6 @@ es:
       workgroups: grupos de trabajo
     articles:
       categories: Categorías
-      stock: Stock
       suppliers: Proveedores/artículos
       title: Artículos
     dashboard: Escritorio
@@ -1243,7 +1185,7 @@ es:
     index:
       action_end: Cerrar
       action_receive: Recibir
-      confirm_delete: "¿Estás seguro/a de que quieres borrar el pedido?"
+      confirm_delete: '¿Estás seguro/a de que quieres borrar el pedido?'
       confirm_end: Realmente quieres cerrar el pedido %{order}? No hay vuelta atrás.
       new_order: Crea nuevo pedido
       no_open_or_finished_orders: Por el momento no hay pedidos abiertos ni cerrados.
@@ -1257,9 +1199,7 @@ es:
       error_closed: El pedido ya estaba cerrado
       error_nosel: Debes seleccionar al menos un artículo. Quizás quieres borrar el pedido?
       error_starts_before_boxfill: tiene que ser después de la fecha de comienzo (o estar vacío)
-      error_starts_before_ends: 
       notice_close: 'Pedido: %{name}, hasta %{ends}'
-      stock: Stock
       warning_ordered: 'Cuidado: los artículos marcados en rojo ya han sido pedidos en este pedido abierto. Si los deseleccionas aquí, todos los pedidos actuales de estos artículos se borrarán. Para proceder, confirma abajo.'
       warning_ordered_stock: 'Cuidado: Los artículos marcados en rojo ya han sido pedidos en este pedido de stock. Si los deseleccionas aquí, todos los pedidos y compras de estos artículos se borrarán y no estarán en la contabilidad. Para proceder, confirma abajo.'
     new:
@@ -1269,7 +1209,6 @@ es:
       consider_member_tolerance: considera la tolerancia
       notice: 'Pedido recibido: %{msg}'
       notice_none: Ningún nuevo artículo para recibir
-      rest_to_stock: 
       submit: recibe pedido
       surplus_options: 'Opciones de distribución:'
       title: Recibiendo %{order}
@@ -1283,13 +1222,8 @@ es:
       comments:
         title: Comentarios
       comments_link: Comentarios
-      confirm_delete: 
-      confirm_end: 
-      confirm_send_to_supplier: 
       create_invoice: Añade factura
-      description1_order: 
       description1_period:
-        pickup: 
         starts: abierto desde %{starts}
         starts_ends: abierto desde %{starts} hasta %{ends}
       description2: "%{ordergroups} ha pedido %{article_count} artículos, con un valor total de %{net_sum} / %{gross_sum} (neto / bruto)."
@@ -1314,21 +1248,14 @@ es:
       notice: Se actualizó el pedido.
     update_order_amounts:
       msg1: "%{count} artículos (%{units} units) actualizados"
-      msg2: 
-      msg4:
-        one: ''
-        other: quedan %{count} (%{units})
   sessions:
-    logged_in: "¡Te has conectado!"
-    logged_out: 
+    logged_in: '¡Te has conectado!'
     login_invalid_email: Dirección de email o contraseña no válidas
     login_invalid_nick: Usuario o contraseña no válidos
     new:
-      forgot_password: "¿Has olvidado la contraseña?"
+      forgot_password: '¿Has olvidado la contraseña?'
       login: Entra
       nojs: Atención, las cookies y el javascript deben ser activados! Por favor desactiva %{link}.
-      noscript: 
-      title: 
   shared:
     articles:
       ordered: Pedidos
@@ -1353,36 +1280,28 @@ es:
       not_enough_apples: 'Atención: tu grupo de pedido no tiene suficientes puntos-manzana para hacer un pedido!'
       title: Pedidos activos
       total_sum: Suma total
-      who_ordered: "¿Quién ha pedido?"
+      who_ordered: '¿Quién ha pedido?'
     order_download_button:
       article_pdf: Artículos PDF
       download_file: Descargar archivo
-      fax_csv: Fax CSV
-      fax_pdf: Fax PDF
-      fax_txt: Fax text
-      group_pdf: Group PDF
-      matrix_pdf: Matrix PDF
       title: Descargar
     task_list:
       accept_task: Acepta la tarea
       done: Hecho
-      done_q: "¿Hecho?"
+      done_q: '¿Hecho?'
       mark_done: Marca la tarea como realizada
       reject_task: Rechaza esta tarea
-      who: "¿Quién la está realizando?"
+      who: '¿Quién la está realizando?'
       who_hint: "(¿Cuánto más se necesita?)"
     user_form_fields:
       contact_address_hint: La dirección de tu grupo de pedido. Si la cambias, también se cambiará para los demás miembros de tu grupo.
+      messagegroups: Únete o sal de los mensajes de grupo
     workgroup_members:
       title: Membresías de grupo
   simple_form:
-    error_notification:
-      default_message: 
     hints:
       article:
         unit: por ej. KG o 1L o 500g
-      article_category:
-        description: 
       order_article:
         units_to_order: Si cambias la cantidad total de unidades enviadas también tendrás que cambiar los valores individuales de grupo haciendo click en el nombre del artículo. No serán recalculados automáticamente, así que a los otros grupos de pedido se les podrían ser cobrar artículos que no llegarán!
         update_global_price: Actualizar el precio para futuros pedidos
@@ -1411,7 +1330,6 @@ es:
         settings_group:
           messages: Mensajes
           privacy: Privacidad
-    'no': 'No'
     options:
       settings:
         profile:
@@ -1422,9 +1340,8 @@ es:
             fr: Francés
             nl: Neerlandés
     required:
-      mark: "*"
       text: requerido
-    'yes': Sí
+    'yes': 'Sí'
   stock_takings:
     create:
       notice: El inventario se ha creado con éxito.
@@ -1436,34 +1353,22 @@ es:
     new:
       amount: Cantidad
       create: crea
-      stock_articles: 
-      temp_inventory: 
-      text_deviations: 
-      text_need_articles: 
-      title: 
     show:
       amount: Cantidad
       article: Artículo
-      confirm_delete: 
       date: Fecha
       note: Nota
       overview: Inventario
       supplier: Proveedor
       title: Muestra inventario
       unit: Unidad
-    stock_takings:
-      confirm_delete: 
-      date: 
-      note: 
-    update:
-      notice: 
   stockit:
     check:
       not_empty: "%{name} no se pudo borrar, el inventario no es cero."
     copy:
       title: Copia artículo de stock
     create:
-      notice: 'Se ha creado el nuevo producto en stock  "%{name}" '
+      notice: Se ha creado el nuevo producto en stock  "%{name}" 
     derive:
       title: Añade un artículo en stock desde plantilla
     destroy:
@@ -1480,9 +1385,8 @@ es:
       new_stock_taking: Añade inventario
       order_online: Publica el pedido de stock
       show_stock_takings: Resumen del inventario
-      stock_count: Número de artículos
+      stock_count: 'Número de artículos'
       stock_worth: 'Valor actual del stock:'
-      title: 
       toggle_unavailable: Muestra/esconde los artículos no disponibles
       view_options: Ver opciones
     new:
@@ -1490,7 +1394,6 @@ es:
       title: Añade mi nuevo artículo de stock
     show:
       change_quantity: Cambia
-      datetime: 
       new_quantity: Nueva cantidad
       reason: Razón
       stock_changes: Cambio de cantidades en stock
@@ -1508,9 +1411,6 @@ es:
       action_new: Crea un nuevo proveedor/a
       articles: artículos (%{count})
       confirm_del: Estas seguro de que quieres borrar al proveedor  %{name}?
-      deliveries:
-        one: ''
-        other: envíos (%{count})
       stock: en stock (%{count})
       title: Proveedores
     new:
@@ -1576,10 +1476,9 @@ es:
       accept_task: Aceptar tarea
       confirm_delete_group: Estás seguro/a de que quieres borrar esta tarea y todas las tareas subsecuentes?
       confirm_delete_single: Estás seguro/a de que quieres borrar esta tarea?
-      confirm_delete_single_from_group: 'Estás seguro/a de que quieres borrar esta tarea (y mantener las tareas recurrentes relacionadas)? '
+      confirm_delete_single_from_group: Estás seguro/a de que quieres borrar esta tarea (y mantener las tareas recurrentes relacionadas)? 
       delete_group: Borrar esta tarea y las subsecuentes
       edit_group: Edita recurrencia
-      hours: "%{count}h"
       mark_done: Marca tarea como hecha
       reject_task: Rechaza tarea
       title: Muestra tarea
@@ -1600,32 +1499,18 @@ es:
     back: Volver
     cancel: Cancelar
     close: Cerrar
-    confirm_delete: 
-    confirm_restore: 
     copy: Copia
     delete: Eliminar
     download: Descarga
     edit: Editar
-    marks:
-      close: 
-      success: 
     or_cancel: o cancelar
     please_wait: Espera...
     restore: Restaura
     save: Guardar
     show: Mostrar
-  views:
-    pagination:
-      first: 
-      last: 
-      next: 
-      previous: 
-      truncate: 
   workgroups:
     edit:
       title: Edita grupo de trabajo
-    error_last_admin_group: 
-    error_last_admin_role: 
     index:
       title: Grupos de trabajo
     update:

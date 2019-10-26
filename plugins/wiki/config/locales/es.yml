@@ -16,36 +16,24 @@ es:
   navigation:
     wiki:
       all_pages: Todas las páginas
-      home: 
-      title: 
   pages:
     all:
       new_page: Crea nueva página
       recent_changes: Cambios recientes
       search:
         action: Busca
-        placeholder: 
-      site_map: 
-      title: 
       title_list: Lista de páginas
     body:
       title_toc: Contenido
-      wikicloth_exception: 
     create:
       notice: La página ha sido creada
     cshow:
       error_noexist: La página no existe
-      redirect_notice: 
-    destroy:
-      notice: 
-    diff:
-      title: 
     edit:
       title: Editar página
     error_stale_object: Cuidado, la página ha sido editada por otra persona. Por favor, intenta de nuevo.
     form:
       help:
-        bold: 
         external_link_ex: Enlace externo
         external_links: Externo
         heading: nivel %{level}
@@ -53,54 +41,18 @@ es:
         image_link_title: Título de la imagen
         image_links: Imágenes
         italic: itálicas
-        link_lists: 
-        link_table: 
-        link_templates: 
-        link_variables: 
-        list_item_1: 
-        list_item_2: 
-        noformat: 
         ordered_list: Lista numerada
         section_block: Estilo del párrafo
         section_character: Estilo de las letras
         section_link: Estilo de los enlaces
         section_more: Más temas
-        section_table: 
-        see_tables: 
-        tables_link: 
-        text: 
-        title: 
-        unordered_list: 
-        wiki_link_ex: 
-        wiki_links: 
       preview: Previsualizar
-    last_updated: 
     new:
       title: Crear una nueva página en la wiki
-    page_list_item:
-      date_format: 
     show:
-      date_format: 
       delete: Eliminar página
-      delete_confirm: 
-      diff: 
-      edit: 
-      last_updated: 
-      subpages: 
-      title_versions: 
-      versions: 
     title: Título
-    update:
-      notice: 
-    variables:
-      description: 
-      title: 
-      value: 
-      variable: 
     version:
-      author: 'Autor/a: %{user}'
-      date_format: 
-      revert: 
-      title: 
+      author: ! 'Autor/a: %{user}'
       title_version: Versión
       view_current: Ver versión actual

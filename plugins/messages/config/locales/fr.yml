@@ -3,29 +3,16 @@ fr:
     attributes:
       message:
         body: Contenu
-        group_id: Cellule ou équipe
-        messagegroup_id: 
         order_id: Commande
         ordergroup_id: Cellule
         private: Privé
         recipient_tokens: Destinataires
-        send_method:
-          all:
-          messagegroup:
-          order:
-          ordergroup:
-          recipients:
-          workgroup:
         send_to_all: Envoyer à tous les membres
         subject: Sujet
         workgroup_id: Équipe
       messagegroup:
-        description: Description
         name: Nom
         user_tokens: Membres
-    models:
-      message: Message
-      messagegroup:
   admin:
     ordergroups:
       show:
@@ -33,15 +20,6 @@ fr:
     users:
       show:
         send_message: Envoyer un message
-  config:
-    hints:
-      mailing_list:
-      mailing_list_subscribe:
-      use_messages:
-    keys:
-      use_messages: Messages
-      mailing_list:
-      mailing_list_subscribe:
   helpers:
     messages:
       write_message: Écrire un message
@@ -53,69 +31,42 @@ fr:
       messages:
         title: Derniers messages reçus
         view_all:
+          text: 'Afficher %{messages} ou %{threads}'
           messages: tous les messages
-          text: Afficher %{messages} ou %{threads}
-          threads:
     start_nav:
       write_message: Écrire un message
   messages:
-    actionbar:
-      message_threads: 
-      messagegroups: 
-      messages: 
-      new: 
     create:
       notice: Le message a bien été sauvegardé et est en cours d'envoi.
-    index:
-      new: Nouveau message
-      title: Messages
     messages:
       reply: Répondre
     model:
-      reply_header: 'Le %{when}, %{user} a écrit:'
-      reply_indent: "> %{line}"
-      reply_subject: 'Re: %{subject}'
+      reply_header: ! 'Le %{when}, %{user} a écrit:'
     new:
-      error_private: 
       hint_private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
       list:
-        desc: Pour envoyer un message à tout le monde, passe par la mailing list "%{list}"
+        desc: ! 'Pour envoyer un message à tout le monde, passe par la mailing list "%{list}"'
         mail: par exemple en envoyant un email à %{email}
         subscribe: Pour plus d'explications concernant la mailing list, consulte le %{link}
         subscribe_msg: Il faudra peut être d'abord t'inscrire à la mailing list.
         wiki: wiki (section mailing list)
-      message: 
       no_user_found: Aucun-e membre trouvée avec cet identifiant
-      reply_to: 
       search: Rechercher ...
       search_user: Rechercher unE membre
       title: Nouveau message
     show:
       all_messages: Aperçu des messages
-      from: 'De:'
-      group: 
+      from: ! 'De:'
       reply: Répondre
-      reply_to: 
-      sent_on: 'Envoyé le:'
-      subject: 'Sujet:'
+      sent_on: ! 'Envoyé le:'
+      subject: ! 'Sujet:'
       title: Afficher le contenu du message
-      to: 
-    thread:
-      all_message_threads: 
-      reply: 
   messages_mailer:
     foodsoft_message:
-      footer: |-
+      footer: |
         Répondre: %{reply_url}
         Afficher ce message dans ton navigateur: %{msg_url}
         Préférences des messages: %{profile_url}
-  navigation:
-    admin:
-      messagegroups:
-    messages: Messages
-  shared:
-    user_form_fields:
-      messagegroups:
   simple_form:
     labels:
       settings:

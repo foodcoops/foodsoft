@@ -1,65 +1,10 @@
 fr:
-  config:
-    hints:
-      use_current_orders:
-    keys:
-      use_current_orders:
   current_orders:
     articles:
-      article:
-        counts:
-        no_selection:
       article_info:
-        from: de %{supplier}
-        origin_in:
-        supplied_and_made_by: fait par %{manufacturer}
         supplied_by: de %{supplier}
-        supplied_by_made_by:
-        unit:
-      form:
-        article_placeholder:
-        current_orders:
-      index:
-        title:
-      ordergroups:
-        add_new:
-        piece:
-        unit:
-      show:
-        title:
-    group_orders:
-      index:
-        title:
-    navigation:
-      articles:
-      ordergroups:
-      receive:
+        supplied_and_made_by: fait par %{manufacturer}
+        from: de %{supplier}
     ordergroups:
-      articles:
-        add_new:
-        no_selection:
-      form:
-        ordergroup_placeholder:
-      index:
-        title:
-      payment_bar:
-        account_balance:
-        new_transaction:
-        payment:
       show:
         title: Articles pour %{name}
-    orders:
-      receive:
-        no_finished_orders:
-        title:
-  helpers:
-    current_orders:
-      pay_done:
-      pay_none:
-      pay_amount:
-  js:
-    current_orders:
-      articles:
-        above:
-        below:
-        equal:

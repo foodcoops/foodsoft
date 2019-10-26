@@ -13,10 +13,8 @@ de:
         fc_share_short: FC-Aufschlag
         gross_price: Bruttopreis
         manufacturer: Produzent
-        name: Name
         note: Notiz
         order_number: Bestellnummer
-        order_number_short: Nr.
         origin: Herkunft
         price: Nettopreis
         supplier: Lieferantin
@@ -27,7 +25,6 @@ de:
         units: Gebinde
       article_category:
         description: Beschreibung
-        name: Name
       article_price:
         deposit: Pfand
         price: Nettopreis
@@ -37,6 +34,11 @@ de:
         delivered_on: Lieferdatum
         note: Notiz
         supplier: Lieferantin
+      document:
+        created_at: Erstellt am
+        created_by: Erstellt von
+        data: Daten
+        mime: MIME-Typ
       financial_transaction:
         amount: Betrag
         created_on: Datum
@@ -45,10 +47,7 @@ de:
         note: Notiz
         ordergroup: Bestellgruppe
         user: Eingetragen von
-      financial_transaction_class:
-        name: Name
       financial_transaction_type:
-        name: Name
         financial_transaction_class: Finanztransaktionsklasse
         name_short: Kurzname
       group_order:
@@ -98,7 +97,6 @@ de:
         note: Notiz
         pickup: Abholung
         starts: Läuft vom
-        status: Status
         supplier: Lieferant
         updated_by: Zuletzt geändert von
       order_article:
@@ -146,18 +144,14 @@ de:
         customer_number_short: Kundennr.
         delivery_days: Liefertage
         email: E-Mail
-        fax: Fax
-        iban: IBAN
         is_subscribed: abonniert?
         min_order_quantity: Mindestbestellmenge
         min_order_quantity_short: Menge (mind.)
-        name: Name
         note: Notiz
         order_howto: Kurzanleitung Bestellen
         phone: Telefon
         phone2: Telefon 2
         shared_sync_method: Syncronisierungsmethode
-        url: Homepage
       task:
         description: Beschreibung
         done: Erledigt?
@@ -170,11 +164,9 @@ de:
       user:
         email: E-Mail
         first_name: Vorname
-        iban: IBAN
         last_activity: Letzte Aktivität
         last_login: Letzter login
         last_name: Nachname
-        name: Name
         nick: Benutzername
         ordergroup: Bestellgruppe
         password: Passwort
@@ -185,8 +177,6 @@ de:
           other: Arbeitsgruppen
       workgroup:
         description: Beschreibung
-        name: Name
-        role_admin: Administration
         role_article_meta: Artikeldatenbank
         role_finance: Finanzen
         role_invoices: Rechnungen
@@ -221,7 +211,9 @@ de:
       order: Bestellung
       order_article: Bestell-Artikel
       order_comment: Kommentar
-      ordergroup: Bestellgruppe
+      ordergroup:
+        one: Bestellgruppe
+        other: Bestellgruppen
       stock_article: Lagerartikel
       stock_taking: Inventur
       supplier: Lieferant
@@ -245,7 +237,6 @@ de:
         new_workgroup: Neue Arbeitsgruppe
         newest_groups: Neueste Gruppen
         newest_users: Neueste Benutzer/innen
-        title: Administration
         type: Typ
         username: Benutzername
     configs:
@@ -275,7 +266,6 @@ de:
         new_financial_transaction_class: Neue Finanztransaktionsklasse anlegen
         title: Finanzen
       transaction_types:
-        name: Name
         new_financial_transaction_type: Neuen Finanztransaktionstyp anlegen
     financial_transaction_classes:
       form:
@@ -337,7 +327,6 @@ de:
         confirm_sudo: Wenn du fortsetzt, dann wirst du als Benutzer %{user} angemeldet. Sei vorsichtig und melde dich ab, wenn du fertig bist!
         groupabos: Gruppenabos
         member_since: Mitglied seit %{time}
-        person: Person
         preference: Einstellungen
         show_email_problems: Zeige E-Mail Probleme
         sudo: Als anderer Benutzer anmelden
@@ -404,7 +393,7 @@ de:
       unit_quantity_short: GebGr
     controller:
       create_from_upload:
-        notice: Es wurden %{count} neue Artikel gespeichert.
+        notice: "Es wurden %{count} neue Artikel gespeichert."
       error_invalid: Artikel sind fehlerhaft
       error_nosel: Du hast keine Artikel ausgewählt
       error_parse: "%{msg} ... in Zeile %{line}"
@@ -431,7 +420,7 @@ de:
       note: 'Pflichtfelder sind: Name, Einheit, (netto) Preis und Bestellnummer.'
       submit: Alle Artikel aktualisieren
       title: Alle Artikel von %{supplier} bearbeiten
-      warning: Achtung, alle Artikel werden aktualisiert!
+      warning: 'Achtung, alle Artikel werden aktualisiert!'
     form:
       title_edit: Artikel bearbeiten
       title_new: Neuen Artikel einfügen
@@ -452,7 +441,6 @@ de:
         title: Artikel importieren
       new: Neuer Artikel
       new_order: Bestellung anlegen
-      search_placeholder: Name ...
       title: Artikel von %{supplier} (%{count})
       upload: Artikel hochladen
     model:
@@ -569,10 +557,8 @@ de:
       email_replyto: Antwortadresse
       email_sender: Senderadresse
       help_url: URL Dokumentation
-      homepage: Homepage
       ignore_browser_locale: Browsersprache ignorieren
       minimum_balance: Minimaler Kontostand
-      name: Name
       order_schedule:
         boxfill:
           recurr: Kistenauffüllen ab
@@ -598,10 +584,7 @@ de:
       use_nick: Benutzernamen verwenden
       webstats_tracking_code: Code für Websiteanalysetool
     tabs:
-      applications: Apps
-      foodcoop: Foodcoop
       language: Sprache
-      layout: Layout
       list: Liste
       messages: Nachrichten
       others: Sonstiges
@@ -609,7 +592,7 @@ de:
       tasks: Aufgaben
   deliveries:
     add_stock_change:
-      how_many_units: Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?
+      how_many_units: 'Wie viele Einheiten (%{unit}) des Artikels »%{name}« liefern?'
     create:
       notice: Lieferung wurde erstellt. Bitte nicht vergessen die Rechnung anzulegen!
     destroy:
@@ -625,7 +608,7 @@ de:
       title_select_stock_articles: 1. Lagerartikel auswählen
     index:
       confirm_delete: Bist Du sicher?
-      new_delivery: Neue Lieferung für %{supplier} anlegen
+      new_delivery: 'Neue Lieferung für %{supplier} anlegen'
       title: "%{supplier}/Lieferungen"
     invoice_amount: Rechnungsbetrag
     invoice_net_amount: bereinigter Rechnungsbetrag
@@ -647,11 +630,6 @@ de:
     suppliers_overview: Lieferantenübersicht
     update:
       notice: Lieferung wurde aktualisiert.
-  discourse:
-    callback:
-      invalid_nonce: Ungültige nonce
-      invalid_signature: Ungültige Signature
-      logged_in: Angemeldet!
   documents:
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
@@ -663,13 +641,13 @@ de:
     order_fax:
       filename: Bestellung %{name}-%{date} - Fax
       rows:
-      - BestellNr.
-      - Menge
-      - Name
-      - Gebinde
-      - Einheit
-      - Preis/Einheit
-      - Summe
+        - BestellNr.
+        - Menge
+        - Name
+        - Gebinde
+        - Einheit
+        - Preis/Einheit
+        - Summe
       total: Gesamtpreis
     order_matrix:
       filename: Bestellung %{name}-%{date} - Sortiermatrix
@@ -707,6 +685,8 @@ de:
         first_paragraph: 'Wenn die Bestellung abgerechnet wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
         or_cancel: oder zurück zur Abrechnung
         title: Bestellung abrechnen
+      edit_note:
+        title: Notiz bearbeiten
       edit_results_by_articles:
         add_article: Artikel hinzufügen
         amount: Menge
@@ -744,7 +724,7 @@ de:
         invoice: Rechnung
         notes_and_journal: Notizen/Protokoll
         summary: Zusammenfassung
-        title: "%{name} abrechnen"
+        title: '%{name} abrechnen'
         view_options: Ansichtsoptionen
       order_article:
         confirm: Bist du sicher?
@@ -767,8 +747,6 @@ de:
         reload: Zusammenfassung neu laden
         with_extra_charge: 'mit Aufschlag:'
         without_extra_charge: 'ohne Aufschlag:'
-      edit_note:
-        title: Notiz bearbeiten
     create:
       notice: Rechnung wurde erstellt.
     financial_links:
@@ -853,7 +831,6 @@ de:
     users:
       index:
         body: "<p>Hier kannst Du den Mitgliedern Deiner Foodcoop eine Nachricht schreiben. Damit Deine Kontaktdaten einzusehen sind, musst Du sie unter %{profile_link} freigeben.</p>"
-        ph_name: Name ...
         ph_ordergroup: Bestellgruppe ...
         profile_link: Einstellungen
         title: Mitglieder
@@ -938,7 +915,7 @@ de:
       sum: Summe
       title: Dein Bestellergebnis für %{order}
     switch_order:
-      remaining: noch %{remaining}
+      remaining: "noch %{remaining}"
       title: Laufende Bestellungen
     update:
       error_general: Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.
@@ -948,14 +925,12 @@ de:
     application:
       edit_user: Mitglieder bearbeiten
       nick_fallback: "(kein Benutzername)"
-      role_admin: Admin
       role_article_meta: Artikel
       role_finance: Finanzen
       role_invoices: Rechnungen
       role_orders: Bestellung
       role_pickups: Abholtage
       role_suppliers: Lieferanten
-      show_google_maps: Show it on Google maps
       sort_by: Nach %{text} sortieren
     deliveries:
       new_invoice: Rechnung anlegen
@@ -969,8 +944,7 @@ de:
       invite:
         create: Einladung verschicken
     tasks:
-      required_users: Es fehlen %{count} Mitstreiterinnen!
-      task_title: "%{name} (%{duration}h)"
+      required_users: "Es fehlen %{count} Mitstreiterinnen!"
   home:
     apple_bar:
       desc: 'Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop. Konkret: Pro %{amount} Bestellsumme solltest Du eine Aufgabe machen!'
@@ -1013,14 +987,11 @@ de:
       title: Mein Profil
       user:
         since: "(Mitglied seit %{when})"
-        title: "%{user}"
     start_nav:
-      admin: Administration
       finances:
         accounts: Konten aktualisieren
         settle: Bestellungen abrechnen
         title: Finanzbereich
-      foodcoop: Foodcoop
       members: Mitglieder
       new_ordergroup: Neue Bestellgruppe
       new_user: Neues Mitglied
@@ -1050,22 +1021,16 @@ de:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
   layouts:
     email:
-      footer_1_separator: "--"
-      footer_2_foodsoft: 'Foodsoft: %{url}'
-      footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
-    foodsoft: Foodsoft
     footer:
       revision: Revision %{revision}
     header:
       feedback:
         desc: Fehler gefunden? Vorschlag? Idee? Kritik?
-        title: Feedback
       help: Hilfe
       logout: Abmelden
       ordergroup: Meine Bestellgruppe
       profile: Profil bearbeiten
-    logo: "<span>food</span>soft"
   lib:
     render_pdf:
       page: Seite %{number} von %{count}
@@ -1097,7 +1062,6 @@ de:
     feedback:
       header: "%{user} schrieb am %{date}:"
       subject: Feedback zur Foodsoft
-    from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Einladung in die Foodcoop
       text: |
@@ -1111,7 +1075,7 @@ de:
         Grüße sendet die Foodsoft!
     negative_balance:
       subject: Gruppenkonto im Minus
-      text: |-
+      text: |
         Liebe Bestellgruppe %{group},
 
         euer Kontostand is durch eine Buchung am %{when} ins Minus gerutscht: %{balance}
@@ -1135,12 +1099,18 @@ de:
         Deine Aufgaben: %{user_tasks_url}
     order_result:
       subject: 'Bestellung beendet: %{name}'
-      text0: |-
+      text0: |
         Liebe Bestellgruppe %{ordergroup},
 
         die Bestellung für "%{order}" wurde am %{when} von %{user} beendet.
         Für euch wurden die folgenden Artikel bestellt:
-      text1: "o Gesamtpreis: %{sum}\n\nBestellung online einsehen: %{order_url}\n\n\nViele Grüße von %{foodcoop} "
+      text1: |-
+        o Gesamtpreis: %{sum}
+
+        Bestellung online einsehen: %{order_url}
+
+
+        Viele Grüße von %{foodcoop} 
     order_result_supplier:
       subject: Neue Bestellung für %{name}
       text: |
@@ -1155,7 +1125,7 @@ de:
         %{foodcoop}
     reset_password:
       subject: Neues Password für %{username}
-      text: |-
+      text: |
         Hallo %{user},
 
         du (oder jemand anderes) hat auf der Foodsoft-Website ein neues Passwort angefordert.
@@ -1178,6 +1148,14 @@ de:
 
 
         Viele Grüße von %{foodcoop}
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Antworten: %{reply_url}
+        Nachricht online einsehen: %{msg_url}
+        Nachrichten-Einstellungen: %{profile_url}
+      footer_group: |
+        Gesendet an Gruppe: %{group}
   model:
     delivery:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
@@ -1202,7 +1180,6 @@ de:
       home: Übersicht
       mail_delivery_status: E-Mail Probleme
       ordergroups: Bestellgruppen
-      title: Administration
       users: Benutzer/innen
       workgroups: Arbeitsgruppen
     articles:
@@ -1210,14 +1187,12 @@ de:
       stock: Lager
       suppliers: Lieferanten/Artikel
       title: Artikel
-    dashboard: Dashboard
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen
       home: Übersicht
       invoices: Rechnungen
       title: Finanzen
-    foodcoop: Foodcoop
     members: Mitglieder
     ordergroups: Bestellgruppen
     orders:
@@ -1267,7 +1242,6 @@ de:
       articles: Artikel
       delivery_day: Liefertag
       heading: Bestellung für %{name}
-      name: Name
       number: Nummer
       to_address: Versandaddresse
     finish:
@@ -1310,7 +1284,7 @@ de:
       rest_to_stock: Rest ins Lager
       submit: Bestellung in Empfang nehmen
       surplus_options: 'Verteilungsoptionen:'
-      title: "»%{order}« in Empfang nehmen"
+      title: '»%{order}« in Empfang nehmen'
     send_to_supplier:
       notice: Die Bestellung wurde an die Lieferantin geschickt.
     show:
@@ -1365,7 +1339,6 @@ de:
     index:
       article_pdf: Artikel PDF
       group_pdf: Gruppen PDF
-      matrix_pdf: Matrix PDF
       title: Abholtage
   sessions:
     logged_in: Angemeldet!
@@ -1376,7 +1349,6 @@ de:
       forgot_password: Passwort vergessen?
       login: Anmelden
       nojs: Achtung, Cookies und Javascript müssen aktiviert sein! %{link} bitte abschalten.
-      noscript: NoScript
       title: Foodsoft anmelden
   shared:
     articles:
@@ -1405,13 +1377,8 @@ de:
       who_ordered: Wer hat bestellt?
     order_download_button:
       article_pdf: Artikel PDF
-      download_file: Download file
-      fax_csv: Fax CSV
-      fax_pdf: Fax PDF
       fax_txt: Fax Text
       group_pdf: Gruppen PDF
-      matrix_pdf: Matrix PDF
-      title: Download
     task_list:
       accept_task: Aufgabe übernehmen
       done: Erledigt
@@ -1422,6 +1389,7 @@ de:
       who_hint: "(Wie viele werden noch benötigt?)"
     user_form_fields:
       contact_address_hint: Die Adresse deiner Bestellgruppe. Wenn du sie aktualisierst, wird sie auch bei den anderen Mitgliedern deiner Bestellgruppe aktualisiert.
+      messagegroups: Nachrichtengruppen beitreten oder verlassen
     workgroup_members:
       title: Mitglieder der Gruppen
   simple_form:
@@ -1460,20 +1428,18 @@ de:
         settings_group:
           messages: Nachrichten
           privacy: Privatsphäre
-    'no': Nein
+    'no': 'Nein'
     options:
       settings:
         profile:
           language:
             de: Deutsch
-            en: English
             es: Spanisch
             fr: Französisch
             nl: Niederländisch
     required:
-      mark: "*"
       text: benötigt
-    'yes': Ja
+    'yes': 'Ja'
   stock_takings:
     create:
       notice: Inventur wurde erfolgreich angelegt.
@@ -1626,7 +1592,6 @@ de:
       confirm_delete_single_from_group: Bist Du sicher, dass Du diese Aufgabe löschen möchtest (und in Bezug stehende wiederkehrende Aufgabe behalten möchtest)?
       delete_group: Aufgabe und folgende löschen
       edit_group: Wiederkehrende ändern
-      hours: "%{count}h"
       mark_done: Als erledigt markieren
       reject_task: Aufgabe ablehnen
       title: Aufgabe anzeigen
@@ -1653,21 +1618,11 @@ de:
     delete: Löschen
     download: Herunterladen
     edit: Bearbeiten
-    marks:
-      close: "&times;"
-      success: <i class="icon icon-ok"></i>
     or_cancel: oder abbrechen
     please_wait: Bitte warten...
     restore: Wiederherstellen
     save: Speichern
     show: Anzeigen
-  views:
-    pagination:
-      first: "&laquo;"
-      last: "&raquo;"
-      next: "&rsaquo;"
-      previous: "&lsaquo;"
-      truncate: "..."
   workgroups:
     edit:
       title: Arbeitsgruppe bearbeiten
