@@ -322,7 +322,7 @@ en:
         confirm: Are you sure?
         edit: Edit group/members
         title: Ordergroup %{name}
-    search_placeholder: name ..
+    search_placeholder: name ...
     users:
       controller:
         sudo_done: You are now logged in as %{user}. Be careful, and do not forget to log out when done!
