@@ -5,6 +5,11 @@ ach:
         body: crwdns5668:0crwdne5668:0
         parent_id: crwdns5670:0crwdne5670:0
         title: crwdns5672:0crwdne5672:0
+  config:
+    hints:
+      use_wiki: crwdns5816:0crwdne5816:0
+    keys:
+      use_wiki: crwdns5818:0crwdne5818:0
   model:
     page:
       redirect: crwdns5674:0%{title}crwdne5674:0
@@ -25,6 +30,7 @@ ach:
       title_list: crwdns5694:0crwdne5694:0
     body:
       title_toc: crwdns5696:0crwdne5696:0
+      wikicloth_exception: 'crwdns5820:0%{msg}crwdne5820:0'
     create:
       notice: crwdns5698:0crwdne5698:0
     cshow:
@@ -40,18 +46,25 @@ ach:
     form:
       help:
         bold: crwdns5712:0crwdne5712:0
-        external_link_ex: crwdns5714:0crwdne5714:0
-        external_links: crwdns5716:0crwdne5716:0
+        external_link_ex: crwdns5822:0crwdne5822:0
+        external_links: crwdns5824:0crwdne5824:0
         heading: crwdns5718:0%{level}crwdne5718:0
         headings: crwdns5720:0crwdne5720:0
+        image_link_title: crwdns5826:0crwdne5826:0
+        image_links: crwdns5828:0crwdne5828:0
         italic: crwdns5722:0crwdne5722:0
+        link_lists: crwdns5830:0crwdne5830:0
+        link_table: crwdns5832:0crwdne5832:0
+        link_templates: crwdns5834:0crwdne5834:0
+        link_variables: crwdns5836:0crwdne5836:0
         list_item_1: crwdns5724:0crwdne5724:0
         list_item_2: crwdns5726:0crwdne5726:0
-        noformat: crwdns5728:0crwdne5728:0
+        noformat: crwdns5838:0crwdne5838:0
         ordered_list: crwdns5730:0crwdne5730:0
         section_block: crwdns5732:0crwdne5732:0
         section_character: crwdns5734:0crwdne5734:0
         section_link: crwdns5736:0crwdne5736:0
+        section_more: crwdns5840:0crwdne5840:0
         section_table: crwdns5738:0crwdne5738:0
         see_tables: crwdns5740:0%{tables_link}crwdne5740:0
         tables_link: crwdns5742:0crwdne5742:0
@@ -79,6 +92,11 @@ ach:
     title: crwdns5780:0crwdne5780:0
     update:
       notice: crwdns5782:0crwdne5782:0
+    variables:
+      description: crwdns5842:0crwdne5842:0
+      title: crwdns5844:0crwdne5844:0
+      value: crwdns5846:0crwdne5846:0
+      variable: crwdns5848:0crwdne5848:0
     version:
       author: ! 'crwdns5784:0%{user}crwdne5784:0'
       date_format: ! 'crwdns5786:0%acrwdnd5786:0%d-%m-%Ycrwdnd5786:0%H:%Mcrwdne5786:0'
