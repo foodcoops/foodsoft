@@ -89,28 +89,6 @@ ach:
         created_at: crwdns2536:0crwdne2536:0
         email: crwdns2538:0crwdne2538:0
         message: crwdns2540:0crwdne2540:0
-      message:
-        body: crwdns2542:0crwdne2542:0
-        group_id: crwdns2544:0crwdne2544:0
-        messagegroup_id: crwdns2546:0crwdne2546:0
-        order_id: crwdns2548:0crwdne2548:0
-        ordergroup_id: crwdns2550:0crwdne2550:0
-        private: crwdns2552:0crwdne2552:0
-        recipient_tokens: "crwdns2554:0crwdne2554:0"
-        send_method:
-          all: crwdns2556:0crwdne2556:0
-          messagegroup: crwdns2558:0crwdne2558:0
-          order: crwdns2560:0crwdne2560:0
-          ordergroup: crwdns2562:0crwdne2562:0
-          recipients: crwdns2564:0crwdne2564:0
-          workgroup: crwdns2566:0crwdne2566:0
-        send_to_all: crwdns2568:0crwdne2568:0
-        subject: crwdns2570:0crwdne2570:0
-        workgroup_id: crwdns2572:0crwdne2572:0
-      messagegroup:
-        description: crwdns2574:0crwdne2574:0
-        name: crwdns2576:0crwdne2576:0
-        user_tokens: crwdns2578:0crwdne2578:0
       order:
         boxfill: crwdns2580:0crwdne2580:0
         closed_by: crwdns2582:0crwdne2582:0
@@ -157,10 +135,6 @@ ach:
         last_user_activity: crwdns2656:0crwdne2656:0
         name: crwdns2658:0crwdne2658:0
         user_tokens: crwdns2660:0crwdne2660:0
-      page:
-        body: crwdns2662:0crwdne2662:0
-        parent_id: crwdns2664:0crwdne2664:0
-        title: crwdns2666:0crwdne2666:0
       stock_article:
         available: crwdns2668:0crwdne2668:0
         price: crwdns2670:0crwdne2670:0
@@ -251,8 +225,6 @@ ach:
       financial_transaction_class: crwdns2802:0crwdne2802:0
       financial_transaction_type: crwdns2804:0crwdne2804:0
       invoice: crwdns2806:0crwdne2806:0
-      message: crwdns2808:0crwdne2808:0
-      messagegroup: crwdns2810:0crwdne2810:0
       order: crwdns2812:0crwdne2812:0
       order_article: crwdns2814:0crwdne2814:0
       order_comment: crwdns2816:0crwdne2816:0
@@ -328,23 +300,6 @@ ach:
       index:
         destroy_all: crwdns2910:0crwdne2910:0
         title: crwdns2912:0crwdne2912:0
-    messagegroups:
-      destroy:
-        error: 'crwdns2914:0%{error}crwdne2914:0'
-        notice: crwdns2916:0crwdne2916:0
-      edit:
-        title: crwdns2918:0crwdne2918:0
-      index:
-        first_paragraph: crwdns2920:0%{url}crwdne2920:0
-        new_messagegroup: crwdns2922:0crwdne2922:0
-        new_messagegroups: crwdns2924:0crwdne2924:0
-        second_paragraph: crwdns2926:0crwdne2926:0
-        title: crwdns2928:0crwdne2928:0
-      new:
-        title: crwdns2930:0crwdne2930:0
-      show:
-        send_message: crwdns2932:0crwdne2932:0
-        title: crwdns2934:0%{name}crwdne2934:0
     ordergroups:
       destroy:
         error: 'crwdns2936:0%{error}crwdne2936:0'
@@ -366,7 +321,6 @@ ach:
       show:
         confirm: crwdns2960:0crwdne2960:0
         edit: crwdns2962:0crwdne2962:0
-        send_message: crwdns2964:0crwdne2964:0
         title: crwdns2966:0%{name}crwdne2966:0
     search_placeholder: crwdns2968:0crwdne2968:0
     users:
@@ -394,7 +348,6 @@ ach:
         member_since: crwdns2998:0%{time}crwdne2998:0
         person: crwdns3000:0crwdne3000:0
         preference: crwdns3002:0crwdne3002:0
-        send_message: crwdns3004:0crwdne3004:0
         show_email_problems: crwdns3006:0crwdne3006:0
         sudo: crwdns3008:0crwdne3008:0
       users:
@@ -573,15 +526,12 @@ ach:
       currency_space: crwdns3248:0crwdne3248:0
       currency_unit: crwdns3250:0crwdne3250:0
       custom_css: crwdns3252:0crwdne3252:0
-      documents_allowed_extension: crwdns3254:0crwdne3254:0
       email_from: crwdns3256:0crwdne3256:0
       email_replyto: crwdns3258:0crwdne3258:0
       email_sender: crwdns3260:0crwdne3260:0
       help_url: crwdns3262:0crwdne3262:0
       homepage: crwdns3264:0crwdne3264:0
       ignore_browser_locale: crwdns3266:0crwdne3266:0
-      mailing_list: crwdns3268:0crwdne3268:0
-      mailing_list_subscribe: crwdns3270:0crwdne3270:0
       minimum_balance: crwdns3272:0crwdne3272:0
       name: crwdns3274:0crwdne3274:0
       order_schedule:
@@ -606,12 +556,8 @@ ach:
       tolerance_is_costly: crwdns3306:0crwdne3306:0
       use_apple_points: crwdns3308:0crwdne3308:0
       use_boxfill: crwdns3310:0crwdne3310:0
-      use_current_orders: crwdns3312:0crwdne3312:0
-      use_documents: crwdns3314:0crwdne3314:0
       use_iban: crwdns3316:0crwdne3316:0
-      use_messages: crwdns3318:0crwdne3318:0
       use_nick: crwdns3320:0crwdne3320:0
-      use_wiki: crwdns3322:0crwdne3322:0
       webstats_tracking_code: crwdns3324:0crwdne3324:0
     keys:
       applepear_url: crwdns3326:0crwdne3326:0
@@ -628,15 +574,12 @@ ach:
       custom_css: crwdns3346:0crwdne3346:0
       default_locale: crwdns3348:0crwdne3348:0
       disable_invite: crwdns3350:0crwdne3350:0
-      documents_allowed_extension: crwdns3352:0crwdne3352:0
       email_from: crwdns3354:0crwdne3354:0
       email_replyto: crwdns3356:0crwdne3356:0
       email_sender: crwdns3358:0crwdne3358:0
       help_url: crwdns3360:0crwdne3360:0
       homepage: crwdns3362:0crwdne3362:0
       ignore_browser_locale: crwdns3364:0crwdne3364:0
-      mailing_list: crwdns3366:0crwdne3366:0
-      mailing_list_subscribe: crwdns3368:0crwdne3368:0
       minimum_balance: crwdns3370:0crwdne3370:0
       name: crwdns3372:0crwdne3372:0
       order_schedule:
@@ -652,11 +595,6 @@ ach:
       pdf_font_size: crwdns3388:0crwdne3388:0
       pdf_page_size: crwdns3390:0crwdne3390:0
       price_markup: crwdns3392:0crwdne3392:0
-      printer_print_order_articles: crwdns3394:0crwdne3394:0
-      printer_print_order_fax: crwdns3396:0crwdne3396:0
-      printer_print_order_groups: crwdns3398:0crwdne3398:0
-      printer_print_order_matrix: crwdns3400:0crwdne3400:0
-      printer_token: crwdns3402:0crwdne3402:0
       stop_ordering_under: crwdns3404:0crwdne3404:0
       tasks_period_days: crwdns3406:0crwdne3406:0
       tasks_upfront_days: crwdns3408:0crwdne3408:0
@@ -665,13 +603,8 @@ ach:
       tolerance_is_costly: crwdns3414:0crwdne3414:0
       use_apple_points: crwdns3416:0crwdne3416:0
       use_boxfill: crwdns3418:0crwdne3418:0
-      use_current_orders: crwdns3420:0crwdne3420:0
-      use_documents: crwdns3422:0crwdne3422:0
       use_iban: crwdns3424:0crwdne3424:0
-      use_messages: crwdns3426:0crwdne3426:0
       use_nick: crwdns3428:0crwdne3428:0
-      use_printer: crwdns3430:0crwdne3430:0
-      use_wiki: crwdns3432:0crwdne3432:0
       webstats_tracking_code: crwdns3434:0crwdne3434:0
     tabs:
       applications: crwdns3436:0crwdne3436:0
@@ -683,54 +616,6 @@ ach:
       others: crwdns3448:0crwdne3448:0
       payment: crwdns3450:0crwdne3450:0
       tasks: crwdns3452:0crwdne3452:0
-  current_orders:
-    articles:
-      article:
-        counts: "crwdns3454:0%{ordergroups}crwdnd3454:0%{articles}crwdne3454:0"
-        no_selection: crwdns3456:0crwdne3456:0
-      article_info:
-        from: crwdns3458:0%{supplier}crwdne3458:0
-        origin_in: crwdns3460:0%{origin}crwdne3460:0
-        supplied_and_made_by: crwdns3462:0%{manufacturer}crwdne3462:0
-        supplied_by: crwdns3464:0%{supplier}crwdne3464:0
-        supplied_by_made_by: crwdns3466:0%{supplier}crwdnd3466:0%{manufacturer}crwdne3466:0
-        unit: crwdns3468:0%{unit}crwdne3468:0
-      form:
-        article_placeholder: crwdns3470:0crwdne3470:0
-        current_orders: crwdns3472:0crwdne3472:0
-      index:
-        title: crwdns3474:0crwdne3474:0
-      ordergroups:
-        add_new: crwdns3476:0crwdne3476:0
-        piece: crwdns3478:0crwdne3478:0
-        unit: crwdns3480:0crwdne3480:0
-      show:
-        title: "crwdns3482:0%{name}crwdne3482:0"
-    group_orders:
-      index:
-        title: crwdns3484:0crwdne3484:0
-    navigation:
-      articles: crwdns3486:0crwdne3486:0
-      ordergroups: crwdns3488:0crwdne3488:0
-      receive: crwdns3490:0crwdne3490:0
-    ordergroups:
-      articles:
-        add_new: crwdns3492:0crwdne3492:0
-        no_selection: crwdns3494:0crwdne3494:0
-      form:
-        ordergroup_placeholder: crwdns3496:0crwdne3496:0
-      index:
-        title: crwdns3498:0crwdne3498:0
-      payment_bar:
-        account_balance: crwdns3500:0crwdne3500:0
-        new_transaction: crwdns3502:0crwdne3502:0
-        payment: 'crwdns3504:0crwdne3504:0'
-      show:
-        title: crwdns3506:0%{name}crwdne3506:0
-    orders:
-      receive:
-        no_finished_orders: crwdns3508:0crwdne3508:0
-        title: crwdns3510:0crwdne3510:0
   deliveries:
     add_stock_change:
       how_many_units: 'crwdns3512:0%{unit}crwdnd3512:0%{name}crwdne3512:0'
@@ -771,34 +656,7 @@ ach:
     suppliers_overview: crwdns3564:0crwdne3564:0
     update:
       notice: crwdns3566:0crwdne3566:0
-  discourse:
-    callback:
-      invalid_nonce: crwdns3568:0crwdne3568:0
-      invalid_signature: crwdns3570:0crwdne3570:0
-      logged_in: crwdns3572:0crwdne3572:0
   documents:
-    create:
-      error: 'crwdns3574:0%{error}crwdne3574:0'
-      not_allowed_mime: crwdns3576:0%{mime}crwdne3576:0
-      notice: crwdns3578:0crwdne3578:0
-    destroy:
-      error: 'crwdns3580:0%{error}crwdne3580:0'
-      no_right: crwdns3582:0crwdne3582:0
-      notice: crwdns3584:0crwdne3584:0
-    form:
-      new: crwdns3586:0crwdne3586:0
-      new_folder: crwdns3588:0crwdne3588:0
-      submit: crwdns3590:0crwdne3590:0
-    index:
-      new: crwdns3592:0crwdne3592:0
-      new_folder: crwdns3594:0crwdne3594:0
-      title: crwdns3596:0crwdne3596:0
-    multiple_orders_by_articles:
-      filename: crwdns3598:0crwdne3598:0
-      title: crwdns3600:0crwdne3600:0
-    multiple_orders_by_groups:
-      filename: crwdns3602:0crwdne3602:0
-      title: crwdns3604:0crwdne3604:0
     order_by_articles:
       filename: crwdns3606:0%{name}crwdnd3606:0%{date}crwdne3606:0
       title: 'crwdns3608:0%{name}crwdnd3608:0%{date}crwdne3608:0'
@@ -1117,15 +975,9 @@ ach:
       role_suppliers: crwdns4062:0crwdne4062:0
       show_google_maps: crwdns4064:0crwdne4064:0
       sort_by: crwdns4066:0%{text}crwdne4066:0
-    current_orders:
-      pay_amount: crwdns4068:0%{amount}crwdne4068:0
-      pay_done: crwdns4070:0crwdne4070:0
-      pay_none: crwdns4072:0crwdne4072:0
     deliveries:
       new_invoice: crwdns4074:0crwdne4074:0
       show_invoice: crwdns4076:0crwdne4076:0
-    messages:
-      write_message: crwdns4078:0crwdne4078:0
     orders:
       old_price: crwdns4080:0crwdne4080:0
       option_choose: crwdns4082:0crwdne4082:0
@@ -1134,10 +986,6 @@ ach:
     submit:
       invite:
         create: crwdns4088:0crwdne4088:0
-      printer_job:
-        create: crwdns4090:0crwdne4090:0
-      message:
-        create: crwdns4092:0crwdne4092:0
     tasks:
       required_users: "crwdns4094:0%{count}crwdne4094:0"
       task_title: "crwdns4096:0%{name}crwdnd4096:0%{duration}crwdne4096:0"
@@ -1150,12 +998,6 @@ ach:
     changes_saved: crwdns4106:0crwdne4106:0
     index:
       due_date_format: "crwdns4108:0%Acrwdnd4108:0%dcrwdnd4108:0%Bcrwdne4108:0"
-      messages:
-        title: crwdns4110:0crwdne4110:0
-        view_all:
-          messages: crwdns4112:0crwdne4112:0
-          text: crwdns4114:0%{messages}crwdnd4114:0%{threads}crwdne4114:0
-          threads: crwdns4116:0crwdne4116:0
       my_ordergroup:
         last_update: crwdns4118:0%{when}crwdne4118:0
         title: crwdns4120:0crwdne4120:0
@@ -1211,7 +1053,6 @@ ach:
         title: crwdns4196:0crwdne4196:0
       tasks: crwdns4198:0crwdne4198:0
       title: crwdns4200:0crwdne4200:0
-      write_message: crwdns4202:0crwdne4202:0
   invites:
     errors:
       already_member: crwdns4204:0crwdne4204:0
@@ -1223,11 +1064,6 @@ ach:
       body: "crwdns4212:0%{group}crwdne4212:0"
     success: crwdns4214:0crwdne4214:0
   js:
-    current_orders:
-      articles:
-        above: "crwdns4216:0%{count}crwdne4216:0"
-        below: "crwdns4218:0%{count}crwdne4218:0"
-        equal: crwdns4220:0crwdne4220:0
     ordering:
       confirm_change: crwdns4222:0crwdne4222:0
   layouts:
@@ -1313,82 +1149,6 @@ ach:
         crwdns4320:0%{user}crwdnd4320:0%{task}crwdnd4320:0%{when}crwdne4320:0
       text1: |
         crwdns4322:0%{user_tasks_url}crwdnd4322:0%{foodcoop}crwdne4322:0
-  message_threads:
-    groupmessage_threads:
-      show_message_threads: crwdns4324:0crwdne4324:0
-    index:
-      general: crwdns4326:0crwdne4326:0
-      title: crwdns4328:0crwdne4328:0
-    message_threads:
-      last_reply_at: crwdns4330:0crwdne4330:0
-      last_reply_by: crwdns4332:0crwdne4332:0
-      started_at: crwdns4334:0crwdne4334:0
-      started_by: crwdns4336:0crwdne4336:0
-    show: crwdns4338:0crwdne4338:0
-  messagegroups:
-    index:
-      body: 'crwdns4340:0crwdne4340:0'
-      title: crwdns4342:0crwdne4342:0
-    join:
-      error: 'crwdns4344:0%{error}crwdne4344:0'
-      notice: crwdns4346:0crwdne4346:0
-    leave:
-      error: 'crwdns4348:0%{error}crwdne4348:0'
-      notice: crwdns4350:0crwdne4350:0
-    messagegroup:
-      join: crwdns4352:0crwdne4352:0
-      leave: crwdns4354:0crwdne4354:0
-  messages:
-    actionbar:
-      message_threads: crwdns4356:0crwdne4356:0
-      messagegroups: crwdns4358:0crwdne4358:0
-      messages: crwdns4360:0crwdne4360:0
-      new: crwdns4362:0crwdne4362:0
-    create:
-      notice: crwdns4364:0crwdne4364:0
-    index:
-      new: crwdns4366:0crwdne4366:0
-      title: crwdns4368:0crwdne4368:0
-    messages:
-      reply: crwdns4370:0crwdne4370:0
-    model:
-      reply_header: "crwdns4372:0%{user}crwdnd4372:0%{when}crwdne4372:0"
-      reply_indent: "crwdns4374:0%{line}crwdne4374:0"
-      reply_subject: 'crwdns4376:0%{subject}crwdne4376:0'
-    new:
-      error_private: crwdns4378:0crwdne4378:0
-      hint_private: crwdns4380:0crwdne4380:0
-      list:
-        desc: 'crwdns4382:0%{list}crwdne4382:0'
-        mail: crwdns4384:0%{email}crwdne4384:0
-        subscribe: crwdns4386:0%{link}crwdne4386:0
-        subscribe_msg: crwdns4388:0crwdne4388:0
-        wiki: crwdns4390:0crwdne4390:0
-      message: crwdns4392:0crwdne4392:0
-      no_user_found: crwdns4394:0crwdne4394:0
-      reply_to: crwdns4396:0%{link}crwdne4396:0
-      search: crwdns4398:0crwdne4398:0
-      search_user: crwdns4400:0crwdne4400:0
-      title: crwdns4402:0crwdne4402:0
-    show:
-      all_messages: crwdns4404:0crwdne4404:0
-      change_visibility: 'crwdns4406:0crwdne4406:0'
-      from: 'crwdns4408:0crwdne4408:0'
-      group: 'crwdns4410:0crwdne4410:0'
-      reply: crwdns4412:0crwdne4412:0
-      reply_to: 'crwdns4414:0crwdne4414:0'
-      sent_on: 'crwdns4416:0crwdne4416:0'
-      subject: 'crwdns4418:0crwdne4418:0'
-      title: crwdns4420:0crwdne4420:0
-      to: 'crwdns4422:0crwdne4422:0'
-      visibility: 'crwdns4424:0crwdne4424:0'
-      visibility_private: 'crwdns4426:0crwdne4426:0'
-      visibility_public: 'crwdns4428:0crwdne4428:0'
-    thread:
-      all_message_threads: crwdns4430:0crwdne4430:0
-      reply: crwdns4432:0crwdne4432:0
-    toggle_private:
-      not_allowed: crwdns4434:0crwdne4434:0
   messages_mailer:
     foodsoft_message:
       footer: |
@@ -1408,8 +1168,6 @@ ach:
       no_admin_delete: crwdns4448:0crwdne4448:0
     order_article:
       error_price: crwdns4450:0crwdne4450:0
-    page:
-      redirect: crwdns4452:0%{title}crwdne4452:0
     user:
       no_ordergroup: crwdns4454:0crwdne4454:0
     group_order_article:
@@ -1420,7 +1178,6 @@ ach:
       finance: crwdns4460:0crwdne4460:0
       home: crwdns4462:0crwdne4462:0
       mail_delivery_status: crwdns4464:0crwdne4464:0
-      messagegroups: crwdns4466:0crwdne4466:0
       ordergroups: crwdns4468:0crwdne4468:0
       title: crwdns4470:0crwdne4470:0
       users: crwdns4472:0crwdne4472:0
@@ -1431,7 +1188,6 @@ ach:
       suppliers: crwdns4480:0crwdne4480:0
       title: crwdns4482:0crwdne4482:0
     dashboard: crwdns4484:0crwdne4484:0
-    documents: crwdns4486:0crwdne4486:0
     finances:
       accounts: crwdns4488:0crwdne4488:0
       balancing: crwdns4490:0crwdne4490:0
@@ -1441,20 +1197,14 @@ ach:
       title: crwdns4498:0crwdne4498:0
     foodcoop: crwdns4500:0crwdne4500:0
     members: crwdns4502:0crwdne4502:0
-    messages: crwdns4504:0crwdne4504:0
     ordergroups: crwdns4506:0crwdne4506:0
     orders:
       archive: crwdns4508:0crwdne4508:0
       manage: crwdns4510:0crwdne4510:0
       ordering: crwdns4512:0crwdne4512:0
       pickups: crwdns4514:0crwdne4514:0
-      printer_jobs: crwdns4516:0crwdne4516:0
       title: crwdns4518:0crwdne4518:0
     tasks: crwdns4520:0crwdne4520:0
-    wiki:
-      all_pages: crwdns4522:0crwdne4522:0
-      home: crwdns4524:0crwdne4524:0
-      title: crwdns4526:0crwdne4526:0
     workgroups: crwdns4528:0crwdne4528:0
   number:
     percentage:
@@ -1552,7 +1302,6 @@ ach:
       confirm_delete: crwdns4662:0crwdne4662:0
       confirm_end: |-
         crwdns4664:0%{order}crwdne4664:0
-      confirm_create_printer_job: crwdns4666:0crwdne4666:0
       confirm_send_to_supplier: crwdns4668:0%{when}crwdne4668:0
       create_invoice: crwdns4670:0crwdne4670:0
       description1_order: "crwdns4672:0%{state}crwdnd4672:0%{supplier}crwdnd4672:0%{who}crwdne4672:0"
@@ -1584,92 +1333,6 @@ ach:
       msg1: "crwdns4714:0%{count}crwdnd4714:0%{units}crwdne4714:0"
       msg2: "crwdns4716:0%{count}crwdnd4716:0%{units}crwdne4716:0"
       msg4: "crwdns4718:0%{count}crwdnd4718:0%{units}crwdne4718:0"
-  pages:
-    all:
-      new_page: crwdns4720:0crwdne4720:0
-      recent_changes: crwdns4722:0crwdne4722:0
-      search:
-        action: crwdns4724:0crwdne4724:0
-        placeholder: crwdns4726:0crwdne4726:0
-      site_map: crwdns4728:0crwdne4728:0
-      title: crwdns4730:0crwdne4730:0
-      title_list: crwdns4732:0crwdne4732:0
-    body:
-      title_toc: crwdns4734:0crwdne4734:0
-      wikicloth_exception: 'crwdns4736:0%{msg}crwdne4736:0'
-    create:
-      notice: crwdns4738:0crwdne4738:0
-    cshow:
-      error_noexist: crwdns4740:0crwdne4740:0
-      redirect_notice: crwdns4742:0%{page}crwdne4742:0
-    destroy:
-      notice: crwdns4744:0%{page}crwdne4744:0
-    diff:
-      title: "crwdns4746:0%{title}crwdnd4746:0%{old}crwdnd4746:0%{new}crwdne4746:0"
-    edit:
-      title: crwdns4748:0crwdne4748:0
-    error_stale_object: crwdns4750:0crwdne4750:0
-    form:
-      help:
-        bold: crwdns4752:0crwdne4752:0
-        external_link_ex: crwdns4754:0crwdne4754:0
-        external_links: crwdns4756:0crwdne4756:0
-        heading: crwdns4758:0%{level}crwdne4758:0
-        headings: crwdns4760:0crwdne4760:0
-        image_link_title: crwdns4762:0crwdne4762:0
-        image_links: crwdns4764:0crwdne4764:0
-        italic: crwdns4766:0crwdne4766:0
-        link_lists: crwdns4768:0crwdne4768:0
-        link_table: crwdns4770:0crwdne4770:0
-        link_templates: crwdns4772:0crwdne4772:0
-        link_variables: crwdns4774:0crwdne4774:0
-        list_item_1: crwdns4776:0crwdne4776:0
-        list_item_2: crwdns4778:0crwdne4778:0
-        noformat: crwdns4780:0crwdne4780:0
-        ordered_list: crwdns4782:0crwdne4782:0
-        section_block: crwdns4784:0crwdne4784:0
-        section_character: crwdns4786:0crwdne4786:0
-        section_link: crwdns4788:0crwdne4788:0
-        section_more: crwdns4790:0crwdne4790:0
-        section_table: crwdns4792:0crwdne4792:0
-        see_tables: crwdns4794:0%{tables_link}crwdne4794:0
-        tables_link: crwdns4796:0crwdne4796:0
-        text: crwdns4798:0crwdne4798:0
-        title: crwdns4800:0crwdne4800:0
-        unordered_list: crwdns4802:0crwdne4802:0
-        wiki_link_ex: crwdns4804:0crwdne4804:0
-        wiki_links: crwdns4806:0crwdne4806:0
-      preview: crwdns4808:0crwdne4808:0
-    last_updated: crwdns4810:0crwdne4810:0
-    new:
-      title: crwdns4812:0crwdne4812:0
-    page_list_item:
-      date_format: "crwdns4814:0%acrwdnd4814:0%dcrwdnd4814:0%Bcrwdnd4814:0%Ycrwdnd4814:0%H:%M:%Scrwdne4814:0"
-    show:
-      date_format: "crwdns4816:0%d-%m-%ycrwdnd4816:0%H:%Mcrwdne4816:0"
-      delete: crwdns4818:0crwdne4818:0
-      delete_confirm: 'crwdns4820:0crwdne4820:0'
-      diff: crwdns4822:0crwdne4822:0
-      edit: crwdns4824:0crwdne4824:0
-      last_updated: crwdns4826:0%{user}crwdnd4826:0%{when}crwdne4826:0
-      subpages: crwdns4828:0crwdne4828:0
-      title_versions: crwdns4830:0crwdne4830:0
-      versions: crwdns4832:0%{count}crwdne4832:0
-    title: crwdns4834:0crwdne4834:0
-    update:
-      notice: crwdns4836:0crwdne4836:0
-    variables:
-      description: crwdns4838:0crwdne4838:0
-      title: crwdns4840:0crwdne4840:0
-      value: crwdns4842:0crwdne4842:0
-      variable: crwdns4844:0crwdne4844:0
-    version:
-      author: 'crwdns4846:0%{user}crwdne4846:0'
-      date_format: "crwdns4848:0%acrwdnd4848:0%d-%m-%Ycrwdnd4848:0%H:%Mcrwdne4848:0"
-      revert: crwdns4850:0crwdne4850:0
-      title: "crwdns4852:0%{title}crwdnd4852:0%{version}crwdne4852:0"
-      title_version: crwdns4854:0crwdne4854:0
-      view_current: crwdns4856:0crwdne4856:0
   pickups:
     document:
       empty_selection: crwdns4858:0crwdne4858:0
@@ -1692,18 +1355,6 @@ ach:
       nojs: crwdns4886:0%{link}crwdne4886:0
       noscript: crwdns4888:0crwdne4888:0
       title: crwdns4890:0crwdne4890:0
-  printer_jobs:
-    create:
-      notice: crwdns4892:0%{count}crwdne4892:0
-    destroy:
-      notice: crwdns4894:0crwdne4894:0
-    index:
-      finished: crwdns4896:0crwdne4896:0
-      pending: crwdns4898:0crwdne4898:0
-      queued: crwdns4900:0crwdne4900:0
-      title: crwdns4902:0crwdne4902:0
-    show:
-      title: crwdns4904:0%{id}crwdne4904:0
   shared:
     articles:
       ordered: crwdns4906:0crwdne4906:0
@@ -1775,8 +1426,6 @@ ach:
       tax: crwdns5000:0crwdne5000:0
     labels:
       settings:
-        messages:
-          send_as_email: crwdns5002:0crwdne5002:0
         notify:
           negative_balance: crwdns5004:0crwdne5004:0
           order_finished: crwdns5006:0crwdne5006:0
