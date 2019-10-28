@@ -32,6 +32,7 @@ RSpec.configure do |config|
   # without messing up tests run after that
   config.before(:each) do
     FoodsoftConfig.init
+    FoodsoftConfig.init_mailing
   end
 
   # If true, the base class of anonymous controllers will be inferred
