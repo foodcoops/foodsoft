@@ -1,6 +1,6 @@
 class CurrentOrders::OrdersController < ApplicationController
 
-  before_filter :authenticate_orders, except: :my
+  before_action :authenticate_orders, except: :my
 
   def show
     @doc_options ||= {}

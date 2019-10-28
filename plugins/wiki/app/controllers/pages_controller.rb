@@ -1,13 +1,13 @@
 # encoding: utf-8
 class PagesController < ApplicationController
-  before_filter -> { require_plugin_enabled FoodsoftWiki }
-  before_filter :catch_special_pages, only: [:show, :new]
+  before_action -> { require_plugin_enabled FoodsoftWiki }
+  before_action :catch_special_pages, only: [:show, :new]
 
-  skip_before_filter :authenticate, :only => :all
-  before_filter :only => :all do
+  skip_before_action :authenticate, :only => :all
+  before_action :only => :all do
     authenticate_or_token(['wiki', 'all'])
   end
-  before_filter do
+  before_action do
     content_for :head, view_context.rss_meta_tag
   end
 

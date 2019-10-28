@@ -2,10 +2,10 @@
 # Management actions that require the "orders" role are handled by the OrdersController.
 class GroupOrdersController < ApplicationController
   # Security
-  before_filter :ensure_ordergroup_member
-  before_filter :ensure_open_order, :only => [:new, :create, :edit, :update, :order, :stock_order, :saveOrder]
-  before_filter :ensure_my_group_order, only: [:show, :edit, :update]
-  before_filter :enough_apples?, only: [:new, :create]
+  before_action :ensure_ordergroup_member
+  before_action :ensure_open_order, :only => [:new, :create, :edit, :update, :order, :stock_order, :saveOrder]
+  before_action :ensure_my_group_order, only: [:show, :edit, :update]
+  before_action :enough_apples?, only: [:new, :create]
 
   # Index page.
   def index
@@ -66,7 +66,7 @@ class GroupOrdersController < ApplicationController
   private
 
   # Returns true if @current_user is member of an Ordergroup.
-  # Used as a :before_filter by OrdersController.
+  # Used as a :before_action by OrdersController.
   def ensure_ordergroup_member
     @ordergroup = @current_user.ordergroup
     if @ordergroup.nil?

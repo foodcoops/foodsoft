@@ -1,6 +1,6 @@
 # Foodcoop-specific styling
 class StylesController < ApplicationController
-  skip_before_filter :authenticate
+  skip_before_action :authenticate
 
   # renders foodcoop css, or 404 if not configured
   #

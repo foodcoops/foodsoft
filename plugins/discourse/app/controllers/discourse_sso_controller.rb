@@ -1,6 +1,6 @@
 class DiscourseSsoController < DiscourseController
 
-  before_filter -> { require_config_enabled :discourse_sso }
+  before_action -> { require_config_enabled :discourse_sso }
 
   def sso
     raise I18n.t('discourse.sso.invalid_signature') unless valid_signature?

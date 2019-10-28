@@ -2,9 +2,9 @@ class PrinterController < ApplicationController
   include Concerns::SendOrderPdf
   include Tubesock::Hijack
 
-  skip_before_filter :authenticate
-  before_filter :authenticate_printer
-  before_filter -> { require_plugin_enabled FoodsoftPrinter }
+  skip_before_action :authenticate
+  before_action :authenticate_printer
+  before_action -> { require_plugin_enabled FoodsoftPrinter }
 
   def socket
     hijack do |tubesock|

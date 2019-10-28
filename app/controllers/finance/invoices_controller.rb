@@ -1,7 +1,7 @@
 class Finance::InvoicesController < ApplicationController
 
-  before_filter :find_invoice, only: [:show, :edit, :update, :destroy]
-  before_filter :ensure_can_edit, only: [:edit, :update, :destroy]
+  before_action :find_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_can_edit, only: [:edit, :update, :destroy]
 
   def index
     @invoices = Invoice.includes(:supplier, :deliveries, :orders).order('date DESC').page(params[:page]).per(@per_page)

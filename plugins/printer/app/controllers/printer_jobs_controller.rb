@@ -1,7 +1,7 @@
 class PrinterJobsController < ApplicationController
   include Concerns::SendOrderPdf
 
-  before_filter -> { require_plugin_enabled FoodsoftPrinter }
+  before_action -> { require_plugin_enabled FoodsoftPrinter }
 
   def index
     jobs = PrinterJob.includes(:printer_job_updates)
