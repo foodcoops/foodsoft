@@ -1,19 +1,15 @@
 language: ruby
 sudo: false
 rvm:
-  - 2.3
+  - 2.4
 services:
-  - xvfb
   - mysql
   - redis-server
 addons:
   apt:
     packages:
       - libmagic-dev
-      - qt5-default
-      - libqt5webkit5-dev
-      - gstreamer1.0-plugins-base
-      - gstreamer1.0-tools
+  chrome: stable
 env: COVERALLS=1
 cache: bundler
 bundler_args:
@@ -24,4 +20,4 @@ before_script:
   - "mysql -e 'grant all on foodsoft_test.* to travis;'"
   - 'printf "test:\n  adapter: mysql2\n  database: foodsoft_test\n  username: travis\n  encoding: utf8\n" >config/database.yml'
   - 'bundle exec rake db:schema:load RAILS_ENV=test'
-script: xvfb-run -a bundle exec rake rspec-rerun:spec
+script: bundle exec rake rspec-rerun:spec

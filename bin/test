@@ -5,13 +5,5 @@ unset DATABASE_URL; export DATABASE_URL
 [ "$TEST_DATABASE_URL" ] && export DATABASE_URL="$TEST_DATABASE_URL"
 export RAILS_ENV=test
 
-# Start virtuals X environment to allow integration testing via firefox/iceweasel
-export DISPLAY=:99
-Xvfb $DISPLAY -nolisten tcp &
-XVFB_PID=$!
-
 # Start tests
 bundle exec rspec $@
-
-# Cleanup
-kill $XVFB_PID

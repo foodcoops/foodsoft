@@ -101,7 +101,8 @@ group :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'puma' # for faster Capybara tests
+  gem 'apparition' # Capybara javascript driver
   gem 'database_cleaner'
   gem 'connection_pool'
   # need to include rspec components before i18n-spec or rake fails in test environment

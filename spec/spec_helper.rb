@@ -5,8 +5,10 @@ require_relative 'support/coverage' # needs to be first
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
+require 'capybara/apparition'
 
-Capybara.javascript_driver = :webkit
+Capybara.server = :puma, { Silent: true }
+Capybara.javascript_driver = :apparition
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
