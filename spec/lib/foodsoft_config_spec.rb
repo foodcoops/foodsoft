@@ -1,8 +1,8 @@
 require_relative '../spec_helper'
 
 describe FoodsoftConfig do
-  let(:name) { Faker::Lorem.words(rand(2..4)).join(' ') }
-  let(:other_name) { Faker::Lorem.words(rand(2..4)).join(' ') }
+  let(:name) { Faker::Lorem.words(number: rand(2..4)).join(' ') }
+  let(:other_name) { Faker::Lorem.words(number: rand(2..4)).join(' ') }
 
   it 'returns a default value' do
     expect(FoodsoftConfig[:protected][:database]).to be true
