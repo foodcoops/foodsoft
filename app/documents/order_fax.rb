@@ -112,22 +112,6 @@ class OrderFax < OrderPdf
       units_to_order = oa.units
       supplier_price = price.supplier_price || oa.article.price
 
-      begin
-        unit = Unit.new(oa.article.unit) rescue Unit.new(oa.article.unit.downcase)
-        total_quantity = units_to_order * oa.price.unit_quantity #* unit.scalar
-        unit = unit #.units
-
-        if (unit.scalar == 1)
-          unit = unit.units
-        else
-          unit = "X #{unit}"
-        end
-        unit = unit.to_s.upcase
-      rescue
-        unit = oa.article.unit
-        total_quantity = units_to_order * oa.price.unit_quantity
-      end
-
       subtotal = units_to_order * supplier_price
       total += subtotal
 
