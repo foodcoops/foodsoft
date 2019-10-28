@@ -71,6 +71,12 @@ class FoodsoftConfig
       set_missing
     end
 
+    def init_mailing
+      [:protocol, :host, :port, :script_name].each do |k|
+        ActionMailer::Base.default_url_options[k] = self[k] if self[k]
+      end
+    end
+
     # Set config and database connection for specific foodcoop.
     #
     # Only needed in multi coop mode.
@@ -225,9 +231,6 @@ class FoodsoftConfig
     end
 
     def setup_mailing
-      [:protocol, :host, :port, :script_name].each do |k|
-        ActionMailer::Base.default_url_options[k] = self[k] if self[k]
-      end
       ActionMailer::Base.default_url_options[:foodcoop] = scope
     end
 

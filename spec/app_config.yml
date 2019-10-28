@@ -19,6 +19,8 @@ default: &defaults
   tax_default: 6.0
   email_sender: noreply@minimal.test
 
+  host: localhost
+
 
 development:
   <<: *defaults
