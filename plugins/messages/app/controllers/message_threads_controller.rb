@@ -1,6 +1,6 @@
 class MessageThreadsController < ApplicationController
 
-  before_filter -> { require_plugin_enabled FoodsoftMessages }
+  before_action -> { require_plugin_enabled FoodsoftMessages }
 
   def index
     @groups = Group.order(:name)

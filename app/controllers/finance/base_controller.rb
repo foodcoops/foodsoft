@@ -1,5 +1,5 @@
 class Finance::BaseController < ApplicationController
-  before_filter :authenticate_finance
+  before_action :authenticate_finance
 
   def index
     @financial_transactions = FinancialTransaction.includes(:ordergroup).order('created_on DESC').limit(8)

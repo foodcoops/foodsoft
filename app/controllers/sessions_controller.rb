@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  skip_before_filter :authenticate
+  skip_before_action :authenticate
   layout 'login'
 
   def new

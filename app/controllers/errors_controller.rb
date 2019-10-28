@@ -1,7 +1,7 @@
 class ErrorsController < ApplicationController
   include Gaffe::Errors
 
-  skip_before_filter :authenticate
+  skip_before_action :authenticate
 
   layout :current_layout
 

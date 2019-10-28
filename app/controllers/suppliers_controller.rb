@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SuppliersController < ApplicationController
-  before_filter :authenticate_suppliers, :except => [:index, :list]
+  before_action :authenticate_suppliers, :except => [:index, :list]
   helper :deliveries
 
   def index

@@ -1,6 +1,6 @@
 # encoding: utf-8
 class CurrentOrdersController < ApplicationController
-  
-  before_filter :authenticate_orders
+
+  before_action :authenticate_orders
 
 end

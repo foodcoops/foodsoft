@@ -1,8 +1,8 @@
 # encoding: utf-8
 class CurrentOrders::OrdergroupsController < ApplicationController
 
-  before_filter :authenticate_orders
-  before_filter :find_group_orders, only: [:index, :show]
+  before_action :authenticate_orders
+  before_action :find_group_orders, only: [:index, :show]
 
   def index
     # sometimes need to pass id as parameter for forms

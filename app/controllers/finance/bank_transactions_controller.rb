@@ -1,5 +1,5 @@
 class Finance::BankTransactionsController < ApplicationController
-  before_filter :authenticate_finance
+  before_action :authenticate_finance
   inherit_resources
 
   def index

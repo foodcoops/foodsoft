@@ -1,6 +1,6 @@
 class PickupsController < ApplicationController
 
-  before_filter :authenticate_pickups
+  before_action :authenticate_pickups
 
   def index
     @orders = Order.finished_not_closed.order('pickup DESC').group_by { |o| o.pickup }

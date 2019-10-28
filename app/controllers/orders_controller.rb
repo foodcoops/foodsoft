@@ -5,9 +5,9 @@
 class OrdersController < ApplicationController
   include Concerns::SendOrderPdf
 
-  before_filter :authenticate_pickups_or_orders
-  before_filter :authenticate_orders, except: [:receive, :receive_on_order_article_create, :receive_on_order_article_update, :show]
-  before_filter :remove_empty_article, only: [:create, :update]
+  before_action :authenticate_pickups_or_orders
+  before_action :authenticate_orders, except: [:receive, :receive_on_order_article_create, :receive_on_order_article_update, :show]
+  before_action :remove_empty_article, only: [:create, :update]
 
   # List orders
   def index

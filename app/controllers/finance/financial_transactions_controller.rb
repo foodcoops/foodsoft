@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Finance::FinancialTransactionsController < ApplicationController
-  before_filter :authenticate_finance
-  before_filter :find_ordergroup, :except => [:new_collection, :create_collection, :index_collection]
+  before_action :authenticate_finance
+  before_action :find_ordergroup, :except => [:new_collection, :create_collection, :index_collection]
   inherit_resources
 #  belongs_to :ordergroup
 

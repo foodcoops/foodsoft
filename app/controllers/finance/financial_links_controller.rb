@@ -1,5 +1,5 @@
 class Finance::FinancialLinksController < Finance::BaseController
-  before_filter :find_financial_link, except: [:create]
+  before_action :find_financial_link, except: [:create]
 
   def show
     @items = @financial_link.bank_transactions.map do |bt|

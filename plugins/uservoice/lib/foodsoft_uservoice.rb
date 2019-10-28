@@ -10,7 +10,7 @@ module FoodsoftUservoice
   module LoadUservoice
     def self.included(base) # :nodoc:
       base.class_eval do
-        before_filter :add_uservoice_script
+        before_action :add_uservoice_script
 
         protected
 

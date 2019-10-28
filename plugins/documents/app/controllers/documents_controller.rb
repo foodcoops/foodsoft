@@ -1,7 +1,7 @@
 require 'filemagic'
 
 class DocumentsController < ApplicationController
-  before_filter -> { require_plugin_enabled FoodsoftDocuments }
+  before_action -> { require_plugin_enabled FoodsoftDocuments }
 
   def index
     if params["sort"]
