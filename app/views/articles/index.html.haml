@@ -53,9 +53,9 @@
 - content_for :javascript do
   :javascript
     // keep import button pressed when import section is shown
-    $(document).on('touchclick', 'a[data-toggle-this=#import]', function() {
+    $(document).on('touchclick', 'a[data-toggle-this="#import"]', function() {
       var state = $('#import').is(':visible');
-      $('.btn-toolbar a[data-toggle-this=#import]').toggleClass('active', !state);
+      $('.btn-toolbar a[data-toggle-this="#import"]').toggleClass('active', !state);
       if (!state) {
         // also load articles when shown
         $('#import form').submit();
