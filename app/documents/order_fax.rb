@@ -75,8 +75,8 @@ class OrderFax < OrderPdf
     # Articles
     data, total = table_data
 
-    column_widths = [40, 40, 90, 40, 200, 60, 70]
-    data << [nil, nil, nil, nil, nil, I18n.t('documents.order_fax.total'), number_to_currency(total)]
+    column_widths = [70, 40, 280, 70, 80]
+    data << [nil, nil, nil, I18n.t('documents.order_fax.total'), number_to_currency(total)]
     table data, column_widths: column_widths, cell_style: {size: fontsize(8), font: 'Courier', overflow: :shrink_to_fit} do |table|
       table.header = true
       # table.cells.border_width = 1
@@ -84,13 +84,14 @@ class OrderFax < OrderPdf
       table.cells.borders = [:bottom]
 
       table.row(0).border_bottom_width = 2
-      table.columns(0..6).align = :right
-      # table.columns(2).align = :right
-      table.columns(4).align = :left
+      table.columns(0..3).align = :left
+      table.columns(4..5).align = :right
+      table.columns(1).align = :right
+      # table.columns(2).align = :left
       # table.columns(5).align = :left
-      table.row(0).columns(3).align = :center
+      # table.row(0).columns(2).align = :center
       # table.columns(3..6).align = :right
-      table.row(data.length - 1).columns(0..6).borders = [:top, :bottom]
+      table.row(data.length - 1).columns(0..5).borders = [:top, :bottom]
       table.row(data.length - 1).columns(0).borders = [:top, :bottom]
       table.row(data.length - 1).border_top_width = 2
     end
@@ -132,9 +133,8 @@ class OrderFax < OrderPdf
 
       data << [oa.article.order_number,
                units_to_order,
-               "#{total_quantity} #{unit}",
-               oa.article.origin,
-               [oa.article.name.squeeze(' '), "\n", oa.article.manufacturer].join(''),
+               # "#{total_quantity} #{unit}",
+               [oa.article.name.squeeze(' '), "\n", oa.article.manufacturer, ' (', oa.article.origin, ')'].join(''),
                number_to_currency(oa.price.supplier_price),
                number_to_currency(subtotal)]
 
