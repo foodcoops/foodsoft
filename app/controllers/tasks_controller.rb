@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params[:task])
+    @task = Task.new(task_params, current_user_id: current_user.id)
     if params[:periodic]
       @task.periodic_task_group = PeriodicTaskGroup.new
     end
@@ -44,6 +44,7 @@ class TasksController < ApplicationController
     task_group = @task.periodic_task_group
     was_periodic = @task.periodic?
     prev_due_date = @task.due_date
+    @task.current_user_id = current_user.id
     @task.attributes=(params[:task])
     if @task.errors.empty? && @task.save
       task_group.update_tasks_including(@task, prev_due_date) if params[:periodic]
@@ -111,4 +112,13 @@ class TasksController < ApplicationController
       redirect_to tasks_url, :alert => I18n.t('tasks.error_not_found')
     end
   end
+
+  private
+
+  def task_params
+    params
+      .require(:task)
+      .permit(:name, :description, :duration, :user_list, :required_users, :workgroup, :due_date, :done)
+  end
+
 end
