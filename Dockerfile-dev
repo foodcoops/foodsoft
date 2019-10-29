@@ -29,7 +29,7 @@ WORKDIR /home/app/src
 COPY Gemfile Gemfile.lock ./
 COPY plugins ./plugins
 RUN bundle config build.nokogiri "--use-system-libraries" && \
-    bundle install -j 4
+    bundle install --frozen -j 4
 
 # Copy the application code
 COPY . ./
