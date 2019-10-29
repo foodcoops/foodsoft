@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
         @message.reply_to = original_message.reply_to
       end
       if original_message.is_readable_for?(current_user)
-        @message.add_recipients [original_message.sender]
+        @message.add_recipients [original_message.sender_id]
         @message.group_id = original_message.group_id
         @message.private = original_message.private
         @message.subject = I18n.t('messages.model.reply_subject', :subject => original_message.subject)

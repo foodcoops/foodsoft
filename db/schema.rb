@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181201000000) do
+ActiveRecord::Schema.define(version: 20181201000100) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -248,12 +248,20 @@ ActiveRecord::Schema.define(version: 20181201000000) do
 
   add_index "memberships", ["user_id", "group_id"], name: "index_memberships_on_user_id_and_group_id", unique: true, using: :btree
 
+  create_table "message_recipients", force: :cascade do |t|
+    t.integer  "message_id",              null: false
+    t.integer  "user_id",                 null: false
+    t.integer  "email_state", default: 0, null: false
+    t.datetime "read_at"
+  end
+
+  add_index "message_recipients", ["message_id"], name: "index_message_recipients_on_message_id", using: :btree
+  add_index "message_recipients", ["user_id", "read_at"], name: "index_message_recipients_on_user_id_and_read_at", using: :btree
+
   create_table "messages", force: :cascade do |t|
     t.integer  "sender_id",      limit: 4
-    t.text     "recipients_ids", limit: 65535
     t.string   "subject",        limit: 255,                   null: false
     t.text     "body",           limit: 65535
-    t.integer  "email_state",    limit: 4,     default: 0,     null: false
     t.boolean  "private",                      default: false
     t.datetime "created_at"
     t.integer  "reply_to",       limit: 4
