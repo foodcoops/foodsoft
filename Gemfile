@@ -42,7 +42,6 @@ gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 http
 gem 'resque'
 gem 'thin'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
-gem 'protected_attributes', '= 1.1.0' # 1.1.0 until tests work work with higher versions
 gem 'ruby-units'
 gem 'attribute_normalizer'
 gem 'ice_cube'

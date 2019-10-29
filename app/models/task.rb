@@ -11,10 +11,6 @@ class Task < ApplicationRecord
 
   attr_accessor :current_user_id
 
-  # form will send user in string. responsibilities will added later
-  include ActiveModel::MassAssignmentSecurity
-  attr_protected :users
-
   validates :name, :presence => true, :length => { :minimum => 3 }
   validates :required_users, :presence => true
   validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 0
