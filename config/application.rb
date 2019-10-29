@@ -63,7 +63,7 @@ module Foodsoft
     config.assets.precompile += [ 'vendor/assets/javascripts/*.js' ]
 
     # CORS for API
-    config.middleware.insert_before 0, 'Rack::Cors' do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
         # this restricts Foodsoft scopes to certain characters - let's discuss it when it becomes an actual problem
