@@ -34,6 +34,9 @@ Foodsoft::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
+
   # Required for i18n-js
   config.assets.initialize_on_precompile = true
 
