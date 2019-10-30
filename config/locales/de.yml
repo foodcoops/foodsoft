@@ -30,6 +30,19 @@ de:
         price: Nettopreis
         tax: MwSt
         unit_quantity: Gebindegröße
+      bank_account:
+        balance: Kontostand
+        description: Beschreibung
+        iban: IBAN
+        name: Name
+      bank_transaction:
+        amount: Betrag
+        date: Datum
+        external_id: Externe ID
+        financial_link: Finanzlink
+        iban: IBAN
+        reference: Zahlungsreferenz
+        text: Beschreibung
       delivery:
         delivered_on: Lieferdatum
         note: Notiz
@@ -42,13 +55,13 @@ de:
       financial_transaction:
         amount: Betrag
         created_on: Datum
-        financial_transaction_class: Finanztransaktionsklasse
-        financial_transaction_type: Finanztransaktionstyp
+        financial_transaction_class: Kontotransaktionsklasse
+        financial_transaction_type: Kontotransaktionstyp
         note: Notiz
         ordergroup: Bestellgruppe
         user: Eingetragen von
       financial_transaction_type:
-        financial_transaction_class: Finanztransaktionsklasse
+        financial_transaction_class: Kontotransaktionsklasse
         name_short: Kurzname
       group_order:
         ordergroup: Bestellgruppe
@@ -72,6 +85,7 @@ de:
         deliveries: Lieferung
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
+        financial_link: Finanzlink
         net_amount: Pfandbereinigter Betrag
         note: Notiz
         number: Nummer
@@ -203,10 +217,11 @@ de:
     models:
       article: Artikel
       article_category: Kategorie
+      bank_transaction: Banktransaktion
       delivery: Lieferung
       financial_transaction: Kontotransaktion
-      financial_transaction_class: Finanztransaktionsklasse
-      financial_transaction_type: Finanztransaktionstyp
+      financial_transaction_class: Kontotransaktionsklasse
+      financial_transaction_type: Kontotransaktionstyp
       invoice: Rechnung
       order: Bestellung
       order_article: Bestell-Artikel
@@ -262,19 +277,22 @@ de:
     confirm: Bist Du sicher?
     finances:
       index:
-        first_paragraph: Hier kannst du die Finanztransaktionsklassen und die dazugehörigen Finanztransaktionstypen verwalten. Jede Finanztansaktion hat einen bestimmten Typ, den du bei jeder Transaktion auswählen muss, falls du mehr als einen Typ angelegt hast. Die Finanztransaktionsklassen können zur Gruppierung der Finanztransaktionstypen verwendet werden und werden in der Kontoübersicht als weitere Spalten angezeigt, falls mehrere angelegt wurden.
-        new_financial_transaction_class: Neue Finanztransaktionsklasse anlegen
+        bank_accounts: Bankkonten
+        first_paragraph: Hier kannst du die Kontotransaktionsklassen und die dazugehörigen Kontotransaktionstypen verwalten. Jede Finanztansaktion hat einen bestimmten Typ, den du bei jeder Transaktion auswählen muss, falls du mehr als einen Typ angelegt hast. Die Kontotransaktionsklassen können zur Gruppierung der Kontotransaktionstypen verwendet werden und werden in der Kontoübersicht als weitere Spalten angezeigt, falls mehrere angelegt wurden.
+        new_bank_account: Neues Bankkonto anlegen
+        new_financial_transaction_class: Neue Kontotransaktionsklasse anlegen
         title: Finanzen
+        transaction_types: Kontotransaktionstypen
       transaction_types:
-        new_financial_transaction_type: Neuen Finanztransaktionstyp anlegen
+        new_financial_transaction_type: Neuen Kontotransaktionstyp anlegen
     financial_transaction_classes:
       form:
-        title_edit: Finanztransaktionsklasse bearbeiten
-        title_new: Finanztransaktionsklasse anlegen
+        title_edit: Kontotransaktionsklasse bearbeiten
+        title_new: Kontotransaktionsklasse anlegen
     financial_transaction_types:
       form:
-        title_edit: Finanztransaktionstyp bearbeiten
-        title_new: Finanztransaktionstyp anlegen
+        title_edit: Kontotransaktionstyp bearbeiten
+        title_new: Kontotransaktionstyp anlegen
     mail_delivery_status:
       destroy_all:
         notice: Alle E-Mail Probleme wurden gelöscht
@@ -747,11 +765,58 @@ de:
         reload: Zusammenfassung neu laden
         with_extra_charge: 'mit Aufschlag:'
         without_extra_charge: 'ohne Aufschlag:'
+    bank_accounts:
+      assign_unlinked_transactions:
+        notice: 'Es wurden %{count} Transaktionen zugeordnet.'
+      import:
+        notice: 'Es wurden %{count} neue Transaktionen importiert.'
+        no_import_method: Für dieses Bankkonto ist keine Importmethode konfiguriert.
+      index:
+        title: Bankkonten
+    bank_transactions:
+      index:
+        assign_unlinked_transactions: Transaktionen zuordenen
+        import_transactions: Importieren
+        title: Banktransaktionen für %{name} (%{balance})
+      show:
+        add_financial_link: Finanzlink hinzufügen
+        belongs_to_supplier: gehört zu Lieferant_in
+        belongs_to_user: gehört zu Benutzer_in
+        in_ordergroup: in Bestellgruppe
+      transactions:
+        add_financial_link: Hinzufügen
     create:
       notice: Rechnung wurde erstellt.
     financial_links:
+      add_bank_transaction:
+        notice: Verlinkung wurde zu der Banktransaktion wurde hinzugefügt.
+      add_financial_transaction:
+        notice: Verlinkung wurde zu der Kontotransaktion wurde hinzugefügt.
+      add_invoice:
+        notice: Verlinkung wurde zu der Rechnung wurde hinzugefügt.
+      create:
+        notice: Ein neuer Finanzlink wurde erstellt.
+      index_bank_transaction:
+        title: Banktransaktion hinzufügen
+      index_financial_transaction:
+        title: Kontotransaktion hinzufügen
+      index_invoice:
+        title: Rechnung hinzufügen
+      remove_bank_transaction:
+        notice: Verlinkung wurde zu der Banktransaktion wurde entfernt.
+      remove_financial_transaction:
+        notice: Verlinkung wurde zu der Kontotransaktion wurde entfernt.
+      remove_invoice:
+        notice: Verlinkung wurde zu der Rechnung wurde entfernt.
       show:
+        add_bank_transaction: Banktransaktion hinzufügen
+        add_financial_transaction: Kontotransaktion hinzufügen
+        add_invoice: Rechnung hinzufügen
+        amount: Betrag
+        date: Datum
+        description: Beschreibung
         title: Finanzlink %{number}
+        type: Typ
     financial_transactions:
       controller:
         create:
@@ -767,7 +832,7 @@ de:
         title: Kontoauszug für %{name}
       index_collection:
         show_groups: Konten verwalten
-        title: Finanztransaktionen
+        title: Kontotransaktionen
       new:
         paragraph: Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.
         title: Neue Transaktion
@@ -1107,7 +1172,7 @@ de:
         Bestellung online einsehen: %{order_url}
 
 
-        Viele Grüße von %{foodcoop} 
+        Viele Grüße von %{foodcoop}
     order_result_supplier:
       subject: Neue Bestellung für %{name}
       text: |
@@ -1157,7 +1222,7 @@ de:
     delivery:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
     financial_transaction_type:
-      no_delete_last: Es muss mindestens ein Finanztransaktionstyp existieren.
+      no_delete_last: Es muss mindestens ein Kontotransaktionstyp existieren.
     group_order:
       stock_ordergroup_name: Lager (%{user})
     invoice:
@@ -1187,6 +1252,7 @@ de:
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen
+      bank_accounts: Bankkonten
       home: Übersicht
       invoices: Rechnungen
       title: Finanzen

@@ -41,7 +41,7 @@ class Finance::FinancialLinksController < Finance::BaseController
       bank_transaction = BankTransaction.find(params[:bank_transaction])
       bank_transaction.update_attribute :financial_link, @financial_link
     end
-    redirect_to finance_link_url(@financial_link), notice: I18n.t('finance.bank_transactions.controller.create.notice')
+    redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
   def index_bank_transaction
@@ -51,13 +51,13 @@ class Finance::FinancialLinksController < Finance::BaseController
   def add_bank_transaction
     bank_transaction = BankTransaction.find(params[:bank_transaction])
     bank_transaction.update_attribute :financial_link, @financial_link
-    redirect_to finance_link_url(@financial_link), notice: I18n.t('finance.bank_transactions.controller.create.notice')
+    redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
   def remove_bank_transaction
     bank_transaction = BankTransaction.find(params[:bank_transaction])
     bank_transaction.update_attribute :financial_link, nil
-    redirect_to finance_link_url(@financial_link), notice: I18n.t('finance.bank_transactions.controller.destroy.notice')
+    redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
   def index_financial_transaction
@@ -67,13 +67,13 @@ class Finance::FinancialLinksController < Finance::BaseController
   def add_financial_transaction
     financial_transaction = FinancialTransaction.find(params[:financial_transaction])
     financial_transaction.update_attribute :financial_link, @financial_link
-    redirect_to finance_link_url(@financial_link), notice: I18n.t('finance.financial_transactions.controller.create.notice')
+    redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
   def remove_financial_transaction
     financial_transaction = FinancialTransaction.find(params[:financial_transaction])
     financial_transaction.update_attribute :financial_link, nil
-    redirect_to finance_link_url(@financial_link), notice: I18n.t('finance.financial_transactions.controller.destroy.notice')
+    redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
   def index_invoice
@@ -83,13 +83,13 @@ class Finance::FinancialLinksController < Finance::BaseController
   def add_invoice
     invoice = Invoice.find(params[:invoice])
     invoice.update_attribute :financial_link, @financial_link
-    redirect_to finance_link_url(@financial_link), notice: I18n.t('finance.financial_transactions.controller.create.notice')
+    redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
   def remove_invoice
     invoice = Invoice.find(params[:invoice])
     invoice.update_attribute :financial_link, nil
-    redirect_to finance_link_url(@financial_link), notice: I18n.t('finance.financial_transactions.controller.destroy.notice')
+    redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
 protected

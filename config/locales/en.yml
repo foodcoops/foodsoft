@@ -33,6 +33,19 @@ en:
         price: Price (net)
         tax: VAT
         unit_quantity: Unit quantity
+      bank_account:
+        balance: Balance
+        description: Description
+        iban: IBAN
+        name: Name
+      bank_transaction:
+        amount: Amount
+        date: Date
+        external_id: External ID
+        financial_link: Financial link
+        iban: IBAN
+        reference: Referenz
+        text: Description
       delivery:
         delivered_on: Delivery date
         note: Note
@@ -79,6 +92,7 @@ en:
         deliveries: Delivery
         deposit: Deposit charged
         deposit_credit: Deposit returned
+        financial_link: Financial link
         net_amount: Amount adjusted for refund
         note: Note
         number: Number
@@ -280,9 +294,12 @@ en:
     confirm: Are you sure?
     finances:
       index:
+        bank_accounts: Bank accounts
         first_paragraph: Here you can manage the financial transaction classes and the corresponding financial transaction types. Every financial transaction has a type, which you have to select at every transaction, if you created more than one type. The financial transaction classes can be use to group the financial transaction types and will be shown as additional columns in the account overview, if there have been created more than one.
+        new_bank_account: Add new bank account
         new_financial_transaction_class: Add new financial transaction class
         title: Finances
+        transaction_types: Financial transaction types
       transaction_types:
         name: Name
         new_financial_transaction_type: Add new financial transaction type
@@ -774,26 +791,57 @@ en:
         with_extra_charge: 'with extra charge:'
         without_extra_charge: 'without extra charge:'
     bank_accounts:
-      controller:
-        assign:
-          notice: '%{count} transactions have been assigned'
-        import:
-          notice: '%{count} new transactions have been imported'
+      assign_unlinked_transactions:
+        notice: '%{count} transactions have been assigned'
+      import:
+        notice: '%{count} new transactions have been imported'
+        no_import_method: For this bank account no import method is configured.
       index:
-        account_statement: Account statement
         title: Bank Accounts
     bank_transactions:
       index:
+        assign_unlinked_transactions: Assign transactions
+        import_transactions: Import
         title: Bank transactions for %{name} (%{balance})
       show:
+        add_financial_link: Add financial link
         belongs_to_supplier: belongs to supplier
         belongs_to_user: belongs to user
         in_ordergroup: in ordergroup
+      transactions:
+        add_financial_link: Add link
     create:
       notice: Invoice was created.
     financial_links:
+      add_bank_transaction:
+        notice: Link to the bank transaction has been added.
+      add_financial_transaction:
+        notice: Link to the financial transaction has been added.
+      add_invoice:
+        notice: Link to the invoice has been added.
+      create:
+        notice: A new financial link has been created.
+      index_bank_transaction:
+        title: Add bank transaction
+      index_financial_transaction:
+        title: Add financial transaction
+      index_invoice:
+        title: Add invoice
+      remove_bank_transaction:
+        notice: Link to the bank transaction has been removed.
+      remove_financial_transaction:
+        notice: Link to the financial transaction has been removed.
+      remove_invoice:
+        notice: Link to the invoice has been removed.
       show:
+        add_bank_transaction: Add bank transaction
+        add_financial_transaction: Add financial transaction
+        add_invoice: Add invoice
+        amount: Amount
+        date: Date
+        description: Description
         title: Financial link %{number}
+        type: Type
     financial_transactions:
       controller:
         create:
