@@ -56,20 +56,30 @@ class Finance::FinancialTransactionsController < ApplicationController
   def create_collection
     raise I18n.t('finance.financial_transactions.controller.create_collection.error_note_required') if params[:note].blank?
     type = FinancialTransactionType.find_by_id(params[:type_id])
-    params[:financial_transactions].each do |trans|
-      # ignore empty amount fields ...
-      unless trans[:amount].blank?
-        amount = trans[:amount].to_f
-        note = params[:note]
-        ordergroup = Ordergroup.find(trans[:ordergroup_id])
-        if params[:set_balance]
-          note += " (#{amount})"
-          amount -= ordergroup.financial_transaction_class_balance(type.financial_transaction_class)
+    financial_link = nil
+
+    ActiveRecord::Base.transaction do
+      financial_link = FinancialLink.new if params[:create_financial_link]
+
+      params[:financial_transactions].each do |trans|
+        # ignore empty amount fields ...
+        unless trans[:amount].blank?
+          amount = trans[:amount].to_f
+          note = params[:note]
+          ordergroup = Ordergroup.find(trans[:ordergroup_id])
+          if params[:set_balance]
+            note += " (#{amount})"
+            amount -= ordergroup.financial_transaction_class_balance(type.financial_transaction_class)
+          end
+          ordergroup.add_financial_transaction!(amount, note, @current_user, type, financial_link)
         end
-        ordergroup.add_financial_transaction!(amount, note, @current_user, type)
       end
+
+      financial_link.try(&:save!)
     end
-    redirect_to finance_ordergroups_url, notice: I18n.t('finance.financial_transactions.controller.create_collection.notice')
+
+    url = financial_link ? finance_link_url(financial_link.id) : finance_ordergroups_url
+    redirect_to url, notice: I18n.t('finance.financial_transactions.controller.create_collection.notice')
   rescue => error
     flash.now[:alert] = error.message
     render action: :new_collection

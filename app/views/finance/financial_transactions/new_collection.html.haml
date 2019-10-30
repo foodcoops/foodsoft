@@ -56,6 +56,11 @@
   %p
     = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn'
     = link_to t('.add_all_ordergroups'), '#', 'data-add-all-ordergroups' => true, class: 'btn'
+  - if BankAccount.any?
+    %p
+      %label
+        = check_box_tag :create_financial_link, true, params[:create_financial_link]
+        = t('.create_financial_link')
   .form-actions
     = submit_tag t('.save'), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), finance_ordergroups_path
