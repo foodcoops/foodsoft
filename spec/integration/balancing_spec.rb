@@ -112,7 +112,7 @@ feature 'settling an order', js: true do
     end
     within("#edit_order_article_#{oa.id}") do
       find('#order_article_units_to_order').set(0)
-      sleep 0.2
+      sleep 0.25
       find('input[type="submit"]').click
     end
     expect(page).to have_selector("#order_article_#{oa.id}")
@@ -134,7 +134,7 @@ feature 'settling an order', js: true do
     within('#new_group_order_article') do
       select user.ordergroup.name, :from => 'group_order_article_ordergroup_id'
       find('#group_order_article_result').set(8)
-      sleep 0.2
+      sleep 0.25
       find('input[type="submit"]').click
     end
     expect(page).to_not have_selector('form#new_group_order_article')
@@ -173,9 +173,8 @@ feature 'settling an order', js: true do
     expect(page).to have_selector('form#new_order_article')
     within('#new_order_article') do
       find('#order_article_article_id').select(new_article.name)
-      sleep 0.1
+      sleep 0.25
       find('input[type="submit"]').click
-      sleep 0.1
     end
     expect(page).to_not have_selector('form#new_order_article')
     expect(page).to have_content(new_article.name)
