@@ -1,7 +1,7 @@
 - title t('.title')
 
 - for supplier in @suppliers
-  - invoices = supplier.invoices.unpaid
+  - invoices = supplier.invoices
   - if invoices.any?
     %h3= supplier.name
     - invoices_sum = 0

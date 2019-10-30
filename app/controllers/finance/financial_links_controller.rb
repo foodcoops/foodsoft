@@ -22,7 +22,7 @@ class Finance::FinancialLinksController < Finance::BaseController
         remove_path: remove_financial_transaction_finance_link_path(@financial_link, ft)
       }
     end
-    @items += @financial_link.invoices.map do |invoice|
+    @items += @financial_link.invoices.includes(:supplier).map do |invoice|
       {
         date: invoice.date || invoice.created_at,
         type: t('activerecord.models.invoice'),
@@ -61,7 +61,7 @@ class Finance::FinancialLinksController < Finance::BaseController
   end
 
   def index_financial_transaction
-    @financial_transactions = FinancialTransaction.without_financial_link
+    @financial_transactions = FinancialTransaction.without_financial_link.includes(:financial_transaction_type, :ordergroup)
   end
 
   def add_financial_transaction
@@ -77,7 +77,7 @@ class Finance::FinancialLinksController < Finance::BaseController
   end
 
   def index_invoice
-    @invoices = Invoice.without_financial_link
+    @invoices = Invoice.without_financial_link.includes(:supplier)
   end
 
   def add_invoice
