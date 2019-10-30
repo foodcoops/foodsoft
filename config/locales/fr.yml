@@ -590,8 +590,6 @@ fr:
       ordergroup:
         remove: Supprimer
         remove_group: Supprimer cette cellule
-      transactions_search:
-        search_placeholder: Recherche notes ...
     index:
       amount_fc: Montant(boufcoop)
       end: Fin
@@ -614,7 +612,6 @@ fr:
     ordergroups:
       index:
         new_transaction: Saisir une nouvelle transaction
-        search_placeholder: Rechercher ...
         show_all: Toutes transactions
         title: Crédits des cellules
       ordergroups:
@@ -1353,6 +1350,7 @@ fr:
     or_cancel: ou annuler
     please_wait: Merci de patienter...
     save: Sauvegarder
+    search_placeholder: Rechercher ...
     show: Afficher
   workgroups:
     edit:

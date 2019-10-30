@@ -823,8 +823,6 @@ en:
       ordergroup:
         remove: Remove
         remove_group: Remove group
-      transactions_search:
-        search_placeholder: Search note ...
     index:
       amount_fc: Amount(FC)
       end: End
@@ -853,7 +851,6 @@ en:
     ordergroups:
       index:
         new_transaction: Add new transactions
-        search_placeholder: Search ...
         show_all: All transactions
         title: Manage accounts
       ordergroups:

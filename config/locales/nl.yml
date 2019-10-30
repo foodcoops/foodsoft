@@ -820,8 +820,6 @@ nl:
       ordergroup:
         remove: Verwijderen
         remove_group: Huishouden verwijderen
-      transactions_search:
-        search_placeholder: Zoeken in notitie ...
     index:
       amount_fc: Bedrag(FC)
       end: Einde
@@ -850,7 +848,6 @@ nl:
     ordergroups:
       index:
         new_transaction: Nieuwe transacties toevoegen
-        search_placeholder: Zoeken ...
         show_all: Transactieoverzicht
         title: Tegoeden beheren
       ordergroups:

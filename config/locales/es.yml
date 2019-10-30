@@ -742,8 +742,6 @@ es:
       ordergroup:
         remove: Remover
         remove_group: Remover grupo
-      transactions_search:
-        search_placeholder: Busca nota ...
     index:
       amount_fc: Importe(FC)
       end: Fin
@@ -772,7 +770,6 @@ es:
     ordergroups:
       index:
         new_transaction: Añade nuevas transacciones
-        search_placeholder: Busca...
         show_all: Todas las transacciones
         title: Maneja los grupos
       ordergroups:
@@ -1507,6 +1504,7 @@ es:
     please_wait: Espera...
     restore: Restaura
     save: Guardar
+    search_placeholder: Busca ...
     show: Mostrar
   workgroups:
     edit:

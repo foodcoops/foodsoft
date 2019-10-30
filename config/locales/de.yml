@@ -781,8 +781,6 @@ de:
       ordergroup:
         remove: Entfernen
         remove_group: Gruppe enfernen
-      transactions_search:
-        search_placeholder: Suche nach ...
     index:
       amount_fc: Betrag(FC)
       end: Ende
@@ -811,7 +809,6 @@ de:
     ordergroups:
       index:
         new_transaction: Neue Überweisungen eingeben
-        search_placeholder: Suchen ...
         show_all: Alle Transaktionen
         title: Konten verwalten
       ordergroups:
@@ -1622,6 +1619,7 @@ de:
     please_wait: Bitte warten...
     restore: Wiederherstellen
     save: Speichern
+    search_placeholder: Suchen ...
     show: Anzeigen
   workgroups:
     edit:

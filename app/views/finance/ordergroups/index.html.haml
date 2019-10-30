@@ -8,7 +8,7 @@
   = form_tag finance_ordergroups_path, :method => :get, :remote => true,
     'data-submit-onchange' => true, class: 'form-search' do
     = text_field_tag :query, params[:query], class: 'input-medium search-query',
-      placeholder: t('.search_placeholder')
+      placeholder: t('ui.search_placeholder')
 
 #ordergroupsTable
   = render :partial => "ordergroups"
