@@ -19,6 +19,7 @@ class Message < ApplicationRecord
   validates_length_of :subject, :in => 1..255
 
   after_initialize do
+    @recipients_ids ||= []
     @send_method ||= 'recipients'
   end
 
