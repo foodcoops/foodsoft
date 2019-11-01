@@ -828,6 +828,10 @@ de:
         in_ordergroup: in Bestellgruppe
       transactions:
         add_financial_link: Hinzufügen
+    base:
+      report_form:
+        submit: Erstellen
+        title: Bericht erstellen
     create:
       notice: Rechnung wurde erstellt.
     financial_links:
@@ -902,6 +906,7 @@ de:
         show_hidden: Versteckte anzeigen
     index:
       amount_fc: Betrag(FC)
+      create_report: Bericht erstellen
       end: Ende
       everything_cleared: Super, alles schon abgerechnet...
       last_transactions: Letzte Überweisungen

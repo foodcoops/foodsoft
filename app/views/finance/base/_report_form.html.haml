@@ -1,0 +1,10 @@
+= simple_form_for :report, validate: true do |f|
+  .modal-header
+    = close_button :modal
+    %h3= t('.title')
+  .modal-body
+    = f.input :date_start, as: :date, html5: true
+    = f.input :date_end, as: :date, html5: true
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit t('.submit'), class: 'btn btn-primary'

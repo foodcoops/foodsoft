@@ -1,5 +1,9 @@
 - title t('.title')
 
+- content_for :actionbar do
+  - if FinancialTransaction.where(ordergroup_id: nil).any?
+    = link_to t('.create_report'), finance_report_path, remote: true, class: 'btn'
+
 .row-fluid
   .span6
     %h2
