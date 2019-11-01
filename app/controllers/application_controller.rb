@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include Concerns::FoodcoopScope
   include Concerns::Auth
   include Concerns::Locale
+  include PathHelper
   helper_method :current_user
   helper_method :available_locales
 

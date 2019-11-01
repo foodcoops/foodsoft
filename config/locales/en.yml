@@ -1311,6 +1311,8 @@ en:
   model:
     delivery:
       each_stock_article_must_be_unique: Each stock article must not be listed more than once.
+    financial_transaction:
+      foodcoop_name: Foodcoop
     financial_transaction_type:
       no_delete_last: At least one financial transaction type must exist.
     group_order:

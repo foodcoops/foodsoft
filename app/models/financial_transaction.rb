@@ -9,12 +9,13 @@ class FinancialTransaction < ApplicationRecord
   belongs_to :reverts, class_name: 'FinancialTransaction', foreign_key: 'reverts_id'
   has_one :reverted_by, class_name: 'FinancialTransaction', foreign_key: 'reverts_id'
 
-  validates_presence_of :amount, :note, :user_id, :ordergroup_id
+  validates_presence_of :amount, :note, :user_id
   validates_numericality_of :amount, greater_then: -100_000,
     less_than: 100_000
 
   scope :visible, -> { joins('LEFT JOIN financial_transactions r ON financial_transactions.id = r.reverts_id').where('r.id IS NULL').where(reverts: nil) }
   scope :without_financial_link, -> { where(financial_link: nil) }
+  scope :with_ordergroup, -> { where.not(ordergroup: nil) }
 
   localize_input_of :amount
 
@@ -52,6 +53,10 @@ class FinancialTransaction < ApplicationRecord
 
   def hidden?
     reverts.present? || reverted_by.present?
+  end
+
+  def ordergroup_name
+    ordergroup ? ordergroup.name : I18n.t('model.financial_transaction.foodcoop_name')
   end
 
   # @todo rename in model, see #575

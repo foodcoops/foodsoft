@@ -34,7 +34,7 @@
         - @financial_transactions.each do |ft|
           %tr
             %td= format_date(ft.created_on)
-            %td= ft.ordergroup.name
+            %td= ft.ordergroup_name
             %td= ft.note
             %td.numeric= format_currency ft.amount
   .span6

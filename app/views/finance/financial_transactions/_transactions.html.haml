@@ -34,7 +34,7 @@
           - else
             = format_time(t.created_on)
         - if with_ordergroup
-          %td= h link_to t.ordergroup.name, finance_ordergroup_transactions_path(t.ordergroup)
+          %td= h link_to t.ordergroup_name, finance_ordergroup_transactions_path(t.ordergroup)
         %td= h show_user(t.user)
         - if FinancialTransactionType.has_multiple_types
           %td= h t.financial_transaction_type.name

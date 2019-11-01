@@ -1272,6 +1272,8 @@ de:
   model:
     delivery:
       each_stock_article_must_be_unique: Lieferung darf jeden Lagerartikel höchstens einmal auflisten.
+    financial_transaction:
+      foodcoop_name: Foodcoop
     financial_transaction_type:
       no_delete_last: Es muss mindestens ein Kontotransaktionstyp existieren.
     group_order:

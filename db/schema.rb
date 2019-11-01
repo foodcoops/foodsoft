@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20181205010000) do
   add_index "financial_transaction_types", ["name_short"], name: "index_financial_transaction_types_on_name_short", using: :btree
 
   create_table "financial_transactions", force: :cascade do |t|
-    t.integer  "ordergroup_id",                 limit: 4,                             default: 0, null: false
+    t.integer  "ordergroup_id",                 limit: 4
     t.decimal  "amount",                                      precision: 8, scale: 2, default: 0, null: false
     t.text     "note",                          limit: 65535,                                     null: false
     t.integer  "user_id",                       limit: 4,                             default: 0, null: false

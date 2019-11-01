@@ -14,7 +14,7 @@
       - for t in @financial_transactions
         %tr
           %td= link_to format_time(t.created_on), add_financial_transaction_finance_link_path(@financial_link, financial_transaction: t.id), method: :put
-          %td= t.ordergroup.name
+          %td= t.ordergroup_name
           - if FinancialTransactionType.has_multiple_types
             %td= h t.financial_transaction_type.name
           %td= number_to_currency t.amount
