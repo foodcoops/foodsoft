@@ -897,6 +897,7 @@ en:
         add_all_ordergroups: Add all ordergroups
         add_all_ordergroups_custom_field: Add all ordergoups with %{label}
         create_financial_link: Create a common financial link for the new transactions.
+        create_foodcoop_transaction: Create a transaction with the inverted sum for the foodcoop (in the case of "double-entry accounting")
         new_ordergroup: Add new ordergroup
         save: Save transaction
         set_balance: Set the balance of the ordergroup to the entered amount.
