@@ -84,6 +84,7 @@ class Finance::FinancialTransactionsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       financial_link = FinancialLink.new if params[:create_financial_link]
+      foodcoop_amount = 0
 
       params[:financial_transactions].each do |trans|
         # ignore empty amount fields ...
@@ -96,7 +97,19 @@ class Finance::FinancialTransactionsController < ApplicationController
             amount -= ordergroup.financial_transaction_class_balance(type.financial_transaction_class)
           end
           ordergroup.add_financial_transaction!(amount, note, @current_user, type, financial_link)
+          foodcoop_amount -= amount
         end
+      end
+
+      if params[:create_foodcoop_transaction]
+        ft = FinancialTransaction.new({
+          financial_transaction_type: type,
+          user: @current_user,
+          amount: foodcoop_amount,
+          note: params[:note],
+          financial_link: financial_link,
+        })
+        ft.save!
       end
 
       financial_link.try(&:save!)
