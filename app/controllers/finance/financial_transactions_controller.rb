@@ -21,6 +21,7 @@ class Finance::FinancialTransactionsController < ApplicationController
 
     @q = FinancialTransaction.search(params[:q])
     @financial_transactions_all = @q.result(distinct: true).includes(:user).order(sort)
+    @financial_transactions_all = @financial_transactions_all.visible unless params[:show_hidden]
     @financial_transactions_all = @financial_transactions_all.where(ordergroup_id: @ordergroup.id) if @ordergroup
     @financial_transactions = @financial_transactions_all.page(params[:page]).per(@per_page)
 
@@ -48,6 +49,12 @@ class Finance::FinancialTransactionsController < ApplicationController
   rescue ActiveRecord::RecordInvalid => error
     flash.now[:alert] = error.message
     render :action => :new
+  end
+
+  def destroy
+    transaction = FinancialTransaction.find(params[:id])
+    transaction.revert!(current_user)
+    redirect_to finance_ordergroup_transactions_url(transaction.ordergroup), notice: t('finance.financial_transactions.controller.destroy.notice')
   end
 
   def new_collection

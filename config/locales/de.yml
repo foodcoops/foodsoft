@@ -825,6 +825,8 @@ de:
           alert: 'Ein Fehler ist aufgetreten: %{error}'
           error_note_required: Notiz wird benötigt!
           notice: Alle Transaktionen wurden gespeichert.
+        destroy:
+          notice: Transaktion wurde gelöscht
       index:
         balance: 'Kontostand: %{balance}'
         last_updated_at: "(zuletzt aktualisiert vor %{when})"
@@ -847,6 +849,11 @@ de:
       ordergroup:
         remove: Entfernen
         remove_group: Gruppe enfernen
+      transactions:
+        confirm_revert: Wills du %{name} wirklich rückgängig machen? Hierbei wird eine zusätzliche Transaktion mit dem invertierten Betrag hinzugefügt und gemeinsam mit der originalen Transaktion versteckt. Diese versteckten Transaktionen sind nur über die Option 'Versteckte anzeigen' sichtbar und können von normalen Benutzer_innen überhaupt nicht angezeigt werden.
+        revert_title: Transaktion rückgängig machen, um sie vor normalen Benutzer_innen versteckt.
+      transactions_search:
+        show_hidden: Versteckte anzeigen
     index:
       amount_fc: Betrag(FC)
       end: Ende

@@ -45,7 +45,7 @@ class HomeController < ApplicationController
         sort = "created_on DESC"
       end
 
-      @financial_transactions = @ordergroup.financial_transactions.page(params[:page]).per(@per_page).order(sort)
+      @financial_transactions = @ordergroup.financial_transactions.visible.page(params[:page]).per(@per_page).order(sort)
       @financial_transactions = @financial_transactions.where("note LIKE ?", "%#{params[:query]}%") if params[:query].present?
 
     else

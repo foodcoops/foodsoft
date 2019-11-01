@@ -1,4 +1,5 @@
 - with_ordergroup = local_assigns[:with_ordergroup]
+- with_hidden = local_assigns[:with_hidden]
 - with_csv = local_assigns[:with_csv]
 .pull-right
   - if with_csv
@@ -22,9 +23,11 @@
       - FinancialTransactionClass.sorted.each do |c|
         %th
           = sort_link_helper c.display, "amount"
+      - if with_hidden
+        %th
   %tbody
     - @financial_transactions.each do |t|
-      %tr
+      %tr{class: "#{'deleted_row' if t.hidden?}"}
         %td
           - if t.financial_link
             = link_to format_time(t.created_on), finance_link_path(t.financial_link)
@@ -40,3 +43,10 @@
           %td.numeric{style: 'width:5em'}
             - if t.financial_transaction_type.financial_transaction_class == c
               = format_currency t.amount
+        - if with_hidden
+          %td.actions{style: 'width:1em'}
+            - unless t.hidden?
+              = link_to finance_ordergroup_transaction_path(t.ordergroup, t), method: :delete,
+                data: {confirm: t('.confirm_revert', name: t.note)}, title: t('.revert_title'),
+                class: 'btn btn-danger btn-mini' do
+                = glyph :remove

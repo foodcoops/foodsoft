@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181201000100) do
+ActiveRecord::Schema.define(version: 20181201000200) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -136,9 +136,11 @@ ActiveRecord::Schema.define(version: 20181201000100) do
     t.datetime "created_on",                                                                      null: false
     t.integer  "financial_link_id"
     t.integer  "financial_transaction_type_id",                                                   null: false
+    t.integer  "reverts_id"
   end
 
   add_index "financial_transactions", ["ordergroup_id"], name: "index_financial_transactions_on_ordergroup_id", using: :btree
+  add_index "financial_transactions", ["reverts_id"], name: "index_financial_transactions_on_reverts_id", unique: true, using: :btree
 
   create_table "group_order_article_quantities", force: :cascade do |t|
     t.integer  "group_order_article_id", limit: 4, default: 0, null: false
