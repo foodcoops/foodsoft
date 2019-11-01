@@ -19,3 +19,8 @@
       = f.text_field :amount_gteq, class: 'input-mini'
       %span.add-on -
       = f.text_field :amount_lteq, class: 'input-mini search-query'
+
+    &nbsp;
+    %label{for: 'show_hidden'}
+      = check_box_tag 'show_hidden', 1, params[:show_hidden]
+      = t '.show_hidden'

@@ -84,8 +84,7 @@ class Ordergroup < Group
     transaction do
       t = FinancialTransaction.new(ordergroup: self, amount: amount, note: note, user: user, financial_transaction_type: transaction_type, financial_link: link)
       t.save!
-      self.account_balance = financial_transactions.sum('amount')
-      save!
+      update_balance!
       # Notify only when order group had a positive balance before the last transaction:
       if t.amount < 0 && self.account_balance < 0 && self.account_balance - t.amount >= 0
         Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'negative_balance', self.id, t.id)
@@ -101,6 +100,10 @@ class Ordergroup < Group
 
     @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, {:jobs_size => jobs, :orders_sum => orders_sum})
+  end
+
+  def update_balance!
+    update_attribute :account_balance, financial_transactions.sum('amount')
   end
 
   def avg_jobs_per_euro

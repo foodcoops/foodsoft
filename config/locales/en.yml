@@ -850,6 +850,8 @@ en:
           alert: 'An error occured: %{error}'
           error_note_required: Note is required!
           notice: All transactions were saved.
+        destroy:
+          notice: Transaktion wurde gelöscht
       index:
         balance: 'Balance of account: %{balance}'
         last_updated_at: "(last updated %{when} ago)"
@@ -872,6 +874,11 @@ en:
       ordergroup:
         remove: Remove
         remove_group: Remove group
+      transactions:
+        confirm_revert: Do you really want to revert %{name}? In this case a new transaction with an inverted amount will be created and in combination with the original transaction hidden. These hidden transaction are only visibe via the 'Show hidden' option and are not visible to normal users at all.
+        revert_title: Revert the transaction, which will hide it from normal users.
+      transactions_search:
+        show_hidden: Show hidden transactions
     index:
       amount_fc: Amount(FC)
       end: End
