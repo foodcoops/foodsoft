@@ -191,7 +191,9 @@ Foodsoft::Application.routes.draw do
       resources :ordergroups, only: [:index] do
         resources :financial_transactions, as: :transactions
       end
-      get 'transactions' => 'financial_transactions#index_collection'
+      resources :financial_transactions, as: :foodcoop_financial_transactions, path: 'foodcoop/financial_transactions', only: [:index, :new, :create]
+      get :transactions, controller: :financial_transactions, action: :index_collection
+      delete 'transactions/:id', controller: :financial_transactions, action: :destroy, as: :transaction
 
       get 'transactions/new_collection' => 'financial_transactions#new_collection', as: 'new_transaction_collection'
       post 'transactions/create_collection' => 'financial_transactions#create_collection', as: 'create_transaction_collection'

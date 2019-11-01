@@ -891,6 +891,7 @@ en:
         title: Financial transactions
       new:
         paragraph: Here you can credit and debit money for the ordergroup <b>%{name}</b>.
+        paragraph_foodcoop: Here you can credit and debit money for the <b>foodcoop</b>.
         title: New transaction
       new_collection:
         add_all_ordergroups: Add all ordergroups
@@ -939,6 +940,7 @@ en:
       index:
         new_transaction: Add new transactions
         show_all: All transactions
+        show_foodcoop: Foodcoop transaktions
         title: Manage accounts
       ordergroups:
         account_statement: Account statement

@@ -1,8 +1,11 @@
 - title t('.title')
 
-%p!= t('.paragraph', name: @ordergroup.name)
+- if @ordergroup
+  %p!= t('.paragraph', name: @ordergroup.name)
+- else
+  %p!= t('.paragraph_foodcoop')
 
-= simple_form_for @financial_transaction, :url => finance_ordergroup_transactions_path(@ordergroup),
+= simple_form_for @financial_transaction, :url => finance_group_transactions_path(@ordergroup),
   :validate => true do |f|
   = f.hidden_field :ordergroup_id
   - if FinancialTransactionType.has_multiple_types
@@ -11,4 +14,4 @@
   = f.input :note, :as => :text
   .form-actions
     = f.submit class: 'btn btn-primary'
-    = link_to t('ui.or_cancel'), finance_ordergroup_transactions_path(@ordergroup)
+    = link_to t('ui.or_cancel'), finance_group_transactions_path(@ordergroup)

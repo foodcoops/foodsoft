@@ -23,6 +23,7 @@ class Finance::FinancialTransactionsController < ApplicationController
     @financial_transactions_all = @q.result(distinct: true).includes(:user).order(sort)
     @financial_transactions_all = @financial_transactions_all.visible unless params[:show_hidden]
     @financial_transactions_all = @financial_transactions_all.where(ordergroup_id: @ordergroup.id) if @ordergroup
+    @financial_transactions_all = @financial_transactions_all.where(ordergroup: nil) if @foodcoop
     @financial_transactions = @financial_transactions_all.page(params[:page]).per(@per_page)
 
     respond_to do |format|
@@ -38,14 +39,22 @@ class Finance::FinancialTransactionsController < ApplicationController
   end
 
   def new
-    @financial_transaction = @ordergroup.financial_transactions.build
+    if @ordergroup
+      @financial_transaction = @ordergroup.financial_transactions.build
+    else
+      @financial_transaction = FinancialTransaction.new
+    end
   end
 
   def create
     @financial_transaction = FinancialTransaction.new(params[:financial_transaction])
     @financial_transaction.user = current_user
-    @financial_transaction.add_transaction!
-    redirect_to finance_ordergroup_transactions_url(@ordergroup), notice: I18n.t('finance.financial_transactions.controller.create.notice')
+    if @financial_transaction.ordergroup
+      @financial_transaction.add_transaction!
+    else
+      @financial_transaction.save!
+    end
+    redirect_to finance_group_transactions_path(@ordergroup), notice: I18n.t('finance.financial_transactions.controller.create.notice')
   rescue ActiveRecord::RecordInvalid => error
     flash.now[:alert] = error.message
     render :action => :new
@@ -54,7 +63,7 @@ class Finance::FinancialTransactionsController < ApplicationController
   def destroy
     transaction = FinancialTransaction.find(params[:id])
     transaction.revert!(current_user)
-    redirect_to finance_ordergroup_transactions_url(transaction.ordergroup), notice: t('finance.financial_transactions.controller.destroy.notice')
+    redirect_to finance_group_transactions_path(transaction.ordergroup), notice: t('finance.financial_transactions.controller.destroy.notice')
   end
 
   def new_collection
@@ -103,7 +112,11 @@ class Finance::FinancialTransactionsController < ApplicationController
   protected
 
   def find_ordergroup
-    @ordergroup = Ordergroup.include_transaction_class_sum.find(params[:ordergroup_id])
+    if params[:ordergroup_id]
+      @ordergroup = Ordergroup.include_transaction_class_sum.find(params[:ordergroup_id])
+    else
+      @foodcoop = true
+    end
   end
 
 end

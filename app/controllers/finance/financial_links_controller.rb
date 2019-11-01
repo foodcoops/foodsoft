@@ -18,7 +18,7 @@ class Finance::FinancialLinksController < Finance::BaseController
         type: t('activerecord.models.financial_transaction'),
         description: "#{ft.ordergroup_name}: #{ft.note}",
         amount: ft.amount,
-        link_to: finance_ordergroup_transactions_path(ft.ordergroup),
+        link_to: finance_group_transactions_path(ft.ordergroup),
         remove_path: remove_financial_transaction_finance_link_path(@financial_link, ft)
       }
     end

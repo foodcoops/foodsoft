@@ -1,25 +1,27 @@
-- title t('.title', name: @ordergroup.name)
+- title @ordergroup ? t('.title', name: @ordergroup.name) : t('.title_foodcoop')
 
 - content_for :actionbar do
-  = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(@ordergroup), class: 'btn btn-primary'
+  - url = @ordergroup ? new_finance_ordergroup_transaction_path(@ordergroup) : new_finance_foodcoop_financial_transaction_path
+  = link_to t('.new_transaction'), url, class: 'btn btn-primary'
 
-- content_for :sidebar do
-  .well.well-small
-    %strong= t('.balance', balance: number_to_currency(@ordergroup.account_balance))
-    %br/
-    %small= t('.last_updated_at', when: distance_of_time_in_words(Time.now, @ordergroup.account_updated))
-    %p
-    - unless FoodsoftConfig[:charge_members_manually]
+- if @ordergroup
+  - content_for :sidebar do
+    .well.well-small
+      %strong= t('.balance', balance: number_to_currency(@ordergroup.account_balance))
+      %br/
+      %small= t('.last_updated_at', when: distance_of_time_in_words(Time.now, @ordergroup.account_updated))
       %p
-        %b= heading_helper(Ordergroup, :available_funds) + ':'
-        = number_to_currency(@ordergroup.get_available_funds)
-    - if FinancialTransactionClass.has_multiple_classes
-      - FinancialTransactionClass.sorted.each do |c|
+      - unless FoodsoftConfig[:charge_members_manually]
         %p
-          %b= c.display + ':'
-          = number_to_currency(@ordergroup["sum_of_class_#{c.id}"])
+          %b= heading_helper(Ordergroup, :available_funds) + ':'
+          = number_to_currency(@ordergroup.get_available_funds)
+      - if FinancialTransactionClass.has_multiple_classes
+        - FinancialTransactionClass.sorted.each do |c|
+          %p
+            %b= c.display + ':'
+            = number_to_currency(@ordergroup["sum_of_class_#{c.id}"])
 
 
-= render 'transactions_search', url: finance_ordergroup_transactions_path(@ordergroup)
+= render 'transactions_search', url: finance_group_transactions_path(@ordergroup)
 
 #transactions= render 'transactions', with_csv: true, with_hidden: true

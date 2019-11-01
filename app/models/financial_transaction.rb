@@ -47,7 +47,7 @@ class FinancialTransaction < ApplicationRecord
       rt.reverts = self
       rt.user = user
       rt.save!
-      ordergroup.update_balance!
+      ordergroup.update_balance! if ordergroup
     end
   end
 
