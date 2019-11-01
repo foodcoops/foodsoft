@@ -1,6 +1,10 @@
 - title t('.title')
 - with_payment = @financial_transactions.with_payment_plugin.any?
 
+- content_for :actionbar do
+  - if FinancialTransaction.where(ordergroup_id: nil).any?
+    = link_to t('.create_report'), finance_report_path, remote: true, class: 'btn'
+
 .row
   .col-md-6
     %h2

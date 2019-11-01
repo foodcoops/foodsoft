@@ -953,6 +953,10 @@ en:
         in_ordergroup: in ordergroup
       transactions:
         add_financial_link: Add link
+    base:
+      report_form:
+        submit: Create
+        title: Create Report
     create:
       notice: Invoice was created.
     financial_links:
@@ -1035,6 +1039,7 @@ en:
         show_hidden: Show hidden transactions
     index:
       amount_fc: Amount(FC)
+      create_report: Create report
       end: End
       everything_cleared: Great, everything is accounted...
       last_transactions: Recent transactions
