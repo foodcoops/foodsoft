@@ -1,5 +1,6 @@
 class FinancialTransactionClass < ApplicationRecord
   has_many :financial_transaction_types, dependent: :destroy
+  has_many :suppliers
 
   validates :name, presence: true
   validates_uniqueness_of :name

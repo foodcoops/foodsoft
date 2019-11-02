@@ -29,6 +29,9 @@
       %dd= @supplier.contact_person
       %dt= heading_helper(Supplier, :customer_number) + ':'
       %dd= @supplier.customer_number
+      - if FinancialTransactionType.has_multiple_types
+        %dt= heading_helper(Supplier, :financial_transaction_class) + ':'
+        %dd= @supplier.financial_transaction_class.name
       - if FoodsoftConfig[:use_iban]
         %dt= heading_helper(Supplier, :iban) + ':'
         %dd= @supplier.iban

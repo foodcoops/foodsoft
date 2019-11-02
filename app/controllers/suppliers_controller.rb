@@ -70,7 +70,7 @@ class SuppliersController < ApplicationController
     params
       .require(:supplier)
       .permit(:name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
-              :iban, :custom_fields, :delivery_days, :order_howto, :note,
+              :iban, :custom_fields, :delivery_days, :order_howto, :note, :financial_transaction_class_id,
               :shared_supplier_id, :min_order_quantity, :shared_sync_method)
   end
 

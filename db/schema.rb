@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181201000200) do
+ActiveRecord::Schema.define(version: 20181201000400) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -439,23 +439,24 @@ ActiveRecord::Schema.define(version: 20181201000200) do
   end
 
   create_table "suppliers", force: :cascade do |t|
-    t.string   "name",               limit: 255, default: "", null: false
-    t.string   "address",            limit: 255, default: "", null: false
-    t.string   "phone",              limit: 255, default: "", null: false
-    t.string   "phone2",             limit: 255
-    t.string   "fax",                limit: 255
-    t.string   "email",              limit: 255
-    t.string   "url",                limit: 255
-    t.string   "contact_person",     limit: 255
-    t.string   "customer_number",    limit: 255
-    t.string   "delivery_days",      limit: 255
-    t.string   "order_howto",        limit: 255
-    t.string   "note",               limit: 255
-    t.integer  "shared_supplier_id", limit: 4
-    t.string   "min_order_quantity", limit: 255
+    t.string   "name",                           limit: 255, default: "", null: false
+    t.string   "address",                        limit: 255, default: "", null: false
+    t.string   "phone",                          limit: 255, default: "", null: false
+    t.string   "phone2",                         limit: 255
+    t.string   "fax",                            limit: 255
+    t.string   "email",                          limit: 255
+    t.string   "url",                            limit: 255
+    t.string   "contact_person",                 limit: 255
+    t.string   "customer_number",                limit: 255
+    t.string   "delivery_days",                  limit: 255
+    t.string   "order_howto",                    limit: 255
+    t.string   "note",                           limit: 255
+    t.integer  "shared_supplier_id",             limit: 4
+    t.string   "min_order_quantity",             limit: 255
     t.datetime "deleted_at"
-    t.string   "shared_sync_method", limit: 255
+    t.string   "shared_sync_method",             limit: 255
     t.string   "iban"
+    t.integer  "financial_transaction_class_id"
   end
 
   add_index "suppliers", ["name"], name: "index_suppliers_on_name", unique: true, using: :btree

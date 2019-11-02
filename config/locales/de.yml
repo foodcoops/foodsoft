@@ -158,6 +158,7 @@ de:
         customer_number_short: Kundennr.
         delivery_days: Liefertage
         email: E-Mail
+        financial_transaction_class: Kontotransaktionsklasse
         is_subscribed: abonniert?
         min_order_quantity: Mindestbestellmenge
         min_order_quantity_short: Menge (mind.)

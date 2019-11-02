@@ -167,6 +167,7 @@ en:
         delivery_days: Delivery days
         email: Email
         fax: Fax
+        financial_transaction_class: Financial transaction class
         iban: IBAN
         is_subscribed: subscribed?
         min_order_quantity: Minimum order quantity

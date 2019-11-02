@@ -12,6 +12,8 @@
   = f.input :url
   = f.input :contact_person
   = f.input :customer_number
+  - if FinancialTransactionType.has_multiple_types
+    = f.association :financial_transaction_class, collection: FinancialTransactionClass.order(:name), hint: false
   - if FoodsoftConfig[:use_iban]
     = f.input :iban
   = f.input :delivery_days
