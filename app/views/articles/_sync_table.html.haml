@@ -14,7 +14,7 @@
       %th= heading_helper Article, :article_category
   %tbody
     - articles_map = @supplier.articles.map{ |a| [a.id, a] }.to_h
-    - articles.sort_by { |a, b| a.errors.empty? ? (article_in_open_order.include? a.id ? 0 : 1) : -1 }.each do |changed_article, attrs|
+    - articles.sort_by { |a, b| a.errors.empty? ? ((article_in_open_order.include? a.id ) ? 0 : 1) : -1 }.each do |changed_article, attrs|
       - unless changed_article.new_record?
         - article = articles_map[changed_article.id]
         - #Article.find(changed_article.id)
