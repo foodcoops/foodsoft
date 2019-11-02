@@ -40,6 +40,8 @@ default: &defaults
   #ignore_browser_locale: false
   # Default timezone, e.g. UTC, Amsterdam, Berlin, etc.
   #time_zone: Berlin
+  # Unit for weight measurements
+  #weight_unit: g
   # Currency symbol, and whether to add a whitespace after the unit.
   #currency_unit: €
   #currency_space: true

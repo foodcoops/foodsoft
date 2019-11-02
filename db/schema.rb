@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181201000200) do
+ActiveRecord::Schema.define(version: 20181202000000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20181201000200) do
     t.datetime "deleted_at"
     t.string   "type",                limit: 255
     t.integer  "quantity",            limit: 4,                           default: 0
+    t.decimal  "weight"
   end
 
   add_index "articles", ["article_category_id"], name: "index_articles_on_article_category_id", using: :btree

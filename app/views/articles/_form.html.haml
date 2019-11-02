@@ -16,6 +16,10 @@
 
     = render partial: 'shared/article_fields_price', locals: {f: f}
 
+    = f.input :weight do
+      .input-append
+        = f.input_field :weight, class: 'input-mini'
+        %span.add-on= FoodsoftConfig[:weight_unit]
     = f.input :origin
     = f.input :manufacturer
     = f.input :order_number

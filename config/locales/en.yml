@@ -25,6 +25,7 @@ en:
         unit_quantity: Unit quantity
         unit_quantity_short: U.Q.
         units: Units
+        weight: Weight
       article_category:
         description: Import names
         name: Name
@@ -576,6 +577,7 @@ en:
       use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
       use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
       webstats_tracking_code: Tracking code for web analytics (like Piwik or Google analytics). Leave empty for no tracking.
+      weight_unit: Unit for displaying weights.
     keys:
       applepear_url: Apple system help URL
       charge_members_manually: Charge members manually
@@ -623,6 +625,7 @@ en:
       use_iban: Use IBAN
       use_nick: Use nicknames
       webstats_tracking_code: Tracking code
+      weight_unit: Weight unit
     tabs:
       applications: Apps
       foodcoop: Foodcoop
