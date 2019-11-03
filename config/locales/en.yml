@@ -1346,6 +1346,7 @@ en:
       prices_sum: 'Sum (net/gross price):'
       units_full: Full units
       units_ordered: Units ordered
+      weight_sum: 'Total weight:'
     create:
       notice: The order was created.
     edit:

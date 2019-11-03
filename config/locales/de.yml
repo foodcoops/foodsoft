@@ -1302,6 +1302,7 @@ de:
       prices_sum: 'Summe (Netto/Brutto-Preise):'
       units_full: Volle Gebinde
       units_ordered: Bestellte Einheiten
+      weight_sum: 'Gesamtgewicht:'
     create:
       notice: Die Bestellung wurde erstellt.
     edit:
