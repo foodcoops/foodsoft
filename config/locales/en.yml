@@ -285,6 +285,9 @@ en:
         emails_title: Sending email
       tab_payment:
         schedule_title: Ordering schedule
+      tab_roles:
+        access_to_title: Access to
+        access_to_paragraph: By default every member of the foodcoop has access to the following areas.
       tab_tasks:
         periodic_title: Periodic tasks
       tabs:
@@ -590,6 +593,12 @@ en:
       currency_unit: Currency
       custom_css: Custom CSS
       default_locale: Default language
+      default_role_article_meta: Articles
+      default_role_finance: Finance
+      default_role_invoices: Invoices
+      default_role_orders: Orders
+      default_role_pickups: Pickup days
+      default_role_suppliers: Suppliers
       disable_invite: Disable invites
       email_from: From address
       email_replyto: Reply-to address
@@ -632,6 +641,7 @@ en:
       messages: Messages
       others: Other
       payment: Finances
+      roles: Roles
       tasks: Tasks
   deliveries:
     add_stock_change:
