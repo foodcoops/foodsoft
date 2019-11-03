@@ -30,7 +30,7 @@ class Admin::ConfigsController < Admin::BaseController
 
   # Set configuration tab names as `@tabs`
   def get_tabs
-    @tabs = %w(foodcoop payment tasks messages layout language others)
+    @tabs = %w(foodcoop payment tasks messages layout language roles others)
     # allow engines to modify this list
     engines = Rails::Engine.subclasses.map(&:instance).select { |e| e.respond_to?(:configuration) }
     engines.each { |e| e.configuration(@tabs, self) }

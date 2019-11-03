@@ -147,32 +147,32 @@ class User < ApplicationRecord
 
   # Checks the finance role
   def role_finance?
-    groups.detect {|group| group.role_finance?}
+    FoodsoftConfig[:default_role_finance] || groups.detect {|group| group.role_finance?}
   end
 
   # Checks the invoices role
   def role_invoices?
-    groups.detect {|group| group.role_invoices?}
+    FoodsoftConfig[:default_role_invoices] || groups.detect {|group| group.role_invoices?}
   end
 
   # Checks the article_meta role
   def role_article_meta?
-    groups.detect {|group| group.role_article_meta?}
+    FoodsoftConfig[:default_role_article_meta] || groups.detect {|group| group.role_article_meta?}
   end
 
   # Checks the suppliers role
   def role_suppliers?
-    groups.detect {|group| group.role_suppliers?}
+    FoodsoftConfig[:default_role_suppliers] || groups.detect {|group| group.role_suppliers?}
   end
 
   # Checks the invoices role
   def role_pickups?
-    groups.detect {|group| group.role_pickups?}
+    FoodsoftConfig[:default_role_pickups] || groups.detect {|group| group.role_pickups?}
   end
 
   # Checks the orders role
   def role_orders?
-    groups.detect {|group| group.role_orders?}
+    FoodsoftConfig[:default_role_orders] || groups.detect {|group| group.role_orders?}
   end
 
   def ordergroup_name
