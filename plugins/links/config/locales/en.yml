@@ -1,6 +1,23 @@
 en:
+  activerecord:
+    attributes:
+      link:
+        name: Name
+        url: URL
+        workgroup: Workgroup
+        indirect: Indirect
+        authorization: Authorization-Header
+  admin:
+    links:
+      index:
+        title: Links
+        new_link: Add new link
+      form:
+        description: If a workgroup is selected, the link is only visible to its members. The option Indirect allows it, that the Foodsoft will redirect users to the address returned by the URL. This option should only be activated if the exact functionality is understood correctly.
   links:
     show:
       indirect_no_location: The configured URL did not return a Location header for redirection.
   navigation:
+    admin:
+      links: Links
     links: Links

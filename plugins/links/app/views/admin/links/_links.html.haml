@@ -1,0 +1,15 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th= Link.human_attribute_name :name
+      %th= Link.human_attribute_name :url
+      %th= t 'ui.actions'
+  %tbody
+    - for link in @links
+      %tr
+        %td= link.name
+        %td= link.url
+        %td
+          = link_to t('ui.edit'), edit_admin_link_path(link), remote: true, class: 'btn btn-mini'
+          = link_to t('ui.delete'), admin_link_path(link), :data => {:confirm => t('admin.confirm', name: link.name)},
+            :method => :delete, class: 'btn btn-mini btn-danger'

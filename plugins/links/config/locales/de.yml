@@ -1,6 +1,25 @@
 de:
+  activerecord:
+    attributes:
+      link:
+        name: Name
+        url: URL
+        workgroup: Arbeitsgruppe
+        indirect: Indirekt
+        authorization: Authorization-Header
+  admin:
+    links:
+      index:
+        title: Links
+        new_link: Neuen Link hinzufügen
+      form:
+        title_new: Link hinzufügen
+        title_edit: Link bearbeiten
+        description: Wenn eine Arbeitsgruppe ausgewählt ist, dann ist der Link nur für deren Mitglieder sichtbar. Die Option Indirekt ermöglicht es, dass die Foodsoft Nutzer_innen an die bei von der URL zurück gegebene Adresse weiterleitet. Diese Option sollte nur bei genauem Verständnis der Funktion aktiviert werden.
   links:
     show:
       indirect_no_location: Die konfigurierte URL hat keinen Location Header für die Weiterleitung zurück gegeben.
   navigation:
+    admin:
+      links: Links
     links: Links

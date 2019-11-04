@@ -10,6 +10,16 @@ module FoodsoftLinks
       if i = primary.items.index(primary[:admin])
         primary.items.insert(i, primary.items.delete_at(-1))
       end
+
+      unless primary[:admin].nil?
+        sub_nav = primary[:admin].sub_navigation
+        sub_nav.items <<
+          SimpleNavigation::Item.new(primary, :links, I18n.t('navigation.admin.links'), context.admin_links_path)
+        # move to right before config item
+        if i = sub_nav.items.index(sub_nav[:config])
+          sub_nav.items.insert(i, sub_nav.items.delete_at(-1))
+        end
+      end
     end
 
     def visble_links(context)

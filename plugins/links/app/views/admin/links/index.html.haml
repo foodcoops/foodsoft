@@ -1,0 +1,7 @@
+- title t '.title'
+
+- content_for :actionbar do
+  = link_to t('.new_link'), new_admin_link_path, remote: true, class: 'btn btn-primary'
+
+#links
+  = render "links"

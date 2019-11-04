@@ -1,0 +1,15 @@
+= simple_form_for [:admin, @link], validate: true, remote: true do |f|
+  .modal-header
+    = close_button :modal
+    %h3= @link.new_record? ? t('.title_new') : t('.title_edit')
+  .modal-body
+    = f.input :name
+    = f.input :url
+    = f.association :workgroup
+    = f.input :indirect, input_html: { 'data-toggle' => 'collapse', 'data-target' => '#authorization' }
+    #authorization{class: @link.indirect? ? '' : 'collapse'}
+      = f.input :authorization
+    %small= t '.description'
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit class: 'btn btn-primary'
