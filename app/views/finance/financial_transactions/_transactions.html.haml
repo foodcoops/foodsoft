@@ -38,7 +38,11 @@
         %td= h show_user(t.user)
         - if FinancialTransactionType.has_multiple_types
           %td= h t.financial_transaction_type.name
-        %td= h t.note
+        %td
+          - if t.group_order
+            = link_to t.note, t.group_order
+          - else
+            = t.note
         - FinancialTransactionClass.sorted.each do |c|
           %td.numeric{style: 'width:5em'}
             - if t.financial_transaction_type.financial_transaction_class == c

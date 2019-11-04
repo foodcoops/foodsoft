@@ -5,6 +5,7 @@ class FinancialTransaction < ApplicationRecord
   belongs_to :user
   belongs_to :financial_link
   belongs_to :financial_transaction_type
+  belongs_to :group_order
   belongs_to :reverts, class_name: 'FinancialTransaction', foreign_key: 'reverts_id'
   has_one :reverted_by, class_name: 'FinancialTransaction', foreign_key: 'reverts_id'
 
