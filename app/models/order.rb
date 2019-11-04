@@ -244,7 +244,7 @@ class Order < ApplicationRecord
       for group_order in gos
         if group_order.ordergroup
           price = group_order.price * -1                  # decrease! account balance
-          group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type)
+          group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type, nil, group_order)
         end
       end
 
