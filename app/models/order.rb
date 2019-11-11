@@ -290,7 +290,7 @@ class Order < ApplicationRecord
       begin
         order.do_end_action!
       rescue => error
-        ExceptionNotifier.notify_exception(error, data: {order_id: order.id})
+        ExceptionNotifier.notify_exception(error, data: {foodcoop: FoodsoftConfig.scope, order_id: order.id})
       end
     end
   end
