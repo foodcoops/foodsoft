@@ -60,8 +60,15 @@ class OrdersController < ApplicationController
 
   # Page to create a new order.
   def new
-    @order = Order.new(supplier_id: params[:supplier_id]).init_dates
-    @order.article_ids = Order.find(params[:order_id]).article_ids if params[:order_id]
+    if params[:order_id]
+      old_order = Order.find(params[:order_id])
+      @order = Order.new(supplier_id: old_order.supplier_id).init_dates
+      @order.article_ids = old_order.article_ids
+    else
+      @order = Order.new(supplier_id: params[:supplier_id]).init_dates
+    end
+  rescue => error
+    redirect_to orders_url, alert: t('errors.general_msg', msg: error.message)
   end
 
   # Save a new order.
