@@ -18,11 +18,13 @@ Docker runs on every modern Linux kernel, but also with a little help on MacOS
 and Windows!  
 
 ## Prerequisites (Windows only)
-To avoid line-ending issues with shell scripts, make sure to configure Git autocrlf to keep linux line endings via
+To avoid line-ending issues with shell scripts, make sure to configure 
+Git autocrlf to keep linux line endings via
 
     git config --local core.autocrlf input 
 
-Don't forget to do a clean checkout (delete everything except `.git` directory) afterwards.  
+Don't forget to do a clean checkout (delete everything except `.git` directory) 
+afterwards.  
 
 ## Setup
 
