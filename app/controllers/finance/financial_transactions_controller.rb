@@ -95,7 +95,7 @@ class Finance::FinancialTransactionsController < ApplicationController
   protected
 
   def find_ordergroup
-    @ordergroup = Ordergroup.find(params[:ordergroup_id])
+    @ordergroup = Ordergroup.include_transaction_class_sum.find(params[:ordergroup_id])
   end
 
 end
