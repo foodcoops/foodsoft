@@ -3,6 +3,7 @@
 - content_for :javascript do
   :javascript
     var ordergroup = $($.parseHTML("#{escape_javascript(render('ordergroup'))}"));
+    var ordergroups = #{raw @ordergroups.to_json};
 
     $(function() {
       $(document).on('touchclick', 'a[data-remove-transaction]', function() {
@@ -16,16 +17,27 @@
       });
 
       $(document).on('touchclick', 'a[data-add-all-ordergroups]', function() {
-        var value = prompt("#{escape_javascript(heading_helper(FinancialTransaction, :amount))}:");
-        if (value === null)
-          return false;
+        var customField = $(this).data('custom-field');
+        var value;
+        if (!customField) {
+          value = prompt("#{escape_javascript(heading_helper(FinancialTransaction, :amount))}:");
+          if (value === null) {
+            return false;
+          }
+        }
         $('#ordergroups > tbody > tr').remove();
-        var options = ordergroup.find('td > select > option').each(function() {
+        for (var id in ordergroups) {
+          if (!ordergroups.hasOwnProperty(id)) {
+            continue;
+          }
+          if (customField) {
+            value = ordergroups[id][customField];
+          }
           var row = ordergroup.clone();
           row.find('td > input').val(value);
-          row.find('td > select').val(this.value);
+          row.find('td > select').val(id);
           row.appendTo('#ordergroups');
-        });
+        }
         return false;
       });
     });
@@ -61,6 +73,10 @@
       %label
         = check_box_tag :create_financial_link, true, params[:create_financial_link]
         = t('.create_financial_link')
+  %p
+    - Ordergroup.custom_fields.each do |f|
+      - if f[:financial_transaction_source]
+        = link_to t('.add_all_ordergroups_custom_field', label: f[:label]), '#', 'data-custom-field' => f[:name], 'data-add-all-ordergroups' => true, class: 'btn'
   .form-actions
     = submit_tag t('.save'), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), finance_ordergroups_path

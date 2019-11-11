@@ -887,6 +887,7 @@ en:
         title: New transaction
       new_collection:
         add_all_ordergroups: Add all ordergroups
+        add_all_ordergroups_custom_field: Add all ordergoups with %{label}
         create_financial_link: Create a common financial link for the new transactions.
         new_ordergroup: Add new ordergroup
         save: Save transaction

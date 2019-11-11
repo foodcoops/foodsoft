@@ -862,6 +862,7 @@ de:
         title: Neue Transaktion
       new_collection:
         add_all_ordergroups: Alle Bestellgruppen hinzufügen
+        add_all_ordergroups_custom_field: Alle Bestellgruppen mit %{label} hinzufügen
         create_financial_link: Erstelle einen gemeinsamen Finanzlink für die neuen Transaktionen.
         new_ordergroup: Weitere Bestellgruppe hinzufügen
         save: Transaktionen speichern
