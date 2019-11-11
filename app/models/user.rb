@@ -203,7 +203,7 @@ class User < ApplicationRecord
 
   def self.authenticate(login, password)
     user = find_by_nick(login) || find_by_email(login)
-    if user && user.has_password(password)
+    if user && password && user.has_password(password)
       user
     else
       nil

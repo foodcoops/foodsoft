@@ -32,6 +32,12 @@ describe User do
     it 'can not authenticate with incorrect password' do
       expect(User.authenticate(user.nick, 'foobar')).to be_nil
     end
+    it 'can not authenticate with nil nick' do
+      expect(User.authenticate(nil, 'blahblah')).to be_nil
+    end
+    it 'can not authenticate with nil password' do
+      expect(User.authenticate(user.nick, nil)).to be_nil
+    end
     it 'can not set a password without matching confirmation' do
       user.password = 'abcdefghij'
       user.password_confirmation = 'foobarxyz'
