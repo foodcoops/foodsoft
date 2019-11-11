@@ -17,5 +17,5 @@
         %td= format_time(order.ends)
         %td= t(order.state, scope: 'orders.state')
         %td
-          = link_to t('ui.copy'), new_order_path(order_id: order, supplier_id: order.supplier), class: 'btn btn-small'
+          = link_to t('ui.copy'), new_order_path(order_id: order), class: 'btn btn-small'
           = link_to t('ui.show'), order, class: 'btn btn-small'
