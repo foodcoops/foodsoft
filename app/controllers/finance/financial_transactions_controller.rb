@@ -58,6 +58,14 @@ class Finance::FinancialTransactionsController < ApplicationController
   end
 
   def new_collection
+    @ordergroups = {}
+    Ordergroup.undeleted.order(:name).map do |ordergroup|
+      obj = { name: ordergroup.name }
+      Ordergroup.custom_fields.each do |field|
+        obj[field[:name]] = ordergroup.settings.custom_fields[field[:name]]
+      end
+      @ordergroups[ordergroup.id] = obj
+    end
   end
 
   def create_collection
