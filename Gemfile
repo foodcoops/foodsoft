@@ -69,7 +69,7 @@ gem 'foodsoft_discourse', path: 'plugins/discourse'
 
 
 group :development do
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.3.6'
   gem 'mailcatcher'
   gem 'web-console', '~> 2.0'
 
