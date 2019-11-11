@@ -1,7 +1,7 @@
 = raw t '.text0', user: @user.name, task: @task.name, when: I18n.l(@task.due_date, format: t('mailer.dateformat'))
-- if @user.next_tasks.size > 0
+- if @next_tasks.size > 0
   = raw t '.nextweek'
-  - for next_task in @user.next_tasks
+  - for next_task in @next_tasks
     - next if next_task == @task
     * #{raw I18n.l next_task.due_date, format: t('mailer.dateformat')} #{raw next_task.name}
 = raw t '.text1', user_tasks_url: user_tasks_url, foodcoop: FoodsoftConfig[:name]
