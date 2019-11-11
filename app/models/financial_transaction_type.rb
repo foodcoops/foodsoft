@@ -1,5 +1,6 @@
 class FinancialTransactionType < ApplicationRecord
   belongs_to :financial_transaction_class
+  belongs_to :bank_account
   has_many :financial_transactions, dependent: :restrict_with_exception
 
   validates :name, presence: true
@@ -9,6 +10,8 @@ class FinancialTransactionType < ApplicationRecord
   validates :financial_transaction_class, presence: true
 
   before_destroy :restrict_deleting_last_financial_transaction_type
+
+  scope :with_name_short, -> { where.not(name_short: [nil, '']) }
 
   def self.default
     first

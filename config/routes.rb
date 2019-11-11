@@ -31,6 +31,7 @@ Foodsoft::Application.routes.draw do
     ########### User specific
 
     get   '/home/profile', as: 'my_profile'
+    get   '/home/reference_calculator'
     patch '/home/update_profile', as: 'update_profile'
     get   '/home/ordergroup' => 'home#ordergroup', as: 'my_ordergroup'
     post  '/home/cancel_membership' => 'home#cancel_membership', as: 'cancel_membership'

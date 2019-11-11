@@ -67,6 +67,7 @@ en:
       financial_transaction_class:
         name: Name
       financial_transaction_type:
+        bank_account: Bank Account
         name: Name
         financial_transaction_class: Financial transaction class
         name_short: Short Name
@@ -314,6 +315,7 @@ en:
         title_new: Add new financial transaction class
     financial_transaction_types:
       form:
+        name_short_desc: The short name is mandatory for financial transaction types which should be automatically assignable in bank transactions. If there are multiple bank accounts, the preferred target account for bank transfers can be selected.
         title_edit: Edit financial transaction type
         title_new: Add new financial transaction type
     mail_delivery_status:
@@ -1116,6 +1118,12 @@ en:
       user:
         since: "(member for %{when})"
         title: "%{user}"
+    reference_calculator:
+      placeholder: Please enter the amounts you want to tranfser in every field first, to see the reference you should use for that transaction.
+      text0: Please transfer
+      text1: with the reference
+      text2: to the bank account
+      title: Reference Calculator
     start_nav:
       admin: Administration
       finances:
@@ -1167,6 +1175,7 @@ en:
       logout: Logout
       ordergroup: My ordergroup
       profile: Edit profile
+      reference_calculator: Reference Calculator
     logo: "<span>food</span>soft"
   lib:
     render_pdf:

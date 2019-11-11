@@ -1,0 +1,76 @@
+- title t('.title')
+
+- content_for :javascript do
+  :javascript
+    $(function() {
+      var default_bank_account = $('p[data-text]').attr('data-text');
+
+      function update() {
+        var items = {};
+        var hide_placeholder = false;
+
+        $('input[data-has-name-short]').each(function() {
+          var bank_account = $(this).attr('data-bank-account') || default_bank_account;
+          var name = $(this).attr('name');
+          var value = Math.ceil(parseFloat($(this).val()) * 100) / 100;
+          if (value > 0) {
+            var item = items[bank_account];
+            if (!item) {
+              items[bank_account] = item = { amount: 0, values: {} };
+            }
+
+            item.amount += value;
+            item.values[name] = value;
+            hide_placeholder = true;
+          }
+        });
+
+        $('p[data-text]').each(function() {
+          var ele = $(this);
+          var bank_account = ele.attr('data-text');
+          var item = items[bank_account];
+          console.dir(item);
+          if (item) {
+            ele.show();
+            ele.find('.amount').text(item.amount);
+            ele.find('.reference').text((#{BankTransactionReference.js_code_for_user(@current_user)})(item.values));
+          } else {
+            ele.hide();
+          }
+        });
+
+        if (hide_placeholder) {
+          $('#placeholder').hide();
+        } else {
+          $('#placeholder').show();
+        }
+      }
+
+      $(document).on('input', 'input[data-has-name-short]', update);
+      update();
+    });
+
+= form_tag finance_create_transaction_collection_path do
+  %p
+    %table#ordergroups
+      %thead
+        %tr
+          %th= heading_helper FinancialTransactionType, :name
+          %th= heading_helper FinancialTransaction, :amount
+      %tbody
+        - for t in @types
+          %tr
+            %td= "#{t.name} (#{t.name_short}):"
+            %td= text_field_tag t.name_short, nil, class: 'input-small',
+              'data-has-name-short' => true, 'data-bank-account' => t.bank_account.try(:id),
+              step: 0.01, type: :number
+  %p#placeholder
+    = t('.placeholder')
+  - for ba in @bank_accounts
+    %p{'data-text' => ba.id}
+      = t('.text0')
+      %b.amount= '?'
+      = t('.text1')
+      %b.reference= '?'
+      = t('.text2')
+      %b= ba.iban
