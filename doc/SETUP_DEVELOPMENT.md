@@ -28,6 +28,8 @@ If instead you just want to run Foodsoft without changing its code, please refer
    This brings up the bleeding-edge development version, which might contain some
    unfinished parts. If you want to be safe, choose the last release:
    `git checkout $(git tag -l | grep ^v | sort -rn | head -n1)`
+   
+   *Note:* When developing on Windows you might run into issues with shell scripts because of Git auto-crlf. Have a look how to avoid that in the [Docker Development Setup](./SETUP_DEVELOPMENT_DOCKER.md#prerequisites-windows-only) instructions. 
 
 1. Install RVM and Ruby 2.4+ (if you have not done so before):
 
@@ -182,3 +184,4 @@ within a docker image. While the default [`Dockerfile`](../Dockerfile) is setup 
 use docker-compose (using [`docker-compose-dev.yml`](../docker-compose-dev.yml)) to
 setup the whole stack at once.
 
+See [Setup Development Docker](./SETUP_DEVELOPMENT_DOCKER.md) for a detailed description.
