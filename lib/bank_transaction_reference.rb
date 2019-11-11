@@ -17,4 +17,18 @@ class BankTransactionReference
     return ret
   end
 
+  def self.js_code_for_user(user)
+    %{
+      function(items) {
+        var ret = "FS#{user.ordergroup.id}.#{user.id}";
+        for (var key in items) {
+          if (items.hasOwnProperty(key)) {
+            ret += key + items[key];
+          }
+        }
+        return ret;
+      }
+    }
+  end
+
 end

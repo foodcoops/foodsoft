@@ -6,6 +6,9 @@
     = f.input :name
     = f.association :financial_transaction_class, :include_blank => false
     = f.input :name_short
+    - if BankAccount.count > 1
+      = f.association :bank_account
+    %small= t '.name_short_desc'
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'

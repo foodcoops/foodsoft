@@ -9,6 +9,8 @@
       %ul.dropdown-menu
         %li= link_to t('.profile'), my_profile_path
         %li= link_to t('.ordergroup'), my_ordergroup_path
+        - if BankAccount.any? && FinancialTransactionType.with_name_short.any?
+          %li= link_to t('.reference_calculator'), home_reference_calculator_path
         %li= link_to t('.logout'), logout_path
     %li{class: ('disabled' if FoodsoftConfig[:homepage].blank?)}
       = link_to FoodsoftConfig[:name], FoodsoftConfig[:homepage]

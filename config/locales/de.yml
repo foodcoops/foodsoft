@@ -61,6 +61,7 @@ de:
         ordergroup: Bestellgruppe
         user: Eingetragen von
       financial_transaction_type:
+        bank_account: Bankkonto
         financial_transaction_class: Kontotransaktionsklasse
         name_short: Kurzname
       group_order:
@@ -298,6 +299,7 @@ de:
         title_new: Kontotransaktionsklasse anlegen
     financial_transaction_types:
       form:
+        name_short_desc: Der Kurzname ist notwendig, falls der Kontotransaktionstyp in Banktransaktionen automatisch erkannt werden soll. Falls es mehrere Bankkonten gibt, kann das gewünschte Zielkonto für Überweisungen ausgewählt werden.
         title_edit: Kontotransaktionstyp bearbeiten
         title_new: Kontotransaktionstyp anlegen
     mail_delivery_status:
@@ -1088,6 +1090,12 @@ de:
       title: Mein Profil
       user:
         since: "(Mitglied seit %{when})"
+    reference_calculator:
+      placeholder: Bitte fülle zuerst die einzelnen Felder mit den gewünschten Beträgen für die Überweisung aus, um die Zahlungsreferenz für diese Transaktion anzuzeigen.
+      text0: Bitte überweise
+      text1: mit der Zahlungsreferenz
+      text2: auf das Bankkonto
+      title: Zahlungsreferenz-Rechner
     start_nav:
       finances:
         accounts: Konten aktualisieren
@@ -1132,6 +1140,7 @@ de:
       logout: Abmelden
       ordergroup: Meine Bestellgruppe
       profile: Profil bearbeiten
+      reference_calculator: Zahlungsreferenz-Rechner
   lib:
     render_pdf:
       page: Seite %{number} von %{count}

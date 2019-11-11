@@ -14,6 +14,15 @@ class HomeController < ApplicationController
   def profile
   end
 
+  def reference_calculator
+    if current_user.ordergroup
+      @types = FinancialTransactionType.with_name_short.order(:name)
+      @bank_accounts = @types.includes(:bank_account).map(&:bank_account).uniq.compact
+    else
+      redirect_to root_url, alert: I18n.t('group_orders.errors.no_member')
+    end
+  end
+
   def update_profile
     if @current_user.update_attributes(user_params)
       @current_user.ordergroup.update_attributes(ordergroup_params) if ordergroup_params

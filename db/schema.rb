@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181205000000) do
+ActiveRecord::Schema.define(version: 20181205010000) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string "name",        limit: 255, default: "", null: false
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20181205000000) do
     t.string  "name",                           limit: 255, null: false
     t.integer "financial_transaction_class_id", limit: 4,   null: false
     t.string  "name_short",                     limit: 255
+    t.integer "bank_account_id",                limit: 4
   end
 
   add_index "financial_transaction_types", ["name_short"], name: "index_financial_transaction_types_on_name_short", using: :btree
