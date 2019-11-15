@@ -300,7 +300,8 @@ GEM
     rack (1.6.11)
     rack-contrib (1.8.0)
       rack (~> 1.4)
-    rack-cors (1.0.3)
+    rack-cors (1.0.6)
+      rack (>= 1.6.0)
     rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
