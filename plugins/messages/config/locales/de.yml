@@ -54,6 +54,8 @@ de:
           text: '%{messages} oder %{threads} anzeigen'
           messages: Nachrichten
           threads: Nachrichtenverläufe
+    start_nav:
+      write_message: Nachricht schreiben
   messagegroups:
     index:
       body: 'Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.'
