@@ -97,6 +97,7 @@ en:
         wiki: Wiki (page Mailing-List)
       message: message
       no_user_found: No user found
+      order_item: "%{supplier_name} (Pickup: %{pickup})"
       reply_to: This message is an reply to an other %{link}.
       search: Search ...
       search_user: Search user
