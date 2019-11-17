@@ -27,6 +27,7 @@ class SuppliersController < ApplicationController
 
   def create
     @supplier = Supplier.new(supplier_params)
+    @supplier.supplier_category ||= SupplierCategory.first
     if @supplier.save
       flash[:notice] = I18n.t('suppliers.create.notice')
       redirect_to suppliers_path
@@ -70,7 +71,7 @@ class SuppliersController < ApplicationController
     params
       .require(:supplier)
       .permit(:name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
-              :iban, :custom_fields, :delivery_days, :order_howto, :note,
+              :iban, :custom_fields, :delivery_days, :order_howto, :note, :supplier_category_id,
               :shared_supplier_id, :min_order_quantity, :shared_sync_method)
   end
 

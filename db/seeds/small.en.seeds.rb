@@ -2,11 +2,13 @@ require_relative 'seed_helper.rb'
 
 ## Suppliers & articles
 
+SupplierCategory.create(:id => 1, :name => "Other")
+
 Supplier.create([
-  {:id => 1, :name => "Beautiful bakery", :address => "Smallstreet 1, Cookilage", :phone => "0123456789", :email => "info@bbakery.test", :min_order_quantity => "100"},
-  {:id => 2, :name => "Chocolatiers", :address => "Multatuliroad 1, Amsterdam", :phone => "0123456789", :email => "info@chocolatiers.test", :url => "http://www.chocolatiers.test/", :contact_person => "Max Pure", :delivery_days => "Tue, Fr (Amsterdam)"},
-  {:id => 3, :name => "Cheesemaker", :address => "Cheesestreet 5, London", :phone => "0123456789", :url => "http://www.cheesemaker.test/"},
-  {:id => 4, :name => "The Nuthome", :address => "Alexanderplatz, Berlin", :phone => "0123456789", :email => "info@thenuthome.test", :url => "http://www.thenuthome.test/", :note => "delivery in Berlin; €9 delivery costs for orders under €123"}
+  {:id => 1, :name => "Beautiful bakery", :supplier_category_id => 1, :address => "Smallstreet 1, Cookilage", :phone => "0123456789", :email => "info@bbakery.test", :min_order_quantity => "100"},
+  {:id => 2, :name => "Chocolatiers", :supplier_category_id => 1, :address => "Multatuliroad 1, Amsterdam", :phone => "0123456789", :email => "info@chocolatiers.test", :url => "http://www.chocolatiers.test/", :contact_person => "Max Pure", :delivery_days => "Tue, Fr (Amsterdam)"},
+  {:id => 3, :name => "Cheesemaker", :supplier_category_id => 1, :address => "Cheesestreet 5, London", :phone => "0123456789", :url => "http://www.cheesemaker.test/"},
+  {:id => 4, :name => "The Nuthome", :supplier_category_id => 1, :address => "Alexanderplatz, Berlin", :phone => "0123456789", :email => "info@thenuthome.test", :url => "http://www.thenuthome.test/", :note => "delivery in Berlin; €9 delivery costs for orders under €123"}
 ])
 
 ArticleCategory.create(:id => 1, :name => "Other", :description => "other, misc, unknown")

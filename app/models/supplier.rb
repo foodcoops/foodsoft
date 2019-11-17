@@ -8,6 +8,7 @@ class Supplier < ApplicationRecord
   has_many :orders
   has_many :deliveries
   has_many :invoices
+  belongs_to :supplier_category
   belongs_to :shared_supplier  # for the sharedLists-App
 
   validates :name, :presence => true, :length => { :in => 4..30 }

@@ -12,6 +12,9 @@
   = f.input :url
   = f.input :contact_person
   = f.input :customer_number
+  - supplier_categories = SupplierCategory.order(:name)
+  - if supplier_categories.count > 1
+    = f.association :supplier_category, collection: supplier_categories, include_blank: false
   - if FoodsoftConfig[:use_iban]
     = f.input :iban
   = f.input :delivery_days
