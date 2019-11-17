@@ -2,11 +2,13 @@ require_relative 'seed_helper.rb'
 
 ## Suppliers & articles
 
+SupplierCategory.create(:id => 1, :name => "Other")
+
 Supplier.create([
-  {:id => 1, :name => "Koekenbakker", :address => "Dorpsstraat 1, Koekange", :phone => "012 3456789", :email => "info@dekoekenbakker.test", :min_order_quantity => "100"},
-  {:id => 2, :name => "Chocolademakkers", :address => "Multatuliweg 1, Amsterdam", :phone => "012 3456789", :email => "info@chocolademakkers.test", :url => "http://www.chocolademakkers.test/", :contact_person => "Max Puur", :delivery_days => "di, vr (Amsterdam)"},
-  {:id => 3, :name => "Kaasmaker", :address => "Waagplein, Alkmaar", :phone => "012 3456789", :url => "http://www.kaaskamer.test/"},
-  {:id => 4, :name => "Notenhuis", :address => "Damrak 1, Amsterdam", :phone => "012 3456789", :email => "info@notenhuis.test", :url => "http://www.notenhuis.test/", :note => "leveren in Amsterdam; €9 leverkosten bij bestellingen onder €123"}
+  {:id => 1, :name => "Koekenbakker", :supplier_category_id => 1, :address => "Dorpsstraat 1, Koekange", :phone => "012 3456789", :email => "info@dekoekenbakker.test", :min_order_quantity => "100"},
+  {:id => 2, :name => "Chocolademakkers", :supplier_category_id => 1, :address => "Multatuliweg 1, Amsterdam", :phone => "012 3456789", :email => "info@chocolademakkers.test", :url => "http://www.chocolademakkers.test/", :contact_person => "Max Puur", :delivery_days => "di, vr (Amsterdam)"},
+  {:id => 3, :name => "Kaasmaker", :supplier_category_id => 1, :address => "Waagplein, Alkmaar", :phone => "012 3456789", :url => "http://www.kaaskamer.test/"},
+  {:id => 4, :name => "Notenhuis", :supplier_category_id => 1, :address => "Damrak 1, Amsterdam", :phone => "012 3456789", :email => "info@notenhuis.test", :url => "http://www.notenhuis.test/", :note => "leveren in Amsterdam; €9 leverkosten bij bestellingen onder €123"}
 ])
 
 ArticleCategory.create(:id => 1, :name => "Other", :description => "overig, anders, onbekend")
