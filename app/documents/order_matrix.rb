@@ -96,6 +96,9 @@ class OrderMatrix < OrderPdf
             # get the Ordergroup result for this order_article
             goa = order_article.group_order_articles.where(group_order_id: group_order.id).first
             result = ((goa.nil? || goa.result == 0) ? '' : goa.result.to_i)
+            if (!result.blank? && goa.tolerance > 0)
+              result = "(#{goa.quantity}..#{goa.quantity+goa.tolerance}) #{result}"
+            end
             group_result << result
           end
           groups_data << group_result
