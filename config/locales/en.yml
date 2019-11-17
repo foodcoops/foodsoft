@@ -351,6 +351,8 @@ en:
         notice: User was deleted
       edit:
         title: Edit user
+      form:
+        create_ordergroup: Create ordergroup with the same name and add user.
       index:
         first_paragraph: Here you can %{url}, edit and delete users.
         new_user: Create new user

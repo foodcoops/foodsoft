@@ -20,7 +20,7 @@ class User < ApplicationRecord
   has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
   has_many :mail_delivery_status, :class_name => 'MailDeliveryStatus', :foreign_key => 'email', :primary_key => 'email'
 
-  attr_accessor :password, :settings_attributes
+  attr_accessor :create_ordergroup, :password, :settings_attributes
 
   scope :deleted, -> { where.not(deleted_at: nil) }
   scope :undeleted, -> { where(deleted_at: nil) }
@@ -64,6 +64,12 @@ class User < ApplicationRecord
       end
       self.settings.merge!(key, value)
     end if settings_attributes
+
+    if ActiveRecord::Type::Boolean.new.type_cast_from_user(create_ordergroup)
+      og = Ordergroup.new({name: name})
+      og.memberships.build({user: self})
+      og.save!
+    end
   end
 
   # sorted by display name

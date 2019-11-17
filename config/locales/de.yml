@@ -333,6 +333,8 @@ de:
         notice: Benutzer/in wurde gelöscht
       edit:
         title: Benutzer/in bearbeiten
+      form:
+        create_ordergroup: Bestellgruppe mit dem selben Namen erstellen und Benutzer_in hinzufügen.
       index:
         first_paragraph: Hier kannst du Benutzer/innen %{url}, bearbeiten und natürlich auch löschen.
         new_user: Neue/n Benutzer/in anlegen
