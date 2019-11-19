@@ -173,6 +173,9 @@ Foodsoft::Application.routes.draw do
       end
 
       resources :links, controller: 'financial_links', only: [:create, :show] do
+        collection do
+          get :incomplete
+        end
         member do
           get :index_bank_transaction
           put 'bank_transactions/:bank_transaction', action: 'add_bank_transaction', as: 'add_bank_transaction'

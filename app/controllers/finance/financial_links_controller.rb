@@ -1,5 +1,5 @@
 class Finance::FinancialLinksController < Finance::BaseController
-  before_action :find_financial_link, except: [:create]
+  before_action :find_financial_link, except: [:create, :incomplete]
 
   def show
     @items = @financial_link.bank_transactions.map do |bt|
@@ -42,6 +42,10 @@ class Finance::FinancialLinksController < Finance::BaseController
       bank_transaction.update_attribute :financial_link, @financial_link
     end
     redirect_to finance_link_url(@financial_link), notice: t('.notice')
+  end
+
+  def incomplete
+    @financial_links = FinancialLink.incomplete
   end
 
   def index_bank_transaction
