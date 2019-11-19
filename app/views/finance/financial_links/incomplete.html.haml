@@ -1,0 +1,14 @@
+- title t('.title')
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper FinancialLink, :id
+      %th= heading_helper FinancialLink, :note
+      %th= heading_helper FinancialTransaction, :amount
+  %tbody
+    - for fl in @financial_links
+      %tr
+        %td= link_to fl.id, finance_link_path(fl)
+        %td= fl.note
+        %td= format_currency fl.full_sum
