@@ -843,6 +843,16 @@ en:
       ordered_on: 'Order Date: %{date}'
     order_matrix:
       filename: Splitsheets %{name}-%{date}
+      heading: Delivery Checklist Page
+      rows:
+      - Article
+      - Unit
+      - Unit quantity
+      - Unit Price
+      - Case Price
+      - Cases
+      - Count/Weight
+      - Spoilage (%)
       title: 'Split sheets: %{name} - %{date} - Ordered by %{user_name}'
       note: ''
       total:

@@ -22,6 +22,8 @@ class OrderMatrix < OrderPdf
   end
 
   def body
+    page_number = 0
+
     @orders = [@order] unless @orders.is_a? Array
 
     @orders.each_with_index do |order, _i|
@@ -64,8 +66,36 @@ class OrderMatrix < OrderPdf
 
       order_articles = @order.order_articles.ordered.sort_by {|o| o.article.name}
 
+      start_new_page(layout: :portrait)
+      page_number += 1
+
+      text I18n.t('documents.order_matrix.heading'), style: :bold
+      move_down 5
+      text I18n.t('documents.order_matrix.note', :user_name => @order.created_by.name,
+                  :user_email => @order.created_by.email), {size: fontsize(8), style: :bold}
+
+       #text I18n.t('documents.order_matrix.total', :count => order_articles.size), size: fontsize(8)
+       #move_down 10
+
+      order_articles_data = [I18n.t('documents.order_matrix.rows')]
+
+      order_articles.each do |a|
+        order_articles_data << [a.article.name.gsub(/\s+/,' '),
+                                a.article.unit,
+                                a.price.unit_quantity,
+                                number_with_precision(article_price(a), precision: 2),
+                                number_with_precision((a.price.unit_quantity * article_price(a)), precision: 2),
+                                a.units,
+                                '','']
+      end
+
+      table order_articles_data, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
+        table.cells.border_width = 1
+        table.cells.border_color = '666666'
+      end
+
+
       total_num_order_articles = order_articles.size
-      page_number = 0
       while page_number * MAX_ARTICLES_PER_PAGE < total_num_order_articles do # Start page generating
 
         page_number += 1
@@ -104,21 +134,21 @@ class OrderMatrix < OrderPdf
           groups_data << group_result
         end
 
-        group_result = ['Total Units']
+        group_result = ['Cases = Total Units']
         for order_article in current_order_articles
           # get the Ordergroup result for this order_article
-          group_result << " #{order_article.units * order_article.price.unit_quantity} X #{order_article.article.unit}"
+          group_result << "#{order_article.units} = #{order_article.units * order_article.price.unit_quantity} X #{order_article.article.unit}"
         end
         groups_data << group_result
 
-        group_result = ['Cases']
-        for order_article in current_order_articles
-          # get the Ordergroup result for this order_article
-          group_result << "#{order_article.units}"
-        end
-        groups_data << group_result
-
-        groups_data << ['% Spoilage'] + current_order_articles.map {|_a| ''}
+        #group_result = ['Cases']
+        #for order_article in current_order_articles
+        #  # get the Ordergroup result for this order_article
+        #  group_result << "#{order_article.units}"
+        #end
+        #groups_data << group_result
+        #
+        #groups_data << ['% Spoilage'] + current_order_articles.map {|_a| ''}
 
         # Make table
         column_widths = [85]
@@ -131,8 +161,8 @@ class OrderMatrix < OrderPdf
           table.row(groups_data.length - 1).style(bold: true)
         end
 
-        move_down 10
-        text 'Always take a photo if there is any suspicion that produce is spoiled. Include the box/lot code so we can request refunds.'
+        #move_down 10
+        #text 'Always take a photo if there is any suspicion that produce is spoiled. Include the box/lot code so we can request refunds.'
       end
     end
   end
