@@ -22,8 +22,6 @@ class OrderMatrix < OrderPdf
   end
 
   def body
-    page_number = 0
-
     @orders = [@order] unless @orders.is_a? Array
 
     @orders.each_with_index do |order, _i|
@@ -66,8 +64,11 @@ class OrderMatrix < OrderPdf
 
       order_articles = @order.order_articles.ordered.sort_by {|o| o.article.name}
 
+      total_num_order_articles = order_articles.size
+      page_number = 0
+
       start_new_page(layout: :portrait)
-      page_number += 1
+      #page_number += 1
 
       text I18n.t('documents.order_matrix.heading'), style: :bold
       move_down 5
