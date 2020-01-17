@@ -6,8 +6,8 @@
     %tr
       - if FoodsoftConfig[:use_nick]
         %th= heading_helper User, :nick
-      %th= heading_helper User, :name
-      %th= heading_helper User, :email
+      %th= sort_link_helper heading_helper(User, :name), "name"
+      %th= sort_link_helper heading_helper(User, :email), "email"
       %th= heading_helper User, :phone
       %th= heading_helper User, :ordergroup
       %th= heading_helper User, :workgroup, count: 3

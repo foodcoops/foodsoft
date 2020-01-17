@@ -6,10 +6,10 @@
     %tr
       - if FoodsoftConfig[:use_nick]
         %th= heading_helper User, :nick
-      %th= heading_helper User, :name
-      %th= heading_helper User, :email
+      %th= sort_link_helper heading_helper(User, :name), "name"
+      %th= sort_link_helper heading_helper(User, :email), "email"
       %th= t 'admin.access_to'
-      %th= heading_helper User, :last_activity
+      %th= sort_link_helper heading_helper(User, :last_activity), "last_activity"
       %th(colspan="2")= t 'ui.actions'
   %tbody
     - for user in @users
