@@ -17,6 +17,7 @@ class SharedArticle < ApplicationRecord
         :manufacturer => manufacturer,
         :origin => origin,
         :price => price,
+        :supplier_price => supplier_price,
         :tax => tax,
         :deposit => deposit,
         :unit_quantity => unit_quantity,
