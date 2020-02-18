@@ -1225,8 +1225,11 @@ en:
         Dear %{ordergroup},
 
         The order for "%{order}" has been closed by %{user} on %{when}.
+      text1: |
+        It can be presumable be picked up on %{pickup}.
+      text2: |
         The following articles have been ordered for your ordergroup:
-      text1: |-
+      text3: |-
         o Total sum: %{sum}
 
         You can view the order online: %{order_url}

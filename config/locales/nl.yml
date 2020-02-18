@@ -1148,8 +1148,9 @@ nl:
         Beste %{ordergroup}.
 
         De bestelling voor "%{order}" is om %{when} gesloten door %{user}.
+      text2: |
         De volgende artikelen zijn voor jouw huishouden besteld:
-      text1: |-
+      text3: |-
         o Totaal: %{sum}
 
         Je kunt de bestelling online bekijken: %{order_url}

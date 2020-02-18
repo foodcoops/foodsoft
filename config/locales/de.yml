@@ -1183,8 +1183,11 @@ de:
         Liebe Bestellgruppe %{ordergroup},
 
         die Bestellung für "%{order}" wurde am %{when} von %{user} beendet.
+      text1: |
+        Sie kann voraussichtlich am %{pickup} abgeholt werden.
+      text2: |
         Für euch wurden die folgenden Artikel bestellt:
-      text1: |-
+      text3: |-
         o Gesamtpreis: %{sum}
 
         Bestellung online einsehen: %{order_url}
