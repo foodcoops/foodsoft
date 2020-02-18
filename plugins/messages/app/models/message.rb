@@ -12,7 +12,11 @@ class Message < ApplicationRecord
   scope :threads, -> { where(:reply_to => nil) }
   scope :thread, -> (id) { where("id = ? OR reply_to = ?", id, id) }
   scope :readable_for, -> (user) {
-    joins(:message_recipients).where('private = ? OR message_recipients.user_id = ?', false, user.try(&:id)).distinct
+    user_id = user.try(&:id)
+
+    joins(:message_recipients)
+      .where('private = ? OR sender_id = ? OR message_recipients.user_id = ?', false, user_id, user_id)
+      .distinct
   }
 
   validates_presence_of :message_recipients, :subject, :body
