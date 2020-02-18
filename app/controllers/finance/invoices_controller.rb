@@ -41,7 +41,7 @@ class Finance::InvoicesController < ApplicationController
 
     if @invoice.save
       flash[:notice] = I18n.t('finance.create.notice')
-      if @invoice.orders.count == 1
+      if @invoice.orders.count == 1 && current_user.role_finance?
         # Redirect to balancing page
         redirect_to new_finance_order_url(order_id: @invoice.orders.first.id)
       else
