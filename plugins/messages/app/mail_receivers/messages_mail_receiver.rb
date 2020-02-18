@@ -49,7 +49,6 @@ class MessagesMailReceiver
     else
       message.subject = I18n.t('messages.model.reply_subject', subject: message.reply_to_message.subject)
     end
-    message.add_recipients @message.recipients.pluck(:id)
     message.add_recipients [@message.sender_id]
 
     message.save!
