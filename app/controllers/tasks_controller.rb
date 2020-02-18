@@ -17,7 +17,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params, current_user_id: current_user.id)
+    @task = Task.new(current_user_id: current_user.id)
+    @task.attributes=(task_params)
     if params[:periodic]
       @task.periodic_task_group = PeriodicTaskGroup.new
     end
@@ -45,7 +46,7 @@ class TasksController < ApplicationController
     was_periodic = @task.periodic?
     prev_due_date = @task.due_date
     @task.current_user_id = current_user.id
-    @task.attributes=(params[:task])
+    @task.attributes=(task_params)
     if @task.errors.empty? && @task.save
       task_group.update_tasks_including(@task, prev_due_date) if params[:periodic]
       flash[:notice] = I18n.t('tasks.update.notice')
@@ -89,7 +90,7 @@ class TasksController < ApplicationController
     redirect_to user_tasks_path, :notice => I18n.t('tasks.accept.notice')
   end
 
-  # deletes assignment between current_user and given task
+  # deletes assignment between current_user and given taskcurrent_user_id: current_user.id
   def reject
     Task.find(params[:id]).users.delete(current_user)
     redirect_to :action => "index"
@@ -118,7 +119,7 @@ class TasksController < ApplicationController
   def task_params
     params
       .require(:task)
-      .permit(:name, :description, :duration, :user_list, :required_users, :workgroup, :due_date, :done)
+      .permit(:name, :description, :duration, :user_list, :required_users, :workgroup_id, :due_date, :done)
   end
 
 end
