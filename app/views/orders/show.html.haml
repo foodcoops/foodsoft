@@ -74,11 +74,16 @@
       - else
         = link_to t('.stock_order'), new_group_order_path(:order_id => @order.id, :stock_order => true), class: 'btn'
       = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
+      = link_to t('.swap-articles'), swap_order_path(@order), class: 'btn'
+      class: "btn#{' btn-primary' unless @order.last_sent_mail}",
+      data: {confirm: @order.last_sent_mail && t('.confirm_send_to_supplier', when: format_time(@order.last_sent_mail)) }
+
     - elsif not @order.closed? and not @order.stockit?
       = link_to t('.send_to_supplier'), send_result_to_supplier_order_path(@order), method: :post,
         class: "btn#{' btn-primary' unless @order.last_sent_mail}",
         data: {confirm: @order.last_sent_mail && t('.confirm_send_to_supplier', when: format_time(@order.last_sent_mail)) }
       = receive_button @order
+
     - unless @order.closed?
       = link_to t('ui.delete'), @order, data: {confirm: t('.confirm_delete')}, method: :delete,
         class: 'btn btn-danger'
