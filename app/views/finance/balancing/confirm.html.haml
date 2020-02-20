@@ -5,10 +5,16 @@
       %b= heading_helper FinancialTransaction, :financial_transaction_type
       = select_tag :type, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] })
   %table.table.table-striped{:style => "width:35em"}
-    - for group_order in @order.group_orders
+    - total = 0
+    - for group_order in @order.group_orders.sort_by { |go| go.ordergroup.name  }
       %tr{:class => cycle('even', 'odd')}
         %td= group_order.ordergroup_name
         %td.numeric= number_to_currency(group_order.price)
+        - total += group_order.price
+    %tr
+      %td Total
+      %td.numeric= number_to_currency(total)
+
   - unless @order.invoice
     .alert.alert-error You must add a supplier invoice to this order before settling it.
   .form-actions
