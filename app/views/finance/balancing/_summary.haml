@@ -2,8 +2,10 @@
 - rounding_error = order.sum(:rounding_error)
 - total_deposit = order.sum(:deposit)
 - total_tax = order.sum(:tax)
-- net_paid_by_members = order.sum(:net)
-- total_paid_by_members = net_paid_by_members+total_deposit+total_tax
+-# net_paid_by_members = order.sum(:net)
+-# total_paid_by_members = net_paid_by_members+total_deposit+total_tax
+- total_paid_by_members  = order.group_orders.sum('price')
+- net_paid_by_members = total_paid_by_members - total_deposit
 
 %b=h order.name
 %br/
