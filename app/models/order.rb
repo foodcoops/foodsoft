@@ -27,6 +27,7 @@ class Order < ApplicationRecord
   after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
+  scope :started, -> { where('starts <= ?', Time.now) }
   scope :open, -> { where(state: 'open').order('ends DESC') }
   scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
   scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
