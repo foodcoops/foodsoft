@@ -197,6 +197,7 @@ Foodsoft::Application.routes.draw do
         member do
           get :assign_unlinked_transactions
           get :import
+          post :import
         end
 
         resources :bank_transactions, as: :transactions

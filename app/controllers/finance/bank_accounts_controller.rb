@@ -15,16 +15,36 @@ class Finance::BankAccountsController < Finance::BaseController
 
   def import
     @bank_account = BankAccount.find(params[:id])
-    import_method = @bank_account.find_import_method
-    if import_method
-      count = import_method.call(@bank_account)
-      redirect_to finance_bank_account_transactions_url(@bank_account), notice: t('.notice', count: count)
+    importer = @bank_account.find_connector
+
+    if importer
+      importer.load params[:state] && YAML.load(params[:state])
+
+      ok = importer.import params[:controls]
+
+      importer.finish if ok
+      flash.notice = t('.notice', count: importer.count) if ok
+      @auto_submit = importer.auto_submit
+      @controls = importer.controls
+      #TODO: encrypt state
+      @state = YAML.dump importer.dump
     else
-      # @todo add import for csv files as fallback
-      redirect_to finance_bank_account_transactions_url(@bank_account), alert: t('.no_import_method')
+      ok = true
+      flash.alert = t('.no_import_method')
     end
+
+    needs_redirect = ok
   rescue => error
-    redirect_to finance_bank_account_transactions_url(@bank_account), alert: t('errors.general_msg', msg: error.message)
+    flash.alert = t('errors.general_msg', msg: error.message)
+    needs_redirect = true
+  ensure
+    return unless needs_redirect
+    redirect_path = finance_bank_account_transactions_url(@bank_account)
+    if request.post?
+      @js_redirect = redirect_path
+    else
+      redirect_to redirect_path
+    end
   end
 
 end
