@@ -83,7 +83,7 @@ class OrderMatrix < OrderPdf
       order_articles.each do |a|
         order_articles_data << [a.article.name.gsub(/\s+/,' '),
                                 a.article.unit,
-                                a.price.unit_quantity,
+                                a.price.unit_quantity * a.units,
                                 number_with_precision(article_price(a), precision: 2),
                                 number_with_precision((a.price.unit_quantity * article_price(a)), precision: 2),
                                 a.units,
@@ -126,9 +126,15 @@ class OrderMatrix < OrderPdf
           for order_article in current_order_articles
             # get the Ordergroup result for this order_article
             goa = order_article.group_order_articles.where(group_order_id: group_order.id).first
-            result = ((goa.nil? || goa.result == 0) ? '' : goa.result.to_i)
-            if (!result.blank? && goa.tolerance > 0)
-              result = "(#{goa.quantity}..#{goa.quantity+goa.tolerance}) #{result}"
+            if goa.nil?
+              result = ''
+            else
+              was_ordered = goa.quantity != 0 || goa.tolerance != 0
+              if was_ordered
+                result = "(#{goa.quantity}..#{goa.quantity+goa.tolerance})   #{goa.result.to_i}"
+              else
+                result = ''
+              end
             end
             group_result << result
           end
@@ -138,7 +144,12 @@ class OrderMatrix < OrderPdf
         group_result = ['Cases = Total Units']
         for order_article in current_order_articles
           # get the Ordergroup result for this order_article
-          group_result << "#{order_article.units} = #{order_article.units * order_article.price.unit_quantity} X #{order_article.article.unit}"
+
+          group_result << [
+              "#{order_article.units} = #{order_article.units * order_article.price.unit_quantity}",
+              order_article.article.unit.to_s.first =~ /^[1-9].*/ ? ' X ' : ' ',
+              "#{order_article.article.unit}"].join('')
+
         end
         groups_data << group_result
 
