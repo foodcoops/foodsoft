@@ -34,6 +34,7 @@ class Order < ApplicationRecord
   scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
   scope :stock_group_order, -> { group_orders.where(ordergroup_id: nil).first }
+  scope :with_invoice, -> { where.not(invoice: nil) }
 
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14

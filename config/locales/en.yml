@@ -737,6 +737,8 @@ en:
       close:
         alert: 'An error occured while accounting: %{message}'
         notice: Order was settled succesfully, the balance of the account was updated.
+      close_all_direct_with_invoice:
+        notice: '%{count} orders have been settled.'
       close_direct:
         alert: 'Order can not be settled: %{message}'
         notice: Order was settled.
@@ -758,6 +760,7 @@ en:
         total_fc: Sum (FC-price)
         units: Units
       index:
+        close_all_direct_with_invoice: Close all with invoice
         title: Closed orders
       invoice:
         edit: Edit invoice

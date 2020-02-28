@@ -712,6 +712,8 @@ de:
       close:
         alert: 'Ein Fehler ist beim Abrechnen aufgetreten: %{message}'
         notice: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert.
+      close_all_direct_with_invoice:
+        notice: Es wurden %{count} Bestellung abgerechnet.
       close_direct:
         alert: 'Bestellung kann nicht abgerechnet werden: %{message}'
         notice: Bestellung wurde abgerechnet.
@@ -733,6 +735,7 @@ de:
         total_fc: Summe (FC-Preis)
         units: Einheiten
       index:
+        close_all_direct_with_invoice: Alle mit Rechnung abrechnen
         title: Beendete Bestellungen
       invoice:
         edit: Rechnung bearbeiten

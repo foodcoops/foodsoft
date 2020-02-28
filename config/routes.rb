@@ -161,6 +161,8 @@ Foodsoft::Application.routes.draw do
           get :new_on_order_article_create
           get :new_on_order_article_update
         end
+
+        post :close_all_direct_with_invoice, on: :collection
       end
 
       resources :invoices do
