@@ -1,0 +1,22 @@
+#!/bin/sh
+
+PROJECT=foodsoft
+
+if [ ! "${CROWDIN_API_KEY}" ]; then
+  echo "Please set CROWDIN_API_KEY to download all translations." 1>&2
+  exit 1
+fi
+
+# build archive
+wget -q -O/dev/null "https://api.crowdin.com/api/project/${PROJECT}/export?key=${CROWDIN_API_KEY}"
+
+# download all translations
+TMPDIR=$(mktemp -d -t "crowdin-${PROJECT}-XXXXXXXXXX")
+wget -q -O "${TMPDIR}/all.zip" "https://api.crowdin.com/api/project/${PROJECT}/download/all.zip?key=${CROWDIN_API_KEY}"
+
+# extract, but strip 'master' component
+ln -s $(pwd) "${TMPDIR}/master"
+unzip -o -d "${TMPDIR}" "${TMPDIR}/all.zip"
+
+rm -f "${TMPDIR}/all.zip" "${TMPDIR}/master"
+rmdir "${TMPDIR}"
