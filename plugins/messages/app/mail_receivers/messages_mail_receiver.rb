@@ -34,10 +34,7 @@ class MessagesMailReceiver
 
     body.encode!(Encoding::default_internal)
     body = EmailReplyTrimmer.trim(body)
-
-    if body.empty?
-      raise MidiSmtpServer::SmtpdException(nil, 541, "The recipient address rejected your message because of a blank plain body")
-    end
+    raise BlankBodyException if body.empty?
 
     message = @user.send_messages.new body: body,
       group: @message.group,
@@ -73,6 +70,14 @@ class MessagesMailReceiver
       end
     end
     mail_part
+  end
+
+  class BlankBodyException < MidiSmtpServer::SmtpdException
+
+    def initialize(msg = nil)
+      super msg, 541, 'The recipient address rejected your message because of a blank plain body'
+    end
+
   end
 
 end
