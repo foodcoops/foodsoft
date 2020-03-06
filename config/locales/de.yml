@@ -167,6 +167,8 @@ de:
         phone2: Telefon 2
         shared_sync_method: Syncronisierungsmethode
       task:
+        created_by: Erstellt von
+        created_on: Erstellt am
         description: Beschreibung
         done: Erledigt?
         due_date: Wann erledigen?

@@ -502,16 +502,17 @@ ActiveRecord::Schema.define(version: 20181201000210) do
   add_index "suppliers", ["name"], name: "index_suppliers_on_name", unique: true, using: :btree
 
   create_table "tasks", force: :cascade do |t|
-    t.string   "name",                   limit: 255, default: "",    null: false
-    t.string   "description",            limit: 255
+    t.string   "name",                   limit: 255,   default: "",    null: false
+    t.text     "description",            limit: 65535
     t.date     "due_date"
-    t.boolean  "done",                               default: false
+    t.boolean  "done",                                 default: false
     t.integer  "workgroup_id",           limit: 4
-    t.datetime "created_on",                                         null: false
-    t.datetime "updated_on",                                         null: false
-    t.integer  "required_users",         limit: 4,   default: 1
-    t.integer  "duration",               limit: 4,   default: 1
+    t.datetime "created_on",                                           null: false
+    t.datetime "updated_on",                                           null: false
+    t.integer  "required_users",         limit: 4,     default: 1
+    t.integer  "duration",               limit: 4,     default: 1
     t.integer  "periodic_task_group_id", limit: 4
+    t.integer  "created_by_user_id",     limit: 4
   end
 
   add_index "tasks", ["due_date"], name: "index_tasks_on_due_date", using: :btree

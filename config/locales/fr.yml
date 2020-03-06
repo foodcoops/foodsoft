@@ -128,6 +128,8 @@ fr:
         phone2: Autre téléphone
         url: Site web
       task:
+        created_by: Crée par
+        created_on: Créé le
         done: Fait?
         due_date: Echéance
         duration: Durée

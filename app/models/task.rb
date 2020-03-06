@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   has_many :users, :through => :assignments
   belongs_to :workgroup
   belongs_to :periodic_task_group
+  belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
   scope :non_group, -> { where(workgroup_id: nil, done: false) }
   scope :done, -> { where(done: true) }

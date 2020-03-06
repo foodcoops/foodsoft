@@ -179,6 +179,8 @@ en:
         shared_sync_method: How to synchronize
         url: Homepage
       task:
+        created_by: Created by
+        created_on: Created at
         description: Description
         done: Done?
         due_date: Due date

@@ -165,6 +165,8 @@ nl:
         shared_sync_method: Hoe synchroniseren
         url: Homepage
       task:
+        created_by: Gemaakt door
+        created_on: Gemaakt op
         description: Beschrijving
         done: Gedaan?
         due_date: Voor wanneer?

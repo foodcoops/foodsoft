@@ -144,6 +144,8 @@ es:
         shared_sync_method: Cómo sincronizar
         url: Web
       task:
+        created_by: Creado por
+        created_on: Creado en
         description: Descripción
         done: Hecho?
         due_date: Fecha

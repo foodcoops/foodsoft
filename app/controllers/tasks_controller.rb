@@ -18,6 +18,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(current_user_id: current_user.id)
+    @task.created_by = current_user
     @task.attributes=(task_params)
     if params[:periodic]
       @task.periodic_task_group = PeriodicTaskGroup.new

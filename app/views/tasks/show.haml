@@ -5,6 +5,10 @@
   %dl.dl-horizontal
     %dt= heading_helper Task, :name
     %dd= @task.name
+    %dt= heading_helper Task, :created_on
+    %dd= format_time @task.created_on
+    %dt= heading_helper Task, :created_by
+    %dd= show_user @task.created_by
     - if @task.description.present?
       %dt= heading_helper Task, :description
       %dd= simple_format(@task.description)
