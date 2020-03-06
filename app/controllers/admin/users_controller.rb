@@ -36,4 +36,12 @@ class Admin::UsersController < Admin::BaseController
     login @user
     redirect_to root_path, notice: I18n.t('admin.users.controller.sudo_done', user: @user.name)
   end
+
+  def delete_attachment
+    attachment = ActiveStorage::Attachment.find(params[:attachment_id])
+    attachment.purge_later
+    respond_to do |format|
+      format.js
+    end
+  end
 end

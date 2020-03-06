@@ -211,6 +211,7 @@ nl:
         user_list: Verantwoordelijken
         workgroup: Werkgroep
       user:
+        attachment: Bijlage
         email: E-mail
         first_name: Voornaam
         iban: IBAN
@@ -392,6 +393,7 @@ nl:
       form:
         create_ordergroup: Een huishouden met dezelfde naam aanmaken en een gebruiker toevoegen.
         send_welcome_mail: Een welkomstmail naar de gebruiker versturen.
+        attachment_hint: Alleen JPEG, PNG en PDF zijn toegestaan.
       index:
         first_paragraph: Hier kun je gebruikers %{url}, bewerken en wissen.
         new_user: Nieuwe gebruiker
@@ -1391,6 +1393,7 @@ nl:
     order_article:
       error_price: moet ingevuld worden en een huidige prijs hebben
     user:
+      invalid_mime: heeft ongeldig MIME type (%{mime})
       no_ordergroup: geen huishouden
     group_order_article:
       order_closed: Bestelling is gesloten en kan niet worden gewijzigd

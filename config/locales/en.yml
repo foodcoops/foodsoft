@@ -245,6 +245,7 @@ en:
         user_list: Responsible users
         workgroup: Workgroup
       user:
+        attachment: Attachment
         email: Email
         first_name: First name
         iban: IBAN
@@ -427,6 +428,7 @@ en:
       edit:
         title: Edit user
       form:
+        attachment_hint: Only JPEG, PNG and PDF are allowed.
         create_ordergroup: Create ordergroup with the same name and add user.
         send_welcome_mail: Send a welcome mail to the user.
       index:
@@ -1490,6 +1492,7 @@ en:
     order_article:
       error_price: must be specified and have a current price price
     user:
+      invalid_mime: has an invalid MIME type (%{mime})
       no_ordergroup: no ordergroup
     group_order_article:
       order_closed: Order is closed and cannot be modified
