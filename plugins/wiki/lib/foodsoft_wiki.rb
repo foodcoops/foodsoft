@@ -3,6 +3,7 @@ require 'acts_as_versioned'
 require 'diffy'
 require 'content_for_in_controllers'
 require 'foodsoft_wiki/engine'
+require 'foodsoft_wiki/mailer'
 require 'foodsoft_wiki/wiki_parser'
 
 module FoodsoftWiki

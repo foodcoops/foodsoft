@@ -1,0 +1,6 @@
+= raw t '.text0', user: show_user(@user)
+- if @additional_text
+  \
+  = raw @additional_text
+\
+= raw t '.text1', link: @link, expires: I18n.l(@user.reset_password_expires), foodcoop: FoodsoftConfig[:name]

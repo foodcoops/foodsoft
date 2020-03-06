@@ -36,6 +36,10 @@ class Page < ApplicationRecord
     where(permalink: "Public_frontpage").first
   end
 
+  def self.welcome_mail
+    where(permalink: "Welcome_mail").first
+  end
+
   def set_permalink
     unless title.blank?
       self.permalink = Page.count == 0 ? "Home" : Page.permalink(title)

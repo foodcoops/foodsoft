@@ -357,6 +357,7 @@ en:
         title: Edit user
       form:
         create_ordergroup: Create ordergroup with the same name and add user.
+        send_welcome_mail: Send a welcome mail to the user.
       index:
         first_paragraph: Here you can %{url}, edit and delete users.
         new_user: Create new user
@@ -1301,6 +1302,19 @@ en:
         You are asigned to the task "%{task}". This task is due by tomorrow (%{when})!
       text1: |
         My tasks: %{user_tasks_url}
+
+
+        Kind regards from %{foodcoop}.
+    welcome:
+      subject: Welcome to the Foodcoop
+      text0: |
+        Dear %{user},
+
+        a new Foodsoft account has been created for you.
+      text1: |
+        In order to choose a new password follow this link: %{link}
+        This link works only once and expires on %{expires}.
+        You can always use "Forgot password?" to get an new link.
 
 
         Kind regards from %{foodcoop}.

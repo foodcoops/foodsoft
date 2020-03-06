@@ -341,6 +341,7 @@ de:
         title: Benutzer/in bearbeiten
       form:
         create_ordergroup: Bestellgruppe mit dem selben Namen erstellen und Benutzer_in hinzufügen.
+        send_welcome_mail: Eine Willkommen-Nachricht an Benutzer_in senden.
       index:
         first_paragraph: Hier kannst du Benutzer/innen %{url}, bearbeiten und natürlich auch löschen.
         new_user: Neue/n Benutzer/in anlegen
@@ -1262,6 +1263,19 @@ de:
         Du bist für "%{task}" eingetragen. Die Aufgabe ist morgen (%{when}) fällig!
       text1: |
         Deine Aufgaben: %{user_tasks_url}
+
+
+        Viele Grüße von %{foodcoop}
+    welcome:
+      subject: Willkommen in der Foodcoop
+      text0: |
+        Liebe(r) %{user},
+
+        für dich wure ein neuer Foodsoft-Zugang erstellt.
+      text1: |
+        Um ein neues Passwort einzugeben, gehe zu: %{link}
+        Dieser Link kann nur einmal aufgerufen werden und läuft am %{expires} ab.
+        Du kannst jederzeit "Passwort vergessen?" benutzen, um einen neuen Link zu erhalten.
 
 
         Viele Grüße von %{foodcoop}
