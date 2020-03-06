@@ -41,6 +41,17 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.upcoming_tasks.subject')
   end
 
+  # Sends a welcome email with instructions on how to reset the password.
+  # Assumes user.setResetPasswordToken has been successfully called already.
+  def welcome(user)
+    @user = user
+    @additional_text = additonal_welcome_text(user)
+    @link = new_password_url(id: @user.id, token: @user.reset_password_token)
+
+    mail to: user,
+         subject: I18n.t('mailer.welcome.subject')
+  end
+
   # Sends order result for specific Ordergroup
   def order_result(user, group_order)
     @order        = group_order.order
@@ -143,6 +154,10 @@ class Mailer < ActionMailer::Base
   def add_order_result_attachments(order, options = {})
     attachments['order.pdf'] = OrderFax.new(order, options).to_pdf
     attachments['order.csv'] = OrderCsv.new(order, options).to_csv
+  end
+
+  # separate method to allow plugins to mess with the text
+  def additonal_welcome_text(user)
   end
 
   private
