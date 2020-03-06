@@ -43,6 +43,14 @@ class DocumentsController < ApplicationController
     redirect_to @document.parent || documents_path, alert: t('.error', error: error.message)
   end
 
+  def update
+    @document = Document.find(params[:id])
+    @document.update_attribute(:parent_id, params[:parent_id])
+    redirect_to @document.parent || documents_path, notice: t('.notice')
+  rescue => error
+    redirect_to @document.parent || documents_path, alert: t('errors.general_msg', msg: error.message)
+  end
+
   def destroy
     @document = Document.find(params[:id])
     if @document.created_by == current_user or current_user.role_admin?
@@ -63,6 +71,10 @@ class DocumentsController < ApplicationController
       index
       render :index
     end
+  end
+
+  def move
+    @document = Document.find(params[:document_id])
   end
 
   def allowed_mime?(mime)

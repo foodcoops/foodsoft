@@ -1772,6 +1772,7 @@ en:
     marks:
       close: "&times;"
       success: <i class="icon icon-ok"></i>
+    move: Move
     or_cancel: or cancel
     please_wait: Please wait...
     restore: Restore
