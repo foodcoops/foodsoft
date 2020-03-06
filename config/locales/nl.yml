@@ -190,6 +190,8 @@ nl:
         user_list: Verantwoordelijken
         workgroup: Werkgroep
       user:
+        attachment: Bijlage
+        delete_attachment: Verwijder bijlage
         email: Email
         first_name: Voornaam
         iban: IBAN
@@ -354,6 +356,7 @@ nl:
       edit:
         title: Lid bewerken
       form:
+        attachment_hint: Alleen JPEG en PDF zijn toegestaan.
         create_ordergroup: Maak een huishouden met dezelfde naam en voeg een gebruiker toe.
       index:
         first_paragraph: Hier kun je gebruikers %{url}, bewerken en wissen.
@@ -1301,8 +1304,7 @@ nl:
       no_delete_last: Er moet ten minste één financiëel transactie type bestaan.
     group_order:
       stock_ordergroup_name: Voorraad (%{user})
-    invoice:
-      invalid_mime: heeft ongeldig MIME type (%{mime})
+    invalid_mime: heeft ongeldig MIME type (%{mime})
     membership:
       no_admin_delete: Lidmaatschap kan niet beeindigd worden. Je bent de laatste administrator.
     order_article:

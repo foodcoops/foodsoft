@@ -32,4 +32,11 @@ class Admin::UsersController < Admin::BaseController
     login @user
     redirect_to root_path, notice: I18n.t('admin.users.controller.sudo_done', user: @user.name)
   end
+
+  def attachment
+    @user = User.find(params[:id])
+    type = MIME::Types[@user.attachment_mime].first
+    filename = "user_#{@user.id}_attachment.#{type.preferred_extension}"
+    send_data @user.attachment_data, filename: filename, type: type
+  end
 end

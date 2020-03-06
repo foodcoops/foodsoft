@@ -1,5 +1,8 @@
 = simple_form_for([:admin, @user]) do |f|
   = render 'shared/user_form_fields', f: f, password_autocomplete: false
+  = f.input :attachment, as: :file, hint: t('.attachment_hint')
+  - if f.object.attachment_data.present?
+    = f.input :delete_attachment, as: :boolean
   = f.input :send_welcome_mail, as: :boolean, label: false, inline_label: t('.send_welcome_mail')
   - unless @user.ordergroup
     = f.input :create_ordergroup, as: :boolean, label: false, inline_label: t('.create_ordergroup')

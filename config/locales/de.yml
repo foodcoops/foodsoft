@@ -187,6 +187,8 @@ de:
         user_list: Verantwortlichen
         workgroup: Arbeitsgruppe
       user:
+        attachment: Anhang
+        delete_attachment: Anhang löschen
         email: E-Mail
         first_name: Vorname
         iban: IBAN
@@ -347,6 +349,7 @@ de:
       edit:
         title: Benutzer/in bearbeiten
       form:
+        attachment_hint: Es sind nur JPEG und PDF erlaubt.
         create_ordergroup: Bestellgruppe mit dem selben Namen erstellen und Benutzer_in hinzufügen.
         send_welcome_mail: Eine Willkommen-Nachricht an Benutzer_in senden.
       index:
@@ -1311,8 +1314,7 @@ de:
       no_delete_last: Es muss mindestens ein Kontotransaktionstyp existieren.
     group_order:
       stock_ordergroup_name: Lager (%{user})
-    invoice:
-      invalid_mime: hat einen ungültigen MIME-Typ (%{mime})
+    invalid_mime: hat einen ungültigen MIME-Typ (%{mime})
     membership:
       no_admin_delete: Mitgliedschaft kann nicht beendet werden. Du bist die letzte Administratorin
     order_article:

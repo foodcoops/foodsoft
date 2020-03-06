@@ -198,6 +198,8 @@ en:
         user_list: Responsible users
         workgroup: Workgroup
       user:
+        attachment: Attachment
+        delete_attachment: Delete attachment
         email: Email
         first_name: First name
         iban: IBAN
@@ -363,6 +365,7 @@ en:
       edit:
         title: Edit user
       form:
+        attachment_hint: Only JPEG and PDF are allowed.
         create_ordergroup: Create ordergroup with the same name and add user.
         send_welcome_mail: Send a welcome mail to the user.
       index:
@@ -1350,8 +1353,7 @@ en:
       no_delete_last: At least one financial transaction type must exist.
     group_order:
       stock_ordergroup_name: Stock (%{user})
-    invoice:
-      invalid_mime: has an invalid MIME type (%{mime})
+    invalid_mime: has an invalid MIME type (%{mime})
     membership:
       no_admin_delete: Membership can not be withdrawn as you are the last administrator.
     order_article:

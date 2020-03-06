@@ -234,6 +234,7 @@ Foodsoft::Application.routes.draw do
       resources :financial_transaction_types
 
       resources :users do
+        get :attachment, on: :member
         post :restore, on: :member
         post :sudo, on: :member
       end

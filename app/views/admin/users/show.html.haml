@@ -18,6 +18,9 @@
             = link_to t('.show_email_problems'), admin_mail_delivery_status_index_path(email: @user.email), class: 'btn btn-warning btn-mini'
         %dt= heading_helper User, :phone
         %dd= @user.phone
+        - if @user.attachment_data
+          %dt= heading_helper User, :attachment
+          %dd= link_to t('ui.download'), admin_user_attachment_path(@user)
         %dt= heading_helper User, :last_login
         %dd= format_time(@user.last_login)
         %dt= heading_helper User, :last_activity
