@@ -142,6 +142,8 @@ fr:
         user_list: Responsables inscritEs
         workgroup: Équipe
       user:
+        attachment: Appendice
+        delete_attachment: Supprimer appendice
         first_name: Prénom
         last_activity: dernière activité
         last_login: Dernière connection

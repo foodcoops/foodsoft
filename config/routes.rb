@@ -266,6 +266,7 @@ Rails.application.routes.draw do
       resources :supplier_categories
 
       resources :users do
+        get :attachment, on: :member
         post :restore, on: :member
         post :sudo, on: :member
       end

@@ -210,6 +210,8 @@ es:
         user_list: Usuarios responsables
         workgroup: Grupo de trabajo
       user:
+        attachment: Adjunto
+        delete_attachment: Borra adjunto
         email: Correo electrónico
         first_name: Nombre
         iban: IBAN
@@ -391,6 +393,7 @@ es:
       form:
         create_ordergroup: Crear grupo de pedido con el mismo nombre y añadir usuario.
         send_welcome_mail: Enviar un correo de bienvenida al usuario/a.
+        attachment_hint: Sólo se permiten los formatos JPEG y PDF.
       index:
         first_paragraph: Aquí puedes %{url}, editar y borar usuarios.
         new_user: Crea nuevo usuario/a

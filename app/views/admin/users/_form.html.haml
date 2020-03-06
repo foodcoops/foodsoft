@@ -9,6 +9,20 @@
           = f.input :send_welcome_mail, as: :boolean, label: false, inline_label: t('.send_welcome_mail'), wrapper: :horizontal_boolean
           - unless @user.ordergroup
             = f.input :create_ordergroup, as: :boolean, label: false, inline_label: t('.create_ordergroup'), wrapper: :horizontal_boolean
+          = f.input :attachments, as: :file, hint: t('.attachment_hint'), input_html: {multiple: true}, direct_upload: true
+          - if f.object.attachments.attached?
+            .control-group
+              %label.control-label
+                = t('ui.delete_attachment')
+              - f.object.attachments.reject(&:new_record?).each do |attachment|
+                .controls.control-text{id: "attachment_#{attachment.id}"}
+                  = f.hidden_field :attachments, value: attachment.signed_id, multiple: true
+                  = link_to url_for(attachment), target: "_blank" do
+                    = image_tag attachment.preview(resize_to_limit: [100, 100]) if attachment.previewable?
+                    = image_tag attachment.variant(resize_to_limit: [100, 100]) if attachment.variable?
+                  = link_to 'Delete', delete_attachment_finance_invoice_path(f.object, attachment_id: attachment.id), method: :delete, remote: true, class: 'btn'
+                  %label= attachment.filename
+                  %hr
     %div
       = f.button :submit
       = link_to t('ui.or_cancel'), :back

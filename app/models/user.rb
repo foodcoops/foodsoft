@@ -1,6 +1,7 @@
 require 'digest/sha1'
 # specific user rights through memberships (see Group)
 class User < ApplicationRecord
+  include Attachment
   include CustomFields
   # TODO: acts_as_paraniod ??
 
@@ -17,6 +18,7 @@ class User < ApplicationRecord
   has_many :send_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :created_orders, class_name: 'Order', foreign_key: 'created_by_user_id', dependent: :nullify
   has_many :mail_delivery_status, class_name: 'MailDeliveryStatus', foreign_key: 'email', primary_key: 'email'
+  has_many_attached :attachments
 
   attr_accessor :create_ordergroup, :password, :send_welcome_mail, :settings_attributes
 
@@ -42,6 +44,7 @@ class User < ApplicationRecord
   validates :nick, uniqueness: { case_sensitive: false, allow_nil: true } # allow_nil in length validation
   validates :iban, format: { with: /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, allow_blank: true }
   validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
+  validate :valid_attachments
 
   before_validation :set_password
   after_initialize do

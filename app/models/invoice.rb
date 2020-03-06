@@ -1,4 +1,5 @@
 class Invoice < ApplicationRecord
+  include Attachment
   include CustomFields
   include LocalizeInput
 
@@ -15,8 +16,6 @@ class Invoice < ApplicationRecord
 
   scope :unpaid, -> { where(paid_on: nil) }
   scope :without_financial_link, -> { where(financial_link: nil) }
-
-  attr_accessor :delete_attachment
 
   # Replace numeric seperator with database format
   localize_input_of :amount, :deposit, :deposit_credit
