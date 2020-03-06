@@ -29,6 +29,7 @@ class FinancialTransaction < ApplicationRecord
 
   def revert!(user)
     transaction do
+      update_attribute :financial_link, FinancialLink.new
       rt = dup
       rt.amount = -rt.amount
       rt.reverts = self
