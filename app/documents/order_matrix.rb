@@ -129,7 +129,7 @@ class OrderMatrix < OrderPdf
             if goa.nil?
               result = ''
             else
-              was_ordered = goa.quantity != 0 || goa.tolerance != 0
+              was_ordered = goa.quantity != 0 || goa.tolerance != 0 || goa.result != 0
               if was_ordered
                 result = "(#{goa.quantity}..#{goa.quantity+goa.tolerance})   #{goa.result.to_i}"
               else
