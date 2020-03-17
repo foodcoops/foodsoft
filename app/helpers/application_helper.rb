@@ -24,6 +24,10 @@ module ApplicationHelper
     content_tag :span, number_to_currency(amount), class: class_name
   end
 
+  def format_weight(weight)
+    "#{weight}#{FoodsoftConfig[:weight_unit]}"
+  end
+
   # Creates ajax-controlled-links for pagination
   def pagination_links_remote(collection, options = {})
     per_page = options[:per_page] || @per_page

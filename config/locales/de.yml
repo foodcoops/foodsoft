@@ -23,6 +23,7 @@ de:
         unit_quantity: Gebindegröße
         unit_quantity_short: GebGr
         units: Gebinde
+        weight: Gewicht
       article_category:
         description: Beschreibung
       article_price:
@@ -566,6 +567,7 @@ de:
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
       webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
+      weight_unit: Einheit für die Anzeige von Gewichten.
     keys:
       applepear_url: Hilfe URL für das Äpfel Punktesystem zum Engagement
       charge_members_manually: Mitglieder manuell abrechnen
@@ -617,6 +619,7 @@ de:
       use_iban: IBAN verwenden
       use_nick: Benutzernamen verwenden
       webstats_tracking_code: Code für Websiteanalysetool
+      weight_unit: Gewichtseinheit
     tabs:
       language: Sprache
       list: Liste
@@ -1324,6 +1327,7 @@ de:
       prices_sum: 'Summe (Netto/Brutto-Preise):'
       units_full: Volle Gebinde
       units_ordered: Bestellte Einheiten
+      weight_sum: 'Gesamtgewicht:'
     create:
       notice: Die Bestellung wurde erstellt.
     edit:
