@@ -94,4 +94,9 @@ class GroupOrder < ApplicationRecord
     ordergroup ? ordergroup.name : I18n.t('model.group_order.stock_ordergroup_name', :user => updated_by.try(:name) || '?')
   end
 
+  def total
+    return price + transport if transport
+    price
+  end
+
 end

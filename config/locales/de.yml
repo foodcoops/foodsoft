@@ -113,6 +113,13 @@ de:
         pickup: Abholung
         starts: Läuft vom
         supplier: Lieferant
+        transport: Transportkosten
+        transport_distribution: Transportkostenverteilung
+        transport_distributions:
+          articles: Kosten anhand der Anzahl an erhaltenen Artiklen verteilen
+          ordergroup: Jede Bestellgruppe zahlt gleich viel
+          price: Kosten anhand der Bestellsumme aufteilen
+          skip: Kosten nicht auf die Bestellgruppen aufteilen
         updated_by: Zuletzt geändert von
       order_article:
         article: Artikel
@@ -738,8 +745,11 @@ de:
       edit_results_by_articles:
         add_article: Artikel hinzufügen
         amount: Menge
+        edit_transport: Transportkosten bearbeiten
         gross: Brutto
         net: Netto
+      edit_transport:
+        title: Transportkosten verteilen
       group_order_articles:
         add_group: Gruppe hinzufügen
         total: Gesamtpreis

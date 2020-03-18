@@ -27,4 +27,11 @@
         el_price_sum.text(I18n.l('currency', new_price_sum));
         el_price_sum.data('value', new_price_sum);
       }
+      var el_total = $('.total', el_sum);
+      if (el_total.length) {
+        var old_total = el_total.data('value');
+        var new_total = old_total - old_price + e.group_order_article_price;
+        el_total.text(I18n.l('currency', new_total));
+        el_total.data('value', new_total);
+      }
     });

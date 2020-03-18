@@ -154,6 +154,8 @@ Foodsoft::Application.routes.draw do
           get :update_summary
           get :edit_note
           put :update_note
+          get :edit_transport
+          put :update_transport
 
           get :confirm
           post :close

@@ -60,6 +60,19 @@ class Finance::BalancingController < Finance::BaseController
     end
   end
 
+  def edit_transport
+    @order = Order.find(params[:id])
+    render :layout => false
+  end
+
+  def update_transport
+    @order = Order.find(params[:id])
+    @order.update_attributes! params[:order]
+    redirect_to new_finance_order_path(order_id: @order.id)
+  rescue => error
+    redirect_to new_finance_order_path(order_id: @order.id), alert: t('errors.general_msg', msg: error.message)
+  end
+
   # before the order will booked, a view lists all Ordergroups and its order_prices
   def confirm
     @order = Order.find(params[:id])

@@ -8,7 +8,7 @@
     - for group_order in @order.group_orders
       %tr{:class => cycle('even', 'odd')}
         %td= group_order.ordergroup_name
-        %td.numeric= number_to_currency(group_order.price)
+        %td.numeric= number_to_currency(group_order.total)
   .form-actions
     = submit_tag t('.clear'), class: 'btn btn-primary'
     = link_to t('.or_cancel'), new_finance_order_path(order_id: @order.id)

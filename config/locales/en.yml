@@ -121,6 +121,13 @@ en:
         starts: Starts at
         status: Status
         supplier: Supplier
+        transport: Transport costs
+        transport_distribution: Transport costs distribution
+        transport_distributions:
+          articles: Distribute the costs among the number of received articles
+          ordergroup: Every ordergroup pays the same amount
+          price: Distribute the costs among the order sum
+          skip: Do not distribute the costs
         updated_by: Last edited by
       order_article:
         article: Article
@@ -761,8 +768,11 @@ en:
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
+        edit_transport: Edit transport
         gross: Gross
         net: Net
+      edit_transport:
+        title: Distribute transport costs
       group_order_articles:
         add_group: Add group
         total: Total costs

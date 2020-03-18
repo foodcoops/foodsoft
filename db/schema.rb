@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(version: 20181205010000) do
     t.integer  "lock_version",       limit: 4,                         default: 0, null: false
     t.datetime "updated_on",                                                       null: false
     t.integer  "updated_by_user_id", limit: 4
+    t.decimal  "transport",                    precision: 8, scale: 2
   end
 
   add_index "group_orders", ["order_id"], name: "index_group_orders_on_order_id", using: :btree
@@ -362,6 +363,7 @@ ActiveRecord::Schema.define(version: 20181205010000) do
     t.date     "pickup"
     t.datetime "last_sent_mail"
     t.integer  "end_action",         limit: 4,                             default: 0,      null: false
+    t.decimal  "transport",                        precision: 8, scale: 2
   end
 
   add_index "orders", ["state"], name: "index_orders_on_state", using: :btree
