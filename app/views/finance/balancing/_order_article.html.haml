@@ -17,8 +17,8 @@
   :plain
     /
   = number_to_currency(order_article.total_gross_price, :unit => "")
-%td #{order_article.price.tax}%
-%td= order_article.price.deposit
+%td= number_to_percentage(order_article.price.tax) unless order_article.price.tax.zero?
+%td= number_to_currency(order_article.price.deposit, :unit => "") unless order_article.price.deposit.zero?
 %td
   = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true,
     class: 'btn btn-mini' unless order_article.order.closed?
