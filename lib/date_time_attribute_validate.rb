@@ -12,7 +12,7 @@ module DateTimeAttributeValidate
 
       attributes.each do |attribute|
 
-        validate "#{attribute}_datetime_value_valid"
+        validate -> { self.send("#{attribute}_datetime_value_valid") }
 
         # allow resetting the field to nil
         before_validation do
