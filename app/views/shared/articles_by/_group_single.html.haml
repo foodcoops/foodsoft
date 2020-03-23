@@ -6,7 +6,7 @@
   - total = 0
   - for goa in group_order.group_order_articles.ordered.includes(:order_article)
     - total += goa.total_price
-    = render 'shared/articles_by/group_single_goa', goa: goa, edit: (edit rescue nil)
+    = render 'shared/articles_by/group_single_goa', goa: goa
   %tr{class: cycle('even', 'odd', :name => 'articles')}
     %th{colspan: 7}= t 'shared.articles_by.price_sum'
     %th.price_sum{colspan: 2, data: {value: total}}= number_to_currency(total)

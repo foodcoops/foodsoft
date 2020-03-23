@@ -10,4 +10,4 @@
             = ", #{pkg_info}".html_safe unless pkg_info.blank?
             )
   - for goa in order_article.group_order_articles.ordered
-    = render 'shared/articles_by/article_single_goa', goa: goa, edit: (edit rescue nil)
+    = render 'shared/articles_by/article_single_goa', goa: goa
