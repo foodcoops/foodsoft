@@ -38,7 +38,7 @@ class MultipleOrdersByGroups < OrderPdf
                   number_to_currency(price),
                   goa.order_article.article.unit,
                   goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity,
-                  goa.result,
+                  group_order_article_result(goa),
                   number_to_currency(sub_total),
                   goa.order_article.price.unit_quantity]
         dimrows << rows.length if goa.result == 0

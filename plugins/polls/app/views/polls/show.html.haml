@@ -53,9 +53,9 @@
         %td
           - best_sum = @poll.resistance_points? ? sums.min : sums.max
           - if sum == best_sum
-            %strong= sum
+            %strong= number_with_precision sum, strip_insignificant_zeros: true
           - else
-            = sum
+            = number_with_precision sum, strip_insignificant_zeros: true
       %td
 
 - for vote in @poll.poll_votes

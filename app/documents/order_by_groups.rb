@@ -27,7 +27,7 @@ class OrderByGroups < OrderPdf
         rows <<  [goa.order_article.article.name,
                   goa.order_article.article.supplier.name,
                   group_order_article_quantity_with_tolerance(goa),
-                  goa.result,
+                  group_order_article_result(goa),
                   order_article_price_per_unit(goa.order_article),
                   number_to_currency(goa.total_price)]
       end

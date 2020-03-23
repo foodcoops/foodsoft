@@ -11,7 +11,7 @@
         %td{:colspan => "3",:style => "width:14em"}
           - unless order_article.order.closed?
             = link_to t('.add_group'), new_group_order_article_path(order_article_id: order_article.id),
-              remote: true, class: 'btn btn-mini' 
+              remote: true, class: 'btn btn-mini'
     %tbody
       - totals = {result: 0}
       - for group_order_article in order_article.group_order_articles.select { |goa| goa.result > 0 }
@@ -23,7 +23,7 @@
           %td.numeric= number_to_currency(group_order_article.order_article.price.fc_price * group_order_article.result)
           %td.actions{:style=>"width:1em"}
             - unless order_article.order.closed?
-              = link_to t('ui.delete'), group_order_article_path(group_order_article), 
+              = link_to t('ui.delete'), group_order_article_path(group_order_article),
                 method: :delete, remote: true, class: 'btn btn-mini btn-danger'
           %td
         - totals[:result] += group_order_article.result
@@ -31,6 +31,6 @@
       %tr
         %td
         %td{:style => "width:8em"}= t('.total_fc')
-        %td.center= totals[:result]
+        %td.center= number_with_precision totals[:result], strip_insignificant_zeros: true
         %td.numeric= number_to_currency(order_article.group_orders_sum[:price])
         %td{:colspan => "3"}
