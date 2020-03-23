@@ -19,7 +19,7 @@ class Admin::ConfigsController < Admin::BaseController
     ActiveRecord::Base.transaction do
       # TODO support nested configuration keys
       params[:config].each do |key, val|
-        FoodsoftConfig[key] = val
+        FoodsoftConfig[key] = convert_config_value val
       end
     end
     flash[:notice] = I18n.t('admin.configs.update.notice')
@@ -51,6 +51,14 @@ class Admin::ConfigsController < Admin::BaseController
           end
         end
       end
+    end
+  end
+
+  def convert_config_value(value)
+    if value.is_a? ActionController::Parameters
+      value.transform_values{ |v| convert_config_value(v) }.to_hash
+    else
+      value
     end
   end
 
