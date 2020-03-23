@@ -34,13 +34,13 @@ If instead you just want to run Foodsoft without changing its code, please refer
    [Docker Development Setup](./SETUP_DEVELOPMENT_DOCKER.md#prerequisites-windows-only)
    instructions.
 
-1. Install RVM and Ruby 2.4+ (if you have not done so before):
+1. Install RVM and Ruby 2.6+ (if you have not done so before):
 
         \curl -L https://get.rvm.io | bash
         source ~/.rvm/scripts/rvm
-        rvm install 2.4
+        rvm install 2.6
 
-    We try to keep Foodsoft compatible with Ruby 2.4 as well as any later versions,
+    We try to keep Foodsoft compatible with Ruby 2.6 as well as any later versions,
     so if you use this and don't want to use RVM, that might actually work.
 
 2. Install system dependencies.
