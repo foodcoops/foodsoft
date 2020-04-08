@@ -7,6 +7,14 @@ class Finance::BalancingController < Finance::BaseController
 
   def new
     @order = Order.find(params[:order_id])
+
+    # this is unpleasant - and not where this code should belong, but solves the case where
+    # an order points to an invoice that has been deleted
+    if @order.invoice.nil? && !@order.invoice_id.nil?
+      @order.invoice_id = nil
+      @order.save
+    end
+
     flash.now.alert = t('finance.balancing.new.alert') if @order.closed?
     @comments = @order.comments
 
