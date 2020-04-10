@@ -893,6 +893,7 @@ de:
         attachment_hint: Es sind nur JPEG und PDF erlaubt.
       index:
         action_new: Neue Rechnung anlegen
+        show_unpaid: Unbezahlte Rechnungen anzeigen
         title: Rechnungen
       new:
         title: Neue Rechnung anlegen
