@@ -1,4 +1,5 @@
 class Finance::InvoicesController < ApplicationController
+  before_action :authenticate_finance_or_invoices
 
   before_action :find_invoice, only: [:show, :edit, :update, :destroy]
   before_action :ensure_can_edit, only: [:edit, :update, :destroy]
