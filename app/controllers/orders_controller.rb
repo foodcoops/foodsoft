@@ -128,7 +128,7 @@ class OrdersController < ApplicationController
       @order.order_articles.each do |oa|
         # oa.update_attributes params[:order_articles][oa.id.to_s] if params[:order_articles][oa.id.to_s]
         oa.update_attributes params[:order_articles][oa.id.to_s] if params[:order_articles][oa.id.to_s]
-        oa.update_results!
+        oa.update_results! if @order.open?
       end
       if @order.finished?
         @order.state = "swapping"
@@ -136,6 +136,7 @@ class OrdersController < ApplicationController
       else
         redirect_to :action => 'show', :id => @order
       end
+      # redirect_to :action => 'show', :id => @order
     end
   end
 
