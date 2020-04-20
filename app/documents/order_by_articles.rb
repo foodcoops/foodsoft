@@ -19,8 +19,7 @@ class OrderByArticles < OrderPdf
 
   def nice_table_by_articles(name, footer, data, dimrows = [])
     down_or_page 25
-    text name, size: 12, style: :bold
-    table data, width: bounds.width / 2, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+    t = make_table data, width: bounds.width / 2, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
       # borders
       table.cells.borders = [:bottom]
       table.cells.padding_top = 2
@@ -35,6 +34,9 @@ class OrderByArticles < OrderPdf
       end
       yield table if block_given?
     end
+    start_new_page if (cursor - (t.height + 12 + 5 + 8)).negative?
+    text name, size: 12, style: :bold
+    t.draw
     down_or_page 5
     text footer, size: 8
   end
