@@ -164,6 +164,8 @@ class Article < ApplicationRecord
     if @shared_article.nil?
       unless supplier.shared_supplier.nil?
         @shared_article ||= supplier.shared_supplier.find_article_by_number(self.order_number)
+        # this is a sanity check in case the sku points to the wrong article (happened due to our db getting messed up)
+        @shared_article = nil if  @shared_article && @shared_article.name != self.name
         @shared_article ||= supplier.shared_supplier.find_article_by_name_origin_manufacture(self.name, self.origin, self.manufacturer)
         @shared_article ||= supplier.shared_supplier.find_article_by_name_manufacture(self.name, self.manufacturer)
       end
