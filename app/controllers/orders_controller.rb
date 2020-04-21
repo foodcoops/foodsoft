@@ -113,30 +113,27 @@ class OrdersController < ApplicationController
   # allow swapping articles in an order for alternatives
   def swap
     @order = Order.includes(:articles).find(params[:id])
-    if @order.closed?
-      flash[:notice] = 'The order has been settled and cannot be changed' #I18n.t('orders.swap.order_closed')
+    unless @order.open?
+      flash[:warn] = I18n.t('orders.swap.order_closed',
+                            url: (view_context.link_to 'the balancing page', new_finance_order_url(order_id: @order.id))).html_safe
       redirect_to :action => 'show', :id => @order
     end
   end
 
   def swap_update
     @order = Order.includes(:articles).find(params[:id])
-    if @order.closed?
-      flash[:notice] = 'The order has been settled and cannot be changed' #I18n.t('orders.swap.order_closed')
+    unless @order.open?
+      flash[:warn] = I18n.t('orders.swap.order_closed',
+                            url: (view_context.link_to 'the balancing page', new_finance_order_url(order_id: @order.id))).html_safe
       redirect_to :action => 'show', :id => @order
     else
       @order.order_articles.each do |oa|
         # oa.update_attributes params[:order_articles][oa.id.to_s] if params[:order_articles][oa.id.to_s]
         oa.update_attributes params[:order_articles][oa.id.to_s] if params[:order_articles][oa.id.to_s]
-        oa.update_results! if @order.open?
+        oa.update_results!
       end
-      if @order.finished?
-        @order.state = "swapping"
-        finish
-      else
-        redirect_to :action => 'show', :id => @order
-      end
-      # redirect_to :action => 'show', :id => @order
+      flash.alert = I18n.t('orders.swap.updated_order')
+      redirect_to :action => 'show', :id => @order
     end
   end
 
@@ -213,7 +210,7 @@ class OrdersController < ApplicationController
           unless oa.units_received.blank?
             cunits[0] += oa.units_received * oa.article.unit_quantity
             oacounts = oa.redistribute oa.units_received * oa.price.unit_quantity, rest_to
-            oacounts.each_with_index {|c, i| cunits[i + 1] += c; counts[i + 1] += 1 if c > 0}
+            oacounts.each_with_index { |c, i| cunits[i + 1] += c; counts[i + 1] += 1 if c > 0 }
           end
         end
         oa.save!
