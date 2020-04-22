@@ -115,7 +115,7 @@ class OrdersController < ApplicationController
     @order = Order.includes(:articles).find(params[:id])
     unless @order.open?
       flash[:warn] = I18n.t('orders.swap.order_closed',
-                            url: (view_context.link_to 'the balancing page', new_finance_order_url(order_id: @order.id))).html_safe
+                            url: (view_context.link_to 'the balancing page', new_finance_order_path(order_id: @order.id))).html_safe
       redirect_to :action => 'show', :id => @order
     end
   end
@@ -124,7 +124,7 @@ class OrdersController < ApplicationController
     @order = Order.includes(:articles).find(params[:id])
     unless @order.open?
       flash[:warn] = I18n.t('orders.swap.order_closed',
-                            url: (view_context.link_to 'the balancing page', new_finance_order_url(order_id: @order.id))).html_safe
+                            url: (view_context.link_to 'the balancing page', new_finance_order_path(order_id: @order.id))).html_safe
       redirect_to :action => 'show', :id => @order
     else
       @order.order_articles.each do |oa|
