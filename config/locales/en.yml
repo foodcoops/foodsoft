@@ -1806,9 +1806,9 @@ en:
       invalid_document: Invalid document type
       title: Split sheet for %{date}
     index:
-      article_pdf: (not used) Split Sheets for Articles PDF
+      article_pdf: Split Sheets for Articles (for Receipts) PDF
       group_pdf: Bin Sheets (for Members) PDF
-      matrix_pdf: Split Sheets (for Receipts) PDF
+      matrix_pdf: Old Split Sheets (not used) PDF
       title: Delivery/Split Days
   sessions:
     logged_in: Logged in!
@@ -1860,13 +1860,13 @@ en:
       total_sum: Total cost
       who_ordered: Who ordered?
     order_download_button:
-      article_pdf: Split Sheets for Articles PDF
+      article_pdf: Split Sheets for Articles (for Reciepts) PDF
       download_file: Download file
       fax_csv: Supplier Order CSV
       fax_pdf: Supplier Order PDF
       fax_txt: Supplier Order text
       group_pdf: Bin Sheets (for Members) PDF
-      matrix_pdf: Split Sheets (for Receipts) PDF
+      matrix_pdf: Old Split Sheets (not used) PDF
       title: Download
     task_list:
       accept_task: Accept task
