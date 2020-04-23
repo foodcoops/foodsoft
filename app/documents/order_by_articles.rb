@@ -32,7 +32,7 @@ class OrderByArticles < OrderPdf
   end
 
   def header(header, header_size)
-    header = "#{@supplier_page[page_number].name} - #{@title}"
+    header = "#{(@supplier_page[page_number] ? @supplier_page[page_number].name : '')}" + (@title ? " - #{@title}" : '')
     bounding_box [bounds.left, bounds.top + header_size], width: bounds.width / 2, height: header_size do
       text header, size: HEADER_FONT_SIZE, align: :center, overflow: :shrink_to_fit if header
     end
@@ -106,6 +106,8 @@ class OrderByArticles < OrderPdf
         # table.columns(1..-1).align = :right
         # table.column(1).font_style = :bold
       end
+      # in case table incremented pages, set the supplier again
+      @supplier_page[page_number] = order_article.order.supplier
     end
   end
 
