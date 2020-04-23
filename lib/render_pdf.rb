@@ -85,30 +85,20 @@ class RenderPDF < Prawn::Document
       }
     )
 
-    header = options[:no_header] ? false : ( options[:title] || title )
-    footer = options[:no_footer] ? false : I18n.l(Time.now, format: :long)
+    header = options[:title] || title
+    footer = I18n.l(Time.now, format: :long)
 
     header_size = 0
-    footer_size = 0
     header_size = height_of(header, size: HEADER_FONT_SIZE, font: DEFAULT_FONT) + HEADER_SPACE if header
-    footer_size = height_of(footer, size: FOOTER_FONT_SIZE, font: DEFAULT_FONT) + FOOTER_SPACE if footer
+    footer_size = height_of(footer, size: FOOTER_FONT_SIZE, font: DEFAULT_FONT) + FOOTER_SPACE
 
     start_new_page(top_margin: TOP_MARGIN + header_size, bottom_margin: BOTTOM_MARGIN + footer_size)
 
     font DEFAULT_FONT
 
     repeat :all, dynamic: true do
-      bounding_box [bounds.left, bounds.top + header_size], width: bounds.width, height: header_size do
-        text header, size: HEADER_FONT_SIZE, align: :center, overflow: :shrink_to_fit if header
-      end
-      font_size FOOTER_FONT_SIZE do
-        bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width, height: footer_size do
-          text footer, align: :left, valign: :bottom if footer
-        end
-        bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width, height: footer_size do
-          text I18n.t('lib.render_pdf.page', number: page_number, count: page_count), align: :right, valign: :bottom if footer
-        end
-      end
+      header(header, header_size)
+      footer(footer, footer_size)
     end
   end
 
@@ -150,6 +140,23 @@ class RenderPDF < Prawn::Document
   end
 
   protected
+
+  def footer(footer, footer_size)
+    font_size FOOTER_FONT_SIZE do
+      bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width, height: footer_size do
+        text footer, align: :left, valign: :bottom if footer
+      end
+      bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width, height: footer_size do
+        text I18n.t('lib.render_pdf.page', number: page_number, count: page_count), align: :right, valign: :bottom if footer
+      end
+    end
+  end
+
+  def header(header, header_size)
+    bounding_box [bounds.left, bounds.top + header_size], width: bounds.width, height: header_size do
+      text header, size: HEADER_FONT_SIZE, align: :center, overflow: :shrink_to_fit if header
+    end
+  end
 
   def fontsize(n)
     n

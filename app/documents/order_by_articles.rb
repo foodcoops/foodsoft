@@ -6,6 +6,9 @@ class OrderByArticles < OrderPdf
     options[:no_header] = true
     options[:no_footer] = true
     super(order, options)
+    @supplier_page = {}
+    @supplier_page[1] = sorted_order_articles.first.order.supplier
+    @title = options[:title]
   end
 
   def filename
@@ -15,6 +18,24 @@ class OrderByArticles < OrderPdf
   def title
     I18n.t('documents.order_by_articles.title', :name => order.name,
            :date => order.ends.strftime(I18n.t('date.formats.default')))
+  end
+
+  def footer(footer, footer_size)
+    font_size FOOTER_FONT_SIZE do
+      bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width / 2, height: footer_size do
+        text footer, align: :left, valign: :bottom if footer
+      end
+      bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width / 2, height: footer_size do
+        text I18n.t('lib.render_pdf.page', number: page_number, count: page_count), align: :right, valign: :bottom if footer
+      end
+    end
+  end
+
+  def header(header, header_size)
+    header = "#{@supplier_page[page_number].name} - #{@title}"
+    bounding_box [bounds.left, bounds.top + header_size], width: bounds.width / 2, height: header_size do
+      text header, size: HEADER_FONT_SIZE, align: :center, overflow: :shrink_to_fit if header
+    end
   end
 
   def nice_table_by_articles(name, footer, data, dimrows = [])
@@ -34,18 +55,22 @@ class OrderByArticles < OrderPdf
       end
       yield table if block_given?
     end
-    start_new_page if (cursor - (t.height + 12 + 5 + 8)).negative?
+    # start_new_page if (cursor - (t.height + 12 + 5 + 8)).negative?
+    start_new_page if (cursor - (t.height + 12)).negative?
     text name, size: 12, style: :bold
     t.draw
-    down_or_page 5
-    text footer, size: 8
+    # down_or_page 5
+    # text footer, size: 8
   end
 
   def body
-    counter = 0
-    total = order_articles.count
-    each_order_article do |order_article|
-      counter = counter + 1
+    current_supplier = sorted_order_articles.first.order.supplier
+    sorted_order_articles.each do |order_article|
+      if current_supplier != order_article.order.supplier
+        start_new_page
+      end
+      current_supplier = order_article.order.supplier
+      @supplier_page[page_number] = order_article.order.supplier
       dimrows = []
       rows = [[
                   GroupOrderArticle.human_attribute_name(:ordered),
@@ -74,12 +99,21 @@ class OrderByArticles < OrderPdf
         name = name.truncate(limit - trail) + name[-trail..-1]
       end
       name = "#{name} (x #{order_article.units})"
-      footer = "#{I18n.l(Time.now, format: :long)}                #{counter} of #{total}"
+      # footer = "#{I18n.l(Time.now, format: :long)}                #{counter} of #{total}"
+      footer = ""
       nice_table_by_articles name, footer, rows, dimrows do |table|
         # table.column(0).width = bounds.width / 2
         # table.columns(1..-1).align = :right
         # table.column(1).font_style = :bold
       end
     end
+  end
+
+  protected
+
+  def sorted_order_articles
+    @sorted_order_articles ||= order_articles
+                                   .all
+                                   .sort_by { |oa| [oa.order.id, oa.order.supplier.name, oa.article.name] }
   end
 end
