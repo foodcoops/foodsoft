@@ -112,8 +112,13 @@ class OrderMatrix < OrderPdf
         header = [""]
         for header_article in current_order_articles
           name = header_article.article.name.gsub(/[-\/]/, " ").gsub(".", ". ").gsub(/\s+/, ' ')
-          name = name.split.collect {|w| w.truncate(8)}.join(" ")
-          header << name.truncate(30)
+          name = name.split.collect {|w| w.truncate(5, omission: '.')}.join(" ")
+          limit = 25
+          trail = 6
+          if name.length > limit
+            name = name.truncate(limit - trail) + name[-trail..-1]
+          end
+          header << name
         end
 
         # Collect group results
