@@ -228,7 +228,7 @@ class Article < ApplicationRecord
   end
 
   def description
-    "#{name} #{manufacturer} #{origin} #{note} #{unit_quantity} #{unit} #{price}"
+    "#{ActionController::Base.helpers.number_to_currency(price)} #{name} #{manufacturer} #{origin} #{note} #{unit_quantity} #{unit}"
   end
 
   protected

@@ -148,10 +148,10 @@ module OrdersHelper
       if order_article.missing_units == 0
         'perfect'
       else
-        "#{order_article.missing_units} extra"
+        "#{order_article.missing_units} short of another case"
       end
     else
-      "#{order_article.missing_units} short"
+      "#{order_article.missing_units} short of a case"
     end
   end
 

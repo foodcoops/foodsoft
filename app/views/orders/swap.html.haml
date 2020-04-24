@@ -11,18 +11,31 @@
   .form-actions
     = form.submit class: 'btn'
   %table.table.table-hover
+    %th article
+    %th required
+    %th units
+    %th cases
+    %th filled
+    %th replace with
+    %th cheaper?
     - for oa in @order.order_articles.sort_by{|a|a.article.name}
       - selected= articles_for_ordering[oa.article.article_category.name].find{|a| a.id == oa.article_id} ? oa.article_id : nil
+      - cheaper= articles_for_ordering[oa.article.article_category.name].find{|a| a.name == oa.article.name && a.price < oa.article.price }
       %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + order_article_class(oa)}
         %td= oa.article.description
-        %td= "#{oa.article.unit} x #{oa.quantity} (+ #{oa.tolerance})"
+        %td= "#{oa.quantity}..#{oa.quantity + oa.tolerance}"
+        %td= oa.article.unit
+        %td= oa.units
         %td= order_article_match_text(oa)
         -#%td=
 
+        - alternatives_for_oa = articles_for_ordering[oa.article.article_category.name].select{|a| a.unit == oa.article.unit && a.name.split[0] == oa.article.name.split[0] }
         %td= select_tag "order_articles[#{oa.id}][article_id]",
-          options_from_collection_for_select(articles_for_ordering[oa.article.article_category.name],:id,:description, selected),
+          options_from_collection_for_select(alternatives_for_oa,:id,:description, selected),
           include_blank: true,
           class: 'input-xxlarge'
+        %td
+          = "#{number_to_currency(cheaper.price)} (#{number_to_currency(cheaper.price - oa.article.price)})" if cheaper
 
   .form-actions
     = form.submit class: 'btn'
