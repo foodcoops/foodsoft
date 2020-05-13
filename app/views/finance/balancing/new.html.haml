@@ -79,6 +79,14 @@
       %li= link_to t('.articles_overview'), new_finance_order_path(order_id: @order.id, view: 'articles_overview'),
         remote: true
 
+- unless @order.closed?
+  %section#add-charge
+    = simple_form_for ([:finance,@order]) do |f|
+      %label Distribute charge
+      = number_field_tag 'order[order_charge]', nil, step: '0.01'
+      = f.submit class: 'btn'
+    %span (eg, shipping cost, etc) based on % of order value.  For example, if shipping cost was $25 and a person ordered $100 of $1000, they would be charged $2.50 (10%).
+
 %section#results
   = render 'edit_results_by_articles'
 %p= link_to_top

@@ -19,34 +19,43 @@ class Finance::BalancingController < Finance::BaseController
     @comments = @order.comments
 
     @articles = @order.order_articles.ordered_or_member.includes(:article, :article_price,
-                                                       group_order_articles: {group_order: :ordergroup})
+                                                                 group_order_articles: {group_order: :ordergroup})
 
     sort_param = params['sort'] || 'name'
     @articles = case sort_param
-                  when 'name' then
-                    @articles.order('articles.name ASC')
-                  when 'name_reverse' then
-                    @articles.order('articles.name DESC')
-                  when 'order_number' then
-                    @articles.order('articles.order_number ASC')
-                  when 'order_number_reverse' then
-                    @articles.order('articles.order_number DESC')
-                  else
-                    @articles
+                when 'name' then
+                  @articles.order('articles.name ASC')
+                when 'name_reverse' then
+                  @articles.order('articles.name DESC')
+                when 'order_number' then
+                  @articles.order('articles.order_number ASC')
+                when 'order_number_reverse' then
+                  @articles.order('articles.order_number DESC')
+                else
+                  @articles
                 end
 
     render layout: false if request.xhr?
   end
-  
+
+  def update
+    @order = Order.find(params[:id])
+    # order_charge = params[:order][:order_charge].to_f
+    order_charge = params[:order].try(:[], :order_charge).to_f
+    @order.distribute_charge(order_charge) if order_charge
+    flash[:notice] = "Distributed charge of #{order_charge} to members"
+    redirect_to new_finance_order_url(order_id: @order.id)
+  end
+
   def new_on_order_article_create # See publish/subscribe design pattern in /doc.
     @order_article = OrderArticle.find(params[:order_article_id])
-    
+
     render :layout => false
   end
-  
+
   def new_on_order_article_update # See publish/subscribe design pattern in /doc.
     @order_article = OrderArticle.find(params[:order_article_id])
-    
+
     render :layout => false
   end
 

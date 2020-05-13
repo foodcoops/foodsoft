@@ -2,6 +2,7 @@
 #
 class Order < ApplicationRecord
   attr_accessor :ignore_warnings
+  attr_accessor :order_charge
 
   # Associations
   has_many :order_articles, :dependent => :destroy
@@ -16,7 +17,7 @@ class Order < ApplicationRecord
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
-  enum end_action: { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
+  enum end_action: {no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3}
 
   # Validations
   validates_presence_of :starts
@@ -53,7 +54,7 @@ class Order < ApplicationRecord
       # make sure to include those articles which are no longer available
       # but which have already been ordered in this stock order
       StockArticle.available.includes(:article_category).
-        order('article_categories.name', 'articles.name').reject{ |a|
+          order('article_categories.name', 'articles.name').reject { |a|
         a.quantity_available <= 0 && !a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else
@@ -148,12 +149,12 @@ class Order < ApplicationRecord
         includes([:article_price, :group_order_articles, :article => :article_category]).
         order('articles.name').
         group_by(&method(:category_name_and_quantity))
-          .sort { |a, b| a[0] <=> b[0] }
+                                          .sort { |a, b| a[0] <=> b[0] }
   end
 
 
   def articles_sort_by_category
-    order_articles.includes(:article).order('articles.name').sort do |a,b|
+    order_articles.includes(:article).order('articles.name').sort do |a, b|
       a.article.article_category.name <=> b.article.article_category.name
     end
   end
@@ -181,31 +182,31 @@ class Order < ApplicationRecord
       for oa in order_articles.ordered.includes(:article, :article_price)
         quantity = oa.group_orders_sum[:quantity] #oa.units * oa.price.unit_quantity
         case type
-          when :net
-            total += quantity * oa.price.price
-          when :gross
-            total += quantity * oa.price.gross_price
-          when :fc
-            total += quantity * oa.price.fc_price
-          when :gross_price_supplier
-            total += oa.units * oa.price.supplier_price
-          when :rounding_error
-            total += oa.calculate_rounding_error(oa.total_supplier_charge, oa.group_orders_sum[:quantity]) * oa.group_orders_sum[:quantity]
-            # total += quantity * oa.price_rounding_error
-          when :tax
-            total += quantity * oa.price.tax_cost
-          when :deposit
-            total += quantity * oa.price.deposit
+        when :net
+          total += quantity * oa.price.price
+        when :gross
+          total += quantity * oa.price.gross_price
+        when :fc
+          total += quantity * oa.price.fc_price
+        when :gross_price_supplier
+          total += oa.units * oa.price.supplier_price
+        when :rounding_error
+          total += oa.calculate_rounding_error(oa.total_supplier_charge, oa.group_orders_sum[:quantity]) * oa.group_orders_sum[:quantity]
+          # total += quantity * oa.price_rounding_error
+        when :tax
+          total += quantity * oa.price.tax_cost
+        when :deposit
+          total += quantity * oa.price.deposit
         end
       end
     elsif type == :groups || type == :groups_without_markup
       for go in group_orders.includes(group_order_articles: {order_article: [:article, :article_price]})
         for goa in go.group_order_articles
           case type
-            when :groups
-              total += goa.result * goa.order_article.price.fc_price
-            when :groups_without_markup
-              total += goa.result * goa.order_article.price.gross_price
+          when :groups
+            total += goa.result * goa.order_article.price.fc_price
+          when :groups_without_markup
+            total += goa.result * goa.order_article.price.gross_price
           end
         end
       end
@@ -255,21 +256,21 @@ class Order < ApplicationRecord
     transaction_note = I18n.t('orders.model.notice_close', :name => name,
                               :ends => ends.strftime(I18n.t('date.formats.default')))
 
-    gos = group_orders.includes(:ordergroup)              # Fetch group_orders
-    gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
+    gos = group_orders.includes(:ordergroup) # Fetch group_orders
+    gos.each { |group_order| group_order.update_price! } # Update prices of group_orders
 
-    transaction do                                        # Start updating account balances
+    transaction do # Start updating account balances
       for group_order in gos
         if group_order.ordergroup
-          price = group_order.price * -1                  # decrease! account balance
+          price = group_order.price * -1 # decrease! account balance
           group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type)
         end
       end
 
-      if stockit?                                         # Decreases the quantity of stock_articles
+      if stockit? # Decreases the quantity of stock_articles
         for oa in order_articles.includes(:article)
-          oa.update_results!                              # Update units_to_order of order_article
-          stock_changes.create! :stock_article => oa.article, :quantity => oa.units_to_order*-1
+          oa.update_results! # Update units_to_order of order_article
+          stock_changes.create! :stock_article => oa.article, :quantity => oa.units_to_order * -1
         end
       end
 
@@ -284,13 +285,13 @@ class Order < ApplicationRecord
     transaction_note = I18n.t('orders.model.notice_reopen', :name => name,
                               :ends => ends.strftime(I18n.t('date.formats.default')))
 
-    gos = group_orders.includes(:ordergroup)              # Fetch group_orders
+    gos = group_orders.includes(:ordergroup) # Fetch group_orders
     # gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
 
-    transaction do                                        # Start updating account balances
+    transaction do # Start updating account balances
       for group_order in gos
         if group_order.ordergroup
-          price = group_order.price                       # increase account balance
+          price = group_order.price # increase account balance
           group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type)
         end
       end
@@ -340,13 +341,43 @@ class Order < ApplicationRecord
     @split_effort ||= order_articles.map { |oa| oa.group_order_articles.where.not(quantity: 0).count }.sum
   end
 
+  def distribute_charge(distribute_amount)
+    # is there a shipping 'article'
+    surcharge_name = '_ Extra Charges'
+    surcharge_article = supplier.articles
+                            .find_or_create_by!(
+                                name: surcharge_name,
+                                article_category_id: 1,
+                                supplier_id: supplier_id,
+                                price: 1.0,
+                                unit: 'dollars',
+                                availability: true,
+                                unit_quantity: 1,
+                                tax: 0.0
+                            )
+
+    oa_surcharge = order_articles.find_or_create_by!(article_id: surcharge_article.id)
+    # oa_surcharge = OrderArticle.joins(:article)
+    #                    .where({order_id: id, article: {name: surcharge_name}}).first
+
+    oa_surcharge.group_order_articles.delete_all
+    total_amount = sum(:groups)
+    group_orders = GroupOrder.where(order_id: id).each do |group_order|
+      share_of_cost = distribute_amount * (group_order.price / total_amount)
+      goa = group_order.group_order_articles.find_or_create_by!(order_article_id: oa_surcharge.id)
+      goa.result = share_of_cost
+      goa.save!
+    end
+    oa_surcharge.group_order_articles
+  end
+
   protected
 
   def starts_before_ends
     delta = Rails.env.test? ? 1 : 0 # since Rails 4.2 tests appear to have time differences, with this validation failing
-    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if ends && starts && ends <= (starts-delta)
-    errors.add(:ends, I18n.t('orders.model.error_boxfill_before_ends')) if ends && boxfill && ends <= (boxfill-delta)
-    errors.add(:boxfill, I18n.t('orders.model.error_starts_before_boxfill')) if boxfill && starts && boxfill <= (starts-delta)
+    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if ends && starts && ends <= (starts - delta)
+    errors.add(:ends, I18n.t('orders.model.error_boxfill_before_ends')) if ends && boxfill && ends <= (boxfill - delta)
+    errors.add(:boxfill, I18n.t('orders.model.error_starts_before_boxfill')) if boxfill && starts && boxfill <= (starts - delta)
   end
 
   def include_articles
