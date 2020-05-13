@@ -26,7 +26,7 @@ module GroupOrdersHelper
   # Return css class names for order result table
 
   def order_article_class_name(quantity, tolerance, result)
-    if (quantity + tolerance > 0)
+    if quantity + tolerance > 0 || result != 0
       result > 0 ? 'success' : 'failed'
     else
       'ignored'
@@ -45,9 +45,9 @@ module GroupOrdersHelper
   end
 
   def get_missing_units_css_class(quantity_missing)
-    if ( quantity_missing == 1 )
+    if  quantity_missing == 1 
       return 'missing-few';
-    elsif ( quantity_missing == 0 )
+    elsif  quantity_missing == 0 
       return ''
     else
       return 'missing-many'
