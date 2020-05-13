@@ -16,7 +16,7 @@
               remote: true, class: 'btn btn-mini' 
     %tbody
       - totals = {result: 0}
-      - group_order_articles = order_article.group_order_articles.select { |goa| goa.result > 0 }
+      - group_order_articles = order_article.group_order_articles.select { |goa| goa.result != 0 }
       - for group_order_article in group_order_articles.sort_by { | goa | goa.group_order.ordergroup_name  }
         %tr[group_order_article]
           %td
@@ -46,7 +46,7 @@
           = " = #{totals[:result]}" unless order_article.article_price.unit_quantity = 1
         %td.center= group_order_article_total_amount(totals[:result], order_article)
         %td.numeric= number_to_currency(member_total[:net_price]-rounding_error)
-        - if rounding_error >= 0.0001
+        - if rounding_error >= 0.0001 || rounding_error <= -0.0001
           %td{:colspan => "3"}
             %abbr{title: "plus this amount from rounding-up to cent"}
               = "(+ #{number_to_currency(rounding_error)})"

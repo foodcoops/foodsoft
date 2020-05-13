@@ -42,7 +42,8 @@ class Finance::BalancingController < Finance::BaseController
     @order = Order.find(params[:id])
     # order_charge = params[:order][:order_charge].to_f
     order_charge = params[:order].try(:[], :order_charge).to_f
-    @order.distribute_charge(order_charge) if order_charge
+    order_charge_name = params[:order].try(:[], :order_charge_name)
+    @order.distribute_charge(order_charge_name, order_charge) if order_charge
     flash[:notice] = "Distributed charge of #{order_charge} to members"
     redirect_to new_finance_order_url(order_id: @order.id)
   end

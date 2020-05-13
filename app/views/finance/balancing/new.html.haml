@@ -82,10 +82,12 @@
 - unless @order.closed?
   %section#add-charge
     = simple_form_for ([:finance,@order]) do |f|
-      %label Distribute charge
-      = number_field_tag 'order[order_charge]', nil, step: '0.01'
-      = f.submit class: 'btn'
-    %span (eg, shipping cost, etc) based on % of order value.  For example, if shipping cost was $25 and a person ordered $100 of $1000, they would be charged $2.50 (10%).
+      %label Apply additional charges
+      = text_field_tag 'order[order_charge_name]', nil, placeholder: 'descriptive name', minlength: 4
+      = number_field_tag 'order[order_charge]', nil, step: '0.01', placeholder: 'total amount to distribute'
+      = f.submit class: 'btn', title: 'Apply'
+    .alert.info
+      %span Pro-rated based on order value.  For example, if a $25 shipping cost is distributed on a $1000 order, a person who ordered $100 (10% of the value) would be charged $2.50 (10% of shipping).  You could alos
 
 %section#results
   = render 'edit_results_by_articles'

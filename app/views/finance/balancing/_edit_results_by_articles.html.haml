@@ -39,7 +39,7 @@
         = link_to t('.add_article'), new_order_order_article_path(@order), remote: true,
           class: 'btn btn-small' unless @order.closed?
   %tbody.list#result_table
-    - ordered_articles,not_ordered_articles = @articles.partition { |oa| oa.units > 0 || oa.group_orders_sum[:quantity] > 0 }
+    - ordered_articles,not_ordered_articles = @articles.partition { |oa| oa.units > 0 || oa.group_orders_sum[:quantity] != 0 }
     - for order_article in ordered_articles
       = render :partial => "order_article_result", :locals => {:order_article => order_article}
 

@@ -341,32 +341,33 @@ class Order < ApplicationRecord
     @split_effort ||= order_articles.map { |oa| oa.group_order_articles.where.not(quantity: 0).count }.sum
   end
 
-  def distribute_charge(distribute_amount)
-    # is there a shipping 'article'
-    surcharge_name = '_ Extra Charges'
+  def round_up_in_cent(amount)
+    (amount * 100).ceil / 100.0
+  end
+
+  def distribute_charge(surcharge_name, distribute_amount)
+    # is there an existing 'article'
+    surcharge_name = "Extra Charges"  if surcharge_name.blank? #default name
     surcharge_article = supplier.articles
-                            .find_or_create_by!(
-                                name: surcharge_name,
-                                article_category_id: 1,
-                                supplier_id: supplier_id,
-                                price: 1.0,
-                                unit: 'dollars',
-                                availability: true,
-                                unit_quantity: 1,
-                                tax: 0.0
-                            )
-
+                                .find_or_create_by!(
+                                    name: surcharge_name,
+                                    article_category_id: 1,
+                                    supplier_id: supplier_id,
+                                    price: 1.0,
+                                    unit: 'dollars',
+                                    availability: true,
+                                    unit_quantity: 1,
+                                    tax: 0.0
+                                )
+    total_amount = GroupOrder.where(order_id: id).sum(:price)
     oa_surcharge = order_articles.find_or_create_by!(article_id: surcharge_article.id)
-    # oa_surcharge = OrderArticle.joins(:article)
-    #                    .where({order_id: id, article: {name: surcharge_name}}).first
-
+    oa_surcharge.update_attributes!({ units_billed: distribute_amount, units_received: distribute_amount})
     oa_surcharge.group_order_articles.delete_all
-    total_amount = sum(:groups)
-    group_orders = GroupOrder.where(order_id: id).each do |group_order|
-      share_of_cost = distribute_amount * (group_order.price / total_amount)
+    GroupOrder.where(order_id: id).each do |group_order|
+      share_of_cost = round_up_in_cent (distribute_amount * (group_order.price / total_amount))
       goa = group_order.group_order_articles.find_or_create_by!(order_article_id: oa_surcharge.id)
-      goa.result = share_of_cost
-      goa.save!
+      goa.update_attribute(:result, share_of_cost)
+      group_order.update_price!
     end
     oa_surcharge.group_order_articles
   end

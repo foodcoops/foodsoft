@@ -13,9 +13,9 @@ class OrderArticle < ApplicationRecord
   validate :article_and_price_exist
   validates_uniqueness_of :article_id, scope: :order_id
 
-  _ordered_sql = "order_articles.units_to_order > 0 OR order_articles.units_billed > 0 OR order_articles.units_received > 0"
+  _ordered_sql = "order_articles.units_to_order > 0 OR order_articles.units_billed > 0 OR order_articles.units_received != 0"
   scope :ordered, -> {where(_ordered_sql)}
-  scope :ordered_or_member, -> {includes(:group_order_articles).where("#{_ordered_sql} OR order_articles.quantity > 0 OR group_order_articles.result > 0")}
+  scope :ordered_or_member, -> {includes(:group_order_articles).where("#{_ordered_sql} OR order_articles.quantity != 0 OR group_order_articles.result != 0")}
   default_scope {includes(:article).order('articles.name')}
 
   before_create :init_from_balancing
