@@ -32,6 +32,10 @@
           %tr
             %td= t("simple_form.labels.settings.profile.#{key}")
             %td= (setting != true and setting != false) ? setting : (setting === true ? t('simple_form.yes') : t('simple_form.no'))
+        - @user.settings.notify.each do |key, setting|
+          %tr
+            %td= t("simple_form.labels.settings.profile.#{key}")
+            %td= (setting != true and setting != false) ? setting : (setting === true ? t('simple_form.yes') : t('simple_form.no'))
   .span3
     .well
       %h4= t '.groupabos'

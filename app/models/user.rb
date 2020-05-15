@@ -47,9 +47,18 @@ class User < ApplicationRecord
 
   before_validation :set_password
   after_initialize do
-    settings.defaults['profile']  = { 'language' => I18n.default_locale } unless settings.profile
+    # does not seem like a nice place to set defaults
+    settings.defaults['profile']  = {
+        language: I18n.default_locale,
+        phone_is_public: true,
+        email_is_public: true
+    } unless settings.profile
     settings.defaults['messages'] = { 'send_as_email' => true }           unless settings.messages
-    settings.defaults['notify']   = { 'upcoming_tasks' => true  }         unless settings.notify
+    settings.defaults['notify']   = {
+        upcoming_tasks: true,
+        order_finished: true,
+        negative_balance: true
+    } unless settings.notify
   end
 
   after_save do
