@@ -90,7 +90,7 @@ class GroupOrder < ApplicationRecord
       save!
       save_group_order_articles
       update_price!
-      UserNotifier.enqueue_in(30.minutes, 'user_edited_order', order_id, ordergroup_id)
+      UserNotifier.enqueue_in(30.seconds, 'user_edited_order', order_id, ordergroup_id)
     end
   end
 
