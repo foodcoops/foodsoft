@@ -34,13 +34,13 @@ class UserNotifier
   # when the order has been updated
   def self.updated_order(args)
     # just delegate, one email template for all
-    UserNotifier.email_updated_orders(args.push('The order has been updated, please review any changes.'))
+    UserNotifier.email_updated_orders(args.push('The ordering person has updated the order, please review any changes.'))
   end
 
   # when the order has been edited by the user
   def self.user_edited_order(args)
     # just delegate, one email template for all
-    UserNotifier.email_updated_order(args.push('You order has been recorded.  Here is a copy for your records.'))
+    UserNotifier.email_updated_order(args.push('Your order has been saved.  Here is a copy for your records.'))
   end
 
   # any time the order changes we send an email to members
