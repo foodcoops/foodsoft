@@ -7,7 +7,7 @@ class Mailer < ActionMailer::Base
   helper :application
   include ApplicationHelper
 
-  layout 'email'  # Use views/layouts/email.txt.erb
+  layout 'email' # Use views/layouts/email.txt.erb
 
   default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
           'X-Auto-Response-Suppress' => 'All'
@@ -41,11 +41,31 @@ class Mailer < ActionMailer::Base
   end
 
   # Sends order result to a specific Ordergroup
+  def compute_changed_since_last_email(group_order, user)
+    changed_goa_ids = [].to_set
+    emailkey = "email-update-#{group_order.id}-#{user.id}"
+    # puts "emailkey #{emailkey}"
+    group_order_current_json = group_order.group_order_articles.to_json(:include => {:order_article => {:include => :article_price}})
+    group_order_previous_json = FoodsoftCache.get(emailkey)
+    if (!group_order_previous_json.blank?)
+      # puts "previous: #{group_order_previous_json}"
+      group_order_previous = parse_goa_json_to_hash(group_order_previous_json)
+      group_order_current = parse_goa_json_to_hash(group_order_current_json)
+      group_order_current.each do |goa_id, goa|
+        changed_goa_ids << goa_id if goa != group_order_previous[goa_id]
+      end
+    end
+    FoodsoftCache.set(emailkey, group_order_current_json)
+    changed_goa_ids
+  end
+
   def order_result(user, group_order, message = '')
-    @order        = group_order.order
-    @group_order  = group_order
+    @order = group_order.order
+    @group_order = group_order
     @message = message
     @user = user
+    goa_ids = compute_changed_since_last_email(group_order, user)
+    @highlight_goa_ids = goa_ids.to_set
     mail to: user,
          is_reply: true,
          subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
@@ -54,8 +74,8 @@ class Mailer < ActionMailer::Base
 
   # Sends order result to the supplier
   def order_result_supplier(user, order, options = {})
-    @user     = user
-    @order    = order
+    @user = user
+    @order = order
     @supplier = order.supplier
 
     add_order_result_attachments order, options
@@ -71,9 +91,9 @@ class Mailer < ActionMailer::Base
   end
 
   # Notify user if account balance is less than zero
-  def negative_balance(user,transaction)
-    @group        = user.ordergroup
-    @transaction  = transaction
+  def negative_balance(user, transaction)
+    @group = user.ordergroup
+    @transaction = transaction
 
     mail to: user,
          subject: I18n.t('mailer.negative_balance.subject')
@@ -147,6 +167,12 @@ class Mailer < ActionMailer::Base
   def add_order_result_attachments(order, options = {})
     attachments['order.pdf'] = OrderFax.new(order, options).to_pdf
     # attachments['order.csv'] = OrderCsv.new(order, options).to_csv
+  end
+
+  protected
+
+  def parse_goa_json_to_hash(group_order_previous_json)
+    JSON.parse(group_order_previous_json).collect { |goa| [goa['group_order_article']['id'], goa['group_order_article']] }.to_h
   end
 
   private

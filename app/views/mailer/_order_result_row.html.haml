@@ -1,5 +1,6 @@
-%tr
+%tr{ style: "#{ highlight ? 'color: red;' : ''}"}
   - article=group_order_article.order_article.article
+  - price= group_order_article.order_article.article_price.price
   - min = group_order_article.quantity
   - max = min+group_order_article.tolerance
   - if max > min
@@ -8,6 +9,6 @@
     %td= min
   %td
     %b=  "#{group_order_article.result}"
-  %td{ style: 'text-align:right' }=  "#{article.unit} @ #{number_to_currency(article.fc_price)}"
+  %td{ style: 'text-align:right' }=  "#{article.unit} @ #{number_to_currency(price)}"
   %td=  article.name
-  %td{ style: 'text-align:right' }=  number_to_currency(group_order_article.result * article.fc_price)
+  %td{ style: 'text-align:right' }=  number_to_currency(group_order_article.result * price)

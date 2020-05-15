@@ -1,5 +1,5 @@
 %div= raw t ('.html0'), ordergroup: @group_order.ordergroup_name, order: @order.name, when: I18n.l(@order.ends), user: show_user(@order.updated_by), message: @message
 
-= render :partial => 'order_result_table', :locals => { goas: @group_order.group_order_articles.ordered.includes(:order_article) }
+= render :partial => 'order_result_table', :locals => { goas: @group_order.group_order_articles.ordered.includes(:order_article), highlight_goa_ids: @highlight_goa_ids }
 
 -#, order_url: group_order_url(@group_order), foodcoop: FoodsoftConfig[:name]

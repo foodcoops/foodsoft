@@ -19,6 +19,13 @@ class UserNotifier
     self.send method_name, args
   end
 
+  def self.queue_order_updated_email(delay:, group_order_id:, message:)
+    UserNotifier.enqueue_in(delay,
+                            'email_updated_group_order',
+                            group_order_id, message, )
+  end
+
+
   # when the order has been 'closed'
   def self.finished_order(args)
     # just delegate, one email template for all
@@ -35,12 +42,6 @@ class UserNotifier
   def self.updated_order(args)
     # just delegate, one email template for all
     UserNotifier.email_updated_orders(args.push('The ordering person has updated the order, please review any changes.'))
-  end
-
-  # when the order has been edited by the user
-  def self.user_edited_order(args)
-    # just delegate, one email template for all
-    UserNotifier.email_updated_order(args.push('Your order has been saved.  Here is a copy for your records.'))
   end
 
   # any time the order changes we send an email to members
@@ -60,15 +61,22 @@ class UserNotifier
     end
   end
 
-  # any time the order changes we send an email to members
-  def self.email_updated_order(args)
-    puts "email_updated_order #{args.as_json}"
-    order_id, ordergroup_id, message = args.first(3)
-    group_order = Order.find(order_id).group_orders.where(ordergroup_id: ordergroup_id).first
-    unless group_order.ordergroup.nil?
+  # # any time the order changes we send an email to members
+  # def self.email_updated_order(args)
+  #   puts "email_updated_order #{args.as_json}"
+  #   order_id, ordergroup_id, message = args.first(3)
+  #   group_order = Order.find(order_id).group_orders.where(ordergroup_id: ordergroup_id).first
+  #   email_updated_group_order(group_order.id, message)
+  # end
+
+  def self.email_updated_group_order(args)
+    group_order_id, message = args
+    puts "email_updated_group_order #{[group_order_id, message]}.as_json}"
+    group_order = GroupOrder.find(group_order_id)
+    if group_order.ordergroup
       group_order.ordergroup.users.each do |user|
         # if user.settings.notify['order_finished'] || true
-        puts "email_updated_order emailing user #{user.email}"
+        puts "email_updated_group_order emailing user #{user.email}"
         Mailer.deliver_now_with_user_locale user do
           Mailer.order_result(user, group_order, message)
         end
@@ -76,6 +84,7 @@ class UserNotifier
       end
     end
   end
+
 
   # If this order group's account balance is made negative by the given/last transaction,
   # a message is sent to all users who have enabled notification.
@@ -91,5 +100,8 @@ class UserNotifier
       end
     end
   end
+
+  protected
+
 
 end

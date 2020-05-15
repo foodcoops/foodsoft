@@ -167,7 +167,11 @@ class OrderArticle < ApplicationRecord
     end
 
     # Recompute
-    group_order_articles.each {|goa| goa.save_results! qty_for_members}
+    notify_changed_set = [].to_set
+    group_order_articles.each do |goa|
+      changed |= goa.save_results! qty_for_members
+      notify_changed_set.add(goa.group_order_id) if changed
+    end
     qty_left -= qty_for_members
 
     # if there's anything left, move to stock if wanted
@@ -188,7 +192,13 @@ class OrderArticle < ApplicationRecord
       order.ordergroups.each(&:update_stats!)
     end
 
-    # TODO notifications
+    # notifications
+    notify_changed_set.each do |group_order_id|
+      UserNotifier.queue_order_updated_email(
+          delay: 30.seconds,
+          group_order_id: group_order_id,
+          message: 'The amounts you will receive have been updated')
+    end
 
     counts
   end

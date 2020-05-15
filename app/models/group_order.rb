@@ -90,7 +90,9 @@ class GroupOrder < ApplicationRecord
       save!
       save_group_order_articles
       update_price!
-      UserNotifier.enqueue_in(30.seconds, 'user_edited_order', order_id, ordergroup_id)
+      UserNotifier.queue_order_updated_email(
+          delay: 30.second, group_order_id: id,
+          message: 'Your order has been saved.  Here is a copy for your records.')
     end
   end
 

@@ -13,7 +13,9 @@
     %tr
       %td{ colspan: 5, style: 'border-bottom: thin solid;' }
     - for group_order_article in goa_filled
-      = render :partial => 'order_result_row', :locals => { group_order_article: group_order_article }
+      - locals = {  group_order_article: group_order_article, highlight: highlight_goa_ids.include?(group_order_article.id)}
+      = render :partial => 'order_result_row', :locals => locals
+
   - if goa_not_filled.count > 0
     %tr
       - if @order.open?
@@ -21,7 +23,8 @@
       - else
         %td{ colspan: '5', style: 'border-top: thin solid;' } These did not get ordered
     - for group_order_article in goa_not_filled
-      = render :partial => 'order_result_row', :locals => { group_order_article: group_order_article }
+      - locals = {  group_order_article: group_order_article, highlight: highlight_goa_ids.include?(group_order_article.id)}
+      = render :partial => 'order_result_row', :locals => locals
   %tr
     %td{ colspan: '5', style: 'border-top: thin solid;' }
   %tr{ style: 'text-align:right; border-top: thin solid;'}
