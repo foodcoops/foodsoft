@@ -41,7 +41,7 @@ class Mailer < ActionMailer::Base
   end
 
   # Sends order result to a specific Ordergroup
-  def order_result(user, group_order, message: nil)
+  def order_result(user, group_order, message = '')
     @order        = group_order.order
     @group_order  = group_order
     @message = message

@@ -245,13 +245,13 @@ class Order < ApplicationRecord
         ordergroups.each(&:update_stats!)
 
         # Notifications
-        UserNotifier.enqueue_in(30.minutes, FoodsoftConfig.scope, 'finished_order', self.id)
+        # UserNotifier.enqueue_in(3.seconds, 'finished_order', self.id)
       end
     end
   end
 
   def notify_modified
-    UserNotifier.enqueue_in(30.minutes, FoodsoftConfig.scope, 'updated_order', self.id)
+    UserNotifier.enqueue_in(30.minutes, 'updated_order', self.id)
   end
 
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
@@ -281,7 +281,7 @@ class Order < ApplicationRecord
       self.update_attributes! :state => 'closed', :updated_by => user, :foodcoop_result => profit
     end
 
-    UserNotifier.enqueue_in(10.minutes, FoodsoftConfig.scope, 'closed_order', self.id)
+    UserNotifier.enqueue_in(10.seconds, 'closed_order', self.id)
   end
 
   # puts order.status back to 'finished' and reverts charges (adds a credit) to Ordergroup.account_balances
@@ -317,6 +317,7 @@ class Order < ApplicationRecord
     Mailer.deliver_now_with_default_locale do
       Mailer.order_result_supplier(user, self)
     end
+    UserNotifier.enqueue_in(3.seconds, 'finished_order', self.id)
     update!(last_sent_mail: Time.now)
   end
 
