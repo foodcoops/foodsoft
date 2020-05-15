@@ -1,6 +1,6 @@
 %tr{ style: "#{ highlight ? 'color: red;' : ''}"}
   - article=group_order_article.order_article.article
-  - price= group_order_article.order_article.article_price.price
+  - price= group_order_article.order_article.price.price
   - min = group_order_article.quantity
   - max = min+group_order_article.tolerance
   - if max > min
