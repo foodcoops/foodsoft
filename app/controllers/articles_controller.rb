@@ -200,6 +200,7 @@ class ArticlesController < ApplicationController
     end
 
     if !has_error
+      @supplier.notify_open_orders_updated
       redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_sync.notice')
     else
       @updated_article_pairs = @updated_articles.map do |article|

@@ -245,9 +245,13 @@ class Order < ApplicationRecord
         ordergroups.each(&:update_stats!)
 
         # Notifications
-        Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'finished_order', self.id)
+        UserNotifier.enqueue_in(30.minutes, FoodsoftConfig.scope, 'finished_order', self.id)
       end
     end
+  end
+
+  def notify_modified
+    UserNotifier.enqueue_in(30.minutes, FoodsoftConfig.scope, 'updated_order', self.id)
   end
 
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
@@ -276,6 +280,8 @@ class Order < ApplicationRecord
 
       self.update_attributes! :state => 'closed', :updated_by => user, :foodcoop_result => profit
     end
+
+    UserNotifier.enqueue_in(10.minutes, FoodsoftConfig.scope, 'closed_order', self.id)
   end
 
   # puts order.status back to 'finished' and reverts charges (adds a credit) to Ordergroup.account_balances
@@ -347,21 +353,21 @@ class Order < ApplicationRecord
 
   def distribute_charge(surcharge_name, distribute_amount)
     # is there an existing 'article'
-    surcharge_name = "Extra Charges"  if surcharge_name.blank? #default name
+    surcharge_name = "Extra Charges" if surcharge_name.blank? #default name
     surcharge_article = supplier.articles
-                                .find_or_create_by!(
-                                    name: surcharge_name,
-                                    article_category_id: 1,
-                                    supplier_id: supplier_id,
-                                    price: 1.0,
-                                    unit: 'dollars',
-                                    availability: true,
-                                    unit_quantity: 1,
-                                    tax: 0.0
-                                )
+                            .find_or_create_by!(
+                                name: surcharge_name,
+                                article_category_id: 1,
+                                supplier_id: supplier_id,
+                                price: 1.0,
+                                unit: 'dollars',
+                                availability: true,
+                                unit_quantity: 1,
+                                tax: 0.0
+                            )
     total_amount = GroupOrder.where(order_id: id).sum(:price)
     oa_surcharge = order_articles.find_or_create_by!(article_id: surcharge_article.id)
-    oa_surcharge.update_attributes!({ units_billed: distribute_amount, units_received: distribute_amount})
+    oa_surcharge.update_attributes!({units_billed: distribute_amount, units_received: distribute_amount})
     oa_surcharge.group_order_articles.delete_all
     GroupOrder.where(order_id: id).each do |group_order|
       share_of_cost = round_up_in_cent (distribute_amount * (group_order.price / total_amount))

@@ -1,4 +1,5 @@
 require "resque/tasks"
+require 'resque/scheduler/tasks'
 
 def run_worker(queue, count = 1)
   puts "Starting #{count} worker(s) with QUEUE: #{queue}"
@@ -11,6 +12,10 @@ def run_worker(queue, count = 1)
     pid = spawn(env_vars, "bundle exec rake resque:work", ops)
     Process.detach(pid)
   }
+  # this is for delayed jobs
+  puts "Starting resque:scheduler"
+  pid = spawn(env_vars, "bundle exec rake resque:scheduler", ops)
+  Process.detach(pid)
 end
 
 namespace :resque do

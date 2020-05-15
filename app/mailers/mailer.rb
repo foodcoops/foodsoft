@@ -40,13 +40,15 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.upcoming_tasks.subject')
   end
 
-  # Sends order result for specific Ordergroup
-  def order_result(user, group_order)
+  # Sends order result to a specific Ordergroup
+  def order_result(user, group_order, message: nil)
     @order        = group_order.order
     @group_order  = group_order
-
+    @message = message
+    @user = user
     mail to: user,
-         subject: I18n.t('mailer.order_result.subject', name: group_order.order.name),
+         is_reply: true,
+         subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
          reply_to: FoodsoftConfig[:email_from]
   end
 
@@ -97,6 +99,7 @@ class Mailer < ActionMailer::Base
   def mail(args)
     args[:message_id] ||= "<#{Mail.random_tag}@#{default_url_options[:host]}>"
     args[:subject] = "[#{FoodsoftConfig[:name]}] #{args[:subject]}"
+    args[:subject] = "Re: #{args[:subject]}" if args[:is_reply]
 
     if args[:from].is_a? User
       args[:reply_to] ||= args[:from]

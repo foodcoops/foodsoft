@@ -138,6 +138,10 @@ class Supplier < ApplicationRecord
     end
   end
 
+  def notify_open_orders_updated
+    orders.where(state: 'open').each(&:notify_modified)
+  end
+
   protected
 
   # make sure the shared_sync_method is allowed for the shared supplier

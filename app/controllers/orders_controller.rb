@@ -132,7 +132,8 @@ class OrdersController < ApplicationController
         oa.update_attributes params[:order_articles][oa.id.to_s] if params[:order_articles][oa.id.to_s]
         oa.update_results!
       end
-      flash.alert = I18n.t('orders.swap.updated_order')
+      @order.notify_modified
+      flash[:notice] = I18n.t('orders.swap.updated_order')
       redirect_to :action => 'show', :id => @order
     end
   end

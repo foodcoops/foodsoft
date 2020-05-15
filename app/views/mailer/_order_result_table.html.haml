@@ -1,0 +1,42 @@
+
+- goa_filled = goas.select{|goa| goa.result>0}
+- goa_not_filled = goas.select{|goa| goa.result==0}
+
+%table{:width => "100%", style: 'font-size: small; border-spacing: 8px 2px;'}
+  %tr{ style: 'font-size: small; text-align:left;'}
+    %th Ordered
+    %th Receive
+    %th Price/Unit
+    %th Article
+    %th Total
+  - if goa_filled.count > 0
+    %tr
+      %td{ colspan: 5, style: 'border-bottom: thin solid;' }
+    - for group_order_article in goa_filled
+      = render :partial => 'order_result_row', :locals => { group_order_article: group_order_article }
+  - if goa_not_filled.count > 0
+    %tr
+      - if @order.open?
+        %td{ colspan: '5', style: 'border-top: thin solid;' } These require cases to be filled
+      - else
+        %td{ colspan: '5', style: 'border-top: thin solid;' } These did not get ordered
+    - for group_order_article in goa_not_filled
+      = render :partial => 'order_result_row', :locals => { group_order_article: group_order_article }
+  %tr
+    %td{ colspan: '5', style: 'border-top: thin solid;' }
+  %tr{ style: 'text-align:right; border-top: thin solid;'}
+    - if @order.closed?  #means it is settled
+      %td{ colspan: '4'} Final Total
+    - else
+      %td{ colspan: '4'} Current Total (may be adjusted depending on actual received and spoilage)
+    - total = @group_order.group_order_articles.map{|goa| goa.order_article.price.fc_price * goa.result}.sum
+    %td= number_to_currency(total)
+  - if @order.open?
+    %tr{ style: 'text-align:right;'}
+      %td{ colspan: '4', style: ''} Minimum Total (if you got everything without any extra)
+      - total_min = @group_order.group_order_articles.map{|goa| goa.order_article.price.fc_price * goa.quantity}.sum
+      %td{style: 'border-top: thin solid;'}= number_to_currency(total_min)
+    %tr{ style: 'text-align:right;'}
+      %td{ colspan: '4', style: ''} Max Total (if you got everything and used all tolerance)
+      - total_max = total_min + @group_order.group_order_articles.map{|goa| goa.order_article.price.fc_price * goa.tolerance}.sum
+      %td{style: 'border-top: thin solid;'}= number_to_currency(total_max)

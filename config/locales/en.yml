@@ -1388,17 +1388,28 @@ en:
 
         Your Tasks: %{user_tasks_url}
     order_result:
-      subject: 'Order closed: %{name}'
+      subject: 'Order %{name} %{pickup}'
       text0: |
         Dear %{ordergroup},
 
-        The order for "%{order}" has been closed by %{user} on %{when}.
+        The order for "%{order}" has been closed by %{user}.
+
         The following articles have been ordered for your ordergroup:
       text1: |-
         o Total sum: %{sum}
 
         You can view the order online: %{order_url}
 
+
+        Kind regards from %{foodcoop}.
+      html0: |
+        Dear %{ordergroup},
+        <br/>
+        <p>%{message}</p>
+      html1: |-
+        o Total sum: %{sum}
+
+        You can view the order online: %{order_url}
 
         Kind regards from %{foodcoop}.
     order_result_supplier:

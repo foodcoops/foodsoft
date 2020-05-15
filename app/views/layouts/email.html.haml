@@ -1,0 +1,436 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    / Facebook sharing information tags
+    %meta{:content => "*|MC:SUBJECT|*", :property => "og:title"}/
+    %title *|MC:SUBJECT|*
+    :css
+      /* Client-specific Styles */
+      #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" button. */
+      body{width:100% !important;} .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+      body{-webkit-text-size-adjust:none;} /* Prevent Webkit platforms from changing default text sizes. */
+
+      /* Reset Styles */
+      body{margin:0; padding:0;}
+      img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+      table td{border-collapse:collapse;}
+      #backgroundTable{height:100% !important; margin:0; padding:0; width:100% !important;}
+
+      /* Template Styles */
+
+      /* /\/\/\/\/\/\/\/\/\/\ STANDARD STYLING: COMMON PAGE ELEMENTS /\/\/\/\/\/\/\/\/\/\ */
+
+      /**
+      * @tab Page
+      * @section background color
+      * @tip Set the background color for your email. You may want to choose one that matches your company's branding.
+      * @theme page
+      */
+      body, #backgroundTable{
+      	/*@editable*/ background-color:#FAFAFA;
+      }
+
+      /**
+      * @tab Page
+      * @section email border
+      * @tip Set the border for your email.
+      */
+      #templateContainer{
+      	/*@editable*/ border: 1px solid #DDDDDD;
+      }
+
+      /**
+      * @tab Page
+      * @section heading 1
+      * @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
+      * @style heading 1
+      */
+      h1, .h1{
+      	/*@editable*/ color:#202020;
+      	display:block;
+      	/*@editable*/ font-family:Arial;
+      	/*@editable*/ font-size:34px;
+      	/*@editable*/ font-weight:bold;
+      	/*@editable*/ line-height:100%;
+      	margin-top:0;
+      	margin-right:0;
+      	margin-bottom:10px;
+      	margin-left:0;
+      	/*@editable*/ text-align:left;
+      }
+
+      /**
+      * @tab Page
+      * @section heading 2
+      * @tip Set the styling for all second-level headings in your emails.
+      * @style heading 2
+      */
+      h2, .h2{
+      	/*@editable*/ color:#202020;
+      	display:block;
+      	/*@editable*/ font-family:Arial;
+      	/*@editable*/ font-size:30px;
+      	/*@editable*/ font-weight:bold;
+      	/*@editable*/ line-height:100%;
+      	margin-top:0;
+      	margin-right:0;
+      	margin-bottom:10px;
+      	margin-left:0;
+      	/*@editable*/ text-align:left;
+      }
+
+      /**
+      * @tab Page
+      * @section heading 3
+      * @tip Set the styling for all third-level headings in your emails.
+      * @style heading 3
+      */
+      h3, .h3{
+      	/*@editable*/ color:#202020;
+      	display:block;
+      	/*@editable*/ font-family:Arial;
+      	/*@editable*/ font-size:26px;
+      	/*@editable*/ font-weight:bold;
+      	/*@editable*/ line-height:100%;
+      	margin-top:0;
+      	margin-right:0;
+      	margin-bottom:10px;
+      	margin-left:0;
+      	/*@editable*/ text-align:left;
+      }
+
+      /**
+      * @tab Page
+      * @section heading 4
+      * @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+      * @style heading 4
+      */
+      h4, .h4{
+      	/*@editable*/ color:#202020;
+      	display:block;
+      	/*@editable*/ font-family:Arial;
+      	/*@editable*/ font-size:22px;
+      	/*@editable*/ font-weight:bold;
+      	/*@editable*/ line-height:100%;
+      	margin-top:0;
+      	margin-right:0;
+      	margin-bottom:10px;
+      	margin-left:0;
+      	/*@editable*/ text-align:left;
+      }
+
+      /* /\/\/\/\/\/\/\/\/\/\ STANDARD STYLING: PREHEADER /\/\/\/\/\/\/\/\/\/\ */
+
+      /**
+      * @tab Header
+      * @section preheader style
+      * @tip Set the background color for your email's preheader area.
+      * @theme page
+      */
+      #templatePreheader{
+      	/*@editable*/ background-color:#FAFAFA;
+      }
+
+      /**
+      * @tab Header
+      * @section preheader text
+      * @tip Set the styling for your email's preheader text. Choose a size and color that is easy to read.
+      */
+      .preheaderContent div{
+      	/*@editable*/ color:#505050;
+      	/*@editable*/ font-family:Arial;
+      	/*@editable*/ font-size:10px;
+      	/*@editable*/ line-height:100%;
+      	/*@editable*/ text-align:left;
+      }
+
+      /**
+      * @tab Header
+      * @section preheader link
+      * @tip Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
+      */
+      .preheaderContent div a:link, .preheaderContent div a:visited, /* Yahoo! Mail Override */ .preheaderContent div a .yshortcuts /* Yahoo! Mail Override */{
+      	/*@editable*/ color:#336699;
+      	/*@editable*/ font-weight:normal;
+      	/*@editable*/ text-decoration:underline;
+      }
+
+      /* /\/\/\/\/\/\/\/\/\/\ STANDARD STYLING: HEADER /\/\/\/\/\/\/\/\/\/\ */
+
+      /**
+      * @tab Header
+      * @section header style
+      * @tip Set the background color and border for your email's header area.
+      * @theme header
+      */
+      #templateHeader{
+      	/*@editable*/ background-color:#FFFFFF;
+      	/*@editable*/ border-bottom:0;
+      }
+
+      /**
+      * @tab Header
+      * @section header text
+      * @tip Set the styling for your email's header text. Choose a size and color that is easy to read.
+      */
+      .headerContent{
+      	/*@editable*/ color:#202020;
+      	/*@editable*/ font-family:Arial;
+      	/*@editable*/ font-size:34px;
+      	/*@editable*/ font-weight:bold;
+      	/*@editable*/ line-height:100%;
+      	/*@editable*/ padding:0;
+      	/*@editable*/ text-align:center;
+      	/*@editable*/ vertical-align:middle;
+      }
+
+      /**
+      * @tab Header
+      * @section header link
+      * @tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
+      */
+      .headerContent a:link, .headerContent a:visited, /* Yahoo! Mail Override */ .headerContent a .yshortcuts /* Yahoo! Mail Override */{
+      	/*@editable*/ color:#336699;
+      	/*@editable*/ font-weight:normal;
+      	/*@editable*/ text-decoration:underline;
+      }
+
+      #headerImage{
+      	height:auto;
+      	max-width:600px !important;
+      }
+
+      /* /\/\/\/\/\/\/\/\/\/\ STANDARD STYLING: MAIN BODY /\/\/\/\/\/\/\/\/\/\ */
+
+      /**
+      * @tab Body
+      * @section body style
+      * @tip Set the background color for your email's body area.
+      */
+      #templateContainer, .bodyContent{
+      	/*@editable*/ background-color:#FFFFFF;
+      }
+
+      /**
+      * @tab Body
+      * @section body text
+      * @tip Set the styling for your email's main content text. Choose a size and color that is easy to read.
+      * @theme main
+      */
+      .bodyContent div{
+      	/*@editable*/ color:#505050;
+      	/*@editable*/ font-family:Arial;
+      	/*@editable*/ font-size:14px;
+      	/*@editable*/ line-height:150%;
+      	/*@editable*/ text-align:left;
+      }
+
+      /**
+      * @tab Body
+      * @section body link
+      * @tip Set the styling for your email's main content links. Choose a color that helps them stand out from your text.
+      */
+      .bodyContent div a:link, .bodyContent div a:visited, /* Yahoo! Mail Override */ .bodyContent div a .yshortcuts /* Yahoo! Mail Override */{
+      	/*@editable*/ color:#336699;
+      	/*@editable*/ font-weight:normal;
+      	/*@editable*/ text-decoration:underline;
+      }
+
+      .bodyContent img{
+      	display:inline;
+      	height:auto;
+      }
+
+      /* /\/\/\/\/\/\/\/\/\/\ STANDARD STYLING: FOOTER /\/\/\/\/\/\/\/\/\/\ */
+
+      /**
+      * @tab Footer
+      * @section footer style
+      * @tip Set the background color and top border for your email's footer area.
+      * @theme footer
+      */
+      #templateFooter{
+      	/*@editable*/ background-color:#FFFFFF;
+      	/*@editable*/ border-top:0;
+      }
+
+      /**
+      * @tab Footer
+      * @section footer text
+      * @tip Set the styling for your email's footer text. Choose a size and color that is easy to read.
+      * @theme footer
+      */
+      .footerContent div{
+      	/*@editable*/ color:#707070;
+      	/*@editable*/ font-family:Arial;
+      	/*@editable*/ font-size:12px;
+      	/*@editable*/ line-height:125%;
+      	/*@editable*/ text-align:left;
+      }
+
+      /**
+      * @tab Footer
+      * @section footer link
+      * @tip Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
+      */
+      .footerContent div a:link, .footerContent div a:visited, /* Yahoo! Mail Override */ .footerContent div a .yshortcuts /* Yahoo! Mail Override */{
+      	/*@editable*/ color:#336699;
+      	/*@editable*/ font-weight:normal;
+      	/*@editable*/ text-decoration:underline;
+      }
+
+      .footerContent img{
+      	display:inline;
+      }
+
+      /**
+      * @tab Footer
+      * @section social bar style
+      * @tip Set the background color and border for your email's footer social bar.
+      * @theme footer
+      */
+      #social{
+      	/*@editable*/ background-color:#FAFAFA;
+      	/*@editable*/ border:0;
+      }
+
+      /**
+      * @tab Footer
+      * @section social bar style
+      * @tip Set the background color and border for your email's footer social bar.
+      */
+      #social div{
+      	/*@editable*/ text-align:center;
+      }
+
+      /**
+      * @tab Footer
+      * @section utility bar style
+      * @tip Set the background color and border for your email's footer utility bar.
+      * @theme footer
+      */
+      #utility{
+      	/*@editable*/ background-color:#FFFFFF;
+      	/*@editable*/ border:0;
+      }
+
+      /**
+      * @tab Footer
+      * @section utility bar style
+      * @tip Set the background color and border for your email's footer utility bar.
+      */
+      #utility div{
+      	/*@editable*/ text-align:center;
+      }
+
+      #monkeyRewards img{
+      	max-width:190px;
+      }
+  %body{:leftmargin => "0", :marginheight => "0", :marginwidth => "0", :offset => "0", :topmargin => "0"}
+    %center
+      %table#backgroundTable{:border => "0", :cellpadding => "0", :cellspacing => "0", :height => "100%", :width => "100%"}
+        %tr
+          %td{:align => "center", :valign => "top"}
+            / // Begin Template Preheader \\
+            %table#templatePreheader{:border => "0", :cellpadding => "10", :cellspacing => "0", :width => "600"}
+              %tr
+                %td.preheaderContent{:valign => "top"}
+                  / // Begin Module: Standard Preheader \
+                  -#%table{:border => "0", :cellpadding => "10", :cellspacing => "0", :width => "100%"}
+                  -#  %tr
+                  -#    %td{:valign => "top"}
+                  -#      %div{"mc:edit" => "std_preheader_content"}
+                  -#        Use this area to offer a short teaser of your email's content. Text here will show in the preview area of some email clients.
+                  -#    / *|IFNOT:ARCHIVE_PAGE|*
+                  -#    %td{:valign => "top", :width => "190"}
+                  -#      %div{"mc:edit" => "std_preheader_links"}
+                  -#        Is this email not displaying correctly?
+                  -#        %br/
+                  -#        = succeed "." do
+                  -#          %a{:href => "*|ARCHIVE|*", :target => "_blank"} View it in your browser
+                      / *|END:IF|*
+                  / // End Module: Standard Preheader \
+            / // End Template Preheader \\
+            %table#templateContainer{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+              %tr
+                %td{:align => "center", :valign => "top"}
+                  / // Begin Template Header \\
+                  -#%table#templateHeader{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                  -#  %tr
+                  -#    %td.headerContent
+                  -#      / // Begin Module: Standard Header Image \\
+                  -#      %img{:id => "headerImage campaign-icon", "mc:allowdesigner" => "", "mc:allowtext" => "", "mc:edit" => "header_image", "mc:label" => "header_image", :src => "http://gallery.mailchimp.com/653153ae841fd11de66ad181a/images/placeholder_600.gif", :style => "max-width:600px;"}/
+                        / // End Module: Standard Header Image \\
+                  / // End Template Header \\
+              %tr
+                %td{:align => "center", :valign => "top"}
+                  / // Begin Template Body \\
+                  %table#templateBody{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.bodyContent{:valign => "top"}
+                        / // Begin Module: Standard Content \\
+                        = yield
+                        -#%table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
+                        -#  %tr
+                        -#    %td{:valign => "top"}
+                        -#      %div{"mc:edit" => "std_content00"}
+                        -#        %h1.h1 Heading 1
+                        -#        %h2.h2 Heading 2
+                        -#        %h3.h3 Heading 3
+                        -#        %h4.h4 Heading 4
+                        -#        %strong Getting started:
+                        -#        Customize your template by clicking on the style editor tabs up above. Set your fonts, colors, and styles. After setting your styling is all done you can click here in this area, delete the text, and start adding your own awesome content!
+                        -#        %br/
+                        -#        %br/
+                        -#        After you enter your content, highlight the text you want to style and select the options you set in the style editor in the "styles" drop down box. Want to
+                        -#        = succeed "," do
+                        -#          %a{:href => "http://www.mailchimp.com/kb/article/im-using-the-style-designer-and-i-cant-get-my-formatting-to-change", :target => "_blank"} get rid of styling on a bit of text
+                        / // End Module: Standard Content \\
+                  / // End Template Body \\
+              %tr
+                %td{:align => "center", :valign => "top"}
+                  / // Begin Template Footer \\
+                  %table#templateFooter{:border => "0", :cellpadding => "10", :cellspacing => "0", :width => "600"}
+                    %tr
+                      %td.footerContent{:valign => "top"}
+                        / // Begin Module: Standard Footer \\
+                        = t '.footer_2_foodsoft', url: root_url
+                        = t '.footer_3_homepage', url: FoodsoftConfig[:homepage] if FoodsoftConfig[:homepage]
+                        = t '.footer_4_help', url: FoodsoftConfig[:help_url] if FoodsoftConfig[:help_url]
+
+                        -#%table{:border => "0", :cellpadding => "10", :cellspacing => "0", :width => "100%"}
+                        -#  %tr
+                        -#    %td#social{:colspan => "2", :valign => "middle"}
+                        -#      %div{"mc:edit" => "std_social"}
+                        -#         
+                        -#        %a{:href => "*|TWITTER:PROFILEURL|*"} follow on Twitter
+                        -#        |
+                        -#        %a{:href => "*|FACEBOOK:PROFILEURL|*"} friend on Facebook
+                        -#        |
+                        -#        = succeed "\u{a0}" do
+                        -#          %a{:href => "*|FORWARD|*"} forward to a friend
+                        -#  %tr
+                        -#    %td{:valign => "top", :width => "350"}
+                        -#      %div{"mc:edit" => "std_footer"}
+                        -#        %em Copyright © *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.
+                        -#        %br/
+                        -#        *|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|*
+                        -#        %br/
+                        -#        %strong Our mailing address is:
+                        -#        %br/
+                        -#        *|HTML:LIST_ADDRESS_HTML|**|END:IF|*
+                        -#    %td#monkeyRewards{:valign => "top", :width => "190"}
+                        -#      %div{"mc:edit" => "monkeyrewards"}
+                        -#        *|IF:REWARDS|* *|HTML:REWARDS|* *|END:IF|*
+                        -#  %tr
+                        -#    %td#utility{:colspan => "2", :valign => "middle"}
+                        -#      %div{"mc:edit" => "std_utility"}
+                        -#         
+                        -#        %a{:href => "*|UNSUB|*"} unsubscribe from this list
+                        -#        |
+                        -#        = succeed "\u{a0}" do
+                        -#          %a{:href => "*|UPDATE_PROFILE|*"} update subscription preferences
+                        / // End Module: Standard Footer \\
+                  / // End Template Footer \\
+            %br/
