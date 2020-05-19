@@ -1,0 +1,77 @@
+%section
+  %h3= title
+  - if ordergroup.not_enough_apples?
+    .alert
+      = t '.not_enough_apples'
+  - unless orders.empty?
+    %table.table
+      %thead
+        %tr
+          %th= heading_helper Order, :name
+          %th= heading_helper Order, :pickup
+          %th= heading_helper Order, :ends
+          %th= t '.who_ordered'
+          %th.numeric= heading_helper GroupOrder, :price
+      %tbody
+        - total = 0
+        - orders.each do |order|
+          %tr
+            %td
+              - if order.open?
+                = link_to_ordering(order)
+              - else
+                = link_to order.name, group_order_path(order.group_order(current_user.ordergroup))
+            %td= format_date(order.pickup) unless order.pickup.nil?
+            %td= format_time(order.ends) unless order.ends.nil?
+            - if group_order = order.group_order(ordergroup)
+              - total += group_order.price
+              %td= "#{show_user group_order.updated_by} (#{format_time(group_order.updated_on)})"
+              %td.numeric
+                - if order.open?
+                  = link_to_ordering(order, show: true) do
+                    = number_to_currency(group_order.price)
+                - else
+                  = number_to_currency(group_order.price)
+            - else
+              %td{:colspan => 2}
+          %tr
+            %td(colspan=5)
+              %div.row-fluid
+                - if order.note
+                  .span= order.note.gsub(URI::DEFAULT_PARSER.make_regexp(['http','https']), '<a href="\0">\0</a>').html_safe
+              %div.row-fluid
+                - count = order.order_articles.ordered.count
+                - not_filled_count = order.order_articles.map{ |oa| oa.missing_units>0 ? 1 : 0 }.sum
+                - cases = order.order_articles.ordered.sum(:units_to_order)
+                - effort = order.split_effort
+                .badge.badge-info= "#{count} #{'items'.pluralize{count}} filled"
+                .badge.badge-warning= "#{not_filled_count} #{'case'.pluralize{not_filled_count}} to fill" if not_filled_count>0
+                .badge.badge-info= "#{cases} full #{'case'.pluralize{cases}}"
+                - supplier_order_sum = order.supplier.sum_on_pickup_date(order.pickup, :gross)
+                - order_sum = order.sum(:gross)
+                .badge.badge-dark
+                  -#= "#{order.supplier.name} total "
+                  = "co-op total "
+                  - if number_to_currency(order_sum)==number_to_currency(supplier_order_sum)
+                    = number_to_currency(order_sum)
+                  - else
+                    = "#{number_to_currency(order_sum)} of #{number_to_currency(supplier_order_sum)}"
+                - min_order_value = order.supplier.min_order_quantity.sub('$','').to_f
+                - if min_order_value > 0
+                  - if supplier_order_sum.to_f > min_order_value
+                    .badge.badge-success= "#{number_to_currency(min_order_value)} minimum met"
+                  - else
+                    - order_value_needed = min_order_value - supplier_order_sum
+                    .badge.badge-important= "#{number_to_currency(order_value_needed)} more to meet minimum of #{number_to_currency(min_order_value)}"
+                .badge.badge-info= "#{effort} splits"
+          %tr.list-heading
+            %td(colspan=5)
+
+      - if total > 0
+        %tfooter
+          %tr
+            %th(colspan=3)
+            %th= t('.total_sum') + ':'
+            %th.numeric= number_to_currency(total)
+  - else
+    %i= t '.no_open_orders'
