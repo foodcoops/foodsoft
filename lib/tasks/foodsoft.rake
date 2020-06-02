@@ -8,7 +8,7 @@ namespace :foodsoft do
 
   desc "Reminder to settle orders"
   task :remind_settle => :environment do
-    Order.email_reminder_to_settle1``
+    Order.email_reminder_to_settle
   end
 
   desc "Notify users of upcoming tasks"
