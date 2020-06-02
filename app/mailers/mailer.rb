@@ -116,6 +116,13 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.not_enough_users_assigned.subject', task: task.name)
   end
 
+  def remind_order_not_settled(user, late_orders)
+    @user = user
+    @late_orders = late_orders
+    mail to: user,
+         subject: 'You have orders that need to be settled'
+  end
+
   def mail(args)
     args[:message_id] ||= "<#{Mail.random_tag}@#{default_url_options[:host]}>"
     args[:subject] = "[#{FoodsoftConfig[:name]}] #{args[:subject]}"

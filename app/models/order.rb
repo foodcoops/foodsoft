@@ -379,6 +379,22 @@ class Order < ApplicationRecord
     oa_surcharge.group_order_articles
   end
 
+  def self.email_reminder_to_settle
+    users = {}
+    orders = Order.finished_not_closed.each do |order|
+      if order.pickup && ((DateTime.now - order.pickup) > 2)
+        users[order.created_by] ||= []
+        users[order.created_by] << order
+      end
+    end
+    users.each do |user, late_orders|
+      # puts "#{key.email} #{value.map{|order| order.id}}"
+      Mailer.deliver_now_with_user_locale user do
+        Mailer.remind_order_not_settled(user, late_orders)
+      end
+    end
+  end
+
   protected
 
   def starts_before_ends

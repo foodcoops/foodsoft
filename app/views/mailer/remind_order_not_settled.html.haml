@@ -1,0 +1,21 @@
+
+%p
+  = "Hi #{@user.first_name},"
+%p
+  This is a reminder that orders that you are managing have not been settled.
+
+%ul
+  - @late_orders.each do | order |
+    %li
+      = link_to("#{order.pickup} ", new_finance_order_url(order_id: order.id))
+      = order.supplier.name
+
+%p
+  %i
+    %b Do not
+  settle the order if you are waiting for a refund from the supplier.
+%p
+  %i
+    %b Do
+  ensure that all other changes, such as adjusting amounts received, price changes, etc, have been done within a day of pickup.
+

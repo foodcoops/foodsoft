@@ -370,7 +370,11 @@
                     %tr
                       %td.bodyContent{:valign => "top"}
                         / // Begin Module: Standard Content \\
-                        = yield
+                        %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
+                          %tr
+                            %td{:valign => "top"}
+                              %div{"mc:edit" => "std_content00"}
+                                = yield
                         -#%table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
                         -#  %tr
                         -#    %td{:valign => "top"}

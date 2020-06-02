@@ -6,6 +6,11 @@ namespace :foodsoft do
     Order.finish_ended!
   end
 
+  desc "Reminder to settle orders"
+  task :remind_settle => :environment do
+    Order.email_reminder_to_settle1``
+  end
+
   desc "Notify users of upcoming tasks"
   task :notify_upcoming_tasks => :environment do
     tasks = Task.where(done: false, due_date: 1.day.from_now.to_date)
