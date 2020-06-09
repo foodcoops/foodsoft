@@ -43,7 +43,7 @@ class Mailer < ActionMailer::Base
   # Sends order result to a specific Ordergroup
   def compute_changed_since_last_email(group_order, user)
     changed_goa_ids = [].to_set
-    emailkey = "email-update-#{group_order.id}-#{user.id}"
+    emailkey = email_key(group_order, user)
     # puts "emailkey #{emailkey}"
     group_order_current_json = group_order.group_order_articles.to_json(:include => {:order_article => {:include => :article_price}})
     group_order_previous_json = FoodsoftCache.get(emailkey)
@@ -66,10 +66,22 @@ class Mailer < ActionMailer::Base
     @user = user
     goa_ids = compute_changed_since_last_email(group_order, user)
     @highlight_goa_ids = goa_ids.to_set
-    mail to: user,
-         is_reply: true,
-         subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
-         reply_to: FoodsoftConfig[:email_from]
+
+    message_id = FoodsoftCache.get(email_id_key(group_order, user))
+
+    if message_id
+      mail to: user,
+           is_reply: true,
+           'IN-REPLY-TO': message_id,
+           subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
+           reply_to: FoodsoftConfig[:email_from]
+    else
+      message_result = mail to: user,
+                            subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
+                            reply_to: FoodsoftConfig[:email_from]
+      FoodsoftCache.set(email_id_key(group_order, user), message.message_id)
+      message_result
+    end
   end
 
   # Sends order result to the supplier
@@ -177,6 +189,14 @@ class Mailer < ActionMailer::Base
   end
 
   protected
+
+  def email_key(group_order, user)
+    "email-update-#{group_order.id}-#{user.id}"
+  end
+
+  def email_id_key(group_order, user)
+    "email-id-#{group_order.id}-#{user.id}"
+  end
 
   def parse_goa_json_to_hash(group_order_previous_json)
     JSON.parse(group_order_previous_json).collect { |goa| [goa['group_order_article']['id'], goa['group_order_article']] }.to_h
