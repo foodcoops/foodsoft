@@ -79,7 +79,7 @@ class Mailer < ActionMailer::Base
       message_result = mail to: user,
                             subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
                             reply_to: FoodsoftConfig[:email_from]
-      FoodsoftCache.set(email_id_key(group_order, user), message.message_id)
+      FoodsoftCache.set(email_id_key(group_order, user), message_result.message_id)
       message_result
     end
   end
