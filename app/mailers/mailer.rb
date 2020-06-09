@@ -72,7 +72,7 @@ class Mailer < ActionMailer::Base
     if message_id
       mail to: user,
            is_reply: true,
-           'IN-REPLY-TO': message_id,
+           'IN-REPLY-TO': "<#{message_id}>",
            subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
            reply_to: FoodsoftConfig[:email_from]
     else
