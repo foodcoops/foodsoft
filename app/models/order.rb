@@ -284,7 +284,21 @@ class Order < ApplicationRecord
     UserNotifier.enqueue_in(10.seconds, 'closed_order', self.id)
   end
 
+  # this opens the order again allowing people to order after it has been closed.
+  def unclose!(user)
+    self.update_attributes! :state => 'open', :updated_by => user, :foodcoop_result => nil
+    order_articles.each do |oa|
+      oa.article_price = nil
+      oa.group_order_articles.each do |goa|
+        goa.result = nil
+        goa.save!
+      end
+      oa.update_results!
+    end
+  end
+
   # puts order.status back to 'finished' and reverts charges (adds a credit) to Ordergroup.account_balances
+  # order will still be closed for ordering, but you can fix mistakes in accounting/balancing
   def reopen!(user, transaction_type = nil)
     raise I18n.t('orders.model.error_not_closed') unless closed?
 
