@@ -117,6 +117,7 @@ class Supplier < ApplicationRecord
   def mark_as_deleted
     transaction do
       super
+      update_column :iban, nil
       articles.each(&:mark_as_deleted)
     end
   end
