@@ -474,6 +474,7 @@ en:
       not_found: No articles found
     index:
       change_supplier: Change supplier ...
+      download: Download articles
       edit_all: Edit all
       ext_db:
         import: Import article

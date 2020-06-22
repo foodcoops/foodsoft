@@ -26,6 +26,7 @@
       = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{'btn-primary' unless @supplier.shared_supplier}"
       = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn'
       = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn'
+      = link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn'
       - if current_user.role_orders?
         = link_to t('.new_order'), new_order_path(supplier_id: @supplier), class: 'btn'
 

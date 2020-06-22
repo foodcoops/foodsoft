@@ -455,6 +455,7 @@ de:
       not_found: Keine Artikel gefunden
     index:
       change_supplier: Lieferant wechseln ...
+      download: Artikel herunterladen
       edit_all: Alle bearbeiten
       ext_db:
         import: Suchen/Importieren
