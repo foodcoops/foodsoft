@@ -1429,6 +1429,7 @@ en:
       consider_member_tolerance: consider tolerance
       notice: 'Order received: %{msg}'
       notice_none: No new articles to receive
+      paragraph: If the ordered and reveived amount are the same, the corresponding fields can be empty. It's still good practice to all fields, since this provieds an easy way to check if all articles have been checked.
       rest_to_stock: rest to stock
       submit: Receive order
       surplus_options: 'Distribution options:'

@@ -1384,6 +1384,7 @@ de:
       consider_member_tolerance: Toleranz berücksichtigen
       notice: 'Bestellung in Empfang genommen: %{msg}'
       notice_none: Keine neuen Artikel für den Empfang ausgewählt.
+      paragraph: Wenn die Bestellmenge mit der Liefermenge übereinstimmt, können die entsprechenden Felder frei gelassen werden. Es empfiehlt sich aber dennoch alle Felder auszufüllen, da daurch einfach nachvollziebar ist ob alle Mengen kontrolliert wurden.
       rest_to_stock: Rest ins Lager
       submit: Bestellung in Empfang nehmen
       surplus_options: 'Verteilungsoptionen:'
