@@ -11,6 +11,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-dev
+      args:
+        user_id: ${USER_ID}
+        group_id: ${GROUP_ID}
     command: ./proc-start worker
     volumes:
       - bundle:/home/app/bundle

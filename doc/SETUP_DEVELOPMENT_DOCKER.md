@@ -17,7 +17,10 @@ For installing instructions see https://docs.docker.com/installation/.
 Docker runs on every modern Linux kernel, but also with a little help on MacOS
 and Windows!
 
-## Prerequisites (Windows only)
+## Prerequisites
+
+### Line-ending (Windows only)
+
 To avoid line-ending issues with shell scripts, make sure to configure
 Git autocrlf to keep linux line endings via
 
@@ -25,6 +28,13 @@ Git autocrlf to keep linux line endings via
 
 Don't forget to do a clean checkout (delete everything except `.git` directory)
 afterwards.
+
+### User / Group ID (Unix and derivates only)
+
+In case the user you're going to run docker with does **not** have the default
+UID/GID of 1000/1000, you may specify `USER_ID` and/or `GROUP_ID` through
+the [docker-compose environment variables](https://docs.docker.com/compose/environment-variables/) -
+see `./env.template`.
 
 ## Setup
 

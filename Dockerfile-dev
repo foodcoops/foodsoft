@@ -19,7 +19,10 @@ ENV PORT=3000 \
 
 # Run app and all commands as user 'app'. This avoids changing permissions
 # for files in mounted volume. Symlink for similarity with production image.
-RUN adduser --gecos GECOS --disabled-password --shell /bin/bash app && \
+ARG group_id
+RUN addgroup --gid ${group_id:-1000} app
+ARG user_id
+RUN adduser --gecos GECOS --disabled-password --shell /bin/bash --uid ${user_id:-1000} --gid ${group_id:-1000} app && \
     ln -s /home/app/src /usr/src/app
 USER app
 
