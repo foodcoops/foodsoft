@@ -8,6 +8,7 @@ public/assets
 public/system
 public/uploads
 vendor/bundle
+.env
 
 # no configuration
 config/*.yml
