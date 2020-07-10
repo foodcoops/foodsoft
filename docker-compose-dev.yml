@@ -35,6 +35,8 @@ services:
       - MYSQL_ROOT_PASSWORD=secret
     volumes:
       - mariadb:/var/lib/mysql
+    ports:
+      - 3306:3306
 
   redis:
     image: redis:3.2-alpine
