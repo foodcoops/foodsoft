@@ -5,9 +5,9 @@
 .row-fluid
   .span6
     %h2= t '.title_open'
-    = render :partial => "orders", :locals => {:orders => Order.finished_not_closed, :pagination => false}
+    = render partial: 'orders', locals: {orders: @finished_not_closed_orders_including_group_order, pagination: false}
 
   .span6
     %h2= t '.title_closed'
     #closed_orders
-      = render :partial => "orders", :locals => {:orders => @closed_orders, :pagination => true}
+      = render partial: 'orders', locals: {orders: @closed_orders_including_group_order, pagination: true}

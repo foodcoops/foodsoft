@@ -21,19 +21,19 @@
 = render :partial => "shared/open_orders", :locals => {:ordergroup => @ordergroup}
 
 // finished orders
-- unless Order.finished_not_closed.empty?
+- unless @finished_not_closed_orders_including_group_order.empty?
   %section
     %h2= t '.finished_orders.title'
-    = render :partial => "orders", :locals => {:orders => Order.finished_not_closed, :pagination => false}
+    = render partial: 'orders', locals: {orders: @finished_not_closed_orders_including_group_order, pagination: false}
     - if @ordergroup.value_of_finished_orders > 0
       %p
         = t('.finished_orders.total_sum') + ':'
         %b= number_to_currency(@ordergroup.value_of_finished_orders)
 
 // closed orders
-- unless Order.closed.empty?
+- unless @closed_orders_including_group_order.empty?
   %section
     %h2= t '.closed_orders.title'
-    = render :partial => "orders", :locals => {:orders => Order.closed.limit(5), :pagination => false}
+    = render partial: 'orders', locals: {orders: @closed_orders_including_group_order, pagination: false}
     %br/
     = link_to t('.closed_orders.more'), archive_group_orders_path

@@ -9,6 +9,8 @@ class GroupOrdersController < ApplicationController
 
   # Index page.
   def index
+    @closed_orders_including_group_order = Order.closed.limit(5).ordergroup_group_orders_map(@ordergroup)
+    @finished_not_closed_orders_including_group_order = Order.finished_not_closed.ordergroup_group_orders_map(@ordergroup)
   end
 
   def new
@@ -56,6 +58,8 @@ class GroupOrdersController < ApplicationController
   def archive
     # get only orders belonging to the ordergroup
     @closed_orders = Order.closed.page(params[:page]).per(10)
+    @closed_orders_including_group_order = @closed_orders.ordergroup_group_orders_map(@ordergroup)
+    @finished_not_closed_orders_including_group_order = Order.finished_not_closed.ordergroup_group_orders_map(@ordergroup)
 
     respond_to do |format|
       format.html # archive.html.haml
