@@ -125,6 +125,21 @@ class Order < ApplicationRecord
     self
   end
 
+  def self.map_with_own_group_orders(scope, ordergroup, page = nil, limit = nil)
+    orders = scope.includes(:supplier)
+    orders = orders.page(page).per(limit) unless limit.nil?
+    own_orders = scope.includes(:group_orders).where(group_orders: {ordergroup_id: ordergroup.id}, id: orders.map {|o| o.id})
+    own_orders_hash = Hash[own_orders.collect {|o| [o.id, o]}]
+    orders.map do |order|
+      group_order = own_orders_hash.has_key?(order.id) ? own_orders_hash[order.id].group_orders.first : nil
+
+      {
+        order: order,
+        group_order: group_order
+      }
+    end
+  end
+
   # search GroupOrder of given Ordergroup
   def group_order(ordergroup)
     group_orders.where(:ordergroup_id => ordergroup.id).first

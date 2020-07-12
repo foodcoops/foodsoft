@@ -1,1 +1,1 @@
-$('#closed_orders').html('#{escape_javascript(render("orders", orders: @closed_orders, pagination: true))}');
+$('#closed_orders').html('#{escape_javascript(render("orders", orders: @closed_orders_including_group_order, pagination: true))}');
