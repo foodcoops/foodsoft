@@ -9,8 +9,9 @@ class GroupOrdersController < ApplicationController
 
   # Index page.
   def index
-    @finished_not_closed_orders_including_group_order = Order.map_with_own_group_orders(Order.finished_not_closed, @ordergroup)
-    @closed_orders_including_group_order = Order.map_with_own_group_orders(Order.closed, @ordergroup, 5)
+    @finished_not_closed_orders_including_group_order = Order.finished_not_closed.ordergroup_group_orders_map(@ordergroup)
+    @closed_orders_including_group_order = Order.closed.limit(5).ordergroup_group_orders_map(@ordergroup)
+    Order.includes(:group_orders).where({group_orders: {ordergroup_id: @ordergroup.id}})
   end
 
   def new
@@ -58,10 +59,11 @@ class GroupOrdersController < ApplicationController
   def archive
     # get only orders belonging to the ordergroup
     @closed_orders = Order.closed.page(params[:page]).per(10)
-    @finished_not_closed_orders_including_group_order = Order.map_with_own_group_orders(Order.finished_not_closed, @ordergroup)
-    @closed_orders_including_group_order = Order.map_with_own_group_orders(Order.closed, @ordergroup, params[:page], 10)
+    @closed_orders_including_group_order = @closed_orders.ordergroup_group_orders_map(@ordergroup)
     respond_to do |format|
-      format.html
+      format.html do
+        @finished_not_closed_orders_including_group_order = Order.finished_not_closed.ordergroup_group_orders_map(@ordergroup)
+      end
       format.js
     end
   end

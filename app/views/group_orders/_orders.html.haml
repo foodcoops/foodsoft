@@ -6,9 +6,8 @@
       %th= heading_helper Order, :ends
       %th= heading_helper GroupOrder, :price
   %tbody
-    - for order_hash in orders
-      - order = order_hash[:order]
-      - group_order = order_hash[:group_order]
+    - for order in orders
+      - group_order = order.cached_ordergroups_group_order
       - order_class = group_order.present? ? "" : "color:grey"
       %tr{:class=> cycle('even', 'odd', :name => 'orders'), :style => order_class}
         %td= group_order.present? ? link_to(order.name, group_order_path(group_order)) : order.name

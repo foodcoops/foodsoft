@@ -3,6 +3,9 @@
 class Order < ApplicationRecord
   attr_accessor :ignore_warnings
 
+  # Cache for an Order's GroupOrder, which is assigned to the currently logged in User's Ordergroup
+  attr_accessor :cached_ordergroups_group_order
+
   # Associations
   has_many :order_articles, :dependent => :destroy
   has_many :articles, :through => :order_articles
@@ -125,18 +128,12 @@ class Order < ApplicationRecord
     self
   end
 
-  def self.map_with_own_group_orders(scope, ordergroup, page = nil, limit = nil)
-    orders = scope.includes(:supplier)
-    orders = orders.page(page).per(limit) unless limit.nil?
-    own_orders = scope.includes(:group_orders).where(group_orders: {ordergroup_id: ordergroup.id}, id: orders.map {|o| o.id})
-    own_orders_hash = Hash[own_orders.collect {|o| [o.id, o]}]
-    orders.map do |order|
-      group_order = own_orders_hash.has_key?(order.id) ? own_orders_hash[order.id].group_orders.first : nil
-
-      {
-        order: order,
-        group_order: group_order
-      }
+  def self.ordergroup_group_orders_map(ordergroup)
+    orders = includes(:supplier)
+    group_orders = GroupOrder.where(ordergroup_id: ordergroup.id, order_id: orders.map(&:id))
+    group_orders_hash = Hash[group_orders.collect {|go| [go.order_id, go]}]
+    orders.each do |order|
+      order.cached_ordergroups_group_order = group_orders_hash[order.id]
     end
   end
 

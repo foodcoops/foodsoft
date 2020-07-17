@@ -83,4 +83,19 @@ describe Order do
 
   end
 
+  describe 'mapped to GroupOrders' do
+    let!(:user) { create :user, groups: [create(:ordergroup)] }
+    let!(:order) { create :order }
+    let!(:order2) { create :order }
+    let!(:go) { create :group_order, order: order, ordergroup: user.ordergroup }
+
+    it 'to map a user\'s GroupOrders to a list of Orders' do
+      orders = Order.ordergroup_group_orders_map(user.ordergroup)
+
+      expect(orders.length).to be 2
+      expect(orders[0].cached_ordergroups_group_order).to have_attributes(id: go.id)
+      expect(orders[1].cached_ordergroups_group_order).to be_nil
+    end
+  end
+
 end
