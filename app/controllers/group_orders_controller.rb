@@ -61,8 +61,8 @@ class GroupOrdersController < ApplicationController
     @finished_not_closed_orders_including_group_order = Order.map_with_own_group_orders(Order.finished_not_closed, @ordergroup)
     @closed_orders_including_group_order = Order.map_with_own_group_orders(Order.closed, @ordergroup, params[:page], 10)
     respond_to do |format|
-      format.html # archive.html.haml
-      format.js   # archive.js.erb
+      format.html
+      format.js
     end
   end
 
