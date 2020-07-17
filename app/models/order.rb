@@ -128,6 +128,8 @@ class Order < ApplicationRecord
     self
   end
 
+  # fetch current Order scope's records and map the current user's GroupOrders in (if any)
+  # (performance enhancement as opposed to fetching each GroupOrder separately from the view)
   def self.ordergroup_group_orders_map(ordergroup)
     orders = includes(:supplier)
     group_orders = GroupOrder.where(ordergroup_id: ordergroup.id, order_id: orders.map(&:id))
