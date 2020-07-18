@@ -35,7 +35,7 @@ class AddForeignKeysToAllTables < ActiveRecord::Migration
     add_foreign_key :financial_transactions, :group_orders
 
     # group_order_article_quantities
-    add_foreign_key :group_order_article_quantities, :articles, column: group_order_article_id
+    add_foreign_key :group_order_article_quantities, :articles, column: :group_order_article_id
 
     # group_order_articles
     add_foreign_key :group_order_articles, :group_orders
