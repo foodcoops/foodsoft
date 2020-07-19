@@ -43,7 +43,7 @@ class Order < ApplicationRecord
   date_time_attribute :starts, :boxfill, :ends
 
   def stockit?
-    supplier_id == 0 || supplier_id.nil?
+    supplier_id.nil?
   end
 
   def name
