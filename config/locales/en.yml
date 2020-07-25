@@ -542,7 +542,7 @@ en:
       text_2: The rows shown here are examples. When there is an "x" in the first column, the article is outlisted and will be removed. This allows you to edit the spreadsheet and quickly remove many articles at once, for example when articles become unavailable with the supplier. The category will be matched to your Foodsoft category list (both by category name and import names).
       title: Upload articles of %{supplier}
   bank_account_connector:
-    confirm_app: Please confirum the code %{code} in your app.
+    confirm_app: Please confirm the code %{code} in your app.
     fields:
       email: E-Mail
       pin: PIN
@@ -821,7 +821,7 @@ en:
       import:
         notice: '%{count} new transactions have been imported'
         no_import_method: For this bank account no import method is configured.
-        submit: Abschicken
+        submit: Import
         title: Import bank transactions for %{name}
       index:
         title: Bank Accounts
@@ -878,7 +878,7 @@ en:
           error_note_required: Note is required!
           notice: All transactions were saved.
         destroy:
-          notice: Transaktion wurde gelöscht
+          notice: The transaction has been removed.
       index:
         balance: 'Balance of account: %{balance}'
         last_updated_at: "(last updated %{when} ago)"
@@ -1429,7 +1429,7 @@ en:
       consider_member_tolerance: consider tolerance
       notice: 'Order received: %{msg}'
       notice_none: No new articles to receive
-      paragraph: If the ordered and reveived amount are the same, the corresponding fields can be empty. It's still good practice to all fields, since this provieds an easy way to check if all articles have been checked.
+      paragraph: If the ordered and received amount are the same, the corresponding fields can be empty. It's still good practice to enter all fields, since this provides an easy way to verify that all articles have been checked.
       rest_to_stock: rest to stock
       submit: Receive order
       surplus_options: 'Distribution options:'

@@ -97,6 +97,7 @@ nl:
         wiki: Wiki (mailing-lijst pagina)
       message: bericht
       no_user_found: Geen gebruiker gevonden
+      order_item: "%{supplier_name} (Ophaaldag: %{pickup})"
       reply_to: Dit bericht is een antwoord op %{link}.
       search: Zoeken ...
       search_user: Gebruiker zoeken

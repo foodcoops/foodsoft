@@ -158,6 +158,7 @@ de:
         customer_number_short: Kundennr.
         delivery_days: Liefertage
         email: E-Mail
+        iban: IBAN
         is_subscribed: abonniert?
         min_order_quantity: Mindestbestellmenge
         min_order_quantity_short: Menge (mind.)
@@ -180,6 +181,7 @@ de:
       user:
         email: E-Mail
         first_name: Vorname
+        iban: IBAN
         last_activity: Letzte Aktivität
         last_login: Letzter login
         last_name: Nachname
@@ -718,7 +720,7 @@ de:
         alert: 'Ein Fehler ist beim Abrechnen aufgetreten: %{message}'
         notice: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert.
       close_all_direct_with_invoice:
-        notice: Es wurden %{count} Bestellung abgerechnet.
+        notice: 'Es wurden %{count} Bestellung abgerechnet.'
       close_direct:
         alert: 'Bestellung kann nicht abgerechnet werden: %{message}'
         notice: Bestellung wurde abgerechnet.

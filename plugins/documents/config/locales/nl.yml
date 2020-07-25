@@ -33,3 +33,8 @@ nl:
       new: Nieuw document uploaden
       new_folder: Nieuwe map
       title: Documenten
+    move:
+      root_folder: Begin
+      title: Verplaatsen
+    update:
+      notice: Document of map is verplaatst
