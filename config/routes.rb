@@ -96,8 +96,7 @@ Foodsoft::Application.routes.draw do
 
     resources :stock_takings do
       collection do
-        get :fill_new_stock_article_form
-        post :add_stock_article
+        get :new_on_stock_article_create
       end
     end
 
@@ -126,6 +125,7 @@ Foodsoft::Application.routes.draw do
       end
 
       resources :articles do
+        get :copy
         collection do
           post :update_selected
           get :edit_all
@@ -161,6 +161,8 @@ Foodsoft::Application.routes.draw do
           get :new_on_order_article_create
           get :new_on_order_article_update
         end
+
+        post :close_all_direct_with_invoice, on: :collection
       end
 
       resources :invoices do
@@ -195,7 +197,9 @@ Foodsoft::Application.routes.draw do
 
       resources :bank_accounts, only: [:index] do
         member do
+          get :assign_unlinked_transactions
           get :import
+          post :import
         end
 
         resources :bank_transactions, as: :transactions

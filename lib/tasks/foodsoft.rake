@@ -63,6 +63,20 @@ namespace :foodsoft do
     server.start
     server.join
   end
+
+  desc "Import and assign bank transactions"
+  task :import_and_assign_bank_transactions => :environment do
+    BankAccount.find_each do |ba|
+      importer = ba.find_connector
+      next unless importer
+      importer.load nil
+      ok = importer.import nil
+      next unless ok
+      importer.finish
+      assign_count = ba.assign_unlinked_transactions
+      rake_say "#{ba.name}: imported #{importer.count}, assigned #{assign_count}"
+    end
+  end
 end
 
 # Helper

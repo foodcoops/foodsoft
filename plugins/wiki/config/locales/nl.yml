@@ -1,0 +1,106 @@
+nl:
+  activerecord:
+    attributes:
+      page:
+        body: Inhoud
+        parent_id: Ouderpagina
+        title: Titel
+  config:
+    hints:
+      use_wiki: Gebruik wiki pagina's.
+    keys:
+      use_wiki: Wiki gebruiken
+  model:
+    page:
+      redirect: Doorverwijzing naar [[%{title}]]...
+  navigation:
+    wiki:
+      all_pages: Alle pagina's
+      home: Hoofdpagina
+      title: Wiki
+  pages:
+    all:
+      new_page: Nieuwe pagina maken
+      recent_changes: Recente wijzigingen
+      search:
+        action: Zoeken
+        placeholder: Pagina titel ...
+      site_map: Sitemap
+      title: Alle wikipagina's
+      title_list: Paginalijst
+    body:
+      title_toc: Inhoud
+      wikicloth_exception: 'Sorry, het is niet gelukt de paginainhoud te begrijpen: %{msg}. Probeer het op te lossen en de pagina opnieuw op te slaan.'
+    create:
+      notice: Pagina is gemaakt.
+    cshow:
+      error_noexist: Pagina bestaat niet!
+      redirect_notice: Doorverwezen van %{page} ...
+    destroy:
+      notice: De pagina '%{page}' en alle subpagina's zijn verwijderd.
+    diff:
+      title: "%{title} - veranderingen van versie %{old} tot %{new}"
+    edit:
+      title: Pagina bewerken
+    error_stale_object: Opgelet, de pagina is net veranderd door een ander. Probeer het alsjeblieft opnieuw.
+    form:
+      help:
+        bold: vet
+        external_link_ex: Externe link
+        external_links: Extern
+        heading: niveau %{level}
+        headings: Kop
+        image_link_title: Titel van afbeelding
+        image_links: Plaatjes
+        italic: cursief
+        link_lists: Meer over lijsten
+        link_table: Tabellen
+        link_templates: Sjablonen
+        link_variables: Foodsoft variabelen
+        list_item_1: Eerste in de lijst
+        list_item_2: Tweede in de lijst
+        noformat: Zonder opmaak
+        ordered_list: Genummerde lijst
+        section_block: Paragrafen
+        section_character: Tekens
+        section_link: Links
+        section_more: Meer onderwerpen
+        section_table: Tabelopmaak
+        see_tables: zie %{tables_link}
+        tables_link: Tabellen
+        text: tekst
+        title: Korte opmaakhulp
+        unordered_list: Itemlijst
+        wiki_link_ex: Foodsoft wiki pagina
+        wiki_links: Wiki-links
+      preview: Voorbeeld
+    last_updated: Laatst bijgewerkt
+    new:
+      title: Nieuwe wiki pagina
+    page_list_item:
+      date_format: ! '%a, %d %B %Y %H:%M:%S'
+    show:
+      date_format: ! '%d-%m-%y %H:%M'
+      delete: Pagina verwijderen
+      delete_confirm: ! 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
+      diff: Versies vergelijken
+      edit: Pagina bewerken
+      last_updated: Laatst bijgewerkt door <b>%{user}</b> op %{when}
+      subpages: kindpagina's
+      title_versions: Versies
+      versions: Versies (%{count})
+    title: Titel
+    update:
+      notice: Pagina is bijgewerkt.
+    variables:
+      description: Variabelen geven informatie van elders. Als je een variabele gebruikt, wordt deze bij het tonen vervangen door zijn waarde. Foodsoft heeft een aantal voorgedefiniëerde variabelen, zoals naam en adres van je foodcoop, softwareversie, en het aantal leden en leveranciers. De tabel hieronder laat alle beschikbare variabelen zien. Je kunt deze gebruiken in wiki-pagina's en in de voettekst (die in het configuratiescherm aangepast kan worden).
+      title: Foodsoft variabelen
+      value: Huidige waarde
+      variable: Variabele
+    version:
+      author: ! 'Auteur: %{user}'
+      date_format: ! '%a, %d-%m-%Y, %H:%M'
+      revert: Deze versie terugzetten
+      title: ! '%{title} - versie %{version}'
+      title_version: Versie
+      view_current: Huidige versie bekijken

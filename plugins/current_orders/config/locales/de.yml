@@ -1,0 +1,69 @@
+de:
+  config:
+    hints:
+      use_current_orders: Aktiviere Plugin zur erweiterten Bearbeitung laufender Bestellungen. Dies erlaubt Mitgliedern mit Bestellrechten, mehrere Bestellungen gleichzeitig zu bearbeiten (in drei zusätzlichen Ansichten unter dem Menüpunkt Bestellungen). Insbesondere hilfreich für Anpassungen an Liefertagen.
+    keys:
+      use_current_orders: Erweiterte Bearbeitungsansicht
+  current_orders:
+    articles:
+      article:
+        counts: '%{ordergroups} Bestellgruppen bestellten %{articles} verschiedene Produkte.'
+        no_selection: Wähle einen Artikel, um anzuzeigen wer ihn bestellt hat oder downloade eine Abholliste rechts.
+      article_info:
+        supplied_by: von %{supplier}
+        supplied_and_made_by: produziert von %{manufacturer}
+        supplied_by_made_by: von %{supplier} produziert von %{manufacturer}
+        unit: pro %{unit}
+        from: von %{supplier}
+      form:
+        article_placeholder: Artikel suchen...
+        current_orders: Alle Aktuelle Bestellungen
+      index:
+        title: Artikel verteilen
+      ordergroups:
+        piece: St.
+        unit: Einheit
+        add_new: Bestellgruppe hinzufügen
+    navigation:
+      receive: In Empfang nehmen
+      articles: Verteilen
+      ordergroups: Gruppenbestellungen
+    group_orders:
+      index:
+        title: Deine Aktuelle Bestellungen
+    ordergroups:
+      articles:
+        add_new: Artikel hinzufügen...
+        no_selection: Wahl eine Bestellgruppe um die Artikel zu zeigen.
+      form:
+        ordergroup_placeholder: Bestellgruppe auswählen...
+      index:
+        title: Artikel für Bestellgruppe
+      payment_bar:
+        account_balance: Kontostand
+        new_transaction: Neue Transaktion
+        payment: ! 'Zahlung:'
+      show:
+        title: Artikel für %{name}
+    orders:
+      receive:
+        title: Bestellungen in Empfang nehmen
+        no_finished_orders: Jetzt gibt es keine Bestellungen in Empfang zu nehmen.
+  documents:
+    multiple_orders_by_articles:
+      filename: Artikelsortierung aktueller Bestellungen
+      title: Aktuelle Bestellungen - Artikelsortierung
+    multiple_orders_by_groups:
+      filename: Gruppensortierung aktueller Bestellungen
+      title: Aktuelle Bestellungen - Gruppensortierung
+  helpers:
+    current_orders:
+      pay_done: vollständig bezahlt
+      pay_none: nichts zu bezahlen
+      pay_amount: zu bezahlen %{amount}
+  js:
+    current_orders:
+      articles:
+        above: '%{count} mehr<br>als verfügbar'
+        below: '%{count} übrig'
+        equal: alle verteilt

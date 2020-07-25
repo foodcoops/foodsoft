@@ -10,10 +10,6 @@ class Supplier < ApplicationRecord
   has_many :invoices
   belongs_to :shared_supplier  # for the sharedLists-App
 
-  include ActiveModel::MassAssignmentSecurity
-  attr_accessible :name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number, :iban, :custom_fields,
-                  :delivery_days, :order_howto, :note, :shared_supplier_id, :min_order_quantity, :shared_sync_method
-
   validates :name, :presence => true, :length => { :in => 4..30 }
   validates :phone, :presence => true, :length => { :in => 8..25 }
   validates :address, :presence => true, :length => { :in => 8..50 }
@@ -103,7 +99,7 @@ class Supplier < ApplicationRecord
       all_order_numbers << article.order_number if article
     end
     if options[:outlist_absent]
-      outlisted_articles += articles.undeleted.where.not(id: all_order_numbers+[nil])
+      outlisted_articles += articles.undeleted.where.not(order_number: all_order_numbers+[nil])
     end
     return [updated_article_pairs, outlisted_articles, new_articles]
   end
@@ -121,6 +117,7 @@ class Supplier < ApplicationRecord
   def mark_as_deleted
     transaction do
       super
+      update_column :iban, nil
       articles.each(&:mark_as_deleted)
     end
   end

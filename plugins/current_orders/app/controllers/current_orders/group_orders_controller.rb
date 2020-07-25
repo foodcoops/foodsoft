@@ -1,6 +1,6 @@
 class CurrentOrders::GroupOrdersController < ApplicationController
   # Security
-  before_filter :ensure_ordergroup_member
+  before_action :ensure_ordergroup_member
 
   def index
     # XXX code duplication lib/foodsoft_current_orders/app/controllers/current_orders/ordergroups_controller.rb

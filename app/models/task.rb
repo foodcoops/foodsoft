@@ -4,16 +4,13 @@ class Task < ApplicationRecord
   has_many :users, :through => :assignments
   belongs_to :workgroup
   belongs_to :periodic_task_group
+  belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
   scope :non_group, -> { where(workgroup_id: nil, done: false) }
   scope :done, -> { where(done: true) }
   scope :undone, -> { where(done: false) }
 
   attr_accessor :current_user_id
-
-  # form will send user in string. responsibilities will added later
-  include ActiveModel::MassAssignmentSecurity
-  attr_protected :users
 
   validates :name, :presence => true, :length => { :minimum => 3 }
   validates :required_users, :presence => true

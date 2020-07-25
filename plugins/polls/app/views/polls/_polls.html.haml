@@ -1,0 +1,23 @@
+- if Poll.count > 20
+  = items_per_page
+= pagination_links_remote @polls
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper Poll, :name
+      %th= heading_helper Poll, :starts
+      %th= heading_helper Poll, :ends
+      %th= t 'ui.actions'
+  %tbody
+    - for poll in @polls
+      %tr{:class => cycle('even','odd', :name => 'polls')}
+        %td= link_to poll.name, poll
+        %td= format_date poll.starts
+        %td= format_date poll.ends
+        %td
+          - if poll.user_can_vote?(current_user)
+            = link_to t('.vote'), vote_poll_path(poll), class: 'btn btn-mini btn-success'
+          - if poll.user_can_edit?(current_user)
+            = link_to t('ui.edit'), edit_poll_path(poll), class: 'btn btn-mini'
+            = link_to t('ui.delete'), poll, :data => {:confirm => t('ui.confirm_delete', name: poll.name)},
+              :method => :delete, class: 'btn btn-mini btn-danger'

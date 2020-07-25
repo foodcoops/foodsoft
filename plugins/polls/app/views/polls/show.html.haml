@@ -1,0 +1,69 @@
+- title @poll.name
+
+- content_for :actionbar do
+  - if @poll.user_can_vote?(current_user)
+    = link_to t('.vote'), vote_poll_path(@poll), class: 'btn btn-success'
+  - if @poll.user_can_edit?(current_user)
+    = link_to t('ui.edit'), edit_poll_path(@poll), class: 'btn'
+    = link_to t('ui.delete'), @poll, :data => {:confirm => t('.confirm')}, :method => :delete, class: 'btn btn-danger'
+
+%p= simple_format @poll.description
+
+- sums = []
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper PollVote, :name
+      - for choice in @poll.choices
+        - sums << 0
+        %th= choice
+      %th= heading_helper PollVote, :updated_at
+  %tbody
+    - for vote in @poll.poll_votes.includes(:poll_choices)
+      %tr
+        %td
+          - if vote.ordergroup.nil?
+            = show_user vote.user
+          - else
+            = "#{vote.ordergroup.name} (#{show_user vote.user})"
+        - @poll.choices.size.times do |idx|
+          - if choice = vote.poll_choices.find { |choice| choice.choice == idx }
+            - if @poll.event?
+              - if choice.value == 0
+                %td{style:'background-color:#eed3d7'}= "\u2715"
+              - elsif choice.value == 1
+                - sums[idx] += 1
+                %td{style:'background-color:#d6e9c6'}= "\u2714"
+              - else
+                - sums[idx] += 0.5
+                %td{style:'background-color:#fcf8e3'}= "?"
+            - elsif @poll.single_select? || @poll.multi_select?
+              - sums[idx] += 1
+              %td= "\u2717"
+            - else
+              - sums[idx] += choice.value
+              %td= choice.value
+          - else
+            %td
+        %td= format_time vote.updated_at
+  %tfoot
+    %tr
+      %td
+      - for sum in sums
+        %td
+          - best_sum = @poll.resistance_points? ? sums.min : sums.max
+          - if sum == best_sum
+            %strong= sum
+          - else
+            = sum
+      %td
+
+- for vote in @poll.poll_votes
+  - unless vote.note.empty?
+    .comment
+      %strong
+        - if vote.ordergroup.nil?
+          = show_user vote.user
+        - else
+          = "#{vote.ordergroup.name} (#{show_user vote.user})"
+      = simple_format(vote.note)

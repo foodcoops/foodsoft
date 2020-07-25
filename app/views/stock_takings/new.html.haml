@@ -1,9 +1,23 @@
 - title t('.title')
+- content_for :javascript do
+  :javascript
+    $(function() {
+      // Subscribe to database changes.
+      // See publish/subscribe design pattern in /doc.
+      $(document).on('StockArticle#create', function(e) {
+        $.ajax({
+          url: '#{new_on_stock_article_create_stock_takings_path}',
+          type: 'get',
+          data: {stock_article_id: e.stock_article_id},
+          contentType: 'application/json; charset=UTF-8'
+        });
+      });
+    });
 
 - content_for :sidebar do
   %p
     %i= t('.text_deviations', inv_link: link_to(t('.temp_inventory'), stock_articles_path)).html_safe
-  %p= t('.text_need_articles', create_link: link_to(t('.create'), new_stock_article_path)).html_safe
+  %p= t('.text_need_articles', create_link: link_to(t('.create'), new_stock_article_path, :remote => true)).html_safe
 
 = simple_form_for(@stock_taking) do |f|
   = f.input :date, as: :date_picker

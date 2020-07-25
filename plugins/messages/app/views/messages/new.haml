@@ -104,7 +104,8 @@
   #messagegroup
     = f.input :messagegroup_id, :as => :select, include_blank: false, :collection => Messagegroup.undeleted.order(:name)
   #order
-    = f.input :order_id, :as => :select, include_blank: false, :collection => Order.finished_not_closed.order('pickup DESC').includes(:supplier).limit(25)
+    = f.input :order_id, :as => :select, include_blank: false, :collection => Order.finished_not_closed.order('pickup DESC').includes(:supplier).limit(25),
+        :label_method => ->(obj){ t('.order_item', supplier_name: obj.name, pickup: format_date(obj.pickup)) }, :input_html => {class: 'input-xxlarge'}
   #recipients
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.where(id: @message.recipients_ids).map(&:token_attributes).to_json }
   = f.input :private, inline_label: t('.hint_private')

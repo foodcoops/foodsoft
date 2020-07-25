@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Finance::FinancialTransactionsController < ApplicationController
-  before_filter :authenticate_finance
-  before_filter :find_ordergroup, :except => [:new_collection, :create_collection, :index_collection]
+  before_action :authenticate_finance
+  before_action :find_ordergroup, :except => [:new_collection, :create_collection, :index_collection]
   inherit_resources
 #  belongs_to :ordergroup
 
@@ -21,6 +21,7 @@ class Finance::FinancialTransactionsController < ApplicationController
 
     @q = FinancialTransaction.search(params[:q])
     @financial_transactions_all = @q.result(distinct: true).includes(:user).order(sort)
+    @financial_transactions_all = @financial_transactions_all.visible unless params[:show_hidden]
     @financial_transactions_all = @financial_transactions_all.where(ordergroup_id: @ordergroup.id) if @ordergroup
     @financial_transactions = @financial_transactions_all.page(params[:page]).per(@per_page)
 
@@ -50,26 +51,50 @@ class Finance::FinancialTransactionsController < ApplicationController
     render :action => :new
   end
 
+  def destroy
+    transaction = FinancialTransaction.find(params[:id])
+    transaction.revert!(current_user)
+    redirect_to finance_ordergroup_transactions_url(transaction.ordergroup), notice: t('finance.financial_transactions.controller.destroy.notice')
+  end
+
   def new_collection
+    @ordergroups = {}
+    Ordergroup.undeleted.order(:name).map do |ordergroup|
+      obj = { name: ordergroup.name }
+      Ordergroup.custom_fields.each do |field|
+        obj[field[:name]] = ordergroup.settings.custom_fields[field[:name]]
+      end
+      @ordergroups[ordergroup.id] = obj
+    end
   end
 
   def create_collection
     raise I18n.t('finance.financial_transactions.controller.create_collection.error_note_required') if params[:note].blank?
     type = FinancialTransactionType.find_by_id(params[:type_id])
-    params[:financial_transactions].each do |trans|
-      # ignore empty amount fields ...
-      unless trans[:amount].blank?
-        amount = trans[:amount].to_f
-        note = params[:note]
-        ordergroup = Ordergroup.find(trans[:ordergroup_id])
-        if params[:set_balance]
-          note += " (#{amount})"
-          amount -= ordergroup.financial_transaction_class_balance(type.financial_transaction_class)
+    financial_link = nil
+
+    ActiveRecord::Base.transaction do
+      financial_link = FinancialLink.new if params[:create_financial_link]
+
+      params[:financial_transactions].each do |trans|
+        # ignore empty amount fields ...
+        unless trans[:amount].blank?
+          amount = trans[:amount].to_f
+          note = params[:note]
+          ordergroup = Ordergroup.find(trans[:ordergroup_id])
+          if params[:set_balance]
+            note += " (#{amount})"
+            amount -= ordergroup.financial_transaction_class_balance(type.financial_transaction_class)
+          end
+          ordergroup.add_financial_transaction!(amount, note, @current_user, type, financial_link)
         end
-        ordergroup.add_financial_transaction!(amount, note, @current_user, type)
       end
+
+      financial_link.try(&:save!)
     end
-    redirect_to finance_ordergroups_url, notice: I18n.t('finance.financial_transactions.controller.create_collection.notice')
+
+    url = financial_link ? finance_link_url(financial_link.id) : finance_ordergroups_url
+    redirect_to url, notice: I18n.t('finance.financial_transactions.controller.create_collection.notice')
   rescue => error
     flash.now[:alert] = error.message
     render action: :new_collection
@@ -78,7 +103,7 @@ class Finance::FinancialTransactionsController < ApplicationController
   protected
 
   def find_ordergroup
-    @ordergroup = Ordergroup.find(params[:ordergroup_id])
+    @ordergroup = Ordergroup.include_transaction_class_sum.find(params[:ordergroup_id])
   end
 
 end

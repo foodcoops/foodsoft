@@ -5,9 +5,9 @@
 class OrdersController < ApplicationController
   include Concerns::SendOrderPdf
 
-  before_filter :authenticate_pickups_or_orders
-  before_filter :authenticate_orders, except: [:receive, :receive_on_order_article_create, :receive_on_order_article_update, :show]
-  before_filter :remove_empty_article, only: [:create, :update]
+  before_action :authenticate_pickups_or_orders
+  before_action :authenticate_orders, except: [:receive, :receive_on_order_article_create, :receive_on_order_article_update, :show]
+  before_action :remove_empty_article, only: [:create, :update]
 
   # List orders
   def index
@@ -60,8 +60,15 @@ class OrdersController < ApplicationController
 
   # Page to create a new order.
   def new
-    @order = Order.new(supplier_id: params[:supplier_id]).init_dates
-    @order.article_ids = Order.find(params[:order_id]).article_ids if params[:order_id]
+    if params[:order_id]
+      old_order = Order.find(params[:order_id])
+      @order = Order.new(supplier_id: old_order.supplier_id).init_dates
+      @order.article_ids = old_order.article_ids
+    else
+      @order = Order.new(supplier_id: params[:supplier_id]).init_dates
+    end
+  rescue => error
+    redirect_to orders_url, alert: t('errors.general_msg', msg: error.message)
   end
 
   # Save a new order.

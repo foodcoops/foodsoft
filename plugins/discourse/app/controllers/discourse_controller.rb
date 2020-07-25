@@ -1,6 +1,6 @@
 class DiscourseController < ApplicationController
 
-  before_filter -> { require_plugin_enabled FoodsoftDiscourse }
+  before_action -> { require_plugin_enabled FoodsoftDiscourse }
 
   protected
 

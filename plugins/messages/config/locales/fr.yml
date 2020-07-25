@@ -1,0 +1,74 @@
+fr:
+  activerecord:
+    attributes:
+      message:
+        body: Contenu
+        order_id: Commande
+        ordergroup_id: Cellule
+        private: Privé
+        recipient_tokens: Destinataires
+        send_to_all: Envoyer à tous les membres
+        subject: Sujet
+        workgroup_id: Équipe
+      messagegroup:
+        name: Nom
+        user_tokens: Membres
+  admin:
+    ordergroups:
+      show:
+        send_message: Envoyer un message
+    users:
+      show:
+        send_message: Envoyer un message
+  helpers:
+    messages:
+      write_message: Écrire un message
+    submit:
+      message:
+        create: envoyer un message
+  home:
+    index:
+      messages:
+        title: Derniers messages reçus
+        view_all:
+          text: 'Afficher %{messages} ou %{threads}'
+          messages: tous les messages
+    start_nav:
+      write_message: Écrire un message
+  messages:
+    create:
+      notice: Le message a bien été sauvegardé et est en cours d'envoi.
+    messages:
+      reply: Répondre
+    model:
+      reply_header: ! 'Le %{when}, %{user} a écrit:'
+    new:
+      hint_private: Le message n'apparaîtra pas dans la boîte de réception du Foodsoft
+      list:
+        desc: ! 'Pour envoyer un message à tout le monde, passe par la mailing list "%{list}"'
+        mail: par exemple en envoyant un email à %{email}
+        subscribe: Pour plus d'explications concernant la mailing list, consulte le %{link}
+        subscribe_msg: Il faudra peut être d'abord t'inscrire à la mailing list.
+        wiki: wiki (section mailing list)
+      no_user_found: Aucun-e membre trouvée avec cet identifiant
+      search: Rechercher ...
+      search_user: Rechercher unE membre
+      title: Nouveau message
+    show:
+      all_messages: Aperçu des messages
+      from: ! 'De:'
+      reply: Répondre
+      sent_on: ! 'Envoyé le:'
+      subject: ! 'Sujet:'
+      title: Afficher le contenu du message
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Répondre: %{reply_url}
+        Afficher ce message dans ton navigateur: %{msg_url}
+        Préférences des messages: %{profile_url}
+  simple_form:
+    labels:
+      settings:
+        messages:
+          send_as_email: Te transmettre les messages de la boufcoop par email

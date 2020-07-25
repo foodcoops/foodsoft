@@ -35,6 +35,7 @@ class Mailer < ActionMailer::Base
   def upcoming_tasks(user, task)
     @user = user
     @task = task
+    @next_tasks = Task.order(:due_date).next_assigned_tasks_for(user)
 
     mail to: user,
          subject: I18n.t('mailer.upcoming_tasks.subject')

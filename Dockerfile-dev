@@ -1,7 +1,7 @@
-FROM ruby:2.3
+FROM ruby:2.4
 
 # Install dependencies
-RUN deps='libmagic-dev xvfb qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x' && \
+RUN deps='libmagic-dev chromium' && \
     apt-get update && \
     apt-get install --no-install-recommends -y $deps && \
     rm -Rf /var/lib/apt/lists/* /var/cache/apt/*
@@ -11,6 +11,8 @@ ENV PORT=3000 \
     RAILS_ENV=development \
     RAILS_LOG_TO_STDOUT=true \
     RAILS_SERVE_STATIC_FILES=true \
+    \
+    CHROMIUM_FLAGS=--no-sandbox \
     \
     BUNDLE_PATH=/home/app/bundle \
     BUNDLE_APP_CONFIG=/home/app/bundle/config
@@ -27,7 +29,7 @@ WORKDIR /home/app/src
 COPY Gemfile Gemfile.lock ./
 COPY plugins ./plugins
 RUN bundle config build.nokogiri "--use-system-libraries" && \
-    bundle install -j 4
+    bundle install --frozen -j 4
 
 # Copy the application code
 COPY . ./

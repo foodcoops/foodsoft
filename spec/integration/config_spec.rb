@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 feature 'admin/configs' do
-  let(:name) { Faker::Lorem.words(rand(2..4)).join(' ') }
+  let(:name) { Faker::Lorem.words(number: rand(2..4)).join(' ') }
   let(:email) { Faker::Internet.email }
   let(:admin) { create :admin }
 

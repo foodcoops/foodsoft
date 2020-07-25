@@ -10,7 +10,7 @@ FactoryBot.define do
 
     factory :admin do
       sequence(:nick) { |n| "admin#{n}" }
-      first_name 'Administrator'
+      first_name { 'Administrator' }
       after :create do |user, evaluator|
         create :workgroup, role_admin: true, user_ids: [user.id]
       end
@@ -35,11 +35,11 @@ FactoryBot.define do
     sequence(:name) {|n| "Group ##{n}"}
 
     factory :workgroup do
-      type ''
+      type { '' }
     end
 
     factory :ordergroup do
-      type 'Ordergroup'
+      type { 'Ordergroup' }
       sequence(:name) {|n| "Order group ##{n}"}
       # workaround to avoid needing to save the ordergroup
       #   avoids e.g. error after logging in related to applebar

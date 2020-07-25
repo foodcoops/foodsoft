@@ -1,7 +1,7 @@
 / insert_after 'erb[silent]:contains("<dashboard_middle_mark>")'
 - if FoodsoftMessages.enabled?
-  - unless Message.pub.empty?
+  - unless Message.readable_for(current_user).empty?
     %section#messages
       %h2= t '.messages.title'
-      = render 'messages/messages', messages: Message.pub.order('created_at DESC').limit(5), pagination: false
+      = render 'messages/messages', messages: Message.readable_for(current_user).includes(:sender).order('created_at DESC').limit(5), pagination: false
       %p= raw t '.messages.view_all.text', messages: link_to(t('.messages.view_all.messages'), messages_path), threads: link_to(t('.messages.view_all.threads'), message_threads_path)

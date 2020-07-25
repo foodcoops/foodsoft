@@ -29,13 +29,18 @@ If instead you just want to run Foodsoft without changing its code, please refer
    unfinished parts. If you want to be safe, choose the last release:
    `git checkout $(git tag -l | grep ^v | sort -rn | head -n1)`
 
-1. Install RVM and Ruby 2+ (if you have not done so before):
+   *Note:* When developing on Windows you might run into issues with shell scripts
+   because of Git auto-crlf. Have a look how to avoid that in the
+   [Docker Development Setup](./SETUP_DEVELOPMENT_DOCKER.md#prerequisites-windows-only)
+   instructions.
+
+1. Install RVM and Ruby 2.4+ (if you have not done so before):
 
         \curl -L https://get.rvm.io | bash
         source ~/.rvm/scripts/rvm
-        rvm install 2.3
+        rvm install 2.4
 
-    We try to keep Foodsoft compatible with Ruby 2.3 as well as any later versions,
+    We try to keep Foodsoft compatible with Ruby 2.4 as well as any later versions,
     so if you use this and don't want to use RVM, that might actually work.
 
 2. Install system dependencies.
@@ -47,11 +52,10 @@ If instead you just want to run Foodsoft without changing its code, please refer
    [libxslt1-dev](https://packages.debian.org/stable/libxslt1-dev)
    [libffi-dev](https://packages.debian.org/stable/libffi-dev)
    [libreadline-dev](https://packages.debian.org/stable/libreadline-dev)
-   [libmagic-dev](https://packages.debian.org/stable/libmagic-dev)
-   [libqtwebkit-dev](https://packages.debian.org/stable/libqtwebkit-dev):
+   [libmagic-dev](https://packages.debian.org/stable/libmagic-dev):
 
         # Debian/Ubuntu
-        sudo apt-get install libv8-dev libmysqlclient-dev libxml2-dev libxslt1-dev libffi-dev libreadline-dev libmagic-dev libqtwebkit-dev
+        sudo apt-get install libv8-dev libmysqlclient-dev libxml2-dev libxslt1-dev libffi-dev libreadline-dev libmagic-dev
 
    For CentOS/Redhat you need
    [v8](https://apps.fedoraproject.org/packages/v8)
@@ -60,11 +64,10 @@ If instead you just want to run Foodsoft without changing its code, please refer
    [libxslt-devel](https://apps.fedoraproject.org/packages/libxslt-devel)
    [libffi-devel](https://apps.fedoraproject.org/packages/libffi-devel)
    [readline-devel](https://apps.fedoraproject.org/packages/readline-devel)
-   [file-devel](https://apps.fedoraproject.org/packages/file-devel)
-   [qtwebkit-devel](https://apps.fedoraproject.org/packages/qtwebkit-devel):
+   [file-devel](https://apps.fedoraproject.org/packages/file-devel):
 
         # CentOS/Redhat
-        sudo yum install v8 community-mysql-devel libxml2-devel libxslt-devel libffi-devel readline-devel file-devel qtwebkit-devel
+        sudo yum install v8 community-mysql-devel libxml2-devel libxslt-devel libffi-devel readline-devel file-devel
 
 3. Install Ruby dependencies:
 
@@ -99,6 +102,9 @@ If instead you just want to run Foodsoft without changing its code, please refer
 
 9. Have phun!
 
+For running integration tests, you also need the Chromium/Chrome web browser.
+On Debian that would be `sudo apt-get install chromium`, on Ubuntu
+`sudo apt-get install chromium-browser`.
 
 ### Manual configuration
 
@@ -177,7 +183,8 @@ explained here.
 
 To avoid having to go through setting up all dependencies, you can also run Foodsoft
 within a docker image. While the default [`Dockerfile`](../Dockerfile) is setup for production,
-[`Dockerfile.dev`](../Dockerfile.dev) is meant for development. Even better, you can
-use docker-compose (using [`docker-compose.dev.yml`](../docker-compose.dev.yml)) to
+[`Dockerfile-dev`](../Dockerfile-dev) is meant for development. Even better, you can
+use docker-compose (using [`docker-compose-dev.yml`](../docker-compose-dev.yml)) to
 setup the whole stack at once.
 
+See [Setup Development Docker](./SETUP_DEVELOPMENT_DOCKER.md) for a detailed description.

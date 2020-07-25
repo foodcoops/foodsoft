@@ -1,7 +1,7 @@
 .well.well-small
   = search_form_for @q, url: url,
         html: {data: {'submit-onchange' => true}, method: :get, remote: true, class: 'form-search'} do |f|
-    = f.text_field :note_cont, class: 'search-query', placeholder: t('.search_placeholder')
+    = f.text_field :note_cont, class: 'search-query', placeholder: t('ui.search_placeholder')
 
     &nbsp;
     = label_tag 'q_created_on_gteq', FinancialTransaction.human_attribute_name(:created_on)
@@ -20,3 +20,7 @@
       %span.add-on -
       = f.text_field :amount_lteq, class: 'input-mini search-query'
 
+    &nbsp;
+    %label{for: 'show_hidden'}
+      = check_box_tag 'show_hidden', 1, params[:show_hidden]
+      = t '.show_hidden'

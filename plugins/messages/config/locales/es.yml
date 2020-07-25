@@ -1,0 +1,128 @@
+es:
+  activerecord:
+    attributes:
+      message:
+        body: Cuerpo
+        messagegroup_id: Grupo de mensajes
+        order_id: Pedido
+        ordergroup_id: Grupo de pedido
+        private: Privado
+        recipient_tokens: Destinatarios (adicionales)
+        send_method:
+          all: Enviar a todos los miembros
+          recipients: Enviar a miembros específicos
+          order: Enviar a los miembros que han participado de un pedido
+          ordergroup: Enviar a los miembros de un grupo de pedido
+          messagegroup: Enviar a los miembros de un grupo de mensajes
+          workgroup: Enviar a miembros de un grupo de trabajo
+        send_to_all: Enviar a todos los miembros
+        subject: Asunto
+        workgroup_id: Grupo de trabajo
+      messagegroup:
+        description: Descripción
+        name: Nombre
+        user_tokens: Miembros
+    models:
+      message: Mensaje
+      messagegroup: Grupo de mensajes
+  admin:
+    ordergroups:
+      show:
+        send_message: Envía mensaje
+    users:
+      show:
+        send_message: Enviar mensaje
+  config:
+    hints:
+      mailing_list: Lista de correo para usar en lugar del sistema de mensajería para enviar correo a todos los miembros.
+      mailing_list_subscribe: Dirección de email a donde los miembros pueden enviar correo para suscribirse.
+      use_messages: Permitir que los miembros de comuniquen unos con otros dentro de Foodsoft.
+    keys:
+      use_messages: Mensajes
+      mailing_list: Lista de correos
+      mailing_list_subscribe: Suscribirse a la lista de correos
+  helpers:
+    messages:
+      write_message: Escribe mensaje
+    submit:
+      message:
+        create: envía mensaje
+  home:
+    index:
+      messages:
+        title: Mensajes recientes
+        view_all:
+          text: 'Muestra %{messages} o %{threads}'
+          messages: todos los mensajes
+          threads: Hilos
+    start_nav:
+      write_message: Escribir un mensaje
+  messagegroups:
+    index:
+      title: Grupos de mensaje
+    join:
+      error: 'No pudo unirse al grupo de mensaje: %{error}'
+      notice: Se ha unido al grupo de mensajes
+    leave:
+      error: 'El grupo de mensajes no se ha podido dejar: %{error}'
+      notice: Se ha dejado el grupo de mensajes
+    messagegroup:
+      join: Unirse al grupo de mensajes
+      leave: Dejar grupo de mensajes
+  messages:
+    actionbar:
+      message_threads: Muestra como hilos
+      messages: Muestra como lista
+      new: Nuevo mensaje
+    index:
+      title: Mensajes
+    messages:
+      reply: Responde
+    new:
+      error_private: Lo siento, este mensaje es privado.
+      list:
+        desc: ! 'Envía mensajes a todos los miembros a través de la lista de correo: %{list}'
+        mail: por ejemplo con un email a %{email}.
+        subscribe: Puedes leer más sobre la lista de correos en %{link}.
+        subscribe_msg: Quizás tengas que suscribirte a la lista primero.
+      message: mensaje
+      no_user_found: No se ha encontrado el usuario
+      reply_to: Este mensaje es una respuesta a otro %{link}.
+      search: Busca ...
+      search_user: Busca usuario
+      title: Nuevo mensaje
+    show:
+      all_messages: Todos los mensajes
+      from: ! 'De:'
+      group: 'Grupo:'
+      reply: Responde
+      reply_to: 'Responde a:'
+      sent_on: ! 'Enviado:'
+      subject: ! 'Asunto:'
+      title: Muestra mensaje
+      to: 'A:'
+    thread:
+      all_message_threads: Todos los hilos de mensaje
+      reply: Responde
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: muestra todos
+    index:
+      title: Hilos de mensaje
+    message_threads:
+      last_reply_at: Última respuesta el
+      last_reply_by: Última respuesta de 
+      started_at: Comenzado el
+      started_by: Comenzado por
+  navigation:
+    admin:
+      messagegroups: Grupos de mensaje
+    messages: Mensajes
+  shared:
+    user_form_fields:
+      messagegroups: Únete o sal de los mensajes de grupo
+  simple_form:
+    labels:
+      settings:
+        messages:
+          send_as_email: Recibir mensajes en emails.

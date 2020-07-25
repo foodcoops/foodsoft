@@ -17,6 +17,15 @@ For installing instructions see https://docs.docker.com/installation/.
 Docker runs on every modern Linux kernel, but also with a little help on MacOS
 and Windows!
 
+## Prerequisites (Windows only)
+To avoid line-ending issues with shell scripts, make sure to configure
+Git autocrlf to keep linux line endings via
+
+    git config --local core.autocrlf input
+
+Don't forget to do a clean checkout (delete everything except `.git` directory)
+afterwards.
+
 ## Setup
 
 Then setup foodsoft development (this will take some time, containers needs
@@ -57,7 +66,7 @@ Open a rails console
 
 Setup the test database
 
-    docker-compose-dev run --rm foodsoft bundle exec rake db:setup RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test
+    docker-compose-dev run --rm foodsoft bundle exec rake db:setup RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8
 
 Run the tests
 

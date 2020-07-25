@@ -6,7 +6,6 @@ de:
         created_by: Erstellt von
         data: Daten
         mime: MIME-Typ
-        name: Name
   config:
     hints:
       documents_allowed_extension: Eine Liste an erlaubten Dateiendungen getrennt durch Leerzeichen.
@@ -33,3 +32,8 @@ de:
       new: Neues Dokument anlegen
       new_folder: Neuen Ordner anlegen
       title: Dokumente
+    move:
+      root_folder: Start
+      title: Verschieben
+    update:
+      notice: Dokument oder Ordner wurde verschoben

@@ -73,7 +73,7 @@
           - FinancialTransactionClass.sorted.each do |fc|
             %th
               = fc.display
-        - for ft in current_user.ordergroup.financial_transactions.limit(5).order('created_on DESC')
+        - for ft in current_user.ordergroup.financial_transactions.visible.includes(:financial_transaction_type, :user).limit(5).order(created_on: :desc)
           %tr
             %td= format_time(ft.created_on)
             %td= h(show_user(ft.user))

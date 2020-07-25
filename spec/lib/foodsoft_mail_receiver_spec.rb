@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe FoodsoftMailReceiver do
 
   before :all do
-    @server = FoodsoftMailReceiver.new 0
+    @server = FoodsoftMailReceiver.new 2525, '127.0.0.1', 4, logger_severity: 5
     @server.start
   end
 
@@ -42,7 +42,7 @@ describe FoodsoftMailReceiver do
 
   it 'does not accept invalid addresses via SMTP' do
     expect {
-      Net::SMTP.start(@server.host, @server.port) do |smtp|
+      Net::SMTP.start(@server.hosts.first, @server.ports.first) do |smtp|
         smtp.send_message 'body', 'from@example.com', 'invalid'
       end
     }.to raise_error(Net::SMTPFatalError)
@@ -50,7 +50,7 @@ describe FoodsoftMailReceiver do
 
   it 'does not accept invalid addresses via SMTP' do
     expect {
-      Net::SMTP.start(@server.host, @server.port) do |smtp|
+      Net::SMTP.start(@server.hosts.first, @server.ports.first) do |smtp|
         smtp.send_message 'body', 'from@example.com', 'invalid'
       end
     }.to raise_error(Net::SMTPFatalError)

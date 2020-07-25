@@ -1,0 +1,81 @@
+fr:
+  activerecord:
+    attributes:
+      page:
+        body: Contenu
+        parent_id: Page parente
+        title: Titre
+  model:
+    page:
+      redirect: Redirection vers [[%{title}]]...
+  navigation:
+    wiki:
+      all_pages: Toutes les pages
+      home: Page d'accueil
+  pages:
+    all:
+      new_page: Créer une nouvelle page
+      recent_changes: Changement récents
+      search:
+        action: Recherche
+        placeholder: Titre de la page ...
+      site_map: Aide à la navigation
+      title: Toutes les pages du wiki
+      title_list: Liste des pages
+    body:
+      title_toc: Contenu
+      wikicloth_exception: 'Une erreur s''est produite lors de l''interprétation de la page wiki: %{msg}. Essaye de la corriger et de sauvegarder à nouveau.'
+    create:
+      notice: La page a bien été créée.
+    cshow:
+      error_noexist: Cette page n'existe pas!
+      redirect_notice: Redirigé à partir de %{page}...
+    destroy:
+      notice: La page '%{page}' et toutes ses descendantes ont bien été supprimées.
+    edit:
+      title: Modifier cette page
+    error_stale_object: Cette page est en cours de modification par unE autre membre. Merci de réessayer plus tard.
+    form:
+      help:
+        bold: gra
+        external_link_ex: Page extérieure
+        external_links: Externe
+        heading: Plan %{level}
+        headings: En-tête
+        italic: italique
+        link_table: Format des tableaux
+        list_item_1: Premier item
+        list_item_2: Deuxième item
+        noformat: Pas de formatage
+        ordered_list: Énumérations
+        section_block: Format de paragraphe
+        section_character: Format de charactère
+        section_link: Format des liens
+        text: texte
+        title: Assistant de mise en forme rapide
+        unordered_list: Liste non ordonnée
+        wiki_link_ex: Page de wiki du Foodsoft
+        wiki_links: Liens Wiki
+      preview: Aperçu
+    last_updated: Dernièrement mis à jour
+    new:
+      title: Ajouter une nouvelle page au Wiki
+    page_list_item:
+      date_format: ! '%a, %d. %B %Y %H:%M:%S'
+    show:
+      date_format: ! '%d.%m.%y %H:%M'
+      delete: Supprimer la page
+      delete_confirm: ! 'Attention, tous les contenus seront aussi supprimés. T''es sûrE de ton coup?'
+      edit: Modifier la page
+      last_updated: Dernière modification le %{when} par <b>%{user}<b>
+      subpages: Sous-pages
+    title: Titre
+    update:
+      notice: La page a été mise à jour
+    version:
+      author: ! 'Auteur: %{user}'
+      date_format: ! '%a, %d.%m.%Y, %H:%M heure'
+      revert: Revenir à cette version
+      title: ! '%{title} - Version %{version}'
+      title_version: Versio
+      view_current: Afficher la version actuelle

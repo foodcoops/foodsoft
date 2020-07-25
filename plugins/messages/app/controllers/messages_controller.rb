@@ -1,10 +1,10 @@
 class MessagesController < ApplicationController
 
-  before_filter -> { require_plugin_enabled FoodsoftMessages }
+  before_action -> { require_plugin_enabled FoodsoftMessages }
 
   # Renders the "inbox" action.
   def index
-    @messages = Message.pub.page(params[:page]).per(@per_page).order('created_at DESC').includes(:sender)
+    @messages = Message.readable_for(current_user).page(params[:page]).per(@per_page).order('created_at DESC').includes(:sender)
   end
 
   # Creates a new message object.
@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
         @message.reply_to = original_message.reply_to
       end
       if original_message.is_readable_for?(current_user)
-        @message.add_recipients [original_message.sender]
+        @message.add_recipients [original_message.sender_id]
         @message.group_id = original_message.group_id
         @message.private = original_message.private
         @message.subject = I18n.t('messages.model.reply_subject', :subject => original_message.subject)

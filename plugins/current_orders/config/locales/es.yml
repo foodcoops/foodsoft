@@ -1,0 +1,68 @@
+es:
+  config:
+    keys:
+      use_current_orders: Pantallas extra de distribución
+  current_orders:
+    articles:
+      article:
+        counts: 'las células %{ordergroups} pidieron %{articles} diferentes artículos.'
+        no_selection: Elige un artículo para ver quién lo ha pedido o descarga las listas de recogida a la derecha.
+      article_info:
+        origin_in: en %{origin}
+        supplied_by: de %{supplier}
+        supplied_and_made_by: hecho por %{manufacturer}
+        supplied_by_made_by: de %{supplier} hecho por %{manufacturer}
+        unit: por %{unit}
+        from: de %{supplier}
+      form:
+        article_placeholder: Busca artículos...
+        current_orders: Todos los pedidos activos
+      index:
+        title: Distribuye artículos
+      ordergroups:
+        piece: pieza
+        unit: unidad
+        add_new: Añade un grupo de pedido...
+    navigation:
+      receive: Recibe
+      articles: Distribuye
+      ordergroups: Pedidos de los miembros
+    group_orders:
+      index:
+        title: Tus pedidos activos
+    ordergroups:
+      articles:
+        add_new: Añade un artículo...
+        no_selection: Elige un grupo de pedido para ver los artículos.
+      form:
+        ordergroup_placeholder: Elige una célula...
+      index:
+        title: Artículos por grupo de pedido
+      payment_bar:
+        account_balance: Balance de cuenta
+        new_transaction: Nueva transacción
+        payment: ! 'Pago:'
+      show:
+        title: Artículos para %{name}
+    orders:
+      receive:
+        title: Recibir pedidos
+        no_finished_orders: En este momento no hay pedidos que recibir.
+  documents:
+    multiple_orders_by_articles:
+      filename: Pedidos activos ordenados por artículo
+      title: Pedidos activos - por artículo
+    multiple_orders_by_groups:
+      filename: Pedidos activos ordenados por grupo
+      title: Pedidos activos - por grupo
+  helpers:
+    current_orders:
+      pay_done: Totalmente pagado
+      pay_none: Nada que pagar
+      pay_amount: A pagar %{amount}
+  js:
+    current_orders:
+      articles:
+        above: '%{count} más<br>de los disponibles'
+        below: 'quedan todavía %{count}'
+        equal: todo distribuido

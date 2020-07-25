@@ -1,0 +1,31 @@
+es:
+  activerecord:
+    attributes:
+      document:
+        created_at: Creado en
+        created_by: Creado por
+        data: Datos
+        mime: Tipo MIME
+        name: Nombre
+  config:
+    hints:
+      documents_allowed_extension: Una lista de extensiones de archivo permitidas, separadas por espacios.
+      use_documents: Agregar una página básica de compartir documentos al menú de la cooperativa.
+    keys:
+      documents_allowed_extension: Extensiones permitidas
+      use_documents: Activar documentos
+  navigation:
+    documents: Documentos
+  documents:
+    create:
+      error: 'El documento no puede ser creado: %{error}'
+      notice: Se ha creado el documento
+    destroy:
+      error: 'El documento no puede ser borrado: %{error}'
+      no_right: No puedes borrar este documento
+      notice: Se ha borrado el documento
+    form:
+      new: Nuevo Documento
+    index:
+      new: Sube nuevo documento
+      title: Documentos

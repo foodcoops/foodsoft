@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   helper_method :available_locales
 
   protect_from_forgery
-  before_filter  :authenticate, :set_user_last_activity, :store_controller, :items_per_page
-  after_filter  :remove_controller
-  around_filter :set_time_zone, :set_currency
+  before_action  :authenticate, :set_user_last_activity, :store_controller, :items_per_page
+  after_action  :remove_controller
+  around_action :set_time_zone, :set_currency
 
 
   # Returns the controller handling the current request.
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   # To disable a controller in the plugin, you can use this as a `before_action`:
   #
   #     class MypluginController < ApplicationController
-  #       before_filter -> { require_plugin_enabled FoodsoftMyplugin }
+  #       before_action -> { require_plugin_enabled FoodsoftMyplugin }
   #     end
   #
   def require_plugin_enabled(plugin)

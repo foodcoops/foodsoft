@@ -9,6 +9,7 @@ class Group < ApplicationRecord
   has_many :users, -> { where(deleted_at: nil) }, through: :memberships
 
   validates :name, :presence => true, :length => {:in => 1..25}
+  validates_uniqueness_of :name
 
   attr_reader :user_tokens
 

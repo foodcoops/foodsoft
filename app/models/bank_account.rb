@@ -10,6 +10,18 @@ class BankAccount < ApplicationRecord
   validates_numericality_of :balance, :message => I18n.t('bank_account.model.invalid_balance')
 
   # @return [Function] Method wich can be called to import transaction from a bank or nil if unsupported
-  def find_import_method
+  def find_connector
+    klass = BankAccountConnector.find iban
+    return klass.new self if klass
+  end
+
+  def assign_unlinked_transactions
+    count = 0
+    bank_transactions.without_financial_link.includes(:supplier, :user).each do |t|
+      if t.assign_to_ordergroup || t.assign_to_invoice
+        count += 1
+      end
+    end
+    count
   end
 end

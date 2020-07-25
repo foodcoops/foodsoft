@@ -1,4 +1,4 @@
-- orders = Order.open.reject{ |order| order == current_order }
+- orders = Order.open.started.reject{ |order| order == current_order }
 - unless orders.empty?
   %h2= t '.title'
   %ul.unstyled

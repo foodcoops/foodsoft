@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SuppliersController < ApplicationController
-  before_filter :authenticate_suppliers, :except => [:index, :list]
+  before_action :authenticate_suppliers, :except => [:index, :list]
   helper :deliveries
 
   def index
@@ -25,23 +25,23 @@ class SuppliersController < ApplicationController
     end
   end
 
-  def create    
-    @supplier = Supplier.new(params[:supplier])
+  def create
+    @supplier = Supplier.new(supplier_params)
     if @supplier.save
       flash[:notice] = I18n.t('suppliers.create.notice')
       redirect_to suppliers_path
     else
       render :action => 'new'
-    end 
+    end
   end
 
-  def edit    
+  def edit
     @supplier = Supplier.find(params[:id])
   end
-  
+
   def update
     @supplier = Supplier.find(params[:id])
-    if @supplier.update_attributes(params[:supplier])
+    if @supplier.update_attributes(supplier_params)
       flash[:notice] = I18n.t('suppliers.update.notice')
       redirect_to @supplier
     else
@@ -57,11 +57,21 @@ class SuppliersController < ApplicationController
     rescue => e
       flash[:error] = I18n.t('errors.general_msg', :msg => e.message)
       redirect_to @supplier
-  end  
-  
+  end
+
   # gives a list with all available shared_suppliers
   def shared_suppliers
     @shared_suppliers = SharedSupplier.all
   end
-  
+
+  private
+
+  def supplier_params
+    params
+      .require(:supplier)
+      .permit(:name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
+              :iban, :custom_fields, :delivery_days, :order_howto, :note,
+              :shared_supplier_id, :min_order_quantity, :shared_sync_method)
+  end
+
 end

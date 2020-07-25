@@ -1,5 +1,8 @@
 = raw t '.text0', ordergroup: @group_order.ordergroup_name, order: @order.name, when: I18n.l(@order.ends), user: show_user(@order.updated_by)
+- if @order.pickup
+  = raw t '.text1', pickup: I18n.l(@order.pickup)
+= raw t '.text2'
 - for group_order_article in @group_order.group_order_articles.ordered.includes(:order_article)
   - article = group_order_article.order_article.article
   \- #{article.name}:  #{group_order_article.result} x #{article.unit} = #{group_order_article.result * article.fc_price}
-= raw t '.text1', sum: @group_order.price, order_url: group_order_url(@group_order), foodcoop: FoodsoftConfig[:name]
+= raw t '.text3', sum: @group_order.price, order_url: group_order_url(@group_order), foodcoop: FoodsoftConfig[:name]

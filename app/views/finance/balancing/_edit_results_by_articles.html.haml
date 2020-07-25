@@ -1,8 +1,34 @@
+- content_for :javascript do
+  :javascript
+    $(function() {
+      // create List for search-feature (using list.js, http://listjs.com)
+      var listjsResetPlugin = ['reset', {highlightClass: 'btn-primary'}];
+      var listjsDelayPlugin = ['delay', {delayedSearchTime: 500}];
+      new List(document.body, {
+        valueNames: ['name'],
+        engine: 'unlist',
+        plugins: [listjsResetPlugin, listjsDelayPlugin],
+        // make large pages work too (as we don't have paging - articles may disappear!)
+        page: 10000,
+        indexAsync: true
+      });
+      $('input').keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+      });
+    });
+
+
+
 %table.ordered-articles.table.table-striped
   %thead
     %tr
-      %th= sort_link_helper Article.model_name.human, "name"
-      %th= sort_link_helper Article.human_attribute_name(:order_number_short), "order_number"
+      %th
+        .input-append
+        = text_field_tag :article, params[:article], placeholder: (heading_helper Article, :name), class: 'delayed-search resettable search-query'
+      %th= heading_helper Article, :order_number
       %th= t('.amount')
       %th= heading_helper Article, :unit
       %th= t('.net')
@@ -12,6 +38,12 @@
       %th{:colspan => "2"}
         = link_to t('.add_article'), new_order_order_article_path(@order), remote: true,
           class: 'btn btn-small' unless @order.closed?
-  %tbody#result_table
-    - for order_article in @articles
+  %tbody.list#result_table
+    - for order_article in @articles.select { |oa| oa.units > 0 }
+      = render :partial => "order_article_result", :locals => {:order_article => order_article}
+
+    %tr
+      %td{ colspan: 10 } The following were not ordered
+
+    - for order_article in @articles.select { |oa| oa.units == 0 }
       = render :partial => "order_article_result", :locals => {:order_article => order_article}

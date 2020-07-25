@@ -11,7 +11,11 @@
       = number_to_currency(article.price)
   %td= number_to_percentage(article.tax) if article.tax != 0
   %td= number_to_currency(article.deposit) if article.deposit != 0
-  %td= link_to t('ui.edit'), edit_supplier_article_path(@supplier, article),
-      :remote => true, class: 'btn btn-mini'
-  %td= link_to t('ui.delete'), [@supplier, article],
-      :method => :delete, :data => {:confirm => t('ui.confirm_delete', name: article.name)}, :remote => true, class: 'btn btn-mini btn-danger'
+  %td
+    = link_to t('ui.edit'), edit_supplier_article_path(@supplier, article),
+      remote: true, class: 'btn btn-mini'
+    = link_to t('ui.copy'), supplier_article_copy_path(@supplier, article),
+      remote: true, class: 'btn btn-mini'
+    = link_to t('ui.delete'), [@supplier, article],
+      method: :delete, data: {confirm: t('ui.confirm_delete', name: article.name)},
+      remote: true, class: 'btn btn-mini btn-danger'

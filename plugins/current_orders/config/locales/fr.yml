@@ -1,0 +1,10 @@
+fr:
+  current_orders:
+    articles:
+      article_info:
+        supplied_by: de %{supplier}
+        supplied_and_made_by: fait par %{manufacturer}
+        from: de %{supplier}
+    ordergroups:
+      show:
+        title: Articles pour %{name}

@@ -1,0 +1,4 @@
+%div
+  = text_field_tag 'poll[choices][]', value
+  = link_to t('.remove'), "#", title: t('.remove_choice'), 'data-remove-choice' => true,
+    class: 'btn btn-small'

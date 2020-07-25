@@ -45,8 +45,8 @@ class HomeController < ApplicationController
         sort = "created_on DESC"
       end
 
-      @financial_transactions = @ordergroup.financial_transactions.page(params[:page]).per(@per_page).order(sort)
-      @financial_transactions = @financial_transactions.where("note LIKE ?", "%#{params[:query]}%") if params[:query].present?
+      @financial_transactions = @ordergroup.financial_transactions.visible.page(params[:page]).per(@per_page).order(sort)
+      @financial_transactions = @financial_transactions.where('financial_transactions.note LIKE ?', "%#{params[:query]}%") if params[:query].present?
 
     else
       redirect_to root_path, alert: I18n.t('home.no_ordergroups')

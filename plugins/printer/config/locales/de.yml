@@ -1,0 +1,31 @@
+de:
+  config:
+    keys:
+      printer_print_order_articles: Artikel PDF drucken
+      printer_print_order_fax: Fax PDF drucken
+      printer_print_order_groups: Gruppen PDF drucken
+      printer_print_order_matrix: Matrix PDF drucken
+      printer_token: Geheimer Token
+      use_printer: Drucker verwenden
+  helpers:
+    submit:
+      printer_job:
+        create: Druckauftrag erstellen
+  navigation:
+    orders:
+      printer_jobs: Druckaufträge
+  orders:
+    show:
+      confirm_create_printer_job: Für diese Bestellung wurde bereits ein Druckauftrag erstellt. Willst du einen neuen erstellen?
+  printer_jobs:
+    create:
+      notice: "%{count} Druckaufträge wurden erstellt."
+    destroy:
+      notice: Druckauftrag wurde gelöscht.
+    index:
+      finished: Beendet
+      pending: Ausstehend
+      queued: Warten auf den Bestellschluss
+      title: Druckaufträge
+    show:
+      title: Druckauftrag %{id}

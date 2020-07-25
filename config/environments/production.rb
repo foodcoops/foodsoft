@@ -61,6 +61,9 @@ Foodsoft::Application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # Don't dump schema in production (especially useful for Docker)
+  config.active_record.dump_schema_after_migration = false
+
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 

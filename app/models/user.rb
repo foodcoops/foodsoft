@@ -20,7 +20,7 @@ class User < ApplicationRecord
   has_many :created_orders, :class_name => 'Order', :foreign_key => 'created_by_user_id', :dependent => :nullify
   has_many :mail_delivery_status, :class_name => 'MailDeliveryStatus', :foreign_key => 'email', :primary_key => 'email'
 
-  attr_accessor :password, :settings_attributes
+  attr_accessor :create_ordergroup, :password, :settings_attributes
 
   scope :deleted, -> { where.not(deleted_at: nil) }
   scope :undeleted, -> { where(deleted_at: nil) }
@@ -64,6 +64,12 @@ class User < ApplicationRecord
       end
       self.settings.merge!(key, value)
     end if settings_attributes
+
+    if ActiveRecord::Type::Boolean.new.type_cast_from_user(create_ordergroup)
+      og = Ordergroup.new({name: name})
+      og.memberships.build({user: self})
+      og.save!
+    end
   end
 
   # sorted by display name
@@ -147,32 +153,32 @@ class User < ApplicationRecord
 
   # Checks the finance role
   def role_finance?
-    groups.detect {|group| group.role_finance?}
+    FoodsoftConfig[:default_role_finance] || groups.detect {|group| group.role_finance?}
   end
 
   # Checks the invoices role
   def role_invoices?
-    groups.detect {|group| group.role_invoices?}
+    FoodsoftConfig[:default_role_invoices] || groups.detect {|group| group.role_invoices?}
   end
 
   # Checks the article_meta role
   def role_article_meta?
-    groups.detect {|group| group.role_article_meta?}
+    FoodsoftConfig[:default_role_article_meta] || groups.detect {|group| group.role_article_meta?}
   end
 
   # Checks the suppliers role
   def role_suppliers?
-    groups.detect {|group| group.role_suppliers?}
+    FoodsoftConfig[:default_role_suppliers] || groups.detect {|group| group.role_suppliers?}
   end
 
   # Checks the invoices role
   def role_pickups?
-    groups.detect {|group| group.role_pickups?}
+    FoodsoftConfig[:default_role_pickups] || groups.detect {|group| group.role_pickups?}
   end
 
   # Checks the orders role
   def role_orders?
-    groups.detect {|group| group.role_orders?}
+    FoodsoftConfig[:default_role_orders] || groups.detect {|group| group.role_orders?}
   end
 
   def ordergroup_name
@@ -203,11 +209,17 @@ class User < ApplicationRecord
 
   def self.authenticate(login, password)
     user = find_by_nick(login) || find_by_email(login)
-    if user && user.has_password(password)
+    if user && password && user.has_password(password)
       user
     else
       nil
     end
+  end
+
+  def self.custom_fields
+    fields = FoodsoftConfig[:custom_fields] && FoodsoftConfig[:custom_fields][:user]
+    return [] unless fields
+    fields.map(&:deep_symbolize_keys)
   end
 
   # XXX this is view-related; need to move out things like token_attributes

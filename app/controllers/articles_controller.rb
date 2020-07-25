@@ -1,6 +1,6 @@
 # encoding: utf-8
 class ArticlesController < ApplicationController
-  before_filter :authenticate_article_meta, :find_supplier
+  before_action :authenticate_article_meta, :find_supplier
 
   def index
     if params['sort']
@@ -21,6 +21,12 @@ class ArticlesController < ApplicationController
     end
 
     @articles = Article.undeleted.where(supplier_id: @supplier, :type => nil).includes(:article_category).order(sort)
+
+    if request.format.csv?
+      send_data ArticlesCsv.new(@articles, encoding: 'utf-8').to_csv, filename: 'articles.csv', type: 'text/csv'
+      return
+    end
+
     @articles = @articles.where('articles.name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
 
     @articles = @articles.page(params[:page]).per(@per_page)
@@ -33,6 +39,11 @@ class ArticlesController < ApplicationController
 
   def new
     @article = @supplier.articles.build(:tax => FoodsoftConfig[:tax_default])
+    render :layout => false
+  end
+
+  def copy
+    @article = @supplier.articles.find(params[:article_id]).dup
     render :layout => false
   end
 

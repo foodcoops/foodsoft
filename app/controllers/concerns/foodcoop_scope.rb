@@ -1,12 +1,12 @@
 # Controller concern to handle foodcoop scope
 #
-# Includes a +before_filter+ for selecting foodcoop from url.
+# Includes a +before_action+ for selecting foodcoop from url.
 #
 module Concerns::FoodcoopScope
   extend ActiveSupport::Concern
 
   included do
-    before_filter :select_foodcoop
+    before_action :select_foodcoop
   end
 
   private

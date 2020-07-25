@@ -1,0 +1,12 @@
+.modal-header
+  = close_button :modal
+  %h3= t('.title')
+.modal-body
+  = link_to t('.root_folder'), document_path(@document, parent_id: nil), method: :patch
+  - Document.walk_tree do |document, level|
+    - if document.folder?
+      %br
+      = ('&nbsp;' * 2 * (level + 1)).html_safe
+      = link_to document.name, document_path(@document, parent_id: document.id), method: :patch
+.modal-footer
+  = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}

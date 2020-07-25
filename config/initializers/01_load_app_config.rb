@@ -3,3 +3,4 @@
 # Load Config, start by selecting defaults via current environment
 require 'foodsoft_config'
 FoodsoftConfig.init
+FoodsoftConfig.init_mailing

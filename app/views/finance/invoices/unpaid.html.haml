@@ -1,7 +1,7 @@
 - title t('.title')
 
 - for supplier in @suppliers
-  - invoices = supplier.invoices.unpaid
+  - invoices = supplier.invoices
   - if invoices.any?
     %h3= supplier.name
     - invoices_sum = 0
@@ -14,6 +14,11 @@
         = format_date invoice.date
         = ' ' + invoice.number
       = ' ' + number_to_currency(invoice.amount)
+      - if invoice.attachment_data?
+        = link_to finance_invoice_attachment_path(invoice) do
+          = glyph :download
+      - if invoice.note?
+        = '(' + invoice.note + ')'
       %br/
     %p
       - if supplier.iban.present?

@@ -30,7 +30,7 @@
   - if @bank_transaction.financial_link
     = link_to t('ui.show'), finance_link_path(@bank_transaction.financial_link)
   - else
-    = link_to t('.add_financial_link'), '/'
+    = link_to t('.add_financial_link'), finance_links_path(bank_transaction: @bank_transaction.id), method: :post
 
 - unless @bank_transaction.receipt.blank?
   %pre= preserve @bank_transaction.receipt

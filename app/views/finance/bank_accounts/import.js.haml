@@ -1,0 +1,4 @@
+- if @js_redirect
+  document.location.replace('#{escape_javascript(@js_redirect)}');
+- else
+  $('#import').html('#{escape_javascript(render("import"))}');

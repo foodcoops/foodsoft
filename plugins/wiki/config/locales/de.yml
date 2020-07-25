@@ -1,6 +1,102 @@
 de:
+  activerecord:
+    attributes:
+      page:
+        body: Inhalt
+        parent_id: Oberseite
+        title: Titel
+  config:
+    hints:
+      use_wiki: Änderbare Wiki Seiten aktivieren
+    keys:
+      use_wiki: Wiki verwenden
+  model:
+    page:
+      redirect: Weiterleitung auf [[%{title}]]...
+  navigation:
+    wiki:
+      all_pages: Alle Seiten
+      home: Startseite
   pages:
+    all:
+      new_page: Neue Seite anlegen
+      recent_changes: Letzte Änderungen
+      search:
+        action: Suche
+        placeholder: Seitentitle ...
+      site_map: Site Map
+      title: Alle Wikiseiten
+      title_list: Seiten-Liste
+    body:
+      title_toc: Inhalt
+      wikicloth_exception: 'Entschuldigung, ein Fehler ist beim Anzeigen der Wikiseite aufgetreten: »%{msg}«. Bearbeiten der Seite kann helfen, diesen Fehler zu beseitigen.'
+    create:
+      notice: Seite wurde angelegt
+    cshow:
+      error_noexist: Seite existiert nicht!
+      redirect_notice: Weitergeleitet von %{page} ...
+    destroy:
+      notice: Die Seite '%{page}' und alle Unterseiten wurden erfolgreich gelöscht
     diff:
       title: "%{title} - Änderung von Version %{old} auf %{new}"
+    edit:
+      title: Seite bearbeiten
+    error_stale_object: Achtung, die Seite wurde gerade von jemand anderes bearbeitet. Bitte versuche es erneut.
+    form:
+      help:
+        bold: fett
+        external_link_ex: Externe Seite
+        external_links: Extern
+        heading: Ebene %{level}
+        headings: Überschriften
+        image_link_title: Bildtitel
+        image_links: Bilder
+        italic: kursiv
+        link_lists: Mehr
+        link_table: Tabellenformatierung
+        link_templates: Vorlagen
+        link_variables: Foodsoft Variablen
+        list_item_1: Erster Punkt
+        list_item_2: Zweiter Punkt
+        noformat: Keine Formatierung
+        ordered_list: Listen mit Zahlen
+        section_block: Block-Formatierung
+        section_character: Zeichenformatierung
+        section_link: Link-Formatierung
+        section_more: Mehr Themen
+        section_table: Tabellenformatierung
+        see_tables: siehe %{tables_link}
+        tables_link: Tabellen
+        title: Schnelle Formatierungshilfe
+        unordered_list: Listen mit Punkten
+        wiki_link_ex: Foodsoft Wiki Seite
+        wiki_links: Wiki-Links
+      preview: Vorschau
+    last_updated: Zuletzt aktualisiert
+    new:
+      title: Neue Wikiseite anlegen
+    page_list_item:
+      date_format: ! '%a, %d. %B %Y %H:%M:%S'
     show:
+      date_format: ! '%d.%m.%y %H:%M'
+      delete: Seite löschen
+      delete_confirm: ! 'Achtung, auch alle Unterseiten werden gelöscht. Bist Du sicher?'
       diff: Versionen vergleichen
+      edit: Seite bearbeiten
+      last_updated: Zuletzt bearbeitet von <b>%{user}</b> am %{when}
+      subpages: Unterseiten
+      title_versions: Versionen
+      versions: Versionen (%{count})
+    title: Titel
+    update:
+      notice: Seite wurde aktualisiert
+    variables:
+      description: Variablen geben Informationen wieder, die an anderer Stelle definiert wurden. Wenn Du die Variable benutzt, wird sie mit ihrem Wert ersetzt, wenn sie angezeigt wird. Foodsoft hat eine Reihe von vordefinierten Variablen, wie zum Beispiel Name und Adresse deiner Foodcoop, Softwareversion und die Anzahl der Mitglieder und Lieferanten. In der Tabelle unten sind alle Variablen aufgeführt. Du kannst diese in Wiki-Seiten und der Fusszeile (in den Einstellungen) nutzen.
+      title: Foodsoft-Variablen
+      value: Aktueller Wert
+    version:
+      author: ! 'Autor: %{user}'
+      date_format: ! '%a, %d.%m.%Y, %H:%M Uhr'
+      revert: Auf diese Version zurücksetzen
+      title: ! '%{title} - Version %{version}'
+      view_current: Aktuelle Version sehen

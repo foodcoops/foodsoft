@@ -1,0 +1,15 @@
+project_identifier: foodsoft
+api_key_env: CROWDIN_API_KEY
+files:
+  - source: /config/locales/en.yml
+    translation: /config/locales/%two_letters_code%.yml
+  - source: /plugins/current_orders/config/locales/en.yml
+    translation: /plugins/current_orders/config/locales/%two_letters_code%.yml
+  - source: /plugins/discourse/config/locales/en.yml
+    translation: /plugins/discourse/config/locales/%two_letters_code%.yml
+  - source: /plugins/documents/config/locales/en.yml
+    translation: /plugins/documents/config/locales/%two_letters_code%.yml
+  - source: /plugins/messages/config/locales/en.yml
+    translation: /plugins/messages/config/locales/%two_letters_code%.yml
+  - source: /plugins/wiki/config/locales/en.yml
+    translation: /plugins/wiki/config/locales/%two_letters_code%.yml

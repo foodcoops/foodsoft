@@ -11,7 +11,7 @@
           contentType: 'application/json; charset=UTF-8'
         });
       });
-      
+
       $(document).on('OrderArticle#create', function(e) {
         $.ajax({
           url: '#{receive_on_order_article_create_order_path(@order)}',
@@ -23,6 +23,8 @@
     });
 
 - title t('.title', order: @order.name)
+
+%p!= t('.paragraph')
 
 = form_tag(receive_order_path(@order)) do
   %fieldset#results

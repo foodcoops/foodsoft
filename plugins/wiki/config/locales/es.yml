@@ -1,0 +1,58 @@
+es:
+  activerecord:
+    attributes:
+      page:
+        body: Cuerpo
+        parent_id: Página madre
+        title: Título
+  config:
+    hints:
+      use_wiki: Activar las páginas editables del wiki.
+    keys:
+      use_wiki: Activar wiki
+  model:
+    page:
+      redirect: Doorverwijzing naar [[%{title}]]...
+  navigation:
+    wiki:
+      all_pages: Todas las páginas
+  pages:
+    all:
+      new_page: Crea nueva página
+      recent_changes: Cambios recientes
+      search:
+        action: Busca
+      title_list: Lista de páginas
+    body:
+      title_toc: Contenido
+    create:
+      notice: La página ha sido creada
+    cshow:
+      error_noexist: La página no existe
+    edit:
+      title: Editar página
+    error_stale_object: Cuidado, la página ha sido editada por otra persona. Por favor, intenta de nuevo.
+    form:
+      help:
+        external_link_ex: Enlace externo
+        external_links: Externo
+        heading: nivel %{level}
+        headings: Título
+        image_link_title: Título de la imagen
+        image_links: Imágenes
+        italic: itálicas
+        ordered_list: Lista numerada
+        section_block: Estilo del párrafo
+        section_character: Estilo de las letras
+        section_link: Estilo de los enlaces
+        section_more: Más temas
+      preview: Previsualizar
+    new:
+      title: Crear una nueva página en la wiki
+    show:
+      delete: Eliminar página
+    title: Título
+    version:
+      author: ! 'Autor/a: %{user}'
+      title_version: Versión
+      view_current: Ver versión actual

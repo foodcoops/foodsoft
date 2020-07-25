@@ -27,6 +27,7 @@ class Order < ApplicationRecord
   after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
+  scope :started, -> { where('starts <= ?', Time.now) }
   scope :open, -> { where(state: 'open').order('ends DESC') }
   scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
   scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
@@ -34,6 +35,7 @@ class Order < ApplicationRecord
   scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
   scope :stock_group_order, -> { group_orders.where(ordergroup_id: nil).first }
+  scope :with_invoice, -> { where.not(invoice: nil) }
 
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
@@ -243,7 +245,7 @@ class Order < ApplicationRecord
       for group_order in gos
         if group_order.ordergroup
           price = group_order.price * -1                  # decrease! account balance
-          group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type)
+          group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type, nil, group_order)
         end
       end
 
@@ -290,7 +292,7 @@ class Order < ApplicationRecord
       begin
         order.do_end_action!
       rescue => error
-        ExceptionNotifier.notify_exception(error, data: {order_id: order.id})
+        ExceptionNotifier.notify_exception(error, data: {foodcoop: FoodsoftConfig.scope, order_id: order.id})
       end
     end
   end

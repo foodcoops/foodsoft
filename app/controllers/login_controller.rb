@@ -1,7 +1,7 @@
 # encoding: utf-8
 class LoginController < ApplicationController
-  skip_before_filter :authenticate        # no authentication since this is the login page
-  before_filter :validate_token, :only => [:new_password, :update_password]
+  skip_before_action :authenticate        # no authentication since this is the login page
+  before_action :validate_token, :only => [:new_password, :update_password]
 
   # Display the form to enter an email address requesting a token to set a new password.
   def forgot_password

@@ -15,42 +15,50 @@ de:
           ordergroup: An die Mitglieder einer Bestellgruppe schicken
           messagegroup: An die Mitglieder einer Nachrichtengruppe schicken
           workgroup: An die Mitglieder einer Arbeitsgruppe schicken
+        send_to_all: An alle Mitglieder schicken
         subject: Betreff
         workgroup_id: Arbeitsgruppe
       messagegroup:
         description: Beschreibung
-        name: Name
         user_tokens: Mitglieder
     models:
+      message: Nachricht
       messagegroup: Nachrichtengruppe
   admin:
-    messagegroups:
-      destroy:
-        error: 'Nachrichtengruppe konnte nicht als gelöscht markiert werden: %{error}'
-        notice: Nachrichtengruppe wurde als gelöscht markiert
-      edit:
-        title: Nachrichtengruppe bearbeiten
-      index:
-        first_paragraph: Hier kannst du %{url} anlegen, Gruppen bearbeiten und löschen.
-        new_messagegroup: Neue Nachrichtengruppe anlegen
-        new_messagegroups: neue Nachrichtengruppe
-        second_paragraph: Eine Nachrichtengruppe ist wie ein Mail-Verteilen. Mitglieder können Verteiler in ihrem Profil abonnieren (und auch wieder abbestellen) an denen sie interessiert sind.
-        title: Nachrichtengruppen
-      new:
-        title: Nachrichtengruppe anlegen
+    ordergroups:
       show:
         send_message: Nachricht senden
-        title: Nachrichtengruppe %{name}
+    users:
+      show:
+        send_message: Nachricht senden
+  config:
+    hints:
+      mailing_list: Die E-Mail Adresse einer Mailing-Liste, die anstatt des Foodsoft Nachrichtensystems für eine Mail an alle Mitglieder verwendet wird.
+      mailing_list_subscribe: E-Mail Adresse zum Anmelden an die Mailingliste
+      use_messages: Den Mitgliedern erlauben, miteinander innerhalb Foodsoft zu kommunizieren
+    keys:
+      use_messages: Nachrichten
+      mailing_list: Mailingliste
+      mailing_list_subscribe: Mailingliste anmelden
+  helpers:
+    messages:
+      write_message: Nachricht schreiben
+    submit:
+      message:
+        create: Nachricht verschicken
   home:
     index:
       messages:
+        title: Neueste Nachrichten
         view_all:
           text: '%{messages} oder %{threads} anzeigen'
           messages: Nachrichten
           threads: Nachrichtenverläufe
+    start_nav:
+      write_message: Nachricht schreiben
   messagegroups:
     index:
-      body: Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.
+      body: 'Du kannst jede der Nachrichtengruppen beitreten oder sie wieder verlassen.'
       title: Nachrichtengruppen
     join:
       error: 'Nachrichtengruppe konnte nicht begetreten werden: %{error}'
@@ -67,9 +75,49 @@ de:
       messagegroups: Nachrichtengruppen beitreten
       messages: Als Liste anzeigen
       new: Neue Nachricht
+    create:
+      notice: Nachricht ist gespeichert und wird versendet.
+    index:
+      title: Nachrichten
+    messages:
+      reply: Antworten
+    model:
+      reply_header: ! '%{user} schrieb am %{when}:'
+    new:
+      error_private: Nachricht ist privat!
+      hint_private: Nachricht erscheint nicht im Foodsoft Posteingang
+      list:
+        desc: ! 'Nachrichten an alle verschickst Du bitte über den Verteiler: %{list}'
+        mail: z.b. mit einer E-Mail an %{email}.
+        subscribe: Erklärungen zum Verteiler findest Du im %{link}.
+        subscribe_msg: Eventuell musst Du Dich dem Verteiler erst bekannt machen.
+        wiki: Wiki (Abschnitt Mailing-Liste)
+      message: Nachricht
+      no_user_found: Kein/e Benutzer/in gefunden
+      order_item: "%{supplier_name} (Abholung: %{pickup})"
+      reply_to: Diese Nachricht ist eine Antwort auf eine andere %{link}.
+      search: Suche ...
+      search_user: Nach Bernutzer/in suchen
+      title: Neue Nachricht
+    show:
+      all_messages: Nachrichten im Überblick
+      change_visibility: 'Ändern'
+      from: ! 'Von:'
+      group: 'Gruppe'
+      reply: Antworten
+      reply_to: 'Antwort auf:'
+      sent_on: ! 'Gesendet:'
+      subject: ! 'Betreff:'
+      title: Nachricht anzeigen
+      to: 'An:'
+      visibility: 'Sichtbarkeit:'
+      visibility_private: 'Privat'
+      visibility_public: 'Öffentlich'
     thread:
       all_message_threads: Alle Nachrichtenverläufe
       reply: Antworten
+    toggle_private:
+      not_allowed: Du kannst die Sichtbarkeit dieser Nachricht nicht ändern.
   message_threads:
     groupmessage_threads:
       show_message_threads: Alle Nachrichtenverläufe anzeigen
@@ -83,9 +131,23 @@ de:
       started_by: Gestartet von
     show:
       general: Allgemeine Nachrichten
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Antworten: %{reply_url}
+        Nachricht online einsehen: %{msg_url}
+        Nachrichten-Einstellungen: %{profile_url}
+      footer_group: |
+        Gesendet an Gruppe: %{group}
   navigation:
     admin:
       messagegroups: Nachrichtengruppen
+    messages: Nachrichten
   shared:
     user_form_fields:
       messagegroups: Nachrichtengruppen beitreten oder verlassen
+  simple_form:
+    labels:
+      settings:
+        messages:
+          send_as_email: Bekomme Nachrichten als E-Mails.

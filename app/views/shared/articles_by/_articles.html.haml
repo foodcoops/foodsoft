@@ -9,6 +9,6 @@
       %th= t 'shared.articles_by.price'
 
   - for order_article in order.order_articles.ordered.includes([:article, :article_price])
-    = render 'shared/articles_by/article_single', order_article: order_article, edit: (edit rescue nil)
+    = render 'shared/articles_by/article_single', order_article: order_article
     %tr
       %td{colspan: 4}

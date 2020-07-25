@@ -25,6 +25,6 @@ class Admin::MailDeliveryStatusController < Admin::BaseController
     @maildeliverystatus.destroy
     redirect_to admin_mail_delivery_status_index_path, notice: t('.notice')
   rescue => error
-    redirect_to admin_mail_delivery_status_index_path, I18n.t('errors.general_msg', msg: error.message)
+    redirect_to admin_mail_delivery_status_index_path, alert: I18n.t('errors.general_msg', msg: error.message)
   end
 end

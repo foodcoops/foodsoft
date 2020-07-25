@@ -33,3 +33,8 @@ en:
       new: Upload new document
       new_folder: Create new folder
       title: Documents
+    move:
+      root_folder: Start
+      title: Move
+    update:
+      notice: Document or folder was moved

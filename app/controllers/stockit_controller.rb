@@ -86,14 +86,4 @@ class StockitController < ApplicationController
     @articles = Article.not_in_stock.limit(8).where('name LIKE ?', "%#{params[:term]}%")
     render :json => @articles.map(&:name)
   end
-
-  def fill_new_stock_article_form
-    article = Article.find(params[:article_id])
-    @supplier = article.supplier
-    stock_article = @supplier.stock_articles.build(
-      article.attributes.reject { |attr| attr == ('id' || 'type')}
-    )
-
-    render :partial => 'form', :locals => {:stock_article => stock_article}
-  end
 end

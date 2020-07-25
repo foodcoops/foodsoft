@@ -8,7 +8,7 @@ FactoryBot.define do
     address { Faker::Address.street_address }
 
     transient do
-      article_count 0
+      article_count { 0 }
     end
 
     after :create do |supplier, evaluator|

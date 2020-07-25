@@ -53,7 +53,9 @@ feature 'settling an order', js: true do
 
   it 'keeps ordered quantities when article is deleted from resulting order' do
     within("#order_article_#{oa.id}") do
-      click_link I18n.t('ui.delete')
+      accept_confirm do
+        click_link I18n.t('ui.delete')
+      end
     end
     expect(page).to_not have_selector("#order_article_#{oa.id}")
     expect(OrderArticle.exists?(oa.id)).to be true
@@ -69,7 +71,9 @@ feature 'settling an order', js: true do
     goa1.destroy
     goa2.destroy
     within("#order_article_#{oa.id}") do
-      click_link I18n.t('ui.delete')
+      accept_confirm do
+        click_link I18n.t('ui.delete')
+      end
     end
     expect(page).to_not have_selector("#order_article_#{oa.id}")
     expect(OrderArticle.exists?(oa.id)).to be false
@@ -107,10 +111,10 @@ feature 'settling an order', js: true do
       click_link I18n.t('ui.edit')
     end
     within("#edit_order_article_#{oa.id}") do
-      fill_in :order_article_units_to_order, :with => 0
+      find('#order_article_units_to_order').set(0)
+      sleep 0.25
       find('input[type="submit"]').click
     end
-    sleep 0.5 # workaround "javascript error" "e is null"
     expect(page).to have_selector("#order_article_#{oa.id}")
     # make sure it still works after reloading
     visit new_finance_order_path(order_id: order.id)
@@ -129,7 +133,8 @@ feature 'settling an order', js: true do
     expect(page).to have_selector('form#new_group_order_article')
     within('#new_group_order_article') do
       select user.ordergroup.name, :from => 'group_order_article_ordergroup_id'
-      fill_in 'group_order_article_result', :with => 8
+      find('#group_order_article_result').set(8)
+      sleep 0.25
       find('input[type="submit"]').click
     end
     expect(page).to_not have_selector('form#new_group_order_article')
@@ -144,7 +149,7 @@ feature 'settling an order', js: true do
   it 'can modify an ordergroup result' do
     click_link article.name
     within("#group_order_articles_#{oa.id}") do
-      fill_in "r_#{goa1.id}", :with => 5
+      find("#r_#{goa1.id}").set(5).send_keys(:tab) # tab to blur and let js update
     end
     expect(page).to have_selector('#summaryChangedWarning') # becomes visible after request is done
     expect(goa1.reload.result).to eq 5
@@ -167,7 +172,8 @@ feature 'settling an order', js: true do
     click_link I18n.t('finance.balancing.edit_results_by_articles.add_article')
     expect(page).to have_selector('form#new_order_article')
     within('#new_order_article') do
-      select new_article.name, :from => 'order_article_article_id'
+      find('#order_article_article_id').select(new_article.name)
+      sleep 0.25
       find('input[type="submit"]').click
     end
     expect(page).to_not have_selector('form#new_order_article')

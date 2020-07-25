@@ -3,7 +3,7 @@ class Admin::FinancesController < Admin::BaseController
 
   def index
     @bank_accounts = BankAccount.order('name')
-    @financial_transaction_classes = FinancialTransactionClass.order('name ASC')
+    @financial_transaction_classes = FinancialTransactionClass.includes(:financial_transaction_types).order('name ASC')
   end
 
   def update_bank_accounts
@@ -12,7 +12,7 @@ class Admin::FinancesController < Admin::BaseController
   end
 
   def update_transaction_types
-    @financial_transaction_classes = FinancialTransactionClass.order('name ASC')
+    @financial_transaction_classes = FinancialTransactionClass.includes(:financial_transaction_types).order('name ASC')
     render :layout => false
   end
 

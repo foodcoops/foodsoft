@@ -15,6 +15,7 @@ en:
           ordergroup: Send to members of a ordergroup
           messagegroup: Send to members of a messagegroup
           workgroup: Send to members of a workgroup
+        send_to_all: Send to all members
         subject: Subject
         workgroup_id: Workgroup
       messagegroup:
@@ -25,23 +26,6 @@ en:
       message: Message
       messagegroup: Message group
   admin:
-    messagegroups:
-      destroy:
-        error: 'Message group could not be deleted: %{error}'
-        notice: Message group was deleted
-      edit:
-        title: Edit message group
-      index:
-        first_paragraph: Here you can create %{url}, edit and delete them.
-        new_messagegroup: Create new message group
-        new_messagegroups: new message groups
-        second_paragraph: "A message group is like a mailing-list. Members can subscribe to (and unsubscribe from) the lists they're interested in, from their profile."
-        title: Message groups
-      new:
-        title: Create message group
-      show:
-        send_message: Send message
-        title: Message group %{name}
     ordergroups:
       show:
         send_message: Send message
@@ -113,12 +97,14 @@ en:
         wiki: Wiki (page Mailing-List)
       message: message
       no_user_found: No user found
+      order_item: "%{supplier_name} (Pickup: %{pickup})"
       reply_to: This message is an reply to an other %{link}.
       search: Search ...
       search_user: Search user
       title: New message
     show:
       all_messages: All messages
+      change_visibility: 'Change'
       from: ! 'From:'
       group: 'Group:'
       reply: Reply
@@ -126,9 +112,15 @@ en:
       sent_on: ! 'Sent:'
       subject: ! 'Subject:'
       title: Show message
+      to: 'To:'
+      visibility: 'Visibility:'
+      visibility_private: 'Private'
+      visibility_public: 'Public'
     thread:
       all_message_threads: All message threads
       reply: Reply
+    toggle_private:
+      not_allowed: You can not change the visibility of the message.
   message_threads:
     groupmessage_threads:
       show_message_threads: show all
@@ -144,13 +136,12 @@ en:
       general: General
   messages_mailer:
     foodsoft_message:
-      footer: ! 'Reply: %{reply_url}
-
+      footer: |
+        Reply: %{reply_url}
         See message online: %{msg_url}
-
         Messaging options: %{profile_url}
-
-'
+      footer_group: |
+        Sent to group: %{group}
   navigation:
     admin:
       messagegroups: Message groups
@@ -158,3 +149,8 @@ en:
   shared:
     user_form_fields:
       messagegroups: Join or leave message groups
+  simple_form:
+    labels:
+      settings:
+        messages:
+          send_as_email: Receive messages as emails.

@@ -1,12 +1,4 @@
 - title t('.title', name: @bank_account.name)
 
-= form_for :bank_accounts, :url => parse_upload_finance_bank_account_path(@bank_account),
-   :html => { multipart: true, class: "form-horizontal" } do |f|
-
-  .control-group
-    %label(for="bank_transactions_file")= t '.file_label'
-    = f.file_field "file"
-
-  .form-actions
-    = submit_tag t('.submit'), class: 'btn btn-primary'
-    = link_to t('ui.or_cancel'), finance_bank_account_transactions_path(@bank_account)
+#import
+  = render "import"

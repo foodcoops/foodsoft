@@ -13,6 +13,9 @@ module FoodsoftWiki
       permalink = Page.permalink(page)
       if Page.exists?(:permalink => permalink)
         { href: url_for(:wiki_page_path, permalink: permalink) }
+      elsif page.include? '#'
+        # If "Foo#Bar" does not exist then consider "Foo" with anchor.
+        link_attributes_if_number_sign_contained_in_nonexistent(page, params[:referer])
       else
         { href: url_for(:new_page_path, title: page, parent: params[:referer]), class: 'new_wiki_link' }
       end
@@ -30,6 +33,24 @@ module FoodsoftWiki
 
 
     private
+
+    def link_attributes_if_number_sign_contained_in_nonexistent(page, referer)
+      # Interpret the part after the last number sign as anchor.
+      arr = page.split('#', -1)# `-1` preserves empty anchor
+      page = arr[0...-1].join('#')
+      anchor = arr[-1]
+
+      return { href: '#' + anchor } if page.empty?
+
+      permalink = Page.permalink(page)
+      if Page.exists?(:permalink => permalink)
+        { href: url_for(:wiki_page_path, permalink: permalink, anchor: anchor) }
+      else
+        # Do not suggest to use number signs in the title.
+        good_page_title = arr[0]
+        { href: url_for(:new_page_path, title: good_page_title, parent: referer), class: 'new_wiki_link' }
+      end
+    end
 
     def url_for(path_name, options={})
       Rails.application.routes.url_helpers.send path_name, options.merge({foodcoop: FoodsoftConfig.scope})

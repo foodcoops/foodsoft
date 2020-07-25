@@ -5,7 +5,7 @@ class SharedSupplier < ApplicationRecord
   # set correct table_name in external DB
   self.table_name = 'suppliers'
 
-  has_many :suppliers
+  has_many :suppliers, -> { undeleted }
   has_many :shared_articles, :foreign_key => :supplier_id
 
 

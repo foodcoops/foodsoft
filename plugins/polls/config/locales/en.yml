@@ -1,0 +1,67 @@
+en:
+  activerecord:
+    attributes:
+      poll:
+        choices: Choices
+        created_at: Created at
+        created_by: Created by
+        description: Description
+        ends: Ends at
+        name: Name
+        max_points: Maximal points
+        min_points: Minimal points
+        multi_select_count: Maximal number
+        one_vote_per_ordergroup: Only one vote for every ordergroup
+        starts: Starts at
+        voting_method: Voting method
+        voting_methods:
+          event: Event
+          single_select: Single select
+          multi_select: Muliple selections
+          points: Points
+          resistance_points: Resistance points
+      poll_vote:
+        name: Name
+        note: Note
+        updated_at: Last updated
+    models:
+      poll: Poll
+  config:
+    hints:
+      use_polls: Enable simple polls.
+    keys:
+      use_polls: Enable polls
+  navigation:
+    polls: Polls
+  polls:
+    choice:
+      remove: Delete
+    create:
+      error: 'Poll could not be created: %{error}'
+      notice: Poll has been created
+    edit:
+      title: Edit poll
+    form:
+      already_voted: The choices can not be changed, since there have been votes already.
+      new_choice: Additional choice
+      required_ordergroup_custom_field: '''%{label}'' of ordergroup must not be empty'
+      required_user_custom_field: '''%{label}'' of use must not be empty'
+    destroy:
+      error: 'Poll could not be deleted: %{error}'
+      no_right: You do not have enough rights to delte this poll
+      notice: Poll has been deleted
+    index:
+      new_poll: New poll
+      title: Polls
+    new:
+      title: New poll
+    polls:
+      vote: Vote
+    show:
+      vote: Vote
+    update:
+      error: 'Poll could not be updated: %{error}'
+      notice: Poll has been updated
+    vote:
+      submit: Vote
+      no_right: You can not participate in this poll

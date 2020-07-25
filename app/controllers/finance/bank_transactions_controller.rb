@@ -1,5 +1,5 @@
 class Finance::BankTransactionsController < ApplicationController
-  before_filter :authenticate_finance
+  before_action :authenticate_finance
   inherit_resources
 
   def index
@@ -17,7 +17,7 @@ class Finance::BankTransactionsController < ApplicationController
     end
 
     @bank_account = BankAccount.find(params[:bank_account_id])
-    @bank_transactions = @bank_account.bank_transactions.order(sort)
+    @bank_transactions = @bank_account.bank_transactions.order(sort).includes(:financial_link)
     @bank_transactions = @bank_transactions.where('reference LIKE ? OR text LIKE ?', "%#{params[:query]}%", "%#{params[:query]}%") unless params[:query].nil?
     @bank_transactions = @bank_transactions.page(params[:page]).per(@per_page)
   end

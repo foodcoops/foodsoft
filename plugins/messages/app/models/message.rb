@@ -4,44 +4,46 @@ class Message < ApplicationRecord
   belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
   belongs_to :group, :class_name => "Group", :foreign_key => "group_id"
   belongs_to :reply_to_message, :class_name => "Message", :foreign_key => "reply_to"
+  has_many :message_recipients, dependent: :destroy
+  has_many :recipients, through: :message_recipients, source: :user
 
-  serialize :recipients_ids, Array
   attr_accessor :send_method, :recipient_tokens, :order_id
 
-  scope :pending, -> { where(:email_state => 0) }
-  scope :sent, -> { where(:email_state => 1) }
-  scope :pub, -> { where(:private => false) }
   scope :threads, -> { where(:reply_to => nil) }
   scope :thread, -> (id) { where("id = ? OR reply_to = ?", id, id) }
+  scope :readable_for, -> (user) {
+    user_id = user.try(&:id)
 
-  # Values for the email_state attribute: :none, :pending, :sent, :failed
-  EMAIL_STATE = {
-    :pending => 0,
-    :sent => 1,
-    :failed => 2
+    joins(:message_recipients)
+      .where('private = ? OR sender_id = ? OR message_recipients.user_id = ?', false, user_id, user_id)
+      .distinct
   }
 
-  validates_presence_of :recipients_ids, :subject, :body
+  validates_presence_of :message_recipients, :subject, :body
   validates_length_of :subject, :in => 1..255
-  validates_inclusion_of :email_state, :in => EMAIL_STATE.values
 
   after_initialize do
+    @recipients_ids ||= []
     @send_method ||= 'recipients'
   end
 
   before_create :create_salt
-  before_validation :clean_up_recipient_ids, :on => :create
+  before_validation :create_message_recipients, on: :create
 
-  def clean_up_recipient_ids
-    add_recipients Group.find(group_id).users unless group_id.blank?
-    add_recipients Order.find(order_id).users_ordered if send_method == 'order'
-    self.recipients_ids = recipients_ids.uniq.reject { |id| id.blank? } unless recipients_ids.nil?
-    self.recipients_ids = User.undeleted.collect(&:id) if send_method == 'all'
+  def create_message_recipients
+    user_ids = @recipients_ids
+    user_ids += User.undeleted.pluck(:id) if send_method == 'all'
+    user_ids += Group.find(group_id).users.pluck(:id) unless group_id.blank?
+    user_ids += Order.find(order_id).users_ordered.pluck(:id) if send_method == 'order'
+
+    user_ids.uniq.each do |user_id|
+      recipient = MessageRecipient.new message: self, user_id: user_id
+      message_recipients << recipient
+    end
   end
 
   def add_recipients(users)
-    self.recipients_ids = [] if recipients_ids.blank?
-    self.recipients_ids += users.collect(&:id) unless users.blank?
+    @recipients_ids += users
   end
 
   def group_id=(group_id)
@@ -85,12 +87,11 @@ class Message < ApplicationRecord
 
   def recipient_tokens=(ids)
     @recipient_tokens = ids
-    add_recipients ids.split(",").collect { |id| User.find(id) }
+    @recipients_ids = ids.split(',').map(&:to_i)
   end
 
   def mail_to=(user_id)
-    user = User.find(user_id)
-    add_recipients([user])
+    @recipients_ids = [user_id]
   end
 
   def mail_hash_for_user(user)
@@ -112,8 +113,8 @@ class Message < ApplicationRecord
     system_message? ? I18n.t('layouts.foodsoft') : sender.display rescue "?"
   end
 
-  def recipients
-    User.where(id: recipients_ids)
+  def recipients_ids
+    @recipients_ids
   end
 
   def last_reply
@@ -121,7 +122,7 @@ class Message < ApplicationRecord
   end
 
   def is_readable_for?(user)
-    !private || sender == user || recipients_ids.include?(user.id)
+    !private || sender == user || message_recipients.where(user: user).any?
   end
 
   def can_toggle_private?(user)

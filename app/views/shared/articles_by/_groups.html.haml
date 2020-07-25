@@ -14,4 +14,4 @@
       %th= #heading_helper Article, :unit_quantity, short: true
 
   - for group_order in order.group_orders.ordered
-    = render 'shared/articles_by/group_single', group_order: group_order, edit: (edit rescue nil)
+    = render 'shared/articles_by/group_single', group_order: group_order

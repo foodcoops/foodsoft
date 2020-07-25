@@ -60,7 +60,7 @@
                   = receive_button order, class: 'btn-small'
 
               %td
-                = link_to t('ui.copy'), new_order_path(order_id: order, supplier_id: order.supplier), class: 'btn btn-small'
+                = link_to t('ui.copy'), new_order_path(order_id: order), class: 'btn btn-small'
                 = link_to t('ui.show'), order, class: 'btn btn-small'
                 = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
                   class: 'btn btn-small btn-danger'

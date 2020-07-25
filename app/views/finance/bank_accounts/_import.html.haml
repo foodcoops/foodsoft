@@ -1,0 +1,33 @@
+= form_tag import_finance_bank_account_path(@bank_account), class: 'form-horizontal',
+    data: { auto_submit: @auto_submit}, id: 'import_form', method: :post, remote: true  do
+
+  = hidden_field_tag :import_uid, @import_uid
+  = hidden_field_tag :state, @state
+
+  - for control in @controls
+    - name = control.name
+    .control-group
+      - if name
+        - if control.type == :hidden
+          = hidden_field_tag "controls[#{control.name}]", control.value
+        - else
+          %label(for=name class='control-label')
+            = control.label + ':'
+          .controls
+            - if control.type == :password
+              = password_field_tag "controls[#{control.name}]", control.value
+            -else
+              = text_field_tag "controls[#{control.name}]", control.value
+      - else
+        = control.text
+
+  - if @auto_submit
+    :javascript
+      var form = $('#import_form');
+      setTimeout(function() {
+        form.submit();
+      }, form.data('auto-submit'));
+  - else
+    .control-group
+      .controls
+        = submit_tag t('.submit'), class: 'btn btn-primary'
