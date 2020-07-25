@@ -254,7 +254,10 @@ Foodsoft::Application.routes.draw do
 
         namespace :user do
           root to: 'users#show'
+          resources :financial_transactions, only: [:index, :show]
         end
+
+        resources :financial_transactions, only: [:index, :show]
       end
     end
 
