@@ -53,16 +53,6 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 end
 
-module Faker
-  class Unit
-    class << self
-      def unit
-        ['kg', '1L', '100ml', 'piece', 'bunch', '500g'].sample
-      end
-    end
-  end
-end
-
 # include default foodsoft scope in urls, so that *_path works
 # https://github.com/rspec/rspec-rails/issues/255
 class ActionDispatch::Routing::RouteSet

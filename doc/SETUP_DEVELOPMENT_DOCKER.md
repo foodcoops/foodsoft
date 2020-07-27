@@ -66,7 +66,7 @@ Open a rails console
 
 Setup the test database
 
-    docker-compose-dev run --rm foodsoft bundle exec rake db:setup RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8
+    docker-compose-dev run --rm foodsoft bundle exec rake db:create db:schema:load RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8
 
 Run the tests
 

@@ -20,6 +20,7 @@ services:
       - REDIS_URL=redis://redis:6379
       - QUEUE=foodsoft_notifier
       - TEST_DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8
+      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
 
   mailcatcher:
     image: tophfr/mailcatcher
