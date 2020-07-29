@@ -1,0 +1,6 @@
+en:
+  links:
+    show:
+      indirect_no_location: The configured URL did not return a Location header for redirection.
+  navigation:
+    links: Links

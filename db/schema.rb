@@ -235,6 +235,14 @@ ActiveRecord::Schema.define(version: 20181205010000) do
 
   add_index "invoices", ["supplier_id"], name: "index_invoices_on_supplier_id", using: :btree
 
+  create_table "links", force: :cascade do |t|
+    t.string  "name",                          null: false
+    t.string  "url",                           null: false
+    t.integer "workgroup_id"
+    t.boolean "indirect",      default: false, null: false
+    t.string  "authorization"
+  end
+
   create_table "mail_delivery_status", force: :cascade do |t|
     t.datetime "created_at"
     t.string   "email",           limit: 255,        null: false

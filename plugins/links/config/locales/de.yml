@@ -1,0 +1,6 @@
+de:
+  links:
+    show:
+      indirect_no_location: Die konfigurierte URL hat keinen Location Header für die Weiterleitung zurück gegeben.
+  navigation:
+    links: Links
