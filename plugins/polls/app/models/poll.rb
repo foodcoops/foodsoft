@@ -23,6 +23,10 @@ class Poll < ActiveRecord::Base
   include DateTimeAttributeValidate
   date_time_attribute :starts, :ends
 
+  before_save do
+    self.multi_select_count ||= 0
+  end
+
   def available_points
     return 0...0 if min_points.nil? || max_points.nil?
     min_points..max_points
