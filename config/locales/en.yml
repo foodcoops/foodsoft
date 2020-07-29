@@ -544,11 +544,12 @@ en:
       text_2: The rows shown here are examples. When there is an "x" in the first column, the article is outlisted and will be removed. This allows you to edit the spreadsheet and quickly remove many articles at once, for example when articles become unavailable with the supplier. The category will be matched to your Foodsoft category list (both by category name and import names).
       title: Upload articles of %{supplier}
   bank_account_connector:
-    confirm_app: Please confirm the code %{code} in your app.
+    confirm: Please confirum the code %{code}.
     fields:
       email: E-Mail
       pin: PIN
       password: Password
+      tan: TAN
       username: Username
   config:
     hints:

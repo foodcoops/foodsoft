@@ -526,11 +526,12 @@ de:
       text_2: Die hier gezeigten Spalten sind Beispiele. Ist ein "x" in der ersten Spalte, wird der Artikel aussortiert und entfernt. Das erlaubt Dir die Tabelle zu ändern und schnell viele Artikel auf ein Mal zu entfernen, zum Beispiel wenn Artkiel des Lieferanten nicht mehr verfügbar sind. Die Kategorie wird der Foodsoft Kategorie zugeordnet (durch die Kategorienamen und die Importnamen).
       title: Artikel des Lieferanten %{supplier} hochladen
   bank_account_connector:
-    confirm_app: Bitte bestätige den Code %{code} in deiner App.
+    confirm: Bitte bestätige den Code %{code}.
     fields:
       email: E-Mail
       pin: PIN
       password: Passwort
+      tan: TAN
       username: Benutzername
   config:
     hints:

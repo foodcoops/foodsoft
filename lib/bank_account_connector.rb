@@ -96,14 +96,18 @@ class BankAccountConnector
     @controls += [TextItem.new(data)]
   end
 
-  def wait_with_text(auto_submit, data)
+  def confirm_text(code)
+    text t('.confirm', code: code)
+  end
+
+  def wait_with_text(auto_submit, code)
     @auto_submit = auto_submit
-    @controls += [TextItem.new(data)]
+    confirm_text code
   end
 
   def wait_for_app(code)
     hidden_field :twofactor, code
-    wait_with_text 3000, t('.confirm_app', code: code)
+    wait_with_text 3000, code
     nil
   end
 
@@ -119,9 +123,12 @@ class BankAccountConnector
     @controls += [PasswordField.new(name, value, t(name))]
   end
 
-
   def set_balance(amount)
     @bank_account.balance = amount
+  end
+
+  def set_balance_as_sum
+    @bank_account.balance = @bank_account.bank_transactions.sum(:amount)
   end
 
   def continuation_point
