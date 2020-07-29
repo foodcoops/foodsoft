@@ -27,6 +27,13 @@ PATH
       ruby-filemagic
 
 PATH
+  remote: plugins/links
+  specs:
+    foodsoft_links (0.0.1)
+      deface (~> 1.0)
+      rails
+
+PATH
   remote: plugins/messages
   specs:
     foodsoft_messages (0.0.1)
@@ -534,6 +541,7 @@ DEPENDENCIES
   faker
   foodsoft_discourse!
   foodsoft_documents!
+  foodsoft_links!
   foodsoft_messages!
   foodsoft_polls!
   foodsoft_wiki!
