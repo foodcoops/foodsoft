@@ -428,7 +428,7 @@ ActiveRecord::Schema.define(version: 20181205010000) do
     t.text     "required_ordergroup_custom_fields", limit: 65535
     t.text     "required_user_custom_fields",       limit: 65535
     t.integer  "voting_method",                     limit: 4,                     null: false
-    t.string   "choices",                           limit: 255,                   null: false
+    t.text     "choices",                           limit: 65535,                 null: false
     t.integer  "final_choice",                      limit: 4
     t.integer  "multi_select_count",                limit: 4,     default: 0,     null: false
     t.integer  "min_points",                        limit: 4
