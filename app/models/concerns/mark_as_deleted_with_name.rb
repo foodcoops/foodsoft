@@ -11,7 +11,7 @@ module MarkAsDeletedWithName
     # (would have been nice to use retry, but there is no general duplicate-entry exception)
     n = ''
     begin
-      append = ' \u2020' + n
+      append = " \u2020" + n
       deleted_name = name.truncate(max_length-append.length, omission: '') + append
       if n.blank?
         n = 'A'
