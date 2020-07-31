@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "rails", '< 5.1'
+gem "rails", '< 5.2'
 
 gem 'sass-rails'
 gem 'less-rails'
@@ -75,6 +75,7 @@ group :development do
   gem 'sqlite3', '~> 1.3.6'
   gem 'mailcatcher'
   gem 'web-console'
+  gem 'listen'
 
   # Better error output
   gem 'better_errors'
