@@ -36,6 +36,7 @@ RUN export DATABASE_URL=mysql2://localhost/temp?encoding=utf8 && \
     apt-get update && \
     apt-get install -y mariadb-server && \
     /etc/init.d/mysql start && \
+    mariadb -e "CREATE DATABASE temp" && \
     cp config/app_config.yml.SAMPLE config/app_config.yml && \
     cp config/database.yml.MySQL_SAMPLE config/database.yml && \
     bundle exec rake db:setup assets:precompile && \

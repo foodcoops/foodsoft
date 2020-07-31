@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "rails", '< 5.2'
+gem "rails", '~> 5.2'
 
 gem 'sass-rails'
 gem 'less-rails'
@@ -18,6 +18,7 @@ gem 'date_time_attribute'
 gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
 gem 'i18n-js', '~> 3.0.0.rc8'
 gem 'rails-i18n'
+gem 'bootsnap', require: false
 
 gem 'mysql2'
 gem 'prawn'
