@@ -53,7 +53,7 @@ class MessagesMailReceiver
     message.add_recipients [@message.sender_id]
 
     message.save!
-    Resque.enqueue(MessageNotifier, FoodsoftConfig.scope, "message_deliver", message.id)
+    DeliverMessageJob.perform_later(message)
   end
 
   private
