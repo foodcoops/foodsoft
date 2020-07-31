@@ -87,7 +87,7 @@ class Ordergroup < Group
       update_balance!
       # Notify only when order group had a positive balance before the last transaction:
       if t.amount < 0 && self.account_balance < 0 && self.account_balance - t.amount >= 0
-        Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'negative_balance', self.id, t.id)
+        NotifyNegativeBalanceJob.perform_later(self, t)
       end
     end
   end

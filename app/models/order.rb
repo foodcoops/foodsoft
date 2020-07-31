@@ -241,7 +241,7 @@ class Order < ApplicationRecord
         ordergroups.each(&:update_stats!)
 
         # Notifications
-        Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'finished_order', self.id)
+        NotifyFinishedOrderJob.perform_later(self)
       end
     end
   end

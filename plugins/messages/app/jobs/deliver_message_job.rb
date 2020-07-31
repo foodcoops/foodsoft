@@ -1,10 +1,5 @@
-class MessageNotifier < UserNotifier
-  @queue = :foodsoft_notifier
-
-  def self.message_deliver(args)
-    message_id = args.first
-    message = Message.find(message_id)
-
+class DeliverMessageJob < ApplicationJob
+  def perform(message)
     message.message_recipients.each do |message_recipient|
       recipient = message_recipient.user
       if recipient.receive_email?
