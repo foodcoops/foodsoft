@@ -47,6 +47,9 @@ module Foodsoft
     # TODO Disable this. Uncommenting this line will currently cause rspec to fail.
     config.action_controller.permit_all_parameters = true
 
+    config.active_job.queue_adapter     = :resque
+    config.active_job.queue_name_prefix = ENV.fetch('JOB_QUEUE_PREFIX', "foodsoft_#{Rails.env}")
+
     # Enable the asset pipeline
     config.assets.enabled = true
 
