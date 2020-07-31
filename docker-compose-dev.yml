@@ -18,7 +18,6 @@ services:
     environment:
       - DATABASE_URL=mysql2://root:secret@mariadb/development?encoding=utf8mb4
       - REDIS_URL=redis://redis:6379
-      - QUEUE=foodsoft_notifier
       - TEST_DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8mb4
       - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
       - MAILCATCHER_ADDRESS=mailcatcher
