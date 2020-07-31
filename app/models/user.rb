@@ -72,7 +72,7 @@ class User < ApplicationRecord
       self.settings.merge!(key, value)
     end if settings_attributes
 
-    if ActiveRecord::Type::Boolean.new.type_cast_from_user(create_ordergroup)
+    if ActiveModel::Type::Boolean.new.cast(create_ordergroup)
       og = Ordergroup.new({name: name})
       og.memberships.build({user: self})
       og.save!
@@ -82,7 +82,7 @@ class User < ApplicationRecord
   end
 
   def send_welcome_mail?
-    ActiveRecord::Type::Boolean.new.type_cast_from_user(send_welcome_mail)
+    ActiveModel::Type::Boolean.new.cast(send_welcome_mail)
   end
 
   # sorted by display name
