@@ -6,7 +6,7 @@ class OrderArticle < ApplicationRecord
 
   belongs_to :order
   belongs_to :article
-  belongs_to :article_price
+  belongs_to :article_price, optional: true
   has_many :group_order_articles, :dependent => :destroy
 
   validates_presence_of :order_id, :article_id

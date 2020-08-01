@@ -1,7 +1,7 @@
 class Delivery < ApplicationRecord
 
   belongs_to :supplier
-  belongs_to :invoice
+  belongs_to :invoice, optional: true
   has_many :stock_changes, -> { includes(:stock_article).order('articles.name ASC') }, :dependent => :destroy
 
   scope :recent, -> { order('created_at DESC').limit(10) }

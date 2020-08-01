@@ -6,6 +6,7 @@ FactoryBot.define do
     name { Faker::Company.name.truncate(30) }
     phone { Faker::PhoneNumber.phone_number }
     address { Faker::Address.street_address }
+    supplier_category
 
     transient do
       article_count { 0 }
@@ -18,6 +19,11 @@ FactoryBot.define do
     end
 
     factory :shared_supplier, class: SharedSupplier
+  end
+
+  factory :supplier_category do
+    sequence(:name) { |n| Faker::Lorem.characters(number: rand(2..12)) + " ##{n}" }
+    financial_transaction_class
   end
 
 end

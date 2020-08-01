@@ -1,5 +1,5 @@
 class Link < ApplicationRecord
-  belongs_to :workgroup
+  belongs_to :workgroup, optional: true
 
   validates_presence_of :name, :url
 

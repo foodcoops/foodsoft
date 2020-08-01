@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   has_many :users_ordered, :through => :ordergroups, :source => :users
   has_many :comments, -> { order('created_at') }, :class_name => "OrderComment"
   has_many :stock_changes
-  belongs_to :invoice
+  belongs_to :invoice, optional: true
   belongs_to :supplier
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
