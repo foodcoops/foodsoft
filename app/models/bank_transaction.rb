@@ -18,9 +18,9 @@ class BankTransaction < ApplicationRecord
   #   @return [Binary] Optional PNG image for e.g. scan of paper receipt.
 
   belongs_to :bank_account
-  belongs_to :financial_link
-  belongs_to :supplier, foreign_key: 'iban', primary_key: 'iban'
-  belongs_to :user, foreign_key: 'iban', primary_key: 'iban'
+  belongs_to :financial_link, optional: true
+  belongs_to :supplier, optional: true, foreign_key: 'iban', primary_key: 'iban'
+  belongs_to :user, optional: true, foreign_key: 'iban', primary_key: 'iban'
 
   validates_presence_of :date, :amount, :bank_account_id
   validates_numericality_of :amount

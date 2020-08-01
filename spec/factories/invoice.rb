@@ -6,6 +6,7 @@ FactoryBot.define do
     supplier
     number { rand(1..99999) }
     amount { rand(0.1..26.0).round(2) }
+    created_by { create :user }
 
     after :create do |invoice|
       invoice.supplier.reload

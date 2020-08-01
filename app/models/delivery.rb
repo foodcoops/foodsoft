@@ -1,7 +1,7 @@
 class Delivery < StockEvent
 
   belongs_to :supplier
-  belongs_to :invoice
+  belongs_to :invoice, optional: true
 
   scope :recent, -> { order('created_at DESC').limit(10) }
 
