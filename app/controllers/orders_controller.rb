@@ -76,6 +76,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     @order.created_by = current_user
+    @order.updated_by = current_user
     if @order.save
       flash[:notice] = I18n.t('orders.create.notice')
       redirect_to @order
