@@ -47,7 +47,7 @@ es:
         reference: Referencia
         text: Descripción
       delivery:
-        delivered_on: Fecha entrega
+        date: Fecha entrega
         note: Nota
         supplier: Proveedor
       document:

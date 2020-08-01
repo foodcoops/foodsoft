@@ -33,7 +33,7 @@ fr:
         tax: TVA
         unit_quantity: Unités par lot
       delivery:
-        delivered_on: Date de réapprovisionnement
+        date: Date de réapprovisionnement
         supplier: Fournisseur-e
       document:
         created_at: Créé le

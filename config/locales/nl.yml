@@ -47,7 +47,7 @@ nl:
         reference: Referentie
         text: Omschrijving
       delivery:
-        delivered_on: Leverdatum
+        date: Leverdatum
         note: Notitie
         supplier: Leverancier
       document:
