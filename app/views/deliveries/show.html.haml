@@ -24,7 +24,7 @@
       %th.numeric= t '.sum'
   %tbody
     - total_net, total_gross = 0,0
-    - @delivery.stock_changes.each do |stock_change|
+    - @stock_changes.each do |stock_change|
       - quantity = stock_change.quantity
       - sum = quantity * stock_change.stock_article.price
       - total_net += sum

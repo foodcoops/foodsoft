@@ -90,16 +90,6 @@ ActiveRecord::Schema.define(version: 20181205010000) do
 
   add_index "bank_transactions", ["financial_link_id"], name: "index_bank_transactions_on_financial_link_id", using: :btree
 
-  create_table "deliveries", force: :cascade do |t|
-    t.integer  "supplier_id", limit: 4
-    t.date     "date"
-    t.datetime "created_at"
-    t.text     "note",        limit: 65535
-    t.integer  "invoice_id",  limit: 4
-  end
-
-  add_index "deliveries", ["supplier_id"], name: "index_deliveries_on_supplier_id", using: :btree
-
   create_table "documents", force: :cascade do |t|
     t.string   "name",               limit: 255
     t.string   "mime",               limit: 255
@@ -472,23 +462,26 @@ ActiveRecord::Schema.define(version: 20181205010000) do
   add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
 
   create_table "stock_changes", force: :cascade do |t|
-    t.integer  "delivery_id",      limit: 4
+    t.integer  "stock_event_id",   limit: 4
     t.integer  "order_id",         limit: 4
     t.integer  "stock_article_id", limit: 4
     t.integer  "quantity",         limit: 4, default: 0
     t.datetime "created_at"
-    t.integer  "stock_taking_id",  limit: 4
   end
 
-  add_index "stock_changes", ["delivery_id"], name: "index_stock_changes_on_delivery_id", using: :btree
   add_index "stock_changes", ["stock_article_id"], name: "index_stock_changes_on_stock_article_id", using: :btree
-  add_index "stock_changes", ["stock_taking_id"], name: "index_stock_changes_on_stock_taking_id", using: :btree
+  add_index "stock_changes", ["stock_event_id"], name: "index_stock_changes_on_stock_event_id", using: :btree
 
-  create_table "stock_takings", force: :cascade do |t|
+  create_table "stock_events", force: :cascade do |t|
+    t.integer  "supplier_id", limit: 4
     t.date     "date"
-    t.text     "note",       limit: 65535
     t.datetime "created_at"
+    t.text     "note",        limit: 65535
+    t.integer  "invoice_id",  limit: 4
+    t.string   "type",                      null: false
   end
+
+  add_index "stock_events", ["supplier_id"], name: "index_stock_events_on_supplier_id", using: :btree
 
   create_table "supplier_categories", force: :cascade do |t|
     t.string  "name",                           limit: 255, null: false
