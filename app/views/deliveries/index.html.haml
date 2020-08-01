@@ -3,13 +3,13 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= heading_helper Delivery, :delivered_on
+      %th= heading_helper Delivery, :date
       %th.numeric= t 'deliveries.invoice_amount'
       %th= heading_helper Delivery, :note
   %tbody
     - for delivery in @deliveries
       %tr
-        %td=h delivery.delivered_on
+        %td=h delivery.date
         %td.numeric= link_to_invoice(delivery)
         %td= truncate delivery.note
         %td

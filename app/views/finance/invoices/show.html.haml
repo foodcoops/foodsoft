@@ -16,11 +16,11 @@
   %p
     %b= heading_helper(Invoice, :deliveries) + ':'
     %span><
-      - @invoice.deliveries.order(:delivered_on).each_with_index do |delivery, index|
+      - @invoice.deliveries.order(:date).each_with_index do |delivery, index|
         - sum = delivery.sum
         - total += sum
         = ', ' if index > 0
-        = link_to format_date(delivery.delivered_on), [delivery.supplier,delivery]
+        = link_to format_date(delivery.date), [delivery.supplier, delivery]
         = ' (' + number_to_currency(sum) + ')'
 - if @invoice.orders.any?
   %p

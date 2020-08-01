@@ -47,7 +47,7 @@ en:
         reference: Referenz
         text: Description
       delivery:
-        delivered_on: Delivery date
+        date: Delivery date
         note: Note
         supplier: Supplier
       document:

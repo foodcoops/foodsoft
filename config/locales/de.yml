@@ -47,7 +47,7 @@ de:
         reference: Zahlungsreferenz
         text: Beschreibung
       delivery:
-        delivered_on: Lieferdatum
+        date: Lieferdatum
         note: Notiz
         supplier: Lieferantin
       document:

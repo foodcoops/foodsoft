@@ -91,11 +91,11 @@ ActiveRecord::Schema.define(version: 20181205010000) do
   add_index "bank_transactions", ["financial_link_id"], name: "index_bank_transactions_on_financial_link_id", using: :btree
 
   create_table "deliveries", force: :cascade do |t|
-    t.integer  "supplier_id",  limit: 4
-    t.date     "delivered_on"
+    t.integer  "supplier_id", limit: 4
+    t.date     "date"
     t.datetime "created_at"
-    t.text     "note",         limit: 65535
-    t.integer  "invoice_id",   limit: 4
+    t.text     "note",        limit: 65535
+    t.integer  "invoice_id",  limit: 4
   end
 
   add_index "deliveries", ["supplier_id"], name: "index_deliveries_on_supplier_id", using: :btree

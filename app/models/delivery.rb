@@ -6,7 +6,7 @@ class Delivery < ApplicationRecord
 
   scope :recent, -> { order('created_at DESC').limit(10) }
 
-  validates_presence_of :supplier_id, :delivered_on
+  validates_presence_of :supplier_id, :date
   validate :stock_articles_must_be_unique
 
   accepts_nested_attributes_for :stock_changes, :allow_destroy => :true
