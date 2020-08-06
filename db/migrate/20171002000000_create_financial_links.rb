@@ -1,4 +1,4 @@
-class CreateFinancialLinks < ActiveRecord::Migration
+class CreateFinancialLinks < ActiveRecord::Migration[4.2]
   def change
     create_table :financial_links do |t|
       t.text :note

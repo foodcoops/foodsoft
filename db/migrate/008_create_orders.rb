@@ -1,4 +1,4 @@
-class CreateOrders < ActiveRecord::Migration
+class CreateOrders < ActiveRecord::Migration[4.2]
   ORDER_TEST = 'Test Order'
   GROUP_ORDER = 'Orders'
   

@@ -1,4 +1,4 @@
-class CreateInvites < ActiveRecord::Migration
+class CreateInvites < ActiveRecord::Migration[4.2]
   def self.up
     create_table :invites do |t|
       t.column :token, :string, :null => false

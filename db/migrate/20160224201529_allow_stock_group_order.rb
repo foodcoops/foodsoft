@@ -1,4 +1,4 @@
-class AllowStockGroupOrder < ActiveRecord::Migration
+class AllowStockGroupOrder < ActiveRecord::Migration[4.2]
   def self.up
     change_column :group_orders, :ordergroup_id, :integer, :default => nil, :null => true
   end

@@ -1,4 +1,4 @@
-class CreateArticlePrices < ActiveRecord::Migration
+class CreateArticlePrices < ActiveRecord::Migration[4.2]
   def self.up
     create_table :article_prices do |t|
       t.column :article_id, :int, :null => false
