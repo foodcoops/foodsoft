@@ -287,9 +287,9 @@ nl:
         emails_title: Emailinstellingen
       tab_payment:
         schedule_title: Bestelrooster
-      tab_roles:
-        access_to_title: Toegang tot
-        access_to_paragraph: Ieder lid van de foodcoop heeft standaard toegang tot de volgende onderdelen.
+      tab_security:
+        default_roles_title: Toegang tot
+        default_roles_paragraph: Ieder lid van de foodcoop heeft standaard toegang tot de volgende onderdelen.
       tab_tasks:
         periodic_title: Periodieke taken
       tabs:
@@ -653,7 +653,7 @@ nl:
       messages: Berichten
       others: Overig
       payment: Financiën
-      roles: Rollen
+      security: Beveiliging
       tasks: Taken
   deliveries:
     add_stock_change:

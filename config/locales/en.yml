@@ -295,9 +295,9 @@ en:
         emails_title: Sending email
       tab_payment:
         schedule_title: Ordering schedule
-      tab_roles:
-        access_to_title: Access to
-        access_to_paragraph: By default every member of the foodcoop has access to the following areas.
+      tab_security:
+        default_roles_title: Access to
+        default_roles_paragraph: By default every member of the foodcoop has access to the following areas.
       tab_tasks:
         periodic_title: Periodic tasks
       tabs:
@@ -664,7 +664,7 @@ en:
       messages: Messages
       others: Other
       payment: Finances
-      roles: Roles
+      security: Security
       tasks: Tasks
   deliveries:
     add_stock_change:
