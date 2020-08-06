@@ -1,7 +1,7 @@
 
 class OrderGroup < Group; end # Needed for renaming of OrderGroup to Ordergroup
 
-class RoadToVersionThree < ActiveRecord::Migration
+class RoadToVersionThree < ActiveRecord::Migration[4.2]
   def self.up
     # TODO: Combine migrations since foodsoft3-development into one file
     # and try to build a migration path from old data.

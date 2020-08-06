@@ -1,4 +1,4 @@
-class AddWeeklyToTasks < ActiveRecord::Migration
+class AddWeeklyToTasks < ActiveRecord::Migration[4.2]
   def self.up
     add_column :tasks, :weekly, :boolean
   end

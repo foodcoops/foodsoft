@@ -1,4 +1,4 @@
-class CreateMessageRecipients < ActiveRecord::Migration
+class CreateMessageRecipients < ActiveRecord::Migration[4.2]
   class Message < ActiveRecord::Base
     has_many :message_recipients
   end

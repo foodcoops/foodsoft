@@ -1,4 +1,4 @@
-class CreateUsers < ActiveRecord::Migration
+class CreateUsers < ActiveRecord::Migration[4.2]
   USER_ADMIN = 'admin'
   USER_TEST = 'test'
 

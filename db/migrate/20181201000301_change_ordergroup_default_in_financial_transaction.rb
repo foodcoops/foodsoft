@@ -1,4 +1,4 @@
-class ChangeOrdergroupDefaultInFinancialTransaction < ActiveRecord::Migration
+class ChangeOrdergroupDefaultInFinancialTransaction < ActiveRecord::Migration[4.2]
   class FinancialTransaction < ActiveRecord::Base; end
 
   def up

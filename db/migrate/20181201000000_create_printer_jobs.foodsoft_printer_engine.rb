@@ -1,4 +1,4 @@
-class CreatePrinterJobs < ActiveRecord::Migration
+class CreatePrinterJobs < ActiveRecord::Migration[4.2]
   def change
     create_table :printer_jobs do |t|
       t.references :order

@@ -1,4 +1,4 @@
-class EnsureArticleForArticlePrice < ActiveRecord::Migration
+class EnsureArticleForArticlePrice < ActiveRecord::Migration[4.2]
   class ArticlePrice < ActiveRecord::Base; end
 
   def change

@@ -1,4 +1,4 @@
-class AddUserToTask < ActiveRecord::Migration
+class AddUserToTask < ActiveRecord::Migration[4.2]
   def change
     add_column :tasks, :created_by_user_id, :integer
 
