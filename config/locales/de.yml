@@ -280,9 +280,9 @@ de:
         emails_title: E-Mails versenden
       tab_payment:
         schedule_title: Bestellschema
-      tab_roles:
-        access_to_title: Zugriff auf
-        access_to_paragraph: Jedes Mitglied der Foodcoop hat automatisch Zugriff auf folgende Bereiche.
+      tab_security:
+        default_roles_title: Zugriff auf
+        default_roles_paragraph: Jedes Mitglied der Foodcoop hat automatisch Zugriff auf folgende Bereiche.
       tab_tasks:
         periodic_title: Wiederkehrende Aufgaben
       tabs:
@@ -641,7 +641,7 @@ de:
       messages: Nachrichten
       others: Sonstiges
       payment: Finanzen
-      roles: Rollen
+      security: Sicherheit
       tasks: Aufgaben
   deliveries:
     add_stock_change:
