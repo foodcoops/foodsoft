@@ -1,4 +1,4 @@
-class ChangeStockSupplierToNullInOrder < ActiveRecord::Migration
+class ChangeStockSupplierToNullInOrder < ActiveRecord::Migration[4.2]
   class Order < ActiveRecord::Base; end
 
   def up

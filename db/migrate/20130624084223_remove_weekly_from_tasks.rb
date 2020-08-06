@@ -1,4 +1,4 @@
-class RemoveWeeklyFromTasks < ActiveRecord::Migration
+class RemoveWeeklyFromTasks < ActiveRecord::Migration[4.2]
   def up
     remove_column :tasks, :weekly
   end

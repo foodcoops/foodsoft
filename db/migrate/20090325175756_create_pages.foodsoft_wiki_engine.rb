@@ -1,5 +1,5 @@
 # This migration comes from foodsoft_wiki_engine (originally 20090325175756)
-class CreatePages < ActiveRecord::Migration
+class CreatePages < ActiveRecord::Migration[4.2]
   def self.up
     create_table :pages do |t|
       t.string :title
