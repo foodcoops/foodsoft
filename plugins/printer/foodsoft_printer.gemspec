@@ -18,5 +18,4 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails"
   s.add_dependency "deface", "~> 1.0"
-  s.add_dependency "tubesock"
 end
