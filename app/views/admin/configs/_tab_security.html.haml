@@ -6,3 +6,6 @@
 = config_input form, :default_role_pickups, as: :boolean
 = config_input form, :default_role_finance, as: :boolean
 = config_input form, :default_role_invoices, as: :boolean
+
+%h4= t '.api_title'
+= config_input form, :api_key, as: :string, input_html: {class: 'input-xlarge'}

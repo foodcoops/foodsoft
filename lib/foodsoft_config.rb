@@ -149,6 +149,11 @@ class FoodsoftConfig
       keys.map(&:to_s).uniq
     end
 
+    def valid_api_key?(header)
+      m = /^Bearer (.+)$/.match(header)
+      m && FoodsoftConfig[:api_key].present? && m[1] == FoodsoftConfig[:api_key]
+    end
+
     # @return [Array<String>] Valid names of foodcoops.
     def foodcoops
       if config[:multi_coop_install]
@@ -260,6 +265,7 @@ class FoodsoftConfig
         tasks_period_days: 7,
         tasks_upfront_days: 49,
         shared_supplier_article_sync_limit: 200,
+        api_key: '',
         # The following keys cannot, by default, be set by foodcoops themselves.
         protected: {
           multi_coop_install: true,
