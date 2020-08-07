@@ -2,7 +2,6 @@
 .row
   .col-md-4
     = config_use_heading form, :use_printer do
-      = config_input form, :printer_token, as: :string
       = config_input form, :printer_print_order_fax, as: :boolean
       = config_input form, :printer_print_order_articles, as: :boolean
       = config_input form, :printer_print_order_groups, as: :boolean
