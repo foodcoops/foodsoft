@@ -61,6 +61,7 @@ RUN export SECRET_KEY_BASE=thisisnotimportantnow && \
     apt-get update && \
     apt-get install -y nodejs && \
     cp config/app_config.yml.SAMPLE config/app_config.yml && \
+    cp config/cable.yml.SAMPLE config/cable.yml && \
     cp config/database.yml.MySQL_SAMPLE config/database.yml && \
     cp config/storage.yml.SAMPLE config/storage.yml && \
     DATABASE_URL=nulldb://nohost bundle exec rake assets:precompile && \
