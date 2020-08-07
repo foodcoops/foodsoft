@@ -1,4 +1,4 @@
-class ChangeInvoiceRelation < ActiveRecord::Migration
+class ChangeInvoiceRelation < ActiveRecord::Migration[4.2]
   def up
     add_column :deliveries, :invoice_id, :integer
     execute 'UPDATE deliveries SET invoice_id = (SELECT id FROM invoices WHERE delivery_id = deliveries.id)'

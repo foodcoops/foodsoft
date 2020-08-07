@@ -5,7 +5,6 @@ en:
       printer_print_order_fax: Print fax PDF
       printer_print_order_groups: Print group PDF
       printer_print_order_matrix: Print matrix PDF
-      printer_token: Secret token
       use_printer: Use printer
   helpers:
     submit:

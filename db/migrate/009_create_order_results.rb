@@ -1,4 +1,4 @@
-class CreateOrderResults < ActiveRecord::Migration
+class CreateOrderResults < ActiveRecord::Migration[4.2]
   def self.up
     create_table :group_order_results do |t|
       t.column :order_id, :int, :null => false

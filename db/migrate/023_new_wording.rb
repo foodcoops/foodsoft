@@ -1,4 +1,4 @@
-class NewWording < ActiveRecord::Migration
+class NewWording < ActiveRecord::Migration[4.2]
   def self.up
     rename_column :articles, :clear_price, :net_price
     rename_column :articles, :refund, :deposit

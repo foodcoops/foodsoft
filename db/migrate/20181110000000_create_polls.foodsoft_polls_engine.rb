@@ -1,4 +1,4 @@
-class CreatePolls < ActiveRecord::Migration
+class CreatePolls < ActiveRecord::Migration[4.2]
   def change
     create_table :polls do |t|
       t.integer :created_by_user_id, null: false

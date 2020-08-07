@@ -1,6 +1,5 @@
 / insert_after ':root:last-child'
 = config_use_heading form, :use_printer do
-  = config_input form, :printer_token, as: :string, input_html: {class: 'input-xlarge'}
   = config_input form, :printer_print_order_fax, as: :boolean
   = config_input form, :printer_print_order_articles, as: :boolean
   = config_input form, :printer_print_order_groups, as: :boolean

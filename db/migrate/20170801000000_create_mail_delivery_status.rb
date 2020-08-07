@@ -1,4 +1,4 @@
-class CreateMailDeliveryStatus < ActiveRecord::Migration
+class CreateMailDeliveryStatus < ActiveRecord::Migration[4.2]
   def change
     create_table :mail_delivery_status do |t|
       t.datetime :created_at

@@ -5,7 +5,7 @@
 # attempt to create an already existing messages table.
 #
 # extracted from 20090120184410_road_to_version_three.rb
-class CreateMessages < ActiveRecord::Migration
+class CreateMessages < ActiveRecord::Migration[4.2]
   def self.up
     create_table :messages do |t|
       t.references :sender

@@ -1,4 +1,4 @@
-class UpdateGroupOrderTotals < ActiveRecord::Migration
+class UpdateGroupOrderTotals < ActiveRecord::Migration[4.2]
   def self.up
     say "If you have ever modified an order after it was settled, the group_order's " +
         "price may be calculated incorrectly. This can take a lot of time on a " +

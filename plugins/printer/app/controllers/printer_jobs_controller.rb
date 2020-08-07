@@ -22,6 +22,7 @@ class PrinterJobsController < ApplicationController
         count += 1
       end
     end
+    PrinterChannel.broadcast_unfinished
     redirect_to order, notice: t('.notice', count: count)
   end
 
@@ -37,6 +38,7 @@ class PrinterJobsController < ApplicationController
   def destroy
     job = PrinterJob.find(params[:id])
     job.finish! current_user
+    PrinterChannel.broadcast_unfinished
     redirect_to printer_jobs_path, notice: t('.notice')
   rescue => error
     redirect_to printer_jobs_path, t('errors.general_msg', msg: error.message)

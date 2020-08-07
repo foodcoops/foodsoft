@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "rails", '~> 4.2'
+gem "rails", '~> 5.2'
 
 gem 'sass-rails'
 gem 'less-rails'
@@ -18,11 +18,12 @@ gem 'date_time_attribute'
 gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
 gem 'i18n-js', '~> 3.0.0.rc8'
 gem 'rails-i18n'
+gem 'bootsnap', require: false
 
-gem 'mysql2', '~> 0.4.0' # for compatibility with rails 4
+gem 'mysql2'
 gem 'prawn'
 gem 'prawn-table'
-gem 'haml', '~> 4.0' # some breaking changes in version 5, remove this line again when fixed
+gem 'haml'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
@@ -36,6 +37,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
 gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
 gem 'simple-navigation-bootstrap'
+gem 'sprockets', '< 4'
 gem 'ransack'
 gem 'acts_as_tree'
 gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 https://github.com/huacnlee/rails-settings-cached/issues/73
@@ -73,7 +75,8 @@ gem 'foodsoft_polls', path: 'plugins/polls'
 group :development do
   gem 'sqlite3', '~> 1.3.6'
   gem 'mailcatcher'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
+  gem 'listen'
 
   # Better error output
   gem 'better_errors'
@@ -104,7 +107,7 @@ group :test do
   gem 'database_cleaner'
   gem 'connection_pool'
   # need to include rspec components before i18n-spec or rake fails in test environment
-  gem 'rspec-core', '~> 3.2'
+  gem 'rspec-core'
   gem 'rspec-rerun'
   gem 'i18n-spec'
   # code coverage

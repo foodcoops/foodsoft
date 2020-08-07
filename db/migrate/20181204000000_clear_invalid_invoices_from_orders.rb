@@ -1,4 +1,4 @@
-class ClearInvalidInvoicesFromOrders < ActiveRecord::Migration
+class ClearInvalidInvoicesFromOrders < ActiveRecord::Migration[4.2]
   class Order < ActiveRecord::Base; end
   class Invoice < ActiveRecord::Base; end
 

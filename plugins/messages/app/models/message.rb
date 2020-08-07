@@ -1,9 +1,9 @@
 require "base32"
 
 class Message < ApplicationRecord
-  belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
-  belongs_to :group, :class_name => "Group", :foreign_key => "group_id"
-  belongs_to :reply_to_message, :class_name => "Message", :foreign_key => "reply_to"
+  belongs_to :sender, class_name: 'User', foreign_key: 'sender_id'
+  belongs_to :group, optional: true, class_name: 'Group', foreign_key: 'group_id'
+  belongs_to :reply_to_message, optional: true, class_name: 'Message', foreign_key: 'reply_to'
   has_many :message_recipients, dependent: :destroy
   has_many :recipients, through: :message_recipients, source: :user
 

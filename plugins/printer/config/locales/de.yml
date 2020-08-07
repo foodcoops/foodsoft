@@ -5,7 +5,6 @@ de:
       printer_print_order_fax: Fax PDF drucken
       printer_print_order_groups: Gruppen PDF drucken
       printer_print_order_matrix: Matrix PDF drucken
-      printer_token: Geheimer Token
       use_printer: Drucker verwenden
   helpers:
     submit:

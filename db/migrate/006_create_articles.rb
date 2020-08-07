@@ -1,4 +1,4 @@
-class CreateArticles < ActiveRecord::Migration
+class CreateArticles < ActiveRecord::Migration[4.2]
   SAMPLE_ARTICLE_NAMES =  ['banana', 'kiwi', 'strawberry']
 
   def self.up

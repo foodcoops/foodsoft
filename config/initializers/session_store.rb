@@ -5,21 +5,20 @@ module ActionDispatch
     class SlugCookieStore < CookieStore
       alias_method :orig_set_cookie, :set_cookie
 
-      def set_cookie(env, session_id, cookie)
+      def set_cookie(request, session_id, cookie)
         if script_name = FoodsoftConfig[:script_name]
-          request = ActionDispatch::Request.new env
           path = request.original_fullpath[script_name.size..-1]
           slug = path.split('/', 2).first
           return if slug.blank?
           cookie[:path] = script_name + slug
         end
-        orig_set_cookie env, session_id, cookie
+        orig_set_cookie request, session_id, cookie
       end
     end
   end
 end
 
-Foodsoft::Application.config.session_store :slug_cookie_store, key: '_foodsoft_session'
+Rails.application.config.session_store :slug_cookie_store, key: '_foodsoft_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information

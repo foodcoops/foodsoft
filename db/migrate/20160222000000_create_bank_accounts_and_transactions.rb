@@ -1,4 +1,4 @@
-class CreateBankAccountsAndTransactions < ActiveRecord::Migration
+class CreateBankAccountsAndTransactions < ActiveRecord::Migration[4.2]
   def change
     create_table :bank_accounts do |t|
       t.string :name, null: false
