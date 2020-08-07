@@ -7,7 +7,13 @@ module Concerns::AuthApi
 
   protected
 
+  def valid_api_key?
+    FoodsoftConfig.valid_api_key? request.headers['Authorization']
+  end
+
   def authenticate
+    return if valid_api_key?
+
     # authenticate does not look at scopes, we just want to know if there's a valid token
     # @see https://github.com/doorkeeper-gem/doorkeeper/blob/v5.0.1/lib/doorkeeper/models/access_token_mixin.rb#L218
     doorkeeper_render_error unless doorkeeper_token && doorkeeper_token.accessible?

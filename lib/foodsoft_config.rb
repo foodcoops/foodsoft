@@ -156,6 +156,11 @@ class FoodsoftConfig
       keys.map(&:to_s).uniq
     end
 
+    def valid_api_key?(header)
+      m = /^Bearer (.+)$/.match(header)
+      m && FoodsoftConfig[:api_key].present? && m[1] == FoodsoftConfig[:api_key]
+    end
+
     # @return [Array<String>] Valid names of foodcoops.
     def foodcoops
       if config[:multi_coop_install]
