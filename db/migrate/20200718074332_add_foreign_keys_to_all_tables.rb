@@ -35,11 +35,11 @@ class AddForeignKeysToAllTables < ActiveRecord::Migration
     add_foreign_key :financial_transactions, :group_orders
 
     # group_order_article_quantities
-    add_foreign_key :group_order_article_quantities, :articles, column: :group_order_article_id
+    add_foreign_key :group_order_article_quantities, :group_order_articles
 
     # group_order_articles
     add_foreign_key :group_order_articles, :group_orders
-    add_foreign_key :group_order_articles, :articles, column: :order_article_id
+    add_foreign_key :group_order_articles, :order_articles
 
     # group_orders
     add_foreign_key :group_orders, :groups, column: :ordergroup_id
@@ -68,6 +68,7 @@ class AddForeignKeysToAllTables < ActiveRecord::Migration
 
     # messages
     add_foreign_key :messages, :users, column: :sender_id
+    add_foreign_key :messages, :messages, column: :reply_to
     add_foreign_key :messages, :groups
 
     # oauth_access_grants

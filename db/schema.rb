@@ -298,6 +298,7 @@ ActiveRecord::Schema.define(version: 20200718074332) do
   end
 
   add_index "messages", ["group_id"], name: "fk_rails_841b0ae6ac", using: :btree
+  add_index "messages", ["reply_to"], name: "fk_rails_3730b06fab", using: :btree
   add_index "messages", ["sender_id"], name: "fk_rails_b8f26a382d", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -615,9 +616,9 @@ ActiveRecord::Schema.define(version: 20200718074332) do
   add_foreign_key "financial_transactions", "group_orders"
   add_foreign_key "financial_transactions", "groups", column: "ordergroup_id"
   add_foreign_key "financial_transactions", "users"
-  add_foreign_key "group_order_article_quantities", "articles", column: "group_order_article_id"
-  add_foreign_key "group_order_articles", "articles", column: "order_article_id"
+  add_foreign_key "group_order_article_quantities", "group_order_articles"
   add_foreign_key "group_order_articles", "group_orders"
+  add_foreign_key "group_order_articles", "order_articles"
   add_foreign_key "group_orders", "groups", column: "ordergroup_id"
   add_foreign_key "group_orders", "orders"
   add_foreign_key "group_orders", "users", column: "updated_by_user_id"
@@ -631,6 +632,7 @@ ActiveRecord::Schema.define(version: 20200718074332) do
   add_foreign_key "message_recipients", "messages"
   add_foreign_key "message_recipients", "users"
   add_foreign_key "messages", "groups"
+  add_foreign_key "messages", "messages", column: "reply_to"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "order_articles", "article_prices"
   add_foreign_key "order_articles", "articles"
