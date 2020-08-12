@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_filter -> { require_plugin_enabled FoodsoftPolls }
+  before_action -> { require_plugin_enabled FoodsoftPolls }
 
   def index
     @polls = Poll.page(params[:page]).per(@per_page).order(created_at: :desc)

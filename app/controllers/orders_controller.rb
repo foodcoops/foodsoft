@@ -94,7 +94,7 @@ class OrdersController < ApplicationController
   # Update an existing order.
   def update
     @order = Order.find params[:id]
-    if @order.update_attributes params[:order]
+    if @order.update_attributes params[:order].merge(updated_by: current_user)
       flash[:notice] = I18n.t('orders.update.notice')
       redirect_to :action => 'show', :id => @order
     else

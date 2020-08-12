@@ -40,7 +40,7 @@ class HomeController < ApplicationController
 
     unless @ordergroup.nil?
 
-      @ordergroup = Ordergroup.include_transaction_class_sum.find(@ordergroup)
+      @ordergroup = Ordergroup.include_transaction_class_sum.find(@ordergroup.id)
 
       if params['sort']
         sort = case params['sort']
