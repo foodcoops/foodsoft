@@ -200,7 +200,8 @@ GEM
       rails (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    haml (4.0.7)
+    haml (5.1.2)
+      temple (>= 0.8.0)
       tilt
     haml-rails (1.0.0)
       actionpack (>= 4.0.1)
@@ -464,6 +465,7 @@ GEM
     sqlite3 (1.3.13)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
+    temple (0.8.2)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     therubyracer (0.12.3)
@@ -546,7 +548,7 @@ DEPENDENCIES
   foodsoft_polls!
   foodsoft_wiki!
   gaffe
-  haml (~> 4.0)
+  haml
   haml-rails
   hashie (~> 3.4.6)
   i18n-js (~> 3.0.0.rc8)

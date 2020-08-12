@@ -33,7 +33,7 @@
           if (item) {
             ele.show();
             ele.find('.amount').text(item.amount);
-            ele.find('.reference').text((#{BankTransactionReference.js_code_for_user(@current_user)})(item.values));
+            ele.find('.reference').text((#{raw BankTransactionReference.js_code_for_user(@current_user)})(item.values));
           } else {
             ele.hide();
           }
