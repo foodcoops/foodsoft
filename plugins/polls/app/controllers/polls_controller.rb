@@ -76,9 +76,11 @@ class PollsController < ApplicationController
       @poll_vote.update!(note: params[:note], user: current_user)
 
       if @poll.single_select?
-        choices = { params[:choice] => '1' }
+        choices = {}
+        choice = params[:choice]
+        choices[choice] = '1' if choice
       else
-        choices = params[:choices] || {}
+        choices = params[:choices].try(:to_h) || {}
       end
 
       @poll_vote.poll_choices = choices.map do |choice, value|
