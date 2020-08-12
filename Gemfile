@@ -22,7 +22,7 @@ gem 'rails-i18n'
 gem 'mysql2', '~> 0.4.0' # for compatibility with rails 4
 gem 'prawn'
 gem 'prawn-table'
-gem 'haml', '~> 4.0' # some breaking changes in version 5, remove this line again when fixed
+gem 'haml'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'simple_form'
