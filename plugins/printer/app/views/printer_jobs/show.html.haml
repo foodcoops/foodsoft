@@ -1,5 +1,8 @@
 - title t('.title', id: @job.id)
 
+- content_for :actionbar do
+  = link_to t('.requeue'), requeue_printer_job_path(@job), method: :post, class: 'btn'
+
 %p
   %b= heading_helper(PrinterJob, :created_by) + ':'
   = show_user @job.created_by

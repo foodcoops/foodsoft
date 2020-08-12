@@ -30,6 +30,14 @@ class PrinterJobsController < ApplicationController
     @job = PrinterJob.find(params[:id])
   end
 
+  def requeue
+    job = PrinterJob.find(params[:id])
+    job = PrinterJob.create! order: job.order, document: job.document, created_by: current_user
+    job.add_update! 'requeued'
+    PrinterChannel.broadcast_unfinished
+    redirect_to printer_jobs_path, notice: t('.notice')
+  end
+
   def document
     job = PrinterJob.find(params[:id])
     send_order_pdf job.order, job.document
