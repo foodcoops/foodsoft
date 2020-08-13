@@ -34,7 +34,7 @@ class Order < ApplicationRecord
   scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
   scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
-  scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
+  scope :stockit, -> { where(supplier_id: nil).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
   scope :stock_group_order, -> { group_orders.where(ordergroup_id: nil).first }
   scope :with_invoice, -> { where.not(invoice: nil) }
@@ -45,7 +45,7 @@ class Order < ApplicationRecord
   date_time_attribute :starts, :boxfill, :ends
 
   def stockit?
-    supplier_id == 0
+    supplier_id.nil?
   end
 
   def name

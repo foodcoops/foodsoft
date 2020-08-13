@@ -20,8 +20,8 @@ module OrdersHelper
 
   def options_for_suppliers_to_select
     options = [[I18n.t('helpers.orders.option_choose')]]
-    options += Supplier.map {|s| [ s.name, url_for(action: "new", supplier_id: s)] }
-    options += [[I18n.t('helpers.orders.option_stock'), url_for(action: 'new', supplier_id: 0)]]
+    options += Supplier.map {|s| [ s.name, url_for(action: "new", supplier_id: s.id)] }
+    options += [[I18n.t('helpers.orders.option_stock'), url_for(action: 'new', supplier_id: nil)]]
     options_for_select(options)
   end
 
