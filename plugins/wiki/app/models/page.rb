@@ -3,7 +3,7 @@ class Page < ApplicationRecord
 
   belongs_to :user, :foreign_key => 'updated_by'
 
-  acts_as_versioned version_column: :lock_version, limit: 20
+  acts_as_versioned version_column: :lock_version
   self.non_versioned_columns += %w(permalink created_at title)
 
   acts_as_tree :order => "title"
