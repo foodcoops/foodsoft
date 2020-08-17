@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20181205010000) do
   add_index "article_categories", ["name"], name: "index_article_categories_on_name", unique: true, using: :btree
 
   create_table "article_prices", force: :cascade do |t|
-    t.integer  "article_id",    limit: 4
+    t.integer  "article_id",    limit: 4,                                     null: false
     t.decimal  "price",                   precision: 8, scale: 2, default: 0, null: false
     t.decimal  "tax",                     precision: 8, scale: 2, default: 0, null: false
     t.decimal  "deposit",                 precision: 8, scale: 2, default: 0, null: false
