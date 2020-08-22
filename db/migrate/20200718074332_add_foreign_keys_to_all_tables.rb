@@ -137,3 +137,4 @@ class AddForeignKeysToAllTables < ActiveRecord::Migration
     add_foreign_key :tasks, :users, column: :created_by_user_id
   end
 end
+
