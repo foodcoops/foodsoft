@@ -43,4 +43,8 @@ class DeleteOrphanedRecordsFromAllTables < ActiveRecord::Migration
     # We're not going to be able to add a FK constraint for settings, but still...:
     Setting.where(thing_type: 'User').where.not(thing_id: User.all).destroy_all
   end
+
+  def down
+    # irreversible
+  end
 end
