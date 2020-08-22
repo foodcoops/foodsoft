@@ -48,3 +48,4 @@ class DeleteOrphanedRecordsFromAllTables < ActiveRecord::Migration
     # irreversible
   end
 end
+
