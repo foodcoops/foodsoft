@@ -54,6 +54,9 @@ class Mailer < ActionMailer::Base
       group_order_current.each do |goa_id, goa|
         changed_goa_ids << goa_id if goa != group_order_previous[goa_id]
       end
+      puts "previous: #{group_order_previous_json}"
+      puts "current: #{group_order_previous_json}"
+      puts "changed :#{changed_goa_ids}"
     end
     FoodsoftCache.set(emailkey, group_order_current_json)
     changed_goa_ids
