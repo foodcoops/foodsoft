@@ -17,7 +17,7 @@ module FoodsoftPrinter
       if Rails.configuration.cache_classes
         OrderPrinterJobs.install
       else
-        ActionDispatch::Reloader.to_prepare do
+        ActiveSupport::Reloader.to_prepare do
           OrderPrinterJobs.install
         end
       end
