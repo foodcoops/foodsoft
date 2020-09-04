@@ -13,7 +13,7 @@
   %h2= t '.title'
   - if @order.errors.has_key?(:articles)
     .alert.alert-error
-      = @order.errors.get(:articles).join(" ")
+      = @order.errors.messages[:articles].join(" ")
   %table.table.table-hover#articleList
     %tr
       %th= check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
