@@ -33,6 +33,19 @@ ach:
         price: crwdns2442:0crwdne2442:0
         tax: crwdns2444:0crwdne2444:0
         unit_quantity: crwdns2446:0crwdne2446:0
+      bank_account:
+        balance: crwdns9174:0crwdne9174:0
+        description: crwdns9176:0crwdne9176:0
+        iban: crwdns9178:0crwdne9178:0
+        name: crwdns9180:0crwdne9180:0
+      bank_transaction:
+        amount: crwdns9182:0crwdne9182:0
+        date: crwdns9184:0crwdne9184:0
+        external_id: crwdns9186:0crwdne9186:0
+        financial_link: crwdns9188:0crwdne9188:0
+        iban: crwdns9190:0crwdne9190:0
+        reference: crwdns9192:0crwdne9192:0
+        text: crwdns9194:0crwdne9194:0
       delivery:
         delivered_on: crwdns2448:0crwdne2448:0
         note: crwdns2450:0crwdne2450:0
@@ -54,6 +67,7 @@ ach:
       financial_transaction_class:
         name: crwdns2478:0crwdne2478:0
       financial_transaction_type:
+        bank_account: crwdns9340:0crwdne9340:0
         name: crwdns2480:0crwdne2480:0
         financial_transaction_class: crwdns2482:0crwdne2482:0
         name_short: crwdns2484:0crwdne2484:0
@@ -79,6 +93,7 @@ ach:
         deliveries: crwdns2518:0crwdne2518:0
         deposit: crwdns2520:0crwdne2520:0
         deposit_credit: crwdns2522:0crwdne2522:0
+        financial_link: crwdns9196:0crwdne9196:0
         net_amount: crwdns2524:0crwdne2524:0
         note: crwdns2526:0crwdne2526:0
         number: crwdns2528:0crwdne2528:0
@@ -106,6 +121,13 @@ ach:
         starts: crwdns2604:0crwdne2604:0
         status: crwdns2606:0crwdne2606:0
         supplier: crwdns2608:0crwdne2608:0
+        transport: crwdns9376:0crwdne9376:0
+        transport_distribution: crwdns9378:0crwdne9378:0
+        transport_distributions:
+          articles: crwdns9380:0crwdne9380:0
+          ordergroup: crwdns9382:0crwdne9382:0
+          price: crwdns9384:0crwdne9384:0
+          skip: crwdns9386:0crwdne9386:0
         updated_by: crwdns2610:0crwdne2610:0
       order_article:
         article: crwdns2612:0crwdne2612:0
@@ -165,6 +187,8 @@ ach:
         shared_sync_method: crwdns2716:0crwdne2716:0
         url: crwdns2718:0crwdne2718:0
       task:
+        created_by: crwdns9320:0crwdne9320:0
+        created_on: crwdns9322:0crwdne9322:0
         description: crwdns2720:0crwdne2720:0
         done: crwdns2722:0crwdne2722:0
         due_date: crwdns2724:0crwdne2724:0
@@ -271,6 +295,9 @@ ach:
         emails_title: crwdns2878:0crwdne2878:0
       tab_payment:
         schedule_title: crwdns2880:0crwdne2880:0
+      tab_security:
+        default_roles_title: crwdns9406:0crwdne9406:0
+        default_roles_paragraph: crwdns9408:0crwdne9408:0
       tab_tasks:
         periodic_title: crwdns2882:0crwdne2882:0
       tabs:
@@ -280,9 +307,12 @@ ach:
     confirm: crwdns2888:0crwdne2888:0
     finances:
       index:
+        bank_accounts: crwdns9202:0crwdne9202:0
         first_paragraph: crwdns2890:0crwdne2890:0
+        new_bank_account: crwdns9204:0crwdne9204:0
         new_financial_transaction_class: crwdns2892:0crwdne2892:0
         title: crwdns2894:0crwdne2894:0
+        transaction_types: crwdns9206:0crwdne9206:0
       transaction_types:
         name: crwdns2896:0crwdne2896:0
         new_financial_transaction_type: crwdns2898:0crwdne2898:0
@@ -292,6 +322,7 @@ ach:
         title_new: crwdns2902:0crwdne2902:0
     financial_transaction_types:
       form:
+        name_short_desc: crwdns9342:0crwdne9342:0
         title_edit: crwdns2904:0crwdne2904:0
         title_new: crwdns2906:0crwdne2906:0
     mail_delivery_status:
@@ -322,7 +353,7 @@ ach:
         confirm: crwdns2960:0crwdne2960:0
         edit: crwdns2962:0crwdne2962:0
         title: crwdns2966:0%{name}crwdne2966:0
-    search_placeholder: crwdns2968:0crwdne2968:0
+    search_placeholder: crwdns9208:0crwdne9208:0
     users:
       controller:
         sudo_done: crwdns2970:0%{user}crwdne2970:0
@@ -331,6 +362,9 @@ ach:
         notice: crwdns2974:0crwdne2974:0
       edit:
         title: crwdns2976:0crwdne2976:0
+      form:
+        create_ordergroup: crwdns9324:0crwdne9324:0
+        send_welcome_mail: crwdns9368:0crwdne9368:0
       index:
         first_paragraph: crwdns2978:0%{url}crwdne2978:0
         new_user: crwdns2980:0crwdne2980:0
@@ -450,6 +484,7 @@ ach:
       not_found: crwdns3140:0crwdne3140:0
     index:
       change_supplier: crwdns3142:0crwdne3142:0
+      download: crwdns9326:0crwdne9326:0
       edit_all: crwdns3144:0crwdne3144:0
       ext_db:
         import: crwdns3146:0crwdne3146:0
@@ -516,6 +551,14 @@ ach:
       text_1: 'crwdns3234:0%{supplier}crwdne3234:0'
       text_2: crwdns3236:0crwdne3236:0
       title: crwdns3238:0%{supplier}crwdne3238:0
+  bank_account_connector:
+    confirm: crwdns9364:0%{code}crwdne9364:0
+    fields:
+      email: crwdns9212:0crwdne9212:0
+      pin: crwdns9214:0crwdne9214:0
+      password: crwdns9216:0crwdne9216:0
+      tan: crwdns9366:0crwdne9366:0
+      username: crwdns9218:0crwdne9218:0
   config:
     hints:
       applepear_url: crwdns3240:0crwdne3240:0
@@ -573,6 +616,12 @@ ach:
       currency_unit: crwdns3344:0crwdne3344:0
       custom_css: crwdns3346:0crwdne3346:0
       default_locale: crwdns3348:0crwdne3348:0
+      default_role_article_meta: crwdns9220:0crwdne9220:0
+      default_role_finance: crwdns9222:0crwdne9222:0
+      default_role_invoices: crwdns9224:0crwdne9224:0
+      default_role_orders: crwdns9226:0crwdne9226:0
+      default_role_pickups: crwdns9228:0crwdne9228:0
+      default_role_suppliers: crwdns9230:0crwdne9230:0
       disable_invite: crwdns3350:0crwdne3350:0
       email_from: crwdns3354:0crwdne3354:0
       email_replyto: crwdns3356:0crwdne3356:0
@@ -615,6 +664,7 @@ ach:
       messages: crwdns3446:0crwdne3446:0
       others: crwdns3448:0crwdne3448:0
       payment: crwdns3450:0crwdne3450:0
+      security: crwdns9410:0crwdne9410:0
       tasks: crwdns3452:0crwdne3452:0
   deliveries:
     add_stock_change:
@@ -703,6 +753,8 @@ ach:
       close:
         alert: 'crwdns3666:0%{message}crwdne3666:0'
         notice: crwdns3668:0crwdne3668:0
+      close_all_direct_with_invoice:
+        notice: 'crwdns9234:0%{count}crwdne9234:0'
       close_direct:
         alert: 'crwdns3670:0%{message}crwdne3670:0'
         notice: crwdns3672:0crwdne3672:0
@@ -716,14 +768,18 @@ ach:
       edit_results_by_articles:
         add_article: crwdns3684:0crwdne3684:0
         amount: crwdns3686:0crwdne3686:0
+        edit_transport: crwdns9388:0crwdne9388:0
         gross: crwdns3688:0crwdne3688:0
         net: crwdns3690:0crwdne3690:0
+      edit_transport:
+        title: crwdns9390:0crwdne9390:0
       group_order_articles:
         add_group: crwdns3692:0crwdne3692:0
         total: crwdns3694:0crwdne3694:0
         total_fc: crwdns3696:0crwdne3696:0
         units: crwdns3698:0crwdne3698:0
       index:
+        close_all_direct_with_invoice: crwdns9236:0crwdne9236:0
         title: crwdns3700:0crwdne3700:0
       invoice:
         edit: crwdns3702:0crwdne3702:0
@@ -774,24 +830,59 @@ ach:
         with_extra_charge: 'crwdns3784:0crwdne3784:0'
         without_extra_charge: 'crwdns3786:0crwdne3786:0'
     bank_accounts:
-      controller:
-        import:
-          notice: 'crwdns3788:0%{count}crwdne3788:0'
+      assign_unlinked_transactions:
+        notice: 'crwdns9238:0%{count}crwdne9238:0'
+      import:
+        notice: 'crwdns9240:0%{count}crwdne9240:0'
+        no_import_method: crwdns9242:0crwdne9242:0
+        submit: crwdns9334:0crwdne9334:0
+        title: crwdns9246:0%{name}crwdne9246:0
       index:
-        account_statement: crwdns3790:0crwdne3790:0
         title: crwdns3792:0crwdne3792:0
     bank_transactions:
       index:
+        assign_unlinked_transactions: crwdns9248:0crwdne9248:0
+        import_transactions: crwdns9250:0crwdne9250:0
         title: crwdns3794:0%{name}crwdnd3794:0%{balance}crwdne3794:0
       show:
+        add_financial_link: crwdns9252:0crwdne9252:0
         belongs_to_supplier: crwdns3796:0crwdne3796:0
         belongs_to_user: crwdns3798:0crwdne3798:0
         in_ordergroup: crwdns3800:0crwdne3800:0
+      transactions:
+        add_financial_link: crwdns9254:0crwdne9254:0
     create:
       notice: crwdns3802:0crwdne3802:0
     financial_links:
+      add_bank_transaction:
+        notice: crwdns9256:0crwdne9256:0
+      add_financial_transaction:
+        notice: crwdns9258:0crwdne9258:0
+      add_invoice:
+        notice: crwdns9260:0crwdne9260:0
+      create:
+        notice: crwdns9262:0crwdne9262:0
+      index_bank_transaction:
+        title: crwdns9264:0crwdne9264:0
+      index_financial_transaction:
+        title: crwdns9266:0crwdne9266:0
+      index_invoice:
+        title: crwdns9268:0crwdne9268:0
+      remove_bank_transaction:
+        notice: crwdns9270:0crwdne9270:0
+      remove_financial_transaction:
+        notice: crwdns9272:0crwdne9272:0
+      remove_invoice:
+        notice: crwdns9274:0crwdne9274:0
       show:
+        add_bank_transaction: crwdns9276:0crwdne9276:0
+        add_financial_transaction: crwdns9278:0crwdne9278:0
+        add_invoice: crwdns9280:0crwdne9280:0
+        amount: crwdns9282:0crwdne9282:0
+        date: crwdns9284:0crwdne9284:0
+        description: crwdns9286:0crwdne9286:0
         title: crwdns3804:0%{number}crwdne3804:0
+        type: crwdns9288:0crwdne9288:0
     financial_transactions:
       controller:
         create:
@@ -800,6 +891,8 @@ ach:
           alert: 'crwdns3808:0%{error}crwdne3808:0'
           error_note_required: crwdns3810:0crwdne3810:0
           notice: crwdns3812:0crwdne3812:0
+        destroy:
+          notice: crwdns9336:0crwdne9336:0
       index:
         balance: 'crwdns3814:0%{balance}crwdne3814:0'
         last_updated_at: "crwdns3816:0%{when}crwdne3816:0"
@@ -810,9 +903,13 @@ ach:
         title: crwdns3824:0crwdne3824:0
       new:
         paragraph: crwdns3826:0%{name}crwdne3826:0
+        paragraph_foodcoop: crwdns9356:0crwdne9356:0
         title: crwdns3828:0crwdne3828:0
       new_collection:
         add_all_ordergroups: crwdns3830:0crwdne3830:0
+        add_all_ordergroups_custom_field: crwdns9318:0%{label}crwdne9318:0
+        create_financial_link: crwdns9292:0crwdne9292:0
+        create_foodcoop_transaction: crwdns9362:0crwdne9362:0
         new_ordergroup: crwdns3832:0crwdne3832:0
         save: crwdns3834:0crwdne3834:0
         set_balance: crwdns3836:0crwdne3836:0
@@ -821,8 +918,11 @@ ach:
       ordergroup:
         remove: crwdns3842:0crwdne3842:0
         remove_group: crwdns3844:0crwdne3844:0
+      transactions:
+        confirm_revert: crwdns9294:0%{name}crwdne9294:0
+        revert_title: crwdns9296:0crwdne9296:0
       transactions_search:
-        search_placeholder: crwdns3846:0crwdne3846:0
+        show_hidden: crwdns9298:0crwdne9298:0
     index:
       amount_fc: crwdns3848:0crwdne3848:0
       end: crwdns3850:0crwdne3850:0
@@ -839,6 +939,7 @@ ach:
         attachment_hint: crwdns3866:0crwdne3866:0
       index:
         action_new: crwdns3868:0crwdne3868:0
+        show_unpaid: crwdns9328:0crwdne9328:0
         title: crwdns3870:0crwdne3870:0
       new:
         title: crwdns3872:0crwdne3872:0
@@ -851,8 +952,8 @@ ach:
     ordergroups:
       index:
         new_transaction: crwdns3882:0crwdne3882:0
-        search_placeholder: crwdns3884:0crwdne3884:0
         show_all: crwdns3886:0crwdne3886:0
+        show_foodcoop: crwdns9358:0crwdne9358:0
         title: crwdns3888:0crwdne3888:0
       ordergroups:
         account_statement: crwdns3890:0crwdne3890:0
@@ -1032,6 +1133,12 @@ ach:
       user:
         since: "crwdns4164:0%{when}crwdne4164:0"
         title: "crwdns4166:0%{user}crwdne4166:0"
+    reference_calculator:
+      placeholder: crwdns9344:0crwdne9344:0
+      text0: crwdns9346:0crwdne9346:0
+      text1: crwdns9348:0crwdne9348:0
+      text2: crwdns9350:0crwdne9350:0
+      title: crwdns9352:0crwdne9352:0
     start_nav:
       admin: crwdns4168:0crwdne4168:0
       finances:
@@ -1083,6 +1190,7 @@ ach:
       logout: crwdns4242:0crwdne4242:0
       ordergroup: crwdns4244:0crwdne4244:0
       profile: crwdns4246:0crwdne4246:0
+      reference_calculator: crwdns9354:0crwdne9354:0
     logo: "crwdns4248:0crwdne4248:0"
   lib:
     render_pdf:
@@ -1131,9 +1239,13 @@ ach:
     order_result:
       subject: 'crwdns4302:0%{name}crwdne4302:0'
       text0: |
-        crwdns4304:0%{ordergroup}crwdnd4304:0%{order}crwdnd4304:0%{user}crwdnd4304:0%{when}crwdne4304:0
-      text1: |-
-        crwdns4306:0%{sum}crwdnd4306:0%{order_url}crwdnd4306:0%{foodcoop}crwdne4306:0
+        crwdns9300:0%{ordergroup}crwdnd9300:0%{order}crwdnd9300:0%{user}crwdnd9300:0%{when}crwdne9300:0
+      text1: |
+        crwdns9302:0%{pickup}crwdne9302:0
+      text2: |
+        crwdns9304:0crwdne9304:0
+      text3: |-
+        crwdns9306:0%{sum}crwdnd9306:0%{order_url}crwdnd9306:0%{foodcoop}crwdne9306:0
     order_result_supplier:
       subject: crwdns4308:0%{name}crwdne4308:0
       text: |
@@ -1149,6 +1261,12 @@ ach:
         crwdns4320:0%{user}crwdnd4320:0%{task}crwdnd4320:0%{when}crwdne4320:0
       text1: |
         crwdns4322:0%{user_tasks_url}crwdnd4322:0%{foodcoop}crwdne4322:0
+    welcome:
+      subject: crwdns9370:0crwdne9370:0
+      text0: |
+        crwdns9372:0%{user}crwdne9372:0
+      text1: |
+        crwdns9374:0%{link}crwdnd9374:0%{expires}crwdnd9374:0%{foodcoop}crwdne9374:0
   messages_mailer:
     foodsoft_message:
       footer: |
@@ -1158,12 +1276,14 @@ ach:
   model:
     delivery:
       each_stock_article_must_be_unique: crwdns4440:0crwdne4440:0
+    financial_transaction:
+      foodcoop_name: crwdns9360:0crwdne9360:0
     financial_transaction_type:
       no_delete_last: crwdns4442:0crwdne4442:0
     group_order:
       stock_ordergroup_name: crwdns4444:0%{user}crwdne4444:0
     invoice:
-      invalid_mime: crwdns4446:0%{mime}crwdne4446:0
+      invalid_mime: crwdns9412:0%{mime}crwdne9412:0
     membership:
       no_admin_delete: crwdns4448:0crwdne4448:0
     order_article:
@@ -1285,6 +1405,7 @@ ach:
       consider_member_tolerance: crwdns4634:0crwdne4634:0
       notice: 'crwdns4636:0%{msg}crwdne4636:0'
       notice_none: crwdns4638:0crwdne4638:0
+      paragraph: crwdns9338:0crwdne9338:0
       rest_to_stock: crwdns4640:0crwdne4640:0
       submit: crwdns4642:0crwdne4642:0
       surplus_options: 'crwdns4644:0crwdne4644:0'
@@ -1634,6 +1755,7 @@ ach:
     marks:
       close: "crwdns5302:0crwdne5302:0"
       success: crwdns5304:0crwdne5304:0
+    move: crwdns9310:0crwdne9310:0
     or_cancel: crwdns5306:0crwdne5306:0
     please_wait: crwdns5308:0crwdne5308:0
     restore: crwdns5310:0crwdne5310:0
