@@ -2,105 +2,57 @@ es:
   activerecord:
     attributes:
       page:
-        body: Body
-        parent_id: Parent page
-        title: Title
+        body: Cuerpo
+        parent_id: Página madre
+        title: Título
   config:
     hints:
-      use_wiki: Enable editable wiki pages.
+      use_wiki: Activar las páginas editables del wiki.
     keys:
-      use_wiki: Enable wiki
+      use_wiki: Activar wiki
   model:
     page:
-      redirect: Redirect to [[%{title}]]...
+      redirect: Doorverwijzing naar [[%{title}]]...
   navigation:
     wiki:
-      all_pages: All Pages
-      home: Home
-      title: Wiki
+      all_pages: Todas las páginas
   pages:
     all:
-      new_page: Create new page
-      recent_changes: Recent changes
+      new_page: Crea nueva página
+      recent_changes: Cambios recientes
       search:
-        action: Search
-        placeholder: Page title ..
-      site_map: Sitemap
-      title: All Wiki pages
-      title_list: List of pages
+        action: Busca
+      title_list: Lista de páginas
     body:
-      title_toc: Content
-      wikicloth_exception: 'I''m sorry to report that an error occured when interpreting the wiki page: %{msg}. Please try to fix it, and save the page again.'
+      title_toc: Contenido
     create:
-      notice: Page was created
+      notice: La página ha sido creada
     cshow:
-      error_noexist: Page doesn't exist!
-      redirect_notice: Redirected from %{page} ...
-    destroy:
-      notice: The page '%{page}' and all subpages have been deleted successfully.
-    diff:
-      title: "%{title} - changes from version %{old} to %{new}"
+      error_noexist: La página no existe
     edit:
-      title: Edit page
-    error_stale_object: Warning, the page has just been edited by someone else. Please try again.
+      title: Editar página
+    error_stale_object: Cuidado, la página ha sido editada por otra persona. Por favor, intenta de nuevo.
     form:
       help:
-        bold: bold
-        external_link_ex: External link
-        external_links: External
-        heading: level %{level}
-        headings: Heading
-        image_link_title: Image title
-        image_links: Images
-        italic: italic
-        link_lists: More on lists
-        link_table: Table formatting
-        link_templates: Templates
-        link_variables: Foodsoft variables
-        list_item_1: First list item
-        list_item_2: Second list item
-        noformat: No formatting
-        ordered_list: Numbered list
-        section_block: Block formatting
-        section_character: Character formatting
-        section_link: Link formatting
-        section_more: More topics
-        section_table: Table formatting
-        see_tables: see %{tables_link}
-        tables_link: Tables
-        text: text
-        title: Quick formatting help
-        unordered_list: Item list
-        wiki_link_ex: Foodsoft Wiki Page
-        wiki_links: Wiki-links
-      preview: Preview
-    last_updated: Last updated
+        external_link_ex: Enlace externo
+        external_links: Externo
+        heading: nivel %{level}
+        headings: Título
+        image_link_title: Título de la imagen
+        image_links: Imágenes
+        italic: itálicas
+        ordered_list: Lista numerada
+        section_block: Estilo del párrafo
+        section_character: Estilo de las letras
+        section_link: Estilo de los enlaces
+        section_more: Más temas
+      preview: Previsualizar
     new:
-      title: Create new wiki page
-    page_list_item:
-      date_format: ! '%a, %d %B %Y %H:%M:%S'
+      title: Crear una nueva página en la wiki
     show:
-      date_format: ! '%d-%m-%y %H:%M'
-      delete: Delete page
-      delete_confirm: ! 'Warning: all subpages will be deleted as well. Are you sure?'
-      diff: Compare versions
-      edit: Edit page
-      last_updated: Last updated by <b>%{user}</b> on %{when}
-      subpages: subpages
-      title_versions: Versions
-      versions: Versions (%{count})
-    title: Title
-    update:
-      notice: Page was updated
-    variables:
-      description: Variables return information from somewhere else. When you use the variable, it will be replaced by its value when displayed. Foodsoft has a number of pre-defined variables, such as the name and address of your foodcoop, the software version, and the number of members and suppliers. See the table below for all variables. You can use these in wiki pages as well as in the footer (from the configuration screen).
-      title: Foodsoft variables
-      value: Current value
-      variable: Variable
+      delete: Eliminar página
+    title: Título
     version:
-      author: ! 'Author: %{user}'
-      date_format: ! '%a, %d-%m-%Y, %H:%M'
-      revert: Revert to this version
-      title: ! '%{title} - version %{version}'
-      title_version: Version
-      view_current: See current version
+      author: ! 'Autor/a: %{user}'
+      title_version: Versión
+      view_current: Ver versión actual
