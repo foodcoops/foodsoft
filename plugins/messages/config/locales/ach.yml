@@ -97,6 +97,7 @@ ach:
         wiki: crwdns5610:0crwdne5610:0
       message: crwdns5612:0crwdne5612:0
       no_user_found: crwdns5614:0crwdne5614:0
+      order_item: "crwdns9308:0%{supplier_name}crwdnd9308:0%{pickup}crwdne9308:0"
       reply_to: crwdns5616:0%{link}crwdne5616:0
       search: crwdns5618:0crwdne5618:0
       search_user: crwdns5620:0crwdne5620:0
