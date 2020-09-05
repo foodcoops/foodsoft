@@ -1,6 +1,6 @@
 nl:
   discourse:
     callback:
-      invalid_nonce: Invalid nonce
-      invalid_signature: Invalid signature
-      logged_in: Logged in!
+      invalid_nonce: Onjuiste nonce
+      invalid_signature: Onjuiste digitale handtekening
+      logged_in: Ingelogd!
