@@ -2,105 +2,80 @@ fr:
   activerecord:
     attributes:
       page:
-        body: Body
-        parent_id: Parent page
-        title: Title
-  config:
-    hints:
-      use_wiki: Enable editable wiki pages.
-    keys:
-      use_wiki: Enable wiki
+        body: Contenu
+        parent_id: Page parente
+        title: Titre
   model:
     page:
-      redirect: Redirect to [[%{title}]]...
+      redirect: Redirection vers [[%{title}]]...
   navigation:
     wiki:
-      all_pages: All Pages
-      home: Home
-      title: Wiki
+      all_pages: Toutes les pages
+      home: Page d'accueil
   pages:
     all:
-      new_page: Create new page
-      recent_changes: Recent changes
+      new_page: Créer une nouvelle page
+      recent_changes: Changement récents
       search:
-        action: Search
-        placeholder: Page title ..
-      site_map: Sitemap
-      title: All Wiki pages
-      title_list: List of pages
+        action: Recherche
+        placeholder: Titre de la page ...
+      site_map: Aide à la navigation
+      title: Toutes les pages du wiki
+      title_list: Liste des pages
     body:
-      title_toc: Content
-      wikicloth_exception: 'I''m sorry to report that an error occured when interpreting the wiki page: %{msg}. Please try to fix it, and save the page again.'
+      title_toc: Contenu
+      wikicloth_exception: 'Une erreur s''est produite lors de l''interprétation de la page wiki: %{msg}. Essaye de la corriger et de sauvegarder à nouveau.'
     create:
-      notice: Page was created
+      notice: La page a bien été créée.
     cshow:
-      error_noexist: Page doesn't exist!
-      redirect_notice: Redirected from %{page} ...
+      error_noexist: Cette page n'existe pas!
+      redirect_notice: Redirigé à partir de %{page}...
     destroy:
-      notice: The page '%{page}' and all subpages have been deleted successfully.
-    diff:
-      title: "%{title} - changes from version %{old} to %{new}"
+      notice: La page '%{page}' et toutes ses descendantes ont bien été supprimées.
     edit:
-      title: Edit page
-    error_stale_object: Warning, the page has just been edited by someone else. Please try again.
+      title: Modifier cette page
+    error_stale_object: Cette page est en cours de modification par unE autre membre. Merci de réessayer plus tard.
     form:
       help:
-        bold: bold
-        external_link_ex: External link
-        external_links: External
-        heading: level %{level}
-        headings: Heading
-        image_link_title: Image title
-        image_links: Images
-        italic: italic
-        link_lists: More on lists
-        link_table: Table formatting
-        link_templates: Templates
-        link_variables: Foodsoft variables
-        list_item_1: First list item
-        list_item_2: Second list item
-        noformat: No formatting
-        ordered_list: Numbered list
-        section_block: Block formatting
-        section_character: Character formatting
-        section_link: Link formatting
-        section_more: More topics
-        section_table: Table formatting
-        see_tables: see %{tables_link}
-        tables_link: Tables
-        text: text
-        title: Quick formatting help
-        unordered_list: Item list
-        wiki_link_ex: Foodsoft Wiki Page
-        wiki_links: Wiki-links
-      preview: Preview
-    last_updated: Last updated
+        bold: gra
+        external_link_ex: Page extérieure
+        external_links: Externe
+        heading: Plan %{level}
+        headings: En-tête
+        italic: italique
+        link_table: Format des tableaux
+        list_item_1: Premier item
+        list_item_2: Deuxième item
+        noformat: Pas de formatage
+        ordered_list: Énumérations
+        section_block: Format de paragraphe
+        section_character: Format de charactère
+        section_link: Format des liens
+        text: texte
+        title: Assistant de mise en forme rapide
+        unordered_list: Liste non ordonnée
+        wiki_link_ex: Page de wiki du Foodsoft
+        wiki_links: Liens Wiki
+      preview: Aperçu
+    last_updated: Dernièrement mis à jour
     new:
-      title: Create new wiki page
+      title: Ajouter une nouvelle page au Wiki
     page_list_item:
-      date_format: ! '%a, %d %B %Y %H:%M:%S'
+      date_format: ! '%a, %d. %B %Y %H:%M:%S'
     show:
-      date_format: ! '%d-%m-%y %H:%M'
-      delete: Delete page
-      delete_confirm: ! 'Warning: all subpages will be deleted as well. Are you sure?'
-      diff: Compare versions
-      edit: Edit page
-      last_updated: Last updated by <b>%{user}</b> on %{when}
-      subpages: subpages
-      title_versions: Versions
-      versions: Versions (%{count})
-    title: Title
+      date_format: ! '%d.%m.%y %H:%M'
+      delete: Supprimer la page
+      delete_confirm: ! 'Attention, tous les contenus seront aussi supprimés. T''es sûrE de ton coup?'
+      edit: Modifier la page
+      last_updated: Dernière modification le %{when} par <b>%{user}<b>
+      subpages: Sous-pages
+    title: Titre
     update:
-      notice: Page was updated
-    variables:
-      description: Variables return information from somewhere else. When you use the variable, it will be replaced by its value when displayed. Foodsoft has a number of pre-defined variables, such as the name and address of your foodcoop, the software version, and the number of members and suppliers. See the table below for all variables. You can use these in wiki pages as well as in the footer (from the configuration screen).
-      title: Foodsoft variables
-      value: Current value
-      variable: Variable
+      notice: La page a été mise à jour
     version:
-      author: ! 'Author: %{user}'
-      date_format: ! '%a, %d-%m-%Y, %H:%M'
-      revert: Revert to this version
-      title: ! '%{title} - version %{version}'
-      title_version: Version
-      view_current: See current version
+      author: ! 'Auteur: %{user}'
+      date_format: ! '%a, %d.%m.%Y, %H:%M heure'
+      revert: Revenir à cette version
+      title: ! '%{title} - Version %{version}'
+      title_version: Versio
+      view_current: Afficher la version actuelle
