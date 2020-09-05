@@ -2,105 +2,105 @@ nl:
   activerecord:
     attributes:
       page:
-        body: Body
-        parent_id: Parent page
-        title: Title
+        body: Inhoud
+        parent_id: Ouderpagina
+        title: Titel
   config:
     hints:
-      use_wiki: Enable editable wiki pages.
+      use_wiki: Gebruik wiki pagina's.
     keys:
-      use_wiki: Enable wiki
+      use_wiki: Wiki gebruiken
   model:
     page:
-      redirect: Redirect to [[%{title}]]...
+      redirect: Doorverwijzing naar [[%{title}]]...
   navigation:
     wiki:
-      all_pages: All Pages
-      home: Home
+      all_pages: Alle pagina's
+      home: Hoofdpagina
       title: Wiki
   pages:
     all:
-      new_page: Create new page
-      recent_changes: Recent changes
+      new_page: Nieuwe pagina maken
+      recent_changes: Recente wijzigingen
       search:
-        action: Search
-        placeholder: Page title ..
+        action: Zoeken
+        placeholder: Pagina titel ...
       site_map: Sitemap
-      title: All Wiki pages
-      title_list: List of pages
+      title: Alle wikipagina's
+      title_list: Paginalijst
     body:
-      title_toc: Content
-      wikicloth_exception: 'I''m sorry to report that an error occured when interpreting the wiki page: %{msg}. Please try to fix it, and save the page again.'
+      title_toc: Inhoud
+      wikicloth_exception: 'Sorry, het is niet gelukt de paginainhoud te begrijpen: %{msg}. Probeer het op te lossen en de pagina opnieuw op te slaan.'
     create:
-      notice: Page was created
+      notice: Pagina is gemaakt.
     cshow:
-      error_noexist: Page doesn't exist!
-      redirect_notice: Redirected from %{page} ...
+      error_noexist: Pagina bestaat niet!
+      redirect_notice: Doorverwezen van %{page} ...
     destroy:
-      notice: The page '%{page}' and all subpages have been deleted successfully.
+      notice: De pagina '%{page}' en alle subpagina's zijn verwijderd.
     diff:
-      title: "%{title} - changes from version %{old} to %{new}"
+      title: "%{title} - veranderingen van versie %{old} tot %{new}"
     edit:
-      title: Edit page
-    error_stale_object: Warning, the page has just been edited by someone else. Please try again.
+      title: Pagina bewerken
+    error_stale_object: Opgelet, de pagina is net veranderd door een ander. Probeer het alsjeblieft opnieuw.
     form:
       help:
-        bold: bold
-        external_link_ex: External link
-        external_links: External
-        heading: level %{level}
-        headings: Heading
-        image_link_title: Image title
-        image_links: Images
-        italic: italic
-        link_lists: More on lists
-        link_table: Table formatting
-        link_templates: Templates
-        link_variables: Foodsoft variables
-        list_item_1: First list item
-        list_item_2: Second list item
-        noformat: No formatting
-        ordered_list: Numbered list
-        section_block: Block formatting
-        section_character: Character formatting
-        section_link: Link formatting
-        section_more: More topics
-        section_table: Table formatting
-        see_tables: see %{tables_link}
-        tables_link: Tables
-        text: text
-        title: Quick formatting help
-        unordered_list: Item list
-        wiki_link_ex: Foodsoft Wiki Page
+        bold: vet
+        external_link_ex: Externe link
+        external_links: Extern
+        heading: niveau %{level}
+        headings: Kop
+        image_link_title: Titel van afbeelding
+        image_links: Plaatjes
+        italic: cursief
+        link_lists: Meer over lijsten
+        link_table: Tabellen
+        link_templates: Sjablonen
+        link_variables: Foodsoft variabelen
+        list_item_1: Eerste in de lijst
+        list_item_2: Tweede in de lijst
+        noformat: Zonder opmaak
+        ordered_list: Genummerde lijst
+        section_block: Paragrafen
+        section_character: Tekens
+        section_link: Links
+        section_more: Meer onderwerpen
+        section_table: Tabelopmaak
+        see_tables: zie %{tables_link}
+        tables_link: Tabellen
+        text: tekst
+        title: Korte opmaakhulp
+        unordered_list: Itemlijst
+        wiki_link_ex: Foodsoft wiki pagina
         wiki_links: Wiki-links
-      preview: Preview
-    last_updated: Last updated
+      preview: Voorbeeld
+    last_updated: Laatst bijgewerkt
     new:
-      title: Create new wiki page
+      title: Nieuwe wiki pagina
     page_list_item:
       date_format: ! '%a, %d %B %Y %H:%M:%S'
     show:
       date_format: ! '%d-%m-%y %H:%M'
-      delete: Delete page
-      delete_confirm: ! 'Warning: all subpages will be deleted as well. Are you sure?'
-      diff: Compare versions
-      edit: Edit page
-      last_updated: Last updated by <b>%{user}</b> on %{when}
-      subpages: subpages
-      title_versions: Versions
-      versions: Versions (%{count})
-    title: Title
+      delete: Pagina verwijderen
+      delete_confirm: ! 'Opgelet: alle onderliggende pagina''s worden ook verwijderd. Zeker weten?'
+      diff: Versies vergelijken
+      edit: Pagina bewerken
+      last_updated: Laatst bijgewerkt door <b>%{user}</b> op %{when}
+      subpages: kindpagina's
+      title_versions: Versies
+      versions: Versies (%{count})
+    title: Titel
     update:
-      notice: Page was updated
+      notice: Pagina is bijgewerkt.
     variables:
-      description: Variables return information from somewhere else. When you use the variable, it will be replaced by its value when displayed. Foodsoft has a number of pre-defined variables, such as the name and address of your foodcoop, the software version, and the number of members and suppliers. See the table below for all variables. You can use these in wiki pages as well as in the footer (from the configuration screen).
-      title: Foodsoft variables
-      value: Current value
-      variable: Variable
+      description: Variabelen geven informatie van elders. Als je een variabele gebruikt, wordt deze bij het tonen vervangen door zijn waarde. Foodsoft heeft een aantal voorgedefiniëerde variabelen, zoals naam en adres van je foodcoop, softwareversie, en het aantal leden en leveranciers. De tabel hieronder laat alle beschikbare variabelen zien. Je kunt deze gebruiken in wiki-pagina's en in de voettekst (die in het configuratiescherm aangepast kan worden).
+      title: Foodsoft variabelen
+      value: Huidige waarde
+      variable: Variabele
     version:
-      author: ! 'Author: %{user}'
+      author: ! 'Auteur: %{user}'
       date_format: ! '%a, %d-%m-%Y, %H:%M'
-      revert: Revert to this version
-      title: ! '%{title} - version %{version}'
-      title_version: Version
-      view_current: See current version
+      revert: Deze versie terugzetten
+      title: ! '%{title} - versie %{version}'
+      title_version: Versie
+      view_current: Huidige versie bekijken
