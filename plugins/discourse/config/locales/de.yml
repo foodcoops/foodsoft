@@ -1,6 +1,6 @@
 de:
   discourse:
     callback:
-      invalid_nonce: Invalid nonce
-      invalid_signature: Invalid signature
-      logged_in: Logged in!
+      invalid_nonce: Ungültige nonce
+      invalid_signature: Ungültige Signature
+      logged_in: Angemeldet!
