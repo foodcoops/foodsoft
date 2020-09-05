@@ -2,154 +2,127 @@ es:
   activerecord:
     attributes:
       message:
-        body: Body
-        messagegroup_id: Messagegroup
-        order_id: Order
-        ordergroup_id: Ordergroup
-        private: Private
-        recipient_tokens: (Additional) recipients
+        body: Cuerpo
+        messagegroup_id: Grupo de mensajes
+        order_id: Pedido
+        ordergroup_id: Grupo de pedido
+        private: Privado
+        recipient_tokens: Destinatarios (adicionales)
         send_method:
-          all: Send to all members
-          recipients: Send to specific members
-          order: Send to members, who participated at an order
-          ordergroup: Send to members of a ordergroup
-          messagegroup: Send to members of a messagegroup
-          workgroup: Send to members of a workgroup
-        send_to_all: Send to all members
-        subject: Subject
-        workgroup_id: Workgroup
+          all: Enviar a todos los miembros
+          recipients: Enviar a miembros específicos
+          order: Enviar a los miembros que han participado de un pedido
+          ordergroup: Enviar a los miembros de un grupo de pedido
+          messagegroup: Enviar a los miembros de un grupo de mensajes
+          workgroup: Enviar a miembros de un grupo de trabajo
+        send_to_all: Enviar a todos los miembros
+        subject: Asunto
+        workgroup_id: Grupo de trabajo
       messagegroup:
-        description: Description
-        name: Name
-        user_tokens: Members
+        description: Descripción
+        name: Nombre
+        user_tokens: Miembros
     models:
-      message: Message
-      messagegroup: Message group
+      message: Mensaje
+      messagegroup: Grupo de mensajes
   admin:
     ordergroups:
       show:
-        send_message: Send message
+        send_message: Envía mensaje
     users:
       show:
-        send_message: Send message
+        send_message: Enviar mensaje
   config:
     hints:
-      mailing_list: Mailing-list email address to use instead of the messaging system for mail to all members.
-      mailing_list_subscribe: Email address where members can send an email to for subscribing.
-      use_messages: Allow members to communicate with each other within Foodsoft.
+      mailing_list: Lista de correo para usar en lugar del sistema de mensajería para enviar correo a todos los miembros.
+      mailing_list_subscribe: Dirección de email a donde los miembros pueden enviar correo para suscribirse.
+      use_messages: Permitir que los miembros de comuniquen unos con otros dentro de Foodsoft.
     keys:
-      use_messages: Messages
-      mailing_list: Mailing-list
-      mailing_list_subscribe: Mailing-list subscribe
+      use_messages: Mensajes
+      mailing_list: Lista de correos
+      mailing_list_subscribe: Suscribirse a la lista de correos
   helpers:
     messages:
-      write_message: Write message
+      write_message: Escribe mensaje
     submit:
       message:
-        create: send message
+        create: envía mensaje
   home:
     index:
       messages:
-        title: Newest messages
+        title: Mensajes recientes
         view_all:
-          text: 'Show %{messages} or %{threads}'
-          messages: all messages
-          threads: threads
+          text: 'Muestra %{messages} o %{threads}'
+          messages: todos los mensajes
+          threads: Hilos
     start_nav:
-      write_message: Write message
+      write_message: Escribir un mensaje
   messagegroups:
     index:
-      body: 'A message group is like a mailing-list: you can join (or leave) any of them to receive the updates sent to that group.'
-      title: Message groups
+      title: Grupos de mensaje
     join:
-      error: 'Could not join message group: %{error}'
-      notice: Joined message group
+      error: 'No pudo unirse al grupo de mensaje: %{error}'
+      notice: Se ha unido al grupo de mensajes
     leave:
-      error: 'Messagegroup could not be left: %{error}'
-      notice: Left message group
+      error: 'El grupo de mensajes no se ha podido dejar: %{error}'
+      notice: Se ha dejado el grupo de mensajes
     messagegroup:
-      join: Join message group
-      leave: Leave message group
+      join: Unirse al grupo de mensajes
+      leave: Dejar grupo de mensajes
   messages:
     actionbar:
-      message_threads: Show as threads
-      messagegroups: Subscribe to groups
-      messages: Show as list
-      new: New message
-    create:
-      notice: Message is saved and will be sent.
+      message_threads: Muestra como hilos
+      messages: Muestra como lista
+      new: Nuevo mensaje
     index:
-      title: Messages
+      title: Mensajes
     messages:
-      reply: Reply
-    model:
-      reply_header: ! '%{user} wrote on %{when}:'
-      reply_indent: ! '> %{line}'
-      reply_subject: ! 'Re: %{subject}'
+      reply: Responde
     new:
-      error_private: Sorry, this message is private.
-      hint_private: Message doesn’t show in Foodsoft mail inbox
+      error_private: Lo siento, este mensaje es privado.
       list:
-        desc: ! 'Please send messages to all using the mailing-list: %{list}'
-        mail: for example with an email to %{email}.
-        subscribe: You can find more about the mailing-list at %{link}.
-        subscribe_msg: You may have to subscribe to the mailing-list first.
-        wiki: Wiki (page Mailing-List)
-      message: message
-      no_user_found: No user found
-      reply_to: This message is an reply to an other %{link}.
-      search: Search ...
-      search_user: Search user
-      title: New message
+        desc: ! 'Envía mensajes a todos los miembros a través de la lista de correo: %{list}'
+        mail: por ejemplo con un email a %{email}.
+        subscribe: Puedes leer más sobre la lista de correos en %{link}.
+        subscribe_msg: Quizás tengas que suscribirte a la lista primero.
+      message: mensaje
+      no_user_found: No se ha encontrado el usuario
+      reply_to: Este mensaje es una respuesta a otro %{link}.
+      search: Busca ...
+      search_user: Busca usuario
+      title: Nuevo mensaje
     show:
-      all_messages: All messages
-      change_visibility: 'Change'
-      from: ! 'From:'
-      group: 'Group:'
-      reply: Reply
-      reply_to: 'Reply to:'
-      sent_on: ! 'Sent:'
-      subject: ! 'Subject:'
-      title: Show message
-      to: 'To:'
-      visibility: 'Visibility:'
-      visibility_private: 'Private'
-      visibility_public: 'Public'
+      all_messages: Todos los mensajes
+      from: ! 'De:'
+      group: 'Grupo:'
+      reply: Responde
+      reply_to: 'Responde a:'
+      sent_on: ! 'Enviado:'
+      subject: ! 'Asunto:'
+      title: Muestra mensaje
+      to: 'A:'
     thread:
-      all_message_threads: All message threads
-      reply: Reply
-    toggle_private:
-      not_allowed: You can not change the visibility of the message.
+      all_message_threads: Todos los hilos de mensaje
+      reply: Responde
   message_threads:
     groupmessage_threads:
-      show_message_threads: show all
+      show_message_threads: muestra todos
     index:
-      general: General
-      title: Message threads
+      title: Hilos de mensaje
     message_threads:
-      last_reply_at: Last replied at
-      last_reply_by: Last replied by
-      started_at: Started at
-      started_by: Started by
-    show:
-      general: General
-  messages_mailer:
-    foodsoft_message:
-      footer: |
-        Reply: %{reply_url}
-        See message online: %{msg_url}
-        Messaging options: %{profile_url}
-      footer_group: |
-        Sent to group: %{group}
+      last_reply_at: Última respuesta el
+      last_reply_by: Última respuesta de 
+      started_at: Comenzado el
+      started_by: Comenzado por
   navigation:
     admin:
-      messagegroups: Message groups
-    messages: Messages
+      messagegroups: Grupos de mensaje
+    messages: Mensajes
   shared:
     user_form_fields:
-      messagegroups: Join or leave message groups
+      messagegroups: Únete o sal de los mensajes de grupo
   simple_form:
     labels:
       settings:
         messages:
-          send_as_email: Receive messages as emails.
+          send_as_email: Recibir mensajes en emails.
