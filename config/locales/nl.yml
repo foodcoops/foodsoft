@@ -2,1070 +2,1146 @@ nl:
   activerecord:
     attributes:
       article:
-        article_category: Category
-        availability: Is article available?
-        availability_short: avail.
-        deposit: Deposit
-        fc_price: FoodCoop price
-        fc_price_desc: Price including taxes, deposit and Foodcoop-charge.
-        fc_price_short: FC price
-        fc_share: FoodCoop margin
-        fc_share_short: FC margin
-        gross_price: Gross price
-        manufacturer: Manufacturer
-        name: Name
-        note: Note
-        order_number: Order number
+        article_category: Categorie
+        availability: Artikel leverbaar?
+        availability_short: leverb.
+        deposit: Statiegeld
+        fc_price: Foodcoop prijs
+        fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop marge.
+        fc_price_short: FC prijs
+        fc_share: Foodcoop marge
+        fc_share_short: FC marge
+        gross_price: Bruto prijs
+        manufacturer: Producent
+        name: Naam
+        note: Notitie
+        order_number: Artikelnummer
         order_number_short: Nr.
-        origin: Origin
-        price: Price (net)
-        supplier: Supplier
-        tax: VAT
-        unit: Unit
-        unit_quantity: Unit quantity
-        unit_quantity_short: U.Q.
-        units: Units
+        origin: Herkomst
+        price: Netto prijs
+        supplier: Leverancier
+        tax: BTW
+        unit: Eenheid
+        unit_quantity: Colligrootte
+        unit_quantity_short: Colli
+        units: Eenheden
       article_category:
-        description: Import names
-        name: Name
+        description: Import namen
+        name: Naam
       article_price:
-        deposit: Deposit
-        price: Price (net)
-        tax: VAT
-        unit_quantity: Unit quantity
+        deposit: Statiegeld
+        price: Netto prijs
+        tax: BTW
+        unit_quantity: Colligrootte
+      bank_account:
+        balance: Tegoed
+        description: Omschrijving
+        iban: IBAN
+        name: Naam
+      bank_transaction:
+        amount: Bedrag
+        date: Datum
+        external_id: Extern ID
+        financial_link: Financiële link
+        iban: IBAN
+        reference: Referentie
+        text: Omschrijving
       delivery:
-        delivered_on: Delivery date
-        note: Note
-        supplier: Supplier
+        delivered_on: Leverdatum
+        note: Notitie
+        supplier: Leverancier
       document:
-        created_at: Created at
-        created_by: Created by
+        created_at: Upload op
+        created_by: Upload door
         data: Data
-        mime: MIME type
-        name: Name
+        mime: MIME-type
+        name: Naam
       financial_transaction:
-        amount: Amount
-        created_on: Date
-        financial_transaction_class: Financial transaction class
-        financial_transaction_type: Financial transaction type
-        note: Note
-        ordergroup: Ordergroup
-        user: Entered by
+        amount: Bedrag
+        created_on: Datum
+        financial_transaction_class: Financiële transactie klasse
+        financial_transaction_type: Financiële transactie type
+        note: Notitie
+        ordergroup: Huishouden
+        user: Ingevuld door
       financial_transaction_class:
-        name: Name
+        name: Naam
       financial_transaction_type:
-        name: Name
-        financial_transaction_class: Financial transaction class
-        name_short: Short Name
+        name: Naam
+        financial_transaction_class: Financiële transactie klasse
+        name_short: Verkorte naam
       group_order:
-        ordergroup: Ordergroup
-        price: Order sum
-        updated_by: Last ordered by
+        ordergroup: Huishouden
+        price: Totaal bestelling
+        updated_by: Laatst besteld door
       group_order_article:
-        ordered: Ordered
-        quantity: Amount
-        received: Received
-        result: Amount
-        tolerance: Tolerance
-        total_price: Sum
-        unit_price: Price/Unit
+        ordered: Besteld
+        quantity: Hoeveelheid
+        received: Ontvangen
+        result: Hoeveelheid
+        tolerance: Tolerantie
+        total_price: Som
+        unit_price: Prijs/Eenheid
       invoice:
-        amount: Amount
-        attachment: Attachment
-        created_at: Created at
-        created_by: Created by
-        date: Billing date
-        delete_attachment: Delete attachment
-        deliveries: Delivery
-        deposit: Deposit charged
-        deposit_credit: Deposit returned
-        net_amount: Amount adjusted for refund
-        note: Note
-        number: Number
-        orders: Order
-        paid_on: Paid on
-        supplier: Supplier
+        amount: Bedrag
+        attachment: Bijlage
+        created_at: Gemaakt op
+        created_by: Gemaakt door
+        date: Factuurdatum
+        delete_attachment: Verwijder bijlage
+        deliveries: Levering
+        deposit: Statiegeld in rekening gebracht
+        deposit_credit: Statiegeld teruggekregen
+        financial_link: Financiële link
+        net_amount: Bedrag gecorrigeerd voor statiegeld
+        note: Notitie
+        number: Nummer
+        orders: Bestelling
+        paid_on: Betaald op
+        supplier: Leverancier
       mail_delivery_status:
-        created_at: Time
+        created_at: Tijd
         email: Email
-        message: Message
+        message: Bericht
       order:
-        boxfill: Fill boxes after
-        closed_by: Settled by
-        created_by: Created by
-        end_action: End action
+        boxfill: Dozen vullen na
+        closed_by: Afgerekend door
+        created_by: Geopend door
+        end_action: Sluitingsactie
         end_actions:
-          auto_close: Close the order
-          auto_close_and_send: Close the order and send it to the supplier
-          auto_close_and_send_min_quantity: Close the order and send it to the supplier if the minimum quantity has been reached
-          no_end_action: No automatic action
-        ends: Ends at
-        name: Supplier
-        note: Note
-        pickup: Pickup
-        starts: Starts at
+          auto_close: Bestelling sluiten
+          auto_close_and_send: Sluit de bestelling en verzend het naar de leverancier
+          auto_close_and_send_min_quantity: Sluit de bestelling en verzend het naar de leverancier als de minimum bestelhoeveelheid gehaald is
+          no_end_action: Geen automatische actie
+        ends: Sluit op
+        name: Leverancier
+        note: Notitie
+        pickup: Ophaaldag
+        starts: Start op
         status: Status
-        supplier: Supplier
-        updated_by: Last edited by
+        supplier: Leverancier
+        updated_by: Laatst aangepast door
       order_article:
-        article: Article
-        missing_units: Missing units
-        missing_units_short: Missing
-        quantity: Desired amount
-        quantity_short: Desired
-        units_received: Received units
-        units_received_short: Received
-        units_to_order: Ordered units
-        units_to_order_short: Ordered
-        update_global_price: Globally update current price
+        article: Artikel
+        missing_units: Missende eenheden
+        missing_units_short: Nodig
+        quantity: Gewenst aantal artikelen
+        quantity_short: Gewenst
+        units_received: Ontvangen eenheden
+        units_received_short: Ontvangen
+        units_to_order: Bestelde eenheden
+        units_to_order_short: Besteld
+        update_global_price: Huidige prijs overal bijwerken
       order_comment:
-        text: Add comment to this order ...
+        text: Commentaar voor deze bestelling toevoegen ...
       ordergroup:
-        account_balance: Account balance
-        available_funds: Available credit
-        break: "(Last) break"
-        break_until: until
+        account_balance: Tegoed
+        available_funds: Beschikbaar tegoed
+        break: "(Laatste) pauze"
+        break_until: tot
         contact: Contact
-        contact_address: Address
-        contact_person: Contact person
-        contact_phone: Phone
-        description: Description
-        ignore_apple_restriction: Ignore order stop by apple points restriction
-        last_order: Last order
-        last_user_activity: Last activity
-        name: Name
-        user_tokens: Members
+        contact_address: Adres
+        contact_person: Contactpersoon
+        contact_phone: Telefoon
+        description: Omschrijving
+        ignore_apple_restriction: Bestelstop vanwege appelpunten negeren
+        last_order: Laatste bestelling
+        last_user_activity: Laatst actief
+        name: Naam
+        user_tokens: Leden
       stock_article:
-        available: Available
-        price: Price
-        quantity: In stock
-        quantity_available: Available quantity
-        quantity_available_short: Avail.
-        quantity_ordered: Ordered
+        available: Beschikbaar
+        price: Prijs
+        quantity: Op voorraad
+        quantity_available: Beschikbaar
+        quantity_available_short: Besch.
+        quantity_ordered: Besteld
       stock_taking:
-        date: Date
-        note: Note
+        date: Datum
+        note: Notitie
       supplier:
-        address: Address
-        contact_person: Contact person
-        customer_number: Customer number
-        customer_number_short: Cust.nr.
-        delivery_days: Delivery days
+        address: Adres
+        contact_person: Contactpersoon
+        customer_number: Klantnummer
+        customer_number_short: Klantnr.
+        delivery_days: Bezorgdagen
         email: Email
         fax: Fax
         iban: IBAN
-        is_subscribed: subscribed?
-        min_order_quantity: Minimum order quantity
-        min_order_quantity_short: Min. quantity
-        name: Name
-        note: Note
-        order_howto: How to order
-        phone: Phone
-        phone2: Phone 2
-        shared_sync_method: How to synchronize
+        is_subscribed: geabonneerd?
+        min_order_quantity: Minimale bestelhoeveelheid
+        min_order_quantity_short: Min. bestelling
+        name: Naam
+        note: Notitie
+        order_howto: Hoe te bestellen
+        phone: Telefoon
+        phone2: Telefoon 2
+        shared_sync_method: Hoe synchroniseren
         url: Homepage
       task:
-        description: Description
-        done: Done?
-        due_date: Due date
-        duration: Duration
-        name: Activity
-        required_users: People required
-        user_list: Responsible users
-        workgroup: Workgroup
+        created_by: Gemaakt door
+        created_on: Gemaakt op
+        description: Beschrijving
+        done: Gedaan?
+        due_date: Voor wanneer?
+        duration: Tijdsduur
+        name: Activiteit
+        required_users: Aantal mensen
+        user_list: Verantwoordelijken
+        workgroup: Werkgroep
       user:
         email: Email
-        first_name: First name
+        first_name: Voornaam
         iban: IBAN
-        last_activity: Last activity
-        last_login: Last login
-        last_name: Last name
-        name: Name
-        nick: Username
-        ordergroup: Ordergroup
-        password: Password
-        password_confirmation: Repeat password
-        phone: Telephone
+        last_activity: Laatst actief
+        last_login: Laatste login
+        last_name: Achternaam
+        name: Naam
+        nick: Gebruikersnaam
+        ordergroup: Huishouden
+        password: Wachtwoord
+        password_confirmation: Wachtwoord herhalen
+        phone: Telefoon
         workgroup:
-          one: Workgroup
-          other: Workgroups
+          one: Werkgroep
+          other: Werkgroepen
       workgroup:
-        description: Description
-        name: Name
-        role_admin: Administration
-        role_article_meta: Article database
-        role_finance: Finances
-        role_invoices: Invoices
-        role_orders: Order management
-        role_pickups: Pickup days
-        role_suppliers: Suppliers
-        user_tokens: Members
+        description: Omschrijving
+        name: Naam
+        role_admin: Beheer
+        role_article_meta: Artikelen
+        role_finance: Financiën
+        role_invoices: Facturen
+        role_orders: Bestellingen
+        role_pickups: Ophaaldagen
+        role_suppliers: Leveranciers
+        user_tokens: Leden
     errors:
-      has_many_left: is still associated with a %{collection}!
+      has_many_left: is nog met een %{collection} verbonden!
       models:
         article:
           attributes:
             name:
-              taken: name is already taken
-              taken_with_unit: name and unit are already taken
+              taken: naam bestaat al
+              taken_with_unit: de combinatie van naam en eenheid bestaat al
         supplier:
           attributes:
             shared_sync_method:
-              included: is not a valid option for this supplier
+              included: is geen geldige keuze voor deze leverancier
         task:
           attributes:
             done:
-              exclusion: finished tasks may not be repeated
+              exclusion: gedane taken kunnen niet herhaald worden
     models:
-      article: Article
-      article_category: Category
-      bank_transaction: Bank transaction
-      delivery: Delivery
-      financial_transaction: Financial transaction
-      financial_transaction_class: Financial transaction class
-      financial_transaction_type: Financial transaction type
-      invoice: Invoice
-      order: Order
-      order_article: Order article
-      order_comment: Order comment
+      article: Artikel
+      article_category: Categorie
+      bank_transaction: Banktransactie
+      delivery: Levering
+      financial_transaction: Financiële transactie
+      financial_transaction_class: Financiële transactie klasse
+      financial_transaction_type: Financiële transactie type
+      invoice: Factuur
+      order: Bestelling
+      order_article: Bestellingsartikel
+      order_comment: Commentaar
       ordergroup:
-        one: Ordergroup
-        other: Ordergroups
-      stock_article: Stock article
-      stock_taking: Stock taking
-      supplier: Supplier
-      task: Task
-      user: User
-      workgroup: Workgroup
+        one: Huishouden
+        other: Huishouden
+      stock_article: Voorraadartikel
+      stock_taking: Inventaris
+      supplier: Leverancier
+      task: Taak
+      user: Gebruiker
+      workgroup: Werkgroep
   admin:
-    access_to: access to
+    access_to: toegang tot
     base:
       index:
-        all_ordergroups: All ordergroups
-        all_users: All users
-        all_workgroups: All workgroups
-        created_at: created at
-        first_paragraph: Here you can administer Foodsoft groups and users.
-        groupname: group name
-        members: members
-        name: name
-        new_ordergroup: New ordergroup
-        new_user: New user
-        new_workgroup: New workgroup
-        newest_groups: newest groups
-        newest_users: newest users
-        title: Administration
-        type: type
-        username: username
+        all_ordergroups: Alle huishoudens
+        all_users: Alle gebruikers
+        all_workgroups: Alle werkgroepen
+        created_at: gemaakt op
+        first_paragraph: Hier kun je de groepen en gebruiker van Foodsoft beheren.
+        groupname: Groepnaam
+        members: leden
+        name: naam
+        new_ordergroup: Nieuw huishouden
+        new_user: Nieuwe gebruiker
+        new_workgroup: Nieuwe werkgroep
+        newest_groups: Nieuwste groepen
+        newest_users: Nieuwste gebruikers
+        title: Administratie
+        type: Type
+        username: Gebruikersnaam
     configs:
       list:
-        key: Key
-        title: Configuration list
-        value: Value
+        key: Sleutel
+        title: Configuratielijst
+        value: Inhoud
       show:
-        submit: Save
-        title: Configuration
+        submit: Opslaan
+        title: Configuratie
       tab_layout:
-        pdf_title: PDF documents
+        pdf_title: PDF documenten
       tab_messages:
-        emails_title: Sending email
+        emails_title: Emailinstellingen
       tab_payment:
-        schedule_title: Ordering schedule
+        schedule_title: Bestelrooster
       tab_tasks:
-        periodic_title: Periodic tasks
+        periodic_title: Periodieke taken
       tabs:
-        title: Configuration
+        title: Configuratie
       update:
-        notice: Configuration saved.
-    confirm: Are you sure?
+        notice: Configuratie opgeslagen.
+    confirm: Weet je het zeker?
     finances:
       index:
-        first_paragraph: Here you can manage the financial transaction classes and the corresponding financial transaction types. Every financial transaction has a type, which you have to select at every transaction, if you created more than one type. The financial transaction classes can be use to group the financial transaction types and will be shown as additional columns in the account overview, if there have been created more than one.
-        new_financial_transaction_class: Add new financial transaction class
-        title: Finances
+        bank_accounts: Bankrekeningen
+        first_paragraph: Hier kunt u de financiële transactieklassen en de bijbehorende financiële transactietypes beheren. Elke financiële transactie heeft een type, die je bij elke transactie moet selecteren, als je meer dan één type hebt gemaakt. De financiële transactieklassen kunnen worden gebruikt om de financiële transactietypes te groeperen en zullen worden weergegeven als extra kolommen in het rekeningoverzicht, als er meer dan één is gecreëerd.
+        new_bank_account: Nieuwe bankrekening toevoegen
+        new_financial_transaction_class: Nieuwe financiële transactie klasse toevoegen
+        title: Financiën
+        transaction_types: Financiële transactie typen
       transaction_types:
-        name: Name
-        new_financial_transaction_type: Add new financial transaction type
+        name: Naam
+        new_financial_transaction_type: Nieuw financiëel transactie type toevoegen
     financial_transaction_classes:
       form:
-        title_edit: Edit financial transaction class
-        title_new: Add new financial transaction class
+        title_edit: Financiële transactie klasse bewerken
+        title_new: Nieuw financiëel transactie type toevoegen
     financial_transaction_types:
       form:
-        title_edit: Edit financial transaction type
-        title_new: Add new financial transaction type
+        title_edit: Financiëel transactie type bewerken
+        title_new: Nieuw financiëel transactie type toevoegen
     mail_delivery_status:
       destroy_all:
-        notice: All email problems were deleted
+        notice: Alle emailproblemen zijn verwijderd
       index:
-        destroy_all: Delete all email problems
-        title: Email problems
+        destroy_all: Alle emailproblemen verwijderen
+        title: Emailproblemen
     ordergroups:
       destroy:
-        error: 'Ordergroup could not be marked as deleted: %{error}'
-        notice: Ordergroup was marked as deleted
+        error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
+        notice: Huishouden is gemarkeerd als verwijderd
       edit:
-        title: Edit ordergroup
+        title: Huishouden bewerken
       form:
-        first_paragraph: You can invite new members %{url}.
-        here: here
+        first_paragraph: Nieuwe leden kun je %{url} uitnodigen.
+        here: hier
       index:
-        first_paragraph: Here you can add %{url}, and edit or delete groups.
-        new_ordergroup: Add new ordergroup
-        new_ordergroups: new ordergroups
-        second_paragraph: 'Consider the difference between <em>group</em> and <em>ordergroup</em>: An ordergroup has an account and can order food. In a <em>%{url}</em> (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
-        title: Ordergroups
-        workgroup: workgroup
+        first_paragraph: Hier kun je %{url} toevoegen, bewerken en verwijderen.
+        new_ordergroup: Nieuw huishouden
+        new_ordergroups: nieuwe huishoudens
+        second_paragraph: 'Bedenk het onderscheid tussen <em>werkgroep</em> en <em>huishouden</em>: een huishouden heeft een rekening en kan bestellen. in een <em>%{url}</em> (bijv. sorteergroep) werken leden samen om taken te vervullen. Leden kunnen slechts lid zijn van éen huishouden, maar van meerdere werkgroepen.'
+        title: Huishoudens
+        workgroup: werkgroep
       new:
-        title: Create ordergroup
+        title: Huishouden toevoegen
       show:
-        confirm: Are you sure?
-        edit: Edit group/members
-        title: Ordergroup %{name}
-    search_placeholder: name ..
+        confirm: Weet je het zeker?
+        edit: Groep/leden bewerken
+        title: Huishouden %{name}
+    search_placeholder: naam ...
     users:
       controller:
-        sudo_done: You are now logged in as %{user}. Be careful, and do not forget to log out when done!
+        sudo_done: Je bent nu ingelogd als %{user}. Wees voorzichtig, en vergeet niet uit te loggen als je klaar bent!
       destroy:
-        error: 'User could not be deleted: %{error}'
-        notice: User was deleted
+        error: 'Gebruiker kon niet verwijderd worden: %{error}'
+        notice: Gebruiker is verwijderd
       edit:
-        title: Edit user
+        title: Lid bewerken
+      form:
+        create_ordergroup: Maak een huishouden met dezelfde naam en voeg een gebruiker toe.
       index:
-        first_paragraph: Here you can %{url}, edit and delete users.
-        new_user: Create new user
-        new_users: create new
-        show_deleted: Show deleted users
-        title: User admin
+        first_paragraph: Hier kun je gebruikers %{url}, bewerken en wissen.
+        new_user: Nieuwe gebruiker
+        new_users: toevoegen
+        show_deleted: Verwijderde gebruikers tonen
+        title: Gebruikers admin
       new:
-        title: Create new user
+        title: Nieuwe gebruiker toevoegen
       restore:
-        error: 'User could not be restored: %{error}'
-        notice: User was restored
+        error: 'Gebruiker kon niet opnieuw actief gemaakt worden: %{error}'
+        notice: Gebruiker is opnieuw actief
       show:
-        confirm_sudo: If you continue, you will take on the identity of %{user}. Do not forget to log out when you're done!
-        groupabos: Group subscriptions
-        member_since: Member since %{time}
-        person: Person
-        preference: Preferences
-        show_email_problems: Show email problems
-        sudo: Take on identity
+        confirm_sudo: Als je doorgaat, neem je de identiteit aan van gebruiker %{user}. Vergeet hierna niet uit te loggen!
+        groupabos: Groepslidmaatschappen
+        member_since: Lid sinds %{time}
+        person: Persoon
+        preference: Voorkeuren
+        show_email_problems: Bekijk emailproblemen
+        sudo: Inloggen als
       users:
-        show_email_problems: Show email problems
+        show_email_problems: Bekijk emailproblemen
     workgroups:
       destroy:
-        error: 'Workgroup could not be deleted: %{error}'
-        notice: Workgroup was deleted
+        error: 'Werkgroep kon niet verwijderd worden: %{error}'
+        notice: Werkgroep is verwijderd
       edit:
-        title: Edit workgroup
+        title: Werkgroep bewerken
       form:
-        first_paragraph: You can invite new members %{url}.
-        here: here
+        first_paragraph: Nieuwe leden kun je %{url} uitnodigen
+        here: hier
       index:
-        first_paragraph: Here you can create %{url}, edit and delete them.
-        new_workgroup: Create new workgroup
-        new_workgroups: new workgroups
-        ordergroup: ordergroup
-        second_paragraph: 'Consider the difference between a <em>workgroup</em> and an <em>ordergroup</em>: an <em>%{url}</em> has an account and can order food. In a workgroup (for example ''sorting group''), members coordinate with each other via tasks and messages. Users can only be in one ordergroup, but can be in multiple workgroups.'
-        title: Workgroups
+        first_paragraph: Hier kun je %{url} toevoegen, bewerken en wissen.
+        new_workgroup: Nieuwe werkgroep
+        new_workgroups: nieuwe werkgroepen
+        ordergroup: huishouden
+        second_paragraph: 'Let op het verschil tussen een <em>groep</em> en een <em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organizeren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
+        title: Werkgroepen
       new:
-        title: Create workgroup
+        title: Werkgroep toevoegen
       show:
-        confirm: Are you sure?
-        edit: Edit group/members
-        title: Workgroup %{name}
+        confirm: Weet je het zeker?
+        edit: Groep/lid bewerken
+        title: Werkgroep %{name}
       workgroups:
-        members: members
-        name: name
+        members: leden
+        name: naam
   application:
     controller:
-      error_authn: Authentication required!
-      error_denied: You are not allowed to view the requested page. If you think you should, ask an administrator to give you appropriate permissions. If you have access to multiple user accounts, you might want to %{sign_in}.
-      error_denied_sign_in: sign in as another user
-      error_feature_disabled: This feature is currently disabled.
-      error_members_only: This action is only available to members of the group!
-      error_token: Access denied (invalid token)!
+      error_authn: Inloggen vereist!
+      error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je mogelijk %{sign_in}.
+      error_denied_sign_in: inloggen als een andere gebruiker
+      error_feature_disabled: Deze optie is momenteel niet actief.
+      error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
+      error_token: Geen toegang (ongeldig token)!
   article_categories:
     create:
-      notice: Category was stored
+      notice: Categorie is opgeslagen
     destroy:
-      error: 'Category could not be deleted: %{message}'
+      error: 'Categorie kon niet gewist worden: %{message}'
     edit:
-      title: Edit category
+      title: Categorie bewerken
     index:
-      new: Add new category
-      title: Article categories
+      new: Nieuwe categorie
+      title: Categoriën
     new:
-      title: Add new category
+      title: Nieuwe categorie maken
     update:
-      notice: Category was updated
+      notice: Categorie is bijgewerkt.
   articles:
     article:
-      last_update: 'last updated: %{last_update} | gross: %{gross_price}'
+      last_update: 'laatst bijgewerkt: %{last_update} | bruto: %{gross_price}'
     articles:
-      confirm_delete: Do you really want to delete all selected articles?
-      option_available: Make articles available
-      option_delete: Delete article
-      option_not_available: Make articles unavailable
-      option_select: Select action ...
-      price_netto: Price
-      unit_quantity_desc: Unit quantity
-      unit_quantity_short: U.Q.
+      confirm_delete: Weet je zeker dat je alle artikelen wilt verwijderen?
+      option_available: Artikelen beschikbaar maken
+      option_delete: Verwijder artikel
+      option_not_available: Artikelen onbeschikbaar maken
+      option_select: Kies actie ...
+      price_netto: Prijs
+      unit_quantity_desc: Aantal eenheden per doos (colli)
+      unit_quantity_short: Colli
     controller:
       create_from_upload:
-        notice: "%{count} new articles were saved."
-      error_invalid: There are errors in articles
-      error_nosel: No articles selected
-      error_parse: "%{msg} ... in line %{line}"
-      error_update: 'An error occured when updating article ''%{article}'': %{msg}'
+        notice: "Er zijn %{count} nieuwe artikelen opgeslagen."
+      error_invalid: Er zijn artikelen die een fout hebben
+      error_nosel: Geen artikelen geselecteerd
+      error_parse: "%{msg} ... in regel %{line}"
+      error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
-        no_file: Please select a file to upload.
-        notice: "%{count} articles were succesfully analysed."
+        no_file: Kies een bestand om te uploaden.
+        notice: "%{count} artikelen zijn geanalyseerd"
       sync:
-        notice: Catalog is up to date
-        shared_alert: "%{supplier} is not linked to an external database"
+        notice: Catalogus is bijgewerkt
+        shared_alert: "%{supplier} is niet aan een externe database gekoppeld"
       update_all:
-        notice: All articles and prices were updated.
+        notice: Alle artikelen en prijzen zijn bijgewerkt.
       update_sel:
-        notice_avail: All selected articles were set to be available.
-        notice_destroy: All selected articles were deleted.
-        notice_noaction: No action specified!
-        notice_unavail: All selected articles were set to be unavailable.
+        notice_avail: Alle geselecteerde artikelen zijn beschikbaar gemaakt.
+        notice_destroy: Alle geselecteerde artikelen zijn gewist.
+        notice_noaction: Geen actie gekozen!
+        notice_unavail: Alle geselecteerde artikelen zijn onbeschikbaar gemaakt.
       update_sync:
-        notice: All articles and prices were updated.
+        notice: Alle artikelen en prijzen zijn bijgewerkt.
     destroy_active_article:
-      drop: delete
-      note: "%{article} is used in current orders and can not be deleted Please first ... the article from orders %{drop_link}."
+      drop: verwijderen
+      note: "%{article} is deel van een lopende bestelling en kan niet verwijderd worden. Het artikel graag eerst uit de bestelling(en) %{drop_link}."
     edit_all:
-      note: 'Mandatory fields are: name, unit, (net) price and order number.'
-      submit: Update all articles
-      title: Edit all articles from %{supplier}
-      warning: 'Warning: all articles will be updated!'
+      note: 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestellingsnummer.'
+      submit: Alle artikelen bijwerken
+      title: Alle artikelen van %{supplier} bewerken
+      warning: 'Let op, alle artikelen worden bijgewerkt!'
     form:
-      title_edit: Edit article
-      title_new: Add new article
+      title_edit: Artikel bewerken
+      title_new: Nieuw artikel toevoegen
     import_search_results:
-      action_import: import
-      already_imported: imported
-      not_found: No articles found
+      action_import: importeren
+      already_imported: geïmporteerd
+      not_found: Geen artikelen gevonden
     index:
-      change_supplier: Change supplier ...
-      edit_all: Edit all
+      change_supplier: Leverancier wisselen ...
+      download: Artikelen downloaden
+      edit_all: Alles bewerken
       ext_db:
-        import: Import article
-        sync: Synchronise
+        import: Zoeken/importeren
+        sync: Synchroniseren
       import:
-        category: Directly import into category
-        placeholder: Search by name ...
-        restrict_region: Restrict to region only
-        title: Import article
-      new: New article
-      new_order: Create new order
-      search_placeholder: Name ...
-      title: Articles from %{supplier} (%{count})
-      upload: Upload articles
+        category: Direct in categorie importeren
+        placeholder: Naam
+        restrict_region: Alleen uit de regio
+        title: Artikel importeren
+      new: Nieuw artikel
+      new_order: Nieuwe bestelling
+      search_placeholder: Naam ...
+      title: Artikelen van %{supplier} (%{count})
+      upload: Artikelen uploaden
     model:
-      error_in_use: "%{article} can not be deleted because the article is part of a current order!"
-      error_nosel: You have selected no articles
+      error_in_use: "%{article} kan niet gewist worden, want deze is deel van een lopende bestelling!"
+      error_nosel: Je hebt geen artikelen geselecteerd
     parse_upload:
-      body: "<p><i>Please verify the articles.</i></p> <p><i>Warning, at the moment there is no check for duplicate articles.</i></p>"
-      submit: Process upload
-      title: Upload articles
+      body: "<p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>"
+      submit: Upload verwerken
+      title: Artikelen uploaden
     sync:
       outlist:
-        alert_used: Warning, %{article} is used in an open order. Please remove it from the order first.
-        body: 'The following articles were removed from the list and will be <b>deleted</b>:'
+        alert_used: Opgelet, %{article} wordt gebruikt in een lopende bestelling. Haal het eerst uit de bestelling.
+        body: 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_ignored:
-          one: One article without order number was skipped.
-          other: "%{count} articles without order number were skipped."
-        body_skip: No articles to delete.
-        title: Remove from list ...
-      price_short: Price
-      submit: Synchronize all
-      title: Synchronize articles with external database
-      unit_quantity_short: Unit quantity
+          one: Er is één artikel zonder artikelnummer overslagen.
+          other: "%{count} artikelen zonder artikelnummer zijn overgeslagen."
+        body_skip: Er zijn geen artikelen om te verwijderen.
+        title: Uit de lijst halen ...
+      price_short: prijs
+      submit: Alles synchroniseren
+      title: Artikelen met externe database synchroniseren
+      unit_quantity_short: Colli
       update:
-        body: 'Every article is shown twice: old values are gray, while the text fields contain updated values. Differences with the old articles are marked yellow.'
-        title: Update ...
+        body: 'Ieder artikel wordt tweemaal getoond: oude waarden zijn grijs, en de tekstvelden bevatten de nieuwe waarden. Verschillen met de oude artikelen zijn geel gemarkeerd.'
+        title: Bijwerken ...
         update_msg:
-          one: One article needs to be updated.
-          other: "%{count} articles need to be updated."
+          one: Er moet éen artikel bijgewerkt worden.
+          other: "Er moeten %{count} artikelen bijgewerkt worden."
       upnew:
         body_count:
-          one: There is one new article to add.
-          other: There are %{count} articles to add.
-        title: Add new ...
+          one: Er is éen nieuw artikel.
+          other: Er zijn %{count} nieuwe artikelen.
+        title: Toevoegen ...
     upload:
       fields:
-        reserved: "(Reserved)"
-        status: Status (x=skip)
-      file_label: Please choose a compatible file
+        reserved: "(Leeg)"
+        status: Status (x=overslaan)
+      file_label: Graag een compatibel bestand uitkiezen
       options:
-        convert_units: Keep current units, recompute unit quantity and price (like synchronize).
-        outlist_absent: Delete articles not in uploaded file.
+        convert_units: Bestaande eenheden behouden, herbereken groothandelseenheid en prijs (net als synchronizeren).
+        outlist_absent: Artikelen die niet in het bestand voorkomen, verwijderen.
       sample:
-        juices: Juices
-        nuts: Nuts
-        organic: Organic
-        supplier_1: Nuttyfarm
-        supplier_2: Brownfields
-        supplier_3: Greenfields
-        tomato_juice: Tomato juice
-        walnuts: Walnuts
-      submit: Upload file
-      text_1: 'Here you can upload a spreadsheet to update the articles of %{supplier}. Excel (xls, xlsx) and OpenOffice (ods) spreadsheets are accepted, as well as comma-separated files (csv, columns separated by ";" with utf-8 encoding). Only the first sheet will be imported, and columns must be in the following order:'
-      text_2: The rows shown here are examples. When there is an "x" in the first column, the article is outlisted and will be removed. This allows you to edit the spreadsheet and quickly remove many articles at once, for example when articles become unavailable with the supplier. The category will be matched to your Foodsoft category list (both by category name and import names).
-      title: Upload articles of %{supplier}
+        juices: Sappen
+        nuts: Noten
+        organic: Bio
+        supplier_1: De Notenboerderij
+        supplier_2: De bruine boer
+        supplier_3: Groenteveld
+        tomato_juice: Tomatensap
+        walnuts: Walnoten
+      submit: Bestand uploaden
+      text_1: 'Hier kun je een spreadsheet uploaden om de artikelen van %{supplier} bij te werken. Zowel Excel (xls, xlsx) als OpenOffice (ods) spreadsheets worden gelezen, evenals csv-bestanden (kolommen geschieden door ";", utf-8 encoding). Alleen de eerste sheet wordt geïmporteerd, en kolommen worden verwacht in deze volgorde:'
+      text_2: De rijen hier getoond zijn voorbeelden. Een "x" in de eerste kolom geeft aan dat het artikel niet meer beschikbaar is en zal worden verwijderd. Hiermee kun je snel meerdere artikelen tegelijk verwijderen. De categorie wordt gematched met de Foodsoft categorielijst (zowel met de categorienaam als de bijbehorende importnamen).
+      title: Artikelen uploaden voor %{supplier}
+  bank_account_connector:
+    fields:
+      email: E-Mail
+      pin: PIN
+      password: Wachtwoord
+      username: Gebruikersnaam
   config:
     hints:
-      applepear_url: Website where the apple and pear system for tasks is explained.
-      charge_members_manually: When you keep track of who received what elsewhere (e.g. on paper), and you don't want to enter this into Foodsoft, select this. You'll need to charge member accounts manually (using "Add new transactions"). You still need to settle orders in the balancing screen, but this will not charge any member accounts.
+      applepear_url: Website waar het appelpunten systeem wordt uitgelegd.
+      charge_members_manually: Kies deze optie als je elders bijhoudt wie welke producten heeft gekregen (bijvoorbeeld op papier), en dat ook niet naderhand in Foodsoft invoert. Na het afrekenen van bestellingen moet je dan iedere keer bij leden handmatig het in rekening te brengen bedrag afschrijven (gebruik "Nieuwe transacties toevoegen"). Het blijft wel nodig bestellingen af te rekenen, maar dat brengt dan niets in rekening bij leden.
       contact:
-        email: General contact email address, shown on website as well as some forms.
-        street: Address, typically this will be your delivery and pick-up location.
-      currency_space: Whether to add whitespace after the currency symbol.
-      currency_unit: Currency symbol for displaying prices.
-      custom_css: To modify the layout of this site, you can enter style modifications using the cascading stylesheets (CSS) language. Leave blank for the default style.
-      email_from: Emails will appear to be from this email address. Leave empty to use the foodcoop's contact address.
-      email_replyto: Set this when you want to receive replies from emails sent by Foodsoft on a different address than the above.
-      email_sender: Emails will appear to be sent from this email address. To avoid emails sent being classified as spam, the webserver may need to be registered in the SPF record of the email address's domain.
-      help_url: Documentation website.
-      homepage: Website of your foodcoop.
-      ignore_browser_locale: Ignore the language of user's computer when the user has not chosen a language yet.
-      minimum_balance: Members can only order when their account balance is above or equal to this amount.
-      name: The name of your foodcoop.
+        email: Algemeen contactadres, zowel voor op de website als in formulieren.
+        street: Adres, meestal is dit het aflever- en ophaaladres.
+      currency_space: Spatie toevoegen na valutasymbool.
+      currency_unit: Valutasymbool voor het tonen van prijzen.
+      custom_css: De layout van deze site kan gewijzigd worden door hier cascading stylesheets (CSS) in te voeren. Laat het leeg voor de standaardstijl.
+      email_from: Emails zullen lijken verzonden te zijn vanaf dit email adres. Laat het veld leeg om het contactadres van de foodcoop te gebruiken.
+      email_replyto: Vul dit in als je antwoord op mails van Foodsoft wilt ontvangen op een ander adres dan het bovenstaande.
+      email_sender: Emails worden verzonden vanaf dit emailadres. Om te voorkomen dat emails als spam worden tegengehouden, is het te adviseren het adres van de webserver op te nemen in het SPF record van het email domein.
+      help_url: Documentatie website.
+      homepage: Website van de foodcoop.
+      ignore_browser_locale: Negeer de taal van de computer wanneer iemand nog geen taal gekozen heeft.
+      minimum_balance: Leden kunnen slechts bestellen wanneer hun tegoed groter of gelijk is aan dit bedrag.
+      name: De naam van de foodcoop.
       order_schedule:
         boxfill:
-          recurr: Schedule for when the box-fill phase starts by default.
-          time: Default time when the box-fill phase of the ordering starts.
+          recurr: Standaard rooster voor wanneer dozen vullen begint.
+          time: Standaard tijd voor wanneer dozen vullen begint.
         ends:
-          recurr: Schedule for default order closing date.
-          time: Default time when orders are closed.
-        initial: Schedule starts at this date.
-      page_footer: Shown on each page at the bottom. Enter "blank" to disable the footer completely.
+          recurr: Schema voor datum waarop de bestelling sluit.
+          time: Standaard tijd wanneer de bestelling sluit.
+        initial: Bestelschema start op deze datum.
+      page_footer: Wordt op iedere pagina getoond. Vul "blank" in om de voettekst helemaal weg te halen.
       pdf_add_page_breaks:
-        order_by_articles: Put each article on a separate page.
-        order_by_groups: Put each ordergroup on a separate page.
-      pdf_font_size: Base font size for PDF documents (12 is standard).
-      pdf_page_size: Page size for PDF documents, typically "A4" or "letter".
-      price_markup: Percentage that is added to the gross price for foodcoop members.
-      stop_ordering_under: Members can only order when they have at least this many apple points.
-      tasks_period_days: Number of days between two periodic tasks (default 7, which is a week).
-      tasks_upfront_days: For how many days in advance you would like to schedule periodic tasks.
-      tax_default: Default VAT percentage for new articles.
-      tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
-      use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
-      use_boxfill: When enabled, near end of an order, members are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
-      use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
-      use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
-      webstats_tracking_code: Tracking code for web analytics (like Piwik or Google analytics). Leave empty for no tracking.
+        order_by_articles: Ieder artikel op een nieuwe pagina.
+        order_by_groups: Ieder huishouden op een nieuwe pagina.
+      pdf_font_size: Basis tekstgrootte voor PDF bestanden (standaard 12).
+      pdf_page_size: Paginaformaat voor PDF bestanden, meestal "A4" of "letter".
+      price_markup: Percentage dat bovenop het brutobedrag wordt gedaan voor foodcoop leden.
+      stop_ordering_under: Leden kunnen slechts bestellen als ze dit aantal appelpunten hebben of meer.
+      tasks_period_days: Aantal dagen tussen twee periodieke taken (standaard 7, een week)
+      tasks_upfront_days: Hoeveel dagen vantevoren je periodieke taken wil aanmaken.
+      tax_default: Standaard BTW percentage voor nieuwe artikelen.
+      tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
+      use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
+      use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
+      use_iban: Om leverancier en gebruiker een extra veld te geven voor het internationale bankrekeningnummer (IBAN).
+      use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
+      webstats_tracking_code: Tracking code voor bezoeker statistieken (zoals Piwik of Google analytics). Leeg laten als geen tracking gewenst is.
     keys:
-      applepear_url: Apple system help URL
-      charge_members_manually: Charge members manually
+      applepear_url: Appelsysteem uitleg URL
+      charge_members_manually: Leden handmatig afrekenen
       contact:
-        city: City
-        country: Country
+        city: Stad
+        country: Land
         email: Email
-        phone: Phone
-        street: Street
+        phone: Telefoon
+        street: Straat
         zip_code: Postcode
-      currency_space: add space
-      currency_unit: Currency
-      custom_css: Custom CSS
-      default_locale: Default language
-      disable_invite: Disable invites
-      email_from: From address
-      email_replyto: Reply-to address
-      email_sender: Sender address
-      help_url: Documentation URL
+      currency_space: spatie toevoegen
+      currency_unit: Valuta
+      custom_css: Aangepaste CSS
+      default_locale: Standaardtaal
+      default_role_article_meta: Artikelen
+      default_role_finance: Financiën
+      default_role_invoices: Rekeningen
+      default_role_orders: Bestellingen
+      default_role_pickups: Ophaaldagen
+      default_role_suppliers: Leveranciers
+      disable_invite: Uitnodigingen deactiveren
+      email_from: From adres
+      email_replyto: Reply-to adres
+      email_sender: Sender adres
+      help_url: Documentatie URL
       homepage: Homepage
-      ignore_browser_locale: Ignore browser language
-      minimum_balance: Minimum balance
-      name: Name
+      ignore_browser_locale: Browsertaal negeren
+      minimum_balance: Minimum tegoed
+      name: Naam
       order_schedule:
         boxfill:
-          recurr: Box fill after
-          time: time
+          recurr: Dozen vullen na
+          time: tijd
         ends:
-          recurr: Order ends
-          time: time
-        initial: Schedule start
-      page_footer: Page footer
-      pdf_add_page_breaks: Page breaks
-      pdf_font_size: Font size
-      pdf_page_size: Page size
-      price_markup: Foodcoop margin
-      stop_ordering_under: Minimum apple points
-      tasks_period_days: Period
-      tasks_upfront_days: Create upfront
-      tax_default: Default VAT
-      time_zone: Time zone
-      tolerance_is_costly: Tolerance is costly
-      use_apple_points: Apple points
-      use_boxfill: Box-fill phase
-      use_iban: Use IBAN
-      use_nick: Use nicknames
+          recurr: Bestelling sluit
+          time: tijd
+        initial: Start bestelschema
+      page_footer: Voettekst
+      pdf_add_page_breaks: Nieuwe pagina's
+      pdf_font_size: Tekstgrootte
+      pdf_page_size: Paginaformaat
+      price_markup: Foodcoop marge
+      stop_ordering_under: Minimum appelpunten
+      tasks_period_days: Periode
+      tasks_upfront_days: Vantevoren
+      tax_default: Standaard BTW
+      time_zone: Tijdzone
+      tolerance_is_costly: Tolerantie is duur
+      use_apple_points: Appelpunten
+      use_boxfill: Dozen vullen fase
+      use_iban: IBAN gebruiken
+      use_nick: Bijnamen gebruiken
       webstats_tracking_code: Tracking code
     tabs:
       applications: Apps
       foodcoop: Foodcoop
-      language: Language
+      language: Taal
       layout: Layout
-      list: List
-      messages: Messages
-      others: Other
-      payment: Finances
-      tasks: Tasks
+      list: Lijst
+      messages: Berichten
+      others: Overig
+      payment: Financiën
+      tasks: Taken
   deliveries:
     add_stock_change:
-      how_many_units: 'How many units (%{unit}) to deliver? Stock article name: %{name}.'
+      how_many_units: 'Hoeveel eenheden (%{unit}) leveren? Voorraadartikel: %{name}.'
     create:
-      notice: Delivery was created. Please don’t forget to add an invoice!
+      notice: Levering is aangemaakt. Vergeet niet een factuur toe te voegen!
     destroy:
-      notice: Delivery was deleted.
+      notice: Levering is verwijdered.
     edit:
-      title: Edit delivery
+      title: Levering aanpassen
     form:
-      confirm_foreign_supplier_reedit: The stock article %{name} was successfully saved. However, it belongs to a different supplier than this delivery. Would you like to edit the stock article again?
-      create_from_blank: Create new article
-      create_stock_article: Create stock article
-      title_fill_quantities: 2. Set delivery quantities
-      title_finish_delivery: 3. Finish delivery
-      title_select_stock_articles: 1. Select stock articles
+      confirm_foreign_supplier_reedit: Voorraadartikel "%{name}" is opgeslagen, maar het hoort bij een andere leverancier dan die van deze levering. Wil je het voorraadartikel aanpassen?
+      create_from_blank: Nieuw voorraadartikel invoeren
+      create_stock_article: Voorraadartikel invoeren
+      title_fill_quantities: 2. Hoeveel mag er geleverd worden
+      title_finish_delivery: 3. Levering afmaken
+      title_select_stock_articles: 1. Kies voorraadartikelen
     index:
-      confirm_delete: Are you sure?
-      new_delivery: 'Create new delivery for %{supplier} '
-      title: "%{supplier}/deliveries"
-    invoice_amount: Invoice amount
-    invoice_net_amount: Invoice net amount
+      confirm_delete: Zeker weten?
+      new_delivery: 'Nieuwe levering maken voor %{supplier}'
+      title: "%{supplier} leveringen"
+    invoice_amount: Factuurbedrag
+    invoice_net_amount: Netto factuurbedrag
     new:
-      title: New delivery from %{supplier}
+      title: Nieuwe levering van %{supplier}
     show:
-      sum: Sum
-      sum_diff: Gross - adjusted invoice amount
-      sum_gross: Gross sum
-      sum_net: Net sum
-      title: Show delivery
-      title_articles: Articles
+      sum: Som
+      sum_diff: Bruto - aangepast factuurbedrag
+      sum_gross: Brutosom
+      sum_net: Nettosom
+      title: Levering tonen
+      title_articles: Artikelen
     stock_article_for_adding:
-      action_add_to_delivery: Add to delivery
-      action_edit: Edit
-      action_other_price: Copy
+      action_add_to_delivery: Voeg toe aan levering
+      action_edit: Bewerk
+      action_other_price: Kopieer
     stock_change_fields:
-      remove_article: Remove article from delivery
-    suppliers_overview: Supplier overview
+      remove_article: Artikel uit levering halen
+    suppliers_overview: Leverancieroverzicht
     update:
-      notice: Delivery was updated.
+      notice: Levering is bijgewerkt.
   documents:
     order_by_articles:
-      filename: Order %{name}-%{date} - by articles
-      title: 'Order sorted by articles: %{name}, closed at %{date}'
+      filename: Bestelling %{name}-%{date} - Artikellijst
+      title: 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
     order_by_groups:
-      filename: Order %{name}-%{date} - by group
-      sum: Sum
-      title: 'Order sorted by group: %{name}, closed at %{date}'
+      filename: Bestelling %{name}-%{date} - Huishoudenslijst
+      sum: Som
+      title: 'Huishoudenslijst van bestelling: %{name}, gesloten op %{date}'
     order_fax:
-      filename: Order %{name}-%{date} - Fax
+      filename: Bestelling %{name}-%{date} - Fax
       rows:
-        - Order Number
-        - Amount
-        - Name
-        - Unit quantity
-        - Unit
-        - Price/Unit
-        - Subtotal
-      total: Total
+        - Nummer
+        - Aantal
+        - Naam
+        - Colli
+        - Eenheid
+        - Prijs/eenh.
+        - Subtotaal
+      total: Totaal
     order_matrix:
-      filename: Order %{name}-%{date} - sorting matrix
-      heading: Article overview (%{count})
-      title: 'Order sorting matrix: %{name}, closed at %{date}'
+      filename: Bestelling %{name}-%{date} - Sorteermatrix
+      heading: Artikeloverzicht (%{count})
+      title: 'Sorteermatrix van bestelling: %{name}, gesloten op %{date}'
   errors:
-    general: A problem has occured.
-    general_again: A problem has occured. Please try again.
-    general_msg: 'A problem has occured: %{msg}'
+    general: Er is een probleem opgetreden.
+    general_again: Er is een fout opgetreden. Probeer het opnieuw.
+    general_msg: 'Er is een probleem opgetreden: %{msg}'
     internal_server_error:
-      text1: An unexpected error has occured. Sorry!
-      text2: We've been notified. If this remains a problem, please tell us so.
-      title: Internal server error
+      text1: Een onverwachte fout is opgetreden. Sorry!
+      text2: We zijn op de hoogte gesteld. Als het probleem blijft bestaan, neem dan gerust contact op.
+      title: Interne serverfout
     not_found:
-      text: This page does not appear to exist, sorry!
-      title: Page not found
+      text: Deze pagina bestaat niet, sorry!
+      title: Pagina niet gevonden
   feedback:
     create:
-      notice: Your feedback was sent successfully. Thanks a lot!
+      notice: Bericht verstuurd. Vriendelijk bedankt!
     new:
-      first_paragraph: Found a bug? Suggestions? Ideas? Reviews? We are happy to hear any feedback.
-      second_paragraph: Please be aware that the Foodsoft Team is only responsible for the maintenance of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.
-      send: Send
-      title: Give feedback
+      first_paragraph: Probleem gevonden? Voorstel? Idee? Verbeterpunt? We horen graag je feedback.
+      second_paragraph: Dit bericht wordt verstuurd naar de ontwikkelaars van de bestelsoftware. Voor vragen over de organisatie van je foodcoop kun je je tot de lokale organisatie wenden.
+      send: Verzenden
+      title: Feedback geven
   finance:
     balancing:
       close:
-        alert: 'An error occured while accounting: %{message}'
-        notice: Order was settled succesfully, the balance of the account was updated.
+        alert: 'Er trad een fout op bij het afrekenen: %{message}'
+        notice: Bestelling is succesvol afgerekend, de tegoeden van de leden zijn bijgewerkt.
+      close_all_direct_with_invoice:
+        notice: '%{count} bestellingen zijn afgerekend.'
       close_direct:
-        alert: 'Order can not be settled: %{message}'
-        notice: Order was settled.
+        alert: 'Bestelling kan niet afgerekend worden: %{message}'
+        notice: Bestelling is afgerekend.
       confirm:
-        clear: Settle
-        first_paragraph: 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
-        or_cancel: or back to accounting
-        title: Settle order
+        clear: Afrekenen
+        first_paragraph: 'Wanneer de bestelling afgerekend wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
+        or_cancel: of terug naar balans
+        title: Bestelling afrekenen
       edit_note:
-        title: Edit order note
+        title: Bewerk ordernotitie
       edit_results_by_articles:
-        add_article: Add article
-        amount: Amount
-        gross: Gross
-        net: Net
+        add_article: Artikel toevoegen
+        amount: Aantal
+        gross: Bruto
+        net: Netto
       group_order_articles:
-        add_group: Add group
-        total: Total costs
-        total_fc: Sum (FC-price)
-        units: Units
+        add_group: Huishouden toevoegen
+        total: Totale prijs
+        total_fc: Som (FC-prijs)
+        units: Eenheden
       index:
-        title: Closed orders
+        close_all_direct_with_invoice: Alles afrekenen met factuur
+        title: Gesloten bestellingen
       invoice:
-        edit: Edit invoice
-        invoice_amount: 'Invoice amount:'
-        invoice_date: 'Invoice date:'
-        invoice_number: 'Invoice number:'
-        minus_refund_calculated: "- deposit charged:"
-        new: create new invoice
-        new_body: 'Create an invoice for this order:'
-        plus_refund_credited: "+ deposit returned:"
-        refund_adjusted_amount: 'amount adjusted for refund:'
+        edit: Factuur bewerken
+        invoice_amount: 'Factuurbedrag:'
+        invoice_date: 'Factuurdatum:'
+        invoice_number: 'Factuurnummer:'
+        minus_refund_calculated: "- statiegeld berekend:"
+        new: factuur toevoegen
+        new_body: 'Een factuur aan deze bestelling toevoegen:'
+        plus_refund_credited: "+ statiegeld teruggekregen:"
+        refund_adjusted_amount: 'bedrag gecorrigeerd voor statiegeld:'
       new:
-        alert: Attention, order was already accounted
-        articles_overview: Overview of articles
-        close_direct: Skip settling
-        close_direct_confirm: You are about to settle the order without charging member accounts. Do this only when you have already debited member accounts manually, or if you really know what you are doing.
-        comment_on_transaction: Here you can add a comment to your accounting.
-        comments: Comments
-        confirm_order: Settle order
-        create_invoice: Add invoice
-        edit_note: Edit note
-        edit_order: Edit order
-        groups_overview: Overview of groups
-        invoice: Invoice
-        notes_and_journal: Order Notes
-        summary: Summary
-        title: Accounting %{name}
-        view_options: Viewing options
+        alert: Opgelet, bestelling is al afgerekend
+        articles_overview: Artikeloverzicht
+        close_direct: Afrekenen overslaan
+        close_direct_confirm: Je staat op het punt de bestelling af te sluiten zonder de bedragen in rekening te brengen bij de huishoudens. Doe dit alleen wanneer je deze bedragen al handmatig hebt afgeschreven, of als je echt weet wat je doet!
+        comment_on_transaction: Hier kun je een notitie aan de afrekening toevoegen.
+        comments: Notities
+        confirm_order: Afrekenen
+        create_invoice: Factuur toevoegen
+        edit_note: Notitie bewerken
+        edit_order: Bestelling bewerken
+        groups_overview: Overzicht per huishouden
+        invoice: Factuur
+        notes_and_journal: Notities/Protocol
+        summary: Samenvatting
+        title: Balans van %{name}
+        view_options: Weergaveopties
       order_article:
-        confirm: Are you sure?
+        confirm: Weet je het zeker?
       orders:
-        clear: accounting
-        cleared: accounted (%{amount})
-        end: End
-        ended: closed
-        name: Supplier
-        no_closed_orders: At the moment there are no closed orders.
-        state: State
+        clear: balans
+        cleared: afgerekend (%{amount})
+        end: Einde
+        ended: gesloten
+        name: Leverancier
+        no_closed_orders: Momenteel zijn er geen gesloten bestellingen.
+        state: Status
       summary:
-        changed: Data was changed!
-        duration: From %{starts} till %{ends}
-        fc_amount: 'Sales value:'
-        fc_profit: FC surplus
-        gross_amount: 'Gross value:'
-        groups_amount: 'Ordergroups sum:'
-        net_amount: 'Net value:'
-        reload: Reload summary
-        with_extra_charge: 'with extra charge:'
-        without_extra_charge: 'without extra charge:'
+        changed: Waarden zijn gewijzigd!
+        duration: Van %{starts} tot %{ends}
+        fc_amount: 'Verkoopwaarde:'
+        fc_profit: FC overschot
+        gross_amount: 'Bruto waarde:'
+        groups_amount: 'Totaal huishoudens:'
+        net_amount: 'Netto waarde:'
+        reload: Samenvatting verversen
+        with_extra_charge: 'inclusief marge:'
+        without_extra_charge: 'zonder marge:'
     bank_accounts:
-      controller:
-        import:
-          notice: '%{count} new transactions have been imported'
+      assign_unlinked_transactions:
+        notice: '%{count} transacties hebben een link toegewezen gekregen'
+      import:
+        notice: '%{count} nieuwe transacties zijn geïmporteerd'
+        no_import_method: Voor deze bankrekening is geen importmethode geconfigureerd.
+        title: Importeer banktransacties voor %{name}
       index:
-        account_statement: Account statement
-        title: Bank Accounts
+        title: Bankrekeningen
     bank_transactions:
       index:
-        title: Bank transactions for %{name} (%{balance})
+        assign_unlinked_transactions: Transacties toewijzen
+        import_transactions: Importeren
+        title: Banktransacties voor %{name} (%{balance})
       show:
-        belongs_to_supplier: belongs to supplier
-        belongs_to_user: belongs to user
-        in_ordergroup: in ordergroup
+        add_financial_link: Financiële link toevoegen
+        belongs_to_supplier: hoort bij leverancier
+        belongs_to_user: hoort bij gebruiker
+        in_ordergroup: in huishouden
+      transactions:
+        add_financial_link: Link toevoegen
     create:
-      notice: Invoice was created.
+      notice: Rekening is gemaakt.
     financial_links:
+      add_bank_transaction:
+        notice: Een link naar de banktransactie is toegevoegd.
+      add_financial_transaction:
+        notice: Een link naar de financiële transactie is toegevoegd.
+      add_invoice:
+        notice: Een link naar de factuur is toegevoegd.
+      create:
+        notice: Een nieuwe financiële link is aangemaakt.
+      index_bank_transaction:
+        title: Banktransactie toevoegen
+      index_financial_transaction:
+        title: Financiële transactie toevoegen
+      index_invoice:
+        title: Factuur toevoegen
+      remove_bank_transaction:
+        notice: De link naar de banktransactie is verwijderd.
+      remove_financial_transaction:
+        notice: Een link naar de financiële transactie is verwijderd.
+      remove_invoice:
+        notice: Een link naar de factuur is verwijderd.
       show:
-        title: Financial link %{number}
+        add_bank_transaction: Banktransactie toevoegen
+        add_financial_transaction: Financiële transactie toevoegen
+        add_invoice: Factuur toevoegen
+        amount: Bedrag
+        date: Datum
+        description: Omschrijving
+        title: Financiële link %{number}
+        type: Type
     financial_transactions:
       controller:
         create:
-          notice: The transaction was saved.
+          notice: De transactie is opgeslagen.
         create_collection:
-          alert: 'An error occured: %{error}'
-          error_note_required: Note is required!
-          notice: All transactions were saved.
+          alert: 'Er is een fout opgetreden: %{error}'
+          error_note_required: Notitie ontbreekt.
+          notice: Alle transacties zijn opgeslagen.
       index:
-        balance: 'Balance of account: %{balance}'
-        last_updated_at: "(last updated %{when} ago)"
-        new_transaction: Create new transaction
-        title: Account statement for %{name}
+        balance: 'Tegoed: %{balance}'
+        last_updated_at: "(laatst bijgewerkt %{when} geleden)"
+        new_transaction: Nieuwe transactie toevoegen
+        title: Rekeningoverzicht voor %{name}
       index_collection:
-        show_groups: Manage accounts
-        title: Financial transactions
+        show_groups: Tegoeden
+        title: Financiële transacties
       new:
-        paragraph: Here you can credit and debit money for the ordergroup <b>%{name}</b>.
-        title: New transaction
+        paragraph: Hier kun je het tegoed van huishouden <b>%{name}</b> ophogen en verlagen.
+        title: Nieuwe transactie
       new_collection:
-        add_all_ordergroups: Add all ordergroups
-        new_ordergroup: Add new ordergroup
-        save: Save transaction
-        set_balance: Set the balance of the ordergroup to the entered amount.
-        sidebar: Here you can update more accounts at the same time. For example all transfers of the ordergroup from one account statement.
-        title: Updating more accounts
+        add_all_ordergroups: Alle huishoudens toevoegen
+        add_all_ordergroups_custom_field: Alle huishoudens met %{label} toevoegen
+        create_financial_link: Maak een gemeenschappelijke financiële link voor de nieuwe transacties.
+        new_ordergroup: Nog een huishouden toevoegen
+        save: Transactie opslaan
+        set_balance: Zet saldo van het huishouden op het ingevoerde bedrag.
+        sidebar: Hier kun je meerdere tegoeden tegelijk bijwerken. Bijvoorbeeld alle overschrijvingen van leden van een bankafschrift.
+        title: Meerdere tegoeden bijwerken
       ordergroup:
-        remove: Remove
-        remove_group: Remove group
+        remove: Verwijderen
+        remove_group: Huishouden verwijderen
+      transactions:
+        confirm_revert: Weet je zeker dat je %{name} ongedaan wil maken? In dit geval zal een nieuwe transactie met een omgekeerd bedrag worden aangemaakt en, samen met de oorspronkelijke transactie, worden verborgen. Deze verborgen transactie is alleen zichtbaar via de 'Toon verborgen' optie en onzichtbaar voor normale gebruikers.
+        revert_title: Transactie ongedaan maken, waardoor deze onzichtbaar wordt voor normale gebruikers.
       transactions_search:
-        search_placeholder: Search note ...
+        show_hidden: Toon verborgen transacties
     index:
-      amount_fc: Amount(FC)
-      end: End
-      everything_cleared: Great, everything is accounted...
-      last_transactions: Recent transactions
-      open_transactions: Unsettled orders
-      show_all: show all
-      title: Finances
-      unpaid_invoices: Unpaid invoices
+      amount_fc: Bedrag(FC)
+      end: Einde
+      everything_cleared: Mooi zo, alles is verrekend...
+      last_transactions: Recente transacties
+      open_transactions: Nog niet afgerekend
+      show_all: alle tonen
+      title: Financiën
+      unpaid_invoices: Onbetaalde facturen
     invoices:
       edit:
-        title: Edit invoice
+        title: Factuur bewerken
       form:
-        attachment_hint: Only JPEG and PDF are allowed.
+        attachment_hint: Alleen JPEG en PDF zijn toegestaan.
       index:
-        action_new: Create new invoice
-        title: Invoices
+        action_new: Nieuwe factuur toevoegen
+        show_unpaid: Toon onbetaalde facturen
+        title: Facturen
       new:
-        title: Create new invoice
+        title: Nieuwe factuur toevoegen
       show:
-        title: Invoice %{number}
+        title: Factuur %{number}
       unpaid:
-        invoices_sum: Total sum
-        invoices_text: Reference
-        title: Unpaid invoices
+        invoices_sum: Totale som
+        invoices_text: Referentie
+        title: Onbetaalde rekeningen
     ordergroups:
       index:
-        new_transaction: Add new transactions
-        search_placeholder: Search ...
-        show_all: All transactions
-        title: Manage accounts
+        new_transaction: Nieuwe transacties toevoegen
+        show_all: Transactieoverzicht
+        title: Tegoeden beheren
       ordergroups:
-        account_statement: Account statement
-        new_transaction: New transaction
+        account_statement: Rekeningafschrift
+        new_transaction: Nieuwe transactie
     update:
-      notice: Invoice was updated
+      notice: Factuur is bijgewerkt
   foodcoop:
     ordergroups:
       index:
-        name: Name ...
-        only_active: Only active groups
-        only_active_desc: "(have placed order at least once in the last 3 months)"
-        title: Ordergroups
+        name: Naam ...
+        only_active: Alleen actieve
+        only_active_desc: "(minstens eenmaal in de laatste 3 maanden besteld)"
+        title: Huishoudens
       ordergroups:
         break: "%{start} - %{end}"
     users:
       index:
-        body: "<p>Here you can write a message to the members of your Foodcoop. If you'd like others to contact you, please enable it in your %{profile_link}.</p>"
-        ph_name: Name ...
-        ph_ordergroup: Ordergroup ...
-        profile_link: options
-        title: Users
+        body: "<p>Hier kun je leden van deze foodcoop een bericht sturen. Om je eigen contactgegevens te laten zien, moet je die vrijgeven in je %{profile_link}.</p>"
+        ph_name: Naam ...
+        ph_ordergroup: Huishouden ...
+        profile_link: profiel
+        title: Leden
     workgroups:
       edit:
-        invite_link: here
-        invite_new: You can invite new members %{invite_link}.
-        title: Edit group
+        invite_link: hier
+        invite_new: Nieuwe leden kun je %{invite_link} uitnodigen.
+        title: Groep bewerken
       index:
-        body: "<p>Editing a group is only available to members of the group.<br/> If you want to join a group, please send the members a message. </p>"
-        title: Working groups
+        body: "<p>De groep kan alleen aangepast worden door leden ervan.<br/> Als je lid wilt worden van een groep, stuur dan een bericht aan een van de leden.</p>"
+        title: Werkgroepen
       workgroup:
-        edit: Edit group
-        show_tasks: Show all tasks
+        edit: Groep bewerken
+        show_tasks: Alle taken weergeven
   group_order_articles:
     form:
-      amount_change_for: Change amount for %{article}
-      result_hint: 'Unit: %{unit}'
+      amount_change_for: Hoeveelheid %{article}
+      result_hint: 'Eenheid: %{unit}'
   group_orders:
     archive:
-      desc: View all %{link} here.
-      open_orders: current orders
-      title: Orders of %{group}
-      title_closed: settled
-      title_open: closed/not settled
+      desc: Bekijk hier alle %{link}.
+      open_orders: lopende bestellingen
+      title: Bestellingen van %{group}
+      title_closed: afgerekend
+      title_open: gesloten/niet afgerekend
     create:
-      error_general: The order couldn’t be updated due to a bug.
-      error_stale: Someone else has ordered in the meantime, couldn't update the order.
-      notice: The order was saved.
+      error_general: De bestelling kon niet bijgewerkt worden vanwege een fout.
+      error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon de bestelling niet bijgewerkt worden.
+      notice: Bestelling opgeslagen.
     errors:
-      closed: This order is already closed.
-      no_member: You are not a member of an ordergroup.
-      notfound: Incorrect URL, this is not your order.
+      closed: Deze bestelling is al gesloten.
+      no_member: Je bent geen lid van dit huishouden.
+      notfound: Foute URL, dit is niet jouw bestelling.
     form:
-      action_save: Save order
-      new_funds: New account balance
-      price: Price
-      reset_article_search: Reset search
-      search_article: Search for articles...
-      sum_amount: Current amount
-      title: Orders
-      total_sum_amount: Total amount
-      total_tolerance: Total tolerance
-      units: Units
-      units_full: Filled units
-      units_total: Total units
+      action_save: Bestelling opslaan
+      new_funds: Nieuw tegoed
+      price: Prijs
+      reset_article_search: Alles tonen
+      search_article: Artikelen zoeken...
+      sum_amount: Huidig totaalbedrag
+      title: Bestellen
+      total_sum_amount: Totalbedrag
+      total_tolerance: Totale tolerantie
+      units: Eenheden
+      units_full: Volle eenheden
+      units_total: Totaal aantal
     index:
       closed_orders:
-        more: more...
-        title: Settled orders
+        more: meer...
+        title: Afgerekende bestellingen
       finished_orders:
-        title: Unsettled orders
-        total_sum: Total sum
+        title: Niet afgerekende bestellingen
+        total_sum: Totaal
       funds:
-        finished_orders: Unsettled orders
-        open_orders: Current orders
+        finished_orders: niet afgerekende bestellingen
+        open_orders: Lopende bestellingen
         title: Credit
-      title: Orders overview
+      title: Besteloverzicht
     messages:
-      not_enough_apples: You need at least %{stop_ordering_under} apples to order. Currently your order group has only %{apples} apples.
+      not_enough_apples: Om te bestellen heb je minimaal %{stop_ordering_under} appels nodig. Momenteel heeft je huishouden slechts %{apples} appels.
     order:
-      title: Articles
+      title: Artikelen
     show:
       articles:
-        edit_order: Edit order
-        not_ordered_msg: You didn’t place an order yet
-        order_closed_msg: Sorry, this order is closed.
-        order_nopen_title: Considering current orders of all groups
-        order_not_open: Received
-        order_now: This is your chance!
-        order_open: Available
-        ordered: Ordered
-        ordered_title: Amount + tolerance
-        show_hide: Show/hide articles not ordered
-        show_note: Show note
-        title: Article overview
-        unit_price: Unit price
-      comment: Comment
+        edit_order: Bestelling aanpassen
+        not_ordered_msg: Je hebt nog niets bestelt
+        order_closed_msg: Sorry, deze bestelling is gesloten.
+        order_nopen_title: Waarbij rekening gehouden is met bestellingen van anderen
+        order_not_open: Ontvangen
+        order_now: Dit is je kans!
+        order_open: Beschikbaar
+        ordered: Besteld
+        ordered_title: Hoeveelheid + tolerantie
+        show_hide: Niet bestelde artikelen tonen/verbergen
+        show_note: Opmerking
+        title: Artikeloverzicht
+        unit_price: Stuksprijs
+      comment: Notitie
       comments:
-        title: Comments
-      not_ordered: You didn’t order.
-      sum: Sum
-      title: Your order result for %{order}
+        title: Commentaar
+      not_ordered: Je hebt niets bestelt.
+      sum: Som
+      title: Jouw bestelling voor %{order}
     switch_order:
-      remaining: "%{remaining} remaining"
-      title: Current orders
+      remaining: "nog %{remaining}"
+      title: Lopende bestellingen
     update:
-      error_general: The order couldn’t be updated due to a bug.
-      error_stale: Someone else has ordered in the meantime, couldn't update the order.
-      notice: The order was saved.
+      error_general: Er is een probleem opgetreden, de bestelling kon niet bijgewerkt worden.
+      error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon je bestelling niet opgeslagen worden. Sorry!
+      notice: De bestelling is opgeslagen.
   helpers:
     application:
-      edit_user: Edit user
-      nick_fallback: "(no username)"
+      edit_user: Gebruiker bewerken
+      nick_fallback: "(geen gebruikersnaam)"
       role_admin: Admin
-      role_article_meta: Articles
-      role_finance: Finance
-      role_invoices: Invoices
-      role_orders: Orders
-      role_pickups: Pickup days
-      role_suppliers: Suppliers
-      show_google_maps: Show it on Google maps
-      sort_by: Sort by %{text}
+      role_article_meta: Artikelen
+      role_finance: Financiën
+      role_invoices: Rekeningen
+      role_orders: Bestelling
+      role_pickups: Ophaaldagen
+      role_suppliers: Leveranciers
+      show_google_maps: Op Google maps bekijken
+      sort_by: Sorteren op %{text}
     deliveries:
-      new_invoice: New invoice
-      show_invoice: Show invoice
+      new_invoice: Nieuwe factuur
+      show_invoice: Factuur tonen
     orders:
-      old_price: Old price
-      option_choose: Choose supplier/stock
-      option_stock: Stock
-      order_pdf: Create PDF
+      old_price: Oude prijs
+      option_choose: Leverancier/voorraad kiezen
+      option_stock: Voorraad
+      order_pdf: PDF maken
     submit:
       invite:
-        create: send invitation
+        create: uitnodiging versturen
     tasks:
-      required_users: "%{count} members are still needed!"
-      task_title: "%{name} (%{duration}h)"
+      required_users: "Nog %{count} leden nodig!"
+      task_title: "%{name} (%{duration}u)"
   home:
     apple_bar:
-      desc: 'This shows the proportion of completed tasks to the volume of orders for your ordergroup in comparison to the average of the Foodcoop. In practice: for every %{amount} of total orders, you should execute a task!'
-      more_info: More information
-      points: 'Your current apple points: %{points}'
-      warning: Warning, if you have less then %{threshold} of apple points, you are not allowed to place an order!
-    changes_saved: Changes saved.
+      desc: "Deze balk laat zien hoeveel taken je gedaan hebt per bestelhoeveelheid, vergeleken met het gemiddelde van de foodcoop.\nPraktisch: voor iedere %{amount} aan totale bestellingen moet je een taak te doen!"
+      more_info: Meer informatie
+      points: 'Appelpuntenstand: %{points}'
+      warning: Opgelet, als je minder dan %{threshold} appelpunten hebt, kun je geen bestelling plaatsen!
+    changes_saved: Wijzigingen opgeslagen.
     index:
       due_date_format: "%A %d %B"
       my_ordergroup:
-        last_update: Last update was %{when} ago
-        title: My ordergroup
+        last_update: Laatst gewijzigd %{when} geleden
+        title: Mijn huishouden
         transactions:
-          title: Last Transactions
-          view: Show account statement
+          title: Laatste transacties
+          view: Rekeningafschrift tonen
       ordergroup:
-        title: Engagement of your ordergroup
+        title: Betrokkenheid van je huishouden
       tasks_move:
-        action: Take over tasks/decline tasks
-        desc: You are responsible for these tasks.
-        title: Take over tasks
+        action: Taken op je nemen/annuleren
+        desc: Je bent voor de volgende taken verantwoordelijk.
+        title: Taken op je nemen
       tasks_open:
-        title: Open tasks
-        view_all: Show all tasks
-      title: Homepage
-      your_tasks: Your tasks
-    no_ordergroups: You are unfortunately not a member of an ordergroup.
+        title: open taken
+        view_all: Alle taken tonen
+      title: Hoofdpagina
+      your_tasks: Jouw taken
+    no_ordergroups: Jammergenoeg ben je niet aangesloten bij een huishouden.
     ordergroup:
-      account_summary: Account Statement
-      invite: Invite a new Person
-      search: Search ...
-      title: My ordergroup
-    ordergroup_cancelled: You cancelled membership of the group %{group}.
+      account_summary: Rekeningafschrift
+      invite: Iemand uitnodigen
+      search: Zoeken ...
+      title: Mijn huishouden
+    ordergroup_cancelled: Je bent geen lid meer van de groep %{group}.
     profile:
       groups:
-        cancel: Leave group
-        cancel_confirm: Are you sure you want to leave this group?
-        invite: Invite new member
-        title: You are member of the groups
-      title: My Profile
+        cancel: Verlaat groep
+        cancel_confirm: Weet je zeker dat je deze groep wilt verlaten?
+        invite: Nieuw lid uitnodigen
+        title: Je bent lid van de groepen
+      title: Mijn Profiel
       user:
-        since: "(member for %{when})"
+        since: "(gebruiker sinds %{when})"
         title: "%{user}"
     start_nav:
-      admin: Administration
+      admin: Administratie
       finances:
-        accounts: Update accounts
-        settle: Account orders
-        title: Finances
+        accounts: Tegoeden bijwerken
+        settle: Bestellingen afrekenen
+        title: Financiën
       foodcoop: Foodcoop
-      members: Members
-      new_ordergroup: New ordergroup
-      new_user: New member
+      members: Leden
+      new_ordergroup: Nieuw huishouden
+      new_user: Nieuw lid
       orders:
-        end: Close orders
-        overview: Overview of orders
-        title: Orders
+        end: Bestellingen sluiten
+        overview: Overzicht van bestellingen
+        title: Bestellingen
       products:
-        edit: Update products
-        edit_stock: Edit stock
-        edit_suppliers: Edit suppliers
-        title: Products
-      tasks: My tasks
-      title: Directly to ...
+        edit: Produkten wijzigen
+        edit_stock: Voorraad wijzigen
+        edit_suppliers: Leveranciers wijzigen
+        title: Producten
+      tasks: Mijn taken
+      title: Direct naar ...
   invites:
     errors:
-      already_member: is already in use. Person is already a member of this Foodcoop.
+      already_member: is al lid van de foodcoop.
     modal_form:
-      body: "<p>Here you can invite someone who isn't part of the foodcoop to join your ordergroup <b>%{group}</b>. After the invitation is accepted, the person will be able to add (and remove) articles to your order.</p> <p>This is a great way to introduce someone to the foodcoop, or to order with multiple people in the same household.</p>"
-      title: Invite person
+      body: "<p>Hier kun je iemand uitnodigen om deel te worden van de foodcoop in jouw bestelgroep <b>%{group}</b>. Als de uitnodiging is geaccepteerd, zal hij of zij artikelen kunnen toevoegen (en verwijderen) aan jouw bestelling.</p> <p>Dit is een makkelijke manier om een vriend of vriendin de foodcoop eens uit te laten proberen, of om met huisgenoten samen bestellingen te doen.</p>"
+      title: Iemand uitnodigen
     new:
-      action: Send invite
-      body: "<p>Here you can add a person to the group <b>%{group}</b>, who is not yet a member of the foodcoop.</p>"
-    success: User was invited successfully.
+      action: Uitnodiging versturen
+      body: "<p>Hier kun je iemand die nog geen lid is, uitnodigen voor de groep <b>%{group}</b>.</p>"
+    success: Persoon is uitgenodigd.
   js:
     ordering:
-      confirm_change: Modifications to this order will be lost when you change the order. Do you want to lose the changes you made and continue?
+      confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
   layouts:
     email:
       footer_1_separator: "--"
@@ -1074,630 +1150,627 @@ nl:
       footer_4_help: 'Help: %{url}'
     foodsoft: Foodsoft
     footer:
-      revision: revision %{revision}
+      revision: revisie %{revision}
     header:
       feedback:
-        desc: Found a bug? Suggestions? Ideas? Review?
+        desc: Foutje gevonden? Suggesties? Ideeën? Commentaar?
         title: Feedback
       help: Help
-      logout: Logout
-      ordergroup: My ordergroup
-      profile: Edit profile
+      logout: Uitloggen
+      ordergroup: Mijn huishouden
+      profile: Profiel aanpassen
     logo: "<span>food</span>soft"
   lib:
     render_pdf:
-      page: Page %{number} of %{count}
+      page: Pagina %{number} van %{count}
   login:
     accept_invitation:
-      body: "<p>You are invited to be part of the foodcoop %{foodcoop} as a member of the group <b>%{group}</b>.</p> <p>If you want to participate, please fill in this form.</p> <p>Naturally, your information wll not be shared with third parties for any reason. You can decide how much of your personal information should be visible for everyone. 'All' means all Foodcoop-members. Please note that the administrators do have access to your information.</p>"
-      submit: Create a Foodsoft account
-      title: Invitation to %{name}
+      body: "<p>Je bent uitgenodigd als lid voor foodcoop %{foodcoop} in de groep <b>%{group}</b>.</p> <p>Als je wilt meedoen, vul dan dit formulier in.</p> <p>Natuurlijk zullen we je informatie niet delen met anderen. Je kunt zelf aangeven, welke informatie voor andere leden beschikbaar is (maar beheerders hebben daar altijd toegang toe).</p>"
+      submit: Foodsoft account aanmaken
+      title: Uitnodiging voor %{name}
     controller:
       accept_invitation:
-        notice: Congratulations, your account was created. You can login now.
-      error_group_invalid: The group in which you were invited doesn’t exist anymore.
-      error_invite_invalid: Your invite is not valid (anymore).
-      error_token_invalid: Invalid or expired token. Please try again.
+        notice: Gefeliciteerd, je account is aangemaakt. Nu kun je inloggen.
+      error_group_invalid: De groep waarin je bent uitgenodigd bestaat niet meer.
+      error_invite_invalid: Deze uitnodiging is niet (meer) geldig.
+      error_token_invalid: Onjuist of verlopen token. Probeer het opnieuw.
       reset_password:
-        notice: If your email is registered here, you will receive a message with a link to reset your password. You may need to check your spam folder.
+        notice: 'Als je e-mailadres hier is geregistreerd, krijg je een bericht met een link om je wachtwoord opnieuw in te stellen. Tip: kijk ook in je spam-folder.'
       update_password:
-        notice: Your password was updated. You can login now.
+        notice: Je wachtwoord is veranderd. Nu kun je weer inloggen.
     forgot_password:
-      body: "<p>No problem, you can choose a new password.</p> <p>Please fill in the email address with which you are registered here. Then you will receive an email with further instructions.</p>"
-      submit: Request new password
-      title: Forgot password?
+      body: "<p>Geen probleem, je kunt hier een nieuw wachtwoord instellen.</p> <p>Vul het emailadres in waarmee je je hebt geregistreerd, dan krijg je een email met verdere instructies.</p>"
+      submit: Nieuw wachtwoord aanvragen
+      title: Wachtwoord vergeten?
     new_password:
-      body: "<p>Please fill in the new password for <b>%{user}</b></p>"
-      submit: Save new password
-      title: New password
+      body: "<p>Geef nieuw wachtwoord voor <b>%{user}</b></p>"
+      submit: Nieuw wachtwoord opslaan
+      title: Nieuw wachtwoord
   mailer:
     dateformat: "%d %b"
     feedback:
-      header: "%{user} wrote at %{date}:"
-      subject: Feedback for Foodsoft
+      header: "%{user} schreef op %{date}:"
+      subject: Feedback van %{email}
     from_via_foodsoft: "%{name} via Foodsoft"
     invite:
-      subject: Invitation to the Foodcoop
+      subject: Uitnodiging voor de foodcoop
       text: |
-        Hi!
+        Hallo!
 
-        %{user} <%{mail}> has invited you to join the group "%{group}".
-        To accept the invitation and to join the foodcoop please follow this link: %{link}
-        This link works only once and expires on %{expires}.
+        %{user} <%{mail}> heeft je uitgenodigd om deel te worden van de groep "%{group}".
+        Om lid te worden van de foodcoop en de uitnodiging te accepteren, ga naar: %{link}
+        Dit kan maar een keer en uiterlijk tot %{expires}.
 
-
-        Greetings, your Foodsoft Team!
+        Groeten van de foodcoop.
     negative_balance:
-      subject: Negative account balance
+      subject: Negatief tegoed
       text: |
-        Dear %{group},
+        Beste %{group},
 
-        Your account balance has dropped below zero due to a booking on %{when}: %{balance}
+        Je tegoed is onder nul gekomen op %{when}: %{balance}
 
-        There was a charge of %{amount} for "%{note}" by %{user}.
+        Er werd %{amount} afgeschreven voor "%{note}" door %{user}.
 
-        Please deposit your account as soon as possible.
+        Zorg er alsjeblieft voor dat tegoed weer positief wordt.
 
 
-
-        Kind regards from %{foodcoop}.
+        Hartlijke groet van %{foodcoop}.
     not_enough_users_assigned:
-      subject: '"%{task}" still needs people!'
+      subject: '"%{task}" heeft nog mensen nodig!'
       text: |
-        Dear %{user},
+        Beste %{user},
 
-        The Task '%{task}' of your working group is due on %{when},
-        and could use some more contributors!
+        De taak '%{task}' van jouw werkgroep op %{when} kan nog iemand gebruiken!
 
-        If you haven’t assigned yourself to this task yet it’s your chance now:
+        Als je je hiervoor nog niet aangemeld hebt is dit je kans:
 
         %{workgroup_tasks_url}
 
-        Your Tasks: %{user_tasks_url}
+        Jouw taken: %{user_tasks_url}
     order_result:
-      subject: 'Order closed: %{name}'
+      subject: 'Bestelling gesloten: %{name}'
       text0: |
-        Dear %{ordergroup},
+        Beste %{ordergroup}.
 
-        The order for "%{order}" has been closed by %{user} on %{when}.
-        The following articles have been ordered for your ordergroup:
-      text1: |-
-        o Total sum: %{sum}
+        De bestelling voor "%{order}" is om %{when} gesloten door %{user}.
+      text1: |
+        Het kan vermoedelijk worden opgehaald op %{pickup}.
+      text2: |
+        De volgende artikelen zijn voor jouw huishouden besteld:
+      text3: |-
+        o Totaal: %{sum}
 
-        You can view the order online: %{order_url}
+        Je kunt de bestelling online bekijken: %{order_url}
 
 
-        Kind regards from %{foodcoop}.
+        Vriendelijke groet van %{foodcoop}.
     order_result_supplier:
-      subject: New order for %{name}
+      subject: Nieuwe bestelling voor %{name}
       text: |
-        Hi!
+        Beste mijnheer/mevrouw,
 
-        Foodcoop %{foodcoop} would like to place an order.
+        Foodcoop %{foodcoop} wil graag een bestelling plaatsen.
 
-        Please find a PDF and spreadsheet attached.
+        Een PDF en spreadsheet vind u meegestuurd.
 
-        Kind regards,
+        Met vriendelijke groet,
         %{user}
         %{foodcoop}
     reset_password:
-      subject: New password for %{username}
+      subject: Nieuw wachtwoord voor %{username}
       text: |
-        Hi %{user},
+        Beste %{user},
 
-        You have (or someone else has) requested a new password.
-        In order to choose a new password follow this link: %{link}
-        This link works only once and expires on %{expires}.
-        If you don't want to change your password, just ignore this message. Your password hasn't been changed yet.
+        Jij (of iemand anders) heeft een nieuw wachtwoord aangevraagd voor het foodcoop ordersysteem.
+        Ga naar de volgende pagina om een nieuw wachtwoord in te voeren: %{link}
+        Dit kan slechts éenmaal gedaan worden, en op zijn laatst op %{expires}.
+        Wanneer je je wachtwoord niet wilt veranderen, hoef je niets te doen; dan blijft je huidige wachtwoord geldig.
 
-
-        Greetings, your Foodsoft Team!
+        Groeten van je foodcoop!
     upcoming_tasks:
-      nextweek: 'Tasks for the next week:'
-      subject: Tasks are due!
+      nextweek: 'Taken voor komende week:'
+      subject: Er is een taak te doen!
       text0: |
-        Dear %{user},
+        Beste %{user},
 
-        You are asigned to the task "%{task}". This task is due by tomorrow (%{when})!
+        Je bent opgegeven voor "%{task}". Deze taak is morgen te vervullen (%{when})!
       text1: |
-        My tasks: %{user_tasks_url}
+        Je taken: %{user_tasks_url}
 
-
-        Kind regards from %{foodcoop}.
+        Groeten van %{foodcoop}.
   messages_mailer:
     foodsoft_message:
       footer: |
-        Reply: %{reply_url}
-        See message online: %{msg_url}
-        Messaging options: %{profile_url}
+        Antwoorden: %{reply_url}
+        Bericht online lezen: %{msg_url}
+        Berichtinstellingen: %{profile_url}
       footer_group: |
-        Sent to group: %{group}
+        Verzenden aan groep: %{group}
   model:
     delivery:
-      each_stock_article_must_be_unique: Each stock article must not be listed more than once.
+      each_stock_article_must_be_unique: In een levering mag ieder voorraadsartikel maar een keer voorkomen.
     financial_transaction_type:
-      no_delete_last: At least one financial transaction type must exist.
+      no_delete_last: Er moet ten minste één financiëel transactie type bestaan.
     group_order:
-      stock_ordergroup_name: Stock (%{user})
-    invoice:
-      invalid_mime: has an invalid MIME type (%{mime})
+      stock_ordergroup_name: Voorraad (%{user})
     membership:
-      no_admin_delete: Membership can not be withdrawn as you are the last administrator.
+      no_admin_delete: Lidmaatschap kan niet beeindigd worden. Je bent de laatste administrator.
     order_article:
-      error_price: must be specified and have a current price price
+      error_price: moet ingevuld worden en een huidige prijs hebben
     user:
-      no_ordergroup: no ordergroup
+      no_ordergroup: geen huishouden
     group_order_article:
-      order_closed: Order is closed and cannot be modified
+      order_closed: Bestelling is gesloten en kan niet worden gewijzigd
   navigation:
     admin:
-      config: Configuration
-      finance: Finances
-      home: Overview
-      mail_delivery_status: Email problems
-      ordergroups: Ordergroups
-      title: Administration
-      users: Users
-      workgroups: Workgroups
+      config: Instellingen
+      finance: Financiën
+      home: Overzicht
+      mail_delivery_status: Emailproblemen
+      ordergroups: Huishoudens
+      title: Administratie
+      users: Gebruikers
+      workgroups: Werkgroepen
     articles:
-      categories: Categories
-      stock: Stock
-      suppliers: Suppliers/articles
-      title: Articles
+      categories: Categoriën
+      stock: Voorraad
+      suppliers: Leveranciers/producten
+      title: Producten
     dashboard: Dashboard
     finances:
-      accounts: Manage accounts
-      balancing: Account orders
-      bank_accounts: Bank Accounts
-      home: Overview
-      invoices: Invoices
-      title: Finances
+      accounts: Ledenbetalingen
+      balancing: Bestellingen afrekenen
+      bank_accounts: Bankrekeningen
+      home: Overzicht
+      invoices: Facturen
+      title: Financiën
     foodcoop: Foodcoop
-    members: Members
-    ordergroups: Ordergroups
+    members: Leden
+    ordergroups: Huishoudens
     orders:
-      archive: My Orders
-      manage: Manage orders
-      ordering: Place order!
-      pickups: Pickup days
-      title: Orders
-    tasks: Tasks
-    workgroups: Workgroups
+      archive: Mijn bestellingen
+      manage: Beheer bestellingen
+      ordering: Plaats bestelling!
+      pickups: Ophaaldagen
+      title: Bestellingen
+    tasks: Taken
+    workgroups: Werkgroepen
   number:
     percentage:
       format:
         strip_insignificant_zeros: true
   order_articles:
     edit:
-      stock_alert: The price of stock articles cannot be changed!
-      title: Update article
+      stock_alert: De prijs van voorraadartikelen kan niet aangepast worden!
+      title: Artikel bijwerken
     new:
-      title: Add delivered article to order
+      title: Geleverd artikel aan bestelling toevoegen
   ordergroups:
     edit:
-      title: Edit ordergroups
+      title: Huidhouden bewerken
     index:
-      title: Ordergroups
+      title: Huishoudens
     model:
-      error_single_group: "%{user} is already a member of another ordergroup"
-      invalid_balance: is not a valid number
+      error_single_group: "%{user} behoort al tot een ander huishouden"
+      invalid_balance: is geen geldig nummer
   orders:
     articles:
-      article_count: 'Ordered articles:'
-      prices: Net/gross price
-      prices_sum: 'Sum (net/gross price):'
-      units_full: Full units
-      units_ordered: Units ordered
+      article_count: 'Bestelde artikelen:'
+      prices: Netto/bruto prijs
+      prices_sum: 'Totaal (netto/bruto prijs):'
+      units_full: Volle eenheden
+      units_ordered: Bestelde eenheden
     create:
-      notice: The order was created.
+      notice: De bestelling is aangemaakt.
     edit:
-      title: 'Edit order: %{name}'
+      title: 'Bestelling aanpassen: %{name}'
     edit_amount:
-      field_locked_title: The distribution of this article among the ordergroups was changed manually. This field is locked to protect those changes. To redistribute and overwrite those changes, press the unlock button and change the amount.
-      field_unlocked_title: The distribution of this article among the ordergroups was changed manually. When you change the amount, those manual changes will be overwritten.
+      field_locked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast, daarom is dit veld beschermd. Om dit artikel toch te herverdelen en de handmatige wijzigingen teniet te doen kun je op de knop met het slot drukken.
+      field_unlocked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast. Als je de hoeveelheid hier verandert, worden deze handmatige aanpassingen overschreven.
     edit_amounts:
-      no_articles_available: No articles to add.
+      no_articles_available: Geen artikelen om toe te voegen.
     fax:
-      amount: Amount
-      articles: Articles
-      delivery_day: Delivery day
-      heading: Order for %{name}
-      name: Name
-      number: Number
-      to_address: Shipping address
+      amount: Aantal
+      articles: Artikelen
+      delivery_day: Bezorgdag
+      heading: Bestelling voor %{name}
+      name: Naam
+      number: Nummer
+      to_address: Verzendadres
     finish:
-      notice: The order has been closed.
+      notice: De bestelling is gesloten.
     form:
-      ignore_warnings: Ignore warnings
-      prices: Prices (net/FC)
-      select_all: Select all
-      stockit: In stock
-      title: Article
+      ignore_warnings: Waarschuwingen negeren
+      prices: Prijs (netto/FC)
+      select_all: Alles selecteren
+      stockit: Beschikbaar
+      title: Artikel
     index:
-      action_end: Close
-      action_receive: Receive
-      confirm_delete: Do you really want to delete the order?
-      confirm_end: Do you really want to close the order %{order}? There is no going back.
-      new_order: Create new order
-      no_open_or_finished_orders: There are currently no open or closed orders.
-      orders_finished: Closed
+      action_end: Sluiten
+      action_receive: Ontvangen
+      confirm_delete: Wil je de bestelling werkelijk verwijderen?
+      confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
+      new_order: Nieuwe bestelling openen
+      no_open_or_finished_orders: Er zijn momenteel geen open of gesloten bestellingen.
+      orders_finished: Gesloten
       orders_open: Open
-      orders_settled: Settled
-      title: Manage orders
+      orders_settled: Afgerekend
+      title: Bestellingen beheren
     model:
-      close_direct_message: Order settled without charging member accounts.
-      error_boxfill_before_ends: must be after the box-fill date (or remain empty)
-      error_closed: Order was already settled
-      error_nosel: At least one article must be selected. You may want to delete the order instead?
-      error_starts_before_boxfill: must be after the start date (or remain empty)
-      error_starts_before_ends: must be after the start date (or remain empty)
-      notice_close: 'Order: %{name}, until %{ends}'
-      stock: Stock
-      warning_ordered: 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted. To proceed, confirm below.'
-      warning_ordered_stock: 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them. Confirm below to proceed.'
+      close_direct_message: Bestelling afgerekend zonder bedragen in rekening te brengen bij huishoudens.
+      error_boxfill_before_ends: moet na de dozen-vul-datum zijn (of leeg blijven)
+      error_closed: Bestelling was al afgerekend
+      error_nosel: Er moet minstens één artikel geselecteerd zijn. Mogelijk wil je de bestelling verwijderen?
+      error_starts_before_boxfill: moet na de startdatum zijn (of leeg blijven)
+      error_starts_before_ends: moet na de startdatum zijn (of niet ingevuld worden)
+      notice_close: 'Bestelling: %{name}, tot %{ends}'
+      stock: Voorraad
+      warning_ordered: 'Opgelet: rood gemarkeerde artikelen zijn al besteld door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen van deze artikelen verwijderd. Bevestig onderaan om hiermee verder te gaan.'
+      warning_ordered_stock: 'Opgelet: rood gemarkeerde artikelen zijn al besteld of gekocht door leden. Als je ze hier deselecteert, worden alle bestaande ledenbestellingen/-aankopen van deze artikelen verwijderd, en worden ze niet afgerekend. Bevestig onderaan om hiermee verder te gaan.'
     new:
-      title: Create new order
+      title: Nieuwe bestelling openen
     receive:
-      add_article: Add article
-      consider_member_tolerance: consider tolerance
-      notice: 'Order received: %{msg}'
-      notice_none: No new articles to receive
-      rest_to_stock: rest to stock
-      submit: Receive order
-      surplus_options: 'Distribution options:'
-      title: Receiving %{order}
+      add_article: Artikel toevoegen
+      consider_member_tolerance: verdelen over tolerantie van leden
+      notice: 'Bestelling ontvangen: %{msg}'
+      notice_none: Geen nieuwe artikelen te ontvangen
+      rest_to_stock: naar voorraad
+      submit: Bestelling ontvangen
+      surplus_options: 'Overschot:'
+      title: 'Ontvangen: %{order}'
     send_to_supplier:
-      notice: The order has been sent to the supplier.
+      notice: De bestelling is naar de leverancier verzonden.
     show:
-      action_end: Close!
-      amounts: 'Net/gross sum:'
-      articles: Article overview
-      articles_ordered: 'Ordered articles:'
+      action_end: Sluiten!
+      amounts: 'Totaal netto/bruto:'
+      articles: Artikeloverzicht
+      articles_ordered: 'Bestelde artikelen:'
       comments:
-        title: Comments
-      comments_link: Comments
-      confirm_delete: Do you really want to delete the order?
+        title: Commentaar
+      comments_link: Commentaar
+      confirm_delete: Wil je deze bestelling echt verwijderen?
       confirm_end: |-
-        Do you really want to close the order %{order}?
-        There is no going back.
-      confirm_send_to_supplier: The order has been sent to the supplier already on %{when}. Do you really want to send it again?
-      create_invoice: Add invoice
-      description1_order: "%{state} order from %{supplier} opened by %{who},"
+        Wil je de bestelling %{order} echt sluiten?
+        Hierna kan zij niet opnieuw geopend worden.
+      confirm_send_to_supplier: De bestelling is al naar de leverancier gestuurd op %{when}. Wil je deze opnieuw verzenden?
+      create_invoice: Rekening toevoegen
+      description1_order: "%{state} order van %{supplier} geopend door %{who},"
       description1_period:
-        pickup: and can be picked up on %{pickup}
-        starts: open from %{starts}
-        starts_ends: open from %{starts} until %{ends}
-      description2: "%{ordergroups} ordered %{article_count} articles, with a total value of %{net_sum} / %{gross_sum} (net / gross)."
-      group_orders: 'Group orders:'
+        pickup: en kan opgehaald worden op %{pickup}
+        starts: open van %{starts}
+        starts_ends: open van %{starts} tot %{ends}
+      description2: "%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto)."
+      group_orders: 'Ledenbestellingen:'
       search_placeholder:
-        articles: Search for articles...
-        default: Search for articles...
-        groups: Search for ordergroups...
-      search_reset: Reset search
-      send_to_supplier: Send to supplier
-      show_invoice: Show invoice
-      sort_article: Sorted in articles
-      sort_group: Sorted in groups
-      stock_order: Stock Order
-      title: 'Order: %{name}'
-      warn_not_closed: Warning, order is not yet settled.
+        articles: Artikelen zoeken...
+        default: Artikelen zoeken...
+        groups: Huishoudens zoeken...
+      search_reset: Zoekopdracht wissen
+      send_to_supplier: Verzenden naar leverancier
+      show_invoice: Rekening tonen
+      sort_article: Per artikel
+      sort_group: Per huishouden
+      stock_order: Voorraadbestelling
+      title: 'Bestelling: %{name}'
+      warn_not_closed: Opgelet, bestelling is nog niet afgerekend.
     state:
-      closed: settled
-      finished: closed
-      open: open
+      closed: afgerekend
+      finished: gesloten
+      open: lopende
     update:
-      notice: The order was updated.
+      notice: De bestelling is bijgewerkt.
     update_order_amounts:
-      msg1: "%{count} articles (%{units} units) updated"
-      msg2: "%{count} (%{units}) using tolerance"
-      msg4: "%{count} (%{units}) left over"
+      msg1: "%{count} artikelen (%{units} eenheden) bijgewerkt"
+      msg2: "%{count} (%{units}) naar tolerantie"
+      msg4: "%{count} (%{units}) overgebleven"
   pickups:
     document:
-      empty_selection: At least one order must be selected.
-      filename: Pickup for %{date}
-      invalid_document: Invalid document type
-      title: Pickup for %{date}
+      empty_selection: Ten minste één bestelling moet worden geselecteerd.
+      filename: Ophalen op %{date}
+      invalid_document: Ongeldig type document
+      title: Ophalen op %{date}
     index:
-      article_pdf: Article PDF
-      group_pdf: Group PDF
+      article_pdf: Artikel PDF
+      group_pdf: Huishouden PDF
       matrix_pdf: Matrix PDF
-      title: Pickup days
+      title: Ophaaldagen
   sessions:
-    logged_in: Logged in!
-    logged_out: Logged out!
-    login_invalid_email: Invalid email address or password
-    login_invalid_nick: Invalid username or password
+    logged_in: Ingelogd!
+    logged_out: Uitgelogd!
+    login_invalid_email: Onjuist emailadres of wachtwoord
+    login_invalid_nick: Onjuiste gebruikersnaam of wachtwoord
     new:
-      forgot_password: Forgot password?
-      login: Login
-      nojs: Attention, cookies and javascript have to be activated! Please switch off %{link}.
+      forgot_password: Wachtwoord vergeten?
+      login: Aanmelden
+      nojs: Opgelet, cookies en javascript moeten toegelaten worden! %{link} uitzetten, alsjeblieft.
       noscript: NoScript
-      title: Foodsoft login
+      title: Foodsoft aanmelden
   shared:
     articles:
-      ordered: Ordered
-      ordered_desc: Number of articles as ordered by member (amount + tolerance)
-      received: Received
-      received_desc: Number of articles that (will be) received by member
+      ordered: Besteld
+      ordered_desc: Hoeveel artikelen het lid besteld heeft (aantal + tolerantie)
+      received: Ontvangen
+      received_desc: Hoeveel artikelen het lid is toegewezen danwel heeft gekregen
     articles_by:
-      price: Total price
-      price_sum: Sum
+      price: Totaalprijs
+      price_sum: Som
     group:
-      access: Access to
-      activated: activated
-      apple_limit: Apple points order limit
-      break: from %{start} to %{end}
-      deactivated: deactivated
+      access: Toegang tot
+      activated: actief
+      apple_limit: Appelpunten bestellingslimiet
+      break: van %{start} tot %{end}
+      deactivated: inactief
     group_form_fields:
-      search: Search ...
-      search_user: Search user
-      user_not_found: No user found
+      search: Zoeken ...
+      search_user: Gebruiker zoeken
+      user_not_found: Geen gebruiker gevonden
     open_orders:
-      no_open_orders: There are no current orders
-      not_enough_apples: Attention your ordergroup has too few apple points to place an order!
-      title: Current orders
-      total_sum: Total sum
-      who_ordered: Who ordered?
+      no_open_orders: Er zijn momenteel geen lopende bestellingen.
+      not_enough_apples: Opgelet, je huishouden heeft niet genoeg appelpunten om te kunnen bestellen!
+      title: Lopende bestellingen
+      total_sum: Totaalsom
+      who_ordered: Wie heeft besteld?
     order_download_button:
-      article_pdf: Article PDF
-      download_file: Download file
+      article_pdf: Artikelen PDF
+      download_file: Bestand downloaden
       fax_csv: Fax CSV
       fax_pdf: Fax PDF
-      fax_txt: Fax text
-      group_pdf: Group PDF
+      fax_txt: Fax tekst
+      group_pdf: Huishoudens PDF
       matrix_pdf: Matrix PDF
-      title: Download
+      title: Downloaden
     task_list:
-      accept_task: Accept task
-      done: Done
-      done_q: Done?
-      mark_done: Mark task as done
-      reject_task: Reject task
-      who: Who is doing it?
-      who_hint: "(How much are still needed?)"
+      accept_task: Taak accepteren
+      done: Gedaan
+      done_q: Gedaan?
+      mark_done: Als gedaan markeren
+      reject_task: Taak laten vallen
+      who: Wie doet het?
+      who_hint: "(Hoeveel zijn er nog nodig?)"
     user_form_fields:
-      contact_address_hint: The address of your ordergroup. If you update this, it changes for other members of the ordergroup as well.
-      messagegroups: Join or leave message groups
+      contact_address_hint: Het adres van je huishouden. Als je dit wijzigt, verandert het ook voor de andere leden van je huishouden.
+      messagegroups: Aan- en afmelden voor berichtengroepen
     workgroup_members:
-      title: Group memberships
+      title: Groepsleden
   simple_form:
     error_notification:
-      default_message: Errors were found. Please check the form.
+      default_message: Problemen gevonden, controleer alsjeblieft de invoer.
     hints:
       article:
-        unit: e.g. KG or 1L or 500g
+        unit: 'Bijv.: KG of 1L of 500g'
       article_category:
-        description: comma-separated list of category names recognised at import/synchronisation
+        description: komma-gescheiden lijst van namen die herkend worden bij uploaden/synchroniseren
       order_article:
-        units_to_order: If you change the total amount of delivered units, you also have to change individual group amounts by clicking on the article name. They will not be automatically recalculated and so ordergroups may be accounted for articles that were not delivered!
-        update_global_price: Also update the price of future orders
+        units_to_order: Als je het aantal geleverde eenheden wijzigt, moet je daarna de hoeveelheden voor huishoudens aanpassen. Klik daarvoor op de artikelnaam. Als je dit vergeet, kunnen huishoudens belast worden voor artikelen die ze niet hebben gekregen!
+        update_global_price: Prijs ook aanpassen voor toekomstige bestellingen
       stock_article:
         copy:
-          name: Please modify
+          name: Wijzigen alsjeblieft
         edit_stock_article:
-          price: "<ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>"
+          price: "<ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>"
       supplier:
-        min_order_quantity: The minimum amount which has to be ordered will be shown during the order process and should motivate ordering
+        min_order_quantity: De minimum bestelhoeveelheid wordt getoond bij het bestellen en is bedoeld om leden te motiveren genoeg te bestellen.
       task:
-        duration: How long will the task take, 1-3 hours
-        required_users: How many users will be needed in total?
-      tax: In percentage, standard is 7,0
+        duration: Hoe lang de taak duurt, 1-3 uur.
+        required_users: Hoeveel mensen zijn in totaal nodig?
+      tax: Percentage
     labels:
       settings:
         notify:
-          negative_balance: Inform me when my ordergroup has a negative balance.
-          order_finished: Inform me about my order result (when the order is closed).
-          upcoming_tasks: Remind me of upcoming tasks.
+          negative_balance: Informeer me wanneer mijn huishouden een negatief saldo krijgt.
+          order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).
+          upcoming_tasks: Herinner me aan aankomende taken.
         profile:
-          email_is_public: Email is visible for other members.
-          language: Language
-          name_is_public: Name is visible for other members.
-          phone_is_public: Phone number is visible for other members.
+          email_is_public: E-mail is zichtbaar voor andere leden.
+          language: Taal
+          name_is_public: Naam is zichtbaar voor andere leden.
+          phone_is_public: Telefoonnummer is zichtbaar voor andere leden.
         settings_group:
-          messages: Messages
+          messages: Berichten
           privacy: Privacy
-    'no': 'No'
+    'no': 'Nee'
     options:
       settings:
         profile:
           language:
-            de: German
-            en: English
-            es: Spanish
-            fr: French
-            nl: Dutch
+            de: Duits
+            en: Engels
+            es: Spaans
+            fr: Frans
+            nl: Nederlands
     required:
       mark: "*"
-      text: required
-    'yes': 'Yes'
+      text: verplicht
+    'yes': 'Ja'
   stock_takings:
     create:
-      notice: Inventory was created successfully.
+      notice: Inventaris is opgenomen.
     edit:
-      title: Edit inventory
+      title: Inventaris aanpassen
     index:
-      new_inventory: Create new inventory
-      title: Inventory overview
+      new_inventory: Nieuwe inventaris opnemen
+      title: Inventarisoverzicht
     new:
-      amount: Amount
-      create: create
-      stock_articles: Stock articles
-      temp_inventory: temporary inventory
-      text_deviations: Please fill in all surplus deviations from the %{inv_link}. For reduction, use a a negative number.
-      text_need_articles: You have to %{create_link} a new stock article before you can use it here.
-      title: Create new inventory
+      amount: Aantal
+      create: aanmaken
+      stock_articles: Voorraadartikelen
+      temp_inventory: tijdelijke inventaris
+      text_deviations: Vul alle afwijkingen in van de %{inv_link}. Als er minder is dan vermeld, gebruik dan een negatief getal.
+      text_need_articles: Je moet een nieuw voorraadartikel %{create_link} voordat je het hier kunt gebruiken.
+      title: Inventaris opnemen
     show:
-      amount: Amount
-      article: Article
-      confirm_delete: Do you really want to delete the inventory?
-      date: Date
-      note: Note
-      overview: Inventory overview
-      supplier: Supplier
-      title: Show inventory
-      unit: Unit
+      amount: Aantal
+      article: Artikel
+      confirm_delete: Wil je de inventaris echt verwijderen?
+      date: Datum
+      note: Notitie
+      overview: Inventarisoverzicht
+      supplier: Leverancier
+      title: Inventarisoverzicht
+      unit: Eenheid
     stock_takings:
-      confirm_delete: Are you sure you want to delete this?
-      date: Date
-      note: Note
+      confirm_delete: Weet je zeker dat je dit wilt verwijderen?
+      date: Datum
+      note: Notitie
     update:
-      notice: Inventory was updated.
+      notice: Inventarisatie is bijgewerkt.
   stockit:
     check:
-      not_empty: "%{name} could not be deleted, the inventory is not zero."
+      not_empty: "%{name} kon niet worden verwijderd, de inventaris is niet leeg."
     copy:
-      title: Copy stock article
+      title: kopieer het voorraadartikel
     create:
-      notice: New stock article "%{name}" was created.
+      notice: Voorraadartikel "%{name}" is aangemaakt.
     derive:
-      title: Add stock article using template
+      title: Voorraadartikel van product maken
     destroy:
-      notice: Article %{name} was deleted.
+      notice: Artikel %{name} is verwijdered.
     edit:
-      title: Edit stock articles
+      title: Voorraadartikelen bewerken
     form:
-      copy_stock_article: copy stock article
-      price_hint: To avoid choas, it is not possible to edit the prices of already added stock articles until further notice.
+      copy_stock_article: vooraadartikel kopiëren
+      price_hint: Om chaos te voorkomen, kun je de prijs van bestaande voorraadartikelen niet aanpassen.
     index:
-      confirm_delete: Are you sure you want to delete?
-      new_delivery: New delivery ...
-      new_stock_article: Add new stock article
-      new_stock_taking: Add inventory
-      order_online: Put stock order online
-      show_stock_takings: Inventory overview
-      stock_count: 'Number of articles:'
-      stock_worth: 'Current stock value:'
-      title: Stock (%{article_count})
-      toggle_unavailable: Show/hide unavailable articles
-      view_options: View options
+      confirm_delete: Weet je zeker dat je dit wilt verwijderen?
+      new_delivery: Nieuwe levering ...
+      new_stock_article: Nieuw voorraadartikel
+      new_stock_taking: Inventaris nemen
+      order_online: Voorraadbestelling openen
+      show_stock_takings: Inventarisoverzicht
+      stock_count: 'Aantal artikelen:'
+      stock_worth: 'Waarde van huidige voorraad:'
+      title: Voorraad (%{article_count})
+      toggle_unavailable: Niet beschikbare artikelen tonen/verbergen
+      view_options: Weergave
     new:
-      search_text: 'Search for articles in all catalogues:'
-      title: Add new stock article
+      search_text: 'Artikelen zoeken in alle catalogi:'
+      title: Nieuw voorraadartikel maken
     show:
-      change_quantity: Change
-      datetime: Time
-      new_quantity: New quantity
-      reason: Reason
-      stock_changes: Stock quantity changes
+      change_quantity: Verandering
+      datetime: Tijd
+      new_quantity: Nieuw aantal
+      reason: Reden
+      stock_changes: Verloop
     update:
-      notice: Stock article %{name} was saved.
+      notice: Voorraadartikel "%{name}" is bijgewerkt.
   suppliers:
     create:
-      notice: Supplier was created
+      notice: Leverancier is aangemaakt.
     destroy:
-      notice: Supplier was deleted
+      notice: Leverancier is verwijderd
     edit:
-      title: Edit supplier
+      title: Leverancier bewerken
     index:
-      action_import: Import supplier from external database
-      action_new: Create new supplier
-      articles: articles (%{count})
-      confirm_del: Do you really want to delete the supplier %{name}?
-      deliveries: deliveries (%{count})
-      stock: in stock (%{count})
-      title: Suppliers
+      action_import: Leverancier uit externe database importeren
+      action_new: Leverancier toevoegen
+      articles: artikelen (%{count})
+      confirm_del: Leverancier %{name} echt verwijderen?
+      deliveries: leveringen (%{count})
+      stock: op voorraad (%{count})
+      title: Leveranciers
     new:
-      title: New supplier
+      title: Nieuwe leverancier
     shared_supplier_methods:
-      all_available: All articles (new are available)
-      all_unavailable: All articles (new are unavailable)
-      import: Choose articles to import
-    shared_supplier_note: Supplier is connected to the external database.
+      all_available: Alle artikelen (nieuwe zijn beschikbaar)
+      all_unavailable: Alle artikelen (nieuwe worden onbeschikbaar)
+      import: Artikelen kiezen uit lijst
+    shared_supplier_note: Leverancier is verbonden met de externe database.
     shared_suppliers:
-      body: "<p>Suppliers of the external database are displayed here.</p> <p>You can import external suppliers by subscribing (see below).</p> <p>A new supplier will be created and connected to the external database.</p>"
-      subscribe: Subscribe
-      subscribe_again: Subscribe again
-      supplier: Supplier
-      title: External lists
+      body: "<p>Hier kun je leveranciers in de externe database zien.</p> <p>Als je een externe leverancier importeert, wordt er een nieuwe leverancier aangemaakt die verbonden is met de externe database.</p>"
+      subscribe: Importeren
+      subscribe_again: Nogmaals importeren
+      supplier: Leverancier
+      title: Externe lijsten
     show:
-      last_deliveries: Recent deliveries
-      last_orders: Last orders
-      new_delivery: New delivery
-      show_deliveries: Show all
+      last_deliveries: Laatste leveringen
+      last_orders: Recente bestellingen
+      new_delivery: Levering aanmaken
+      show_deliveries: Alle leveringen tonen
     update:
-      notice: Supplier was updated
+      notice: Leverancier is bijgewerkt
   tasks:
     accept:
-      notice: You have accepted the task
+      notice: Je hebt de taak geaccepteerd
     archive:
-      title: Task archive
+      title: Takenarchief
     create:
-      notice: Task has been created
+      notice: Taak is aangemaakt
     destroy:
-      notice: Task has been deleted
+      notice: Taak is verwijderd
     edit:
-      submit_periodic: Save recurring task
-      title: Edit task
-      title_periodic: Edit recurring task
-      warning_periodic: "<strong>Warning:</strong> This task is part of a group of <em>recurring tasks</em>. When saving it will be excluded from the group and it will be converted to a <em>regular task</em>."
-    error_not_found: No workgroup found
+      submit_periodic: Terugkerende taak opslaan
+      title: Taak bewerken
+      title_periodic: Terugkerende taak bewerken
+      warning_periodic: "<strong>Opgelet:</strong> deze taak is onderdeel van een <em>terugkerende taak</em>. Wanneer je deze opslaat, zal dit als uitzondering worden opgeslagen."
+    error_not_found: Geen werkgroep gevonden
     form:
       search:
-        hint: Search for user
-        noresult: No user found
-        placeholder: Search ...
+        hint: Gebruiker zoeken
+        noresult: Geen gebruiker gevonden
+        placeholder: Zoeken ...
       submit:
-        periodic: Save recurring task
+        periodic: Terugkerende taak bewaren
     index:
-      show_group_tasks: Show group tasks
-      title: Tasks
-      title_non_group: Tasks for all!
+      show_group_tasks: Groepstaken tonen
+      title: Taken
+      title_non_group: Taken voor iedereen!
     nav:
-      all_tasks: All tasks
-      archive: Completed tasks (archive)
-      group_tasks: Group tasks
-      my_tasks: My tasks
-      new_task: Create new task
-      pages: Pages
+      all_tasks: Alle taken
+      archive: Gedane taken (archief)
+      group_tasks: Groepstaken
+      my_tasks: Mijn taken
+      new_task: Nieuwe taak
+      pages: Pagina's
     new:
-      submit_periodic: Create recurring task
-      title: Create new task
-    repeated: Task is recurring
+      submit_periodic: Terugkerende taak aanmaken
+      title: Nieuwe taak maken
+    repeated: Deze taak wordt herhaald.
     set_done:
-      notice: The state of the task has been updated
+      notice: De status van de taak is aangepast
     show:
-      accept_task: Accept task
-      confirm_delete_group: Really delete this and all subsequent tasks?
-      confirm_delete_single: Are you sure you want to delete the task?
-      confirm_delete_single_from_group: Are you sure you want to delete this task (and keep related recurring tasks)?
-      delete_group: Delete task and subsequent
-      edit_group: Edit recurring
-      hours: "%{count}h"
-      mark_done: Mark task as done
-      reject_task: Reject task
-      title: Show task
+      accept_task: Accepteren
+      confirm_delete_group: Deze en alle volgende taken echt verwijderen?
+      confirm_delete_single: Weet je zeker dat je deze taak wilt verwijderen?
+      confirm_delete_single_from_group: Weet je zeker dat je deze taak wilt verwijderen (en de terugkerende taak behouden)?
+      delete_group: Deze en volgende verwijderen
+      edit_group: Terugkerende taak bewerken
+      hours: "%{count}u"
+      mark_done: Als gedaan markeren
+      reject_task: Taak laten vallen
+      title: Taak bekijken
     update:
-      notice: Task has been updated
-      notice_converted: Task has been updated and was converted to a non-repeating task.
+      notice: Taak is bijgewerkt
+      notice_converted: Taak is bijgewerkt en omgezet naar een eenmalige taak.
     user:
-      more: Nothing to do? %{tasks_link} are tasks for sure.
-      tasks_link: Here
-      title: My tasks
-      title_accepted: Accepted tasks
-      title_open: Open tasks
+      more: Niets voor jou? %{tasks_link} is vast wat te doen
+      tasks_link: Hier
+      title: Mijn taken
+      title_accepted: Aangenomen taken
+      title_open: Open taken
     workgroup:
-      title: Tasks for %{workgroup}
-      title_all: All group tasks
+      title: Taken voor %{workgroup}
+      title_all: Alle groepstaken
   ui:
-    actions: Actions
-    back: Back
-    cancel: Cancel
-    close: Close
-    confirm_delete: Do you really want to delete %{name}?
-    confirm_restore: Do you really want to restore %{name}?
-    copy: Copy
-    delete: Delete
+    actions: Acties
+    back: Terug
+    cancel: Annuleren
+    close: Sluiten
+    confirm_delete: Wil je %{name} echt verwijderen?
+    confirm_restore: Wil je %{name} echt opnieuw actief maken?
+    copy: Kopiëren
+    delete: Verwijder
     download: Download
-    edit: Edit
+    edit: Bewerk
     marks:
       close: "&times;"
       success: <i class="icon icon-ok"></i>
-    or_cancel: or cancel
-    please_wait: Please wait...
-    restore: Restore
-    save: Save
-    search_placeholder: Search ...
-    show: Show
+    move: Verplaatsen
+    or_cancel: of annuleren
+    please_wait: Een moment alstublieft...
+    restore: Herstellen
+    save: Opslaan
+    search_placeholder: Zoeken ...
+    show: Tonen
   views:
     pagination:
       first: "&laquo;"
@@ -1707,10 +1780,10 @@ nl:
       truncate: "..."
   workgroups:
     edit:
-      title: Edit workgroup
-    error_last_admin_group: The last group with admin rights may not be deleted
-    error_last_admin_role: Admin role for the last group with admin rights cannot be withdrawn
+      title: Werkgroep bewerken
+    error_last_admin_group: De laatste groep met admin-rechten mag niet verwijderd worden (anders kun je er niet meer in).
+    error_last_admin_role: Je kunt admin-privileges voor de laatste groep met admin-rechten niet weghalen (anders kun je er niet meer in).
     index:
-      title: Workgroups
+      title: Werkgroepen
     update:
-      notice: Workgroup was updated
+      notice: Werkgroep is bijgewerkt
