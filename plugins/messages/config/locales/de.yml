@@ -83,6 +83,7 @@ de:
       reply: Antworten
     model:
       reply_header: ! '%{user} schrieb am %{when}:'
+      reply_indent: ! '> %{line}'
     new:
       error_private: Nachricht ist privat!
       hint_private: Nachricht erscheint nicht im Foodsoft Posteingang
