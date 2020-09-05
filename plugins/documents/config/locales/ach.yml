@@ -33,3 +33,8 @@ ach:
       new: crwdns5466:0crwdne5466:0
       new_folder: crwdns5468:0crwdne5468:0
       title: crwdns5470:0crwdne5470:0
+    move:
+      root_folder: crwdns9312:0crwdne9312:0
+      title: crwdns9314:0crwdne9314:0
+    update:
+      notice: crwdns9316:0crwdne9316:0
