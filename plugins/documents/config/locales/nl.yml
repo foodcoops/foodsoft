@@ -2,34 +2,39 @@ nl:
   activerecord:
     attributes:
       document:
-        created_at: Created at
-        created_by: Created by
+        created_at: Upload op
+        created_by: Upload door
         data: Data
-        mime: MIME type
-        name: Name
+        mime: MIME-type
+        name: Naam
   config:
     hints:
-      documents_allowed_extension: A list of allowed filename extensions separated by spaces.
-      use_documents: Add a basic document sharing page to the foodcoop menu.
+      documents_allowed_extension: Lijst van toegestane bestandsextensies, gescheiden door spaties.
+      use_documents: Geeft een simpele manier om documenten te delen in het foodcoop menu.
     keys:
-      documents_allowed_extension: Allowed extensions
-      use_documents: Enable documents
+      documents_allowed_extension: Toegestane extensies
+      use_documents: Documenten delen
   navigation:
-    documents: Documents
+    documents: Documenten
   documents:
     create:
-      error: 'Document or folder could not be created: %{error}'
-      not_allowed_mime: The filetype "%{mime}" is not allowed. Please contact an administrator to whitelist it.
-      notice: Document or folder was created
+      error: 'Document kon niet gemaakt worden: %{error}'
+      not_allowed_mime: Het bestandstype "%{mime}" is niet toegestaan. Vraag de systeembeheerder het toe te staan.
+      notice: Document is gemaakt
     destroy:
-      error: 'Document or folder could not be deleted: %{error}'
-      no_right: You do not have enough rights to delete the document or folder
-      notice: Document or folder was deleted
+      error: 'Document kon niet verwijderd worden: %{error}'
+      no_right: Je hebt niet genoeg rechten om het document te verwijderen
+      notice: Document is verwijderd
     form:
-      new: New Document
-      new_folder: new Folder
-      submit: Create
+      new: Nieuw document
+      new_folder: nieuwe map
+      submit: Aanmaken
     index:
-      new: Upload new document
-      new_folder: Create new folder
-      title: Documents
+      new: Nieuw document uploaden
+      new_folder: Nieuwe map
+      title: Documenten
+    move:
+      root_folder: Begin
+      title: Verplaatsen
+    update:
+      notice: Document of map is verplaatst
