@@ -1,73 +1,69 @@
 de:
   config:
     hints:
-      use_current_orders: Enable the current_orders plugin. Allows members with the order permission to change member amounts in multiple orders, using three new screens in the Orders menu. Especially useful for pick-up days.
+      use_current_orders: Aktiviere Plugin zur erweiterten Bearbeitung laufender Bestellungen. Dies erlaubt Mitgliedern mit Bestellrechten, mehrere Bestellungen gleichzeitig zu bearbeiten (in drei zusätzlichen Ansichten unter dem Menüpunkt Bestellungen). Insbesondere hilfreich für Anpassungen an Liefertagen.
     keys:
-      use_current_orders: Extra distribute screens
+      use_current_orders: Erweiterte Bearbeitungsansicht
   current_orders:
     articles:
       article:
-        counts: '%{ordergroups} ordergroups ordered %{articles} different articles.'
-        no_selection: Choose an article to show who ordered it, or download pick lists at the right.
+        counts: '%{ordergroups} Bestellgruppen bestellten %{articles} verschiedene Produkte.'
+        no_selection: Wähle einen Artikel, um anzuzeigen wer ihn bestellt hat oder downloade eine Abholliste rechts.
       article_info:
-        origin_in: in %{origin}
-        supplied_by: from %{supplier}
-        supplied_and_made_by: made by %{manufacturer}
-        supplied_by_made_by: from %{supplier} made by %{manufacturer}
-        unit: per %{unit}
-        from: from %{supplier}
+        supplied_by: von %{supplier}
+        supplied_and_made_by: produziert von %{manufacturer}
+        supplied_by_made_by: von %{supplier} produziert von %{manufacturer}
+        unit: pro %{unit}
+        from: von %{supplier}
       form:
-        article_placeholder: Search articles...
-        current_orders: All current orders
+        article_placeholder: Artikel suchen...
+        current_orders: Alle Aktuelle Bestellungen
       index:
-        title: Distribute articles
+        title: Artikel verteilen
       ordergroups:
-        piece: pc
-        unit: unit
-        add_new: Add an ordergroup...
-      show:
-        title: ! '%{name}'
+        piece: St.
+        unit: Einheit
+        add_new: Bestellgruppe hinzufügen
     navigation:
-      receive: Receive
-      articles: Distribute
-      ordergroups: Member orders
+      receive: In Empfang nehmen
+      articles: Verteilen
+      ordergroups: Gruppenbestellungen
     group_orders:
       index:
-        title: Your current orders
+        title: Deine Aktuelle Bestellungen
     ordergroups:
       articles:
-        add_new: Add an article...
-        no_selection: Choose an ordergroup to show the articles.
+        add_new: Artikel hinzufügen...
+        no_selection: Wahl eine Bestellgruppe um die Artikel zu zeigen.
       form:
-        ordergroup_placeholder: Choose an ordergroup...
+        ordergroup_placeholder: Bestellgruppe auswählen...
       index:
-        title: Articles for ordergroup
+        title: Artikel für Bestellgruppe
       payment_bar:
-        account_balance: Account balance
-        new_pin: PIN
-        new_transaction: New transaction
-        payment: ! 'Payment:'
+        account_balance: Kontostand
+        new_transaction: Neue Transaktion
+        payment: ! 'Zahlung:'
       show:
-        title: Articles for %{name}
+        title: Artikel für %{name}
     orders:
       receive:
-        title: Receive orders
-        no_finished_orders: There are currently no orders to receive.
+        title: Bestellungen in Empfang nehmen
+        no_finished_orders: Jetzt gibt es keine Bestellungen in Empfang zu nehmen.
   documents:
     multiple_orders_by_articles:
-      filename: Current orders sorted by article
-      title: Current orders - by article
+      filename: Artikelsortierung aktueller Bestellungen
+      title: Aktuelle Bestellungen - Artikelsortierung
     multiple_orders_by_groups:
-      filename: Current orders sorted by group
-      title: Current orders - by group
+      filename: Gruppensortierung aktueller Bestellungen
+      title: Aktuelle Bestellungen - Gruppensortierung
   helpers:
     current_orders:
-      pay_done: Fully paid
-      pay_none: Nothing to pay
-      pay_amount: To pay %{amount}
+      pay_done: vollständig bezahlt
+      pay_none: nichts zu bezahlen
+      pay_amount: zu bezahlen %{amount}
   js:
     current_orders:
       articles:
-        above: '%{count} more<br>than available'
-        below: '%{count} left over'
-        equal: all distributed
+        above: '%{count} mehr<br>als verfügbar'
+        below: '%{count} übrig'
+        equal: alle verteilt
