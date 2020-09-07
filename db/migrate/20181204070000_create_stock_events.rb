@@ -11,7 +11,9 @@ class CreateStockEvents < ActiveRecord::Migration[4.2]
       dir.up do
         change_column_default :stock_events, :type, nil
 
-        diff = [StockEvent.maximum(:id) + 1 - StockTaking.minimum(:id), 0].max
+        stock_event_max = StockEvent.maximum(:id) || 0
+        stock_taking_min = StockTaking.minimum(:id) || 0
+        diff = [stock_event_max + 1 - stock_taking_min, 0].max
 
         execute "UPDATE stock_changes SET stock_event_id = stock_taking_id + #{diff}
           WHERE stock_taking_id IS NOT NULL"
