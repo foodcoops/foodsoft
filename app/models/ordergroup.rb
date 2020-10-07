@@ -23,7 +23,7 @@ class Ordergroup < Group
   after_create :update_stats!
 
   def contact
-    "#{contact_phone} (#{contact_person})"
+    "#{contact_phone}#{contact_person.blank? ? '':'('+contact_person+')'}"
   end
   def non_members
     User.natural_order.all.reject { |u| (users.include?(u) || u.ordergroup) }

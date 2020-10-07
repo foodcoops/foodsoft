@@ -2,23 +2,35 @@
   = items_per_page
 = pagination_links_remote @ordergroups
 
-%table.table.table-striped
+%button.btn.btn-info{ onclick: "download_table_as_csv('ordergroup_table');"}
+  %i.icon-download
+  Download Table
+
+%table.table.table-striped#ordergroup_table
   %thead
     %tr
       %th= heading_helper Ordergroup, :name
+      -#%th= heading_helper Ordergroup, :phone
       %th= heading_helper Ordergroup, :user_tokens
-      %th= heading_helper Ordergroup, :break
-      %th= heading_helper Ordergroup, :last_user_activity
+      %th= heading_helper Ordergroup, :contact
+      %th
+      %th= heading_helper Ordergroup, :contact_address
+      -#%th= heading_helper Ordergroup, :break
+      -#%th= heading_helper Ordergroup, :last_user_activity
       %th= heading_helper Ordergroup, :last_order
 
   %tbody
+    - count = 1
     - for ordergroup in @ordergroups
-      %tr
-        %td= ordergroup.name
-        %td=h ordergroup.users.collect { |u| show_user(u) }.join(", ")
-        - if ordergroup.break_start? or ordergroup.break_end?
-          %td= raw t '.break', start: format_date(ordergroup.break_start), end: format_date(ordergroup.break_end)
-        - else
-          %td
-        %td= format_date ordergroup.last_user_activity
-        %td= format_date ordergroup.last_order.try(:starts)
+      - first_row = true
+      - for user in ordergroup.users
+        %tr
+          %td= "#{count}. #{ordergroup.name}" if first_row
+          %td= "#{user.first_name} #{user.last_name}"
+          %td= user.phone
+          %td= user.email
+          %td= link_to_gmaps ordergroup.contact_address if first_row
+          %td= format_date ordergroup.last_order.try(:starts) if first_row
+        - count= first_row ? count+1 : count
+        - first_row = false
+
