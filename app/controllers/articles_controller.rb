@@ -215,10 +215,10 @@ class ArticlesController < ApplicationController
   #
   def shared
     # build array of keywords, required for ransack _all suffix
-    params[:q][:name_cont_all] = params[:q][:name_cont_all].split(' ') if params[:q]
-    # Build search with meta search plugin
-    @search = @supplier.shared_supplier.shared_articles.search(params[:q])
-    @articles = @search.result.page(params[:page]).per(10)
+    q = params.fetch(:q, {})
+    q[:name_cont_all] = params.fetch(:name_cont_all_joined, '').split(' ')
+    search = @supplier.shared_supplier.shared_articles.ransack(q)
+    @articles = search.result.page(params[:page]).per(10)
     render :layout => false
   end
 

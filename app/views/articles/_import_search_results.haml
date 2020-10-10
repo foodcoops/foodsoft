@@ -1,7 +1,7 @@
 - if @articles.empty?
   %p= t '.not_found'
 - else
-  = pagination_links_remote @articles, :params => {:q => search_params}
+  = pagination_links_remote @articles
   %table.table.table-striped
     %thead
       %tr
@@ -15,7 +15,7 @@
     %tbody
       - for article in @articles
         %tr{id: "shared_article_#{article.id}"}
-          %td= highlight article.name, search_params[:name_cont_all]
+          %td= highlight article.name, params.fetch(:name_cont_all_joined, '').split(' ')
           %td= article.origin
           %td= article.manufacturer
           %td{title: article.note}= truncate(article.note, length: 11)
