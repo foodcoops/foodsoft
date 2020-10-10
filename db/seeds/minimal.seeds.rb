@@ -1,7 +1,7 @@
 # Create nessecary data to start with a fresh installation
 
 # Create working group with full rights
-administrators = Workgroup.create(
+administrators = Workgroup.create!(
     :name => "Administrators",
     :description => "System administrators.",
     :role_admin => true,
@@ -13,7 +13,7 @@ administrators = Workgroup.create(
 )
 
 # Create admin user
-User.create(
+User.create!(
     :nick => "admin",
     :first_name => "Anton",
     :last_name => "Administrator",
@@ -23,9 +23,9 @@ User.create(
 )
 
 # First entry for financial transaction types
-financial_transaction_class = FinancialTransactionClass.create(:name => "Other")
-FinancialTransactionType.create(:name => "Foodcoop", :financial_transaction_class_id => financial_transaction_class.id)
+financial_transaction_class = FinancialTransactionClass.create!(:name => "Other")
+FinancialTransactionType.create!(:name => "Foodcoop", :financial_transaction_class_id => financial_transaction_class.id)
 
 # First entry for article categories
-SupplierCategory.create(:name => "Other", :financial_transaction_class_id => financial_transaction_class.id)
-ArticleCategory.create(:name => "Other", :description => "other, misc, unknown")
+SupplierCategory.create!(:name => "Other", :financial_transaction_class_id => financial_transaction_class.id)
+ArticleCategory.create!(:name => "Other", :description => "other, misc, unknown")
