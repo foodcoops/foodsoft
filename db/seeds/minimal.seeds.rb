@@ -27,5 +27,5 @@ financial_transaction_class = FinancialTransactionClass.create(:name => "Other")
 FinancialTransactionType.create(:name => "Foodcoop", :financial_transaction_class_id => financial_transaction_class.id)
 
 # First entry for article categories
-SupplierCategory.create(:name => "Other")
+SupplierCategory.create(:name => "Other", :financial_transaction_class_id => financial_transaction_class.id)
 ArticleCategory.create(:name => "Other", :description => "other, misc, unknown")
