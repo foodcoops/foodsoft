@@ -141,13 +141,6 @@ Article.create!(:name => "Chia seeds", :supplier_id => 4, :article_category_id =
 Article.create!(:name => "Coconut grated", :supplier_id => 4, :article_category_id => 13, :unit => "kg", :availability => true, :price => 0.55E0, :tax => 6.0, :deposit => 0.0, :unit_quantity => 1, :order_number => ":b3f65e4")
 
 
-## Orders & OrderArticles
-
-seed_order(supplier_id: 1, starts: 2.days.ago, ends: 5.days.from_now)
-seed_order(supplier_id: 3, starts: 2.days.ago, ends: 5.days.from_now)
-seed_order(supplier_id: 2, starts: 2.days.ago, ends: 4.days.from_now)
-
-
 ## Members & groups
 
 User.create!(:id => 1, :nick => "admin", :password => "secret", :first_name => "Anton", :last_name => "Administrator", :email => "admin@foo.test", :created_on => 'Wed, 15 Jan 2014 16:15:33 UTC +00:00')
@@ -176,6 +169,13 @@ Membership.create!(:group_id => 3, :user_id => 4)
 Membership.create!(:group_id => 7, :user_id => 5)
 Membership.create!(:group_id => 3, :user_id => 5)
 Membership.create!(:group_id => 4, :user_id => 5)
+
+
+## Orders & OrderArticles
+
+seed_order(supplier_id: 1, starts: 2.days.ago, ends: 5.days.from_now)
+seed_order(supplier_id: 3, starts: 2.days.ago, ends: 5.days.from_now)
+seed_order(supplier_id: 2, starts: 2.days.ago, ends: 4.days.from_now)
 
 
 ## GroupOrders & such

@@ -7,7 +7,7 @@ def seed_group_orders
       # 20% of the order-ordergroup combinations don't order
       next if rand(10) < 2
       # order 3..12 times a random article
-      go = og.group_orders.create!(order: order)
+      go = og.group_orders.create!(order: order, updated_by_user_id: 1)
       (3+rand(10)).times do
         goa = go.group_order_articles.find_or_create_by!(order_article: order.order_articles.offset(rand(noas)).first)
         unit_quantity = goa.order_article.price.unit_quantity
@@ -23,5 +23,6 @@ end
 def seed_order(options={})
   options[:article_ids] ||= (options[:supplier]||Supplier.find(options[:supplier_id])).articles.map(&:id)
   options[:created_by_user_id] ||= 1
+  options[:updated_by_user_id] ||= 1
   Order.create! options
 end
