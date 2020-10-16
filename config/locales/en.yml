@@ -597,7 +597,7 @@ en:
       tasks_upfront_days: For how many days in advance you would like to schedule periodic tasks.
       tax_default: Default VAT percentage for new articles.
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
-      ignore_received_units_on_redistribute: Even, if the supplier hasn't delivered all that was ordered, the order groups will be charged for the full amounts, unless manually changed.
+      ignore_received_units_on_redistribute: Even if the supplier hasn't delivered all that was ordered, the order groups will be charged for the full amounts, unless manually changed.
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
       use_boxfill: When enabled, near end of an order, members are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
       use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
