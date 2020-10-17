@@ -5,7 +5,7 @@ class ConfigSerializer < ActiveModel::Serializer
 
   # settings
   attributes :currency_unit, :currency_space, :default_locale, :price_markup,
-             :tolerance_is_costly, :ignore_received_units_on_redistribute, :use_apple_points, :use_tolerance
+             :tolerance_is_costly, :distribution_strategy, :use_apple_points, :use_tolerance
 
   # layout
   attributes :page_footer_html, :webstats_tracking_code_html

@@ -260,6 +260,7 @@ class FoodsoftConfig
         tasks_period_days: 7,
         tasks_upfront_days: 49,
         shared_supplier_article_sync_limit: 200,
+        distribution_strategy: :first_order_first_serve,
         # The following keys cannot, by default, be set by foodcoops themselves.
         protected: {
           multi_coop_install: true,

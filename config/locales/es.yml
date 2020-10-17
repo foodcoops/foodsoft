@@ -268,7 +268,7 @@ es:
         all_ordergroups: Todos los grupos de pedido
         all_users: Todos los usuarios
         all_workgroups: Todos los grupos de trabajo
-        created_at: creado 
+        created_at: creado
         first_paragraph: Aquí puedes administrar grupos y usuarios de Foodsoft.
         groupname: nombre del grupo
         members: miembros
@@ -513,7 +513,7 @@ es:
         status: Estado (x=saltar)
       file_label: Por favor elige un archivo compatible
       options:
-        convert_units: Mantener unidades actuales, recomputar la cantidad y precio de unidades (como sincronizar). 
+        convert_units: Mantener unidades actuales, recomputar la cantidad y precio de unidades (como sincronizar).
         outlist_absent: Borrar artículos que no están en el archivo subido.
       sample:
         juices: Jugos
@@ -561,6 +561,7 @@ es:
       tasks_upfront_days: Con cuántos días de antelación te gustaría programar las tareas periódicas.
       tax_default: Porcentaje por defecto del IVA para artículos nuevos.
       tolerance_is_costly: Pide lo que más permita la tolerancia de los miembros (en lugar de sólo lo necesario para llenar la última caja). Permitir esto también incluye la tolerancia en el precio final del pedido abierto de cada miembro.
+      distribution_strategy: Cómo se deben distribuir los artículos después de recibir un pedido.
       use_apple_points: Cuando el sistema de puntos-manzana está habilitado los miembros deberán realizar algunas tareas para poder hacer pedidos.
       use_boxfill: Cuando está activado, cerca del cierre de un pedido los miembros no podrán cambiar su pedido a menos que se incremente el valor pedido total. Esto ayudará a llenar las cajas que faltan. Igualmente deberás decidir una fecha de llenado de cajas para los pedidos.
       use_iban: Cuando esta opción está habilitada, el proveedor y el usuario pueden guardan también su número de cuenta bancaria internacional (IBAN).
@@ -605,6 +606,10 @@ es:
       tax_default: IVA por defecto
       time_zone: Zona horaria
       tolerance_is_costly: La tolerancia es prioritaria
+      distribution_strategy: Estrategia de distribución
+      distribution_strategy_options:
+        first_order_first_serve: Primero distribuya a quienes ordenaron primero
+        no_automatic_distribution: Sin distribución automática
       use_apple_points: Puntos-manzana
       use_boxfill: Fase de llenar las cajas
       use_iban: Usar IBAN
@@ -1009,7 +1014,7 @@ es:
     changes_saved: Guarda los cambios.
     index:
       my_ordergroup:
-        last_update: La última actualización fue hace %{when} 
+        last_update: La última actualización fue hace %{when}
         title: Mi grupo de pedido
         transactions:
           title: Últimas transacciones
@@ -1098,7 +1103,7 @@ es:
       error_invite_invalid: Tu invitación no es válida.
       error_token_invalid: La sesión ha expirado o no es válida. Prueba de nuevo.
       reset_password:
-        notice: Si tu email está ya registrado aquí, recibirás un mensaje con un enlace para 
+        notice: Si tu email está ya registrado aquí, recibirás un mensaje con un enlace para
       update_password:
         notice: Tu contraseña ha sido actualizada. Prueba a conectarte ahora.
     forgot_password:
@@ -1463,7 +1468,7 @@ es:
     copy:
       title: Copia artículo de stock
     create:
-      notice: Se ha creado el nuevo producto en stock  "%{name}" 
+      notice: Se ha creado el nuevo producto en stock  "%{name}"
     derive:
       title: Añade un artículo en stock desde plantilla
     destroy:
@@ -1571,7 +1576,7 @@ es:
       accept_task: Aceptar tarea
       confirm_delete_group: Estás seguro/a de que quieres borrar esta tarea y todas las tareas subsecuentes?
       confirm_delete_single: Estás seguro/a de que quieres borrar esta tarea?
-      confirm_delete_single_from_group: Estás seguro/a de que quieres borrar esta tarea (y mantener las tareas recurrentes relacionadas)? 
+      confirm_delete_single_from_group: Estás seguro/a de que quieres borrar esta tarea (y mantener las tareas recurrentes relacionadas)?
       delete_group: Borrar esta tarea y las subsecuentes
       edit_group: Edita recurrencia
       mark_done: Marca tarea como hecha

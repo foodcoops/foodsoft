@@ -597,7 +597,7 @@ de:
       tasks_upfront_days: Anzahl der Tage, für welche du im Voraus wiederkehrende Aufgaben definieren möchtest
       tax_default: Standard Mehrwertsteuersatz für neue Artikel
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
-      ignore_received_units_on_redistribute: Auch, wenn insgesamt zu wenig geliefert wurde, wird den Bestellgruppen der volle Betrag verrechnet, bis die Menge manuell korrigiert wird.
+      distribution_strategy: Wie bei der Verteilung von Artikeln nach dem Empfangen einer Bestellung vorgegangen werden soll.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
@@ -651,7 +651,10 @@ de:
       tax_default: Mehrwertsteuer
       time_zone: Zeitzone
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
-      ignore_received_units_on_redistribute: Liefermenge beim Verrechnen der einzelnen Bestellgruppen ignorieren
+      distribution_strategy: Verteilungs-Strategie
+      distribution_strategy_options:
+        first_order_first_serve: Zuerst an die verteilen, die zuerst bestellt haben
+        no_automatic_distribution: Keine automatische Verteilung
       use_apple_points: Apfelpunkte verwenden
       use_boxfill: Kistenauffüllphase
       use_iban: IBAN verwenden

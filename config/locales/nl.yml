@@ -597,6 +597,7 @@ nl:
       tasks_upfront_days: Hoeveel dagen vantevoren je periodieke taken wil aanmaken.
       tax_default: Standaard BTW percentage voor nieuwe artikelen.
       tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
+      distribution_strategy: Hoe verder te gaan met de distributie van artikelen na ontvangst van een bestelling.
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
       use_iban: Om leverancier en gebruiker een extra veld te geven voor het internationale bankrekeningnummer (IBAN).
@@ -650,6 +651,10 @@ nl:
       tax_default: Standaard BTW
       time_zone: Tijdzone
       tolerance_is_costly: Tolerantie is duur
+      distribution_strategy: Distributie strategie
+      distribution_strategy_options:
+        first_order_first_serve: Verdeel eerst onder degenen die het eerst hebben besteld
+        no_automatic_distribution: Geen automatische distributie
       use_apple_points: Appelpunten
       use_boxfill: Dozen vullen fase
       use_iban: IBAN gebruiken

@@ -131,13 +131,13 @@ class GroupOrderArticle < ApplicationRecord
       # Determine quantities to be ordered...
       order_quantities.each do |goaq|
         q = goaq.quantity
-        q = [q, total - total_quantity].min unless FoodsoftConfig[:ignore_received_units_on_redistribute]
+        q = [q, total - total_quantity].min if FoodsoftConfig[:distribution_strategy] == :first_order_first_serve
         total_quantity += q
         if goaq.group_order_article_id == self.id
           logger.debug "increasing quantity by #{q}"
           quantity += q
         end
-        break if total_quantity >= total && !FoodsoftConfig[:ignore_received_units_on_redistribute]
+        break if total_quantity >= total && FoodsoftConfig[:distribution_strategy] == :first_order_first_serve
       end
 
       # Determine tolerance to be ordered...
