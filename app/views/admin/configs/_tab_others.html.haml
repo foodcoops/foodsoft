@@ -1,7 +1,7 @@
 = config_input form, :use_nick, as: :boolean
 = config_input form, :tolerance_is_costly, as: :boolean
-- distribution_options = [[t('config.keys.distribution_strategy_options.first_order_first_serve'), :first_order_first_serve],
-  [t('config.keys.distribution_strategy_options.no_automatic_distribution'), :no_automatic_distribution]]
+- distribution_options = [[t('config.keys.distribution_strategy_options.first_order_first_serve'), FoodsoftConfig::DistributionStrategy::FIRST_ORDER_FIRST_SERVE],
+  [t('config.keys.distribution_strategy_options.no_automatic_distribution'), FoodsoftConfig::DistributionStrategy::NO_AUTOMATIC_DISTRIBUTION]]
 = config_input form, :distribution_strategy, as: :select, collection: distribution_options,
   include_blank: false, input_html: {class: 'input-xxlarge'}
 = config_input form, :disable_invite, as: :boolean

@@ -1,5 +1,4 @@
 class ConfigSerializer < ActiveModel::Serializer
-
   # details
   attributes :name, :homepage, :contact
 
