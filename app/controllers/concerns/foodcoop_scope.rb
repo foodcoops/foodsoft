@@ -6,7 +6,7 @@ module Concerns::FoodcoopScope
   extend ActiveSupport::Concern
 
   included do
-    before_action :select_foodcoop
+    prepend_before_action :select_foodcoop
   end
 
   private
