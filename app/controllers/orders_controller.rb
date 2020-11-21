@@ -132,8 +132,12 @@ class OrdersController < ApplicationController
     unless request.post?
       @order_articles = @order.order_articles.ordered_or_member.includes(:article).order('articles.order_number, articles.name')
     else
-      s = update_order_amounts
-      flash[:notice] = (s ? I18n.t('orders.receive.notice', :msg => s) : I18n.t('orders.receive.notice_none'))
+      Order.transaction do
+        s = update_order_amounts
+        @order.update_attribute(:state, 'received') if @order.state != 'received'
+
+        flash[:notice] = (s ? I18n.t('orders.receive.notice', :msg => s) : I18n.t('orders.receive.notice_none'))
+      end
       if current_user.role_orders? || current_user.role_finance?
         redirect_to @order
       elsif current_user.role_pickup?

@@ -21,7 +21,7 @@ class StockArticle < Article
 
   def quantity_ordered
     OrderArticle.where(article_id: id).
-        joins(:order).where(orders: {state: ['open', 'finished']}).sum(:units_to_order)
+        joins(:order).where(orders: {state: %w[open finished received]}).sum(:units_to_order)
   end
 
   def quantity_history

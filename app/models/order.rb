@@ -31,8 +31,8 @@ class Order < ApplicationRecord
   # Finders
   scope :started, -> { where('starts <= ?', Time.now) }
   scope :open, -> { where(state: 'open').order('ends DESC') }
-  scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
-  scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
+  scope :finished, -> { where(state: %w[finished received closed]).order('ends DESC') }
+  scope :finished_not_closed, -> { where(state: %w[finished received]).order('ends DESC') }
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
   scope :stockit, -> { where(supplier_id: nil).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
@@ -92,7 +92,11 @@ class Order < ApplicationRecord
   end
 
   def finished?
-    state == "finished"
+    state == "finished" || state == "received"
+  end
+
+  def received?
+    state == "received"
   end
 
   def closed?
