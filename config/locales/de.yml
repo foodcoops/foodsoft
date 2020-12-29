@@ -157,6 +157,8 @@ de:
         last_user_activity: Zuletzt aktiv
         name: Name
         user_tokens: Mitglieder
+      payment:
+        payed_by: Bezahlt von
       stock_article:
         available: Verfügbar
         price: Nettopreis
@@ -332,6 +334,7 @@ de:
         destroy_all: Alle E-Mail Probleme löschen
         title: E-Mail Probleme
     ordergroups:
+      search_unpaid: "Offene Payments ..."
       destroy:
         error: 'Bestellgruppe konnte nicht als gelöscht markiert werden: %{error}'
         notice: Bestellgruppe wurde als gelöscht markiert
@@ -353,6 +356,28 @@ de:
         confirm: Bist Du sicher?
         edit: Gruppe/Mitglieder bearbeiten
         title: Bestellgruppe %{name}
+    payments:
+      destroy:
+        error: 'Payment konnte nicht als gelöscht markiert werden: %{error}'
+        notice: Payment wurde als gelöscht markiert
+      edit:
+        title: Payment bearbeiten
+      form:
+        search_group: Bestellgruppe suchen
+        search: Suche
+        here: hier
+      index:
+        first_paragraph: Hier kannst du %{url} anlegen, bearbeiten und löschen.
+        new_payment: Neue Payments anlegen
+        second_paragraph: 'Payments sind unterschiedliche Dinge die von einer Bestellgruppe and die FoodCoop zu entrichten sind (z.B.: Jahresmitgliedsbeitrag, monatliche Zahlungen, ...)'
+        title: Payments
+        payed: Bezahlt
+      new:
+        title: Payment anlegen
+      show:
+        confirm: Bist Du sicher?
+        edit: Gruppe/Mitglieder bearbeiten
+        title: Payment %{name}
     search_placeholder: Name ...
     users:
       controller:
@@ -1352,6 +1377,7 @@ de:
       home: Übersicht
       mail_delivery_status: E-Mail Probleme
       ordergroups: Bestellgruppen
+      payments: Payments
       users: Benutzer/innen
       workgroups: Arbeitsgruppen
     articles:

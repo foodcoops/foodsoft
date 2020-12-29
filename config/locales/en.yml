@@ -157,6 +157,8 @@ en:
         last_user_activity: Last activity
         name: Name
         user_tokens: Members
+      payment:
+        payed_by: Payed by
       stock_article:
         available: Available
         price: Price
@@ -332,6 +334,7 @@ en:
         destroy_all: Delete all email problems
         title: Email problems
     ordergroups:
+      search_unpaid: "Unpaid payments ..."
       destroy:
         error: 'Ordergroup could not be marked as deleted: %{error}'
         notice: Ordergroup was marked as deleted
@@ -353,6 +356,28 @@ en:
         confirm: Are you sure?
         edit: Edit group/members
         title: Ordergroup %{name}
+    payments:
+      destroy:
+        error: 'Payment could not be marked as deleted: %{error}'
+        notice: Payment marked as deleted
+      edit:
+        title: Edit payment
+      form:
+        search_group: Search ordergroup
+        search: Search
+        here: here
+      index:
+        first_paragraph: Here you are able to %{url}, edit und delete.
+        new_payment: Create new payments
+        second_paragraph: 'Payments are things an ordergroup has to pay to a FoodCoop. This could be yearly or monthly fees ...'
+        title: Payments
+        payed: payed
+      new:
+        title: Create payment
+      show:
+        confirm: Are you sure?
+        edit: Edit payment
+        title: Payment %{name}
     search_placeholder: name ...
     users:
       controller:
@@ -1362,6 +1387,7 @@ en:
       home: Overview
       mail_delivery_status: Email problems
       ordergroups: Ordergroups
+      payments: Payments
       title: Administration
       users: Users
       workgroups: Workgroups

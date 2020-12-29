@@ -5,6 +5,16 @@ class Admin::OrdergroupsController < Admin::BaseController
   def index
     @ordergroups = Ordergroup.undeleted.order('name ASC')
 
+    # Place it before the CSV stuff to enable exporting filtered data by directly
+    # constructing the URL
+    # .../ordergroups.csv?query_unpaid=QUERY
+    #
+    unless params[:query_unpaid].blank?
+      @ordergroups = @ordergroups.joins(:payments).where(payments: {name: "#{params[:query_unpaid]}"})
+      # invert
+      @ordergroups = Ordergroup.where.not(:id => @ordergroups.reorder("groups.name").pluck(:id))
+    end
+
     if request.format.csv?
       send_data OrdergroupsCsv.new(@ordergroups).to_csv, filename: 'ordergroups.csv', type: 'text/csv'
     end
