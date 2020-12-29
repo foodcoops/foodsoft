@@ -1,3 +1,13 @@
+# Foodsoft 4.7.1
+(31 December 2020)
+
+* Fix minor navigation glitch ([78c4ebc](https://github.com/foodcoops/foodsoft/commit/78c4ebcb4b61891e13d3dbb9f07c34ad88c41f4a))
+* Fix legacy tasks without user ([beaca7d](https://github.com/foodcoops/foodsoft/commit/beaca7d384bf9c9a9c5275ac7d81bb012374372e))
+* Fix GroupOrder update timestamp ([3d5043f](https://github.com/foodcoops/foodsoft/commit/3d5043fd052f79b33f8cae2ea3a5cc81ee972ba5))
+* Move from Travis CI to GitHub Actions ([9b092ee](https://github.com/foodcoops/foodsoft/commit/9b092ee362df8a46854d8dc42125963f86dadf2f))
+* Fix database seeds ([#774](https://github.com/foodcoops/foodsoft/issues/774))
+* Fix searching in external database ([4043433](https://github.com/foodcoops/foodsoft/commit/4043433539f34b880bec8826d2f29f9137412ef4))
+
 # Foodsoft 4.7.0
 (11 September 2020)
 
