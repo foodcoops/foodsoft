@@ -55,8 +55,10 @@ class OrderArticlesController < ApplicationController
   end
 
   def authenticate_finance_orders_or_pickup
-    return true if current_user.role_finance? || current_user.role_orders?
+    return if current_user.role_finance? || current_user.role_orders?
 
-    current_user.role_pickups? && !@order.nil? && @order.state == 'finished'
+    return if current_user.role_pickups? && !@order.nil? && @order.state == 'finished'
+
+    deny_access
   end
 end
