@@ -324,7 +324,7 @@ definitions:
         type: 'string'
         default: null
         description: name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)
-      oder_id:
+      order_id:
         type: 'integer'
         default: null
         description: id of order group, user is assigned to
