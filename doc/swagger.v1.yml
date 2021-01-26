@@ -324,37 +324,18 @@ definitions:
         type: 'string'
         default: null
         description: name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)
-      order_id:
+      ordergroup_id:
         type: 'integer'
         default: null
         description: id of order group, user is assigned to
-      credit:
-        type: number
+      available_funds:
+        type: 'number'
         default: 0
         description: actual available credit of user/ordergroup
-      balance:
-        type: 'integer'
+      account_balance:
+        type: 'number'
         default: 0
         description: credit + open claim
-      classes:
-        type: array
-        default: null
-        description: array of transaction classes and their credit, null if no transaction classes are defined
-        items:
-          $ref: '#/definitions/FinancialClass'
-          
-  FinancialClass:
-    type: object
-    properties:
-      id:
-        type: integer
-        description: id of transaction class
-      name:
-        type: string
-        description: name of transaction class
-      credit:
-        type: number
-        description: actual credit of transaction class
 
   Navigation:
     type: array
