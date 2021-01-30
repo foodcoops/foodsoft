@@ -1,16 +1,15 @@
 class OrderArticlesController < ApplicationController
-
-  before_action :authenticate_finance_or_orders
+  before_action :fetch_order, except: :destroy
+  before_action :authenticate_finance_or_invoices, except: [:new, :create]
+  before_action :authenticate_finance_orders_or_pickup, except: [:edit, :update, :destroy]
 
   layout false  # We only use this controller to serve js snippets, no need for layout rendering
 
   def new
-    @order = Order.find(params[:order_id])
     @order_article = @order.order_articles.build(params[:order_article])
   end
 
   def create
-    @order = Order.find(params[:order_id])
     # The article may be ordered with zero units - in that case do not complain.
     #   If order_article is ordered and a new order_article is created, an error message will be
     #   given mentioning that the article already exists, which is desired.
@@ -24,12 +23,10 @@ class OrderArticlesController < ApplicationController
   end
 
   def edit
-    @order = Order.find(params[:order_id])
     @order_article = OrderArticle.find(params[:id])
   end
 
   def update
-    @order = Order.find(params[:order_id])
     @order_article = OrderArticle.find(params[:id])
     begin
       @order_article.update_article_and_price!(params[:order_article], params[:article], params[:article_price])
@@ -49,5 +46,19 @@ class OrderArticlesController < ApplicationController
       @order_article.group_order_articles.each { |goa| goa.update_attribute(:result, 0) }
       @order_article.update_results!
     end
+  end
+
+  private
+
+  def fetch_order
+    @order = Order.find(params[:order_id])
+  end
+
+  def authenticate_finance_orders_or_pickup
+    return if current_user.role_finance? || current_user.role_orders?
+
+    return if current_user.role_pickups? && !@order.nil? && @order.state == 'finished'
+
+    deny_access
   end
 end

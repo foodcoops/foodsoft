@@ -26,4 +26,5 @@
       / TODO add almost invisible text_field for entering single units
     %td.units_delta
     %td
-      = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article, without_units: true), remote: true, class: 'btn btn-small'
+      - if current_user.role_orders? || current_user.role_finance?
+        = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article, without_units: true), remote: true, class: 'btn btn-small'

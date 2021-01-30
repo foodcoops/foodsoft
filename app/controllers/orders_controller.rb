@@ -134,7 +134,13 @@ class OrdersController < ApplicationController
     else
       s = update_order_amounts
       flash[:notice] = (s ? I18n.t('orders.receive.notice', :msg => s) : I18n.t('orders.receive.notice_none'))
-      redirect_to @order
+      if current_user.role_orders? || current_user.role_finance?
+        redirect_to @order
+      elsif current_user.role_pickup?
+        redirect_to pickups_path
+      else
+        redirect_to receive_order_path(@order)
+      end
     end
   end
 
