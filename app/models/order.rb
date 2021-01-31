@@ -39,6 +39,16 @@ class Order < ApplicationRecord
   scope :stock_group_order, -> { group_orders.where(ordergroup_id: nil).first }
   scope :with_invoice, -> { where.not(invoice: nil) }
 
+  # State related finders
+  # diagram for `Order.state` looks like this:
+  # * -> open -> finished (-> received) -> closed
+  # So orders can
+  # 1. ...only transition in one direction (e.g. an order that has been `finished` currently cannot be reopened)
+  # 2. ...be set to `closed` when having the `finished` state. (`received` is optional)
+  scope :open, -> { where(state: 'open').order('ends DESC') }
+  scope :finished, -> { where(state: %w[finished received closed]).order('ends DESC') }
+  scope :finished_not_closed, -> { where(state: %w[finished received]).order('ends DESC') }
+
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
   include DateTimeAttributeValidate
