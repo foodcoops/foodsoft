@@ -30,9 +30,6 @@ class Order < ApplicationRecord
 
   # Finders
   scope :started, -> { where('starts <= ?', Time.now) }
-  scope :open, -> { where(state: 'open').order('ends DESC') }
-  scope :finished, -> { where(state: %w[finished received closed]).order('ends DESC') }
-  scope :finished_not_closed, -> { where(state: %w[finished received]).order('ends DESC') }
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
   scope :stockit, -> { where(supplier_id: nil).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
@@ -40,7 +37,7 @@ class Order < ApplicationRecord
   scope :with_invoice, -> { where.not(invoice: nil) }
 
   # State related finders
-  # diagram for `Order.state` looks like this:
+  # Diagram for `Order.state` looks like this:
   # * -> open -> finished (-> received) -> closed
   # So orders can
   # 1. ...only transition in one direction (e.g. an order that has been `finished` currently cannot be reopened)
