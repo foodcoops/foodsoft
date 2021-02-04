@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_filter -> { require_plugin_enabled FoodsoftPolls }
+  before_action -> { require_plugin_enabled FoodsoftPolls }
 
   def index
     @polls = Poll.page(params[:page]).per(@per_page).order(created_at: :desc)
@@ -76,9 +76,11 @@ class PollsController < ApplicationController
       @poll_vote.update!(note: params[:note], user: current_user)
 
       if @poll.single_select?
-        choices = { params[:choice] => '1' }
+        choices = {}
+        choice = params[:choice]
+        choices[choice] = '1' if choice
       else
-        choices = params[:choices] || {}
+        choices = params[:choices].try(:to_h) || {}
       end
 
       @poll_vote.poll_choices = choices.map do |choice, value|

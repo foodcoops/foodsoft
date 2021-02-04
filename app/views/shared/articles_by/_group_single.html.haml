@@ -8,8 +8,16 @@
     - total += goa.total_price
     = render 'shared/articles_by/group_single_goa', goa: goa
   %tr{class: cycle('even', 'odd', :name => 'articles')}
-    %th{colspan: 7}= t 'shared.articles_by.price_sum'
+    %th{colspan: 7}= heading_helper GroupOrder, :price
     %th.price_sum{colspan: 2, data: {value: total}}= number_to_currency(total)
+  - if group_order.transport
+    - total += group_order.transport
+    %tr{class: cycle('even', 'odd', :name => 'articles')}
+      %td{colspan: 7}= heading_helper GroupOrder, :transport
+      %td{colspan: 2}= number_to_currency(group_order.transport)
+    %tr{class: cycle('even', 'odd', :name => 'articles')}
+      %th{colspan: 7}= heading_helper GroupOrder, :total
+      %th.total{colspan: 2, data: {value: total}}= number_to_currency(total)
   %tr
     %th{colspan: 9}
   - reset_cycle("articles")

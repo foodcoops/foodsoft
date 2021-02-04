@@ -2,9 +2,9 @@
 class Task < ApplicationRecord
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
-  belongs_to :workgroup
-  belongs_to :periodic_task_group
-  belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
+  belongs_to :workgroup, optional: true
+  belongs_to :periodic_task_group, optional: true
+  belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id', optional: true
 
   scope :non_group, -> { where(workgroup_id: nil, done: false) }
   scope :done, -> { where(done: true) }

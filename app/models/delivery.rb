@@ -1,12 +1,11 @@
-class Delivery < ApplicationRecord
+class Delivery < StockEvent
 
   belongs_to :supplier
-  belongs_to :invoice
-  has_many :stock_changes, -> { includes(:stock_article).order('articles.name ASC') }, :dependent => :destroy
+  belongs_to :invoice, optional: true
 
   scope :recent, -> { order('created_at DESC').limit(10) }
 
-  validates_presence_of :supplier_id, :delivered_on
+  validates_presence_of :supplier_id
   validate :stock_articles_must_be_unique
 
   accepts_nested_attributes_for :stock_changes, :allow_destroy => :true

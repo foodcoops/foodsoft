@@ -1,6 +1,6 @@
 class FinancialTransactionType < ApplicationRecord
   belongs_to :financial_transaction_class
-  belongs_to :bank_account
+  belongs_to :bank_account, optional: true
   has_many :financial_transactions, dependent: :restrict_with_exception
 
   validates :name, presence: true

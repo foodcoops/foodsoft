@@ -24,6 +24,11 @@
           = number_to_currency(@group_order.price)
         - else
           = t '.not_ordered'
+      - if @group_order && @group_order.transport
+        %dt= heading_helper GroupOrder, :transport
+        %dd= number_to_currency(@group_order.transport)
+        %dt= heading_helper GroupOrder, :total
+        %dd= number_to_currency(@group_order.total)
       - if @order.closed?
         %dt= heading_helper Order, :closed_by
         %dd= show_user_link @order.updated_by
@@ -83,6 +88,13 @@
           %tr{class: cycle('even', 'odd', name: 'articles')}
             %th{colspan: "5"}= heading_helper GroupOrder, :price
             %th= number_to_currency(@group_order.price)
+          - if @group_order.transport
+            %tr{class: cycle('even', 'odd', name: 'articles')}
+              %td{colspan: "5"}= heading_helper GroupOrder, :transport
+              %td= number_to_currency(@group_order.transport)
+            %tr{class: cycle('even', 'odd', name: 'articles')}
+              %th{colspan: "5"}= heading_helper GroupOrder, :total
+              %th= number_to_currency(@group_order.total)
       %br/
       = link_to_top
     - else

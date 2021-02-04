@@ -42,6 +42,7 @@ class GroupOrdersController < ApplicationController
 
   def update
     @group_order.attributes = params[:group_order]
+    @group_order.updated_by = current_user
     begin
       @group_order.save_ordering!
       redirect_to group_order_url(@group_order), :notice => I18n.t('group_orders.update.notice')

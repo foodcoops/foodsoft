@@ -1,7 +1,7 @@
 class StockChange < ApplicationRecord
-  belongs_to :delivery
-  belongs_to :order
-  belongs_to :stock_taking
+  belongs_to :delivery, optional: true, foreign_key: 'stock_event_id'
+  belongs_to :order, optional: true
+  belongs_to :stock_taking, optional: true, foreign_key: 'stock_event_id'
   belongs_to :stock_article
 
   validates_presence_of :stock_article_id, :quantity

@@ -76,6 +76,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     @order.created_by = current_user
+    @order.updated_by = current_user
     if @order.save
       flash[:notice] = I18n.t('orders.create.notice')
       redirect_to @order
@@ -94,7 +95,7 @@ class OrdersController < ApplicationController
   # Update an existing order.
   def update
     @order = Order.find params[:id]
-    if @order.update_attributes params[:order]
+    if @order.update_attributes params[:order].merge(updated_by: current_user)
       flash[:notice] = I18n.t('orders.update.notice')
       redirect_to :action => 'show', :id => @order
     else
@@ -131,9 +132,19 @@ class OrdersController < ApplicationController
     unless request.post?
       @order_articles = @order.order_articles.ordered_or_member.includes(:article).order('articles.order_number, articles.name')
     else
-      s = update_order_amounts
-      flash[:notice] = (s ? I18n.t('orders.receive.notice', :msg => s) : I18n.t('orders.receive.notice_none'))
-      redirect_to @order
+      Order.transaction do
+        s = update_order_amounts
+        @order.update_attribute(:state, 'received') if @order.state != 'received'
+
+        flash[:notice] = (s ? I18n.t('orders.receive.notice', :msg => s) : I18n.t('orders.receive.notice_none'))
+      end
+      if current_user.role_orders? || current_user.role_finance?
+        redirect_to @order
+      elsif current_user.role_pickup?
+        redirect_to pickups_path
+      else
+        redirect_to receive_order_path(@order)
+      end
     end
   end
 

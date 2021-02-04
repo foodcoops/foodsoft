@@ -18,6 +18,7 @@ class HomeController < ApplicationController
     if current_user.ordergroup
       @types = FinancialTransactionType.with_name_short.order(:name)
       @bank_accounts = @types.includes(:bank_account).map(&:bank_account).uniq.compact
+      @bank_accounts = [BankAccount.last] if @bank_accounts.empty?
     else
       redirect_to root_url, alert: I18n.t('group_orders.errors.no_member')
     end
@@ -39,7 +40,7 @@ class HomeController < ApplicationController
 
     unless @ordergroup.nil?
 
-      @ordergroup = Ordergroup.include_transaction_class_sum.find(@ordergroup)
+      @ordergroup = Ordergroup.include_transaction_class_sum.find(@ordergroup.id)
 
       if params['sort']
         sort = case params['sort']

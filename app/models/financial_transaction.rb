@@ -1,12 +1,12 @@
 # financial transactions are the foodcoop internal financial transactions
 # only ordergroups have an account  balance and are happy to transfer money
 class FinancialTransaction < ApplicationRecord
-  belongs_to :ordergroup
+  belongs_to :ordergroup, optional: true
   belongs_to :user
-  belongs_to :financial_link
+  belongs_to :financial_link, optional: true
   belongs_to :financial_transaction_type
-  belongs_to :group_order
-  belongs_to :reverts, class_name: 'FinancialTransaction', foreign_key: 'reverts_id'
+  belongs_to :group_order, optional: true
+  belongs_to :reverts, optional: true, class_name: 'FinancialTransaction', foreign_key: 'reverts_id'
   has_one :reverted_by, class_name: 'FinancialTransaction', foreign_key: 'reverts_id'
 
   validates_presence_of :amount, :note, :user_id

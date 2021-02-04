@@ -1,4 +1,4 @@
-class AddMessaging < ActiveRecord::Migration
+class AddMessaging < ActiveRecord::Migration[4.2]
   def self.up
     # Table that holds the messages:
     create_table :messages do |t|

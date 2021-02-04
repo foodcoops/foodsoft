@@ -1,12 +1,13 @@
 require_relative '../spec_helper'
 
 describe Order do
+  let(:user) { create :user, groups: [create(:ordergroup)] }
 
   it 'automaticly finishes ended' do
-    create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.from_now
-    create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.ago
-    create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.from_now, end_action: :auto_close
-    order = create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close
+    create :order, created_by: user, starts: Date.yesterday, ends: 1.hour.from_now
+    create :order, created_by: user, starts: Date.yesterday, ends: 1.hour.ago
+    create :order, created_by: user, starts: Date.yesterday, ends: 1.hour.from_now, end_action: :auto_close
+    order = create :order, created_by: user, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close
 
     Order.finish_ended!
     order.reload
@@ -18,7 +19,7 @@ describe Order do
 
   it 'sends mail if min_order_quantity has been reached' do
     create :user, groups: [create(:ordergroup)]
-    create :order, created_by: User.first, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close_and_send_min_quantity
+    create :order, created_by: user, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close_and_send_min_quantity
 
     Order.finish_ended!
     expect(ActionMailer::Base.deliveries.count).to eq 1
@@ -50,7 +51,7 @@ describe Order do
 
     it 'can be finished' do
       # TODO randomise user
-      order.finish!(User.first)
+      order.finish!(user)
       expect(order).to_not be_open
       expect(order).to be_finished
       expect(order).to_not be_closed
@@ -58,8 +59,8 @@ describe Order do
 
     it 'can be closed' do
       # TODO randomise user
-      order.finish!(User.first)
-      order.close!(User.first)
+      order.finish!(user)
+      order.close!(user)
       expect(order).to_not be_open
       expect(order).to be_closed
     end

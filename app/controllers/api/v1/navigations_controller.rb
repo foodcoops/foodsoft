@@ -15,7 +15,7 @@ class Api::V1::NavigationsController < Api::V1::BaseController
     items.map do |item|
       r = {}
       r[:name] = item[:name]
-      r[:url] = request.base_url + item[:url] if item[:url] != '#'
+      r[:url] = request.base_url + item[:url] if item[:url] && item[:url] != '#'
       r[:items] = transform(item[:items]) if item[:items]
       r
     end

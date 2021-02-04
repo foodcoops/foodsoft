@@ -47,7 +47,7 @@ en:
         reference: Referenz
         text: Description
       delivery:
-        delivered_on: Delivery date
+        date: Delivery date
         note: Note
         supplier: Supplier
       document:
@@ -121,6 +121,13 @@ en:
         starts: Starts at
         status: Status
         supplier: Supplier
+        transport: Transport costs
+        transport_distribution: Transport costs distribution
+        transport_distributions:
+          articles: Distribute the costs among the number of received articles
+          ordergroup: Every ordergroup pays the same amount
+          price: Distribute the costs among the order sum
+          skip: Do not distribute the costs
         updated_by: Last edited by
       order_article:
         article: Article
@@ -288,9 +295,9 @@ en:
         emails_title: Sending email
       tab_payment:
         schedule_title: Ordering schedule
-      tab_roles:
-        access_to_title: Access to
-        access_to_paragraph: By default every member of the foodcoop has access to the following areas.
+      tab_security:
+        default_roles_title: Access to
+        default_roles_paragraph: By default every member of the foodcoop has access to the following areas.
       tab_tasks:
         periodic_title: Periodic tasks
       tabs:
@@ -657,7 +664,7 @@ en:
       messages: Messages
       others: Other
       payment: Finances
-      roles: Roles
+      security: Security
       tasks: Tasks
   deliveries:
     add_stock_change:
@@ -761,8 +768,11 @@ en:
       edit_results_by_articles:
         add_article: Add article
         amount: Amount
+        edit_transport: Edit transport
         gross: Gross
         net: Net
+      edit_transport:
+        title: Distribute transport costs
       group_order_articles:
         add_group: Add group
         total: Total costs

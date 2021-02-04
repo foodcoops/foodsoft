@@ -1,3 +1,47 @@
+# Foodsoft 4.7.1
+(31 December 2020)
+
+* Fix minor navigation glitch ([78c4ebc](https://github.com/foodcoops/foodsoft/commit/78c4ebcb4b61891e13d3dbb9f07c34ad88c41f4a))
+* Fix legacy tasks without user ([beaca7d](https://github.com/foodcoops/foodsoft/commit/beaca7d384bf9c9a9c5275ac7d81bb012374372e))
+* Fix GroupOrder update timestamp ([3d5043f](https://github.com/foodcoops/foodsoft/commit/3d5043fd052f79b33f8cae2ea3a5cc81ee972ba5))
+* Fix searching in external database ([4043433](https://github.com/foodcoops/foodsoft/commit/4043433539f34b880bec8826d2f29f9137412ef4))
+
+# Foodsoft 4.7.0
+(11 September 2020)
+
+* Add download for articles
+* Add search to balancing page (#651)
+* Fix to not allow changes to settled orders (#614)
+* Fix to improve ordering on smaller screens (#668)
+* Fix to not show deleted shared suppliers
+* Fix for anchor links in wiki
+* Fix to show private messages in index pages (#106)
+* Fix to only show started orders in member ordering
+* Allow to copy articles (#541)
+* Allow making public messages private (#625)
+* Allow reverting financial transactions (ff76fa)
+* Send mails to suppliers in the default language
+* Do not show deleted users as group members (#587)
+* Show associated group when sending messages (#559)
+* CSV download for ordergroups (71fd6f)
+* Speedup sync (#610)
+* Improve usability when ordering (#552)
+* Show the sitemap on the Wiki index
+* Better support for a pickup day, including PDFs with all orders and a pickups role
+* Add transport costs per order, which can be distributed over members
+* Add financial types and classes
+* Add bank accounts, including importing transactions
+* Add financial links to link financial transactions with invoices, orders and bank transactions
+* Allow creating transactions for ordergroups with a custom field (a3defc)
+* Allow more than 20 page versions in the wiki
+* Add polls plugin
+* Folders for the documents plugin (dc94e9)
+* Allow moving of documents
+* New printer job queue plugin, to easily print documents from within Foodsoft
+* Initial work an API, so that external applications can work with Foodsoft
+
+Note that this releases uses Rails 5.2 under hood.
+
 # Foodsoft 4.6.0
 (10 November 2017)
 

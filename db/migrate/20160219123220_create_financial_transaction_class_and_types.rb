@@ -1,4 +1,4 @@
-class CreateFinancialTransactionClassAndTypes < ActiveRecord::Migration
+class CreateFinancialTransactionClassAndTypes < ActiveRecord::Migration[4.2]
   def change
     create_table :financial_transaction_classes do |t|
       t.string :name, :null => false

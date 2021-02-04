@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 class Order < ApplicationRecord
-  attr_accessor :ignore_warnings
+  attr_accessor :ignore_warnings, :transport_distribution
 
   # Associations
   has_many :order_articles, :dependent => :destroy
@@ -11,12 +11,13 @@ class Order < ApplicationRecord
   has_many :users_ordered, :through => :ordergroups, :source => :users
   has_many :comments, -> { order('created_at') }, :class_name => "OrderComment"
   has_many :stock_changes
-  belongs_to :invoice
-  belongs_to :supplier
+  belongs_to :invoice, optional: true
+  belongs_to :supplier, optional: true
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
   enum end_action: { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
+  enum transport_distribution: [:skip, :ordergroup, :price, :articles]
 
   # Validations
   validates_presence_of :starts
@@ -25,17 +26,25 @@ class Order < ApplicationRecord
 
   # Callbacks
   after_save :save_order_articles, :update_price_of_group_orders
+  before_validation :distribute_transport
 
   # Finders
   scope :started, -> { where('starts <= ?', Time.now) }
-  scope :open, -> { where(state: 'open').order('ends DESC') }
-  scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
-  scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
-  scope :stockit, -> { where(supplier_id: 0).order('ends DESC') }
+  scope :stockit, -> { where(supplier_id: nil).order('ends DESC') }
   scope :recent, -> { order('starts DESC').limit(10) }
   scope :stock_group_order, -> { group_orders.where(ordergroup_id: nil).first }
   scope :with_invoice, -> { where.not(invoice: nil) }
+
+  # State related finders
+  # Diagram for `Order.state` looks like this:
+  # * -> open -> finished (-> received) -> closed
+  # So orders can
+  # 1. ...only transition in one direction (e.g. an order that has been `finished` currently cannot be reopened)
+  # 2. ...be set to `closed` when having the `finished` state. (`received` is optional)
+  scope :open, -> { where(state: 'open').order('ends DESC') }
+  scope :finished, -> { where(state: %w[finished received closed]).order('ends DESC') }
+  scope :finished_not_closed, -> { where(state: %w[finished received]).order('ends DESC') }
 
   # Allow separate inputs for date and time
   #   with workaround for https://github.com/einzige/date_time_attribute/issues/14
@@ -43,7 +52,7 @@ class Order < ApplicationRecord
   date_time_attribute :starts, :boxfill, :ends
 
   def stockit?
-    supplier_id == 0
+    supplier_id.nil?
   end
 
   def name
@@ -90,7 +99,11 @@ class Order < ApplicationRecord
   end
 
   def finished?
-    state == "finished"
+    state == "finished" || state == "received"
+  end
+
+  def received?
+    state == "received"
   end
 
   def closed?
@@ -258,7 +271,7 @@ class Order < ApplicationRecord
     transaction do                                        # Start updating account balances
       for group_order in gos
         if group_order.ordergroup
-          price = group_order.price * -1                  # decrease! account balance
+          price = group_order.total * -1                  # decrease! account balance
           group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type, nil, group_order)
         end
       end
@@ -346,6 +359,27 @@ class Order < ApplicationRecord
   end
 
   private
+
+  def distribute_transport
+    return unless group_orders.any?
+    case transport_distribution.try(&:to_i)
+    when Order.transport_distributions[:ordergroup] then
+      amount = transport / group_orders.size
+      group_orders.each do |go|
+        go.transport = amount.ceil(2)
+      end
+    when Order.transport_distributions[:price] then
+      amount = transport / group_orders.sum(:price)
+      group_orders.each do |go|
+        go.transport = (amount * go.price).ceil(2)
+      end
+    when Order.transport_distributions[:articles] then
+      amount = transport / group_orders.includes(:group_order_articles).sum(:result)
+      group_orders.each do |go|
+        go.transport = (amount * go.group_order_articles.sum(:result)).ceil(2)
+      end
+    end
+  end
 
   # Updates the "price" attribute of GroupOrders or GroupOrderResults
   # This will be either the maximum value of a current order or the actual order value of a finished order.

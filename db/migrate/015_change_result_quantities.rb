@@ -1,4 +1,4 @@
-class ChangeResultQuantities < ActiveRecord::Migration
+class ChangeResultQuantities < ActiveRecord::Migration[4.2]
   def self.up
     change_column :group_order_article_results, :quantity, :decimal, :precision => 6, :scale => 3
     change_column :order_article_results, :units_to_order, :decimal, :precision => 6, :scale => 3, :null => false

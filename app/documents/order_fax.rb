@@ -50,7 +50,7 @@ class OrderFax < OrderPdf
     text Date.today.strftime(I18n.t('date.formats.default')), align: :right
 
     move_down 10
-    text "#{Delivery.human_attribute_name :delivered_on}:"
+    text "#{Delivery.human_attribute_name :date}:"
     move_down 10
     unless order.supplier.try(:contact_person).blank?
       text "#{Supplier.human_attribute_name :contact_person}: #{order.supplier[:contact_person]}"

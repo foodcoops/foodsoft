@@ -64,7 +64,7 @@
         %tbody
           - for delivery in @deliveries
             %tr
-              %td= link_to delivery.delivered_on, [@supplier, delivery]
+              %td= link_to delivery.date, [@supplier, delivery]
               %td= link_to_invoice(delivery)
 
   - if @orders.any?

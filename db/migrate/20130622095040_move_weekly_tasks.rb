@@ -1,4 +1,4 @@
-class MoveWeeklyTasks < ActiveRecord::Migration
+class MoveWeeklyTasks < ActiveRecord::Migration[4.2]
   def up
     Workgroup.where(weekly_task: true).each do |workgroup|
       task_group = PeriodicTaskGroup.create

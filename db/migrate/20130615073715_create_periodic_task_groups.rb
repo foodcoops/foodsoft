@@ -1,4 +1,4 @@
-class CreatePeriodicTaskGroups < ActiveRecord::Migration
+class CreatePeriodicTaskGroups < ActiveRecord::Migration[4.2]
   def change
     create_table :periodic_task_groups do |t|
       t.date :next_task_date

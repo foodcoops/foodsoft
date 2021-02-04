@@ -12,3 +12,13 @@
     = render 'shared/articles_by/article_single', order_article: order_article
     %tr
       %td{colspan: 4}
+  - if order.transport
+    %tbody
+      %tr.list-heading
+        %th{colspan: 4}>
+          %h4.name.pull-left= heading_helper GroupOrder, :transport
+    - for go in order.group_orders
+      - if go.transport
+        %tr
+          %td{colspan: 3, style: 'width:70%'}= go.ordergroup_name
+          %td= number_to_currency(go.transport)

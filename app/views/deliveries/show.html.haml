@@ -3,8 +3,8 @@
 %dl
   %dt= heading_helper Delivery, :supplier
   %dd= @delivery.supplier.name
-  %dt= heading_helper Delivery, :delivered_on
-  %dd= @delivery.delivered_on
+  %dt= heading_helper Delivery, :date
+  %dd= @delivery.date
   %dt= t 'deliveries.invoice_amount'
   %dd= link_to_invoice(@delivery)
   - if @delivery.invoice
@@ -24,7 +24,7 @@
       %th.numeric= t '.sum'
   %tbody
     - total_net, total_gross = 0,0
-    - @delivery.stock_changes.each do |stock_change|
+    - @stock_changes.each do |stock_change|
       - quantity = stock_change.quantity
       - sum = quantity * stock_change.stock_article.price
       - total_net += sum

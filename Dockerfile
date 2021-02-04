@@ -1,4 +1,4 @@
-FROM ruby:2.4
+FROM ruby:2.6
 
 RUN supercronicUrl=https://github.com/aptible/supercronic/releases/download/v0.1.3/supercronic-linux-amd64 && \
     supercronicBin=/usr/local/bin/supercronic && \
@@ -36,6 +36,7 @@ RUN export DATABASE_URL=mysql2://localhost/temp?encoding=utf8 && \
     apt-get update && \
     apt-get install -y mariadb-server && \
     /etc/init.d/mysql start && \
+    mariadb -e "CREATE DATABASE temp" && \
     cp config/app_config.yml.SAMPLE config/app_config.yml && \
     cp config/database.yml.MySQL_SAMPLE config/database.yml && \
     bundle exec rake db:setup assets:precompile && \

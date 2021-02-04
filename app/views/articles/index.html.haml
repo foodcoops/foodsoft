@@ -35,7 +35,7 @@
     = form_tag shared_supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search',
       'data-submit-onchange' => true do
       %h3{style: 'display: inline; vertical-align: middle; margin-right: 1em;'}= t('.import.title') + ' '
-      = text_field_tag "q[name_cont_all]", "", class: 'input-medium search-query',
+      = text_field_tag "name_cont_all_joined", "", class: 'input-medium search-query',
         placeholder: t('.import.placeholder')
       %label.checkbox
         = check_box_tag "q[origin_eq]", "REG", false

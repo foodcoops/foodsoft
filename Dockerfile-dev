@@ -1,4 +1,4 @@
-FROM ruby:2.4
+FROM ruby:2.6
 
 # Install dependencies
 RUN deps='libmagic-dev chromium' && \

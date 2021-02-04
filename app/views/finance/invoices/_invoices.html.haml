@@ -28,7 +28,7 @@
           %td><
             - invoice.deliveries.each_with_index do |delivery, index|
               = ', ' if index > 0
-              = link_to format_date(delivery.delivered_on), [delivery.supplier,delivery]
+              = link_to format_date(delivery.date), [delivery.supplier,delivery]
         %td><
           - invoice.orders.each_with_index do |order, index|
             = ', ' if index > 0

@@ -14,10 +14,13 @@ es:
         gross_price: Precio bruto
         manufacturer: Elaborador-a
         name: Nombre
+        note: Nota
         order_number: Número de pedido
+        order_number_short: Núm.
         origin: Origen
         price: Precio (neto)
         supplier: Proveedor
+        tax: IVA
         unit: Unidad
         unit_quantity: Cantidad de unidades
         unit_quantity_short: C.U.
@@ -30,8 +33,22 @@ es:
         price: Precio (neto)
         tax: IVA
         unit_quantity: Cantidad de unidades
+      bank_account:
+        balance: Saldo
+        description: Descripción
+        iban: IBAN
+        name: Nombre
+      bank_transaction:
+        amount: Cantidad
+        date: Fecha
+        external_id: Identificación externa
+        financial_link: Enlace financiero
+        iban: IBAN
+        reference: Referencia
+        text: Descripción
       delivery:
-        delivered_on: Fecha entrega
+        date: Fecha entrega
+        note: Nota
         supplier: Proveedor
       document:
         created_at: Creado en
@@ -42,8 +59,18 @@ es:
       financial_transaction:
         amount: Importe
         created_on: Fecha
+        financial_transaction_class: Transacciones financieras
+        financial_transaction_type: Tipo de transacción financiera
+        note: Nota
         ordergroup: Grupo de pedido
         user: Ingresado por
+      financial_transaction_class:
+        name: Nombre
+      financial_transaction_type:
+        bank_account: Cuenta bancaria
+        name: Nombre
+        financial_transaction_class: Tipo de transacción financiera
+        name_short: Nombre corto
       group_order:
         ordergroup: Grupo de pedido
         price: Suma de pedidos
@@ -66,6 +93,7 @@ es:
         deliveries: Entregas
         deposit: Depósito cobrado
         deposit_credit: Depósito devuelto
+        financial_link: Enlace financiero
         net_amount: Importe ajustado para devolver
         note: Nota
         number: Número
@@ -74,6 +102,7 @@ es:
         supplier: Proveedor
       mail_delivery_status:
         created_at: Hora
+        email: Correo electrónico
         message: Mensaje
       order:
         boxfill: Repartir cajas después
@@ -87,9 +116,18 @@ es:
           no_end_action: Ninguna acción automática
         ends: Finaliza el
         name: Proveedor
+        note: Nota
         pickup: Recogida
         starts: Comienza el
+        status: Estado
         supplier: Proveedor
+        transport: Coste de transporte
+        transport_distribution: Distribución de costes de transporte
+        transport_distributions:
+          articles: Distribuya los costos entre el número de artículos recibidos
+          ordergroup: Cada grupo de pedido paga la misma cantidad
+          price: Distribuya los costos entre la suma del pedido
+          skip: No distribuya los costos
         updated_by: Editado por última vez por
       order_article:
         article: Artículo
@@ -128,16 +166,21 @@ es:
         quantity_ordered: Pedidos
       stock_taking:
         date: Fecha
+        note: Nota
       supplier:
         address: Dirección
         contact_person: Persona de contacto
         customer_number: Número de cliente
         customer_number_short: Nr.cliente
         delivery_days: Días de entrega
+        email: Correo electrónico
+        fax: Fax
+        iban: IBAN
         is_subscribed: suscrito?
         min_order_quantity: Cantidad mínima para pedir
         min_order_quantity_short: Cant. min.
         name: Nombre
+        note: Nota
         order_howto: Cómo pedir
         phone: teléfono
         phone2: teléfono 2
@@ -155,7 +198,9 @@ es:
         user_list: Usuarios responsables
         workgroup: Grupo de trabajo
       user:
+        email: Correo electrónico
         first_name: Nombre
+        iban: IBAN
         last_activity: Última actividad
         last_login: Último login
         last_name: Apellido
@@ -176,14 +221,17 @@ es:
         role_finance: Finanzas
         role_invoices: Facturas
         role_orders: Manejo de pedidos
+        role_pickups: Fecha de recogida
         role_suppliers: Proveedores
         user_tokens: Miembros
     errors:
+      has_many_left: todavía está asociado con un %{collection}!
       models:
         article:
           attributes:
             name:
               taken: ese nombre ya está cogido
+              taken_with_unit: nombre y unidad ya están en uso
         supplier:
           attributes:
             shared_sync_method:
@@ -195,8 +243,11 @@ es:
     models:
       article: Artículo
       article_category: Categoría
+      bank_transaction: Transacción bancaria
       delivery: Entrega
       financial_transaction: Transacción financiara
+      financial_transaction_class: Transacciones financieras
+      financial_transaction_type: Tipo de transacción financiera
       invoice: Factura
       order: Pedido
       order_article: Pedir artículo
@@ -205,6 +256,7 @@ es:
         one: Grupo de pedido
         other: Grupos de pedido
       stock_article: Artículo de stock
+      stock_taking: Toma de inventario
       supplier: Proveedor
       task: Tarea
       user: Usuario
@@ -243,6 +295,9 @@ es:
         emails_title: Enviando email
       tab_payment:
         schedule_title: Agenda de pedidos
+      tab_security:
+        default_roles_title: Acceso a
+        default_roles_paragraph: Por defecto, todos los miembros de la cooperativa de alimentos tienen acceso a las siguientes áreas.
       tab_tasks:
         periodic_title: Tareas periódicas
       tabs:
@@ -250,6 +305,9 @@ es:
       update:
         notice: Configuración guardada.
     confirm: '¿Estás seguro/a?'
+    finances:
+      index:
+        bank_accounts: Cuentas bancarias
     mail_delivery_status:
       destroy_all:
         notice: Se han borrado todos los problemas de email
@@ -713,9 +771,48 @@ es:
         reload: Actualiza sumario
         with_extra_charge: 'con cargo extra:'
         without_extra_charge: 'sin cargo extra:'
+    bank_accounts:
+      import:
+        no_import_method: Para esta cuenta bancaria no se ha configurado ningún método de importación.
+        submit: Importar
+        title: Importar transacciones bancarias para %{name}
+      index:
+        title: Cuentas bancarias
+    bank_transactions:
+      index:
+        assign_unlinked_transactions: Asignar transacciones
+        import_transactions: Importar
+        title: Transacciones bancarias para %{name} (%{balance})
+      show:
+        add_financial_link: Añadir enlace financiero
+        belongs_to_supplier: pertenece al proveedor
+        belongs_to_user: pertenece al usuario
+        in_ordergroup: en grupo de pedido
+      transactions:
+        add_financial_link: Agregar enlace
     create:
       notice: Se ha creado la factura.
     financial_links:
+      add_bank_transaction:
+        notice: Se ha añadido el enlace a la transacción bancaria.
+      add_financial_transaction:
+        notice: Se ha añadido el enlace a la transacción financiera.
+      add_invoice:
+        notice: El enlace a la factura ha sido añadido.
+      create:
+        notice: Se ha creado un nuevo enlance financiero.
+      index_bank_transaction:
+        title: Añadir transacción bancaria
+      index_financial_transaction:
+        title: Añadir transacción financiera
+      index_invoice:
+        title: Añadir factura
+      remove_bank_transaction:
+        notice: Se ha eliminado el enlace a la transacción bancaria.
+      remove_financial_transaction:
+        notice: El enlace a la transacción financiera ha sido eliminado.
+      remove_invoice:
+        notice: El enlace a la factura ha sido eliminado.
       show:
         title: Enlace financiero %{number}
     financial_transactions:
@@ -1096,8 +1193,6 @@ es:
   model:
     delivery:
       each_stock_article_must_be_unique: Los artículos de stock no pueden ser listados más de una vez.
-    invoice:
-      invalid_mime: tiene un tipo de MIME inválido (%{mime})
     membership:
       no_admin_delete: No te puedes salir de este grupo porque eres el último adimistrador/a.
     user:
