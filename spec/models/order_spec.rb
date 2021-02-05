@@ -17,6 +17,31 @@ describe Order do
     expect(order).to be_finished
   end
 
+  describe 'scopes' do
+    let!(:open_order)     { create :order, state: 'open'     }
+    let!(:finished_order) { create :order, state: 'finished' }
+    let!(:received_order) { create :order, state: 'received' }
+    let!(:closed_order)   { create :order, state: 'closed'   }
+
+    it 'should retrieve open orders in the "open" scope' do
+      expect(Order.open.count).to eq(1)
+      expect(Order.open.first.id).to eq(open_order.id)
+    end
+
+    it 'should retrieve finished, received and closed orders in the "finished" scope' do
+      expect(Order.finished.count).to eq(3)
+      expect(Order.finished.first.id).to eq(finished_order.id)
+      expect(Order.finished.second.id).to eq(received_order.id)
+      expect(Order.finished.third.id).to eq(closed_order.id)
+    end
+
+    it 'should retrieve finished and received orders in the "finished_not_closed" scope' do
+      expect(Order.finished_not_closed.count).to eq(2)
+      expect(Order.finished.first.id).to eq(finished_order.id)
+      expect(Order.finished.second.id).to eq(received_order.id)
+    end
+  end
+
   it 'sends mail if min_order_quantity has been reached' do
     create :user, groups: [create(:ordergroup)]
     create :order, created_by: user, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close_and_send_min_quantity
