@@ -151,8 +151,7 @@ module OrdersHelper
     if order.stockit?
       content_tag :div, t('orders.index.action_receive'), class: "btn disabled #{options[:class]}"
     else
-      was_received = order.order_articles.where('units_received IS NOT NULL').any?
-      link_to t('orders.index.action_receive'), receive_order_path(order), class: "btn#{' btn-success' unless was_received} #{options[:class]}"
+      link_to t('orders.index.action_receive'), receive_order_path(order), class: "btn#{' btn-success' unless order.received?} #{options[:class]}"
     end
   end
 end
