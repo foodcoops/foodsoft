@@ -42,4 +42,23 @@ describe GroupOrderArticle do
     end
   end
 
+  describe 'distribution strategy' do
+    let(:article) { create :article, supplier: order.supplier, unit_quantity: 1 }
+    let(:oa) { order.order_articles.create(:article => article) }
+    let(:goa) { create :group_order_article, group_order: go, order_article: oa }
+    let!(:goaq) { create :group_order_article_quantity, group_order_article: goa, quantity: 4 }
+
+    it 'can calculate the result for the distribution strategy "first order first serve"' do
+      res = goa.calculate_result(2)
+      expect(res).to eq(quantity: 2, tolerance: 0, total: 2)
+    end
+
+    it 'can calculate the result for the distribution strategy "no automatic distribution"' do
+      FoodsoftConfig[:distribution_strategy] = FoodsoftConfig::DistributionStrategy::NO_AUTOMATIC_DISTRIBUTION
+
+      res = goa.calculate_result(2)
+      expect(res).to eq(quantity: 4, tolerance: 0, total: 4)
+    end
+  end
+
 end
