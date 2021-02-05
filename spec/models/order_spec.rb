@@ -25,20 +25,20 @@ describe Order do
 
     it 'should retrieve open orders in the "open" scope' do
       expect(Order.open.count).to eq(1)
-      expect(Order.open.first.id).to eq(open_order.id)
+      expect(Order.open.where(id: open_order.id)).to exist
     end
 
     it 'should retrieve finished, received and closed orders in the "finished" scope' do
       expect(Order.finished.count).to eq(3)
-      expect(Order.finished.first.id).to eq(finished_order.id)
-      expect(Order.finished.second.id).to eq(received_order.id)
-      expect(Order.finished.third.id).to eq(closed_order.id)
+      expect(Order.finished.where(id: finished_order.id)).to exist
+      expect(Order.finished.where(id: received_order.id)).to exist
+      expect(Order.finished.where(id: closed_order.id)).to exist
     end
 
     it 'should retrieve finished and received orders in the "finished_not_closed" scope' do
       expect(Order.finished_not_closed.count).to eq(2)
-      expect(Order.finished.first.id).to eq(finished_order.id)
-      expect(Order.finished.second.id).to eq(received_order.id)
+      expect(Order.finished_not_closed.where(id: finished_order.id)).to exist
+      expect(Order.finished_not_closed.where(id: received_order.id)).to exist
     end
   end
 
