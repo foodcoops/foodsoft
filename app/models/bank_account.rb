@@ -24,4 +24,8 @@ class BankAccount < ApplicationRecord
     end
     count
   end
+
+  def last_transaction_date
+    bank_transactions.order(date: :desc).first&.date
+  end
 end
