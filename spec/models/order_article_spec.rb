@@ -117,6 +117,159 @@ describe OrderArticle do
 
   end
 
+  describe 'article price' do
+    let(:admin) { create :user, groups:[create(:workgroup, role_finance: true)] }
+    let(:article) { create :article }
+    let(:order1) { create :order, article_ids: [article.id] }
+    let(:order2) { create :order, article_ids: [article.id] }
+    let(:order3) { create :order, article_ids: [article.id] }
+    let(:order4) { create :order, article_ids: [article.id] }
+    let(:oa1) { order1.order_articles.first }
+    let(:oa2) { order2.order_articles.first }
+    let(:oa3) { order3.order_articles.first }
+    let(:oa4) { order4.order_articles.first }
+    let(:go1) { create :group_order, order: order1 }
+    let(:go2) { create :group_order, order: order2 }
+    let(:go3) { create :group_order, order: order3 }
+    let(:go4) { create :group_order, order: order4 }
+    let(:goa1) { create :group_order_article, group_order: go1, order_article: oa1 }
+    let(:goa2) { create :group_order_article, group_order: go2, order_article: oa2 }
+    let(:goa3) { create :group_order_article, group_order: go3, order_article: oa3 }
+    let(:goa4) { create :group_order_article, group_order: go4, order_article: oa4 }
+
+    def price_attributes(price)
+      { price: price, unit_quantity: 1 }
+    end
+
+    it 'is correct for open orders' do
+      expect(order1.order_articles.first.price.price).to eq article.price
+      expect(order2.order_articles.first.price.price).to eq article.price
+      expect(order3.order_articles.first.price.price).to eq article.price
+
+      expect(order1.order_articles.first.price.tax).to eq article.tax
+      expect(order2.order_articles.first.price.tax).to eq article.tax
+      expect(order3.order_articles.first.price.tax).to eq article.tax
+
+      expect(order1.order_articles.first.price.deposit).to eq article.deposit
+      expect(order2.order_articles.first.price.deposit).to eq article.deposit
+      expect(order3.order_articles.first.price.deposit).to eq article.deposit
+
+      expect(order1.order_articles.first.price.unit_quantity).to eq article.unit_quantity
+      expect(order2.order_articles.first.price.unit_quantity).to eq article.unit_quantity
+      expect(order3.order_articles.first.price.unit_quantity).to eq article.unit_quantity
+    end
+
+    it 'changs only for open orders when the article is changed' do
+      old_article_price = article.price
+      new_article_price = old_article_price + 1
+      order1.finish!(admin)
+      article.update_attributes!({price: new_article_price})
+      oa1.reload
+      oa2.reload
+      expect(oa1.price.price).to eq old_article_price
+      expect(oa2.price.price).to eq new_article_price
+    end
+
+    it 'can change the name' do
+      old_article_name = article.name
+      new_article_name = "#{old_article_name} changed"
+
+      order1.finish!(admin)
+      oa1.reload
+      oa1.update_article_and_price!({}, {name: new_article_name})
+
+      article.reload
+      expect(article.name).to eq new_article_name
+    end
+
+    it 'can change the price for one order' do
+      old_article_price = article.price
+      new_article_price = old_article_price + 1
+
+      order1.finish!(admin)
+      order2.finish!(admin)
+      oa1.reload
+      oa1.update_article_and_price!({}, {}, price_attributes(new_article_price))
+
+      article.reload
+      oa1.reload
+      oa2.reload
+      oa3.reload
+      expect(article.price).to eq old_article_price
+      expect(oa1.price.price).to eq new_article_price
+      expect(oa2.price.price).to eq old_article_price
+      expect(oa3.price.price).to eq old_article_price
+
+      order3.finish!(admin)
+      oa1.reload
+      oa1.update_article_and_price!({}, {}, price_attributes(old_article_price))
+
+      article.reload
+      oa1.reload
+      oa2.reload
+      oa3.reload
+      oa4.reload
+      expect(article.price).to eq old_article_price
+      expect(oa1.price.price).to eq old_article_price
+      expect(oa2.price.price).to eq old_article_price
+      expect(oa3.price.price).to eq old_article_price
+      expect(oa4.price.price).to eq old_article_price
+    end
+
+    it 'can change the global price' do
+      old_article_price = article.price
+      new_article_price = old_article_price + 1
+
+      order1.finish!(admin)
+      order2.finish!(admin)
+
+      oa1.reload
+      oa1.update_article_and_price!({update_global_price: true}, {}, price_attributes(new_article_price))
+
+      article.reload
+      oa1.reload
+      oa2.reload
+      oa3.reload
+      oa4.reload
+      expect(article.price).to eq new_article_price
+      expect(oa1.price.price).to eq new_article_price
+      expect(oa2.price.price).to eq old_article_price
+      expect(oa3.price.price).to eq new_article_price
+      expect(oa4.price.price).to eq new_article_price
+
+      order3.finish!(admin)
+      oa1.reload
+      oa1.update_article_and_price!({update_global_price: true}, {}, price_attributes(old_article_price))
+
+      article.reload
+      oa1.reload
+      oa2.reload
+      oa3.reload
+      oa4.reload
+      expect(article.price).to eq old_article_price
+      expect(oa1.price.price).to eq old_article_price
+      expect(oa2.price.price).to eq old_article_price
+      expect(oa3.price.price).to eq new_article_price
+      expect(oa4.price.price).to eq old_article_price
+
+      order4.finish!(admin)
+      oa1.reload
+      oa1.update_article_and_price!({update_global_price: true}, {}, price_attributes(new_article_price))
+
+      article.reload
+      oa1.reload
+      oa2.reload
+      oa3.reload
+      oa4.reload
+      expect(article.price).to eq new_article_price
+      expect(oa1.price.price).to eq new_article_price
+      expect(oa2.price.price).to eq old_article_price
+      expect(oa3.price.price).to eq new_article_price
+      expect(oa4.price.price).to eq old_article_price
+    end
+
+  end
+
   describe 'boxfill' do
     before { FoodsoftConfig[:use_boxfill] = true }
     let(:article) { create :article, unit_quantity: 6 }

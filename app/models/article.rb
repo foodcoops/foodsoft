@@ -200,6 +200,10 @@ class Article < ApplicationRecord
     update_column :deleted_at, Time.now
   end
 
+  def current_article_price
+    article_prices.find_or_initialize_by(price: price, tax: tax, deposit: deposit, unit_quantity: unit_quantity)
+  end
+
   protected
 
   # Checks if the article is in use before it will deleted
