@@ -403,6 +403,7 @@ fr:
     hints:
       homepage: Site de votre coop.
       name: Le nom de votre coop.
+      distribution_strategy: Comment procéder à la distribution des articles après réception d'une commande.
     keys:
       contact:
         city: Ville
@@ -413,6 +414,10 @@ fr:
         zip_code: Code postal
       currency_unit: Monnaie
       name: Nom
+      distribution_strategy: Stratégie de distribution
+      distribution_strategy_options:
+        first_order_first_serve: Distribuez d'abord à ceux qui ont commandé en premier
+        no_automatic_distribution: Pas de distribution automatique
     tabs:
       language: Langue
       list: Liste

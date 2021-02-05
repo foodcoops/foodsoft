@@ -128,15 +128,18 @@ class GroupOrderArticle < ApplicationRecord
       order_quantities = GroupOrderArticleQuantity.where(group_order_article_id: order_article.group_order_article_ids).order('created_on')
       logger.debug "GroupOrderArticleQuantity records found: #{order_quantities.size}"
 
+      first_order_first_serve = (FoodsoftConfig[:distribution_strategy] == FoodsoftConfig::DistributionStrategy::FIRST_ORDER_FIRST_SERVE)
+
       # Determine quantities to be ordered...
       order_quantities.each do |goaq|
-        q = [goaq.quantity, total - total_quantity].min
+        q = goaq.quantity
+        q = [q, total - total_quantity].min if first_order_first_serve
         total_quantity += q
         if goaq.group_order_article_id == self.id
           logger.debug "increasing quantity by #{q}"
           quantity += q
         end
-        break if total_quantity >= total
+        break if total_quantity >= total && first_order_first_serve
       end
 
       # Determine tolerance to be ordered...

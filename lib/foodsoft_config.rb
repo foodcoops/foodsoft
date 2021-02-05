@@ -54,6 +54,12 @@ class FoodsoftConfig
   # Loaded configuration
   APP_CONFIG = ActiveSupport::HashWithIndifferentAccess.new
 
+  # distribution strategy config values enum
+  module DistributionStrategy
+    FIRST_ORDER_FIRST_SERVE = 'first_order_first_serve'
+    NO_AUTOMATIC_DISTRIBUTION = 'no_automatic_distribution'
+  end
+
   class << self
 
     # Load and initialize foodcoop configuration file.
@@ -260,6 +266,7 @@ class FoodsoftConfig
         tasks_period_days: 7,
         tasks_upfront_days: 49,
         shared_supplier_article_sync_limit: 200,
+        distribution_strategy: FoodsoftConfig::DistributionStrategy::FIRST_ORDER_FIRST_SERVE,
         # The following keys cannot, by default, be set by foodcoops themselves.
         protected: {
           multi_coop_install: true,

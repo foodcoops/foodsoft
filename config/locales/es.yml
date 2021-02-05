@@ -561,6 +561,7 @@ es:
       tasks_upfront_days: Con cuántos días de antelación te gustaría programar las tareas periódicas.
       tax_default: Porcentaje por defecto del IVA para artículos nuevos.
       tolerance_is_costly: Pide lo que más permita la tolerancia de los miembros (en lugar de sólo lo necesario para llenar la última caja). Permitir esto también incluye la tolerancia en el precio final del pedido abierto de cada miembro.
+      distribution_strategy: Cómo se deben distribuir los artículos después de recibir un pedido.
       use_apple_points: Cuando el sistema de puntos-manzana está habilitado los miembros deberán realizar algunas tareas para poder hacer pedidos.
       use_boxfill: Cuando está activado, cerca del cierre de un pedido los miembros no podrán cambiar su pedido a menos que se incremente el valor pedido total. Esto ayudará a llenar las cajas que faltan. Igualmente deberás decidir una fecha de llenado de cajas para los pedidos.
       use_iban: Cuando esta opción está habilitada, el proveedor y el usuario pueden guardan también su número de cuenta bancaria internacional (IBAN).
@@ -605,6 +606,10 @@ es:
       tax_default: IVA por defecto
       time_zone: Zona horaria
       tolerance_is_costly: La tolerancia es prioritaria
+      distribution_strategy: Estrategia de distribución
+      distribution_strategy_options:
+        first_order_first_serve: Primero distribuya a quienes ordenaron primero
+        no_automatic_distribution: Sin distribución automática
       use_apple_points: Puntos-manzana
       use_boxfill: Fase de llenar las cajas
       use_iban: Usar IBAN

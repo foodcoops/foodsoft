@@ -1,5 +1,8 @@
 = config_input form, :use_nick, as: :boolean
 = config_input form, :tolerance_is_costly, as: :boolean
+- distribution_strategy_options = FoodsoftConfig::DistributionStrategy.constants.map { |c| FoodsoftConfig::DistributionStrategy.const_get(c) }
+= config_input form, :distribution_strategy, as: :select, collection: distribution_strategy_options,
+  include_blank: false, input_html: {class: 'input-xxlarge'}, label_method: ->(s){ t("config.keys.distribution_strategy_options.#{s}") }
 = config_input form, :disable_invite, as: :boolean
 = config_input form, :help_url, as: :url, input_html: {class: 'input-xlarge'}
 = config_input form, :webstats_tracking_code, as: :text, input_html: {class: 'input-xxlarge', rows: 3}
