@@ -17,7 +17,7 @@ describe Order do
     expect(order).to be_finished
   end
 
-  describe 'scopes' do
+  describe 'state scopes and boolean getters' do
     let!(:open_order)     { create :order, state: 'open'     }
     let!(:finished_order) { create :order, state: 'finished' }
     let!(:received_order) { create :order, state: 'received' }
@@ -39,6 +39,34 @@ describe Order do
       expect(Order.finished_not_closed.count).to eq(2)
       expect(Order.finished_not_closed.where(id: finished_order.id)).to exist
       expect(Order.finished_not_closed.where(id: received_order.id)).to exist
+    end
+
+    it 'should return valid boolean states for open orders' do
+      expect(open_order.open?).to be(true)
+      expect(open_order.finished?).to be(false)
+      expect(open_order.received?).to be(false)
+      expect(open_order.closed?).to be(false)
+    end
+
+    it 'should return valid boolean states for finished orders' do
+      expect(finished_order.open?).to be(false)
+      expect(finished_order.finished?).to be(true)
+      expect(finished_order.received?).to be(false)
+      expect(finished_order.closed?).to be(false)
+    end
+
+    it 'should return valid boolean states for received orders' do
+      expect(received_order.open?).to be(false)
+      expect(received_order.finished?).to be(true)
+      expect(received_order.received?).to be(true)
+      expect(received_order.closed?).to be(false)
+    end
+
+    it 'should return valid boolean states for closed orders' do
+      expect(closed_order.open?).to be(false)
+      expect(closed_order.finished?).to be(false)
+      expect(closed_order.received?).to be(false)
+      expect(closed_order.closed?).to be(true)
     end
   end
 
