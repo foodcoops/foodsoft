@@ -1,4 +1,4 @@
-class DeleteOrphanedRecordsFromAllTables < ActiveRecord::Migration
+class DeleteOrphanedRecordsFromAllTables < ActiveRecord::Migration[5.2]
   class Article < ActiveRecord::Base; end
   class ArticleCategory < ActiveRecord::Base; end
   class ArticlePrice < ActiveRecord::Base; end

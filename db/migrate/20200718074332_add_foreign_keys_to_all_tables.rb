@@ -1,4 +1,4 @@
-class AddForeignKeysToAllTables < ActiveRecord::Migration
+class AddForeignKeysToAllTables < ActiveRecord::Migration[5.2]
   def change
     # article_prices
     add_foreign_key :article_prices, :articles
@@ -15,9 +15,9 @@ class AddForeignKeysToAllTables < ActiveRecord::Migration
     add_foreign_key :bank_transactions, :bank_accounts
     add_foreign_key :bank_transactions, :financial_links
 
-    # deliveries
-    add_foreign_key :deliveries, :suppliers
-    add_foreign_key :deliveries, :invoices
+    # stock_events
+    add_foreign_key :stock_events, :suppliers
+    add_foreign_key :stock_events, :invoices
 
     # documents
     add_foreign_key :documents, :users, column: :created_by_user_id
@@ -119,10 +119,9 @@ class AddForeignKeysToAllTables < ActiveRecord::Migration
     add_foreign_key :printer_jobs, :users, column: :finished_by_user_id
 
     # stock_changes
-    add_foreign_key :stock_changes, :deliveries
+    add_foreign_key :stock_changes, :stock_events
     add_foreign_key :stock_changes, :orders
     add_foreign_key :stock_changes, :articles, column: :stock_article_id
-    add_foreign_key :stock_changes, :stock_takings
 
     # supplier_categories
     add_foreign_key :supplier_categories, :financial_transaction_classes
