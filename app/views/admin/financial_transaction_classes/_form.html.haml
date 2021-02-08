@@ -4,6 +4,7 @@
     %h3= @financial_transaction_class.new_record? ? t('.title_new') : t('.title_edit')
   .modal-body
     = f.input :name
+    = f.input :ignore_for_account_balance
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit class: 'btn btn-primary'

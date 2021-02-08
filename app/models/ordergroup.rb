@@ -103,7 +103,11 @@ class Ordergroup < Group
   end
 
   def update_balance!
-    update_attribute :account_balance, financial_transactions.sum('amount')
+    new_account_balance = financial_transactions
+      .joins(financial_transaction_type: [:financial_transaction_class])
+      .where({ financial_transaction_classes: { ignore_for_account_balance: false} })
+      .sum(:amount)
+    update_attribute :account_balance, new_account_balance
   end
 
   def avg_jobs_per_euro
