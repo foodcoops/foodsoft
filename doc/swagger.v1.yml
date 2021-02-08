@@ -383,6 +383,12 @@ definitions:
       amount:
         type: number
         description: amount credited (negative for a debit transaction)
+      financial_transaction_type_id:
+        type: integer
+        description: id of the type of the transaction
+      financial_transaction_type_name:
+        type: string
+        description: name of the type of the transaction
       note:
         type: string
         description: note entered with the transaction
@@ -390,7 +396,7 @@ definitions:
         type: string
         format: date-time
         description: when the transaction was entered
-    required: ['id', 'user_id', 'user_name', 'amount', 'note', 'created_at']
+    required: ['id', 'user_id', 'user_name', 'amount', 'financial_transaction_type_id', 'financial_transaction_type_name', 'note', 'created_at']
 
   FinancialTransactionClass:
     type: object
