@@ -41,6 +41,13 @@
 
     $(document).on('touchclick', '#order_articles .unlocker', unlock_receive_input_field);
 
+    $(document).on('click', '#set_all_to_zero', function() {
+      $('tbody input').each(function(i, input) {
+        $(input).val(0);
+        update_delta(input);
+      });
+    })
+
     $(function() {
       $('input[data-units-expected]').each(function() {
         update_delta(this);
@@ -97,7 +104,10 @@
       = render :partial => 'edit_amount', :locals => {:order_article => order_article}
   %tfoot
     %tr
-      %th{:colspan => 10}
+      %th{colspan: 6}
         %select#add_article{:style => 'width: 500px;'}
           - new_article_data.each do |option|
             %option{id: "add_article_#{option[:id]}", value: option[:id]}= option[:text]
+      %th{colspan: 4}
+        %button.btn#set_all_to_zero{type: :button}
+          = t '.set_all_to_zero'
