@@ -955,6 +955,7 @@ de:
         title: Unbezahlte Rechnungen
     ordergroups:
       index:
+        new_financial_link: Neuer Finanzlink
         new_transaction: Neue Überweisungen eingeben
         show_all: Alle Transaktionen
         show_foodcoop: Foodcoop Transaktionen

@@ -36,7 +36,7 @@ class Finance::FinancialLinksController < Finance::BaseController
   end
 
   def create
-    @financial_link = FinancialLink.new
+    @financial_link = FinancialLink.first_unused_or_create
     if params[:bank_transaction] then
       bank_transaction = BankTransaction.find(params[:bank_transaction])
       bank_transaction.update_attribute :financial_link, @financial_link

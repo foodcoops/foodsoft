@@ -956,6 +956,7 @@ en:
         title: Unpaid invoices
     ordergroups:
       index:
+        new_financial_link: New financial link
         new_transaction: Add new transactions
         show_all: All transactions
         show_foodcoop: Foodcoop transaktions
