@@ -1428,6 +1428,7 @@ en:
       field_unlocked_title: The distribution of this article among the ordergroups was changed manually. When you change the amount, those manual changes will be overwritten.
     edit_amounts:
       no_articles_available: No articles to add.
+      set_all_to_zero: Set all to zero
     fax:
       amount: Amount
       articles: Articles

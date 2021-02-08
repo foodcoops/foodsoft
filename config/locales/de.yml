@@ -1415,6 +1415,7 @@ de:
       field_unlocked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Wenn du die gelieferte Menge änderst, werden die vorherigen manuellen Änderungen überschrieben.
     edit_amounts:
       no_articles_available: Keine Artikel zum hinzufügen verfügbar
+      set_all_to_zero: Alle auf Null setzen
     fax:
       amount: Menge
       articles: Artikel
