@@ -5,7 +5,15 @@ class Finance::InvoicesController < ApplicationController
   before_action :ensure_can_edit, only: [:edit, :update, :destroy]
 
   def index
-    @invoices = Invoice.includes(:supplier, :deliveries, :orders).order('date DESC').page(params[:page]).per(@per_page)
+    @invoices_all = Invoice.includes(:supplier, :deliveries, :orders).order('date DESC')
+    @invoices = @invoices_all.page(params[:page]).per(@per_page)
+
+    respond_to do |format|
+      format.js; format.html { render }
+      format.csv do
+        send_data InvoicesCsv.new(@invoices_all).to_csv, filename: 'invoices.csv', type: 'text/csv'
+      end
+    end
   end
 
   def unpaid
