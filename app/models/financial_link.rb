@@ -37,4 +37,8 @@ class FinancialLink < ApplicationRecord
   def self.first_unused_or_create
     unused.first || create
   end
+
+  def amount
+    bank_transactions.sum(:amount) + invoices.sum(:amount) - financial_transactions.sum(:amount)
+  end
 end
