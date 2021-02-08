@@ -21,7 +21,7 @@ class FinancialTransactionsCsv < RenderCSV
       yield [
               t.created_on,
               t.ordergroup_id,
-              t.ordergroup.name,
+              t.ordergroup_name,
               show_user(t.user),
               t.financial_transaction_type.financial_transaction_class.name,
               t.financial_transaction_type.name,
