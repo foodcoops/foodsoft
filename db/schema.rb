@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
 
   create_table "financial_transaction_classes", id: :integer, force: :cascade do |t|
     t.string "name", null: false
+    t.boolean "ignore_for_account_balance", default: false, null: false
   end
 
   create_table "financial_transaction_types", id: :integer, force: :cascade do |t|
