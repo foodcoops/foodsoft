@@ -101,6 +101,18 @@ describe 'API v1', type: :apivore, order: :defined do
       it_handles_invalid_token(:get, '/financial_transaction_classes')
       it_handles_invalid_token(:get, '/financial_transaction_classes/{id}', ->{ api_auth({'id' => cla_1.id }) })
     end
+
+    context 'financial_transaction_types' do
+      let!(:tpy_1) { create :financial_transaction_type }
+      let!(:tpy_2) { create :financial_transaction_type }
+
+      it { is_expected.to validate(:get, '/financial_transaction_types', 200, api_auth) }
+      it { is_expected.to validate(:get, '/financial_transaction_types/{id}', 200, api_auth({'id' => tpy_2.id})) }
+      it { is_expected.to validate(:get, '/financial_transaction_types/{id}', 404, api_auth({'id' => tpy_2.id + 1})) }
+
+      it_handles_invalid_token(:get, '/financial_transaction_types')
+      it_handles_invalid_token(:get, '/financial_transaction_types/{id}', ->{ api_auth({'id' => tpy_1.id }) })
+    end
   end
 
   # needs to be last context so it is always run at the end
