@@ -265,6 +265,7 @@ Rails.application.routes.draw do
           resources :financial_transactions, only: [:index, :show]
         end
 
+        resources :financial_transaction_classes, only: [:index, :show]
         resources :financial_transactions, only: [:index, :show]
       end
     end

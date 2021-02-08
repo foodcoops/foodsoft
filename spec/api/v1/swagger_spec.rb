@@ -89,6 +89,18 @@ describe 'API v1', type: :apivore, order: :defined do
       it_handles_invalid_token_and_scope(:get, '/financial_transactions')
       it_handles_invalid_token_and_scope(:get, '/financial_transactions/{id}', ->{ api_auth({'id' => ft_2.id}) })
     end
+
+    context 'financial_transaction_classes' do
+      let!(:cla_1) { create :financial_transaction_class }
+      let!(:cla_2) { create :financial_transaction_class }
+
+      it { is_expected.to validate(:get, '/financial_transaction_classes', 200, api_auth) }
+      it { is_expected.to validate(:get, '/financial_transaction_classes/{id}', 200, api_auth({'id' => cla_2.id})) }
+      it { is_expected.to validate(:get, '/financial_transaction_classes/{id}', 404, api_auth({'id' => cla_2.id + 1})) }
+
+      it_handles_invalid_token(:get, '/financial_transaction_classes')
+      it_handles_invalid_token(:get, '/financial_transaction_classes/{id}', ->{ api_auth({'id' => cla_1.id }) })
+    end
   end
 
   # needs to be last context so it is always run at the end

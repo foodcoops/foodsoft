@@ -180,6 +180,59 @@ paths:
       security:
         - foodsoft_auth: ['finance:read', 'finance:write']
 
+  /financial_transaction_classes:
+    get:
+      summary: financial transaction classes
+      tags:
+        - 2. Category
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction_classes:
+                type: array
+                items:
+                  $ref: '#/definitions/FinancialTransactionClass'
+              meta:
+                $ref: '#/definitions/Meta'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+
+      security:
+        - foodsoft_auth: ['all']
+  /financial_transaction_classes/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find financial transaction class by id
+      tags:
+        - 2. Category
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction_class:
+                $ref: '#/definitions/FinancialTransactionClass'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
+
   /config:
     get:
       summary: configuration variables
@@ -285,6 +338,16 @@ definitions:
         format: date-time
         description: when the transaction was entered
     required: ['id', 'user_id', 'user_name', 'amount', 'note', 'created_at']
+
+  FinancialTransactionClass:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        description: full name
+    required: ['id', 'name']
 
   Navigation:
     type: array
