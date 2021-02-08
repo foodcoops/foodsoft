@@ -69,10 +69,11 @@
     - if @order.open?
       = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
         data: {confirm: t('.confirm_end', order: @order.name)}
-      - if @order.stock_group_order
-        = link_to t('.stock_order'), edit_group_order_path(@order.stock_group_order, :order_id => @order.id), class: 'btn'
-      - else
-        = link_to t('.stock_order'), new_group_order_path(:order_id => @order.id, :stock_order => true), class: 'btn'
+      - if @order.supplier
+        - if @order.stock_group_order
+          = link_to t('.stock_order'), edit_group_order_path(@order.stock_group_order, order_id: @order.id), class: 'btn'
+        - else
+          = link_to t('.stock_order'), new_group_order_path(order_id: @order.id, stock_order: true), class: 'btn'
       = link_to t('ui.edit'), edit_order_path(@order), class: 'btn'
     - elsif not @order.closed? and not @order.stockit?
       = link_to t('.send_to_supplier'), send_result_to_supplier_order_path(@order), method: :post,
