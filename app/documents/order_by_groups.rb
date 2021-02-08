@@ -11,7 +11,8 @@ class OrderByGroups < OrderPdf
   end
 
   def body
-    each_ordergroup do |oa_name, oa_total, oa_id|
+    each_ordergroup do |oa_name, oa_total, oa_id, oa_transport|
+      has_transport = !oa_transport.nil? && oa_transport > 0
       dimrows = []
       rows = [[
         OrderArticle.human_attribute_name(:article),
@@ -33,10 +34,19 @@ class OrderByGroups < OrderPdf
       end
       next unless rows.length > 1
       rows << [nil, nil, nil, nil, nil, number_to_currency(oa_total)]
+      if has_transport
+        rows << [GroupOrder.human_attribute_name(:transport), nil, nil, nil, nil, number_to_currency(oa_transport)]
+        rows << [nil, nil, nil, nil, nil, number_to_currency(oa_total + oa_transport)]
+      end
 
       rows.each { |row| row.delete_at 1 } unless @options[:show_supplier]
 
       nice_table oa_name || stock_ordergroup_name, rows, dimrows do |table|
+        if has_transport
+          table.row(-4).border_width = 1
+          table.row(-4).border_color = '666666'
+        end
+
         table.row(-2).border_width = 1
         table.row(-2).border_color = '666666'
         table.row(-1).borders = []
