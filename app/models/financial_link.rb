@@ -4,6 +4,12 @@ class FinancialLink < ApplicationRecord
   has_many :invoices
 
   scope :incomplete, -> { with_full_sum.where.not('full_sums.full_sum' => 0) }
+  scope :unused, -> {
+    includes(:bank_transactions, :financial_transactions, :invoices)
+      .where(bank_transactions: { financial_link_id: nil })
+      .where(financial_transactions: { financial_link_id: nil })
+      .where(invoices: { financial_link_id: nil})
+  }
   scope :with_full_sum, -> {
     select(:id, :note, :full_sum).joins(<<-SQL)
       LEFT JOIN (
@@ -27,4 +33,8 @@ class FinancialLink < ApplicationRecord
       ) full_sums ON full_sums.id = financial_links.id
     SQL
   }
+
+  def self.first_unused_or_create
+    unused.first || create
+  end
 end
