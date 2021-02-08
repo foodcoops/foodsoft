@@ -17,9 +17,16 @@ class Finance::BankTransactionsController < ApplicationController
     end
 
     @bank_account = BankAccount.find(params[:bank_account_id])
-    @bank_transactions = @bank_account.bank_transactions.order(sort).includes(:financial_link)
-    @bank_transactions = @bank_transactions.where('reference LIKE ? OR text LIKE ?', "%#{params[:query]}%", "%#{params[:query]}%") unless params[:query].nil?
-    @bank_transactions = @bank_transactions.page(params[:page]).per(@per_page)
+    @bank_transactions_all = @bank_account.bank_transactions.order(sort).includes(:financial_link)
+    @bank_transactions_all = @bank_transactions_all.where('reference LIKE ? OR text LIKE ?', "%#{params[:query]}%", "%#{params[:query]}%") unless params[:query].nil?
+    @bank_transactions = @bank_transactions_all.page(params[:page]).per(@per_page)
+
+    respond_to do |format|
+      format.js; format.html { render }
+      format.csv do
+        send_data BankTransactionsCsv.new(@bank_transactions_all).to_csv, filename: 'transactions.csv', type: 'text/csv'
+      end
+    end
   end
 
   def show

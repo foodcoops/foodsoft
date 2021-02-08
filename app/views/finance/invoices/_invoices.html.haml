@@ -1,5 +1,10 @@
-- if Invoice.count > 20
-  = items_per_page
+.pull-right
+  .btn-group
+    = link_to url_for(query: params[:query], format: :csv), class: 'btn' do
+      = glyph :download
+      CSV
+  - if @invoices.total_pages > 1
+    = items_per_page
 = pagination_links_remote @invoices
 
 %table.table.table-striped
