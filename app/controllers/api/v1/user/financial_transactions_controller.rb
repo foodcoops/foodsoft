@@ -15,7 +15,7 @@ class Api::V1::User::FinancialTransactionsController < Api::V1::BaseController
   private
 
   def scope
-    current_ordergroup.financial_transactions.includes(:user)
+    current_ordergroup.financial_transactions.includes(:user, :financial_transaction_type)
   end
 
 end

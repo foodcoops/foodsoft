@@ -14,7 +14,7 @@ class Api::V1::FinancialTransactionsController < Api::V1::BaseController
   private
 
   def scope
-    FinancialTransaction.includes(:user)
+    FinancialTransaction.includes(:user, :financial_transaction_type)
   end
 
   def ransack_auth_object
