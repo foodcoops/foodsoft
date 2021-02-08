@@ -9,9 +9,9 @@ class OrderPdf < RenderPDF
   end
 
   def nice_table(name, data, dimrows = [])
-    down_or_page 25
-    text name, size: 10, style: :bold
-    table data, width: bounds.width, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+    name_options = {size: 10, style: :bold}
+    name_height = height_of name, name_options
+    made_table = make_table data, width: bounds.width, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
       # borders
       table.cells.borders = [:bottom]
       table.cells.padding_top = 2
@@ -27,6 +27,15 @@ class OrderPdf < RenderPDF
 
       yield table if block_given?
     end
+
+    if name_height + made_table.height < cursor
+      down_or_page 15
+    else
+      start_new_page
+    end
+
+    text name, name_options
+    made_table.draw
   end
 
   protected
