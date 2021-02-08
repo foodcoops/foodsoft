@@ -190,6 +190,9 @@ Rails.application.routes.draw do
           get :index_invoice
           put 'invoices/:invoice', action: 'add_invoice', as: 'add_invoice'
           delete 'invoices/:invoice', action: 'remove_invoice', as: 'remove_invoice'
+
+          get :new_financial_transaction
+          post :create_financial_transaction
         end
       end
 

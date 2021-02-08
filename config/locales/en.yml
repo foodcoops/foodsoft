@@ -867,12 +867,16 @@ en:
         notice: Link to the invoice has been added.
       create:
         notice: A new financial link has been created.
+      create_financial_transaction:
+        notice: Financial transaction has been added.
       index_bank_transaction:
         title: Add bank transaction
       index_financial_transaction:
         title: Add financial transaction
       index_invoice:
         title: Add invoice
+      new_financial_transaction:
+        title: Add financial transaction
       remove_bank_transaction:
         notice: Link to the bank transaction has been removed.
       remove_financial_transaction:
@@ -886,6 +890,7 @@ en:
         amount: Amount
         date: Date
         description: Description
+        new_financial_transaction: New financial transaction
         title: Financial link %{number}
         type: Type
     financial_transactions:

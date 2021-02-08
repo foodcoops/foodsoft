@@ -866,12 +866,16 @@ de:
         notice: Verlinkung wurde zu der Rechnung wurde hinzugefügt.
       create:
         notice: Ein neuer Finanzlink wurde erstellt.
+      create_financial_transaction:
+        notice: Neue Kontotransaktion wurde hinzugefügt.
       index_bank_transaction:
         title: Banktransaktion hinzufügen
       index_financial_transaction:
         title: Kontotransaktion hinzufügen
       index_invoice:
         title: Rechnung hinzufügen
+      new_financial_transaction:
+        title: Neue Kontotransaktion hinzufügen
       remove_bank_transaction:
         notice: Verlinkung wurde zu der Banktransaktion wurde entfernt.
       remove_financial_transaction:
@@ -885,6 +889,7 @@ de:
         amount: Betrag
         date: Datum
         description: Beschreibung
+        new_financial_transaction: Neu Kontotransaktion hinzufügen
         title: Finanzlink %{number}
         type: Typ
     financial_transactions:

@@ -64,6 +64,20 @@ class Finance::FinancialLinksController < Finance::BaseController
     redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
+  def new_financial_transaction
+    @financial_transaction = FinancialTransaction.new(financial_link: @financial_link)
+    @financial_transaction.amount = @financial_link.amount
+    @financial_transaction.ordergroup_id = find_best_fitting_ordergroup_id_for_financial_link(@financial_link.id)
+  end
+
+  def create_financial_transaction
+    financial_transaction = FinancialTransaction.new(financial_transaction_params)
+    financial_transaction.ordergroup.add_financial_transaction! financial_transaction.amount, financial_transaction.note, current_user, financial_transaction.financial_transaction_type, @financial_link
+    redirect_to finance_link_url(@financial_link), notice: t('.notice')
+  rescue => error
+    redirect_to finance_link_url(@financial_link), alert: t('errors.general_msg', msg: error)
+  end
+
   def index_financial_transaction
     @financial_transactions = FinancialTransaction.without_financial_link.includes(:financial_transaction_type, :ordergroup)
   end
@@ -100,6 +114,19 @@ protected
 
   def find_financial_link
     @financial_link = FinancialLink.find(params[:id])
+  end
+
+private
+
+  def financial_transaction_params
+    params.require(:financial_transaction).permit(:financial_transaction_type_id, :ordergroup_id, :amount, :note)
+  end
+
+  def find_best_fitting_ordergroup_id_for_financial_link(financial_link_id)
+    FinancialTransaction.joins(<<-SQL).order(created_on: :desc).pluck(:ordergroup_id).first
+      JOIN bank_transactions a ON financial_transactions.financial_link_id = a.financial_link_id
+      JOIN bank_transactions b ON a.iban = b.iban AND b.financial_link_id = #{financial_link_id.to_i}
+    SQL
   end
 
 end
