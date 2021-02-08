@@ -233,6 +233,59 @@ paths:
       security:
         - foodsoft_auth: ['all']
 
+  /financial_transaction_types:
+    get:
+      summary: financial transaction types
+      tags:
+        - 2. Category
+      parameters:
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/per_page'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction_types:
+                type: array
+                items:
+                  $ref: '#/definitions/FinancialTransactionType'
+              meta:
+                $ref: '#/definitions/Meta'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+
+      security:
+        - foodsoft_auth: ['all']
+  /financial_transaction_types/{id}:
+    parameters:
+      - $ref: '#/parameters/idInUrl'
+    get:
+      summary: find financial transaction type by id
+      tags:
+        - 2. Category
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction_type:
+                $ref: '#/definitions/FinancialTransactionType'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        404:
+          description: not found
+          schema:
+            $ref: '#/definitions/Error404'
+      security:
+        - foodsoft_auth: ['all']
+
   /config:
     get:
       summary: configuration variables
@@ -348,6 +401,34 @@ definitions:
         type: string
         description: full name
     required: ['id', 'name']
+
+  FinancialTransactionType:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+        description: full name
+      name_short:
+        type: ['string', 'null']
+        description: short name (used for bank transfers)
+      bank_account_id:
+        type: ['integer', 'null']
+        description: id of the bank account used for this transaction type
+      bank_account_name:
+        type: ['string', 'null']
+        description: name of the bank account used for this transaction type
+      bank_account_iban:
+        type: ['string', 'null']
+        description: IBAN of the bank account used for this transaction type
+      financial_transaction_class_id:
+        type: integer
+        description: id of the class of the transaction
+      financial_transaction_class_name:
+        type: string
+        description: name of the class of the transaction
+    required: ['id', 'name', 'financial_transaction_class_id', 'financial_transaction_class_name']
 
   Navigation:
     type: array
