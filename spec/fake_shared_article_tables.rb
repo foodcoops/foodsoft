@@ -2,6 +2,9 @@
 # TODO: Maybe transform this to an API endpoint?
 class FakeSharedArticleTables
   def self.up
+    verbose_before = ActiveRecord::Migration.verbose
+    ActiveRecord::Migration.verbose = false
+
     ActiveRecord::Schema.define do
       drop_table :shared_articles, if_exists: true
       drop_table :shared_suppliers, if_exists: true
@@ -49,13 +52,19 @@ class FakeSharedArticleTables
         t.string   'mail_type'
         t.string   'salt',                                    null: false
       end
+      ActiveRecord::Migration.verbose = verbose_before
     end
   end
 
   def self.down
     ActiveRecord::Schema.define do
+      verbose_before = ActiveRecord::Migration.verbose
+      ActiveRecord::Migration.verbose = false
+
       drop_table :shared_articles, if_exists: true
       drop_table :shared_suppliers, if_exists: true
+
+      ActiveRecord::Migration.verbose = verbose_before
     end
   end
 end
