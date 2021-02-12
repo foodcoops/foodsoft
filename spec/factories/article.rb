@@ -17,7 +17,7 @@ FactoryBot.define do
 
     factory :shared_article, class: SharedArticle do
       sequence(:name) { |n| Faker::Lorem.words(number: rand(2..4)).join(' ') + " s##{n}" }
-      order_number { Faker::Lorem.characters(number: rand(1..12)) }
+      number { Faker::Lorem.characters(number: rand(1..12)) }
       supplier { create :shared_supplier }
     end
   end

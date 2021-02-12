@@ -1,4 +1,15 @@
 require_relative '../spec_helper'
+require_relative '../fake_shared_article_tables'
+
+RSpec.configure do |config|
+  config.before(:all) do
+    FakeSharedArticleTables.up
+  end
+
+  config.after(:all) do
+    FakeSharedArticleTables.down
+  end
+end
 
 describe Supplier do
   let(:supplier) { create :supplier }

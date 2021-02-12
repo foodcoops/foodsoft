@@ -127,7 +127,6 @@ class AddForeignKeysToAllTables < ActiveRecord::Migration[5.2]
     add_foreign_key :supplier_categories, :financial_transaction_classes
 
     # suppliers
-    add_foreign_key :suppliers, :suppliers, column: :shared_supplier_id
     add_foreign_key :suppliers, :supplier_categories
 
     # tasks

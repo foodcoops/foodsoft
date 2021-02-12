@@ -510,7 +510,6 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.string "iban"
     t.integer "supplier_category_id"
     t.index ["name"], name: "index_suppliers_on_name", unique: true
-    t.index ["shared_supplier_id"], name: "fk_rails_6958f49bbb"
     t.index ["supplier_category_id"], name: "fk_rails_f8fa27fa1f"
   end
 
@@ -613,7 +612,6 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
   add_foreign_key "stock_events", "suppliers"
   add_foreign_key "supplier_categories", "financial_transaction_classes"
   add_foreign_key "suppliers", "supplier_categories"
-  add_foreign_key "suppliers", "suppliers", column: "shared_supplier_id"
   add_foreign_key "tasks", "groups", column: "periodic_task_group_id"
   add_foreign_key "tasks", "groups", column: "workgroup_id"
   add_foreign_key "tasks", "users", column: "created_by_user_id"
