@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "user_id", default: 0, null: false
     t.integer "task_id", default: 0, null: false
     t.boolean "accepted", default: false
+    t.index ["task_id"], name: "fk_rails_b7c53ee3b6"
     t.index ["user_id", "task_id"], name: "index_assignments_on_user_id_and_task_id", unique: true
   end
 
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.text "receipt"
     t.binary "image", limit: 16777215
     t.integer "financial_link_id"
+    t.index ["bank_account_id"], name: "fk_rails_e0117c6727"
     t.index ["financial_link_id"], name: "index_bank_transactions_on_financial_link_id"
   end
 
@@ -92,6 +94,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "parent_id"
+    t.index ["created_by_user_id"], name: "fk_rails_7294a1aa59"
     t.index ["parent_id"], name: "index_documents_on_parent_id"
   end
 
@@ -108,6 +111,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "financial_transaction_class_id", null: false
     t.string "name_short"
     t.integer "bank_account_id"
+    t.index ["financial_transaction_class_id"], name: "fk_rails_f2b646cddc"
     t.index ["name_short"], name: "index_financial_transaction_types_on_name_short"
   end
 
@@ -121,8 +125,12 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "financial_link_id"
     t.integer "reverts_id"
     t.integer "group_order_id"
+    t.index ["financial_link_id"], name: "fk_rails_d41d3fdfae"
+    t.index ["financial_transaction_type_id"], name: "fk_rails_dba6d95fbf"
+    t.index ["group_order_id"], name: "fk_rails_88ae0ba39c"
     t.index ["ordergroup_id"], name: "index_financial_transactions_on_ordergroup_id"
     t.index ["reverts_id"], name: "index_financial_transactions_on_reverts_id", unique: true
+    t.index ["user_id"], name: "fk_rails_0cbb08eeee"
   end
 
   create_table "group_order_article_quantities", id: :integer, force: :cascade do |t|
@@ -157,6 +165,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["order_id"], name: "index_group_orders_on_order_id"
     t.index ["ordergroup_id", "order_id"], name: "index_group_orders_on_ordergroup_id_and_order_id", unique: true
     t.index ["ordergroup_id"], name: "index_group_orders_on_ordergroup_id"
+    t.index ["updated_by_user_id"], name: "fk_rails_1889c54304"
   end
 
   create_table "groups", id: :integer, force: :cascade do |t|
@@ -190,7 +199,9 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "group_id", default: 0, null: false
     t.integer "user_id", default: 0, null: false
     t.string "email", default: "", null: false
+    t.index ["group_id"], name: "fk_rails_9e216f1ff4"
     t.index ["token"], name: "index_invites_on_token"
+    t.index ["user_id"], name: "fk_rails_ff69dbb2ac"
   end
 
   create_table "invoices", id: :integer, force: :cascade do |t|
@@ -208,6 +219,8 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.string "attachment_mime"
     t.binary "attachment_data", limit: 16777215
     t.integer "financial_link_id"
+    t.index ["created_by_user_id"], name: "fk_rails_8fd25eeb3c"
+    t.index ["financial_link_id"], name: "fk_rails_75b0aafe67"
     t.index ["supplier_id"], name: "index_invoices_on_supplier_id"
   end
 
@@ -231,6 +244,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
   create_table "memberships", id: :integer, force: :cascade do |t|
     t.integer "group_id", default: 0, null: false
     t.integer "user_id", default: 0, null: false
+    t.index ["group_id"], name: "fk_rails_aaf389f138"
     t.index ["user_id", "group_id"], name: "index_memberships_on_user_id_and_group_id", unique: true
   end
 
@@ -253,6 +267,9 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "group_id"
     t.string "salt"
     t.binary "received_email", limit: 16777215
+    t.index ["group_id"], name: "fk_rails_841b0ae6ac"
+    t.index ["reply_to"], name: "fk_rails_3730b06fab"
+    t.index ["sender_id"], name: "fk_rails_b8f26a382d"
   end
 
   create_table "oauth_access_grants", id: :integer, force: :cascade do |t|
@@ -303,6 +320,8 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "article_price_id"
     t.integer "units_billed"
     t.integer "units_received"
+    t.index ["article_id"], name: "fk_rails_44e6c21781"
+    t.index ["article_price_id"], name: "fk_rails_798fa38c22"
     t.index ["order_id", "article_id"], name: "index_order_articles_on_order_id_and_article_id", unique: true
     t.index ["order_id"], name: "index_order_articles_on_order_id"
   end
@@ -313,6 +332,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.text "text"
     t.datetime "created_at"
     t.index ["order_id"], name: "index_order_comments_on_order_id"
+    t.index ["user_id"], name: "fk_rails_9db67cf94d"
   end
 
   create_table "orders", id: :integer, force: :cascade do |t|
@@ -331,7 +351,11 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.datetime "last_sent_mail"
     t.integer "end_action", default: 0, null: false
     t.decimal "transport", precision: 8, scale: 2
+    t.index ["created_by_user_id"], name: "fk_rails_30144627f8"
+    t.index ["invoice_id"], name: "fk_rails_b33ed6c672"
     t.index ["state"], name: "index_orders_on_state"
+    t.index ["supplier_id"], name: "fk_rails_d426350910"
+    t.index ["updated_by_user_id"], name: "fk_rails_f3fe5911c4"
   end
 
   create_table "page_versions", id: :integer, force: :cascade do |t|
@@ -343,6 +367,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "parent_id"
     t.datetime "updated_at"
     t.index ["page_id"], name: "index_page_versions_on_page_id"
+    t.index ["parent_id"], name: "fk_rails_966d369f50"
   end
 
   create_table "pages", id: :integer, force: :cascade do |t|
@@ -355,6 +380,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["parent_id"], name: "fk_rails_409bbac70a"
     t.index ["permalink"], name: "index_pages_on_permalink"
     t.index ["title"], name: "index_pages_on_title"
   end
@@ -379,7 +405,9 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.text "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["ordergroup_id"], name: "fk_rails_931f43cfec"
     t.index ["poll_id", "user_id", "ordergroup_id"], name: "index_poll_votes_on_poll_id_and_user_id_and_ordergroup_id", unique: true
+    t.index ["user_id"], name: "fk_rails_b64de9b025"
   end
 
   create_table "polls", id: :integer, force: :cascade do |t|
@@ -399,6 +427,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "max_points"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["created_by_user_id"], name: "fk_rails_ddedb38d1d"
     t.index ["final_choice"], name: "index_polls_on_final_choice"
   end
 
@@ -416,7 +445,10 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "created_by_user_id", null: false
     t.integer "finished_by_user_id"
     t.datetime "finished_at"
+    t.index ["created_by_user_id"], name: "fk_rails_a222b5a8b4"
     t.index ["finished_at"], name: "index_printer_jobs_on_finished_at"
+    t.index ["finished_by_user_id"], name: "fk_rails_c259d78e0a"
+    t.index ["order_id"], name: "fk_rails_f691a1be68"
   end
 
   create_table "settings", id: :integer, force: :cascade do |t|
@@ -435,6 +467,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "stock_article_id"
     t.integer "quantity", default: 0
     t.datetime "created_at"
+    t.index ["order_id"], name: "fk_rails_6ddf028707"
     t.index ["stock_article_id"], name: "index_stock_changes_on_stock_article_id"
     t.index ["stock_event_id"], name: "index_stock_changes_on_stock_event_id"
   end
@@ -446,6 +479,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.text "note"
     t.integer "invoice_id"
     t.string "type", null: false
+    t.index ["invoice_id"], name: "fk_rails_04a623ff69"
     t.index ["supplier_id"], name: "index_stock_events_on_supplier_id"
   end
 
@@ -453,6 +487,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.string "name", null: false
     t.string "description"
     t.integer "financial_transaction_class_id"
+    t.index ["financial_transaction_class_id"], name: "fk_rails_e4db9d9002"
   end
 
   create_table "suppliers", id: :integer, force: :cascade do |t|
@@ -475,6 +510,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.string "iban"
     t.integer "supplier_category_id"
     t.index ["name"], name: "index_suppliers_on_name", unique: true
+    t.index ["supplier_category_id"], name: "fk_rails_f8fa27fa1f"
   end
 
   create_table "tasks", id: :integer, force: :cascade do |t|
@@ -489,8 +525,10 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "duration", default: 1
     t.integer "periodic_task_group_id"
     t.integer "created_by_user_id"
+    t.index ["created_by_user_id"], name: "fk_rails_1f562c7b99"
     t.index ["due_date"], name: "index_tasks_on_due_date"
     t.index ["name"], name: "index_tasks_on_name"
+    t.index ["periodic_task_group_id"], name: "fk_rails_78a5d11f82"
     t.index ["workgroup_id"], name: "index_tasks_on_workgroup_id"
   end
 
@@ -513,4 +551,68 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["nick"], name: "index_users_on_nick", unique: true
   end
 
+  add_foreign_key "article_prices", "articles"
+  add_foreign_key "articles", "article_categories"
+  add_foreign_key "articles", "suppliers"
+  add_foreign_key "assignments", "tasks"
+  add_foreign_key "assignments", "users"
+  add_foreign_key "bank_transactions", "bank_accounts"
+  add_foreign_key "bank_transactions", "financial_links"
+  add_foreign_key "documents", "users", column: "created_by_user_id"
+  add_foreign_key "financial_transaction_types", "financial_transaction_classes"
+  add_foreign_key "financial_transactions", "financial_links"
+  add_foreign_key "financial_transactions", "financial_transaction_types"
+  add_foreign_key "financial_transactions", "financial_transactions", column: "reverts_id"
+  add_foreign_key "financial_transactions", "group_orders"
+  add_foreign_key "financial_transactions", "groups", column: "ordergroup_id"
+  add_foreign_key "financial_transactions", "users"
+  add_foreign_key "group_order_article_quantities", "group_order_articles"
+  add_foreign_key "group_order_articles", "group_orders"
+  add_foreign_key "group_order_articles", "order_articles"
+  add_foreign_key "group_orders", "groups", column: "ordergroup_id"
+  add_foreign_key "group_orders", "orders"
+  add_foreign_key "group_orders", "users", column: "updated_by_user_id"
+  add_foreign_key "invites", "groups"
+  add_foreign_key "invites", "users"
+  add_foreign_key "invoices", "financial_links"
+  add_foreign_key "invoices", "suppliers"
+  add_foreign_key "invoices", "users", column: "created_by_user_id"
+  add_foreign_key "memberships", "groups"
+  add_foreign_key "memberships", "users"
+  add_foreign_key "message_recipients", "messages"
+  add_foreign_key "message_recipients", "users"
+  add_foreign_key "messages", "groups"
+  add_foreign_key "messages", "messages", column: "reply_to"
+  add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "order_articles", "article_prices"
+  add_foreign_key "order_articles", "articles"
+  add_foreign_key "order_articles", "orders"
+  add_foreign_key "order_comments", "orders"
+  add_foreign_key "order_comments", "users"
+  add_foreign_key "orders", "invoices"
+  add_foreign_key "orders", "suppliers"
+  add_foreign_key "orders", "users", column: "created_by_user_id"
+  add_foreign_key "orders", "users", column: "updated_by_user_id"
+  add_foreign_key "page_versions", "pages"
+  add_foreign_key "page_versions", "pages", column: "parent_id"
+  add_foreign_key "pages", "pages", column: "parent_id"
+  add_foreign_key "poll_choices", "poll_votes"
+  add_foreign_key "poll_votes", "groups", column: "ordergroup_id"
+  add_foreign_key "poll_votes", "polls"
+  add_foreign_key "poll_votes", "users"
+  add_foreign_key "polls", "users", column: "created_by_user_id"
+  add_foreign_key "printer_job_updates", "printer_jobs"
+  add_foreign_key "printer_jobs", "orders"
+  add_foreign_key "printer_jobs", "users", column: "created_by_user_id"
+  add_foreign_key "printer_jobs", "users", column: "finished_by_user_id"
+  add_foreign_key "stock_changes", "articles", column: "stock_article_id"
+  add_foreign_key "stock_changes", "orders"
+  add_foreign_key "stock_changes", "stock_events"
+  add_foreign_key "stock_events", "invoices"
+  add_foreign_key "stock_events", "suppliers"
+  add_foreign_key "supplier_categories", "financial_transaction_classes"
+  add_foreign_key "suppliers", "supplier_categories"
+  add_foreign_key "tasks", "groups", column: "periodic_task_group_id"
+  add_foreign_key "tasks", "groups", column: "workgroup_id"
+  add_foreign_key "tasks", "users", column: "created_by_user_id"
 end

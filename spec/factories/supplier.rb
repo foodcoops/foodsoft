@@ -23,7 +23,9 @@ FactoryBot.define do
       create_list :article, article_count, supplier: supplier
     end
 
-    factory :shared_supplier, class: SharedSupplier
+    factory :shared_supplier, class: SharedSupplier do
+      salt { Faker::Lorem.characters(number: 100) }
+    end
   end
 
   factory :supplier_category do
