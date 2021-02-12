@@ -52,8 +52,9 @@ class FakeSharedArticleTables
         t.string   'mail_type'
         t.string   'salt',                                    null: false
       end
-      ActiveRecord::Migration.verbose = verbose_before
     end
+
+    ActiveRecord::Migration.verbose = verbose_before
   end
 
   def self.down
