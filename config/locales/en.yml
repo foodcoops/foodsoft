@@ -1139,6 +1139,7 @@ en:
         since: "(member for %{when})"
         title: "%{user}"
     reference_calculator:
+      transaction_types_headline: Target
       placeholder: Please enter the amounts you want to tranfser in every field first, to see the reference you should use for that transaction.
       text0: Please transfer
       text1: with the reference
