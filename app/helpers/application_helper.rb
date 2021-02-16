@@ -25,6 +25,17 @@ module ApplicationHelper
     content_tag :span, number_to_currency(amount), class: class_name
   end
 
+  # Adds whitespaces to an IBAN for better readable display (groups of 4 digits)
+  def format_iban(iban)
+    split_groups = iban.length / 4
+    while split_groups > 0 do
+      iban.insert(split_groups * 4, ' ')
+      split_groups -= 1
+    end
+
+    content_tag :span, iban
+  end
+
   # Creates ajax-controlled-links for pagination
   def pagination_links_remote(collection, options = {})
     per_page = options[:per_page] || @per_page
