@@ -25,7 +25,7 @@ class Order < ApplicationRecord
   validate :keep_ordered_articles
 
   # Callbacks
-  after_save :save_order_articles, :update_price_of_group_orders
+  after_save :save_order_articles, :update_price_of_group_orders!
   before_validation :distribute_transport
 
   # Finders
@@ -270,19 +270,11 @@ class Order < ApplicationRecord
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
   def close!(user, transaction_type = nil)
     raise I18n.t('orders.model.error_closed') if closed?
-    transaction_note = I18n.t('orders.model.notice_close', :name => name,
-                              :ends => ends.strftime(I18n.t('date.formats.default')))
 
-    gos = group_orders.includes(:ordergroup)              # Fetch group_orders
-    gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
+    update_price_of_group_orders!
 
     transaction do                                        # Start updating account balances
-      for group_order in gos
-        if group_order.ordergroup
-          price = group_order.total * -1                  # decrease! account balance
-          group_order.ordergroup.add_financial_transaction!(price, transaction_note, user, transaction_type, nil, group_order)
-        end
-      end
+      charge_group_orders!(user, transaction_type)
 
       if stockit?                                         # Decreases the quantity of stock_articles
         for oa in order_articles.includes(:article)
@@ -391,8 +383,21 @@ class Order < ApplicationRecord
 
   # Updates the "price" attribute of GroupOrders or GroupOrderResults
   # This will be either the maximum value of a current order or the actual order value of a finished order.
-  def update_price_of_group_orders
-    group_orders.each { |group_order| group_order.update_price! }
+  def update_price_of_group_orders!
+    group_orders.each(&:update_price!)
   end
 
+  def charge_group_orders!(user, transaction_type = nil)
+    note = transaction_note
+    group_orders.includes(:ordergroup).each do |group_order|
+      if group_order.ordergroup
+        price = group_order.price * -1 # decrease! account balance
+        group_order.ordergroup.add_financial_transaction!(price, note, user, transaction_type, nil, group_order)
+      end
+    end
+  end
+
+  def transaction_note
+    I18n.t('orders.model.notice_close', name: name, ends: ends.strftime(I18n.t('date.formats.default')))
+  end
 end
