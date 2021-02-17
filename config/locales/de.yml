@@ -177,8 +177,8 @@ de:
         fax: Fax
         iban: IBAN
         is_subscribed: abonniert?
-        min_order_quantity: Mindestbestellmenge
-        min_order_quantity_short: Menge (mind.)
+        min_order_quantity: Mindestbestellmenge (Euro)
+        min_order_quantity_short: Menge (€ min.)
         name: Name
         note: Notiz
         order_howto: Kurzanleitung Bestellen
