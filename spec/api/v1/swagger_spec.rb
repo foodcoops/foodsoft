@@ -50,7 +50,6 @@ describe 'API v1', type: :apivore, order: :defined do
 
         let(:create_params) { {'_data' => {financial_transaction: {amount: 1, financial_transaction_type_id: ft_1.financial_transaction_type.id, note: 'note'}}} }
 
-
         context 'without using self service' do
           it { is_expected.to validate(:post, '/user/financial_transactions', 403, api_auth(create_params)) }
         end
