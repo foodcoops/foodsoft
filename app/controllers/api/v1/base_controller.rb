@@ -25,6 +25,20 @@ class Api::V1::BaseController < ApplicationController
     end
   end
 
+  def require_minimum_balance
+    minimum_balance = FoodsoftConfig[:minimum_balance] or return
+    if current_ordergroup.account_balance < minimum_balance
+      raise Api::Errors::PermissionRequired.new(t('application.controller.error_minimum_balance', min: minimum_balance))
+    end
+  end
+
+  def require_enough_apples
+    if current_ordergroup.not_enough_apples?
+      s = t('group_orders.messages.not_enough_apples', apples: current_ordergroup.apples, stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
+      raise Api::Errors::PermissionRequired.new(s)
+    end
+  end
+
   def skip_session
     request.session_options[:skip] = true
   end
