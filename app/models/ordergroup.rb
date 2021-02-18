@@ -90,6 +90,7 @@ class Ordergroup < Group
       if t.amount < 0 && self.account_balance < 0 && self.account_balance - t.amount >= 0
         Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'negative_balance', self.id, t.id)
       end
+      t
     end
   end
 

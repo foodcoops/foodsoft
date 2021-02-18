@@ -48,7 +48,38 @@ describe 'API v1', type: :apivore, order: :defined do
         it { is_expected.to validate(:get, '/user/financial_transactions/{id}', 404, api_auth({'id' => other_ft_1.id})) }
         it { is_expected.to validate(:get, '/user/financial_transactions/{id}', 404, api_auth({'id' => FinancialTransaction.last.id + 1})) }
 
+        let(:create_params) { {'_data' => {financial_transaction: {amount: 1, financial_transaction_type_id: ft_1.financial_transaction_type.id, note: 'note'}}} }
+
+
+        context 'without using self service' do
+          it { is_expected.to validate(:post, '/user/financial_transactions', 403, api_auth(create_params)) }
+        end
+
+        context 'with using self service' do
+          before { FoodsoftConfig[:use_self_service] = true }
+
+          it { is_expected.to validate(:post, '/user/financial_transactions', 200, api_auth(create_params)) }
+
+          context 'with invalid financial transaction type' do
+            let(:create_params) { {'_data' => {financial_transaction: {amount: 1, financial_transaction_type_id: -1, note: 'note'}}} }
+
+            it { is_expected.to validate(:post, '/user/financial_transactions', 404, api_auth(create_params)) }
+          end
+
+          context 'without note' do
+            let(:create_params) { {'_data' => {financial_transaction: {amount: 1, financial_transaction_type_id: ft_1.financial_transaction_type.id}}} }
+
+            it { is_expected.to validate(:post, '/user/financial_transactions', 422, api_auth(create_params)) }
+          end
+
+          context 'without enough balance' do
+            before { FoodsoftConfig[:minimum_balance] = 1000 }
+            it { is_expected.to validate(:post, '/user/financial_transactions', 403, api_auth(create_params)) }
+          end
+        end
+
         it_handles_invalid_token_and_scope(:get, '/user/financial_transactions')
+        it_handles_invalid_token_and_scope(:post, '/user/financial_transactions', ->{ api_auth(create_params) })
         it_handles_invalid_token_and_scope(:get, '/user/financial_transactions/{id}', ->{ api_auth('id' => ft_2.id) })
       end
     end
