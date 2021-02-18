@@ -39,6 +39,12 @@ class Api::V1::BaseController < ApplicationController
     end
   end
 
+  def require_config_enabled(config)
+    unless FoodsoftConfig[config]
+      raise Api::Errors::PermissionRequired.new(t('application.controller.error_not_enabled', config: config))
+    end
+  end
+
   def skip_session
     request.session_options[:skip] = true
   end
