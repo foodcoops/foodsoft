@@ -58,6 +58,15 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 end
 
+if ENV['COVERAGE'] == 'lcov'
+  require 'simplecov-lcov'
+  SimpleCov::Formatter::LcovFormatter.config do |c|
+    c.report_with_single_file = true
+    c.single_report_path = 'coverage/lcov.info'
+  end
+  SimpleCov.formatters = SimpleCov::Formatter::LcovFormatter
+end
+
 # include default foodsoft scope in urls, so that *_path works
 # https://github.com/rspec/rspec-rails/issues/255
 class ActionDispatch::Routing::RouteSet

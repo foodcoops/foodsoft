@@ -50,6 +50,10 @@ jobs:
       - name: Run tests
         run: bundle exec rake rspec-rerun:spec
         env:
-          COVERALLS: 1
+          COVERAGE: lcov
           DATABASE_URL: mysql2://user:password@127.0.0.1/test
           RAILS_ENV: test
+      - name: Upload coverage report to Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
