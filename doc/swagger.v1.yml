@@ -89,6 +89,42 @@ paths:
             $ref: '#/definitions/Error403'
       security:
         - foodsoft_auth: ['finance:user']
+    post:
+      summary: create new financial transaction
+      tags:
+        - 1. User
+        - 6. FinancialTransaction
+      parameters:
+        - in: body
+          name: body
+          description: financial transaction to create
+          required: true
+          schema:
+            $ref: '#/definitions/FinancialTransactionForCreate'
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_transaction:
+                $ref: '#/definitions/FinancialTransaction'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: user has no ordergroup, is below minimum balance, or missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+        404:
+          description: financial transaction type not found
+          schema:
+            $ref: '#/definitions/Error404'
+        422:
+          description: invalid parameter value
+          schema:
+            $ref: '#/definitions/Error422'
   /user/financial_transactions/{id}:
     parameters:
       - $ref: '#/parameters/idInUrl'
@@ -719,34 +755,40 @@ definitions:
         description: language code
     required: ['id', 'name', 'email']
 
-  FinancialTransaction:
+  FinancialTransactionForCreate:
     type: object
     properties:
-      id:
-        type: integer
-      user_id:
-        type: ['integer', 'null']
-        description: id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)
-      user_name:
-        type: ['string', 'null']
-        description: name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)
       amount:
         type: number
         description: amount credited (negative for a debit transaction)
       financial_transaction_type_id:
         type: integer
         description: id of the type of the transaction
-      financial_transaction_type_name:
-        type: string
-        description: name of the type of the transaction
       note:
         type: string
         description: note entered with the transaction
-      created_at:
-        type: string
-        format: date-time
-        description: when the transaction was entered
-    required: ['id', 'user_id', 'user_name', 'amount', 'financial_transaction_type_id', 'financial_transaction_type_name', 'note', 'created_at']
+    required: ['amount', 'financial_transaction_type_id', 'note']
+  FinancialTransaction:
+    allOf:
+      - $ref: '#/definitions/FinancialTransactionForCreate'
+      - type: object
+        properties:
+          id:
+            type: integer
+          user_id:
+            type: ['integer', 'null']
+            description: id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)
+          user_name:
+            type: ['string', 'null']
+            description: name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)
+          financial_transaction_type_name:
+            type: string
+            description: name of the type of the transaction
+          created_at:
+            type: string
+            format: date-time
+            description: when the transaction was entered
+        required: ['id', 'user_id', 'user_name', 'financial_transaction_type_name', 'created_at']
 
   FinancialTransactionClass:
     type: object
