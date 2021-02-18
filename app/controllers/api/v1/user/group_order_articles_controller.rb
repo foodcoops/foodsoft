@@ -84,20 +84,6 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
     params.require(:group_order_article).permit(:quantity, :tolerance)
   end
 
-  def require_minimum_balance
-    minimum_balance = FoodsoftConfig[:minimum_balance] or return
-    if current_ordergroup.account_balance < minimum_balance
-      raise Api::Errors::PermissionRequired.new(t('application.controller.error_minimum_balance', min: minimum_balance))
-    end
-  end
-
-  def require_enough_apples
-    if current_ordergroup.not_enough_apples?
-      s = t('group_orders.messages.not_enough_apples', apples: current_ordergroup.apples, stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
-      raise Api::Errors::PermissionRequired.new(s)
-    end
-  end
-
   def render_goa_with_oa(goa, oa = goa.order_article)
     data = {}
     data[:group_order_article] = GroupOrderArticleSerializer.new(goa) if goa
