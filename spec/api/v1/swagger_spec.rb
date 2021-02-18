@@ -27,6 +27,16 @@ describe 'API v1', type: :apivore, order: :defined do
       it_handles_invalid_token_and_scope(:get, '/user')
     end
 
+    context 'user/financial_overview' do
+      let(:api_scopes) { ['finance:user'] }
+      let!(:user) { create :user, :ordergroup }
+
+      it { is_expected.to validate(:get, '/user/financial_overview', 200, api_auth) }
+      it { is_expected.to validate(:get, '/user/financial_overview', 401) }
+
+      it_handles_invalid_token_and_scope(:get, '/user/financial_overview')
+    end
+
     context 'user/financial_transactions' do
       let(:api_scopes) { ['finance:user'] }
       let(:other_user) { create :user, :ordergroup }
