@@ -4,6 +4,7 @@ ENV["FOODSOFT_APP_CONFIG"] ||= 'spec/app_config.yml' # load special foodsoft con
 require_relative 'support/coverage' # needs to be first
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'simplecov-lcov'
 require 'capybara/rails'
 require 'capybara/apparition'
 
@@ -56,6 +57,14 @@ RSpec.configure do |config|
   # Automatically determine spec from directory structure, see:
   # https://www.relishapp.com/rspec/rspec-rails/v/3-0/docs/directory-structure
   config.infer_spec_type_from_file_location!
+end
+
+if ENV['COVERAGE'] == 'lcov'
+  SimpleCov::Formatter::LcovFormatter.config do |c|
+    c.report_with_single_file = true
+    c.single_report_path = 'coverage/lcov.info'
+  end
+  SimpleCov.formatters = SimpleCov::Formatter::LcovFormatter
 end
 
 # include default foodsoft scope in urls, so that *_path works
