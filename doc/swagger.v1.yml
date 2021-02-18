@@ -90,7 +90,7 @@ paths:
       security:
         - foodsoft_auth: ['finance:user']
     post:
-      summary: create new financial transaction
+      summary: create new financial transaction (requires enabled self service)
       tags:
         - 1. User
         - 6. FinancialTransaction
@@ -114,7 +114,7 @@ paths:
           schema:
             $ref: '#/definitions/Error401'
         403:
-          description: user has no ordergroup, is below minimum balance, or missing scope
+          description: user has no ordergroup, is below minimum balance, self service is disabled, or missing scope
           schema:
             $ref: '#/definitions/Error403'
         404:
