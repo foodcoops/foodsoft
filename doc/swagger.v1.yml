@@ -58,6 +58,31 @@ paths:
       security:
         - foodsoft_auth: ['user:read', 'user:write']
 
+  /user/financial_overview:
+    get:
+      summary: financial summary about the currently logged-in user
+      tags:
+        - 1. User
+        - 6. FinancialTransaction
+      responses:
+        200:
+          description: success
+          schema:
+            type: object
+            properties:
+              financial_overview:
+                $ref: '#/definitions/FinanceOverview'
+        401:
+          description: not logged-in
+          schema:
+            $ref: '#/definitions/Error401'
+        403:
+          description: missing scope
+          schema:
+            $ref: '#/definitions/Error403'
+      security:
+        - foodsoft_auth: ['finance:user']
+
   /user/financial_transactions:
     get:
       summary: financial transactions of the member's ordergroup
@@ -827,6 +852,32 @@ definitions:
         type: string
         description: name of the class of the transaction
     required: ['id', 'name', 'financial_transaction_class_id', 'financial_transaction_class_name']
+
+  FinanceOverview:
+    type: object
+    properties:
+      account_balance:
+        type: number
+        description: booked accout balance of ordergroup
+      available_funds:
+        type: number
+        description: fund available to order articles
+      financial_transaction_class_sums:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: id of the financial transaction class
+            name:
+              type: string
+              description: name of the financial transaction class
+            amount:
+              type: number
+              description: sum of the amounts belonging to the financial transaction class
+          required: ['id', 'name', 'amount']
+    required: ['account_balance', 'available_funds', 'financial_transaction_class_sums']
 
   ArticleCategory:
     type: object
