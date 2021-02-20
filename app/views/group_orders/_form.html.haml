@@ -38,7 +38,7 @@
       %dd= format_date(@order.pickup)
       - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
         %dt= heading_helper Supplier, :min_order_quantity, short: true
-        %dd= @order.supplier.min_order_quantity
+        %dd= number_to_currency @order.supplier.min_order_quantity
       %dt= t '.sum_amount'
       %dd= number_to_currency @order.sum
       - unless @group_order.new_record?
