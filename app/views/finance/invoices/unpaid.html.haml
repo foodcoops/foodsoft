@@ -23,7 +23,7 @@
     %p
       - if supplier.iban.present?
         %b= heading_helper(Supplier, :iban) + ':'
-        = supplier.iban
+        = format_iban supplier.iban
         %br/
       %b= t('.invoices_text') + ':'
       = invoices_text.join(', ')

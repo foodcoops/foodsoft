@@ -10,7 +10,7 @@
 - if @bank_transaction.iban?
   %p
     %b= heading_helper(BankTransaction, :iban) + ':'
-    = @bank_transaction.iban
+    = format_iban @bank_transaction.iban
     - if user = @bank_transaction.user
       = t('.belongs_to_user')
       = user.display
