@@ -25,15 +25,9 @@ module ApplicationHelper
     content_tag :span, number_to_currency(amount), class: class_name
   end
 
-  # Adds whitespaces to an IBAN for better readable display (groups of 4 digits)
+  # Splits an IBAN into groups of 4 digits (.iban tag will add margins between each group)
   def format_iban(iban)
-    split_groups = iban.length / 4
-    while split_groups > 0 do
-      iban.insert(split_groups * 4, ' ')
-      split_groups -= 1
-    end
-
-    content_tag :span, iban
+    iban.scan(/..?.?.?/).map{ |item| content_tag(:span, item, style: "margin-right: 0.5em;") }.join.html_safe
   end
 
   # Creates ajax-controlled-links for pagination
