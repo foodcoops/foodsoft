@@ -10,7 +10,10 @@
   = f.hidden_field :ordergroup_id
   - if FinancialTransactionType.has_multiple_types
     = f.association :financial_transaction_type, :as => :radio_buttons
-  = f.input :amount
+  = f.input :amount do
+    .input-prepend
+      %span.add-on= t 'number.currency.format.unit'
+      = f.input_field :amount, class: 'input-small', step: 0.01, type: :number
   = f.input :note, :as => :text
   .form-actions
     = f.submit class: 'btn btn-primary'
