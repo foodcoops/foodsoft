@@ -2,74 +2,76 @@
 
 - total = 0
 
-%p
-  %b= heading_helper(Invoice, :created_at) + ':'
-  = format_time(@invoice.created_at)
-%p
-  %b= heading_helper(Invoice, :created_by) + ':'
-  = show_user(@invoice.created_by)
-%p
-  %b= heading_helper(Invoice, :supplier) + ':'
-  = @invoice.supplier.name
+.row-fluid
+  .span6
+    %dl.dl-horizontal
+      %dt= heading_helper(Invoice, :created_at) + ':'
+      %dd= format_date(@invoice.created_at)
 
-- if @invoice.deliveries.any?
-  %p
-    %b= heading_helper(Invoice, :deliveries) + ':'
-    %span><
-      - @invoice.deliveries.order(:date).each_with_index do |delivery, index|
-        - sum = delivery.sum
-        - total += sum
-        = ', ' if index > 0
-        = link_to format_date(delivery.date), [delivery.supplier, delivery]
-        = ' (' + number_to_currency(sum) + ')'
-- if @invoice.orders.any?
-  %p
-    %b= heading_helper(Invoice, :orders) + ':'
-    %span><
-      - @invoice.orders.order(:ends).each_with_index do |order, index|
-        - sum = order.sum
-        - total += sum
-        = ', ' if index > 0
-        = link_to format_date(order.ends), new_finance_order_path(order_id: order)
-        = ' (' + number_to_currency(sum) + ')'
+      %dt= heading_helper(Invoice, :created_by) + ':'
+      %dd= show_user(@invoice.created_by)
 
-%p
-  %b= heading_helper(Invoice, :number) + ':'
-  = @invoice.number
-%p
-  %b= heading_helper(Invoice, :date) + ':'
-  = @invoice.date
-%p
-  %b= heading_helper(Invoice, :paid_on) + ':'
-  = @invoice.paid_on
-%p
-  %b= heading_helper(Invoice, :amount) + ':'
-  = number_to_currency @invoice.amount
-%p
-  %b= heading_helper(Invoice, :deposit) + ':'
-  = number_to_currency @invoice.deposit
-%p
-  %b= heading_helper(Invoice, :deposit_credit) + ':'
-  = number_to_currency @invoice.deposit_credit
-%p
-  %b= heading_helper(Invoice, :net_amount) + ':'
-  = number_to_currency @invoice.net_amount
-- if @invoice.deliveries.any? || @invoice.orders.any?
-  %p
-    %b= heading_helper(Invoice, :total) + ':'
-    = number_to_currency total
-%p
-  %b= heading_helper(Invoice, :attachment) + ':'
-  - if @invoice.attachment_data
-    = link_to t('ui.download'), finance_invoice_attachment_path(@invoice)
-%p
-  %b= heading_helper(Invoice, :note) + ':'
-  =h @invoice.note
-- if @invoice.financial_link
-  %p
-    %b= heading_helper(Invoice, :financial_link) + ':'
-    = link_to t('ui.show'), finance_link_path(@invoice.financial_link)
+      %dt= heading_helper(Invoice, :supplier) + ':'
+      %dd= @invoice.supplier.name
 
-- if @invoice.user_can_edit?(current_user)
-  = link_to t('ui.edit'), edit_finance_invoice_path(@invoice), class: 'btn'
-= link_to t('ui.or_cancel'), finance_invoices_path
+      - if @invoice.deliveries.any?
+        %dt= heading_helper(Invoice, :deliveries) + ':'
+        %dd><
+          - @invoice.deliveries.order(:date).each_with_index do |delivery, index|
+            - sum = delivery.sum
+            - total += sum
+            = ', ' if index > 0
+            = link_to format_date(delivery.date), [delivery.supplier, delivery]
+            = ' (' + number_to_currency(sum) + ')'
+
+      - if @invoice.orders.any?
+        %dt= heading_helper(Invoice, :orders) + ':'
+        %dd><
+          - @invoice.orders.order(:ends).each_with_index do |order, index|
+            - sum = order.sum
+            - total += sum
+            = ', ' if index > 0
+            = link_to format_date(order.ends), new_finance_order_path(order_id: order) #, style: "margin-right: 0.2em;"
+            = ' (' + number_to_currency(sum) + ')'
+
+      %dt= heading_helper(Invoice, :number) + ':'
+      %dd= @invoice.number
+
+      %dt= heading_helper(Invoice, :date) + ':'
+      %dd= format_date(@invoice.date)
+
+      %dt= heading_helper(Invoice, :paid_on) + ':'
+      %dd= format_date(@invoice.paid_on)
+
+      %dt= heading_helper(Invoice, :amount) + ':'
+      %dd= number_to_currency @invoice.amount
+
+      %dt= heading_helper(Invoice, :deposit) + ':'
+      %dd= number_to_currency @invoice.deposit
+
+      %dt= heading_helper(Invoice, :deposit_credit) + ':'
+      %dd= number_to_currency @invoice.deposit
+
+      %dt= heading_helper(Invoice, :net_amount) + ':'
+      %dd= number_to_currency @invoice.net_amount
+
+      - if @invoice.deliveries.any? || @invoice.orders.any?
+        %dt= heading_helper(Invoice, :total) + ':'
+        %dd= number_to_currency total
+
+      - if @invoice.attachment_data
+        %dt= heading_helper(Invoice, :attachment) + ':'
+        %dd= link_to t('ui.download'), finance_invoice_attachment_path(@invoice)
+
+      %dt= heading_helper(Invoice, :note) + ':'
+      %dd= simple_format(@invoice.note)
+
+      - if @invoice.financial_link
+        %dt= heading_helper(Invoice, :financial_link) + ':'
+        %dd= link_to t('ui.show'), finance_link_path(@invoice.financial_link)
+
+    .clearfix
+      .form-actions
+        - if @invoice.user_can_edit?(current_user)
+          = link_to t('ui.edit'), edit_finance_invoice_path(@invoice), class: 'btn'
+        = link_to t('ui.or_cancel'), finance_invoices_path
