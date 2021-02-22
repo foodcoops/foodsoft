@@ -1144,6 +1144,7 @@ de:
         since: "(Mitglied seit %{when})"
         title: "%{user}"
     reference_calculator:
+      transaction_types_headline: Zweck
       placeholder: Bitte fülle zuerst die einzelnen Felder mit den gewünschten Beträgen für die Überweisung aus, um die Zahlungsreferenz für diese Transaktion anzuzeigen.
       text0: Bitte überweise
       text1: mit der Zahlungsreferenz
