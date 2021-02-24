@@ -247,6 +247,8 @@ Rails.application.routes.draw do
         get :memberships, on: :member
       end
 
+      resources :payments
+
       resources :mail_delivery_status, only: [:index, :show, :destroy] do
         delete :index, on: :collection, action: :destroy_all
       end
@@ -286,6 +288,7 @@ Rails.application.routes.draw do
     ############## The rest
 
     resources :users, only: [:index]
+    resources :ordergroups, only: [:index]
 
   end # End of /:foodcoop scope
 end

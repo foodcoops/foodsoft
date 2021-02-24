@@ -1,0 +1,23 @@
+- unless @payment.new_record?
+  = simple_form_for [:admin, @payment] do |f|
+    = f.input :name
+
+    = f.input :group_tokens, :as => :string,
+      :input_html => { 'data-pre' => f.object.groups.map(&:token_attributes).to_json }
+
+    - content_for :javascript do
+      :javascript
+        $(function() {
+          $("##{f.object.class.to_s.underscore}_group_tokens").tokenInput("#{ordergroups_path(:format => :json)}", {
+            crossDomain: false,
+            prePopulate: $("##{f.object.class.to_s.underscore}_group_tokens").data("pre"),
+            hintText: '#{t('.search_group')}',
+            noResultText: '#{t('.group_not_found')}',
+            searchingText: '#{t('.search')}',
+            theme: 'facebook'
+          });
+        });
+
+    .form-actions
+      = f.button :submit
+      = link_to t('ui.or_cancel'), :back

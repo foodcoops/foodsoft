@@ -1,0 +1,13 @@
+- title t '.title', name: @payment.name
+
+%dl
+  %dt= heading_helper(Payment, :name) + ':'
+  %dd=h @payment.name
+  %dt= heading_helper(Payment, :payed_by) + ':'
+  %dd
+    - groups = @payment.groups
+    = "(#{groups.size})"
+    = groups.collect{|u| u.name}.join(", ")
+
+= link_to t('ui.edit'), edit_admin_payment_path(@payment), class: 'btn'
+= link_to t('ui.delete'), [:admin, @payment], :data => {:confirm => t('.confirm')}, :method => :delete, class: 'btn btn-danger'

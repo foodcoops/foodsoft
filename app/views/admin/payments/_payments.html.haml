@@ -1,0 +1,19 @@
+- if Payment.count > 20
+  = items_per_page
+= pagination_links_remote @payments
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper Payment, :name
+      %th= t 'admin.payments.index.payed'
+      %th= t 'ui.actions'
+  %tbody
+    - for payment in @payments
+      %tr{:class => cycle('even','odd', :name => 'payments')}
+        %td= link_to payment.name, [:admin, payment]
+        %td= payment.groups.size
+        %td
+          = link_to t('ui.edit'), edit_admin_payment_path(payment), class: 'btn btn-mini'
+          = link_to t('ui.delete'), [:admin, payment], :data => {       |
+              :confirm => t('ui.confirm_delete', name: payment.name)},  |
+            :method => :delete, class: 'btn btn-mini btn-danger'

@@ -11,8 +11,12 @@
   %p= t('.second_paragraph', url: link_to(t('.workgroup'), admin_workgroups_path)).html_safe
 .well.well-small
   = form_tag admin_ordergroups_path, :method => :get, :remote => true,
-    'data-submit-onchange' => true, class: 'form-search' do
+    'data-submit-onchange' => true, class: 'form-search', style: 'float: left' do
     = text_field_tag :query, params[:query], class: 'input-medium search-query',
       placeholder: t('admin.search_placeholder')
+  = form_tag admin_ordergroups_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :query_unpaid, params[:query_unpaid], class: 'input-medium search-query',
+      placeholder: t('admin.ordergroups.search_unpaid')
 #ordergroups
   = render "ordergroups"

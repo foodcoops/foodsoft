@@ -8,6 +8,8 @@ class Group < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :users, -> { where(deleted_at: nil) }, through: :memberships
 
+  has_and_belongs_to_many :payments
+
   validates :name, :presence => true, :length => {:in => 1..25}
   validates_uniqueness_of :name
 
@@ -41,4 +43,10 @@ class Group < ApplicationRecord
       super
     end
   end
+
+  def token_attributes
+    # Used in javascript search
+    {:id => id, :name => name}
+  end
+
 end

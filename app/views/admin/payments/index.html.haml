@@ -1,0 +1,18 @@
+- title t('.title')
+
+- content_for :actionbar do
+  = link_to t('.new_payment'), new_admin_payment_path, class: 'btn btn-primary'
+  = link_to url_for(search: params[:q], format: :csv), class: 'btn' do
+    = glyph :download
+    CSV
+
+- content_for :sidebar do
+  %p= t('.first_paragraph', url: link_to(t('.new_payment'), new_admin_payment_path)).html_safe
+  %p= t('.second_paragraph', url: link_to(t('.workgroup'), admin_workgroups_path)).html_safe
+.well.well-small
+  = form_tag admin_payments_path, :method => :get, :remote => true,
+    'data-submit-onchange' => true, class: 'form-search' do
+    = text_field_tag :query, params[:query], class: 'input-medium search-query',
+      placeholder: t('admin.search_placeholder')
+#payments
+  = render "payments"
