@@ -50,7 +50,7 @@
       %dd= number_to_currency @invoice.deposit
 
       %dt= heading_helper(Invoice, :deposit_credit) + ':'
-      %dd= number_to_currency @invoice.deposit
+      %dd= number_to_currency @invoice.deposit_credit
 
       %dt= heading_helper(Invoice, :net_amount) + ':'
       %dd= number_to_currency @invoice.net_amount
