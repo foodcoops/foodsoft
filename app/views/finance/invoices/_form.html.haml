@@ -19,9 +19,18 @@
   = f.input :date, as: :date_picker
   - if current_user.role_finance?
     = f.input :paid_on, as: :date_picker
-  = f.input :amount, as: :string
-  = f.input :deposit, as: :string
-  = f.input :deposit_credit, as: :string
+  = f.input :amount, as: :string do
+    .input-prepend
+      %span.add-on= t 'number.currency.format.unit'
+      = f.input_field :amount, class: 'input-small'
+  = f.input :deposit, as: :string do
+    .input-prepend
+      %span.add-on= t 'number.currency.format.unit'
+      = f.input_field :deposit, class: 'input-small'
+  = f.input :deposit_credit, as: :string do
+    .input-prepend
+      %span.add-on= t 'number.currency.format.unit'
+      = f.input_field :deposit_credit, class: 'input-small'
   = render 'shared/custom_form_fields', f: f, type: :invoice
   = f.input :attachment, as: :file, hint: t('.attachment_hint')
   - if f.object.attachment_data.present?
