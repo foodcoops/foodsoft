@@ -75,6 +75,9 @@ class FoodsoftConfig
       self.scope = config[:default_scope] or raise "No default_scope is set"
       # Set defaults for backward-compatibility
       set_missing
+      # Make sure relevant configuration is applied, also in single coops mode,
+      # where select_foodcoop is not called in every request.
+      setup_mailing
     end
 
     def init_mailing
