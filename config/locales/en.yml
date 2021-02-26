@@ -1339,7 +1339,7 @@ en:
       text1: |
         In order to choose a new password follow this link: %{link}
         This link works only once and expires on %{expires}.
-        You can always use "Forgot password?" to get an new link.
+        You can always use "Forgot password?" to get a new link.
 
 
         Kind regards from %{foodcoop}.
