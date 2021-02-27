@@ -1298,6 +1298,7 @@ en:
       subject: 'Order delivery registered: %{name}'
       text0: |
         Dear %{ordergroup},
+
         the order for "%{order}" has been received.
       abundant_articles: Received too much
       scarce_articles: Received too little

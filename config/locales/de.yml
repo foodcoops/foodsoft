@@ -1287,6 +1287,7 @@ de:
       subject: 'Bestellung entgegengenommen: %{name}'
       text0: |
         Liebe Bestellgruppe %{ordergroup},
+
         die Bestellung für "%{order}" wurde geliefert.
       abundant_articles: Zuviel geliefert
       scarce_articles: Zuwenig geliefert
