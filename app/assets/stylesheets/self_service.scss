@@ -1,0 +1,72 @@
+#self-service {
+  #pickup {
+    tr {
+      &:hover {
+        td {
+          background-color: transparent;
+        }
+
+        background-color: #f5f5f5;
+      }
+
+      &.abundance {
+        background-color: #78b74e;
+        &:hover {
+          background-color: #78b74e88;
+        }
+      }
+
+      &.shortage {
+        background-color: #ED0606A0;
+        &:hover {
+          background-color: #ED060677;
+        }
+      }
+
+      td.availability {
+        font-weight: bold;
+      }
+    }
+  }
+
+  #transactions .table {
+    width: auto;
+
+    .control-group {
+      margin-bottom: 0px;
+    }
+
+    input.numeric {
+      width: 50px;
+    }
+
+    .date, .amount {
+      white-space: nowrap;
+    }
+  }
+
+  .funds {
+    margin-bottom: 10px;
+    th, td {
+      padding: 5px;
+    }
+
+    th::after {
+      content: ':';
+    }
+
+    td {
+      padding-right: 20px;
+    }
+  }
+}
+
+.just-added {
+  animation-name: justAdded;
+  animation-duration: 2s;
+}
+
+@keyframes justAdded  {
+  from {background-color: #78b74e;}
+  to {background-color: transparent;}
+}

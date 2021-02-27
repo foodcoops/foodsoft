@@ -61,6 +61,15 @@ describe GroupOrderArticle do
       goa.update_quantities(1, 2)
       expect(goa.tolerance).to eq(2)
     end
+
+    it 'calculates the difference of fetched articles compared to ordered articles correctly' do
+      goa.quantity = 3
+      goa.result = 1
+      expect(goa.fetch_deviation).to eq(-2)
+
+      goa.result = 4
+      expect(goa.fetch_deviation).to eq(1)
+    end
   end
 
   describe 'distribution strategy' do

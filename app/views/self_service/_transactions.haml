@@ -1,0 +1,21 @@
+= simple_form_for @ordergroup.financial_transactions.build, :url => finance_group_transactions_path(@ordergroup), remote: true, html: { class: 'self-service-transaction' } do |form|
+  = form.hidden_field :ordergroup_id
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= t('.date')
+        %th= t('.amount')
+        %th= t('.transaction_text')
+        %th
+    %tbody
+      %tr
+        %td
+        %td= form.input :amount, :label => false, :required => true
+        %td= form.text_field :note, :label => false, :required => true
+        %td= form.submit
+      - @financial_transactions.each do |financial_transaction|
+        %tr
+          %td.date= format_time(financial_transaction.created_on)
+          %td.amount.numeric= format_currency financial_transaction.amount
+          %td.note= financial_transaction.note
+          %td

@@ -1,0 +1,7 @@
+%table.funds
+  %tbody
+    %tr
+      %th=heading_helper(Ordergroup, :available_funds)
+      %td#available-funds.value.currency=number_to_currency(@ordergroup.get_available_funds)
+      %th=heading_helper(Ordergroup, :account_balance)
+      %td#account_balance.value.currency=number_to_currency(@ordergroup.account_balance)

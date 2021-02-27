@@ -268,4 +268,32 @@ describe OrderArticle do
       end
     end
   end
+
+  describe 'self_service' do
+    let(:article) { create :article, unit_quantity: 3 }
+    let(:order) { create :order, article_ids: [article.id] }
+    let(:go1) { create :group_order, order: order }
+    let(:go2) { create :group_order, order: order }
+    let(:go3) { create :group_order, order: order }
+    let(:goa1) { create :group_order_article, group_order: go1, order_article: oa, quantity: 4, result: 3 }
+    let(:goa2) { create :group_order_article, group_order: go2, order_article: oa, quantity: 4, result: 6 }
+    let(:goa3) { create :group_order_article, group_order: go3, order_article: oa, quantity: 4, result: 4 }
+
+    it 'can retrieve articles that haven\'t been fetched as ordered' do
+      [goa1, goa2, goa3].map(&:reload)
+      expect(oa.group_order_articles_with_fetch_deviations).to eq [goa1, goa2]
+    end
+
+    it 'calculates availability correctly' do
+      [goa1, goa2, goa3].map(&:reload)
+      expect(oa.sum_of_all_fetch_deviations).to eq(1)
+
+      oa.units_to_order = 12
+      oa.units_received = 10
+      expect(oa.availability).to eq(-3)
+
+      oa.units_received = 15
+      expect(oa.availability).to eq(2)
+    end
+  end
 end

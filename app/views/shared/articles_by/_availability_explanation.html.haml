@@ -1,0 +1,31 @@
+%div.text-left
+  %strong=t('shared.articles_by.ordered_in_total')
+  = goa.order_article.units_to_order
+  %br
+  %strong=t('shared.articles_by.received_in_total')
+  = goa.order_article.units_received || 0
+  %br
+  %strong
+    - if goa.order_article.difference_received_ordered.negative?
+      =t('shared.articles_by.received_negative_diff')
+    - else
+      =t('shared.articles_by.received_positive_diff')
+  = goa.order_article.difference_received_ordered.abs
+  %br
+  %strong
+    - if goa.order_article.sum_of_all_fetch_deviations.negative?
+      =t('shared.articles_by.received_negative_diff')
+    - else
+      =t('shared.articles_by.fetched_positive_diff')
+  = goa.order_article.sum_of_all_fetch_deviations.abs
+  - unless goa.order_article.group_order_articles_with_fetch_deviations.empty?
+    %br
+    %br
+    %strong=t('shared.articles_by.corrections_details_header')
+    %table
+      - goa.order_article.group_order_articles_with_fetch_deviations.each do |other_goa|
+        %tr
+          %td
+            %i="#{other_goa.group_order.ordergroup_name}:"
+          %td.text-right
+            ="#{other_goa.fetch_deviation.positive? ? '+' : ''}#{other_goa.fetch_deviation}"
