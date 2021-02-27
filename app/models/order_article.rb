@@ -202,6 +202,10 @@ class OrderArticle < ApplicationRecord
     group_order_articles.any? {|goa| goa.result_manually_changed?}
   end
 
+  def difference_received_ordered
+    (units_received || 0) - units_to_order
+  end
+
   private
 
   def article_and_price_exist

@@ -138,6 +138,7 @@ class OrdersController < ApplicationController
 
         flash[:notice] = (s ? I18n.t('orders.receive.notice', :msg => s) : I18n.t('orders.receive.notice_none'))
       end
+      Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'received_order', @order.id)
       if current_user.role_orders? || current_user.role_finance?
         redirect_to @order
       elsif current_user.role_pickup?

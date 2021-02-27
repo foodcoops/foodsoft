@@ -33,6 +33,20 @@ describe OrderArticle do
     expect(oa.units).to eq oa.units_received
   end
 
+  it 'calculates the difference of received articles to ordered articles' do
+    oa.units_received = 10
+    oa.units_to_order = 2
+    expect(oa.difference_received_ordered).to eq(8)
+
+    oa.units_received = 2
+    oa.units_to_order = 10
+    expect(oa.difference_received_ordered).to eq(-8)
+
+    oa.units_received = nil
+    oa.units_to_order = 10
+    expect(oa.difference_received_ordered).to eq(-10)
+  end
+
   describe 'redistribution' do
     let(:admin) { create :user, groups:[create(:workgroup, role_finance: true)] }
     let(:article) { create :article, unit_quantity: 3 }
