@@ -22,6 +22,21 @@ class UserNotifier
     end
   end
 
+  def self.received_order(args)
+    order_id = args.first
+    Order.find(order_id).group_orders.each do |group_order|
+      next if group_order.ordergroup.nil?
+
+      group_order.ordergroup.users.each do |user|
+        next unless user.settings.notify['order_received']
+
+        Mailer.deliver_now_with_user_locale user do
+          Mailer.order_received(user, group_order)
+        end
+      end
+    end
+  end
+
   # If this order group's account balance is made negative by the given/last transaction,
   # a message is sent to all users who have enabled notification.
   def self.negative_balance(args)

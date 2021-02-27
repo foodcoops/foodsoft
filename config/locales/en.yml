@@ -1294,6 +1294,17 @@ en:
 
 
         Kind regards from %{foodcoop}.
+    order_received:
+      subject: 'Order delivery registered: %{name}'
+      text0: |
+        Dear %{ordergroup},
+        the order for "%{order}" has been received.
+      abundant_articles: Received too much
+      scarce_articles: Received too little
+      article_details: |
+        o %{name}:
+        -- Ordered: %{ordered} x %{unit}
+        -- Received: %{received} x %{unit}
     order_result_supplier:
       subject: New order for %{name}
       text: |
@@ -1630,6 +1641,7 @@ en:
         notify:
           negative_balance: Inform me when my ordergroup has a negative balance.
           order_finished: Inform me about my order result (when the order is closed).
+          order_received: Inform me about delivery details (after order has been received).
           upcoming_tasks: Remind me of upcoming tasks.
         profile:
           email_is_public: Email is visible for other members.

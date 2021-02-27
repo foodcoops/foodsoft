@@ -1283,6 +1283,17 @@ de:
 
 
         Viele Grüße von %{foodcoop}
+    order_received:
+      subject: 'Bestellung entgegengenommen: %{name}'
+      text0: |
+        Liebe Bestellgruppe %{ordergroup},
+        die Bestellung für "%{order}" wurde geliefert.
+      abundant_articles: Zuviel geliefert
+      scarce_articles: Zuwenig geliefert
+      article_details: |
+        o %{name}:
+        -- Bestellt: %{ordered} x %{unit}
+        -- Geliefert: %{received} x %{unit}
     order_result_supplier:
       subject: Neue Bestellung für %{name}
       text: |
@@ -1608,6 +1619,7 @@ de:
         notify:
           negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
           order_finished: Informiere mich über meine Bestellergebnisse (nach Ende der Bestellung).
+          order_received: Informiere mich über Lieferdetails (nachdem die Ware entgegengenommen wurde).
           upcoming_tasks: Erinnere mich an anstehende Aufgaben.
         profile:
           email_is_public: E-Mail ist für Mitglieder sichtbar.
