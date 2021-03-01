@@ -52,7 +52,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Don't dump schema in production (especially useful for Docker)
   config.active_record.dump_schema_after_migration = false

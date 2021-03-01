@@ -54,5 +54,4 @@ module Concerns::CollectionScope
   def ransack_auth_object
     nil
   end
-
 end

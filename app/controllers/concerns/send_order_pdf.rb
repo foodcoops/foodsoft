@@ -9,9 +9,8 @@ module Concerns::SendOrderPdf
             when 'articles' then OrderByArticles
             when 'fax'      then OrderFax
             when 'matrix'   then OrderMatrix
-          end
+            end
     pdf = klass.new order
     send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf'
   end
-
 end

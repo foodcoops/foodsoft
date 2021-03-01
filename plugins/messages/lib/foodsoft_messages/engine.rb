@@ -2,6 +2,7 @@ module FoodsoftMessages
   class Engine < ::Rails::Engine
     def navigation(primary, context)
       return unless FoodsoftMessages.enabled?
+
       unless primary[:foodcoop].nil?
         sub_nav = primary[:foodcoop].sub_navigation
         sub_nav.items <<

@@ -1,5 +1,4 @@
 class FeedbackController < ApplicationController
-
   def new
   end
 
@@ -11,5 +10,4 @@ class FeedbackController < ApplicationController
       render :action => 'new'
     end
   end
-
 end

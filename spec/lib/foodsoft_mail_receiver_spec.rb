@@ -1,7 +1,6 @@
 require_relative '../spec_helper'
 
 describe FoodsoftMailReceiver do
-
   before :all do
     @server = FoodsoftMailReceiver.new 2525, '127.0.0.1', 4, logger_severity: 5
     @server.start
@@ -75,5 +74,4 @@ describe FoodsoftMailReceiver do
   after :all do
     @server.shutdown
   end
-
 end

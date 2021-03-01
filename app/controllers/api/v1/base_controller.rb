@@ -51,26 +51,26 @@ class Api::V1::BaseController < ApplicationController
 
   def not_found_handler(e)
     # remove where-clauses from error message (not suitable for end-users)
-    msg = e.message.try {|m| m.sub(/\s*\[.*?\]\s*$/, '')} || 'Not found'
-    render status: 404, json: {error: 'not_found', error_description: msg}
+    msg = e.message.try { |m| m.sub(/\s*\[.*?\]\s*$/, '') } || 'Not found'
+    render status: 404, json: { error: 'not_found', error_description: msg }
   end
 
   def not_acceptable_handler(e)
     msg = e.message || 'Data not acceptable'
-    render status: 422, json: {error: 'not_acceptable', error_description: msg}
+    render status: 422, json: { error: 'not_acceptable', error_description: msg }
   end
 
   def doorkeeper_unauthorized_render_options(error:)
-    {json: {error: error.name, error_description: error.description}}
+    { json: { error: error.name, error_description: error.description } }
   end
 
   def doorkeeper_forbidden_render_options(error:)
-    {json: {error: error.name, error_description: error.description}}
+    { json: { error: error.name, error_description: error.description } }
   end
 
   def permission_required_handler(e)
     msg = e.message || 'Forbidden, user has no access'
-    render status: 403, json: {error: 'forbidden', error_description: msg}
+    render status: 403, json: { error: 'forbidden', error_description: msg }
   end
 
   # @todo something with ApplicationHelper#show_user

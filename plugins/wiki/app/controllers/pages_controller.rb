@@ -1,4 +1,3 @@
-# encoding: utf-8
 class PagesController < ApplicationController
   before_action -> { require_plugin_enabled FoodsoftWiki }
   before_action :catch_special_pages, only: [:show, :new]
@@ -33,7 +32,7 @@ class PagesController < ApplicationController
         redirect_to wiki_page_path(page.permalink) and return
       end
     end
-    
+
     if @page.nil?
       redirect_to new_page_path(:title => params[:permalink])
     elsif @page.redirect?
@@ -61,7 +60,7 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page].merge({:user => current_user}))
+    @page = Page.new(params[:page].merge({ :user => current_user }))
 
     if params[:preview]
       render :action => 'new'
@@ -77,7 +76,7 @@ class PagesController < ApplicationController
 
   def update
     @page = Page.find(params[:id])
-    @page.attributes = params[:page].merge({:user => current_user})
+    @page.attributes = params[:page].merge({ :user => current_user })
 
     if params[:preview]
       @page.attributes = params[:page]
@@ -92,7 +91,6 @@ class PagesController < ApplicationController
         render :action => "edit"
       end
     end
-
   rescue ActiveRecord::StaleObjectError
     flash[:error] = I18n.t('pages.error_stale_object')
     redirect_to wiki_page_path(@page.permalink)
@@ -116,11 +114,11 @@ class PagesController < ApplicationController
     end
     if params[:sort]
       sort = case params[:sort]
-               when "title"                then "title"
-               when "title_reverse"        then "title DESC"
-               when "last_updated"         then "updated_at DESC"
-               when "last_updated_reverse" then "updated_at"
-               end
+             when "title"                then "title"
+             when "title_reverse"        then "title DESC"
+             when "last_updated"         then "updated_at DESC"
+             when "last_updated_reverse" then "updated_at"
+             end
     else
       sort = "title"
     end
@@ -152,7 +150,7 @@ class PagesController < ApplicationController
 
   def variables
     keys = Foodsoft::ExpansionVariables.variables.keys
-    @variables = Hash[keys.map {|k| [k, Foodsoft::ExpansionVariables.get(k)]}]
+    @variables = Hash[keys.map { |k| [k, Foodsoft::ExpansionVariables.get(k)] }]
     render 'variables'
   end
 

@@ -1,5 +1,4 @@
 class DiscourseLoginController < DiscourseController
-
   before_action -> { require_config_disabled :discourse_sso }
   skip_before_action :authenticate
 
@@ -11,8 +10,8 @@ class DiscourseLoginController < DiscourseController
 
     session[:discourse_sso_nonce] = nonce
     redirect_to_with_payload "#{discourse_url}/session/sso_provider",
-      nonce: nonce,
-      return_sso_url: return_sso_url
+                             nonce: nonce,
+                             return_sso_url: return_sso_url
   end
 
   def callback
@@ -21,6 +20,7 @@ class DiscourseLoginController < DiscourseController
     payload = parse_payload
 
     raise I18n.t('discourse.callback.invalid_nonce') if payload[:nonce] != session[:discourse_sso_nonce]
+
     session[:discourse_sso_nonce] = nil
 
     id = payload[:external_id].to_i
@@ -39,5 +39,4 @@ class DiscourseLoginController < DiscourseController
   rescue => error
     redirect_to login_url, alert: error.to_s
   end
-
 end

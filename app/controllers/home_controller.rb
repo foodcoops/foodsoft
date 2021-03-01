@@ -1,6 +1,4 @@
-# encoding: utf-8
 class HomeController < ApplicationController
-
   def index
     # unaccepted tasks
     @unaccepted_tasks = Task.order(:due_date).unaccepted_tasks_for(current_user)
@@ -44,13 +42,13 @@ class HomeController < ApplicationController
 
       if params['sort']
         sort = case params['sort']
-        when "date"  then "created_on"
-        when "note"   then "note"
-        when "amount" then "amount"
-        when "date_reverse"  then "created_on DESC"
-        when "note_reverse" then "note DESC"
-        when "amount_reverse" then "amount DESC"
-        end
+               when "date" then "created_on"
+               when "note"   then "note"
+               when "amount" then "amount"
+               when "date_reverse" then "created_on DESC"
+               when "note_reverse" then "note DESC"
+               when "amount_reverse" then "amount DESC"
+               end
       else
         sort = "created_on DESC"
       end
@@ -88,5 +86,4 @@ class HomeController < ApplicationController
       params.require(:user).require(:ordergroup).permit(:contact_address)
     end
   end
-
 end

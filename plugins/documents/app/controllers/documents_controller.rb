@@ -6,10 +6,10 @@ class DocumentsController < ApplicationController
   def index
     if params["sort"]
       sort = case params["sort"]
-               when "name" then "data IS NULL DESC, name"
-               when "created_at" then "created_at"
-               when "name_reverse" then "data IS NULL, name DESC"
-               when "created_at_reverse" then "created_at DESC"
+             when "name" then "data IS NULL DESC, name"
+             when "created_at" then "created_at"
+             when "name_reverse" then "data IS NULL, name DESC"
+             when "created_at_reverse" then "created_at DESC"
              end
     else
       sort = "data IS NULL DESC, name"
@@ -31,6 +31,7 @@ class DocumentsController < ApplicationController
       @document.data = data.read
       @document.mime = FileMagic.new(FileMagic::MAGIC_MIME).buffer(@document.data)
       raise t('.not_allowed_mime', mime: @document.mime) unless allowed_mime? @document.mime
+
       if @document.name.empty?
         name = File.basename(data.original_filename)
         @document.name = name.gsub(/[^\w\.\-]/, '_')

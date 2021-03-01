@@ -99,7 +99,7 @@ describe Order do
     it 'is not closed by default'   do expect(order).to_not be_closed end
 
     it 'has valid order articles' do
-      order.order_articles.each {|oa| expect(oa).to be_valid }
+      order.order_articles.each { |oa| expect(oa).to be_valid }
     end
 
     it 'can be finished' do
@@ -117,13 +117,12 @@ describe Order do
       expect(order).to_not be_open
       expect(order).to be_closed
     end
-
   end
 
   describe 'with a default end date' do
     let(:order) { create :order }
     before do
-      FoodsoftConfig[:order_schedule] = {ends: {recurr: 'FREQ=WEEKLY;BYDAY=MO', time: '9:00'}}
+      FoodsoftConfig[:order_schedule] = { ends: { recurr: 'FREQ=WEEKLY;BYDAY=MO', time: '9:00' } }
       order.init_dates
     end
 
@@ -134,7 +133,6 @@ describe Order do
     it 'to have a correct time' do
       expect(order.ends.strftime('%H:%M')).to eq '09:00'
     end
-
   end
 
   describe 'mapped to GroupOrders' do
@@ -153,5 +151,4 @@ describe Order do
       expect(orders[1][:group_order]).to be_nil
     end
   end
-
 end

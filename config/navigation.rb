@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
 # Configures your navigation
 
 SimpleNavigation::Configuration.run do |navigation|
-
   # allow engines to add to the menu - https://gist.github.com/mjtko/4873ee0c112b6bd646f8
   engines = Rails::Engine.subclasses.map(&:instance).select { |e| e.respond_to?(:navigation) }
   # to include an engine but keep it from modifying the menu:
-  #engines.reject! { |e| e.instance_of? FoodsoftMyplugin::Engine }
+  # engines.reject! { |e| e.instance_of? FoodsoftMyplugin::Engine }
 
   navigation.items do |primary|
     primary.dom_class = 'nav'
@@ -54,5 +52,4 @@ SimpleNavigation::Configuration.run do |navigation|
 
     engines.each { |e| e.navigation(primary, self) }
   end
-
 end

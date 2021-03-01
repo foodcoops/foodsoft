@@ -1,5 +1,4 @@
 class BankAccountConnectorExternal < BankAccountConnector
-
   def load(data)
     @connector = create_connector
     @connector.load data
@@ -23,9 +22,9 @@ class BankAccountConnectorExternal < BankAccountConnector
 
   def import(data)
     return false unless connector_login(data)
+
     connector_import
     connector_logout
     true
   end
-
 end

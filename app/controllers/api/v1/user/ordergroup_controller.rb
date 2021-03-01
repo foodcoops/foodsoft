@@ -1,6 +1,5 @@
 class Api::V1::User::OrdergroupController < Api::V1::BaseController
-
-  before_action ->{ doorkeeper_authorize! 'finance:user' }, only: [:financial_overview]
+  before_action -> { doorkeeper_authorize! 'finance:user' }, only: [:financial_overview]
 
   def financial_overview
     ordergroup = Ordergroup.include_transaction_class_sum.find(current_ordergroup.id)
@@ -19,5 +18,4 @@ class Api::V1::User::OrdergroupController < Api::V1::BaseController
       }
     }
   end
-
 end

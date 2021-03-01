@@ -7,16 +7,16 @@ module Colors
   def colorize(text, color_code)
     "\033[#{color_code}m#{text}\033[0m"
   end
- 
+
   {
-    :black    => 30,
-    :red      => 31,
-    :green    => 32,
-    :yellow   => 33,
-    :blue     => 34,
-    :magenta  => 35,
-    :cyan     => 36,
-    :white    => 37
+    :black => 30,
+    :red => 31,
+    :green => 32,
+    :yellow => 33,
+    :blue => 34,
+    :magenta => 35,
+    :cyan => 36,
+    :white => 37
   }.each do |key, color_code|
     define_method key do |text|
       colorize(text, color_code)
@@ -49,9 +49,9 @@ end
 
 def setup_bundler
   puts yellow "Installing bundler if not installed..."
-  %x( if [ -z `which bundle` ]; then gem install bundler --no-rdoc --no-ri; fi )
+  %x(if [ -z `which bundle` ]; then gem install bundler --no-rdoc --no-ri; fi)
   puts yellow "Executing bundle install..."
-  %x( bundle install )
+  %x(bundle install)
 end
 
 def setup_database
@@ -61,18 +61,18 @@ def setup_database
     return nil
   end
   return nil if skip?(file)
-  
-  database = ask("What kind of database do you use?\nOptions:\n(1) MySQL\n(2) SQLite", ["1","2"])
+
+  database = ask("What kind of database do you use?\nOptions:\n(1) MySQL\n(2) SQLite", ["1", "2"])
   if database == "1"
     puts yellow "Using MySQL..."
-    %x( cp #{Rails.root.join("#{file}.MySQL_SAMPLE")} #{Rails.root.join(file)} )
+    %x(cp #{Rails.root.join("#{file}.MySQL_SAMPLE")} #{Rails.root.join(file)})
   elsif database == "2"
     puts yellow "Using SQLite..."
-    %x( cp #{Rails.root.join("#{file}.SQLite_SAMPLE")} #{Rails.root.join(file)} )
+    %x(cp #{Rails.root.join("#{file}.SQLite_SAMPLE")} #{Rails.root.join(file)})
   end
-  
+
   reminder(file)
-  
+
   puts blue "IMPORTANT:  Edit (rake-generated) config/database.yml with valid username and password for EACH env before continuing!"
   finished = ask("Finished?\nOptions:\n(y) Yes", ["y"])
   if finished
@@ -86,27 +86,28 @@ def setup_app_config
   file = 'config/app_config.yml'
   sample = Rails.root.join("#{file}.SAMPLE")
   return nil if skip?(file)
-  
+
   puts yellow "Copying #{file}..."
-  %x( cp #{sample} #{Rails.root.join(file)} )
+  %x(cp #{sample} #{Rails.root.join(file)})
   reminder(file)
 end
 
 def setup_development
   file = 'config/environments/development.rb'
   return nil if skip?(file)
-  
+
   puts yellow "Copying #{file}..."
-  %x( cp #{Rails.root.join("#{file}.SAMPLE")} #{Rails.root.join(file)} )
+  %x(cp #{Rails.root.join("#{file}.SAMPLE")} #{Rails.root.join(file)})
   reminder(file)
 end
 
 def start_mailcatcher
   return nil if ENV['MAILCATCHER_PORT'] # skip when it has an existing Docker container
-  mailcatcher = ask("Do you want to start mailcatcher?\nOptions:\n(y) Yes\n(n) No", ["y","n"])
+
+  mailcatcher = ask("Do you want to start mailcatcher?\nOptions:\n(y) Yes\n(n) No", ["y", "n"])
   if mailcatcher === "y"
     puts yellow "Starting mailcatcher at http://localhost:1080..."
-    %x( mailcatcher )
+    %x(mailcatcher)
   end
 end
 
@@ -128,7 +129,7 @@ end
 
 def skip?(file)
   output = false
-  skip = ask(cyan("We found #{file}!\nOptions:\n(1) Skip step\n(2) Force rewrite"), ["1","2"]) if File.exists?(Rails.root.join(file))
+  skip = ask(cyan("We found #{file}!\nOptions:\n(1) Skip step\n(2) Force rewrite"), ["1", "2"]) if File.exists?(Rails.root.join(file))
   output = true if skip == "1"
   output
 end
@@ -145,4 +146,3 @@ def capture_stdout
 ensure
   $stdout = STDOUT
 end
-

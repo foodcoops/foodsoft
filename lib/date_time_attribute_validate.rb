@@ -6,12 +6,10 @@ module DateTimeAttributeValidate
   include DateTimeAttribute
 
   module ClassMethods
-
     def date_time_attribute(*attributes)
       super
 
       attributes.each do |attribute|
-
         validate -> { self.send("#{attribute}_datetime_value_valid") }
 
         # allow resetting the field to nil
@@ -39,10 +37,10 @@ module DateTimeAttributeValidate
 
         # fallback to field when values are not set
         define_method("#{attribute}_date_value") do
-          self.instance_variable_get("@#{attribute}_date_value") || self.send("#{attribute}_date").try {|e| e.strftime('%Y-%m-%d')}
+          self.instance_variable_get("@#{attribute}_date_value") || self.send("#{attribute}_date").try { |e| e.strftime('%Y-%m-%d') }
         end
         define_method("#{attribute}_time_value") do
-          self.instance_variable_get("@#{attribute}_time_value") || self.send("#{attribute}_time").try {|e| e.strftime('%H:%M')}
+          self.instance_variable_get("@#{attribute}_time_value") || self.send("#{attribute}_time").try { |e| e.strftime('%H:%M') }
         end
 
         private
@@ -58,9 +56,7 @@ module DateTimeAttributeValidate
             errors.add(attribute, "is not a valid time") # @todo I18n
           end
         end
-
       end
     end
-
   end
 end

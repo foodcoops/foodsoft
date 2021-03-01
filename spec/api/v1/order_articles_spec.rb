@@ -6,7 +6,7 @@ describe Api::V1::OrderArticlesController, type: :controller do
   let(:api_scopes) { ['orders:read'] }
 
   let(:json_order_articles) { json_response['order_articles'] }
-  let(:json_order_article_ids) { json_order_articles.map {|joa| joa["id"] } }
+  let(:json_order_article_ids) { json_order_articles.map { |joa| joa["id"] } }
 
   describe "GET :index" do
     context "with param q[ordered]" do

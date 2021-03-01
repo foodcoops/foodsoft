@@ -13,7 +13,7 @@ class AddMessaging < ActiveRecord::Migration[4.2]
     end
     add_index(:messages, :sender_id)
     add_index(:messages, :recipient_id)
-    
+
     # Setup acts_as_configurable plugin for user options etc.
     ConfigurableSetting.create_table
   end

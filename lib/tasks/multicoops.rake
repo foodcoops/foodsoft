@@ -3,7 +3,6 @@
 # for each foodcoop is used.
 
 namespace :multicoops do
-
   desc 'Runs a specific rake task for each registered foodcoop, use rake multicoops:run TASK=db:migrate'
   task :run => :environment do
     task_to_run = ENV['TASK']
@@ -14,7 +13,7 @@ namespace :multicoops do
         Rake::Task[task_to_run].execute
       rescue => error
         last_error = error
-        ExceptionNotifier.notify_exception(error, data: {foodcoop: coop})
+        ExceptionNotifier.notify_exception(error, data: { foodcoop: coop })
       end
     end
     raise last_error if last_error
@@ -27,11 +26,9 @@ namespace :multicoops do
     rake_say "Run '#{task_to_run}' for #{ENV['FOODCOOP']}"
     Rake::Task[task_to_run].execute
   end
-
 end
-
 
 # Helper
 def rake_say(message)
-    puts message unless Rake.application.options.silent
+  puts message unless Rake.application.options.silent
 end

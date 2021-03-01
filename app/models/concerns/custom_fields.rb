@@ -6,7 +6,7 @@ module CustomFields
 
   included do
     after_initialize do
-      settings.defaults['custom_fields'] = { } unless settings.custom_fields
+      settings.defaults['custom_fields'] = {} unless settings.custom_fields
     end
 
     after_save do

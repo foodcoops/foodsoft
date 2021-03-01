@@ -1,6 +1,6 @@
 module FoodsoftDateUtil
   # find next occurence given a recurring ical string and time
-  def self.next_occurrence(start=Time.now, from=start, options={})
+  def self.next_occurrence(start = Time.now, from = start, options = {})
     occ = nil
     if options && options[:recurr]
       schedule = IceCube::Schedule.new(start)
@@ -25,5 +25,4 @@ module FoodsoftDateUtil
       p
     end
   end
-
 end

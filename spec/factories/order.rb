@@ -1,7 +1,6 @@
 require 'factory_bot'
 
 FactoryBot.define do
-
   factory :order do
     starts { Time.now }
     supplier { create :supplier, article_count: (article_count.nil? ? true : article_count) }
@@ -25,5 +24,4 @@ FactoryBot.define do
       order.reload
     end
   end
-
 end

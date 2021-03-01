@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 
 feature 'settling an order', js: true do
   let(:ftt) { create :financial_transaction_type }
-  let(:admin) { create :user, groups:[create(:workgroup, role_finance: true)] }
-  let(:user) { create :user, groups:[create(:ordergroup)] }
+  let(:admin) { create :user, groups: [create(:workgroup, role_finance: true)] }
+  let(:user) { create :user, groups: [create(:ordergroup)] }
   let(:supplier) { create :supplier }
   let(:article) { create :article, supplier: supplier, unit_quantity: 1 }
   let(:order) { create :order, supplier: supplier, article_ids: [article.id] } # need to ref article
@@ -95,7 +95,7 @@ feature 'settling an order', js: true do
   end
 
   it 'deletes a GroupOrderArticle with no ordered amounts' do
-    goa1.update_attributes({:quantity => 0, :tolerance => 0})
+    goa1.update_attributes({ :quantity => 0, :tolerance => 0 })
     click_link article.name
     expect(page).to have_selector("#group_order_article_#{goa1.id}")
     within("#group_order_article_#{goa1.id}") do

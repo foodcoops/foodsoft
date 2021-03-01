@@ -12,6 +12,7 @@ class UserNotifier
     order_id = args.first
     Order.find(order_id).group_orders.each do |group_order|
       next if group_order.ordergroup.nil?
+
       group_order.ordergroup.users.each do |user|
         if user.settings.notify['order_finished']
           Mailer.deliver_now_with_user_locale user do

@@ -1,5 +1,4 @@
 class SharedSupplier < ApplicationRecord
-
   # connect to database from sharedLists-Application
   SharedSupplier.establish_connection(FoodsoftConfig[:shared_lists])
   # set correct table_name in external DB
@@ -7,7 +6,6 @@ class SharedSupplier < ApplicationRecord
 
   has_many :suppliers, -> { undeleted }
   has_many :shared_articles, :foreign_key => :supplier_id
-
 
   def find_article_by_number(order_number)
     # note that `shared_articles` uses number instead order_number
@@ -22,7 +20,7 @@ class SharedSupplier < ApplicationRecord
   # when created by import from shared supplier feature.
   def autofill_attributes
     whitelist = %w(name address phone fax email url delivery_days note)
-    attributes.select { |k,_v| whitelist.include?(k) }
+    attributes.select { |k, _v| whitelist.include?(k) }
   end
 
   # return list of synchronisation methods available for this supplier

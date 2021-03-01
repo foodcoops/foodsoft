@@ -1,5 +1,4 @@
 class PickupsController < ApplicationController
-
   before_action :authenticate_pickups
 
   def index

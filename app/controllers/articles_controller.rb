@@ -1,21 +1,20 @@
-# encoding: utf-8
 class ArticlesController < ApplicationController
   before_action :authenticate_article_meta, :find_supplier
 
   def index
     if params['sort']
       sort = case params['sort']
-               when "name"  then "articles.name"
-               when "unit"   then "articles.unit"
-               when "article_category" then "article_categories.name"
-               when "note"   then "articles.note"
-               when "availability" then "articles.availability"
-               when "name_reverse"  then "articles.name DESC"
-               when "unit_reverse"   then "articles.unit DESC"
-               when "article_category_reverse" then "article_categories.name DESC"
-               when "note_reverse" then "articles.note DESC"
-               when "availability_reverse" then "articles.availability DESC"
-               end
+             when "name" then "articles.name"
+             when "unit" then "articles.unit"
+             when "article_category" then "article_categories.name"
+             when "note" then "articles.note"
+             when "availability" then "articles.availability"
+             when "name_reverse" then "articles.name DESC"
+             when "unit_reverse" then "articles.unit DESC"
+             when "article_category_reverse" then "article_categories.name DESC"
+             when "note_reverse" then "articles.note DESC"
+             when "availability_reverse" then "articles.availability DESC"
+             end
     else
       sort = "article_categories.name, articles.name"
     end
@@ -99,7 +98,7 @@ class ArticlesController < ApplicationController
             end
           end
 
-          raise ActiveRecord::Rollback  if invalid_articles # Rollback all changes
+          raise ActiveRecord::Rollback if invalid_articles # Rollback all changes
         end
       end
     end
@@ -117,25 +116,25 @@ class ArticlesController < ApplicationController
   # makes different actions on selected articles
   def update_selected
     raise I18n.t('articles.controller.error_nosel') if params[:selected_articles].nil?
+
     articles = Article.find(params[:selected_articles])
     Article.transaction do
       case params[:selected_action]
-        when 'destroy'
-          articles.each(&:mark_as_deleted)
-          flash[:notice] = I18n.t('articles.controller.update_sel.notice_destroy')
-        when 'setNotAvailable'
-          articles.each {|a| a.update_attribute(:availability, false) }
-          flash[:notice] = I18n.t('articles.controller.update_sel.notice_unavail')
-        when 'setAvailable'
-          articles.each {|a| a.update_attribute(:availability, true) }
-          flash[:notice] = I18n.t('articles.controller.update_sel.notice_avail')
-        else
-          flash[:alert] = I18n.t('articles.controller.update_sel.notice_noaction')
+      when 'destroy'
+        articles.each(&:mark_as_deleted)
+        flash[:notice] = I18n.t('articles.controller.update_sel.notice_destroy')
+      when 'setNotAvailable'
+        articles.each { |a| a.update_attribute(:availability, false) }
+        flash[:notice] = I18n.t('articles.controller.update_sel.notice_unavail')
+      when 'setAvailable'
+        articles.each { |a| a.update_attribute(:availability, true) }
+        flash[:notice] = I18n.t('articles.controller.update_sel.notice_avail')
+      else
+        flash[:alert] = I18n.t('articles.controller.update_sel.notice_noaction')
       end
     end
     # action succeded
     redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page])
-
   rescue => error
     redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page]),
                 :alert => I18n.t('errors.general_msg', :msg => error)
@@ -149,7 +148,7 @@ class ArticlesController < ApplicationController
   # Update articles from a spreadsheet
   def parse_upload
     uploaded_file = params[:articles]['file'] or raise I18n.t('articles.controller.parse_upload.no_file')
-    options = {filename: uploaded_file.original_filename}
+    options = { filename: uploaded_file.original_filename }
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
     @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_from_file uploaded_file.tempfile, options
@@ -177,10 +176,10 @@ class ArticlesController < ApplicationController
 
   # Updates, deletes articles when upload or sync form is submitted
   def update_synchronized
-    @outlisted_articles = Article.find(params[:outlisted_articles].try(:keys)||[])
-    @updated_articles = Article.find(params[:articles].try(:keys)||[])
-    @updated_articles.map{|a| a.assign_attributes(params[:articles][a.id.to_s]) }
-    @new_articles = (params[:new_articles]||[]).map{|a| @supplier.articles.build(a) }
+    @outlisted_articles = Article.find(params[:outlisted_articles].try(:keys) || [])
+    @updated_articles = Article.find(params[:articles].try(:keys) || [])
+    @updated_articles.map { |a| a.assign_attributes(params[:articles][a.id.to_s]) }
+    @new_articles = (params[:new_articles] || []).map { |a| @supplier.articles.build(a) }
 
     has_error = false
     Article.transaction do
@@ -192,9 +191,9 @@ class ArticlesController < ApplicationController
         has_error = true
       end
       # Update articles
-      @updated_articles.each {|a| a.save or has_error=true }
+      @updated_articles.each { |a| a.save or has_error = true }
       # Add new articles
-      @new_articles.each {|a| a.save or has_error=true }
+      @new_articles.each { |a| a.save or has_error = true }
 
       raise ActiveRecord::Rollback if has_error
     end

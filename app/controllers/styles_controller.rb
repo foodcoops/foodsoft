@@ -11,7 +11,7 @@ class StylesController < ApplicationController
     if css.blank?
       render body: nil, content_type: 'text/css', status: 404
     else
-      expires_in 1.week, public:true if params[:md5].present?
+      expires_in 1.week, public: true if params[:md5].present?
       render body: css, content_type: 'text/css'
     end
   end

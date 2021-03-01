@@ -33,7 +33,8 @@ class MoveWeeklyTasks < ActiveRecord::Migration[4.2]
     end
   end
 
-private
+  private
+
   def weekly_task?(workgroup, task)
     return false if task.due_date.nil?
 

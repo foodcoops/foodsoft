@@ -1,7 +1,7 @@
 class Api::V1::User::FinancialTransactionsController < Api::V1::BaseController
   include Concerns::CollectionScope
 
-  before_action ->{ doorkeeper_authorize! 'finance:user' }
+  before_action -> { doorkeeper_authorize! 'finance:user' }
   before_action :require_ordergroup
   before_action :require_minimum_balance, only: [:create]
   before_action -> { require_config_enabled :use_self_service }, only: [:create]
@@ -29,5 +29,4 @@ class Api::V1::User::FinancialTransactionsController < Api::V1::BaseController
   def create_params
     params.require(:financial_transaction).permit(:amount, :financial_transaction_type_id, :note)
   end
-
 end

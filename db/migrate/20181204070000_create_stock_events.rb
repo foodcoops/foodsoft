@@ -1,5 +1,6 @@
 class CreateStockEvents < ActiveRecord::Migration[4.2]
   class StockEvent < ActiveRecord::Base; end
+
   class StockTaking < ActiveRecord::Base; end
 
   def change

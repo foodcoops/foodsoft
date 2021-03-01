@@ -11,7 +11,7 @@ class FinancialTransaction < ApplicationRecord
 
   validates_presence_of :amount, :note, :user_id
   validates_numericality_of :amount, greater_then: -100_000,
-    less_than: 100_000
+                                     less_than: 100_000
 
   scope :visible, -> { joins('LEFT JOIN financial_transactions r ON financial_transactions.id = r.reverts_id').where('r.id IS NULL').where(reverts: nil) }
   scope :without_financial_link, -> { where(financial_link: nil) }

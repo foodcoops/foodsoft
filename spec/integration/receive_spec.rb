@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 feature 'receiving an order', js: true do
-  let(:admin) { create :user, groups:[create(:workgroup, role_orders: true)] }
+  let(:admin) { create :user, groups: [create(:workgroup, role_orders: true)] }
   let(:supplier) { create :supplier }
   let(:article) { create :article, supplier: supplier, unit_quantity: 3 }
   let(:order) { create :order, supplier: supplier, article_ids: [article.id] } # need to ref article
@@ -37,53 +37,53 @@ feature 'receiving an order', js: true do
   before { login admin }
 
   it 'has product ordered visible' do
-    set_quantities [3,0], [0,0]
+    set_quantities [3, 0], [0, 0]
     visit receive_order_path(id: order.id)
     expect(page).to have_content(article.name)
     expect(page).to have_selector("#order_article_#{oa.id}")
   end
 
   it 'has product not ordered invisible' do
-    set_quantities [0,0], [0,0]
+    set_quantities [0, 0], [0, 0]
     visit receive_order_path(id: order.id)
     expect(page).to_not have_selector("#order_article_#{oa.id}")
   end
 
   it 'is not received by default' do
-    set_quantities [3,0], [0,0]
+    set_quantities [3, 0], [0, 0]
     visit receive_order_path(id: order.id)
     expect(find("#order_articles_#{oa.id}_units_received").value).to be_blank
   end
 
   it 'does not change anything when received is ordered' do
-    set_quantities [2,0], [3,2]
+    set_quantities [2, 0], [3, 2]
     visit receive_order_path(id: order.id)
     fill_in "order_articles_#{oa.id}_units_received", :with => oa.units_to_order
     find('input[type="submit"]').click
     expect(page).to have_selector('body')
-    check_quantities 2,  2, 4
+    check_quantities 2, 2, 4
   end
 
   it 'redistributes properly when received is more' do
-    set_quantities [2,0], [3,2]
+    set_quantities [2, 0], [3, 2]
     visit receive_order_path(id: order.id)
     fill_in "order_articles_#{oa.id}_units_received", :with => 3
     find('input[type="submit"]').click
     expect(page).to have_selector('body')
-    check_quantities 3,  2, 5
+    check_quantities 3, 2, 5
   end
 
   it 'redistributes properly when received is less' do
-    set_quantities [2,0], [3,2]
+    set_quantities [2, 0], [3, 2]
     visit receive_order_path(id: order.id)
     fill_in "order_articles_#{oa.id}_units_received", :with => 1
     find('input[type="submit"]').click
     expect(page).to have_selector('body')
-    check_quantities 1,  2, 1
+    check_quantities 1, 2, 1
   end
 
   it 'has a locked field when edited elsewhere' do
-    set_quantities [2,0], [3,2]
+    set_quantities [2, 0], [3, 2]
     goa1.result = goa1.result + 1
     goa1.save!
     visit receive_order_path(id: order.id)
@@ -91,12 +91,12 @@ feature 'receiving an order', js: true do
   end
 
   it 'leaves locked rows alone when submitted' do
-    set_quantities [2,0], [3,2]
+    set_quantities [2, 0], [3, 2]
     goa1.result = goa1.result + 1
     goa1.save!
     visit receive_order_path(id: order.id)
     find('input[type="submit"]').click
     expect(page).to have_selector('body')
-    check_quantities 2,  3, 4
+    check_quantities 2, 3, 4
   end
 end

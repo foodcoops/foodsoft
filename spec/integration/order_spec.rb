@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 feature Order, js: true do
-  let(:admin) { create :user, groups:[create(:workgroup, role_orders: true)] }
+  let(:admin) { create :user, groups: [create(:workgroup, role_orders: true)] }
   let(:article) { create :article, unit_quantity: 1 }
   let(:order) { create :order, supplier: article.supplier, article_ids: [article.id] } # need to ref article
   let(:go1) { create :group_order, order: order }
@@ -21,7 +21,7 @@ feature Order, js: true do
 
   it 'fills in the end date with a schedule' do
     FoodsoftConfig[:time_zone] = 'UTC'
-    FoodsoftConfig[:order_schedule] = {ends: {recurr: 'FREQ=MONTHLY;BYMONTHDAY=1', time: '12:00'}}
+    FoodsoftConfig[:order_schedule] = { ends: { recurr: 'FREQ=MONTHLY;BYMONTHDAY=1', time: '12:00' } }
     visit new_order_path(supplier_id: article.supplier.id)
     expect(page).to have_text I18n.t('orders.new.title')
     expect(find_field('order_ends_time_value').value).to eq '12:00'
@@ -40,7 +40,7 @@ feature Order, js: true do
   it 'can close an order' do
     setup_and_close_order
     expect(order).to be_finished
-    expect(page).to_not have_link I18n.t('orders.index.action_end')
+    expect(page).not_to have_link I18n.t('orders.index.action_end')
     expect(oa.units_to_order).to eq 1
   end
 

@@ -1,6 +1,4 @@
-# encoding: utf-8
 class OrderFax < OrderPdf
-
   BATCH_SIZE = 250
 
   def filename
@@ -15,7 +13,7 @@ class OrderFax < OrderPdf
     contact = FoodsoftConfig[:contact].symbolize_keys
 
     # From paragraph
-    bounding_box [margin_box.right-200,margin_box.top], width: 200 do
+    bounding_box [margin_box.right - 200, margin_box.top], width: 200 do
       text FoodsoftConfig[:name], size: fontsize(9), align: :right
       move_down 5
       text contact[:street], size: fontsize(9), align: :right
@@ -36,7 +34,7 @@ class OrderFax < OrderPdf
     end
 
     # Recipient
-    bounding_box [margin_box.left,margin_box.top-60], width: 200 do
+    bounding_box [margin_box.left, margin_box.top - 60], width: 200 do
       text order.name
       move_down 5
       text order.supplier.try(:address).to_s
@@ -72,7 +70,7 @@ class OrderFax < OrderPdf
                number_to_currency(subtotal)]
     end
     data << [I18n.t('documents.order_fax.total'), nil, nil, nil, nil, nil, number_to_currency(total)]
-    table data, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
+    table data, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
       table.header = true
       table.cells.border_width = 1
       table.cells.border_color = '666666'
@@ -80,28 +78,27 @@ class OrderFax < OrderPdf
       table.row(0).border_bottom_width = 2
       table.columns(1).align = :right
       table.columns(3..6).align = :right
-      table.row(data.length-1).columns(0..5).borders = [:top, :bottom]
-      table.row(data.length-1).columns(0).borders = [:top, :bottom, :left]
-      table.row(data.length-1).border_top_width = 2
+      table.row(data.length - 1).columns(0..5).borders = [:top, :bottom]
+      table.row(data.length - 1).columns(0).borders = [:top, :bottom, :left]
+      table.row(data.length - 1).border_top_width = 2
     end
-              #font_size: fontsize(8),
-              #vertical_padding: 3,
-              #border_style: :grid,
-              #headers: ["BestellNr.", "Menge","Name", "Gebinde", "Einheit","Preis/Einheit"],
-              #align: {0 => :left}
+    # font_size: fontsize(8),
+    # vertical_padding: 3,
+    # border_style: :grid,
+    # headers: ["BestellNr.", "Menge","Name", "Gebinde", "Einheit","Preis/Einheit"],
+    # align: {0 => :left}
   end
 
   private
 
   def order_articles
-    order.order_articles.ordered.
-      joins(:article).
-      order('articles.order_number').order('articles.name').
-      preload(:article, :article_price)
+    order.order_articles.ordered
+         .joins(:article)
+         .order('articles.order_number').order('articles.name')
+         .preload(:article, :article_price)
   end
 
   def each_order_article
-    order_articles.find_each_with_order(batch_size: BATCH_SIZE) {|oa| yield oa }
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE) { |oa| yield oa }
   end
-
 end

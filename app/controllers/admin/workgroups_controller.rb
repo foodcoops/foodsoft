@@ -1,4 +1,3 @@
-# encoding: utf-8
 class Admin::WorkgroupsController < Admin::BaseController
   inherit_resources
 

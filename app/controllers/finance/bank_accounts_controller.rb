@@ -1,5 +1,4 @@
 class Finance::BankAccountsController < Finance::BaseController
-
   def index
     @bank_accounts = BankAccount.order('name')
     redirect_to finance_bank_account_transactions_url(@bank_accounts.first) if @bank_accounts.count == 1
@@ -26,7 +25,7 @@ class Finance::BankAccountsController < Finance::BaseController
       flash.notice = t('.notice', count: importer.count) if ok
       @auto_submit = importer.auto_submit
       @controls = importer.controls
-      #TODO: encrypt state
+      # TODO: encrypt state
       @state = YAML.dump importer.dump
     else
       ok = true
@@ -39,6 +38,7 @@ class Finance::BankAccountsController < Finance::BaseController
     needs_redirect = true
   ensure
     return unless needs_redirect
+
     redirect_path = finance_bank_account_transactions_url(@bank_account)
     if request.post?
       @js_redirect = redirect_path
@@ -46,5 +46,4 @@ class Finance::BankAccountsController < Finance::BaseController
       redirect_to redirect_path
     end
   end
-
 end

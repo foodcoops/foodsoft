@@ -12,6 +12,7 @@ ActiveSupport.on_load(:after_initialize) do
     def category
       ArticleCategory.where(id: article_category_id).first
     end
+
     def self.find_by_number(n)
       find_by_order_number(n)
     end

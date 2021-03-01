@@ -60,5 +60,4 @@ describe GroupOrderArticle do
       expect(res).to eq(quantity: 4, tolerance: 0, total: 4)
     end
   end
-
 end

@@ -3,6 +3,7 @@ module FoodsoftDocuments
     def navigation(primary, context)
       return unless FoodsoftDocuments.enabled?
       return if primary[:foodcoop].nil?
+
       sub_nav = primary[:foodcoop].sub_navigation
       sub_nav.items <<
         SimpleNavigation::Item.new(primary, :documents, I18n.t('navigation.documents'), context.documents_path)

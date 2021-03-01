@@ -1,8 +1,7 @@
-# encoding: utf-8
 require_relative '../spec_helper'
 
 feature ArticlesController do
-  let(:user) { create :user, groups:[create(:workgroup, role_article_meta: true)] }
+  let(:user) { create :user, groups: [create(:workgroup, role_article_meta: true)] }
   let (:supplier) { create :supplier }
   let!(:article_category) { create :article_category }
   before { login user }
@@ -28,7 +27,7 @@ feature ArticlesController do
         fill_in 'article_tax', :with => article.tax
         fill_in 'article_deposit', :with => article.deposit
         # "Element cannot be scrolled into view" error, js as workaround
-        #find('input[type="submit"]').click
+        # find('input[type="submit"]').click
         page.execute_script('$("form#new_article").submit();')
       end
       expect(page).to have_content(article.name)
@@ -52,7 +51,7 @@ feature ArticlesController do
           expect(find("tr:nth-child(2) #new_articles__name").value).to eq "Pijnboompitten"
 
           4.times do |i|
-            all("tr:nth-child(#{i+1}) select > option")[1].select_option
+            all("tr:nth-child(#{i + 1}) select > option")[1].select_option
           end
           find('input[type="submit"]').click
           expect(page).to have_content("Pijnboompitten")

@@ -21,16 +21,16 @@ class CreateFinancialTransactions < ActiveRecord::Migration[4.2]
     # Add transactions to the sample order group
     puts "Add 30 transactions to the group '#{CreateGroups::GROUP_ORDER}'..."
     raise "Group '#{CreateGroups::GROUP_ORDER}' not found!" unless ordergroup = Group.find_by_name(CreateGroups::GROUP_ORDER)
+
     balance = 0
     for i in 1..30
       ordergroup.addFinancialTransaction(i, "Sample Transaction Nr. #{i}", admin)
       balance += i
     end
-    raise "Failed!" unless financial_transaction = FinancialTransaction.find_by_note('Sample Transaction Nr. 1')  
+    raise "Failed!" unless financial_transaction = FinancialTransaction.find_by_note('Sample Transaction Nr. 1')
     raise "Failed to update account_balance!" unless OrderGroup.find(ordergroup.id).account_balance == balance
-  
   end
-  
+
   def self.down
     remove_column :groups, :role_finance
     drop_table :financial_transactions

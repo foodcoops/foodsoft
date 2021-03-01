@@ -12,7 +12,7 @@ module MarkAsDeletedWithName
     n = ''
     begin
       append = " \u2020" + n
-      deleted_name = name.truncate(max_length-append.length, omission: '') + append
+      deleted_name = name.truncate(max_length - append.length, omission: '') + append
       if n.blank?
         n = 'A'
       else

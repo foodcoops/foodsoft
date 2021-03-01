@@ -6,7 +6,7 @@ class CreateOrderResults < ActiveRecord::Migration[4.2]
       t.column :price, :decimal, :precision => 8, :scale => 2, :null => false, :default => 0
     end
     add_index(:group_order_results, [:group_name, :order_id], :unique => true)
-    
+
     create_table :order_article_results do |t|
       t.column :order_id, :int, :null => false
       t.column :name, :string, :null => false
@@ -22,7 +22,7 @@ class CreateOrderResults < ActiveRecord::Migration[4.2]
       t.column :units_to_order, :int, :null => false
     end
     add_index(:order_article_results, :order_id)
-    
+
     create_table :group_order_article_results do |t|
       t.column :order_article_result_id, :int, :null => false
       t.column :group_order_result_id, :int, :null => false

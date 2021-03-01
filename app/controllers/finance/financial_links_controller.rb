@@ -110,13 +110,13 @@ class Finance::FinancialLinksController < Finance::BaseController
     redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
 
-protected
+  protected
 
   def find_financial_link
     @financial_link = FinancialLink.find(params[:id])
   end
 
-private
+  private
 
   def financial_transaction_params
     params.require(:financial_transaction).permit(:financial_transaction_type_id, :ordergroup_id, :amount, :note)
@@ -128,5 +128,4 @@ private
       JOIN bank_transactions b ON a.iban = b.iban AND b.financial_link_id = #{financial_link_id.to_i}
     SQL
   end
-
 end

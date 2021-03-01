@@ -10,11 +10,11 @@ FinancialTransactionClass.create!(:id => 2, :name => 'Foodsoft')
 SupplierCategory.create!(:id => 1, :name => "Other", :financial_transaction_class_id => 1)
 
 Supplier.create!([
-  {:id => 1, :name => "Beautiful bakery", :supplier_category_id => 1, :address => "Smallstreet 1, Cookilage", :phone => "0123456789", :email => "info@bbakery.test", :min_order_quantity => "100"},
-  {:id => 2, :name => "Chocolatiers", :supplier_category_id => 1, :address => "Multatuliroad 1, Amsterdam", :phone => "0123456789", :email => "info@chocolatiers.test", :url => "http://www.chocolatiers.test/", :contact_person => "Max Pure", :delivery_days => "Tue, Fr (Amsterdam)"},
-  {:id => 3, :name => "Cheesemaker", :supplier_category_id => 1, :address => "Cheesestreet 5, London", :phone => "0123456789", :url => "http://www.cheesemaker.test/"},
-  {:id => 4, :name => "The Nuthome", :supplier_category_id => 1, :address => "Alexanderplatz, Berlin", :phone => "0123456789", :email => "info@thenuthome.test", :url => "http://www.thenuthome.test/", :note => "delivery in Berlin; €9 delivery costs for orders under €123"}
-])
+                   { :id => 1, :name => "Beautiful bakery", :supplier_category_id => 1, :address => "Smallstreet 1, Cookilage", :phone => "0123456789", :email => "info@bbakery.test", :min_order_quantity => "100" },
+                   { :id => 2, :name => "Chocolatiers", :supplier_category_id => 1, :address => "Multatuliroad 1, Amsterdam", :phone => "0123456789", :email => "info@chocolatiers.test", :url => "http://www.chocolatiers.test/", :contact_person => "Max Pure", :delivery_days => "Tue, Fr (Amsterdam)" },
+                   { :id => 3, :name => "Cheesemaker", :supplier_category_id => 1, :address => "Cheesestreet 5, London", :phone => "0123456789", :url => "http://www.cheesemaker.test/" },
+                   { :id => 4, :name => "The Nuthome", :supplier_category_id => 1, :address => "Alexanderplatz, Berlin", :phone => "0123456789", :email => "info@thenuthome.test", :url => "http://www.thenuthome.test/", :note => "delivery in Berlin; €9 delivery costs for orders under €123" }
+                 ])
 
 ArticleCategory.create!(:id => 1, :name => "Other", :description => "other, misc, unknown")
 ArticleCategory.create!(:id => 2, :name => "Fruit")
@@ -140,7 +140,6 @@ Article.create!(:name => "Blueberries", :supplier_id => 4, :article_category_id 
 Article.create!(:name => "Chia seeds", :supplier_id => 4, :article_category_id => 13, :unit => "kg", :availability => true, :price => 0.55555E3, :tax => 6.0, :deposit => 0.0, :unit_quantity => 1, :order_number => ":416d57b")
 Article.create!(:name => "Coconut grated", :supplier_id => 4, :article_category_id => 13, :unit => "kg", :availability => true, :price => 0.55E0, :tax => 6.0, :deposit => 0.0, :unit_quantity => 1, :order_number => ":b3f65e4")
 
-
 ## Members & groups
 
 User.create!(:id => 1, :nick => "admin", :password => "secret", :first_name => "Anton", :last_name => "Administrator", :email => "admin@foo.test", :created_on => 'Wed, 15 Jan 2014 16:15:33 UTC +00:00')
@@ -153,10 +152,10 @@ Workgroup.create!(:id => 1, :name => "Administrators", :description => "System a
 Workgroup.create!(:id => 2, :name => "Finances", :account_balance => 0.0, :created_on => 'Sun, 19 Jan 2014 17:40:03 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => true, :role_orders => false, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
 Workgroup.create!(:id => 3, :name => "Ordering", :account_balance => 0.0, :created_on => 'Thu, 20 Feb 2014 14:44:47 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => true, :role_finance => false, :role_orders => true, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
 Workgroup.create!(:id => 4, :name => "Assortment", :account_balance => 0.0, :created_on => 'Wed, 09 Apr 2014 12:24:55 UTC +00:00', :role_admin => false, :role_suppliers => true, :role_article_meta => true, :role_finance => false, :role_orders => false, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
-Ordergroup.create!(:id => 5, :name => "Admin Administrator", :account_balance => 0.0, :created_on => 'Sat, 18 Jan 2014 00:38:48 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => false, :role_orders => false, :stats => {:jobs_size=>0, :orders_sum=>1021.74}, :next_weekly_tasks_number => 8, :ignore_apple_restriction => true)
-Ordergroup.create!(:id => 6, :name => "Pete's house", :account_balance => -0.35E2, :created_on => 'Sat, 25 Jan 2014 20:20:37 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => false, :role_orders => false, :contact_person => "Piet Pieterssen", :stats => {:jobs_size=>0, :orders_sum=>60.96}, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
-Ordergroup.create!(:id => 7, :name => "Jan Klaassen", :account_balance => -0.35E2, :created_on => 'Mon, 27 Jan 2014 16:22:14 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => false, :role_orders => false, :contact_person => "Jan Klaassen", :stats => {:jobs_size=>0, :orders_sum=>0}, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
-Ordergroup.create!(:id => 8, :name => "John Doe", :account_balance => 0.90E2, :created_on => 'Wed, 09 Apr 2014 12:23:29 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => false, :role_orders => false, :contact_person => "John Doe", :stats => {:jobs_size=>0, :orders_sum=>0}, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
+Ordergroup.create!(:id => 5, :name => "Admin Administrator", :account_balance => 0.0, :created_on => 'Sat, 18 Jan 2014 00:38:48 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => false, :role_orders => false, :stats => { :jobs_size => 0, :orders_sum => 1021.74 }, :next_weekly_tasks_number => 8, :ignore_apple_restriction => true)
+Ordergroup.create!(:id => 6, :name => "Pete's house", :account_balance => -0.35E2, :created_on => 'Sat, 25 Jan 2014 20:20:37 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => false, :role_orders => false, :contact_person => "Piet Pieterssen", :stats => { :jobs_size => 0, :orders_sum => 60.96 }, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
+Ordergroup.create!(:id => 7, :name => "Jan Klaassen", :account_balance => -0.35E2, :created_on => 'Mon, 27 Jan 2014 16:22:14 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => false, :role_orders => false, :contact_person => "Jan Klaassen", :stats => { :jobs_size => 0, :orders_sum => 0 }, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
+Ordergroup.create!(:id => 8, :name => "John Doe", :account_balance => 0.90E2, :created_on => 'Wed, 09 Apr 2014 12:23:29 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => false, :role_orders => false, :contact_person => "John Doe", :stats => { :jobs_size => 0, :orders_sum => 0 }, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
 
 Membership.create!(:group_id => 1, :user_id => 1)
 Membership.create!(:group_id => 5, :user_id => 1)
@@ -170,18 +169,15 @@ Membership.create!(:group_id => 7, :user_id => 5)
 Membership.create!(:group_id => 3, :user_id => 5)
 Membership.create!(:group_id => 4, :user_id => 5)
 
-
 ## Orders & OrderArticles
 
 seed_order(supplier_id: 1, starts: 2.days.ago, ends: 5.days.from_now)
 seed_order(supplier_id: 3, starts: 2.days.ago, ends: 5.days.from_now)
 seed_order(supplier_id: 2, starts: 2.days.ago, ends: 4.days.from_now)
 
-
 ## GroupOrders & such
 
 seed_group_orders
-
 
 ## Finances
 

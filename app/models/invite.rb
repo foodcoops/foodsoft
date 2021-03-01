@@ -14,7 +14,7 @@ class Invite < ApplicationRecord
 
   before_validation :set_token_and_expires_at
 
- protected
+  protected
 
   # Before validation, set token and expires_at.
   def set_token_and_expires_at
@@ -22,7 +22,7 @@ class Invite < ApplicationRecord
     self.expires_at = Time.now.advance(:days => 7)
   end
 
- private
+  private
 
   # Custom validation: check that email does not already belong to a registered user.
   def email_not_already_registered
@@ -30,5 +30,4 @@ class Invite < ApplicationRecord
       errors.add(:email, I18n.t('invites.errors.already_member'))
     end
   end
-
 end

@@ -1,5 +1,4 @@
 class BankAccountConnector
-
   class TextItem
     def initialize(text)
       @text = text
@@ -12,7 +11,6 @@ class BankAccountConnector
     def text
       @text
     end
-
   end
 
   class TextField
@@ -40,21 +38,16 @@ class BankAccountConnector
   end
 
   class PasswordField < TextField
-
     def type
       :password
     end
-
   end
 
   class HiddenField < TextField
-
     def type
       :hidden
     end
-
   end
-
 
   @@registered_classes = Set.new
 
@@ -111,7 +104,7 @@ class BankAccountConnector
     nil
   end
 
-  def text_field(name, value=nil)
+  def text_field(name, value = nil)
     @controls += [TextField.new(name, value, t(name))]
   end
 
@@ -119,7 +112,7 @@ class BankAccountConnector
     @controls += [HiddenField.new(name, value, 'HIDDEN')]
   end
 
-  def password_field(name, value=nil)
+  def password_field(name, value = nil)
     @controls += [PasswordField.new(name, value, t(name))]
   end
 
@@ -139,7 +132,7 @@ class BankAccountConnector
     @bank_account.import_continuation_point = data
   end
 
-  def update_or_create_transaction(external_id, data={})
+  def update_or_create_transaction(external_id, data = {})
     @bank_account.bank_transactions.where(external_id: external_id).first_or_create.update(data)
     @count += 1
   end
@@ -155,8 +148,9 @@ class BankAccountConnector
   def dump
   end
 
-  def t(key, args={})
+  def t(key, args = {})
     return t(".fields.#{key}") unless key.is_a? String
+
     I18n.t 'bank_account_connector' + key, args
   end
 end

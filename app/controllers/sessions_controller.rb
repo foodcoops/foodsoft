@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   skip_before_action :authenticate
   layout 'login'
 
@@ -30,5 +29,4 @@ class SessionsController < ApplicationController
   def redirect_to_foodcoop
     redirect_to root_path
   end
-
 end

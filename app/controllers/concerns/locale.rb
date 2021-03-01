@@ -47,5 +47,4 @@ module Concerns::Locale
     locale = session[:locale] = ::I18n.locale
     logger.info("Set locale to #{locale}")
   end
-
 end

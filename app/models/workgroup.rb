@@ -1,4 +1,3 @@
-# encoding: utf-8
 class Workgroup < Group
   include CustomFields
 
@@ -26,5 +25,4 @@ class Workgroup < Group
       errors.add(:role_admin, I18n.t('workgroups.error_last_admin_role'))
     end
   end
-
 end

@@ -3,7 +3,7 @@ require 'csv'
 class RenderCSV
   include ActionView::Helpers::NumberHelper
 
-  def initialize(object, options={})
+  def initialize(object, options = {})
     @object = object
     @options = options
     # defaults to please Microsoft Excel ...
@@ -13,12 +13,12 @@ class RenderCSV
   end
 
   def to_csv
-    options = @options.select {|k| %w(col_sep row_sep).include? k.to_s}
+    options = @options.select { |k| %w(col_sep row_sep).include? k.to_s }
     ret = CSV.generate options do |csv|
       if h = header
         csv << h
       end
-      data {|d| csv << d}
+      data { |d| csv << d }
     end
     ret.encode(@options[:encoding], invalid: :replace, undef: :replace)
   end
@@ -34,11 +34,11 @@ class RenderCSV
   # Helper method to test pdf via rails console: OrderCsv.new(order).save_tmp
   def save_tmp
     encoding = @options[:encoding] || 'UTF-8'
-    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.csv", 'w') {|f| f.write(to_csv.force_encoding(encoding)) }
+    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.csv", 'w') { |f| f.write(to_csv.force_encoding(encoding)) }
   end
 
   # XXX disable unit to avoid encoding problems, both in unit and whitespace. Also allows computations in spreadsheet.
-  def number_to_currency(number, options={})
-    super(number, options.merge({unit: ''}))
+  def number_to_currency(number, options = {})
+    super(number, options.merge({ unit: '' }))
   end
 end

@@ -1,4 +1,3 @@
-# encoding: utf-8
 class MultipleOrdersByArticles < OrderPdf
   include OrdersHelper
 
@@ -32,28 +31,29 @@ class MultipleOrdersByArticles < OrderPdf
         dimrows << rows.length if goa.result == 0
       end
       next if rows.length == 0
+
       sum = order_article.group_orders_sum
       rows.unshift I18n.t('documents.order_by_articles.rows').dup # table header
 
       rows << [I18n.t('documents.order_by_groups.sum'),
                order_article.tolerance > 0 ? "#{order_article.quantity} + #{order_article.tolerance}" : order_article.quantity,
                sum[:quantity],
-               nil] #number_to_currency(sum[:price])]
+               nil] # number_to_currency(sum[:price])]
 
       text "<b>#{order_article.article.name}</b> " +
            "(#{order_article.article.unit}; #{number_to_currency order_article.price.fc_price}; " +
            units_history_line(order_article, plain: true) + ')',
            size: fontsize(10), inline_format: true
-      table rows, cell_style: {size: fontsize(8), overflow: :shrink_to_fit} do |table|
+      table rows, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
         # borders
         table.cells.borders = [:bottom]
         table.cells.border_width = 0.02
         table.cells.border_color = 'dddddd'
         table.rows(0).border_width = 1
         table.rows(0).border_color = '666666'
-        table.row(rows.length-2).border_width = 1
-        table.row(rows.length-2).border_color = '666666'
-        table.row(rows.length-1).borders = []
+        table.row(rows.length - 2).border_width = 1
+        table.row(rows.length - 2).border_color = '666666'
+        table.row(rows.length - 1).borders = []
 
         table.column(0).width = 200
         table.columns(1..2).align = :center
@@ -73,25 +73,24 @@ class MultipleOrdersByArticles < OrderPdf
   end
 
   def order_articles
-    OrderArticle.where(order_id: order).ordered.
-      includes(:article).references(:article).
-      reorder('order_articles.order_id, articles.name').
-      preload(:article_price). # preload not join, just in case it went missing
-      preload(:order, :group_order_articles => {:group_order => :ordergroup})
+    OrderArticle.where(order_id: order).ordered
+                .includes(:article).references(:article)
+                .reorder('order_articles.order_id, articles.name')
+                .preload(:article_price) # preload not join, just in case it went missing
+                .preload(:order, :group_order_articles => { :group_order => :ordergroup })
   end
 
   def each_order_article
-    order_articles.find_each_with_order(batch_size: BATCH_SIZE) {|oa| yield oa }
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE) { |oa| yield oa }
   end
 
   def group_order_articles_for(order_article)
     goas = order_article.group_order_articles.to_a
-    goas.sort_by! {|goa| goa.group_order.ordergroup_name }
+    goas.sort_by! { |goa| goa.group_order.ordergroup_name }
     goas
   end
 
   def each_group_order_article_for(group_order)
-    group_order_articles_for(group_order).each {|goa| yield goa }
+    group_order_articles_for(group_order).each { |goa| yield goa }
   end
-
 end

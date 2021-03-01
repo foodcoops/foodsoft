@@ -1,8 +1,7 @@
 class StockitController < ApplicationController
-
   def index
-    @stock_articles = StockArticle.undeleted.includes(:supplier, :article_category).
-        order('suppliers.name, article_categories.name, articles.name')
+    @stock_articles = StockArticle.undeleted.includes(:supplier, :article_category)
+                                  .order('suppliers.name, article_categories.name, articles.name')
   end
 
   def index_on_stock_article_create # See publish/subscribe design pattern in /doc.
@@ -40,7 +39,7 @@ class StockitController < ApplicationController
   end
 
   def create
-    @stock_article = StockArticle.new({quantity: 0}.merge(params[:stock_article]))
+    @stock_article = StockArticle.new({ quantity: 0 }.merge(params[:stock_article]))
     @stock_article.save!
     render :layout => false
   rescue ActiveRecord::RecordInvalid
@@ -78,10 +77,10 @@ class StockitController < ApplicationController
     render :layout => false
   rescue => error
     render :partial => "destroy_fail", :layout => false,
-      :locals => { :fail_msg => I18n.t('errors.general_msg', :msg => error.message) }
+           :locals => { :fail_msg => I18n.t('errors.general_msg', :msg => error.message) }
   end
 
-  #TODO: Fix this!!
+  # TODO: Fix this!!
   def articles_search
     @articles = Article.not_in_stock.limit(8).where('name LIKE ?', "%#{params[:term]}%")
     render :json => @articles.map(&:name)

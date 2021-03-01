@@ -5,12 +5,12 @@ class Finance::BankTransactionsController < ApplicationController
   def index
     if params["sort"]
       sort = case params["sort"]
-               when "date" then "date"
-               when "amount" then "amount"
-               when "financial_link" then "financial_link_id"
-               when "date_reverse" then "date DESC"
-               when "amount_reverse" then "amount DESC"
-               when "financial_link_reverse" then "financial_link_id DESC"
+             when "date" then "date"
+             when "amount" then "amount"
+             when "financial_link" then "financial_link_id"
+             when "date_reverse" then "date DESC"
+             when "amount_reverse" then "amount DESC"
+             when "financial_link_reverse" then "financial_link_id DESC"
              end
     else
       sort = "date DESC"

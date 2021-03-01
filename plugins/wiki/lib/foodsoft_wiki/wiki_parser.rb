@@ -1,6 +1,5 @@
 module FoodsoftWiki
   class WikiParser < WikiCloth::Parser
-
     template do |template|
       Foodsoft::ExpansionVariables.get(template)
     end
@@ -31,12 +30,11 @@ module FoodsoftWiki
       super(render_options)
     end
 
-
     private
 
     def link_attributes_if_number_sign_contained_in_nonexistent(page, referer)
       # Interpret the part after the last number sign as anchor.
-      arr = page.split('#', -1)# `-1` preserves empty anchor
+      arr = page.split('#', -1) # `-1` preserves empty anchor
       page = arr[0...-1].join('#')
       anchor = arr[-1]
 
@@ -52,9 +50,8 @@ module FoodsoftWiki
       end
     end
 
-    def url_for(path_name, options={})
-      Rails.application.routes.url_helpers.send path_name, options.merge({foodcoop: FoodsoftConfig.scope})
+    def url_for(path_name, options = {})
+      Rails.application.routes.url_helpers.send path_name, options.merge({ foodcoop: FoodsoftConfig.scope })
     end
-
   end
 end

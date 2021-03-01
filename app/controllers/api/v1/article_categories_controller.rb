@@ -22,5 +22,4 @@ class Api::V1::ArticleCategoriesController < Api::V1::BaseController
   def scope
     ArticleCategory.all
   end
-
 end

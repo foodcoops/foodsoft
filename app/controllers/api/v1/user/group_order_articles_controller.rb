@@ -1,7 +1,7 @@
 class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
   include Concerns::CollectionScope
 
-  before_action ->{ doorkeeper_authorize! 'group_orders:user' }
+  before_action -> { doorkeeper_authorize! 'group_orders:user' }
 
   before_action :require_ordergroup
   before_action :require_minimum_balance, only: [:create, :update] # destroy is ok
@@ -62,10 +62,10 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
   end
 
   def scope
-    GroupOrderArticle.
-      joins(:group_order).
-      includes(order_article: :article, group_order: :order).
-      where(group_orders: { ordergroup_id: current_ordergroup.id })
+    GroupOrderArticle
+      .joins(:group_order)
+      .includes(order_article: :article, group_order: :order)
+      .where(group_orders: { ordergroup_id: current_ordergroup.id })
   end
 
   def scope_for_update

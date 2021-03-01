@@ -1,16 +1,15 @@
 class Foodcoop::WorkgroupsController < ApplicationController
-
   before_action :authenticate_membership_or_admin,
-    :except => [:index]
+                :except => [:index]
 
   def index
     @workgroups = Workgroup.order("name")
   end
-  
+
   def edit
     @workgroup = Workgroup.find(params[:id])
   end
-  
+
   def update
     @workgroup = Workgroup.find(params[:id])
     if @workgroup.update_attributes(params[:workgroup])

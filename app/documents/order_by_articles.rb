@@ -1,13 +1,11 @@
-# encoding: utf-8
 class OrderByArticles < OrderPdf
-
   def filename
     I18n.t('documents.order_by_articles.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
   end
 
   def title
     I18n.t('documents.order_by_articles.title', :name => order.name,
-      :date => order.ends.strftime(I18n.t('date.formats.default')))
+                                                :date => order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body

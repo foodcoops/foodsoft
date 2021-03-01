@@ -10,9 +10,9 @@ require 'capybara/apparition'
 Capybara.server = :puma, { Silent: true }
 Capybara.javascript_driver = :apparition
 
-#TODO: Remove temporary fix to ignore JavaScript errors
+# TODO: Remove temporary fix to ignore JavaScript errors
 Capybara.register_driver :apparition do |app|
-  Capybara::Apparition::Driver.new(app, {js_errors: false})
+  Capybara::Apparition::Driver.new(app, { js_errors: false })
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -70,7 +70,7 @@ end
 # include default foodsoft scope in urls, so that *_path works
 # https://github.com/rspec/rspec-rails/issues/255
 class ActionDispatch::Routing::RouteSet
-  def default_url_options(options={})
-      {foodcoop: FoodsoftConfig.scope}.merge(options)
+  def default_url_options(options = {})
+    { foodcoop: FoodsoftConfig.scope }.merge(options)
   end
 end
