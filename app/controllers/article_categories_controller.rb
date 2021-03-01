@@ -1,5 +1,4 @@
 class ArticleCategoriesController < ApplicationController
-
   inherit_resources # Build default REST Actions via plugin
 
   before_action :authenticate_article_meta
@@ -23,5 +22,4 @@ class ArticleCategoriesController < ApplicationController
   def collection
     @article_categories = ArticleCategory.order('name')
   end
-
 end

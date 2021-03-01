@@ -1,7 +1,7 @@
 module FoodsoftLinks
   class Engine < ::Rails::Engine
     def navigation(primary, context)
-      primary.item :links, I18n.t('navigation.links'), '#', if: Proc.new { visble_links(context).any? }  do |subnav|
+      primary.item :links, I18n.t('navigation.links'), '#', if: Proc.new { visble_links(context).any? } do |subnav|
         visble_links(context).each do |link|
           subnav.item link.id, link.name, context.link_path(link)
         end

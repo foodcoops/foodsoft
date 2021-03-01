@@ -1,6 +1,4 @@
-# encoding: utf-8
 class Finance::BalancingController < Finance::BaseController
-
   def index
     @orders = Order.finished.page(params[:page]).per(@per_page).order('ends DESC')
   end
@@ -11,20 +9,20 @@ class Finance::BalancingController < Finance::BaseController
     @comments = @order.comments
 
     @articles = @order.order_articles.ordered_or_member.includes(:article, :article_price,
-                                                       group_order_articles: {group_order: :ordergroup})
+                                                                 group_order_articles: { group_order: :ordergroup })
 
     sort_param = params['sort'] || 'name'
     @articles = case sort_param
-                  when 'name' then
-                    @articles.order('articles.name ASC')
-                  when 'name_reverse' then
-                    @articles.order('articles.name DESC')
-                  when 'order_number' then
-                    @articles.order('articles.order_number ASC')
-                  when 'order_number_reverse' then
-                    @articles.order('articles.order_number DESC')
-                  else
-                    @articles
+                when 'name' then
+                  @articles.order('articles.name ASC')
+                when 'name_reverse' then
+                  @articles.order('articles.name DESC')
+                when 'order_number' then
+                  @articles.order('articles.order_number ASC')
+                when 'order_number_reverse' then
+                  @articles.order('articles.order_number DESC')
+                else
+                  @articles
                 end
 
     render layout: false if request.xhr?
@@ -84,7 +82,6 @@ class Finance::BalancingController < Finance::BaseController
     @type = FinancialTransactionType.find_by_id(params.permit(:type)[:type])
     @order.close!(@current_user, @type)
     redirect_to finance_order_index_url, notice: t('finance.balancing.close.notice')
-
   rescue => error
     redirect_to new_finance_order_url(order_id: @order.id), alert: t('finance.balancing.close.alert', message: error.message)
   end
@@ -110,5 +107,4 @@ class Finance::BalancingController < Finance::BaseController
   rescue => error
     redirect_to finance_order_index_url, alert: t('errors.general_msg', msg: error.message)
   end
-
 end

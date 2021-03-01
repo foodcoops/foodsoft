@@ -1,5 +1,4 @@
 class SupplierCategory < ActiveRecord::Base
-
   belongs_to :financial_transaction_class
   has_many :suppliers
 
@@ -15,5 +14,4 @@ class SupplierCategory < ActiveRecord::Base
   def check_for_associated_suppliers
     raise I18n.t('activerecord.errors.has_many_left', collection: Supplier.model_name.human) if suppliers.undeleted.any?
   end
-
 end

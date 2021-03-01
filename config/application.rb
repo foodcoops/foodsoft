@@ -29,7 +29,7 @@ module Foodsoft
 
     # Internationalization.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
-    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '{??,???}{-*,}.yml')).map{|p| p.basename('.yml').to_s }
+    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '{??,???}{-*,}.yml')).map { |p| p.basename('.yml').to_s }
     config.i18n.default_locale = :en
     config.i18n.fallbacks = [:en]
 
@@ -58,7 +58,7 @@ module Foodsoft
     config.assets.initialize_on_precompile = true
 
     # Load legacy scripts from vendor
-    config.assets.precompile += [ 'vendor/assets/javascripts/*.js' ]
+    config.assets.precompile += ['vendor/assets/javascripts/*.js']
 
     # CORS for API
     config.middleware.insert_before 0, Rack::Cors do

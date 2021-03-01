@@ -1,7 +1,6 @@
 require 'csv'
 
 class OrderCsv < RenderCSV
-
   def header
     [
       OrderArticle.human_attribute_name(:units_to_order),
@@ -17,15 +16,14 @@ class OrderCsv < RenderCSV
   def data
     @object.order_articles.ordered.includes([:article, :article_price]).all.map do |oa|
       yield [
-              oa.units_to_order,
-              oa.article.order_number,
-              oa.article.name,
-              oa.article.unit,
-              oa.price.unit_quantity > 1 ? oa.price.unit_quantity : nil,
-              number_to_currency(oa.price.price * oa.price.unit_quantity),
-              number_to_currency(oa.total_price)
-            ]
+        oa.units_to_order,
+        oa.article.order_number,
+        oa.article.name,
+        oa.article.unit,
+        oa.price.unit_quantity > 1 ? oa.price.unit_quantity : nil,
+        number_to_currency(oa.price.price * oa.price.unit_quantity),
+        number_to_currency(oa.total_price)
+      ]
     end
   end
-
 end

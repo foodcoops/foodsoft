@@ -17,6 +17,7 @@ class PrinterJobsController < ApplicationController
     PrinterJob.transaction do
       %w(articles fax groups matrix).each do |document|
         next unless FoodsoftConfig["printer_print_order_#{document}"]
+
         job = PrinterJob.create! order: order, document: document, created_by: current_user
         job.add_update! state
         count += 1

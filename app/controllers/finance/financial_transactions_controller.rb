@@ -1,20 +1,19 @@
-# encoding: utf-8
 class Finance::FinancialTransactionsController < ApplicationController
   before_action :authenticate_finance
   before_action :find_ordergroup, :except => [:new_collection, :create_collection, :index_collection]
   inherit_resources
-#  belongs_to :ordergroup
+  #  belongs_to :ordergroup
 
   def index
     if params['sort']
       sort = case params['sort']
-               when "date"  then "created_on"
-               when "note"   then "note"
-               when "amount" then "amount"
-               when "date_reverse"  then "created_on DESC"
-               when "note_reverse" then "note DESC"
-               when "amount_reverse" then "amount DESC"
-               end
+             when "date" then "created_on"
+             when "note"   then "note"
+             when "amount" then "amount"
+             when "date_reverse" then "created_on DESC"
+             when "note_reverse" then "note DESC"
+             when "amount_reverse" then "amount DESC"
+             end
     else
       sort = "created_on DESC"
     end
@@ -79,6 +78,7 @@ class Finance::FinancialTransactionsController < ApplicationController
 
   def create_collection
     raise I18n.t('finance.financial_transactions.controller.create_collection.error_note_required') if params[:note].blank?
+
     type = FinancialTransactionType.find_by_id(params[:type_id])
     financial_link = nil
 
@@ -103,12 +103,12 @@ class Finance::FinancialTransactionsController < ApplicationController
 
       if params[:create_foodcoop_transaction]
         ft = FinancialTransaction.new({
-          financial_transaction_type: type,
-          user: @current_user,
-          amount: foodcoop_amount,
-          note: params[:note],
-          financial_link: financial_link,
-        })
+                                        financial_transaction_type: type,
+                                        user: @current_user,
+                                        amount: foodcoop_amount,
+                                        note: params[:note],
+                                        financial_link: financial_link,
+                                      })
         ft.save!
       end
 
@@ -131,5 +131,4 @@ class Finance::FinancialTransactionsController < ApplicationController
       @foodcoop = true
     end
   end
-
 end

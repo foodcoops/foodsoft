@@ -47,7 +47,6 @@ describe Api::V1::User::FinancialTransactionsController, type: :controller do
     end
   end
 
-
   shared_examples "financial_transactions endpoint failure" do |status|
     it "returns status #{status}" do
       request
@@ -66,7 +65,6 @@ describe Api::V1::User::FinancialTransactionsController, type: :controller do
       }
     end
   end
-
 
   describe "POST :create" do
     let(:ft_params) { { amount: amount, financial_transaction_type_id: ftt1.id, note: note } }

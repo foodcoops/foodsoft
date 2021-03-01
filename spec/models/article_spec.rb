@@ -49,7 +49,6 @@ describe Article do
     expect(article.in_open_order).to eq(order)
   end
 
-
   it 'has no shared article by default' do
     expect(article.shared_article).to be_nil
   end
@@ -72,8 +71,8 @@ describe Article do
     it 'can be synchronised' do
       # TODO move article sync from supplier to article
       article # need to reference for it to exist when syncing
-      updated_article = supplier.sync_all[0].select{|s| s[0].id==article.id}.first[0]
-      article.update_attributes updated_article.attributes.reject{|k,v| k=='id' or k=='type'}
+      updated_article = supplier.sync_all[0].select { |s| s[0].id == article.id }.first[0]
+      article.update_attributes updated_article.attributes.reject { |k, v| k == 'id' or k == 'type' }
       expect(article.name).to eq(shared_article.name)
       # now synchronising shouldn't change anything anymore
       expect(article.shared_article_changed?).to be_falsey
@@ -95,11 +94,11 @@ describe Article do
       article.shared_updated_on -= 1 # to make update do something
       article.save!
       # TODO get sync functionality in article
-      updated_article = supplier.sync_all[0].select{|s| s[0].id==article.id}.first[0]
-      article.update_attributes! updated_article.attributes.reject{|k,v| k=='id' or k=='type'}
+      updated_article = supplier.sync_all[0].select { |s| s[0].id == article.id }.first[0]
+      article.update_attributes! updated_article.attributes.reject { |k, v| k == 'id' or k == 'type' }
       expect(article.unit).to eq '200g'
       expect(article.unit_quantity).to eq 5
-      expect(article.price).to be_within(0.005).of(shared_article.price/5)
+      expect(article.price).to be_within(0.005).of(shared_article.price / 5)
     end
 
     it 'does not synchronise when it has no order number' do

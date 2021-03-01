@@ -19,15 +19,15 @@ class FinancialTransactionsCsv < RenderCSV
   def data
     @object.includes(:user, :ordergroup, :financial_transaction_type).each do |t|
       yield [
-              t.created_on,
-              t.ordergroup_id,
-              t.ordergroup_name,
-              show_user(t.user),
-              t.financial_transaction_type.financial_transaction_class.name,
-              t.financial_transaction_type.name,
-              t.note,
-              number_to_currency(t.amount)
-            ]
+        t.created_on,
+        t.ordergroup_id,
+        t.ordergroup_name,
+        show_user(t.user),
+        t.financial_transaction_type.financial_transaction_class.name,
+        t.financial_transaction_type.name,
+        t.note,
+        number_to_currency(t.amount)
+      ]
     end
   end
 end

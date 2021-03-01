@@ -1,8 +1,7 @@
 require 'prawn/measurement_extensions'
 
 class RotatedCell < Prawn::Table::Cell::Text
-
-  def initialize(pdf, text, options={})
+  def initialize(pdf, text, options = {})
     options[:content] = text
     options[:valign] = :center
     options[:align] = :center
@@ -32,8 +31,8 @@ class RotatedCell < Prawn::Table::Cell::Text
   def draw_borders(pt)
     @pdf.mask(:line_width, :stroke_color) do
       x, y = pt
-      from = [[x - skew , y + (border_top_width / 2.0)],
-      to = [x, y - height - (border_bottom_width / 2.0)]]
+      from = [[x - skew, y + (border_top_width / 2.0)],
+              to = [x, y - height - (border_bottom_width / 2.0)]]
 
       @pdf.line_width = @border_widths[3]
       @pdf.stroke_color = @border_colors[3]
@@ -47,11 +46,10 @@ class RotatedCell < Prawn::Table::Cell::Text
       with_text_color do
         text_box(width: spanned_content_width + FPTolerance + skew,
                  height: spanned_content_height + FPTolerance,
-                 at: [1-skew, @pdf.cursor]).render
+                 at: [1 - skew, @pdf.cursor]).render
       end
     end
   end
-
 end
 
 class RenderPDF < Prawn::Document
@@ -116,17 +114,17 @@ class RenderPDF < Prawn::Document
   end
 
   def to_pdf
-    body  # Add content, which is defined in subclasses
-    render  # Render pdf
+    body # Add content, which is defined in subclasses
+    render # Render pdf
   end
 
   # Helper method to test pdf via rails console: OrderByGroups.new(order).save_tmp
   def save_tmp
-    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.pdf", 'w') {|f| f.write(to_pdf.force_encoding("UTF-8")) }
+    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.pdf", 'w') { |f| f.write(to_pdf.force_encoding("UTF-8")) }
   end
 
   # @todo avoid underscore instead of unicode whitespace in pdf :/
-  def number_to_currency(number, options={})
+  def number_to_currency(number, options = {})
     super(number, options).gsub("\u202f", ' ') if number
   end
 
@@ -136,7 +134,7 @@ class RenderPDF < Prawn::Document
   end
 
   # add pagebreak or vertical whitespace, depending on configuration
-  def down_or_page(space=10)
+  def down_or_page(space = 10)
     if @first_page
       @first_page = false
       return
@@ -155,7 +153,7 @@ class RenderPDF < Prawn::Document
   end
 
   # return whether pagebreak or vertical whitespace is used for breaks
-  def pdf_add_page_breaks?(docid=nil)
+  def pdf_add_page_breaks?(docid = nil)
     docid ||= self.class.name.underscore
     cfg = FoodsoftConfig[:pdf_add_page_breaks]
     if cfg.is_a? Array

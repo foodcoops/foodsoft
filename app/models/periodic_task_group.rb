@@ -4,6 +4,7 @@ class PeriodicTaskGroup < ApplicationRecord
   def has_next_task?
     return false if tasks.empty?
     return false if tasks.first.due_date.nil?
+
     return true
   end
 

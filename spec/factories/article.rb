@@ -1,7 +1,6 @@
 require 'factory_bot'
 
 FactoryBot.define do
-
   factory :_article do
     unit { Faker::Unit.unit }
     price { rand(0.1..26.0).round(2) }
@@ -32,5 +31,4 @@ FactoryBot.define do
   factory :article_category do
     sequence(:name) { |n| Faker::Lorem.characters(number: rand(2..12)) + " ##{n}" }
   end
-
 end

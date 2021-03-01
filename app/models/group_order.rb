@@ -13,7 +13,7 @@ class GroupOrder < ApplicationRecord
 
   validates_presence_of :order_id
   validates_numericality_of :price
-  validates_uniqueness_of :ordergroup_id, :scope => :order_id   # order groups can only order once per order
+  validates_uniqueness_of :ordergroup_id, :scope => :order_id # order groups can only order once per order
 
   scope :in_open_orders, -> { joins(:order).merge(Order.open) }
   scope :in_finished_orders, -> { joins(:order).merge(Order.finished_not_closed) }
@@ -39,23 +39,22 @@ class GroupOrder < ApplicationRecord
     data[:order_articles] = {}
     order.articles_grouped_by_category.each do |article_category, order_articles|
       order_articles.each do |order_article|
-
         # Get the result of last time ordering, if possible
         goa = group_order_articles.detect { |goa| goa.order_article_id == order_article.id }
 
         # Build hash with relevant data
         data[:order_articles][order_article.id] = {
-            :price => order_article.article.fc_price,
-            :unit => order_article.article.unit_quantity,
-            :quantity => (goa ? goa.quantity : 0),
-            :others_quantity => order_article.quantity - (goa ? goa.quantity : 0),
-            :used_quantity => (goa ? goa.result(:quantity) : 0),
-            :tolerance => (goa ? goa.tolerance : 0),
-            :others_tolerance => order_article.tolerance - (goa ? goa.tolerance : 0),
-            :used_tolerance => (goa ? goa.result(:tolerance) : 0),
-            :total_price => (goa ? goa.total_price : 0),
-            :missing_units => order_article.missing_units,
-            :quantity_available => (order.stockit? ? order_article.article.quantity_available : 0)
+          :price => order_article.article.fc_price,
+          :unit => order_article.article.unit_quantity,
+          :quantity => (goa ? goa.quantity : 0),
+          :others_quantity => order_article.quantity - (goa ? goa.quantity : 0),
+          :used_quantity => (goa ? goa.result(:quantity) : 0),
+          :tolerance => (goa ? goa.tolerance : 0),
+          :others_tolerance => order_article.tolerance - (goa ? goa.tolerance : 0),
+          :used_tolerance => (goa ? goa.result(:tolerance) : 0),
+          :total_price => (goa ? goa.total_price : 0),
+          :missing_units => order_article.missing_units,
+          :quantity_available => (order.stockit? ? order_article.article.quantity_available : 0)
         }
       end
     end
@@ -70,7 +69,7 @@ class GroupOrder < ApplicationRecord
 
       # Get ordered quantities and update group_order_articles/_quantities...
       if group_order_articles_attributes
-        quantities = group_order_articles_attributes.fetch(order_article.id.to_s, {:quantity => 0, :tolerance => 0})
+        quantities = group_order_articles_attributes.fetch(order_article.id.to_s, { :quantity => 0, :tolerance => 0 })
         group_order_article.update_quantities(quantities[:quantity].to_i, quantities[:tolerance].to_i)
       end
 
@@ -88,7 +87,6 @@ class GroupOrder < ApplicationRecord
     update_attribute(:price, total)
   end
 
-
   # Save GroupOrder and updates group_order_articles/quantities accordingly
   def save_ordering!
     transaction do
@@ -104,7 +102,7 @@ class GroupOrder < ApplicationRecord
 
   def total
     return price + transport if transport
+
     price
   end
-
 end

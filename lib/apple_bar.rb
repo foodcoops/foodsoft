@@ -1,5 +1,4 @@
 class AppleBar
-
   attr_reader :ordergroup
 
   def initialize(ordergroup)
@@ -17,7 +16,7 @@ class AppleBar
       'success'
     else
       if FoodsoftConfig[:stop_ordering_under].present? and
-          apples >= FoodsoftConfig[:stop_ordering_under]
+         apples >= FoodsoftConfig[:stop_ordering_under]
         'warning'
       else
         'danger'
@@ -31,7 +30,7 @@ class AppleBar
   end
 
   def mean_order_amount_per_job
-    (1/@global_avg).round rescue 0
+    (1 / @global_avg).round rescue 0
   end
 
   def apples

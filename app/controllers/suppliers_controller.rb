@@ -1,4 +1,3 @@
-# encoding: utf-8
 class SuppliersController < ApplicationController
   before_action :authenticate_suppliers, :except => [:index, :list]
   helper :deliveries
@@ -18,7 +17,7 @@ class SuppliersController < ApplicationController
   # if shared_supplier_id is given, the new supplier will filled whith its attributes
   def new
     if params[:shared_supplier_id]
-      shared_supplier =  SharedSupplier.find(params[:shared_supplier_id])
+      shared_supplier = SharedSupplier.find(params[:shared_supplier_id])
       @supplier = shared_supplier.suppliers.new(shared_supplier.autofill_attributes)
     else
       @supplier = Supplier.new
@@ -55,9 +54,9 @@ class SuppliersController < ApplicationController
     @supplier.mark_as_deleted
     flash[:notice] = I18n.t('suppliers.destroy.notice')
     redirect_to suppliers_path
-    rescue => e
-      flash[:error] = I18n.t('errors.general_msg', :msg => e.message)
-      redirect_to @supplier
+  rescue => e
+    flash[:error] = I18n.t('errors.general_msg', :msg => e.message)
+    redirect_to @supplier
   end
 
   # gives a list with all available shared_suppliers
@@ -74,5 +73,4 @@ class SuppliersController < ApplicationController
               :iban, :custom_fields, :delivery_days, :order_howto, :note, :supplier_category_id,
               :shared_supplier_id, :min_order_quantity, :shared_sync_method)
   end
-
 end

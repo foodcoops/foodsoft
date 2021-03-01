@@ -1,5 +1,4 @@
 class Finance::OrdergroupsController < Finance::BaseController
-
   def index
     m = /^(?<col>name|sum_of_class_\d+)(?<reverse>_reverse)?$/.match params["sort"]
     if m

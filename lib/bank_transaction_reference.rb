@@ -1,5 +1,4 @@
 class BankTransactionReference
-
   # parses a string from a bank transaction field
   def self.parse(data)
     m = /(^|[^\w\.])FS(?<group>\d+)(\.(?<user>\d+))?(?<parts>([A-Za-z]+\d+(\.\d+)?)+)([^\w\.]|$)/.match(data)
@@ -30,5 +29,4 @@ class BankTransactionReference
       }
     }
   end
-
 end

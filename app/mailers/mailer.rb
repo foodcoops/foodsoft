@@ -1,4 +1,3 @@
-# encoding: utf-8
 # ActionMailer class that handles all emails for Foodsoft.
 class Mailer < ActionMailer::Base
   # XXX Quick fix to allow the use of show_user. Proper take would be one of
@@ -7,7 +6,7 @@ class Mailer < ActionMailer::Base
   helper :application
   include ApplicationHelper
 
-  layout 'email'  # Use views/layouts/email.txt.erb
+  layout 'email' # Use views/layouts/email.txt.erb
 
   default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
           'X-Auto-Response-Suppress' => 'All'
@@ -71,7 +70,7 @@ class Mailer < ActionMailer::Base
     @scarce_articles = order_articles.select { |oa| oa.difference_received_ordered.negative? }
 
     mail to: user,
-          subject: I18n.t('mailer.order_received.subject', name: group_order.order.name)
+         subject: I18n.t('mailer.order_received.subject', name: group_order.order.name)
   end
 
   # Sends order result to the supplier
@@ -92,7 +91,7 @@ class Mailer < ActionMailer::Base
   end
 
   # Notify user if account balance is less than zero
-  def negative_balance(user,transaction)
+  def negative_balance(user, transaction)
     @group        = user.ordergroup
     @transaction  = transaction
 
@@ -180,5 +179,4 @@ class Mailer < ActionMailer::Base
     address.display_name = name
     address.format
   end
-
 end

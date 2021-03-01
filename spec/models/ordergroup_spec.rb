@@ -6,7 +6,7 @@ describe Ordergroup do
   let(:ftt1) { create :financial_transaction_type, financial_transaction_class: ftc1 }
   let(:ftt2) { create :financial_transaction_type, financial_transaction_class: ftc2 }
   let(:ftt3) { create :financial_transaction_type, financial_transaction_class: ftc2 }
-  let(:user) { create :user, groups:[create(:ordergroup)] }
+  let(:user) { create :user, groups: [create(:ordergroup)] }
 
   context 'with financial transactions' do
     before do

@@ -1,4 +1,3 @@
-# encoding: utf-8
 # Groups organize the User.
 # A Member gets the roles from the Group
 class Group < ApplicationRecord
@@ -8,7 +7,7 @@ class Group < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :users, -> { where(deleted_at: nil) }, through: :memberships
 
-  validates :name, :presence => true, :length => {:in => 1..25}
+  validates :name, :presence => true, :length => { :in => 1..25 }
   validates_uniqueness_of :name
 
   attr_reader :user_tokens

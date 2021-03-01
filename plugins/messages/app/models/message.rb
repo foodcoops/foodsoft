@@ -10,8 +10,8 @@ class Message < ApplicationRecord
   attr_accessor :send_method, :recipient_tokens, :order_id
 
   scope :threads, -> { where(:reply_to => nil) }
-  scope :thread, -> (id) { where("id = ? OR reply_to = ?", id, id) }
-  scope :readable_for, -> (user) {
+  scope :thread, ->(id) { where("id = ? OR reply_to = ?", id, id) }
+  scope :readable_for, ->(user) {
     user_id = user.try(&:id)
 
     joins(:message_recipients)
@@ -128,12 +128,13 @@ class Message < ApplicationRecord
   def can_toggle_private?(user)
     return true if sender == user
     return false if private?
+
     user.role_admin?
   end
 
   private
 
   def create_salt
-    self.salt = [Array.new(6){rand(256).chr}.join].pack("m").chomp
+    self.salt = [Array.new(6) { rand(256).chr }.join].pack("m").chomp
   end
 end

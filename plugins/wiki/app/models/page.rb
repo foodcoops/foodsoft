@@ -76,10 +76,10 @@ class Page < ApplicationRecord
   def create_redirect
     unless old_title.blank?
       Page.create :redirect => id,
-        :title => old_title,
-        :body => I18n.t('model.page.redirect', :title => title),
-        :permalink => Page.permalink(old_title),
-        :updated_by => updated_by
+                  :title => old_title,
+                  :body => I18n.t('model.page.redirect', :title => title),
+                  :permalink => Page.permalink(old_title),
+                  :updated_by => updated_by
     end
   end
 end

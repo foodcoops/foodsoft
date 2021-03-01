@@ -22,5 +22,4 @@ class Api::V1::FinancialTransactionTypesController < Api::V1::BaseController
   def scope
     FinancialTransactionType.includes(:bank_account, :financial_transaction_class)
   end
-
 end

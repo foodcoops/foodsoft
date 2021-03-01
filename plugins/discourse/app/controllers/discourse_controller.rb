@@ -1,11 +1,11 @@
 class DiscourseController < ApplicationController
-
   before_action -> { require_plugin_enabled FoodsoftDiscourse }
 
   protected
 
   def valid_signature?
     return false if params[:sso].blank? || params[:sig].blank?
+
     get_hmac_hex_string(params[:sso]) == params[:sig]
   end
 

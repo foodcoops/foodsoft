@@ -30,7 +30,6 @@ module Concerns::FoodcoopScope
 
   # Always stay in foodcoop url scope
   def default_url_options(options = {})
-    super().merge({foodcoop: FoodsoftConfig.scope})
+    super().merge({ foodcoop: FoodsoftConfig.scope })
   end
-
 end

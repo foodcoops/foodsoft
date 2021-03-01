@@ -50,10 +50,10 @@ feature 'product distribution', js: true do
     expect(oa.quantity).to eq(6)
     expect(oa.tolerance).to eq(1)
     # Gruppe a bekommt 3 einheiten.
-    goa_a = oa.group_order_articles.joins(:group_order).where(:group_orders => {:ordergroup_id => user_a.ordergroup.id}).first
+    goa_a = oa.group_order_articles.joins(:group_order).where(:group_orders => { :ordergroup_id => user_a.ordergroup.id }).first
     expect(goa_a.result).to eq(3)
     # gruppe b bekommt 2 einheiten.
-    goa_b = oa.group_order_articles.joins(:group_order).where(:group_orders => {:ordergroup_id => user_b.ordergroup.id}).first
+    goa_b = oa.group_order_articles.joins(:group_order).where(:group_orders => { :ordergroup_id => user_b.ordergroup.id }).first
     expect(goa_b.result).to eq(2)
   end
 end

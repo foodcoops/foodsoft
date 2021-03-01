@@ -1,11 +1,10 @@
 require_relative '../spec_helper'
 
 describe User do
-
   it 'is correctly created' do
     user = create :user,
-      nick: 'johnnydoe', first_name: 'Johnny', last_name: 'DoeBar',
-      email: 'johnnydoe@foodcoop.test', phone: '+1234567890'
+                  nick: 'johnnydoe', first_name: 'Johnny', last_name: 'DoeBar',
+                  email: 'johnnydoe@foodcoop.test', phone: '+1234567890'
     expect(user.nick).to eq('johnnydoe')
     expect(user.first_name).to eq('Johnny')
     expect(user.last_name).to eq('DoeBar')
@@ -71,5 +70,4 @@ describe User do
     let(:user) { create :admin }
     it 'default admin role' do expect(user.role_admin?).to be_truthy end
   end
-
 end

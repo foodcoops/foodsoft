@@ -1,7 +1,5 @@
-
 module SessionHelper
-
-  def login(user=nil, password=nil)
+  def login(user = nil, password = nil)
     visit login_path
     user = FactoryBot.create :user if user.nil?
     if user.instance_of? ::User
@@ -13,5 +11,4 @@ module SessionHelper
     fill_in 'password', :with => password
     find('input[type=submit]').click
   end
-
 end

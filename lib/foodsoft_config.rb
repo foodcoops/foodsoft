@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 # Foodcoop-specific configuration.
 #
 # This is loaded from +config/app_config.yml+, which contains a root
@@ -34,7 +32,6 @@
 # then you can whitelist specific attributes setting them to +false+.
 #
 class FoodsoftConfig
-
   # @!attribute scope
   #   Returns the current foodcoop scope for the multicoops feature, otherwise
   #   the value of the foodcoop configuration key +default_scope+ is used.
@@ -61,7 +58,6 @@ class FoodsoftConfig
   end
 
   class << self
-
     # Load and initialize foodcoop configuration file.
     # @param filename [String] Override configuration file
     def init(filename = APP_CONFIG_FILE)
@@ -135,6 +131,7 @@ class FoodsoftConfig
     # @return [Boolean] Whether storing succeeded (fails when key is not allowed to be set in database).
     def []=(key, value)
       return false unless allowed_key?(key)
+
       value = normalize_value value
       # then update database
       if config[key] == value || (config[key].nil? && value == false)
@@ -147,13 +144,13 @@ class FoodsoftConfig
         # or store
         RailsSettings::CachedSettings["foodcoop.#{self.scope}.#{key}"] = value
       end
-      return true
+      true
     end
 
     # @return [Array<String>] Configuration keys that are set (either in +app_config.yml+ or database).
     def keys
       keys = RailsSettings::CachedSettings.get_all("foodcoop.#{self.scope}.").try(:keys) || []
-      keys.map! {|k| k.gsub /^foodcoop\.#{self.scope}\./, ''}
+      keys.map! { |k| k.gsub(/^foodcoop\.#{self.scope}\./, '') }
       keys += config.keys
       keys.map(&:to_s).uniq
     end
@@ -183,22 +180,20 @@ class FoodsoftConfig
     def allowed_key?(key)
       # fast check for keys without nesting
       if self.config[:protected].include? key
-        return !self.config[:protected][key]
+        !self.config[:protected][key]
       else
-        return !self.config[:protected][:all]
+        !self.config[:protected][:all]
       end
       # @todo allow to check nested keys as well
     end
 
     # @return [Hash] Full configuration.
     def to_hash
-      Hash[keys.map {|k| [k, self[k]]} ]
+      keys.map { |k| [k, self[k]] }.to_h
     end
 
     # for using active_model_serializer in the api/v1/configs controller
-    alias :read_attribute_for_serialization :[]
-
-    protected
+    alias read_attribute_for_serialization []
 
     # @!attribute default_config
     #   Returns the program-default foodcoop configuration.
@@ -223,11 +218,11 @@ class FoodsoftConfig
     #   @return [Hash] Default configuration values
     mattr_accessor :default_config
 
-
     private
 
     def set_config(foodcoop)
       raise "No config for this environment (#{foodcoop}) available!" if APP_CONFIG[foodcoop].nil?
+
       self.config = APP_CONFIG[foodcoop]
       self.scope = foodcoop
       set_missing
@@ -288,20 +283,18 @@ class FoodsoftConfig
 
     # Normalize value recursively (which can be entered as strings, but we want to store it properly)
     def normalize_value(value)
-      value = value.map{|v| normalize_value(v)} if value.is_a? Array
+      value = value.map { |v| normalize_value(v) } if value.is_a? Array
       if value.is_a? Hash
-        value = ActiveSupport::HashWithIndifferentAccess[ value.to_a.map{|a| [a[0], normalize_value(a[1])]} ]
+        value = ActiveSupport::HashWithIndifferentAccess[value.to_a.map { |a| [a[0], normalize_value(a[1])] }]
       end
       case value
-        when 'true' then true
-        when 'false' then false
-        when /^[-+0-9]+$/ then value.to_i
-        when /^[-+0-9.]+([eE][-+0-9]+)?$/ then value.to_f
-        when '' then nil
-        else value
+      when 'true' then true
+      when 'false' then false
+      when /^[-+0-9]+$/ then value.to_i
+      when /^[-+0-9.]+([eE][-+0-9]+)?$/ then value.to_f
+      when '' then nil
+      else value
       end
     end
-
-
   end
 end

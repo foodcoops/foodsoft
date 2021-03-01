@@ -1,4 +1,3 @@
-# encoding: utf-8
 #
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
@@ -27,14 +26,14 @@ module ApplicationHelper
 
   # Splits an IBAN into groups of 4 digits displayed with margins in between
   def format_iban(iban)
-    iban.scan(/..?.?.?/).map{ |item| content_tag(:span, item, style: "margin-right: 0.5em;") }.join.html_safe
+    iban.scan(/..?.?.?/).map { |item| content_tag(:span, item, style: "margin-right: 0.5em;") }.join.html_safe
   end
 
   # Creates ajax-controlled-links for pagination
   def pagination_links_remote(collection, options = {})
     per_page = options[:per_page] || @per_page
     params = options[:params] || {}
-    params = params.merge({:per_page => per_page})
+    params = params.merge({ :per_page => per_page })
     paginate collection, :params => params, :remote => true
   end
 
@@ -45,7 +44,7 @@ module ApplicationHelper
     params = params || {}
 
     links = per_page_options.map do |per_page|
-      params.merge!({:per_page => per_page})
+      params.merge!({ :per_page => per_page })
       link_class = 'btn'
       link_class << ' disabled' if per_page == current
       link_to(per_page, params, :remote => true, class: link_class)
@@ -58,33 +57,31 @@ module ApplicationHelper
         links.join.html_safe
       end
     end
-
   end
 
   def sort_link_helper(text, key, options = {})
     # Hmtl options
     remote = options[:remote].nil? ? true : options[:remote]
     class_name = case params[:sort]
-                   when key then
-                     'sortup'
-                   when key + '_reverse' then
-                     'sortdown'
-                   else
-                     nil
+                 when key then
+                   'sortup'
+                 when key + '_reverse' then
+                   'sortdown'
+                 else
+                   nil
                  end
     html_options = {
-        :title => I18n.t('helpers.application.sort_by', text: text),
-        :remote => remote,
-        :class => class_name
+      :title => I18n.t('helpers.application.sort_by', text: text),
+      :remote => remote,
+      :class => class_name
     }
-
 
     # Url options
     key += "_reverse" if params[:sort] == key
     per_page = options[:per_page] || @per_page
     url_options = params.merge(per_page: per_page, sort: key)
-    url_options.merge!({page: params[:page]}) if params[:page]
-    url_options.merge!({query: params[:query]}) if params[:query]
+    url_options.merge!({ page: params[:page] }) if params[:page]
+    url_options.merge!({ query: params[:query] }) if params[:query]
 
     link_to(text, url_for(url_options), html_options)
   end
@@ -98,13 +95,13 @@ module ApplicationHelper
   #   be overridden by the option 'desc'.
   #  Other options are passed through to I18n.
   def heading_helper(model, attribute, options = {})
-    i18nopts = {count: 2}.merge(options.select {|a| !['short', 'desc'].include?(a) })
+    i18nopts = { count: 2 }.merge(options.select { |a| !['short', 'desc'].include?(a) })
     s = model.human_attribute_name(attribute, i18nopts)
     if options[:short]
       desc = options[:desc]
-      desc ||= model.human_attribute_name("#{attribute}_desc".to_sym, options.merge({fallback: true, default: '', count: 2}))
+      desc ||= model.human_attribute_name("#{attribute}_desc".to_sym, options.merge({ fallback: true, default: '', count: 2 }))
       desc.blank? && desc = s
-      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({fallback: true, default: '', count: 2}))
+      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({ fallback: true, default: '', count: 2 }))
       s = raw "<abbr title='#{desc}'>#{sshort}</abbr>" unless sshort.blank?
     end
     s
@@ -134,24 +131,24 @@ module ApplicationHelper
   end
 
   def tab_is_active?(tab)
-    tab[:active].detect {|c| controller.controller_path.match(c) }
+    tab[:active].detect { |c| controller.controller_path.match(c) }
   end
 
-  def icon(name, options={})
+  def icon(name, options = {})
     icons = {
-        :delete  => { :file => 'b_drop.png', :alt => I18n.t('ui.delete')},
-        :edit    => { :file => 'b_edit.png', :alt => I18n.t('ui.edit')},
-        :members => { :file => 'b_users.png', :alt => I18n.t('helpers.application.edit_user')}
+      :delete => { :file => 'b_drop.png', :alt => I18n.t('ui.delete') },
+      :edit => { :file => 'b_edit.png', :alt => I18n.t('ui.edit') },
+      :members => { :file => 'b_users.png', :alt => I18n.t('helpers.application.edit_user') }
     }
     options[:alt] ||= icons[name][:alt]
     options[:title] ||= icons[name][:title]
-    options.merge!({:size => '16x16',:border => "0"})
+    options.merge!({ :size => '16x16', :border => "0" })
 
     image_tag icons[name][:file], options
   end
 
   # Remote links with default 'loader'.gif during request
-  def remote_link_to(text, options={})
+  def remote_link_to(text, options = {})
     remote_options = {
       :before => "Element.show('loader')",
       :success => "Element.hide('loader')",
@@ -160,20 +157,20 @@ module ApplicationHelper
     link_to(text, options[:url], remote_options.merge(options))
   end
 
-  def format_roles(record, icon=false)
+  def format_roles(record, icon = false)
     roles = %w(suppliers article_meta orders pickups finance invoices admin)
-    roles.select! {|role| record.send "role_#{role}?"}
-    names = Hash[roles.map{|r| [r, I18n.t("helpers.application.role_#{r}")]}]
+    roles.select! { |role| record.send "role_#{role}?" }
+    names = Hash[roles.map { |r| [r, I18n.t("helpers.application.role_#{r}")] }]
     if icon
-      roles.map{|r| image_tag("role-#{r}.png", size: '22x22', border: 0, alt: names[r], title: names[r])}.join('&nbsp;').html_safe
+      roles.map { |r| image_tag("role-#{r}.png", size: '22x22', border: 0, alt: names[r], title: names[r]) }.join('&nbsp;').html_safe
     else
-      roles.map{|r| names[r]}.join(', ')
+      roles.map { |r| names[r] }.join(', ')
     end
   end
 
   def link_to_gmaps(address)
     link_to h(address), "http://maps.google.com/?q=#{h(address)}", :title => I18n.t('helpers.application.show_google_maps'),
-      :target => "_blank"
+                                                                   :target => "_blank"
   end
 
   # Returns flash messages html.
@@ -200,12 +197,13 @@ module ApplicationHelper
   # http://railsapps.github.io/twitter-bootstrap-rails.html
   def base_errors resource
     return '' if resource.errors.empty? || resource.errors[:base].empty?
+
     messages = resource.errors[:base].map { |msg| content_tag(:li, msg) }.join
-    render :partial => 'shared/base_errors', :locals => {:error_messages => messages}
+    render :partial => 'shared/base_errors', :locals => { :error_messages => messages }
   end
 
   # show a user, depending on settings
-  def show_user(user=@current_user, options = {})
+  def show_user(user = @current_user, options = {})
     if user.nil?
       "?"
     elsif FoodsoftConfig[:use_nick]
@@ -223,13 +221,14 @@ module ApplicationHelper
   end
 
   # render user presentation linking to default action (plugins can override this)
-  def show_user_link(user=@current_user)
+  def show_user_link(user = @current_user)
     show_user user
   end
 
   # allow truncate to add title when tooltip option is given
-  def truncate(text, options={}, &block)
+  def truncate(text, options = {}, &block)
     return text if !text || text.length <= (options[:length] || 30)
+
     text_truncated = super(text, options, &block)
     if options[:tooltip]
       content_tag :span, text_truncated, title: text
@@ -240,29 +239,28 @@ module ApplicationHelper
 
   # Expand variables in text
   # @see Foodsoft::ExpansionVariables#expand
-  def expand(text, options={})
+  def expand(text, options = {})
     Foodsoft::ExpansionVariables.expand(text, options)
   end
 
   # @param dismiss [String, Symbol] Bootstrap dismiss value (modal, alert)
   # @return [String] HTML for close button dismissing
   def close_button(dismiss)
-    content_tag :button, type: 'button', class: 'close', data: {dismiss: dismiss} do
+    content_tag :button, type: 'button', class: 'close', data: { dismiss: dismiss } do
       I18n.t('ui.marks.close').html_safe
     end
   end
 
   # @return [String] path to foodcoop CSS style (with MD5 parameter for caching)
-  def foodcoop_css_path(options={})
-    super(options.merge({md5: Digest::MD5.hexdigest(FoodsoftConfig[:custom_css].to_s)}))
+  def foodcoop_css_path(options = {})
+    super(options.merge({ md5: Digest::MD5.hexdigest(FoodsoftConfig[:custom_css].to_s) }))
   end
 
   # @return [String] stylesheet tag for foodcoop CSS style (+custom_css+ foodcoop config)
   # @see #foodcoop_css_path
-  def foodcoop_css_tag(options={})
+  def foodcoop_css_tag(options = {})
     unless FoodsoftConfig[:custom_css].blank?
       stylesheet_link_tag foodcoop_css_path, media: 'all'
     end
   end
-
 end

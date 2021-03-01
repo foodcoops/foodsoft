@@ -7,4 +7,3 @@ module Faker
     end
   end
 end
-

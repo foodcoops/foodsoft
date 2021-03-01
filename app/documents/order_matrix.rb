@@ -1,5 +1,4 @@
 class OrderMatrix < OrderPdf
-
   HEADER_ROTATE = -30
   PLACEHOLDER_CHAR = 'X'
 
@@ -9,7 +8,7 @@ class OrderMatrix < OrderPdf
 
   def title
     I18n.t('documents.order_matrix.title', :name => @order.name,
-      :date => @order.ends.strftime(I18n.t('date.formats.default')))
+                                           :date => @order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
@@ -31,7 +30,7 @@ class OrderMatrix < OrderPdf
 
     order_articles_data.each { |row| row.delete_at 1 } unless @options[:show_supplier]
 
-    name = I18n.t('documents.order_matrix.heading', count: order_articles_data.size-1)
+    name = I18n.t('documents.order_matrix.heading', count: order_articles_data.size - 1)
     nice_table name, order_articles_data do |table|
       if @options[:show_supplier]
         table.column(0).width = bounds.width / 3
@@ -82,7 +81,7 @@ class OrderMatrix < OrderPdf
         rows << row
       end
 
-      table rows, header: true, cell_style: {overflow: :shrink_to_fit} do |table|
+      table rows, header: true, cell_style: { overflow: :shrink_to_fit } do |table|
         table.cells.padding = [0, 0, 2, 0]
         table.cells.borders = [:left]
         table.cells.border_width = 0.5
@@ -95,8 +94,8 @@ class OrderMatrix < OrderPdf
         table.column(1).align = :right
         table.column(1).padding = [0, 3, 2, 0]
         table.column(2..-1).align = :center
-        table.cells[0,0].borders = []
-        table.cells[0,1].borders = []
+        table.cells[0, 0].borders = []
+        table.cells[0, 1].borders = []
 
         table.column(0).overflow = :truncate
         table.column(0).width = col_width_0
@@ -104,7 +103,7 @@ class OrderMatrix < OrderPdf
         table.column(2..-1).width = col_width_2
 
         (0..batch_size).step(5).each do |idx|
-          table.column(2+idx).border_width = 2
+          table.column(2 + idx).border_width = 2
         end
 
         table.row_colors = ['dddddd', 'ffffff']
@@ -113,5 +112,4 @@ class OrderMatrix < OrderPdf
       first_page = false
     end
   end
-
 end

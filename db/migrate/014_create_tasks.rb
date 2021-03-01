@@ -12,14 +12,14 @@ class CreateTasks < ActiveRecord::Migration[4.2]
     end
     add_index :tasks, :name
     add_index :tasks, :due_date
-    
+
     create_table :assignments do |t|
       t.column :user_id, :integer, :null => false
       t.column :task_id, :integer, :null => false
       t.column :accepted, :boolean, :default => false
     end
     add_index :assignments, [:user_id, :task_id], :unique => true
-    
+
     add_column :groups, :weekly_task, :boolean, :default => false # if group has an job for every week
     add_column :groups, :weekday, :integer  # e.g. 1 means monday, 2 = tuesday an so on
     add_column :groups, :task_name, :string # the name of the weekly task

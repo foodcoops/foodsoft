@@ -36,7 +36,7 @@ module Concerns::AuthApi
   # Make sure that at least one the given OAuth scopes is valid for the current user's permissions.
   # @raise Api::Errors::PermissionsRequired
   def doorkeeper_authorize_roles!(*scopes)
-    unless scopes.any? {|scope| doorkeeper_scope_permitted?(scope) }
+    unless scopes.any? { |scope| doorkeeper_scope_permitted?(scope) }
       raise Api::Errors::PermissionRequired.new('Forbidden, no permission')
     end
   end
@@ -60,7 +60,7 @@ module Concerns::AuthApi
     when 'suppliers'      then return current_user.role_suppliers?
     when 'group_orders'   then return current_user.role_orders?
     when 'finance'        then return current_user.role_finance?
-    # please note that offline_access does not belong here, since it is not used for permission checking
+      # please note that offline_access does not belong here, since it is not used for permission checking
     end
 
     case scope

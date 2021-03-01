@@ -1,5 +1,4 @@
 class GroupOrderArticlesController < ApplicationController
-
   before_action :authenticate_finance
   before_action :find_group_order_article, except: [:new, :create]
 
@@ -30,7 +29,7 @@ class GroupOrderArticlesController < ApplicationController
       update_summaries(@group_order_article)
       render :create
 
-    else  # Validation failed, show form
+    else # Validation failed, show form
       render :new
     end
   end
@@ -50,7 +49,7 @@ class GroupOrderArticlesController < ApplicationController
   def destroy
     # only destroy if quantity and tolerance was zero already, so that we don't
     # lose what the user ordered, if any
-    if @group_order_article.quantity > 0 || @group_order_article.tolerance >0
+    if @group_order_article.quantity > 0 || @group_order_article.tolerance > 0
       @group_order_article.update_attribute(:result, 0)
     else
       @group_order_article.destroy

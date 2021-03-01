@@ -1,5 +1,4 @@
 class MessagegroupsController < ApplicationController
-
   def index
     @messagegroups = Messagegroup.order("name")
   end

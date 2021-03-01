@@ -1,7 +1,7 @@
 class Api::V1::OrdersController < Api::V1::BaseController
   include Concerns::CollectionScope
 
-  before_action ->{ doorkeeper_authorize! 'orders:read', 'orders:write' }
+  before_action -> { doorkeeper_authorize! 'orders:read', 'orders:write' }
 
   def index
     render_collection search_scope

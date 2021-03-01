@@ -33,7 +33,7 @@ class GroupOrdersController < ApplicationController
   end
 
   def show
-    @order= @group_order.order
+    @order = @group_order.order
   end
 
   def edit
@@ -100,12 +100,11 @@ class GroupOrdersController < ApplicationController
     if @ordergroup.not_enough_apples?
       redirect_to group_orders_url,
                   alert: t('not_enough_apples', scope: 'group_orders.messages', apples: @ordergroup.apples,
-                           stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
+                                                stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
     end
   end
 
   def order_id_param
     params[:order_id] || (params[:group_order] && params[:group_order][:order_id])
   end
-
 end

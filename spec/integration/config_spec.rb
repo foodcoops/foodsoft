@@ -51,13 +51,13 @@ feature 'admin/configs' do
   end
 
   def compact_hash_deep!(h)
-    h.each do |k,v|
+    h.each do |k, v|
       if v.is_a? Hash
         compact_hash_deep!(v)
-        v.reject! {|k,v| v.blank?}
+        v.reject! { |k, v| v.blank? }
       end
     end
-    h.reject! {|k,v| v.blank?}
+    h.reject! { |k, v| v.blank? }
     h
   end
 end

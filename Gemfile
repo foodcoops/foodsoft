@@ -9,7 +9,6 @@ gem 'uglifier', '>= 1.0.3'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-
 gem 'jquery-rails'
 gem 'select2-rails'
 gem 'rails_tokeninput'
@@ -67,10 +66,9 @@ gem 'foodsoft_links', path: 'plugins/links'
 gem 'foodsoft_polls', path: 'plugins/polls'
 
 # plugins not enabled by default
-#gem 'foodsoft_current_orders', path: 'plugins/current_orders'
-#gem 'foodsoft_printer', path: 'plugins/printer'
-#gem 'foodsoft_uservoice', path: 'plugins/uservoice'
-
+# gem 'foodsoft_current_orders', path: 'plugins/current_orders'
+# gem 'foodsoft_printer', path: 'plugins/printer'
+# gem 'foodsoft_uservoice', path: 'plugins/uservoice'
 
 group :development do
   gem 'sqlite3', '~> 1.3.6'

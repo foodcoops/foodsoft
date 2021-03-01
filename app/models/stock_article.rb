@@ -1,11 +1,9 @@
-# encoding: utf-8
 class StockArticle < Article
-
   has_many :stock_changes
 
   scope :available, -> { undeleted.where('quantity > 0') }
 
-  validates :quantity, presence: true, numericality: {greater_than_or_equal_to: 0}
+  validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   before_destroy :check_quantity
 
@@ -30,12 +28,12 @@ class StockArticle < Article
   end
 
   def quantity_ordered
-    OrderArticle.where(article_id: id).
-        joins(:order).where(orders: {state: %w[open finished received]}).sum(:units_to_order)
+    OrderArticle.where(article_id: id)
+                .joins(:order).where(orders: { state: %w[open finished received] }).sum(:units_to_order)
   end
 
   def quantity_history
-    stock_changes.reorder('stock_changes.created_at ASC').map{|s| s.quantity}.cumulative_sum
+    stock_changes.reorder('stock_changes.created_at ASC').map { |s| s.quantity }.cumulative_sum
   end
 
   def self.stock_value

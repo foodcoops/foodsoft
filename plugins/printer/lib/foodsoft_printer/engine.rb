@@ -2,6 +2,7 @@ module FoodsoftPrinter
   class Engine < ::Rails::Engine
     def navigation(primary, context)
       return unless FoodsoftPrinter.enabled?
+
       unless primary[:orders].nil?
         sub_nav = primary[:orders].sub_navigation
         sub_nav.items <<

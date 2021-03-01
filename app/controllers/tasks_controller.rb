@@ -1,10 +1,9 @@
-# encoding: utf-8
 class TasksController < ApplicationController
-  #auto_complete_for :user, :nick
+  # auto_complete_for :user, :nick
 
   def index
     @non_group_tasks = Task.non_group.order('due_date', 'name').includes(assignments: :user)
-    @groups = Workgroup.order(:name).includes(open_tasks: {assignments: :user})
+    @groups = Workgroup.order(:name).includes(open_tasks: { assignments: :user })
   end
 
   def user
@@ -19,7 +18,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(current_user_id: current_user.id)
     @task.created_by = current_user
-    @task.attributes=(task_params)
+    @task.attributes = (task_params)
     if params[:periodic]
       @task.periodic_task_group = PeriodicTaskGroup.new
     end
@@ -47,7 +46,7 @@ class TasksController < ApplicationController
     was_periodic = @task.periodic?
     prev_due_date = @task.due_date
     @task.current_user_id = current_user.id
-    @task.attributes=(task_params)
+    @task.attributes = (task_params)
     if @task.errors.empty? && @task.save
       task_group.update_tasks_including(@task, prev_due_date) if params[:periodic]
       flash[:notice] = I18n.t('tasks.update.notice')
@@ -122,5 +121,4 @@ class TasksController < ApplicationController
       .require(:task)
       .permit(:name, :description, :duration, :user_list, :required_users, :workgroup_id, :due_date, :done)
   end
-
 end

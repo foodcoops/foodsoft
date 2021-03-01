@@ -1,9 +1,8 @@
 require 'factory_bot'
 
 FactoryBot.define do
-
   factory :user do
-    sequence(:nick) { |n| "user#{n}"}
+    sequence(:nick) { |n| "user#{n}" }
     first_name { Faker::Name.first_name }
     email { Faker::Internet.email }
     password { new_random_password }
@@ -32,7 +31,7 @@ FactoryBot.define do
   end
 
   factory :group do
-    sequence(:name) {|n| "Group ##{n}"}
+    sequence(:name) { |n| "Group ##{n}" }
 
     factory :workgroup do
       type { '' }
@@ -40,11 +39,10 @@ FactoryBot.define do
 
     factory :ordergroup do
       type { 'Ordergroup' }
-      sequence(:name) {|n| "Order group ##{n}"}
+      sequence(:name) { |n| "Order group ##{n}" }
       # workaround to avoid needing to save the ordergroup
       #   avoids e.g. error after logging in related to applebar
       after :create do |group| Ordergroup.find(group.id).update_stats! end
     end
   end
-
 end

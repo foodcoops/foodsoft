@@ -1,6 +1,4 @@
-# encoding: utf-8
 class CurrentOrders::OrdergroupsController < ApplicationController
-
   before_action :authenticate_orders
   before_action :find_group_orders, only: [:index, :show]
 
@@ -21,7 +19,7 @@ class CurrentOrders::OrdergroupsController < ApplicationController
   end
 
   def show_on_group_order_article_update
-    #@goa = GroupOrderArticle.find(params[:group_order_article_id])
+    # @goa = GroupOrderArticle.find(params[:group_order_article_id])
     @group_order = GroupOrder.find(params[:group_order_id])
     @ordergroup = @group_order.ordergroup
   end
@@ -33,15 +31,15 @@ class CurrentOrders::OrdergroupsController < ApplicationController
 
     @all_ordergroups = Ordergroup.undeleted.order(:name).to_a
     @ordered_group_ids = GroupOrder.where(order_id: @order_ids).pluck('DISTINCT(ordergroup_id)')
-    @all_ordergroups.sort_by! {|o| @ordered_group_ids.include?(o.id) ? o.name : "ZZZZZ#{o.name}" }
+    @all_ordergroups.sort_by! { |o| @ordered_group_ids.include?(o.id) ? o.name : "ZZZZZ#{o.name}" }
 
     @ordergroup = Ordergroup.find(params[:id]) unless params[:id].nil?
-    @goas = GroupOrderArticle.includes(:group_order, :order_article => [:article, :article_price]).
-              where(group_orders: {order_id: @order_ids, ordergroup_id: @ordergroup.id}).ordered.all unless @ordergroup.nil?
+    @goas = GroupOrderArticle.includes(:group_order, :order_article => [:article, :article_price])
+                             .where(group_orders: { order_id: @order_ids, ordergroup_id: @ordergroup.id }).ordered.all unless @ordergroup.nil?
   end
 
   helper_method \
-  def articles_for_adding
+    def articles_for_adding
     OrderArticle.includes(:article, :article_price).where(order_id: @order_ids)
   end
 end

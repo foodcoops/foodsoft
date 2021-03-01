@@ -1,6 +1,5 @@
-
 class OrderTxt
-  def initialize(order, options={})
+  def initialize(order, options = {})
     @order = order
   end
 
@@ -16,16 +15,16 @@ class OrderTxt
     text += "****** " + I18n.t('orders.fax.to_address') + "\n\n"
     text += "#{FoodsoftConfig[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
     text += "****** " + I18n.t('orders.fax.articles') + "\n\n"
-    text += "%8s %8s   %s\n"%[I18n.t('orders.fax.number'), I18n.t('orders.fax.amount'), I18n.t('orders.fax.name')]
+    text += "%8s %8s   %s\n" % [I18n.t('orders.fax.number'), I18n.t('orders.fax.amount'), I18n.t('orders.fax.name')]
     # now display all ordered articles
     @order.order_articles.ordered.includes([:article, :article_price]).each do |oa|
-      text += "%8s %8d   %s\n"%[oa.article.order_number, oa.units_to_order.to_i, oa.article.name]
+      text += "%8s %8d   %s\n" % [oa.article.order_number, oa.units_to_order.to_i, oa.article.name]
     end
     text
   end
 
   # Helper method to test pdf via rails console: OrderTxt.new(order).save_tmp
   def save_tmp
-    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.txt", 'w') {|f| f.write(to_csv.force_encoding("UTF-8")) }
+    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.txt", 'w') { |f| f.write(to_csv.force_encoding("UTF-8")) }
   end
 end

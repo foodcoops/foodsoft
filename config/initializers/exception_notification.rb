@@ -1,13 +1,11 @@
 require 'exception_notification/rails'
 
-
 require 'resque/failure/multiple'
 require 'resque/failure/redis'
 require 'exception_notification/resque'
 
 Resque::Failure::Multiple.classes = [Resque::Failure::Redis, ExceptionNotification::Resque]
 Resque::Failure.backend = Resque::Failure::Multiple
-
 
 ExceptionNotification.configure do |config|
   # Ignore additional exception types.
@@ -25,8 +23,8 @@ ExceptionNotification.configure do |config|
   # Email notifier sends notifications by email.
   if notification = FoodsoftConfig[:notification]
     config.add_notifier :email, {
-      :email_prefix         => notification[:email_prefix],
-      :sender_address       => notification[:sender_address],
+      :email_prefix => notification[:email_prefix],
+      :sender_address => notification[:sender_address],
       :exception_recipients => notification[:error_recipients],
     }
   end
@@ -49,5 +47,4 @@ ExceptionNotification.configure do |config|
   #   :url => 'http://example.com:5555/hubot/path',
   #   :http_method => :post
   # }
-
 end
