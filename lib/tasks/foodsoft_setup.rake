@@ -34,8 +34,17 @@ namespace :foodsoft do
     setup_development
     setup_database
     start_mailcatcher
-    puts yellow "All done! Your foodcoft should be running smoothly."
+    puts yellow "All done! Your foodsoft setup should be running smoothly."
     start_server
+  end
+
+  desc "Setup foodsoft"
+  task :setup_development_docker do
+    puts yellow "This task will help you get your foodcoop running in development via docker."
+    setup_app_config
+    setup_development
+    setup_run_rake_db_setup
+    puts yellow "All done! Your foodsoft setup should be running smoothly via docker."
   end
 
   namespace :setup do
@@ -65,21 +74,23 @@ def setup_database
   database = ask("What kind of database do you use?\nOptions:\n(1) MySQL\n(2) SQLite", ["1", "2"])
   if database == "1"
     puts yellow "Using MySQL..."
-    %x(cp #{Rails.root.join("#{file}.MySQL_SAMPLE")} #{Rails.root.join(file)})
+    %x(cp -p #{Rails.root.join("#{file}.MySQL_SAMPLE")} #{Rails.root.join(file)})
   elsif database == "2"
     puts yellow "Using SQLite..."
-    %x(cp #{Rails.root.join("#{file}.SQLite_SAMPLE")} #{Rails.root.join(file)})
+    %x(cp -p #{Rails.root.join("#{file}.SQLite_SAMPLE")} #{Rails.root.join(file)})
   end
 
   reminder(file)
 
   puts blue "IMPORTANT:  Edit (rake-generated) config/database.yml with valid username and password for EACH env before continuing!"
   finished = ask("Finished?\nOptions:\n(y) Yes", ["y"])
-  if finished
-    Rake::Task["db:setup"].reenable
-    db_setup = capture_stdout { Rake::Task["db:setup"].invoke }
-    puts db_setup
-  end
+  setup_run_rake_db_setup if finished
+end
+
+def setup_run_rake_db_setup
+  Rake::Task["db:setup"].reenable
+  db_setup = capture_stdout { Rake::Task["db:setup"].invoke }
+  puts db_setup
 end
 
 def setup_app_config
@@ -88,7 +99,7 @@ def setup_app_config
   return nil if skip?(file)
 
   puts yellow "Copying #{file}..."
-  %x(cp #{sample} #{Rails.root.join(file)})
+  %x(cp -p #{sample} #{Rails.root.join(file)})
   reminder(file)
 end
 
@@ -97,7 +108,7 @@ def setup_development
   return nil if skip?(file)
 
   puts yellow "Copying #{file}..."
-  %x(cp #{Rails.root.join("#{file}.SAMPLE")} #{Rails.root.join(file)})
+  %x(cp -p #{Rails.root.join("#{file}.SAMPLE")} #{Rails.root.join(file)})
   reminder(file)
 end
 
