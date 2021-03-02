@@ -28,19 +28,20 @@ afterwards.
 
 ## Setup
 
-Then setup foodsoft development (this will take some time, containers needs
-to be pulled from docker registry and a lot dependencies needs to be installed)
+Then start the database server and setup foodsoft development (this will take
+some time, containers needs to be pulled from docker registry and a lot
+dependencies needs to be installed)
+
+    docker-compose -f docker-compose-dev.yml up -d mariadb
+    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
+      bundle install
+    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
+      bundle exec rake foodsoft:setup_development_docker
+
+Optionally an initial database (here seeded with `small.en`) can be loaded by running
 
     docker-compose -f docker-compose-dev.yml run --rm foodsoft \
-      bundle exec rake foodsoft:setup_development
-
-Do not enable mailcatcher, because this is already included as a docker image.
-
-Then create an initial database (here seeded with `small.en`) by running
-
-    docker-compose -f docker-compose-dev.yml up -d mariadb && sleep 15
-    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
-      bundle exec rake db:create db:schema:load db:seed:small.en
+      bundle exec rake db:schema:load db:seed:small.en
 
 To avoid having to pass the `-f` argument all the time, it is recommended to setup
 an alias, e.g. by adding the following line to your ~/.bashrc
@@ -66,7 +67,8 @@ Open a rails console
 
 Setup the test database
 
-    docker-compose-dev run --rm foodsoft bundle exec rake db:create db:schema:load RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8
+    docker-compose-dev run --rm mariadb mariadb --host=mariadb --password=secret --execute="CREATE DATABASE test"
+    docker-compose-dev run --rm foodsoft bundle exec rake db:schema:load RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8mb4
 
 Run the tests
 
@@ -82,6 +84,10 @@ Jump in a running container for debugging.
 ### Receiving mails
 
 Go to [http://localhost:1080](http://localhost:1080)
+
+### Manage database
+
+Go to [http://localhost:2080](http://localhost:2080)
 
 ### Gemfile updates
 
