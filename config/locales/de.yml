@@ -740,7 +740,7 @@ de:
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
     general_msg: 'Ein Fehler ist aufgetreten: %{msg}'
     internal_server_error:
-      text1: Ein unerwarteter Fehler ist aufgretreten. Entschuldigung!
+      text1: Ein unerwarteter Fehler ist aufgetreten. Entschuldigung!
       text2: Wir wurden benachrichtigt. Fall das Problem weiterhin besteht, gib uns bitte bescheid.
       title: Interner Server Fehler
     not_found:
@@ -923,7 +923,7 @@ de:
         create_foodcoop_transaction: Erstelle einen Transaktion mit der der invertieten Summe für die Foodcoop (für den Fall der "doppelte Buchführung")
         new_ordergroup: Weitere Bestellgruppe hinzufügen
         save: Transaktionen speichern
-        set_balance: Setze den Kontostand der Bestellgrupppe auf den eingegebenen Betrag.
+        set_balance: Setze den Kontostand der Bestellgruppe auf den eingegebenen Betrag.
         sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualsieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
         title: Mehrere Konten aktualisieren
       ordergroup:
@@ -1086,6 +1086,7 @@ de:
       role_orders: Bestellung
       role_pickups: Abholtage
       role_suppliers: Lieferanten
+      show_google_maps: Auf Google Maps anzeigen
       sort_by: Nach %{text} sortieren
     deliveries:
       new_invoice: Rechnung anlegen
@@ -1151,10 +1152,12 @@ de:
       text2: auf das Bankkonto
       title: Zahlungsreferenz-Rechner
     start_nav:
+      admin: Administration
       finances:
         accounts: Konten aktualisieren
         settle: Bestellungen abrechnen
         title: Finanzbereich
+      foodcoop: Foodcoop
       members: Mitglieder
       new_ordergroup: Neue Bestellgruppe
       new_user: Neues Mitglied
@@ -1378,6 +1381,7 @@ de:
       home: Übersicht
       mail_delivery_status: E-Mail Probleme
       ordergroups: Bestellgruppen
+      title: Administration
       users: Benutzer/innen
       workgroups: Arbeitsgruppen
     articles:
