@@ -65,6 +65,7 @@ en:
         ordergroup: Ordergroup
         user: Entered by
       financial_transaction_class:
+        ignore_for_account_balance: Ignore for account balance
         name: Name
       financial_transaction_type:
         bank_account: Bank Account

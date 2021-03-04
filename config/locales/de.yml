@@ -65,6 +65,7 @@ de:
         ordergroup: Bestellgruppe
         user: Eingetragen von
       financial_transaction_class:
+        ignore_for_account_balance: Für Kontostand ignorieren
         name: Name
       financial_transaction_type:
         bank_account: Bankkonto
