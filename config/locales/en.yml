@@ -938,6 +938,9 @@ en:
         title: Import bank transactions for %{name}
       index:
         title: Bank Accounts
+    bank_gateways:
+      callback:
+        notice: '%{count} new transactions have been imported'
     bank_transactions:
       index:
         assign_unlinked_transactions: Assign transactions
