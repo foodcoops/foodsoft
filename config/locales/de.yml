@@ -35,9 +35,15 @@ de:
         unit_quantity: Gebindegröße
       bank_account:
         balance: Kontostand
+        bank_gateway: Bankgateway
         description: Beschreibung
         iban: IBAN
         name: Name
+      bank_gateway:
+        authorization: Authorization-Header
+        name: Name
+        unattended_user: Bedienerlos-Benutzer_in
+        url: URL
       bank_transaction:
         amount: Betrag
         date: Datum
@@ -244,6 +250,8 @@ de:
     models:
       article: Artikel
       article_category: Kategorie
+      bank_account: Bankkonto
+      bank_gateway: Bankgateway
       bank_transaction: Banktransaktion
       delivery: Lieferung
       financial_transaction: Kontotransaktion

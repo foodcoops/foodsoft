@@ -35,9 +35,15 @@ en:
         unit_quantity: Unit quantity
       bank_account:
         balance: Balance
+        bank_gateway: Bank gateway
         description: Description
         iban: IBAN
         name: Name
+      bank_gateway:
+        authorization: Authorization-Header
+        name: Name
+        unattended_user: Unattended user
+        url: URL
       bank_transaction:
         amount: Amount
         date: Date
@@ -244,6 +250,8 @@ en:
     models:
       article: Article
       article_category: Category
+      bank_account: Bank account
+      bank_gateway: Bank gateway
       bank_transaction: Bank transaction
       delivery: Delivery
       financial_transaction: Financial transaction

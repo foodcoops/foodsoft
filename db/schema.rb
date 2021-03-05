@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.decimal "balance", precision: 12, scale: 2, default: "0.0", null: false
     t.datetime "last_import"
     t.string "import_continuation_point"
+    t.integer "bank_gateway_id"
+  end
+
+  create_table "bank_gateways", id: :integer, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "url", null: false
+    t.string "authorization"
+    t.integer "unattended_user_id"
   end
 
   create_table "bank_transactions", id: :integer, force: :cascade do |t|
