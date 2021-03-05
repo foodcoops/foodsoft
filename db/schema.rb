@@ -454,6 +454,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.string "name", null: false
     t.string "description"
     t.integer "financial_transaction_class_id"
+    t.integer "bank_account_id"
   end
 
   create_table "suppliers", id: :integer, force: :cascade do |t|
