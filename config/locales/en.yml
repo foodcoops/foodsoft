@@ -290,6 +290,14 @@ en:
         title: Administration
         type: type
         username: username
+    bank_accounts:
+      form:
+        title_edit: Edit bank account
+        title_new: Add new bank account
+    bank_gateways:
+      form:
+        title_edit: Edit bank gateway
+        title_new: Add new bank gateway
     configs:
       list:
         key: Key
