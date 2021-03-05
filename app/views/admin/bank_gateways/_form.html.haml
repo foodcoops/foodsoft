@@ -1,0 +1,12 @@
+= simple_form_for [:admin, @bank_gateway], :validate => true, :remote => true do |f|
+  .modal-header
+    = close_button :modal
+    %h3= @bank_gateway.new_record? ? t('.title_new') : t('.title_edit')
+  .modal-body
+    = f.input :name
+    = f.input :url
+    = f.input :authorization
+    = f.association :unattended_user
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit class: 'btn btn-primary'

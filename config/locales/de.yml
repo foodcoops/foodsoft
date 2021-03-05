@@ -290,6 +290,14 @@ de:
         title: Administration
         type: Typ
         username: Benutzername
+    bank_accounts:
+      form:
+        title_edit: Bankkonto bearbeiten
+        title_new: Bankkonto anlegen
+    bank_gateways:
+      form:
+        title_edit: Bankgateway bearbeiten
+        title_new: Bankgateway anlegen
     configs:
       list:
         key: Schlüssel

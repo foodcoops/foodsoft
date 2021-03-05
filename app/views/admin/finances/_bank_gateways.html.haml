@@ -1,0 +1,13 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper BankGateway, :name
+      %th
+  %tbody
+    - @bank_gateways.each do |bank_gateway|
+      %tr
+        %td= bank_gateway.name
+        %td
+          = link_to t('ui.edit'), edit_admin_bank_gateway_path(bank_gateway), remote: true, class: 'btn btn-mini'
+          = link_to t('ui.delete'), [:admin, bank_gateway], :method => :delete, :data => {:confirm => t('ui.confirm_delete', name: bank_gateway.name)},
+            remote: true, class: 'btn btn-mini btn-danger'
