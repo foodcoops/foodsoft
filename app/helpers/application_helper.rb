@@ -26,7 +26,7 @@ module ApplicationHelper
 
   # Splits an IBAN into groups of 4 digits displayed with margins in between
   def format_iban(iban)
-    iban.scan(/..?.?.?/).map { |item| content_tag(:span, item, style: "margin-right: 0.5em;") }.join.html_safe
+    iban && iban.scan(/..?.?.?/).map { |item| content_tag(:span, item, style: "margin-right: 0.5em;") }.join.html_safe
   end
 
   # Creates ajax-controlled-links for pagination

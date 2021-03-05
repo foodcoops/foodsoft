@@ -140,7 +140,7 @@ class OrdersController < ApplicationController
       Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'received_order', @order.id)
       if current_user.role_orders? || current_user.role_finance?
         redirect_to @order
-      elsif current_user.role_pickup?
+      elsif current_user.role_pickups?
         redirect_to pickups_path
       else
         redirect_to receive_order_path(@order)
