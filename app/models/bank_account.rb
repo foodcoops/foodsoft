@@ -1,5 +1,6 @@
 class BankAccount < ApplicationRecord
   has_many :bank_transactions, dependent: :destroy
+  belongs_to :bank_gateway, optional: true
 
   normalize_attributes :name, :iban, :description
 
