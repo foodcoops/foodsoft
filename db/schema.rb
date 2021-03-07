@@ -331,8 +331,8 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "units_to_order", default: 0, null: false
     t.integer "lock_version", default: 0, null: false
     t.integer "article_price_id"
-    t.integer "units_billed"
-    t.integer "units_received"
+    t.decimal "units_billed", precision: 8, scale: 3
+    t.decimal "units_received", precision: 8, scale: 3
     t.index ["order_id", "article_id"], name: "index_order_articles_on_order_id_and_article_id", unique: true
     t.index ["order_id"], name: "index_order_articles_on_order_id"
   end
