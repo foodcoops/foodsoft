@@ -3,7 +3,7 @@ class ArticlesCsv < RenderCSV
 
   def header
     [
-      '',
+      Article.human_attribute_name(:availability_short),
       Article.human_attribute_name(:order_number),
       Article.human_attribute_name(:name),
       Article.human_attribute_name(:note),
