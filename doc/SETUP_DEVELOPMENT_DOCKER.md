@@ -17,6 +17,11 @@ For installing instructions see https://docs.docker.com/installation/.
 Docker runs on every modern Linux kernel, but also with a little help on MacOS
 and Windows!
 
+## Prerequisites (Linux only)
+To install Docker without root privileges, see Run the Docker daemon as a non-root user (Rootless mode):
+https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+
+
 ## Prerequisites (Windows only)
 To avoid line-ending issues with shell scripts, make sure to configure
 Git autocrlf to keep linux line endings via
