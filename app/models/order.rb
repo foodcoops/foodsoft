@@ -266,13 +266,15 @@ class Order < ApplicationRecord
   end
 
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
-  def close!(user, transaction_type = nil)
+  def close!(user, transaction_type = nil, financial_link = nil)
     raise I18n.t('orders.model.error_closed') if closed?
 
     update_price_of_group_orders!
 
+    invoice.update_attribute :financial_link, financial_link if invoice && financial_link
+
     transaction do                                        # Start updating account balances
-      charge_group_orders!(user, transaction_type)
+      charge_group_orders!(user, transaction_type, financial_link)
 
       if stockit?                                         # Decreases the quantity of stock_articles
         for oa in order_articles.includes(:article)
@@ -387,12 +389,12 @@ class Order < ApplicationRecord
     group_orders.each(&:update_price!)
   end
 
-  def charge_group_orders!(user, transaction_type = nil)
+  def charge_group_orders!(user, transaction_type = nil, financial_link = nil)
     note = transaction_note
     group_orders.includes(:ordergroup).each do |group_order|
       if group_order.ordergroup
         price = group_order.price * -1 # decrease! account balance
-        group_order.ordergroup.add_financial_transaction!(price, note, user, transaction_type, nil, group_order)
+        group_order.ordergroup.add_financial_transaction!(price, note, user, transaction_type, financial_link, group_order)
       end
     end
   end

@@ -770,6 +770,7 @@ de:
       confirm:
         clear: Abrechnen
         first_paragraph: 'Wenn die Bestellung abgerechnet wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
+        create_financial_link: Erstelle einen gemeinsamen Finanzlink für die Kontotransaktionen sowie, falls vorhanden, die zugehörige Rechnung.
         or_cancel: oder zurück zur Abrechnung
         title: Bestellung abrechnen
       edit_note:
