@@ -20,6 +20,8 @@ class Ordergroup < Group
 
   after_create :update_stats!
 
+  scope :active, -> { joins(:orders).where(orders: { starts: (Time.now.months_ago(3)..) }).group(:id) }
+
   def contact
     "#{contact_phone} (#{contact_person})"
   end
