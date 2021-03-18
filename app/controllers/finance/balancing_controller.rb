@@ -89,7 +89,7 @@ class Finance::BalancingController < Finance::BaseController
                                       user: @current_user,
                                       amount: @order.sum(:groups),
                                       note: @order.transaction_note,
-                                      financial_link: @link,
+                                      financial_link: @link
                                     })
       ft.save!
     end
