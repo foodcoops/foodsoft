@@ -772,7 +772,8 @@ en:
       confirm:
         clear: Settle
         first_paragraph: 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
-        create_financial_link: Create a common financial link for the transactions and, if existing, the attached invoice.
+        create_foodcoop_transaction: 'Create a transaction with the inverted sum for the foodcoop (in the case of "double-entry accounting"):'
+        create_financial_link: Create a common financial link for the transactions.
         or_cancel: or back to accounting
         title: Settle order
       edit_note:

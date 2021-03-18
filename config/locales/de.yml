@@ -770,7 +770,8 @@ de:
       confirm:
         clear: Abrechnen
         first_paragraph: 'Wenn die Bestellung abgerechnet wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
-        create_financial_link: Erstelle einen gemeinsamen Finanzlink für die Kontotransaktionen sowie, falls vorhanden, die zugehörige Rechnung.
+        create_foodcoop_transaction: 'Erstelle eine Transaktion mit der invertierten Summe für die Foodcoop (für den Fall der "doppelten Buchführung"):'
+        create_financial_link: Erstelle einen gemeinsamen Finanzlink für die Kontotransaktionen.
         or_cancel: oder zurück zur Abrechnung
         title: Bestellung abrechnen
       edit_note:
@@ -924,7 +925,7 @@ de:
         add_all_ordergroups: Alle Bestellgruppen hinzufügen
         add_all_ordergroups_custom_field: Alle Bestellgruppen mit %{label} hinzufügen
         create_financial_link: Erstelle einen gemeinsamen Finanzlink für die neuen Transaktionen.
-        create_foodcoop_transaction: Erstelle einen Transaktion mit der der invertieten Summe für die Foodcoop (für den Fall der "doppelte Buchführung")
+        create_foodcoop_transaction: Erstelle eine Transaktion mit der invertierten Summe für die Foodcoop (für den Fall der "doppelten Buchführung")
         new_ordergroup: Weitere Bestellgruppe hinzufügen
         save: Transaktionen speichern
         set_balance: Setze den Kontostand der Bestellgruppe auf den eingegebenen Betrag.

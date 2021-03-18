@@ -271,8 +271,6 @@ class Order < ApplicationRecord
 
     update_price_of_group_orders!
 
-    invoice.update_attribute :financial_link, financial_link if invoice && financial_link
-
     transaction do                                        # Start updating account balances
       charge_group_orders!(user, transaction_type, financial_link)
 

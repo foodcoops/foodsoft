@@ -82,6 +82,18 @@ class Finance::BalancingController < Finance::BaseController
     @type = FinancialTransactionType.find_by_id(params.permit(:type)[:type])
     @link = FinancialLink.new if params[:create_financial_link]
     @order.close!(@current_user, @type, @link)
+
+    if params[:create_foodcoop_transaction]
+      ft = FinancialTransaction.new({
+                                      financial_transaction_type: @type,
+                                      user: @current_user,
+                                      amount: @order.sum(:groups),
+                                      note: @order.transaction_note,
+                                      financial_link: @link,
+                                    })
+      ft.save!
+    end
+
     redirect_to finance_order_index_url, notice: t('finance.balancing.close.notice')
   rescue => error
     redirect_to new_finance_order_url(order_id: @order.id), alert: t('finance.balancing.close.alert', message: error.message)
