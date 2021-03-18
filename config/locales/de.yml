@@ -866,11 +866,11 @@ de:
       notice: Rechnung wurde erstellt.
     financial_links:
       add_bank_transaction:
-        notice: Verlinkung wurde zu der Banktransaktion wurde hinzugefügt.
+        notice: Verlinkung zu der Banktransaktion wurde hinzugefügt.
       add_financial_transaction:
-        notice: Verlinkung wurde zu der Kontotransaktion wurde hinzugefügt.
+        notice: Verlinkung zu der Kontotransaktion wurde hinzugefügt.
       add_invoice:
-        notice: Verlinkung wurde zu der Rechnung wurde hinzugefügt.
+        notice: Verlinkung zu der Rechnung wurde hinzugefügt.
       create:
         notice: Ein neuer Finanzlink wurde erstellt.
       create_financial_transaction:
@@ -884,11 +884,11 @@ de:
       new_financial_transaction:
         title: Neue Kontotransaktion hinzufügen
       remove_bank_transaction:
-        notice: Verlinkung wurde zu der Banktransaktion wurde entfernt.
+        notice: Verlinkung zu der Banktransaktion wurde entfernt.
       remove_financial_transaction:
-        notice: Verlinkung wurde zu der Kontotransaktion wurde entfernt.
+        notice: Verlinkung zu der Kontotransaktion wurde entfernt.
       remove_invoice:
-        notice: Verlinkung wurde zu der Rechnung wurde entfernt.
+        notice: Verlinkung zu der Rechnung wurde entfernt.
       show:
         add_bank_transaction: Banktransaktion hinzufügen
         add_financial_transaction: Kontotransaktion hinzufügen
@@ -896,7 +896,7 @@ de:
         amount: Betrag
         date: Datum
         description: Beschreibung
-        new_financial_transaction: Neu Kontotransaktion hinzufügen
+        new_financial_transaction: Neue Kontotransaktion erstellen & hinzufügen
         title: Finanzlink %{number}
         type: Typ
     financial_transactions:
@@ -914,12 +914,13 @@ de:
         last_updated_at: "(zuletzt aktualisiert vor %{when})"
         new_transaction: Neue Transaktion anlegen
         title: Kontoauszug für %{name}
+        title_foodcoop: Foodcoop-Kontoauszug
       index_collection:
         show_groups: Konten verwalten
         title: Kontotransaktionen
       new:
         paragraph: Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.
-        paragraph_foodcoop: Hier kannst du der <b>Foodcooop</b> Geld gutschreiben/abziehen.
+        paragraph_foodcoop: Hier kannst du der <b>Foodcoop</b> Geld gutschreiben/abziehen.
         title: Neue Transaktion
       new_collection:
         add_all_ordergroups: Alle Bestellgruppen hinzufügen
@@ -929,14 +930,14 @@ de:
         new_ordergroup: Weitere Bestellgruppe hinzufügen
         save: Transaktionen speichern
         set_balance: Setze den Kontostand der Bestellgruppe auf den eingegebenen Betrag.
-        sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualsieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
+        sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualisieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
         title: Mehrere Konten aktualisieren
       ordergroup:
         remove: Entfernen
         remove_group: Gruppe enfernen
       transactions:
-        confirm_revert: Wills du %{name} wirklich rückgängig machen? Hierbei wird eine zusätzliche Transaktion mit dem invertierten Betrag hinzugefügt und gemeinsam mit der originalen Transaktion versteckt. Diese versteckten Transaktionen sind nur über die Option 'Versteckte anzeigen' sichtbar und können von normalen Benutzer_innen überhaupt nicht angezeigt werden.
-        revert_title: Transaktion rückgängig machen, um sie vor normalen Benutzer_innen versteckt.
+        confirm_revert: Willst du %{name} wirklich rückgängig machen? Hierbei wird eine zusätzliche Transaktion mit dem invertierten Betrag hinzugefügt und gemeinsam mit der originalen Transaktion versteckt. Diese versteckten Transaktionen sind nur über die Option 'Versteckte anzeigen' sichtbar und können von normalen Benutzer_innen überhaupt nicht angezeigt werden.
+        revert_title: Transaktion rückgängig machen und vor normalen Benutzer_innen verstecken.
       transactions_search:
         show_hidden: Versteckte anzeigen
     index:
@@ -970,7 +971,7 @@ de:
         new_financial_link: Neuer Finanzlink
         new_transaction: Neue Überweisungen eingeben
         show_all: Alle Transaktionen
-        show_foodcoop: Foodcoop Transaktionen
+        show_foodcoop: Foodcoop-Transaktionen
         title: Konten verwalten
       ordergroups:
         account_statement: Kontoauszug

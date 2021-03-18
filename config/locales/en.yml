@@ -884,7 +884,7 @@ en:
       index_invoice:
         title: Add invoice
       new_financial_transaction:
-        title: Add financial transaction
+        title: Add new financial transaction
       remove_bank_transaction:
         notice: Link to the bank transaction has been removed.
       remove_financial_transaction:
@@ -898,7 +898,7 @@ en:
         amount: Amount
         date: Date
         description: Description
-        new_financial_transaction: New financial transaction
+        new_financial_transaction: Create & add new financial transaction
         title: Financial link %{number}
         type: Type
     financial_transactions:
@@ -916,6 +916,7 @@ en:
         last_updated_at: "(last updated %{when} ago)"
         new_transaction: Create new transaction
         title: Account statement for %{name}
+        title_foodcoop: Foodcoop account statement
       index_collection:
         show_groups: Manage accounts
         title: Financial transactions
@@ -972,7 +973,7 @@ en:
         new_financial_link: New financial link
         new_transaction: Add new transactions
         show_all: All transactions
-        show_foodcoop: Foodcoop transaktions
+        show_foodcoop: Foodcoop transactions
         title: Manage accounts
       ordergroups:
         account_statement: Account statement
