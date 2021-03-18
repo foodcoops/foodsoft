@@ -266,10 +266,21 @@ class Order < ApplicationRecord
   end
 
   # Sets order.status to 'close' and updates all Ordergroup.account_balances
-  def close!(user, transaction_type = nil, financial_link = nil)
+  def close!(user, transaction_type = nil, financial_link = nil, create_foodcoop_transaction = false)
     raise I18n.t('orders.model.error_closed') if closed?
 
     update_price_of_group_orders!
+
+    if create_foodcoop_transaction
+      ft = FinancialTransaction.new({
+                                      financial_transaction_type: transaction_type,
+                                      user: user,
+                                      amount: sum(:groups),
+                                      note: transaction_note,
+                                      financial_link: financial_link
+                                    })
+      ft.save!
+    end
 
     transaction do                                        # Start updating account balances
       charge_group_orders!(user, transaction_type, financial_link)
