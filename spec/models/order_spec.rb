@@ -1,6 +1,7 @@
 require_relative '../spec_helper'
 
 describe Order do
+  let!(:ftt) { create :financial_transaction_type }
   let(:user) { create :user, groups: [create(:ordergroup)] }
 
   it 'automaticly finishes ended' do
@@ -149,6 +150,31 @@ describe Order do
       expect(orders[0][:group_order]).to have_attributes(id: go.id)
       expect(orders[1][:order]).to have_attributes(id: order2.id)
       expect(orders[1][:group_order]).to be_nil
+    end
+  end
+
+  describe 'balancing charges correct amounts' do
+    let!(:transport) { rand(0.1..26.0).round(2) }
+    let!(:order) { create :order, article_count: 1 }
+    let!(:oa) { order.order_articles.first }
+    let!(:go) { create :group_order, order: order, transport: transport }
+    let!(:goa) { create :group_order_article, group_order: go, order_article: oa, quantity: 1 }
+
+    before do
+      goa.update_quantities(1, 0)
+      go.reload
+      go.update_price!
+      user.ordergroup.update_stats!
+      oa.update_results!
+
+      order.finish!(user)
+      order.reload
+      order.close!(user, ftt)
+    end
+
+    it 'creates financial transaction with correct amount' do
+      expect(goa.result).to be > 0
+      expect(go.ordergroup.financial_transactions.last.amount).to eq(-go.total)
     end
   end
 end
