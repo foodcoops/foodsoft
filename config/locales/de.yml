@@ -822,6 +822,7 @@ de:
         name: Lieferantin
         no_closed_orders: Derzeit gibt es keine beendeten Bestellungen.
         state: Status
+        show_all: (alle anzeigen)
       summary:
         changed: Daten wurden verändert!
         duration: von %{starts} bis %{ends}
