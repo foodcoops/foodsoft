@@ -158,15 +158,22 @@ describe Order do
     let!(:order) { create :order, article_count: 1 }
     let!(:oa) { order.order_articles.first }
     let!(:go) { create :group_order, order: order, transport: transport }
+    let!(:goa) { create :group_order_article, group_order: go, order_article: oa, quantity: 1 }
 
     before do
-      create :group_order_article, group_order: go, order_article: oa, quantity: 1
+      goa.update_quantities(1, 0)
+      go.reload
+      go.update_price!
+      user.ordergroup.update_stats!
+      oa.update_results!
 
       order.finish!(user)
+      order.reload
       order.close!(user, ftt)
     end
 
     it 'creates financial transaction with correct amount' do
+      expect(goa.result).to be > 0
       expect(go.ordergroup.financial_transactions.last.amount).to eq(-go.total)
     end
   end
