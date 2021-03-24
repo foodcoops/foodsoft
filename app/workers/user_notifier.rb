@@ -6,6 +6,14 @@ class UserNotifier
   # eg, if enqueue_in is called several times within the first delay,
   # it will only execute the notification once
   def self.enqueue_in(delay, *args)
+    # ignore delays in development
+    puts "enqueue_in: Rails.env=#{Rails.env}"
+    if (Rails.env=='development')
+      puts "enqueue_in: ignoring delay of #{delay} seconds : #{args}"
+      delay = 1
+    else
+      puts "enqueue_in delay of #{delay} seconds : #{args}"
+    end
     args = args.unshift(FoodsoftConfig.scope)
     Resque.remove_delayed(UserNotifier, *args)
     Resque.enqueue_in(delay, UserNotifier, *args)
