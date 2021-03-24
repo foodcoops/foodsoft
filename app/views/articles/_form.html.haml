@@ -4,7 +4,7 @@
   .modal-header
     = close_button :modal
     %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
-  .modal-body
+  .modal-body(style="max-height: 800px;" )
     = f.input :availability
     = f.input :name
 
