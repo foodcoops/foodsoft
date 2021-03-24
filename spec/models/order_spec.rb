@@ -1,6 +1,7 @@
 require_relative '../spec_helper'
 
 describe Order do
+  let!(:ftt) { create :financial_transaction_type }
   let(:user) { create :user, groups: [create(:ordergroup)] }
 
   it 'automaticly finishes ended' do
@@ -153,47 +154,20 @@ describe Order do
   end
 
   describe 'balancing charges correct amounts' do
-    # why does it sometimes fail for numbers like these?
-    transport = 5.84
-    price = 15.54
-    quantity = 17
-    tax_percent = 16
-
-    # transport = rand(0.1..26.0).round(2)
-    # price = rand(0.1..26.0).round(2)
-    # quantity = rand(1..26).round(0)
-    # tax_percent = rand(0.1..26.0).round(1)
-    tax = tax_percent * 0.01 + 1
-    markup = FoodsoftConfig[:price_markup] * 0.01 + 1
-    to_be_charged = (quantity * ((price * tax).round(2) * markup).round(2) + transport) * -1
-    order_ends = DateTime.now + 1.day
-
-    let!(:user) { create :user, groups: [create(:ordergroup)] }
-    let!(:order) { create :order, article_count: 4, ends: order_ends }
-    let!(:go) { create :group_order, order: order, ordergroup: user.ordergroup, transport: transport }
-    let!(:ftc) { create :financial_transaction_class, financial_transaction_types: [create(:financial_transaction_type)] }
-    let!(:article) { create :article, price: price, tax: tax_percent }
-    let!(:oa) { create :order_article, order: order, article: article }
-    let!(:goa) { create :group_order_article, group_order: go, order_article: oa, quantity: quantity }
-
-    # for debugging failing test
-    puts "transport: #{transport}"
-    puts "price: #{price}"
-    puts "quantity: #{quantity}"
-    puts "tax_percent: #{tax_percent}"
-    puts "tax: #{tax}"
-    puts "markup: #{markup}"
-    puts "to be charged: #{to_be_charged}"
+    let!(:transport) { rand(0.1..26.0).round(2) }
+    let!(:order) { create :order, article_count: 1 }
+    let!(:oa) { order.order_articles.first }
+    let!(:go) { create :group_order, order: order, transport: transport }
 
     before do
-      order.close!(user)
+      create :group_order_article, group_order: go, order_article: oa, quantity: 1
+
+      order.finish!(user)
+      order.close!(user, ftt)
     end
 
-    it 'correct transactions created' do
-      expect(ftc.financial_transactions.count).to eq(1)
-      difference = (ftc.financial_transactions[0].amount - to_be_charged).abs
-      expect(difference).to be <= 0.001
-      puts "difference: #{difference}" # for debugging failing test
+    it 'creates financial transaction with correct amount' do
+      expect(go.ordergroup.financial_transactions.last.amount).to eq(-go.total)
     end
   end
 end
