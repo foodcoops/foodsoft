@@ -33,6 +33,7 @@ namespace :foodsoft do
     setup_app_config
     setup_development
     setup_database
+    setup_storage
     start_mailcatcher
     puts yellow "All done! Your foodsoft setup should be running smoothly."
     start_server
@@ -43,6 +44,7 @@ namespace :foodsoft do
     puts yellow "This task will help you get your foodcoop running in development via docker."
     setup_app_config
     setup_development
+    setup_storage
     setup_run_rake_db_setup
     puts yellow "All done! Your foodsoft setup should be running smoothly via docker."
   end
@@ -105,6 +107,15 @@ end
 
 def setup_development
   file = 'config/environments/development.rb'
+  return nil if skip?(file)
+
+  puts yellow "Copying #{file}..."
+  %x(cp -p #{Rails.root.join("#{file}.SAMPLE")} #{Rails.root.join(file)})
+  reminder(file)
+end
+
+def setup_storage
+  file = 'config/storage.yml'
   return nil if skip?(file)
 
   puts yellow "Copying #{file}..."
