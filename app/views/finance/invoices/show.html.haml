@@ -31,7 +31,7 @@
             - sum = order.sum
             - total += sum
             = ', ' if index > 0
-            = link_to format_date(order.ends), new_finance_order_path(order_id: order) #, style: "margin-right: 0.2em;"
+            = link_to format_date(order.ends), new_finance_order_path(order_id: order)
             = ' (' + number_to_currency(sum) + ')'
 
       %dt= heading_helper(Invoice, :number) + ':'
