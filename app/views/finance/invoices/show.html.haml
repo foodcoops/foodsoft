@@ -6,7 +6,7 @@
   .span6
     %dl.dl-horizontal
       %dt= heading_helper(Invoice, :created_at) + ':'
-      %dd= format_date(@invoice.created_at)
+      %dd= format_time(@invoice.created_at)
 
       %dt= heading_helper(Invoice, :created_by) + ':'
       %dd= show_user(@invoice.created_by)
