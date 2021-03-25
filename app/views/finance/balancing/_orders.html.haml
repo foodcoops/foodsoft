@@ -1,3 +1,4 @@
+- title " "+t('.for')+" "+Supplier.find(params[:supplier_id]).name if params.has_key?(:supplier_id) 
 - unless @orders.empty?
   - content_for :actionbar do
     .btn-group
