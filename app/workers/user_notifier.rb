@@ -8,7 +8,7 @@ class UserNotifier
   def self.enqueue_in(delay, *args)
     # ignore delays in development
     puts "enqueue_in: Rails.env=#{Rails.env}"
-    if (Rails.env=='development')
+    if (Rails.env == 'development')
       puts "enqueue_in: ignoring delay of #{delay} seconds : #{args}"
       delay = 1
     else
@@ -30,14 +30,14 @@ class UserNotifier
   def self.queue_order_updated_email(delay:, group_order_id:, message:)
     UserNotifier.enqueue_in(delay,
                             'email_updated_group_order',
-                            group_order_id, message, )
+                            group_order_id, message,)
   end
 
 
   # when the order has been 'closed'
   def self.finished_order(args)
     # just delegate, one email template for all
-    UserNotifier.email_updated_orders(args.push('Order has been closed and sent to supplier.'))
+    UserNotifier.email_updated_orders(args.push('The order has been closed and sent to supplier.'))
   end
 
   # when the order has been settled
@@ -49,7 +49,7 @@ class UserNotifier
   # when the order has been updated
   def self.updated_order(args)
     # just delegate, one email template for all
-    UserNotifier.email_updated_orders(args.push('The ordering person has updated the order, please review any changes.'))
+    UserNotifier.email_updated_orders(args.push('There were updates to your order, please review any changes.'))
   end
 
   # any time the order changes we send an email to members
@@ -58,13 +58,22 @@ class UserNotifier
     order_id, message = args.first(2)
     Order.find(order_id).group_orders.each do |group_order|
       next if group_order.ordergroup.nil?
+      puts "emailing #{group_order.ordergroup.users.count} users"
       group_order.ordergroup.users.each do |user|
         # if user.settings.notify['order_finished']
+
+        begin
           puts "email_updated_orders emailing user #{user.email}"
-          Mailer.deliver_now_with_user_locale user do
-            Mailer.order_result(user, group_order, message)
-          end
-        # end
+
+
+        Mailer.deliver_now_with_user_locale user do
+          Mailer.order_result(user, group_order, message)
+        end
+        rescue MailCancelled => e
+          puts "mail was canceled/no mail required"
+        rescue  => e
+          puts "email_updated_orders - problem occurred #{e} #{e.backtrace}"
+        end
       end
     end
   end
@@ -84,11 +93,17 @@ class UserNotifier
     if group_order.ordergroup
       group_order.ordergroup.users.each do |user|
         # if user.settings.notify['order_finished'] || true
+        begin
         puts "email_updated_group_order emailing user #{user.email}"
+
         Mailer.deliver_now_with_user_locale user do
           Mailer.order_result(user, group_order, message)
         end
-        # end
+        rescue MailCancelled => e
+          puts "mail was canceled/no mail required"
+        rescue  => e
+          puts "email_updated_group_order: problem occurred #{e}"
+        end
       end
     end
   end

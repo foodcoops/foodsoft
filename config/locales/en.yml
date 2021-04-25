@@ -1403,9 +1403,10 @@ en:
 
         Kind regards from %{foodcoop}.
       html0: |
-        Dear %{ordergroup},
+        Dear %{user},
         <br/>
         <p>%{message}</p>
+        <p>%{orderuser}</p>
       html1: |-
         o Total sum: %{sum}
 

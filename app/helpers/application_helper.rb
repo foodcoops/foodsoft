@@ -212,7 +212,7 @@ module ApplicationHelper
         user.nick.nil? ? I18n.t('helpers.application.nick_fallback') : user.nick
       end
     else
-      "#{user.first_name} #{user.last_name}" + (options[:unique] ? " (\##{user.id})" : '')
+      "#{user.first_name} #{user.last_name}"      + (options[:unique] ? " (\##{user.id})" : '')   + (options[:show_phone] ? " #{user.phone}" : '')
     end
   end
 

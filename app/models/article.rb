@@ -69,7 +69,7 @@ class Article < ApplicationRecord
   validate :uniqueness_of_name unless :skip_validation_uniqueness_of_name
 
   # Callbacks
-  before_save :update_price_history
+  before_save :update_price_history, :notify_orders
   before_destroy :check_article_in_use
 
   # Returns true if article has been updated at least 2 days ago
@@ -84,6 +84,20 @@ class Article < ApplicationRecord
       order_article = order_articles.detect {|oa| oa.article_id == id }
       order_article ? order_article.order : nil
     end
+  end
+
+  # If the article is used in an open Order, the Order will be returned.
+  def in_open_orders
+      @in_open_orders ||= begin
+       order_articles = OrderArticle
+                            .where(order_id: Order.open.collect(&:id))
+          .where(article_id: id)
+           .map{ |oa| oa.order }
+     end
+  end
+
+  def notify_orders
+    in_open_orders.each{ |o| o.notify_modified }
   end
 
   # Returns true if the article has been ordered in the given order at least once

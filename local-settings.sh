@@ -8,6 +8,8 @@ export SHARED_DATABASE_URL=postgresql://food-coop:food-coop@localhost/food-price
 export RAILS_FORCE_SSL=false
 export SMTP_PORT=1025
 export SMTP_DOMAIN=localhost
-export SMTP_ADDRESS=localhost
+#export SMTP_ADDRESS=localhost
+export SMTP_ADDRESS=127.0.0.1
 export REDIS_URL=redis://127.0.0.1:6379/
+export ADMIN_EMAIL=tom@localhost
 

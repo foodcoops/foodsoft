@@ -1,14 +1,41 @@
-%tr{ style: "#{ highlight ? 'font-weight: bold;' : ''}"}
-  - article=group_order_article.order_article.article
-  - price= group_order_article.order_article.price.price
-  - min = group_order_article.quantity
-  - max = min+group_order_article.tolerance
-  - if max > min
-    %td= "#{min}..#{max}"
-  - else
-    %td= min
+- article=group_order_article.order_article.article
+- price= group_order_article.order_article.price.fc_price
+- min = group_order_article.quantity
+- tolerance = group_order_article.tolerance
+- max = min+tolerance
+- ordered = min<max ? "#{min}..#{max}" : "#{min}"
+- result = group_order_article.result
+- price_per_unit = "#{article.unit} @ #{number_to_currency(price)}"
+- total = number_to_currency(result * price)
+
+- diff = diff || {}
+- old_min = diff['quantity'] || min
+- old_max = old_min + (diff['tolerance'] || tolerance)
+- old_unit = (diff['unit']) || article.unit
+- old_price = (diff['price'] || price).to_f
+- old_result = (diff['result'] || result).to_f
+- old_ordered = old_max > old_min ? "#{old_min}..#{old_max}" : "#{old_min}"
+- old_price_per_unit = "#{old_unit} @ #{number_to_currency(old_price)}"
+- old_total = number_to_currency(old_result * old_price)
+
+-#:css
+-#  .text-strike {  text-decoration: line-through; margin-top: 0; margin-bottom: 0 }
+
+%tr
   %td
-    %b=  "#{group_order_article.result}"
-  %td{ style: 'text-align:right' }=  "#{article.unit} @ #{number_to_currency(price)}"
-  %td=  article.name
-  %td{ style: 'text-align:right' }=  number_to_currency(group_order_article.result * price)
+    %p.text-strike= old_ordered if (old_ordered!=ordered)
+    = ordered
+  %td
+    %p.text-strike= old_result if (old_result!=result)
+    = result
+  %td{ style: 'text-align:right' }
+    %p.text-strike= old_price_per_unit if (old_price_per_unit != price_per_unit)
+    = price_per_unit
+  %td
+    %p.text-strike= diff['name'] if (diff['name'] != article.name)
+    = article.name
+  %td{ style: 'text-align:right' }
+    %p.text-strike= old_total if (old_total != total)
+    = total
+
+

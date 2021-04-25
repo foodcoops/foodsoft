@@ -7,6 +7,8 @@ class Mailer < ActionMailer::Base
   helper :application
   include ApplicationHelper
 
+  class MailCancelled < StandardError; end
+
   layout 'email' # Use views/layouts/email.txt.erb
 
   default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
@@ -40,26 +42,77 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.upcoming_tasks.subject')
   end
 
+  # credit: https://gist.github.com/henrik/146844#gistcomment-2267142
+  def deep_diff(a, b)
+    (a.keys | b.keys).each_with_object({}) do |k, diff|
+      if a[k] != b[k]
+        if a[k].is_a?(Hash) && b[k].is_a?(Hash)
+          diff[k] = deep_diff(a[k], b[k])
+        else
+          diff[k] = [a[k], b[k]]
+        end
+      end
+      diff
+    end
+  end
+
   # Sends order result to a specific Ordergroup
   def compute_changed_since_last_email(group_order, user)
-    changed_goa_ids = [].to_set
-    emailkey = email_key(group_order, user)
-    # puts "emailkey #{emailkey}"
-    group_order_current_json = group_order.group_order_articles.to_json(:include => {:order_article => {:include => :article_price}})
-    group_order_previous_json = FoodsoftCache.get(emailkey)
-    if (!group_order_previous_json.blank?)
-      # puts "previous: #{group_order_previous_json}"
-      group_order_previous = parse_goa_json_to_hash(group_order_previous_json)
-      group_order_current = parse_goa_json_to_hash(group_order_current_json)
-      group_order_current.each do |goa_id, goa|
-        changed_goa_ids << goa_id if goa != group_order_previous[goa_id]
-      end
-      puts "previous: #{group_order_previous_json}"
-      puts "current: #{group_order_previous_json}"
-      puts "changed :#{changed_goa_ids}"
+    email_key = email_key(group_order, user)
+    # puts "email_key #{email_key} #{user.email}"
+
+    group_order_current = group_order.group_order_articles.map do |goa|
+      [goa.id,
+       {
+         quantity: goa.quantity,
+         tolerance: goa.tolerance,
+         result: goa.result,
+         fc_price: goa.order_article.price.fc_price,
+         name: goa.order_article.article.name,
+         unit: goa.order_article.article.unit
+       }
+      ]
     end
-    FoodsoftCache.set(emailkey, group_order_current_json)
-    changed_goa_ids
+
+    # add the overall totals to the diff
+    total_min = group_order.group_order_articles.map { |goa| goa.order_article.price.fc_price * goa.quantity }.sum
+    total_max = total_min + group_order.group_order_articles.map { |goa| goa.order_article.price.fc_price * goa.tolerance }.sum
+    group_order_current << ['totals', {
+      total: group_order.group_order_articles.map { |goa| goa.order_article.price.fc_price * goa.result }.sum,
+      'min-total': total_min,
+      'max-total': total_max
+    }]
+
+    group_order_current = group_order_current.to_h
+    group_order_current_json = group_order_current.to_json
+
+    # re-parse to stringify keys, and other quirks
+    group_order_current = JSON.parse(group_order_current_json)
+
+    # puts "ok #{group_order_current_json}"
+    group_order_previous_json = FoodsoftCache.get(email_key)
+    FoodsoftCache.set(email_key, group_order_current_json)
+    if (group_order_previous_json.blank?)
+      # puts "no prev order found "
+      false
+    else
+      # puts "previous: #{group_order_previous_json}"
+      group_order_previous = JSON.parse(group_order_previous_json)
+      diff = deep_diff(group_order_previous, group_order_current)
+      # puts "diff : #{diff}"
+      # keep just the old value in the hash
+      diff.each do |id, changes|
+        if (!diff[id].is_a?(Hash))
+          diff.delete(id)
+        else
+          changes.each do |prop, change|
+            changes[prop] = change[0] if (change)
+          end
+        end
+      end
+      puts "diff reduced: #{diff}"
+      diff
+    end
   end
 
   def order_result(user, group_order, message = '')
@@ -67,23 +120,32 @@ class Mailer < ActionMailer::Base
     @group_order = group_order
     @message = message
     @user = user
-    goa_ids = compute_changed_since_last_email(group_order, user)
-    @highlight_goa_ids = goa_ids.to_set
+    @diff = compute_changed_since_last_email(group_order, user)
+    @updated_by = @order.updated_by || @order.created_by
 
-    message_id = FoodsoftCache.get(email_id_key(group_order, user))
-
-    if message_id
-      mail to: user,
-           is_reply: true,
-           'IN-REPLY-TO': "<#{message_id}>",
-           subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
-           reply_to: FoodsoftConfig[:email_from]
+    # puts "size of diff #{@diff.size}"
+    if (@diff && @diff.size == 0)
+      # puts("not first change and size is empty")
+      raise MailCancelled.new("#{user.email}")
     else
-      message_result = mail to: user,
-                            subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
-                            reply_to: FoodsoftConfig[:email_from]
-      FoodsoftCache.set(email_id_key(group_order, user), message_result.message_id)
-      message_result
+      # puts("change or first update")
+      message_id = FoodsoftCache.get(email_id_key(group_order, user))
+
+      if message_id
+        mail to: user,
+             is_reply: true,
+             'IN-REPLY-TO': "<#{message_id}>",
+             subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
+             # from: @updated_by.email,
+             reply_to: @updated_by.email
+      else
+        message_result = mail to: user,
+                              subject: I18n.t('mailer.order_result.subject', name: group_order.order.name, pickup: group_order.order.pickup),
+                              # from: @updated_by.email,
+                              reply_to: @updated_by.email
+        FoodsoftCache.set(email_id_key(group_order, user), message_result.message_id)
+        message_result
+      end
     end
   end
 
@@ -181,7 +243,11 @@ class Mailer < ActionMailer::Base
   def self.deliver_now
     message = yield
     message.deliver_now
+  rescue MailCancelled => e
+    puts "mail was cancelled #{e}"
   rescue => error
+    puts "error sending mail: #{error}"
+    error.backtrace.each { |line| puts line }
     MailDeliveryStatus.create email: message.to[0], message: error.message
   end
 
@@ -202,7 +268,9 @@ class Mailer < ActionMailer::Base
   end
 
   def parse_goa_json_to_hash(group_order_previous_json)
-    JSON.parse(group_order_previous_json).collect { |goa| [goa['group_order_article']['id'], goa['group_order_article']] }.to_h
+    JSON.parse(group_order_previous_json).collect do |goa|
+      [goa['group_order_article']['id'], goa['group_order_article']]
+    end.to_h
   end
 
   private
