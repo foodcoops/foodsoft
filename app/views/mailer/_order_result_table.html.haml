@@ -17,52 +17,53 @@
   td { vertical-align: bottom }
 
 %table{:width => "100%", style: 'font-size: small; border-spacing: 8px 2px;'}
-  %tr{ style: 'font-size: small; text-align:left;'}
-    %th Ordered
-    %th Receive
-    %th Price/Unit
-    %th Article
-    %th Total
-  - if goa_filled.count > 0
-    %tr
-      %td{ colspan: 5, style: 'border-bottom: thin solid;' }
-    - for group_order_article in goa_filled
-      - locals = {  group_order_article: group_order_article, diff: diff[group_order_article.id.to_s]}
-      = render :partial => 'order_result_row', :locals => locals
+  %thead
+    %tr{ style: 'font-size: small; text-align:left;'}
+      %th Ordered
+      %th Receive
+      %th{ style: 'min-width: 100'} Price/Unit
+      %th{ style: "width: '*'"} Article
+      %th Total
+    - if goa_filled.count > 0
+      %tr
+        %td{ colspan: 5, style: 'border-bottom: thin solid;' }
+      - for group_order_article in goa_filled
+        - locals = {  group_order_article: group_order_article, diff: diff[group_order_article.id.to_s]}
+        = render :partial => 'order_result_row', :locals => locals
 
-  - if goa_not_filled.count > 0
+    - if goa_not_filled.count > 0
+      %tr
+        - if @order.open?
+          %td{ colspan: '5', style: 'border-top: thin solid;' } These require cases to be filled
+        - else
+          %td{ colspan: '5', style: 'border-top: thin solid;' } These did not get ordered
+      - for group_order_article in goa_not_filled
+        - locals = {  group_order_article: group_order_article, diff: diff[group_order_article.id.to_s]}
+        = render :partial => 'order_result_row', :locals => locals
     %tr
-      - if @order.open?
-        %td{ colspan: '5', style: 'border-top: thin solid;' } These require cases to be filled
+      %td{ colspan: '5', style: 'border-top: thin solid;' }
+
+
+    %tr{ style: 'text-align:right; border-top: thin solid;'}
+      - if @order.closed?  #means it is settled
+        %td{ colspan: '4'} Final Total
       - else
-        %td{ colspan: '5', style: 'border-top: thin solid;' } These did not get ordered
-    - for group_order_article in goa_not_filled
-      - locals = {  group_order_article: group_order_article, diff: diff[group_order_article.id.to_s]}
-      = render :partial => 'order_result_row', :locals => locals
-  %tr
-    %td{ colspan: '5', style: 'border-top: thin solid;' }
+        %td{ colspan: '4'} Current Total (may be adjusted depending on actual received and spoilage)
 
+      %td
+        %p.text-strike= old_total if old_total != total
+        = total
 
-  %tr{ style: 'text-align:right; border-top: thin solid;'}
-    - if @order.closed?  #means it is settled
-      %td{ colspan: '4'} Final Total
-    - else
-      %td{ colspan: '4'} Current Total (may be adjusted depending on actual received and spoilage)
+    - if @order.open?
+      %tr{ style: 'text-align:right;'}
+        %td{ colspan: '4', style: ''} Minimum Total (if you got everything without any extra)
 
-    %td
-      %p.text-strike= old_total if old_total != total
-      = total
+        %td{style: 'border-top: thin solid;'}
+          %p.text-strike= old_min_total if old_min_total != total_min
+          = total_min
+      %tr{ style: 'text-align:right;'}
+        %td{ colspan: '4', style: ''} Max Total (if you got everything and used all tolerance)
 
-  - if @order.open?
-    %tr{ style: 'text-align:right;'}
-      %td{ colspan: '4', style: ''} Minimum Total (if you got everything without any extra)
-
-      %td{style: 'border-top: thin solid;'}
-        %p.text-strike= old_min_total if old_min_total != total_min
-        = total_min
-    %tr{ style: 'text-align:right;'}
-      %td{ colspan: '4', style: ''} Max Total (if you got everything and used all tolerance)
-
-      %td{style: 'border-top: thin solid;'}
-        %p.text-strike= old_max_total if old_max_total != total_max
-        = total_max
+        %td{style: 'border-top: thin solid;'}
+          %p.text-strike= old_max_total if old_max_total != total_max
+          = total_max

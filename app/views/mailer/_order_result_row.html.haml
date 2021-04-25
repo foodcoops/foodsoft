@@ -12,7 +12,7 @@
 - old_min = diff['quantity'] || min
 - old_max = old_min + (diff['tolerance'] || tolerance)
 - old_unit = (diff['unit']) || article.unit
-- old_price = (diff['price'] || price).to_f
+- old_price = (diff['fc_price'] || price).to_f
 - old_result = (diff['result'] || result).to_f
 - old_ordered = old_max > old_min ? "#{old_min}..#{old_max}" : "#{old_min}"
 - old_price_per_unit = "#{old_unit} @ #{number_to_currency(old_price)}"
