@@ -39,12 +39,12 @@
       %br
     = price_per_unit
   %td{ style: tdStyle }
-    if (diff['name'] != article.name)
+    - if (diff['name'] != article.name)
       %strike= diff['name']
       %br
     = article.name
   %td{ style: tdStyleRight }
-    if (old_total != total)
+    - if (old_total != total)
       %strike= old_total
       %br
     = total
