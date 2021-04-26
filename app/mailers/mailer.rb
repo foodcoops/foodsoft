@@ -242,7 +242,7 @@ class Mailer < ActionMailer::Base
 
   def self.deliver_now
     message = yield
-    message.transport_encoding = '7bit'
+    # message.transport_encoding = '7bit'
     message.deliver_now
   rescue MailCancelled => e
     puts "mail was cancelled #{e}"
