@@ -19,28 +19,28 @@
 - old_price_per_unit = "#{old_unit} @ #{number_to_currency(old_price)}"
 - old_total = number_to_currency(old_result * old_price)
 
-%tr
-  %td{ style: '{ vertical-align: bottom }' }
+%tr{style: 'vertical-align: bottom;'}
+  %td
     - if old_ordered!=ordered
       %strike= old_ordered
       %br
     = ordered
-  %td{ style: '{ vertical-align: bottom }' }
+  %td
     - if old_result!=result
       %strike= old_result
       %br
     = result
-  %td{ style: '{ text-align: right; vertical-align: bottom }' }
+  %td{ style: '{ text-align: right }' }
     - if old_price_per_unit != price_per_unit
       %strike= old_price_per_unit
       %br
     = price_per_unit
-  %td{ style: '{ vertical-align: bottom }' }
+  %td
     - if old_name != article.name
       %strike= old_name
       %br
     = article.name
-  %td{ style: '{ text-align: right; vertical-align: bottom }' }
+  %td{ style: '{ text-align: right }' }
     - if old_total != total
       %strike= old_total
       %br
