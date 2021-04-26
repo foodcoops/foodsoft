@@ -18,8 +18,9 @@
 - old_price_per_unit = "#{old_unit} @ #{number_to_currency(old_price)}"
 - old_total = number_to_currency(old_result * old_price)
 
--#:css
--#  .text-strike {  text-decoration: line-through; margin-top: 0; margin-bottom: 0 }
+:css
+  .text-strike {  text-decoration: line-through; margin-top: 0; margin-bottom: 0 }
+  td { vertical-align: bottom }
 
 %tr
   %td
