@@ -69,8 +69,8 @@ class UserNotifier
         Mailer.deliver_now_with_user_locale user do
           Mailer.order_result(user, group_order, message)
         end
-        rescue MailCancelled => e
-          puts "mail was canceled/no mail required"
+        rescue Mailer::MailCancelled => e
+          puts "mail was canceled/no mail required #{e}"
         rescue  => e
           puts "email_updated_orders - problem occurred #{e} #{e.backtrace}"
         end
@@ -99,8 +99,8 @@ class UserNotifier
         Mailer.deliver_now_with_user_locale user do
           Mailer.order_result(user, group_order, message)
         end
-        rescue MailCancelled => e
-          puts "mail was canceled/no mail required"
+        rescue Mailer::MailCancelled => e
+          puts "mail was canceled/no mail required #{e}"
         rescue  => e
           puts "email_updated_group_order: problem occurred #{e}"
         end
