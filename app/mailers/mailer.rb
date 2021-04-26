@@ -98,7 +98,7 @@ class Mailer < ActionMailer::Base
     else
       # puts "previous: #{group_order_previous_json}"
       group_order_previous = JSON.parse(group_order_previous_json)
-      diff = deep_diff(group_order_previous, group_order_current)
+      diff = deep_diff(group_order_previous, group_order_current) rescue {}
       # puts "diff : #{diff}"
       # keep just the old value in the hash
       diff.each do |id, changes|

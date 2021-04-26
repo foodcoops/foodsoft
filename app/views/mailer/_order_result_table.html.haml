@@ -7,6 +7,7 @@
 - total_min =number_to_currency(total_min_value)
 - total_max = number_to_currency(total_min_value + @group_order.group_order_articles.map{|goa| goa.order_article.price.fc_price * goa.tolerance}.sum)
 
+- diff = diff || {}
 - total_diff = diff['totals'] || {}
 - old_total = (total_diff['total'] && number_to_currency(total_diff['total'].to_f)) || total
 - old_min_total = (total_diff['min-total'] && number_to_currency(total_diff['min-total'].to_f)) || total_min
