@@ -25,7 +25,9 @@
 
 %tr
   %td{ style: tdStyle }
-    %p{style: strikeCell}= old_ordered if (old_ordered!=ordered)
+    - if (old_ordered!=ordered)
+      %p
+        %strike= old_ordered
     = ordered
   %td{ style: tdStyle }
     %p{style: strikeCell}= old_result if (old_result!=result)
