@@ -12,9 +12,10 @@
 - old_min_total = (total_diff['min-total'] && number_to_currency(total_diff['min-total'].to_f)) || total_min
 - old_max_total = (total_diff['max-total'] && number_to_currency(total_diff['max-total'].to_f)) || total_max
 
-:css
-  .text-strike {  text-decoration: line-through; margin-top: 0; margin-bottom: 0 }
-  td { vertical-align: bottom }
+
+- strikeCell='{  text-decoration: line-through; margin-top: 0; margin-bottom: 0 }'
+- tdStyle= '{ vertical-align: bottom }'
+- tdStyleRight= '{ text-align: right; vertical-align: bottom }'
 
 %table{:width => "100%", style: 'font-size: small; border-spacing: 8px 2px;'}
   %thead
@@ -51,7 +52,7 @@
         %td{ colspan: '4'} Current Total (may be adjusted depending on actual received and spoilage)
 
       %td
-        %p.text-strike= old_total if old_total != total
+        %p{style: strikeCell}= old_total if old_total != total
         = total
 
     - if @order.open?
@@ -59,11 +60,11 @@
         %td{ colspan: '4', style: ''} Minimum Total (if you got everything without any extra)
 
         %td{style: 'border-top: thin solid;'}
-          %p.text-strike= old_min_total if old_min_total != total_min
+          %p{style: strikeCell}= old_min_total if old_min_total != total_min
           = total_min
       %tr{ style: 'text-align:right;'}
         %td{ colspan: '4', style: ''} Max Total (if you got everything and used all tolerance)
 
         %td{style: 'border-top: thin solid;'}
-          %p.text-strike= old_max_total if old_max_total != total_max
+          %p{style: strikeCell}= old_max_total if old_max_total != total_max
           = total_max
