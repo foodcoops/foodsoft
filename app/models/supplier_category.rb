@@ -1,5 +1,6 @@
 class SupplierCategory < ActiveRecord::Base
   belongs_to :financial_transaction_class
+  belongs_to :bank_account, optional: true
   has_many :suppliers
 
   normalize_attributes :name, :description

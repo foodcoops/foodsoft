@@ -3,11 +3,17 @@ class Admin::FinancesController < Admin::BaseController
 
   def index
     @bank_accounts = BankAccount.order('name')
+    @bank_gateways = BankGateway.order('name')
     @financial_transaction_classes = FinancialTransactionClass.includes(:financial_transaction_types).order('name ASC')
   end
 
   def update_bank_accounts
     @bank_accounts = BankAccount.order('name')
+    render :layout => false
+  end
+
+  def update_bank_gateways
+    @bank_gateways = BankGateway.order('name')
     render :layout => false
   end
 
