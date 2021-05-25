@@ -37,47 +37,39 @@ Then start the database server and setup foodsoft development (this will take
 some time, containers needs to be pulled from docker registry and a lot
 dependencies needs to be installed)
 
-    docker-compose -f docker-compose-dev.yml up -d mariadb
-    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
+    docker-compose up -d mariadb
+    docker-compose run --rm foodsoft \
       bundle install
-    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
+    docker-compose run --rm foodsoft \
       bundle exec rake foodsoft:setup_development_docker
 
 Optionally an initial database (here seeded with `small.en`) can be loaded by running
 
-    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
+    docker-compose run --rm foodsoft \
       bundle exec rake db:schema:load db:seed:small.en
-
-To avoid having to pass the `-f` argument all the time, it is recommended to setup
-an alias, e.g. by adding the following line to your ~/.bashrc
-
-    alias docker-compose-dev='docker-compose -f docker-compose-dev.yml'
-
-then reload it by executing `. ~/.bashrc`. Following commands assume this is setup.
-
 
 ## Usage
 
 Start containers (in foreground, stop them with `Ctrl-C`)
 
-    docker-compose-dev up
+    docker-compose up
 
 Run a rails/rake command
 
-    docker-compose-dev run --rm foodsoft bundle exec rake db:migrate
+    docker-compose run --rm foodsoft bundle exec rake db:migrate
 
 Open a rails console
 
-    docker-compose-dev run --rm foodsoft bundle exec rails c
+    docker-compose run --rm foodsoft bundle exec rails c
 
 Setup the test database
 
-    docker-compose-dev run --rm mariadb mariadb --host=mariadb --password=secret --execute="CREATE DATABASE test"
-    docker-compose-dev run --rm foodsoft bundle exec rake db:schema:load RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8mb4
+    docker-compose run --rm mariadb mariadb --host=mariadb --password=secret --execute="CREATE DATABASE test"
+    docker-compose run --rm foodsoft bundle exec rake db:schema:load RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8mb4
 
 Run the tests
 
-    docker-compose-dev run --rm foodsoft ./bin/test
+    docker-compose run --rm foodsoft ./bin/test
 
 Jump in a running container for debugging.
 
@@ -98,8 +90,8 @@ Go to [http://localhost:2080](http://localhost:2080)
 
 As the gem bundle is stored in a volume, you can run
 
-    docker-compose-dev run --rm foodsoft bundle install
-    docker-compose-dev restart foodsoft foodsoft_worker
+    docker-compose run --rm foodsoft bundle install
+    docker-compose restart foodsoft foodsoft_worker
 
 Do this each time you update your `Gemfile`.
 
