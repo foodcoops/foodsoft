@@ -241,7 +241,7 @@ class Order < ApplicationRecord
         # Also save results for each group_order_result
         # Clean up
         order_articles.includes(:article).each do |oa|
-          oa.update_attribute(:article_price, oa.article.article_prices.first)
+          oa.update_attribute(:article_price, oa.article.current_article_price)
           oa.group_order_articles.each do |goa|
             goa.save_results!
             # Delete no longer required order-history (group_order_article_quantities) and
