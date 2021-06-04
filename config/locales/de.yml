@@ -196,7 +196,7 @@ de:
         duration: Dauer
         name: Aufgabe
         required_users: Anzahl
-        user_list: Verantwortlichen
+        user_list: Verantwortliche
         workgroup: Arbeitsgruppe
       user:
         email: E-Mail
