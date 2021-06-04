@@ -304,7 +304,7 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.0.2)
-    mini_portile2 (2.5.0)
+    mini_portile2 (2.5.3)
     minitest (5.14.3)
     mono_logger (1.1.0)
     msgpack (1.4.2)
@@ -313,7 +313,7 @@ GEM
       ruby2_keywords (~> 0.0.1)
     mysql2 (0.5.3)
     nio4r (2.5.5)
-    nokogiri (1.11.1)
+    nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     parallel (1.20.1)
