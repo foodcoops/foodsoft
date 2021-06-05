@@ -1,3 +1,18 @@
+.list .has-free-tolerance td, .list .has-free-tolerance:hover td {
+	/* Class `has-free-tolerance` is set by backend code iff and only if
+	** no items are ordered by this group and there is free tolerance.
+	** It only comes to function, if it is not shadowed by one of the 
+	** classes `m̀issing-*` below.
+	**
+	** It is set to yellow here, because it fits well with the
+	** semantics "You get it, if you order one more item" of
+	** class `missing-few`. However, unlike for `missing-few`,
+	** "If you order one more, one more package will be completed" is
+	** not true here, so you may consider another color more appropriate here.
+	*/
+	background-color: #ffee75;
+}
+
 .list .missing-many td, .list .missing-many:hover td {
 	background-color: #ebbebe;
 }
@@ -9,3 +24,4 @@
 .list .missing-none td, .list .missing-none:hover td {
 	background-color: #E4EED6;
 }
+

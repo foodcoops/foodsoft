@@ -44,11 +44,17 @@ module GroupOrdersHelper
     { group_order_article: goa, quantity: quantity, tolerance: tolerance, result: result, sub_total: sub_total }
   end
 
-  def get_missing_units_css_class(quantity_missing)
+  def get_missing_units_css_class(ordering_data)
+    quantity_missing = ordering_data[:missing_units]
     if (quantity_missing == 1)
       return 'missing-few';
     elsif (quantity_missing == 0)
-      return ''
+      if ( ordering_data[:others_tolerance] > 0 and ordering_data[:quantity] == 0 )
+        # see comment in file list.missing.css
+        return 'has-free-tolerance'
+      else
+        return ''
+      end
     else
       return 'missing-many'
     end
