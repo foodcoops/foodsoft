@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_090257) do
+ActiveRecord::Schema.define(version: 2021_06_08_080612) do
 
   create_table "article_categories", id: :integer, force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -510,6 +510,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.datetime "last_activity"
     t.datetime "deleted_at"
     t.string "iban"
+    t.string "encrypted_password", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["nick"], name: "index_users_on_nick", unique: true
   end
