@@ -1,6 +1,8 @@
 require 'digest/sha1'
 # specific user rights through memberships (see Group)
 class User < ApplicationRecord
+  devise :database_authenticatable
+
   include CustomFields
   # TODO: acts_as_paraniod ??
 
