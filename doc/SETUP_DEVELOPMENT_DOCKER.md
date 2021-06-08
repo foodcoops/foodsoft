@@ -62,6 +62,8 @@ Start containers (in foreground, stop them with `Ctrl-C`)
 
     docker-compose-dev up
 
+(Login using the default credentials: `admin/secret`)
+
 Run a rails/rake command
 
     docker-compose-dev run --rm foodsoft bundle exec rake db:migrate
