@@ -461,7 +461,7 @@ es:
       already_imported: importado
       not_found: No se han encontrado articulos
     index:
-      change_supplier: Cambiar proveedor ...
+      change_supplier: Cambiar proveedor
       edit_all: Editar todos
       ext_db:
         import: Importar artículo
