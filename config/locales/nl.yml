@@ -484,7 +484,7 @@ nl:
       already_imported: geïmporteerd
       not_found: Geen artikelen gevonden
     index:
-      change_supplier: Leverancier wisselen ...
+      change_supplier: Leverancier wisselen
       download: Artikelen downloaden
       edit_all: Alles bewerken
       ext_db:
