@@ -23,7 +23,7 @@ class ArticlesCsv < RenderCSV
   def data
     @object.each do |o|
       yield [
-        '',
+        o.availability ? I18n.t('simple_form.yes') : I18n.t('simple_form.no'),
         o.order_number,
         o.name,
         o.note,

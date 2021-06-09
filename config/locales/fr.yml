@@ -348,6 +348,7 @@ fr:
       not_found: Aucun produit correspondant n'a été trouvé
     index:
       change_supplier: Changer de fournisseur-e...
+      download: Exporter les produits
       edit_all: Tout modifier
       ext_db:
         import: Rechercher/Importer
