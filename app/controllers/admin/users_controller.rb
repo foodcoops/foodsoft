@@ -2,7 +2,19 @@ class Admin::UsersController < Admin::BaseController
   inherit_resources
 
   def index
-    @users = params[:show_deleted] ? User.deleted : User.undeleted
+    if params["sort"]
+      sort = case params["sort"]
+               when "name" then "first_name, last_name"
+               when "email" then "email"
+               when "last_activity" then "last_activity"
+               when "name_reverse" then "first_name DESC, last_name DESC"
+               when "email_reverse" then "email DESC"
+               when "last_activity_reverse" then "last_activity DESC"
+             end
+      @users = params[:show_deleted] ? User.deleted.order(sort) : User.undeleted.order(sort)
+    else
+      @users = params[:show_deleted] ? User.deleted : User.undeleted
+    end
     @users = @users.includes(:mail_delivery_status)
 
     if request.format.csv?

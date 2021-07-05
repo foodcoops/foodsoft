@@ -4,7 +4,7 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= heading_helper Ordergroup, :name
+      %th= sort_link_helper heading_helper(Ordergroup, :name), "name"
       %th= heading_helper Ordergroup, :user_tokens
       %th= heading_helper Ordergroup, :contact_address
       %th= heading_helper Ordergroup, :last_user_activity

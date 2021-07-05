@@ -1,6 +1,14 @@
 class Foodcoop::OrdergroupsController < ApplicationController
   def index
-    @ordergroups = Ordergroup.undeleted.order('name')
+    if params["sort"]
+      sort = case params["sort"]
+             when "name" then "name"
+             when "name_reverse" then "name DESC"
+             end
+      @ordergroups = Ordergroup.undeleted.order(sort)
+    else
+      @ordergroups = Ordergroup.undeleted.order('name')
+    end
 
     unless params[:name].blank? # Search by name
       @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")
