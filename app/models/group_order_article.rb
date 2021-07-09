@@ -12,6 +12,8 @@ class GroupOrderArticle < ApplicationRecord
   validates :quantity, :tolerance, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
+  default_scope { joins(:order_article => :article).order('articles.name') }
+
 
   localize_input_of :result
 
