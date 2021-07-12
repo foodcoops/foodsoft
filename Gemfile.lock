@@ -113,7 +113,7 @@ GEM
       tzinfo (~> 1.1)
     acts_as_tree (2.9.1)
       activerecord (>= 3.0.0)
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     apivore (1.6.2)
       actionpack (>= 4, < 6)
