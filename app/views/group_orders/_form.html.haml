@@ -183,13 +183,16 @@
           - tolerance_shown = order_article_data[:unit] > 1
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article #{get_missing_units_css_class(order_article_data[:missing_units])}", valign: "top"}
             %td.name
-              %span= order_article.article.name
+              %span.hidden-phone= order_article.article.name
+              %span.visible-phone
+                = order_article.article.name
+                %small= "(#{order_article.article.origin})"
               %br/
               %small= order_article.article.manufacturer
               %small= "(#{order_article.article.order_number})" unless order_article.article.order_number.blank?
               - unless order_article.article.note.blank?
-                %blockquote.small
-                  %span #{heading_helper Article, :note}: #{order_article.article.note}
+                %blockquote
+                  %small #{heading_helper Article, :note}: #{order_article.article.note}
               .visible-phone #{number_to_currency(order_article_data[:price])} per #{order_article.article.unit}
               %div
                 %span.label{:class => [ (order_article.units_to_order>0 &&  order_article_data[:extra_available]==0 ? 'label-success' : 'label-warning'),  "units_#{order_article.id}"] }
