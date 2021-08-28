@@ -52,7 +52,7 @@
 -# - if current_user.ordergroup
 -#   = render :partial => 'shared/upcoming_orders', :locals => {:ordergroup => current_user.ordergroup}
 
-- if current_user.ordergroup
+- if current_user.ordergroup and !Order.finished_not_closed.empty?
   = render :partial => 'shared/closed_orders', :locals => {:ordergroup => current_user.ordergroup}
 
 
