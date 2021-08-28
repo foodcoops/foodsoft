@@ -28,7 +28,8 @@ class Order < ApplicationRecord
   after_save :save_order_articles, :update_price_of_group_orders
 
   # Finders
-  scope :open, -> { where(state: 'open').order('ends DESC') }
+  scope :open, -> { where(state: 'open').where('starts <= ?', DateTime.now).order('ends DESC') }
+  scope :upcoming, -> { where(state: 'open').where('starts >= ?', DateTime.now).order('ends DESC') }
   scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
   scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }
   scope :closed, -> { where(state: 'closed').order('ends DESC') }
@@ -54,7 +55,7 @@ class Order < ApplicationRecord
       # make sure to include those articles which are no longer available
       # but which have already been ordered in this stock order
       StockArticle.available.includes(:article_category).
-          order('article_categories.name', 'articles.name').reject { |a|
+        order('article_categories.name', 'articles.name').reject { |a|
         a.quantity_available <= 0 && !a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else
@@ -138,18 +139,18 @@ class Order < ApplicationRecord
   # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
   def articles_grouped_by_category
     @articles_grouped_by_category ||= order_articles.
-        includes([:article_price, :group_order_articles, :article => :article_category]).
-        order('articles.name').
-        group_by { |a| a.article.article_category.name }.
-        sort { |a, b| a[0] <=> b[0] }
+      includes([:article_price, :group_order_articles, :article => :article_category]).
+      order('articles.name').
+      group_by { |a| a.article.article_category.name }.
+      sort { |a, b| a[0] <=> b[0] }
   end
 
   def articles_grouped_by_category_and_ordered_amount
     @articles_grouped_by_category ||= order_articles.
-        includes([:article_price, :group_order_articles, :article => :article_category]).
-        order('articles.name').
-        group_by(&method(:category_name_and_quantity))
-                                          .sort { |a, b| a[0] <=> b[0] }
+      includes([:article_price, :group_order_articles, :article => :article_category]).
+      order('articles.name').
+      group_by(&method(:category_name_and_quantity))
+                                                    .sort { |a, b| a[0] <=> b[0] }
   end
 
 
@@ -370,16 +371,16 @@ class Order < ApplicationRecord
     # is there an existing 'article'
     surcharge_name = "Extra Charges" if surcharge_name.blank? #default name
     surcharge_article = supplier.articles
-                            .find_or_create_by!(
-                                name: surcharge_name,
-                                article_category_id: 1,
-                                supplier_id: supplier_id,
-                                price: 1.0,
-                                unit: 'dollars',
-                                availability: true,
-                                unit_quantity: 1,
-                                tax: 0.0
-                            )
+                                .find_or_create_by!(
+                                  name: surcharge_name,
+                                  article_category_id: 1,
+                                  supplier_id: supplier_id,
+                                  price: 1.0,
+                                  unit: 'dollars',
+                                  availability: true,
+                                  unit_quantity: 1,
+                                  tax: 0.0
+                                )
     total_amount = GroupOrder.where(order_id: id).sum(:price)
     oa_surcharge = order_articles.find_or_create_by!(article_id: surcharge_article.id)
     oa_surcharge.update_attributes!({units_billed: distribute_amount, units_received: distribute_amount})

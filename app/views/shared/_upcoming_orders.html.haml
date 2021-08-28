@@ -1,0 +1,42 @@
+%section
+  %h2= t '.title'
+  - if ordergroup.not_enough_apples?
+    .alert
+      = t '.not_enough_apples'
+  - unless Order.upcoming.empty?
+    %table.table
+      %thead
+        %tr
+          %th= heading_helper Order, :name
+          %th= heading_helper Order, :pickup
+          %th= heading_helper Order, :ends
+          %th= heading_helper Order, :starts
+      %tbody
+        - total = 0
+        - Order.upcoming.each do |order|
+          %tr
+            %td
+              = link_to_ordering(order)
+            %td= format_date(order.pickup) unless order.pickup.nil?
+            %td= format_time(order.ends) unless order.ends.nil?
+            %td= format_time(order.starts) unless order.starts.nil?
+          %tr
+            %td(colspan=5)
+              %div.row-fluid
+                - if order.note
+                  .span= order.note.gsub(URI::DEFAULT_PARSER.make_regexp(['http','https']), '<a href="\0">\0</a>').html_safe
+              %div.row-fluid
+                - min_order_value = order.supplier.min_order_quantity.sub('$','').to_f
+                - if min_order_value > 0
+                  = "min order value is #{number_to_currency(min_order_value)}"
+          %tr.list-heading
+            %td(colspan=5)
+
+      - if total > 0
+        %tfooter
+          %tr
+            %th(colspan=3)
+            %th= t('.total_sum') + ':'
+            %th.numeric= number_to_currency(total)
+  - else
+    %i= t '.no_open_orders'

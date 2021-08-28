@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   # List orders
   def index
     @open_orders = Order.open.includes(:supplier)
+    @upcoming_orders = Order.upcoming.includes(:supplier)
     @finished_orders = Order.finished_not_closed.includes(:supplier)
     @per_page = 15
     if params['sort']
@@ -69,7 +70,7 @@ class OrdersController < ApplicationController
 
   # Page to create a new order.
   def new
-    attributes = {supplier_id: params[:supplier_id]}
+    attributes = { supplier_id: params[:supplier_id] }
     if params[:order_id]
       copy_order = Order.find(params[:order_id])
       attributes.merge!(copy_order.slice(:article_ids, :note,
@@ -137,7 +138,6 @@ class OrdersController < ApplicationController
       redirect_to :action => 'show', :id => @order
     end
   end
-
 
   # Delete an order.
   def destroy

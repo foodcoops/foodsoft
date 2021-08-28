@@ -7,6 +7,7 @@
       %th= heading_helper Order, :starts
       %th= sort_link_helper heading_helper(Order, :ends), "ends"
       %th= heading_helper Order, :status
+      %th= heading_helper Order, :split_effort
       %th
   %tbody
     - @orders.each do |order|
@@ -16,6 +17,7 @@
         %td= format_time(order.starts)
         %td= format_time(order.ends)
         %td= t(order.state, scope: 'orders.state')
+        %td= order.split_effort
         %td
           = link_to t('ui.copy'), new_order_path(order_id: order, supplier_id: order.supplier), class: 'btn btn-small'
           = link_to t('ui.show'), order, class: 'btn btn-small'

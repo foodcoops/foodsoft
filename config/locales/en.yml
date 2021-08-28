@@ -1651,6 +1651,7 @@ en:
       orders_open: Open
       orders_settled: Settled
       title: Manage orders
+      upcoming_orders: "Upcoming"
     model:
       close_direct_message: Order settled without charging member accounts.
       error_boxfill_before_ends: must be after the box-fill date (or remain empty)
@@ -1895,6 +1896,10 @@ en:
       title: Group memberships
     article_fields_price:
       price_warning: Supplier price does not equal Price * Unit.  You can use the 'Recalculate Price' button to update the price.
+    upcoming_orders:
+      title: "Upcoming orders"
+    closed_orders:
+      title: "Closed"
   simple_form:
     error_notification:
       default_message: Errors were found. Please check the form.

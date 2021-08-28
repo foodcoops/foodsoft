@@ -10,27 +10,57 @@
         %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1
 
 .well
-  - if not @open_orders.empty?
-    %h2= t '.orders_open'
-  - elsif not @finished_orders.empty?
-    %h2= t '.orders_finished'
-  - else
-    = t '.no_open_or_finished_orders'
-  - unless @open_orders.empty? and @finished_orders.empty?
+
+  -# - if not @open_orders.empty?
+  -#   %h2= t '.orders_open'
+  -# - if not @upcoming_orders.empty?
+  -#   %h2= t '.orders_upcoming'
+  -# - elsif not @finished_orders.empty?
+  -#   %h2= t '.orders_finished'
+  -# - else
+  -#   = t '.no_open_or_finished_orders'
+  - unless @open_orders.empty? and @upcoming_orders.empty? and @finished_orders.empty?
     %table.table.table-striped
       %thead
         %tr
           %th= heading_helper Order, :name
+          %th= heading_helper Order, :starts
           %th= heading_helper Order, :pickup
           %th= heading_helper Order, :ends
           %th= heading_helper Order, :note
           %th{colspan: "2"}
       %tbody
+        - unless @upcoming_orders.empty?
+          %tr
+          %td{colspan: 6}
+            %h2= t '.upcoming_orders'
+          - for order in @upcoming_orders
+            - tr_class = " active" if order.expired?
+            %tr{class: tr_class}
+              %td= order.name
+              %td= format_date(order.starts) unless order.pickup.nil?
+              %td= format_date(order.pickup) unless order.pickup.nil?
+              %td= format_time(order.ends) unless order.ends.nil?
+              %td= truncate(order.note)
+              %td= link_to t('.action_end'), finish_order_path(order),
+                data: {confirm: t('.confirm_end', order: order.name)}, method: :post,
+                class: 'btn btn-small btn-success'
+
+              %td
+                -#= link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-small'
+                = link_to t('ui.show'), order, class: 'btn btn-small'
+                -#= link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
+                  class: 'btn btn-small btn-danger'
+
         - unless @open_orders.empty?
+          %tr
+            %td{colspan: 6}
+              %h2= t '.orders_open'
           - for order in @open_orders
             - tr_class = " active" if order.expired?
             %tr{class: tr_class}
               %td= order.name
+              %td= format_date(order.starts) unless order.pickup.nil?
               %td= format_date(order.pickup) unless order.pickup.nil?
               %td= format_time(order.ends) unless order.ends.nil?
               %td= truncate(order.note)
@@ -45,13 +75,13 @@
                   class: 'btn btn-small btn-danger'
 
         - unless @finished_orders.empty?
-          - unless @open_orders.empty?
-            %tr
-              %td{colspan: 6}
-                %h2= t '.orders_finished'
+          %tr
+            %td{colspan: 6}
+              %h2= t '.orders_finished'
           - for order in @finished_orders
             %tr
               %td= order.name
+              %td= format_date(order.starts) unless order.starts.nil?
               %td= format_date(order.pickup) unless order.pickup.nil?
               %td= format_time(order.ends)
               %td= truncate(order.note)
