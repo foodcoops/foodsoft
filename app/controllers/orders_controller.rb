@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
     if params[:order_id]
       copy_order = Order.find(params[:order_id])
       attributes.merge!(copy_order.slice(:article_ids, :note,
-                                         :supplier_note, :end_action,
+                                         :supplier_note, :end_action, :ends,
                                          :boxfill))
     end
     @order = Order.new(attributes).init_dates
