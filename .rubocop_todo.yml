@@ -215,6 +215,7 @@ Lint/ShadowingOuterLocalVariable:
 # Configuration parameters: AllowComments, AllowNil.
 Lint/SuppressedException:
   Exclude:
+    - 'config/initializers/rails6_backports.rb'
     - 'lib/foodsoft_config.rb'
     - 'lib/tasks/rspec.rake'
 
@@ -1495,6 +1496,7 @@ Style/MultilineBlockChain:
   Exclude:
     - 'app/helpers/group_orders_helper.rb'
     - 'app/models/order.rb'
+    - 'config/initializers/rails6_backports.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
