@@ -182,6 +182,10 @@ class Article < ApplicationRecord
         @shared_article = nil if  @shared_article && @shared_article.name != self.name
         @shared_article ||= supplier.shared_supplier.find_article_by_name_origin_manufacture(self.name, self.origin, self.manufacturer)
         @shared_article ||= supplier.shared_supplier.find_article_by_name_manufacture(self.name, self.manufacturer)
+
+        # ok, if we had cleared this because of the 'sanity check' above, but could not find it via the other lookups,
+        # then go back to the order number version if it exists
+        @shared_article ||= supplier.shared_supplier.find_article_by_number(self.order_number)
       end
       if @shared_article
         if @shared_article.linked_to.nil?
