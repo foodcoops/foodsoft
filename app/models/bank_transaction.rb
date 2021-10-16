@@ -36,7 +36,7 @@ class BankTransaction < ApplicationRecord
   def assign_to_invoice
     return false unless supplier
 
-    content = text
+    content = text || ""
     content += "\n" + reference if reference.present?
     invoices = supplier.invoices.unpaid.select { |i| content.include? i.number }
     invoices_sum = invoices.map(&:amount).sum
