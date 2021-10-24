@@ -10,7 +10,6 @@ RUN supercronicUrl=https://github.com/aptible/supercronic/releases/download/v0.1
 ENV PORT=3000 \
     SMTP_SERVER_PORT=2525 \
     RAILS_ENV=production \
-    RAILS_LOG_TO_STDOUT=true \
     RAILS_SERVE_STATIC_FILES=true
 
 WORKDIR /usr/src/app
