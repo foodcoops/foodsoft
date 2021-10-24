@@ -50,7 +50,7 @@ To run the worker (recommended!), supply a different command
       foodsoft:latest  ./proc-start worker
 
 To also run the cronjobs, start the previous command but substituting
-`mail` with `cron`. That should give you the ingredients for a production-setup.
+`worker` with `cron`. That should give you the ingredients for a production-setup.
 With the help of a front-end webserver doing ssl, of course.
 
 
