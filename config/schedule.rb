@@ -17,3 +17,8 @@ end
 every 1.minute do
   rake "multicoops:run TASK=foodsoft:finish_ended_orders"
 end
+
+# restart everything
+every :day, :at => '2:20 am' do
+  command '/bin/bash -l -c "/home/foodsoft/restart.sh >> /home/foodsoft/cron-restarts.log"'
+end
