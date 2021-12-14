@@ -33,7 +33,7 @@ class User < ApplicationRecord
   validates_presence_of :first_name # for simple_form validations
   validates_length_of :first_name, :in => 2..50
   validates_confirmation_of :password
-  validates_length_of :password, :in => 5..25, :allow_blank => true
+  validates_length_of :password, :in => 12..50, :allow_blank => true
   # allow nick to be nil depending on foodcoop config
   # TODO Rails 4 may have a more beautiful way
   #   http://stackoverflow.com/questions/19845910/conditional-allow-nil-part-of-validation
