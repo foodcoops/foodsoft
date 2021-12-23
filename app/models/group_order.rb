@@ -9,6 +9,7 @@ class GroupOrder < ApplicationRecord
   has_many :group_order_articles, :dependent => :destroy
   has_many :order_articles, :through => :group_order_articles
   has_one :financial_transaction
+  has_one :group_order_invoice
   belongs_to :updated_by, optional: true, class_name: 'User', foreign_key: 'updated_by_user_id'
 
   validates_presence_of :order_id
