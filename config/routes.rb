@@ -139,7 +139,7 @@ Rails.application.routes.draw do
         end
       end
     end
-
+    resources :group_order_invoices
     resources :article_categories
 
     ########### Finance
@@ -171,6 +171,7 @@ Rails.application.routes.draw do
         get :form_on_supplier_id_change, on: :collection
         get :unpaid, on: :collection
       end
+
 
       resources :links, controller: 'financial_links', only: [:create, :show] do
         collection do
