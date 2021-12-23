@@ -84,6 +84,14 @@ en:
         tolerance: Tolerance
         total_price: Sum
         unit_price: Price/Unit
+      group_order_invoice:
+        name: Group order invoice
+        links:
+          delete: delete invoice
+          generate: generate invoice
+          download: download invoice
+        payment_method: Credit
+        tax_number_not_set: Tax number not set in configs
       invoice:
         amount: Amount
         attachment: Attachment
@@ -601,6 +609,8 @@ en:
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
       distribution_strategy: How articles should be distributed after an order has been received.
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
+      use_automatic_invoices: When an order is settled, invoices for the individual order groups are automatically sent by mail
+      payment_method: Payment Method for group order invoices
       use_boxfill: When enabled, near end of an order, members are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
       use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
       use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
@@ -616,6 +626,7 @@ en:
         phone: Phone
         street: Street
         zip_code: Postcode
+        tax_number: Tax number
       currency_space: add space
       currency_unit: Currency
       custom_css: Custom CSS
@@ -659,6 +670,9 @@ en:
         first_order_first_serve: First distribute to those who ordered first
         no_automatic_distribution: No automatic distribution
       use_apple_points: Apple points
+      group_order_invoices:
+        use: Automatically send group order invoices when an order is settled
+        payment_method: Payment method for group order invoices
       use_boxfill: Box-fill phase
       use_iban: Use IBAN
       use_nick: Use nicknames
@@ -716,6 +730,39 @@ en:
     update:
       notice: Delivery was updated.
   documents:
+    group_order_invoice_pdf:
+      ordergroup:
+        contact_phone: 'Phone: %{contact_phone}'
+        contact_address: 'Adress :  %{contact_address}'
+        name: 'Ordergroup: %{ordergroup}'
+      filename: Invoice %{number}
+      invoicee: Invoicee
+      invoicer: Invoicer
+      invoice_date: 'Invoice date: %{invoice_date}'
+      invoice_number: 'Invoice number: %{invoice_number}'
+      markup_included: incl Foodcoop Marge on gross price %{marge}%
+      payment_method: 'Payment_method: %{payment_method}'
+      sum_to_pay_net: Total sum (net)
+      sum_to_pay_gross: Total sum (gross)
+      table_headline: 'The following items will be charged for the order:'
+      tax_excluded: excl. MwSt.
+      tax_included: incl. VAT %{tax}%
+      tax_number: 'Tax number: %{number}'
+      title: Invoice for order at %{supplier}
+      no_price_markup_rows:
+        - Name
+        - Amount
+        - Unit price (net)
+        - Total price (net)
+        - VAT
+        - Total price (gross)
+      price_markup_rows:
+        - Name
+        - Amount
+        - Unit price (net)
+        - Total price (net)
+        - VAT
+        - Total price (gross) incl. foodcoop margin
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
       title: 'Order sorted by articles: %{name}, closed at %{date}'
@@ -739,6 +786,7 @@ en:
       heading: Article overview (%{count})
       title: 'Order sorting matrix: %{name}, closed at %{date}'
   errors:
+    check_tax_number: Please check whether the foodcoop's tax number is set correctly.
     general: A problem has occured.
     general_again: A problem has occured. Please try again.
     general_msg: 'A problem has occured: %{msg}'
@@ -762,6 +810,7 @@ en:
       close:
         alert: 'An error occured while accounting: %{message}'
         notice: Order was settled succesfully, the balance of the account was updated.
+        settings_not_set: No emails with invoices sent. Please check the settings.
       close_all_direct_with_invoice:
         notice: '%{count} orders have been settled.'
       close_direct:
@@ -1239,6 +1288,15 @@ en:
     feedback:
       header: "%{user} wrote at %{date}:"
       subject: Feedback for Foodsoft
+    group_order_invoice:
+      subject: Order group invoice for %{group} at %{supplier}
+      text: |
+        Dear order group %{group},
+
+        The collective order at %{supplier} has just been settled and invoices have been created for the respective order groups.
+        Attached you will find your invoice.
+
+        Best regards from %{foodcoop}
     from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Invitation to the Foodcoop
@@ -1478,6 +1536,7 @@ en:
       orders_finished: Closed
       orders_open: Open
       orders_settled: Settled
+      not_closed: Order not yet settled
       title: Manage orders
     model:
       close_direct_message: Order settled without charging member accounts.

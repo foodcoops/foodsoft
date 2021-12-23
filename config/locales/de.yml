@@ -84,6 +84,14 @@ de:
         tolerance: Toleranz
         total_price: Summe
         unit_price: Preis/Einheit
+      group_order_invoice:
+        name: Bestellgruppenrechnung
+        links:
+          delete: Rechnung löschen
+          generate: Rechnung erzeugen
+          download: Rechnung herunterladen
+        payment_method: Guthaben
+        tax_number_not_set: Steuernummer in den Einstellungen nicht gesetzt
       invoice:
         amount: Betrag
         attachment: Anhang
@@ -600,6 +608,8 @@ de:
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
       distribution_strategy: Wie bei der Verteilung von Artikeln nach dem Empfangen einer Bestellung vorgegangen werden soll.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
+      use_automatic_invoices: Bei der Abrechnung einer Bestellung werden Rechnungen für die einzelnen Bestellgruppenautomatisch per Mail versandt
+      payment_method: Zahlungsart für Bestellgruppenrechnungen
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
@@ -615,6 +625,7 @@ de:
         phone: Telefon
         street: Straße
         zip_code: Postleitzahl
+        tax_number: Steuernummer
       currency_space: Leerzeichen hinzufügen
       currency_unit: Währung
       custom_css: Angepasstes CSS
@@ -658,6 +669,9 @@ de:
         first_order_first_serve: Zuerst an die verteilen, die zuerst bestellt haben
         no_automatic_distribution: Keine automatische Verteilung
       use_apple_points: Apfelpunkte verwenden
+      group_order_invoices:
+        use: Bestellgruppen Rechnungen automatisch bei Abrechnung einer Bestellung versenden
+        payment_method: Zahlungsart für Bestellgruppenrechnungen
       use_boxfill: Kistenauffüllphase
       use_iban: IBAN verwenden
       use_nick: Benutzernamen verwenden
@@ -714,6 +728,39 @@ de:
     update:
       notice: Lieferung wurde aktualisiert.
   documents:
+    group_order_invoice_pdf:
+      filename: Rechnung %{number}
+      invoicer: Rechnungsteller*in
+      invoicee: Rechnungsempfänger*in
+      invoice_date: 'Rechnungsdatum: %{invoice_date}'
+      invoice_number: 'Rechnungsnummer: %{invoice_number}'
+      markup_included: zzgl. Foodcoop Marge auf brutto Preis %{marge}%
+      ordergroup:
+        contact_phone: 'Telefonnummer: %{contact_phone}'
+        contact_address: 'Adresse :  %{contact_address}'
+        name: Bestellgruppe %{ordergroup}
+      payment_method: 'Zahlungsart: %{payment_method}'
+      sum_to_pay_net: Zu zahlen gesamt (netto)
+      sum_to_pay_gross: Zu zahlen gesamt (brutto)
+      table_headline: 'Für die Bestellung fallen folgende Posten an:'
+      tax_excluded: exkl. MwSt.
+      tax_included: zzgl. Gesamtsumme MwSt. %{tax}%
+      tax_number: 'Steuernummer: %{number}'
+      title: Rechnung für die Bestellung bei %{supplier}
+      no_price_markup_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis (netto)
+        - Artikel Gesamtpreis (netto)
+        - MwSt.
+        - Artikel Gesamtpreis (brutto)
+      price_markup_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis (netto)
+        - Artikel Gesamtpreis (netto)
+        - MwSt.
+        - Artikel Gesamtpreis (brutto) inkl. Foodcoopmarge %{marge}%
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
       title: 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
@@ -737,6 +784,7 @@ de:
       heading: Artikelübersicht (%{count})
       title: 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
   errors:
+    check_tax_number: Überprüft, ob die Steuernummer der Foodcoop richtig gesetzt ist
     general: Ein Problem ist aufgetreten.
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
     general_msg: 'Ein Fehler ist aufgetreten: %{msg}'
@@ -760,6 +808,8 @@ de:
       close:
         alert: 'Ein Fehler ist beim Abrechnen aufgetreten: %{message}'
         notice: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert.
+        notice_mail: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert. Außerdem wurden automatisch Rechnungen an die Bestellgruppenmitglieder geschickt.
+        settings_not_set: Keine Emails mit Rechnungen versendet. Bitte überprüfe die Einstellungen.
       close_all_direct_with_invoice:
         notice: 'Es wurden %{count} Bestellung abgerechnet.'
       close_direct:
@@ -824,6 +874,7 @@ de:
         ended: beendet
         name: Lieferantin
         no_closed_orders: Derzeit gibt es keine beendeten Bestellungen.
+
         state: Status
       summary:
         changed: Daten wurden verändert!
@@ -1235,6 +1286,15 @@ de:
     feedback:
       header: "%{user} schrieb am %{date}:"
       subject: Feedback zur Foodsoft
+    group_order_invoice:
+      subject: Bestellgruppenrechnung für %{group} bei %{supplier}
+      text: |
+        Liebe Bestellgruppe %{group},
+
+        Die Sammelbestellung bei %{supplier} wurde soeben abgerechnet und für die jeweiligen Bestellgruppen Rechnungen angelegt.
+        Im Anhang befindet sich daher eure Rechnung.
+
+        Viele Grüße von %{foodcoop}
     invite:
       subject: Einladung in die Foodcoop
       text: |
@@ -1467,6 +1527,7 @@ de:
       orders_finished: Beendet
       orders_open: Laufend
       orders_settled: Abgerechnet
+      not_closed: Bestellung noch nicht abgerechnet
       title: Bestellungen verwalten
     model:
       close_direct_message: Die Bestellung wurde abgechlossen, ohne die Mitgliederkonten zu belasten.
