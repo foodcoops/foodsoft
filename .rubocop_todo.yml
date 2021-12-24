@@ -269,6 +269,8 @@ Lint/Void:
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
   Max: 143
+  Exclude:
+    - 'app/documents/group_order_invoice_pdf.rb'
 
 # Offense count: 72
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
@@ -419,6 +421,7 @@ RSpec/Capybara/FeatureMethods:
     - 'spec/integration/receive_spec.rb'
     - 'spec/integration/session_spec.rb'
     - 'spec/integration/supplier_spec.rb'
+    - 'spec/integration/group_order_invoices_spec.rb'
 
 # Offense count: 27
 # Configuration parameters: Prefixes.
