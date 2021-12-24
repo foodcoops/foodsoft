@@ -735,7 +735,7 @@ en:
         contact_phone: 'Phone: %{contact_phone}'
         contact_address: 'Adress :  %{contact_address}'
         name: 'Ordergroup: %{ordergroup}'
-      filename: Invoice %{number}
+      filename: Invoice%{number}
       invoicee: Invoicee
       invoicer: Invoicer
       invoice_date: 'Invoice date: %{invoice_date}'
@@ -810,7 +810,7 @@ en:
       close:
         alert: 'An error occured while accounting: %{message}'
         notice: Order was settled succesfully, the balance of the account was updated.
-        settings_not_set: No emails with invoices sent. Please check the settings.
+        settings_not_set: No emails with order group invoices sent. Please check the settings. Tax number set?
       close_all_direct_with_invoice:
         notice: '%{count} orders have been settled.'
       close_direct:

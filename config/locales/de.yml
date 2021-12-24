@@ -729,7 +729,7 @@ de:
       notice: Lieferung wurde aktualisiert.
   documents:
     group_order_invoice_pdf:
-      filename: Rechnung %{number}
+      filename: Rechnung%{number}
       invoicer: Rechnungsteller*in
       invoicee: Rechnungsempfänger*in
       invoice_date: 'Rechnungsdatum: %{invoice_date}'
@@ -809,7 +809,7 @@ de:
         alert: 'Ein Fehler ist beim Abrechnen aufgetreten: %{message}'
         notice: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert.
         notice_mail: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert. Außerdem wurden automatisch Rechnungen an die Bestellgruppenmitglieder geschickt.
-        settings_not_set: Keine Emails mit Rechnungen versendet. Bitte überprüfe die Einstellungen.
+        settings_not_set: Keine Emails mit Bestellgruppenrechnungen versendet. Bitte überprüfe die Einstellungen. Steuernummer gesetzt?
       close_all_direct_with_invoice:
         notice: 'Es wurden %{count} Bestellung abgerechnet.'
       close_direct:
