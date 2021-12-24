@@ -9,9 +9,11 @@ class GroupOrderInvoicesController < ApplicationController
           send_group_order_invoice_pdf @group_order_invoice if FoodsoftConfig[:contact][:tax_number]
         end
       end
-    else raise RecordInvalid
-      redirect_back fallback_location: root_path, notice: 'Something went wrong', :alert => I18n.t('errors.general_msg', :msg => "#{error} " + I18n.t('errors.check_tax_number'))
+    else
+      raise RecordInvalid
     end
+  rescue => error
+    redirect_back fallback_location: root_path, notice: 'Something went wrong', alert: I18n.t('errors.general_msg', msg: "#{error} " + I18n.t('errors.check_tax_number'))
   end
 
   def destroy
@@ -27,7 +29,7 @@ class GroupOrderInvoicesController < ApplicationController
   def create
     go = GroupOrder.find(params[:group_order])
     @order = go.order
-    goi = GroupOrderInvoice.find_or_create_by!(group_order_id: go.id)
+    GroupOrderInvoice.find_or_create_by!(group_order_id: go.id)
     respond_to do |format|
       format.js
     end

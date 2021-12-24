@@ -63,7 +63,6 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.group_order_invoice.subject', group: @group.name, supplier: @supplier)
   end
 
-
   # Sends order result for specific Ordergroup
   def order_result(user, group_order)
     @order        = group_order.order

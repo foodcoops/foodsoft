@@ -172,7 +172,6 @@ Rails.application.routes.draw do
         get :unpaid, on: :collection
       end
 
-
       resources :links, controller: 'financial_links', only: [:create, :show] do
         collection do
           get :incomplete

@@ -1,5 +1,4 @@
 class GroupOrderInvoice < ApplicationRecord
-
   belongs_to :group_order
   validates_presence_of :group_order
   validates_uniqueness_of :invoice_number
@@ -8,10 +7,10 @@ class GroupOrderInvoice < ApplicationRecord
 
   def generate_invoice_number(count)
     trailing_number = count.to_s.rjust(4, '0')
-    unless  GroupOrderInvoice.find_by(invoice_number: Time.now.strftime("%Y%m%d") + trailing_number)
-      Time.now.strftime("%Y%m%d") + trailing_number
-    else
+    if GroupOrderInvoice.find_by(invoice_number: Time.now.strftime("%Y%m%d") + trailing_number)
       generate_invoice_number(count.to_i + 1)
+    else
+      Time.now.strftime("%Y%m%d") + trailing_number
     end
   end
 
@@ -44,7 +43,7 @@ class GroupOrderInvoice < ApplicationRecord
     invoice_data[:order_articles] = {}
     group_order.order_articles.each do |order_article|
       # Get the result of last time ordering, if possible
-      goa = group_order.group_order_articles.detect { |goa| goa.order_article_id == order_article.id }
+      goa = group_order.group_order_articles.detect { |tmp_goa| tmp_goa.order_article_id == order_article.id }
 
       # Build hash with relevant data
       invoice_data[:order_articles][order_article.id] = {
@@ -55,6 +54,5 @@ class GroupOrderInvoice < ApplicationRecord
       }
     end
     invoice_data
-
   end
 end
