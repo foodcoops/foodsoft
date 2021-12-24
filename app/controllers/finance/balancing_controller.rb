@@ -5,7 +5,7 @@ class Finance::BalancingController < Finance::BaseController
 
   def new
     @order = Order.find(params[:order_id])
-    flash.now.alert = t('finance.balancing.new.alert') if @order.closed?
+    flash.now.alert = t('finance.balancing.new.alert') if @order.closed? && flash[:alert].blank?
     @comments = @order.comments
 
     @articles = @order.order_articles.ordered_or_member.includes(:article, :article_price,
@@ -81,21 +81,24 @@ class Finance::BalancingController < Finance::BaseController
     @order = Order.find(params[:id])
     @type = FinancialTransactionType.find_by_id(params.permit(:type)[:type])
     @order.close!(@current_user, @type)
-    note =  t('finance.balancing.close.notice')
+    note = t('finance.balancing.close.notice')
     if @order.closed?
-      if FoodsoftConfig[:group_order_invoices]&.[](:use) && FoodsoftConfig[:contact]&.[](:tax_number)
+      alert = t('finance.balancing.close.alert')
+      if FoodsoftConfig[:group_order_invoices]&.[](:use)
         @order.group_orders.each do |go|
+          alert = t('finance.balancing.close.settings_not_set')
           goi = GroupOrderInvoice.find_or_create_by!(group_order_id: go.id)
           if goi.save!
             NotifyGroupOrderInvoiceJob.perform_later(goi)
-            note =  t('finance.balancing.close.notice_mail')
+            note = t('finance.balancing.close.notice_mail')
           end
         end
       end
     end
+    alert ||= t('finance.balancing.close.alert')
     redirect_to finance_order_index_url, notice: note
-    rescue => error
-    redirect_to new_finance_order_url(order_id: @order.id), notice: note, alert: t('finance.balancing.close.alert', message: error.message)
+  rescue => error
+    redirect_to new_finance_order_url(order_id: @order.id), notice: note, alert: alert, msg: error.message
   end
 
   # Close the order directly, without automaticly updating ordergroups account balances
