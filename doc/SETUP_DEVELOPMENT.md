@@ -69,7 +69,18 @@ If instead you just want to run Foodsoft without changing its code, please refer
         # CentOS/Redhat
         sudo yum install v8 community-mysql-devel libxml2-devel libxslt-devel libffi-devel readline-devel file-devel
 
-3. Install Ruby dependencies:
+3. Install Ruby dependencies: 
+   Change your current directory to the foodsoft directory, e.g.:
+
+        cd foodsoft
+        
+   If you type `ls`, you should see a file `Gemfile` among others.
+   
+   Ensure that the command `/usr/bin/mkdir` is available, otherwise create a symbolic link:
+
+        sudo ln -s /bin/mkdir /usr/bin/mkdir
+   
+   Now you can start to install the Ruby dependencies: 
 
         bundle install
 
