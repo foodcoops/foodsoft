@@ -118,9 +118,9 @@ default: &defaults
   #      label: Birthday
   #      as: date_picker
 
-  # Uncomment to add tracking code for web statistics, e.g. for Piwik. (Added to bottom of page)
+  # Uncomment to add tracking code for web statistics, e.g. for Matomo. (Added to bottom of page)
   #webstats_tracking_code: |
-  #  <!-- Piwik -->
+  #  <!-- Matomo -->
   #  ......
 
   # email address to be used as sender
