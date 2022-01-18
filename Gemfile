@@ -117,3 +117,7 @@ group :test do
   gem 'apivore', require: false
   gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
 end
+
+# Use a local Gemfile to include custom dependencies that might be relevant for
+# hosting environments or developement.
+eval_gemfile 'Gemfile.local' if File.exist? 'Gemfile.local'
