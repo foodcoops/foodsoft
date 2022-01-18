@@ -257,6 +257,7 @@ class FoodsoftConfig
         use_apple_points: true,
         # English is the default language, and this makes it show up as default.
         default_locale: 'en',
+        time_zone: 'Berlin',
         currency_unit: '€',
         currency_space: true,
         foodsoft_url: 'https://github.com/foodcoops/foodsoft',
