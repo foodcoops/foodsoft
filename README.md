@@ -27,6 +27,10 @@ Or play around directly from your browser via
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mob-programming-meetup/foodsoft)
 
+Optionally an initial database (here seeded with `small.en`) can be loaded by running
+
+    docker-compose-dev run --rm foodsoft \
+      bundle exec rake db:schema:load db:seed:small.en
 
 Deploying
 ---------
