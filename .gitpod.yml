@@ -6,16 +6,16 @@ tasks:
   - command: |
       docker-compose -f docker-compose-dev.yml up
 
-# ports:
-#   - port: 5000
-#     onOpen: ignore
-#   - port: 5601
-#     onOpen: open-browser
+ports:
+  - port: 3000
+    onOpen: open-browser
+  - port: 2080
+    onOpen: open-browser
+  - port: 1080
+    onOpen: open-browser
 #   - port: 9200
 #     onOpen: open-preview
 #   - port: 9300
-#     onOpen: ignore
-#   - port: 9600
 #     onOpen: ignore
 
 vscode:
