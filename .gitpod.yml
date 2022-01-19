@@ -8,11 +8,11 @@ tasks:
 
 ports:
   - port: 3000
-    onOpen: open-browser
+    onOpen: open-preview
   - port: 2080
-    onOpen: open-browser
+    onOpen: open-preview
   - port: 1080
-    onOpen: open-browser
+    onOpen: open-preview
 #   - port: 9200
 #     onOpen: open-preview
 #   - port: 9300
