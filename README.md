@@ -29,7 +29,7 @@ Or play around directly from your browser via
 
 Optionally an initial database (here seeded with `small.en`) can be loaded by running
 
-    docker-compose-dev run --rm foodsoft \
+    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
       bundle exec rake db:schema:load db:seed:small.en
 
 Deploying

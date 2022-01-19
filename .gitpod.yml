@@ -7,7 +7,6 @@ tasks:
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle install
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake foodsoft:setup_development_docker
       docker-compose -f docker-compose-dev.yml up
-      alias docker-compose-dev='docker-compose -f docker-compose-dev.yml'
 
 
 ports:
@@ -17,10 +16,6 @@ ports:
     onOpen: open-preview
   - port: 1080
     onOpen: open-preview
-#   - port: 9200
-#     onOpen: open-preview
-#   - port: 9300
-#     onOpen: ignore
 
 vscode:
   extensions:
