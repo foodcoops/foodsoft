@@ -3,6 +3,9 @@
 tasks:
   - init: |
       docker-compose -f docker-compose-dev.yml pull
+      docker-compose -f docker-compose-dev.yml up -d mariadb
+      docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle install
+      docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake foodsoft:setup_development_docker
   - command: |
       docker-compose -f docker-compose-dev.yml up
 
