@@ -6,8 +6,8 @@ tasks:
       docker-compose -f docker-compose-dev.yml up -d mariadb
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle install
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake foodsoft:setup_development_docker
-  - command: |
       docker-compose -f docker-compose-dev.yml up
+
 
 ports:
   - port: 3000
