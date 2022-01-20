@@ -23,9 +23,13 @@ Get foodsoft [running locally](doc/SETUP_DEVELOPMENT.md),
 then visit our [Developing Guidelines](https://github.com/foodcoops/foodsoft/wiki/Developing-Guidelines)
 page on the wiki.
 
-Or play around directly from your browser via 
+### Quickstart
+
+Alternatively, you can play around directly from your browser via 
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mob-programming-meetup/foodsoft)
+
+*Default User/Password:* admin/secret
 
 Optionally an initial database (here seeded with `small.en`) can be loaded by running
 
