@@ -1,4 +1,4 @@
-# This configuration file was copy and pasted 
+# This configuration file was mainly inspired by ./doc/SETUP_DEVELOPMENT_DOCKER.md
 
 tasks:
   - init: |
