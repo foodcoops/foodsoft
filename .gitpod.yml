@@ -6,6 +6,14 @@ tasks:
       docker-compose -f docker-compose-dev.yml up -d mariadb
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle install
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake foodsoft:setup_development_docker
+      touch /workspace/prebuild.done
+  - command: |
+      until [ -f /workspace/prebuild.done ]
+      do
+          echo "waiting for prebuild.done file..."
+          sleep 1
+      done
+      echo "prebuild.done file found"
       docker-compose -f docker-compose-dev.yml up
 
 
