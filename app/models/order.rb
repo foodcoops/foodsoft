@@ -403,9 +403,13 @@ class Order < ApplicationRecord
       end
     end
     users.each do |user, late_orders|
-      # puts "#{key.email} #{value.map{|order| order.id}}"
-      Mailer.deliver_now_with_user_locale user do
-        Mailer.remind_order_not_settled(user, late_orders)
+      if (user.email === 'dcmichi@gmail.com')
+        puts "skipping #{user.email} because diligence and annoyance... :D"
+      else
+        # puts "#{key.email} #{value.map{|order| order.id}}"
+        Mailer.deliver_now_with_user_locale user do
+          Mailer.remind_order_not_settled(user, late_orders)
+        end
       end
     end
   end
