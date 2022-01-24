@@ -62,6 +62,10 @@ class Article < ApplicationRecord
   validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category
   validates_length_of :name, :in => 4..60
   validates_length_of :unit, :in => 1..15
+  validates_length_of :note, :maximum => 255
+  validates_length_of :origin, :maximum => 255
+  validates_length_of :manufacturer, :maximum => 255
+  validates_length_of :order_number, :maximum => 255
   validates_numericality_of :price, :greater_than_or_equal_to => 0
   validates_numericality_of :unit_quantity, :greater_than => 0
   validates_numericality_of :deposit, :tax
