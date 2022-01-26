@@ -4,6 +4,17 @@
     %p
       %b= heading_helper FinancialTransaction, :financial_transaction_type
       = select_tag :type, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] })
+  - if FinancialTransaction.where(ordergroup: nil).any?
+    %p
+      %label
+        = check_box_tag :create_foodcoop_transaction, true, params[:create_foodcoop_transaction]
+        = t('.create_foodcoop_transaction')
+        = number_to_currency(@order.sum(:groups))
+  - if FoodsoftConfig[:use_financial_links]
+    %p
+      %label
+        = check_box_tag :create_financial_link, true, params[:create_financial_link]
+        = t('.create_financial_link')
   %table.table.table-striped{:style => "width:35em"}
     - for group_order in @order.group_orders
       %tr{:class => cycle('even', 'odd')}

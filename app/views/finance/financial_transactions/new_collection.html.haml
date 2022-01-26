@@ -73,7 +73,7 @@
       %label
         = check_box_tag :create_foodcoop_transaction, true, params[:create_foodcoop_transaction]
         = t('.create_foodcoop_transaction')
-  - if BankAccount.any?
+  - if FoodsoftConfig[:use_financial_links]
     %p
       %label
         = check_box_tag :create_financial_link, true, params[:create_financial_link]
