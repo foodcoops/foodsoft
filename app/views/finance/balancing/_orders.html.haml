@@ -21,7 +21,7 @@
           %td= show_user(order.updated_by)
           %td{id: "generate-invoice#{order.id}"}
             - if order.closed?
-              -if FoodsoftConfig[:contact][:tax_number]
+              -if FoodsoftConfig[:contact][:tax_number] && order.ordergroups.present?
                 = render :partial => 'group_order_invoices/links', locals:{order: order}
               -else
                 = I18n.t('activerecord.attributes.group_order_invoice.tax_number_not_set')

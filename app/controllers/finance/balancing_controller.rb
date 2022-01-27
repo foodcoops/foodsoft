@@ -84,7 +84,7 @@ class Finance::BalancingController < Finance::BaseController
     note = t('finance.balancing.close.notice')
     if @order.closed?
       alert = t('finance.balancing.close.alert')
-      if FoodsoftConfig[:group_order_invoices]&.[](:use)
+      if FoodsoftConfig[:group_order_invoices]&.[](:use_automatic_invoices)
         @order.group_orders.each do |go|
           alert = t('finance.balancing.close.settings_not_set')
           goi = GroupOrderInvoice.find_or_create_by!(group_order_id: go.id)
