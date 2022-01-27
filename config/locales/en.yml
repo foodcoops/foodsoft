@@ -304,6 +304,7 @@ en:
         emails_title: Sending email
       tab_payment:
         schedule_title: Ordering schedule
+        group_order_invoices:         Group order invoices
       tab_security:
         default_roles_title: Access to
         default_roles_paragraph: By default every member of the foodcoop has access to the following areas.
@@ -671,8 +672,9 @@ en:
         no_automatic_distribution: No automatic distribution
       use_apple_points: Apple points
       group_order_invoices:
-        use: Automatically send group order invoices when an order is settled
-        payment_method: Payment method for group order invoices
+        use: Send automatically via mail after oder settlement
+        payment_method: Payment method
+        vat_exempt: This foodcoopis VAT exempt
       use_boxfill: Box-fill phase
       use_iban: Use IBAN
       use_nick: Use nicknames

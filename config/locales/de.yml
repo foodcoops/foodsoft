@@ -304,6 +304,7 @@ de:
         emails_title: E-Mails versenden
       tab_payment:
         schedule_title: Bestellschema
+        group_order_invoices: Bestellgruppenrechnungen
       tab_security:
         default_roles_title: Zugriff auf
         default_roles_paragraph: Jedes Mitglied der Foodcoop hat automatisch Zugriff auf folgende Bereiche.
@@ -670,8 +671,9 @@ de:
         no_automatic_distribution: Keine automatische Verteilung
       use_apple_points: Apfelpunkte verwenden
       group_order_invoices:
-        use: Bestellgruppen Rechnungen automatisch bei Abrechnung einer Bestellung versenden
-        payment_method: Zahlungsart für Bestellgruppenrechnungen
+        use: Automatisch bei Abrechnung per Mail versenden
+        payment_method: Zahlungsart
+        vat_exempt: Diese Foodcoop ist MwSt. befreit
       use_boxfill: Kistenauffüllphase
       use_iban: IBAN verwenden
       use_nick: Benutzernamen verwenden
