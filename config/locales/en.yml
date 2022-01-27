@@ -583,6 +583,9 @@ en:
       email_from: Emails will appear to be from this email address. Leave empty to use the foodcoop's contact address.
       email_replyto: Set this when you want to receive replies from emails sent by Foodsoft on a different address than the above.
       email_sender: Emails will appear to be sent from this email address. To avoid emails sent being classified as spam, the webserver may need to be registered in the SPF record of the email address's domain.
+      use_automatic_invoices: A listing of the invoice items is made without explicit display of VAT and the invoice receives the necessary addition regarding the small business regulation §19 (applies to Germany)
+      payment_method: Payment type is declared on the order group invoice
+      vat_exempt: A listing of the invoice items is made without explicit  display of VAT and the invoice contains the necessary addition regarding the German Kleinunternehmerregelung §19 UStG (attention! FoodCoop marge not included in nvoice).
       help_url: Documentation website.
       homepage: Website of your foodcoop.
       ignore_browser_locale: Ignore the language of user's computer when the user has not chosen a language yet.
@@ -672,7 +675,7 @@ en:
         no_automatic_distribution: No automatic distribution
       use_apple_points: Apple points
       group_order_invoices:
-        use: Send automatically via mail after oder settlement
+        use_automatic_invoices: Send automatically via mail after oder settlement
         payment_method: Payment method
         vat_exempt: This foodcoopis VAT exempt
       use_boxfill: Box-fill phase
@@ -744,6 +747,8 @@ en:
       invoice_number: 'Invoice number: %{invoice_number}'
       markup_included: incl Foodcoop Marge on gross price %{marge}%
       payment_method: 'Payment_method: %{payment_method}'
+      small_business_regulation: As a small entrepreneur in the sense of §19 para. 1 of the Umsatzsteuergesetz (UStG), no value added tax is charged.
+      sum_to_pay: Total sum
       sum_to_pay_net: Total sum (net)
       sum_to_pay_gross: Total sum (gross)
       table_headline: 'The following items will be charged for the order:'
@@ -751,16 +756,21 @@ en:
       tax_included: incl. VAT %{tax}%
       tax_number: 'Tax number: %{number}'
       title: Invoice for order at %{supplier}
+      vat_exempt_rows:
+        - Name
+        - Quantity
+        - Unit price
+        - Total price
       no_price_markup_rows:
         - Name
-        - Amount
+        - Quantity
         - Unit price (net)
         - Total price (net)
         - VAT
         - Total price (gross)
       price_markup_rows:
         - Name
-        - Amount
+        - Quantity
         - Unit price (net)
         - Total price (net)
         - VAT

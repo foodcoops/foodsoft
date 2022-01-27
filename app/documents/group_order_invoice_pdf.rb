@@ -64,6 +64,64 @@ class GroupOrderInvoicePdf < RenderPDF
     move_down 5
 
     #------------- Table Data -----------------------
+
+    @group_order = GroupOrder.find(@options[:group_order].id)
+    if (FoodsoftConfig[:group_order_invoices][:vat_exempt])
+      body_for_vat_exempt
+    else
+      body_with_vat
+    end
+  end
+  
+  def body_for_vat_exempt
+    total_gross = 0
+    data = [I18n.t('documents.group_order_invoice_pdf.vat_exempt_rows')]
+    move_down 10
+    group_order_articles = GroupOrderArticle.where(group_order_id: @group_order.id)
+    group_order_articles.each do |goa|
+      # if no unit is received, nothing is to be charged
+      next if goa.result.to_i == 0
+      goa_total_gross = goa.result * goa.order_article.price.gross_price
+      data << [goa.order_article.article.name,
+               goa.result.to_i,
+               number_to_currency(goa.order_article.price.gross_price),
+               number_to_currency(goa.total_price)]
+      total_gross += goa_total_gross
+    end
+
+    table data, position: :left, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
+      table.header = true
+      table.position = :center
+      table.cells.border_width = 1
+      table.cells.border_color = '666666'
+
+      table.row(0).column(1).width = 40
+      table.row(0).border_bottom_width = 2
+      table.columns(1).align = :right
+      table.columns(1..6).align = :right
+    end
+
+    move_down 5
+    sum = []
+    sum << [nil, nil, I18n.t('documents.group_order_invoice_pdf.sum_to_pay'), number_to_currency(total_gross)]
+    # table for sum
+    indent(200) do
+      table sum, position: :center, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
+        sum.length.times do |count|
+          table.row(count).columns(0..3).borders = []
+        end
+        table.row(sum.length - 1).columns(0..2).borders = []
+        table.row(sum.length - 1).border_bottom_width = 2
+        table.row(sum.length - 1).columns(3).borders = [:bottom]
+      end
+    end
+
+    move_down 25
+    text I18n.t('documents.group_order_invoice_pdf.small_business_regulation')
+    move_down 10
+  end
+
+  def body_with_vat
     total_gross = 0
     total_net = 0
     # Articles
@@ -71,7 +129,6 @@ class GroupOrderInvoicePdf < RenderPDF
     tax_hash_net = Hash.new(0) # for summing up article net prices grouped into vat percentage
     tax_hash_gross = Hash.new(0) # same here with gross prices
 
-    group_order = GroupOrder.find(@options[:group_order].id)
     marge = FoodsoftConfig[:price_markup]
 
     # data table looks different when price_markup > 0
@@ -80,7 +137,7 @@ class GroupOrderInvoicePdf < RenderPDF
            else
              [I18n.t('documents.group_order_invoice_pdf.price_markup_rows', marge: marge)]
            end
-    goa_tax_hash = GroupOrderArticle.where(group_order_id: group_order.id).find_each.group_by { |oat| oat.order_article.price.tax }
+    goa_tax_hash = GroupOrderArticle.where(group_order_id: @group_order.id).find_each.group_by { |oat| oat.order_article.price.tax }
     goa_tax_hash.each do |tax, group_order_articles|
       group_order_articles.each do |goa|
         # if no unit is received, nothing is to be charged
@@ -136,6 +193,10 @@ class GroupOrderInvoicePdf < RenderPDF
       table.row(sum.length - 1).columns(5).borders = [:bottom]
     end
 
-    move_down 15
+    if(FoodsoftConfig[:group_order_invoices][:vat_exempt])
+      move_down 15
+      text I18n.t('documents.group_order_invoice_pdf.small_business_regulation')
+    end
+    move_down 10
   end
 end
