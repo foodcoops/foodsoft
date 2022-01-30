@@ -13,3 +13,5 @@ After opening the workspace, follow these steps to complete the setup:
 ```
 
 > Note: The gitpod env is setup to open the front-ends using a preview browser built into the workspace. You can also open these in browser tabs by clicking the icon next to address bar. Refer gitpod.io docs about [whitelisting workspaces](https://www.gitpod.io/docs/configure/browser-settings#browser-settings) to prevent pop-up blockers from blocking these tabs.
+
+The main configuration of the Gitpod workspace is in [/.gippod.yml](/.gitpod.yml). Check out https://www.gitpod.io/docs/config-gitpod-file for more information. 
