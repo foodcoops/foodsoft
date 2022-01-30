@@ -21,9 +21,9 @@ ports:
   - port: 3000
     onOpen: open-preview
   - port: 2080
-    onOpen: open-preview
+    onOpen: notify
   - port: 1080
-    onOpen: open-preview
+    onOpen: notify
 
 vscode:
   extensions:
