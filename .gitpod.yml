@@ -1,9 +1,9 @@
 # This configuration file was mainly inspired by ./doc/SETUP_DEVELOPMENT_DOCKER.md
 
-image: ruby:2.6 # should be the same version as in /Dockerfile-dev 
-
 tasks:
   - init: |
+      rvm install 2.6.9 # should be similar as in /Dockerfile-dev 
+      rvm use 2.6.9
       docker-compose -f docker-compose-dev.yml pull
       docker-compose -f docker-compose-dev.yml up -d mariadb
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle install
