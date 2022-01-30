@@ -7,6 +7,7 @@ tasks:
       rvm install 2.6.9 # should be similar as in /Dockerfile-dev 
       rvm use 2.6.9
       gem install bundler:1.17.3
+      apt-get install -y libmagic-dev
       bundle install
   - name: Docker
     init: |
