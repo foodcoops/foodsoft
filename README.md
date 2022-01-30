@@ -23,18 +23,11 @@ Get foodsoft [running locally](doc/SETUP_DEVELOPMENT.md),
 then visit our [Developing Guidelines](https://github.com/foodcoops/foodsoft/wiki/Developing-Guidelines)
 page on the wiki.
 
-### Quickstart
-
-Alternatively, you can play around directly from your browser via 
+Get foodsoft running in gitpod
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mob-programming-meetup/foodsoft)
 
-*Default User/Password:* admin/secret
-
-Optionally an initial database (here seeded with `small.en`) can be loaded by running
-
-    docker-compose -f docker-compose-dev.yml run --rm foodsoft \
-      bundle exec rake db:schema:load db:seed:small.en
+Follow these [instructions](doc/SETUP_GITPOD.md) to complete setup from within the workspace. 
 
 Deploying
 ---------
