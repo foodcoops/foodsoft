@@ -2,20 +2,27 @@
 
 tasks:
   - init: |
+      # install correct ruby+tools versions
       rvm install 2.6.9 # should be similar as in /Dockerfile-dev 
       rvm use 2.6.9
+      gem install bundler:1.17.3
+      gem install rake:13.0.3
+      # init docker containers
       docker-compose -f docker-compose-dev.yml pull
       docker-compose -f docker-compose-dev.yml up -d mariadb
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle install
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake foodsoft:setup_development_docker
+      # sync init done
       touch /workspace/prebuild.done
   - command: |
+      # wait for init done
       until [ -f /workspace/prebuild.done ]
       do
           echo "waiting for prebuild.done file..."
           sleep 1
       done
       echo "prebuild.done file found"
+      # start docker containers
       docker-compose -f docker-compose-dev.yml up
 
 
