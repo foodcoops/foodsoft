@@ -1,4 +1,5 @@
 class BankTransaction < ApplicationRecord
+  include LocalizeInput
   # @!attribute external_id
   #   @return [String] Unique Identifier of the transaction within the bank account.
   # @!attribute date

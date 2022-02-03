@@ -1,5 +1,6 @@
 class Invoice < ApplicationRecord
   include CustomFields
+  include LocalizeInput
 
   belongs_to :supplier
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
