@@ -1,10 +1,4 @@
 GIT
-  remote: https://github.com/carchrae/localize_input.git
-  revision: 597e33bb42a3b0fd58c3ea7d4f5a208c2911b43d
-  specs:
-    localize_input (0.1.0)
-
-GIT
   remote: https://github.com/technoweenie/acts_as_versioned.git
   revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
   specs:
@@ -606,7 +600,6 @@ DEPENDENCIES
   kaminari
   less-rails
   listen
-  localize_input!
   mailcatcher
   meta_request
   midi-smtp-server

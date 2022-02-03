@@ -1,6 +1,8 @@
 # financial transactions are the foodcoop internal financial transactions
 # only ordergroups have an account  balance and are happy to transfer money
 class FinancialTransaction < ApplicationRecord
+  include LocalizeInput
+
   belongs_to :ordergroup, optional: true
   belongs_to :user
   belongs_to :financial_link, optional: true

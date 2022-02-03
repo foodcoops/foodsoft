@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  include LocalizeInput
   include PriceCalculation
 
   # @!attribute name

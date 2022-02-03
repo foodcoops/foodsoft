@@ -2,6 +2,8 @@
 # The chronologically order of the Ordergroup - activity are stored in GroupOrderArticleQuantity
 #
 class GroupOrderArticle < ApplicationRecord
+  include LocalizeInput
+
   belongs_to :group_order
   belongs_to :order_article
   has_many   :group_order_article_quantities, dependent: :destroy
