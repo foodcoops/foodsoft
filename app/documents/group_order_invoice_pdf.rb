@@ -66,7 +66,7 @@ class GroupOrderInvoicePdf < RenderPDF
     #------------- Table Data -----------------------
 
     @group_order = GroupOrder.find(@options[:group_order].id)
-    if (FoodsoftConfig[:group_order_invoices][:vat_exempt])
+    if FoodsoftConfig[:group_order_invoices][:vat_exempt]
       body_for_vat_exempt
     else
       body_with_vat
