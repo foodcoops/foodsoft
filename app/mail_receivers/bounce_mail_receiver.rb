@@ -1,5 +1,4 @@
 class BounceMailReceiver
-
   def self.regexp
     /bounce\+(?<local>.*)=(?<domain>[^=]+)/
   end
@@ -16,5 +15,4 @@ class BounceMailReceiver
                               attachment_mime: 'message/rfc822',
                               attachment_data: data
   end
-
 end

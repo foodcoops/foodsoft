@@ -29,7 +29,7 @@ module Foodsoft
 
     # Internationalization.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
-    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '{??,???}{-*,}.yml')).map{|p| p.basename('.yml').to_s }
+    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '{??,???}{-*,}.yml')).map { |p| p.basename('.yml').to_s }
     config.i18n.default_locale = :en
     config.i18n.fallbacks = [:en]
 
@@ -47,6 +47,9 @@ module Foodsoft
     # TODO Disable this. Uncommenting this line will currently cause rspec to fail.
     config.action_controller.permit_all_parameters = true
 
+    config.active_job.queue_adapter     = :resque
+    config.active_job.queue_name_prefix = ENV.fetch('JOB_QUEUE_PREFIX', "foodsoft_#{Rails.env}")
+
     # Enable the asset pipeline
     config.assets.enabled = true
 
@@ -58,7 +61,7 @@ module Foodsoft
     config.assets.initialize_on_precompile = true
 
     # Load legacy scripts from vendor
-    config.assets.precompile += [ 'vendor/assets/javascripts/*.js' ]
+    config.assets.precompile += ['vendor/assets/javascripts/*.js']
 
     # CORS for API
     config.middleware.insert_before 0, Rack::Cors do

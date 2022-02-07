@@ -1,7 +1,6 @@
 require "email_reply_trimmer"
 
 class MessagesMailReceiver
-
   def self.regexp
     /(?<message_id>\d+)\.(?<user_id>\d+)\.(?<hash>\w+)/
   end
@@ -37,9 +36,9 @@ class MessagesMailReceiver
     raise BlankBodyException if body.empty?
 
     message = @user.send_messages.new body: body,
-      group: @message.group,
-      private: @message.private,
-      received_email: data
+                                      group: @message.group,
+                                      private: @message.private,
+                                      received_email: data
     if @message.reply_to
       message.reply_to_message = @message.reply_to_message
     else
@@ -53,7 +52,7 @@ class MessagesMailReceiver
     message.add_recipients [@message.sender_id]
 
     message.save!
-    Resque.enqueue(MessageNotifier, FoodsoftConfig.scope, "message_deliver", message.id)
+    DeliverMessageJob.perform_later(message)
   end
 
   private
@@ -73,11 +72,8 @@ class MessagesMailReceiver
   end
 
   class BlankBodyException < MidiSmtpServer::SmtpdException
-
     def initialize(msg = nil)
       super msg, 541, 'The recipient address rejected your message because of a blank plain body'
     end
-
   end
-
 end

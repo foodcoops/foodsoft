@@ -32,15 +32,19 @@ fr:
         price: Prix HT
         tax: TVA
         unit_quantity: Unités par lot
+      bank_transaction:
+        iban: IBAN
       delivery:
         date: Date de réapprovisionnement
         supplier: Fournisseur-e
       document:
         created_at: Créé le
         created_by: Crée par
+        mime: Type MIME
         name: Nom
       financial_transaction:
         amount: Montant
+        created_on: Date
         ordergroup: Cellule
         user: Créateur-trice
       group_order:

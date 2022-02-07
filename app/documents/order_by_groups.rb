@@ -1,13 +1,11 @@
-# encoding: utf-8
 class OrderByGroups < OrderPdf
-
   def filename
     I18n.t('documents.order_by_groups.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
   end
 
   def title
     I18n.t('documents.order_by_groups.title', :name => order.name,
-      :date => order.ends.strftime(I18n.t('date.formats.default')))
+                                              :date => order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
@@ -25,14 +23,15 @@ class OrderByGroups < OrderPdf
 
       each_group_order_article_for_ordergroup(oa_id) do |goa|
         dimrows << rows.length if goa.result == 0
-        rows <<  [goa.order_article.article.name,
-                  goa.group_order.order.name,
-                  group_order_article_quantity_with_tolerance(goa),
-                  group_order_article_result(goa),
-                  order_article_price_per_unit(goa.order_article),
-                  number_to_currency(goa.total_price)]
+        rows << [goa.order_article.article.name,
+                 goa.group_order.order.name,
+                 group_order_article_quantity_with_tolerance(goa),
+                 group_order_article_result(goa),
+                 order_article_price_per_unit(goa.order_article),
+                 number_to_currency(goa.total_price)]
       end
       next unless rows.length > 1
+
       rows << [nil, nil, nil, nil, nil, number_to_currency(oa_total)]
       if has_transport
         rows << [GroupOrder.human_attribute_name(:transport), nil, nil, nil, nil, number_to_currency(oa_transport)]
@@ -64,5 +63,4 @@ class OrderByGroups < OrderPdf
       end
     end
   end
-
 end

@@ -29,7 +29,7 @@ if defined? RubyUnits
 
   # we use pc for piece, not parsec
   RubyUnits::Unit.redefine!('parsec') do |unit|
-    unit.aliases = unit.aliases.reject {|u| u=='pc'}
+    unit.aliases = unit.aliases.reject { |u| u == 'pc' }
     unit.display_name = 'parsec'
   end
 
@@ -37,7 +37,7 @@ if defined? RubyUnits
   # default precision of 8 which same as all database definitions in db/migrate/20131213002332_*.rb
   class Rational
     alias orig_to_d to_d
-    def to_d(precision=8)
+    def to_d(precision = 8)
       orig_to_d(precision)
     end
   end

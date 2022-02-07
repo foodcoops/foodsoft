@@ -1,5 +1,4 @@
 class Foodcoop::UsersController < ApplicationController
-
   def index
     @users = User.undeleted.natural_order
 
@@ -17,5 +16,4 @@ class Foodcoop::UsersController < ApplicationController
       format.js { render :layout => false } # index.js.erb
     end
   end
-
 end

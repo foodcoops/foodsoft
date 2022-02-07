@@ -1,7 +1,6 @@
 require 'factory_bot'
 
 FactoryBot.define do
-
   factory :invoice do
     supplier
     number { rand(1..99999) }
@@ -12,5 +11,4 @@ FactoryBot.define do
       invoice.supplier.reload
     end
   end
-
 end

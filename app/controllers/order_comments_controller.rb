@@ -1,5 +1,4 @@
 class OrderCommentsController < ApplicationController
-
   def new
     @order = Order.find(params[:order_id])
     @order_comment = @order.comments.build(:user => current_user)

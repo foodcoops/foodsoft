@@ -4,7 +4,7 @@ Foodsoft
 [![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.svg?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
 [![Docs Status](https://inch-ci.org/github/foodcoops/foodsoft.svg?branch=master)](http://inch-ci.org/github/foodcoops/foodsoft)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.svg)](https://codeclimate.com/github/foodcoops/foodsoft)
-[![Docker Status](https://img.shields.io/docker/build/foodcoops/foodsoft.svg)](https://hub.docker.com/r/foodcoops/foodsoft)
+[![Docker Status](https://img.shields.io/docker/cloud/build/foodcoops/foodsoft.svg)](https://hub.docker.com/r/foodcoops/foodsoft)
 [![Documentation](https://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/foodcoops/foodsoft)
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
@@ -28,7 +28,7 @@ Deploying
 ---------
 
 Setup foodsoft to [run in production](doc/SETUP_PRODUCTION.md), or join an existing
-[hosting platform](https://foodcoops.github.io/foodsoft-hosting/).
+[hosting platform](https://foodcoops.net/foodsoft-hosting/).
 
 
 License
@@ -52,7 +52,7 @@ files are marked as public domain in the file header.
 
 If you have any remaining questions, please
 [open an issue](https://github.com/foodcoops/foodsoft/issues/new) or contact
-the [mailing list](http://foodsoft.51229.x6.nabble.com/foodsoft-discuss-f5.html).
+the [mailing list](http://foodsoft.274.s1.nabble.com/foodsoft-discuss-f5.html).
 
 Please see [LICENSE](LICENSE.md) for the full and authoritative text. Some
 bundled third-party components have [other licenses](vendor/README.md).

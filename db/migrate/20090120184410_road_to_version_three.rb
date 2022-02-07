@@ -1,4 +1,3 @@
-
 class OrderGroup < Group; end # Needed for renaming of OrderGroup to Ordergroup
 
 class RoadToVersionThree < ActiveRecord::Migration[4.2]
@@ -30,7 +29,7 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     end
 
     # == Ordergroups
-    remove_column :groups, :actual_size        # Useless, desposits are better stored within a transaction.note
+    remove_column :groups, :actual_size # Useless, desposits are better stored within a transaction.note
     # rename from OrderGroup to Ordergroup
     rename_column :financial_transactions, :order_group_id, :ordergroup_id
     rename_column :group_orders, :order_group_id, :ordergroup_id
@@ -49,7 +48,7 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
       contact = ordergroup.users.first
       if contact
         ordergroup.update_attributes :contact_person => contact.name,
-          :contact_phone => contact.phone, :contact_address => contact.address
+                                     :contact_phone => contact.phone, :contact_address => contact.address
       end
     end
     remove_column :users, :address
@@ -66,7 +65,7 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
       t.text :note
       t.datetime :starts
       t.datetime :ends
-      t.string :state, :default => "open"   # Statemachine ... open -> finished -> closed
+      t.string :state, :default => "open" # Statemachine ... open -> finished -> closed
       t.integer :lock_version, :default => 0, :null => false
       t.integer :updated_by_user_id
     end
@@ -81,13 +80,13 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
       t.date :paid_on
       t.text :note
       t.decimal :amount, :null => false, :precision => 8, :scale => 2, :default => 0.0
-      t.decimal :deposit, :precision => 8, :scale => 2, :default => 0.0,  :null => false
-      t.decimal :deposit_credit, :precision => 8, :scale => 2, :default => 0.0,  :null => false
+      t.decimal :deposit, :precision => 8, :scale => 2, :default => 0.0, :null => false
+      t.decimal :deposit_credit, :precision => 8, :scale => 2, :default => 0.0, :null => false
       t.timestamps
     end
 
     # == Delivery
-     create_table :deliveries do |t|
+    create_table :deliveries do |t|
       t.integer :supplier_id
       t.date :delivered_on
       t.datetime :created_at
@@ -118,11 +117,11 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     # Create price history for every Article
     Article.all.each do |a|
       a.article_prices.create :price => a.price, :tax => a.tax,
-        :deposit => a.deposit, :unit_quantity => a.unit_quantity
+                              :deposit => a.deposit, :unit_quantity => a.unit_quantity
     end
     # Every Article has now a Category. Fix it if neccessary.
     Article.all(:conditions => { :article_category_id => nil }).each do |article|
-        article.update_attribute(:article_category, ArticleCategory.first)
+      article.update_attribute(:article_category, ArticleCategory.first)
     end
     # order-articles
     add_column :order_articles, :article_price_id, :integer

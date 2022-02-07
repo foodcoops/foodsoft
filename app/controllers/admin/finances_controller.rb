@@ -15,5 +15,4 @@ class Admin::FinancesController < Admin::BaseController
     @financial_transaction_classes = FinancialTransactionClass.includes(:financial_transaction_types).order('name ASC')
     render :layout => false
   end
-
 end

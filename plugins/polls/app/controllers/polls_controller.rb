@@ -63,6 +63,7 @@ class PollsController < ApplicationController
     if @poll.one_vote_per_ordergroup
       ordergroup = current_user.ordergroup
       return redirect_to polls_path, alert: t('.no_ordergroup') unless ordergroup
+
       attributes = { ordergroup: ordergroup }
     else
       attributes = { user: current_user }
@@ -103,8 +104,8 @@ class PollsController < ApplicationController
     params
       .require(:poll)
       .permit(:name, :starts_date_value, :starts_time_value, :ends_date_value,
-        :ends_time_value, :description, :one_vote_per_ordergroup, :voting_method,
-        :multi_select_count, :min_points, :max_points, choices: [],
-        required_ordergroup_custom_fields: [], required_user_custom_fields: [])
+              :ends_time_value, :description, :one_vote_per_ordergroup, :voting_method,
+              :multi_select_count, :min_points, :max_points, choices: [],
+                                                             required_ordergroup_custom_fields: [], required_user_custom_fields: [])
   end
 end

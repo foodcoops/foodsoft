@@ -24,7 +24,7 @@ module Concerns::Auth
 
   def login(user)
     session[:user_id] = user.id
-    session[:scope] = FoodsoftConfig.scope  # Save scope in session to not allow switching between foodcoops with one account
+    session[:scope] = FoodsoftConfig.scope # Save scope in session to not allow switching between foodcoops with one account
     session[:locale] = user.locale
   end
 
@@ -56,18 +56,18 @@ module Concerns::Auth
       # We have an authenticated user, now check role...
       # Roles gets the user through his memberships.
       hasRole = case role
-      when 'admin'               then current_user.role_admin?
-      when 'finance'             then current_user.role_finance?
-      when 'article_meta'        then current_user.role_article_meta?
-      when 'pickups'             then current_user.role_pickups?
-      when 'suppliers'           then current_user.role_suppliers?
-      when 'orders'              then current_user.role_orders?
-      when 'finance_or_invoices' then (current_user.role_finance? || current_user.role_invoices?)
-      when 'finance_or_orders'   then (current_user.role_finance? || current_user.role_orders?)
-      when 'pickups_or_orders'   then (current_user.role_pickups? || current_user.role_orders?)
-      when 'any'                 then true  # no role required
-      else false                            # any unknown role will always fail
-      end
+                when 'admin'               then current_user.role_admin?
+                when 'finance'             then current_user.role_finance?
+                when 'article_meta'        then current_user.role_article_meta?
+                when 'pickups'             then current_user.role_pickups?
+                when 'suppliers'           then current_user.role_suppliers?
+                when 'orders'              then current_user.role_orders?
+                when 'finance_or_invoices' then (current_user.role_finance? || current_user.role_invoices?)
+                when 'finance_or_orders'   then (current_user.role_finance? || current_user.role_orders?)
+                when 'pickups_or_orders'   then (current_user.role_pickups? || current_user.role_orders?)
+                when 'any'                 then true # no role required
+                else false # any unknown role will always fail
+                end
       if hasRole
         current_user
       else
@@ -137,6 +137,7 @@ module Concerns::Auth
   # @see https://github.com/doorkeeper-gem/doorkeeper/issues/71#issuecomment-5471317
   def expire_access_tokens
     return unless @current_user
+
     Doorkeeper::AccessToken.transaction do
       token_scope = Doorkeeper::AccessToken.where(revoked_at: nil, resource_owner_id: @current_user.id)
       token_scope.each do |token|
@@ -146,8 +147,7 @@ module Concerns::Auth
   end
 
   # Redirect to the login page, used in authenticate, plugins can override this.
-  def redirect_to_login(options={})
+  def redirect_to_login(options = {})
     redirect_to login_url, options
   end
-
 end

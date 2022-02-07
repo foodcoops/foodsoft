@@ -41,7 +41,7 @@ describe Api::V1::User::OrdergroupController, type: :controller do
       expect(json_financial_overview['account_balance']).to eq 444
       expect(json_financial_overview['available_funds']).to eq 444 - go.price
 
-      ftcs = Hash[ json_financial_overview['financial_transaction_class_sums'].map { |x| [x['id'], x] } ]
+      ftcs = Hash[json_financial_overview['financial_transaction_class_sums'].map { |x| [x['id'], x] }]
 
       ftcs1 = ftcs[ftc1.id]
       expect(ftcs1['name']).to eq ftc1.name

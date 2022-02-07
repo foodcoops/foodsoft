@@ -17,7 +17,7 @@ describe BankTransaction do
     JSON
 
     importer = BankAccountInformationImporter.new(bank_account)
-    expect{importer.import!(content)}.to raise_error(JSON::ParserError)
+    expect { importer.import!(content) }.to raise_error(JSON::ParserError)
   end
 
   it 'empty object' do

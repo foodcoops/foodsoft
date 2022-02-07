@@ -1,5 +1,4 @@
 class Foodcoop::OrdergroupsController < ApplicationController
-  
   def index
     @ordergroups = Ordergroup.undeleted.order('name')
 

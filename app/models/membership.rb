@@ -1,10 +1,8 @@
 class Membership < ApplicationRecord
-
   belongs_to :user
   belongs_to :group
 
   before_destroy :check_last_admin
-
 
   protected
 

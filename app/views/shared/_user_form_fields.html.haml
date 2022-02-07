@@ -35,14 +35,15 @@
         = profile.input 'email_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['email_is_public'] }
         - if FoodsoftConfig[:use_nick]
           = profile.input 'name_is_public',   as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }
-  
+
     .settings-group
       %div{class: 'control-group'}
         %h5{class: 'controls'}
           = t 'simple_form.labels.settings.settings_group.messages'
-        
+
       = s.simple_fields_for :notify, defaults: { inline_label: true, label: false } do |notify|
         = notify.input 'order_finished',    as: :boolean, input_html: { checked: f.object.settings.notify['order_finished'] }
+        = notify.input 'order_received',    as: :boolean, input_html: { checked: f.object.settings.notify['order_received'] }
         = notify.input 'negative_balance',  as: :boolean, input_html: { checked: f.object.settings.notify['negative_balance'] }
         = notify.input 'upcoming_tasks',    as: :boolean, input_html: { checked: f.object.settings.notify['upcoming_tasks'] }
 

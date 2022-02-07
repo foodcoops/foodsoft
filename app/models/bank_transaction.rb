@@ -1,5 +1,4 @@
 class BankTransaction < ApplicationRecord
-
   # @!attribute external_id
   #   @return [String] Unique Identifier of the transaction within the bank account.
   # @!attribute date
@@ -39,13 +38,13 @@ class BankTransaction < ApplicationRecord
 
     content = text
     content += "\n" + reference if reference.present?
-    invoices = supplier.invoices.unpaid.select {|i| content.include? i.number}
+    invoices = supplier.invoices.unpaid.select { |i| content.include? i.number }
     invoices_sum = invoices.map(&:amount).sum
     return false if amount != -invoices_sum
 
     transaction do
       link = FinancialLink.new
-      invoices.each {|i| i.update_attributes! financial_link: link, paid_on: date }
+      invoices.each { |i| i.update_attributes! financial_link: link, paid_on: date }
       update_attribute :financial_link, link
     end
 
@@ -57,8 +56,10 @@ class BankTransaction < ApplicationRecord
     return unless m
 
     return false if m[:parts].values.sum != amount
+
     group = Ordergroup.find_by_id(m[:group])
     return false unless group
+
     usr = m[:user] ? User.find_by_id(m[:user]) : group.users.first
     return false unless usr
 
@@ -69,6 +70,7 @@ class BankTransaction < ApplicationRecord
       m[:parts].each do |short, value|
         ftt = FinancialTransactionType.find_by_name_short(short)
         return false unless ftt
+
         group.add_financial_transaction! value, note, usr, ftt, link if value > 0
       end
 

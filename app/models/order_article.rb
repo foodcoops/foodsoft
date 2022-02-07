@@ -38,6 +38,7 @@ class OrderArticle < ApplicationRecord
   def units
     return units_received unless units_received.nil?
     return units_billed unless units_billed.nil?
+
     units_to_order
   end
 
@@ -45,7 +46,7 @@ class OrderArticle < ApplicationRecord
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
     quantity = group_order_articles.collect(&:result).sum
-    {:quantity => quantity, :price => quantity * price.fc_price}
+    { :quantity => quantity, :price => quantity * price.fc_price }
   end
 
   # Update quantity/tolerance/units_to_order from group_order_articles
@@ -96,7 +97,7 @@ class OrderArticle < ApplicationRecord
     units * price.unit_quantity * price.gross_price
   end
 
-  def ordered_quantities_different_from_group_orders?(ordered_mark="!", billed_mark="?", received_mark="?")
+  def ordered_quantities_different_from_group_orders?(ordered_mark = "!", billed_mark = "?", received_mark = "?")
     if not units_received.nil?
       ((units_received * price.unit_quantity) == group_orders_sum[:quantity]) ? false : received_mark
     elsif not units_billed.nil?
@@ -123,12 +124,12 @@ class OrderArticle < ApplicationRecord
     if surplus.index(:tolerance).nil?
       qty_for_members = [qty_left, self.quantity].min
     else
-      qty_for_members = [qty_left, self.quantity+self.tolerance].min
-      counts[surplus.index(:tolerance)] = [0, qty_for_members-self.quantity].max
+      qty_for_members = [qty_left, self.quantity + self.tolerance].min
+      counts[surplus.index(:tolerance)] = [0, qty_for_members - self.quantity].max
     end
 
     # Recompute
-    group_order_articles.each {|goa| goa.save_results! qty_for_members }
+    group_order_articles.each { |goa| goa.save_results! qty_for_members }
     qty_left -= qty_for_members
 
     # if there's anything left, move to stock if wanted
@@ -185,7 +186,7 @@ class OrderArticle < ApplicationRecord
   end
 
   def update_global_price=(value)
-    @update_global_price = (value == true || value == '1') ?  true : false
+    @update_global_price = (value == true || value == '1') ? true : false
   end
 
   # @return [Number] Units missing for the last +unit_quantity+ of the article.
@@ -199,7 +200,11 @@ class OrderArticle < ApplicationRecord
 
   # Check if the result of any associated GroupOrderArticle was overridden manually
   def result_manually_changed?
-    group_order_articles.any? {|goa| goa.result_manually_changed?}
+    group_order_articles.any? { |goa| goa.result_manually_changed? }
+  end
+
+  def difference_received_ordered
+    (units_received || 0) - units_to_order
   end
 
   private
@@ -241,7 +246,7 @@ class OrderArticle < ApplicationRecord
   end
 
   def _missing_units(unit_quantity, quantity, tolerance)
-    units = unit_quantity - ((quantity  % unit_quantity) + tolerance)
+    units = unit_quantity - ((quantity % unit_quantity) + tolerance)
     units = 0 if units < 0
     units = 0 if units == unit_quantity
     units

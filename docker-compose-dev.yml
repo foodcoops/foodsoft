@@ -13,14 +13,15 @@ services:
       dockerfile: Dockerfile-dev
     command: ./proc-start worker
     volumes:
-      - bundle:/home/app/bundle
-      - .:/home/app/src
+      - bundle:/usr/local/bundle
+      - .:/app
     environment:
-      - DATABASE_URL=mysql2://root:secret@mariadb/development?encoding=utf8
+      - DATABASE_URL=mysql2://root:secret@mariadb/development?encoding=utf8mb4
       - REDIS_URL=redis://redis:6379
-      - QUEUE=foodsoft_notifier
-      - TEST_DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8
+      - TEST_DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8mb4
       - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
+      - MAILCATCHER_ADDRESS=mailcatcher
+      - MAILCATCHER_PORT=25
 
   mailcatcher:
     image: tophfr/mailcatcher
@@ -28,14 +29,24 @@ services:
       - "1080:80"
 
   mariadb:
-    image: mariadb:10.1
+    image: mariadb:10.5
     environment:
       - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=development
     volumes:
       - mariadb:/var/lib/mysql
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_USER=root
+      - PMA_PASSWORD=secret
+    ports:
+      - "2080:80"
+
   redis:
-    image: redis:3.2-alpine
+    image: redis:6.2-alpine
 
 volumes:
   bundle:

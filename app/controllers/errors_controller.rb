@@ -11,15 +11,6 @@ class ErrorsController < ApplicationController
 
   private
 
-  def select_foodcoop
-    foodcoop = params[:foodcoop]
-    if FoodsoftConfig.allowed_foodcoop? foodcoop
-      FoodsoftConfig.select_foodcoop foodcoop
-    else
-      FoodsoftConfig.select_default_foodcoop
-    end
-  end
-
   def current_layout
     current_user ? 'application' : 'login'
   end

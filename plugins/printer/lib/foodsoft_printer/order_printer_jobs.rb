@@ -1,5 +1,4 @@
 module FoodsoftPrinter
-
   module OrderPrinterJobs
     def self.included(base) # :nodoc:
       base.class_eval do
@@ -22,5 +21,4 @@ module FoodsoftPrinter
       Order.send :include, self
     end
   end
-
 end

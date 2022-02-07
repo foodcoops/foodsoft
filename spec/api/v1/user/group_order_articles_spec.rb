@@ -12,13 +12,12 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
   let(:other_quantity) { rand(1..10) }
   let(:other_tolerance) { rand(1..10) }
   let(:user_other) { create(:user, :ordergroup) }
-  let!(:go_other) { create(:group_order, order: order, ordergroup: user_other.ordergroup ) }
+  let!(:go_other) { create(:group_order, order: order, ordergroup: user_other.ordergroup) }
   let!(:goa_other) { create(:group_order_article, group_order: go_other, order_article: oa_1, quantity: other_quantity, tolerance: other_tolerance) }
   before { go_other.update_price!; user_other.ordergroup.update_stats! }
 
   let(:json_goa) { json_response['group_order_article'] }
   let(:json_oa) { json_response['order_article'] }
-
 
   shared_examples "group_order_articles endpoint success" do
     before { request }
@@ -38,8 +37,8 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
       expect {
         request
         go = user.ordergroup.group_orders.where(order: order).last
-       }.to change { go&.updated_by }.to(user)
-        .and change { go&.price }
+      }.to change { go&.updated_by }.to(user)
+                                    .and change { go&.price }
     end
   end
 
@@ -61,7 +60,6 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
     end
   end
 
-
   shared_examples "group_order_articles endpoint failure" do |status|
     it "returns status #{status}" do
       request
@@ -78,12 +76,11 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
     it "does not change the group_order_article" do
       expect { request }.to_not change {
         goa = GroupOrderArticle.joins(:group_order)
-          .where(order_article_id: oa_1.id, group_orders: { ordergroup: user.ordergroup }).last
+                               .where(order_article_id: oa_1.id, group_orders: { ordergroup: user.ordergroup }).last
         goa&.attributes
       }
     end
   end
-
 
   describe "POST :create" do
     let(:new_quantity) { rand(1..10) }
@@ -109,7 +106,7 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
     end
 
     context "with invalid parameter values" do
-      let(:goa_params) { { order_article_id: oa_1.id, quantity: -1, tolerance: new_tolerance} }
+      let(:goa_params) { { order_article_id: oa_1.id, quantity: -1, tolerance: new_tolerance } }
       include_examples "group_order_articles endpoint failure", 422
     end
 
@@ -124,7 +121,7 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
     end
 
     context 'without enough apple points' do
-      before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true)  }
+      before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true) }
       include_examples "group_order_articles endpoint failure", 403
     end
   end
@@ -145,7 +142,7 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
     end
 
     context "with invalid parameter values" do
-      let(:goa_params) { { order_article_id: oa_1.id, quantity: -1, tolerance: new_tolerance} }
+      let(:goa_params) { { order_article_id: oa_1.id, quantity: -1, tolerance: new_tolerance } }
       include_examples "group_order_articles endpoint failure", 422
     end
 
@@ -160,7 +157,7 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
     end
 
     context 'without enough apple points' do
-      before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true)  }
+      before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true) }
       include_examples "group_order_articles endpoint failure", 403
     end
   end
@@ -175,7 +172,6 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
 
     let(:request) { delete :destroy, params: { id: goa.id, foodcoop: 'f' } }
 
-
     shared_examples "group_order_articles destroy success" do
       include_examples "group_order_articles endpoint success"
 
@@ -187,7 +183,6 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
         expect(GroupOrderArticle.where(id: goa.id)).to be_empty
       end
     end
-
 
     context "happy flow" do
       include_examples "group_order_articles destroy success"
@@ -204,7 +199,7 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
     end
 
     context 'without enough apple points' do
-      before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true)  }
+      before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true) }
       include_examples "group_order_articles destroy success"
     end
   end

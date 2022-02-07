@@ -46,7 +46,6 @@ describe BankTransaction do
       expect(invoice5.paid_on).to eq bank_transaction4.date
       expect(invoice5.financial_link).to eq bank_transaction4.financial_link
     end
-
   end
 
   describe 'ordergroup' do
@@ -102,7 +101,5 @@ describe BankTransaction do
     it 'ignores transaction with invalid short name' do
       expect(bank_transaction8.assign_to_ordergroup).to be false
     end
-
   end
-
 end

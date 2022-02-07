@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class DeltaInput < SimpleForm::Inputs::StringInput
   # for now, need to pass id or it won't work
   def input(wrapper_options)
@@ -16,12 +14,12 @@ class DeltaInput < SimpleForm::Inputs::StringInput
         delta_button(content_tag(:i, nil, class: 'icon icon-plus'), 1, options)
     end
   end
-  #template.button_tag('−', type: :submit, data: {decrement: options[:id]}, tabindex: -1, class: 'btn') +
+  # template.button_tag('−', type: :submit, data: {decrement: options[:id]}, tabindex: -1, class: 'btn') +
 
   private
 
   def delta_button(title, direction, options)
-    data = { (direction>0 ? 'increment' : 'decrement') => options[:id] }
+    data = { (direction > 0 ? 'increment' : 'decrement') => options[:id] }
     delta = direction * options[:data][:delta]
     template.button_tag(title, type: :button, name: 'delta', value: delta, data: data, tabindex: -1, class: 'btn')
   end

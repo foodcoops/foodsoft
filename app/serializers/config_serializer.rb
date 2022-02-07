@@ -12,7 +12,6 @@ class ConfigSerializer < ActiveModel::Serializer
   # help and version
   attributes :applepear_url, :help_url, :foodsoft
 
-
   def foodsoft
     {
       version: Foodsoft::VERSION,

@@ -13,7 +13,7 @@ feature 'the session' do
       expect(page).to_not have_selector('.alert-error')
     end
     it 'does not log me in with wrong password' do
-      login user.nick, 'XX'+user.password 
+      login user.nick, 'XX' + user.password
       expect(page).to have_selector('.alert-error')
     end
     it 'can log me in using an email address' do
@@ -24,5 +24,4 @@ feature 'the session' do
       expect(page).to_not have_selector('.alert-error')
     end
   end
-
 end

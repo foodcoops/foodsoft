@@ -22,5 +22,4 @@ class Api::V1::FinancialTransactionClassesController < Api::V1::BaseController
   def scope
     FinancialTransactionClass.all
   end
-
 end

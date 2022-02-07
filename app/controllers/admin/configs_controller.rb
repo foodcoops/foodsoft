@@ -1,5 +1,4 @@
 class Admin::ConfigsController < Admin::BaseController
-
   before_action :get_tabs, only: [:show, :list]
 
   def show
@@ -11,7 +10,7 @@ class Admin::ConfigsController < Admin::BaseController
     @current_tab = 'list'
     @cfg = FoodsoftConfig
     @dfl = FoodsoftConfig.config
-    @keys = FoodsoftConfig.keys.select {|k| FoodsoftConfig.allowed_key?(k)}.sort
+    @keys = FoodsoftConfig.keys.select { |k| FoodsoftConfig.allowed_key?(k) }.sort
   end
 
   def update
@@ -56,10 +55,9 @@ class Admin::ConfigsController < Admin::BaseController
 
   def convert_config_value(value)
     if value.is_a? ActionController::Parameters
-      value.transform_values{ |v| convert_config_value(v) }.to_hash
+      value.transform_values { |v| convert_config_value(v) }.to_hash
     else
       value
     end
   end
-
 end

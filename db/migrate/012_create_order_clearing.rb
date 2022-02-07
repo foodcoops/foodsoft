@@ -1,5 +1,4 @@
 class CreateOrderClearing < ActiveRecord::Migration[4.2]
-
   def self.up
     add_column :orders, :invoice_amount, :decimal, :precision => 8, :scale => 2, :null => false, :default => 0
     add_column :orders, :refund, :decimal, :precision => 8, :scale => 2, :null => false, :default => 0

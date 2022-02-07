@@ -1,6 +1,4 @@
-# encoding: utf-8
 class CurrentOrders::ArticlesController < ApplicationController
-
   before_action :authenticate_orders
   before_action :find_order_and_order_article, only: [:index, :show]
 
@@ -21,7 +19,7 @@ class CurrentOrders::ArticlesController < ApplicationController
   end
 
   def show_on_group_order_article_update
-    #@goa = GroupOrderArticle.find(params[:group_order_article_id])
+    # @goa = GroupOrderArticle.find(params[:group_order_article_id])
   end
 
   protected
@@ -40,7 +38,7 @@ class CurrentOrders::ArticlesController < ApplicationController
   end
 
   helper_method \
-  def ordergroups_for_adding
+    def ordergroups_for_adding
     Ordergroup.undeleted.order(:name)
   end
 end

@@ -3,6 +3,7 @@ module FoodsoftPolls
     def navigation(primary, context)
       return unless FoodsoftPolls.enabled?
       return if primary[:foodcoop].nil?
+
       sub_nav = primary[:foodcoop].sub_navigation
       sub_nav.items <<
         SimpleNavigation::Item.new(primary, :polls, I18n.t('navigation.polls'), context.polls_path)

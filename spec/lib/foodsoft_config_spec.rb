@@ -95,5 +95,4 @@ describe FoodsoftConfig do
       expect(FoodsoftConfig[:protected]['database']).to eq FoodsoftConfig[:protected][:database]
     end
   end
-
 end

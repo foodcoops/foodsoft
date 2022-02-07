@@ -1,5 +1,3 @@
-# encoding: utf-8
-#
 class Order < ApplicationRecord
   attr_accessor :ignore_warnings, :transport_distribution
 
@@ -71,8 +69,8 @@ class Order < ApplicationRecord
     if stockit?
       # make sure to include those articles which are no longer available
       # but which have already been ordered in this stock order
-      StockArticle.available.includes(:article_category).
-        order('article_categories.name', 'articles.name').reject{ |a|
+      StockArticle.available.includes(:article_category)
+                  .order('article_categories.name', 'articles.name').reject { |a|
         a.quantity_available <= 0 && !a.ordered_in_order?(self)
       }.group_by { |a| a.article_category.name }
     else
@@ -151,7 +149,7 @@ class Order < ApplicationRecord
   def self.ordergroup_group_orders_map(ordergroup)
     orders = includes(:supplier)
     group_orders = GroupOrder.where(ordergroup_id: ordergroup.id, order_id: orders.map(&:id))
-    group_orders_hash = Hash[group_orders.collect {|go| [go.order_id, go]}]
+    group_orders_hash = Hash[group_orders.collect { |go| [go.order_id, go] }]
     orders.map do |order|
       {
         order: order,
@@ -173,22 +171,22 @@ class Order < ApplicationRecord
   # The array has the following form:
   # e.g: [["drugs",[teethpaste, toiletpaper]], ["fruits" => [apple, banana, lemon]]]
   def articles_grouped_by_category
-    @articles_grouped_by_category ||= order_articles.
-        includes([:article_price, :group_order_articles, :article => :article_category]).
-        order('articles.name').
-        group_by { |a| a.article.article_category.name }.
-        sort { |a, b| a[0] <=> b[0] }
+    @articles_grouped_by_category ||= order_articles
+                                      .includes([:article_price, :group_order_articles, :article => :article_category])
+                                      .order('articles.name')
+                                      .group_by { |a| a.article.article_category.name }
+                                      .sort { |a, b| a[0] <=> b[0] }
   end
 
   def articles_sort_by_category
-    order_articles.includes(:article).order('articles.name').sort do |a,b|
+    order_articles.includes(:article).order('articles.name').sort do |a, b|
       a.article.article_category.name <=> b.article.article_category.name
     end
   end
 
   # Returns the defecit/benefit for the foodcoop
   # Requires a valid invoice, belonging to this order
-  #FIXME: Consider order.foodcoop_result
+  # FIXME: Consider order.foodcoop_result
   def profit(options = {})
     markup = options[:without_markup] || false
     if invoice
@@ -208,22 +206,22 @@ class Order < ApplicationRecord
       for oa in order_articles.ordered.includes(:article, :article_price)
         quantity = oa.units * oa.price.unit_quantity
         case type
-          when :net
-            total += quantity * oa.price.price
-          when :gross
-            total += quantity * oa.price.gross_price
-          when :fc
-            total += quantity * oa.price.fc_price
+        when :net
+          total += quantity * oa.price.price
+        when :gross
+          total += quantity * oa.price.gross_price
+        when :fc
+          total += quantity * oa.price.fc_price
         end
       end
     elsif type == :groups || type == :groups_without_markup
-      for go in group_orders.includes(group_order_articles: {order_article: [:article, :article_price]})
+      for go in group_orders.includes(group_order_articles: { order_article: [:article, :article_price] })
         for goa in go.group_order_articles
           case type
-            when :groups
-              total += goa.result * goa.order_article.price.fc_price
-            when :groups_without_markup
-              total += goa.result * goa.order_article.price.gross_price
+          when :groups
+            total += goa.result * goa.order_article.price.fc_price
+          when :groups_without_markup
+            total += goa.result * goa.order_article.price.gross_price
           end
         end
       end
@@ -251,7 +249,7 @@ class Order < ApplicationRecord
             #    A: Yes, we do - for redistributing articles when the number of articles
             #       delivered changes, and for statistics on popular articles. Records
             #       with both tolerance and quantity zero can be deleted.
-            #goa.group_order_article_quantities.clear
+            # goa.group_order_article_quantities.clear
           end
         end
 
@@ -262,7 +260,7 @@ class Order < ApplicationRecord
         ordergroups.each(&:update_stats!)
 
         # Notifications
-        Resque.enqueue(UserNotifier, FoodsoftConfig.scope, 'finished_order', self.id)
+        NotifyFinishedOrderJob.perform_later(self)
       end
     end
   end
@@ -279,7 +277,7 @@ class Order < ApplicationRecord
       if stockit?                                         # Decreases the quantity of stock_articles
         for oa in order_articles.includes(:article)
           oa.update_results!                              # Update units_to_order of order_article
-          stock_changes.create! :stock_article => oa.article, :quantity => oa.units_to_order*-1
+          stock_changes.create! :stock_article => oa.article, :quantity => oa.units_to_order * -1
         end
       end
 
@@ -290,6 +288,7 @@ class Order < ApplicationRecord
   # Close the order directly, without automaticly updating ordergroups account balances
   def close_direct!(user)
     raise I18n.t('orders.model.error_closed') if closed?
+
     comments.create(user: user, text: I18n.t('orders.model.close_direct_message')) unless FoodsoftConfig[:charge_members_manually]
     update_attributes! state: 'closed', updated_by: user
   end
@@ -319,7 +318,7 @@ class Order < ApplicationRecord
       begin
         order.do_end_action!
       rescue => error
-        ExceptionNotifier.notify_exception(error, data: {foodcoop: FoodsoftConfig.scope, order_id: order.id})
+        ExceptionNotifier.notify_exception(error, data: { foodcoop: FoodsoftConfig.scope, order_id: order.id })
       end
     end
   end
@@ -328,9 +327,9 @@ class Order < ApplicationRecord
 
   def starts_before_ends
     delta = Rails.env.test? ? 1 : 0 # since Rails 4.2 tests appear to have time differences, with this validation failing
-    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if ends && starts && ends <= (starts-delta)
-    errors.add(:ends, I18n.t('orders.model.error_boxfill_before_ends')) if ends && boxfill && ends <= (boxfill-delta)
-    errors.add(:boxfill, I18n.t('orders.model.error_starts_before_boxfill')) if boxfill && starts && boxfill <= (starts-delta)
+    errors.add(:ends, I18n.t('orders.model.error_starts_before_ends')) if ends && starts && ends <= (starts - delta)
+    errors.add(:ends, I18n.t('orders.model.error_boxfill_before_ends')) if ends && boxfill && ends <= (boxfill - delta)
+    errors.add(:boxfill, I18n.t('orders.model.error_starts_before_boxfill')) if boxfill && starts && boxfill <= (starts - delta)
   end
 
   def include_articles
@@ -362,6 +361,7 @@ class Order < ApplicationRecord
 
   def distribute_transport
     return unless group_orders.any?
+
     case transport_distribution.try(&:to_i)
     when Order.transport_distributions[:ordergroup] then
       amount = transport / group_orders.size

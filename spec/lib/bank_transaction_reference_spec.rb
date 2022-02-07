@@ -92,5 +92,4 @@ describe BankTransactionReference do
   it 'returns correct value for FS34.56A67.89 with prefix and suffix' do
     expect(BankTransactionReference.parse('prefix FS34.56A67.89, suffix')).to match({ group: 34, user: 56, parts: { "A" => 67.89 } })
   end
-
 end

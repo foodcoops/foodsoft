@@ -69,9 +69,11 @@ namespace :foodsoft do
     BankAccount.find_each do |ba|
       importer = ba.find_connector
       next unless importer
+
       importer.load nil
       ok = importer.import nil
       next unless ok
+
       importer.finish
       assign_count = ba.assign_unlinked_transactions
       rake_say "#{ba.name}: imported #{importer.count}, assigned #{assign_count}"

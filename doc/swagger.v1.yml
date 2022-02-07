@@ -415,7 +415,7 @@ paths:
     get:
       summary: orders
       tags:
-        - 2. Orders
+        - 2. Order
       parameters:
         - $ref: '#/parameters/page'
         - $ref: '#/parameters/per_page'

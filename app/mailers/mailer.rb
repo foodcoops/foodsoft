@@ -1,4 +1,3 @@
-# encoding: utf-8
 # ActionMailer class that handles all emails for Foodsoft.
 class Mailer < ActionMailer::Base
   # XXX Quick fix to allow the use of show_user. Proper take would be one of
@@ -7,7 +6,7 @@ class Mailer < ActionMailer::Base
   helper :application
   include ApplicationHelper
 
-  layout 'email'  # Use views/layouts/email.txt.erb
+  layout 'email' # Use views/layouts/email.txt.erb
 
   default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
           'X-Auto-Response-Suppress' => 'All'
@@ -61,6 +60,19 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.order_result.subject', name: group_order.order.name)
   end
 
+  # Sends order received info for specific Ordergroup
+  def order_received(user, group_order)
+    @order        = group_order.order
+    @group_order  = group_order
+
+    order_articles = @order.order_articles.reject { |oa| oa.units_received.nil? }
+    @abundant_articles = order_articles.select { |oa| oa.difference_received_ordered.positive? }
+    @scarce_articles = order_articles.select { |oa| oa.difference_received_ordered.negative? }
+
+    mail to: user,
+         subject: I18n.t('mailer.order_received.subject', name: group_order.order.name)
+  end
+
   # Sends order result to the supplier
   def order_result_supplier(user, order, options = {})
     @user     = user
@@ -79,7 +91,7 @@ class Mailer < ActionMailer::Base
   end
 
   # Notify user if account balance is less than zero
-  def negative_balance(user,transaction)
+  def negative_balance(user, transaction)
     @group        = user.ordergroup
     @transaction  = transaction
 
@@ -91,7 +103,7 @@ class Mailer < ActionMailer::Base
     @user = user
     @feedback = feedback
 
-    mail to: FoodsoftConfig[:notification][:error_recipients],
+    mail to: feedback_recipients,
          from: user,
          subject: I18n.t('mailer.feedback.subject')
   end
@@ -168,4 +180,8 @@ class Mailer < ActionMailer::Base
     address.format
   end
 
+  # use the (new) feedback_recipients option, but fallback to error_recipients for backwards compatibility
+  def feedback_recipients
+    FoodsoftConfig[:notification][:feedback_recipients] || FoodsoftConfig[:notification][:error_recipients]
+  end
 end

@@ -14,25 +14,12 @@ ENV PORT=3000 \
     \
     CHROMIUM_FLAGS=--no-sandbox \
     \
-    BUNDLE_PATH=/home/app/bundle \
-    BUNDLE_APP_CONFIG=/home/app/bundle/config
+    BUNDLE_PATH=/usr/local/bundle \
+    BUNDLE_APP_CONFIG=/usr/local/bundle/config
 
-# Run app and all commands as user 'app'. This avoids changing permissions
-# for files in mounted volume. Symlink for similarity with production image.
-RUN adduser --gecos GECOS --disabled-password --shell /bin/bash app && \
-    ln -s /home/app/src /usr/src/app
-USER app
+WORKDIR /app
 
-WORKDIR /home/app/src
-
-# Copy files needed for installing gem dependencies, and install them.
-COPY Gemfile Gemfile.lock ./
-COPY plugins ./plugins
-RUN bundle config build.nokogiri "--use-system-libraries" && \
-    bundle install --frozen -j 4
-
-# Copy the application code
-COPY . ./
+RUN bundle config build.nokogiri "--use-system-libraries"
 
 EXPOSE 3000
 

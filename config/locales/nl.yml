@@ -418,6 +418,7 @@ nl:
       error_denied_sign_in: inloggen als een andere gebruiker
       error_feature_disabled: Deze optie is momenteel niet actief.
       error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
+      error_minimum_balance: Sorry, je tegoed is lager dan het minimum van %{min}.
       error_token: Geen toegang (ongeldig token)!
   article_categories:
     create:
@@ -597,11 +598,12 @@ nl:
       tasks_upfront_days: Hoeveel dagen vantevoren je periodieke taken wil aanmaken.
       tax_default: Standaard BTW percentage voor nieuwe artikelen.
       tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
-      distribution_strategy: Hoe verder te gaan met de distributie van artikelen na ontvangst van een bestelling.
+      distribution_strategy: Hoe verder te gaan met het verdelen van artikelen nadat een bestelling is ontvangen.
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
       use_iban: Om leverancier en gebruiker een extra veld te geven voor het internationale bankrekeningnummer (IBAN).
       use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
+      use_self_service: Wanneer dit aan staat, kan iedereen zelf financiële transacties toevoegen.
       webstats_tracking_code: Tracking code voor bezoeker statistieken (zoals Piwik of Google analytics). Leeg laten als geen tracking gewenst is.
     keys:
       applepear_url: Appelsysteem uitleg URL
@@ -651,14 +653,15 @@ nl:
       tax_default: Standaard BTW
       time_zone: Tijdzone
       tolerance_is_costly: Tolerantie is duur
-      distribution_strategy: Distributie strategie
+      distribution_strategy: Verdeelstrategie
       distribution_strategy_options:
         first_order_first_serve: Verdeel eerst onder degenen die het eerst hebben besteld
-        no_automatic_distribution: Geen automatische distributie
+        no_automatic_distribution: Geen automatische verdeling
       use_apple_points: Appelpunten
       use_boxfill: Dozen vullen fase
       use_iban: IBAN gebruiken
       use_nick: Bijnamen gebruiken
+      use_self_service: Zelf-service
       webstats_tracking_code: Tracking code
     tabs:
       applications: Apps
@@ -867,12 +870,16 @@ nl:
         notice: Een link naar de factuur is toegevoegd.
       create:
         notice: Een nieuwe financiële link is aangemaakt.
+      create_financial_transaction:
+        notice: Financiële transactie is toegevoegd.
       index_bank_transaction:
         title: Banktransactie toevoegen
       index_financial_transaction:
         title: Financiële transactie toevoegen
       index_invoice:
         title: Factuur toevoegen
+      new_financial_transaction:
+        title: Financiële transactie toevoegen
       remove_bank_transaction:
         notice: De link naar de banktransactie is verwijderd.
       remove_financial_transaction:
@@ -886,6 +893,7 @@ nl:
         amount: Bedrag
         date: Datum
         description: Omschrijving
+        new_financial_transaction: Nieuwe financiële transactie
         title: Financiële link %{number}
         type: Type
     financial_transactions:
@@ -956,6 +964,7 @@ nl:
         title: Onbetaalde rekeningen
     ordergroups:
       index:
+        new_financial_link: Nieuwe financiële link
         new_transaction: Nieuwe transacties toevoegen
         show_all: Transactieoverzicht
         show_foodcoop: Foodcoop transacties
@@ -1139,6 +1148,7 @@ nl:
         since: "(gebruiker sinds %{when})"
         title: "%{user}"
     reference_calculator:
+      transaction_types_headline: Doel
       placeholder: Vul de bedragen in die je wilt overschrijven in ieder veld om te zien welke referentie je kunt gebruiken voor de transactie.
       text0: Maak
       text1: over met referentie
@@ -1281,6 +1291,18 @@ nl:
 
 
         Vriendelijke groet van %{foodcoop}.
+    order_received:
+      subject: 'Ontvangst geregistreerd: %{name}'
+      text0: |
+        Beste %{ordergroup}.
+
+        De bestelling voor "%{order}" is ontvangen.
+      abundant_articles: Te veel ontvangen
+      scarce_articles: Te weinig ontvangen
+      article_details: |
+        o %{name}:
+        -- Besteld: %{ordered} x %{unit}
+        -- Ontvangen: %{received} x %{unit}
     order_result_supplier:
       subject: Nieuwe bestelling voor %{name}
       text: |
@@ -1324,7 +1346,7 @@ nl:
       text1: |
         Klik op deze link om een nieuw wachtwoord in te stellen: %{link}
         Deze link werkt slechts eenmaal en verloopt op %{expires}.
-        Je kunt altijd "Wachtwoord vergeten?" gebruiken om een nieuwe link te krijgen.
+        Je kunt altijd "Wachtwoord vergeten?" gebruiken om een nieuwe link aan te vragen.
 
 
         Vriendelijke groeten van %{foodcoop}.
@@ -1423,6 +1445,7 @@ nl:
       field_unlocked_title: De verdeling van dit artikel over de huishoudens is handmatig aangepast. Als je de hoeveelheid hier verandert, worden deze handmatige aanpassingen overschreven.
     edit_amounts:
       no_articles_available: Geen artikelen om toe te voegen.
+      set_all_to_zero: Alles op nul zetten
     fax:
       amount: Aantal
       articles: Artikelen
@@ -1614,6 +1637,7 @@ nl:
         notify:
           negative_balance: Informeer me wanneer mijn huishouden een negatief saldo krijgt.
           order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).
+          order_received: Informeer me over mijn bestelresultaat (wanneer de bestelling ontvangen is).
           upcoming_tasks: Herinner me aan aankomende taken.
         profile:
           email_is_public: E-mail is zichtbaar voor andere leden.

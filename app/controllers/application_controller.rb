@@ -1,4 +1,3 @@
-# encoding: utf-8
 class ApplicationController < ActionController::Base
   include Concerns::FoodcoopScope
   include Concerns::Auth
@@ -8,10 +7,9 @@ class ApplicationController < ActionController::Base
   helper_method :available_locales
 
   protect_from_forgery
-  before_action  :authenticate, :set_user_last_activity, :store_controller, :items_per_page
+  before_action :authenticate, :set_user_last_activity, :store_controller, :items_per_page
   after_action  :remove_controller
   around_action :set_time_zone, :set_currency
-
 
   # Returns the controller handling the current request.
   def self.current
@@ -90,10 +88,9 @@ class ApplicationController < ActionController::Base
     old_currency = ::I18n.t('number.currency.format.unit')
     new_currency = FoodsoftConfig[:currency_unit] || ''
     new_currency += "\u202f" if FoodsoftConfig[:currency_space]
-    ::I18n.backend.store_translations(::I18n.locale, number: {currency: {format: {unit: new_currency}}})
+    ::I18n.backend.store_translations(::I18n.locale, number: { currency: { format: { unit: new_currency } } })
     yield
   ensure
-    ::I18n.backend.store_translations(::I18n.locale, number: {currency: {format: {unit: old_currency}}})
+    ::I18n.backend.store_translations(::I18n.locale, number: { currency: { format: { unit: old_currency } } })
   end
-
 end

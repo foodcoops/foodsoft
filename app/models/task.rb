@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 class Task < ApplicationRecord
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
@@ -25,19 +24,18 @@ class Task < ApplicationRecord
   # Find all tasks, for which the current user should be responsible
   # but which aren't accepted yet
   def self.unaccepted_tasks_for(user)
-    user.tasks.undone.where(assignments: {accepted: false})
+    user.tasks.undone.where(assignments: { accepted: false })
   end
 
   # Find all accepted tasks, which aren't done
   def self.accepted_tasks_for(user)
-    user.tasks.undone.where(assignments: {accepted: true})
+    user.tasks.undone.where(assignments: { accepted: true })
   end
-
 
   # find all tasks in the period (or another number of days)
   def self.next_assigned_tasks_for(user, number = FoodsoftConfig[:tasks_period_days].to_i)
-    user.tasks.undone.where(assignments: {accepted: true}).
-        where(["tasks.due_date >= ? AND tasks.due_date <= ?", Time.now, number.days.from_now])
+    user.tasks.undone.where(assignments: { accepted: true })
+        .where(["tasks.due_date >= ? AND tasks.due_date <= ?", Time.now, number.days.from_now])
   end
 
   # count tasks with not enough responsible people
@@ -45,7 +43,7 @@ class Task < ApplicationRecord
   def self.unassigned_tasks_for(user)
     undone.includes(:assignments, workgroup: :memberships).select do |task|
       !task.enough_users_assigned? and
-          (!task.workgroup or task.workgroup.memberships.detect { |m| m.user_id == user.id })
+        (!task.workgroup or task.workgroup.memberships.detect { |m| m.user_id == user.id })
     end
   end
 
@@ -53,6 +51,7 @@ class Task < ApplicationRecord
     periodic_task_group_count = {}
     self.unassigned_tasks_for(user).reject do |item|
       next false unless item.periodic_task_group
+
       count = periodic_task_group_count[item.periodic_task_group] || 0
       periodic_task_group_count[item.periodic_task_group] = count + 1
       count >= max
@@ -64,11 +63,11 @@ class Task < ApplicationRecord
   end
 
   def is_assigned?(user)
-    self.assignments.detect {|ass| ass.user_id == user.id }
+    self.assignments.detect { |ass| ass.user_id == user.id }
   end
 
   def is_accepted?(user)
-    self.assignments.detect {|ass| ass.user_id == user.id && ass.accepted }
+    self.assignments.detect { |ass| ass.user_id == user.id && ass.accepted }
   end
 
   def enough_users_assigned?
@@ -98,7 +97,7 @@ class Task < ApplicationRecord
         if user.blank?
           errors.add(:user_list)
         else
-          if  id == current_user_id.to_i
+          if id == current_user_id.to_i
             # current_user will accept, when he puts himself to the list of users
             self.assignments.build :user => user, :accepted => true
           else
@@ -115,7 +114,7 @@ class Task < ApplicationRecord
   end
 
   def update_ordergroup_stats(user_ids = self.user_ids)
-    Ordergroup.joins(:users).where(users: {id: user_ids}).each(&:update_stats!)
+    Ordergroup.joins(:users).where(users: { id: user_ids }).each(&:update_stats!)
   end
 
   def exclude_from_periodic_task_group

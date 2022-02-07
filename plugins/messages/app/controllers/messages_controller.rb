@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-
   before_action -> { require_plugin_enabled FoodsoftMessages }
 
   # Renders the "inbox" action.
@@ -22,7 +21,7 @@ class MessagesController < ApplicationController
         @message.private = original_message.private
         @message.subject = I18n.t('messages.model.reply_subject', :subject => original_message.subject)
         @message.body = I18n.t('messages.model.reply_header', :user => original_message.sender.display, :when => I18n.l(original_message.created_at, :format => :short)) + "\n"
-        original_message.body.each_line{ |l| @message.body += I18n.t('messages.model.reply_indent', :line => l) }
+        original_message.body.each_line { |l| @message.body += I18n.t('messages.model.reply_indent', :line => l) }
       else
         redirect_to new_message_url, alert: I18n.t('messages.new.error_private')
       end
@@ -33,7 +32,7 @@ class MessagesController < ApplicationController
   def create
     @message = @current_user.send_messages.new(params[:message])
     if @message.save
-      Resque.enqueue(MessageNotifier, FoodsoftConfig.scope, 'message_deliver', @message.id)
+      DeliverMessageJob.perform_later(@message)
       redirect_to messages_url, :notice => I18n.t('messages.create.notice')
     else
       render :action => 'new'

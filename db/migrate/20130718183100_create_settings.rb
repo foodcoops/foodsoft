@@ -7,8 +7,8 @@ class CreateSettings < ActiveRecord::Migration[4.2]
       t.string :thing_type, limit: 30, null: true
       t.timestamps
     end
-    
-    add_index :settings, [ :thing_type, :thing_id, :var ], unique: true
+
+    add_index :settings, [:thing_type, :thing_id, :var], unique: true
   end
 
   def self.down

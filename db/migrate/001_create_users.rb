@@ -16,13 +16,13 @@ class CreateUsers < ActiveRecord::Migration[4.2]
     end
     add_index(:users, :nick, :unique => true)
     add_index(:users, :email, :unique => true)
-    
+
     # Create the default admin user...
     puts "Creating user #{USER_ADMIN} with password 'secret'..."
     user = User.new(:nick => USER_ADMIN, :first_name => "Anton", :last_name => "Administrator", :email => "admin@foo.test")
     user.password = "secret"
     raise "Failed!" unless user.save && User.find_by_nick(USER_ADMIN).has_password("secret")
-    
+
     # Create a normal user...
     puts "Creating user #{USER_TEST} with password 'foobar'..."
     user = User.new(:nick => USER_TEST, :first_name => "Tim", :last_name => "Tester", :email => "test@foo.test")

@@ -8,7 +8,7 @@ class FinancialLink < ApplicationRecord
     includes(:bank_transactions, :financial_transactions, :invoices)
       .where(bank_transactions: { financial_link_id: nil })
       .where(financial_transactions: { financial_link_id: nil })
-      .where(invoices: { financial_link_id: nil})
+      .where(invoices: { financial_link_id: nil })
   }
   scope :with_full_sum, -> {
     select(:id, :note, :full_sum).joins(<<-SQL)

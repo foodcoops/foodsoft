@@ -1,7 +1,6 @@
 class MigrateUserSettings < ActiveRecord::Migration[4.2]
   def up
     say_with_time 'Save old user settings in new RailsSettings module' do
-
       # Allow setting default locale via env parameter
       # This is used, when setting users language settings
       default_locale = I18n.default_locale
@@ -15,7 +14,7 @@ class MigrateUserSettings < ActiveRecord::Migration[4.2]
         type      = old_setting.configurable_type
         id        = old_setting.configurable_id
         begin
-          user      = type.constantize.find(id)
+          user = type.constantize.find(id)
         rescue ActiveRecord::RecordNotFound
           Rails.logger.debug "Can't find configurable object with type: #{type.inspect}, id: #{id.inspect}"
           next
@@ -32,9 +31,9 @@ class MigrateUserSettings < ActiveRecord::Migration[4.2]
 
         # set the settings_attributes (thanks to settings.merge! we can set them one by one)
         user.settings_attributes = {
-            "#{namespace}" => {
-                "#{key}" => value
-            }
+          "#{namespace}" => {
+            "#{key}" => value
+          }
         }
 
         # save the user to apply after_save callback

@@ -1,13 +1,12 @@
-# encoding: utf-8
 class LoginController < ApplicationController
-  skip_before_action :authenticate        # no authentication since this is the login page
+  skip_before_action :authenticate # no authentication since this is the login page
   before_action :validate_token, :only => [:new_password, :update_password]
 
   # Display the form to enter an email address requesting a token to set a new password.
   def forgot_password
     @user = User.new
   end
-  
+
   # Sends an email to a user with the token that allows setting a new password through action "password".
   def reset_password
     if request.get? || params[:user].nil? # Catch for get request and give better error message.
@@ -19,12 +18,12 @@ class LoginController < ApplicationController
     end
     redirect_to login_url, :notice => I18n.t('login.controller.reset_password.notice')
   end
-  
+
   # Set a new password with a token from the password reminder email.
   # Called with params :id => User.id and :token => User.reset_password_token to specify a new password.
   def new_password
   end
-  
+
   # Sets a new password.
   # Called with params :id => User.id and :token => User.reset_password_token to specify a new password.
   def update_password
