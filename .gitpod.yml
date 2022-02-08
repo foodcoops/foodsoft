@@ -5,7 +5,7 @@ tasks:
     init: |
       # install correct ruby+tools versions
       rvm install $(cat .ruby-version)
-      rvm use $(cat .ruby-version)
+      rvm use $(cat .ruby-version) --default 
       gem install bundler
       sudo apt-get install -y libmagic-dev
       bundle install
