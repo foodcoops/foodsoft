@@ -1,7 +1,4 @@
 # This configuration file was mainly inspired by ./doc/SETUP_DEVELOPMENT_DOCKER.md
-image:
-  file: .gitpod.Dockerfile
-
 tasks:
   - name: Docker
     init: |
@@ -15,6 +12,14 @@ tasks:
       docker-compose -f docker-compose-dev.yml up
       
   - name: Rails
+    before: |
+      sudo apt-get install -y libmagic-dev
+      # install correct ruby+tools versions
+      printf "rvm_gems_path=/home/gitpod/.rvm\n" > ~/.rvmrc
+      rvm reinstall $(cat .ruby-version)
+      rvm use $(cat .ruby-version) --default 
+      gem install bundler
+      printf "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc
     init: |
       bundle install
 
