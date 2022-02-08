@@ -22,9 +22,7 @@ tasks:
       printf "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc
     init: |
       bundle install
-      echo "bundle install done"
-      echo "whoami?"
-      whoami
+      sudo chown -R gitpod tmp/cache # see https://github.com/Shopify/bootsnap/issues/77#issuecomment-352053269
 
 ports:
   - port: 3000
