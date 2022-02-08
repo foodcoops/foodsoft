@@ -27,7 +27,7 @@ Get a foodsoft dev-environment running in the browser with Gitpod
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mob-programming-meetup/foodsoft)
 
-Follow these [instructions](doc/SETUP_GITPOD.md) to complete setup from within the Gitpod workspace. 
+Follow these [instructions](doc/SETUP_DEVELOPMENT_GITPOD.md) to complete setup from within the Gitpod workspace. 
 
 Deploying
 ---------
