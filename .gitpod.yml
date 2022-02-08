@@ -1,4 +1,6 @@
 # This configuration file was mainly inspired by ./doc/SETUP_DEVELOPMENT_DOCKER.md
+image:
+  file: .gitpod.Dockerfile
 
 tasks:
   - name: Docker
@@ -11,13 +13,9 @@ tasks:
     command: |
       # start docker containers
       docker-compose -f docker-compose-dev.yml up
+      
   - name: Rails
     init: |
-      # install correct ruby+tools versions
-      rvm install $(cat .ruby-version)
-      rvm use $(cat .ruby-version) --default 
-      gem install bundler
-      sudo apt-get install -y libmagic-dev
       bundle install
 
 ports:
