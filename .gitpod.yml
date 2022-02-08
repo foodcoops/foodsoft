@@ -22,6 +22,9 @@ tasks:
       printf "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc
     init: |
       bundle install
+      echo "bundle install done"
+      echo "whoami?"
+      whoami
 
 ports:
   - port: 3000
