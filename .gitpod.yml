@@ -7,6 +7,9 @@ tasks:
       docker-compose -f docker-compose-dev.yml up -d mariadb
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle install
       docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake foodsoft:setup_development_docker
+      # setup test database
+      docker-compose -f docker-compose-dev.yml run --rm mariadb mariadb --host=mariadb --password=secret --execute="CREATE DATABASE test"
+      docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake db:schema:load RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8mb4
     command: |
       # start docker containers
       docker-compose -f docker-compose-dev.yml up
