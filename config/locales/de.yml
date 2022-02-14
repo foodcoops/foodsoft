@@ -1530,6 +1530,7 @@ de:
       closed: abgerechnet
       finished: beendet
       open: laufend
+      received: in Empfang genommen
     update:
       notice: Die Bestellung wurde aktualisiert.
     update_order_amounts:
