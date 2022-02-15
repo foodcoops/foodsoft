@@ -7,10 +7,11 @@ class Foodcoop::UsersController < ApplicationController
                when "name_reverse" then "first_name DESC, last_name DESC"
                when "email_reverse" then "email DESC"
              end
-      @users = User.undeleted.order(sort)
     else
-      @users = User.undeleted.natural_order
+      sort = "first_name, last_name"
     end
+    
+    @users = User.undeleted.order(sort)
 
     # if somebody uses the search field:
     @users = @users.natural_search(params[:user_name]) unless params[:user_name].blank?

@@ -11,10 +11,12 @@ class Admin::UsersController < Admin::BaseController
                when "email_reverse" then "email DESC"
                when "last_activity_reverse" then "last_activity DESC"
              end
-      @users = params[:show_deleted] ? User.deleted.order(sort) : User.undeleted.order(sort)
     else
-      @users = params[:show_deleted] ? User.deleted : User.undeleted
+      sort =  "first_name, last_name"
     end
+
+    @users = params[:show_deleted] ? User.deleted.order(sort) : User.undeleted.order(sort)
+
     @users = @users.includes(:mail_delivery_status)
 
     if request.format.csv?

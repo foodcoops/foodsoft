@@ -7,10 +7,11 @@ class Admin::OrdergroupsController < Admin::BaseController
              when "name" then "name"
              when "name_reverse" then "name DESC"
              end
-      @ordergroups = Ordergroup.undeleted.order(sort)
     else
-      @ordergroups = Ordergroup.undeleted.order('name ASC')
+      sort = "name"
     end
+
+    @ordergroups = Ordergroup.undeleted.order(sort)
 
     if request.format.csv?
       send_data OrdergroupsCsv.new(@ordergroups).to_csv, filename: 'ordergroups.csv', type: 'text/csv'

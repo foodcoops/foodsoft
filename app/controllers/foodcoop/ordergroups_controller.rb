@@ -5,10 +5,11 @@ class Foodcoop::OrdergroupsController < ApplicationController
              when "name" then "name"
              when "name_reverse" then "name DESC"
              end
-      @ordergroups = Ordergroup.undeleted.order(sort)
     else
-      @ordergroups = Ordergroup.undeleted.order('name')
+      sort = "name"
     end
+
+    @ordergroups = Ordergroup.undeleted.order(sort)
 
     unless params[:name].blank? # Search by name
       @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")
