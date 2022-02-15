@@ -2,18 +2,18 @@ class Admin::UsersController < Admin::BaseController
   inherit_resources
 
   def index
-    if params["sort"]
-      sort = case params["sort"]
-               when "name" then "first_name, last_name"
-               when "email" then "email"
-               when "last_activity" then "last_activity"
-               when "name_reverse" then "first_name DESC, last_name DESC"
-               when "email_reverse" then "email DESC"
-               when "last_activity_reverse" then "last_activity DESC"
+    sort = if params["sort"]
+             case params["sort"]
+             when "name" then "first_name, last_name"
+             when "email" then "email"
+             when "last_activity" then "last_activity"
+             when "name_reverse" then "first_name DESC, last_name DESC"
+             when "email_reverse" then "email DESC"
+             when "last_activity_reverse" then "last_activity DESC"
              end
-    else
-      sort =  "first_name, last_name"
-    end
+           else
+             "first_name, last_name"
+           end
 
     @users = params[:show_deleted] ? User.deleted.order(sort) : User.undeleted.order(sort)
 

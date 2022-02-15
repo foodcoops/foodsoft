@@ -1,16 +1,16 @@
 class Foodcoop::UsersController < ApplicationController
   def index
-    if params["sort"]
-      sort = case params["sort"]
-               when "name" then "first_name, last_name"
-               when "email" then "email"
-               when "name_reverse" then "first_name DESC, last_name DESC"
-               when "email_reverse" then "email DESC"
+    sort = if params["sort"]
+             case params["sort"]
+             when "name" then "first_name, last_name"
+             when "email" then "email"
+             when "name_reverse" then "first_name DESC, last_name DESC"
+             when "email_reverse" then "email DESC"
              end
-    else
-      sort = "first_name, last_name"
-    end
-    
+           else
+             "first_name, last_name"
+           end
+
     @users = User.undeleted.order(sort)
 
     # if somebody uses the search field:

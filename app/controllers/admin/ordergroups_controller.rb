@@ -2,14 +2,14 @@ class Admin::OrdergroupsController < Admin::BaseController
   inherit_resources
 
   def index
-    if params["sort"]
-      sort = case params["sort"]
+    sort = if params["sort"]
+             case params["sort"]
              when "name" then "name"
              when "name_reverse" then "name DESC"
              end
-    else
-      sort = "name"
-    end
+           else
+             "name"
+           end
 
     @ordergroups = Ordergroup.undeleted.order(sort)
 
