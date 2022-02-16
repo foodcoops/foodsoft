@@ -1535,6 +1535,7 @@ nl:
       closed: afgerekend
       finished: gesloten
       open: lopende
+      received: ontvangen
     update:
       notice: De bestelling is bijgewerkt.
     update_order_amounts:
