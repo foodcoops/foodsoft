@@ -1541,6 +1541,7 @@ en:
       closed: settled
       finished: closed
       open: open
+      received: received
     update:
       notice: The order was updated.
     update_order_amounts:
