@@ -91,7 +91,7 @@ en:
         created_by: Created by
         date: Billing date
         delete_attachment: Delete attachment
-        deliveries: Delivery
+        deliveries: Stock delivery
         deposit: Deposit charged
         deposit_credit: Deposit returned
         financial_link: Financial link
