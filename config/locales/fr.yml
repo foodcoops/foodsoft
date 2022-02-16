@@ -1093,6 +1093,7 @@ fr:
       closed: décomptée
       finished: clôturée
       open: en cours
+      received: reçu      
     update:
       notice: La commande a été mise à jour.
     update_order_amounts:
