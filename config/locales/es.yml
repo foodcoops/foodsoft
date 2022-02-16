@@ -1344,6 +1344,7 @@ es:
       closed: cerrado
       finished: terminado
       open: abierto
+      received: recibido
     update:
       notice: Se actualizó el pedido.
     update_order_amounts:
