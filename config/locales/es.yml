@@ -90,7 +90,7 @@ es:
         created_by: Creado por
         date: Fecha de Pago
         delete_attachment: Borra adjunto
-        deliveries: Entregas
+        deliveries: Entregas en stock
         deposit: Depósito cobrado
         deposit_credit: Depósito devuelto
         financial_link: Enlace financiero
