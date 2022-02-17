@@ -4,14 +4,16 @@ class Foodcoop::OrdergroupsController < ApplicationController
              case params["sort"]
              when "name" then "name"
              when "name_reverse" then "name DESC"
-             when "last_user_activity" then "last_user_activity"
-             when "last_user_activity_reverse" then "last_user_activity DESC"
+             when "last_user_activity" then "users.last_activity"
+             when "last_user_activity_reverse" then "users.last_activity DESC"
+             when "last_order" then "orders.starts"
+             when "last_order_reverse" then "orders.starts DESC"
              end
            else
              "name"
            end
 
-    @ordergroups = Ordergroup.left_joins(:orders).order('orders.starts DESC') # order by "orders.starts"
+    @ordergroups = Ordergroup.left_joins(:orders).left_joins(:users).undeleted.order(sort).distinct
 
     unless params[:name].blank? # Search by name
       @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")
