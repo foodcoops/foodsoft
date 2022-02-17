@@ -11,7 +11,7 @@ class Foodcoop::OrdergroupsController < ApplicationController
              "name"
            end
 
-    @ordergroups = Ordergroup.undeleted.order(sort) # order by "orders.starts"
+    @ordergroups = Ordergroup.left_joins(:orders).order('orders.starts DESC') # order by "orders.starts"
 
     unless params[:name].blank? # Search by name
       @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")
