@@ -13,14 +13,21 @@ class Foodcoop::OrdergroupsController < ApplicationController
              "name"
            end
 
-    @ordergroups = Ordergroup.left_joins(:orders).left_joins(:users).undeleted.order(sort).distinct
+    case params["sort"]
+    when "last_user_activity", "last_user_activity_reverse" then @ordergroups = Ordergroup.left_joins(:users).undeleted.order(sort).distinct
+    when "last_order", "last_order_reverse" then @ordergroups = Ordergroup.left_joins(:orders).undeleted.order(sort).distinct
+    else
+      Rails.logger.info("default sort order")
+      @ordergroups = Ordergroup.undeleted.order(sort)
+    end
+    Rails.logger.info("ordergroups should be initialized")
 
     unless params[:name].blank? # Search by name
       @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")
     end
 
     if params[:only_active] # Select only active groups
-      @ordergroups = @ordergroups.joins(:orders).where("orders.starts >= ?", Time.now.months_ago(3)).uniq
+      @ordergroups = @ordergroups.joins(:orders).where("orders.starts >= ?", Time.now.months_ago(3)).distinct
     end
 
     @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
