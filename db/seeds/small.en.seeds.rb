@@ -147,6 +147,7 @@ User.create!(:id => 2, :nick => "john", :password => "secret", :first_name => "J
 User.create!(:id => 3, :nick => "peter", :password => "secret", :first_name => "Peter", :last_name => "Peters", :email => "peter@peters.test", :created_on => 'Sat, 25 Jan 2014 20:20:36 UTC +00:00')
 User.create!(:id => 4, :nick => "jan", :password => "secret", :first_name => "Jan", :last_name => "Lou", :email => "jan@lou.test", :created_on => 'Mon, 27 Jan 2014 16:22:14 UTC +00:00')
 User.create!(:id => 5, :nick => "mary", :password => "secret", :first_name => "Mary", :last_name => "Lou", :email => "marie@lou.test", :created_on => 'Mon, 03 Feb 2014 11:47:17 UTC +00:00')
+User.find_by_nick("mary").update(last_activity: 5.days.ago)
 
 Workgroup.create!(:id => 1, :name => "Administrators", :description => "System administrators.", :account_balance => 0.0, :created_on => 'Wed, 15 Jan 2014 16:15:33 UTC +00:00', :role_admin => true, :role_suppliers => true, :role_article_meta => true, :role_finance => true, :role_orders => true, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
 Workgroup.create!(:id => 2, :name => "Finances", :account_balance => 0.0, :created_on => 'Sun, 19 Jan 2014 17:40:03 UTC +00:00', :role_admin => false, :role_suppliers => false, :role_article_meta => false, :role_finance => true, :role_orders => false, :next_weekly_tasks_number => 8, :ignore_apple_restriction => false)
@@ -172,8 +173,8 @@ Membership.create!(:group_id => 4, :user_id => 5)
 ## Orders & OrderArticles
 
 seed_order(supplier_id: 1, starts: 2.days.ago, ends: 5.days.from_now)
-seed_order(supplier_id: 3, starts: 2.days.ago, ends: 5.days.from_now)
-seed_order(supplier_id: 2, starts: 2.days.ago, ends: 4.days.from_now)
+seed_order(supplier_id: 3, starts: 3.days.ago, ends: 5.days.from_now)
+seed_order(supplier_id: 2, starts: 4.days.ago, ends: 4.days.from_now)
 
 ## GroupOrders & such
 
