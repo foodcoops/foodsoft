@@ -1,7 +1,7 @@
 FROM ruby:2.6
 
 # Install dependencies
-RUN deps='libmagic-dev chromium' && \
+RUN deps='libmagic-dev chromium nodejs' && \
     apt-get update && \
     apt-get install --no-install-recommends -y $deps && \
     rm -Rf /var/lib/apt/lists/* /var/cache/apt/*
