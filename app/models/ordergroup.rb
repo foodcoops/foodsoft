@@ -4,14 +4,6 @@
 # Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
 
-# TODO for Feb 16th
-# Main goal:
-#    make "lastOrders" sortable
-#
-# To be touched:
-#  * views - define how X can be displayed
-#  * controllers - handles interaction logic
-
 class Ordergroup < Group
   include CustomFields
 
