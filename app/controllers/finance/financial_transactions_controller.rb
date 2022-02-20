@@ -89,7 +89,7 @@ class Finance::FinancialTransactionsController < ApplicationController
       params[:financial_transactions].each do |trans|
         # ignore empty amount fields ...
         unless trans[:amount].blank?
-          amount = trans[:amount].to_f
+          amount = LocalizeInput.parse(trans[:amount]).to_f
           note = params[:note]
           ordergroup = Ordergroup.find(trans[:ordergroup_id])
           if params[:set_balance]
