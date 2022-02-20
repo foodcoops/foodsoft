@@ -334,7 +334,7 @@ de:
         first_paragraph: Hier kannst du die Kontotransaktionsklassen und die dazugehörigen Kontotransaktionstypen verwalten. Jede Finanztansaktion hat einen bestimmten Typ, den du bei jeder Transaktion auswählen muss, falls du mehr als einen Typ angelegt hast. Die Kontotransaktionsklassen können zur Gruppierung der Kontotransaktionstypen verwendet werden und werden in der Kontoübersicht als weitere Spalten angezeigt, falls mehrere angelegt wurden.
         new_bank_account: Neues Bankkonto anlegen
         new_financial_transaction_class: Neue Kontotransaktionsklasse anlegen
-        new_bank_gateway: Neuer Bank Gateway anlegen
+        new_bank_gateway: Neuen Bank Gateway anlegen
         title: Finanzen
         transaction_types: Kontotransaktionstypen
         supplier_categories: Lieferantenkategorien
