@@ -193,6 +193,11 @@ de:
         phone2: Telefon 2
         shared_sync_method: Syncronisierungsmethode
         url: Webseite
+      supplier_category:
+        name: Name
+        description: Beschreibung
+        financial_transaction_class: Kontotransaktionsklasse
+        bank_account: Bankkonto
       task:
         created_by: Erstellt von
         created_on: Erstellt am
@@ -267,6 +272,7 @@ de:
       stock_article: Lagerartikel
       stock_taking: Inventur
       supplier: Lieferant
+      supplier_category: Lieferantenkategorie
       task: Aufgabe
       user: Benutzerinnen
       workgroup: Arbeitsgruppe
@@ -328,8 +334,11 @@ de:
         first_paragraph: Hier kannst du die Kontotransaktionsklassen und die dazugehörigen Kontotransaktionstypen verwalten. Jede Finanztansaktion hat einen bestimmten Typ, den du bei jeder Transaktion auswählen muss, falls du mehr als einen Typ angelegt hast. Die Kontotransaktionsklassen können zur Gruppierung der Kontotransaktionstypen verwendet werden und werden in der Kontoübersicht als weitere Spalten angezeigt, falls mehrere angelegt wurden.
         new_bank_account: Neues Bankkonto anlegen
         new_financial_transaction_class: Neue Kontotransaktionsklasse anlegen
+        new_bank_gateway: Neuen Bank Gateway anlegen
         title: Finanzen
         transaction_types: Kontotransaktionstypen
+        supplier_categories: Lieferantenkategorien
+        new_supplier_category: Neue Lieferantenkategorie anlegen
       transaction_types:
         name: Name
         new_financial_transaction_type: Neuen Kontotransaktionstyp anlegen
@@ -428,6 +437,10 @@ de:
       workgroups:
         members: Mitglieder
         name: Name
+    supplier_categories:
+      form:
+        title_new: Neue Lieferantenkategorie anlegen
+        title_edit: Lieferantenkategorie bearbeiten
   application:
     controller:
       error_authn: Anmeldung erforderlich!
