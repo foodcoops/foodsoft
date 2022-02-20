@@ -24,46 +24,46 @@ describe Order do
     let!(:received_order) { create :order, state: 'received' }
     let!(:closed_order)   { create :order, state: 'closed'   }
 
-    it 'should retrieve open orders in the "open" scope' do
+    it 'retrieves open orders in the "open" scope' do
       expect(Order.open.count).to eq(1)
       expect(Order.open.where(id: open_order.id)).to exist
     end
 
-    it 'should retrieve finished, received and closed orders in the "finished" scope' do
+    it 'retrieves finished, received and closed orders in the "finished" scope' do
       expect(Order.finished.count).to eq(3)
       expect(Order.finished.where(id: finished_order.id)).to exist
       expect(Order.finished.where(id: received_order.id)).to exist
       expect(Order.finished.where(id: closed_order.id)).to exist
     end
 
-    it 'should retrieve finished and received orders in the "finished_not_closed" scope' do
+    it 'retrieves finished and received orders in the "finished_not_closed" scope' do
       expect(Order.finished_not_closed.count).to eq(2)
       expect(Order.finished_not_closed.where(id: finished_order.id)).to exist
       expect(Order.finished_not_closed.where(id: received_order.id)).to exist
     end
 
-    it 'should return valid boolean states for open orders' do
+    it 'returns valid boolean states for open orders' do
       expect(open_order.open?).to be(true)
       expect(open_order.finished?).to be(false)
       expect(open_order.received?).to be(false)
       expect(open_order.closed?).to be(false)
     end
 
-    it 'should return valid boolean states for finished orders' do
+    it 'returns valid boolean states for finished orders' do
       expect(finished_order.open?).to be(false)
       expect(finished_order.finished?).to be(true)
       expect(finished_order.received?).to be(false)
       expect(finished_order.closed?).to be(false)
     end
 
-    it 'should return valid boolean states for received orders' do
+    it 'returns valid boolean states for received orders' do
       expect(received_order.open?).to be(false)
       expect(received_order.finished?).to be(true)
       expect(received_order.received?).to be(true)
       expect(received_order.closed?).to be(false)
     end
 
-    it 'should return valid boolean states for closed orders' do
+    it 'returns valid boolean states for closed orders' do
       expect(closed_order.open?).to be(false)
       expect(closed_order.finished?).to be(false)
       expect(closed_order.received?).to be(false)
@@ -122,6 +122,7 @@ describe Order do
 
   describe 'with a default end date' do
     let(:order) { create :order }
+
     before do
       FoodsoftConfig[:order_schedule] = { ends: { recurr: 'FREQ=WEEKLY;BYDAY=MO', time: '9:00' } }
       order.init_dates

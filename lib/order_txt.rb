@@ -25,6 +25,6 @@ class OrderTxt
 
   # Helper method to test pdf via rails console: OrderTxt.new(order).save_tmp
   def save_tmp
-    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.txt", 'w') { |f| f.write(to_csv.force_encoding("UTF-8")) }
+    File.write("#{Rails.root}/tmp/#{self.class.to_s.underscore}.txt", to_csv.force_encoding("UTF-8"))
   end
 end

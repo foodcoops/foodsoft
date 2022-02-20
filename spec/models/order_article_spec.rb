@@ -130,6 +130,7 @@ describe OrderArticle do
 
   describe 'boxfill' do
     before { FoodsoftConfig[:use_boxfill] = true }
+
     let(:article) { create :article, unit_quantity: 6 }
     let(:order) { create :order, article_ids: [article.id], starts: 1.week.ago }
     let(:oa) { order.order_articles.first }
@@ -139,7 +140,7 @@ describe OrderArticle do
     shared_examples "boxfill" do |success, q|
       # initial situation
       before do
-        goa.update_quantities *q.keys[0]
+        goa.update_quantities(*q.keys[0])
         oa.update_results!; oa.reload
       end
 
@@ -149,11 +150,11 @@ describe OrderArticle do
       end
 
       # actual test
-      it (success ? 'succeeds' : 'fails') do
+      it(success ? 'succeeds' : 'fails') do
         order.update_attributes(boxfill: boxfill_from)
 
         r = proc {
-          goa.update_quantities *q.values[0]
+          goa.update_quantities(*q.values[0])
           oa.update_results!
         }
         if success
@@ -169,9 +170,11 @@ describe OrderArticle do
 
     context 'before the date' do
       let(:boxfill_from) { 1.hour.from_now }
+
       context 'decreasing the missing units' do
         include_examples "boxfill", true, [6, 0] => [5, 0], [6, 0, 0] => [5, 0, 1]
       end
+
       context 'decreasing the tolerance' do
         include_examples "boxfill", true, [1, 2] => [1, 1], [1, 2, 3] => [1, 1, 4]
       end
@@ -179,21 +182,27 @@ describe OrderArticle do
 
     context 'after the date' do
       let(:boxfill_from) { 1.second.ago }
+
       context 'changing nothing in particular' do
         include_examples "boxfill", true, [4, 1] => [4, 1], [4, 1, 1] => [4, 1, 1]
       end
+
       context 'increasing missing units' do
         include_examples "boxfill", false, [3, 0] => [2, 0], [3, 0, 3] => [3, 0, 3]
       end
+
       context 'increasing tolerance' do
         include_examples "boxfill", true, [2, 1] => [2, 2], [2, 1, 3] => [2, 2, 2]
       end
+
       context 'decreasing quantity to fix missing units' do
         include_examples "boxfill", true, [7, 0] => [6, 0], [7, 0, 5] => [6, 0, 0]
       end
+
       context 'decreasing quantity keeping missing units equal' do
         include_examples "boxfill", false, [7, 0] => [1, 0], [7, 0, 5] => [7, 0, 5]
       end
+
       context 'moving tolerance to quantity' do
         include_examples "boxfill", true, [4, 2] => [6, 0], [4, 2, 0] => [6, 0, 0]
       end

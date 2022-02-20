@@ -145,13 +145,13 @@ class Mailer < ActionMailer::Base
 
   def self.deliver_now_with_user_locale(user, &block)
     I18n.with_locale(user.settings['profile']['language']) do
-      self.deliver_now &block
+      self.deliver_now(&block)
     end
   end
 
   def self.deliver_now_with_default_locale(&block)
     I18n.with_locale(FoodsoftConfig[:default_locale]) do
-      self.deliver_now &block
+      self.deliver_now(&block)
     end
   end
 

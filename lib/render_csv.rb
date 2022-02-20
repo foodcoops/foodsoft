@@ -34,7 +34,7 @@ class RenderCSV
   # Helper method to test pdf via rails console: OrderCsv.new(order).save_tmp
   def save_tmp
     encoding = @options[:encoding] || 'UTF-8'
-    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.csv", 'w') { |f| f.write(to_csv.force_encoding(encoding)) }
+    File.write("#{Rails.root}/tmp/#{self.class.to_s.underscore}.csv", to_csv.force_encoding(encoding))
   end
 
   # XXX disable unit to avoid encoding problems, both in unit and whitespace. Also allows computations in spreadsheet.

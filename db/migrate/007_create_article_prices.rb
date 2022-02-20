@@ -16,7 +16,7 @@ class CreateArticlePrices < ActiveRecord::Migration[4.2]
     puts 'add prices to the sample articles'
     CreateArticles::SAMPLE_ARTICLE_NAMES.each do |a|
       puts 'Create Price for article ' + a
-      raise 'article #{a} not found!' unless article = Article.find_by_name(a)
+      raise "article #{a} not found!" unless article = Article.find_by_name(a)
 
       new_price = ArticlePrice.new(:clear_price => rand(4) + 1,
                                    :tax => 7.0,

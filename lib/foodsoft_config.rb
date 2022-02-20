@@ -158,7 +158,7 @@ class FoodsoftConfig
     # @return [Array<String>] Valid names of foodcoops.
     def foodcoops
       if config[:multi_coop_install]
-        APP_CONFIG.keys.reject { |coop| coop =~ /^(default|development|test|production)$/ }
+        APP_CONFIG.keys.grep_v(/^(default|development|test|production)$/)
       else
         [config[:default_scope]]
       end
@@ -189,7 +189,7 @@ class FoodsoftConfig
 
     # @return [Hash] Full configuration.
     def to_hash
-      keys.map { |k| [k, self[k]] }.to_h
+      keys.to_h { |k| [k, self[k]] }
     end
 
     # for using active_model_serializer in the api/v1/configs controller

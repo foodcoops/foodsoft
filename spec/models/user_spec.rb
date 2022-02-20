@@ -15,6 +15,7 @@ describe User do
 
   describe 'does not have the role' do
     let(:user) { create :user }
+
     it 'admin'        do expect(user.role_admin?).to be_falsey end
     it 'finance'      do expect(user.role_finance?).to be_falsey end
     it 'article_meta' do expect(user.role_article_meta?).to be_falsey end
@@ -28,20 +29,25 @@ describe User do
     it 'can authenticate with correct password' do
       expect(User.authenticate(user.nick, 'blahblahblah')).to be_truthy
     end
+
     it 'can not authenticate with incorrect password' do
       expect(User.authenticate(user.nick, 'foobar')).to be_nil
     end
+
     it 'can not authenticate with nil nick' do
       expect(User.authenticate(nil, 'blahblahblah')).to be_nil
     end
+
     it 'can not authenticate with nil password' do
       expect(User.authenticate(user.nick, nil)).to be_nil
     end
+
     it 'can not set a password without matching confirmation' do
       user.password = 'abcdefghijkl'
       user.password_confirmation = 'foobaruvwxyz'
       expect(user).to be_invalid
     end
+
     it 'can set a password with matching confirmation' do
       user.password = 'abcdefghijkl'
       user.password_confirmation = 'abcdefghijkl'
@@ -51,6 +57,7 @@ describe User do
     it 'has a unique nick' do
       expect(build(:user, nick: user.nick, email: "x-#{user.email}")).to be_invalid
     end
+
     it 'has a unique email' do
       expect(build(:user, email: "#{user.email}")).to be_invalid
     end
@@ -68,6 +75,7 @@ describe User do
 
   describe 'admin' do
     let(:user) { create :admin }
+
     it 'default admin role' do expect(user.role_admin?).to be_truthy end
   end
 end

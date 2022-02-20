@@ -5,6 +5,7 @@ feature 'supplier' do
 
   describe 'create new' do
     let(:user) { create :user, groups: [create(:workgroup, role_suppliers: true)] }
+
     before { login user }
 
     it 'can be created' do

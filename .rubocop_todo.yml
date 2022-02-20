@@ -56,13 +56,6 @@ Lint/AmbiguousBlockAssociation:
 
 # Offense count: 4
 # Cop supports --auto-correct.
-Lint/AmbiguousOperator:
-  Exclude:
-    - 'app/mailers/mailer.rb'
-    - 'spec/models/order_article_spec.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
 Lint/AmbiguousOperatorPrecedence:
   Exclude:
     - 'app/models/concerns/price_calculation.rb'
@@ -136,12 +129,6 @@ Lint/IneffectiveAccessModifier:
 
 # Offense count: 1
 # Cop supports --auto-correct-all.
-Lint/InterpolationCheck:
-  Exclude:
-    - 'db/migrate/007_create_article_prices.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct-all.
 Lint/Loop:
   Exclude:
     - 'app/models/concerns/mark_as_deleted_with_name.rb'
@@ -158,31 +145,10 @@ Lint/NonDeterministicRequireOrder:
   Exclude:
     - 'spec/spec_helper.rb'
 
-# Offense count: 5
-# Cop supports --auto-correct.
-Lint/ParenthesesAsGroupedExpression:
-  Exclude:
-    - 'spec/integration/articles_spec.rb'
-    - 'spec/lib/token_verifier_spec.rb'
-    - 'spec/models/order_article_spec.rb'
-
 # Offense count: 1
 Lint/ReturnInVoidContext:
   Exclude:
     - 'lib/foodsoft_config.rb'
-
-# Offense count: 8
-# Cop supports --auto-correct.
-Lint/ScriptPermission:
-  Exclude:
-    - 'Rakefile'
-    - 'plugins/discourse/Rakefile'
-    - 'plugins/documents/Rakefile'
-    - 'plugins/links/Rakefile'
-    - 'plugins/messages/Rakefile'
-    - 'plugins/polls/Rakefile'
-    - 'plugins/printer/Rakefile'
-    - 'plugins/wiki/Rakefile'
 
 # Offense count: 7
 # Cop supports --auto-correct.
@@ -479,70 +445,10 @@ RSpec/DescribedClass:
     - 'spec/models/ordergroup_spec.rb'
     - 'spec/models/user_spec.rb'
 
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: AllowConsecutiveOneLiners.
-RSpec/EmptyLineAfterExample:
-  Exclude:
-    - 'spec/integration/session_spec.rb'
-    - 'spec/models/user_spec.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterExampleGroup:
-  Exclude:
-    - 'spec/models/order_article_spec.rb'
-
-# Offense count: 30
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterFinalLet:
-  Exclude:
-    - 'spec/api/v1/order_articles_spec.rb'
-    - 'spec/api/v1/swagger_spec.rb'
-    - 'spec/api/v1/user/financial_transactions_spec.rb'
-    - 'spec/api/v1/user/group_order_articles_spec.rb'
-    - 'spec/integration/articles_spec.rb'
-    - 'spec/integration/balancing_spec.rb'
-    - 'spec/integration/login_spec.rb'
-    - 'spec/integration/supplier_spec.rb'
-    - 'spec/models/order_article_spec.rb'
-    - 'spec/models/order_spec.rb'
-    - 'spec/models/user_spec.rb'
-    - 'spec/support/api_helper.rb'
-
-# Offense count: 17
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterHook:
-  Exclude:
-    - 'spec/api/v1/swagger_spec.rb'
-    - 'spec/api/v1/user/financial_transactions_spec.rb'
-    - 'spec/api/v1/user/group_order_articles_spec.rb'
-    - 'spec/integration/balancing_spec.rb'
-    - 'spec/integration/login_spec.rb'
-    - 'spec/models/order_article_spec.rb'
-    - 'spec/support/api_oauth.rb'
-
 # Offense count: 59
 # Configuration parameters: CountAsOne.
 RSpec/ExampleLength:
   Max: 81
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: CustomTransform, IgnoredWords.
-RSpec/ExampleWording:
-  Exclude:
-    - 'spec/models/order_spec.rb'
-
-# Offense count: 5
-# Cop supports --auto-correct.
-# Configuration parameters: Include.
-# Include: spec/factories.rb, spec/factories/**/*.rb, features/support/factories/**/*.rb
-RSpec/FactoryBot/FactoryClassName:
-  Exclude:
-    - 'spec/factories/article.rb'
-    - 'spec/factories/doorkeeper.rb'
-    - 'spec/factories/supplier.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -598,12 +504,6 @@ RSpec/IteratedExpectation:
   Exclude:
     - 'spec/models/order_spec.rb'
     - 'spec/models/supplier_spec.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-RSpec/LetBeforeExamples:
-  Exclude:
-    - 'spec/api/v1/swagger_spec.rb'
 
 # Offense count: 13
 RSpec/LetSetup:
@@ -674,14 +574,6 @@ RSpec/RepeatedExample:
     - 'spec/lib/bank_transaction_reference_spec.rb'
     - 'spec/lib/foodsoft_mail_receiver_spec.rb'
 
-# Offense count: 9
-# Cop supports --auto-correct.
-RSpec/ScatteredLet:
-  Exclude:
-    - 'spec/api/v1/swagger_spec.rb'
-    - 'spec/api/v1/user/group_order_articles_spec.rb'
-    - 'spec/api/v1/user/ordergroup_spec.rb'
-
 # Offense count: 7
 RSpec/ScatteredSetup:
   Exclude:
@@ -709,14 +601,6 @@ Rails/ActiveRecordCallbacksOrder:
     - 'app/models/financial_transaction_type.rb'
     - 'app/models/order.rb'
     - 'app/models/stock_change.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: Include.
-# Include: db/migrate/*.rb
-Rails/AddColumnIndex:
-  Exclude:
-    - 'db/migrate/20171002000000_create_financial_links.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -751,12 +635,6 @@ Rails/Blank:
   Exclude:
     - 'app/controllers/api/v1/base_controller.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Rails/ContentTag:
-  Exclude:
-    - 'plugins/wiki/app/helpers/pages_helper.rb'
-
 # Offense count: 33
 # Configuration parameters: Include.
 # Include: db/migrate/*.rb
@@ -782,12 +660,6 @@ Rails/Date:
 # AllowedReceivers: Gem::Specification
 Rails/DynamicFindBy:
   Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Rails/EagerEvaluationLogMessage:
-  Exclude:
-    - 'db/migrate/20130718183101_migrate_user_settings.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -1297,15 +1169,6 @@ Style/ExplicitBlockArgument:
     - 'plugins/current_orders/app/documents/multiple_orders_by_articles.rb'
     - 'plugins/current_orders/app/documents/multiple_orders_by_groups.rb'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/FileWrite:
-  Exclude:
-    - 'config/initializers/secret_token.rb'
-    - 'lib/order_txt.rb'
-    - 'lib/render_csv.rb'
-    - 'lib/render_pdf.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct-all.
 # Configuration parameters: EnforcedStyle.
@@ -1461,12 +1324,6 @@ Style/LineEndConcatenation:
   Exclude:
     - 'db/migrate/20130702113610_update_group_order_totals.rb'
     - 'plugins/current_orders/app/documents/multiple_orders_by_articles.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct-all.
-Style/MapToHash:
-  Exclude:
-    - 'lib/foodsoft_config.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -1779,12 +1636,6 @@ Style/RedundantReturn:
 # Cop supports --auto-correct.
 Style/RedundantSelf:
   Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/RedundantSelfAssignmentBranch:
-  Exclude:
-    - 'db/migrate/20130718183101_migrate_user_settings.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct-all.

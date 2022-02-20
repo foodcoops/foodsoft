@@ -2,7 +2,7 @@ module PagesHelper
   include WikiCloth
 
   def rss_meta_tag
-    tag('link', :rel => "alternate", :type => "application/rss+xml", :title => "RSS", :href => all_pages_rss_url).html_safe
+    tag.link(rel: "alternate", type: "application/rss+xml", title: "RSS", href: all_pages_rss_url).html_safe
   end
 
   def wikified_body(body, title = nil)

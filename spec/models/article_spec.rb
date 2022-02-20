@@ -5,7 +5,7 @@ describe Article do
   let(:article) { create :article, supplier: supplier }
 
   it 'has a unique name' do
-    article2 = FactoryBot.build :article, supplier: supplier, name: article.name
+    article2 = build :article, supplier: supplier, name: article.name
     expect(article2).to be_invalid
   end
 

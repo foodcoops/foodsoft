@@ -10,6 +10,7 @@ module ApiHelper
     def self.it_handles_invalid_token(method, path, params_block = -> { api_auth })
       context 'with invalid access token' do
         let(:api_access_token) { 'abc' }
+
         it { is_expected.to validate(method, path, 401, instance_exec(&params_block)) }
       end
     end
@@ -17,6 +18,7 @@ module ApiHelper
     def self.it_handles_invalid_scope(method, path, params_block = -> { api_auth })
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
+
         it { is_expected.to validate(method, path, 403, instance_exec(&params_block)) }
       end
     end
