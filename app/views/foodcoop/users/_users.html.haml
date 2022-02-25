@@ -8,8 +8,8 @@
         %th= heading_helper User, :nick
       %th= sort_link_helper heading_helper(User, :name), "name"
       %th= sort_link_helper heading_helper(User, :email), "email"
-      %th= heading_helper User, :phone
-      %th= heading_helper User, :ordergroup
+      %th= sort_link_helper heading_helper(User, :phone), "phone"
+      %th= sort_link_helper heading_helper(User, :ordergroup), "ordergroup"
       %th= heading_helper User, :workgroup, count: 3
   %tbody
     - for user in @users

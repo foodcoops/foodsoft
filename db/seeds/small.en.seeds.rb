@@ -142,9 +142,9 @@ Article.create!(:name => "Coconut grated", :supplier_id => 4, :article_category_
 
 ## Members & groups
 
-User.create!(:id => 1, :nick => "admin", :password => "secret", :first_name => "Anton", :last_name => "Administrator", :email => "admin@foo.test", :created_on => 'Wed, 15 Jan 2014 16:15:33 UTC +00:00')
+User.create!(:id => 1, :nick => "admin", :password => "secret", :first_name => "Anton", :last_name => "Administrator", :email => "admin@foo.test", :phone => "+4421486548", :created_on => 'Wed, 15 Jan 2014 16:15:33 UTC +00:00')
 User.create!(:id => 2, :nick => "john", :password => "secret", :first_name => "John", :last_name => "Doe", :email => "john@doe.test", :created_on => 'Sun, 19 Jan 2014 17:38:22 UTC +00:00')
-User.create!(:id => 3, :nick => "peter", :password => "secret", :first_name => "Peter", :last_name => "Peters", :email => "peter@peters.test", :created_on => 'Sat, 25 Jan 2014 20:20:36 UTC +00:00')
+User.create!(:id => 3, :nick => "peter", :password => "secret", :first_name => "Peter", :last_name => "Peters", :email => "peter@peters.test", :phone => "+4711235486811", :created_on => 'Sat, 25 Jan 2014 20:20:36 UTC +00:00')
 User.create!(:id => 4, :nick => "jan", :password => "secret", :first_name => "Jan", :last_name => "Lou", :email => "jan@lou.test", :created_on => 'Mon, 27 Jan 2014 16:22:14 UTC +00:00')
 User.create!(:id => 5, :nick => "mary", :password => "secret", :first_name => "Mary", :last_name => "Lou", :email => "marie@lou.test", :created_on => 'Mon, 03 Feb 2014 11:47:17 UTC +00:00')
 User.find_by_nick("mary").update(last_activity: 5.days.ago)

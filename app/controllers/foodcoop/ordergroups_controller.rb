@@ -18,10 +18,8 @@ class Foodcoop::OrdergroupsController < ApplicationController
     when "last_order", "last_order_reverse" then @ordergroups = Ordergroup.left_joins(:orders).group("groups.id").undeleted.order(sort).distinct
       # tp Ordergroup.left_joins(:orders).order("orders.starts"), "name", "orders.starts"
     else
-      # Rails.logger.info("default sort order")
       @ordergroups = Ordergroup.undeleted.order(sort)
     end
-    Rails.logger.info("ordergroups should be initialized")
 
     unless params[:name].blank? # Search by name
       @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")
