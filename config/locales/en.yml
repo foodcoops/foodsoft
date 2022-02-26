@@ -35,9 +35,15 @@ en:
         unit_quantity: Unit quantity
       bank_account:
         balance: Balance
+        bank_gateway: Bank gateway
         description: Description
         iban: IBAN
         name: Name
+      bank_gateway:
+        authorization: Authorization-Header
+        name: Name
+        unattended_user: Unattended user
+        url: URL
       bank_transaction:
         amount: Amount
         date: Date
@@ -91,7 +97,7 @@ en:
         created_by: Created by
         date: Billing date
         delete_attachment: Delete attachment
-        deliveries: Delivery
+        deliveries: Stock delivery
         deposit: Deposit charged
         deposit_credit: Deposit returned
         financial_link: Financial link
@@ -187,6 +193,11 @@ en:
         phone2: Phone 2
         shared_sync_method: How to synchronize
         url: Homepage
+      supplier_category:
+        name: Name
+        description: Description
+        financial_transaction_class: Financial transacton class
+        bank_account: Bank account
       task:
         created_by: Created by
         created_on: Created at
@@ -244,6 +255,8 @@ en:
     models:
       article: Article
       article_category: Category
+      bank_account: Bank account
+      bank_gateway: Bank gateway
       bank_transaction: Bank transaction
       delivery: Delivery
       financial_transaction: Financial transaction
@@ -259,6 +272,7 @@ en:
       stock_article: Stock article
       stock_taking: Stock taking
       supplier: Supplier
+      supplier_category: Supplier category
       task: Task
       user: User
       workgroup: Workgroup
@@ -282,6 +296,14 @@ en:
         title: Administration
         type: type
         username: username
+    bank_accounts:
+      form:
+        title_edit: Edit bank account
+        title_new: Add new bank account
+    bank_gateways:
+      form:
+        title_edit: Edit bank gateway
+        title_new: Add new bank gateway
     configs:
       list:
         key: Key
@@ -312,8 +334,11 @@ en:
         first_paragraph: Here you can manage the financial transaction classes and the corresponding financial transaction types. Every financial transaction has a type, which you have to select at every transaction, if you created more than one type. The financial transaction classes can be use to group the financial transaction types and will be shown as additional columns in the account overview, if there have been created more than one.
         new_bank_account: Add new bank account
         new_financial_transaction_class: Add new financial transaction class
+        new_bank_gateway: Add new bank gateway
         title: Finances
         transaction_types: Financial transaction types
+        supplier_categories: Supplier categories
+        new_supplier_category: New supplier category
       transaction_types:
         name: Name
         new_financial_transaction_type: Add new financial transaction type
@@ -412,6 +437,10 @@ en:
       workgroups:
         members: members
         name: name
+    supplier_categories:
+      form:
+        title_new: Add supplier category
+        title_edit: Edit supplier category
   application:
     controller:
       error_authn: Authentication required!
@@ -1541,6 +1570,7 @@ en:
       closed: settled
       finished: closed
       open: open
+      received: received
     update:
       notice: The order was updated.
     update_order_amounts:

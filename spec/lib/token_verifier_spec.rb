@@ -1,9 +1,9 @@
 require_relative '../spec_helper'
 
 describe TokenVerifier do
-  let (:prefix) { 'xyz' }
-  let (:v) { TokenVerifier.new(prefix) }
-  let (:msg) { v.generate }
+  let(:prefix) { 'xyz' }
+  let(:v) { TokenVerifier.new(prefix) }
+  let(:msg) { v.generate }
 
   it 'validates' do
     expect { v.verify(msg) }.to_not raise_error

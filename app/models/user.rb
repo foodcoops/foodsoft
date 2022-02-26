@@ -33,7 +33,7 @@ class User < ApplicationRecord
   validates_presence_of :first_name # for simple_form validations
   validates_length_of :first_name, :in => 2..50
   validates_confirmation_of :password
-  validates_length_of :password, :in => 5..25, :allow_blank => true
+  validates_length_of :password, :in => 5..50, :allow_blank => true
   # allow nick to be nil depending on foodcoop config
   # TODO Rails 4 may have a more beautiful way
   #   http://stackoverflow.com/questions/19845910/conditional-allow-nil-part-of-validation
@@ -132,7 +132,7 @@ class User < ApplicationRecord
   end
 
   # Returns a random password.
-  def new_random_password(size = 3)
+  def new_random_password(size = 6)
     c = %w(b c d f g h j k l m n p qu r s t v w x z ch cr fr nd ng nk nt ph pr rd sh sl sp st th tr)
     v = %w(a e i o u y)
     f, r = true, ''

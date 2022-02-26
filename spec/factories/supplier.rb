@@ -23,7 +23,7 @@ FactoryBot.define do
       create_list :article, article_count, supplier: supplier
     end
 
-    factory :shared_supplier, class: SharedSupplier
+    factory :shared_supplier, class: 'SharedSupplier'
   end
 
   factory :supplier_category do

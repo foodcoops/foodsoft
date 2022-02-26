@@ -83,21 +83,25 @@ describe Api::V1::User::FinancialTransactionsController, type: :controller do
 
       context "with existing financial transaction" do
         before { user.ordergroup.add_financial_transaction! 5000, 'for ordering', user, ftt3 }
+
         include_examples "financial_transactions create/update success"
       end
 
       context "with invalid financial transaction type" do
         let(:ft_params) { { amount: amount, financial_transaction_type_id: -1, note: note } }
+
         include_examples "financial_transactions endpoint failure", 404
       end
 
       context "without note" do
         let(:ft_params) { { amount: amount, financial_transaction_type_id: ftt1.id } }
+
         include_examples "financial_transactions endpoint failure", 422
       end
 
       context 'without enough balance' do
         before { FoodsoftConfig[:minimum_balance] = 1000 }
+
         include_examples "financial_transactions endpoint failure", 403
       end
     end

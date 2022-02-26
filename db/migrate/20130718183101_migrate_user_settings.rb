@@ -16,7 +16,7 @@ class MigrateUserSettings < ActiveRecord::Migration[4.2]
         begin
           user = type.constantize.find(id)
         rescue ActiveRecord::RecordNotFound
-          Rails.logger.debug "Can't find configurable object with type: #{type.inspect}, id: #{id.inspect}"
+          Rails.logger.debug { "Can't find configurable object with type: #{type.inspect}, id: #{id.inspect}" }
           next
         end
 
@@ -27,7 +27,7 @@ class MigrateUserSettings < ActiveRecord::Migration[4.2]
 
         # prepare value
         value     = YAML.load(old_setting.value)
-        value     = value.nil? ? false : value
+        value     = false if value.nil?
 
         # set the settings_attributes (thanks to settings.merge! we can set them one by one)
         user.settings_attributes = {

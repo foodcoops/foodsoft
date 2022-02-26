@@ -18,7 +18,7 @@ Foodsoft::Application.config.secret_key_base = begin
     else
       puts "=> Generating initial SECRET_KEY_BASE in #{sf}"
       token = SecureRandom.hex(30)
-      File.open(sf, 'w') { |f| f.write(token) }
+      File.write(sf, token)
       token
     end
   end

@@ -89,6 +89,14 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.decimal "balance", precision: 12, scale: 2, default: "0.0", null: false
     t.datetime "last_import"
     t.string "import_continuation_point"
+    t.integer "bank_gateway_id"
+  end
+
+  create_table "bank_gateways", id: :integer, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "url", null: false
+    t.string "authorization"
+    t.integer "unattended_user_id"
   end
 
   create_table "bank_transactions", id: :integer, force: :cascade do |t|
@@ -323,8 +331,8 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "units_to_order", default: 0, null: false
     t.integer "lock_version", default: 0, null: false
     t.integer "article_price_id"
-    t.integer "units_billed"
-    t.integer "units_received"
+    t.decimal "units_billed", precision: 8, scale: 3
+    t.decimal "units_received", precision: 8, scale: 3
     t.index ["order_id", "article_id"], name: "index_order_articles_on_order_id_and_article_id", unique: true
     t.index ["order_id"], name: "index_order_articles_on_order_id"
   end
@@ -475,6 +483,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.string "name", null: false
     t.string "description"
     t.integer "financial_transaction_class_id"
+    t.integer "bank_account_id"
   end
 
   create_table "suppliers", id: :integer, force: :cascade do |t|

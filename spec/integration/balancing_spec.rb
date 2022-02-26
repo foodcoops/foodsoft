@@ -12,6 +12,7 @@ feature 'settling an order', js: true do
   let(:oa) { order.order_articles.find_by_article_id(article.id) }
   let(:goa1) { create :group_order_article, group_order: go1, order_article: oa }
   let(:goa2) { create :group_order_article, group_order: go2, order_article: oa }
+
   before do
     goa1.update_quantities(3, 0)
     goa2.update_quantities(1, 0)
@@ -29,6 +30,7 @@ feature 'settling an order', js: true do
   end
 
   before { login admin }
+
   before { visit new_finance_order_path(order_id: order.id) }
 
   it 'has product ordered visible' do

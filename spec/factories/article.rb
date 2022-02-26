@@ -14,13 +14,13 @@ FactoryBot.define do
       article_category
     end
 
-    factory :shared_article, class: SharedArticle do
+    factory :shared_article, class: 'SharedArticle' do
       sequence(:name) { |n| Faker::Lorem.words(number: rand(2..4)).join(' ') + " s##{n}" }
       order_number { Faker::Lorem.characters(number: rand(1..12)) }
       shared_supplier
     end
 
-    factory :stock_article, class: StockArticle do
+    factory :stock_article, class: 'StockArticle' do
       sequence(:name) { |n| Faker::Lorem.words(number: rand(2..4)).join(' ') + " ##{n}" }
       unit_quantity { 1 }
       supplier

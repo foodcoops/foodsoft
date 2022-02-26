@@ -13,13 +13,13 @@ describe Api::V1::User::OrdergroupController, type: :controller do
 
   describe "GET :financial_overview" do
     let(:order) { create(:order, article_count: 1) }
+    let(:json_financial_overview) { json_response['financial_overview'] }
     let(:oa_1) { order.order_articles.first }
 
     let!(:go) { create(:group_order, order: order, ordergroup: user.ordergroup) }
     let!(:goa) { create(:group_order_article, group_order: go, order_article: oa_1, quantity: 1, tolerance: 0) }
-    before { go.update_price!; user.ordergroup.update_stats! }
 
-    let(:json_financial_overview) { json_response['financial_overview'] }
+    before { go.update_price!; user.ordergroup.update_stats! }
 
     before do
       og = user.ordergroup

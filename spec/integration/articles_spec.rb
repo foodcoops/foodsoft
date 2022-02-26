@@ -2,8 +2,9 @@ require_relative '../spec_helper'
 
 feature ArticlesController do
   let(:user) { create :user, groups: [create(:workgroup, role_article_meta: true)] }
-  let (:supplier) { create :supplier }
+  let(:supplier) { create :supplier }
   let!(:article_category) { create :article_category }
+
   before { login user }
 
   describe ':index', js: true do
@@ -17,7 +18,7 @@ feature ArticlesController do
     it 'can create a new article' do
       click_on I18n.t('articles.index.new')
       expect(page).to have_selector('form#new_article')
-      article = FactoryBot.build :article, supplier: supplier, article_category: article_category
+      article = build :article, supplier: supplier, article_category: article_category
       within('#new_article') do
         fill_in 'article_name', :with => article.name
         fill_in 'article_unit', :with => article.unit
@@ -37,6 +38,7 @@ feature ArticlesController do
   describe ':upload' do
     let(:filename) { 'foodsoft_file_02.csv' }
     let(:file)     { Rails.root.join("spec/fixtures/#{filename}") }
+
     before do
       visit upload_supplier_articles_path(supplier_id: supplier.id)
       attach_file 'articles_file', file
@@ -45,6 +47,7 @@ feature ArticlesController do
     Dir.glob('spec/fixtures/foodsoft_file_01.*') do |test_file|
       describe "can import articles from #{test_file}" do
         let(:file) { Rails.root.join(test_file) }
+
         it do
           find('input[type="submit"]').click
           expect(find("tr:nth-child(1) #new_articles__note").value).to eq "bio ◎"
@@ -63,6 +66,7 @@ feature ArticlesController do
 
     describe "can update existing article" do
       let!(:article) { create :article, supplier: supplier, name: 'Foobar', order_number: 1, unit: '250 g' }
+
       it do
         find('input[type="submit"]').click
         expect(find("#articles_#{article.id}_name").value).to eq 'Tomatoes'
@@ -88,6 +92,7 @@ feature ArticlesController do
 
     describe "can remove an existing article" do
       let!(:article) { create :article, supplier: supplier, name: 'Foobar', order_number: 99999 }
+
       it do
         check('articles_outlist_absent')
         find('input[type="submit"]').click
@@ -101,6 +106,7 @@ feature ArticlesController do
 
     describe "can convert units when updating" do
       let!(:article) { create :article, supplier: supplier, order_number: 1, unit: '250 g' }
+
       it do
         check('articles_convert_units')
         find('input[type="submit"]').click

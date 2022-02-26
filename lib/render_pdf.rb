@@ -120,7 +120,7 @@ class RenderPDF < Prawn::Document
 
   # Helper method to test pdf via rails console: OrderByGroups.new(order).save_tmp
   def save_tmp
-    File.open("#{Rails.root}/tmp/#{self.class.to_s.underscore}.pdf", 'w') { |f| f.write(to_pdf.force_encoding("UTF-8")) }
+    File.write("#{Rails.root}/tmp/#{self.class.to_s.underscore}.pdf", to_pdf.force_encoding("UTF-8"))
   end
 
   # @todo avoid underscore instead of unicode whitespace in pdf :/

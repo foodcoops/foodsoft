@@ -5,6 +5,7 @@ feature LoginController do
 
   describe 'forgot password' do
     before { visit forgot_password_path }
+
     it 'is accessible' do
       expect(page).to have_selector 'input[id=user_email]'
     end
@@ -21,7 +22,9 @@ feature LoginController do
   describe 'and reset it' do
     let(:token) { user.reset_password_token }
     let(:newpass) { user.new_random_password }
+
     before { user.request_password_reset! }
+
     before { visit new_password_path(id: user.id, token: token) }
 
     it 'is accessible' do
@@ -30,6 +33,7 @@ feature LoginController do
 
     describe 'with wrong token' do
       let(:token) { 'foobar' }
+
       it 'is not accessible' do
         expect(page).to have_selector '.alert-error'
         expect(page).to_not have_selector 'input[type=password]'

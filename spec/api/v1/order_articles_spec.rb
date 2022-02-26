@@ -12,6 +12,7 @@ describe Api::V1::OrderArticlesController, type: :controller do
     context "with param q[ordered]" do
       let(:order) { create(:order, article_count: 4) }
       let(:order_articles) { order.order_articles }
+
       before do
         order_articles[0].update_attributes! quantity: 0, tolerance: 0, units_to_order: 0
         order_articles[1].update_attributes! quantity: 1, tolerance: 0, units_to_order: 0
@@ -42,6 +43,7 @@ describe Api::V1::OrderArticlesController, type: :controller do
       context "when ordered by user" do
         let(:user) { create(:user, :ordergroup) }
         let(:go) { create(:group_order, order: order, ordergroup: user.ordergroup) }
+
         before do
           create(:group_order_article, group_order: go, order_article: order_articles[1], quantity: 1)
           create(:group_order_article, group_order: go, order_article: order_articles[2], tolerance: 0)

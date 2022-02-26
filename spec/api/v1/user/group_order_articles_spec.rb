@@ -4,6 +4,8 @@ require 'spec_helper'
 describe Api::V1::User::GroupOrderArticlesController, type: :controller do
   include ApiOAuth
   let(:user) { create(:user, :ordergroup) }
+  let(:json_goa) { json_response['group_order_article'] }
+  let(:json_oa) { json_response['order_article'] }
   let(:api_scopes) { ['group_orders:user'] }
 
   let(:order) { create(:order, article_count: 1) }
@@ -14,10 +16,8 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
   let(:user_other) { create(:user, :ordergroup) }
   let!(:go_other) { create(:group_order, order: order, ordergroup: user_other.ordergroup) }
   let!(:goa_other) { create(:group_order_article, group_order: go_other, order_article: oa_1, quantity: other_quantity, tolerance: other_tolerance) }
-  before { go_other.update_price!; user_other.ordergroup.update_stats! }
 
-  let(:json_goa) { json_response['group_order_article'] }
-  let(:json_oa) { json_response['order_article'] }
+  before { go_other.update_price!; user_other.ordergroup.update_stats! }
 
   shared_examples "group_order_articles endpoint success" do
     before { request }
@@ -95,47 +95,54 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
 
     context "with an existing group_order" do
       let!(:go) { create(:group_order, order: order, ordergroup: user.ordergroup) }
+
       include_examples "group_order_articles create/update success"
     end
 
     context "with an existing group_order_article" do
       let!(:go) { create(:group_order, order: order, ordergroup: user.ordergroup) }
       let!(:goa) { create(:group_order_article, group_order: go, order_article: oa_1, quantity: 0, tolerance: 1) }
+
       before { go.update_price!; user.ordergroup.update_stats! }
+
       include_examples "group_order_articles endpoint failure", 422
     end
 
     context "with invalid parameter values" do
       let(:goa_params) { { order_article_id: oa_1.id, quantity: -1, tolerance: new_tolerance } }
+
       include_examples "group_order_articles endpoint failure", 422
     end
 
     context 'with a closed order' do
       let(:order) { create(:order, article_count: 1, state: :finished) }
+
       include_examples "group_order_articles endpoint failure", 404
     end
 
     context 'without enough balance' do
       before { FoodsoftConfig[:minimum_balance] = 1000 }
+
       include_examples "group_order_articles endpoint failure", 403
     end
 
     context 'without enough apple points' do
       before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true) }
+
       include_examples "group_order_articles endpoint failure", 403
     end
   end
 
   describe "PATCH :update" do
     let(:new_quantity) { rand(2..10) }
+    let(:goa_params) { { quantity: new_quantity, tolerance: new_tolerance } }
+    let(:request) { patch :update, params: { id: goa.id, group_order_article: goa_params, foodcoop: 'f' } }
     let(:new_tolerance) { rand(2..10) }
 
     let!(:go) { create(:group_order, order: order, ordergroup: user.ordergroup) }
     let!(:goa) { create(:group_order_article, group_order: go, order_article: oa_1, quantity: 1, tolerance: 0) }
-    before { go.update_price!; user.ordergroup.update_stats! }
 
-    let(:goa_params) { { quantity: new_quantity, tolerance: new_tolerance } }
-    let(:request) { patch :update, params: { id: goa.id, group_order_article: goa_params, foodcoop: 'f' } }
+    before { go.update_price!; user.ordergroup.update_stats! }
 
     context "happy flow" do
       include_examples "group_order_articles create/update success"
@@ -143,34 +150,38 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
 
     context "with invalid parameter values" do
       let(:goa_params) { { order_article_id: oa_1.id, quantity: -1, tolerance: new_tolerance } }
+
       include_examples "group_order_articles endpoint failure", 422
     end
 
     context 'with a closed order' do
       let(:order) { create(:order, article_count: 1, state: :finished) }
+
       include_examples "group_order_articles endpoint failure", 404
     end
 
     context 'without enough balance' do
       before { FoodsoftConfig[:minimum_balance] = 1000 }
+
       include_examples "group_order_articles endpoint failure", 403
     end
 
     context 'without enough apple points' do
       before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true) }
+
       include_examples "group_order_articles endpoint failure", 403
     end
   end
 
   describe "DELETE :destroy" do
     let(:new_quantity) { 0 }
+    let(:request) { delete :destroy, params: { id: goa.id, foodcoop: 'f' } }
     let(:new_tolerance) { 0 }
 
     let!(:go) { create(:group_order, order: order, ordergroup: user.ordergroup) }
     let!(:goa) { create(:group_order_article, group_order: go, order_article: oa_1) }
-    before { go.update_price!; user.ordergroup.update_stats! }
 
-    let(:request) { delete :destroy, params: { id: goa.id, foodcoop: 'f' } }
+    before { go.update_price!; user.ordergroup.update_stats! }
 
     shared_examples "group_order_articles destroy success" do
       include_examples "group_order_articles endpoint success"
@@ -190,16 +201,19 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
 
     context 'with a closed order' do
       let(:order) { create(:order, article_count: 1, state: :finished) }
+
       include_examples "group_order_articles endpoint failure", 404
     end
 
     context 'without enough balance' do
       before { FoodsoftConfig[:minimum_balance] = 1000 }
+
       include_examples "group_order_articles destroy success"
     end
 
     context 'without enough apple points' do
       before { allow_any_instance_of(Ordergroup).to receive(:not_enough_apples?).and_return(true) }
+
       include_examples "group_order_articles destroy success"
     end
   end

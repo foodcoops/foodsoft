@@ -224,12 +224,16 @@ Rails.application.routes.draw do
 
       resources :finances, only: [:index] do
         get :update_bank_accounts, on: :collection
+        get :update_bank_gateways, on: :collection
         get :update_transaction_types, on: :collection
+        get :update_supplier_categories, on: :collection
       end
 
       resources :bank_accounts
+      resources :bank_gateways
       resources :financial_transaction_classes
       resources :financial_transaction_types
+      resources :supplier_categories
 
       resources :users do
         post :restore, on: :member

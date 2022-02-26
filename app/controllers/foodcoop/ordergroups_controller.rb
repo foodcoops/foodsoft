@@ -26,7 +26,7 @@ class Foodcoop::OrdergroupsController < ApplicationController
     end
 
     if params[:only_active] # Select only active groups
-      @ordergroups = @ordergroups.joins(:orders).where("orders.starts >= ?", Time.now.months_ago(3)).distinct
+      @ordergroups = @ordergroups.active
     end
 
     @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
