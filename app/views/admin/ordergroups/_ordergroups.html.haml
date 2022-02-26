@@ -5,7 +5,7 @@
   %thead
     %tr
       %th= sort_link_helper heading_helper(Ordergroup, :name), "name"
-      %th= heading_helper Ordergroup, :user_tokens
+      %th= sort_link_helper heading_helper(Ordergroup, :user_tokens), "members_count"
       %th= heading_helper Ordergroup, :contact_address
       %th= sort_link_helper heading_helper(Ordergroup, :last_user_activity), "last_user_activity"
       %th= sort_link_helper heading_helper(Ordergroup, :last_order), "last_order"

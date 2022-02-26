@@ -6,6 +6,8 @@ class Admin::OrdergroupsController < Admin::BaseController
              case params["sort"]
              when "name" then "name"
              when "name_reverse" then "name DESC"
+             when "members_count" then "count(*)"
+             when "members_count_reverse" then "count(*) DESC"
              when "last_user_activity" then "max(users.last_activity)"
              when "last_user_activity_reverse" then "max(users.last_activity) DESC"
              when "last_order" then "max(orders.starts)"
@@ -16,7 +18,7 @@ class Admin::OrdergroupsController < Admin::BaseController
            end
 
     @ordergroups = case params["sort"]
-                   when "last_user_activity", "last_user_activity_reverse" then Ordergroup.left_joins(:users).group("groups.id").undeleted.order(sort).distinct
+                   when "members_count", "members_count_reverse", "last_user_activity", "last_user_activity_reverse" then Ordergroup.left_joins(:users).group("groups.id").undeleted.order(sort).distinct
                    when "last_order", "last_order_reverse" then Ordergroup.left_joins(:orders).group("groups.id").undeleted.order(sort).distinct
                    else
                      Ordergroup.undeleted.order(sort)
