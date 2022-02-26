@@ -3,7 +3,6 @@
 #
 # Ordergroup have the following attributes, in addition to Group
 # * account_balance (decimal)
-
 class Ordergroup < Group
   include CustomFields
 
