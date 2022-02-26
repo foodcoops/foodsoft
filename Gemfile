@@ -56,8 +56,6 @@ gem 'ruby-filemagic'
 gem 'mime-types'
 gem 'midi-smtp-server'
 gem "table_print"
-gem "awesome_print"
-
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
