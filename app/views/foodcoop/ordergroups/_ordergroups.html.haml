@@ -21,4 +21,4 @@
         - else
           %td
         %td= format_date ordergroup.last_user_activity
-        %td= format_datetime ordergroup.last_order.try(:starts)
+        %td= format_date ordergroup.last_order.try(:starts)

@@ -6,12 +6,21 @@ class Admin::OrdergroupsController < Admin::BaseController
              case params["sort"]
              when "name" then "name"
              when "name_reverse" then "name DESC"
+             when "last_user_activity" then "users.last_activity"
+             when "last_user_activity_reverse" then "users.last_activity DESC"
+             when "last_order" then "max(orders.starts)"
+             when "last_order_reverse" then "max(orders.starts) DESC"
              end
            else
              "name"
            end
 
-    @ordergroups = Ordergroup.undeleted.order(sort)
+    case params["sort"]
+    when "last_user_activity", "last_user_activity_reverse" then @ordergroups = Ordergroup.left_joins(:users).undeleted.order(sort).distinct
+    when "last_order", "last_order_reverse" then @ordergroups = Ordergroup.left_joins(:orders).group("groups.id").undeleted.order(sort).distinct
+    else
+      @ordergroups = Ordergroup.undeleted.order(sort)
+    end
 
     if request.format.csv?
       send_data OrdergroupsCsv.new(@ordergroups).to_csv, filename: 'ordergroups.csv', type: 'text/csv'
