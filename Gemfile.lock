@@ -128,7 +128,6 @@ GEM
     arel (9.0.0)
     ast (2.4.2)
     attribute_normalizer (1.2.0)
-    awesome_print (1.9.2)
     base32 (0.3.4)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
@@ -574,7 +573,6 @@ DEPENDENCIES
   apivore
   apparition
   attribute_normalizer
-  awesome_print
   better_errors
   binding_of_caller
   bootsnap
