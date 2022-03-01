@@ -51,6 +51,18 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.welcome.subject')
   end
 
+  # Sends automatically generated invoicesfor group orders to ordergroup members
+  def group_order_invoice(group_order_invoice, user)
+    @user = user
+    @group_order_invoice = group_order_invoice
+    @group_order = group_order_invoice.group_order
+    @supplier = @group_order.order.supplier.name
+    @group = @group_order.ordergroup
+    add_group_order_invoice_attachments(group_order_invoice)
+    mail to: user,
+         subject: I18n.t('mailer.group_order_invoice.subject', group: @group.name, supplier: @supplier)
+  end
+
   # Sends order result for specific Ordergroup
   def order_result(user, group_order)
     @order        = group_order.order
@@ -166,6 +178,11 @@ class Mailer < ActionMailer::Base
   def add_order_result_attachments(order, options = {})
     attachments['order.pdf'] = OrderFax.new(order, options).to_pdf
     attachments['order.csv'] = OrderCsv.new(order, options).to_csv
+  end
+
+  def add_group_order_invoice_attachments(group_order_invoice)
+    attachment_name = group_order_invoice.name + '.pdf'
+    attachments[attachment_name] = GroupOrderInvoicePdf.new(group_order_invoice.load_data_for_invoice).to_pdf
   end
 
   # separate method to allow plugins to mess with the text

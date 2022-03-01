@@ -13,6 +13,11 @@
 = config_input form, :charge_members_manually, as: :boolean
 = config_input form, :use_iban, as: :boolean
 = config_input form, :use_self_service, as: :boolean
+%h4= t '.group_order_invoices'
+= form.fields_for :group_order_invoices do |field|
+  = config_input field, :use_automatic_invoices, as: :boolean
+  = config_input field, :vat_exempt, as: :boolean
+  = config_input field, :payment_method, as: :string, input_html: {class: 'input-medium'}
 
 %h4= t '.schedule_title'
 = form.simple_fields_for :order_schedule do |fields|
