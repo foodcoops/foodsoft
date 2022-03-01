@@ -14,8 +14,8 @@ class Foodcoop::OrdergroupsController < ApplicationController
            end
 
     @ordergroups = case params["sort"]
-                   when "last_user_activity", "last_user_activity_reverse" then Ordergroup.left_joins(:users).group("groups.id").undeleted.order(sort).distinct
-                   when "last_order", "last_order_reverse" then Ordergroup.left_joins(:orders).group("groups.id").undeleted.order(sort).distinct
+                   when "last_user_activity", "last_user_activity_reverse" then Ordergroup.left_joins(:users).group("groups.id").undeleted.order(sort)
+                   when "last_order", "last_order_reverse" then Ordergroup.left_joins(:orders).group("groups.id").undeleted.order(sort)
                    else
                      Ordergroup.undeleted.order(sort)
                    end
