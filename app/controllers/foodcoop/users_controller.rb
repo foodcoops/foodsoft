@@ -15,11 +15,7 @@ class Foodcoop::UsersController < ApplicationController
              "first_name, last_name"
            end
 
-    @users = case params["sort"]
-             when "ordergroup", "ordergroup_reverse" then User.left_joins(:groups).where("groups.type = 'Ordergroup'").undeleted.order(sort).distinct
-             else
-               User.undeleted.order(sort)
-             end
+    @users = User.left_joins(:groups).where(groups: { type: 'Ordergroup' }).undeleted.order(sort).distinct
 
     # if somebody uses the search field:
     @users = @users.natural_search(params[:user_name]) unless params[:user_name].blank?

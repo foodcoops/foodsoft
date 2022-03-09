@@ -15,7 +15,8 @@ class Admin::UsersController < Admin::BaseController
              "first_name, last_name"
            end
 
-    @users = params[:show_deleted] ? User.deleted.order(sort) : User.undeleted.order(sort)
+    @users = params[:show_deleted] ? User.deleted : User.undeleted
+    @users = @users.order(sort)
 
     @users = @users.includes(:mail_delivery_status)
 
