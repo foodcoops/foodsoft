@@ -8,6 +8,20 @@ describe Ordergroup do
   let(:ftt3) { create :financial_transaction_type, financial_transaction_class: ftc2 }
   let(:user) { create :user, groups: [create(:ordergroup)] }
 
+  it 'shows no active ordergroups when all orders are older than 3 months' do
+    order = create :order, starts: 4.months.ago
+    user.ordergroup.group_orders.create!(order: order)
+
+    expect(Ordergroup.active).to be_empty
+  end
+
+  it 'shows active ordergroups when there are recent orders' do
+    order = create :order, starts: 2.days.ago
+    user.ordergroup.group_orders.create!(order: order)
+
+    expect(Ordergroup.active).not_to be_empty
+  end
+
   context 'with financial transactions' do
     before do
       og = user.ordergroup
