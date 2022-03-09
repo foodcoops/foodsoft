@@ -2,6 +2,8 @@ class Foodcoop::UsersController < ApplicationController
   def index
     sort = if params["sort"]
              case params["sort"]
+             when "nick" then "nick"
+             when "nick_reverse" then "nick DESC"
              when "name" then "first_name, last_name"
              when "name_reverse" then "first_name DESC, last_name DESC"
              when "email" then "email"
