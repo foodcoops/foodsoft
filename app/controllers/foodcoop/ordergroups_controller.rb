@@ -1,25 +1,6 @@
 class Foodcoop::OrdergroupsController < ApplicationController
   def index
-    sort = if params["sort"]
-             case params["sort"]
-             when "name" then "name"
-             when "name_reverse" then "name DESC"
-             when "last_user_activity" then "max(users.last_activity)"
-             when "last_user_activity_reverse" then "max(users.last_activity) DESC"
-             when "last_order" then "max(orders.starts)"
-             when "last_order_reverse" then "max(orders.starts) DESC"
-             end
-           else
-             "name"
-           end
-
-    @ordergroups = case params["sort"]
-                   when "last_user_activity", "last_user_activity_reverse" then Ordergroup.left_joins(:users).group("groups.id")
-                   when "last_order", "last_order_reverse" then Ordergroup.left_joins(:orders).group("groups.id")
-                   else
-                     Ordergroup
-                   end
-    @ordergroups = @ordergroups.undeleted.order(sort)
+    @ordergroups = Ordergroup.undeleted.sort_by_param(params["sort"] || "name")
 
     unless params[:name].blank? # Search by name
       @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")

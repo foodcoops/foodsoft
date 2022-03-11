@@ -2,28 +2,7 @@ class Admin::OrdergroupsController < Admin::BaseController
   inherit_resources
 
   def index
-    sort = if params["sort"]
-             case params["sort"]
-             when "name" then "name"
-             when "name_reverse" then "name DESC"
-             when "members_count" then "count(*)"
-             when "members_count_reverse" then "count(*) DESC"
-             when "last_user_activity" then "max(users.last_activity)"
-             when "last_user_activity_reverse" then "max(users.last_activity) DESC"
-             when "last_order" then "max(orders.starts)"
-             when "last_order_reverse" then "max(orders.starts) DESC"
-             end
-           else
-             "name"
-           end
-
-    @ordergroups = case params["sort"]
-                   when "members_count", "members_count_reverse", "last_user_activity", "last_user_activity_reverse" then Ordergroup.left_joins(:users).group("groups.id")
-                   when "last_order", "last_order_reverse" then Ordergroup.left_joins(:orders).group("groups.id")
-                   else
-                     Ordergroup
-                   end
-    @ordergroups = @ordergroups.undeleted.order(sort)
+    @ordergroups = Ordergroup.undeleted.sort_by_param(params["sort"] || "name")
 
     if request.format.csv?
       send_data OrdergroupsCsv.new(@ordergroups).to_csv, filename: 'ordergroups.csv', type: 'text/csv'
