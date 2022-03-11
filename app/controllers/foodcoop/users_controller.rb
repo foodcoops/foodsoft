@@ -1,23 +1,18 @@
 class Foodcoop::UsersController < ApplicationController
   def index
-    sort = if params["sort"]
-             case params["sort"]
-             when "nick" then "nick"
-             when "nick_reverse" then "nick DESC"
-             when "name" then "first_name, last_name"
-             when "name_reverse" then "first_name DESC, last_name DESC"
-             when "email" then "email"
-             when "email_reverse" then "email DESC"
-             when "phone" then "phone"
-             when "phone_reverse" then "phone DESC"
-             when "ordergroup" then "groups.name"
-             when "ordergroup_reverse" then "groups.name DESC"
-             end
-           else
-             "first_name, last_name"
-           end
-
-    @users = User.left_joins(:groups).where(groups: { type: 'Ordergroup' }).undeleted.order(sort).distinct
+    sort_param_map = {
+      "nick" => "nick",
+      "nick_reverse" => "nick DESC",
+      "name" => "first_name, last_name",
+      "name_reverse" => "first_name DESC, last_name DESC",
+      "email" => "email",
+      "email_reverse" => "email DESC",
+      "phone" => "phone",
+      "phone_reverse" => "phone DESC",
+      "ordergroup" => "groups.name",
+      "ordergroup_reverse" => "groups.name DESC"
+    }
+    @users = User.left_joins(:groups).where(groups: { type: 'Ordergroup' }).undeleted.order(sort_param_map[params["sort"]] || "first_name, last_name").distinct
 
     # if somebody uses the search field:
     @users = @users.natural_search(params[:user_name]) unless params[:user_name].blank?

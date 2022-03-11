@@ -148,6 +148,27 @@ class Ordergroup < Group
     financial_transactions.last.try(:created_on) || created_on
   end
 
+  def self.sort_by_param(param)
+    sort_param_map = {
+      "name" => "name",
+      "name_reverse" => "name DESC",
+      "members_count" => "count(*)",
+      "members_count_reverse" => "count(*) DESC",
+      "last_user_activity" => "max(users.last_activity)",
+      "last_user_activity_reverse" => "max(users.last_activity) DESC",
+      "last_order" => "max(orders.starts)",
+      "last_order_reverse" => "max(orders.starts) DESC"
+    }
+
+    @ordergroup = case param
+                  when "members_count", "members_count_reverse", "last_user_activity", "last_user_activity_reverse" then @ordergroup.left_joins(:users).group("groups.id")
+                  when "last_order", "last_order_reverse" then @ordergroup.left_joins(:orders).group("groups.id")
+                  else
+                    Ordergroup
+                  end
+    @ordergroup.order(sort_param_map[param])
+  end
+
   private
 
   # Make sure, that a user can only be in one ordergroup
@@ -165,26 +186,5 @@ class Ordergroup < Group
       message = group.first.deleted? ? :taken_with_deleted : :taken
       errors.add :name, message
     end
-  end
-
-  def self.sort_by_param(param)
-    sort_param_map = {
-      "name" => "name",
-      "name_reverse" => "name DESC",
-      "members_count" => "count(*)",
-      "members_count_reverse" => "count(*) DESC",
-      "last_user_activity" => "max(users.last_activity)",
-      "last_user_activity_reverse" => "max(users.last_activity) DESC",
-      "last_order" => "max(orders.starts)",
-      "last_order_reverse" => "max(orders.starts) DESC",
-    }
-
-    @ordergroup = case param
-                    when "members_count", "members_count_reverse", "last_user_activity", "last_user_activity_reverse" then @ordergroup.left_joins(:users).group("groups.id")
-                    when "last_order", "last_order_reverse" then @ordergroup.left_joins(:orders).group("groups.id")
-                    else
-                      Ordergroup
-                    end
-    @ordergroup.order(sort_param_map[param])
   end
 end
