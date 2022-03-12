@@ -251,7 +251,9 @@ class User < ApplicationRecord
     { :id => id, :name => "#{display} (#{ordergroup.try(:name)})" }
   end
 
-  def self.sort_by_param(param = "name")
+  def self.sort_by_param(param)
+    param ||= "name"
+    
     sort_param_map = {
       "nick" => "nick",
       "nick_reverse" => "nick DESC",
