@@ -148,7 +148,7 @@ class Ordergroup < Group
     financial_transactions.last.try(:created_on) || created_on
   end
 
-  def self.sort_by_param(param)
+  def self.sort_by_param(param = "name")
     sort_param_map = {
       "name" => "name",
       "name_reverse" => "name DESC",
@@ -160,13 +160,10 @@ class Ordergroup < Group
       "last_order_reverse" => "max(orders.starts) DESC"
     }
 
-    @ordergroup = case param
-                  when "members_count", "members_count_reverse", "last_user_activity", "last_user_activity_reverse" then @ordergroup.left_joins(:users).group("groups.id")
-                  when "last_order", "last_order_reverse" then @ordergroup.left_joins(:orders).group("groups.id")
-                  else
-                    Ordergroup
-                  end
-    @ordergroup.order(sort_param_map[param])
+    result = self
+    result = result.left_joins(:users).group("groups.id") if param.starts_with?("members_count", "last_user_activity")
+    result = result.left_joins(:orders).group("groups.id") if param.starts_with?("last_order")
+    result.order(sort_param_map[param])
   end
 
   private
