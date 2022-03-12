@@ -253,7 +253,7 @@ class User < ApplicationRecord
 
   def self.sort_by_param(param)
     param ||= "name"
-    
+
     sort_param_map = {
       "nick" => "nick",
       "nick_reverse" => "nick DESC",
@@ -268,7 +268,7 @@ class User < ApplicationRecord
       "ordergroup" => "groups.name",
       "ordergroup_reverse" => "groups.name DESC"
     }
-    
+
     self.left_joins(:groups).where(groups: { type: 'Ordergroup' }).order(sort_param_map[param]).distinct
   end
 end

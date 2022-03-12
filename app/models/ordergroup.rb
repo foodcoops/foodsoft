@@ -150,7 +150,7 @@ class Ordergroup < Group
 
   def self.sort_by_param(param)
     param ||= "name"
-    
+
     sort_param_map = {
       "name" => "name",
       "name_reverse" => "name DESC",
