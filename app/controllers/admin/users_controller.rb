@@ -2,19 +2,8 @@ class Admin::UsersController < Admin::BaseController
   inherit_resources
 
   def index
-    sort_param_map = {
-      "nick" => "nick",
-      "nick_reverse" => "nick DESC",
-      "name" => "first_name, last_name",
-      "email" => "email",
-      "last_activity" => "last_activity",
-      "name_reverse" => "first_name DESC, last_name DESC",
-      "email_reverse" => "email DESC",
-      "last_activity_reverse" => "last_activity DESC"
-    }
-
     @users = params[:show_deleted] ? User.deleted : User.undeleted
-    @users = @users.order(sort_param_map[params["sort"]] || "first_name, last_name")
+    @users = @users.sort_by_param(params["sort"])
 
     @users = @users.includes(:mail_delivery_status)
 

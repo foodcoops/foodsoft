@@ -250,4 +250,23 @@ class User < ApplicationRecord
     #   this should not be part of the model anyway
     { :id => id, :name => "#{display} (#{ordergroup.try(:name)})" }
   end
+
+  def self.sort_by_param(param = "name")
+    sort_param_map = {
+      "nick" => "nick",
+      "nick_reverse" => "nick DESC",
+      "name" => "first_name, last_name",
+      "name_reverse" => "first_name DESC, last_name DESC",
+      "email" => "email",
+      "email_reverse" => "email DESC",
+      "phone" => "phone",
+      "phone_reverse" => "phone DESC",
+      "last_activity" => "last_activity",
+      "last_activity_reverse" => "last_activity DESC",
+      "ordergroup" => "groups.name",
+      "ordergroup_reverse" => "groups.name DESC"
+    }
+    
+    self.left_joins(:groups).where(groups: { type: 'Ordergroup' }).order(sort_param_map[param]).distinct
+  end
 end

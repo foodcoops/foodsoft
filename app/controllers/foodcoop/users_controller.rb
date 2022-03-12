@@ -1,18 +1,6 @@
 class Foodcoop::UsersController < ApplicationController
   def index
-    sort_param_map = {
-      "nick" => "nick",
-      "nick_reverse" => "nick DESC",
-      "name" => "first_name, last_name",
-      "name_reverse" => "first_name DESC, last_name DESC",
-      "email" => "email",
-      "email_reverse" => "email DESC",
-      "phone" => "phone",
-      "phone_reverse" => "phone DESC",
-      "ordergroup" => "groups.name",
-      "ordergroup_reverse" => "groups.name DESC"
-    }
-    @users = User.left_joins(:groups).where(groups: { type: 'Ordergroup' }).undeleted.order(sort_param_map[params["sort"]] || "first_name, last_name").distinct
+    @users = User.undeleted.sort_by_param(params["sort"])
 
     # if somebody uses the search field:
     @users = @users.natural_search(params[:user_name]) unless params[:user_name].blank?
