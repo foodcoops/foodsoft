@@ -85,6 +85,8 @@ group :development do
 
   # Get infos when not using proper eager loading
   gem 'bullet'
+  # Display Active Record queries as tables in the console
+  gem 'table_print'
 end
 
 group :development, :test do
