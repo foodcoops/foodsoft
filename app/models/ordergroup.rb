@@ -163,8 +163,8 @@ class Ordergroup < Group
     }
 
     result = self
-    result = result.left_joins(:users).group("groups.id") if param && param.starts_with?("members_count", "last_user_activity")
-    result = result.left_joins(:orders).group("groups.id") if param && param.starts_with?("last_order")
+    result = result.left_joins(:users).group("groups.id") if param.starts_with?("members_count", "last_user_activity")
+    result = result.left_joins(:orders).group("groups.id") if param.starts_with?("last_order")
     result.order(sort_param_map[param])
   end
 
