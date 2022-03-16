@@ -78,4 +78,58 @@ describe User do
 
     it 'default admin role' do expect(user.role_admin?).to be_truthy end
   end
+
+  describe 'sort correctly' do
+    it 'by nick' do
+      user_b = create :user, nick: 'bbb'
+      user_a = create :user, nick: 'aaa'
+      user_c = create :user, nick: 'ccc'
+
+      expect(User.sort_by_param('nick')).to eq([user_a, user_b, user_c])
+    end
+
+    it 'reverse by nick' do
+      user_b = create :user, nick: 'bbb'
+      user_a = create :user, nick: 'aaa'
+      user_c = create :user, nick: 'ccc'
+
+      expect(User.sort_by_param('nick_reverse')).to eq([user_c, user_b, user_a])
+    end
+
+    it 'by ordergroup' do
+      user_b = create :user, groups: [create(:workgroup, name: 'a'), create(:ordergroup, name: 'bb')] 
+      user_a = create :user, groups: [create(:workgroup, name: 'b'), create(:ordergroup, name: 'aa')] 
+      user_c = create :user, groups: [ create(:workgroup, name: 'c'), create(:ordergroup, name: 'cc')]
+
+      expect(User.sort_by_param('ordergroup')).to eq([user_a, user_b, user_c])
+    end
+
+    it 'reverse by ordergroup' do
+      user_b = create :user, groups: [create(:workgroup, name: 'a'), create(:ordergroup, name: 'bb')] 
+      user_a = create :user, groups: [create(:workgroup, name: 'b'), create(:ordergroup, name: 'aa')] 
+      user_c = create :user, groups: [ create(:workgroup, name: 'c'), create(:ordergroup, name: 'cc')]
+
+      expect(User.sort_by_param('ordergroup_reverse')).to eq([user_c, user_b, user_a])
+    end
+
+    it 'and users are only listed once' do
+      create :user
+
+      expect(User.sort_by_param('ordergroup').size).to eq(1)
+    end
+
+    it 'and users belonging to a workgroup are only listed once' do
+      create :admin
+
+      expect(User.sort_by_param('ordergroup').size).to eq(1)
+    end
+
+    it 'and users belonging to 2 ordergroups are only listed once' do
+      user = create :user
+      create :ordergroup, user_ids: [user.id]
+      create :ordergroup, user_ids: [user.id]
+
+      expect(User.sort_by_param('ordergroup').size).to eq(1)
+    end
+  end
 end

@@ -34,7 +34,7 @@ FactoryBot.define do
     sequence(:name) { |n| "Group ##{n}" }
 
     factory :workgroup do
-      type { '' }
+      type { 'Workgroup' }
     end
 
     factory :ordergroup do

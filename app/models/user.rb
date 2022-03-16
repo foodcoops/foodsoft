@@ -265,10 +265,10 @@ class User < ApplicationRecord
       "phone_reverse" => "phone DESC",
       "last_activity" => "last_activity",
       "last_activity_reverse" => "last_activity DESC",
-      "ordergroup" => "groups.name",
-      "ordergroup_reverse" => "groups.name DESC"
+      "ordergroup" => "IFNULL(groups.type, '') <> 'Ordergroup', groups.name",
+      "ordergroup_reverse" => "IFNULL(groups.type, '') <> 'Ordergroup', groups.name DESC",
     }
 
-    self.left_joins(:groups).where(groups: { type: 'Ordergroup' }).order(sort_param_map[param]).distinct
+    self.eager_load(:groups).order(sort_param_map[param]) # eager_load is like left_join but without duplicates
   end
 end
