@@ -96,6 +96,70 @@ describe User do
       expect(User.sort_by_param('nick_reverse')).to eq([user_c, user_b, user_a])
     end
 
+    it 'by name' do
+      user_b = create :user, first_name: 'aaa', last_name: 'bbb'
+      user_a = create :user, first_name: 'aaa', last_name: 'aaa'
+      user_c = create :user, first_name: 'ccc', last_name: 'aaa'
+
+      expect(User.sort_by_param('name')).to eq([user_a, user_b, user_c])
+    end
+
+    it 'reverse by name' do
+      user_b = create :user, first_name: 'aaa', last_name: 'bbb'
+      user_a = create :user, first_name: 'aaa', last_name: 'aaa'
+      user_c = create :user, first_name: 'ccc', last_name: 'aaa'
+
+      expect(User.sort_by_param('name_reverse')).to eq([user_c, user_b, user_a])
+    end
+
+    it 'by email' do
+      user_b = create :user, email: 'bbb@dummy.com'
+      user_a = create :user, email: 'aaa@dummy.com'
+      user_c = create :user, email: 'ccc@dummy.com'
+
+      expect(User.sort_by_param('email')).to eq([user_a, user_b, user_c])
+    end
+
+    it 'reverse by email' do
+      user_b = create :user, email: 'bbb@dummy.com'
+      user_a = create :user, email: 'aaa@dummy.com'
+      user_c = create :user, email: 'ccc@dummy.com'
+
+      expect(User.sort_by_param('email_reverse')).to eq([user_c, user_b, user_a])
+    end
+
+    it 'by phone' do
+      user_b = create :user, phone: 'bbb'
+      user_a = create :user, phone: 'aaa'
+      user_c = create :user, phone: 'ccc'
+
+      expect(User.sort_by_param('phone')).to eq([user_a, user_b, user_c])
+    end
+
+    it 'reverse by phone' do
+      user_b = create :user, phone: 'bbb'
+      user_a = create :user, phone: 'aaa'
+      user_c = create :user, phone: 'ccc'
+
+      expect(User.sort_by_param('phone_reverse')).to eq([user_c, user_b, user_a])
+    end
+
+    it 'by last_activity' do
+      user_b = create :user, last_activity: 3.days.ago
+      user_a = create :user, last_activity: 5.days.ago
+      user_c = create :user, last_activity: Time.now
+
+      expect(User.sort_by_param('last_activity')).to eq([user_a, user_b, user_c])
+    end
+
+    it 'reverse by last_activity' do
+      user_b = create :user, last_activity: 3.days.ago
+      user_a = create :user, last_activity: 5.days.ago
+      user_c = create :user, last_activity: Time.now
+
+      expect(User.sort_by_param('last_activity_reverse')).to eq([user_c, user_b, user_a])
+    end
+
     it 'by ordergroup' do
       user_b = create :user, groups: [create(:workgroup, name: 'a'), create(:ordergroup, name: 'bb')]
       user_a = create :user, groups: [create(:workgroup, name: 'b'), create(:ordergroup, name: 'aa')]
