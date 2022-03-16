@@ -266,7 +266,7 @@ class User < ApplicationRecord
       "last_activity" => "last_activity",
       "last_activity_reverse" => "last_activity DESC",
       "ordergroup" => "IFNULL(groups.type, '') <> 'Ordergroup', groups.name",
-      "ordergroup_reverse" => "IFNULL(groups.type, '') <> 'Ordergroup', groups.name DESC",
+      "ordergroup_reverse" => "IFNULL(groups.type, '') <> 'Ordergroup', groups.name DESC"
     }
 
     self.eager_load(:groups).order(sort_param_map[param]) # eager_load is like left_join but without duplicates

@@ -97,17 +97,17 @@ describe User do
     end
 
     it 'by ordergroup' do
-      user_b = create :user, groups: [create(:workgroup, name: 'a'), create(:ordergroup, name: 'bb')] 
-      user_a = create :user, groups: [create(:workgroup, name: 'b'), create(:ordergroup, name: 'aa')] 
-      user_c = create :user, groups: [ create(:workgroup, name: 'c'), create(:ordergroup, name: 'cc')]
+      user_b = create :user, groups: [create(:workgroup, name: 'a'), create(:ordergroup, name: 'bb')]
+      user_a = create :user, groups: [create(:workgroup, name: 'b'), create(:ordergroup, name: 'aa')]
+      user_c = create :user, groups: [create(:workgroup, name: 'c'), create(:ordergroup, name: 'cc')]
 
       expect(User.sort_by_param('ordergroup')).to eq([user_a, user_b, user_c])
     end
 
     it 'reverse by ordergroup' do
-      user_b = create :user, groups: [create(:workgroup, name: 'a'), create(:ordergroup, name: 'bb')] 
-      user_a = create :user, groups: [create(:workgroup, name: 'b'), create(:ordergroup, name: 'aa')] 
-      user_c = create :user, groups: [ create(:workgroup, name: 'c'), create(:ordergroup, name: 'cc')]
+      user_b = create :user, groups: [create(:workgroup, name: 'a'), create(:ordergroup, name: 'bb')]
+      user_a = create :user, groups: [create(:workgroup, name: 'b'), create(:ordergroup, name: 'aa')]
+      user_c = create :user, groups: [create(:workgroup, name: 'c'), create(:ordergroup, name: 'cc')]
 
       expect(User.sort_by_param('ordergroup_reverse')).to eq([user_c, user_b, user_a])
     end
