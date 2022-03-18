@@ -60,6 +60,28 @@ describe Ordergroup do
 
       expect(Ordergroup.sort_by_param('last_user_activity_reverse')).to eq([group_c, group_b, group_a])
     end
+
+    it 'by members_count' do
+      users_b = [create(:user)]
+      users_a = []
+      users_c = [create(:user), create(:user), create(:user)]
+      group_b = create :ordergroup, name: 'bbb', user_ids: users_b.map(&:id)
+      group_a = create :ordergroup, name: 'aaa', user_ids: users_a.map(&:id)
+      group_c = create :ordergroup, name: 'ccc', user_ids: users_c.map(&:id)
+
+      expect(Ordergroup.sort_by_param('members_count')).to eq([group_a, group_b, group_c])
+    end
+
+    it 'reverse by members_count' do
+      users_b = [create(:user)]
+      users_a = []
+      users_c = [create(:user), create(:user), create(:user)]
+      group_b = create :ordergroup, name: 'bbb', user_ids: users_b.map(&:id)
+      group_a = create :ordergroup, name: 'aaa', user_ids: users_a.map(&:id)
+      group_c = create :ordergroup, name: 'ccc', user_ids: users_c.map(&:id)
+
+      expect(Ordergroup.sort_by_param('members_count_reverse')).to eq([group_c, group_b, group_a])
+    end
   end
 
   context 'with financial transactions' do

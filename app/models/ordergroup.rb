@@ -154,8 +154,8 @@ class Ordergroup < Group
     sort_param_map = {
       "name" => "name",
       "name_reverse" => "name DESC",
-      "members_count" => "count(*)",
-      "members_count_reverse" => "count(*) DESC",
+      "members_count" => "count(users.id)",
+      "members_count_reverse" => "count(users.id) DESC",
       "last_user_activity" => "max(users.last_activity)",
       "last_user_activity_reverse" => "max(users.last_activity) DESC",
       "last_order" => "max(orders.starts)",
