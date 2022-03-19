@@ -39,28 +39,6 @@ describe Ordergroup do
       expect(Ordergroup.sort_by_param('name_reverse')).to eq([group_c, group_b, group_a])
     end
 
-    it 'by last_activity' do
-      user_b = create :user, last_activity: 3.days.ago
-      user_a = create :user, last_activity: 5.days.ago
-      user_c = create :user, last_activity: Time.now
-      group_b = create :ordergroup, name: 'bbb', user_ids: [user_b.id]
-      group_a = create :ordergroup, name: 'aaa', user_ids: [user_a.id]
-      group_c = create :ordergroup, name: 'ccc', user_ids: [user_c.id]
-
-      expect(Ordergroup.sort_by_param('last_user_activity')).to eq([group_a, group_b, group_c])
-    end
-
-    it 'reverse by last_activity' do
-      user_b = create :user, last_activity: 3.days.ago
-      user_a = create :user, last_activity: 5.days.ago
-      user_c = create :user, last_activity: Time.now
-      group_b = create :ordergroup, name: 'bbb', user_ids: [user_b.id]
-      group_a = create :ordergroup, name: 'aaa', user_ids: [user_a.id]
-      group_c = create :ordergroup, name: 'ccc', user_ids: [user_c.id]
-
-      expect(Ordergroup.sort_by_param('last_user_activity_reverse')).to eq([group_c, group_b, group_a])
-    end
-
     it 'by members_count' do
       users_b = [create(:user)]
       users_a = []
@@ -81,6 +59,28 @@ describe Ordergroup do
       group_c = create :ordergroup, name: 'ccc', user_ids: users_c.map(&:id)
 
       expect(Ordergroup.sort_by_param('members_count_reverse')).to eq([group_c, group_b, group_a])
+    end
+
+    it 'by last_user_activity' do
+      user_b = create :user, last_activity: 3.days.ago
+      user_a = create :user, last_activity: 5.days.ago
+      user_c = create :user, last_activity: Time.now
+      group_b = create :ordergroup, name: 'bbb', user_ids: [user_b.id]
+      group_a = create :ordergroup, name: 'aaa', user_ids: [user_a.id]
+      group_c = create :ordergroup, name: 'ccc', user_ids: [user_c.id]
+
+      expect(Ordergroup.sort_by_param('last_user_activity')).to eq([group_a, group_b, group_c])
+    end
+
+    it 'reverse by last_user_activity' do
+      user_b = create :user, last_activity: 3.days.ago
+      user_a = create :user, last_activity: 5.days.ago
+      user_c = create :user, last_activity: Time.now
+      group_b = create :ordergroup, name: 'bbb', user_ids: [user_b.id]
+      group_a = create :ordergroup, name: 'aaa', user_ids: [user_a.id]
+      group_c = create :ordergroup, name: 'ccc', user_ids: [user_c.id]
+
+      expect(Ordergroup.sort_by_param('last_user_activity_reverse')).to eq([group_c, group_b, group_a])
     end
   end
 
