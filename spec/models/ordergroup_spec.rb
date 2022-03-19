@@ -82,6 +82,28 @@ describe Ordergroup do
 
       expect(Ordergroup.sort_by_param('last_user_activity_reverse')).to eq([group_c, group_b, group_a])
     end
+
+    it 'by last_order' do
+      group_b = create :ordergroup, name: 'bbb'
+      group_a = create :ordergroup, name: 'aaa'
+      group_c = create :ordergroup, name: 'ccc'
+      group_b.group_orders.create! order: create(:order, starts: 6.days.ago)
+      group_a.group_orders.create! order: create(:order, starts: 4.months.ago)
+      group_c.group_orders.create! order: create(:order, starts: Time.now)
+
+      expect(Ordergroup.sort_by_param('last_order')).to eq([group_a, group_b, group_c])
+    end
+
+    it 'reverse by last_order' do
+      group_b = create :ordergroup, name: 'bbb'
+      group_a = create :ordergroup, name: 'aaa'
+      group_c = create :ordergroup, name: 'ccc'
+      group_b.group_orders.create! order: create(:order, starts: 6.days.ago)
+      group_a.group_orders.create! order: create(:order, starts: 4.months.ago)
+      group_c.group_orders.create! order: create(:order, starts: Time.now)
+
+      expect(Ordergroup.sort_by_param('last_order_reverse')).to eq([group_c, group_b, group_a])
+    end
   end
 
   context 'with financial transactions' do
