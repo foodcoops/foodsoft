@@ -15,17 +15,9 @@ tasks:
       docker-compose -f docker-compose-dev.yml up
       
   - name: Rails
-    before: |
-      sudo apt-get install -y libmagic-dev
-      # install correct ruby+tools versions
-      printf "rvm_gems_path=/home/gitpod/.rvm\n" > ~/.rvmrc
-      rvm reinstall $(cat .ruby-version)
-      rvm use $(cat .ruby-version) --default 
-      gem install bundler
-      printf "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc
-    init: |
-      bundle install
-      sudo chown -R gitpod tmp/cache # see https://github.com/Shopify/bootsnap/issues/77#issuecomment-352053269
+    command: |
+      echo "The rails application stared in docker containers (see docker-compose-dev.yml)."
+      echo "For executing rails commands, upen up a bash terminal inside the foodsoft container via 'docker-compose -f docker-compose-dev.yml exec foodsoft bash'"
 
 ports:
   - port: 3000
