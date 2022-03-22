@@ -43,7 +43,7 @@ class OrderByGroups < OrderPdf
       oa = Ordergroup.find(oa_id)
       oa_phone = oa.contact_phone
       if (oa_phone.blank?)
-        user_with_phone = oa.users.find { |user| !user.blank? }
+        user_with_phone = oa.users.find { |user| !user.phone.blank? }
         oa_phone = user_with_phone.phone if (user_with_phone)
       end
       if (oa_phone.blank?)
