@@ -15,32 +15,46 @@ class OrderByGroups < OrderPdf
     each_ordergroup do |oa_name, oa_total, oa_id|
       dimrows = []
       rows = [[
-        GroupOrderArticle.human_attribute_name(:ordered),
-        GroupOrderArticle.human_attribute_name(:received),
-        GroupOrderArticle.human_attribute_name(:unit_price),
-        Article.human_attribute_name(:supplier),
-        OrderArticle.human_attribute_name(:article),
-        GroupOrderArticle.human_attribute_name(:total_price)
-      ]]
+                GroupOrderArticle.human_attribute_name(:ordered),
+                GroupOrderArticle.human_attribute_name(:received),
+                GroupOrderArticle.human_attribute_name(:unit_price),
+                Article.human_attribute_name(:supplier),
+                OrderArticle.human_attribute_name(:article),
+                GroupOrderArticle.human_attribute_name(:total_price)
+              ]]
 
       each_group_order_article_for_ordergroup(oa_id) do |goa|
         dimrows << rows.length if goa.result == 0
         rows << [
-            goa.tolerance > 0 ? "#{goa.quantity} (+#{goa.tolerance} extra)" : goa.quantity,
-            "#{goa.result}    ____ ",
-            order_article_unit_per_price(goa.order_article),
-            # goa.order_article.article.unit,
-            # number_to_currency(order_article_price(goa.order_article)),
-            goa.order_article.article.supplier.name.truncate(10, omission: ''),
-            goa.order_article.article.name,
-            number_to_currency(goa.total_price)]
+          goa.tolerance > 0 ? "#{goa.quantity} (+#{goa.tolerance} extra)" : goa.quantity,
+          "#{goa.result}    ____ ",
+          order_article_unit_per_price(goa.order_article),
+          # goa.order_article.article.unit,
+          # number_to_currency(order_article_price(goa.order_article)),
+          goa.order_article.article.supplier.name.truncate(10, omission: ''),
+          goa.order_article.article.name,
+          number_to_currency(goa.total_price)]
       end
       next unless rows.length > 1
       rows << [nil, nil, nil, nil, I18n.t('documents.order_by_groups.sum'), number_to_currency(oa_total)]
 
       rows.each { |row| row.delete_at 3 } unless @options[:show_supplier]
 
-      nice_table oa_name || stock_ordergroup_name, rows, dimrows do |table|
+      oa = Ordergroup.find(oa_id)
+      oa_phone = oa.contact_phone
+      if (oa_phone.blank?)
+        user_with_phone = oa.users.find { |user| !user.blank? }
+        oa_phone = user_with_phone.phone if (user_with_phone)
+      end
+      if (oa_phone.blank?)
+        oa_phone = 'UPDATE PROFILE, PHONE IS REQUIRED'
+      else
+        # trim leading 1
+        oa_phone = number_to_phone(oa_phone.sub(/^1/, ''))
+      end
+
+      oa_title = "#{oa_name}   (#{oa_phone})"
+      nice_table oa_title || stock_ordergroup_name, rows, dimrows do |table|
         table.row(-2).border_width = 1
         table.row(-2).border_color = '666666'
         table.row(-1).borders = []
