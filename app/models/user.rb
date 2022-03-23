@@ -269,6 +269,8 @@ class User < ApplicationRecord
       "ordergroup_reverse" => "IFNULL(groups.type, '') <> 'Ordergroup', groups.name DESC"
     }
 
-    self.eager_load(:groups).order(sort_param_map[param]) # eager_load is like left_join but without duplicates
+    # Never pass user input data to Arel.sql() because of SQL Injection vulnerabilities.
+    # This case here is okay, as param is mapped to the actual order string.
+    self.eager_load(:groups).order(Arel.sql(sort_param_map[param])) # eager_load is like left_join but without duplicates
   end
 end
