@@ -165,10 +165,10 @@ class Ordergroup < Group
     result = self
     result = result.left_joins(:users).group("groups.id") if param.starts_with?("members_count", "last_user_activity")
     result = result.left_joins(:orders).group("groups.id") if param.starts_with?("last_order")
-    
+
     # Never pass user input data to Arel.sql() because of SQL Injection vulnerabilities.
     # This case here is okay, as param is mapped to the actual order string.
-    result.order(Arel.sql(sort_param_map[param])) 
+    result.order(Arel.sql(sort_param_map[param]))
   end
 
   private
