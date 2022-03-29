@@ -1,3 +1,9 @@
+.row
+  = form_for :group_order_invoice, url: url_for('group_order_invoice#create_multiple') do |f| 
+    = f.date_field :invoice_date, {}
+    = f.hidden_field :order_id, value: order.id
+    = f.submit 'Alle Rechnungen mit Datum erzeugen', class: 'btn btn small'
+
 - order.group_orders.includes([:group_order_invoice, :ordergroup]).each do |go|
   .row
     .column.small-3
