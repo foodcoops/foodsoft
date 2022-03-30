@@ -5,9 +5,9 @@
       - if go.group_order_invoice.present?
         - show_generate_with_date = false
     - if show_generate_with_date
-      = form_for :group_order_invoice, url: url_for('group_order_invoice#create_multiple') do |f| 
+      = form_for :group_order_invoice, url: url_for('group_order_invoice#create_multiple'), remote: true do |f| 
         = f.label :invoice_date, I18n.t('activerecord.attributes.group_order_invoice.links.invoice_date')
-        = f.date_field :invoice_date, {}
+        = f.date_field :invoice_date, {value: Date.today, max: Date.today, required: true}
         = f.hidden_field :order_id, value: order.id
         = f.submit  I18n.t('activerecord.attributes.group_order_invoice.links.generate_with_date'), class: 'btn btn small'
 

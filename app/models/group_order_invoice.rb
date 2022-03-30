@@ -7,14 +7,6 @@ class GroupOrderInvoice < ApplicationRecord
 
   def generate_invoice_number(count)
     trailing_number = count.to_s.rjust(4, '0')
-    puts "
-    " + "______________" + "
-    " + "______________" + "
-    " + "______________" + "
-    " + "#{self.invoice_date}" + "
-    " + "______________"+ "
-    " + "______________"+ "
-    " + "______________"
     if GroupOrderInvoice.find_by(invoice_number: self.invoice_date.strftime("%Y%m%d") + trailing_number)
       generate_invoice_number(count.to_i + 1)
     else

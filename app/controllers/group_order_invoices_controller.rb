@@ -37,9 +37,9 @@ class GroupOrderInvoicesController < ApplicationController
       goi.invoice_number = goi.generate_invoice_number(1)
       goi.save!
     end
-    redirect_back fallback_location: root_path
-  rescue => error
-    redirect_back fallback_location: root_path, notice: 'Something went wrong', :alert => I18n.t('errors.general_msg', :msg => error)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
