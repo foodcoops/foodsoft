@@ -29,21 +29,13 @@ class GroupOrderInvoicesController < ApplicationController
   def create_multiple
     invoice_date = params[:group_order_invoice][:invoice_date]
     order_id = params[:group_order_invoice][:order_id]
-    puts "
-    " + "______________" + "
-    " + "______________" + "
-    " + "______________" + "
-    " + "#{invoice_date}" + "
-    " + "______________"+ "
-    " + "______________"+ "
-    " + "______________"
-    raise "#{invoice_date}"
-    gos = GroupOrder.find_by(order_id: params[:order_id])
-    for go in gos
-      GroupOrderInvoice.find_or_create_by!(group_order_id: go.id)
-      respond_to do |format|
-        format.js
-      end
+    @order = Order.find(order_id)
+    gos = GroupOrder.where("order_id = ?", order_id)
+    gos.each do |go|
+      goi = GroupOrderInvoice.find_or_create_by!(group_order_id: go.id)
+      goi.invoice_date = invoice_date
+      goi.invoice_number = goi.generate_invoice_number(1)
+      goi.save!
     end
     redirect_back fallback_location: root_path
   rescue => error
@@ -52,6 +44,7 @@ class GroupOrderInvoicesController < ApplicationController
 
   def create
     go = GroupOrder.find(params[:group_order])
+    @order = go.order
     GroupOrderInvoice.find_or_create_by!(group_order_id: go.id)
     respond_to do |format|
       format.js

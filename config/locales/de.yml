@@ -94,8 +94,11 @@ de:
         name: Bestellgruppenrechnung
         links:
           delete: Rechnung löschen
-          generate: Rechnung erzeugen
           download: Rechnung herunterladen
+          generate: Rechnung erzeugen
+          invoice_date: Datum der Bestellgruppenrechnung
+          generate_with_date: setzen & erzeugen
+
         payment_method: Guthaben
         tax_number_not_set: Steuernummer in den Einstellungen nicht gesetzt
       invoice:

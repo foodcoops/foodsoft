@@ -94,8 +94,10 @@ en:
         name: Group order invoice
         links:
           delete: delete invoice
-          generate: generate invoice
           download: download invoice
+          invoice_date: date of group order invoice
+          generate: generate invoice
+          generate_with_date: set & generate
         payment_method: Credit
         tax_number_not_set: Tax number not set in configs
       invoice:

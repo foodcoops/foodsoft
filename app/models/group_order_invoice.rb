@@ -7,10 +7,18 @@ class GroupOrderInvoice < ApplicationRecord
 
   def generate_invoice_number(count)
     trailing_number = count.to_s.rjust(4, '0')
-    if GroupOrderInvoice.find_by(invoice_number: Time.now.strftime("%Y%m%d") + trailing_number)
+    puts "
+    " + "______________" + "
+    " + "______________" + "
+    " + "______________" + "
+    " + "#{self.invoice_date}" + "
+    " + "______________"+ "
+    " + "______________"+ "
+    " + "______________"
+    if GroupOrderInvoice.find_by(invoice_number: self.invoice_date.strftime("%Y%m%d") + trailing_number)
       generate_invoice_number(count.to_i + 1)
     else
-      Time.now.strftime("%Y%m%d") + trailing_number
+      self.invoice_date.strftime("%Y%m%d") + trailing_number
     end
   end
 
@@ -21,8 +29,8 @@ class GroupOrderInvoice < ApplicationRecord
   end
 
   def init
+    self.invoice_date = Time.now unless invoice_date
     self.invoice_number = generate_invoice_number(1) unless self.invoice_number
-    self.invoice_date = Time.now unless self.invoice_date
     self.payment_method = FoodsoftConfig[:group_order_invoices]&.[](:payment_method) || I18n.t('activerecord.attributes.group_order_invoice.payment_method') unless self.payment_method
   end
 

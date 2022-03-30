@@ -1,8 +1,15 @@
 .row
-  = form_for :group_order_invoice, url: url_for('group_order_invoice#create_multiple') do |f| 
-    = f.date_field :invoice_date, {}
-    = f.hidden_field :order_id, value: order.id
-    = f.submit 'Alle Rechnungen mit Datum erzeugen', class: 'btn btn small'
+  .column.small-12
+    - show_generate_with_date = true
+    - order.group_orders.each do |go|
+      - if go.group_order_invoice.present?
+        - show_generate_with_date = false
+    - if show_generate_with_date
+      = form_for :group_order_invoice, url: url_for('group_order_invoice#create_multiple') do |f| 
+        = f.label :invoice_date, I18n.t('activerecord.attributes.group_order_invoice.links.invoice_date')
+        = f.date_field :invoice_date, {}
+        = f.hidden_field :order_id, value: order.id
+        = f.submit  I18n.t('activerecord.attributes.group_order_invoice.links.generate_with_date'), class: 'btn btn small'
 
 - order.group_orders.includes([:group_order_invoice, :ordergroup]).each do |go|
   .row
