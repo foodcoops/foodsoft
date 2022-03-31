@@ -921,7 +921,7 @@ de:
         amount: Betrag
         date: Datum
         description: Beschreibung
-        new_financial_transaction: Neu Kontotransaktion hinzufügen
+        new_financial_transaction: Neue Kontotransaktion hinzufügen
         title: Finanzlink %{number}
         type: Typ
     financial_transactions:
