@@ -9,9 +9,8 @@ describe GroupOrderInvoice do
 
   describe 'erroneous group order invoice' do
     let(:goi) { create :group_order_invoice, group_order_id: group_order.id }
-
     it 'does not create group order invoice if tax_number not set' do
-      expect { goi }.to raise_error(ActiveRecord::RecordInvalid)
+      expect { goi }.to raise_error(ActiveRecord::RecordInvalid, /.*/)
     end
   end
 
