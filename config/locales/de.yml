@@ -1370,7 +1370,7 @@ de:
       text0: |
         Liebe(r) %{user},
 
-        für dich wure ein neuer Foodsoft-Zugang erstellt.
+        für dich wurde ein neuer Foodsoft-Zugang erstellt.
       text1: |
         Um ein neues Passwort einzugeben, gehe zu: %{link}
         Dieser Link kann nur einmal aufgerufen werden und läuft am %{expires} ab.
