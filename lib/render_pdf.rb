@@ -70,7 +70,7 @@ class RenderPDF < Prawn::Document
     options[:skip_page_creation] = true
     @options = options
     @first_page = true
-
+    no_footer = @options&.[](:no_footer) ? true : false
     super(options)
 
     # Use ttf for better utf-8 compability
@@ -84,11 +84,11 @@ class RenderPDF < Prawn::Document
     )
 
     header = options[:title] || title
-    footer = I18n.l(Time.now, format: :long)
+    footer = I18n.l(Time.now, format: :long) unless no_footer
 
     header_size = 0
     header_size = height_of(header, size: HEADER_FONT_SIZE, font: DEFAULT_FONT) + HEADER_SPACE if header
-    footer_size = height_of(footer, size: FOOTER_FONT_SIZE, font: DEFAULT_FONT) + FOOTER_SPACE
+    footer_size = no_footer ? 0 : height_of(footer, size: FOOTER_FONT_SIZE, font: DEFAULT_FONT) + FOOTER_SPACE 
 
     start_new_page(top_margin: TOP_MARGIN + header_size, bottom_margin: BOTTOM_MARGIN + footer_size)
 
@@ -98,12 +98,15 @@ class RenderPDF < Prawn::Document
       bounding_box [bounds.left, bounds.top + header_size], width: bounds.width, height: header_size do
         text header, size: HEADER_FONT_SIZE, align: :center, overflow: :shrink_to_fit if header
       end
-      font_size FOOTER_FONT_SIZE do
-        bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width, height: footer_size do
-          text footer, align: :left, valign: :bottom
-        end
-        bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width, height: footer_size do
-          text I18n.t('lib.render_pdf.page', number: page_number, count: page_count), align: :right, valign: :bottom
+
+      unless no_footer
+        font_size FOOTER_FONT_SIZE do
+          bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width, height: footer_size do
+            text footer, align: :left, valign: :bottom
+          end 
+          bounding_box [bounds.left, bounds.bottom - FOOTER_SPACE], width: bounds.width, height: footer_size do
+            text I18n.t('lib.render_pdf.page', number: page_number, count: page_count), align: :right, valign: :bottom
+          end 
         end
       end
     end
