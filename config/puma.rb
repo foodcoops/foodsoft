@@ -11,6 +11,9 @@ threads threads_count, threads_count
 #
 port        ENV.fetch("PORT") { 3000 }
 
+# Bind automatically to all systemd activated sockets
+bind_to_activated_sockets
+
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
