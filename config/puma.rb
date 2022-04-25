@@ -9,7 +9,7 @@ threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port        ENV.fetch("PORT") { 3000 }
+port ENV.fetch("PORT") { 3000 }
 
 # Bind automatically to all systemd activated sockets
 bind_to_activated_sockets
