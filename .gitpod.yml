@@ -16,8 +16,8 @@ tasks:
       
   - name: Rails
     command: |
-      echo "The rails application stared in docker containers (see docker-compose-dev.yml)."
-      echo "For executing rails commands, upen up a bash terminal inside the foodsoft container via 'docker-compose -f docker-compose-dev.yml exec foodsoft bash'"
+      echo "The rails application is started in docker containers (see docker-compose-dev.yml)."
+      echo "For executing rails commands, open up a bash terminal inside the foodsoft container via 'docker-compose -f docker-compose-dev.yml exec foodsoft bash'"
 
 ports:
   - port: 3000
