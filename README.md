@@ -23,6 +23,11 @@ Get foodsoft [running locally](doc/SETUP_DEVELOPMENT.md),
 then visit our [Developing Guidelines](https://github.com/foodcoops/foodsoft/wiki/Developing-Guidelines)
 page on the wiki.
 
+Get a foodsoft dev-environment running in the browser with Gitpod
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mob-programming-meetup/foodsoft)
+
+Follow these [instructions](doc/SETUP_DEVELOPMENT_GITPOD.md) to complete setup from within the Gitpod workspace. 
 
 Deploying
 ---------
