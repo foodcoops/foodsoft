@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.description = "Adds possibility to do polls with foodsoft."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
-  s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails"
   s.add_dependency "deface", "~> 1.0"
