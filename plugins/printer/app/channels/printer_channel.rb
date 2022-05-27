@@ -5,6 +5,7 @@ class PrinterChannel < ApplicationCable::Channel
   end
 
   def update(data)
+    FoodsoftConfig.select_multifoodcoop 'vorratskammer'
     job = PrinterJob.unfinished.find_by_id(data['id'])
     return unless job
 
