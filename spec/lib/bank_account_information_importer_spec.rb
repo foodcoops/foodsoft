@@ -242,7 +242,7 @@ describe BankTransaction do
     expect(bt.date).to eq('2019-02-13'.to_date)
     expect(bt.text).to eq('Hammersmith Inc.')
     expect(bt.iban).to be(nil)
-    expect(bt.reference).to eq('Martin Schöneicher, Inv# 123453423, Thx')
+    expect(bt.reference).to eq("Corvette Ersatzteile\nMartin Schöneicher, Inv# 123453423, Thx")
     expect(bt.receipt).to eq('Auslands-Überweisung')
   end
 
@@ -318,7 +318,7 @@ describe BankTransaction do
     expect(bt.date).to eq('2019-02-14'.to_date)
     expect(bt.text).to eq('Maria Reithuber')
     expect(bt.iban).to eq('AT251657674147449499')
-    expect(bt.reference).to eq("Danke für's Auslegen")
+    expect(bt.reference).to eq("Auslage von Martin S.\nDanke für's Auslegen")
     expect(bt.receipt).to eq('Gutschrift')
   end
 
@@ -390,7 +390,7 @@ describe BankTransaction do
     expect(bt1.date).to eq('2020-01-01'.to_date)
     expect(bt1.text).to eq('DN1')
     expect(bt1.iban).to eq('DE72957284895783674747')
-    expect(bt1.reference).to be(nil)
+    expect(bt1.reference).to eq('')
     expect(bt1.receipt).to eq('AI1')
 
     bt2 = bank_account.bank_transactions.find_by_external_id("T2")
@@ -406,7 +406,7 @@ describe BankTransaction do
     expect(bt3.date).to eq('2000-03-01'.to_date)
     expect(bt3.text).to eq('DN3')
     expect(bt3.iban).to be(nil)
-    expect(bt3.reference).to be(nil)
+    expect(bt3.reference).to eq('')
     expect(bt3.receipt).to be(nil)
   end
 end
