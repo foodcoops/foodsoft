@@ -5,7 +5,7 @@
 namespace :multicoops do
   desc 'Runs a specific rake task for each registered foodcoop, use rake multicoops:run TASK=db:migrate'
   task :run => :environment do
-    task_to_run = ENV['TASK']
+    task_to_run = ENV.fetch('TASK', nil)
     last_error = nil
     FoodsoftConfig.each_coop do |coop|
       begin
@@ -21,9 +21,9 @@ namespace :multicoops do
 
   desc 'Runs a specific rake task for a single coop, use rake mutlicoops:run_single TASK=db:migrate FOODCOOP=demo'
   task :run_single => :environment do
-    task_to_run = ENV['TASK']
-    FoodsoftConfig.select_foodcoop ENV['FOODCOOP']
-    rake_say "Run '#{task_to_run}' for #{ENV['FOODCOOP']}"
+    task_to_run = ENV.fetch('TASK', nil)
+    FoodsoftConfig.select_foodcoop ENV.fetch('FOODCOOP', nil)
+    rake_say "Run '#{task_to_run}' for #{ENV.fetch('FOODCOOP', nil)}"
     Rake::Task[task_to_run].execute
   end
 end

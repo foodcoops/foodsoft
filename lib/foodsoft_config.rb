@@ -47,7 +47,7 @@ class FoodsoftConfig
   # Configuration file location.
   #   Taken from environment variable +FOODSOFT_APP_CONFIG+,
   #   or else +config/app_config.yml+.
-  APP_CONFIG_FILE = ENV['FOODSOFT_APP_CONFIG'] || 'config/app_config.yml'
+  APP_CONFIG_FILE = ENV.fetch('FOODSOFT_APP_CONFIG', 'config/app_config.yml')
   # Loaded configuration
   APP_CONFIG = ActiveSupport::HashWithIndifferentAccess.new
 

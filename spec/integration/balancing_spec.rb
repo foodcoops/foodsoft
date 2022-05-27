@@ -180,6 +180,6 @@ feature 'settling an order', js: true do
     end
     expect(page).to_not have_selector('form#new_order_article')
     expect(page).to have_content(new_article.name)
-    expect(order.order_articles.where(article_id: new_article.id)).to_not be nil
+    expect(order.order_articles.where(article_id: new_article.id)).to_not be_nil
   end
 end

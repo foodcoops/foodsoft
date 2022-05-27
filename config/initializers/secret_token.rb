@@ -5,7 +5,7 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 Foodsoft::Application.config.secret_key_base = begin
-  if (token = ENV['SECRET_KEY_BASE']).present?
+  if (token = ENV.fetch('SECRET_KEY_BASE', nil)).present?
     token
   elsif Rails.env.production? || Rails.env.staging?
     raise "You must set SECRET_KEY_BASE"

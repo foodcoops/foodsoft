@@ -892,6 +892,11 @@ Rails/SquishedSQLHeredocs:
 Rails/TimeZone:
   Enabled: false
 
+# Offense count: 1
+Rails/TransactionExitStatement:
+  Exclude:
+    - 'app/models/bank_transaction.rb'
+
 # Offense count: 3
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb

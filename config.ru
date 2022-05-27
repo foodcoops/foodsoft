@@ -3,6 +3,6 @@
 require ::File.expand_path('../config/environment', __FILE__)
 
 # https://gist.github.com/ebeigarts/5450422
-map ENV['RAILS_RELATIVE_URL_ROOT'] || '/' do
+map ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/') do
   run Foodsoft::Application
 end

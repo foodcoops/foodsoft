@@ -2,35 +2,35 @@ require_relative '../spec_helper'
 
 describe BankTransactionReference do
   it 'returns nil for empty input' do
-    expect(BankTransactionReference.parse('')).to be nil
+    expect(BankTransactionReference.parse('')).to be_nil
   end
 
   it 'returns nil for invalid string' do
-    expect(BankTransactionReference.parse('invalid')).to be nil
+    expect(BankTransactionReference.parse('invalid')).to be_nil
   end
 
   it 'returns nil for FS1A' do
-    expect(BankTransactionReference.parse('FS1A')).to be nil
+    expect(BankTransactionReference.parse('FS1A')).to be_nil
   end
 
   it 'returns nil for FS1.1A' do
-    expect(BankTransactionReference.parse('FS1.1A')).to be nil
+    expect(BankTransactionReference.parse('FS1.1A')).to be_nil
   end
 
   it 'returns nil for xFS1A1' do
-    expect(BankTransactionReference.parse('xFS1A1')).to be nil
+    expect(BankTransactionReference.parse('xFS1A1')).to be_nil
   end
 
   it 'returns nil for .FS1A1' do
-    expect(BankTransactionReference.parse('.FS1A1')).to be nil
+    expect(BankTransactionReference.parse('.FS1A1')).to be_nil
   end
 
   it 'returns nil for FS1A1x' do
-    expect(BankTransactionReference.parse('FS1A1x')).to be nil
+    expect(BankTransactionReference.parse('FS1A1x')).to be_nil
   end
 
   it 'returns nil for FS1A1.' do
-    expect(BankTransactionReference.parse('FS1A1.')).to be nil
+    expect(BankTransactionReference.parse('FS1A1.')).to be_nil
   end
 
   it 'returns correct value for FS1A1' do

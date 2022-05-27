@@ -6,7 +6,7 @@ require 'pathname'
 
 namespace :db do
   namespace :seed do
-    Dir.glob(Rails.root.join('db/seeds/*.seeds.rb')).each do |seedfile|
+    Dir.glob(Rails.root.join('db/seeds/*.seeds.rb')).sort.each do |seedfile|
       desc "Load the seed data from #{Pathname.new(seedfile).relative_path_from(Rails.root)}"
       task File.basename(seedfile, '.seeds.rb') => :environment do
         require_relative seedfile

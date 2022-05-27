@@ -9,7 +9,7 @@ describe FoodsoftConfig do
   end
 
   it 'returns an empty default value' do
-    expect(FoodsoftConfig[:protected][:LIUhniuyGNKUQTWfbiOQIWYexngo78hqexul]).to be nil
+    expect(FoodsoftConfig[:protected][:LIUhniuyGNKUQTWfbiOQIWYexngo78hqexul]).to be_nil
   end
 
   it 'returns a configuration value' do

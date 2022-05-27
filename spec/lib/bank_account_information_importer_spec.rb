@@ -8,7 +8,7 @@ describe BankTransaction do
     JSON
 
     importer = BankAccountInformationImporter.new(bank_account)
-    expect(importer.import!(content)).to be(nil)
+    expect(importer.import!(content)).to be_nil
   end
 
   it 'invalid JSON' do
@@ -241,7 +241,7 @@ describe BankTransaction do
     expect(bt.amount).to eq(-238.68)
     expect(bt.date).to eq('2019-02-13'.to_date)
     expect(bt.text).to eq('Hammersmith Inc.')
-    expect(bt.iban).to be(nil)
+    expect(bt.iban).to be_nil
     expect(bt.reference).to eq("Corvette Ersatzteile\nMartin Schöneicher, Inv# 123453423, Thx")
     expect(bt.receipt).to eq('Auslands-Überweisung')
   end
@@ -277,7 +277,7 @@ describe BankTransaction do
     expect(bt.amount).to eq(-12.3)
     expect(bt.date).to eq('2019-02-14'.to_date)
     expect(bt.text).to eq('superbank AG')
-    expect(bt.iban).to be(nil)
+    expect(bt.iban).to be_nil
     expect(bt.reference).to eq("Überweisung US, Wechselspesen u Provision")
     expect(bt.receipt).to eq('Spesen/Gebühren')
   end
@@ -399,14 +399,14 @@ describe BankTransaction do
     expect(bt2.text).to eq('CN2')
     expect(bt2.iban).to eq('CH9300762011623852957')
     expect(bt2.reference).to eq('RI2')
-    expect(bt2.receipt).to be(nil)
+    expect(bt2.receipt).to be_nil
 
     bt3 = bank_account.bank_transactions.find_by_external_id("T3")
     expect(bt3.amount).to eq(33)
     expect(bt3.date).to eq('2000-03-01'.to_date)
     expect(bt3.text).to eq('DN3')
-    expect(bt3.iban).to be(nil)
+    expect(bt3.iban).to be_nil
     expect(bt3.reference).to eq('')
-    expect(bt3.receipt).to be(nil)
+    expect(bt3.receipt).to be_nil
   end
 end

@@ -59,7 +59,7 @@ describe BankTransaction do
     let!(:bank_transaction8) { create :bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}X10", amount: 10 }
 
     it 'ignores transaction with invalid reference' do
-      expect(bank_transaction1.assign_to_ordergroup).to be nil
+      expect(bank_transaction1.assign_to_ordergroup).to be_nil
     end
 
     it 'ignores transaction with invalid ordergroup' do
