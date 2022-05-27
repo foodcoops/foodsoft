@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
   def show
     @message = Message.find(params[:id])
     unless @message.is_readable_for?(current_user)
-      redirect_to messages_url, alert: 'Nachricht ist privat!'
+      redirect_to messages_url, alert: I18n.t('messages.new.error_private')
     end
   end
 
