@@ -148,6 +148,29 @@ class Ordergroup < Group
     financial_transactions.last.try(:created_on) || created_on
   end
 
+  def self.sort_by_param(param)
+    param ||= "name"
+
+    sort_param_map = {
+      "name" => "name",
+      "name_reverse" => "name DESC",
+      "members_count" => "count(users.id)",
+      "members_count_reverse" => "count(users.id) DESC",
+      "last_user_activity" => "max(users.last_activity)",
+      "last_user_activity_reverse" => "max(users.last_activity) DESC",
+      "last_order" => "max(orders.starts)",
+      "last_order_reverse" => "max(orders.starts) DESC"
+    }
+
+    result = self
+    result = result.left_joins(:users).group("groups.id") if param.starts_with?("members_count", "last_user_activity")
+    result = result.left_joins(:orders).group("groups.id") if param.starts_with?("last_order")
+
+    # Never pass user input data to Arel.sql() because of SQL Injection vulnerabilities.
+    # This case here is okay, as param is mapped to the actual order string.
+    result.order(Arel.sql(sort_param_map[param]))
+  end
+
   private
 
   # Make sure, that a user can only be in one ordergroup

@@ -2,7 +2,7 @@ class Admin::OrdergroupsController < Admin::BaseController
   inherit_resources
 
   def index
-    @ordergroups = Ordergroup.undeleted.order('name ASC')
+    @ordergroups = Ordergroup.undeleted.sort_by_param(params["sort"])
 
     if request.format.csv?
       send_data OrdergroupsCsv.new(@ordergroups).to_csv, filename: 'ordergroups.csv', type: 'text/csv'

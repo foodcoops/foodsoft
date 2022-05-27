@@ -1,6 +1,6 @@
 class Foodcoop::UsersController < ApplicationController
   def index
-    @users = User.undeleted.natural_order
+    @users = User.undeleted.sort_by_param(params["sort"])
 
     # if somebody uses the search field:
     @users = @users.natural_search(params[:user_name]) unless params[:user_name].blank?

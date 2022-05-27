@@ -250,4 +250,27 @@ class User < ApplicationRecord
     #   this should not be part of the model anyway
     { :id => id, :name => "#{display} (#{ordergroup.try(:name)})" }
   end
+
+  def self.sort_by_param(param)
+    param ||= "name"
+
+    sort_param_map = {
+      "nick" => "nick",
+      "nick_reverse" => "nick DESC",
+      "name" => "first_name, last_name",
+      "name_reverse" => "first_name DESC, last_name DESC",
+      "email" => "users.email",
+      "email_reverse" => "users.email DESC",
+      "phone" => "phone",
+      "phone_reverse" => "phone DESC",
+      "last_activity" => "last_activity",
+      "last_activity_reverse" => "last_activity DESC",
+      "ordergroup" => "IFNULL(groups.type, '') <> 'Ordergroup', groups.name",
+      "ordergroup_reverse" => "IFNULL(groups.type, '') <> 'Ordergroup', groups.name DESC"
+    }
+
+    # Never pass user input data to Arel.sql() because of SQL Injection vulnerabilities.
+    # This case here is okay, as param is mapped to the actual order string.
+    self.eager_load(:groups).order(Arel.sql(sort_param_map[param])) # eager_load is like left_join but without duplicates
+  end
 end

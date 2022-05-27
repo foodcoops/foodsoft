@@ -22,6 +22,90 @@ describe Ordergroup do
     expect(Ordergroup.active).not_to be_empty
   end
 
+  describe 'sort correctly' do
+    it 'by name' do
+      group_b = create :ordergroup, name: 'bbb'
+      group_a = create :ordergroup, name: 'aaa'
+      group_c = create :ordergroup, name: 'ccc'
+
+      expect(Ordergroup.sort_by_param('name')).to eq([group_a, group_b, group_c])
+    end
+
+    it 'reverse by name' do
+      group_b = create :ordergroup, name: 'bbb'
+      group_a = create :ordergroup, name: 'aaa'
+      group_c = create :ordergroup, name: 'ccc'
+
+      expect(Ordergroup.sort_by_param('name_reverse')).to eq([group_c, group_b, group_a])
+    end
+
+    it 'by members_count' do
+      users_b = [create(:user)]
+      users_a = []
+      users_c = [create(:user), create(:user), create(:user)]
+      group_b = create :ordergroup, name: 'bbb', user_ids: users_b.map(&:id)
+      group_a = create :ordergroup, name: 'aaa', user_ids: users_a.map(&:id)
+      group_c = create :ordergroup, name: 'ccc', user_ids: users_c.map(&:id)
+
+      expect(Ordergroup.sort_by_param('members_count')).to eq([group_a, group_b, group_c])
+    end
+
+    it 'reverse by members_count' do
+      users_b = [create(:user)]
+      users_a = []
+      users_c = [create(:user), create(:user), create(:user)]
+      group_b = create :ordergroup, name: 'bbb', user_ids: users_b.map(&:id)
+      group_a = create :ordergroup, name: 'aaa', user_ids: users_a.map(&:id)
+      group_c = create :ordergroup, name: 'ccc', user_ids: users_c.map(&:id)
+
+      expect(Ordergroup.sort_by_param('members_count_reverse')).to eq([group_c, group_b, group_a])
+    end
+
+    it 'by last_user_activity' do
+      user_b = create :user, last_activity: 3.days.ago
+      user_a = create :user, last_activity: 5.days.ago
+      user_c = create :user, last_activity: Time.now
+      group_b = create :ordergroup, name: 'bbb', user_ids: [user_b.id]
+      group_a = create :ordergroup, name: 'aaa', user_ids: [user_a.id]
+      group_c = create :ordergroup, name: 'ccc', user_ids: [user_c.id]
+
+      expect(Ordergroup.sort_by_param('last_user_activity')).to eq([group_a, group_b, group_c])
+    end
+
+    it 'reverse by last_user_activity' do
+      user_b = create :user, last_activity: 3.days.ago
+      user_a = create :user, last_activity: 5.days.ago
+      user_c = create :user, last_activity: Time.now
+      group_b = create :ordergroup, name: 'bbb', user_ids: [user_b.id]
+      group_a = create :ordergroup, name: 'aaa', user_ids: [user_a.id]
+      group_c = create :ordergroup, name: 'ccc', user_ids: [user_c.id]
+
+      expect(Ordergroup.sort_by_param('last_user_activity_reverse')).to eq([group_c, group_b, group_a])
+    end
+
+    it 'by last_order' do
+      group_b = create :ordergroup, name: 'bbb'
+      group_a = create :ordergroup, name: 'aaa'
+      group_c = create :ordergroup, name: 'ccc'
+      group_b.group_orders.create! order: create(:order, starts: 6.days.ago)
+      group_a.group_orders.create! order: create(:order, starts: 4.months.ago)
+      group_c.group_orders.create! order: create(:order, starts: Time.now)
+
+      expect(Ordergroup.sort_by_param('last_order')).to eq([group_a, group_b, group_c])
+    end
+
+    it 'reverse by last_order' do
+      group_b = create :ordergroup, name: 'bbb'
+      group_a = create :ordergroup, name: 'aaa'
+      group_c = create :ordergroup, name: 'ccc'
+      group_b.group_orders.create! order: create(:order, starts: 6.days.ago)
+      group_a.group_orders.create! order: create(:order, starts: 4.months.ago)
+      group_c.group_orders.create! order: create(:order, starts: Time.now)
+
+      expect(Ordergroup.sort_by_param('last_order_reverse')).to eq([group_c, group_b, group_a])
+    end
+  end
+
   context 'with financial transactions' do
     before do
       og = user.ordergroup

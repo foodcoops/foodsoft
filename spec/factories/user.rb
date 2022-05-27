@@ -34,10 +34,10 @@ FactoryBot.define do
     sequence(:name) { |n| "Group ##{n}" }
 
     factory :workgroup do
-      type { '' }
+      type { 'Workgroup' }
     end
 
-    factory :ordergroup do
+    factory :ordergroup, class: "Ordergroup" do
       type { 'Ordergroup' }
       sequence(:name) { |n| "Order group ##{n}" }
       # workaround to avoid needing to save the ordergroup

@@ -4,10 +4,11 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= heading_helper Ordergroup, :name
-      %th= heading_helper Ordergroup, :user_tokens
+      %th= sort_link_helper heading_helper(Ordergroup, :name), "name"
+      %th= sort_link_helper heading_helper(Ordergroup, :user_tokens), "members_count"
       %th= heading_helper Ordergroup, :contact_address
-      %th= heading_helper Ordergroup, :last_user_activity
+      %th= sort_link_helper heading_helper(Ordergroup, :last_user_activity), "last_user_activity"
+      %th= sort_link_helper heading_helper(Ordergroup, :last_order), "last_order"
       %th= t 'ui.actions'
   %tbody
     - for ordergroup in @ordergroups
@@ -17,6 +18,7 @@
           %abbr{title: ordergroup_members_title(ordergroup)}= ordergroup.users.size
         %td= link_to_gmaps ordergroup.contact_address
         %td= format_date ordergroup.last_user_activity
+        %td= format_date ordergroup.last_order.try(:starts)
         %td
           = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-mini'
           = link_to t('ui.delete'), [:admin, ordergroup], :data => {:confirm => t('ui.confirm_delete', name: ordergroup.name)},
