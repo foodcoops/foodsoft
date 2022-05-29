@@ -1,38 +1,47 @@
 - title t('.title')
 
-- for supplier in @suppliers
-  - invoices = supplier.invoices
-  - if invoices.any?
-    %h3= supplier.name
-    - invoices_sum = 0
-    - invoices_text = []
-    %p
-    - for invoice in invoices
-      - invoice_amount_diff = invoice.expected_amount - invoice.net_amount
-      - invoices_sum += invoice.amount
-      - invoices_text << invoice.number
-      = link_to finance_invoice_path(invoice) do
-        = format_date invoice.date
-        = ' ' + invoice.number
-      = ' ' + number_to_currency(invoice.amount)
-      - if invoice_amount_diff != 0
-        %span{style: "color:#{invoice_amount_diff < 0 ? 'red' : 'green'}"}
-          = invoice_amount_diff > 0 ? '+' : '-'
-          = number_to_currency(invoice_amount_diff.abs)
-      - if invoice.attachments.attached?
-        - for attachment in invoice.attachments
-          = link_to attachment.filename, url_for(attachment)
-          = fa_icon :download
-      - if invoice.note?
-        = '(' + invoice.note + ')'
-      %br/
-    %p
-      - if supplier.iban.present?
-        %b= heading_helper(Supplier, :iban) + ':'
-        = format_iban supplier.iban
+= form_tag(pay_finance_invoices_path) do
+  - show_pay_button = false
+
+  - for supplier in @suppliers
+    - invoices = supplier.invoices
+    - if invoices.any?
+      %h3= supplier.name
+      - invoices_sum = 0
+      - invoices_text = []
+      %p
+      - for invoice in invoices
+        - invoice_amount_diff = invoice.expected_amount - invoice.net_amount
+        - invoices_sum += invoice.amount
+        - invoices_text << invoice.number
+        - if supplier.supplier_category.bank_account&.bank_gateway
+          - show_pay_button = true
+          = check_box_tag "invoices[]", invoice.id, false
+        = link_to finance_invoice_path(invoice) do
+          = format_date invoice.date
+          = ' ' + invoice.number
+        = ' ' + number_to_currency(invoice.amount)
+        - if invoice_amount_diff != 0
+          %span{style: "color:#{invoice_amount_diff < 0 ? 'red' : 'green'}"}
+            = invoice_amount_diff > 0 ? '+' : '-'
+            = number_to_currency(invoice_amount_diff.abs)
+        - if invoice.attachments.attached?
+          - for attachment in invoice.attachments
+            = link_to attachment.filename, url_for(attachment)
+            = fa_icon :download
+        - if invoice.note?
+          = '(' + invoice.note + ')'
         %br/
-      %b= t('.invoices_text') + ':'
-      = invoices_text.join(', ')
-      %br/
-      %b= t('.invoices_sum') + ':'
-      = number_to_currency invoices_sum
+      %p
+        - if supplier.iban.present?
+          %b= heading_helper(Supplier, :iban) + ':'
+          = format_iban supplier.iban
+          %br/
+        %b= t('.invoices_text') + ':'
+        = invoices_text.join(', ')
+        %br/
+        %b= t('.invoices_sum') + ':'
+        = number_to_currency invoices_sum
+
+  - if show_pay_button
+    = submit_tag t('.pay'), class: 'btn btn-primary'

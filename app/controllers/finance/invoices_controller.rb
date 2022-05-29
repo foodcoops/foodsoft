@@ -87,6 +87,47 @@ class Finance::InvoicesController < ApplicationController
     end
   end
 
+  def pay
+    unless params[:invoices]
+      return redirect_to unpaid_finance_invoices_path, alert: I18n.t('finance.invoices.controller.pay.no_invoices')
+    end
+
+    ids = params[:invoices].map(&:to_i)
+    invoices = Invoice.includes(:supplier).where(id: ids)
+
+    bank_gateways = BankGateway
+                    .includes({ bank_accounts: { supplier_categories: { suppliers: :invoices } } })
+                    .where({ invoices: { id: ids } })
+
+    unless bank_gateways.length == 1
+      return redirect_to unpaid_finance_invoices_path, alert: I18n.t('finance.invoices.controller.pay.multiple_bank_gateways')
+    end
+
+    bank_gateway = bank_gateways.first
+
+    payments = invoices.map do |i|
+      {
+        instructedAmount: {
+          currency: 'EUR',
+          amount: i.amount.to_s
+        },
+        debtorAccount: {
+          iban: i.supplier.supplier_category.bank_account.iban
+        },
+        creditorName: i.supplier.name,
+        creditorAccount: {
+          iban: i.supplier.iban
+        },
+        remittanceInformationUnstructured: i.number
+      }
+    end
+
+    callback_url = callback_finance_bank_gateway_url(bank_gateway)
+    user = bank_gateway.unattended_user != current_user && current_user
+    location = bank_gateway.connector.pay_and_import_url callback_url, user, { sepaCreditTransferPayments: payments }
+    redirect_to location, status: :found
+  end
+
   private
 
   def find_invoice

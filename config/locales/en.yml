@@ -1058,6 +1058,7 @@ en:
       unpaid:
         invoices_sum: Total sum
         invoices_text: Reference
+        pay: Pay selected invoices
         title: Unpaid invoices
     ordergroups:
       index:

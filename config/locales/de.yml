@@ -1054,6 +1054,7 @@ de:
       unpaid:
         invoices_sum: Gesamtsumme
         invoices_text: Verwendungszweck
+        pay: Ausgewählte Rechnungen bezahlen
         title: Unbezahlte Rechnungen
     ordergroups:
       index:
