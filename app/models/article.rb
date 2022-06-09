@@ -80,24 +80,24 @@ class Article < ApplicationRecord
   # If the article is used in an open Order, the Order will be returned.
   def in_open_order
     @in_open_order ||= begin
-      order_articles = OrderArticle.where(order_id: Order.open.collect(&:id))
-      order_article = order_articles.detect {|oa| oa.article_id == id }
-      order_article ? order_article.order : nil
-    end
+                         order_articles = OrderArticle.where(order_id: Order.open.collect(&:id))
+                         order_article = order_articles.detect { |oa| oa.article_id == id }
+                         order_article ? order_article.order : nil
+                       end
   end
 
   # If the article is used in an open Order, the Order will be returned.
   def in_open_orders
-      @in_open_orders ||= begin
-       order_articles = OrderArticle
-                            .where(order_id: Order.open.collect(&:id))
-          .where(article_id: id)
-           .map{ |oa| oa.order }
-     end
+    @in_open_orders ||= begin
+                          order_articles = OrderArticle
+                                             .where(order_id: Order.open.collect(&:id))
+                                             .where(article_id: id)
+                                             .map { |oa| oa.order }
+                        end
   end
 
   def notify_orders
-    in_open_orders.each{ |o| o.notify_modified }
+    in_open_orders.each { |o| o.notify_modified }
   end
 
   # Returns true if the article has been ordered in the given order at least once
@@ -129,20 +129,38 @@ class Article < ApplicationRecord
   # @param new_article [Article] New article to update self
   # @option options [Boolean] :convert_units Omit or set to +true+ to keep current unit and recompute unit quantity and price.
   # @return [Hash<Symbol, Object>] Attributes with new values
-  def unequal_attributes(new_article, options={})
+  def unequal_attributes(new_article, options = {})
     # try to convert different units when desired
+    new_supplier_price = new_article.supplier_price
     if options[:convert_units] == false
       new_price, new_unit_quantity = nil, nil
+      # puts "not using convert units"
     else
       new_price, new_unit_quantity = convert_units(new_article)
+      # puts "supplier values: #{new_article.price} X #{new_article.unit_quantity} of #{new_article.unit}"
     end
     if new_price && new_unit_quantity
+      # puts "converted value: #{new_price} X #{new_unit_quantity} of #{unit}"
+      # supplier_amount = Unit.new(new_article.unit.downcase) * new_article.unit_quantity
+      # fc_amount = Unit.new(unit.downcase) * new_unit_quantity
+      # if (supplier_amount != fc_amount)
+      #   raise "sanity check failed #{supplier_amount} != #{fc_amount}"
+      # end
       new_unit = self.unit
+
+      # ensure supplier price is adjusted (eg, if we have UQ of 6 X 1L, but supplier price is UQ 1 x 1L)
+      if ((new_price * new_unit_quantity) - new_supplier_price).abs > (new_unit_quantity * 0.1) # account for small rounding errors
+        new_supplier_price = new_price * new_unit_quantity
+      end
     else
+      # puts "no converted values, using supplier values"
       new_price = new_article.price
       new_unit_quantity = new_article.unit_quantity
       new_unit = new_article.unit
     end
+
+    # sometimes the supplier deposit is not known, so only update it if a nonzero value is given
+    new_deposit = new_article.deposit != 0 ? new_article.deposit : deposit
 
     return Article.compare_attributes(
       {
@@ -151,9 +169,9 @@ class Article < ApplicationRecord
         :origin => [self.origin, new_article.origin],
         :unit => [self.unit, new_unit],
         :price => [self.price.to_f.round(2), new_price.to_f.round(2)],
-        :supplier_price => [self.supplier_price.to_f.round(2), new_article.supplier_price.to_f.round(2)],
+        :supplier_price => [self.supplier_price.to_f.round(2), new_supplier_price.to_f.round(2)],
         :tax => [self.tax, new_article.tax],
-        :deposit => [self.deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
+        :deposit => [self.deposit.to_f.round(2), new_deposit.to_f.round(2)],
         # take care of different num-objects.
         :unit_quantity => [self.unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
         :note => [self.note.to_s, new_article.note.to_s]
@@ -168,7 +186,7 @@ class Article < ApplicationRecord
   # @return [Hash<Symbol, Object>] Changed attributes with new values
   def self.compare_attributes(attributes)
     unequal_attributes = attributes.select { |name, values| values[0] != values[1] && !(values[0].blank? && values[1].blank?) }
-    Hash[unequal_attributes.to_a.map {|a| [a[0], a[1].last]}]
+    Hash[unequal_attributes.to_a.map { |a| [a[0], a[1].last] }]
   end
 
   # to get the correspondent shared article
@@ -181,7 +199,7 @@ class Article < ApplicationRecord
 
         # this is a sanity check in case the sku points to the wrong article (happened due to our db getting messed up)
         # note we may go back to using this one at the end of this block
-        @shared_article = nil if  @shared_article && @shared_article.name != self.name
+        @shared_article = nil if @shared_article && @shared_article.name != self.name
 
         @shared_article ||= supplier.shared_supplier.find_article_by_name_origin_manufacture(self.name, self.origin, self.manufacturer)
         @shared_article ||= supplier.shared_supplier.find_article_by_name_manufacture(self.name, self.manufacturer)
@@ -192,7 +210,7 @@ class Article < ApplicationRecord
       end
       if @shared_article
         if @shared_article.linked_to.nil?
-          @shared_article.linked_to=self
+          @shared_article.linked_to = self
         else
           # raise "already linked to #{@shared_article.linked_to} not #{self.id}" unless @shared_article.linked_to == self
           if @shared_article.linked_to != self
@@ -211,31 +229,65 @@ class Article < ApplicationRecord
   # returns false if units aren't foodsoft-compatible
   # returns nil if units are eqal
   def convert_units(new_article = shared_article)
-    if unit != new_article.unit
-      # legacy, used by foodcoops in Germany
-      if new_article.unit == "KI" && unit == "ST" # 'KI' means a box, with a different amount of items in it
-        # try to match the size out of its name, e.g. "banana 10-12 St" => 10
-        new_unit_quantity = /[0-9\-\s]+(St)/.match(new_article.name).to_s.to_i
-        if new_unit_quantity && new_unit_quantity > 0
-          new_price = (new_article.price/new_unit_quantity.to_f).round(2)
-          [new_price, new_unit_quantity]
-        else
-          false
-        end
-      else # use ruby-units to convert
-        fc_unit = (::Unit.new(unit) rescue nil)
-        supplier_unit = (::Unit.new(new_article.unit) rescue nil)
-        if fc_unit && supplier_unit && fc_unit =~ supplier_unit
-          conversion_factor = (supplier_unit / fc_unit).to_base.to_r
-          new_price = new_article.price / conversion_factor
-          new_unit_quantity = new_article.unit_quantity * conversion_factor
-          [new_price, new_unit_quantity]
-        else
-          false
-        end
+
+    if true # supplier && supplier.name == 'Pro Organics'
+      if unit == new_article.unit && unit_quantity == new_article.unit_quantity
+        # puts "unit '#{unit} x #{unit_quantity}' == new_article.unit '#{new_article.unit} x #{new_article.unit_quantity}' no conversion needed for #{name}"
+        return nil
       end
+      fc_unit = (::Unit.new(unit.downcase) rescue nil)
+      supplier_unit = (::Unit.new(new_article.unit.downcase) rescue nil)
+      fc_uq = unit_quantity
+      supplier_uq = new_article.unit_quantity
+      if fc_unit && supplier_unit && fc_unit =~ supplier_unit
+        # conversion_factor = ((supplier_unit*supplier_uq) / (fc_unit*fc_uq)).to_base.to_r
+        conversion_factor = (supplier_unit/fc_unit).scalar
+        new_price = new_article.price / conversion_factor
+        # new_unit_quantity = new_article.unit_quantity * conversion_factor
+        new_unit_quantity = fc_uq
+        # puts "Pro: fc_unit =~ supplier_unit is true. conversion (#{conversion_factor}) converting #{[new_price.to_f, new_unit_quantity.to_f]}"
+        return [new_price, new_unit_quantity]
+      else
+        # puts "Pro: fc_unit (#{fc_unit}) =~ supplier_unit (#{supplier_unit}) is not true (units changed?), no conversion possible"
+        return false
+      end
+    end
+
+
+    if unit == new_article.unit
+      # puts "unit '#{unit}' == new_article.unit '#{new_article.unit}' no conversion needed for #{name}"
+      return nil
+    end
+
+
+
+    # legacy, used by foodcoops in Germany
+    if new_article.unit == "KI" && unit == "ST" # 'KI' means a box, with a different amount of items in it
+      # try to match the size out of its name, e.g. "banana 10-12 St" => 10
+      new_unit_quantity = /[0-9\-\s]+(St)/.match(new_article.name).to_s.to_i
+      if new_unit_quantity && new_unit_quantity > 0
+        new_price = (new_article.price / new_unit_quantity.to_f).round(2)
+        return [new_price, new_unit_quantity]
+      else
+        return false
+      end
+    end
+
+    # use ruby-units to convert
+    fc_unit = (::Unit.new(unit.downcase) rescue nil)
+    supplier_unit = (::Unit.new(new_article.unit.downcase) rescue nil)
+    # puts "fc_unit=#{fc_unit} (uq=#{unit_quantity}) supplier_unit=#{supplier_unit} (uq=#{new_article.unit_quantity})  fc_unit =~ supplier_unit=#{fc_unit =~ supplier_unit} of #{name}"
+    # fc_unit =~ supplier_unit is checking the type of unit - eg 1LB =~ 5LB is true
+    if fc_unit && supplier_unit && fc_unit =~ supplier_unit
+      #if fc_unit && supplier_unit && (fc_unit != supplier_unit || new_article.unit_quantity != unit_quantity)
+      conversion_factor = (supplier_unit / fc_unit).to_base.to_r
+      new_price = new_article.price / conversion_factor
+      new_unit_quantity = new_article.unit_quantity * conversion_factor
+      # puts "fc_unit =~ supplier_unit is true. conversion (#{conversion_factor}) converting #{[new_price.to_f, new_unit_quantity.to_f]}"
+      return [new_price, new_unit_quantity]
     else
-      nil
+      # puts "fc_unit (#{fc_unit}) =~ supplier_unit (#{supplier_unit}) is not true (units changed?), no conversion possible"
+      return false
     end
   end
 
