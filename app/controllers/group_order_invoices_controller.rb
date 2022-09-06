@@ -1,19 +1,22 @@
 class GroupOrderInvoicesController < ApplicationController
   include Concerns::SendGroupOrderInvoicePdf
+  before_action :authenticate_finance
 
   def show
-    @group_order_invoice = GroupOrderInvoice.find(params[:id])
-    if FoodsoftConfig[:contact][:tax_number]
-      respond_to do |format|
-        format.pdf do
-          send_group_order_invoice_pdf @group_order_invoice if FoodsoftConfig[:contact][:tax_number]
+    begin
+      @group_order_invoice = GroupOrderInvoice.find(params[:id])
+      if FoodsoftConfig[:contact][:tax_number]
+        respond_to do |format|
+          format.pdf do
+            send_group_order_invoice_pdf @group_order_invoice if FoodsoftConfig[:contact][:tax_number]
+          end
         end
+      else
+        raise RecordInvalid
       end
-    else
-      raise RecordInvalid
+    rescue ActiveRecord::RecordInvalid => error
+      redirect_back fallback_location: root_path, notice: 'Something went wrong', alert: I18n.t('errors.general_msg', msg: "#{error} " + I18n.t('errors.check_tax_number'))
     end
-  rescue => error
-    redirect_back fallback_location: root_path, notice: 'Something went wrong', alert: I18n.t('errors.general_msg', msg: "#{error} " + I18n.t('errors.check_tax_number'))
   end
 
   def destroy
