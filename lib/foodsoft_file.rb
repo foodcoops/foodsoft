@@ -8,39 +8,59 @@ class FoodsoftFile
     SpreadsheetFile.parse file, options do |row, row_index|
       next if row[2].blank?
 
+      article = { :order_number => row[1],
+                  :name => row[2],
+                  :note => row[3],
+                  :manufacturer => row[4],
+                  :origin => row[5],
+                  :unit => row[6],
+                  :price => row[7],
+                  :tax => row[8],
+                  :deposit => (row[9].nil? ? "0" : row[9]),
+                  :unit_quantity => row[10],
+                  :article_category => row[13] }
+      status = row[0] && row[0].strip.downcase == 'x' ? :outlisted : nil
+      yield status, article, row_index
+    end
+  end
+
+  def self.parseHorizon(file, options = {})
+    SpreadsheetFile.parse file, options do |row, row_index|
+      next if row[2].blank?
+
       row_to_index = ('a'..'z').zip(0..25).to_h
       map = lambda do |row|
         tax = 0
         tax += 5 if row[row_to_index['o']]
         tax += 7 if row[row_to_index['n']]
         {
-            order_number: row[1],
-            name: row[3],
-            note: row[6],
-            manufacturer: row[2],
-            # origin: 0,
-            unit: row[8],
-            unit_quantity: row[7],
-            price: row[9],
-            tax: tax,
-            # deposit:
-            article_category: 'Grocery'
+          order_number: row[1],
+          name: row[3],
+          note: row[6],
+          manufacturer: row[2],
+          # origin: 0,
+          unit: row[8],
+          unit_quantity: row[7],
+          price: row[9],
+          tax: tax,
+          # deposit:
+          article_category: 'Grocery'
         }
       end
       begin
         article = if map.nil?
                     {
-                        order_number: row[1],
-                        name: row[2],
-                        note: row[3],
-                        manufacturer: row[4],
-                        origin: row[5],
-                        unit: row[6],
-                        price: row[7],
-                        tax: row[8],
-                        deposit: (row[9].nil? ? '0' : row[9]),
-                        unit_quantity: row[10],
-                        article_category: row[13]
+                      order_number: row[1],
+                      name: row[2],
+                      note: row[3],
+                      manufacturer: row[4],
+                      origin: row[5],
+                      unit: row[6],
+                      price: row[7],
+                      tax: row[8],
+                      deposit: (row[9].nil? ? '0' : row[9]),
+                      unit_quantity: row[10],
+                      article_category: row[13]
                     }
                     status = row[0] && row[0].strip.downcase == 'x' ? :outlisted : nil
                   else
@@ -55,5 +75,4 @@ class FoodsoftFile
       yield status, article, row_index
     end
   end
-
 end

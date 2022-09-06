@@ -78,59 +78,90 @@ class Supplier < ApplicationRecord
     updated_article_pairs, outlisted_articles, new_articles = [], [], []
     articles_by_order_number = articles.undeleted.group_by(&:order_number)
     order_numbers_from_file = Set.new
-    FoodsoftFile::parse file, options do |status, new_attrs, line|
-      # if there are duplicates in the file, we just take the first one
-      if (order_numbers_from_file.add?(new_attrs[:order_number]).nil?)
-        puts "skipping duplicate #{new_attrs[:order_number]}"
-      else
-        begin
-          # puts "matching #{new_attrs[:order_number]}"
-          articles_matching = articles_by_order_number[new_attrs[:order_number]] || []
-          articles_matching_in_open_orders = articles_matching.select { |a| a.in_open_order }
-          in_open_order = articles_matching_in_open_orders.count > 0
-          if (in_open_order)
-            article = articles_matching_in_open_orders.first
-          else
-            article = articles_matching.first
-          end
-
-          new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
-          new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
-          new_article = articles.build(new_attrs)
-
-          if status.nil?
-            if article.nil?
-              new_articles << new_article
+    if (name ==='Horizon')
+      FoodsoftFile::parseHorizon file, options do |status, new_attrs, line|
+        # if there are duplicates in the file, we just take the first one
+        if (order_numbers_from_file.add?(new_attrs[:order_number]).nil?)
+          puts "skipping duplicate #{new_attrs[:order_number]}"
+        else
+          begin
+            # puts "matching #{new_attrs[:order_number]}"
+            articles_matching = articles_by_order_number[new_attrs[:order_number]] || []
+            articles_matching_in_open_orders = articles_matching.select { |a| a.in_open_order }
+            in_open_order = articles_matching_in_open_orders.count > 0
+            if (in_open_order)
+              article = articles_matching_in_open_orders.first
             else
-              unequal_attributes = article.unequal_attributes(new_article, options.slice(:convert_units))
-              unless unequal_attributes.empty?
-                article.attributes = unequal_attributes
-                updated_article_pairs << [article, unequal_attributes]
-              end
+              article = articles_matching.first
             end
-          elsif status == :outlisted && article.present?
-            outlisted_articles << article
 
-            # stop when there is a parsing error
-          elsif status.is_a? String
-            # @todo move I18n key to model
-            raise I18n.t('articles.model.error_parse', :msg => status, :line => line.to_s)
-          end
+            new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
+            new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
+            new_article = articles.build(new_attrs)
 
-          duplicate_articles = articles_matching.select { |a| !(a == article || a.in_open_order) }
-          if (duplicate_articles.count > 0)
-            puts "found #{duplicate_articles.count} extra copies for #{new_attrs[:order_number]} #{in_open_order ? 'in open order' : ''} " +
+            if status.nil?
+              if article.nil?
+                new_articles << new_article
+              else
+                unequal_attributes = article.unequal_attributes(new_article, options.slice(:convert_units))
+                unless unequal_attributes.empty?
+                  article.attributes = unequal_attributes
+                  updated_article_pairs << [article, unequal_attributes]
+                end
+              end
+            elsif status == :outlisted && article.present?
+              outlisted_articles << article
+
+              # stop when there is a parsing error
+            elsif status.is_a? String
+              # @todo move I18n key to model
+              raise I18n.t('articles.model.error_parse', :msg => status, :line => line.to_s)
+            end
+
+            duplicate_articles = articles_matching.select { |a| !(a == article || a.in_open_order) }
+            if (duplicate_articles.count > 0)
+              puts "found #{duplicate_articles.count} extra copies for #{new_attrs[:order_number]} #{in_open_order ? 'in open order' : ''} " +
                      " #{new_attrs[:name]} (new #{new_articles.size} updated  #{updated_article_pairs.size})"
-            outlisted_articles.concat(duplicate_articles)
+              outlisted_articles.concat(duplicate_articles)
+            end
+
+            all_order_numbers << article.order_number if article
+          rescue RuntimeError => e
+            puts "blew up #{e.inspect}"
           end
-
-          all_order_numbers << article.order_number if article
-        rescue RuntimeError => e
-          puts "blew up #{e.inspect}"
         end
-      end
 
+      end
+    else
+      FoodsoftFile::parse file, options do |status, new_attrs, line|
+        article = articles.undeleted.where(order_number: new_attrs[:order_number]).first
+        new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
+        new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
+        new_article = articles.build(new_attrs)
+
+        if status.nil?
+          if article.nil?
+            new_articles << new_article
+          else
+            unequal_attributes = article.unequal_attributes(new_article, options.slice(:convert_units))
+            unless unequal_attributes.empty?
+              article.attributes = unequal_attributes
+              updated_article_pairs << [article, unequal_attributes]
+            end
+          end
+        elsif status == :outlisted && article.present?
+          outlisted_articles << article
+
+          # stop when there is a parsing error
+        elsif status.is_a? String
+          # @todo move I18n key to model
+          raise I18n.t('articles.model.error_parse', :msg => status, :line => line.to_s)
+        end
+
+        all_order_numbers << article.order_number if article
+      end
     end
+
     if options[:outlist_absent]
       outlisted_articles += articles.undeleted.where.not(order_number: all_order_numbers + [nil])
     end
