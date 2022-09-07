@@ -9,6 +9,8 @@
         %th= t('.end')
         %th= t('.state')
         %th= heading_helper Order, :updated_by
+        %th= heading_helper GroupOrderInvoice,  :name
+        %th
         %th
     %tbody
       - @orders.each do |order|
@@ -17,6 +19,14 @@
           %td=h format_time(order.ends) unless order.ends.nil?
           %td= order.closed? ? t('.cleared', amount: number_to_currency(order.foodcoop_result)) : t('.ended')
           %td= show_user(order.updated_by)
+          %td{id: "generate-invoice#{order.id}"}
+            - if order.closed?
+              -if FoodsoftConfig[:contact][:tax_number] && order.ordergroups.present?
+                = render :partial => 'group_order_invoices/links', locals:{order: order}
+              -else
+                = I18n.t('activerecord.attributes.group_order_invoice.tax_number_not_set')
+            - else
+              = t('orders.index.not_closed')
           %td
             - unless order.closed?
               - if current_user.role_orders?

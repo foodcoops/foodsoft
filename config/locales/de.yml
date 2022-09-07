@@ -90,6 +90,17 @@ de:
         tolerance: Toleranz
         total_price: Summe
         unit_price: Preis/Einheit
+      group_order_invoice:
+        name: Bestellgruppenrechnung
+        links:
+          delete: Rechnung löschen
+          download: Rechnung herunterladen
+          generate: Rechnung erzeugen
+          invoice_date: Datum der Bestellgruppenrechnung
+          generate_with_date: setzen & erzeugen
+
+        payment_method: Guthaben
+        tax_number_not_set: Steuernummer in den Einstellungen nicht gesetzt
       invoice:
         amount: Betrag
         attachment: Anhang
@@ -318,6 +329,7 @@ de:
         emails_title: E-Mails versenden
       tab_payment:
         schedule_title: Bestellschema
+        group_order_invoices: Bestellgruppenrechnungen
       tab_security:
         default_roles_title: Zugriff auf
         default_roles_paragraph: Jedes Mitglied der Foodcoop hat automatisch Zugriff auf folgende Bereiche.
@@ -602,6 +614,10 @@ de:
       email_from: E-Mails werden so aussehen, als ob sie von dieser Adresse gesendet wurden. Kann leer gelassen werden, um die Kontaktadresse der Foodcoop zu benutzen.
       email_replyto: Setze diese Adresse, wenn Du Antworten auf Foodsoft E-Mails auf eine andere, als die oben angegebene Absenderadresse bekommen möchtest.
       email_sender: E-Mails werden so aussehen, als ob sie von dieser Adresse versendet wurden. Um zu vermeiden, dass E-Mails dadurch als Spam eingeordnet werden, muss der Webserver möglicherweise im SPF Eintrag der Domain der E-Mail Adresse eingetragen werden.
+      group_order_invoices:
+        use_automativ_go_invoices: Es werden auf die Bestellgruppen zugeschnittene Rechnungen für die jeweilige Bestellung beim Klicken auf "abrechnen" an alle Bestellgruppenmitglieder per Mail versendet.
+        payment_method: Zahlungsart wird auf der Bestellgruppenrechnung deklariert
+        vat_exempt: Eine Auflistung der Rechnungsartikel erfolgt ohne explizite Ausweisung der MwSt. und die Rechnung erhält den notwendigen Zusatz bzgl. der Kleinunternehmerregelung §19 (FoodCoop Marge ebenfalls nicht in Rechnung enthalten)
       help_url: Link zur Dokumentationsseite
       homepage: Webseite der Foodcoop
       ignore_browser_locale: Ignoriere die Sprache des Computers des Anwenders, wenn der Anwender noch keine Sprache gewählt hat.
@@ -644,6 +660,7 @@ de:
         phone: Telefon
         street: Straße
         zip_code: Postleitzahl
+        tax_number: Steuernummer
       currency_space: Leerzeichen hinzufügen
       currency_unit: Währung
       custom_css: Angepasstes CSS
@@ -658,6 +675,10 @@ de:
       email_from: Absenderadresse
       email_replyto: Antwortadresse
       email_sender: Senderadresse
+      group_order_invoices:
+        use_automatic_invoices: Automatisch bei Abrechnung per Mail versenden
+        payment_method: Zahlungsart
+        vat_exempt: Diese Foodcoop ist MwSt. befreit
       help_url: URL Dokumentation
       homepage: Webseite
       ignore_browser_locale: Browsersprache ignorieren
@@ -743,6 +764,46 @@ de:
     update:
       notice: Lieferung wurde aktualisiert.
   documents:
+    group_order_invoice_pdf:
+      filename: Rechnung%{number}
+      invoicer: Rechnungsteller*in
+      invoicee: Rechnungsempfänger*in
+      invoice_date: 'Rechnungsdatum: %{invoice_date}'
+      invoice_number: 'Rechnungsnummer: %{invoice_number}'
+      markup_included: zzgl. Foodcoop Marge auf brutto Preis %{marge}%
+      ordergroup:
+        contact_phone: 'Telefonnummer: %{contact_phone}'
+        contact_address: 'Adresse :  %{contact_address}'
+        name: Bestellgruppe %{ordergroup}
+      payment_method: 'Zahlungsart: %{payment_method}'
+      sum_to_pay: Zu zahlen gesamt
+      sum_to_pay_net: Zu zahlen gesamt (netto)
+      sum_to_pay_gross: Zu zahlen gesamt (brutto)
+      small_business_regulation: Als Kleinunternehmer*in im Sinne von §19 Abs. 1 Umsatzsteuergesetz (UStG) wird keine Umsatzsteuer berechnet.
+      table_headline: 'Für die Bestellung fallen folgende Posten an:'
+      tax_excluded: exkl. MwSt.
+      tax_included: zzgl. Gesamtsumme MwSt. %{tax}%
+      tax_number: 'Steuernummer: %{number}'
+      title: Rechnung für die Bestellung bei %{supplier}
+      vat_exempt_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis
+        - Artikel Gesamtpreis
+      no_price_markup_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis (netto)
+        - Artikel Gesamtpreis (netto)
+        - MwSt.
+        - Artikel Gesamtpreis (brutto)
+      price_markup_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis (netto)
+        - Artikel Gesamtpreis (netto)
+        - MwSt.
+        - Artikel Gesamtpreis (brutto) inkl. Foodcoopmarge %{marge}%
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
       title: 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
@@ -766,6 +827,7 @@ de:
       heading: Artikelübersicht (%{count})
       title: 'Sortiermatrix der Bestellung: %{name}, beendet am %{date}'
   errors:
+    check_tax_number: Überprüft, ob die Steuernummer der Foodcoop richtig gesetzt ist
     general: Ein Problem ist aufgetreten.
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
     general_msg: 'Ein Fehler ist aufgetreten: %{msg}'
@@ -789,6 +851,8 @@ de:
       close:
         alert: 'Ein Fehler ist beim Abrechnen aufgetreten: %{message}'
         notice: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert.
+        notice_mail: Bestellung wurde erfolgreich abgerechnet, die Kontostände aktualisiert. Außerdem wurden automatisch Rechnungen an die Bestellgruppenmitglieder geschickt.
+        settings_not_set: Keine Emails mit Bestellgruppenrechnungen versendet. Bitte überprüfe die Einstellungen. Steuernummer gesetzt?
       close_all_direct_with_invoice:
         notice: 'Es wurden %{count} Bestellung abgerechnet.'
       close_direct:
@@ -853,6 +917,7 @@ de:
         ended: beendet
         name: Lieferantin
         no_closed_orders: Derzeit gibt es keine beendeten Bestellungen.
+
         state: Status
       summary:
         changed: Daten wurden verändert!
@@ -1264,6 +1329,15 @@ de:
     feedback:
       header: "%{user} schrieb am %{date}:"
       subject: Feedback zur Foodsoft
+    group_order_invoice:
+      subject: Bestellgruppenrechnung für %{group} bei %{supplier}
+      text: |
+        Liebe Bestellgruppe %{group},
+
+        Die Sammelbestellung bei %{supplier} wurde soeben abgerechnet und für die jeweiligen Bestellgruppen Rechnungen angelegt.
+        Im Anhang befindet sich daher eure Rechnung.
+
+        Viele Grüße von %{foodcoop}
     invite:
       subject: Einladung in die Foodcoop
       text: |
@@ -1496,6 +1570,7 @@ de:
       orders_finished: Beendet
       orders_open: Laufend
       orders_settled: Abgerechnet
+      not_closed: Bestellung noch nicht abgerechnet
       title: Bestellungen verwalten
     model:
       close_direct_message: Die Bestellung wurde abgechlossen, ohne die Mitgliederkonten zu belasten.
