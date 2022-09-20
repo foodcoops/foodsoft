@@ -6,19 +6,19 @@ nl:
         availability: Artikel leverbaar?
         availability_short: leverb.
         deposit: Statiegeld
-        fc_price: Foodcoop prijs
-        fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop marge.
-        fc_price_short: FC prijs
-        fc_share: Foodcoop marge
-        fc_share_short: FC marge
-        gross_price: Bruto prijs
+        fc_price: Foodcoop-prijs
+        fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop-marge.
+        fc_price_short: FC-prijs
+        fc_share: Foodcoop-marge
+        fc_share_short: FC-marge
+        gross_price: Brutoprijs
         manufacturer: Producent
         name: Naam
         note: Notitie
         order_number: Artikelnummer
         order_number_short: Nr.
         origin: Herkomst
-        price: Netto prijs
+        price: Nettoprijs
         supplier: Leverancier
         tax: BTW
         unit: Eenheid
@@ -26,11 +26,11 @@ nl:
         unit_quantity_short: Colli
         units: Eenheden
       article_category:
-        description: Import namen
+        description: Namen importeren
         name: Naam
       article_price:
         deposit: Statiegeld
-        price: Netto prijs
+        price: Nettoprijs
         tax: BTW
         unit_quantity: Colligrootte
       bank_account:
@@ -69,7 +69,7 @@ nl:
       financial_transaction_type:
         bank_account: Bankrekening
         name: Naam
-        financial_transaction_class: Financiële transactie klasse
+        financial_transaction_class: Klasse financiële transactie
         name_short: Verkorte naam
       group_order:
         ordergroup: Huishouden
@@ -89,7 +89,7 @@ nl:
         created_at: Gemaakt op
         created_by: Gemaakt door
         date: Factuurdatum
-        delete_attachment: Verwijder bijlage
+        delete_attachment: Bijlage verwijderen
         deliveries: Voorraad levering
         deposit: Statiegeld in rekening gebracht
         deposit_credit: Statiegeld teruggekregen
@@ -102,7 +102,7 @@ nl:
         supplier: Leverancier
       mail_delivery_status:
         created_at: Tijd
-        email: Email
+        email: E-mail
         message: Bericht
       order:
         boxfill: Dozen vullen na
@@ -111,8 +111,8 @@ nl:
         end_action: Sluitingsactie
         end_actions:
           auto_close: Bestelling sluiten
-          auto_close_and_send: Sluit de bestelling en verzend het naar de leverancier
-          auto_close_and_send_min_quantity: Sluit de bestelling en verzend het naar de leverancier als de minimum bestelhoeveelheid gehaald is
+          auto_close_and_send: De bestelling sluiten en naar de leverancier verzenden
+          auto_close_and_send_min_quantity: De bestelling sluiten en naar de leverancier verzenden als de minimale bestelhoeveelheid gehaald is
           no_end_action: Geen automatische actie
         ends: Sluit op
         name: Leverancier
@@ -124,10 +124,10 @@ nl:
         transport: Vervoerskosten
         transport_distribution: Verdeling van vervoerskosten
         transport_distributions:
-          articles: Verdeel de kosten over het aantal ontvangen artikelen
-          ordergroup: Ieder huishouden betaald hetzelfde bedrag
-          price: Verdeel de kosten over het orderbedrag
-          skip: Verdeel de kosten niet
+          articles: De kosten over het aantal ontvangen artikelen verdelen
+          ordergroup: Ieder huishouden betaalt hetzelfde bedrag
+          price: De kosten over het orderbedrag verdelen
+          skip: De kosten niet verdelen
         updated_by: Laatst aangepast door
       order_article:
         article: Artikel
@@ -141,7 +141,7 @@ nl:
         units_to_order_short: Besteld
         update_global_price: Huidige prijs overal bijwerken
       order_comment:
-        text: Commentaar voor deze bestelling toevoegen ...
+        text: Commentaar voor deze bestelling toevoegen…
       ordergroup:
         account_balance: Tegoed
         available_funds: Beschikbaar tegoed
@@ -173,7 +173,7 @@ nl:
         customer_number: Klantnummer
         customer_number_short: Klantnr.
         delivery_days: Bezorgdagen
-        email: Email
+        email: E-mail
         fax: Fax
         iban: IBAN
         is_subscribed: geabonneerd?
@@ -198,11 +198,11 @@ nl:
         user_list: Verantwoordelijken
         workgroup: Werkgroep
       user:
-        email: Email
+        email: E-mail
         first_name: Voornaam
         iban: IBAN
         last_activity: Laatst actief
-        last_login: Laatste login
+        last_login: Laatste aanmelding
         last_name: Achternaam
         name: Naam
         nick: Gebruikersnaam
@@ -246,11 +246,11 @@ nl:
       bank_transaction: Banktransactie
       delivery: Levering
       financial_transaction: Financiële transactie
-      financial_transaction_class: Financiële transactie klasse
-      financial_transaction_type: Financiële transactie type
+      financial_transaction_class: Klasse financiële transactie
+      financial_transaction_type: Type financiële transactie
       invoice: Factuur
       order: Bestelling
-      order_article: Bestellingsartikel
+      order_article: Bestelartikel
       order_comment: Commentaar
       ordergroup:
         one: Huishouden
@@ -269,8 +269,8 @@ nl:
         all_users: Alle gebruikers
         all_workgroups: Alle werkgroepen
         created_at: gemaakt op
-        first_paragraph: Hier kun je de groepen en gebruiker van Foodsoft beheren.
-        groupname: Groepnaam
+        first_paragraph: Hier kun je de groepen en gebruikers van Foodsoft beheren.
+        groupname: Groepsnaam
         members: leden
         name: naam
         new_ordergroup: Nieuw huishouden
@@ -290,14 +290,14 @@ nl:
         submit: Opslaan
         title: Configuratie
       tab_layout:
-        pdf_title: PDF documenten
+        pdf_title: PDF-documenten
       tab_messages:
-        emails_title: Emailinstellingen
+        emails_title: E-mailinstellingen
       tab_payment:
         schedule_title: Bestelrooster
       tab_security:
         default_roles_title: Toegang tot
-        default_roles_paragraph: Ieder lid van de foodcoop heeft standaard toegang tot de volgende onderdelen.
+        default_roles_paragraph: Ieder lid van de foodcoop heeft standaard toegang tot de volgende onderdelen:
       tab_tasks:
         periodic_title: Periodieke taken
       tabs:
@@ -308,29 +308,29 @@ nl:
     finances:
       index:
         bank_accounts: Bankrekeningen
-        first_paragraph: Hier kunt u de financiële transactieklassen en de bijbehorende financiële transactietypes beheren. Elke financiële transactie heeft een type, die je bij elke transactie moet selecteren, als je meer dan één type hebt gemaakt. De financiële transactieklassen kunnen worden gebruikt om de financiële transactietypes te groeperen en zullen worden weergegeven als extra kolommen in het rekeningoverzicht, als er meer dan één is gecreëerd.
+        first_paragraph: Hier kunt u de klassen van financiële transacties en de bijbehorende typen financiële transacties beheren. Elke financiële transactie heeft een type, die je bij elke transactie moet selecteren, als je meer dan één type hebt gemaakt. De klassen financiële transacties kunnen worden gebruikt om de types financiële transacties te groeperen en zullen worden weergegeven als extra kolommen in het rekeningoverzicht, als er meer dan één is gecreëerd.
         new_bank_account: Nieuwe bankrekening toevoegen
-        new_financial_transaction_class: Nieuwe financiële transactie klasse toevoegen
+        new_financial_transaction_class: Nieuwe klasse voor financiële transacties toevoegen
         title: Financiën
-        transaction_types: Financiële transactie typen
+        transaction_types: Typen financiële transacties
       transaction_types:
         name: Naam
-        new_financial_transaction_type: Nieuw financiëel transactie type toevoegen
+        new_financial_transaction_type: Nieuw type financiële transactie toevoegen
     financial_transaction_classes:
       form:
-        title_edit: Financiële transactie klasse bewerken
-        title_new: Nieuw financiëel transactie type toevoegen
+        title_edit: Klasse voor financiële transactie bewerken
+        title_new: Nieuw type financiële transactie toevoegen
     financial_transaction_types:
       form:
-        name_short_desc: De korte naam is verplicht voor financiële transactietypes die automatisch moeten kunnen worden toegewezen bij banktransacties. Als er meerdere bankrekeningen zijn, kan de voorkeursrekening voor bankoverschrijvingen worden geselecteerd.
-        title_edit: Financiëel transactie type bewerken
-        title_new: Nieuw financiëel transactie type toevoegen
+        name_short_desc: De korte naam is verplicht voor typen financiële transacties die automatisch moeten kunnen worden toegewezen bij banktransacties. Als er meerdere bankrekeningen zijn, kan de voorkeursrekening voor bankoverschrijvingen worden geselecteerd.
+        title_edit: Type financiële transactie bewerken
+        title_new: Nieuw type financiëel transactie toevoegen
     mail_delivery_status:
       destroy_all:
-        notice: Alle emailproblemen zijn verwijderd
+        notice: Alle e-mailproblemen zijn verwijderd
       index:
-        destroy_all: Alle emailproblemen verwijderen
-        title: Emailproblemen
+        destroy_all: Alle e-mailproblemen verwijderen
+        title: E-mailproblemen
     ordergroups:
       destroy:
         error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
@@ -342,9 +342,9 @@ nl:
         here: hier
       index:
         first_paragraph: Hier kun je %{url} toevoegen, bewerken en verwijderen.
-        new_ordergroup: Nieuw huishouden
+        new_ordergroup: een nieuw huishouden
         new_ordergroups: nieuwe huishoudens
-        second_paragraph: 'Bedenk het onderscheid tussen <em>werkgroep</em> en <em>huishouden</em>: een huishouden heeft een rekening en kan bestellen. in een <em>%{url}</em> (bijv. sorteergroep) werken leden samen om taken te vervullen. Leden kunnen slechts lid zijn van éen huishouden, maar van meerdere werkgroepen.'
+        second_paragraph: 'Let op het onderscheid tussen <em>werkgroep</em> en <em>huishouden</em>: een huishouden heeft een rekening en kan bestellen; in een <em>%{url}</em> (bijv. sorteergroep) werken leden samen om taken te vervullen. Leden kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
         title: Huishoudens
         workgroup: werkgroep
       new:
@@ -353,18 +353,18 @@ nl:
         confirm: Weet je het zeker?
         edit: Groep/leden bewerken
         title: Huishouden %{name}
-    search_placeholder: naam ...
+    search_placeholder: naam…
     users:
       controller:
-        sudo_done: Je bent nu ingelogd als %{user}. Wees voorzichtig, en vergeet niet uit te loggen als je klaar bent!
+        sudo_done: Je bent nu aangemeld als %{user}. Wees voorzichtig, en vergeet niet af te melden als je klaar bent!
       destroy:
         error: 'Gebruiker kon niet verwijderd worden: %{error}'
         notice: Gebruiker is verwijderd
       edit:
         title: Lid bewerken
       form:
-        create_ordergroup: Maak een huishouden met dezelfde naam en voeg een gebruiker toe.
-        send_welcome_mail: Verstuur een welkomstmail naar de gebruiker.
+        create_ordergroup: Een huishouden met dezelfde naam aanmaken en een gebruiker toevoegen.
+        send_welcome_mail: Een welkomstmail naar de gebruiker versturen.
       index:
         first_paragraph: Hier kun je gebruikers %{url}, bewerken en wissen.
         new_user: Nieuwe gebruiker
