@@ -370,22 +370,22 @@ nl:
         new_user: Nieuwe gebruiker
         new_users: toevoegen
         show_deleted: Verwijderde gebruikers tonen
-        title: Gebruikers admin
+        title: Gebruikersbeheer
       new:
         title: Nieuwe gebruiker toevoegen
       restore:
         error: 'Gebruiker kon niet opnieuw actief gemaakt worden: %{error}'
         notice: Gebruiker is opnieuw actief
       show:
-        confirm_sudo: Als je doorgaat, neem je de identiteit aan van gebruiker %{user}. Vergeet hierna niet uit te loggen!
+        confirm_sudo: Als je doorgaat, neem je de identiteit aan van gebruiker %{user}. Vergeet hierna niet af te melden!
         groupabos: Groepslidmaatschappen
         member_since: Lid sinds %{time}
         person: Persoon
         preference: Voorkeuren
-        show_email_problems: Bekijk emailproblemen
-        sudo: Inloggen als
+        show_email_problems: E-mailproblemen bekijken
+        sudo: Aanmelden als
       users:
-        show_email_problems: Bekijk emailproblemen
+        show_email_problems: E-mailproblemen bekijken
     workgroups:
       destroy:
         error: 'Werkgroep kon niet verwijderd worden: %{error}'
@@ -400,7 +400,7 @@ nl:
         new_workgroup: Nieuwe werkgroep
         new_workgroups: nieuwe werkgroepen
         ordergroup: huishouden
-        second_paragraph: 'Let op het verschil tussen een <em>groep</em> en een <em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organizeren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
+        second_paragraph: 'Let op het verschil tussen een <em>groep</em> en een <em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organiseren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
         title: Werkgroepen
       new:
         title: Werkgroep toevoegen
@@ -413,9 +413,9 @@ nl:
         name: naam
   application:
     controller:
-      error_authn: Inloggen vereist!
-      error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je mogelijk %{sign_in}.
-      error_denied_sign_in: inloggen als een andere gebruiker
+      error_authn: Aanmelden vereist!
+      error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je je mogelijk %{sign_in}.
+      error_denied_sign_in: aanmelden als een andere gebruiker
       error_feature_disabled: Deze optie is momenteel niet actief.
       error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
       error_minimum_balance: Sorry, je tegoed is lager dan het minimum van %{min}.
@@ -429,7 +429,7 @@ nl:
       title: Categorie bewerken
     index:
       new: Nieuwe categorie
-      title: Categoriën
+      title: Categorieën
     new:
       title: Nieuwe categorie maken
     update:
@@ -440,9 +440,9 @@ nl:
     articles:
       confirm_delete: Weet je zeker dat je alle artikelen wilt verwijderen?
       option_available: Artikelen beschikbaar maken
-      option_delete: Verwijder artikel
+      option_delete: Artikel verwijderen
       option_not_available: Artikelen onbeschikbaar maken
-      option_select: Kies actie ...
+      option_select: Actie kiezen…
       price_netto: Prijs
       unit_quantity_desc: Aantal eenheden per doos (colli)
       unit_quantity_short: Colli
@@ -451,10 +451,10 @@ nl:
         notice: "Er zijn %{count} nieuwe artikelen opgeslagen."
       error_invalid: Er zijn artikelen die een fout hebben
       error_nosel: Geen artikelen geselecteerd
-      error_parse: "%{msg} ... in regel %{line}"
+      error_parse: "%{msg} … in regel %{line}"
       error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
-        no_file: Kies een bestand om te uploaden.
+        no_file: Een bestand om te uploaden kiezen.
         notice: "%{count} artikelen zijn geanalyseerd"
       sync:
         notice: Catalogus is bijgewerkt
@@ -472,7 +472,7 @@ nl:
       drop: verwijderen
       note: "%{article} is deel van een lopende bestelling en kan niet verwijderd worden. Het artikel graag eerst uit de bestelling(en) %{drop_link}."
     edit_all:
-      note: 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestellingsnummer.'
+      note: 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestelnummer.'
       submit: Alle artikelen bijwerken
       title: Alle artikelen van %{supplier} bewerken
       warning: 'Let op, alle artikelen worden bijgewerkt!'
@@ -484,7 +484,7 @@ nl:
       already_imported: geïmporteerd
       not_found: Geen artikelen gevonden
     index:
-      change_supplier: Leverancier wisselen ...
+      change_supplier: Leverancier wisselen…
       download: Artikelen downloaden
       edit_all: Alles bewerken
       ext_db:
