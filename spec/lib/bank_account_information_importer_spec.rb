@@ -4,8 +4,7 @@ describe BankTransaction do
   let(:bank_account) { create :bank_account }
 
   it 'empty content' do
-    content = <<-JSON
-    JSON
+    content = ''
 
     importer = BankAccountInformationImporter.new(bank_account)
     expect(importer.import!(content)).to be_nil

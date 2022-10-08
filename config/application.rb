@@ -74,7 +74,7 @@ module Foodsoft
   end
 
   # Foodsoft version
-  VERSION = File.read(Rails.root.join('VERSION')).strip
+  VERSION = Rails.root.join('VERSION').read.strip
   # Current revision, or +nil+
-  REVISION = (File.read(Rails.root.join('REVISION')).strip rescue nil)
+  REVISION = (Rails.root.join('REVISION').read.strip rescue nil)
 end

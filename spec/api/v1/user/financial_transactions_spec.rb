@@ -21,7 +21,7 @@ describe Api::V1::User::FinancialTransactionsController, type: :controller do
     before { request }
 
     it "returns status 200" do
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
   end
 

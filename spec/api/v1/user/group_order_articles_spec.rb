@@ -23,7 +23,7 @@ describe Api::V1::User::GroupOrderArticlesController, type: :controller do
     before { request }
 
     it "returns status 200" do
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
 
     it "returns the order_article" do

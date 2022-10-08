@@ -166,6 +166,6 @@ class RenderPDF < Prawn::Document
   end
 
   def font_path(name)
-    File.join(Rails.root, 'vendor', 'assets', 'fonts', name)
+    Rails.root.join('vendor', 'assets', 'fonts', name)
   end
 end

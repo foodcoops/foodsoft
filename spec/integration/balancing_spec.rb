@@ -113,7 +113,7 @@ feature 'settling an order', js: true do
       click_link I18n.t('ui.edit')
     end
     within("#edit_order_article_#{oa.id}") do
-      find('#order_article_units_to_order').set(0)
+      find_by_id('order_article_units_to_order').set(0)
       sleep 0.25
       find('input[type="submit"]').click
     end
@@ -135,7 +135,7 @@ feature 'settling an order', js: true do
     expect(page).to have_selector('form#new_group_order_article')
     within('#new_group_order_article') do
       select user.ordergroup.name, :from => 'group_order_article_ordergroup_id'
-      find('#group_order_article_result').set(8)
+      find_by_id('group_order_article_result').set(8)
       sleep 0.25
       find('input[type="submit"]').click
     end
@@ -174,7 +174,7 @@ feature 'settling an order', js: true do
     click_link I18n.t('finance.balancing.edit_results_by_articles.add_article')
     expect(page).to have_selector('form#new_order_article')
     within('#new_order_article') do
-      find('#order_article_article_id').select(new_article.name)
+      find_by_id('order_article_article_id').select(new_article.name)
       sleep 0.25
       find('input[type="submit"]').click
     end
