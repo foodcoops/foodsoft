@@ -36,6 +36,9 @@ module Foodsoft
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
+    # TODO: Remove this. See CVE-2022-32224 for details.
+    config.active_record.yaml_column_permitted_classes = [BigDecimal, Date, Symbol, Time]
+
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
