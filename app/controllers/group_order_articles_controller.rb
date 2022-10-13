@@ -19,7 +19,7 @@ class GroupOrderArticlesController < ApplicationController
     goa = GroupOrderArticle.where(group_order_id: @group_order_article.group_order_id,
                                   order_article_id: @order_article.id).first
 
-    if goa && goa.update_attributes(params[:group_order_article])
+    if goa && goa.update(params[:group_order_article])
       @group_order_article = goa
 
       update_summaries(@group_order_article)
@@ -38,7 +38,7 @@ class GroupOrderArticlesController < ApplicationController
     if params[:delta]
       @group_order_article.update_attribute :result, [@group_order_article.result + params[:delta].to_f, 0].max
     else
-      @group_order_article.update_attributes(params[:group_order_article])
+      @group_order_article.update(params[:group_order_article])
     end
 
     update_summaries(@group_order_article)

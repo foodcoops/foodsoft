@@ -97,7 +97,7 @@ feature 'settling an order', js: true do
   end
 
   it 'deletes a GroupOrderArticle with no ordered amounts' do
-    goa1.update_attributes({ :quantity => 0, :tolerance => 0 })
+    goa1.update(quantity: 0, tolerance: 0)
     click_link article.name
     expect(page).to have_selector("#group_order_article_#{goa1.id}")
     within("#group_order_article_#{goa1.id}") do

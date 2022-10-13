@@ -37,7 +37,7 @@ class PollsController < ApplicationController
 
     if user_has_no_right
       redirect_to polls_path, alert: t('.no_right')
-    elsif @poll.update_attributes(poll_params)
+    elsif @poll.update(poll_params)
       redirect_to @poll, notice: t('.notice')
     else
       render action: 'edit'

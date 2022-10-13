@@ -41,7 +41,7 @@ class SuppliersController < ApplicationController
 
   def update
     @supplier = Supplier.find(params[:id])
-    if @supplier.update_attributes(supplier_params)
+    if @supplier.update(supplier_params)
       flash[:notice] = I18n.t('suppliers.update.notice')
       redirect_to @supplier
     else

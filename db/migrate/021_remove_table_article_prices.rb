@@ -16,14 +16,14 @@ class RemoveTableArticlePrices < ActiveRecord::Migration[4.2]
     puts "now copy values of article_prices into new articles-columns..."
     Article.find(:all).each do |article|
       price = article.current_price
-      article.update_attributes!(:clear_price => price.clear_price,
-                                 :gross_price => price.gross_price,
-                                 :tax => price.tax,
-                                 :refund => price.refund,
-                                 :unit_quantity => price.unit_quantity,
-                                 :order_number => price.order_number,
-                                 :updated_at => price.updated_on,
-                                 :created_at => price.updated_on)
+      article.update!(clear_price: price.clear_price,
+                      gross_price: price.gross_price,
+                      tax: price.tax,
+                      refund: price.refund,
+                      unit_quantity: price.unit_quantity,
+                      order_number: price.order_number,
+                      updated_at: price.updated_on,
+                      created_at: price.updated_on)
     end
 
     puts "delete article_prices, current_price attribute"

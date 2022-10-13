@@ -78,7 +78,7 @@ describe Article do
       # TODO move article sync from supplier to article
       article # need to reference for it to exist when syncing
       updated_article = supplier.sync_all[0].select { |s| s[0].id == article.id }.first[0]
-      article.update_attributes updated_article.attributes.reject { |k, v| k == 'id' or k == 'type' }
+      article.update(updated_article.attributes.reject { |k, v| k == 'id' or k == 'type' })
       expect(article.name).to eq(shared_article.name)
       # now synchronising shouldn't change anything anymore
       expect(article.shared_article_changed?).to be_falsey
@@ -101,14 +101,14 @@ describe Article do
       article.save!
       # TODO get sync functionality in article
       updated_article = supplier.sync_all[0].select { |s| s[0].id == article.id }.first[0]
-      article.update_attributes! updated_article.attributes.reject { |k, v| k == 'id' or k == 'type' }
+      article.update!(updated_article.attributes.reject { |k, v| k == 'id' or k == 'type' })
       expect(article.unit).to eq '200g'
       expect(article.unit_quantity).to eq 5
       expect(article.price).to be_within(0.005).of(shared_article.price / 5)
     end
 
     it 'does not synchronise when it has no order number' do
-      article.update_attributes :order_number => nil
+      article.update(order_number: nil)
       expect(supplier.sync_all).to eq [[], [], []]
     end
   end

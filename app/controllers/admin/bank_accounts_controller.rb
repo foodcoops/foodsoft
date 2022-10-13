@@ -23,7 +23,7 @@ class Admin::BankAccountsController < Admin::BaseController
   def update
     @bank_account = BankAccount.find(params[:id])
 
-    if @bank_account.update_attributes(params[:bank_account])
+    if @bank_account.update(params[:bank_account])
       redirect_to update_bank_accounts_admin_finances_url, :status => 303
     else
       render :action => 'new', :layout => false

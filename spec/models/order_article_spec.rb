@@ -151,7 +151,7 @@ describe OrderArticle do
 
       # actual test
       it(success ? 'succeeds' : 'fails') do
-        order.update_attributes(boxfill: boxfill_from)
+        order.update(boxfill: boxfill_from)
 
         r = proc {
           goa.update_quantities(*q.values[0])

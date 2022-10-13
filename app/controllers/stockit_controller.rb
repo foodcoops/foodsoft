@@ -54,7 +54,7 @@ class StockitController < ApplicationController
 
   def update
     @stock_article = StockArticle.find(params[:id])
-    @stock_article.update_attributes!(params[:stock_article])
+    @stock_article.update!(params[:stock_article])
     render :layout => false
   rescue ActiveRecord::RecordInvalid
     render :action => 'edit', :layout => false

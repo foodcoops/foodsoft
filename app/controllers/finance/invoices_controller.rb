@@ -63,7 +63,7 @@ class Finance::InvoicesController < ApplicationController
   end
 
   def update
-    if @invoice.update_attributes(params[:invoice])
+    if @invoice.update(params[:invoice])
       redirect_to [:finance, @invoice], notice: I18n.t('finance.update.notice')
     else
       fill_deliveries_and_orders_collection @invoice.id, @invoice.supplier_id

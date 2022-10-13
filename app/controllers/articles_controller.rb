@@ -64,7 +64,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
 
-    if @article.update_attributes(params[:article])
+    if @article.update(params[:article])
       render :layout => false
     else
       render :action => 'new', :layout => false
@@ -93,7 +93,7 @@ class ArticlesController < ApplicationController
           # Update other article attributes...
           @articles = Article.find(params[:articles].keys)
           @articles.each do |article|
-            unless article.update_attributes(params[:articles][article.id.to_s])
+            unless article.update(params[:articles][article.id.to_s])
               invalid_articles = true unless invalid_articles # Remember that there are validation errors
             end
           end

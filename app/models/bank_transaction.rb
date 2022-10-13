@@ -45,7 +45,7 @@ class BankTransaction < ApplicationRecord
 
     transaction do
       link = FinancialLink.new
-      invoices.each { |i| i.update_attributes! financial_link: link, paid_on: date }
+      invoices.each { |i| i.update!(financial_link: link, paid_on: date) }
       update_attribute :financial_link, link
     end
 

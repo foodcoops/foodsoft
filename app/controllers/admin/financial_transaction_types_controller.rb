@@ -24,7 +24,7 @@ class Admin::FinancialTransactionTypesController < Admin::BaseController
   def update
     @financial_transaction_type = FinancialTransactionType.find(params[:id])
 
-    if @financial_transaction_type.update_attributes(params[:financial_transaction_type])
+    if @financial_transaction_type.update(params[:financial_transaction_type])
       redirect_to update_transaction_types_admin_finances_url, status: 303
     else
       render action: 'new', layout: false

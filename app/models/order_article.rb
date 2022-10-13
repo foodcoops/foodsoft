@@ -159,10 +159,10 @@ class OrderArticle < ApplicationRecord
   def update_article_and_price!(order_article_attributes, article_attributes, price_attributes = nil)
     OrderArticle.transaction do
       # Updates self
-      self.update_attributes!(order_article_attributes)
+      self.update!(order_article_attributes)
 
       # Updates article
-      article.update_attributes!(article_attributes)
+      article.update!(article_attributes)
 
       # Updates article_price belonging to current order article
       if price_attributes.present?
@@ -170,7 +170,7 @@ class OrderArticle < ApplicationRecord
         if article_price.changed?
           # Updates also price attributes of article if update_global_price is selected
           if update_global_price
-            article.update_attributes!(price_attributes)
+            article.update!(price_attributes)
             self.article_price = article.article_prices.first and save # Assign new created article price to order article
           else
             # Creates a new article_price if neccessary

@@ -14,10 +14,10 @@ describe Api::V1::OrderArticlesController, type: :controller do
       let(:order_articles) { order.order_articles }
 
       before do
-        order_articles[0].update_attributes! quantity: 0, tolerance: 0, units_to_order: 0
-        order_articles[1].update_attributes! quantity: 1, tolerance: 0, units_to_order: 0
-        order_articles[2].update_attributes! quantity: 0, tolerance: 1, units_to_order: 0
-        order_articles[3].update_attributes! quantity: 0, tolerance: 0, units_to_order: 1
+        order_articles[0].update!(quantity: 0, tolerance: 0, units_to_order: 0)
+        order_articles[1].update!(quantity: 1, tolerance: 0, units_to_order: 0)
+        order_articles[2].update!(quantity: 0, tolerance: 1, units_to_order: 0)
+        order_articles[3].update!(quantity: 0, tolerance: 0, units_to_order: 1)
       end
 
       it "(unset)" do

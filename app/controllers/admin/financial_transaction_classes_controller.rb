@@ -23,7 +23,7 @@ class Admin::FinancialTransactionClassesController < Admin::BaseController
   def update
     @financial_transaction_class = FinancialTransactionClass.find(params[:id])
 
-    if @financial_transaction_class.update_attributes(params[:financial_transaction_class])
+    if @financial_transaction_class.update(params[:financial_transaction_class])
       redirect_to update_transaction_types_admin_finances_url, status: 303
     else
       render action: 'new', layout: false

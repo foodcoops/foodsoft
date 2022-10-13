@@ -27,7 +27,7 @@ class MoveWeeklyTasks < ActiveRecord::Migration[4.2]
           task_required_users: task.required_users,
           task_duration: task.duration
         }
-        workgroup.update_attributes workgroup_attributes
+        workgroup.update(workgroup_attributes)
         task_group.tasks.update_all weekly: true
       end
     end

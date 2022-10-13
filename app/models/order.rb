@@ -235,7 +235,7 @@ class Order < ApplicationRecord
     unless finished?
       Order.transaction do
         # set new order state (needed by notify_order_finished)
-        update_attributes!(:state => 'finished', :ends => Time.now, :updated_by => user)
+        update!(state: 'finished', ends: Time.now, updated_by: user)
 
         # Update order_articles. Save the current article_price to keep price consistency
         # Also save results for each group_order_result
@@ -281,7 +281,7 @@ class Order < ApplicationRecord
         end
       end
 
-      self.update_attributes! :state => 'closed', :updated_by => user, :foodcoop_result => profit
+      self.update!(state: 'closed', updated_by: user, foodcoop_result: profit)
     end
   end
 
@@ -290,7 +290,7 @@ class Order < ApplicationRecord
     raise I18n.t('orders.model.error_closed') if closed?
 
     comments.create(user: user, text: I18n.t('orders.model.close_direct_message')) unless FoodsoftConfig[:charge_members_manually]
-    update_attributes! state: 'closed', updated_by: user
+    update!(state: 'closed', updated_by: user)
   end
 
   def send_to_supplier!(user)

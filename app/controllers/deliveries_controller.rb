@@ -33,7 +33,7 @@ class DeliveriesController < ApplicationController
   def update
     @delivery = Delivery.find(params[:id])
 
-    if @delivery.update_attributes(params[:delivery])
+    if @delivery.update(params[:delivery])
       flash[:notice] = I18n.t('deliveries.update.notice')
       redirect_to [@supplier, @delivery]
     else

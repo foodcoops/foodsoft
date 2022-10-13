@@ -26,7 +26,7 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
       goa.update_quantities((create_params[:quantity] || 0).to_i, (create_params[:tolerance] || 0).to_i)
       oa.update_results!
       go.update_price!
-      go.update_attributes! updated_by: current_user
+      go.update!(updated_by: current_user)
     end
     render_goa_with_oa(goa)
   end
@@ -38,7 +38,7 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
       goa.update_quantities((update_params[:quantity] || goa.quantity).to_i, (update_params[:tolerance] || goa.tolerance).to_i)
       goa.order_article.update_results!
       goa.group_order.update_price!
-      goa.group_order.update_attributes! updated_by: current_user
+      goa.group_order.update!(updated_by: current_user)
     end
     render_goa_with_oa(goa)
   end
@@ -50,7 +50,7 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
       goa.destroy!
       goa.order_article.update_results!
       goa.group_order.update_price!
-      goa.group_order.update_attributes! updated_by: current_user
+      goa.group_order.update!(updated_by: current_user)
     end
     render_goa_with_oa(nil, goa.order_article)
   end

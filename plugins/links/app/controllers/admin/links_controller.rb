@@ -25,7 +25,7 @@ class Admin::LinksController < Admin::BaseController
   def update
     @link = Link.find(params[:id])
 
-    if @link.update_attributes!(link_params)
+    if @link.update!(link_params)
       index
       render action: :update_links
     else

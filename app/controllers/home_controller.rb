@@ -23,8 +23,8 @@ class HomeController < ApplicationController
   end
 
   def update_profile
-    if @current_user.update_attributes(user_params)
-      @current_user.ordergroup.update_attributes(ordergroup_params) if ordergroup_params
+    if @current_user.update(user_params)
+      @current_user.ordergroup.update(ordergroup_params) if ordergroup_params
       session[:locale] = @current_user.locale
       redirect_to my_profile_url, notice: I18n.t('home.changes_saved')
     else

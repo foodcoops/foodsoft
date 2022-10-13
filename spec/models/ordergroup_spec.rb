@@ -127,13 +127,13 @@ describe Ordergroup do
       expect(og.account_balance).to eq 444
 
       ftc1.reload
-      ftc1.update_attributes!(ignore_for_account_balance: true)
+      ftc1.update!(ignore_for_account_balance: true)
 
       og.reload
       expect(og.account_balance).to eq 440
 
       ftt2.reload
-      ftt2.update_attributes!(financial_transaction_class: ftc1)
+      ftt2.update!(financial_transaction_class: ftc1)
 
       og.reload
       expect(og.account_balance).to eq 400
@@ -146,7 +146,7 @@ describe Ordergroup do
       expect(result["sum_of_class_#{ftc2.id}"]).to eq 440
 
       ftt2.reload
-      ftt2.update_attributes!(financial_transaction_class: ftc1)
+      ftt2.update!(financial_transaction_class: ftc1)
 
       result = Ordergroup.include_transaction_class_sum.where(id: og).first
       expect(result["sum_of_class_#{ftc1.id}"]).to eq 44
