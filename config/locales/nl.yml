@@ -497,14 +497,14 @@ nl:
         title: Artikel importeren
       new: Nieuw artikel
       new_order: Nieuwe bestelling
-      search_placeholder: Naam ...
+      search_placeholder: Naam…
       title: Artikelen van %{supplier} (%{count})
       upload: Artikelen uploaden
     model:
       error_in_use: "%{article} kan niet gewist worden, want deze is deel van een lopende bestelling!"
       error_nosel: Je hebt geen artikelen geselecteerd
     parse_upload:
-      body: "<p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>"
+      body: "<p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vindt er geen controle op dubbele artikelen plaats.</i></p>"
       submit: Upload verwerken
       title: Artikelen uploaden
     sync:
@@ -512,32 +512,32 @@ nl:
         alert_used: Opgelet, %{article} wordt gebruikt in een lopende bestelling. Haal het eerst uit de bestelling.
         body: 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_ignored:
-          one: Er is één artikel zonder artikelnummer overslagen.
+          one: Er is één artikel zonder artikelnummer overgeslagen.
           other: "%{count} artikelen zonder artikelnummer zijn overgeslagen."
         body_skip: Er zijn geen artikelen om te verwijderen.
-        title: Uit de lijst halen ...
+        title: Uit de lijst halen…
       price_short: prijs
       submit: Alles synchroniseren
       title: Artikelen met externe database synchroniseren
       unit_quantity_short: Colli
       update:
         body: 'Ieder artikel wordt tweemaal getoond: oude waarden zijn grijs, en de tekstvelden bevatten de nieuwe waarden. Verschillen met de oude artikelen zijn geel gemarkeerd.'
-        title: Bijwerken ...
+        title: Bijwerken…
         update_msg:
-          one: Er moet éen artikel bijgewerkt worden.
+          one: Er moet één artikel bijgewerkt worden.
           other: "Er moeten %{count} artikelen bijgewerkt worden."
       upnew:
         body_count:
-          one: Er is éen nieuw artikel.
+          one: Er is één nieuw artikel.
           other: Er zijn %{count} nieuwe artikelen.
-        title: Toevoegen ...
+        title: Toevoegen…
     upload:
       fields:
         reserved: "(Leeg)"
         status: Status (x=overslaan)
-      file_label: Graag een compatibel bestand uitkiezen
+      file_label: Kies een compatibel bestand uit
       options:
-        convert_units: Bestaande eenheden behouden, herbereken groothandelseenheid en prijs (net als synchronizeren).
+        convert_units: Bestaande eenheden behouden, groothandelseenheid en prijs herberekenen (net als synchroniseren).
         outlist_absent: Artikelen die niet in het bestand voorkomen, verwijderen.
       sample:
         juices: Sappen
@@ -549,21 +549,21 @@ nl:
         tomato_juice: Tomatensap
         walnuts: Walnoten
       submit: Bestand uploaden
-      text_1: 'Hier kun je een spreadsheet uploaden om de artikelen van %{supplier} bij te werken. Zowel Excel (xls, xlsx) als OpenOffice (ods) spreadsheets worden gelezen, evenals csv-bestanden (kolommen geschieden door ";", utf-8 encoding). Alleen de eerste sheet wordt geïmporteerd, en kolommen worden verwacht in deze volgorde:'
-      text_2: De rijen hier getoond zijn voorbeelden. Een "x" in de eerste kolom geeft aan dat het artikel niet meer beschikbaar is en zal worden verwijderd. Hiermee kun je snel meerdere artikelen tegelijk verwijderen. De categorie wordt gematched met de Foodsoft categorielijst (zowel met de categorienaam als de bijbehorende importnamen).
+      text_1: 'Hier kun je een spreadsheet uploaden om de artikelen van %{supplier} bij te werken. Spreadsheets van zowel Excel (xls, xlsx) als OpenOffice (ods) worden gelezen, evenals csv-bestanden (kolommen gescheiden door ";", utf-8 encoding). Alleen de eerste sheet wordt geïmporteerd, en kolommen worden verwacht in deze volgorde:'
+      text_2: De rijen hier getoond zijn voorbeelden. Een “x” in de eerste kolom geeft aan dat het artikel niet meer beschikbaar is en zal worden verwijderd. Hiermee kun je snel meerdere artikelen tegelijk verwijderen. De categorie wordt vergeleken met de categorielijst van Foodsoft (zowel met de categorienaam als de bijbehorende importnamen).
       title: Artikelen uploaden voor %{supplier}
   bank_account_connector:
-    confirm: Bevestig de code %{code}.
+    confirm: Code %{code} bevestigen.
     fields:
-      email: E-Mail
+      email: E-mail
       pin: PIN
       password: Wachtwoord
       tan: TAN
       username: Gebruikersnaam
   config:
     hints:
-      applepear_url: Website waar het appelpunten systeem wordt uitgelegd.
-      charge_members_manually: Kies deze optie als je elders bijhoudt wie welke producten heeft gekregen (bijvoorbeeld op papier), en dat ook niet naderhand in Foodsoft invoert. Na het afrekenen van bestellingen moet je dan iedere keer bij leden handmatig het in rekening te brengen bedrag afschrijven (gebruik "Nieuwe transacties toevoegen"). Het blijft wel nodig bestellingen af te rekenen, maar dat brengt dan niets in rekening bij leden.
+      applepear_url: Website waar het appelpuntensysteem wordt uitgelegd.
+      charge_members_manually: Kies deze optie als je elders bijhoudt wie welke producten heeft gekregen (bijvoorbeeld op papier), en dat ook niet naderhand in Foodsoft invoert. Na het afrekenen van bestellingen moet je dan iedere keer bij leden handmatig het in rekening te brengen bedrag afschrijven (gebruik “Nieuwe transacties toevoegen”). Het blijft wel nodig bestellingen af te rekenen, maar dat brengt dan niets in rekening bij leden.
       contact:
         email: Algemeen contactadres, zowel voor op de website als in formulieren.
         street: Adres, meestal is dit het aflever- en ophaaladres.
