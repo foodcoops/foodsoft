@@ -41,6 +41,7 @@ gem 'acts_as_tree'
 gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 https://github.com/huacnlee/rails-settings-cached/issues/73
 gem 'resque'
 gem 'puma'
+gem 'sd_notify'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 gem 'ruby-units'
 gem 'attribute_normalizer'
