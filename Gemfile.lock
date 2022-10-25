@@ -465,6 +465,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sd_notify (0.1.1)
     select2-rails (4.0.13)
     simple-navigation (3.14.0)
       activesupport (>= 2.3.2)
@@ -623,6 +624,7 @@ DEPENDENCIES
   ruby-prof
   ruby-units
   sass-rails
+  sd_notify
   select2-rails
   simple-navigation (~> 3.14.0)
   simple-navigation-bootstrap
