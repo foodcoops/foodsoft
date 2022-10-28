@@ -56,8 +56,8 @@ install and configure Foodsoft without having to publish your changes. These
 files are marked as public domain in the file header.
 
 If you have any remaining questions, please
-[open an issue](https://github.com/foodcoops/foodsoft/issues/new) or contact
-the [mailing list](http://foodsoft.274.s1.nabble.com/foodsoft-discuss-f5.html).
+[open an issue](https://github.com/foodcoops/foodsoft/issues/new) or open a new
+topic at the [forum](https://forum.foodcoops.net).
 
 Please see [LICENSE](LICENSE.md) for the full and authoritative text. Some
 bundled third-party components have [other licenses](vendor/README.md).
