@@ -127,6 +127,7 @@ en:
         pickup: Pickup
         starts: Starts at
         status: Status
+        sum: Sum (net/gross price)
         supplier: Supplier
         transport: Transport costs
         transport_distribution: Transport costs distribution

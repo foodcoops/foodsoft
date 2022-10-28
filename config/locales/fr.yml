@@ -83,6 +83,7 @@ fr:
         name: Fournisseur-e
         starts: Ouverture le
         status: Statut
+        sum: Totaux (des prix TTC/HT)
         supplier: Fournisseu-r-se
         updated_by: Dernière modification par
       order_article:

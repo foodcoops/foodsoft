@@ -120,6 +120,7 @@ es:
         pickup: Recogida
         starts: Comienza el
         status: Estado
+        sum: Suma (Precio Neto/Bruto)
         supplier: Proveedor
         transport: Coste de transporte
         transport_distribution: Distribución de costes de transporte
