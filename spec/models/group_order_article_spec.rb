@@ -40,13 +40,22 @@ describe GroupOrderArticle do
       goa.update_quantities(0, 0)
       expect(GroupOrderArticle.exists?(goa.id)).to be false
     end
+
+    it 'updates quantity and tolerance' do
+      goa.update_quantities(2, 2)
+      goa.update_quantities(1, 1)
+      expect(goa.quantity).to eq(1)
+      expect(goa.tolerance).to eq(1)
+      goa.update_quantities(1, 2)
+      expect(goa.tolerance).to eq(2)
+    end
   end
 
   describe 'distribution strategy' do
     let(:article) { create :article, supplier: order.supplier, unit_quantity: 1 }
     let(:oa) { order.order_articles.create(:article => article) }
     let(:goa) { create :group_order_article, group_order: go, order_article: oa }
-    let!(:goaq) { create :group_order_article_quantity, group_order_article: goa, quantity: 4 }
+    let!(:goaq) { create :group_order_article_quantity, group_order_article: goa, quantity: 4, tolerance: 6 }
 
     it 'can calculate the result for the distribution strategy "first order first serve"' do
       res = goa.calculate_result(2)
@@ -58,6 +67,11 @@ describe GroupOrderArticle do
 
       res = goa.calculate_result(2)
       expect(res).to eq(quantity: 4, tolerance: 0, total: 4)
+    end
+
+    it 'determines tolerance correctly' do
+      res = goa.calculate_result(6)
+      expect(res).to eq(quantity: 4, tolerance: 2, total: 6)
     end
   end
 end

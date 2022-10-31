@@ -405,6 +405,7 @@ RSpec/Capybara/FeatureMethods:
     - "spec/integration/articles_spec.rb"
     - "spec/integration/balancing_spec.rb"
     - "spec/integration/config_spec.rb"
+    - "spec/integration/home_spec.rb"
     - "spec/integration/login_spec.rb"
     - "spec/integration/order_spec.rb"
     - "spec/integration/product_distribution_example_spec.rb"
