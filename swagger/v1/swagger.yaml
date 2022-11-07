@@ -12,14 +12,14 @@ paths:
       responses:
         '200':
           description: success
+        '403':
+          description: missing scope
         '401':
           description: not logged-in
 components:
   securitySchemes:
     oauth2:
       type: oauth2
-      in: header
-      name: Authorization
       flows:
         implicit:
           authorizationUrl: http://localhost:3000/f/oauth/authorize

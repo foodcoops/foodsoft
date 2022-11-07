@@ -26,8 +26,6 @@ RSpec.configure do |config|
         securitySchemes: {
           oauth2: {
             type: :oauth2,
-            in: :header,
-            name: 'Authorization',
             flows: {
               implicit: {
                 authorizationUrl: 'http://localhost:3000/f/oauth/authorize',
