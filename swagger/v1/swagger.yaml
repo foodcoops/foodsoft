@@ -8,14 +8,27 @@ paths:
     get:
       summary: info about the currently logged-in user
       tags:
-      - 1. User
+      - User
       responses:
         '200':
           description: success
-        '403':
-          description: missing scope
         '401':
           description: not logged-in
+        '403':
+          description: missing scope
+  "/user/financial_overview":
+    get:
+      summary: financial summary about the currently logged-in user
+      tags:
+      - User
+      - FinancialTransaction
+      responses:
+        '200':
+          description: success
+        '401':
+          description: not logged-in
+        '403':
+          description: missing scope
 components:
   securitySchemes:
     oauth2:

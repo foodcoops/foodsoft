@@ -5,21 +5,26 @@ module ApiHelper
     let(:user) { create(:user) }
     let(:api_scopes) { [] } # empty scopes for stricter testing (in reality this would be default_scopes)
     let(:api_access_token) { create(:oauth2_access_token, resource_owner_id: user.id, scopes: api_scopes&.join(' ')).token }
-    let(:api_authorization) { "Bearer #{api_access_token}" }
+    let(:Authorization) { "Bearer #{api_access_token}" }
 
-    def self.it_handles_invalid_token(method, path, params_block = -> { api_auth })
+    # TODO: not needed anymore?
+    def self.it_handles_invalid_token()
       context 'with invalid access token' do
-        let(:api_access_token) { 'abc' }
+        let(:Authorization) { 'abc' }
 
-        it { is_expected.to validate(method, path, 401, instance_exec(&params_block)) }
+        response 401, 'not logged-in' do
+          run_test!
+        end
       end
     end
 
-    def self.it_handles_invalid_scope(method, path, params_block = -> { api_auth })
+    def self.it_handles_invalid_scope()
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
 
-        it { is_expected.to validate(method, path, 403, instance_exec(&params_block)) }
+        response 403, 'missing scope' do
+          run_test!
+        end
       end
     end
 
@@ -33,7 +38,8 @@ module ApiHelper
   # @param params [Hash] Query parameters
   # @return Query parameters with authentication header
   # @see Swagger::RspecHelpers#validate
-  def api_auth(params = {})
-    { '_headers' => { 'Authorization' => api_authorization } }.deep_merge(params)
-  end
+  # def api_auth(params = {})
+  #   { '_headers' => { 'Authorization' => api_authorization } }.deep_merge(params)
+  # end
+  # TODO: not needed anymore
 end
