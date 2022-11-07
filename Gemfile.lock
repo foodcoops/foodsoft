@@ -109,13 +109,6 @@ GEM
       activerecord (>= 3.0.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    apivore (1.6.2)
-      actionpack (>= 4, < 6)
-      hashie (~> 3.3)
-      json-schema (~> 2.5)
-      rspec (~> 3)
-      rspec-expectations (~> 3.1)
-      rspec-mocks (~> 3.1)
     apparition (0.6.0)
       capybara (~> 3.13, < 4)
       websocket-driver (>= 0.6.5)
@@ -567,7 +560,6 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   acts_as_tree
   acts_as_versioned!
-  apivore
   apparition
   attribute_normalizer
   better_errors

@@ -118,7 +118,5 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-lcov', require: false
   # api
-  gem 'apivore', require: false
-  gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
   gem 'rswag-specs'
 end
