@@ -1,0 +1,43 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/user":
+    get:
+      summary: info about the currently logged-in user
+      tags:
+      - 1. User
+      responses:
+        '200':
+          description: success
+        '401':
+          description: not logged-in
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      in: header
+      name: Authorization
+      flows:
+        implicit:
+          authorizationUrl: http://localhost:3000/f/oauth/authorize
+          scopes:
+            config:user: reading Foodsoft configuration for regular users
+            config:read: reading Foodsoft configuration values
+            config:write: reading and updating Foodsoft configuration values
+            finance:user: accessing your own financial transactions
+            finance:read: reading all financial transactions
+            finance:write: reading and creating financial transactions
+            user:read: reading your own user profile
+            user:write: reading and updating your own user profile
+            offline_access: retain access after user has logged out
+servers:
+- url: http://{defaultHost}/f/api/v1
+  variables:
+    defaultHost:
+      default: localhost:3000
+security:
+- oauth2:
+  - user:read

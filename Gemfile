@@ -55,6 +55,8 @@ gem 'gaffe'
 gem 'ruby-filemagic'
 gem 'mime-types'
 gem 'midi-smtp-server'
+gem 'rswag-api'
+gem 'rswag-ui'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
@@ -118,4 +120,5 @@ group :test do
   # api
   gem 'apivore', require: false
   gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
+  gem 'rswag-specs'
 end

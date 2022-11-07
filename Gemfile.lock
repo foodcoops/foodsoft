@@ -430,6 +430,16 @@ GEM
     rspec-rerun (1.1.0)
       rspec (~> 3.0)
     rspec-support (3.11.1)
+    rswag-api (2.7.0)
+      railties (>= 3.1, < 7.1)
+    rswag-specs (2.7.0)
+      activesupport (>= 3.1, < 7.1)
+      json-schema (>= 2.2, < 4.0)
+      railties (>= 3.1, < 7.1)
+      rspec-core (>= 2.14)
+    rswag-ui (2.7.0)
+      actionpack (>= 3.1, < 7.1)
+      railties (>= 3.1, < 7.1)
     rubocop (1.36.0)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -617,6 +627,9 @@ DEPENDENCIES
   rspec-core
   rspec-rails
   rspec-rerun
+  rswag-api
+  rswag-specs
+  rswag-ui
   rubocop
   rubocop-rails
   rubocop-rspec
