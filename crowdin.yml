@@ -1,5 +1,5 @@
-project_identifier: foodsoft
-api_key_env: CROWDIN_API_KEY
+project_id: 357447
+api_token_env: CROWDIN_API_KEY
 files:
   - source: /config/locales/en.yml
     translation: /config/locales/%two_letters_code%.yml
