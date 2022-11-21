@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'User API', type: :request do
+describe 'User', type: :request do
   include ApiHelper
 
   path '/user' do
