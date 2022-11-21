@@ -7,12 +7,12 @@ module ApiHelper
     let(:api_access_token) { create(:oauth2_access_token, resource_owner_id: user.id, scopes: api_scopes&.join(' ')).token }
     let(:Authorization) { "Bearer #{api_access_token}" }
 
-    # TODO: not needed anymore?
     def self.it_handles_invalid_token()
       context 'with invalid access token' do
         let(:Authorization) { 'abc' }
 
         response 401, 'not logged-in' do
+          schema '$ref' => '#/components/schemas/Error401'
           run_test!
         end
       end
@@ -23,6 +23,7 @@ module ApiHelper
         let(:api_scopes) { ['none'] }
 
         response 403, 'missing scope' do
+          schema '$ref' => '#/components/schemas/Error403'
           run_test!
         end
       end
@@ -33,13 +34,4 @@ module ApiHelper
       it_handles_invalid_scope(*args)
     end
   end
-
-  # Add authentication to parameters for {Swagger::RspecHelpers#validate}
-  # @param params [Hash] Query parameters
-  # @return Query parameters with authentication header
-  # @see Swagger::RspecHelpers#validate
-  # def api_auth(params = {})
-  #   { '_headers' => { 'Authorization' => api_authorization } }.deep_merge(params)
-  # end
-  # TODO: not needed anymore
 end

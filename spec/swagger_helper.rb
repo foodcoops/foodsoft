@@ -23,6 +23,69 @@ RSpec.configure do |config|
       },
       paths: {},
       components: {
+        schemas: {
+          Error: {
+            type: :object,
+            properties: {
+              error: {
+                type: :string,
+                description: 'error code'
+              },
+              error_description: {
+                type: :string,
+                description: 'human-readable error message (localized)'
+              }
+            }
+          },
+          Error401: {
+            type: :object,
+            properties: {
+              error: {
+                type: :string,
+                description: '<tt>unauthorized</tt>'
+              },
+              error_description: {
+                '$ref': '#/components/schemas/Error/properties/error_description'
+              }
+            }
+          },
+          Error403: {
+            type: :object,
+            properties: {
+              error: {
+                type: :string,
+                description: '<tt>forbidden</tt> or <tt>invalid_scope</tt>'
+              },
+              error_description: {
+                '$ref': '#/components/schemas/Error/properties/error_description'
+              }
+            }
+          },
+          Error404: {
+            type: :object,
+            properties: {
+              error: {
+                type: :string,
+                description: '<tt>not_found</tt>'
+              },
+              error_description: {
+                '$ref': '#/components/schemas/Error/properties/error_description'
+              }
+            }
+          },
+          Error422: {
+            type: :object,
+            properties: {
+              error: {
+                type: :string,
+                description: 'unprocessable entity'
+              },
+              error_description: {
+                '$ref': '#/components/schemas/Error/properties/error_description'
+              }
+            }
+          }
+        },
         securitySchemes: {
           oauth2: {
             type: :oauth2,

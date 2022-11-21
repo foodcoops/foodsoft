@@ -12,10 +12,41 @@ paths:
       responses:
         '200':
           description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                        description: full name
+                      email:
+                        type: string
+                        description: email address
+                      locale:
+                        type: string
+                        description: language code
+                    required:
+                    - id
+                    - name
+                    - email
         '401':
           description: not logged-in
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error401"
         '403':
           description: missing scope
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error403"
   "/user/financial_overview":
     get:
       summary: financial summary about the currently logged-in user
@@ -25,11 +56,93 @@ paths:
       responses:
         '200':
           description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_balance:
+                    type: number
+                    description: booked accout balance of ordergroup
+                  available_funds:
+                    type: number
+                    description: fund available to order articles
+                  financial_transaction_class_sums:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: id of the financial transaction class
+                      name:
+                        type: string
+                        description: name of the financial transaction class
+                      amount:
+                        type: number
+                        description: sum of the amounts belonging to the financial
+                          transaction class
+                      required:
+                      - id
+                      - name
+                      - amount
+                    required:
+                    - account_balance
+                    - available_funds
+                    - financial_transaction_class_sums
         '401':
           description: not logged-in
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error401"
         '403':
           description: missing scope
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error403"
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: error code
+        error_description:
+          type: string
+          description: human-readable error message (localized)
+    Error401:
+      type: object
+      properties:
+        error:
+          type: string
+          description: "<tt>unauthorized</tt>"
+        error_description:
+          "$ref": "#/components/schemas/Error/properties/error_description"
+    Error403:
+      type: object
+      properties:
+        error:
+          type: string
+          description: "<tt>forbidden</tt> or <tt>invalid_scope</tt>"
+        error_description:
+          "$ref": "#/components/schemas/Error/properties/error_description"
+    Error404:
+      type: object
+      properties:
+        error:
+          type: string
+          description: "<tt>not_found</tt>"
+        error_description:
+          "$ref": "#/components/schemas/Error/properties/error_description"
+    Error422:
+      type: object
+      properties:
+        error:
+          type: string
+          description: unprocessable entity
+        error_description:
+          "$ref": "#/components/schemas/Error/properties/error_description"
   securitySchemes:
     oauth2:
       type: oauth2
