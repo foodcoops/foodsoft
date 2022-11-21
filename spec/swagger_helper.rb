@@ -16,7 +16,7 @@ RSpec.configure do |config|
   # the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
   config.swagger_docs = {
     'v1/swagger.yaml' => {
-      openapi: '3.0.1',
+      openapi: '3.0.3',
       info: {
         title: 'API V1',
         version: 'v1'
@@ -24,6 +24,27 @@ RSpec.configure do |config|
       paths: {},
       components: {
         schemas: {
+          Navigation: {
+            type: :array,
+            items: {
+              type: :object,
+              properties: {
+                name: {
+                  type: :string,
+                  description: 'title'
+                },
+                url: {
+                  type: :string,
+                  description: 'link'
+                },
+                items: {
+                  '$ref': "#/components/schemas/Navigation"
+                }
+              },
+              required: ['name'],
+              minProperties: 2 # name+url or name+items
+            }
+          },
           Error: {
             type: :object,
             properties: {
