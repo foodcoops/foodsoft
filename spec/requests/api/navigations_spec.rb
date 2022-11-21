@@ -7,7 +7,6 @@ describe 'Navigation', type: :request do
     get 'navigation' do
       tags 'General'
       produces 'application/json'
-      let(:api_scopes) { ['config:user'] }
 
       response '200', 'success' do
         schema type: :object, properties: {

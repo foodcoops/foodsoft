@@ -24,6 +24,52 @@ RSpec.configure do |config|
       paths: {},
       components: {
         schemas: {
+          page: {
+            type: :integer,
+            description: 'page number',
+            minimum: 0,
+            default: 0
+          },
+          per_page: {
+            type: :integer,
+            description: 'items per page',
+            minimum: 0,
+            default: 20
+          },
+          ArticleCategory: {
+            type: :object,
+            properties: {
+              id: {
+                type: :integer
+              },
+              name: {
+                type: :string
+              }
+            },
+            required: %w[id name]
+          },
+          Meta: {
+            type: :object,
+            properties: {
+              page: {
+                type: :integer,
+                description: 'page number of the returned collection'
+              },
+              per_page: {
+                type: :integer,
+                description: 'number of items per page'
+              },
+              total_pages: {
+                type: :integer,
+                description: 'total number of pages'
+              },
+              total_count: {
+                type: :integer,
+                description: 'total number of items in the collection'
+              },
+              required: %w[page per_page total_pages total_count]
+            }
+          },
           Navigation: {
             type: :array,
             items: {
