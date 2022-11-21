@@ -7,7 +7,7 @@ module ApiHelper
     let(:api_access_token) { create(:oauth2_access_token, resource_owner_id: user.id, scopes: api_scopes&.join(' ')).token }
     let(:Authorization) { "Bearer #{api_access_token}" }
 
-    def self.it_handles_invalid_token()
+    def self.it_handles_invalid_token
       context 'with invalid access token' do
         let(:Authorization) { 'abc' }
 
@@ -18,7 +18,7 @@ module ApiHelper
       end
     end
 
-    def self.it_handles_invalid_scope()
+    def self.it_handles_invalid_scope
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
 
