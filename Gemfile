@@ -55,6 +55,7 @@ gem 'gaffe'
 gem 'ruby-filemagic'
 gem 'mime-types'
 gem 'midi-smtp-server'
+gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
 gem 'rswag-api'
 gem 'rswag-ui'
 
