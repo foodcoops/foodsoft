@@ -24,17 +24,15 @@ RSpec.configure do |config|
       paths: {},
       components: {
         schemas: {
-          page: {
-            type: :integer,
-            description: 'page number',
-            minimum: 0,
-            default: 0
-          },
-          per_page: {
-            type: :integer,
-            description: 'items per page',
-            minimum: 0,
-            default: 20
+          pagination: {
+            type: :object,
+            properties: {
+              recordCount: { type: :integer },
+              pageCount: { type: :integer },
+              currentPage: { type: :integer },
+              pageSize: { type: :integer }
+            },
+            required: %w(recordCount pageCount currentPage pageSize)
           },
           ArticleCategory: {
             type: :object,
