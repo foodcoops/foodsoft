@@ -46,6 +46,18 @@ RSpec.configure do |config|
             },
             required: %w[id name]
           },
+          FinancialTransactionClass: {
+            type: :object,
+            properties: {
+              id: {
+                type: :integer
+              },
+              name: {
+                type: :string
+              }
+            },
+            required: %w[id name]
+          },
           Meta: {
             type: :object,
             properties: {
