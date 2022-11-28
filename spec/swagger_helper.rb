@@ -24,6 +24,95 @@ RSpec.configure do |config|
       paths: {},
       components: {
         schemas: {
+          pagination: {
+            type: :object,
+            properties: {
+              recordCount: { type: :integer },
+              pageCount: { type: :integer },
+              currentPage: { type: :integer },
+              pageSize: { type: :integer }
+            },
+            required: %w(recordCount pageCount currentPage pageSize)
+          },
+          Article: {
+            type: :object,
+            properties: {
+              id: {
+                type: :integer
+              },
+              name: {
+                type: :string
+              },
+              supplier_id: {
+                type: :integer,
+                description: 'id of supplier, or 0 for stock articles'
+              },
+              supplier_name: {
+                type: %w[string null],
+                description: 'name of the supplier, or null for stock articles'
+              },
+              unit: {
+                type: :string,
+                description: 'amount of each unit, e.g. "100 g" or "kg"'
+              },
+              unit_quantity: {
+                type: :integer,
+                description: 'units can only be ordered from the supplier in multiples of unit_quantity'
+              },
+              note: {
+                type: %w[string null],
+                description: 'generic note'
+              },
+              manufacturer: {
+                type: %w[string null],
+                description: 'manufacturer'
+              },
+              origin: {
+                type: %w[string null],
+                description: 'origin, preferably (starting with a) 2-letter ISO country code'
+              },
+              article_category_id: {
+                type: :integer,
+                description: 'id of article category'
+              },
+              quantity_available: {
+                type: :integer,
+                description: 'number of units available (only present on stock articles)'
+              }
+            },
+            required: %w[id name supplier_id supplier_name unit unit_quantity note manufacturer origin article_category_id]
+          },
+          OrderArticle: {
+            type: :object,
+            properties: {
+              id: {
+                type: :integer
+              },
+              order_id: {
+                type: :integer,
+                description: 'id of order this order article belongs to'
+              },
+              price: {
+                type: :float,
+                description: 'foodcoop price'
+              },
+              quantity: {
+                type: :integer,
+                description: 'number of units ordered by members'
+              },
+              tolerance: {
+                type: :integer,
+                description: 'number of extra units that members are willing to buy to fill a box'
+              },
+              units_to_order: {
+                type: :integer,
+                description: 'number of units to order from the supplier'
+              },
+              article: {
+                '$ref': '#/components/schemas/Article'
+              }
+            }
+          },
           ArticleCategory: {
             type: :object,
             properties: {
