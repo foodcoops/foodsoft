@@ -19,9 +19,13 @@ describe Supplier do
   end
 
   it 'return correct tolerance' do
-    supplier = create :supplier, articles: create_list(:article, 1, unit_quantity: 1)
+    supplier = create :supplier
+    articles = create_list(:article, 1, unit_quantity: 1, supplier_id: supplier.id)
+    supplier.reload
     expect(supplier.has_tolerance?).to be false
-    supplier2 = create :supplier, articles: create_list(:article, 1, unit_quantity: 2)
+    supplier2 = create :supplier
+    articles = create_list(:article, 1, unit_quantity: 2, supplier_id: supplier2.id)
+    supplier.reload
     expect(supplier2.has_tolerance?).to be true
   end
 

@@ -131,24 +131,22 @@ describe HomeController, type: :controller do
       end
 
       describe 'assigns sortings' do
-        let(:fin_trans1) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'A', amount: 200, created_on: Time.now }
-        let(:fin_trans2) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'B', amount: 100, created_on: Time.now + 2.minutes }
-        let(:fin_trans3) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'C', amount: 50, created_on: Time.now + 1.minute }
+        let(:fin_trans1) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'A', amount: 100 }
+        let(:fin_trans2) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'B', amount: 200, created_on: Time.now + 1.minute }
 
         before do
           fin_trans1
           fin_trans2
-          fin_trans3
         end
 
         it 'by criteria' do
           sortings = [
-            ['date', [fin_trans1, fin_trans3, fin_trans2]],
-            ['note', [fin_trans1, fin_trans2, fin_trans3]],
-            ['amount', [fin_trans3, fin_trans2, fin_trans1]],
-            ['date_reverse', [fin_trans2, fin_trans3, fin_trans1]],
-            ['note_reverse', [fin_trans3, fin_trans2, fin_trans1]],
-            ['amount_reverse', [fin_trans1, fin_trans2, fin_trans3]]
+            ['date', [fin_trans1, fin_trans2]],
+            ['note', [fin_trans1, fin_trans2]],
+            ['amount', [fin_trans1, fin_trans2]],
+            ['date_reverse', [fin_trans2, fin_trans1]],
+            ['note_reverse', [fin_trans2, fin_trans1]],
+            ['amount_reverse', [fin_trans2, fin_trans1]]
           ]
           sortings.each do |sorting|
             get_with_defaults :ordergroup, params: { sort: sorting[0] }
@@ -184,7 +182,7 @@ describe HomeController, type: :controller do
         get_with_defaults :cancel_membership, params: { group_id: fin_user.groups.first.id }
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to(my_profile_path)
-        expect(flash[:notice]).to match(/#{I18n.t('home.ordergroup_cancelled', group: membership.group.name)}/)
+        expect(flash[:notice]).to match(/#{I18n.t('home.ordergroup_cancelled', :group => membership.group.name)}/)
       end
 
       it 'removes user membership' do
@@ -192,7 +190,7 @@ describe HomeController, type: :controller do
         get_with_defaults :cancel_membership, params: { membership_id: membership.id }
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to(my_profile_path)
-        expect(flash[:notice]).to match(/#{I18n.t('home.ordergroup_cancelled', group: membership.group.name)}/)
+        expect(flash[:notice]).to match(/#{I18n.t('home.ordergroup_cancelled', :group => membership.group.name)}/)
       end
     end
   end
