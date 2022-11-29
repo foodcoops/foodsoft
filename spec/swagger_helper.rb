@@ -24,16 +24,6 @@ RSpec.configure do |config|
       paths: {},
       components: {
         schemas: {
-          pagination: {
-            type: :object,
-            properties: {
-              recordCount: { type: :integer },
-              pageCount: { type: :integer },
-              currentPage: { type: :integer },
-              pageSize: { type: :integer }
-            },
-            required: %w(recordCount pageCount currentPage pageSize)
-          },
           ArticleCategory: {
             type: :object,
             properties: {
@@ -51,12 +41,9 @@ RSpec.configure do |config|
             properties: {
               id: {
                 type: :integer
-              },
-              name: {
-                type: :string
               }
             },
-            required: %w[id financial_transaction_type]
+            required: %w[amount note user_id]
           },
           FinancialTransactionClass: {
             type: :object,

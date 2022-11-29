@@ -18,10 +18,34 @@ module ApiHelper
       end
     end
 
+    def self.it_handles_invalid_token_with_id(class_sym)
+      context 'with invalid access token' do
+        let(:Authorization) { 'abc' }
+        let(:id) { create(class_sym).id }
+
+        response 401, 'not logged-in' do
+          schema '$ref' => '#/components/schemas/Error401'
+          run_test!
+        end
+      end
+    end
+
     def self.it_handles_invalid_scope
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
 
+        response 403, 'missing scope' do
+          schema '$ref' => '#/components/schemas/Error403'
+          run_test!
+        end
+      end
+    end
+
+    def self.it_handles_invalid_scope_with_id(class_sym)
+      context 'with invalid scope' do
+        let(:api_scopes) { ['none'] }
+        let(:id) { create(class_sym).id }
+        
         response 403, 'missing scope' do
           schema '$ref' => '#/components/schemas/Error403'
           run_test!
