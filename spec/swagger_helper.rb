@@ -41,6 +41,57 @@ RSpec.configure do |config|
             properties: {
               id: {
                 type: :integer
+              },
+              amount: {
+                type: :integer,
+                description: 'amount credited (negative for a debit transaction)'
+              },
+              financial_transaction_type_id:
+              {
+                type: :integer,
+                description: 'id of the type of the transaction'
+              },
+              note: {
+                type: :string,
+                description: 'note entered with the transaction'
+              },
+              user_id: {
+                type: :integer,
+                required: false,
+                description: 'id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)'
+              },
+              user_name: {
+                type: :string,
+                required: false,
+                description: 'name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)'
+              },
+              financial_transaction_type_name: {
+                type: :string,
+                description: 'name of the type of the transaction'
+              },
+              created_at: {
+                type: :string,
+                format: :datetime,
+                description: 'when the transaction was entered'
+              }
+            },
+            required: %w[amount note user_id]
+          },
+          FinancialTransactionForCreate: {
+            type: :object,
+            properties: {
+              amount: {
+                type: :integer,
+                description: 'amount credited (negative for a debit transaction)'
+              },
+              financial_transaction_type_id:
+              {
+                type: :integer,
+                description: 'id of the type of the transaction'
+              },
+              note: {
+                type: :string,
+                description: 'note entered with the transaction'
               }
             },
             required: %w[amount note user_id]

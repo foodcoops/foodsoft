@@ -45,7 +45,7 @@ module ApiHelper
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
         let(:id) { create(class_sym).id }
-        
+
         response 403, 'missing scope' do
           schema '$ref' => '#/components/schemas/Error403'
           run_test!
