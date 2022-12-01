@@ -52,35 +52,42 @@ describe 'User', type: :request do
     get 'financial summary about the currently logged-in user' do
       tags 'User', 'FinancialTransaction'
       produces 'application/json'
-      let!(:user) { create :user, :ordergroup }
+      let(:user) { create :user, :ordergroup }
+      FinancialTransactionClass.create(name: 'TestTransaction')
 
       response 200, 'success' do
         schema type: :object,
                properties: {
-                 account_balance: {
-                   type: :number,
-                   description: 'booked accout balance of ordergroup'
-                 },
-                 available_funds: {
-                   type: :number,
-                   description: 'fund available to order articles'
-                 },
-                 financial_transaction_class_sums: {
+                 financial_overview: {
                    type: :object,
                    properties: {
-                     id: {
-                       type: :integer,
-                       description: 'id of the financial transaction class'
-                     },
-                     name: {
-                       type: :string,
-                       description: 'name of the financial transaction class'
-                     },
-                     amount: {
+
+                     account_balance: {
                        type: :number,
-                       description: 'sum of the amounts belonging to the financial transaction class'
+                       description: 'booked accout balance of ordergroup'
                      },
-                     required: %w[id name amount]
+                     available_funds: {
+                       type: :number,
+                       description: 'fund available to order articles'
+                     },
+                     financial_transaction_class_sums: {
+                       type: :array,
+                       properties: {
+                         id: {
+                           type: :integer,
+                           description: 'id of the financial transaction class'
+                         },
+                         name: {
+                           type: :string,
+                           description: 'name of the financial transaction class'
+                         },
+                         amount: {
+                           type: :number,
+                           description: 'sum of the amounts belonging to the financial transaction class'
+                         }
+                       },
+                       required: %w[id name amount]
+                     }
                    },
                    required: %w[account_balance available_funds financial_transaction_class_sums]
                  }

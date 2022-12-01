@@ -93,7 +93,8 @@ RSpec.configure do |config|
                 description: 'id of order this order article belongs to'
               },
               price: {
-                type: :float,
+                type: :number,
+                format: :float,
                 description: 'foodcoop price'
               },
               quantity: {
@@ -146,12 +147,10 @@ RSpec.configure do |config|
               },
               user_id: {
                 type: :integer,
-                required: false,
                 description: 'id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)'
               },
               user_name: {
                 type: :string,
-                required: false,
                 description: 'name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)'
               },
               financial_transaction_type_name: {
@@ -227,9 +226,9 @@ RSpec.configure do |config|
               total_count: {
                 type: :integer,
                 description: 'total number of items in the collection'
-              },
-              required: %w[page per_page total_pages total_count]
-            }
+              }
+            },
+            required: %w[page per_page total_pages total_count]
           },
           Navigation: {
             type: :array,
