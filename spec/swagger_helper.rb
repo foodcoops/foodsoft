@@ -34,6 +34,46 @@ RSpec.configure do |config|
             },
             required: %w(recordCount pageCount currentPage pageSize)
           },
+          Order: {
+            type: :object,
+            properties: {
+              id: {
+                type: :integer
+              },
+              name: {
+                type: :string,
+                description: "name of the order's supplier (or stock)"
+              },
+              starts: {
+                type: :string,
+                format: 'date-time',
+                description: 'when the order was opened'
+              },
+              ends: {
+                type: ['string', 'null'],
+                format: 'date-time',
+                description: 'when the order will close or was closed'
+              },
+              boxfill: {
+                type: ['string', 'null'],
+                format: 'date-time',
+                description: 'when the order will enter or entered the boxfill phase'
+              },
+              pickup: {
+                type: ['string', 'null'],
+                format: :date,
+                description: 'pickup date'
+              },
+              is_open: {
+                type: :boolean,
+                description: 'if the order is currently open or not'
+              },
+              is_boxfill: {
+                type: :boolean,
+                description: 'if the order is currently in the boxfill phase or not'
+              }
+            }
+          },
           Article: {
             type: :object,
             properties: {
