@@ -208,6 +208,54 @@ RSpec.configure do |config|
             },
             required: %w[id name financial_transaction_class]
           },
+          GroupOrderArticleForUpdate: {
+            type: :object,
+            properties: {
+              quantity:
+              {
+                type: :integer,
+                description: 'number of units ordered by the users ordergroup'
+              },
+              tolerance:
+              {
+                type: :integer,
+                description: 'number of extra units the users ordergroup is willing to buy for filling a box'
+              }
+            }
+          },
+          GroupOrderArticleForCreate: {
+            type: :object,
+            properties: {
+              order_article_id:
+              {
+                type: :integer,
+                description: 'id of order article'
+              }
+            }
+          },
+          GroupOrderArticle: {
+            type: :object,
+            properties: {
+              id: {
+                type: :integer
+              },
+              result: {
+                type: :float,
+                description: 'number of units the users ordergroup will receive or has received'
+              },
+              total_price:
+              {
+                type: :float,
+                description: 'total price of this group order article'
+              },
+              order_article_id:
+              {
+                type: :integer,
+                description: 'id of order article'
+              }
+            },
+            required: %w[order_article_id]
+          },
           Meta: {
             type: :object,
             properties: {
@@ -305,7 +353,7 @@ RSpec.configure do |config|
             properties: {
               error: {
                 type: :string,
-                description: 'unprocessable entity'
+                description: '<tt>unprocessable entity</tt>'
               },
               error_description: {
                 '$ref': '#/components/schemas/Error/properties/error_description'

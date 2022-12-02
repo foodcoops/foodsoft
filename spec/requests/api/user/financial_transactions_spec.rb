@@ -23,8 +23,10 @@ describe 'User', type: :request do
         properties: {
           amount: { type: :integer },
           financial_transaction_type: { type: :integer },
-          note: { type: :string }        }
+          note: { type: :string }
+        }
       }
+      let(:financial_transaction) { { amount: 3, financial_transaction_type_id: create(:financial_transaction_type).id, note: 'lirum larum' } }
 
       response '200', 'success' do
         schema type: :object, properties: {
@@ -35,9 +37,38 @@ describe 'User', type: :request do
             }
           }
         }
-        let(:financial_transaction) { { amount: 3, financial_transaction_type_id: create(:financial_transaction_type).id, note: 'lirum larum' } }
         run_test!
       end
+
+      # 401
+      it_handles_invalid_token_with_id(:financial_transaction)
+
+      # 403
+      # description: user has no ordergroup, is below minimum balance, self service is disabled, or missing scope
+      it_handles_invalid_scope_with_id(:financial_transaction)
+
+      # TODO: fix 404 and 422
+      # 404
+      # Type not found
+      # description: financial transaction type not found
+      # Should be 404, but is 200 with validation errors..
+      #      Rswag::Specs::UnexpectedResponse:
+      #  Expected response code '404' to match '200'
+      #  Response body: {"error":"not_found","error_description":"Couldn't find FinancialTransactionType with 'id'=invalid"}
+      # let(:financial_transaction) { { amount: 3, financial_transaction_type_id: 'invalid', note: 'lirum larum' } }
+      # response '404', 'invalid parameter value' do
+      #  schema '$ref' => '#/components/schemas/Error404'
+      #  run_test!
+      # end
+
+      # 422
+      # response '422', 'invalid parameter value' do
+      #   let(:financial_transaction) { { amount: -3, financial_transaction_type_id: create(:financial_transaction_type).id, note: -2 } }
+
+      #   schema '$ref' => '#/components/schemas/Error422'
+      #   run_test!
+      # end
+
     end
 
     get 'financial transactions of the members ordergroup' do
