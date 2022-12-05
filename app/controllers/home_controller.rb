@@ -18,7 +18,7 @@ class HomeController < ApplicationController
       @bank_accounts = @types.includes(:bank_account).map(&:bank_account).uniq.compact
       @bank_accounts = [BankAccount.last] if @bank_accounts.empty?
     else
-      redirect_to root_url, alert: I18n.t('group_orders.errors.no_member')
+      redirect_to root_path, alert: I18n.t('group_orders.errors.no_member')
     end
   end
 
@@ -26,7 +26,7 @@ class HomeController < ApplicationController
     if @current_user.update(user_params)
       @current_user.ordergroup.update(ordergroup_params) if ordergroup_params
       session[:locale] = @current_user.locale
-      redirect_to my_profile_url, notice: I18n.t('home.changes_saved')
+      redirect_to my_profile_path, notice: I18n.t('home.changes_saved')
     else
       render :profile
     end
@@ -64,7 +64,7 @@ class HomeController < ApplicationController
   # cancel personal memberships direct from the myProfile-page
   def cancel_membership
     if params[:membership_id]
-      membership = @current_user.memberships.find!(params[:membership_id])
+      membership = @current_user.memberships.find(params[:membership_id])
     else
       membership = @current_user.memberships.find_by_group_id!(params[:group_id])
     end
