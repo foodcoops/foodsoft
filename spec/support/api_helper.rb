@@ -30,26 +30,41 @@ module ApiHelper
       end
     end
 
-    def self.it_handles_invalid_scope
+    def self.it_handles_invalid_scope(description="missing scope")
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
 
-        response 403, 'missing scope' do
+        response 403, description do
           schema '$ref' => '#/components/schemas/Error403'
           run_test!
         end
       end
     end
 
-    def self.it_handles_invalid_scope_with_id(class_sym)
+    def self.it_handles_invalid_scope_with_id(class_sym, description)
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
         let(:id) { create(class_sym).id }
-
-        response 403, 'missing scope' do
+        response 403, description do
           schema '$ref' => '#/components/schemas/Error403'
           run_test!
         end
+      end
+    end
+
+    def self.it_cannot_find_object(description="not found")
+      # 404
+      response '404', description do
+        schema type: :object, properties: {
+          group_order_article: {
+            type: :object,
+            items: {
+              '$ref': '#/components/schemas/GroupOrderArticle'
+            }
+          }
+        }
+        let(:id) { 'invalid' }
+        run_test!
       end
     end
 

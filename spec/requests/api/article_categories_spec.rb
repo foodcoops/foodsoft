@@ -7,18 +7,16 @@ describe 'Article Categories', type: :request do
     get 'article categories' do
       tags 'Category'
       produces 'application/json'
-      parameter name: "page[number]", in: :query, type: :integer, required: false
-      parameter name: "page[size]", in: :query, type: :integer, required: false
-
-      let!(:order_article) { create(:order, article_count: 1).order_articles.first }
-      let!(:stock_article) { create(:stock_article) }
-      let!(:stock_order_article) { create(:stock_order, article_ids: [stock_article.id]).order_articles.first }
+      parameter name: "per_page", in: :query, type: :integer, required: false
+      parameter name: "page", in: :query, type: :integer, required: false
+      let(:page) { 1 }
+      let(:per_page) { 10 }
+      let(:order_article) { create(:order, article_count: 1).order_articles.first }
+      let(:stock_article) { create(:stock_article) }
+      let(:stock_order_article) { create(:stock_order, article_ids: [stock_article.id]).order_articles.first }
 
       response '200', 'success' do
         schema type: :object, properties: {
-          meta: {
-            '$ref' => '#/components/schemas/pagination'
-          },
           article_categories: {
             type: :array,
             items: {
@@ -26,8 +24,6 @@ describe 'Article Categories', type: :request do
             }
           }
         }
-
-        let(:page) { { number: 1, size: 20 } }
         run_test!
       end
 
@@ -36,7 +32,7 @@ describe 'Article Categories', type: :request do
   end
 
   path '/article_categories/{id}' do
-    get 'Retrieves an article category' do
+    get 'find article category by id' do
       tags 'Category'
       produces 'application/json'
       parameter name: :id, in: :path, type: :string

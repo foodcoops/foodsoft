@@ -7,15 +7,13 @@ describe 'Financial Transaction types', type: :request do
     get 'financial transaction types' do
       tags 'Category'
       produces 'application/json'
-      parameter name: "page[number]", in: :query, type: :integer, required: false
-      parameter name: "page[size]", in: :query, type: :integer, required: false
-
-      let!(:financial_transaction_type) { create(:financial_transaction_type) }
+      parameter name: "per_page", in: :query, type: :integer, required: false
+      parameter name: "page", in: :query, type: :integer, required: false
+      let(:page) { 1 }
+      let(:per_page) { 10 }
+      let(:financial_transaction_type) { create(:financial_transaction_type) }
       response '200', 'success' do
         schema type: :object, properties: {
-          meta: {
-            '$ref' => '#/components/schemas/pagination'
-          },
           financial_transaction_type: {
             type: :array,
             items: {
@@ -23,8 +21,6 @@ describe 'Financial Transaction types', type: :request do
             }
           }
         }
-
-        let(:page) { { number: 1, size: 20 } }
         run_test!
       end
 
@@ -33,7 +29,7 @@ describe 'Financial Transaction types', type: :request do
   end
 
   path '/financial_transaction_types/{id}' do
-    get 'Retrieves a financial transaction type' do
+    get 'find financial transaction type by id' do
       tags 'Category'
       produces 'application/json'
       parameter name: :id, in: :path, type: :string

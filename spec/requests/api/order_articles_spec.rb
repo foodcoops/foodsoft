@@ -7,8 +7,10 @@ describe 'Order Articles', type: :request do
     get 'order articles' do
       tags 'Order'
       produces 'application/json'
-      parameter name: 'page[number]', in: :query, type: :integer, required: false
-      parameter name: 'page[size]', in: :query, type: :integer, required: false
+      parameter name: "per_page", in: :query, type: :integer, required: false
+      parameter name: "page", in: :query, type: :integer, required: false
+      let(:page) { 1 }
+      let(:per_page) { 10 }
       parameter name: 'q', in: :query, required: false,
                 description: "'member' show articles ordered by the user's ordergroup, 'all' by all members, and 'supplier' ordered at the supplier",
                 schema: {

@@ -13,11 +13,14 @@ describe 'User', type: :request do
   end
 
   path '/user/financial_transactions' do
-    post 'financial transaction to create' do
+    post 'create new financial transaction (requires enabled self service)' do
       tags 'User', 'FinancialTransaction'
       consumes 'application/json'
       produces 'application/json'
-
+      parameter name: "per_page", in: :query, type: :integer, required: false
+      parameter name: "page", in: :query, type: :integer, required: false
+      let(:page) { 1 }
+      let(:per_page) { 20 }
       parameter name: :financial_transaction, in: :body, schema: {
         type: :object,
         properties: {
@@ -45,7 +48,7 @@ describe 'User', type: :request do
 
       # 403
       # description: user has no ordergroup, is below minimum balance, self service is disabled, or missing scope
-      it_handles_invalid_scope_with_id(:financial_transaction)
+      it_handles_invalid_scope_with_id(:financial_transaction, 'user has no ordergroup, is below minimum balance, self service is disabled, or missing scope')
 
       # TODO: fix 404 and 422
       # 404
@@ -68,10 +71,8 @@ describe 'User', type: :request do
       #   schema '$ref' => '#/components/schemas/Error422'
       #   run_test!
       # end
-
     end
-
-    get 'financial transactions of the members ordergroup' do
+    get "financial transactions of the member's ordergroup" do
       tags 'User', 'Financial Transaction'
       produces 'application/json'
 
@@ -127,7 +128,7 @@ describe 'User', type: :request do
       # 401
       it_handles_invalid_token_with_id(:financial_transaction)
       # 403
-      it_handles_invalid_scope_with_id(:financial_transaction)
+      it_handles_invalid_scope_with_id(:financial_transaction, 'user has no ordergroup or missing scope')
       # 404
       response '404', 'financial transaction not found' do
         schema type: :object, properties: {

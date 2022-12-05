@@ -8,8 +8,10 @@ describe 'Orders', type: :request do
     get 'orders' do
       tags 'Order'
       produces 'application/json'
-      parameter name: 'page[number]', in: :query, type: :integer, required: false
-      parameter name: 'page[size]', in: :query, type: :integer, required: false
+      parameter name: "per_page", in: :query, type: :integer, required: false
+      parameter name: "page", in: :query, type: :integer, required: false
+      let(:page) { 1 }
+      let(:per_page) { 20 }
 
       let(:order) { create(:order) }
 
