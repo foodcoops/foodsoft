@@ -196,7 +196,7 @@ en:
       supplier_category:
         name: Name
         description: Description
-        financial_transaction_class: Financial transacton class
+        financial_transaction_class: Financial transaction class
         bank_account: Bank account
       task:
         created_by: Created by
