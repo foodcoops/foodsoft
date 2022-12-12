@@ -10,6 +10,7 @@ describe 'Config', type: :request do
       let(:api_scopes) { ['config:user'] }
 
       response '200', 'success' do
+        schema type: :object, properties: {}
         run_test!
       end
 
