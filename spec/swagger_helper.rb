@@ -50,17 +50,20 @@ RSpec.configure do |config|
                 description: 'when the order was opened'
               },
               ends: {
-                type: ['string', 'null'],
+                type: :string,
+                nullable: true,
                 format: 'date-time',
                 description: 'when the order will close or was closed'
               },
               boxfill: {
-                type: ['string', 'null'],
+                type: :string,
+                nullable: true,
                 format: 'date-time',
                 description: 'when the order will enter or entered the boxfill phase'
               },
               pickup: {
-                type: ['string', 'null'],
+                type: :string,
+                nullable: true,
                 format: :date,
                 description: 'pickup date'
               },
@@ -88,7 +91,8 @@ RSpec.configure do |config|
                 description: 'id of supplier, or 0 for stock articles'
               },
               supplier_name: {
-                type: %w[string null],
+                type: :string,
+                nullable: true,
                 description: 'name of the supplier, or null for stock articles'
               },
               unit: {
@@ -100,15 +104,18 @@ RSpec.configure do |config|
                 description: 'units can only be ordered from the supplier in multiples of unit_quantity'
               },
               note: {
-                type: %w[string null],
+                type: :string,
+                nullable: true,
                 description: 'generic note'
               },
               manufacturer: {
-                type: %w[string null],
+                type: :string,
+                nullable: true,
                 description: 'manufacturer'
               },
               origin: {
-                type: %w[string null],
+                type: :string,
+                nullable: true,
                 description: 'origin, preferably (starting with a) 2-letter ISO country code'
               },
               article_category_id: {
@@ -187,10 +194,12 @@ RSpec.configure do |config|
               },
               user_id: {
                 type: :integer,
+                nullable: true,
                 description: 'id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)'
               },
               user_name: {
                 type: :string,
+                nullable: true,
                 description: 'name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)'
               },
               financial_transaction_type_name: {
@@ -244,9 +253,37 @@ RSpec.configure do |config|
               },
               name: {
                 type: :string
+              },
+              name_short: {
+                type: :string,
+                nullable: true,
+                description: 'short name (used for bank transfers)'
+              },
+              bank_account_id: {
+                type: :integer,
+                nullable: true,
+                description: 'id of the bank account used for this transaction type'
+              },
+              bank_account_name: {
+                type: :string,
+                nullable: true,
+                description: 'name of the bank account used for this transaction type'
+              },
+              bank_account_iban: {
+                type: :string,
+                nullable: true,
+                description: 'IBAN of the bank account used for this transaction type'
+              },
+              financial_transaction_class_id: {
+                type: :integer,
+                description: 'id of the class of the transaction'
+              },
+              financial_transaction_class_name: {
+                type: :string,
+                description: 'name of the class of the transaction'
               }
             },
-            required: %w[id name financial_transaction_class]
+            required: %w[id name financial_transaction_class_id financial_transaction_class_name]
           },
           GroupOrderArticleForUpdate: {
             type: :object,

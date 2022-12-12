@@ -9,11 +9,12 @@ describe 'Financial Transaction types', type: :request do
       produces 'application/json'
       parameter name: "per_page", in: :query, type: :integer, required: false
       parameter name: "page", in: :query, type: :integer, required: false
-      let(:page) { 1 }
-      let(:per_page) { 10 }
       let(:financial_transaction_type) { create(:financial_transaction_type) }
       response '200', 'success' do
         schema type: :object, properties: {
+          meta: {
+            '$ref' => '#/components/schemas/Meta'
+          },
           financial_transaction_type: {
             type: :array,
             items: {
@@ -43,36 +44,12 @@ describe 'Financial Transaction types', type: :request do
             }
           }
         }
-        let(:id) { FinancialTransactionType.create(name: 'TestType').id }
+        let(:id) { create(:financial_transaction_type).id }
         run_test!
       end
 
-      response '401', 'not logged in' do
-        schema type: :object, properties: {
-          financial_transaction_types: {
-            type: :array,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransactionType'
-            }
-          }
-        }
-        let(:Authorization) { 'abc' }
-        let(:id) { FinancialTransactionType.create(name: 'TestType').id }
-        run_test!
-      end
-
-      response '404', 'financial transaction type not found' do
-        schema type: :object, properties: {
-          financial_transaction_types: {
-            type: :array,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransactionType'
-            }
-          }
-        }
-        let(:id) { 'invalid' }
-        run_test!
-      end
+      it_handles_invalid_token_with_id :financial_transaction_type
+      it_cannot_find_object 'financial transaction type not found'
     end
   end
 end
