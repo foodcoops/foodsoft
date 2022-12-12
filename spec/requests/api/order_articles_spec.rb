@@ -9,17 +9,8 @@ describe 'Order Articles', type: :request do
       produces 'application/json'
       parameter name: "per_page", in: :query, type: :integer, required: false
       parameter name: "page", in: :query, type: :integer, required: false
-      parameter name: 'q', in: :query, required: false,
-                description: "'member' show articles ordered by the user's ordergroup, 'all' by all members, and 'supplier' ordered at the supplier",
-                schema: {
-                  type: :object,
-                  properties: {
-                    ordered: {
-                      type: :string,
-                      enum: %w[member all supplier]
-                    }
-                  }
-                }
+      q_ordered_url_param
+
       let(:api_scopes) { ['orders:read', 'orders:write'] }
       let(:order) { create(:order, article_count: 4) }
       let(:order_articles) { order.order_articles }

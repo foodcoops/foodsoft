@@ -351,6 +351,15 @@ RSpec.configure do |config|
               }
             ]
           },
+          q_ordered: {
+            type: :object,
+            properties: {
+              ordered: {
+                type: :string,
+                enum: %w[member all supplier]
+              }
+            }
+          },
           Meta: {
             type: :object,
             properties: {
