@@ -9,15 +9,15 @@ describe 'Order Articles', type: :request do
       produces 'application/json'
       parameter name: "per_page", in: :query, type: :integer, required: false
       parameter name: "page", in: :query, type: :integer, required: false
-      let(:page) { 1 }
-      let(:per_page) { 10 }
       parameter name: 'q', in: :query, required: false,
                 description: "'member' show articles ordered by the user's ordergroup, 'all' by all members, and 'supplier' ordered at the supplier",
                 schema: {
                   type: :object,
-                  ordered: {
-                    type: :string,
-                    enum: %w[member all supplier]
+                  properties: {
+                    ordered: {
+                      type: :string,
+                      enum: %w[member all supplier]
+                    }
                   }
                 }
       let(:api_scopes) { ['orders:read', 'orders:write'] }
@@ -106,10 +106,7 @@ describe 'Order Articles', type: :request do
       tags 'Order'
       produces 'application/json'
       parameter name: 'id', in: :path, type: :integer, minimum: 1, required: true
-
       let(:api_scopes) { ['orders:read', 'orders:write'] }
-      let(:order) { create(:order, article_count: 1) }
-      let(:id) { order.order_articles.first.id }
 
       response '200', 'success' do
         schema type: :object, properties: {
@@ -117,11 +114,14 @@ describe 'Order Articles', type: :request do
             '$ref': '#/components/schemas/OrderArticle'
           }
         }
+        let(:order) { create(:order, article_count: 1) }
+        let(:id) { order.order_articles.first.id }
 
         run_test!
       end
 
       it_handles_invalid_token_and_scope
+      it_cannot_find_object 'order article not found'
     end
   end
 end
