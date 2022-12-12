@@ -12,9 +12,7 @@ describe 'Financial Transaction types', type: :request do
       let(:financial_transaction_type) { create(:financial_transaction_type) }
       response '200', 'success' do
         schema type: :object, properties: {
-          meta: {
-            '$ref' => '#/components/schemas/Meta'
-          },
+          meta: { '$ref' => '#/components/schemas/Meta' },
           financial_transaction_type: {
             type: :array,
             items: {

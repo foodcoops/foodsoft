@@ -25,13 +25,7 @@ describe 'User', type: :request do
       let(:per_page) { 20 }
       response '200', 'success' do
         schema type: :object, properties: {
-          meta: {
-            type: :object,
-            items:
-            {
-              '$ref': '#/components/schemas/Meta'
-            }
-          },
+          meta: { '$ref': '#/components/schemas/Meta' },
           group_order_article: {
             type: :array,
             items: {

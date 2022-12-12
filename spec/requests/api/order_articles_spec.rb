@@ -33,9 +33,7 @@ describe 'Order Articles', type: :request do
 
       response '200', 'success' do
         schema type: :object, properties: {
-          meta: {
-            '$ref' => '#/components/schemas/Meta'
-          },
+          meta: { '$ref' => '#/components/schemas/Meta' },
           order_articles: {
             type: :array,
             items: {

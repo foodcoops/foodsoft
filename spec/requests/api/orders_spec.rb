@@ -10,16 +10,12 @@ describe 'Orders', type: :request do
       produces 'application/json'
       parameter name: "per_page", in: :query, type: :integer, required: false
       parameter name: "page", in: :query, type: :integer, required: false
-      let(:page) { 1 }
-      let(:per_page) { 20 }
 
       let(:order) { create(:order) }
 
       response '200', 'success' do
         schema type: :object, properties: {
-          meta: {
-            '$ref' => '#/components/schemas/Meta'
-          },
+          meta: { '$ref' => '#/components/schemas/Meta' },
           ordes: {
             type: :array,
             items: {

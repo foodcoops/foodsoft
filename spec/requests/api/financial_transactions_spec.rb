@@ -16,9 +16,7 @@ describe 'Financial Transaction', type: :request do
 
       response '200', 'success' do
         schema type: :object, properties: {
-          meta: {
-            '$ref' => '#/components/schemas/Meta'
-          },
+          meta: { '$ref' => '#/components/schemas/Meta' },
           financial_transaction: {
             type: :array,
             items: {
