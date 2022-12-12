@@ -183,14 +183,13 @@ RSpec.configure do |config|
                     type: :integer
                   },
                   amount: {
-                    type: :integer,
+                    type: :float,
                     description: 'amount credited (negative for a debit transaction)'
                   },
-                  financial_transaction_type_id:
-                {
-                  type: :integer,
-                  description: 'id of the type of the transaction'
-                },
+                  financial_transaction_type_id: {
+                    type: :integer,
+                    description: 'id of the type of the transaction'
+                  },
                   note: {
                     type: :string,
                     description: 'note entered with the transaction'
@@ -223,7 +222,7 @@ RSpec.configure do |config|
             type: :object,
             properties: {
               amount: {
-                type: :integer,
+                type: :float,
                 description: 'amount credited (negative for a debit transaction)'
               },
               financial_transaction_type_id:
