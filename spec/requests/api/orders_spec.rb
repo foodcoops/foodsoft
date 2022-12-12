@@ -39,7 +39,8 @@ describe 'Orders', type: :request do
     get 'Order' do
       tags 'Order'
       produces 'application/json'
-      parameter name: 'id', in: :path, type: :integer, minimum: 1, required: true
+      id_url_param
+
       let(:order) { create(:order) }
       let(:id) { order.id }
 

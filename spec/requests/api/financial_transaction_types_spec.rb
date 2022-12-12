@@ -33,7 +33,7 @@ describe 'Financial Transaction types', type: :request do
     get 'find financial transaction type by id' do
       tags 'Category'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      id_url_param
 
       response '200', 'financial transaction type found' do
         schema type: :object, properties: {

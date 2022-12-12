@@ -37,7 +37,7 @@ describe 'Financial Transaction', type: :request do
     get 'Retrieves a financial transaction ' do
       tags 'Financial Transaction'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      id_url_param
 
       response '200', 'financial transaction found' do
         schema type: :object, properties: {

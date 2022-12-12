@@ -88,7 +88,7 @@ describe 'User', type: :request do
     get 'find financial transaction by id' do
       tags 'User', 'Financial Transaction'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      id_url_param
 
       response '200', 'success' do
         schema type: :object, properties: {

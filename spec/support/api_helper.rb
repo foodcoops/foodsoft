@@ -67,5 +67,9 @@ module ApiHelper
       it_handles_invalid_token(*args)
       it_handles_invalid_scope(*args)
     end
+
+    def self.id_url_param
+      parameter name: :id, in: :path, type: :integer, required: true
+    end
   end
 end

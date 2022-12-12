@@ -33,7 +33,7 @@ describe 'Article Categories', type: :request do
     get 'find article category by id' do
       tags 'Category'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      id_url_param
 
       response '200', 'article category found' do
         schema type: :object, properties: {

@@ -35,7 +35,7 @@ describe 'Financial Transaction Classes', type: :request do
     get 'Retrieves a financial transaction class' do
       tags 'Category'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      id_url_param
 
       response '200', 'financial transaction class found' do
         schema type: :object, properties: {

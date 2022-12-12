@@ -105,7 +105,7 @@ describe 'Order Articles', type: :request do
     get 'order articles' do
       tags 'Order'
       produces 'application/json'
-      parameter name: 'id', in: :path, type: :integer, minimum: 1, required: true
+      id_url_param
       let(:api_scopes) { ['orders:read', 'orders:write'] }
 
       response '200', 'success' do

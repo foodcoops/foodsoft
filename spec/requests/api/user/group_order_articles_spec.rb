@@ -107,9 +107,8 @@ describe 'User', type: :request do
     get 'find group order article by id' do
       tags 'User', 'GroupOrderArticle'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      id_url_param
 
-      let(:id) { goa.id }
       response '200', 'success' do
         schema type: :object, properties: {
           group_order_article: {
@@ -119,6 +118,7 @@ describe 'User', type: :request do
             }
           }
         }
+        let(:id) { goa.id }
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(data['group_order_article']['id']).to eq(goa.id)
@@ -155,7 +155,7 @@ describe 'User', type: :request do
       tags 'User', 'GroupOrderArticle'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      id_url_param
 
       parameter name: :group_order_article, in: :body, schema: {
         type: :object,
@@ -219,11 +219,9 @@ describe 'User', type: :request do
       tags 'User', 'Order'
       consumes 'application/json'
       produces 'application/json'
+      id_url_param
       let(:api_scopes) { ['group_orders:user'] }
 
-      parameter name: :id, in: :path, type: :string
-
-      let(:id) { goa.id }
       response '200', 'success' do
         schema type: :object, properties: {
           group_order_article: {
@@ -233,6 +231,7 @@ describe 'User', type: :request do
             }
           }
         }
+        let(:id) { goa.id }
         run_test!
       end
 
