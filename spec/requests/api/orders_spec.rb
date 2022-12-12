@@ -41,7 +41,7 @@ describe 'Orders', type: :request do
 
       response '200', 'success' do
         schema type: :object, properties: {
-          '$ref': '#/components/schemas/Order'
+          order: { '$ref' => '#/components/schemas/Order' }
         }
         let(:id) { order.id }
 
