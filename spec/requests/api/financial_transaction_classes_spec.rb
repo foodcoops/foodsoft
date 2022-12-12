@@ -7,16 +7,15 @@ describe 'Financial Transaction Classes', type: :request do
     get 'financial transaction classes' do
       tags 'Category'
       produces 'application/json'
-
       parameter name: "per_page", in: :query, type: :integer, required: false
       parameter name: "page", in: :query, type: :integer, required: false
-      let(:page) { 1 }
-      let(:per_page) { 10 }
-
       let(:financial_transaction_class) { create(:financial_transaction_class) }
 
       response '200', 'success' do
         schema type: :object, properties: {
+          meta: {
+            '$ref' => '#/components/schemas/Meta'
+          },
           financial_transaction_class: {
             type: :array,
             items: {
@@ -47,36 +46,12 @@ describe 'Financial Transaction Classes', type: :request do
             }
           }
         }
-        let(:id) { FinancialTransactionClass.create(name: 'TestTransaction').id }
+        let(:id) { create(:financial_transaction_class).id }
         run_test!
       end
 
-      response '401', 'not logged in' do
-        schema type: :object, properties: {
-          financial_transaction_classes: {
-            type: :array,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransactionClass'
-            }
-          }
-        }
-        let(:Authorization) { 'abc' }
-        let(:id) { FinancialTransactionClass.create(name: 'TestTransaction').id }
-        run_test!
-      end
-
-      response '404', 'financial transaction class not found' do
-        schema type: :object, properties: {
-          financial_transaction_classes: {
-            type: :array,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransactionClass'
-            }
-          }
-        }
-        let(:id) { 'invalid' }
-        run_test!
-      end
+      it_handles_invalid_token_with_id :financial_transaction
+      it_cannot_find_object 'financial transaction class not found'
     end
   end
 end
