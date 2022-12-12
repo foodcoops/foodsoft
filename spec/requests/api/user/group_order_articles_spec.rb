@@ -21,8 +21,8 @@ describe 'User', type: :request do
       produces 'application/json'
       parameter name: "per_page", in: :query, type: :integer, required: false
       parameter name: "page", in: :query, type: :integer, required: false
-      let(:page) { 1 }
-      let(:per_page) { 20 }
+      q_ordered_url_param
+
       response '200', 'success' do
         schema type: :object, properties: {
           meta: { '$ref': '#/components/schemas/Meta' },
@@ -40,35 +40,27 @@ describe 'User', type: :request do
         end
       end
 
-      # response 401
       it_handles_invalid_token
-
-      # response 403
-      it_handles_invalid_scope('user has no ordergroup or missing scope')
+      it_handles_invalid_scope 'user has no ordergroup or missing scope'
     end
+
     post 'create new group order article' do
       tags 'User', 'Order'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :group_order_article, in: :body, schema: {
-        type: :object,
-        description: 'group order article to create',
-        properties: {
-          order_article_id: { type: :integer },
-          quantity: { type: :integer },
-          tolerance: { type: :string }
-        },
-        required: true
-      }
+      parameter name: :group_order_article, in: :body,
+                description: 'group order article to create',
+                required: true,
+                schema: { '$ref': '#/components/schemas/GroupOrderArticleForCreate' }
 
       let(:group_order_article) { { order_article_id: order_articles.last.id, quantity: 1, tolerance: 2 } }
       response '200', 'success' do
         schema type: :object, properties: {
-          group_order_article_for_create: {
-            type: :object,
-            items: {
-              '$ref': '#/components/schemas/GroupOrderArticleForCreate'
-            }
+          group_order_article: {
+            '$ref': '#/components/schemas/GroupOrderArticle'
+          },
+          order_article: {
+            '$ref': '#/components/schemas/OrderArticle'
           }
         }
         run_test!
@@ -77,7 +69,6 @@ describe 'User', type: :request do
       it_handles_invalid_token_with_id
       it_handles_invalid_scope_with_id 'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope'
 
-      # 404
       response '404', 'order article not found in open orders' do
         let(:group_order_article) { { order_article_id: 'invalid', quantity: 1, tolerance: 2 } }
         schema '$ref' => '#/components/schemas/Error404'
@@ -95,19 +86,20 @@ describe 'User', type: :request do
 
   path '/user/group_order_articles/{id}' do
     get 'find group order article by id' do
-      tags 'User', 'GroupOrderArticle'
+      tags 'User', 'Order'
       produces 'application/json'
       id_url_param
 
       response '200', 'success' do
         schema type: :object, properties: {
           group_order_article: {
-            type: :object,
-            items: {
-              '$ref': '#/components/schemas/GroupOrderArticle'
-            }
+            '$ref': '#/components/schemas/GroupOrderArticle'
+          },
+          order_article: {
+            '$ref': '#/components/schemas/OrderArticle'
           }
         }
+
         let(:id) { goa.id }
         run_test! do |response|
           data = JSON.parse(response.body)
@@ -121,21 +113,15 @@ describe 'User', type: :request do
     end
 
     patch 'update a group order article (but delete if quantity and tolerance are zero)' do
-      tags 'User', 'GroupOrderArticle'
+      tags 'User', 'Order'
       consumes 'application/json'
       produces 'application/json'
       id_url_param
+      parameter name: :group_order_article, in: :body,
+                description: 'group order article update',
+                required: true,
+                schema: { '$ref': '#/components/schemas/GroupOrderArticleForUpdate' }
 
-      parameter name: :group_order_article, in: :body, schema: {
-        type: :object,
-        description: 'group order article to create',
-        properties: {
-          order_article_id: { type: :integer },
-          quantity: { type: :integer },
-          tolerance: { type: :string }
-        },
-        required: true
-      }
       let(:id) { goa.id }
       let(:group_order_article) { { order_article_id: goa.order_article_id, quantity: 2, tolerance: 2 } }
 
@@ -144,7 +130,7 @@ describe 'User', type: :request do
           group_order_article_for_create: {
             type: :object,
             items: {
-              '$ref': '#/components/schemas/GroupOrderArticleForUpdate'
+
             }
           }
         }
