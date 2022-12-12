@@ -183,7 +183,8 @@ RSpec.configure do |config|
                     type: :integer
                   },
                   amount: {
-                    type: :float,
+                    type: :number,
+                    format: :float,
                     description: 'amount credited (negative for a debit transaction)'
                   },
                   financial_transaction_type_id: {
@@ -222,7 +223,8 @@ RSpec.configure do |config|
             type: :object,
             properties: {
               amount: {
-                type: :float,
+                type: :number,
+                format: :float,
                 description: 'amount credited (negative for a debit transaction)'
               },
               financial_transaction_type_id:
@@ -305,37 +307,49 @@ RSpec.configure do |config|
             }
           },
           GroupOrderArticleForCreate: {
-            type: :object,
-            properties: {
-              order_article_id:
+            allOf: [
+              { '$ref': '#/components/schemas/GroupOrderArticleForUpdate' },
               {
-                type: :integer,
-                description: 'id of order article'
+                type: :object,
+                properties: {
+                  order_article_id:
+                  {
+                    type: :integer,
+                    description: 'id of order article'
+                  }
+                }
               }
-            }
+            ]
           },
           GroupOrderArticle: {
-            type: :object,
-            properties: {
-              id: {
-                type: :integer
-              },
-              result: {
-                type: :float,
-                description: 'number of units the users ordergroup will receive or has received'
-              },
-              total_price:
+            allOf: [
+              { '$ref': '#/components/schemas/GroupOrderArticleForCreate' },
               {
-                type: :float,
-                description: 'total price of this group order article'
-              },
-              order_article_id:
-              {
-                type: :integer,
-                description: 'id of order article'
+                type: :object,
+                properties: {
+                  id: {
+                    type: :integer
+                  },
+                  result: {
+                    type: :number,
+                    format: :float,
+                    description: 'number of units the users ordergroup will receive or has received'
+                  },
+                  total_price:
+                  {
+                    type: :number,
+                    format: :float,
+                    description: 'total price of this group order article'
+                  },
+                  order_article_id:
+                  {
+                    type: :integer,
+                    description: 'id of order article'
+                  }
+                },
+                required: %w[order_article_id]
               }
-            },
-            required: %w[order_article_id]
+            ]
           },
           Meta: {
             type: :object,
