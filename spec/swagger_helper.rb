@@ -174,45 +174,50 @@ RSpec.configure do |config|
             required: %w[id name]
           },
           FinancialTransaction: {
-            type: :object,
-            properties: {
-              id: {
-                type: :integer
-              },
-              amount: {
-                type: :integer,
-                description: 'amount credited (negative for a debit transaction)'
-              },
-              financial_transaction_type_id:
+            allOf: [
+              { '$ref': '#/components/schemas/FinancialTransactionForCreate' },
               {
-                type: :integer,
-                description: 'id of the type of the transaction'
-              },
-              note: {
-                type: :string,
-                description: 'note entered with the transaction'
-              },
-              user_id: {
-                type: :integer,
-                nullable: true,
-                description: 'id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)'
-              },
-              user_name: {
-                type: :string,
-                nullable: true,
-                description: 'name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)'
-              },
-              financial_transaction_type_name: {
-                type: :string,
-                description: 'name of the type of the transaction'
-              },
-              created_at: {
-                type: :string,
-                format: :datetime,
-                description: 'when the transaction was entered'
+                type: :object,
+                properties: {
+                  id: {
+                    type: :integer
+                  },
+                  amount: {
+                    type: :integer,
+                    description: 'amount credited (negative for a debit transaction)'
+                  },
+                  financial_transaction_type_id:
+                {
+                  type: :integer,
+                  description: 'id of the type of the transaction'
+                },
+                  note: {
+                    type: :string,
+                    description: 'note entered with the transaction'
+                  },
+                  user_id: {
+                    type: :integer,
+                    nullable: true,
+                    description: 'id of user who entered the transaction (may be <tt>null</tt> for deleted users or 0 for a system user)'
+                  },
+                  user_name: {
+                    type: :string,
+                    nullable: true,
+                    description: 'name of user who entered the transaction (may be <tt>null</tt> or empty string for deleted users or system users)'
+                  },
+                  financial_transaction_type_name: {
+                    type: :string,
+                    description: 'name of the type of the transaction'
+                  },
+                  created_at: {
+                    type: :string,
+                    format: 'date-time',
+                    description: 'when the transaction was entered'
+                  }
+                },
+                required: %w[id user_id user_name financial_transaction_type_name created_at]
               }
-            },
-            required: %w[amount note user_id]
+            ]
           },
           FinancialTransactionForCreate: {
             type: :object,

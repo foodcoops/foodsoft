@@ -17,10 +17,7 @@ describe 'User', type: :request do
       tags "Financial Transaction"
       consumes 'application/json'
       produces 'application/json'
-      parameter name: "per_page", in: :query, type: :integer, required: false
-      parameter name: "page", in: :query, type: :integer, required: false
-      let(:page) { 1 }
-      let(:per_page) { 20 }
+
       parameter name: :financial_transaction, in: :body, schema: {
         type: :object,
         properties: {
@@ -29,62 +26,46 @@ describe 'User', type: :request do
           note: { type: :string }
         }
       }
+
       let(:financial_transaction) { { amount: 3, financial_transaction_type_id: create(:financial_transaction_type).id, note: 'lirum larum' } }
 
       response '200', 'success' do
         schema type: :object, properties: {
-          financial_transaction_for_create: {
-            type: :object,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransactionForCreate'
-            }
-          }
+          financial_transaction: { '$ref': '#/components/schemas/FinancialTransaction' }
         }
         run_test!
       end
 
-      # 401
-      it_handles_invalid_token_with_id(:financial_transaction)
-
-      # 403
-      # description: user has no ordergroup, is below minimum balance, self service is disabled, or missing scope
+      it_handles_invalid_token_with_id :financial_transaction
       it_handles_invalid_scope_with_id(:financial_transaction, 'user has no ordergroup, is below minimum balance, self service is disabled, or missing scope')
 
-      # TODO: fix 404 and 422
-      # 404
-      # Type not found
-      # description: financial transaction type not found
-      # Should be 404, but is 200 with validation errors..
-      #      Rswag::Specs::UnexpectedResponse:
-      #  Expected response code '404' to match '200'
-      #  Response body: {"error":"not_found","error_description":"Couldn't find FinancialTransactionType with 'id'=invalid"}
-      # let(:financial_transaction) { { amount: 3, financial_transaction_type_id: 'invalid', note: 'lirum larum' } }
-      # response '404', 'invalid parameter value' do
-      #  schema '$ref' => '#/components/schemas/Error404'
-      #  run_test!
-      # end
+      response '404', 'financial transaction type not found' do
+        schema '$ref' => '#/components/schemas/Error404'
+        let(:financial_transaction) { { amount: 3, financial_transaction_type_id: 'invalid', note: 'lirum larum' } }
+        run_test!
+      end
 
-      # 422
+      # TODO: fix controller to actually send a 422 for invalid params?
+      # Expected response code '200' to match '422'
+      # Response body: {"financial_transaction":{"id":316,"user_id":599,"user_name":"Lisbeth ","amount":-3.0,"note":"-2","created_at":"2022-12-12T13:05:32.000+01:00","financial_transaction_type_id":346,"financial_transaction_type_name":"aut est iste #9"}}
+      #
       # response '422', 'invalid parameter value' do
+      #   # schema '$ref' => '#/components/schemas/Error422'
       #   let(:financial_transaction) { { amount: -3, financial_transaction_type_id: create(:financial_transaction_type).id, note: -2 } }
-
-      #   schema '$ref' => '#/components/schemas/Error422'
       #   run_test!
       # end
     end
+
     get "financial transactions of the member's ordergroup" do
       tags 'User', 'Financial Transaction'
       produces 'application/json'
+      parameter name: "per_page", in: :query, type: :integer, required: false
+      parameter name: "page", in: :query, type: :integer, required: false
+
 
       response '200', 'success' do
         schema type: :object, properties: {
-          meta: {
-            type: :object,
-            items:
-            {
-              '$ref': '#/components/schemas/Meta'
-            }
-          },
+          meta: { '$ref': '#/components/schemas/Meta' },
           financial_transaction: {
             type: :array,
             items: {
@@ -98,7 +79,7 @@ describe 'User', type: :request do
           expect(data['financial_transactions'].first['id']).to eq(ft.id)
         end
       end
-      # responses 401 & 403
+
       it_handles_invalid_token_and_scope
     end
   end
@@ -125,23 +106,9 @@ describe 'User', type: :request do
         end
       end
 
-      # 401
-      it_handles_invalid_token_with_id(:financial_transaction)
-      # 403
-      it_handles_invalid_scope_with_id(:financial_transaction, 'user has no ordergroup or missing scope')
-      # 404
-      response '404', 'financial transaction not found' do
-        schema type: :object, properties: {
-          financial_transaction: {
-            type: :object,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransaction'
-            }
-          }
-        }
-        let(:id) { 'invalid' }
-        run_test!
-      end
+      it_handles_invalid_token_with_id :financial_transaction
+      it_handles_invalid_scope_with_id :financial_transaction, 'user has no ordergroup or missing scope'
+      it_cannot_find_object 'financial transaction not found'
     end
   end
 end
