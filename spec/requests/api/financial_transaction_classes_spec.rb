@@ -50,7 +50,7 @@ describe 'Financial Transaction Classes', type: :request do
         run_test!
       end
 
-      it_handles_invalid_token_with_id :financial_transaction
+      it_handles_invalid_token_with_id
       it_cannot_find_object 'financial transaction class not found'
     end
   end

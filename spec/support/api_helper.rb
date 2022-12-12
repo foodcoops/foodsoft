@@ -18,10 +18,10 @@ module ApiHelper
       end
     end
 
-    def self.it_handles_invalid_token_with_id(class_sym)
+    def self.it_handles_invalid_token_with_id
       context 'with invalid access token' do
         let(:Authorization) { 'abc' }
-        let(:id) { create(class_sym).id }
+        let(:id) { 42 } # id doesn't matter here
 
         response 401, 'not logged-in' do
           schema '$ref' => '#/components/schemas/Error401'
@@ -41,10 +41,10 @@ module ApiHelper
       end
     end
 
-    def self.it_handles_invalid_scope_with_id(class_sym, description = 'missing scope')
+    def self.it_handles_invalid_scope_with_id(description = 'missing scope')
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
-        let(:id) { create(class_sym).id }
+        let(:id) { 42 } # id doesn't matter here
 
         response 403, description do
           schema '$ref' => '#/components/schemas/Error403'
@@ -55,7 +55,6 @@ module ApiHelper
 
     def self.it_cannot_find_object(description = 'not found')
       let(:id) { 'invalid' }
-
 
       response 404, description do
         schema '$ref' => '#/components/schemas/Error404'

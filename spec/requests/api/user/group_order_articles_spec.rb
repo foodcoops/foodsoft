@@ -80,12 +80,8 @@ describe 'User', type: :request do
         run_test!
       end
 
-      # 401
-      it_handles_invalid_token_with_id(:group_order_article)
-
-      # 403
-      # description: user has no ordergroup, is below minimum balance, self service is disabled, or missing scope
-      it_handles_invalid_scope_with_id(:group_order_article, 'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope')
+      it_handles_invalid_token_with_id
+      it_handles_invalid_scope_with_id 'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope'
 
       # 404
       response '404', 'order article not found in open orders' do
@@ -125,32 +121,11 @@ describe 'User', type: :request do
         end
       end
 
-      # 401
-      response 401, 'not logged-in' do
-        let(:Authorization) { 'abc' }
-        schema '$ref' => '#/components/schemas/Error401'
-        run_test!
-      end
-      # 403
-      response 403, 'user has no ordergroup or missing scope' do
-        let(:api_scopes) { ['none'] }
-        schema '$ref' => '#/components/schemas/Error403'
-        run_test!
-      end
-      # 404
-      response '404', 'group order article not found' do
-        schema type: :object, properties: {
-          group_order_article: {
-            type: :object,
-            items: {
-              '$ref': '#/components/schemas/GroupOrderArticle'
-            }
-          }
-        }
-        let(:id) { 'invalid' }
-        run_test!
-      end
+      it_handles_invalid_scope_with_id
+      it_handles_invalid_token_with_id
+      it_cannot_find_object 'group order article not found'
     end
+
     patch 'update a group order article (but delete if quantity and tolerance are zero)' do
       tags 'User', 'GroupOrderArticle'
       consumes 'application/json'
@@ -235,12 +210,7 @@ describe 'User', type: :request do
         run_test!
       end
 
-      # 401
-      response 401, 'not logged-in' do
-        let(:Authorization) { 'abc' }
-        schema '$ref' => '#/components/schemas/Error401'
-        run_test!
-      end
+      it_handles_invalid_token_with_id
 
       # 403
       response 403, 'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope' do
@@ -249,8 +219,7 @@ describe 'User', type: :request do
         run_test!
       end
 
-      # 404
-      it_cannot_find_object('order article not found in open orders')
+      it_cannot_find_object 'order article not found in open orders'
     end
   end
 end

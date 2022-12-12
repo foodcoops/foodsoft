@@ -48,7 +48,7 @@ describe 'Financial Transaction types', type: :request do
         run_test!
       end
 
-      it_handles_invalid_token_with_id :financial_transaction_type
+      it_handles_invalid_token_with_id
       it_cannot_find_object 'financial transaction type not found'
     end
   end

@@ -47,7 +47,7 @@ describe 'Article Categories', type: :request do
         let(:id) { create(:article_category, name: 'dairy').id }
         run_test!
       end
-      it_handles_invalid_token_with_id(:article_category)
+      it_handles_invalid_token_with_id
       it_cannot_find_object
     end
   end

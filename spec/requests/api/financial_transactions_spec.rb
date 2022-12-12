@@ -51,8 +51,8 @@ describe 'Financial Transaction', type: :request do
         let(:id) { FinancialTransaction.create(user: user).id }
         run_test!
       end
-      it_handles_invalid_token_with_id :financial_transaction
-      it_handles_invalid_scope_with_id :financial_transaction
+      it_handles_invalid_token_with_id
+      it_handles_invalid_scope_with_id
       it_cannot_find_object 'financial transaction not found'
     end
   end

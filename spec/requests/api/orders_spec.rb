@@ -42,17 +42,20 @@ describe 'Orders', type: :request do
       id_url_param
 
       let(:order) { create(:order) }
-      let(:id) { order.id }
 
       response '200', 'success' do
         schema type: :object, properties: {
           '$ref': '#/components/schemas/Order'
         }
+        let(:id) { order.id }
 
         run_test! do |response|
           expect(JSON.parse(response.body)['order']['id']).to eq order.id
         end
       end
+
+      it_handles_invalid_token_and_scope
+      it_cannot_find_object 'order not found'
     end
   end
 end

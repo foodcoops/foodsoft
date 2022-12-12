@@ -36,8 +36,8 @@ describe 'User', type: :request do
         run_test!
       end
 
-      it_handles_invalid_token_with_id :financial_transaction
-      it_handles_invalid_scope_with_id(:financial_transaction, 'user has no ordergroup, is below minimum balance, self service is disabled, or missing scope')
+      it_handles_invalid_token_with_id
+      it_handles_invalid_scope_with_id 'user has no ordergroup, is below minimum balance, self service is disabled, or missing scope'
 
       response '404', 'financial transaction type not found' do
         schema '$ref' => '#/components/schemas/Error404'
@@ -106,8 +106,8 @@ describe 'User', type: :request do
         end
       end
 
-      it_handles_invalid_token_with_id :financial_transaction
-      it_handles_invalid_scope_with_id :financial_transaction, 'user has no ordergroup or missing scope'
+      it_handles_invalid_token_with_id
+      it_handles_invalid_scope_with_id 'user has no ordergroup or missing scope'
       it_cannot_find_object 'financial transaction not found'
     end
   end
