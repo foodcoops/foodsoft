@@ -26,11 +26,10 @@ describe 'Financial Transaction', type: :request do
             }
           }
         }
-        let(:page) { 1 }
-        let(:per_page) { 10 }
+
         run_test!
       end
-      it_handles_invalid_scope
+      it_handles_invalid_token_and_scope
     end
   end
 
@@ -52,22 +51,9 @@ describe 'Financial Transaction', type: :request do
         let(:id) { FinancialTransaction.create(user: user).id }
         run_test!
       end
-      it_handles_invalid_scope_with_id(:financial_transaction, 'missing scope or no permission')
-
-      response '404', 'financial transaction not found' do
-        schema type: :object, properties: {
-          financial_transaction: {
-            type: :array,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransaction'
-            }
-          }
-        }
-        let(:id) { 'invalid' }
-        run_test!
-      end
-      # response 403
-      it_handles_invalid_scope_with_id(:financial_transaction, 'missing scope or no permission')
+      it_handles_invalid_token_with_id :financial_transaction
+      it_handles_invalid_scope_with_id :financial_transaction
+      it_cannot_find_object 'financial transaction not found'
     end
   end
 end

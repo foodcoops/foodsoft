@@ -30,7 +30,7 @@ module ApiHelper
       end
     end
 
-    def self.it_handles_invalid_scope(description = "missing scope")
+    def self.it_handles_invalid_scope(description = 'missing scope')
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
 
@@ -41,7 +41,7 @@ module ApiHelper
       end
     end
 
-    def self.it_handles_invalid_scope_with_id(class_sym, description)
+    def self.it_handles_invalid_scope_with_id(class_sym, description = 'missing scope')
       context 'with invalid scope' do
         let(:api_scopes) { ['none'] }
         let(:id) { create(class_sym).id }
@@ -53,7 +53,7 @@ module ApiHelper
       end
     end
 
-    def self.it_cannot_find_object(description = "not found")
+    def self.it_cannot_find_object(description = 'not found')
       let(:id) { 'invalid' }
 
 
