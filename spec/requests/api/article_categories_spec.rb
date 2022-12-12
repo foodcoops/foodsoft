@@ -9,8 +9,6 @@ describe 'Article Categories', type: :request do
       produces 'application/json'
       parameter name: "per_page", in: :query, type: :integer, required: false
       parameter name: "page", in: :query, type: :integer, required: false
-      let(:page) { 1 }
-      let(:per_page) { 10 }
       let(:order_article) { create(:order, article_count: 1).order_articles.first }
       let(:stock_article) { create(:stock_article) }
       let(:stock_order_article) { create(:stock_order, article_ids: [stock_article.id]).order_articles.first }
@@ -46,36 +44,11 @@ describe 'Article Categories', type: :request do
             }
           }
         }
-        let(:id) { ArticleCategory.create(name: 'dairy').id }
+        let(:id) { create(:article_category, name: 'dairy').id }
         run_test!
       end
-
-      response '401', 'not logged in' do
-        schema type: :object, properties: {
-          article_categories: {
-            type: :array,
-            items: {
-              '$ref': '#/components/schemas/ArticleCategory'
-            }
-          }
-        }
-        let(:Authorization) { 'abc' }
-        let(:id) { ArticleCategory.create(name: 'dairy').id }
-        run_test!
-      end
-
-      response '404', 'article category not found' do
-        schema type: :object, properties: {
-          article_categories: {
-            type: :array,
-            items: {
-              '$ref': '#/components/schemas/ArticleCategory'
-            }
-          }
-        }
-        let(:id) { 'invalid' }
-        run_test!
-      end
+      it_handles_invalid_token_with_id(:article_category)
+      it_cannot_find_object
     end
   end
 end
