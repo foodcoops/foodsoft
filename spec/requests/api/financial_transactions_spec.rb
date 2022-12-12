@@ -17,11 +17,7 @@ describe 'Financial Transaction', type: :request do
       response '200', 'success' do
         schema type: :object, properties: {
           meta: {
-            type: :object,
-            items:
-            {
-              '$ref': '#/components/schemas/Meta'
-            }
+            '$ref' => '#/components/schemas/Meta'
           },
           financial_transaction: {
             type: :array,
@@ -40,7 +36,7 @@ describe 'Financial Transaction', type: :request do
 
   path '/financial_transactions/{id}' do
     get 'Retrieves a financial transaction ' do
-      tags 'Category'
+      tags 'Financial Transaction'
       produces 'application/json'
       parameter name: :id, in: :path, type: :string
 

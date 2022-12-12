@@ -14,7 +14,7 @@ describe 'User', type: :request do
 
   path '/user/financial_transactions' do
     post 'create new financial transaction (requires enabled self service)' do
-      tags 'User', 'FinancialTransaction'
+      tags "Financial Transaction"
       consumes 'application/json'
       produces 'application/json'
       parameter name: "per_page", in: :query, type: :integer, required: false
@@ -105,7 +105,7 @@ describe 'User', type: :request do
 
   path '/user/financial_transactions/{id}' do
     get 'find financial transaction by id' do
-      tags 'User', 'FinancialTransaction'
+      tags 'User', 'Financial Transaction'
       produces 'application/json'
       parameter name: :id, in: :path, type: :string
 

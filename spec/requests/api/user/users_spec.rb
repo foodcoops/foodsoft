@@ -50,7 +50,7 @@ describe 'User', type: :request do
 
   path '/user/financial_overview' do
     get 'financial summary about the currently logged-in user' do
-      tags 'User', 'FinancialTransaction'
+      tags 'User', 'Financial Transaction'
       produces 'application/json'
       let(:user) { create :user, :ordergroup }
       FinancialTransactionClass.create(name: 'TestTransaction')
