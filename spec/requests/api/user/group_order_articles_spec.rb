@@ -75,7 +75,6 @@ describe 'User', type: :request do
         run_test!
       end
 
-      # 422
       response '422', 'invalid parameter value or group order article already exists' do
         let(:group_order_article) { { order_article_id: goa.order_article_id, quantity: 1, tolerance: 2 } }
         schema '$ref' => '#/components/schemas/Error422'
@@ -127,42 +126,35 @@ describe 'User', type: :request do
 
       response '200', 'success' do
         schema type: :object, properties: {
-          group_order_article_for_create: {
-            type: :object,
-            items: {
-
-            }
+          group_order_article: {
+            '$ref': '#/components/schemas/GroupOrderArticle'
           }
         }
         run_test!
       end
-      # 401
+
       response 401, 'not logged-in' do
-        let(:Authorization) { 'abc' }
         schema '$ref' => '#/components/schemas/Error401'
+        let(:Authorization) { 'abc' }
         run_test!
       end
-      # 403
+
       response 403, 'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope' do
         let(:api_scopes) { ['none'] }
         schema '$ref' => '#/components/schemas/Error403'
         run_test!
       end
-      # 404
+
       response '404', 'order article not found in open orders' do
         schema type: :object, properties: {
           group_order_article: {
-            type: :object,
-            items: {
-              '$ref': '#/components/schemas/GroupOrderArticle'
-            }
+            '$ref': '#/components/schemas/GroupOrderArticle'
           }
         }
         let(:id) { 'invalid' }
         run_test!
       end
 
-      # 422
       response '422', 'invalid parameter value' do
         let(:group_order_article) { { order_article_id: 'invalid', quantity: -5, tolerance: 'invalid' } }
         schema '$ref' => '#/components/schemas/Error422'
@@ -180,10 +172,7 @@ describe 'User', type: :request do
       response '200', 'success' do
         schema type: :object, properties: {
           group_order_article: {
-            type: :object,
-            items: {
-              '$ref': '#/components/schemas/GroupOrderArticle'
-            }
+            '$ref': '#/components/schemas/GroupOrderArticle'
           }
         }
         let(:id) { goa.id }
@@ -192,7 +181,6 @@ describe 'User', type: :request do
 
       it_handles_invalid_token_with_id
 
-      # 403
       response 403, 'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope' do
         let(:api_scopes) { ['none'] }
         schema '$ref' => '#/components/schemas/Error403'
