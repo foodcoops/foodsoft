@@ -7,8 +7,7 @@ describe 'Order Articles', type: :request do
     get 'order articles' do
       tags 'Order'
       produces 'application/json'
-      parameter name: "per_page", in: :query, type: :integer, required: false
-      parameter name: "page", in: :query, type: :integer, required: false
+      pagination_param
       q_ordered_url_param
 
       let(:api_scopes) { ['orders:read', 'orders:write'] }
