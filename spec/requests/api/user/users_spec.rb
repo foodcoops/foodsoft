@@ -53,6 +53,7 @@ describe 'User', type: :request do
       tags 'User', 'Financial Transaction'
       produces 'application/json'
       let(:user) { create :user, :ordergroup }
+      let(:api_scopes) { ['finance:user'] }
       FinancialTransactionClass.create(name: 'TestTransaction')
 
       response 200, 'success' do
@@ -93,7 +94,6 @@ describe 'User', type: :request do
                  }
                }
 
-        let(:api_scopes) { ['finance:user'] }
         run_test!
       end
 

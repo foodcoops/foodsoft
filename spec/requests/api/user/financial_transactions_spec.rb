@@ -91,10 +91,7 @@ describe 'User', type: :request do
       response '200', 'success' do
         schema type: :object, properties: {
           financial_transaction: {
-            type: :object,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransaction'
-            }
+            '$ref': '#/components/schemas/FinancialTransaction'
           }
         }
         let(:id) { ft.id }

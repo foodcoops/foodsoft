@@ -46,7 +46,7 @@ describe 'Order Articles', type: :request do
           end
         end
 
-        describe 'supplier' do
+        describe 'when ordered by supplier' do
           let(:q) { { q: { ordered: 'supplier' } } }
 
           run_test! do |response|
@@ -56,7 +56,7 @@ describe 'Order Articles', type: :request do
           end
         end
 
-        describe 'member' do
+        describe 'when ordered by member' do
           let(:q) { { q: { ordered: 'member' } } }
 
           run_test! do |response|

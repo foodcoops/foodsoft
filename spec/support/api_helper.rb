@@ -79,7 +79,12 @@ module ApiHelper
     def self.q_ordered_url_param
       parameter name: :q, in: :query, required: false,
                 description: "'member' show articles ordered by the user's ordergroup, 'all' by all members, and 'supplier' ordered at the supplier",
-                schema: { '$ref' => '#/components/schemas/q_ordered' }
+                schema: {
+                  type: :object,
+                  properties: {
+                    ordered: { '$ref' => '#/components/schemas/q_ordered' }
+                  }
+                }
     end
   end
 end
