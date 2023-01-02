@@ -14,7 +14,7 @@ describe 'User', type: :request do
 
   path '/user/financial_transactions' do
     post 'create new financial transaction (requires enabled self service)' do
-      tags "Financial Transaction"
+      tags 'Financial Transaction'
       consumes 'application/json'
       produces 'application/json'
 
