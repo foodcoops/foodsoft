@@ -7,8 +7,7 @@ describe 'Article Categories', type: :request do
     get 'article categories' do
       tags 'Category'
       produces 'application/json'
-      parameter name: "per_page", in: :query, type: :integer, required: false
-      parameter name: "page", in: :query, type: :integer, required: false
+      pagination_param
       let(:order_article) { create(:order, article_count: 1).order_articles.first }
       let(:stock_article) { create(:stock_article) }
       let(:stock_order_article) { create(:stock_order, article_ids: [stock_article.id]).order_articles.first }

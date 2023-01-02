@@ -19,8 +19,7 @@ describe 'User', type: :request do
     get 'group order articles' do
       tags 'User', 'Order'
       produces 'application/json'
-      parameter name: "per_page", in: :query, type: :integer, required: false
-      parameter name: "page", in: :query, type: :integer, required: false
+      pagination_param
       q_ordered_url_param
 
       response '200', 'success' do

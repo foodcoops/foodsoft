@@ -71,8 +71,13 @@ module ApiHelper
       parameter name: :id, in: :path, type: :integer, required: true
     end
 
+    def self.pagination_param
+      parameter name: :per_page, in: :query, type: :integer, required: false
+      parameter name: :page, in: :query, type: :integer, required: false
+    end
+
     def self.q_ordered_url_param
-      parameter name: 'q', in: :query, required: false,
+      parameter name: :q, in: :query, required: false,
                 description: "'member' show articles ordered by the user's ordergroup, 'all' by all members, and 'supplier' ordered at the supplier",
                 schema: { '$ref' => '#/components/schemas/q_ordered' }
     end

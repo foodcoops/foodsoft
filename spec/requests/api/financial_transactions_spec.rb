@@ -11,8 +11,7 @@ describe 'Financial Transaction', type: :request do
     get 'financial transactions' do
       tags 'Financial Transaction'
       produces 'application/json'
-      parameter name: "per_page", in: :query, type: :integer, required: false
-      parameter name: "page", in: :query, type: :integer, required: false
+      pagination_param
 
       response '200', 'success' do
         schema type: :object, properties: {

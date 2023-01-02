@@ -7,8 +7,7 @@ describe 'Financial Transaction Classes', type: :request do
     get 'financial transaction classes' do
       tags 'Category'
       produces 'application/json'
-      parameter name: "per_page", in: :query, type: :integer, required: false
-      parameter name: "page", in: :query, type: :integer, required: false
+      pagination_param
       let(:financial_transaction_class) { create(:financial_transaction_class) }
 
       response '200', 'success' do

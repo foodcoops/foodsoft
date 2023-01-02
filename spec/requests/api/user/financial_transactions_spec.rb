@@ -59,9 +59,7 @@ describe 'User', type: :request do
     get "financial transactions of the member's ordergroup" do
       tags 'User', 'Financial Transaction'
       produces 'application/json'
-      parameter name: "per_page", in: :query, type: :integer, required: false
-      parameter name: "page", in: :query, type: :integer, required: false
-
+      pagination_param
 
       response '200', 'success' do
         schema type: :object, properties: {
