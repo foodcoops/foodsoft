@@ -599,6 +599,14 @@ RSpec/ScatteredSetup:
     - "spec/integration/balancing_spec.rb"
     - "spec/integration/login_spec.rb"
 
+# Offense count: 4
+# Configuration parameters: AllowedPatterns, IgnoredPatterns.
+# SupportedStyles: snake_case, camelCase
+RSpec/VariableName:
+  EnforcedStyle: snake_case
+  AllowedPatterns:
+     - ^Authorization$
+
 # Offense count: 1
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
 RSpec/VerifiedDoubles:
