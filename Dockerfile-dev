@@ -1,4 +1,4 @@
-FROM ruby:2.6
+FROM ruby:2.7
 
 # Install dependencies
 RUN deps='libmagic-dev chromium nodejs' && \
@@ -19,6 +19,7 @@ ENV PORT=3000 \
 
 WORKDIR /app
 
+RUN gem install bundler
 RUN bundle config build.nokogiri "--use-system-libraries"
 
 EXPOSE 3000

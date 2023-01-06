@@ -11,6 +11,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-dev
+      platform: linux/x86_64
     command: ./proc-start worker
     volumes:
       - bundle:/usr/local/bundle
