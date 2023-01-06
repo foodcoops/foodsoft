@@ -14,23 +14,23 @@ class AppleBar
   def group_bar_state
     if apples >= 100
       'success'
+    elsif FoodsoftConfig[:stop_ordering_under].present? &&
+          (apples >= FoodsoftConfig[:stop_ordering_under])
+      'warning'
     else
-      if FoodsoftConfig[:stop_ordering_under].present? and
-         apples >= FoodsoftConfig[:stop_ordering_under]
-        'warning'
-      else
-        'danger'
-      end
+      'danger'
     end
   end
 
   # Use apples as percentage, but show at least 10 percent
   def group_bar_width
-    @ordergroup.apples < 2 ? 2 : @ordergroup.apples
+    [@ordergroup.apples, 2].max
   end
 
   def mean_order_amount_per_job
-    (1 / @global_avg).round rescue 0
+    (1 / @global_avg).round
+  rescue
+    0
   end
 
   def apples

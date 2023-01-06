@@ -8,9 +8,7 @@ class BankAccountConnector
       nil
     end
 
-    def text
-      @text
-    end
+    attr_reader :text
   end
 
   class TextField
@@ -24,13 +22,7 @@ class BankAccountConnector
       nil
     end
 
-    def name
-      @name
-    end
-
-    def value
-      @value
-    end
+    attr_reader :name, :value
 
     def label
       @label || @name.to_s
@@ -73,17 +65,7 @@ class BankAccountConnector
     @bank_account.iban
   end
 
-  def auto_submit
-    @auto_submit
-  end
-
-  def controls
-    @controls
-  end
-
-  def count
-    @count
-  end
+  attr_reader :auto_submit, :controls, :count
 
   def text(data)
     @controls += [TextItem.new(data)]
@@ -142,11 +124,9 @@ class BankAccountConnector
     @bank_account.save!
   end
 
-  def load(data)
-  end
+  def load(data); end
 
-  def dump
-  end
+  def dump; end
 
   def t(key, args = {})
     return t(".fields.#{key}") unless key.is_a? String

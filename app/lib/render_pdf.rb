@@ -18,7 +18,7 @@ class RotatedCell < Prawn::Table::Cell::Text
     (height + (border_top_width / 2.0) + (border_bottom_width / 2.0)) / tan_rotation
   end
 
-  def styled_width_of(text)
+  def styled_width_of(_text)
     options = @text_options.reject { |k| k == :style }
     with_font { (@pdf.height_of(@content, options) + padding_top + padding_bottom) / tan_rotation }
   end
@@ -156,9 +156,10 @@ class RenderPDF < Prawn::Document
   def pdf_add_page_breaks?(docid = nil)
     docid ||= self.class.name.underscore
     cfg = FoodsoftConfig[:pdf_add_page_breaks]
-    if cfg.is_a? Array
+    case cfg
+    when Array
       cfg.index(docid.to_s).any?
-    elsif cfg.is_a? Hash
+    when Hash
       cfg[docid.to_s]
     else
       cfg

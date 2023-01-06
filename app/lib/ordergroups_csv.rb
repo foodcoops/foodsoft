@@ -14,9 +14,9 @@ class OrdergroupsCsv < RenderCSV
       Ordergroup.human_attribute_name(:break_start),
       Ordergroup.human_attribute_name(:break_end),
       Ordergroup.human_attribute_name(:last_user_activity),
-      Ordergroup.human_attribute_name(:last_order),
+      Ordergroup.human_attribute_name(:last_order)
     ]
-    row + Ordergroup.custom_fields.map { |f| f[:label] }
+    row + Ordergroup.custom_fields.pluck(:label)
   end
 
   def data
@@ -33,7 +33,7 @@ class OrdergroupsCsv < RenderCSV
         o.break_start,
         o.break_end,
         o.last_user_activity,
-        o.last_order.try(:starts),
+        o.last_order.try(:starts)
       ]
       yield row + Ordergroup.custom_fields.map { |f| o.settings.custom_fields[f[:name]] }
     end

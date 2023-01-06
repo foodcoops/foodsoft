@@ -1,5 +1,5 @@
 class OrderTxt
-  def initialize(order, options = {})
+  def initialize(order, _options = {})
     @order = order
   end
 
@@ -15,10 +15,10 @@ class OrderTxt
     text += "****** " + I18n.t('orders.fax.to_address') + "\n\n"
     text += "#{FoodsoftConfig[:name]}\n#{contact[:street]}\n#{contact[:zip_code]} #{contact[:city]}\n\n"
     text += "****** " + I18n.t('orders.fax.articles') + "\n\n"
-    text += "%8s %8s   %s\n" % [I18n.t('orders.fax.number'), I18n.t('orders.fax.amount'), I18n.t('orders.fax.name')]
+    text += format("%8s %8s   %s\n", I18n.t('orders.fax.number'), I18n.t('orders.fax.amount'), I18n.t('orders.fax.name'))
     # now display all ordered articles
     @order.order_articles.ordered.includes([:article, :article_price]).each do |oa|
-      text += "%8s %8d   %s\n" % [oa.article.order_number, oa.units_to_order.to_i, oa.article.name]
+      text += format("%8s %8d   %s\n", oa.article.order_number, oa.units_to_order.to_i, oa.article.name)
     end
     text
   end
