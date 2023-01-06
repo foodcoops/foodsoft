@@ -21,8 +21,6 @@ class TokenVerifier < ActiveSupport::MessageVerifier
     # return original message
     if r.length > 2
       r[2]
-    else
-      nil
     end
   end
 
@@ -31,8 +29,6 @@ class TokenVerifier < ActiveSupport::MessageVerifier
   class InvalidScope < ActiveSupport::MessageVerifier::InvalidSignature; end
 
   class InvalidPrefix < ActiveSupport::MessageVerifier::InvalidSignature; end
-
-  protected
 
   def self.secret
     # secret_key_base for Rails 4, but Rails 3 initializer may still be used

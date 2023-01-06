@@ -54,8 +54,8 @@ module Foodsoft
     # @param options [Hash<String, String>] Extra variables to expand
     # @return [String] Expanded string
     def self.expand(str, options = {})
-      str.gsub /{{([._a-zA-Z0-9]+)}}/ do
-        options[$1] || self.get($1)
+      str.gsub(/{{([._a-zA-Z0-9]+)}}/) do
+        options[::Regexp.last_match(1)] || self.get(::Regexp.last_match(1))
       end
     end
 

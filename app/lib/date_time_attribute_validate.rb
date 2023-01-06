@@ -27,12 +27,20 @@ module DateTimeAttributeValidate
         define_method("#{attribute}_date_value=") do |val|
           self.instance_variable_set("@#{attribute}_is_set", true)
           self.instance_variable_set("@#{attribute}_date_value", val)
-          self.send("#{attribute}_date=", val) rescue nil
+          begin
+            self.send("#{attribute}_date=", val)
+          rescue
+            nil
+          end
         end
         define_method("#{attribute}_time_value=") do |val|
           self.instance_variable_set("@#{attribute}_is_set", true)
           self.instance_variable_set("@#{attribute}_time_value", val)
-          self.send("#{attribute}_time=", val) rescue nil
+          begin
+            self.send("#{attribute}_time=", val)
+          rescue
+            nil
+          end
         end
 
         # fallback to field when values are not set
@@ -48,11 +56,19 @@ module DateTimeAttributeValidate
         # validate date and time
         define_method("#{attribute}_datetime_value_valid") do
           date = self.instance_variable_get("@#{attribute}_date_value")
-          unless date.blank? || (Date.parse(date) rescue nil)
+          unless date.blank? || begin
+            Date.parse(date)
+          rescue
+            nil
+          end
             errors.add(attribute, "is not a valid date") # @todo I18n
           end
           time = self.instance_variable_get("@#{attribute}_time_value")
-          unless time.blank? || (Time.parse(time) rescue nil)
+          unless time.blank? || begin
+            Time.parse(time)
+          rescue
+            nil
+          end
             errors.add(attribute, "is not a valid time") # @todo I18n
           end
         end

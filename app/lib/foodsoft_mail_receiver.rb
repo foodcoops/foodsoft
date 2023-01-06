@@ -19,7 +19,7 @@ class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
 
   private
 
-  def on_rcpt_to_event(ctx, rcpt_to)
+  def on_rcpt_to_event(_ctx, rcpt_to)
     recipient = rcpt_to.gsub(/^\s*<\s*(.*)\s*>\s*$/, '\1')
     @handlers << self.class.find_handler(recipient)
     rcpt_to
@@ -29,20 +29,18 @@ class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
   end
 
   def on_message_data_event(ctx)
-    begin
-      @handlers.each do |handler|
-        handler.call(ctx[:message][:data])
-      end
-    rescue => error
-      ExceptionNotifier.notify_exception(error, data: ctx)
-      raise error
-    ensure
-      @handlers.clear
+    @handlers.each do |handler|
+      handler.call(ctx[:message][:data])
     end
+  rescue => error
+    ExceptionNotifier.notify_exception(error, data: ctx)
+    raise error
+  ensure
+    @handlers.clear
   end
 
   def self.find_handler(recipient)
-    m = /(?<foodcoop>[^@\.]+)\.(?<address>[^@]+)(@(?<hostname>[^@]+))?/.match recipient
+    m = /(?<foodcoop>[^@.]+)\.(?<address>[^@]+)(@(?<hostname>[^@]+))?/.match recipient
     raise "recipient is missing or has an invalid format" if m.nil?
     raise "Foodcoop '#{m[:foodcoop]}' could not be found" unless FoodsoftConfig.allowed_foodcoop? m[:foodcoop]
 
@@ -51,7 +49,7 @@ class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
     @@registered_classes.each do |klass|
       if match = klass.regexp.match(m[:address])
         handler = klass.new match
-        return lambda { |data| handler.received(data) }
+        return ->(data) { handler.received(data) }
       end
     end
 
