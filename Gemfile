@@ -1,11 +1,11 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "rails", '~> 5.2'
+gem "rails", '~> 7.0'
 
-gem 'sass-rails'
+gem 'sassc-rails'
 gem 'less-rails'
-gem 'uglifier', '>= 1.0.3'
+gem 'uglifier'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
@@ -46,7 +46,8 @@ gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 gem 'ruby-units'
 gem 'attribute_normalizer'
 gem 'ice_cube'
-gem 'recurring_select'
+# At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
+gem 'recurring_select', git: 'https://github.com/gregschmit/recurring_select'
 gem 'roo'
 gem 'roo-xls'
 gem 'spreadsheet'
@@ -84,7 +85,8 @@ group :development do
   gem 'binding_of_caller'
   # gem "rails-i18n-debug"
   # chrome debugging extension https://github.com/dejan/rails_panel
-  gem 'meta_request'
+  # TODO: disabled due to https://github.com/rails/rails/issues/40781
+  # gem 'meta_request'
 
   # Get infos when not using proper eager loading
   gem 'bullet'

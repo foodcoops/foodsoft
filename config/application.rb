@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Foodsoft
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.0
+    config.load_defaults 7.0
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -35,9 +35,6 @@ module Foodsoft
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
-
-    # TODO: Remove this. See CVE-2022-32224 for details.
-    config.active_record.yaml_column_permitted_classes = [BigDecimal, Date, Symbol, Time]
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
@@ -65,6 +62,12 @@ module Foodsoft
 
     # Load legacy scripts from vendor
     config.assets.precompile += ['vendor/assets/javascripts/*.js']
+
+    config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
+
+    config.autoloader = :zeitwerk
+
+    # Ex:- :default =>''
 
     # CORS for API
     config.middleware.insert_before 0, Rack::Cors do
