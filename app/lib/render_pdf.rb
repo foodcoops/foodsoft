@@ -52,7 +52,7 @@ class RotatedCell < Prawn::Table::Cell::Text
   end
 end
 
-class RenderPDF < Prawn::Document
+class RenderPdf < Prawn::Document
   include ActionView::Helpers::NumberHelper
   include ApplicationHelper
 

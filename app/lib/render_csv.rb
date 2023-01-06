@@ -1,6 +1,6 @@
 require 'csv'
 
-class RenderCSV
+class RenderCsv
   include ActionView::Helpers::NumberHelper
 
   def initialize(object, options = {})
