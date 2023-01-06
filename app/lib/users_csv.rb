@@ -1,4 +1,4 @@
-class UsersCsv < RenderCSV
+class UsersCsv < RenderCsv
   include ApplicationHelper
 
   def header

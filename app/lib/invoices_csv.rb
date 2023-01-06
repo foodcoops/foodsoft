@@ -1,6 +1,6 @@
 require 'csv'
 
-class InvoicesCsv < RenderCSV
+class InvoicesCsv < RenderCsv
   include ApplicationHelper
 
   def header

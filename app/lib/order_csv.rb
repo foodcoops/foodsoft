@@ -1,6 +1,6 @@
 require 'csv'
 
-class OrderCsv < RenderCSV
+class OrderCsv < RenderCsv
   def header
     [
       OrderArticle.human_attribute_name(:units_to_order),
