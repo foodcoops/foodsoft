@@ -2,6 +2,8 @@
 source "https://rubygems.org"
 
 gem "rails", '~> 7.0'
+gem 'mail', '~> 2.7.1' # bug with mail 2.8.0 https://github.com/mikel/mail/issues/1489
+
 
 gem 'sassc-rails'
 gem 'less-rails'
