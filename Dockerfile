@@ -1,4 +1,4 @@
-FROM ruby:2.6
+FROM ruby:2.7
 
 RUN supercronicUrl=https://github.com/aptible/supercronic/releases/download/v0.1.3/supercronic-linux-amd64 && \
     supercronicBin=/usr/local/bin/supercronic && \
@@ -22,6 +22,7 @@ RUN buildDeps='libmagic-dev' && \
     apt-get update && \
     apt-get install --no-install-recommends -y $buildDeps && \
     echo 'gem: --no-document' >> ~/.gemrc && \
+    gem install bundler && \
     bundle config build.nokogiri "--use-system-libraries" && \
     bundle install --deployment --without development test -j 4 && \
     apt-get purge -y --auto-remove $buildDeps && \
