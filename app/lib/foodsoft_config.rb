@@ -230,7 +230,7 @@ class FoodsoftConfig
     end
 
     def setup_database
-      database_config = ActiveRecord::Base.configurations[Rails.env]
+      database_config = ActiveRecord::Base.configurations.find_db_config(Rails.env).configuration_hash
       database_config = database_config.merge(config[:database]) if config[:database].present?
       ActiveRecord::Base.establish_connection(database_config)
     end
