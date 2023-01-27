@@ -125,3 +125,4 @@ group :test do
 end
 
 gem "terser", "~> 1.1"
+gem "importmap-rails", "~> 1.1"

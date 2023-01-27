@@ -8,9 +8,9 @@
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     //%link(href="images/favicon.ico" rel="shortcut icon")
-
     = yield(:head)
     = foodcoop_css_tag
+
 
   %body
     = yield
@@ -19,7 +19,9 @@
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
-    = javascript_include_tag "application"
+    = javascript_importmap_tags
+    = javascript_include_tag "application_legacy"
+
     :javascript
       I18n.defaultLocale = "#{I18n.default_locale}";
       I18n.locale = "#{I18n.locale}";
