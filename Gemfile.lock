@@ -540,6 +540,8 @@ GEM
       sqlite3 (>= 1.3.3)
     table_print (1.5.7)
     temple (0.9.1)
+    terser (1.1.13)
+      execjs (>= 0.3.0, < 3)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -560,8 +562,6 @@ GEM
       unf (~> 0.1.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
@@ -674,9 +674,9 @@ DEPENDENCIES
   sprockets (< 4)
   sqlite3 (~> 1.3.6)
   table_print
+  terser (~> 1.1)
   therubyracer
   twitter-bootstrap-rails (~> 2.2.8)
-  uglifier
   web-console
   whenever
 
