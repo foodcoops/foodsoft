@@ -18,7 +18,7 @@ class Finance::FinancialTransactionsController < ApplicationController
       sort = "created_on DESC"
     end
 
-    @q = FinancialTransaction.search(params[:q])
+    @q = FinancialTransaction.ransack(params[:q])
     @financial_transactions_all = @q.result(distinct: true).includes(:user).order(sort)
     @financial_transactions_all = @financial_transactions_all.visible unless params[:show_hidden]
     @financial_transactions_all = @financial_transactions_all.where(ordergroup_id: @ordergroup.id) if @ordergroup
