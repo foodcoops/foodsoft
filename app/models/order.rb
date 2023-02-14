@@ -29,6 +29,7 @@ class Order < ApplicationRecord
 
   # Finders
   scope :open, -> { where(state: 'open').where('starts <= ?', DateTime.now).order('ends DESC') }
+  scope :open_reverse, -> { where(state: 'open').where('starts <= ?', DateTime.now).order(:ends) }
   scope :upcoming, -> { where(state: 'open').where('starts >= ?', DateTime.now).order('ends DESC') }
   scope :finished, -> { where("orders.state = 'finished' OR orders.state = 'closed'").order('ends DESC') }
   scope :finished_not_closed, -> { where(state: 'finished').order('ends DESC') }

@@ -14,7 +14,7 @@
           %th.numeric= heading_helper GroupOrder, :price
       %tbody
         - total = 0
-        - Order.open.each do |order|
+        - Order.open_reverse.each do |order|
           %tr
             %td
               = link_to_ordering(order)
