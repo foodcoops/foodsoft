@@ -155,4 +155,16 @@ module OrdersHelper
               class: "btn#{' btn-success' unless order.received?} #{options[:class]}"
     end
   end
+
+  def custom_csv_collection
+    [
+      OrderArticle.human_attribute_name(:units_to_order),
+      Article.human_attribute_name(:order_number),
+      Article.human_attribute_name(:name),
+      Article.human_attribute_name(:unit),
+      Article.human_attribute_name(:unit_quantity_short),
+      ArticlePrice.human_attribute_name(:price),
+      OrderArticle.human_attribute_name(:total_price)
+    ]
+  end
 end

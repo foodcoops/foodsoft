@@ -1442,6 +1442,9 @@ nl:
       units_ordered: Bestelde eenheden
     create:
       notice: De bestelling is aangemaakt.
+    custom_csv:
+      description: Kies de volgorde van de attributen en de attributen voor het csv-bestand
+      column: kolom
     edit:
       title: 'Bestelling aanpassen: %{name}'
     edit_amount:

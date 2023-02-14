@@ -1467,6 +1467,9 @@ de:
       units_ordered: Bestellte Einheiten
     create:
       notice: Die Bestellung wurde erstellt.
+    custom_csv:
+      description: Wähle die Attribute und deren Reihenfolge für die zu erzeugende CSV Datei
+      column: Spalte
     edit:
       title: 'Bestellung bearbeiten: %{name}'
     edit_amount:

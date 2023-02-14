@@ -1014,6 +1014,9 @@ fr:
       units_ordered: Unités commandées
     create:
       notice: La commande a bien été définie.
+    custom_csv:
+      description: Veuillez choisir l'ordre des attributs ainsi que les attributs pour le fichier csv
+      column: colonne
     edit:
       title: 'Modifier la commande: %{name}'
     edit_amount:

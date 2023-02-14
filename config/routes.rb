@@ -48,6 +48,7 @@ Rails.application.routes.draw do
         get :receive
         post :receive
 
+        get :custom_csv
         get :receive_on_order_article_create
         get :receive_on_order_article_update
       end

@@ -50,12 +50,25 @@ class OrdersController < ApplicationController
         send_order_pdf @order, params[:document]
       end
       format.csv do
-        send_data OrderCsv.new(@order).to_csv, filename: @order.name + '.csv', type: 'text/csv'
+        send_data OrderCsv.new(@order, options= {custom_csv: params[:custom_csv]}).to_csv, filename: @order.name + '.csv', type: 'text/csv'
       end
       format.text do
         send_data OrderTxt.new(@order).to_txt, filename: @order.name + '.txt', type: 'text/plain'
       end
     end
+  end
+
+  def custom_csv
+    @order = Order.find(params[:id])
+    @view = (params[:view] || 'default').gsub(/[^-_a-zA-Z0-9]/, '')
+    @partial = case @view
+               when 'default'  then 'articles'
+               when 'groups'   then 'shared/articles_by/groups'
+               when 'articles' then 'shared/articles_by/articles'
+               else 'articles'
+               end
+
+    render :layout => false
   end
 
   # Page to create a new order.

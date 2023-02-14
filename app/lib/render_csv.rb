@@ -20,6 +20,7 @@ class RenderCsv
       end
       data { |d| csv << d }
     end
+    ret << I18n.t('.orders.articles.prices_sum') << ";" << "#{number_to_currency(@object.sum(:gross))}/#{number_to_currency(@object.sum(:net))}" if @options[:custom_csv]
     ret.encode(@options[:encoding], invalid: :replace, undef: :replace)
   end
 
