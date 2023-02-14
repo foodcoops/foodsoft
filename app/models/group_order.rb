@@ -32,8 +32,8 @@ class GroupOrder < ApplicationRecord
   # Generate some data for the javascript methods in ordering view
   def load_data
     data = {}
-    data[:account_balance] = ordergroup.nil? ? BigDecimal.new('+Infinity') : ordergroup.account_balance
-    data[:available_funds] = ordergroup.nil? ? BigDecimal.new('+Infinity') : ordergroup.get_available_funds(self)
+    data[:account_balance] = ordergroup.nil? ? BigDecimal('+Infinity') : ordergroup.account_balance
+    data[:available_funds] = ordergroup.nil? ? BigDecimal('+Infinity') : ordergroup.get_available_funds(self)
 
     # load prices and other stuff....
     data[:order_articles] = {}
