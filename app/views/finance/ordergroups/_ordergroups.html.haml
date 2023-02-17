@@ -22,3 +22,12 @@
         %td
           = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-mini'
           = link_to t('.account_statement'), finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-mini'
+  %thead
+    %tr
+      %th= t 'Total'
+      %th
+      - FinancialTransactionClass.sorted.each do |c|
+        - name = FinancialTransactionClass.has_multiple_classes ? c.display : heading_helper(Ordergroup, :account_balance)
+        %th.numeric= format_currency @total_balances[c.id]
+      %th.numeric
+        = format_currency @total_balances.values.reduce(:+)
