@@ -90,6 +90,31 @@ feature ArticlesController do
       end
     end
 
+    describe "takes over category from file" do
+      it do
+        find(:css, '#articles_update_category[value="1"]').set(true) # check take over category from file
+        expect(ArticleCategory.count).to eq 1 # new Category vegetables should be created from file
+        find('input[type="submit"]').click # upload file
+        find('input[type="submit"]').click # submit changes
+        expect(ArticleCategory.count).to eq 2 # it is
+        expect(supplier.articles.count).to eq 1
+        expect(supplier.articles.first.article_category.name).to eq "Vegetables"
+      end
+    end
+
+    describe "overwrites article_category from file" do
+      let!(:article_category) { create(:article_category, name: "Fruit") }
+      let(:article) { create(:article, supplier: supplier, name: 'Tomatoes', order_number: 1, unit: '250 g', article_category: article_category) }
+
+      it do
+        find(:css, '#articles_update_category[value="1"]').set(true) # check take over category from file
+        find('input[type="submit"]').click #upload file
+        find('input[type="submit"]').click #submit changes
+        expect(supplier.articles.count).to eq 1
+        expect(supplier.articles.first.article_category.name).to eq "Vegetables"
+      end
+    end
+
     describe "can remove an existing article" do
       let!(:article) { create :article, supplier: supplier, name: 'Foobar', order_number: 99999 }
 

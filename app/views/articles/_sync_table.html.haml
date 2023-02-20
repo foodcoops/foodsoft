@@ -49,7 +49,8 @@
             .input-prepend
               %span.add-on= t 'number.currency.format.unit'
               = form.text_field 'deposit', class: 'input-mini', style: 'width: 45px'
-          %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
+          %td{:style => highlight_new(attrs, :article_category)}
+            = form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
             {include_blank: true}, class: 'input-small'
       - unless changed_article.errors.empty?
         %tr.alert

@@ -539,6 +539,7 @@ nl:
       options:
         convert_units: Bestaande eenheden behouden, herbereken groothandelseenheid en prijs (net als synchronizeren).
         outlist_absent: Artikelen die niet in het bestand voorkomen, verwijderen.
+        upload_category: Categorieën overnemen uit bestand.
       sample:
         juices: Sappen
         nuts: Noten

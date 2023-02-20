@@ -568,6 +568,7 @@ de:
       options:
         convert_units: Derzeitige Einheiten beibehalten, berechne Mengeneinheit und Preis (wie Synchronisieren).
         outlist_absent: Artikel löschen, die nicht in der hochgeladenen Datei sind.
+        update_category: Kategorien aus der Datei übernehmen und erstellen.
       sample:
         juices: Säfte
         nuts: Nüsse

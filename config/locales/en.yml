@@ -569,6 +569,7 @@ en:
       options:
         convert_units: Keep current units, recompute unit quantity and price (like synchronize).
         outlist_absent: Delete articles not in uploaded file.
+        update_category: Create and replace categories from uploaded file.
       sample:
         juices: Juices
         nuts: Nuts
