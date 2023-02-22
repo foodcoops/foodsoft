@@ -234,9 +234,8 @@ GEM
       rails (>= 4.0.0)
     globalid (1.0.1)
       activesupport (>= 5.0)
-    haml (6.1.1)
-      temple (>= 0.8.2)
-      thor
+    haml (5.2.2)
+      temple (>= 0.8.0)
       tilt
     haml-rails (2.1.0)
       actionpack (>= 5.1)
@@ -618,7 +617,7 @@ DEPENDENCIES
   foodsoft_polls!
   foodsoft_wiki!
   gaffe
-  haml
+  haml (~> 5.0)
   haml-rails
   hashie (~> 3.4.6)
   i18n-js (~> 3.0.0.rc8)
