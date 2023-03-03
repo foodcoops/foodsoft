@@ -120,6 +120,7 @@ nl:
         pickup: Ophaaldag
         starts: Start op
         status: Status
+        sum: Totaal (netto/bruto prijs)
         supplier: Leverancier
         transport: Vervoerskosten
         transport_distribution: Verdeling van vervoerskosten

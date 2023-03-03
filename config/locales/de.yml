@@ -127,6 +127,7 @@ de:
         pickup: Abholung
         starts: Läuft vom
         status: Status
+        sum: Summe (Netto/Brutto-Preise)
         supplier: Lieferant
         transport: Transportkosten
         transport_distribution: Transportkostenverteilung

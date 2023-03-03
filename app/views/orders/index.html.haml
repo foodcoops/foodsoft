@@ -24,6 +24,7 @@
           %th= heading_helper Order, :pickup
           %th= heading_helper Order, :ends
           %th= heading_helper Order, :note
+          %th= heading_helper Order, :sum
           %th{colspan: "2"}
       %tbody
         - unless @open_orders.empty?
@@ -34,6 +35,7 @@
               %td= format_date(order.pickup) unless order.pickup.nil?
               %td= format_time(order.ends) unless order.ends.nil?
               %td= truncate(order.note)
+              %td= number_to_currency(order.sum(:net)) + ' / ' + number_to_currency(order.sum(:gross))
               %td= link_to t('.action_end'), finish_order_path(order),
                 data: {confirm: t('.confirm_end', order: order.name)}, method: :post,
                 class: 'btn btn-small btn-success'
