@@ -7,10 +7,10 @@ describe ArticlesController, type: :controller do
   let(:article_category_a) { create :article_category, name: "AAAA" }
   let(:article_category_b) { create :article_category, name: "BBBB" }
   let(:article_category_c) { create :article_category, name: "CCCC" }
-  let(:supplier) { create :supplier}
+  let(:supplier) { create :supplier }
   let(:article_a) { create :article, name: 'AAAA', note: "ZZZZ", unit: '750 g', article_category: article_category_b, availability: false, supplier_id: supplier.id }
   let(:article_b) { create :article, name: 'BBBB', note: "XXXX", unit: '500 g', article_category: article_category_a, availability: true, supplier_id: supplier.id }
-  let(:article_c) { create :article, name: 'CCCC', note: "YYYY", unit: '250 g', article_category: article_category_c, availability: true, supplier_id: supplier.id  }
+  let(:article_c) { create :article, name: 'CCCC', note: "YYYY", unit: '250 g', article_category: article_category_c, availability: true, supplier_id: supplier.id }
   let(:article_no_supplier) { create :article, name: 'no_supplier', note: "no_supplier", unit: '100 g', article_category: article_category_b, availability: true }
 
   let(:order) { create :order }
@@ -36,6 +36,7 @@ describe ArticlesController, type: :controller do
       article_c
       supplier.reload
     end
+
     it 'assigns sorting on articles' do
       sortings = [
         ['name', [article_a, article_b, article_c]],
