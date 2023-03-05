@@ -21,6 +21,10 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   # We use capybara with webkit, and need database_cleaner
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
   config.before(:each) do
     DatabaseCleaner.strategy = (RSpec.current_example.metadata[:js] ? :truncation : :transaction)
     DatabaseCleaner.start
@@ -51,8 +55,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.include SpecTestHelper, type: :controller
   config.include SessionHelper, type: :feature
-
   # Automatically determine spec from directory structure, see:
   # https://www.relishapp.com/rspec/rspec-rails/v/3-0/docs/directory-structure
   config.infer_spec_type_from_file_location!
