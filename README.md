@@ -1,5 +1,6 @@
 Foodsoft
 =========
+
 [![Build Status](https://github.com/foodcoops/foodsoft/workflows/Ruby/badge.svg)](https://github.com/foodcoops/foodsoft/actions)
 [![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.svg?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
 [![Docs Status](https://inch-ci.org/github/foodcoops/foodsoft.svg?branch=master)](http://inch-ci.org/github/foodcoops/foodsoft)
@@ -15,9 +16,15 @@ If you're a food coop considering to use foodsoft, please have a look at the [wi
 
 More information about using this software and contributing can be found on the [wiki](https://github.com/foodcoops/foodsoft/wiki).
 
+Roadmap
+-------
+
+If you'd like to see what is currently bring prioritised for development, check [our roadmap](https://github.com/orgs/foodcoops/projects/1). If you'd like to influence the roadmap, please join our [monthly community call](https://forum.foodcoops.net/t/foodsoft-monthly-community-call/573/6). As of March 2023, Foodsoft has limited development capacity but we are trying to build this up once more. For now, we try to prioritise what we work on, in order to focus our efforts. If your proposed changes are waiting for some time without review, please join the community call to discuss.
 
 Developing
 ----------
+
+> Foodsoft development needs your help! If you want to hack/triage/organise to improve the software, please consider joining our monthly community calls which are announced on [this forum thread](https://forum.foodcoops.net/t/foodsoft-monthly-community-call/573/6). In these calls, we check in with each other, discuss what to prioritise and try to make progress with development and community issues together.
 
 Get foodsoft [running locally](doc/SETUP_DEVELOPMENT.md),
 then visit our [Developing Guidelines](https://github.com/foodcoops/foodsoft/wiki/Developing-Guidelines)
@@ -34,7 +41,6 @@ Deploying
 
 Setup foodsoft to [run in production](doc/SETUP_PRODUCTION.md), or join an existing
 [hosting platform](https://foodcoops.net/foodsoft-hosting/).
-
 
 License
 -------
