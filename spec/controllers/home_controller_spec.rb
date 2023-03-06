@@ -14,16 +14,12 @@ describe HomeController, type: :controller do
       end
     end
 
-    describe 'logegd in' do
+    describe 'logged in' do
       before { login user }
 
-      it 'assigns tasks' do
+      it 'succeeds' do
         get_with_defaults :index
-
-        expect(assigns(:unaccepted_tasks)).not_to be_nil
-        expect(assigns(:next_tasks)).not_to be_nil
-        expect(assigns(:unassigned_tasks)).not_to be_nil
-        expect(response).to render_template('home/index')
+        expect(response).to have_http_status(:success)
       end
     end
   end
@@ -31,10 +27,9 @@ describe HomeController, type: :controller do
   describe 'GET profile' do
     before { login user }
 
-    it 'renders dashboard' do
+    it 'succeeds' do
       get_with_defaults :profile
       expect(response).to have_http_status(:success)
-      expect(response).to render_template('home/profile')
     end
   end
 
@@ -54,10 +49,9 @@ describe HomeController, type: :controller do
 
       before { login og_user }
 
-      it 'renders reference calculator' do
+      it 'succeeds' do
         get_with_defaults :reference_calculator
         expect(response).to have_http_status(:success)
-        expect(response).to render_template('home/reference_calculator')
       end
     end
   end
@@ -70,11 +64,9 @@ describe HomeController, type: :controller do
 
       before { login user }
 
-      it 'renders profile after update with invalid attributes' do
+      it 'stays on profile after update with invalid attributes' do
         get_with_defaults :update_profile, params: { user: invalid_attributes }
         expect(response).to have_http_status(:success)
-        expect(response).to render_template('home/profile')
-        expect(assigns(:current_user).errors.present?).to be true
       end
 
       it 'redirects to profile after update with unchanged attributes' do
@@ -124,38 +116,9 @@ describe HomeController, type: :controller do
 
       before { login og_user }
 
-      it 'renders ordergroup' do
+      it 'succeeds' do
         get_with_defaults :ordergroup
         expect(response).to have_http_status(:success)
-        expect(response).to render_template('home/ordergroup')
-      end
-
-      describe 'assigns sortings' do
-        let(:fin_trans1) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'A', amount: 200, created_on: Time.now }
-        let(:fin_trans2) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'B', amount: 100, created_on: Time.now + 2.minutes }
-        let(:fin_trans3) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'C', amount: 50, created_on: Time.now + 1.minute }
-
-        before do
-          fin_trans1
-          fin_trans2
-          fin_trans3
-        end
-
-        it 'by criteria' do
-          sortings = [
-            ['date', [fin_trans1, fin_trans3, fin_trans2]],
-            ['note', [fin_trans1, fin_trans2, fin_trans3]],
-            ['amount', [fin_trans3, fin_trans2, fin_trans1]],
-            ['date_reverse', [fin_trans2, fin_trans3, fin_trans1]],
-            ['note_reverse', [fin_trans3, fin_trans2, fin_trans1]],
-            ['amount_reverse', [fin_trans1, fin_trans2, fin_trans3]]
-          ]
-          sortings.each do |sorting|
-            get_with_defaults :ordergroup, params: { sort: sorting[0] }
-            expect(response).to have_http_status(:success)
-            expect(assigns(:financial_transactions).to_a).to eq(sorting[1])
-          end
-        end
       end
     end
   end

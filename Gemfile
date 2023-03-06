@@ -112,7 +112,6 @@ group :test do
   gem 'rspec-core'
   gem 'rspec-rerun'
   gem 'i18n-spec'
-  gem 'rails-controller-testing'
   # code coverage
   gem 'simplecov', require: false
   gem 'simplecov-lcov', require: false

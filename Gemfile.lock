@@ -350,10 +350,6 @@ GEM
       sprockets-rails (>= 2.0.0)
     rails-assets-listjs (0.2.0.beta.4)
       railties (>= 3.1)
-    rails-controller-testing (1.0.5)
-      actionpack (>= 5.0.1.rc1)
-      actionview (>= 5.0.1.rc1)
-      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -610,7 +606,6 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.2)
   rails-assets-listjs (= 0.2.0.beta.4)
-  rails-controller-testing
   rails-i18n
   rails-settings-cached (= 0.4.3)
   rails_tokeninput
@@ -647,4 +642,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.17.3
+   2.4.5
