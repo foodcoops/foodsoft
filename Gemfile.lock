@@ -17,6 +17,14 @@ GIT
       activerecord (>= 3.0.9)
 
 PATH
+  remote: plugins/article_import
+  specs:
+    foodsoft_article_import (0.0.1)
+      deface (~> 1.0)
+      rails
+      roo (~> 2.9.0)
+
+PATH
   remote: plugins/discourse
   specs:
     foodsoft_discourse (0.0.1)
@@ -624,6 +632,7 @@ DEPENDENCIES
   exception_notification
   factory_bot_rails
   faker
+  foodsoft_article_import!
   foodsoft_discourse!
   foodsoft_documents!
   foodsoft_links!
