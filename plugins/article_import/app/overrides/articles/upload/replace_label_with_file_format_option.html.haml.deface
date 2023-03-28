@@ -1,0 +1,5 @@
+/ insert_after 'erb:contains("file_field")'
+- if FoodsoftArticleImport.enabled?
+  %label(for="articles_file")
+    %strong="select the file type you are about to upload"
+  =f.collection_select :type, FoodsoftArticleImport::FORMATS , :to_s, :to_s
