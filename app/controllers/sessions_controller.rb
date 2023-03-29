@@ -21,7 +21,11 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to login_url, :notice => I18n.t('sessions.logged_out')
+    if FoodsoftConfig[:logout_redirect_url].present?
+      redirect_to FoodsoftConfig[:logout_redirect_url]
+    else
+      redirect_to login_url, :notice => I18n.t('sessions.logged_out')
+    end
   end
 
   # redirect to root, going to default foodcoop when none given
