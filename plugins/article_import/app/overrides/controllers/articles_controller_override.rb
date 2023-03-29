@@ -5,6 +5,8 @@ ArticlesController.class_eval do
     options = { filename: uploaded_file.original_filename }
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
+    options[:update_category] = (params[:articles]['update_category'] == '1')
+
     @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_from_file uploaded_file.tempfile, type, options
     if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
       redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.parse_upload.notice')

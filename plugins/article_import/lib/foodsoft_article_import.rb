@@ -66,7 +66,7 @@ module FoodsoftArticleImport
     opts[:csv_options][:encoding] = encoding if encoding
     opts[:csv_options][:col_sep] = col_sep if col_sep
     opts[:csv_options][:liberal_parsing] = true if liberal_parsing
-    opts[:extension] = File.extname(File.basename(@@filename)) if @@filename
+    opts[:extension] = File.extname(File.basename(file)) if file
     begin
       Roo::Spreadsheet.open(file, **opts)
     rescue StandardError => e

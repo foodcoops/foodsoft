@@ -3,3 +3,8 @@
   %label(for="articles_file")
     %strong="select the file type you are about to upload"
   =f.collection_select :type, FoodsoftArticleImport::FORMATS , :to_s, :to_s
+/ insert_before 'erb:contains("articles_outlist_absent")'
+-if FoodsoftArticleImport.enabled?
+  %label(for="articles_update_category")
+    = f.check_box "update_category"
+    = t 'Kategorien aus der Datei übernehmen und erstellen.'

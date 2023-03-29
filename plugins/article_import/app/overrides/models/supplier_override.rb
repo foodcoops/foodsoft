@@ -13,14 +13,20 @@ Supplier.class_eval do
     custom_codes_file_path = custom_codes_path if File.exist?(custom_codes_path)
     FoodsoftArticleImport.parse(file, custom_file_path: custom_codes_file_path, type: type, **opts) do |new_attrs, status, line|
       article = articles.undeleted.where(order_number: new_attrs[:order_number]).first
-      new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
+
+      if new_attrs[:article_category].present? && options[:update_category]
+        new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category]) || ArticleCategory.create_or_find_by!(name: new_attrs[:article_category])
+      else
+        new_attrs[:article_category] = nil
+      end
+
       new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
       new_article = articles.build(new_attrs)
       if status.nil?
         if article.nil?
           new_articles << new_article
         else
-          unequal_attributes = article.unequal_attributes(new_article, options.slice(:convert_units))
+          unequal_attributes = article.unequal_attributes(new_article, options.slice(:convert_units, :update_category))
           unless unequal_attributes.empty?
             article.attributes = unequal_attributes
             updated_article_pairs << [article, unequal_attributes]
