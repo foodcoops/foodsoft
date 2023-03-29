@@ -1,0 +1,107 @@
+tr:
+  activerecord:
+    attributes:
+      page:
+        body: İçerik
+        parent_id: Üst sayfa
+        title: Başlık
+  config:
+    hints:
+      use_wiki: Düzenlenebilir wiki sayfalarını etkinleştirin.
+    keys:
+      use_wiki: Wiki'yi etkinleştir
+  model:
+    page:
+      redirect: '[[%{title}]] sayfasına yönlendiriliyor...'
+  navigation:
+    wiki:
+      all_pages: Tüm Sayfalar
+      home: Ana Sayfa
+      title: Wiki
+  pages:
+    all:
+      new_page: Yeni sayfa oluştur
+      recent_changes: Son değişiklikler
+      search:
+        action: Ara
+        placeholder: Sayfa başlığı ..
+      site_map: Site Haritası
+      title: Tüm Wiki sayfaları
+      title_list: Sayfa listesi
+    body:
+      title_toc: İçindekiler
+      wikicloth_exception: 'Üzgünüm, wiki sayfasını yorumlarken bir hata oluştu: %{msg}. Lütfen düzeltin ve sayfayı tekrar kaydedin.'
+    create:
+      notice: Sayfa oluşturuldu.
+    cshow:
+      error_noexist: Sayfa mevcut değil!
+      redirect_notice: '%{page} sayfasından yönlendirildi ...'
+    destroy:
+      notice: Sayfa '%{page}' ve tüm alt sayfaları başarıyla silindi.
+    diff:
+      title: "%{title} - %{old} versiyonundan %{new} versiyonuna değişiklikler"
+    edit:
+      title: Sayfayı düzenle
+    error_stale_object: Uyarı, sayfa başka biri tarafından düzenlendi. Lütfen tekrar deneyin.
+    form:
+      help:
+        bold: kalın
+        external_link_ex: Dış bağlantı
+        external_links: Dış
+        heading: '%{level}. düzey'
+        headings: Başlık
+        image_link_title: Resim başlığı
+        image_links: Resimler
+        italic: italik
+        link_lists: Liste hakkında daha fazlası
+        link_table: Tablo biçimlendirmesi
+        link_templates: Şablonlar
+        link_variables: Foodsoft değişkenleri
+        list_item_1: İlk liste maddesi
+        list_item_2: İkinci liste maddesi
+        noformat: Biçimlendirme yok
+        ordered_list: Numaralı liste
+        section_block: Blok biçimlendirmesi
+        section_character: Karakter biçimlendirmesi
+        section_link: Bağlantı biçimlendirmesi
+        section_more: Daha fazla konu
+        section_table: Tablo biçimlendirmesi
+        see_tables: '%{tables_link} göz atın'
+        tables_link: Tablolar
+        text: metin
+        title: Hızlı biçimlendirme yardımı
+        unordered_list: Madde listesi
+        wiki_link_ex: Foodsoft Wiki Sayfası
+        wiki_links: Wiki bağlantıları
+      preview: Önizleme
+    last_updated: Son güncelleme
+    new:
+      title: Yeni bir wiki sayfası oluşturun
+    page_list_item:
+      date_format: ! '%d %B %Y, %H:%M:%S'
+    show:
+      date_format: ! '%d-%m-%Y %H:%M'
+      delete: Sayfayı sil
+      delete_confirm: Tüm alt sayfaların da silineceği uyarısını dikkate alarak devam etmek istediğinizden emin misiniz?
+      diff: Versiyonları karşılaştır
+      edit: Sayfayı düzenle
+      last_updated: Son güncelleme %{when} tarihinde <b>%{user}</b> tarafından yapıldı
+      subpages: alt sayfalar
+      title_versions: Versiyonlar
+      versions: Versiyonlar (%{count})
+    title: Başlık
+    update:
+      notice: Sayfa güncellendi
+    variables:
+      description: Değişkenler bilgiyi başka bir yerden getirir. Değişkeni kullandığınızda, görüntülendiğinde değeriyle değiştirilir. Foodsoft'un adınız, adresiniz, yazılım sürümü ve üye ve tedarikçi sayısı gibi birçok önceden tanımlanmış değişkeni vardır. Tüm değişkenler için aşağıdaki tabloya bakın. Bunları wiki sayfalarında ve ayak kısımlarında (yapılandırma ekranından) kullanabilirsiniz.
+      title: Foodsoft değişkenleri
+      value: Güncel değer
+      variable: Değişken
+    version:
+      author: 'Yazar: %{user}'
+      date_format: ! '%a, %d-%m-%Y, %H:%M'
+      revert: Bu sürüme geri dön
+      title: ! '%{title} - sürüm %{version}'
+      title_version: Sürüm
+      view_current: Şu anki sürümü gör
+

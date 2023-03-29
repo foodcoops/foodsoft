@@ -8,6 +8,7 @@
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.nl
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.tr
 //= require list
 //= require list.unlist
 //= require list.delay

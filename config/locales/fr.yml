@@ -1196,6 +1196,7 @@ fr:
             es: Espagnol
             fr: Français
             nl: Néerlandais
+            tr: Turc
     required:
       text: requis
     'yes': 'Oui'
