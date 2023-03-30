@@ -1,28 +1,15 @@
+require_relative '../test_helper'
 require_relative '../../../../spec/spec_helper'
 
 feature ArticlesController do
-  
+
   let(:user) { create(:user, groups: [create(:workgroup, role_article_meta: true)]) }
   let(:supplier) { create(:supplier) }
   let!(:article_category) { create(:article_category) }
-  
-  before do
-    FoodsoftConfig[:use_article_import] = true
-    login user
-  end
-  after do
-    FoodsoftConfig[:use_article_import] = false
-  end
+
+  before { login user }
 
   describe ':index', js: true do
-    puts "
-    " + "______________" + "
-    " + "______________" + "
-    " + "______________" + "
-    " + "Plugin" + "
-    " + "______________"+ "
-    " + "______________"+ "
-    " + "______________"
     before do
       login user
       visit supplier_articles_path(supplier_id: supplier.id)

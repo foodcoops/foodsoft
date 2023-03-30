@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["foodsoft@local-it.org"]
   s.summary     = "Manages manual article import from file. File Formats supported are: foodsoft file(csv), bnn files (.bnn) and odin files (xml)"
 
-  s.files = Dir["{app,config,db,lib,spec}/**/*"] + ["Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
 
   s.add_dependency "rails"
   s.add_dependency "deface", "~> 1.0"
