@@ -32,6 +32,9 @@ default: &defaults
   # custom foodsoft software URL (used in footer)
   #foodsoft_url: https://github.com/foodcoops/foodsoft
 
+  # URL to redirect to after logging out
+  # logout_redirect_url: https://foodcoop.test
+
   # Default language
   #default_locale: en
   # By default, foodsoft takes the language from the webbrowser/operating system.
