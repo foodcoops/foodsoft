@@ -6,7 +6,7 @@ module FoodsoftArticleImport
       end
     end
     def default_foodsoft_config(cfg)
-      cfg[:use_article_import] = true
+      cfg[:use_article_import] = false
     end
   end
 end
