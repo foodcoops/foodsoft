@@ -3,11 +3,7 @@ tr:
     attributes:
       article:
         article_category: Kategori
-<<<<<<< Updated upstream
-        availability: Makale mevcut mu?
-=======
         availability: Ürün mevcut mu?
->>>>>>> Stashed changes
         availability_short: mevcut.
         deposit: Depozito
         fc_price: FoodCoop fiyatı
@@ -281,11 +277,7 @@ tr:
       user: Kullanıcı
       workgroup: Çalışma grubu
   admin:
-<<<<<<< Updated upstream
-    access_to: erişim sağla
-=======
     access_to: Erişim sağla
->>>>>>> Stashed changes
     base:
       index:
         all_ordergroups: Tüm sipariş grupları
@@ -417,11 +409,7 @@ tr:
         person: Kişi
         preference: Tercihler
         show_email_problems: E-posta sorunlarını göster
-<<<<<<< Updated upstream
-        sudo: Kimlik olarak al
-=======
         sudo: Kimliği kullanarak giriş yap
->>>>>>> Stashed changes
       users:
         show_email_problems: E-posta sorunlarını göster
     workgroups:
@@ -471,11 +459,7 @@ tr:
       title: Kategori düzenleme
     index:
       new: Yeni kategori ekle
-<<<<<<< Updated upstream
-      title: Makale kategorileri
-=======
       title: Ürün kategorileri
->>>>>>> Stashed changes
     new:
       title: Yeni kategori ekleme
     update:
@@ -484,33 +468,16 @@ tr:
     article:
       last_update: 'son güncelleme: %{last_update} | brüt: %{gross_price}'
     articles:
-<<<<<<< Updated upstream
-      confirm_delete: Tüm seçilen makaleleri gerçekten silmek istiyor musunuz?
-      option_available: Makaleleri müsait hale getir
-      option_delete: Makaleyi sil
-      option_not_available: Makaleleri müsait değil hale getir
-=======
       confirm_delete: Tüm seçilen ürünleri gerçekten silmek istiyor musunuz?
       option_available: Ürünleri müsait hale getir
       option_delete: Ürünü sil
       option_not_available: Ürünleri müsait değil yap
->>>>>>> Stashed changes
       option_select: Bir eylem seçin ...
       price_netto: Fiyat
       unit_quantity_desc: Birim miktarı
       unit_quantity_short: B.M.
     controller:
       create_from_upload:
-<<<<<<< Updated upstream
-        notice: "%{count} yeni makale kaydedildi."
-      error_invalid: Makalelerde hatalar var
-      error_nosel: Seçili makale yok
-      error_parse: "%{msg} ... satır %{line}'da"
-      error_update: '%{article} makalesini güncellerken bir hata oluştu: %{msg}'
-      parse_upload:
-        no_file: Lütfen yüklemek için bir dosya seçin.
-        notice: "%{count} makale başarıyla analiz edildi."
-=======
         notice: "%{count} yeni ürün kaydedildi."
       error_invalid: Ürünlerde hatalar var
       error_nosel: Seçili ürün yok
@@ -519,42 +486,10 @@ tr:
       parse_upload:
         no_file: Lütfen yüklemek için bir dosya seçin.
         notice: "%{count} ürün başarıyla analiz edildi."
->>>>>>> Stashed changes
       sync:
         notice: Katalog güncel
         shared_alert: "%{supplier} harici bir veritabanına bağlı değil"
       update_all:
-<<<<<<< Updated upstream
-        notice: Tüm makaleler ve fiyatlar güncellendi.
-      update_sel:
-        notice_avail: Tüm seçili makaleler müsait olarak ayarlandı.
-        notice_destroy: Tüm seçili makaleler silindi.
-        notice_noaction: Hiçbir işlem belirtilmedi!
-        notice_unavail: Tüm seçili makaleler müsait değil olarak ayarlandı.
-      update_sync:
-        notice: Tüm makaleler ve fiyatlar güncellendi.
-    destroy_active_article:
-      drop: sil
-      note: "%{article} mevcut siparişlerde kullanılıyor ve silinemez. Lütfen önce ... makaleyi siparişlerden %{drop_link} kaldırın."
-    edit_all:
-      note: 'Zorunlu alanlar: ad, birim, (net) fiyat ve sipariş numarası.'
-      submit: Tüm makaleleri güncelle
-      title: "%{supplier} tüm makaleleri düzenle"
-      warning: 'Uyarı: tüm makaleler güncellenecek!'
-    form:
-      title_edit: Makaleyi düzenle
-      title_new: Yeni makale ekle
-    import_search_results:
-      action_import: İçe aktar
-      already_imported: içe aktarıldı
-      not_found: Makale bulunamadı
-    index:
-      change_supplier: Tedarikçi değiştir ...
-      download: Makaleleri indir
-      edit_all: Tümünü düzenle
-      ext_db:
-        import: Makaleyi içe aktar
-=======
         notice: Tüm ürünler ve fiyatlar güncellendi.
       update_sel:
         notice_avail: Tüm seçili ürünler müsait olarak ayarlandı.
@@ -584,50 +519,11 @@ tr:
       edit_all: Tümünü düzenle
       ext_db:
         import: Ürünü içe aktar
->>>>>>> Stashed changes
         sync: Senkronize et
       import:
         category: Doğrudan kategoriye aktar
         placeholder: Ad ile arama yapın ...
         restrict_region: Sadece bölgeye özgü hale getir
-<<<<<<< Updated upstream
-        title: Makaleyi içe aktar
-      new: Yeni makale
-      new_order: Yeni sipariş oluştur
-      search_placeholder: Ad ...
-      title: "%{supplier} makaleleri (%{count})"
-      upload: Makaleleri yükle
-    model:
-      error_in_use: "%{article}, bir mevcut siparişin parçası olduğu için silinemiyor!"
-      error_nosel: Hiçbir makale seçmediniz
-    parse_upload:
-      body: "<p><i>Lütfen makaleleri doğrulayın.</i></p> <p><i>Dikkat, şu anda yinelenen makaleler için herhangi bir kontrol yok.</i></p>"
-      submit: Yüklemeyi işle
-      title: Makaleleri yükle
-    sync:
-      outlist:
-        alert_used: Uyarı, %{article} açık bir siparişte kullanılıyor. Lütfen önce siparişten kaldırın.
-        body: 'Aşağıdaki makaleler listeden çıkarıldı ve <b>silinecek</b>:'
-        body_ignored:
-          one: Bir sipariş numarası olmayan makale atlandı.
-          other: "%{count} sipariş numarası olmayan makale atlandı."
-        body_skip: Silinecek makale yok.
-        title: Listeden çıkar ...
-      price_short: Fiyat
-      submit: Tümünü senkronize et
-      title: Harici veritabanıyla makaleleri senkronize et
-      unit_quantity_short: Birim miktarı
-      update:
-        body: 'Her makale iki kez gösterilir: eski değerler gri, metin alanları ise güncellenmiş değerler içerir. Eski makalelerle farklılıklar sarı renkle işaretlenmiştir.'
-        title: Güncelle ...
-        update_msg:
-          one: Bir makale güncellenmesi gerekiyor.
-          other: "%{count} makale güncellenmesi gerekiyor."
-      upnew:
-        body_count:
-          one: Bir yeni makale eklemek için.
-          other: Eklemek için %{count} makale var.
-=======
         title: Ürünü içe aktar
       new: Yeni ürün
       new_order: Yeni sipariş oluştur
@@ -664,7 +560,6 @@ tr:
         body_count:
           one: Bir yeni ürün eklemek için.
           other: Eklemek için %{count} ürün var.
->>>>>>> Stashed changes
         title: Yeni ekle ...
     upload:
       fields:
@@ -673,11 +568,7 @@ tr:
       file_label: Lütfen uyumlu bir dosya seçin
       options:
         convert_units: Mevcut birimleri koruyun, birim miktarını ve fiyatı yeniden hesaplayın (senkronize gibi).
-<<<<<<< Updated upstream
-        outlist_absent: Yüklenen dosyada olmayan makaleleri sil.
-=======
         outlist_absent: Yüklenen dosyada olmayan ürünleri sil.
->>>>>>> Stashed changes
       sample:
         juices: Sular
         nuts: Kuruyemişler
@@ -688,15 +579,9 @@ tr:
         tomato_juice: Domates suyu
         walnuts: Cevizler
       submit: Dosyayı yükle
-<<<<<<< Updated upstream
-      text_1: '%{supplier} makalelerini güncellemek için bir elektronik tablo yükleyebilirsiniz. Excel (xls, xlsx) ve OpenOffice (ods) tabloları kabul edilir, virgülle ayrılmış dosyalar da kabul edilir (csv, utf-8 kodlamalı "; " ile ayrılmış sütunlar). Sadece ilk sayfa içe aktarılacak ve sütunlar aşağıdaki sıraya göre olmalıdır:'
-      text_2: Burada gösterilen satırlar örneklerdir. İlk sütunda "x" olduğunda, makale listeden çıkarılır ve silinir. Bu, örneğin tedarikçiyle makaleler müsait olmadığında birçok makaleyi hızlı bir şekilde kaldırmak için elektronik tabloyu düzenlemenize ve çıkarmanıza izin verir. Kategori, Foodsoft kategori listenize eşleştirilecek (hem kategori adı hem de içe aktarma adlarıyla).
-      title: "%{supplier} makalelerini yükle"
-=======
       text_1: '%{supplier} ürünlerini güncellemek için bir elektronik tablo yükleyebilirsiniz. Excel (xls, xlsx) ve OpenOffice (ods) tabloları kabul edilir, virgülle ayrılmış dosyalar da kabul edilir (csv, utf-8 kodlamalı "; " ile ayrılmış sütunlar). Sadece ilk sayfa içe aktarılacak ve sütunlar aşağıdaki sıraya göre olmalıdır:'
       text_2: Burada gösterilen satırlar örneklerdir. İlk sütunda "x" olduğunda, ürün listeden çıkarılır ve silinir. Bu, örneğin tedarikçiyle ürünler müsait olmadığında birçok ürünyi hızlı bir şekilde kaldırmak için elektronik tabloyu düzenlemenize ve çıkarmanıza izin verir. Kategori, Foodsoft kategori listenize eşleştirilecek (hem kategori adı hem de içe aktarma adlarıyla).
       title: "%{supplier} ürünlerini yükle"
->>>>>>> Stashed changes
   bank_account_connector:
     confirm: Lütfen %{code} kodunu onaylayın.
     fields:
@@ -829,21 +714,12 @@ tr:
     edit:
       title: Teslimatı düzenle
     form:
-<<<<<<< Updated upstream
-      confirm_foreign_supplier_reedit: Stok maddesi %{name} başarıyla kaydedildi. Ancak, bu teslimatın tedarikçisi ile farklı bir tedarikçiye ait. Stok maddesini tekrar düzenlemek ister misiniz?
-      create_from_blank: Yeni madde oluştur
-      create_stock_article: Stok maddesi oluştur
-      title_fill_quantities: 2. Teslimat miktarlarını belirle
-      title_finish_delivery: 3. Teslimatı tamamla
-      title_select_stock_articles: 1. Stok maddelerini seç
-=======
       confirm_foreign_supplier_reedit: Stok ürünü %{name} başarıyla kaydedildi. Ancak, bu teslimatın tedarikçisi ile farklı bir tedarikçiye ait. Stok ürününi tekrar düzenlemek ister misiniz?
       create_from_blank: Yeni ürün oluştur
       create_stock_article: Stok ürünü oluştur
       title_fill_quantities: 2. Teslimat miktarlarını belirle
       title_finish_delivery: 3. Teslimatı tamamla
       title_select_stock_articles: 1. Stok ürünlerini seç
->>>>>>> Stashed changes
     index:
       confirm_delete: Silmek istediğinizden emin misiniz?
       new_delivery: '%{supplier} için yeni teslimat oluştur '
@@ -858,11 +734,7 @@ tr:
       sum_gross: Brüt toplam
       sum_net: Net toplam
       title: Teslimatı göster
-<<<<<<< Updated upstream
-      title_articles: Maddeler
-=======
       title_articles: Ürünler
->>>>>>> Stashed changes
     stock_article_for_adding:
       action_add_to_delivery: Teslimata ekle
       action_edit: Düzenle
@@ -874,13 +746,8 @@ tr:
       notice: Teslimat güncellendi.
   documents:
     order_by_articles:
-<<<<<<< Updated upstream
-      filename: Sipariş %{name}-%{date} - maddelere göre
-      title: '%{name} için maddelere göre sıralanmış sipariş, %{date} tarihinde kapanmıştır'
-=======
       filename: Sipariş %{name}-%{date} - ürünlere göre
       title: '%{name} için ürünlere göre sıralanmış sipariş, %{date} tarihinde kapanmıştır'
->>>>>>> Stashed changes
     order_by_groups:
       filename: Sipariş %{name}-%{date} - gruba göre
       sum: Toplam
@@ -898,11 +765,7 @@ tr:
       total: Toplam
     order_matrix:
       filename: Sipariş %{name}-%{date} - sıralama matrisi
-<<<<<<< Updated upstream
-      heading: Makale genel bakışı (%{count})
-=======
       heading: ürün genel bakışı (%{count})
->>>>>>> Stashed changes
       title: '%{date} tarihinde kapatılan %{name} sipariş sıralama matrisi'
   errors:
     general: Bir problem oluştu.
@@ -941,11 +804,7 @@ tr:
       edit_note:
         title: Sipariş notunu düzenle
       edit_results_by_articles:
-<<<<<<< Updated upstream
-        add_article: Makale ekle
-=======
         add_article: ürün ekle
->>>>>>> Stashed changes
         amount: Miktar
         edit_transport: Taşıma masraflarını düzenle
         gross: Brüt
@@ -972,11 +831,7 @@ tr:
         refund_adjusted_amount: 'iade için düzeltilen tutar:'
       new:
         alert: Dikkat, sipariş zaten hesaba katılmış
-<<<<<<< Updated upstream
-        articles_overview: Makalelerin genel bakışı
-=======
         articles_overview: ürünlerin genel bakışı
->>>>>>> Stashed changes
         close_direct: Ödemeyi atla
         close_direct_confirm: Üye hesaplarını manuel olarak borçlandırdıysanız veya gerçekten ne yaptığınızı biliyorsanız, üye hesaplarını ücretlendirmeden siparişi hesapla. 
         comment_on_transaction: Muhasebenize bir yorum ekleyebilirsiniz.
@@ -1154,11 +1009,7 @@ tr:
       index:
         name: İsim ...
         only_active: Sadece aktif gruplar
-<<<<<<< Updated upstream
-        only_active_desc: "(son 3 ayda en az bir kez sipariş vermişlerdir)"
-=======
         only_active_desc: "(son 3 ayda en az bir kez sipariş vermiş olanlar)"
->>>>>>> Stashed changes
         title: Sipariş Grupları
       ordergroups:
         break: "%{start} - %{end}"
@@ -1543,11 +1394,7 @@ tr:
         Gruba gönderildi: %{group}
   model:
     delivery:
-<<<<<<< Updated upstream
-      each_stock_article_must_be_unique: Her stok maddesi bir kez listelenmeli.
-=======
       each_stock_article_must_be_unique: Her stok ürünü bir kez listelenmeli.
->>>>>>> Stashed changes
     financial_transaction:
       foodcoop_name: Gıda kooperatifi
     financial_transaction_type:
@@ -1577,13 +1424,8 @@ tr:
     articles:
       categories: Kategoriler
       stock: Stok
-<<<<<<< Updated upstream
-      suppliers: Tedarikçiler/makaleler
-      title: Makaleler
-=======
       suppliers: Tedarikçiler/ürünler
       title: Ürünler
->>>>>>> Stashed changes
     dashboard: Kontrol Paneli
     finances:
       accounts: Hesapları Yönet
@@ -1609,17 +1451,10 @@ tr:
         strip_insignificant_zeros: true
   order_articles:
     edit:
-<<<<<<< Updated upstream
-      stock_alert: Stok makalelerinin fiyatı değiştirilemez!
-      title: Makaleyi güncelle
-    new:
-      title: Siparişe teslim edilen makale ekle
-=======
       stock_alert: Stok ürünürinin fiyatı değiştirilemez!
       title: Ürünü güncelle
     new:
       title: Siparişe teslim edilen ürünükle
->>>>>>> Stashed changes
   ordergroups:
     edit:
       title: Sipariş gruplarını düzenle
@@ -1630,11 +1465,7 @@ tr:
       invalid_balance: geçerli bir sayı değil
   orders:
     articles:
-<<<<<<< Updated upstream
-      article_count: 'Sipariş edilen makaleler:'
-=======
       article_count: 'Sipariş edilen ürünür:'
->>>>>>> Stashed changes
       prices: Net/brüt fiyatı
       prices_sum: 'Toplam (net/brüt fiyat):'
       units_full: Tam birimler
@@ -1644,16 +1475,6 @@ tr:
     edit:
       title: 'Siparişi düzenle: %{name}'
     edit_amount:
-<<<<<<< Updated upstream
-      field_locked_title: Bu makale, sipariş grupları arasındaki dağılımı manuel olarak değiştirildi. Bu alan, bu değişiklikleri korumak için kilitlidir. Yeni bir dağılım yapmak ve bu değişiklikleri üzerine yazmak için kilidi açın ve miktarı değiştirin.
-      field_unlocked_title: Bu makale, sipariş grupları arasındaki dağılımı manuel olarak değiştirildi. Miktarı değiştirirken, bu manuel değişiklikler üzerine yazılacaktır.
-    edit_amounts:
-      no_articles_available: Eklenecek makale yok.
-      set_all_to_zero: Tümünü sıfıra ayarla
-    fax:
-      amount: Miktar
-      articles: Makaleler
-=======
       field_locked_title: Bu ürünüsipariş grupları arasındaki dağılımı manuel olarak değiştirildi. Bu alan, bu değişiklikleri korumak için kilitlidir. Yeni bir dağılım yapmak ve bu değişiklikleri üzerine yazmak için kilidi açın ve miktarı değiştirin.
       field_unlocked_title: Bu ürünüsipariş grupları arasındaki dağılımı manuel olarak değiştirildi. Miktarı değiştirirken, bu manuel değişiklikler üzerine yazılacaktır.
     edit_amounts:
@@ -1662,7 +1483,6 @@ tr:
     fax:
       amount: Miktar
       articles: Ürümler
->>>>>>> Stashed changes
       delivery_day: Teslim günü
       heading: "%{name} için sipariş"
       name: İsim
@@ -1675,11 +1495,7 @@ tr:
       prices: Fiyatlar (net/FC)
       select_all: Hepsini seç
       stockit: Stokta
-<<<<<<< Updated upstream
-      title: Madde
-=======
       title: Ürün
->>>>>>> Stashed changes
     index:
       action_end: Kapat
       action_receive: Teslim al
@@ -1695,27 +1511,11 @@ tr:
       close_direct_message: Üye hesaplarına ücret yansıtılmadan sipariş kapatıldı.
       error_boxfill_before_ends: Kutu doldurma tarihi son tarihten önce olmalıdır (veya boş bırakılmalıdır).
       error_closed: Sipariş zaten kapatılmış
-<<<<<<< Updated upstream
-      error_nosel: En az bir madde seçilmelidir. Siparişi silmek isteyebilirsiniz?
-=======
       error_nosel: En az bir ürün seçilmelidir. Siparişi silmek isteyebilirsiniz?
->>>>>>> Stashed changes
       error_starts_before_boxfill: Başlangıç tarihi kutu doldurma tarihinden sonra olmalıdır (veya boş bırakılmalıdır).
       error_starts_before_ends: Başlangıç tarihi bitiş tarihinden sonra olmalıdır (veya boş bırakılmalıdır).
       notice_close: '%{name} siparişi, %{ends} kadar.'
       stock: Stok
-<<<<<<< Updated upstream
-      warning_ordered: 'Uyarı: Kırmızı olarak işaretlenen maddeler bu açık siparişte zaten sipariş edildi. Burada işaretini kaldırırsanız, tüm bu maddelerin mevcut siparişleri silinecektir. Devam etmek için aşağıdaki onaylayın.'
-      warning_ordered_stock: 'Uyarı: Kırmızı olarak işaretlenen maddeler bu açık stok siparişinde zaten sipariş/purchased edildi. Burada işaretini kaldırırsanız, tüm bu maddelerin mevcut siparişleri/purchases silinecek ve bunlar hesaba katılmayacaktır. Devam etmek için aşağıdaki onaylayın.'
-    new:
-      title: Yeni sipariş oluştur
-    receive:
-      add_article: Madde ekle
-      consider_member_tolerance: toleransı dikkate al
-      notice: '%{msg} siparişi alındı.'
-      notice_none: Teslim alınacak yeni bir madde yok
-      paragraph: Sipariş edilen ve alınan miktar aynıysa, ilgili alanlar boş bırakılabilir. Yine de tüm alanların girilmesi iyi bir uygulamadır, çünkü bu, tüm maddelerin kontrol edildiğini doğrulamanın kolay bir yolunu sağlar.
-=======
       warning_ordered: 'Uyarı: Kırmızı olarak işaretlenen ürünler bu açık siparişte zaten sipariş edildi. Burada işaretini kaldırırsanız, tüm bu ürünlerin mevcut siparişleri silinecektir. Devam etmek için aşağıdaki onaylayın.'
       warning_ordered_stock: 'Uyarı: Kırmızı olarak işaretlenen ürünler bu açık stok siparişinde zaten sipariş/purchased edildi. Burada işaretini kaldırırsanız, tüm bu ürünlerin mevcut siparişleri/purchases silinecek ve bunlar hesaba katılmayacaktır. Devam etmek için aşağıdaki onaylayın.'
     new:
@@ -1726,7 +1526,6 @@ tr:
       notice: '%{msg} siparişi alındı.'
       notice_none: Teslim alınacak yeni bir ürün yok
       paragraph: Sipariş edilen ve alınan miktar aynıysa, ilgili alanlar boş bırakılabilir. Yine de tüm alanların girilmesi iyi bir uygulamadır, çünkü bu, tüm ürünlerin kontrol edildiğini doğrulamanın kolay bir yolunu sağlar.
->>>>>>> Stashed changes
       rest_to_stock: stokta kalanlar
       submit: Siparişi Al
       surplus_options: 'Dağıtım Seçenekleri:'
@@ -1736,13 +1535,8 @@ tr:
     show:
       action_end: Kapat!
       amounts: 'Net/Brüt toplam:'
-<<<<<<< Updated upstream
-      articles: Makale özeti
-      articles_ordered: 'Sipariş edilen makaleler:'
-=======
       articles: Ürüm özeti
       articles_ordered: 'Sipariş edilen ürünür:'
->>>>>>> Stashed changes
       comments:
         title: Yorumlar
       comments_link: Yorumlar
@@ -1914,16 +1708,6 @@ tr:
     new:
       amount: Miktar
       create: oluştur
-<<<<<<< Updated upstream
-      stock_articles: Stok maddeleri
-      temp_inventory: geçici envanter
-      text_deviations: "%{inv_link} için tüm fazla sapmaları doldurunuz. Azaltma için negatif bir sayı kullanın."
-      text_need_articles: Burada kullanmadan önce yeni bir stok madde %{create_link} oluşturmanız gerekiyor.
-      title: Yeni envanter oluştur
-    show:
-      amount: Miktar
-      article: Madde
-=======
       stock_articles: Stok ürünleri
       temp_inventory: geçici envanter
       text_deviations: "%{inv_link} için tüm fazla sapmaları doldurunuz. Azaltma için negatif bir sayı kullanın."
@@ -1932,7 +1716,6 @@ tr:
     show:
       amount: Miktar
       article: Ürün
->>>>>>> Stashed changes
       confirm_delete: Envateri silmek istediğinize emin misiniz?
       date: Tarih
       note: Not
@@ -1950,35 +1733,6 @@ tr:
     check:
       not_empty: "%{name} silinemedi, envanter sıfır değil."
     copy:
-<<<<<<< Updated upstream
-      title: Stok maddesi kopyala
-    create:
-      notice: Yeni stok maddesi "%{name}" oluşturuldu.
-    derive:
-      title: Şablon kullanarak stok maddesi ekle
-    destroy:
-      notice: "%{name} makalesi silindi."
-    edit:
-      title: Stok maddelerini düzenle
-    form:
-      copy_stock_article: stok makalesi kopyala
-      price_hint: Karmaşayı önlemek için, mevcut stok maddelerinin fiyatlarını şimdilik düzenlemek mümkün değildir.
-    index:
-      confirm_delete: Silmek istediğinizden emin misiniz?
-      new_delivery: Yeni teslimat ...
-      new_stock_article: Yeni stok maddesi ekle
-      new_stock_taking: Envanter ekle
-      order_online: Stok siparişini çevrimiçi olarak ver
-      show_stock_takings: Envanter genel bakışı
-      stock_count: 'Makale sayısı:'
-      stock_worth: 'Geçerli stok değeri:'
-      title: Stok (%{article_count})
-      toggle_unavailable: Kullanılamayan makaleleri göster/gizle
-      view_options: Görünüm seçenekleri
-    new:
-      search_text: 'Tüm kataloglarda makale arayın:'
-      title: Yeni stok maddesi ekle
-=======
       title: Stok ürünü kopyala
     create:
       notice: Yeni stok ürünü "%{name}" oluşturuldu.
@@ -2006,7 +1760,6 @@ tr:
     new:
       search_text: 'Tüm kataloglarda ürün arayın:'
       title: Yeni stok ürünü ekle
->>>>>>> Stashed changes
     show:
       change_quantity: Değiştir
       datetime: Zaman
@@ -2014,11 +1767,7 @@ tr:
       reason: Sebep
       stock_changes: Stok miktarı değişiklikleri
     update:
-<<<<<<< Updated upstream
-      notice: Stok makalesi %{name} kaydedildi.
-=======
       notice: Stok ürünü %{name} kaydedildi.
->>>>>>> Stashed changes
   suppliers:
     create:
       notice: Tedarikçi oluşturuldu
@@ -2029,11 +1778,7 @@ tr:
     index:
       action_import: Dış veritabanından tedarikçi içe aktar
       action_new: Yeni tedarikçi oluştur
-<<<<<<< Updated upstream
-      articles: makaleler (%{count})
-=======
       articles: ürünler (%{count})
->>>>>>> Stashed changes
       confirm_del: "%{name} tedarikçisini gerçekten silmek istiyor musunuz?"
       deliveries: teslimatlar (%{count})
       stock: stokta (%{count})
