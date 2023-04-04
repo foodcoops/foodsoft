@@ -1,4 +1,6 @@
 class Foodcoop::UsersController < ApplicationController
+  before_action -> { require_config_disabled :disable_members_overview }
+
   def index
     @users = User.undeleted.sort_by_param(params["sort"])
 

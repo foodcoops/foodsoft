@@ -90,6 +90,9 @@ default: &defaults
   #use_wiki: true
   #use_messages: true
 
+  # When enabled only administrators can access the member list.
+  #disable_members_overview: true
+
   # Base font size for generated PDF documents
   #pdf_font_size: 12
   # Page size for generated PDF documents

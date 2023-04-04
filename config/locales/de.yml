@@ -655,6 +655,7 @@ de:
       default_role_pickups: Abholtage
       default_role_suppliers: Lieferanten
       disable_invite: Einladungen deaktivieren
+      disable_members_overview: Mitgliederliste deaktivieren
       email_from: Absenderadresse
       email_replyto: Antwortadresse
       email_sender: Senderadresse

@@ -580,6 +580,7 @@ es:
       custom_css: CSS adicional
       default_locale: Idioma por defecto
       disable_invite: Desactivar invitaciones
+      disable_members_overview: Desactivar la lista de miembros
       email_from: Dirección de email de origen
       email_replyto: Dirección reply-to
       email_sender: Dirección del remitente
