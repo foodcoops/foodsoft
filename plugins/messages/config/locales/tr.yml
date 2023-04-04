@@ -92,9 +92,9 @@ tr:
       list:
         desc: ! 'Lütfen tüm mesajları şu mailing-liste gönderin: %{list}'
         mail: örneğin %{email} adresine bir e-posta ile.
-        subscribe: E-posta listesi hakkında daha fazla bilgi edinebilirsiniz: %{link}.
+        subscribe: 'E-posta listesi hakkında daha fazla bilgi edinebilirsiniz: %{link}.'
         subscribe_msg: Önce e-posta listesine kaydolmanız gerekebilir.
-        wiki: Wiki (sayfa: Mailing-List)
+        wiki: Wiki (page Mailing-List)
       message: mesaj
       no_user_found: Kullanıcı bulunamadı.
       order_item: "%{supplier_name} (Pickup: %{pickup})"
