@@ -1,0 +1,73 @@
+tr:
+  config:
+    hints:
+      use_current_orders: Şimdiki_siparişler eklentisini aktif et. Sipariş izni olan üyelerin, Siparişler menüsünde üç yeni ekran kullanarak birden çok siparişte üye miktarlarını değiştirmesine olanak tanır. Özellikle teslim alma günleri için faydalıdır.
+    keys:
+      use_current_orders: Ekstra dağıtım ekranları
+  current_orders:
+    articles:
+      article:
+        counts: '%{ordergroups} sipariş grubu, %{articles} farklı ürün sipariş etti.'
+        no_selection: Hangi üyenin ne sipariş ettiğini görmek için bir ürün seçin, veya sağ taraftan toplama listelerini indirin.
+      article_info:
+        origin_in: '%{origin} içinde'
+        supplied_by: '%{supplier} tarafından'
+        supplied_and_made_by: '%{manufacturer} tarafından yapıldı'
+        supplied_by_made_by: '%{supplier} tarafından sağlandı, %{manufacturer} tarafından yapıldı'
+        unit: '%{unit} başına'
+        from: '%{supplier} tarafından'
+      form:
+        article_placeholder: Ürünleri arayın...
+        current_orders: Tüm güncel siparişler
+      index:
+        title: Ürünleri dağıt
+      ordergroups:
+        piece: adet
+        unit: birim
+        add_new: Bir sipariş grubu ekleyin...
+      show:
+        title: ! '%{name}'
+    navigation:
+      receive: Teslim al
+      articles: Dağıtım
+      ordergroups: Üye siparişleri
+    group_orders:
+      index:
+        title: Mevcut siparişleriniz
+    ordergroups:
+      articles:
+        add_new: Yeni bir ürün ekleyin...
+        no_selection: Hangi sipariş grubunu göstermek istediğinizi seçin.
+      form:
+        ordergroup_placeholder: Bir sipariş grubu seçin...
+      index:
+        title: Ürünler - sipariş grubu için
+      payment_bar:
+        account_balance: Hesap bakiyesi
+        new_pin: PIN
+        new_transaction: Yeni işlem
+        payment: ! 'Ödeme:'
+      show:
+        title: '%{name} adına ürünler'
+    orders:
+      receive:
+        title: Siparişleri al
+        no_finished_orders: Şu anda alınacak sipariş yok.
+  documents:
+    multiple_orders_by_articles:
+      filename: Ürüne göre mevcut siparişler
+      title: Mevcut siparişler - ürüne göre
+    multiple_orders_by_groups:
+      filename: Gruba göre mevcut siparişler
+      title: Mevcut siparişler - gruba göre
+  helpers:
+    current_orders:
+      pay_done: Tamamen ödendi
+      pay_none: Ödenecek bir şey yok
+      pay_amount: Ödenecek tutar %{amount}
+  js:
+    current_orders:
+      articles:
+        above: '%{count} adet mevcut stoktan fazla'
+        below: '%{count} adet mevcut stokta kaldı'
+        equal: Tümü dağıtıldı

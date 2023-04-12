@@ -1,0 +1,156 @@
+tr:
+  activerecord:
+    attributes:
+      message:
+        body: Mesaj İçeriği
+        messagegroup_id: Mesaj Grubu
+        order_id: Sipariş
+        ordergroup_id: Sipariş Grubu
+        private: Özel
+        recipient_tokens: (Ek) alıcılar
+        send_method:
+          all: Tüm üyelere gönder
+          recipients: Belirli üyelere gönder
+          order: Bir siparişe katılan üyelere gönder
+          ordergroup: Bir sipariş grubunun üyelerine gönder
+          messagegroup: Bir mesaj grubunun üyelerine gönder
+          workgroup: Bir iş grubunun üyelerine gönder
+        send_to_all: Tüm üyelere gönder
+        subject: Konu
+        workgroup_id: İş Grubu
+      messagegroup:
+        description: Açıklama
+        name: Ad
+        user_tokens: Üyeler
+    models:
+      message: Mesaj
+      messagegroup: Mesaj grubu
+  admin:
+    ordergroups:
+      show:
+        send_message: Mesaj gönder
+    users:
+      show:
+        send_message: Mesaj gönder
+  config:
+    hints:
+      mailing_list: Tüm üyelere için mesajlaşma sistemi yerine kullanılabilecek posta listesi e-posta adresi.
+      mailing_list_subscribe: Üyelerin abone olmak için bir e-posta gönderebileceği e-posta adresi.
+      use_messages: Üyelerin Foodsoft içinde birbirleriyle iletişim kurmasına izin ver.
+    keys:
+      use_messages: Mesajlar
+      mailing_list: Posta Listesi
+      mailing_list_subscribe: Posta Listesi Aboneliği
+  helpers:
+    messages:
+      write_message: Mesaj yaz
+    submit:
+      message:
+        create: Mesaj gönder
+  home:
+    index:
+      messages:
+        title: En yeni mesajlar
+        view_all:
+          text: '%{messages} veya %{threads} göster'
+          messages: tüm mesajlar
+          threads: konular
+    start_nav:
+      write_message: Mesaj yaz
+  messagegroups:
+    index:
+      body: 'Bir mesaj grubu, bir posta listesi gibi: o gruba üye olabilir (veya çıkabilir) ve o gruba gönderilen güncellemeleri alabilirsiniz.'
+      title: Mesaj grupları
+    join:
+      error: 'Mesaj grubuna katılamadı: %{error}'
+      notice: Mesaj grubuna katıldınız
+    leave:
+      error: 'Mesaj grubu terk edilemedi: %{error}'
+      notice: Mesaj grubundan ayrıldınız
+    messagegroup:
+      join: Mesaj grubuna katıl
+      leave: Mesaj grubundan ayrıl
+  messages:
+    actionbar:
+      message_threads: Konu olarak göster
+      messagegroups: Gruplara abone ol
+      messages: Liste olarak göster
+      new: Yeni mesaj
+    create:
+      notice: Mesaj kaydedildi ve gönderilecek.
+    index:
+      title: Mesajlar
+    messages:
+      reply: Yanıtla
+    model:
+      reply_header: ! '%{user} %{when} tarihinde yazdı:'
+      reply_indent: ! '> %{line}'
+      reply_subject: ! 'Yanıt: %{subject}'
+    new:
+      error_private: Üzgünüz, bu mesaj özel.
+      hint_private: Mesaj Foodsoft posta kutusunda gösterilmez.
+      list:
+        desc: ! 'Lütfen tüm mesajları şu mailing-liste gönderin: %{list}'
+        mail: örneğin %{email} adresine bir e-posta ile.
+        subscribe: 'E-posta listesi hakkında daha fazla bilgi edinebilirsiniz: %{link}.'
+        subscribe_msg: Önce e-posta listesine kaydolmanız gerekebilir.
+        wiki: Wiki (page Posta-listesi)
+      message: mesaj
+      no_user_found: Kullanıcı bulunamadı.
+      order_item: "%{supplier_name} (Pickup: %{pickup})"
+      reply_to: Bu mesaj, başka bir %{link} yanıtıdır.
+      search: Ara ...
+      search_user: Kullanıcı ara
+      title: Yeni mesaj
+    show:
+      all_messages: Tüm mesajlar
+      change_visibility: 'Değiştir'
+      from: ! 'Kimden:'
+      group: 'Grup:'
+      reply: Yanıtla
+      reply_to: 'Yanıtla:'
+      sent_on: ! 'Gönderildi:'
+      subject: ! 'Konu:'
+      title: Mesajı Göster
+      to: 'Kime:'
+      visibility: 'Görünürlük:'
+      visibility_private: 'Özel'
+      visibility_public: 'Genel'
+    thread:
+      all_message_threads: Tüm mesaj konuları
+      reply: Yanıtla
+    toggle_private:
+      not_allowed: Mesajın görünürlüğünü değiştiremezsiniz.
+  message_threads:
+    groupmessage_threads:
+      show_message_threads: tümünü göster
+    index:
+      general: Genel
+      title: Mesaj Konuları
+    message_threads:
+      last_reply_at: Son yanıt tarihi
+      last_reply_by: Son yanıtlayan
+      started_at: Başlangıç tarihi
+      started_by: Başlatan
+    show:
+      general: Genel
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Yanıt: %{reply_url}
+        Mesajı çevrimiçi görüntüle: %{msg_url}
+        Mesajlaşma seçenekleri:: %{profile_url}
+      footer_group: |
+        Gruba gönderildi: %{group}
+  navigation:
+    admin:
+      messagegroups: Mesaj grupları
+    messages: Mesajlar
+  shared:
+    user_form_fields:
+      messagegroups: Mesaj gruplarına katıl veya ayrıl
+  simple_form:
+    labels:
+      settings:
+        messages:
+          send_as_email: Mesajları e-posta olarak al

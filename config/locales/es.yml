@@ -1440,6 +1440,7 @@ es:
             es: Español
             fr: Francés
             nl: Neerlandés
+            tr: Turco
     required:
       text: requerido
     'yes': 'Sí'

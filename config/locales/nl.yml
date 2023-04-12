@@ -1658,6 +1658,7 @@ nl:
             es: Spaans
             fr: Frans
             nl: Nederlands
+            tr: Turks
     required:
       mark: "*"
       text: verplicht

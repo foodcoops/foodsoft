@@ -1,0 +1,67 @@
+tr:
+activerecord:
+  attributes:
+    poll:
+      choices: Seçenekler
+      created_at: Oluşturulma tarihi
+      created_by: Oluşturan
+      description: Açıklama
+      ends: Bitiş tarihi
+      name: Adı
+      max_points: Maksimum puan
+      min_points: Minimum puan
+      multi_select_count: Maksimum seçim sayısı
+      one_vote_per_ordergroup: Sadece bir oylama her sipariş grubu için
+      starts: Başlangıç tarihi
+      voting_method: Oylama yöntemi
+      voting_methods:
+        event: Etkinlik
+        single_select: Tek seçim
+        multi_select: Birden fazla seçim
+        points: Puanlar
+        resistance_points: Direniş puanları
+    poll_vote:
+      name: Adı
+      note: Not
+      updated_at: Son güncelleme
+  models:
+    poll: Oylama
+config:
+  hints:
+    use_polls: Basit anketleri etkinleştirin.
+  keys:
+    use_polls: Anketleri etkinleştirin
+navigation:
+  polls: Anketler
+polls:
+  choice:
+    remove: Sil
+  create:
+    error: 'Anket oluşturulamadı: %{error}'
+    notice: Anket oluşturuldu
+  edit:
+    title: Anketi düzenle
+  form:
+    already_voted: Oylama yapıldığından seçenekler değiştirilemez.
+    new_choice: Yeni seçenek
+    required_ordergroup_custom_field: 'Sipariş grubunun ''%{label}'' alanı boş olamaz.'
+    required_user_custom_field: 'Kullanıcının ''%{label}'' alanı boş olamaz.'
+  destroy:
+    error: 'Anket silinemedi: %{error}'
+    no_right: Bu anketi silme izniniz yok
+    notice: Anket silindi
+  index:
+    new_poll: Yeni anket
+    title: Anketler
+  new:
+    title: Yeni anket
+  polls:
+    vote: Oyla
+  show:
+    vote: Oyla
+  update:
+    error: 'Anket güncellenemedi: %{error}'
+    notice: Anket güncellendi
+  vote:
+    submit: Oyla
+    no_right: Bu ankete katılamazsınız

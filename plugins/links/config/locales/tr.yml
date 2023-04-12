@@ -1,0 +1,23 @@
+tr:
+  activerecord:
+    attributes:
+      link:
+        name: Adı
+        url: URL
+        workgroup: Çalışma Grubu
+        indirect: Dolaylı
+        authorization: Yetkilendirme Başlığı
+  admin:
+    links:
+      index:
+        title: Linkler
+        new_link: Yeni link ekle
+      form:
+        description: Bir çalışma grubu seçildiğinde, link yalnızca grubun üyelerine görünür. 'Dolaylı' seçeneği, Foodsoft'un kullanıcıları URL tarafından döndürülen adrese yönlendirmesine izin verir. Bu seçenek, yalnızca tam işlevselliği doğru anlaşıldığında etkinleştirilmelidir.
+  links:
+    show:
+      indirect_no_location: Yapılandırılmış URL, yönlendirme için bir Konum başlığı döndürmedi.
+  navigation:
+    admin:
+      links: Linkler
+    links: Linkler
