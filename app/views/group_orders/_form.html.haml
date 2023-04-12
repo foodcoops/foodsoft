@@ -95,7 +95,14 @@
           %td{colspan: "9"}
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article #{get_missing_units_css_class(@ordering_data[:order_articles][order_article.id][:missing_units])}", valign: "top"}
-            %td.name= order_article.article.name
+            - oa = order_article
+            %td{style: "width:40%"}
+              = oa.article.name
+              - unless oa.article.note.blank?
+                = image_tag("lamp_grey.png", {alt: t('.articles.show_note'), size: "15x16", border: "0", onmouseover: "$('#note_#{oa.id}').show();", onmouseout: "$('#note_#{oa.id}').hide();"})           
+            
+
+
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15
             %td= h order_article.article.origin
@@ -130,6 +137,8 @@
                   %a.btn.btn-ordering{'data-decrease_tolerance' => order_article.id}
                     %i.icon-minus
 
+            
+
             %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
               %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
               .article-info
@@ -151,6 +160,11 @@
                   %br/
                   #{heading_helper Article, :note}: #{order_article.article.note}
                   %br/
+
+            - unless oa.article.note.blank?
+              %tr{id: "note_#{oa.id}", class: "note even", style: "display:none"}
+                %td{colspan: "6"}=h oa.article.note
+                
   #order-footer
     #info-box
     #total-sum
