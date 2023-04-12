@@ -18,6 +18,13 @@ class Message < ApplicationRecord
       .where('private = ? OR sender_id = ? OR message_recipients.user_id = ?', false, user_id, user_id)
       .distinct
   }
+  scope :last_readable_for, ->(user, nr) {
+    user_id = user.try(&:id)
+    received = MessageRecipient.select(:message_id, :user_id).where(user_id: user_id).limit(nr)
+
+    joins("LEFT OUTER JOIN (#{received.to_sql}) sub ON messages.id = sub.message_id")
+      .where('private = ? OR sender_id = ? OR sub.user_id = ?', false, user_id, user_id)
+  }
 
   validates_presence_of :message_recipients, :subject, :body
   validates_length_of :subject, in: 1..255
