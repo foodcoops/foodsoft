@@ -9,7 +9,7 @@ tr:
         name: Ad
   config:
     hints:
-      documents_allowed_extension: Boşluklarla ayrılmış izin verilen dosya uzantılarının bir listesi.
+      documents_allowed_extension: İzin verilen dosya uzantılarının boşluklarla ayrılmış bir listesi.
       use_documents: Gıda kooperatifi menüsüne temel bir belge paylaşım sayfası ekleyin.
     keys:
       documents_allowed_extension: İzin verilen uzantılar

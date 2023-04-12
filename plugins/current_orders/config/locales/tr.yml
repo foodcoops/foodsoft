@@ -1,14 +1,14 @@
 tr:
   config:
     hints:
-      use_current_orders: Şimdiki_siparişler eklentisini aktif et. Sipariş izni olan üyelerin, Menüler menüsünde üç yeni ekran kullanarak birden çok siparişte üye miktarlarını değiştirmesine olanak tanır. Özellikle teslim alma günleri için faydalıdır.
+      use_current_orders: Şimdiki_siparişler eklentisini aktif et. Sipariş izni olan üyelerin, Siparişler menüsünde üç yeni ekran kullanarak birden çok siparişte üye miktarlarını değiştirmesine olanak tanır. Özellikle teslim alma günleri için faydalıdır.
     keys:
       use_current_orders: Ekstra dağıtım ekranları
   current_orders:
     articles:
       article:
         counts: '%{ordergroups} sipariş grubu, %{articles} farklı ürün sipariş etti.'
-        no_selection: Hangi üyenin ne sipariş ettiğini görmek veya doğru yerde toplama listelerini indirmek için bir ürün seçin.
+        no_selection: Hangi üyenin ne sipariş ettiğini görmek için bir ürün seçin, veya sağ taraftan toplama listelerini indirin.
       article_info:
         origin_in: '%{origin} içinde'
         supplied_by: '%{supplier} tarafından'

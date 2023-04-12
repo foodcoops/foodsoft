@@ -13,7 +13,7 @@ tr:
         title: Linkler
         new_link: Yeni link ekle
       form:
-        description: Bir çalışma grubu seçildiğinde, link yalnızca üyelerine görünür. Dolaylı seçeneği, Foodsoft'un kullanıcıları URL tarafından döndürülen adrese yönlendirmesine izin verir. Bu seçenek, tam işlevselliği doğru anlaşıldığında yalnızca etkinleştirilmelidir.
+        description: Bir çalışma grubu seçildiğinde, link yalnızca grubun üyelerine görünür. 'Dolaylı' seçeneği, Foodsoft'un kullanıcıları URL tarafından döndürülen adrese yönlendirmesine izin verir. Bu seçenek, yalnızca tam işlevselliği doğru anlaşıldığında etkinleştirilmelidir.
   links:
     show:
       indirect_no_location: Yapılandırılmış URL, yönlendirme için bir Konum başlığı döndürmedi.

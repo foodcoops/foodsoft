@@ -3,16 +3,16 @@ activerecord:
   attributes:
     poll:
       choices: Seçenekler
-      created_at: Oluşturulma Tarihi
+      created_at: Oluşturulma tarihi
       created_by: Oluşturan
       description: Açıklama
-      ends: Bitiş Tarihi
+      ends: Bitiş tarihi
       name: Adı
       max_points: Maksimum puan
       min_points: Minimum puan
       multi_select_count: Maksimum seçim sayısı
       one_vote_per_ordergroup: Sadece bir oylama her sipariş grubu için
-      starts: Başlangıç Tarihi
+      starts: Başlangıç tarihi
       voting_method: Oylama yöntemi
       voting_methods:
         event: Etkinlik
@@ -48,7 +48,7 @@ polls:
     required_user_custom_field: 'Kullanıcının ''%{label}'' alanı boş olamaz.'
   destroy:
     error: 'Anket silinemedi: %{error}'
-    no_right: Bu ankete silme izniniz yok
+    no_right: Bu anketi silme izniniz yok
     notice: Anket silindi
   index:
     new_poll: Yeni anket

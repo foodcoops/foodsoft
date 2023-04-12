@@ -96,7 +96,7 @@ tr:
         created_at: Oluşturulma tarihi
         created_by: Oluşturan
         date: Fatura tarihi
-        delete_attachment: Ek sil
+        delete_attachment: Eki sil
         deliveries: Stok teslimatı
         deposit: Tahsil edilen depozito
         deposit_credit: İade edilen depozito
@@ -134,7 +134,7 @@ tr:
           articles: Alınan ürün sayısına göre maliyeti dağıt
           ordergroup: Her sipariş grubu aynı tutarı öder
           price: Sipariş tutarına göre maliyeti dağıt
-          skip: Maliyeti dağıtmama
+          skip: Maliyeti dağıtma
         updated_by: Son düzenleyen
       order_article:
         article: Ürün
@@ -145,7 +145,7 @@ tr:
         units_received: Alınan birimler
         units_received_short: Alınan
         units_to_order: Sipariş edilen birimler
-        units_to_order_short: Sipariş
+        units_to_order_short: Sipariş edildi
         update_global_price: Mevcut fiyatı tüm siparişlerde güncelle
       order_comment:
         text: Bu siparişe yorum ekle ...
@@ -159,11 +159,11 @@ tr:
         contact_person: İlgili kişi
         contact_phone: Telefon
         description: Açıklama
-        ignore_apple_restriction: Apple puan sınırlamasına uyma
+        ignore_apple_restriction: Elma puan sınırlamasını yok say
         last_order: Son sipariş
         last_user_activity: Son etkinlik
         name: Adı
-        user_tokens: Üyeler        
+        user_tokens: Üyeler    
       stock_article:
         available: Mevcut
         price: Fiyat
@@ -322,7 +322,7 @@ tr:
         default_roles_title: Erişim sağlanacak alanlar
         default_roles_paragraph: Foodcoop üyesi herkes varsayılan olarak aşağıdaki alanlara erişime sahiptir.
       tab_tasks:
-        periodic_title: Düzenli Görevler
+        periodic_title: Düzenli görevler
       tabs:
         title: Yapılandırma
       update:
@@ -359,18 +359,18 @@ tr:
         title: E-posta problemleri
     ordergroups:
       destroy:
-        error: 'Sipariş grubu silinemedi: %{error}'
-        notice: Sipariş grubu silindi
+        error: 'Sipariş grubu silindi olarak işaretlenemedi: %{error}'
+        notice: Sipariş grubu silindi olarak işaretlendi
       edit:
         title: Sipariş grubunu düzenle
       form:
         first_paragraph: Yeni üyeleri %{url} davet edebilirsiniz.
         here: buradan
       index:
-        first_paragraph: Burada %{url} ekleyebilir, grupları düzenleyebilir veya silebilirsiniz.
+        first_paragraph: Burada %{url}  grupları ekleyebilir, düzenleyebilir veya silebilirsiniz.
         new_ordergroup: Yeni sipariş grubu ekle
         new_ordergroups: yeni sipariş grupları
-        second_paragraph: '<em>Grup</em> ve <em>sipariş grubu</em> arasındaki farkı düşünün: Bir sipariş grubu bir hesaba sahiptir ve yemek siparişi verebilir. Bir <em>%{url}</em> (örneğin ''sınıflandırma grubu'') içindeki üyeler, görevler ve mesajlar yoluyla birbirleriyle koordine eder. Kullanıcılar sadece bir sipariş grubunda olabilir, ancak birden fazla çalışma grubunda olabilirler.'
+        second_paragraph: '<em>Grup</em> ve <em>sipariş grubu</em> arasındaki farkı şöyle düşünün: Bir sipariş grubu bir hesaba sahiptir ve yiyecek siparişi verebilir. Bir <em>%{url}</em> (örneğin ''sınıflandırma grubu'') içindeki üyeler, görevler ve mesajlar yoluyla birbirleri arasında koordinasyon sağlar. Kullanıcılar sadece bir sipariş grubunda olabilir, ancak birden fazla çalışma grubunda olabilirler.'
         title: Sipariş grupları
         workgroup: çalışma grubu
       new:
@@ -392,9 +392,9 @@ tr:
         create_ordergroup: Aynı adı taşıyan bir sipariş grubu oluşturun ve kullanıcıyı ekleyin.
         send_welcome_mail: Kullanıcıya hoş geldiniz e-postası gönderin.
       index:
-        first_paragraph: Burada %{url} kullanıcılarını oluşturabilir, düzenleyebilir ve silebilirsiniz.
-        new_user: Yeni kullanıcı oluştur
-        new_users: yeni kullanıcılar oluşturun
+        first_paragraph: Burada %{url}, düzenleyebilir ve silebilirsiniz.
+        new_user: Yeni kullanıcı oluşturabilir
+        new_users: yeni oluştur
         show_deleted: Silinmiş kullanıcıları göster
         title: Kullanıcı Yönetimi
       new:
@@ -417,22 +417,22 @@ tr:
         error: 'Çalışma grubu silinemedi: %{error}'
         notice: Çalışma grubu silindi
       edit:
-        title: Çalışma grubunu Düzenle
+        title: Çalışma grubunu düzenle
       form:
         first_paragraph: Yeni üyeleri %{url} davet edebilirsiniz.
-        here: burada
+        here: buradan
       index:
         first_paragraph: Burada %{url} oluşturabilir, düzenleyebilir ve silebilirsiniz.
         new_workgroup: Yeni çalışma grubu oluştur
-        new_workgroups: yeni çalışma grupları oluşturun
+        new_workgroups: yeni çalışma grupları
         ordergroup: sipariş grubu
-        second_paragraph: '<em>Çalışma grubu</em> ve <em>sipariş grubu</em> arasındaki farkı dikkate alın: bir <em>%{url}</em> hesabı vardır ve yemek siparişi verebilir. Bir çalışma grubunda (örneğin ''sınıflandırma grubu''), üyeler görevler ve mesajlar aracılığıyla birbirleriyle koordine ederler. Kullanıcılar yalnızca bir sipariş grubunda olabilir, ancak birden fazla çalışma grubunda olabilirler.'
+        second_paragraph: '<em>Çalışma grubu</em> ve <em>sipariş grubu</em> arasındaki farkı dikkate alın: bir <em>%{url}</em> hesabı vardır ve yemek siparişi verebilir. Bir çalışma grubunda (örneğin ''sınıflandırma grubu''), üyeler görevler ve mesajlar aracılığıyla birbirleri arasında koordinasyon sağlarlar. Kullanıcılar yalnızca bir sipariş grubunda olabilir, ancak birden fazla çalışma grubunda olabilirler.'
         title: Çalışma Grupları
       new:
         title: Yeni çalışma grubu oluştur
       show:
         confirm: Emin misiniz?
-        edit: Düzenle
+        edit: Grubu/kullanıcıları düzenle
         title: Çalışma Grubu %{name}
       workgroups:
         members: üyeler
@@ -444,8 +444,8 @@ tr:
   application:
     controller:
       error_authn: Kimlik doğrulama gerekiyor!
-      error_denied: İstenen sayfayı görüntülemeye yetkiniz yok. İlgili izinleri vermek için bir yöneticiye başvurun. Birden fazla kullanıcı hesabına erişiminiz varsa, %{sign_in} yapmayı deneyin.
-      error_denied_sign_in: başka bir kullanıcı olarak oturum aç
+      error_denied: İstenen sayfayı görüntülemeye yetkiniz yok. İlgili izinlere sahip olmanız gerektiğini düşünüyorsanız bir yöneticiye başvurun. Birden fazla kullanıcı hesabına erişiminiz varsa, %{sign_in} deneyin.
+      error_denied_sign_in: başka bir kullanıcı olarak oturum açmayı
       error_feature_disabled: Bu özellik şu anda devre dışı bırakılmış durumda.
       error_members_only: Bu eylem, yalnızca grubun üyeleri tarafından kullanılabilir!
       error_minimum_balance: Maalesef hesap bakiyeniz %{min} minimumunun altında.
@@ -468,10 +468,10 @@ tr:
     article:
       last_update: 'son güncelleme: %{last_update} | brüt: %{gross_price}'
     articles:
-      confirm_delete: Tüm seçilen ürünleri gerçekten silmek istiyor musunuz?
-      option_available: Ürünleri müsait hale getir
+      confirm_delete: Seçilen ürünleri gerçekten silmek istiyor musunuz?
+      option_available: Ürünleri uygun hale getir
       option_delete: Ürünü sil
-      option_not_available: Ürünleri müsait değil yap
+      option_not_available: Ürünleri uygun değil yap
       option_select: Bir eylem seçin ...
       price_netto: Fiyat
       unit_quantity_desc: Birim miktarı
@@ -480,7 +480,7 @@ tr:
       create_from_upload:
         notice: "%{count} yeni ürün kaydedildi."
       error_invalid: Ürünlerde hatalar var
-      error_nosel: Seçili ürün yok
+      error_nosel: Seçilmiş bir ürün yok
       error_parse: "%{msg} ... satır %{line}'da"
       error_update: '%{article} ürünleri güncellerken bir hata oluştu: %{msg}'
       parse_upload:
@@ -492,10 +492,10 @@ tr:
       update_all:
         notice: Tüm ürünler ve fiyatlar güncellendi.
       update_sel:
-        notice_avail: Tüm seçili ürünler müsait olarak ayarlandı.
+        notice_avail: Tüm seçili ürünler uygun olarak ayarlandı.
         notice_destroy: Tüm seçili ürünler silindi.
         notice_noaction: Hiçbir işlem belirtilmedi!
-        notice_unavail: Tüm seçili ürünler müsait değil olarak ayarlandı.
+        notice_unavail: Tüm seçili ürünler uygun değil olarak ayarlandı.
       update_sync:
         notice: Tüm ürünler ve fiyatlar güncellendi.
     destroy_active_article:
@@ -504,7 +504,7 @@ tr:
     edit_all:
       note: 'Zorunlu alanlar: ad, birim, (net) fiyat ve sipariş numarası.'
       submit: Tüm ürünleri güncelle
-      title: "%{supplier} tüm ürünleri düzenle"
+      title: "%{supplier} tedarikçisinin tüm ürünleri düzenle"
       warning: 'Uyarı: tüm ürünler güncellenecek!'
     form:
       title_edit: Ürün düzenle
@@ -534,7 +534,7 @@ tr:
       error_in_use: "%{article}, bir mevcut siparişin parçası olduğu için silinemiyor!"
       error_nosel: Hiçbir ürün seçmediniz
     parse_upload:
-      body: "<p><i>Lütfen ürünleri doğrulayın.</i></p> <p><i>Dikkat, şu anda yinelenen ürünler için herhangi bir kontrol yok.</i></p>"
+      body: "<p><i>Lütfen ürünleri doğrulayın.</i></p> <p><i>Dikkat, tekrar eden ürünler için şu anda herhangi bir kontrol yapılmıyor.</i></p>"
       submit: Yüklemeyi işle
       title: Ürünleri yükle
     sync:
@@ -542,8 +542,8 @@ tr:
         alert_used: Uyarı, %{article} açık bir siparişte kullanılıyor. Lütfen önce siparişten kaldırın.
         body: 'Aşağıdaki ürünler listeden çıkarıldı ve <b>silinecek</b>:'
         body_ignored:
-          one: Bir sipariş numarası olmayan ürün atlandı.
-          other: "%{count} sipariş numarası olmayan ürün atlandı."
+          one: Sipariş numarası olmayan bir ürün atlandı.
+          other: "Sipariş numarası olmayan %{count} ürün atlandı."
         body_skip: Silinecek ürün yok.
         title: Listeden çıkar ...
       price_short: Fiyat
@@ -570,30 +570,30 @@ tr:
         convert_units: Mevcut birimleri koruyun, birim miktarını ve fiyatı yeniden hesaplayın (senkronize gibi).
         outlist_absent: Yüklenen dosyada olmayan ürünleri sil.
       sample:
-        juices: Sular
+        juices: Meyve suları
         nuts: Kuruyemişler
         organic: Organik
         supplier_1: Kuruyemişçi
-        supplier_2: Kahverengi alanlar
-        supplier_3: Yeşil alanlar
+        supplier_2: Kahverengi tarladan
+        supplier_3: Yeşil tarladan
         tomato_juice: Domates suyu
         walnuts: Cevizler
       submit: Dosyayı yükle
       text_1: '%{supplier} ürünlerini güncellemek için bir elektronik tablo yükleyebilirsiniz. Excel (xls, xlsx) ve OpenOffice (ods) tabloları kabul edilir, virgülle ayrılmış dosyalar da kabul edilir (csv, utf-8 kodlamalı "; " ile ayrılmış sütunlar). Sadece ilk sayfa içe aktarılacak ve sütunlar aşağıdaki sıraya göre olmalıdır:'
-      text_2: Burada gösterilen satırlar örneklerdir. İlk sütunda "x" olduğunda, ürün listeden çıkarılır ve silinir. Bu, örneğin tedarikçiyle ürünler müsait olmadığında birçok ürünyi hızlı bir şekilde kaldırmak için elektronik tabloyu düzenlemenize ve çıkarmanıza izin verir. Kategori, Foodsoft kategori listenize eşleştirilecek (hem kategori adı hem de içe aktarma adlarıyla).
+      text_2: Burada gösterilen satırlar örneklerdir. İlk sütunda "x" olduğunda, ürün listeden çıkarılır ve silinir. Bu, örneğin tedarikçiyle ürünler müsait olmadığında birçok ürünü hızlı bir şekilde kaldırmak için elektronik tabloyu düzenlemenize ve çıkarmanıza izin verir. Kategori, Foodsoft kategori listenize eşleştirilecek (hem kategori adı hem de içe aktarma adlarıyla).
       title: "%{supplier} ürünlerini yükle"
   bank_account_connector:
     confirm: Lütfen %{code} kodunu onaylayın.
     fields:
       email: E-Posta
       pin: PIN
-      password: Parola
+      password: Şifre
       tan: TAN
       username: Kullanıcı adı
   config:
     hints:
       applepear_url: Görevler için kullanılan elma ve armut sisteminin açıklandığı web sitesi.
-      charge_members_manually: Üyelerin ne aldığını başka bir yerde takip ettiğinizde (örneğin kağıt üzerinde), bunu Foodsoft'a girmek istemezseniz, bunu seçin. Üye hesaplarını manuel olarak şarj etmeniz gerekecektir ("Yeni işlem ekle" kullanarak). Denge ekranında hala siparişleri uzlaştırmanız gerekecek, ancak üye hesaplarına ücret yansıtılmayacak.
+      charge_members_manually: Üyelerin ne aldığını başka bir yerde takip ettiğinizde (örneğin kağıt üzerinde), bunu Foodsoft'a girmek istemezseniz, bunu seçin. Üye hesaplarını manuel olarak ücretlendirmeniz gerekecektir ("Yeni işlem ekle" kullanarak). Denge ekranında hala siparişleri uzlaştırmanız gerekecek, ancak üye hesaplarına ücret yansıtılmayacak.
       contact:
         email: Genel iletişim e-posta adresi, web sitesinde ve bazı formlarda gösterilir.
         street: Adres, genellikle teslimat ve toplama noktanız olacaktır.
@@ -604,14 +604,14 @@ tr:
       email_replyto: Foodsoft tarafından gönderilen e-postalardan farklı bir adresten yanıt almak istediğinizde bunu ayarlayın.
       email_sender: E-postalar bu e-posta adresinden gönderilir. Gönderen e-posta adresinin etki alanının SPF kaydına web sunucusunun kaydedilmesi gerekebilir, böylece gönderilen e-postalar spam olarak sınıflandırılmaz.
       help_url: Belgelendirme web sitesi.
-      homepage: Foodcoop'unuzun web sitesi.
+      homepage: Yiyecek kooperatifinizin web sitesi.
       ignore_browser_locale: Kullanıcının henüz bir dil seçmediği zaman kullanıcının bilgisayarının dilini yoksayın.
       minimum_balance: Üyeler, hesap bakiyelerinin bu miktarın üzerinde veya eşit olduğu durumlarda sadece sipariş verebilirler.
-      name: Foodcoop'unuzun adı.
+      name: Yiyecek kooperatifinizin adı.
       order_schedule:
         boxfill:
-          recurr: Kutu-doldurma aşamasının varsayılan başlama zamanı.
-          time: Siparişin başlangıç ​​saati.
+          recurr: Kutuları-doldurma aşamasının varsayılan başlama zamanı.
+          time: Siparişin başlangıç saati.
         ends:
           recurr: Varsayılan sipariş kapanma tarihi için plan.
           time: Siparişlerin kapatılacağı varsayılan saat.
@@ -621,19 +621,19 @@ tr:
         order_by_articles: Her ürünü ayrı bir sayfada göster.
         order_by_groups: Her sipariş grubunu ayrı bir sayfada göster.
       pdf_font_size: PDF belgeleri için temel yazı tipi boyutu (standart 12'dir).
-      pdf_page_size: PDF belgeleri için sayfa boyutu, genellikle "A4" veya "letter".
+      pdf_page_size: PDF belgeleri için sayfa boyutu, genellikle "A4" veya "zarf".
       price_markup: Üyelerin toplam fiyatına eklenen yüzde.
-      stop_ordering_under: Üyeler sadece bu kadar çok elma puanı olduğunda sipariş verebilirler.
+      stop_ordering_under: Üyeler sadece bu kadar elma puanı olduğunda sipariş verebilirler.
       tasks_period_days: İki periyodik görev arasındaki gün sayısı (varsayılan olarak 7, yani bir hafta).
       tasks_upfront_days: Periyodik görevleri kaç gün önceden planlamak istediğinize bağlı olarak değişir.
       tax_default: Yeni ürünler için varsayılan KDV yüzdesi.
-      tolerance_is_costly: Üye toleransının mümkün olduğunca çok sipariş edilmesi (yalnızca son kutuyu doldurmak için gerektiği kadar sipariş edilmesi yerine). Bu seçenek, açık üye siparişinin toplam fiyatına toleransı da dahil eder.
+      tolerance_is_costly: Üye toleransını maksimum dolduracak kadar sipariş edin (sadece son kutuyu dolduracak kadar ürün eklemek yerine). Açık siparişin toplam tutarına uygulanan tolerans da buna dahildir.
       distribution_strategy: Bir sipariş alındıktan sonra ürünlerin nasıl dağıtılacağı.
       use_apple_points: Elma puanı sistemi etkinleştirildiğinde, üyeler sipariş vermeye devam edebilmek için bazı görevleri yapmak zorundadırlar.
-      use_boxfill: Etkinleştirildiğinde, siparişin sonuna doğru, üyeler yalnızca toplam sipariş tutarını artırdığında siparişlerini değiştirebilirler. Bu, kalan kutuları doldurmaya yardımcı olur. Siparişler için bir kutu doldurma tarihi belirlemelisiniz.
-      use_iban: Etkinleştirildiğinde, tedarikçi ve kullanıcı uluslararası banka hesap numarasını depolamak için ek bir alan sağlarlar.
+      use_boxfill: Etkinleştirildiğinde, siparişin sonuna doğru, üyeler yalnızca toplam sipariş tutarını artırdığında siparişlerini değiştirebilirler. Bu, kalan kutuları doldurmaya yardımcı olur. Siparişler için bir kutuları-doldurma tarihi belirlemelisiniz.
+      use_iban: Etkinleştirildiğinde, tedarikçi ve kullanıcı uluslararası banka hesap numaralarını saklayabileceği ek bir alan sunar.
       use_nick: Gerçek adlar yerine takma adları göster ve kullan. Bu seçeneği etkinleştirdiğinizde, her kullanıcının bir takma adı olup olmadığını kontrol edin.
-      use_self_service: Kendi kendilerine seçilmiş dengeleme işlevlerini kullanabilen üyeler.
+      use_self_service: Seçili dengeleme (balancing) işlevlerini üyeler kendileri kullanabilirler.
       webstats_tracking_code: Web analitiği için takip kodu (Piwik veya Google analytics gibi). Takip etmek istemiyorsanız boş bırakın.
     keys:
       applepear_url: Elma sistemi yardım URL'si
@@ -657,7 +657,7 @@ tr:
       default_role_suppliers: Tedarikçiler
       disable_invite: Davetiyeleri devre dışı bırak
       email_from: Adresinden
-      email_replyto: Yanıtla adresi
+      email_replyto: Yanıtlanacak adres
       email_sender: Gönderen adresi
       help_url: Belgeleme URL'si
       homepage: Ana sayfa
@@ -688,10 +688,10 @@ tr:
         first_order_first_serve: İlk sipariş edenlere öncelik verin
         no_automatic_distribution: Otomatik dağıtım yok
       use_apple_points: Elma puanları kullan
-      use_boxfill: Kutu doldurma aşamasını kullan
+      use_boxfill: Kutuları-doldurma aşamasını kullan
       use_iban: IBAN kullan
       use_nick: Takma ad kullan
-      use_self_service: Kendi kendine hizmet kullan
+      use_self_service: Kendi kendine (self service) hizmet kullan
       webstats_tracking_code: Takip kodu
     tabs:
       applications: Uygulamalar
@@ -714,7 +714,7 @@ tr:
     edit:
       title: Teslimatı düzenle
     form:
-      confirm_foreign_supplier_reedit: Stok ürünü %{name} başarıyla kaydedildi. Ancak, bu teslimatın tedarikçisi ile farklı bir tedarikçiye ait. Stok ürününi tekrar düzenlemek ister misiniz?
+      confirm_foreign_supplier_reedit: Stok ürünü %{name} başarıyla kaydedildi. Ancak, bu teslimatın tedarikçisinden farklı bir tedarikçiye ait. Stok ürününü tekrar düzenlemek ister misiniz?
       create_from_blank: Yeni ürün oluştur
       create_stock_article: Stok ürünü oluştur
       title_fill_quantities: 2. Teslimat miktarlarını belirle
@@ -765,7 +765,7 @@ tr:
       total: Toplam
     order_matrix:
       filename: Sipariş %{name}-%{date} - sıralama matrisi
-      heading: ürün genel bakışı (%{count})
+      heading: Ürün genel bakışı (%{count})
       title: '%{date} tarihinde kapatılan %{name} sipariş sıralama matrisi'
   errors:
     general: Bir problem oluştu.
@@ -790,34 +790,34 @@ tr:
     balancing:
       close:
         alert: 'Muhasebe yapılırken bir hata oluştu: %{message}'
-        notice: Sipariş başarıyla hesaplandı, hesap bakiyesi güncellendi.
+        notice: Sipariş başarıyla tamamlandı, hesap bakiyesi güncellendi.
       close_all_direct_with_invoice:
-        notice: '%{count} sipariş hesaplandı.'
+        notice: '%{count} sipariş tamamlandı.'
       close_direct:
-        alert: 'Sipariş hesaplanamadı: %{message}'
-        notice: Sipariş hesaplandı.
+        alert: 'Sipariş tamamlanamadı: %{message}'
+        notice: Sipariş tamamlandı.
       confirm:
         clear: Hesapla
-        first_paragraph: 'Sipariş hesaplandığında, tüm grup hesapları güncellenecektir.<br />Hesaplar şu şekilde tahsil edilecektir:'
+        first_paragraph: 'Sipariş tamamlandığında, tüm grup hesapları güncellenecektir.<br />Hesaplar şu şekilde tahsil edilecektir:'
         or_cancel: ya da muhasebeye geri dön
-        title: Siparişi Hesapla
+        title: Siparişi tamamla
       edit_note:
         title: Sipariş notunu düzenle
       edit_results_by_articles:
-        add_article: ürün ekle
+        add_article: Ürün ekle
         amount: Miktar
         edit_transport: Taşıma masraflarını düzenle
         gross: Brüt
         net: Net
       edit_transport:
-        title: Taşıma masraflarını dağıt
+        title: Taşıma maliyetlerini dağıt
       group_order_articles:
         add_group: Grup ekle
         total: Toplam maliyet
         total_fc: Toplam (FC fiyat)
         units: Birimler
       index:
-        close_all_direct_with_invoice: Faturayla hepsini kapat
+        close_all_direct_with_invoice: Hepsini faturayla kapat
         title: Kapatılan siparişler
       invoice:
         edit: Faturayı düzenle
@@ -831,16 +831,16 @@ tr:
         refund_adjusted_amount: 'iade için düzeltilen tutar:'
       new:
         alert: Dikkat, sipariş zaten hesaba katılmış
-        articles_overview: ürünlerin genel bakışı
+        articles_overview: Ürünlere genel bakışı
         close_direct: Ödemeyi atla
-        close_direct_confirm: Üye hesaplarını manuel olarak borçlandırdıysanız veya gerçekten ne yaptığınızı biliyorsanız, üye hesaplarını ücretlendirmeden siparişi hesapla. 
+        close_direct_confirm: Üye hesaplarını ücretlendirmeden siparişi tamamla. Üye hesaplarını zaten manuel olarak borçlandırdıysanız veya gerçekten ne yaptığınızı biliyorsanız bunu yapın.
         comment_on_transaction: Muhasebenize bir yorum ekleyebilirsiniz.
         comments: Yorumlar
-        confirm_order: Siparişi hesapla
+        confirm_order: Siparişi tamamla
         create_invoice: Fatura ekle
         edit_note: Notu düzenle
         edit_order: Siparişi düzenle
-        groups_overview: Grupların genel bakışı
+        groups_overview: Gruplara genel bakış
         invoice: Fatura
         notes_and_journal: Sipariş Notları
         summary: Özet
@@ -860,12 +860,12 @@ tr:
         changed: Veri değiştirildi!
         duration: "%{starts} ile %{ends} arası"
         fc_amount: 'Satış değeri:'
-        fc_profit: Finansal merkez fazlası
+        fc_profit: Foodcoop'tan artan (surplus)
         gross_amount: 'Brüt değer:'
         groups_amount: 'Sipariş grupları toplamı:'
         net_amount: 'Net değer:'
         reload: Özeti yeniden yükle
-        with_extra_charge: 'ek ücretli:'
+        with_extra_charge: 'ek ücretle birlikte:'
         without_extra_charge: 'ek ücretsiz:'
     bank_accounts:
       assign_unlinked_transactions:
@@ -932,13 +932,13 @@ tr:
           notice: İşlem kaydedildi.
         create_collection:
           alert: 'Bir hata oluştu: %{error}'
-          error_note_required: Not alanı gereklidir!
+          error_note_required: Not doldurulması gereklidir!
           notice: Tüm işlemler kaydedildi.
         destroy:
           notice: İşlem kaldırıldı.
       index:
         balance: '%{balance} hesap bakiyesi'
-        last_updated_at: "(son güncelleme %{when} önce)"
+        last_updated_at: "(son güncelleme %{when} tarihinden önce)"
         new_transaction: Yeni işlem oluştur
         title: '%{name} için hesap özeti'
       index_collection:
@@ -979,7 +979,7 @@ tr:
       edit:
         title: Faturayı düzenle
       form:
-        attachment_hint: Sadece JPEG ve PDF dosyaları izin verilir.
+        attachment_hint: Sadece JPEG ve PDF dosyaları kabul edilir.
       index:
         action_new: Yeni fatura oluştur
         show_unpaid: Ödenmemiş faturaları göster
@@ -1076,7 +1076,7 @@ tr:
         title: Kredi
       title: Siparişler genel bakışı
     messages:
-      not_enough_apples: Sipariş vermek için en az %{stop_ordering_under} elmanız olmalıdır. Şu anda sipariş grubunuzda sadece %{apples} elma var.
+      not_enough_apples: Sipariş vermek için en az %{stop_ordering_under} elma puanınız olmalıdır. Şu anda sipariş grubunuzda sadece %{apples} elma puanı var.
     order:
       title: Ürünler
     show:
@@ -1119,7 +1119,7 @@ tr:
       role_pickups: Teslimat günleri
       role_suppliers: Tedarikçiler
       show_google_maps: Google Haritalarda göster
-      sort_by: '%{text} tarafından sırala'
+      sort_by: 'Şuna göre sırala: %{text}'
     deliveries:
       new_invoice: Yeni fatura
       show_invoice: Faturayı göster
@@ -1136,7 +1136,7 @@ tr:
       task_title: "%{name} (%{duration} saat)"
   home:
     apple_bar:
-      desc: 'Bu, sipariş grubunuzdaki tamamlanan görevlerin sipariş hacmi ile Foodcoop ortalaması arasındaki oranını gösterir. Uygulamada: toplam siparişlerinizin her %{amount} için bir görev yapmalısınız!'
+      desc: 'Bu, sipariş grubunuzdaki tamamlanan görevlerin sipariş hacmi ile Foodcoop ortalaması arasındaki oranını gösterir. Uygulamada: Her %{amount} toplam sipariş için bir görev yapmalısınız!'
       more_info: Daha fazla bilgi
       points: 'Mevcut elma puanınız: %{points}'
       warning: Uyarı, elma puanınız %{threshold} değerinden azsa, sipariş vermenize izin verilmez!
@@ -1144,7 +1144,7 @@ tr:
     index:
       due_date_format: "%A %d %B"
       my_ordergroup:
-        last_update: Son güncelleme %{when} önce yapıldı
+        last_update: Son güncelleme %{when} tarihinden önce yapıldı
         title: Benim sipariş grubum
         transactions:
           title: Son işlemler
@@ -1179,7 +1179,7 @@ tr:
         title: "%{user}"
     reference_calculator:
       transaction_types_headline: Amaç
-      placeholder: Lütfen her alan için aktarmak istediğiniz miktarları girdikten sonra, bu işlem için kullanmanız gereken referansı görmek için yenileyin.
+      placeholder: Bu işlem için kullanmanız gereken referansı görmek için önce lütfen her alan için aktarmak istediğiniz miktarları girin.
       text0: Lütfen şu miktarı transfer edin
       text1: referans numarası ile birlikte
       text2: şu banka hesabına
@@ -1250,7 +1250,7 @@ tr:
         notice: Tebrikler, hesabınız başarıyla oluşturuldu. Şimdi giriş yapabilirsiniz.
       error_group_invalid: Davet edildiğiniz grup artık mevcut değil.
       error_invite_invalid: Davetiniz geçersiz (artık geçerli değil).
-      error_token_invalid: Geçersiz veya süresi dolmuş belirteç. Lütfen tekrar deneyin.
+      error_token_invalid: Geçersiz veya süresi dolmuş belirteç (token). Lütfen tekrar deneyin.
       reset_password:
         notice: Eğer e-postanız kayıtlıysa, şifrenizi sıfırlamak için bir bağlantı içeren bir mesaj alacaksınız. Spam klasörünüzü kontrol etmeniz gerekebilir.
       update_password:
@@ -1299,7 +1299,8 @@ tr:
       text: |
         Sevgili %{user},
 
-        Çalışma grubunun '%{task}' görevi %{when} tarihinde tamamlanacak ve daha fazla katılımcıya ihtiyaç duyuyor!
+        Çalışma grubunun '%{task}' görevi %{when} tarihinde tamamlanacak 
+        ve daha fazla katılımcıya ihtiyaç duyuyor!
 
         Eğer henüz bu göreve atanmadıysanız, şimdi fırsatınız var:
 
@@ -1404,7 +1405,7 @@ tr:
     invoice:
       invalid_mime: geçersiz bir MIME türüne sahip (%{mime})
     membership:
-      no_admin_delete: Son yönetici olduğunuz için üyelik geri alınamaz.
+      no_admin_delete: Son kalan yönetici olduğunuz için üyelikten çıkılamaz.
     order_article:
       error_price: belirtilmeli ve geçerli bir fiyata sahip olmalıdır
     user:
@@ -1451,10 +1452,10 @@ tr:
         strip_insignificant_zeros: true
   order_articles:
     edit:
-      stock_alert: Stok ürünürinin fiyatı değiştirilemez!
+      stock_alert: Stok ürünlerinin fiyatı değiştirilemez!
       title: Ürünü güncelle
     new:
-      title: Siparişe teslim edilen ürünükle
+      title: Teslim edilen ürünü siparişe ekle
   ordergroups:
     edit:
       title: Sipariş gruplarını düzenle
@@ -1465,7 +1466,7 @@ tr:
       invalid_balance: geçerli bir sayı değil
   orders:
     articles:
-      article_count: 'Sipariş edilen ürünür:'
+      article_count: 'Sipariş edilen ürünler:'
       prices: Net/brüt fiyatı
       prices_sum: 'Toplam (net/brüt fiyat):'
       units_full: Tam birimler
@@ -1475,14 +1476,14 @@ tr:
     edit:
       title: 'Siparişi düzenle: %{name}'
     edit_amount:
-      field_locked_title: Bu ürünüsipariş grupları arasındaki dağılımı manuel olarak değiştirildi. Bu alan, bu değişiklikleri korumak için kilitlidir. Yeni bir dağılım yapmak ve bu değişiklikleri üzerine yazmak için kilidi açın ve miktarı değiştirin.
-      field_unlocked_title: Bu ürünüsipariş grupları arasındaki dağılımı manuel olarak değiştirildi. Miktarı değiştirirken, bu manuel değişiklikler üzerine yazılacaktır.
+      field_locked_title: Bu ürünün sipariş grupları arasındaki dağılımı manuel olarak değiştirildi. Bu alan, bu değişiklikleri korumak için kilitlidir. Yeni bir dağılım yapmak ve bu değişiklikleri üzerine yazmak için kilidi açın ve miktarı değiştirin.
+      field_unlocked_title: Bu ürünün sipariş grupları arasındaki dağılımı manuel olarak değiştirildi. Miktarı değiştirirken, bu manuel değişiklikler üzerine yazılacaktır.
     edit_amounts:
-      no_articles_available: Eklenecek ürünüok.
+      no_articles_available: Eklenecek ürün yok.
       set_all_to_zero: Tümünü sıfıra ayarla
     fax:
       amount: Miktar
-      articles: Ürümler
+      articles: Ürünler
       delivery_day: Teslim günü
       heading: "%{name} için sipariş"
       name: İsim
@@ -1511,21 +1512,21 @@ tr:
       close_direct_message: Üye hesaplarına ücret yansıtılmadan sipariş kapatıldı.
       error_boxfill_before_ends: Kutu doldurma tarihi son tarihten önce olmalıdır (veya boş bırakılmalıdır).
       error_closed: Sipariş zaten kapatılmış
-      error_nosel: En az bir ürün seçilmelidir. Siparişi silmek isteyebilirsiniz?
+      error_nosel: En az bir ürün seçilmelidir. Ya da belki siparişi silmek istiyor olabilirsiniz?
       error_starts_before_boxfill: Başlangıç tarihi kutu doldurma tarihinden sonra olmalıdır (veya boş bırakılmalıdır).
       error_starts_before_ends: Başlangıç tarihi bitiş tarihinden sonra olmalıdır (veya boş bırakılmalıdır).
       notice_close: '%{name} siparişi, %{ends} kadar.'
       stock: Stok
       warning_ordered: 'Uyarı: Kırmızı olarak işaretlenen ürünler bu açık siparişte zaten sipariş edildi. Burada işaretini kaldırırsanız, tüm bu ürünlerin mevcut siparişleri silinecektir. Devam etmek için aşağıdaki onaylayın.'
-      warning_ordered_stock: 'Uyarı: Kırmızı olarak işaretlenen ürünler bu açık stok siparişinde zaten sipariş/purchased edildi. Burada işaretini kaldırırsanız, tüm bu ürünlerin mevcut siparişleri/purchases silinecek ve bunlar hesaba katılmayacaktır. Devam etmek için aşağıdaki onaylayın.'
+      warning_ordered_stock: 'Uyarı: Kırmızı olarak işaretlenen ürünler bu açık stok siparişinde zaten sipariş edildi/satın alındı. Burada seçimleri kaldırırsanız, tüm bu ürünlerin mevcut siparişleri/satı nalımları silinecek ve bunlar hesaba katılmayacaktır. Devam etmek için aşağıda onay verin.'
     new:
       title: Yeni sipariş oluştur
     receive:
-      add_article: ürün ekle
+      add_article: Ürün ekle
       consider_member_tolerance: toleransı dikkate al
       notice: '%{msg} siparişi alındı.'
       notice_none: Teslim alınacak yeni bir ürün yok
-      paragraph: Sipariş edilen ve alınan miktar aynıysa, ilgili alanlar boş bırakılabilir. Yine de tüm alanların girilmesi iyi bir uygulamadır, çünkü bu, tüm ürünlerin kontrol edildiğini doğrulamanın kolay bir yolunu sağlar.
+      paragraph: Sipariş edilen ve alınan miktar aynıysa, ilgili alanlar boş bırakılabilir. Yine de tüm alanların girilmesi iyi olur, çünkü bu, tüm ürünlerin kontrol edildiğinin anlaşılmasını sağlar.
       rest_to_stock: stokta kalanlar
       submit: Siparişi Al
       surplus_options: 'Dağıtım Seçenekleri:'
@@ -1535,8 +1536,8 @@ tr:
     show:
       action_end: Kapat!
       amounts: 'Net/Brüt toplam:'
-      articles: Ürüm özeti
-      articles_ordered: 'Sipariş edilen ürünür:'
+      articles: Ürün özeti
+      articles_ordered: 'Sipariş edilen üründür:'
       comments:
         title: Yorumlar
       comments_link: Yorumlar
@@ -1654,7 +1655,7 @@ tr:
       article_category:
         description: İçe aktarım/senkronizasyonda tanınan kategori adlarının virgülle ayrılmış listesi
       order_article:
-        units_to_order: Teslim edilen toplam birim miktarını değiştirirseniz, ayrı ayrı grup miktarlarını değiştirmek için ürün adına tıklamanız gerekir. Bunlar otomatik olarak yeniden hesaplanmayacağından, sipariş grupları teslim edilmemiş ürünler için hesaplanabilir!
+        units_to_order: Teslim edilen toplam birim miktarını değiştirirseniz, ayrı ayrı grup miktarlarını değiştirmek için ürün adına tıklamanız gerekir. Bunlar otomatik olarak yeniden hesaplanmayacağından, sipariş grupları teslim edilmemiş ürünler için borçlu kalabilirler!
         update_global_price: Ayrıca gelecekteki siparişlerin fiyatını da güncelleyin
       stock_article:
         copy:
@@ -1711,7 +1712,7 @@ tr:
       stock_articles: Stok ürünleri
       temp_inventory: geçici envanter
       text_deviations: "%{inv_link} için tüm fazla sapmaları doldurunuz. Azaltma için negatif bir sayı kullanın."
-      text_need_articles: Burada kullanmadan önce yeni bir stok ürün %{create_link} oluşturmanız gerekiyor.
+      text_need_articles: "Burada kullanmadan önce, şuradan yeni bir stok ürün oluşturmanız gerekiyor: %{create_link}"
       title: Yeni envanter oluştur
     show:
       amount: Miktar
@@ -1752,7 +1753,7 @@ tr:
       new_stock_taking: Envanter ekle
       order_online: Stok siparişini çevrimiçi olarak ver
       show_stock_takings: Envanter genel bakışı
-      stock_count: 'Ürüm sayısı:'
+      stock_count: 'Ürün sayısı:'
       stock_worth: 'Geçerli stok değeri:'
       title: Stok (%{article_count})
       toggle_unavailable: Kullanılamayan ürünleri göster/gizle
@@ -1843,16 +1844,16 @@ tr:
     set_done:
       notice: Görev durumu güncellendi
     show:
-      accept_task: Görevi Kabul Et
+      accept_task: Görevi kabul et
       confirm_delete_group: Bu ve sonraki tüm görevleri gerçekten silmek istiyor musunuz?
       confirm_delete_single: Görevi silmek istediğinizden emin misiniz?
       confirm_delete_single_from_group: Bu görevi (ilişkili yinelenen görevleri tutarak) silmek istediğinizden emin misiniz?
-      delete_group: Görevi ve sonrasını sil
+      delete_group: Görevi ve takip edenleri sil
       edit_group: Tekrarlayanı düzenle
       hours: "%{count}s"
       mark_done: Görevi tamamlandı olarak işaretle
-      reject_task: Görevi Reddet
-      title: Görevi Göster
+      reject_task: Görevi reddet
+      title: Görevi göster
     update:
       notice: Görev güncellendi.
       notice_converted: Görev güncellendi ve tekrarlanmayan bir göreve dönüştürüldü.

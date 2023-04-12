@@ -34,7 +34,7 @@ tr:
         send_message: Mesaj gönder
   config:
     hints:
-      mailing_list: Tüm üyelere posta sistemi yerine kullanılabilecek posta listesi e-posta adresi.
+      mailing_list: Tüm üyelere için mesajlaşma sistemi yerine kullanılabilecek posta listesi e-posta adresi.
       mailing_list_subscribe: Üyelerin abone olmak için bir e-posta gönderebileceği e-posta adresi.
       use_messages: Üyelerin Foodsoft içinde birbirleriyle iletişim kurmasına izin ver.
     keys:
@@ -43,7 +43,7 @@ tr:
       mailing_list_subscribe: Posta Listesi Aboneliği
   helpers:
     messages:
-      write_message: Mesaj Yaz
+      write_message: Mesaj yaz
     submit:
       message:
         create: Mesaj gönder
@@ -56,11 +56,11 @@ tr:
           messages: tüm mesajlar
           threads: konular
     start_nav:
-      write_message: Mesaj Yaz
+      write_message: Mesaj yaz
   messagegroups:
     index:
       body: 'Bir mesaj grubu, bir posta listesi gibi: o gruba üye olabilir (veya çıkabilir) ve o gruba gönderilen güncellemeleri alabilirsiniz.'
-      title: Mesaj Grupları
+      title: Mesaj grupları
     join:
       error: 'Mesaj grubuna katılamadı: %{error}'
       notice: Mesaj grubuna katıldınız
@@ -94,7 +94,7 @@ tr:
         mail: örneğin %{email} adresine bir e-posta ile.
         subscribe: 'E-posta listesi hakkında daha fazla bilgi edinebilirsiniz: %{link}.'
         subscribe_msg: Önce e-posta listesine kaydolmanız gerekebilir.
-        wiki: Wiki (page Mailing-List)
+        wiki: Wiki (page Posta-listesi)
       message: mesaj
       no_user_found: Kullanıcı bulunamadı.
       order_item: "%{supplier_name} (Pickup: %{pickup})"
