@@ -10,7 +10,6 @@ class OrderArticlesController < ApplicationController
   end
 
   def create
-    puts 'in create oa controller'
     # The article may be ordered with zero units - in that case do not complain.
     #   If order_article is ordered and a new order_article is created, an error message will be
     #   given mentioning that the article already exists, which is desired.

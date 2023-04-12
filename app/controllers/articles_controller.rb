@@ -37,7 +37,6 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    puts 'in new article controller'
     @article = @supplier.articles.build(:tax => FoodsoftConfig[:tax_default])
     render :layout => false
   end
@@ -48,7 +47,6 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    puts 'in create article controller'
     @article = Article.new(params[:article])
     if @article.valid? && @article.save
       render :layout => false
