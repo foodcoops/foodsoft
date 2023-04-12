@@ -75,6 +75,8 @@
                   = oa.article.name
                   - unless oa.article.note.blank?
                     = image_tag("lamp_grey.png", {alt: t('.articles.show_note'), size: "15x16", border: "0", onmouseover: "$('#note_#{oa.id}').show();", onmouseout: "$('#note_#{oa.id}').hide();"})
+                  - unless oa.article.note.blank?
+                    = image_tag("role-article_meta.png", {alt: t('.articles.show_note'), size: "15x16", border: "0", onmouseover: "$('#ingredients_#{oa.id}').show();", onmouseout: "$('#ingredients_#{oa.id}').hide();"})
                 %td= "#{oa.price.unit_quantity} x #{oa.article.unit}"
                 %td= number_to_currency(oa.price.fc_price)
                 %td
@@ -85,6 +87,9 @@
               - unless oa.article.note.blank?
                 %tr{id: "note_#{oa.id}", class: "note even", style: "display:none"}
                   %td{colspan: "6"}=h oa.article.note
+              - unless oa.article.ingredients.blank?
+                %tr{id: "ingredients_#{oa.id}", class: "note even", style: "display:none"}
+                  %td{colspan: "6"}=h oa.article.ingredients
           %tr{class: cycle('even', 'odd', name: 'articles')}
             %th{colspan: "5"}= heading_helper GroupOrder, :price
             %th= number_to_currency(@group_order.price)
