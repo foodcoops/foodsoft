@@ -272,6 +272,9 @@ Rails.application.routes.draw do
           resources :financial_transactions, only: [:index, :show, :create]
           resources :group_order_articles
         end
+        namespace :admin do
+          resources :users, only: [:index, :show]
+        end
 
         resources :financial_transaction_classes, only: [:index, :show]
         resources :financial_transaction_types, only: [:index, :show]
