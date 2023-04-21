@@ -6,19 +6,19 @@ nl:
         availability: Artikel leverbaar?
         availability_short: leverb.
         deposit: Statiegeld
-        fc_price: Foodcoop prijs
-        fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop marge.
-        fc_price_short: FC prijs
-        fc_share: Foodcoop marge
-        fc_share_short: FC marge
-        gross_price: Bruto prijs
+        fc_price: Foodcoop-prijs
+        fc_price_desc: Prijs inclusief belasting, statiegeld en foodcoop-marge.
+        fc_price_short: FC-prijs
+        fc_share: Foodcoop-marge
+        fc_share_short: FC-marge
+        gross_price: Brutoprijs
         manufacturer: Producent
         name: Naam
         note: Notitie
         order_number: Artikelnummer
         order_number_short: Nr.
         origin: Herkomst
-        price: Netto prijs
+        price: Nettoprijs
         supplier: Leverancier
         tax: BTW
         unit: Eenheid
@@ -26,11 +26,11 @@ nl:
         unit_quantity_short: Colli
         units: Eenheden
       article_category:
-        description: Import namen
+        description: Namen importeren
         name: Naam
       article_price:
         deposit: Statiegeld
-        price: Netto prijs
+        price: Nettoprijs
         tax: BTW
         unit_quantity: Colligrootte
       bank_account:
@@ -69,7 +69,7 @@ nl:
       financial_transaction_type:
         bank_account: Bankrekening
         name: Naam
-        financial_transaction_class: Financiële transactie klasse
+        financial_transaction_class: Klasse financiële transactie
         name_short: Verkorte naam
       group_order:
         ordergroup: Huishouden
@@ -89,7 +89,7 @@ nl:
         created_at: Gemaakt op
         created_by: Gemaakt door
         date: Factuurdatum
-        delete_attachment: Verwijder bijlage
+        delete_attachment: Bijlage verwijderen
         deliveries: Voorraad levering
         deposit: Statiegeld in rekening gebracht
         deposit_credit: Statiegeld teruggekregen
@@ -102,7 +102,7 @@ nl:
         supplier: Leverancier
       mail_delivery_status:
         created_at: Tijd
-        email: Email
+        email: E-mail
         message: Bericht
       order:
         boxfill: Dozen vullen na
@@ -111,8 +111,8 @@ nl:
         end_action: Sluitingsactie
         end_actions:
           auto_close: Bestelling sluiten
-          auto_close_and_send: Sluit de bestelling en verzend het naar de leverancier
-          auto_close_and_send_min_quantity: Sluit de bestelling en verzend het naar de leverancier als de minimum bestelhoeveelheid gehaald is
+          auto_close_and_send: De bestelling sluiten en naar de leverancier verzenden
+          auto_close_and_send_min_quantity: De bestelling sluiten en naar de leverancier verzenden als de minimale bestelhoeveelheid gehaald is
           no_end_action: Geen automatische actie
         ends: Sluit op
         name: Leverancier
@@ -124,10 +124,10 @@ nl:
         transport: Vervoerskosten
         transport_distribution: Verdeling van vervoerskosten
         transport_distributions:
-          articles: Verdeel de kosten over het aantal ontvangen artikelen
-          ordergroup: Ieder huishouden betaald hetzelfde bedrag
-          price: Verdeel de kosten over het orderbedrag
-          skip: Verdeel de kosten niet
+          articles: De kosten over het aantal ontvangen artikelen verdelen
+          ordergroup: Ieder huishouden betaalt hetzelfde bedrag
+          price: De kosten over het orderbedrag verdelen
+          skip: De kosten niet verdelen
         updated_by: Laatst aangepast door
       order_article:
         article: Artikel
@@ -141,7 +141,7 @@ nl:
         units_to_order_short: Besteld
         update_global_price: Huidige prijs overal bijwerken
       order_comment:
-        text: Commentaar voor deze bestelling toevoegen ...
+        text: Commentaar voor deze bestelling toevoegen…
       ordergroup:
         account_balance: Tegoed
         available_funds: Beschikbaar tegoed
@@ -173,7 +173,7 @@ nl:
         customer_number: Klantnummer
         customer_number_short: Klantnr.
         delivery_days: Bezorgdagen
-        email: Email
+        email: E-mail
         fax: Fax
         iban: IBAN
         is_subscribed: geabonneerd?
@@ -198,11 +198,11 @@ nl:
         user_list: Verantwoordelijken
         workgroup: Werkgroep
       user:
-        email: Email
+        email: E-mail
         first_name: Voornaam
         iban: IBAN
         last_activity: Laatst actief
-        last_login: Laatste login
+        last_login: Laatste aanmelding
         last_name: Achternaam
         name: Naam
         nick: Gebruikersnaam
@@ -246,11 +246,11 @@ nl:
       bank_transaction: Banktransactie
       delivery: Levering
       financial_transaction: Financiële transactie
-      financial_transaction_class: Financiële transactie klasse
-      financial_transaction_type: Financiële transactie type
+      financial_transaction_class: Klasse financiële transactie
+      financial_transaction_type: Type financiële transactie
       invoice: Factuur
       order: Bestelling
-      order_article: Bestellingsartikel
+      order_article: Bestelartikel
       order_comment: Commentaar
       ordergroup:
         one: Huishouden
@@ -269,8 +269,8 @@ nl:
         all_users: Alle gebruikers
         all_workgroups: Alle werkgroepen
         created_at: gemaakt op
-        first_paragraph: Hier kun je de groepen en gebruiker van Foodsoft beheren.
-        groupname: Groepnaam
+        first_paragraph: Hier kun je de groepen en gebruikers van Foodsoft beheren.
+        groupname: Groepsnaam
         members: leden
         name: naam
         new_ordergroup: Nieuw huishouden
@@ -290,14 +290,14 @@ nl:
         submit: Opslaan
         title: Configuratie
       tab_layout:
-        pdf_title: PDF documenten
+        pdf_title: PDF-documenten
       tab_messages:
-        emails_title: Emailinstellingen
+        emails_title: E-mailinstellingen
       tab_payment:
         schedule_title: Bestelrooster
       tab_security:
         default_roles_title: Toegang tot
-        default_roles_paragraph: Ieder lid van de foodcoop heeft standaard toegang tot de volgende onderdelen.
+        default_roles_paragraph: "Ieder lid van de foodcoop heeft standaard toegang tot de volgende onderdelen:"
       tab_tasks:
         periodic_title: Periodieke taken
       tabs:
@@ -308,29 +308,29 @@ nl:
     finances:
       index:
         bank_accounts: Bankrekeningen
-        first_paragraph: Hier kunt u de financiële transactieklassen en de bijbehorende financiële transactietypes beheren. Elke financiële transactie heeft een type, die je bij elke transactie moet selecteren, als je meer dan één type hebt gemaakt. De financiële transactieklassen kunnen worden gebruikt om de financiële transactietypes te groeperen en zullen worden weergegeven als extra kolommen in het rekeningoverzicht, als er meer dan één is gecreëerd.
+        first_paragraph: Hier kunt u de klassen van financiële transacties en de bijbehorende typen financiële transacties beheren. Elke financiële transactie heeft een type, die je bij elke transactie moet selecteren, als je meer dan één type hebt gemaakt. De klassen financiële transacties kunnen worden gebruikt om de types financiële transacties te groeperen en zullen worden weergegeven als extra kolommen in het rekeningoverzicht, als er meer dan één is gecreëerd.
         new_bank_account: Nieuwe bankrekening toevoegen
-        new_financial_transaction_class: Nieuwe financiële transactie klasse toevoegen
+        new_financial_transaction_class: Nieuwe klasse voor financiële transacties toevoegen
         title: Financiën
-        transaction_types: Financiële transactie typen
+        transaction_types: Typen financiële transacties
       transaction_types:
         name: Naam
-        new_financial_transaction_type: Nieuw financiëel transactie type toevoegen
+        new_financial_transaction_type: Nieuw type financiële transactie toevoegen
     financial_transaction_classes:
       form:
-        title_edit: Financiële transactie klasse bewerken
-        title_new: Nieuw financiëel transactie type toevoegen
+        title_edit: Klasse voor financiële transactie bewerken
+        title_new: Nieuw type financiële transactie toevoegen
     financial_transaction_types:
       form:
-        name_short_desc: De korte naam is verplicht voor financiële transactietypes die automatisch moeten kunnen worden toegewezen bij banktransacties. Als er meerdere bankrekeningen zijn, kan de voorkeursrekening voor bankoverschrijvingen worden geselecteerd.
-        title_edit: Financiëel transactie type bewerken
-        title_new: Nieuw financiëel transactie type toevoegen
+        name_short_desc: De korte naam is verplicht voor typen financiële transacties die automatisch moeten kunnen worden toegewezen bij banktransacties. Als er meerdere bankrekeningen zijn, kan de voorkeursrekening voor bankoverschrijvingen worden geselecteerd.
+        title_edit: Type financiële transactie bewerken
+        title_new: Nieuw type financiëel transactie toevoegen
     mail_delivery_status:
       destroy_all:
-        notice: Alle emailproblemen zijn verwijderd
+        notice: Alle e-mailproblemen zijn verwijderd
       index:
-        destroy_all: Alle emailproblemen verwijderen
-        title: Emailproblemen
+        destroy_all: Alle e-mailproblemen verwijderen
+        title: E-mailproblemen
     ordergroups:
       destroy:
         error: 'Huishouden kon niet als verwijderd gemarkeerd worden: %{error}'
@@ -342,9 +342,9 @@ nl:
         here: hier
       index:
         first_paragraph: Hier kun je %{url} toevoegen, bewerken en verwijderen.
-        new_ordergroup: Nieuw huishouden
+        new_ordergroup: een nieuw huishouden
         new_ordergroups: nieuwe huishoudens
-        second_paragraph: 'Bedenk het onderscheid tussen <em>werkgroep</em> en <em>huishouden</em>: een huishouden heeft een rekening en kan bestellen. in een <em>%{url}</em> (bijv. sorteergroep) werken leden samen om taken te vervullen. Leden kunnen slechts lid zijn van éen huishouden, maar van meerdere werkgroepen.'
+        second_paragraph: 'Let op het onderscheid tussen <em>werkgroep</em> en <em>huishouden</em>: een huishouden heeft een rekening en kan bestellen; in een <em>%{url}</em> (bijv. sorteergroep) werken leden samen om taken te vervullen. Leden kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
         title: Huishoudens
         workgroup: werkgroep
       new:
@@ -353,39 +353,39 @@ nl:
         confirm: Weet je het zeker?
         edit: Groep/leden bewerken
         title: Huishouden %{name}
-    search_placeholder: naam ...
+    search_placeholder: naam…
     users:
       controller:
-        sudo_done: Je bent nu ingelogd als %{user}. Wees voorzichtig, en vergeet niet uit te loggen als je klaar bent!
+        sudo_done: Je bent nu aangemeld als %{user}. Wees voorzichtig, en vergeet niet af te melden als je klaar bent!
       destroy:
         error: 'Gebruiker kon niet verwijderd worden: %{error}'
         notice: Gebruiker is verwijderd
       edit:
         title: Lid bewerken
       form:
-        create_ordergroup: Maak een huishouden met dezelfde naam en voeg een gebruiker toe.
-        send_welcome_mail: Verstuur een welkomstmail naar de gebruiker.
+        create_ordergroup: Een huishouden met dezelfde naam aanmaken en een gebruiker toevoegen.
+        send_welcome_mail: Een welkomstmail naar de gebruiker versturen.
       index:
         first_paragraph: Hier kun je gebruikers %{url}, bewerken en wissen.
         new_user: Nieuwe gebruiker
         new_users: toevoegen
         show_deleted: Verwijderde gebruikers tonen
-        title: Gebruikers admin
+        title: Gebruikersbeheer
       new:
         title: Nieuwe gebruiker toevoegen
       restore:
         error: 'Gebruiker kon niet opnieuw actief gemaakt worden: %{error}'
         notice: Gebruiker is opnieuw actief
       show:
-        confirm_sudo: Als je doorgaat, neem je de identiteit aan van gebruiker %{user}. Vergeet hierna niet uit te loggen!
+        confirm_sudo: Als je doorgaat, neem je de identiteit aan van gebruiker %{user}. Vergeet hierna niet af te melden!
         groupabos: Groepslidmaatschappen
         member_since: Lid sinds %{time}
         person: Persoon
         preference: Voorkeuren
-        show_email_problems: Bekijk emailproblemen
-        sudo: Inloggen als
+        show_email_problems: E-mailproblemen bekijken
+        sudo: Aanmelden als
       users:
-        show_email_problems: Bekijk emailproblemen
+        show_email_problems: E-mailproblemen bekijken
     workgroups:
       destroy:
         error: 'Werkgroep kon niet verwijderd worden: %{error}'
@@ -400,7 +400,7 @@ nl:
         new_workgroup: Nieuwe werkgroep
         new_workgroups: nieuwe werkgroepen
         ordergroup: huishouden
-        second_paragraph: 'Let op het verschil tussen een <em>groep</em> en een <em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organizeren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
+        second_paragraph: 'Let op het verschil tussen een <em>groep</em> en een <em>huishouden</em>: een <em>%{url}</em> heeft een tegoed en kan bestellen. In een werkgroep (bijv. ''sorteergroep'') organiseren zich de leden met behulp van taken en berichten. Gebruikers kunnen slechts lid zijn van één huishouden, maar van meerdere werkgroepen.'
         title: Werkgroepen
       new:
         title: Werkgroep toevoegen
@@ -413,9 +413,9 @@ nl:
         name: naam
   application:
     controller:
-      error_authn: Inloggen vereist!
-      error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je mogelijk %{sign_in}.
-      error_denied_sign_in: inloggen als een andere gebruiker
+      error_authn: Aanmelden vereist!
+      error_denied: Je hebt geen toegang tot de gevraagde pagina. Als je denkt dat je dat wel zou moeten hebben, vraag dan een beheerder je die rechten te geven. Als je meerdere accounts hebt, wil je je mogelijk %{sign_in}.
+      error_denied_sign_in: aanmelden als een andere gebruiker
       error_feature_disabled: Deze optie is momenteel niet actief.
       error_members_only: Deze actie is alleen beschikbaar voor leden van de groep!
       error_minimum_balance: Sorry, je tegoed is lager dan het minimum van %{min}.
@@ -429,7 +429,7 @@ nl:
       title: Categorie bewerken
     index:
       new: Nieuwe categorie
-      title: Categoriën
+      title: Categorieën
     new:
       title: Nieuwe categorie maken
     update:
@@ -440,9 +440,9 @@ nl:
     articles:
       confirm_delete: Weet je zeker dat je alle artikelen wilt verwijderen?
       option_available: Artikelen beschikbaar maken
-      option_delete: Verwijder artikel
+      option_delete: Artikel verwijderen
       option_not_available: Artikelen onbeschikbaar maken
-      option_select: Kies actie ...
+      option_select: Actie kiezen…
       price_netto: Prijs
       unit_quantity_desc: Aantal eenheden per doos (colli)
       unit_quantity_short: Colli
@@ -451,10 +451,10 @@ nl:
         notice: "Er zijn %{count} nieuwe artikelen opgeslagen."
       error_invalid: Er zijn artikelen die een fout hebben
       error_nosel: Geen artikelen geselecteerd
-      error_parse: "%{msg} ... in regel %{line}"
+      error_parse: "%{msg} … in regel %{line}"
       error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
-        no_file: Kies een bestand om te uploaden.
+        no_file: Een bestand om te uploaden kiezen.
         notice: "%{count} artikelen zijn geanalyseerd"
       sync:
         notice: Catalogus is bijgewerkt
@@ -472,7 +472,7 @@ nl:
       drop: verwijderen
       note: "%{article} is deel van een lopende bestelling en kan niet verwijderd worden. Het artikel graag eerst uit de bestelling(en) %{drop_link}."
     edit_all:
-      note: 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestellingsnummer.'
+      note: 'Verplichte velden zijn: Naam, eenheid, (netto) prijs en bestelnummer.'
       submit: Alle artikelen bijwerken
       title: Alle artikelen van %{supplier} bewerken
       warning: 'Let op, alle artikelen worden bijgewerkt!'
@@ -484,7 +484,7 @@ nl:
       already_imported: geïmporteerd
       not_found: Geen artikelen gevonden
     index:
-      change_supplier: Leverancier wisselen ...
+      change_supplier: Leverancier wisselen…
       download: Artikelen downloaden
       edit_all: Alles bewerken
       ext_db:
@@ -497,14 +497,14 @@ nl:
         title: Artikel importeren
       new: Nieuw artikel
       new_order: Nieuwe bestelling
-      search_placeholder: Naam ...
+      search_placeholder: Naam…
       title: Artikelen van %{supplier} (%{count})
       upload: Artikelen uploaden
     model:
       error_in_use: "%{article} kan niet gewist worden, want deze is deel van een lopende bestelling!"
       error_nosel: Je hebt geen artikelen geselecteerd
     parse_upload:
-      body: "<p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vind er geen controle op dubbele artikelen plaats.</i></p>"
+      body: "<p><i>Ingelezen artikelen graag controleren.</i></p> <p><i>Let op, momenteel vindt er geen controle op dubbele artikelen plaats.</i></p>"
       submit: Upload verwerken
       title: Artikelen uploaden
     sync:
@@ -512,32 +512,32 @@ nl:
         alert_used: Opgelet, %{article} wordt gebruikt in een lopende bestelling. Haal het eerst uit de bestelling.
         body: 'De volgende artikelen zijn uit de lijst gehaald en worden <b>verwijderd</b>:'
         body_ignored:
-          one: Er is één artikel zonder artikelnummer overslagen.
+          one: Er is één artikel zonder artikelnummer overgeslagen.
           other: "%{count} artikelen zonder artikelnummer zijn overgeslagen."
         body_skip: Er zijn geen artikelen om te verwijderen.
-        title: Uit de lijst halen ...
+        title: Uit de lijst halen…
       price_short: prijs
       submit: Alles synchroniseren
       title: Artikelen met externe database synchroniseren
       unit_quantity_short: Colli
       update:
         body: 'Ieder artikel wordt tweemaal getoond: oude waarden zijn grijs, en de tekstvelden bevatten de nieuwe waarden. Verschillen met de oude artikelen zijn geel gemarkeerd.'
-        title: Bijwerken ...
+        title: Bijwerken…
         update_msg:
-          one: Er moet éen artikel bijgewerkt worden.
+          one: Er moet één artikel bijgewerkt worden.
           other: "Er moeten %{count} artikelen bijgewerkt worden."
       upnew:
         body_count:
-          one: Er is éen nieuw artikel.
+          one: Er is één nieuw artikel.
           other: Er zijn %{count} nieuwe artikelen.
-        title: Toevoegen ...
+        title: Toevoegen…
     upload:
       fields:
         reserved: "(Leeg)"
         status: Status (x=overslaan)
-      file_label: Graag een compatibel bestand uitkiezen
+      file_label: Kies een compatibel bestand uit
       options:
-        convert_units: Bestaande eenheden behouden, herbereken groothandelseenheid en prijs (net als synchronizeren).
+        convert_units: Bestaande eenheden behouden, groothandelseenheid en prijs herberekenen (net als synchroniseren).
         outlist_absent: Artikelen die niet in het bestand voorkomen, verwijderen.
       sample:
         juices: Sappen
@@ -549,21 +549,21 @@ nl:
         tomato_juice: Tomatensap
         walnuts: Walnoten
       submit: Bestand uploaden
-      text_1: 'Hier kun je een spreadsheet uploaden om de artikelen van %{supplier} bij te werken. Zowel Excel (xls, xlsx) als OpenOffice (ods) spreadsheets worden gelezen, evenals csv-bestanden (kolommen geschieden door ";", utf-8 encoding). Alleen de eerste sheet wordt geïmporteerd, en kolommen worden verwacht in deze volgorde:'
-      text_2: De rijen hier getoond zijn voorbeelden. Een "x" in de eerste kolom geeft aan dat het artikel niet meer beschikbaar is en zal worden verwijderd. Hiermee kun je snel meerdere artikelen tegelijk verwijderen. De categorie wordt gematched met de Foodsoft categorielijst (zowel met de categorienaam als de bijbehorende importnamen).
+      text_1: 'Hier kun je een spreadsheet uploaden om de artikelen van %{supplier} bij te werken. Spreadsheets van zowel Excel (xls, xlsx) als OpenOffice (ods) worden gelezen, evenals csv-bestanden (kolommen gescheiden door ";", utf-8 encoding). Alleen de eerste sheet wordt geïmporteerd, en kolommen worden verwacht in deze volgorde:'
+      text_2: De rijen hier getoond zijn voorbeelden. Een “x” in de eerste kolom geeft aan dat het artikel niet meer beschikbaar is en zal worden verwijderd. Hiermee kun je snel meerdere artikelen tegelijk verwijderen. De categorie wordt vergeleken met de categorielijst van Foodsoft (zowel met de categorienaam als de bijbehorende importnamen).
       title: Artikelen uploaden voor %{supplier}
   bank_account_connector:
-    confirm: Bevestig de code %{code}.
+    confirm: Code %{code} bevestigen.
     fields:
-      email: E-Mail
+      email: E-mail
       pin: PIN
       password: Wachtwoord
       tan: TAN
       username: Gebruikersnaam
   config:
     hints:
-      applepear_url: Website waar het appelpunten systeem wordt uitgelegd.
-      charge_members_manually: Kies deze optie als je elders bijhoudt wie welke producten heeft gekregen (bijvoorbeeld op papier), en dat ook niet naderhand in Foodsoft invoert. Na het afrekenen van bestellingen moet je dan iedere keer bij leden handmatig het in rekening te brengen bedrag afschrijven (gebruik "Nieuwe transacties toevoegen"). Het blijft wel nodig bestellingen af te rekenen, maar dat brengt dan niets in rekening bij leden.
+      applepear_url: Website waar het appelpuntensysteem wordt uitgelegd.
+      charge_members_manually: Kies deze optie als je elders bijhoudt wie welke producten heeft gekregen (bijvoorbeeld op papier), en dat ook niet naderhand in Foodsoft invoert. Na het afrekenen van bestellingen moet je dan iedere keer bij leden handmatig het in rekening te brengen bedrag afschrijven (gebruik “Nieuwe transacties toevoegen”). Het blijft wel nodig bestellingen af te rekenen, maar dat brengt dan niets in rekening bij leden.
       contact:
         email: Algemeen contactadres, zowel voor op de website als in formulieren.
         street: Adres, meestal is dit het aflever- en ophaaladres.
