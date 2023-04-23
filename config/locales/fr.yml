@@ -1375,3 +1375,6 @@ fr:
       title: Équipes
     update:
       notice: L'équipe a été mise à jour
+  time:
+    formats:
+      foodsoft_datetime: "%d/%m/%Y %H:%M"

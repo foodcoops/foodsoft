@@ -1618,3 +1618,6 @@ es:
       title: Grupos de trabajo
     update:
       notice: El grupo de trabajo se actualizó.
+  time:
+    formats:
+      foodsoft_datetime: "%d/%b/%Y %H:%M"

@@ -1868,3 +1868,6 @@ nl:
       title: Werkgroepen
     update:
       notice: Werkgroep is bijgewerkt
+  time:
+    formats:
+      foodsoft_datetime: "%d-%m-%Y %H:%M"

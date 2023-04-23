@@ -1876,3 +1876,6 @@ de:
       title: Arbeitsgruppen
     update:
       notice: Arbeitsgruppe wurde aktualisiert
+  time:
+    formats:
+      foodsoft_datetime: "%d.%m.%Y %H:%M"
