@@ -1,0 +1,6 @@
+tr:
+  discourse:
+    callback:
+      invalid_nonce: Geçersiz nonce
+      invalid_signature: Geçersiz imza
+      logged_in: Giriş yapıldı!

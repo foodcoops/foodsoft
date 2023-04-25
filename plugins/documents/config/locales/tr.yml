@@ -1,0 +1,40 @@
+tr:
+  activerecord:
+    attributes:
+      document:
+        created_at: Oluşturulma tarihi
+        created_by: Tarafından oluşturuldu
+        data: Veri
+        mime: MIME türü
+        name: Ad
+  config:
+    hints:
+      documents_allowed_extension: İzin verilen dosya uzantılarının boşluklarla ayrılmış bir listesi.
+      use_documents: Gıda kooperatifi menüsüne temel bir belge paylaşım sayfası ekleyin.
+    keys:
+      documents_allowed_extension: İzin verilen uzantılar
+      use_documents: Belgeleri etkinleştir
+  navigation:
+    documents: Belgeler
+  documents:
+    create:
+      error: 'Belge veya klasör oluşturulamadı: %{error}'
+      not_allowed_mime: '"%{mime}" dosya türüne izin verilmiyor. Lütfen bunu beyaz listeye almak için bir yöneticiyle iletişime geçin.'
+      notice: Belge veya klasör oluşturuldu
+    destroy:
+      error: 'Belge veya klasör silinemedi: %{error}'
+      no_right: Belgeyi veya klasörü silmek için yeterli yetkiniz yok
+      notice: Belge veya klasör silindi
+    form:
+      new: Yeni belge
+      new_folder: Yeni klasör
+      submit: Oluştur
+    index:
+      new: Yeni belge yükle
+      new_folder: Yeni klasör oluştur
+      title: Belgeler
+    move:
+      root_folder: Başlangıç
+      title: Taşı
+    update:
+      notice: Belge veya klasör taşındı

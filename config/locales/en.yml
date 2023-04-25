@@ -1693,6 +1693,7 @@ en:
             es: Spanish
             fr: French
             nl: Dutch
+            tr: Turkish
     required:
       mark: "*"
       text: required
