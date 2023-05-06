@@ -53,6 +53,7 @@ namespace :foodsoft do
     desc "Initialize stock configuration"
     task :stock_config do
       setup_app_config
+      setup_storage
       setup_development
     end
   end
