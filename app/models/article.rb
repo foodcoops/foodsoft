@@ -110,9 +110,9 @@ class Article < ApplicationRecord
   # if only the timestamps differ and the attributes are equal,
   # false will returned and self.shared_updated_on will be updated
   def shared_article_changed?(supplier = self.supplier)
-    # skip early if the timestamp hasn't changed
+    # skip early if the timestamp hasn't changed - DISABLED
     shared_article = self.shared_article(supplier)
-    unless shared_article.nil? || self.shared_updated_on == shared_article.updated_on
+    unless shared_article.nil? # || self.shared_updated_on == shared_article.updated_on
       attrs = unequal_attributes(shared_article)
       if attrs.empty?
         # when attributes not changed, update timestamp of article
