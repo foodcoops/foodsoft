@@ -11,8 +11,20 @@ module Concerns::CollectionScope
     20
   end
 
+  def default_page
+    1
+  end
+
   def max_per_page
     250
+  end
+
+  def page
+    if params[:page]
+      params[:page].to_i
+    else
+      default_page
+    end
   end
 
   def per_page
@@ -27,7 +39,7 @@ module Concerns::CollectionScope
   def search_scope
     s = scope
     s = s.ransack(params[:q], auth_object: ransack_auth_object).result(distinct: true) if params[:q]
-    s = s.page(params[:page].to_i).per(per_page) if per_page && per_page >= 0
+    s = s.page(page).per(per_page) if per_page && per_page >= 0
     s
   end
 
@@ -35,13 +47,14 @@ module Concerns::CollectionScope
     render json: scope, meta: collection_meta(scope)
   end
 
+  # to_f required, otherwise result of (scope.total_count.to_f / [1, per_page].max) is integer
   def collection_meta(scope, extra = {})
     return unless scope.respond_to?(:total_count) && per_page
 
     {
-      page: params[:page].to_i,
+      page: page,
       per_page: per_page,
-      total_pages: (scope.total_count / [1, per_page].max).ceil,
+      total_pages: (scope.total_count.to_f / [1, per_page].max).ceil,
       total_count: scope.total_count
     }.merge(extra)
   end
