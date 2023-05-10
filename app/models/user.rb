@@ -43,12 +43,35 @@ class User < ApplicationRecord
   validates_format_of :iban, :with => /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, :allow_blank => true
   validates_uniqueness_of :iban, :case_sensitive => false, :allow_blank => true
 
-  before_validation :set_password
+  # Fully initializing all settings further below. But there is an issue with an clean database (db:reset)
+  #   for Anton Administrator (missing locale)
   after_initialize do
-    settings.defaults['profile']  = { 'language' => I18n.default_locale } unless settings.profile
-    settings.defaults['messages'] = { 'send_as_email' => true }           unless settings.messages
-    settings.defaults['notify']   = { 'upcoming_tasks' => true } unless settings.notify
+    settings.defaults['profile'] = { 'language' => I18n.default_locale } unless settings.profile
+  #   settings.defaults['messages'] = { 'send_as_email' => true }           unless settings.messages
+  #   settings.defaults['notify']   = { 'upcoming_tasks' => true } unless settings.notify
   end
+
+  after_initialize do
+    # fully initialize user settings
+    # settings.defaults['profile'] = {
+    #   'language' => I18n.default_locale,
+    #   'phone_is_public' => false,
+    #   'email_is_public' => false
+    # } unless settings['profile']
+
+    # settings.defaults['messages'] = {
+    #   'send_as_email' => true
+    # } unless settings['messages']
+
+    # settings.defaults['notify'] = {
+    #   'order_finished' => false,
+    #   'order_received' => false,
+    #   'upcoming_tasks' => true,
+    #   'negative_balance' => false
+    # } unless settings['notify']
+  end
+
+  before_validation :set_password
 
   before_save do
     if send_welcome_mail?
@@ -57,7 +80,29 @@ class User < ApplicationRecord
     end
   end
 
+  # While debugging it was found that after save is also triggered in user/index calls.
+  # Is that a wanted behavior?
   after_save do
+    # We fully initialize settings here in order to keep them optional in api
+    # If we don't do that then, in case of missing settings or settings which are equal
+    #   to the default values, no settings were saved in the former approach
+    self.settings['profile'] = {
+      'language' => I18n.default_locale,
+      'phone_is_public' => false,
+      'email_is_public' => false
+    } unless self.settings['profile']
+
+    self.settings['messages'] = {
+      'send_as_email' => true
+    } unless self.settings['messages']
+
+    self.settings['notify'] = {
+      'order_finished' => false,
+      'order_received' => false,
+      'upcoming_tasks' => true,
+      'negative_balance' => false
+    } unless self.settings['notify']
+
     settings_attributes.each do |key, value|
       value.each do |k, v|
         case v

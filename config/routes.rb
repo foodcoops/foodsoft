@@ -273,7 +273,9 @@ Rails.application.routes.draw do
           resources :group_order_articles
         end
         namespace :admin do
-          resources :users, only: [:index, :show]
+          resources :users do
+            post :restore, on: :member
+          end
         end
 
         resources :financial_transaction_classes, only: [:index, :show]

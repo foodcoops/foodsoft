@@ -403,6 +403,152 @@ RSpec.configure do |config|
               minProperties: 2 # name+url or name+items
             }
           },
+          UserBase: {
+            type: :object,
+            properties: {
+              first_name: {
+                type: :string,
+                description: 'first name'
+              },
+              last_name: {
+                type: :string,
+                description: 'Last name'
+              },
+              email: {
+                type: :string,
+                description: 'Email address'
+              },
+              phone: {
+                type: :string,
+                description: 'Phone',
+                nullable: true
+              },
+              settings_attributes: {
+                allOf: [{ '$ref': '#/components/schemas/UserSettings' }]
+              }
+            },
+            required: %w[first_name email]
+          },
+          UserSettings: {
+            type: :object,
+            properties: {
+              profile: {
+                type: :object,
+                properties: {
+                  language:
+                  {
+                    type: :string,
+                    description: 'Language'
+                  },
+                  phone_is_public:
+                  {
+                    type: :boolean,
+                    description: 'Phone is shown public',
+                    default: false
+                  },
+                  email_is_public:
+                  {
+                    type: :boolean,
+                    description: 'Email is shown public',
+                    default: false
+                  }
+                }
+              },
+              notify: {
+                type: :object,
+                properties: {
+                  order_finished:
+                  {
+                    type: :boolean,
+                    description: 'Order finished',
+                    default: false
+                  },
+                  order_received:
+                  {
+                    type: :boolean,
+                    description: 'Order received',
+                    default: false
+                  },
+                  upcoming_tasks:
+                  {
+                    type: :boolean,
+                    description: 'Upcoming tasks',
+                    default: true
+                  },
+                  negative_balance:
+                  {
+                    type: :boolean,
+                    description: 'Negative balance',
+                    default: false
+                  }
+                }
+              },
+              messages: {
+                type: :object,
+                properties: {
+                  send_as_email:
+                  {
+                    type: :boolean,
+                    description: 'Send as email',
+                    default: true
+                  }
+                }
+              }
+            }
+          },
+          UserForCreate: {
+            type: :object,
+            properties: {
+              password: {
+                type: :string,
+                description: 'Password'
+              }
+            },
+            required: %w[password],
+            allOf: [{ '$ref': '#/components/schemas/UserBase' }]
+          },
+          UserForUpdate: {
+            type: :object,
+            properties: {
+              id:
+              {
+                type: :integer,
+                description: 'ID'
+              }
+            },
+            required: %w[id],
+            allOf: [{ '$ref': '#/components/schemas/UserForCreate' }]
+          },
+          UserDeleted: {
+            type: :object,
+            properties: {
+              deleted_at:
+              {
+                type: :string,
+                description: 'ID'
+              }
+            },
+            required: %w[deleted_at],
+            allOf: [{ '$ref': '#/components/schemas/User' }]
+          },
+          User: {
+            type: :object,
+            properties: {
+              id:
+              {
+                type: :integer,
+                description: 'ID'
+              },
+              ordergroupid:
+              {
+                type: :integer,
+                description: 'order group ID',
+                nullable: true
+              }
+            },
+            required: %w[id ordergroupid],
+            allOf: [{ '$ref': '#/components/schemas/UserBase' }]
+          },
           Error: {
             type: :object,
             properties: {
