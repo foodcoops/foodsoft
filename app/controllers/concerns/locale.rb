@@ -18,7 +18,7 @@ module Concerns::Locale
   end
 
   def browser_language
-    request.env['HTTP_ACCEPT_LANGUAGE'] ? request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first : nil
+    request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.first
   end
 
   def default_language
@@ -30,7 +30,7 @@ module Concerns::Locale
   def select_language_according_to_priority
     language = explicitly_requested_language || session_language || user_settings_language
     language ||= browser_language unless FoodsoftConfig[:ignore_browser_locale]
-    language.presence&.to_sym unless language.blank?
+    language.presence&.to_sym if language.present?
   end
 
   def available_locales
@@ -38,11 +38,11 @@ module Concerns::Locale
   end
 
   def set_locale
-    if available_locales.include?(select_language_according_to_priority)
-      ::I18n.locale = select_language_according_to_priority
-    else
-      ::I18n.locale = default_language
-    end
+    ::I18n.locale = if available_locales.include?(select_language_according_to_priority)
+                      select_language_according_to_priority
+                    else
+                      default_language
+                    end
 
     locale = session[:locale] = ::I18n.locale
     logger.info("Set locale to #{locale}")

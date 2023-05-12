@@ -8,26 +8,24 @@ module FoodsoftDateUtil
       # @todo handle ical parse errors
       occ = begin
         schedule.next_occurrence(from).to_time
-      rescue
+      rescue StandardError
         nil
       end
     end
-    if options && options[:time] && occ
-      occ = occ.beginning_of_day.advance(seconds: Time.parse(options[:time]).seconds_since_midnight)
-    end
+    occ = occ.beginning_of_day.advance(seconds: Time.parse(options[:time]).seconds_since_midnight) if options && options[:time] && occ
     occ
   end
 
-  # @param p [String, Symbol, Hash, IceCube::Rule] What to return a rule from.
+  # @param rule [String, Symbol, Hash, IceCube::Rule] What to return a rule from.
   # @return [IceCube::Rule] Recurring rule
-  def self.rule_from(p)
-    case p
+  def self.rule_from(rule)
+    case rule
     when String
-      IceCube::Rule.from_ical(p)
+      IceCube::Rule.from_ical(rule)
     when Hash
-      IceCube::Rule.from_hash(p)
+      IceCube::Rule.from_hash(rule)
     else
-      p
+      rule
     end
   end
 end

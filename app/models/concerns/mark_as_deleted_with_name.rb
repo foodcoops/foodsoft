@@ -3,7 +3,7 @@ module MarkAsDeletedWithName
 
   def mark_as_deleted
     # get maximum length of name
-    max_length = 100000
+    max_length = 100_000
     if lenval = self.class.validators_on(:name).detect { |v| v.is_a?(ActiveModel::Validations::LengthValidator) }
       max_length = lenval.options[:maximum]
     end

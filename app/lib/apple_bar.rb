@@ -29,7 +29,7 @@ class AppleBar
 
   def mean_order_amount_per_job
     (1 / @global_avg).round
-  rescue
+  rescue StandardError
     0
   end
 

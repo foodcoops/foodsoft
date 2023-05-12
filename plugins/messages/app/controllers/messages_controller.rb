@@ -10,21 +10,20 @@ class MessagesController < ApplicationController
   def new
     @message = Message.new(params[:message])
 
-    if @message.reply_to
-      original_message = Message.find(@message.reply_to)
-      if original_message.reply_to
-        @message.reply_to = original_message.reply_to
-      end
-      if original_message.is_readable_for?(current_user)
-        @message.add_recipients [original_message.sender_id]
-        @message.group_id = original_message.group_id
-        @message.private = original_message.private
-        @message.subject = I18n.t('messages.model.reply_subject', :subject => original_message.subject)
-        @message.body = I18n.t('messages.model.reply_header', :user => original_message.sender.display, :when => I18n.l(original_message.created_at, :format => :short)) + "\n"
-        original_message.body.each_line { |l| @message.body += I18n.t('messages.model.reply_indent', :line => l) }
-      else
-        redirect_to new_message_url, alert: I18n.t('messages.new.error_private')
-      end
+    return unless @message.reply_to
+
+    original_message = Message.find(@message.reply_to)
+    @message.reply_to = original_message.reply_to if original_message.reply_to
+    if original_message.is_readable_for?(current_user)
+      @message.add_recipients [original_message.sender_id]
+      @message.group_id = original_message.group_id
+      @message.private = original_message.private
+      @message.subject = I18n.t('messages.model.reply_subject', subject: original_message.subject)
+      @message.body = I18n.t('messages.model.reply_header', user: original_message.sender.display,
+                                                            when: I18n.l(original_message.created_at, format: :short)) + "\n"
+      original_message.body.each_line { |l| @message.body += I18n.t('messages.model.reply_indent', line: l) }
+    else
+      redirect_to new_message_url, alert: I18n.t('messages.new.error_private')
     end
   end
 
@@ -33,18 +32,18 @@ class MessagesController < ApplicationController
     @message = @current_user.send_messages.new(params[:message])
     if @message.save
       DeliverMessageJob.perform_later(@message)
-      redirect_to messages_url, :notice => I18n.t('messages.create.notice')
+      redirect_to messages_url, notice: I18n.t('messages.create.notice')
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
   # Shows a single message.
   def show
     @message = Message.find(params[:id])
-    unless @message.is_readable_for?(current_user)
-      redirect_to messages_url, alert: I18n.t('messages.new.error_private')
-    end
+    return if @message.is_readable_for?(current_user)
+
+    redirect_to messages_url, alert: I18n.t('messages.new.error_private')
   end
 
   def toggle_private

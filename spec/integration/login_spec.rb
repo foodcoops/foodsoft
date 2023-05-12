@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 feature LoginController do
-  let(:user) { create :user }
+  let(:user) { create(:user) }
 
   describe 'forgot password' do
     before { visit forgot_password_path }
@@ -36,7 +36,7 @@ feature LoginController do
 
       it 'is not accessible' do
         expect(page).to have_selector '.alert-error'
-        expect(page).to_not have_selector 'input[type=password]'
+        expect(page).not_to have_selector 'input[type=password]'
       end
     end
 

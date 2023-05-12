@@ -55,7 +55,7 @@ class OrderPdf < RenderPdf
   end
 
   def group_order_article_quantity_with_tolerance(goa)
-    goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : "#{goa.quantity}"
+    goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity.to_s
   end
 
   def group_order_article_result(goa)
@@ -88,7 +88,7 @@ class OrderPdf < RenderPdf
              .pluck('groups.name', 'SUM(group_orders.price)', 'ordergroup_id', 'SUM(group_orders.transport)')
 
     result.map do |item|
-      [item.first || stock_ordergroup_name] + item[1..-1]
+      [item.first || stock_ordergroup_name] + item[1..]
     end
   end
 
@@ -103,7 +103,7 @@ class OrderPdf < RenderPdf
   def each_ordergroup_batch(batch_size)
     offset = 0
 
-    while true
+    loop do
       go_records = ordergroups(offset, batch_size)
 
       break unless go_records.any?
@@ -136,7 +136,7 @@ class OrderPdf < RenderPdf
     group_order_articles(ordergroup)
       .includes(order_article: { article: [:supplier] })
       .order('suppliers.name, articles.name')
-      .preload(order_article: [:article_price, :order])
+      .preload(order_article: %i[article_price order])
       .each(&block)
   end
 

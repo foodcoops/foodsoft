@@ -41,14 +41,14 @@ class BankAccountConnector
     end
   end
 
-  @@registered_classes = Set.new
+  @registered_classes = Set.new
 
   def self.register(klass)
-    @@registered_classes.add klass
+    @registered_classes.add klass
   end
 
   def self.find(iban)
-    @@registered_classes.each do |klass|
+    @registered_classes.each do |klass|
       return klass if klass.handles(iban)
     end
     nil

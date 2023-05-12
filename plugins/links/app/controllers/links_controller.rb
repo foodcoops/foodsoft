@@ -5,9 +5,7 @@ class LinksController < ApplicationController
     link = Link.find(params[:id])
     url = link.url
 
-    if link.workgroup && !current_user.role_admin? && !link.workgroup.member?(current_user)
-      return deny_access
-    end
+    return deny_access if link.workgroup && !current_user.role_admin? && !link.workgroup.member?(current_user)
 
     if link.indirect
       uri = URI.parse url
@@ -19,11 +17,9 @@ class LinksController < ApplicationController
 
       url = result.header['Location']
 
-      unless url
-        return redirect_to root_url, alert: t('.indirect_no_location')
-      end
+      return redirect_to root_url, alert: t('.indirect_no_location') unless url
     end
 
-    redirect_to url, status: 302
+    redirect_to url, status: :found
   end
 end

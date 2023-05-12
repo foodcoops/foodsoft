@@ -11,7 +11,7 @@ if ENV['COVERAGE'] or ENV['COVERALLS']
 
   # slightly tweaked coverage reporting
   def cov_no_plugins(source_file, path)
-    source_file.filename =~ /#{path}/ and not source_file.filename =~ /\/lib\/foodsoft_.*\//
+    source_file.filename =~ /#{path}/ and !(source_file.filename =~ %r{/lib/foodsoft_.*/})
   end
   SimpleCov.start do
     add_filter '/spec/'
@@ -21,6 +21,6 @@ if ENV['COVERAGE'] or ENV['COVERALLS']
     add_group 'Helpers'      do |s| cov_no_plugins s, '/app/helpers/' end
     add_group 'Documents'    do |s| cov_no_plugins s, '/app/documents/' end
     add_group 'Libraries'    do |s| cov_no_plugins s, '/lib/' end
-    add_group 'Plugins'      do |s| s.filename =~ /\/lib\/foodsoft_.*\// end
+    add_group 'Plugins'      do |s| s.filename =~ %r{/lib/foodsoft_.*/} end
   end
 end

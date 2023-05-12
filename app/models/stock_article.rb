@@ -10,11 +10,11 @@ class StockArticle < Article
   ransack_alias :quantity_available, :quantity # in-line with {StockArticleSerializer}
 
   def self.ransackable_attributes(auth_object = nil)
-    super(auth_object) - %w(supplier_id) + %w(quantity)
+    super(auth_object) - %w[supplier_id] + %w[quantity]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    super(auth_object) - %w(supplier)
+    super(auth_object) - %w[supplier]
   end
 
   # Update the quantity of items in stock
@@ -48,7 +48,7 @@ class StockArticle < Article
   protected
 
   def check_quantity
-    raise I18n.t('stockit.check.not_empty', :name => name) unless quantity == 0
+    raise I18n.t('stockit.check.not_empty', name: name) unless quantity == 0
   end
 
   # Overwrite Price history of Article. For StockArticles isn't it necessary.

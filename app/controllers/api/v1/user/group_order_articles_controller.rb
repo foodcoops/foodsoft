@@ -4,8 +4,8 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
   before_action -> { doorkeeper_authorize! 'group_orders:user' }
 
   before_action :require_ordergroup
-  before_action :require_minimum_balance, only: [:create, :update] # destroy is ok
-  before_action :require_enough_apples, only: [:create, :update] # destroy is ok
+  before_action :require_minimum_balance, only: %i[create update] # destroy is ok
+  before_action :require_enough_apples, only: %i[create update] # destroy is ok
   # @todo allow decreasing amounts when minimum balance isn't met
 
   def index
@@ -35,7 +35,8 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
     goa = nil
     GroupOrderArticle.transaction do
       goa = scope_for_update.includes(:group_order_article_quantities).find(params.require(:id))
-      goa.update_quantities((update_params[:quantity] || goa.quantity).to_i, (update_params[:tolerance] || goa.tolerance).to_i)
+      goa.update_quantities((update_params[:quantity] || goa.quantity).to_i,
+                            (update_params[:tolerance] || goa.tolerance).to_i)
       goa.order_article.update_results!
       goa.group_order.update_price!
       goa.group_order.update!(updated_by: current_user)

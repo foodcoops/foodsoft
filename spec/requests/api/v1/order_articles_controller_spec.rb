@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Order Articles', type: :request do
+describe Api::V1::OrderArticlesController do
   include ApiHelper
 
   path '/order_articles' do

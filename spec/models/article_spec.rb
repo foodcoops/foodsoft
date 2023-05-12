@@ -1,11 +1,11 @@
 require_relative '../spec_helper'
 
 describe Article do
-  let(:supplier) { create :supplier }
-  let(:article) { create :article, supplier: supplier }
+  let(:supplier) { create(:supplier) }
+  let(:article) { create(:article, supplier: supplier) }
 
   it 'has a unique name' do
-    article2 = build :article, supplier: supplier, name: article.name
+    article2 = build(:article, supplier: supplier, name: article.name)
     expect(article2).to be_invalid
   end
 
@@ -21,21 +21,21 @@ describe Article do
     end
 
     it 'returns false when invalid unit' do
-      article1 = build :article, supplier: supplier, unit: 'invalid'
+      article1 = build(:article, supplier: supplier, unit: 'invalid')
       expect(article.convert_units(article1)).to be false
     end
 
     it 'converts from ST to KI (german foodcoops legacy)' do
-      article1 = build :article, supplier: supplier, unit: 'ST'
-      article2 = build :article, supplier: supplier, name: 'banana 10-12 St', price: 12.34, unit: 'KI'
+      article1 = build(:article, supplier: supplier, unit: 'ST')
+      article2 = build(:article, supplier: supplier, name: 'banana 10-12 St', price: 12.34, unit: 'KI')
       new_price, new_unit_quantity = article1.convert_units(article2)
       expect(new_unit_quantity).to eq 10
       expect(new_price).to eq 1.23
     end
 
     it 'converts from g to kg' do
-      article1 = build :article, supplier: supplier, unit: 'kg'
-      article2 = build :article, supplier: supplier, unit: 'g', price: 0.12, unit_quantity: 1500
+      article1 = build(:article, supplier: supplier, unit: 'kg')
+      article2 = build(:article, supplier: supplier, unit: 'g', price: 0.12, unit_quantity: 1500)
       new_price, new_unit_quantity = article1.convert_units(article2)
       expect(new_unit_quantity).to eq 1.5
       expect(new_price).to eq 120
@@ -43,7 +43,7 @@ describe Article do
   end
 
   it 'computes changed article attributes' do
-    article2 = build :article, supplier: supplier, name: 'banana'
+    article2 = build(:article, supplier: supplier, name: 'banana')
     expect(article.unequal_attributes(article2)[:name]).to eq 'banana'
   end
 
@@ -83,7 +83,7 @@ describe Article do
   end
 
   it 'is knows its open order' do
-    order = create :order, supplier: supplier, article_ids: [article.id]
+    order = create(:order, supplier: supplier, article_ids: [article.id])
     expect(article.in_open_order).to eq(order)
   end
 
@@ -91,26 +91,26 @@ describe Article do
     expect(article.shared_article).to be_nil
   end
 
-  describe 'connected to a shared database', :type => :feature do
-    let(:shared_article) { create :shared_article }
-    let(:supplier) { create :supplier, shared_supplier_id: shared_article.supplier_id }
-    let(:article) { create :article, supplier: supplier, order_number: shared_article.order_number }
+  describe 'connected to a shared database', type: :feature do
+    let(:shared_article) { create(:shared_article) }
+    let(:supplier) { create(:supplier, shared_supplier_id: shared_article.supplier_id) }
+    let(:article) { create(:article, supplier: supplier, order_number: shared_article.order_number) }
 
     it 'can be found in the shared database' do
-      expect(article.shared_article).to_not be_nil
+      expect(article.shared_article).not_to be_nil
     end
 
     it 'can find updates' do
       changed = article.shared_article_changed?
-      expect(changed).to_not be_falsey
+      expect(changed).not_to be_falsey
       expect(changed.length).to be > 1
     end
 
     it 'can be synchronised' do
-      # TODO move article sync from supplier to article
+      # TODO: move article sync from supplier to article
       article # need to reference for it to exist when syncing
       updated_article = supplier.sync_all[0].select { |s| s[0].id == article.id }.first[0]
-      article.update(updated_article.attributes.reject { |k, v| k == 'id' or k == 'type' })
+      article.update(updated_article.attributes.reject { |k, _v| %w[id type].include?(k) })
       expect(article.name).to eq(shared_article.name)
       # now synchronising shouldn't change anything anymore
       expect(article.shared_article_changed?).to be_falsey
@@ -131,9 +131,9 @@ describe Article do
       article.unit = '200g'
       article.shared_updated_on -= 1 # to make update do something
       article.save!
-      # TODO get sync functionality in article
+      # TODO: get sync functionality in article
       updated_article = supplier.sync_all[0].select { |s| s[0].id == article.id }.first[0]
-      article.update!(updated_article.attributes.reject { |k, v| k == 'id' or k == 'type' })
+      article.update!(updated_article.attributes.reject { |k, _v| %w[id type].include?(k) })
       expect(article.unit).to eq '200g'
       expect(article.unit_quantity).to eq 5
       expect(article.price).to be_within(0.005).of(shared_article.price / 5)

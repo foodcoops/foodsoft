@@ -42,7 +42,7 @@ class Article < ApplicationRecord
   belongs_to :supplier
   # @!attribute article_prices
   #   @return [Array<ArticlePrice>] Price history (current price first).
-  has_many :article_prices, -> { order("created_at DESC") }
+  has_many :article_prices, -> { order('created_at DESC') }
   # @!attribute order_articles
   #   @return [Array<OrderArticle>] Order articles for this article.
   has_many :order_articles
@@ -60,16 +60,16 @@ class Article < ApplicationRecord
   scope :not_in_stock, -> { where(type: nil) }
 
   # Validations
-  validates_presence_of :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category
-  validates_length_of :name, :in => 4..60
-  validates_length_of :unit, :in => 1..15
-  validates_length_of :note, :maximum => 255
-  validates_length_of :origin, :maximum => 255
-  validates_length_of :manufacturer, :maximum => 255
-  validates_length_of :order_number, :maximum => 255
-  validates_numericality_of :price, :greater_than_or_equal_to => 0
-  validates_numericality_of :unit_quantity, :greater_than => 0
-  validates_numericality_of :deposit, :tax
+  validates :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category, presence: true
+  validates :name, length: { in: 4..60 }
+  validates :unit, length: { in: 1..15 }
+  validates :note, length: { maximum: 255 }
+  validates :origin, length: { maximum: 255 }
+  validates :manufacturer, length: { maximum: 255 }
+  validates :order_number, length: { maximum: 255 }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :unit_quantity, numericality: { greater_than: 0 }
+  validates :deposit, :tax, numericality: true
   # validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type], if: Proc.new {|a| a.supplier.shared_sync_method.blank? or a.supplier.shared_sync_method == 'import' }
   # validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit, :unit_quantity]
   validate :uniqueness_of_name
@@ -78,12 +78,12 @@ class Article < ApplicationRecord
   before_save :update_price_history
   before_destroy :check_article_in_use
 
-  def self.ransackable_attributes(auth_object = nil)
-    %w(id name supplier_id article_category_id unit note manufacturer origin unit_quantity order_number)
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id name supplier_id article_category_id unit note manufacturer origin unit_quantity order_number]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    %w(article_category supplier order_articles orders)
+  def self.ransackable_associations(_auth_object = nil)
+    %w[article_category supplier order_articles orders]
   end
 
   # Returns true if article has been updated at least 2 days ago
@@ -96,7 +96,7 @@ class Article < ApplicationRecord
     @in_open_order ||= begin
       order_articles = OrderArticle.where(order_id: Order.open.collect(&:id))
       order_article = order_articles.detect { |oa| oa.article_id == id }
-      order_article ? order_article.order : nil
+      order_article&.order
     end
   end
 
@@ -112,15 +112,15 @@ class Article < ApplicationRecord
   def shared_article_changed?(supplier = self.supplier)
     # skip early if the timestamp hasn't changed
     shared_article = self.shared_article(supplier)
-    unless shared_article.nil? || self.shared_updated_on == shared_article.updated_on
-      attrs = unequal_attributes(shared_article)
-      if attrs.empty?
-        # when attributes not changed, update timestamp of article
-        self.update_attribute(:shared_updated_on, shared_article.updated_on)
-        false
-      else
-        attrs
-      end
+    return if shared_article.nil? || shared_updated_on == shared_article.updated_on
+
+    attrs = unequal_attributes(shared_article)
+    if attrs.empty?
+      # when attributes not changed, update timestamp of article
+      update_attribute(:shared_updated_on, shared_article.updated_on)
+      false
+    else
+      attrs
     end
   end
 
@@ -131,30 +131,31 @@ class Article < ApplicationRecord
   def unequal_attributes(new_article, options = {})
     # try to convert different units when desired
     if options[:convert_units] == false
-      new_price, new_unit_quantity = nil, nil
+      new_price = nil
+      new_unit_quantity = nil
     else
       new_price, new_unit_quantity = convert_units(new_article)
     end
     if new_price && new_unit_quantity
-      new_unit = self.unit
+      new_unit = unit
     else
       new_price = new_article.price
       new_unit_quantity = new_article.unit_quantity
       new_unit = new_article.unit
     end
 
-    return Article.compare_attributes(
+    Article.compare_attributes(
       {
-        :name => [self.name, new_article.name],
-        :manufacturer => [self.manufacturer, new_article.manufacturer.to_s],
-        :origin => [self.origin, new_article.origin],
-        :unit => [self.unit, new_unit],
-        :price => [self.price.to_f.round(2), new_price.to_f.round(2)],
-        :tax => [self.tax, new_article.tax],
-        :deposit => [self.deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
+        name: [name, new_article.name],
+        manufacturer: [manufacturer, new_article.manufacturer.to_s],
+        origin: [origin, new_article.origin],
+        unit: [unit, new_unit],
+        price: [price.to_f.round(2), new_price.to_f.round(2)],
+        tax: [tax, new_article.tax],
+        deposit: [deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
         # take care of different num-objects.
-        :unit_quantity => [self.unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
-        :note => [self.note.to_s, new_article.note.to_s]
+        unit_quantity: [unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
+        note: [note.to_s, new_article.note.to_s]
       }
     )
   end
@@ -165,14 +166,20 @@ class Article < ApplicationRecord
   # @param attributes [Hash<Symbol, Array>] Attributes with old and new values
   # @return [Hash<Symbol, Object>] Changed attributes with new values
   def self.compare_attributes(attributes)
-    unequal_attributes = attributes.select { |name, values| values[0] != values[1] && !(values[0].blank? && values[1].blank?) }
-    Hash[unequal_attributes.to_a.map { |a| [a[0], a[1].last] }]
+    unequal_attributes = attributes.select do |_name, values|
+      values[0] != values[1] && !(values[0].blank? && values[1].blank?)
+    end
+    unequal_attributes.to_a.map { |a| [a[0], a[1].last] }.to_h
   end
 
   # to get the correspondent shared article
   def shared_article(supplier = self.supplier)
-    self.order_number.blank? and return nil
-    @shared_article ||= supplier.shared_supplier.find_article_by_number(self.order_number) rescue nil
+    order_number.blank? and return nil
+    @shared_article ||= begin
+      supplier.shared_supplier.find_article_by_number(order_number)
+    rescue StandardError
+      nil
+    end
   end
 
   # convert units in foodcoop-size
@@ -181,31 +188,37 @@ class Article < ApplicationRecord
   # returns false if units aren't foodsoft-compatible
   # returns nil if units are eqal
   def convert_units(new_article = shared_article)
-    if unit != new_article.unit
-      # legacy, used by foodcoops in Germany
-      if new_article.unit == "KI" && unit == "ST" # 'KI' means a box, with a different amount of items in it
-        # try to match the size out of its name, e.g. "banana 10-12 St" => 10
-        new_unit_quantity = /[0-9\-\s]+(St)/.match(new_article.name).to_s.to_i
-        if new_unit_quantity && new_unit_quantity > 0
-          new_price = (new_article.price / new_unit_quantity.to_f).round(2)
-          [new_price, new_unit_quantity]
-        else
-          false
-        end
-      else # use ruby-units to convert
-        fc_unit = (::Unit.new(unit) rescue nil)
-        supplier_unit = (::Unit.new(new_article.unit) rescue nil)
-        if fc_unit && supplier_unit && fc_unit =~ supplier_unit
-          conversion_factor = (supplier_unit / fc_unit).to_base.to_r
-          new_price = new_article.price / conversion_factor
-          new_unit_quantity = new_article.unit_quantity * conversion_factor
-          [new_price, new_unit_quantity]
-        else
-          false
-        end
+    return unless unit != new_article.unit
+
+    # legacy, used by foodcoops in Germany
+    if new_article.unit == 'KI' && unit == 'ST' # 'KI' means a box, with a different amount of items in it
+      # try to match the size out of its name, e.g. "banana 10-12 St" => 10
+      new_unit_quantity = /[0-9\-\s]+(St)/.match(new_article.name).to_s.to_i
+      if new_unit_quantity && new_unit_quantity > 0
+        new_price = (new_article.price / new_unit_quantity.to_f).round(2)
+        [new_price, new_unit_quantity]
+      else
+        false
       end
-    else
-      nil
+    else # use ruby-units to convert
+      fc_unit = begin
+        ::Unit.new(unit)
+      rescue StandardError
+        nil
+      end
+      supplier_unit = begin
+        ::Unit.new(new_article.unit)
+      rescue StandardError
+        nil
+      end
+      if fc_unit && supplier_unit && fc_unit =~ supplier_unit
+        conversion_factor = (supplier_unit / fc_unit).to_base.to_r
+        new_price = new_article.price / conversion_factor
+        new_unit_quantity = new_article.unit_quantity * conversion_factor
+        [new_price, new_unit_quantity]
+      else
+        false
+      end
     end
   end
 
@@ -222,19 +235,19 @@ class Article < ApplicationRecord
 
   # Checks if the article is in use before it will deleted
   def check_article_in_use
-    raise I18n.t('articles.model.error_in_use', :article => self.name.to_s) if self.in_open_order
+    raise I18n.t('articles.model.error_in_use', article: name.to_s) if in_open_order
   end
 
   # Create an ArticlePrice, when the price-attr are changed.
   def update_price_history
-    if price_changed?
-      article_prices.build(
-        :price => price,
-        :tax => tax,
-        :deposit => deposit,
-        :unit_quantity => unit_quantity
-      )
-    end
+    return unless price_changed?
+
+    article_prices.build(
+      price: price,
+      tax: tax,
+      deposit: deposit,
+      unit_quantity: unit_quantity
+    )
   end
 
   def price_changed?
@@ -250,8 +263,8 @@ class Article < ApplicationRecord
     # supplier should always be there - except, perhaps, on initialization (on seeding)
     if supplier && (supplier.shared_sync_method.blank? || supplier.shared_sync_method == 'import')
       errors.add :name, :taken if matches.any?
-    else
-      errors.add :name, :taken_with_unit if matches.where(unit: unit, unit_quantity: unit_quantity).any?
+    elsif matches.where(unit: unit, unit_quantity: unit_quantity).any?
+      errors.add :name, :taken_with_unit
     end
   end
 end

@@ -19,9 +19,9 @@ class TokenVerifier < ActiveSupport::MessageVerifier
     raise InvalidPrefix unless r[1] == @_prefix
 
     # return original message
-    if r.length > 2
-      r[2]
-    end
+    return unless r.length > 2
+
+    r[2]
   end
 
   class InvalidMessage < ActiveSupport::MessageVerifier::InvalidSignature; end

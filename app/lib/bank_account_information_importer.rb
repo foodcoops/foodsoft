@@ -17,16 +17,16 @@ class BankAccountInformationImporter
     ret = 0
     booked.each do |t|
       amount = parse_account_information_amount t[:transactionAmount]
-      entityName = amount < 0 ? t[:creditorName] : t[:debtorName]
-      entityAccount = amount < 0 ? t[:creditorAccount] : t[:debtorAccount]
+      entity_name = amount < 0 ? t[:creditorName] : t[:debtorName]
+      entity_account = amount < 0 ? t[:creditorAccount] : t[:debtorAccount]
       reference = [t[:endToEndId], t[:remittanceInformationUnstructured]].join("\n").strip
 
       @bank_account.bank_transactions.where(external_id: t[:transactionId]).first_or_create.update({
                                                                                                      date: t[:bookingDate],
                                                                                                      amount: amount,
-                                                                                                     iban: entityAccount && entityAccount[:iban],
+                                                                                                     iban: entity_account && entity_account[:iban],
                                                                                                      reference: reference,
-                                                                                                     text: entityName,
+                                                                                                     text: entity_name,
                                                                                                      receipt: t[:additionalInformation]
                                                                                                    })
       ret += 1
@@ -34,7 +34,7 @@ class BankAccountInformationImporter
 
     balances = (data[:balances] ? data[:balances].map { |b| [b[:balanceType], b[:balanceAmount]] } : []).to_h
     balance = balances.values.first
-    %w(closingBooked expected authorised openingBooked interimAvailable forwardAvailable nonInvoiced).each do |type|
+    %w[closingBooked expected authorised openingBooked interimAvailable forwardAvailable nonInvoiced].each do |type|
       value = balances[type]
       if value
         balance = value

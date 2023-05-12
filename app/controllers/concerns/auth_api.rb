@@ -36,9 +36,9 @@ module Concerns::AuthApi
   # Make sure that at least one the given OAuth scopes is valid for the current user's permissions.
   # @raise Api::Errors::PermissionsRequired
   def doorkeeper_authorize_roles!(*scopes)
-    unless scopes.any? { |scope| doorkeeper_scope_permitted?(scope) }
-      raise Api::Errors::PermissionRequired.new('Forbidden, no permission')
-    end
+    return if scopes.any? { |scope| doorkeeper_scope_permitted?(scope) }
+
+    raise Api::Errors::PermissionRequired, 'Forbidden, no permission'
   end
 
   # Check whether a given OAuth scope is permitted for the current user.
@@ -48,9 +48,7 @@ module Concerns::AuthApi
   def doorkeeper_scope_permitted?(scope)
     scope_parts = scope.split(':')
     # user sub-scopes like +config:user+ are always permitted
-    if scope_parts.last == 'user'
-      return true
-    end
+    return true if scope_parts.last == 'user'
 
     case scope_parts.first
     when 'user'           then return true # access to the current user's own profile
@@ -64,8 +62,8 @@ module Concerns::AuthApi
     end
 
     case scope
-    when 'orders:read'    then return true
-    when 'orders:write'   then return current_user.role_orders?
+    when 'orders:read'    then true
+    when 'orders:write'   then current_user.role_orders?
     end
   end
 end

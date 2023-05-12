@@ -29,12 +29,14 @@ module Foodsoft
 
     # Internationalization.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
-    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '{??,???}{-*,}.yml')).map { |p| p.basename('.yml').to_s }
+    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '{??,???}{-*,}.yml')).map do |p|
+      p.basename('.yml').to_s
+    end
     config.i18n.default_locale = :en
     config.i18n.fallbacks = [:en]
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
@@ -44,7 +46,7 @@ module Foodsoft
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
-    # TODO Disable this. Uncommenting this line will currently cause rspec to fail.
+    # TODO: Disable this. Uncommenting this line will currently cause rspec to fail.
     config.action_controller.permit_all_parameters = true
 
     config.active_job.queue_adapter     = :resque
@@ -82,5 +84,9 @@ module Foodsoft
   # Foodsoft version
   VERSION = Rails.root.join('VERSION').read.strip
   # Current revision, or +nil+
-  REVISION = (Rails.root.join('REVISION').read.strip rescue nil)
+  REVISION = begin
+    Rails.root.join('REVISION').read.strip
+  rescue StandardError
+    nil
+  end
 end

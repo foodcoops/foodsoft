@@ -1,5 +1,5 @@
-require "deface"
-require "foodsoft_current_orders/engine"
+require 'deface'
+require 'foodsoft_current_orders/engine'
 
 module FoodsoftCurrentOrders
   def self.enabled?

@@ -37,9 +37,7 @@ class PrinterController < ApplicationController
     job = PrinterJob.unfinished.find_by_id(json[:id])
     return unless job
 
-    if json[:state]
-      job.add_update! json[:state], json[:message]
-    end
+    job.add_update! json[:state], json[:message] if json[:state]
     job.finish! if json[:finish]
   end
 

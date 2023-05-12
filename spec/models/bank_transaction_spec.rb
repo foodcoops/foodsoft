@@ -1,24 +1,32 @@
 require_relative '../spec_helper'
 
 describe BankTransaction do
-  let(:bank_account) { create :bank_account }
-  let(:ordergroup) { create :ordergroup }
-  let(:supplier) { create :supplier, iban: Faker::Bank.iban }
-  let!(:user) { create :user, groups: [ordergroup] }
-  let!(:ftt_a) { create :financial_transaction_type, name_short: 'A' }
-  let!(:ftt_b) { create :financial_transaction_type, name_short: 'B' }
+  let(:bank_account) { create(:bank_account) }
+  let(:ordergroup) { create(:ordergroup) }
+  let(:supplier) { create(:supplier, iban: Faker::Bank.iban) }
+  let!(:user) { create(:user, groups: [ordergroup]) }
+  let!(:ftt_a) { create(:financial_transaction_type, name_short: 'A') }
+  let!(:ftt_b) { create(:financial_transaction_type, name_short: 'B') }
 
   describe 'supplier' do
-    let!(:invoice1) { create :invoice, supplier: supplier, number: '11', amount: 10 }
-    let!(:invoice2) { create :invoice, supplier: supplier, number: '22', amount: 20 }
-    let!(:invoice3) { create :invoice, supplier: supplier, number: '33', amount: 30 }
-    let!(:invoice4) { create :invoice, supplier: supplier, number: '44', amount: 40 }
-    let!(:invoice5) { create :invoice, supplier: supplier, number: '55', amount: 50 }
+    let!(:invoice1) { create(:invoice, supplier: supplier, number: '11', amount: 10) }
+    let!(:invoice2) { create(:invoice, supplier: supplier, number: '22', amount: 20) }
+    let!(:invoice3) { create(:invoice, supplier: supplier, number: '33', amount: 30) }
+    let!(:invoice4) { create(:invoice, supplier: supplier, number: '44', amount: 40) }
+    let!(:invoice5) { create(:invoice, supplier: supplier, number: '55', amount: 50) }
 
-    let!(:bank_transaction1) { create :bank_transaction, bank_account: bank_account, iban: supplier.iban, reference: '11', amount: 10 }
-    let!(:bank_transaction2) { create :bank_transaction, bank_account: bank_account, iban: supplier.iban, reference: '22', amount: -20 }
-    let!(:bank_transaction3) { create :bank_transaction, bank_account: bank_account, iban: supplier.iban, reference: '33,44', amount: -70 }
-    let!(:bank_transaction4) { create :bank_transaction, bank_account: bank_account, iban: supplier.iban, text: '55', amount: -50 }
+    let!(:bank_transaction1) do
+      create(:bank_transaction, bank_account: bank_account, iban: supplier.iban, reference: '11', amount: 10)
+    end
+    let!(:bank_transaction2) do
+      create(:bank_transaction, bank_account: bank_account, iban: supplier.iban, reference: '22', amount: -20)
+    end
+    let!(:bank_transaction3) do
+      create(:bank_transaction, bank_account: bank_account, iban: supplier.iban, reference: '33,44', amount: -70)
+    end
+    let!(:bank_transaction4) do
+      create(:bank_transaction, bank_account: bank_account, iban: supplier.iban, text: '55', amount: -50)
+    end
 
     it 'ignores invoices with invalid amount' do
       expect(bank_transaction1.assign_to_invoice).to be false
@@ -49,14 +57,26 @@ describe BankTransaction do
   end
 
   describe 'ordergroup' do
-    let!(:bank_transaction1) { create :bank_transaction, bank_account: bank_account, reference: "invalid", amount: 10 }
-    let!(:bank_transaction2) { create :bank_transaction, bank_account: bank_account, reference: "FS99A10", amount: 10 }
-    let!(:bank_transaction3) { create :bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}.99A10", amount: 10 }
-    let!(:bank_transaction4) { create :bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}A10", amount: 99 }
-    let!(:bank_transaction5) { create :bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}A10", amount: 10 }
-    let!(:bank_transaction6) { create :bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}A10B20", amount: 30 }
-    let!(:bank_transaction7) { create :bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}.#{user.id}A10", amount: 10 }
-    let!(:bank_transaction8) { create :bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}X10", amount: 10 }
+    let!(:bank_transaction1) { create(:bank_transaction, bank_account: bank_account, reference: 'invalid', amount: 10) }
+    let!(:bank_transaction2) { create(:bank_transaction, bank_account: bank_account, reference: 'FS99A10', amount: 10) }
+    let!(:bank_transaction3) do
+      create(:bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}.99A10", amount: 10)
+    end
+    let!(:bank_transaction4) do
+      create(:bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}A10", amount: 99)
+    end
+    let!(:bank_transaction5) do
+      create(:bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}A10", amount: 10)
+    end
+    let!(:bank_transaction6) do
+      create(:bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}A10B20", amount: 30)
+    end
+    let!(:bank_transaction7) do
+      create(:bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}.#{user.id}A10", amount: 10)
+    end
+    let!(:bank_transaction8) do
+      create(:bank_transaction, bank_account: bank_account, reference: "FS#{ordergroup.id}X10", amount: 10)
+    end
 
     it 'ignores transaction with invalid reference' do
       expect(bank_transaction1.assign_to_ordergroup).to be_nil

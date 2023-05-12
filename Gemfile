@@ -1,75 +1,74 @@
 # A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rails", '~> 7.0'
 gem 'mail', '~> 2.7.1' # bug with mail 2.8.0 https://github.com/mikel/mail/issues/1489
+gem 'rails', '~> 7.0'
 
-
-gem 'sassc-rails'
 gem 'less-rails'
+gem 'sassc-rails'
 gem 'uglifier'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-gem 'jquery-rails'
-gem 'select2-rails'
-gem 'rails_tokeninput'
+gem 'bootsnap', require: false
 gem 'bootstrap-datepicker-rails'
 gem 'date_time_attribute'
-gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
 gem 'i18n-js', '~> 3.0.0.rc8'
+gem 'jquery-rails'
+gem 'rails-assets-listjs', '0.2.0.beta.4' # remember to maintain list.*.js plugins and template engines on update
 gem 'rails-i18n'
-gem 'bootsnap', require: false
+gem 'rails_tokeninput'
+gem 'select2-rails'
 
-gem 'mysql2'
-gem 'prawn'
-gem 'prawn-table'
-gem 'haml'
-gem 'haml-rails'
-gem 'kaminari'
-gem 'simple_form'
-gem 'inherited_resources'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'acts_as_tree'
+gem 'attribute_normalizer'
 gem 'daemons'
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
+gem 'haml'
+gem 'haml-rails'
+gem 'ice_cube'
+gem 'inherited_resources'
+gem 'kaminari'
+gem 'mysql2'
+gem 'prawn'
+gem 'prawn-table'
+gem 'puma'
 gem 'rack-cors', require: 'rack/cors'
-gem 'active_model_serializers', '~> 0.10.0'
-gem 'twitter-bootstrap-rails', '~> 2.2.8'
+gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 https://github.com/huacnlee/rails-settings-cached/issues/73
+gem 'ransack'
+gem 'resque'
+gem 'ruby-units'
+gem 'sd_notify'
+gem 'simple_form'
 gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
 gem 'simple-navigation-bootstrap'
 gem 'sprockets', '< 4'
-gem 'ransack'
-gem 'acts_as_tree'
-gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 https://github.com/huacnlee/rails-settings-cached/issues/73
-gem 'resque'
-gem 'puma'
-gem 'sd_notify'
+gem 'twitter-bootstrap-rails', '~> 2.2.8'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
-gem 'ruby-units'
-gem 'attribute_normalizer'
-gem 'ice_cube'
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
+gem 'exception_notification'
+gem 'gaffe'
+gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
+gem 'midi-smtp-server'
+gem 'mime-types'
 gem 'recurring_select', git: 'https://github.com/gregschmit/recurring_select'
 gem 'roo'
 gem 'roo-xls'
-gem 'spreadsheet'
-gem 'exception_notification'
-gem 'gaffe'
-gem 'ruby-filemagic'
-gem 'mime-types'
-gem 'midi-smtp-server'
-gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
 gem 'rswag-api'
 gem 'rswag-ui'
+gem 'ruby-filemagic'
+gem 'spreadsheet'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
-gem 'foodsoft_wiki', path: 'plugins/wiki'
-gem 'foodsoft_messages', path: 'plugins/messages'
-gem 'foodsoft_documents', path: 'plugins/documents'
 gem 'foodsoft_discourse', path: 'plugins/discourse'
+gem 'foodsoft_documents', path: 'plugins/documents'
 gem 'foodsoft_links', path: 'plugins/links'
+gem 'foodsoft_messages', path: 'plugins/messages'
 gem 'foodsoft_polls', path: 'plugins/polls'
+gem 'foodsoft_wiki', path: 'plugins/wiki'
 
 # plugins not enabled by default
 # gem 'foodsoft_current_orders', path: 'plugins/current_orders'
@@ -77,10 +76,10 @@ gem 'foodsoft_polls', path: 'plugins/polls'
 # gem 'foodsoft_uservoice', path: 'plugins/uservoice'
 
 group :development do
-  gem 'sqlite3', '~> 1.3.6'
-  gem 'mailcatcher'
-  gem 'web-console'
   gem 'listen'
+  gem 'mailcatcher'
+  gem 'sqlite3', '~> 1.3.6'
+  gem 'web-console'
 
   # Better error output
   gem 'better_errors'
@@ -108,17 +107,17 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails'
+  gem 'apparition' # Capybara javascript driver
+  gem 'capybara'
+  gem 'connection_pool'
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'capybara'
-  gem 'apparition' # Capybara javascript driver
-  gem 'database_cleaner'
-  gem 'connection_pool'
+  gem 'rspec-rails'
   # need to include rspec components before i18n-spec or rake fails in test environment
+  gem 'i18n-spec'
   gem 'rspec-core'
   gem 'rspec-rerun'
-  gem 'i18n-spec'
   # code coverage
   gem 'simplecov', require: false
   gem 'simplecov-lcov', require: false

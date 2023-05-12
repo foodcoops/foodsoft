@@ -1,8 +1,8 @@
 module StockitHelper
   def stock_article_classes(article)
     class_names = []
-    class_names << "unavailable" if article.quantity_available <= 0
-    class_names.join(" ")
+    class_names << 'unavailable' if article.quantity_available <= 0
+    class_names.join(' ')
   end
 
   def link_to_stock_change_reason(stock_change)
@@ -17,8 +17,8 @@ module StockitHelper
 
   def stock_article_price_hint(stock_article)
     t('simple_form.hints.stock_article.edit_stock_article.price',
-      :stock_article_copy_link => link_to(t('stockit.form.copy_stock_article'),
-                                          stock_article_copy_path(stock_article),
-                                          :remote => true))
+      stock_article_copy_link: link_to(t('stockit.form.copy_stock_article'),
+                                       stock_article_copy_path(stock_article),
+                                       remote: true))
   end
 end

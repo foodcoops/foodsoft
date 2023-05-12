@@ -17,7 +17,7 @@ class DiscourseSsoController < DiscourseController
                              external_id: "#{FoodsoftConfig.scope}/#{current_user.id}",
                              username: current_user.nick,
                              name: current_user.name
-  rescue => error
-    redirect_to root_url, alert: error.to_s
+  rescue StandardError => e
+    redirect_to root_url, alert: e.to_s
   end
 end

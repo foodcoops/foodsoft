@@ -1,5 +1,5 @@
 class DeliveriesController < ApplicationController
-  before_action :find_supplier, :exclude => :fill_new_stock_article_form
+  before_action :find_supplier, exclude: :fill_new_stock_article_form
 
   def index
     @deliveries = @supplier.deliveries.order('date DESC')
@@ -15,6 +15,10 @@ class DeliveriesController < ApplicationController
     @delivery.date = Date.today # TODO: move to model/database
   end
 
+  def edit
+    @delivery = Delivery.find(params[:id])
+  end
+
   def create
     @delivery = Delivery.new(params[:delivery])
 
@@ -22,12 +26,8 @@ class DeliveriesController < ApplicationController
       flash[:notice] = I18n.t('deliveries.create.notice')
       redirect_to [@supplier, @delivery]
     else
-      render :action => "new"
+      render action: 'new'
     end
-  end
-
-  def edit
-    @delivery = Delivery.find(params[:id])
   end
 
   def update
@@ -37,7 +37,7 @@ class DeliveriesController < ApplicationController
       flash[:notice] = I18n.t('deliveries.update.notice')
       redirect_to [@supplier, @delivery]
     else
-      render :action => "edit"
+      render action: 'edit'
     end
   end
 
@@ -52,18 +52,18 @@ class DeliveriesController < ApplicationController
   def add_stock_change
     @stock_change = StockChange.new
     @stock_change.stock_article = StockArticle.find(params[:stock_article_id])
-    render :layout => false
+    render layout: false
   end
 
   def form_on_stock_article_create # See publish/subscribe design pattern in /doc.
     @stock_article = StockArticle.find(params[:id])
 
-    render :layout => false
+    render layout: false
   end
 
   def form_on_stock_article_update # See publish/subscribe design pattern in /doc.
     @stock_article = StockArticle.find(params[:id])
 
-    render :layout => false
+    render layout: false
   end
 end

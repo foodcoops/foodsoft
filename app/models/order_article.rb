@@ -7,25 +7,27 @@ class OrderArticle < ApplicationRecord
   belongs_to :order
   belongs_to :article
   belongs_to :article_price, optional: true
-  has_many :group_order_articles, :dependent => :destroy
+  has_many :group_order_articles, dependent: :destroy
 
-  validates_presence_of :order_id, :article_id
+  validates :order_id, :article_id, presence: true
   validate :article_and_price_exist
-  validates_uniqueness_of :article_id, scope: :order_id
+  validates :article_id, uniqueness: { scope: :order_id }
 
-  _ordered_sql = "order_articles.units_to_order > 0 OR order_articles.units_billed > 0 OR order_articles.units_received > 0"
+  _ordered_sql = 'order_articles.units_to_order > 0 OR order_articles.units_billed > 0 OR order_articles.units_received > 0'
   scope :ordered, -> { where(_ordered_sql) }
-  scope :ordered_or_member, -> { includes(:group_order_articles).where("#{_ordered_sql} OR order_articles.quantity > 0 OR group_order_articles.result > 0") }
+  scope :ordered_or_member, lambda {
+                              includes(:group_order_articles).where("#{_ordered_sql} OR order_articles.quantity > 0 OR group_order_articles.result > 0")
+                            }
 
   before_create :init_from_balancing
   after_destroy :update_ordergroup_prices
 
-  def self.ransackable_attributes(auth_object = nil)
-    %w(id order_id article_id quantity tolerance units_to_order)
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id order_id article_id quantity tolerance units_to_order]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    %w(order article)
+  def self.ransackable_associations(_auth_object = nil)
+    %w[order article]
   end
 
   # This method returns either the ArticlePrice or the Article
@@ -46,7 +48,7 @@ class OrderArticle < ApplicationRecord
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
     quantity = group_order_articles.collect(&:result).sum
-    { :quantity => quantity, :price => quantity * price.fc_price }
+    { quantity: quantity, price: quantity * price.fc_price }
   end
 
   # Update quantity/tolerance/units_to_order from group_order_articles
@@ -97,15 +99,13 @@ class OrderArticle < ApplicationRecord
     units * price.unit_quantity * price.gross_price
   end
 
-  def ordered_quantities_different_from_group_orders?(ordered_mark = "!", billed_mark = "?", received_mark = "?")
-    if not units_received.nil?
-      ((units_received * price.unit_quantity) == group_orders_sum[:quantity]) ? false : received_mark
-    elsif not units_billed.nil?
-      ((units_billed * price.unit_quantity) == group_orders_sum[:quantity]) ? false : billed_mark
-    elsif not units_to_order.nil?
-      ((units_to_order * price.unit_quantity) == group_orders_sum[:quantity]) ? false : ordered_mark
-    else
-      nil # can happen in integration tests
+  def ordered_quantities_different_from_group_orders?(ordered_mark = '!', billed_mark = '?', received_mark = '?')
+    if !units_received.nil?
+      (units_received * price.unit_quantity) == group_orders_sum[:quantity] ? false : received_mark
+    elsif !units_billed.nil?
+      (units_billed * price.unit_quantity) == group_orders_sum[:quantity] ? false : billed_mark
+    elsif !units_to_order.nil?
+      (units_to_order * price.unit_quantity) == group_orders_sum[:quantity] ? false : ordered_mark
     end
   end
 
@@ -124,7 +124,7 @@ class OrderArticle < ApplicationRecord
     if surplus.index(:tolerance).nil?
       qty_for_members = [qty_left, self.quantity].min
     else
-      qty_for_members = [qty_left, self.quantity + self.tolerance].min
+      qty_for_members = [qty_left, self.quantity + tolerance].min
       counts[surplus.index(:tolerance)] = [0, qty_for_members - self.quantity].max
     end
 
@@ -139,9 +139,7 @@ class OrderArticle < ApplicationRecord
       # 2) if not found, create new stock article
       #      avoiding duplicate stock article names
     end
-    if qty_left > 0 && surplus.index(nil)
-      counts[surplus.index(nil)] = qty_left
-    end
+    counts[surplus.index(nil)] = qty_left if qty_left > 0 && surplus.index(nil)
 
     # Update GroupOrder prices & Ordergroup stats
     # TODO only affected group_orders, and once after redistributing all articles
@@ -150,7 +148,7 @@ class OrderArticle < ApplicationRecord
       order.ordergroups.each(&:update_stats!)
     end
 
-    # TODO notifications
+    # TODO: notifications
 
     counts
   end
@@ -159,7 +157,7 @@ class OrderArticle < ApplicationRecord
   def update_article_and_price!(order_article_attributes, article_attributes, price_attributes = nil)
     OrderArticle.transaction do
       # Updates self
-      self.update!(order_article_attributes)
+      update!(order_article_attributes)
 
       # Updates article
       article.update!(article_attributes)
@@ -186,7 +184,7 @@ class OrderArticle < ApplicationRecord
   end
 
   def update_global_price=(value)
-    @update_global_price = (value == true || value == '1') ? true : false
+    @update_global_price = [true, '1'].include?(value) ? true : false
   end
 
   # @return [Number] Units missing for the last +unit_quantity+ of the article.
@@ -210,16 +208,19 @@ class OrderArticle < ApplicationRecord
   private
 
   def article_and_price_exist
-    errors.add(:article, I18n.t('model.order_article.error_price')) if !(article = Article.find(article_id)) || article.fc_price.nil?
-  rescue
+    if !(article = Article.find(article_id)) || article.fc_price.nil?
+      errors.add(:article,
+                 I18n.t('model.order_article.error_price'))
+    end
+  rescue StandardError
     errors.add(:article, I18n.t('model.order_article.error_price'))
   end
 
   # Associate with current article price if created in a finished order
   def init_from_balancing
-    if order.present? && order.finished?
-      self.article_price = article.article_prices.first
-    end
+    return unless order.present? && order.finished?
+
+    self.article_price = article.article_prices.first
   end
 
   def update_ordergroup_prices
@@ -241,7 +242,8 @@ class OrderArticle < ApplicationRecord
     unless (delta_q == 0 && delta_t >= 0) ||
            (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
            (delta_q > 0 && delta_q == -delta_t)
-      raise ActiveRecord::RecordNotSaved.new("Change not acceptable in boxfill phase for '#{article.name}', sorry.", self)
+      raise ActiveRecord::RecordNotSaved.new("Change not acceptable in boxfill phase for '#{article.name}', sorry.",
+                                             self)
     end
   end
 

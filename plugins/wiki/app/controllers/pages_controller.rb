@@ -1,20 +1,20 @@
 class PagesController < ApplicationController
   before_action -> { require_plugin_enabled FoodsoftWiki }
-  before_action :catch_special_pages, only: [:show, :new]
+  before_action :catch_special_pages, only: %i[show new]
 
-  skip_before_action :authenticate, :only => :all
-  before_action :only => :all do
-    authenticate_or_token(['wiki', 'all'])
+  skip_before_action :authenticate, only: :all
+  before_action only: :all do
+    authenticate_or_token(%w[wiki all])
   end
   before_action do
     content_for :head, view_context.rss_meta_tag
   end
 
   def index
-    @page = Page.find_by_permalink "Home"
+    @page = Page.find_by_permalink 'Home'
 
     if @page
-      render :action => 'show'
+      render action: 'show'
     else
       redirect_to all_pages_path
     end
@@ -34,11 +34,11 @@ class PagesController < ApplicationController
     end
 
     if @page.nil?
-      redirect_to new_page_path(:title => params[:permalink])
+      redirect_to new_page_path(title: params[:permalink])
     elsif @page.redirect?
       page = Page.find_by_id(@page.redirect)
       unless page.nil?
-        flash[:notice] = I18n.t('pages.cshow.redirect_notice', :page => @page.title)
+        flash[:notice] = I18n.t('pages.cshow.redirect_notice', page: @page.title)
         redirect_to wiki_page_path(page.permalink)
       end
     end
@@ -46,12 +46,12 @@ class PagesController < ApplicationController
 
   def new
     @page = Page.new
-    @page.title = params[:title].gsub("_", " ") if params[:title]
+    @page.title = params[:title].gsub('_', ' ') if params[:title]
     @page.parent = Page.find_by_permalink(params[:parent]) if params[:parent]
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @page }
+      format.xml  { render xml: @page }
     end
   end
 
@@ -60,36 +60,32 @@ class PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page].merge({ :user => current_user }))
+    @page = Page.new(params[:page].merge({ user: current_user }))
 
     if params[:preview]
-      render :action => 'new'
+      render action: 'new'
+    elsif @page.save
+      flash[:notice] = I18n.t('pages.create.notice')
+      redirect_to(wiki_page_path(@page.permalink))
     else
-      if @page.save
-        flash[:notice] = I18n.t('pages.create.notice')
-        redirect_to(wiki_page_path(@page.permalink))
-      else
-        render :action => "new"
-      end
+      render action: 'new'
     end
   end
 
   def update
     @page = Page.find(params[:id])
-    @page.attributes = params[:page].merge({ :user => current_user })
+    @page.attributes = params[:page].merge({ user: current_user })
 
     if params[:preview]
       @page.attributes = params[:page]
-      render :action => 'edit'
+      render action: 'edit'
+    elsif @page.save
+      @page.parent_id = parent_id if params[:parent_id].present? \
+            && params[:parent_id] != @page_id
+      flash[:notice] = I18n.t('pages.update.notice')
+      redirect_to wiki_page_path(@page.permalink)
     else
-      if @page.save
-        @page.parent_id = parent_id if (!params[:parent_id].blank? \
-            && params[:parent_id] != @page_id)
-        flash[:notice] = I18n.t('pages.update.notice')
-        redirect_to wiki_page_path(@page.permalink)
-      else
-        render :action => "edit"
-      end
+      render action: 'edit'
     end
   rescue ActiveRecord::StaleObjectError
     flash[:error] = I18n.t('pages.error_stale_object')
@@ -100,7 +96,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.destroy
 
-    flash[:notice] = I18n.t('pages.destroy.notice', :page => @page.title)
+    flash[:notice] = I18n.t('pages.destroy.notice', page: @page.title)
     redirect_to wiki_path
   end
 
@@ -109,23 +105,23 @@ class PagesController < ApplicationController
     @partial = params[:view] || 'site_map'
 
     if params[:name]
-      @pages = @pages.where("title LIKE ?", "%#{params[:name]}%").limit(20)
+      @pages = @pages.where('title LIKE ?', "%#{params[:name]}%").limit(20)
       @partial = 'title_list'
     end
-    if params[:sort]
-      sort = case params[:sort]
-             when "title"                then "title"
-             when "title_reverse"        then "title DESC"
-             when "last_updated"         then "updated_at DESC"
-             when "last_updated_reverse" then "updated_at"
+    sort = if params[:sort]
+             case params[:sort]
+             when 'title'                then 'title'
+             when 'title_reverse'        then 'title DESC'
+             when 'last_updated'         then 'updated_at DESC'
+             when 'last_updated_reverse' then 'updated_at'
              end
-    else
-      sort = "title"
-    end
+           else
+             'title'
+           end
     @pages = @pages.order(sort)
     respond_to do |format|
       format.html
-      format.rss { render :layout => false }
+      format.rss { render layout: false }
     end
   end
 
@@ -150,15 +146,15 @@ class PagesController < ApplicationController
 
   def variables
     keys = Foodsoft::ExpansionVariables.variables.keys
-    @variables = Hash[keys.map { |k| [k, Foodsoft::ExpansionVariables.get(k)] }]
+    @variables = keys.index_with { |k| Foodsoft::ExpansionVariables.get(k) }
     render 'variables'
   end
 
   private
 
   def catch_special_pages
-    if params[:id] == 'Help:Foodsoft_variables'
-      variables
-    end
+    return unless params[:id] == 'Help:Foodsoft_variables'
+
+    variables
   end
 end

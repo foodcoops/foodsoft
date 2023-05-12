@@ -4,5 +4,5 @@
 class GroupOrderArticleQuantity < ApplicationRecord
   belongs_to :group_order_article
 
-  validates_presence_of :group_order_article_id
+  validates :group_order_article_id, presence: true
 end

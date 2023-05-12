@@ -1,17 +1,17 @@
 require_relative '../spec_helper'
 
 feature 'settling an order', js: true do
-  let(:ftt) { create :financial_transaction_type }
-  let(:admin) { create :user, groups: [create(:workgroup, role_finance: true)] }
-  let(:user) { create :user, groups: [create(:ordergroup)] }
-  let(:supplier) { create :supplier }
-  let(:article) { create :article, supplier: supplier, unit_quantity: 1 }
-  let(:order) { create :order, supplier: supplier, article_ids: [article.id] } # need to ref article
-  let(:go1) { create :group_order, order: order }
-  let(:go2) { create :group_order, order: order }
+  let(:ftt) { create(:financial_transaction_type) }
+  let(:admin) { create(:user, groups: [create(:workgroup, role_finance: true)]) }
+  let(:user) { create(:user, groups: [create(:ordergroup)]) }
+  let(:supplier) { create(:supplier) }
+  let(:article) { create(:article, supplier: supplier, unit_quantity: 1) }
+  let(:order) { create(:order, supplier: supplier, article_ids: [article.id]) } # need to ref article
+  let(:go1) { create(:group_order, order: order) }
+  let(:go2) { create(:group_order, order: order) }
   let(:oa) { order.order_articles.find_by_article_id(article.id) }
-  let(:goa1) { create :group_order_article, group_order: go1, order_article: oa }
-  let(:goa2) { create :group_order_article, group_order: go2, order_article: oa }
+  let(:goa1) { create(:group_order_article, group_order: go1, order_article: oa) }
+  let(:goa2) { create(:group_order_article, group_order: go2, order_article: oa) }
 
   before do
     goa1.update_quantities(3, 0)
@@ -22,16 +22,15 @@ feature 'settling an order', js: true do
     goa2.reload
   end
 
+  before { visit new_finance_order_path(order_id: order.id) }
+  before { login admin }
+
   it 'has correct order result' do
     expect(oa.quantity).to eq(4)
     expect(oa.tolerance).to eq(0)
     expect(goa1.result).to eq(3)
     expect(goa2.result).to eq(1)
   end
-
-  before { login admin }
-
-  before { visit new_finance_order_path(order_id: order.id) }
 
   it 'has product ordered visible' do
     expect(page).to have_content(article.name)
@@ -59,7 +58,7 @@ feature 'settling an order', js: true do
         click_link I18n.t('ui.delete')
       end
     end
-    expect(page).to_not have_selector("#order_article_#{oa.id}")
+    expect(page).not_to have_selector("#order_article_#{oa.id}")
     expect(OrderArticle.exists?(oa.id)).to be true
     oa.reload
     expect(oa.quantity).to eq(4)
@@ -77,7 +76,7 @@ feature 'settling an order', js: true do
         click_link I18n.t('ui.delete')
       end
     end
-    expect(page).to_not have_selector("#order_article_#{oa.id}")
+    expect(page).not_to have_selector("#order_article_#{oa.id}")
     expect(OrderArticle.exists?(oa.id)).to be false
   end
 
@@ -87,7 +86,7 @@ feature 'settling an order', js: true do
     within("#group_order_article_#{goa1.id}") do
       click_link I18n.t('ui.delete')
     end
-    expect(page).to_not have_selector("#group_order_article_#{goa1.id}")
+    expect(page).not_to have_selector("#group_order_article_#{goa1.id}")
     expect(OrderArticle.exists?(oa.id)).to be true
     expect(GroupOrderArticle.exists?(goa1.id)).to be true
     goa1.reload
@@ -103,7 +102,7 @@ feature 'settling an order', js: true do
     within("#group_order_article_#{goa1.id}") do
       click_link I18n.t('ui.delete')
     end
-    expect(page).to_not have_selector("#group_order_article_#{goa1.id}")
+    expect(page).not_to have_selector("#group_order_article_#{goa1.id}")
     expect(OrderArticle.exists?(oa.id)).to be true
     expect(GroupOrderArticle.exists?(goa1.id)).to be false
   end
@@ -134,15 +133,15 @@ feature 'settling an order', js: true do
     end
     expect(page).to have_selector('form#new_group_order_article')
     within('#new_group_order_article') do
-      select user.ordergroup.name, :from => 'group_order_article_ordergroup_id'
+      select user.ordergroup.name, from: 'group_order_article_ordergroup_id'
       find_by_id('group_order_article_result').set(8)
       sleep 0.25
       find('input[type="submit"]').click
     end
-    expect(page).to_not have_selector('form#new_group_order_article')
+    expect(page).not_to have_selector('form#new_group_order_article')
     expect(page).to have_content(user.ordergroup.name)
     goa = GroupOrderArticle.last
-    expect(goa).to_not be_nil
+    expect(goa).not_to be_nil
     expect(goa.result).to eq 8
     expect(page).to have_selector("#group_order_article_#{goa.id}")
     expect(find("#r_#{goa.id}").value.to_f).to eq 8
@@ -169,8 +168,8 @@ feature 'settling an order', js: true do
   end
 
   it 'can add an article' do
-    new_article = create :article, supplier: supplier
-    expect(page).to_not have_content(new_article.name)
+    new_article = create(:article, supplier: supplier)
+    expect(page).not_to have_content(new_article.name)
     click_link I18n.t('finance.balancing.edit_results_by_articles.add_article')
     expect(page).to have_selector('form#new_order_article')
     within('#new_order_article') do
@@ -178,8 +177,8 @@ feature 'settling an order', js: true do
       sleep 0.25
       find('input[type="submit"]').click
     end
-    expect(page).to_not have_selector('form#new_order_article')
+    expect(page).not_to have_selector('form#new_order_article')
     expect(page).to have_content(new_article.name)
-    expect(order.order_articles.where(article_id: new_article.id)).to_not be_nil
+    expect(order.order_articles.where(article_id: new_article.id)).not_to be_nil
   end
 end

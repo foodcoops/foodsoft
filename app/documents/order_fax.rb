@@ -2,7 +2,7 @@ class OrderFax < OrderPdf
   BATCH_SIZE = 250
 
   def filename
-    I18n.t('documents.order_fax.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
+    I18n.t('documents.order_fax.filename', name: order.name, date: order.ends.to_date) + '.pdf'
   end
 
   def title
@@ -20,16 +20,18 @@ class OrderFax < OrderPdf
       move_down 5
       text "#{contact[:zip_code]} #{contact[:city]}", size: fontsize(9), align: :right
       move_down 5
-      unless order.supplier.try(:customer_number).blank?
-        text "#{Supplier.human_attribute_name :customer_number}: #{order.supplier[:customer_number]}", size: fontsize(9), align: :right
+      if order.supplier.try(:customer_number).present?
+        text "#{Supplier.human_attribute_name :customer_number}: #{order.supplier[:customer_number]}",
+             size: fontsize(9), align: :right
         move_down 5
       end
-      unless contact[:phone].blank?
+      if contact[:phone].present?
         text "#{Supplier.human_attribute_name :phone}: #{contact[:phone]}", size: fontsize(9), align: :right
         move_down 5
       end
-      unless contact[:email].blank?
-        text "#{Supplier.human_attribute_name :email}: #{contact[:email]}", size: fontsize(9), align: :right
+      if contact[:email].present?
+        text "#{Supplier.human_attribute_name :email}: #{contact[:email]}", size: fontsize(9),
+                                                                            align: :right
       end
     end
 
@@ -38,7 +40,7 @@ class OrderFax < OrderPdf
       text order.name
       move_down 5
       text order.supplier.try(:address).to_s
-      unless order.supplier.try(:fax).blank?
+      if order.supplier.try(:fax).present?
         move_down 5
         text "#{Supplier.human_attribute_name :fax}: #{order.supplier[:fax]}"
       end
@@ -50,7 +52,7 @@ class OrderFax < OrderPdf
     move_down 10
     text "#{Delivery.human_attribute_name :date}:"
     move_down 10
-    unless order.supplier.try(:contact_person).blank?
+    if order.supplier.try(:contact_person).present?
       text "#{Supplier.human_attribute_name :contact_person}: #{order.supplier[:contact_person]}"
       move_down 10
     end
@@ -78,8 +80,8 @@ class OrderFax < OrderPdf
       table.row(0).border_bottom_width = 2
       table.columns(1).align = :right
       table.columns(3..6).align = :right
-      table.row(data.length - 1).columns(0..5).borders = [:top, :bottom]
-      table.row(data.length - 1).columns(0).borders = [:top, :bottom, :left]
+      table.row(data.length - 1).columns(0..5).borders = %i[top bottom]
+      table.row(data.length - 1).columns(0).borders = %i[top bottom left]
       table.row(data.length - 1).border_top_width = 2
     end
     # font_size: fontsize(8),
@@ -98,7 +100,7 @@ class OrderFax < OrderPdf
          .preload(:article, :article_price)
   end
 
-  def each_order_article
-    order_articles.find_each_with_order(batch_size: BATCH_SIZE) { |oa| yield oa }
+  def each_order_article(&block)
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE, &block)
   end
 end

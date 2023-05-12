@@ -15,7 +15,7 @@ class Ordergroup < Group
   has_many :orders, through: :group_orders
   has_many :group_order_articles, through: :group_orders
 
-  validates_numericality_of :account_balance, :message => I18n.t('ordergroups.model.invalid_balance')
+  validates :account_balance, numericality: { message: I18n.t('ordergroups.model.invalid_balance') }
   validate :uniqueness_of_name, :uniqueness_of_members
 
   after_create :update_stats!
@@ -32,7 +32,7 @@ class Ordergroup < Group
 
   def self.include_transaction_class_sum
     columns = ['groups.*']
-    FinancialTransactionClass.all.each do |c|
+    FinancialTransactionClass.all.find_each do |c|
       columns << "sum(CASE financial_transaction_types.financial_transaction_class_id WHEN #{c.id} THEN financial_transactions.amount ELSE 0 END) AS sum_of_class_#{c.id}"
     end
 
@@ -51,9 +51,9 @@ class Ordergroup < Group
 
   def last_user_activity
     last_active_user = users.order('users.last_activity DESC').first
-    if last_active_user
-      last_active_user.last_activity
-    end
+    return unless last_active_user
+
+    last_active_user.last_activity
   end
 
   # the most recent order this ordergroup was participating in
@@ -86,12 +86,14 @@ class Ordergroup < Group
   # Throws an exception if it fails.
   def add_financial_transaction!(amount, note, user, transaction_type, link = nil, group_order = nil)
     transaction do
-      t = FinancialTransaction.new(ordergroup: self, amount: amount, note: note, user: user, financial_transaction_type: transaction_type, financial_link: link, group_order: group_order)
+      t = FinancialTransaction.new(ordergroup: self, amount: amount, note: note, user: user,
+                                   financial_transaction_type: transaction_type, financial_link: link, group_order: group_order)
       t.save!
       update_balance!
       # Notify only when order group had a positive balance before the last transaction:
-      if t.amount < 0 && self.account_balance < 0 && self.account_balance - t.amount >= 0
-        NotifyNegativeBalanceJob.perform_later(self, t)
+      if t.amount < 0 && account_balance < 0 && account_balance - t.amount >= 0
+        NotifyNegativeBalanceJob.perform_later(self,
+                                               t)
       end
       t
     end
@@ -101,10 +103,11 @@ class Ordergroup < Group
     # Get hours for every job of each user in period
     jobs = users.to_a.sum { |u| u.tasks.done.where('updated_on > ?', APPLE_MONTH_AGO.month.ago).sum(:duration) }
     # Get group_order.price for every finished order in this period
-    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).references(:orders).sum(:price)
+    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?',
+                                                                           APPLE_MONTH_AGO.month.ago).references(:orders).sum(:price)
 
     @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
-    update_attribute(:stats, { :jobs_size => jobs, :orders_sum => orders_sum })
+    update_attribute(:stats, { jobs_size: jobs, orders_sum: orders_sum })
   end
 
   def update_balance!
@@ -116,13 +119,17 @@ class Ordergroup < Group
   end
 
   def avg_jobs_per_euro
-    stats[:jobs_size].to_f / stats[:orders_sum].to_f rescue 0
+    stats[:jobs_size].to_f / stats[:orders_sum].to_f
+  rescue StandardError
+    0
   end
 
   # This is the ordergroup job per euro performance
   # in comparison to the hole foodcoop average
   def apples
-    ((avg_jobs_per_euro / Ordergroup.avg_jobs_per_euro) * 100).to_i rescue 0
+    ((avg_jobs_per_euro / Ordergroup.avg_jobs_per_euro) * 100).to_i
+  rescue StandardError
+    0
   end
 
   # If the the option stop_ordering_under is set, the ordergroup is only allowed to participate in an order,
@@ -141,7 +148,11 @@ class Ordergroup < Group
   # Global average
   def self.avg_jobs_per_euro
     stats = Ordergroup.pluck(:stats)
-    stats.sum { |s| s[:jobs_size].to_f } / stats.sum { |s| s[:orders_sum].to_f } rescue 0
+    begin
+      stats.sum { |s| s[:jobs_size].to_f } / stats.sum { |s| s[:orders_sum].to_f }
+    rescue StandardError
+      0
+    end
   end
 
   def account_updated
@@ -149,22 +160,22 @@ class Ordergroup < Group
   end
 
   def self.sort_by_param(param)
-    param ||= "name"
+    param ||= 'name'
 
     sort_param_map = {
-      "name" => "name",
-      "name_reverse" => "name DESC",
-      "members_count" => "count(users.id)",
-      "members_count_reverse" => "count(users.id) DESC",
-      "last_user_activity" => "max(users.last_activity)",
-      "last_user_activity_reverse" => "max(users.last_activity) DESC",
-      "last_order" => "max(orders.starts)",
-      "last_order_reverse" => "max(orders.starts) DESC"
+      'name' => 'name',
+      'name_reverse' => 'name DESC',
+      'members_count' => 'count(users.id)',
+      'members_count_reverse' => 'count(users.id) DESC',
+      'last_user_activity' => 'max(users.last_activity)',
+      'last_user_activity_reverse' => 'max(users.last_activity) DESC',
+      'last_order' => 'max(orders.starts)',
+      'last_order_reverse' => 'max(orders.starts) DESC'
     }
 
     result = self
-    result = result.left_joins(:users).group("groups.id") if param.starts_with?("members_count", "last_user_activity")
-    result = result.left_joins(:orders).group("groups.id") if param.starts_with?("last_order")
+    result = result.left_joins(:users).group('groups.id') if param.starts_with?('members_count', 'last_user_activity')
+    result = result.left_joins(:orders).group('groups.id') if param.starts_with?('last_order')
 
     # Never pass user input data to Arel.sql() because of SQL Injection vulnerabilities.
     # This case here is okay, as param is mapped to the actual order string.
@@ -176,17 +187,21 @@ class Ordergroup < Group
   # Make sure, that a user can only be in one ordergroup
   def uniqueness_of_members
     users.each do |user|
-      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.display) if user.groups.where(:type => 'Ordergroup').size > 1
+      next unless user.groups.where(type: 'Ordergroup').size > 1
+
+      errors.add :user_tokens,
+                 I18n.t('ordergroups.model.error_single_group',
+                        user: user.display)
     end
   end
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
     group = Ordergroup.where(name: name)
-    group = group.where.not(id: self.id) unless new_record?
-    if group.exists?
-      message = group.first.deleted? ? :taken_with_deleted : :taken
-      errors.add :name, message
-    end
+    group = group.where.not(id: id) unless new_record?
+    return unless group.exists?
+
+    message = group.first.deleted? ? :taken_with_deleted : :taken
+    errors.add :name, message
   end
 end

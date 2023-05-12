@@ -4,5 +4,5 @@ class BankGateway < ApplicationRecord
 
   scope :with_unattended_support, -> { where.not(unattended_user: nil) }
 
-  validates_presence_of :name, :url
+  validates :name, :url, presence: true
 end

@@ -21,31 +21,44 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :orders, I18n.t('navigation.orders.title'), '#' do |subnav|
       subnav.item :ordering, I18n.t('navigation.orders.ordering'), group_orders_path
       subnav.item :ordering_archive, I18n.t('navigation.orders.archive'), archive_group_orders_path
-      subnav.item :orders, I18n.t('navigation.orders.manage'), orders_path, if: Proc.new { current_user.role_orders? }
-      subnav.item :pickups, I18n.t('navigation.orders.pickups'), pickups_path, if: Proc.new { current_user.role_pickups? }
+      subnav.item :orders, I18n.t('navigation.orders.manage'), orders_path, if: proc { current_user.role_orders? }
+      subnav.item :pickups, I18n.t('navigation.orders.pickups'), pickups_path, if: proc {
+                                                                                     current_user.role_pickups?
+                                                                                   }
     end
 
     primary.item :articles, I18n.t('navigation.articles.title'), '#',
-                 if: Proc.new { current_user.role_article_meta? or current_user.role_suppliers? } do |subnav|
+                 if: proc { current_user.role_article_meta? or current_user.role_suppliers? } do |subnav|
       subnav.item :suppliers, I18n.t('navigation.articles.suppliers'), suppliers_path
       subnav.item :stockit, I18n.t('navigation.articles.stock'), stock_articles_path
       subnav.item :categories, I18n.t('navigation.articles.categories'), article_categories_path
     end
 
-    primary.item :finance, I18n.t('navigation.finances.title'), '#', if: Proc.new { current_user.role_finance? || current_user.role_invoices? } do |subnav|
-      subnav.item :finance_home, I18n.t('navigation.finances.home'), finance_root_path, if: Proc.new { current_user.role_finance? }
-      subnav.item :finance_home, I18n.t('navigation.finances.bank_accounts'), finance_bank_accounts_path, if: Proc.new { current_user.role_finance? }
-      subnav.item :accounts, I18n.t('navigation.finances.accounts'), finance_ordergroups_path, if: Proc.new { current_user.role_finance? }
-      subnav.item :balancing, I18n.t('navigation.finances.balancing'), finance_order_index_path, if: Proc.new { current_user.role_finance? }
+    primary.item :finance, I18n.t('navigation.finances.title'), '#', if: proc {
+                                                                           current_user.role_finance? || current_user.role_invoices?
+                                                                         } do |subnav|
+      subnav.item :finance_home, I18n.t('navigation.finances.home'), finance_root_path, if: proc {
+                                                                                              current_user.role_finance?
+                                                                                            }
+      subnav.item :finance_home, I18n.t('navigation.finances.bank_accounts'), finance_bank_accounts_path, if: proc {
+                                                                                                                current_user.role_finance?
+                                                                                                              }
+      subnav.item :accounts, I18n.t('navigation.finances.accounts'), finance_ordergroups_path, if: proc {
+                                                                                                     current_user.role_finance?
+                                                                                                   }
+      subnav.item :balancing, I18n.t('navigation.finances.balancing'), finance_order_index_path, if: proc {
+                                                                                                       current_user.role_finance?
+                                                                                                     }
       subnav.item :invoices, I18n.t('navigation.finances.invoices'), finance_invoices_path
     end
 
-    primary.item :admin, I18n.t('navigation.admin.title'), '#', if: Proc.new { current_user.role_admin? } do |subnav|
+    primary.item :admin, I18n.t('navigation.admin.title'), '#', if: proc { current_user.role_admin? } do |subnav|
       subnav.item :admin_home, I18n.t('navigation.admin.home'), admin_root_path
       subnav.item :users, I18n.t('navigation.admin.users'), admin_users_path
       subnav.item :ordergroups, I18n.t('navigation.admin.ordergroups'), admin_ordergroups_path
       subnav.item :workgroups, I18n.t('navigation.admin.workgroups'), admin_workgroups_path
-      subnav.item :mail_delivery_status, I18n.t('navigation.admin.mail_delivery_status'), admin_mail_delivery_status_index_path
+      subnav.item :mail_delivery_status, I18n.t('navigation.admin.mail_delivery_status'),
+                  admin_mail_delivery_status_index_path
       subnav.item :finances, I18n.t('navigation.admin.finance'), admin_finances_path
       subnav.item :config, I18n.t('navigation.admin.config'), admin_config_path
     end

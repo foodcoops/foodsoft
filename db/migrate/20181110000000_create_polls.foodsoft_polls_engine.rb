@@ -24,14 +24,14 @@ class CreatePolls < ActiveRecord::Migration[4.2]
       t.references :ordergroup
       t.text :note
       t.timestamps
-      t.index [:poll_id, :user_id, :ordergroup_id], unique: true
+      t.index %i[poll_id user_id ordergroup_id], unique: true
     end
 
     create_table :poll_choices do |t|
       t.references :poll_vote, null: false
       t.integer :choice, null: false
       t.integer :value, null: false
-      t.index [:poll_vote_id, :choice], unique: true
+      t.index %i[poll_vote_id choice], unique: true
     end
   end
 end

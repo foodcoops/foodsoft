@@ -24,12 +24,12 @@ module Concerns::FoodcoopScope
     elsif FoodsoftConfig.allowed_foodcoop? foodcoop
       FoodsoftConfig.select_foodcoop foodcoop
     else
-      raise ActionController::RoutingError.new 'Foodcoop Not Found'
+      raise ActionController::RoutingError, 'Foodcoop Not Found'
     end
   end
 
   # Always stay in foodcoop url scope
-  def default_url_options(options = {})
+  def default_url_options(_options = {})
     super().merge({ foodcoop: FoodsoftConfig.scope })
   end
 end
