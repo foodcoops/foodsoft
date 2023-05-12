@@ -45,15 +45,13 @@ describe 'User', type: :request do
         run_test!
       end
 
-      # TODO: fix controller to actually send a 422 for invalid params?
-      # Expected response code '200' to match '422'
-      # Response body: {"financial_transaction":{"id":316,"user_id":599,"user_name":"Lisbeth ","amount":-3.0,"note":"-2","created_at":"2022-12-12T13:05:32.000+01:00","financial_transaction_type_id":346,"financial_transaction_type_name":"aut est iste #9"}}
-      #
-      # response '422', 'invalid parameter value' do
-      #   # schema '$ref' => '#/components/schemas/Error422'
-      #   let(:financial_transaction) { { amount: -3, financial_transaction_type_id: create(:financial_transaction_type).id, note: -2 } }
-      #   run_test!
-      # end
+      response '422', 'invalid parameter value' do
+        # TODO: Fix controller to actually send a 422 for invalid params: https://github.com/foodcoops/foodsoft/issues/999
+        xit 'fix controller to actually send a 422 for invalid params: https://github.com/foodcoops/foodsoft/issues/999'
+        schema '$ref' => '#/components/schemas/Error422'
+        let(:financial_transaction) { { amount: -3, financial_transaction_type_id: create(:financial_transaction_type).id, note: -2 } }
+        run_test!
+      end
     end
 
     get "financial transactions of the member's ordergroup" do
