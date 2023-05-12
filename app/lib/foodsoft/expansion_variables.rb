@@ -14,7 +14,7 @@ module Foodsoft
     cattr_accessor :variables
 
     # Hash of variables. Note that keys are Strings.
-    @@variables = {
+    @variables = {
       'scope' => -> { FoodsoftConfig.scope },
       'name' => -> { FoodsoftConfig[:name] },
       'contact.street' => -> { FoodsoftConfig[:contact][:street] },
@@ -39,13 +39,13 @@ module Foodsoft
       'supplier_count' => -> { Supplier.undeleted.count },
       'active_supplier_count' => -> { active_supplier_count },
       'active_suppliers' => -> { active_suppliers },
-      'first_order_date' => -> { I18n.l Order.first.try { |o| o.starts.to_date } }
+      'first_order_date' => -> { I18n.l(Order.first.try { |o| o.starts.to_date }) }
     }
 
     # Return expanded variable
     # @return [String] Expanded variable
     def self.get(var)
-      s = @@variables[var.to_s]
+      s = @variables[var.to_s]
       s.respond_to?(:call) ? s.call : s.to_s
     end
 
@@ -55,7 +55,7 @@ module Foodsoft
     # @return [String] Expanded string
     def self.expand(str, options = {})
       str.gsub(/{{([._a-zA-Z0-9]+)}}/) do
-        options[::Regexp.last_match(1)] || self.get(::Regexp.last_match(1))
+        options[::Regexp.last_match(1)] || get(::Regexp.last_match(1))
       end
     end
 

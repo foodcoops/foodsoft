@@ -1,8 +1,8 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
-ENV["FOODSOFT_APP_CONFIG"] ||= 'spec/app_config.yml' # load special foodsoft config
+ENV['RAILS_ENV'] ||= 'test'
+ENV['FOODSOFT_APP_CONFIG'] ||= 'spec/app_config.yml' # load special foodsoft config
 require_relative 'support/coverage' # needs to be first
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/apparition'
@@ -17,17 +17,17 @@ end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   # We use capybara with webkit, and need database_cleaner
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.strategy = (RSpec.current_example.metadata[:js] ? :truncation : :transaction)
     DatabaseCleaner.start
     # clean slate mail queues, not sure why needed - https://github.com/rspec/rspec-rails/issues/661
     ActionMailer::Base.deliveries.clear
   end
-  config.after(:each) do
+  config.after do
     DatabaseCleaner.clean
     # Need to clear cache for RailsSettings::CachedSettings
     Rails.cache.clear
@@ -35,7 +35,7 @@ RSpec.configure do |config|
 
   # reload foodsoft configuration, so that tests can use FoodsoftConfig.config[:foo]=x
   # without messing up tests run after that
-  config.before(:each) do
+  config.before do
     FoodsoftConfig.init
     FoodsoftConfig.init_mailing
   end
@@ -49,7 +49,7 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = "random"
+  config.order = 'random'
 
   config.include SpecTestHelper, type: :controller
   config.include SessionHelper, type: :feature

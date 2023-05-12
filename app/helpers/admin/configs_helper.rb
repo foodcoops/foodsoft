@@ -28,7 +28,11 @@ module Admin::ConfigsHelper
       options[:default] = options[:input_html].delete(:value)
       return form.input key, options, &block
     end
-    block ||= proc { config_input_field form, key, options.merge(options[:input_html]) } if options[:as] == :select_recurring
+    if options[:as] == :select_recurring
+      block ||= proc {
+        config_input_field form, key, options.merge(options[:input_html])
+      }
+    end
     form.input key, options, &block
   end
 
@@ -57,11 +61,12 @@ module Admin::ConfigsHelper
       unchecked_value = options.delete(:unchecked_value) || 'false'
       options[:checked] = 'checked' if v = options.delete(:value) && v != 'false'
       # different key for hidden field so that allow clocking on label focuses the control
-      form.hidden_field(key, id: "#{key}_", value: unchecked_value, as: :hidden) + form.check_box(key, options, checked_value, false)
+      form.hidden_field(key, id: "#{key}_", value: unchecked_value,
+                             as: :hidden) + form.check_box(key, options, checked_value, false)
     elsif options[:as] == :select_recurring
       options[:value] = FoodsoftDateUtil.rule_from(options[:value])
       options[:rules] ||= []
-      options[:rules].unshift options[:value] unless options[:value].blank?
+      options[:rules].unshift options[:value] if options[:value].present?
       options[:rules].push [I18n.t('recurring_select.not_recurring'), '{}'] if options.delete(:allow_blank) # blank after current value
       form.select_recurring key, options.delete(:rules).uniq, options
     else
@@ -73,7 +78,7 @@ module Admin::ConfigsHelper
   # @param form [ActionView::Helpers::FormBuilder] Form object.
   # @param key [Symbol, String] Configuration key of a boolean (e.g. +use_messages+).
   # @option options [String] :label Label to show
-  def config_use_heading(form, key, options = {})
+  def config_use_heading(form, key, options = {}, &block)
     head = content_tag :label do
       lbl = options[:label] || config_input_label(form, key)
       field = config_input_field(form, key, as: :boolean, boolean_style: :inline,
@@ -83,9 +88,7 @@ module Admin::ConfigsHelper
         content_tag :span, (lbl + field).html_safe, config_input_tooltip_options(form, key, {})
       end
     end
-    fields = content_tag(:fieldset, id: "#{key}-fields", class: "collapse#{' in' if @cfg[key]}") do
-      yield
-    end
+    fields = content_tag(:fieldset, id: "#{key}-fields", class: "collapse#{' in' if @cfg[key]}", &block)
     head + fields
   end
 
@@ -127,7 +130,7 @@ module Admin::ConfigsHelper
     # tooltip with help info to the right
     cfg_path = form.lookup_model_names[1..-1] + [key]
     tooltip = I18n.t("config.hints.#{cfg_path.map(&:to_s).join('.')}", default: '')
-    unless tooltip.blank?
+    if tooltip.present?
       options[:data] ||= {}
       options[:data][:toggle] ||= 'tooltip'
       options[:data][:placement] ||= 'right'

@@ -17,16 +17,16 @@ class ArticleCategory < ApplicationRecord
 
   normalize_attributes :name, :description
 
-  validates :name, :presence => true, :uniqueness => true, :length => { :minimum => 2 }
+  validates :name, presence: true, uniqueness: true, length: { minimum: 2 }
 
   before_destroy :check_for_associated_articles
 
-  def self.ransackable_attributes(auth_object = nil)
-    %w(id name)
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id name]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    %w(articles order_articles orders)
+  def self.ransackable_associations(_auth_object = nil)
+    %w[articles order_articles orders]
   end
 
   # Find a category that matches a category name; may return nil.
@@ -40,7 +40,11 @@ class ArticleCategory < ApplicationRecord
     # case-insensitive substring match (take the closest match = shortest)
     c = ArticleCategory.where('name LIKE ?', "%#{category}%") unless c && c.any?
     # case-insensitive phrase present in category description
-    c = ArticleCategory.where('description LIKE ?', "%#{category}%").select { |s| s.description.match /(^|,)\s*#{category}\s*(,|$)/i } unless c && c.any?
+    unless c && c.any?
+      c = ArticleCategory.where('description LIKE ?', "%#{category}%").select do |s|
+        s.description.match(/(^|,)\s*#{category}\s*(,|$)/i)
+      end
+    end
     # return closest match if there are multiple
     c = c.sort_by { |s| s.name.length }.first if c.respond_to? :sort_by
     c
@@ -50,6 +54,9 @@ class ArticleCategory < ApplicationRecord
 
   # Deny deleting the category when there are associated articles.
   def check_for_associated_articles
-    raise I18n.t('activerecord.errors.has_many_left', collection: Article.model_name.human) if articles.undeleted.exists?
+    return unless articles.undeleted.exists?
+
+    raise I18n.t('activerecord.errors.has_many_left',
+                 collection: Article.model_name.human)
   end
 end

@@ -1,15 +1,15 @@
 require 'swagger_helper'
 
-describe 'User', type: :request do
+describe 'User' do
   include ApiHelper
 
   let(:api_scopes) { ['group_orders:user'] }
-  let(:user) { create :user, groups: [create(:ordergroup)] }
-  let(:other_user2) { create :user }
+  let(:user) { create(:user, groups: [create(:ordergroup)]) }
+  let(:other_user2) { create(:user) }
   let(:order) { create(:order, article_count: 4) }
   let(:order_articles) { order.order_articles }
-  let(:group_order) { create :group_order, ordergroup: user.ordergroup, order_id: order.id }
-  let(:goa) { create :group_order_article, group_order: group_order, order_article: order_articles.first }
+  let(:group_order) { create(:group_order, ordergroup: user.ordergroup, order_id: order.id) }
+  let(:goa) { create(:group_order_article, group_order: group_order, order_article: order_articles.first) }
 
   before do
     goa
@@ -134,11 +134,12 @@ describe 'User', type: :request do
 
       response 401, 'not logged-in' do
         schema '$ref' => '#/components/schemas/Error401'
-        let(:Authorization) { 'abc' }
+        let(:Authorization) { 'abc' } # rubocop:disable  RSpec/VariableName
         run_test!
       end
 
-      response 403, 'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope' do
+      response 403,
+               'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope' do
         let(:api_scopes) { ['none'] }
         schema '$ref' => '#/components/schemas/Error403'
         run_test!
@@ -180,7 +181,8 @@ describe 'User', type: :request do
 
       it_handles_invalid_token_with_id
 
-      response 403, 'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope' do
+      response 403,
+               'user has no ordergroup, order not open, is below minimum balance, has not enough apple points, or missing scope' do
         let(:api_scopes) { ['none'] }
         schema '$ref' => '#/components/schemas/Error403'
         run_test!

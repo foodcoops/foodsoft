@@ -32,7 +32,7 @@ RSpec.configure do |config|
               currentPage: { type: :integer },
               pageSize: { type: :integer }
             },
-            required: %w(recordCount pageCount currentPage pageSize)
+            required: %w[recordCount pageCount currentPage pageSize]
           },
           Order: {
             type: :object,
@@ -127,7 +127,8 @@ RSpec.configure do |config|
                 description: 'number of units available (only present on stock articles)'
               }
             },
-            required: %w[id name supplier_id supplier_name unit unit_quantity note manufacturer origin article_category_id]
+            required: %w[id name supplier_id supplier_name unit unit_quantity note manufacturer origin
+                         article_category_id]
           },
           OrderArticle: {
             type: :object,
@@ -396,7 +397,7 @@ RSpec.configure do |config|
                   description: 'link'
                 },
                 items: {
-                  '$ref': "#/components/schemas/Navigation"
+                  '$ref': '#/components/schemas/Navigation'
                 }
               },
               required: ['name'],

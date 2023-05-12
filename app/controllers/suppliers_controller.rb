@@ -1,5 +1,5 @@
 class SuppliersController < ApplicationController
-  before_action :authenticate_suppliers, :except => [:index, :list]
+  before_action :authenticate_suppliers, except: %i[index list]
   helper :deliveries
 
   def index
@@ -24,6 +24,10 @@ class SuppliersController < ApplicationController
     end
   end
 
+  def edit
+    @supplier = Supplier.find(params[:id])
+  end
+
   def create
     @supplier = Supplier.new(supplier_params)
     @supplier.supplier_category ||= SupplierCategory.first
@@ -31,12 +35,8 @@ class SuppliersController < ApplicationController
       flash[:notice] = I18n.t('suppliers.create.notice')
       redirect_to suppliers_path
     else
-      render :action => 'new'
+      render action: 'new'
     end
-  end
-
-  def edit
-    @supplier = Supplier.find(params[:id])
   end
 
   def update
@@ -45,7 +45,7 @@ class SuppliersController < ApplicationController
       flash[:notice] = I18n.t('suppliers.update.notice')
       redirect_to @supplier
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
@@ -54,8 +54,8 @@ class SuppliersController < ApplicationController
     @supplier.mark_as_deleted
     flash[:notice] = I18n.t('suppliers.destroy.notice')
     redirect_to suppliers_path
-  rescue => e
-    flash[:error] = I18n.t('errors.general_msg', :msg => e.message)
+  rescue StandardError => e
+    flash[:error] = I18n.t('errors.general_msg', msg: e.message)
     redirect_to @supplier
   end
 

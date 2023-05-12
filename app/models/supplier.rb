@@ -2,7 +2,9 @@ class Supplier < ApplicationRecord
   include MarkAsDeletedWithName
   include CustomFields
 
-  has_many :articles, -> { where(:type => nil).includes(:article_category).order('article_categories.name', 'articles.name') }
+  has_many :articles, lambda {
+                        where(type: nil).includes(:article_category).order('article_categories.name', 'articles.name')
+                      }
   has_many :stock_articles, -> { includes(:article_category).order('article_categories.name', 'articles.name') }
   has_many :orders
   has_many :deliveries
@@ -10,24 +12,24 @@ class Supplier < ApplicationRecord
   belongs_to :supplier_category
   belongs_to :shared_supplier, optional: true # for the sharedLists-App
 
-  validates :name, :presence => true, :length => { :in => 4..30 }
-  validates :phone, :presence => true, :length => { :in => 8..25 }
-  validates :address, :presence => true, :length => { :in => 8..50 }
-  validates_format_of :iban, :with => /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, :allow_blank => true
-  validates_uniqueness_of :iban, :case_sensitive => false, :allow_blank => true
-  validates_length_of :order_howto, :note, maximum: 250
+  validates :name, presence: true, length: { in: 4..30 }
+  validates :phone, presence: true, length: { in: 8..25 }
+  validates :address, presence: true, length: { in: 8..50 }
+  validates :iban, format: { with: /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, allow_blank: true }
+  validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
+  validates :order_howto, :note, length: { maximum: 250 }
   validate :valid_shared_sync_method
   validate :uniqueness_of_name
 
   scope :undeleted, -> { where(deleted_at: nil) }
   scope :having_articles, -> { where(id: Article.undeleted.select(:supplier_id).distinct) }
 
-  def self.ransackable_attributes(auth_object = nil)
-    %w(id name)
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id name]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    %w(articles stock_articles orders)
+  def self.ransackable_associations(_auth_object = nil)
+    %w[articles stock_articles orders]
   end
 
   # sync all articles with the external database
@@ -35,7 +37,9 @@ class Supplier < ApplicationRecord
   # also returns an array with outlisted_articles, which should be deleted
   # also returns an array with new articles, which should be added (depending on shared_sync_method)
   def sync_all
-    updated_article_pairs, outlisted_articles, new_articles = [], [], []
+    updated_article_pairs = []
+    outlisted_articles = []
+    new_articles = []
     existing_articles = Set.new
     for article in articles.undeleted
       # try to find the associated shared_article
@@ -44,30 +48,28 @@ class Supplier < ApplicationRecord
       if shared_article # article will be updated
         existing_articles.add(shared_article.id)
         unequal_attributes = article.shared_article_changed?(self)
-        unless unequal_attributes.blank? # skip if shared_article has not been changed
+        if unequal_attributes.present? # skip if shared_article has not been changed
           article.attributes = unequal_attributes
           updated_article_pairs << [article, unequal_attributes]
         end
       # Articles with no order number can be used to put non-shared articles
       # in a shared supplier, with sync keeping them.
-      elsif not article.order_number.blank?
+      elsif article.order_number.present?
         # article isn't in external database anymore
         outlisted_articles << article
       end
     end
     # Find any new articles, unless the import is manual
-    if ['all_available', 'all_unavailable'].include?(shared_sync_method)
+    if %w[all_available all_unavailable].include?(shared_sync_method)
       # build new articles
       shared_supplier
         .shared_articles
         .where.not(id: existing_articles.to_a)
         .find_each { |new_shared_article| new_articles << new_shared_article.build_new_article(self) }
       # make them unavailable when desired
-      if shared_sync_method == 'all_unavailable'
-        new_articles.each { |new_article| new_article.availability = false }
-      end
+      new_articles.each { |new_article| new_article.availability = false } if shared_sync_method == 'all_unavailable'
     end
-    return [updated_article_pairs, outlisted_articles, new_articles]
+    [updated_article_pairs, outlisted_articles, new_articles]
   end
 
   # Synchronise articles with spreadsheet.
@@ -78,8 +80,10 @@ class Supplier < ApplicationRecord
   # @option options [Boolean] :convert_units Omit or set to +true+ to keep current units, recomputing unit quantity and price.
   def sync_from_file(file, options = {})
     all_order_numbers = []
-    updated_article_pairs, outlisted_articles, new_articles = [], [], []
-    FoodsoftFile::parse file, options do |status, new_attrs, line|
+    updated_article_pairs = []
+    outlisted_articles = []
+    new_articles = []
+    FoodsoftFile.parse file, options do |status, new_attrs, line|
       article = articles.undeleted.where(order_number: new_attrs[:order_number]).first
       new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
       new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
@@ -101,15 +105,13 @@ class Supplier < ApplicationRecord
       # stop when there is a parsing error
       elsif status.is_a? String
         # @todo move I18n key to model
-        raise I18n.t('articles.model.error_parse', :msg => status, :line => line.to_s)
+        raise I18n.t('articles.model.error_parse', msg: status, line: line.to_s)
       end
 
       all_order_numbers << article.order_number if article
     end
-    if options[:outlist_absent]
-      outlisted_articles += articles.undeleted.where.not(order_number: all_order_numbers + [nil])
-    end
-    return [updated_article_pairs, outlisted_articles, new_articles]
+    outlisted_articles += articles.undeleted.where.not(order_number: all_order_numbers + [nil]) if options[:outlist_absent]
+    [updated_article_pairs, outlisted_articles, new_articles]
   end
 
   # default value
@@ -140,18 +142,18 @@ class Supplier < ApplicationRecord
 
   # make sure the shared_sync_method is allowed for the shared supplier
   def valid_shared_sync_method
-    if shared_supplier && !shared_supplier.shared_sync_methods.include?(shared_sync_method)
-      errors.add :shared_sync_method, :included
-    end
+    return unless shared_supplier && !shared_supplier.shared_sync_methods.include?(shared_sync_method)
+
+    errors.add :shared_sync_method, :included
   end
 
   # Make sure, the name is uniq, add usefull message if uniq group is already deleted
   def uniqueness_of_name
     supplier = Supplier.where(name: name)
-    supplier = supplier.where.not(id: self.id) unless new_record?
-    if supplier.exists?
-      message = supplier.first.deleted? ? :taken_with_deleted : :taken
-      errors.add :name, message
-    end
+    supplier = supplier.where.not(id: id) unless new_record?
+    return unless supplier.exists?
+
+    message = supplier.first.deleted? ? :taken_with_deleted : :taken
+    errors.add :name, message
   end
 end

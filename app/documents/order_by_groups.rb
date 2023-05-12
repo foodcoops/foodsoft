@@ -1,11 +1,11 @@
 class OrderByGroups < OrderPdf
   def filename
-    I18n.t('documents.order_by_groups.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
+    I18n.t('documents.order_by_groups.filename', name: order.name, date: order.ends.to_date) + '.pdf'
   end
 
   def title
-    I18n.t('documents.order_by_groups.title', :name => order.name,
-                                              :date => order.ends.strftime(I18n.t('date.formats.default')))
+    I18n.t('documents.order_by_groups.title', name: order.name,
+                                              date: order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body

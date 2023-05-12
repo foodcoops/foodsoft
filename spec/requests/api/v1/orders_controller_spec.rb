@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Orders', type: :request do
+describe Api::V1::OrdersController do
   include ApiHelper
   let(:api_scopes) { ['orders:read'] }
 

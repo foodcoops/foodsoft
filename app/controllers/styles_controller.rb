@@ -9,7 +9,7 @@ class StylesController < ApplicationController
   def foodcoop
     css = FoodsoftConfig[:custom_css]
     if css.blank?
-      render body: nil, content_type: 'text/css', status: 404
+      render body: nil, content_type: 'text/css', status: :not_found
     else
       expires_in 1.week, public: true if params[:md5].present?
       render body: css, content_type: 'text/css'

@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Navigation', type: :request do
+describe Api::V1::NavigationsController do
   include ApiHelper
 
   path '/navigation' do

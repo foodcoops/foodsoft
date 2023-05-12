@@ -10,7 +10,7 @@ module CustomFields
     end
 
     after_save do
-      self.settings.custom_fields = custom_fields if custom_fields
+      settings.custom_fields = custom_fields if custom_fields
     end
   end
 end

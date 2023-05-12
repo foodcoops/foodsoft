@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Article Categories', type: :request do
+describe Api::V1::ArticleCategoriesController do
   include ApiHelper
 
   path '/article_categories' do

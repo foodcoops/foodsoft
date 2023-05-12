@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe OrderArticle do
-  let(:order) { create :order, article_count: 1 }
+  let(:order) { create(:order, article_count: 1) }
   let(:oa) { order.order_articles.first }
 
   it 'is not ordered by default' do
     expect(OrderArticle.ordered.count).to eq 0
   end
 
-  [:units_to_order, :units_billed, :units_received].each do |units|
+  %i[units_to_order units_billed units_received].each do |units|
     it "is ordered when there are #{units.to_s.gsub '_', ' '}" do
       oa.update_attribute units, rand(1..99)
       expect(OrderArticle.ordered.count).to eq 1
@@ -46,15 +46,15 @@ describe OrderArticle do
   end
 
   describe 'redistribution' do
-    let(:admin) { create :user, groups: [create(:workgroup, role_finance: true)] }
-    let(:article) { create :article, unit_quantity: 3 }
-    let(:order) { create :order, article_ids: [article.id] }
-    let(:go1) { create :group_order, order: order }
-    let(:go2) { create :group_order, order: order }
-    let(:go3) { create :group_order, order: order }
-    let(:goa1) { create :group_order_article, group_order: go1, order_article: oa }
-    let(:goa2) { create :group_order_article, group_order: go2, order_article: oa }
-    let(:goa3) { create :group_order_article, group_order: go3, order_article: oa }
+    let(:admin) { create(:user, groups: [create(:workgroup, role_finance: true)]) }
+    let(:article) { create(:article, unit_quantity: 3) }
+    let(:order) { create(:order, article_ids: [article.id]) }
+    let(:go1) { create(:group_order, order: order) }
+    let(:go2) { create(:group_order, order: order) }
+    let(:go3) { create(:group_order, order: order) }
+    let(:goa1) { create(:group_order_article, group_order: go1, order_article: oa) }
+    let(:goa2) { create(:group_order_article, group_order: go2, order_article: oa) }
+    let(:goa3) { create(:group_order_article, group_order: go3, order_article: oa) }
 
     # set quantities of group_order_articles
     def set_quantities(q1, q2, q3)
@@ -79,21 +79,21 @@ describe OrderArticle do
 
     it 'does nothing when nothing has changed' do
       set_quantities [3, 2], [1, 3], [1, 0]
-      expect(oa.redistribute 6, [:tolerance, nil]).to eq [1, 0]
+      expect(oa.redistribute(6, [:tolerance, nil])).to eq [1, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result).map(&:to_i)).to eq [4, 1, 1]
     end
 
     it 'works when there is nothing to distribute' do
       set_quantities [3, 2], [1, 3], [1, 0]
-      expect(oa.redistribute 0, [:tolerance, nil]).to eq [0, 0]
+      expect(oa.redistribute(0, [:tolerance, nil])).to eq [0, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result)).to eq [0, 0, 0]
     end
 
     it 'works when quantity needs to be reduced' do
       set_quantities [3, 2], [1, 3], [1, 0]
-      expect(oa.redistribute 4, [:tolerance, nil]).to eq [0, 0]
+      expect(oa.redistribute(4, [:tolerance, nil])).to eq [0, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result)).to eq [3, 1, 0]
     end
@@ -101,28 +101,28 @@ describe OrderArticle do
     it 'works when quantity is increased within quantity' do
       set_quantities [3, 0], [2, 0], [2, 0]
       expect([goa1, goa2, goa3].map(&:result)).to eq [3, 2, 1]
-      expect(oa.redistribute 7, [:tolerance, nil]).to eq [0, 0]
+      expect(oa.redistribute(7, [:tolerance, nil])).to eq [0, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result).map(&:to_i)).to eq [3, 2, 2]
     end
 
     it 'works when there is just one for the first' do
       set_quantities [3, 2], [1, 3], [1, 0]
-      expect(oa.redistribute 1, [:tolerance, nil]).to eq [0, 0]
+      expect(oa.redistribute(1, [:tolerance, nil])).to eq [0, 0]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result)).to eq [1, 0, 0]
     end
 
     it 'works when there is tolerance and left-over' do
       set_quantities [3, 2], [1, 1], [1, 0]
-      expect(oa.redistribute 10, [:tolerance, nil]).to eq [3, 2]
+      expect(oa.redistribute(10, [:tolerance, nil])).to eq [3, 2]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result)).to eq [5, 2, 1]
     end
 
     it 'works when redistributing without tolerance' do
       set_quantities [3, 2], [1, 3], [1, 0]
-      expect(oa.redistribute 8, [nil]).to eq [3]
+      expect(oa.redistribute(8, [nil])).to eq [3]
       goa_reload
       expect([goa1, goa2, goa3].map(&:result)).to eq [3, 1, 1]
     end
@@ -131,17 +131,18 @@ describe OrderArticle do
   describe 'boxfill' do
     before { FoodsoftConfig[:use_boxfill] = true }
 
-    let(:article) { create :article, unit_quantity: 6 }
-    let(:order) { create :order, article_ids: [article.id], starts: 1.week.ago }
+    let(:article) { create(:article, unit_quantity: 6) }
+    let(:order) { create(:order, article_ids: [article.id], starts: 1.week.ago) }
     let(:oa) { order.order_articles.first }
-    let(:go) { create :group_order, order: order }
-    let(:goa) { create :group_order_article, group_order: go, order_article: oa }
+    let(:go) { create(:group_order, order: order) }
+    let(:goa) { create(:group_order_article, group_order: go, order_article: oa) }
 
-    shared_examples "boxfill" do |success, q|
+    shared_examples 'boxfill' do |success, q|
       # initial situation
       before do
         goa.update_quantities(*q.keys[0])
-        oa.update_results!; oa.reload
+        oa.update_results!
+        oa.reload
       end
 
       # check starting condition
@@ -172,11 +173,11 @@ describe OrderArticle do
       let(:boxfill_from) { 1.hour.from_now }
 
       context 'decreasing the missing units' do
-        include_examples "boxfill", true, [6, 0] => [5, 0], [6, 0, 0] => [5, 0, 1]
+        include_examples 'boxfill', true, [6, 0] => [5, 0], [6, 0, 0] => [5, 0, 1]
       end
 
       context 'decreasing the tolerance' do
-        include_examples "boxfill", true, [1, 2] => [1, 1], [1, 2, 3] => [1, 1, 4]
+        include_examples 'boxfill', true, [1, 2] => [1, 1], [1, 2, 3] => [1, 1, 4]
       end
     end
 
@@ -184,27 +185,27 @@ describe OrderArticle do
       let(:boxfill_from) { 1.second.ago }
 
       context 'changing nothing in particular' do
-        include_examples "boxfill", true, [4, 1] => [4, 1], [4, 1, 1] => [4, 1, 1]
+        include_examples 'boxfill', true, [4, 1] => [4, 1], [4, 1, 1] => [4, 1, 1]
       end
 
       context 'increasing missing units' do
-        include_examples "boxfill", false, [3, 0] => [2, 0], [3, 0, 3] => [3, 0, 3]
+        include_examples 'boxfill', false, [3, 0] => [2, 0], [3, 0, 3] => [3, 0, 3]
       end
 
       context 'increasing tolerance' do
-        include_examples "boxfill", true, [2, 1] => [2, 2], [2, 1, 3] => [2, 2, 2]
+        include_examples 'boxfill', true, [2, 1] => [2, 2], [2, 1, 3] => [2, 2, 2]
       end
 
       context 'decreasing quantity to fix missing units' do
-        include_examples "boxfill", true, [7, 0] => [6, 0], [7, 0, 5] => [6, 0, 0]
+        include_examples 'boxfill', true, [7, 0] => [6, 0], [7, 0, 5] => [6, 0, 0]
       end
 
       context 'decreasing quantity keeping missing units equal' do
-        include_examples "boxfill", false, [7, 0] => [1, 0], [7, 0, 5] => [7, 0, 5]
+        include_examples 'boxfill', false, [7, 0] => [1, 0], [7, 0, 5] => [7, 0, 5]
       end
 
       context 'moving tolerance to quantity' do
-        include_examples "boxfill", true, [4, 2] => [6, 0], [4, 2, 0] => [6, 0, 0]
+        include_examples 'boxfill', true, [4, 2] => [6, 0], [4, 2, 0] => [6, 0, 0]
       end
       # @todo enable test when tolerance doesn't count in missing_units
       # context 'decreasing tolerance' do

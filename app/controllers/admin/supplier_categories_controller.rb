@@ -6,6 +6,11 @@ class Admin::SupplierCategoriesController < Admin::BaseController
     render layout: false
   end
 
+  def edit
+    @supplier_category = SupplierCategory.find(params[:id])
+    render action: 'new', layout: false
+  end
+
   def create
     @supplier_category = SupplierCategory.new(params[:supplier_category])
     if @supplier_category.valid? && @supplier_category.save
@@ -13,11 +18,6 @@ class Admin::SupplierCategoriesController < Admin::BaseController
     else
       render action: 'new', layout: false
     end
-  end
-
-  def edit
-    @supplier_category = SupplierCategory.find(params[:id])
-    render action: 'new', layout: false
   end
 
   def update

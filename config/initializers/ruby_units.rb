@@ -2,28 +2,28 @@
 
 if defined? RubyUnits
   RubyUnits::Unit.redefine!('liter') do |unit|
-    unit.aliases   += %w{ltr}
+    unit.aliases   += %w[ltr]
   end
 
   RubyUnits::Unit.redefine!('kilogram') do |unit|
-    unit.aliases   += %w{KG}
+    unit.aliases   += %w[KG]
   end
 
   RubyUnits::Unit.redefine!('gram') do |unit|
-    unit.aliases   += %w{gr}
+    unit.aliases   += %w[gr]
   end
 
   RubyUnits::Unit.define('piece') do |unit|
     unit.definition = RubyUnits::Unit.new('1 each')
-    unit.aliases    = %w{pc pcs piece pieces}   # locale: en
-    unit.aliases   += %w{st stuk stuks}         # locale: nl
+    unit.aliases    = %w[pc pcs piece pieces]   # locale: en
+    unit.aliases   += %w[st stuk stuks]         # locale: nl
     unit.kind       = :counting
   end
 
   RubyUnits::Unit.define('bag') do |unit|
     unit.definition = RubyUnits::Unit.new('1 each')
-    unit.aliases    = %w{bag bags blt sachet sachets} # locale: en
-    unit.aliases   += %w{zak zakken zakje zakjes}     # locale: nl
+    unit.aliases    = %w[bag bags blt sachet sachets] # locale: en
+    unit.aliases   += %w[zak zakken zakje zakjes]     # locale: nl
     unit.kind       = :counting
   end
 

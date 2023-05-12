@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Config', type: :request do
+describe Api::V1::ConfigsController do
   include ApiHelper
 
   path '/config' do

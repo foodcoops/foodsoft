@@ -6,6 +6,11 @@ class Admin::BankGatewaysController < Admin::BaseController
     render layout: false
   end
 
+  def edit
+    @bank_gateway = BankGateway.find(params[:id])
+    render action: 'new', layout: false
+  end
+
   def create
     @bank_gateway = BankGateway.new(params[:bank_gateway])
     if @bank_gateway.valid? && @bank_gateway.save
@@ -13,11 +18,6 @@ class Admin::BankGatewaysController < Admin::BaseController
     else
       render action: 'new', layout: false
     end
-  end
-
-  def edit
-    @bank_gateway = BankGateway.find(params[:id])
-    render action: 'new', layout: false
   end
 
   def update

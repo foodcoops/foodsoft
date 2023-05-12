@@ -1,9 +1,9 @@
 class Task < ApplicationRecord
-  has_many :assignments, :dependent => :destroy
-  has_many :users, :through => :assignments
+  has_many :assignments, dependent: :destroy
+  has_many :users, through: :assignments
   belongs_to :workgroup, optional: true
   belongs_to :periodic_task_group, optional: true
-  belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id', optional: true
+  belongs_to :created_by, class_name: 'User', foreign_key: 'created_by_user_id', optional: true
 
   scope :non_group, -> { where(workgroup_id: nil, done: false) }
   scope :done, -> { where(done: true) }
@@ -11,12 +11,12 @@ class Task < ApplicationRecord
 
   attr_accessor :current_user_id
 
-  validates :name, :presence => true, :length => { :minimum => 3 }
-  validates :required_users, :presence => true
-  validates_numericality_of :duration, :required_users, :only_integer => true, :greater_than => 0
-  validates_length_of :description, maximum: 250
+  validates :name, presence: true, length: { minimum: 3 }
+  validates :required_users, presence: true
+  validates :duration, :required_users, numericality: { only_integer: true, greater_than: 0 }
+  validates :description, length: { maximum: 250 }
   validates :done, exclusion: { in: [true] }, if: :periodic?, on: :create
-  validates_presence_of :due_date, if: :periodic?
+  validates :due_date, presence: { if: :periodic? }
 
   before_save :exclude_from_periodic_task_group, if: :changed?, unless: :new_record?
   after_save :update_ordergroup_stats
@@ -35,7 +35,7 @@ class Task < ApplicationRecord
   # find all tasks in the period (or another number of days)
   def self.next_assigned_tasks_for(user, number = FoodsoftConfig[:tasks_period_days].to_i)
     user.tasks.undone.where(assignments: { accepted: true })
-        .where(["tasks.due_date >= ? AND tasks.due_date <= ?", Time.now, number.days.from_now])
+        .where(['tasks.due_date >= ? AND tasks.due_date <= ?', Time.now, number.days.from_now])
   end
 
   # count tasks with not enough responsible people
@@ -49,7 +49,7 @@ class Task < ApplicationRecord
 
   def self.next_unassigned_tasks_for(user, max = 2)
     periodic_task_group_count = {}
-    self.unassigned_tasks_for(user).reject do |item|
+    unassigned_tasks_for(user).reject do |item|
       next false unless item.periodic_task_group
 
       count = periodic_task_group_count[item.periodic_task_group] || 0
@@ -59,19 +59,19 @@ class Task < ApplicationRecord
   end
 
   def periodic?
-    not periodic_task_group.nil?
+    !periodic_task_group.nil?
   end
 
   def is_assigned?(user)
-    self.assignments.detect { |ass| ass.user_id == user.id }
+    assignments.detect { |ass| ass.user_id == user.id }
   end
 
   def is_accepted?(user)
-    self.assignments.detect { |ass| ass.user_id == user.id && ass.accepted }
+    assignments.detect { |ass| ass.user_id == user.id && ass.accepted }
   end
 
   def enough_users_assigned?
-    assignments.to_a.count(&:accepted) >= required_users ? true : false
+    assignments.to_a.count(&:accepted) >= required_users
   end
 
   def still_required_users
@@ -82,39 +82,35 @@ class Task < ApplicationRecord
   # and makes the users responsible for the task
   # TODO: check for maximal number of users
   def user_list=(ids)
-    list = ids.split(",").map(&:to_i)
+    list = ids.split(',').map(&:to_i)
     new_users = (list - users.collect(&:id)).uniq
     old_users = users.reject { |user| list.include?(user.id) }
 
     self.class.transaction do
       # delete old assignments
-      if old_users.any?
-        assignments.where(user_id: old_users.map(&:id)).each(&:destroy)
-      end
+      assignments.where(user_id: old_users.map(&:id)).find_each(&:destroy) if old_users.any?
       # create new assignments
       new_users.each do |id|
         user = User.find(id)
         if user.blank?
           errors.add(:user_list)
+        elsif id == current_user_id.to_i
+          assignments.build user: user, accepted: true
+        # current_user will accept, when he puts himself to the list of users
         else
-          if id == current_user_id.to_i
-            # current_user will accept, when he puts himself to the list of users
-            self.assignments.build :user => user, :accepted => true
-          else
-            # normal assignement
-            self.assignments.build :user => user
-          end
+          # normal assignement
+          assignments.build user: user
         end
       end
     end
   end
 
   def user_list
-    @user_list ||= users.collect(&:id).join(", ")
+    @user_list ||= users.collect(&:id).join(', ')
   end
 
   def update_ordergroup_stats(user_ids = self.user_ids)
-    Ordergroup.joins(:users).where(users: { id: user_ids }).each(&:update_stats!)
+    Ordergroup.joins(:users).where(users: { id: user_ids }).find_each(&:update_stats!)
   end
 
   def exclude_from_periodic_task_group

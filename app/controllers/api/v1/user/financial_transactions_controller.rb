@@ -16,7 +16,8 @@ class Api::V1::User::FinancialTransactionsController < Api::V1::BaseController
 
   def create
     transaction_type = FinancialTransactionType.find(create_params[:financial_transaction_type_id])
-    ft = current_ordergroup.add_financial_transaction!(create_params[:amount], create_params[:note], current_user, transaction_type)
+    ft = current_ordergroup.add_financial_transaction!(create_params[:amount], create_params[:note], current_user,
+                                                       transaction_type)
     render json: ft
   end
 

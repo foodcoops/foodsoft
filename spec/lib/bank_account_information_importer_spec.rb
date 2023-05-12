@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 describe BankTransaction do
-  let(:bank_account) { create :bank_account }
+  let(:bank_account) { create(:bank_account) }
 
   it 'empty content' do
     content = ''
@@ -188,7 +188,7 @@ describe BankTransaction do
     expect(bt.date).to eq('2019-02-13'.to_date)
     expect(bt.text).to eq('Deutsche Bundesbahn')
     expect(bt.iban).to eq('DE72957284895783674747')
-    expect(bt.reference).to eq("743574386368 Muenchen-Hamburg 27.03.2019")
+    expect(bt.reference).to eq('743574386368 Muenchen-Hamburg 27.03.2019')
     expect(bt.receipt).to eq('Lastschrift')
   end
 
@@ -277,7 +277,7 @@ describe BankTransaction do
     expect(bt.date).to eq('2019-02-14'.to_date)
     expect(bt.text).to eq('superbank AG')
     expect(bt.iban).to be_nil
-    expect(bt.reference).to eq("Überweisung US, Wechselspesen u Provision")
+    expect(bt.reference).to eq('Überweisung US, Wechselspesen u Provision')
     expect(bt.receipt).to eq('Spesen/Gebühren')
   end
 
@@ -384,7 +384,7 @@ describe BankTransaction do
     expect(bank_account.last_transaction_date).to eq('2020-01-01'.to_date)
     expect(bank_account.balance).to eq(22)
 
-    bt1 = bank_account.bank_transactions.find_by_external_id("T1")
+    bt1 = bank_account.bank_transactions.find_by_external_id('T1')
     expect(bt1.amount).to eq(11)
     expect(bt1.date).to eq('2020-01-01'.to_date)
     expect(bt1.text).to eq('DN1')
@@ -392,7 +392,7 @@ describe BankTransaction do
     expect(bt1.reference).to eq('')
     expect(bt1.receipt).to eq('AI1')
 
-    bt2 = bank_account.bank_transactions.find_by_external_id("T2")
+    bt2 = bank_account.bank_transactions.find_by_external_id('T2')
     expect(bt2.amount).to eq(-22)
     expect(bt2.date).to eq('2010-02-01'.to_date)
     expect(bt2.text).to eq('CN2')
@@ -400,7 +400,7 @@ describe BankTransaction do
     expect(bt2.reference).to eq('RI2')
     expect(bt2.receipt).to be_nil
 
-    bt3 = bank_account.bank_transactions.find_by_external_id("T3")
+    bt3 = bank_account.bank_transactions.find_by_external_id('T3')
     expect(bt3.amount).to eq(33)
     expect(bt3.date).to eq('2000-03-01'.to_date)
     expect(bt3.text).to eq('DN3')

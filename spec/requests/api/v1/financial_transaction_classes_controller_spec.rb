@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Financial Transaction Classes', type: :request do
+describe Api::V1::FinancialTransactionClassesController do
   include ApiHelper
 
   path '/financial_transaction_classes' do

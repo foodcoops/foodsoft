@@ -3,12 +3,12 @@ class OrderMatrix < OrderPdf
   PLACEHOLDER_CHAR = 'X'
 
   def filename
-    I18n.t('documents.order_matrix.filename', :name => @order.name, :date => @order.ends.to_date) + '.pdf'
+    I18n.t('documents.order_matrix.filename', name: @order.name, date: @order.ends.to_date) + '.pdf'
   end
 
   def title
-    I18n.t('documents.order_matrix.title', :name => @order.name,
-                                           :date => @order.ends.strftime(I18n.t('date.formats.default')))
+    I18n.t('documents.order_matrix.title', name: @order.name,
+                                           date: @order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
@@ -87,7 +87,7 @@ class OrderMatrix < OrderPdf
         table.cells.border_width = 0.5
         table.cells.border_color = '666666'
 
-        table.row(0).borders = [:bottom, :left]
+        table.row(0).borders = %i[bottom left]
         table.row(0).padding = [2, 0, 2, 0]
         table.row(1..-1).height = row_height_1
         table.column(0..1).borders = []
@@ -106,7 +106,7 @@ class OrderMatrix < OrderPdf
           table.column(2 + idx).border_width = 2
         end
 
-        table.row_colors = ['dddddd', 'ffffff']
+        table.row_colors = %w[dddddd ffffff]
       end
 
       first_page = false

@@ -28,9 +28,9 @@ class RotatedCell < Prawn::Table::Cell::Text
     with_font { (@pdf.width_of(@content, options) + padding_top + padding_bottom) * tan_rotation }
   end
 
-  def draw_borders(pt)
+  def draw_borders(point)
     @pdf.mask(:line_width, :stroke_color) do
-      x, y = pt
+      x, y = point
       from = [[x - skew, y + (border_top_width / 2.0)],
               to = [x, y - height - (border_bottom_width / 2.0)]]
 
@@ -118,11 +118,6 @@ class RenderPdf < Prawn::Document
     render # Render pdf
   end
 
-  # Helper method to test pdf via rails console: OrderByGroups.new(order).save_tmp
-  def save_tmp
-    File.write("#{Rails.root}/tmp/#{self.class.to_s.underscore}.pdf", to_pdf.force_encoding("UTF-8"))
-  end
-
   # @todo avoid underscore instead of unicode whitespace in pdf :/
   def number_to_currency(number, options = {})
     super(number, options).gsub("\u202f", ' ') if number
@@ -148,8 +143,8 @@ class RenderPdf < Prawn::Document
 
   protected
 
-  def fontsize(n)
-    n
+  def fontsize(size)
+    size
   end
 
   # return whether pagebreak or vertical whitespace is used for breaks

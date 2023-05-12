@@ -1,10 +1,12 @@
 require 'swagger_helper'
 
-describe 'Financial Transaction', type: :request do
+describe Api::V1::FinancialTransactionsController do
   include ApiHelper
   let!(:finance_user) { create(:user, groups: [create(:workgroup, role_finance: true)]) }
   let!(:api_scopes) { ['finance:read', 'finance:write'] }
-  let(:api_access_token) { create(:oauth2_access_token, resource_owner_id: finance_user.id, scopes: api_scopes&.join(' ')).token }
+  let(:api_access_token) do
+    create(:oauth2_access_token, resource_owner_id: finance_user.id, scopes: api_scopes&.join(' ')).token
+  end
   let(:financial_transaction) { create(:financial_transaction, user: user) }
 
   path '/financial_transactions' do

@@ -1,15 +1,15 @@
 require_relative '../spec_helper'
 
 feature 'receiving an order', js: true do
-  let(:admin) { create :user, groups: [create(:workgroup, role_orders: true)] }
-  let(:supplier) { create :supplier }
-  let(:article) { create :article, supplier: supplier, unit_quantity: 3 }
-  let(:order) { create :order, supplier: supplier, article_ids: [article.id] } # need to ref article
-  let(:go1) { create :group_order, order: order }
-  let(:go2) { create :group_order, order: order }
+  let(:admin) { create(:user, groups: [create(:workgroup, role_orders: true)]) }
+  let(:supplier) { create(:supplier) }
+  let(:article) { create(:article, supplier: supplier, unit_quantity: 3) }
+  let(:order) { create(:order, supplier: supplier, article_ids: [article.id]) } # need to ref article
+  let(:go1) { create(:group_order, order: order) }
+  let(:go2) { create(:group_order, order: order) }
   let(:oa) { order.order_articles.find_by_article_id(article.id) }
-  let(:goa1) { create :group_order_article, group_order: go1, order_article: oa }
-  let(:goa2) { create :group_order_article, group_order: go2, order_article: oa }
+  let(:goa1) { create(:group_order_article, group_order: go1, order_article: oa) }
+  let(:goa2) { create(:group_order_article, group_order: go2, order_article: oa) }
 
   # set quantities of group_order_articles
   def set_quantities(q1, q2)
@@ -46,7 +46,7 @@ feature 'receiving an order', js: true do
   it 'has product not ordered invisible' do
     set_quantities [0, 0], [0, 0]
     visit receive_order_path(id: order.id)
-    expect(page).to_not have_selector("#order_article_#{oa.id}")
+    expect(page).not_to have_selector("#order_article_#{oa.id}")
   end
 
   it 'is not received by default' do
@@ -58,7 +58,7 @@ feature 'receiving an order', js: true do
   it 'does not change anything when received is ordered' do
     set_quantities [2, 0], [3, 2]
     visit receive_order_path(id: order.id)
-    fill_in "order_articles_#{oa.id}_units_received", :with => oa.units_to_order
+    fill_in "order_articles_#{oa.id}_units_received", with: oa.units_to_order
     find('input[type="submit"]').click
     expect(page).to have_selector('body')
     check_quantities 2, 2, 4
@@ -67,7 +67,7 @@ feature 'receiving an order', js: true do
   it 'redistributes properly when received is more' do
     set_quantities [2, 0], [3, 2]
     visit receive_order_path(id: order.id)
-    fill_in "order_articles_#{oa.id}_units_received", :with => 3
+    fill_in "order_articles_#{oa.id}_units_received", with: 3
     find('input[type="submit"]').click
     expect(page).to have_selector('body')
     check_quantities 3, 2, 5
@@ -76,7 +76,7 @@ feature 'receiving an order', js: true do
   it 'redistributes properly when received is less' do
     set_quantities [2, 0], [3, 2]
     visit receive_order_path(id: order.id)
-    fill_in "order_articles_#{oa.id}_units_received", :with => 1
+    fill_in "order_articles_#{oa.id}_units_received", with: 1
     find('input[type="submit"]').click
     expect(page).to have_selector('body')
     check_quantities 1, 2, 1

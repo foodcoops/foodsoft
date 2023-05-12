@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'User', type: :request do
+describe 'User' do
   include ApiHelper
 
   path '/user' do
@@ -8,9 +8,9 @@ describe 'User', type: :request do
       tags 'User'
       produces 'application/json'
       let(:api_scopes) { ['user:read'] }
-      let(:other_user1) { create :user }
-      let(:user) { create :user }
-      let(:other_user2) { create :user }
+      let(:other_user1) { create(:user) }
+      let(:user) { create(:user) }
+      let(:other_user2) { create(:user) }
 
       response '200', 'success' do
         schema type: :object,
@@ -52,7 +52,7 @@ describe 'User', type: :request do
     get 'financial summary about the currently logged-in user' do
       tags 'User', 'Financial Transaction'
       produces 'application/json'
-      let(:user) { create :user, :ordergroup }
+      let(:user) { create(:user, :ordergroup) }
       let(:api_scopes) { ['finance:user'] }
       FinancialTransactionClass.create(name: 'TestTransaction')
 

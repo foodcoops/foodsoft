@@ -46,8 +46,7 @@ class MigrateUserSettings < ActiveRecord::Migration[4.2]
     drop_table :configurable_settings
   end
 
-  def down
-  end
+  def down; end
 end
 
 # this is the base class of all configurable settings

@@ -1,10 +1,11 @@
 module GroupOrdersHelper
   def data_to_js(ordering_data)
-    ordering_data[:order_articles].map { |id, data|
-      [id, data[:price], data[:unit], data[:total_price], data[:others_quantity], data[:others_tolerance], data[:used_quantity], data[:quantity_available]]
-    }.map { |row|
+    ordering_data[:order_articles].map do |id, data|
+      [id, data[:price], data[:unit], data[:total_price], data[:others_quantity], data[:others_tolerance],
+       data[:used_quantity], data[:quantity_available]]
+    end.map do |row|
       "addData(#{row.join(', ')});"
-    }.join("\n")
+    end.join("\n")
   end
 
   # Returns a link to the page where a group_order can be edited.
@@ -14,9 +15,9 @@ module GroupOrdersHelper
     path = if options[:show] && group_order
              group_order_path(group_order)
            elsif group_order
-             edit_group_order_path(group_order, :order_id => order.id)
+             edit_group_order_path(group_order, order_id: order.id)
            else
-             new_group_order_path(:order_id => order.id)
+             new_group_order_path(order_id: order.id)
            end
     options.delete(:show)
     name = block_given? ? capture(&block) : order.name
@@ -26,7 +27,7 @@ module GroupOrdersHelper
   # Return css class names for order result table
 
   def order_article_class_name(quantity, tolerance, result)
-    if (quantity + tolerance > 0)
+    if quantity + tolerance > 0
       result > 0 ? 'success' : 'failed'
     else
       'ignored'
@@ -45,12 +46,12 @@ module GroupOrdersHelper
   end
 
   def get_missing_units_css_class(quantity_missing)
-    if (quantity_missing == 1)
-      return 'missing-few';
-    elsif (quantity_missing == 0)
-      return ''
+    if quantity_missing == 1
+      'missing-few'
+    elsif quantity_missing == 0
+      ''
     else
-      return 'missing-many'
+      'missing-many'
     end
   end
 end

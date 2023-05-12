@@ -9,15 +9,19 @@ module Concerns::Auth
 
   def current_user
     # check if there is a valid session and return the logged-in user (its object)
-    if session[:user_id] && params[:foodcoop]
-      # for shared-host installations. check if the cookie-subdomain fits to request.
-      @current_user ||= User.undeleted.find_by_id(session[:user_id]) if session[:scope] == FoodsoftConfig.scope
-    end
+    return unless session[:user_id] && params[:foodcoop]
+
+    # for shared-host installations. check if the cookie-subdomain fits to request.
+    @current_user ||= User.undeleted.find_by_id(session[:user_id]) if session[:scope] == FoodsoftConfig.scope
   end
 
   def deny_access
     session[:return_to] = request.original_url
-    redirect_to root_url, alert: I18n.t('application.controller.error_denied', sign_in: ActionController::Base.helpers.link_to(t('application.controller.error_denied_sign_in'), login_path))
+    redirect_to root_url,
+                alert: I18n.t('application.controller.error_denied',
+                              sign_in: ActionController::Base.helpers.link_to(
+                                t('application.controller.error_denied_sign_in'), login_path
+                              ))
   end
 
   private
@@ -47,12 +51,7 @@ module Concerns::Auth
 
   def authenticate(role = 'any')
     # Attempt to retrieve authenticated user from controller instance or session...
-    if !current_user
-      # No user at all: redirect to login page.
-      logout
-      session[:return_to] = request.original_url
-      redirect_to_login :alert => I18n.t('application.controller.error_authn')
-    else
+    if current_user
       # We have an authenticated user, now check role...
       # Roles gets the user through his memberships.
       hasRole = case role
@@ -73,6 +72,11 @@ module Concerns::Auth
       else
         deny_access
       end
+    else
+      # No user at all: redirect to login page.
+      logout
+      session[:return_to] = request.original_url
+      redirect_to_login alert: I18n.t('application.controller.error_authn')
     end
   end
 
@@ -116,13 +120,13 @@ module Concerns::Auth
   # if fails the user will redirected to startpage
   def authenticate_membership_or_admin(group_id = params[:id])
     @group = Group.find(group_id)
-    unless @group.member?(@current_user) || @current_user.role_admin?
-      redirect_to root_path, alert: I18n.t('application.controller.error_members_only')
-    end
+    return if @group.member?(@current_user) || @current_user.role_admin?
+
+    redirect_to root_path, alert: I18n.t('application.controller.error_members_only')
   end
 
   def authenticate_or_token(prefix, role = 'any')
-    if not params[:token].blank?
+    if params[:token].present?
       begin
         TokenVerifier.new(prefix).verify(params[:token])
       rescue ActiveSupport::MessageVerifier::InvalidSignature

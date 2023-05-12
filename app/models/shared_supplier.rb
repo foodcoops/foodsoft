@@ -5,10 +5,10 @@ class SharedSupplier < ApplicationRecord
   self.table_name = 'suppliers'
 
   has_many :suppliers, -> { undeleted }
-  has_many :shared_articles, :foreign_key => :supplier_id
+  has_many :shared_articles, foreign_key: :supplier_id
 
   def find_article_by_number(order_number)
-    # note that `shared_articles` uses number instead order_number
+    # NOTE: that `shared_articles` uses number instead order_number
     cached_articles.detect { |a| a.number == order_number }
   end
 
@@ -19,15 +19,18 @@ class SharedSupplier < ApplicationRecord
   # These set of attributes are used to autofill attributes of new supplier,
   # when created by import from shared supplier feature.
   def autofill_attributes
-    whitelist = %w(name address phone fax email url delivery_days note)
+    whitelist = %w[name address phone fax email url delivery_days note]
     attributes.select { |k, _v| whitelist.include?(k) }
   end
 
   # return list of synchronisation methods available for this supplier
   def shared_sync_methods
     methods = []
-    methods += %w(all_available all_unavailable) if shared_articles.count < FoodsoftConfig[:shared_supplier_article_sync_limit]
-    methods += %w(import)
+    if shared_articles.count < FoodsoftConfig[:shared_supplier_article_sync_limit]
+      methods += %w[all_available
+                    all_unavailable]
+    end
+    methods += %w[import]
     methods
   end
 end

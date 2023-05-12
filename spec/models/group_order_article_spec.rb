@@ -1,10 +1,10 @@
 require_relative '../spec_helper'
 
 describe GroupOrderArticle do
-  let(:user) { create :user, groups: [create(:ordergroup)] }
+  let(:user) { create(:user, groups: [create(:ordergroup)]) }
   let(:order) { create(:order) }
-  let(:go) { create :group_order, order: order, ordergroup: user.ordergroup }
-  let(:goa) { create :group_order_article, group_order: go, order_article: order.order_articles.first }
+  let(:go) { create(:group_order, order: order, ordergroup: user.ordergroup) }
+  let(:goa) { create(:group_order_article, group_order: go, order_article: order.order_articles.first) }
 
   it 'has zero quantity by default'    do expect(goa.quantity).to eq(0) end
   it 'has zero tolerance by default'   do expect(goa.tolerance).to eq(0) end
@@ -12,9 +12,9 @@ describe GroupOrderArticle do
   it 'has zero total price by default' do expect(goa.total_price).to eq(0) end
 
   describe do
-    let(:article) { create :article, supplier: order.supplier, unit_quantity: 1 }
-    let(:oa) { order.order_articles.create(:article => article) }
-    let(:goa) { create :group_order_article, group_order: go, order_article: oa }
+    let(:article) { create(:article, supplier: order.supplier, unit_quantity: 1) }
+    let(:oa) { order.order_articles.create(article: article) }
+    let(:goa) { create(:group_order_article, group_order: go, order_article: oa) }
 
     it 'can be ordered by piece' do
       goa.update_quantities(1, 0)
@@ -23,7 +23,8 @@ describe GroupOrderArticle do
     end
 
     it 'can be ordered in larger amounts' do
-      quantity, tolerance = rand(13..99), rand(0..99)
+      quantity = rand(13..99)
+      tolerance = rand(0..99)
       goa.update_quantities(quantity, tolerance)
       expect(goa.quantity).to eq(quantity)
       expect(goa.tolerance).to eq(tolerance)
@@ -52,10 +53,10 @@ describe GroupOrderArticle do
   end
 
   describe 'distribution strategy' do
-    let(:article) { create :article, supplier: order.supplier, unit_quantity: 1 }
-    let(:oa) { order.order_articles.create(:article => article) }
-    let(:goa) { create :group_order_article, group_order: go, order_article: oa }
-    let!(:goaq) { create :group_order_article_quantity, group_order_article: goa, quantity: 4, tolerance: 6 }
+    let(:article) { create(:article, supplier: order.supplier, unit_quantity: 1) }
+    let(:oa) { order.order_articles.create(article: article) }
+    let(:goa) { create(:group_order_article, group_order: go, order_article: oa) }
+    let!(:goaq) { create(:group_order_article_quantity, group_order_article: goa, quantity: 4, tolerance: 6) }
 
     it 'can calculate the result for the distribution strategy "first order first serve"' do
       res = goa.calculate_result(2)

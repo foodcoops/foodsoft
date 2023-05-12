@@ -1,7 +1,7 @@
 class OrderArticlesController < ApplicationController
   before_action :fetch_order, except: :destroy
-  before_action :authenticate_finance_or_invoices, except: [:new, :create]
-  before_action :authenticate_finance_orders_or_pickup, except: [:edit, :update, :destroy]
+  before_action :authenticate_finance_or_invoices, except: %i[new create]
+  before_action :authenticate_finance_orders_or_pickup, except: %i[edit update destroy]
 
   layout false  # We only use this controller to serve js snippets, no need for layout rendering
 
@@ -9,28 +9,26 @@ class OrderArticlesController < ApplicationController
     @order_article = @order.order_articles.build(params[:order_article])
   end
 
+  def edit
+    @order_article = OrderArticle.find(params[:id])
+  end
+
   def create
     # The article may be ordered with zero units - in that case do not complain.
     #   If order_article is ordered and a new order_article is created, an error message will be
     #   given mentioning that the article already exists, which is desired.
-    @order_article = @order.order_articles.where(:article_id => params[:order_article][:article_id]).first
-    unless @order_article && @order_article.units_to_order == 0
-      @order_article = @order.order_articles.build(params[:order_article])
-    end
+    @order_article = @order.order_articles.where(article_id: params[:order_article][:article_id]).first
+    @order_article = @order.order_articles.build(params[:order_article]) unless @order_article && @order_article.units_to_order == 0
     @order_article.save!
-  rescue
+  rescue StandardError
     render action: :new
-  end
-
-  def edit
-    @order_article = OrderArticle.find(params[:id])
   end
 
   def update
     @order_article = OrderArticle.find(params[:id])
     begin
       @order_article.update_article_and_price!(params[:order_article], params[:article], params[:article_price])
-    rescue
+    rescue StandardError
       render action: :edit
     end
   end

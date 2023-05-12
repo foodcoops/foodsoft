@@ -1,11 +1,11 @@
 require 'swagger_helper'
 
-describe 'User', type: :request do
+describe 'User' do
   include ApiHelper
 
   let(:api_scopes) { ['finance:user'] }
-  let(:user) { create :user, groups: [create(:ordergroup)] }
-  let(:other_user2) { create :user }
+  let(:user) { create(:user, groups: [create(:ordergroup)]) }
+  let(:other_user2) { create(:user) }
   let(:ft) { create(:financial_transaction, user: user, ordergroup: user.ordergroup) }
 
   before do
@@ -27,7 +27,9 @@ describe 'User', type: :request do
         }
       }
 
-      let(:financial_transaction) { { amount: 3, financial_transaction_type_id: create(:financial_transaction_type).id, note: 'lirum larum' } }
+      let(:financial_transaction) do
+        { amount: 3, financial_transaction_type_id: create(:financial_transaction_type).id, note: 'lirum larum' }
+      end
 
       response '200', 'success' do
         schema type: :object, properties: {

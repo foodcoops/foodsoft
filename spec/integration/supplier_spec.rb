@@ -1,20 +1,20 @@
 require_relative '../spec_helper'
 
 feature 'supplier' do
-  let(:supplier) { create :supplier }
-  let(:user) { create :user, :role_suppliers }
+  let(:supplier) { create(:supplier) }
+  let(:user) { create(:user, :role_suppliers) }
 
   before { login user }
 
   describe 'create new' do
     it 'can be created' do
-      create :supplier_category
+      create(:supplier_category)
       visit new_supplier_path
-      supplier = build :supplier
+      supplier = build(:supplier)
       within('#new_supplier') do
-        fill_in 'supplier_name', :with => supplier.name
-        fill_in 'supplier_address', :with => supplier.address
-        fill_in 'supplier_phone', :with => supplier.phone
+        fill_in 'supplier_name', with: supplier.name
+        fill_in 'supplier_address', with: supplier.address
+        fill_in 'supplier_phone', with: supplier.phone
         find('input[type="submit"]').click
       end
       expect(page).to have_content(supplier.name)
@@ -38,7 +38,7 @@ feature 'supplier' do
     end
 
     it 'can be updated' do
-      new_supplier = build :supplier
+      new_supplier = build(:supplier)
       supplier
       visit edit_supplier_path(id: supplier.id)
       fill_in 'supplier_name', with: new_supplier.name

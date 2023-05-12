@@ -1,17 +1,17 @@
-require "base32"
+require 'base32'
 
 class Message < ApplicationRecord
-  belongs_to :sender, class_name: 'User', foreign_key: 'sender_id'
-  belongs_to :group, optional: true, class_name: 'Group', foreign_key: 'group_id'
+  belongs_to :sender, class_name: 'User'
+  belongs_to :group, optional: true, class_name: 'Group'
   belongs_to :reply_to_message, optional: true, class_name: 'Message', foreign_key: 'reply_to'
   has_many :message_recipients, dependent: :destroy
   has_many :recipients, through: :message_recipients, source: :user
 
   attr_accessor :send_method, :recipient_tokens, :order_id
 
-  scope :threads, -> { where(:reply_to => nil) }
-  scope :thread, ->(id) { where("id = ? OR reply_to = ?", id, id) }
-  scope :readable_for, ->(user) {
+  scope :threads, -> { where(reply_to: nil) }
+  scope :thread, ->(id) { where('id = ? OR reply_to = ?', id, id) }
+  scope :readable_for, lambda { |user|
     user_id = user.try(&:id)
 
     joins(:message_recipients)
@@ -20,7 +20,7 @@ class Message < ApplicationRecord
   }
 
   validates_presence_of :message_recipients, :subject, :body
-  validates_length_of :subject, :in => 1..255
+  validates_length_of :subject, in: 1..255
 
   after_initialize do
     @recipients_ids ||= []
@@ -33,7 +33,7 @@ class Message < ApplicationRecord
   def create_message_recipients
     user_ids = @recipients_ids
     user_ids += User.undeleted.pluck(:id) if send_method == 'all'
-    user_ids += Group.find(group_id).users.pluck(:id) unless group_id.blank?
+    user_ids += Group.find(group_id).users.pluck(:id) if group_id.present?
     user_ids += Order.find(order_id).users_ordered.pluck(:id) if send_method == 'order'
 
     user_ids.uniq.each do |user_id|
@@ -47,7 +47,7 @@ class Message < ApplicationRecord
   end
 
   def group_id=(group_id)
-    group = Group.find(group_id) unless group_id.blank?
+    group = Group.find(group_id) if group_id.present?
     if group
       @send_method = 'workgroup' if group.type == 'Workgroup'
       @send_method = 'ordergroup' if group.type == 'Ordergroup'
@@ -96,29 +96,29 @@ class Message < ApplicationRecord
 
   def mail_hash_for_user(user)
     digest = Digest::SHA1.new
-    digest.update self.id.to_s
-    digest.update ":"
+    digest.update id.to_s
+    digest.update ':'
     digest.update salt
-    digest.update ":"
+    digest.update ':'
     digest.update user.id.to_s
     Base32.encode digest.digest
   end
 
   # Returns true if this message is a system message, i.e. was sent automatically by Foodsoft itself.
   def system_message?
-    self.sender_id.nil?
+    sender_id.nil?
   end
 
   def sender_name
-    system_message? ? I18n.t('layouts.foodsoft') : sender.display rescue "?"
+    system_message? ? I18n.t('layouts.foodsoft') : sender.display
+  rescue StandardError
+    '?'
   end
 
-  def recipients_ids
-    @recipients_ids
-  end
+  attr_reader :recipients_ids
 
   def last_reply
-    Message.where(reply_to: self.id).order(:created_at).last
+    Message.where(reply_to: id).order(:created_at).last
   end
 
   def is_readable_for?(user)
@@ -135,6 +135,6 @@ class Message < ApplicationRecord
   private
 
   def create_salt
-    self.salt = [Array.new(6) { rand(256).chr }.join].pack("m").chomp
+    self.salt = [Array.new(6) { rand(256).chr }.join].pack('m').chomp
   end
 end

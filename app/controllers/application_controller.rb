@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
   private
 
   def set_user_last_activity
-    if current_user && (session[:last_activity] == nil || session[:last_activity] < 1.minutes.ago)
-      current_user.update_attribute(:last_activity, Time.now)
-      session[:last_activity] = Time.now
-    end
+    return unless current_user && (session[:last_activity].nil? || session[:last_activity] < 1.minute.ago)
+
+    current_user.update_attribute(:last_activity, Time.now)
+    session[:last_activity] = Time.now
   end
 
   # Many plugins can be turned on and off on the fly with a `use_` configuration option.
@@ -64,11 +64,11 @@ class ApplicationController < ActionController::Base
   end
 
   def items_per_page
-    if params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 500
-      @per_page = params[:per_page].to_i
-    else
-      @per_page = 20
-    end
+    @per_page = if params[:per_page] && params[:per_page].to_i > 0 && params[:per_page].to_i <= 500
+                  params[:per_page].to_i
+                else
+                  20
+                end
   end
 
   # Set timezone according to foodcoop preference.

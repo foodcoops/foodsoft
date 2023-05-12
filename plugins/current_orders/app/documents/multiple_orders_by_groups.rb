@@ -113,7 +113,7 @@ class MultipleOrdersByGroups < OrderPdf
     s
   end
 
-  def each_ordergroup
+  def each_ordergroup(&block)
     ordergroups.find_in_batches_with_order(batch_size: BATCH_SIZE) do |ordergroups|
       @group_order_article_batch = GroupOrderArticle
                                    .joins(:group_order)
@@ -121,8 +121,8 @@ class MultipleOrdersByGroups < OrderPdf
                                    .where(group_orders: { ordergroup_id: ordergroups.map(&:id) })
                                    .order('group_orders.order_id, group_order_articles.id')
                                    .preload(group_orders: { order: :supplier })
-                                   .preload(order_article: [:article, :article_price, :order])
-      ordergroups.each { |ordergroup| yield ordergroup }
+                                   .preload(order_article: %i[article article_price order])
+      ordergroups.each(&block)
     end
   end
 
@@ -130,7 +130,7 @@ class MultipleOrdersByGroups < OrderPdf
     @group_order_article_batch.select { |goa| goa.group_order.ordergroup_id == ordergroup.id }
   end
 
-  def each_group_order_article_for(ordergroup)
-    group_order_articles_for(ordergroup).each { |goa| yield goa }
+  def each_group_order_article_for(ordergroup, &block)
+    group_order_articles_for(ordergroup).each(&block)
   end
 end

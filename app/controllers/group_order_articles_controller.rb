@@ -1,6 +1,6 @@
 class GroupOrderArticlesController < ApplicationController
   before_action :authenticate_finance
-  before_action :find_group_order_article, except: [:new, :create]
+  before_action :find_group_order_article, except: %i[new create]
 
   layout false  # We only use this controller to server js snippets, no need for layout rendering
 

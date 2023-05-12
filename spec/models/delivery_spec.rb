@@ -1,8 +1,8 @@
 require_relative '../spec_helper'
 
 describe Delivery do
-  let(:delivery) { create :delivery }
-  let(:stock_article) { create :stock_article, price: 3 }
+  let(:delivery) { create(:delivery) }
+  let(:stock_article) { create(:stock_article, price: 3) }
 
   it 'creates new stock_changes' do
     delivery.new_stock_changes = ([

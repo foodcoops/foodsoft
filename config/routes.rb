@@ -2,11 +2,11 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
-  get "order_comments/new"
+  get 'order_comments/new'
 
-  get "comments/new"
+  get 'comments/new'
 
-  get "sessions/new"
+  get 'sessions/new'
 
   root to: 'sessions#redirect_to_foodcoop', as: nil
 
@@ -24,8 +24,8 @@ Rails.application.routes.draw do
     post  '/login/reset_password' => 'login#reset_password', as: :reset_password
     get   '/login/new_password' => 'login#new_password', as: :new_password
     patch '/login/update_password' => 'login#update_password', as: :update_password
-    match '/login/accept_invitation/:token' => 'login#accept_invitation', as: :accept_invitation, via: [:get, :post]
-    resources :sessions, only: [:new, :create, :destroy]
+    match '/login/accept_invitation/:token' => 'login#accept_invitation', as: :accept_invitation, via: %i[get post]
+    resources :sessions, only: %i[new create destroy]
 
     get '/foodcoop.css' => 'styles#foodcoop', as: 'foodcoop_css'
 
@@ -65,11 +65,11 @@ Rails.application.routes.draw do
 
     resources :group_order_articles
 
-    resources :order_comments, only: [:new, :create]
+    resources :order_comments, only: %i[new create]
 
     ############ Foodcoop orga
 
-    resources :invites, only: [:new, :create]
+    resources :invites, only: %i[new create]
 
     resources :tasks do
       collection do
@@ -91,7 +91,7 @@ Rails.application.routes.draw do
 
       resources :ordergroups, only: [:index]
 
-      resources :workgroups, only: [:index, :edit, :update]
+      resources :workgroups, only: %i[index edit update]
     end
 
     ########### Article management
@@ -175,7 +175,7 @@ Rails.application.routes.draw do
         get :unpaid, on: :collection
       end
 
-      resources :links, controller: 'financial_links', only: [:create, :show] do
+      resources :links, controller: 'financial_links', only: %i[create show] do
         collection do
           get :incomplete
         end
@@ -185,8 +185,10 @@ Rails.application.routes.draw do
           delete 'bank_transactions/:bank_transaction', action: 'remove_bank_transaction', as: 'remove_bank_transaction'
 
           get :index_financial_transaction
-          put 'financial_transactions/:financial_transaction', action: 'add_financial_transaction', as: 'add_financial_transaction'
-          delete 'financial_transactions/:financial_transaction', action: 'remove_financial_transaction', as: 'remove_financial_transaction'
+          put 'financial_transactions/:financial_transaction', action: 'add_financial_transaction',
+                                                               as: 'add_financial_transaction'
+          delete 'financial_transactions/:financial_transaction', action: 'remove_financial_transaction',
+                                                                  as: 'remove_financial_transaction'
 
           get :index_invoice
           put 'invoices/:invoice', action: 'add_invoice', as: 'add_invoice'
@@ -200,12 +202,14 @@ Rails.application.routes.draw do
       resources :ordergroups, only: [:index] do
         resources :financial_transactions, as: :transactions
       end
-      resources :financial_transactions, as: :foodcoop_financial_transactions, path: 'foodcoop/financial_transactions', only: [:index, :new, :create]
+      resources :financial_transactions, as: :foodcoop_financial_transactions, path: 'foodcoop/financial_transactions',
+                                         only: %i[index new create]
       get :transactions, controller: :financial_transactions, action: :index_collection
       delete 'transactions/:id', controller: :financial_transactions, action: :destroy, as: :transaction
 
       get 'transactions/new_collection' => 'financial_transactions#new_collection', as: 'new_transaction_collection'
-      post 'transactions/create_collection' => 'financial_transactions#create_collection', as: 'create_transaction_collection'
+      post 'transactions/create_collection' => 'financial_transactions#create_collection',
+           as: 'create_transaction_collection'
 
       resources :bank_accounts, only: [:index] do
         member do
@@ -217,7 +221,7 @@ Rails.application.routes.draw do
         resources :bank_transactions, as: :transactions
       end
 
-      resources :bank_transactions, only: [:index, :show]
+      resources :bank_transactions, only: %i[index show]
     end
 
     ########### Administration
@@ -251,11 +255,11 @@ Rails.application.routes.draw do
         get :memberships, on: :member
       end
 
-      resources :mail_delivery_status, only: [:index, :show, :destroy] do
+      resources :mail_delivery_status, only: %i[index show destroy] do
         delete :index, on: :collection, action: :destroy_all
       end
 
-      resource :config, only: [:show, :update] do
+      resource :config, only: %i[show update] do
         get :list
       end
     end
@@ -270,23 +274,23 @@ Rails.application.routes.draw do
         namespace :user do
           root to: 'users#show'
           get :financial_overview, to: 'ordergroup#financial_overview'
-          resources :financial_transactions, only: [:index, :show, :create]
+          resources :financial_transactions, only: %i[index show create]
           resources :group_order_articles
         end
 
-        resources :financial_transaction_classes, only: [:index, :show]
-        resources :financial_transaction_types, only: [:index, :show]
-        resources :financial_transactions, only: [:index, :show]
-        resources :orders, only: [:index, :show]
-        resources :order_articles, only: [:index, :show]
+        resources :financial_transaction_classes, only: %i[index show]
+        resources :financial_transaction_types, only: %i[index show]
+        resources :financial_transactions, only: %i[index show]
+        resources :orders, only: %i[index show]
+        resources :order_articles, only: %i[index show]
         resources :group_order_articles
-        resources :article_categories, only: [:index, :show]
+        resources :article_categories, only: %i[index show]
       end
     end
 
     ############## Feedback
 
-    resource :feedback, only: [:new, :create], controller: 'feedback'
+    resource :feedback, only: %i[new create], controller: 'feedback'
 
     ############## The rest
 

@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe HomeController, type: :controller do
-  let(:user) { create :user }
+describe HomeController do
+  let(:user) { create(:user) }
 
   describe 'GET index' do
     describe 'NOT logged in' do
@@ -45,7 +45,7 @@ describe HomeController, type: :controller do
     end
 
     describe 'with ordergroup user' do
-      let(:og_user) { create :user, :ordergroup }
+      let(:og_user) { create(:user, :ordergroup) }
 
       before { login og_user }
 
@@ -59,7 +59,7 @@ describe HomeController, type: :controller do
   describe 'GET update_profile' do
     describe 'with simple user' do
       let(:unchanged_attributes) { user.attributes.slice('first_name', 'last_name', 'email') }
-      let(:changed_attributes) { attributes_for :user }
+      let(:changed_attributes) { attributes_for(:user) }
       let(:invalid_attributes) { { email: 'e.mail.com' } }
 
       before { login user }
@@ -80,12 +80,13 @@ describe HomeController, type: :controller do
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to(my_profile_path)
         expect(flash[:notice]).to match(/#{I18n.t('home.changes_saved')}/)
-        expect(user.reload.attributes.slice(:first_name, :last_name, :email)).to eq(changed_attributes.slice('first_name', 'last_name', 'email'))
+        expect(user.reload.attributes.slice(:first_name, :last_name,
+                                            :email)).to eq(changed_attributes.slice('first_name', 'last_name', 'email'))
       end
     end
 
     describe 'with ordergroup user' do
-      let(:og_user) { create :user, :ordergroup }
+      let(:og_user) { create(:user, :ordergroup) }
       let(:unchanged_attributes) { og_user.attributes.slice('first_name', 'last_name', 'email') }
       let(:changed_attributes) { unchanged_attributes.merge({ ordergroup: { contact_address: 'new Adress 7' } }) }
 
@@ -112,7 +113,7 @@ describe HomeController, type: :controller do
     end
 
     describe 'with ordergroup user' do
-      let(:og_user) { create :user, :ordergroup }
+      let(:og_user) { create(:user, :ordergroup) }
 
       before { login og_user }
 
@@ -132,13 +133,13 @@ describe HomeController, type: :controller do
           get_with_defaults :cancel_membership
         end.to raise_error(ActiveRecord::RecordNotFound)
         expect do
-          get_with_defaults :cancel_membership, params: { membership_id: 424242 }
+          get_with_defaults :cancel_membership, params: { membership_id: 424_242 }
         end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     describe 'with ordergroup user' do
-      let(:fin_user) { create :user, :role_finance }
+      let(:fin_user) { create(:user, :role_finance) }
 
       before { login fin_user }
 

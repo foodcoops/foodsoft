@@ -8,21 +8,21 @@ class GroupOrderArticle < ApplicationRecord
   belongs_to :order_article
   has_many   :group_order_article_quantities, dependent: :destroy
 
-  validates_presence_of :group_order, :order_article
-  validates_uniqueness_of :order_article_id, :scope => :group_order_id # just once an article per group order
+  validates :group_order, :order_article, presence: true
+  validates :order_article_id, uniqueness: { scope: :group_order_id } # just once an article per group order
   validate :check_order_not_closed # don't allow changes to closed (aka settled) orders
   validates :quantity, :tolerance, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  scope :ordered, -> { includes(:group_order => :ordergroup).order('groups.name') }
+  scope :ordered, -> { includes(group_order: :ordergroup).order('groups.name') }
 
   localize_input_of :result
 
-  def self.ransackable_attributes(auth_object = nil)
-    %w(id quantity tolerance result)
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id quantity tolerance result]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    %w(order_article group_order)
+  def self.ransackable_associations(_auth_object = nil)
+    %w[order_article group_order]
   end
 
   # Setter used in group_order_article#new
@@ -32,7 +32,7 @@ class GroupOrderArticle < ApplicationRecord
   end
 
   def ordergroup_id
-    group_order.try!(:ordergroup_id)
+    group_order&.ordergroup_id
   end
 
   # Updates the quantity/tolerance for this GroupOrderArticle by updating both GroupOrderArticle properties
@@ -45,7 +45,7 @@ class GroupOrderArticle < ApplicationRecord
 
     # When quantity and tolerance are zero, we don't serve any purpose
     if quantity == 0 && tolerance == 0
-      logger.debug("Self-destructing since requested quantity and tolerance are zero")
+      logger.debug('Self-destructing since requested quantity and tolerance are zero')
       destroy!
       return
     end
@@ -54,26 +54,28 @@ class GroupOrderArticle < ApplicationRecord
     quantities = group_order_article_quantities.order('created_on DESC').to_a
     logger.debug("GroupOrderArticleQuantity items found: #{quantities.size}")
 
-    if (quantities.size == 0)
+    if quantities.size == 0
       # There is no GroupOrderArticleQuantity item yet, just insert with desired quantities...
-      logger.debug("No quantities entry at all, inserting a new one with the desired quantities")
-      quantities.push(GroupOrderArticleQuantity.new(:group_order_article => self, :quantity => quantity, :tolerance => tolerance))
-      self.quantity, self.tolerance = quantity, tolerance
+      logger.debug('No quantities entry at all, inserting a new one with the desired quantities')
+      quantities.push(GroupOrderArticleQuantity.new(group_order_article: self, quantity: quantity,
+                                                    tolerance: tolerance))
+      self.quantity = quantity
+      self.tolerance = tolerance
     else
       # Decrease quantity/tolerance if necessary by going through the existing items and decreasing their values...
       i = 0
-      while (i < quantities.size && (quantity < self.quantity || tolerance < self.tolerance))
+      while i < quantities.size && (quantity < self.quantity || tolerance < self.tolerance)
         logger.debug("Need to decrease quantities for GroupOrderArticleQuantity[#{quantities[i].id}]")
-        if (quantity < self.quantity && quantities[i].quantity > 0)
+        if quantity < self.quantity && quantities[i].quantity > 0
           delta = self.quantity - quantity
-          delta = (delta > quantities[i].quantity ? quantities[i].quantity : delta)
+          delta = [delta, quantities[i].quantity].min
           logger.debug("Decreasing quantity by #{delta}")
           quantities[i].quantity -= delta
           self.quantity -= delta
         end
-        if (tolerance < self.tolerance && quantities[i].tolerance > 0)
+        if tolerance < self.tolerance && quantities[i].tolerance > 0
           delta = self.tolerance - tolerance
-          delta = (delta > quantities[i].tolerance ? quantities[i].tolerance : delta)
+          delta = [delta, quantities[i].tolerance].min
           logger.debug("Decreasing tolerance by #{delta}")
           quantities[i].tolerance -= delta
           self.tolerance -= delta
@@ -81,12 +83,12 @@ class GroupOrderArticle < ApplicationRecord
         i += 1
       end
       # If there is at least one increased value: insert a new GroupOrderArticleQuantity object
-      if (quantity > self.quantity || tolerance > self.tolerance)
-        logger.debug("Inserting a new GroupOrderArticleQuantity")
+      if quantity > self.quantity || tolerance > self.tolerance
+        logger.debug('Inserting a new GroupOrderArticleQuantity')
         quantities.insert(0, GroupOrderArticleQuantity.new(
-                               :group_order_article => self,
-                               :quantity => (quantity > self.quantity ? quantity - self.quantity : 0),
-                               :tolerance => (tolerance > self.tolerance ? tolerance - self.tolerance : 0)
+                               group_order_article: self,
+                               quantity: (quantity > self.quantity ? quantity - self.quantity : 0),
+                               tolerance: (tolerance > self.tolerance ? tolerance - self.tolerance : 0)
                              ))
         # Recalc totals:
         self.quantity += quantities[0].quantity
@@ -95,8 +97,9 @@ class GroupOrderArticle < ApplicationRecord
     end
 
     # Check if something went terribly wrong and quantites have not been adjusted as desired.
-    if (self.quantity != quantity || self.tolerance != tolerance)
-      raise ActiveRecord::RecordNotSaved.new('Unable to update GroupOrderArticle/-Quantities to desired quantities!', self)
+    if self.quantity != quantity || self.tolerance != tolerance
+      raise ActiveRecord::RecordNotSaved.new('Unable to update GroupOrderArticle/-Quantities to desired quantities!',
+                                             self)
     end
 
     # Remove zero-only items.
@@ -121,7 +124,7 @@ class GroupOrderArticle < ApplicationRecord
     quantity = tolerance = total_quantity = 0
 
     # Get total
-    if not total.nil?
+    if !total.nil?
       logger.debug "<#{order_article.article.name}> => #{total} (given)"
     elsif order_article.article.is_a?(StockArticle)
       total = order_article.article.quantity
@@ -145,7 +148,7 @@ class GroupOrderArticle < ApplicationRecord
         q = goaq.quantity
         q = [q, total - total_quantity].min if first_order_first_serve
         total_quantity += q
-        if goaq.group_order_article_id == self.id
+        if goaq.group_order_article_id == id
           logger.debug "increasing quantity by #{q}"
           quantity += q
         end
@@ -154,11 +157,11 @@ class GroupOrderArticle < ApplicationRecord
 
       # Determine tolerance to be ordered...
       if total_quantity < total
-        logger.debug "determining additional items to be ordered from tolerance"
+        logger.debug 'determining additional items to be ordered from tolerance'
         order_quantities.each do |goaq|
           q = [goaq.tolerance, total - total_quantity].min
           total_quantity += q
-          if goaq.group_order_article_id == self.id
+          if goaq.group_order_article_id == id
             logger.debug "increasing tolerance by #{q}"
             tolerance += q
           end
@@ -170,7 +173,7 @@ class GroupOrderArticle < ApplicationRecord
     end
 
     # memoize result unless a total is given
-    r = { :quantity => quantity, :tolerance => tolerance, :total => quantity + tolerance }
+    r = { quantity: quantity, tolerance: tolerance, total: quantity + tolerance }
     @calculate_result = r if total.nil?
     r
   end
@@ -185,8 +188,8 @@ class GroupOrderArticle < ApplicationRecord
   # This is used for automatic distribution, e.g., in order.finish! or when receiving orders
   def save_results!(article_total = nil)
     new_result = calculate_result(article_total)[:total]
-    self.update_attribute(:result_computed, new_result)
-    self.update_attribute(:result, new_result)
+    update_attribute(:result_computed, new_result)
+    update_attribute(:result, new_result)
   end
 
   # Returns total price for this individual article
@@ -213,8 +216,8 @@ class GroupOrderArticle < ApplicationRecord
   private
 
   def check_order_not_closed
-    if order_article.order.closed?
-      errors.add(:order_article, I18n.t('model.group_order_article.order_closed'))
-    end
+    return unless order_article.order.closed?
+
+    errors.add(:order_article, I18n.t('model.group_order_article.order_closed'))
   end
 end

@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 # Foodsoft production configuration.
 #
@@ -51,7 +51,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = ENV["RAILS_FORCE_SSL"] != "false"
+  config.force_ssl = ENV['RAILS_FORCE_SSL'] != 'false'
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
@@ -97,9 +97,18 @@ Rails.application.configure do
     config.action_mailer.smtp_settings[:domain] = ENV['SMTP_DOMAIN'] if ENV['SMTP_DOMAIN'].present?
     config.action_mailer.smtp_settings[:user_name] = ENV['SMTP_USER_NAME'] if ENV['SMTP_USER_NAME'].present?
     config.action_mailer.smtp_settings[:password] = ENV['SMTP_PASSWORD'] if ENV['SMTP_PASSWORD'].present?
-    config.action_mailer.smtp_settings[:authentication] = ENV['SMTP_AUTHENTICATION'] if ENV['SMTP_AUTHENTICATION'].present?
-    config.action_mailer.smtp_settings[:enable_starttls_auto] = ENV['SMTP_ENABLE_STARTTLS_AUTO'] == 'true' if ENV['SMTP_ENABLE_STARTTLS_AUTO'].present?
-    config.action_mailer.smtp_settings[:openssl_verify_mode] = ENV['SMTP_OPENSSL_VERIFY_MODE'] if ENV['SMTP_OPENSSL_VERIFY_MODE'].present?
+    if ENV['SMTP_AUTHENTICATION'].present?
+      config.action_mailer.smtp_settings[:authentication] =
+        ENV['SMTP_AUTHENTICATION']
+    end
+    if ENV['SMTP_ENABLE_STARTTLS_AUTO'].present?
+      config.action_mailer.smtp_settings[:enable_starttls_auto] =
+        ENV['SMTP_ENABLE_STARTTLS_AUTO'] == 'true'
+    end
+    if ENV['SMTP_OPENSSL_VERIFY_MODE'].present?
+      config.action_mailer.smtp_settings[:openssl_verify_mode] =
+        ENV['SMTP_OPENSSL_VERIFY_MODE']
+    end
   else
     # Use sendmail as default to avoid ssl cert problems
     config.action_mailer.delivery_method = :sendmail
@@ -112,7 +121,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)

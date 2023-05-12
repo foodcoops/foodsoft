@@ -7,21 +7,21 @@ class StockTakingsController < ApplicationController
 
   def new
     @stock_taking = StockTaking.new
-    StockArticle.undeleted.each { |a| @stock_taking.stock_changes.build(:stock_article => a) }
+    StockArticle.undeleted.each { |a| @stock_taking.stock_changes.build(stock_article: a) }
   end
 
   def new_on_stock_article_create # See publish/subscribe design pattern in /doc.
     stock_article = StockArticle.find(params[:stock_article_id])
-    @stock_change = StockChange.new(:stock_article => stock_article)
+    @stock_change = StockChange.new(stock_article: stock_article)
 
-    render :layout => false
+    render layout: false
   end
 
   def create
-    create!(:notice => I18n.t('stock_takings.create.notice'))
+    create!(notice: I18n.t('stock_takings.create.notice'))
   end
 
   def update
-    update!(:notice => I18n.t('stock_takings.update.notice'))
+    update!(notice: I18n.t('stock_takings.update.notice'))
   end
 end

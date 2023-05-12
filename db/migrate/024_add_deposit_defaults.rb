@@ -7,6 +7,5 @@ class AddDepositDefaults < ActiveRecord::Migration[4.2]
     change_column_default :orders, :deposit_credit, 0.0
   end
 
-  def self.down
-  end
+  def self.down; end
 end

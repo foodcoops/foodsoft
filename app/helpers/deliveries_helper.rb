@@ -11,11 +11,11 @@ module DeliveriesHelper
 
   def articles_for_select2(articles, except = [], &block)
     articles = articles.reorder('articles.name ASC')
-    articles = articles.reject { |a| not except.index(a.id).nil? } if except
-    block_given? or block = Proc.new { |a| "#{a.name} (#{number_to_currency a.price}/#{a.unit})" }
+    articles = articles.reject { |a| !except.index(a.id).nil? } if except
+    block_given? or block = proc { |a| "#{a.name} (#{number_to_currency a.price}/#{a.unit})" }
     articles.map do |a|
-      { :id => a.id, :text => block.call(a) }
-    end.unshift({ :id => '', :text => '' })
+      { id: a.id, text: block.call(a) }
+    end.unshift({ id: '', text: '' })
   end
 
   def articles_for_table(articles)
@@ -23,10 +23,14 @@ module DeliveriesHelper
   end
 
   def stock_change_remove_link(stock_change_form)
-    return link_to t('deliveries.stock_change_fields.remove_article'), "#", :class => 'remove_new_stock_change btn btn-small' if stock_change_form.object.new_record?
+    if stock_change_form.object.new_record?
+      return link_to t('deliveries.stock_change_fields.remove_article'), '#',
+                     class: 'remove_new_stock_change btn btn-small'
+    end
 
     output = stock_change_form.hidden_field :_destroy
-    output += link_to t('deliveries.stock_change_fields.remove_article'), "#", :class => 'destroy_stock_change btn btn-small'
-    return output.html_safe
+    output += link_to t('deliveries.stock_change_fields.remove_article'), '#',
+                      class: 'destroy_stock_change btn btn-small'
+    output.html_safe
   end
 end

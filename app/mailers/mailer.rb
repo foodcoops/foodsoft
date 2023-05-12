@@ -81,7 +81,7 @@ class Mailer < ActionMailer::Base
 
     add_order_result_attachments order, options
 
-    subject = I18n.t('mailer.order_result_supplier.subject', :name => order.supplier.name)
+    subject = I18n.t('mailer.order_result_supplier.subject', name: order.supplier.name)
     subject += " (#{I18n.t('activerecord.attributes.order.pickup')}: #{format_date(order.pickup)})" if order.pickup
 
     mail to: order.supplier.email,
@@ -122,10 +122,11 @@ class Mailer < ActionMailer::Base
 
     if args[:from].is_a? User
       args[:reply_to] ||= args[:from]
-      args[:from] = format_address(FoodsoftConfig[:email_sender], I18n.t('mailer.from_via_foodsoft', name: show_user(args[:from])))
+      args[:from] =
+        format_address(FoodsoftConfig[:email_sender], I18n.t('mailer.from_via_foodsoft', name: show_user(args[:from])))
     end
 
-    [:bcc, :cc, :reply_to, :sender, :to].each do |k|
+    %i[bcc cc reply_to sender to].each do |k|
       user = args[k]
       args[k] = format_address(user.email, show_user(user)) if user.is_a? User
     end
@@ -145,21 +146,21 @@ class Mailer < ActionMailer::Base
 
   def self.deliver_now_with_user_locale(user, &block)
     I18n.with_locale(user.settings['profile']['language']) do
-      self.deliver_now(&block)
+      deliver_now(&block)
     end
   end
 
   def self.deliver_now_with_default_locale(&block)
     I18n.with_locale(FoodsoftConfig[:default_locale]) do
-      self.deliver_now(&block)
+      deliver_now(&block)
     end
   end
 
   def self.deliver_now
     message = yield
     message.deliver_now
-  rescue => error
-    MailDeliveryStatus.create email: message.to[0], message: error.message
+  rescue StandardError => e
+    MailDeliveryStatus.create email: message.to[0], message: e.message
   end
 
   # separate method to allow plugins to mess with the attachments
@@ -169,8 +170,7 @@ class Mailer < ActionMailer::Base
   end
 
   # separate method to allow plugins to mess with the text
-  def additonal_welcome_text(user)
-  end
+  def additonal_welcome_text(user); end
 
   private
 

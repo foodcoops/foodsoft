@@ -6,7 +6,7 @@ class DeltaInput < SimpleForm::Inputs::StringInput
     options[:data] ||= {}
     options[:data][:delta] ||= 1
     options[:autocomplete] ||= 'off'
-    # TODO get generated id, don't know how yet - `add_default_name_and_id_for_value` might be an option
+    # TODO: get generated id, don't know how yet - `add_default_name_and_id_for_value` might be an option
 
     template.content_tag :div, class: 'delta-input input-prepend input-append' do
       delta_button(content_tag(:i, nil, class: 'icon icon-minus'), -1, options) +

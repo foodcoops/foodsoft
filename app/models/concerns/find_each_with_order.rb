@@ -3,9 +3,9 @@ module FindEachWithOrder
   extend ActiveSupport::Concern
 
   class_methods do
-    def find_each_with_order(options = {})
+    def find_each_with_order(options = {}, &block)
       find_in_batches_with_order(options) do |records|
-        records.each { |record| yield record }
+        records.each(&block)
       end
     end
 
