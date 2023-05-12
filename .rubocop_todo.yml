@@ -455,17 +455,8 @@ RSpec/DescribedClass:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 RSpec/EmptyExampleGroup:
   Exclude:
-    - 'spec/requests/api/article_categories_spec.rb'
-    - 'spec/requests/api/configs_spec.rb'
-    - 'spec/requests/api/financial_transaction_classes_spec.rb'
-    - 'spec/requests/api/financial_transaction_types_spec.rb'
-    - 'spec/requests/api/financial_transactions_spec.rb'
-    - 'spec/requests/api/navigations_spec.rb'
-    - 'spec/requests/api/order_articles_spec.rb'
-    - 'spec/requests/api/orders_spec.rb'
-    - 'spec/requests/api/user/financial_transactions_spec.rb'
-    - 'spec/requests/api/user/group_order_articles_spec.rb'
-    - 'spec/requests/api/user/users_spec.rb'
+    # exclude for rswag tests:
+    - 'spec/requests/api/**/*_spec.rb'
 
 
 
