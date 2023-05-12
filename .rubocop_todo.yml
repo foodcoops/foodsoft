@@ -451,6 +451,15 @@ RSpec/DescribedClass:
     - "spec/models/ordergroup_spec.rb"
     - "spec/models/user_spec.rb"
 
+# Offense count: 15
+# This cop supports unsafe autocorrection (--autocorrect-all).
+RSpec/EmptyExampleGroup:
+  Exclude:
+    # exclude for rswag tests:
+    - 'spec/requests/api/**/*_spec.rb'
+
+
+
 # Offense count: 65
 # Configuration parameters: CountAsOne.
 RSpec/ExampleLength:
@@ -580,6 +589,14 @@ RSpec/ScatteredSetup:
     - "spec/api/v1/user/ordergroup_spec.rb"
     - "spec/integration/balancing_spec.rb"
     - "spec/integration/login_spec.rb"
+
+# Offense count: 4
+# Configuration parameters: AllowedPatterns, IgnoredPatterns.
+# SupportedStyles: snake_case, camelCase
+RSpec/VariableName:
+  EnforcedStyle: snake_case
+  AllowedPatterns:
+     - ^Authorization$
 
 # Offense count: 1
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.

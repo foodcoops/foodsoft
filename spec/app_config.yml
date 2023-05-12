@@ -6,6 +6,7 @@
 
 default: &defaults
   multi_coop_install: false
+  use_self_service: true
   default_scope: 'f'
 
   name: FC Minimal

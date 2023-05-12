@@ -1,4 +1,7 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   get "order_comments/new"
 
   get "comments/new"
@@ -290,3 +293,4 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
   end # End of /:foodcoop scope
 end
+# rubocop:enable Metrics/BlockLength

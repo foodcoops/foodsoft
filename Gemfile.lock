@@ -109,13 +109,6 @@ GEM
       activerecord (>= 3.0.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    apivore (1.6.2)
-      actionpack (>= 4, < 6)
-      hashie (~> 3.3)
-      json-schema (~> 2.5)
-      rspec (~> 3)
-      rspec-expectations (~> 3.1)
-      rspec-mocks (~> 3.1)
     apparition (0.6.0)
       capybara (~> 3.13, < 4)
       websocket-driver (>= 0.6.5)
@@ -430,6 +423,16 @@ GEM
     rspec-rerun (1.1.0)
       rspec (~> 3.0)
     rspec-support (3.11.1)
+    rswag-api (2.7.0)
+      railties (>= 3.1, < 7.1)
+    rswag-specs (2.7.0)
+      activesupport (>= 3.1, < 7.1)
+      json-schema (>= 2.2, < 4.0)
+      railties (>= 3.1, < 7.1)
+      rspec-core (>= 2.14)
+    rswag-ui (2.7.0)
+      actionpack (>= 3.1, < 7.1)
+      railties (>= 3.1, < 7.1)
     rubocop (1.36.0)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -557,7 +560,6 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   acts_as_tree
   acts_as_versioned!
-  apivore
   apparition
   attribute_normalizer
   better_errors
@@ -617,6 +619,9 @@ DEPENDENCIES
   rspec-core
   rspec-rails
   rspec-rerun
+  rswag-api
+  rswag-specs
+  rswag-ui
   rubocop
   rubocop-rails
   rubocop-rspec
