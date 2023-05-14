@@ -133,7 +133,7 @@ function update(item, quantity, tolerance) {
 
     if (missing_units <= 0 || missing_units == unit[item]) {
         missing_units = 0;
-        if (units > 0) {
+        if (quantity > 0) {
             missing_units_css = 'missing-none';
         } else {
             missing_units_css = '';
