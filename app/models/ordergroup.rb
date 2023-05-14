@@ -176,7 +176,7 @@ class Ordergroup < Group
   # Make sure, that a user can only be in one ordergroup
   def uniqueness_of_members
     users.each do |user|
-      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.display) if user.groups.where(:type => 'Ordergroup').size > 1
+      errors.add :user_tokens, I18n.t('ordergroups.model.error_single_group', :user => user.display) if user.groups.where(:type => 'Ordergroup').size >= 1
     end
   end
 
