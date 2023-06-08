@@ -20,6 +20,6 @@ class LinksController < ApplicationController
       return redirect_to root_url, alert: t('.indirect_no_location') unless url
     end
 
-    redirect_to url, status: :found
+    redirect_to url, status: :found, allow_other_host: true
   end
 end
