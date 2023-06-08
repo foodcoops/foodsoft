@@ -68,17 +68,6 @@ module Foodsoft
     config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
 
     config.autoloader = :zeitwerk
-
-    # Ex:- :default =>''
-
-    # CORS for API
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        # this restricts Foodsoft scopes to certain characters - let's discuss it when it becomes an actual problem
-        resource %r{\A/[-a-zA-Z0-9_]+/api/v1/}, headers: :any, methods: :any
-      end
-    end
   end
 
   # Foodsoft version
