@@ -186,7 +186,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     commonjs (0.2.7)
-    concurrent-ruby (1.1.10)
+    concurrent-ruby (1.2.2)
     connection_pool (2.3.0)
     content_for_in_controllers (0.0.2)
     crass (1.0.6)
@@ -232,7 +232,7 @@ GEM
     ffi (1.15.5)
     gaffe (1.2.0)
       rails (>= 4.0.0)
-    globalid (1.0.1)
+    globalid (1.1.0)
       activesupport (>= 5.0)
     haml (5.2.2)
       temple (>= 0.8.0)
@@ -247,7 +247,7 @@ GEM
       activesupport (>= 5.2)
     hashie (3.4.6)
     htmlentities (4.3.4)
-    i18n (1.12.0)
+    i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     i18n-js (3.0.11)
       i18n (>= 0.6.6, < 2)
@@ -292,9 +292,9 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.19.1)
+    loofah (2.21.3)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     mailcatcher (0.2.4)
@@ -315,7 +315,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
-    minitest (5.17.0)
+    minitest (5.18.0)
     mono_logger (1.1.1)
     msgpack (1.6.0)
     multi_json (1.15.0)
@@ -331,8 +331,8 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    nio4r (2.5.8)
-    nokogiri (1.13.10-x86_64-linux)
+    nio4r (2.5.9)
+    nokogiri (1.15.2-x86_64-linux)
       racc (~> 1.4)
     parallel (1.23.0)
     parser (3.2.2.1)
@@ -356,13 +356,13 @@ GEM
     public_suffix (5.0.1)
     puma (6.0.2)
       nio4r (~> 2.0)
-    racc (1.6.2)
+    racc (1.7.0)
     rack (2.2.7)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-protection (3.0.5)
       rack
-    rack-test (2.0.2)
+    rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.4)
       actioncable (= 7.0.4)
@@ -383,8 +383,9 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.4)
-      loofah (~> 2.19, >= 2.19.1)
+    rails-html-sanitizer (1.6.0)
+      loofah (~> 2.21)
+      nokogiri (~> 1.14)
     rails-i18n (7.0.6)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
@@ -548,18 +549,18 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
-    thor (1.2.1)
+    thor (1.2.2)
     tilt (2.0.11)
-    timeout (0.3.1)
+    timeout (0.3.2)
     ttfunk (1.7.0)
-    twitter-bootstrap-rails (2.2.8)
+    twitter-bootstrap-rails (3.2.2)
       actionpack (>= 3.1)
-      execjs
-      rails (>= 3.1)
+      execjs (>= 2.2.2, >= 2.2)
+      less-rails (>= 2.5.0)
       railties (>= 3.1)
     twitter-text (1.14.7)
       unf (~> 0.1.0)
-    tzinfo (2.0.5)
+    tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
       unf_ext
@@ -584,7 +585,7 @@ GEM
       twitter-text
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.6)
+    zeitwerk (2.6.8)
 
 PLATFORMS
   x86_64-linux
@@ -675,7 +676,7 @@ DEPENDENCIES
   table_print
   terser (~> 1.1)
   therubyracer
-  twitter-bootstrap-rails (~> 2.2.8)
+  twitter-bootstrap-rails (~> 3.2.2)
   web-console
   whenever
 
