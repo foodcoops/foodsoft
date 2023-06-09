@@ -44,7 +44,7 @@ gem 'simple_form'
 gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
 gem 'simple-navigation-bootstrap'
 gem 'sprockets', '< 4'
-gem 'twitter-bootstrap-rails', '~> 2.2.8'
+gem 'twitter-bootstrap-rails', '~> 3.2.2'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
 gem 'exception_notification'
