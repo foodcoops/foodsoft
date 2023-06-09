@@ -14,7 +14,7 @@ ExceptionNotification.configure do |config|
 
   # Adds a condition to decide when an exception must be ignored or not.
   # The ignore_if method can be invoked multiple times to add extra conditions.
-  config.ignore_if do |exception, options|
+  config.ignore_if do |_exception, _options|
     Rails.env.development? || Rails.env.test?
   end
 
@@ -23,9 +23,9 @@ ExceptionNotification.configure do |config|
   # Email notifier sends notifications by email.
   if notification = FoodsoftConfig[:notification]
     config.add_notifier :email, {
-      :email_prefix => notification[:email_prefix],
-      :sender_address => notification[:sender_address],
-      :exception_recipients => notification[:error_recipients],
+      email_prefix: notification[:email_prefix],
+      sender_address: notification[:sender_address],
+      exception_recipients: notification[:error_recipients]
     }
   end
 

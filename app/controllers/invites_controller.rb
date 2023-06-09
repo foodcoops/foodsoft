@@ -3,7 +3,7 @@ class InvitesController < ApplicationController
   before_action -> { require_config_disabled :disable_invite }
 
   def new
-    @invite = Invite.new(:user => @current_user, :group => @group)
+    @invite = Invite.new(user: @current_user, group: @group)
   end
 
   def create
@@ -27,6 +27,10 @@ class InvitesController < ApplicationController
   protected
 
   def authenticate_membership_or_admin_for_invites
-    authenticate_membership_or_admin((params[:invite][:group_id] rescue params[:id]))
+    authenticate_membership_or_admin(begin
+      params[:invite][:group_id]
+    rescue StandardError
+      params[:id]
+    end)
   end
 end

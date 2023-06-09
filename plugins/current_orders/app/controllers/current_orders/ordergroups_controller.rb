@@ -1,6 +1,6 @@
 class CurrentOrders::OrdergroupsController < ApplicationController
   before_action :authenticate_orders
-  before_action :find_group_orders, only: [:index, :show]
+  before_action :find_group_orders, only: %i[index show]
 
   def index
     # sometimes need to pass id as parameter for forms
@@ -34,8 +34,11 @@ class CurrentOrders::OrdergroupsController < ApplicationController
     @all_ordergroups.sort_by! { |o| @ordered_group_ids.include?(o.id) ? o.name : "ZZZZZ#{o.name}" }
 
     @ordergroup = Ordergroup.find(params[:id]) unless params[:id].nil?
-    @goas = GroupOrderArticle.includes(:group_order, :order_article => [:article, :article_price])
-                             .where(group_orders: { order_id: @order_ids, ordergroup_id: @ordergroup.id }).ordered.all unless @ordergroup.nil?
+    return if @ordergroup.nil?
+
+    @goas = GroupOrderArticle.includes(:group_order, order_article: %i[article article_price])
+                             .where(group_orders: { order_id: @order_ids,
+                                                    ordergroup_id: @ordergroup.id }).ordered.all
   end
 
   helper_method \

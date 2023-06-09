@@ -10,8 +10,8 @@ FactoryBot.define do
       article_count { 0 }
     end
 
-    before :create do |supplier, evaluator|
-      next if supplier.class == SharedSupplier
+    before :create do |supplier, _evaluator|
+      next if supplier.instance_of?(SharedSupplier)
       next if supplier.supplier_category_id?
 
       supplier.supplier_category = create :supplier_category
@@ -20,7 +20,7 @@ FactoryBot.define do
     after :create do |supplier, evaluator|
       article_count = evaluator.article_count
       article_count = rand(1..99) if article_count == true
-      create_list :article, article_count, supplier: supplier
+      create_list(:article, article_count, supplier: supplier)
     end
 
     factory :shared_supplier, class: 'SharedSupplier'

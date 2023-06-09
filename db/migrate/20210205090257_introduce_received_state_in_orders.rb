@@ -1,7 +1,7 @@
 class IntroduceReceivedStateInOrders < ActiveRecord::Migration[5.2]
   def up
     Order.where(state: 'finished').each do |order|
-      order.update_attribute(:state, 'received') if order.order_articles.where('units_received IS NOT NULL').any?
+      order.update_attribute(:state, 'received') if order.order_articles.where.not(units_received: nil).any?
     end
   end
 

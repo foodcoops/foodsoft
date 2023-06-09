@@ -22,8 +22,8 @@ class BankTransaction < ApplicationRecord
   belongs_to :supplier, optional: true, foreign_key: 'iban', primary_key: 'iban'
   belongs_to :user, optional: true, foreign_key: 'iban', primary_key: 'iban'
 
-  validates_presence_of :date, :amount, :bank_account_id
-  validates_numericality_of :amount
+  validates :date, :amount, :bank_account_id, presence: true
+  validates :amount, numericality: true
 
   scope :without_financial_link, -> { where(financial_link: nil) }
 
@@ -31,13 +31,13 @@ class BankTransaction < ApplicationRecord
   localize_input_of :amount
 
   def image_url
-    'data:image/png;base64,' + Base64.encode64(self.image)
+    'data:image/png;base64,' + Base64.encode64(image)
   end
 
   def assign_to_invoice
     return false unless supplier
 
-    content = text || ""
+    content = text || ''
     content += "\n" + reference if reference.present?
     invoices = supplier.invoices.unpaid.select { |i| content.include? i.number }
     invoices_sum = invoices.map(&:amount).sum
@@ -49,7 +49,7 @@ class BankTransaction < ApplicationRecord
       update_attribute :financial_link, link
     end
 
-    return true
+    true
   end
 
   def assign_to_ordergroup
@@ -78,6 +78,6 @@ class BankTransaction < ApplicationRecord
       update_attribute :financial_link, link
     end
 
-    return true
+    true
   end
 end

@@ -18,7 +18,7 @@ module OrdersHelper
 
   def options_for_suppliers_to_select
     options = [[I18n.t('helpers.orders.option_choose')]]
-    options += Supplier.map { |s| [s.name, url_for(action: "new", supplier_id: s.id)] }
+    options += Supplier.map { |s| [s.name, url_for(action: 'new', supplier_id: s.id)] }
     options += [[I18n.t('helpers.orders.option_stock'), url_for(action: 'new', supplier_id: nil)]]
     options_for_select(options)
   end
@@ -29,13 +29,13 @@ module OrdersHelper
       nil
     else
       units_info = []
-      [:units_to_order, :units_billed, :units_received].map do |unit|
-        if n = order_article.send(unit)
-          line = n.to_s + ' '
-          line += pkg_helper(order_article.price, options) + ' ' unless n == 0
-          line += OrderArticle.human_attribute_name("#{unit}_short", count: n)
-          units_info << line
-        end
+      %i[units_to_order units_billed units_received].map do |unit|
+        next unless n = order_article.send(unit)
+
+        line = n.to_s + ' '
+        line += pkg_helper(order_article.price, options) + ' ' unless n == 0
+        line += OrderArticle.human_attribute_name("#{unit}_short", count: n)
+        units_info << line
       end
       units_info.join(', ').html_safe
     end
@@ -67,8 +67,8 @@ module OrdersHelper
   def pkg_helper_icon(c = nil, options = {})
     options = { tag: 'i', class: '' }.merge(options)
     if c.nil?
-      c = "&nbsp;".html_safe
-      options[:class] += " icon-only"
+      c = '&nbsp;'.html_safe
+      options[:class] += ' icon-only'
     end
     content_tag(options[:tag], c, class: "package #{options[:class]}").html_safe
   end
@@ -94,11 +94,12 @@ module OrdersHelper
                                                   autocomplete: 'off'
 
     if order_article.result_manually_changed?
-      input_html = content_tag(:span, class: 'input-prepend intable', title: t('orders.edit_amount.field_locked_title', default: '')) {
+      input_html = content_tag(:span, class: 'input-prepend intable',
+                                      title: t('orders.edit_amount.field_locked_title', default: '')) do
         button_tag(nil, type: :button, class: 'btn unlocker') {
           content_tag(:i, nil, class: 'icon icon-unlock')
         } + input_html
-      }
+      end
     end
 
     input_html.html_safe
@@ -109,18 +110,16 @@ module OrdersHelper
   def ordergroup_count(order)
     group_orders = order.group_orders.includes(:ordergroup)
     txt = "#{group_orders.count} #{Ordergroup.model_name.human count: group_orders.count}"
-    if group_orders.count == 0
-      return txt
-    else
-      desc = group_orders.includes(:ordergroup).map { |g| g.ordergroup_name }.join(', ')
-      content_tag(:abbr, txt, title: desc).html_safe
-    end
+    return txt if group_orders.count == 0
+
+    desc = group_orders.includes(:ordergroup).map { |g| g.ordergroup_name }.join(', ')
+    content_tag(:abbr, txt, title: desc).html_safe
   end
 
   # @param order_or_supplier [Order, Supplier] Order or supplier to link to
   # @return [String] Link to order or supplier, showing its name.
   def supplier_link(order_or_supplier)
-    if order_or_supplier.kind_of?(Order) && order_or_supplier.stockit?
+    if order_or_supplier.is_a?(Order) && order_or_supplier.stockit?
       link_to(order_or_supplier.name, stock_articles_path).html_safe
     else
       link_to(@order.supplier.name, supplier_path(@order.supplier)).html_safe
@@ -152,7 +151,8 @@ module OrdersHelper
     if order.stockit?
       content_tag :div, t('orders.index.action_receive'), class: "btn disabled #{options[:class]}"
     else
-      link_to t('orders.index.action_receive'), receive_order_path(order), class: "btn#{' btn-success' unless order.received?} #{options[:class]}"
+      link_to t('orders.index.action_receive'), receive_order_path(order),
+              class: "btn#{' btn-success' unless order.received?} #{options[:class]}"
     end
   end
 end

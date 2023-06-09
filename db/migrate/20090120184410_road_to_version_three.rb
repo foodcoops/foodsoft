@@ -10,10 +10,10 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     create_table :messages do |t|
       t.references :sender
       t.text :recipients_ids
-      t.string :subject, :null => false
+      t.string :subject, null: false
       t.text :body
-      t.integer :email_state, :default => 0, :null => false
-      t.boolean :private, :default => false
+      t.integer :email_state, default: 0, null: false
+      t.boolean :private, default: false
       t.datetime :created_at
     end
 
@@ -23,9 +23,9 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     add_column :groups, :deleted_at, :datetime
 
     # == Workgroups
-    puts "Migrate all groups to workgroups.."
-    Group.find(:all, :conditions => { :type => "" }).each do |workgroup|
-      workgroup.update_attribute(:type, "Workgroup")
+    puts 'Migrate all groups to workgroups..'
+    Group.find(:all, conditions: { type: '' }).each do |workgroup|
+      workgroup.update_attribute(:type, 'Workgroup')
     end
 
     # == Ordergroups
@@ -34,11 +34,11 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     rename_column :financial_transactions, :order_group_id, :ordergroup_id
     rename_column :group_orders, :order_group_id, :ordergroup_id
     rename_column :tasks, :group_id, :workgroup_id
-    remove_index :group_orders, :name => "index_group_orders_on_order_group_id_and_order_id"
-    add_index :group_orders, [:ordergroup_id, :order_id], :unique => true
+    remove_index :group_orders, name: 'index_group_orders_on_order_group_id_and_order_id'
+    add_index :group_orders, %i[ordergroup_id order_id], unique: true
 
-    Group.find(:all, :conditions => { :type => "OrderGroup" }).each do |ordergroup|
-      ordergroup.update_attribute(:type, "Ordergroup")
+    Group.find(:all, conditions: { type: 'OrderGroup' }).each do |ordergroup|
+      ordergroup.update_attribute(:type, 'Ordergroup')
     end
     # move contact-infos from users to ordergroups
     add_column :groups, :contact_person, :string
@@ -46,9 +46,7 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     add_column :groups, :contact_address, :string
     Ordergroup.all.each do |ordergroup|
       contact = ordergroup.users.first
-      if contact
-        ordergroup.update(contact_person: contact.name, contact_phone: contact.phone, contact_address: contact.address)
-      end
+      ordergroup.update(contact_person: contact.name, contact_phone: contact.phone, contact_address: contact.address) if contact
     end
     remove_column :users, :address
 
@@ -57,15 +55,18 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     drop_table :group_order_results
     drop_table :order_article_results
     drop_table :group_order_article_results
-    GroupOrder.delete_all; OrderArticle.delete_all; GroupOrderArticle.delete_all; GroupOrderArticleQuantity.delete_all
+    GroupOrder.delete_all
+    OrderArticle.delete_all
+    GroupOrderArticle.delete_all
+    GroupOrderArticleQuantity.delete_all
 
     create_table :orders do |t|
       t.references :supplier
       t.text :note
       t.datetime :starts
       t.datetime :ends
-      t.string :state, :default => "open" # Statemachine ... open -> finished -> closed
-      t.integer :lock_version, :default => 0, :null => false
+      t.string :state, default: 'open' # Statemachine ... open -> finished -> closed
+      t.integer :lock_version, default: 0, null: false
       t.integer :updated_by_user_id
     end
 
@@ -78,9 +79,9 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
       t.date :date
       t.date :paid_on
       t.text :note
-      t.decimal :amount, :null => false, :precision => 8, :scale => 2, :default => 0.0
-      t.decimal :deposit, :precision => 8, :scale => 2, :default => 0.0, :null => false
-      t.decimal :deposit_credit, :precision => 8, :scale => 2, :default => 0.0, :null => false
+      t.decimal :amount, null: false, precision: 8, scale: 2, default: 0.0
+      t.decimal :deposit, precision: 8, scale: 2, default: 0.0, null: false
+      t.decimal :deposit_credit, precision: 8, scale: 2, default: 0.0, null: false
       t.timestamps
     end
 
@@ -107,41 +108,41 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     # == ArticlePrice
     create_table :article_prices do |t|
       t.references :article
-      t.decimal :price, :precision => 8, :scale => 2, :default => 0.0, :null => false
-      t.decimal :tax, :precision => 8, :scale => 2, :default => 0.0, :null => false
-      t.decimal :deposit, :precision => 8, :scale => 2, :default => 0.0, :null => false
+      t.decimal :price, precision: 8, scale: 2, default: 0.0, null: false
+      t.decimal :tax, precision: 8, scale: 2, default: 0.0, null: false
+      t.decimal :deposit, precision: 8, scale: 2, default: 0.0, null: false
       t.integer :unit_quantity
       t.datetime :created_at
     end
     # Create price history for every Article
     Article.all.each do |a|
-      a.article_prices.create :price => a.price, :tax => a.tax,
-                              :deposit => a.deposit, :unit_quantity => a.unit_quantity
+      a.article_prices.create price: a.price, tax: a.tax,
+                              deposit: a.deposit, unit_quantity: a.unit_quantity
     end
     # Every Article has now a Category. Fix it if neccessary.
-    Article.all(:conditions => { :article_category_id => nil }).each do |article|
+    Article.all(conditions: { article_category_id: nil }).each do |article|
       article.update_attribute(:article_category, ArticleCategory.first)
     end
     # order-articles
     add_column :order_articles, :article_price_id, :integer
 
     # == GroupOrder
-    change_column :group_orders, :updated_by_user_id, :integer, :default => nil, :null => true
+    change_column :group_orders, :updated_by_user_id, :integer, default: nil, null: true
 
     # == GroupOrderArticle
     # The total order result in ordergroup is now saved!
-    add_column :group_order_articles, :result, :integer, :default => nil
+    add_column :group_order_articles, :result, :integer, default: nil
 
     # == StockArticle
     add_column :articles, :type, :string
-    add_column :articles, :quantity, :integer, :default => 0
+    add_column :articles, :quantity, :integer, default: 0
 
     # == StockChanges
     create_table :stock_changes do |t|
       t.references :delivery
       t.references :order
       t.references :stock_article
-      t.integer :quantity, :default => 0
+      t.integer :quantity, default: 0
       t.datetime :created_at
     end
 
@@ -158,6 +159,5 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     User.all.each { |u| u.settings['notify.upcoming_tasks'] = 1 }
   end
 
-  def self.down
-  end
+  def self.down; end
 end

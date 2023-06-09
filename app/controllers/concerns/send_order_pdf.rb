@@ -3,7 +3,7 @@ module Concerns::SendOrderPdf
 
   protected
 
-  def send_order_pdf order, document
+  def send_order_pdf(order, document)
     klass = case document
             when 'groups'   then OrderByGroups
             when 'articles' then OrderByArticles

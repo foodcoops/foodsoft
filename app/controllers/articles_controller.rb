@@ -2,24 +2,24 @@ class ArticlesController < ApplicationController
   before_action :authenticate_article_meta, :find_supplier
 
   def index
-    if params['sort']
-      sort = case params['sort']
-             when "name" then "articles.name"
-             when "unit" then "articles.unit"
-             when "article_category" then "article_categories.name"
-             when "note" then "articles.note"
-             when "availability" then "articles.availability"
-             when "name_reverse" then "articles.name DESC"
-             when "unit_reverse" then "articles.unit DESC"
-             when "article_category_reverse" then "article_categories.name DESC"
-             when "note_reverse" then "articles.note DESC"
-             when "availability_reverse" then "articles.availability DESC"
+    sort = if params['sort']
+             case params['sort']
+             when 'name' then 'articles.name'
+             when 'unit' then 'articles.unit'
+             when 'article_category' then 'article_categories.name'
+             when 'note' then 'articles.note'
+             when 'availability' then 'articles.availability'
+             when 'name_reverse' then 'articles.name DESC'
+             when 'unit_reverse' then 'articles.unit DESC'
+             when 'article_category_reverse' then 'article_categories.name DESC'
+             when 'note_reverse' then 'articles.note DESC'
+             when 'availability_reverse' then 'articles.availability DESC'
              end
-    else
-      sort = "article_categories.name, articles.name"
-    end
+           else
+             'article_categories.name, articles.name'
+           end
 
-    @articles = Article.undeleted.where(supplier_id: @supplier, :type => nil).includes(:article_category).order(sort)
+    @articles = Article.undeleted.where(supplier_id: @supplier, type: nil).includes(:article_category).order(sort)
 
     if request.format.csv?
       send_data ArticlesCsv.new(@articles, encoding: 'utf-8').to_csv, filename: 'articles.csv', type: 'text/csv'
@@ -32,32 +32,32 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js { render :layout => false }
+      format.js { render layout: false }
     end
   end
 
   def new
-    @article = @supplier.articles.build(:tax => FoodsoftConfig[:tax_default])
-    render :layout => false
+    @article = @supplier.articles.build(tax: FoodsoftConfig[:tax_default])
+    render layout: false
   end
 
   def copy
     @article = @supplier.articles.find(params[:article_id]).dup
-    render :layout => false
+    render layout: false
+  end
+
+  def edit
+    @article = Article.find(params[:id])
+    render action: 'new', layout: false
   end
 
   def create
     @article = Article.new(params[:article])
     if @article.valid? && @article.save
-      render :layout => false
+      render layout: false
     else
-      render :action => 'new', :layout => false
+      render action: 'new', layout: false
     end
-  end
-
-  def edit
-    @article = Article.find(params[:id])
-    render :action => 'new', :layout => false
   end
 
   # Updates one Article and highlights the line if succeded
@@ -65,9 +65,9 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     if @article.update(params[:article])
-      render :layout => false
+      render layout: false
     else
-      render :action => 'new', :layout => false
+      render action: 'new', layout: false
     end
   end
 
@@ -75,7 +75,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.mark_as_deleted unless @order = @article.in_open_order # If article is in an active Order, the Order will be returned
-    render :layout => false
+    render layout: false
   end
 
   # Renders a form for editing all articles from a supplier
@@ -87,19 +87,17 @@ class ArticlesController < ApplicationController
   def update_all
     invalid_articles = false
 
-    begin
-      Article.transaction do
-        unless params[:articles].blank?
-          # Update other article attributes...
-          @articles = Article.find(params[:articles].keys)
-          @articles.each do |article|
-            unless article.update(params[:articles][article.id.to_s])
-              invalid_articles = true unless invalid_articles # Remember that there are validation errors
-            end
+    Article.transaction do
+      if params[:articles].present?
+        # Update other article attributes...
+        @articles = Article.find(params[:articles].keys)
+        @articles.each do |article|
+          unless article.update(params[:articles][article.id.to_s])
+            invalid_articles ||= true # Remember that there are validation errors
           end
-
-          raise ActiveRecord::Rollback if invalid_articles # Rollback all changes
         end
+
+        raise ActiveRecord::Rollback if invalid_articles # Rollback all changes
       end
     end
 
@@ -134,16 +132,15 @@ class ArticlesController < ApplicationController
       end
     end
     # action succeded
-    redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page])
-  rescue => error
-    redirect_to supplier_articles_url(@supplier, :per_page => params[:per_page]),
-                :alert => I18n.t('errors.general_msg', :msg => error)
+    redirect_to supplier_articles_url(@supplier, per_page: params[:per_page])
+  rescue StandardError => e
+    redirect_to supplier_articles_url(@supplier, per_page: params[:per_page]),
+                alert: I18n.t('errors.general_msg', msg: e)
   end
 
   # lets start with parsing articles from uploaded file, yeah
   # Renders the upload form
-  def upload
-  end
+  def upload; end
 
   # Update articles from a spreadsheet
   def parse_upload
@@ -151,13 +148,15 @@ class ArticlesController < ApplicationController
     options = { filename: uploaded_file.original_filename }
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
-    @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_from_file uploaded_file.tempfile, options
+    @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_from_file uploaded_file.tempfile,
+                                                                                          options
     if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
-      redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.parse_upload.notice')
+      redirect_to supplier_articles_path(@supplier),
+                  notice: I18n.t('articles.controller.parse_upload.notice')
     end
     @ignored_article_count = 0
-  rescue => error
-    redirect_to upload_supplier_articles_path(@supplier), :alert => I18n.t('errors.general_msg', :msg => error.message)
+  rescue StandardError => e
+    redirect_to upload_supplier_articles_path(@supplier), alert: I18n.t('errors.general_msg', msg: e.message)
   end
 
   # sync all articles with the external database
@@ -165,13 +164,14 @@ class ArticlesController < ApplicationController
   def sync
     # check if there is an shared_supplier
     unless @supplier.shared_supplier
-      redirect_to supplier_articles_url(@supplier), :alert => I18n.t('articles.controller.sync.shared_alert', :supplier => @supplier.name)
+      redirect_to supplier_articles_url(@supplier),
+                  alert: I18n.t('articles.controller.sync.shared_alert', supplier: @supplier.name)
     end
     # sync articles against external database
     @updated_article_pairs, @outlisted_articles, @new_articles = @supplier.sync_all
-    if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
-      redirect_to supplier_articles_path(@supplier), :notice => I18n.t('articles.controller.sync.notice')
-    end
+    return unless @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
+
+    redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.sync.notice')
   end
 
   # Updates, deletes articles when upload or sync form is submitted
@@ -186,7 +186,7 @@ class ArticlesController < ApplicationController
       # delete articles
       begin
         @outlisted_articles.each(&:mark_as_deleted)
-      rescue
+      rescue StandardError
         # raises an exception when used in current order
         has_error = true
       end
@@ -198,15 +198,15 @@ class ArticlesController < ApplicationController
       raise ActiveRecord::Rollback if has_error
     end
 
-    if !has_error
-      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_sync.notice')
-    else
+    if has_error
       @updated_article_pairs = @updated_articles.map do |article|
         orig_article = Article.find(article.id)
         [article, orig_article.unequal_attributes(article)]
       end
       flash.now.alert = I18n.t('articles.controller.error_invalid')
       render params[:from_action] == 'sync' ? :sync : :parse_upload
+    else
+      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_sync.notice')
     end
   end
 
@@ -218,18 +218,18 @@ class ArticlesController < ApplicationController
     q[:name_cont_all] = params.fetch(:name_cont_all_joined, '').split(' ')
     search = @supplier.shared_supplier.shared_articles.ransack(q)
     @articles = search.result.page(params[:page]).per(10)
-    render :layout => false
+    render layout: false
   end
 
   # fills a form whith values of the selected shared_article
   # when the direct parameter is set and the article is valid, it is imported directly
   def import
     @article = SharedArticle.find(params[:shared_article_id]).build_new_article(@supplier)
-    @article.article_category_id = params[:article_category_id] unless params[:article_category_id].blank?
-    if params[:direct] && !params[:article_category_id].blank? && @article.valid? && @article.save
-      render :action => 'create', :layout => false
+    @article.article_category_id = params[:article_category_id] if params[:article_category_id].present?
+    if params[:direct] && params[:article_category_id].present? && @article.valid? && @article.save
+      render action: 'create', layout: false
     else
-      render :action => 'new', :layout => false
+      render action: 'new', layout: false
     end
   end
 

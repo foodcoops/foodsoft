@@ -11,33 +11,31 @@ class TasksController < ApplicationController
     @accepted_tasks = Task.accepted_tasks_for(current_user)
   end
 
-  def new
-    @task = Task.new(current_user_id: current_user.id)
-  end
-
-  def create
-    @task = Task.new(current_user_id: current_user.id)
-    @task.created_by = current_user
-    @task.attributes = (task_params)
-    if params[:periodic]
-      @task.periodic_task_group = PeriodicTaskGroup.new
-    end
-    if @task.save
-      @task.periodic_task_group.create_tasks_for_upfront_days if params[:periodic]
-      redirect_to tasks_url, :notice => I18n.t('tasks.create.notice')
-    else
-      render :template => "tasks/new"
-    end
-  end
-
   def show
     @task = Task.find(params[:id])
+  end
+
+  def new
+    @task = Task.new(current_user_id: current_user.id)
   end
 
   def edit
     @task = Task.find(params[:id])
     @periodic = !!params[:periodic]
     @task.current_user_id = current_user.id
+  end
+
+  def create
+    @task = Task.new(current_user_id: current_user.id)
+    @task.created_by = current_user
+    @task.attributes = (task_params)
+    @task.periodic_task_group = PeriodicTaskGroup.new if params[:periodic]
+    if @task.save
+      @task.periodic_task_group.create_tasks_for_upfront_days if params[:periodic]
+      redirect_to tasks_url, notice: I18n.t('tasks.create.notice')
+    else
+      render template: 'tasks/new'
+    end
   end
 
   def update
@@ -50,16 +48,14 @@ class TasksController < ApplicationController
     if @task.errors.empty? && @task.save
       task_group.update_tasks_including(@task, prev_due_date) if params[:periodic]
       flash[:notice] = I18n.t('tasks.update.notice')
-      if was_periodic && !@task.periodic?
-        flash[:notice] = I18n.t('tasks.update.notice_converted')
-      end
+      flash[:notice] = I18n.t('tasks.update.notice_converted') if was_periodic && !@task.periodic?
       if @task.workgroup
         redirect_to workgroup_tasks_url(workgroup_id: @task.workgroup_id)
       else
         redirect_to tasks_url
       end
     else
-      render :template => "tasks/edit"
+      render template: 'tasks/edit'
     end
   end
 
@@ -75,7 +71,7 @@ class TasksController < ApplicationController
     end
     task.update_ordergroup_stats(user_ids)
 
-    redirect_to tasks_url, :notice => I18n.t('tasks.destroy.notice')
+    redirect_to tasks_url, notice: I18n.t('tasks.destroy.notice')
   end
 
   # assign current_user to the task and set the assignment to "accepted"
@@ -85,20 +81,20 @@ class TasksController < ApplicationController
     if ass = task.is_assigned?(current_user)
       ass.update_attribute(:accepted, true)
     else
-      task.assignments.create(:user => current_user, :accepted => true)
+      task.assignments.create(user: current_user, accepted: true)
     end
-    redirect_to user_tasks_path, :notice => I18n.t('tasks.accept.notice')
+    redirect_to user_tasks_path, notice: I18n.t('tasks.accept.notice')
   end
 
   # deletes assignment between current_user and given taskcurrent_user_id: current_user.id
   def reject
     Task.find(params[:id]).users.delete(current_user)
-    redirect_to :action => "index"
+    redirect_to action: 'index'
   end
 
   def set_done
     Task.find(params[:id]).update_attribute :done, true
-    redirect_to tasks_url, :notice => I18n.t('tasks.set_done.notice')
+    redirect_to tasks_url, notice: I18n.t('tasks.set_done.notice')
   end
 
   # Shows all tasks, which are already done
@@ -109,9 +105,9 @@ class TasksController < ApplicationController
   # shows workgroup (normal group) to edit weekly_tasks_template
   def workgroup
     @group = Group.find(params[:workgroup_id])
-    if @group.is_a? Ordergroup
-      redirect_to tasks_url, :alert => I18n.t('tasks.error_not_found')
-    end
+    return unless @group.is_a? Ordergroup
+
+    redirect_to tasks_url, alert: I18n.t('tasks.error_not_found')
   end
 
   private

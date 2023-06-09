@@ -15,21 +15,21 @@ class MoveWeeklyTasks < ActiveRecord::Migration[4.2]
 
   def down
     PeriodicTaskGroup.all.each do |task_group|
-      unless task_group.tasks.empty?
-        task = task_group.tasks.first
-        workgroup = task.workgroup
-        puts "Writing task data of group #{task_group.id} to workgroup #{workgroup.name}"
-        workgroup_attributes = {
-          weekly_task: true,
-          weekday: task.due_date.days_to_week_start(:sunday),
-          task_name: task.name,
-          task_description: task.description,
-          task_required_users: task.required_users,
-          task_duration: task.duration
-        }
-        workgroup.update(workgroup_attributes)
-        task_group.tasks.update_all weekly: true
-      end
+      next if task_group.tasks.empty?
+
+      task = task_group.tasks.first
+      workgroup = task.workgroup
+      puts "Writing task data of group #{task_group.id} to workgroup #{workgroup.name}"
+      workgroup_attributes = {
+        weekly_task: true,
+        weekday: task.due_date.days_to_week_start(:sunday),
+        task_name: task.name,
+        task_description: task.description,
+        task_required_users: task.required_users,
+        task_duration: task.duration
+      }
+      workgroup.update(workgroup_attributes)
+      task_group.tasks.update_all weekly: true
     end
   end
 

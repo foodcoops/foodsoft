@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 feature 'admin/configs' do
   let(:name) { Faker::Lorem.words(number: rand(2..4)).join(' ') }
   let(:email) { Faker::Internet.email }
-  let(:admin) { create :admin }
+  let(:admin) { create(:admin) }
 
   before { login admin }
 
@@ -51,13 +51,13 @@ feature 'admin/configs' do
   end
 
   def compact_hash_deep!(h)
-    h.each do |k, v|
+    h.each do |_k, v|
       if v.is_a? Hash
         compact_hash_deep!(v)
-        v.reject! { |k, v| v.blank? }
+        v.compact_blank!
       end
     end
-    h.reject! { |k, v| v.blank? }
+    h.compact_blank!
     h
   end
 end

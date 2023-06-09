@@ -4,7 +4,7 @@ class Admin::WorkgroupsController < Admin::BaseController
   def index
     @workgroups = Workgroup.order('name ASC')
     # if somebody uses the search field:
-    @workgroups = @workgroups.where('name LIKE ?', "%#{params[:query]}%") unless params[:query].blank?
+    @workgroups = @workgroups.where('name LIKE ?', "%#{params[:query]}%") if params[:query].present?
 
     @workgroups = @workgroups.page(params[:page]).per(@per_page)
   end
@@ -12,8 +12,8 @@ class Admin::WorkgroupsController < Admin::BaseController
   def destroy
     @workgroup = Workgroup.find(params[:id])
     @workgroup.destroy
-    redirect_to admin_workgroups_url, notice: t('admin.workgroups.destroy.notice')
-  rescue => error
-    redirect_to admin_workgroups_url, alert: t('admin.workgroups.destroy.error', error: error.message)
+    redirect_to admin_workgroups_url, notice: t('.notice')
+  rescue StandardError => e
+    redirect_to admin_workgroups_url, alert: t('.error', error: e.message)
   end
 end

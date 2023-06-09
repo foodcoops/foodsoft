@@ -5,7 +5,7 @@ class PeriodicTaskGroup < ApplicationRecord
     return false if tasks.empty?
     return false if tasks.first.due_date.nil?
 
-    return true
+    true
   end
 
   def create_next_task
@@ -18,15 +18,13 @@ class PeriodicTaskGroup < ApplicationRecord
     next_task.save
 
     self.next_task_date += period_days
-    self.save
+    save
   end
 
   def create_tasks_until(create_until)
-    if has_next_task?
-      while next_task_date.nil? || next_task_date < create_until
-        create_next_task
-      end
-    end
+    return unless has_next_task?
+
+    create_next_task while next_task_date.nil? || next_task_date < create_until
   end
 
   def create_tasks_for_upfront_days
@@ -36,7 +34,7 @@ class PeriodicTaskGroup < ApplicationRecord
   end
 
   def exclude_tasks_before(task)
-    tasks.where("due_date < '#{task.due_date}'").each do |t|
+    tasks.where("due_date < '#{task.due_date}'").find_each do |t|
       t.update_attribute(:periodic_task_group, nil)
     end
   end
@@ -53,7 +51,7 @@ class PeriodicTaskGroup < ApplicationRecord
                    due_date: task.due_date + due_date_delta)
     end
     group_tasks.each do |task|
-      task.update_columns(periodic_task_group_id: self.id)
+      task.update_columns(periodic_task_group_id: id)
     end
   end
 

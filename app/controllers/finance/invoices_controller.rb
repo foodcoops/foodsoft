@@ -1,15 +1,16 @@
 class Finance::InvoicesController < ApplicationController
   before_action :authenticate_finance_or_invoices
 
-  before_action :find_invoice, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_can_edit, only: [:edit, :update, :destroy]
+  before_action :find_invoice, only: %i[show edit update destroy]
+  before_action :ensure_can_edit, only: %i[edit update destroy]
 
   def index
     @invoices_all = Invoice.includes(:supplier, :deliveries, :orders).order('date DESC')
     @invoices = @invoices_all.page(params[:page]).per(@per_page)
 
     respond_to do |format|
-      format.js; format.html { render }
+      format.js
+      format.html { render }
       format.csv do
         send_data InvoicesCsv.new(@invoices_all).to_csv, filename: 'invoices.csv', type: 'text/csv'
       end
@@ -20,11 +21,10 @@ class Finance::InvoicesController < ApplicationController
     @suppliers = Supplier.includes(:invoices).where('invoices.paid_on IS NULL').references(:invoices)
   end
 
-  def show
-  end
+  def show; end
 
   def new
-    @invoice = Invoice.new :supplier_id => params[:supplier_id]
+    @invoice = Invoice.new supplier_id: params[:supplier_id]
     @invoice.deliveries << Delivery.find_by_id(params[:delivery_id]) if params[:delivery_id]
     @invoice.orders << Order.find_by_id(params[:order_id]) if params[:order_id]
     fill_deliveries_and_orders_collection @invoice.id, @invoice.supplier_id
@@ -36,12 +36,14 @@ class Finance::InvoicesController < ApplicationController
 
   def form_on_supplier_id_change
     fill_deliveries_and_orders_collection params[:invoice_id], params[:supplier_id]
-    render :layout => false
+    render layout: false
   end
 
   def fill_deliveries_and_orders_collection(invoice_id, supplier_id)
-    @deliveries_collection = Delivery.where('invoice_id = ? OR (invoice_id IS NULL AND supplier_id = ?)', invoice_id, supplier_id).order(date: :desc).limit(25)
-    @orders_collection = Order.where('invoice_id = ? OR (invoice_id IS NULL AND supplier_id = ?)', invoice_id, supplier_id).order(ends: :desc).limit(25)
+    @deliveries_collection = Delivery.where('invoice_id = ? OR (invoice_id IS NULL AND supplier_id = ?)', invoice_id,
+                                            supplier_id).order(date: :desc).limit(25)
+    @orders_collection = Order.where('invoice_id = ? OR (invoice_id IS NULL AND supplier_id = ?)', invoice_id,
+                                     supplier_id).order(ends: :desc).limit(25)
   end
 
   def create
@@ -58,7 +60,7 @@ class Finance::InvoicesController < ApplicationController
       end
     else
       fill_deliveries_and_orders_collection @invoice.id, @invoice.supplier_id
-      render :action => "new"
+      render action: 'new'
     end
   end
 
@@ -81,7 +83,7 @@ class Finance::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:invoice_id])
     type = MIME::Types[@invoice.attachment_mime].first
     filename = "invoice_#{@invoice.id}_attachment.#{type.preferred_extension}"
-    send_data(@invoice.attachment_data, :filename => filename, :type => type)
+    send_data(@invoice.attachment_data, filename: filename, type: type)
   end
 
   private
@@ -92,8 +94,8 @@ class Finance::InvoicesController < ApplicationController
 
   # Returns true if @current_user can edit the invoice..
   def ensure_can_edit
-    unless @invoice.user_can_edit?(current_user)
-      deny_access
-    end
+    return if @invoice.user_can_edit?(current_user)
+
+    deny_access
   end
 end

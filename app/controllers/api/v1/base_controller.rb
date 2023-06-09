@@ -20,29 +20,30 @@ class Api::V1::BaseController < ApplicationController
 
   def require_ordergroup
     authenticate
-    unless current_ordergroup.present?
-      raise Api::Errors::PermissionRequired.new('Forbidden, must be in an ordergroup')
-    end
+    return if current_ordergroup.present?
+
+    raise Api::Errors::PermissionRequired, 'Forbidden, must be in an ordergroup'
   end
 
   def require_minimum_balance
     minimum_balance = FoodsoftConfig[:minimum_balance] or return
-    if current_ordergroup.account_balance < minimum_balance
-      raise Api::Errors::PermissionRequired.new(t('application.controller.error_minimum_balance', min: minimum_balance))
-    end
+    return unless current_ordergroup.account_balance < minimum_balance
+
+    raise Api::Errors::PermissionRequired, t('application.controller.error_minimum_balance', min: minimum_balance)
   end
 
   def require_enough_apples
-    if current_ordergroup.not_enough_apples?
-      s = t('group_orders.messages.not_enough_apples', apples: current_ordergroup.apples, stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
-      raise Api::Errors::PermissionRequired.new(s)
-    end
+    return unless current_ordergroup.not_enough_apples?
+
+    s = t('group_orders.messages.not_enough_apples', apples: current_ordergroup.apples,
+                                                     stop_ordering_under: FoodsoftConfig[:stop_ordering_under])
+    raise Api::Errors::PermissionRequired, s
   end
 
   def require_config_enabled(config)
-    unless FoodsoftConfig[config]
-      raise Api::Errors::PermissionRequired.new(t('application.controller.error_not_enabled', config: config))
-    end
+    return if FoodsoftConfig[config]
+
+    raise Api::Errors::PermissionRequired, t('application.controller.error_not_enabled', config: config)
   end
 
   def skip_session
@@ -52,12 +53,12 @@ class Api::V1::BaseController < ApplicationController
   def not_found_handler(e)
     # remove where-clauses from error message (not suitable for end-users)
     msg = e.message.try { |m| m.sub(/\s*\[.*?\]\s*$/, '') } || 'Not found'
-    render status: 404, json: { error: 'not_found', error_description: msg }
+    render status: :not_found, json: { error: 'not_found', error_description: msg }
   end
 
   def not_acceptable_handler(e)
     msg = e.message || 'Data not acceptable'
-    render status: 422, json: { error: 'not_acceptable', error_description: msg }
+    render status: :unprocessable_entity, json: { error: 'not_acceptable', error_description: msg }
   end
 
   def doorkeeper_unauthorized_render_options(error:)
@@ -70,11 +71,11 @@ class Api::V1::BaseController < ApplicationController
 
   def permission_required_handler(e)
     msg = e.message || 'Forbidden, user has no access'
-    render status: 403, json: { error: 'forbidden', error_description: msg }
+    render status: :forbidden, json: { error: 'forbidden', error_description: msg }
   end
 
   # @todo something with ApplicationHelper#show_user
-  def show_user(user = current_user, **options)
+  def show_user(user = current_user, **_options)
     user.display
   end
 end

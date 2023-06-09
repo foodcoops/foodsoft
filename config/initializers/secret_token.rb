@@ -8,12 +8,12 @@ Foodsoft::Application.config.secret_key_base = begin
   if (token = ENV.fetch('SECRET_KEY_BASE', nil)).present?
     token
   elsif Rails.env.production? || Rails.env.staging?
-    raise "You must set SECRET_KEY_BASE"
+    raise 'You must set SECRET_KEY_BASE'
   elsif Rails.env.test?
     SecureRandom.hex(30) # doesn't really matter
   else
     sf = Rails.root.join('tmp', 'secret_key_base')
-    if File.exists?(sf)
+    if File.exist?(sf)
       File.read(sf)
     else
       puts "=> Generating initial SECRET_KEY_BASE in #{sf}"

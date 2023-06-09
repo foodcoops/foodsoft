@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 feature 'my profile page' do
-  let(:user) { create :user }
+  let(:user) { create(:user) }
 
   before { login user }
 

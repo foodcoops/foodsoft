@@ -5,7 +5,7 @@ class FinancialTransactionClass < ApplicationRecord
   has_many :ordergroups, -> { distinct }, through: :financial_transactions
 
   validates :name, presence: true
-  validates_uniqueness_of :name
+  validates :name, uniqueness: true
 
   after_save :update_balance_of_ordergroups
 

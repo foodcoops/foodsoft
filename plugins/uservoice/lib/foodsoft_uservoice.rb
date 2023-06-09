@@ -1,5 +1,5 @@
-require "content_for_in_controllers"
-require "foodsoft_uservoice/engine"
+require 'content_for_in_controllers'
+require 'foodsoft_uservoice/engine'
 
 module FoodsoftUservoice
   # enabled when configured, but can still be disabled by use_uservoice option
@@ -19,11 +19,11 @@ module FoodsoftUservoice
 
           # include uservoice javascript
           api_key = FoodsoftConfig[:uservoice]['api_key']
-          js_pre = "UserVoice=window.UserVoice||[];"
+          js_pre = 'UserVoice=window.UserVoice||[];'
           js_load = "var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/#{view_context.j api_key}.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s);"
 
           # configuration
-          sections = FoodsoftConfig[:uservoice].reject { |k, v| k == 'api_key' }
+          sections = FoodsoftConfig[:uservoice].except('api_key')
           sections.each_pair do |k, v|
             if k == 'identify'
               v['id'] = current_user.try(:id) if v.include?('id')
@@ -48,5 +48,5 @@ module FoodsoftUservoice
 end
 
 ActiveSupport.on_load(:after_initialize) do
-  ApplicationController.send :include, FoodsoftUservoice::LoadUservoice
+  ApplicationController.include FoodsoftUservoice::LoadUservoice
 end

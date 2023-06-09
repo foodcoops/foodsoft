@@ -5,7 +5,7 @@ class DiscourseLoginController < DiscourseController
   def initiate
     discourse_url = FoodsoftConfig[:discourse_url]
 
-    nonce = SecureRandom.hex()
+    nonce = SecureRandom.hex
     return_sso_url = url_for(action: :callback, only_path: false)
 
     session[:discourse_sso_nonce] = nonce
@@ -36,7 +36,7 @@ class DiscourseLoginController < DiscourseController
     user.save!
 
     login_and_redirect_to_return_to user, notice: I18n.t('discourse.callback.logged_in')
-  rescue => error
-    redirect_to login_url, alert: error.to_s
+  rescue StandardError => e
+    redirect_to login_url, alert: e.to_s
   end
 end

@@ -4,13 +4,13 @@ class FinancialLink < ApplicationRecord
   has_many :invoices
 
   scope :incomplete, -> { with_full_sum.where.not('full_sums.full_sum' => 0) }
-  scope :unused, -> {
+  scope :unused, lambda {
     includes(:bank_transactions, :financial_transactions, :invoices)
       .where(bank_transactions: { financial_link_id: nil })
       .where(financial_transactions: { financial_link_id: nil })
       .where(invoices: { financial_link_id: nil })
   }
-  scope :with_full_sum, -> {
+  scope :with_full_sum, lambda {
     select(:id, :note, :full_sum).joins(<<-SQL)
       LEFT JOIN (
         SELECT id, COALESCE(bt_sum, 0) - COALESCE(ft_sum, 0) + COALESCE(i_sum, 0) AS full_sum

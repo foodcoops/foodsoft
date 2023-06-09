@@ -3,16 +3,14 @@ class Admin::UsersController < Admin::BaseController
 
   def index
     @users = params[:show_deleted] ? User.deleted : User.undeleted
-    @users = @users.sort_by_param(params["sort"])
+    @users = @users.sort_by_param(params['sort'])
 
     @users = @users.includes(:mail_delivery_status)
 
-    if request.format.csv?
-      send_data UsersCsv.new(@users).to_csv, filename: 'users.csv', type: 'text/csv'
-    end
+    send_data UsersCsv.new(@users).to_csv, filename: 'users.csv', type: 'text/csv' if request.format.csv?
 
     # if somebody uses the search field:
-    @users = @users.natural_search(params[:user_name]) unless params[:user_name].blank?
+    @users = @users.natural_search(params[:user_name]) if params[:user_name].present?
 
     @users = @users.page(params[:page]).per(@per_page)
   end
@@ -20,17 +18,17 @@ class Admin::UsersController < Admin::BaseController
   def destroy
     @user = User.find(params[:id])
     @user.mark_as_deleted
-    redirect_to admin_users_url, notice: t('admin.users.destroy.notice')
-  rescue => error
-    redirect_to admin_users_url, alert: t('admin.users.destroy.error', error: error.message)
+    redirect_to admin_users_url, notice: t('.notice')
+  rescue StandardError => e
+    redirect_to admin_users_url, alert: t('.error', error: e.message)
   end
 
   def restore
     @user = User.find(params[:id])
     @user.restore
-    redirect_to admin_users_url, notice: t('admin.users.restore.notice')
-  rescue => error
-    redirect_to admin_users_url, alert: t('admin.users.restore.error', error: error.message)
+    redirect_to admin_users_url, notice: t('.notice')
+  rescue StandardError => e
+    redirect_to admin_users_url, alert: t('.error', error: e.message)
   end
 
   def sudo

@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def format_datetime_timespec(time, format)
-    I18n.l(time, :format => format) unless (time.nil? || format.nil?)
+    I18n.l(time, format: format) unless time.nil? || format.nil?
   end
 
   def format_currency(amount)
@@ -26,28 +26,28 @@ module ApplicationHelper
 
   # Splits an IBAN into groups of 4 digits displayed with margins in between
   def format_iban(iban)
-    iban && iban.scan(/..?.?.?/).map { |item| content_tag(:span, item, style: "margin-right: 0.5em;") }.join.html_safe
+    iban && iban.scan(/..?.?.?/).map { |item| content_tag(:span, item, style: 'margin-right: 0.5em;') }.join.html_safe
   end
 
   # Creates ajax-controlled-links for pagination
   def pagination_links_remote(collection, options = {})
     per_page = options[:per_page] || @per_page
     params = options[:params] || {}
-    params = params.merge({ :per_page => per_page })
-    paginate collection, :params => params, :remote => true
+    params = params.merge({ per_page: per_page })
+    paginate collection, params: params, remote: true
   end
 
   # Link-collection for per_page-options when using the pagination-plugin
   def items_per_page(options = {})
     per_page_options = options[:per_page_options] || [20, 50, 100, 500]
     current = options[:current] || @per_page
-    params = params || {}
+    params ||= {}
 
     links = per_page_options.map do |per_page|
-      params.merge!({ :per_page => per_page })
+      params.merge!({ per_page: per_page })
       link_class = 'btn'
       link_class << ' disabled' if per_page == current
-      link_to(per_page, params, :remote => true, class: link_class)
+      link_to(per_page, params, remote: true, class: link_class)
     end
 
     if options[:wrap] == false
@@ -63,21 +63,19 @@ module ApplicationHelper
     # Hmtl options
     remote = options[:remote].nil? ? true : options[:remote]
     class_name = case params[:sort]
-                 when key then
+                 when key
                    'sortup'
-                 when key + '_reverse' then
+                 when key + '_reverse'
                    'sortdown'
-                 else
-                   nil
                  end
     html_options = {
-      :title => I18n.t('helpers.application.sort_by', text: text),
-      :remote => remote,
-      :class => class_name
+      title: I18n.t('helpers.application.sort_by', text: text),
+      remote: remote,
+      class: class_name
     }
 
     # Url options
-    key += "_reverse" if params[:sort] == key
+    key += '_reverse' if params[:sort] == key
     per_page = options[:per_page] || @per_page
     url_options = params.merge(per_page: per_page, sort: key)
     url_options.merge!({ page: params[:page] }) if params[:page]
@@ -95,14 +93,16 @@ module ApplicationHelper
   #   be overridden by the option 'desc'.
   #  Other options are passed through to I18n.
   def heading_helper(model, attribute, options = {})
-    i18nopts = { count: 2 }.merge(options.select { |a| !['short', 'desc'].include?(a) })
+    i18nopts = { count: 2 }.merge(options.select { |a| !%w[short desc].include?(a) })
     s = model.human_attribute_name(attribute, i18nopts)
     if options[:short]
       desc = options[:desc]
-      desc ||= model.human_attribute_name("#{attribute}_desc".to_sym, options.merge({ fallback: true, default: '', count: 2 }))
+      desc ||= model.human_attribute_name("#{attribute}_desc".to_sym,
+                                          options.merge({ fallback: true, default: '', count: 2 }))
       desc.blank? && desc = s
-      sshort = model.human_attribute_name("#{attribute}_short".to_sym, options.merge({ fallback: true, default: '', count: 2 }))
-      s = raw "<abbr title='#{desc}'>#{sshort}</abbr>" unless sshort.blank?
+      sshort = model.human_attribute_name("#{attribute}_short".to_sym,
+                                          options.merge({ fallback: true, default: '', count: 2 }))
+      s = raw "<abbr title='#{desc}'>#{sshort}</abbr>" if sshort.present?
     end
     s
   end
@@ -117,7 +117,7 @@ module ApplicationHelper
   # Returns the weekday. 0 is sunday, 1 is monday and so on
   def weekday(dayNumber)
     weekdays = I18n.t('date.day_names')
-    return weekdays[dayNumber]
+    weekdays[dayNumber]
   end
 
   # to set a title for both the h1-tag and the title in the header
@@ -136,13 +136,13 @@ module ApplicationHelper
 
   def icon(name, options = {})
     icons = {
-      :delete => { :file => 'b_drop.png', :alt => I18n.t('ui.delete') },
-      :edit => { :file => 'b_edit.png', :alt => I18n.t('ui.edit') },
-      :members => { :file => 'b_users.png', :alt => I18n.t('helpers.application.edit_user') }
+      delete: { file: 'b_drop.png', alt: I18n.t('ui.delete') },
+      edit: { file: 'b_edit.png', alt: I18n.t('ui.edit') },
+      members: { file: 'b_users.png', alt: I18n.t('helpers.application.edit_user') }
     }
     options[:alt] ||= icons[name][:alt]
     options[:title] ||= icons[name][:title]
-    options.merge!({ :size => '16x16', :border => "0" })
+    options.merge!({ size: '16x16', border: '0' })
 
     image_tag icons[name][:file], options
   end
@@ -150,27 +150,29 @@ module ApplicationHelper
   # Remote links with default 'loader'.gif during request
   def remote_link_to(text, options = {})
     remote_options = {
-      :before => "Element.show('loader')",
-      :success => "Element.hide('loader')",
-      :method => :get
+      before: "Element.show('loader')",
+      success: "Element.hide('loader')",
+      method: :get
     }
     link_to(text, options[:url], remote_options.merge(options))
   end
 
   def format_roles(record, icon = false)
-    roles = %w(suppliers article_meta orders pickups finance invoices admin)
+    roles = %w[suppliers article_meta orders pickups finance invoices admin]
     roles.select! { |role| record.send "role_#{role}?" }
-    names = Hash[roles.map { |r| [r, I18n.t("helpers.application.role_#{r}")] }]
+    names = roles.index_with { |r| I18n.t("helpers.application.role_#{r}") }
     if icon
-      roles.map { |r| image_tag("role-#{r}.png", size: '22x22', border: 0, alt: names[r], title: names[r]) }.join('&nbsp;').html_safe
+      roles.map do |r|
+        image_tag("role-#{r}.png", size: '22x22', border: 0, alt: names[r], title: names[r])
+      end.join('&nbsp;').html_safe
     else
       roles.map { |r| names[r] }.join(', ')
     end
   end
 
   def link_to_gmaps(address)
-    link_to h(address), "http://maps.google.com/?q=#{h(address)}", :title => I18n.t('helpers.application.show_google_maps'),
-                                                                   :target => "_blank"
+    link_to h(address), "http://maps.google.com/?q=#{h(address)}", title: I18n.t('helpers.application.show_google_maps'),
+                                                                   target: '_blank', rel: 'noopener'
   end
 
   # Returns flash messages html.
@@ -186,8 +188,8 @@ module ApplicationHelper
       type = :success if type == 'notice'
       type = :error   if type == 'alert'
       text = content_tag(:div,
-                         content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => "close", "data-dismiss" => "alert") +
-                             message, :class => "alert fade in alert-#{type}")
+                         content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => 'close', 'data-dismiss' => 'alert') +
+                             message, class: "alert fade in alert-#{type}")
       flash_messages << text if message
     end
     flash_messages.join("\n").html_safe
@@ -195,17 +197,17 @@ module ApplicationHelper
 
   # render base errors in a form after failed validation
   # http://railsapps.github.io/twitter-bootstrap-rails.html
-  def base_errors resource
+  def base_errors(resource)
     return '' if resource.errors.empty? || resource.errors[:base].empty?
 
     messages = resource.errors[:base].map { |msg| content_tag(:li, msg) }.join
-    render :partial => 'shared/base_errors', :locals => { :error_messages => messages }
+    render partial: 'shared/base_errors', locals: { error_messages: messages }
   end
 
   # show a user, depending on settings
   def show_user(user = @current_user, options = {})
     if user.nil?
-      "?"
+      '?'
     elsif FoodsoftConfig[:use_nick]
       if options[:full] && options[:markup]
         raw "<b>#{h user.nick}</b> (#{h user.first_name} #{h user.last_name})"
@@ -216,7 +218,7 @@ module ApplicationHelper
         user.nick.nil? ? I18n.t('helpers.application.nick_fallback') : user.nick
       end
     else
-      "#{user.first_name} #{user.last_name}" + (options[:unique] ? " (\##{user.id})" : '')
+      "#{user.first_name} #{user.last_name}" + (options[:unique] ? " (##{user.id})" : '')
     end
   end
 
@@ -258,9 +260,9 @@ module ApplicationHelper
 
   # @return [String] stylesheet tag for foodcoop CSS style (+custom_css+ foodcoop config)
   # @see #foodcoop_css_path
-  def foodcoop_css_tag(options = {})
-    unless FoodsoftConfig[:custom_css].blank?
-      stylesheet_link_tag foodcoop_css_path, media: 'all'
-    end
+  def foodcoop_css_tag(_options = {})
+    return if FoodsoftConfig[:custom_css].blank?
+
+    stylesheet_link_tag foodcoop_css_path, media: 'all'
   end
 end

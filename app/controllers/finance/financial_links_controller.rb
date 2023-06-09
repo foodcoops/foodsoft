@@ -1,5 +1,5 @@
 class Finance::FinancialLinksController < Finance::BaseController
-  before_action :find_financial_link, except: [:create, :incomplete]
+  before_action :find_financial_link, except: %i[create incomplete]
 
   def show
     @items = @financial_link.bank_transactions.map do |bt|
@@ -37,7 +37,7 @@ class Finance::FinancialLinksController < Finance::BaseController
 
   def create
     @financial_link = FinancialLink.first_unused_or_create
-    if params[:bank_transaction] then
+    if params[:bank_transaction]
       bank_transaction = BankTransaction.find(params[:bank_transaction])
       bank_transaction.update_attribute :financial_link, @financial_link
     end
@@ -72,14 +72,16 @@ class Finance::FinancialLinksController < Finance::BaseController
 
   def create_financial_transaction
     financial_transaction = FinancialTransaction.new(financial_transaction_params)
-    financial_transaction.ordergroup.add_financial_transaction! financial_transaction.amount, financial_transaction.note, current_user, financial_transaction.financial_transaction_type, @financial_link
+    financial_transaction.ordergroup.add_financial_transaction! financial_transaction.amount,
+                                                                financial_transaction.note, current_user, financial_transaction.financial_transaction_type, @financial_link
     redirect_to finance_link_url(@financial_link), notice: t('.notice')
-  rescue => error
-    redirect_to finance_link_url(@financial_link), alert: t('errors.general_msg', msg: error)
+  rescue StandardError => e
+    redirect_to finance_link_url(@financial_link), alert: t('errors.general_msg', msg: e)
   end
 
   def index_financial_transaction
-    @financial_transactions = FinancialTransaction.without_financial_link.includes(:financial_transaction_type, :ordergroup)
+    @financial_transactions = FinancialTransaction.without_financial_link.includes(:financial_transaction_type,
+                                                                                   :ordergroup)
   end
 
   def add_financial_transaction
@@ -123,7 +125,7 @@ class Finance::FinancialLinksController < Finance::BaseController
   end
 
   def find_best_fitting_ordergroup_id_for_financial_link(financial_link_id)
-    FinancialTransaction.joins(<<-SQL).order(created_on: :desc).pluck(:ordergroup_id).first
+    FinancialTransaction.joins(<<-SQL).order(created_on: :desc).pick(:ordergroup_id)
       JOIN bank_transactions a ON financial_transactions.financial_link_id = a.financial_link_id
       JOIN bank_transactions b ON a.iban = b.iban AND b.financial_link_id = #{financial_link_id.to_i}
     SQL

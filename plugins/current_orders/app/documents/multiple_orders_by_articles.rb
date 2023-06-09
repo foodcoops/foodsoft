@@ -77,11 +77,11 @@ class MultipleOrdersByArticles < OrderPdf
                 .includes(:article).references(:article)
                 .reorder('order_articles.order_id, articles.name')
                 .preload(:article_price) # preload not join, just in case it went missing
-                .preload(:order, :group_order_articles => { :group_order => :ordergroup })
+                .preload(:order, group_order_articles: { group_order: :ordergroup })
   end
 
-  def each_order_article
-    order_articles.find_each_with_order(batch_size: BATCH_SIZE) { |oa| yield oa }
+  def each_order_article(&block)
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE, &block)
   end
 
   def group_order_articles_for(order_article)
@@ -90,7 +90,7 @@ class MultipleOrdersByArticles < OrderPdf
     goas
   end
 
-  def each_group_order_article_for(group_order)
-    group_order_articles_for(group_order).each { |goa| yield goa }
+  def each_group_order_article_for(group_order, &block)
+    group_order_articles_for(group_order).each(&block)
   end
 end

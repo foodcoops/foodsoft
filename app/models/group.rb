@@ -7,8 +7,8 @@ class Group < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :users, -> { where(deleted_at: nil) }, through: :memberships
 
-  validates :name, :presence => true, :length => { :in => 1..25 }
-  validates_uniqueness_of :name
+  validates :name, presence: true, length: { in: 1..25 }
+  validates :name, uniqueness: true
 
   attr_reader :user_tokens
 
@@ -25,7 +25,7 @@ class Group < ApplicationRecord
   end
 
   def user_tokens=(ids)
-    self.user_ids = ids.split(",")
+    self.user_ids = ids.split(',')
   end
 
   def deleted?

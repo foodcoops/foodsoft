@@ -4,17 +4,17 @@ class ArticleCategoriesController < ApplicationController
   before_action :authenticate_article_meta
 
   def create
-    create!(:notice => I18n.t('article_categories.create.notice')) { article_categories_path }
+    create!(notice: I18n.t('article_categories.create.notice')) { article_categories_path }
   end
 
   def update
-    update!(:notice => I18n.t('article_categories.update.notice')) { article_categories_path }
+    update!(notice: I18n.t('article_categories.update.notice')) { article_categories_path }
   end
 
   def destroy
     destroy!
-  rescue => error
-    redirect_to article_categories_path, alert: I18n.t('article_categories.destroy.error', message: error.message)
+  rescue StandardError => e
+    redirect_to article_categories_path, alert: I18n.t('article_categories.destroy.error', message: e.message)
   end
 
   protected

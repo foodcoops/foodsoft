@@ -8,8 +8,8 @@ class Finance::BankAccountsController < Finance::BaseController
     @bank_account = BankAccount.find(params[:id])
     count = @bank_account.assign_unlinked_transactions
     redirect_to finance_bank_account_transactions_url(@bank_account), notice: t('.notice', count: count)
-  rescue => error
-    redirect_to finance_bank_account_transactions_url(@bank_account), alert: t('errors.general_msg', msg: error.message)
+  rescue StandardError => e
+    redirect_to finance_bank_account_transactions_url(@bank_account), alert: t('errors.general_msg', msg: e.message)
   end
 
   def import
@@ -33,8 +33,8 @@ class Finance::BankAccountsController < Finance::BaseController
     end
 
     needs_redirect = ok
-  rescue => error
-    flash.alert = t('errors.general_msg', msg: error.message)
+  rescue StandardError => e
+    flash.alert = t('errors.general_msg', msg: e.message)
     needs_redirect = true
   ensure
     return unless needs_redirect
