@@ -1903,3 +1903,6 @@ en:
       title: Workgroups
     update:
       notice: Workgroup was updated
+  time:
+    formats:
+      foodsoft_datetime: "%Y-%m-%d %H:%M"
