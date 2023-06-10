@@ -64,6 +64,19 @@ class Order < ApplicationRecord
     end
   end
 
+  def articles_for_ordering_ungrouped
+    if stockit?
+      # make sure to include those articles which are no longer available
+      # but which have already been ordered in this stock order
+      StockArticle.available.includes(:article_category).
+        order('article_categories.name', 'articles.name').reject { |a|
+        a.quantity_available <= 0 && !a.ordered_in_order?(self)
+      }
+    else
+      supplier.articles.available
+    end
+  end
+
   def supplier_articles
     if stockit?
       StockArticle.undeleted.reorder('articles.name')
@@ -397,14 +410,14 @@ class Order < ApplicationRecord
 
   def self.email_reminder_to_settle
     users = {}
-    orders = Order.finished_not_closed.each do |order|
+    Order.finished_not_closed.each do |order|
       if order.pickup && ((DateTime.now - order.pickup) > 2)
         users[order.created_by] ||= []
         users[order.created_by] << order
       end
     end
     users.each do |user, late_orders|
-      if (user.email === 'dcmichi@gmail.com')
+      if user.email === 'dcmichi@gmail.com'
         puts "skipping #{user.email} because diligence and annoyance... :D"
       else
         # puts "#{key.email} #{value.map{|order| order.id}}"

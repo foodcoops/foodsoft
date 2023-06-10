@@ -51,6 +51,7 @@ Foodsoft::Application.routes.draw do
         get :receive_on_order_article_update
 
         get :swap
+        get :swap_all
         patch :swap_update
       end
 

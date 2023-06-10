@@ -8,6 +8,7 @@
 
 = simple_form_for @order, url: swap_update_order_path do |form|
   - articles_for_ordering = @order.articles_for_ordering
+  - articles_for_orders_ungrouped = @swap_all && @order.articles_for_ordering_ungrouped
   .form-actions
     = form.submit class: 'btn'
   %table.table.table-hover
@@ -30,10 +31,18 @@
         -#%td=
 
         - alternatives_for_oa = articles_for_ordering[oa.article.article_category.name].select{|a| a.unit == oa.article.unit && a.name.split[0] == oa.article.name.split[0] }
-        %td= select_tag "order_articles[#{oa.id}][article_id]",
-          options_from_collection_for_select(alternatives_for_oa,:id,:description, selected),
-          include_blank: true,
-          class: 'input-xxlarge'
+
+        - if @swap_all
+          %td= select_tag "order_articles[#{oa.id}][article_id]",
+            options_from_collection_for_select(articles_for_orders_ungrouped,:id,:description, selected),
+            include_blank: true,
+            class: 'input-xxlarge'
+        - else
+          %td= select_tag "order_articles[#{oa.id}][article_id]",
+            options_from_collection_for_select(alternatives_for_oa,:id,:description, selected),
+            include_blank: true,
+            class: 'input-xxlarge'
+
         %td
           = "#{number_to_currency(cheaper.price)} (#{number_to_currency(cheaper.price - oa.article.price)})" if cheaper
 

@@ -121,6 +121,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  # allow swapping articles in an order for alternatives (allow any item to be swapped)
+  def swap_all
+    @order = Order.includes(:articles).find(params[:id])
+    @swap_all = true
+    unless @order.open?
+      flash[:warn] = I18n.t('orders.swap.order_closed',
+                            url: (view_context.link_to 'the balancing page', new_finance_order_path(order_id: @order.id))).html_safe
+      redirect_to :action => 'show', :id => @order
+    end
+    render 'swap'
+  end
+
   def swap_update
     @order = Order.includes(:articles).find(params[:id])
     unless @order.open?
