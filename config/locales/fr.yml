@@ -418,6 +418,7 @@ fr:
         zip_code: Code postal
       currency_unit: Monnaie
       name: Nom
+      disable_members_overview: Désactiver la liste des membres
       distribution_strategy: Stratégie de distribution
       distribution_strategy_options:
         first_order_first_serve: Distribuez d'abord à ceux qui ont commandé en premier

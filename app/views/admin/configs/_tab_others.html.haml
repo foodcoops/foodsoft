@@ -4,5 +4,6 @@
 = config_input form, :distribution_strategy, as: :select, collection: distribution_strategy_options,
   include_blank: false, input_html: {class: 'input-xxlarge'}, label_method: ->(s){ t("config.keys.distribution_strategy_options.#{s}") }
 = config_input form, :disable_invite, as: :boolean
+= config_input form, :disable_members_overview, as: :boolean
 = config_input form, :help_url, as: :url, input_html: {class: 'input-xlarge'}
 = config_input form, :webstats_tracking_code, as: :text, input_html: {class: 'input-xxlarge', rows: 3}

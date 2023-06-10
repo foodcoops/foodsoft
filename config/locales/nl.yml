@@ -626,6 +626,7 @@ nl:
       default_role_pickups: Ophaaldagen
       default_role_suppliers: Leveranciers
       disable_invite: Uitnodigingen deactiveren
+      disable_members_overview: Ledenlijst deactiveren
       email_from: From adres
       email_replyto: Reply-to adres
       email_sender: Sender adres
