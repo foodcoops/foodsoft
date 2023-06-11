@@ -12,31 +12,34 @@ class OrderByGroups < OrderPdf
   end
 
   def body
+
     each_ordergroup do |oa_name, oa_total, oa_id|
       dimrows = []
       rows = [[
-                GroupOrderArticle.human_attribute_name(:ordered),
-                GroupOrderArticle.human_attribute_name(:received),
-                GroupOrderArticle.human_attribute_name(:unit_price),
-                Article.human_attribute_name(:supplier),
+                'Ordered', #GroupOrderArticle.human_attribute_name(:ordered),
+                'Received', #GroupOrderArticle.human_attribute_name(:received),
                 OrderArticle.human_attribute_name(:article),
+                Article.human_attribute_name(:supplier),
+                'Units @ Price', #GroupOrderArticle.human_attribute_name(:unit_price),
                 GroupOrderArticle.human_attribute_name(:total_price)
               ]]
 
       each_group_order_article_for_ordergroup(oa_id) do |goa|
         dimrows << rows.length if goa.result == 0
+        name = goa.order_article.article.name.gsub(/^\d\d\d\d:\s*/,'')
+        quantity = goa.tolerance > 0 ? "#{goa.quantity}..#{goa.quantity + goa.tolerance}" : goa.quantity
         rows << [
-          goa.tolerance > 0 ? "#{goa.quantity} (+#{goa.tolerance} extra)" : goa.quantity,
-          "#{goa.result}    ____ ",
+          "#{quantity}",
+          "#{goa.result}  ____  #{goa.order_article.article.unit}",
+          name.truncate(30, omission: ''),
+          goa.order_article.article.supplier.name.truncate(10, omission: ''),
           order_article_unit_per_price(goa.order_article),
           # goa.order_article.article.unit,
           # number_to_currency(order_article_price(goa.order_article)),
-          goa.order_article.article.supplier.name.truncate(10, omission: ''),
-          goa.order_article.article.name,
           number_to_currency(goa.total_price)]
       end
       next unless rows.length > 1
-      rows << [nil, nil, nil, nil, I18n.t('documents.order_by_groups.sum'), number_to_currency(oa_total)]
+      rows << [nil, nil, I18n.t('documents.order_by_groups.sum'), nil, nil, number_to_currency(oa_total)]
 
       rows.each { |row| row.delete_at 3 } unless @options[:show_supplier]
 
@@ -62,9 +65,11 @@ class OrderByGroups < OrderPdf
         if @options[:show_supplier]
           supplier_width = 60
           table.column(3).width = supplier_width
-          table.column(4).width = (bounds.width / 2) - supplier_width
+          table.column(2).width = (bounds.width / 2) - supplier_width
+          table.cells.size = 11
         else
-          table.column(3).width = bounds.width / 2
+          table.cells.size = 11
+          table.column(2).width = bounds.width / 2
         end
 
         # table.columns(-4..-1).align = :right
