@@ -30,9 +30,9 @@ class OrderByGroups < OrderPdf
         quantity = goa.tolerance > 0 ? "#{goa.quantity}..#{goa.quantity + goa.tolerance}" : goa.quantity
         rows << [
           "#{quantity}",
-          "#{goa.result}  ____  #{goa.order_article.article.unit}",
-          name.truncate(30, omission: ''),
-          goa.order_article.article.supplier.name.truncate(10, omission: ''),
+          "#{goa.result} __ #{goa.order_article.article.unit}",
+          name.truncate(28, omission: ''),
+          goa.order_article.article.supplier.name.truncate(9, omission: ''),
           order_article_unit_per_price(goa.order_article),
           # goa.order_article.article.unit,
           # number_to_currency(order_article_price(goa.order_article)),
@@ -66,9 +66,9 @@ class OrderByGroups < OrderPdf
           supplier_width = 60
           table.column(3).width = supplier_width
           table.column(2).width = (bounds.width / 2) - supplier_width
-          table.cells.size = 11
+          table.cells.size = 10
         else
-          table.cells.size = 11
+          table.cells.size = 10
           table.column(2).width = bounds.width / 2
         end
 
