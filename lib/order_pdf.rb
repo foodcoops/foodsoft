@@ -11,7 +11,7 @@ class OrderPdf < RenderPDF
   def nice_table(name, data, dimrows = [])
     down_or_page 25
     text name, size: 18, style: :bold
-    table data, width: bounds.width, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+    table data, width: bounds.width, cell_style: { size: 8, overflow: :shrink_to_fit } do |table|
       # borders
       table.cells.borders = [:bottom]
       table.cells.padding_top = 2
@@ -57,14 +57,14 @@ class OrderPdf < RenderPDF
   def group_order_articles(ordergroup)
     GroupOrderArticle.
       includes(:group_order).
-      where(group_orders: {order_id: @orders, ordergroup_id: ordergroup})
+      where(group_orders: { order_id: @orders, ordergroup_id: ordergroup })
   end
 
   def order_articles
     OrderArticle.
       ordered.
       includes(article: :supplier).
-      includes(group_order_articles: {group_order: :ordergroup}).
+      includes(group_order_articles: { group_order: :ordergroup }).
       where(order: @orders).
       order('suppliers.name, articles.name, groups.name').
       preload(:article_price)
@@ -104,8 +104,8 @@ class OrderPdf < RenderPDF
 
       # get quantity for each article and ordergroup
       goa_records = group_order_articles(group_ids)
-        .group('group_order_articles.order_article_id, group_orders.ordergroup_id')
-        .pluck('group_order_articles.order_article_id', 'group_orders.ordergroup_id', 'SUM(COALESCE(group_order_articles.result, group_order_articles.quantity))')
+                      .group('group_order_articles.order_article_id, group_orders.ordergroup_id')
+                      .pluck('group_order_articles.order_article_id', 'group_orders.ordergroup_id', 'SUM(COALESCE(group_order_articles.result, group_order_articles.quantity))')
 
       # transform the flat list of results in a hash (with the article as key), which contains an array for all ordergroups
       results = goa_records.group_by(&:first).transform_values do |value|
@@ -125,11 +125,14 @@ class OrderPdf < RenderPDF
   end
 
   def each_group_order_article_for_ordergroup(ordergroup, &block)
-    group_order_articles(ordergroup)
-      .includes(order_article: {article: [:supplier]})
-      .order('suppliers.name, articles.name')
-      .preload(order_article: [:article_price, :order])
-      .each(&block)
+    group_order_articles = group_order_articles(ordergroup)
+                             .includes(order_article: { article: [:supplier] })
+                             .order('suppliers.name, articles.name')
+                             .preload(order_article: [:article_price, :order])
+    sorted = group_order_articles
+               .sort_by { |a|  a.order_article.article.name.gsub(/^\d\d\d\d:\s*/, '') }
+
+    sorted.each(&block)
   end
 
   def stock_ordergroup_name
@@ -137,7 +140,7 @@ class OrderPdf < RenderPDF
       eager_load(:updated_by).
       where(order: @orders).
       map(&:updated_by).
-      map{ |u| u.try(&:name) || '?' }
+      map { |u| u.try(&:name) || '?' }
 
     I18n.t('model.group_order.stock_ordergroup_name', user: users.uniq.sort.join(', '))
   end

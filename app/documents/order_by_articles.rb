@@ -40,7 +40,7 @@ class OrderByArticles < OrderPdf
 
   def nice_table_by_articles(name, footer, data, dimrows = [])
     down_or_page 25
-    t = make_table data, width: bounds.width / 2, cell_style: {size: 8, overflow: :shrink_to_fit} do |table|
+    t = make_table data, width: bounds.width / 2, cell_style: { size: 8, overflow: :shrink_to_fit } do |table|
       # borders
       table.cells.borders = [:bottom]
       table.cells.padding_top = 2
@@ -73,11 +73,11 @@ class OrderByArticles < OrderPdf
       @supplier_page[page_number] = order_article.order.supplier
       dimrows = []
       rows = [[
-                  GroupOrderArticle.human_attribute_name(:ordered),
-                  "#{GroupOrderArticle.human_attribute_name(:received)} (#{order_article.price.unit_quantity * order_article.units})",
-                  Article.human_attribute_name(:unit),
-                  GroupOrder.human_attribute_name(:ordergroup),
-                  GroupOrderArticle.human_attribute_name(:total_price)
+                GroupOrderArticle.human_attribute_name(:ordered),
+                "#{GroupOrderArticle.human_attribute_name(:received)} (#{order_article.price.unit_quantity * order_article.units})",
+                Article.human_attribute_name(:unit),
+                GroupOrder.human_attribute_name(:ordergroup),
+                GroupOrderArticle.human_attribute_name(:total_price)
               ]]
 
       each_group_order_article_for_order_article(order_article) do |goa|
@@ -115,7 +115,9 @@ class OrderByArticles < OrderPdf
 
   def sorted_order_articles
     @sorted_order_articles ||= order_articles
-                                   .all
-                                   .sort_by { |oa| [oa.order.id, oa.order.supplier.name, oa.article.name] }
+                                 .all
+                                 .sort_by { |oa|
+                                   name = oa.article.name.gsub(/^\d\d\d\d:\s*/, '')
+                                   [oa.order.id, oa.order.supplier.name, name] }
   end
 end
