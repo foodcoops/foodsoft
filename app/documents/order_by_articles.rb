@@ -40,7 +40,7 @@ class OrderByArticles < OrderPdf
 
   def nice_table_by_articles(name, footer, data, dimrows = [])
     down_or_page 25
-    t = make_table data, width: bounds.width / 2, cell_style: { size: 8, overflow: :shrink_to_fit } do |table|
+    t = make_table data, width: bounds.width / 2, cell_style: { size: 10, overflow: :shrink_to_fit } do |table|
       # borders
       table.cells.borders = [:bottom]
       table.cells.padding_top = 2
@@ -59,6 +59,7 @@ class OrderByArticles < OrderPdf
     start_new_page if (cursor - (t.height + 12)).negative?
     text name, size: 12, style: :bold
     t.draw
+
     # down_or_page 5
     # text footer, size: 8
   end
@@ -75,33 +76,48 @@ class OrderByArticles < OrderPdf
       rows = [[
                 GroupOrderArticle.human_attribute_name(:ordered),
                 "#{GroupOrderArticle.human_attribute_name(:received)} (#{order_article.price.unit_quantity * order_article.units})",
-                Article.human_attribute_name(:unit),
+                # Article.human_attribute_name(:unit),
                 GroupOrder.human_attribute_name(:ordergroup),
-                GroupOrderArticle.human_attribute_name(:total_price)
+              # GroupOrderArticle.human_attribute_name(:total_price)
               ]]
 
       each_group_order_article_for_order_article(order_article) do |goa|
         dimrows << rows.length if goa.result == 0
-        rows << [group_order_article_quantity_with_tolerance(goa),
-                 "____ #{goa.result}",
-                 order_article.article.unit,
-                 goa.group_order.ordergroup_name,
-                 number_to_currency(goa.total_price)]
+        quantity = goa.tolerance > 0 ? "#{goa.quantity}..#{goa.quantity + goa.tolerance}" : goa.quantity
+        rows << [quantity,
+                 "#{goa.result} _______ #{order_article.article.unit}",
+                 goa.group_order.ordergroup_name.truncate(22, omission: ''),
+        # number_to_currency(goa.total_price)
+        ]
       end
       next unless rows.length > 1
 
+      # if (rows.length > 5)
+      #   rows << [nil, "#{order_article.price.unit_quantity * order_article.units} #{order_article.article.unit}", 'Total']
+      # end
+
       # name = "#{order_article.article.name} (#{order_article.article.unit} | #{order_article.price.unit_quantity} | #{number_to_currency(order_article.price.fc_price)})"
       # name += " #{order_article.article.supplier.name}" if @options[:show_supplier]
-      name = order_article.article.name
-      limit = 34
+      name = order_article.article.name.gsub(/^\d\d\d\d:\s*/, '')
+
+      limit = 100 # not splitting page in half, so who cares how wide
+      # limit = 45
       trail = 6
       if name.length > limit
         name = name.truncate(limit - trail) + name[-trail..-1]
       end
-      name = "#{name} (x #{order_article.units})"
+
+      if (order_article.units > 1)
+        name = "#{order_article.units} #{name}"
+      else
+        name = "#{name}"
+      end
+
       # footer = "#{I18n.l(Time.now, format: :long)}                #{counter} of #{total}"
       footer = ""
       nice_table_by_articles name, footer, rows, dimrows do |table|
+        table.columns(0..1).align = :right
+        table.column(2).width = (bounds.width / 2) / 2
         # table.column(0).width = bounds.width / 2
         # table.columns(1..-1).align = :right
         # table.column(1).font_style = :bold
