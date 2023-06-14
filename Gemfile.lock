@@ -254,6 +254,9 @@ GEM
     i18n-spec (0.6.0)
       iso
     ice_cube (0.16.4)
+    importmap-rails (1.1.5)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     inherited_resources (1.13.1)
       actionpack (>= 5.2, < 7.1)
       has_scope (~> 0.6)
@@ -624,6 +627,7 @@ DEPENDENCIES
   i18n-js (~> 3.0.0.rc8)
   i18n-spec
   ice_cube
+  importmap-rails (~> 1.1)
   inherited_resources
   jquery-rails
   kaminari
