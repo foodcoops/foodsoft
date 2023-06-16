@@ -59,10 +59,16 @@ describe Article do
     expect(article.gross_price).to be >= article.price
   end
 
-  it 'computes the fc price correctly' do
-    expect(article.fc_price).to eq((article.gross_price * 1.05).round(2))
+  [[nil, 1],
+   [0,   1],
+   [5,   1.05],
+   [42,  1.42],
+   [100, 2]].each do |price_markup, percent|
+    it "computes the fc price with price_markup #{price_markup} correctly" do
+      FoodsoftConfig.config['price_markup'] = price_markup
+      expect(article.fc_price).to eq((article.gross_price * percent).round(2))
+    end
   end
-
   it 'knows when it is deleted' do
     expect(supplier.deleted?).to be false
     supplier.mark_as_deleted
