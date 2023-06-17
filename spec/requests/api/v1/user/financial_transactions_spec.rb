@@ -48,10 +48,9 @@ describe 'User' do
       end
 
       response '422', 'invalid parameter value' do
-        xit 'TODO: fix controller to actually send a 422 for invalid params: https://github.com/foodcoops/foodsoft/issues/999'
-        # schema '$ref' => '#/components/schemas/Error422'
-        # let(:financial_transaction) { { amount: -3, financial_transaction_type_id: create(:financial_transaction_type).id, note: -2 } }
-        # run_test!
+        schema '$ref' => '#/components/schemas/Error422'
+        let(:financial_transaction) { { amount: "abc", financial_transaction_type_id: create(:financial_transaction_type).id, note: "foo bar" } }
+        run_test!
       end
     end
 
