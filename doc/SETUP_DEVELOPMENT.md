@@ -12,7 +12,7 @@ If instead you just want to run Foodsoft without changing its code, please refer
 
 **System requirements**:
 [rbenv](https://github.com/rbenv/rbenv),
-[Ruby 2.6+](https://www.ruby-lang.org/en/downloads/),
+[Ruby 2.7+](https://www.ruby-lang.org/en/downloads/),
 [Bundler](http://bundler.io/),
 [MySQL](http://mysql.com/) / [SQLite](http://sqlite.org/), 
 [Redis](http://redis.io/) (optional).
@@ -31,6 +31,10 @@ If instead you just want to run Foodsoft without changing its code, please refer
     *Note:* When developing on Windows you might run into issues with shell scripts because of Git auto-crlf.
     Have a look how to avoid that in the [Docker Development Setup](./SETUP_DEVELOPMENT_DOCKER.md#prerequisites-windows-only)
     instructions.
+
+1. Install developement packages. For Debian/Ubuntu:
+
+        sudo apt install default-libmysqlclient-dev libmagic-dev libxml2-dev libxslt-dev
 
 1. Install and setup rbenv and Bundler. For Debian/Ubuntu:
 
