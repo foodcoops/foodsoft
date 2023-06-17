@@ -1,7 +1,6 @@
 # A sample Gemfile
 source 'https://rubygems.org'
 
-gem 'mail', '~> 2.7.1' # bug with mail 2.8.0 https://github.com/mikel/mail/issues/1489
 gem 'rails', '~> 7.0'
 
 gem 'less-rails'
