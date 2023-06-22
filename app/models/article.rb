@@ -211,7 +211,7 @@ class Article < ApplicationRecord
       rescue StandardError
         nil
       end
-      if fc_unit && supplier_unit && fc_unit =~ supplier_unit
+      if fc_unit != 0 && supplier_unit != 0 && fc_unit && supplier_unit && fc_unit =~ supplier_unit
         conversion_factor = (supplier_unit / fc_unit).to_base.to_r
         new_price = new_article.price / conversion_factor
         new_unit_quantity = new_article.unit_quantity * conversion_factor
