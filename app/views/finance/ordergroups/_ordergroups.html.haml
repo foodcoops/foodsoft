@@ -28,6 +28,6 @@
       %th
       - FinancialTransactionClass.sorted.each do |c|
         - name = FinancialTransactionClass.has_multiple_classes ? c.display : heading_helper(Ordergroup, :account_balance)
-        %th.numeric= format_currency @total_balances[c.id]
-      %th.numeric
+        %th.numeric{:id => "total_balance#{c.id}"}= format_currency @total_balances[c.id]
+      %th.numeric#total_balance_sum
         = format_currency @total_balances.values.reduce(:+)
