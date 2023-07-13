@@ -1,3 +1,36 @@
+# Foodsoft 4.8.0
+
+* feat: Show total sums for ordergroup finances [#1017](https://github.com/foodcoops/foodsoft/pull/1017)
+* feat: Richtext Messages and Attachments with Actiontext [#918](https://github.com/foodcoops/foodsoft/issues/918)
+* feat: Make date configurable via locales [#997](https://github.com/foodcoops/foodsoft/pull/997)
+* feat: Turkish language support added [#995](https://github.com/foodcoops/foodsoft/pull/995)
+* feat: Disable member list via configuration [#990](https://github.com/foodcoops/foodsoft/pull/990)
+* feat: Specify an URL to redirect after logout via settings #989
+* feat: introduce importmaps [#983](https://github.com/foodcoops/foodsoft/pull/983)
+* feat: ruby 2.7.2 and rails 7 upgrade [#979](https://github.com/foodcoops/foodsoft/pull/979)
+* feat: Add home controller test [#972](https://github.com/foodcoops/foodsoft/pull/972)
+* feat: Replace apivore with rswag for api tests [#969](https://github.com/foodcoops/foodsoft/pull/969)
+* feat: increase test coverage [#966](https://github.com/foodcoops/foodsoft/pull/966)
+* feat: Show order note as tooltip [#965](https://github.com/foodcoops/foodsoft/pull/965)
+* feat: Add sd_notify [#961](https://github.com/foodcoops/foodsoft/pull/961)
+* feat: Show instance name at login screen [#957](https://github.com/foodcoops/foodsoft/pull/957)
+* feat: Enabled systemd socket activation [#942](https://github.com/foodcoops/foodsoft/pull/942)
+* feat: Add table_print gem for debugging ActiveRecord queries in the console [#935](https://github.com/foodcoops/foodsoft/pull/935)
+* feat: Add admin UI for SupplierCategories (supplier_categories) [#930](https://github.com/foodcoops/foodsoft/pull/930)
+
+* fix: add null checks for articles convert_units [33034e6](https://github.com/foodcoops/foodsoft/commit/33034e66b88968dedc5289425e1eff847ee67e12)
+* fix: downgrade haml to make deface work [#1003](https://github.com/foodcoops/foodsoft/pull/1003)
+* fix: dutch translation errors [#954](https://github.com/foodcoops/foodsoft/pull/954)
+* fix: Fixe filtering of active ordergroups [#934](https://github.com/foodcoops/foodsoft/pull/934)
+* fix: Change password validation to allow longer passwords [#923](https://github.com/foodcoops/foodsoft/pull/923)
+* fix: Invoice: change label "delivery" to "stock delivery" [#922](https://github.com/foodcoops/foodsoft/pull/922)
+* fix: Allow decimal numbers in transaction collections [#921](https://github.com/foodcoops/foodsoft/pull/921)
+* fix: Add validation of more article fields [#917](https://github.com/foodcoops/foodsoft/pull/917/files)
+* fix: Add default time_zone [#912](https://github.com/foodcoops/foodsoft/pull/912)
+* fix: Rename Piwik to Matomo [#911](https://github.com/foodcoops/foodsoft/pull/911/files)
+* fix: Change instructions to rbenv [#910](https://github.com/foodcoops/foodsoft/pull/910/files)
+
+
 # Foodsoft 4.7.1
 (31 December 2020)
 
