@@ -14,7 +14,7 @@ class Finance::OrdergroupsController < Finance::BaseController
     @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
 
     @total_balances = FinancialTransactionClass.sorted.each_with_object({}) do |c, tmp|
-      tmp[c.id] = c.financial_transactions.reduce(0) { | sum, t | sum + t.amount }
+      tmp[c.id] = c.financial_transactions.reduce(0) { |sum, t| sum + t.amount }
     end
   end
 end
