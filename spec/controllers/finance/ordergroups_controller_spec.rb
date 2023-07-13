@@ -49,8 +49,8 @@ describe Finance::OrdergroupsController do
       get_with_defaults :index
       expect(response).to have_http_status(:success)
 
-      assert_select "#total_balance#{fin_trans_type1.id}", number_to_currency(300)
-      assert_select "#total_balance#{fin_trans_type2.id}", number_to_currency(42.23)
+      assert_select "#total_balance#{fin_trans_type1.financial_transaction_class_id}", number_to_currency(300)
+      assert_select "#total_balance#{fin_trans_type2.financial_transaction_class_id}", number_to_currency(42.23)
       assert_select '#total_balance_sum', number_to_currency(342.23)
     end
   end
