@@ -173,6 +173,9 @@ default: &defaults
   # default to allow automatically adding new articles on sync only when less than 200 articles in total
   #shared_supplier_article_sync_limit: 200
 
+  # number of days after which attachment files get deleted
+  #attachment_retention_days: 365
+
 development:
   <<: *defaults
 
