@@ -7,4 +7,5 @@
 *= require list.unlist
 *= require list.missing
 *= require recurring_select
+*= require actiontext
 */
