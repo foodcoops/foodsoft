@@ -1080,9 +1080,12 @@ es:
   js:
     ordering:
       confirm_change: Las modificaciones sobre este pedido se perderán cuando cambies el pedido. ¿Quieres perder los cambios que has hecho y continuar?
+    trix_editor:
+      file_size_alert: ¡El archivo adjunto es demasiado grande!  El tamaño máximo es de 512Mb
   layouts:
     email:
       footer_4_help: 'Ayuda: %{url}'
+      help: 'Ayuda'
     footer:
       revision: revisión %{revision}
     header:
