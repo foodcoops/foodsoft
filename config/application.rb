@@ -68,6 +68,8 @@ module Foodsoft
     config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
 
     config.autoloader = :zeitwerk
+
+    config.active_storage.variant_processor = :mini_magick
   end
 
   # Foodsoft version
