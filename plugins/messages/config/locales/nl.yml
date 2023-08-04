@@ -140,6 +140,9 @@ nl:
         Antwoorden: %{reply_url}
         Bericht online lezen: %{msg_url}
         Berichtinstellingen: %{profile_url}
+      reply: Antwoorden
+      see_message_online: Bericht online lezen
+      messaging_options: Berichtinstellingen
       footer_group: |
         Verzenden aan groep: %{group}
   navigation:
