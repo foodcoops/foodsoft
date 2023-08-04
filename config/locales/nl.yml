@@ -1189,12 +1189,15 @@ nl:
   js:
     ordering:
       confirm_change: Als je naar een andere bestelling gaat, gaan je aanpassingen in deze bestelling verloren. Wijzigingen vergeten en naar de andere bestelling gaan?
+    trix_editor:
+      file_size_alert: De bestandsbijlage is te groot! De maximale grootte is 512Mb!
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
+      help: 'Help'
     foodsoft: Foodsoft
     footer:
       revision: revisie %{revision}

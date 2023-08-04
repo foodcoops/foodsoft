@@ -831,10 +831,13 @@ fr:
   js:
     ordering:
       confirm_change: Les changements apportés à cette commande vont être perdus. Est-ce que tu veux vraiment continuer?
+    trix_editor:
+      file_size_alert: Le fichier joint est trop volumineux ! La taille maximale est de 512Mb
   layouts:
     email:
       footer_3_homepage: 'Boufcoop: %{url}'
       footer_4_help: 'Aide: %{url}'
+      help: 'Aide'
     footer:
       revision: révision %{revision}
     header:

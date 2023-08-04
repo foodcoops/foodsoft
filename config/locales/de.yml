@@ -1216,12 +1216,15 @@ de:
   js:
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
+    trix_editor:
+      file_size_alert: Der Dateianhang ist zu groß! Die maximale Größe beträgt 512Mb
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
+      help: 'Hilfe'
     foodsoft: Foodsoft
     footer:
       revision: Revision %{revision}

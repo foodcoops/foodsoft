@@ -1218,6 +1218,8 @@ tr:
   js:
     ordering:
       confirm_change: Bu siparişe yapılan değişiklikler kaybolacak. Değişikliklerinizi kaybetmek ve devam etmek istiyor musunuz?
+    trix_editor:
+      file_size_alert: Dosya eki çok büyük! Maksimum boyut 512Mb
   layouts:
     email:
       footer_1_separator: "--"

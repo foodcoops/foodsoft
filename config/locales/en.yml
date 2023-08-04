@@ -1219,12 +1219,15 @@ en:
   js:
     ordering:
       confirm_change: Modifications to this order will be lost when you change the order. Do you want to lose the changes you made and continue?
+    trix_editor:
+      file_size_alert: The file is to large! The supported file size is 512Mb!
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
+      help: 'Help'
     foodsoft: Foodsoft
     footer:
       revision: revision %{revision}
