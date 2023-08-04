@@ -292,7 +292,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_085312) do
   create_table "messages", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "sender_id"
     t.string "subject", null: false
-    t.text "body"
     t.boolean "private", default: false
     t.datetime "created_at", precision: nil
     t.integer "reply_to"

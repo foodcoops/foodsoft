@@ -138,6 +138,9 @@ de:
         Antworten: %{reply_url}
         Nachricht online einsehen: %{msg_url}
         Nachrichten-Einstellungen: %{profile_url}
+      reply: Antworten
+      see_message_online: Nachricht online einsehen
+      messaging_options: Nachrichten-Einstellungen
       footer_group: |
         Gesendet an Gruppe: %{group}
   navigation:

@@ -140,6 +140,9 @@ en:
         Reply: %{reply_url}
         See message online: %{msg_url}
         Messaging options: %{profile_url}
+      reply: Reply
+      see_message_online: See message online
+      messaging_options: Messaging options
       footer_group: |
         Sent to group: %{group}
   navigation:
