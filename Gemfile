@@ -125,3 +125,5 @@ group :test do
   # api
   gem 'rswag-specs'
 end
+
+gem "activerecord-nulldb-adapter", "~> 0.9.0"
