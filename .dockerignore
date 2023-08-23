@@ -41,3 +41,7 @@ Capfile
 config/deploy
 config/deploy.rb
 Gemfile.capistrano*
+
+Dockerfile
+Dockerfile-dev
+docker-compose.yml
