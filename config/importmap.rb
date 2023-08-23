@@ -2,3 +2,4 @@
 pin "application", preload: true
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
+pin "trix-editor-overrides"
