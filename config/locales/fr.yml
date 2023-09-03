@@ -14,7 +14,7 @@ fr:
         gross_price: Prix TTC
         manufacturer: Product-rice-eur
         name: Nom
-        order_number: Numéro 
+        order_number: Numéro
         order_number_short: Numéro
         origin: Lieu de production
         price: Prix HT
@@ -417,6 +417,7 @@ fr:
         street: Rue
         zip_code: Code postal
       currency_unit: Monnaie
+      disable_members_overview: Désactiver la liste des membres
       name: Nom
       distribution_strategy: Stratégie de distribution
       distribution_strategy_options:
@@ -830,10 +831,13 @@ fr:
   js:
     ordering:
       confirm_change: Les changements apportés à cette commande vont être perdus. Est-ce que tu veux vraiment continuer?
+    trix_editor:
+      file_size_alert: Le fichier joint est trop volumineux ! La taille maximale est de 512Mb
   layouts:
     email:
       footer_3_homepage: 'Boufcoop: %{url}'
       footer_4_help: 'Aide: %{url}'
+      help: 'Aide'
     footer:
       revision: révision %{revision}
     header:
@@ -860,7 +864,7 @@ fr:
       error_invite_invalid: Ton invitation n'est pas ou plus valide.
       error_token_invalid: Ton jeton de connexion n'est pas ou plus valide, essaie de cliquer à nouveau sur le lien.
       reset_password:
-        notice: Tu vas maintenant recevoir un message contenant un lien qui te permettra de réinitialiser ton mot de passe. 
+        notice: Tu vas maintenant recevoir un message contenant un lien qui te permettra de réinitialiser ton mot de passe.
       update_password:
         notice: Ton mot de passe a été mis à jour. Tu peux maintenant de connecter.
     forgot_password:
@@ -1196,6 +1200,7 @@ fr:
             es: Espagnol
             fr: Français
             nl: Néerlandais
+            tr: Turc
     required:
       text: requis
     'yes': 'Oui'
@@ -1344,7 +1349,7 @@ fr:
       notice: La description du boulot a été mise à jour.
       notice_converted: Le boulot a été converti en boulot ordinaire (sans répétition).
     user:
-      more: Tu t'ennuies en ce moment? Il y aura sûrement du boulot pour toi %{tasks_link}. 
+      more: Tu t'ennuies en ce moment? Il y aura sûrement du boulot pour toi %{tasks_link}.
       tasks_link: par là-bas
       title: Ton boulot
       title_accepted: Boulots acceptés
@@ -1369,8 +1374,11 @@ fr:
     edit:
       title: Modifier l'équipe
     error_last_admin_group: Impossible de supprimer la dernière cellule avec privilèges administratrices.
-    error_last_admin_role: Les privilèges administratrices ne peuvent pas être retirés à la dernière cellule qui les possède. 
+    error_last_admin_role: Les privilèges administratrices ne peuvent pas être retirés à la dernière cellule qui les possède.
     index:
       title: Équipes
     update:
       notice: L'équipe a été mise à jour
+  time:
+    formats:
+      foodsoft_datetime: "%d/%m/%Y %H:%M"
