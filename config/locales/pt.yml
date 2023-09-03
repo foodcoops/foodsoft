@@ -33,12 +33,20 @@ pt:
         price: Preço (líquido)
         tax: IVA
         unit_quantity: Quantidade de unidade
+      bank_account:
+        description: Descrição
+        name: Nome
+      bank_transaction:
+        date: Data
+        external_id: ID Externo
+        text: Descrição
       delivery:
-        delivered_on: Data de entrega
+        date: Data de entrega
         note: Nota
         supplier: Fornecedor
       document:
         created_at: Criado em
+        created_by: Criado por
         data: Dados
         mime: Tipo MIME
         name: Nome
@@ -48,11 +56,17 @@ pt:
         note: Nota
         ordergroup: Grupo de pedidos
         user: Inserido por
+      financial_transaction_class:
+        name: Nome
+      financial_transaction_type:
+        bank_account: Conta bancária
+        name: Nome
       group_order:
         price: Soma do pedido
         updated_by: Último ordenado por
       group_order_article:
         quantity: Quantidade
+        received: Recebido
         result: Quantidade
         tolerance: Tolerância
         total_price: Soma
@@ -63,7 +77,6 @@ pt:
         created_by: Criado por
         date: Data de cobrança
         delete_attachment: Excluir anexo
-        deliveries: Entrega
         deposit: Depósito cobrado
         deposit_credit: Depósito retornado
         net_amount: Quantia ajustada para reembolso
@@ -76,12 +89,15 @@ pt:
         boxfill: Caixas de preenchimento após
         closed_by: Estabelecido por 
         created_by: Criado por
+        end_actions:
+          auto_close_and_send: Feche o pedido e envie ao fornecedor
         ends: Termina em
         name: Fornecedor
         note: Nota
         pickup: Pegar
         starts: Começa em
         supplier: Fornecedor
+        transport_distribution: Distribuição de custos de transporte
         updated_by: Última edição por
       order_article:
         article: Artigo
