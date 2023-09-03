@@ -138,6 +138,9 @@ ach:
     foodsoft_message:
       footer: |
         crwdns5810:0%{reply_url}crwdnd5810:0%{msg_url}crwdnd5810:0%{profile_url}crwdne5810:0
+      reply: crwdns12211:0crwdne12211:0
+      see_message_online: crwdns12213:0crwdne12213:0
+      messaging_options: crwdns12215:0crwdne12215:0
       footer_group: |
         crwdns5812:0%{group}crwdne5812:0
   navigation:
