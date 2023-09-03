@@ -14,7 +14,9 @@ it:
         gross_price: Prezzo lordo
         manufacturer: Fabbricante
         name: Nome
+        note: Nota
         order_number: Numero ordine
+        order_number_short: N.
         origin: Origine
         price: Prezzo (netto)
         supplier: Fornitore
@@ -31,27 +33,57 @@ it:
         price: Prezzo (netto)
         tax: IVA
         unit_quantity: Quantità unitaria
+      bank_account:
+        balance: Bilanciamento
+        description: Descrizione
+        iban: IBAN
+        name: Nome
+      bank_transaction:
+        amount: Importo
+        date: Data
+        external_id: ID Esterno
+        financial_link: Collegamento finanziario
+        iban: IBAN
+        reference: Referenza
+        text: Descrizione
       delivery:
-        delivered_on: Data distribuzione
+        date: Data di consegna
+        note: Nota
         supplier: Fornitore
       document:
         created_at: Creato a
+        created_by: Creato da
         data: Dati
         mime: Tipo MIME
         name: Nome
       financial_transaction:
         amount: Quantità
         created_on: Data
+        financial_transaction_class: Classe di transazione finanziaria
+        financial_transaction_type: Tipo di transazione finanziaria
+        note: Nota
         ordergroup: Gruppo d'ordine
         user: Inserito da
+      financial_transaction_class:
+        ignore_for_account_balance: Ignora per il saldo del conto
+        name: Nome
+      financial_transaction_type:
+        bank_account: Conto Bancario
+        name: Nome
+        financial_transaction_class: Classe di transazione finanziaria
+        name_short: Nome Breve
       group_order:
+        ordergroup: Gruppo dell'ordine
         price: Totale ordine
         updated_by: Ordinato l'ultima volta da
       group_order_article:
+        ordered: Ordinato
         quantity: Quantità
+        received: Ricevuto
         result: Quantità
         tolerance: Tolleranza
         total_price: Totale
+        unit_price: Prezzo/Unità
       invoice:
         amount: Quantità
         attachment: Allegato
@@ -59,16 +91,18 @@ it:
         created_by: Creato da
         date: Data di fatturazione
         delete_attachment: Cancella allegato
-        deliveries: Spedizione
         deposit: Deposito cauzionale
         deposit_credit: Deposito restituito
+        financial_link: Collegamento finanziario
         net_amount: Ammontare corretto per il rimborso
+        note: Nota
         number: Numero
         orders: Ordine
         paid_on: Pagato su
         supplier: Fornitore
       mail_delivery_status:
         created_at: Ora
+        email: Email
         message: Messaggio
       order:
         boxfill: Riempi gli scatoloni dopo
@@ -82,10 +116,18 @@ it:
           no_end_action: Nessuna azione automatica
         ends: Finisce a
         name: Fornitore
+        note: Nota
         pickup: Raccolta
         starts: Comincia alle
         status: Stato
         supplier: Fornitore
+        transport: Costi di trasporto
+        transport_distribution: Distribuzione dei costi di trasporto
+        transport_distributions:
+          articles: Distribuire i costi tra il numero di articoli ricevuti
+          ordergroup: Ogni gruppo d'ordine paga lo stesso importo
+          price: Distribuire i costi tra la somma degli ordini
+          skip: Non distribuire i costi
         updated_by: Ultima modifica di
       order_article:
         article: Articolo
@@ -124,22 +166,29 @@ it:
         quantity_ordered: Ordinato
       stock_taking:
         date: Data
+        note: Nota
       supplier:
         address: Indirizzo
         contact_person: Contatto personale
         customer_number: Numero cliente
         customer_number_short: Nr cliente
         delivery_days: Giorni di consegna
+        email: Email
+        fax: Fax
+        iban: IBAN
         is_subscribed: iscritto?
         min_order_quantity: Quantità minima ordinativo
         min_order_quantity_short: Q.tà minima
         name: Nome
+        note: Nota
         order_howto: Come ordinare
         phone: Telefono
         phone2: Telefono 2
         shared_sync_method: Come sincronizzarsi
         url: Sito web
       task:
+        created_by: Creata da
+        created_on: Creata alle
         description: Descrizione
         done: Fatto?
         due_date: Scadenza
@@ -149,13 +198,16 @@ it:
         user_list: Utenti responsabili
         workgroup: Gruppo di lavoro
       user:
+        email: Email
         first_name: Nome
+        iban: IBAN
         last_activity: Ultima attività
         last_login: Ultimo login
         last_name: Cognome
         name: Nome
         nick: Nomeutente
         ordergroup: Gruppo d'ordine
+        password: Password
         password_confirmation: Ripetere password
         phone: Telefono
         workgroup:
@@ -169,6 +221,7 @@ it:
         role_finance: Finanze
         role_invoices: Fatture
         role_orders: Gestione ordini
+        role_pickups: Giorni di ritiro
         role_suppliers: Fornitori
         user_tokens: Membri
     errors:
@@ -190,8 +243,11 @@ it:
     models:
       article: Articolo
       article_category: Categoria
+      bank_transaction: Transazione bancaria
       delivery: Distribuzione
       financial_transaction: Transazione finanziaria
+      financial_transaction_class: Classe di transazione finanziaria
+      financial_transaction_type: Tipo di transazione finanziaria
       invoice: Fattura
       order: Ordine
       order_article: Ordina articolo
@@ -239,6 +295,9 @@ it:
         emails_title: Spedizione email
       tab_payment:
         schedule_title: Ordine degli ordini
+      tab_security:
+        default_roles_title: Accesso a
+        default_roles_paragraph: Di default ogni membro della cooperativa alimentare ha accesso alle seguenti aree.
       tab_tasks:
         periodic_title: Compiti periodici
       tabs:
@@ -246,6 +305,26 @@ it:
       update:
         notice: Configurazione salvata.
     confirm: Sicuro?
+    finances:
+      index:
+        bank_accounts: Conti bancari
+        first_paragraph: Qui puoi gestire le classi di transazione finanziaria e i tipi corrispondenti. Ogni transazione finanziaria ha un tipo, che devi selezionare a ogni transazione, se ne hai creato più di uno. Le classi di transazione finanziaria possono essere usate per raggrupparne i tipi e saranno mostrate come colonne aggiuntive nella panoramica del conto, se ne sono stati create più di una.
+        new_bank_account: Aggiungi nuovo conto bancario
+        new_financial_transaction_class: Aggiungi nuova classe di transazione finanziaria
+        title: Finanze
+        transaction_types: Tipi di transazione finanziaria
+      transaction_types:
+        name: Nome
+        new_financial_transaction_type: Aggiungi nuovo tipo di transazione finanziaria
+    financial_transaction_classes:
+      form:
+        title_edit: Modifica classe di transazione finanziaria
+        title_new: Aggiungi nuova classe di transazione finanziaria
+    financial_transaction_types:
+      form:
+        name_short_desc: Il nome breve è obbligatorio per i tipi di transazione finanziaria che dovrebbero essere assegnabili automaticamente nelle transazioni bancarie. Se ci sono più conti bancari, il conto di destinazione preferito per i trasferimenti bancari è selezionabile.
+        title_edit: Modifica tipo di transazione finanziaria
+        title_new: Aggiungi nuovo tipo di transazione finanziaria
     mail_delivery_status:
       destroy_all:
         notice: Tutti i problemi email sono stati cancellati
@@ -274,6 +353,7 @@ it:
         confirm: Sicuro?
         edit: Modifica gruppi/membri
         title: Gruppo d'ordine %{name}
+    search_placeholder: nome ...
     users:
       controller:
         sudo_done: Ora sei connesso come %{user}. Fai attenzione e non dimenticare di disconnetterti quando hai finito!
@@ -282,6 +362,9 @@ it:
         notice: L'utente era stato cancellato
       edit:
         title: Modifica utente
+      form:
+        create_ordergroup: Crea gruppo d'ordine con lo stesso nome e aggiungi utente.
+        send_welcome_mail: Invia una mail di benvenuto all'utente.
       index:
         first_paragraph: Qui puoi %{url}, modificare e cancellare utenti.
         new_user: Crea un nuovo utente
@@ -335,6 +418,7 @@ it:
       error_denied_sign_in: firma come altro utente
       error_feature_disabled: Questa funzione è attualmente disabilitata
       error_members_only: Questa azione è disponibile solo ai membri del gruppo!
+      error_minimum_balance: Spiacenti, il saldo del tuo conto è inferiore al minimo di %{min}.
       error_token: Accesso negato (gettone non valido)!
   article_categories:
     create:
@@ -363,12 +447,15 @@ it:
       unit_quantity_desc: Quantità unitaria
       unit_quantity_short: Q.u.
     controller:
+      create_from_upload:
+        notice: "%{count} nuovi articoli salvati."
       error_invalid: Ci sono errori negli articoli
       error_nosel: Nessun articolo selezionato
       error_parse: "%{msg} ... alla riga %{line}"
       error_update: 'Si è verificato un errore durante l''aggiornamento dell''articolo "%{article}": %{msg}'
       parse_upload:
         no_file: Seleziona un file da caricare
+        notice: "%{count} articoli analizzati correttamente."
       sync:
         notice: Il catalogo è aggiornato
         shared_alert: "%{supplier} non è collegato ad un database esterno"
@@ -398,6 +485,7 @@ it:
       not_found: Nessun articolo trovato
     index:
       change_supplier: Cambia fornitore ...
+      download: Scarica articoli
       edit_all: Modifica tutto
       ext_db:
         import: Importa articolo
@@ -410,6 +498,7 @@ it:
       new: Nuovo articolo
       new_order: Crea nuovo ordine
       search_placeholder: Nome ...
+      title: Articoli da %{supplier} (%{count})
       upload: Aggiorna articoli
     model:
       error_in_use: "%{article} non può essere cancellato perché l'articolo è parte di un ordine corrente!"
@@ -461,10 +550,20 @@ it:
         walnuts: Noci
       submit: Carica file
       text_1: 'Qui puoi caricare un foglio elettronico per aggiornare gli articoli di %{supplier}. I formati di fogli elettronici accettati sono xls, xlsx (Excel) e odt (LibreOffice, OpenOffice), oppure csv (colonne separate da ";" con codifica UTF-8). Solo il primo foglio verrà importato, mentre le colonne dovranno avere il seguente ordine:'
+      text_2: Le righe mostrate qui sono esempi. Quando c'è una "x" nella prima colonna, l'articolo è elencato e sarà rimosso. Questo ti consente di modificare il foglio di calcolo e rimuovere rapidamente molti articoli in una volta, ad esempio quando questi divengono non disponibili con il fornitore. La categoria sarà abbinata alla tua lista di categorie di Foodsoft (sia per nome della categoria che per nomi di importazione).
       title: Carica articoli di %{supplier}
+  bank_account_connector:
+    confirm: Sei pregato di confermare il codice %{code}.
+    fields:
+      email: Email
+      pin: PIN
+      password: Password
+      tan: TAN
+      username: Nome utente
   config:
     hints:
       applepear_url: Sito web dove il sistema delle mele e delle pere per i compiti viene spiegato.
+      charge_members_manually: Quando tieni traccia di chi ha ricevuto cosa altrove (es. su carta) e non vuoi inserirlo in Foodsoft, seleziona questo. Dovrai addebitare manualmente i conti dei membri (usando "Aggiungi nuove transazioni"). Devi comunque regolare gli ordini nella schermata del saldo, ma questo non addebiterà alcun conto dei membri.
       contact:
         email: Indirizzo email di contatto generale, mostrato sul sito web e in alcuni moduli.
         street: Indirizzo, tipicamente questo sarà il punto di spedizione e di prelievo.
@@ -499,10 +598,12 @@ it:
       tasks_upfront_days: Quanti giorni in anticipo si vuole effettuare la programmazione dei compiti periodici.
       tax_default: Percentuale d'IVA predefinita per i nuovi articoli.
       tolerance_is_costly: Ordina quanto più possibile la tolleranza dei membri (rispetto solo a quanto necessario per riempire l'ultimo scatolone). L'abilitazione include anche la tolleranza nel prezzo totale dell'ordine ai membri aperti.
+      distribution_strategy: Come dovrebbero esser distribuiti gli articoli dopo la ricezione di un ordine.
       use_apple_points: Quando il sistema di punti mela è abilitato, i membri devono fare qualche compito per poter continuare a ordinare.
       use_boxfill: Se abilitata, vicini alla fine di un ordine, i membri saranno in grado solo di cambiare il loro ordine aumentando il quantitativo totale ordinato. Questo aiuta a riempire gli scatoloni rimanenti. È comunque necessario impostare una data di riempimento per gli ordini.
       use_iban: Se abilitata, il fornitore e l'utente forniscono un campo aggiuntivo per memorizzare il numero di conto internazionale.
       use_nick: Mostra e usa i nickname invece dei nomi reali. Abilitando questa funzionalità, controllare che ogni utente abbia un nickname.
+      use_self_service: Quando abilitati, i membri possono usare le funzioni di saldo selezionate per conto proprio.
       webstats_tracking_code: Codice di tracciamento per analisi web (come Piwik o Google analytics). Lasciare in bianco per disabilitare il tracciamento.
     keys:
       applepear_url: URL di aiuto per i sistemi Apple
@@ -510,6 +611,7 @@ it:
       contact:
         city: Città
         country: Stato
+        email: Email
         phone: Telefono
         street: Via
         zip_code: Codice postale
@@ -517,11 +619,18 @@ it:
       currency_unit: Valuta
       custom_css: CSS personalizzato
       default_locale: Lingua predefinita
+      default_role_article_meta: Articoli
+      default_role_finance: Finanza
+      default_role_invoices: Fatture
+      default_role_orders: Ordini
+      default_role_pickups: Giorni di ritiro
+      default_role_suppliers: Fornitori
       disable_invite: Disabilita gli inviti
       email_from: Indirizzo mittente
       email_replyto: Indirizzo di risposta
       email_sender: Indirizzo mittente
       help_url: URL documentazione
+      homepage: Homepage
       ignore_browser_locale: Ignora lingua del browser
       minimum_balance: Bilancio minimo
       name: Nome
@@ -544,18 +653,26 @@ it:
       tax_default: IVA predefinita
       time_zone: Fuso orario
       tolerance_is_costly: La tolleranza è costosa
+      distribution_strategy: Strategia di distribuzione
+      distribution_strategy_options:
+        first_order_first_serve: Distribuisci prima a chi ha ordinato per primo
+        no_automatic_distribution: Nessuna distribuzione automatica
       use_apple_points: Punti mela
       use_boxfill: Fase di riempimento scatoloni
       use_iban: Usa IBAN
       use_nick: Usa i nickname
+      use_self_service: Usa self service
       webstats_tracking_code: Codice di tracciatura
     tabs:
+      applications: App
+      foodcoop: Foodcoop
       language: Lingua
       layout: Disposizione
       list: Lista
       messages: Messaggi
       others: Altro
       payment: Finanze
+      security: Sicurezza
       tasks: Compiti
   deliveries:
     add_stock_change:
@@ -644,6 +761,8 @@ it:
       close:
         alert: 'Si è verificato un errore durante la gestione della contabilità: %{message}'
         notice: L'ordine è stato impostato con successo, il bilancio del conto è stato aggiornato.
+      close_all_direct_with_invoice:
+        notice: '%{count} ordini sono stati regolati.'
       close_direct:
         alert: 'L''ordine non può essere impostato: %{message}'
         notice: L'ordine è stato impostato.
@@ -652,17 +771,23 @@ it:
         first_paragraph: 'Quando l''ordine è stato impostato, tutti gli account del gruppo vengono aggiornati.<br>Gli account vengono addebitati nel modo seguente:'
         or_cancel: o indietro all'accounting
         title: Imposta ordine
+      edit_note:
+        title: Modifica nota dell'ordine
       edit_results_by_articles:
         add_article: Aggiungi articolo
         amount: Quantità
+        edit_transport: Modifica trasporto
         gross: Lordo
         net: Netto
+      edit_transport:
+        title: Distribuisci i costi di trasporto
       group_order_articles:
         add_group: Aggiungi gruppo
         total: Costi totali
         total_fc: Totale (prezzo-fc)
         units: Unità
       index:
+        close_all_direct_with_invoice: Chiudi tutto con la fattura
         title: Ordini chiusi
       invoice:
         edit: Modifica fattura
@@ -678,6 +803,8 @@ it:
         alert: Attenzione, l'ordine era già stato contabilizzato
         articles_overview: Panoramica degli articoli
         close_direct: Salta l'impostazione
+        close_direct_confirm: Stai per regolare l'ordine senza addebitare i conti dei membri. Fallo solo quando hai già addebitato manualmente i conti dei membri, o se sai davvero ciò che stai facendo.
+        comment_on_transaction: Qui puoi aggiungere un commento alla tua contabilità.
         comments: Commenti
         confirm_order: Imposta ordine
         create_invoice: Aggiungi fattura
@@ -693,6 +820,7 @@ it:
         confirm: Sicuri?
       orders:
         clear: contabilità
+        cleared: contabilizzato (%{amount})
         end: Fine
         ended: chiuso
         name: Fornitore
@@ -702,11 +830,72 @@ it:
         changed: I dati sono cambiati!
         duration: Da %{starts} fino a %{ends}
         fc_amount: 'Valore vendite:'
+        fc_profit: Surplus FC
         gross_amount: 'Valore lordo:'
+        groups_amount: 'Somma gruppi d''ordine:'
         net_amount: 'Valore netto:'
         reload: Ricarica sommario
+        with_extra_charge: 'con supplemento:'
+        without_extra_charge: 'senza supplemento:'
+    bank_accounts:
+      assign_unlinked_transactions:
+        notice: '%{count} transazioni sono state assegnate'
+      import:
+        notice: '%{count} nuove transazioni sono state importate'
+        no_import_method: Per questo conto bancario non è configurato alcun metodo di importazione.
+        submit: Importa
+        title: Importa le transazioni bancarie per %{name}
+      index:
+        title: Conti Bancari
+    bank_transactions:
+      index:
+        assign_unlinked_transactions: Assegna transazioni
+        import_transactions: Importa
+        title: Transazioni bancarie per %{name} (%{balance})
+      show:
+        add_financial_link: Aggiungi collegamento finanziario
+        belongs_to_supplier: appartiene al fornitore
+        belongs_to_user: appartiene all'utente
+        in_ordergroup: nel gruppo d'ordine
+      transactions:
+        add_financial_link: Aggiungi link
     create:
       notice: La fattura è stata creata.
+    financial_links:
+      add_bank_transaction:
+        notice: Collegamento aggiunto alla transazione bancaria.
+      add_financial_transaction:
+        notice: Collegamento aggiunto alla transazione finanziaria.
+      add_invoice:
+        notice: Collegamento aggiunto alla fattura.
+      create:
+        notice: Un nuovo collegamento finanziario è stato creato.
+      create_financial_transaction:
+        notice: La transazione finanziaria è stata aggiunta.
+      index_bank_transaction:
+        title: Aggiungi transazione bancaria
+      index_financial_transaction:
+        title: Aggiungi transazione finanziaria
+      index_invoice:
+        title: Aggiungi fattura
+      new_financial_transaction:
+        title: Aggiungi transazione finanziaria
+      remove_bank_transaction:
+        notice: Collegamento alla transazione bancaria rimosso.
+      remove_financial_transaction:
+        notice: Collegamento alla transazione finanziaria rimosso.
+      remove_invoice:
+        notice: Collegamento alla fattura rimosso.
+      show:
+        add_bank_transaction: Aggiungi transazione bancaria
+        add_financial_transaction: Aggiungi transazione finanziaria
+        add_invoice: Aggiungi fattura
+        amount: Importo
+        date: Data
+        description: Descrizione
+        new_financial_transaction: Nuova transazione finanziaria
+        title: Collegamento finanziario %{number}
+        type: Tipo
     financial_transactions:
       controller:
         create:
@@ -715,31 +904,312 @@ it:
           alert: 'Si è verificato un errore: %{error}'
           error_note_required: È necessaria una nota!
           notice: Tutte le transazioni sono state salvate.
+        destroy:
+          notice: La transazione è stata rimossa.
       index:
         balance: 'Bilancio del conto: %{balance}'
         last_updated_at: "(ultimo aggiornamento %{when} fa)"
         new_transaction: Crea una nuova transazione
+        title: Estratto conto per %{name}
       index_collection:
         show_groups: Gestione account
         title: Transazioni finanziarie
+      new:
+        paragraph: Qui può accreditare e addebitare denaro per il gruppo d'ordine <b>%{name}</b>.
+        paragraph_foodcoop: Qui puoi accreditare e addebitare denaro per la <b>cooperativa alimentare</b>.
+        title: Nuova transazione
       new_collection:
         add_all_ordergroups: Aggiungi tutti i gruppi d'ordine
+        add_all_ordergroups_custom_field: Aggiungi %{label} a tutti i gruppi d'ordine
+        create_financial_link: Crea un collegamento finanziario comune per le nuove transazioni.
+        create_foodcoop_transaction: Crea una transazione con la somma invertita per la cooperativa alimentare (nel caso della "contabilità a doppia entrata")
         new_ordergroup: Aggiungi nuovo gruppo d'ordine
         save: Salva la transazione
+        set_balance: Imposta il saldo del gruppo d'ordine all'importo inserito.
+        sidebar: Qui puoi aggiornare più conti in contemporanea. Per esempio tutti i trasferimenti del gruppo d'ordine da un estratto conto.
+        title: Aggiornamento di più conti
+      ordergroup:
+        remove: Rimuovi
+        remove_group: Rimuovi gruppo
+      transactions:
+        confirm_revert: Sei sicuro di voler ripristinare %{name}? In questo caso una nuova transazione con un importo ripristinato sarà creata e in combinazione alla transazione originale sarà nascosta. Queste transazioni nascoste sono visibili solo tramite l'opzione 'Mostra nascoste' e non sono visibili affatto agli utenti normali.
+        revert_title: Ripristina la transazione, nascondendola dagli utenti normali.
+      transactions_search:
+        show_hidden: Mostra le transazioni nascoste
+    index:
+      amount_fc: Importo(FC)
+      end: Fine
+      everything_cleared: Ottimo, è tutto contabilizzato...
+      last_transactions: Transazioni recenti
+      open_transactions: Ordini non regolati
+      show_all: mostra tutto
+      title: Finanze
+      unpaid_invoices: Fatture non pagate
+    invoices:
+      edit:
+        title: Modifica fattura
+      form:
+        attachment_hint: Solo JPEG e PDF consentiti.
+      index:
+        action_new: Crea nuova fattura
+        show_unpaid: Mostra le fatture non pagate
+        title: Fatture
+      new:
+        title: Crea nuova fattura
+      show:
+        title: Fattura %{number}
+      unpaid:
+        invoices_sum: Somma totale
+        invoices_text: Riferimento
+        title: Fatture non pagate
     ordergroups:
+      index:
+        new_financial_link: Nuovo collegamento finanziario
+        new_transaction: Aggiungi nuove transazioni
+        show_all: Tutte le transazioni
+        show_foodcoop: Transazioni della Foodcoop
+        title: Gestisci conti
       ordergroups:
         account_statement: Dichiarazione account
+        new_transaction: Nuova transazione
+    update:
+      notice: La fattura è stata aggiornata
+  foodcoop:
+    ordergroups:
+      index:
+        name: Nome...
+        only_active: Solo gruppi attivi
+        only_active_desc: "(ha effettuato l'ordine almeno una volta negli ultimi 3 mesi)"
+        title: Gruppi d'ordine
+      ordergroups:
+        break: "%{start} - %{end}"
+    users:
+      index:
+        body: "<p>Qui puoi scrivere un messaggio ai membri della tua Foodcoop. Se vorresti che altri ti contattassero, sei pregato di consentirlo nel tuo %{profile_link}.</p>"
+        ph_name: Nome...
+        ph_ordergroup: Gruppo d'ordine...
+        profile_link: opzioni
+        title: Utenti
+    workgroups:
+      edit:
+        invite_link: qui
+        invite_new: Puoi invitare nuovi membri %{invite_link}.
+        title: Modifica gruppo
+      index:
+        body: "<p>La modifica di un gruppo è disponibile solo per i membri del gruppo.<br/> Se vuoi unirti a un gruppo, sei pregato di inviare un messaggio ai membri.</p>"
+        title: Gruppi di lavoro
+      workgroup:
+        edit: Modifica gruppo
+        show_tasks: Mostra tutte le attività
+  group_order_articles:
+    form:
+      amount_change_for: Cambia importo per %{article}
+      result_hint: 'Unità: %{unit}'
+  group_orders:
+    archive:
+      desc: Visualizza tutti i %{link} qui.
+      open_orders: ordini correnti
+      title: Ordini di %{group}
+      title_closed: regolato
+      title_open: chiuso/non regolato
+    create:
+      error_general: '''Impossibile aggiornare l''ordine a causa di un bug.'
+      error_stale: Qualcun altro ha ordinato nel mentre, impossibile aggiornare l'ordine.
+      notice: L'ordine è stato salvato.
+    errors:
+      closed: Quest'ordine è già chiuso.
+      no_member: Non sei un membro di un gruppo d'ordine.
+      notfound: URL errato, questo non è il tuo ordine.
+    form:
+      action_save: Salva ordine
+      new_funds: Nuovo saldo del conto
+      price: Prezzo
+      reset_article_search: Ripristina la ricerca
+      search_article: Cerca articoli...
+      sum_amount: Importo corrente
+      title: Ordini
+      total_sum_amount: Importo totale
+      total_tolerance: Tolleranza totale
+      units: Unità
+      units_full: Unità compilate
+      units_total: Unità totali
+    index:
+      closed_orders:
+        more: altro...
+        title: Ordini regolati
+      finished_orders:
+        title: Ordini non regolati
+        total_sum: Somma totale
+      funds:
+        finished_orders: Ordini non regolati
+        open_orders: Ordini correnti
+        title: Credito
+      title: Panoramica degli ordini
+    messages:
+      not_enough_apples: Ti servono almeno %{stop_ordering_under} mele per ordinare. Correntemente il gruppo del tuo ordine contiene solo %{apples} mele.
+    order:
+      title: Articoli
+    show:
+      articles:
+        edit_order: Modifica ordine
+        not_ordered_msg: Non hai ancora effettuato un ordine
+        order_closed_msg: Spiacenti, quest'ordine è chiuso.
+        order_nopen_title: Considerando gli ordini correnti di tutti i gruppi
+        order_not_open: Ricevuto
+        order_now: Questa è la tua possibilità!
+        order_open: Disponibile
+        ordered: Ordinato
+        ordered_title: Importo + tolleranza
+        show_hide: Mostra/nascondi articoli non ordinati
+        show_note: Mostra nota
+        title: Panoramica dell'articolo
+        unit_price: Prezzo unitario
+      comment: Commento
+      comments:
+        title: Commenti
+      not_ordered: Non hai ordinato.
+      sum: Somma
+      title: Il risultato del tuo ordine per %{order}
+    switch_order:
+      remaining: "%{remaining} rimanente"
+      title: Ordini correnti
+    update:
+      error_general: Impossibile aggiornare l'ordine a causa di un bug.
+      error_stale: Qualcun altro ha ordinato nel frattempo, impossibile aggiornare l'ordine.
+      notice: L'ordine è stato salvato.
   helpers:
+    application:
+      edit_user: Modifica utente
+      nick_fallback: "(nessun nome utente)"
+      role_admin: Admin
+      role_article_meta: Articoli
+      role_finance: Finanza
+      role_invoices: Fatture
+      role_orders: Ordini
+      role_pickups: Giorni di ritiro
+      role_suppliers: Fornitori
+      show_google_maps: Mostralo su Google Maps
+      sort_by: Ordina per %{text}
+    deliveries:
+      new_invoice: Nuova fattura
+      show_invoice: Mostra fattura
     orders:
+      old_price: Vecchio prezzo
+      option_choose: Scegli fornitore/scorta
       option_stock: Magazzino
+      order_pdf: Crea PDF
+    submit:
+      invite:
+        create: invia invito
+    tasks:
+      required_users: "%{count} membri ancora necessari!"
+      task_title: "%{name} (%{duration}h)"
   home:
+    apple_bar:
+      desc: 'Questo mostra la proporzione di attività completate al volume di ordini per il tuo gruppo d''ordine in confronto alla media della Foodcoop. In pratica, per ogni %{amount} degli ordini totali, dovresti eseguire un''attività!'
+      more_info: Altre informazioni
+      points: 'I tuoi punti mela correnti: %{points}'
+      warning: Attenzione, hai meno di %{threshold} punti mela, non ti è permesso di effettuare un ordine!
+    changes_saved: Modifiche salvate.
+    index:
+      due_date_format: "%A %d %B"
+      my_ordergroup:
+        last_update: Ultimo aggiornamento %{when} fa
+        title: Il mio gruppo d'ordine
+        transactions:
+          title: Ultime Transazioni
+          view: Mostra estratto conto
+      ordergroup:
+        title: Impegno del tuo gruppo d'ordine
+      tasks_move:
+        action: Riprendi le attività/rifiuta attività
+        desc: Sei responsabile per queste attività.
+        title: Riprendi attività
+      tasks_open:
+        title: Apri attività
+        view_all: Mostra tutte le attività
+      title: Homepage
+      your_tasks: Le tue attività
+    no_ordergroups: Sfortunatamente non sei un membro di un gruppo d'ordine.
     ordergroup:
       account_summary: Dichiarazione account
+      invite: Invita una nuova Persona
+      search: Cerca...
+      title: Il mio gruppo d'ordine
+    ordergroup_cancelled: Hai annullato l'appartenenza al gruppo %{group}.
+    profile:
+      groups:
+        cancel: Abbandona gruppo
+        cancel_confirm: Sei sicuro di voler abbandonare questo gruppo?
+        invite: Invita nuovo membro
+        title: Sei membro dei gruppi
+      title: Il Mio Profilo
+      user:
+        since: "(membro per %{when})"
+        title: "%{user}"
+    reference_calculator:
+      transaction_types_headline: Scopo
+      placeholder: Sei pregato di inserire prima gli importi che vuoi trasferire in ogni campo, per vedere il riferimento che dovresti usare per quella transazione.
+      text0: Sei pregato di trasferire
+      text1: con il riferimento
+      text2: al conto bancario
+      title: Calcolatore di Riferimento
     start_nav:
+      admin: Amministrazione
       finances:
         accounts: Aggiorna gli account
+        settle: Ordini del conto
+        title: Finanze
+      foodcoop: Foodcoop
+      members: Membri
+      new_ordergroup: Nuovo gruppo d'ordine
+      new_user: Nuovo membro
+      orders:
+        end: Chiudi ordini
+        overview: Panoramica degli ordini
+        title: Ordini
       products:
+        edit: Aggiorna prodotti
         edit_stock: Modifica magazzino
+        edit_suppliers: Modifica fornitori
+        title: Prodotti
+      tasks: Le mie attività
+      title: Direttamente a...
+  invites:
+    errors:
+      already_member: è già in uso. La persona è già un membro di questa Foodcoop.
+    modal_form:
+      body: "<p>Qui puoi invitare qualcuno che non fa parte della foodcoop per unirsi al tuo ordine di gruppo <b>%{group}</b>. Dopo che l'invito è accettato, la persona potrà aggiungere (e rimuovere) articoli dal tuo ordine.</p>\n<p>Questo è un ottimo modo per introdurre qualcuno alla foodcoop, o per ordinare con più persone nella stessa abitazione.</p>"
+      title: Invita persona
+    new:
+      action: Invia invito
+      body: "<p>Qui puoi aggiungere una persona al gruppo <b>%{group}</b>, che non sia ancora un membro della foodcoop.</p>"
+    success: Utente invitato correttamente.
+  js:
+    ordering:
+      confirm_change: Le modifiche a quest'ordine verranno perse quando lo modificherai. Vuoi perdere le modifiche effettuate e continuare?
+  layouts:
+    email:
+      footer_1_separator: "--"
+      footer_2_foodsoft: 'Foodsoft: %{url}'
+      footer_3_homepage: 'Foodcoop: %{url}'
+      footer_4_help: 'Aiuto: %{url}'
+    foodsoft: Foodsoft
+    footer:
+      revision: revisione %{revision}
+    header:
+      feedback:
+        desc: Trovato un bug? Suggerimenti? Idee? Recensione?
+        title: Feedback
+      help: Aiuto
+      logout: Disconnettiti
+      ordergroup: Il mio gruppo d'ordine
+      profile: Modifica profilo
+      reference_calculator: Calcolatore di Riferimento
+    logo: "<span>food</span>soft"
+  lib:
+    render_pdf:
+      page: Pagina %{number} di %{count}
   login:
     accept_invitation:
       body: "<p>Sei stato invitato a far parte della foodcoop %{foodcoop} come membro del gruppo <b>%{group}</b>.</p> <p>Se desideri partecipare, compilare questo modulo.</p> <p>Naturalmente, queste informazioni non verranno condivise con terze parti per nessuna ragione. Puoi decidere quante delle tue informazioni personali saranno visibili a tutti. 'Tutti' significa tutti i membri della Foodcoop. Si noti che gli amministratori hanno pieno accesso a tutte le tue informazioni.</p>"
@@ -763,18 +1233,185 @@ it:
       body: "<p>Inserire la nuova password per <b>%{user}</b></p>"
       submit: Salva nuova password
       title: Nuova password
+  mailer:
+    dateformat: "%d %b"
+    feedback:
+      header: "%{user} ha scritto alle %{date}:"
+      subject: Feedback per Foodsoft
+    from_via_foodsoft: "%{name} tramite Foodsoft"
+    invite:
+      subject: Invito alla Foodcoop
+      text: |
+        Ciao!
+
+        %{user} <%{mail}> ti ha invitato a unirti al gruppo "%{group}".
+        Per accettare l'invito e unirti alla foodcoop sei pregato di seguire questo link: %{link}
+        Questo link funziona solo una volta e scade il %{expires}.
+
+
+        Saluti, il tuo Team di Foodsoft!
+    negative_balance:
+      subject: Saldo del conto negativo
+      text: |
+        Caro %{group},
+
+        Il saldo del vostro conto è calato sotto zero a causa di una prenotazione il %{when}: %{balance}
+
+        Si è verificato un addebito di %{amount} per "%{note}" da %{user}.
+
+        Siete pregati di depositare il vostro conto il prima possibile.
+
+
+        Gentili saluti da %{foodcoop}.
+    not_enough_users_assigned:
+      subject: '"%{task}" ha ancora bisogno di persone!'
+      text: |
+        Caro %{user},
+
+        L'Attività '%{task}' del tuo gruppo di lavoro scadrà il %{when},
+        e potrebbe aver bisogno di qualche altro contributo!
+
+        Se non ti sei ancora impegnato in quest'attività, ora è la tua occasione:
+
+        %{workgroup_tasks_url}
+
+        Le Tue Attività: %{user_tasks_url}
+    order_result:
+      subject: 'Ordine chiuso: %{name}'
+      text0: |
+        Caro %{ordergroup},
+
+        L'ordine per "%{order}" è stato chiuso da %{user} il %{when}.
+      text1: |
+        Può esser presumibile che sia raccolto il %{pickup}.
+      text2: |
+        I seguenti articoli sono stati ordinati per il tuo gruppo d'ordine:
+      text3: |-
+        Somma Totale: %{sum}
+
+        Puoi visualizzare l'ordine online: %{order_url}
+
+        Gentili saluti da %{foodcoop}.
+    order_received:
+      subject: 'Consegna dell''ordine registrata: %{name}'
+      text0: |
+        Caro %{ordergroup},
+
+        l'ordine per "%{order}" è stato ricevuto.
+      abundant_articles: Ricevuto troppi
+      scarce_articles: Ricevuto troppi pochi
+      article_details: |
+        %{name}:
+        -- Ordinati: %{ordered} x %{unit}
+        -- Ricevuti: %{received} x %{unit}
+    order_result_supplier:
+      subject: Nuovo ordine per %{name}
+      text: |
+        Ciao!
+
+        La Foodcoop %{foodcoop} vorrebbe effettuare un ordine.
+
+        Sei pregato di trovare un PDF e foglio di calcolo allegato.
+
+        Gentili saluti,
+        %{user}
+        %{foodcoop}
+    reset_password:
+      subject: Nuova password per %{username}
+      text: |
+        Ciao %{user},
+
+        Hai (o qualcun'altro ha) richiesto una nuova password.
+        Per sceglierne una nuova segui questo link: %{link}
+        Questo link funziona solo una volta e scade il %{expires}.
+        Se non vuoi cambiare la password, basta ignorare questo messaggio. La tua password non è ancora stata cambiata.
+
+        Saluti, il tuo Team di Foodsoft!
+    upcoming_tasks:
+      nextweek: 'Attività per la prossima settimana:'
+      subject: Attività in scadenza!
+      text0: |
+        Caro %{user},
+
+        Sei assegnato all'attività "%{task}". Quest'attività è in scadenza domani (%{when})!
+      text1: |
+        Le mie attività: %{user_tasks_url}
+
+
+        Gentili saluti da %{foodcoop}.
+    welcome:
+      subject: Benvenuto alla Foodcoop
+      text0: |
+        Caro %{user},
+
+        è stato creato per te un nuovo profilo di Foodsoft.
+      text1: |
+        Per scegliere una nuova password segui questo link: %{link}
+        Questo link funziona solo una volta e scade il %{expires}.
+        Puoi sempre usare "Hai dimenticato la password?" per ottenerne uno nuovo.
+
+        Gentili saluti da %{foodcoop}.
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Risposta: %{reply_url}
+        Vedi messaggio online: %{msg_url}
+        Opzioni di messaggistica: %{profile_url}
+      footer_group: |
+        Inviato al gruppo: %{group}
   model:
     delivery:
       each_stock_article_must_be_unique: Ogni articolo a magazzino non deve essere elencato più di una volta.
+    financial_transaction:
+      foodcoop_name: Foodcoop
+    financial_transaction_type:
+      no_delete_last: Almeno un tipo di transazione finanziaria deve esistere.
     group_order:
       stock_ordergroup_name: Magazzino (%{user})
+    invoice:
+      invalid_mime: ha un tipo di MIME non valido (%{mime})
+    membership:
+      no_admin_delete: L'appartenenza non è ritirabile in quanto sei l'ultimo amministratore.
+    order_article:
+      error_price: dev'esser specificato e avere un prezzo corrente
     user:
       no_ordergroup: nessun gruppo d'ordine
+    group_order_article:
+      order_closed: Ordine chiuso e non modificabile
   navigation:
+    admin:
+      config: Configurazione
+      finance: Finanze
+      home: Panoramica
+      mail_delivery_status: Problemi di email
+      ordergroups: Gruppi d'ordine
+      title: Amministrazione
+      users: Utenti
+      workgroups: Gruppi d'ordine
     articles:
+      categories: Categorie
       stock: Magazzino
+      suppliers: Fornitori/articoli
+      title: Articoli
+    dashboard: Pannello di controllo
     finances:
       accounts: Gestione account
+      balancing: Ordini del conto
+      bank_accounts: Conti Bancari
+      home: Panoramica
+      invoices: Fatture
+      title: Finanze
+    foodcoop: Foodcoop
+    members: Membri
+    ordergroups: Gruppi d'ordine
+    orders:
+      archive: I Miei Ordini
+      manage: Gestisci ordini
+      ordering: Effettua l'ordine!
+      pickups: Giorni di ritiro
+      title: Ordini
+    tasks: Attività
+    workgroups: Gruppi di lavoro
   number:
     percentage:
       format:
@@ -782,23 +1419,249 @@ it:
   order_articles:
     edit:
       stock_alert: Il prezzo degli articolo a magazzino non può essere cambiato!
-  orders:
-    form:
-      stockit: A magazzino
+      title: Aggiorna articolo
+    new:
+      title: Aggiungi articolo consegnato all'ordine
+  ordergroups:
+    edit:
+      title: Modifica gruppi d'ordine
+    index:
+      title: Gruppi d'ordine
     model:
+      error_single_group: "%{user} è già membro di un altro gruppo d'ordine"
+      invalid_balance: non è un numero valido
+  orders:
+    articles:
+      article_count: 'Articoli ordinati:'
+      prices: Prezzo netto/lordo
+      prices_sum: 'Somma (prezzo netto/lordo):'
+      units_full: Unità complete
+      units_ordered: Unità ordinate
+    create:
+      notice: L'ordine è stato creato.
+    edit:
+      title: 'Modifica ordine: %{name}'
+    edit_amount:
+      field_locked_title: La distribuzione di questo articolo tra gruppi d'ordine è stata cambiata manualmente. Questo campo è bloccato per proteggere queste modifiche. Per ridistribuire e sovrascrivere queste modifiche, premi il pulsante sblocca e cambia l'importo.
+      field_unlocked_title: La distribuzione di questo articolo tra i gruppi d'ordine è stata modificata manualmente. Quando modifichi l'importo, queste modifiche manuali saranno sovrascritte.
+    edit_amounts:
+      no_articles_available: Nessun articolo da aggiungere.
+      set_all_to_zero: Imposta tutto a zero
+    fax:
+      amount: Importo
+      articles: Articoli
+      delivery_day: Giorno di consegna
+      heading: Ordine per %{name}
+      name: Nome
+      number: Numero
+      to_address: Indirizzo di spedizione
+    finish:
+      notice: L'ordine è stato chiuso.
+    form:
+      ignore_warnings: Ignora avvisi
+      prices: Prezzi (netto/FC)
+      select_all: Seleziona tutto
+      stockit: A magazzino
+      title: Articolo
+    index:
+      action_end: Chiudi
+      action_receive: Ricevi
+      confirm_delete: Vuoi davvero eliminare l'ordine?
+      confirm_end: Vuoi davvero chiudere l'ordine %{order}? Non si torna indietro.
+      new_order: Crea nuovo ordine
+      no_open_or_finished_orders: Correntemente non ci sono ordini aperti o chiusi.
+      orders_finished: Chiuso
+      orders_open: Aperto
+      orders_settled: Regolato
+      title: Gestisci ordini
+    model:
+      close_direct_message: Ordine regolato senza addebitare i conti dei membri.
+      error_boxfill_before_ends: deve essere dopo la data di riempimento della scatola (o rimarrà vuota)
+      error_closed: Ordine già regolato
+      error_nosel: Almeno un articolo dev'esser selezionato. Potresti invece voler eliminare l'ordine?
+      error_starts_before_boxfill: deve essere dopo la data di inizio (o rimarrà vuoto)
+      error_starts_before_ends: deve essere dopo la data di inizio (o rimarrà vuoto)
+      notice_close: 'Ordine: %{name}, fino a %{ends}'
       stock: Magazzino
+      warning_ordered: 'Attenzione: gli articoli segnati in rosso sono già stati ordinati entro quest''ordine aperto. Se li deselezioni qui, tutti gli ordini esistenti di questi articoli saranno eliminati. Per procedere, conferma sotto.'
       warning_ordered_stock: 'Attenzione: gli articoli marcati in rosso sono già stati ordinati/comperati dentro questo ordine aperto a magazzino. Se qui li si deseleziona, tutti gli ordini/acquisti esistenti di questi articoli verranno cancellati e non verranno contabilizzati. Confermare sotto per procedere.'
+    new:
+      title: Crea nuovo ordine
     receive:
+      add_article: Aggiungi articolo
+      consider_member_tolerance: considera tolleranza
+      notice: 'Ordine ricevuto: %{msg}'
+      notice_none: Nessun nuovo articolo da ricevere
+      paragraph: Se la quantità ordinata e ricevuta è uguale, i campi corrispondenti possono essere vuoti. È comunque ancora buona pratica inserire tutti i campi, poiché questo fornisce un modo semplice di verificare che tutti gli articoli siano stati controllati.
       rest_to_stock: rimanente a magazzino
+      submit: Ricevi ordine
+      surplus_options: 'Opzioni di distribuzione:'
+      title: Ricezione di %{order}
+    send_to_supplier:
+      notice: L'ordine è stato inviato al fornitore.
     show:
+      action_end: Chiudi!
+      amounts: 'Somma netta/lorda:'
+      articles: Panoramica dell'articolo
+      articles_ordered: 'Articoli ordinati:'
+      comments:
+        title: Commenti
+      comments_link: Commenti
+      confirm_delete: Vuoi davvero eliminare l'ordine?
+      confirm_end: |-
+        Vuoi davvero eliminare l'ordine %{order}?
+        Non si torna indietro.
+      confirm_send_to_supplier: L'ordine è stato già inviato al fornitore il %{when}. Vuoi davvero reinviarlo?
+      create_invoice: Aggiungi fattura
+      description1_order: "%{state} ordine da %{supplier} aperto da %{who},"
+      description1_period:
+        pickup: e ritirabile il %{pickup}
+        starts: apri da %{starts}
+        starts_ends: apri da %{starts} fino a %{ends}
+      description2: "%{ordergroups} hanno ordinato %{article_count} articoli, con un valore totale di %{net_sum} / %{gross_sum} (netto / lordo)."
+      group_orders: 'Ordini del gruppo:'
+      search_placeholder:
+        articles: Cerca articoli...
+        default: Cerca articoli...
+        groups: Cerca gruppi d'ordine...
+      search_reset: Ripristina la ricerca
+      send_to_supplier: Invia al fornitore
+      show_invoice: Mostra fattura
+      sort_article: Ordinati in articoli
+      sort_group: Ordinati in gruppi
       stock_order: Ordine a magazzino
+      title: 'Ordine: %{name}'
+      warn_not_closed: Attenzione, l'ordine non è ancora regolato.
+    state:
+      closed: regolato
+      finished: chiuso
+      open: aperto
+    update:
+      notice: L'ordine è stato aggiornato.
+    update_order_amounts:
+      msg1: "%{count} articoli (%{units} unità) aggiornati"
+      msg2: "%{count} (%{units}) usando la tolleranza"
+      msg4: "%{count} (%{units}) rimanenti"
+  pickups:
+    document:
+      empty_selection: Almeno un ordine dev'esser selezionato.
+      filename: Ritiro per %{date}
+      invalid_document: Tipo di documento non valido
+      title: Ritiro per %{date}
+    index:
+      article_pdf: PDF Articolo
+      group_pdf: PDF Gruppo
+      matrix_pdf: PDF Matrice
+      title: Giorni di ritiro
+  sessions:
+    logged_in: Acceduto!
+    logged_out: Disconnesso!
+    login_invalid_email: Indirizzo email o password non validi
+    login_invalid_nick: Nome utente o password non validi
+    new:
+      forgot_password: Hai dimenticato la password?
+      login: Accedi
+      nojs: Attenzione, i cookie e javascript sono stati attivati! Sei pregato di disattivare %{link}.
+      noscript: NoScript
+      title: Accesso di Foodsoft
+  shared:
+    articles:
+      ordered: Ordinati
+      ordered_desc: Numero di articoli come ordinati per membro (importo + tolleranza)
+      received: Ricevuti
+      received_desc: Numero di articoli (che saranno) ricevuti per membro
+    articles_by:
+      price: Prezzo totale
+      price_sum: Somma
+    group:
+      access: Accedi a
+      activated: attivato
+      apple_limit: Limite d'ordine dei punti mela
+      break: da %{start} a %{end}
+      deactivated: disattivato
+    group_form_fields:
+      search: Cerca...
+      search_user: Cerca utente
+      user_not_found: Nessun utente trovato
+    open_orders:
+      no_open_orders: Nessun ordine corrente
+      not_enough_apples: Attenzione, il tuo gruppo d'ordine ha troppi pochi punti mela per effettuare un ordine!
+      title: Ordini correnti
+      total_sum: Somma totale
+      who_ordered: Chi ha ordinato?
+    order_download_button:
+      article_pdf: PDF dell'Articolo
+      download_file: Scarica file
+      fax_csv: CSV Fax
+      fax_pdf: PDF Fax
+      fax_txt: Testo fax
+      group_pdf: PDF del Gruppo
+      matrix_pdf: PDF Matrice
+      title: Scarica
+    task_list:
+      accept_task: Accetta attività
+      done: Fatto
+      done_q: Fatto?
+      mark_done: Segna attività come fatta
+      reject_task: Rifiuta attività
+      who: Chi lo sta facendo?
+      who_hint: "(Quanto serve ancora?)"
+    user_form_fields:
+      contact_address_hint: L'indirizzo del tuo gruppo d'ordine. Se lo aggiorni, cambia anche per gli altri membri del gruppo d'ordine.
+      messagegroups: Unisciti o abbandona i gruppi di messaggio
+    workgroup_members:
+      title: Appartenenza al gruppo
   simple_form:
+    error_notification:
+      default_message: Errori trovati. Sei pregato di controllare il modulo.
     hints:
+      article:
+        unit: es. KG o 1L o 500g
+      article_category:
+        description: elenco separato da virgole di nomi di categorie riconosciuti all'importazione/sincronizzazione
+      order_article:
+        units_to_order: Se cambi la quantità totale di unità consegnate, dovrai anche cambiare le quantità singole del gruppo cliccando sul nome dell'articolo. Non saranno ricalcolate automaticamente e quindi i gruppi d'ordine potrebbero esser addebitati per articoli non consegnati!
+        update_global_price: Aggiorna anche il prezzo di ordini futuri
       stock_article:
         copy:
           name: Prego modificare
         edit_stock_article:
           price: "<ul><li>I cambiamenti di prezzo sono vietati.</li><li>Se necessario, %{stock_article_copy_link}.</li></ul>"
+      supplier:
+        min_order_quantity: La quantità minima da ordinare sarà mostrata durante il processo d'ordine e dovrebbe motivare l'ordine
+      task:
+        duration: Quanto durerà l'attività, da 1 a 3 ore
+        required_users: Quanti utenti sono necessari in totale?
+      tax: In percentuale, standard è 7,0
+    labels:
+      settings:
+        notify:
+          negative_balance: Informami quando il mio gruppo d'ordine ha un saldo negativo.
+          order_finished: Informami del risultato del mio ordine (quando l'ordine è chiuso).
+          order_received: Informami dei dettagli di consegna (dopo la ricezione dell'ordine).
+          upcoming_tasks: Ricordami delle attività in arrivo.
+        profile:
+          email_is_public: Email visibile agli altri membri.
+          language: Lingua
+          name_is_public: Nome visibile agli altri membri.
+          phone_is_public: Numero di telefono visibile agli altri membri.
+        settings_group:
+          messages: Messaggi
+          privacy: Privacy
+    'no': 'No'
+    options:
+      settings:
+        profile:
+          language:
+            de: Tedesco
+            en: Inglese
+            es: Spagnolo
+            fr: Francese
+            nl: Olandese
+    required:
+      mark: "*"
+      text: richiesto
+    'yes': 'Sì'
   stock_takings:
     create:
       notice: L'inventario è stato creato con successo.
@@ -812,6 +1675,7 @@ it:
       create: crea
       stock_articles: Articoli a magazzino
       temp_inventory: inventario temporaneo
+      text_deviations: Sei pregato di compilare tutte le deviazioni in eccesso da %{inv_link}. Per la riduzione, usa un numero negativo.
       text_need_articles: Devi %{create_link} un nuovo articolo a magazzino prima di poterlo usare qui.
       title: Crea un nuovo inventario
     show:
@@ -819,6 +1683,7 @@ it:
       article: Articolo
       confirm_delete: Sei sicuro di voler cancellare l'inventario?
       date: Data
+      note: Nota
       overview: Panoramica inventario
       supplier: Fornitore
       title: Mostra inventario
@@ -826,6 +1691,7 @@ it:
     stock_takings:
       confirm_delete: Sicuro di voler cancellare questo?
       date: Data
+      note: Nota
     update:
       notice: L'inventario è stato aggiornato.
   stockit:
@@ -867,6 +1733,131 @@ it:
       stock_changes: Cambiamenti quantità magazzino
     update:
       notice: L'articolo a magazzino %{name} è stato salvato.
+  suppliers:
+    create:
+      notice: Il fornitore è stato creato
+    destroy:
+      notice: Il fornitore è stato eliminato
+    edit:
+      title: Modifica fornitore
+    index:
+      action_import: Importa fornitore dal database esterno
+      action_new: Crea nuovo fornitore
+      articles: articoli (%{count})
+      confirm_del: Vuoi davvero eliminare il fornitore %{name}?
+      deliveries: consegne (%{count})
+      stock: in magazzino (%{count})
+      title: Fornitori
+    new:
+      title: Nuovo fornitore
+    shared_supplier_methods:
+      all_available: Tutti gli articoli (nuovi disponibili)
+      all_unavailable: Tutti gli articoli (nuovi non disponibili)
+      import: Scegli articoli da importare
+    shared_supplier_note: Fornitore connesso al database esterno.
+    shared_suppliers:
+      body: "<p>I fornitori del database esterno sono mostrati qui.</p> <p>Puoi importare i fornitori esterni iscrivendoli (vedi sotto).</p> <p>Un nuovo fornitore sarà creato e connesso al database esterno.</p>"
+      subscribe: Iscrivi
+      subscribe_again: Iscrivi di nuovo
+      supplier: Fornitore
+      title: Elenchi esterni
+    show:
+      last_deliveries: Consegne recenti
+      last_orders: Ultimi ordini
+      new_delivery: Nuova consegna
+      show_deliveries: Mostra tutto
+    update:
+      notice: Fornitore aggiornato
+  tasks:
+    accept:
+      notice: Hai accettato l'attività
+    archive:
+      title: Archivio dell'attività
+    create:
+      notice: L'attività è stata creata
+    destroy:
+      notice: L'attività è stata eliminata
+    edit:
+      submit_periodic: Salva attività ricorrente
+      title: Modifica attività
+      title_periodic: Modifica attività ricorrente
+      warning_periodic: "<strong>Attenzione:</strong> Quest'attività è parte di un gruppo di <em>attività ricorrenti</em>. Salvandola sarà esclusa dal gruppo e convertita in un'<em>attività regolare</em>."
+    error_not_found: Nessun gruppo di lavoro trovato
+    form:
+      search:
+        hint: Cerca per utente
+        noresult: Nessun utente trovato
+        placeholder: Cerca...
+      submit:
+        periodic: Salva attività ricorrente
+    index:
+      show_group_tasks: Mostra attività di gruppo
+      title: Attività
+      title_non_group: Attività per tutti!
+    nav:
+      all_tasks: Tutte le attività
+      archive: Attività completate (archivio)
+      group_tasks: Attività di gruppo
+      my_tasks: Le mie attività
+      new_task: Crea nuova attività
+      pages: Pagine
+    new:
+      submit_periodic: Crea attività ricorrente
+      title: Crea nuova attività
+    repeated: L'attività è ricorrente
+    set_done:
+      notice: Lo stato dell'attività è stato aggiornato
+    show:
+      accept_task: Accetta attività
+      confirm_delete_group: Eliminare davvero questa e tutte le attività successive?
+      confirm_delete_single: Sei sicuro di voler eliminare l'attività?
+      confirm_delete_single_from_group: Sei sicuro di voler eliminare quest'attività (e mantenere quelle ricorrenti correlate)?
+      delete_group: Elimina attività e successive
+      edit_group: Modifica ricorrente
+      hours: "%{count}h"
+      mark_done: Segna attività come fatta
+      reject_task: Rifiuta attività
+      title: Mostra attività
+    update:
+      notice: L'attività è stata aggiornata
+      notice_converted: L'attività è stata aggiornata e convertita in una non ripetuta.
+    user:
+      more: Niente da fare? %{tasks_link} sono sicuramente attività.
+      tasks_link: Qui
+      title: Le mie attività
+      title_accepted: Attività accettate
+      title_open: Apri attività
+    workgroup:
+      title: Attività per %{workgroup}
+      title_all: Tutte le attività del gruppo
+  ui:
+    actions: Azioni
+    back: Indietro
+    cancel: Annulla
+    close: Chiudi
+    confirm_delete: Vuoi davvero eliminare %{name}?
+    confirm_restore: Vuoi davvero ripristinare %{name}?
+    copy: Copia
+    delete: Elimina
+    download: Scarica
+    edit: Modifica
+    marks:
+      close: "&times;"
+      success: <i class="icon icon-ok"></i>
+    move: Sposta
+    or_cancel: o annulla
+    please_wait: Sei pregato d'attendere...
+    restore: Ripristina
+    save: Salva
+    search_placeholder: Cerca...
+    show: Mostra
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      next: "&rsaquo;"
+      previous: "&lsaquo;"
+      truncate: "..."
   workgroups:
     edit:
       title: Modifica il gruppo di lavoro
