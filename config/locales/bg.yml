@@ -15,8 +15,6 @@ bg:
         name: Име
       article_price:
         deposit: Депозит
-      delivery:
-        delivered_on: Дата на доставка
     models:
       delivery: Доставка
       financial_transaction: Финансова транзакция
