@@ -283,7 +283,7 @@ es:
         all_ordergroups: Todos los grupos de pedido
         all_users: Todos los usuarios
         all_workgroups: Todos los grupos de trabajo
-        created_at: creado 
+        created_at: creado
         first_paragraph: Aquí puedes administrar grupos y usuarios de Foodsoft.
         groupname: nombre del grupo
         members: miembros
@@ -567,7 +567,7 @@ es:
         status: Estado (x=saltar)
       file_label: Por favor elige un archivo compatible
       options:
-        convert_units: Mantener unidades actuales, recomputar la cantidad y precio de unidades (como sincronizar). 
+        convert_units: Mantener unidades actuales, recomputar la cantidad y precio de unidades (como sincronizar).
         outlist_absent: Borrar artículos que no están en el archivo subido.
       sample:
         juices: Jugos
@@ -656,6 +656,7 @@ es:
       default_role_pickups: Días de recogida
       default_role_suppliers: Proveedores
       disable_invite: Desactivar invitaciones
+      disable_members_overview: Desactivar la lista de miembros
       email_from: Dirección de email de origen
       email_replyto: Dirección reply-to
       email_sender: Dirección del remitente
@@ -1144,7 +1145,7 @@ es:
     index:
       due_date_format: "%A %d %B"
       my_ordergroup:
-        last_update: La última actualización fue hace %{when} 
+        last_update: La última actualización fue hace %{when}
         title: Mi grupo de pedido
         transactions:
           title: Últimas transacciones
@@ -1218,12 +1219,15 @@ es:
   js:
     ordering:
       confirm_change: Las modificaciones sobre este pedido se perderán cuando cambies el pedido. ¿Quieres perder los cambios que has hecho y continuar?
+    trix_editor:
+      file_size_alert: '¡El archivo adjunto es demasiado grande!  El tamaño máximo es de 512Mb'
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Ayuda: %{url}'
+      help: 'Ayuda'
     foodsoft: Foodsoft
     footer:
       revision: revisión %{revision}
@@ -1252,7 +1256,7 @@ es:
       error_invite_invalid: Tu invitación no es válida.
       error_token_invalid: La sesión ha expirado o no es válida. Prueba de nuevo.
       reset_password:
-        notice: Si tu email está ya registrado aquí, recibirás un mensaje con un enlace para 
+        notice: Si tu email está ya registrado aquí, recibirás un mensaje con un enlace para
       update_password:
         notice: Tu contraseña ha sido actualizada. Prueba a conectarte ahora.
     forgot_password:
@@ -1693,6 +1697,7 @@ es:
             es: Español
             fr: Francés
             nl: Neerlandés
+            tr: Turco
     required:
       mark: "*"
       text: requerido
@@ -1735,7 +1740,7 @@ es:
     copy:
       title: Copia artículo de stock
     create:
-      notice: Se ha creado el nuevo producto en stock  "%{name}" 
+      notice: Se ha creado el nuevo producto en stock  "%{name}"
     derive:
       title: Añade un artículo en stock desde plantilla
     destroy:
@@ -1846,7 +1851,7 @@ es:
       accept_task: Aceptar tarea
       confirm_delete_group: Estás seguro/a de que quieres borrar esta tarea y todas las tareas subsecuentes?
       confirm_delete_single: Estás seguro/a de que quieres borrar esta tarea?
-      confirm_delete_single_from_group: Estás seguro/a de que quieres borrar esta tarea (y mantener las tareas recurrentes relacionadas)? 
+      confirm_delete_single_from_group: Estás seguro/a de que quieres borrar esta tarea (y mantener las tareas recurrentes relacionadas)?
       delete_group: Borrar esta tarea y las subsecuentes
       edit_group: Edita recurrencia
       hours: "%{count}h"
@@ -1902,3 +1907,6 @@ es:
       title: Grupos de trabajo
     update:
       notice: El grupo de trabajo se actualizó.
+  time:
+    formats:
+      foodsoft_datetime: "%d/%b/%Y %H:%M"
