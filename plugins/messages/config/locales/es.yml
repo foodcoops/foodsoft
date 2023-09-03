@@ -59,6 +59,7 @@ es:
       write_message: Escribir un mensaje
   messagegroups:
     index:
+      body: 'Un grupo de mensajes es como una lista de correo: puedes unirte (o salir) a cualquiera de ellos para recibir las actualizaciones enviadas a ese grupo.'
       title: Grupos de mensaje
     join:
       error: 'No pudo unirse al grupo de mensaje: %{error}'
@@ -72,27 +73,38 @@ es:
   messages:
     actionbar:
       message_threads: Muestra como hilos
+      messagegroups: Suscribirse a este grupo
       messages: Muestra como lista
       new: Nuevo mensaje
+    create:
+      notice: El mensaje ha sido guardado y será enviado.
     index:
       title: Mensajes
     messages:
       reply: Responde
+    model:
+      reply_header: ! '%{user} escribió en %{when}:'
+      reply_indent: ! '> %{line}'
+      reply_subject: ! 'Re: %{subject}'
     new:
       error_private: Lo siento, este mensaje es privado.
+      hint_private: El mensaje no se muestra en el buzón de correo Foodsoft
       list:
         desc: ! 'Envía mensajes a todos los miembros a través de la lista de correo: %{list}'
         mail: por ejemplo con un email a %{email}.
         subscribe: Puedes leer más sobre la lista de correos en %{link}.
         subscribe_msg: Quizás tengas que suscribirte a la lista primero.
+        wiki: Wiki (lista de correo de páginas)
       message: mensaje
       no_user_found: No se ha encontrado el usuario
+      order_item: "%{supplier_name} (Recoger: %{pickup})"
       reply_to: Este mensaje es una respuesta a otro %{link}.
       search: Busca ...
       search_user: Busca usuario
       title: Nuevo mensaje
     show:
       all_messages: Todos los mensajes
+      change_visibility: 'Cambiar'
       from: ! 'De:'
       group: 'Grupo:'
       reply: Responde
@@ -101,19 +113,35 @@ es:
       subject: ! 'Asunto:'
       title: Muestra mensaje
       to: 'A:'
+      visibility: 'Visibilidad:'
+      visibility_private: 'Privado'
+      visibility_public: 'Público'
     thread:
       all_message_threads: Todos los hilos de mensaje
       reply: Responde
+    toggle_private:
+      not_allowed: No puede cambiar la visibilidad del mensaje.
   message_threads:
     groupmessage_threads:
       show_message_threads: muestra todos
     index:
+      general: General
       title: Hilos de mensaje
     message_threads:
       last_reply_at: Última respuesta el
       last_reply_by: Última respuesta de 
       started_at: Comenzado el
       started_by: Comenzado por
+    show:
+      general: General
+  messages_mailer:
+    foodsoft_message:
+      footer: |
+        Respuesta: %{reply_url}
+        Ver mensaje en línea: %{msg_url}
+        Opciones de mensaje: %{profile_url}
+      footer_group: |
+        Enviado al grupo: %{group}
   navigation:
     admin:
       messagegroups: Grupos de mensaje
