@@ -129,7 +129,7 @@ es:
       title: Hilos de mensaje
     message_threads:
       last_reply_at: Última respuesta el
-      last_reply_by: Última respuesta de 
+      last_reply_by: Última respuesta de
       started_at: Comenzado el
       started_by: Comenzado por
     show:
