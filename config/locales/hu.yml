@@ -31,7 +31,6 @@ hu:
         tax: Adó
         unit_quantity: Mennyiségi egység
       delivery:
-        delivered_on: Szállítási határidő
         note: Jegyzet
         supplier: Szállitó
       financial_transaction:
@@ -43,7 +42,6 @@ hu:
       invoice:
         amount: Összeg
         date: Számlázási dátum
-        deliveries: Szállítás
         deposit: Fizetett előleg
         deposit_credit: Visszafizetett előleg
         note: Jegyzet
