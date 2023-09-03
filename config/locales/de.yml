@@ -40,7 +40,10 @@ de:
         iban: IBAN
         name: Name
       bank_gateway:
+        authorization: Authorization-Header
+        name: Name
         unattended_user: Bedienerlos-Benutzer_in
+        url: URL
       bank_transaction:
         amount: Betrag
         date: Datum
@@ -191,7 +194,9 @@ de:
         shared_sync_method: Syncronisierungsmethode
         url: Webseite
       supplier_category:
+        name: Name
         description: Beschreibung
+        financial_transaction_class: Kontotransaktionsklasse
         bank_account: Bankkonto
       task:
         created_by: Erstellt von
@@ -651,6 +656,7 @@ de:
       default_role_pickups: Abholtage
       default_role_suppliers: Lieferanten
       disable_invite: Einladungen deaktivieren
+      disable_members_overview: Mitgliederliste deaktivieren
       email_from: Absenderadresse
       email_replyto: Antwortadresse
       email_sender: Senderadresse
@@ -1213,12 +1219,15 @@ de:
   js:
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
+    trix_editor:
+      file_size_alert: Der Dateianhang ist zu groß! Die maximale Größe beträgt 512Mb
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
+      help: 'Hilfe'
     foodsoft: Foodsoft
     footer:
       revision: Revision %{revision}
@@ -1685,6 +1694,7 @@ de:
             es: Spanisch
             fr: Französisch
             nl: Niederländisch
+            tr: Türkisch
     required:
       mark: "*"
       text: benötigt
@@ -1894,3 +1904,6 @@ de:
       title: Arbeitsgruppen
     update:
       notice: Arbeitsgruppe wurde aktualisiert
+  time:
+    formats:
+      foodsoft_datetime: "%d.%m.%Y %H:%M"
