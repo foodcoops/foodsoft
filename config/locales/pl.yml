@@ -20,6 +20,7 @@ pl:
         origin: Źródło
         price: Cena (netto)
         supplier: Dostawca
+        tax: VAT
         unit: Jedn.
         unit_quantity: Ilość
         unit_quantity_short: Ilość
@@ -30,9 +31,14 @@ pl:
       article_price:
         deposit: Kaucja
         price: Cena (netto)
+        tax: VAT
         unit_quantity: Ilość
+      bank_account:
+        balance: Saldo
+        description: Opis
+        iban: IBAN
+        name: Nazwa
       delivery:
-        delivered_on: Data dostawy
         note: Uwaga
         supplier: Dostawca
       financial_transaction:
@@ -52,7 +58,6 @@ pl:
       invoice:
         amount: Kwota
         date: Data kasowania
-        deliveries: Dostawa
         deposit: Naliczona kaucja
         deposit_credit: Zwrócona kaucja
         note: Uwaga
