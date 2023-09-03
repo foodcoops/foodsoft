@@ -32,15 +32,19 @@ fr:
         price: Prix HT
         tax: TVA
         unit_quantity: Unités par lot
+      bank_transaction:
+        iban: IBAN
       delivery:
-        delivered_on: Date de réapprovisionnement
+        date: Date de réapprovisionnement
         supplier: Fournisseur-e
       document:
         created_at: Créé le
         created_by: Crée par
+        mime: Type MIME
         name: Nom
       financial_transaction:
         amount: Montant
+        created_on: Date
         ordergroup: Cellule
         user: Créateur-trice
       group_order:
@@ -62,7 +66,7 @@ fr:
         created_by: Établi par
         date: Date de facturation
         delete_attachment: Supprimer appendice
-        deliveries: Réapprovisionnement
+        deliveries: Réapprovisionnement en cellier
         deposit: Consigne facturée
         deposit_credit: Consigne remboursée
         net_amount: Montant recalculé en excluant les consignes
@@ -403,6 +407,7 @@ fr:
     hints:
       homepage: Site de votre coop.
       name: Le nom de votre coop.
+      distribution_strategy: Comment procéder à la distribution des articles après réception d'une commande.
     keys:
       contact:
         city: Ville
@@ -413,6 +418,10 @@ fr:
         zip_code: Code postal
       currency_unit: Monnaie
       name: Nom
+      distribution_strategy: Stratégie de distribution
+      distribution_strategy_options:
+        first_order_first_serve: Distribuez d'abord à ceux qui ont commandé en premier
+        no_automatic_distribution: Pas de distribution automatique
     tabs:
       language: Langue
       list: Liste
@@ -1084,6 +1093,7 @@ fr:
       closed: décomptée
       finished: clôturée
       open: en cours
+      received: reçu
     update:
       notice: La commande a été mise à jour.
     update_order_amounts:
