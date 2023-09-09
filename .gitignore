@@ -9,6 +9,7 @@ public/system
 public/uploads
 storage
 vendor/bundle
+swagger
 
 # no configuration
 config/*.yml

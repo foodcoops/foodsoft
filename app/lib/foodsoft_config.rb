@@ -116,7 +116,7 @@ class FoodsoftConfig
     # @param key [String, Symbol]
     # @return [Object] Value of the key.
     def [](key)
-      if RailsSettings::CachedSettings.table_exists? && allowed_key?(key)
+      if ActiveRecord::Base.connected? && RailsSettings::CachedSettings.table_exists? && allowed_key?(key)
         value = RailsSettings::CachedSettings["foodcoop.#{scope}.#{key}"]
         value = config[key] if value.nil?
         value

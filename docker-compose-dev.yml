@@ -10,12 +10,12 @@ services:
   foodsoft_worker:
     build:
       context: .
-      dockerfile: Dockerfile-dev
+      target: development
     platform: linux/x86_64
     command: ./proc-start worker
     volumes:
       - bundle:/usr/local/bundle
-      - .:/app
+      - .:/usr/src/app
     environment:
       - DATABASE_URL=mysql2://root:secret@mariadb/development?encoding=utf8mb4
       - REDIS_URL=redis://redis:6379
