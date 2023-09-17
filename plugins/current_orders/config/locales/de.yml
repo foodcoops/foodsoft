@@ -10,6 +10,7 @@ de:
         counts: '%{ordergroups} Bestellgruppen bestellten %{articles} verschiedene Produkte.'
         no_selection: Wähle einen Artikel, um anzuzeigen wer ihn bestellt hat oder downloade eine Abholliste rechts.
       article_info:
+        origin_in: in %{origin}
         supplied_by: von %{supplier}
         supplied_and_made_by: produziert von %{manufacturer}
         supplied_by_made_by: von %{supplier} produziert von %{manufacturer}
@@ -24,6 +25,8 @@ de:
         piece: St.
         unit: Einheit
         add_new: Bestellgruppe hinzufügen
+      show:
+        title: ! '%{name}'
     navigation:
       receive: In Empfang nehmen
       articles: Verteilen
@@ -41,6 +44,7 @@ de:
         title: Artikel für Bestellgruppe
       payment_bar:
         account_balance: Kontostand
+        new_pin: PIN
         new_transaction: Neue Transaktion
         payment: ! 'Zahlung:'
       show:

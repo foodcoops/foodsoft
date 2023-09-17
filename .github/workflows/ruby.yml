@@ -35,7 +35,9 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Setup chromedriver
-        uses: nanasess/setup-chromedriver@v1.0.1
+        uses: nanasess/setup-chromedriver@v2
+        with:
+          chromedriver-version: '115.0.5790.170' # https://github.com/nanasess/setup-chromedriver/issues/200
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:

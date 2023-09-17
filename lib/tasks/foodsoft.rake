@@ -1,6 +1,6 @@
 # put in here all foodsoft tasks
 # => :environment loads the environment an gives easy access to the application
-namespace :foodsoft do
+namespace :foodsoft do # rubocop:disable Metrics/BlockLength
   desc 'Finish ended orders'
   task finish_ended_orders: :environment do
     Order.finish_ended!
@@ -77,6 +77,19 @@ namespace :foodsoft do
       importer.finish
       assign_count = ba.assign_unlinked_transactions
       rake_say "#{ba.name}: imported #{importer.count}, assigned #{assign_count}"
+    end
+  end
+
+  desc 'Prune attachments older than maximum age'
+  task prune_old_attachments: :environment do
+    if FoodsoftConfig[:attachment_retention_days]
+      rake_say "Pruning attachments older than #{FoodsoftConfig[:attachment_retention_days]} days"
+      ActiveStorage::Attachment.where("created_at < ?", FoodsoftConfig[:attachment_retention_days].days.ago).each do |attachment|
+        rake_say attachment.inspect
+        attachment.purge_later
+      end
+    else
+      rake_say "Please configure your app_config.yml accordingly:\nattachment_retention_days: <number of days>"
     end
   end
 end

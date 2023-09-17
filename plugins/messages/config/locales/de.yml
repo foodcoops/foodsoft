@@ -20,6 +20,7 @@ de:
         workgroup_id: Arbeitsgruppe
       messagegroup:
         description: Beschreibung
+        name: Name
         user_tokens: Mitglieder
     models:
       message: Nachricht
@@ -84,6 +85,7 @@ de:
     model:
       reply_header: ! '%{user} schrieb am %{when}:'
       reply_indent: ! '> %{line}'
+      reply_subject: ! 'Re: %{subject}'
     new:
       error_private: Nachricht ist privat!
       hint_private: Nachricht erscheint nicht im Foodsoft Posteingang
@@ -138,6 +140,9 @@ de:
         Antworten: %{reply_url}
         Nachricht online einsehen: %{msg_url}
         Nachrichten-Einstellungen: %{profile_url}
+      reply: Antworten
+      see_message_online: Nachricht online einsehen
+      messaging_options: Nachrichten-Einstellungen
       footer_group: |
         Gesendet an Gruppe: %{group}
   navigation:

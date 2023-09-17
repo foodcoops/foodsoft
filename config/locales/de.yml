@@ -448,6 +448,7 @@ de:
       error_denied_sign_in: als ein anderer Benutzer anmelden
       error_feature_disabled: Diese Funktion ist derzeit nicht aktiviert.
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
+      error_minimum_balance: Ihr Kontostand liegt leider unter dem Minimum von %{min}.
       error_token: Zugriff verweigert (ungültiger Token)!
   article_categories:
     create:
@@ -697,6 +698,7 @@ de:
       applications: Apps
       foodcoop: Foodcoop
       language: Sprache
+      layout: Layout
       list: Liste
       messages: Nachrichten
       others: Sonstiges
@@ -1132,6 +1134,7 @@ de:
         create: Einladung verschicken
     tasks:
       required_users: "Es fehlen %{count} Mitstreiterinnen!"
+      task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
       desc: 'Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop. Konkret: Pro %{amount} Bestellsumme solltest Du eine Aufgabe machen!'
@@ -1216,18 +1219,22 @@ de:
   js:
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
+    trix_editor:
+      file_size_alert: Der Dateianhang ist zu groß! Die maximale Größe beträgt 512Mb
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
+      help: 'Hilfe'
     foodsoft: Foodsoft
     footer:
       revision: Revision %{revision}
     header:
       feedback:
         desc: Fehler gefunden? Vorschlag? Idee? Kritik?
+        title: Feedback
       help: Hilfe
       logout: Abmelden
       ordergroup: Meine Bestellgruppe
@@ -1265,6 +1272,7 @@ de:
     feedback:
       header: "%{user} schrieb am %{date}:"
       subject: Feedback zur Foodsoft
+    from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Einladung in die Foodcoop
       text: |
@@ -1420,6 +1428,7 @@ de:
       stock: Lager
       suppliers: Lieferanten/Artikel
       title: Artikel
+    dashboard: Übersichtsseite
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen
@@ -1427,6 +1436,7 @@ de:
       home: Übersicht
       invoices: Rechnungen
       title: Finanzen
+    foodcoop: Foodcoop
     members: Mitglieder
     ordergroups: Bestellgruppen
     orders:
@@ -1477,6 +1487,7 @@ de:
       articles: Artikel
       delivery_day: Liefertag
       heading: Bestellung für %{name}
+      name: Name
       number: Nummer
       to_address: Versandaddresse
     finish:
@@ -1576,6 +1587,7 @@ de:
     index:
       article_pdf: Artikel PDF
       group_pdf: Gruppen PDF
+      matrix_pdf: Matrix PDF
       title: Abholtage
   sessions:
     logged_in: Angemeldet!
@@ -1586,6 +1598,7 @@ de:
       forgot_password: Passwort vergessen?
       login: Anmelden
       nojs: Achtung, Cookies und Javascript müssen aktiviert sein! %{link} bitte abschalten.
+      noscript: NoScript
       title: Foodsoft anmelden
   shared:
     articles:
@@ -1614,8 +1627,13 @@ de:
       who_ordered: Wer hat bestellt?
     order_download_button:
       article_pdf: Artikel PDF
+      download_file: Datei herunterladen
+      fax_csv: Fax CSV
+      fax_pdf: Fax PDF
       fax_txt: Fax Text
       group_pdf: Gruppen PDF
+      matrix_pdf: Matrix PDF
+      title: Herunterladen
     task_list:
       accept_task: Aufgabe übernehmen
       done: Erledigt
@@ -1672,10 +1690,11 @@ de:
         profile:
           language:
             de: Deutsch
+            en: Englisch
             es: Spanisch
-            tr: Türkisch
             fr: Französisch
             nl: Niederländisch
+            tr: Türkisch
     required:
       mark: "*"
       text: benötigt
@@ -1832,6 +1851,7 @@ de:
       confirm_delete_single_from_group: Bist Du sicher, dass Du diese Aufgabe löschen möchtest (und in Bezug stehende wiederkehrende Aufgabe behalten möchtest)?
       delete_group: Aufgabe und folgende löschen
       edit_group: Wiederkehrende ändern
+      hours: "%{count}h"
       mark_done: Als erledigt markieren
       reject_task: Aufgabe ablehnen
       title: Aufgabe anzeigen
@@ -1858,6 +1878,9 @@ de:
     delete: Löschen
     download: Herunterladen
     edit: Bearbeiten
+    marks:
+      close: "&times;"
+      success: <i class="icon icon-ok"></i>
     move: Verschieben
     or_cancel: oder abbrechen
     please_wait: Bitte warten...
@@ -1867,6 +1890,10 @@ de:
     show: Anzeigen
   views:
     pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      next: "&rsaquo;"
+      previous: "&lsaquo;"
       truncate: "..."
   workgroups:
     edit:

@@ -25,6 +25,18 @@ describe Article do
       expect(article.convert_units(article1)).to be false
     end
 
+    it 'returns false if unit = 0' do
+      article1 = build(:article, supplier: supplier, unit: '1kg', price: 2, unit_quantity: 1)
+      article2 = build(:article, supplier: supplier, unit: '0kg', price: 2, unit_quantity: 1)
+      expect(article1.convert_units(article2)).to be false
+    end
+
+    it 'returns false if unit becomes zero because of , symbol in unit format' do
+      article1 = build(:article, supplier: supplier, unit: '0,8kg', price: 2, unit_quantity: 1)
+      article2 = build(:article, supplier: supplier, unit: '0,9kg', price: 2, unit_quantity: 1)
+      expect(article1.convert_units(article2)).to be false
+    end
+
     it 'converts from ST to KI (german foodcoops legacy)' do
       article1 = build(:article, supplier: supplier, unit: 'ST')
       article2 = build(:article, supplier: supplier, name: 'banana 10-12 St', price: 12.34, unit: 'KI')

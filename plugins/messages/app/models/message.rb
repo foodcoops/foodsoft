@@ -22,6 +22,8 @@ class Message < ApplicationRecord
   validates_presence_of :message_recipients, :subject, :body
   validates_length_of :subject, in: 1..255
 
+  has_rich_text :body
+
   after_initialize do
     @recipients_ids ||= []
     @send_method ||= 'recipients'

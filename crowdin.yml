@@ -1,5 +1,7 @@
 project_id: 357447
 api_token_env: CROWDIN_API_KEY
+preserve_hierarchy: true
+base_path: "."
 files:
   - source: /config/locales/en.yml
     translation: /config/locales/%two_letters_code%.yml

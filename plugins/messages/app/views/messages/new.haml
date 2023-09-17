@@ -110,7 +110,7 @@
     = f.input :recipient_tokens, :input_html => { 'data-pre' => User.where(id: @message.recipients_ids).map(&:token_attributes).to_json }
   = f.input :private, inline_label: t('.hint_private')
   = f.input :subject, input_html: {class: 'input-xxlarge'}
-  = f.input :body, input_html: {class: 'input-xxlarge', rows: 13}
+  = f.rich_text_area :body, input_html: {class: 'input-xxlarge', rows: 13}
   .form-actions
     = f.submit class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), :back
