@@ -143,8 +143,6 @@ default: &defaults
   notification:
     error_recipients:
       - admin@foodcoop.test
-    feedback_recipients:
-      - support@foodcoop.test
     sender_address: "\"Foodsoft Error\" <foodsoft@foodcoop.test>"
     email_prefix: "[Foodsoft]"
 

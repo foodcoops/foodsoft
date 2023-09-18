@@ -779,14 +779,6 @@ nl:
     not_found:
       text: Deze pagina bestaat niet, sorry!
       title: Pagina niet gevonden
-  feedback:
-    create:
-      notice: Bericht verstuurd. Vriendelijk bedankt!
-    new:
-      first_paragraph: Probleem gevonden? Voorstel? Idee? Verbeterpunt? We horen graag je feedback.
-      second_paragraph: Dit bericht wordt verstuurd naar de ontwikkelaars van de bestelsoftware. Voor vragen over de organisatie van je foodcoop kun je je tot de lokale organisatie wenden.
-      send: Verzenden
-      title: Feedback geven
   finance:
     balancing:
       close:
@@ -1232,9 +1224,6 @@ nl:
     footer:
       revision: revisie %{revision}
     header:
-      feedback:
-        desc: Foutje gevonden? Suggesties? Ideeën? Commentaar?
-        title: Feedback
       help: Help
       logout: Uitloggen
       ordergroup: Mijn huishouden
@@ -1269,9 +1258,6 @@ nl:
       title: Nieuw wachtwoord
   mailer:
     dateformat: "%d %b"
-    feedback:
-      header: "%{user} schreef op %{date}:"
-      subject: Feedback van %{email}
     from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Uitnodiging voor de foodcoop
