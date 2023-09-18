@@ -514,7 +514,7 @@ tr:
       already_imported: içe aktarıldı
       not_found: Ürün bulunamadı
     index:
-      change_supplier: Tedarikçi değiştir ...
+      change_supplier: Tedarikçi değiştir
       download: Ürünleri indir
       edit_all: Tümünü düzenle
       ext_db:

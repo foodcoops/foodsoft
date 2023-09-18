@@ -347,7 +347,7 @@ fr:
       already_imported: déjà importé
       not_found: Aucun produit correspondant n'a été trouvé
     index:
-      change_supplier: Changer de fournisseur-e...
+      change_supplier: Changer de fournisseur-e
       edit_all: Tout modifier
       ext_db:
         import: Rechercher/Importer

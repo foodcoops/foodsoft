@@ -514,7 +514,7 @@ en:
       already_imported: imported
       not_found: No articles found
     index:
-      change_supplier: Change supplier ...
+      change_supplier: Change supplier
       download: Download articles
       edit_all: Edit all
       ext_db:
