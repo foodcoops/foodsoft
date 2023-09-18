@@ -779,14 +779,6 @@ de:
     not_found:
       text: Diese Seite existiert anscheinend nicht. Entschuldigung!
       title: Seite nicht gefunden
-  feedback:
-    create:
-      notice: Das Feedback wurde erfolgreich verschickt. Vielen Dank!
-    new:
-      first_paragraph: Fehler gefunden? Vorschlag? Idee? Kritik? Wir freuen uns über jegliches Feedback.
-      second_paragraph: Bitte beachte, dass das Foodsoft Team nur die Software wartet. Bei Fragen zur Organisation in Deiner Foodcoop, kontaktiere besser die entsprechenden Ansprechpartner.
-      send: Absenden
-      title: Gib Feedback
   finance:
     balancing:
       close:
@@ -1232,9 +1224,6 @@ de:
     footer:
       revision: Revision %{revision}
     header:
-      feedback:
-        desc: Fehler gefunden? Vorschlag? Idee? Kritik?
-        title: Feedback
       help: Hilfe
       logout: Abmelden
       ordergroup: Meine Bestellgruppe
@@ -1269,9 +1258,6 @@ de:
       title: Neues Passwort
   mailer:
     dateformat: "%d. %b"
-    feedback:
-      header: "%{user} schrieb am %{date}:"
-      subject: Feedback zur Foodsoft
     from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Einladung in die Foodcoop

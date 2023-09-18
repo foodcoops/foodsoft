@@ -779,14 +779,6 @@ es:
     not_found:
       text: Esta página parece no existir. ¡Lo sentimos!
       title: Página no encontrada
-  feedback:
-    create:
-      notice: Tus comentarios fueron enviados con éxito. ¡Muchas gracias!
-    new:
-      first_paragraph: '¿Encontraste un error? ¿Tienes sugerencias, ideas o comentarios? Nos gustaría recibir tus comentarios.'
-      second_paragraph: Tenga en cuenta que el equipo de Foodsoft es el único responsable del mantenimiento del software. Para preguntas relacionadas con la organización de tu Foodcoop, por favor contacta a la persona de contacto apropiada.
-      send: Enviar
-      title: Enviar comentarios
   finance:
     balancing:
       close:
@@ -1232,9 +1224,6 @@ es:
     footer:
       revision: revisión %{revision}
     header:
-      feedback:
-        desc: '¿Encontrase algún error? ¿Sugerencias? ¿Ideas?'
-        title: Sugerencias
       help: Ayuda
       logout: Salir
       ordergroup: Mis grupos de pedido
@@ -1269,9 +1258,6 @@ es:
       title: Nueva contraseña
   mailer:
     dateformat: "%d %b"
-    feedback:
-      header: "%{user} escribió %{date}:"
-      subject: Comentarios para Foodsoft
     from_via_foodsoft: "%{name} vía Foodsoft"
     invite:
       subject: Invitación al Foodcoop

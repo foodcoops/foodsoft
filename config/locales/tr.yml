@@ -778,14 +778,6 @@ tr:
     not_found:
       text: Bu sayfa mevcut değil, üzgünüz!
       title: Sayfa bulunamadı
-  feedback:
-    create:
-      notice: Geri bildiriminiz başarıyla gönderildi. Teşekkür ederiz!
-    new:
-      first_paragraph: Bir hata buldunuz mu? Önerileriniz mi var? Fikirleriniz mi? Geri bildirimlerinizi duymaktan mutluluk duyarız.
-      second_paragraph: Lütfen unutmayın, Foodsoft ekibi yalnızca yazılımın bakımından sorumludur. Foodcoop'unuzun organizasyonuyla ilgili sorularınız için uygun kişiye başvurmanız gerekmektedir.
-      send: Gönder
-      title: Geri Bildirim Ver
   finance:
     balancing:
       close:
@@ -1230,9 +1222,6 @@ tr:
     footer:
       revision: revizyon %{revision}
     header:
-      feedback:
-        desc: Bir hata mı buldunuz? Öneriler? Fikirler? İnceleme?
-        title: Geri bildirim
       help: Yardım
       logout: Çıkış yap
       ordergroup: Benim sipariş grubum
@@ -1267,9 +1256,6 @@ tr:
       title: Yeni şifre
   mailer:
     dateformat: "%d %b"
-    feedback:
-      header: "%{user} tarafından %{date} tarihinde yazıldı:"
-      subject: Foodsoft için geri bildirim
     from_via_foodsoft: "%{name} Foodsoft aracılığıyla"
     invite:
       subject: Foodcoop Davetiyesi

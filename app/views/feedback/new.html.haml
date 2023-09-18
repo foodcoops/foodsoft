@@ -1,9 +1,0 @@
-- title t('.title')
-
-%p= t('.first_paragraph')
-%p= t('.second_paragraph')
-
-= form_tag feedback_path do
-  = text_area_tag :message, nil, class: 'input-xxlarge', rows: 10, required: 'required'
-  .form-actions
-    = submit_tag t('.send'), class: 'btn btn-primary'

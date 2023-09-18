@@ -16,7 +16,6 @@
       = link_to FoodsoftConfig[:name], FoodsoftConfig[:homepage], target: '_blank'
     - if FoodsoftConfig[:help_url]
       %li= link_to t('.help'), FoodsoftConfig[:help_url], target: '_blank'
-    %li= link_to t('.feedback.title'), new_feedback_path, title: t('.feedback.desc')
   .clearfix
 
   .navbar

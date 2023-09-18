@@ -493,14 +493,6 @@ fr:
     general: Un problème a été rencontré.
     general_again: Une erreur s'est produite. Merci de réessayer.
     general_msg: 'Une erreur s''est produite: %{msg}'
-  feedback:
-    create:
-      notice: Ton commentaire a été transmis avec succès. Merci
-    new:
-      first_paragraph: Tu as trouvé une erreur? Tu as une proposition, une idée, une critique? Envoie un commentaire!
-      second_paragraph: "Petite remarque: l'équipe de Foodsoft s'occupe seulement de la maintenance du logiciel.\nPour les questions concernants l'organisation de ta boufcoop, il faut contacter les personnes concernées."
-      send: Transmettre
-      title: Laisser un commentaire
   finance:
     balancing:
       close:
@@ -841,9 +833,6 @@ fr:
     footer:
       revision: révision %{revision}
     header:
-      feedback:
-        desc: Tu as trouvé une erreur? Tu as des propositions, des idées, des critiques?
-        title: Retours
       help: Aide
       logout: Déconnexion
       ordergroup: Ta cellule
@@ -876,9 +865,6 @@ fr:
       submit: Sauvegarder le nouveau mot de passe
       title: Nouveau mot de passe
   mailer:
-    feedback:
-      header: "Le %{date}, %{user} a écrit:"
-      subject: Feedback pour Foodsoft
     invite:
       subject: Invitation à participer à une Bouffecoop
       text: |

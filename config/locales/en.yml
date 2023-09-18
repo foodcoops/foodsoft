@@ -779,14 +779,6 @@ en:
     not_found:
       text: This page does not appear to exist, sorry!
       title: Page not found
-  feedback:
-    create:
-      notice: Your feedback was sent successfully. Thanks a lot!
-    new:
-      first_paragraph: Found a bug? Suggestions? Ideas? Reviews? We are happy to hear any feedback.
-      second_paragraph: Please be aware that the Foodsoft Team is only responsible for the maintenance of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.
-      send: Send
-      title: Give feedback
   finance:
     balancing:
       close:
@@ -1232,9 +1224,6 @@ en:
     footer:
       revision: revision %{revision}
     header:
-      feedback:
-        desc: Found a bug? Suggestions? Ideas? Review?
-        title: Feedback
       help: Help
       logout: Logout
       ordergroup: My ordergroup
@@ -1269,9 +1258,6 @@ en:
       title: New password
   mailer:
     dateformat: "%d %b"
-    feedback:
-      header: "%{user} wrote at %{date}:"
-      subject: Feedback for Foodsoft
     from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Invitation to the Foodcoop

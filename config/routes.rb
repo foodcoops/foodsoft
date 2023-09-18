@@ -288,10 +288,6 @@ Rails.application.routes.draw do
       end
     end
 
-    ############## Feedback
-
-    resource :feedback, only: %i[new create], controller: 'feedback'
-
     ############## The rest
 
     resources :users, only: [:index]
