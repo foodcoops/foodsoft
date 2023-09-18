@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
   def destroy
     logout
     if FoodsoftConfig[:logout_redirect_url].present?
-      redirect_to FoodsoftConfig[:logout_redirect_url]
+      redirect_to FoodsoftConfig[:logout_redirect_url], allow_other_host: true
     else
       redirect_to login_url, notice: I18n.t('sessions.logged_out')
     end
