@@ -38,7 +38,6 @@ gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 http
 gem 'ransack'
 gem 'resque'
 gem 'ruby-units'
-gem 'sd_notify'
 gem 'simple_form'
 gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
 gem 'simple-navigation-bootstrap'
