@@ -341,7 +341,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    nio4r (2.5.8)
+    nio4r (2.5.9)
     nokogiri (1.15.2-x86_64-linux)
       racc (~> 1.4)
     parallel (1.23.0)
@@ -364,7 +364,7 @@ GEM
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
     public_suffix (5.0.1)
-    puma (6.0.2)
+    puma (6.3.1)
       nio4r (~> 2.0)
     racc (1.7.0)
     rack (2.2.7)
@@ -600,7 +600,6 @@ GEM
     zeitwerk (2.6.8)
 
 PLATFORMS
-  ruby
   x86_64-linux
 
 DEPENDENCIES
