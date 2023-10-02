@@ -14,7 +14,7 @@ class DocumentsController < ApplicationController
            else
              'data IS NULL DESC, name'
            end
-
+    sort = Arel.sql(sort) # this is okay as we don't use user params directly
     @documents = Document.where(parent: @document).page(params[:page]).per(@per_page).order(sort)
   end
 
