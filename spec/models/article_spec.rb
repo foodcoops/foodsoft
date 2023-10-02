@@ -52,6 +52,13 @@ describe Article do
       expect(new_unit_quantity).to eq 1.5
       expect(new_price).to eq 120
     end
+
+    it 'does not exceed limits when converting from 100ml to 0.1ml' do
+      article1 = build(:article, supplier: supplier, unit: '0.1ml', unit_quantity: 1)
+      article2 = build(:article, supplier: supplier, unit: '100ml', unit_quantity: 1.0)
+      _, new_unit_quantity = article1.convert_units(article2)
+      expect(new_unit_quantity.to_f).to eq 1000
+    end
   end
 
   it 'computes changed article attributes' do
@@ -160,6 +167,14 @@ describe Article do
     it 'does not synchronise when it has no order number' do
       article.update(order_number: nil)
       expect(supplier.sync_all).to eq [[], [], []]
+    end
+
+    it 'does not exceed integer limits when converting from 0.1ml to 100ml' do
+      article.update!(unit: '0.1ml', unit_quantity: 1)
+      shared_article.update!(unit: '100ml', unit_quantity: 1.0)
+      updated_article = supplier.sync_all[0].select { |s| s[0].id == article.id }.first[0]
+      article.update(updated_article.attributes.reject { |k, _v| %w[id type].include?(k) })
+      expect(article.unit_quantity).to eq(1000)
     end
   end
 end
