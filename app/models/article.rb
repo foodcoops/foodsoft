@@ -162,6 +162,16 @@ class Article < ApplicationRecord
     # sometimes the supplier deposit is not known, so only update it if a nonzero value is given
     new_deposit = new_article.deposit != 0 ? new_article.deposit : deposit
 
+    # this is gross - sometimes new_article is a SharedArticle, and sometimes it is an Article
+    class_name = new_article.class.name
+    if (class_name === 'Article')
+      new_category = new_article.article_category
+    elsif (class_name === 'SharedArticle')
+      new_category = ArticleCategory.find_match(new_article.category)
+    else
+      puts "unknown class passed: " + class_name
+    end
+
     return Article.compare_attributes(
       {
         :name => [self.name, new_article.name],
@@ -174,7 +184,8 @@ class Article < ApplicationRecord
         :deposit => [self.deposit.to_f.round(2), new_deposit.to_f.round(2)],
         # take care of different num-objects.
         :unit_quantity => [self.unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
-        :note => [self.note.to_s, new_article.note.to_s]
+        :note => [self.note.to_s, new_article.note.to_s],
+        :article_category => [self.article_category, new_category]
       }
     )
   end
@@ -241,7 +252,7 @@ class Article < ApplicationRecord
       supplier_uq = new_article.unit_quantity
       if fc_unit && supplier_unit && fc_unit =~ supplier_unit
         # conversion_factor = ((supplier_unit*supplier_uq) / (fc_unit*fc_uq)).to_base.to_r
-        conversion_factor = (supplier_unit/fc_unit).scalar
+        conversion_factor = (supplier_unit / fc_unit).scalar
         new_price = new_article.price / conversion_factor
         # new_unit_quantity = new_article.unit_quantity * conversion_factor
         new_unit_quantity = fc_uq
@@ -253,13 +264,10 @@ class Article < ApplicationRecord
       end
     end
 
-
     if unit == new_article.unit
       # puts "unit '#{unit}' == new_article.unit '#{new_article.unit}' no conversion needed for #{name}"
       return nil
     end
-
-
 
     # legacy, used by foodcoops in Germany
     if new_article.unit == "KI" && unit == "ST" # 'KI' means a box, with a different amount of items in it
