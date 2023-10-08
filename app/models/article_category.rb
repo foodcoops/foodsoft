@@ -18,17 +18,25 @@ class ArticleCategory < ApplicationRecord
 
   # Find a category that matches a category name; may return nil.
   # TODO more intelligence like remembering earlier associations (global and/or per-supplier)
+  @@cache = {}
   def self.find_match(category)
     return if category.blank? || category.length < 3
     c = nil
+
+    if (@@cache[category])
+      # puts "found in cache #{category}"
+      return @@cache[category];
+    end
     ## exact match - not needed, will be returned by next query as well
     #c ||= ArticleCategory.where(name: category).first
     # case-insensitive substring match (take the closest match = shortest)
     c = ArticleCategory.where('name LIKE ?', "%#{category}%") unless c && c.any?
     # case-insensitive phrase present in category description
-    c = ArticleCategory.where('description LIKE ?', "%#{category}%").select {|s| s.description.match /(^|,)\s*#{category}\s*(,|$)/i} unless c && c.any?
+    c = ArticleCategory.where('description LIKE ?', "%#{category}%").select { |s| s.description.match /(^|,)\s*#{category}\s*(,|$)/i } unless c && c.any?
     # return closest match if there are multiple
-    c = c.sort_by {|s| s.name.length}.first if c.respond_to? :sort_by
+    c = c.sort_by { |s| s.name.length }.first if c.respond_to? :sort_by
+
+    @@cache[category] = c
     c
   end
 
