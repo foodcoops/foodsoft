@@ -31,43 +31,37 @@ class FoodsoftFile
       row_to_index = ('a'..'z').zip(0..25).to_h
       map = lambda do |row|
         tax = 0
-        tax += 5 if row[row_to_index['o']]
-        tax += 7 if row[row_to_index['n']]
-        {
-          order_number: row[1],
-          name: row[3],
-          note: row[6],
-          manufacturer: row[2],
+        tax += 5 if row[row_to_index['n']]
+        tax += 7 if row[row_to_index['m']]
+
+        unit_quantity = row[row_to_index['h']]
+        # annoying import inconsistency, EA means UQ = 1
+        unit_quantity = 1 if (unit_quantity == 'EA')
+
+        price = row[row_to_index['k']]
+        # annoying import, if EA then case price not listed, use unit price
+        price = row[row_to_index['j']] if (price.blank? && unit_quantity == 1)
+
+        parsed = {
+          order_number: row[row_to_index['b']],
+          name: row[row_to_index['d']],
+          note: row[row_to_index['g']],
+          manufacturer: row[row_to_index['c']],
           # origin: 0,
-          unit: row[8],
-          unit_quantity: row[7],
-          price: row[9],
+          unit: row[row_to_index['i']],
+          unit_quantity: unit_quantity,
+          price: price,
           tax: tax,
           # deposit:
           article_category: 'Grocery'
         }
+        puts "row #{row.to_s} #{parsed.to_s}"
+        return parsed
       end
       begin
-        article = if map.nil?
-                    {
-                      order_number: row[1],
-                      name: row[2],
-                      note: row[3],
-                      manufacturer: row[4],
-                      origin: row[5],
-                      unit: row[6],
-                      price: row[7],
-                      tax: row[8],
-                      deposit: (row[9].nil? ? '0' : row[9]),
-                      unit_quantity: row[10],
-                      article_category: row[13]
-                    }
-                    status = row[0] && row[0].strip.downcase == 'x' ? :outlisted : nil
-                  else
-                    map.call(row)
-                  end
+        article = map.call(row)
+        status = nil
         next unless article[:order_number].present? && article[:price].to_f != 0
-
       rescue => error
         puts "error : #{error}"
         next
