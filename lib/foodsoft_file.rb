@@ -38,9 +38,7 @@ class FoodsoftFile
         # annoying import inconsistency, EA means UQ = 1
         unit_quantity = 1 if (unit_quantity == 'EA')
 
-        price = row[row_to_index['k']]
-        # annoying import, if EA then case price not listed, use unit price
-        price = row[row_to_index['j']] if (price.blank? && unit_quantity == 1)
+        price = row[row_to_index['j']]
 
         parsed = {
           order_number: row[row_to_index['b']],
