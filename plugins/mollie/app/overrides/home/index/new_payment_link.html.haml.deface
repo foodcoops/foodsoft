@@ -1,0 +1,4 @@
+/ insert_after 'erb[silent]:contains("<dashboard_ordergroup_mark>")'
+= link_to new_payments_mollie_path do
+  = t '.credit_your_account'
+  %i.icon.icon-chevron-right

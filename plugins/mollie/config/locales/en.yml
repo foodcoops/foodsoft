@@ -1,0 +1,46 @@
+en:
+  activerecord:
+    attributes:
+      home:
+        credit_your_account: Credit your Account
+    home:
+      index:
+          credit_your_account: Credit your Account
+      ordergroup:
+          credit_your_account: Credit your Account
+  payments:
+    mollie:
+      new:
+        title: Credit your account
+        no_ordergroup: You need to be member of an ordergroup
+      create:
+        invalid_amount: Invalid amount
+      form:
+        amount_pay: Amount to pay
+        method: Pay using
+        submit: Pay online
+        financial_transaction_type: Financial Transaction Type
+        fee: Select the appropriate transaction costs
+      controller:
+        result:
+          notice: Your account was credited %{amount}.
+          failed: Payment failed.
+          wait: Your account will be credited when the payment is received.
+        transaction_note: '%{method} payment'
+  config:
+    hints:
+      use_mollie: Let members credit their own Foodsoft ordergroup account with online payments using Mollie.
+      mollie:
+        api_key: You find the API-Key in the Mollie Dashboard. Use the Live API-Key here (or the Test API-Key for a demo instance).
+        financial_transaction_type: Choose the transaction type mollie payments should be assigned.
+        charge_fees: Charge ordergroups the transaction fees applied by mollie. This is currently only available for EUR.
+        currency: Choose the currency mollie should use (ISO code)
+        default_amount: The default amount to credit the ordergroup with.
+    keys:
+      use_mollie: Use Mollie
+      mollie:
+        api_key: API key
+        financial_transaction_type: Transaction type
+        charge_fees: Charge transaction fees
+        currency: Currency
+        default_amount: Default amount
