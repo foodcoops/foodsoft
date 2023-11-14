@@ -1,0 +1,44 @@
+nl:
+  activerecord:
+    attributes:
+      home:
+        credit_your_account: Geld storten
+  home:
+    index:
+      credit_your_account: Geld storten
+    ordergroup:
+      credit_your_account: Geld storten
+  payments:
+    mollie:
+      new:
+        title: Stort geld op je account
+        no_ordergroup: U dient lid te zijn van een huishouden
+      create:
+        invalid_amount: Ongeldig bedrag
+      form:
+        amount_pay: Te betalen bedrag
+        method: Hoe te betalen
+        submit: Betaal online
+        financial_transaction_type: Financiële-transactietype
+        fee: Selecteer de juiste transactiekosten
+      controller:
+        result:
+          notice: Er is %{amount} bijgeschreven op uw account.
+          failed: Betaling mislukt.
+  config:
+    hints:
+      use_mollie: Laat gebruikers zelf geld op de rekening van hun Foodsoft huishouden zetten met online betalingen via Mollie.
+      mollie:
+        api_key: Vul hier de Live API-Key in, te vinden in het Mollie Dashboard (of de Test API-Key voor een Foodsoft demo).
+        financial_transaction_type: Kies het transactietype waaraan Mollie Payments moeten worden toegewezen
+        charge_fees: Breng huishouden de door Mollie gehanteerde transactiekosten in rekening. Dit is momenteel alleen beschikbaar voor EUR.
+        currency: Kies de valuta die Mollie moet gebruiken (ISO code)
+        default_amount: Het standaardbedrag waarmee de ordergroep wordt gecrediteerd.
+    keys:
+      use_mollie: Accepteer online betalingen via Mollie
+      mollie:
+        api_key: Mollie API-Key
+        financial_transaction_type: Transactietype
+        charge_fees: Transactiekosten in rekening brengen
+        currency: Valuta
+        default_amount: Standaard bedrag
