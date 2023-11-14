@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def format_currency(amount)
-    class_name = amount < 0 ? 'negative_amout' : 'positive_amount'
+    class_name = amount < 0 ? 'negative_amout' : 'positive_amount' if amount.is_a? Numeric
     content_tag :span, number_to_currency(amount), class: class_name
   end
 

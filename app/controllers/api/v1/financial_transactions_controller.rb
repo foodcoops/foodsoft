@@ -4,7 +4,7 @@ class Api::V1::FinancialTransactionsController < Api::V1::BaseController
   before_action -> { doorkeeper_authorize! 'finance:read', 'finance:write' }
 
   def index
-    render_collection search_scope
+    render_collection params.permit(:include_incomplete) ? search_scope : search_scope.where.not(amount: nil)
   end
 
   def show
