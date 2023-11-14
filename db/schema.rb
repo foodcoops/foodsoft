@@ -159,7 +159,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_26_111615) do
 
   create_table "financial_transactions", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "ordergroup_id"
-    t.decimal "amount", precision: 8, scale: 2, default: "0.0", null: false
+    t.decimal "amount", precision: 8, scale: 2
     t.text "note", null: false
     t.integer "user_id", default: 0, null: false
     t.datetime "created_on", precision: nil, null: false
@@ -167,7 +167,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_26_111615) do
     t.integer "financial_link_id"
     t.integer "reverts_id"
     t.integer "group_order_id"
+    t.timestamp "updated_on"
+    t.string "payment_method"
+    t.string "payment_plugin"
+    t.string "payment_id"
+    t.decimal "payment_amount", precision: 8, scale: 3
+    t.string "payment_currency"
+    t.string "payment_state"
+    t.decimal "payment_fee", precision: 8, scale: 3
     t.index ["ordergroup_id"], name: "index_financial_transactions_on_ordergroup_id"
+    t.index ["payment_plugin", "payment_id"], name: "index_financial_transactions_on_payment_plugin_and_payment_id"
     t.index ["reverts_id"], name: "index_financial_transactions_on_reverts_id", unique: true
   end
 

@@ -44,6 +44,7 @@
 - '<dashboard_middle_mark>'
 
 - if current_user.ordergroup
+
   // Ordergroup overview
   %section
     %h2= t '.my_ordergroup.title'
@@ -63,27 +64,34 @@
           = link_to my_ordergroup_path do
             = t '.my_ordergroup.transactions.view'
             %i.icon.icon-chevron-right
+          - '<dashboard_ordergroup_mark>'
       %table.table.table-striped
+        - financial_transactions = current_user.ordergroup.financial_transactions.visible.includes(:financial_transaction_type, :user).limit(5).order(created_on: :desc)
+        - with_payment = financial_transactions.with_payment_plugin.any?
         %tr
           %th= heading_helper FinancialTransaction, :created_on
           %th= heading_helper FinancialTransaction, :user
           - if FinancialTransactionType.has_multiple_types
             %th= heading_helper FinancialTransaction, :financial_transaction_type
           %th= heading_helper FinancialTransaction, :note
+          - if with_payment
+            %th= heading_helper FinancialTransaction, :payment_state
           - FinancialTransactionClass.sorted.each do |fc|
             %th
               = fc.display
-        - for ft in current_user.ordergroup.financial_transactions.visible.includes(:financial_transaction_type, :user).limit(5).order(created_on: :desc)
+        - for ft in financial_transactions
           %tr
             %td= format_time(ft.created_on)
             %td= h(show_user(ft.user))
             - if FinancialTransactionType.has_multiple_types
               %td= h(ft.financial_transaction_type.name)
             %td= h(ft.note)
+            - if with_payment
+              %td= h(ft.payment_state)
             - FinancialTransactionClass.sorted.each do |fc|
               %td.numeric{style: 'width:5em'}
                 - if ft.financial_transaction_type.financial_transaction_class == fc
-                  = format_currency ft.amount
+                  = format_currency(ft.amount)
 
 -# placeholder deface to add content using erb[silent]:contains()
 - '<dashboard_bottom_mark>'

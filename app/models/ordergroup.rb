@@ -91,14 +91,12 @@ class Ordergroup < Group
       t.save!
       update_balance!
       # Notify only when order group had a positive balance before the last transaction:
-      if t.amount < 0 && account_balance < 0 && account_balance - t.amount >= 0
-        NotifyNegativeBalanceJob.perform_later(self,
-                                               t)
-      end
+      NotifyNegativeBalanceJob.perform_later(self, t) if t.amount < 0 && account_balance < 0 && account_balance - t.amount >= 0
       t
     end
   end
 
+  # Recomputes job statistics from group orders.
   def update_stats!
     # Get hours for every job of each user in period
     jobs = users.to_a.sum { |u| u.tasks.done.where('updated_on > ?', APPLE_MONTH_AGO.month.ago).sum(:duration) }
@@ -156,7 +154,7 @@ class Ordergroup < Group
   end
 
   def account_updated
-    financial_transactions.last.try(:created_on) || created_on
+    financial_transactions.last.try(:updated_on) || created_on
   end
 
   def self.sort_by_param(param)

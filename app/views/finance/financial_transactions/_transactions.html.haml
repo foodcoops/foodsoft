@@ -1,6 +1,7 @@
 - with_ordergroup = local_assigns[:with_ordergroup]
 - with_hidden = local_assigns[:with_hidden]
 - with_csv = local_assigns[:with_csv]
+- with_payment = @financial_transactions.with_payment_plugin.any?
 .pull-right
   - if with_csv
     .btn-group
@@ -20,6 +21,12 @@
       - if FinancialTransactionType.has_multiple_types
         %th= heading_helper FinancialTransaction, :financial_transaction_type
       %th= sort_link_helper heading_helper(FinancialTransaction, :note), "note"
+      - if with_payment
+        %th= heading_helper FinancialTransaction, :payment_plugin
+        %th= heading_helper FinancialTransaction, :payment_method
+        %th= heading_helper FinancialTransaction, :payment_amount
+        %th= heading_helper FinancialTransaction, :payment_fee
+        %th= heading_helper FinancialTransaction, :payment_state
       - FinancialTransactionClass.sorted.each do |c|
         %th
           = sort_link_helper c.display, "amount"
@@ -43,13 +50,19 @@
             = link_to t.note, t.group_order
           - else
             = t.note
+        - if with_payment
+          %td= t.payment_plugin
+          %td= t.payment_method
+          %td= format_currency t.payment_amount
+          %td= format_currency t.payment_fee
+          %td= t.payment_state
         - FinancialTransactionClass.sorted.each do |c|
           %td.numeric{style: 'width:5em'}
             - if t.financial_transaction_type.financial_transaction_class == c
               = format_currency t.amount
         - if with_hidden
           %td.actions{style: 'width:1em'}
-            - unless t.hidden?
+            - unless t.hidden? || t.amount.nil?
               = link_to finance_transaction_path(t), method: :delete,
                 data: {confirm: t('.confirm_revert', name: t.note)}, title: t('.revert_title'),
                 class: 'btn btn-danger btn-mini' do

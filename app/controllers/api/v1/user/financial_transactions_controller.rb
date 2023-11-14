@@ -27,6 +27,15 @@ class Api::V1::User::FinancialTransactionsController < Api::V1::BaseController
     current_ordergroup.financial_transactions.includes(:user, :financial_transaction_type)
   end
 
+  def include_incomple?
+    params.permit(:include_incomplete)[:include_incomplete]
+  end
+
+  def search_scope
+    scope = super
+    include_incomple? ? scope : scope.where.not(amount: nil)
+  end
+
   def create_params
     params.require(:financial_transaction).permit(:amount, :financial_transaction_type_id, :note)
   end
