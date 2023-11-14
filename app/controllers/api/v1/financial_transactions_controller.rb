@@ -17,6 +17,15 @@ class Api::V1::FinancialTransactionsController < Api::V1::BaseController
     FinancialTransaction.includes(:user, :financial_transaction_type)
   end
 
+  def include_incomple?
+    params.permit(:include_incomplete)[:include_incomplete] == 'true'
+  end
+
+  def search_scope
+    scope = super
+    include_incomple? ? scope : scope.where.not(amount: nil)
+  end
+
   def ransack_auth_object
     :finance
   end

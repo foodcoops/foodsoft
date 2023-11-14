@@ -11,17 +11,23 @@ class FinancialTransaction < ApplicationRecord
   belongs_to :reverts, optional: true, class_name: 'FinancialTransaction'
   has_one :reverted_by, class_name: 'FinancialTransaction', foreign_key: 'reverts_id'
 
-  validates :amount, :note, :user_id, presence: true
+  validates :note, :user_id, presence: true
   validates :amount, numericality: { greater_then: -100_000,
-                                     less_than: 100_000 }
+                                     less_than: 100_000 },
+                     allow_nil: -> { payment_amount.present? }
+  validates :payment_amount, :payment_fee, allow_nil: true, numericality: { greater_then: 0, less_than: 100_000 }
+  validates :payment_state, inclusion: { in: %w[canceled expired failed open paid pending] }, allow_nil: true
 
   scope :visible, lambda {
                     joins('LEFT JOIN financial_transactions r ON financial_transactions.id = r.reverts_id').where('r.id IS NULL').where(reverts: nil)
                   }
   scope :without_financial_link, -> { where(financial_link: nil) }
   scope :with_ordergroup, -> { where.not(ordergroup: nil) }
+  scope :with_payment_plugin, -> { where.not(payment_plugin: nil) }
 
   localize_input_of :amount
+
+  around_save :save_and_update_ordergroup_balance
 
   after_initialize do
     initialize_financial_transaction_type
@@ -38,12 +44,9 @@ class FinancialTransaction < ApplicationRecord
     %w[] # none, and certainly not user until we've secured that more
   end
 
-  # Use this save method instead of simple save and after callback
-  def add_transaction!
-    ordergroup.add_financial_transaction! amount, note, user, financial_transaction_type
-  end
-
   def revert!(user)
+    raise 'Pending Transaction cannot be reverted' if amount.nil?
+
     transaction do
       update_attribute :financial_link, FinancialLink.new
       rt = dup
@@ -72,5 +75,14 @@ class FinancialTransaction < ApplicationRecord
 
   def initialize_financial_transaction_type
     self.financial_transaction_type ||= FinancialTransactionType.default
+  end
+
+  private
+
+  def save_and_update_ordergroup_balance
+    ActiveRecord::Base.transaction do
+      yield
+      ordergroup.update_balance! if ordergroup
+    end
   end
 end

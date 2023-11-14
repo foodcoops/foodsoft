@@ -186,7 +186,8 @@ RSpec.configure do |config|
                   amount: {
                     type: :number,
                     format: :float,
-                    description: 'amount credited (negative for a debit transaction)'
+                    nullable: true,
+                    description: 'amount credited. Negative for a debit transaction, null for an incomplete transaction.'
                   },
                   financial_transaction_type_id: {
                     type: :integer,
