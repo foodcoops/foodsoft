@@ -9,6 +9,11 @@
     .panel-heading
       %b= h(message.sender_name)
       = format_time(message.created_at)
+      %br
+      - # show the list of recipients in a expandable detail/summary panel
+      %details
+        %summary= t '.recipients'
+        = message.recipients.map(&:display).join(', ')
     .panel-body= simple_format(h(message.body))
 
 %p

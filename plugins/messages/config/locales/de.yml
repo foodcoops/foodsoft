@@ -119,6 +119,7 @@ de:
     thread:
       all_message_threads: Alle Nachrichtenverläufe
       reply: Antworten
+      recipients: Empfänger_innen
     toggle_private:
       not_allowed: Du kannst die Sichtbarkeit dieser Nachricht nicht ändern.
   message_threads:

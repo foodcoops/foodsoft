@@ -119,6 +119,7 @@ es:
     thread:
       all_message_threads: Todos los hilos de mensaje
       reply: Responde
+      recipients: Destinatarios
     toggle_private:
       not_allowed: No puede cambiar la visibilidad del mensaje.
   message_threads:
