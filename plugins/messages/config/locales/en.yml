@@ -119,6 +119,7 @@ en:
     thread:
       all_message_threads: All message threads
       reply: Reply
+      recipients: Recipients
     toggle_private:
       not_allowed: You can not change the visibility of the message.
   message_threads:

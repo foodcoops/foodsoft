@@ -119,6 +119,7 @@ nl:
     thread:
       all_message_threads: Alle conversaties
       reply: Antwoord
+      recipients: Geadresseerden
     toggle_private:
       not_allowed: Je kunt de zichtbaarheid van het bericht niet wijzigen.
   message_threads:

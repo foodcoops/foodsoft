@@ -119,6 +119,7 @@ tr:
     thread:
       all_message_threads: Tüm mesaj konuları
       reply: Yanıtla
+      recipients: Alıcılar
     toggle_private:
       not_allowed: Mesajın görünürlüğünü değiştiremezsiniz.
   message_threads:
