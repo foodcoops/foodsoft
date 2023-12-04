@@ -27,6 +27,7 @@ config/environments/development.rb
 nbproject/
 .*.sw?
 *~
+*.iml
 
 coverage
 tags
