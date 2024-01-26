@@ -170,9 +170,9 @@ Rails.application.routes.draw do
       end
 
       resources :invoices do
-        get :attachment
         get :form_on_supplier_id_change, on: :collection
         get :unpaid, on: :collection
+        delete 'delete_attachment/:attachment_id', to: 'invoices#delete_attachment', as: 'delete_attachment', on: :member
       end
 
       resources :links, controller: 'financial_links', only: %i[create show] do

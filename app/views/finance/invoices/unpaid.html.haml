@@ -19,8 +19,9 @@
         %span{style: "color:#{invoice_amount_diff < 0 ? 'red' : 'green'}"}
           = invoice_amount_diff > 0 ? '+' : '-'
           = number_to_currency(invoice_amount_diff.abs)
-      - if invoice.attachment_data?
-        = link_to finance_invoice_attachment_path(invoice) do
+      - if invoice.attachments.attached?
+        - for attachment in invoice.attachments
+          = link_to attachment.filename, url_for(attachment)
           = glyph :download
       - if invoice.note?
         = '(' + invoice.note + ')'

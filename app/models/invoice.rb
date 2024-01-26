@@ -7,10 +7,11 @@ class Invoice < ApplicationRecord
   belongs_to :financial_link, optional: true
   has_many :deliveries, dependent: :nullify
   has_many :orders, dependent: :nullify
+  has_many_attached :attachments
 
   validates :supplier_id, presence: true
   validates :amount, :deposit, :deposit_credit, numericality: true
-  validate :valid_attachment
+  validate :valid_attachments
 
   scope :unpaid, -> { where(paid_on: nil) }
   scope :without_financial_link, -> { where(financial_link: nil) }
@@ -19,19 +20,6 @@ class Invoice < ApplicationRecord
 
   # Replace numeric seperator with database format
   localize_input_of :amount, :deposit, :deposit_credit
-
-  def attachment=(incoming_file)
-    self.attachment_data = incoming_file.read
-    # allow to soft-fail when FileMagic isn't present and removed from Gemfile (e.g. Heroku)
-    self.attachment_mime = defined?(FileMagic) ? FileMagic.new(FileMagic::MAGIC_MIME).buffer(attachment_data) : 'application/octet-stream'
-  end
-
-  def delete_attachment=(value)
-    return unless value == '1'
-
-    self.attachment_data = nil
-    self.attachment_mime = nil
-  end
 
   def user_can_edit?(user)
     user.role_finance? || (user.role_invoices? && !paid_on && created_by.try(:id) == user.id)
@@ -62,12 +50,10 @@ class Invoice < ApplicationRecord
 
   protected
 
-  def valid_attachment
-    return unless attachment_data
-
-    mime = MIME::Type.simplified(attachment_mime)
-    return if ['application/pdf', 'image/jpeg'].include? mime
-
-    errors.add :attachment, I18n.t('model.invoice.invalid_mime', mime: mime)
+  # validates that the attachments are jpeg, png or pdf
+  def valid_attachments
+    attachments.each do |attachment|
+      errors.add(:attachments, I18n.t('model.invoice.invalid_mime', mime: attachment.content_type)) unless attachment.content_type.in?(%w[image/jpeg image/png application/pdf])
+    end
   end
 end

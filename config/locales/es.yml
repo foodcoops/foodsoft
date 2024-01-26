@@ -972,7 +972,7 @@ es:
       edit:
         title: Edita factura
       form:
-        attachment_hint: Sólo se permiten los formatos JPEG y PDF.
+        attachment_hint: Sólo se permiten los formatos JPEG, PNG y PDF.
       index:
         action_new: Crea nueva factura
         show_unpaid: Mostrar facturas no pagadas

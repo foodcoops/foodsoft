@@ -971,7 +971,7 @@ tr:
       edit:
         title: Faturayı düzenle
       form:
-        attachment_hint: Sadece JPEG ve PDF dosyaları kabul edilir.
+        attachment_hint: Sadece JPEG, PNG ve PDF dosyaları kabul edilir.
       index:
         action_new: Yeni fatura oluştur
         show_unpaid: Ödenmemiş faturaları göster

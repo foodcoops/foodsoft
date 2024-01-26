@@ -972,7 +972,7 @@ nl:
       edit:
         title: Factuur bewerken
       form:
-        attachment_hint: Alleen JPEG en PDF zijn toegestaan.
+        attachment_hint: Alleen JPEG, PNG en PDF zijn toegestaan.
       index:
         action_new: Nieuwe factuur toevoegen
         show_unpaid: Toon onbetaalde facturen

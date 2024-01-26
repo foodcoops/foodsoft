@@ -972,7 +972,7 @@ de:
       edit:
         title: Rechnung bearbeiten
       form:
-        attachment_hint: Es sind nur JPEG und PDF erlaubt.
+        attachment_hint: Es sind nur JPEG, PNG und PDF erlaubt.
       index:
         action_new: Neue Rechnung anlegen
         show_unpaid: Unbezahlte Rechnungen anzeigen

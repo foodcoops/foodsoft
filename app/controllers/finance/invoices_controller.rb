@@ -79,11 +79,12 @@ class Finance::InvoicesController < ApplicationController
     redirect_to finance_invoices_url
   end
 
-  def attachment
-    @invoice = Invoice.find(params[:invoice_id])
-    type = MIME::Types[@invoice.attachment_mime].first
-    filename = "invoice_#{@invoice.id}_attachment.#{type.preferred_extension}"
-    send_data(@invoice.attachment_data, filename: filename, type: type)
+  def delete_attachment
+    attachment = ActiveStorage::Attachment.find(params[:attachment_id])
+    attachment.purge_later
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

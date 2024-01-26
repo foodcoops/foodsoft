@@ -972,7 +972,7 @@ en:
       edit:
         title: Edit invoice
       form:
-        attachment_hint: Only JPEG and PDF are allowed.
+        attachment_hint: Only JPEG, PNG and PDF are allowed.
       index:
         action_new: Create new invoice
         show_unpaid: Show unpaid invoices
