@@ -96,9 +96,17 @@ describe Order do
   describe 'with articles' do
     let(:order) { create(:order) }
 
-    it 'is open by default'         do expect(order).to be_open end
-    it 'is not finished by default' do expect(order).not_to be_finished end
-    it 'is not closed by default'   do expect(order).not_to be_closed end
+    it 'is open by default' do
+      expect(order).to be_open
+    end
+
+    it 'is not finished by default' do
+      expect(order).not_to be_finished
+    end
+
+    it 'is not closed by default' do
+      expect(order).not_to be_closed
+    end
 
     it 'has valid order articles' do
       order.order_articles.each { |oa| expect(oa).to be_valid }

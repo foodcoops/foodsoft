@@ -12,7 +12,9 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :dashboard_nav_item, I18n.t('navigation.dashboard'), root_path(anchor: '')
 
     primary.item :foodcoop, I18n.t('navigation.foodcoop'), '#' do |subnav|
-      subnav.item :members, I18n.t('navigation.members'), foodcoop_users_path, unless: proc { FoodsoftConfig[:disable_members_overview] }
+      subnav.item :members, I18n.t('navigation.members'), foodcoop_users_path, unless: proc {
+                                                                                         FoodsoftConfig[:disable_members_overview]
+                                                                                       }
       subnav.item :workgroups, I18n.t('navigation.workgroups'), foodcoop_workgroups_path
       subnav.item :ordergroups, I18n.t('navigation.ordergroups'), foodcoop_ordergroups_path
       subnav.item :tasks, I18n.t('navigation.tasks'), tasks_path

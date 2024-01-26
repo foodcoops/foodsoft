@@ -51,6 +51,7 @@ class PrinterController < ApplicationController
 
   def authenticate_printer
     return head(:unauthorized) unless bearer_token
-    return head(:forbidden) if bearer_token != FoodsoftConfig[:printer_token]
+
+    head(:forbidden) if bearer_token != FoodsoftConfig[:printer_token]
   end
 end

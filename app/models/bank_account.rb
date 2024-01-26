@@ -13,7 +13,7 @@ class BankAccount < ApplicationRecord
   # @return [Function] Method wich can be called to import transaction from a bank or nil if unsupported
   def find_connector
     klass = BankAccountConnector.find iban
-    return klass.new self if klass
+    klass.new self if klass
   end
 
   def assign_unlinked_transactions

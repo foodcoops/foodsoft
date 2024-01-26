@@ -3,7 +3,7 @@ class OrderArticlesController < ApplicationController
   before_action :authenticate_finance_or_invoices, except: %i[new create]
   before_action :authenticate_finance_orders_or_pickup, except: %i[edit update destroy]
 
-  layout false  # We only use this controller to serve js snippets, no need for layout rendering
+  layout false # We only use this controller to serve js snippets, no need for layout rendering
 
   def new
     @order_article = @order.order_articles.build(params[:order_article])

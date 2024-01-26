@@ -146,7 +146,6 @@ class FoodsoftConfig
         # or store
         RailsSettings::CachedSettings["foodcoop.#{scope}.#{key}"] = value
       end
-      true
     end
 
     # @return [Array<String>] Configuration keys that are set (either in +app_config.yml+ or database).

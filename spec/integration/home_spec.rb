@@ -17,7 +17,7 @@ feature 'my profile page' do
       fill_in 'user_first_name', with: 'foo'
       click_button I18n.t('ui.save')
       expect(User.find(user.id).first_name).to eq 'foo'
-      expect(page).to have_selector '.alert-success'
+      expect(page).to have_css '.alert-success'
     end
   end
 end

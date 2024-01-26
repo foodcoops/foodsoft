@@ -56,7 +56,7 @@ class MultipleOrdersByGroups < OrderPdf
         I18n.t('shared.articles.ordered'),
         I18n.t('shared.articles.received'),
         I18n.t('shared.articles_by.price_sum'),
-        { image: "#{Rails.root}/app/assets/images/package-bg.png", scale: 0.6, position: :center }
+        { image: "#{Rails.root.join('app/assets/images/package-bg.png')}", scale: 0.6, position: :center }
       ]
 
       # last column showing unit_quantity is useless if they're all one
@@ -100,7 +100,7 @@ class MultipleOrdersByGroups < OrderPdf
   protected
 
   def pdf_add_page_breaks?
-    super 'order_by_groups'
+    super('order_by_groups')
   end
 
   def ordergroups

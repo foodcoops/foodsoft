@@ -97,10 +97,10 @@ module ApplicationHelper
     s = model.human_attribute_name(attribute, i18nopts)
     if options[:short]
       desc = options[:desc]
-      desc ||= model.human_attribute_name("#{attribute}_desc".to_sym,
+      desc ||= model.human_attribute_name(:"#{attribute}_desc",
                                           options.merge({ fallback: true, default: '', count: 2 }))
       desc.blank? && desc = s
-      sshort = model.human_attribute_name("#{attribute}_short".to_sym,
+      sshort = model.human_attribute_name(:"#{attribute}_short",
                                           options.merge({ fallback: true, default: '', count: 2 }))
       s = raw "<abbr title='#{desc}'>#{sshort}</abbr>" if sshort.present?
     end

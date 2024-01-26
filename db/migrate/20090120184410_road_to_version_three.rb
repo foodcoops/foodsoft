@@ -46,7 +46,10 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     add_column :groups, :contact_address, :string
     Ordergroup.all.each do |ordergroup|
       contact = ordergroup.users.first
-      ordergroup.update(contact_person: contact.name, contact_phone: contact.phone, contact_address: contact.address) if contact
+      if contact
+        ordergroup.update(contact_person: contact.name, contact_phone: contact.phone,
+                          contact_address: contact.address)
+      end
     end
     remove_column :users, :address
 

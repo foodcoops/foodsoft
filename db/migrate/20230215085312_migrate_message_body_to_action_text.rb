@@ -16,7 +16,7 @@ class MigrateMessageBodyToActionText < ActiveRecord::Migration[7.0]
         remove_column :messages, :body_old, :text
       end
       dir.down do
-        execute "ALTER TABLE `messages` ADD `body_old` text"
+        execute 'ALTER TABLE `messages` ADD `body_old` text'
         execute "UPDATE `messages` m
                   INNER JOIN `action_text_rich_texts` a
                     ON m.id = a.record_id
@@ -25,7 +25,7 @@ class MigrateMessageBodyToActionText < ActiveRecord::Migration[7.0]
           message.update(body_old: strip_tags(message.body_old))
         end
         execute "DELETE FROM `action_text_rich_texts` WHERE `action_text_rich_texts`.`record_type` = 'Message'"
-        execute "ALTER TABLE `messages` CHANGE `body_old` `body` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;"
+        execute 'ALTER TABLE `messages` CHANGE `body_old` `body` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;'
       end
     end
   end

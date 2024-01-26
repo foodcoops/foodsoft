@@ -61,9 +61,9 @@ module Concerns::Auth
                 when 'pickups'             then current_user.role_pickups?
                 when 'suppliers'           then current_user.role_suppliers?
                 when 'orders'              then current_user.role_orders?
-                when 'finance_or_invoices' then (current_user.role_finance? || current_user.role_invoices?)
-                when 'finance_or_orders'   then (current_user.role_finance? || current_user.role_orders?)
-                when 'pickups_or_orders'   then (current_user.role_pickups? || current_user.role_orders?)
+                when 'finance_or_invoices' then current_user.role_finance? || current_user.role_invoices?
+                when 'finance_or_orders'   then current_user.role_finance? || current_user.role_orders?
+                when 'pickups_or_orders'   then current_user.role_pickups? || current_user.role_orders?
                 when 'any'                 then true # no role required
                 else false # any unknown role will always fail
                 end

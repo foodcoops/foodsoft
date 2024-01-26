@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-feature 'product distribution', js: true do
+feature 'product distribution', :js do
   let(:ftt) { create(:financial_transaction_type) }
   let(:admin) { create(:admin) }
   let(:user_a) { create(:user, groups: [create(:ordergroup)]) }
@@ -34,7 +34,7 @@ feature 'product distribution', js: true do
     scrolldown
     2.times { find("[data-increase_quantity='#{oa.id}']").click }
     find('input[type=submit]').click
-    expect(page).to have_selector('body')
+    expect(page).to have_css('body')
     # gruppe a faellt ein dass sie doch noch mehr braucht von x und aendert auf 4(1).
     login user_a
     visit edit_group_order_path(id: order.group_order(user_a.ordergroup).id, order_id: order.id)
@@ -42,7 +42,7 @@ feature 'product distribution', js: true do
     2.times { find("[data-increase_quantity='#{oa.id}']").click }
     2.times { find("[data-decrease_tolerance='#{oa.id}']").click }
     find('input[type=submit]').click
-    expect(page).to have_selector('body')
+    expect(page).to have_css('body')
     # die zuteilung
     order.finish!(admin)
     oa.reload
