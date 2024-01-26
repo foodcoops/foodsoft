@@ -189,6 +189,7 @@ class Article < ApplicationRecord
   # returns nil if units are eqal
   def convert_units(new_article = shared_article)
     return unless unit != new_article.unit
+    return false if new_article.unit.include?(',')
 
     # legacy, used by foodcoops in Germany
     if new_article.unit == 'KI' && unit == 'ST' # 'KI' means a box, with a different amount of items in it

@@ -31,8 +31,7 @@ describe Article do
       expect(article1.convert_units(article2)).to be false
     end
 
-    xit 'returns false if unit becomes zero because of , symbol in unit format' do
-      # @todo broken after latest update as conversion logic changes?!
+    it 'returns false if unit becomes zero because of , symbol in unit format' do
       article1 = build(:article, supplier: supplier, unit: '0,8kg', price: 2, unit_quantity: 1)
       article2 = build(:article, supplier: supplier, unit: '0,9kg', price: 2, unit_quantity: 1)
       expect(article1.convert_units(article2)).to be false
