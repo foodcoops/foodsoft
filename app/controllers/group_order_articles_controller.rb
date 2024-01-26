@@ -2,7 +2,7 @@ class GroupOrderArticlesController < ApplicationController
   before_action :authenticate_finance
   before_action :find_group_order_article, except: %i[new create]
 
-  layout false  # We only use this controller to server js snippets, no need for layout rendering
+  layout false # We only use this controller to server js snippets, no need for layout rendering
 
   def new
     @order_article = OrderArticle.find(params[:order_article_id])

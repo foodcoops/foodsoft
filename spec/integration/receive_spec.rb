@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-feature 'receiving an order', js: true do
+feature 'receiving an order', :js do
   let(:admin) { create(:user, groups: [create(:workgroup, role_orders: true)]) }
   let(:supplier) { create(:supplier) }
   let(:article) { create(:article, supplier: supplier, unit_quantity: 3) }
@@ -40,13 +40,13 @@ feature 'receiving an order', js: true do
     set_quantities [3, 0], [0, 0]
     visit receive_order_path(id: order.id)
     expect(page).to have_content(article.name)
-    expect(page).to have_selector("#order_article_#{oa.id}")
+    expect(page).to have_css("#order_article_#{oa.id}")
   end
 
   it 'has product not ordered invisible' do
     set_quantities [0, 0], [0, 0]
     visit receive_order_path(id: order.id)
-    expect(page).not_to have_selector("#order_article_#{oa.id}")
+    expect(page).to have_no_css("#order_article_#{oa.id}")
   end
 
   it 'is not received by default' do
@@ -60,7 +60,7 @@ feature 'receiving an order', js: true do
     visit receive_order_path(id: order.id)
     fill_in "order_articles_#{oa.id}_units_received", with: oa.units_to_order
     find('input[type="submit"]').click
-    expect(page).to have_selector('body')
+    expect(page).to have_css('body')
     check_quantities 2, 2, 4
   end
 
@@ -69,7 +69,7 @@ feature 'receiving an order', js: true do
     visit receive_order_path(id: order.id)
     fill_in "order_articles_#{oa.id}_units_received", with: 3
     find('input[type="submit"]').click
-    expect(page).to have_selector('body')
+    expect(page).to have_css('body')
     check_quantities 3, 2, 5
   end
 
@@ -78,7 +78,7 @@ feature 'receiving an order', js: true do
     visit receive_order_path(id: order.id)
     fill_in "order_articles_#{oa.id}_units_received", with: 1
     find('input[type="submit"]').click
-    expect(page).to have_selector('body')
+    expect(page).to have_css('body')
     check_quantities 1, 2, 1
   end
 
@@ -96,7 +96,7 @@ feature 'receiving an order', js: true do
     goa1.save!
     visit receive_order_path(id: order.id)
     find('input[type="submit"]').click
-    expect(page).to have_selector('body')
+    expect(page).to have_css('body')
     check_quantities 2, 3, 4
   end
 end

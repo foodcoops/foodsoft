@@ -51,7 +51,7 @@ describe Api::V1::OrderArticlesController do
           run_test! do |response|
             json_order_articles = JSON.parse(response.body)['order_articles']
             json_order_article_ids = json_order_articles.map { |d| d['id'].to_i }
-            expect(json_order_article_ids).to match_array [order_articles[3].id]
+            expect(json_order_article_ids).to contain_exactly(order_articles[3].id)
           end
         end
 

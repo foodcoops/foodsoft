@@ -12,7 +12,7 @@ Foodsoft::Application.config.secret_key_base = begin
   elsif Rails.env.test?
     SecureRandom.hex(30) # doesn't really matter
   else
-    sf = Rails.root.join('tmp', 'secret_key_base')
+    sf = Rails.root.join('tmp/secret_key_base')
     if File.exist?(sf)
       File.read(sf)
     else

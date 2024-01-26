@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-feature Order, js: true do
+feature Order, :js do
   let(:admin) { create(:user, groups: [create(:workgroup, role_orders: true)]) }
   let(:article) { create(:article, unit_quantity: 1) }
   let(:order) { create(:order, supplier: article.supplier, article_ids: [article.id]) } # need to ref article
@@ -32,7 +32,7 @@ feature Order, js: true do
     visit new_order_path(supplier_id: article.supplier_id)
     expect(page).to have_text I18n.t('orders.new.title')
     find('input[type="submit"]').click
-    expect(page).to have_selector('.alert-success')
+    expect(page).to have_css('.alert-success')
     expect(Order.count).to eq 1
     expect(Order.first.supplier).to eq article.supplier
   end
@@ -40,7 +40,7 @@ feature Order, js: true do
   it 'can close an order' do
     setup_and_close_order
     expect(order).to be_finished
-    expect(page).not_to have_link I18n.t('orders.index.action_end')
+    expect(page).to have_no_link I18n.t('orders.index.action_end')
     expect(oa.units_to_order).to eq 1
   end
 
@@ -53,7 +53,7 @@ feature Order, js: true do
     accept_confirm do
       click_link_or_button I18n.t('orders.index.action_end')
     end
-    expect(page).to have_selector('.alert-success')
+    expect(page).to have_css('.alert-success')
     order.reload
     oa.reload
   end

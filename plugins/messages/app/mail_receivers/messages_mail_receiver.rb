@@ -67,7 +67,7 @@ class MessagesMailReceiver
 
   class BlankBodyException < MidiSmtpServer::SmtpdException
     def initialize(msg = nil)
-      super msg, 541, 'The recipient address rejected your message because of a blank plain body'
+      super(msg, 541, 'The recipient address rejected your message because of a blank plain body')
     end
   end
 end

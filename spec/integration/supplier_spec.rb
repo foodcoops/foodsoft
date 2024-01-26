@@ -27,7 +27,7 @@ feature 'supplier' do
     end
   end
 
-  describe 'existing', js: true do
+  describe 'existing', :js do
     it 'can be shown' do
       supplier
       visit suppliers_path
@@ -53,7 +53,7 @@ feature 'supplier' do
       accept_confirm do
         click_link I18n.t('ui.delete')
       end
-      expect(page).not_to have_content(supplier.name)
+      expect(page).to have_no_content(supplier.name)
       expect(supplier.reload.deleted?).to be true
     end
   end

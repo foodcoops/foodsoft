@@ -30,7 +30,7 @@ module PagesHelper
       if text.nil?
         link_to permalink, new_page_path(title: permalink)
       else
-        link_to text,  new_page_path(title: permalink)
+        link_to text, new_page_path(title: permalink)
       end
     else
       link_to_wikipage(page, text)

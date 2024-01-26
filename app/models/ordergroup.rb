@@ -27,7 +27,7 @@ class Ordergroup < Group
   end
 
   def non_members
-    User.natural_order.all.reject { |u| (users.include?(u) || u.ordergroup) }
+    User.natural_order.all.reject { |u| users.include?(u) || u.ordergroup }
   end
 
   def self.include_transaction_class_sum

@@ -7,11 +7,11 @@ module ApiHelper
     let(:api_access_token) do
       create(:oauth2_access_token, resource_owner_id: user.id, scopes: api_scopes&.join(' ')).token
     end
-    let(:Authorization) { "Bearer #{api_access_token}" } # rubocop:disable  RSpec/VariableName
+    let(:Authorization) { "Bearer #{api_access_token}" }
 
     def self.it_handles_invalid_token
       context 'with invalid access token' do
-        let(:Authorization) { 'abc' } # rubocop:disable  RSpec/VariableName
+        let(:Authorization) { 'abc' }
 
         response 401, 'not logged-in' do
           schema '$ref' => '#/components/schemas/Error401'
@@ -22,7 +22,7 @@ module ApiHelper
 
     def self.it_handles_invalid_token_with_id
       context 'with invalid access token' do
-        let(:Authorization) { 'abc' } # rubocop:disable  RSpec/VariableName
+        let(:Authorization) { 'abc' }
         let(:id) { 42 } # id doesn't matter here
 
         response 401, 'not logged-in' do

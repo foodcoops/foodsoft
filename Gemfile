@@ -32,7 +32,6 @@ gem 'kaminari'
 gem 'mysql2'
 gem 'net-ftp'
 gem 'net-http'
-gem 'uri', '= 0.10.0.2' # TODO: remove this when updated to ruby 3.x
 gem 'prawn'
 gem 'prawn-table'
 gem 'puma'
@@ -46,13 +45,14 @@ gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
 gem 'simple-navigation-bootstrap'
 gem 'sprockets', '< 4'
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
+gem 'uri', '= 0.10.0.2' # TODO: remove this when updated to ruby 3.x
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
 gem 'exception_notification'
 gem 'gaffe'
 gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
-gem "image_processing", "~> 1.12"
-gem "importmap-rails", "~> 1.1"
+gem 'image_processing', '~> 1.12'
+gem 'importmap-rails', '~> 1.1'
 gem 'midi-smtp-server'
 gem 'mime-types'
 gem 'recurring_select', git: 'https://github.com/gregschmit/recurring_select'
@@ -62,7 +62,7 @@ gem 'rswag-api'
 gem 'rswag-ui'
 gem 'ruby-filemagic'
 gem 'spreadsheet'
-gem "terser", "~> 1.1"
+gem 'terser', '~> 1.1'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'

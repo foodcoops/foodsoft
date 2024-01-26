@@ -22,7 +22,7 @@ FactoryBot.define do
     end
 
     %i[ordergroup finance invoices article_meta suppliers pickups orders].each do |role|
-      trait "role_#{role}".to_sym do
+      trait :"role_#{role}" do
         after :create do |user, _evaluator|
           create(:workgroup, "role_#{role}" => true, user_ids: [user.id])
         end
@@ -42,7 +42,9 @@ FactoryBot.define do
       sequence(:name) { |n| "Order group ##{n}" }
       # workaround to avoid needing to save the ordergroup
       #   avoids e.g. error after logging in related to applebar
-      after :create do |group| Ordergroup.find(group.id).update_stats! end
+      after :create do |group|
+        Ordergroup.find(group.id).update_stats!
+      end
     end
   end
 end

@@ -16,11 +16,23 @@ if ENV['COVERAGE'] or ENV['COVERALLS']
   SimpleCov.start do
     add_filter '/spec/'
     add_filter '/test/'
-    add_group 'Models'       do |s| cov_no_plugins s, '/app/models/' end
-    add_group 'Controllers'  do |s| cov_no_plugins s, '/app/controllers/' end
-    add_group 'Helpers'      do |s| cov_no_plugins s, '/app/helpers/' end
-    add_group 'Documents'    do |s| cov_no_plugins s, '/app/documents/' end
-    add_group 'Libraries'    do |s| cov_no_plugins s, '/lib/' end
-    add_group 'Plugins'      do |s| s.filename =~ %r{/lib/foodsoft_.*/} end
+    add_group 'Models' do |s|
+      cov_no_plugins s, '/app/models/'
+    end
+    add_group 'Controllers' do |s|
+      cov_no_plugins s, '/app/controllers/'
+    end
+    add_group 'Helpers' do |s|
+      cov_no_plugins s, '/app/helpers/'
+    end
+    add_group 'Documents' do |s|
+      cov_no_plugins s, '/app/documents/'
+    end
+    add_group 'Libraries' do |s|
+      cov_no_plugins s, '/lib/'
+    end
+    add_group 'Plugins' do |s|
+      s.filename =~ %r{/lib/foodsoft_.*/}
+    end
   end
 end

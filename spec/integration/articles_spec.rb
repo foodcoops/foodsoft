@@ -7,7 +7,7 @@ feature ArticlesController do
 
   before { login user }
 
-  describe ':index', js: true do
+  describe ':index', :js do
     before { visit supplier_articles_path(supplier_id: supplier.id) }
 
     it 'can visit supplier articles path' do
@@ -17,7 +17,7 @@ feature ArticlesController do
 
     it 'can create a new article' do
       click_on I18n.t('articles.index.new')
-      expect(page).to have_selector('form#new_article')
+      expect(page).to have_css('form#new_article')
       article = build(:article, supplier: supplier, article_category: article_category)
       within('#new_article') do
         fill_in 'article_name', with: article.name

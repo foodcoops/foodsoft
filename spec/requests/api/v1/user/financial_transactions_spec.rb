@@ -49,7 +49,9 @@ describe 'User' do
 
       response '422', 'invalid parameter value' do
         schema '$ref' => '#/components/schemas/Error422'
-        let(:financial_transaction) { { amount: "abc", financial_transaction_type_id: create(:financial_transaction_type).id, note: "foo bar" } }
+        let(:financial_transaction) do
+          { amount: 'abc', financial_transaction_type_id: create(:financial_transaction_type).id, note: 'foo bar' }
+        end
         run_test!
       end
     end

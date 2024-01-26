@@ -16,11 +16,25 @@ describe User do
   describe 'does not have the role' do
     let(:user) { create(:user) }
 
-    it 'admin'        do expect(user.role_admin?).to be_falsey end
-    it 'finance'      do expect(user.role_finance?).to be_falsey end
-    it 'article_meta' do expect(user.role_article_meta?).to be_falsey end
-    it 'suppliers'    do expect(user.role_suppliers?).to be_falsey end
-    it 'orders'       do expect(user.role_orders?).to be_falsey end
+    it 'admin' do
+      expect(user.role_admin?).to be_falsey
+    end
+
+    it 'finance' do
+      expect(user.role_finance?).to be_falsey
+    end
+
+    it 'article_meta' do
+      expect(user.role_article_meta?).to be_falsey
+    end
+
+    it 'suppliers' do
+      expect(user.role_suppliers?).to be_falsey
+    end
+
+    it 'orders' do
+      expect(user.role_orders?).to be_falsey
+    end
   end
 
   describe do
@@ -76,7 +90,9 @@ describe User do
   describe 'admin' do
     let(:user) { create(:admin) }
 
-    it 'default admin role' do expect(user.role_admin?).to be_truthy end
+    it 'default admin role' do
+      expect(user.role_admin?).to be_truthy
+    end
   end
 
   describe 'sort correctly' do

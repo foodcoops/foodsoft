@@ -6,10 +6,21 @@ describe GroupOrderArticle do
   let(:go) { create(:group_order, order: order, ordergroup: user.ordergroup) }
   let(:goa) { create(:group_order_article, group_order: go, order_article: order.order_articles.first) }
 
-  it 'has zero quantity by default'    do expect(goa.quantity).to eq(0) end
-  it 'has zero tolerance by default'   do expect(goa.tolerance).to eq(0) end
-  it 'has zero result by default'      do expect(goa.result).to eq(0) end
-  it 'has zero total price by default' do expect(goa.total_price).to eq(0) end
+  it 'has zero quantity by default' do
+    expect(goa.quantity).to eq(0)
+  end
+
+  it 'has zero tolerance by default' do
+    expect(goa.tolerance).to eq(0)
+  end
+
+  it 'has zero result by default' do
+    expect(goa.result).to eq(0)
+  end
+
+  it 'has zero total price by default' do
+    expect(goa.total_price).to eq(0)
+  end
 
   describe do
     let(:article) { create(:article, supplier: order.supplier, unit_quantity: 1) }

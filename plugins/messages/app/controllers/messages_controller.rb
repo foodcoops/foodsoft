@@ -21,8 +21,9 @@ class MessagesController < ApplicationController
       @message.subject = I18n.t('messages.model.reply_subject', subject: original_message.subject)
       @message.body = I18n.t('messages.model.reply_header', user: original_message.sender.display,
                                                             when: I18n.l(original_message.created_at, format: :short)) + "\n"
-      @message.body = I18n.t('messages.model.reply_header', user: original_message.sender.display, when: I18n.l(original_message.created_at, format: :short)) + "\n" \
-      + "<blockquote>" + original_message.body.to_trix_html + "</blockquote>"
+      @message.body = I18n.t('messages.model.reply_header', user: original_message.sender.display,
+                                                            when: I18n.l(original_message.created_at, format: :short)) + "\n" \
+      + '<blockquote>' + original_message.body.to_trix_html + '</blockquote>'
     else
       redirect_to new_message_url, alert: I18n.t('messages.new.error_private')
     end
