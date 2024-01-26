@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_085312) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_26_111615) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -251,8 +251,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_085312) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.integer "created_by_user_id"
-    t.string "attachment_mime"
-    t.binary "attachment_data", size: :medium
     t.integer "financial_link_id"
     t.index ["supplier_id"], name: "index_invoices_on_supplier_id"
   end
