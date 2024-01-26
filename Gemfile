@@ -32,6 +32,7 @@ gem 'kaminari'
 gem 'mysql2'
 gem 'net-ftp'
 gem 'net-http'
+gem 'uri', '= 0.10.0.2' # TODO: remove this when updated to ruby 3.x
 gem 'prawn'
 gem 'prawn-table'
 gem 'puma'
