@@ -29,6 +29,7 @@
           %th= heading_helper FinancialTransaction, :created_on
           %th= heading_helper FinancialTransaction, :ordergroup
           %th= heading_helper FinancialTransaction, :note
+          %th= heading_helper FinancialTransaction, :payment_state
           %th.numeric= heading_helper FinancialTransaction, :amount
       %tbody
         - @financial_transactions.each do |ft|
@@ -36,7 +37,8 @@
             %td= format_date(ft.created_on)
             %td= ft.ordergroup_name
             %td= ft.note
-            %td.numeric= format_currency ft.amount
+            %td= ft.payment_state
+            %td.numeric= format_currency(ft.amount)
   .span6
     %h2
       = t('.open_transactions')
@@ -48,7 +50,7 @@
             %th= heading_helper Order, :name
             %th= t '.end'
             %th.numeric= t('.amount_fc')
-            %th 
+            %th
         %tbody
           - @orders.each do |order|
             %tr

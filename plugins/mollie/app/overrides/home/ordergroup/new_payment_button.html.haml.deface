@@ -1,0 +1,2 @@
+/ insert_after 'erb[silent]:contains("<home_ordergroup_well_mark>")'
+= link_to t('.credit_your_account'), new_payments_mollie_path, class: 'btn btn-secondary'

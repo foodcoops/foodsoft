@@ -50,11 +50,7 @@ class Finance::FinancialTransactionsController < ApplicationController
   def create
     @financial_transaction = FinancialTransaction.new(params[:financial_transaction])
     @financial_transaction.user = current_user
-    if @financial_transaction.ordergroup
-      @financial_transaction.add_transaction!
-    else
-      @financial_transaction.save!
-    end
+    @financial_transaction.save!
     redirect_to finance_group_transactions_path(@ordergroup),
                 notice: I18n.t('finance.financial_transactions.controller.create.notice')
   rescue ActiveRecord::RecordInvalid => e

@@ -7,7 +7,7 @@ class Api::V1::User::FinancialTransactionsController < Api::V1::BaseController
   before_action -> { require_config_enabled :use_self_service }, only: [:create]
 
   def index
-    render_collection search_scope
+    render_collection params.permit(:include_incomplete)[:include_incomplete] ? search_scope : search_scope.where.not(amount: nil)
   end
 
   def show

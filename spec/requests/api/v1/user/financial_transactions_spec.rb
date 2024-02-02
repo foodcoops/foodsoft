@@ -6,11 +6,8 @@ describe 'User' do
   let(:api_scopes) { ['finance:user'] }
   let(:user) { create(:user, groups: [create(:ordergroup)]) }
   let(:other_user2) { create(:user) }
-  let(:ft) { create(:financial_transaction, user: user, ordergroup: user.ordergroup) }
-
-  before do
-    ft
-  end
+  let!(:financial_transaction) { create(:financial_transaction, user: user, ordergroup: user.ordergroup) }
+  let!(:financial_transaction_amount_nil) { create(:financial_transaction, user: user, ordergroup: user.ordergroup, amount: nil) }
 
   path '/user/financial_transactions' do
     post 'create new financial transaction (requires enabled self service)' do
@@ -60,21 +57,34 @@ describe 'User' do
       tags 'User', 'Financial Transaction'
       produces 'application/json'
       pagination_param
+      parameter name: :include_incomplete, in: :query, type: :boolean, required: false
 
-      response '200', 'success' do
-        schema type: :object, properties: {
-          meta: { '$ref': '#/components/schemas/Meta' },
-          financial_transaction: {
-            type: :array,
-            items: {
-              '$ref': '#/components/schemas/FinancialTransaction'
-            }
+      get_properties = {
+        meta: { '$ref': '#/components/schemas/Meta' },
+        financial_transaction: {
+          type: :array,
+          items: {
+            '$ref': '#/components/schemas/FinancialTransaction'
           }
         }
+      }
 
+      response '200', 'success' do
+        schema type: :object, properties: get_properties
         run_test! do |response|
           data = JSON.parse(response.body)
-          expect(data['financial_transactions'].first['id']).to eq(ft.id)
+          expect(data['meta']['total_count']).to eq 1
+          expect(data['financial_transactions'].first['id']).to eq(financial_transaction.id)
+        end
+      end
+
+      response '200', 'success' do # with incomplete transactions
+        schema type: :object, properties: get_properties
+        let(:include_incomplete) { true }
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['meta']['total_count']).to eq 2
+          expect(data['financial_transactions'].pluck('id')).to include(financial_transaction_amount_nil.id)
         end
       end
 
@@ -94,10 +104,10 @@ describe 'User' do
             '$ref': '#/components/schemas/FinancialTransaction'
           }
         }
-        let(:id) { ft.id }
+        let(:id) { financial_transaction.id }
         run_test! do |response|
           data = JSON.parse(response.body)
-          expect(data['financial_transaction']['id']).to eq(ft.id)
+          expect(data['financial_transaction']['id']).to eq(financial_transaction.id)
         end
       end
 
