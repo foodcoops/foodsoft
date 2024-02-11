@@ -1,49 +1,4 @@
 bg:
-  activerecord:
-    attributes:
-      article:
-        article_category: Категория
-        availability: Наличен ли е продукта?
-        availability_short: наличен
-        deposit: Депозит
-        fc_price: Цена на кооператива
-        fc_price_short: Цена на кр
-        fc_share: Надценка за кооператива
-        fc_share_short: Надценка за кооператива
-      article_category:
-        description: Описание
-        name: Име
-      article_price:
-        deposit: Депозит
-    models:
-      delivery: Доставка
-      financial_transaction: Финансова транзакция
-      invoice: Фактура
-      order: Поръчка
-      order_comment: Коментар за поръчката
-  articles:
-    article:
-      last_update: 'посл. обновняване: %{last_update} | gross: %{gross_price}'
-    articles:
-      confirm_delete: Сигурни ли сте, че искате да изтриете всички избрани продукти?
-      option_available: Направете продуктите налични
-      option_delete: Изтрийте продукт
-      option_not_available: Направете продуктите неналични
-      option_select: Изберете действие ...
-      price_netto: Цена
-      unit_quantity_desc: Единично количество
-      unit_quantity_short: Количество
-    index:
-      change_supplier: Сменете снабдителя ...
-      edit_all: Променете всички
-      ext_db:
-        import: Търсене/Внос
-        sync: Синхронизирайте
-      new: Нов продукт
-      new_order: Създайте нова поръчка
-      search_placeholder: Име ..
-      title: Продукти от %{supplier} (%{count})
-      upload: Качете продукти
   number:
     percentage:
       format:
