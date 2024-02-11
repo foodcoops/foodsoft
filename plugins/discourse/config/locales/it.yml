@@ -1,6 +1,1 @@
 it:
-  discourse:
-    callback:
-      invalid_nonce: Nonce non valido
-      invalid_signature: Firma non valida
-      logged_in: Acceduto!
