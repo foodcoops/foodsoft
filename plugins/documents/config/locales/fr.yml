@@ -1,7 +1,1 @@
 fr:
-  activerecord:
-    attributes:
-      document:
-        created_at: Créé le
-        created_by: Crée par
-        name: Nom
