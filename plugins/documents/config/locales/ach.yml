@@ -2,39 +2,39 @@ ach:
   activerecord:
     attributes:
       document:
-        created_at: crwdns5428:0crwdne5428:0
-        created_by: crwdns5430:0crwdne5430:0
-        data: crwdns5432:0crwdne5432:0
-        mime: crwdns5434:0crwdne5434:0
-        name: crwdns5436:0crwdne5436:0
+        created_at: crwdns20921:0crwdne20921:0
+        created_by: crwdns20923:0crwdne20923:0
+        data: crwdns20925:0crwdne20925:0
+        mime: crwdns20927:0crwdne20927:0
+        name: crwdns20929:0crwdne20929:0
   config:
     hints:
-      documents_allowed_extension: crwdns5438:0crwdne5438:0
-      use_documents: crwdns5440:0crwdne5440:0
+      documents_allowed_extension: crwdns20931:0crwdne20931:0
+      use_documents: crwdns20933:0crwdne20933:0
     keys:
-      documents_allowed_extension: crwdns5442:0crwdne5442:0
-      use_documents: crwdns5444:0crwdne5444:0
+      documents_allowed_extension: crwdns20935:0crwdne20935:0
+      use_documents: crwdns20937:0crwdne20937:0
   navigation:
-    documents: crwdns5446:0crwdne5446:0
+    documents: crwdns20939:0crwdne20939:0
   documents:
     create:
-      error: 'crwdns5448:0%{error}crwdne5448:0'
-      not_allowed_mime: crwdns5450:0%{mime}crwdne5450:0
-      notice: crwdns5452:0crwdne5452:0
+      error: 'crwdns20941:0%{error}crwdne20941:0'
+      not_allowed_mime: crwdns20943:0%{mime}crwdne20943:0
+      notice: crwdns20945:0crwdne20945:0
     destroy:
-      error: 'crwdns5454:0%{error}crwdne5454:0'
-      no_right: crwdns5456:0crwdne5456:0
-      notice: crwdns5458:0crwdne5458:0
+      error: 'crwdns20947:0%{error}crwdne20947:0'
+      no_right: crwdns20949:0crwdne20949:0
+      notice: crwdns20951:0crwdne20951:0
     form:
-      new: crwdns5460:0crwdne5460:0
-      new_folder: crwdns5462:0crwdne5462:0
-      submit: crwdns5464:0crwdne5464:0
+      new: crwdns20953:0crwdne20953:0
+      new_folder: crwdns20955:0crwdne20955:0
+      submit: crwdns20957:0crwdne20957:0
     index:
-      new: crwdns5466:0crwdne5466:0
-      new_folder: crwdns5468:0crwdne5468:0
-      title: crwdns5470:0crwdne5470:0
+      new: crwdns20959:0crwdne20959:0
+      new_folder: crwdns20961:0crwdne20961:0
+      title: crwdns20963:0crwdne20963:0
     move:
-      root_folder: crwdns9312:0crwdne9312:0
-      title: crwdns9314:0crwdne9314:0
+      root_folder: crwdns20965:0crwdne20965:0
+      title: crwdns20967:0crwdne20967:0
     update:
-      notice: crwdns9316:0crwdne9316:0
+      notice: crwdns20969:0crwdne20969:0
