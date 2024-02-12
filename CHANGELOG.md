@@ -1,3 +1,22 @@
+# Foodsoft 4.8.1
+(12 February 2024)
+
+
+### Bug Fixes
+
+* article convert_unit will fail when unit contains a comma character ([b1fa97d](https://github.com/foodcoops/foodsoft/commit/b1fa97d34d66d140e197107867251db93360f8a5))
+* documents sort sql needs Arel.sql ([4df78de](https://github.com/foodcoops/foodsoft/commit/4df78def01fc395f7902deb6f0d11d1d8b8efda7))
+* incompatible uri gem ([bae984b](https://github.com/foodcoops/foodsoft/commit/bae984bb3e760bb863410374216c7f6ef50fe93a))
+* update ruby image, fix bundler version ([c450368](https://github.com/foodcoops/foodsoft/commit/c45036810eeced044a58dac615a629a7b1fb78d0))
+
+
+### Features
+
+* **messages:** show recipients in thread view ([9ee8a8f](https://github.com/foodcoops/foodsoft/commit/9ee8a8f85bf4d912276dbfac58bbbaa1e14cde1d))
+* use active storage for invoice attachments ([0ff74e8](https://github.com/foodcoops/foodsoft/commit/0ff74e8a46c1c46be1574f74f4365f2e6870a386)), closes [#1037](https://github.com/foodcoops/foodsoft/issues/1037)
+* remove the feedback form ([9c81aa3](https://github.com/foodcoops/foodsoft/commit/9c81aa3b7e3b4b045ab32ba58a9b653458382169))
+
+
 # Foodsoft 4.8.0
 
 * feat: Show total sums for ordergroup finances [#1017](https://github.com/foodcoops/foodsoft/pull/1017)
@@ -268,3 +287,18 @@ When you upgrade, be sure to review `config/app_config.yml.SAMPLE`. When you're 
 
 # Foodsoft 3.1.1
 (20 July 2012)
+# [](https://github.com/foodcoops/foodsoft/compare/v4.8.0-rc0...v) (2024-02-12)
+
+
+### Bug Fixes
+
+* article convert_unit will fail when unit contains a comma character ([b1fa97d](https://github.com/foodcoops/foodsoft/commit/b1fa97d34d66d140e197107867251db93360f8a5))
+* documents sort sql needs Arel.sql ([4df78de](https://github.com/foodcoops/foodsoft/commit/4df78def01fc395f7902deb6f0d11d1d8b8efda7))
+* incompatible uri gem ([bae984b](https://github.com/foodcoops/foodsoft/commit/bae984bb3e760bb863410374216c7f6ef50fe93a))
+* update ruby image, fix bundler version ([c450368](https://github.com/foodcoops/foodsoft/commit/c45036810eeced044a58dac615a629a7b1fb78d0))
+
+
+### Features
+
+* **messages:** show recipients in thread view ([9ee8a8f](https://github.com/foodcoops/foodsoft/commit/9ee8a8f85bf4d912276dbfac58bbbaa1e14cde1d))
+* use active storage for invoice attachments ([0ff74e8](https://github.com/foodcoops/foodsoft/commit/0ff74e8a46c1c46be1574f74f4365f2e6870a386)), closes [#1037](https://github.com/foodcoops/foodsoft/issues/1037)
