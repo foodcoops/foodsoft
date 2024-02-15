@@ -44,12 +44,9 @@ class Admin::ConfigsController < Admin::BaseController
       if config[k]
         # allow clearing it using dummy value '{}' ('' would break recurring_select)
         if config[k][:recurr].present? && config[k][:recurr] != '{}' && !config[k][:recurr].nil?
-          r = ActiveSupport::JSON.decode(config[k][:recurr])
-          config[k][:recurr] = ''
-          if !r.nil?
-            a = FoodsoftDateUtil.rule_from(r)
-            config[k][:recurr] = a.to_ical if a
-          end
+          config[k][:recurr] = ActiveSupport::JSON.decode(config[k][:recurr])
+          date = FoodsoftDateUtil.rule_from(config[k][:recurr])
+          config[k][:recurr] = date.to_ical if date
         else
           config[k][:recurr] = ''
         end
