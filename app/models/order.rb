@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  include FoodsoftPrinter::OrderPrinterJobs
   attr_accessor :ignore_warnings, :transport_distribution
 
   attribute :transport_distribution, :integer
@@ -245,7 +246,7 @@ class Order < ApplicationRecord
   # Ignored if the order is already finished.
   def finish!(user)
     return if finished?
-
+    printer_finish!(user)
     Order.transaction do
       # set new order state (needed by notify_order_finished)
       update!(state: 'finished', ends: Time.now, updated_by: user)

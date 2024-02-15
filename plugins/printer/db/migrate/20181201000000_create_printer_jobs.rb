@@ -15,6 +15,6 @@ class CreatePrinterJobs < ActiveRecord::Migration[4.2]
       t.text :message
     end
 
-    add_index :printer_job_updates, %i[printer_job_id created_at]
+    add_index :printer_job_updates, [:printer_job_id, :created_at]
   end
 end

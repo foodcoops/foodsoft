@@ -15,7 +15,7 @@ class PrinterJobsController < ApplicationController
     state = order.open? ? 'queued' : 'ready'
     count = 0
     PrinterJob.transaction do
-      %w[articles fax groups matrix].each do |document|
+      %w(articles fax groups matrix).each do |document|
         next unless FoodsoftConfig["printer_print_order_#{document}"]
 
         job = PrinterJob.create! order: order, document: document, created_by: current_user
@@ -49,7 +49,7 @@ class PrinterJobsController < ApplicationController
     job.finish! current_user
     PrinterChannel.broadcast_unfinished
     redirect_to printer_jobs_path, notice: t('.notice')
-  rescue StandardError => e
-    redirect_to printer_jobs_path, t('errors.general_msg', msg: e.message)
+  rescue => error
+    redirect_to printer_jobs_path, t('errors.general_msg', msg: error.message)
   end
 end

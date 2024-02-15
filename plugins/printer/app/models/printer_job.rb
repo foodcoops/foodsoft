@@ -26,6 +26,6 @@ class PrinterJob < ActiveRecord::Base
   def finish!(user = nil)
     return unless finished_at.nil?
 
-    update(finished_at: Time.now, finished_by: user)
+    update_attributes finished_at: Time.now, finished_by: user
   end
 end
