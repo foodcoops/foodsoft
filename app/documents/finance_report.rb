@@ -1,4 +1,4 @@
-class FinanceReport < RenderPDF
+class FinanceReport < RenderPdf
   def initialize(range, options = {})
     @range = range
     super(options)
