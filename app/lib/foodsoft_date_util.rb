@@ -24,6 +24,8 @@ module FoodsoftDateUtil
       IceCube::Rule.from_ical(rule)
     when Hash
       IceCube::Rule.from_hash(rule)
+    when ActionController::Parameters
+      IceCube::Rule.from_hash(rule.to_hash)
     else
       rule
     end

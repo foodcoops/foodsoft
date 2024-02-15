@@ -43,11 +43,12 @@ class Admin::ConfigsController < Admin::BaseController
     for k in %i[pickup boxfill ends] do
       if config[k]
         # allow clearing it using dummy value '{}' ('' would break recurring_select)
-        if config[k][:recurr].present? && config[k][:recurr] != '{}'
+        if config[k][:recurr].present? && config[k][:recurr] != '{}' && !config[k][:recurr].nil?
           config[k][:recurr] = ActiveSupport::JSON.decode(config[k][:recurr])
-          config[k][:recurr] = FoodsoftDateUtil.rule_from(config[k][:recurr]).to_ical if config[k][:recurr]
+          date = FoodsoftDateUtil.rule_from(config[k][:recurr])
+          config[k][:recurr] = date.to_ical if date
         else
-          config[k] = nil
+          config[k][:recurr] = ''
         end
       end
     end
