@@ -1,5 +1,5 @@
 # Foodsoft 4.8.1
-(12 February 2024)
+(15 February 2024)
 
 
 ### Bug Fixes
@@ -8,7 +8,7 @@
 * documents sort sql needs Arel.sql ([4df78de](https://github.com/foodcoops/foodsoft/commit/4df78def01fc395f7902deb6f0d11d1d8b8efda7))
 * incompatible uri gem ([bae984b](https://github.com/foodcoops/foodsoft/commit/bae984bb3e760bb863410374216c7f6ef50fe93a))
 * update ruby image, fix bundler version ([c450368](https://github.com/foodcoops/foodsoft/commit/c45036810eeced044a58dac615a629a7b1fb78d0))
-
+* bug on saving config, fixes [#801](https://github.com/foodcoops/foodsoft/issues/801) ([8b152bf](https://github.com/foodcoops/foodsoft/commit/8b152bfbc0ef375f1f180c92006b62d241c83a2d))
 
 ### Features
 
@@ -302,3 +302,9 @@ When you upgrade, be sure to review `config/app_config.yml.SAMPLE`. When you're 
 
 * **messages:** show recipients in thread view ([9ee8a8f](https://github.com/foodcoops/foodsoft/commit/9ee8a8f85bf4d912276dbfac58bbbaa1e14cde1d))
 * use active storage for invoice attachments ([0ff74e8](https://github.com/foodcoops/foodsoft/commit/0ff74e8a46c1c46be1574f74f4365f2e6870a386)), closes [#1037](https://github.com/foodcoops/foodsoft/issues/1037)
+# [](https://github.com/foodcoops/foodsoft/compare/v4.8.1-rc0...v) (2024-02-15)
+
+
+### Bug Fixes
+
+* bug on saving config, fixes [#801](https://github.com/foodcoops/foodsoft/issues/801) ([8b152bf](https://github.com/foodcoops/foodsoft/commit/8b152bfbc0ef375f1f180c92006b62d241c83a2d))
