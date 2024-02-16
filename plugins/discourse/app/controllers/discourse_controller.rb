@@ -13,7 +13,9 @@ class DiscourseController < ApplicationController
     base64_payload = Base64.strict_encode64 payload.to_query
     sso = CGI.escape base64_payload
     sig = get_hmac_hex_string base64_payload
-    redirect_to "#{url}#{url.include?('?') ? '&' : '?'}sso=#{sso}&sig=#{sig}"
+
+                             
+    redirect_to "#{url}#{url.include?('?') ? '&' : '?'}sso=#{sso}&sig=#{sig}", allow_other_host: true
   end
 
   def parse_payload
