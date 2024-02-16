@@ -8,7 +8,7 @@ class Finance::FinancialLinksController < Finance::BaseController
         type: t('activerecord.models.bank_transaction'),
         description: bt.text,
         amount: bt.amount,
-        link_to: finance_bank_transaction_path(bt),
+        link_to: finance_bank_account_transaction_path(id:bt.id,bank_account_id:bt.bank_account.id),
         remove_path: remove_bank_transaction_finance_link_path(@financial_link, bt)
       }
     end

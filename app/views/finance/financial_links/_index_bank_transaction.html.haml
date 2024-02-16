@@ -14,7 +14,7 @@
         %tbody
           - for t in @bank_transactions
             %tr
-              %td= link_to format_time(t.date), add_bank_transaction_finance_link_path(@financial_link, bank_transaction: t.id), method: :put
+              %td= link_to format_date(t.date), add_bank_transaction_finance_link_path(@financial_link, bank_transaction: t.id), method: :put
               %td= t.text
               %td= t.reference
               %td= number_to_currency t.amount

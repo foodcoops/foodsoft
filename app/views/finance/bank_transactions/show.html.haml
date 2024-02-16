@@ -35,7 +35,7 @@
 
 - unless @bank_transaction.receipt.blank?
   %pre= preserve @bank_transaction.receipt
-- if @bank_transaction.image
-  %p= image_tag @bank_transaction.image_url
+-# - if @bank_transaction.image
+-#   %p= image_tag @bank_transaction.image_url
 
 = link_to t('ui.or_cancel'), finance_bank_account_transactions_path(@bank_transaction.bank_account)

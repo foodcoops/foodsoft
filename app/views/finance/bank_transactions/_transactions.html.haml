@@ -17,7 +17,7 @@
   %tbody
     - @bank_transactions.each do |t|
       %tr
-        %td= h link_to format_date(t.date), finance_bank_transaction_path(t)
+        %td= h link_to format_date(t.date), finance_bank_account_transaction_path(id:t.id)
         %td= h(t.text).gsub("\n", "<br>").html_safe
         %td= h(t.reference).gsub("\n", "<br>").html_safe
         %td.numeric{style: 'width:5em'}= format_currency t.amount
