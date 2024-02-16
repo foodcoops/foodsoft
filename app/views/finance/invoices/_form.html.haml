@@ -1,4 +1,4 @@
-.col-md-4 
+.col-md-4
   = simple_form_for([:finance, @invoice]) do |f|
     - if @invoice.created_at
       .row
@@ -35,7 +35,7 @@
           - f.object.attachments.reject(&:new_record?).each do |attachment|
             .control-text{id: "attachment_#{attachment.id}"}
               = f.hidden_field :attachments, value: attachment.signed_id, multiple: true
-              = link_to url_for(attachment), target: "_blank" do
+              = link_to attachment.url, target: "_blank" do
                 = image_tag attachment.preview(resize_to_limit: [100, 100]) if attachment.previewable?
                 = image_tag attachment.variant(resize_to_limit: [100, 100]) if attachment.variable?
               = link_to 'Delete', delete_attachment_finance_invoice_path(f.object, attachment_id: attachment.id), method: :delete, remote: true, class: 'btn'
