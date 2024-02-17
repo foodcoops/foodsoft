@@ -21,7 +21,7 @@ class Finance::BankGatewaysController < Finance::BaseController
     return deny_access if reconfigure && !@bank_gateway.can_reconfigure?(current_user)
 
     location = @bank_gateway.connector.pay_and_import_url callback_uri, user, nil, reconfigure: reconfigure
-    redirect_to location, status: :found
+    redirect_to location, status: :found, allow_other_host:true
   rescue => error
     redirect_to finance_bank_account_transactions_url(bank_account), alert: t('errors.general_msg', msg: error.message)
   end
