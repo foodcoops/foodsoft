@@ -2,6 +2,8 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
+  mount ActiveStorage::Engine, at: '/rails/active_storage'
+
   get 'order_comments/new'
 
   get 'comments/new'
