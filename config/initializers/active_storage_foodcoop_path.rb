@@ -47,6 +47,11 @@ module FoodsoftActiveStorageDiskService
 end
 
 ActiveSupport.on_load(:after_initialize) do
+  db_name = ENV.fetch('FOODCOOP_DB_NAME', nil)
+  if db_name
+    foodsoft_name db_name.split('_', 2)[1]
+    FoodsoftConfig.select_foodcoop foodsoft_name
+  end
   ActiveStorage::Service::DiskService.include FoodsoftActiveStorageDiskService
   ActiveStorage::DiskController.include FoodsoftActiveStorageDiskController
 end
