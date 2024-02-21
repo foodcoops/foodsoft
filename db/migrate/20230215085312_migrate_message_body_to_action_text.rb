@@ -10,7 +10,9 @@ class MigrateMessageBodyToActionText < ActiveRecord::Migration[7.0]
       dir.up do
         rename_column :messages, :body, :body_old
         Message.all.each do |message|
-          message.update(body: simple_format(message.body_old))
+          elem = Nokogiri::XML::DocumentFragment.parse(simple_format(message.body_old))
+          elem.content = elem.content.encode('ascii', fallback: ->(char) { "&##{char.ord};" })
+          message.update(body: elem)
           message.body.update(record_type: :Message) # action_text_rich_texts uses STI record_type field and has to be set to the real model
         end
         remove_column :messages, :body_old, :text
