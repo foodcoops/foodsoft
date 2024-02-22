@@ -8,7 +8,7 @@ class Finance::BankGatewaysController < Finance::BaseController
     count = @bank_gateway.connector.handle_callback params
     @bank_gateway.bank_accounts.each(&:assign_unlinked_transactions) unless bank_account
 
-    redirect_to redirect_to_url, notice: t('.notice', count: count)
+    redirect_to redirect_to_url, notice: t('.notice', count: count), allow_other_host:true
   rescue => error
     redirect_to redirect_to_url, alert: t('errors.general_msg', msg: error.message)
   end

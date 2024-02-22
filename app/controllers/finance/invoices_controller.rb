@@ -89,7 +89,7 @@ class Finance::InvoicesController < ApplicationController
 
   def pay
     unless params[:invoices]
-      return redirect_to unpaid_finance_invoices_path, alert: I18n.t('finance.invoices.controller.pay.no_invoices')
+      return redirect_to unpaid_finance_invoices_path, alert: I18n.t('finance.invoices.controller.pay.no_invoices'), allow_other_host:true
     end
 
     ids = params[:invoices].map(&:to_i)
