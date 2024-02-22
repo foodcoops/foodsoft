@@ -8,11 +8,18 @@
     = f.input :unit
     = f.input :note
     - if stock_article.new_record?
-      = f.input :price
-      = f.input :tax, :wrapper => :append do
-        = f.input_field :tax
-        %span.add-on %
-      = f.input :deposit
+      .fold-line
+        = f.input :price do
+          .input-prepend
+            %span.add-on= t 'number.currency.format.unit'
+            = f.input_field :price, class: 'input-mini'
+        = f.input :tax, :wrapper => :append do
+          = f.input_field :tax, class: 'input-mini'
+          %span.add-on %
+      = f.input :deposit do
+        .input-prepend
+          %span.add-on= t 'number.currency.format.unit'
+          = f.input_field :deposit, class: 'input-mini'
     - else
       = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article).html_safe
     = f.association :article_category

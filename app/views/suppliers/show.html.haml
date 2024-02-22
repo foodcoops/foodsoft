@@ -42,7 +42,7 @@
       %dt= heading_helper(Supplier, :note) + ':'
       %dd= simple_format(@supplier.note)
       %dt= heading_helper(Supplier, :min_order_quantity) + ':'
-      %dd= @supplier.min_order_quantity
+      %dd= number_to_currency @supplier.min_order_quantity
 
     .clearfix
     - if @current_user.role_suppliers?
