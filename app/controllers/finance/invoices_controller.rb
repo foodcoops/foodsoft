@@ -125,7 +125,7 @@ class Finance::InvoicesController < ApplicationController
     callback_url = callback_finance_bank_gateway_url(bank_gateway)
     user = bank_gateway.unattended_user != current_user && current_user
     location = bank_gateway.connector.pay_and_import_url callback_url, user, { sepaCreditTransferPayments: payments }
-    redirect_to location, status: :found
+    redirect_to location, status: :found, allow_other_host: true
   end
 
   private
