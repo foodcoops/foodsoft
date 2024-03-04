@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_04_004950) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -85,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_04_004950) do
     t.datetime "deleted_at", precision: nil
     t.string "type"
     t.integer "quantity", default: 0
+    t.integer "max_quantity"
     t.index ["article_category_id"], name: "index_articles_on_article_category_id"
     t.index ["name", "supplier_id"], name: "index_articles_on_name_and_supplier_id"
     t.index ["supplier_id"], name: "index_articles_on_supplier_id"
@@ -101,7 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_04_004950) do
   create_table "bank_accounts", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "iban"
-    t.string "description"
+    t.text "description"
     t.decimal "balance", precision: 12, scale: 2, default: "0.0", null: false
     t.datetime "last_import", precision: nil
     t.string "import_continuation_point"
@@ -131,12 +132,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_04_004950) do
 
   create_table "documents", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
-    t.string "mime"
-    t.binary "data", size: :long
     t.integer "created_by_user_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.integer "parent_id"
+    t.boolean "folder", default: false, null: false
     t.index ["parent_id"], name: "index_documents_on_parent_id"
   end
 
