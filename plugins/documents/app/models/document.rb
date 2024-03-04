@@ -4,14 +4,18 @@ class Document < ApplicationRecord
 
   belongs_to :created_by, class_name: 'User', foreign_key: 'created_by_user_id'
 
+  has_one_attached :attachment
+
   acts_as_tree
+
+  validate :valid_attachment
 
   def file?
     !folder?
   end
 
-  def folder?
-    mime.nil?
+  def valid_attachment
+    errors.add(:attachment, I18n.t('documents.create.not_allowed_mime', mime: attachment.content_type)) unless !attachment.attached? or allowed_mime? attachment.content_type
   end
 
   def filename
@@ -27,4 +31,17 @@ class Document < ApplicationRecord
 
     "#{name}.#{types.first.preferred_extension}"
   end
+
+  def allowed_mime?(mime)
+    whitelist = FoodsoftConfig[:documents_allowed_extension].split
+    MIME::Types.type_for(whitelist).each do |type|
+      return true if type.like? mime
+    end
+    false
+  end
+
+  def delete_attachment
+    attachment.purge_later
+  end
+
 end

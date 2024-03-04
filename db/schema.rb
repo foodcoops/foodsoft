@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_26_111615) do
+ActiveRecord::Schema[7.0].define(version: 20240303231629) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -131,12 +131,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_26_111615) do
 
   create_table "documents", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
-    t.string "mime"
-    t.binary "data", size: :long
     t.integer "created_by_user_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.integer "parent_id"
+    t.boolean "folder"
     t.index ["parent_id"], name: "index_documents_on_parent_id"
   end
 
