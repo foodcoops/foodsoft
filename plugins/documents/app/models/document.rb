@@ -15,7 +15,7 @@ class Document < ApplicationRecord
   end
 
   def valid_attachment
-    errors.add(:attachment, I18n.t('documents.create.not_allowed_mime', mime: attachment.content_type)) unless !attachment.attached? or allowed_mime? attachment.content_type
+    errors.add(:attachment, I18n.t('documents.create.not_allowed_mime', mime: attachment.content_type)) unless !attachment.attached? || allowed_mime?(attachment.content_type)
   end
 
   def filename
@@ -43,5 +43,4 @@ class Document < ApplicationRecord
   def delete_attachment
     attachment.purge_later
   end
-
 end
