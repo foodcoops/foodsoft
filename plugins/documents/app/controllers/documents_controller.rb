@@ -27,14 +27,12 @@ class DocumentsController < ApplicationController
     @document = Document.new name: params[:document][:name]
     @document.parent = Document.find_by_id(params[:document][:parent_id])
     @document.attachment = params[:document][:attachment]
-    if !@document.attachment.nil?
-      if @document.name.empty?
-        name = File.basename(@document.attachment.filename.to_s)
-        @document.name = name.gsub(/[^\w.-]/, '_')
-      end
+    if !@document.attachment.nil? and @document.name.empty?
+      name = File.basename(@document.attachment.filename.to_s)
+      @document.name = name.gsub(/[^\w.-]/, '_')
     end
     @document.created_by = current_user
-    @document.folder = !params[:document].has_key?(:attachment)
+    @document.folder = !params[:document].key?(:attachment)
     @document.save!
     redirect_to @document.parent || documents_path, notice: t('.notice')
   rescue StandardError => e
@@ -75,5 +73,4 @@ class DocumentsController < ApplicationController
   def move
     @document = Document.find(params[:document_id])
   end
-
 end
