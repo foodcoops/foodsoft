@@ -38,9 +38,7 @@ module FoodsoftActiveStorageDiskService
           purpose: :blob_key
         )
 
-        if url_options.blank?
-          raise ArgumentError, "Cannot generate URL for #{filename} using Disk service, please set ActiveStorage::Current.url_options."
-        end
+        raise ArgumentError, "Cannot generate URL for #{filename} using Disk service, please set ActiveStorage::Current.url_options." if url_options.blank?
 
         url_helpers.rails_disk_service_url(verified_key_with_expiration, filename: filename, **url_options)
       end
