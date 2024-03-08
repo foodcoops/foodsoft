@@ -1,26 +1,24 @@
 require_relative 'seed_helper'
 
 ## Financial transaction classes
-
-FinancialTransactionClass.create!(id: 1, name: 'Standard')
+FinancialTransactionClass.first_or_create!(id: 1, name: 'Standard')
 FinancialTransactionClass.create!(id: 2, name: 'Foodsoft')
 
 ## Suppliers & articles
+SupplierCategory.first_or_create!(id: 1, name: 'Other', financial_transaction_class_id: 1)
 
-SupplierCategory.create!(id: 1, name: 'Other', financial_transaction_class_id: 1)
+Supplier.first_or_create!([
+                            { id: 1, name: 'Beautiful bakery', supplier_category_id: 1,
+                              address: 'Smallstreet 1, Cookilage', phone: '0123456789', email: 'info@bbakery.test', min_order_quantity: '100' },
+                            { id: 2, name: 'Chocolatiers', supplier_category_id: 1,
+                              address: 'Multatuliroad 1, Amsterdam', phone: '0123456789', email: 'info@chocolatiers.test', url: 'http://www.chocolatiers.test/', contact_person: 'Max Pure', delivery_days: 'Tue, Fr (Amsterdam)' },
+                            { id: 3, name: 'Cheesemaker', supplier_category_id: 1,
+                              address: 'Cheesestreet 5, London', phone: '0123456789', url: 'http://www.cheesemaker.test/' },
+                            { id: 4, name: 'The Nuthome', supplier_category_id: 1,
+                              address: 'Alexanderplatz, Berlin', phone: '0123456789', email: 'info@thenuthome.test', url: 'http://www.thenuthome.test/', note: 'delivery in Berlin; €9 delivery costs for orders under €123' }
+                          ])
 
-Supplier.create!([
-                   { id: 1, name: 'Beautiful bakery', supplier_category_id: 1,
-                     address: 'Smallstreet 1, Cookilage', phone: '0123456789', email: 'info@bbakery.test', min_order_quantity: '100' },
-                   { id: 2, name: 'Chocolatiers', supplier_category_id: 1,
-                     address: 'Multatuliroad 1, Amsterdam', phone: '0123456789', email: 'info@chocolatiers.test', url: 'http://www.chocolatiers.test/', contact_person: 'Max Pure', delivery_days: 'Tue, Fr (Amsterdam)' },
-                   { id: 3, name: 'Cheesemaker', supplier_category_id: 1,
-                     address: 'Cheesestreet 5, London', phone: '0123456789', url: 'http://www.cheesemaker.test/' },
-                   { id: 4, name: 'The Nuthome', supplier_category_id: 1,
-                     address: 'Alexanderplatz, Berlin', phone: '0123456789', email: 'info@thenuthome.test', url: 'http://www.thenuthome.test/', note: 'delivery in Berlin; €9 delivery costs for orders under €123' }
-                 ])
-
-ArticleCategory.create!(id: 1, name: 'Other', description: 'other, misc, unknown')
+ArticleCategory.first_or_create!(id: 1, name: 'Other', description: 'other, misc, unknown')
 ArticleCategory.create!(id: 2, name: 'Fruit')
 ArticleCategory.create!(id: 3, name: 'Vegetables')
 ArticleCategory.create!(id: 4, name: 'Potatoes & onions')
@@ -255,8 +253,8 @@ Article.create!(name: 'Coconut grated', supplier_id: 4, article_category_id: 13,
 
 ## Members & groups
 
-User.create!(id: 1, nick: 'admin', password: 'secret', first_name: 'Anton', last_name: 'Administrator',
-             email: 'admin@foo.test', phone: '+4421486548', created_on: 'Wed, 15 Jan 2014 16:15:33 UTC +00:00')
+User.first_or_create!(id: 1, nick: 'admin', password: 'secret', first_name: 'Anton', last_name: 'Administrator',
+                      email: 'admin@foo.test', phone: '+4421486548', created_on: 'Wed, 15 Jan 2014 16:15:33 UTC +00:00')
 User.create!(id: 2, nick: 'john', password: 'secret', first_name: 'John', last_name: 'Doe',
              email: 'john@doe.test', created_on: 'Sun, 19 Jan 2014 17:38:22 UTC +00:00')
 User.create!(id: 3, nick: 'peter', password: 'secret', first_name: 'Peter', last_name: 'Peters',
@@ -267,8 +265,8 @@ User.create!(id: 5, nick: 'mary', password: 'secret', first_name: 'Mary', last_n
              email: 'marie@lou.test', created_on: 'Mon, 03 Feb 2014 11:47:17 UTC +00:00')
 User.find_by_nick('mary').update(last_activity: 5.days.ago)
 
-Workgroup.create!(id: 1, name: 'Administrators', description: 'System administrators.',
-                  account_balance: 0.0, created_on: 'Wed, 15 Jan 2014 16:15:33 UTC +00:00', role_admin: true, role_suppliers: true, role_article_meta: true, role_finance: true, role_orders: true, next_weekly_tasks_number: 8, ignore_apple_restriction: false)
+Workgroup.first_or_create!(id: 1, name: 'Administrators', description: 'System administrators.',
+                           account_balance: 0.0, created_on: 'Wed, 15 Jan 2014 16:15:33 UTC +00:00', role_admin: true, role_suppliers: true, role_article_meta: true, role_finance: true, role_orders: true, next_weekly_tasks_number: 8, ignore_apple_restriction: false)
 Workgroup.create!(id: 2, name: 'Finances', account_balance: 0.0,
                   created_on: 'Sun, 19 Jan 2014 17:40:03 UTC +00:00', role_admin: false, role_suppliers: false, role_article_meta: false, role_finance: true, role_orders: false, next_weekly_tasks_number: 8, ignore_apple_restriction: false)
 Workgroup.create!(id: 3, name: 'Ordering', account_balance: 0.0,
@@ -284,7 +282,7 @@ Ordergroup.create!(id: 7, name: 'Jan Klaassen', account_balance: -0.35E2,
 Ordergroup.create!(id: 8, name: 'John Doe', account_balance: 0.90E2,
                    created_on: 'Wed, 09 Apr 2014 12:23:29 UTC +00:00', role_admin: false, role_suppliers: false, role_article_meta: false, role_finance: false, role_orders: false, contact_person: 'John Doe', stats: { jobs_size: 0, orders_sum: 0 }, next_weekly_tasks_number: 8, ignore_apple_restriction: false)
 
-Membership.create!(group_id: 1, user_id: 1)
+Membership.first_or_create!(group_id: 1, user_id: 1)
 Membership.create!(group_id: 5, user_id: 1)
 Membership.create!(group_id: 2, user_id: 2)
 Membership.create!(group_id: 8, user_id: 2)
@@ -308,7 +306,7 @@ seed_group_orders
 
 ## Finances
 
-FinancialTransactionType.create!(id: 1, name: 'Foodcoop', financial_transaction_class_id: 1)
+FinancialTransactionType.first_or_create!(id: 1, name: 'Foodcoop', financial_transaction_class_id: 1)
 
 FinancialTransaction.create!(id: 1, ordergroup_id: 5, amount: -0.35E2,
                              note: 'Membership fee for ordergroup', user_id: 1, created_on: 'Sat, 18 Jan 2014 00:38:48 UTC +00:00', financial_transaction_type_id: 1)
