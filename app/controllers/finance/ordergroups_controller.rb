@@ -13,8 +13,8 @@ class Finance::OrdergroupsController < Finance::BaseController
     @ordergroups = @ordergroups.where('groups.name LIKE ?', "%#{params[:query]}%") unless params[:query].nil?
     @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
 
-    @total_balances = FinancialTransactionClass.sorted.each_with_object({}) do |c, tmp|
-      tmp[c.id] = c.financial_transactions.reduce(0) { |sum, t| sum + t.amount }
+    @total_balances = FinancialTransactionClass.sorted.each_with_object({}) do |transaction_class, total_balances|
+      total_balances[transaction_class.id] = @ordergroups.reduce(0) { |sum, o| o["sum_of_class_#{transaction_class.id}"] + sum }
     end
   end
 end
