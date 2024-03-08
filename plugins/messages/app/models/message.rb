@@ -7,6 +7,8 @@ class Message < ApplicationRecord
   has_many :message_recipients, dependent: :destroy
   has_many :recipients, through: :message_recipients, source: :user
 
+  attribute :recipients_ids
+
   attr_accessor :send_method, :recipient_tokens, :order_id
 
   scope :threads, -> { where(reply_to: nil) }
