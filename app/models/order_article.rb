@@ -172,8 +172,9 @@ class OrderArticle < ApplicationRecord
             self.article_price = article.article_prices.first and save # Assign new created article price to order article
           else
             # Creates a new article_price if neccessary
-            # Set created_at timestamp to order ends, to make sure the current article price isn't changed
-            create_article_price!(price_attributes.merge(article_id: article_id, created_at: order.ends)) and save
+            # Ugly workaround for faulty db structure:
+            # Set created_at timestamp to just before the latest article price, to make sure the current article price isn't changed
+            create_article_price!(price_attributes.merge(article_id: article_id, created_at: article.article_prices.last.created_at - 1.second)) and save
           end
 
           # Updates ordergroup values
