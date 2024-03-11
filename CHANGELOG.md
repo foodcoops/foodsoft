@@ -9,6 +9,9 @@
 * incompatible uri gem ([bae984b](https://github.com/foodcoops/foodsoft/commit/bae984bb3e760bb863410374216c7f6ef50fe93a))
 * update ruby image, fix bundler version ([c450368](https://github.com/foodcoops/foodsoft/commit/c45036810eeced044a58dac615a629a7b1fb78d0))
 * bug on saving config, fixes [#801](https://github.com/foodcoops/foodsoft/issues/801) ([8b152bf](https://github.com/foodcoops/foodsoft/commit/8b152bfbc0ef375f1f180c92006b62d241c83a2d))
+* active storage links for attachments ([#1045](https://github.com/foodcoops/foodsoft/issues/1045)) ([4b7356e](https://github.com/foodcoops/foodsoft/commit/4b7356e7e4993f44590cd62dc9f24642cb94c89a))
+* allow_other_host for discourse plugin redirects ([#1043](https://github.com/foodcoops/foodsoft/issues/1043)) ([8836697](https://github.com/foodcoops/foodsoft/commit/8836697ed7d9d3137d7797067a2db9e9208a6440))
+* **finance:** ordergroup overview total balances ([#1051](https://github.com/foodcoops/foodsoft/issues/1051)) ([a5861f5](https://github.com/foodcoops/foodsoft/commit/a5861f55855dfbe5ce343d4d1896121ccf14471d))
 
 ### Features
 
