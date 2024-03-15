@@ -31,24 +31,26 @@ class MessagesMailReceiver
     body = EmailReplyTrimmer.trim(body)
     raise BlankBodyException if body.empty?
 
-    message = @user.send_messages.new body: body,
-                                      group: @message.group,
-                                      private: @message.private,
-                                      received_email: data
-    message.reply_to_message = if @message.reply_to
-                                 @message.reply_to_message
-                               else
-                                 @message
-                               end
-    message.subject = if mail.subject
-                        mail.subject.gsub("[#{FoodsoftConfig[:name]}] ", '')
-                      else
-                        I18n.t('messages.model.reply_subject', subject: message.reply_to_message.subject)
-                      end
-    message.add_recipients [@message.sender_id]
+    ActiveRecord::Base.transaction do
+      message = @user.send_messages.new body: body,
+                                        group: @message.group,
+                                        private: @message.private,
+                                        received_email: data
+      message.reply_to_message = if @message.reply_to
+                                   @message.reply_to_message
+                                 else
+                                   @message
+                                 end
+      message.subject = if mail.subject
+                          mail.subject.gsub("[#{FoodsoftConfig[:name]}] ", '')
+                        else
+                          I18n.t('messages.model.reply_subject', subject: message.reply_to_message.subject)
+                        end
+      message.add_recipients [@message.sender_id]
 
-    message.save!
-    DeliverMessageJob.perform_later(message)
+      message.save!
+      DeliverMessageJob.perform_later(message)
+    end
   end
 
   private
