@@ -100,6 +100,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'rails-erd', '~> 1.7'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
