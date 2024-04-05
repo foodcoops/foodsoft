@@ -11,5 +11,9 @@ FactoryBot.define do
     # transactions we'd use the default. This, however, is the easiest way to
     # get the factory going. If you want equal types, specify it explicitly.
     financial_transaction_type
+
+    trait :pending do
+      amount { nil }
+    end
   end
 end
