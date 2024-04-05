@@ -58,6 +58,8 @@
               %td
                 - unless order.stockit?
                   = receive_button order, class: 'btn-small'
+                - if current_user.role_finance?
+                  = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-small btn-primary'
 
               %td
                 = link_to t('ui.copy'), new_order_path(order_id: order), class: 'btn btn-small'
