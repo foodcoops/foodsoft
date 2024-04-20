@@ -632,6 +632,7 @@ de:
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
+      use_financial_links: Wenn aktiviert, werden Optionen zum Anlegen von Finanzlinks angezeigt, die zusammenhängende Kontotransaktionen, Rechnungen und Banktransaktionen gruppieren können. Außerdem werden Optionen zum Anlegen von Foodcoop-Transaktionen angezeigt (Transaktionen, die keiner Bestellgruppe zugeordnet sind, sondern als Ausgleichsbuchungen zwecks doppelter Buchführung dienen).
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
       use_self_service: Wenn aktiviert, können Benutzer_innen selbständig dafür freigegebene Abrechungsfunktionen nutzen.
       webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
@@ -691,6 +692,7 @@ de:
       use_apple_points: Apfelpunkte verwenden
       use_boxfill: Kistenauffüllphase
       use_iban: IBAN verwenden
+      use_financial_links: Finanzlinks & Foodcoop-Transaktionen verwenden
       use_nick: Benutzernamen verwenden
       use_self_service: Selbstbedienung verwenden
       webstats_tracking_code: Code für Websiteanalysetool
@@ -792,6 +794,8 @@ de:
       confirm:
         clear: Abrechnen
         first_paragraph: 'Wenn die Bestellung abgerechnet wird, werden ebenfalls alle Gruppenkonten aktualisiert.<br />Die Konten werden wie folgt belastet:'
+        create_financial_link: Erstelle einen gemeinsamen Finanzlink für die neuen Transaktionen.
+        create_foodcoop_transaction: Erstelle eine Foodcoop-Transaktion mit der invertierten Summe (%{sum}).
         or_cancel: oder zurück zur Abrechnung
         title: Bestellung abrechnen
       edit_note:
@@ -886,11 +890,11 @@ de:
       notice: Rechnung wurde erstellt.
     financial_links:
       add_bank_transaction:
-        notice: Verlinkung wurde zu der Banktransaktion wurde hinzugefügt.
+        notice: Verlinkung zu der Banktransaktion wurde hinzugefügt.
       add_financial_transaction:
-        notice: Verlinkung wurde zu der Kontotransaktion wurde hinzugefügt.
+        notice: Verlinkung zu der Kontotransaktion wurde hinzugefügt.
       add_invoice:
-        notice: Verlinkung wurde zu der Rechnung wurde hinzugefügt.
+        notice: Verlinkung zu der Rechnung wurde hinzugefügt.
       create:
         notice: Ein neuer Finanzlink wurde erstellt.
       create_financial_transaction:
@@ -904,11 +908,11 @@ de:
       new_financial_transaction:
         title: Neue Kontotransaktion hinzufügen
       remove_bank_transaction:
-        notice: Verlinkung wurde zu der Banktransaktion wurde entfernt.
+        notice: Verlinkung zu der Banktransaktion wurde entfernt.
       remove_financial_transaction:
-        notice: Verlinkung wurde zu der Kontotransaktion wurde entfernt.
+        notice: Verlinkung zu der Kontotransaktion wurde entfernt.
       remove_invoice:
-        notice: Verlinkung wurde zu der Rechnung wurde entfernt.
+        notice: Verlinkung zu der Rechnung wurde entfernt.
       show:
         add_bank_transaction: Banktransaktion hinzufügen
         add_financial_transaction: Kontotransaktion hinzufügen
@@ -919,6 +923,8 @@ de:
         new_financial_transaction: Neue Kontotransaktion hinzufügen
         title: Finanzlink %{number}
         type: Typ
+        remove_from_link: Von Link entfernen
+        remove_from_link_confirm: Hierdurch wird die Transaktion nicht gelöscht, sondern nur vom Finanzlink entfernt. Möchtest du fortfahren?
     financial_transactions:
       controller:
         create:
@@ -934,29 +940,30 @@ de:
         last_updated_at: "(zuletzt aktualisiert vor %{when})"
         new_transaction: Neue Transaktion anlegen
         title: Kontoauszug für %{name}
+        title_foodcoop: Foodcoop-Kontoauszug
       index_collection:
         show_groups: Konten verwalten
         title: Kontotransaktionen
       new:
         paragraph: Hier kannst du der Bestellgruppe <b>%{name}</b> Geld gutschreiben/abziehen.
-        paragraph_foodcoop: Hier kannst du der <b>Foodcooop</b> Geld gutschreiben/abziehen.
+        paragraph_foodcoop: Hier kannst du der <b>Foodcoop</b> Geld gutschreiben/abziehen.
         title: Neue Transaktion
       new_collection:
         add_all_ordergroups: Alle Bestellgruppen hinzufügen
         add_all_ordergroups_custom_field: Alle Bestellgruppen mit %{label} hinzufügen
         create_financial_link: Erstelle einen gemeinsamen Finanzlink für die neuen Transaktionen.
-        create_foodcoop_transaction: Erstelle einen Transaktion mit der der invertieten Summe für die Foodcoop (für den Fall der "doppelte Buchführung")
+        create_foodcoop_transaction: Erstelle eine Foodcoop-Transaktion mit der invertierten Summe (für den Fall der "doppelten Buchführung")
         new_ordergroup: Weitere Bestellgruppe hinzufügen
         save: Transaktionen speichern
         set_balance: Setze den Kontostand der Bestellgruppe auf den eingegebenen Betrag.
-        sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualsieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
+        sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualisieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
         title: Mehrere Konten aktualisieren
       ordergroup:
         remove: Entfernen
         remove_group: Gruppe enfernen
       transactions:
-        confirm_revert: Wills du %{name} wirklich rückgängig machen? Hierbei wird eine zusätzliche Transaktion mit dem invertierten Betrag hinzugefügt und gemeinsam mit der originalen Transaktion versteckt. Diese versteckten Transaktionen sind nur über die Option 'Versteckte anzeigen' sichtbar und können von normalen Benutzer_innen überhaupt nicht angezeigt werden.
-        revert_title: Transaktion rückgängig machen, um sie vor normalen Benutzer_innen versteckt.
+        confirm_revert: Willst du %{name} wirklich rückgängig machen? Hierbei wird eine zusätzliche Transaktion mit dem invertierten Betrag hinzugefügt und gemeinsam mit der originalen Transaktion versteckt. Diese versteckten Transaktionen sind nur über die Option 'Versteckte anzeigen' sichtbar und können von normalen Benutzer_innen überhaupt nicht angezeigt werden.
+        revert_title: Transaktion rückgängig machen und vor normalen Benutzer_innen verstecken.
       transactions_search:
         show_hidden: Versteckte anzeigen
     index:
@@ -990,7 +997,7 @@ de:
         new_financial_link: Neuer Finanzlink
         new_transaction: Neue Überweisungen eingeben
         show_all: Alle Transaktionen
-        show_foodcoop: Foodcoop Transaktionen
+        show_foodcoop: Foodcoop-Transaktionen
         title: Konten verwalten
       ordergroups:
         account_statement: Kontoauszug

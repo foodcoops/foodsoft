@@ -1,6 +1,7 @@
 - with_ordergroup = local_assigns[:with_ordergroup]
 - with_hidden = local_assigns[:with_hidden]
 - with_csv = local_assigns[:with_csv]
+- with_grouporder_links = local_assigns[:with_grouporder_links]
 - with_payment = @financial_transactions.with_payment_plugin.any?
 .pull-right
   - if with_csv
@@ -36,7 +37,7 @@
     - @financial_transactions.each do |t|
       %tr{class: "#{'deleted_row' if t.hidden?}"}
         %td
-          - if t.financial_link
+          - if t.financial_link && current_user.role_finance?
             = link_to format_time(t.created_on), finance_link_path(t.financial_link)
           - else
             = format_time(t.created_on)
@@ -45,11 +46,7 @@
         %td= h show_user(t.user)
         - if FinancialTransactionType.has_multiple_types
           %td= h t.financial_transaction_type.name
-        %td
-          - if t.group_order
-            = link_to t.note, t.group_order
-          - else
-            = t.note
+        %td= render "finance/financial_transactions/order_note", financial_transaction:t, with_grouporder_link: with_grouporder_links
         - if with_payment
           %td= t.payment_plugin
           %td= t.payment_method

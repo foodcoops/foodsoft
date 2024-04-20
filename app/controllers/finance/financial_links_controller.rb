@@ -13,10 +13,16 @@ class Finance::FinancialLinksController < Finance::BaseController
       }
     end
     @items += @financial_link.financial_transactions.map do |ft|
+      ft_note =
+        if ft.group_order
+          view_context.link_to ft.note, new_finance_order_path(order_id: ft.group_order.order.id)
+        else
+          ft.note
+        end
       {
         date: ft.created_on,
         type: t('activerecord.models.financial_transaction'),
-        description: "#{ft.ordergroup_name}: #{ft.note}",
+        description: "#{ft.ordergroup_name}: #{ft_note}",
         amount: ft.amount,
         link_to: finance_group_transactions_path(ft.ordergroup),
         remove_path: remove_financial_transaction_finance_link_path(@financial_link, ft)
@@ -80,8 +86,7 @@ class Finance::FinancialLinksController < Finance::BaseController
   end
 
   def index_financial_transaction
-    @financial_transactions = FinancialTransaction.without_financial_link.includes(:financial_transaction_type,
-                                                                                   :ordergroup)
+    @financial_transactions = FinancialTransaction.without_financial_link.includes(:financial_transaction_type, :ordergroup, :group_order)
   end
 
   def add_financial_transaction
