@@ -31,4 +31,4 @@
         'data-submit-onchange' => true, class: 'form-search' do
         = text_field_tag :query, params[:query], class: 'input-medium search-query',
           placeholder: t('.search')
-    #transactions= render "finance/financial_transactions/transactions", with_csv: false
+    #transactions= render "finance/financial_transactions/transactions", with_csv: false, with_grouporder_links: true

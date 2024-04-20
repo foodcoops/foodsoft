@@ -9,6 +9,14 @@
       %tr{:class => cycle('even', 'odd')}
         %td= group_order.ordergroup_name
         %td.numeric= number_to_currency(group_order.total)
+  - if FoodsoftConfig[:use_financial_links]
+    %p
+      %label
+        = check_box_tag :create_financial_link, true, params.fetch(:create_financial_link, true)
+        = t('.create_financial_link')
+      %label
+        = check_box_tag :create_foodcoop_transaction, true, params.fetch(:create_foodcoop_transaction, true)
+        = t('.create_foodcoop_transaction', sum: number_to_currency(@order.sum(:groups)))
   .form-actions
     = submit_tag t('.clear'), class: 'btn btn-primary'
     = link_to t('.or_cancel'), new_finance_order_path(order_id: @order.id)

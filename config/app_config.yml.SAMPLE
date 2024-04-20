@@ -68,6 +68,24 @@ default: &defaults
   # not fully enforced right now, since the check is only client-side
   #minimum_balance: 0
 
+  # When you keep track of who received what elsewhere (e.g. on paper), and you don't want to
+  # enter this into Foodsoft, set this to true. You'll need to charge member accounts 
+  # manually (using "Add new transactions"). You still need to settle orders in the 
+  # balancing screen, but this will not charge any member accounts.
+  #charge_members_manually: true
+
+  # When enabled, supplier and user provide an additonal field for storing the international bank account number.
+  #use_iban: true
+
+  # When enabled, options to create financial links will be shown, which can group associated 
+  # financial transactions, invoices, and bank transactions. Also, options to create foodcoop transactions 
+  # will be shown (transactions which aren't assigned to any ordergroup, but serve as balancing entries 
+  # for double-entry accounting.)
+  #use_financial_links: true
+
+  # When enabled, members are able to use selected balancing functions on their own.
+  #use_self_service: true
+
   # how many days there are between two periodic tasks
   #tasks_period_days: 7
   # how many days upfront periodic tasks are created

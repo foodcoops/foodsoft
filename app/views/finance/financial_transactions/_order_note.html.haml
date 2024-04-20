@@ -1,0 +1,9 @@
+- financial_transaction = local_assigns[:financial_transaction]
+- with_grouporder_link = local_assigns[:with_grouporder_link]
+- if financial_transaction.group_order
+  - if with_grouporder_link
+    = link_to financial_transaction.note, financial_transaction.group_order
+  - else
+    = link_to financial_transaction.note, new_finance_order_path(order_id: financial_transaction.group_order.order.id)
+- else
+  = financial_transaction.note

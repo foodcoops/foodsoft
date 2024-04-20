@@ -632,6 +632,7 @@ en:
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
       use_boxfill: When enabled, near end of an order, members are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
       use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
+      use_financial_links: When enabled, options to create financial links will be shown, which can group associated financial transactions, invoices, and bank transactions. Also, options to create foodcoop transactions will be shown (transactions which aren't assigned to any ordergroup, but serve as balancing entries for double-entry accounting.)
       use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
       use_self_service: When enabled, members are able to use selected balancing functions on their own.
       webstats_tracking_code: Tracking code for web analytics (like Piwik or Google analytics). Leave empty for no tracking.
@@ -691,6 +692,7 @@ en:
       use_apple_points: Apple points
       use_boxfill: Box-fill phase
       use_iban: Use IBAN
+      use_financial_links: Use financial links & foodcoop transactions
       use_nick: Use nicknames
       use_self_service: Use self service
       webstats_tracking_code: Tracking code
@@ -792,6 +794,8 @@ en:
       confirm:
         clear: Settle
         first_paragraph: 'When the order is settled, all group accounts will be updated.<br />The accounts will be charged as follows:'
+        create_financial_link: Create a common financial link for the new transactions.
+        create_foodcoop_transaction: Create a foodcoop transaction with the inverted sum (%{sum}).
         or_cancel: or back to accounting
         title: Settle order
       edit_note:
@@ -919,6 +923,8 @@ en:
         new_financial_transaction: New financial transaction
         title: Financial link %{number}
         type: Type
+        remove_from_link: Remove from link
+        remove_from_link_confirm: This won't delete the transaction, but only remove it from the link. Do you want to proceed?
     financial_transactions:
       controller:
         create:
@@ -934,6 +940,7 @@ en:
         last_updated_at: "(last updated %{when} ago)"
         new_transaction: Create new transaction
         title: Account statement for %{name}
+        title_foodcoop: Foodcoop account statement
       index_collection:
         show_groups: Manage accounts
         title: Financial transactions
@@ -990,7 +997,7 @@ en:
         new_financial_link: New financial link
         new_transaction: Add new transactions
         show_all: All transactions
-        show_foodcoop: Foodcoop transaktions
+        show_foodcoop: Foodcoop transactions
         title: Manage accounts
       ordergroups:
         account_statement: Account statement

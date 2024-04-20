@@ -85,7 +85,7 @@
             %td= h(show_user(ft.user))
             - if FinancialTransactionType.has_multiple_types
               %td= h(ft.financial_transaction_type.name)
-            %td= h(ft.note)
+            %td= h(render "finance/financial_transactions/order_note", financial_transaction:ft, with_grouporder_link: true)
             - if with_payment
               %td= h(ft.payment_state)
             - FinancialTransactionClass.sorted.each do |fc|

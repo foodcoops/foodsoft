@@ -27,9 +27,9 @@
           - else
             = format_date item[:date]
         %td= item[:type]
-        %td= item[:description]
+        %td= sanitize item[:description]
         %td.numeric{style: 'width:5em'}= format_currency item[:amount]
-        %td= link_to t('ui.delete'), item[:remove_path], :data => {:confirm => t('ui.confirm_delete', name: item[:description])}, :method => :delete,
+        %td= link_to t('.remove_from_link'), item[:remove_path], :data => {:confirm => t('.remove_from_link_confirm')}, :method => :delete,
           class: 'btn btn-danger btn-mini'
 
 %p
