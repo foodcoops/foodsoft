@@ -634,6 +634,7 @@ en:
       use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
       use_financial_links: When enabled, options to create financial links will be shown, which can group associated financial transactions, invoices, and bank transactions. Also, options to create foodcoop transactions will be shown (transactions which aren't assigned to any ordergroup, but serve as balancing entries for double-entry accounting.)
       use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
+      profile_data_public_by_default: When creating a new user, the pricacy options "Phone number / Email / Name is visible for other members" will be checked by default. If nicknames are disabled, name will be visible either way.
       use_self_service: When enabled, members are able to use selected balancing functions on their own.
       webstats_tracking_code: Tracking code for web analytics (like Piwik or Google analytics). Leave empty for no tracking.
     keys:
@@ -694,6 +695,7 @@ en:
       use_iban: Use IBAN
       use_financial_links: Use financial links & foodcoop transactions
       use_nick: Use nicknames
+      profile_data_public_by_default: Profile data visible to others by default
       use_self_service: Use self service
       webstats_tracking_code: Tracking code
     tabs:
