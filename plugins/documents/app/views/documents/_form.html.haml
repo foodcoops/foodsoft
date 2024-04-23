@@ -6,7 +6,7 @@
   .modal-body
     = f.input :name, as: :string, required: @document.folder?
     - if @document.file?
-      = f.input :data, as: :file, required: true
+      = f.input :attachment, as: :file, input_html: {multiple: false}, direct_upload: true, required: true
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = f.submit t('.submit'), class: 'btn btn-primary'
