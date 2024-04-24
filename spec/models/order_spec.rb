@@ -71,15 +71,6 @@ describe Order do
     end
   end
 
-  it 'sends mail if min_order_quantity has been reached' do
-    create(:user, groups: [create(:ordergroup)])
-    create(:order, created_by: user, starts: Date.yesterday, ends: 1.hour.ago,
-                   end_action: :auto_close_and_send_min_quantity)
-
-    Order.finish_ended!
-    expect(ActionMailer::Base.deliveries.count).to eq 1
-  end
-
   it 'needs a supplier' do
     expect(build(:order, supplier: nil)).to be_invalid
   end
@@ -160,6 +151,59 @@ describe Order do
       expect(orders[0][:group_order]).to have_attributes(id: go.id)
       expect(orders[1][:order]).to have_attributes(id: order2.id)
       expect(orders[1][:group_order]).to be_nil
+    end
+  end
+
+  describe 'with end_action auto_close_and_send' do
+    let!(:order) { create(:order, created_by: user, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close_and_send) }
+
+    it 'sends mail even if nothing ordered' do
+      Order.finish_ended!
+      order.reload
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+    end
+  end
+
+  describe 'with end_action auto_close_and_send_min_quantity' do
+    let!(:order) { create(:order, created_by: user, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close_and_send_min_quantity, article_count: 1) }
+    let!(:oa) { order.order_articles.first }
+    let!(:go) { create(:group_order, order: order) }
+    let!(:goa) { create(:group_order_article, group_order: go, order_article: oa, quantity: 0) }
+
+    it 'does not send mail if nothing ordered' do
+      # TODO: call go.reload, oa.update_results! if that proves to be correct
+      Order.finish_ended!
+      order.reload
+      expect(ActionMailer::Base.deliveries.count).to eq 0
+    end
+
+    it 'sends mail if min_order_quantity has been reached' do # I think there isn't actually a min_order_quantity that is checked?!
+      goa.update_quantities(1, 0)
+      go.reload
+      oa.update_results!
+      Order.finish_ended!
+      order.reload
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+    end
+  end
+
+  describe 'with end_action auto_close_and_send_unless_empty' do
+    let!(:order) { create(:order, created_by: user, starts: Date.yesterday, ends: 1.hour.ago, end_action: :auto_close_and_send_unless_empty, article_count: 1) }
+    let!(:oa) { order.order_articles.first }
+    let!(:go) { create(:group_order, order: order) }
+    let!(:goa) { create(:group_order_article, group_order: go, order_article: oa, quantity: 0) }
+
+    it 'does not send mail if nothing ordered' do
+      Order.finish_ended!
+      order.reload
+      expect(ActionMailer::Base.deliveries.count).to eq 0
+    end
+
+    it 'sends mail if something ordered' do
+      goa.update_quantities(1, 0)
+      Order.finish_ended!
+      order.reload
+      expect(ActionMailer::Base.deliveries.count).to eq 1
     end
   end
 

@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   belongs_to :updated_by, class_name: 'User', foreign_key: 'updated_by_user_id'
   belongs_to :created_by, class_name: 'User', foreign_key: 'created_by_user_id'
 
-  enum end_action: { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
+  enum end_action: { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_unless_empty: 4, auto_close_and_send_min_quantity: 3 }
   enum transport_distribution: { skip: 0, ordergroup: 1, price: 2, articles: 3 }
 
   # Validations
@@ -316,7 +316,10 @@ class Order < ApplicationRecord
       send_to_supplier!(created_by)
     elsif auto_close_and_send_min_quantity?
       finish!(created_by)
-      send_to_supplier!(created_by) if sum >= supplier.min_order_quantity.to_r
+      send_to_supplier!(created_by) if sum >= supplier.min_order_quantity.to_r && !order_articles.ordered.empty?
+    elsif auto_close_and_send_unless_empty?
+      finish!(created_by)
+      send_to_supplier!(created_by) unless order_articles.ordered.empty?
     end
   end
 

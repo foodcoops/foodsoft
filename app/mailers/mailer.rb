@@ -79,14 +79,25 @@ class Mailer < ActionMailer::Base
     @order    = order
     @supplier = order.supplier
 
+    associated_users =
+      if user == order.created_by
+        format_user_address(user)
+      else
+        [format_user_address(user), format_user_address(order.created_by)].join(', ')
+      end
+    reply_to_users = associated_users unless FoodsoftConfig[:order_result_email_reply_to] && !FoodsoftConfig[:order_result_email_reply_copy_to_user]
+    users_cc = associated_users if FoodsoftConfig[:mail_order_result_copy_to_user] == FoodsoftConfig::MailOrderResultCopyToUser::CC
+    users_bcc = associated_users if FoodsoftConfig[:mail_order_result_copy_to_user] == FoodsoftConfig::MailOrderResultCopyToUser::BCC
+
     add_order_result_attachments order, options
 
     subject = I18n.t('mailer.order_result_supplier.subject', name: order.supplier.name)
     subject += " (#{I18n.t('activerecord.attributes.order.pickup')}: #{format_date(order.pickup)})" if order.pickup
 
     mail to: order.supplier.email,
-         cc: user,
-         reply_to: user,
+         cc: users_cc,
+         bcc: users_bcc,
+         reply_to: [FoodsoftConfig[:order_result_email_reply_to], reply_to_users].join(', '),
          subject: subject
   end
 
@@ -119,7 +130,7 @@ class Mailer < ActionMailer::Base
 
     %i[bcc cc reply_to sender to].each do |k|
       user = args[k]
-      args[k] = format_address(user.email, show_user(user)) if user.is_a? User
+      args[k] = format_user_address(user) if user.is_a? User
     end
 
     if contact_email = FoodsoftConfig[:contact][:email]
@@ -164,6 +175,10 @@ class Mailer < ActionMailer::Base
   def additonal_welcome_text(user); end
 
   private
+
+  def format_user_address(user)
+    format_address(user.email, show_user(user))
+  end
 
   def format_address(email, name)
     address = Mail::Address.new email

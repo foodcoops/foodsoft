@@ -1,0 +1,8 @@
+%fieldset
+  %label
+    %h4= t '.communication_with_suppliers'
+  - mail_order_result_copy_to_user_options = FoodsoftConfig::MailOrderResultCopyToUser.constants.map { |c| FoodsoftConfig::MailOrderResultCopyToUser.const_get(c) }
+  = config_input form, :mail_order_result_copy_to_user, as: :select, collection: mail_order_result_copy_to_user_options,
+    include_blank: false, input_html: {class: 'input-xxlarge'}, value_method: ->(s){ s }, label_method: ->(s){ t("config.keys.mail_order_result_copy_to_user_options.#{s}") }
+  = config_input form, :order_result_email_reply_to, as: :string, input_html: {class: 'input-xlarge', placeholder: "#{@cfg[:name]} <#{@cfg[:contact][:email]}>"}
+  = config_input form, :order_result_email_reply_copy_to_user, as: :boolean
