@@ -132,6 +132,19 @@ default: &defaults
   # email address to be used as sender
   email_sender: foodsoft@foodcoop.test
 
+
+  # Options for communication between suppliers, the foodcoop, and order-associated users:
+  #   Associated users are a) the user who created the order and b) (unless it was auto-sent) the user who clicked the button "Send to supplier."
+
+  # Mail order results only to the supplier (no_copy), as copy to associated user(s) (cc), or as blind copy to associated user(s) (bcc).
+  mail_order_result_copy_to_user: bcc
+
+  # Enter an email address if you want to request your suppliers to send any replies to that address instead of the associated users':
+  # order_result_email_reply_to: Foodcoop <orders@foodcoop.test>
+  # If you want replies to be sent to both the specified reply-to address and the associated users':
+  # order_result_email_reply_copy_to_user: true
+
+
   # domain to be used for reply emails
   #reply_email_domain: reply.foodcoop.test
 

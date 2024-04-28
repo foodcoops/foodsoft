@@ -118,8 +118,9 @@ de:
         end_action: Endeaktion
         end_actions:
           auto_close: Bestellung beenden
-          auto_close_and_send: Bestellung beenden und an Lieferantin schicken
-          auto_close_and_send_min_quantity: Bestellung beenden und an Lieferantin schicken sofern die Mindestbestellmenge erreicht wurde
+          auto_close_and_send: Bestellung beenden und an Lieferantin schicken (auch wenn nichts bestellt wurde)
+          auto_close_and_send_min_quantity: Bestellung beenden und an Lieferantin schicken, sofern die Mindestbestellmenge erreicht wurde (und mind. 1 Artikel bestellt)
+          auto_close_and_send_unless_empty: Bestellung beenden und an Lieferantin schicken, außer es wurde nichts bestellt
           no_end_action: Keine automatische Aktion
         ends: Endet am
         name: Lieferant
@@ -316,6 +317,8 @@ de:
         pdf_title: PDF-Dokumente
       tab_messages:
         emails_title: E-Mails versenden
+      tab_suppliers:
+        communication_with_suppliers: Kommunikation mit Lieferant:innen
       tab_payment:
         schedule_title: Bestellschema
       tab_security:
@@ -603,6 +606,9 @@ de:
       email_from: E-Mails werden so aussehen, als ob sie von dieser Adresse gesendet wurden. Kann leer gelassen werden, um die Kontaktadresse der Foodcoop zu benutzen.
       email_replyto: Setze diese Adresse, wenn Du Antworten auf Foodsoft E-Mails auf eine andere, als die oben angegebene Absenderadresse bekommen möchtest.
       email_sender: E-Mails werden so aussehen, als ob sie von dieser Adresse versendet wurden. Um zu vermeiden, dass E-Mails dadurch als Spam eingeordnet werden, muss der Webserver möglicherweise im SPF Eintrag der Domain der E-Mail Adresse eingetragen werden.
+      mail_order_result_copy_to_user: Wenn eine Bestellung an eine Lieferant:in gesendet wird, wird eine (Blind-)Kopie der E-Mail an die zugehörige Benutzer:innen gesendet. Diese sind a) die Benutzer:in, die die Bestellung eröffnet hat und b) (außer bei automatischer Aussendung) die Benutzer:in, die auf den "An Lieferantin schicken"-Button geklickt hat.
+      order_result_email_reply_to: Gib eine E-Mail-Adresse ein, falls du die Lieferant:innen bitten möchtest, Antworten ggf. an jene Adresse zu schicken anstatt an die der zugehörigen Benutzer:innen (die die Bestellung erstellt bzw. auf den "An Lieferantin schicken"-Button geklickt haben)
+      order_result_email_reply_copy_to_user: Wenn aktiviert, werden die Lieferant:innen gebeten Antworten ggf. sowohl an die angegebene Adresse, als auch an die Benutzer:in, die die Bestellung erstellt hat, als auch ggf. an die Benutzer:in, die auf den "An Lieferantin schicken"-Button geklickt hat, zu schicken.
       help_url: Link zur Dokumentationsseite
       homepage: Webseite der Foodcoop
       ignore_browser_locale: Ignoriere die Sprache des Computers des Anwenders, wenn der Anwender noch keine Sprache gewählt hat.
@@ -660,6 +666,13 @@ de:
       email_from: Absenderadresse
       email_replyto: Antwortadresse
       email_sender: Senderadresse
+      mail_order_result_copy_to_user: E-Mail mit Bestellergebnis ...
+      mail_order_result_copy_to_user_options:
+        no_copy: nur an Lieferant:in senden
+        cc: als Kopie (CC) an zugehörige Benutzer:in(nen) senden
+        bcc: als Blindkopie (BCC) an zugehörige Benutzer:in(nen) senden
+      order_result_email_reply_to: Antwortadresse
+      order_result_email_reply_copy_to_user: Antwort auch an zugehörige Benutzer:in(nen)
       help_url: URL Dokumentation
       homepage: Webseite
       ignore_browser_locale: Browsersprache ignorieren
@@ -701,6 +714,7 @@ de:
       layout: Layout
       list: Liste
       messages: Nachrichten
+      suppliers: Lieferant:innen
       others: Sonstiges
       payment: Finanzen
       security: Sicherheit

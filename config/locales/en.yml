@@ -118,8 +118,9 @@ en:
         end_action: End action
         end_actions:
           auto_close: Close the order
-          auto_close_and_send: Close the order and send it to the supplier
-          auto_close_and_send_min_quantity: Close the order and send it to the supplier if the minimum quantity has been reached
+          auto_close_and_send: Close the order and send it to the supplier (even if nothing has been ordered)
+          auto_close_and_send_min_quantity: Close the order and send it to the supplier if the minimum quantity has been reached (and min. 1 article ordered)
+          auto_close_and_send_unless_empty: Close the order and send it to the supplier unless nothing has been ordered
           no_end_action: No automatic action
         ends: Ends at
         name: Supplier
@@ -316,6 +317,8 @@ en:
         pdf_title: PDF documents
       tab_messages:
         emails_title: Sending email
+      tab_suppliers:
+        communication_with_suppliers: Communication with suppliers
       tab_payment:
         schedule_title: Ordering schedule
       tab_security:
@@ -603,6 +606,9 @@ en:
       email_from: Emails will appear to be from this email address. Leave empty to use the foodcoop's contact address.
       email_replyto: Set this when you want to receive replies from emails sent by Foodsoft on a different address than the above.
       email_sender: Emails will appear to be sent from this email address. To avoid emails sent being classified as spam, the webserver may need to be registered in the SPF record of the email address's domain.
+      mail_order_result_copy_to_user: When an order is sent to the supplier, a (blind) copy of the email will be sent to the associated users. Those are a) the user who created the order and b) (unless it was auto-sent) the user who clicked the button "Send to supplier."
+      order_result_email_reply_to: Enter an email address if you want to request your suppliers to send any replies to that address instead of the associated users' (who created the order / clicked the "Send to supplier" button.)
+      order_result_email_reply_copy_to_user: If enabled, your suppliers will be requested to send any replies both to the specified reply address, as to the user who created the order, as, if given, to the user who clicked the "Send to supplier" button.
       help_url: Documentation website.
       homepage: Website of your foodcoop.
       ignore_browser_locale: Ignore the language of user's computer when the user has not chosen a language yet.
@@ -660,6 +666,13 @@ en:
       email_from: From address
       email_replyto: Reply-to address
       email_sender: Sender address
+      mail_order_result_copy_to_user: Mail order result ...
+      mail_order_result_copy_to_user_options:
+        no_copy: only to the supplier
+        cc: as copy (CC) to associated user(s)
+        bcc: as blind copy (BCC) to associated user(s)
+      order_result_email_reply_to: Reply-to address
+      order_result_email_reply_copy_to_user: Send reply copy to associated user(s)
       help_url: Documentation URL
       homepage: Homepage
       ignore_browser_locale: Ignore browser language
@@ -701,6 +714,7 @@ en:
       layout: Layout
       list: List
       messages: Messages
+      suppliers: Suppliers
       others: Other
       payment: Finances
       security: Security

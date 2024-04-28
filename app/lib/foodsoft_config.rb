@@ -59,6 +59,12 @@ class FoodsoftConfig
     NO_AUTOMATIC_DISTRIBUTION = 'no_automatic_distribution'
   end
 
+  module MailOrderResultCopyToUser
+    NO_COPY = 'no_copy'
+    CC = 'cc'
+    BCC = 'bcc'
+  end
+
   class << self
     # Load and initialize foodcoop configuration file.
     # @param filename [String] Override configuration file
