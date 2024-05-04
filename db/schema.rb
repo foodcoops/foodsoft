@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_04_004950) do
   create_table "bank_accounts", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "iban"
-    t.string "description"
+    t.text "description"
     t.decimal "balance", precision: 12, scale: 2, default: "0.0", null: false
     t.datetime "last_import", precision: nil
     t.string "import_continuation_point"
