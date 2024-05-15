@@ -32,8 +32,8 @@
             = form.text_field 'name', :size => 0
             - hidden_fields.each do |field|
               = form.hidden_field field
-          %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-small'
-          %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-small'
+          %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-medium'
+          %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-medium'
           %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'input-mini'
           %td{:style => highlight_new(attrs, :unit)}= form.text_field 'unit', class: 'input-mini'
           %td{:style => highlight_new(attrs, :unit_quantity)}= form.text_field 'unit_quantity', class: 'input-mini'
@@ -49,8 +49,8 @@
             .input-prepend
               %span.add-on= t 'number.currency.format.unit'
               = form.text_field 'deposit', class: 'input-mini', style: 'width: 45px'
-          %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
-            {include_blank: true}, class: 'input-small'
+          %td{:style => highlight_new(attrs, :article_category)}
+            = form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] }, {include_blank: true}
       - unless changed_article.errors.empty?
         %tr.alert
           %td(colspan=11)= changed_article.errors.full_messages.join(', ')
