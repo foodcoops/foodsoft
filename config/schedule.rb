@@ -15,7 +15,6 @@ end
 # Weekly tasks
 every :sunday, at: '7:14 am' do
   rake 'multicoops:run TASK=foodsoft:create_upcoming_periodic_tasks'
-  rake 'multicoops:run TASKS=foodsoft:prune_old_attachments'
 end
 
 # Finish ended orders
