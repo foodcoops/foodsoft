@@ -91,7 +91,7 @@ function decreaseTolerance(item) {
 }
 
 function update(item, quantity, tolerance) {
-    const units = Number($('#unit_quantity_' + item).text());
+    var units = Number($('#unit_quantity_' + item).text());
     // console.log('units ' + units);
     var oldQuantity = $('#q_' + item).val();
     var minTolerance = units > 1 ? Math.floor(6 / price[item]) : 0;
