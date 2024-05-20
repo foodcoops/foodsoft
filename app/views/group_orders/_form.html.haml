@@ -198,6 +198,7 @@
                   = 'Filled '
                   %strong{id: "units_#{order_article.id}"}= order_article.units_to_order
                   = " x #{@order.stockit? ? order_article.article.quantity_available : order_article_data[:unit]} x #{order_article.article.unit}"
+                  .hidden{id: "unit_quantity_#{order_article.id}"}= order_article_data[:unit]
                 %span.label.label-success{:style => ('display: none' unless order_article_data[:extra_available]>0)}
                   %strong{class: "extra_units_#{order_article.id}" }= order_article_data[:extra_available]
                   = ' extra'
