@@ -31,6 +31,12 @@ class Message < ApplicationRecord
 
   has_rich_text :body
 
+  # Override the `attributes=` method to exclude `recipients_ids`
+  def attributes=(new_attributes)
+    new_attributes = new_attributes.reject { |key, _| key.to_sym == :recipients_ids }
+    super(new_attributes)
+  end
+
   after_initialize do
     @recipients_ids ||= []
     @send_method ||= 'recipients'
