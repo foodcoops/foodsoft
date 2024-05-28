@@ -7,7 +7,9 @@ class Message < ApplicationRecord
   has_many :message_recipients, dependent: :destroy
   has_many :recipients, through: :message_recipients, source: :user
 
-  attr_accessor :send_method, :recipient_tokens, :order_id
+  validate :recipients_ids_must_be_valid
+
+  attr_accessor :send_method, :recipient_tokens, :order_id, :recipients_ids
 
   scope :threads, -> { where(reply_to: nil) }
   scope :thread, ->(id) { where('id = ? OR reply_to = ?', id, id) }
@@ -33,8 +35,25 @@ class Message < ApplicationRecord
 
   # Override the `attributes=` method to exclude `recipients_ids`
   def attributes=(new_attributes)
-    new_attributes = new_attributes.reject { |key, _| key.to_sym == :recipients_ids }
+    if new_attributes.respond_to?(:with_indifferent_access)
+      new_attributes = new_attributes.with_indifferent_access
+    end
+
+    # Log the attributes for debugging purposes
+    Rails.logger.debug "Original attributes: #{new_attributes.inspect}"
+
+    # Remove `recipients_ids` from the attributes hash
+    new_attributes = new_attributes.except(:recipients_ids, 'recipients_ids')
+
+    # Log the sanitized attributes for debugging purposes
+    Rails.logger.debug "Sanitized attributes: #{new_attributes.inspect}"
+
     super(new_attributes)
+  end
+
+  def recipients_ids=(value)
+    @recipients_ids = value
+    Rails.logger.debug "Setting recipients_ids to: #{value.inspect}"
   end
 
   after_initialize do
@@ -130,8 +149,6 @@ class Message < ApplicationRecord
     '?'
   end
 
-  attr_reader :recipients_ids
-
   def last_reply
     Message.where(reply_to: id).order(:created_at).last
   end
@@ -151,5 +168,9 @@ class Message < ApplicationRecord
 
   def create_salt
     self.salt = [Array.new(6) { rand(256).chr }.join].pack('m').chomp
+  end
+
+  def recipients_ids_must_be_valid
+    errors.add(:recipients_ids, "must be valid") if recipients_ids.blank?
   end
 end
