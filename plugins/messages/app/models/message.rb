@@ -7,8 +7,6 @@ class Message < ApplicationRecord
   has_many :message_recipients, dependent: :destroy
   has_many :recipients, through: :message_recipients, source: :user
 
-  validate :recipients_ids_must_be_valid
-
   attr_accessor :send_method, :recipient_tokens, :order_id, :recipients_ids
 
   scope :threads, -> { where(reply_to: nil) }
@@ -30,6 +28,14 @@ class Message < ApplicationRecord
 
   validates_presence_of :message_recipients, :subject, :body
   validates_length_of :subject, in: 1..255
+
+  after_initialize do
+    @recipients_ids ||= []
+    @send_method ||= 'recipients'
+  end
+
+  before_create :create_salt
+  before_validation :create_message_recipients, on: :create
 
   has_rich_text :body
 
@@ -53,27 +59,6 @@ class Message < ApplicationRecord
 
   def recipients_ids=(value)
     @recipients_ids = value
-    Rails.logger.debug "Setting recipients_ids to: #{value.inspect}"
-  end
-
-  after_initialize do
-    @recipients_ids ||= []
-    @send_method ||= 'recipients'
-  end
-
-  before_create :create_salt
-  before_validation :create_message_recipients, on: :create
-
-  def create_message_recipients
-    user_ids = @recipients_ids
-    user_ids += User.undeleted.pluck(:id) if send_method == 'all'
-    user_ids += Group.find(group_id).users.pluck(:id) if group_id.present?
-    user_ids += Order.find(order_id).users_ordered.pluck(:id) if send_method == 'order'
-
-    user_ids.uniq.each do |user_id|
-      recipient = MessageRecipient.new message: self, user_id: user_id
-      message_recipients << recipient
-    end
   end
 
   def add_recipients(users)
@@ -166,11 +151,20 @@ class Message < ApplicationRecord
 
   private
 
+  def create_message_recipients
+    user_ids = @recipients_ids
+    user_ids += User.undeleted.pluck(:id) if send_method == 'all'
+    user_ids += Group.find(group_id).users.pluck(:id) if group_id.present?
+    user_ids += Order.find(order_id).users_ordered.pluck(:id) if send_method == 'order'
+
+    user_ids.uniq.each do |user_id|
+      recipient = MessageRecipient.new message: self, user_id: user_id
+      message_recipients << recipient
+    end
+  end
+
   def create_salt
     self.salt = [Array.new(6) { rand(256).chr }.join].pack('m').chomp
   end
 
-  def recipients_ids_must_be_valid
-    errors.add(:recipients_ids, "must be valid") if recipients_ids.blank?
-  end
 end

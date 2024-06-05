@@ -34,15 +34,18 @@ class MessagesController < ApplicationController
     ActiveRecord::Base.transaction do
       @current_user.with_lock do
         @message = @current_user.send_messages.new(params[:message])
-        raise ActiveRecord::Rollback unless @message.save
-
-        DeliverMessageJob.perform_later(@message)
-        redirect_to messages_url, notice: I18n.t('messages.create.notice')
+        if @message.save
+          DeliverMessageJob.perform_later(@message)
+          redirect_to messages_url, notice: I18n.t('messages.create.notice')
+        else
+          Rails.logger.info "Message validation failed with: #{@message.errors.inspect}"
+          render :new, status: :unprocessable_entity
+          raise ActiveRecord::Rollback
+        end
       end
     end
-  rescue ActiveRecord::RecordInvalid
-    # Handle validation errors
-    render action: 'new'
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::Rollback => e
+      render :new, status: :unprocessable_entity
   end
 
   # Shows a single message.
