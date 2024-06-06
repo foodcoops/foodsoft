@@ -7,7 +7,7 @@ class Message < ApplicationRecord
   has_many :message_recipients, dependent: :destroy
   has_many :recipients, through: :message_recipients, source: :user
 
-  attr_accessor :send_method, :recipient_tokens, :order_id, :recipients_ids
+  attr_accessor :send_method, :recipient_tokens, :order_id, :mrecipients_ids
 
   scope :threads, -> { where(reply_to: nil) }
   scope :thread, ->(id) { where('id = ? OR reply_to = ?', id, id) }
@@ -30,7 +30,7 @@ class Message < ApplicationRecord
   validates_length_of :subject, in: 1..255
 
   after_initialize do
-    @recipients_ids ||= []
+    @mrecipients_ids ||= []
     @send_method ||= 'recipients'
   end
 
@@ -39,7 +39,7 @@ class Message < ApplicationRecord
 
   has_rich_text :body
 
-  # Override the `attributes=` method to exclude `recipients_ids`
+  # Override the `attributes=` method to exclude `mrecipients_ids`
   def attributes=(new_attributes)
     if new_attributes.respond_to?(:with_indifferent_access)
       new_attributes = new_attributes.with_indifferent_access
@@ -48,8 +48,8 @@ class Message < ApplicationRecord
     # Log the attributes for debugging purposes
     Rails.logger.debug "Original attributes: #{new_attributes.inspect}"
 
-    # Remove `recipients_ids` from the attributes hash
-    new_attributes = new_attributes.except(:recipients_ids, 'recipients_ids')
+    # Remove `mrecipients_ids` from the attributes hash
+    new_attributes = new_attributes.except(:mrecipients_ids, 'mrecipients_ids')
 
     # Log the sanitized attributes for debugging purposes
     Rails.logger.debug "Sanitized attributes: #{new_attributes.inspect}"
@@ -57,12 +57,12 @@ class Message < ApplicationRecord
     super(new_attributes)
   end
 
-  def recipients_ids=(value)
-    @recipients_ids = value
+  def mrecipients_ids=(value)
+    @mrecipients_ids = value
   end
 
   def add_recipients(users)
-    @recipients_ids += users
+    @mrecipients_ids += users
   end
 
   def group_id=(group_id)
@@ -106,11 +106,11 @@ class Message < ApplicationRecord
 
   def recipient_tokens=(ids)
     @recipient_tokens = ids
-    @recipients_ids = ids.split(',').map(&:to_i)
+    @mrecipients_ids = ids.split(',').map(&:to_i)
   end
 
   def mail_to=(user_id)
-    @recipients_ids = [user_id]
+    @mrecipients_ids = [user_id]
   end
 
   def mail_hash_for_user(user)
@@ -152,7 +152,7 @@ class Message < ApplicationRecord
   private
 
   def create_message_recipients
-    user_ids = @recipients_ids
+    user_ids = @mrecipients_ids
     user_ids += User.undeleted.pluck(:id) if send_method == 'all'
     user_ids += Group.find(group_id).users.pluck(:id) if group_id.present?
     user_ids += Order.find(order_id).users_ordered.pluck(:id) if send_method == 'order'
