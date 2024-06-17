@@ -45,8 +45,15 @@ class User < ApplicationRecord
 
   before_validation :set_password
   after_initialize do
-    settings.defaults['profile']  = { 'language' => I18n.default_locale } unless settings.profile
-    settings.defaults['messages'] = { 'send_as_email' => true }           unless settings.messages
+    unless settings.profile
+      settings.defaults['profile'] = { 'language' => FoodsoftConfig[:default_locale] || I18n.default_locale } unless settings.profile
+      if FoodsoftConfig[:profile_data_public_by_default]
+        settings.defaults['profile']['phone_is_public'] = true
+        settings.defaults['profile']['email_is_public'] = true
+        settings.defaults['profile']['name_is_public'] = true
+      end
+    end
+    settings.defaults['messages'] = { 'send_as_email' => true } unless settings.messages
     settings.defaults['notify']   = { 'upcoming_tasks' => true } unless settings.notify
   end
 

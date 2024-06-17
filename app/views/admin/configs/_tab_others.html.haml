@@ -1,4 +1,5 @@
 = config_input form, :use_nick, as: :boolean
+= config_input form, :profile_data_public_by_default, as: :boolean
 = config_input form, :tolerance_is_costly, as: :boolean
 - distribution_strategy_options = FoodsoftConfig::DistributionStrategy.constants.map { |c| FoodsoftConfig::DistributionStrategy.const_get(c) }
 = config_input form, :distribution_strategy, as: :select, collection: distribution_strategy_options,

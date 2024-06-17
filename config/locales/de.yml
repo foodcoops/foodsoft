@@ -634,6 +634,7 @@ de:
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_financial_links: Wenn aktiviert, werden Optionen zum Anlegen von Finanzlinks angezeigt, die zusammenhängende Kontotransaktionen, Rechnungen und Banktransaktionen gruppieren können. Außerdem werden Optionen zum Anlegen von Foodcoop-Transaktionen angezeigt (Transaktionen, die keiner Bestellgruppe zugeordnet sind, sondern als Ausgleichsbuchungen zwecks doppelter Buchführung dienen).
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
+      profile_data_public_by_default: Beim Anlegen einer neuen Benutzer:in werden bei den Privatsphäre-Optionen "Telefon/E-Mail/Name ist für Mitglieder sichtbar" standardmäßig Haken gesetzt. Wenn Benutzernamen deaktiviert sind, sind Namen immer für alle sichtbar.
       use_self_service: Wenn aktiviert, können Benutzer_innen selbständig dafür freigegebene Abrechungsfunktionen nutzen.
       webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
     keys:
@@ -694,6 +695,7 @@ de:
       use_iban: IBAN verwenden
       use_financial_links: Finanzlinks & Foodcoop-Transaktionen verwenden
       use_nick: Benutzernamen verwenden
+      profile_data_public_by_default: Profildaten standardmäßig für andere sichtbar
       use_self_service: Selbstbedienung verwenden
       webstats_tracking_code: Code für Websiteanalysetool
     tabs:
