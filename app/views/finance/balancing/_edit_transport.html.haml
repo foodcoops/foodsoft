@@ -3,7 +3,10 @@
     = close_button :modal
     %h3= t('.title')
   .modal-body
-    = f.input :transport
+    = f.input :transport do
+      .input-prepend
+        %span.add-on= t 'number.currency.format.unit'
+        = f.input_field :transport, class: 'input-small'
     = f.input :transport_distribution, as: :radio_buttons, collection: Order.transport_distributions,
       include_blank: false, label_method: ->(k){ t("activerecord.attributes.order.transport_distributions.#{k.first}") }
   .modal-footer
