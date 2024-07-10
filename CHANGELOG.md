@@ -1,3 +1,20 @@
+# [Foodsoft 4.9](https://github.com/foodcoops/foodsoft/compare/v4.8.1-rc2...v4.9) 
+(2024-07-10)
+
+
+### Bug Fixes
+
+* allow longer bank account descriptions ([#1062](https://github.com/foodcoops/foodsoft/issues/1062)) ([48567cf](https://github.com/foodcoops/foodsoft/commit/48567cff3d410fd5610b719649f889b9048563d7))
+
+### Features
+
+* adapt financial transaction type for online payment provider ([#1008](https://github.com/foodcoops/foodsoft/issues/1008) , PR [#1031](https://github.com/foodcoops/foodsoft/issues/1031)) ([113a14d](https://github.com/foodcoops/foodsoft/commit/113a14d2018476cee1c936155d7a2d9aaf654d64))
+* add accounting buttons in order management views (usability enhancement) ([#1061](https://github.com/foodcoops/foodsoft/issues/1061)) ([d6a92bf](https://github.com/foodcoops/foodsoft/commit/d6a92bf62c5875922ff5f7de32d0283ec6c8e08f))
+* add online payment provider mollie plugin ([#1008](https://github.com/foodcoops/foodsoft/issues/1008) , PR [#1031](https://github.com/foodcoops/foodsoft/issues/1031)) ([0b7898d](https://github.com/foodcoops/foodsoft/commit/0b7898dfe18ba03c722ff5122237c28220fb10ce))
+* move document data from document plugin to active storage ([#1050](https://github.com/foodcoops/foodsoft/issues/1050)) ([f8b92eb](https://github.com/foodcoops/foodsoft/commit/f8b92eb7836ee7a3e0de9a1ffc786a23c922079e))
+
+
+
 # Foodsoft 4.8.1
 (15 February 2024)
 
