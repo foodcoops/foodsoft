@@ -85,7 +85,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
     t.datetime "deleted_at", precision: nil
     t.string "type"
     t.integer "quantity", default: 0
-    t.integer "max_quantity"
     t.index ["article_category_id"], name: "index_articles_on_article_category_id"
     t.index ["name", "supplier_id"], name: "index_articles_on_name_and_supplier_id"
     t.index ["supplier_id"], name: "index_articles_on_supplier_id"
