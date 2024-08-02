@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
     t.integer "article_category_id", default: 0, null: false
     t.string "unit", default: "", null: false
     t.string "note"
+    t.string "ingredients"
     t.boolean "availability", default: true, null: false
     t.string "manufacturer"
     t.string "origin"
