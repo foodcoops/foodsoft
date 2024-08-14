@@ -669,6 +669,7 @@ fr:
       notfound: ' Mauvaise adresse, ce n''est pas ta commande.'
     form:
       action_save: Enregistrer ta commande
+      account_statement: Relevé de compte
       new_funds: Nouveau solde
       price: Prix
       reset_article_search: Réinitialiser la recherche

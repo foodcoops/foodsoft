@@ -1054,6 +1054,7 @@ en:
       notfound: Incorrect URL, this is not your order.
     form:
       action_save: Save order
+      account_statement: Account Statement
       new_funds: New account balance
       price: Price
       reset_article_search: Reset search

@@ -184,8 +184,13 @@ function updateBalance() {
     if (balance < minimumBalance) {
         bgcolor = '#FF0000';
         $('#submit_button').attr('disabled', 'disabled')
+        $('#submit_button').attr('title', I18n.t('js.ordering.balance_too_low'));
+        $('#submit_button').css('background-color', '#ABABAB');
+        $('#account-statement-button').removeClass('hidden');
+
     } else {
         $('#submit_button').removeAttr('disabled')
+        $('#account-statement-button').addClass('hidden');
     }
     // update bgcolor
     for (i in itemTotal) {

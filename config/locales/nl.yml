@@ -1045,6 +1045,7 @@ nl:
       notfound: Foute URL, dit is niet jouw bestelling.
     form:
       action_save: Bestelling opslaan
+      account_statement: Rekeningafschrift
       new_funds: Nieuw tegoed
       price: Prijs
       reset_article_search: Alles tonen
