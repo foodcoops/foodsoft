@@ -1054,6 +1054,7 @@ de:
       notfound: Fehlerhafte URL, das ist nicht Deine Bestellung.
     form:
       action_save: Bestellung speichern
+      account_statement: Kontostand
       new_funds: Neuer Kontostand
       price: Preis
       reset_article_search: Suche zurücksetzen

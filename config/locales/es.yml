@@ -1045,6 +1045,7 @@ es:
       notfound: Enlace incorrecto, este no es tu pedido
     form:
       action_save: Guardar pedido
+      account_statement: Estado de cuenta
       new_funds: Nuevo balance de cuenta
       price: Precio
       reset_article_search: Reinicia la búsqueda

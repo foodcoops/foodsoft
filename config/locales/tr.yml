@@ -1044,6 +1044,7 @@ tr:
       notfound: Yanlış URL, bu sizin siparişiniz değil.
     form:
       action_save: Siparişi kaydet
+      account_statement: Hesap Özeti
       new_funds: Yeni hesap bakiyesi
       price: Fiyat
       reset_article_search: Arama sıfırla
