@@ -6,6 +6,10 @@ class SharedArticle < ApplicationRecord
 
   belongs_to :shared_supplier, foreign_key: :supplier_id
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[category created_on deposit id manufacturer name note number origin price scale_price scale_quantity supplier_id tax unit unit_quantity updated_on]
+  end
+
   def build_new_article(supplier)
     supplier.articles.build(
       name: name,
