@@ -77,6 +77,13 @@
                     - unless changed_article.new_record?
                       %p.help-block{style: 'color: grey;'}=article.minimum_order_quantity.to_s
               .fold-line
+                = form.input :maximum_order_quantity, label: "Maximum order quantity" do
+                  .input-append
+                    = form.input_field :maximum_order_quantity, class: 'input-mini', style: highlight_new(attrs, :maximum_order_quantity), title: "total maximum order quantity for this article"
+                    %span.add-on
+                    - unless changed_article.new_record?
+                      %p.help-block{style: 'color: grey;'}=article.maximum_order_quantity.to_s
+              .fold-line
                 = form.input :billing_unit, hint: changed_article.new_record? ? nil : ArticleUnitsLib.get_translated_name_for_code(article.billing_unit || article.supplier_order_unit), hint_html: {style: 'color: grey;'}, as: :select, collection: [], input_html: {'data-initial-value': changed_article.billing_unit, class: 'input-medium', style: highlight_new(attrs, :billing_unit)}, include_blank: false
               .fold-line
                 = form.input :group_order_granularity, hint: changed_article.new_record? ? nil : "#{article.group_order_granularity} x #{ArticleUnitsLib.get_translated_name_for_code(article.group_order_unit)}", hint_html: {style: 'color: grey;'}, label: "Allow orders per", input_html: {class: 'input-mini', style: highlight_new(attrs, :group_order_granularity), title: "steps in which ordergroups can order this article"}

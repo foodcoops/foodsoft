@@ -13,6 +13,7 @@ class ArticleForm {
       this.supplierUnitSelect$ = $(`#${this.unitFieldsIdPrefix}_supplier_order_unit`, this.articleForm$);
       this.unitRatiosTable$ = $('#fc_base_price', this.articleForm$);
       this.minimumOrderQuantity$ = $(`#${this.unitFieldsIdPrefix}_minimum_order_quantity`, this.articleForm$);
+      this.maximumOrderQuantity$ = $(`#${this.unitFieldsIdPrefix}_maximum_order_quantity`, this.articleForm$);
       this.billingUnit$ = $(`#${this.unitFieldsIdPrefix}_billing_unit`, this.articleForm$);
       this.groupOrderGranularity$ = $(`#${this.unitFieldsIdPrefix}_group_order_granularity`, this.articleForm$);
       this.groupOrderUnit$ = $(`#${this.unitFieldsIdPrefix}_group_order_unit`, this.articleForm$);
@@ -191,6 +192,7 @@ class ArticleForm {
   initializeRegularFormFields() {
     this.unit$.change(() => {
       this.setMinimumOrderUnitDisplay();
+      this.setMaximumOrderUnitDisplay();
       this.updateAvailableBillingAndGroupOrderUnits();
       this.updateUnitMultiplierLabels();
       this.updateCustomUnitWarning();
@@ -227,6 +229,7 @@ class ArticleForm {
     this.unit$.toggle(!valueChosen);
     this.filterAvailableRatioUnits();
     this.setMinimumOrderUnitDisplay();
+    this.setMaximumOrderUnitDisplay();
     this.updateAvailableBillingAndGroupOrderUnits();
     this.updateUnitMultiplierLabels();
   }
@@ -243,6 +246,21 @@ class ArticleForm {
 
     const converter = this.getUnitsConverter();
     this.minimumOrderQuantity$.attr('step', converter.isUnitSiConversible(this.supplierUnitSelect$.val()) ? 'any' : 1);
+  }
+
+  setMaximumOrderUnitDisplay() {
+    console.log('setMaximumOrderUnitDisplay');
+    const chosenOptionLabel = this.supplierUnitSelect$.val() !== ''
+      ? $(`option[value="${this.supplierUnitSelect$.val()}"]`, this.supplierUnitSelect$).text()
+      : undefined;
+    const unitVal = $(`#${this.unitFieldsIdPrefix}_unit`).val();
+    this.maximumOrderQuantity$
+      .parents('.input-append')
+      .find('.add-on')
+      .text(chosenOptionLabel !== undefined ? chosenOptionLabel : unitVal);
+
+    const converter = this.getUnitsConverter();
+    this.maximumOrderQuantity$.attr('step', converter.isUnitSiConversible(this.supplierUnitSelect$.val()) ? 'any' : 1);
   }
 
   bindAddRatioButton() {

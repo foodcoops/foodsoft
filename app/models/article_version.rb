@@ -41,7 +41,7 @@ class ArticleVersion < ApplicationRecord
   validates :group_order_granularity, numericality: { greater_than_or_equal_to: 0 }
   validates :deposit, :tax, numericality: true
   validates :minimum_order_quantity, numericality: { allow_nil: true }
-
+  validates :maximum_order_quantity, numericality: { allow_nil: true }
   # validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type], if: Proc.new {|a| a.supplier.shared_sync_method.blank? or a.supplier.shared_sync_method == 'import' }
   # validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit, :unit_quantity]
   validate :uniqueness_of_name
@@ -119,6 +119,20 @@ class ArticleVersion < ApplicationRecord
       self[:minimum_order_quantity] = nil
     else
       super
+    end
+  end
+
+  def maximum_order_quantity=(value)
+    if value.blank?
+      self[:maximum_order_quantity] = nil
+    else
+      value = value.gsub(I18n.t('number.format.separator'), '.') if value.is_a?(String)
+      begin
+        value = value.to_i if Float(value) % 1 == 0
+      rescue ArgumentError
+        # not any number -> let validation handle this
+      end
+      super(value)
     end
   end
 
