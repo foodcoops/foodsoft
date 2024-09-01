@@ -13,6 +13,7 @@ class ArticleForm {
       this.supplierUnitSelect$ = $(`#${this.unitFieldsIdPrefix}_supplier_order_unit`, this.articleForm$);
       this.unitRatiosTable$ = $('#fc_base_price', this.articleForm$);
       this.minimumOrderQuantity$ = $(`#${this.unitFieldsIdPrefix}_minimum_order_quantity`, this.articleForm$);
+      this.maximumOrderQuantity$ = $(`#${this.unitFieldsIdPrefix}_maximum_order_quantity`, this.articleForm$);
       this.billingUnit$ = $(`#${this.unitFieldsIdPrefix}_billing_unit`, this.articleForm$);
       this.groupOrderGranularity$ = $(`#${this.unitFieldsIdPrefix}_group_order_granularity`, this.articleForm$);
       this.groupOrderUnit$ = $(`#${this.unitFieldsIdPrefix}_group_order_unit`, this.articleForm$);

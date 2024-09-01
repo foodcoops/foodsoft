@@ -126,7 +126,7 @@
                   %i.icon-minus
                 %a.btn.btn-ordering.increase
                   %i.icon-plus
-                %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'input-mini numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
+                %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'input-mini numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available]), step: order_article.article_version.group_order_granularity}
               %span.numeric-step-error
                 = t('errors.step_error', granularity: order_article.article_version.group_order_granularity, min: 0)
 
