@@ -1464,6 +1464,9 @@ es:
       units_ordered: Unidades pedidas
     create:
       notice: Se ha creado el pedido
+    custom_csv:
+      description: Por favor elija el orden de los atributos así como los atributos para el archivo csv
+      column: columna
     edit:
       title: 'Edita pedido: %{name}'
     edit_amount:

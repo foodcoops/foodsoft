@@ -1473,6 +1473,9 @@ en:
       units_ordered: Units ordered
     create:
       notice: The order was created.
+    custom_csv:
+      description: Please choose the order as well as the attributes for the csv file
+      column: column
     edit:
       title: 'Edit order: %{name}'
     edit_amount:
@@ -1626,6 +1629,7 @@ en:
       who_ordered: Who ordered?
     order_download_button:
       article_pdf: Article PDF
+      custom_csv: Custom CSV
       download_file: Download file
       fax_csv: Fax CSV
       fax_pdf: Fax PDF
