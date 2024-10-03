@@ -1,0 +1,129 @@
+
+# from http://www.nieuweband.nl/producten/groepen/
+indeling:
+  1: Verswaren
+  50: Kaas
+  62: Schapenkaas
+
+  2: Basisproducten
+  850: Noten
+  855: Noten grootverbruik
+  700: Peulvruchten
+  705: Peulvruchten grootverbruik
+  340: Rijst
+  341: Rijst grootverbruik
+  450: Vlokken
+  455: Vlokken grootverbruik
+  800: Zaden en pitten
+  805: Zaden en pitten grootverbruik
+  603: Melen grootverbruik
+
+  3: Ontbijt en lunch
+  943: Marmelade
+  1272: Muesli en poppies
+  1000: Notenpasta
+  1276: Ontbijtmelen
+  1295: Rijstwafels
+  1290: Roggebrood
+  1270: Sandwichspread
+  940: Vruchtenbeleg
+  942: Vruchtenjam
+  944: Vruchtenstroop
+  1300: Knäckebröd, toast en beschuit
+
+  4: Warme maaltijd
+  1820: Mosterd
+  1610: Olijfolie
+  1600: Olijven
+  1451: Peulvruchtenconserven
+  1957: Pindasaus
+  1960: Sambal, ketjap en pittige smaakmakers
+  2170: Seitan
+  2260: Siropen
+  2248: Smaakmakers
+  1500: Soepen en bouillon
+  1515: Soepstengels
+  2000: Sojasauzen
+  2250: Suiker
+  1452: Tafelzuren
+  1590: Tamme-kastanje-producten
+  1975: Thaise keuken
+  1900: Tomatenproducten
+  1670: Vetten
+  1930: Visconserven
+  2175: Vleesvervangers
+  1360: Vruchtencompote
+  1400: Vruchtenconserven
+  1350: Vruchtenmoes en -puree
+  2249: Zout en kruidenzout
+
+  5: Sappen en dranken
+  2605: Rode wijn Oostenrijk
+  2604: Rode wijn Portugal
+  2602: Rode wijn Spanje
+  2608: Rode wijn Zuid-Afrika
+  2612: Rosé Spanje
+  2617: Rosé Zuid-Afrika
+  2420: Smoothies
+  2455: Sojamelkproducten
+  2505: Speciaalbieren
+  2400: Vruchtensappen
+  2490: Waterijs
+  2637: Witte wijn Argentinië
+  2630: Witte wijn Frankrijk
+  2634: Witte wijn Griekenland
+  2631: Witte wijn Italië
+  2635: Witte wijn Oostenrijk
+  2632: Witte wijn Spanje
+  2638: Witte wijn Zuid-Afrika
+
+  6: Warme dranken en theekruiden
+  3102: Kruidenthee builtjes
+  3100: Kruidenthee los
+  3020: Kruidenthee met geneeskrachtige werking
+  3009: Rooibosthee
+  3010: Thee grootverpakking
+  3052: Theekruiden
+  3008: Witte thee
+  3011: Yogi spice tea
+  3012: Yogi tao tea
+  3000: Zwarte thee
+
+  7: Versnaperingen
+  3552: Lollies
+  3470: Nougat en fudge
+  3570: Raw Food
+  3360: Rozijntjes in kinderverpakking
+  3410: Snijkoek
+  3555: Snoep met suiker
+  3550: Snoep zonder suiker
+  3405: Stroopwafels
+  3350: Tortillachips en salsa
+  3358: Zoete chips
+  3540: Zoethoutstokjes
+  3365: Zoutjes, hartige bites en popcorn
+  3530: Laurierdrop
+
+  8: Persoonlijke verzorging en cosmetica
+  5036: Lavera
+  5037: Namaste
+  5040: Natracare
+  5042: Odylique
+  5049: Sonett
+  5055: Urtekram
+  5065: Weleda
+
+  9: Natuurtherapeutisch
+  5455: Kruidentincturen
+  5420: Propolis-producten
+  5245: Zelfzorgmiddelen
+  5280: Huid- en massage-olie
+
+  10: Non Food
+  5517: Luiers en babydoekjes
+  5510: Maandverband en tampons
+  5520: Toiletpapier e.d.
+  5890: Voor kinderen (en volwassenen)
+  5650: Was- en schoonmaakmiddelen
+  5515: Watten
+  5610: Luchtverfrissers

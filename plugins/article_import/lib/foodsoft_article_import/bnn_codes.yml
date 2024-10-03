@@ -1,0 +1,1119 @@
+# BNN Codes
+tax:
+  "1": 7.0
+  "2": 19.0
+  "3": 10.7
+  
+deposit:
+  "930190": 0.08
+  "930200": 0.08
+  "930205": 0.08
+  "930210": 0.08
+  "930230": 0.08
+  "930260": 0.08
+  "930270": 0.08
+  "930280": 0.08
+  "998010": 0.08
+  "998016": 0.08
+  "998350": 0.08
+  "998360": 0.08
+  "998427": 0.08
+  "998440": 0.08
+  "998460": 0.08
+  "998470": 0.08
+  "998500": 0.08
+  "998510": 0.08
+  "998700": 0.08
+  "998710": 0.08
+  "998725": 0.08
+  "998730": 0.08
+  "998750": 0.08
+  "998760": 0.08
+  "998790": 0.08
+  "998800": 0.08
+  "998810": 0.08
+  "998840": 0.08
+  "998860": 0.08
+  "998880": 0.08
+  "998887": 0.08
+  "900010": 0.15
+  "900020": 0.15
+  "900030": 0.15
+  "900040": 0.15
+  "900050": 0.15
+  "900070": 0.15
+  "900075": 0.15
+  "900085": 0.15
+  "900089": 0.15
+  "900850": 0.15
+  "900860": 0.15
+  "900870": 0.15
+  "900890": 0.15
+  "930010": 0.15
+  "930020": 0.15
+  "930030": 0.15
+  "930035": 0.15
+  "930050": 0.15
+  "930090": 0.15
+  "930110": 0.15
+  "930120": 0.15
+  "930130": 0.15
+  "930320": 0.15
+  "930325": 0.15
+  "955230": 0.15
+  "998000": 0.15
+  "999983": 0.15
+  "999985": 0.15
+  "998040": 0.15
+  "998060": 0.15
+  "998070": 0.15
+  "998080": 0.15
+  "998100": 0.15
+  "998110": 0.15
+  "998300": 0.15
+  "998310": 0.15
+  "998320": 0.15
+  "998330": 0.15
+  "998340": 0.15
+  "998352": 0.15
+  "998370": 0.15
+  "998380": 0.15
+  "998390": 0.15
+  "998405": 0.15
+  "998417": 0.15
+  "998450": 0.15
+  "998480": 0.15
+  "998520": 0.15
+  "999200": 0.15
+  "900892": 0.25
+  "930290": 0.25
+  "999980": 0.25
+  "998020": 0.25
+  "998030": 0.25
+  "998090": 0.25
+  "998366": 0.25
+  "998420": 0.25
+  "998437": 0.25
+  "998740": 0.25
+  "998770": 0.25
+  "930450": 0.50
+  "930440": 1.00
+  "930460": 1.00
+  "930256": 1.50
+  "930257": 1.50
+  "930250": 30.00
+  "930252": 30.00
+  "998720": 30.00
+  "998830": 30.00
+  "998870": 30.00
+
+manufacturer:
+  bro: Brodowin
+  AAB: Azienda Agricola Bettili
+  ABD: Agro Bio Drom, Frankreich
+  ABM: Maintal GmbH
+  ABT: Albtal Naturkost GmbH
+  ACF: Arcada France S.A. 
+  ACL: Achleitner Biohof GmbH
+  ADC: Coste Vincent & Francoise 
+  ADM: Antersdorfer Mühle GmbH
+  ADR: Faan Zuidhorn 
+  AFH: Doris Wallbaum & Co
+  agm: Angermeier Weinimport
+  AGR: Agrano GmbH & Co KG
+  AGX: Agrexco Ltd.
+  akr: Biohof Barnsen
+  ALB: Alber Pilzkonservenfabrik
+  alf: Bioland-Hof Altfeld
+  ALL: Allgäuland Käsereien GmbH
+  ALM: Allmendinger Metzgerei
+  ALN: AL Naturkost Handels GmbH
+  ALO: Allos-Walter Lang GmbH
+  ALR: Allerleirauh GmbH
+  ALS: Alsan Werk
+  ALT: Alberts-Tofuhaus
+  ALV: Alva 
+  AMA: Amazonas Naturpr.Handels GmbH
+  AMS: Santa Fe Europe GmbH
+  AMW: AlmaWin GmbH
+  AND: Andechser Molkerei GmbH
+  ANF: Allgäu Natur GmbH
+  ANG: Angelmaier OHG
+  ANI: Anis de l' Abbaye
+  ANJ: Atelier Niedernjesa
+  ANL: Anderlbauer Frasdorf
+  ANN: AN, Ne Bienenwachskerzen
+  ANT: Antico Forno a Legna
+  APR: Apeiron
+  ARC: Arche Naturprodukte GmbH
+  ARG: ARGANDÓR
+  ARI: Aries Umweltprodukte
+  ARO: Aromabalance, Silvia Plum
+  art: Artesia
+  asc: Asch
+  ASS: Assindia - GmbH
+  ATX: Ute Arnswald 
+  AUR: Auro Pflanzenchemie AG
+  BAB: Baba-Laffa, W. Maguid
+  BAC: Hof Backensholz
+  BAE: Biofarm A.E.
+  bai: Bioland-Hof Gerhard Baiker
+  bäj: Bärthele, Joachim
+  BAK: Bauckhof demeter Naturkost
+  BAL: Ballybrado, Cahir Co.
+  BAS: Bastiaansen Bio-Kaas B.V.
+  BAU: BioBauernmarkt Chiemgau eG
+  bba: Bäckerei Bahde
+  bbi: Bäckerei Bihn
+  BBN: Bio Bavaria Naturkost
+  BBO: Flemming Naturkost
+  BBR: Mineralbrunnen AG
+  BBW: Bioland Ba-Wü GmbH
+  bdh: Butendiek-Hof
+  bdp: Biodynaminska Produkter
+  BDW: Bio-Dienst Weiss GmbH
+  BEL: Bellenature
+  BER: Bergquell GmbH & Co.KG
+  BEU: Beutelsbacher GmbH
+  BFA: Biofarms s.r.l.
+  BFG: Burkhardt Feinkostwerke GmbH
+  BFR: Bioforce A.Vogel GbmH
+  BFS: Bruno Fischer GmbH Naturkost
+  bgb: Heinz Bursch
+  BGH: Burgunderhof digestif´s GmbH
+  BHÄ: Bäck. Härdtner
+  bhb: Bäckerei Höhenberg
+  bhc: Bioland-Hof Christiansen´s
+  bhk: Bioland-Hof Klauser
+  bhl: Bioland Hof Lesker KG
+  bhm: Bioland-Hof Hubert Merz
+  BHO: Barnhouse Naturprodukte GmbH
+  bhö: Bioland-Hof Hörz
+  bhr: Bioland-Hof Martin Häring
+  BIA: Bio Aras, ELAFOS
+  BIB: Bio Bärchen Vertriebs GmbH
+  bid: Imkerei Binder
+  BIF: Biofrisch GmbH 
+  BIH: Markus Bihler GmbH
+  bil: BioHof Laurer
+  bim: Bieringer Mühle
+  BIN: Bingenheimer Saatgut AG
+  BIO: Bio Akademie
+  BIP: Bio Plus GmbH
+  BIR: Käserei H. Birkenstock GmbH
+  BIS: Bio Service SRL
+  BIT: Bioturm
+  BIV: BioVita Naturkost GmbH 
+  BIZ: Biozyklische Produkte AG
+  BJS: Josef Schäfers
+  BKB: Bio Korn Biscuits
+  bkf: Bakenhus Biofleisch GmbH
+  bkh: Bauckhof OHG
+  BKM: Biokosma GmbH
+  bko: Bäckerei Kostner
+  BKP: Brava cv
+  BKT: Biokorntakt Vertriebs GmbH
+  BKW:  Liane und Roman Wirth
+  BLA: biolare ? Pilzanbau
+  BLB: Blütenland Bienenh.
+  blg: Bollinger, Bernd
+  BLI: Holle Baby Food GmbH
+  BLL: Boller Fruchtsäfte
+  BLM: Binger Lammbräu GmbH
+  BLN: Bioland GmbH Nord
+  BLR: Ökofrost GmbH
+  BLS: Bioland Südtirol
+  BMA: BIOMAS
+  BMK: N.V. Biomilk S.A.
+  BML: Bio Molkerei Lembach
+  bms: Bioland-Milchschafhof
+  bmü: Bannmühle
+  bmw: Barbara Müller Handels GmbH
+  BND: Bionade GHmbH
+  BNE: Bionest
+  BOA: Bio-Obst Augustin KG
+  BOB: Bobalis
+  BOH: Boschenhof GbR
+  BOI: Bois Naturkost GmbH
+  BOK: Bodensee Kelterei GmbH
+  BOL: Bohlsener Mühle
+  böm: BÖMO
+  BON: Allos Walter Lang GmbH 
+  bos: Biol-Dyn. Obstbau Seger
+  BOW: Gandha BV
+  BPL: F.J. Moog SARL
+  BPR: Bioprim
+  bra: Brack Kaffee
+  brb: Rüdiger Born
+  BRE: Gewürzmühle Brecht GmbH
+  BRI: Brio Spa
+  BRO: Jules Brocherin S.A.
+  brs: Asgaard
+  BRT: Candy Factory KG
+  bru: Biolandhof Brummer-Bange
+  bsh: Bioland Schleswig-Holstein
+  BSK:  Wiggensbach GmbH
+  bsp: Bioland-Hof Speidel
+  bsw: Bioland-Hof Schulte-Walter
+  BTH: Biothek Handels-GmbH
+  btm: EZG Bioland-Südgetreide
+  BTR: Biotropic GmbH
+  BUC: Bucheckchen
+  BUF: Bodin & Fils
+  BÜH: Metzgerei Bühler GmbH
+  BUK: Borghoff & Kötter Gbr
+  bup: Braun U. Partner
+  BUR: Burk's Fränkische Öko-Nudeln
+  BVE: Bio Vegan GmbH
+  bvg: Bioland Vermarktungs GmbH
+  BVI: abacco B.V.
+  BWH: Bornwiesenhof
+  BWL: Haya Lebensmittel GmbH
+  BYO: Byodo Naturkost GmbH
+  CAA: Coop.Agr. ARABIOS.a.r.l.
+  CAB: Erich Boden Delikatessen
+  CAL: Calendula Naturkost Backstube
+  CAM: Campobelle s.r.l.
+  can: Anthal Canadi
+  CAR: Care Naturkost GmbH & Co.
+  CAV: Cal Valls
+  CBR: C. Berger
+  CBU: Weingut Clemens Busch
+  CDO: Cha Do Teehandel
+  CES: Il Cesto 
+  CGL: Castiglioni S.P.A.
+  CHE: Chemviron Carbon gmbH
+  CHI: Chiemgauer Naturfleisch GmbH
+  CHR: De Rit Handels GmbH
+  CLO: Clostermann
+  CMD: CMD Naturkosmetik
+  CNH: Chiemgauer Naturkosthandel
+  COL: Chocolat Schönenberger AG
+  COR: C&C Fine Foods, Niederlassung
+  COS: Cosmoveda, G. Eckerle
+  CTE: Castle Tea
+  CUM: Cumnatura
+  CVE: Campina Verde ecosol S.L.
+  DAG: De Dageraad
+  DAK: Die andere Konditorei
+  DAM: Dachswanger Hof
+  DAN: Danival
+  DAV: Davert GmbH
+  DBB: Die Beerenbauern
+  DBH: CW Öko Ei GmbH
+  DDC: Domain de Clairac, Frankreich
+  DDI: Demeter Dienste
+  DDM: Domaine du Midi GmbH 
+  DEH: Bio-Hofmolkerei Dehlwes
+  DEN: dennree-Versorgungs GmbH
+  DET: Detmers Getreide GmbH
+  DFE: Demeter Felderzeugnisse GmbH
+  DFR: Daniel Frank
+  DGU: Dal Gustaio
+  DIE: Helmut Arendt
+  DIN: Alfons u. Franz Neumeier GbR
+  dio: Dionisio de Nova Garcia
+  dis: Schulze-Schleppinghoff
+  DIW: Weingut Hans Diwald
+  DKA: Dr. Klaus Karg
+  DKG: Geifertshofen GmbH
+  dko: Disselkoen Organics
+  dma: Demeterhof Massmann
+  dmä: Demeterhof Mäck
+  dnj: Danner, Johann Georg
+  DOT: Dottenfelder Hof
+  dpr: Demeterhof Preller
+  DRM: Dr. Martins da Cunha GmbH
+  DSE: Deutsche See
+  dsw: Dirk Schulze-Wethmar
+  DUN: Dunn's of Dublin
+  DWE: Dwersteg Destillerie
+  DWF: Dworschak-Fleischmann GbR
+  dwp: Dritte Welt Partner
+  DYF: Dynamis France
+  DZW: De Zwalm
+  EBR: Die Regionalen
+  ECO: Ecomel B.V.
+  ECP: ecopan-Naturkost GmbH
+  ecr: Ecoregion
+  ECV: ECOVER Products nv
+  EGG: Eggert´s Tiefkühl-Service 
+  EGL: Wilhelm Egle GmbH
+  EGM: Ökoland GmbH
+  EIQ: Ei.Q. GmbH
+  EIS: Eisblümerl Naturkost
+  eit: Eitzinger Franz
+  ELK: Naturkost Elkershausen GmbH
+  EOG: EOS Getränke GmbH
+  EOS: Eosta International BV (NL)
+  EPI: epikouros
+  ERD: ErdmannHauser GmbH
+  ERH: Frank Erhardt
+  ERN: ERNTESEGEN Naturkost GmbH
+  EUH: Eurohealth AG
+  EUN: Euronat ? Bretagne
+  EVS: Evers Naturkost GmbH
+  EWE: Ernst Weber Naturkost
+  fah: FairHandeln
+  FAI: Frucht Agentur Iberia
+  FAL: Breisgaumilch GmbH, Fallers
+  FDO: Fattoria degli Orsi
+  fig: Fattoria degli Orsi
+  FIN: Finck 
+  fis: Brauerei Rupert Fisch
+  FIT: Fitne GmbH
+  FKS: Hermann Stiefel
+  FKW: Fruchsaftkelterei Klaus Weber
+  FLA: Flamant Vert S.A.R.L.
+  FLC: Flockenhaus
+  fle: Fleckenbühler Landprodukte
+  FLN: Flemming-Naturkost 
+  FLO: Florin, Angelika Trankle
+  FLP: Fleur Products BV
+  FON: Fontaine Nahrungsmittel GmbH
+  FOR: Forte
+  FÖR: Förster
+  FPF: Fahrenzhausen GmbH
+  fps: Franz Baumann
+  FRC: Francia Mozzarella
+  FRE: Hofladen Frey
+  FRH: Freiheithof
+  FRI: Frisetta GmbH
+  FRK: Frischkeim Naturkost GmbH
+  FRO: Fromin GmbH
+  FRT: Florentin-Mediterranean Food
+  FVG: FALA Verkaufsgesellschaft mbH
+  FZI: Feinkäserei Zimmermann
+  FZS: Sommer & Co.KG
+  gah: Gärtnerei Amaranth
+  gäh: Gärtnerei Halmberg
+  gäk: Gärtnerei Kienast
+  gal: Gallung´s Ziegenhof
+  GAR: Gärtnerei Landes
+  GBA: Gerald Bartke GmbH
+  gch: Gärtnerei Christian Hiss
+  gcl: Gut Clarenhof
+  gdi: Gärtnerei Distel
+  GDR: Graindrops
+  GEB: Martina Gebhardt GmbH
+  GEE: Lupina Handels GmbH
+  GEH: Georg Gehrsitz GmbH & Co.KG
+  GEP: GEPA
+  GFH: Mechthild & Andres Klose
+  GFR: Gebr. Franz GmbH
+  ggk: Burkhard Dreckel
+  gha: Gärtnerei Andreas Hankel
+  gho: Gärtnerei Horizont
+  gie: Giegold Hefefabrik
+  gip: Gilchinger Pilzzucht
+  gks: Gärtnerei Klein Sigi
+  GLG: Glafey-Lichte GmbH
+  gli: Glitz Ehringhausen
+  GLM: Gläserne Meierei GmbH 
+  GOL: Golden Temple 
+  GÖM: Grünsfelder GmbH & Co.KG.
+  gom: Gomille, Torsten
+  GOV: Govinda?s Naturkost GbR
+  gpb: Gerhard Preuschl Biolandhof
+  gpe: Gesa Petersen
+  GPN: Grüner Punkt Naturkost GmbH
+  GRE: C.F. Grell Nachf.
+  GRM: Grindsted Mejeri
+  GRN: Biotropic GmbH
+  GRU: Gruel Biolandhof
+  GSD: Gerhard Schürholz GmbH
+  GSE: GSE Vertrieb
+  gsi: Gregor Sing
+  gsl: Gärtnerei Schmälzle
+  gub: Gärtnerei Ulenburg
+  GUD: Gude GmbH
+  GUL: Gesund & Leben
+  GUR: Gurtmann, Christoph
+  GUT: Gute Zeiten GmbH
+  GUZ: Glahn & Zindl
+  GWF: GWF eG
+  HAA: Haaner Felsenquelle GmbH
+  hag: Hartmann Getränke
+  hal: Haldenhof
+  HAM: Hamfelder Hof
+  HAN: Handelskontor Willmann
+  HÄR: Härle
+  HAU: Dr. Hauschka ? Wala GmbH
+  HAW: hawo´s Getreidemühlen GmbH
+  HBG: Hornberger Lebensquell
+  hdk: Hof Dinkler
+  HEC: Heuck Landbäckerei
+  HEI: Heidelberger Naturfarben
+  hek: Hecker Naturkost
+  HER: Herbaria Kräuterparadies GmbH
+  HES: Weingut Heiner Sauer
+  HEU: Heuschrecke Naturkost GmbH
+  hex: Hexerküche
+  HFA: Hof Farrenau, Deimling GbR
+  hfm: Hofgemeinschaft  Fischermühle
+  hfn: Hofgemeinschaft  Fischermühle
+  hgo: Imkerei Oswald
+  hha: Hasso Hasbach
+  HIE: Hierl- Der Nudelmacher
+  HIN: Mathias Kloppenborg GmbH
+  HKH: Hofkäserei Heggelbach
+  hkk: Hekking
+  HLE: Holzlehner
+  HLW: Herrmannsdorfer Werkstätten
+  HMB: Humbel Brennerei
+  HMS: Handelsag. Rolf Schekerka
+  HMÜ: Peter & Martina Linxweiler
+  HOC: Hoch GmbH Oblatenfabrik
+  hof: Hofmark Brauerei
+  hoh: Dorfgem. Hohenroth
+  hoi: Henri Willig B.V.
+  HOL: Holle Baby Food GmbH
+  HÖL: Höllensprudel
+  hom: Hoffmeier
+  HOR: Horizon Natuurvoeding B.V.
+  HÖR: Bäckerei Hörtling
+  HOV: H2Ovital oHG
+  HOY: Hoyer GmbH
+  HPG: Horn Papiergroßhandel
+  hse: Herbert Seitz
+  hst: Hof Steinrausch
+  hum: Huber, Martin
+  HUN: hanf & natur
+  HUZ: Huzo
+  hwi: Henri Willig, Kaasm.
+  HWL: Hawlik Pilzbrut GmbH
+  IAB: Imkerei (Reiner) Bienefeld
+  ibe: Imkerei Berrenrath
+  ilk: Imkerei Ludger Klinker
+  ILU: ILUMINA GmbH
+  imb: Imkerei Betz
+  IMF: Hain Celestial Europe BVBA
+  imm: Mohr + Müller Imkerei
+  irf: Imkerei Feldt
+  IRM: Imkerei Roland Maier
+  ISA: ISANA GmbH & Co.KG
+  ISE: Klaus Wolf
+  ISK: Isko  Vertriebs GmbH
+  IUM: I&M Inge Stamm GmbH
+  jäh: Jähnke Naturkost
+  JAN: BioFleischerei Jansen
+  JAS: Jasci Donatello
+  JAT: Jatex  Handels-GmbH
+  jbe: Beck Schafhof
+  JOP: Jogopur Yogoferm GmbH
+  JOR: Jordan Cereals Ltd.
+  KÄB: (Martin) Bauhofer Käserei
+  KÄL: Inntaler GmbH
+  KAM: KAMUT Association of Europe
+  KAN: Kanne Brottrunk GmbH & Co.KG
+  KAT: Karibu Trade 
+  kbh: Kiebitzhof
+  KBW: Klosterbrauerei Weißenohe
+  kei: Keil, Sepp
+  KER: Keramik & Kerzen
+  kgg: Kelterei Gregor Greimel
+  KGÖ: Karl Gröner GmbH
+  KGV: Klostergut Volkenroda
+  KHA: Konrad Halder
+  KIL: Kilian
+  KIP: Kipepeo BIO & FAIR GmbH
+  KKL: KKL-Naturwaren
+  KKV: Vollwertbäckerei König
+  KLA: AlmaWin  GmbH
+  KLD: Keimland
+  KLG: Keimling Naturkost GmbH
+  klk: Käserei Schlierbach
+  klo: Klotz, Martin
+  KMF: Käsemanufaktur, Lothar Müller
+  KNE: Getreidemühle Knecht KG
+  KNÖ: Robert Knöbel
+  KON: Engelhard GmbH & Co. KG
+  KOR: Kornblume, F.+ B.Brinkmann
+  KPL: Kräutergarten Pommernland
+  KRA: Kranichhof
+  KRÄ: KAULFUSS
+  KRE: Krämers Ernährung
+  krr: Fachkrankenhaus Ringgenhof
+  KTO: Kato
+  KUC: Kolla & Co
+  KWE: Köhlerei Wengert
+  LAB: Labroco Agrarconsult
+  LAF: Hofgut Algertshausen
+  LAL: La Luna del Rospo
+  läm: Lämmerhof
+  LAN: Landkrone GmbH
+  LAS: Lakhsmi
+  LAV: laverana GmbH
+  LBI: Do-it Dutsch
+  LEB: U. Walter GmbH - Lebensbaum 
+  LHQ: St. Leonhardquelle
+  LIL: Legend International Ltd.
+  LIM: Lima NV
+  LIR: Lily Rose
+  LIW: Lichtwurzel, Imton
+  LJL: Johann Langgartner 
+  LMC: Lammersiek & CO.  
+  LNA: Grabower Süßwaren GmbH
+  LÖC: Löcke Bio-Pilzzucht
+  LOG: Logona Hans Hansel GmbH
+  LSP: La Spinosa ( Weingut)
+  LTA: Lauretana, Wasser Import GmbH
+  LUB: Lubs GmbH
+  lüp: Lübcke Papier GmbH & Co KG
+  LUV: Luvos Heilerde
+  MAB: Bio-Nahrungsmittel GmbH
+  mah: Hof Mahlitzsch
+  MAI: Maisch
+  map: Maple GmbH
+  MAR: Marschland NK GmbH
+  MÄR: Märkisches Landbrot GmbH
+  MAT: Martinshof GmbH
+  MÄU: Gebr. Grund GmbH & Co.KG
+  MAY: Mayka Naturbackwaren GmbH
+  MAZ: Mazer, Bernd
+  MCA: Mustiola International SRL
+  med: Medousa, Griechenland Importe
+  MEK: Weingut Meinklang
+  met: Metsä Tissue GmbH
+  MGN: Naturland-Bauern e.G.
+  mhb: Meyerhof  Belm
+  mhh: ?Die Meierei? Hansfelder Hof
+  MID: Midi
+  mig: Migliore
+  mil: Miller GmbH & Co.KG Agnes
+  MKF: merkur frucht Freiburg GmbH
+  MKL: Makulaku Confectionery Ltd
+  MLL: Mollis Kinderprodukte GmbH
+  MMC: MM Cosmetic GmbH
+  MOA: MolenAartje B.V. Natudis
+  MOB: Frisetta GmbH & Co.KG
+  MOC: Wasserprinz; div. Anbieter
+  MOI: Moin BioTK-Bachwaren
+  MOK: Mokobella EU GmbH
+  MOL: Moltex Baby-Hygiene GmbH
+  MOR: EgeSun GmbH
+  MÖR: Mörk Naturkostprodukte
+  MOU: Wertform  GmbH & Co
+  MSV: mesa verde
+  MTB: Mont´Albano 
+  MUL: Multikost Vertriebs GmbH
+  MWO: Milchwerke Oberfranken
+  MZG: Sieben Zwerge GmbH
+  mzi: Mathias Zipf
+  NAB: Hubert Tempelmann e.K.
+  NAC: BodyWise (UK)Ltd.
+  NAG: Tofumanufaktur Nagel GmbH
+  NAM: Naturmaelk A.m.b.a.
+  NAP: Combu Cha
+  NAT: Naturata e.G.
+  nbm: Nußbaumer, Roman
+  NBO: Nürnberger Bio-Originale
+  NCO: Natur Compagnie GmbH
+  NEE: Neue Erde GmbH
+  NEG: Neu´s GmbH & Co. KG
+  NEU: Gebr. Ehrnsperger e.K.
+  nhb: Naturlandhof Biberger
+  NHU: Natur Hurtig (Himalaya Salz)
+  nlg: Nordland, Lebensgem.
+  NMA: NaturMarkt GmbH 
+  nmd: Münzner
+  NNA: Mensch & Natur AG 
+  NOK: Noka-Sojamanufaktur GmbH
+  NPG: Nette Papier GmbH
+  NSC: Naturkost Schuchardt
+  NTM: Natumi GmbH Produkte & Ideen
+  NTR: Naturian Ökoweine OHG
+  NTU: Naturion
+  NUR: IL NURAGHE GmbH
+  NUT: Nutrifors AG
+  NWA: Nikolaihof Wachau - Weingut
+  NWR: Öko-Norm GmbH
+  OAT: Ceba Foods AB 
+  obb: Obsthof Bruno Brugger
+  obm: Obsthof Bernd Majer
+  OBS: Öko-Bauernhöfe Sachsen GmbH
+  ÖBW: Brodowin Ökodorf
+  OCB: OCB-Vertriebs-GmbH
+  ODE: Odenwald EKO Brood en Banket
+  ODI: ODIN Holland C.V.
+  ÖER: Öko Ernte GmbH
+  ÖFA: Öko Feinkost Andechs Gmbh
+  ÖFR: Ökofrost GmbH
+  ogh: Demeter Gärtnerei Obergrashof
+  ohc: Obsthof Cordes
+  OHE: Obsthof Heinrich
+  ohh: Obsthof Hermann Helde
+  OHL: Ohling, Andreas
+  ÖKB: ÖkoBo
+  ÖKH: Ökohum Vertriebs GmbH
+  ÖKL: Ökoland GmbH Nord
+  ÖKN: Ökonatur
+  ÖKU: Naturkosthandel Ökollus
+  ÖLI: Öko-Line
+  ÖMA: ÖMA- Beer GmbH 
+  OML: Ostermühle Naturkost GmbH
+  ÖMS: Ölmühle Solling GmbH
+  ORG: Organix4U GmbH
+  ORH: Obsthof Robert Hartmann
+  ORO: Organic Oils S.P.A.
+  ort: Biofrucht Ortlieb GbR
+  osn: Osning-Getränke GmbH
+  ÖWK: Haus am Goldberg GmbH
+  ÖWR: Weingut Richard Schmidt
+  ÖWS: Öko-Weinimport Schmid
+  pab: Bacchini Roberto & C. S.n.c.
+  PAN: Pasta Nuova GmbH
+  pau: Bioland Gemüse Paul 
+  PEM: PEMA Heinrich Leupoldt KG
+  PER: Perger Getränke GmbH
+  PET: Marcel Petite, Frankreich
+  PFH: Gabriele Gersdorf GmbH
+  PFO: Papierf. Oberschmitten GmbH
+  PID: MW BGL Chiemgau eG
+  PIM: Pinzgauer Molkerei
+  PIN: Pinkus Müller GmbH & Co.KG
+  PLA: Käserei Plangger Ges.m.b.H.
+  PLG: Peralge, Marciella Callegarie
+  PLO: div. Anbieter
+  PMI: Peterstaler Mineralquellen
+  PMP: Progeo Mangimi Petfood
+  PNA: Pro Natura S.A.
+  PÖB: Pötzelberger
+  pod: Poder GmbH
+  PÖS: PINGU-Öko-Tiefkühlservice
+  PRG: Provence Regime S.A.
+  PRN: Pro Natur GmbH
+  PRO: Probio Handelsgesellschaft 
+  PRV: Provamel
+  PVL: Primavera Life GmbH
+  RAA: Raab 
+  RAC: Rachelli Italia s.r.l.
+  rad: Radicula GmbH (Avalon)
+  ran: Randegger Ottilienquell
+  RAP: Rapunzel Naturkost AG
+  RBB: Michael Krieger KG
+  rde: Roman Denis Bioland-Gemüsebau
+  rds: Rudolf Schramm
+  RED: Redecker
+  rei: Reicheneder, Gerhard
+  rha: Hofgut Rengoldshausen
+  RHG: Rheinland-Höfe GmbH
+  RHÖ: Rhöner (Brauerei)
+  RIE: Peter Riegel Weinimport GmbH
+  RIN: Ringenwalde Werkhof
+  RIS: Ristic
+  RIT: De Rit  Handels GmbH
+  RLG: Metzgerei Rieblinger
+  ROB: Geflügelhof RoBert?s
+  rog: Söbbeke GmbH & Co. KG
+  ROH: Geflügelhof Rothäusle
+  ROL: C. F. Rolle Mühle GmbH
+  ROM: Rosmarin Ingo Karrasch GbR
+  ROS: Hubmann- Rosengarten
+  RÖS: Georg Rösner Vertriebs GmbH
+  ROT: Rother Bräu
+  rsh: Rösslerhof
+  RTE: Manfred und Christine Rothe
+  RUH: Riensch & Held GmbH & Co. KG
+  RUN: Runge Nahrungsmittel GmbH
+  RUS: Ruschin Makrobiotik GmbH
+  RZO: Rzollhäusle, H.R. Hauser
+  SAB: SANBEAM Gesunde Produkte GmbH
+  SAC: Petersilchen Sanchon GmbH
+  säh: Karla u. Sebastian Schäfer
+  SAL: Salomon
+  SAN: Sante Naturkosmetik GmbH
+  SAO: Gsund & Schön Sanoll 
+  SAR: Sanatur GmbH
+  SAS: S´Atra Sardigna Coop A.r.l.
+  SAV: Santaverde GmbH
+  sbä: Steinofen Bäcker
+  SBG: Mol Hohenlohe-Franken e.G.
+  SBH: Matthias Höfflin
+  SBM: Saarpfälzische Bio-Höfe GmbH
+  SCH: Naturkost Schramm GmbH
+  SCK: Walter Rau GmbH & Co. KG 
+  SDE: Robert Schindele GesmbH
+  SDL: Siegfried Schedel
+  SEE: Weingut W. Seeber
+  SEG: Sennerei Walchsee  GmbH
+  SEK: Sekowa Seibold KG
+  SEL: La Selva Vertriebs-GmbH
+  SFE: Hof Mühlenberg E. Schiffers
+  sfm: Schäfer, Martin (Michaelshof)
+  SFO: Sinfo Naturkost & Naturwaren
+  SHE: Weingut Schäfer-Heinrich 
+  shh: Max Fischer
+  SIN: Singer
+  SJF: Sojafarm
+  sjh: Metzgerei Schojohann
+  sjs: Schaut, Josef
+  SKA: Schönegger Käse-Alm GmbH
+  SLC: Svenska LantChips AB
+  sle: Schilling, Erich
+  slm: Salm, Elvira (Limberger)
+  SMA: Sana-Mare
+  SND: Weingut Sander
+  SNF: Sanoflore
+  SNI: Weingut Stortz-Nicolaus
+  snn: Monika u. Thomas Sannmann
+  SNT: Sonett OHG
+  SNZ: Schnitzer Bräu
+  SOB: SOBO Naturkost
+  SÖB: Söbbeke GmbH & Co. KG
+  SOD: Sodasan GmbH
+  SOE: Salamita Soc. Coop. A.r.l.
+  SOF: Soto Feinkost, Oskar Schramm
+  SOJ: Triballat Noyal
+  SON: Sonne GmbH
+  SOT: Allgäuland
+  SPA: Spaichinger Nudelmacher GmbH
+  spe: Speckhan, Rudolf
+  SPH: Spreewälder Hirsemühle
+  SPI: Spielberger KG Naturata e.G.
+  SPL: Silver Plastic GmbH & Co. KG
+  SPR: B & G Sprossenparadies GmbH
+  sqn: St. Nikolaus Quelle
+  SRH: Scharein, Hubert
+  SSC: Sural-Sacicc
+  SSI: Santisi Vollkornnudeln
+  STB: Seitenbacher GmbH Naturkost
+  STE: Steck
+  sth: Scholtenhof
+  STN: Sonnentor GmbH
+  STY: Teebaumöl Kosmetik
+  STZ: Schnitzer OHG
+  SUN: Sunval Nahrungsmittel GmbH
+  SVA: Svadesha Naturkost- Vertrieb
+  SVE: Svenska Lant Chips
+  svm: Hof von der Mehden
+  SWE: Schuldt & Weber 
+  swo: Schwollener Sprudel
+  sww: Karin u. Corney Weimeijer
+  SWZ: Schweizer GmbH
+  SYM: Sympakorn
+  tag: Tagwerk
+  TAI: Life Food GmbH
+  TAP: TAPIR Wachswaren GmbH
+  TAR: Tarpa Naturkost
+  TAU: Tautropfen GmbH 
+  TDP: Terra di Puglia
+  TEL: Hakle GmbH
+  TER: Terrasana Naturvoeding BV
+  TES: Terra Soleil 
+  TEU: Teutoburger Ölmühle 
+  TFO: Faan Zuidhorn BV. F.Andringa
+  TIL: Tilouche Fruchtimport GmbH
+  TLI: CV Ter Linde 
+  TMJ: Thise Mejeri
+  TOF: Ökofrost GmbH
+  TOP: ToPas GmbH
+  tph: T.Port Hamburg GmbH & Co.
+  TRA: Tradin Organic B.V.
+  tro:  Tropenfruchtimport GmbH
+  TUC: Tra Terra e Cielo
+  ubm: Upländer Bauernmolkerei GmbH
+  uhe: Uta Helberg
+  ulh: Ulmenhof
+  una: Uli Natterer
+  uns: Unseld´s Backstube
+  unt: Ulrich u. Monika Unterweger
+  URD: Uni-Vert
+  URT: Urtekram A/S
+  VAV: Vallée-Verte Handelsges. mbH
+  vbr: Vollkornbäckerei Rasche
+  VEN: eco cosmetics GmbH & Co. KG
+  VGB: Bioland Schleswig Holstein 
+  VGE: Verlag gesund essen GmbH
+  VGF: Hansen & Koschmieder GmbH
+  VIA: Viana Naturkost GmbH
+  VIB: Fattoria VIB
+  VIV: S.A. Viver, Frankreich
+  VIZ: Vino Zero
+  VLV: VivoLo Vin, Ökoweinhandel
+  vms: Traitteur Villemin GmbH
+  VNI: L. Weinrich GmbH & Co.KG
+  VOE: voelkel GmbH
+  VOL: Volvic, Frankreich
+  VUN: Velazquez Universal s.L.
+  VVE: Viola Verde GmbH
+  vzw: Hüser van Zwoll GmbH & Co. KG
+  waa: Gartenbau Waas
+  wal: Walter, J.
+  WAT: Walter Thies Zellglas 
+  WBT: WBT SRL
+  WDL: Milchkoop Wendland GmbH
+  WDM: Windmill Organics Foods Ltd.
+  WDN: Großbäckerei Wendeln
+  web: Weber GmbH
+  WEG: Weingut O. Gottschalk
+  WEH: Peter Werth
+  WEL: Weleda AG 
+  WEN: Wilhelm Weber GmbH
+  WER: Werz GmbH & Co. KG
+  WGP: Wagner Tiefkühlprodukte GmbH
+  who: Westhof GmbH
+  WHS: Deutsche Parmalat GmbH 
+  WIE: Weingut Stephanshof
+  WLM: Ecover Belgium n.v.
+  wmr: Richard Wirthmüller 
+  WOB: Bäckerei Wolfgruber  OHG
+  WOL: Verlag Fred Wollner GbR
+  WOO: woodshade organics ApS
+  WPA: Wepa P. Krengel GmbH & Co. KG
+  WRK: Weingut Friedhelm Rinklin
+  WSB: Battenfeld-Spanier
+  wsq: Wittenseer Quelle
+  WTI: WTI GmbH
+  WUN: Wunderland e.V.
+  WUR: Wurzel Fachgroßhandel
+  WÜR: Prima Käse, Jürgen Würth
+  wwb: Westerwald Bio GmbH
+  wwi: Weber, Wilhelm
+  WYS: KAMO, Peter Wyssling 
+  wzb: Wenzelburger GbR.
+  YAK: Faan Zuidhorn BV. F. Andringa
+  YAR: Yarrah Food/Vink Sales BV 
+  ZAN: Zann Bio-Center
+  ZAP: Zapparoli
+  ZEL: Zellertaler Kellerei GmbH
+  ZIM: E. Zimmermann GmbH & Co
+  ZLN: Pastificio Zanellini spa
+  ZNL: Zagler´s Naturladen
+  zsl: Ziegenhof Schlatt
+  ZWE: Zwergenwiese Naturkost GmbH
+  ZWI: E. Zwicky (Deutschland) GmbH
+  ZWÖ: Weingut im Zwölberich
+
+category:
+  "01": Brot und Backwaren
+  "02": Milch, Milchprodukte, Eier, Tofu
+  "03": Obst, Gemüse, Sprossen, Pilze
+  "04": Fleisch, Wurst, Snacks
+  "05": Getreide, Ölsaaten, Nußkerne
+  "06": Nudeln, Trockenfrüchte, Müsli
+  "07": Brotaufstriche, Honig, Nußmuse
+  "08": Würzmittel, Öle, Fette
+  "09": Süßwaren, Gebäck, Pudding
+  "10": Spezialsortimente
+  "11": Tee, Kaffee, Kakao
+  "12": Getränke
+  "13": Kräuter, Heilmittel, Ätherische Öle
+  "14": Körperpflege und Kosmetik
+  "15": Wasch- und Reinigungsmittel
+  "16": Haushaltsgeräte
+  "17": Bücher und Zeitschriften
+  "18": Papier, Schreibwaren, Spielzeug
+  "19": Textilien und Schuhe
+  "20": Farben, Bau- u. Wohnmaterial
+  "0101": Brot
+  "0102": Brötchen, Semmeln, Brezen
+  "0103": Spezialitäten
+  "0111": Standardgebäck
+  "0112": Saisongebäck
+  "0113": Kuchen, Torten
+  "0121": Pikantes Gebäck
+  "0131": Sonstiges vom Bäcker
+  "0201": Milch
+  "0202": Sauermilchprodukte
+  "0203": Quark
+  "0204": Joghurt
+  "0205": Pudding
+  "0206": Sahne, Butter, Sonstiges
+  "0211": Ziegen-/Schafsmilchprodukte
+  "0221": Frischkäse
+  "0222": Weichkäse
+  "0223": Halbfester Schnittkäse
+  "0224": Schnittkäse
+  "0225": Hartkäse
+  "0231": Ziegen-/Schafskäse
+  "0241": Eier
+  "0251": Tofu, Tempeh
+  "0252": Soja-Frischprodukte
+  "0253": Soja- und Reisgetränke
+  "0254": Sojapudding
+  "0301": Obst, heimisch
+  "0302": Südfrüchte
+  "0303": Beeren
+  "0304": Exoten
+  "0311": Kartoffeln
+  "0312": Wurzelgemüse
+  "0313": Salate
+  "0314": Blatt- und Zwiebelgemüse
+  "0315": Kohlgemüse
+  "0316": Fruchtgemüse und Spezialitäten
+  "0321": Kräuter
+  "0331": Keime und Sprossen
+  "0341": Pilze
+  "0351": Nüsse in Schale
+  "0399": Div. Frischprodukte
+  "0401": Fleisch
+  "0402": Geflügel
+  "0411": Wurst
+  "0421": Fisch
+  "0422": Fischerzeugnisse
+  "0431": Burger, Kroketten
+  "0441": Sonstige Snacks
+  "0501": Getreide
+  "0502": Hülsenfrüchte
+  "0511": Ölsaaten
+  "0521": Nußkerne
+  "0531": Keimsaaten
+  "0601": Getreideprodukte
+  "0602": Flocken
+  "0603": Nudeln
+  "0611": Sojaerzeugnisse
+  "0621": Trockenfrüchte
+  "0631": Müsli
+  "0632": Krunchy
+  "0701": Würzige Aufstriche
+  "0702": Fruchtaufstriche
+  "0711": Honig
+  "0712": Honigprodukte
+  "0721": Nußmuse
+  "0801": Salz und Kräutersalz
+  "0802": Essig
+  "0803": Senf
+  "0804": Suppen und  Soßen
+  "0805": Sojasoße und Miso
+  "0806": Würzmittel
+  "0811": Gewürze
+  "0812": Gewürzmischungen
+  "0813": Gewürzöle
+  "0821": Speiseöle
+  "0822": Margarine
+  "0831": Pikante Konserven
+  "0832": Süße Konserven
+  "0841": Fertiggerichte
+  "0842": Halbfertiggerichte
+  "0901": Frucht- und Knusperriegel
+  "0902": Bonbons und Lutscher
+  "0903": Schokolade
+  "0904": Pralinen
+  "0911": Dauergebäck
+  "0912": Waffeln
+  "0913": Kekse
+  "0914": Knabbergebäck
+  "0921": Süßmittel
+  "0922": Obstdicksäfte
+  "0923": Carob
+  "0931": Pudding
+  "0932": Back- und Geliermittel
+  "0933": Kochhilfen, Fermente
+  "1001": Säuglingsbreie
+  "1002": Babykost
+  "1011": Makrobiotische Spezialitäten
+  "1021": 3. Welt-Solidaritätswaren
+  "1031": Tiefkühlkost
+  "1051": Tiernahrung
+  "1101": Früchtetee
+  "1102": Kräutertee
+  "1103": Kräutertee-Mischungen
+  "1104": Rooibos
+  "1105": Gewürztee
+  "1111": Schwarzer Tee
+  "1112": Grüner Tee
+  "1113": Aromatisierter Tee
+  "1121": Bohnenkaffee
+  "1122": Ersatzkaffee
+  "1131": Kakao
+  "1132": Schokoladengetränke
+  "1201": Wasser
+  "1211": Fruchtsäfte
+  "1212": Fruchtnektare, Limonade, Schorle
+  "1213": Gemüsesäfte
+  "1215": Kwaszgetränke, Getreidegetränke, Diätgetränke
+  "1221": Bier
+  "1231": Rotwein
+  "1232": Rosé-Wein
+  "1233": Weißwein
+  "1241": Cidre
+  "1242": Schaumwein
+  "1251": Spirituosen
+  "1301": Heilkräuter
+  "1302": Kräutermischungen
+  "1311": Freiverkäufliche Arzneimittel
+  "1312": Kur- und Heilmittel
+  "1321": Ätherische Öle
+  "1322": Ätherische Ölmischungen
+  "1331": Duftlampen und Rauchgefäße
+  "1332": Zubehör für Duftwerk
+  "1341": Räucherwerk
+  "1401": Seife
+  "1402": Gesichtsreinigung und -pflege
+  "1403": Körperöl und Körperpflege
+  "1404": Haarpflege
+  "1405": Zahn- und Mundpflege
+  "1406": Handcreme
+  "1407": Fußpflege
+  "1411": Badezusätze und Duschpräparate
+  "1412": Deo, Eau de Toilette
+  "1413": Rasierzubehör
+  "1414": Sonnenschutz
+  "1415": Baby- und Kinderpflege
+  "1421": Dekorativkosmetik
+  "1422": Parfum
+  "1423": Sonstige Kosmetik
+  "1431": Zahnbürsten
+  "1432": Bürsten und Kämme
+  "1433": Kosmetikzubehör
+  "1441": Hygiene
+  "1451": Tierpflege
+  "1501": Waschmittel
+  "1502": Spülmittel
+  "1503": Reinigungsmittel
+  "1511": Dosierhilfsmittel
+  "1521": Schuhcreme
+  "1531": Insektenschutz, Düngemittel
+  "1601": Handmühlen
+  "1602": Elektromühlen
+  "1603": Kombi-Maschinen
+  "1604": Zubehör für Kombigeräte
+  "1611": Sonstige Haushaltsgeräte
+  "1612": Keimgeräte, Dörrapparate, Gärtöpfe
+  "1621": Küchenhelfer
+  "1622": Kaffee- und Teefilter
+  "1631": Haushaltswaren
+  "1701": Kochen und Backen
+  "1702": Ernährung und Gesundheit
+  "1703": Landwirtschaft und Garten
+  "1704": Ökologie und Ergänzendes
+  "1705": Baubiologie
+  "1706": Esoterisches
+  "1707": Sonstige Bücher
+  "1711": Zeitschriften
+  "1801": Schmuckpapier
+  "1802": Schulpapier
+  "1803": Neutrales Papier
+  "1804": Formdrucke
+  "1805": Geschenkpapier
+  "1806": Sonstiges Papier
+  "1811": Stifte
+  "1812": Malbedarf
+  "1813": Knetwachs
+  "1821": Kerzen
+  "1831": Spielzeug
+  "1832": Bastelbedarf
+  "1841": Edelsteine
+  "1851": CD's
+  "1852": MC's
+  "1901": Windeln
+  "1902": Baby- und Kinderwäsche
+  "1903": Erwachsenenwäsche
+  "1904": Oberbekleidung
+  "1905": Strümpfe
+  "1911": Schuhe und Einlegesohlen
+  "2001": Imprägnierung, Lasur, Balsame
+  "2002": Lacke
+  "2003": Wandfarben
+  "2004": Kleber
+  "2009": Sonstige Farben, Lösemittel
+  "2011": Tapeten
+  "2012": Bodenbeläge
+  "2013": Dämmstoffe
+  "2019": Sonstige Baumaterialien
+  "2021": Mobiliar
+  "2022": Matratzen
+  "2023": Heimtextilien
+  "2029": Sonstige Wohnmaterialien
+  "2031": Werkzeug, Hilfsmittel
