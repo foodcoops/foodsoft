@@ -1,2 +1,2 @@
 $('#article_#{@article.id}').replaceWith('#{escape_javascript(render(@article))}');
-$('#modalContainer').modal('hide');
+$('#modalContainer').removeClass('modal-xl').modal('hide');

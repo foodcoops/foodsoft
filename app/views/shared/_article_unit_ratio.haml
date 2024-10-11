@@ -1,0 +1,19 @@
+- original_ratio = defined?(original_ratios) ? original_ratios&.to_a&.dig(article_unit_ratio_counter) : nil
+- changed = !original_ratio.nil? && (original_ratio.quantity != article_unit_ratio.quantity || original_ratio.unit != article_unit_ratio.unit)
+%tr{:class => 'no-indent-left', :style => changed ? "background-color: yellow" : ""}
+  = f.fields_for(:article_unit_ratios, article_unit_ratio) do |sub_form|
+    -# title: unit quantifier
+    %td
+      -# TODO: Check, if there was any justified reason for this article_unit_ratio_counter logic:
+      -#= hidden_field f.object.class.to_s.underscore + "[article_unit_ratios_attributes][#{article_unit_ratio_counter + 1}]", :sort, value: article_unit_ratio_counter + 1
+      = sub_form.input :sort, as: :hidden
+
+      = sub_form.input :quantity, {input_html: {class: 'input-mini'}, label: false}
+    %td= '&times;'.html_safe
+    %td= sub_form.input :unit, as: :select, include_blank: true, collection: @article_units, label: false, input_html: {class: 'input-medium'}
+    %td.ml-1= t('.per')
+    %td
+      %span.unit_multiplier.mr-1
+    %td.actions{style: 'width:1em'}
+      = link_to t('.remove'), method: :delete, 'data-remove-ratio' => true, title: t('.remove'), class: 'btn btn-danger btn-mini' do
+        = glyph :remove

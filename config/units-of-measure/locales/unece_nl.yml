@@ -1,0 +1,733 @@
+---
+unece_units:
+  XCU:
+    name: Bekers
+  XCN:
+    name: Container
+  XSH:
+    name: Zak
+  X43:
+    name: Bigbag
+  XST:
+    name: Blad
+  XOK:
+    name: Blok
+  XVA:
+    name: BTW
+  XBX:
+    name: Box
+  XBH:
+    name: Tailleband
+  XBE:
+    name: Bundel
+  XCX:
+    name: Kan
+  XBJ:
+    name: Emmer
+  XUN:
+    name: Eenheid
+  XOS:
+    name: Wegwerppallet
+  XDH:
+    name: Eurobox, CHEP-Box
+  XBA:
+    name: Vat
+  XFI:
+    name: Vaten
+  XBO:
+    name: Fles
+  XBQ:
+    name: Fles in buitenverpakking
+  XFB:
+    name: Flexibag
+  XFT:
+    name: Foodtainer
+  XJR:
+    name: Glas
+  XGR:
+    name: Glazen pot
+  XOW:
+    name: Grote zak in palletformaat
+  X8B:
+    name: Houten doos
+  XCV:
+    name: Envelop
+  XWA:
+    name: IBC (Intermediate Bulk Container)
+  XEI:
+    name: Isotherme doos
+  XJT:
+    name: Jute zak
+  XGY:
+    name: Jute zak
+  XJY:
+    name: Bus
+  XBD:
+    name: Karton
+  XCR:
+    name: Krat
+  XAI:
+    name: Scharnierende verpakking
+  XPA:
+    name: Collo
+  XBK:
+    name: Mand
+  XBI:
+    name: Emmer
+  XOV:
+    name: Retourpallet
+  XNT:
+    name: Net
+  XPK:
+    name: Pak
+  XPC:
+    name: Pakket
+  XPX:
+    name: Pallet
+  X5M:
+    name: Papieren zak
+  XPR:
+    name: Plastic verpakking
+  XEC:
+    name: Plastic zak
+  X6H:
+    name: Kunststof composiet verpakking
+  X44:
+    name: Polyester zak
+  XBR:
+    name: Bout
+  XCW:
+    name: Container op rol
+  XBT:
+    name: Rol
+  XSA:
+    name: Zak
+  XBM:
+    name: Kom
+  XSX:
+    name: Stel in
+  XDN:
+    name: Verdeler
+  XAE:
+    name: Spuitbus
+  XSC:
+    name: Stijging
+  XLU:
+    name: Trap
+  X5L:
+    name: Doek
+  XPP:
+    name: Stuk
+  XPU:
+    name: Lade
+  XBG:
+    name: Zak
+  XP2:
+    name: Kroes
+  XCK:
+    name: Ton
+  XPT:
+    name: Pot
+  XGI:
+    name: Drager
+  XTU:
+    name: Buis
+  PTN:
+    name: Portie
+    long_name: Portie
+    symbols: []
+  STC:
+    name: Bar
+    long_name: Bar
+    symbols: []
+  DMT:
+    name: Decimeter
+    long_name: Decimeter
+    symbols:
+    - dm
+  CMT:
+    name: Centimeters
+    long_name: Centimeters
+    symbols:
+    - cm
+  4H:
+    name: Micrometers
+    long_name: Micrometer (micron)
+    symbols:
+    - µm
+  MMT:
+    name: Millimeters
+    long_name: Millimeters
+    symbols:
+    - mm
+  HMT:
+    name: Hectometer
+    long_name: Hectometer
+    symbols:
+    - hm
+  KMT:
+    name: Kilometers
+    long_name: Kilometers
+    symbols:
+    - km
+  A45:
+    name: Decameter
+    long_name: Decameter
+    symbols:
+    - dam
+  INH:
+    name: Inch
+    long_name: Inch
+    symbols:
+    - "″"
+    - in
+  FOT:
+    name: Voet
+    long_name: Voet
+    symbols:
+    - ft
+  YRD:
+    name: Werf
+    long_name: Werf
+    symbols:
+    - yd
+  SMI:
+    name: Mijl
+    long_name: Mijl (Brits)
+    symbols:
+    - mile
+  '77':
+    name: Milli inch
+    long_name: Milli inch
+    symbols:
+    - mil
+  MTK:
+    name: Vierkante meter
+    long_name: Vierkante meter
+    symbols:
+    - m²
+    - qm
+  DAA:
+    name: Decar
+    long_name: Decar
+    symbols:
+    - daa
+  KMK:
+    name: Vierkante kilometer
+    long_name: Vierkante kilometer
+    symbols:
+    - km²
+  CMK:
+    name: Vierkante centimeters
+    long_name: Vierkante centimeters
+    symbols:
+    - cm²
+  DMK:
+    name: Vierkante decimeter
+    long_name: Vierkante decimeter
+    symbols:
+    - dm²
+  H16:
+    name: Vierkante decameter
+    long_name: Vierkante decameter
+    symbols:
+    - dam²
+  H18:
+    name: Vierkante hectometer
+    long_name: Vierkante hectometer
+    symbols:
+    - hm²
+  MMK:
+    name: Vierkante millimeter
+    long_name: Vierkante millimeter
+    symbols:
+    - mm²
+  M47:
+    name: Cirkelvormige mil
+    long_name: Cirkelvormige mil
+    symbols:
+    - cmil
+  ARE:
+    name: Ar
+    long_name: Ar
+    symbols:
+    - a
+  HAR:
+    name: Hectare
+    long_name: Hectare
+    symbols:
+    - ha
+  INK:
+    name: Vierkante inch
+    long_name: Vierkante inch
+    symbols:
+    - in²
+  FTK:
+    name: Vierkante voet
+    long_name: Vierkante voet
+    symbols:
+    - ft²
+  YDK:
+    name: Vierkante meter
+    long_name: Vierkante meter
+    symbols:
+    - yd²
+  MIK:
+    name: Vierkante mijl
+    long_name: Vierkante mijl (Brits)
+    symbols:
+    - mi²
+  ACR:
+    name: Morgen
+    long_name: Morgen
+    symbols:
+    - acre
+  KGM:
+    name: Kilogram
+    long_name: Kilogram
+    symbols:
+    - kg
+  HGM:
+    name: Hectogram
+    long_name: Hectogram
+    symbols:
+    - hg
+  KTN:
+    name: Kiloton
+    long_name: Kiloton
+    symbols:
+    - kt
+  DJ:
+    name: Decagram
+    long_name: Decagram
+    symbols:
+    - dag
+    - dkg
+  DG:
+    name: Decigram
+    long_name: Decigram
+    symbols:
+    - dg
+  CGM:
+    name: Centigram
+    long_name: Centigram
+    symbols:
+    - cg
+  DTN:
+    name: Decitonne
+    long_name: Decitonne
+    symbols:
+    - dt
+    - dtn
+  MGM:
+    name: Milligram
+    long_name: Milligram
+    symbols:
+    - mg
+  2U:
+    name: Megagram
+    long_name: Megagram
+    symbols:
+    - Mg
+  MC:
+    name: Microgram
+    long_name: Microgram
+    symbols:
+    - µg
+  GRM:
+    name: Gram
+    long_name: Gram
+    symbols:
+    - g
+  TNE:
+    name: Ton
+    long_name: Ton (metrisch)
+    symbols:
+    - t
+  M86:
+    name: Pond
+    long_name: Pond
+    symbols:
+    - pfd
+  LBR:
+    name: Engels pond
+    long_name: Engels pond
+    symbols:
+    - lb
+  GRN:
+    name: Gran
+    long_name: Gran
+    symbols:
+    - gr
+  ONZ:
+    name: Ons
+    long_name: Ounce (avoirdupois)
+    symbols:
+    - oz
+  CWI:
+    name: Br. centner
+    long_name: Honderd kilogram (Brits)
+    symbols:
+    - cwt
+  CWA:
+    name: Am. Zentner
+    long_name: Honderd kilogram (Amerikaans)
+    symbols:
+    - cwt
+  LTN:
+    name: Br. ton
+    long_name: Britse ton, lange ton (Amerikaans)
+    symbols:
+    - ton (Br.)
+  STI:
+    name: Steen
+    long_name: Steen (Brits)
+    symbols:
+    - st
+  STN:
+    name: Am. Ton
+    long_name: Amerikaanse ton, korte ton
+    symbols:
+    - ton (Am.)
+  APZ:
+    name: Troy ounce
+    long_name: Troy ounce of apothekersunce
+    symbols:
+    - tr oz
+  F13:
+    name: Slak
+    long_name: Slak
+    symbols:
+    - slug
+  SEC:
+    name: Tweede
+    long_name: Seconde [tijdseenheid]
+    symbols:
+    - s
+  MIN:
+    name: Minuut
+    long_name: Minuut [tijdseenheid]
+    symbols:
+    - min
+  HUR:
+    name: Uur
+    long_name: Uur
+    symbols:
+    - h
+  DAY:
+    name: Dag
+    long_name: Dag
+    symbols:
+    - d
+  C26:
+    name: Milliseconde
+    long_name: Milliseconde
+    symbols:
+    - ms
+  WEE:
+    name: Week
+    long_name: Week
+    symbols:
+    - wk
+  MON:
+    name: Maand
+    long_name: Maand
+    symbols:
+    - mo
+  ANN:
+    name: Jaar
+    long_name: Jaar
+    symbols:
+    - "y"
+  MTQ:
+    name: Kubieke meter
+    long_name: Kubieke meter
+    symbols:
+    - m³
+    - cbm
+  LTR:
+    name: Liter
+    long_name: Liter
+    symbols:
+    - l
+  MAL:
+    name: Megaliter
+    long_name: Megaliter
+    symbols:
+    - Ml
+  DLT:
+    name: Deciliter
+    long_name: Deciliter
+    symbols:
+    - dl
+  4G:
+    name: Microliter
+    long_name: Microliter
+    symbols:
+    - µl
+  K6:
+    name: Kiloliter
+    long_name: Kiloliter
+    symbols:
+    - kl
+  A44:
+    name: Decaliter
+    long_name: Decaliter
+    symbols:
+    - dal
+  MMQ:
+    name: Kubieke millimeter
+    long_name: Kubieke millimeter
+    symbols:
+    - mm³
+  CMQ:
+    name: Kubieke centimeter
+    long_name: Kubieke centimeter
+    symbols:
+    - cm³
+    - ccm
+  DMQ:
+    name: Kubieke decimeter
+    long_name: Kubieke decimeter
+    symbols:
+    - dm³
+  MLT:
+    name: Milliliters
+    long_name: Milliliters
+    symbols:
+    - ml
+  HLT:
+    name: Hectoliter
+    long_name: Hectoliter
+    symbols:
+    - hl
+  CLT:
+    name: Centiliter
+    long_name: Centiliter
+    symbols:
+    - cl
+  DMA:
+    name: Kubische decameter
+    long_name: Kubische decameter
+    symbols:
+    - dam³
+  H19:
+    name: Kubieke hektometer
+    long_name: Kubieke hektometer
+    symbols:
+    - hm³
+  H20:
+    name: Kubieke kilometer
+    long_name: Kubieke kilometer
+    symbols:
+    - km³
+  M67:
+    name: acre-voet
+    long_name: acre-foot (gebaseerd op U.S. Survey Foot)
+    symbols:
+    - acre-ft
+  M68:
+    name: Snoer
+    long_name: Snoer (128 ft3)
+    symbols:
+    - cord
+  M69:
+    name: Kubieke mijl
+    long_name: Kubieke mijl (Brits)
+    symbols:
+    - mi³
+  M70:
+    name: Bak registreren
+    long_name: Bak registreren
+    symbols:
+    - RT
+  5I:
+    name: Kubieke voet
+    long_name: Kubieke voet
+    symbols:
+    - std
+  INQ:
+    name: Kubieke inch
+    long_name: Kubieke inch
+    symbols:
+    - in³
+  FTQ:
+    name: Kubieke voet
+    long_name: Kubieke voet
+    symbols:
+    - ft³
+  YDQ:
+    name: Kubieke meter
+    long_name: Kubieke meter
+    symbols:
+    - yd³
+  GLI:
+    name: Gallon (Br.)
+    long_name: Gallon (Brits)
+    symbols:
+    - gal
+  GLL:
+    name: Gallon (Am.)
+    long_name: Gallon (Amerikaans)
+    symbols:
+    - gal
+  PTI:
+    name: Pint (Br.)
+    long_name: Pint (Brits)
+    symbols:
+    - pt
+  QTI:
+    name: Kwart
+    long_name: kwart (Brits)
+    symbols:
+    - qt
+  PTL:
+    name: vloeibare pint (Am.)
+    long_name: vloeibare pint (Amerikaans)
+    symbols:
+    - liq pt
+  QTL:
+    name: vloeibaar kwart (Am.)
+    long_name: vloeibaar kwart (amerikaans)
+    symbols:
+    - liq qt
+  PTD:
+    name: droge pint (Am.)
+    long_name: droge pint (Amerikaans)
+    symbols:
+    - dry pt
+  OZI:
+    name: vloeibare ounce (Br.)
+    long_name: fluid ounce (Brits)
+    symbols:
+    - fl oz
+  J57:
+    name: Vat (Br.)
+    long_name: Vat (Brits)
+    symbols:
+    - bbl
+  L43:
+    name: Kwart bushel (Br.)
+    long_name: peck (Brits)
+    symbols:
+    - pk
+  L84:
+    name: Ton (Br.)
+    long_name: ton (verzending UK)
+    symbols:
+    - Shipping ton (Br.)
+  L86:
+    name: Ton (Am.)
+    long_name: ton (verzending VS)
+    symbols:
+    - Shipping ton (Am.)
+  OZA:
+    name: Vloeibare ounce
+    long_name: Vloeibare ounce (Amerikaans)
+    symbols:
+    - fl oz
+  BUI:
+    name: Bushel (Br.)
+    long_name: Bushel (Brits)
+    symbols:
+    - bushel
+  BUA:
+    name: Bushel (Am.)
+    long_name: Bushel (Amerikaans)
+    symbols:
+    - bu
+  BLL:
+    name: Vat (Am.)
+    long_name: Vat (Amerikaans)
+    symbols:
+    - barrel
+  BLD:
+    name: Droog vat (Am.)
+    long_name: Dry Barrel (Amerikaans)
+    symbols:
+    - bbl
+  GLD:
+    name: Droge gallon (Am.)
+    long_name: Droge gallon (Amerikaans)
+    symbols:
+    - dry gal
+  QTD:
+    name: Droog Kwart (Am.)
+    long_name: Dry Quart (Amerikaans)
+    symbols:
+    - dry qt
+  G26:
+    name: Ster
+    long_name: Ster (kubieke meter bulk)
+    symbols:
+    - st
+  G21:
+    name: Beker
+    long_name: Cup [eenheid van volume]
+    symbols:
+    - cup
+  G24:
+    name: Eetlepel
+    long_name: Eetlepel
+    symbols:
+    - el
+  G25:
+    name: Theelepel
+    long_name: Theelepel
+    symbols:
+    - tl
+  G23:
+    name: Kwart bushel (Am.)
+    long_name: Quarter bushel (Amerikaans)
+    symbols:
+    - pk
+  JOU:
+    name: Joules
+    long_name: Joules
+    symbols:
+    - J
+  J75:
+    name: Calorieën
+    long_name: Calorieën
+    symbols:
+    - cal
+  K51:
+    name: Kilocalorie
+    long_name: Kilocalorie
+    symbols:
+    - kcal
+  J55:
+    name: Watt seconde
+    long_name: Watt seconde
+    symbols:
+    - Ws
+  WHR:
+    name: Wattuur
+    long_name: Wattuur
+    symbols:
+    - Wh
+  KWH:
+    name: Kilowattuur
+    long_name: Kilowattuur
+    symbols:
+    - kWh
+  GWH:
+    name: Gigawattuur
+    long_name: Gigawattuur
+    symbols:
+    - GWh
+  WTT:
+    name: Watts
+    long_name: Watts
+    symbols:
+    - W
+  KWT:
+    name: Kilowatt
+    long_name: Kilowatt
+    symbols:
+    - kW
+  MAW:
+    name: Megawatt
+    long_name: Megawatt
+    symbols:
+    - MW

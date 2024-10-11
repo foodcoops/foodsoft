@@ -1,8 +1,4 @@
 = simple_form_for @supplier do |f|
-  - if @supplier.shared_supplier
-    .alert.alert-info
-      = t 'suppliers.shared_supplier_note'
-  = f.hidden_field :shared_supplier_id
   = f.input :name
   = f.input :address
   = f.input :phone
@@ -21,9 +17,9 @@
   = f.input :order_howto, as: :text, input_html: {rows: 5}
   = f.input :note, as: :text, input_html: {rows: 5}
   = f.input :min_order_quantity
+  = f.input :supplier_remote_source
   = render 'shared/custom_form_fields', f: f, type: :supplier
-  - if @supplier.shared_supplier
-    = f.input :shared_sync_method, collection: shared_sync_method_collection(@supplier.shared_supplier), input_html: {class: 'input-xlarge'}, include_blank: false, disabled: @supplier.shared_supplier.shared_sync_methods.count < 2
+  = f.input :shared_sync_method, collection: shared_sync_method_collection, input_html: {class: 'input-xlarge'}, include_blank: true
   .form-actions
     = f.submit class: 'btn'
     = link_to t('ui.or_cancel'), suppliers_path

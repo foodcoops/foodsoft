@@ -267,4 +267,8 @@ module ApplicationHelper
 
     stylesheet_link_tag foodcoop_css_path, media: 'all'
   end
+
+  def format_number(value, max_precision = 2)
+    number_with_precision(value, precision: max_precision, strip_insignificant_zeros: true, separator: '.', delimiter: '')
+  end
 end

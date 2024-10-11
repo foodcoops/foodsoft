@@ -1,5 +1,5 @@
-status;art. nummer;productnaam;notitie;producent;herkomst;eenheid;prijs ex btw;btw (%);statiegeld;colligrootte;(reserved);(reserved);categorienaam
-;29932;Walnoten (ongeroosterd);bio ◎;Het grote bomenbos;Veluwe, NL;kg;2.34;6;0;1;;;Nuts
-;28391;Pijnboompitten;dem;Het warme woud;TR;100g;5.56;6;0;10;;;Nuts
-;1829;Appelsap (verpakt);;Appelgaarde;DE;4x250ml;3.21;6;0.4;10;;;Drinks
-;177813;Tomaten;bio;De röde hof;Best, NL;500 g;1.2;6;0;20;;;Vegetables
+avail.;Order number;Name;Supplier order unit;Unit;Ratios to supplier order unit;Minimum order quantity;Billing unit;Group order granularity;Group order unit;Price (net);Price unit;VAT;Deposit;Note;Category;Origin;Manufacturer
+Yes;29932;Walnoten (ongeroosterd);;kg;;;;1;;2.34;;6;0;bio ◎;Nuts;Veluwe, NL;Het grote bomenbos
+Yes;28391;Pijnboompitten;;100g;10 Piece;;;1;;5.56;;6;0;dem;Nuts;TR;Het warme woud
+Yes;1829;Appelsap (verpakt);;4x250ml;10 Piece;;;1;;3.21;;6;0.4;;Drinks;DE;Appelgaarde
+Yes;177813;Tomaten;;500 g;20 Piece;;;1;;1.2;;6;0;bio;Vegetables;Best, NL;De röde hof

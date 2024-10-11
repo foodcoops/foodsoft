@@ -1,0 +1,16 @@
+- @article_units.each do |article_unit|
+  %tr{class: ("untranslated" if article_unit[:untranslated])}
+    %td= article_unit[:code]
+    %td= highlight(article_unit[:symbol], @query)
+    %td
+      = highlight(article_unit[:name], @query)
+      - if article_unit[:untranslated]
+        %a{title: t('.request_translation'), href: "https://github.com/foodcoops/foodsoft/issues/new?title=Add%20translations%20for%20article%20unit%20%27#{article_unit[:code]}%27", target: '_blank'}
+          %i.icon-mail-forward
+    %td= article_unit[:description]
+    %td
+      - if article_unit[:record].nil?
+        = render partial: 'create_link', locals: {unit: article_unit[:code]}
+      - else
+        = render partial: 'destroy_link', locals: {article_unit: article_unit[:record]}
+

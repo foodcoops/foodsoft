@@ -1,0 +1,409 @@
+Common code,Original name,English suggestion,Engl. abbr.,Engl. Aliases,German suggestion,German abbr.,German aliases,Description
+XOJ,1/4 EURO Pallet,1/4 EURO Pallet,,,1/4 EURO Palette,,,Standard pallet with dimensions 60 X 40 cm.
+XOL,1/8 EURO Pallet,1/8 EURO Pallet,,,1/8 EURO Palette,,,Standard pallet with dimensions 40 X 30 cm.
+X1B,"Drum, aluminium",Aluminium drum,,,Aluminiumfass,,,
+XQD,"Drum, aluminium, removable head","Aluminium drum, removable head",,,"Aluminiumfass, abnehmbarer Kopf",,,
+XQC,"Drum, aluminium, non-removable head","Aluminium drum, non-removable head",,,"Aluminiumfass, nicht abnehmbarer Kopf",,,
+XWD,"Intermediate bulk container, aluminium ",Aluminium intermediate bulk container,,,Aluminium-Intermediate-Bulk-Container,,,
+XWH,"Intermediate bulk container, aluminium, pressurised > 10 kpa","Aluminium intermediate bulk container, pressurised > 10 kpa",,,"Aluminium-Intermediate-Bulk-Container, druckbeaufschlagt > 10 kPa",,,
+X4B,"Box, aluminium",Aluminium box,,,Aluminiumkiste,,,
+XWL,"Intermediate bulk container, aluminium, liquid ",Aluminium intermediate liquid bulk container,,,Aluminium-Zwischenbehälter für flüssige Schüttgüter,,,
+XAM,"Ampoule, non-protected ",Ampoule,,,Ampulle,,,
+XOU,"Container, outer",Outer container,,,Außenbehälter,,,"A type of containment box that serves as the outer shipping container, not otherwise specified as transport equipment."
+X7A,"Case, car",Car case,,,Auto-Box,,,A type of portable container designed to store equipment for carriage in an automobile.
+XAL,Ball,Ball,,,Ball,,,A spherical containment vessel for retaining substances or articles.
+XBN,"Bale, non-compressed ",Bale,,,Ballen,,,
+XBF,"Balloon, non-protected ",Balloon,,,Ballon,,,
+XSY,Sleeve,Sleeve,,,Banderole,,,
+XIN,Ingot,Ingot,,,Barren,,,
+XIZ,"Ingots, in bundle/bunch/truss",Ingots,,,Barren (mehrere),,,
+XBS,"Bottle, non-protected, bulbous ",Bulbous bottle,,,Bauchige Flasche,,,A narrow-necked bulb shaped vessel without external protective packing material.
+XCU,Cup,Cup,,,Becher,,,
+XCN,"Container, not otherwise specified as transport equipment",Container,,,Behälter,,,
+XPO,Pouch,Pouch,,,Beutel,,,
+XSH,Sachet ,Sachet ,,,Beutel,,,
+XCB,"Crate, beer",Beer crate,,,Bierkasten,,,
+X43,"Bag, super bulk",Big bag,,,Bigbag,,,A cloth plastic or paper based bag having the dimensions of the pallet on which it is constructed.
+XST,Sheet,Sheet,,,Blatt,Bl.,,
+XSZ,"Sheets, in bundle/bunch/truss",Sheets,,,Blätter,,,
+XSM,Sheetmetal ,Sheetmetal ,,,Blech ,,,
+XOK,Block,Block,,,Block,,,"A solid piece of a hard substance, such as granite, having one or more flat sides."
+XPN,Plank,Plank,,,Bohle,,,
+XVA,Vat,Vat,,,Bottich,,,
+XBX,Box,Box,,,Box,,,
+XBW,"Box, for liquids",Box for liquids,,,Box für Flüssigkeiten,,,
+XPZ,"Planks, in bundle/bunch/truss",Planks,,,Bretter,,,
+XCI,Canister ,Canister ,,,Büchse,,,
+XHN,Hanger,Hanger,,,Bügel,,,A purpose shaped device with a hook at the top for hanging items from a rail.
+XBH,Bunch,Bunch,,,Bund,Bd.,bd,
+XTS,Truss,Truss,,,Bündel,,,
+XBE,Bundle ,Bundle ,bdl.,,Bündel ,Bdl.,,
+XCC,Churn,Churn,,,Butterfass,,,
+XLT,Lot,Lot,,,Charge,,,
+XP1,CHEP pallet 60 cm x 80 cm ,CHEP pallet 60 cm x 80 cm ,,,CHEP Palette 60 cm x 80 cm ,,,Commonwealth Handling Equipment Pool (CHEP) standard pallet of dimensions 60 centimeters x 80 centimeters.
+XOC,"Pallet, CHEP 100 cm x 120 cm","CHEP Pallet, 100 cm x 120 cm",,,"CHEP Palette, 100 cm x 120 cm",,,Commonwealth Handling Equipment Pool (CHEP) standard pallet of dimensions 100 centimeters x 120 centimeters.
+XOA,"Pallet, CHEP 40 cm x 60 cm","CHEP Pallet, 40 cm x 60 cm",,,"CHEP Palette, 40 cm x 60 cm",,,Commonwealth Handling Equipment Pool (CHEP) standard pallet of dimensions 40 centimeters x 60 centimeters.
+XOB,"Pallet, CHEP 80 cm x 120 cm","CHEP Pallet, 80 cm x 120 cm",,,"CHEP Palette, 80 cm x 120 cm",,,Commonwealth Handling Equipment Pool (CHEP) standard pallet of dimensions 80 centimeters x 120 centimeters.
+XDG,"Cage, Commonwealth Handling Equipment Pool  (CHEP)",CHEP Cage,,,CHEP-Käfig,,,
+XZP,"Intermediate bulk container, composite, flexible plastic, pressurised","Composite intermediate bulk container, flexible plastic, pressurised",,,"Composite-Intermediate Bulk Container, flexibler Plastik, druckbeaufschlagt",,,
+XZR,"Intermediate bulk container, composite, flexible plastic, liquids ","Composite intermediate bulk container, flexible plastic, liquids",,,"Composite-Intermediate Bulk Container, flexibler Plastik, Flüssigkeiten",,,
+XZM,"Intermediate bulk container, composite, flexible plastic, solids","Composite intermediate bulk container, flexible plastic, solids",,,"Composite-Intermediate-Bulk-Behälter, flexibler Plastik, Feststoffe",,,
+XZQ,"Intermediate bulk container, composite, rigid plastic, liquids","Composite intermediate bulk container, rigid plastic, liquids",,,"Composite-Intermediate-Bulk-Behälter, Hartplastik, Flüssigkeiten",,,
+XZN,"Intermediate bulk container, composite, rigid plastic, pressurised ","Composite intermediate bulk container, rigid plastic, pressurised",,,"Composite-Intermediate-Bulk-Container, Hartplastik, druckbeaufschlagt",,,
+XZL,"Intermediate bulk container, composite, rigid plastic, solids","Composite intermediate bulk container, rigid plastic, solids",,,"Composite-Intermediate-Bulk-Container, Hartplastik, Feststoffe",,,
+XDJ,"Demijohn, non-protected",Demijohn,,,Demijohn,,,
+XIA,"Package, display, wooden ",Wooden display package,,,Display-Paket aus Holz,,,
+XIB,"Package, display, cardboard",Cardboard display package,,,Display-Paket aus Karton,,,
+XID,"Package, display, metal",Metal display package,,,Display-Paket aus Metall,,,
+XIC,"Package, display, plastic",Plastic display package,,,Display-Paket aus Plastik,,,
+XCX,"Can, cylindrical ",Can,,,Dose,,,
+XTN,Tin,Tin,,,Dose,,,
+XCD,"Can, with handle and spout ",Can with handle and spout ,,,Dose mit Griff und Ausgießer ,,,
+XTB,Tub,Tub,,,Eimer,,,
+XBJ,Bucket ,Bucket ,,,Eimer ,,,
+XTL,"Tub, with lid",Tub with lid,,,Eimer mit Deckel,,,
+XFD,"Crate, framed",Framed crate,,,Eingefasste Kiste,,,
+XAG,"Pallet, shrinkwrapped ",Shrinkwrapped pallet,,,Eingeschweißte Palette,,,Pallet load secured with transparent plastic film that has been wrapped around and then shrunk tightly.
+XUN,Unit,Unit,,,Einheit,,,"A type of package composed of a single item or object, not otherwise specified as a unit of transport equipment."
+XZZ,Mutually defined ,Mutually defined ,,,Einvernehmlich definiert ,,,
+XOS,Oneway pallet,Oneway pallet,,,Einweg-Palette,,,Pallet need not be returned to the point of expedition
+XO3,Oneway pallet ISO 0 - 1/2 EURO Pallet,Oneway pallet ISO 0 - 1/2 EURO Pallet,,,Einwegpalette ISO 0 - 1/2 EURO Palette,,,Oneway pallet with dimensions 80 X 60 cm.
+XO4,Oneway pallet ISO 1 - 1/1 EURO Pallet,Oneway pallet ISO 1 - 1/1 EURO Pallet,,,Einwegpalette ISO 1 - 1/1 EURO Palette,,,Oneway pallet with dimensions 80 X 120 cm.
+XO5,Oneway pallet ISO 2 - 2/1 EURO Pallet,Oneway pallet ISO 2 - 2/1 EURO Pallet,,,Einwegpalette ISO 2 - 2/1 EURO Palette,,,Oneway pallet with dimensions 100 X 120 cm.
+XNF,"Unpacked or unpackaged, single unit",Single unit unpackaged,,,Einzelne Einheit unverpackt,,,
+XDI,"Drum, iron ",Iron drum,,,Eisenfass,,,
+XDH,"Box, Commonwealth Handling Equipment Pool (CHEP), Eurobox","Eurobox, CHEP box",box,,"Eurobox, CHEP-Box",Box,,A box mounted on a pallet base under the control of CHEP.
+XBA,Barrel ,Barrel ,,,Fass,,,
+XBU,Butt ,Butt ,,,Fass,,,
+XDR,Drum ,Drum ,,,Fass,,,
+XTO,Tun,Tun,,,Fass,,,
+XFI,Firkin ,Firkin ,,,Fässchen ,,,
+XFR,Frame,Frame,,,Fassung,,,
+XVY,"Bulk, solid, fine particles (“powders”)",Fine particles solid bulk (“powders”),,,"Feine Partikel, feste Schüttgüter (""Pulver"")",,,
+XFP,Filmpack ,Filmpack ,,,Filmpack,,,
+XCE,Creel,Creel,,,Fischkorb,,,
+XBO,"Bottle, non-protected, cylindrical ",Bottle,btl.,btl,Flasche,Fl.,fl,A narrow-necked cylindrical shaped vessel without external protective packing material.
+XBC,Bottlecrate / bottlerack ,Bottlecrate / bottlerack ,,,Flaschenkasten / Flaschengestell,,,
+XBQ,"Bottle, protected cylindrical",Protected bottle,btl.,,Flasche in Umverpackung,Fl.,,A narrow-necked cylindrical shaped vessel with external protective packing material.
+X1F,"Container, flexible",Flexible container,,,Flexibler Behälter,,,A packaging container of flexible construction.
+XFX,"Bag, flexible container",Flexible container bag,,,Flexibler Behältersack,,,
+XZU,"Intermediate bulk container, flexible",Flexible intermediate bulk container,,,Flexibler intermediärer  Schüttgutbehälter (IBC),,,
+XFE,Flexitank,Flexitank,,,Flexitank,,,"A flexible containment tank made of plastic, typically for the transportation bulk non-hazardous cargoes using standard size shipping containers."
+XIF,"Package, flow ",Flow package,,,Flow-Paket,,,"A flexible tubular package or skin, possibly transparent, often used for containment of foodstuffs (e.g. salami sausage)."
+XWM,"Intermediate bulk container, metal, liquid ",Metal intermediate liquid bulk container,,,Flüssiger Schüttgutbehälter aus Metall,,,
+XWK,"Intermediate bulk container, steel, liquid ",Steel intermediate liquid bulk container,,,Flüssiger Schüttgutbehälter aus Stahl,,,
+XVL,"Bulk, liquid ",Liquid bulk,,,Flüssiges Schüttgut,,,
+XVQ,"Bulk, liquefied gas (at abnormal temperature/pressure) ",Liquefied gas bulk,,,Flüssiggas-Schüttgut,,,
+XFB,Flexibag,Flexibag,,,Flexibag,,,"A flexible containment bag made of plastic, typically for the transportation bulk non-hazardous cargoes using standard size shipping containers."
+XGL,"Container, gallon",Gallon container,,,Gallonen-Kanister,,,A container with a capacity of one gallon.
+XGB,"Bottle, gas",Gas bottle,,,Gasflasche,,,A narrow-necked metal cylinder for retention of liquefied or compressed gas.
+XVG,"Bulk, gas (at 1031 mbar and 15°C)",Gas bulk,,,Gas-Schüttgut,,,
+XMW,"Receptacle, plastic wrapped ",Plastic wrapped receptacle,,,Gefäß mit Plastikummantelung,,,Containment vessel wrapped with plastic for retaining substances or articles.
+XWQ,"Intermediate bulk container, woven plastic, with liner ",Woven plastic intermediate bulk container with liner,,,Geflochtener Plastik-Intermediate-Bulk-Behälter mit Liner,,,
+XCS,Case ,Case ,,,Gehäuse,,,
+XLE,Luggage,Luggage,,,Gepäck,,,"A collection of bags, cases and/or containers which hold personal belongings for a journey."
+XAP,"Ampoule, protected ",Protected ampoule,,,Ampulle in Umverpackung,,,
+XBV,"Bottle, protected bulbous",Protected bulbous bottle,,,Bauchige Flasche in Umverpackung,,,A narrow-necked bulb shaped vessel with external protective packing material.
+XFT,Foodtainer,Foodtainer,,,Foodtainer,,,
+XCP,"Carboy, protected",Protected carboy,,,Korbflasche in Umverpackung,,,
+XBP,"Balloon, protected ",Protected balloon,,,Ballon in Umverpackung,,,
+XDP,"Demijohn, protected",Protected demijohn,,,Demijohn in Umverpackung,,,
+XRK,Rack ,Rack ,,,Gestell,,,
+XSI,Skid ,Skid ,,,Gestell,,,A low movable platform or pallet to facilitate the handling and transport of goods.
+X5H,"Bag, woven plastic",Woven plastic bag,,,Gewebte Plastiktüte,,,
+XXA,"Bag, woven plastic, without inner coat/liner ",Woven plastic bag without inner coat/liner,,,Gewebte Plastiktüte ohne Innenmantel/Liner,,,
+XXB,"Bag, woven plastic, sift proof ","Woven plastic bag, sift proof",,,"Gewebte Plastiktüte, siebfest",,,
+XXC,"Bag, woven plastic, water resistant","Woven plastic bag, water resistant",,,"Gewebte Plastiktüte, wasserabweisend",,,
+XWP,"Intermediate bulk container, woven plastic, coated ","Woven plastic intermediate bulk container, coated",,,"Gewebter Plastik-Intermediate-Bulk-Behälter, beschichtet",,,
+XWN,"Intermediate bulk container, woven plastic, without coat/liner ",Woven plastic intermediate bulk container without coat/liner,,,Gewebter Plastik-Intermediate-Bulk-Container ohne Mantel/Liner,,,
+XWR,"Intermediate bulk container, woven plastic, coated and liner ","Woven plastic intermediate bulk container, coated and liner",,,"Gewebter Plastik-Zwischenschüttgutbehälter, beschichtet und Auskleidung",,,
+XJR,Jar,Jar,,,Glas,Gl.,gl,
+XGR,"Receptacle, glass ",Glass receptacle,,,Glasgefäß,,,Containment vessel made of glass for retaining substances or articles.
+XYV,"Composite packaging, glass receptacle in wickerwork hamper",Glass receptacle in wickerwork hamper composite packaging,,,Glasgefäß aus Korbgeflecht behindert Verbundverpackungen,,,
+XYQ,"Composite packaging, glass receptacle in aluminium drum",Glass receptacle in aluminium drum composite packaging,,,Glasgefäß in Aluminium-Fassverbundverpackung,,,
+XYR,"Composite packaging, glass receptacle in aluminium crate",Glass receptacle in aluminium crate composite packaging,,,Glasgefäß in Aluminiumkistenverbundverpackung,,,
+XYY,"Composite packaging, glass receptacle in expandable plastic pack",Glass receptacle in expandable plastic pack composite packaging,,,Glasgefäß in expandierbarer Plastikverpackung,,,
+XYW,"Composite packaging, glass receptacle in fibre drum",Glass receptacle in fibre drum composite packaging,,,Glasgefäß in Fasertrommel-Verbundverpackungen,,,
+XYX,"Composite packaging, glass receptacle in fibreboard box ",Glass receptacle in fibreboard box composite packaging,,,Glasgefäß in Faserverbundverpackung,,,
+XYS,"Composite packaging, glass receptacle in wooden box",Glass receptacle in wooden box composite packaging,,,Glasgefäß in Holzkisten-Verbundverpackung,,,
+XYT,"Composite packaging, glass receptacle in plywood drum",Glass receptacle in plywood drum composite packaging,,,Glasgefäß in Sperrholztrommel-Verbundverpackung,,,
+XYN,"Composite packaging, glass receptacle in steel drum",Glass receptacle in steel drum composite packaging,,,Glasgefäß in Stahlfass-Verbundverpackung,,,
+XYP,"Composite packaging, glass receptacle in steel crate box",Glass receptacle in steel crate box composite packaging,,,Glasgefäß in Stahlkistenbox Verbundverpackung,,,
+XYZ,"Composite packaging, glass receptacle in solid plastic pack",Glass receptacle in solid plastic pack composite packaging,,,Glasgefäß in Verbundverpackung aus festem Plastik,,,
+X6P,"Composite packaging, glass receptacle",Glass composite packaging,,,Glas-Verbundverpackung,,,
+XVO,"Bulk, solid, large particles (“nodules”) ",Large particles solid bulk (“nodules”),,,"Große Partikel, feste Massen (""Knötchen"")",,,
+XZB,"Bag, large ",Large bag,,,Großer Sack,,,
+XOW,"Large bag, pallet sized",Pallet sized large bag,,,Großer Sack in Palettengröße,,,"A non-rigid container made of fabric, paper, plastic, etc, with an opening at the top which can be closed and which is suitable for use on pallets"
+XOP,Wholesaler pallet,Wholesaler pallet,,,Großhandelspalette,,,Pallet provided by the wholesaler.
+XDM,"Crate, bulk, wooden",Wooden bulk crate,,,Großkiste aus Holz,,,
+XDK,"Crate, bulk, cardboard ",Cardboard bulk crate,,,Großkiste aus Pappe,,,
+XDL,"Crate, bulk, plastic ",Plastic bulk crate,,,Großkiste aus Plastik,,,
+XB4,Belt,Belt,,,Gurt,,,A band use to retain multiple articles together.
+XZH,"Intermediate bulk container, rigid plastic, freestanding, pressurised","Rigid plastic intermediate bulk container, freestanding, pressurised",,,"Harter Plastik-Intermediate Bulk Container, freistehend, druckbeaufschlagt",,,
+XZF,"Intermediate bulk container, rigid plastic, freestanding, solids","Rigid plastic intermediate bulk container, freestanding, solids",,,"Harter Plastik-Intermediate Bulk Container, freistehend, Feststoffe",,,
+XZJ,"Intermediate bulk container, rigid plastic, with structural equipment, liquids ","Rigid plastic intermediate bulk container, with structural equipment, liquids",,,"Harter Plastik-Intermediate-Bulk-Behälter mit struktureller Ausrüstung, Flüssigkeiten",,,
+XZK,"Intermediate bulk container, rigid plastic, freestanding, liquids","Rigid plastic intermediate bulk container, freestanding, liquids",,,"Harter Plastik-Intermediate-Bulk-Behälter, freistehend, Flüssigkeiten",,,
+XZG,"Intermediate bulk container, rigid plastic, with structural equipment, pressurised","Rigid plastic intermediate bulk container, with structural equipment, pressurised",,,"Harter Plastik-Intermediate-Bulk-Container, mit struktureller Ausrüstung, druckbeaufschlagt",,,
+XZD,"Intermediate bulk container, rigid plastic, with structural equipment, solids","Rigid plastic intermediate bulk container, with structural equipment, solids",,,"Harter Plastik-Intermediate-Bulk-Container, mit struktureller Ausrüstung, Feststoffe",,,
+XQS,"Box, plastic, solid",Solid plastic box,,,Hartplastikbox,,,
+XPL,Pail ,Pail ,,,Hobbock,,,
+X7B,"Case, wooden",Wooden case,,,Holzbox,,,A case made of wood for retaining substances or articles.
+X8C,"Bundle, wooden",Wood bundle,,,Holzbündel,,,Loose or unpacked pieces of wood tied or wrapped together. 
+X2C,"Barrel, wooden",Wooden barrel,,,Holzfass,,,
+X1W,"Drum, wooden",Wooden drum,,,Holzfass (drum),,,
+XQH,"Barrel, wooden, bung type","Wooden barrel, bung type",,,Holzfass mit Spund,,,
+XQJ,"Barrel, wooden, removable head ","Wooden barrel, removable head",,,"Holzfass, abnehmbarer Kopf",,,
+XAD,"Receptacle, wooden ",Wooden receptacle,,,Holzgefäß,,,Containment vessel made of wood for retaining substances or articles.
+X8B,"Crate, wooden",Wooden crate,,,Holzkiste,,,"A receptacle, made of wood, on which goods are retained for ease of mechanical handling during transport and storage."
+XEE,"Case, with pallet base, wooden ",Wooden case with pallet base,,,Holzkiste mit Palettenboden,,,
+XDB,"Crate, multiple layer, wooden","Wooden crate, multiple layer",,,"Holzkiste, mehrlagig",,,
+XHB,"Basket, with handle, wooden",Wooden basket with handle,,,Holzkorb mit Griff,,,
+X8A,"Pallet, wooden",Wooden pallet,,,Holzpalette,,,"A platform or open-ended box, made of wood, on which goods are retained for ease of mechanical handling during transport and storage."
+XO7,Wooden pallet  40 cm x 80 cm,Wooden pallet  40 cm x 80 cm,,,Holzpalette 40 cm x 80 cm,,,Wooden pallet with dimensions 40 cm x 80 cm.
+XDT,"Tray, one layer no cover, wooden ","Wooden tray, one layer, no cover ",,,"Holzschale, einlagig, ohne Deckel ",,,
+XDX,"Tray, two layers no cover, wooden","Wooden tray, two layers, no cover",,,"Holzschale, zweilagig, ohne Deckel",,,
+XCV,Cover,Cover,,,Hülle,,,
+XIG,"Package, paper wrapped",Paper wrapped package,,,In Papier eingewickeltes Paket,,,
+XZV,"Intermediate bulk container, metal, other than steel","Metal intermediate bulk container, other than steel",,,"Intermediärer Schüttgutbehälter (IBC) aus Metall, ausgenommen Stahl",,,
+XZW,"Intermediate bulk container, natural wood",Natural wood intermediate bulk container,,,Intermediärer Schüttgutbehälter (IBC) aus Naturholz,,,
+XZT,"Intermediate bulk container, fibreboard",Fibreboard intermediate bulk container,,,Intermediärer Schüttgutbehälter (IBC) aus Pappe,,,
+XZX,"Intermediate bulk container, plywood",Plywood intermediate bulk container,,,Intermediärer Schüttgutbehälter (IBC) aus Sperrholz,,,
+XZS,"Intermediate bulk container, composite",Composite intermediate bulk container,,,Intermediärer Schüttgutbehälter (IBC) aus Verbundwerkstoff,,,
+XWA,Intermediate bulk container,Intermediate bulk container (IBC),IBC,,Intermediate Bulk Container (IBC),IBC,,"A reusable container made of metal, plastic, textile, wood or composite materials used to facilitate transportation of bulk solids and liquids in manageable volumes."
+XWU,"Intermediate bulk container, natural wood, with inner liner",Natural wood intermediate bulk container with inner liner,,,Intermediate Bulk Container aus Naturholz mit Innenauskleidung,,,
+XWG,"Intermediate bulk container, steel, pressurised > 10 kpa","Steel intermediate bulk container, pressurised > 10 kpa",,,"Intermediate Bulk Container aus Stahl, druckbeaufschlagt > 10 kPa",,,
+XEI,"Case, isothermic ",Isothermic case,,,Isotherme Box,,,
+XJB,"Bag, jumbo",Jumbo bag,,,Jumbo-Sack,,,"A flexible containment bag, widely used for storage, transportation and handling of powder, flake or granular materials. Typically constructed from woven polypropylene (PP) fabric in the form of cubic bags. "
+XJT,Jutebag,Jutebag,,,Jutebeutel,,,
+XGY,"Bag, gunny",Gunny bag,,,Jutesack,,,"A sack made of gunny or burlap, used for transporting coarse commodities, such as grains, potatoes, and other agricultural products. "
+XCG,Cage ,Cage ,,,Käfig ,,,
+XJY,"Jerrican, cylindrical",Jerrican,,,Kanister,,,
+XAV,Capsule,Capsule,,,Kapsel,,,
+XCM,Card,Card,,,Karte,,,A flat package usually made of fibreboard from/to which product is often hung or attached.
+XBD,Board,Board,,,Karton,,,
+XCT,Carton ,Carton ,,,Karton ,,,
+XEF,"Case, with pallet base, cardboard",Cardboard case with pallet base,,,Karton mit Palettenboden,,,
+XBY,"Board, in bundle/bunch/truss ",Board,,,Kartonbündel,,,
+XIK,"Package, cardboard, with bottle grip-holes ",Cardboard package with bottle grip-holes,,,Kartonverpackung mit Flaschengrifflöchern,,,Packaging material made out of cardboard that facilitates the separation of individual glass or plastic bottles.    
+XCQ,Cartridge,Cartridge,,,Kartusche,,,Package containing a charge such as propelling explosive for firearms or ink toner for a printer.
+XKG,Keg,Keg,,,Keg,,,
+XCR,Crate,Crate,,,Kiste,,,
+X4G,"Box, fibreboard",Fibreboard box,,,Kiste aus Hartfaserplatten,,,
+X4F,"Box, reconstituted wood",Reconstituted wood box,,,Kiste aus Holzfaserwerkstoffen,,,
+X4C,"Box, natural wood",Natural wood box,,,Kiste aus Naturholz,,,
+XED,"Case, with pallet base ",Case with pallet base,,,Kiste mit Palettenboden,,,
+XPB,"Pallet, box Combined open-ended box and pallet",Pallet box,,,Kiste mit Palettenboden,,,
+XKI,Kit,Kit,,,Kit,,,A set of articles or implements used for a specific purpose.
+XAI,Clamshell,Clamshell,,,Klappverpackung,,,
+XRJ,"Rack, clothing hanger",Clothing hanger rack,,,Kleiderbügelständer,,,
+XCF,Coffer ,Coffer ,,,Koffer,,,
+XSU,Suitcase ,Suitcase ,,,Koffer ,,,
+XFL,Flask,Flask,,,Kolben,,,
+XPA,Packet ,Packet ,,,Kollo,,,Small package.
+XAJ,Cone,Cone,,,Kone,,,Container used in the transport of linear material such as yarn.
+XBK,Basket ,Basket ,,,Korb ,,,
+XPJ,Punnet,Punnet,,,Körbchen,,,
+XCO,"Carboy, non-protected",Carboy,,,Korbflasche,,,
+XVR,"Bulk, solid, granular particles (“grains”) ",Granular particles solid bulk (“grains”),,,"Körnige Partikel, feste Schüttgüter (""Körner"")",,,
+XJG,Jug,Jug,,,Krug,,,
+XPH,Pitcher,Pitcher,,,Krug,,,
+XBI,Bin,Bin,,,Kübel,,,
+XCJ,Coffin ,Coffin ,,,Lade,,,
+XCZ,Canvas ,Canvas ,,,Leinen,,,
+XLV,Liftvan,Liftvan,,,Liftvan,,,A wooden or metal container used for packing household goods and personal effects.
+XP3,LPR pallet 60 cm x 80 cm,LPR pallet 60 cm x 80 cm,,,LPR-Palette 60 cm x 80 cm,,,LPR (La Pallet Rouge) standard pallet of dimensions 60 cm x 80 cm.
+XP4,LPR pallet 80 cm x 120 cm,LPR pallet 80 cm x 120 cm,,,LPR-Palette 80 cm x 120 cm,,,LPR (La Pallet Rouge) standard pallet of dimensions 80 cm x 120 cm.
+XMT,Mat,Mat,,,Matte,,,
+XNG,"Unpacked or unpackaged, multiple units",Multiple units unpackaged,,,Mehrere Einheiten unverpackt,,,
+XXJ,"Bag, paper, multi-wall ",Multi-wall paper bag,,,Mehrwandige Papiertüte,,,
+XXK,"Bag, paper, multi-wall, water resistant","Multi-wall paper bag, water resistant",,,"Mehrwandige Papiertüte, wasserabweisend",,,
+XZA,"Intermediate bulk container, paper, multi-wall ",Multi-wall paper intermediate bulk container,,,Mehrwandiger Papier-Intermediate Bulk Container,,,
+XMS,"Sack, multi-wall ",Multi-wall sack,,,Mehrwandiger Sack,,,
+XOV,Returnable pallet,Returnable pallet,,,Mehrwegpalette,,,Pallet must be returned to the point of expedition.
+XME,"Container, metal",Metal container,,,Metallbehälter,,,"A type of containment box made of metal for retaining substances or articles, not otherwise specified as transport equipment."
+XEH,"Case, with pallet base, metal",Metal case with pallet base,,,Metallbox mit Palettenboden,,,
+XMR,"Receptacle, metal ",Metal receptacle,,,Metallgefäß,,,Containment vessel made of metal for retaining substances or articles.
+XWJ,"Intermediate bulk container, metal, pressure 10 kpa ","Metal intermediate bulk container, pressure 10 kpa",,,"Metall-Intermediate Bulk Container, Druck 10 kPa",,,
+XWF,"Intermediate bulk container, metal ",Metal intermediate bulk container,,,Metall-Intermediate-Bulk-Behälter,,,
+XMA,"Crate, metal",Metal crate,,,Metallkiste,,,Containment box made of metal for retaining substances or articles.
+XMC,"Crate, milk",Milk crate,,,Milchkiste,,,
+XPD,"Pallet, modular, collars 80cms * 100cms ","Modular pallet, collars 80cms * 100cms",,,"Modulare Palette, Aufsatzrahmen 80 cm * 100 cm",,,Standard sized pallet of dimensions 80 centimeters by 100 centimeters (cms).
+XPE,"Pallet, modular, collars 80cms * 120cms ","Modular pallet, collars 80cms * 120cms",,,"Modulare Palette, Aufsatzrahmen 80 cm * 120 cm",,,Standard sized pallet of dimensions 80 centimeters by 120 centimeters (cms).
+XAF,"Pallet, modular, collars 80cms * 60cms ","Modular pallet, collars 80 cms * 60 cms",,,"Modulare Palette, Aufsatzrahmen 80 cm * 60 cm",,,Standard sized pallet of dimensions 80 centimeters by 60 centimeters (cms).
+XMB,"Bag, multiply",Multiply bag,,,Multiply Beutel,,,
+XQP,"Box, wooden, natural wood, ordinary","Wooden box, natural wood, ordinary",,,Naturholz-Kiste,,,
+XQQ,"Box, wooden, natural wood, with sift proof walls","Wooden box, natural wood, with sift proof walls",,,Naturholz-Kiste mit staubdichten Wänden,,,
+XNS,Nest ,Nest ,,,Nest ,,,
+XNT,Net,Net,,,Netz,,,
+XNA,Not available,Not available,,,Nicht verfügbar,,,
+XFC,"Crate, fruit ",Fruit crate,,,Obstkiste,,,
+XUC,Uncaged ,Uncaged ,,,Ohne Käfig ,,,
+XOT,Octabin,Octabin,,,Oktabin,,,"A standard cardboard container of large dimensions for storing for example vegetables, granules of plastics or other dry products."
+XHG,Hogshead ,Hogshead ,,,Oxhoft,,,
+XPK,Package,Package,pkg.,pkg,Packung,Pkg.,"pkg, pkt",Standard packaging unit.
+XPC,Parcel ,Parcel ,,,Paket ,,,
+XPX,Pallet ,Pallet ,,,Palette ,,,"Platform or open-ended box, usually made of wood, on which goods are retained for ease of mechanical handling during transport and storage."
+XOR,Pallet 60 X 100 cm,Pallet 60 X 100 cm,,,Palette 60 X 100 cm,,,Pallet with dimensions 60 X 100 cm.
+XOQ,Pallet 80 X 100 cm,Pallet 80 X 100 cm,,,Palette 80 X 100 cm,,,Pallet with dimensions 80 X 100 cm.
+XOZ,Wheeled pallet with raised rim ( 81 x 60 x 16),Wheeled pallet with raised rim ( 81 x 60 x 16),,,Palette auf Rädern mit erhöhtem Rand ( 81 x 60 x 16),,,A wheeled pallet with raised rim for the storing and transporting of loads. Dimensions: 81 x 60 x 16 cm (length x width x height).
+XOX,A wheeled pallet with raised rim (81 x 67 x 135),Wheeled pallet with raised rim (81 x 67 x 135),,,Palette auf Rädern mit erhöhtem Rand (81 x 67 x 135),,,A wheeled pallet with raised rim for the storing and transporting of loads. Dimensions: 81 x 67 x 135 cm (length x width x height).
+XOY,A Wheeled pallet with raised rim (81 x 72 x 135),Wheeled pallet with raised rim (81 x 72 x 135),,,Palette auf Rädern mit erhöhtem Rand (81 x 72 x 135),,,A wheeled pallet with raised rim for the storing and transporting of loads. Dimensions: 81 x 72 x 135 cm (length x width x height).
+XOG,Pallet ISO 0 - 1/2 EURO Pallet,Pallet ISO 0 - 1/2 EURO Pallet,,,Palette ISO 0 - 1/2 EURO Palette,,,Standard pallet with dimensions 80 X 60 cm.
+XOH,Pallet ISO 1 - 1/1 EURO Pallet,Pallet ISO 1 - 1/1 EURO Pallet,,,Palette ISO 1 - 1/1 EURO Palette,,,Standard pallet with dimensions 80 X 120 cm.
+XOI,Pallet ISO 2 – 2/1 EURO Pallet,Pallet ISO 2 – 2/1 EURO Pallet,,,Palette ISO 2 – 2/1 EURO Palette,,,Standard pallet with dimensions 100 X 120 cm.
+XO6,Pallet with exceptional dimensions,Pallet with exceptional dimensions,,,Palette mit besonderen Abmessungen,,,Pallet with non-standard dimensions
+XAH,"Pallet, 100cms * 110cms ","Pallet, 100 cms * 110 cms ",,,"Palette, 100 cm * 110 cm ",,,Standard sized pallet of dimensions 100centimeters by 110 centimeters (cms).
+XOD,"Pallet, AS 4068-1993","Pallet, AS 4068-1993",,,"Palette, AS 4068-1993",,,Australian standard pallet of dimensions 116.5 centimeters x 116.5 centimeters.
+XOE,"Pallet, ISO T11","Pallet, ISO T11",,,"Palette, ISO T11",,,"ISO standard pallet of dimensions 110 centimeters x 110 centimeters, prevalent in Asia - Pacific region."
+XAC,"Receptacle, paper ",Paper receptacle,,,Papiergefäß,,,Containment vessel made of paper for retaining substances or articles.
+XZC,"Intermediate bulk container, paper, multi-wall, water resistant","Paper intermediate bulk container, multi-wall, water resistant",,,"Papier-Intermediate Bulk Container, mehrwandig, wasserdicht",,,
+X5M,"Bag, paper ",Paper bag,,,Papiertüte,,,
+X1G,"Drum, fibre",Fibre drum,,,Pappfass,,,
+XAB,"Receptacle, fibre ",Fibre receptacle,,,Pappgefäß,,,Containment vessel made of fibre used for retaining substances or articles.
+XDC,"Crate, multiple layer, cardboard ","Cardboard crate, multiple layer",,,"Pappkiste, mehrlagig",,,
+XHC,"Basket, with handle, cardboard ",Cardboard basket with handle,,,Pappkorb mit Griff,,,
+XDV,"Tray, one layer no cover, cardboard","Cardboard tray, one layer, no cover",,,"Pappschale, einlagig, ohne Deckel",,,
+XDY,"Tray, two layers no cover, cardboard ","Cardboard tray, two layers, no cover",,,"Pappschale, zweilagig, ohne Deckel",,,
+XPF,Pen ,Pen ,,,Pen,,,A small open top enclosure for retaining animals.
+XVI,Vial ,Vial ,,,Phiole ,,,
+XEG,"Case, with pallet base, plastic",Plastic case with pallet base,,,Plastikbox mit Palettenboden,,,
+XIH,"Drum, plastic",Plastic drum,,,Plastikfass,,,
+XQG,"Drum, plastic, removable head","Plastic drum, removable head",,,"Plastikfass, abnehmbarer Kopf",,,
+XQF,"Drum, plastic, non-removable head","Plastic drum, non-removable head",,,"Plastikfass, nicht abnehmbarer Kopf",,,
+XSP,"Sheet, plastic wrapping",Plastic wrapping sheet,,,Plastikfolie,,,
+XXD,"Bag, plastics film ",Plastics film bag,,,Plastik-Folienbeutel,,,
+XPR,"Receptacle, plastic ",Plastic receptacle,,,Plastikgefäß,,,Containment vessel made of plastic for retaining substances or articles.
+XYC,"Composite packaging, plastic receptacle in aluminium drum",Plastic receptacle in aluminium drum composite packaging,,,Plastikgefäß in Aluminium-Fassverbundverpackung,,,
+XYD,"Composite packaging, plastic receptacle in aluminium crate",Plastic receptacle in aluminium crate composite packaging,,,Plastikgefäß in Aluminiumkisten-Verbundverpackung,,,
+XYK,"Composite packaging, plastic receptacle in fibreboard box",Plastic receptacle in fibreboard box composite packaging,,,Plastikgefäß in Faserverbundverpackung,,,
+XYJ,"Composite packaging, plastic receptacle in fibre drum",Plastic receptacle in fibre drum composite packaging,,,Plastikgefäß in Faserverbundverpackungen,,,
+XYF,"Composite packaging, plastic receptacle in wooden box",Plastic receptacle in wooden box composite packaging,,,Plastikgefäß in Holzkisten-Verbundverpackung,,,
+XYL,"Composite packaging, plastic receptacle in plastic drum",Plastic receptacle in plastic drum composite packaging,,,Plastikgefäß in Plastikfass-Verbundverpackung,,,
+XYH,"Composite packaging, plastic receptacle in plywood box ",Plastic receptacle in plywood box composite packaging,,,Plastikgefäß in Sperrholzbox-Verbundverpackung,,,
+XYG,"Composite packaging, plastic receptacle in plywood drum",Plastic receptacle in plywood drum composite packaging,,,Plastikgefäß in Sperrholztrommel-Verbundverpackung,,,
+XYA,"Composite packaging, plastic receptacle in steel drum",Plastic receptacle in steel drum composite packaging,,,Plastikgefäß in Stahlfass-Verbundverpackung,,,
+XYB,"Composite packaging, plastic receptacle in steel crate box",Plastic receptacle in steel crate box composite packaging,,,Plastikgefäß in Verbundverpackung für Stahlkistenboxen,,,
+XYM,"Composite packaging, plastic receptacle in solid plastic box",Plastic receptacle in solid plastic box composite packaging,,,Plastikgefäß in Verbundverpackung für Vollplastikboxen,,,
+X3H,"Jerrican, plastic",Plastic jerrican,,,Plastikkanister,,,
+XQN,"Jerrican, plastic, removable head","Plastic jerrican, removable head",,,"Plastik-Kanister, abnehmbarer Kopf",,,
+XQM,"Jerrican, plastic, non-removable head","Plastic jerrican, non-removable head",,,"Plastik-Kanister, nicht abnehmbarer Kopf",,,
+X4H,"Box, plastic",Plastic box,,,Plastikkiste,,,
+XDA,"Crate, multiple layer, plastic ","Plastic crate, multiple layer",,,"Plastikkiste, mehrlagig",,,
+XHA,"Basket, with handle, plastic ",Plastic basket with handle,,,Plastikkorb mit Griff,,,
+XOM,Synthetic pallet ISO 1,Synthetic pallet ISO 1,,,Plastikpalette ISO 1,,,A standard pallet with standard dimensions 80 x 120cm made of a synthetic material for hygienic reasons.
+XON,Synthetic pallet ISO 2,Synthetic pallet ISO 2,,,Plastikpalette ISO 2,,,A standard pallet with standard dimensions 100 x 120cm made of a synthetic material for hygienic reasons.
+XO8,Plastic pallet SRS 60 cm x 80 cm,Plastic pallet SRS 60 cm x 80 cm,,,Plastikpalette SRS 60 cm x 80 cm,,,SRS (Svenska Retursystem) standard synthetic pallet of dimensions 60 cm x 80 cm.
+XO9,Plastic pallet SRS 80 cm x 120 cm,Plastic pallet SRS 80 cm x 120 cm,,,Plastikpalette SRS 80 cm x 120 cm,,,SRS (Svenska Retursystem) standard synthetic pallet of dimensions 80 cm x 120 cm.
+XDS,"Tray, one layer no cover, plastic","Plastic tray, one layer, no cover",,,"Plastikschale, einlagig, ohne Deckel",,,
+XDW,"Tray, two layers no cover, plastic tray","Plastic tray, two layers, no cover",,,"Plastikschale, zweilagig, ohne Deckel",,,
+XNU,"Net, tube, plastic ",Plastic tube net,,,Plastik-Schlauchnetz,,,
+XEC,"Bag, plastic ",Plastic bag,,,Plastiktüte,,,
+X6H,"Composite packaging, plastic receptacle",Plastic composite packaging,,,Plastik-Verbundverpackung,,,
+XSB,Slab,Slab,,,Platte,,,
+XPY,"Plates, in bundle/bunch/truss",Plates,,,Platten,,,
+XFW,"Cart, flatbed",Flatbed cart,,,Plattformwagen,,,Wheeled flat bedded device on which trays or other regular shaped items are packed for transportation purposes.
+X44,"Bag, polybag",Polybag,,,Polybeutel,,,"A type of plastic bag, typically used to wrap promotional pieces, publications, product samples, and/or catalogues. "
+XBL,"Bale, compressed ",Compressed bale,,,Pressballen,,,
+XOF,"Platform, unspecified weight or dimension",Platform,,,Pritsche,,,A pallet equivalent shipping platform of unknown dimensions or unknown weight. 
+XTK,"Tank, rectangular",Rectangular tank,,,Rechteckbehälter,,,
+XCA,"Can, rectangular ",Rectangular can,,,Rechteckige Dose,,,
+XJC,"Jerrican, rectangular",Rectangular jerrican,,,Rechteckiger Kanister,,,
+XRT,Rednet ,Rednet ,,,Rednet,,,Containment material made of red mesh netting for retaining articles (e.g. trees).
+XTE,Tyre,Tyre,,,Reifen,,,A ring made of rubber and/or metal surrounding a wheel.
+XZY,"Intermediate bulk container, reconstituted wood",Reconstituted wood intermediate bulk container,,,Rekonstituierter Holz-Intermediate-Bulk-Container,,,
+XWZ,"Intermediate bulk container, reconstituted wood, with inner liner",Reconstituted wood intermediate bulk container with inner liner,,,Rekonstituierter Holz-Intermediate-Bulk-Container mit Innenauskleidung,,,
+XBR,Bar,Bar,,,Riegel,,,
+XRG,Ring ,Ring ,,,Ring ,,,
+XPV,"Pipes, in bundle/bunch/truss ",Pipes,,,Rohre ,,,
+XTZ,"Tubes, in bundle/bunch/truss ",Tubes,,,Rohre ,,,
+XCW,"Cage, roll ",Roll cage,,,Rollcontainer,,,
+XBT,Bolt ,Bolt ,,,Rolle,,,
+XCL,Coil ,Coil ,,,Rolle,,,
+XRO,Roll ,Roll ,,,Rolle,,,
+X1A,"Drum, steel",Steel drum,,,Rollreifenfass,,,
+XO2,Trolley,Trolley,,,Rollwagen,,,"A low cart for the transportation and storage of groceries, milk, etc."
+XTY,"Tank, cylindrical",Tank,,,Rundbehälter,,,
+XSA,Sack ,Sack ,,,Sack ,,,
+XBM,Basin,Bowl,,,Schüssel,,,
+XQR,"Box, plastic, expanded ",Expanded plastic box,,,Schaumstoffbox,,,
+XLG,Log,Log,,,Scheit/Stamm,,,
+XPI,Pipe ,Pipe ,,,Schlauch,,,
+XVS,"Bulk, scrap metal",Scrap metal bulk,,,Schrott-Schüttgut,,,Loose or unpacked scrap metal transported in bulk form. 
+XSW,Shrinkwrapped  ,Shrinkwrapped  ,,,Schrumpfverpackung,,,Goods retained in a transparent plastic film that has been wrapped around and then shrunk tightly on to the goods.
+XSE,Sea-chest,Sea chest,,,Seekasten,,,
+XSX,Set,Set,,,Set,,,
+XIE,"Package, show",Show package,,,Show-Paket,,,
+XSK,"Case, skeleton ",Skeleton case,,,Skelett-Gehäuse,,,
+XSL,Slipsheet ,Slipsheet ,,,Slipsheet,,,Hard plastic sheeting primarily used as the base on which to stack goods to optimise the space within a container. May be used as an alternative to a palletized packaging.
+XDN,Dispenser,Dispenser,,,Spender,,,
+X1D,"Drum, plywood",Plywood drum,,,Sperrholzfass,,,
+XWY,"Intermediate bulk container, plywood, with inner liner ",Plywood intermediate bulk container with inner liner,,,Sperrholz-Intermediate-Bulk-Container mit Innenauskleidung,,,
+X4D,"Box, plywood",Plywood box,,,Sperrholzkiste,,,
+XSD,Spindle,Spindle,,,Spindel,,,
+XAE,Aerosol,Aerosol,,,Sprühdose,,,
+XRL,Reel ,Reel ,,,Spule,,,Cylindrical rotatory device with a rim at each end on which materials are wound.
+XBB,Bobbin ,Bobbin ,,,Spule ,,,
+XSO,Spool ,Spool ,,,Spule ,,,"A packaging container used in the transport of such items as wire, cable, tape and yarn."
+XBZ,"Bars, in bundle/bunch/truss",Bars,,,Stabbündel,,,
+XRZ,"Rods, in bundle/bunch/truss",Rods,,,Stäbe,,,
+XQB,"Drum, steel, removable head","Steel drum, removable head",,,"Stahlfass, abnehmbarer Kopf",,,
+XQA,"Drum, steel, non-removable head","Steel drum, non-removable head",,,"Stahlfass, nicht abnehmbarer Kopf",,,
+XSS,"Case, steel",Steel case,,,Stahlgehäuse,,,
+XSV,"Envelope, steel",Steel envelope,,,Stahlhülle,,,
+XWC,"Intermediate bulk container, steel ",Steel intermediate bulk container,,,Stahl-Intermediate-Bulk-Container,,,
+XQK,"Jerrican, steel, non-removable head","Steel jerrican, non-removable head",,,"Stahlkaner, nicht abnehmbarer Kopf",,,
+X3A,"Jerrican, steel",Steel jerrican,,,Stahlkanister,,,
+XQL,"Jerrican, steel, removable head","Steel jerrican, removable head",,,"Stahlkanister, abnehmbarer Kopf",,,
+X4A,"Box, steel",Steel box,,,Stahlkiste,,,
+XLZ,"Logs, in bundle/bunch/truss",Logs,,,Stämme,,,
+XRD,Rod,Rod,,,Stange,,,
+XIL,"Tray, rigid, lidded stackable (CEN TS 14482:2002)","Lidded rigid tray, stackable",,,"Starres Tablett mit Deckel, stapelbar",,,Lidded stackable rigid tray compliant with CEN TS 14482:2002.
+XAA,"Intermediate bulk container, rigid plastic",Rigid plastic intermediate bulk container,,,Steifer intermediärer Schüttgutbehälter (RIBC),,,
+XSC,"Crate, shallow ",Shallow crate,,,Steige,,,
+XLU,Lug,Lug,,,Stiege,,,A wooden box for the transportation and storage of fruit or vegetables.
+XNV,"Net, tube, textile ",Textile tube net,,,Stoff-Schlauchnetz,,,
+X5L,"Bag, textile ",Textile bag,,,Stofftüte,,,
+XMX,Matchbox ,Matchbox ,,,Streichholzschachtel ,,,
+XPP,Piece,Piece,,pc,Stück,,"stk, st, stueck",A loose or unpacked article. 
+XDU,"Tray, one layer no cover, polystyrene","Polystyrene tray, one layer, no cover",,,"Styroporschale, einlagig, ohne Deckel",,,
+XGU,"Tray, containing horizontally stacked flat items",Tray containing horizontally stacked flat items,,,Tablett mit horizontal gestapelten flachen Gegenständen,,,Tray containing flat items stacked on top of one another.
+XPU,Tray ,Tray ,,,Schale,,,
+XT1,Tablet,Tablet,,,Tablette,,,"A loose or unpacked article in the form of a bar, block or piece. "
+XTG,"Tank container, generic",Tank container,,,Tankcontainer,,,A specially constructed container for transporting liquids and gases in bulk.
+XBG,Bag,Bag,,,Tasche,,,A receptacle made of flexible material with an open or closed top.
+XTC,Tea-chest,Tea chest,,,Teekiste,,,
+XPG,Plate,Plate,,,Teller,,,
+XWT,"Intermediate bulk container, textile with out coat/liner ",Textile with out coat/liner intermediate bulk container,,,Textil ohne Mantel/Liner Intermediate Bulk Container,,,
+XXG,"Bag, textile, sift proof ","Textile bag, sift proof",,,"Textilbeutel, siebfest",,,
+XWW,"Intermediate bulk container, textile, with liner ",Textile intermediate bulk container with liner,,,Textiler Intermediate Bulk Container mit Liner,,,
+XWV,"Intermediate bulk container, textile, coated ","Textile intermediate bulk container, coated",,,"Textiler Intermediate Bulk Container, beschichtet",,,
+XWX,"Intermediate bulk container, textile, coated and liner ","Textile intermediate bulk container, coated and liner",,,"Textiler Intermediate Bulk Container, beschichtet und Liner",,,
+XXF,"Bag, textile, without inner coat/liner ",Textile bag without inner coat/liner,,,Textiltasche ohne Innenmantel/Liner,,,
+XXH,"Bag, textile, water resistant","Textile bag, water resistant",,,"Textiltasche, wasserabweisend",,,
+XP2,Pan,Pan,,,Tiegel,,,"A shallow, wide, open container, usually of metal."
+XTI,Tierce,Tierce,,,Tierce,,,
+XCK,Cask ,Cask ,,,Tonne,,,
+XPT,Pot,Pot,,,Topf,,tiegel,
+XGI,Girder ,Girder ,,,Träger ,,,
+XGZ,"Girders, in bundle/bunch/truss ",Girders,,,Trägerbündel,,,
+XTT,"Bag, tote",Tote bag,,,Tragetasche,,,A capacious bag or basket.
+XHR,Hamper ,Hamper ,,,Tragkorb,,,
+XTW,"Pallet, triwall",Triwall pallet,,,Tri-Wall-Palette,,,A lightweight pallet made from heavy duty corrugated board.  
+XCH,Chest,Chest,,,Truhe,,,
+XFO,Footlocker ,Footlocker ,,,Truhe,,,
+XTR,Trunk,Trunk,,,Truhe,,,
+XTU,Tube ,Tube ,,,Tube,,,
+XTV,"Tube, with nozzle ",Tube with nozzle ,,,Tube mit Düse ,,,"A tube made of plastic, metal or cardboard fitted with a nozzle, containing a liquid or semi-liquid product, e.g. silicon."
+XEN,Envelope ,Envelope ,,,Umschlag,,,
+XNE,Unpacked or unpackaged ,Unpackaged ,,,Unverpackt,,,
+XVP,Vacuum-packed,Vacuum-packed,,,Vakuumverpackt,,,
+XVK,Vanpack ,Vanpack ,,,Vanpack ,,,A type of wooden crate. 
+XVN,Vehicle,Vehicle,,,Vehikel,,,A self-propelled means of conveyance.
+XWB,Wickerbottle ,Wickerbottle ,,,Weidenflasche ,,,
+XAT,Atomizer ,Atomizer ,,,Zerstäuber ,,,
+XTD,"Tube, collapsible",Collapsible tube,,,Zusammenklappbare Tube,,,
+XO1,Two sided cage on wheels with fixing strap,Two sided cage on wheels with fixing strap,,,Zweiseitiger Käfig auf Rädern mit Befestigungsgurt,,,A two sided cage mounted on wheels with fixing strap. Dimensions: 900 x 770 x 1513 cm (length x width x height).
+XWS,"Intermediate bulk container, plastic film",Plastic film intermediate bulk container,,,Zwischenbehälter aus Plastikfolie,,,
+XCY,Cylinder ,Cylinder ,,,Zylinder ,,,
+PTN,Portion,Portion,,,Portion,,port,
+STC,Stick,Stick,,,Stange,,,

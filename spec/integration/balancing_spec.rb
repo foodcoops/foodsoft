@@ -9,11 +9,13 @@ feature 'settling an order', :js do
   let(:order) { create(:order, supplier: supplier, article_ids: [article.id]) } # need to ref article
   let(:go1) { create(:group_order, order: order) }
   let(:go2) { create(:group_order, order: order) }
-  let(:oa) { order.order_articles.find_by_article_id(article.id) }
+  let(:oa) { order.order_articles.find_by_article_version_id(article.latest_article_version.id) }
   let(:goa1) { create(:group_order_article, group_order: go1, order_article: oa) }
   let(:goa2) { create(:group_order_article, group_order: go2, order_article: oa) }
 
   before do
+    create(:article_unit, unit: 'XPP')
+    create(:article_unit, unit: 'XPK')
     goa1.update_quantities(3, 0)
     goa2.update_quantities(1, 0)
     oa.update_results!
@@ -172,12 +174,12 @@ feature 'settling an order', :js do
     click_link I18n.t('finance.balancing.edit_results_by_articles.add_article')
     expect(page).to have_css('form#new_order_article')
     within('#new_order_article') do
-      find_by_id('order_article_article_id').select(new_article.name)
+      find_by_id('order_article_article_version_id').select(new_article.name)
       sleep 0.25
       find('input[type="submit"]').click
     end
     expect(page).to have_no_css('form#new_order_article')
     expect(page).to have_content(new_article.name)
-    expect(order.order_articles.where(article_id: new_article.id)).not_to be_nil
+    expect(order.order_articles.where(article_version_id: new_article.latest_article_version.id)).not_to be_nil
   end
 end

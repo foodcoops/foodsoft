@@ -27,7 +27,7 @@ fr:
       article_category:
         description: Description
         name: Nom
-      article_price:
+      article_version:
         deposit: Consigne
         price: Prix HT
         tax: TVA
@@ -315,13 +315,9 @@ fr:
         notice: "%{count} nouveaux produits on été sauvegardés."
       error_invalid: La description des produits comporte des erreurs.
       error_nosel: Aucun produit n'a été sélectionné
-      error_parse: "%{msg} ... à la ligne %{line}"
       error_update: 'Une erreur s''est produite lors de la mise à jour du produit "%{article}": %{msg}'
       parse_upload:
         notice: "%{count} produits ont été examinés avec succès."
-      sync:
-        notice: Le catalogue est à jour
-        shared_alert: "%{supplier} n'est pas dans l'annuaire mutualisé."
       update_all:
         notice: Les produits et les prix ont été mis à jour.
       update_sel:
@@ -342,10 +338,6 @@ fr:
     form:
       title_edit: Modifier ce produit
       title_new: Ajouter un nouveau produit
-    import_search_results:
-      action_import: importer
-      already_imported: déjà importé
-      not_found: Aucun produit correspondant n'a été trouvé
     index:
       change_supplier: Changer de fournisseur-e
       edit_all: Tout modifier
@@ -480,9 +472,8 @@ fr:
       rows:
         - Numéro
         - Quantité
-        - Nom du produit
-        - Nombre d'unités
         - Unité
+        - Nom du produit
         - Prix unitaire
         - Prix
     order_matrix:
@@ -1288,6 +1279,10 @@ fr:
       show_deliveries: Afficher tous les réapprovisionnements
     update:
       notice: Les données du-de la fournisseur-e ont été mises à jour
+    import_search_results:
+      action_import: importer
+      already_imported: déjà importé
+      not_found: Aucun produit correspondant n'a été trouvé
   tasks:
     accept:
       notice: Tu as accepté ce boulot

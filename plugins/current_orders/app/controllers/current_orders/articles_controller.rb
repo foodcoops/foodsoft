@@ -33,7 +33,7 @@ class CurrentOrders::ArticlesController < ApplicationController
       @order_articles = @order.order_articles
     end
     @q = OrderArticle.ransack(params[:q])
-    @order_articles = @order_articles.ordered.merge(@q.result).includes(:article, :article_price)
+    @order_articles = @order_articles.ordered.merge(@q.result).includes(:article, :article_version)
     @order_article = @order_articles.where(id: params[:id]).first
   end
 

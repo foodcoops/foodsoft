@@ -28,7 +28,7 @@
     %tfoot
       %tr
         %td{colspan: 9}
-          - new_article_data = articles_for_select2(articles_for_adding) {|a| "#{a.article.name} (#{a.article.unit}, #{number_to_currency a.price.fc_price})"}
+          - new_article_data = articles_for_select2(articles_for_adding) {|a| "#{a.article.name} (#{a.article.unit}, #{number_to_currency a.article_version.fc_price})"}
           = form_for GroupOrderArticle.new, remote: true, html: {'data-submit-onchange' => true, style: 'margin: 0'} do |f|
             = f.select :order_article_id,
                 options_for_select(new_article_data.map {|a| [a[:text], a[:id]]}),

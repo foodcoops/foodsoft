@@ -1,12 +1,14 @@
+= render partial: 'shared/js_templates/unit_conversion_popover_template', locals: {set_units_data: true}
 - content_for :javascript do
   - group_balance = FoodsoftConfig[:charge_members_manually] ? @ordering_data[:account_balance] : @ordering_data[:available_funds]
   :javascript
+    new GroupOrderForm($('.group_order_form'), {
+      units: unitsData,
+      toleranceIsCostly: #{(FoodsoftConfig[:tolerance_is_costly] or false).to_json},
+      groupBalance: #{group_balance},
+      minimumBalance: #{FoodsoftConfig[:minimum_balance] or 0}
+    });
     $(function() {
-      #{data_to_js(@ordering_data)}
-      setGroupBalance(#{group_balance});
-      setMinimumBalance(#{FoodsoftConfig[:minimum_balance] or 0});
-      setToleranceBehaviour(#{FoodsoftConfig[:tolerance_is_costly]});
-      setStockit(#{@order.stockit?});
       // create List for search-feature (using list.js, http://listjs.com)
       var listjsResetPlugin = ['reset', {highlightClass: 'btn-primary'}];
       var listjsDelayPlugin = ['delay', {delayedSearchTime: 500}];
@@ -21,7 +23,6 @@
     });
 
 - title t('.title'), false
-
 .row-fluid
   .well.pull-left
     = close_button :alert
@@ -64,7 +65,7 @@
         %button.add-on.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
           %i.icon.icon-remove
 
-= form_for @group_order do |f|
+= form_for @group_order, html: {class: 'group_order_form'} do |f|
   = f.hidden_field :lock_version
   = f.hidden_field :order_id
   = f.hidden_field :updated_by_user_id
@@ -80,12 +81,12 @@
         %th{style: "width:4.5em;"}= heading_helper Article, :unit
         - unless @order.stockit?
           %th{style: "width:70px;"}= heading_helper OrderArticle, :missing_units, short: true
-          %th#col_required= heading_helper GroupOrderArticle, :quantity
-          %th#col_tolerance= heading_helper GroupOrderArticle, :tolerance
+          %th#col_required{colspan: 2}= heading_helper GroupOrderArticle, :quantity
+          %th#col_tolerance{colspan: 2}= heading_helper GroupOrderArticle, :tolerance
         - else
           %th(style="width:20px")= heading_helper StockArticle, :available
-          %th#col_required= heading_helper GroupOrderArticle, :quantity
-        %th{style: "width:15px;"}= heading_helper GroupOrderArticle, :total_price
+          %th#col_required{colspan: 2}= heading_helper GroupOrderArticle, :quantity
+        %th{style: "width:15px;text-align:right;"}= heading_helper GroupOrderArticle, :total_price
     %tbody.list
       - @order.articles_grouped_by_category.each do |category, order_articles|
         %tr.list-heading.article-category
@@ -94,49 +95,62 @@
             %i.icon-tag
           %td{colspan: "9"}
         - order_articles.each do |order_article|
-          %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article #{get_missing_units_css_class(@ordering_data[:order_articles][order_article.id][:missing_units])}", valign: "top"}
-            %td.name= order_article.article.name
+          %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article #{get_missing_units_css_class(@ordering_data[:order_articles][order_article.id][:missing_units], order_article.article_version)}", valign: "top"}
+            %td.name= order_article.article_version.name
             - if @order.stockit?
-              %td= truncate order_article.article.supplier.name, length: 15
-            %td= h order_article.article.origin
+              %td= truncate order_article.article_version.article.supplier.name, length: 15
+            %td= h order_article.article_version.origin
             %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
-            %td= order_article.article.unit
+            %td.group-order-unit= format_group_order_unit_with_ratios(order_article.article_version)
             %td
               - if @order.stockit?
                 = @ordering_data[:order_articles][order_article.id][:quantity_available]
               - else
-                %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
+                %span.missing-units= @ordering_data[:order_articles][order_article.id][:missing_units]
 
-            %td.quantity
-              %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:quantity], 'data-min' => (@ordering_data[:order_articles][order_article.id][:quantity] if @order.boxfill?), 'data-max' => (@ordering_data[:order_articles][order_article.id][:quantity]+@ordering_data[:order_articles][order_article.id][:missing_units] if @order.boxfill?)}/
-              %span.used{id: "q_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_quantity]
+            - quantity_data = ratio_quantity_data(order_article, order_article.article_version.group_order_unit)
+            - quantity_data['ratio-group-order-unit-supplier-unit'] = @ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit]
+            - quantity_data['others_quantity'] = @ordering_data[:order_articles][order_article.id][:others_quantity]
+            - quantity_data['others_tolerance'] = @ordering_data[:order_articles][order_article.id][:others_tolerance]
+            - quantity_data['used_quantity'] = @ordering_data[:order_articles][order_article.id][:used_quantity]
+            - quantity_data['price'] = @ordering_data[:order_articles][order_article.id][:price]
+            - quantity_data['minimum_order_quantity'] = @ordering_data[:order_articles][order_article.id][:minimum_order_quantity] unless @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].nil?
+            - quantity_data['e2e-order-article-id'] = order_article.id
+            %td.used-unused
+              %span.used= number_with_precision(@ordering_data[:order_articles][order_article.id][:used_quantity], precision: 3, strip_insignificant_zeros: true)
               +
-              %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
-              .btn-group
-                %a.btn.btn-ordering{'data-increase_quantity' => order_article.id}
-                  %i.icon-plus
-                %a.btn.btn-ordering{'data-decrease_quantity' => order_article.id}
+              %span.unused= number_with_precision(@ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity], precision: 3, strip_insignificant_zeros: true)
+            %td.quantity.group-order-input{class: ('stock-order' if @order.stockit?)}
+              .btn-group.numeric-step
+                %a.btn.btn-ordering.decrease
                   %i.icon-minus
+                %a.btn.btn-ordering.increase
+                  %i.icon-plus
+                %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'input-mini numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
+              %span.numeric-step-error
+                = t('errors.step_error', granularity: order_article.article_version.group_order_granularity, min: 0)
 
-            %td.tolerance{style: ('display:none' if @order.stockit?)}
-              %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance], 'data-min' => (@ordering_data[:order_articles][order_article.id][:tolerance] if @order.boxfill?)}/
-              - if (@ordering_data[:order_articles][order_article.id][:unit] > 1)
-                %span.used{id: "t_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_tolerance]
+            %td.used-unused-tolerance{style: ('display:none' if @order.stockit?)}
+              - if (order_article.article_version.uses_tolerance?)
+                %span.used= number_with_precision(@ordering_data[:order_articles][order_article.id][:used_tolerance], precision: 3, strip_insignificant_zeros: true)
                 +
-                %span.unused{id: "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
+                %span.unused= number_with_precision(@ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance], precision: 3, strip_insignificant_zeros: true)
+            %td.tolerance.group-order-input{style: ('display:none' if @order.stockit?)}
+              - if (order_article.article_version.uses_tolerance?)
                 .btn-group
-                  %a.btn.btn-ordering{'data-increase_tolerance' => order_article.id}
-                    %i.icon-plus
-                  %a.btn.btn-ordering{'data-decrease_tolerance' => order_article.id}
+                  %a.btn.btn-ordering.decrease
                     %i.icon-minus
+                  %a.btn.btn-ordering.increase
+                    %i.icon-plus
+                  %input.goa-tolerance{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", data: quantity_data, value: @ordering_data[:order_articles][order_article.id][:tolerance], autocomplete: 'off', class: 'input-mini numeric', min: 0, step: order_article.article_version.group_order_granularity, max: [@ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit], @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].presence || 0].max}
 
             %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
-              %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
+              %span{id: "price_#{order_article.id}_display", data: {price: @ordering_data[:order_articles][order_article.id][:total_price]}}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
               .article-info
-                .article-name= order_article.article.name
+                .article-name= order_article.article_version.name
                 .pull-right
                   = t('.units_full') + ':'
-                  %span{id: "units_#{order_article.id}"}= order_article.units_to_order
+                  %span{id: "units_#{order_article.id}"}= order_article.article_version.convert_quantity(order_article.units_to_order, order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit)
                   %br/
                   = t('.units_total') + ':'
                   %span{id: "q_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] + @ordering_data[:order_articles][order_article.id][:others_quantity]
@@ -145,11 +159,18 @@
                   %span{id: "t_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
                   %br/
                 .pull-left
-                  #{heading_helper Article, :manufacturer}: #{order_article.article.manufacturer}
+                  #{heading_helper Article, :manufacturer}: #{order_article.article_version.manufacturer}
                   %br/
-                  #{heading_helper Article, :units}: #{@order.stockit? ? order_article.article.quantity_available : @ordering_data[:order_articles][order_article.id][:unit]} * #{h order_article.article.unit}
+                  #{heading_helper Article, :units}:
+                  - if @order.stockit?
+                    #{order_article.article_version.article.quantity_available}
+                  - elsif order_article.article_version.uses_tolerance?
+                    #{format_supplier_order_unit_with_ratios(order_article.article_version)}
+                  - else
+                    #{format_group_order_unit_with_ratios(order_article.article_version)}
+
                   %br/
-                  #{heading_helper Article, :note}: #{order_article.article.note}
+                  #{heading_helper Article, :note}: #{order_article.article_version.note}
                   %br/
   #order-footer
     #info-box
@@ -174,8 +195,8 @@
             %strong
               %span#new_balance= number_to_currency(old_balance - @group_order.price)
       %span#order-button
-        = submit_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary' )
+        = submit_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary', disabled: 'disabled' )
         = link_to t('.account_statement'), my_ordergroup_path, class: 'btn btn-secondary btn-small hidden', id: 'account-statement-button'
-      #{link_to t('ui.or_cancel'), group_orders_path}
+        #{link_to t('ui.or_cancel'), group_orders_path}
   %input#total_balance{name: "total_balance", type: "hidden", value: @ordergroup.account_balance - @group_order.price}/
   %input{name: "version", type: "hidden", value: @version}/

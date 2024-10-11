@@ -28,7 +28,7 @@ es:
       article_category:
         description: Importar nombres
         name: Nombre
-      article_price:
+      article_version:
         deposit: Depósito
         price: Precio (neto)
         tax: IVA
@@ -239,7 +239,7 @@ es:
     errors:
       has_many_left: todavía está asociado con un %{collection}!
       models:
-        article:
+        article_version:
           attributes:
             name:
               taken: ese nombre ya está cogido
@@ -481,14 +481,10 @@ es:
         notice: "Se han guardado %{count} nuevos artículos."
       error_invalid: Hay errores en los artículos
       error_nosel: No se ha seleccionado ningún artículo
-      error_parse: "%{msg} ... en la línea %{line}"
       error_update: 'Ha ocurrido un error miebtras se actualizaba el artículo ''%{article}'': %{msg}'
       parse_upload:
         no_file: Elige un archivo para subir.
         notice: "%{count} artículos fueron analizados con éxito."
-      sync:
-        notice: El catálogo está actualizado
-        shared_alert: "%{supplier} no está conectado a una base de datos externa"
       update_all:
         notice: Se han actualizado todos los artículos y precios.
       update_sel:
@@ -509,10 +505,6 @@ es:
     form:
       title_edit: Editar artículo
       title_new: Añadir un nuevo artículo
-    import_search_results:
-      action_import: importar
-      already_imported: importado
-      not_found: No se han encontrado articulos
     index:
       change_supplier: Cambiar proveedor
       download: Descargar artículos
@@ -758,9 +750,8 @@ es:
       rows:
         - Número de pedido
         - Importe
-        - Nombre
-        - Cantidad de unidades
         - Unidad
+        - Nombre
         - Precio/Unidad
         - Subtotal
       total: Total
@@ -1795,6 +1786,10 @@ es:
       show_deliveries: Muestra todos
     update:
       notice: Se ha actualizado el proveedor/a
+    import_search_results:
+      action_import: importar
+      already_imported: importado
+      not_found: No se han encontrado articulos
   tasks:
     accept:
       notice: Has aceptado la tarea

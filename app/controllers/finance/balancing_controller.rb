@@ -8,19 +8,19 @@ class Finance::BalancingController < Finance::BaseController
     flash.now.alert = t('.alert') if @order.closed?
     @comments = @order.comments
 
-    @articles = @order.order_articles.ordered_or_member.includes(:article, :article_price,
+    @articles = @order.order_articles.ordered_or_member.includes(article_version: :article,
                                                                  group_order_articles: { group_order: :ordergroup })
 
     sort_param = params['sort'] || 'name'
     @articles = case sort_param
                 when 'name'
-                  @articles.order('articles.name ASC')
+                  @articles.order('article_versions.name ASC')
                 when 'name_reverse'
-                  @articles.order('articles.name DESC')
+                  @articles.order('article_versions.name DESC')
                 when 'order_number'
-                  @articles.order('articles.order_number ASC')
+                  @articles.order('article_versions.order_number ASC')
                 when 'order_number_reverse'
-                  @articles.order('articles.order_number DESC')
+                  @articles.order('article_versions.order_number DESC')
                 else
                   @articles
                 end
