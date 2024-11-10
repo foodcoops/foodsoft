@@ -31,21 +31,29 @@ class Invoice < ApplicationRecord
   end
 
   def orders_sum
-    orders
-      .joins(order_articles: [:article_price])
-      .sum('COALESCE(order_articles.units_received, order_articles.units_billed, order_articles.units_to_order)' \
-        + '* article_prices.unit_quantity' \
-        + '* ROUND((article_prices.price + article_prices.deposit) * (100 + article_prices.tax) / 100, 2)')
+    sum = 0
+    for order in orders 
+      sum += order.sum(:groups) 
+    end
+    sum
   end
 
   def orders_transport_sum
     orders.sum(:transport)
   end
-
+  
+  def deliveries_sum
+    sum = 0
+    for delivery in deliveries
+      sum += delivery.sum
+    end
+    sum
+  end
+  
   def expected_amount
     return net_amount unless orders.any?
 
-    orders_sum + orders_transport_sum
+    orders_sum + orders_transport_sum + deliveries_sum
   end
 
   protected
