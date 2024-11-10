@@ -220,7 +220,7 @@ class Order < ApplicationRecord
         end
       end
     elsif %i[groups groups_without_markup].include?(type)
-      for go in group_orders.includes(group_order_articles: { order_article: %i[article article_price] })
+      for go in group_orders.includes(group_order_articles: { order_article: %i[article article_price] }).where.not(ordergroup: nil)
         for goa in go.group_order_articles
           case type
           when :groups
