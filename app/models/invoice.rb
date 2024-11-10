@@ -31,11 +31,7 @@ class Invoice < ApplicationRecord
   end
 
   def orders_sum
-    sum = 0
-    for order in orders 
-      sum += order.sum(:groups) 
-    end
-    sum
+    orders.sum { |order| order.sum(:groups) }
   end
 
   def orders_transport_sum
@@ -43,11 +39,7 @@ class Invoice < ApplicationRecord
   end
   
   def deliveries_sum
-    sum = 0
-    for delivery in deliveries
-      sum += delivery.sum
-    end
-    sum
+    deliveries.sum(&:sum)
   end
   
   def expected_amount
