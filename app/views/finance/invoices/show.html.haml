@@ -28,7 +28,7 @@
         %dt= heading_helper(Invoice, :orders) + ':'
         %dd><
           - @invoice.orders.order(:ends).each_with_index do |order, index|
-            - sum_og = order.sum(:groups) 
+            - sum_og = order.sum(:groups_without_markup) 
             - sum = order.sum
             - transport = order.transport || 0
             - total += sum_og + transport
