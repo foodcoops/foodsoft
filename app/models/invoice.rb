@@ -30,22 +30,30 @@ class Invoice < ApplicationRecord
     amount - deposit + deposit_credit
   end
 
-  def orders_sum
-    orders.sum { |order| order.sum(:groups_without_markup) }
+  def orders_sum(type = :without_markup)
+    if type == :without_markup
+      orders.sum { |order| order.sum(:groups_without_markup) }
+    elsif type == :with_markup
+      orders.sum { |order| order.sum(:groups) } 
+    end
   end
 
   def orders_transport_sum
     orders.sum(:transport)
   end
-  
-  def deliveries_sum
-    deliveries.sum(&:sum)
+
+  def deliveries_sum(type = :without_markup)
+    if type == :without_markup
+      deliveries.sum(&:sum) 
+    elsif type == :with_markup  
+      deliveries.sum  { |delivery| delivery.sum(:fc)}
+    end
   end
-  
-  def expected_amount
+
+  def expected_amount(type = :without_markup)
     return net_amount unless orders.any?
 
-    orders_sum + orders_transport_sum + deliveries_sum
+    orders_sum(type) + orders_transport_sum + deliveries_sum(type)  
   end
 
   protected
