@@ -39,7 +39,7 @@ class Invoice < ApplicationRecord
   end
 
   def orders_transport_sum
-    orders.sum(:transport)
+    orders.sum { |order| order.sum(:transport) }
   end
 
   def deliveries_sum(type = :without_markup)
