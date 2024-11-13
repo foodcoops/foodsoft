@@ -46,7 +46,7 @@ class Invoice < ApplicationRecord
     if type == :without_markup
       deliveries.sum(&:sum) 
     elsif type == :with_markup  
-      deliveries.sum  { |delivery| delivery.sum(:fc)}
+      deliveries.sum  { |delivery| delivery.sum(:fc) }
     end
   end
 
