@@ -990,6 +990,9 @@ en:
         title: Create new invoice
       show:
         title: Invoice %{number}
+        fc_profit: FC Profit
+        with_extra_charge: ' with margin'
+        without_extra_charge: ' without margin'  
       unpaid:
         invoices_sum: Total sum
         invoices_text: Reference
