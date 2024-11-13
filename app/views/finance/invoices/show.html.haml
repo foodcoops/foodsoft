@@ -30,18 +30,21 @@
         %dt= heading_helper(Invoice, :orders) + ':'
         %dd><
           - @invoice.orders.order(:ends).each_with_index do |order, index|
-            - sum_og = order.sum(:groups_without_markup) 
-            - sum = order.sum
+            - sum_og = order.sum(:groups_without_markup) # without markup
+            - sum = order.sum # without markup
+            - transport_og = order.sum(:transport)  
             - transport = order.transport || 0
-            - total += sum_og + transport
-            - total_fc += order.sum(:groups) + transport
+            - total += sum_og + transport_og  # without markup
+            - total_fc += order.sum(:groups) + transport_og # with_markup
             = ', ' if index > 0
             = link_to format_date(order.ends), new_finance_order_path(order_id: order)
             = ' (' + number_to_currency(sum_og) 
             - if sum_og < sum 
               = ' / ' + number_to_currency(sum)
             - if transport != 0
-              = ' + ' + number_to_currency(transport)
+              = ' + ' + number_to_currency(transport_og)
+              - if transport_og < transport
+                = ' / ' + number_to_currency(transport)
             = ')'
 
       %dt= heading_helper(Invoice, :number) + ':'
