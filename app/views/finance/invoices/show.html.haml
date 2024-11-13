@@ -1,6 +1,7 @@
 - title t('.title', number: @invoice.number)
 
 - total = 0
+- total_fc = 0
 
 .row-fluid
   .span6
@@ -20,6 +21,7 @@
           - @invoice.deliveries.order(:date).each_with_index do |delivery, index|
             - sum = delivery.sum
             - total += sum
+            - total_fc += delivery.sum(:fc)
             = ', ' if index > 0
             = link_to format_date(delivery.date), [delivery.supplier, delivery]
             = ' (' + number_to_currency(sum) + ')'
@@ -32,6 +34,7 @@
             - sum = order.sum
             - transport = order.transport || 0
             - total += sum_og + transport
+            - total_fc += order.sum(:groups) + transport
             = ', ' if index > 0
             = link_to format_date(order.ends), new_finance_order_path(order_id: order)
             = ' (' + number_to_currency(sum_og) 
