@@ -34,7 +34,7 @@ class Invoice < ApplicationRecord
     if type == :without_markup
       orders.sum { |order| order.sum(:groups_without_markup) }
     elsif type == :with_markup
-      orders.sum { |order| order.sum(:groups) } 
+      orders.sum { |order| order.sum(:groups) }
     end
   end
 
@@ -44,16 +44,16 @@ class Invoice < ApplicationRecord
 
   def deliveries_sum(type = :without_markup)
     if type == :without_markup
-      deliveries.sum(&:sum) 
-    elsif type == :with_markup  
-      deliveries.sum  { |delivery| delivery.sum(:fc) }
+      deliveries.sum(&:sum)
+    elsif type == :with_markup
+      deliveries.sum { |delivery| delivery.sum(:fc) }
     end
   end
 
   def expected_amount(type = :without_markup)
     return net_amount unless orders.any?
 
-    orders_sum(type) + orders_transport_sum + deliveries_sum(type)  
+    orders_sum(type) + orders_transport_sum + deliveries_sum(type)
   end
 
   protected
