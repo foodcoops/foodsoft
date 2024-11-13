@@ -230,6 +230,8 @@ class Order < ApplicationRecord
           end
         end
       end
+    elsif type == :transport
+      total = group_orders.where.not(ordergroup: nil).sum(:transport)
     end
     total
   end
