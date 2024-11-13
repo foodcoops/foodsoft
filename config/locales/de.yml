@@ -990,6 +990,9 @@ de:
         title: Neue Rechnung anlegen
       show:
         title: Rechnung %{number}
+        fc_profit: FC Gewinn
+        with_extra_charge: ' mit Aufschlag'
+        without_extra_charge: ' ohne Aufschlag'  
       unpaid:
         invoices_sum: Gesamtsumme
         invoices_text: Verwendungszweck
