@@ -859,7 +859,7 @@ de:
         changed: Daten wurden verändert!
         duration: von %{starts} bis %{ends}
         fc_amount: 'FC-Betrag:'
-        fc_profit: FC Gewinn
+        fc_profit: FC Überschuss
         gross_amount: 'Bruttobetrag:'
         groups_amount: 'Gruppenbeträge:'
         net_amount: 'Nettobetrag:'
@@ -990,7 +990,7 @@ de:
         title: Neue Rechnung anlegen
       show:
         title: Rechnung %{number}
-        fc_profit: FC Gewinn
+        fc_profit: FC Überschuss
         with_extra_charge: ' mit Aufschlag'
         without_extra_charge: ' ohne Aufschlag'  
       unpaid:
