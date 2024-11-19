@@ -859,7 +859,7 @@ en:
         changed: Data was changed!
         duration: From %{starts} till %{ends}
         fc_amount: 'Sales value:'
-        fc_profit: FC surplus
+        fc_profit: FC Surplus
         gross_amount: 'Gross value:'
         groups_amount: 'Ordergroups sum:'
         net_amount: 'Net value:'
@@ -990,7 +990,7 @@ en:
         title: Create new invoice
       show:
         title: Invoice %{number}
-        fc_profit: FC Profit
+        fc_profit: FC Surplus
         with_extra_charge: ' with margin'
         without_extra_charge: ' without margin'  
       unpaid:
