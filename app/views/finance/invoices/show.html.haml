@@ -76,16 +76,12 @@
           %dd= number_to_currency(total_fc)          
 
         %dt= t('.fc_profit') + (total_fc > total ? t('.without_extra_charge')  : '') + ':'   
-        - profit = total - @invoice.net_amount
         %dd
-          %span{style: "color:#{profit < 0 ? 'red' : 'green'}"} 
-            = number_to_currency(profit)
+          = format_currency_difference(total - @invoice.net_amount) 
         - if total_fc > total
           %dt= t('.fc_profit') + ' ' + t('.with_extra_charge') + ':'
-          - profit = total_fc - @invoice.net_amount
           %dd
-            %span{style: "color:#{profit < 0 ? 'red' : 'green'}"}
-              = number_to_currency(profit)    
+            = format_currency_difference(total_fc - @invoice.net_amount)      
 
       - if @invoice.attachments.attached?
         %dt= heading_helper(Invoice, :attachment) + ':'
