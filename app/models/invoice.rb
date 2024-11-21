@@ -54,6 +54,10 @@ class Invoice < ApplicationRecord
     orders_sum(type) + orders_transport_sum + deliveries_sum(type)
   end
 
+  def profit(type = :without_markup)
+    expected_amount(type) - net_amount
+  end
+
   protected
 
   # validates that the attachments are jpeg, png or pdf
