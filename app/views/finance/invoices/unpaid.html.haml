@@ -18,7 +18,8 @@
       = ' ' + number_to_currency(invoice.amount)
       = format_currency_difference(invoice_amount_diff)
       - if invoice_profit > invoice_amount_diff
-        = ' / ' + format_currency_difference(invoice_profit) 
+        = ' / ' 
+        = format_currency_difference(invoice_profit) 
       - if invoice.attachments.attached?
         - for attachment in invoice.attachments
           = link_to attachment.filename, url_for(attachment)
