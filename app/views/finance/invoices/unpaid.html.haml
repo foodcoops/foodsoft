@@ -16,13 +16,9 @@
         = format_date invoice.date
         = ' ' + invoice.number
       = ' ' + number_to_currency(invoice.amount)
-      %span{style: "color:#{invoice_amount_diff < 0 ? 'red' : 'green'}"}
-        - # = invoice_amount_diff > 0 ? '+' : '-'
-        = number_to_currency(invoice_amount_diff) #.abs)
+      = format_currency_difference(invoice_amount_diff)
       - if invoice_profit > invoice_amount_diff
-        = ' / '
-        %span{style: "color:#{invoice_profit < 0 ? 'red' : 'green'}"}
-          = number_to_currency(invoice_profit)
+        = ' / ' + format_currency_difference(invoice_profit) 
       - if invoice.attachments.attached?
         - for attachment in invoice.attachments
           = link_to attachment.filename, url_for(attachment)
