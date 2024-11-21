@@ -27,7 +27,7 @@ module ApplicationHelper
   end
 
   def format_currency_difference(amount)
-    class_name = amount < 0 ? 'negative_amount' : 'positive_green' 
+    class_name = amount < 0 ? 'negative_amount' : 'positive_green'
     content_tag :span, (amount > 0 ? '+' : '') + number_to_currency(amount), class: class_name
   end
 
