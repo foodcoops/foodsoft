@@ -231,11 +231,11 @@ class Order < ApplicationRecord
         end
       end
     elsif type == :stock_order
-      for go in group_orders.includes(group_order_articles: { order_article: [:article, :article_price] }).where(ordergroup: nil)
+      for go in group_orders.includes(group_order_articles: { order_article: %i[article article_price] }).where(ordergroup: nil)
         for goa in go.group_order_articles
           total += goa.result * goa.order_article.price.gross_price
         end
-      end   
+      end
     elsif type == :transport
       total = group_orders.where.not(ordergroup: nil).sum(:transport)
     end
