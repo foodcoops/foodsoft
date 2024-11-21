@@ -26,6 +26,11 @@ module ApplicationHelper
     content_tag :span, number_to_currency(amount), class: class_name
   end
 
+  def format_currency_difference(amount)
+    class_name = amount < 0 ? 'negative_amout' : 'positive_green' 
+    content_tag :span, (amount > 0 ? '+' : '') + number_to_currency(amount), class: class_name
+  end
+
   # Splits an IBAN into groups of 4 digits displayed with margins in between
   def format_iban(iban)
     iban && iban.scan(/..?.?.?/).map { |item| content_tag(:span, item, style: 'margin-right: 0.5em;') }.join.html_safe
