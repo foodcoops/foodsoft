@@ -22,12 +22,12 @@ module ApplicationHelper
   def format_currency(amount)
     return nil if amount.nil?
 
-    class_name = amount < 0 ? 'negative_amout' : 'positive_amount'
+    class_name = amount < 0 ? 'negative_amount' : 'positive_amount'
     content_tag :span, number_to_currency(amount), class: class_name
   end
 
   def format_currency_difference(amount)
-    class_name = amount < 0 ? 'negative_amout' : 'positive_green' 
+    class_name = amount < 0 ? 'negative_amount' : 'positive_green' 
     content_tag :span, (amount > 0 ? '+' : '') + number_to_currency(amount), class: class_name
   end
 
