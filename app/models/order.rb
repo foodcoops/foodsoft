@@ -189,15 +189,19 @@ class Order < ApplicationRecord
     end
   end
 
-  # Returns the defecit/benefit for the foodcoop
+  # Returns the defecit/benefit for the foodcoop per order
   # Requires a valid invoice, belonging to this order
   # FIXME: Consider order.foodcoop_result
-  def profit(options = {})
-    markup = options[:without_markup] || false
-    return unless invoice
-
-    groups_sum = markup ? sum(:groups_without_markup) : sum(:groups)
-    groups_sum - invoice.net_amount
+  def profit(type = :with_markup)
+    if invoice
+      invoice.profit(type) / invoice.orders.count
+    else
+      if type == :without_markup
+        sum(:groups_without_markup)
+      else
+        sum(:groups)
+      end
+    end
   end
 
   # Returns the all round price of a finished order
