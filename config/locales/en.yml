@@ -875,6 +875,7 @@ en:
         total_transport_costs: 'Transport costs total:'
         group_transport_costs: 'Transport costs groups:'
         fc_transport_costs: 'Transport costs FC:'
+        order_surplus: 'FC order surplus:'
     bank_accounts:
       assign_unlinked_transactions:
         notice: '%{count} transactions have been assigned'
