@@ -196,11 +196,7 @@ class Order < ApplicationRecord
     if invoice
       invoice.profit(type) / invoice.orders.count
     else
-      if type == :without_markup
-        sum(:groups_without_markup)
-      else
-        sum(:groups)
-      end
+      type == :without_markup ? sum(:groups_without_markup) : sum(:groups)
     end
   end
 
