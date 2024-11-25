@@ -875,6 +875,7 @@ de:
         total_transport_costs: 'Transportkosten gesamt:'
         group_transport_costs: 'Transportkosten Gruppen:'
         fc_transport_costs: 'Transportkosten FC:'
+        order_surplus: 'FC Überschuss Bestellung:'
     bank_accounts:
       assign_unlinked_transactions:
         notice: 'Es wurden %{count} Transaktionen zugeordnet.'
