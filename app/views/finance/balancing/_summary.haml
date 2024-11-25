@@ -39,6 +39,10 @@
         %td= t('.fc_transport_costs')
         %td.numeric= number_to_currency(fc_transport_costs) 
 
+    %tr
+      %td= t('.order_surplus')
+      %td.numeric= format_currency_difference(order.profit(:without_markup))
+
 #summaryChangedWarning.alert(style="display:none;")
   %strong= t '.changed'
   %br/
