@@ -189,6 +189,14 @@ class Order < ApplicationRecord
     end
   end
 
+  def has_deposit?
+    order_articles.any? { |oa| oa.article.deposit != 0 }
+  end
+
+  def has_tolerance?
+    order_articles.any? { |oa| oa.article.unit_quantity > 1 }
+  end
+
   # Returns the defecit/benefit for the foodcoop
   # Requires a valid invoice, belonging to this order
   # FIXME: Consider order.foodcoop_result
