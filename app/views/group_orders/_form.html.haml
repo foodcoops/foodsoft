@@ -77,11 +77,15 @@
           %th{style: 'width:120px'}= heading_helper StockArticle, :supplier
         %th{style: "width:13px;"}
         %th{style: "width:4.5em;"}= t '.price'
+        - if @order.has_deposit? 
+          %th{style: "width:4.5em;"}= t '.contains_deposit'
         %th{style: "width:4.5em;"}= heading_helper Article, :unit
         - unless @order.stockit?
-          %th{style: "width:70px;"}= heading_helper OrderArticle, :missing_units, short: true
+          - if @order.has_tolerance?
+            %th{style: "width:70px;"}= heading_helper OrderArticle, :missing_units, short: true
           %th#col_required= heading_helper GroupOrderArticle, :quantity
-          %th#col_tolerance= heading_helper GroupOrderArticle, :tolerance
+          - if @order.has_tolerance?
+            %th#col_tolerance= heading_helper GroupOrderArticle, :tolerance
         - else
           %th(style="width:20px")= heading_helper StockArticle, :available
           %th#col_required= heading_helper GroupOrderArticle, :quantity
@@ -100,35 +104,44 @@
               %td= truncate order_article.article.supplier.name, length: 15
             %td= h order_article.article.origin
             %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
+            - if @order.has_deposit? 
+              %td= number_to_currency(order_article.article.deposit * (1+order_article.article.tax/100 )) if order_article.article.deposit>0
             %td= order_article.article.unit
-            %td
-              - if @order.stockit?
-                = @ordering_data[:order_articles][order_article.id][:quantity_available]
-              - else
-                %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
+            - if @order.has_tolerance? || @order.stockit?
+              %td
+                - if @order.stockit?
+                  = @ordering_data[:order_articles][order_article.id][:quantity_available]
+                - else
+                  %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
 
             %td.quantity
               %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:quantity], 'data-min' => (@ordering_data[:order_articles][order_article.id][:quantity] if @order.boxfill?), 'data-max' => (@ordering_data[:order_articles][order_article.id][:quantity]+@ordering_data[:order_articles][order_article.id][:missing_units] if @order.boxfill?)}/
               %span.used{id: "q_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_quantity]
-              +
-              %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
+              - if order_article.article.unit_quantity > 1 
+                +
+                %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
+              - else
+                %span{ style: "color: transparent;" } + 0
               .btn-group
                 %a.btn.btn-ordering{'data-increase_quantity' => order_article.id}
                   %i.icon-plus
                 %a.btn.btn-ordering{'data-decrease_quantity' => order_article.id}
                   %i.icon-minus
 
-            %td.tolerance{style: ('display:none' if @order.stockit?)}
-              %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance], 'data-min' => (@ordering_data[:order_articles][order_article.id][:tolerance] if @order.boxfill?)}/
-              - if (@ordering_data[:order_articles][order_article.id][:unit] > 1)
-                %span.used{id: "t_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_tolerance]
-                +
-                %span.unused{id: "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
+            - if @order.has_tolerance?
+              %td.tolerance{style: ('display:none' if @order.stockit?)}
+                %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance], 'data-min' => (@ordering_data[:order_articles][order_article.id][:tolerance] if @order.boxfill?)}/
+                - if (@ordering_data[:order_articles][order_article.id][:unit] > 1)
+                  %span.used{id: "t_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_tolerance]
+                    +
+                    %span.unused{id: "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
+                - else
+                  %span{ style: "color: transparent;" } + 0 
                 .btn-group
-                  %a.btn.btn-ordering{'data-increase_tolerance' => order_article.id}
-                    %i.icon-plus
-                  %a.btn.btn-ordering{'data-decrease_tolerance' => order_article.id}
-                    %i.icon-minus
+                    %a.btn.btn-ordering{'data-increase_tolerance' => order_article.id}
+                      %i.icon-plus
+                    %a.btn.btn-ordering{'data-decrease_tolerance' => order_article.id}
+                      %i.icon-minus
 
             %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
               %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
