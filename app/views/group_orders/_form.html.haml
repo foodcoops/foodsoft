@@ -133,11 +133,9 @@
                 %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance], 'data-min' => (@ordering_data[:order_articles][order_article.id][:tolerance] if @order.boxfill?)}/
                 - if (@ordering_data[:order_articles][order_article.id][:unit] > 1)
                   %span.used{id: "t_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_tolerance]
-                    +
-                    %span.unused{id: "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
-                - else
-                  %span{ style: "color: transparent;" } + 0 
-                .btn-group
+                  +
+                  %span.unused{id: "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
+                  .btn-group
                     %a.btn.btn-ordering{'data-increase_tolerance' => order_article.id}
                       %i.icon-plus
                     %a.btn.btn-ordering{'data-decrease_tolerance' => order_article.id}
