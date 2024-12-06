@@ -121,7 +121,7 @@
                 +
                 %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
               - else
-                %span{ style: "color: transparent;" } + 0
+                %span.unused{style: "color: transparent;"} + 0
               .btn-group
                 %a.btn.btn-ordering{'data-increase_quantity' => order_article.id}
                   %i.icon-plus
