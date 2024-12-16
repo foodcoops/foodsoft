@@ -12,6 +12,15 @@ module PriceCalculation
     add_percent(gross_price, FoodsoftConfig[:price_markup].to_i)
   end
 
+  # deposit
+  def gross_deposit
+    add_percent(deposit, tax)
+  end
+
+  def fc_deposit
+    add_percent(gross_deposit, FoodsoftConfig[:price_markup])
+  end
+
   private
 
   def add_percent(value, percent)
