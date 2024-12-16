@@ -105,7 +105,8 @@
             %td= h order_article.article.origin
             %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
             - if @order.has_deposit? 
-              %td= number_to_currency(order_article.article.deposit * (1+order_article.article.tax/100 )) if order_article.article.deposit>0
+              - deposit = order_article.article.fc_deposit
+              %td= number_to_currency(deposit) if deposit>0 
             %td= order_article.article.unit
             - if @order.has_tolerance? || @order.stockit?
               %td
