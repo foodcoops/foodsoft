@@ -190,7 +190,7 @@ class Order < ApplicationRecord
   end
 
   def has_deposit?
-    order_articles.any? { |oa| oa.article.deposit != 0 }
+    order_articles.any? { |oa| oa.article.deposit > 0 }
   end
 
   def has_tolerance?
