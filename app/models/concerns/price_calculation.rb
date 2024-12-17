@@ -13,7 +13,7 @@ module PriceCalculation
 
   # @return [Number] Price for the foodcoop-member.
   def fc_price
-      add_percent(gross_price(include_deposit=FALSE), FoodsoftConfig[:price_markup]) + fc_deposit
+     add_percent(gross_price(include_deposit=FALSE), FoodsoftConfig[:price_markup]) + fc_deposit
   end
 
   def gross_deposit
