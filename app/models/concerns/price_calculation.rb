@@ -21,8 +21,7 @@ module PriceCalculation
   end
 
   def fc_deposit
-    deposit_with_markup = false # FoodsoftConfig[:deposit_with_markup]
-    if deposit_with_markup  
+    if FoodsoftConfig[:deposit_with_markup] || false 
       add_percent(gross_deposit, FoodsoftConfig[:price_markup])
     else
       gross_deposit
