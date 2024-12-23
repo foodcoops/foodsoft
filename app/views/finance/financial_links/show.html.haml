@@ -31,6 +31,34 @@
         %td.numeric{style: 'width:5em'}= format_currency item[:amount]
         %td= link_to t('.remove_from_link'), item[:remove_path], :data => {:confirm => t('.remove_from_link_confirm')}, :method => :delete,
           class: 'btn btn-danger btn-xs'
+  %thead
+    - if @financial_link.bank_transactions.count > 1
+      %tr
+        %th
+        %th= 'sum of bank transactions:'
+        %th
+        %th.numeric{style: 'width:5em'}= format_currency(@financial_link.bank_transactions.sum(:amount))
+        %th
+    - if @financial_link.invoices.count > 1
+      %tr
+        %th
+        %th= 'sum of invoices:'
+        %th
+        %th.numeric{style: 'width:5em'}= format_currency(@financial_link.invoices.sum(:amount))
+        %th
+    - if @financial_link.financial_transactions.count > 1
+      %tr
+        %th
+        %th= 'sum of financial transactions:'
+        %th
+        %th.numeric{style: 'width:5em'}= format_currency(@financial_link.financial_transactions.sum(:amount))
+        %th
+    %tr
+      %th
+      %th= 'total (bank transactions + invoices - financial transactions):'
+      %th
+      %th.numeric{style: 'width:5em'}= format_currency(@financial_link.amount)
+      %th
 
 %p
   = @financial_link.note
