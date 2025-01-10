@@ -922,7 +922,7 @@ nl:
         title: Financiële link %{number}
         type: Type
         remove_from_link: Verwijder link
-        remove_from_link_confirm: De transactie zelf wordt niet verwijderd, alleen de link. Wil je doorgaan
+        remove_from_link_confirm: De transactie zelf wordt niet verwijderd, alleen de link. Wil je doorgaan?
     financial_transactions:
       controller:
         create:
