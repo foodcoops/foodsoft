@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require select2-full
-//= require twitter/bootstrap
 //= require jquery.tokeninput
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.de

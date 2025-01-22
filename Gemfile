@@ -3,10 +3,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 7.0.8'
 
-gem 'less-rails'
-gem 'sassc-rails'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'sassc-rails', '>= 2.1.0'
 
 gem 'bootsnap', require: false
 gem 'bootstrap-datepicker-rails'
@@ -24,7 +21,7 @@ gem 'attribute_normalizer'
 gem 'daemons'
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
-gem 'haml', '~> 5.0'
+gem 'haml', '~> 6.0'
 gem 'haml-rails'
 gem 'ice_cube'
 gem 'inherited_resources'
@@ -41,11 +38,11 @@ gem 'ransack'
 gem 'resque'
 gem 'ruby-units'
 gem 'simple_form'
-gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
-gem 'simple-navigation-bootstrap'
+gem 'simple-navigation'
+gem 'simple_navigation_bootstrap'
 gem 'sprockets', '< 4'
-gem 'twitter-bootstrap-rails', '~> 2.2.8'
-gem 'uri', '= 0.10.0.2' # TODO: remove this when updated to ruby 3.x
+gem 'bootstrap-sass', '~> 3.4.1'
+gem 'font-awesome-rails'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
 gem 'exception_notification'
@@ -63,6 +60,10 @@ gem 'rswag-ui'
 gem 'ruby-filemagic'
 gem 'spreadsheet'
 gem 'terser', '~> 1.1'
+gem 'concurrent-ruby', '1.3.4'
+gem 'psych', '3.3.2'
+gem 'mutex_m'
+gem 'csv'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
