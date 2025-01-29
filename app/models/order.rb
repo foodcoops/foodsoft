@@ -160,7 +160,7 @@ class Order < ApplicationRecord
   end
 
   def articles_grouped_by_category_and_ordered_amount
-    @articles_grouped_by_category_and_ordered_amount ||= order_articles.
+    @articles_grouped_by_category ||= order_articles.
       includes([:article_price, :group_order_articles, :article => :article_category]).
       order('articles.name').
       group_by(&method(:category_name_and_quantity))
