@@ -311,10 +311,7 @@ class Order < ApplicationRecord
   end
 
   def send_to_supplier!(user)
-    Mailer.deliver_now_with_default_locale do
-      Mailer.order_result_supplier(user, self)
-    end
-    update!(last_sent_mail: Time.now)
+    SendOrderToSupplierJob.perform_later(FoodsoftConfig.scope,self)
   end
 
   def do_end_action!
