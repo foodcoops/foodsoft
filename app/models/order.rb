@@ -313,9 +313,7 @@ class Order < ApplicationRecord
 
   def send_to_supplier!(user)
     if supplier.remote_order_method == :email
-      Mailer.deliver_now_with_default_locale do
-        Mailer.order_result_supplier(user, self)
-      end
+      SendOrderToSupplierJob.perform_later(self)
     else
       upload_via_ftp
     end
