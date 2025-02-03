@@ -87,7 +87,7 @@ class Mailer < ActionMailer::Base
     subject = I18n.t('mailer.order_result_supplier.subject', name: order.supplier.name)
     subject += " (#{I18n.t('activerecord.attributes.order.pickup')}: #{format_date(order.pickup)})" if order.pickup
 
-    mail to: order.supplier.email,
+    res = mail to: order.supplier.email,
          cc: user,
          reply_to: user,
          subject: subject
@@ -152,9 +152,10 @@ class Mailer < ActionMailer::Base
 
   def self.deliver_now
     message = yield
-    message.deliver_now
+    message.deliver_now!
   rescue StandardError => e
     MailDeliveryStatus.create email: message.to[0], message: e.message
+    raise StandardError, e.message
   end
 
   # separate method to allow plugins to mess with the attachments
