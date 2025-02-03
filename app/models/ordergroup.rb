@@ -92,7 +92,7 @@ class Ordergroup < Group
       t.save!
       update_balance!
       # Notify only when order group had a positive balance before the last transaction:
-      NotifyNegativeBalanceJob.perform_later(self, t) if t.amount < 0 && account_balance < 0 && account_balance - t.amount >= 0
+      NotifyNegativeBalanceJob.perform_later(FoodsoftConfig.scope,self, t) if t.amount < 0 && account_balance < 0 && account_balance - t.amount >= 0
       t
     end
 
