@@ -266,7 +266,7 @@ class Order < ApplicationRecord
       ordergroups.each(&:update_stats!)
 
       # Notifications
-      NotifyFinishedOrderJob.perform_later(self)
+      NotifyFinishedOrderJob.perform_later(FoodsoftConfig.scope,self)
     end
   end
 
