@@ -10,7 +10,7 @@ module FoodsoftActiveJobArguments
       end
 
       def deserialize(arguments)
-        FoodsoftConfig.select_multifoodcoop arguments[0]
+        FoodsoftConfig.select_multifoodcoop arguments.shift
         orig_deserialize(arguments)
       end
     end

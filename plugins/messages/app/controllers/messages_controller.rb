@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
         @message = @current_user.send_messages.new(params[:message])
         Rails.logger.info "Message column names: #{@message.class.column_names.inspect}"
         if @message.save
-          DeliverMessageJob.perform_later(FoodsoftConfig.scope,@message)
+          DeliverMessageJob.perform_later(@message)
           redirect_to messages_url, notice: I18n.t('messages.create.notice')
         else
           Rails.logger.info "Message validation failed with: #{@message.errors.inspect}"

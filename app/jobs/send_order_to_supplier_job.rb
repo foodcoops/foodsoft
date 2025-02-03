@@ -1,6 +1,5 @@
 class SendOrderToSupplierJob < ApplicationJob
-  def perform(foodcoop,order)
-    FoodsoftConfig.select_multifoodcoop foodcoop
+  def perform(order)
     Mailer.deliver_now_with_default_locale do
       Mailer.order_result_supplier(order.created_by, order)
     end

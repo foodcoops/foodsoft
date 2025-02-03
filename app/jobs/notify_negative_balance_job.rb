@@ -1,6 +1,5 @@
 class NotifyNegativeBalanceJob < ApplicationJob
-  def perform(foodcoop,ordergroup, transaction)
-    FoodsoftConfig.select_multifoodcoop foodcoop
+  def perform(ordergroup, transaction)
     ordergroup.users.each do |user|
       next unless user.settings.notify['negative_balance']
 

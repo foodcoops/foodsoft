@@ -1,6 +1,5 @@
 class NotifyReceivedOrderJob < ApplicationJob
-  def perform(foodcoop,order)
-    FoodsoftConfig.select_multifoodcoop foodcoop
+  def perform(order)
     order.group_orders.each do |group_order|
       next unless group_order.ordergroup
 

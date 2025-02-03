@@ -49,7 +49,7 @@ class MessagesMailReceiver
       message.add_recipients [@message.sender_id]
 
       message.save!
-      DeliverMessageJob.perform_later(FoodsoftConfig.scope,message)
+      DeliverMessageJob.perform_later(message)
     end
   end
 
