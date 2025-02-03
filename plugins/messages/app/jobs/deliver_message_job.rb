@@ -1,5 +1,6 @@
 class DeliverMessageJob < ApplicationJob
-  def perform(message)
+  def perform(foodcoop,message)
+    FoodsoftConfig.select_multifoodcoop foodcoop
     message.message_recipients.each do |message_recipient|
       recipient = message_recipient.user
       if recipient.receive_email?
