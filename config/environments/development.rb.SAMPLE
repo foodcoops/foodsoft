@@ -5,6 +5,8 @@ require 'active_support/core_ext/integer/time'
 # This file is in the public domain.
 
 Rails.application.configure do
+  config.hosts << "localhost" # Whitelist one hostname
+  config.hosts << /app\.local\.at\Z/ # Whitelist a test domain
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
