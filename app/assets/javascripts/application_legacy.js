@@ -172,6 +172,11 @@ $(function() {
     });
 
     // See stupidtable.js for initialization of local table sorting
+  
+    // prevents attachments:
+    document.addEventListener("trix-file-accept", function(event) {
+      event.preventDefault();
+    });
 });
 
 // retrigger last local table sorting

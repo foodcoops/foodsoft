@@ -13,3 +13,7 @@
 @import "actiontext";
 @import "self_service";
 @import "migrate-units";
+
+.trix-button-group.trix-button-group--file-tools {
+    display:none;
+}
