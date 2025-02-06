@@ -25,8 +25,7 @@ module ActiveJob
     # Override the `_perform_job` method
     define_method(:_perform_job) do
       foodsoft_scope = @arguments.shift
-      FoodsoftConfig.select_foodcoop foodsoft_scope
-
+      FoodsoftConfig.select_foodcoop foodsoft_scope if FoodsoftConfig[:multi_coop_install]
       # Call the original `_perform_job` method
       original_perform_job.bind(self).call
     end
