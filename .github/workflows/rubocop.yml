@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
+      - name: Install libmagic-dev
+        run: sudo apt-get update && sudo apt-get install -y libmagic-dev
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:
