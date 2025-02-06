@@ -33,7 +33,7 @@ class MessagesController < ApplicationController
   def create
     @message = @current_user.send_messages.new(params[:message])
     if @message.save
-      DeliverMessageJob.perform_later(@message)
+      DeliverMessageJob.perform_later(FoodsoftConfig.scope,@message)
       redirect_to messages_url, notice: I18n.t('messages.create.notice')
     else
       render action: 'new'
