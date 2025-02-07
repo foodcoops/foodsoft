@@ -221,11 +221,11 @@ class Order < ApplicationRecord
       end
     elsif %i[groups groups_without_markup].include?(type)
       for go in group_orders.includes(group_order_articles: { order_article: %i[article article_price] })
-        for goa in go.group_order_articles
-          case type
-          when :groups
-            total += goa.result * goa.order_article.price.fc_price
-          when :groups_without_markup
+        case type
+        when :groups
+          total += go.total
+        when :groups_without_markup
+          for goa in go.group_order_articles
             total += goa.result * goa.order_article.price.gross_price
           end
         end
@@ -277,7 +277,7 @@ class Order < ApplicationRecord
     update_price_of_group_orders!
 
     transaction do                                        # Start updating account balances
-      charge_group_orders!(user, transaction_type, financial_link)
+      total_group_charges = charge_group_orders!(user, transaction_type, financial_link)
 
       if stockit?                                         # Decreases the quantity of stock_articles
         for oa in order_articles.includes(:article)
@@ -289,7 +289,7 @@ class Order < ApplicationRecord
       if create_foodcoop_transaction
         ft = FinancialTransaction.new({ financial_transaction_type: transaction_type,
                                         user: user,
-                                        amount: sum(:groups),
+                                        amount: total_group_charges * -1,
                                         note: transaction_note,
                                         financial_link: financial_link })
         ft.save!
@@ -408,12 +408,15 @@ class Order < ApplicationRecord
 
   def charge_group_orders!(user, transaction_type = nil, financial_link = nil)
     note = transaction_note
+    total = 0
     group_orders.includes(:ordergroup).find_each do |group_order|
       if group_order.ordergroup
         price = group_order.total * -1 # decrease! account balance
-        group_order.ordergroup.add_financial_transaction!(price, note, user, transaction_type, financial_link, group_order)
+        transaction = group_order.ordergroup.add_financial_transaction!(price, note, user, transaction_type, financial_link, group_order)
+        total += transaction.amount
       end
     end
+    total
   end
 
   def transaction_note
