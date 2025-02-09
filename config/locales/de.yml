@@ -820,6 +820,7 @@ de:
         title: Beendete Bestellungen
       invoice:
         edit: Rechnung bearbeiten
+        view: Rechnung ansehen
         invoice_amount: 'Rechnungsbetrag:'
         invoice_date: 'Rechnungsdatum:'
         invoice_number: 'Rechnungsnummer:'
@@ -828,6 +829,11 @@ de:
         new_body: 'Eine Rechnung für diese Bestellung anlegen:'
         plus_refund_credited: "+ Pfand gutgeschrieben:"
         refund_adjusted_amount: 'pfandbereinigter Betrag:'
+        fc_profit: 'FC Überschuss'
+        with_extra_charge: 'mit Aufschlag:'
+        without_extra_charge: 'ohne Aufschlag:'
+        orders: 'Anzahl Bestellungen:'
+        deliveries: 'Anzahl Lager-Lieferungen:'
       new:
         alert: Achtung, Bestellung wurde schon abgerechnet
         articles_overview: Artikelübersicht
@@ -859,13 +865,17 @@ de:
         changed: Daten wurden verändert!
         duration: von %{starts} bis %{ends}
         fc_amount: 'FC-Betrag:'
-        fc_profit: FC Gewinn
         gross_amount: 'Bruttobetrag:'
         groups_amount: 'Gruppenbeträge:'
+        stock_order_amount: 'Lager-Bestellung:'
         net_amount: 'Nettobetrag:'
         reload: Zusammenfassung neu laden
         with_extra_charge: 'mit Aufschlag:'
         without_extra_charge: 'ohne Aufschlag:'
+        total_transport_costs: 'Transportkosten gesamt:'
+        group_transport_costs: 'Transportkosten Gruppen:'
+        fc_transport_costs: 'Transportkosten FC:'
+        order_surplus: 'FC Überschuss Bestellung:'
     bank_accounts:
       assign_unlinked_transactions:
         notice: 'Es wurden %{count} Transaktionen zugeordnet.'
@@ -990,6 +1000,9 @@ de:
         title: Neue Rechnung anlegen
       show:
         title: Rechnung %{number}
+        fc_profit: FC Überschuss
+        with_extra_charge: ' mit Aufschlag'
+        without_extra_charge: ' ohne Aufschlag'  
       unpaid:
         invoices_sum: Gesamtsumme
         invoices_text: Verwendungszweck

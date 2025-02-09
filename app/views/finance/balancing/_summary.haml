@@ -3,28 +3,46 @@
 = t('.duration', {starts: format_date(order.starts), ends: format_date(order.ends)})
 %p
   %table
+    - gross_sum = order.sum(:gross)
+    - fc_sum = order.sum(:fc)
+    - stock_order_amount = order.sum(:stock_order)
     %tr
       %td= t('.net_amount')
       %td.numeric= number_to_currency(order.sum(:net))
     %tr
       %td= t('.gross_amount')
-      %td.numeric= number_to_currency(order.sum(:gross))
-    %tr
-      %td= t('.fc_amount')
-      %td.numeric= number_to_currency(order.sum(:fc))
+      %td.numeric= number_to_currency(gross_sum)
+    - if fc_sum > gross_sum
+      %tr
+        %td= t('.fc_amount')
+        %td.numeric= number_to_currency(fc_sum)
     %tr
       %td= t('.groups_amount')
       %td.numeric= number_to_currency(order.sum(:groups))
+
+    - if stock_order_amount > 0
+      %tr
+        %td= t('.stock_order_amount')
+        %td.numeric= number_to_currency(stock_order_amount)
+
+    - total_transport_costs = order.transport || 0
+    - if total_transport_costs > 0
+      %tr
+        %td= t('.total_transport_costs')
+        %td.numeric= number_to_currency(total_transport_costs)
+        - group_transport_costs = order.sum(:transport)
+        - fc_transport_costs = total_transport_costs - group_transport_costs  
+      %tr
+        %td= t('.group_transport_costs')
+        %td.numeric= number_to_currency(group_transport_costs)
+      %tr
+        %td= t('.fc_transport_costs')
+        %td.numeric= number_to_currency(fc_transport_costs) 
+
     %tr
-      %td
-        = t('.fc_profit')
-        %small= t('.without_extra_charge')
-      %td.numeric= number_to_currency(order.profit(:without_markup => true))
-    %tr
-      %td
-        = t('.fc_profit')
-        %small= t('.with_extra_charge')        
-      %td#order_profit.numeric= number_to_currency(order.profit)
+      %td= t('.order_surplus')
+      %td.numeric= format_currency_difference(order.profit(:without_markup))
+
 #summaryChangedWarning.alert(style="display:none;")
   %strong= t '.changed'
   %br/

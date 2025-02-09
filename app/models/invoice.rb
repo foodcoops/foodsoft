@@ -30,22 +30,32 @@ class Invoice < ApplicationRecord
     amount - deposit + deposit_credit
   end
 
-  def orders_sum
-    orders
-      .joins(order_articles: [:article_price])
-      .sum('COALESCE(order_articles.units_received, order_articles.units_billed, order_articles.units_to_order)' \
-        + '* article_prices.unit_quantity' \
-        + '* ROUND((article_prices.price + article_prices.deposit) * (100 + article_prices.tax) / 100, 2)')
+  def orders_sum(type = :without_markup)
+    if type == :without_markup
+      orders.sum { |order| order.sum(:groups_without_markup) }
+    elsif type == :with_markup
+      orders.sum { |order| order.sum(:groups) }
+    end
   end
 
   def orders_transport_sum
-    orders.sum(:transport)
+    orders.sum { |order| order.sum(:transport) }
   end
 
-  def expected_amount
-    return net_amount unless orders.any?
+  def deliveries_sum(type = :without_markup)
+    if type == :without_markup
+      deliveries.sum(&:sum)
+    elsif type == :with_markup
+      deliveries.sum { |delivery| delivery.sum(:fc) }
+    end
+  end
 
-    orders_sum + orders_transport_sum
+  def expected_amount(type = :without_markup)
+    orders_sum(type) + orders_transport_sum + deliveries_sum(type)
+  end
+
+  def profit(type = :without_markup)
+    expected_amount(type) - net_amount
   end
 
   protected

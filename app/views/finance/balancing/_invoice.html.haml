@@ -18,8 +18,38 @@
     %tr
       %td= t('.refund_adjusted_amount')
       %td.curreny= number_to_currency invoice.net_amount
+
+    - n_orders = invoice.orders.count
+    - n_deliveries = invoice.deliveries.count
+    - if n_orders > 1
+      %tr
+        %td= t('.orders')
+        %td.numeric=  n_orders.to_s 
+    - if n_deliveries > 0
+      %tr
+        %td= t('.deliveries')
+        %td.numeric=  n_deliveries.to_s
+             
+    - profit_without_markup = invoice.profit(:without_markup)
+    - profit_with_markup = invoice.profit(:with_markup)
+    %tr
+      %td
+        = t('.fc_profit')
+        - if profit_with_markup > profit_without_markup
+          %small= t('.without_extra_charge')
+        - else
+          = ':'
+      %td.numeric= format_currency_difference(profit_without_markup) 
+    - if profit_with_markup > profit_without_markup
+      %tr
+        %td
+          = t('.fc_profit')
+          %small= t('.with_extra_charge')        
+        %td#order_profit.numeric= format_currency_difference(profit_with_markup)
+
   %br/
-  = link_to t('.edit'), edit_finance_invoice_path(invoice)
+  = link_to t('.view'), finance_invoice_path(invoice), class: 'btn'   
+  = link_to t('.edit'), edit_finance_invoice_path(invoice), class: 'btn' 
 
 - else
   = t '.new_body'

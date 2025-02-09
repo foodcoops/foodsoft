@@ -189,15 +189,15 @@ class Order < ApplicationRecord
     end
   end
 
-  # Returns the defecit/benefit for the foodcoop
+  # Returns the defecit/benefit for the foodcoop per order
   # Requires a valid invoice, belonging to this order
   # FIXME: Consider order.foodcoop_result
-  def profit(options = {})
-    markup = options[:without_markup] || false
-    return unless invoice
-
-    groups_sum = markup ? sum(:groups_without_markup) : sum(:groups)
-    groups_sum - invoice.net_amount
+  def profit(type = :with_markup)
+    if invoice
+      invoice.profit(type) / invoice.orders.count
+    else
+      type == :without_markup ? sum(:groups_without_markup) : sum(:groups)
+    end
   end
 
   # Returns the all round price of a finished order
@@ -220,7 +220,7 @@ class Order < ApplicationRecord
         end
       end
     elsif %i[groups groups_without_markup].include?(type)
-      for go in group_orders.includes(group_order_articles: { order_article: %i[article article_price] })
+      for go in group_orders.includes(group_order_articles: { order_article: %i[article article_price] }).where.not(ordergroup: nil)
         for goa in go.group_order_articles
           case type
           when :groups
@@ -230,6 +230,14 @@ class Order < ApplicationRecord
           end
         end
       end
+    elsif type == :stock_order
+      for go in group_orders.includes(group_order_articles: { order_article: %i[article article_price] }).where(ordergroup: nil)
+        for goa in go.group_order_articles
+          total += goa.result * goa.order_article.price.gross_price
+        end
+      end
+    elsif type == :transport
+      total = group_orders.where.not(ordergroup: nil).sum(:transport)
     end
     total
   end
@@ -397,6 +405,8 @@ class Order < ApplicationRecord
       group_orders.each do |go|
         go.transport = (amount * go.group_order_articles.sum(:result)).ceil(2)
       end
+    when Order.transport_distributions[:skip]
+      group_orders.each { |go| go.transport = 0 }
     end
   end
 

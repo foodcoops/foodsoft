@@ -820,6 +820,7 @@ en:
         title: Closed orders
       invoice:
         edit: Edit invoice
+        view: View invoice
         invoice_amount: 'Invoice amount:'
         invoice_date: 'Invoice date:'
         invoice_number: 'Invoice number:'
@@ -828,6 +829,11 @@ en:
         new_body: 'Create an invoice for this order:'
         plus_refund_credited: "+ deposit returned:"
         refund_adjusted_amount: 'amount adjusted for refund:'
+        fc_profit: 'FC surplus'
+        with_extra_charge: 'with extra charge:'
+        without_extra_charge: 'without extra charge:'
+        orders: 'Number of orders:'
+        deliveries: 'Number of stock delivieries:'
       new:
         alert: Attention, order was already accounted
         articles_overview: Overview of articles
@@ -859,13 +865,17 @@ en:
         changed: Data was changed!
         duration: From %{starts} till %{ends}
         fc_amount: 'Sales value:'
-        fc_profit: FC surplus
         gross_amount: 'Gross value:'
         groups_amount: 'Ordergroups sum:'
+        stock_order_amount: 'Stock order:'
         net_amount: 'Net value:'
         reload: Reload summary
         with_extra_charge: 'with extra charge:'
         without_extra_charge: 'without extra charge:'
+        total_transport_costs: 'Transport costs total:'
+        group_transport_costs: 'Transport costs groups:'
+        fc_transport_costs: 'Transport costs FC:'
+        order_surplus: 'FC order surplus:'
     bank_accounts:
       assign_unlinked_transactions:
         notice: '%{count} transactions have been assigned'
@@ -990,6 +1000,9 @@ en:
         title: Create new invoice
       show:
         title: Invoice %{number}
+        fc_profit: FC surplus
+        with_extra_charge: ' with margin'
+        without_extra_charge: ' without margin'  
       unpaid:
         invoices_sum: Total sum
         invoices_text: Reference
