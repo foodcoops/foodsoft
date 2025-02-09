@@ -20,7 +20,10 @@
             = form.check_box 'availability'
           %td= form.text_field 'name', class: 'input-medium'
           %td= form.text_field 'unit', class: 'input-mini'
-          %td= form.text_field 'price', class: 'input-mini'
+          %td
+            .input-prepend
+              %span.add-on= t 'number.currency.format.unit'
+              = form.text_field 'price', class: 'input-mini'
           %td= form.text_field 'unit_quantity', class: 'input-mini'
           %td= form.text_field 'order_number', class: 'input-mini'
           %td= form.text_field 'note', class: 'input-medium'
@@ -29,7 +32,10 @@
           %td.input-append
             = form.text_field 'tax', class: 'input-mini'
             %span.add-on %
-          %td= form.text_field 'deposit', class: 'input-mini'
+          %td
+            .input-prepend
+              %span.add-on= t 'number.currency.format.unit'
+              = form.text_field 'deposit', class: 'input-mini'
         - unless article.errors.empty?
           %tr.alert
             %td(colspan="10")= article.errors.full_messages.join(", ")
