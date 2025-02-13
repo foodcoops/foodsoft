@@ -6,6 +6,7 @@ class SharedSupplier < ApplicationRecord
 
   has_many :suppliers, -> { undeleted }
   has_many :shared_articles, foreign_key: :supplier_id
+  default_scope { where(foodcoop: [FoodsoftConfig[:name], ""]) }
 
   def find_article_by_number(order_number)
     # NOTE: that `shared_articles` uses number instead order_number
