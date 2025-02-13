@@ -1,0 +1,3 @@
+$('#modalContainer').html('#{j(render("custom_csv_form"))}');
+$('#modalContainer').modal();
+$('#modalContainer').submit(function() {$('#modalContainer').modal('hide');});

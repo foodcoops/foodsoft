@@ -1,0 +1,15 @@
+= simple_form_for :custom_csv,format: :csv, :url => order_path(@order, view: @view, format: :csv), method: :get do |f|
+  .modal-header
+    = close_button :modal
+    .h3=I18n.t('.orders.custom_csv.description')
+  .modal-body
+    = f.input :first, as: :select, collection: custom_csv_collection, label: "1. " + I18n.t('.orders.custom_csv.column')
+    = f.input :second, as: :select, collection: custom_csv_collection, required: false, label: "2. " + I18n.t('.orders.custom_csv.column')
+    = f.input :third, as: :select, collection: custom_csv_collection, required: false, label: "3. " + I18n.t('.orders.custom_csv.column')
+    = f.input :fourth, as: :select, collection: custom_csv_collection, required: false, label: "4. " + I18n.t('.orders.custom_csv.column')
+    = f.input :fifth, as: :select, collection: custom_csv_collection, required: false, label: "5. " + I18n.t('.orders.custom_csv.column')
+    = f.input :sixth, as: :select, collection: custom_csv_collection, required: false, label: "6. " + I18n.t('.orders.custom_csv.column')
+    = f.input :seventh, as: :select, collection: custom_csv_collection, required: false, label: "7. " + I18n.t('.orders.custom_csv.column')
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit class: 'btn btn-primary'

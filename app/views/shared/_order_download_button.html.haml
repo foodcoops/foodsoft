@@ -10,3 +10,4 @@
     - unless order.stockit?
       %li= link_to t('.fax_txt'), order_path(order, format: :txt), {title: t('.download_file')}
     %li= link_to t('.fax_csv'), order_path(order, format: :csv), {title: t('.download_file')}
+    %li= link_to t('.custom_csv'), custom_csv_order_path(order), remote: true
