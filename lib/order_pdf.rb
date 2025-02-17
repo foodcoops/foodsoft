@@ -8,9 +8,10 @@ class OrderPdf < RenderPDF
     super(options)
   end
 
-  def nice_table(name, data, dimrows = [])
+  def nice_table(name, data, dimrows = [], phone ='')
     down_or_page 25
-    text name, size: 18, style: :bold
+    text name, size: 48, style: :bold
+    text phone, size: 12 if phone
     table data, width: bounds.width, cell_style: { size: 8, overflow: :shrink_to_fit } do |table|
       # borders
       table.cells.borders = [:bottom]

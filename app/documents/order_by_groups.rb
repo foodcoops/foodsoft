@@ -56,8 +56,8 @@ class OrderByGroups < OrderPdf
         oa_phone = number_to_phone(oa_phone.sub(/^1/, ''))
       end
 
-      oa_title = "#{oa_name}   (#{oa_phone})"
-      nice_table oa_title || stock_ordergroup_name, rows, dimrows do |table|
+      oa_title = "#{oa_name}"
+      nice_table oa_title || stock_ordergroup_name, rows, dimrows, oa_phone do |table|
         table.row(-2).border_width = 1
         table.row(-2).border_color = '666666'
         table.row(-1).borders = []
