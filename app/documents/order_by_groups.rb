@@ -25,7 +25,7 @@ class OrderByGroups < OrderPdf
               ]]
 
       each_group_order_article_for_ordergroup(oa_id) do |goa|
-        dimrows << rows.length if goa.result == 0
+        next if goa.result == 0
         name = goa.order_article.article.name.gsub(/^\d\d\d\d:\s*/,'')
         quantity = goa.tolerance > 0 ? "#{goa.quantity}..#{goa.quantity + goa.tolerance}" : goa.quantity
         rows << [
